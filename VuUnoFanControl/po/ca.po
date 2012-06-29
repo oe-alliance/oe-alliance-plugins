@@ -1,0 +1,66 @@
+# Catalan translations for Enigma2.
+#
+# Oriol Pellicer i Sabrià <oriol@elsud.org>, 2006, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 16:40+0100\n"
+"PO-Revision-Date: 2012-05-18 01:41+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Catalan\n"
+"X-Poedit-Country: CATALONIA\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#
+msgid "Cancel"
+msgstr "Cancel·lar"
+
+msgid "Fan Control"
+msgstr ""
+
+msgid "FanOFF InStanby"
+msgstr ""
+
+msgid "PWM value"
+msgstr ""
+
+#
+msgid "Really close without saving settings?"
+msgstr "Sortir sense guardar els canvis?"
+
+#
+msgid "Save"
+msgstr ""
+
+msgid "Status Check Period"
+msgstr ""
+
+msgid "minute"
+msgstr ""
+
+#
+msgid "minutes"
+msgstr "minuts"
+
+#
+msgid "no"
+msgstr "no"
+
+#
+msgid "seconds"
+msgstr "segons"
+
+msgid "setup Fancontol inStandby mode"
+msgstr ""
+
+#
+msgid "yes"
+msgstr "si"

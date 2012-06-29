@@ -1,0 +1,54 @@
+# Slovak translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:40+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: none\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Pootle 2.0.3\n"
+"X-Poedit-Language: Slovak\n"
+"X-Poedit-Country: SLOVAKIA\n"
+
+msgid "Close"
+msgstr "Zatvoriť"
+
+msgid "Fan Control"
+msgstr ""
+
+msgid "Fan basic action"
+msgstr ""
+
+msgid "Fan off duration time"
+msgstr ""
+
+msgid "Fan on duration time"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr "Naozaj zatvoriť bez uloženia nastavení?"
+
+msgid "Save"
+msgstr "Uložiť"
+
+msgid "Use Fan timer"
+msgstr ""
+
+msgid "no"
+msgstr "nie"
+
+msgid "off"
+msgstr "vyp."
+
+msgid "on"
+msgstr "zap."
+
+msgid "yes"
+msgstr "áno"

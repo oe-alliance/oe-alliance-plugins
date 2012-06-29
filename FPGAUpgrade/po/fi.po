@@ -1,0 +1,60 @@
+# Finnish translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 16:40+0100\n"
+"PO-Revision-Date: 2012-05-18 01:41+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: none\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.3\n"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: FINLAND\n"
+
+#, python-format
+msgid "%d / 100"
+msgstr ""
+
+msgid "Can't cancel during upgrade!!"
+msgstr ""
+
+#
+msgid "Close"
+msgstr "Sulje"
+
+#
+msgid "Download"
+msgstr "Lataa"
+
+msgid "Downloaded "
+msgstr ""
+
+msgid "Downloading..."
+msgstr ""
+
+#, python-format
+msgid ""
+"Error[%d] : %s.\n"
+"Press OK to exit."
+msgstr ""
+
+msgid "FPGA Upgrade"
+msgstr ""
+
+msgid "File not found"
+msgstr ""
+
+msgid "Status : 0%"
+msgstr ""
+
+msgid "Succeed"
+msgstr ""
+
+msgid "Upgrade"
+msgstr ""

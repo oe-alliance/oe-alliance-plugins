@@ -1,0 +1,298 @@
+# Turkish translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:40+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: CÜNEYT OCAKLILAR <ocaklilar@gmail.com>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.0.3\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-Bookmarks: 2450,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
+
+msgid ""
+"\"channel scan\" searches for channels and saves them to your receiver; "
+"\"save to XML file\" does a transponder search and saves found transponders "
+"to an XML file in satellites.xml format"
+msgstr ""
+
+msgid "Blind Scan"
+msgstr "Kör Tarama"
+
+msgid "Blindscan"
+msgstr "Körtarama"
+
+#
+msgid "Clear before scan"
+msgstr "Tarama öncesinde kanal listesini temizle"
+
+#
+msgid "Exit"
+msgstr "Çıkış"
+
+msgid "Filter out adjacent satellites"
+msgstr "Bitişik uyduları filtrele"
+
+msgid ""
+"Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the "
+"case of C-band satellites)"
+msgstr ""
+"Frekans değerleri 10700 - 12750 arasında olmalı (C-Band uydularında 3000 - "
+"4200)"
+
+msgid ""
+"If you are not sure what polarisations the satellite you wish to search "
+"transmits, select \"vertical and horizontal\""
+msgstr ""
+"Taranacak uydunun polarizasyonundan emin değilseniz, \"dikey ve yatay\" "
+"seçin."
+
+msgid ""
+"If you select \"yes\" all channels on the satellite being search will be "
+"deleted before starting the current search"
+msgstr ""
+"\"evet\" geçerli tarama başlamadan önce uyduya ait tüm eski kanallar silinir."
+
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not "
+"encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgstr ""
+"\"evet\" tarama sadece şifresiz kanalları saklar; \"hayır\" şifresiz ve "
+"şifreli kanalları bulur."
+
+msgid ""
+"If you select \"yes\" the scan will only search transponders not listed in "
+"satellites.xml"
+msgstr ""
+"\"evet\" sadece satellites.xml de olmayan aktarıcılar için tarama yapılır."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"For C-band searches stop frequency must be between 3000MHz and 4200MHz."
+msgstr ""
+"Geçersiz parametre girildi. Lütfen düzeltip tekrar deneyin.\n"
+"C-band taramada bitiş frekansı 3000MHz - 4200MHz arasında olmalıdır."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Frequency start value is larger than stop value."
+msgstr ""
+"Geçersiz parametre girildi. Lütfen düzeltip tekrar deneyin.\n"
+"Başlangıç frekans değeri, bitiş frekans değerinden büyük."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+"Geçersiz parametre girildi. Lütfen düzeltip tekrar deneyin.\n"
+"Başlangıç frekansı 10700MHz - 12750MHz arasında olmalıdır.\n"
+"(C-Bandında 3000MHz - 4200MHz arasında)."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start symbol rate must be between 1MHz and 44MHz."
+msgstr ""
+"Geçersiz parametre girildi. Lütfen düzeltip tekrar deneyin.\n"
+"Başlangıç sembol değeri 1MHz - 44MHz arasında olmalıdır."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+"Geçersiz parametre girildi. Lütfen düzeltip tekrar deneyin.\n"
+"Bitiş frekansı 10700MHz - 12750MHz arasında olmalıdır.\n"
+"(C-Bandında 3000MHz - 4200MHz arasında)."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop symbol rate must be between 2MHz and 45MHz."
+msgstr ""
+"Geçersiz parametre girildi. Lütfen düzeltip tekrar deneyin.\n"
+"Bitiş sembol değeri 2MHz - 45MHz arasında olmalıdır."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Symbol rate start value is larger than stop value."
+msgstr ""
+"Geçersiz parametre girildi. Lütfen düzeltip tekrar deneyin.\n"
+"Başlangıç sembol değeri, bitiş sembol değerinden büyük."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a C-band satellite so frequency values \n"
+"need to be between 3000MHz and 4200MHz."
+msgstr ""
+"Geçersiz parametre girildi. Lütfen düzeltip tekrar deneyin.\n"
+"C-band uydusu olduğundan frekans değerleri \n"
+"3000MHz - 4200MHz arasında olmalıdır."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a Ku-band satellite so frequency values \n"
+"need to be between 10700MHz and 12750MHz."
+msgstr ""
+"Geçersiz parametre girildi. Lütfen düzeltip tekrar deneyin.\n"
+"Ku-band uydusu olduğundan frekans değerleri \n"
+"10700MHz - 12750MHz arasında olmalıdır."
+
+#, python-format
+msgid ""
+"Looking for available transponders.\n"
+"This will take a short while.\n"
+"\n"
+"   Current Status : %d/%d\n"
+"   Satellite : %s\n"
+"   Polarization : %s\n"
+"   Frequency range : %d - %d MHz\n"
+"   Symbol rates : %d - %d MHz"
+msgstr ""
+"Uygun aktarıcılar aranıyor.\n"
+"Bu ilem biraz sürebilir.\n"
+"\n"
+"   Geçerli Durum : %d/%d\n"
+"   Uydu : %s\n"
+"   Polarizasyon : %s\n"
+"   Frekans genişliği : %d - %d MHz\n"
+"   Sembol değeri : %d - %d MHz"
+
+msgid ""
+"No new transponders found! \n"
+"\n"
+"Only transponders already listed in satellites.xml \n"
+"have been found for those search parameters!"
+msgstr ""
+"Yeni aktarıcı bulunamadı! \n"
+"\n"
+"Sadece satellites.xml içinde bulunan aktarıcılar\n"
+"bulundu!"
+
+msgid "No transponders were found for those search parameters!"
+msgstr "Arama parametreleri için hiçbir aktarıcı bulunamadı!"
+
+msgid "Only free scan"
+msgstr "Sadece şifresiz tara"
+
+msgid "Only scan unknown transponders"
+msgstr "Sadece bilinmeyen aktarıcıları tara"
+
+msgid "Please setup your tuner configuration."
+msgstr "Lütfen tuner yapılandırmanızı kurun."
+
+msgid "Polarisation"
+msgstr "Polarizasyon"
+
+msgid "Press Green/OK to start the scan"
+msgstr "Taramayı başlatmak için Yeşil/OK'a basın."
+
+#
+msgid "Satellite"
+msgstr "Uydu"
+
+msgid "Scan"
+msgstr "Tara"
+
+msgid "Scan start frequency"
+msgstr "Tarama başlangıç frekansı"
+
+msgid "Scan start symbolrate"
+msgstr "Tarama başlangıç sembol değeri"
+
+msgid "Scan stop frequency"
+msgstr "Tarama bitiş frekansı"
+
+msgid "Scan stop symbolrate"
+msgstr "Tarama bitiş sembol değeri"
+
+#, python-format
+msgid ""
+"Search completed. %d transponders found.\n"
+"\n"
+"Details saved in:\n"
+"%s"
+msgstr ""
+"Arama tamamlandı. %d aktarıcı bulundu.\n"
+"\n"
+"Detaylar buraya saklandı:\n"
+"%s"
+
+msgid "Search type"
+msgstr "Arama tipi"
+
+msgid "Select a tuner that is configured for the satellite you wish to search"
+msgstr "Taramak istediğiniz uyduya yapılandırılmış bir tuner seçin"
+
+msgid "Select the satellite you wish to search"
+msgstr "Taramak istediğiniz uyduyu seçin"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+msgstr ""
+"Sembol değerleri, megasembol biçiminde; 1 - 44 arasında bir değer girin."
+
+msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
+msgstr ""
+"Sembol değerleri, megasembol biçiminde; 2 - 45 arasında bir değer girin."
+
+msgid "The blindscan run was cancelled by the user."
+msgstr "Kör tarama kullanıcı tarafından iptal edildi."
+
+#
+msgid "Tuner"
+msgstr "Tuner"
+
+msgid ""
+"When a neighbouring satellite is very strong this avoids searching "
+"transponders known to be coming from the neighbouring satellite"
+msgstr ""
+"Komşu bir uydunun çok kuvvetli olması, yakındaki uydu aktarıcılarının "
+"aranmasını önleyebilir."
+
+#
+msgid "circular left"
+msgstr "dairesel sola"
+
+#
+msgid "circular right"
+msgstr "dairesel sağa"
+
+msgid "circular right and circular left"
+msgstr "dairesel sağ ve dairesel sol"
+
+#
+msgid "horizontal"
+msgstr "yatay (h)"
+
+#
+msgid "no"
+msgstr "hayır"
+
+msgid "save to XML file"
+msgstr "XML dosyasına sakla"
+
+msgid "scan for channels"
+msgstr "kanal tara"
+
+msgid "up to 1 degree"
+msgstr "1 dereceye kadar"
+
+msgid "up to 2 degrees"
+msgstr "2 dereceye kadar"
+
+msgid "up to 3 degrees"
+msgstr "3 dereceye kadar"
+
+#
+msgid "vertical"
+msgstr "dikey (v)"
+
+msgid "vertical and horizontal"
+msgstr "dikey ve yatay"

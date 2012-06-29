@@ -1,0 +1,56 @@
+# English translations for enigma2 package.
+# Copyright (C) 2012 THE enigma2'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2 package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:45+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: ViX\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED KINGDOM\n"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Fan Control"
+msgstr "Fan Control"
+
+msgid "Fan basic action"
+msgstr "Fan basic action"
+
+msgid "Fan off duration time"
+msgstr "Fan off duration time"
+
+msgid "Fan on duration time"
+msgstr "Fan on duration time"
+
+msgid "Really close without saving settings?"
+msgstr "Really close without saving settings?"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Use Fan timer"
+msgstr "Use Fan timer"
+
+msgid "no"
+msgstr "no"
+
+msgid "off"
+msgstr "off"
+
+msgid "on"
+msgstr "on"
+
+msgid "yes"
+msgstr "yes"

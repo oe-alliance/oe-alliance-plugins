@@ -1,0 +1,50 @@
+# Icelandic translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:40+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: Polar Team/LT Team <baddi@oreind.is>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.3\n"
+"X-Poedit-Language: Icelandic\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: ICELAND\n"
+
+msgid "Cancel"
+msgstr "Hætta við"
+
+msgid "Enable led"
+msgstr ""
+
+msgid "Led state RUN"
+msgstr ""
+
+msgid "Led state Record"
+msgstr ""
+
+msgid "Led state Standby"
+msgstr ""
+
+#
+msgid "Save"
+msgstr "Vista"
+
+msgid "Show clock"
+msgstr ""
+
+msgid "Time mode"
+msgstr ""
+
+msgid "Update Date/Time"
+msgstr ""
+
+msgid "VFD_Giga"
+msgstr ""

@@ -1,0 +1,42 @@
+# Nederlands translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ViX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-23 07:43+0100\n"
+"Last-Translator: \n"
+"Language-Team: Andy Blackburn, Rob van der Does\n"
+"Language: Nederlands\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Nederlands\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Country: NEDERLAND\n"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Fan Control"
+msgstr "Fan Control"
+
+msgid "Fan mode"
+msgstr "Fan modus"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Off"
+msgstr "Uit"
+
+msgid "On"
+msgstr "Aan"
+
+msgid "switch Fan On/Off"
+msgstr "schakel Fan Aan/Uit"

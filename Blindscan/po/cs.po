@@ -1,0 +1,340 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ims\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-22 01:01+0100\n"
+"Last-Translator: jerry <jerry00@quick.cz>\n"
+"Language-Team: jerry00 <jerry00@quick.cz>\n"
+"Language: Czech\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+
+msgid ""
+"\"channel scan\" searches for channels and saves them to your receiver; "
+"\"save to XML file\" does a transponder search and saves found transponders "
+"to an XML file in satellites.xml format"
+msgstr ""
+
+#
+msgid "Blind Scan"
+msgstr ""
+
+#
+msgid "Blindscan"
+msgstr ""
+
+#
+msgid "Clear before scan"
+msgstr "Smazat před skenováním"
+
+#
+msgid "Exit"
+msgstr "Ukončit"
+
+#
+msgid "Filter out adjacent satellites"
+msgstr "Filtrovat sousední satelity"
+
+#
+msgid ""
+"Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the "
+"case of C-band satellites)"
+msgstr ""
+"Frekvence musí být mezi 10700 a 12750 (nebo 3000 a 4200 v případě satelitu v "
+"C-pásmu)"
+
+#
+msgid ""
+"If you are not sure what polarisations the satellite you wish to search "
+"transmits, select \"vertical and horizontal\""
+msgstr ""
+"Pokud si nejste jisti, jakou polarizaci má satelit, který chcete prohledat, "
+"vyberte \"vertikální a horizontální\""
+
+#
+msgid ""
+"If you select \"yes\" all channels on the satellite being search will be "
+"deleted before starting the current search"
+msgstr ""
+"Když vyberete \"ano\" všechny kanály na satelitu budou před zahájením "
+"hledání odstraněny "
+
+#
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not "
+"encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgstr ""
+"Když vyberete \"ano\" vyhledají se pouze nekódované kanály;\"ne\" vyhledají "
+"se free i kódované kanály"
+
+#
+msgid ""
+"If you select \"yes\" the scan will only search transponders not listed in "
+"satellites.xml"
+msgstr ""
+"Když vyberete \"ano\" prohledají se pouze transpondéry, které nejsou uvedeny "
+"v satellites.xml"
+
+#
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"For C-band searches stop frequency must be between 3000MHz and 4200MHz."
+msgstr ""
+"Zadán neplatný parametr. Opravte ho a zkuste to znova.\n"
+"Pro C-pásmo musí být koncová frekvence mezi 3000MHz a 4200MHz."
+
+#
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Frequency start value is larger than stop value."
+msgstr ""
+"Zadán neplatný parametr. Opravte ho a zkuste to znova.\n"
+"Počáteční frekvence je větší než koncová."
+
+#
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+"Zadán neplatný parametr. Opravte ho a zkuste to znova.\n"
+"Počáteční frekvence musí být mezi 10700MHz a 15750MHz.Nebo pro C-pásmo  mezi "
+"3000MHz a 4200MHz."
+
+#
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start symbol rate must be between 1MHz and 44MHz."
+msgstr ""
+"Zadán neplatný parametr. Opravte ho a zkuste to znova.\n"
+"Počáteční symb. rychlost musí být mezi 1MHz a 44MHz."
+
+#
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+"Zadán neplatný parametr.Opravte ho a znovu.\n"
+"Konc. frkv. musí být mezi 10700 a 12750MHz.\n"
+"(Nebo v pásmu C frekv. mezi 3000MHz a 4200MHz."
+
+#
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop symbol rate must be between 2MHz and 45MHz."
+msgstr ""
+"Zadán neplatný parametr.Opravte ho a znovu.\n"
+"Koncová symb. rychlost musí být mezi 2MHz a 45MHz."
+
+#
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Symbol rate start value is larger than stop value."
+msgstr ""
+"Zadán neplatný parametr.Opravte ho a znovu.\n"
+"Počáteční symb. rychlost je větší než cílová."
+
+#
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a C-band satellite so frequency values \n"
+"need to be between 3000MHz and 4200MHz."
+msgstr ""
+"Zadán neplatný parametr.Opravte ho a znovu.\n"
+"Pokud je to sat. v pásmu C-, tak jeho frekv. \n"
+"musí být mezi 3000MHz a 4200MHz."
+
+#
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a Ku-band satellite so frequency values \n"
+"need to be between 10700MHz and 12750MHz."
+msgstr ""
+"Zadán neplatný parametr.Opravte ho a znovu.\n"
+"Pokud je to sat. v pásmu Ku, tak jeho frekv. \n"
+"musí být mezi 10700MHz a 12750MHz."
+
+#, python-format
+msgid ""
+"Looking for available transponders.\n"
+"This will take a short while.\n"
+"\n"
+"   Current Status : %d/%d\n"
+"   Satellite : %s\n"
+"   Polarization : %s\n"
+"   Frequency range : %d - %d MHz\n"
+"   Symbol rates : %d - %d MHz"
+msgstr ""
+"Hledám dostupné tranďáky.\n"
+"Zabere to nějaký čas.\n"
+"\n"
+"   Stav nyní : %d/%d\n"
+"   Satelit : %s\n"
+"   Polarizace : %s\n"
+"   Frekv. rozsah : %d - %d MHz\n"
+"   Sym. rychlost : %d - %d MHz"
+
+msgid ""
+"No new transponders found! \n"
+"\n"
+"Only transponders already listed in satellites.xml \n"
+"have been found for those search parameters!"
+msgstr ""
+"Žádné nové tranďáky! \n"
+"\n"
+"Pouze ty, co již jsou v satellites.xml \n"
+"odpovídají nastaveným parametrům hledání!"
+
+#
+msgid "No transponders were found for those search parameters!"
+msgstr "Těmto parametrům hledání neodpovídají žádné traňďáky!"
+
+#
+msgid "Only free scan"
+msgstr "Jen volné"
+
+#
+msgid "Only scan unknown transponders"
+msgstr "Pouze neznámé tranďáky"
+
+#
+msgid "Please setup your tuner configuration."
+msgstr "Nastavte konfiguraci tuneru."
+
+#
+msgid "Polarisation"
+msgstr "Polarizace"
+
+#
+msgid "Press Green/OK to start the scan"
+msgstr "Zeleným/OK začne skenování"
+
+#
+msgid "Satellite"
+msgstr "Satelit"
+
+#
+msgid "Scan"
+msgstr "Hledat"
+
+#
+msgid "Scan start frequency"
+msgstr "Hledat od frekvence"
+
+#
+msgid "Scan start symbolrate"
+msgstr "Hledat od symb.ryhlosti"
+
+#
+msgid "Scan stop frequency"
+msgstr "Hledat do frekvence"
+
+#
+msgid "Scan stop symbolrate"
+msgstr "Hledat do symb.ryhlosti"
+
+#, python-format
+msgid ""
+"Search completed. %d transponders found.\n"
+"\n"
+"Details saved in:\n"
+"%s"
+msgstr ""
+"Prohledáno. %d nalezených tranďáků.\n"
+"\n"
+"Podrobnosti ulož. v:\n"
+"%s"
+
+#
+msgid "Search type"
+msgstr "Typ hledání"
+
+#
+msgid "Select a tuner that is configured for the satellite you wish to search"
+msgstr "Vyberte tuner na satelitu, který chcete prohledat"
+
+#
+msgid "Select the satellite you wish to search"
+msgstr "Vyberte satelit, který chcete prohledat"
+
+#
+msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+msgstr ""
+"Hodnoty přenosové rychlosti jsou v megasymbols, zadejte hodnotu mezi 1 a 44"
+
+#
+msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
+msgstr ""
+"Hodnoty přenosové rychlosti jsou v megasymbols, zadejte hodnotu mezi 2 a 45"
+
+#
+msgid "The blindscan run was cancelled by the user."
+msgstr "Spuštěný blindscan byl zrušen uživatelem."
+
+#
+msgid "Tuner"
+msgstr "Tuner"
+
+#
+msgid ""
+"When a neighbouring satellite is very strong this avoids searching "
+"transponders known to be coming from the neighbouring satellite"
+msgstr ""
+"Když je sousední satelit velmi silný ,zabrání se tím hledání transpondérů ze "
+"sousedního satelitu"
+
+#
+msgid "circular left"
+msgstr "levá kruhová (polarizace)"
+
+#
+msgid "circular right"
+msgstr "pravá kruhová (polarizace)"
+
+#
+msgid "circular right and circular left"
+msgstr "pravá kruhová a levá kruhová "
+
+#
+msgid "horizontal"
+msgstr "horizontální"
+
+#
+msgid "no"
+msgstr "ne"
+
+#
+msgid "save to XML file"
+msgstr "uložit do souboru XML"
+
+#
+msgid "scan for channels"
+msgstr "hledám kanály"
+
+#
+msgid "up to 1 degree"
+msgstr "až 1 stupeň"
+
+#
+msgid "up to 2 degrees"
+msgstr "až  stupně"
+
+#
+msgid "up to 3 degrees"
+msgstr "až 3 stupně"
+
+#
+msgid "vertical"
+msgstr "vertikální"
+
+#
+msgid "vertical and horizontal"
+msgstr "svile a vodorovně"

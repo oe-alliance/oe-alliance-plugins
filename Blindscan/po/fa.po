@@ -1,0 +1,238 @@
+# Persian translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:41+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.0.3\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+msgid ""
+"\"channel scan\" searches for channels and saves them to your receiver; "
+"\"save to XML file\" does a transponder search and saves found transponders "
+"to an XML file in satellites.xml format"
+msgstr ""
+
+msgid "Blind Scan"
+msgstr ""
+
+msgid "Blindscan"
+msgstr ""
+
+msgid "Clear before scan"
+msgstr "پاک سازی قبل از اسکن"
+
+msgid "Exit"
+msgstr "خروج"
+
+msgid "Filter out adjacent satellites"
+msgstr ""
+
+msgid ""
+"Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the "
+"case of C-band satellites)"
+msgstr ""
+
+msgid ""
+"If you are not sure what polarisations the satellite you wish to search "
+"transmits, select \"vertical and horizontal\""
+msgstr ""
+
+msgid ""
+"If you select \"yes\" all channels on the satellite being search will be "
+"deleted before starting the current search"
+msgstr ""
+
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not "
+"encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgstr ""
+
+msgid ""
+"If you select \"yes\" the scan will only search transponders not listed in "
+"satellites.xml"
+msgstr ""
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"For C-band searches stop frequency must be between 3000MHz and 4200MHz."
+msgstr ""
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Frequency start value is larger than stop value."
+msgstr ""
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start symbol rate must be between 1MHz and 44MHz."
+msgstr ""
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop symbol rate must be between 2MHz and 45MHz."
+msgstr ""
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Symbol rate start value is larger than stop value."
+msgstr ""
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a C-band satellite so frequency values \n"
+"need to be between 3000MHz and 4200MHz."
+msgstr ""
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a Ku-band satellite so frequency values \n"
+"need to be between 10700MHz and 12750MHz."
+msgstr ""
+
+#, python-format
+msgid ""
+"Looking for available transponders.\n"
+"This will take a short while.\n"
+"\n"
+"   Current Status : %d/%d\n"
+"   Satellite : %s\n"
+"   Polarization : %s\n"
+"   Frequency range : %d - %d MHz\n"
+"   Symbol rates : %d - %d MHz"
+msgstr ""
+
+msgid ""
+"No new transponders found! \n"
+"\n"
+"Only transponders already listed in satellites.xml \n"
+"have been found for those search parameters!"
+msgstr ""
+
+msgid "No transponders were found for those search parameters!"
+msgstr ""
+
+msgid "Only free scan"
+msgstr ""
+
+msgid "Only scan unknown transponders"
+msgstr ""
+
+msgid "Please setup your tuner configuration."
+msgstr ""
+
+msgid "Polarisation"
+msgstr "Polarisation"
+
+msgid "Press Green/OK to start the scan"
+msgstr ""
+
+msgid "Satellite"
+msgstr "ماهواره"
+
+msgid "Scan"
+msgstr ""
+
+msgid "Scan start frequency"
+msgstr ""
+
+msgid "Scan start symbolrate"
+msgstr ""
+
+msgid "Scan stop frequency"
+msgstr ""
+
+msgid "Scan stop symbolrate"
+msgstr ""
+
+#, python-format
+msgid ""
+"Search completed. %d transponders found.\n"
+"\n"
+"Details saved in:\n"
+"%s"
+msgstr ""
+
+msgid "Search type"
+msgstr ""
+
+msgid "Select a tuner that is configured for the satellite you wish to search"
+msgstr ""
+
+msgid "Select the satellite you wish to search"
+msgstr ""
+
+msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+msgstr ""
+
+msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
+msgstr ""
+
+msgid "The blindscan run was cancelled by the user."
+msgstr ""
+
+msgid "Tuner"
+msgstr "تیونر"
+
+msgid ""
+"When a neighbouring satellite is very strong this avoids searching "
+"transponders known to be coming from the neighbouring satellite"
+msgstr ""
+
+msgid "circular left"
+msgstr "چرخش چپ"
+
+msgid "circular right"
+msgstr "چرخش راست"
+
+msgid "circular right and circular left"
+msgstr ""
+
+msgid "horizontal"
+msgstr "افقی"
+
+msgid "no"
+msgstr "خیر"
+
+msgid "save to XML file"
+msgstr ""
+
+msgid "scan for channels"
+msgstr ""
+
+msgid "up to 1 degree"
+msgstr ""
+
+msgid "up to 2 degrees"
+msgstr ""
+
+msgid "up to 3 degrees"
+msgstr ""
+
+msgid "vertical"
+msgstr "عمودی"
+
+msgid "vertical and horizontal"
+msgstr ""

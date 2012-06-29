@@ -1,0 +1,293 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/plugin.py:282
+msgid ""
+"\"channel scan\" searches for channels and saves them to your receiver; "
+"\"save to XML file\" does a transponder search and saves found transponders "
+"to an XML file in satellites.xml format"
+msgstr ""
+
+#: ../src/plugin.py:841 ../src/plugin.py:849 ../src/plugin.py:855
+msgid "Blind Scan"
+msgstr ""
+
+#: ../src/plugin.py:45
+msgid "Blindscan"
+msgstr ""
+
+#: ../src/plugin.py:278
+msgid "Clear before scan"
+msgstr ""
+
+#: ../src/plugin.py:80 ../src/plugin.py:92
+msgid "Exit"
+msgstr ""
+
+#: ../src/plugin.py:281
+msgid "Filter out adjacent satellites"
+msgstr ""
+
+#: ../src/plugin.py:273 ../src/plugin.py:274
+msgid ""
+"Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the "
+"case of C-band satellites)"
+msgstr ""
+
+#: ../src/plugin.py:275
+msgid ""
+"If you are not sure what polarisations the satellite you wish to search "
+"transmits, select \"vertical and horizontal\""
+msgstr ""
+
+#: ../src/plugin.py:278
+msgid ""
+"If you select \"yes\" all channels on the satellite being search will be "
+"deleted before starting the current search"
+msgstr ""
+
+#: ../src/plugin.py:279
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not "
+"encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgstr ""
+
+#: ../src/plugin.py:280
+msgid ""
+"If you select \"yes\" the scan will only search transponders not listed in "
+"satellites.xml"
+msgstr ""
+
+#: ../src/plugin.py:329
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"For C-band searches stop frequency must be between 3000MHz and 4200MHz."
+msgstr ""
+
+#: ../src/plugin.py:314
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Frequency start value is larger than stop value."
+msgstr ""
+
+#: ../src/plugin.py:326 ../src/plugin.py:340
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+
+#: ../src/plugin.py:305
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start symbol rate must be between 1MHz and 44MHz."
+msgstr ""
+
+#: ../src/plugin.py:343
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+
+#: ../src/plugin.py:308
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop symbol rate must be between 2MHz and 45MHz."
+msgstr ""
+
+#: ../src/plugin.py:311
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Symbol rate start value is larger than stop value."
+msgstr ""
+
+#: ../src/plugin.py:318 ../src/plugin.py:321
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a C-band satellite so frequency values \n"
+"need to be between 3000MHz and 4200MHz."
+msgstr ""
+
+#: ../src/plugin.py:334 ../src/plugin.py:337
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a Ku-band satellite so frequency values \n"
+"need to be between 10700MHz and 12750MHz."
+msgstr ""
+
+#: ../src/plugin.py:537
+#, python-format
+msgid ""
+"Looking for available transponders.\n"
+"This will take a short while.\n"
+"\n"
+"   Current Status : %d/%d\n"
+"   Satellite : %s\n"
+"   Polarization : %s\n"
+"   Frequency range : %d - %d MHz\n"
+"   Symbol rates : %d - %d MHz"
+msgstr ""
+
+#: ../src/plugin.py:641
+msgid ""
+"No new transponders found! \n"
+"\n"
+"Only transponders already listed in satellites.xml \n"
+"have been found for those search parameters!"
+msgstr ""
+
+#: ../src/plugin.py:645
+msgid "No transponders were found for those search parameters!"
+msgstr ""
+
+#: ../src/plugin.py:279
+msgid "Only free scan"
+msgstr ""
+
+#: ../src/plugin.py:280
+msgid "Only scan unknown transponders"
+msgstr ""
+
+#: ../src/plugin.py:94
+msgid "Please setup your tuner configuration."
+msgstr ""
+
+#: ../src/plugin.py:275
+msgid "Polarisation"
+msgstr ""
+
+#: ../src/plugin.py:82
+msgid "Press Green/OK to start the scan"
+msgstr ""
+
+#: ../src/plugin.py:272
+msgid "Satellite"
+msgstr ""
+
+#: ../src/plugin.py:81
+msgid "Scan"
+msgstr ""
+
+#: ../src/plugin.py:273
+msgid "Scan start frequency"
+msgstr ""
+
+#: ../src/plugin.py:276
+msgid "Scan start symbolrate"
+msgstr ""
+
+#: ../src/plugin.py:274
+msgid "Scan stop frequency"
+msgstr ""
+
+#: ../src/plugin.py:277
+msgid "Scan stop symbolrate"
+msgstr ""
+
+#: ../src/plugin.py:638
+#, python-format
+msgid ""
+"Search completed. %d transponders found.\n"
+"\n"
+"Details saved in:\n"
+"%s"
+msgstr ""
+
+#: ../src/plugin.py:282
+msgid "Search type"
+msgstr ""
+
+#: ../src/plugin.py:260
+msgid "Select a tuner that is configured for the satellite you wish to search"
+msgstr ""
+
+#: ../src/plugin.py:272
+msgid "Select the satellite you wish to search"
+msgstr ""
+
+#: ../src/plugin.py:276
+msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+msgstr ""
+
+#: ../src/plugin.py:277
+msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
+msgstr ""
+
+#: ../src/plugin.py:647
+msgid "The blindscan run was cancelled by the user."
+msgstr ""
+
+#: ../src/plugin.py:260
+msgid "Tuner"
+msgstr ""
+
+#: ../src/plugin.py:281
+msgid ""
+"When a neighbouring satellite is very strong this avoids searching "
+"transponders known to be coming from the neighbouring satellite"
+msgstr ""
+
+#: ../src/plugin.py:232 ../src/plugin.py:530 ../src/plugin.py:533
+msgid "circular left"
+msgstr ""
+
+#: ../src/plugin.py:231 ../src/plugin.py:528 ../src/plugin.py:535
+msgid "circular right"
+msgstr ""
+
+#: ../src/plugin.py:230
+msgid "circular right and circular left"
+msgstr ""
+
+#: ../src/plugin.py:229
+msgid "horizontal"
+msgstr ""
+
+#: ../src/plugin.py:200
+msgid "no"
+msgstr ""
+
+#: ../src/plugin.py:206
+msgid "save to XML file"
+msgstr ""
+
+#: ../src/plugin.py:205
+msgid "scan for channels"
+msgstr ""
+
+#: ../src/plugin.py:201
+msgid "up to 1 degree"
+msgstr ""
+
+#: ../src/plugin.py:202
+msgid "up to 2 degrees"
+msgstr ""
+
+#: ../src/plugin.py:203
+msgid "up to 3 degrees"
+msgstr ""
+
+#: ../src/plugin.py:228
+msgid "vertical"
+msgstr ""
+
+#: ../src/plugin.py:227
+msgid "vertical and horizontal"
+msgstr ""

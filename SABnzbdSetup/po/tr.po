@@ -1,0 +1,83 @@
+# Turkish translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:40+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: CÜNEYT OCAKLILAR <ocaklilar@gmail.com>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.0.3\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-Bookmarks: 2450,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
+
+msgid "Autostart"
+msgstr "Otobaşlama"
+
+msgid "Autostart:"
+msgstr "Otobaşlama:"
+
+msgid "Current Status:"
+msgstr "Geçerli Durum:"
+
+#
+msgid "Disabled"
+msgstr "Devre dışı"
+
+#
+msgid "Enabled"
+msgstr "Etkin"
+
+msgid "Installing Service"
+msgstr ""
+
+#, python-format
+msgid "Ready to install \"%s\" ?"
+msgstr ""
+
+#, python-format
+msgid "Ready to remove \"%s\" ?"
+msgstr ""
+
+msgid "Remove Service"
+msgstr ""
+
+msgid "Removing Service"
+msgstr ""
+
+msgid "Running"
+msgstr "Çalışıyor"
+
+msgid "SABnzbd Setup"
+msgstr ""
+
+msgid "Start"
+msgstr "Başla"
+
+#
+msgid "Stop"
+msgstr "Durdur"
+
+msgid "Stopped"
+msgstr "Durduruldu"
+
+msgid ""
+"Your receiver will be restarted after the installation of service.\n"
+"\n"
+"Do you want to install now ?"
+msgstr ""
+
+msgid ""
+"Your receiver will be restarted after the removal of service\n"
+"Do you want to remove now ?"
+msgstr ""
+
+msgid "please wait..."
+msgstr ""

@@ -1,29 +1,28 @@
-AC_INIT(plugins,0.0.1)
-AM_INIT_AUTOMAKE(plugins,0.0.1)
+AC_INIT([enigma2-oe-alliance-plugins],[1.0])
+AM_INIT_AUTOMAKE([dist-bzip2 foreign no-define tar-pax])
+AC_CONFIG_HEADERS([enigma2-plugins-config.h])
+
+# Silent rules are available since 1.11, but older versions
+# are still in use. So don't use them unconditionally.
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
+AC_USE_SYSTEM_EXTENSIONS
+AC_SYS_LARGEFILE
+
+AC_PROG_CC
+AC_PROG_CXX
+m4_ifdef([LT_INIT], [LT_INIT], [AC_PROG_LIBTOOL])
+AC_CONFIG_MACRO_DIR([m4])
+
+AC_CHECK_HEADERS([dbox/fp.h dbox/lcd-ks0713.h])
 
 AC_PATH_PROG(MSGFMT, msgfmt, AC_MSG_ERROR(Could not find msgfmt))
 
 AM_PATH_PYTHON
-AC_PYTHON_DEVEL
+AX_PYTHON_DEVEL
+AX_PTHREAD
 
-AC_PROG_CXX
-
-CPPFLAGS="$CPPFLAGS $PYTHON_CPPFLAGS"
-LDFLAGS="$LDFLAGS $PYTHON_LDFLAGS"
-
-AC_ARG_WITH(po,
-        AS_HELP_STRING([--with-po],[enable updating of po files]),
-        [with_po="$withval"],[with_po="no"])
-if test "$with_po" = "yes"; then
-        AC_PATH_PROG(MSGINIT, msginit)
-        AC_PATH_PROG(MSGMERGE, msgmerge)
-        AC_PATH_PROG(MSGUNIQ, msguniq)
-        AC_PATH_PROG(XGETTEXT, xgettext)
-        if test -z "$MSGINIT" -o -z "$MSGMERGE" -o -z "$MSGUNIQ" -o -z "$XGETTEXT"; then
-                AC_MSG_ERROR([Could not find required gettext tools])
-        fi
-fi
-AM_CONDITIONAL(UPDATE_PO, test "$with_po" = "yes")
+TUXBOX_APPS_DVB
 
 AC_ARG_WITH(boxtype,
 	[  --with-boxtype=NAME box type [[none,dm7025,dm800...]]],
@@ -51,31 +50,96 @@ AM_CONDITIONAL(GB800SE, test "$BOXTYPE" == gb800se)
 AM_CONDITIONAL(GB800UE, test "$BOXTYPE" == gb800ue)
 AM_CONDITIONAL(GBQUAD, test "$BOXTYPE" == gbquad)
 
+PKG_CHECK_MODULES(ENIGMA2, enigma2)
+PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
+PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
+
+AC_ARG_WITH(tpm,
+	AS_HELP_STRING([--with-tpm], [enable plugins that require a TPM]),
+	[with_tpm="$withval"],[with_tpm="no"])
+if test "$with_tpm" = "yes"; then
+	AC_DEFINE([HAVE_TPM],[1],[Define to 1 to enable plugins that require a TPM])
+fi
+AM_CONDITIONAL(TPM, test "$with_tpm" = "yes")
+
+AC_ARG_WITH(debug,
+	AS_HELP_STRING([--without-debug],[disable debugging code]),
+	[with_debug="$withval"],[with_debug="yes"])
+if test "$with_debug" = "yes"; then
+	DEBUG_CFLAGS="-ggdb3"
+	AC_DEFINE([DEBUG],[1],[Define to 1 to enable debugging code])
+fi
+AC_SUBST(DEBUG_CFLAGS)
+
+AC_ARG_WITH(po,
+	AS_HELP_STRING([--with-po],[enable updating of po files]),
+	[with_po="$withval"],[with_po="no"])
+if test "$with_po" = "yes"; then
+	AC_PATH_PROG(MSGINIT, msginit)
+	AC_PATH_PROG(MSGMERGE, msgmerge)
+	AC_PATH_PROG(MSGUNIQ, msguniq)
+	AC_PATH_PROG(XGETTEXT, xgettext)
+	if test -z "$MSGINIT" -o -z "$MSGMERGE" -o -z "$MSGUNIQ" -o -z "$XGETTEXT"; then
+		AC_MSG_ERROR([Could not find required gettext tools])
+	fi
+fi
+AM_CONDITIONAL(UPDATE_PO, test "$with_po" = "yes")
+
 AC_CONFIG_FILES([
 Makefile
-src/Makefile
-src/Extensions/Makefile
-src/Extensions/VuplusEvent/Makefile
-src/Extensions/VuplusEvent/meta/Makefile
-src/SystemPlugins/Makefile
-src/SystemPlugins/Blindscan/Makefile
-src/SystemPlugins/Blindscan/meta/Makefile
-src/SystemPlugins/FirmwareUpgrade/Makefile
-src/SystemPlugins/FirmwareUpgrade/meta/Makefile
-src/SystemPlugins/FPGAUpgrade/Makefile
-src/SystemPlugins/FPGAUpgrade/meta/Makefile
-src/SystemPlugins/TmTwinFanControl/Makefile
-src/SystemPlugins/TmTwinFanControl/meta/Makefile
-src/SystemPlugins/RemoteControlCode/Makefile
-src/SystemPlugins/RemoteControlCode/meta/Makefile
-src/SystemPlugins/SABnzbdSetup/Makefile
-src/SystemPlugins/VFDGiga/Makefile
-src/SystemPlugins/VuDuoFanControl/Makefile
-src/SystemPlugins/VuDuoFanControl/meta/Makefile
-src/SystemPlugins/VuUnoFanControl/Makefile
-src/SystemPlugins/VuUnoFanControl/meta/Makefile
-src/SystemPlugins/XtrendFancontrol/Makefile
-src/SystemPlugins/XtrendFancontrol/meta/Makefile
-po/Makefile
+
+Blindscan/Makefile
+Blindscan/src/Makefile
+Blindscan/meta/Makefile
+Blindscan/po/Makefile
+
+FirmwareUpgrade/Makefile
+FirmwareUpgrade/src/Makefile
+FirmwareUpgrade/meta/Makefile
+FirmwareUpgrade/po/Makefile
+
+FPGAUpgrade/Makefile
+FPGAUpgrade/src/Makefile
+FPGAUpgrade/meta/Makefile
+FPGAUpgrade/po/Makefile
+
+TmTwinFanControl/Makefile
+TmTwinFanControl/src/Makefile
+TmTwinFanControl/meta/Makefile
+TmTwinFanControl/po/Makefile
+
+RemoteControlCode/Makefile
+RemoteControlCode/src/Makefile
+RemoteControlCode/meta/Makefile
+RemoteControlCode/po/Makefile
+
+SABnzbdSetup/Makefile
+SABnzbdSetup/src/Makefile
+SABnzbdSetup/meta/Makefile
+SABnzbdSetup/po/Makefile
+
+VFDGiga/Makefile
+VFDGiga/src/Makefile
+VFDGiga/po/Makefile
+
+VuDuoFanControl/Makefile
+VuDuoFanControl/src/Makefile
+VuDuoFanControl/meta/Makefile
+VuDuoFanControl/po/Makefile
+
+VuplusEvent/Makefile
+VuplusEvent/src/Makefile
+VuplusEvent/meta/Makefile
+VuplusEvent/po/Makefile
+
+VuUnoFanControl/Makefile
+VuUnoFanControl/src/Makefile
+VuUnoFanControl/meta/Makefile
+VuUnoFanControl/po/Makefile
+
+XtrendFancontrol/Makefile
+XtrendFancontrol/src/Makefile
+XtrendFancontrol/meta/Makefile
+XtrendFancontrol/po/Makefile
 ])
 AC_OUTPUT

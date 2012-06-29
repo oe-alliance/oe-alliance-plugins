@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>andyblac</author>
+                    <name>SABnzbdSetup</name>
+                    <packagename>enigma2-plugin-systemplugins-sabnzbd</packagename>
+                    <shortdescription>Start/Stop SABnzbd downloader</shortdescription>
+                    <description>Start/Stop SABnzbd downloader</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-remotecontrolcode" />
+	</files>
+</default>

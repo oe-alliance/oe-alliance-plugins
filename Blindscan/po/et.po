@@ -1,0 +1,285 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:41+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: Raivo, Henkka, eesatfan, rimas\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid ""
+"\"channel scan\" searches for channels and saves them to your receiver; "
+"\"save to XML file\" does a transponder search and saves found transponders "
+"to an XML file in satellites.xml format"
+msgstr ""
+
+msgid "Blind Scan"
+msgstr "Pimeotsing"
+
+msgid "Blindscan"
+msgstr "Pimeotsing"
+
+msgid "Clear before scan"
+msgstr "Kustuta kanalid"
+
+msgid "Exit"
+msgstr "Välju"
+
+msgid "Filter out adjacent satellites"
+msgstr "Filtreeri kõrvutised satelliidid"
+
+msgid ""
+"Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the "
+"case of C-band satellites)"
+msgstr ""
+"Sageduste vahemik peab olema 10700 kuni 12750 (või 3000 kuni 4200 C-band "
+"satelliitidel)"
+
+msgid ""
+"If you are not sure what polarisations the satellite you wish to search "
+"transmits, select \"vertical and horizontal\""
+msgstr ""
+"Kui sa ei ole kindel, millist polarisatsiooni otsitav satelliit kasutab, "
+"vali \"vertikaalne and horisontaalne\""
+
+msgid ""
+"If you select \"yes\" all channels on the satellite being search will be "
+"deleted before starting the current search"
+msgstr ""
+"Valides \"jah\", kustutatakse kõik otsitava satelliidi kanalid enne "
+"kanaliotsingu alustamist"
+
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not "
+"encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgstr ""
+"Määrates \"jah\", salvestab otsing ainult koodivabad kanalid; \"ei\" leiab "
+"kodeeritud ja koodivabad kanalid"
+
+msgid ""
+"If you select \"yes\" the scan will only search transponders not listed in "
+"satellites.xml"
+msgstr ""
+"Valides \"jah\", otsitakse ainult transpondereid, mida ei leidu satellites."
+"xml failis"
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"For C-band searches stop frequency must be between 3000MHz and 4200MHz."
+msgstr ""
+"Sisestati kehtetud parameetrid. Paranda ja proovi uuesti.\n"
+"C-band otsingu lõppsagedus peab olema vahemikus 3000MHz kuni 4200MHz."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Frequency start value is larger than stop value."
+msgstr ""
+"Sisestati kehtetud parameetrid. Paranda ja proovi uuesti.\n"
+"Algsagedus peab olema lõppsagedusest suurem."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+"Sisestati kehtetud parameetrid. Paranda ja proovi uuesti.\n"
+"Algsagedus peab olema vahemikus 10700MHz kuni 12750MHz.\n"
+"(Või 3000MHz kuni 4200MHz, kui on c-band)."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start symbol rate must be between 1MHz and 44MHz."
+msgstr ""
+"Sisestati kehtetud parameetrid. Paranda ja proovi uuesti.\n"
+"Alg sümbolikiirus peab olema vahemikus 1MHz kuni 44MHz."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+"Sisestati kehtetud parameetrid. Paranda ja proovi uuesti.\n"
+"Lõppsagedus peab olema vahemikus 10700MHz kuni 12750MHz.\n"
+"(Või 3000MHz and 4200MHz, kui on c-band)."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop symbol rate must be between 2MHz and 45MHz."
+msgstr ""
+"Sisestati kehtetud parameetrid. Paranda ja proovi uuesti.\n"
+"Lõpp sümbolikiirus peab olema vahemikus 2MHz kuni 45MHz."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Symbol rate start value is larger than stop value."
+msgstr ""
+"Sisestati kehtetud parameetrid. Paranda ja proovi uuesti.\n"
+"Symbol rate algväärtus peab olema suurem kui lõppväärtus."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a C-band satellite so frequency values \n"
+"need to be between 3000MHz and 4200MHz."
+msgstr ""
+"Sisestati kehtetud parameetrid. Paranda ja proovi uuesti.\n"
+"See on C-band satelliit, sageduste vahemik \n"
+"peab olema 3000MHz kuni 4200MHz."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a Ku-band satellite so frequency values \n"
+"need to be between 10700MHz and 12750MHz."
+msgstr ""
+"Sisestati kehtetud parameetrid. Paranda ja proovi uuesti.\n"
+"See on Ku-band satelliit, sageduste vahemik \n"
+"peab olema 10700MHz kuni 12750MHz."
+
+#, python-format
+msgid ""
+"Looking for available transponders.\n"
+"This will take a short while.\n"
+"\n"
+"   Current Status : %d/%d\n"
+"   Satellite : %s\n"
+"   Polarization : %s\n"
+"   Frequency range : %d - %d MHz\n"
+"   Symbol rates : %d - %d MHz"
+msgstr ""
+"Otsime saadaolevaid transpondereid.\n"
+"See kestab mõne minuti.\n"
+"\n"
+"   Praegune olek : %d/%d\n"
+"   Satelliit : %s\n"
+"   Polarisatsioon : %s\n"
+"   Ribalaius : %d - %d MHz\n"
+"   Symbol rates : %d - %d MHz"
+
+msgid ""
+"No new transponders found! \n"
+"\n"
+"Only transponders already listed in satellites.xml \n"
+"have been found for those search parameters!"
+msgstr ""
+"Uusi transpondereid ei leitud! \n"
+"\n"
+"Kõik nende otsingu parameetrite järgi leitud transponderid\n"
+"juba leiduvad satellites.xml failis!"
+
+msgid "No transponders were found for those search parameters!"
+msgstr "Nende otsingu parameetritega transpondereid ei leitud!"
+
+msgid "Only free scan"
+msgstr "Ainult vabakanalid"
+
+msgid "Only scan unknown transponders"
+msgstr "Ainult tundmatud transponderid"
+
+msgid "Please setup your tuner configuration."
+msgstr "Häälesta tuuner."
+
+msgid "Polarisation"
+msgstr "Polarisatsioon"
+
+msgid "Press Green/OK to start the scan"
+msgstr "Otsingu alustamiseks vajuta OK"
+
+msgid "Satellite"
+msgstr "Satelliit"
+
+msgid "Scan"
+msgstr "Otsi"
+
+msgid "Scan start frequency"
+msgstr "Otsingu algsagedus"
+
+msgid "Scan start symbolrate"
+msgstr "Otsingu sümbolikiiruse algväärtus"
+
+msgid "Scan stop frequency"
+msgstr "Otsingu lõppsagedus"
+
+msgid "Scan stop symbolrate"
+msgstr "Otsingu sümbolikiiruse lõppväärtus"
+
+#, python-format
+msgid ""
+"Search completed. %d transponders found.\n"
+"\n"
+"Details saved in:\n"
+"%s"
+msgstr ""
+"Otsing lõpetatud. %d transponderit leitud.\n"
+"\n"
+"Üksikasjad salvestati:\n"
+"%s"
+
+msgid "Search type"
+msgstr "Otsingu tüüp"
+
+msgid "Select a tuner that is configured for the satellite you wish to search"
+msgstr "Vali tuuner, mis on häälestatud otsitavale satellidile"
+
+msgid "Select the satellite you wish to search"
+msgstr "Vali otsinguks satelliit"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+msgstr ""
+"Symbol rate väärtused on megasymbolites; sisesta väärtus vahemikus 1 kuni 44"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
+msgstr ""
+"Symbol rate väärtused on megasymbolites; sisesta väärtus vahemikus 2 kuni 45"
+
+msgid "The blindscan run was cancelled by the user."
+msgstr "Kasutaja katkestas pimeotsingu."
+
+msgid "Tuner"
+msgstr "Tuuner"
+
+msgid ""
+"When a neighbouring satellite is very strong this avoids searching "
+"transponders known to be coming from the neighbouring satellite"
+msgstr ""
+"Kui naabersatelliit on väga tugeva signaaliga, väldib see otsimist "
+"transponderitelt, mis tulevad naabersatelliidilt."
+
+msgid "circular left"
+msgstr "ringpolarisatsioon vasak"
+
+msgid "circular right"
+msgstr "ringpolarisatsioon parem"
+
+msgid "circular right and circular left"
+msgstr "ringpolarisatsioon parem ja vasak"
+
+msgid "horizontal"
+msgstr "horisontaalne"
+
+msgid "no"
+msgstr "ei"
+
+msgid "save to XML file"
+msgstr "salvesta XML faili"
+
+msgid "scan for channels"
+msgstr "otsi kanaleid"
+
+msgid "up to 1 degree"
+msgstr "1 kraad"
+
+msgid "up to 2 degrees"
+msgstr "2 kraadi"
+
+msgid "up to 3 degrees"
+msgstr "3 kraadi"
+
+msgid "vertical"
+msgstr "vertikaal"
+
+msgid "vertical and horizontal"
+msgstr "vertikaalne ja horisontaalne"

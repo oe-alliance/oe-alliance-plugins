@@ -1,0 +1,293 @@
+# Nederlands translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ViX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-23 07:43+0100\n"
+"Last-Translator: \n"
+"Language-Team: Andy Blackburn, Rob van der Does\n"
+"Language: Nederlands\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Nederlands\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Country: NEDERLAND\n"
+
+msgid ""
+"\"channel scan\" searches for channels and saves them to your receiver; "
+"\"save to XML file\" does a transponder search and saves found transponders "
+"to an XML file in satellites.xml format"
+msgstr ""
+
+msgid "Blind Scan"
+msgstr "Blind Scan"
+
+msgid "Blindscan"
+msgstr "Blindscan"
+
+msgid "Clear before scan"
+msgstr "Vóór zoeken alle zenders wissen?"
+
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "Filter out adjacent satellites"
+msgstr "Filter nabije satellieten uit"
+
+msgid ""
+"Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the "
+"case of C-band satellites)"
+msgstr ""
+"Frequentie waardes moeten tussen 10700MHz en 12750MHz liggen (of tussen "
+"3000MHz en 4200MHz in geval van C-band satellieten)."
+
+msgid ""
+"If you are not sure what polarisations the satellite you wish to search "
+"transmits, select \"vertical and horizontal\""
+msgstr ""
+"Als u niet zeker bent van de polarisatie van de gewenste transponder, kiest "
+"u voor \"vertikaal en horizontaal\" "
+
+msgid ""
+"If you select \"yes\" all channels on the satellite being search will be "
+"deleted before starting the current search"
+msgstr ""
+"Als u \"Ja\" kiest, zullen alle kanalen van de huidige satelliet worden "
+"gewist voor de zoekslag begint. Dit voorkomt veelal dat kanalen dubbel "
+"bestaan in uw STB_BOX."
+
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not "
+"encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgstr ""
+"Als u \"Ja\" kiest, zullen alleen kanalen worden gezocht die niet gecodeerd "
+"zijn; met \"no\" zullen alle kanalen gezocht worden."
+
+msgid ""
+"If you select \"yes\" the scan will only search transponders not listed in "
+"satellites.xml"
+msgstr ""
+"Als u \"Ja\" kiest, zullen alleen kanalen worden gezocht die niet in us "
+"satellites.xml staan (het bestand waar alle transponders in staan)."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"For C-band searches stop frequency must be between 3000MHz and 4200MHz."
+msgstr ""
+"Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
+"Voor C-band zoeken moet de eind frequentie liggen tussen 3000MHz en 4200MHz."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Frequency start value is larger than stop value."
+msgstr ""
+"Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
+"De frequentie beginwaarde is hoger dan de eindwaarde"
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+"Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
+"De beginwaarde voor de frequentie moet liggen tussen de 10700MHz en "
+"12750MHz.\n"
+"(of tussen de 3000MHz en 4200MHz voor de C-band)."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Start symbol rate must be between 1MHz and 44MHz."
+msgstr ""
+"Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
+"De aanvangs symbol rate moet liggen tussen de 1MHz en de 44MHz."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop frequency must be between 10700MHz and 12750MHz.\n"
+"(Or 3000MHz and 4200MHz in the case of c-band)."
+msgstr ""
+"Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
+"De eindwaarde voor de frequentie moet liggen tussen de 10700MHz en "
+"12750MHz.\n"
+"(of tussen de 3000MHz en 4200MHz voor de C-band)."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Stop symbol rate must be between 2MHz and 45MHz."
+msgstr ""
+"Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
+"De eindwaarde voor de symbolrate moet tussen de 2MHz en de 45MHz liggen."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"Symbol rate start value is larger than stop value."
+msgstr ""
+"Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
+"De aanvangs symbolrate is groter dan de eindwaarde"
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a C-band satellite so frequency values \n"
+"need to be between 3000MHz and 4200MHz."
+msgstr ""
+"Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
+"Dit is een C-band transponder dus de frequentie moet liggen tussen \n"
+"de 3000MHz en 4200MHz."
+
+msgid ""
+"Invalid parameters entered. Please correct and try again.\n"
+"That is a Ku-band satellite so frequency values \n"
+"need to be between 10700MHz and 12750MHz."
+msgstr ""
+"Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
+"Dit is een Ku-band transponder dus de frequentie moet liggen tussen \n"
+"de 10700MHz en 12750MHz."
+
+#, python-format
+msgid ""
+"Looking for available transponders.\n"
+"This will take a short while.\n"
+"\n"
+"   Current Status : %d/%d\n"
+"   Satellite : %s\n"
+"   Polarization : %s\n"
+"   Frequency range : %d - %d MHz\n"
+"   Symbol rates : %d - %d MHz"
+msgstr ""
+"Zoekt naar beschikbare transponders.\n"
+"Dit duurt even.\n"
+"\n"
+"   Actuele status: %d/%d\n"
+"   Satelliet: %s\n"
+"   Polarisatie: %s\n"
+"   Frequentie bereik: %d - %d MHz\n"
+"   Symbol rates: %d - %d MHz"
+
+msgid ""
+"No new transponders found! \n"
+"\n"
+"Only transponders already listed in satellites.xml \n"
+"have been found for those search parameters!"
+msgstr ""
+"Geen nieuwe transponders gevonden! \n"
+"\n"
+"Er zijn alleen transponders gevonden \n"
+"die al in de satellites.xml aanwezig waren!"
+
+msgid "No transponders were found for those search parameters!"
+msgstr "Met deze zoek parameters zijn geen transponders gevonden!"
+
+msgid "Only free scan"
+msgstr "Alleen FTA"
+
+msgid "Only scan unknown transponders"
+msgstr "Scan alleen onbekende transponders"
+
+msgid "Please setup your tuner configuration."
+msgstr "U moet de tunerconfiguratie vastleggen."
+
+msgid "Polarisation"
+msgstr "Polarisatie"
+
+msgid "Press Green/OK to start the scan"
+msgstr "Druk op Groen/OK om de scan te beginnen"
+
+msgid "Satellite"
+msgstr "Satelliet"
+
+msgid "Scan"
+msgstr "Scan"
+
+msgid "Scan start frequency"
+msgstr "Scan start frequentie"
+
+msgid "Scan start symbolrate"
+msgstr "Scan start symbolrate"
+
+msgid "Scan stop frequency"
+msgstr "Scan stop frequentie"
+
+msgid "Scan stop symbolrate"
+msgstr "Scan stop symbolrate"
+
+#, python-format
+msgid ""
+"Search completed. %d transponders found.\n"
+"\n"
+"Details saved in:\n"
+"%s"
+msgstr ""
+"Zoeken gereed. %d transponders gevonden.\n"
+"\n"
+"Details opgeslagen in:\n"
+"%s"
+
+msgid "Search type"
+msgstr "Zoek type"
+
+msgid "Select a tuner that is configured for the satellite you wish to search"
+msgstr ""
+"Kies een tuner die is geconfigureerd voor de satelliet die u wilt zoeken"
+
+msgid "Select the satellite you wish to search"
+msgstr "Kies de satelliet die u wilt zoeken"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+msgstr "Symbol rate waardes in megasymbols; geef een waarde tussen 1 and 44 in"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
+msgstr "Symbol rate waardes in megasymbols; geef een waarde tussen 2 and 45 in"
+
+msgid "The blindscan run was cancelled by the user."
+msgstr "De blindscan is door d egebruiker geannuleerd"
+
+msgid "Tuner"
+msgstr "Tuner"
+
+msgid ""
+"When a neighbouring satellite is very strong this avoids searching "
+"transponders known to be coming from the neighbouring satellite"
+msgstr ""
+"Als een naburige satelliet erg sterk is, kunt u met deze instelling "
+"voorkomen dat transponders waarvan bekend is dat die van die satelliet "
+"afkomstig zijn, toegekend worden aan de gescande satelliet."
+
+msgid "circular left"
+msgstr "circular links"
+
+msgid "circular right"
+msgstr "circular rechts"
+
+msgid "circular right and circular left"
+msgstr "circulair rechts en links"
+
+msgid "horizontal"
+msgstr "horizontaal"
+
+msgid "no"
+msgstr "nee"
+
+msgid "save to XML file"
+msgstr "sla op in XML-bestand"
+
+msgid "scan for channels"
+msgstr "Zoek kanalen"
+
+msgid "up to 1 degree"
+msgstr "tot 1 graad"
+
+msgid "up to 2 degrees"
+msgstr "tot 2 graden"
+
+msgid "up to 3 degrees"
+msgstr "tot 3 graden"
+
+msgid "vertical"
+msgstr "vertikaal"
+
+msgid "vertical and horizontal"
+msgstr "vertikaal en horizontaal"

@@ -1,0 +1,75 @@
+# Italian translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 16:40+0100\n"
+"PO-Revision-Date: 2012-05-18 01:40+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.3\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Country: ITALY\n"
+
+msgid "1-1. Serial Number (The first two or three letters of SN)"
+msgstr ""
+
+msgid "1-2. Serial Number (The remaining numbers of SN)"
+msgstr ""
+
+msgid "2. Contact"
+msgstr ""
+
+msgid "Agree"
+msgstr ""
+
+#
+msgid "Exit"
+msgstr "Uscire"
+
+msgid "For use this plugin, you must update the kernel version to 3.1 or later"
+msgstr ""
+
+msgid "MA"
+msgstr ""
+
+msgid "MB"
+msgstr ""
+
+msgid "MC"
+msgstr ""
+
+msgid "MD"
+msgstr ""
+
+msgid "ME"
+msgstr ""
+
+msgid "MF"
+msgstr ""
+
+msgid "MG"
+msgstr ""
+
+msgid "MH"
+msgstr ""
+
+msgid "MSA"
+msgstr ""
+
+#
+msgid "Restart"
+msgstr "Riavviare"
+
+msgid "Return the Love Event"
+msgstr ""
+
+msgid "Start"
+msgstr ""

@@ -1,0 +1,44 @@
+# English translations for tuxbox-enigma package.
+# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Automatically generated, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:40+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: Mediavox, robertut <info@mediavox.hu, robertut@yahoo.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Hungarian\n"
+"X-Poedit-Country: HUNGARY\n"
+
+#
+msgid "Cancel"
+msgstr "Mégse"
+
+#
+#, python-format
+msgid "Fan %d PWM"
+msgstr "Ventilátor %d PWM"
+
+msgid "Fan Control"
+msgstr ""
+
+msgid "Fan control"
+msgstr ""
+
+#
+msgid "OK"
+msgstr "OK"
+
+#
+#, python-format
+msgid "Standby Fan %d PWM"
+msgstr ""

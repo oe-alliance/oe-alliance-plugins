@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/plugin.py:84
+msgid "1-1. Serial Number (The first two or three letters of SN)"
+msgstr ""
+
+#: ../src/plugin.py:86 ../src/plugin.py:88
+msgid "1-2. Serial Number (The remaining numbers of SN)"
+msgstr ""
+
+#: ../src/plugin.py:89
+msgid "2. Contact"
+msgstr ""
+
+#: ../src/plugin.py:225
+msgid "Agree"
+msgstr ""
+
+#: ../src/plugin.py:63 ../src/plugin.py:225
+msgid "Exit"
+msgstr ""
+
+#: ../src/plugin.py:80
+msgid "For use this plugin, you must update the kernel version to 3.1 or later"
+msgstr ""
+
+#: ../src/plugin.py:21
+msgid "MA"
+msgstr ""
+
+#: ../src/plugin.py:21
+msgid "MB"
+msgstr ""
+
+#: ../src/plugin.py:21
+msgid "MC"
+msgstr ""
+
+#: ../src/plugin.py:21
+msgid "MD"
+msgstr ""
+
+#: ../src/plugin.py:21
+msgid "ME"
+msgstr ""
+
+#: ../src/plugin.py:21
+msgid "MF"
+msgstr ""
+
+#: ../src/plugin.py:21
+msgid "MG"
+msgstr ""
+
+#: ../src/plugin.py:21
+msgid "MH"
+msgstr ""
+
+#: ../src/plugin.py:21
+msgid "MSA"
+msgstr ""
+
+#: ../src/plugin.py:122
+msgid "Restart"
+msgstr ""
+
+#: ../src/plugin.py:232
+msgid "Return the Love Event"
+msgstr ""
+
+#: ../src/plugin.py:64
+msgid "Start"
+msgstr ""

@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 16:40+0100\n"
+"PO-Revision-Date: 2012-05-18 01:41+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: Bulgarian\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "1-1. Serial Number (The first two or three letters of SN)"
+msgstr ""
+
+msgid "1-2. Serial Number (The remaining numbers of SN)"
+msgstr ""
+
+msgid "2. Contact"
+msgstr ""
+
+msgid "Agree"
+msgstr ""
+
+msgid "Exit"
+msgstr "Изход"
+
+msgid "For use this plugin, you must update the kernel version to 3.1 or later"
+msgstr ""
+
+msgid "MA"
+msgstr ""
+
+msgid "MB"
+msgstr ""
+
+msgid "MC"
+msgstr ""
+
+msgid "MD"
+msgstr ""
+
+msgid "ME"
+msgstr ""
+
+msgid "MF"
+msgstr ""
+
+msgid "MG"
+msgstr ""
+
+msgid "MH"
+msgstr ""
+
+msgid "MSA"
+msgstr ""
+
+msgid "Restart"
+msgstr "Рестарт"
+
+msgid "Return the Love Event"
+msgstr ""
+
+msgid "Start"
+msgstr ""

@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/plugin.py:45
+msgid "Autostart"
+msgstr ""
+
+#: ../src/plugin.py:38
+msgid "Autostart:"
+msgstr ""
+
+#: ../src/plugin.py:40
+msgid "Current Status:"
+msgstr ""
+
+#: ../src/plugin.py:39 ../src/plugin.py:136
+msgid "Disabled"
+msgstr ""
+
+#: ../src/plugin.py:140
+msgid "Enabled"
+msgstr ""
+
+#: ../src/plugin.py:75
+msgid "Installing Service"
+msgstr ""
+
+#: ../src/plugin.py:62
+#, python-format
+msgid "Ready to install \"%s\" ?"
+msgstr ""
+
+#: ../src/plugin.py:89
+#, python-format
+msgid "Ready to remove \"%s\" ?"
+msgstr ""
+
+#: ../src/plugin.py:43
+msgid "Remove Service"
+msgstr ""
+
+#: ../src/plugin.py:100
+msgid "Removing Service"
+msgstr ""
+
+#: ../src/plugin.py:42
+msgid "Running"
+msgstr ""
+
+#: ../src/plugin.py:35 ../src/plugin.py:157
+msgid "SABnzbd Setup"
+msgstr ""
+
+#: ../src/plugin.py:44 ../src/plugin.py:155
+msgid "Start"
+msgstr ""
+
+#: ../src/plugin.py:149
+msgid "Stop"
+msgstr ""
+
+#: ../src/plugin.py:41
+msgid "Stopped"
+msgstr ""
+
+#: ../src/plugin.py:61
+msgid ""
+"Your receiver will be restarted after the installation of service.\n"
+"\n"
+"Do you want to install now ?"
+msgstr ""
+
+#: ../src/plugin.py:88
+msgid ""
+"Your receiver will be restarted after the removal of service\n"
+"Do you want to remove now ?"
+msgstr ""
+
+#: ../src/plugin.py:74 ../src/plugin.py:99
+msgid "please wait..."
+msgstr ""

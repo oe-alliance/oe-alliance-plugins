@@ -1,0 +1,43 @@
+# Swedish translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:40+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.3\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: SWEDEN\n"
+
+#
+msgid "Cancel"
+msgstr "Avbryt"
+
+#
+#, python-format
+msgid "Fan %d PWM"
+msgstr "Fläkt %d PWM"
+
+msgid "Fan Control"
+msgstr ""
+
+msgid "Fan control"
+msgstr ""
+
+#
+msgid "OK"
+msgstr "OK"
+
+#
+#, python-format
+msgid "Standby Fan %d PWM"
+msgstr "Standby fläkt %d PWM"

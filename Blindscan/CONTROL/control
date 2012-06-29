@@ -1,0 +1,5 @@
+Package: enigma2-plugin-systemplugins-blindscan
+Version: 1.1-r0
+Description: blindscan...
+Maintainer: Huevos
+Depends: enigma2

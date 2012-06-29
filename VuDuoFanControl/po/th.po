@@ -1,0 +1,56 @@
+# English translations for tuxbox-enigma package.
+# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tuxbox-enigma package.
+# Automatically generated, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1-En-Th\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:40+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: Tony @ Thai Dreambox <tonyboyth@gmail.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Thai\n"
+"X-Poedit-Country: THAILAND\n"
+
+msgid "Close"
+msgstr "ปิด"
+
+msgid "Fan Control"
+msgstr ""
+
+msgid "Fan basic action"
+msgstr ""
+
+msgid "Fan off duration time"
+msgstr ""
+
+msgid "Fan on duration time"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr "ยกเลิกโดยไม่จัดเก็บข้อมูล?"
+
+msgid "Save"
+msgstr "บันทึก"
+
+msgid "Use Fan timer"
+msgstr ""
+
+msgid "no"
+msgstr "ไม่"
+
+msgid "off"
+msgstr "ปิด"
+
+msgid "on"
+msgstr "เปิด"
+
+msgid "yes"
+msgstr "ใช่"

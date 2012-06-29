@@ -1,0 +1,39 @@
+# English translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:41+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Fan Control"
+msgstr "Fan Control"
+
+msgid "Fan mode"
+msgstr "Fan mode"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Off"
+msgstr "Off"
+
+msgid "On"
+msgstr "On"
+
+msgid "switch Fan On/Off"
+msgstr "switch Fan On/Off"

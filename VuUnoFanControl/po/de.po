@@ -1,0 +1,56 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 16:40+0100\n"
+"PO-Revision-Date: 2012-05-20 21:48+0100\n"
+"Last-Translator: Ralf Biedermann <ralf.biedermann@rbsoft.de>\n"
+"Language-Team: Deutsch <> j-ot&Trial\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Pootle 2.0.3\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Country: GERMANY\n"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Fan Control"
+msgstr "Lüflterkontrolle"
+
+msgid "FanOFF InStanby"
+msgstr "Lüfter aus in Standby"
+
+msgid "PWM value"
+msgstr "PWM Wert"
+
+msgid "Really close without saving settings?"
+msgstr "Wirklich ohne Sichern beenden?"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Status Check Period"
+msgstr "Statusprüfung Zeitintervall"
+
+msgid "minute"
+msgstr "Minute"
+
+msgid "minutes"
+msgstr "Minuten"
+
+msgid "no"
+msgstr "nein"
+
+msgid "seconds"
+msgstr "Sekunden"
+
+msgid "setup Fancontol inStandby mode"
+msgstr ""
+
+msgid "yes"
+msgstr "ja"
