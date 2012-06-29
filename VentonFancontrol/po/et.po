@@ -1,0 +1,49 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:41+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: Raivo, Henkka, eesatfan, rimas\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "Close"
+msgstr "Sulge"
+
+msgid "Fan Control"
+msgstr "Ventilaatori juhtimine"
+
+msgid "Fan basic action"
+msgstr "Ventilaatori põhitoimingud"
+
+msgid "Fan off duration time"
+msgstr "Ventilaatori väljas oleku aeg"
+
+msgid "Fan on duration time"
+msgstr "Ventilaatori seesoleku aeg"
+
+msgid "Really close without saving settings?"
+msgstr "Kas väljud seadistusi salvestamata?"
+
+msgid "Save"
+msgstr "Salvesta"
+
+msgid "Use Fan timer"
+msgstr "Kasuta ventilaatori taimerit"
+
+msgid "no"
+msgstr "ei"
+
+msgid "off"
+msgstr "väljas"
+
+msgid "on"
+msgstr "sees"
+
+msgid "yes"
+msgstr "jah"

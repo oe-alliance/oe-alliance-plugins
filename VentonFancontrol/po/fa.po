@@ -1,0 +1,54 @@
+# Persian translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:41+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.0.3\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+
+msgid "Close"
+msgstr "بستن"
+
+msgid "Fan Control"
+msgstr ""
+
+msgid "Fan basic action"
+msgstr ""
+
+msgid "Fan off duration time"
+msgstr ""
+
+msgid "Fan on duration time"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr "خروج بدون ذخیره کردن تنظیمات ؟"
+
+msgid "Save"
+msgstr "ذخیره"
+
+msgid "Use Fan timer"
+msgstr ""
+
+msgid "no"
+msgstr "خیر"
+
+msgid "off"
+msgstr "خاموش"
+
+msgid "on"
+msgstr "روشن"
+
+msgid "yes"
+msgstr "بله"

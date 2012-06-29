@@ -1,0 +1,60 @@
+# Arabic translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:41+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: Arabic <moustafagamal@hotmail.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Pootle 2.0.3\n"
+"X-Poedit-Language: Arabic\n"
+"X-Poedit-Country: EGYPT\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+
+msgid "Close"
+msgstr "أغلاق"
+
+msgid "Fan Control"
+msgstr ""
+
+msgid "Fan basic action"
+msgstr ""
+
+msgid "Fan off duration time"
+msgstr ""
+
+msgid "Fan on duration time"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr "هل تريد فعلا الغلق بدون حفظ الاعدادات ؟"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Use Fan timer"
+msgstr ""
+
+#
+msgid "no"
+msgstr "لا."
+
+#
+msgid "off"
+msgstr "لا يعمـل!"
+
+#
+msgid "on"
+msgstr "يعمل!"
+
+#
+msgid "yes"
+msgstr "نعـم"

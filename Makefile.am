@@ -12,6 +12,10 @@ if ODIN
 SUBDIRS += XtrendFancontrol Blindscan
 endif
 
+if VENTON
+SUBDIRS += VentonFancontrol
+endif
+
 if VUUNO
 SUBDIRS += VuUnoFanControl FPGAUpgrade Blindscan RemoteControlCode
 endif

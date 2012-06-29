@@ -1,0 +1,64 @@
+# Frisian translations for Enigma2.
+#
+# Gerrit <gerrit@nedlinux.nl>, 2007, 2008.
+# gerrit <gerrit@nedlinux.nl>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2012-05-18 01:41+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: gerrit <fy@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Nederlands\n"
+"X-Poedit-Country: NEDERLAND\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#
+msgid "Close"
+msgstr "Slúte"
+
+msgid "Fan Control"
+msgstr ""
+
+msgid "Fan basic action"
+msgstr ""
+
+msgid "Fan off duration time"
+msgstr ""
+
+msgid "Fan on duration time"
+msgstr ""
+
+#
+msgid "Really close without saving settings?"
+msgstr "Slúte sunder op te slaan ?"
+
+#
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Use Fan timer"
+msgstr ""
+
+#
+msgid "no"
+msgstr "nee"
+
+#
+msgid "off"
+msgstr "uit"
+
+#
+msgid "on"
+msgstr "oan"
+
+#
+msgid "yes"
+msgstr "ja"
