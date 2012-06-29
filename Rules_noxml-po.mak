@@ -33,6 +33,7 @@ install-data-local: $(LANGMO)
 	for lang in $(LANGS); do \
 		$(mkinstalldirs) $(DESTDIR)$(plugindir)/locale/$$lang/LC_MESSAGES; \
 		$(INSTALL_DATA) $$lang.mo $(DESTDIR)$(plugindir)/locale/$$lang/LC_MESSAGES/$(PLUGIN).mo; \
+		$(INSTALL_DATA) $$lang.po $(DESTDIR)$(plugindir)/$(PLUGIN).po; \
 	done
 
 uninstall-local:
