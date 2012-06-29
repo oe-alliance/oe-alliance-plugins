@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, getConfigListEntry
