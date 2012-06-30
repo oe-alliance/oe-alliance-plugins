@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-dlnaserver
+Version: 1.0-r0
+Description: this is dlna server using minidlna
+Maintainer: kos
+Depends: enigma2
