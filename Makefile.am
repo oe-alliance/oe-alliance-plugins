@@ -5,7 +5,7 @@ SUBDIRS += VuplusEvent
 endif
 
 if XTREND
-SUBDIRS += XtrendFancontrol Blindscan
+SUBDIRS += XtrendFancontrol Blindscan XtrendRemote
 endif
 
 if ODIN
@@ -17,11 +17,11 @@ SUBDIRS += VentonFancontrol
 endif
 
 if VUUNO
-SUBDIRS += VuUnoFanControl FPGAUpgrade Blindscan RemoteControlCode
+SUBDIRS += VuUnoFanControl FPGAUpgrade Blindscan VuRemote
 endif
 
 if VUULTIMO
-SUBDIRS += VuUnoFanControl FirmwareUpgrade Blindscan RemoteControlCode
+SUBDIRS += VuUnoFanControl FirmwareUpgrade Blindscan VuRemote
 endif
 
 if VUDUO

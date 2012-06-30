@@ -118,11 +118,6 @@ TmTwinFanControl/src/Makefile
 TmTwinFanControl/meta/Makefile
 TmTwinFanControl/po/Makefile
 
-RemoteControlCode/Makefile
-RemoteControlCode/src/Makefile
-RemoteControlCode/meta/Makefile
-RemoteControlCode/po/Makefile
-
 SABnzbdSetup/Makefile
 SABnzbdSetup/src/Makefile
 SABnzbdSetup/meta/Makefile
@@ -141,6 +136,11 @@ VentonFancontrol/po/Makefile
 VFDGiga/Makefile
 VFDGiga/src/Makefile
 VFDGiga/po/Makefile
+
+VuRemote/Makefile
+VuRemote/src/Makefile
+VuRemote/meta/Makefile
+VuRemote/po/Makefile
 
 VuDuoFanControl/Makefile
 VuDuoFanControl/src/Makefile
@@ -161,5 +161,9 @@ XtrendFancontrol/Makefile
 XtrendFancontrol/src/Makefile
 XtrendFancontrol/meta/Makefile
 XtrendFancontrol/po/Makefile
+
+XtrendRemote/Makefile
+XtrendRemote/src/Makefile
+XtrendRemote/meta/Makefile
 ])
 AC_OUTPUT
