@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-dlnabrowser
+Version: 1.0-r0
+Description: this is dlna/upnp browser using djmount
+Maintainer: kos
+Depends: enigma2
