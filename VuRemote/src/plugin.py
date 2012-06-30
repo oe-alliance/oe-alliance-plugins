@@ -1,15 +1,29 @@
 # for localized messages
 from . import _
 
+from Plugins.Plugin import PluginDescriptor
+
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigSelection
+from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigYesNo
 from Components.ActionMap import ActionMap
 from Screens.MessageBox import MessageBox
 from Components.Sources.StaticText import StaticText
-from Components.SystemInfo import SystemInfo
 from Tools.Directories import fileExists
 from enigma import eTimer
+
+try:
+	file = open('/etc/image-version', 'r')
+	lines = file.readlines()
+	file.close()
+	for x in lines:
+		splitted = x.split('=')
+		if splitted[0] == "comment":
+			distro = splitted[1].replace('\n','')
+except:
+	distro=""
+if distro == "ViX":
+	config.misc.remotecontrol_text_support = ConfigYesNo(default = False)
 
 config.plugins.remotecontrolcode = ConfigSubsection()
 if fileExists("/proc/stb/info/vumodel"):
@@ -22,13 +36,6 @@ if fileExists("/proc/stb/info/vumodel"):
 	elif info == "solo" or info == "duo":
 		config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "1", choices =
 			[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
-
-def isRemoteCodeSupported():
-	if fileExists("/proc/stb/fp/remote_code"):
-		return True
-	return False
-
-SystemInfo["RemoteCode"] = isRemoteCodeSupported()
 
 class RemoteControlCodeInit:
 	def __init__(self):
@@ -97,7 +104,8 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		self.list = []
 		self.rcsctype = getConfigListEntry(_("Remote Control System Code"), config.plugins.remotecontrolcode.systemcode)
 		self.list.append( self.rcsctype )
-		self.list.append(getConfigListEntry(_("Text support"), config.misc.remotecontrol_text_support))
+		if distro == "ViX":
+			self.list.append(getConfigListEntry(_("Text support"), config.misc.remotecontrol_text_support))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -157,5 +165,18 @@ class MessageBoxConfirmCode(MessageBox):
 
 remotecontrolcodeinit = RemoteControlCodeInit()
 
-def Plugins(**kwargs):
-	return []
+def main(session, **kwargs):
+	session.open(RemoteControlCode)
+
+def RemoteControlSetup(menuid, **kwargs):
+	if menuid == "system":
+		return [(_("Remote Control Code"), main, "remotecontrolcode", 50)]
+	else:
+		return []
+
+def Plugins(path, **kwargs):
+	if fileExists("/proc/stb/fp/remote_code"):
+		plist = [PluginDescriptor(name=_("Remote Control Code"), where=PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=RemoteControlSetup)]
+		return plist
+	else:
+		return []
