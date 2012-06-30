@@ -118,11 +118,6 @@ TmTwinFanControl/src/Makefile
 TmTwinFanControl/meta/Makefile
 TmTwinFanControl/po/Makefile
 
-SABnzbdSetup/Makefile
-SABnzbdSetup/src/Makefile
-SABnzbdSetup/meta/Makefile
-SABnzbdSetup/po/Makefile
-
 StreamTV/Makefile
 StreamTV/src/Makefile
 StreamTV/meta/Makefile

@@ -1,5 +1,0 @@
-Package: enigma2-plugin-systemplugins-sabnzbd
-Version: 1.0-r0
-Description: Start/Stop SABnzbd downloader
-Maintainer: andyblac
-Depends: enigma2 sabnzbd
