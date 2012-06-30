@@ -1,0 +1,1 @@
+SUBDIRS = icons meta src
