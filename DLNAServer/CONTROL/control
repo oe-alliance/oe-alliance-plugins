@@ -2,4 +2,4 @@ Package: enigma2-plugin-extensions-dlnaserver
 Version: 1.0-r0
 Description: this is dlna server using minidlna
 Maintainer: kos
-Depends: enigma2
+Depends: enigma2 , minidlna , libexif12 , libavformat52 , libavutil49 , libavcodec52 , libgsm1 , libmp3lame0 , libschroedinger-1.0-0 , libtheora0 , liboil
