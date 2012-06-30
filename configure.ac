@@ -95,6 +95,14 @@ Blindscan/src/Makefile
 Blindscan/meta/Makefile
 Blindscan/po/Makefile
 
+DLNABrowser/Makefile
+DLNABrowser/src/Makefile
+DLNABrowser/meta/Makefile
+
+DLNAServer/Makefile
+DLNAServer/src/Makefile
+DLNAServer/meta/Makefile
+
 FirmwareUpgrade/Makefile
 FirmwareUpgrade/src/Makefile
 FirmwareUpgrade/meta/Makefile
@@ -119,6 +127,11 @@ SABnzbdSetup/Makefile
 SABnzbdSetup/src/Makefile
 SABnzbdSetup/meta/Makefile
 SABnzbdSetup/po/Makefile
+
+StreamTV/Makefile
+StreamTV/src/Makefile
+StreamTV/meta/Makefile
+StreamTV/icons/Makefile
 
 VentonFancontrol/Makefile
 VentonFancontrol/src/Makefile

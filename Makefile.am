@@ -1,4 +1,4 @@
-SUBDIRS = SABnzbdSetup
+SUBDIRS = SABnzbdSetup DLNABrowser DLNAServer StreamTV
 
 if VUPLUS
 SUBDIRS += VuplusEvent
