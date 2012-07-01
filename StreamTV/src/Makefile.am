@@ -1,4 +1,4 @@
-installdir = $(pkglibdir)/python/Plugins/Extensions/StreamTV
+installdir = $(libdir)/python/Plugins/Extensions/StreamTV
 
 install_PYTHON = \
 	channel_background.png \

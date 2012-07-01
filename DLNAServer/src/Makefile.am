@@ -1,4 +1,4 @@
-installdir = $(pkglibdir)/python/Plugins/Extensions/DLNAServer
+installdir = $(libdir)/python/Plugins/Extensions/DLNAServer
 
 install_PYTHON = \
 	dlnaserver \
