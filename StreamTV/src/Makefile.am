@@ -1,4 +1,4 @@
-installdir = $(libdir)/python/Plugins/Extensions/StreamTV
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/StreamTV
 
 install_PYTHON = \
 	channel_background.png \

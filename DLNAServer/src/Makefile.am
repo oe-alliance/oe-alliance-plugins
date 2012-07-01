@@ -1,4 +1,4 @@
-installdir = $(libdir)/python/Plugins/Extensions/DLNAServer
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/DLNAServer
 
 install_PYTHON = \
 	dlnaserver \
