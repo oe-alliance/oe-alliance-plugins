@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>babsy</author>
+                    <name>VFDControl</name>
+                    <packagename>enigma2-plugin-systemplugins-vfdcontrol</packagename>
+                    <shortdescription>vfd controller</shortdescription>
+                    <description>vfd controller</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-blindscan" />
+	</files>
+</default>

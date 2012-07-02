@@ -128,9 +128,10 @@ VentonFancontrol/src/Makefile
 VentonFancontrol/meta/Makefile
 VentonFancontrol/po/Makefile
 
-VFDGiga/Makefile
-VFDGiga/src/Makefile
-VFDGiga/po/Makefile
+VFDControl/Makefile
+VFDControl/src/Makefile
+VFDControl/meta/Makefile
+VFDControl/po/Makefile
 
 VuRemote/Makefile
 VuRemote/src/Makefile
