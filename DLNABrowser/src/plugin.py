@@ -793,7 +793,10 @@ class DLNADeviceBrowser(Screen):
 
 	def keyOK(self):
 		global DLNA_CONFIG_ROOT_DIR
-		selectedFullPaht = '%s%s/'%(DLNA_CONFIG_ROOT_DIR, self["devicelist"].getCurrent()[1])
+		selectedItem = self["devicelist"].getCurrent()
+		if selectedItem is None:
+			return
+		selectedFullPaht = '%s%s/'%(DLNA_CONFIG_ROOT_DIR, selectedItem[1])
 		self.session.openWithCallback(self.cbDeviceListRefresh, DLNAFileBrowser, selectedFullPaht)
 		self.deviceListRefreshTimer.stop()
 
