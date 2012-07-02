@@ -21,28 +21,28 @@ msgid "Cancel"
 msgstr "Annuleren"
 
 msgid "Enable led"
-msgstr ""
+msgstr "LED ingeschakeld"
 
 msgid "Led state RUN"
-msgstr ""
+msgstr "LED status RUN"
 
 msgid "Led state Record"
-msgstr ""
+msgstr "LED status Opname"
 
 msgid "Led state Standby"
-msgstr ""
+msgstr "LED status Stand-by"
 
 msgid "Save"
 msgstr "Opslaan"
 
 msgid "Show clock"
-msgstr ""
+msgstr "Toon klok"
 
 msgid "Time mode"
-msgstr ""
+msgstr "Tijd modus"
 
 msgid "Update Date/Time"
-msgstr ""
+msgstr "Update Datum/Tjd"
 
 msgid "VFD_Giga"
-msgstr ""
+msgstr "VFD_Giga"
