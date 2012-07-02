@@ -160,5 +160,6 @@ XtrendFancontrol/po/Makefile
 XtrendRemote/Makefile
 XtrendRemote/src/Makefile
 XtrendRemote/meta/Makefile
+XtrendRemote/po/Makefile
 ])
 AC_OUTPUT
