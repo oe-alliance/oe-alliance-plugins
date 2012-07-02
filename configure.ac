@@ -113,6 +113,11 @@ FPGAUpgrade/src/Makefile
 FPGAUpgrade/meta/Makefile
 FPGAUpgrade/po/Makefile
 
+GigaBlueVFDControl/Makefile
+GigaBlueVFDControl/src/Makefile
+GigaBlueVFDControl/meta/Makefile
+GigaBlueVFDControl/po/Makefile
+
 TmTwinFanControl/Makefile
 TmTwinFanControl/src/Makefile
 TmTwinFanControl/meta/Makefile
@@ -127,11 +132,6 @@ VentonFancontrol/Makefile
 VentonFancontrol/src/Makefile
 VentonFancontrol/meta/Makefile
 VentonFancontrol/po/Makefile
-
-VFDControl/Makefile
-VFDControl/src/Makefile
-VFDControl/meta/Makefile
-VFDControl/po/Makefile
 
 VuRemote/Makefile
 VuRemote/src/Makefile

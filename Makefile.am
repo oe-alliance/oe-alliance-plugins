@@ -33,6 +33,6 @@ SUBDIRS += TmTwinFanControl
 endif
 
 if GIGABLUE
-SUBDIRS += VFDControl
+SUBDIRS += GigaBlueVFDControl
 endif
 
