@@ -1,5 +1,5 @@
-installdir = $(libdir)/enigma2/python/Plugins/SystemPlugins/choiceRC
+installdir = $(libdir)/enigma2/python/Plugins/SystemPlugins/RemoteControlCode
 
-install_PYTHON =	\
+install_PYTHON =  \
 	__init__.py \
 	plugin.py

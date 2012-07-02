@@ -1,3 +1,3 @@
 installdir = $(datadir)/meta
 
-dist_install_DATA = plugin_choicerc.xml
+dist_install_DATA = plugin_remotecontrolcode.xml
