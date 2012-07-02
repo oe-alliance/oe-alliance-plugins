@@ -1,8 +1,6 @@
 # for localized messages
 from . import _
 
-from Plugins.Plugin import PluginDescriptor
-
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigYesNo
@@ -176,7 +174,6 @@ def RemoteControlSetup(menuid, **kwargs):
 
 def Plugins(path, **kwargs):
 	if fileExists("/proc/stb/fp/remote_code"):
-		plist = [PluginDescriptor(name=_("Remote Control Code"), where=PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=RemoteControlSetup)]
-		return plist
-	else:
-		return []
+		from Plugins.Plugin import PluginDescriptor
+		return [PluginDescriptor(name=_("Remote Control Code"), where=PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=RemoteControlSetup)]
+	return []
