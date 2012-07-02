@@ -1,6 +1,9 @@
 #  ET-View RCSetup version 1.2
-#  Remote Controller Setup (RCSetup) 
+#  Remote Controller Setup (RCSetup)
 # -*- coding: utf-8 -*-
+# for localized messages
+from . import _
+
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigSlider, getConfigListEntry
@@ -141,9 +144,15 @@ def main(session, **kwargs):
 def startup(reason, **kwargs):
 	return
 
+def RemoteControlSetup(menuid, **kwargs):
+	if menuid == "system":
+		return [(_("Remote Control Code"), main, "remotecontrolcode", 50)]
+	else:
+		return []
+
 def Plugins(**kwargs):
 	if os_path.exists("/proc/stb/ir/rc/type"):
 		from Plugins.Plugin import PluginDescriptor
-		return [PluginDescriptor(name = "Remote Setup", description = _("Choice remote"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
+		return [PluginDescriptor(name=_("Remote Control Code"), where=PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=RemoteControlSetup),
 					PluginDescriptor(name = "Remote Setup", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
 	return []
