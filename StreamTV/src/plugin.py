@@ -1,6 +1,7 @@
 from Plugins.Plugin import PluginDescriptor
 
 import os
+from os import system
 from xml.etree.cElementTree import fromstring, ElementTree
 
 from enigma import gFont, eTimer, eConsoleAppContainer, ePicLoad, loadPNG, getDesktop, eServiceReference, iPlayableService, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
@@ -398,8 +399,19 @@ class StreamTVList(Screen):
 			self.streamList.append((x.get('name'), x))
 
 def main(session, **kwargs):
-	session.open(StreamTVList)
-                                                           
+	system("ethtool eth0 > /tmp/.eth0_test")
+	f = open("/tmp/.eth0_test", 'r')
+	for line in f.readlines():
+		line = line.strip()
+		if line.find('Link detected:') >= 0:
+			x = line.split(':',1)
+			active = x[1].strip()
+	if (active=="yes"):
+		system("rm /tmp/.eth0_test")
+		session.open(StreamTVList)
+	else:
+		session.open(MessageBox, _("This plugin need internet connection. Please plug in ethernet cable and try again!"), MessageBox.TYPE_INFO, timeout=4)
+
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("StreamTVPlayer"), description="Watching IPTV implemented by RTSP/RTMP protocol.", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
 
