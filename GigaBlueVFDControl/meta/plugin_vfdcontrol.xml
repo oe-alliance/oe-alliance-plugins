@@ -11,6 +11,6 @@
           </info>
 
 	  <files type="package"> <!-- without version, without .ipk -->
-		<file type="package" name="enigma2-plugin-systemplugins-blindscan" />
+		<file type="package" name="enigma2-plugin-systemplugins-vfdcontrol" />
 	</files>
 </default>

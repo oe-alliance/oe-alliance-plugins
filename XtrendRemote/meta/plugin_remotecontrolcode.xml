@@ -11,7 +11,7 @@
                     </description>
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
-		<file type="package" name="enigma2-plugin-systemplugins-choicerc" />
+		<file type="package" name="enigma2-plugin-systemplugins-remotecontrolcode" />
 	</files>
 
 </default>
