@@ -104,7 +104,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		</screen>
 		"""
 	def __init__(self, session): 
-		self.session = session
+                self.session = session
 		Screen.__init__(self, session)
 
 		self.oldConfig = {}
@@ -112,7 +112,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.menulist)
 
 		self.configFileName = "/etc/minidlna.conf"
-		self.runcherBin     = resolveFilename(SCOPE_PLUGINS, "Extensions/DLNAServer/dlnaserver")
+		self.runcherBin     = "/etc/init.d/minidlna"
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", ], {
 			"red"    : self.keyExit,
 			"green"  : self.keyGreen,
@@ -153,9 +153,9 @@ class DLNAServer(ConfigListScreen, Screen):
 			self.session.openWithCallback(self.cbChangeDirectory, SelectDirectoryWindow, currentItem.value)
 
 	def keyGreen(self):
-		args = '-e'
+		args = ' stop' 
 		if self["key_green"].getText().strip() == 'Start':
-			args = '-s'
+			args = ' start'
 			self.saveConfigFile()
 		rc = os.popen('%s %s'%(self.runcherBin, args)).read()
 		self["information"].setText(rc)
@@ -206,7 +206,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		self.writeConfigFile(serverName=serverName, videoDir=videoDir, auditDir=auditDir, pictureDir=pictureDir, logDir=logDir, logLevel=logLevel)
 
 	def isRunning(self):
-		ps_str = os.popen('ps -ef | grep minidlna | grep -v grep').read()
+		ps_str = os.popen('ps | grep minidlna | grep -v grep').read()
 		if ps_str.strip() != '':
 			return True
 		return False
@@ -223,7 +223,7 @@ class DLNAServer(ConfigListScreen, Screen):
 			return self.menuItemLogDir
 		return None
 
-	def cbChangeDirectory(self, pathStr):
+        def cbChangeDirectory(self, pathStr):
 		if pathStr is None or pathStr.strip() == '':
 			return
 
@@ -329,7 +329,10 @@ class DLNAServer(ConfigListScreen, Screen):
 					self.oldConfig[key] = default
 			except: self.oldConfig[key] = default
 			
-		setDefault('friendly_name', '%s DLNA Server'%(config.misc.boxtype.value.upper()))
+		try:
+			model = os.popen('cat /proc/stb/info/boxtype').read().strip()
+		except: model = 'My'
+		setDefault('friendly_name', '%s DLNA Server'%(model.upper()))
 		setDefault('media_dirV', '/media/dlna/Videos')
 		setDefault('media_dirA', '/media/dlna/Musics')
 		setDefault('media_dirP', '/media/dlna/Pictures')
