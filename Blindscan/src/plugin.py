@@ -101,16 +101,23 @@ class Blindscan(ConfigListScreen, Screen):
 		self.selectionChanged()
 
 	def selectionChanged(self):
- 		self["status"].setText(self["config"].getCurrent()[2])
+		if self["config"].list != [] and self["config"].list != None:
+			self["status"].setText(self["config"].getCurrent()[2])
 
 	# for summary:
 	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
 	def getCurrentEntry(self):
-		return self["config"].getCurrent()[0]
+		if self["config"].list != [] and self["config"].list != None:
+			return self["config"].getCurrent()[0]
+		else:
+			return ""
 	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].getText())
+		if self["config"].list != [] and self["config"].list != None:
+			return str(self["config"].getCurrent()[1].getText())
+		else:
+			return ""
 	def createSummary(self):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
