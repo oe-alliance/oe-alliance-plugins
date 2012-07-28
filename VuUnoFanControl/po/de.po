@@ -20,7 +20,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 msgid "Fan Control"
-msgstr "Lüflterkontrolle"
+msgstr "Lüfterkontrolle"
 
 msgid "FanOFF InStanby"
 msgstr "Lüfter aus in Standby"

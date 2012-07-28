@@ -23,7 +23,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 msgid "Fan Control"
-msgstr "Lüflterkontrolle"
+msgstr "Lüfterkontrolle"
 
 msgid "Fan mode"
 msgstr "Lüftermodus"

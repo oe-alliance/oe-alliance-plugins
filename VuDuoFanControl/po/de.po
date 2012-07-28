@@ -20,7 +20,7 @@ msgid "Close"
 msgstr "Schließen"
 
 msgid "Fan Control"
-msgstr "Lüflterkontrolle"
+msgstr "Lüfterkontrolle"
 
 msgid "Fan basic action"
 msgstr ""

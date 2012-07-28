@@ -24,7 +24,7 @@ msgid "Fan %d PWM"
 msgstr "Lüfter %d PWM"
 
 msgid "Fan Control"
-msgstr "Lüflterkontrolle"
+msgstr "Lüfterkontrolle"
 
 msgid "Fan control"
 msgstr ""
