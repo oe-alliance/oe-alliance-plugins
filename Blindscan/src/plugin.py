@@ -464,7 +464,11 @@ class Blindscan(ConfigListScreen, Screen):
 					del self.session.pip
 					if not self.openFrontend():
 						self.frontend = None
-		self.tuner = Tuner(self.frontend)
+		try:
+			self.tuner = Tuner(self.frontend)
+		except:
+			self.session.open(MessageBox, _("Sorry, this tuner is in use."), MessageBox.TYPE_ERROR)
+			return False
 
 		if self.is_c_band_scan :
 			self.scan_sat.frequency.value = 3600
