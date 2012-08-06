@@ -1,12 +1,13 @@
-# for localized messages
-from . import _
-
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, getConfigListEntry
 from Components.FanControl import fancontrol
 
-modelist = {"0": _("Off"), "1": _("On")}
+boxtype = open('/proc/stb/info/boxtype', 'r').read()
+if boxtype[:-1] == 'ini-3000':
+	modelist = {"0": _("Off"), "2": _("On")}
+else:
+	modelist = {"0": _("Off"), "2": _("On"), "1": _("Auto")}
 standbylist = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))]
 
 config.plugins.FanControl = ConfigSubsection()
@@ -71,10 +72,7 @@ class FanSetupScreen(ConfigListScreen, Screen):
 		self.close()
 
 def applySettings(mode, firststart = None, modestandby = None):
-	if mode == 1:
-		fancontrol.getConfig(0).pwm.value = 255
-	else:
-		fancontrol.getConfig(0).pwm.value = 0
+	fancontrol.getConfig(0).pwm.value = mode
 
 	if firststart:
 		if config.plugins.FanControl.StandbyOff.value == "false":
