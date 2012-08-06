@@ -455,6 +455,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 		returnvalue = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
+		self.frontend = None
 		if not self.openFrontend():
 			self.oldref = self.session.nav.getCurrentlyPlayingServiceReference()
 			self.session.nav.stopService()
@@ -462,13 +463,11 @@ class Blindscan(ConfigListScreen, Screen):
 				if self.session.pipshown:
 					self.session.pipshown = False
 					del self.session.pip
-					if not self.openFrontend():
-						self.frontend = None
-		try:
-			self.tuner = Tuner(self.frontend)
-		except:
+					self.openFrontend()
+		if self.frontend == None :
 			self.session.open(MessageBox, _("Sorry, this tuner is in use."), MessageBox.TYPE_ERROR)
 			return False
+		self.tuner = Tuner(self.frontend)
 
 		if self.is_c_band_scan :
 			self.scan_sat.frequency.value = 3600
