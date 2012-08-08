@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"POT-Creation-Date: 2012-08-09 00:14+0100\n"
 "PO-Revision-Date: 2012-05-18 01:41+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: None <tbt_dk@hotmail.com>\n"
@@ -17,31 +17,136 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Country: DENMARK\n"
 
-#
-msgid "Auto"
-msgstr "Auto"
+msgid " "
+msgstr ""
+
+msgid " ver. 3.1"
+msgstr ""
+
+msgid "All"
+msgstr ""
 
 #
 msgid "Cancel"
 msgstr "Fortryd"
 
+msgid "Drive is sleeping\n"
+msgstr ""
+
+msgid "ERROR\n"
+msgstr ""
+
+msgid "End time"
+msgstr ""
+
+msgid "Fan - Auto"
+msgstr ""
+
+msgid "Fan - Off"
+msgstr ""
+
+msgid "Fan - On"
+msgstr ""
+
 msgid "Fan Control"
+msgstr ""
+
+msgid "Fan Setup"
 msgstr ""
 
 msgid "Fan mode"
 msgstr ""
 
-#
-msgid "OK"
-msgstr "OK"
+msgid "Fan setup:"
+msgstr ""
 
-#
-msgid "Off"
-msgstr "Fra"
+msgid "Found internal HDD !\n"
+msgstr ""
 
-#
-msgid "On"
-msgstr "Til"
+msgid "HDD Sleeping"
+msgstr ""
+
+msgid "HDD Temperature"
+msgstr ""
+
+msgid ""
+"Harddisk standby after - no standby\n"
+"You may not use this mode!"
+msgstr ""
+
+msgid "HddTempWatcher not running!"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Not found an internal HDD !"
+msgstr ""
+
+msgid "Power status"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Select internal HDD device"
+msgstr ""
+
+msgid "Show HDDTemp"
+msgstr ""
+
+msgid "Show temp. HDD to extensions menu"
+msgstr ""
+
+msgid "Show temp.HDD"
+msgstr ""
+
+msgid "Start time"
+msgstr ""
+
+msgid ""
+"Start time OFF mode equal End time OFF mode\n"
+"You may not use this time settings!"
+msgstr ""
+
+msgid "Switch Fan mode on time setting"
+msgstr ""
+
+msgid "Switch OFF mode on HDD sleep"
+msgstr ""
+
+msgid "Switch ON mode on HDD max.temp. (0 - disable)"
+msgstr ""
+
+msgid "Watch HDD state"
+msgstr ""
+
+msgid ""
+"You may not use this mode!\n"
+"Not found an internal hard drive!"
+msgstr ""
+
+msgid "hddtemp not installed!"
+msgstr ""
 
 msgid "switch Fan On/Off"
 msgstr ""
+
+msgid "temp : "
+msgstr ""
+
+#
+#~ msgid "Auto"
+#~ msgstr "Auto"
+
+#
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#
+#~ msgid "Off"
+#~ msgstr "Fra"
+
+#
+#~ msgid "On"
+#~ msgstr "Til"
