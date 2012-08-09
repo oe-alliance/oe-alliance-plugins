@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-09 00:14+0100\n"
-"PO-Revision-Date: 2012-05-23 07:43+0100\n"
+"PO-Revision-Date: 2012-08-09 08:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: Nederlands\n"
@@ -13,126 +13,130 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Nederlands\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Country: NEDERLAND\n"
 
 msgid " "
-msgstr ""
+msgstr " "
 
 msgid " ver. 3.1"
-msgstr ""
+msgstr " ver. 3.1"
 
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgid "Cancel"
 msgstr "Annuleren"
 
 msgid "Drive is sleeping\n"
-msgstr ""
+msgstr "Schijf slaapt\n"
 
 msgid "ERROR\n"
-msgstr ""
+msgstr "Fout\n"
 
 msgid "End time"
-msgstr ""
+msgstr "Eindtijd"
 
 msgid "Fan - Auto"
-msgstr ""
+msgstr "Fan - Auto"
 
 msgid "Fan - Off"
-msgstr ""
+msgstr "Fan - Uit"
 
 msgid "Fan - On"
-msgstr ""
+msgstr "Fan - Aan"
 
 msgid "Fan Control"
 msgstr "Fan Control"
 
 msgid "Fan Setup"
-msgstr ""
+msgstr "Fan instellingen"
 
 msgid "Fan mode"
 msgstr "Fan modus"
 
 msgid "Fan setup:"
-msgstr ""
+msgstr "Fan instellingen:"
 
 msgid "Found internal HDD !\n"
-msgstr ""
+msgstr "Interne HDD gevonden!\n"
 
 msgid "HDD Sleeping"
-msgstr ""
+msgstr "HDD slaapt"
 
 msgid "HDD Temperature"
-msgstr ""
+msgstr "HDD temperatuur"
 
 msgid ""
 "Harddisk standby after - no standby\n"
 "You may not use this mode!"
 msgstr ""
+"HDD standby na - geen standby\n"
+"U kunt deze mode niet gebruiken!"
 
 msgid "HddTempWatcher not running!"
-msgstr ""
+msgstr "HDD temperatuur controle niet actief"
 
 msgid "None"
-msgstr ""
+msgstr "Geen"
 
 msgid "Not found an internal HDD !"
-msgstr ""
+msgstr "Geen interne HDD gevonden!"
 
 msgid "Power status"
-msgstr ""
+msgstr "Power status"
 
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 msgid "Select internal HDD device"
-msgstr ""
+msgstr "Kies interne HDD"
 
 msgid "Show HDDTemp"
-msgstr ""
+msgstr "Toon HDD temperatuur"
 
 msgid "Show temp. HDD to extensions menu"
-msgstr ""
+msgstr "Toon HDD temperatuur in extensies"
 
 msgid "Show temp.HDD"
-msgstr ""
+msgstr "Toon HDD temperatuur"
 
 msgid "Start time"
-msgstr ""
+msgstr "Starttijd"
 
 msgid ""
 "Start time OFF mode equal End time OFF mode\n"
 "You may not use this time settings!"
 msgstr ""
+"Starttijd UIT is gelijk aan eindtijd UIT\n"
+"U kunt deze tijdinstelling niet gebruiken!"
 
 msgid "Switch Fan mode on time setting"
-msgstr ""
+msgstr "Wissel fan-mode per tijdsinstelling"
 
 msgid "Switch OFF mode on HDD sleep"
-msgstr ""
+msgstr "Deactiveer mode als HDD slaapt"
 
 msgid "Switch ON mode on HDD max.temp. (0 - disable)"
-msgstr ""
+msgstr "Activeer HDD max.temp. (0 - disable)"
 
 msgid "Watch HDD state"
-msgstr ""
+msgstr "Controleer HDD status"
 
 msgid ""
 "You may not use this mode!\n"
 "Not found an internal hard drive!"
 msgstr ""
+"U kunt deze modus niet gebruiken!\n"
+"Geen interne schijf gevonden!"
 
 msgid "hddtemp not installed!"
-msgstr ""
+msgstr "hddtemp niet geïnstalleerd!"
 
 msgid "switch Fan On/Off"
 msgstr "schakel Fan Aan/Uit"
 
 msgid "temp : "
-msgstr ""
+msgstr "temp : "
 
 #~ msgid "Auto"
 #~ msgstr "Auto"
