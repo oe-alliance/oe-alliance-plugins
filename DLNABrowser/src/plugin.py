@@ -1,5 +1,5 @@
 from Plugins.Plugin import PluginDescriptor
-
+from Plugins.Extensions.PicturePlayer.ui import *
 import os
 from enigma import gFont, eTimer, eConsoleAppContainer, ePicLoad, getDesktop, eServiceReference, iPlayableService, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
 
@@ -257,8 +257,8 @@ class DLNAFileBrowser(Screen):
 class DLNAStreamPlayer(Screen, InfoBarNotifications):
 	skin = 	"""
 		<screen name="DLNAStreamPlayer" flags="wfNoBorder" position="center,620" size="455,53" title="DLNAStreamPlayer" backgroundColor="transparent">
-			<ePixmap pixmap="skin_default/mp_wb_background.png" position="0,0" zPosition="-1" size="455,53" />
-			<ePixmap pixmap="skin_default/icons/mp_wb_buttons.png" position="40,23" size="30,13" alphatest="on" />
+			<ePixmap pixmap="Vu_HD/mp_wb_background.png" position="0,0" zPosition="-1" size="455,53" />
+			<ePixmap pixmap="Vu_HD/icons/mp_wb_buttons.png" position="40,23" size="30,13" alphatest="on" />
 
 			<widget source="session.CurrentService" render="PositionGauge" position="80,25" size="220,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
 				<convert type="ServicePosition">Gauge</convert>
@@ -617,7 +617,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 		</screen>
 		"""
 	def __init__(self, session): 
-		self.session = session
+                self.session = session
 		Screen.__init__(self, session)
 
 		self.menulist  = []
@@ -631,7 +631,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 			"green"  : self.keyOK,
 			"cancel" : self.keyExit,
 			"ok"     : self.keyOK,
-			}, -2)
+                }, -2)
 		self["key_red"]     = StaticText(_("Exit"))
 		self["key_green"]   = StaticText(_("Save"))
 		self["key_yellow"]  = StaticText(_(" "))

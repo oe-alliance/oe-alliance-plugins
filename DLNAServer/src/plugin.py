@@ -11,10 +11,21 @@ from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import NumberActionMap, ActionMap
-from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigDirectory, ConfigYesNo, ConfigSelection
+from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigDirectory, ConfigYesNo, ConfigSubsection
 from Components.FileList import FileList
 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+
+config.plugins.dlnaserver = ConfigSubsection()
+config.plugins.dlnaserver.autostart = ConfigYesNo(default = False)
+
+runcherBin = "/etc/init.d/minidlna"
+
+def isRunning():
+	ps_str = os.popen('ps | grep minidlna | grep -v grep').read()
+	if ps_str.strip() != '':
+		return True
+	return False
 
 class SelectDirectoryWindow(Screen):
 	skin = 	"""
@@ -112,7 +123,6 @@ class DLNAServer(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.menulist)
 
 		self.configFileName = "/etc/minidlna.conf"
-		self.runcherBin     = "/etc/init.d/minidlna"
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", ], {
 			"red"    : self.keyExit,
 			"green"  : self.keyGreen,
@@ -135,16 +145,18 @@ class DLNAServer(ConfigListScreen, Screen):
 
 	def layoutFinished(self):
 		green_btm_str = 'Start'
-		if self.isRunning():
+		if isRunning():
 			green_btm_str = 'Stop'
 		self["key_green"].setText(green_btm_str)
 		#self["information"].setText(' ')
 
 	def cbGreenTimer(self):
 		self.updateGreenTimer.stop()
+		self["information"].setText("")
 		self.layoutFinished()
 
 	def keyExit(self):
+		config.plugins.dlnaserver.autostart.save()
 		self.close()
 	
 	def keyOK(self):
@@ -157,7 +169,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		if self["key_green"].getText().strip() == 'Start':
 			args = ' start'
 			self.saveConfigFile()
-		rc = os.popen('%s %s'%(self.runcherBin, args)).read()
+		rc = os.popen('%s %s'%(runcherBin, args)).read()
 		self["information"].setText(rc)
 		self.updateGreenTimer.start(1000)
 
@@ -181,6 +193,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		self.menuItemEnableLog.value = enable_log
 		self.menuItemLogLevel.value  = log_level
 		self.menuItemLogDir.value    = self.oldConfig.get('log_dir')
+		config.plugins.dlnaserver.autostart.value = False
 		self.resetMenuList()
 
 	def keyRed(self):
@@ -204,12 +217,6 @@ class DLNAServer(ConfigListScreen, Screen):
 		if not self.menuItemEnableLog.value:
 			logDir,logLevel = None, None
 		self.writeConfigFile(serverName=serverName, videoDir=videoDir, auditDir=auditDir, pictureDir=pictureDir, logDir=logDir, logLevel=logLevel)
-
-	def isRunning(self):
-		ps_str = os.popen('ps | grep minidlna | grep -v grep').read()
-		if ps_str.strip() != '':
-			return True
-		return False
 
 	def getCurrentItem(self):
 		currentEntry = self["config"].getCurrent()
@@ -261,6 +268,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		self.menuEntryEnableLog  = getConfigListEntry(_("Enable Logging"), self.menuItemEnableLog)
 		self.menuEntryLogLevel   = getConfigListEntry(_("    - Log Level"), self.menuItemLogLevel)
 		self.menuEntryLogDir     = getConfigListEntry(_("    - Log Directory"), self.menuItemLogDir)
+		self.menuEntryAutoStart  = getConfigListEntry(_("Enable Autostart for DLNA Server"), config.plugins.dlnaserver.autostart)
 		self.resetMenuList()
 
 	def resetMenuList(self):
@@ -273,6 +281,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		if self.menuItemEnableLog.value:
 			self.menulist.append(self.menuEntryLogLevel)
 			self.menulist.append(self.menuEntryLogDir)
+		self.menulist.append(self.menuEntryAutoStart)
 		self["config"].list = self.menulist
 		self["config"].l.setList(self.menulist)
 
@@ -352,5 +361,26 @@ class DLNAServer(ConfigListScreen, Screen):
 def main(session, **kwargs):
 	session.open(DLNAServer)
 
+def autostart(reason, **kwargs):
+	if reason == 0:
+		if isRunning():
+			args = " stop"
+			is_running = True
+		else:
+			args = " start"
+			is_running = False
+		cmd = runcherBin + args
+
+		if config.plugins.dlnaserver.autostart.value:
+			if is_running:
+				print "[DLNAServer] already started"
+			else:
+				print "[DLNAServer] starting ..."
+				os.system(cmd)
+		elif config.plugins.dlnaserver.autostart.value == False and is_running == True:
+				print "[DLNAServer] stopping ..."
+				os.system(cmd)
+
 def Plugins(**kwargs):
- 	return PluginDescriptor(name="DLNA Server", description="This is dlna server using minidlna.", where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main)
+ 	return [PluginDescriptor(name="DLNA Server", description="This is dlna server using minidlna.", where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main),
+		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart)]
