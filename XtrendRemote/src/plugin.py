@@ -9,7 +9,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigSlider, getConfigListEntry
 from os import path as os_path, chmod as os_chmod, unlink as os_unlink, system as os_system
 
-modelist = {"5": _("ET9000/ET9100"), "4": _("DMM/DMM ADV"), "7": _("ET5000/ET6000"), "11": _("ET9200/ET9500") }
+modelist = {"5": _("ET9000/ET9100"), "4": _("DMM/DMM ADV"), "7": _("ET5000/ET6000"), "9": _("ET9500"), "11": _("ET9200/ET9500") }
 
 config.plugins.RCSetup = ConfigSubsection()
 from os import system as os_system
@@ -19,6 +19,8 @@ file.close()
 temp = int(text)
 if temp == 11:
 	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "11")
+elif temp == 9:
+	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "9")
 elif temp == 7:
 	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "7")
 elif temp == 5:
