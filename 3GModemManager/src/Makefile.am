@@ -1,4 +1,4 @@
-installdir = $(pkglibdir)/python/Plugins/SystemPlugins/3GModemManager
+installdir = $(libdir)/enigma2/python/Plugins/SystemPlugins/3GModemManager
 
 SUBDIRS = script
 
