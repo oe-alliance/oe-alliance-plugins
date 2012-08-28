@@ -1,0 +1,7 @@
+Package: enigma2-plugin-systemplugins-3gmodemmanager
+Version: 1.0-r0
+Description: systemplugins-3gmodemmanager 
+Section: base
+Priority: optional
+Maintainer: unknown
+Depends: ppp, usbmodeswitch, usbmodeswitch-data, wvdial, wvstreams, libwvutils4.6, libwvstreams-extras, libuniconf4.6, kernel-module-ppp-async, kernel-module-ppp-deflate, kernel-module-ppp-synctty, kernel-module-ppp-generic, kernel-module-slhc, kernel-module-usbserial, enigma2

@@ -162,5 +162,11 @@ XtrendRemote/Makefile
 XtrendRemote/src/Makefile
 XtrendRemote/meta/Makefile
 XtrendRemote/po/Makefile
+
+3GModemManager/Makefile
+3GModemManager/src/Makefile
+3GModemManager/src/script/Makefile
+3GModemManager/meta/Makefile
+
 ])
 AC_OUTPUT
