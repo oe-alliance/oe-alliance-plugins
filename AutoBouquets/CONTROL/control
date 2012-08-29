@@ -1,0 +1,12 @@
+Package: enigma2-plugin-extensions-autobouquets-e2
+Version: 201208212300.1
+Description: 28.2E stream bouquet downloader (Enigma2)
+Section: extra
+Priority: optional
+Maintainer: LraiZer
+Architecture: all
+OE: N/A
+Homepage: www.ukcvs.org
+Depends: dvbsnoop
+Source: www.ukcvs.org
+

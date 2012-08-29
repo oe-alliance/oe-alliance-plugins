@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo "Removing AutoBouquets E2 Plugin from the system ..."
+
+rm -r /usr/lib/enigma2/python/Plugins/Extensions/AutoBouquets > /dev/null 2>&1
+echo "Restarting Enigma2 to get rid of AutoBouquets E2 Plugin ..."
+init 4
+killall -9 enigma2 > /dev/null 2>&1
+init 3
+
+exit 0
+

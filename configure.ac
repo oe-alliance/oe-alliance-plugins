@@ -90,6 +90,12 @@ AM_CONDITIONAL(UPDATE_PO, test "$with_po" = "yes")
 AC_CONFIG_FILES([
 Makefile
 
+AutoBouquets/Makefile
+AutoBouquets/src/Makefile
+AutoBouquets/script/Makefile
+AutoBouquets/meta/Makefile
+AutoBouquets/po/Makefile
+
 Blindscan/Makefile
 Blindscan/src/Makefile
 Blindscan/meta/Makefile
