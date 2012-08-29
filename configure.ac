@@ -92,7 +92,6 @@ Makefile
 
 AutoBouquets/Makefile
 AutoBouquets/src/Makefile
-AutoBouquets/script/Makefile
 AutoBouquets/meta/Makefile
 AutoBouquets/po/Makefile
 

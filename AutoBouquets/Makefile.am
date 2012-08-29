@@ -1,1 +1,1 @@
-SUBDIRS = meta po src script
+SUBDIRS = meta po src

@@ -147,7 +147,7 @@ class MyShCom(Screen):
 		print "\n[MyShCom] returnValue: " + returnValue + "\n"
 
 		if returnValue is not None:
-			self.shcom("/usr/script/autobouquets_e2.sh " + returnValue)
+			self.shcom("/usr/ib/enigma2/python/Plugins/Extensions/AutoBouquets/autobouquets_e2.sh " + returnValue)
 
 	def shcom(self, com):
 		if fileExists("/usr/bin/dvbsnoop"):
