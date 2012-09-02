@@ -241,15 +241,15 @@ done
 echo "#NAME 28.2E ---- UK Bouquets ----
 #SERVICE 1:64:1:0:0:0:0:0:0:0:
 #DESCRIPTION 28.2E -- UK Bouquets --
-#SERVICE 1:320:1:0:0:0:0:0:0:0:
+#SERVICE 1:0:1:11a3:7dc:2:11a0000:0:0:0:
 #DESCRIPTION Created By AutoBouquets E2
-#SERVICE 1:320:1:0:0:0:0:0:0:0:
+#SERVICE 1:0:1:11a3:7dc:2:11a0000:0:0:0:
 #DESCRIPTION Coding and Scripts by LraiZer
-#SERVICE 1:320:1:0:0:0:0:0:0:0:
+#SERVICE 1:0:1:11a3:7dc:2:11a0000:0:0:0:
 #DESCRIPTION Developed by www.ukcvs.org
-#SERVICE 1:320:1:0:0:0:0:0:0:0:
+#SERVICE 1:0:1:11a3:7dc:2:11a0000:0:0:0:
 #DESCRIPTION Created On `date`
-#SERVICE 1:320:1:0:0:0:0:0:0:0:
+#SERVICE 1:0:1:11a3:7dc:2:11a0000:0:0:0:
 #DESCRIPTION Plugin Version date - 21st August 2012" >/tmp/userbouquet.ukcvs_bq.tv
 
 bq="00"
@@ -277,42 +277,46 @@ while read ln; do
 			namespace=":2:011a0000:0:0:0:"
 		;;
 	esac
-	if [ $count -eq $position ]; then
-		bouquetmarker "$position" "$epg"
-	else
-		placeholder "$position" "$epg" "$count"
-		count=$position
-	fi
-	echo "$channel$namespace" >>/tmp/userbouquet.ukcvs_bq.tv
-	echo "$channel$namespace" >>/tmp/userbouquet.ukcvs$bq.tv
-	if [ $position -eq 498 ]; then
-		echo "#DESCRIPTION Primetime" >>/tmp/userbouquet.ukcvs_bq.tv
-		echo "#DESCRIPTION Primetime" >>/tmp/userbouquet.ukcvs$bq.tv
-	fi
-	if [ $position -gt 699 -a $position -lt 780 ]; then
-		if [ $position -lt 752 -o $position -gt 753 ]; then
-			echo "#DESCRIPTION SBO $position" >>/tmp/userbouquet.ukcvs_bq.tv
-			echo "#DESCRIPTION SBO $position" >>/tmp/userbouquet.ukcvs$bq.tv
+	if [ $position -lt 1000 ]; then
+		if [ $count -eq $position ]; then
+			bouquetmarker "$position" "$epg"
+		else
+			placeholder "$position" "$epg" "$count"
+			count=$position
 		fi
-	fi
-	if [ $epg -gt 1470 -a $epg -lt 1480 ]; then
 		echo "$channel$namespace" >>/tmp/userbouquet.ukcvs_bq.tv
-		echo "#DESCRIPTION Sky Sports Interactive $epg" >>/tmp/userbouquet.ukcvs_bq.tv
 		echo "$channel$namespace" >>/tmp/userbouquet.ukcvs$bq.tv
-		echo "#DESCRIPTION Sky Sports Interactive $epg" >>/tmp/userbouquet.ukcvs$bq.tv
-	fi
-	if [ $epg -gt 2142 -a $epg -lt 2148 ]; then
-		echo "$channel$namespace" >>/tmp/userbouquet.ukcvs_bq.tv
-		echo "#DESCRIPTION BBCi $epg" >>/tmp/userbouquet.ukcvs_bq.tv
-		echo "$channel$namespace" >>/tmp/userbouquet.ukcvs$bq.tv
-		echo "#DESCRIPTION BBCi $epg" >>/tmp/userbouquet.ukcvs$bq.tv
+		if [ $position -eq 498 ]; then
+			echo "#DESCRIPTION Primetime" >>/tmp/userbouquet.ukcvs_bq.tv
+			echo "#DESCRIPTION Primetime" >>/tmp/userbouquet.ukcvs$bq.tv
+		fi
+		if [ $position -gt 699 -a $position -lt 780 ]; then
+			if [ $position -lt 752 -o $position -gt 753 ]; then
+				echo "#DESCRIPTION SBO $position" >>/tmp/userbouquet.ukcvs_bq.tv
+				echo "#DESCRIPTION SBO $position" >>/tmp/userbouquet.ukcvs$bq.tv
+			fi
+		fi
+	else
+		bouquetmarker "$position" "$epg"
+		if [ $epg -gt 1470 -a $epg -lt 1480 ]; then
+			echo "$channel$namespace" >>/tmp/userbouquet.ukcvs_bq.tv
+			echo "#DESCRIPTION Sky Sports Interactive $epg" >>/tmp/userbouquet.ukcvs_bq.tv
+			echo "$channel$namespace" >>/tmp/userbouquet.ukcvs$bq.tv
+			echo "#DESCRIPTION Sky Sports Interactive $epg" >>/tmp/userbouquet.ukcvs$bq.tv
+		fi
+		if [ $epg -gt 2142 -a $epg -lt 2148 ]; then
+			echo "$channel$namespace" >>/tmp/userbouquet.ukcvs_bq.tv
+			echo "#DESCRIPTION BBCi $epg" >>/tmp/userbouquet.ukcvs_bq.tv
+			echo "$channel$namespace" >>/tmp/userbouquet.ukcvs$bq.tv
+			echo "#DESCRIPTION BBCi $epg" >>/tmp/userbouquet.ukcvs$bq.tv
+		fi
 	fi
 done < /tmp/services.txt
 
 bouquet=$(($bouquet+1)); bq=15
 namespace=":2:011a0000:0:0:0:"
 echo "writing... userbouquet.ukcvs$bq.tv < High Definition"
-echo "#NAME   - -  High Definition
+echo "#NAME High Definition
 #SERVICE 1:64:1:0:0:0:0:0:0:0:
 #DESCRIPTION 28.2E -- High Definition --" >/tmp/userbouquet.ukcvs$bq.tv
 grep '^......... #SERVICE 1:0:19:' /tmp/services.txt | sed 's/^.\{10\}\(.*\)/\1'"$namespace"'/' >>/tmp/userbouquet.ukcvs$bq.tv
