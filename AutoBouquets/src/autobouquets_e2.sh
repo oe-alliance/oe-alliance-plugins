@@ -41,6 +41,12 @@ else
 	REGION="07"
 fi
 
+if [ ! "$3" = "" ]; then
+	HDFIRST="$3"
+else
+	HDFIRST="N"
+fi
+
 echo "getting data set $DATA, region set $REGION"
 echo "reading Bouquet Association Table, please wait..."
 { sleep 5; [ ! -s /tmp/dvb.txt ] && killall -9 dvbsnoop; } &
@@ -74,7 +80,7 @@ while read ln; do
 	sed -n "$(($dvb1-17)),/^CRC/p" /tmp/dvb.txt >>/tmp/sections.txt
 	echo "`date` $DATA-$sec_num@$dvb1"
 	[ $sec_num -eq $sec_num_cycle ] && break
-done </tmp/sections_ref.txt
+done < /tmp/sections_ref.txt
 rm -f /tmp/sections_ref.txt
 rm -f /tmp/dvb.txt
 
@@ -151,11 +157,9 @@ bouquet="1"
 bouquetname(){
 bouquet=$(($bouquet+1)); bq=$1
 echo "writing... userbouquet.ukcvs$bq.tv < $2"
-echo "#NAME $2
-#SERVICE 1:64:1:0:0:0:0:0:0:0:
-#DESCRIPTION 28.2E -- $2 --" >>/tmp/userbouquet.ukcvs$bq.tv
-echo "#SERVICE 1:64:$bouquet:0:0:0:0:0:0:0:
-#DESCRIPTION -- $2 --" >>/tmp/userbouquet.ukcvs_bq.tv
+echo -e "#NAME 28.2E -- $2 --\n#SERVICE 1:64:1:0:0:0:0:0:0:0:\n#DESCRIPTION $2" >>/tmp/userbouquet.ukcvs$bq.tv
+echo -e "#SERVICE 1:64:$bouquet:0:0:0:0:0:0:0:\n#DESCRIPTION $2" >>/tmp/userbouquet.ukcvs_bq.tv
+echo -e "#NAME 28.2E -- High Definition --\n#SERVICE 1:64:1:0:0:0:0:0:0:0:\n#DESCRIPTION $2" >>/tmp/userbouquet.ukcvs_hd.tv
 echo '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.ukcvs'$bq'.tv" ORDER BY bouquet' >>/tmp/bouquets.tv
 }
 
@@ -232,8 +236,10 @@ placeholder(){
 cnt=$3
 while [ $cnt -lt $1 ]; do
 	cnt=$(($cnt+1))
-echo '#SERVICE 1:320:1:0:0:0:0:0:0:0:
-#DESCRIPTION  ' >>/tmp/userbouquet.ukcvs_bq.tv
+echo -e '#SERVICE 1:320:1:0:0:0:0:0:0:0:\n#DESCRIPTION  ' >>/tmp/userbouquet.ukcvs_bq.tv
+if [ $HDFIRST = "Y" ]; then
+	echo -e '#SERVICE 1:320:1:0:0:0:0:0:0:0:\n#DESCRIPTION  ' >>/tmp/userbouquet.ukcvs$bq.tv
+fi
 bouquetmarker "$cnt" "$2"
 done
 }
@@ -253,28 +259,45 @@ echo "#NAME 28.2E ---- UK Bouquets ----
 #DESCRIPTION Plugin Version date - 21st August 2012" >/tmp/userbouquet.ukcvs_bq.tv
 
 bq="00"
-echo '#NAME UKCVS - Bouquets (TV)
-#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.ukcvs00.tv" ORDER BY bouquet' >/tmp/bouquets.tv
+echo -e '#NAME UKCVS - Bouquets (TV)\n#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.ukcvs00.tv" ORDER BY bouquet' >/tmp/bouquets.tv
 
 echo 'writing... userbouquet.ukcvs00.tv < 28.2E UK Bouquets'
 
 count=0
 while read ln; do
 	count=$(($count+1))
+	tmpa=`echo $ln | cut -d ":" -f1 | sed 's/^.\{10\}\(.*\)/\1/'`
+	tmpb=`echo $ln | cut -d ":" -f2`
+	tmpc=`echo $ln | cut -d ":" -f3`
+	sid=`echo $ln | cut -d ":" -f4`
 	tsid=`echo $ln | cut -d ":" -f5`
+	case $tmpc in
+		0*) tmpc=${tmpc:1} ;;
+		*) ;;
+		esac
+	case $sid in
+		0*) sid=${sid:1} ;;
+		*) ;;
+		esac
+	case $tsid in
+		0*) tsid=${tsid:1} ;;
+		*) ;;
+		esac
 	position=$(printf "%d\n" 0x`echo "$ln"|sed 's/^\(.\{4\}\).*/\1/'`)
 	epg=$(printf "%d\n" 0x`echo "$ln"|sed 's/^.\{5\}\(.\{4\}\).*/\1/'`)
-	channel=`echo "$ln" | sed 's/^.\{10\}\(.*\)/\1/'`
+# 	channel=`echo "$ln" | sed 's/^.\{10\}\(.*\)/\1/'`
+	channel=`echo "${tmpa}:${tmpb}:${tmpc}:${sid}:${tsid}"`
+
 	echo "$channel #EPG $epg #POSITION $position" >>/tmp/autobouquets.log
 	case "$tsid" in
-		"07db")
-			namespace=":0:011a2e8a:0:0:0:"
+		"7db")
+			namespace=":0:11a2e8a:0:0:0:"
 		;;
-		"07e3")
-			namespace=":2:011a2f26:0:0:0:"
+		"7e3")
+			namespace=":2:11a2f26:0:0:0:"
 		;;
 		*)
-			namespace=":2:011a0000:0:0:0:"
+			namespace=":2:11a0000:0:0:0:"
 		;;
 	esac
 	if [ $position -lt 1000 ]; then
@@ -286,6 +309,9 @@ while read ln; do
 		fi
 		echo "$channel$namespace" >>/tmp/userbouquet.ukcvs_bq.tv
 		echo "$channel$namespace" >>/tmp/userbouquet.ukcvs$bq.tv
+		if [ $tmpc -eq 19 -o $tmpc -eq 87 ]; then
+			echo "$channel$namespace" >>/tmp/userbouquet.ukcvs_hd.tv
+		fi
 		if [ $position -eq 498 ]; then
 			echo "#DESCRIPTION Primetime" >>/tmp/userbouquet.ukcvs_bq.tv
 			echo "#DESCRIPTION Primetime" >>/tmp/userbouquet.ukcvs$bq.tv
@@ -310,24 +336,28 @@ while read ln; do
 			echo "$channel$namespace" >>/tmp/userbouquet.ukcvs$bq.tv
 			echo "#DESCRIPTION BBCi $epg" >>/tmp/userbouquet.ukcvs$bq.tv
 		fi
+		if [ $tmpc -eq 19 -o $tmpc -eq 87 ]; then
+			echo "$channel$namespace" >>/tmp/userbouquet.ukcvs_hd.tv
+		fi
 	fi
 done < /tmp/services.txt
 
-bouquet=$(($bouquet+1)); bq=15
-namespace=":2:011a0000:0:0:0:"
-echo "writing... userbouquet.ukcvs$bq.tv < High Definition"
-echo "#NAME High Definition
-#SERVICE 1:64:1:0:0:0:0:0:0:0:
-#DESCRIPTION 28.2E -- High Definition --" >/tmp/userbouquet.ukcvs$bq.tv
-grep '^......... #SERVICE 1:0:19:' /tmp/services.txt | sed 's/^.\{10\}\(.*\)/\1'"$namespace"'/' >>/tmp/userbouquet.ukcvs$bq.tv
-echo "#SERVICE 1:64:$bouquet:0:0:0:0:0:0:0:
-#DESCRIPTION -- High Definition --" >>/tmp/userbouquet.ukcvs_bq.tv
-grep '^......... #SERVICE 1:0:19:' /tmp/services.txt | sed 's/^.\{10\}\(.*\)/\1'"$namespace"'/' >>/tmp/userbouquet.ukcvs_bq.tv
-echo '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.ukcvs'$bq'.tv" ORDER BY bouquet
-#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet' >>/tmp/bouquets.tv
-
-cat /tmp/userbouquet.ukcvs_bq.tv|sed '14,22d' >/tmp/userbouquet.ukcvs00.tv
-rm -f /tmp/userbouquet.ukcvs_bq.tv
+echo "writing... userbouquet.ukcvs15.tv < High Definition"
+if [ $HDFIRST = "Y" ]; then
+	echo '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet' >>/tmp/bouquets.tv
+	cp /tmp/userbouquet.ukcvs_hd.tv /tmp/userbouquet.ukcvs15.tv
+	count=`echo "$(cat /tmp/userbouquet.ukcvs_hd.tv | grep ' 1:0:' | wc -l)"`
+	while [ "$count" -lt "100" ]
+	do
+	echo -e '#SERVICE 1:320:1:0:0:0:0:0:0:0:\n#DESCRIPTION  ' >>/tmp/userbouquet.ukcvs_hd.tv
+	count=$(($count + 1))
+	done
+	cp /tmp/userbouquet.ukcvs_hd.tv /tmp/userbouquet.ukcvs00.tv
+else
+	echo -e '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.ukcvs15.tv" ORDER BY bouquet\n#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet' >>/tmp/bouquets.tv
+	cp /tmp/userbouquet.ukcvs_hd.tv /tmp/userbouquet.ukcvs15.tv
+	cat /tmp/userbouquet.ukcvs_bq.tv|sed '14,22d' >/tmp/userbouquet.ukcvs00.tv
+fi
 
 echo "writing... userbouquet.ukcvs00.radio < 28.2E UK Radio"
 echo "#NAME 28.2E -- UK RADIO --
