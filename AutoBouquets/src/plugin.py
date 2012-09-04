@@ -305,7 +305,7 @@ class AutoBouquets(Screen):
 		self.onLayoutFinish.append(self.doneConfiguring)
 
 	def createSetup(self):
-		self.session.openWithCallback(self.setupDone, AutoBouquetMenu)
+		self.session.openWithCallback(self.setupDone, AutoBouquetsMenu)
 
 	def setupDone(self):
 		self.doneConfiguring()
@@ -540,7 +540,7 @@ class AutoBouquets(Screen):
 
 class AutoBouquetsMenu(ConfigListScreen, Screen):
 	skin = """
-		<screen name="AutoBouquetMenu" position="center,center" size="500,285" title="AutoBouquet Setup">
+		<screen name="AutoBouquetsMenu" position="center,center" size="500,285" title="AutoBouquets Setup">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
@@ -551,7 +551,7 @@ class AutoBouquetsMenu(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		Screen.setTitle(self, _("AutoBouquet Setup"))
+		Screen.setTitle(self, _("AutoBouquets Setup"))
 
 		self.onChangedEntry = [ ]
 		self.list = []
@@ -621,7 +621,7 @@ class AutoBouquetsMenu(ConfigListScreen, Screen):
 
 class AutoBouquetsLogView(Screen):
 	skin = """
-<screen name="AutoBouquetLogView" position="center,center" size="560,400" title="Backup Log" >
+<screen name="AutoBouquetsLogView" position="center,center" size="560,400" title="Backup Log" >
 	<widget name="list" position="0,0" size="560,400" font="Regular;16" />
 </screen>"""
 	def __init__(self, session):
