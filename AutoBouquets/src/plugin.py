@@ -358,6 +358,11 @@ class AutoBouquets(Screen):
 			self.go()
 
 	def startservicescan(self):
+		self.wasinstabdby = False
+		if inStandby:
+			self.wasinstabdby = True
+			inStandby.Power()
+			sleep (2)
 		tlist = []
 		known_networks = [ ]
 		nims_to_scan = [ ]
@@ -504,11 +509,6 @@ class AutoBouquets(Screen):
 			self.shcom("/usr/lib/enigma2/python/Plugins/Extensions/AutoBouquets/autobouquets_e2.sh " + config.autobouquets.area.getValue() + " N" )
 
 	def refcheck(self):
-		self.wasinstabdby = False
-		if inStandby:
-			self.wasinstabdby = True
-			inStandby.Power()
-			sleep (2)
 		if self.postScanService.toString().find(':2:') == -1:
 			ref = eServiceReference("1:0:19:1B1D:802:2:11A0000:0:0:0:")
 			self.session.nav.playService(ref)
