@@ -22,6 +22,11 @@ from datetime import date
 from time import localtime, time, strftime, mktime, sleep
 from os import stat, path
 
+from Screens.ServiceScan import ServiceScan
+from Components.NimManager import nimmanager, getConfigSatlist
+from enigma import eComponentScan
+from Screens.ScanSetup import getInitialTransponderList
+
 arealist = []
 arealist.append(("None", "Not Set"))
 arealist.append(("4101 13", "Atherstone HD"))
@@ -247,37 +252,8 @@ class AutoAutoBouquetsTimer:
 				self.autobouquetsdate(atLeast)
 		else:
 			print "[AutoBouquets] Running AutoBouquets", strftime("%c", localtime(now))
-			self.refcheck()
-			if config.autobouquets.hdasfirst.getValue():
-				self.shcom("/usr/lib/enigma2/python/Plugins/Extensions/AutoBouquets/autobouquets_e2.sh " + config.autobouquets.area.getValue() + " Y" )
-			else:
-				self.shcom("/usr/lib/enigma2/python/Plugins/Extensions/AutoBouquets/autobouquets_e2.sh " + config.autobouquets.area.getValue() + " N" )
-
-	def refcheck(self):
-		self.wasinstabdby = False
-		if inStandby:
-			self.wasinstabdby = True
-			inStandby.Power()
-			sleep (2)
-		self.StartRef = self.session.nav.getCurrentlyPlayingServiceReference()
-		if self.StartRef.toString().find(':2:') == -1:
-			ref = eServiceReference("1:0:19:1B1D:802:2:11A0000:0:0:0:")
-			self.session.nav.playService(ref)
-			sleep (2)
-
-	def shcom(self, com):
-		if fileExists("/usr/bin/dvbsnoop"):
-			self.session.openWithCallback(self.scancomplete,Console,_("AutoBouquets E2 for 28.2E"), ["%s" % com], closeOnSuccess=True)
-		else:
-			self.session.open(MessageBox,"dvbsnoop not found!",MessageBox.TYPE_ERROR)
-# 			print "[MyShCom] dvbsnoop failed!"
-
-	def scancomplete(self):
-		if self.session.nav.getCurrentlyPlayingServiceReference() != self.StartRef:
-			self.session.nav.playService(self.StartRef)
-		if self.wasinstabdby:
-			from Tools import Notifications
-			Notifications.AddNotification(Standby)
+			self.MyShCom = MyShCom(self.session)
+			self.MyShCom.startservicescan()
 
 class MyShCom(Screen):
 	skin = """
@@ -324,6 +300,8 @@ class MyShCom(Screen):
 			'log': self.showLog,
 			"menu": self.createSetup,
 		}, -1)
+		self.ScanIsShown = None
+		self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.onLayoutFinish.append(self.doneConfiguring)
 
 	def createSetup(self):
@@ -364,10 +342,159 @@ class MyShCom(Screen):
 		returnValue = config.autobouquets.area.getValue()
 # 		print "[MyShCom] returnValue: " + returnValue
 		if returnValue != "None":
-			self.go()
+			self.channelupdate()
 		else:
 			question = self.session.open(MessageBox,_('Please first setup, by pressing menu'), MessageBox.TYPE_INFO)
 			question.setTitle(_("AutoBouquets E2 for 28.2E"))
+
+	def channelupdate(self):
+		question = self.session.openWithCallback(self.updatecallback,MessageBox,_('Do you want to perform a service scan'), MessageBox.TYPE_YESNO)
+		question.setTitle(_("AutoBouquets E2 for 28.2E"))
+
+	def updatecallback(self, val):
+		if val:
+			self.startservicescan()
+		else:
+			self.go()
+
+	def startservicescan(self):
+		tlist = []
+		known_networks = [ ]
+		nims_to_scan = [ ]
+
+		for nim in nimmanager.nim_slots:
+			# collect networks provided by this tuner
+			need_scan = False
+			networks = self.getNetworksForNim(nim)
+
+			# we only need to scan on the first tuner which provides a network.
+			# this gives the first tuner for each network priority for scanning.
+			for x in networks:
+				if x not in known_networks:
+					need_scan = True
+					print x, "not in ", known_networks
+					known_networks.append(x)
+
+# 			print "nim %d provides" % nim.slot, networks
+# 			print "known:", known_networks
+#
+			# don't offer to scan nims if nothing is connected
+			if not nimmanager.somethingConnected(nim.slot):
+				need_scan = False
+
+			if need_scan:
+				nims_to_scan.append(nim)
+
+		# we save the config elements to use them on keyGo
+		self.nim_enable = [ ]
+
+		if len(nims_to_scan):
+			for nim in nims_to_scan:
+				nimconfig = ConfigYesNo(default = True)
+				nimconfig.nim_index = nim.slot
+				self.nim_enable.append(nimconfig)
+
+		self.scanList = []
+		self.known_networks = set()
+		self.nim_iter=0
+		self.buildTransponderList()
+
+	def getNetworksForNim(self, nim):
+		networks = [ ]
+		if nim.isCompatible("DVB-S"):
+			tmpnetworks = nimmanager.getSatListForNim(nim.slot)
+			for x in tmpnetworks:
+				if x[0] == 282:
+					networks.append(x)
+		else:
+			# empty tuners provide no networks.
+			networks = [ ]
+		return networks
+
+	def buildTransponderList(self): # this method is called multiple times because of asynchronous stuff
+		APPEND_NOW = 0
+		SEARCH_CABLE_TRANSPONDERS = 1
+		action = APPEND_NOW
+
+		n = self.nim_iter < len(self.nim_enable) and self.nim_enable[self.nim_iter] or None
+		self.nim_iter += 1
+		if n:
+			if n.value: # check if nim is enabled
+				flags = 0
+				nim = nimmanager.nim_slots[n.nim_index]
+				networks = set(self.getNetworksForNim(nim))
+				networkid = 0
+				# don't scan anything twice
+				networks.discard(self.known_networks)
+
+				tlist = [ ]
+				if nim.isCompatible("DVB-S"):
+					# get initial transponders for each satellite to be scanned
+					for sat in networks:
+						getInitialTransponderList(tlist, sat[0])
+				else:
+					assert False
+				flags |= eComponentScan.scanNetworkSearch #FIXMEEE.. use flags from cables / satellites / terrestrial.xml
+				flags |= eComponentScan.scanRemoveServices
+
+				if action == APPEND_NOW:
+					self.scanList.append({"transponders": tlist, "feid": nim.slot, "flags": flags})
+				elif action == SEARCH_CABLE_TRANSPONDERS:
+					self.flags = flags
+					self.feid = nim.slot
+					self.networkid = networkid
+					self.startCableTransponderSearch(nim.slot)
+					return
+				else:
+					assert False
+
+			self.buildTransponderList() # recursive call of this function !!!
+			return
+		# when we are here, then the recursion is finished and all enabled nims are checked
+		# so we now start the real transponder scan
+		self.startScan(self.scanList)
+
+	def startScan(self, scanList):
+		if len(scanList):
+			self.timer = eTimer()
+			self.start()
+			self.RunServiceScan = self.session.openWithCallback(self.finished_cb, ServiceScan, scanList)
+
+	def start(self):
+		if self.finish_check not in self.timer.callback:
+			self.timer.callback.append(self.finish_check)
+		self.timer.startLongTimer(60)
+
+	def stop(self):
+		if self.finish_check in self.timer.callback:
+			self.timer.callback.remove(self.finish_check)
+		self.timer.stop()
+
+	def finish_check(self):
+		try:
+			if not self.RunServiceScan["scan"].isDone():
+				self.timer.startLongTimer(10)
+			else:
+				self.stop()
+				self.RunServiceScan.close()
+				self.RunServiceScan = None
+		except:
+			self.RunServiceScan = None
+			self.stop
+
+	def finished_cb(self):
+		self.session.nav.playService(self.postScanService)
+		self.go()
+
+	def keyCancel(self):
+		self.session.nav.playService(self.postScanService)
+		self.close()
+
+	def Satexists(self, tlist, pos):
+		for x in tlist:
+			if x == pos:
+				return 1
+		return 0
 
 	def go(self):
 		self.refcheck()
@@ -377,8 +504,12 @@ class MyShCom(Screen):
 			self.shcom("/usr/lib/enigma2/python/Plugins/Extensions/AutoBouquets/autobouquets_e2.sh " + config.autobouquets.area.getValue() + " N" )
 
 	def refcheck(self):
-		self.StartRef = self.session.nav.getCurrentlyPlayingServiceReference()
-		if self.StartRef.toString().find(':2:') == -1:
+		self.wasinstabdby = False
+		if inStandby:
+			self.wasinstabdby = True
+			inStandby.Power()
+			sleep (2)
+		if self.postScanService.toString().find(':2:') == -1:
 			ref = eServiceReference("1:0:19:1B1D:802:2:11A0000:0:0:0:")
 			self.session.nav.playService(ref)
 			sleep (2)
@@ -391,8 +522,11 @@ class MyShCom(Screen):
 # 			print "[MyShCom] dvbsnoop failed!"
 
 	def scancomplete(self):
-		if self.session.nav.getCurrentlyPlayingServiceReference() != self.StartRef:
-			self.session.nav.playService(self.StartRef)
+		if self.session.nav.getCurrentlyPlayingServiceReference() != self.postScanService:
+			self.session.nav.playService(self.postScanService)
+		if self.wasinstabdby:
+			from Tools import Notifications
+			Notifications.AddNotification(Standby)
 
 	def about(self):
 		self.session.open(MessageBox,"AutoBouquets E2 for 28.2E\nVersion date - 21/08/2012\n\nLraiZer @ www.ukcvs.org",MessageBox.TYPE_INFO)
