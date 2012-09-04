@@ -252,10 +252,10 @@ class AutoAutoBouquetsTimer:
 				self.autobouquetsdate(atLeast)
 		else:
 			print "[AutoBouquets] Running AutoBouquets", strftime("%c", localtime(now))
-			self.MyShCom = MyShCom(self.session)
-			self.MyShCom.startservicescan()
+			self.AutoBouquets = AutoBouquets(self.session)
+			self.AutoBouquets.startservicescan()
 
-class MyShCom(Screen):
+class AutoBouquets(Screen):
 	skin = """
 		<screen position="center,center" size="365,250" title="AutoBouquets E2 for 28.2E" >
 			<widget name="key_red" position="25,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;18" transparent="1"/>
@@ -340,7 +340,7 @@ class MyShCom(Screen):
 
 	def question(self):
 		returnValue = config.autobouquets.area.getValue()
-# 		print "[MyShCom] returnValue: " + returnValue
+# 		print "[AutoBouquets] returnValue: " + returnValue
 		if returnValue != "None":
 			self.channelupdate()
 		else:
@@ -519,7 +519,7 @@ class MyShCom(Screen):
 			self.session.openWithCallback(self.scancomplete,Console,_("AutoBouquets E2 for 28.2E"), ["%s" % com], closeOnSuccess=True)
 		else:
 			self.session.open(MessageBox,"dvbsnoop not found!",MessageBox.TYPE_ERROR)
-# 			print "[MyShCom] dvbsnoop failed!"
+# 			print "[AutoBouquets] dvbsnoop failed!"
 
 	def scancomplete(self):
 		if self.session.nav.getCurrentlyPlayingServiceReference() != self.postScanService:
@@ -535,10 +535,10 @@ class MyShCom(Screen):
 		self.session.open(Console,_("Showing AutoBouquets readme.txt"),["cat /usr/lib/enigma2/python/Plugins/Extensions/AutoBouquets/%s" % _("readme.txt")])
 
 	def cancel(self):
-# 		print "[MyShCom] cancel"
+# 		print "[AutoBouquets] cancel"
 		self.close(None)
 
-class AutoBouquetMenu(ConfigListScreen, Screen):
+class AutoBouquetsMenu(ConfigListScreen, Screen):
 	skin = """
 		<screen name="AutoBouquetMenu" position="center,center" size="500,285" title="AutoBouquet Setup">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
@@ -619,7 +619,7 @@ class AutoBouquetMenu(ConfigListScreen, Screen):
 		else:
 			self.close()
 
-class AutoBouquetLogView(Screen):
+class AutoBouquetsLogView(Screen):
 	skin = """
 <screen name="AutoBouquetLogView" position="center,center" size="560,400" title="Backup Log" >
 	<widget name="list" position="0,0" size="560,400" font="Regular;16" />
@@ -657,8 +657,8 @@ class AutoBouquetLogView(Screen):
 ###########################################################################
 
 def main(session, **kwargs):
-# 	print "[MyShCom] start"
-	session.open(MyShCom)
+# 	print "[AutoBouquets] start"
+	session.open(AutoBouquets)
 
 ###########################################################################
 
