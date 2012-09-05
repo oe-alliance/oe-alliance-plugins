@@ -343,7 +343,7 @@ class AutoBouquets(Screen):
 		self["status2"].setText(str(autobouquetstext))
 
 	def showLog(self):
-		self.session.open(AutoBouquetLogView)
+		self.session.open(AutoBouquetsLogView)
 
 	def question(self):
 		returnValue = config.autobouquets.area.getValue()
