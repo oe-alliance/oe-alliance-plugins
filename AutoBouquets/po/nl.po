@@ -1,0 +1,134 @@
+# Dutch translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2012 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-04 20:32+0100\n"
+"PO-Revision-Date: 2012-09-05 19:12+0100\n"
+"Last-Translator: \n"
+"Language-Team: Andy Blackburn, Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/plugin.py:333
+msgid "%a %e %b  %-H:%M"
+msgstr "%a %e %b  %-H:%M"
+
+#: ../src/plugin.py:132
+msgid "30 Days"
+msgstr "30 dagen"
+
+#: ../src/plugin.py:290
+msgid "About"
+msgstr "About"
+
+#: ../src/plugin.py:576
+msgid "Aera"
+msgstr "Gebied"
+
+#: ../src/plugin.py:281
+msgid "Area:"
+msgstr "Gebied:"
+
+#: ../src/plugin.py:348 ../src/plugin.py:352 ../src/plugin.py:519
+msgid "AutoBouquets E2 for 28.2E"
+msgstr "AutoBouquets E2 voor 28.2E"
+
+#: ../src/plugin.py:630
+msgid "AutoBouquets Log"
+msgstr "AutoBouquets lLog"
+
+#: ../src/plugin.py:554
+msgid "AutoBouquets Setup"
+msgstr "AutoBouquets instellingen"
+
+#: ../src/plugin.py:287 ../src/plugin.py:570
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: ../src/plugin.py:132
+msgid "Daily"
+msgstr "Dagelijks"
+
+#: ../src/plugin.py:351
+msgid "Do you want to perform a service scan"
+msgstr "Wilt u nu een kanaal scan uitvoeren?"
+
+#: ../src/plugin.py:250
+msgid "Enough Retries, delaying till next schedule."
+msgstr "Vaak genoeg geprobeerd; wact tot de volgende geplande uitvoering"
+
+#: ../src/plugin.py:283
+msgid "HD Bouquet:"
+msgstr "HD Bouquet:"
+
+#: ../src/plugin.py:289
+msgid "Help"
+msgstr "Help"
+
+#: ../src/plugin.py:634 ../src/plugin.py:639
+msgid "Last scan"
+msgstr "Laatste scan"
+
+#: ../src/plugin.py:333 ../src/plugin.py:335
+msgid "Next Backup: "
+msgstr "Volgende backup"
+
+#: ../src/plugin.py:571
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:347
+msgid "Please first setup, by pressing menu"
+msgstr "Eerst instellen; druk op 'menu'"
+
+#: ../src/plugin.py:618
+msgid "Really close without saving settings?"
+msgstr "Echt afsluiten zonder op te slaan?"
+
+#: ../src/plugin.py:581
+msgid "Repeat how often"
+msgstr "Hoe vaak herhalen"
+
+#: ../src/plugin.py:578 ../src/plugin.py:587
+msgid "Schedule Scan"
+msgstr "Geplande scan"
+
+#: ../src/plugin.py:535
+msgid "Showing AutoBouquets readme.txt"
+msgstr "Toont Autobouquets readme.txt"
+
+#: ../src/plugin.py:288
+msgid "Start"
+msgstr "Start"
+
+#: ../src/plugin.py:580
+msgid "Time of Backup to start"
+msgstr "Starttijd van backup"
+
+#: ../src/plugin.py:577
+msgid "Use HD first bouquet"
+msgstr "Gebruik HD-lijst als eerste"
+
+#: ../src/plugin.py:132
+msgid "Weekly"
+msgstr "Wekelijks"
+
+#: ../src/plugin.py:225
+msgid ""
+"Your STB_BOX is about to update your bouquets,\n"
+"Do you want to allow this?"
+msgstr ""
+"Uw STB_BOX staat op het punt uw bouqueten te updaten,\n"
+"Wilt u dat toestaan?"
+
+#: ../src/plugin.py:535
+msgid "readme.txt"
+msgstr "readme.txt"
