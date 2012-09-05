@@ -3,6 +3,9 @@
 # HOMEPAGE Forum - www.ukcvs.org
 # version date - 21st August 2012
 
+# for localized messages
+from . import _
+
 from Screens.Screen import Screen
 from Screens.Console import Console
 from Screens.MessageBox import MessageBox
