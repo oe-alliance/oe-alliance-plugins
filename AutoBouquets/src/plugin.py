@@ -253,6 +253,12 @@ class AutoAutoBouquetsTimer:
 		else:
 			print "[AutoBouquets] Running AutoBouquets", strftime("%c", localtime(now))
 			self.AutoBouquets = AutoBouquets(self.session)
+			self.wasinstabdby = False
+			if inStandby:
+				self.wasinstabdby = True
+				inStandby.Power()
+				sleep (2)
+			self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
 			self.AutoBouquets.startservicescan()
 
 class AutoBouquets(Screen):
@@ -272,7 +278,8 @@ class AutoBouquets(Screen):
 			<widget name="areavalue" position="150,140" size="205,30" font="Regular;22" zPosition="2" />
 			<widget name="hd" position="0,170" size="140,30" font="Regular; 22" halign="right" zPosition="2" transparent="0" />
 			<widget name="hdcheck" position="150,170" size="32,32" alphatest="on" zPosition="1" pixmaps="skin_default/icons/lock_off.png,skin_default/icons/lock_on.png"/>
-			<widget name="status" position="0,220" size="365,30" font="Regular;20" zPosition="5" />
+			<widget name="status" position="0,220" size="140,30" font="Regular; 22" halign="right" zPosition="2" transparent="0" />
+			<widget name="status2" position="150,220" size="205,30" font="Regular;22" zPosition="5" />
 		</screen>"""
 
 	def __init__(self, session, args = 0):
@@ -282,7 +289,8 @@ class AutoBouquets(Screen):
 		self['areavalue'] = Label()
 		self['hd'] = Label(_('HD Bouquet:'))
 		self['hdcheck'] = MultiPixmap()
-		self["status"] = Label()
+		self["status"] = Label(_("Next Backup:"))
+		self["status2"] = Label()
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Start"))
@@ -300,8 +308,7 @@ class AutoBouquets(Screen):
 			'log': self.showLog,
 			"menu": self.createSetup,
 		}, -1)
-		self.ScanIsShown = None
-		self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.wasinstabdby = False
 		self.onLayoutFinish.append(self.doneConfiguring)
 
 	def createSetup(self):
@@ -330,16 +337,17 @@ class AutoBouquets(Screen):
 				autoAutoBouquetsTimer.backupstop()
 		if AutoBouquetsTime > 0:
 			t = localtime(AutoBouquetsTime)
-			autobouquetstext = _("Next Backup: ") + strftime(_("%a %e %b  %-H:%M"), t)
+			autobouquetstext = strftime(_("%a %e %b  %-H:%M"), t)
 		else:
-			autobouquetstext = _("Next Backup: ")
-		self["status"].setText(str(autobouquetstext))
+			autobouquetstext = ""
+		self["status2"].setText(str(autobouquetstext))
 
 	def showLog(self):
 		self.session.open(AutoBouquetLogView)
 
 	def question(self):
 		returnValue = config.autobouquets.area.getValue()
+		self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
 # 		print "[AutoBouquets] returnValue: " + returnValue
 		if returnValue != "None":
 			self.channelupdate()
@@ -358,11 +366,6 @@ class AutoBouquets(Screen):
 			self.go()
 
 	def startservicescan(self):
-		self.wasinstabdby = False
-		if inStandby:
-			self.wasinstabdby = True
-			inStandby.Power()
-			sleep (2)
 		tlist = []
 		known_networks = [ ]
 		nims_to_scan = [ ]
