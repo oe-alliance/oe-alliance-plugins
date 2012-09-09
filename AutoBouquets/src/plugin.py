@@ -255,14 +255,20 @@ class AutoAutoBouquetsTimer:
 				self.autobouquetsdate(atLeast)
 		else:
 			print "[AutoBouquets] Running AutoBouquets", strftime("%c", localtime(now))
-			self.AutoBouquets = AutoBouquets(self.session)
-			self.wasinstabdby = False
+			from Screens.Standby import inStandby
 			if inStandby:
-				self.wasinstabdby = True
+				self.wasinstandby = True
 				inStandby.Power()
-				sleep (2)
-			self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
-			self.AutoBouquets.startservicescan()
+			self.timer = eTimer()
+			self.timer.callback.append(self.doautostartscan)
+			self.timer.start(10000, 1)
+
+	def doautostartscan(self):
+		self.AutoBouquets = AutoBouquets(self.session)
+		postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.timer = eTimer()
+		self.timer.callback.append(self.AutoBouquets.startservicescan(postScanService, self.wasinstandby))
+		self.timer.start(5000, 1)
 
 class AutoBouquets(Screen):
 	skin = """
@@ -359,16 +365,19 @@ class AutoBouquets(Screen):
 			question.setTitle(_("AutoBouquets E2 for 28.2E"))
 
 	def channelupdate(self):
-		question = self.session.openWithCallback(self.updatecallback,MessageBox,_('Do you want to perform a service scan'), MessageBox.TYPE_YESNO)
-		question.setTitle(_("AutoBouquets E2 for 28.2E"))
+		self.question = self.session.openWithCallback(self.updatecallback,MessageBox,_('Do you want to perform a service scan'), MessageBox.TYPE_YESNO)
+		self.question.setTitle(_("AutoBouquets E2 for 28.2E"))
 
 	def updatecallback(self, val):
 		if val:
-			self.startservicescan()
+			self.startservicescan(self.postScanService)
 		else:
 			self.go()
 
-	def startservicescan(self):
+	def startservicescan(self, postScanService=None, wasinstandby=False):
+		self.wasinstandby = wasinstandby
+		self.postScanService = postScanService
+
 		tlist = []
 		known_networks = [ ]
 		nims_to_scan = [ ]
@@ -508,17 +517,20 @@ class AutoBouquets(Screen):
 		return 0
 
 	def go(self):
-		self.refcheck()
+		if self.postScanService.toString().find(':2:') == -1:
+			ref = eServiceReference("1:0:19:1B1D:802:2:11A0000:0:0:0:")
+			self.session.nav.playService(ref)
+			self.timer = eTimer()
+			self.timer.callback.append(self.doScan)
+			self.timer.start(5000, 1)
+		else:
+			self.doScan()
+
+	def doScan(self):
 		if config.autobouquets.hdasfirst.getValue():
 			self.shcom("/usr/lib/enigma2/python/Plugins/Extensions/AutoBouquets/autobouquets_e2.sh " + config.autobouquets.area.getValue() + " Y" )
 		else:
 			self.shcom("/usr/lib/enigma2/python/Plugins/Extensions/AutoBouquets/autobouquets_e2.sh " + config.autobouquets.area.getValue() + " N" )
-
-	def refcheck(self):
-		if self.postScanService.toString().find(':2:') == -1:
-			ref = eServiceReference("1:0:19:1B1D:802:2:11A0000:0:0:0:")
-			self.session.nav.playService(ref)
-			sleep (2)
 
 	def shcom(self, com):
 		if fileExists("/usr/bin/dvbsnoop"):
@@ -530,7 +542,7 @@ class AutoBouquets(Screen):
 	def scancomplete(self):
 		if self.session.nav.getCurrentlyPlayingServiceReference() != self.postScanService:
 			self.session.nav.playService(self.postScanService)
-		if self.wasinstabdby:
+		if self.wasinstandby:
 			from Tools import Notifications
 			Notifications.AddNotification(Standby)
 
