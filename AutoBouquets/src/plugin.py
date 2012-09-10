@@ -681,6 +681,6 @@ def main(session, **kwargs):
 ###########################################################################
 
 def Plugins(**kwargs):
-	plist = [PluginDescriptor(name="AutoBouquets E2",description="28.2e stream bouquet downloader",where = PluginDescriptor.WHERE_PLUGINMENU,icon="autobouquets.png",fnc=main)]
+	plist = [PluginDescriptor(name="AutoBouquets E2",description="28.2e stream bouquet downloader",where = PluginDescriptor.WHERE_PLUGINMENU,icon="autobouquets.png", needsRestart = True, fnc=main)]
 	plist.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=AutoBouquetsautostart))
 	return plist
