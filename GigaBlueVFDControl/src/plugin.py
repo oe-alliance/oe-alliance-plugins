@@ -11,14 +11,17 @@ from Components.config import config, configfile, ConfigSubsection, ConfigEnable
      getConfigListEntry, ConfigInteger, ConfigSelection, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from enigma import evfd, iPlayableService, eServiceCenter, eTimer
+from enigma import iPlayableService, eServiceCenter, eTimer
 from os import system
 from Plugins.Plugin import PluginDescriptor
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ServiceList import ServiceList
 from Screens.InfoBar import InfoBar
 from time import localtime, time
-import Screens.Standby
+
+if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo':
+	import Screens.Standby
+	from enigma import evfd
 
 config.plugins.VFD_Giga = ConfigSubsection()
 config.plugins.VFD_Giga.showClock = ConfigSelection(default = "Yes", choices = [("False",_("in standby: ") + _("No")),("True",_("in standby: ") + _("Yes")),("True_All",_("Yes")),("Off",_("Off"))])
@@ -318,11 +321,14 @@ class VFD_Giga:
 	def abort(self):
 		print "[VFD-GIGA] aborting"
 
-	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+	if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo':
+		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
+	if not config.misc.boxtype.value == 'gb800se' or not config.misc.boxtype.value == 'gb800solo':
+		return [ ]
 	if menuid != "system":
-			return [ ]
+		return [ ]
 	return [(_("VFD_Giga"), startVFD, "VFD_Giga", None)]
 
 def startVFD(session, **kwargs):
@@ -339,11 +345,15 @@ def controlgigaVfd():
 
 	if gReason == 0 and mySession != None and gigaVfd == None:
 		print "[VFD-GIGA] Starting !!"
-		gigaVfd = VFD_Giga(mySession)
+		if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo':
+			gigaVfd = VFD_Giga(mySession)
+		else:
+			gigaVfd = True
 	elif gReason == 1 and gigaVfd != None:
 		print "[VFD-GIGA] Stopping !!"
 		SetTime()
-		evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledDSBY.value)
+		if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo':
+			evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledDSBY.value)
 		gigaVfd = None
 
 def SetTime():
