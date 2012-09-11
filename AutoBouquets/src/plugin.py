@@ -317,7 +317,7 @@ class AutoBouquets(Screen):
 			'log': self.showLog,
 			"menu": self.createSetup,
 		}, -1)
-		self.wasinstabdby = False
+		self.wasinstandby = False
 		self.onLayoutFinish.append(self.doneConfiguring)
 
 	def createSetup(self):
@@ -682,5 +682,5 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	plist = [PluginDescriptor(name="AutoBouquets E2",description="28.2e stream bouquet downloader",where = PluginDescriptor.WHERE_PLUGINMENU,icon="autobouquets.png", needsRestart = True, fnc=main)]
-	plist.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=AutoBouquetsautostart))
+	plist.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, needsRestart = True, fnc=AutoBouquetsautostart))
 	return plist
