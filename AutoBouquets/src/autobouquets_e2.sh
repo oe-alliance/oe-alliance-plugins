@@ -236,9 +236,9 @@ placeholder(){
 cnt=$3
 while [ $cnt -lt $1 ]; do
 	cnt=$(($cnt+1))
-echo -e '#SERVICE 1:320:1:0:0:0:0:0:0:0:\n#DESCRIPTION  ' >>/tmp/userbouquet.ukcvs_bq.tv
+echo -e '#SERVICE 1:832:d:0:0:0:0:0:0:0:\n#DESCRIPTION  ' >>/tmp/userbouquet.ukcvs_bq.tv
 if [ $HDFIRST = "Y" ]; then
-	echo -e '#SERVICE 1:320:1:0:0:0:0:0:0:0:\n#DESCRIPTION  ' >>/tmp/userbouquet.ukcvs$bq.tv
+	echo -e '#SERVICE 1:832:d:0:0:0:0:0:0:0:\n#DESCRIPTION  ' >>/tmp/userbouquet.ukcvs$bq.tv
 fi
 bouquetmarker "$cnt" "$2"
 done
