@@ -824,7 +824,7 @@ class Blindscan(ConfigListScreen, Screen):
 		xml.append('		Filter out adjacent satellites: %s\n' % (adjacent[self.filter_off_adjacent_satellites.value]))
 		xml.append('-->\n\n')
 		xml.append('<satellites>\n')
-		xml.append('	<sat name="%s" flags="0" position="%s">\n' % (self.sat_name, self.orb_position))
+		xml.append('	<sat name="%s" flags="0" position="%s">\n' % (self.sat_name.replace('&', '&amp;'), self.orb_position))
 		for tp in tp_list :
 			xml.append('		<transponder frequency="%d" symbol_rate="%d" polarization="%d" fec_inner="%d" system="%d" modulation="%d"/>\n' % (tp.frequency, tp.symbol_rate, tp.polarisation, tp.fec, tp.system, tp.modulation))
 		xml.append('	</sat>\n')
