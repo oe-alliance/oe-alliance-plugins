@@ -351,7 +351,7 @@ def controlgigaVfd():
 			gigaVfd = True
 	elif gReason == 1 and gigaVfd != None:
 		print "[VFD-GIGA] Stopping !!"
-		SetTime()
+		#SetTime()
 		if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo':
 			evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledDSBY.value)
 		gigaVfd = None
@@ -380,7 +380,7 @@ def SetTime():
 		print "[VFD-GIGA] set RTC time failed!"
 
 def sessionstart(reason, **kwargs):
-	print "[VFD-GIGA] AutoStarting VFD_Giga"
+	print "[VFD-GIGA] sessionstart"
 	global gigaVfd
 	global gReason
 	global mySession
