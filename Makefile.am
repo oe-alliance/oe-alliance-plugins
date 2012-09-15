@@ -1,4 +1,4 @@
-SUBDIRS = AutoBouquets DLNABrowser DLNAServer StreamTV 3GModemManager
+SUBDIRS = AutoBouquets DLNABrowser DLNAServer StreamTV 3GModemManager WebBrowser
 
 if VUPLUS
 SUBDIRS += VuplusEvent

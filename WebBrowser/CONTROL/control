@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-webbrowser
+Version: 1.0-r0
+Description: WebBrowser for Embedded Systems
+Maintainer: kos
+Depends: enigma2 , python-gdata , libqtwebkite4 , webbrowser-utils , qt4-embedded-fonts , qt4-embedded-plugin-imageformat-gif , qt4-embedded-plugin-imageformat-ico , qt4-embedded-plugin-imageformat-jpeg , qt4-embedded-plugin-imageformat-mng , qt4-embedded-plugin-imageformat-svg , qt4-embedded-plugin-imageformat-tiff , qt4-embedded-plugin-iconengine-svgicon

@@ -158,6 +158,12 @@ VuUnoFanControl/src/Makefile
 VuUnoFanControl/meta/Makefile
 VuUnoFanControl/po/Makefile
 
+WebBrowser/Makefile
+WebBrowser/src/Makefile
+WebBrowser/meta/Makefile
+WebBrowser/keymap/Makefile
+WebBrowser/icons/Makefile
+
 XtrendFancontrol/Makefile
 XtrendFancontrol/src/Makefile
 XtrendFancontrol/meta/Makefile
