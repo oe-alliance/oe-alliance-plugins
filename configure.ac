@@ -90,6 +90,11 @@ AM_CONDITIONAL(UPDATE_PO, test "$with_po" = "yes")
 AC_CONFIG_FILES([
 Makefile
 
+3GModemManager/Makefile
+3GModemManager/src/Makefile
+3GModemManager/src/script/Makefile
+3GModemManager/meta/Makefile
+
 AutoBouquets/Makefile
 AutoBouquets/src/Makefile
 AutoBouquets/meta/Makefile
@@ -163,6 +168,7 @@ WebBrowser/src/Makefile
 WebBrowser/meta/Makefile
 WebBrowser/keymap/Makefile
 WebBrowser/icons/Makefile
+WebBrowser/po/Makefile
 
 XtrendFancontrol/Makefile
 XtrendFancontrol/src/Makefile
@@ -173,11 +179,6 @@ XtrendRemote/Makefile
 XtrendRemote/src/Makefile
 XtrendRemote/meta/Makefile
 XtrendRemote/po/Makefile
-
-3GModemManager/Makefile
-3GModemManager/src/Makefile
-3GModemManager/src/script/Makefile
-3GModemManager/meta/Makefile
 
 ])
 AC_OUTPUT

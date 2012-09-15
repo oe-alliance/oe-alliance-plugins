@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from Plugins.Plugin import PluginDescriptor
 
 import time, os, socket, thread, socket, copy
@@ -100,12 +103,12 @@ class Player(Screen, InfoBarNotifications):
 			<widget source="session.CurrentService" render="PositionGauge" position="80,25" size="220,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
 				<convert type="ServicePosition">Gauge</convert>
 			</widget>
-			
+
 			<widget source="session.CurrentService" render="Label" position="310,20" size="50,20" font="Regular;18" halign="center" valign="center" backgroundColor="#4e5a74" transparent="1" >
 				<convert type="ServicePosition">Position</convert>
 			</widget>
 			<widget name="sidebar" position="362,20" size="10,20" font="Regular;18" halign="center" valign="center" backgroundColor="#4e5a74" transparent="1" />
-			<widget source="session.CurrentService" render="Label" position="374,20" size="50,20" font="Regular;18" halign="center" valign="center" backgroundColor="#4e5a74" transparent="1" > 
+			<widget source="session.CurrentService" render="Label" position="374,20" size="50,20" font="Regular;18" halign="center" valign="center" backgroundColor="#4e5a74" transparent="1" >
 				<convert type="ServicePosition">Length</convert>
 			</widget>
 		</screen>
@@ -143,7 +146,7 @@ class Player(Screen, InfoBarNotifications):
 		self.state = self.PLAYER_PLAYING
 		self.lastseekstate = self.PLAYER_PLAYING
 		self.__seekableStatusChanged()
-	
+
 		self.onClose.append(self.__onClose)
 		self.doPlay()
 
@@ -216,7 +219,7 @@ class Player(Screen, InfoBarNotifications):
 	def doPlay(self):
 		if self.state == self.PLAYER_PAUSED:
 			if self.shown:
-				self.__setHideTimer()	
+				self.__setHideTimer()
 		self.state = self.PLAYER_PLAYING
 		self.session.nav.playService(self.service)
 		if self.shown:
@@ -328,7 +331,7 @@ class PlayerService:
 			os.remove(self.uds_file)
 		except OSError:
 			pass
-	
+
 	def start(self, timeout = 1):
 		self.socket_timeout = timeout
 		thread.start_new_thread(self.run, (True,))
@@ -399,7 +402,7 @@ class PlayerService:
 		print "virtual keyboard callback!!"
 		wb_unlock()
 		self.sendResponse(self.vk_conn, data)
-		
+
 	def sendResponse(self, conn, data):
 		if data is None or len(data) == 0:
 			data = ""
@@ -420,7 +423,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		</screen>
 		""" % model_rc
 
-	def __init__(self, session): 
+	def __init__(self, session):
 		Screen.__init__(self, session)
                 self.session = session
 		self.list = []
@@ -544,13 +547,13 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		self.name_list  = []
 		self.mouse_list = None
 		self.keyboard_list = None
-		
+
 		self.makeHandlerList(self.devices_string)
 
 		if self.conf_mouse == "" or self.getHandlerName(self.conf_mouse) is None:
 			self.conf_mouse = self.mouse_list[0][0]
 		self.mouse = ConfigSelection(default = self.conf_mouse, choices = self.mouse_list)
-		self.list.append(getConfigListEntry(_('Mouse'), self.mouse))		
+		self.list.append(getConfigListEntry(_('Mouse'), self.mouse))
 
 		if self.conf_keyboard == "" or self.getHandlerName(self.conf_keyboard) is None:
 			self.conf_keyboard = self.keyboard_list[0][0]
@@ -648,7 +651,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 
 		kbd_cmd = " "
 		mouse_cmd = " "
-		extra_cmd = " " 
+		extra_cmd = " "
 		browser_cmd = "%s/%s -qws" % (self.browser_root, self.browser_name)
 
 		mouse_param = self.mouse.value
