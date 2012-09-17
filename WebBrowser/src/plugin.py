@@ -33,7 +33,6 @@ from Components.config import config, ConfigSelection, getConfigListEntry, Confi
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
-from Screens.DefaultWizard import DefaultWizard
 from Screens.InfoBarGenerics import InfoBarNotifications
 
 from enigma import eTimer, eServiceReference, iPlayableService, fbClass, eRCInput, eConsoleAppContainer
