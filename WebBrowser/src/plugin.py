@@ -453,6 +453,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 
 		self.makeConfig()
 		#time.sleep(2)
+		excute_cmd("echo 1 > /proc/stb/fp/mouse")
 
 		self.lock = False
 		self.service = PlayerService(self.session)
@@ -474,6 +475,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		self.service.stop()
 		excute_cmd("killall -15 %s"%(self.browser_name))
 		excute_cmd("echo 60 > /proc/sys/vm/swappiness")
+		excute_cmd("echo 0 > /proc/stb/fp/mouse")
 		enable_rc_mouse(False) #rc-mouse off
 		language.activateLanguageIndex(self.current_lang_idx)
 		fbClass.getInstance().unlock()
@@ -737,5 +739,4 @@ def main(session, **kwargs):
 def Plugins(**kwargs):
 	return [PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, needsRestart = False, fnc=sessionstart),
 		PluginDescriptor(name=_("Web Browser"), description="start web browser", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)]
-
 
