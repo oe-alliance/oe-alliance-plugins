@@ -42,6 +42,8 @@ HTTPConnection.debuglevel = 1
 model_rc = "rc_wb_desc.png"
 if config.misc.boxtype.value.startswith('gb'):
 	model_rc = "rc_wb_desc_gb.png"
+elif config.misc.boxtype.value.startswith('venton'):
+	model_rc = "rc_wb_desc_hdx.png"
 
 def excute_cmd(cmd):
 	print "prepared cmd:", cmd
