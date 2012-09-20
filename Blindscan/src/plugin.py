@@ -6,7 +6,6 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.ServiceScan import ServiceScan
 from Screens.MessageBox import MessageBox
-from Screens.DefaultWizard import DefaultWizard
 
 from Components.Label import Label
 from Components.TuneTest import Tuner

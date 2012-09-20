@@ -2,7 +2,6 @@ from Plugins.Plugin import PluginDescriptor
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Screens.DefaultWizard import DefaultWizard
 from Screens.Standby import TryQuitMainloop
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 
