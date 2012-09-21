@@ -441,7 +441,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 			"green": self.keyGo,
 			"cancel": self.keyExit,
                 }, -2)
-		self.info = Label(_("If you want to quit the Browser,\nPress -> EXIT."))
+		self.info = Label(_("If you want to quit the Browser,\nPress RED -> EXIT."))
 		self["info"] = self.info
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = StaticText(_("Start"))
