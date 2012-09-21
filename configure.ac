@@ -133,6 +133,11 @@ TmTwinFanControl/src/Makefile
 TmTwinFanControl/meta/Makefile
 TmTwinFanControl/po/Makefile
 
+OpenUitzendingGemist/Makefile
+OpenUitzendingGemist/src/Makefile
+OpenUitzendingGemist/meta/Makefile
+OpenUitzendingGemist/po/Makefile
+
 StreamTV/Makefile
 StreamTV/src/Makefile
 StreamTV/meta/Makefile

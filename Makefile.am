@@ -5,7 +5,7 @@ SUBDIRS += VuplusEvent
 endif
 
 if XTREND
-SUBDIRS += XtrendFancontrol Blindscan XtrendRemote
+SUBDIRS += XtrendFancontrol Blindscan XtrendRemote OpenUitzendingGemist
 endif
 
 if ODIN
