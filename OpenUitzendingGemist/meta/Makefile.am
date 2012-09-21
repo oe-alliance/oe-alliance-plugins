@@ -1,3 +1,3 @@
 installdir = $(datadir)/meta
 
-dist_install_DATA = OpenUitzendingGemist.xml
+dist_install_DATA = plugin_openuitzendinggemist.xml
