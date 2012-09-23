@@ -593,25 +593,16 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		browser_cmd = "%s/%s -qws" % (self.browser_root, self.browser_name)
 
 		mouse_param = self.mouse.value
-		#if self.mouse.value == "mrc":
-		#	mouse_param = self.rc_mouse
-		#elif self.mouse.value == "musb":
-		#	mouse_param = self.usb_mouse
-		keyboard_param = self.keyboard.value
-		#if self.keyboard.value == "krc":
-		#	keyboard_param = self.rc_keyboard
-		#elif self.keyboard.value == "kusb":
-		#	keyboard_param = self.usb_keyboard
 
-		#if self.getHandlerName(mouse_param)[1:].startswith("dreambox"):
-		#	enable_rc_mouse(True) #rc-mouse on
-		#if str(mouse_param).startswith("event"):
-		mouse_cmd = "export QWS_MOUSE_PROTO=LinuxInput:/dev/input/%s; " % (str(mouse_param))
+		keyboard_param = self.keyboard.value
+		if not config.misc.boxtype.value.startswith('gb'):
+			mouse_cmd = "export QWS_MOUSE_PROTO=LinuxInput:/dev/input/%s; " % (str(mouse_param))
 
 		keymap_param = ""
 		if self.langs.value == "de":
 			keymap_param = ":keymap=/usr/share/keymaps/player/de.qmap"
-		kbd_cmd = "export QWS_KEYBOARD=LinuxInput:/dev/input/%s%s; " % (str(keyboard_param), keymap_param)
+		if not config.misc.boxtype.value.startswith('gb'):	
+			kbd_cmd = "export QWS_KEYBOARD=LinuxInput:/dev/input/%s%s; " % (str(keyboard_param), keymap_param)
 
 		cmd = "%s%s%s%s" % (extra_cmd, kbd_cmd, mouse_cmd, browser_cmd)
 		print "prepared command : [%s]" % cmd
@@ -641,20 +632,6 @@ class BrowserLauncher(ConfigListScreen, Screen):
 			self.timer_start = eTimer()
 			self.timer_start.callback.append(self.startBrowser)
 			self.timer_start.start(10)
-
-	def getHandlerName(self, v):
-		if v == "mrc":
-			v = self.rc_mouse
-		elif v == "musb":
-			v = self.usb_mouse
-		elif v == "krc":
-			v = self.rc_keyboard
-		elif v == "kusb":
-			v = self.usb_keyboard
-		for l in self.name_list:
-			if l[0] == v:
-				return l[1]
-		return None
 
 	def callbackLauncherDataAvail(self, ret_data):
 		print ret_data
