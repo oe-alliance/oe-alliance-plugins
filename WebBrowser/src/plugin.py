@@ -29,6 +29,7 @@ from Components.Sources.StaticText import StaticText
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.config import config, ConfigSelection, getConfigListEntry, ConfigSlider
+from Components.InputDevice import iInputDevices
 
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
