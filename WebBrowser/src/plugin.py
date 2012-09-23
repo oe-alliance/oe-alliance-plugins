@@ -71,7 +71,7 @@ def is_process_running(pname):
 	if pname is None or len(pname) == 0:
 		return False
 
-	cmd = "/bin/ps -ef | grep %s | grep -v grep | awk \'{print $5}\'"%(pname)
+	cmd = "/bin/ps | grep %s | grep -v grep | awk \'{print $5}\'"%(pname)
 	for line in os.popen(cmd).readlines():
 		return True
 	return False
@@ -456,6 +456,8 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		self.rc_mouse = None
 		self.rc_keyboard = None
 
+		self.current_lang_idx = language.getActiveLanguageIndex()
+
 		self.makeConfig()
 		#time.sleep(2)
 
@@ -468,7 +470,6 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		self.timer_exit_cond.callback.append(self.resetExitCond)
 
 		self.test_cond = True
-		self.current_lang_idx = language.getActiveLanguageIndex()
 
 	def keyNone(self):
 		None
@@ -547,10 +548,14 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		self.keyboard_list = None
 		
 		self.devices = [(x, iInputDevices.getDeviceName(x).replace("dreambox advanced remote control (native)", "Remote Control").replace("dreambox front panel", "Front Panel") + "(" + x  + ")") for x in iInputDevices.getDeviceList()]
-		  
+
+		if self.conf_mouse == "":
+			self.conf_mouse = "event1"
 		self.mouse = ConfigSelection(default = self.conf_mouse, choices = self.devices)
 		self.list.append(getConfigListEntry(_('Mouse'), _(self.mouse)))		
 
+		if self.conf_keyboard == "":
+			self.conf_keyboard = "event1"
 		self.keyboard = ConfigSelection(default = self.conf_keyboard, choices = self.devices)
 		self.list.append(getConfigListEntry(_('Keyboard'), _(self.keyboard)))
 
