@@ -256,6 +256,7 @@ class AutoAutoBouquetsTimer:
 		else:
 			print "[AutoBouquets] Running AutoBouquets", strftime("%c", localtime(now))
 			from Screens.Standby import inStandby
+			self.wasinstandby = False
 			if inStandby:
 				self.wasinstandby = True
 				inStandby.Power()
