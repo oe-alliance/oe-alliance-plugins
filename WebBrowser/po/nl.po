@@ -1,0 +1,79 @@
+# Dutch translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2012 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-28 14:21+0100\n"
+"PO-Revision-Date: 2012-09-28 19:34+0100\n"
+"Last-Translator: \n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.3\n"
+
+#: ../src/plugin.py:136
+msgid "/"
+msgstr "/"
+
+#: ../src/plugin.py:566
+msgid "Alpha Value"
+msgstr "Alpha waarde"
+
+#: ../src/plugin.py:401
+msgid "Enter your input data"
+msgstr "Geef data in"
+
+#: ../src/plugin.py:447
+msgid "Exit"
+msgstr "Stop"
+
+#: ../src/plugin.py:445
+msgid ""
+"If you want to quit the Browser,\n"
+"Press RED -> EXIT."
+msgstr ""
+"Als u de browser wilt afsluiten,\n"
+"druk op RED -> EXIT."
+
+#: ../src/plugin.py:561
+msgid "Keyboard"
+msgstr "Toetsenbord"
+
+#: ../src/plugin.py:572
+msgid "Language"
+msgstr "Taal"
+
+#: ../src/plugin.py:556
+msgid "Mouse"
+msgstr "Muis"
+
+#: ../src/plugin.py:176
+msgid "No, but play video again"
+msgstr "Nee, maar speel video opnieuw"
+
+#: ../src/plugin.py:317
+msgid "Sorry, video is not available!"
+msgstr "Sorry, video is niet beschikbaar!"
+
+#: ../src/plugin.py:448
+msgid "Start"
+msgstr "Start"
+
+#: ../src/plugin.py:177
+msgid "Stop playing this movie?"
+msgstr "Stop afspelen?"
+
+#: ../src/plugin.py:655
+msgid "Web Browser"
+msgstr "Webbrowser"
+
+#: ../src/plugin.py:176
+msgid "Yes"
+msgstr "Ja"
