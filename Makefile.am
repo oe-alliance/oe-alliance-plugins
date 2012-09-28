@@ -1,11 +1,11 @@
-SUBDIRS = AutoBouquets DLNABrowser DLNAServer StreamTV 3GModemManager WebBrowser
+SUBDIRS = AutoBouquets DLNABrowser DLNAServer StreamTV 3GModemManager WebBrowser OpenUitzendingGemist
 
 if VUPLUS
 SUBDIRS += VuplusEvent
 endif
 
 if XTREND
-SUBDIRS += XtrendFancontrol Blindscan XtrendRemote OpenUitzendingGemist
+SUBDIRS += XtrendFancontrol Blindscan XtrendRemote
 endif
 
 if ODIN
