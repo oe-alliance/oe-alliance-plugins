@@ -3,23 +3,71 @@
 
 case "$1" in
     0)
+	echo "Killing wvdial..."
 	kill -INT `ps | grep wvdial | grep -v grep | awk '{print $1}'` & /etc/ppp/ppp-stop
 	;;
     1)
-	modprobe -r usbserial
+	echo "Restore dns..."
+	chattr -i /etc/ppp/resolv.conf
+	chattr -i /etc/resolv.conf
+	cp /etc/resolv.conf.org /etc/resolv.conf
+	cp /etc/ppp/resolv.conf.org /etc/ppp/resolv.conf
+	echo "Restore dns...[DONE]"
+	echo "Removing modules..."
+	modprobe -r pppoe
+	modprobe -r ppp_async
+	modprobe -r ppp_deflate
+	modprobe -r ppp_generic
+	modprobe -r ppp_synctty
+	modprobe -r cdc-acm
+	modprobe -r ppp-mppe
+	modprobe -r bsd-comp
+	modprobe -r slhc
+
+	modprobe -v -r usbserial
+	modprobe -v -r option
+	modprobe -v -r option
 	;;
     2)
-	modprobe usbserial $2 $3
+	echo "Loading modules..."
+	modprobe pppoe
+	modprobe ppp_async
+	modprobe ppp_deflate
+	modprobe ppp_generic
+	modprobe ppp_synctty
+	modprobe cdc-acm
+	modprobe ppp-mppe
+	modprobe bsd-comp
+	modprobe slhc
+
+	modprobe -v -r usbserial
+	modprobe -v -r option
+	modprobe -v option
 	;;
     3)
+	echo "Switch modem to gsm modem mode..."
 	usb_modeswitch -c /usr/share/usb_modeswitch/$2
 	;;
     4)
+	echo "Generating wvdial.conf..."
 	rm -f /etc/wvdial.conf
+	sleep 8
 	wvdialconf
+	
 	;;
     5)
-	wvdial &
+	echo "Copy old resolv.conf"
+	cp /etc/resolv.conf /etc/resolv.conf.org
+	cp /etc/ppp/resolv.conf /etc/ppp/resolv.conf.org
+	echo "Prepare dns..."
+	echo "nameserver 208.67.222.222" > /etc/resolv.conf
+	echo "nameserver 208.67.220.220" >> /etc/resolv.conf
+	cp /etc/resolv.conf /etc/ppp/resolv.conf
+	chattr +i /etc/ppp/resolv.conf
+	chattr +i /etc/resolv.conf
+	echo "Prepare dns...[DONE]"
+	sleep 5
+	wvdial&
 	;;
     *)
 	echo "Usage: $0 {0|1|2|3|4|5}"

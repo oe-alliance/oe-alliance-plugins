@@ -1,4 +1,24 @@
 <apns version="1">
-    <apn carrier="KT-HSDPA" apn="alwayson-r6.ktfwing.com" phone="*99#" />
-    <apn carrier="SKT3G" apn="web.sktelecom.com" phone="*99#" />
+    <apn region="Azerbaijan" carrier="Azercell" apn="internet" user="guest" password="guest" phone="*99#" />
+    <apn region="Russia" carrier="BeeLine" apn="internet.beeline.ru" user="beeline" password="beeline" phone="*99#" />
+    <apn region="Ukraine" carrier="Beeline" apn="internet.beeline.ua" phone="*99#" />
+    <apn region="China" carrier="China Unicom" apn="3gnet" user="card" password="card" phone="*99#" />
+    <apn region="Ukraine" carrier="Djuice" apn="www.djuice.com.ua" phone="*99#" />
+    <apn region="Dubai" carrier="Etisalat" apn="internet.etisalat" phone="*99#" />
+    <apn region="None" carrier="KT-HSDPA" apn="alwayson-r6.ktfwing.com" phone="*99#" />
+    <apn region="Ukraine" carrier="Kyivstar1" apn="www.ab.kyivstar.net" phone="*99#" />
+    <apn region="Ukraine" carrier="Kyivstar2" apn="www.kyivstar.net" phone="*99#" />
+    <apn region="Ukraine" carrier="Lifi" apn="internet" phone="*99#" />
+    <apn region="Morocco" carrier="Maroc Telecom" apn="iam" user="wac" password="1987" phone="*99#" />
+    <apn region="Russia" carrier="Megafon" apn="internet" phone="*99#" />
+    <apn region="Egypt" carrier="Mobinil" apn="mobinilweb" phone="*99#" />
+    <apn region="Russia" carrier="MTS" apn="internet.mts.ru" user="mts" password="mts" phone="*99#" />
+    <apn region="Russia" carrier="NTK" apn="internet.ntc" user="ntc" password="ntc" phone="*99***1#" />
+    <apn region="None" carrier="SKT3G" apn="web.sktelecom.com" phone="*99#" />
+    <apn region="Russia" carrier="Smarts" apn="internet.smarts.ru" phone="*99#" />
+    <apn region="Saudi Arabia" carrier="STC" apn="jawalnet.com.sa" user="guest" password="guest" phone="*99#" />
+    <apn region="3G++" carrier="Tunis" apn="internet.tn" user="" password="" phone="*99#" />
+    <apn region="Ukraine" carrier="Utel" apn="3g.utel.ua" phone="*99#" />
+    <apn region="Egypt" carrier="Vodafone" apn="internet.vodafone.net" phone="*99#" />
+    <apn region="Poland" carrier="T-Mobile PL" apn="internet" user="internet" password="internet" pin="" phone="*99#" />
 </apns>
