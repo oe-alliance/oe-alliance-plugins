@@ -10,6 +10,7 @@ from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
 from Plugins.SystemPlugins.FanControl.InstandbyOn import instandbyon
 import NavigationInstance
+from enigma import eTimer
 
 class ManualFancontrol(Screen,ConfigListScreen):
 	skin = """
@@ -42,11 +43,21 @@ class ManualFancontrol(Screen,ConfigListScreen):
 		self.oldfanoffmode = instandbyon.fanoffmode
 		if instandbyon.fanoffmode is 'ON' :
 			instandbyon.checkStatusLoopStop()
+		self.checkFanTimer = eTimer()
+		self.checkFanTimer.callback.append(self.fan_pwm_error)
+		self.onLayoutFinish.append(self.checkFan)
+
+	def checkFan(self):
+		if not instandbyon.check_fan_pwm():
+			self.checkFanTimer.start(10,True)
+
+	def fan_pwm_error(self):
+		self.session.openWithCallback(self.close, MessageBox, _("Can not open 'fan_pwm'"), MessageBox.TYPE_ERROR)
 
 	def displayCurrentValue(self):
 		currrent_val = self["config"].getCurrent()[0]+" : "+str(self["config"].getCurrent()[1].value)
 		self["current"].setText(_(currrent_val))
-		print currrent_val
+#		print currrent_val
 
 	def selectionChanged(self):
 		if self["config"].getCurrent() == self.pwmEntry:
@@ -91,15 +102,15 @@ class ManualFancontrol(Screen,ConfigListScreen):
 
 	def keySave(self):
 		if instandbyon.fanoffmode is 'OFF' and config.plugins.manualfancontrols.pwmvalue.value == 0:
-			print "<SimpleFancontrol> instandbyon.fanoffmode 'OFF' -> 'ON'"
+#			print "[ManualFancontrol] instandbyon.fanoffmode 'OFF' -> 'ON'"
 			instandbyon.fanoffmode = 'ON'
 			instandbyon.addRecordEventCB()
 			instandbyon.checkStatusLoopStart()
 		elif instandbyon.fanoffmode is 'ON' and config.plugins.manualfancontrols.pwmvalue.value != 0:
-			print "<SimpleFancontrol> instandbyon.fanoffmode 'ON' -> 'OFF'"
+#			print "[ManualFancontrol] instandbyon.fanoffmode 'ON' -> 'OFF'"
 			instandbyon.fanoffmode = 'OFF'
 			instandbyon.removeRecordEventCB()
-#			instandbyon.checkStatusLoopStop() # stopped at init
+#			instandbyon.checkStatusLoopStop() # stoped at init
 		elif self.oldfanoffmode is 'ON' :
 			instandbyon.checkStatusLoopStart()
 		instandbyon.checkStstus()
