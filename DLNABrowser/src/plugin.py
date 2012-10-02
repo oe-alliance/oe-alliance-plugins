@@ -132,7 +132,7 @@ class DLNAFileBrowser(Screen):
 	def __init__(self, session, directory):
 		self.session = session
 		Screen.__init__(self, session)
-		
+
 		self["actions"]  = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"], {
 			"back"  : self.keyCancel,
 			"left"  : self.keyLeft,
@@ -213,23 +213,22 @@ class DLNAFileBrowser(Screen):
 		self["directory"].setText(directory)
 
 	def showMovie(self):
-		from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
 		self.beforeService = self.session.nav.getCurrentlyPlayingServiceReference()
 		path = self["filelist"].getCurrentDirectory() + self["filelist"].getFilename()
-		mp = self.session.open(MediaPlayer)
-		mp.callback = self.cbShowMovie
-		mp.playlist.clear()
-		mp.savePlaylistOnExit = False
-		mp.playlist.addFile(eServiceReference(4097, 0, path))
-		mp.changeEntry(0)
-		mp.switchToPlayList()
-		
+		try:
+			from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
+			mp = self.session.open(MediaPlayer)
+			mp.callback = self.cbShowMovie
+			mp.playlist.clear()
+			mp.savePlaylistOnExit = False
+			mp.playlist.addFile(eServiceReference(4097, 0, path))
+			mp.changeEntry(0)
+			mp.switchToPlayList()
+		except:
+			self.session.openWithCallback(self.cbShowMovie, DLNAStreamPlayer, eServiceReference(4097, 0, path), self.beforeService)
+
 	def showPicture(self):
-		self.session.openWithCallback(self.cbShowPicture, 
-					      DLNAImageViewer, 
-					      self["filelist"].getFileList(), 
-					      self["filelist"].getSelectionIndex(), 
-					      self["filelist"].getCurrentDirectory())
+		self.session.openWithCallback(self.cbShowPicture, DLNAImageViewer, self["filelist"].getFileList(), self["filelist"].getSelectionIndex(), self["filelist"].getCurrentDirectory())
 
 	def showMusic(self):
 		self.showMovie()
@@ -237,10 +236,7 @@ class DLNAFileBrowser(Screen):
 	def showStream(self):
 		path = self["filelist"].getCurrentDirectory() + self["filelist"].getFilename()
 		self.beforeService = self.session.nav.getCurrentlyPlayingServiceReference()
-		self.session.openWithCallback(self.cbShowMovie, 
-					      DLNAStreamPlayer, 
-					      eServiceReference(4097, 0, path), 
-					      self.beforeService)
+		self.session.openWithCallback(self.cbShowMovie, DLNAStreamPlayer, eServiceReference(4097, 0, path), self.beforeService)
 
 	def showUnknown(self):
 		message = "Can't play selected file. It is unknown file extension."
@@ -263,12 +259,12 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 			<widget source="session.CurrentService" render="PositionGauge" position="80,25" size="220,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
 				<convert type="ServicePosition">Gauge</convert>
 			</widget>
-			
+
 			<widget source="session.CurrentService" render="Label" position="310,20" size="50,20" font="Regular;18" halign="center" valign="center" backgroundColor="#4e5a74" transparent="1" >
 				<convert type="ServicePosition">Position</convert>
 			</widget>
 			<widget name="sidebar" position="362,20" size="10,20" font="Regular;18" halign="center" valign="center" backgroundColor="#4e5a74" transparent="1" />
-			<widget source="session.CurrentService" render="Label" position="374,20" size="50,20" font="Regular;18" halign="center" valign="center" backgroundColor="#4e5a74" transparent="1" > 
+			<widget source="session.CurrentService" render="Label" position="374,20" size="50,20" font="Regular;18" halign="center" valign="center" backgroundColor="#4e5a74" transparent="1" >
 				<convert type="ServicePosition">Length</convert>
 			</widget>
 		</screen>
@@ -304,7 +300,7 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 		self.state = self.PLAYER_PLAYING
 		self.lastseekstate = self.PLAYER_PLAYING
 		self.__seekableStatusChanged()
-	
+
 		self.onClose.append(self.__onClose)
 		self.doPlay()
 
@@ -371,7 +367,7 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 	def doPlay(self):
 		if self.state == self.PLAYER_PAUSED:
 			if self.shown:
-				self.__setHideTimer()	
+				self.__setHideTimer()
 		self.state = self.PLAYER_PLAYING
 		self.session.nav.playService(self.service)
 		if self.shown:
@@ -469,8 +465,8 @@ class DLNAImageViewer(Screen):
 
 	def setPictureLoadPara(self):
 		sc = AVSwitch().getFramebufferScale()
-		self.pictureLoad.setPara([self["image"].instance.size().width(), 
-					  self["image"].instance.size().height(), 
+		self.pictureLoad.setPara([self["image"].instance.size().width(),
+					  self["image"].instance.size().height(),
 					  sc[0],
 					  sc[1],
 					  0,
@@ -493,7 +489,7 @@ class DLNAImageViewer(Screen):
 					self.fileList.append(x[0][0])
 				else:	self.directoryCount += 1
 			else:	self.fileList.append(x[4])
-		
+
 		self.currentIndex = self.lsatIndex - self.directoryCount
 		if self.currentIndex < 0:
 			self.currentIndex = 0
@@ -578,7 +574,7 @@ class TaskManager:
 
 	def setStatusCB(self, cbfunc):
 		self.cbSetStatusCB = cbfunc
-		
+
 	def next(self):
 		if self.taskIdx >= len(self.taskList) or self.occurError:
 			print "[DLNAClient Plugin] Info >> can't run task!!"
@@ -616,7 +612,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 			<widget name="config" position="0,50" size="600,200" scrollbarMode="showOnDemand" />
 		</screen>
 		"""
-	def __init__(self, session): 
+	def __init__(self, session):
                 self.session = session
 		Screen.__init__(self, session)
 
@@ -903,6 +899,6 @@ class DLNADeviceBrowser(Screen):
 
 def main(session, **kwargs):
 	session.open(DLNADeviceBrowser)
-                                                           
+
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("DLNA/uPnP Browser"), description="This is dlna/upnp client using djmount.", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
