@@ -606,6 +606,7 @@ class ModemManager(Screen):
 		#self.restartAppTimer.callback.append(self.cbRestartAppTimer)
 		self.commandBin = resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/3GModemManager/3gcommand")
 		self.forceStop = False
+		self.GetIP()
 		
 	def GetIP(self):
 		if self["key_green"].getText() == 'Disconnect':
