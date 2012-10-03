@@ -46,7 +46,7 @@ case "$1" in
 	;;
     3)
 	echo "Switch modem to gsm modem mode..."
-	usb_modeswitch -c /usr/share/usb_modeswitch/$2
+	usb_modeswitch -v$2 -p$3 -c /usr/share/usb_modeswitch/$2:$3
 	;;
     4)
 	echo "Generating wvdial.conf..."

@@ -473,6 +473,7 @@ class ModemManual(Screen):
 		self.close()
 
 	def keyExit(self):
+		system("chattr -i /etc/ppp/resolv.conf;chattr -i /etc/resolv.conf")
 		self.close()
 
 	def setAPNInfo(self, noUpdate=False):
@@ -757,7 +758,7 @@ class ModemManager(Screen):
 			cmd = "%s 2 vendor=0x%s product=0x%s" % (self.commandBin, x.get("Vendor"), x.get("ProdID"))
 			self.taskManager.append(cmd, self.cbStep1PrintAvail, self.cbPrintClose)
 
-			cmd = "%s 3 %s:%s" % (self.commandBin, x.get("Vendor"), x.get("ProdID"))
+			cmd = "%s 3 %s %s" % (self.commandBin, x.get("Vendor"), x.get("ProdID"))
 			
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbPrintClose)
 
