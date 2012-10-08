@@ -7,11 +7,9 @@ from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.StaticText import StaticText
-from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSubsection, ConfigBoolean, ConfigSelection, getConfigListEntry
 from enigma import eServiceReference, eTimer, iPlayableService, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_WRAP, RT_VALIGN_TOP, ePicLoad
 from ServiceReference import ServiceReference
-from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarSeek
+from Screens.InfoBarGenerics import InfoBarSeek, InfoBarNotifications, InfoBarCueSheetSupport
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
@@ -21,11 +19,6 @@ from httplib import HTTPException
 from twisted.web import client
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir
 import socket
-from datetime import date, timedelta
-
-
-config.plugins.OpenUitzendingGemist = ConfigSubsection()
-config.plugins.OpenUitzendingGemist.showpictures = ConfigBoolean(default = True)
 
 
 def wgetUrl(target):
@@ -37,16 +30,16 @@ def wgetUrl(target):
 	}
 	outtxt = Request(target, None, std_headers)
 	try:
-		outtxt = urlopen2(target, timeout = 5).read()
+		outtxt = urlopen2(target).read()
 	except (URLError, HTTPException, socket.error):
 		return ''
 	return outtxt
 
 
-def MPanelEntryComponent(channel, text, png):
+def MPanelEntryComponent(channel, text):
 	res = [ text ]
-	res.append((eListboxPythonMultiContent.TYPE_TEXT, 200, 15, 800, 100, 0, RT_HALIGN_LEFT|RT_WRAP|RT_VALIGN_TOP, text))
-	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 5, 150, 150, png))
+	res.append((eListboxPythonMultiContent.TYPE_TEXT, 10, 12, 800, 100, 0, RT_HALIGN_LEFT|RT_WRAP|RT_VALIGN_TOP, text))
+	#res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 5, 150, 150, png))
 	return res
 
 
@@ -54,15 +47,14 @@ class MPanelList(MenuList):
 	def __init__(self, list, selection = 0, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", 18))
-		self.l.setItemHeight(120)
+		self.l.setItemHeight(100)
 		self.selection = selection
 
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		self.moveToIndex(self.selection)
 
-
-class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
+class UGMediaPlayer(Screen, InfoBarNotifications):
 	STATE_IDLE = 0
 	STATE_PLAYING = 1
 	STATE_PAUSED = 2
@@ -89,20 +81,17 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		</widget>
 		</screen>"""
 
-	def __init__(self, session, service, mediatype):
+	def __init__(self, session, service):
 		Screen.__init__(self, session)
 		self.skinName = "MoviePlayer"
 		InfoBarNotifications.__init__(self)
-		if mediatype == 'rtl':
-			InfoBarSeek.__init__(self)
 		self.session = session
 		self.service = service
 		self.screen_timeout = 3000
-		self.mediatype = mediatype
+		self.nextservice = None
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
 			{
 				iPlayableService.evStart: self.__serviceStarted,
-				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 				iPlayableService.evEOF: self.__evEOF,
 			})
 		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"],
@@ -120,15 +109,6 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.onPlayStateChanged = [ ]
 		self.play()
 		self.onClose.append(self.__onClose)
-
-	def __seekableStatusChanged(self):
-		if self.mediatype != 'rtl':
-			return
-		if not self.isSeekable():
-			self["SeekActions"].setEnabled(False)
-			self.setSeekState(self.STATE_PLAYING)
-		else:
-			self["SeekActions"].setEnabled(True)
 
 	def __onClose(self):
 		self.session.nav.stopService()
@@ -181,7 +161,6 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 
 	def __serviceStarted(self):
 		self.state = self.STATE_PLAYING
-		self.__seekableStatusChanged()
 
 	def handleLeave(self):
 		self.close()
@@ -196,48 +175,219 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 			return
 		self.handleLeave()
 
-class OpenUgConfigureScreen(Screen, ConfigListScreen):
-	def __init__(self, session):
-		self.skin = """
-				<screen position="center,center" size="400,100" title="">
-					<widget name="config" position="10,10"   size="e-20,e-10" scrollbarMode="showOnDemand" />
-				</screen>"""
-		self.session = session
+class UGRTLMediaPlayer(Screen, InfoBarNotifications, InfoBarCueSheetSupport, InfoBarSeek):
+	STATE_IDLE = 0
+	STATE_PLAYING = 1
+	STATE_PAUSED = 2
+	ENABLE_RESUME_SUPPORT = True
+	ALLOW_SUSPEND = True
+	
+	skin = """<screen name="MediaPlayer" flags="wfNoBorder" position="0,380" size="720,160" title="Media player" backgroundColor="transparent">
+		<ePixmap position="0,0" pixmap="skin_default/info-bg_mp.png" zPosition="-1" size="720,160" />
+		<ePixmap position="29,40" pixmap="skin_default/screws_mp.png" size="665,104" alphatest="on" />
+		<ePixmap position="48,70" pixmap="skin_default/icons/mp_buttons.png" size="108,13" alphatest="on" />
+		<ePixmap pixmap="skin_default/icons/icon_event.png" position="207,78" size="15,10" alphatest="on" />
+		<widget source="session.CurrentService" render="Label" position="230,73" size="360,40" font="Regular;20" backgroundColor="#263c59" shadowColor="#1d354c" shadowOffset="-1,-1" transparent="1">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="580,73" size="90,24" font="Regular;20" halign="right" backgroundColor="#4e5a74" transparent="1">
+			<convert type="ServicePosition">Length</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="205,129" size="100,20" font="Regular;18" halign="center" valign="center" backgroundColor="#06224f" shadowColor="#1d354c" shadowOffset="-1,-1" transparent="1">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<widget source="session.CurrentService" render="PositionGauge" position="300,133" size="270,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
+			<convert type="ServicePosition">Gauge</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="576,129" size="100,20" font="Regular;18" halign="center" valign="center" backgroundColor="#06224f" shadowColor="#1d354c" shadowOffset="-1,-1" transparent="1">
+			<convert type="ServicePosition">Remaining</convert>
+		</widget>
+		</screen>"""
+
+	def __init__(self, session, service):
 		Screen.__init__(self, session)
-
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
-
-		self["actions"] = ActionMap(["SetupActions"],
+		self.skinName = "MoviePlayer"
+		InfoBarNotifications.__init__(self)
+		self.session = session
+		self.service = service
+		self.screen_timeout = 5000
+		self.nextservice = None
+		print "evEOF=%d" % iPlayableService.evEOF
+		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
+			{
+				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
+				iPlayableService.evStart: self.__serviceStarted,
+				iPlayableService.evEOF: self.__evEOF,
+			})
+		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"],
 		{
-			"ok": self.keyGo,
-			"cancel": self.keyCancel,
-		}, -2)
-
-		self["config"].list = self.list
-		self.list.append(getConfigListEntry(_("Show pictures"), config.plugins.OpenUitzendingGemist.showpictures))
-		self["config"].l.setList(self.list)
+				"ok": self.ok,
+				"cancel": self.leavePlayer,
+				"stop": self.leavePlayer,
+				"playpauseService": self.playpauseService,
+				"play": self.playpauseService,
+				"pause": self.playpauseService,
+			}, -2)
 		
-		self.onLayoutFinish.append(self.layoutFinished)
+		InfoBarSeek.__init__(self, actionmap = "MediaPlayerSeekActions")
 
-	def layoutFinished(self):
-		self.setTitle(_("Open Uitzending Gemist options"))
+		self.hidetimer = eTimer()
+		self.hidetimer.timeout.get().append(self.ok)
+		self.returning = False
+		
+		self.state = self.STATE_PLAYING
+		self.lastseekstate = self.STATE_PLAYING
+		self.onPlayStateChanged = [ ]
+		self.__seekableStatusChanged()
+		
+		self.play()
+		self.onClose.append(self.__onClose)
 
-	def keyGo(self):
-		for x in self["config"].list:
-			x[1].save()
+	def __onClose(self):
+		self.session.nav.stopService()
+
+	def __evEOF(self):
+		self.handleLeave()
+
+	def __setHideTimer(self):
+		self.hidetimer.start(self.screen_timeout)
+
+	def showInfobar(self):
+		self.show()
+		if self.state == self.STATE_PLAYING:
+			self.__setHideTimer()
+		else:
+			pass
+
+	def hideInfobar(self):
+		self.hide()
+		self.hidetimer.stop()
+
+	def ok(self):
+		if self.shown:
+			self.hideInfobar()
+		else:
+			self.showInfobar()
+
+	def playService(self, newservice):
+		if self.state != self.STATE_IDLE:
+			self.stopCurrent()
+		self.service = newservice
+		self.play()
+
+	def play(self):
+		if self.state == self.STATE_PAUSED:
+			if self.shown:
+				self.__setHideTimer()
+		self.state = self.STATE_PLAYING
+		self.session.nav.playService(self.service)
+		if self.shown:
+			self.__setHideTimer()
+
+	def stopCurrent(self):
+		self.session.nav.stopService()
+		self.state = self.STATE_IDLE
+		
+	def playpauseService(self):
+		print "playpauseService"
+		if self.state == self.STATE_PLAYING:
+			self.pauseService()
+		elif self.state == self.STATE_PAUSED:
+			self.unPauseService()
+			
+	def pauseService(self):
+		print "pauseService"
+		if self.state == self.STATE_PLAYING:
+			self.setSeekState(self.STATE_PAUSED)
+		
+	def unPauseService(self):
+		print "unPauseService"
+		if self.state == self.STATE_PAUSED:
+			self.setSeekState(self.STATE_PLAYING)
+			
+	def getSeek(self):
+		service = self.session.nav.getCurrentService()
+		if service is None:
+			return None
+
+		seek = service.seek()
+
+		if seek is None or not seek.isCurrentlySeekable():
+			return None
+
+		return seek
+		
+	def isSeekable(self):
+		if self.getSeek() is None:
+			return False
+		return True
+		
+	def __seekableStatusChanged(self):
+		print "seekable status changed!"
+		if not self.isSeekable():
+			self.setSeekState(self.STATE_PLAYING)
+		else:
+			print "seekable"
+
+	def __serviceStarted(self):
+		self.state = self.STATE_PLAYING
+		self.__seekableStatusChanged()
+		
+	def setSeekState(self, wantstate):
+		print "setSeekState"
+		if wantstate == self.STATE_PAUSED:
+			print "trying to switch to Pause- state:",self.STATE_PAUSED
+		elif wantstate == self.STATE_PLAYING:
+			print "trying to switch to playing- state:",self.STATE_PLAYING
+		service = self.session.nav.getCurrentService()
+		if service is None:
+			print "No Service found"
+			return False
+		pauseable = service.pause()
+		if pauseable is None:
+			print "not pauseable."
+			self.state = self.STATE_PLAYING
+
+		if pauseable is not None:
+			print "service is pausable"
+			if wantstate == self.STATE_PAUSED:
+				print "WANT TO PAUSE"
+				pauseable.pause()
+				self.state = self.STATE_PAUSED
+				if not self.shown:
+					self.hidetimer.stop()
+					self.show()
+			elif wantstate == self.STATE_PLAYING:
+				print "WANT TO PLAY"
+				pauseable.unpause()
+				self.state = self.STATE_PLAYING
+				if self.shown:
+					self.__setHideTimer()
+
+		for c in self.onPlayStateChanged:
+			c(self.state)
+		
+		return True
+
+	def handleLeave(self):
 		self.close()
 
-	def keyCancel(self):
-		for x in self["config"].list:
-			x[1].cancel()
-		self.close()
+	def leavePlayer(self):
+		self.handleLeave()
+
+	def doEofInternal(self, playing):
+		if not self.execing:
+			return
+		if not playing :
+			return
+		self.handleLeave()
+
 
 class OpenUgSetupScreen(Screen):
 	def __init__(self, session):
 		self.skin = """
-				<screen position="center,center" size="400,320" title="">
-					<widget name="menu" position="10,10"   size="e-20,180" scrollbarMode="showOnDemand" />
+				<screen position="center,center" size="400,300" title="">
+					<widget name="menu" position="10,10"   size="e-20,150" scrollbarMode="showOnDemand" />
 					<widget name="info" position="10,e-125" size="e-20,150" halign="center" font="Regular;22" />
 				</screen>"""
 		self.session = session
@@ -256,7 +406,7 @@ class OpenUgSetupScreen(Screen):
 
 		self.imagedir = '/tmp/openUgImg/'
 
-		self["info"] = Label(_("Open Uitzending Gemist\n\nBrought to you by openViX\n\nBased on Xtrend code"))
+		self["info"] = Label(_("Open Uitzending Gemist\n\nBrought to you by openViX\nLight mod by DEG\nBased on Xtrend code"))
 
 		self.mmenu= []
 		self.mmenu.append((_("UG Recently added"), 'recent'))
@@ -265,7 +415,6 @@ class OpenUgSetupScreen(Screen):
 		self.mmenu.append((_("UG Search"), 'search'))
 		self.mmenu.append((_("RTL XL A-Z"), 'rtl'))
 		self.mmenu.append((_("RTL XL Gemist"), 'rtlback'))
-		self.mmenu.append((_("Setup"), 'setup'))
 		self["menu"] = MenuList(self.mmenu)
 
 		self.onLayoutFinish.append(self.layoutFinished)
@@ -298,8 +447,6 @@ class OpenUgSetupScreen(Screen):
 				self.session.open(OpenUg, selection[1])
 			elif selection[1] == 'rtlback':
 				self.session.open(DaysBackScreen)
-			elif selection[1] == 'setup':
-				self.session.open(OpenUgConfigureScreen)
 
 	def keyCancel(self):
 		self.removeFiles(self.imagedir)
@@ -334,14 +481,8 @@ class DaysBackScreen(Screen):
 
 		self.mmenu= []
 		count = 0
-		now = date.today()
 		while count < 15:
-			if count == 0:
-				self.mmenu.append((_("Today"), count))
-			else:
-				tmp = now.strftime("%A")
-				self.mmenu.append(((tmp), count))
-			now = now - timedelta(1)
+			self.mmenu.append(((_("%d days back") % count), count))
 			count += 1
 		self["menu"] = MenuList(self.mmenu)
 
@@ -365,9 +506,9 @@ class OpenUg(Screen):
 	UG_SHORT_DESCR = 2
 	UG_CHANNELNAME = 3
 	UG_STREAMURL = 4
-	UG_ICON = 5
-	UG_ICONTYPE = 6
-	UG_SERIE = 7
+	#UG_ICON = 7
+	#UG_ICONTYPE = 6
+	UG_SERIE = 5
 	UG_LEVEL_ALL = 0
 	UG_LEVEL_SERIE = 1
 	MAX_PIC_PAGE = 5
@@ -379,15 +520,14 @@ class OpenUg(Screen):
 
 	def __init__(self, session, cmd):
 		self.skin = """
-				<screen position="80,70" size="e-160,e-110" title="">
+				<screen position="80,70" size="820,e-110" title="">
 					<widget name="list" position="0,0" size="e-0,e-0" scrollbarMode="showOnDemand" transparent="1" zPosition="2"/>
-					<widget name="thumbnail" position="0,0" size="150,150" alphatest="on" />
 				</screen>"""
 		self.session = session
 		Screen.__init__(self, session)
 
-		self["thumbnail"] = Pixmap()
-		self["thumbnail"].hide()
+		#self["thumbnail"] = Pixmap()
+		#self["thumbnail"].hide()
 
 		self.cbTimer = eTimer()
 		self.cbTimer.callback.append(self.timerCallback)
@@ -404,14 +544,14 @@ class OpenUg(Screen):
 		self.isRtlBack = False
 		self.level = self.UG_LEVEL_ALL
 
-		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/pli.png"))
+		#self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/pli.png"))
 		
 		self.tmplist = []
 		self.mediaList = []
 
-		self.imagedir = "/tmp/openUgImg/"
-		if (os_path.exists(self.imagedir) != True):
-			os_mkdir(self.imagedir)
+		#self.imagedir = "/tmp/openUgImg/"
+		#if (os_path.exists(self.imagedir) != True):
+		#	os_mkdir(self.imagedir)
 
 		self["list"] = MPanelList(list = self.tmplist, selection = 0)
 		self.updateMenu()
@@ -432,46 +572,45 @@ class OpenUg(Screen):
 	def layoutFinished(self):
 		self.setTitle("Open Uitzending Gemist")
 
-	def updatePage(self):
-		if self.page != self["list"].getSelectedIndex() / self.MAX_PIC_PAGE:
-			self.page = self["list"].getSelectedIndex() / self.MAX_PIC_PAGE
-			self.loadPicPage()
+#	def updatePage(self):
+#		if self.page != self["list"].getSelectedIndex() / self.MAX_PIC_PAGE:
+#			self.page = self["list"].getSelectedIndex() / self.MAX_PIC_PAGE
+#			self.loadPicPage()
 
 	def key_up(self):
 		self["list"].up()
-		self.updatePage()
+		#self.updatePage()
 
 	def key_down(self):
 		self["list"].down()
-		self.updatePage()
+		#self.updatePage()
 
 	def key_left(self):
 		self["list"].pageUp()
-		self.updatePage()
+		#self.updatePage()
 
 	def key_right(self):
 		self["list"].pageDown()
-		self.updatePage()
+		#self.updatePage()
 
 	def updateMenu(self):
 		self.tmplist = []
 		if len(self.mediaList) > 0:
 			pos = 0
 			for x in self.mediaList:
-				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.png))
-				tmp_icon = str(x[self.UG_STREAMURL]) + str(x[self.UG_ICONTYPE])
-				thumbnailFile = self.imagedir + tmp_icon
-				self.pixmaps_to_load.append(tmp_icon)
+				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR])))
+				#tmp_icon = str(x[self.UG_STREAMURL]) + str(x[self.UG_ICONTYPE])
+				#thumbnailFile = self.imagedir + tmp_icon
+				#self.pixmaps_to_load.append(tmp_icon)
 
-				if not self.Details.has_key(tmp_icon):
-					self.Details[tmp_icon] = { 'thumbnail': None}
+				#if not self.Details.has_key(tmp_icon):
+				#	self.Details[tmp_icon] = { 'thumbnail': None}
 
-				if x[self.UG_ICON] != '':
-					if (os_path.exists(thumbnailFile) == True):
-						self.fetchFinished(True, picture_id = tmp_icon, failed = False)
-					else:
-						if config.plugins.OpenUitzendingGemist.showpictures.value:
-							client.downloadPage(x[self.UG_ICON], thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
+				#if x[self.UG_ICON] != '':
+				#	if (os_path.exists(thumbnailFile) == True):
+				#		self.fetchFinished(True, picture_id = tmp_icon, failed = False)
+				#	else:
+				#		client.downloadPage(x[self.UG_ICON], thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
 				pos += 1
 			self["list"].setList(self.tmplist)
 
@@ -589,7 +728,10 @@ class OpenUg(Screen):
 
 	def finish_decode(self, picture_id, info):
 		ptr = self.picloads[picture_id].getData()
-		thumbnailFile = self.imagedir + str(picture_id)
+		if self.isRtl:
+			thumbnailFile = self.imagedir + str(picture_id)
+		else:
+			thumbnailFile = self.imagedir + str(picture_id)
 		if ptr != None:
 			if self.Details.has_key(picture_id):
 				self.Details[picture_id]["thumbnail"] = ptr
@@ -597,11 +739,7 @@ class OpenUg(Screen):
 		self.tmplist = []
 		pos = 0
 		for x in self.mediaList:
-			if self.Details[(x[self.UG_STREAMURL] + str(x[self.UG_ICONTYPE]))]["thumbnail"] is not None:
-				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.Details[(x[self.UG_STREAMURL] + str(x[self.UG_ICONTYPE]))]["thumbnail"]))
-			else:
-				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.png))
-
+			self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR])))
 			pos += 1
 		self["list"].setList(self.tmplist)
 
@@ -622,7 +760,7 @@ class OpenUg(Screen):
 				if tmp != '':
 					myreference = eServiceReference(4097, 0, tmp)
 					myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
-					self.session.open(UGMediaPlayer, myreference, 'rtl')
+					self.session.open(UGRTLMediaPlayer, myreference)
 
 		else:
 			if self.level == self.UG_LEVEL_ALL:
@@ -645,7 +783,7 @@ class OpenUg(Screen):
 		tmp = tmp[0].replace('\/', '/')
 		myreference = eServiceReference(4097, 0, tmp)
 		myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
-		self.session.open(UGMediaPlayer, myreference, 'npo')
+		self.session.open(UGMediaPlayer, myreference)
 
 	def getRTLStream(self, url):
 		data = wgetUrl(self.RTL_BASE_URL + url)
@@ -682,9 +820,9 @@ class OpenUg(Screen):
 					tmp = "<a href=\""
 					stream = line.split(tmp)[1].split('\">')[0]
 
-				tmp = "<img class=\"thumbnail\" src=\""
-				if tmp in line:
-					icon = 'http://rtl.ksya.net/' + line.split(tmp)[1].split('\" ')[0]
+				#tmp = "<img class=\"thumbnail\" src=\""
+				#if tmp in line:
+				#	icon = 'http://rtl.ksya.net/' + line.split(tmp)[1].split('\" ')[0]
 
 				tmp = "<span class=\"title\">"
 				if tmp in line:
@@ -705,8 +843,8 @@ class OpenUg(Screen):
 				tmp = "<br />"
 				date = line.split(tmp)[0].lstrip()
 
-				icon_type = self.getIconType(icon)
-				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
+				#icon_type = self.getIconType(icon)
+				weekList.append((date, name, short, channel, stream, False))
 				state = 0
 
 	def getRTLMediaData(self, weekList):
@@ -730,22 +868,15 @@ class OpenUg(Screen):
 				if tmp in line:
 					stream = line.split(tmp)[1].split('\">')[0]
 
-				tmp = "<img class=\"thumbnail\" src=\""
-				if tmp in line:
-					icon = self.RTL_BASE_URL + line.split(tmp)[1].split('\" ')[0]
+				#tmp = "<img class=\"thumbnail\" src=\""
+				#if tmp in line:
+				#	icon = self.RTL_BASE_URL + line.split(tmp)[1].split('\" ')[0]
 
 				tmp = "<span class=\"title\">"
 				if tmp in line:
 					name = line.split(tmp)[1].split("</span>")[0]
-					icon_type = self.getIconType(icon)
-
-					ignore = False
-					for x in weekList:
-						if stream == x[self.UG_STREAMURL] and icon == x[self.UG_ICON]:
-							ignore = True
-							break
-					if ignore is False:
-						weekList.append((date, name, short, channel, stream, icon, icon_type, True))
+					#icon_type = self.getIconType(icon)
+					weekList.append((date, name, short, channel, stream, True))
 					state = 0
 
 	def getRTLMediaDataBack(self, weekList, days):
@@ -769,9 +900,9 @@ class OpenUg(Screen):
 					tmp = "<a href=\""
 					stream = line.split(tmp)[1].split('\">')[0]
 
-				tmp = "<img class=\"thumbnail\" src=\""
-				if tmp in line:
-					icon = line.split(tmp)[1].split('\" ')[0]
+				#tmp = "<img class=\"thumbnail\" src=\""
+				#if tmp in line:
+				#	icon = line.split(tmp)[1].split('\" ')[0]
 
 				tmp = "<span class=\"title\">"
 				if tmp in line:
@@ -788,8 +919,8 @@ class OpenUg(Screen):
 
 			elif state == 4:
 				date = ''
-				icon_type = self.getIconType(icon)
-				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
+				#icon_type = self.getIconType(icon)
+				weekList.append((date, name, short, channel, stream, False))
 				state = 0
 
 	def getMediaData(self, weekList, url):
@@ -834,17 +965,17 @@ class OpenUg(Screen):
 					date = tmp[1].split("</div>")[0]
 					channel = date[-3:]
 
-				tmp = "<img class='thumbnail' src='"
-				if tmp in line:
-					tmp = line.split(tmp)
-					icon = tmp[1].split("\'/>")[0]
-					if "http://" not in icon:
-						icon_tmp = self.UG_BASE_URL
-						icon =  icon_tmp + icon
+				#tmp = "<img class='thumbnail' src='"
+				#if tmp in line:
+				#	tmp = line.split(tmp)
+				#	icon = tmp[1].split("\'/>")[0]
+				#	if "http://" not in icon:
+				#		icon_tmp = self.UG_BASE_URL
+				#		icon =  icon_tmp + icon
 
-				if "</div>" in line[:6] and date and name and short and icon:
-					icon_type = self.getIconType(icon)
-					weekList.append((date, name, short, channel, stream, icon, icon_type, False))
+				if "</div>" in line[:6] and date and name and short:
+					#icon_type = self.getIconType(icon)
+					weekList.append((date, name, short, channel, stream, False))
 					state = 0
 
 	def getMediaDataAlph(self, weekList, url):
@@ -886,14 +1017,14 @@ class OpenUg(Screen):
 					stream = tmp[1].split("\"")[0]
 
 				if serieid == '':
-					tmp = "<img class='thumbnail' src='"
-					if tmp in line:
-						tmp = line.split(tmp)
-						icon = tmp[1].split('\'/>')[0]
-						tmp = "http://"
-						if tmp not in icon:
-							icon_tmp = self.UG_BASE_URL
-							icon =  icon_tmp + icon
+					#tmp = "<img class='thumbnail' src='"
+					#if tmp in line:
+					#	tmp = line.split(tmp)
+					#	icon = tmp[1].split('\'/>')[0]
+					#	tmp = "http://"
+					#	if tmp not in icon:
+					#		icon_tmp = self.UG_BASE_URL
+					#		icon =  icon_tmp + icon
 
 					tmp = "<div class='datum'>"
 					if tmp in line and date == '':
@@ -906,45 +1037,56 @@ class OpenUg(Screen):
 						tmp = line.split(tmp)
 						short = tmp[1].split("</div>")[0]
 				else:
-					tmp = "<div class='thumbHolder'>"
-					if tmp in line:
-						tmp = "url(\""
+					tmp = "<div class='datum'>"
+					if tmp in line and date == '':
 						tmp = line.split(tmp)
-						icon = tmp[1].split("\"")[0]
-						if "http://" not in icon:
-							icon_tmp = self.UG_BASE_URL
-							icon =  icon_tmp + icon
+						date = tmp[1].split("</div>")[0]
+						channel = date[-3:]
+
+					tmp = "<div class='short'>"
+					if tmp in line:
+						tmp = line.split(tmp)
+						short = tmp[1].split("</div>")[0]
+					
+					#tmp = "<div class='thumbHolder'>"
+					#if tmp in line:
+					#	tmp = "url(\""
+					#	tmp = line.split(tmp)
+					#	icon = tmp[1].split("\"")[0]
+					#	if "http://" not in icon:
+					#		icon_tmp = self.UG_BASE_URL
+					#		icon =  icon_tmp + icon
 
 				isdone = False
 				if serieid == '':
-					if name and stream and icon and date:
+					if name and stream and date:
 						isdone = True
 				else:
-					if name and serieid and icon:
+					if name and serieid:
 						isdone = True
 				if isdone:
 					if serieid != '':
-						icon_type = self.getIconType(icon)
-						weekList.append((date, name, short, channel, serieid, icon, icon_type, True))
+						#icon_type = self.getIconType(icon)
+						weekList.append((date, name, short, channel, serieid, True))
 					else:
-						icon_type = self.getIconType(icon)
-						weekList.append((date, name, short, channel, stream, icon, icon_type, False))
+						#icon_type = self.getIconType(icon)
+						weekList.append((date, name, short, channel, stream, False))
 					state = 0
 
-	def getIconType(self, data):
-		tmp = ".png"
-		if tmp in data:
-			return tmp
-		tmp = ".gif"
-		if tmp in data:
-			return tmp
-		tmp = ".jpg"
-		if tmp in data:
-			return tmp
-		return ""
+#	def getIconType(self, data):
+#		tmp = ".png"
+#		if tmp in data:
+#			return tmp
+#		tmp = ".gif"
+#		if tmp in data:
+#			return tmp
+#		tmp = ".jpg"
+#		if tmp in data:
+#			return tmp
+#		return ""
 
 def main(session, **kwargs):
 	session.open(OpenUgSetupScreen)
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]
+	return [PluginDescriptor(name = "Open uitzending gemist Light", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]
