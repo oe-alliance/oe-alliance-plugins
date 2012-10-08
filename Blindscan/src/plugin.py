@@ -847,11 +847,6 @@ class Blindscan(ConfigListScreen, Screen):
 		print "SatBandCheck band = %s" % (band)
 		return band
 
-
-def Plugins(path, **kwargs):
-	plist = [PluginDescriptor(name=_("Blind Scan"), where=PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=BlindscanSetup)]
-	return plist
-
 def main(session, **kwargs):
 	session.open(Blindscan)
 
