@@ -50,7 +50,7 @@ class instandbyOn:
 
 	def checkStstus(self):
 		from Screens.Standby import inStandby
-		print "[ManualFancontrol] checkStstus, fanoffmode : %s, "%self.fanoffmode,"inStandby : ",inStandby and True or False
+# 		print "[ManualFancontrol] checkStstus, fanoffmode : %s, "%self.fanoffmode,"inStandby : ",inStandby and True or False
 		if self.fanoffmode is 'ON' : # pwmvalue is '0'
 			if self.isRecording() or self.isHDDActive():
 				self.setPWM(self.minimum_pwm)
@@ -98,7 +98,7 @@ class instandbyOn:
 
 	def isRecording(self):
 		recordings = NavigationInstance.instance.getRecordings()
-		print "<ManualFancontrol_> recordings : ",len(recordings)
+# 		print "<ManualFancontrol_> recordings : ",len(recordings)
 		if recordings :
 			return True
 		else:
@@ -107,9 +107,9 @@ class instandbyOn:
 	def isHDDActive(self): # remake certainly
 		for hdd in harddiskmanager.HDDList():
 			if not hdd[1].isSleeping():
-				print "<ManualFancontrol_> %s is not Sleeping"%hdd[0]
+# 				print "<ManualFancontrol_> %s is not Sleeping"%hdd[0]
 				return True
-		print "<ManualFancontrol_> All HDDs are Sleeping"
+# 		print "<ManualFancontrol_> All HDDs are Sleeping"
 		return False
 
 	def getPWM(self):
@@ -117,10 +117,10 @@ class instandbyOn:
 			f = open("/proc/stb/fp/fan_pwm", "r")
 			value = int(f.readline().strip(), 16)
 			f.close()
-			print "[ManualFancontrol] getPWM : %d "%value
+# 			print "[ManualFancontrol] getPWM : %d "%value
 			return value
 		except:
-			print "[ManualFancontrol] /proc/stb/fp/fan_pwm is not exist"
+# 			print "[ManualFancontrol] /proc/stb/fp/fan_pwm is not exist"
 			return None
 
 	def setPWM(self, value):
@@ -128,9 +128,9 @@ class instandbyOn:
 			f = open("/proc/stb/fp/fan_pwm", "w")
 			f.write("%x" % value)
 			f.close()
-			print "[ManualFancontrol] setPWM to : %d"%value
+# 			print "[ManualFancontrol] setPWM to : %d"%value
 		except:
-			print "[ManualFancontrol] /proc/stb/fp/fan_pwm is not exist"
+# 			print "[ManualFancontrol] /proc/stb/fp/fan_pwm is not exist"
 
 	def check_fan_pwm(self):
 		from os import access, F_OK
