@@ -130,7 +130,7 @@ class instandbyOn:
 			f.close()
 # 			print "[ManualFancontrol] setPWM to : %d"%value
 		except:
-# 			print "[ManualFancontrol] /proc/stb/fp/fan_pwm is not exist"
+			print "[ManualFancontrol] /proc/stb/fp/fan_pwm is not exist"
 
 	def check_fan_pwm(self):
 		from os import access, F_OK
