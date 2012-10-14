@@ -1,4 +1,4 @@
-#  ET-View RCSetup version 1.3
+#  ET-View RCSetup version 1.4
 #  Remote Controller Setup (RCSetup)
 # -*- coding: utf-8 -*-
 # for localized messages
@@ -9,7 +9,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigSlider, getConfigListEntry
 from os import path as os_path, chmod as os_chmod, unlink as os_unlink, system as os_system
 
-modelist = {"5": _("ET9000/ET9100"), "4": _("DMM/DMM ADV"), "7": _("ET5000/ET6000"), "9": _("ET6500/ET9500"), "11": _("ET9200/ET9500"), "13": _("ET4000") }
+modelist = {"3": _("OdinM9/MaraM9"), "5": _("ET9000/ET9100"), "4": _("DMM/DMM ADV"), "6": _("DMM/DMM ADV"), "7": _("ET5000/ET6000"), "8": _("Vu"), "9": _("ET6500/ET9500"), "11": _("ET9200/ET9500"), "13": _("ET4000"), "14": _("XP1000") }
 
 config.plugins.RCSetup = ConfigSubsection()
 from os import system as os_system
@@ -17,18 +17,26 @@ file = open("/proc/stb/ir/rc/type", "r")
 text=file.read()
 file.close()
 temp = int(text)
+if temp == 14:
+	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "14")
 if temp == 13:
 	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "13")
 elif temp == 11:
 	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "11")
 elif temp == 9:
 	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "9")
+elif temp == 8:
+	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "8")	
 elif temp == 7:
 	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "7")
+elif temp == 6:
+	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "6")	
 elif temp == 5:
 	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "5")
 elif temp == 4:
 	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "4")
+elif temp == 3:
+	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "3")	
 
 class RCSetupScreen(Screen, ConfigListScreen):
 	skin = """
@@ -98,18 +106,26 @@ class RCSetupScreen(Screen, ConfigListScreen):
 
 	def installHelper(self):
 		tmp = int(config.plugins.RCSetup.mode.value)
+		if tmp == 3:
+			self.removeFile()
 		if tmp == 5:
 			self.removeFile()
 		elif tmp == 4:
 			self.createFile()
+		elif tmp == 6:
+			self.createFile()			
 		elif tmp == 7:
 			self.createFile()
+		elif tmp == 8:
+			self.createFile()	
 		elif tmp == 9:
 			self.createFile()	
 		elif tmp == 11:
 			self.createFile()
 		elif tmp == 13:
-			self.createFile()	
+			self.createFile()
+		elif tmp == 14:
+			self.createFile()			
 
 	def createFile(self):
 		file = open("/etc/rc3.d/S30rcsetup", "w")
