@@ -473,7 +473,7 @@ class ModemManual(Screen):
 		self.close()
 
 	def keyExit(self):
-		system("chattr -i /etc/ppp/resolv.conf;chattr -i /etc/resolv.conf")
+		os.system("chattr -i /etc/ppp/resolv.conf;chattr -i /etc/resolv.conf")
 		self.close()
 
 	def setAPNInfo(self, noUpdate=False):
