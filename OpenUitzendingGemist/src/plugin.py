@@ -13,6 +13,7 @@ from enigma import eServiceReference, eTimer, iPlayableService, eListboxPythonMu
 from ServiceReference import ServiceReference
 from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarSeek
 from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Screens.MessageBox import MessageBox
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -196,6 +197,12 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 			return
 		self.handleLeave()
 
+	def lockShow(self):
+		return
+
+	def unlockShow(self):
+		return
+
 class OpenUgConfigureScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
 		self.skin = """
@@ -256,7 +263,7 @@ class OpenUgSetupScreen(Screen):
 
 		self.imagedir = '/tmp/openUgImg/'
 
-		self["info"] = Label(_("Open Uitzending Gemist\n\nBrought to you by openVIx\n\nBased on Xtrend code"))
+		self["info"] = Label(_("Open Uitzending Gemist\n\nBrought to you by openViX\n\nBased on Xtrend code"))
 
 		self.mmenu= []
 		self.mmenu.append((_("UG Recently added"), 'recent'))
@@ -339,8 +346,7 @@ class DaysBackScreen(Screen):
 			if count == 0:
 				self.mmenu.append((_("Today"), count))
 			else:
-				tmp = now.strftime("%A")
-				self.mmenu.append(((tmp), count))
+				self.mmenu.append(((now.strftime("%A")), count))
 			now = now - timedelta(1)
 			count += 1
 		self["menu"] = MenuList(self.mmenu)
@@ -371,6 +377,9 @@ class OpenUg(Screen):
 	UG_LEVEL_ALL = 0
 	UG_LEVEL_SERIE = 1
 	MAX_PIC_PAGE = 5
+
+	TIMER_CMD_START = 0
+	TIMER_CMD_VKEY = 1
 
 	UG_BASE_URL = "http://hbbtv.distributie.publiekeomroep.nl"
 	HBBTV_UG_BASE_URL = UG_BASE_URL + "/ug/ajax/action/"
@@ -403,8 +412,10 @@ class OpenUg(Screen):
 		self.isRtl = False
 		self.isRtlBack = False
 		self.level = self.UG_LEVEL_ALL
+		self.cmd = cmd
+		self.timerCmd = self.TIMER_CMD_START
 
-		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/pli.png"))
+		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/vix.png"))
 		
 		self.tmplist = []
 		self.mediaList = []
@@ -426,8 +437,7 @@ class OpenUg(Screen):
 		}
 		, -1)
 		self.onLayoutFinish.append(self.layoutFinished)
-
-		self.setupCallback(cmd)
+		self.cbTimer.start(10)
 
 	def layoutFinished(self):
 		self.setTitle("Open Uitzending Gemist")
@@ -511,11 +521,15 @@ class OpenUg(Screen):
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "archive_week/protocol/html")
+			if len(self.mediaList) == 0:
+				self.mediaProblemPopup()
 			self.updateMenu()
 		elif retval == 'pop':
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/popular/protocol/html")
+			if len(self.mediaList) == 0:
+				self.mediaProblemPopup()
 			self.updateMenu()
 		elif retval == 'atotz':
 			self.clearList()
@@ -525,26 +539,38 @@ class OpenUg(Screen):
 			self.getMediaDataAlph(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/1/protocol/html")
 			self.getMediaDataAlph(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/2/protocol/html")
 			self.getMediaDataAlph(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/3/protocol/html")
+			if len(self.mediaList) == 0:
+				self.mediaProblemPopup()
 			self.updateMenu()
 		elif retval == 'search':
+			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
 		elif retval == 'rtl':
 			self.clearList()
 			self.isRtl = True
 			self.level = self.UG_LEVEL_ALL
 			self.getRTLMediaData(self.mediaList)
-			self.updateMenu()
+			if len(self.mediaList) == 0:
+				self.mediaProblemPopup()
+			else:
+				self.updateMenu()
 		else:
 			self.clearList()
 			self.isRtl = True
 			self.isRtlBack = True
 			self.level = self.UG_LEVEL_SERIE
 			self.getRTLMediaDataBack(self.mediaList, retval)
-			self.updateMenu()
+			if len(self.mediaList) == 0:
+				self.mediaProblemPopup()
+			else:
+				self.updateMenu()
 
 	def timerCallback(self):
 		self.cbTimer.stop()
-		self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title = (_("Search term")), text = "")
+		if self.timerCmd == self.TIMER_CMD_START:
+			self.setupCallback(self.cmd)
+		elif self.timerCmd == self.TIMER_CMD_VKEY:
+			self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title = (_("Search term")), text = "")
 
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
@@ -553,8 +579,13 @@ class OpenUg(Screen):
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/search/protocol/html/searchString/" + callback)
 			self.updateMenu()
+			if len(self.mediaList) == 0:
+				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
 		else:
 			self.close()
+
+	def mediaProblemPopup(self):
+		self.session.openWithCallback(self.close, MessageBox, _("There was a problem retrieving the media list"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
 
 	def fetchFailed(self, string, picture_id):
 		self.fetchFinished(False, picture_id, failed = True)
@@ -640,10 +671,7 @@ class OpenUg(Screen):
 
 	def doUGPlay(self):
 		out = wgetUrl(self.STAGING_UG_BASE_URL + "streams/video/pr_id/" + self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
-		tmp = out.split('stream_link":"')
-		tmp = tmp[1].split('\",')
-		tmp = tmp[0].replace('\/', '/')
-		myreference = eServiceReference(4097, 0, tmp)
+		myreference = eServiceReference(4097, 0, out.split('stream_link":"')[1].split('\",')[0].replace('\/', '/'))
 		myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
 		self.session.open(UGMediaPlayer, myreference, 'npo')
 
@@ -655,8 +683,7 @@ class OpenUg(Screen):
 		name = ''
 		icon = ''
 		for line in data:
-			tmp = ".mp4"
-			if tmp in line:
+			if ".mp4" in line:
 				tmp = "<a href=\""
 				if tmp in line:
 					url = line.split(tmp)[1].split("\">")[0]
@@ -684,7 +711,7 @@ class OpenUg(Screen):
 
 				tmp = "<img class=\"thumbnail\" src=\""
 				if tmp in line:
-					icon = 'http://rtl.ksya.net/' + line.split(tmp)[1].split('\" ')[0]
+					icon = line.split(tmp)[1].split('\" ')[0]
 
 				tmp = "<span class=\"title\">"
 				if tmp in line:
@@ -692,18 +719,17 @@ class OpenUg(Screen):
 					state = 2
 
 			elif state == 2:
-				tmp = "<br />"
-				short = line.split(tmp)[0].lstrip()
+				if '<span class=\"extra_info\">' in line:
+					continue
+				short = line.split("<br />")[0].lstrip()
 				state = 3
 
 			elif state == 3:
-				tmp = "<br />"
-				channel = line.split(tmp)[0].lstrip()
+				channel = line.split("<br />")[0].lstrip()
 				state = 4
 
 			elif state == 4:
-				tmp = "<br />"
-				date = line.split(tmp)[0].lstrip()
+				date = line.split("<br />")[0].lstrip()
 
 				icon_type = self.getIconType(icon)
 				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
@@ -722,17 +748,12 @@ class OpenUg(Screen):
 		channel = ''
 		for line in data:
 			if state == 0:
-				tmp = "<li>"
-				if tmp in line:
+				if "<li>" in line:
 					state = 1
 			elif state == 1:
 				tmp = "<a href=\""
 				if tmp in line:
 					stream = line.split(tmp)[1].split('\">')[0]
-
-				tmp = "<img class=\"thumbnail\" src=\""
-				if tmp in line:
-					icon = self.RTL_BASE_URL + line.split(tmp)[1].split('\" ')[0]
 
 				tmp = "<span class=\"title\">"
 				if tmp in line:
@@ -760,14 +781,11 @@ class OpenUg(Screen):
 		date = ''
 		channel = ''
 		for line in data:
-			tmp = "<li>"
-			if tmp in line:
+			if "<li>" in line:
 				state = 1
 			if state == 1:
-				tmp = "<a href=\"episode"
-				if tmp in line:
-					tmp = "<a href=\""
-					stream = line.split(tmp)[1].split('\">')[0]
+				if "<a href=\"episode" in line:
+					stream = line.split("<a href=\"")[1].split('\">')[0]
 
 				tmp = "<img class=\"thumbnail\" src=\""
 				if tmp in line:
@@ -815,29 +833,24 @@ class OpenUg(Screen):
 			elif state == 1:
 				tmp = "<div class=\"programDetails\" id=\""
 				if  tmp in line:
-					tmp = line.split(tmp)
-					stream = tmp[1].split('\">')[0]
+					stream = line.split(tmp)[1].split('\">')[0]
 
 				tmp = "<h3>"
 				if tmp in line:
-					tmp = line.split(tmp)
-					name = tmp[1].split("</h3>")[0]
+					name = line.split(tmp)[1].split("</h3>")[0]
 
 				tmp = "<div class='short'>"
 				if tmp in line:
-					tmp = line.split(tmp)
-					short = tmp[1].split("</div>")[0]
+					short = line.split(tmp)[1].split("</div>")[0]
 
 				tmp = "<div class='datum'>"
 				if tmp in line and date == '':
-					tmp = line.split(tmp)
-					date = tmp[1].split("</div>")[0]
+					date = line.split(tmp)[1].split("</div>")[0]
 					channel = date[-3:]
 
 				tmp = "<img class='thumbnail' src='"
 				if tmp in line:
-					tmp = line.split(tmp)
-					icon = tmp[1].split("\'/>")[0]
+					icon = line.split(tmp)[1].split("\'/>")[0]
 					if "http://" not in icon:
 						icon_tmp = self.UG_BASE_URL
 						icon =  icon_tmp + icon
@@ -859,8 +872,7 @@ class OpenUg(Screen):
 		serieid = ''
 		data = data.split('\n')
 		for line in data:
-			tmp = "<div class=\"menuItem"
-			if tmp in line:
+			if "<div class=\"menuItem" in line:
 				serieid = ''
 				short = ''
 				name = ''
@@ -868,49 +880,39 @@ class OpenUg(Screen):
 				stream = ''
 				channel = ''
 				icon = ''
-				tmp = "id="
-				if tmp in line:
-					tmp = line.split("id=\"")
-					serieid = tmp[1].split('\"')[0]
+				if "id=" in line:
+					serieid = line.split("id=\"")[1].split('\"')[0]
 				state = 1
 
 			if state == 1:
 				tmp = "<h3>"
 				if tmp in line and name == '':
-					tmp = line.split(tmp)
-					name = tmp[1].split("</h3>")[0]
+					name = line.split(tmp)[1].split("</h3>")[0]
 
 				tmp = "<div class=\"programDetails\" id=\""
 				if tmp in line and stream == '':
-					tmp = line.split(tmp)
-					stream = tmp[1].split("\"")[0]
+					stream = line.split(tmp)[1].split("\"")[0]
 
 				if serieid == '':
 					tmp = "<img class='thumbnail' src='"
 					if tmp in line:
-						tmp = line.split(tmp)
-						icon = tmp[1].split('\'/>')[0]
-						tmp = "http://"
-						if tmp not in icon:
+						icon = line.split(tmp)[1].split('\'/>')[0]
+						if "http://" not in icon:
 							icon_tmp = self.UG_BASE_URL
 							icon =  icon_tmp + icon
 
 					tmp = "<div class='datum'>"
 					if tmp in line and date == '':
-						tmp = line.split(tmp)
-						date = tmp[1].split("</div>")[0]
+						date = line.split(tmp)[1].split("</div>")[0]
 						channel = date[-3:]
 
 					tmp = "<div class='short'>"
 					if tmp in line:
-						tmp = line.split(tmp)
-						short = tmp[1].split("</div>")[0]
+						short = line.split(tmp)[1].split("</div>")[0]
 				else:
 					tmp = "<div class='thumbHolder'>"
 					if tmp in line:
-						tmp = "url(\""
-						tmp = line.split(tmp)
-						icon = tmp[1].split("\"")[0]
+						icon = line.split("url(\"")[1].split("\"")[0]
 						if "http://" not in icon:
 							icon_tmp = self.UG_BASE_URL
 							icon =  icon_tmp + icon
