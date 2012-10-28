@@ -28,7 +28,7 @@ if VUDUO
 SUBDIRS += VuDuoFanControl
 endif
 
-if TMTWIN
+if TECHNOMATE
 SUBDIRS += TmTwinFanControl
 endif
 
