@@ -137,6 +137,11 @@ TmTwinFanControl/src/Makefile
 TmTwinFanControl/meta/Makefile
 TmTwinFanControl/po/Makefile
 
+TunerServer/Makefile
+TunerServer/src/Makefile
+TunerServer/meta/Makefile
+TunerServer/po/Makefile
+
 OpenUitzendingGemist/Makefile
 OpenUitzendingGemist/src/Makefile
 OpenUitzendingGemist/meta/Makefile
