@@ -152,7 +152,6 @@ class ParserHandler(handler.ContentHandler):
 		return self.nodeList
 
 class EditModemManual(ConfigListScreen, Screen):
-	param = int(getDesktop(0).size().height()) >= 720 and (450,360) or (160,300)
 	skin = 	"""
 		<screen position="center,center" size="600,360" title="3G Modem Manager Config Edit">
 			<widget name="config" zPosition="2" position="0,0" size="600,300" scrollbarMode="showOnDemand" transparent="1" />
@@ -167,10 +166,10 @@ class EditModemManual(ConfigListScreen, Screen):
 			<widget source="key_blue" render="Label" position="455,320" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#18188b"  foregroundColor="#ffffff" transparent="1" />
 
 			<widget name="VKeyIcon" pixmap="skin_default/buttons/key_text.png" position="50,200" zPosition="10" size="35,25" transparent="1" alphatest="on" />
-			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="%d,%d" zPosition="1" size="1,1" transparent="1" alphatest="on" />
+			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,300" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 		</screen>
-		""" % param
-
+		""" 
+		
 	def __init__(self, session, cbFuncClose, uid=None, pwd=None, pin=None, apn=None, phone='*99#', isAdd=False):
 		Screen.__init__(self, session)
 		self.cbFuncClose, self.isAdd = cbFuncClose, isAdd
