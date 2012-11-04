@@ -1,4 +1,4 @@
-installdir = $(libdir)/enigma2/python/Plugins/Extentions/TunerServer
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/TunerServer
 
 install_PYTHON = *.py
 
