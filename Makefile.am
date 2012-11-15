@@ -8,7 +8,7 @@ if XTREND
 SUBDIRS += XtrendFancontrol Blindscan XtrendRemote
 endif
 
-if ODIN
+if MARA
 SUBDIRS += XtrendFancontrol Blindscan
 endif
 
@@ -34,5 +34,9 @@ endif
 
 if GIGABLUE
 SUBDIRS += GigaBlueVFDControl
+endif
+
+if XP1000
+SUBDIRS += XtrendRemote
 endif
 
