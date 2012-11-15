@@ -48,6 +48,7 @@ AM_CONDITIONAL(ET9X00, test "$BOXTYPE" == et9x00)
 AM_CONDITIONAL(MARAM9, test "$BOXTYPE" == maram9)
 AM_CONDITIONAL(TMTWIN, test "$BOXTYPE" == tmtwin)
 AM_CONDITIONAL(TM2T, test "$BOXTYPE" == tm2t)
+AM_CONDITIONAL(TMSINGLE, test "$BOXTYPE" == tmsingle)
 AM_CONDITIONAL(GB800SOLO, test "$BOXTYPE" == gb800solo)
 AM_CONDITIONAL(GB800SE, test "$BOXTYPE" == gb800se)
 AM_CONDITIONAL(GB800UE, test "$BOXTYPE" == gb800ue)
@@ -55,6 +56,9 @@ AM_CONDITIONAL(GBQUAD, test "$BOXTYPE" == gbquad)
 AM_CONDITIONAL(VENTONHDX, test "$BOXTYPE" == ventonhdx)
 AM_CONDITIONAL(VENTONHDE, test "$BOXTYPE" == ventonhde)
 AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
+if test `echo "$BOXTYPE" | cut -b 1-2` == "dm"; then
+	AC_DEFINE(DREAMBOX, 1, [Dreambox hardware])
+fi
 
 PKG_CHECK_MODULES(ENIGMA2, enigma2)
 PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
