@@ -974,7 +974,7 @@ class ModemManager(Screen):
 
 	def getUSBList(self):
 		kernel_ver = about.getKernelVersionString()
-		if kernel_ver == "3.60.0":
+		if kernel_ver == "3.6.0":
 		  cmd = "/usr/bin/usb-devices"
 		else:
 		  cmd = "cat /proc/bus/usb/devices"
