@@ -13,6 +13,7 @@ from Components.MenuList import MenuList
 from Components.config import config, getConfigListEntry, ConfigInteger, ConfigSubsection, ConfigSelection, ConfigText, ConfigYesNo, NoSave, ConfigNothing
 from Components.ConfigList import ConfigListScreen
 from Components.Pixmap import Pixmap
+from Components.About import about
 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN
 
@@ -972,8 +973,14 @@ class ModemManager(Screen):
 		return lv_usb_items
 
 	def getUSBList(self):
+		kernel_ver = about.getKernelVersionString()
+		if kernel_ver == "3.60.0":
+		  cmd = "/usr/bin/usb-devices"
+		else:
+		  cmd = "cat /proc/bus/usb/devices"
+		  
 		parsed_usb_list = []
-		usb_devices = os.popen('cat /proc/bus/usb/devices').read()
+		usb_devices = os.popen(cmd).read()
 		tmp_device = {}
 		for x in usb_devices.splitlines():
 			if x is None or len(x) == 0:
