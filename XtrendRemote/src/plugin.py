@@ -19,7 +19,7 @@ file.close()
 temp = int(text)
 if temp == 14:
 	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "14")
-if temp == 13:
+elif temp == 13:
 	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "13")
 elif temp == 11:
 	config.plugins.RCSetup.mode = ConfigSelection(choices = modelist, default = "11")
@@ -108,7 +108,7 @@ class RCSetupScreen(Screen, ConfigListScreen):
 		tmp = int(config.plugins.RCSetup.mode.value)
 		if tmp == 3:
 			self.removeFile()
-		if tmp == 5:
+		elif tmp == 5:
 			self.removeFile()
 		elif tmp == 4:
 			self.createFile()
