@@ -8,7 +8,7 @@ if XTREND
 SUBDIRS += XtrendFancontrol Blindscan XtrendRemote
 endif
 
-if MARA
+if ODIN
 SUBDIRS += XtrendFancontrol Blindscan
 endif
 
