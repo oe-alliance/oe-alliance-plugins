@@ -596,6 +596,16 @@ class TaskManager:
 		self.taskIdx += 1
 		return True
 
+
+config.plugins.dlnabrowser = ConfigSubsection()
+config.plugins.dlnabrowser.autostart = ConfigYesNo(default = True)
+
+def isRunning():
+	ps_str = os.popen('cat /etc/mtab | grep djmount').read()
+	if ps_str.strip() != '':
+		return True
+	return False
+
 class DLNAClientConfig(ConfigListScreen, Screen):
 	skin=   """
 		<screen position="center,center" size="600,350" title="Mini DLNA Runcher">
@@ -636,9 +646,11 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 		self.makeMenuList()
 
 	def keyExit(self):
+		config.plugins.dlnabrowser.autostart.save()
 		self.close(None, None, None)
 
 	def keyOK(self):
+		config.plugins.dlnabrowser.autostart.save()
 		self.writeConfigFile()
 		#self.close(self.menuItemRefresh.value, self.menuItemRootDir.value)
 		self.close(self.menuItemRefresh.value, None, self.menuItemSlideshow.value)
@@ -652,6 +664,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 		#self.menuEntryRootDir   = getConfigListEntry(_("Mount Point"), self.menuItemRootDir)
 		self.menuEntryRefresh   = getConfigListEntry(_("DeviceList Refresh Interval"), self.menuItemRefresh)
 		self.menuEntrySlideshow = getConfigListEntry(_("Slideshow Interval"), self.menuItemSlideshow)
+		self.menuEntryAutoStart  = getConfigListEntry(_("Enable Autostart for DLNA Browser"), config.plugins.dlnabrowser.autostart)
 		self.resetMenuList()
 
 	def resetMenuList(self):
@@ -659,6 +672,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 		#self.menulist.append(self.menuEntryRootDir)
 		self.menulist.append(self.menuEntryRefresh)
 		self.menulist.append(self.menuEntrySlideshow)
+		self.menulist.append(self.menuEntryAutoStart)
 		self["config"].list = self.menulist
 		self["config"].l.setList(self.menulist)
 
@@ -823,15 +837,9 @@ class DLNADeviceBrowser(Screen):
 			except : pass
 		print "config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH)
 
-	def isRunning(self):
-		ps_str = os.popen('cat /etc/mtab | grep djmount').read()
-		if ps_str.strip() != '':
-			return True
-		return False
-
 	def updateGUI(self):
 		green_btm_str = 'Start'
-		if self.isRunning():
+		if isRunning():
 			green_btm_str = 'Stop'
 		self["key_green"].setText(green_btm_str)
 		self.keyBlue()
@@ -897,8 +905,28 @@ class DLNADeviceBrowser(Screen):
 			items.append((d,d))
 		return items
 
+def autostart(reason, **kwargs):
+	if reason == 0:
+		if isRunning():
+			args = 'fusermount -u %s;modprobe -r fuse'%(DLNA_CONFIG_ROOT_DIR)
+			is_running = True
+		else:
+			args = "modprobe fuse;" + 'djmount -o allow_other -o iocharset=utf8 %s'%(DLNA_CONFIG_ROOT_DIR)
+			is_running = False
+		cmd = args
+
+		if config.plugins.dlnabrowser.autostart.value:
+			if is_running:
+				print "[DLNABrowser] already started"
+			else:
+				print "[DLNABrowser] starting ..."
+				os.system(cmd)
+		elif config.plugins.dlnabrowser.autostart.value == False and is_running == True:
+				print "[DLNABrowser] stopping ..."
+				os.system(cmd)
 def main(session, **kwargs):
 	session.open(DLNADeviceBrowser)
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name=_("DLNA/uPnP Browser"), description="This is dlna/upnp client using djmount.", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
+	return [PluginDescriptor(name=_("DLNA/uPnP Browser"), description="This is dlna/upnp client using djmount.", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart)]
