@@ -461,8 +461,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 
 		self.makeConfig()
 		#time.sleep(2)
-		if config.misc.boxtype.value.startswith('gb'):
-			excute_cmd("echo 1 > /proc/stb/fp/mouse")
+		excute_cmd("echo 1 > /proc/stb/fp/mouse")
 
 		self.lock = False
 		self.service = PlayerService(self.session)
@@ -483,8 +482,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		self.service.stop()
 		excute_cmd("killall -15 %s"%(self.browser_name))
 		excute_cmd("echo 60 > /proc/sys/vm/swappiness")
-		if config.misc.boxtype.value.startswith('gb'):
-			excute_cmd("echo 0 > /proc/stb/fp/mouse")
+		excute_cmd("echo 0 > /proc/stb/fp/mouse")
 		enable_rc_mouse(False) #rc-mouse off
 		language.activateLanguageIndex(self.current_lang_idx)
 		fbClass.getInstance().unlock()
@@ -599,14 +597,10 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		mouse_param = self.mouse.value
 
 		keyboard_param = self.keyboard.value
-		if not config.misc.boxtype.value.startswith('gb'):
-			mouse_cmd = "export QWS_MOUSE_PROTO=LinuxInput:/dev/input/%s; " % (str(mouse_param))
 
 		keymap_param = ""
 		if self.langs.value == "de":
 			keymap_param = ":keymap=/usr/share/keymaps/player/de.qmap"
-		if not config.misc.boxtype.value.startswith('gb'):	
-			kbd_cmd = "export QWS_KEYBOARD=LinuxInput:/dev/input/%s%s; " % (str(keyboard_param), keymap_param)
 
 		cmd = "%s%s%s%s" % (extra_cmd, kbd_cmd, mouse_cmd, browser_cmd)
 		print "prepared command : [%s]" % cmd
