@@ -40,18 +40,19 @@ case "$1" in
 	modprobe bsd-comp
 	modprobe slhc
 
-	modprobe -v -r usbserial
-	modprobe -v -r option
+	modprobe -v usbserial
 	modprobe -v option
+	sleep 8 # wait for kernel attachment
 	;;
     3)
 	echo "Switch modem to gsm modem mode..."
 	usb_modeswitch -v$2 -p$3 -c /usr/share/usb_modeswitch/$2:$3
+
+	sleep 8 # wait for switch to new prod and vendor id
 	;;
     4)
 	echo "Generating wvdial.conf..."
 	rm -f /etc/wvdial.conf
-	sleep 8
 	wvdialconf
 	
 	;;
