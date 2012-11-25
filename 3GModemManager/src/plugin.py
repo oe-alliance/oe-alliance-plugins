@@ -773,9 +773,6 @@ class ModemManager(Screen):
 		self["menulist"].down()
 		self.updateUSBInfo()
 
-	def exit(self):
-		self.close()
-		
 	def keyOK(self):
 		if len(self.usb_lv_items) < 1:
 			message = "Please connect 3G or 4G modem to USB port!"
