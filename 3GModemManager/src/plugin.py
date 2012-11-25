@@ -773,27 +773,35 @@ class ModemManager(Screen):
 		self["menulist"].down()
 		self.updateUSBInfo()
 
+	def exit(self):
+		self.close()
+		
 	def keyOK(self):
-		self.forceStop = False
-		if self.isAttemptConnect():
-			return
+		if len(self.usb_lv_items) < 1:
+			message = "Please connect 3G or 4G modem to USB port!"
+			self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO,5)
+			self.close()
+		else:
+			self.forceStop = False
+			if self.isAttemptConnect():
+				return
 
-		def areadyExistAnotherAdapter():
-			networkAdapters = iNetwork.getConfiguredAdapters()
-			for x in networkAdapters:
-				if x[:3] != 'ppp':
-					return True
-			return False
+			def areadyExistAnotherAdapter():
+				networkAdapters = iNetwork.getConfiguredAdapters()
+				for x in networkAdapters:
+					if x[:3] != 'ppp':
+						return True
+				return False
 
-		if self["key_green"].getText() == 'Disconnect':
-			message = "Do you want to disconnect?"
-			self.session.openWithCallback(self.cbConfirmDone, MessageBox, _(message), default = False)
-			return
+			if self["key_green"].getText() == 'Disconnect':
+				message = "Do you want to disconnect?"
+				self.session.openWithCallback(self.cbConfirmDone, MessageBox, _(message), default = False)
+				return
 
-		if areadyExistAnotherAdapter():
-			message = "Another adapter connected has been found.\n\nA connection is attempted after disconnect all of other device. Do you want to?"
-			self.session.openWithCallback(self.cbConfirmDone, MessageBox, _(message), default = True)
-		else:	self.cbConfirmDone(True)
+			if areadyExistAnotherAdapter():
+				message = "Another adapter connected has been found.\n\nA connection is attempted after disconnect all of other device. Do you want to?"
+				self.session.openWithCallback(self.cbConfirmDone, MessageBox, _(message), default = True)
+			else:	self.cbConfirmDone(True)
 
 	def cbConfirmDone(self, ret):
 		if not ret: return
