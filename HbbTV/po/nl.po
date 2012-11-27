@@ -8,175 +8,176 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-27 12:36+0000\n"
-"PO-Revision-Date: 2012-11-27 12:36+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2012-11-27 14:33+0100\n"
+"Last-Translator: \n"
+"Language-Team: Andy B;ackburn, Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../src/plugin.py:1433
 msgid "Add"
-msgstr ""
+msgstr "Voeg toe"
 
 #: ../src/plugin.py:1609
 msgid "Backspace Key"
-msgstr ""
+msgstr "Backspace toets"
 
 #: ../src/plugin.py:1164 ../src/plugin.py:1278
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 #: ../src/plugin.py:1226
 msgid "Current Page"
-msgstr ""
+msgstr "Huidige pagina"
 
 #: ../src/plugin.py:1435
 msgid "Delete"
-msgstr ""
+msgstr "Verwijder"
 
 #: ../src/plugin.py:1227
 msgid "Direct Input"
-msgstr ""
+msgstr "Directe invoer"
 
 #: ../src/plugin.py:1633
 msgid "Down Key"
-msgstr ""
+msgstr "Toets naar beneden"
 
 #: ../src/plugin.py:1434
 msgid "Edit"
-msgstr ""
+msgstr "Pas aan"
 
 #: ../src/plugin.py:1607 ../src/plugin.py:1638
 msgid "Enter Key"
-msgstr ""
+msgstr "Enter toets"
 
 #: ../src/plugin.py:1432 ../src/plugin.py:1575
 msgid "Exit"
-msgstr ""
+msgstr "Verlaat"
 
 #: ../src/plugin.py:1601
 msgid "Exit the Opera browser."
-msgstr ""
+msgstr "Verlaat de Opera browser."
 
 #: ../src/plugin.py:1576
 msgid "Global"
-msgstr ""
+msgstr "Globaal"
 
 #: ../src/plugin.py:1644
 msgid "Go to next page."
-msgstr ""
+msgstr "Ga naar de volgende pagina."
 
 #: ../src/plugin.py:1643
 msgid "Go to previous page."
-msgstr ""
+msgstr "Ga naar de vorige pagina."
 
 #: ../src/plugin.py:1618
 msgid "It will move the mouse pointer down."
-msgstr ""
+msgstr "Beweegt de muisaanwijzer naar beneden."
 
 #: ../src/plugin.py:1619
 msgid "It will move the mouse pointer left."
-msgstr ""
+msgstr "Beweegt de muisaanwijzer naar links."
 
 #: ../src/plugin.py:1620
 msgid "It will move the mouse pointer right."
-msgstr ""
+msgstr "Beweegt de muisaanwijzer naar rechts."
 
 #: ../src/plugin.py:1617
 msgid "It will move the mouse pointer up."
-msgstr ""
+msgstr "Beweegt de muisaanwijzer naar boven."
 
 #: ../src/plugin.py:1578
 msgid "Keyboard"
-msgstr ""
+msgstr "Toetsenbord"
 
 #: ../src/plugin.py:1627 ../src/plugin.py:1634
 msgid "Left Key"
-msgstr ""
+msgstr "Toets naar links"
 
 #: ../src/plugin.py:1623
 msgid "Left Mouse Button"
-msgstr ""
+msgstr "Linker muistoets"
 
 #: ../src/plugin.py:1577
 msgid "Mouse"
-msgstr ""
+msgstr "Muis"
 
 #: ../src/plugin.py:1380
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: ../src/plugin.py:1040
 msgid "No detected HbbTV applications."
-msgstr ""
+msgstr "Geen HbbTV applicaties gedetecteerd."
 
 #: ../src/plugin.py:1642
 msgid "PageDown Key"
-msgstr ""
+msgstr "Toets pagina naar beneden"
 
 #: ../src/plugin.py:1641
 msgid "PageUp Key"
-msgstr ""
+msgstr "Toets pagina naar boven"
 
 #: ../src/plugin.py:1041
 msgid "Please choose an HbbTV application."
-msgstr ""
+msgstr "Kies een HbbTV applicatie."
 
 #: ../src/plugin.py:1054
 msgid "Please choose one."
-msgstr ""
+msgstr "Kies er één."
 
 #: ../src/plugin.py:1516
 msgid "Please choose."
-msgstr ""
+msgstr "Kies."
 
 #: ../src/plugin.py:1628 ../src/plugin.py:1635
 msgid "Right Key"
-msgstr ""
+msgstr "Toets naar rechts"
 
 #: ../src/plugin.py:1626
 msgid "Right Mouse Button"
-msgstr ""
+msgstr "Rechter muistoets"
 
 #: ../src/plugin.py:1165 ../src/plugin.py:1279
 msgid "Save"
-msgstr ""
+msgstr "Sla op"
 
 #: ../src/plugin.py:1436
 msgid "Set as Startpage"
-msgstr ""
+msgstr "Stel in als startpagina"
 
 #: ../src/plugin.py:1604
 msgid "Show the Menu window."
-msgstr ""
+msgstr "Toon menuvenster"
 
 #: ../src/plugin.py:1608
 msgid "Show the Virtual keyboard window."
-msgstr ""
+msgstr "Toon virtuele toetsenbord"
 
 #: ../src/plugin.py:1224
 msgid "Start Page"
-msgstr ""
+msgstr "Startpagina"
 
 #: ../src/plugin.py:1229
 msgid "Startpage"
-msgstr ""
+msgstr "Startpagina"
 
 #: ../src/plugin.py:1612
 msgid "Switch to keyboard/mouse mode."
-msgstr ""
+msgstr "Schakel tussen toetsenbord en muis modus"
 
 #: ../src/plugin.py:1387
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: ../src/plugin.py:1632
 msgid "Up Key"
-msgstr ""
+msgstr "Toets naar boven"
 
 #: ../src/plugin.py:1388
 msgid "Url"
-msgstr ""
+msgstr "Url"
