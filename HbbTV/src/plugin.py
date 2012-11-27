@@ -2092,7 +2092,7 @@ def plugin_extension_browser_config(session, **kwargs):
 
 def Plugins(path, **kwargs):
 	return 	[
-		PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=auto_start_main),
+		PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=auto_start_main),
 		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, needsRestart=True, fnc=session_start_main, weight=-10),
 		PluginDescriptor(name="HbbTV Applications", where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=True, fnc=plugin_extension_start_application),
 		PluginDescriptor(name="Browser Start/Stop", where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=True, fnc=plugin_extension_browser_config),
