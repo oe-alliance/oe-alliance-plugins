@@ -136,10 +136,10 @@ GigaBlueVFDControl/src/Makefile
 GigaBlueVFDControl/meta/Makefile
 GigaBlueVFDControl/po/Makefile
 
-lib/python/Plugins/Extensions/HbbTV/Makefile
-lib/python/Plugins/Extensions/HbbTV/src/Makefile
-lib/python/Plugins/Extensions/HbbTV/meta/Makefile
-lib/python/Plugins/Extensions/HbbTV/po/Makefile
+HbbTV/Makefile
+HbbTV/src/Makefile
+HbbTV/meta/Makefile
+HbbTV/po/Makefile
 
 TmTwinFanControl/Makefile
 TmTwinFanControl/src/Makefile
