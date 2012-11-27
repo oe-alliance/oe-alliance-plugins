@@ -1,0 +1,182 @@
+# English translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2012 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-27 12:36+0000\n"
+"PO-Revision-Date: 2012-11-27 12:36+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/plugin.py:1433
+msgid "Add"
+msgstr "Add"
+
+#: ../src/plugin.py:1609
+msgid "Backspace Key"
+msgstr "Backspace Key"
+
+#: ../src/plugin.py:1164 ../src/plugin.py:1278
+msgid "Cancel"
+msgstr "Cancel"
+
+#: ../src/plugin.py:1226
+msgid "Current Page"
+msgstr "Current Page"
+
+#: ../src/plugin.py:1435
+msgid "Delete"
+msgstr "Delete"
+
+#: ../src/plugin.py:1227
+msgid "Direct Input"
+msgstr "Direct Input"
+
+#: ../src/plugin.py:1633
+msgid "Down Key"
+msgstr "Down Key"
+
+#: ../src/plugin.py:1434
+msgid "Edit"
+msgstr "Edit"
+
+#: ../src/plugin.py:1607 ../src/plugin.py:1638
+msgid "Enter Key"
+msgstr "Enter Key"
+
+#: ../src/plugin.py:1432 ../src/plugin.py:1575
+msgid "Exit"
+msgstr "Exit"
+
+#: ../src/plugin.py:1601
+msgid "Exit the Opera browser."
+msgstr "Exit the Opera browser."
+
+#: ../src/plugin.py:1576
+msgid "Global"
+msgstr "Global"
+
+#: ../src/plugin.py:1644
+msgid "Go to next page."
+msgstr "Go to next page."
+
+#: ../src/plugin.py:1643
+msgid "Go to previous page."
+msgstr "Go to previous page."
+
+#: ../src/plugin.py:1618
+msgid "It will move the mouse pointer down."
+msgstr "It will move the mouse pointer down."
+
+#: ../src/plugin.py:1619
+msgid "It will move the mouse pointer left."
+msgstr "It will move the mouse pointer left."
+
+#: ../src/plugin.py:1620
+msgid "It will move the mouse pointer right."
+msgstr "It will move the mouse pointer right."
+
+#: ../src/plugin.py:1617
+msgid "It will move the mouse pointer up."
+msgstr "It will move the mouse pointer up."
+
+#: ../src/plugin.py:1578
+msgid "Keyboard"
+msgstr "Keyboard"
+
+#: ../src/plugin.py:1627 ../src/plugin.py:1634
+msgid "Left Key"
+msgstr "Left Key"
+
+#: ../src/plugin.py:1623
+msgid "Left Mouse Button"
+msgstr "Left Mouse Button"
+
+#: ../src/plugin.py:1577
+msgid "Mouse"
+msgstr "Mouse"
+
+#: ../src/plugin.py:1380
+msgid "Name"
+msgstr "Name"
+
+#: ../src/plugin.py:1040
+msgid "No detected HbbTV applications."
+msgstr "No detected HbbTV applications."
+
+#: ../src/plugin.py:1642
+msgid "PageDown Key"
+msgstr "PageDown Key"
+
+#: ../src/plugin.py:1641
+msgid "PageUp Key"
+msgstr "PageUp Key"
+
+#: ../src/plugin.py:1041
+msgid "Please choose an HbbTV application."
+msgstr "Please choose an HbbTV application."
+
+#: ../src/plugin.py:1054
+msgid "Please choose one."
+msgstr "Please choose one."
+
+#: ../src/plugin.py:1516
+msgid "Please choose."
+msgstr "Please choose."
+
+#: ../src/plugin.py:1628 ../src/plugin.py:1635
+msgid "Right Key"
+msgstr "Right Key"
+
+#: ../src/plugin.py:1626
+msgid "Right Mouse Button"
+msgstr "Right Mouse Button"
+
+#: ../src/plugin.py:1165 ../src/plugin.py:1279
+msgid "Save"
+msgstr "Save"
+
+#: ../src/plugin.py:1436
+msgid "Set as Startpage"
+msgstr "Set as Startpage"
+
+#: ../src/plugin.py:1604
+msgid "Show the Menu window."
+msgstr "Show the Menu window."
+
+#: ../src/plugin.py:1608
+msgid "Show the Virtual keyboard window."
+msgstr "Show the Virtual keyboard window."
+
+#: ../src/plugin.py:1224
+msgid "Start Page"
+msgstr "Start Page"
+
+#: ../src/plugin.py:1229
+msgid "Startpage"
+msgstr "Startpage"
+
+#: ../src/plugin.py:1612
+msgid "Switch to keyboard/mouse mode."
+msgstr "Switch to keyboard/mouse mode."
+
+#: ../src/plugin.py:1387
+msgid "Title"
+msgstr "Title"
+
+#: ../src/plugin.py:1632
+msgid "Up Key"
+msgstr "Up Key"
+
+#: ../src/plugin.py:1388
+msgid "Url"
+msgstr "Url"
