@@ -1,7 +1,7 @@
 SUBDIRS = AutoBouquets DLNABrowser DLNAServer StreamTV 3GModemManager WebBrowser OpenUitzendingGemist TunerServer
 
 if VUPLUS
-SUBDIRS += VuplusEvent
+SUBDIRS += VuplusEvent HbbTV
 endif
 
 if XTREND
