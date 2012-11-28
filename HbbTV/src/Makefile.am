@@ -7,3 +7,4 @@ install_PYTHON = \
 	plugin.py
 
 install_SCRIPTS = dumpait
+install_DATA = keymap.xml

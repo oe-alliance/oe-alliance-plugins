@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from Plugins.Plugin import PluginDescriptor
 
 from Screens.Screen import Screen
@@ -854,6 +857,7 @@ class HbbTVWindow(Screen, InfoBarNotifications):
 		self._currentServicePositionTimer.stop()
 
 	def _layoutFinished(self):
+		self.setTitle(_('HbbTV Plugin'))
 		command_util = getCommandUtil()
 		profile = self._profile
 		(sid, onid, tsid, name, orgid) = getChannelInfos()
@@ -995,7 +999,7 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 
 	def _cb_hbbtv_activated(self, title=None, url=None):
 		if not self._is_browser_running():
-			message = "HbbTV Browser was not running.\nPlease running browser before start HbbTV Application."
+			message = _("HbbTV Browser was not running.\nPlease running browser before start HbbTV Application.")
 			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
 			return
 		service = self._session.nav.getCurrentlyPlayingServiceReference()
@@ -1074,15 +1078,15 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 	def showBrowserConfigBox(self):
 		start_stop_mode = []
 		if self._is_browser_running():
-			start_stop_mode.append(('Stop',None))
-		else:	start_stop_mode.append(('Start',None))
+			start_stop_mode.append((_('Stop'),None))
+		else:	start_stop_mode.append(_(('Start'),None))
 		self._session.openWithCallback(self._browser_config_selected, ChoiceBox, title=_("Please choose one."), list=start_stop_mode)
 
 	def _browser_config_selected(self, selected):
 		if selected is None:
 			return
 		try:
-			mode = selected[0]
+			mode = selected[1]
 			if mode == 'Start':
 				if not self._is_browser_running():
 					self._start_opera()
@@ -1161,7 +1165,7 @@ class OperaBrowserSetting:
 		}
 
 class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
-	skin=   """
+	skin=	 """
 		<screen position="center,center" size="600,350" title="Preference">
 			<widget name="url" position="5,0" size="590,100" valign="center" font="Regular;20" />
 			<widget name="config" position="0,100" size="600,200" scrollbarMode="showOnDemand" />
@@ -1174,7 +1178,7 @@ class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
 		</screen>
 		"""
 	def __init__(self, session, currentUrl):
-                self.session = session
+		self.session = session
 		Screen.__init__(self, session)
 
 		self.menulist = []
@@ -1199,6 +1203,7 @@ class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
+		self.setTitle(_('Preference'))
 		try:
 			d = OperaBrowserSetting().getData()
 			self._startPageUrl = d['start']
@@ -1217,7 +1222,7 @@ class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
 	def keyGreen(self):
 		url = self["url"].getText()
 		if strIsEmpty(url):
-			self.session.open(MessageBox, 'Invalid URL!!(Empty)\nPlease, Input to the URL.', type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _('Invalid URL!!(Empty)\nPlease, Input to the URL.'), type = MessageBox.TYPE_INFO)
 			return
 		mode = 0
 		if url.find('/usr/local/manual') > 0:
@@ -1234,7 +1239,7 @@ class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
 				return
 			self["url"].setText(data)
 		if self.menuItemStartpage.value == "direct":
-			self.session.openWithCallback(_cb_directInputUrl, VirtualKeyBoard, title=("Please enter URL here"), text='http://')
+			self.session.openWithCallback(_cb_directInputUrl, VirtualKeyBoard, title=(_("Please enter URL here")), text='http://')
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1263,7 +1268,7 @@ class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
 
 class BookmarkEditWindow(ConfigListScreen, Screen):
 	CATEGORY,BOOKMARK = 0,1
-	skin=   """
+	skin = """
 		<screen position="center,center" size="600,140" title="Bookmark Edit">
 			<widget name="config" position="0,0" size="600,100" scrollbarMode="showOnDemand" />
 
@@ -1281,7 +1286,7 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 		self.mMode = _mode
 		self.mType = _type
 		self.mData = _data
-                self.mSession = session
+		self.mSession = session
 		self.mBookmarkManager = _bm
 
 		if _data is not None:
@@ -1315,21 +1320,21 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		self.setTitle('Bookmark ' + self.mMode)
+		self.setTitle(_('Bookmark') + ' ' + self.mMode)
 
 	def selectedItem(self):
 		currentPosition = self["config"].getCurrent()
 		if self.mType == BookmarkEditWindow.CATEGORY:
-			return ("Name", self.menuItemName)
+			return (_("Name"), self.menuItemName)
 		else:
 			if currentPosition == self.menuEntryTitle:
-				return ("Title", self.menuItemTitle)
+				return (_("Title"), self.menuItemTitle)
 			elif currentPosition == self.menuEntryUrl:
-				return ("Url", self.menuItemUrl)
+				return (_("Url"), self.menuItemUrl)
 		return None
 
 	def showMessageBox(self, text):
-		msg = "Invalid " + text + "!!(Empty)\nPlease, Input to the " + text + "."
+		msg = _("Invalid ") + text + _("!!(Empty)\nPlease, Input to the") + " " + text + "."
 		self.mSession.openWithCallback(self.showVKeyWindow, MessageBox, msg, MessageBox.TYPE_INFO)
 		return False
 
@@ -1353,34 +1358,34 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 
 	def saveData(self):
 		if self.mType == BookmarkEditWindow.CATEGORY:
-			if self.mMode == 'Add':
+			if self.mMode == _('Add'):
 				categoryName = self.menuItemName.value
 				if strIsEmpty(categoryName):
-					return self.showMessageBox("Category Name")
+					return self.showMessageBox(_("Category Name"))
 				self.mBookmarkManager.addCategory(categoryName)
 			else:
 				if strIsEmpty(self.menuItemName.value):
-					return self.showMessageBox("Category Name")
+					return self.showMessageBox(_("Category Name"))
 				self.mData.mName = self.menuItemName.value
 				self.mBookmarkManager.updateCategory(self.mData)
 		else:
-			if self.mMode == 'Add':
+			if self.mMode == _('Add'):
 				bookmarkTitle = self.menuItemTitle.value
-				bookmarkUrl   = self.menuItemUrl.value
+				bookmarkUrl	  = self.menuItemUrl.value
 				if strIsEmpty(bookmarkTitle):
 					self["config"].setCurrentIndex(0)
-					return self.showMessageBox("Bookmark Title")
+					return self.showMessageBox(_("Bookmark Title"))
 				if strIsEmpty(bookmarkUrl):
 					self["config"].setCurrentIndex(1)
-					return self.showMessageBox("Bookmark URL")
+					return self.showMessageBox(_("Bookmark URL"))
 				self.mBookmarkManager.addBookmark(bookmarkTitle, bookmarkUrl, self.mData.mParent, 0)
 			else:
 				if strIsEmpty(self.menuItemTitle.value):
 					self["config"].setCurrentIndex(0)
-					return self.showMessageBox("Bookmark Title")
+					return self.showMessageBox(_("Bookmark Title"))
 				if strIsEmpty(self.menuItemUrl.value):
 					self["config"].setCurrentIndex(1)
-					return self.showMessageBox("Bookmark URL")
+					return self.showMessageBox(_("Bookmark URL"))
 				self.mData.mTitle = self.menuItemTitle.value
 				self.mData.mUrl   = self.menuItemUrl.value
 				self.mBookmarkManager.updateBookmark(self.mData)
@@ -1419,7 +1424,7 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 		self["config"].l.setList(self.menulist)
 
 class OperaBrowserBookmarkWindow(Screen):
-	skin =	"""
+	skin = """
 		<screen name="HbbTVBrowserBookmarkWindow" position="center,center" size="600,400" title="Bookmark" >
 			<widget name="bookmarklist" position="0,0" size="600,200" zPosition="10" scrollbarMode="showOnDemand" />
 
@@ -1454,14 +1459,19 @@ class OperaBrowserBookmarkWindow(Screen):
 				"0"	: self.keyNumber,
 			},-2)
 
-		self["key_red"]    = StaticText(_("Exit"))
-		self["key_green"]  = StaticText(_("Add"))
+		self["key_red"]	 = StaticText(_("Exit"))
+		self["key_green"]	 = StaticText(_("Add"))
 		self["key_yellow"] = StaticText(_("Edit"))
-		self["key_blue"]   = StaticText(_("Delete"))
-		self["key_0"]      = StaticText(_("Set as Startpage"))
+		self["key_blue"]	 = StaticText(_("Delete"))
+		self["key_0"]		 = StaticText(_("Set as Startpage"))
 
 		self.mBookmarkList = self.setBookmarkList()
 		self["bookmarklist"] = MenuList(self.mBookmarkList)
+
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self.setTitle(_('Bookmark'))
 
 	def setBookmarkList(self):
 		l = []
@@ -1500,7 +1510,7 @@ class OperaBrowserBookmarkWindow(Screen):
 	def keyNumber(self):
 		data = self["bookmarklist"].getCurrent()[1]
 		if strIsEmpty(data.mUrl):
-			msg = "Invalid URL. Please check again!!"
+			msg = _("Invalid URL. Please check again!!")
 			self.mSession.open(MessageBox, msg, MessageBox.TYPE_INFO)
 			return
 		def cbSetStartpage(ret=None):
@@ -1508,7 +1518,7 @@ class OperaBrowserBookmarkWindow(Screen):
 			if ret:
 				data = self["bookmarklist"].getCurrent()[1]
 				OperaBrowserSetting().setData(data.mUrl, data.mType)
-		msg = "Do you want to set selected url to the Startpage?"
+		msg = _("Do you want to set selected url to the Startpage?")
 		self.mSession.openWithCallback(cbSetStartpage, MessageBox, msg, MessageBox.TYPE_YESNO, default=True)
 
 	def keyGreen(self):
@@ -1523,7 +1533,7 @@ class OperaBrowserBookmarkWindow(Screen):
 					return
 				retAdd = self.mBookmarkManager.addBookmark(self.mTitle, self.mUrl, parent.mId, 0)
 				if not retAdd:
-					msg = "Current page is already exist."
+					msg = _("Current page is already exist.")
 					self.mSession.open(MessageBox, msg, MessageBox.TYPE_INFO)
 				self.cbEditWindow(True)
 			elif data[1] == 2:
@@ -1531,19 +1541,19 @@ class OperaBrowserBookmarkWindow(Screen):
 				if parent is None:
 					return
 				b = BookmarkData(0, '', '', parent.mId, 0)
-				self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, 'Add', BookmarkEditWindow.BOOKMARK, b, self.mBookmarkManager)
+				self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, _('Add'), BookmarkEditWindow.BOOKMARK, b, self.mBookmarkManager)
 			elif data[1] == 3:
 				c = CategoryData(0, '')
-				self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, 'Add', BookmarkEditWindow.CATEGORY, c, self.mBookmarkManager)
+				self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, _('Add'), BookmarkEditWindow.CATEGORY, c, self.mBookmarkManager)
 		if strIsEmpty(self.mUrl):
-			l = [('Direct Input(Bookmark)',2,), ('Direct Input(Category)',3,)]
-		else:	l = [('Currentpage(Bookmark)',1,), ('Direct Input(Bookmark)',2,), ('Direct Input(Category)',3,)]
+			l = [(_('Direct Input(Bookmark)'),2,), (_('Direct Input(Category)'),3,)]
+		else:	l = [(_('Currentpage(Bookmark)'),1,), (_('Direct Input(Bookmark)'),2,), (_('Direct Input(Category)'),3,)]
 		self.mSession.openWithCallback(cbGreen, ChoiceBox, title=_("Please choose."), list=l)
 	def keyYellow(self):
 		data = self["bookmarklist"].getCurrent()[1]
 		if self.isCategoryItem():
-			self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, 'Edit', BookmarkEditWindow.CATEGORY, data, self.mBookmarkManager)
-		else:	self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, 'Edit', BookmarkEditWindow.BOOKMARK, data, self.mBookmarkManager)
+			self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, _('Edit'), BookmarkEditWindow.CATEGORY, data, self.mBookmarkManager)
+		else:	self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, _('Edit'), BookmarkEditWindow.BOOKMARK, data, self.mBookmarkManager)
 	def keyBlue(self):
 		def cbBlue(ret=None):
 			if not ret: return
@@ -1553,8 +1563,8 @@ class OperaBrowserBookmarkWindow(Screen):
 			else:	self.mBookmarkManager.deleteBookmark(data.mId)
 			self.updateBookmarkList()
 		if self.isCategoryItem():
-			msg = "Do you want to delete the category and the bookmarks?"
-		else:	msg = "Do you want to delete the bookmark?"
+			msg = _("Do you want to delete the category and the bookmarks?")
+		else:	msg = _("Do you want to delete the bookmark?")
 		self.mSession.openWithCallback(cbBlue, MessageBox, msg, MessageBox.TYPE_YESNO, default=True)
 	def keyOK(self):
 		if self.isCategoryItem(): return
@@ -1562,7 +1572,7 @@ class OperaBrowserBookmarkWindow(Screen):
 		data = self["bookmarklist"].getCurrent()[1]
 		url = data.mUrl.strip()
 		if len(url) == 0:
-			self.session.open(MessageBox, "Can't open selected bookmark.\n   - URL data is empty!!", type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("Can't open selected bookmark.\n	- URL data is empty!!"), type = MessageBox.TYPE_INFO)
 			return
 		mode = data.mType
 		if mode:
@@ -1577,11 +1587,10 @@ class OperaBrowserBookmarkWindow(Screen):
 	def keyCancel(self):
 		self.close()
 
-
 class BrowserHelpWindow(Screen, HelpableScreen):
 	MODE_GLOBAL,MODE_KEYBOARD,MODE_MOUSE = 1,2,3
-        skin =	"""
-                <screen name="BrowserHelpWindow" position="center,center" size="600,40" title="Browser Help" >
+	skin = """
+		<screen name="BrowserHelpWindow" position="center,center" size="600,40" title="Browser Help" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
@@ -1591,19 +1600,19 @@ class BrowserHelpWindow(Screen, HelpableScreen):
 			<widget source="key_green" render="Label" position="155,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_yellow" render="Label" position="305,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_blue" render="Label" position="450,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" foregroundColor="#ffffff" transparent="1" />
-                </screen>
+		</screen>
 		"""
-        def __init__(self, session):
-                Screen.__init__(self, session)
+	def __init__(self, session):
+		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
-		self["key_red"]    = StaticText(_("Exit"))
-		self["key_green"]  = StaticText(_("Global"))
+		self["key_red"]	 = StaticText(_("Exit"))
+		self["key_green"]	 = StaticText(_("Global"))
 		self["key_yellow"] = StaticText(_("Mouse"))
-		self["key_blue"]   = StaticText(_("Keyboard"))
+		self["key_blue"]	 = StaticText(_("Keyboard"))
 
 		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions","ColorActions"], {
-				"ok"    : self.keyRed,
+				"ok"	: self.keyRed,
 				"cancel": self.keyRed,
 				"red"	: self.keyRed,
 				"green"	: self.keyGreen,
@@ -1614,6 +1623,11 @@ class BrowserHelpWindow(Screen, HelpableScreen):
 		self.showHelpTimer = eTimer()
 		self.showHelpTimer.callback.append(self.cbShowHelpTimerClosed)
 		self.showHelpTimer.start(500)
+
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self.setTitle(_('Browser Help'))
 
 	def cbShowHelpTimerClosed(self):
 		self.showHelpTimer.stop()
@@ -1629,9 +1643,9 @@ class BrowserHelpWindow(Screen, HelpableScreen):
 				"menu" : (self.keyPass, _("Show the Menu window.")),
 			})
 			self["ColorActions"] = HelpableActionMap(self, "ColorActions", {
-				"green"  : (self.keyPass, _("Enter Key")),
+				"green"	 : (self.keyPass, _("Enter Key")),
 				"yellow" : (self.keyPass, _("Show the Virtual keyboard window.")),
-				"blue"   : (self.keyPass, _("Backspace Key")),
+				"blue"	 : (self.keyPass, _("Backspace Key")),
 			})
 			self["EPGSelectActions"] = HelpableActionMap(self, "EPGSelectActions", {
 				"info" : (self.keyPass, _("Switch to keyboard/mouse mode.")),
@@ -1700,12 +1714,12 @@ class OperaBrowser(Screen):
 			<widget name="menulist" position="50,%d" size="%d,150" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 			<widget name="submenulist" position="%d,%d" size="%d,150" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 			<widget name="bottomArea" position="0,640" size="1280,80" font="Regular;20" valign="center" halign="center" backgroundColor="#000000" />
-	        </screen>
+		</screen>
 		""" % (MENUBAR_ITEM_HEIGHT+30, SUBMENULIST_WIDTH, SUBMENULIST_WIDTH+50+SUBMENULIST_NEXT, MENUBAR_ITEM_HEIGHT+30, SUBMENULIST_WIDTH)# modify menu
 
-	MENUITEMS_LIST =[[('Open Startpage', None), ('Open URL', None), ('Start/Stop',None), ('Exit', None)],
-			 [('Bookmark', None), ('Preference', None)],
-			 [('About', None), ('Help', None)]]
+	MENUITEMS_LIST =[[(_('Open Startpage'), None), (_('Open URL'), None), (_('Start/Stop'),None), (_('Exit'), None)],
+			 [(_('Bookmark'), None), (_('Preference'), None)],
+			 [(_('About'), None), (_('Help'), None)]]
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["DirectionActions", "MenuActions", "OkCancelActions"], {
@@ -1746,22 +1760,28 @@ class OperaBrowser(Screen):
 		self._onCloseTimer = eTimer()
 		self._onCloseTimer.callback.append(self._cb_onClose)
 
+		self.paramUrl = url
+
 	def enableRCMouse(self, mode): #mode=[0|1]|[False|True]
 		rcmouse_path = "/proc/stb/fp/mouse"
 		if os.path.exists(rcmouse_path):
 			os.system("echo %d > %s" % (mode, rcmouse_path))
 
 	def layoutFinished(self):
-		self["menuitemFile"].setText("File")# modify menu
-		self["menuitemTool"].setText("Tools")
-		self["menuitemHelp"].setText("Help")
+		self["menuitemFile"].setText(_("File"))# modify menu
+		self["menuitemTool"].setText(_("Tools"))
+		self["menuitemHelp"].setText(_("Help"))
 
 		self["menulist"].hide()
 		self["submenulist"].hide()
 
-		self["bottomArea"].setText("Opera Web Browser Plugin v1.0")
-		self.setTitle("BrowserMain")
+		self["bottomArea"].setText(_("Opera Web Browser Plugin v1.0"))
+		self.setTitle(_("BrowserMain"))
 		self.selectMenuitem()
+
+		if self.paramUrl is not None:
+			self.keyMenu()
+			self.cbUrlText(self.paramUrl, 1)
 
 	def selectMenuitem(self):
 		tmp = [self["menuitemFile"], self["menuitemTool"], self["menuitemHelp"]]# modify menu
@@ -1779,7 +1799,7 @@ class OperaBrowser(Screen):
 	def setListOnView(self):
 		l = self.MENUITEMS_LIST[self.menubarCurrentIndex]
 		if not self._terminatedBrowser and self.menubarCurrentIndex == 0: # running
-			l = [('Return', None)]
+			l = [(_('Return'), None)]
 		self.lvMenuItems = l #self.MENUITEMS_LIST[self.menubarCurrentIndex]
 		return self.lvMenuItems
 
@@ -1828,7 +1848,7 @@ class OperaBrowser(Screen):
 			if self._on_setPageTitle in command_server.onSetPageTitleCB:
 				command_server.onSetPageTitleCB.remove(self._on_setPageTitle)
 		except Exception, ErrMsg: pass
-		self._on_setPageTitle('Opera Browser')
+		self._on_setPageTitle(_('Opera Browser'))
 		self.enableRCMouse(False)
 		self.toggleMainScreen()
 		fbClass.getInstance().unlock()
@@ -1838,8 +1858,11 @@ class OperaBrowser(Screen):
 		#if not self.toggleListViewFlag:
 		#	self.keyDown()
 		self._currentPageUrl = ''
-		self.keyRight()
-		self.keyLeft()
+		if self.paramUrl is not None:
+			self.keyCancel()
+		else:
+			self.keyRight()
+			self.keyLeft()
 
 	def _on_setPageTitle(self, title=None):
 		print "Title :",title
@@ -1878,12 +1901,12 @@ class OperaBrowser(Screen):
 	def _cmd_on_OpenUrl(self):
 		global _g_helper
 		if not _g_helper._is_browser_running():
-			message = "Opera Browser was not running.\nPlease running browser using [File]>[Start/Stop] menu."
+			message = _("Opera Browser was not running.\nPlease running browser using [File]>[Start/Stop] menu.")
 			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
 			return
-		self.session.openWithCallback(self.cbUrlText, VirtualKeyBoard, title=("Please enter URL here"), text='http://')
+		self.session.openWithCallback(self.cbUrlText, VirtualKeyBoard, title=(_("Please enter URL here")), text='http://')
 	def _cmd_on_About(self):
-		self.session.open(MessageBox, 'Opera Web Browser Plugin v1.0', type = MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, _('Opera Web Browser Plugin v1.0'), type = MessageBox.TYPE_INFO)
 	def _cmd_on_Exit(self):
 		self.close()
 	def _cmd_on_StartStop(self):
@@ -1907,7 +1930,7 @@ class OperaBrowser(Screen):
 	def _cmd_on_OpenStartpage(self):
 		global _g_helper
 		if not _g_helper._is_browser_running():
-			message = "Opera Browser was not running.\nPlease running browser using [File]>[Start/Stop] menu."
+			message = _("Opera Browser was not running.\nPlease running browser using [File]>[Start/Stop] menu.")
 			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
 			return
 		mode = 0
@@ -1925,17 +1948,17 @@ class OperaBrowser(Screen):
 		self.session.open(BrowserHelpWindow)
 
 	def doCommand(self, command):
-		cmd_map = {# modify menu
-			 'Exit'		:self._cmd_on_Exit
-			,'Help'		:self._cmd_on_Help
-			,'About'	:self._cmd_on_About
-			,'Open URL'	:self._cmd_on_OpenUrl
-			,'Start/Stop'	:self._cmd_on_StartStop
-			,'Bookmark'	:self._cmd_on_Bookmark
-			,'Preference'	:self._cmd_on_Preference
-			,'Return'	:self._cmd_on_ReturnToBrowser
-			,'Open Startpage' :self._cmd_on_OpenStartpage
-		}
+		# modify menu
+		cmd_map = {}
+		cmd_map[_('Exit')] = self._cmd_on_Exit
+		cmd_map[_('Help')] = self._cmd_on_Help
+		cmd_map[_('About')] = self._cmd_on_About
+		cmd_map[_('Open URL')] = self._cmd_on_OpenUrl
+		cmd_map[_('Start/Stop')] = self._cmd_on_StartStop
+		cmd_map[_('Bookmark')] = self._cmd_on_Bookmark
+		cmd_map[_('Preference')] = self._cmd_on_Preference
+		cmd_map[_('Return')] = self._cmd_on_ReturnToBrowser
+		cmd_map[_('Open Startpage')] = self._cmd_on_OpenStartpage
 		try:
 			cmd_map[command]()
 		except Exception, ErrMsg: print ErrMsg
@@ -2026,7 +2049,7 @@ class OperaBrowser(Screen):
 			eRCInput.getInstance().lock()
 			if self.toggleListViewFlag:
 				self.toggleMainScreen()
-			self._currentPageUrl   = None
+			self._currentPageUrl	  = None
 			self._currentPageTitle = None
 			command_util = getCommandUtil()
 			command_util.sendCommand('OP_BROWSER_MENU_RES')
@@ -2052,20 +2075,52 @@ class OperaBrowser(Screen):
 		self.currentListView.pageUp()
 		self.keyUp()
 
-
-
 def auto_start_main(reason, **kwargs):
 	if reason:
 		command_server = getCommandServer()
 		command_server.stop()
 
+from  Screens.HelpMenu import HelpableScreen
 def session_start_main(session, reason, **kwargs):
 	fbClass.getInstance().unlock()
 	eRCInput.getInstance().unlock()
 	global _g_helper
 	_g_helper = session.open(HbbTVHelper)
 
+	HelpableScreen.__init__ = HelpableScreen__init__
+	HelpableScreen.session = session
+
+def HelpableScreen__init__(self):
+	if isinstance(self, HelpableScreen):
+		HelpableScreen.showManual = showManual
+
+		self["helpActions"] = ActionMap(["HelpbuttonActions"], {
+			"help_b" : self.showHelp,
+			"help_l" : self.showManual,
+		}, -2)
+
 _g_clearBrowserDataTimer = eTimer()
+def showManual(self):
+	if not os.path.exists('/usr/local/manual'):
+		return
+
+	url = 'file:///usr/local/manual/main.html'
+	lang = language.getLanguage()
+	if lang == 'ru_RU' and os.path.exists('/usr/local/manual/ru_RU'):
+		url = 'file:///usr/local/manual/ru_RU/main.html'
+	elif lang == 'de_DE' and os.path.exists('/usr/local/manual/de_DE'):
+		url = 'file:///usr/local/manual/de_DE/main.html'
+
+	def _do_clean():
+		_g_clearBrowserDataTimer.stop()
+		try:	_g_clearBrowserDataTimer.callback.remove(_do_clean)
+		except: pass
+		setPluginBrowser(None)
+	def clearBrowserData():
+		_g_clearBrowserDataTimer.callback.append(_do_clean)
+		_g_clearBrowserDataTimer.start(50)
+	setPluginBrowser(self.session.openWithCallback(clearBrowserData, OperaBrowser, url))
+
 def plugin_start_main(session, **kwargs):
 	#session.open(OperaBrowser)
 	def _do_clean():
@@ -2091,11 +2146,12 @@ def plugin_extension_browser_config(session, **kwargs):
 	_g_helper.showBrowserConfigBox()
 
 def Plugins(path, **kwargs):
-	return 	[
-		PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=auto_start_main),
-		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, needsRestart=True, fnc=session_start_main, weight=-10),
-		PluginDescriptor(name="HbbTV Applications", where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=True, fnc=plugin_extension_start_application),
-		PluginDescriptor(name="Browser Start/Stop", where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=True, fnc=plugin_extension_browser_config),
-		PluginDescriptor(name="Opera Web Browser", description="start opera web browser", where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=True, fnc=plugin_start_main),
-		]
+	l = []
+	l.append(PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=auto_start_main))
+	l.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, needsRestart=True, fnc=session_start_main, weight=-10))
+	l.append(PluginDescriptor(name=_("HbbTV Applications"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=True, fnc=plugin_extension_start_application))
+	l.append(PluginDescriptor(name=_("Browser Start/Stop"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=True, fnc=plugin_extension_browser_config))
+	l.append(PluginDescriptor(name=_("Opera Web Browser"), description=_("start opera web browser"), where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=True, fnc=plugin_start_main))
+
+	return l
 
