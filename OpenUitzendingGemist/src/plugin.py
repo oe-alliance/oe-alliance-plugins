@@ -263,7 +263,7 @@ class OpenUgSetupScreen(Screen):
 
 		self.imagedir = '/tmp/openUgImg/'
 
-		self["info"] = Label(_("Open Uitzending Gemist\n\nBrought to you by openViX\n\nBased on Xtrend code"))
+		self["info"] = Label(_("Open Uitzending Gemist\n\nBased on Xtrend code"))
 
 		self.mmenu= []
 		self.mmenu.append((_("UG Recently added"), 'recent'))
@@ -463,13 +463,21 @@ class OpenUg(Screen):
 		self["list"].pageDown()
 		self.updatePage()
 
+	def getThumbnailName(self, x):
+		if self.isRtl:
+			if x[self.UG_ICON]:
+				return str(x[self.UG_ICON]).split("/uuid=")[1].split("/")[0] + ".jpg"
+			else:
+				return ""
+		return str(x[self.UG_STREAMURL]) + str(x[self.UG_ICONTYPE])
+
 	def updateMenu(self):
 		self.tmplist = []
 		if len(self.mediaList) > 0:
 			pos = 0
 			for x in self.mediaList:
 				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.png))
-				tmp_icon = str(x[self.UG_STREAMURL]) + str(x[self.UG_ICONTYPE])
+				tmp_icon = self.getThumbnailName(x)
 				thumbnailFile = self.imagedir + tmp_icon
 				self.pixmaps_to_load.append(tmp_icon)
 
@@ -602,7 +610,7 @@ class OpenUg(Screen):
 			count = 0
 			for x in self.mediaList:
 				if count >= start and count < end:
-					if (x[self.UG_STREAMURL] + str(x[self.UG_ICONTYPE])) == picture_id:
+					if self.getThumbnailName(x) == picture_id:
 						self.picloads[picture_id] = ePicLoad()
 						self.picloads[picture_id].PictureData.get().append(boundFunction(self.finish_decode, picture_id))
 						self.picloads[picture_id].setPara((150, 150, sc[0], sc[1], False, 1, "#00000000"))
@@ -628,8 +636,8 @@ class OpenUg(Screen):
 		self.tmplist = []
 		pos = 0
 		for x in self.mediaList:
-			if self.Details[(x[self.UG_STREAMURL] + str(x[self.UG_ICONTYPE]))]["thumbnail"] is not None:
-				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.Details[(x[self.UG_STREAMURL] + str(x[self.UG_ICONTYPE]))]["thumbnail"]))
+			if self.Details[self.getThumbnailName(x)]["thumbnail"] is not None:
+				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.Details[self.getThumbnailName(x)]["thumbnail"]))
 			else:
 				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.png))
 
@@ -684,9 +692,9 @@ class OpenUg(Screen):
 		icon = ''
 		for line in data:
 			if ".mp4" in line:
-				tmp = "<a href=\""
+				tmp = "<source src=\""
 				if tmp in line:
-					url = line.split(tmp)[1].split("\">")[0]
+					url = line.split("src=\"")[1].split("\"")[0]
 				return url
 		return ''
 
@@ -704,7 +712,7 @@ class OpenUg(Screen):
 			if "<li>" in line:
 				state = 1
 			if state == 1:
-				tmp = "<a href=\"episode"
+				tmp = "<a href=\"video"
 				if tmp in line:
 					tmp = "<a href=\""
 					stream = line.split(tmp)[1].split('\">')[0]
@@ -784,8 +792,8 @@ class OpenUg(Screen):
 			if "<li>" in line:
 				state = 1
 			if state == 1:
-				if "<a href=\"episode" in line:
-					stream = line.split("<a href=\"")[1].split('\">')[0]
+				if "<a href=\"video" in line:
+					stream = line.split("<a href=\"")[1].split('\" ')[0]
 
 				tmp = "<img class=\"thumbnail\" src=\""
 				if tmp in line:
@@ -794,18 +802,19 @@ class OpenUg(Screen):
 				tmp = "<span class=\"title\">"
 				if tmp in line:
 					name = line.split(tmp)[1].split("</span>")[0]
+					short = line.split("<br />")[1]
 					state = 2
 
 			elif state == 2:
-				short = line.split("<br />")[0].lstrip()
 				state = 3
 
 			elif state == 3:
-				channel = line.split("<br />")[0].lstrip()
+				tmp = line.split("<br")[0].split(" | ")
+				channel = tmp[0]
 				state = 4
 
 			elif state == 4:
-				date = ''
+				date = line
 				icon_type = self.getIconType(icon)
 				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
 				state = 0
