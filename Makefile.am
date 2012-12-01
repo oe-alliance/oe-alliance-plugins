@@ -17,19 +17,15 @@ SUBDIRS += VentonFancontrol
 endif
 
 if VUUNO
-SUBDIRS += VuUnoFanControl FPGAUpgrade Blindscan VuRemote
+SUBDIRS += FPGAUpgrade Blindscan VuRemote
 endif
 
 if VUULTIMO
-SUBDIRS += VuUnoFanControl FirmwareUpgrade Blindscan VuRemote
+SUBDIRS += FirmwareUpgrade Blindscan VuRemote
 endif
 
 if VUDUO
 SUBDIRS += VuDuoFanControl
-endif
-
-if TECHNOMATE
-SUBDIRS += TmTwinFanControl
 endif
 
 if GIGABLUE
@@ -40,3 +36,6 @@ if XP1000
 SUBDIRS += XtrendRemote
 endif
 
+if HAVE_TEMPFANCONTROL
+SUBDIRS += TempFanControl
+endif

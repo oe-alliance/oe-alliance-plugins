@@ -60,6 +60,8 @@ if test `echo "$BOXTYPE" | cut -b 1-2` == "dm"; then
 	AC_DEFINE(DREAMBOX, 1, [Dreambox hardware])
 fi
 
+AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm500hd -o "$BOXTYPE" == vuuno -o "$BOXTYPE" == vuultimo -o "$BOXTYPE" == tmsingle -o "$BOXTYPE" == tmtwin -o "$BOXTYPE" == tm2t)
+
 PKG_CHECK_MODULES(ENIGMA2, enigma2)
 PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
 PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
@@ -103,10 +105,14 @@ Makefile
 3GModemManager/src/script/Makefile
 3GModemManager/meta/Makefile
 
-AutoBouquets/Makefile
-AutoBouquets/src/Makefile
-AutoBouquets/meta/Makefile
-AutoBouquets/po/Makefile
+AutoBouquetsMaker/Makefile
+AutoBouquetsMaker/images/Makefile
+AutoBouquetsMaker/lib/Makefile
+AutoBouquetsMaker/meta/Makefile
+AutoBouquetsMaker/po/Makefile
+AutoBouquetsMaker/providers/Makefile
+AutoBouquetsMaker/src/Makefile
+AutoBouquetsMaker/src/scanner/Makefile
 
 Blindscan/Makefile
 Blindscan/src/Makefile
@@ -141,10 +147,10 @@ HbbTV/src/Makefile
 HbbTV/meta/Makefile
 HbbTV/po/Makefile
 
-TmTwinFanControl/Makefile
-TmTwinFanControl/src/Makefile
-TmTwinFanControl/meta/Makefile
-TmTwinFanControl/po/Makefile
+TempFanControl/Makefile
+TempFanControl/src/Makefile
+TempFanControl/meta/Makefile
+TempFanControl/po/Makefile
 
 TunerServer/Makefile
 TunerServer/src/Makefile
@@ -180,11 +186,6 @@ VuplusEvent/Makefile
 VuplusEvent/src/Makefile
 VuplusEvent/meta/Makefile
 VuplusEvent/po/Makefile
-
-VuUnoFanControl/Makefile
-VuUnoFanControl/src/Makefile
-VuUnoFanControl/meta/Makefile
-VuUnoFanControl/po/Makefile
 
 WebBrowser/Makefile
 WebBrowser/src/Makefile

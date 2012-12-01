@@ -4,7 +4,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext
 
 PluginLanguageDomain = "FanControl"
-PluginLanguagePath = "SystemPlugins/FanControl/locale"
+PluginLanguagePath = "SystemPlugins/TempFanControl/locale"
 
 def localeInit():
 	if os.path.exists(resolveFilename(SCOPE_PLUGINS, os.path.join(PluginLanguagePath, language.getLanguage()))):
