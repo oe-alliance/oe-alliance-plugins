@@ -109,11 +109,10 @@ class SimpleConfigParser:
 
 class BookmarkManager(SimpleConfigParser):
 	_instance = None
-        def __new__(cls, *args, **kwargs):
-            if not cls._instance:
-                cls._instance = super(Singleton, cls).__new__(
-                                   cls, *args, **kwargs)
-            return cls._instance
+	def __new__(cls, *args, **kwargs):
+		if not cls._instance:
+			cls._instance = super(Singleton, cls).__new__(cls, *args, **kwargs)
+		return cls._instance
 
 	def __init__(self, _dbFileName):
 		SimpleConfigParser.__init__(self)
@@ -128,27 +127,40 @@ class BookmarkManager(SimpleConfigParser):
 			f.close()
 			manualmode = (model == "solo2" or model == "duo2")
 
-			os.system('echo "[__SYS__]" > %s'%(_dbFileName))
-			os.system('echo "category_current_idx = 1" >> %s'%(_dbFileName))
+			out = open(_dbFileName, 'w')
+			line = "[__SYS__]\n"
+			line = line + "category_current_idx = 1\n"
 			if manualmode :
-				os.system('echo "bookmark_current_idx = 2" >> %s'%(_dbFileName))
-			else:	os.system('echo "bookmark_current_idx = 1" >> %s'%(_dbFileName))
-			os.system('echo "[c-1]" >> %s'%(_dbFileName))
-			os.system('echo "id = 1" >> %s'%(_dbFileName))
-			os.system('echo "name = My favorite" >> %s'%(_dbFileName))
-			os.system('echo "[b-1]" >> %s'%(_dbFileName))
-			os.system('echo "url = http://www2.vuplus.com/" >> %s'%(_dbFileName))
-			os.system('echo "id = 1" >> %s'%(_dbFileName))
-			os.system('echo "parent = 1" >> %s'%(_dbFileName))
-			os.system('echo "title = Vuplus Home" >> %s'%(_dbFileName))
-			os.system('echo "type = 0" >> %s'%(_dbFileName))
+				line = line + "bookmark_current_idx = 3\n"
+			else:
+				line = line + "bookmark_current_idx = 2\n"
+			line = line + "\n"
+			line = line + "[c-1]\n"
+			line = line + "id = 1\n"
+			line = line + "name = My favorite\n"
+			line = line + "\n"
+			line = line + "[b-1]\n"
+			line = line + "id = 1\n"
+			line = line + "title = Vuplus Home\n"
+			line = line + "url = http://www2.vuplus.com/\n"
+			line = line + "parent = 1\n"
+			line = line + "type = 0\n"
+			line = line + "\n"
+			line = line + "[b-2]\n"
+			line = line + "id = 2\n"
+			line = line + "title = HBBig\n"
+			line = line + "url = http://www.hbbig.com/\n"
+			line = line + "parent = 1\n"
+			line = line + "type = 0\n"
+			line = line + "\n"
 			if manualmode :
-				os.system('echo "[b-2]" >> %s'%(_dbFileName))
-				os.system('echo "url = file:///usr/local/manual/main.html" >> %s'%(_dbFileName))
-				os.system('echo "id = 2" >> %s'%(_dbFileName))
-				os.system('echo "parent = 1" >> %s'%(_dbFileName))
-				os.system('echo "title = User Manual" >> %s'%(_dbFileName))
-				os.system('echo "type = 1" >> %s'%(_dbFileName))
+				line = line + "[b-3]\n"
+				line = line + "url = file:///usr/local/manual/main.html\n"
+				line = line + "id = 2\n"
+				line = line + "parent = 1\n"
+				line = line + "title = User Manual\n"
+				line = line + "type = 1\n"
+			out.write(line)
 		self.init(_dbFileName)
 
 	def message(self, format, params=None):
@@ -289,6 +301,6 @@ class BookmarkManager(SimpleConfigParser):
 
 	@staticmethod
 	def getInstance():
-		return BookmarkManager('/usr/lib/enigma2/python/Plugins/Extensions/HbbTV/bookmark.ini')
+		return BookmarkManager('/etc/enigma2/hbbtv_bookmark.ini')
 
 
