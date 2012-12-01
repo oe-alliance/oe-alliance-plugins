@@ -110,15 +110,12 @@ class TempFanControl(Screen, ConfigListScreen):
 			if count < tempcount:
 				id = templist[count]
 				if not getBoxType().startswith('tm') and not getBoxType().startswith('vu'):
-					print 'TEST1'
 					self["SensorTempText%d" % count] = StaticText(sensors.getSensorName(id))
 					self["SensorTemp%d" % count] = SensorSource(sensorid = id)
 				elif getBoxType().startswith('tm') or getBoxType().startswith('vu') and id < 1:
-					print 'TEST2'
 					self["SensorTempText%d" % count] = StaticText(sensors.getSensorName(id))
 					self["SensorTemp%d" % count] = SensorSource(sensorid = id)
 				else:
-					print 'TEST3'
 					self["SensorTempText%d" % count] = StaticText("")
 					self["SensorTemp%d" % count] = SensorSource()
 			else:
