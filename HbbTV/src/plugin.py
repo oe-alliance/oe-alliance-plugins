@@ -1053,7 +1053,7 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 
 	def getStartHbbTVUrl(self):
 		url, self._profile = None, 0
-		if len(self._applicationList) > 0:
+		if self._applicationList and len(self._applicationList) > 0:
 			self._profile = self._applicationList[0]["profile"]
 			url = self._applicationList[0]["url"]
 		if url is None:
