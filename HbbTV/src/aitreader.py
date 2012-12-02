@@ -1,4 +1,5 @@
-import os, xml.dom.minidom
+# -*- coding: utf-8 -*-
+import os, xml.dom.minidom, re
 
 DUMPBIN = "/usr/lib/enigma2/python/Plugins/Extensions/HbbTV/dumpait"
 class eAITSectionReader:
@@ -42,9 +43,15 @@ class eAITSectionReader:
 
 	def doOpen(self):
 		document = os.popen(self.mCommand).read()
+
+		# strip all none printable charators from data grabed from stream.
+		control_chars = ''.join(map(unichr, range(0,32) + range(127,160)))
+		control_char_re = re.compile('[%s]' % re.escape(control_chars))
+		document = control_char_re.sub('', document)
+
 		if len(document) == 0:
 			return False
-		self.mDocument = xml.dom.minidom.parseString(document)
+		self.mDocument = xml.dom.minidom.parseString(document.encode("utf-8"))
 		return True
 
 	def doDump(self):
