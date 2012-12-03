@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-27 12:36+0000\n"
+"POT-Creation-Date: 2012-12-03 13:52+0000\n"
 "PO-Revision-Date: 2012-11-27 12:36+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -18,166 +18,252 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../src/plugin.py:1433
+msgid ""
+"!!(Empty)\n"
+"Please, Input to the"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
 msgid "Add"
 msgstr ""
 
-#: ../src/plugin.py:1609
 msgid "Backspace Key"
 msgstr ""
 
-#: ../src/plugin.py:1164 ../src/plugin.py:1278
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmark Title"
+msgstr ""
+
+msgid "Bookmark URL"
+msgstr ""
+
+msgid "Browser Help"
+msgstr ""
+
+msgid "Browser Start/Stop"
+msgstr ""
+
+msgid "BrowserMain"
+msgstr ""
+
+msgid ""
+"Can't open selected bookmark.\n"
+"   - URL data is empty!!"
+msgstr ""
+
 msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:1226
+msgid "Category Name"
+msgstr ""
+
 msgid "Current Page"
 msgstr ""
 
-#: ../src/plugin.py:1435
+msgid "Current page is already exist."
+msgstr ""
+
+msgid "Currentpage(Bookmark)"
+msgstr ""
+
 msgid "Delete"
 msgstr ""
 
-#: ../src/plugin.py:1227
 msgid "Direct Input"
 msgstr ""
 
-#: ../src/plugin.py:1633
+msgid "Direct Input(Bookmark)"
+msgstr ""
+
+msgid "Direct Input(Category)"
+msgstr ""
+
+msgid "Do you want to delete the bookmark?"
+msgstr ""
+
+msgid "Do you want to delete the category and the bookmarks?"
+msgstr ""
+
+msgid "Do you want to set selected url to the Startpage?"
+msgstr ""
+
 msgid "Down Key"
 msgstr ""
 
-#: ../src/plugin.py:1434
 msgid "Edit"
 msgstr ""
 
-#: ../src/plugin.py:1607 ../src/plugin.py:1638
 msgid "Enter Key"
 msgstr ""
 
-#: ../src/plugin.py:1432 ../src/plugin.py:1575
 msgid "Exit"
 msgstr ""
 
-#: ../src/plugin.py:1601
 msgid "Exit the Opera browser."
 msgstr ""
 
-#: ../src/plugin.py:1576
+msgid "File"
+msgstr ""
+
 msgid "Global"
 msgstr ""
 
-#: ../src/plugin.py:1644
 msgid "Go to next page."
 msgstr ""
 
-#: ../src/plugin.py:1643
 msgid "Go to previous page."
 msgstr ""
 
-#: ../src/plugin.py:1618
+msgid "HbbTV Applications"
+msgstr ""
+
+msgid ""
+"HbbTV Browser was not running.\n"
+"Please running browser before start HbbTV Application."
+msgstr ""
+
+msgid "HbbTV Plugin"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Invalid "
+msgstr ""
+
+msgid ""
+"Invalid URL!!(Empty)\n"
+"Please, Input to the URL."
+msgstr ""
+
+msgid "Invalid URL. Please check again!!"
+msgstr ""
+
 msgid "It will move the mouse pointer down."
 msgstr ""
 
-#: ../src/plugin.py:1619
 msgid "It will move the mouse pointer left."
 msgstr ""
 
-#: ../src/plugin.py:1620
 msgid "It will move the mouse pointer right."
 msgstr ""
 
-#: ../src/plugin.py:1617
 msgid "It will move the mouse pointer up."
 msgstr ""
 
-#: ../src/plugin.py:1578
 msgid "Keyboard"
 msgstr ""
 
-#: ../src/plugin.py:1627 ../src/plugin.py:1634
 msgid "Left Key"
 msgstr ""
 
-#: ../src/plugin.py:1623
 msgid "Left Mouse Button"
 msgstr ""
 
-#: ../src/plugin.py:1577
 msgid "Mouse"
 msgstr ""
 
-#: ../src/plugin.py:1380
 msgid "Name"
 msgstr ""
 
-#: ../src/plugin.py:1040
 msgid "No detected HbbTV applications."
 msgstr ""
 
-#: ../src/plugin.py:1642
+msgid "Open Startpage"
+msgstr ""
+
+msgid "Open URL"
+msgstr ""
+
+msgid "Opera Browser"
+msgstr ""
+
+msgid ""
+"Opera Browser was not running.\n"
+"Please running browser using [File]>[Start/Stop] menu."
+msgstr ""
+
+msgid "Opera Web Browser"
+msgstr ""
+
+msgid "Opera Web Browser Plugin v1.0"
+msgstr ""
+
 msgid "PageDown Key"
 msgstr ""
 
-#: ../src/plugin.py:1641
 msgid "PageUp Key"
 msgstr ""
 
-#: ../src/plugin.py:1041
 msgid "Please choose an HbbTV application."
 msgstr ""
 
-#: ../src/plugin.py:1054
 msgid "Please choose one."
 msgstr ""
 
-#: ../src/plugin.py:1516
 msgid "Please choose."
 msgstr ""
 
-#: ../src/plugin.py:1628 ../src/plugin.py:1635
+msgid "Please enter URL here"
+msgstr ""
+
+msgid "Preference"
+msgstr ""
+
+msgid "Return"
+msgstr ""
+
 msgid "Right Key"
 msgstr ""
 
-#: ../src/plugin.py:1626
 msgid "Right Mouse Button"
 msgstr ""
 
-#: ../src/plugin.py:1165 ../src/plugin.py:1279
 msgid "Save"
 msgstr ""
 
-#: ../src/plugin.py:1436
 msgid "Set as Startpage"
 msgstr ""
 
-#: ../src/plugin.py:1604
 msgid "Show the Menu window."
 msgstr ""
 
-#: ../src/plugin.py:1608
 msgid "Show the Virtual keyboard window."
 msgstr ""
 
-#: ../src/plugin.py:1224
+msgid "Start"
+msgstr ""
+
 msgid "Start Page"
 msgstr ""
 
-#: ../src/plugin.py:1229
+msgid "Start/Stop"
+msgstr ""
+
 msgid "Startpage"
 msgstr ""
 
-#: ../src/plugin.py:1612
+msgid "Stop"
+msgstr ""
+
 msgid "Switch to keyboard/mouse mode."
 msgstr ""
 
-#: ../src/plugin.py:1387
 msgid "Title"
 msgstr ""
 
-#: ../src/plugin.py:1632
+msgid "Tools"
+msgstr ""
+
 msgid "Up Key"
 msgstr ""
 
-#: ../src/plugin.py:1388
 msgid "Url"
+msgstr ""
+
+msgid "start opera web browser"
 msgstr ""

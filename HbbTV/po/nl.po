@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-27 12:36+0000\n"
-"PO-Revision-Date: 2012-11-27 14:33+0100\n"
+"POT-Creation-Date: 2012-12-03 13:52+0000\n"
+"PO-Revision-Date: 2012-12-03 15:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: Andy B;ackburn, Rob van der Does\n"
 "Language: nl\n"
@@ -18,166 +18,262 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: ../src/plugin.py:1433
+msgid ""
+"!!(Empty)\n"
+"Please, Input to the"
+msgstr ""
+"!!(Leeg)\n"
+"Geef in naar"
+
+msgid "About"
+msgstr "About"
+
 msgid "Add"
 msgstr "Voeg toe"
 
-#: ../src/plugin.py:1609
 msgid "Backspace Key"
 msgstr "Backspace toets"
 
-#: ../src/plugin.py:1164 ../src/plugin.py:1278
+msgid "Bookmark"
+msgstr "Bladwijzer"
+
+msgid "Bookmark Title"
+msgstr "Bladwijzer titel"
+
+msgid "Bookmark URL"
+msgstr "Bladwijzer URL"
+
+msgid "Browser Help"
+msgstr "Browser help"
+
+msgid "Browser Start/Stop"
+msgstr "Browser start/stop"
+
+msgid "BrowserMain"
+msgstr "Browser "
+
+msgid ""
+"Can't open selected bookmark.\n"
+"   - URL data is empty!!"
+msgstr ""
+"Kan geselecteerde bladwijzer niet openen.\n"
+"   - URL is leeg!!"
+
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: ../src/plugin.py:1226
+msgid "Category Name"
+msgstr "Categorie naam"
+
 msgid "Current Page"
 msgstr "Huidige pagina"
 
-#: ../src/plugin.py:1435
+msgid "Current page is already exist."
+msgstr "Huidige pagina bestaat al."
+
+msgid "Currentpage(Bookmark)"
+msgstr "Huidige pagina (bladwijzer)"
+
 msgid "Delete"
 msgstr "Verwijder"
 
-#: ../src/plugin.py:1227
 msgid "Direct Input"
 msgstr "Directe invoer"
 
-#: ../src/plugin.py:1633
+msgid "Direct Input(Bookmark)"
+msgstr "Direkte invoer (bladwijzer)"
+
+msgid "Direct Input(Category)"
+msgstr "Direkte invoer (categorie)"
+
+msgid "Do you want to delete the bookmark?"
+msgstr "Wilt u deze bladwijzer verwijderen?"
+
+msgid "Do you want to delete the category and the bookmarks?"
+msgstr "Wilt u de categorie en de bladwijzers verwijderen?"
+
+msgid "Do you want to set selected url to the Startpage?"
+msgstr "Wilt u de geselecteerde URL als startpagina gebruiken?"
+
 msgid "Down Key"
 msgstr "Toets naar beneden"
 
-#: ../src/plugin.py:1434
 msgid "Edit"
 msgstr "Pas aan"
 
-#: ../src/plugin.py:1607 ../src/plugin.py:1638
 msgid "Enter Key"
 msgstr "Enter toets"
 
-#: ../src/plugin.py:1432 ../src/plugin.py:1575
 msgid "Exit"
 msgstr "Verlaat"
 
-#: ../src/plugin.py:1601
 msgid "Exit the Opera browser."
 msgstr "Verlaat de Opera browser."
 
-#: ../src/plugin.py:1576
+msgid "File"
+msgstr "Bestand"
+
 msgid "Global"
 msgstr "Globaal"
 
-#: ../src/plugin.py:1644
 msgid "Go to next page."
 msgstr "Ga naar de volgende pagina."
 
-#: ../src/plugin.py:1643
 msgid "Go to previous page."
 msgstr "Ga naar de vorige pagina."
 
-#: ../src/plugin.py:1618
+msgid "HbbTV Applications"
+msgstr "HbbTV applicaties"
+
+msgid ""
+"HbbTV Browser was not running.\n"
+"Please running browser before start HbbTV Application."
+msgstr ""
+"HbbTV Browser was niet actief.\n"
+"Start de browser alvorens een HbbTV applicatie te starten."
+
+msgid "HbbTV Plugin"
+msgstr "HbbTV Plugin"
+
+msgid "Help"
+msgstr "Help"
+
+msgid "Invalid "
+msgstr "Ongeldig"
+
+msgid ""
+"Invalid URL!!(Empty)\n"
+"Please, Input to the URL."
+msgstr ""
+"Ongeldige URL!!(Leeg)\n"
+"Geef de URL in."
+
+msgid "Invalid URL. Please check again!!"
+msgstr "Ongeldige URL!!"
+
 msgid "It will move the mouse pointer down."
 msgstr "Beweegt de muisaanwijzer naar beneden."
 
-#: ../src/plugin.py:1619
 msgid "It will move the mouse pointer left."
 msgstr "Beweegt de muisaanwijzer naar links."
 
-#: ../src/plugin.py:1620
 msgid "It will move the mouse pointer right."
 msgstr "Beweegt de muisaanwijzer naar rechts."
 
-#: ../src/plugin.py:1617
 msgid "It will move the mouse pointer up."
 msgstr "Beweegt de muisaanwijzer naar boven."
 
-#: ../src/plugin.py:1578
 msgid "Keyboard"
 msgstr "Toetsenbord"
 
-#: ../src/plugin.py:1627 ../src/plugin.py:1634
 msgid "Left Key"
 msgstr "Toets naar links"
 
-#: ../src/plugin.py:1623
 msgid "Left Mouse Button"
 msgstr "Linker muistoets"
 
-#: ../src/plugin.py:1577
 msgid "Mouse"
 msgstr "Muis"
 
-#: ../src/plugin.py:1380
 msgid "Name"
 msgstr "Naam"
 
-#: ../src/plugin.py:1040
 msgid "No detected HbbTV applications."
 msgstr "Geen HbbTV applicaties gedetecteerd."
 
-#: ../src/plugin.py:1642
+msgid "Open Startpage"
+msgstr "Open startpagina"
+
+msgid "Open URL"
+msgstr "Open URL"
+
+msgid "Opera Browser"
+msgstr "Opera Browser"
+
+msgid ""
+"Opera Browser was not running.\n"
+"Please running browser using [File]>[Start/Stop] menu."
+msgstr ""
+"Opera Browser was niet aktief.\n"
+"Start de browser met [File]>[Start/Stop] menu."
+
+msgid "Opera Web Browser"
+msgstr "Opera Web Browser"
+
+msgid "Opera Web Browser Plugin v1.0"
+msgstr "Opera Web Browser Plugin v1.0"
+
 msgid "PageDown Key"
 msgstr "Toets pagina naar beneden"
 
-#: ../src/plugin.py:1641
 msgid "PageUp Key"
 msgstr "Toets pagina naar boven"
 
-#: ../src/plugin.py:1041
 msgid "Please choose an HbbTV application."
 msgstr "Kies een HbbTV applicatie."
 
-#: ../src/plugin.py:1054
 msgid "Please choose one."
 msgstr "Kies er één."
 
-#: ../src/plugin.py:1516
 msgid "Please choose."
 msgstr "Kies."
 
-#: ../src/plugin.py:1628 ../src/plugin.py:1635
+msgid "Please enter URL here"
+msgstr "Geef URL hier in"
+
+msgid "Preference"
+msgstr "Voorkeur"
+
+msgid "Return"
+msgstr "Terug"
+
 msgid "Right Key"
 msgstr "Toets naar rechts"
 
-#: ../src/plugin.py:1626
 msgid "Right Mouse Button"
 msgstr "Rechter muistoets"
 
-#: ../src/plugin.py:1165 ../src/plugin.py:1279
 msgid "Save"
 msgstr "Sla op"
 
-#: ../src/plugin.py:1436
 msgid "Set as Startpage"
 msgstr "Stel in als startpagina"
 
-#: ../src/plugin.py:1604
 msgid "Show the Menu window."
 msgstr "Toon menuvenster"
 
-#: ../src/plugin.py:1608
 msgid "Show the Virtual keyboard window."
 msgstr "Toon virtuele toetsenbord"
 
-#: ../src/plugin.py:1224
+msgid "Start"
+msgstr "Start"
+
 msgid "Start Page"
 msgstr "Startpagina"
 
-#: ../src/plugin.py:1229
+msgid "Start/Stop"
+msgstr "Start/Stop"
+
 msgid "Startpage"
 msgstr "Startpagina"
 
-#: ../src/plugin.py:1612
+msgid "Stop"
+msgstr "Stop"
+
 msgid "Switch to keyboard/mouse mode."
 msgstr "Schakel tussen toetsenbord en muis modus"
 
-#: ../src/plugin.py:1387
 msgid "Title"
 msgstr "Titel"
 
-#: ../src/plugin.py:1632
+msgid "Tools"
+msgstr "Gereedschap"
+
 msgid "Up Key"
 msgstr "Toets naar boven"
 
-#: ../src/plugin.py:1388
 msgid "Url"
 msgstr "Url"
+
+msgid "start opera web browser"
+msgstr "start opera web browser"
