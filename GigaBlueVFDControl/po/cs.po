@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ims\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
 "PO-Revision-Date: 2012-05-22 01:01+0100\n"
 "Last-Translator: jerry <jerry00@quick.cz>\n"
 "Language-Team: jerry00 <jerry00@quick.cz>\n"
@@ -13,14 +13,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Czech\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+msgid "Blink Record Led"
+msgstr ""
+
+msgid "Blue"
+msgstr ""
 
 #
 msgid "Cancel"
 msgstr "Zavřít"
 
 msgid "Enable led"
+msgstr ""
+
+msgid "Led state Deep Standby"
 msgstr ""
 
 msgid "Led state RUN"
@@ -32,11 +40,29 @@ msgstr ""
 msgid "Led state Standby"
 msgstr ""
 
+msgid "No"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "Purple"
+msgstr ""
+
+msgid "Red"
+msgstr ""
+
 #
 msgid "Save"
 msgstr "Uložit"
 
 msgid "Show clock"
+msgstr ""
+
+msgid "Show clock in Deep Standby"
 msgstr ""
 
 msgid "Time mode"
@@ -46,4 +72,10 @@ msgid "Update Date/Time"
 msgstr ""
 
 msgid "VFD_Giga"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "in standby: "
 msgstr ""

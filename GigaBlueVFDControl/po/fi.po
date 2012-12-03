@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
 "PO-Revision-Date: 2012-05-18 01:41+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,11 +17,20 @@ msgstr ""
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-Country: FINLAND\n"
 
+msgid "Blink Record Led"
+msgstr ""
+
+msgid "Blue"
+msgstr ""
+
 #
 msgid "Cancel"
 msgstr "Peruuta"
 
 msgid "Enable led"
+msgstr ""
+
+msgid "Led state Deep Standby"
 msgstr ""
 
 msgid "Led state RUN"
@@ -33,11 +42,29 @@ msgstr ""
 msgid "Led state Standby"
 msgstr ""
 
+msgid "No"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "Purple"
+msgstr ""
+
+msgid "Red"
+msgstr ""
+
 #
 msgid "Save"
 msgstr "Tallenna"
 
 msgid "Show clock"
+msgstr ""
+
+msgid "Show clock in Deep Standby"
 msgstr ""
 
 msgid "Time mode"
@@ -47,4 +74,10 @@ msgid "Update Date/Time"
 msgstr ""
 
 msgid "VFD_Giga"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "in standby: "
 msgstr ""

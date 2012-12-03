@@ -1,0 +1,70 @@
+# Dutch translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2012 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2012-12-03 15:01+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Allow Streaming From Box Tuners"
+msgstr ""
+
+msgid "Build Complete!"
+msgstr ""
+
+msgid "Build Server"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Current Status:"
+msgstr ""
+
+msgid "Disable Server"
+msgstr ""
+
+msgid "Info"
+msgstr ""
+
+msgid "Server Disabled"
+msgstr ""
+
+msgid "Server Enabled"
+msgstr ""
+
+msgid "Server now disabled!"
+msgstr ""
+
+msgid "Sorry, but you need to have a device mounted at '/media/hd'"
+msgstr ""
+
+msgid "Tuner Server"
+msgstr ""
+
+msgid "Tuner Server Disabled."
+msgstr ""
+
+msgid "Tuner Server setup"
+msgstr ""
+
+msgid ""
+"Your server is now being deleted\n"
+"Please Wait ..."
+msgstr ""
+
+msgid ""
+"Your server is now building\n"
+"Please wait ..."
+msgstr ""
