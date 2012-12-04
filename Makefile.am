@@ -28,6 +28,14 @@ if VUDUO
 SUBDIRS += VuDuoFanControl
 endif
 
+if VUSOLO2
+SUBDIRS += FPGAUpgrade VuRemote
+endif
+
+if VUDUO2
+SUBDIRS += FPGAUpgrade VuRemote
+endif
+
 if GIGABLUE
 SUBDIRS += GigaBlueVFDControl
 endif
