@@ -28,7 +28,7 @@ if fileExists("/proc/stb/info/vumodel"):
 	vumodel = open("/proc/stb/info/vumodel")
 	info=vumodel.read().strip()
 	vumodel.close()
-	if info == "uno" or info == "ultimo":
+	if info == "uno" or info == "ultimo" or info == "solo2" or info == "duo2":
 		config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "2", choices =
 			[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
 	elif info == "solo" or info == "duo":
