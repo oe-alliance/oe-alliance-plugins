@@ -1,0 +1,193 @@
+# Dutch translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2012 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-11 16:18+0000\n"
+"PO-Revision-Date: 2012-12-11 17:48+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: Andy Blacburn. Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "30 Days"
+msgstr "30 dagen"
+
+msgid "About"
+msgstr "About"
+
+msgid "Add provider prefix to bouquets"
+msgstr "Voeg providerprefix toe aan favorietenlijsten"
+
+msgid "Allows you to set a schedule to perform a scan "
+msgstr "U kunt een schema instellen voor het uitvoeren van een scan"
+
+msgid "AutoBouquetsMaker"
+msgstr "AutoBouquetsMaker"
+
+msgid "AutoBouquetsMaker Configure"
+msgstr "AutoBouquetsMaker instellingen"
+
+msgid "AutoBouquetsMaker Hide sections"
+msgstr "AutoBouquetsMaker verberg secties"
+
+msgid "AutoBouquetsMaker Keep bouquets"
+msgstr "AutoBouquetsMaker behoud favorietenlijsten"
+
+msgid "AutoBouquetsMaker Log"
+msgstr "AutoBouquetsMaker log"
+
+msgid "AutoBouquetsMaker Providers"
+msgstr "AutoBouquetsMaker providers"
+
+msgid "Bouquets order"
+msgstr "Volgorde van favorietenlijsten"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Choose which level of setting's to display. 'Expert'-level shows all items, this also add's more options in the providers menu."
+msgstr "Kies het niveau van de te maken instellingen. 'Expert'-niveau toont alle items en er worden opties aan het providers menu toegevoegd."
+
+msgid "Close"
+msgstr "Sluit"
+
+msgid "Configure"
+msgstr "Configureer"
+
+msgid "Daily"
+msgstr "Dagelijks"
+
+msgid "Hide sections"
+msgstr "Verberg secties"
+
+msgid "Keep all bouquets"
+msgstr "Behoud alle favorietenlijsten"
+
+msgid "Keep bouquets"
+msgstr "Behoud favorietenlijsten"
+
+msgid "Move down"
+msgstr "Verplaats omlaag"
+
+msgid "Move up"
+msgstr "Verplaats omhoog"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Please wait..."
+msgstr "Even wachten..."
+
+msgid "Providers"
+msgstr "Providers"
+
+msgid "Providers order"
+msgstr "Providers volgorde"
+
+msgid "Really close without saving settings?"
+msgstr "Echt afsluiten zinder op te slaan?"
+
+msgid "Repeat how often"
+msgstr "Hoe vaak herhalen?"
+
+msgid "Schedule scan"
+msgstr "Plan scan"
+
+msgid "Select your own bouquet from the list, please note that the only the first 100 channels for this bouquet will be used."
+msgstr "Kies uw eiegn favorietenlijst in de lijst. Let op dat alleen de eerste 100 kanalen voor deze lijst zullen worden gebruikt."
+
+msgid "Set the repeat interval of the schedule."
+msgstr "Bepaal het herhalingsinterval van het schema."
+
+msgid "Set the time of day to perform the scan."
+msgstr "Tijdstip voor de dagelijkse scan."
+
+msgid "Setup mode"
+msgstr "Instellingen modus"
+
+msgid "Show log"
+msgstr "Toon log"
+
+msgid "Start scan"
+msgstr "Start scan"
+
+msgid "This option allows you to choose what region of the country you live in, so it populates the correct channels for your region."
+msgstr "Hier kiest u de regio zodat de voor uw regio juiste kanalen worden getoond."
+
+msgid "This option enables the current selected provider."
+msgstr "Deze optie schakeld de gekozen provider in."
+
+msgid "This option has several choices \"Yes\", (create a bouquet with all the channels in it), \"Yes HD only\", (will group all HD channels into this bouquet), \"Custom\", (allows you to select your own bouquet), \"No\", (do not use a main bouquet)"
+msgstr "Deze optie kent diverse keuzes \"Ja\", (creeert een lijst met alle kanalen), \"Ja alleen HD\", (alle HD-kanalen komen in in deze lijst), \"Aangepast\", (laat u uw eigen lijst kiezen), \"Nee\", (gebruik geen hoofdlijst)"
+
+msgid "This option will create a FreeToAir bouquet, it will group all none encrypted channels into this bouquet."
+msgstr "Deze optie maakt een FTA-lijst; alle niet versleutelde kanalen komen hierin."
+
+msgid "This option will create a High Definition bouquet, it will group all HD channels into this bouquet."
+msgstr "Deze optie maakt een HD-lijst; alle HD-kanalen komen hierin."
+
+msgid "This option will create bouquets for each type of channel, ie Entertainment, Movies, Documentary."
+msgstr "Deze optie maakt een lijst voor elk type zender, zoals Amusement. Film, documentaires."
+
+msgid "This option will prepend the provider name to bouquet name "
+msgstr "Deze optie plaatst de naam van de provider voor de lijst."
+
+msgid "This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)"
+msgstr "Deze optie wisselt SD kanalen met de HD versies (b.v.101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)"
+
+msgid "Time of backup to start"
+msgstr "Tijdstip dat backup start"
+
+msgid "Weekly"
+msgstr "Wekelijks"
+
+msgid "When disabled this will enable the 'Keep bouquets' in the main menu, allowing you to hide some 'existing' bouquets."
+msgstr "Indien uitgeschakeld zal dit 'Bewaar favorietenlijsten' inschakelen, wat het u mogelijk maakt enkele bestaande lijsten te verbergen."
+
+msgid "area"
+msgstr "gebied"
+
+msgid "custom bouquet for main"
+msgstr "aangepaste hoofdlijst"
+
+msgid "expert"
+msgstr "expert"
+
+msgid "generate FTA bouquet"
+msgstr "genereer FTA favorietenlijst"
+
+msgid "generate HD bouquet"
+msgstr "genereer HD favorietenlijst"
+
+msgid "generate main bouquet"
+msgstr "genereer hoofd-favorietenlijst"
+
+msgid "generate sections bouquets"
+msgstr "genereer sectie favorieten"
+
+msgid "no"
+msgstr "nee"
+
+msgid "simple"
+msgstr "eenvoudig"
+
+msgid "swap channels"
+msgstr "wissel channels"
+
+msgid "yes"
+msgstr "ja"
+
+msgid "yes (custom)"
+msgstr "ja (aangepast)"
+
+msgid "yes (only HD)"
+msgstr "ja  (alleen HD)"
+

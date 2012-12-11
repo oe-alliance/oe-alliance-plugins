@@ -1,0 +1,63 @@
+<provider>
+	<name>FreeSat</name>
+	<protocol>freesat</protocol>
+	<transponder frequency="10802750" symbol_rate="22000000" polarization="0"
+		fec_inner="4" orbital_position="282" inversion="2" system="0"
+		modulation="1" roll_off="0" pilot="2"
+		bat_pid="0xf01" />
+	<configurations>
+		<configuration key="freesat_118_29" bouquet="0x118" region="0x29" namespace="0x11a0000">England G2 - Channel Islands/Channel Islands</configuration>
+		<configuration key="freesat_118_f" bouquet="0x118" region="0xf" namespace="0x11a0000">England G2 - E Midlands/Central E</configuration>
+		<configuration key="freesat_118_1" bouquet="0x118" region="0x1" namespace="0x11a0000">England G2 - London/London</configuration>
+		<configuration key="freesat_118_8" bouquet="0x118" region="0x8" namespace="0x11a0000">England G2 - N West/BorderEng</configuration>
+		<configuration key="freesat_118_24" bouquet="0x118" region="0x24" namespace="0x11a0000">England G2 - NE &amp; C/Tyne Tees S</configuration>
+		<configuration key="freesat_118_1d" bouquet="0x118" region="0x1d" namespace="0x11a0000">England G2 - South/Meridian SE</configuration>
+		<configuration key="freesat_118_16" bouquet="0x118" region="0x16" namespace="0x11a0000">England G2 - West/Meridian N</configuration>
+		<configuration key="freesat_110_29" bouquet="0x110" region="0x29" namespace="0x11a0000">England HD - Channel Islands/Channel Islands</configuration>
+		<configuration key="freesat_110_f" bouquet="0x110" region="0xf" namespace="0x11a0000">England HD - E Midlands/Central E</configuration>
+		<configuration key="freesat_110_1" bouquet="0x110" region="0x1" namespace="0x11a0000">England HD - London/London</configuration>
+		<configuration key="freesat_110_8" bouquet="0x110" region="0x8" namespace="0x11a0000">England HD - N West/BorderEng</configuration>
+		<configuration key="freesat_110_24" bouquet="0x110" region="0x24" namespace="0x11a0000">England HD - NE &amp; C/Tyne Tees S</configuration>
+		<configuration key="freesat_110_1d" bouquet="0x110" region="0x1d" namespace="0x11a0000">England HD - South/Meridian SE</configuration>
+		<configuration key="freesat_110_16" bouquet="0x110" region="0x16" namespace="0x11a0000">England HD - West/Meridian N</configuration>
+		<configuration key="freesat_100_29" bouquet="0x100" region="0x29" namespace="0x11a0000">England SD - Channel Islands/Channel Islands</configuration>
+		<configuration key="freesat_100_f" bouquet="0x100" region="0xf" namespace="0x11a0000">England SD - E Midlands/Central E</configuration>
+		<configuration key="freesat_100_1" bouquet="0x100" region="0x1" namespace="0x11a0000">England SD - London/London</configuration>
+		<configuration key="freesat_100_8" bouquet="0x100" region="0x8" namespace="0x11a0000">England SD - N West/BorderEng</configuration>
+		<configuration key="freesat_100_24" bouquet="0x100" region="0x24" namespace="0x11a0000">England SD - NE &amp; C/Tyne Tees S</configuration>
+		<configuration key="freesat_100_1d" bouquet="0x100" region="0x1d" namespace="0x11a0000">England SD - South/Meridian SE</configuration>
+		<configuration key="freesat_100_16" bouquet="0x100" region="0x16" namespace="0x11a0000">England SD - West/Meridian N</configuration>
+		<configuration key="freesat_11b_5a" bouquet="0x11b" region="0x5a" namespace="0x11a0000">Northern Ireland G2 - Northern Ireland</configuration>
+		<configuration key="freesat_113_5a" bouquet="0x113" region="0x5a" namespace="0x11a0000">Northern Ireland HD - Northern Ireland</configuration>
+		<configuration key="freesat_103_5a" bouquet="0x103" region="0x5a" namespace="0x11a0000">Northern Ireland SD - Northern Ireland</configuration>
+		<configuration key="freesat_119_3c" bouquet="0x119" region="0x3c" namespace="0x11a0000">Scotland G2 - Scotland/Grampian</configuration>
+		<configuration key="freesat_111_3c" bouquet="0x111" region="0x3c" namespace="0x11a0000">Scotland HD - Scotland/Grampian</configuration>
+		<configuration key="freesat_101_3c" bouquet="0x101" region="0x3c" namespace="0x11a0000">Scotland SD - Scotland/Grampian</configuration>
+		<configuration key="freesat_11a_50" bouquet="0x11a" region="0x50" namespace="0x11a0000">Wales G2 - Wales</configuration>
+		<configuration key="freesat_112_50" bouquet="0x112" region="0x50" namespace="0x11a0000">Wales HD - Wales</configuration>
+		<configuration key="freesat_102_50" bouquet="0x102" region="0x50" namespace="0x11a0000">Wales SD - Wales</configuration>
+	</configurations>
+	<sections>
+		<section number="101">Entertainment</section>
+		<section number="200">News and Sport</section>
+		<section number="300">Movies</section>
+		<section number="400">Lifestyle</section>
+		<section number="500">Music</section>
+		<section number="600">Children</section>
+		<section number="650">Special Interest</section>
+		<!--
+		<section number="700">Radio</section>
+		-->
+		<section number="800">Shopping</section>
+		<section number="870">Adult</section>
+		<section number="950">Regional</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+if service["number"] > 999 or service["number"] < 1:
+	skip = True
+if service["number"] >= 700 and service["number"] < 800:
+	service["service_type"] = 2
+]]>
+	</servicehacks>
+</provider>

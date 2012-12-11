@@ -109,10 +109,14 @@ Makefile
 3GModemManager/src/script/Makefile
 3GModemManager/meta/Makefile
 
-AutoBouquets/Makefile
-AutoBouquets/src/Makefile
-AutoBouquets/meta/Makefile
-AutoBouquets/po/Makefile
+AutoBouquetsMaker/Makefile
+AutoBouquetsMaker/images/Makefile
+AutoBouquetsMaker/lib/Makefile
+AutoBouquetsMaker/meta/Makefile
+AutoBouquetsMaker/po/Makefile
+AutoBouquetsMaker/providers/Makefile
+AutoBouquetsMaker/src/Makefile
+AutoBouquetsMaker/src/scanner/Makefile
 
 Blindscan/Makefile
 Blindscan/src/Makefile

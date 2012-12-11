@@ -1,4 +1,6 @@
-SUBDIRS = AutoBouquets DLNABrowser DLNAServer StreamTV 3GModemManager WebBrowser OpenUitzendingGemist TunerServer
+ACLOCAL_AMFLAGS = -I m4
+
+SUBDIRS = AutoBouquetsMaker DLNABrowser DLNAServer StreamTV 3GModemManager WebBrowser OpenUitzendingGemist TunerServer
 
 if VUPLUS
 SUBDIRS += VuplusEvent HbbTV

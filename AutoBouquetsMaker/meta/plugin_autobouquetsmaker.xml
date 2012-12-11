@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Extentions" />
+	  </prerequisites>
+          <info>
+                    <author>Skaman and AndyBlac</author>
+                    <name>AutoBouquetsMaker</name>
+                    <packagename>enigma2-plugin-systemplugins-autobouquetsmaker</packagename>
+                    <shortdescription>Automatically build and update bouquets from the satellite stream.</shortdescription>
+                    <description>Automatically build and update bouquets from the satellite stream.</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-autobouquetsmaker" />
+	</files>
+</default>

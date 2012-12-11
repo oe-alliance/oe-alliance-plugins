@@ -1,0 +1,491 @@
+# for localized messages
+from . import _
+
+from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
+from Components.ActionMap import ActionMap
+from Components.Button import Button
+from Components.config import config, configfile, ConfigYesNo, ConfigSelection, getConfigListEntry
+from Components.ConfigList import ConfigListScreen
+from Components.Sources.StaticText import StaticText
+from Components.Label import Label
+from Components.NimManager import nimmanager
+from enigma import eTimer
+
+from scanner.manager import Manager
+from scanner.providerconfig import ProviderConfig
+import log
+import itertools
+
+class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
+	skin = """
+		<screen position="center,center" size="600,350" >
+			<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#9f1313" font="Regular;18" transparent="1"/>
+			<widget name="key_green" position="150,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#1f771f" font="Regular;18" transparent="1"/>
+			<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="150,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<widget name="config" position="10,60" size="580,230" scrollbarMode="showOnDemand" />
+			<widget name="description" position="0,300" size="600,50" font="Regular;18" halign="center" valign="bottom" transparent="0" zPosition="1" />
+			<widget name="pleasewait" position="10,60" size="580,230" font="Regular;18" halign="center" valign="center" transparent="0" zPosition="2" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.session = session
+		self.setup_title = _("AutoBouquetsMaker Providers")
+		Screen.setTitle(self, self.setup_title)
+
+		self.onChangedEntry = [ ]
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+
+		self.activityTimer = eTimer()
+		self.activityTimer.timeout.get().append(self.prepare)
+
+		self["actions"] = ActionMap(["SetupActions", 'ColorActions', 'VirtualKeyboardActions', "MenuActions"],
+		{
+			"ok": self.keySave,
+			"cancel": self.keyCancel,
+			"red": self.keyCancel,
+			"green": self.keySave,
+			"menu": self.keyCancel,
+		}, -2)
+
+		self["key_red"] = Button(_("Cancel"))
+		self["key_green"] = Button(_("OK"))
+		self["pleasewait"] = Label()
+		self["description"] = Label(_(""))
+
+		self.onLayoutFinish.append(self.populate)
+
+	def populate(self):
+		self["actions"].setEnabled(False)
+		self["pleasewait"].setText(_("Please wait..."))
+		self.activityTimer.start(1)
+
+	def prepare(self):
+		self.activityTimer.stop()
+		self.providers = Manager().getProviders()
+		self.providers_configs = {}
+		self.providers_area = {}
+		self.providers_swapchannels = {}
+		self.providers_makemain = {}
+		self.providers_custommain = {}
+		self.providers_makesections = {}
+		self.providers_makehd = {}
+		self.providers_makefta = {}
+		self.providers_order = []
+		self.orbital_supported = []
+
+		# get supported orbital positions
+		nims = nimmanager.getNimListOfType("DVB-S")
+		for nim in nims:
+			sats = nimmanager.getSatListForNim(nim)
+			for sat in sats:
+				if sat[0] not in self.orbital_supported:
+					self.orbital_supported.append(sat[0])
+
+		# read providers configurations
+		providers_tmp_configs = {}
+		providers_tmp = config.autobouquetsmaker.providers.value.split("|")
+		for provider_tmp in providers_tmp:
+			provider_config = ProviderConfig(provider_tmp)
+
+			if not provider_config.isValid():
+				continue
+
+			if provider_config.getProvider() not in self.providers:
+				continue
+
+			if self.providers[provider_config.getProvider()]["transponder"]["orbital_position"] not in self.orbital_supported:
+				continue
+
+			self.providers_order.append(provider_config.getProvider())
+			providers_tmp_configs[provider_config.getProvider()] = provider_config
+
+		# get current bouquets list (for custom main)
+		bouquets = Manager().getBouquetsList()
+		bouquets_list = []
+
+		if bouquets["tv"] is not None:
+			for bouquet in bouquets["tv"]:
+				if bouquet["filename"][:12] == "autobouquet.":
+					continue
+				bouquets_list.append((bouquet["filename"], bouquet["name"]))
+
+		# build providers configurations
+		for provider in self.providers.keys():
+			self.providers_configs[provider] = ConfigYesNo(default = (provider in providers_tmp_configs.keys()))
+			self.providers_swapchannels[provider] = ConfigYesNo(default = (provider in providers_tmp_configs and providers_tmp_configs[provider].isSwapChannels()))
+
+			custom_bouquets_exists = False
+			self.providers_makemain[provider] = None
+			self.providers_custommain[provider] = None
+			self.providers_makesections[provider] = None
+			self.providers_makehd[provider] = None
+			self.providers_makefta[provider] = None
+
+			if len(self.providers[provider]["sections"].keys()) > 1:	# only if there's more then one section
+				sections_default = True
+				if provider in providers_tmp_configs:
+					sections_default = providers_tmp_configs[provider].isMakeSections()
+				self.providers_makesections[provider] = ConfigYesNo(default = sections_default)
+				custom_bouquets_exists = True
+
+			if self.providers[provider]["protocol"] != "fastscan":	# fastscan doesn't have enough information to make HD and/or FTA bouquets
+				hd_default = True
+				fta_default = True
+				if provider in providers_tmp_configs:
+					hd_default = providers_tmp_configs[provider].isMakeHD()
+					fta_default = providers_tmp_configs[provider].isMakeFTA()
+				self.providers_makehd[provider] = ConfigYesNo(default = hd_default)
+				self.providers_makefta[provider] = ConfigYesNo(default = fta_default)
+				custom_bouquets_exists = True
+
+			if sorted(self.providers[provider]["sections"].keys())[0] > 1:
+				makemain_default = "no"
+				makemain_list = []
+				makemain_list.append(("yes", _("yes")))
+
+				if provider not in providers_tmp_configs:
+					makemain_default = "yes"	# enabled as default
+
+				if provider in providers_tmp_configs and providers_tmp_configs[provider].isMakeNormalMain():
+					makemain_default = "yes"
+
+				if self.providers[provider]["protocol"] != "fastscan":
+					makemain_list.append(("hd", _("yes (only HD)")))
+					if provider in providers_tmp_configs and providers_tmp_configs[provider].isMakeHDMain():
+						makemain_default = "hd"
+
+				if len(bouquets_list) > 0:
+					makemain_list.append(("custom", _("yes (custom)")))
+					if provider in providers_tmp_configs and providers_tmp_configs[provider].isMakeCustomMain():
+						makemain_default = "custom"
+
+					bouquet_default = bouquets_list[0][0]
+					if provider in providers_tmp_configs:
+						for bouquet_entry in bouquets_list:
+							if bouquet_entry[0] == providers_tmp_configs[provider].getCustomFilename():
+								bouquet_default = bouquet_entry[0]
+								break
+
+					self.providers_custommain[provider] = ConfigSelection(default = bouquet_default, choices = bouquets_list)
+
+				makemain_list.append(("no", _("no")))
+				self.providers_makemain[provider] = ConfigSelection(default = makemain_default, choices = makemain_list)
+
+			elif custom_bouquets_exists:
+				makemain_default = "no"
+				if provider not in providers_tmp_configs:
+					makemain_default = "yes"
+				if provider in providers_tmp_configs and providers_tmp_configs[provider].isMakeNormalMain():
+					makemain_default = "yes"
+				self.providers_makemain[provider] = ConfigSelection(default = makemain_default, choices = [("yes", _("yes")), ("no", _("no"))])
+
+			arealist = []
+			bouquets = self.providers[provider]["bouquets"]
+			for bouquet in bouquets.keys():
+				arealist.append((bouquet, self.providers[provider]["bouquets"][bouquet]["name"]))
+			arealist.sort()
+			if self.providers[provider]["protocol"] == "sky" or self.providers[provider]["protocol"] == "freesat":
+				default_area = None
+				if provider in providers_tmp_configs:
+					default_area = providers_tmp_configs[provider].getArea()
+				self.providers_area[provider] = ConfigSelection(default = default_area, choices = arealist)
+
+		self.createSetup()
+		self["pleasewait"].hide()
+		self["actions"].setEnabled(True)
+
+	def createSetup(self):
+		self.editListEntry = None
+		self.list = []
+		providers_enabled = []
+		for provider in sorted(self.providers.keys()):
+			if self.providers[provider]["transponder"]["orbital_position"] not in self.orbital_supported:
+				continue
+
+			self.list.append(getConfigListEntry(self.providers[provider]["name"], self.providers_configs[provider], _("This option enables the current selected provider.")))
+			if self.providers_configs[provider].value:
+				if self.providers[provider]["protocol"] == "sky" or self.providers[provider]["protocol"] == "freesat":
+					self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("area"), self.providers_area[provider], _("This option allows you to choose what region of the country you live in, so it populates the correct channels for your region.")))
+
+				if config.autobouquetsmaker.level.value == "expert":
+					if self.providers_makemain[provider]:
+						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate main bouquet"), self.providers_makemain[provider], _('This option has several choices "Yes", (create a bouquet with all the channels in it), "Yes HD only", (will group all HD channels into this bouquet), "Custom", (allows you to select your own bouquet), "No", (do not use a main bouquet)')))
+
+					if self.providers_custommain[provider] and self.providers_makemain[provider] and self.providers_makemain[provider].value == "custom":
+						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("custom bouquet for main"), self.providers_custommain[provider], _("Select your own bouquet from the list, please note that the only the first 100 channels for this bouquet will be used.")))
+
+					if self.providers_makesections[provider]:
+						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate sections bouquets"), self.providers_makesections[provider], _("This option will create bouquets for each type of channel, ie Entertainment, Movies, Documentary.")))
+
+					if self.providers_makehd[provider] and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "hd"):
+						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate HD bouquet"), self.providers_makehd[provider], _("This option will create a High Definition bouquet, it will group all HD channels into this bouquet.")))
+
+					if self.providers_makefta[provider]:
+						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate FTA bouquet"), self.providers_makefta[provider], _("This option will create a FreeToAir bouquet, it will group all none encrypted channels into this bouquet.")))
+
+					if self.providers_makemain[provider] and self.providers_makemain[provider].value == "yes":
+						if self.providers[provider]["protocol"] == "sky":
+							for swapchannel in self.providers[provider]["swapchannels"]:
+								if len(swapchannel["filters"]) == 0:
+									self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("swap channels"), self.providers_swapchannels[provider], _("This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)")))
+									break
+
+								done = False
+								if self.providers_area[provider].value in self.providers[provider]["bouquets"]:
+									current_bouquet_id = self.providers[provider]["bouquets"][self.providers_area[provider].value]["bouquet"]
+									current_region = self.providers[provider]["bouquets"][self.providers_area[provider].value]["region"]
+									for cfilter in swapchannel["filters"]:
+										if cfilter[0] == current_bouquet_id and cfilter[1] == current_region:
+											self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("swap channels"), self.providers_swapchannels[provider], _("This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)")))
+											done = True
+											break
+
+								if done:
+									break
+						else:
+							if len(self.providers[provider]["swapchannels"]) > 0:
+								self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("swap channels"), self.providers_swapchannels[provider], _("This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)")))
+
+				providers_enabled.append(provider)
+
+		for provider in providers_enabled:
+			if provider not in self.providers_order:
+				self.providers_order.append(provider)
+
+		for provider in self.providers_order:
+			if provider not in providers_enabled:
+				self.providers_order.remove(provider)
+
+		self["config"].list = self.list
+		self["config"].setList(self.list)
+
+	# for summary:
+	def changedEntry(self):
+		self.item = self["config"].getCurrent()
+		for x in self.onChangedEntry:
+			x()
+		try:
+			if isinstance(self["config"].getCurrent()[1], ConfigYesNo) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
+				self.createSetup()
+		except:
+			pass
+
+	def getCurrentEntry(self):
+		return self["config"].getCurrent() and str(self["config"].getCurrent()[0]) or ""
+
+	def getCurrentValue(self):
+		return self["config"].getCurrent() and str(self["config"].getCurrent()[1].getText()) or ""
+
+	def getCurrentDescription(self):
+		return self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or ""
+
+	def createSummary(self):
+		return SetupSummary
+
+	def saveAll(self):
+		for x in self["config"].list:
+			x[1].save()
+
+		config_string = ""
+		for provider in self.providers_order:
+			if self.providers_configs[provider].value:
+				if len(config_string) > 0:
+					config_string += "|"
+
+				provider_config = ProviderConfig()
+				provider_config.unsetAllFlags()
+
+				provider_config.setProvider(provider)
+				if self.providers[provider]["protocol"] == "sky" or self.providers[provider]["protocol"] == "freesat":
+					provider_config.setArea(self.providers_area[provider].value)
+
+				if self.providers_makemain[provider] is None or self.providers_makemain[provider].value == "yes":
+					provider_config.setMakeNormalMain()
+				elif self.providers_makemain[provider].value == "hd":
+					provider_config.setMakeHDMain()
+				elif self.providers_makemain[provider].value == "custom":
+					provider_config.setMakeCustomMain()
+					provider_config.setCustomFilename(self.providers_custommain[provider].value)
+
+				if self.providers_makesections[provider] and self.providers_makesections[provider].value:
+					provider_config.setMakeSections()
+
+				if self.providers_makehd[provider] and self.providers_makehd[provider].value and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "hd"):
+					provider_config.setMakeHD()
+
+				if self.providers_makefta[provider] and self.providers_makefta[provider].value:
+					provider_config.setMakeFTA()
+
+				if self.providers_swapchannels[provider] and self.providers_swapchannels[provider].value:
+					provider_config.setSwapChannels()
+
+				config_string += provider_config.serialize()
+
+		config.autobouquetsmaker.providers.value = config_string
+		config.autobouquetsmaker.providers.save()
+		configfile.save()
+
+	# keySave and keyCancel are just provided in case you need them.
+	# you have to call them by yourself.
+	def keySave(self):
+		self.saveAll()
+		self.close()
+
+	def cancelConfirm(self, result):
+		if not result:
+			return
+		for x in self["config"].list:
+			x[1].cancel()
+		self.close()
+
+	def keyCancel(self):
+		if self["config"].isChanged():
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
+		else:
+			self.close()
+
+class AutoBouquetsMaker_Setup(ConfigListScreen, Screen):
+	skin = """
+		<screen position="center,center" size="600,350" >
+			<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#9f1313" font="Regular;18" transparent="1"/>
+			<widget name="key_green" position="150,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#1f771f" font="Regular;18" transparent="1"/>
+			<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green" position="150,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<widget name="config" position="10,60" size="580,230" scrollbarMode="showOnDemand" />
+			<widget name="description" position="0,300" size="600,50" font="Regular;18" halign="center" valign="bottom" transparent="0" zPosition="1" />
+			<widget name="pleasewait" position="10,60" size="580,230" font="Regular;18" halign="center" valign="center" transparent="0" zPosition="2" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.session = session
+		self.setup_title = _("AutoBouquetsMaker Configure")
+		Screen.setTitle(self, self.setup_title)
+
+		self.onChangedEntry = [ ]
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+
+		self.activityTimer = eTimer()
+		self.activityTimer.timeout.get().append(self.prepare)
+
+		self["actions"] = ActionMap(["SetupActions", 'ColorActions', 'VirtualKeyboardActions', "MenuActions"],
+		{
+			"ok": self.keySave,
+			"cancel": self.keyCancel,
+			"red": self.keyCancel,
+			"green": self.keySave,
+			"menu": self.keyCancel,
+		}, -2)
+
+		self["key_red"] = Button(_("Cancel"))
+		self["key_green"] = Button(_("OK"))
+		self["description"] = Label(_(""))
+		self["pleasewait"] = Label()
+
+		self.onLayoutFinish.append(self.populate)
+
+	def populate(self):
+		self["actions"].setEnabled(False)
+		self["pleasewait"].setText(_("Please wait..."))
+		self.activityTimer.start(1)
+
+	def prepare(self):
+		self.activityTimer.stop()
+		bouquets = Manager().getBouquetsList()
+		bouquets_list = []
+		bouquet_default = None
+
+		self.createSetup()
+		self["pleasewait"].hide()
+		self["actions"].setEnabled(True)
+
+	def createSetup(self):
+		self.editListEntry = None
+		self.list = []
+
+		self.list.append(getConfigListEntry(_("Setup mode"), config.autobouquetsmaker.level, _("Choose which level of setting's to display. 'Expert'-level shows all items, this also add's more options in the providers menu.")))
+		self.list.append(getConfigListEntry(_("Schedule scan"), config.autobouquetsmaker.schedule, _("Allows you to set a schedule to perform a scan ")))
+		if config.autobouquetsmaker.schedule.getValue():
+			self.list.append(getConfigListEntry(_("Time of backup to start"), config.autobouquetsmaker.scheduletime, _("Set the time of day to perform the scan.")))
+			self.list.append(getConfigListEntry(_("Repeat how often"), config.autobouquetsmaker.repeattype, _("Set the repeat interval of the schedule.")))
+		if config.autobouquetsmaker.level.value == "expert":
+			self.list.append(getConfigListEntry(_("Keep all bouquets"), config.autobouquetsmaker.keepallbouquets, _("When disabled this will enable the 'Keep bouquets' in the main menu, allowing you to hide some 'existing' bouquets.")))
+			self.list.append(getConfigListEntry(_("Add provider prefix to bouquets"), config.autobouquetsmaker.addprefix, _("This option will prepend the provider name to bouquet name ")))
+
+		self["config"].list = self.list
+		self["config"].setList(self.list)
+
+	# for summary:
+	def changedEntry(self):
+		self.item = self["config"].getCurrent()
+		for x in self.onChangedEntry:
+			x()
+		try:
+			if isinstance(self["config"].getCurrent()[1], ConfigYesNo) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
+				self.createSetup()
+		except:
+			pass
+
+	def getCurrentEntry(self):
+		return self["config"].getCurrent() and str(self["config"].getCurrent()[0]) or ""
+
+	def getCurrentValue(self):
+		return self["config"].getCurrent() and str(self["config"].getCurrent()[1].getText()) or ""
+
+	def getCurrentDescription(self):
+		return self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or ""
+
+	def createSummary(self):
+		return SetupSummary
+
+	def saveAll(self):
+		for x in self["config"].list:
+			x[1].save()
+
+	# keySave and keyCancel are just provided in case you need them.
+	# you have to call them by yourself.
+	def keySave(self):
+		self.saveAll()
+		self.close()
+
+	def cancelConfirm(self, result):
+		if not result:
+			return
+		for x in self["config"].list:
+			x[1].cancel()
+		self.close()
+
+	def keyCancel(self):
+		if self["config"].isChanged():
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
+		else:
+			self.close()
+
+class SetupSummary(Screen):
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent = parent)
+		self["SetupTitle"] = StaticText(_(parent.setup_title))
+		self["SetupEntry"] = StaticText("")
+		self["SetupValue"] = StaticText("")
+		self.onShow.append(self.addWatcher)
+		self.onHide.append(self.removeWatcher)
+
+	def addWatcher(self):
+		self.parent.onChangedEntry.append(self.selectionChanged)
+		self.parent["config"].onSelectionChanged.append(self.selectionChanged)
+		self.selectionChanged()
+
+	def removeWatcher(self):
+		self.parent.onChangedEntry.remove(self.selectionChanged)
+		self.parent["config"].onSelectionChanged.remove(self.selectionChanged)
+
+	def selectionChanged(self):
+		self["SetupEntry"].text = self.parent.getCurrentEntry()
+		self["SetupValue"].text = self.parent.getCurrentValue()
+		if hasattr(self.parent,"getCurrentDescription"):
+			self.parent["description"].text = self.parent.getCurrentDescription()

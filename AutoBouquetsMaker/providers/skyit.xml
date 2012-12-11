@@ -1,0 +1,28 @@
+<provider>
+	<name>SKY Italy</name>
+	<protocol>sky</protocol>
+	<transponder frequency="11976000" symbol_rate="29900000" polarization="0"
+		fec_inner="4" orbital_position="130" inversion="2" system="0"
+		modulation="1" roll_off="0" pilot="2" />
+	<configurations>
+		<configuration key="sky_italy_sd" bouquet="0x6250" region="0x05" namespace="0x820000">SKY Italy SD</configuration>
+		<configuration key="sky_italy_hd" bouquet="0x6250" region="0x04" namespace="0x820000">SKY Italy HD</configuration>
+	</configurations>
+	<sections>
+		<section number="100">Intrattenimento</section>
+		<section number="200">Sport</section>
+		<section number="300">Cinema</section>
+		<section number="350">Primafila</section>
+		<section number="400">Mondi e culture</section>
+		<section number="500">News</section>
+		<section number="600">Bambini</section>
+		<section number="700">Musica</section>
+		<section number="800">Altri</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+if service["number"] > 999 or service["number"] < 100:
+	skip = True
+]]>
+	</servicehacks>
+</provider>
