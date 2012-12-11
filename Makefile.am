@@ -13,7 +13,7 @@ SUBDIRS += XtrendFancontrol Blindscan
 endif
 
 if VENTON
-SUBDIRS += VentonFancontrol
+SUBDIRS += VentonFancontrol Blindscan
 endif
 
 if VUUNO
