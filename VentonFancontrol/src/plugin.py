@@ -11,8 +11,8 @@ else:
 standbylist = [("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))]
 
 config.plugins.FanControl = ConfigSubsection()
-config.plugins.FanControl.mode = ConfigSelection(choices = modelist, default = "0")
-config.plugins.FanControl.StandbyOff = ConfigSelection(choices = standbylist, default="false")
+config.plugins.FanControl.mode = ConfigSelection(choices = modelist, default = "2")
+config.plugins.FanControl.StandbyOff = ConfigSelection(choices = standbylist, default="true")
 
 class FanSetupScreen(ConfigListScreen, Screen):
 
