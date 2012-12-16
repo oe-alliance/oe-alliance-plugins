@@ -1,0 +1,195 @@
+# German translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2012 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-15 05:36+0000\n"
+"PO-Revision-Date: 2012-12-16 20:18+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: Andy Blacburn, Trial\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: germany\n"
+
+msgid "30 Days"
+msgstr "30 Tage"
+
+msgid "About"
+msgstr "Über"
+
+msgid "Add provider prefix to bouquets"
+msgstr "Füge Provider in Namen ein"
+
+msgid "Allows you to set a schedule to perform a scan "
+msgstr "Erlaubt es einen Zeitplan für den Scan zu erstellen"
+
+msgid "AutoBouquetsMaker"
+msgstr "AutoBouquetsMaker"
+
+msgid "AutoBouquetsMaker Configure"
+msgstr "AutoBouquetsMaker Einstellungen"
+
+msgid "AutoBouquetsMaker Hide sections"
+msgstr "AutoBouquetsMaker Verberge Sektionen"
+
+msgid "AutoBouquetsMaker Keep bouquets"
+msgstr "AutoBouquetsMaker Behalte Favoritenlisten"
+
+msgid "AutoBouquetsMaker Log"
+msgstr "AutoBouquetsMaker Log"
+
+msgid "AutoBouquetsMaker Providers"
+msgstr "AutoBouquetsMaker Anbieter"
+
+msgid "Bouquets order"
+msgstr "Favoritenliste Sortierung"
+
+msgid "Cancel"
+msgstr "Abbruch"
+
+msgid "Choose which level of setting's to display. 'Expert'-level shows all items, this also add's more options in the providers menu."
+msgstr "Wähloe Level der Anzeige. 'Experte' zeigt alle Einträge auch in den Anbieter-Menüs."
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "Configure"
+msgstr "Einstellungen"
+
+msgid "Daily"
+msgstr "Täglich"
+
+msgid "Hide sections"
+msgstr "Verstecke Sektionen"
+
+msgid "Keep all bouquets"
+msgstr "Alle Favoritenlisten behalten"
+
+msgid "Keep bouquets"
+msgstr "Favoritenlisten behalten"
+
+msgid "Move down"
+msgstr "Runter bewegen"
+
+msgid "Move up"
+msgstr "Hoch bewegne"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Please wait..."
+msgstr "Bitte warten..."
+
+msgid "Providers"
+msgstr "Anbieter"
+
+msgid "Providers order"
+msgstr "Anbieter Sortierung"
+
+msgid "Really close without saving settings?"
+msgstr "Wirklich ohne Speichern beenden?"
+
+msgid "Repeat how often"
+msgstr "Wie oft wiederholen?"
+
+msgid "Schedule scan"
+msgstr "Geplanter Scan"
+
+msgid "Select your own bouquet from the list, please note that the only the first 100 channels for this bouquet will be used."
+msgstr "Wähle deine eigene Favoritenliste aus der Liste. Bitte beachten das nur die ersten 100 Sender der Favoritenliste benutzt werden."
+
+msgid "Set the repeat interval of the schedule."
+msgstr "Setze den Zeitabstand für die geplanten Scans."
+
+msgid "Set the time of day to perform the scan."
+msgstr "Setze die Zeit wann der Scan durchgeführt werden soll."
+
+msgid "Setup mode"
+msgstr "Einstellungsmodus"
+
+msgid "Show log"
+msgstr "Zeige Log"
+
+msgid "Start scan"
+msgstr "Starte Scan"
+
+msgid "This option allows you to choose what region of the country you live in, so it populates the correct channels for your region."
+msgstr "Diese Option erlaubt es die Region des Landes vorzugeben damit die korrekten Sender gewählt werden."
+
+msgid "This option enables the current selected provider."
+msgstr "Diese Option aktiviert den aktuell gewählten Anbieter."
+
+msgid "This option has several choices \"Yes\", (create a bouquet with all the channels in it), \"Yes HD only\", (will group all HD channels into this bouquet), \"Custom\", (allows you to select your own bouquet), \"No\", (do not use a main bouquet)"
+msgstr "Diese Option enthält mehrere Wahlmöglichkeiten \"Ja\" (erzeuge eine Favoritenliste mit allen Sendern), \"Ja nur HD\" (erzeuge eine Favoritenliste mit allen HD Sendern), \"benutzerdefiniert\" (erlaubt es eine Favoritenliste auszuwählen), \"Nein\" (Hauptfavoritenliste nicht benutzen)"
+
+msgid "This option will create a FreeToAir bouquet, it will group all none encrypted channels into this bouquet."
+msgstr "Diese Option erzeugt eine FreeToAir (FTA) Favoritenliste. Alle nicht verschlüsselten Sender werden in einer Favoritenliste zusammen gefasst."
+
+msgid "This option will create a High Definition bouquet, it will group all HD channels into this bouquet."
+msgstr "Diese Option erzeugt eine HighDefinition (HD) Favoritenliste. Alle HD Sender werden in einer Favoritenliste zusammen gefasst."
+
+msgid "This option will create bouquets for each type of channel, ie Entertainment, Movies, Documentary."
+msgstr "Diese Option erzeugt eine Favoritenliste für jede Programmart wie z.B. Unterhaltung, Filme, Serien."
+
+msgid "This option will prepend the provider name to bouquet name "
+msgstr "Diese Option fügt den Anbieternamen an den Anfang des Namens der Favoritenliste an."
+
+msgid "This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)"
+msgstr "Diese Option tauscht SD und HD Versionen der Sender also z.B. 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel 5"
+
+msgid "Time of backup to start"
+msgstr "Zeit für Start von Backup"
+
+msgid "Weekly"
+msgstr "Wöchentlich"
+
+msgid "When disabled this will enable the 'Keep bouquets' in the main menu, allowing you to hide some 'existing' bouquets."
+msgstr "Wenn deaktiviert erscheint 'Favoritenliste behalten' im Hauptmenü und erlaubt es vorhandene Favoritenlisten zu verstecken."
+
+msgid "area"
+msgstr "Region"
+
+msgid "custom bouquet for main"
+msgstr "Benutzerdefinierte Haupt Favoritenliste"
+
+msgid "expert"
+msgstr "Experte"
+
+msgid "generate FTA bouquet"
+msgstr "Erzeuge FTA Favoritenlisten"
+
+msgid "generate HD bouquet"
+msgstr "Erzeuge HD Favoritenlisten"
+
+msgid "generate main bouquet"
+msgstr "Erzeuge Haupt Favoritenlisten"
+
+msgid "generate sections bouquets"
+msgstr "Erzeuge Sektionen Favoritenlisten"
+
+msgid "no"
+msgstr "Nein"
+
+msgid "simple"
+msgstr "einfach"
+
+msgid "swap channels"
+msgstr "Sender tauschen"
+
+msgid "yes"
+msgstr "Ja"
+
+msgid "yes (custom)"
+msgstr "Ja (benutzerdefiniert)"
+
+msgid "yes (only HD)"
+msgstr "Ja (nur HD)"
+
