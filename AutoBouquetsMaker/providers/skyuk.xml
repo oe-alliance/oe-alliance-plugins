@@ -194,22 +194,19 @@ if service["transport_stream_id"] == 0x7e3:
 
 if service["service_type"] == 0x02 and service["number"] > 3000:
 	service["number"] -= 3000
+	
+for number in service["numbers"]:
+	if number > 999 or number < 100:
+		if service["channel_id"] > 1470 and service["channel_id"] < 1480:
+			service["numbers"] = [service["channel_id"] - 471,]
+			service["interactive_name"] = "Sky Sports Interactive " + str(service["channel_id"])
+		elif service["channel_id"] > 2142 and service["channel_id"] < 2148:
+			service["numbers"] = [service["channel_id"] - 1123,]
+			service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
+		else:
+			skip = True
 
-#if service["number"] >= 700 and service["number"] < 780 and service["service_name"] == "Unknown":
-#	service["interactive_name"] = "Box Office %d" % service["number"]
-	
-#if service["number"] >= 900 and service["number"] < 950 and service["service_name"] == "Unknown":
-#	service["interactive_name"] = "Adult %d" % service["number"]
-	
-if service["number"] > 999 or service["number"] < 100:
-	if service["channel_id"] > 1470 and service["channel_id"] < 1480:
-		service["number"] = service["channel_id"] - 471
-		service["interactive_name"] = "Sky Sports Interactive " + str(service["channel_id"])
-	elif service["channel_id"] > 2142 and service["channel_id"] < 2148:
-		service["number"] = service["channel_id"] - 1123
-		service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
-	else:
-		skip = True
+		break
 ]]>
 	</servicehacks>
 </provider>
