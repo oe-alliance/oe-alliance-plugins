@@ -165,16 +165,11 @@ class BouquetsWriter():
 			sections = providers[section_identifier]["sections"]
 
 			if provider_configs[section_identifier].isMakeNormalMain() or provider_configs[section_identifier].isMakeHDMain():
-				print 'TEST1'
 				if self.containServices(path, "autobouquet.%s.main.tv" % section_identifier):
-					print 'section_identifier1:',section_identifier
 					bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.main.tv\" ORDER BY bouquet\n" % section_identifier)
 				else:
-					print 'section_identifier2:',section_identifier
 					bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.main.tv\" ORDER BY bouquet\n" % section_identifier)
-				print 'section_identifier3:',section_identifier
 				bouquetsToKeep2["tv"].append("autobouquet.%s.main.tv" % section_identifier)
-
 			elif provider_configs[section_identifier].isMakeCustomMain():
 				customfilename = provider_configs[section_identifier].getCustomFilename()
 				if self.containServices(path, customfilename):
