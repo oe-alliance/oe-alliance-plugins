@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>hschang</author>
+                    <name>TranscodingSetup</name>
+                    <packagename>enigma2-plugin-systemplugins-transcodingsetup</packagename>
+                    <shortdescription>Setup transcoding of your VU+</shortdescription>
+                    <description>Setup transcoding of your VU+</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-transcodingsetup" />
+	</files>
+</default>

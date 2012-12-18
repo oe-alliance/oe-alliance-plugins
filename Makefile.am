@@ -31,11 +31,11 @@ SUBDIRS += VuDuoFanControl
 endif
 
 if VUSOLO2
-SUBDIRS += FPGAUpgrade VuRemote
+SUBDIRS += FPGAUpgrade VuRemote TransCodingSetup
 endif
 
 if VUDUO2
-SUBDIRS += FPGAUpgrade VuRemote
+SUBDIRS += FPGAUpgrade VuRemote TransCodingSetup
 endif
 
 if GIGABLUE

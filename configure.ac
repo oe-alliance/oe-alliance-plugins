@@ -156,6 +156,11 @@ TempFanControl/src/Makefile
 TempFanControl/meta/Makefile
 TempFanControl/po/Makefile
 
+TransCodingSetup/Makefile
+TransCodingSetup/src/Makefile
+TransCodingSetup/meta/Makefile
+TransCodingSetup/po/Makefile
+
 TunerServer/Makefile
 TunerServer/src/Makefile
 TunerServer/meta/Makefile
