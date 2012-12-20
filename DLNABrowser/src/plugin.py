@@ -148,7 +148,7 @@ class DLNAFileBrowser(Screen):
 
 		self["directory"]  = Label()
 		self["key_red"]    = StaticText(_("Show Device"))
-		self["key_green"]  = StaticText(_(" "))
+		self["key_green"]  = StaticText(_("Add all"))
 		self["key_yellow"] = StaticText(_("Up"))
 		self["key_blue"]   = StaticText(_("Top"))
 		self["filelist"]   = DLNAFileList(directory)
@@ -174,7 +174,60 @@ class DLNAFileBrowser(Screen):
 		self.updateDirectory()
 
 	def keyGreen(self):
-		print "not implements!!"
+		try:
+			if self["filelist"].canDescent():
+				idx=self["filelist"].getSelectionIndex()
+				(files,fileTypes) = self.recursiveFileCheck()
+				# goto the correct selection index (as it was before)
+				newIdx=self["filelist"].getSelectionIndex()
+				while idx > newIdx:
+					self["filelist"].down()
+					self.updateDirectory()
+					newIdx += 1
+				if fileTypes == 'music' or fileTypes == 'movie':
+					self.beforeService = self.session.nav.getCurrentlyPlayingServiceReference()
+					from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
+					mp = self.session.open(MediaPlayer)
+					mp.callback = self.cbShowMovie
+					mp.playlist.clear()
+					mp.savePlaylistOnExit = False
+					for f in files:
+						if len(f) > 0:
+							mp.playlist.addFile(eServiceReference(4097, 0, f))
+					mp.changeEntry(0)
+					mp.switchToPlayList()
+				else:
+					self.showUnknown()
+				return
+		except:	return
+
+	def recursiveFileCheck(self,firstFileType=None):
+		files=[]
+		self["filelist"].descent()
+		fileList=self["filelist"].getFileList()
+		try:
+			fileDir = str(fileList[0][0][0])
+			idx=fileDir[:len(fileDir)-2].rfind(os.sep)
+			if idx>0:
+				fileDir = fileDir[:idx] + os.sep
+		except:
+			return ([], firstFileType)
+		for idx, f in enumerate(fileList):
+			if idx>0:
+				try:
+					if self["filelist"].canDescent():
+						(tmpFiles,tmpType) = self.recursiveFileCheck(firstFileType)
+						files.append(tmpFiles)
+					else:
+						fileType = self["filelist"].getFileType()
+						if fileType != 'unknown':
+							if firstFileType is None or fileType == firstFileType:
+								firstFileType = fileType
+								files.append(fileDir+str(f[0][0]))
+				except: pass
+				self["filelist"].down()
+		self["filelist"].changeParent()
+		return (files, firstFileType)
 
 	def keyYellow(self):
 		self["filelist"].changeParent()
