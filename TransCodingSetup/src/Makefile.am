@@ -1,5 +1,5 @@
-installdir = $(pkglibdir)/python/Plugins/SystemPlugins/TransCodingSetup
+installdir = $(libdir)/enigma2/python/Plugins/SystemPlugins/TransCodingSetup
 
-install_PYTHON =	\
+install_PYTHON = \
 	__init__.py \
 	plugin.py 
