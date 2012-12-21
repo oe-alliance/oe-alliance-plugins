@@ -176,56 +176,64 @@ class DLNAFileBrowser(Screen):
 	def keyGreen(self):
 		try:
 			if self["filelist"].canDescent():
-				idx=self["filelist"].getSelectionIndex()
-				(files,fileTypes) = self.recursiveFileCheck()
+				idx = self["filelist"].getSelectionIndex()
+				(files, fileTypes) = self.recursiveFileCheck()
 				# goto the correct selection index (as it was before)
 				newIdx=self["filelist"].getSelectionIndex()
 				while idx > newIdx:
 					self["filelist"].down()
-					self.updateDirectory()
 					newIdx += 1
-				if fileTypes == 'music' or fileTypes == 'movie':
-					self.beforeService = self.session.nav.getCurrentlyPlayingServiceReference()
-					from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
-					mp = self.session.open(MediaPlayer)
-					mp.callback = self.cbShowMovie
-					mp.playlist.clear()
-					mp.savePlaylistOnExit = False
-					for f in files:
-						if len(f) > 0:
-							mp.playlist.addFile(eServiceReference(4097, 0, f))
-					mp.changeEntry(0)
-					mp.switchToPlayList()
-				else:
-					self.showUnknown()
+				self.updateDirectory()
+				if len(files) > 0:
+					if (fileTypes == 'music' or fileTypes == 'movie'):
+						self.beforeService = self.session.nav.getCurrentlyPlayingServiceReference()
+						from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
+						mp = self.session.open(MediaPlayer)
+						mp.callback = self.cbShowMovie
+						mp.playlist.clear()
+						mp.savePlaylistOnExit = False
+						for f in files:
+							if len(f) > 0:
+								mp.playlist.addFile(eServiceReference(4097, 0, f))
+						mp.changeEntry(0)
+						mp.switchToPlayList()
+					else:
+						self.showUnknown()
 				return
 		except:	return
 
-	def recursiveFileCheck(self,firstFileType=None):
-		files=[]
+	def recursiveFileCheck(self, firstFileType = None):
+		files = []
 		self["filelist"].descent()
-		fileList=self["filelist"].getFileList()
+		fileList = self["filelist"].getFileList()
 		try:
 			fileDir = str(fileList[0][0][0])
-			idx=fileDir[:len(fileDir)-2].rfind(os.sep)
-			if idx>0:
-				fileDir = fileDir[:idx] + os.sep
+			idx = fileDir[:len(fileDir)-2].rfind(os.sep)
+			if idx > 0:
+				fileDir = fileDir[:idx]+os.sep
 		except:
 			return ([], firstFileType)
-		for idx, f in enumerate(fileList):
-			if idx>0:
-				try:
-					if self["filelist"].canDescent():
-						(tmpFiles,tmpType) = self.recursiveFileCheck(firstFileType)
-						files.append(tmpFiles)
-					else:
-						fileType = self["filelist"].getFileType()
-						if fileType != 'unknown':
-							if firstFileType is None or fileType == firstFileType:
-								firstFileType = fileType
-								files.append(fileDir+str(f[0][0]))
-				except: pass
-				self["filelist"].down()
+		for f in fileList:
+			try:
+				newFiles = []
+				if self["filelist"].canDescent():
+					idx = self["filelist"].getSelectionIndex()
+					(newFiles, fileType) = self.recursiveFileCheck(firstFileType)
+					# goto the correct selection index (as it was before)
+					newIdx = self["filelist"].getSelectionIndex()
+					while idx > newIdx:
+						self["filelist"].down()
+						newIdx += 1
+				else:
+					fileType = self["filelist"].getFileType()
+					newFiles = [fileDir+str(f[0][0])]
+				if len(newFiles) > 0:
+					if not fileType is None and fileType != 'unknown':
+						if firstFileType is None or fileType == firstFileType:
+							firstFileType = fileType
+							files = files + newFiles
+			except: pass
+			self["filelist"].down()
 		self["filelist"].changeParent()
 		return (files, firstFileType)
 
