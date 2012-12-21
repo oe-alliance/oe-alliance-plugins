@@ -151,6 +151,11 @@ HbbTV/src/Makefile
 HbbTV/meta/Makefile
 HbbTV/po/Makefile
 
+MaraM7VFDControl/Makefile
+MaraM7VFDControl/src/Makefile
+MaraM7VFDControl/meta/Makefile
+MaraM7VFDControl/po/Makefile
+
 TempFanControl/Makefile
 TempFanControl/src/Makefile
 TempFanControl/meta/Makefile
