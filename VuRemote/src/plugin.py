@@ -53,7 +53,7 @@ class RemoteControlCodeInit:
 			vumodel = open("/proc/stb/info/vumodel")
 			info=vumodel.read().strip()
 			vumodel.close()
-			if info in ["uno", "ultimo"]:
+			if info in ["uno", "ultimo", "solo2", "duo2"]:
 				return True
 			else:
 				return False
@@ -96,7 +96,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 			self.checkModelTimer.start(1000,True)
 
 	def invalidmodel(self):
-			self.session.openWithCallback(self.close, MessageBox, _("This Plugin only support for UNO/ULTIMO"), MessageBox.TYPE_ERROR)
+			self.session.openWithCallback(self.close, MessageBox, _("This Plugin only supports") + " Uno/Ultimo/Solo2/Duo2"), MessageBox.TYPE_ERROR)
 
 	def createSetup(self):
 		self.list = []
