@@ -942,7 +942,9 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 		self._applicationList = None
 
 		self.mVuplusBox = False
-		issue = open("/etc/issue").read()
+		f = open("/etc/issue")
+		issue = f.read()
+		f.close()
 		if(issue.startswith("Vuplus")):
 			self.mVuplusBox = True
 
