@@ -37,6 +37,10 @@ config.plugins.VFD_Giga.timeMode = ConfigSelection(default = "24h", choices = [(
 
 RecLed = None
 
+# Global variable
+gigaVfd = None
+_session = None
+
 class Channelnumber:
 
 	def __init__(self, session):
@@ -343,28 +347,6 @@ def main(menuid):
 def startVFD(session, **kwargs):
 	session.open(VFD_GigaSetup)
 
-gigaVfd = None
-gReason = -1
-mySession = None
-
-def controlgigaVfd():
-	global gigaVfd
-	global gReason
-	global mySession
-
-	if gReason == 0 and mySession != None and gigaVfd == None:
-		print "[VFD-GIGA] Starting !!"
-		if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo' or config.misc.boxtype.value == 'gb800ue':
-			gigaVfd = VFD_Giga(mySession)
-		else:
-			gigaVfd = True
-	elif gReason == 1 and gigaVfd != None:
-		print "[VFD-GIGA] Stopping !!"
-		#SetTime()
-		if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo' or config.misc.boxtype.value == 'gb800ue':
-			evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledDSBY.value)
-		gigaVfd = None
-
 def SetTime():
 	print "[VFD-GIGA] Set RTC time"
 	import time
@@ -388,18 +370,23 @@ def SetTime():
 	except IOError:
 		print "[VFD-GIGA] set RTC time failed!"
 
-def sessionstart(reason, **kwargs):
-	print "[VFD-GIGA] sessionstart"
+def autostart(reason, session=None, **kwargs):
+	"called with reason=1 to during shutdown, with reason=0 at startup?"
 	global gigaVfd
-	global gReason
-	global mySession
-
-	if kwargs.has_key("session"):
-		mySession = kwargs["session"]
+	global _session
+	if reason == 0:
+		if session is not None and config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo' or config.misc.boxtype.value == 'gb800ue':
+			_session = session
+			if gigaVfd is None:
+				print "[VFD-GIGA] Starting !!"
+				gigaVfd = VFD_Giga(session)
 	else:
-		gReason = reason
-	controlgigaVfd()
+		print "[VFD-GIGA] Stopping !!"
+		#SetTime()
+		if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo' or config.misc.boxtype.value == 'gb800ue':
+			evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledDSBY.value)
+		gigaVfd = None
 
 def Plugins(**kwargs):
- 	return [ PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=sessionstart),
- 		PluginDescriptor(name="VFD_Giga", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+ 	return [ PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART,PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart),
+		PluginDescriptor(name="Display", description="Change VFD display settings",where=PluginDescriptor.WHERE_MENU, fnc=main) ]
