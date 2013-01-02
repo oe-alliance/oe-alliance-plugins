@@ -117,11 +117,13 @@ class AutoBouquetsMaker(Screen):
 			for bouquet in bouquets["tv"]:
 				if bouquet["filename"][:12] == "autobouquet.":
 					continue
-				bouquets_tv.append(bouquet["filename"])
+				if len(bouquet["filename"]) > 0:
+					bouquets_tv.append(bouquet["filename"])
 			for bouquet in bouquets["radio"]:
 				if bouquet["filename"][:12] == "autobouquet.":
 					continue
-				bouquets_radio.append(bouquet["filename"])
+				if len(bouquet["filename"]) > 0:
+					bouquets_radio.append(bouquet["filename"])
 			self.manager.setBouquetsToKeep(bouquets_tv, bouquets_radio)
 		else:
 			bouquets = config.autobouquetsmaker.keepbouquets.value.split("|")
