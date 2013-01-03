@@ -663,7 +663,9 @@ class ModemManager(Screen):
 		
 	def cbRestartAppTimer(self):
 		self.restartAppTimer.stop()
-		model = file('/proc/stb/info/vumodel').read().strip()
+		file = open('/proc/stb/info/vumodel')
+		model = file.read().strip()
+		file.close()
 		if model is not None:
 			if model == 'solo' or model == 'bm750':
 				self.session.open(TryQuitMainloop, 3)

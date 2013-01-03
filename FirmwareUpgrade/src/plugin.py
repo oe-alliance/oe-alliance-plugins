@@ -433,7 +433,9 @@ class Filebrowser(Screen):
 
 	def runDownloading(self) :
 		self.timer_downloading.stop()
-		machine = str(open("/proc/stb/info/vumodel").read().strip())
+		file = open("/proc/stb/info/vumodel").read().strip()
+		machine = str(file.read().strip())
+		file.close()
 
 		def cbDownloadDone(tar):
 			try:

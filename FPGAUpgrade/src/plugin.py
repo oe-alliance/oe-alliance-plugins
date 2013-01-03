@@ -280,8 +280,12 @@ class FPGAUpgrade(Screen):
 
 	def doLoadConf(self):
 		if fileExists("/proc/stb/info/vumodel"):
-                        model = open("/proc/stb/info/vumodel").read().strip()
-			download_uri_header = open('/usr/lib/enigma2/python/Plugins/SystemPlugins/FPGAUpgrade/fpga.conf').readline().strip()
+			file = open("/proc/stb/info/vumodel")
+			model = file.read().strip()
+			file.close()
+			file = open('/usr/lib/enigma2/python/Plugins/SystemPlugins/FPGAUpgrade/fpga.conf')
+			download_uri_header = file.readline().strip()
+			file.close()
 			self.DOWNLOAD_URL = str(download_uri_header) + "vu" + str(model) + "/" + self.DOWNLOAD_FILE_NAME
 
 	def doHook(self, blockNumber, blockSize, totalSize) :
