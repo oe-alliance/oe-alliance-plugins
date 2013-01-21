@@ -57,14 +57,19 @@ class TranscodingSetupInit:
 
 	def activateEncoder(self, activate=False):
 		def tryWrite(filename, retry, value):
-			self.old_trascoding = file(filename).read().strip()
+			f = open(filename)
+			data = f.read().strip()
+			f.close()
+			self.old_trascoding = data
 			for x in range(retry):
-				file = open(filename,'w')
-				file.write(value)
-				if file(filename).read().strip() == value:
-					file.close()
+				f = open(filename,'w')
+				f.write(value)
+				f.close()
+				f = open(filename,'r')
+				data = f.read().strip()
+				f.close()
+				if data == value:
 					return True
-			file.close()
 			return False
 		enable = activate and "enabled" or "disabled"
 		return tryWrite("/proc/stb/encoder/enable", 2, enable)
