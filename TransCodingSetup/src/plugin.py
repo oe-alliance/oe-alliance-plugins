@@ -59,9 +59,12 @@ class TranscodingSetupInit:
 		def tryWrite(filename, retry, value):
 			self.old_trascoding = file(filename).read().strip()
 			for x in range(retry):
-				file(filename,'w').write(value)
+				file = open(filename,'w')
+				file.write(value)
 				if file(filename).read().strip() == value:
+					file.close()
 					return True
+			file.close()
 			return False
 		enable = activate and "enabled" or "disabled"
 		return tryWrite("/proc/stb/encoder/enable", 2, enable)
@@ -81,7 +84,9 @@ class TranscodingSetupInit:
 
 	def isAvailableModel(self):
 		try:
-			info = file("/proc/stb/info/vumodel").read().strip()
+			file = open("/proc/stb/info/vumodel")
+			info = file.read().strip()
+			file.close()
 			return info in ["solo2", "duo2"]
 		except: return False
 
