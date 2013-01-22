@@ -45,6 +45,20 @@ if os.path.exists("/proc/stb/info/vumodel"):
 		fwdata= {
 			"fpga" : ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]
 			}
+	elif info == "solo2":
+		fwlist= [
+			("fpga", _("FPGA"))
+			]
+		fwdata= { 
+			"fpga" : ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]
+			}
+	elif info == "duo2":
+		fwlist= [
+			("fpga", _("FPGA"))
+			]
+		fwdata= {
+			"fpga" : ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]
+			}
 
 import os, fcntl, thread
 STATUS_READY 		= 0
@@ -310,7 +324,7 @@ class UpgradeStatus(Screen):
 class Filebrowser(Screen):
 	skin = 	"""
 		<screen position="center,center" size="500,260" title="File Browser" >
-			<ePixmap pixmap="ViX_HD_Common/buttons/blue.png" position="5,7" size="80,40" alphatest="blend" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="5,7" size="80,40" alphatest="blend" />
 			<widget source="key_blue" render="Label" position="40,0" zPosition="1" size="180,40" font="Regular;20" halign="left" valign="center" transparent="1"/>
 			<widget name="file_list" position="0,50" size="500,160" scrollbarMode="showOnDemand" />
 
@@ -434,7 +448,7 @@ class Filebrowser(Screen):
 	def runDownloading(self) :
 		self.timer_downloading.stop()
 		file = open("/proc/stb/info/vumodel").read().strip()
-		machine = str(file.read().strip())
+		machine = str(file)
 		file.close()
 
 		def cbDownloadDone(tar):
@@ -538,8 +552,8 @@ class Filebrowser(Screen):
 class FirmwareUpgrade(Screen, ConfigListScreen):
 	skin = 	"""
 		<screen position="center,center" size="560,175" title="Firmware Upgrade" >
-			<ePixmap pixmap="ViX_HD_Common/buttons/red.png" position="125,7" size="80,40" alphatest="blend" />
-			<ePixmap pixmap="ViX_HD_Common/buttons/green.png" position="330,7" size="80,40" alphatest="blend" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="125,7" size="80,40" alphatest="blend" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="330,7" size="80,40" alphatest="blend" />
 
 			<widget source="key_red" render="Label" position="160,0" zPosition="1" size="155,40" font="Regular;20" halign="left" valign="center" transparent="1" />
 			<widget source="key_green" render="Label" position="365,0" zPosition="1" size="155,40" font="Regular;20" halign="left" valign="center" transparent="1" />
