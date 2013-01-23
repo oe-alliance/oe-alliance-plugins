@@ -802,7 +802,8 @@ class OpenUg(Screen):
 				tmp = "<span class=\"title\">"
 				if tmp in line:
 					name = line.split(tmp)[1].split("</span>")[0]
-					short = line.split("<br />")[1]
+					if "<br />" in line:
+						short = line.split("<br />")[1]
 					state = 2
 
 			elif state == 2:
