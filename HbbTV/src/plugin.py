@@ -1061,6 +1061,8 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 			self._profile = self._applicationList[0]["profile"]
 			url = self._applicationList[0]["url"]
 		if url is None:
+			service = self._session.nav.getCurrentService()
+			info = service and service.info()
 			url = info.getInfoString(iServiceInformation.sHBBTVUrl)
 		return url
 
