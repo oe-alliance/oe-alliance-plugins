@@ -218,5 +218,12 @@ XtrendRemote/src/Makefile
 XtrendRemote/meta/Makefile
 XtrendRemote/po/Makefile
 
+MICOMUpgrade/Makefile
+MICOMUpgrade/src/Makefile
+MICOMUpgrade/src/bin/Makefile
+MICOMUpgrade/meta/Makefile
+MICOMUpgrade/po/Makefile
+
+
 ])
 AC_OUTPUT

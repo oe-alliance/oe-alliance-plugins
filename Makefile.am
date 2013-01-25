@@ -15,7 +15,7 @@ SUBDIRS += XtrendFancontrol Blindscan
 endif
 
 if VENTON
-SUBDIRS += VentonFancontrol Blindscan
+SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade
 endif
 
 if VUUNO

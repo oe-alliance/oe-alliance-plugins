@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>ini</author>
+                    <name>MICOMUpgrade</name>
+                    <packagename>enigma2-plugin-systemplugins-micomupgrade</packagename>
+                    <shortdescription>Upgrade your system Front Panel</shortdescription>
+                    <description>Upgrade your internal system Front Panel.</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-micomupgrade" />
+	</files>
+</default>

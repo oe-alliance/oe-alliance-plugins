@@ -1,0 +1,5 @@
+Package: enigma2-plugin-systemplugins-micomupgrade
+Version: 1.0-r0
+Description: Upgrade your system Firmware
+Maintainer: ini
+Depends: enigma2
