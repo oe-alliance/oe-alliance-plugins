@@ -156,6 +156,12 @@ MaraM7VFDControl/src/Makefile
 MaraM7VFDControl/meta/Makefile
 MaraM7VFDControl/po/Makefile
 
+MICOMUpgrade/Makefile
+MICOMUpgrade/src/Makefile
+MICOMUpgrade/src/bin/Makefile
+MICOMUpgrade/meta/Makefile
+MICOMUpgrade/po/Makefile
+
 TempFanControl/Makefile
 TempFanControl/src/Makefile
 TempFanControl/meta/Makefile
@@ -217,12 +223,6 @@ XtrendRemote/Makefile
 XtrendRemote/src/Makefile
 XtrendRemote/meta/Makefile
 XtrendRemote/po/Makefile
-
-MICOMUpgrade/Makefile
-MICOMUpgrade/src/Makefile
-MICOMUpgrade/src/bin/Makefile
-MICOMUpgrade/meta/Makefile
-MICOMUpgrade/po/Makefile
 
 
 ])
