@@ -319,13 +319,13 @@ class FirmwareUpgrade(Screen):
 		self.cbRebootCallCount = 0;
 
 		from Tools.StbHardware import getFPVersion
-		version = str(getFPVersion() or "N/A")
+		self.version = str(getFPVersion() or "N/A")
 		newversion = str("N/A")
 
 		self["oldversion_label"] = Label(_("Current version:"))
 		self["newversion_label"] = Label(_("New version:"))
 
-		self["oldversion"] = Label(version)
+		self["oldversion"] = Label(self.version)
 		self["newversion"] = Label(newversion)
 		
 		self["key_red"] = StaticText(_("Close"))
@@ -364,13 +364,16 @@ class FirmwareUpgrade(Screen):
 		if data is not None:
 			try:
 				fp = open(data+'.version', "r")
-				verfile = fp.readline()
+				self.verfile = fp.readline()
 				fp.close()
-				verfile = verfile.strip("\n")
+				self.verfile = self.verfile.strip("\n")
 			except:
 				"N/A"
-			self["newversion"].setText(verfile)
-			self["status"].setText("Press the Green/OK button, if you want to upgrade to this file:\n%s\n" % (data))
+			self["newversion"].setText(self.verfile)
+			if int(self.verfile) <= int(self.version):
+				self["status"].setText("You have already latest front panel version")
+			else:
+				self["status"].setText("Press the Green/OK button, if you want to upgrade to this file:\n%s\n" % (data))
 			self.updateFilePath = data
 			if self.fileopenmode == False:
 				self.upgrade_auto_run_timer.start(1000)
@@ -407,6 +410,10 @@ class FirmwareUpgrade(Screen):
 			return
 		if self.updateFilePath == "":
 			self.doFileOpen()
+			return
+		# check if downloaded verion is newer then flashed one
+		if int(self.verfile) <= int(self.version):      
+			self.session.open(MessageBox, _("You can not upgrade to the same or lower version !"), MessageBox.TYPE_INFO, timeout = 10)
 			return
 		msg = "You should not be stop during the upgrade.\nDo you want to upgrade?"
 		self.session.openWithCallback(self.cbRunUpgrade, MessageBox, _(msg), MessageBox.TYPE_YESNO, timeout = 15, default = True)
