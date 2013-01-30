@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 import os, urllib
 from urllib import urlretrieve
 
