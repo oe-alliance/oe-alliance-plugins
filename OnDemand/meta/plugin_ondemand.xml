@@ -1,0 +1,13 @@
+<default>
+		  <info>
+					<author>oe-alliance</author>
+					<name>OnDemand</name>
+					<packagename>enigma2-plugin-extension-ondemand</packagename>
+					<shortdescription>Watch on demand TV.</shortdescription>
+					<description>Watch on demand TV.</description>
+		  </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-ondemand" />
+	</files>
+</default>

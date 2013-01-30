@@ -162,6 +162,11 @@ MICOMUpgrade/src/bin/Makefile
 MICOMUpgrade/meta/Makefile
 MICOMUpgrade/po/Makefile
 
+OnDemand/Makefile
+OnDemand/src/Makefile
+OnDemand/meta/Makefile
+OnDemand/po/Makefile
+
 TempFanControl/Makefile
 TempFanControl/src/Makefile
 TempFanControl/meta/Makefile
