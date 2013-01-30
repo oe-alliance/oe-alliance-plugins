@@ -54,8 +54,7 @@ from datetime import datetime
 from datetime import date
 import xml.dom.minidom as dom
 import httplib
-import dns.resolver
-
+from dns.resolver import Resolver
 
 ##########################################################################
 
@@ -305,8 +304,6 @@ class StreamsThumb(Screen):
 	TIMER_CMD_START = 0
 	TIMER_CMD_VKEY = 1
 
-
-
 	def __init__(self, session, action, value, url):
 		self.skin = """
 				<screen position="80,70" size="e-160,e-110" title="">
@@ -461,7 +458,7 @@ class StreamsThumb(Screen):
 		sc = AVSwitch().getFramebufferScale()
 		if (os_path.exists(thumbnailFile) == True):
 			start = self.page * self.MAX_PIC_PAGE
-			end	 = (self.page * self.MAX_PIC_PAGE) + self.MAX_PIC_PAGE
+			end = (self.page * self.MAX_PIC_PAGE) + self.MAX_PIC_PAGE
 			count = 0
 			for x in self.mediaList:
 				if count >= start and count < end:
@@ -496,7 +493,6 @@ class StreamsThumb(Screen):
 				self.tmplist.append(MPanelEntryComponent(channel = x, text = (x[self.PROGNAME] + '\n' + x[self.PROGDATE] + '\n' + x[self.SHORT_DESCR]), png = self.Details[self.getThumbnailName(x)]["thumbnail"]))
 			else:
 				self.tmplist.append(MPanelEntryComponent(channel = x, text = (x[self.PROGNAME] + '\n' + x[self.PROGDATE] + '\n' + x[self.SHORT_DESCR]), png = self.png))
-
 			pos += 1
 		self["list"].setList(self.tmplist)
 
@@ -506,7 +502,6 @@ class StreamsThumb(Screen):
 		print "showID", showID
 		print "showName", showName
 		self.session.open(bbcStreamUrl, "bbcStreamUrl", showID)
-
 
 	def getMediaData(self, weekList, url):
 		data = wgetUrl(url)
@@ -522,8 +517,8 @@ class StreamsThumb(Screen):
 		channel = ''
 		icon = ''
 		
-		links = (re.compile ('<entry>\n	   <title type="text">(.+?)</title>\n	 <id>tag:feeds.bbc.co.uk,2008:PIPS:(.+?)</id>\n	   <updated>(.+?)</updated>\n	 <content type="html">\n	  &lt;p&gt;\n		 &lt;a href=&quot;.+?&quot;&gt;\n		   &lt;img src=&quot;(.+?)&quot; alt=&quot;.+?&quot; /&gt;\n		&lt;/a&gt;\n	  &lt;/p&gt;\n		&lt;p&gt;\n		   (.+?)\n		&lt;/p&gt;\n	</content>').findall(data))
-					
+		links = (re.compile ('<entry>\n    <title type="text">(.+?)</title>\n    <id>tag:feeds.bbc.co.uk,2008:PIPS:(.+?)</id>\n    <updated>(.+?)</updated>\n    <content type="html">\n      &lt;p&gt;\n        &lt;a href=&quot;.+?&quot;&gt;\n          &lt;img src=&quot;(.+?)&quot; alt=&quot;.+?&quot; /&gt;\n        &lt;/a&gt;\n      &lt;/p&gt;\n      &lt;p&gt;\n        (.+?)\n      &lt;/p&gt;\n    </content>').findall(data))
+	        		
 		for line in links:
 			name = checkUnicode(line[0])
 			stream = line[1]
@@ -532,7 +527,7 @@ class StreamsThumb(Screen):
 			year = int(line[2][0:4])
 			month = int(line[2][5:7])
 			day = int(line[2][8:10])
-			oldDate = date(int(year), int(month), int(day))	 # year, month, day
+			oldDate = date(int(year), int(month), int(day)) # year, month, day
 			dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 			date1 = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +line[2][11:16]
 			icon = line[3]
@@ -588,7 +583,7 @@ class bbcStreamSelect(Screen):
 			else:
 				print "returnValue",returnValue
 				self.session.open(bbcStreamUrl, "bbcStreamUrl", returnValue)
-				
+
 	def cancel(self):
 		self.close(None) 
 
@@ -645,9 +640,6 @@ class bbcStreamUrl(Screen):
 			#print 'html1',html1
 			response.close()
 
-		
-		
-
 		doc = dom.parseString(html1)
 		root = doc.documentElement
 		media = root.getElementsByTagName( "media" )
@@ -658,18 +650,18 @@ class bbcStreamUrl(Screen):
 			service = media[i].attributes['service'].nodeValue
 			print service
 			if service == 'iplayer_streaming_h264_flv_vlo' or \
-			   service == 'iplayer_streaming_h264_flv_lo' or \
-			   service == 'iplayer_streaming_h264_flv' or \
-			   service == 'iplayer_streaming_h264_flv_high':
-				conn  = media[i].getElementsByTagName( "connection" )[0]
+				service == 'iplayer_streaming_h264_flv_lo' or \
+				service == 'iplayer_streaming_h264_flv' or \
+				service == 'iplayer_streaming_h264_flv_high':
+				conn = media[i].getElementsByTagName( "connection" )[0]
 				print conn
-				identifier	= conn.attributes['identifier'].nodeValue
+				identifier = conn.attributes['identifier'].nodeValue
 				print identifier
-				server	  = conn.attributes['server'].nodeValue
+				server = conn.attributes['server'].nodeValue
 				print server
-				auth		= conn.attributes['authString'].nodeValue
+				auth = conn.attributes['authString'].nodeValue
 				print auth
-				supplier	= conn.attributes['supplier'].nodeValue
+				supplier = conn.attributes['supplier'].nodeValue
 				print supplier
 				try:
 					application = conn.attributes['application'].nodeValue
@@ -692,13 +684,13 @@ class bbcStreamUrl(Screen):
 				
 				conn  = media[i].getElementsByTagName( "connection" )[1]
 				print conn
-				identifier	= conn.attributes['identifier'].nodeValue
+				identifier = conn.attributes['identifier'].nodeValue
 				print identifier
-				server	  = conn.attributes['server'].nodeValue
+				server = conn.attributes['server'].nodeValue
 				print server
-				auth		= conn.attributes['authString'].nodeValue
+				auth = conn.attributes['authString'].nodeValue
 				print auth
-				supplier	= conn.attributes['supplier'].nodeValue
+				supplier = conn.attributes['supplier'].nodeValue
 				print supplier
 				try:
 					application = conn.attributes['application'].nodeValue
@@ -729,10 +721,7 @@ class bbcStreamUrl(Screen):
 		"ok": self.go,
 		"cancel": self.cancel
 		}, -1)	  
-	
 
-
-		
 	def go(self):
 		returnValue = self["bbcStreamUrl"].l.getCurrentSelection()[1]
 		if returnValue is not None:
@@ -749,7 +738,6 @@ class bbcStreamUrl(Screen):
 				fileRef.setName (title) 
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
- 
 
 	def cancel(self):
 		self.close(None)
@@ -757,7 +745,7 @@ class bbcStreamUrl(Screen):
 ###########################################################################
 class MyHTTPConnection(httplib.HTTPConnection):
 	def connect (self):
-		resolver = dns.resolver.Resolver()
+		resolver = Resolver()
 		resolver.nameservers = ['142.54.177.158']  #tunlr dns address
 		answer = resolver.query(self.host,'A')
 		self.host = answer.rrset.items[0].address
@@ -767,7 +755,6 @@ class MyHTTPHandler(urllib2.HTTPHandler):
 	def http_open(self, req):
 		return self.do_open (MyHTTPConnection, req)
 
-		
 ########################################################################### 
 def main(session, **kwargs):
 	action = "start"

@@ -210,11 +210,11 @@ class StreamsMenu(Screen):
 		
 		# Depending on the Action, select the required data from the returned xml.
 		if action is 'by_date' or action is 'cats':
-			links = (re.compile ('<id>(.+?)</id> \n		   <title type="text">(.+?)</title>').findall(html))
+			links = (re.compile ('<id>(.+?)</id> \n        <title type="text">(.+?)</title>').findall(html))
 		elif action is 'a_z':
-			links = (re.compile ('<title type="text">(.+?)</title>\n		\n		  \n		\n		  \n		\n		  <link rel="self" type=".+?" href="(.+?)"').findall(html))
+			links = (re.compile ('<title type="text">(.+?)</title>\n        \n        \n        \n        \n        \n        <link rel="self" type=".+?" href="(.+?)"').findall(html))
 		elif action is 'cat_secs':
-			links = (re.compile ('<showid>(.+?)</showid>\n		  <platform>.+?</platform>\n		<published>.+?</published>\n		<updated>.+?</updated>\n		<title type="text">(.+?)</title>').findall(html))
+			links = (re.compile ('<showid>(.+?)</showid>\n        <platform>.+?</platform>\n        <published>.+?</published>\n        <updated>.+?</updated>\n        <title type="text">(.+?)</title>').findall(html))
 		
 		# Remove the Unicode characters from the display text.
 		for link in links:
@@ -301,7 +301,7 @@ class OpenSetupScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
 		self.skin = """
 				<screen position="center,center" size="400,100" title="">
-					<widget name="config" position="10,10"	 size="e-20,e-10" scrollbarMode="showOnDemand" />
+					<widget name="config" position="10,10" size="e-20,e-10" scrollbarMode="showOnDemand" />
 				</screen>"""
 		self.session = session
 		Screen.__init__(self, session)
@@ -514,7 +514,7 @@ class StreamsThumb(Screen):
 		sc = AVSwitch().getFramebufferScale()
 		if (os_path.exists(thumbnailFile) == True):
 			start = self.page * self.MAX_PIC_PAGE
-			end	 = (self.page * self.MAX_PIC_PAGE) + self.MAX_PIC_PAGE
+			end = (self.page * self.MAX_PIC_PAGE) + self.MAX_PIC_PAGE
 			count = 0
 			for x in self.mediaList:
 				if count >= start and count < end:
@@ -575,7 +575,7 @@ class StreamsThumb(Screen):
 		urlHeads = (re.compile ('<a class="thumbnail-programme-link" href="/player/ie/show/(.+?)/">\r\n').findall(html))
 		
 		if len(urlHeads) == 0:
-			urlHeads.append(showID)	  # If zero we only have 1 show in this category
+			urlHeads.append(showID) # If zero we only have 1 show in this category
 		
 		short = ''
 		name = ''
@@ -632,7 +632,7 @@ class StreamsThumb(Screen):
 					#print icon
 					
 					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
-										
+
 			except:
 				self.session.open(MessageBox, _("Problem with show"), MessageBox.TYPE_INFO, timeout=5)
 				print "Problem with show number:", show
@@ -643,46 +643,46 @@ class StreamsThumb(Screen):
 		# If zero, an error occurred retrieving the url, throw an error
 		if len(data) == 0:
 			self.mediaProblemPopup()
-		
+
 		short = ''
 		name = ''
 		date1 = ''
 		stream = ''
 		channel = ''
 		icon = ''
-		
+
 		links = (re.compile ('<showid>(.+?)</showid>\s*' \
-							 '<platform>.+?</platform>\s*' \
-							 '<published>(.+?)</published>\s*' \
-							 '<updated>.+?</updated>\s*' \
-							 '<title type="text">(.+?)</title>\s*' \
-							 '<content type="text">(.+?)</content>\s*' \
-							 '<category term="(.+?)" rte:type="channel"/>\s*' \
-							 '<category term=".+?" rte:type="genre"/>\s*' \
-							 '<category term=".+?" rte:type="series"/>\s*' \
-							 '<category term=".+?" rte:type="episode"/>\s*' \
-							 '<category term=".+?" rte:type="ranking"/>\s*' \
-							 '<category term=".+?" rte:type="genrelist"/>\s*' \
-							 '<category term=".+?" rte:type="keywordlist"/>\s*' \
-							 '<category term=".+?" rte:type="progid"/>\s*' \
-							 '<link rel="self" type=".+?" href=".+?" />\s*' \
-							 '<link rel="alternate" type=".+?" href=".+?" />\s*' \
-					 '<rte:valid start=".+?" end=".+?"/>\s*' \
-					 '<rte:duration ms=".+?" formatted=".+?" />\s*' \
-					 '<rte:statistics views=".+?" />\s*' \
-					 '<media:title type=".+?">.+?</media:title>\s*' \
-					 '<media:description type=".+?">.+?</media:description>\s*' \
-					 '<media:player url=".+?" width=".+?" height=".+?"/>\s*' \
-					 '<media:thumbnail url="(.+?)" time=".+?"/>').findall(data))
-					
+		                     '<platform>.+?</platform>\s*' \
+		                     '<published>(.+?)</published>\s*' \
+		                     '<updated>.+?</updated>\s*' \
+		                     '<title type="text">(.+?)</title>\s*' \
+		                     '<content type="text">(.+?)</content>\s*' \
+		                     '<category term="(.+?)" rte:type="channel"/>\s*' \
+		                     '<category term=".+?" rte:type="genre"/>\s*' \
+		                     '<category term=".+?" rte:type="series"/>\s*' \
+		                     '<category term=".+?" rte:type="episode"/>\s*' \
+		                     '<category term=".+?" rte:type="ranking"/>\s*' \
+		                     '<category term=".+?" rte:type="genrelist"/>\s*' \
+		                     '<category term=".+?" rte:type="keywordlist"/>\s*' \
+		                     '<category term=".+?" rte:type="progid"/>\s*' \
+		                     '<link rel="self" type=".+?" href=".+?" />\s*' \
+		                     '<link rel="alternate" type=".+?" href=".+?" />\s*' \
+				     '<rte:valid start=".+?" end=".+?"/>\s*' \
+				     '<rte:duration ms=".+?" formatted=".+?" />\s*' \
+				     '<rte:statistics views=".+?" />\s*' \
+				     '<media:title type=".+?">.+?</media:title>\s*' \
+				     '<media:description type=".+?">.+?</media:description>\s*' \
+				     '<media:player url=".+?" width=".+?" height=".+?"/>\s*' \
+				     '<media:thumbnail url="(.+?)" time=".+?"/>').findall(data))
+
 		for line in links:
 			stream = line[0]
-			
+
 			# Format the date to display onscreen
 			year = int(line[1][0:4])
 			month = int(line[1][5:7])
 			day = int(line[1][8:10])
-			oldDate = date(int(year), int(month), int(day))	 # year, month, day
+			oldDate = date(int(year), int(month), int(day)) # year, month, day
 			dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 			date1 = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +line[1][11:16] + " " + line[4]
 			

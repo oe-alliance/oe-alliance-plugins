@@ -364,7 +364,8 @@ class allShowsMenu(Screen):
 				self.session.open(showListMenu, "showListMenu", returnValue)
  
 	def cancel(self):
-		self.close(None) 
+		self.close(None)
+
 ###########################################################################
 class showListMenu(Screen):
 	#print	"talkedMenu"
@@ -420,13 +421,11 @@ class showListMenu(Screen):
 				fileUrl = findPlayUrl(returnValue)
 				fileRef = eServiceReference(4097,0,fileUrl)
 				returnValue = self.session.open(MoviePlayer, fileRef)
- 
+
 	def cancel(self):
 		self.close(None) 
-		
-		
-###########################################################################
- 
+
+##########################################################################
 def findPlayUrl(value, **kwargs):
 	fileUrl = ""
 	url = value
@@ -437,14 +436,11 @@ def findPlayUrl(value, **kwargs):
 		response = urllib2.urlopen(req)
 		html = str(response.read())
 		response.close()
-		links = (re.compile ('url: "mp4:(.+?)",\r\n\t\t\t\t		   autoPlay: true,\r\n\t\t\t\t\t\tautoBuffering: true,\r\n\t\t\t\t		  provider: "rtmp"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\r\n\t\t\t\t// All FP Plug ins:\r\n\t\t\t\tplugins:\r\n\t\t\t\t{	 \r\n\t\t\t\t\tcontrols:  \r\n\t\t\t\t\t{\r\n\t\t\t\t\t\turl:"flowplayer.controls.gc-build-112011.swf"\r\n\t\t\t\t\t}\r\n\t\t\t\t\t\r\n\t\t\t\t\t,\r\n\r\n\t\t\t\t\trtmp: {\r\n\t\t\t\t\t\turl: "flowplayer.rtmp-3.2.3.swf",\r\n\t\t\t\t\t\tnetConnectionUrl: "rtmp://.+?content/videos/(.+?)/"\r\n').findall(html)[0])
+		links = (re.compile ('url: "mp4:(.+?)",\r\n\t\t\t\t        autoPlay: true,\r\n\t\t\t\t\t\tautoBuffering: true,\r\n\t\t\t\t        provider: "rtmp"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\r\n\t\t\t\t// All FP Plug ins:\r\n\t\t\t\tplugins:\r\n\t\t\t\t{  \r\n\t\t\t\t\tcontrols:  \r\n\t\t\t\t\t{\r\n\t\t\t\t\t\turl:"flowplayer.controls.gc-build-112011.swf"\r\n\t\t\t\t\t}\r\n\t\t\t\t\t\r\n\t\t\t\t\t,\r\n\r\n\t\t\t\t\trtmp: {\r\n\t\t\t\t\t\turl: "flowplayer.rtmp-3.2.3.swf",\r\n\t\t\t\t\t\tnetConnectionUrl: "rtmp://.+?content/videos/(.+?)/"\r\n').findall(html)[0])
 		print links
 		fileUrl = 'http://content.tv3.ie/content/videos/'+links[1]+'/'+links[0]
 	except:
 		print "failed findPlayUrl"
-	
-	
-	
 	return fileUrl
 	
 ###########################################################################
