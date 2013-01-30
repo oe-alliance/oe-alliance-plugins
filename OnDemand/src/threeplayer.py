@@ -157,7 +157,10 @@ class talkedMenu(Screen):
 		response = urllib2.urlopen(req)
 		html = str(response.read())
 		response.close()
-		soup = BeautifulSoup(''.join(html));
+		try:
+			soup = BeautifulSoup(''.join(html))
+		except:
+			soup = ""
 		slider1 = soup.find('div', id='slider1')
 		for mymatch in slider1.findAll('div', id=(('gridshow'), ('gridshow-right'))):
 			try:
@@ -222,7 +225,10 @@ class straightMenu(Screen):
 		response = urllib2.urlopen(req)
 		html = str(response.read())
 		response.close()
-		soup = BeautifulSoup(''.join(html));
+		try:
+			soup = BeautifulSoup(''.join(html))
+		except:
+			soup = ""
 		slider1 = soup.find('div', id='slider2')
 		for mymatch in slider1.findAll('div', id=(('gridshow'), ('gridshow-right'))):
 			url = mymatch.a['href']
@@ -280,7 +286,10 @@ class goingMenu(Screen):
 		response = urllib2.urlopen(req)
 		html = str(response.read())
 		response.close()
-		soup = BeautifulSoup(''.join(html));
+		try:
+			soup = BeautifulSoup(''.join(html))
+		except:
+			soup = ""
 		slider1 = soup.find('div', id='slider3')
 		for mymatch in slider1.findAll('div', id=(('gridshow'), ('gridshow-right'))):
 			url = mymatch.a['href']
@@ -390,7 +399,10 @@ class showListMenu(Screen):
 		response = urllib2.urlopen(req)
 		html = str(response.read())
 		response.close()
-		soup = BeautifulSoup(''.join(html));
+		try:
+			soup = BeautifulSoup(''.join(html))
+		except:
+			soup = ""
 		slider1 = soup.find('div', id='slider1')
 		for mymatch in slider1.findAll('div', id=(('gridshow'), ('gridshow-right'))):
 			url = mymatch.a['href']
