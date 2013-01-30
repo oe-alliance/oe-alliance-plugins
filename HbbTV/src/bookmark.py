@@ -116,17 +116,22 @@ class BookmarkManager(SimpleConfigParser):
 
 	def __init__(self, _dbFileName):
 		SimpleConfigParser.__init__(self)
-
 		self.mBookmarkRoot = None
 		self.mDebugEnable = True
 
 		import os
 		if not os.path.exists(_dbFileName):
-			f = file('/proc/stb/info/vumodel')
-			model = f.read().strip()
-			f.close()
-			manualmode = (model == "solo2" or model == "duo2")
+			model = ""
+			if os.path.exists('/proc/stb/info/vumodel'):
+				f = file('/proc/stb/info/vumodel')
+				model = f.read().strip()
+				f.close()
+			elif os.path.exists('/proc/stb/info/gbmodel'):
+				f = file('/proc/stb/info/gbmodel')
+				model = f.read().strip()
+				f.close()
 
+			manualmode = (model == "solo2" or model == "duo2" or model == "quad")
 			out = open(_dbFileName, 'w')
 			line = "[__SYS__]\n"
 			line = line + "category_current_idx = 1\n"
@@ -141,8 +146,8 @@ class BookmarkManager(SimpleConfigParser):
 			line = line + "\n"
 			line = line + "[b-1]\n"
 			line = line + "id = 1\n"
-			line = line + "title = Vuplus Home\n"
-			line = line + "url = http://www2.vuplus.com/\n"
+			line = line + "title = Google\n"
+			line = line + "url = http://www.google.com/\n"
 			line = line + "parent = 1\n"
 			line = line + "type = 0\n"
 			line = line + "\n"
@@ -153,7 +158,7 @@ class BookmarkManager(SimpleConfigParser):
 			line = line + "parent = 1\n"
 			line = line + "type = 0\n"
 			line = line + "\n"
-			if manualmode :
+			if manualmode:
 				line = line + "[b-3]\n"
 				line = line + "url = file:///usr/local/manual/main.html\n"
 				line = line + "id = 2\n"
