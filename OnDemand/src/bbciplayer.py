@@ -170,63 +170,63 @@ class BBCiMenu(Screen):
 				self.close(None)
 		elif self.action is "start":
 			if returnValue is "bbc1":
-				self.session.open(StreamsThumb, "bbc1", "0", "http://feeds.bbc.co.uk/iplayer/bbc_one/list")
+				self.session.open(StreamsThumb, "bbc1", "BBC One", "http://feeds.bbc.co.uk/iplayer/bbc_one/list")
 			elif returnValue is "bbc2":
-				self.session.open(StreamsThumb, "bbc2", "0", "http://feeds.bbc.co.uk/iplayer/bbc_two/list")
+				self.session.open(StreamsThumb, "bbc2", "BBC Two", "http://feeds.bbc.co.uk/iplayer/bbc_two/list")
 			elif returnValue is "bbc3":
-				self.session.open(StreamsThumb, "bbc3", "0", "http://feeds.bbc.co.uk/iplayer/bbc_three/list")
+				self.session.open(StreamsThumb, "bbc3", "BBC Three", "http://feeds.bbc.co.uk/iplayer/bbc_three/list")
 			elif returnValue is "bbc4":
-				self.session.open(StreamsThumb, "bbc4", "0", "http://feeds.bbc.co.uk/iplayer/bbc_four/list")
+				self.session.open(StreamsThumb, "bbc4", "BBC Four", "http://feeds.bbc.co.uk/iplayer/bbc_four/list")
 			elif returnValue is "cbbc":
-				self.session.open(StreamsThumb, "cbbc", "0", "http://feeds.bbc.co.uk/iplayer/cbbc/list")
+				self.session.open(StreamsThumb, "cbbc", "CBBC", "http://feeds.bbc.co.uk/iplayer/cbbc/list")
 			elif returnValue is "cbeeb":
-				self.session.open(StreamsThumb, "cbeeb", "0", "http://feeds.bbc.co.uk/iplayer/cbeebies/list")
+				self.session.open(StreamsThumb, "cbeeb", "Cbeebies", "http://feeds.bbc.co.uk/iplayer/cbeebies/list")
 			elif returnValue is "bbcp":
-				self.session.open(StreamsThumb, "bbcp", "0", "http://feeds.bbc.co.uk/iplayer/bbc_parliament/list")
+				self.session.open(StreamsThumb, "bbcp", "BBC Parliamanent", "http://feeds.bbc.co.uk/iplayer/bbc_parliament/list")
 			elif returnValue is "bbcn":
-				self.session.open(StreamsThumb, "bbcn", "0", "http://feeds.bbc.co.uk/iplayer/bbc_news24/list")
+				self.session.open(StreamsThumb, "bbcn", "BBC News", "http://feeds.bbc.co.uk/iplayer/bbc_news24/list")
 			elif returnValue is "bbca":
-				self.session.open(StreamsThumb, "bbca", "0", "http://feeds.bbc.co.uk/iplayer/bbc_alba/list")
+				self.session.open(StreamsThumb, "bbca", "BBC Alba", "http://feeds.bbc.co.uk/iplayer/bbc_alba/list")
 			elif returnValue is "bbchd":
-				self.session.open(StreamsThumb, "bbchd", "0", "http://feeds.bbc.co.uk/iplayer/bbc_hd/list")
+				self.session.open(StreamsThumb, "bbchd", "BBC HD", "http://feeds.bbc.co.uk/iplayer/bbc_hd/list")
 			elif returnValue is "bbchighlights":
-				self.session.open(StreamsThumb, "bbchighlights", "0", "http://feeds.bbc.co.uk/iplayer/highlights/tv")
+				self.session.open(StreamsThumb, "bbchighlights", "TV HIGHLIGHTS", "http://feeds.bbc.co.uk/iplayer/highlights/tv")
 			elif returnValue is "bbcpopular":
-				self.session.open(StreamsThumb, "bbcpopular", "0", "http://feeds.bbc.co.uk/iplayer/popular/tv")
+				self.session.open(StreamsThumb, "bbcpopular", "MOST POPULAR TV", "http://feeds.bbc.co.uk/iplayer/popular/tv")
 			elif returnValue is "bbcdrama":
-				self.session.open(StreamsThumb, "bbcdrama", "0", "http://feeds.bbc.co.uk/iplayer/categories/drama/tv/list")
+				self.session.open(StreamsThumb, "bbcdrama", "DRAMA", "http://feeds.bbc.co.uk/iplayer/categories/drama/tv/list")
 			elif returnValue is "bbcentertainment":
-				self.session.open(StreamsThumb, "bbcentertainment", "0", "http://feeds.bbc.co.uk/iplayer/categories/entertainment/tv/list")
+				self.session.open(StreamsThumb, "bbcentertainment", "ENTERTAINMENT", "http://feeds.bbc.co.uk/iplayer/categories/entertainment/tv/list")
 			elif returnValue is "bbcfactual":
-				self.session.open(StreamsThumb, "bbcfactual", "0", "http://feeds.bbc.co.uk/iplayer/categories/factual/tv/list")
+				self.session.open(StreamsThumb, "bbcfactual", "FACTUAL", "http://feeds.bbc.co.uk/iplayer/categories/factual/tv/list")
 			elif returnValue is "bbcsigned":
-				self.session.open(StreamsThumb, "bbcsigned", "0", "http://feeds.bbc.co.uk/iplayer/categories/signed/tv/list")
+				self.session.open(StreamsThumb, "bbcsigned", "SIGNED", "http://feeds.bbc.co.uk/iplayer/categories/signed/tv/list")
 			elif returnValue is "bbconedrama":
-				self.session.open(StreamsThumb, "bbconedrama", "0", "http://feeds.bbc.co.uk/iplayer/bbc_one/drama/tv/list")
+				self.session.open(StreamsThumb, "bbconedrama", "BBC One DRAMA", "http://feeds.bbc.co.uk/iplayer/bbc_one/drama/tv/list")
 			elif returnValue is "bbccomedy":
-				self.session.open(StreamsThumb, "bbccomedy", "0", "http://feeds.bbc.co.uk/iplayer/comedy/tv/list")
+				self.session.open(StreamsThumb, "bbccomedy", "COMEDY", "http://feeds.bbc.co.uk/iplayer/comedy/tv/list")
 			elif returnValue is "bbchealth":
-				self.session.open(StreamsThumb, "bbchealth", "0", "http://feeds.bbc.co.uk/iplayer/bbc_three/factual/health_and_wellbeing/tv/list")
+				self.session.open(StreamsThumb, "bbchealth", "HEALTH AND WELLBEING", "http://feeds.bbc.co.uk/iplayer/bbc_three/factual/health_and_wellbeing/tv/list")
 			elif returnValue is "bbcwales":
-				self.session.open(StreamsThumb, "bbcwales", "0", "http://feeds.bbc.co.uk/iplayer/wales/tv/list")
+				self.session.open(StreamsThumb, "bbcwales", "BBC WALES", "http://feeds.bbc.co.uk/iplayer/wales/tv/list")
 			elif returnValue is "bbcscotland":
-				self.session.open(StreamsThumb, "bbcscotland", "0", "http://feeds.bbc.co.uk/iplayer/scotland/tv/list")
+				self.session.open(StreamsThumb, "bbcscotland", "BBC SCOTLAND", "http://feeds.bbc.co.uk/iplayer/scotland/tv/list")
 			elif returnValue is "bbcni":
-				self.session.open(StreamsThumb, "bbcni", "0", "http://feeds.bbc.co.uk/iplayer/northern_ireland/tv/list")
+				self.session.open(StreamsThumb, "bbcni", "BBC NORTHERN IRELAND", "http://feeds.bbc.co.uk/iplayer/northern_ireland/tv/list")
 			elif returnValue is "film":
-				self.session.open(StreamsThumb, "film", "0", "http://feeds.bbc.co.uk/iplayer/films/tv/list")
+				self.session.open(StreamsThumb, "film", "MOVIES", "http://feeds.bbc.co.uk/iplayer/films/tv/list")
 			elif returnValue is "bbckids":
-				self.session.open(StreamsThumb, "bbckids", "0", "http://feeds.bbc.co.uk/iplayer/childrens/tv/list")
+				self.session.open(StreamsThumb, "bbckids", "KIDS", "http://feeds.bbc.co.uk/iplayer/childrens/tv/list")
 			elif returnValue is "bbcnews":
-				self.session.open(StreamsThumb, "bbcnews", "0", "http://feeds.bbc.co.uk/iplayer/news/tv/list/")
+				self.session.open(StreamsThumb, "bbcnews", "BBC News", "http://feeds.bbc.co.uk/iplayer/news/tv/list/")
 			elif returnValue is "bbcmusic":
-				self.session.open(StreamsThumb, "bbcmusic", "0", "http://feeds.bbc.co.uk/iplayer/music/tv/list")
+				self.session.open(StreamsThumb, "bbcmusic", "MUSIC", "http://feeds.bbc.co.uk/iplayer/music/tv/list")
 			elif returnValue is "bbcsoaps":
-				self.session.open(StreamsThumb, "bbcsoaps", "0", "http://feeds.bbc.co.uk/iplayer/soaps/tv/list")
+				self.session.open(StreamsThumb, "bbcsoaps", "SOAPS", "http://feeds.bbc.co.uk/iplayer/soaps/tv/list")
 			elif returnValue is "bbcsport":
-				self.session.open(StreamsThumb, "bbcsport", "0", "http://feeds.bbc.co.uk/iplayer/sport/tv/list")
+				self.session.open(StreamsThumb, "bbcsport", "SPORT", "http://feeds.bbc.co.uk/iplayer/sport/tv/list")
 			elif returnValue is "bbcreligous":
-				self.session.open(StreamsThumb, "bbcreligous", "0", "http://feeds.bbc.co.uk/iplayer/religion_and_ethics/tv/list")
+				self.session.open(StreamsThumb, "bbcreligous", "RELIGON", "http://feeds.bbc.co.uk/iplayer/religion_and_ethics/tv/list")
 
 	def cancel(self):
 		self.close(None)
@@ -271,13 +271,13 @@ class OpenSetupScreen(Screen, ConfigListScreen):
 		}, -2)
 
 		self["config"].list = self.list
-		self.list.append(getConfigListEntry(_("Show pictures"), config.plugins.rteplayer.showpictures))
+		self.list.append(getConfigListEntry(_("Show pictures"), config.plugins.bbciplayer.showpictures))
 		self["config"].l.setList(self.list)
 		
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		self.setTitle(_("RTE Player: Setup Screen"))
+		self.setTitle(_("BBC iPlayer: Setup Screen"))
 
 	def keyGo(self):
 		for x in self["config"].list:
@@ -332,7 +332,7 @@ class StreamsThumb(Screen):
 		self.title = value
 		self.timerCmd = self.TIMER_CMD_START
 
-		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/rteplayer/logo.jpg"))
+		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/bbciplayer/logo.jpg"))
 		
 		self.tmplist = []
 		self.mediaList = []
@@ -343,7 +343,7 @@ class StreamsThumb(Screen):
 
 		self["list"] = MPanelList(list = self.tmplist, selection = 0)
 		self.updateMenu()
-		self["actions"] = ActionMap(["WizardActions", "MovieSelectionActions", "DirectionActions"],
+		self["actions"] = ActionMap(["SetupActions", "WizardActions", "MovieSelectionActions", "DirectionActions"],
 		{
 			"up": self.key_up,
 			"down": self.key_down,
@@ -357,7 +357,7 @@ class StreamsThumb(Screen):
 		self.cbTimer.start(10)
 
 	def layoutFinished(self):
-		self.setTitle("RTE Player: Listings for " +self.title)
+		self.setTitle("BBC iPlayer: Listings for " +self.title)
 
 	def updatePage(self):
 		if self.page != self["list"].getSelectedIndex() / self.MAX_PIC_PAGE:
@@ -401,7 +401,7 @@ class StreamsThumb(Screen):
 					if (os_path.exists(thumbnailFile) == True):
 						self.fetchFinished(True, picture_id = tmp_icon, failed = False)
 					else:
-						#if config.plugins.rteplayer.showpictures.value:
+						#if config.plugins.bbciplayer.showpictures.value:
 						client.downloadPage(x[self.ICON], thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
 				pos += 1
 			self["list"].setList(self.tmplist)
@@ -498,10 +498,11 @@ class StreamsThumb(Screen):
 
 	def go(self):
 		showID = self["list"].l.getCurrentSelection()[0][4]
-		showName = self["list"].l.getCurrentSelection()[0][1] 
+		showName = self["list"].l.getCurrentSelection()[0][1]
+		returnedData = (showID,showName)
 		print "showID", showID
 		print "showName", showName
-		self.session.open(bbcStreamUrl, "bbcStreamUrl", showID)
+		self.session.open(bbcStreamUrl, "bbcStreamUrl", returnedData)
 
 	def getMediaData(self, weekList, url):
 		data = wgetUrl(url)
@@ -536,56 +537,6 @@ class StreamsThumb(Screen):
 			channel = ""
 			weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
 			
-##################################################################################
-class bbcStreamSelect(Screen):
-	print "BBC One"
-	wsize = getDesktop(0).size().width() - 200
-	hsize = getDesktop(0).size().height() - 300
-	
-	skin = """
-		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="BBC iPlayer" >
-		<widget name="bbcStreamSelect" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
-		</screen>"""
-
-	def __init__(self, session, action, value, url):
-		Screen.__init__(self, session)
-		self.action = action
-		self.value = value
-		osdList = []
-		print 'URL:',url
-		req = urllib2.Request(url)
-		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-		response = urllib2.urlopen(req)
-		html = str(response.read())
-		response.close()
-		links = (re.compile ('<link rel="alternate" href="(.+?)" type="text/html" title="(.+?)">').findall(html))
-		for link in links:
-			osdList.append((_(link[1]), link))
-		osdList.sort()
-			
-		osdList.append((_("Help & About"), "help"))
-		osdList.append((_("Exit"), "exit"))
-		
-		self["bbcStreamSelect"] = MenuList(osdList)
-		self["myActionMap"] = ActionMap(["SetupActions"],
-		{
-		"ok": self.go,
-		"cancel": self.cancel
-		}, -1) 
-		
-	def go(self):
-		returnValue = self["bbcStreamSelect"].l.getCurrentSelection()[1]
-		if returnValue is not None:
-			if returnValue is "help":
-				self.session.open(ShowHelp)
-			elif returnValue is "exit":
-				self.close(None)
-			else:
-				print "returnValue",returnValue
-				self.session.open(bbcStreamUrl, "bbcStreamUrl", returnValue)
-
-	def cancel(self):
-		self.close(None) 
 
 ###########################################################################
 class bbcStreamUrl(Screen):
@@ -594,7 +545,7 @@ class bbcStreamUrl(Screen):
 	hsize = getDesktop(0).size().height() - 300
 	
 	skin = """
-		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="BBC iPlayer" >
+		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="" >
 		<widget name="bbcStreamUrl" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
 		</screen>"""
 
@@ -603,19 +554,21 @@ class bbcStreamUrl(Screen):
 		self.action = action
 		returnValue = value
 		osdList = []
-		title = returnValue
-		fileUrl = returnValue
-		print 'title',title
+		self.notUK = 0
+		self.title = returnValue[1]
+		fileUrl = returnValue[0]
+		print 'title',self.title
 		print 'fileurl',fileUrl
-		#code1 = (re.compile ('http://www.bbc.co.uk/iplayer/episode/(.+?)/.+?/').findall(fileUrl)[0])
-		#print "code1",code1
 		url1 = 'http://www.bbc.co.uk/iplayer/playlist/'+fileUrl
 		req = urllib2.Request(url1)
 		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 		response = urllib2.urlopen(req)
 		html = str(response.read())
 		response.close()
-		links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[1])
+		try:
+			links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[1])
+		except:
+			links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[0])
 		print 'links',links
 		url2 = 'http://www.bbc.co.uk/mediaselector/4/mtis/stream/'+links
 		print 'url2',url2
@@ -627,18 +580,21 @@ class bbcStreamUrl(Screen):
 		response.close()
 		
 		if html1.find('notukerror') > 0:
+			self.notUK = 1
 			print "Non UK Address"
 			opener = urllib2.build_opener(MyHTTPHandler)
+			old_opener = urllib2._opener
 			urllib2.install_opener (opener)
-			print 'links',links
+			#print 'links',links
 			url2 = 'http://www.bbc.co.uk/mediaselector/4/mtis/stream/'+links
-			print 'url2',url2
+			#print 'url2',url2
 			req = urllib2.Request(url2)
 			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 			response = urllib2.urlopen(req)
 			html1 = str(response.read())
 			#print 'html1',html1
 			response.close()
+			urllib2.install_opener (old_opener)
 
 		doc = dom.parseString(html1)
 		root = doc.documentElement
@@ -653,65 +609,26 @@ class bbcStreamUrl(Screen):
 				service == 'iplayer_streaming_h264_flv_lo' or \
 				service == 'iplayer_streaming_h264_flv' or \
 				service == 'iplayer_streaming_h264_flv_high':
-				conn = media[i].getElementsByTagName( "connection" )[0]
-				print conn
-				identifier = conn.attributes['identifier'].nodeValue
-				print identifier
-				server = conn.attributes['server'].nodeValue
-				print server
-				auth = conn.attributes['authString'].nodeValue
-				print auth
-				supplier = conn.attributes['supplier'].nodeValue
-				print supplier
-				try:
-					application = conn.attributes['application'].nodeValue
-					print application
-				except:
-					print "missing"
-					application = "none"
-				if supplier == 'limelight':
-					print "limelight"
-					fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
-				elif supplier == 'akamai':
-					print "akamai"
-					fileUrl = "rtmp://"+server+":1935/ app=ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
-				print "###fileUrl###"
-				print fileUrl
-				fileUrlTitle = []
-				fileUrlTitle.append(fileUrl)
-				fileUrlTitle.append(title)
-				osdList.append((_(str(service)+" "+str(supplier)+" "+str(application)), fileUrlTitle))
-				
+				conn  = media[i].getElementsByTagName( "connection" )[0]
+				returnedList = self.getHosts(conn, self.title, service)
+				if returnedList[0].find('akamai') > 0 and self.notUK == 1:
+					print "Not UK no Akamai"
+				else:
+					osdList.append(returnedList)
+				#print osdList
 				conn  = media[i].getElementsByTagName( "connection" )[1]
-				print conn
-				identifier = conn.attributes['identifier'].nodeValue
-				print identifier
-				server = conn.attributes['server'].nodeValue
-				print server
-				auth = conn.attributes['authString'].nodeValue
-				print auth
-				supplier = conn.attributes['supplier'].nodeValue
-				print supplier
-				try:
-					application = conn.attributes['application'].nodeValue
-					print application
-				except:
-					print "missing"
-					application = "none"
-				if supplier == 'limelight':
-					print "limelight"
-					fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
-				elif supplier == 'akamai':
-					print "akamai"
-					fileUrl = "rtmp://"+server+":1935/ app=ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
-				fileUrlTitle = []
-				fileUrlTitle.append(fileUrl)
-				fileUrlTitle.append(title)
-				osdList.append((_(str(service)+" "+str(supplier)+" "+str(application)), fileUrlTitle))
+				returnedList = self.getHosts(conn, self.title, service)
+				#print "returnedList", returnedList
+				if returnedList[0].find('akamai') > 0 and self.notUK == 1:
+					print "Not UK no Akamai"
+				else:
+					osdList.append(returnedList)
+				#print osdList
 				
 			i=i+1
-			print " "
 			
+		
+		osdList.sort()
 		osdList.append((_("Exit"), "exit"))
 
 		Screen.__init__(self, session)
@@ -720,7 +637,53 @@ class bbcStreamUrl(Screen):
 		{
 		"ok": self.go,
 		"cancel": self.cancel
-		}, -1)	  
+		}, -1)
+
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self.setTitle(_(self.title + " Choose Bitrate"))
+	
+
+	def getHosts(self, conn, title, service):
+		#print conn
+		identifier  = conn.attributes['identifier'].nodeValue
+		#print identifier
+		server = conn.attributes['server'].nodeValue
+		#print server
+		auth = conn.attributes['authString'].nodeValue
+		#print auth
+		supplier = conn.attributes['supplier'].nodeValue
+		#print supplier
+		try:
+			application = conn.attributes['application'].nodeValue
+			#print application
+		except:
+			print "application missing"
+			application = "none"
+		if supplier == 'limelight':
+			print "limelight"
+			fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
+		elif supplier == 'akamai':
+			print "akamai"
+			fileUrl = "rtmp://"+server+":1935/ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
+		if service == 'iplayer_streaming_h264_flv_vlo':
+			bitrate = 400
+		elif service == 'iplayer_streaming_h264_flv_lo':
+			bitrate = 480
+		elif service == 'iplayer_streaming_h264_flv':
+			bitrate = 800
+		elif service == 'iplayer_streaming_h264_flv_high':
+			bitrate = 1500
+		
+		#print "###fileUrl###"
+		#print fileUrl
+		fileUrlTitle = []
+		fileUrlTitle.append(fileUrl)
+		fileUrlTitle.append(title)
+		returnList = ((_(str(bitrate)+" "+str(supplier)), fileUrlTitle))
+		return returnList 
+
 
 	def go(self):
 		returnValue = self["bbcStreamUrl"].l.getCurrentSelection()[1]
@@ -728,11 +691,11 @@ class bbcStreamUrl(Screen):
 			if returnValue is "exit":
 				self.close(None)
 			else:
-				print "returnValue",returnValue
+				#print "returnValue",returnValue
 				title = returnValue[1]
 				fileUrl = returnValue[0]
-				print 'title',title
-				print 'fileUrl',fileUrl
+				#print 'title',title
+				#print 'fileUrl',fileUrl
 				
 				fileRef = eServiceReference(4097,0,str(fileUrl))
 				fileRef.setName (title) 
