@@ -20,8 +20,11 @@ try:
 			distro = splitted[1].replace('\n','')
 except:
 	distro=""
-if distro == "ViX" or distro == "AAF":
+if distro == "ViX":
 	config.misc.remotecontrol_text_support = ConfigYesNo(default = False)
+
+if  distro == "AAF":
+	config.misc.remotecontrol_text_support = ConfigYesNo(default = True)	
 
 config.plugins.remotecontrolcode = ConfigSubsection()
 if fileExists("/proc/stb/info/vumodel"):
