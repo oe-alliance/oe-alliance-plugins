@@ -3,7 +3,7 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext
 
-PluginLanguageDomain = "FanControl"
+PluginLanguageDomain = "TempFanControl"
 PluginLanguagePath = "SystemPlugins/TempFanControl/locale"
 
 def localeInit():
