@@ -25,6 +25,10 @@ import os
 import sys
 
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists
+try:
+	from Tools.Directories import SCOPE_ACTIVE_SKIN
+except:
+	pass
 
 class AutoBouquetsMaker(Screen):
 	skin = """
@@ -58,8 +62,11 @@ class AutoBouquetsMaker(Screen):
 	def firstExec(self, postScanService=None):
 		from Screens.Standby import inStandby
 		if not inStandby:
-			png = resolveFilename(SCOPE_CURRENT_SKIN, "autobouquetsmaker/background.png")
-			if not fileExists(png):
+			try:
+				png = resolveFilename(SCOPE_ACTIVE_SKIN, "autobouquetsmaker/background.png")
+			except:
+				png = None
+			if not png or not fileExists(png):
 				png = "%s/../images/background.png" % os.path.dirname(sys.modules[__name__].__file__)
 			self["background"].instance.setPixmapFromFile(png)
 

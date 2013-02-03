@@ -5,8 +5,6 @@ from Components.Sources.List import List
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.Label import Label
-from Tools.LoadPixmap import LoadPixmap
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from enigma import eTimer
 
 from scanner.manager import Manager
