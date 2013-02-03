@@ -50,6 +50,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
+		self["description"] = Label("")
 		self['footnote'] = Label("")
 		self["status"] = StaticText()
 
@@ -67,7 +68,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.list = []
 		self.status = ""
 
-		ConfigListScreen.__init__(self, self.list)
+		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
 		if self.scan_nims.value != None and self.scan_nims.value != "" :
 			self["actions"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
 			{
@@ -95,32 +96,24 @@ class Blindscan(ConfigListScreen, Screen):
 		self.i2c_mapping_table = None
 		self.makeNimSocket()
 
-		if not self.selectionChanged in self["config"].onSelectionChanged:
-			self["config"].onSelectionChanged.append(self.selectionChanged)
-		self.selectionChanged()
-
-	def selectionChanged(self):
-		if self["config"].list != [] and self["config"].list != None:
-			self["status"].setText(self["config"].getCurrent()[2])
+		self.changedEntry()
 
 	# for summary:
 	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
 	def getCurrentEntry(self):
-		if self["config"].list != [] and self["config"].list != None:
-			return self["config"].getCurrent()[0]
-		else:
-			return ""
+		return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
+
 	def getCurrentValue(self):
-		if self["config"].list != [] and self["config"].list != None:
-			return str(self["config"].getCurrent()[1].getText())
-		else:
-			return ""
+		return self["config"].getCurrent() and str(self["config"].getCurrent()[1].getText()) or ""
+
+	def getCurrentDescription(self):
+		return self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or ""
+
 	def createSummary(self):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
-
 
 	def makeNimSocket(self):
 		self.i2c_mapping_table = {0:2, 1:3, 2:1, 3:0}
