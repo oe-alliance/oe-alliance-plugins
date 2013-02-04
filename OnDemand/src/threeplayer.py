@@ -495,7 +495,7 @@ class StreamsThumb(Screen):
 			parser = etree.HTMLParser(encoding='utf-8')
 			tree   = etree.parse(url, parser)
 
-			for elem in tree.xpath("//div[@id='"+func+"']//div[@id='gridshow'] | //div[@id='"+func+"']//div[@id='gridshow']//img[@class='shadow smallroundcorner']"):
+			for elem in tree.xpath("//div[@id='"+func+"']//div[contains(@id,'gridshow')] | //div[@id='"+func+"']//div[contains(@id,'gridshow')]//img[@class='shadow smallroundcorner']"):
 				if elem.tag == 'img':
 					icon = str(elem.attrib.get('src'))
 					iconSet = True               
@@ -564,11 +564,11 @@ class StreamsThumb(Screen):
 			print 'getAllShowsMediaData: Error parsing feed: ', exception
 
 ###########################################################################
-
+	
 def findPlayUrl(value, **kwargs):
 	fileUrl = ""
 	url = value
-	
+
 	try:
 		url1 = 'http://www.tv3.ie'+url
 		req = urllib2.Request(url1)
@@ -576,28 +576,28 @@ def findPlayUrl(value, **kwargs):
 		response = urllib2.urlopen(req)
  		html = str(response.read())
 		response.close()
-        
-		soup = BeautifulSoup(html)	
-		ageCheck = soup.find('div', {'id':'age_check_form_row'})
-	
-		if ageCheck is not None:
+ 
+		if html.find('age_check_form_row') > 0:
 			try:
-				headers = { 'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}			 
-				values = {'age_ok':'1'}			
-				data = urllib.urlencode(values)			
-				req = urllib2.Request(url1, data, headers)			
-				response = urllib2.urlopen(req)			 
+				headers = { 'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}
+				values = {'age_ok':'1'}
+				data = urllib.urlencode(values)
+				req = urllib2.Request(url1, data, headers)
+				response = urllib2.urlopen(req)
 				html = str(response.read())
 				response.close()
-			except (Exception) as exception:
-				print 'Error getting webpage for age restrict: ', exception
-				return False
 
+			except (Exception) as exception:
+					print 'Error getting webpage for age restrict: ', exception
+					return False
+ 
 		links = (re.compile ('url: "mp4:(.+?)",\r\n\t\t\t\t        autoPlay: true,\r\n\t\t\t\t\t\tautoBuffering: true,\r\n\t\t\t\t        provider: "rtmp"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\r\n\t\t\t\t// All FP Plug ins:\r\n\t\t\t\tplugins:\r\n\t\t\t\t{  \r\n\t\t\t\t\tcontrols:  \r\n\t\t\t\t\t{\r\n\t\t\t\t\t\turl:"flowplayer.controls.gc-build-112011.swf"\r\n\t\t\t\t\t}\r\n\t\t\t\t\t\r\n\t\t\t\t\t,\r\n\r\n\t\t\t\t\trtmp: {\r\n\t\t\t\t\t\turl: "flowplayer.rtmp-3.2.3.swf",\r\n\t\t\t\t\t\tnetConnectionUrl: "rtmp://.+?content/videos/(.+?)/"\r\n').findall(html)[0])
 		fileUrl = 'http://content.tv3.ie/content/videos/'+str(links[1])+'/'+str(links[0])
+ 
 	except (Exception) as exception:
 		print 'findPlayUrl: Error getting URLs: ', exception
-		
+		return False
+ 
 	return fileUrl
 
 ###########################################################################
