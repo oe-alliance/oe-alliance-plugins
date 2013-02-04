@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 # for localized messages
-from . import _
+
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
@@ -271,7 +271,7 @@ class StreamsThumb(Screen):
 		self.title = value
 		self.timerCmd = self.TIMER_CMD_START
 
-		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/ondemand/3player.png"))
+		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/onDemand/3player.png"))
 		
 		self.tmplist = []
 		self.mediaList = []
@@ -321,9 +321,7 @@ class StreamsThumb(Screen):
 
 	def getThumbnailName(self, x):
 		temp_icon = str(x[self.ICON])
-		print 'temp_icon: ', temp_icon
 		icon_name = temp_icon.rsplit('/',1)
-		print 'icon_name: ', icon_name
         	return str(icon_name[1])
 
 	def updateMenu(self):
@@ -471,13 +469,8 @@ class StreamsThumb(Screen):
 		showName = self["list"].l.getCurrentSelection()[0][1]
 		icon = self["list"].l.getCurrentSelection()[0][5]
 		
-		print 'showID: ', showID
-		print 'showName: ', showName
-		print 'icon: ', icon
-		
 		if self.cmd == 'all_shows':
 			self.session.open(StreamsThumb, "one_show", showName, showID)
-			#self.session.open(showListMenu, "showListMenu", showID)
 		else:
 			fileUrl = findPlayUrl(showID)
 			print 'fileUrl: ', fileUrl
@@ -485,7 +478,7 @@ class StreamsThumb(Screen):
 			fileUrl2 = str(icon[:-12])+'.mp4'
 			fileUrl2 = fileUrl2.replace('3player', '3Player')
 			print 'fileUrl2: ', fileUrl2
-			fileRef = eServiceReference(4097,0,str(fileUrl2))
+			fileRef = eServiceReference(4097,0,str(fileUrl))
 			fileRef.setName (showName)
 			lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			self.session.open(MoviePlayer, fileRef, None, lastservice)
@@ -586,7 +579,6 @@ def findPlayUrl(value, **kwargs):
     url = value
     try:
         url1 = 'http://www.tv3.ie'+url
-        print 'url1: ', url1
         req = urllib2.Request(url1)
         req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
         response = urllib2.urlopen(req)
@@ -611,9 +603,7 @@ def findPlayUrl(value, **kwargs):
 			return False
 				
         links = (re.compile ('url: "mp4:(.+?)",\r\n\t\t\t\t        autoPlay: true,\r\n\t\t\t\t\t\tautoBuffering: true,\r\n\t\t\t\t        provider: "rtmp"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\r\n\t\t\t\t// All FP Plug ins:\r\n\t\t\t\tplugins:\r\n\t\t\t\t{  \r\n\t\t\t\t\tcontrols:  \r\n\t\t\t\t\t{\r\n\t\t\t\t\t\turl:"flowplayer.controls.gc-build-112011.swf"\r\n\t\t\t\t\t}\r\n\t\t\t\t\t\r\n\t\t\t\t\t,\r\n\r\n\t\t\t\t\trtmp: {\r\n\t\t\t\t\t\turl: "flowplayer.rtmp-3.2.3.swf",\r\n\t\t\t\t\t\tnetConnectionUrl: "rtmp://.+?content/videos/(.+?)/"\r\n').findall(html)[0])
-        print links
         fileUrl = 'http://content.tv3.ie/content/videos/'+str(links[1])+'/'+str(links[0])
-        print 'fileUrl: ', fileUrl
     except:
         print "failed findPlayUrl"
     
@@ -624,8 +614,6 @@ def findPlayUrl(value, **kwargs):
 ###########################################################################
 def checkUnicode(value, **kwargs):
     stringValue = value 
-    #print  "stringValue"
-    #print  stringValue
     returnValue = stringValue.replace('&#39;', '\'')
     return returnValue
 ###########################################################################
@@ -636,10 +624,10 @@ def main(session, **kwargs):
     #session.open(RTEMenu)
 ###########################################################################    
 class MoviePlayer(MP_parent):
-	def __init__(self, session, service):
+	def __init__(self, session, service, slist = None, lastservice = None):		
 		self.session = session
 		self.WithoutStopClose = False
-		MP_parent.__init__(self, self.session, service)
+		MP_parent.__init__(self, session, service, slist, lastservice)
 
 	def leavePlayer(self):
 		self.leavePlayerConfirmed([True,"quit"])
