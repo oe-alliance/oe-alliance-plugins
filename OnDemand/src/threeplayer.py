@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 # for localized messages
-
+from . import _
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
