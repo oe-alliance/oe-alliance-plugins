@@ -17,6 +17,7 @@
 """
 # for localized messages
 from . import _
+
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
@@ -58,116 +59,107 @@ config.plugins.threeplayer.showpictures = ConfigBoolean(default = True)
     
 ##########################################################################
 class ShowHelp(Screen):
-    skin = """
-        <screen position="center,center" size="700,400" title="3Player">
-            <widget name="myLabel" position="10,0" size="680,380" font="Console;18"/>
-            </screen>"""
-    def __init__(self, session, args = None):
-        self.session = session
+	skin = """
+		<screen position="center,center" size="700,400" title="3Player">
+			<widget name="myLabel" position="10,0" size="680,380" font="Console;18"/>
+		</screen>"""
+	def __init__(self, session, args = None):
+		self.session = session
 
-        Screen.__init__(self, session)
-        #Help text
-        text = """
-    3Player Alpha 2
-    rogerthis 2013
-    
-    Change Log
-    
-    Alpha 2
-    Added more
-    
-    Alpha 1
-    initial release
-    
-    Main support on www.world-of-satellite.com
-        """
-        
-        self["myLabel"] = ScrollLabel(text)
-        self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
-        {
-        "cancel": self.close,
-        "ok": self.close,
-        "up": self["myLabel"].pageUp,
-		"down": self["myLabel"].pageDown,
-        }, -1)
-        
+		Screen.__init__(self, session)
+		#Help text
+		text = """
+			3Player Alpha 2
+			rogerthis 2013
+
+			Change Log
+			Alpha 2
+			Added more
+
+			Alpha 1
+			initial release
+
+			Main support on www.world-of-satellite.com
+		"""
+
+		self["myLabel"] = ScrollLabel(text)
+		self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
+		{
+			"cancel": self.close,
+			"ok": self.close,
+			"up": self["myLabel"].pageUp,
+			"down": self["myLabel"].pageDown,
+		}, -1)
+
 ##########################################################################
 class threeMainMenu(Screen):
-    
-    wsize = getDesktop(0).size().width() - 200
-    hsize = getDesktop(0).size().height() - 300
-    
-    skin = """
-        <screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="3Player - Main Menu" >
-        <widget name="threeMainMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
-        </screen>"""
-            
 
-        
-    def __init__(self, session, action, value):
-        
-        self.imagedir = "/tmp/openThreeImg/"
-        self.session = session
-        self.action = action
-        self.value = value
-        osdList = []
-        
-        
-        if self.action is "start":
-            
-            osdList.append((_("Most Talked About"), "talked"))
-            osdList.append((_("Straight Off The Telly"), "straight"))
-            osdList.append((_("Going, Going..."), "going"))
-            osdList.append((_("All Shows"), "all_shows"))
-	    osdList.append((_("Setup"), 'setup'))
-        
-        
-        osdList.append((_("Help & About"), "help"))
-        osdList.append((_("Exit"), "exit"))
-        
-        Screen.__init__(self, session)
-        self["threeMainMenu"] = MenuList(osdList)
-        self["myActionMap"] = ActionMap(["SetupActions"],
-        {
-        "ok": self.go,
-        "cancel": self.cancel
-        }, -1)    
-        
-    
-    def go(self):
-        returnValue = self["threeMainMenu"].l.getCurrentSelection()[1]
-        
-        if returnValue is "help":
-                self.session.open(ShowHelp)
-        elif returnValue is "setup":
-		self.session.open(OpenSetupScreen)
-        elif returnValue is "exit":
-        	self.removeFiles(self.imagedir)
-                self.close(None)
-            
-        
-        elif self.action is "start":
-            if returnValue is "talked":
-                self.session.open(StreamsThumb, "talked", "Most Talked About", "http://www.tv3.ie/3player")
-            elif returnValue is "straight":
-                self.session.open(StreamsThumb, "straight", "Straight Off The Telly", "http://www.tv3.ie/3player")
-            elif returnValue is "going":
-                self.session.open(StreamsThumb, "going", "Going Going Gone", "http://www.tv3.ie/3player")
-            elif returnValue is "all_shows":
-                self.session.open(StreamsThumb, "all_shows", "All Shows", "http://www.tv3.ie/3player/allshows")
-            
+	wsize = getDesktop(0).size().width() - 200
+	hsize = getDesktop(0).size().height() - 300
+
+	skin = """
+		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="3Player - Main Menu" >
+			<widget name="threeMainMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
+		</screen>"""
 
 
-    def cancel(self):
-    	self.removeFiles(self.imagedir)
-        self.close(None)
+	def __init__(self, session, action, value):
+
+		self.imagedir = "/tmp/openThreeImg/"
+		self.session = session
+		self.action = action
+		self.value = value
+		osdList = []
+
+		if self.action is "start":
+
+			osdList.append((_("Most Talked About"), "talked"))
+			osdList.append((_("Straight Off The Telly"), "straight"))
+			osdList.append((_("Going, Going..."), "going"))
+			osdList.append((_("All Shows"), "all_shows"))
+			osdList.append((_("Setup"), 'setup'))
+			osdList.append((_("Help & About"), "help"))
+			osdList.append((_("Exit"), "exit"))
+
+		Screen.__init__(self, session)
+		self["threeMainMenu"] = MenuList(osdList)
+		self["myActionMap"] = ActionMap(["SetupActions"],
+		{
+			"ok": self.go,
+			"cancel": self.cancel
+		}, -1)
+
+
+	def go(self):
+		returnValue = self["threeMainMenu"].l.getCurrentSelection()[1]
+
+		if returnValue is "help":
+			self.session.open(ShowHelp)
+		elif returnValue is "setup":
+			self.session.open(OpenSetupScreen)
+		elif returnValue is "exit":
+			self.removeFiles(self.imagedir)
+			self.close(None)
+		elif self.action is "start":
+			if returnValue is "talked":
+				self.session.open(StreamsThumb, "talked", "Most Talked About", "http://www.tv3.ie/3player")
+			elif returnValue is "straight":
+				self.session.open(StreamsThumb, "straight", "Straight Off The Telly", "http://www.tv3.ie/3player")
+			elif returnValue is "going":
+				self.session.open(StreamsThumb, "going", "Going Going Gone", "http://www.tv3.ie/3player")
+			elif returnValue is "all_shows":
+				self.session.open(StreamsThumb, "all_shows", "All Shows", "http://www.tv3.ie/3player/allshows")
+
+
+	def cancel(self):
+		self.removeFiles(self.imagedir)
+		self.close(None)
         
-    def removeFiles(self, targetdir):
-	import os
-	for root, dirs, files in os.walk(targetdir):
-		for name in files:
-			os.remove(os.path.join(root, name))
-			
+	def removeFiles(self, targetdir):
+		for root, dirs, files in os.walk(targetdir):
+			for name in files:
+				os.remove(os.path.join(root, name))
+
 ###########################################################################
 def MPanelEntryComponent(channel, text, png):
 	res = [ channel ]
@@ -210,7 +202,7 @@ class OpenSetupScreen(Screen, ConfigListScreen):
 		self["config"].list = self.list
 		self.list.append(getConfigListEntry(_("Show pictures"), config.plugins.threeplayer.showpictures))
 		self["config"].l.setList(self.list)
-		
+
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
@@ -272,7 +264,7 @@ class StreamsThumb(Screen):
 		self.timerCmd = self.TIMER_CMD_START
 
 		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/onDemand/3player.png"))
-		
+
 		self.tmplist = []
 		self.mediaList = []
 
@@ -290,8 +282,7 @@ class StreamsThumb(Screen):
 			"right": self.key_right,
 			"ok": self.go,
 			"back": self.Exit,
-		}
-		, -1)
+		}, -1)
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.cbTimer.start(10)
 
@@ -322,7 +313,7 @@ class StreamsThumb(Screen):
 	def getThumbnailName(self, x):
 		temp_icon = str(x[self.ICON])
 		icon_name = temp_icon.rsplit('/',1)
-        	return str(icon_name[1])
+		return str(icon_name[1])
 
 	def updateMenu(self):
 		self.tmplist = []
@@ -359,7 +350,7 @@ class StreamsThumb(Screen):
 	def setupCallback(self, retval = None):
 		if retval == 'cancel' or retval is None:
 			return
-		
+
 		if retval == 'talked':
 			self.clearList()
 			self.getMediaData(self.mediaList, self.url, "slider1")
@@ -433,7 +424,6 @@ class StreamsThumb(Screen):
 						self.picloads[picture_id] = ePicLoad()
 						self.picloads[picture_id].PictureData.get().append(boundFunction(self.finish_decode, picture_id))
 						self.picloads[picture_id].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), sc[0], sc[1], True, 1, "#00000000"))
-						#self.picloads[picture_id].setPara((178, 100, sc[0], sc[1], False, 1, "#00000000"))
 						self.picloads[picture_id].startDecode(thumbnailFile)
 				count += 1
 				if count > end:
@@ -468,16 +458,18 @@ class StreamsThumb(Screen):
 		showID = self["list"].l.getCurrentSelection()[0][4]
 		showName = self["list"].l.getCurrentSelection()[0][1]
 		icon = self["list"].l.getCurrentSelection()[0][5]
-		
+
 		if self.cmd == 'all_shows':
 			self.session.open(StreamsThumb, "one_show", showName, showID)
 		else:
-			fileUrl = findPlayUrl(showID)
-			print 'fileUrl: ', fileUrl
+			if self.cmd == 'straight':
+				fileUrl = findPlayUrl(showID)
+				print 'fileUrl: ', fileUrl
+			else:
+				fileUrl = str(icon[:-12])+'.mp4'
+				fileUrl = fileUrl.replace('3player', '3Player')
+				print 'fileUrl: ', fileUrl
 				
-			fileUrl2 = str(icon[:-12])+'.mp4'
-			fileUrl2 = fileUrl2.replace('3player', '3Player')
-			print 'fileUrl2: ', fileUrl2
 			fileRef = eServiceReference(4097,0,str(fileUrl))
 			fileRef.setName (showName)
 			lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
@@ -486,29 +478,29 @@ class StreamsThumb(Screen):
 ##############################################################################
 
 	def getMediaData(self, weekList, url, function):
-		
+
 		func = function[:7]
-    		funcDiff = function[-1:]
+		funcDiff = function[-1:]
 		duration = ""
 		icon_type = ".jpg"
-	    	channel = "TV3"
-	    	short = ''
+		channel = "TV3"
+		short = ''
 		name = ''
 		date = ''
 		stream = ''
 		icon = ''
-	    	iconSet = False
+		iconSet = False
 
-	    	try:
+		try:
 			parser = etree.HTMLParser(encoding='utf-8')
 			tree   = etree.parse(url, parser)
 
 			for elem in tree.xpath("//div[@id='"+func+"']//div[@id='gridshow'] | //div[@id='"+func+"']//div[@id='gridshow']//img[@class='shadow smallroundcorner']"):
-		    		if elem.tag == 'img':
+				if elem.tag == 'img':
 					icon = str(elem.attrib.get('src'))
 					iconSet = True               
 
-		    		if elem.tag == 'div':
+				if elem.tag == 'div':
 					stream = str(elem[0].attrib.get('href'))
 					titleData = elem[0].attrib.get('title')
 					titleDecode = titleData.encode('charmap', 'ignore')
@@ -519,109 +511,106 @@ class StreamsThumb(Screen):
 					short = str(match.group(3))
 
 					if func == "slider1":
-					    if funcDiff == "a":
-						duration = elem[3].text
-					    else:
-						duration = elem[4].text
+						if funcDiff == "a":
+							duration = elem[3].text
+						else:
+							duration = elem[4].text
 
-		    		if iconSet == True:
-		    			if func == "slider1":
-		    				short = short+"\nDuration: "+str(duration)
+				if iconSet == True:
+					if func == "slider1":
+						short = short+"\nDuration: "+str(duration)
 					weekList.append((date, name, short, channel, stream, icon, icon_type, False))
 					iconSet = False
 
-	    	except (Exception) as exception:
-		        print 'getMediaData: Error parsing feed: ', exception
+		except (Exception) as exception:
+			print 'getMediaData: Error parsing feed: ', exception
 		        
 ###########################################################################
 
 	def getAllShowsMediaData(self, weekList, url, function):
-		
+
 		baseUrl = "http://www.tv3.ie"
 		baseDescription = "A list of all shows currently stored for "
 		duration = ""
 		icon_type = ".jpg"
-	    	channel = "TV3"
-	    	short = ''
+		channel = "TV3"
+		short = ''
 		name = ''
 		date = ''
 		stream = ''
 		icon = ''
-	    	hrefSet = False
+		hrefSet = False
 
-	    	try:
+		try:
 			parser = etree.HTMLParser(encoding='utf-8')
 			tree   = etree.parse(url, parser)
 
 			for elem in tree.xpath("//div[contains(@class,'gridshow')]//h3//a | //div[contains(@class,'gridshow')]//a//img"):
-		    		if elem.tag == 'img':
+				if elem.tag == 'img':
 					icon = str(elem.attrib.get('src'))              
 
-		    		if elem.tag == 'a':
+				if elem.tag == 'a':
 					stream = baseUrl + str(elem.attrib.get('href'))
 					name = str(elem.text)
 					date = " "
 					short = baseDescription + str(elem.text)				
 					hrefSet = True
 
-		    		if hrefSet == True:
+				if hrefSet == True:
 					weekList.append((date, name, short, channel, stream, icon, icon_type, False))
 					hrefSet = False
 
-	    	except (Exception) as exception:
-		        print 'getAllShowsMediaData: Error parsing feed: ', exception
-        
-        
-###########################################################################
- 
-def findPlayUrl(value, **kwargs):
-    fileUrl = ""
-    url = value
-    try:
-        url1 = 'http://www.tv3.ie'+url
-        req = urllib2.Request(url1)
-        req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-        response = urllib2.urlopen(req)
-        html = str(response.read())
-        response.close()
-        
-        soup = BeautifulSoup(html)	
-	ageCheck = soup.find('div', {'id':'age_check_form_row'})
-	
-	if ageCheck is not None:
-				
-		try:
-			headers = { 'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}			 
-			values = {'age_ok':'1'}			
-			data = urllib.urlencode(values)			
-			req = urllib2.Request(url1, data, headers)			
-			response = urllib2.urlopen(req)			 
-            		html = str(response.read())
-            		response.close()
 		except (Exception) as exception:
-			print 'Error getting webpage for age restrict: ', exception
-			return False
-				
-        links = (re.compile ('url: "mp4:(.+?)",\r\n\t\t\t\t        autoPlay: true,\r\n\t\t\t\t\t\tautoBuffering: true,\r\n\t\t\t\t        provider: "rtmp"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\r\n\t\t\t\t// All FP Plug ins:\r\n\t\t\t\tplugins:\r\n\t\t\t\t{  \r\n\t\t\t\t\tcontrols:  \r\n\t\t\t\t\t{\r\n\t\t\t\t\t\turl:"flowplayer.controls.gc-build-112011.swf"\r\n\t\t\t\t\t}\r\n\t\t\t\t\t\r\n\t\t\t\t\t,\r\n\r\n\t\t\t\t\trtmp: {\r\n\t\t\t\t\t\turl: "flowplayer.rtmp-3.2.3.swf",\r\n\t\t\t\t\t\tnetConnectionUrl: "rtmp://.+?content/videos/(.+?)/"\r\n').findall(html)[0])
-        fileUrl = 'http://content.tv3.ie/content/videos/'+str(links[1])+'/'+str(links[0])
-    except:
-        print "failed findPlayUrl"
-    
-    
-    
-    return fileUrl
-    
+			print 'getAllShowsMediaData: Error parsing feed: ', exception
+
+###########################################################################
+
+def findPlayUrl(value, **kwargs):
+	fileUrl = ""
+	url = value
+	
+	try:
+		url1 = 'http://www.tv3.ie'+url
+		req = urllib2.Request(url1)
+		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
+		response = urllib2.urlopen(req)
+ 		html = str(response.read())
+		response.close()
+        
+		soup = BeautifulSoup(html)	
+		ageCheck = soup.find('div', {'id':'age_check_form_row'})
+	
+		if ageCheck is not None:
+			try:
+				headers = { 'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}			 
+				values = {'age_ok':'1'}			
+				data = urllib.urlencode(values)			
+				req = urllib2.Request(url1, data, headers)			
+				response = urllib2.urlopen(req)			 
+				html = str(response.read())
+				response.close()
+			except (Exception) as exception:
+				print 'Error getting webpage for age restrict: ', exception
+				return False
+
+		links = (re.compile ('url: "mp4:(.+?)",\r\n\t\t\t\t        autoPlay: true,\r\n\t\t\t\t\t\tautoBuffering: true,\r\n\t\t\t\t        provider: "rtmp"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\r\n\t\t\t\t// All FP Plug ins:\r\n\t\t\t\tplugins:\r\n\t\t\t\t{  \r\n\t\t\t\t\tcontrols:  \r\n\t\t\t\t\t{\r\n\t\t\t\t\t\turl:"flowplayer.controls.gc-build-112011.swf"\r\n\t\t\t\t\t}\r\n\t\t\t\t\t\r\n\t\t\t\t\t,\r\n\r\n\t\t\t\t\trtmp: {\r\n\t\t\t\t\t\turl: "flowplayer.rtmp-3.2.3.swf",\r\n\t\t\t\t\t\tnetConnectionUrl: "rtmp://.+?content/videos/(.+?)/"\r\n').findall(html)[0])
+		fileUrl = 'http://content.tv3.ie/content/videos/'+str(links[1])+'/'+str(links[0])
+	except (Exception) as exception:
+		print 'findPlayUrl: Error getting URLs: ', exception
+		
+	return fileUrl
+
 ###########################################################################
 def checkUnicode(value, **kwargs):
-    stringValue = value 
-    returnValue = stringValue.replace('&#39;', '\'')
-    return returnValue
+	stringValue = value 
+	returnValue = stringValue.replace('&#39;', '\'')
+	return returnValue
 ###########################################################################
 def main(session, **kwargs):
-    action = "start"
-    value = 0 
-    start = session.open(threeMainMenu, action, value)
-    #session.open(RTEMenu)
+	action = "start"
+	value = 0 
+	start = session.open(threeMainMenu, action, value)
+	#session.open(RTEMenu)
 ###########################################################################    
 class MoviePlayer(MP_parent):
 	def __init__(self, session, service, slist = None, lastservice = None):		
@@ -633,11 +622,9 @@ class MoviePlayer(MP_parent):
 		self.leavePlayerConfirmed([True,"quit"])
 ###########################################################################
 def Plugins(**kwargs):
-    return PluginDescriptor(
-        name="3Player",
-        description="3Player - Irish Video On Demand Service",
-        where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
-        icon="./3player.png",
-        fnc=main)
-
-
+	return PluginDescriptor(
+		name="3Player",
+		description="3Player - Irish Video On Demand Service",
+		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
+		icon="./3player.png",
+		fnc=main)
