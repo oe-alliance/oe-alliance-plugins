@@ -16,7 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-
+# for localized messages
+from . import _
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
@@ -39,8 +40,6 @@ import itvplayer
 import rteplayer
 import threeplayer
 
-
-
 config.ondemand = ConfigSubsection()
 config.ondemand.ShowRTEPlayer = ConfigYesNo(default = True)
 config.ondemand.Show3Player = ConfigYesNo(default = True)
@@ -52,29 +51,28 @@ hsize = getDesktop(0).size().height() - 300
 
 ##########################################################################
 class OnDemandHelp(Screen):
-    skin = """
-        <screen position="center,center" size="500,300" title="OnDemandHelp">
-            <widget name="myLabel" position="0,0" size="280,300" font="Console;18"/>
-            </screen>"""
-    def __init__(self, session, args = None):
-        self.session = session
-
-        Screen.__init__(self, session)
-        #Help text
-        text = """
+	skin = """
+		<screen position="center,center" size="500,300" title="OnDemandHelp">
+			<widget name="myLabel" position="0,0" size="280,300" font="Console;18"/>
+		</screen>"""
+	def __init__(self, session, args = None):
+		self.session = session
+		Screen.__init__(self, session)
+		#Help text
+		text = """
 OnDemand by Team VIX
 support on
 world-of-satellite.com
 """
-        
-        self["myLabel"] = ScrollLabel(text)
-        self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
-        {
-        "cancel": self.close,
-        "ok": self.close,
-        "up": self["myLabel"].pageUp,
-		"down": self["myLabel"].pageDown,
-        }, -1)
+
+	self["myLabel"] = ScrollLabel(text)
+	self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
+	{
+	"cancel": self.close,
+	"ok": self.close,
+	"up": self["myLabel"].pageUp,
+	"down": self["myLabel"].pageDown,
+	}, -1)
         
 ##########################################################################
 
@@ -166,9 +164,6 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 		self["PlayerList"].setList(self.PlayerList)
 		self["PlayerList"].l.setItemHeight(42)
 
-
-
-
 	def OnDemandListEntry(self, name, jpg):
 		res = [(name, jpg)]
 		icon = "/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/%s.png" % jpg
@@ -198,7 +193,6 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 			self.session.open(bbciplayer.BBCiMenu, "start", "0")
 		elif player == "itvplayer":
 			self.session.open(itvplayer.ITVplayer)
-
 
 	def keyCancel(self):
 		self.close()
