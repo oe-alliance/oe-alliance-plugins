@@ -36,14 +36,14 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.InfoBarGenerics import InfoBarNotifications
 
-from enigma import eTimer, eServiceReference, iPlayableService, fbClass, eRCInput, eConsoleAppContainer
+from enigma import eTimer, eServiceReference, iPlayableService, fbClass, eRCInput, eConsoleAppContainer, getBoxType
 
 HTTPConnection.debuglevel = 1
 
 model_rc = "rc_wb_desc.png"
-if config.misc.boxtype.value.startswith('gb'):
+if getBoxType().startswith('gb'):
 	model_rc = "rc_wb_desc_gb.png"
-elif config.misc.boxtype.value.startswith('venton'):
+elif getBoxType().startswith('venton'):
 	model_rc = "rc_wb_desc_hdx.png"
 
 def excute_cmd(cmd):
