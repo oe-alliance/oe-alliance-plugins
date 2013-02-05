@@ -2,16 +2,13 @@
 from . import _
 
 from Screens.Screen import Screen
-from Plugins.Plugin import PluginDescriptor
 from Components.Console import Console
 from Components.Button import Button
 from Components.ActionMap import ActionMap
-from Components.ConfigList import ConfigList
-from Components.config import config, configfile, ConfigSubsection, ConfigEnableDisable, \
-     getConfigListEntry, ConfigInteger, ConfigSelection, ConfigYesNo
-from Components.ConfigList import ConfigListScreen
+from Components.config import config, configfile, ConfigSubsection, ConfigEnableDisable, getConfigListEntry, ConfigInteger, ConfigSelection, ConfigYesNo
+from Components.ConfigList import ConfigListScreen, ConfigList
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from enigma import iPlayableService, eServiceCenter, eTimer
+from enigma import iPlayableService, eServiceCenter, eTimer, getBoxType
 from os import system
 from Plugins.Plugin import PluginDescriptor
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -19,7 +16,7 @@ from Components.ServiceList import ServiceList
 from Screens.InfoBar import InfoBar
 from time import localtime, time
 
-if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo' or config.misc.boxtype.value == 'gb800ue':
+if getBoxType() == 'gb800se' or getBoxType() == 'gb800solo' or getBoxType() == 'gb800ue':
 	import Screens.Standby
 	from enigma import evfd
 
@@ -56,7 +53,7 @@ class Channelnumber:
 
 	def __eventInfoChanged(self):
 		self.RecordingLed()
-		if not config.misc.boxtype.value == 'gb800se' and not config.misc.boxtype.value == 'gb800solo':
+		if not getBoxType() == 'gb800se' and not getBoxType() == 'gb800solo':
 			return
 		if config.plugins.VFD_Giga.showClock.value == 'Off' or config.plugins.VFD_Giga.showClock.value == 'True_All':
 			return
@@ -130,7 +127,7 @@ class Channelnumber:
 
 	def vrime(self):
 		self.RecordingLed()
-		if not config.misc.boxtype.value == 'gb800se' and not config.misc.boxtype.value == 'gb800solo':
+		if not getBoxType() == 'gb800se' and not getBoxType() == 'gb800solo':
 			self.zaPrik.start(self.updatetime, 1)
 			return
 		if config.plugins.VFD_Giga.showClock.value == 'Off':
@@ -263,7 +260,7 @@ class VFD_GigaSetup(ConfigListScreen, Screen):
 			evfd.getInstance().vfd_led(str(config.plugins.VFD_Giga.ledRUN.value))
 		else:
 			evfd.getInstance().vfd_led("0")
-		if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo':
+		if getBoxType() == 'gb800se' or getBoxType() == 'gb800solo':
 			self.list.append(getConfigListEntry(_("Show clock"), config.plugins.VFD_Giga.showClock))
 			self.list.append(getConfigListEntry(_("Show clock in Deep Standby"), config.plugins.VFD_Giga.showClockDeepStandby))
 			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
@@ -330,11 +327,11 @@ class VFD_Giga:
 	def abort(self):
 		print "[VFD-GIGA] aborting"
 
-	if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo' or config.misc.boxtype.value == 'gb800ue':
+	if getBoxType() == 'gb800se' or getBoxType() == 'gb800solo' or getBoxType() == 'gb800ue':
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
-	if not config.misc.boxtype.value == 'gb800se' and not config.misc.boxtype.value == 'gb800solo' and not config.misc.boxtype.value == 'gb800ue':
+	if not getBoxType() == 'gb800se' and not getBoxType() == 'gb800solo' and not getBoxType() == 'gb800ue':
 		return [ ]
 	if menuid != "system":
 		return [ ]
@@ -354,14 +351,14 @@ def controlgigaVfd():
 
 	if gReason == 0 and mySession != None and gigaVfd == None:
 		print "[VFD-GIGA] Starting !!"
-		if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo' or config.misc.boxtype.value == 'gb800ue':
+		if getBoxType() == 'gb800se' or getBoxType() == 'gb800solo' or getBoxType() == 'gb800ue':
 			gigaVfd = VFD_Giga(mySession)
 		else:
 			gigaVfd = True
 	elif gReason == 1 and gigaVfd != None:
 		print "[VFD-GIGA] Stopping !!"
 		#SetTime()
-		if config.misc.boxtype.value == 'gb800se' or config.misc.boxtype.value == 'gb800solo' or config.misc.boxtype.value == 'gb800ue':
+		if getBoxType() == 'gb800se' or getBoxType() == 'gb800solo' or getBoxType() == 'gb800ue':
 			evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledDSBY.value)
 		gigaVfd = None
 
