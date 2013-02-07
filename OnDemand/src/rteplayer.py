@@ -97,29 +97,29 @@ class ShowHelp(Screen):
 	def __init__(self, session, args = None):
 		Screen.__init__(self, session)
 		text = """
-					RTE Player Beta 1
-					rogerthis 2013
+RTE Player Beta 1
+rogerthis 2013
 
-					Plays single episodes from Latest, Popular and By Date
-					Multiple episode selection from Categories and A to Z
-					For single episodes from Categories and A to Z, it 
-					automatically play this file
+Plays single episodes from Latest, Popular and By Date
+Multiple episode selection from Categories and A to Z
+For single episodes from Categories and A to Z, it 
+automatically play this file
 
-					Change Log
-					Beta 1 
-					fixed unicode character &#39;
-					code cleanup
+Change Log
+Beta 1 
+fixed unicode character &#39;
+code cleanup
 
-					Alpha 2
-					adds:
-					categories
-					a to z
+Alpha 2
+adds:
+categories
+a to z
 
-					Alpha 1
-					initial release
+Alpha 1
+initial release
 
-					Main support on www.world-of-satellite.com
-				"""
+Main support on www.world-of-satellite.com
+		"""
 
 		self["myLabel"] = ScrollLabel(text)
 		self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],

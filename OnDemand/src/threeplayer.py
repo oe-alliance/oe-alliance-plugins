@@ -69,17 +69,17 @@ class ShowHelp(Screen):
 		Screen.__init__(self, session)
 		#Help text
 		text = """
-			3Player Alpha 2
-			rogerthis 2013
+3Player Alpha 2
+rogerthis 2013
 
-			Change Log
-			Alpha 2
-			Added more
+Change Log
+Alpha 2
+Added more
 
-			Alpha 1
-			initial release
+Alpha 1
+initial release
 
-			Main support on www.world-of-satellite.com
+Main support on www.world-of-satellite.com
 		"""
 
 		self["myLabel"] = ScrollLabel(text)
