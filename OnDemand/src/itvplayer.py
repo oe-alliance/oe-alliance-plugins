@@ -45,17 +45,13 @@ socket.setdefaulttimeout(300) #in seconds
 ###########################################################################
 
 class ITVplayer(Screen):
-	wsize = getDesktop(0).size().width()
-	hsize = getDesktop(0).size().height()
-	print "wsize " + str(wsize)
-	plugin_dir = os.path.dirname(os.path.realpath(__file__)) + "/"
+	print "ITVPlayer"
+	wsize = getDesktop(0).size().width() - 200
+	hsize = getDesktop(0).size().height() - 300
 	
 	skin = """
-		<screen flags="wfNoBorder" position="0,0" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="ITV" >
-		<ePixmap alphatest="on" pixmap=\"""" + plugin_dir + """main.png" position="0,0" size=\"""" + str(wsize) + "," + str(hsize) + """\"	zPosition="-2"/>
-			<widget name="myMenu" position="235,385" size=\"""" + str(wsize - 502) + "," + str(hsize - 470) + """\" scrollbarMode="showOnDemand"/>
-			<widget name="pix" position=\"""" + str((wsize /2) + 300) + """,110" size="250,350" zPosition="7"/>
-		
+		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="ITV Player" >
+		<widget name="myMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
 		</screen>"""
 			
 	fileTitle1 = ""
@@ -65,7 +61,7 @@ class ITVplayer(Screen):
 	oldlist = []
 	osdList = []
 	osdList.append((_("ITV Player	 (This will take some time to load.)"), "itv"))
-	osdList.append((_("Help / About"), "help"))
+	osdList.append((_("Back"), "exit"))
 	historyList = []
 	historyInt = 0
 	rtmp = ""
@@ -87,13 +83,13 @@ class ITVplayer(Screen):
 		
 	
 	def go(self):
-	
-		
 		
 		returnTitle = self["myMenu"].l.getCurrentSelection()[0]
 		returnValue = self["myMenu"].l.getCurrentSelection()[1]
 		returnIndex = self["myMenu"].getSelectedIndex()
-		
+		if returnValue is "exit":
+			self.close(None)
+
 		if not self.theFunc == "itv2": 
 			if not returnValue == "help":
 				try:
@@ -139,8 +135,8 @@ class ITVplayer(Screen):
 			   
 				self.theFunc = "itv"
 				
-			if returnValue == "help":
-				self.session.open(MessageBox,_("This is a preview alpha release, no help awailable. \nThis plugin will work only for users inside UK or with a UK ip!\n\nDeveloped by: subixonfire\nGfx by: Ev0 \n\nIf you like my work feel free to donate. This will help future work on this and other plugins. "), MessageBox.TYPE_INFO)		
+			if returnValue == "exit":
+				self.close(None)
 						
 		elif self.theFunc == "itv":
 		
