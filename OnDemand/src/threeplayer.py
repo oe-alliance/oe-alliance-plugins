@@ -263,7 +263,7 @@ class StreamsThumb(Screen):
 		self.title = value
 		self.timerCmd = self.TIMER_CMD_START
 
-		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/onDemand/3player.png"))
+		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/threeDefault.png"))
 
 		self.tmplist = []
 		self.mediaList = []

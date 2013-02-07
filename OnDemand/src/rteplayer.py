@@ -55,10 +55,14 @@ from time import strftime, strptime
 from datetime import datetime
 from datetime import date
 import xml.etree.ElementTree as ET
+from lxml import etree
 
 # Set the default config option to True to show images
 config.plugins.rteplayer = ConfigSubsection()
 config.plugins.rteplayer.showpictures = ConfigBoolean(default = True)
+
+
+########### Retrieve the webpage data ####################################
 
 def wgetUrl(target):
 	try:
@@ -67,65 +71,78 @@ def wgetUrl(target):
 		response = urllib2.urlopen(req)
 		outtxt = str(response.read())
 		response.close()
-	except:
+		return outtxt
+	except (Exception) as exception:
+		print 'wgetUrl: Error retrieving URL ', exception
 		return ''
-	return outtxt
 
 ##########################################################################
+
+def calcDuration(miliseconds):
+	try:
+		mins = int((miliseconds / (1000*60)))
+		duration = str(mins)
+		return str(duration)
+	except (Exception) as exception:
+		print 'calcDuration: Error calculating minutes: ', exception
+		return ''
+
+##########################################################################
+
 class ShowHelp(Screen):
 	skin = """
-		<screen position="center,center" size="700,400" title="RTE Player">
-			<widget name="myLabel" position="10,0" size="680,380" font="Console;18"/>
+			<screen position="center,center" size="700,400" title="RTE Player">
+				<widget name="myLabel" position="10,0" size="680,380" font="Console;18"/>
 			</screen>"""
 	def __init__(self, session, args = None):
 		Screen.__init__(self, session)
 		text = """
-RTE Player Beta 1
-rogerthis 2013
+					RTE Player Beta 1
+					rogerthis 2013
 
-Plays single episodes from Latest, Popular and By Date
-Multiple episode selection from Categories and A to Z
-For single episodes from Categories and A to Z, it 
-automatically play this file
+					Plays single episodes from Latest, Popular and By Date
+					Multiple episode selection from Categories and A to Z
+					For single episodes from Categories and A to Z, it 
+					automatically play this file
 
-Change Log
-Beta 1 
-fixed unicode character &#39;
-code cleanup
-	
-Alpha 2
-adds:
-categories
-a to z
-	
-Alpha 1
-initial release
-	
-Main support on www.world-of-satellite.com
-"""
+					Change Log
+					Beta 1 
+					fixed unicode character &#39;
+					code cleanup
+
+					Alpha 2
+					adds:
+					categories
+					a to z
+
+					Alpha 1
+					initial release
+
+					Main support on www.world-of-satellite.com
+				"""
 
 		self["myLabel"] = ScrollLabel(text)
 		self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
 		{
-		"cancel": self.close,
-		"ok": self.close,
-		"up": self["myLabel"].pageUp,
-		"down": self["myLabel"].pageDown,
+			"cancel": self.close,
+			"ok": self.close,
+			"up": self["myLabel"].pageUp,
+			"down": self["myLabel"].pageDown,
 		}, -1)
-		
+
 ##########################################################################
 class RTEMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
-	
+
 	skin = """
 		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="RTE Player - Main Menu" >
-		<widget name="RTEMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
+			<widget name="RTEMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
 		</screen>"""
 
 	def __init__(self, session, action, value):
 		Screen.__init__(self, session)
-		
+
 		self.imagedir = "/tmp/openRteImg/"
 		self.action = action
 		self.value = value
@@ -139,12 +156,12 @@ class RTEMenu(Screen):
 			osdList.append((_("Setup"), 'setup'))
 			osdList.append((_("Help & About"), "help"))
 			osdList.append((_("Exit"), "exit"))
-		
+
 		self["RTEMenu"] = MenuList(osdList)
 		self["myActionMap"] = ActionMap(["SetupActions"],
 		{
-		"ok": self.go,
-		"cancel": self.cancel
+			"ok": self.go,
+			"cancel": self.cancel
 		}, -1)	  
 
 	def go(self):
@@ -171,21 +188,22 @@ class RTEMenu(Screen):
 	def cancel(self):
 		self.removeFiles(self.imagedir)
 		self.close(None)		
-				
+
 	def removeFiles(self, targetdir):
 		import os
 		for root, dirs, files in os.walk(targetdir):
 			for name in files:
 				os.remove(os.path.join(root, name))
-		
+
 ###########################################################################
+
 class StreamsMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
-	
+
 	skin = """
 		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" >
-		<widget name="latestMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
+			<widget name="latestMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
 		</screen>"""
 
 	def __init__(self, session, action, value, url):
@@ -196,44 +214,40 @@ class StreamsMenu(Screen):
 			Screen.setTitle(self, _("RTE Player - Categories"))
 		elif action is 'a_z':
 			Screen.setTitle(self, _("RTE Player - A to Z"))
-					
+
 		self.action = action
 		self.value = value
 		osdList = []
-		
+
 		# Read the URL for the selected category on the Main Menu.
-		html = wgetUrl(url)
-		
-		# If zero, an error occurred retrieving the url, throw an error
-		if len(html) == 0:
-			self.mediaProblemPopup()
-		
-		# Depending on the Action, select the required data from the returned xml.
-		if action is 'by_date' or action is 'cats':
-			links = (re.compile ('<id>(.+?)</id> \n        <title type="text">(.+?)</title>').findall(html))
-		elif action is 'a_z':
-			links = (re.compile ('<title type="text">(.+?)</title>\n        \n        \n        \n        \n        \n        <link rel="self" type=".+?" href="(.+?)"').findall(html))
-		elif action is 'cat_secs':
-			links = (re.compile ('<showid>(.+?)</showid>\n        <platform>.+?</platform>\n        <published>.+?</published>\n        <updated>.+?</updated>\n        <title type="text">(.+?)</title>').findall(html))
-		
-		# Remove the Unicode characters from the display text.
-		for link in links:
-			if not action is 'a_z':
-				returned = checkUnicode(link[1])
-				osdList.append((_(returned), link[0]))
-			else:
-				returned = checkUnicode(link[0])
-				osdList.append((_(returned), link[1]))
-				
+		try:
+			# Parse the XML with elementTree
+			tree = etree.parse(url)
+
+			# Find the first element <entry>
+			for elem in tree.xpath('//*[local-name() = "entry"]'):
+				# Iterate through the children of <entry>
+				if not action is 'a_z':
+					name = checkUnicode(str(elem[1].text))
+					url = checkUnicode(str(elem[0].text))
+					osdList.append((_(name), url))
+				else:
+					name = checkUnicode(str(elem[1].text))
+					url = checkUnicode(str(elem[2].attrib.get('href')))
+					osdList.append((_(name), url))
+
+		except (Exception) as exception:
+			print 'StreamsMenu: Error parsing feed: ', exception											
+
 		osdList.append((_("Exit"), "exit"))
-		
+
 		self["latestMenu"] = MenuList(osdList)
 		self["myActionMap"] = ActionMap(["SetupActions"],
 		{
-		"ok": self.go,
-		"cancel": self.cancel
+			"ok": self.go,
+			"cancel": self.cancel
 		}, -1) 
-		
+
 	def go(self):
 		returnValue = self["latestMenu"].l.getCurrentSelection()[1]
 		title = self["latestMenu"].l.getCurrentSelection()[0]
@@ -243,40 +257,48 @@ class StreamsMenu(Screen):
 			elif self.action is "by_date":
 				self.session.open(StreamsThumb, "by_date", title, returnValue)
 			elif self.action is "cats" or self.action is "a_z":
-				self.session.open(StreamsMenu, "cat_secs", title, returnValue)
+				self.session.open(StreamsThumb, "cat_secs", title, returnValue)
 			elif self.action is "cat_secs":
 				self.session.open(StreamsThumb, "programmeListMenu", title, returnValue)
 
- 
 	def cancel(self):
 		self.close(None)
 
 ###########################################################################
+
 def findPlayUrl(showID, **kwargs):
 	# Take the accepted showID and append it onto the url below.
 	url = 'http://feeds.rasset.ie/rteavgen/player/playlist?type=iptv1&showId='+showID
-	html = wgetUrl(url)
-	
-	# If zero, an error occurred retrieving the url, throw an error
-	if len(html) == 0:
-		self.mediaProblemPopup()
-	
-	links = (re.compile ('url="rtmpe://fmsod.rte.ie/rtevod/mp4:(.+?)" type="video/mp4"').findall(html)[0])
-	fileUrl = "rtmpe://fmsod.rte.ie/rtevod/ app=rtevod/ swfUrl=http://www.rte.ie/player/assets/player_458.swf swfVfy=1 timeout=180 playpath=mp4:"+links
-	return fileUrl
-	
+
+	try:
+		html = wgetUrl(url)
+
+		# If zero, an error occurred retrieving the url, throw an error
+		if len(html) == 0:
+			self.mediaProblemPopup()
+
+		links = (re.compile ('url="rtmpe://fmsod.rte.ie/rtevod/mp4:(.+?)" type="video/mp4"').findall(html)[0])
+		fileUrl = "rtmpe://fmsod.rte.ie/rtevod/ app=rtevod/ swfUrl=http://www.rte.ie/player/assets/player_458.swf swfVfy=1 timeout=180 playpath=mp4:"+links
+		return fileUrl
+	except (Exception) as exception:
+		print 'findPlayUrl: Problem rerieving URL: ', exception
+
 ###########################################################################
+
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	returnValue = stringValue.replace('&#39;', '\'')
 	return returnValue
+
 ###########################################################################
+
 def main(session, **kwargs):
 	action = "start"
 	value = 0 
 	start = session.open(RTEMenu, action, value)
-	#session.open(RTEMenu)
+
 ###########################################################################
+
 def MPanelEntryComponent(channel, text, png):
 	res = [ channel ]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 200, 15, 800, 100, 0, RT_HALIGN_LEFT|RT_WRAP|RT_VALIGN_TOP, text))
@@ -318,7 +340,7 @@ class OpenSetupScreen(Screen, ConfigListScreen):
 		self["config"].list = self.list
 		self.list.append(getConfigListEntry(_("Show pictures"), config.plugins.rteplayer.showpictures))
 		self["config"].l.setList(self.list)
-		
+
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
@@ -335,6 +357,7 @@ class OpenSetupScreen(Screen, ConfigListScreen):
 		self.close()
 
 ###########################################################################
+
 class StreamsThumb(Screen):
 
 	PROGDATE = 0
@@ -379,8 +402,8 @@ class StreamsThumb(Screen):
 		self.title = value
 		self.timerCmd = self.TIMER_CMD_START
 
-		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/rteplayer/logo.jpg"))
-		
+		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/rteDefault.png"))
+
 		self.tmplist = []
 		self.mediaList = []
 
@@ -398,18 +421,23 @@ class StreamsThumb(Screen):
 			"right": self.key_right,
 			"ok": self.go,
 			"back": self.Exit,
-		}
-		, -1)
+		}, -1)
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.cbTimer.start(10)
 
+##############################################################
+
 	def layoutFinished(self):
 		self.setTitle("RTE Player: Listings for " +self.title)
+
+##############################################################
 
 	def updatePage(self):
 		if self.page != self["list"].getSelectedIndex() / self.MAX_PIC_PAGE:
 			self.page = self["list"].getSelectedIndex() / self.MAX_PIC_PAGE
 			self.loadPicPage()
+
+##############################################################
 
 	def key_up(self):
 		self["list"].up()
@@ -427,8 +455,14 @@ class StreamsThumb(Screen):
 		self["list"].pageDown()
 		self.updatePage()
 
+##############################################################
+
 	def getThumbnailName(self, x):
-		return str(x[self.STREAMURL]) + str(x[self.ICONTYPE])
+		temp_icon = str(x[self.ICON])
+		icon_name = temp_icon.rsplit('/',1)
+		return str(icon_name[1])
+
+##############################################################
 
 	def updateMenu(self):
 		self.tmplist = []
@@ -436,7 +470,6 @@ class StreamsThumb(Screen):
 			pos = 0
 			for x in self.mediaList:
 				self.tmplist.append(MPanelEntryComponent(channel = x, text = (x[self.PROGNAME] + '\n' + x[self.PROGDATE] + '\n' + x[self.SHORT_DESCR]), png = self.png))
-				#tmp_icon = str(x[4]) + ".jpg"
 				tmp_icon = self.getThumbnailName(x)
 				thumbnailFile = self.imagedir + tmp_icon
 				self.pixmaps_to_load.append(tmp_icon)
@@ -453,8 +486,12 @@ class StreamsThumb(Screen):
 				pos += 1
 			self["list"].setList(self.tmplist)
 
+##############################################################
+
 	def Exit(self):
 		self.close()		
+
+##############################################################
 
 	def clearList(self):
 		elist = []
@@ -463,13 +500,21 @@ class StreamsThumb(Screen):
 		self.pixmaps_to_load = []
 		self.page = 0
 
+##############################################################
+
 	def setupCallback(self, retval = None):
 		if retval == 'cancel' or retval is None:
 			return
-		
+
 		if retval == 'latest' or retval == 'pop' or retval == 'by_date':
 			self.clearList()
 			self.getMediaData(self.mediaList, self.url)
+			if len(self.mediaList) == 0:
+				self.mediaProblemPopup()
+			self.updateMenu()
+		if retval == 'cat_secs':
+			self.clearList()
+			self.getCatsMediaData(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup()
 			self.updateMenu()
@@ -479,9 +524,8 @@ class StreamsThumb(Screen):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup()
 			self.updateMenu()
-		else:
-			self.timerCmd = self.TIMER_CMD_VKEY
-			self.cbTimer.start(10)
+
+##############################################################
 
 	def timerCallback(self):
 		self.cbTimer.stop()
@@ -489,6 +533,8 @@ class StreamsThumb(Screen):
 			self.setupCallback(self.cmd)
 		elif self.timerCmd == self.TIMER_CMD_VKEY:
 			self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title = (_("Search term")), text = "")
+
+##############################################################
 
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
@@ -500,11 +546,17 @@ class StreamsThumb(Screen):
 		else:
 			self.close()
 
-	def mediaProblemPopup(self):
-		self.session.openWithCallback(self.close, MessageBox, _("There was a problem retrieving the media list"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+##############################################################
+
+	def mediaProblemPopup(self, error):
+		self.session.openWithCallback(self.close, MessageBox, _(error), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+
+##############################################################
 
 	def fetchFailed(self, string, picture_id):
 		self.fetchFinished(False, picture_id, failed = True)
+
+##############################################################
 
 	def fetchFinished(self, x, picture_id, failed = False):
 		if failed:
@@ -522,7 +574,6 @@ class StreamsThumb(Screen):
 						self.picloads[picture_id] = ePicLoad()
 						self.picloads[picture_id].PictureData.get().append(boundFunction(self.finish_decode, picture_id))
 						self.picloads[picture_id].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), sc[0], sc[1], True, 1, "#00000000"))
-						#self.picloads[picture_id].setPara((178, 100, sc[0], sc[1], False, 1, "#00000000"))
 						self.picloads[picture_id].startDecode(thumbnailFile)
 				count += 1
 				if count > end:
@@ -531,9 +582,13 @@ class StreamsThumb(Screen):
 			self.pixmaps_to_load.append(picture_id)
 			self.fetchFinished(False, picture_id, failed = True)
 
+##############################################################
+
 	def loadPicPage(self):
 		self.Details = {}
 		self.updateMenu()
+
+##############################################################
 
 	def finish_decode(self, picture_id, info):
 		ptr = self.picloads[picture_id].getData()
@@ -553,63 +608,71 @@ class StreamsThumb(Screen):
 			pos += 1
 		self["list"].setList(self.tmplist)
 
+##############################################################
+
 	def go(self):
 		showID = self["list"].l.getCurrentSelection()[0][4]
 		showName = self["list"].l.getCurrentSelection()[0][1]
-		
-		fileUrl = findPlayUrl(showID)
-		fileRef = eServiceReference(4097,0,fileUrl)
-		fileRef.setName (showName)
-		lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		self.session.open(MoviePlayer, fileRef, None, lastservice)
+
+		if self.cmd == 'cat_secs':
+			self.session.open(StreamsThumb, "programmeListMenu", showName, showID)
+		else:
+			fileUrl = findPlayUrl(showID)
+			fileRef = eServiceReference(4097,0,fileUrl)
+			fileRef.setName (showName)
+			lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			self.session.open(MoviePlayer, fileRef, None, lastservice)
+
+##############################################################
 
 	def canBeMultiple(self, weekList, showID):
 		url = 'http://www.rte.ie/player/ie/show/'+showID
-		html = wgetUrl(url)
-		
-		# If zero, an error occurred retrieving the url, throw an error
-		if len(html) == 0:
-			self.mediaProblemPopup()
-		
-		# Now get all the related Show ID's
-		urlHeads = (re.compile ('<a class="thumbnail-programme-link" href="/player/ie/show/(.+?)/">\r\n').findall(html))
-		
-		if len(urlHeads) == 0:
-			urlHeads.append(showID) # If zero we only have 1 show in this category
-		
+
+		showIDs = []
+		start1 = datetime.now()
+		try: 
+			parser = etree.HTMLParser(encoding='utf-8')
+			tree   = etree.parse(url, parser)
+
+			for shows in tree.xpath('//div[@class="more-videos-pane"]//article[@class="thumbnail-module"]//a[@class="thumbnail-programme-link"]/@href'):
+				show_split = shows.rsplit('/',2)
+				show = str(show_split[1])
+				showIDs.append(show)
+
+		except (Exception) as exception:
+			print 'canBeMultiple:-getShows: Error getting show numbers: ', exception
+			showIDs.append(showID)
+
+
+		# If zero we only have 1 show in this category
+		if len(showIDs) == 0:
+			showIDs.append(showID)
+
 		short = ''
 		name = ''
 		date1 = ''
 		stream = ''
 		channel = ''
 		icon = ''
-		
-		for show in urlHeads:
+
+		for show in showIDs:
 			newUrl = 'http://feeds.rasset.ie/rteavgen/player/playlist?showId='+show
-			data = wgetUrl(newUrl)
-			
-			# If zero, an error occurred retrieving the url, throw an error
-			if len(data) == 0:
-				self.mediaProblemPopup()
-			
+
 			try:
-				# Parse the XML with elementTree
-				tree = ET.fromstring(data)
-				
-				# Find the first element <entry> (Don't know why it appends the URL onto here???)
-				for elem in tree.iter('{http://www.w3.org/2005/Atom}entry'):
+				# Parse the XML with lxml
+				tree = etree.parse(newUrl)
+
+				# Find the first element <entry>
+				for elem in tree.xpath('//*[local-name() = "entry"]'):
 					# Iterate through the children of <entry>
-					for el in elem:
-						#print el.tag, el.attrib, el.text (If you want to see each element and attribs use this line)
-						stream = str(elem.find('{http://www.w3.org/2005/Atom}id').text)
-						date_tmp = str(elem.find('{http://www.w3.org/2005/Atom}published').text)
-						name_tmp = str(elem.find('{http://www.w3.org/2005/Atom}title').text)
-						short_tmp = str(elem.find('{http://www.w3.org/2005/Atom}content').text)
-						channel_tmp = elem.find('{http://www.w3.org/2005/Atom}category', "channel")
-						channel = str(channel_tmp.get('term'))
-						icon_tmp = elem.find('{http://search.yahoo.com/mrss/}thumbnail')
-						icon_url = str(icon_tmp.get('url'))
-										
+					stream = str(elem[0].text)
+					date_tmp = str(elem[1].text)
+					name_tmp = str(elem[3].text)
+					short_tmp = str(elem[4].text)
+					channel = str(elem[5].attrib.get('term'))
+					millisecs = int(elem[16].attrib.get('ms'))
+					icon_url = str(elem[23].attrib.get('url'))
+
 					# Tidy up the format of the data
 					year = int(date_tmp[0:4])
 					month = int(date_tmp[5:7])
@@ -617,32 +680,27 @@ class StreamsThumb(Screen):
 					oldDate = date(year, month, day)  # year, month, day
 					dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 					date1 = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16] + " " + channel
-					
+
 					name = checkUnicode(name_tmp)
 					short = checkUnicode(short_tmp)
+
+					# Calcualte the stream duration
+					duration = calcDuration(millisecs)
+
+					# Append duration onto the show description
+					short = short+"\nDuration: "+str(duration)+" mins"
+
 					icon = icon_url[0:-7]+"-261.jpg"
 					icon_type = '.jpg'
-					
-					# Debug: Print the field outputs
-					#print stream
-					#print date1
-					#print name
-					#print short
-					#print channel
-					#print icon
-					
+
 					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
 
-			except:
-				self.session.open(MessageBox, _("Problem with show"), MessageBox.TYPE_INFO, timeout=5)
-				print "Problem with show number:", show
+			except (Exception) as exception:
+				print "canBeMultiple: Problem parsing data: ", exception
+
+#################################################################
 
 	def getMediaData(self, weekList, url):
-		data = wgetUrl(url)
-		
-		# If zero, an error occurred retrieving the url, throw an error
-		if len(data) == 0:
-			self.mediaProblemPopup()
 
 		short = ''
 		name = ''
@@ -651,49 +709,85 @@ class StreamsThumb(Screen):
 		channel = ''
 		icon = ''
 
-		links = (re.compile ('<showid>(.+?)</showid>\s*' \
-		                     '<platform>.+?</platform>\s*' \
-		                     '<published>(.+?)</published>\s*' \
-		                     '<updated>.+?</updated>\s*' \
-		                     '<title type="text">(.+?)</title>\s*' \
-		                     '<content type="text">(.+?)</content>\s*' \
-		                     '<category term="(.+?)" rte:type="channel"/>\s*' \
-		                     '<category term=".+?" rte:type="genre"/>\s*' \
-		                     '<category term=".+?" rte:type="series"/>\s*' \
-		                     '<category term=".+?" rte:type="episode"/>\s*' \
-		                     '<category term=".+?" rte:type="ranking"/>\s*' \
-		                     '<category term=".+?" rte:type="genrelist"/>\s*' \
-		                     '<category term=".+?" rte:type="keywordlist"/>\s*' \
-		                     '<category term=".+?" rte:type="progid"/>\s*' \
-		                     '<link rel="self" type=".+?" href=".+?" />\s*' \
-		                     '<link rel="alternate" type=".+?" href=".+?" />\s*' \
-				     '<rte:valid start=".+?" end=".+?"/>\s*' \
-				     '<rte:duration ms=".+?" formatted=".+?" />\s*' \
-				     '<rte:statistics views=".+?" />\s*' \
-				     '<media:title type=".+?">.+?</media:title>\s*' \
-				     '<media:description type=".+?">.+?</media:description>\s*' \
-				     '<media:player url=".+?" width=".+?" height=".+?"/>\s*' \
-				     '<media:thumbnail url="(.+?)" time=".+?"/>').findall(data))
+		try:
+			# Parse the XML with elementTree
+			tree = etree.parse(url)
 
-		for line in links:
-			stream = line[0]
+			# Find the first element <entry>
+			for elem in tree.xpath('//*[local-name() = "entry"]'):
+				# Iterate through the children of <entry>
+				stream = str(elem[1].text)
+				date_tmp = str(elem[3].text)
+				name_tmp = str(elem[5].text)
+				short_tmp = str(elem[6].text)
+				channel = str(elem[7].attrib.get('term'))
+				millisecs = int(elem[18].attrib.get('ms'))
+				icon_url = str(elem[23].attrib.get('url'))
 
-			# Format the date to display onscreen
-			year = int(line[1][0:4])
-			month = int(line[1][5:7])
-			day = int(line[1][8:10])
-			oldDate = date(int(year), int(month), int(day)) # year, month, day
-			dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-			date1 = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +line[1][11:16] + " " + line[4]
-			
-			name = checkUnicode(line[2])
-			short = checkUnicode(line[3])
-			channel = line[4]
-			icon = line[5][0:-4]+"-261.jpg" # higher quality image 261x147
-			#icon = line[5] lower quality image 150x84
-			icon_type = '.jpg'
-			weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
-			
+				year = int(date_tmp[0:4])
+				month = int(date_tmp[5:7])
+				day = int(date_tmp[8:10])
+				oldDate = date(int(year), int(month), int(day)) # year, month, day
+				dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+				date1 = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16] + " " + channel
+
+				name = checkUnicode(name_tmp)
+				short = checkUnicode(short_tmp)
+				icon = icon_url[0:-4]+"-261.jpg" # higher quality image 261x147
+				#icon = line[5] lower quality image 150x84
+				icon_type = '.jpg'
+
+				# Calcualte the stream duration
+				duration = calcDuration(millisecs)
+
+				# Append duration onto the show description
+				short = short+"\nDuration: "+str(duration)+" mins"
+
+				weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+
+		except (Exception) as exception:
+			print 'getMediaData: Error getting Media info: ', exception
+
+#################################################################
+
+	def getCatsMediaData(self, weekList, url):
+		short = ''
+		name = ''
+		date1 = ''
+		stream = ''
+		channel = ''
+		icon = ''
+
+		try:
+			# Parse the XML with elementTree
+			tree = etree.parse(url)
+
+			# Find the first element <entry>
+			for elem in tree.xpath('//*[local-name() = "entry"]'):
+				# Iterate through the children of <entry>
+				stream_tmp = str(elem[1].text)
+				date_tmp = str(elem[4].text)
+				name_tmp = str(elem[5].text)
+				icon_url = str(elem[23].attrib.get('url'))
+
+				year = int(date_tmp[0:4])
+				month = int(date_tmp[5:7])
+				day = int(date_tmp[8:10])
+				oldDate = date(int(year), int(month), int(day)) # year, month, day
+				dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+				date1 = "Last updated on " + dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16]
+
+				stream = checkUnicode(stream_tmp)
+				name = checkUnicode(name_tmp)
+				short = "\nThe current list of episodes stored for " + str(name)
+				icon = icon_url[0:-4]+"-261.jpg" # higher quality image 261x147
+				icon_type = '.jpg'
+
+				weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+
+		except (Exception) as exception:
+			print 'getCatsMediaData: Error getting Media info: ', exception			
+
 ###########################################################################	   
 class MoviePlayer(MP_parent):
 	def __init__(self, session, service, slist = None, lastservice = None):
@@ -704,7 +798,7 @@ class MoviePlayer(MP_parent):
 ############################################################################
 def Plugins(**kwargs):
 	return PluginDescriptor(
-		name="111RTEPlayer",
+		name="RTEPlayer",
 		description="RTE Player - Irish Video On Demand Service",
 		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
 		icon="./rteplayer.png",

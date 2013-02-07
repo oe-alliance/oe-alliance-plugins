@@ -60,19 +60,19 @@ class OnDemandHelp(Screen):
 		Screen.__init__(self, session)
 		#Help text
 		text = """
-OnDemand by Team VIX
-support on
-world-of-satellite.com
-"""
+					OnDemand by Team VIX
+					support on
+					world-of-satellite.com
+				"""
 
-	self["myLabel"] = ScrollLabel(text)
-	self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
-	{
-	"cancel": self.close,
-	"ok": self.close,
-	"up": self["myLabel"].pageUp,
-	"down": self["myLabel"].pageDown,
-	}, -1)
+		self["myLabel"] = ScrollLabel(text)
+		self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
+		{
+			"cancel": self.close,
+			"ok": self.close,
+			"up": self["myLabel"].pageUp,
+			"down": self["myLabel"].pageDown,
+		}, -1)
         
 ##########################################################################
 
