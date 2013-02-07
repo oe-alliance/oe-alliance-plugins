@@ -52,45 +52,6 @@ from bs4 import BeautifulSoup
 from datetime import datetime, date, timedelta
 from lxml import etree
 
-
-# Set the default config option to True to show images
-config.plugins.threeplayer = ConfigSubsection()
-config.plugins.threeplayer.showpictures = ConfigBoolean(default = True)
-    
-##########################################################################
-class ShowHelp(Screen):
-	skin = """
-		<screen position="center,center" size="700,400" title="3Player">
-			<widget name="myLabel" position="10,0" size="680,380" font="Console;18"/>
-		</screen>"""
-	def __init__(self, session, args = None):
-		self.session = session
-
-		Screen.__init__(self, session)
-		#Help text
-		text = """
-3Player Alpha 2
-rogerthis 2013
-
-Change Log
-Alpha 2
-Added more
-
-Alpha 1
-initial release
-
-Main support on www.world-of-satellite.com
-		"""
-
-		self["myLabel"] = ScrollLabel(text)
-		self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
-		{
-			"cancel": self.close,
-			"ok": self.close,
-			"up": self["myLabel"].pageUp,
-			"down": self["myLabel"].pageDown,
-		}, -1)
-
 ##########################################################################
 class threeMainMenu(Screen):
 
@@ -117,9 +78,7 @@ class threeMainMenu(Screen):
 			osdList.append((_("Straight Off The Telly"), "straight"))
 			osdList.append((_("Going, Going..."), "going"))
 			osdList.append((_("All Shows"), "all_shows"))
-			osdList.append((_("Setup"), 'setup'))
-			osdList.append((_("Help & About"), "help"))
-			osdList.append((_("Exit"), "exit"))
+			osdList.append((_("Back"), "exit"))
 
 		Screen.__init__(self, session)
 		self["threeMainMenu"] = MenuList(osdList)
@@ -133,11 +92,7 @@ class threeMainMenu(Screen):
 	def go(self):
 		returnValue = self["threeMainMenu"].l.getCurrentSelection()[1]
 
-		if returnValue is "help":
-			self.session.open(ShowHelp)
-		elif returnValue is "setup":
-			self.session.open(OpenSetupScreen)
-		elif returnValue is "exit":
+		if returnValue is "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
 		elif self.action is "start":
@@ -178,45 +133,6 @@ class MPanelList(MenuList):
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		self.moveToIndex(self.selection)
-
-###########################################################################
-class OpenSetupScreen(Screen, ConfigListScreen):
-
-	def __init__(self, session):
-		self.skin = """
-				<screen position="center,center" size="400,100" title="">
-					<widget name="config" position="10,10"   size="e-20,e-10" scrollbarMode="showOnDemand" />
-				</screen>"""
-		self.session = session
-		Screen.__init__(self, session)
-
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
-
-		self["actions"] = ActionMap(["SetupActions"],
-		{
-			"ok": self.keyGo,
-			"cancel": self.keyCancel,
-		}, -2)
-
-		self["config"].list = self.list
-		self.list.append(getConfigListEntry(_("Show pictures"), config.plugins.threeplayer.showpictures))
-		self["config"].l.setList(self.list)
-
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(_("3 Player: Setup Screen"))
-
-	def keyGo(self):
-		for x in self["config"].list:
-			x[1].save()
-		self.close()
-
-	def keyCancel(self):
-		for x in self["config"].list:
-			x[1].cancel()
-		self.close()
 
 ###########################################################################
 class StreamsThumb(Screen):
@@ -332,7 +248,7 @@ class StreamsThumb(Screen):
 					if (os_path.exists(thumbnailFile) == True):
 						self.fetchFinished(True, picture_id = tmp_icon, failed = False)
 					else:
-						if config.plugins.threeplayer.showpictures.value:
+						if config.ondemand.ShowImages.value:
 							client.downloadPage(x[self.ICON], thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
 				pos += 1
 			self["list"].setList(self.tmplist)
@@ -620,11 +536,3 @@ class MoviePlayer(MP_parent):
 
 	def leavePlayer(self):
 		self.leavePlayerConfirmed([True,"quit"])
-###########################################################################
-def Plugins(**kwargs):
-	return PluginDescriptor(
-		name="3Player",
-		description="3Player - Irish Video On Demand Service",
-		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
-		icon="./3player.png",
-		fnc=main)

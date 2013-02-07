@@ -57,11 +57,6 @@ from datetime import date
 import xml.etree.ElementTree as ET
 from lxml import etree
 
-# Set the default config option to True to show images
-config.plugins.rteplayer = ConfigSubsection()
-config.plugins.rteplayer.showpictures = ConfigBoolean(default = True)
-
-
 ########### Retrieve the webpage data ####################################
 
 def wgetUrl(target):
@@ -88,49 +83,6 @@ def calcDuration(miliseconds):
 		return ''
 
 ##########################################################################
-
-class ShowHelp(Screen):
-	skin = """
-			<screen position="center,center" size="700,400" title="RTE Player">
-				<widget name="myLabel" position="10,0" size="680,380" font="Console;18"/>
-			</screen>"""
-	def __init__(self, session, args = None):
-		Screen.__init__(self, session)
-		text = """
-RTE Player Beta 1
-rogerthis 2013
-
-Plays single episodes from Latest, Popular and By Date
-Multiple episode selection from Categories and A to Z
-For single episodes from Categories and A to Z, it 
-automatically play this file
-
-Change Log
-Beta 1 
-fixed unicode character &#39;
-code cleanup
-
-Alpha 2
-adds:
-categories
-a to z
-
-Alpha 1
-initial release
-
-Main support on www.world-of-satellite.com
-		"""
-
-		self["myLabel"] = ScrollLabel(text)
-		self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
-		{
-			"cancel": self.close,
-			"ok": self.close,
-			"up": self["myLabel"].pageUp,
-			"down": self["myLabel"].pageDown,
-		}, -1)
-
-##########################################################################
 class RTEMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
@@ -153,9 +105,7 @@ class RTEMenu(Screen):
 			osdList.append((_("Episodes by Date"), "by_date"))
 			osdList.append((_("Show Categories"), "cats"))
 			osdList.append((_("Shows A to Z"), "a_z"))
-			osdList.append((_("Setup"), 'setup'))
-			osdList.append((_("Help & About"), "help"))
-			osdList.append((_("Exit"), "exit"))
+			osdList.append((_("Back"), "exit"))
 
 		self["RTEMenu"] = MenuList(osdList)
 		self["myActionMap"] = ActionMap(["SetupActions"],
@@ -166,11 +116,7 @@ class RTEMenu(Screen):
 
 	def go(self):
 		returnValue = self["RTEMenu"].l.getCurrentSelection()[1]
-		if returnValue is "help":
-			self.session.open(ShowHelp)
-		elif returnValue is "setup":
-			self.session.open(OpenSetupScreen)
-		elif returnValue is "exit":
+		if returnValue is "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
 		elif self.action is "start":
@@ -318,45 +264,6 @@ class MPanelList(MenuList):
 		self.moveToIndex(self.selection)
 
 ###########################################################################
-class OpenSetupScreen(Screen, ConfigListScreen):
-
-	def __init__(self, session):
-		self.skin = """
-				<screen position="center,center" size="400,100" title="">
-					<widget name="config" position="10,10" size="e-20,e-10" scrollbarMode="showOnDemand" />
-				</screen>"""
-		self.session = session
-		Screen.__init__(self, session)
-
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
-
-		self["actions"] = ActionMap(["SetupActions"],
-		{
-			"ok": self.keyGo,
-			"cancel": self.keyCancel,
-		}, -2)
-
-		self["config"].list = self.list
-		self.list.append(getConfigListEntry(_("Show pictures"), config.plugins.rteplayer.showpictures))
-		self["config"].l.setList(self.list)
-
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(_("RTE Player: Setup Screen"))
-
-	def keyGo(self):
-		for x in self["config"].list:
-			x[1].save()
-		self.close()
-
-	def keyCancel(self):
-		for x in self["config"].list:
-			x[1].cancel()
-		self.close()
-
-###########################################################################
 
 class StreamsThumb(Screen):
 
@@ -481,7 +388,7 @@ class StreamsThumb(Screen):
 					if (os_path.exists(thumbnailFile) == True):
 						self.fetchFinished(True, picture_id = tmp_icon, failed = False)
 					else:
-						if config.plugins.rteplayer.showpictures.value:
+						if config.ondemand.ShowImages.value:
 							client.downloadPage(x[self.ICON], thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
 				pos += 1
 			self["list"].setList(self.tmplist)
@@ -795,11 +702,3 @@ class MoviePlayer(MP_parent):
 
 	def leavePlayer(self):
 		self.leavePlayerConfirmed([True,"quit"])
-############################################################################
-def Plugins(**kwargs):
-	return PluginDescriptor(
-		name="RTEPlayer",
-		description="RTE Player - Irish Video On Demand Service",
-		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
-		icon="./rteplayer.png",
-		fnc=main)

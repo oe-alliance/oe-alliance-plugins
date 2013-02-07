@@ -45,6 +45,7 @@ config.ondemand.ShowRTEPlayer = ConfigYesNo(default = True)
 config.ondemand.Show3Player = ConfigYesNo(default = True)
 config.ondemand.ShowBBCiPlayer = ConfigYesNo(default = True)
 config.ondemand.ShowITVPlayer = ConfigYesNo(default = True)
+config.ondemand.ShowImages = ConfigYesNo(default = True)
 
 wsize = getDesktop(0).size().width() - 200
 hsize = getDesktop(0).size().height() - 300
@@ -89,10 +90,11 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		
 		self.configlist = []
 		ConfigListScreen.__init__(self, self.configlist)
-		self.configlist.append(getConfigListEntry("RTE Player:", config.ondemand.ShowRTEPlayer))
-		self.configlist.append(getConfigListEntry("3 Player:", config.ondemand.Show3Player))
-		self.configlist.append(getConfigListEntry("BBC iPlayer:", config.ondemand.ShowBBCiPlayer))
-		self.configlist.append(getConfigListEntry("ITV Player:", config.ondemand.ShowITVPlayer))
+		self.configlist.append(getConfigListEntry((_("RTE Player:")), config.ondemand.ShowRTEPlayer))
+		self.configlist.append(getConfigListEntry((_("3 Player:")), config.ondemand.Show3Player))
+		self.configlist.append(getConfigListEntry((_("BBC iPlayer:")), config.ondemand.ShowBBCiPlayer))
+		self.configlist.append(getConfigListEntry((_("ITV Player:")), config.ondemand.ShowITVPlayer))
+		self.configlist.append(getConfigListEntry((_("Show Images:")), config.ondemand.ShowImages))
 		self["config"].setList(self.configlist)
 
 		

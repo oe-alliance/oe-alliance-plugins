@@ -76,31 +76,6 @@ def checkUnicode(value, **kwargs):
 	return returnValue
 ###########################################################################
 
-class ShowHelp(Screen):
-	skin = """
-		<screen position="center,center" size="700,400" title="BBC iPlayer">
-			<widget name="myLabel" position="10,0" size="680,380" font="Console;18"/>
-			</screen>"""
-	def __init__(self, session, args = None):
-		self.session = session
-
-		Screen.__init__(self, session)
-		#Help text
-		text = """
-	   BBC iPlayer 
-
-		"""
-		
-		self["myLabel"] = ScrollLabel(text)
-		self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
-		{
-		"cancel": self.close,
-		"ok": self.close,
-		"up": self["myLabel"].pageUp,
-		"down": self["myLabel"].pageDown,
-		}, -1)
-		
-##########################################################################
 class BBCiMenu(Screen):
 	print "BBCiMenu"
 	wsize = getDesktop(0).size().width() - 200
@@ -149,8 +124,7 @@ class BBCiMenu(Screen):
 			osdList.append((_("BBC Alba"), "bbca"))
 			osdList.append((_("BBC HD"), "bbchd"))
 		
-		osdList.append((_("Help & About"), "help"))
-		osdList.append((_("Exit"), "exit"))
+		osdList.append((_("Back"), "exit"))
 		
 		Screen.__init__(self, session)
 		self["BBCiMenu"] = MenuList(osdList)
@@ -164,9 +138,7 @@ class BBCiMenu(Screen):
 		returnValue = self["BBCiMenu"].l.getCurrentSelection()[1]
 		returnValue2 = self["BBCiMenu"].l.getCurrentSelection()[1] + "," + self["BBCiMenu"].l.getCurrentSelection()[0] 
 		
-		if returnValue is "help":
-				self.session.open(ShowHelp)
-		elif returnValue is "exit":
+		if returnValue is "exit":
 				self.close(None)
 		elif self.action is "start":
 			if returnValue is "bbc1":
@@ -249,45 +221,6 @@ class MPanelList(MenuList):
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		self.moveToIndex(self.selection)
-
-###########################################################################
-class OpenSetupScreen(Screen, ConfigListScreen):
-
-	def __init__(self, session):
-		self.skin = """
-				<screen position="center,center" size="400,100" title="">
-					<widget name="config" position="10,10"	 size="e-20,e-10" scrollbarMode="showOnDemand" />
-				</screen>"""
-		self.session = session
-		Screen.__init__(self, session)
-
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
-
-		self["actions"] = ActionMap(["SetupActions"],
-		{
-			"ok": self.keyGo,
-			"cancel": self.keyCancel,
-		}, -2)
-
-		self["config"].list = self.list
-		self.list.append(getConfigListEntry(_("Show pictures"), config.plugins.bbciplayer.showpictures))
-		self["config"].l.setList(self.list)
-		
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(_("BBC iPlayer: Setup Screen"))
-
-	def keyGo(self):
-		for x in self["config"].list:
-			x[1].save()
-		self.close()
-
-	def keyCancel(self):
-		for x in self["config"].list:
-			x[1].cancel()
-		self.close()
 
 ###########################################################################
 class StreamsThumb(Screen):
@@ -401,8 +334,8 @@ class StreamsThumb(Screen):
 					if (os_path.exists(thumbnailFile) == True):
 						self.fetchFinished(True, picture_id = tmp_icon, failed = False)
 					else:
-						#if config.plugins.bbciplayer.showpictures.value:
-						client.downloadPage(x[self.ICON], thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
+						if config.ondemand.ShowImages.value:
+							client.downloadPage(x[self.ICON], thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
 				pos += 1
 			self["list"].setList(self.tmplist)
 
@@ -731,12 +664,3 @@ class MoviePlayer(MP_parent):
 
 	def leavePlayer(self):
 		self.leavePlayerConfirmed([True,"quit"])
-
-###########################################################################
-def Plugins(**kwargs):
-	return PluginDescriptor(
-		name="BBC iPlayer Beta v0.1",
-		description="Beta BBC iPlayer",
-		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
-		icon="./iplayer.png",
-		fnc=main)
