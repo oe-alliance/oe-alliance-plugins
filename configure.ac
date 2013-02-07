@@ -164,6 +164,7 @@ MICOMUpgrade/po/Makefile
 
 OnDemand/Makefile
 OnDemand/src/Makefile
+OnDemand/src/icons/Makefile
 OnDemand/meta/Makefile
 OnDemand/po/Makefile
 
