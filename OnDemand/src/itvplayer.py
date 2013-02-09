@@ -37,8 +37,9 @@ from Tools.Directories import fileExists
 from cookielib import CookieJar
 import urllib, urllib2, re, time, os, random
 import socket
-
 socket.setdefaulttimeout(300) #in seconds
+import httplib
+from dns.resolver import Resolver
 
 	 
 
@@ -194,17 +195,42 @@ class ITVplayer(Screen):
 	"""%returnValue
 	
 			url = 'http://mercury.itv.com/PlaylistService.svc'
-	
-	
-			req = urllib2.Request(url, soapMessage)
-			req.add_header("Host","mercury.itv.com")
-			req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
-			req.add_header("Content-type","text/xml; charset=\"UTF-8\"")
-			req.add_header("Content-length","%d" % len(soapMessage))
-			req.add_header("SOAPAction","http://tempuri.org/PlaylistService/GetPlaylist")	 
-			response = urllib2.urlopen(req)	  
-			htmldoc = str(response.read())
-			response.close() 
+
+			try:
+				req = urllib2.Request(url, soapMessage)
+				req.add_header("Host","mercury.itv.com")
+				req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
+				req.add_header("Content-type","text/xml; charset=\"UTF-8\"")
+				req.add_header("Content-length","%d" % len(soapMessage))
+				req.add_header("SOAPAction","http://tempuri.org/PlaylistService/GetPlaylist")	 
+				response = urllib2.urlopen(req)	  
+				htmldoc = str(response.read())
+				response.close()
+			except urllib2.HTTPError, exception:
+				exResp = str(exception.read())
+				
+				if 'InvalidGeoRegion' in exResp:
+					print "Non UK Address"
+					opener = urllib2.build_opener(MyHTTPHandler)
+					old_opener = urllib2._opener
+					urllib2.install_opener (opener)
+					req = urllib2.Request(url, soapMessage)
+					req.add_header("Host","mercury.itv.com")
+					req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
+					req.add_header("Content-type","text/xml; charset=\"UTF-8\"")
+					req.add_header("Content-length","%d" % len(soapMessage))
+					req.add_header("SOAPAction","http://tempuri.org/PlaylistService/GetPlaylist")	 
+					response = urllib2.urlopen(req)	  
+					htmldoc = str(response.read())
+					response.close()
+					urllib2.install_opener (old_opener)
+				else:
+					self.session.open(MessageBox, _("HTTPError: Problem Retrieving Stream"), MessageBox.TYPE_ERROR, timeout=5)
+					return False
+			except (Exception) as exception2:
+				self.session.open(MessageBox, _("Exception: Problem Retrieving Stream"), MessageBox.TYPE_ERROR, timeout=5)
+				print "go: Error calling urllib2: ", exception2
+				return False
 	
 			res = re.search('<VideoEntries>.+?</VideoEntries>', htmldoc, re.DOTALL).group(0)
 			#print res
@@ -307,6 +333,21 @@ class MoviePlayer(MP_parent):
 	def __onClose(self):
 		if not(self.WithoutStopClose):
 			self.session.nav.playService(self.lastservice)	
+
+###########################################################################
+
+class MyHTTPConnection(httplib.HTTPConnection):
+	def connect (self):
+		resolver = Resolver()
+		resolver.nameservers = ['142.54.177.158']  #tunlr dns address
+		answer = resolver.query(self.host,'A')
+		self.host = answer.rrset.items[0].address
+		self.sock = socket.create_connection ((self.host, self.port))
+
+class MyHTTPHandler(urllib2.HTTPHandler):
+	def http_open(self, req):
+		return self.do_open (MyHTTPConnection, req)
+
 ###########################################################################
 
 def Plugins(**kwargs):
