@@ -226,6 +226,7 @@ class ITVplayer(Screen):
 					urllib2.install_opener (old_opener)
 				else:
 					self.session.open(MessageBox, _("HTTPError: Problem Retrieving Stream"), MessageBox.TYPE_ERROR, timeout=5)
+					print "HTTPError: Error retrieving stream: ", exResp
 					return False
 			except (Exception) as exception2:
 				self.session.open(MessageBox, _("Exception: Problem Retrieving Stream"), MessageBox.TYPE_ERROR, timeout=5)
