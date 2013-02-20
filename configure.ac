@@ -125,7 +125,7 @@ Blindscan/po/Makefile
 
 DLNABrowser/Makefile
 DLNABrowser/src/Makefile
-DLNABrowser/src/icons/Makefile
+DLNABrowser/icons/Makefile
 DLNABrowser/meta/Makefile
 
 DLNAServer/Makefile
