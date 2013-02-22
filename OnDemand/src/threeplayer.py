@@ -439,6 +439,7 @@ class StreamsThumb(Screen):
 					iconSet = False
 
 		except (Exception) as exception:
+			self.session.open(MessageBox, _("Exception: Problem Parsing Media Data, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
 			print 'getMediaData: Error parsing feed: ', exception
 		        
 ###########################################################################
@@ -477,6 +478,7 @@ class StreamsThumb(Screen):
 					hrefSet = False
 
 		except (Exception) as exception:
+			self.session.open(MessageBox, _("Exception: Problem Parsing AllShows Data, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
 			print 'getAllShowsMediaData: Error parsing feed: ', exception
 
 ###########################################################################
@@ -504,16 +506,19 @@ def findPlayUrl(value, **kwargs):
 				response.close()
 
 			except (Exception) as exception:
-					print 'Error getting webpage for age restrict: ', exception
-					return False
+				self.session.open(MessageBox, _("Exception: Problem Retrieving Age Restrict Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
+				print 'Error getting webpage for age restrict: ', exception
+				return False
  
-		links = (re.compile ('url: "mp4:(.+?)",\r\n\t\t\t\t        autoPlay: true,\r\n\t\t\t\t\t\tautoBuffering: true,\r\n\t\t\t\t        provider: "rtmp"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\r\n\t\t\t\t// All FP Plug ins:\r\n\t\t\t\tplugins:\r\n\t\t\t\t{  \r\n\t\t\t\t\tcontrols:  \r\n\t\t\t\t\t{\r\n\t\t\t\t\t\turl:"flowplayer.controls.gc-build-112011.swf"\r\n\t\t\t\t\t}\r\n\t\t\t\t\t\r\n\t\t\t\t\t,\r\n\r\n\t\t\t\t\trtmp: {\r\n\t\t\t\t\t\turl: "flowplayer.rtmp-3.2.3.swf",\r\n\t\t\t\t\t\tnetConnectionUrl: "rtmp://.+?content/videos/(.+?)/"\r\n').findall(html)[0])
-		fileUrl = 'http://content.tv3.ie/content/videos/'+str(links[1])+'/'+str(links[0])
- 
+		url = (re.compile ('url: "mp4:(.+?)",').findall(html)[0])
+		connection = (re.compile ('netConnectionUrl: "rtmp://.+?content/videos/(.+?)/"').findall(html)[0])
+		fileUrl = 'http://content.tv3.ie/content/videos/'+str(connection)+'/'+str(url)
+
 	except (Exception) as exception:
+		self.session.open(MessageBox, _("Exception: Problem Retrieving Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
 		print 'findPlayUrl: Error getting URLs: ', exception
 		return False
- 
+
 	return fileUrl
 
 ###########################################################################
