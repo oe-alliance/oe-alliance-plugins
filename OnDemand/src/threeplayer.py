@@ -379,7 +379,7 @@ class StreamsThumb(Screen):
 			self.session.open(StreamsThumb, "one_show", showName, showID)
 		else:
 			if self.cmd == 'straight':
-				fileUrl = findPlayUrl(showID)
+				fileUrl = self.findPlayUrl(showID)
 				print 'fileUrl: ', fileUrl
 			else:
 				fileUrl = str(icon[:-12])+'.mp4'
@@ -483,7 +483,7 @@ class StreamsThumb(Screen):
 
 ###########################################################################
 	
-	def findPlayUrl(value, **kwargs):
+	def findPlayUrl(self, value):
 		fileUrl = ""
 		url = value
 
@@ -522,10 +522,10 @@ class StreamsThumb(Screen):
 		return fileUrl
 
 ###########################################################################
-	def checkUnicode(value, **kwargs):
-		stringValue = value 
-		returnValue = stringValue.replace('&#39;', '\'')
-		return returnValue
+def checkUnicode(value, **kwargs):
+	stringValue = value 
+	returnValue = stringValue.replace('&#39;', '\'')
+	return returnValue
 ###########################################################################
 def main(session, **kwargs):
 	action = "start"
