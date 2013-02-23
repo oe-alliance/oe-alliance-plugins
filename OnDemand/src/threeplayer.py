@@ -483,49 +483,49 @@ class StreamsThumb(Screen):
 
 ###########################################################################
 	
-def findPlayUrl(value, **kwargs):
-	fileUrl = ""
-	url = value
+	def findPlayUrl(value, **kwargs):
+		fileUrl = ""
+		url = value
 
-	try:
-		url1 = 'http://www.tv3.ie'+url
-		req = urllib2.Request(url1)
-		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-		response = urllib2.urlopen(req)
- 		html = str(response.read())
-		response.close()
- 
-		if html.find('age_check_form_row') > 0:
-			try:
-				headers = { 'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}
-				values = {'age_ok':'1'}
-				data = urllib.urlencode(values)
-				req = urllib2.Request(url1, data, headers)
-				response = urllib2.urlopen(req)
-				html = str(response.read())
-				response.close()
+		try:
+			url1 = 'http://www.tv3.ie'+url
+			req = urllib2.Request(url1)
+			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
+			response = urllib2.urlopen(req)
+			html = str(response.read())
+			response.close()
 
-			except (Exception) as exception:
-				self.session.open(MessageBox, _("Exception: Problem Retrieving Age Restrict Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
-				print 'Error getting webpage for age restrict: ', exception
-				return False
- 
-		url = (re.compile ('url: "mp4:(.+?)",').findall(html)[0])
-		connection = (re.compile ('netConnectionUrl: "rtmp://.+?content/videos/(.+?)/"').findall(html)[0])
-		fileUrl = 'http://content.tv3.ie/content/videos/'+str(connection)+'/'+str(url)
+			if html.find('age_check_form_row') > 0:
+				try:
+					headers = { 'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}
+					values = {'age_ok':'1'}
+					data = urllib.urlencode(values)
+					req = urllib2.Request(url1, data, headers)
+					response = urllib2.urlopen(req)
+					html = str(response.read())
+					response.close()
 
-	except (Exception) as exception:
-		self.session.open(MessageBox, _("Exception: Problem Retrieving Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
-		print 'findPlayUrl: Error getting URLs: ', exception
-		return False
+				except (Exception) as exception:
+					self.session.open(MessageBox, _("Exception: Problem Retrieving Age Restrict Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
+					print 'Error getting webpage for age restrict: ', exception
+					return False
 
-	return fileUrl
+			url = (re.compile ('url: "mp4:(.+?)",').findall(html)[0])
+			connection = (re.compile ('netConnectionUrl: "rtmp://.+?content/videos/(.+?)/"').findall(html)[0])
+			fileUrl = 'http://content.tv3.ie/content/videos/'+str(connection)+'/'+str(url)
+
+		except (Exception) as exception:
+			self.session.open(MessageBox, _("Exception: Problem Retrieving Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
+			print 'findPlayUrl: Error getting URLs: ', exception
+			return False
+
+		return fileUrl
 
 ###########################################################################
-def checkUnicode(value, **kwargs):
-	stringValue = value 
-	returnValue = stringValue.replace('&#39;', '\'')
-	return returnValue
+	def checkUnicode(value, **kwargs):
+		stringValue = value 
+		returnValue = stringValue.replace('&#39;', '\'')
+		return returnValue
 ###########################################################################
 def main(session, **kwargs):
 	action = "start"
