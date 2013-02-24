@@ -386,10 +386,11 @@ class StreamsThumb(Screen):
 				fileUrl = fileUrl.replace('3player', '3Player')
 				print 'fileUrl: ', fileUrl
 				
-			fileRef = eServiceReference(4097,0,str(fileUrl))
-			fileRef.setName (showName)
-			lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			self.session.open(MoviePlayer, fileRef, None, lastservice)
+			if fileUrl:
+				fileRef = eServiceReference(4097,0,str(fileUrl))
+				fileRef.setName (showName)
+				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+				self.session.open(MoviePlayer, fileRef, None, lastservice)
 
 ##############################################################################
 
@@ -508,18 +509,18 @@ class StreamsThumb(Screen):
 				except (Exception) as exception:
 					self.session.open(MessageBox, _("Exception: Problem Retrieving Age Restrict Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
 					print 'Error getting webpage for age restrict: ', exception
-					return False
+					return ""
 
 			url = (re.compile ('url: "mp4:(.+?)",').findall(html)[0])
 			connection = (re.compile ('netConnectionUrl: "rtmp://.+?content/videos/(.+?)/"').findall(html)[0])
 			fileUrl = 'http://content.tv3.ie/content/videos/'+str(connection)+'/'+str(url)
 
+			return fileUrl
+
 		except (Exception) as exception:
 			self.session.open(MessageBox, _("Exception: Problem Retrieving Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
 			print 'findPlayUrl: Error getting URLs: ', exception
-			return False
-
-		return fileUrl
+			return ""
 
 ###########################################################################
 def checkUnicode(value, **kwargs):
