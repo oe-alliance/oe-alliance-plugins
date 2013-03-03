@@ -19,22 +19,18 @@
 # for localized messages
 from . import _
 
+from Components.ActionMap import ActionMap
+from Components.config import config, getConfigListEntry, ConfigYesNo, ConfigSubsection
+from Components.ConfigList import ConfigListScreen
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
+from Components.MenuList import MenuList
+from Components.ScrollLabel import ScrollLabel
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
-from Screens.InfoBar import MoviePlayer as MP_parent
-from Screens.InfoBar import InfoBar
-from Screens.MessageBox import MessageBox
-from ServiceReference import ServiceReference
-from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigDirectory, ConfigYesNo, ConfigSelection, ConfigSubsection
-from enigma import getDesktop, eServiceCenter, gFont, eTimer, eConsoleAppContainer, ePicLoad, loadPNG, eServiceReference, iPlayableService, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, eListbox
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
-from Components.ConfigList import ConfigListScreen
-from Components.MenuList import MenuList
-from Screens.MessageBox import MessageBox
-from Components.ActionMap import ActionMap
-from Components.ScrollLabel import ScrollLabel
-import urllib, urllib2, re, time, os
+
+from enigma import getDesktop, gFont, ePicLoad, eListboxPythonMultiContent, RT_HALIGN_RIGHT
+
 import bbciplayer
 import itvplayer
 import rteplayer
@@ -77,7 +73,6 @@ world-of-satellite.com
         
 ##########################################################################
 
-
 class OnDemandScreenSetup(Screen, ConfigListScreen):
 	skin = 	"""
 		<screen position="center,center" size="500,300" title="OnDemand Configuration" >
@@ -96,7 +91,6 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.configlist.append(getConfigListEntry((_("ITV Player:")), config.ondemand.ShowITVPlayer))
 		self.configlist.append(getConfigListEntry((_("Show Images:")), config.ondemand.ShowImages))
 		self["config"].setList(self.configlist)
-
 		
 		self["actions"]  = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
 			"ok"    : self.keyOK,
@@ -144,6 +138,7 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 			"info" : self.keyInfo
 		}, -1)
 
+		self.picload = ePicLoad()
 		
 		self['PlayerList'] = chooseMenuList([])
 	
@@ -168,9 +163,12 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 
 	def OnDemandListEntry(self, name, jpg):
 		res = [(name, jpg)]
-		icon = "/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/%s.png" % jpg
+		icon = resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/%s.png" % jpg)
 		if fileExists(icon):
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 0), size=(100, 40), png=loadPNG(icon)))	
+			self.picload.setPara((100, 40, 0, 0, 1, 1, "#00000000"))
+			self.picload.startDecode(icon, 0, 0, False)
+			pngthumb = self.picload.getData()
+			res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 0), size=(100, 40), png=pngthumb))	
 		res.append(MultiContentEntryText(pos=(330, 0), size=(170, 40), font=0, text=name, flags=RT_HALIGN_RIGHT))
 		return res
 	
@@ -194,7 +192,7 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 		elif player == "bbciplayer":
 			self.session.open(bbciplayer.BBCiMenu, "start", "0")
 		elif player == "itvplayer":
-			self.session.open(itvplayer.ITVplayer)
+			self.session.open(itvplayer.ITVplayer, "start", "0")
 
 	def keyCancel(self):
 		self.close()

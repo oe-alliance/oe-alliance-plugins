@@ -35,7 +35,7 @@ from Components.AVSwitch import AVSwitch
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.StaticText import StaticText
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSubsection, ConfigBoolean, ConfigSelection, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigBoolean, ConfigInteger, ConfigSelection, getConfigListEntry
 from enigma import eTimer, iPlayableService, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_WRAP, RT_VALIGN_TOP
 from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarSeek
 from Screens.VirtualKeyBoard import VirtualKeyBoard
@@ -47,10 +47,17 @@ from twisted.web import client
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir
 from time import strftime, strptime
 import socket
+import random
 import urllib, urllib2, re, time, os
 from bs4 import BeautifulSoup
 from datetime import datetime, date, timedelta
 from lxml import etree
+
+# Set the default config option to False for IP Forward
+config.plugins.threeplayer = ConfigSubsection()
+config.plugins.threeplayer.ipforward = ConfigBoolean(default = False)
+config.plugins.threeplayer.seg1 = ConfigInteger(default = 46, limits=(1, 255) )
+config.plugins.threeplayer.seg2 = ConfigInteger(default = 7, limits=(1, 255) )
 
 ##########################################################################
 class threeMainMenu(Screen):
@@ -78,6 +85,7 @@ class threeMainMenu(Screen):
 			osdList.append((_("Straight Off The Telly"), "straight"))
 			osdList.append((_("Going, Going..."), "going"))
 			osdList.append((_("All Shows"), "all_shows"))
+			osdList.append((_("Setup"), 'setup'))
 			osdList.append((_("Back"), "exit"))
 
 		Screen.__init__(self, session)
@@ -95,6 +103,8 @@ class threeMainMenu(Screen):
 		if returnValue is "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
+		elif returnValue is "setup":
+			self.session.open(OpenSetupScreen)
 		elif self.action is "start":
 			if returnValue is "talked":
 				self.session.open(StreamsThumb, "talked", "Most Talked About", "http://www.tv3.ie/3player")
@@ -133,6 +143,48 @@ class MPanelList(MenuList):
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		self.moveToIndex(self.selection)
+
+###########################################################################
+
+class OpenSetupScreen(Screen, ConfigListScreen):
+
+	def __init__(self, session):
+		self.skin = """
+				<screen position="center,center" size="400,100" title="">
+					<widget name="config" position="10,10"   size="e-20,e-10" scrollbarMode="showOnDemand" />
+				</screen>"""
+		self.session = session
+		Screen.__init__(self, session)
+
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session = self.session)
+
+		self["actions"] = ActionMap(["SetupActions"],
+		{
+			"ok": self.keyGo,
+			"cancel": self.keyCancel,
+		}, -2)
+
+		self["config"].list = self.list
+		self.list.append(getConfigListEntry(_("Enable IP Forward"), config.plugins.threeplayer.ipforward))
+		self.list.append(getConfigListEntry(_("Segment 1 (e.g. 46.X.X.X) "), config.plugins.threeplayer.seg1))
+		self.list.append(getConfigListEntry(_("Segment 2 (e.g. XX.7.X.X) "), config.plugins.threeplayer.seg2))
+		self["config"].l.setList(self.list)
+		
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self.setTitle(_("Three Player: Setup Screen"))
+
+	def keyGo(self):
+		for x in self["config"].list:
+			x[1].save()
+		self.close()
+
+	def keyCancel(self):
+		for x in self["config"].list:
+			x[1].cancel()
+		self.close()		
 
 ###########################################################################
 class StreamsThumb(Screen):
@@ -379,18 +431,17 @@ class StreamsThumb(Screen):
 			self.session.open(StreamsThumb, "one_show", showName, showID)
 		else:
 			if self.cmd == 'straight':
-				fileUrl = self.findPlayUrl(showID)
+				fileUrl = findPlayUrl(showID)
 				print 'fileUrl: ', fileUrl
 			else:
 				fileUrl = str(icon[:-12])+'.mp4'
 				fileUrl = fileUrl.replace('3player', '3Player')
 				print 'fileUrl: ', fileUrl
 				
-			if fileUrl:
-				fileRef = eServiceReference(4097,0,str(fileUrl))
-				fileRef.setName (showName)
-				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-				self.session.open(MoviePlayer, fileRef, None, lastservice)
+			fileRef = eServiceReference(4097,0,str(fileUrl))
+			fileRef.setName (showName)
+			lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			self.session.open(MoviePlayer, fileRef, None, lastservice)
 
 ##############################################################################
 
@@ -440,7 +491,6 @@ class StreamsThumb(Screen):
 					iconSet = False
 
 		except (Exception) as exception:
-			self.session.open(MessageBox, _("Exception: Problem Parsing Media Data, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
 			print 'getMediaData: Error parsing feed: ', exception
 		        
 ###########################################################################
@@ -479,48 +529,61 @@ class StreamsThumb(Screen):
 					hrefSet = False
 
 		except (Exception) as exception:
-			self.session.open(MessageBox, _("Exception: Problem Parsing AllShows Data, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
 			print 'getAllShowsMediaData: Error parsing feed: ', exception
 
 ###########################################################################
 	
-	def findPlayUrl(self, value):
-		fileUrl = ""
-		url = value
+def findPlayUrl(value, **kwargs):
+	fileUrl = ""
+	url = value
+	ipSegment1 = config.plugins.threeplayer.seg1.value
+	ipSegment2 = config.plugins.threeplayer.seg2.value
 
-		try:
-			url1 = 'http://www.tv3.ie'+url
-			req = urllib2.Request(url1)
-			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-			response = urllib2.urlopen(req)
-			html = str(response.read())
-			response.close()
+	try:
+		url1 = 'http://www.tv3.ie'+url
+		print "url1: ", url1
+		req = urllib2.Request(url1)
+		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
+		if config.plugins.threeplayer.ipforward.value:
+			forwardedForIP = '%d.%d.%d.%d' % (ipSegment1, ipSegment2, random.randint(0, 255), random.randint(0, 254)) 
+			print 'findPlayUrl: forwardedForIP: ', forwardedForIP
+			req.add_header('X-Forwarded-For', forwardedForIP)
+		response = urllib2.urlopen(req)
+ 		html = str(response.read())
+ 		print "html: ", html
+		response.close()
+ 
+		if html.find('age_check_form_row') > 0:
+			try:
+				headers = { 'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}
+				values = {'age_ok':'1'}
+				data = urllib.urlencode(values)
+				req = urllib2.Request(url1, data, headers)
+				response = urllib2.urlopen(req)
+				html = str(response.read())
+				response.close()
 
-			if html.find('age_check_form_row') > 0:
-				try:
-					headers = { 'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}
-					values = {'age_ok':'1'}
-					data = urllib.urlencode(values)
-					req = urllib2.Request(url1, data, headers)
-					response = urllib2.urlopen(req)
-					html = str(response.read())
-					response.close()
-
-				except (Exception) as exception:
-					self.session.open(MessageBox, _("Exception: Problem Retrieving Age Restrict Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
+			except (Exception) as exception:
 					print 'Error getting webpage for age restrict: ', exception
-					return ""
+					return False
+ 
+		#links = (re.compile ('url: "mp4:(.+?)",\r\n\t\t\t\t        autoPlay: true,\r\n\t\t\t\t\t\tautoBuffering: true,\r\n\t\t\t\t        provider: "rtmp"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\r\n\t\t\t\t// All FP Plug ins:\r\n\t\t\t\tplugins:\r\n\t\t\t\t{  \r\n\t\t\t\t\tcontrols:  \r\n\t\t\t\t\t{\r\n\t\t\t\t\t\turl:"flowplayer.controls.gc-build-112011.swf"\r\n\t\t\t\t\t}\r\n\t\t\t\t\t\r\n\t\t\t\t\t,\r\n\r\n\t\t\t\t\trtmp: {\r\n\t\t\t\t\t\turl: "flowplayer.rtmp-3.2.3.swf",\r\n\t\t\t\t\t\tnetConnectionUrl: "rtmp://.+?content/videos/(.+?)/"\r\n').findall(html)[0])
+		url = (re.compile ('url: "mp4:(.+?)",').findall(html)[0])
+		#print "url: ", url
+		connection = (re.compile ('netConnectionUrl: "rtmp://.+?content/videos/(.+?)/"').findall(html)[0])
+		#print "connection: ", connection
+		#fileUrl = 'http://content.tv3.ie/content/videos/'+str(links[1])+'/'+str(links[0])
+		fileUrl = 'http://content.tv3.ie/content/videos/'+str(connection)+'/'+str(url)
+		print "fileUrl: ", fileUrl
 
-			url = (re.compile ('url: "mp4:(.+?)",').findall(html)[0])
-			connection = (re.compile ('netConnectionUrl: "rtmp://.+?content/videos/(.+?)/"').findall(html)[0])
-			fileUrl = 'http://content.tv3.ie/content/videos/'+str(connection)+'/'+str(url)
-
-			return fileUrl
-
-		except (Exception) as exception:
-			self.session.open(MessageBox, _("Exception: Problem Retrieving Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
-			print 'findPlayUrl: Error getting URLs: ', exception
-			return ""
+	except urllib2.HTTPError, exception:
+		exResp = str(exception.read())
+		print 'findPlayUrl: HTTPError: Error getting URLs: ', exResp		
+	except (Exception) as exception:
+		print 'findPlayUrl: Error getting URLs: ', exception
+		return False
+ 
+	return fileUrl
 
 ###########################################################################
 def checkUnicode(value, **kwargs):
