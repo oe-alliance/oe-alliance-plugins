@@ -86,7 +86,7 @@ class threeMainMenu(Screen):
 			elif returnValue is "straight":
 				self.session.open(StreamsThumb, "straight", "Straight Off The Telly", "http://www.tv3.ie/3player")
 			elif returnValue is "going":
-				self.session.open(StreamsThumb, "going", "Going Going Gone", "http://www.tv3.ie/3player")
+				self.session.open(StreamsThumb, "going", "Going Going...", "http://www.tv3.ie/3player")
 			elif returnValue is "all_shows":
 				self.session.open(StreamsThumb, "all_shows", "All Shows", "http://www.tv3.ie/3player/allshows")
 
@@ -146,11 +146,13 @@ class StreamsThumb(Screen):
 		self.hidemessage = eTimer()
 		self.hidemessage.timeout.get().append(self.hidewaitingtext)
 		
-		self.imagedir = "/tmp/openThreeImg/"
+		self.imagedir = "/tmp/onDemandImg/"
+		self.defaultImg = "Extensions/OnDemand/icons/threeDefault.png"
+		
 		if (os_path.exists(self.imagedir) != True):
 			os_mkdir(self.imagedir)
 
-		self['list'] = EpisodeList()
+		self['list'] = EpisodeList(self.defaultImg)
 		
 		self.updateMenu()
 		

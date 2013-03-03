@@ -40,7 +40,7 @@ class Rect:
 		self.h = height
 
 class EpisodeList(HTMLComponent, GUIComponent):
-	def __init__(self):
+	def __init__(self, iconDefault):
 		GUIComponent.__init__(self)
 		self.picload = ePicLoad()
 		self.l = eListboxPythonMultiContent()
@@ -55,7 +55,9 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		self.descriptionFontName = "Regular"
 		self.descriptionFontSize = 18
 
-		self.imagedir = "/tmp/openItvImg/"
+		self.imagedir = "/tmp/onDemandImg/"
+		self.defaultImg = iconDefault
+		
 		if not os_path.exists(self.imagedir):
 			os_mkdir(self.imagedir)
 
@@ -179,7 +181,7 @@ class EpisodeList(HTMLComponent, GUIComponent):
 				pngthumb = self.picload.getData()
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
 		else:
-			self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/itvDefault.png"), 0, 0, False)
+			self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, self.defaultImg), 0, 0, False)
 			pngthumb = self.picload.getData()
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
 

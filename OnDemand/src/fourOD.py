@@ -270,10 +270,12 @@ class StreamsThumb(Screen):
 		self.hidemessage.timeout.get().append(self.hidewaitingtext)
 		
 		self.imagedir = "/tmp/onDemandImg/"
+		self.defaultImg = "Extensions/OnDemand/icons/fourOD.png"
+		
 		if (os_path.exists(self.imagedir) != True):
 			os_mkdir(self.imagedir)
 
-		self['list'] = EpisodeList()
+		self['list'] = EpisodeList(self.defaultImg)
 		
 		self.updateMenu()
 		

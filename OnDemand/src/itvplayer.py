@@ -214,11 +214,13 @@ class StreamsThumb(Screen):
 		self.hidemessage = eTimer()
 		self.hidemessage.timeout.get().append(self.hidewaitingtext)
 
-		self.imagedir = "/tmp/openItvImg/"
+		self.imagedir = "/tmp/onDemandImg/"
+		self.defaultImg = "Extensions/OnDemand/icons/itvDefault.png"
+		
 		if (os_path.exists(self.imagedir) != True):
 			os_mkdir(self.imagedir)
 
-		self['list'] = EpisodeList()
+		self['list'] = EpisodeList(self.defaultImg)
 
 		self.updateMenu()
 		self["actions"] = ActionMap(["WizardActions", "MovieSelectionActions", "DirectionActions"],

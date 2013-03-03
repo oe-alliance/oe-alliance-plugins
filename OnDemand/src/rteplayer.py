@@ -270,11 +270,13 @@ class StreamsThumb(Screen):
 		self.hidemessage = eTimer()
 		self.hidemessage.timeout.get().append(self.hidewaitingtext)
 		
-		self.imagedir = "/tmp/openRteImg/"
+		self.imagedir = "/tmp/onDemandImg/"
+		self.defaultImg = "Extensions/OnDemand/icons/rteDefault.png"
+		
 		if (os_path.exists(self.imagedir) != True):
 			os_mkdir(self.imagedir)
 
-		self['list'] = EpisodeList()
+		self['list'] = EpisodeList(self.defaultImg)
 		
 		self.updateMenu()
 		
@@ -543,8 +545,8 @@ class StreamsThumb(Screen):
 				day = int(date_tmp[8:10])
 				oldDate = date(int(year), int(month), int(day)) # year, month, day
 				dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-				date_tmp = "Last updated on " + dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16]
-				date1 = _("Date Aired:")+" "+str(date_tmp)
+				date_tmp = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16]
+				date1 = _("Date Updated:")+" "+str(date_tmp)
 
 				stream = checkUnicode(stream_tmp)
 				name = checkUnicode(name_tmp)

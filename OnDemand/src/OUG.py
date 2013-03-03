@@ -239,10 +239,12 @@ class OpenUg(Screen):
 		self.hidemessage.timeout.get().append(self.hidewaitingtext)
 		
 		self.imagedir = "/tmp/onDemandImg/"
+		self.defaultImg = "Extensions/OnDemand/icons/OUG.png"
+		
 		if (os_path.exists(self.imagedir) != True):
 			os_mkdir(self.imagedir)
-
-		self['list'] = EpisodeList()
+		
+		self['list'] = EpisodeList(self.defaultImg)
 				
 		self.updateMenu()
 		
@@ -270,7 +272,7 @@ class OpenUg(Screen):
 		self.refreshTimer.start(3000)
 	
 	def clearList(self):
-		#self['list'] = EpisodeList()
+		self['list'].setCurrentIndex(0)
 		self.mediaList = []
 		
 	def hidewaitingtext(self):
@@ -408,14 +410,13 @@ class OpenUg(Screen):
 		if self.isRtl:
 			print "go: isRtl: ", self.isRtl
 			if self.level == self.UG_LEVEL_ALL:
-				print "go: UG_LEVEL_ALL: ", self.UG_LEVEL_ALL
 				tmp = self.mediaList[selIndex][self.UG_STREAMURL]
 				self.clearList()
 				self.getRTLSerie(self.mediaList, tmp)
 				self.level = self.UG_LEVEL_SERIE
 				self.updateMenu()
+				
 			elif self.level == self.UG_LEVEL_SERIE:
-				print "go: UG_LEVEL_SERIE: ", self.UG_LEVEL_SERIE
 				tmp = self.getRTLStream(self.mediaList[selIndex][self.UG_STREAMURL])
 				if tmp != '':
 					myreference = eServiceReference(4097, 0, tmp)
@@ -484,24 +485,30 @@ class OpenUg(Screen):
 				tmp = "<img class=\"thumbnail\" src=\""
 				if tmp in line:
 					icon = line.split(tmp)[1].split('\" ')[0]
-
+					
+				tmp = "<div class=\"stationlogo\""
+				if tmp in line:
+					lineTmp = line.split(tmp)[1].split('</div>')[0]
+					channelTmp = lineTmp.rsplit('>',1)
+					channel = channelTmp[1]
+					
 				tmp = "<span class=\"title\">"
 				if tmp in line:
 					name = line.split(tmp)[1].split('</span>')[0]
-					state = 2
+					name = checkUnicode(name)
+					state = 2					
 
 			elif state == 2:
 				if '<span class=\"extra_info\">' in line:
 					continue
-				short = line.split("<br />")[0].lstrip()
+				date = line.split("<br />")[0].lstrip()
 				state = 3
 
 			elif state == 3:
-				channel = line.split("<br />")[0].lstrip()
-				state = 4
-
-			elif state == 4:
-				date = line.split("<br />")[0].lstrip()
+				tmp = "<span class=\"small\">"
+				if tmp in line:
+					short = line.split(tmp)[1].split('</span>')[0]
+					short = checkUnicode(short)
 
 				icon_type = self.getIconType(icon)
 				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
@@ -520,10 +527,7 @@ class OpenUg(Screen):
 		date = ''
 		channel = ''
 		for line in data:
-			if state == 0:
-				if "<li>" in line:
-					state = 1
-			elif state == 1:
+			if "<li" in line:
 				tmp = "<a href=\""
 				if tmp in line:
 					stream = line.split(tmp)[1].split('\">')[0]
@@ -531,6 +535,7 @@ class OpenUg(Screen):
 				tmp = "<span class=\"title\">"
 				if tmp in line:
 					name = line.split(tmp)[1].split("</span>")[0]
+					name = checkUnicode(name)
 					icon_type = self.getIconType(icon)
 
 					ignore = False
@@ -540,12 +545,12 @@ class OpenUg(Screen):
 							break
 					if ignore is False:
 						weekList.append((date, name, short, channel, stream, icon, icon_type, True))
-					state = 0
 
 #=========================================================================================
 	def getRTLMediaDataBack(self, weekList, days):
 		url = self.RTL_BASE_URL + "?daysback=" + '%d' % (days)
 		data = wgetUrl(url)
+		print "getRTLMediaDataBack1: data: ", data
 		data = data.split('\n')
 		state = 0
 		name = ''
@@ -565,23 +570,28 @@ class OpenUg(Screen):
 				if tmp in line:
 					icon = line.split(tmp)[1].split('\" ')[0]
 
+				tmp = "<div class=\"stationlogo\""
+				if tmp in line:
+					lineTmp = line.split(tmp)[1].split('</div>')[0]
+					channelTmp = lineTmp.rsplit('>',1)
+					channel = channelTmp[1]
+					
 				tmp = "<span class=\"title\">"
 				if tmp in line:
 					name = line.split(tmp)[1].split("</span>")[0]
+					name = checkUnicode(name)
 					if "<br />" in line:
 						short = line.split("<br />")[1]
+						short = checkUnicode(short)
 					state = 2
 
 			elif state == 2:
-				state = 3
+				tmp = "<span class=\"extra_info\">"
+				if tmp in line:
+					state = 3
 
 			elif state == 3:
-				tmp = line.split("<br")[0].split(" | ")
-				channel = tmp[0]
-				state = 4
-
-			elif state == 4:
-				date = line
+				date = line[:5]+" "+channel
 				icon_type = self.getIconType(icon)
 				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
 				state = 0
@@ -615,10 +625,12 @@ class OpenUg(Screen):
 				tmp = "<h3>"
 				if tmp in line:
 					name = line.split(tmp)[1].split("</h3>")[0]
+					name = checkUnicode(name)
 
 				tmp = "<div class='short'>"
 				if tmp in line:
 					short = line.split(tmp)[1].split("</div>")[0]
+					short = checkUnicode(short)
 
 				tmp = "<div class='datum'>"
 				if tmp in line and date == '':
@@ -666,6 +678,7 @@ class OpenUg(Screen):
 				tmp = "<h3>"
 				if tmp in line and name == '':
 					name = line.split(tmp)[1].split("</h3>")[0]
+					name = checkUnicode(name)
 
 				tmp = "<div class=\"programDetails\" id=\""
 				if tmp in line and stream == '':
@@ -687,6 +700,7 @@ class OpenUg(Screen):
 					tmp = "<div class='short'>"
 					if tmp in line:
 						short = line.split(tmp)[1].split("</div>")[0]
+						short = checkUnicode(short)
 				else:
 					tmp = "<div class='thumbHolder'>"
 					if tmp in line:
@@ -723,7 +737,13 @@ class OpenUg(Screen):
 		if tmp in data:
 			return tmp
 		return ""
-
+#=========================================================================================
+def checkUnicode(value, **kwargs):
+	stringValue = value 
+	stringValue = stringValue.replace('&#39;', '\'')
+	stringValue = stringValue.replace('&amp;', '&')
+	return stringValue
+	
 #=========================================================================================
 def Plugins(**kwargs):
 	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]

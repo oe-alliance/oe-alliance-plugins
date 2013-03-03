@@ -78,24 +78,24 @@ class BBCiMenu(Screen):
 		
 		if self.action is "start":
 			print "start"
-			osdList.append((_("TV HIGHLIGHTS"), "bbchighlights"))
-			osdList.append((_("MOST POPULAR TV"), "bbcpopular"))
-			osdList.append((_("DRAMA"), "bbcdrama"))
-			osdList.append((_("ENTERTAINMENT"), "bbcentertainment"))
-			osdList.append((_("MOVIES"), "film"))
-			osdList.append((_("FACTUAL"), "bbcfactual"))
-			osdList.append((_("COMEDY"), "bbccomedy"))
-			osdList.append((_("SOAPS"), "bbcsoaps"))
-			osdList.append((_("CHILDRENS"), "bbckids"))
-			osdList.append((_("NEWS"), "bbcnews"))
-			osdList.append((_("SPORT"), "bbcsport"))
-			osdList.append((_("MUSIC"), "bbcmusic"))
-			osdList.append((_("HEALTH AND WELLBEING"), "bbchealth"))
-			osdList.append((_("RELIGON"), "bbcreligous"))
-			osdList.append((_("SIGNED"), "bbcsigned"))
-			osdList.append((_("BBC NORTHERN IRELAND"), "bbcni"))
-			osdList.append((_("BBC WALES"), "bbcwales"))
-			osdList.append((_("BBC SCOTLAND"), "bbcscotland"))
+			osdList.append((_("TV Highlights"), "bbchighlights"))
+			osdList.append((_("Most Popular TV"), "bbcpopular"))
+			osdList.append((_("Drama"), "bbcdrama"))
+			osdList.append((_("Entertainment"), "bbcentertainment"))
+			osdList.append((_("Movies"), "film"))
+			osdList.append((_("Factual"), "bbcfactual"))
+			osdList.append((_("Comedy"), "bbccomedy"))
+			osdList.append((_("Soaps"), "bbcsoaps"))
+			osdList.append((_("Childrens"), "bbckids"))
+			osdList.append((_("News"), "bbcnews"))
+			osdList.append((_("Sport"), "bbcsport"))
+			osdList.append((_("Music"), "bbcmusic"))
+			osdList.append((_("Health And Wellbeing"), "bbchealth"))
+			osdList.append((_("Religion"), "bbcreligous"))
+			osdList.append((_("Signed"), "bbcsigned"))
+			osdList.append((_("BBC Northern Ireland"), "bbcni"))
+			osdList.append((_("BBC Wales"), "bbcwales"))
+			osdList.append((_("BBC Scotland"), "bbcscotland"))
 			osdList.append((_("BBC One"), "bbc1"))
 			osdList.append((_("BBC Two"), "bbc2"))
 			osdList.append((_("BBC Three"), "bbc3"))
@@ -146,43 +146,43 @@ class BBCiMenu(Screen):
 			elif returnValue is "bbchd":
 				self.session.open(StreamsThumb, "bbchd", "BBC HD", "http://feeds.bbc.co.uk/iplayer/bbc_hd/list")
 			elif returnValue is "bbchighlights":
-				self.session.open(StreamsThumb, "bbchighlights", "TV HIGHLIGHTS", "http://feeds.bbc.co.uk/iplayer/highlights/tv")
+				self.session.open(StreamsThumb, "bbchighlights", "TV Highlights", "http://feeds.bbc.co.uk/iplayer/highlights/tv")
 			elif returnValue is "bbcpopular":
-				self.session.open(StreamsThumb, "bbcpopular", "MOST POPULAR TV", "http://feeds.bbc.co.uk/iplayer/popular/tv")
+				self.session.open(StreamsThumb, "bbcpopular", "Most Popular TV", "http://feeds.bbc.co.uk/iplayer/popular/tv")
 			elif returnValue is "bbcdrama":
-				self.session.open(StreamsThumb, "bbcdrama", "DRAMA", "http://feeds.bbc.co.uk/iplayer/categories/drama/tv/list")
+				self.session.open(StreamsThumb, "bbcdrama", "Drama", "http://feeds.bbc.co.uk/iplayer/categories/drama/tv/list")
 			elif returnValue is "bbcentertainment":
-				self.session.open(StreamsThumb, "bbcentertainment", "ENTERTAINMENT", "http://feeds.bbc.co.uk/iplayer/categories/entertainment/tv/list")
+				self.session.open(StreamsThumb, "bbcentertainment", "Entertainment", "http://feeds.bbc.co.uk/iplayer/categories/entertainment/tv/list")
 			elif returnValue is "bbcfactual":
-				self.session.open(StreamsThumb, "bbcfactual", "FACTUAL", "http://feeds.bbc.co.uk/iplayer/categories/factual/tv/list")
+				self.session.open(StreamsThumb, "bbcfactual", "Factual", "http://feeds.bbc.co.uk/iplayer/categories/factual/tv/list")
 			elif returnValue is "bbcsigned":
-				self.session.open(StreamsThumb, "bbcsigned", "SIGNED", "http://feeds.bbc.co.uk/iplayer/categories/signed/tv/list")
+				self.session.open(StreamsThumb, "bbcsigned", "Signed", "http://feeds.bbc.co.uk/iplayer/categories/signed/tv/list")
 			elif returnValue is "bbconedrama":
-				self.session.open(StreamsThumb, "bbconedrama", "BBC One DRAMA", "http://feeds.bbc.co.uk/iplayer/bbc_one/drama/tv/list")
+				self.session.open(StreamsThumb, "bbconedrama", "BBC One Drama", "http://feeds.bbc.co.uk/iplayer/bbc_one/drama/tv/list")
 			elif returnValue is "bbccomedy":
-				self.session.open(StreamsThumb, "bbccomedy", "COMEDY", "http://feeds.bbc.co.uk/iplayer/comedy/tv/list")
+				self.session.open(StreamsThumb, "bbccomedy", "Comedy", "http://feeds.bbc.co.uk/iplayer/comedy/tv/list")
 			elif returnValue is "bbchealth":
-				self.session.open(StreamsThumb, "bbchealth", "HEALTH AND WELLBEING", "http://feeds.bbc.co.uk/iplayer/bbc_three/factual/health_and_wellbeing/tv/list")
+				self.session.open(StreamsThumb, "bbchealth", "Health And Wellbeing", "http://feeds.bbc.co.uk/iplayer/bbc_three/factual/health_and_wellbeing/tv/list")
 			elif returnValue is "bbcwales":
-				self.session.open(StreamsThumb, "bbcwales", "BBC WALES", "http://feeds.bbc.co.uk/iplayer/wales/tv/list")
+				self.session.open(StreamsThumb, "bbcwales", "BBC Wales", "http://feeds.bbc.co.uk/iplayer/wales/tv/list")
 			elif returnValue is "bbcscotland":
-				self.session.open(StreamsThumb, "bbcscotland", "BBC SCOTLAND", "http://feeds.bbc.co.uk/iplayer/scotland/tv/list")
+				self.session.open(StreamsThumb, "bbcscotland", "BBC Scotland", "http://feeds.bbc.co.uk/iplayer/scotland/tv/list")
 			elif returnValue is "bbcni":
-				self.session.open(StreamsThumb, "bbcni", "BBC NORTHERN IRELAND", "http://feeds.bbc.co.uk/iplayer/northern_ireland/tv/list")
+				self.session.open(StreamsThumb, "bbcni", "BBC Northern Ireland", "http://feeds.bbc.co.uk/iplayer/northern_ireland/tv/list")
 			elif returnValue is "film":
-				self.session.open(StreamsThumb, "film", "MOVIES", "http://feeds.bbc.co.uk/iplayer/films/tv/list")
+				self.session.open(StreamsThumb, "film", "Movies", "http://feeds.bbc.co.uk/iplayer/films/tv/list")
 			elif returnValue is "bbckids":
-				self.session.open(StreamsThumb, "bbckids", "KIDS", "http://feeds.bbc.co.uk/iplayer/childrens/tv/list")
+				self.session.open(StreamsThumb, "bbckids", "Kids", "http://feeds.bbc.co.uk/iplayer/childrens/tv/list")
 			elif returnValue is "bbcnews":
 				self.session.open(StreamsThumb, "bbcnews", "BBC News", "http://feeds.bbc.co.uk/iplayer/news/tv/list/")
 			elif returnValue is "bbcmusic":
-				self.session.open(StreamsThumb, "bbcmusic", "MUSIC", "http://feeds.bbc.co.uk/iplayer/music/tv/list")
+				self.session.open(StreamsThumb, "bbcmusic", "Music", "http://feeds.bbc.co.uk/iplayer/music/tv/list")
 			elif returnValue is "bbcsoaps":
-				self.session.open(StreamsThumb, "bbcsoaps", "SOAPS", "http://feeds.bbc.co.uk/iplayer/soaps/tv/list")
+				self.session.open(StreamsThumb, "bbcsoaps", "Soaps", "http://feeds.bbc.co.uk/iplayer/soaps/tv/list")
 			elif returnValue is "bbcsport":
-				self.session.open(StreamsThumb, "bbcsport", "SPORT", "http://feeds.bbc.co.uk/iplayer/sport/tv/list")
+				self.session.open(StreamsThumb, "bbcsport", "Sport", "http://feeds.bbc.co.uk/iplayer/sport/tv/list")
 			elif returnValue is "bbcreligous":
-				self.session.open(StreamsThumb, "bbcreligous", "RELIGON", "http://feeds.bbc.co.uk/iplayer/religion_and_ethics/tv/list")
+				self.session.open(StreamsThumb, "bbcreligous", "Religion", "http://feeds.bbc.co.uk/iplayer/religion_and_ethics/tv/list")
 
 	def cancel(self):
 		self.removeFiles(self.imagedir)
@@ -237,11 +237,13 @@ class StreamsThumb(Screen):
 		self.hidemessage = eTimer()
 		self.hidemessage.timeout.get().append(self.hidewaitingtext)
 		
-		self.imagedir = "/tmp/openBbcImg/"
+		self.imagedir = "/tmp/onDemandImg/"
+		self.defaultImg = "Extensions/OnDemand/icons/bbciplayer.png"
+		
 		if (os_path.exists(self.imagedir) != True):
 			os_mkdir(self.imagedir)
 
-		self['list'] = EpisodeList()
+		self['list'] = EpisodeList(self.defaultImg)
 		
 		self.updateMenu()
 		self["actions"] = ActionMap(["SetupActions", "WizardActions", "MovieSelectionActions", "DirectionActions"],
