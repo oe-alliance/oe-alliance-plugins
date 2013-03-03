@@ -236,8 +236,8 @@ class StreamsThumb(Screen):
 	def updateMenu(self):
 		self['list'].recalcEntrySize()
 		self['list'].fillEpisodeList(self.mediaList)
-		self.hidemessage.start(10)
-		self.refreshTimer.start(3000)
+		self.hidemessage.start(12)
+		self.refreshTimer.start(4000)
 
 	def hidewaitingtext(self):
 		self.hidemessage.stop()

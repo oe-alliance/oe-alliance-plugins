@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
     OnDemand by Team VIX
     Copyright (C) 2013
@@ -31,45 +32,26 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 from enigma import getDesktop, gFont, ePicLoad, eListboxPythonMultiContent, RT_HALIGN_RIGHT
 
+from about import OnDemand_About
+
 import bbciplayer
 import itvplayer
 import rteplayer
 import threeplayer
+import fourOD
+import OUG
 
 config.ondemand = ConfigSubsection()
 config.ondemand.ShowRTEPlayer = ConfigYesNo(default = True)
 config.ondemand.Show3Player = ConfigYesNo(default = True)
 config.ondemand.ShowBBCiPlayer = ConfigYesNo(default = True)
 config.ondemand.ShowITVPlayer = ConfigYesNo(default = True)
+config.ondemand.Show4ODPlayer = ConfigYesNo(default = True)
+config.ondemand.ShowOUGPlayer = ConfigYesNo(default = True)
 config.ondemand.ShowImages = ConfigYesNo(default = True)
 
 wsize = getDesktop(0).size().width() - 200
 hsize = getDesktop(0).size().height() - 300
-
-##########################################################################
-class OnDemandHelp(Screen):
-	skin = """
-		<screen position="center,center" size="500,300" title="OnDemandHelp">
-			<widget name="myLabel" position="0,0" size="280,300" font="Console;18"/>
-		</screen>"""
-	def __init__(self, session, args = None):
-		self.session = session
-		Screen.__init__(self, session)
-		#Help text
-		text = """
-OnDemand by Team VIX
-support on
-world-of-satellite.com
-		"""
-
-		self["myLabel"] = ScrollLabel(text)
-		self["myActionMap"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
-		{
-			"cancel": self.close,
-			"ok": self.close,
-			"up": self["myLabel"].pageUp,
-			"down": self["myLabel"].pageDown,
-		}, -1)
         
 ##########################################################################
 
@@ -89,6 +71,8 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.configlist.append(getConfigListEntry((_("3 Player:")), config.ondemand.Show3Player))
 		self.configlist.append(getConfigListEntry((_("BBC iPlayer:")), config.ondemand.ShowBBCiPlayer))
 		self.configlist.append(getConfigListEntry((_("ITV Player:")), config.ondemand.ShowITVPlayer))
+		self.configlist.append(getConfigListEntry((_("4OD Player:")), config.ondemand.Show4ODPlayer))
+		self.configlist.append(getConfigListEntry((_("OUG Player:")), config.ondemand.ShowOUGPlayer))
 		self.configlist.append(getConfigListEntry((_("Show Images:")), config.ondemand.ShowImages))
 		self["config"].setList(self.configlist)
 		
@@ -107,7 +91,7 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.session.open(OnDemandScreenSetup)
 		
 	def keyInfo(self):
-		self.session.open(OnDemandHelp)
+		self.session.open(OnDemand_About)
 	
 	def keyCancel(self):
 		self.close()
@@ -156,6 +140,10 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 			self.PlayerList.append(self.OnDemandListEntry("3 Player", "3player"))
 		if config.ondemand.ShowBBCiPlayer.value:
 			self.PlayerList.append(self.OnDemandListEntry("BBC iPlayer", "bbciplayer"))
+		if config.ondemand.Show4ODPlayer.value:
+			self.PlayerList.append(self.OnDemandListEntry("4OD Player", "fourOD"))
+		if config.ondemand.ShowOUGPlayer.value:
+			self.PlayerList.append(self.OnDemandListEntry("OUG Player", "OUG"))
 
 		self.PlayerList.sort()
 		self["PlayerList"].setList(self.PlayerList)
@@ -176,7 +164,7 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 		self.session.open(OnDemandScreenSetup)
 		
 	def keyInfo(self):
-		self.session.open(OnDemandHelp)
+		self.session.open(OnDemand_About)
 		
 	def keyOK(self):
 		exist = self[self.currenlist].getCurrent()
@@ -193,6 +181,10 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 			self.session.open(bbciplayer.BBCiMenu, "start", "0")
 		elif player == "itvplayer":
 			self.session.open(itvplayer.ITVplayer, "start", "0")
+		elif player == "fourOD":
+			self.session.open(fourOD.fourODMainMenu, "start", "0")
+		elif player == "OUG":
+			self.session.open(OUG.OpenUgSetupScreen, "start", "0")
 
 	def keyCancel(self):
 		self.close()
