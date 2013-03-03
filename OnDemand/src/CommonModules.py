@@ -204,7 +204,13 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		try:
 			temp_icon = str(x)
 			icon_name = temp_icon.rsplit('/',1)
-			return str(icon_name[1])
+			
+			# OUG streams doesn't handle thumbnals well
+			if icon_name[1][:5] == "nicam":
+				icon_name = temp_icon.rsplit('/',2)
+				return str(icon_name[1])+".jpg"
+			else:				
+				return str(icon_name[1])
 		except (Exception) as exception:
 			print "getThumbnailName: No image found: ", exception, " for: ", x
 			return ''
