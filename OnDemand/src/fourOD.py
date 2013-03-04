@@ -45,6 +45,7 @@ from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHand
 #=========================================================================================
 def wgetUrl(target):
 	try:
+		isUK = 0
 		req = urllib2.Request(target)
 		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 		response = urllib2.urlopen(req)	
@@ -70,6 +71,7 @@ def wgetUrl(target):
 		# Now attempt to use TUNLR to bypass the Geo restriction.
 		if outtxt.find('ERROR') > 0:
 			print "Non UK Address"
+			isUK = 1
 			opener = urllib2.build_opener(MyHTTPHandler)
 			old_opener = urllib2._opener
 			urllib2.install_opener (opener)
@@ -94,7 +96,7 @@ def wgetUrl(target):
 			urllib2.install_opener (old_opener)		
 
 		# Now return the decoded webpage
-		return outtxt
+		return (outtxt, isUK)
 
 	except (Exception) as exception:
 		print "wgetUrl: Exception: ", exception
@@ -104,9 +106,9 @@ def wgetUrl(target):
 		# If we managed to read the URL then return data, might have failed on decode.
 		if outtxt:
 			print "wgetUrl: Exception: outtxt: ", outtxt
-			return outtxt
+			return (outtxt, isUK)
 		else:
-			return ""
+			return ("", isUK)
 		
 #==============================================================================
 def GetCharset(response):
@@ -148,8 +150,7 @@ class fourODMainMenu(Screen):
 		if self.action is "start":
 			# Read the URL for the selected category on the Main Menu.
 			try:
-				data = wgetUrl(self.url % int(time.time()*1000))
-				print "data: ", data
+				(data, isUK) = wgetUrl(self.url % int(time.time()*1000))
 
 				jsonData = simplejson.loads(data)
 
@@ -191,8 +192,7 @@ class fourODMainMenu(Screen):
 					match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
 
 					categoryName = match.group(1)
-					#label = unicode(entry[u'title']) + u' (' + unicode(entry['dc:relation.4oDProgrammeCount']) + u')' 
-					#print "label: ", label
+					#label = unicode(entry[u'title']) + u' (' + unicode(entry['dc:relation.4oDProgrammeCount']) + u')'
 					summary = unicode(entry[u'summary'][u'$']) + u' (' + unicode(entry['dc:relation.4oDProgrammeCount']) + u')' 
 					
 					osdList.append((_(str(summary)), str(categoryName)))
@@ -375,7 +375,7 @@ class StreamsThumb(Screen):
 			self.session.open(StreamsThumb, "show", showName, showID)
 		else:
 			try:
-				(fileUrl, rtmpvar) = self.getRTMPUrl(showID)
+				(fileUrl, rtmpvar, returnMessage) = self.getRTMPUrl(showID)
 				
 				if fileUrl:
 					fileRef = eServiceReference(4097,0,str(fileUrl))
@@ -383,7 +383,10 @@ class StreamsThumb(Screen):
 					lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 					self.session.open(MoviePlayer, fileRef, None, lastservice)
 				else:
-					self.mediaProblemPopup("Problem retreiving the stream URL!")
+					if returnMessage:
+						self.mediaProblemPopup(returnMessage)
+					else:
+						self.mediaProblemPopup("Problem retreiving the stream URL!")
 					
 			except (Exception) as exception:
 				print 'go: Error getting fileUrl: ', exception
@@ -393,27 +396,29 @@ class StreamsThumb(Screen):
 		playUrl = None
 
 		try:
-			rtmpvar = self.InitialiseRTMP(assetUrl)
+			(rtmpvar, returnMessage) = self.InitialiseRTMP(assetUrl)
 			if rtmpvar:
 				playUrl = rtmpvar.getPlayUrl()    
 
-				return (playUrl, rtmpvar)
+				return (playUrl, rtmpvar, returnMessage)
 			else:
-				return ("", "")
+				return ("", "", returnMessage)
 
 		except (Exception) as exception:
 			print 'getRTMPUrl: Error getting playUrl: ', exception
-			return ("", "")
+			return ("", "", "")
 
 #==============================================================================			
 	def InitialiseRTMP(self, assetUrl):
 
 		try:
 			self.urlRoot = u"http://www.channel4.com"
-
+			streamUri = ""
+			auth = ""
+			
 			# Get the stream info
-			(streamUri, auth) = self.GetStreamInfo(assetUrl)
-
+			(streamUri, auth, returnMessage) = self.GetStreamInfo(assetUrl)
+			
 			if streamUri:
 				url = re.search('(.*?)mp4:', streamUri).group(1)
 				app = re.search('.com/(.*?)mp4:', streamUri).group(1)
@@ -424,25 +429,36 @@ class StreamsThumb(Screen):
 
 				swfPlayer = self.GetSwfPlayer()
 				rtmpvar = RTMP(rtmp = streamUri, app = app, swfVfy = swfPlayer, playPath = playPath, pageUrl = self.urlRoot)
-				return rtmpvar
+				return (rtmpvar, returnMessage)
 			else:
-				return ""
+				return ("", returnMessage)
 		except (Exception) as exception:
 			print 'InitialiseRTMP: Error getting mp4: ', exception
-			return ""
+			return ("", "")
 
 #==============================================================================
 	def GetStreamInfo(self, assetUrl):
-		maxAttempts = 10
+		maxAttempts = 15
+		
+		streamURI = ""
+		auth = ""
+		returnMessage = "Non-UK User!!\n\nUnable to find playable Stream in "+str(maxAttempts)+" attempts!!\n\nPlease try again!"
+		
 		for attemptNumber in range(0, maxAttempts):
-			xml = wgetUrl( assetUrl )
-			print "GetStreamInfo: xml: ", xml
+			(xml, isUK) = wgetUrl( assetUrl )
 			
 			# Parse the returned XML
 			soup = BeautifulSoup(xml)
 
 			uriData = soup.find(u'uridata')
 			streamURI = uriData.find(u'streamuri').text
+			
+			# If call is from Outside UK then stream URL might need to be altered.
+			if isUK == 1:
+				print "GetStreamInfo: notUK user: streamURI: ", streamURI, " streamURI[:10]: ", streamURI[:10]
+				if streamURI[:10] <> "rtmpe://ll":
+					streamURI = ""
+					continue
 
 			# If HTTP Dynamic Streaming is used for this show then there will be no mp4 file,
 			# and decoding the token will fail, therefore we abort before
@@ -460,8 +476,11 @@ class StreamsThumb(Screen):
 				continue
 
 			break
-
-		return (streamURI, auth)
+		
+		if streamURI:
+			return (streamURI, auth, "")
+		else:
+			return (streamURI, auth, returnMessage)
 
 #==============================================================================
 	def GetAuthentication(self, uriData):
@@ -492,7 +511,7 @@ class StreamsThumb(Screen):
 			self.swfDefault = u"http://ps3.channel4.com/swf/ps3player-9.0.124-1.27.2.swf"
 
 			rootHtml = None
-			rootHtml = wgetUrl(self.ps3Root)
+			(rootHtml, isUK) = wgetUrl(self.ps3Root)
 
 			soup = BeautifulSoup(rootHtml)
 			
@@ -500,7 +519,7 @@ class StreamsThumb(Screen):
 			jsUrl = script['src']
 
 			jsHtml = None
-			jsHtml = wgetUrl(self.ps3Root + '/' + jsUrl)
+			(jsHtml, isUK) = wgetUrl(self.ps3Root + '/' + jsUrl)
             
 			# Looking for the string below
 			"""
@@ -617,7 +636,7 @@ class StreamsThumb(Screen):
 			while len(weekList) < 500 and self.nextUrl is not None:
 
 				# Read the Show URL
-				jsonText = wgetUrl(self.nextUrl)
+				(jsonText, isUK) = wgetUrl(self.nextUrl)
 
 				# Use JSON to parse the returned data
 				jsonData = simplejson.loads(jsonText)
@@ -633,37 +652,31 @@ class StreamsThumb(Screen):
 					try:
 						stream = entry[u'group'][u'player']['@url']
 					except (Exception) as exception:
-						print 'getShowMediaData: stream exception: ', exception
 						stream = ""
 
 					try:
 						seriesNum = int(entry[u'dc:relation.SeriesNumber'])
 					except (Exception) as exception:
-						print 'getShowMediaData: seriesNum exception: ', exception
 						seriesNum = ""
 
 					try:
 						epNum = int(entry[u'dc:relation.EpisodeNumber'])
 					except (Exception) as exception:
-						print 'getShowMediaData: epNum exception: ', exception
 						epNum = ""
 
 					try:
 						seriesData = " (S"+str(("%02d" % seriesNum))+"E"+str(("%02d" % epNum))+")"
 					except (Exception) as exception:
-						print 'getShowMediaData: seriesData exception: ', exception
 						seriesData = ""
 
 					try:
 						hasSubtitles = bool(entry['dc:relation.Subtitles'])
 					except (Exception) as exception:
-						print 'getShowMediaData: hasSubtitles exception: ', exception
 						hasSubtitles = False
 
 					try:
 						icon = entry[u'group'][u'thumbnail'][u'@url']
 					except (Exception) as exception:
-						print 'getShowMediaData: icon exception: ', exception
 						icon = ""
 
 					try:
@@ -671,7 +684,6 @@ class StreamsThumb(Screen):
 						date_tmp = lastDate.strftime(u"%a %b %d %Y")
 						date1 = _("Last Aired:")+" "+str(date_tmp)
 					except (Exception) as exception:
-						print 'getShowMediaData: date1 exception: ', exception
 						date1 = ""
 
 					try:
@@ -680,21 +692,18 @@ class StreamsThumb(Screen):
 						if seriesData:
 							name = name+seriesData
 					except (Exception) as exception:
-						print 'getShowMediaData: name exception: ', exception
 						name = ""
 
 					try:
 						short = str(entry[u'summary'][u'$'])
 						short = remove_extra_spaces(short)
 					except (Exception) as exception:
-						print 'getShowMediaData: short exception: ', exception
 						short = ""
 
 					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
 
 				if 'next' in jsonData['feed']['link']:
 					self.nextUrl = jsonData['feed']['link']['next']
-					print 'getShowMediaData: nextUrl: ', self.nextUrl
 				else:
 					self.nextUrl = None
 
@@ -778,7 +787,7 @@ class StreamsThumb(Screen):
 			while len(weekList) < 500 and self.nextUrl is not None:
 
 				# Read the Category URL
-				jsonText = wgetUrl(self.nextUrl)
+				(jsonText, isUK) = wgetUrl(self.nextUrl)
 
 				# Use JSON to parse the returned data
 				jsonData = simplejson.loads(jsonText)
@@ -797,13 +806,11 @@ class StreamsThumb(Screen):
 						match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
 						stream = str(match.group(1))
 					except (Exception) as exception:
-						print 'getCatsMediaData: stream exception: ', exception
 						stream = ""
 
 					try:
 						icon = entry['content']['thumbnail']['@url']
 					except (Exception) as exception:
-						print 'getCatsMediaData: icon exception: ', exception
 						icon = ""
 
 					try:
@@ -811,7 +818,6 @@ class StreamsThumb(Screen):
 						name = str(name.replace(u'&amp;', u'&'))
 						name = remove_extra_spaces(name)
 					except (Exception) as exception:
-						print 'getCatsMediaData: name exception: ', exception
 						name = ""
 
 					try:
@@ -819,7 +825,6 @@ class StreamsThumb(Screen):
 						short = str(short.replace(u'&amp;', u'&'))
 						short = remove_extra_spaces(short)
 					except (Exception) as exception:
-						print 'getCatsMediaData: short exception: ', exception
 						short = ""
 
 					try:
@@ -827,14 +832,12 @@ class StreamsThumb(Screen):
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 						date1 = _("Last Updated:")+" "+str(date_tmp)
 					except (Exception) as exception:
-						print 'getCatsMediaData: date exception: ', exception
 						date1 = ""
 
 					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
 
 				if 'next' in jsonData['feed']['link']:
 					self.nextUrl = jsonData['feed']['link']['next']
-					print 'getShowMediaData: nextUrl: ', self.nextUrl
 				else:
 					self.nextUrl = None				
 
