@@ -311,7 +311,7 @@ class UpgradeStatus(Screen):
 
 	def cbConfirmExit(self, ret):
 		if ret:
-			os.system("rm -f %s %s.md5" % (self.datafile, self.datafile))
+			os.remove("%s %s.md5" % (self.datafile, self.datafile))
 		self.close()
 
 	def keyExit(self):
@@ -468,13 +468,15 @@ class Filebrowser(Screen):
 			return
 
 		target_path = ""
-		for l in file("/tmp/"+root_file).readlines():
+		file = open("/tmp/"+root_file)
+		for l in file.readlines():
 			if l.startswith(machine):
 				try:
 					target_path = l.split("=")[1].strip()
 				except:
 					target_path = ""
 					pass
+		file.close()
 		if target_path == "":
 			self.session.open(MessageBox, _("Firmware does not exist."), MessageBox.TYPE_INFO)
 			self.resetGUI()
@@ -484,7 +486,7 @@ class Filebrowser(Screen):
 		self.guri = "%s/vu%s/%s"%(root_uri, machine, target_path)
 		self.gbin = os.path.basename(target_path)
 		#print "[FirmwareUpgrade] - uri[%s], data[%s], data_path[%s]" % (self.gbin, self.guri, target_path)
-		os.system("rm -f /tmp/" + root_file)
+		os.remove("/tmp/" + root_file)
 
 		# md5
 		if not self.doDownload(self.guri+".md5", self.gbin+".md5", cbfunc=cbDownloadDone, errmsg="Can't download the checksum file."):
