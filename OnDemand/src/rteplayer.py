@@ -35,8 +35,13 @@ from time import strftime
 import urllib2, re
 
 from lxml import etree
+from lxml import html
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler
+
+#=================== Default URL's =======================================
+
+rteSearchDefault = "http://www.rte.ie/player/ie/search/?q="
 
 ########### Retrieve the webpage data ####################################
 
@@ -86,6 +91,7 @@ class RTEMenu(Screen):
 			osdList.append((_("Episodes by Date"), "by_date"))
 			osdList.append((_("Show Categories"), "cats"))
 			osdList.append((_("Shows A to Z"), "a_z"))
+			osdList.append((_("Search"), "search"))
 			osdList.append((_("Back"), "exit"))
 
 		self["RTEMenu"] = MenuList(osdList)
@@ -111,6 +117,8 @@ class RTEMenu(Screen):
 				self.session.open(StreamsMenu, "cats", "0", "http://feeds.rasset.ie/rteavgen/player/genrelist/?type=iptv")
 			elif returnValue is "a_z":
 				self.session.open(StreamsMenu, "a_z", "0", "http://feeds.rasset.ie/rteavgen/player/azlist/?platform=playerxl")
+			elif returnValue is "search":
+				self.session.open(StreamsThumb, "search", "0", "http://www.rte.ie/player/ie/search/?q=")
 
 	def cancel(self):
 		self.removeFiles(self.imagedir)
@@ -339,16 +347,22 @@ class StreamsThumb(Screen):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
+			
 		if retval == 'cat_secs':
 			self.getCatsMediaData(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
+			
 		elif  retval == 'programmeListMenu':
 			self.canBeMultiple(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
+			
+		elif retval == 'search':
+			self.timerCmd = self.TIMER_CMD_VKEY
+			self.cbTimer.start(10)			
 
 ##############################################################
 
@@ -363,8 +377,8 @@ class StreamsThumb(Screen):
 
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
-			self.clearList()
-			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/search/protocol/html/searchString/" + callback)
+			self.setTitle("RTE Player: Search Listings for " +callback)
+			self.getSearchMediaData(self.mediaList, rteSearchDefault + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
 				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
@@ -558,3 +572,45 @@ class StreamsThumb(Screen):
 
 		except (Exception) as exception:
 			print 'getCatsMediaData: Error getting Media info: ', exception
+
+#################################################################
+
+	def getSearchMediaData(self, weekList, url):
+
+		short = ''
+		name = ''
+		date1 = ''
+		stream = ''
+		channel = ''
+		icon = ''
+
+		try:
+			# Parse the HTML with LXML-HTML
+			tree = html.parse(url)
+
+			# Find the first element <article>
+			for article in tree.xpath('//article[@class="search-result clearfix"]'):
+				# Iterate through the children of <article>
+				select = lambda expr: article.cssselect(expr)[0]
+				title = select(".search-programme-title")
+				icon=select("img.thumbnail").get('src')
+				name_tmp=title.text_content()
+				
+				stream_tmp=title.find('a').get('href')
+				stream_split = stream_tmp.rsplit('/',2)
+				stream = stream_split[1]
+				
+				date1=select(".search-programme-episodes").text_content()
+				short_tmp=select(".search-programme-description").text_content()
+				channel=select(".search-channel-icon").text_content()
+
+				name = checkUnicode(name_tmp)
+				short = checkUnicode(short_tmp)
+
+				icon_type = '.jpg'
+				date1 = str(date1)+" "+str(channel)
+
+				weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+
+		except (Exception) as exception:
+			print 'getSearchMediaData: Error getting Media info: ', exception
