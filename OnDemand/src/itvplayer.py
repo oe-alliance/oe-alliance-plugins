@@ -34,11 +34,11 @@ from datetime import date
 from time import strftime
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as os_walk
 
-import urllib2
+import urllib2, re
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler
 
-##########################################################################
+#===================================================================================
 class ITVplayer(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
@@ -56,6 +56,7 @@ class ITVplayer(Screen):
 		self.value = value
 		osdList = []
 		if self.action is "start":
+			osdList.append((_("Search"), "search"))
 			osdList.append((_("All Shows"), "all_shows"))
 			osdList.append((_("Back"), "exit"))
 
@@ -74,6 +75,8 @@ class ITVplayer(Screen):
 		elif self.action is "start":
 			if returnValue is "all_shows":
 				self.session.open(StreamsThumb, "all_shows", "All Shows", "http://www.itv.com/_data/xml/CatchUpData/CatchUp360/CatchUpMenu.xml")
+			elif returnValue is "search":
+				self.session.open(StreamsThumb, "search", "Search", "http://www.itv.com/_data/xml/CatchUpData/CatchUp360/CatchUpMenu.xml")
 
 	def cancel(self):
 		self.removeFiles(self.imagedir)
@@ -84,8 +87,7 @@ class ITVplayer(Screen):
 			for name in files:
 				os_remove(os_path.join(root, name))
 
-###########################################################################
-
+#===================================================================================
 class StreamsMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
@@ -109,23 +111,28 @@ class StreamsMenu(Screen):
 			# Read the URL to get the stream options
 			html = wgetUrl(url)
 
-			# Parse the XML with LXML
-			parser = etree.XMLParser(encoding='utf-8')
-			tree   = etree.fromstring(html, parser)
+			# Only attempt to parse the XML if data has been returned
+			if html:
+				# Parse the XML with LXML
+				parser = etree.XMLParser(encoding='utf-8')
+				tree   = etree.fromstring(html, parser)
 
-			# Get the rtmpe stream URL
-			rtmp_list = tree.xpath("//VideoEntries//MediaFiles/@base")
-			self.rtmp = str(rtmp_list[0])
+				# Get the rtmpe stream URL
+				rtmp_list = tree.xpath("//VideoEntries//MediaFiles/@base")
+				self.rtmp = str(rtmp_list[0])
 
-			# Append each stream quality URL into the menu list
-			for elem in tree.xpath('//VideoEntries//MediaFiles//MediaFile'):
-				bitRate = elem.attrib.get("bitrate")
-				quality = int(bitRate) / 1000
-				osdList.append((_("Play With a Bitrate Quality of "+str(quality)), str(elem[0].text)))
+				# Append each stream quality URL into the menu list
+				for elem in tree.xpath('//VideoEntries//MediaFiles//MediaFile'):
+					bitRate = elem.attrib.get("bitrate")
+					quality = int(bitRate) / 1000
+					osdList.append((_("Play With a Bitrate Quality of "+str(quality)), str(elem[0].text)))
+			else:
+				self.session.open(MessageBox, _("Exception: Problem Retrieving Stream"), MessageBox.TYPE_ERROR, timeout=5)
 
 		except (Exception) as exception:
 			print 'StreamsMenu: Error parsing BitRate feed: ', exception
 
+		osdList.sort()
 		osdList.append((_("Exit"), "exit"))
 
 		self["latestMenu"] = MenuList(osdList)
@@ -154,25 +161,14 @@ class StreamsMenu(Screen):
 	def cancel(self):
 		self.close(None)
 
-###########################################################################
-
+#===================================================================================
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	returnValue = stringValue.replace('&#39;', '\'')
 	return returnValue
 
-###########################################################################
-
+#===================================================================================
 class StreamsThumb(Screen):
-
-	PROGDATE = 0
-	PROGNAME = 1
-	SHORT_DESCR = 2
-	CHANNELNAME = 3
-	STREAMURL = 4
-	ICON = 5
-	ICONTYPE = 6
-	MAX_PIC_PAGE = 5
 
 	TIMER_CMD_START = 0
 	TIMER_CMD_VKEY = 1
@@ -235,6 +231,7 @@ class StreamsThumb(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.cbTimer.start(10)
 
+#===================================================================================
 	def updateMenu(self):
 		self['list'].recalcEntrySize()
 		self['list'].fillEpisodeList(self.mediaList)
@@ -253,45 +250,40 @@ class StreamsThumb(Screen):
 		self.setTitle("ITV Player: Listings for " +self.title)
 
 	def key_up(self):
-		# self.refreshTimer.start(2000)
 		self['list'].moveTo(self['list'].instance.moveUp)
 
 	def key_down(self):
-		# self.refreshTimer.start(2000)
 		self['list'].moveTo(self['list'].instance.moveDown)
 
 	def key_left(self):
-		# self.refreshTimer.start(2000)
 		self['list'].moveTo(self['list'].instance.pageUp)
 
 	def key_right(self):
-		# self.refreshTimer.start(2000)
 		self['list'].moveTo(self['list'].instance.pageDown)
 
 	def Exit(self):
 		self.close()
 
+#===================================================================================
 	def setupCallback(self, retval = None):
 		if retval == 'cancel' or retval is None:
 			return
 
 		if retval == 'all_shows':
-			#print "setupCallback: all_shows:"
-			#print "setupCallback1: mediaList: ", self.mediaList
 			self.getMediaData(self.mediaList, self.url)
-			#print "setupCallback2: mediaList: ", self.mediaList
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-		if retval == 'one_show':
-			#print "setupCallback: one_show:"
-			#print "setupCallback3: mediaList: ", self.mediaList
+		elif retval == 'one_show':
 			self.getShowMediaData(self.mediaList, self.url)
-			#print "setupCallback: mediaList: ", self.mediaList
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
+		elif  retval == 'search':
+			self.timerCmd = self.TIMER_CMD_VKEY
+			self.cbTimer.start(10)
 
+#===================================================================================
 	def timerCallback(self):
 		self.cbTimer.stop()
 		if self.timerCmd == self.TIMER_CMD_START:
@@ -301,26 +293,31 @@ class StreamsThumb(Screen):
 
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
-			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/search/protocol/html/searchString/" + callback)
+			self.setTitle("ITV Player: Search Listings for " +callback)
+			print "keyboardCallback: self.url: ", self.url
+			print "keyboardCallback: callback: ", callback
+			self.getSearchMediaData(self.mediaList, self.url, callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
 				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
 		else:
 			self.close()
 
+#===================================================================================
 	def mediaProblemPopup(self, error):
 		self.session.openWithCallback(self.close, MessageBox, _(error), MessageBox.TYPE_ERROR, timeout=5, simple = True)
 
+#===================================================================================
 	def go(self):
 		showID = self["list"].l.getCurrentSelection()[4]
 		showName = self["list"].l.getCurrentSelection()[1]
-		if self.cmd == "all_shows":
+		
+		if self.cmd == "all_shows" or self.cmd == "search":
 			self.session.open(StreamsThumb, "one_show", showName, showID)
 		else:
 			self.session.open(StreamsMenu, "one_show", showName, showID)
 
-#################################################################
-
+#===================================================================================
 	def getMediaData(self, weekList, url):
 		short = ''
 		name = ''
@@ -338,14 +335,10 @@ class StreamsThumb(Screen):
 			for elem in tree.xpath("//ITVCatchUpProgramme"):
 				# Iterate through the children of <ITVCatchUpProgramme>
 				stream = str(elem[0].text)
-				#print 'stream: ', stream
 				date_tmp = str(elem[4].text)
-				#print 'date1: ', date1
 				name_tmp = str(elem[1].text)
 				icon = str(elem[3].text)
-				#print 'icon: ', icon
 				if icon is None or icon == "None":
-					#print "getMediaData: Setting Icon: ", icon
 					icon = ""
 
 				year = int(date_tmp[0:4])
@@ -362,16 +355,13 @@ class StreamsThumb(Screen):
 
 				weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
 
-			#root = parser.close()
-
 		except (Exception) as exception:
 			print 'getMediaData: Error getting Media info: ', exception
 
-#################################################################
-
+#===================================================================================
 	def getShowMediaData(self, weekList, progID):
 		url = "http://www.itv.com/_app/Dynamic/CatchUpData.ashx?ViewType=1&Filter=" + progID + "&moduleID=115107"
-		#print "getShowMediaData: url: ", url
+		
 		short = ''
 		name = ''
 		date1 = ''
@@ -388,29 +378,20 @@ class StreamsThumb(Screen):
 			for elem in tree.xpath('//div[contains(@class,"listItem")]//div'):
 				#print elem.tag, elem.attrib, elem.text
 				if elem.attrib.get('class') == "floatLeft":
-					#print "getShowMediaData: element = floatLeft"
 					show_url = str(elem[0].attrib.get('href'))
 					show_split = show_url.rsplit('=',1)
 					show = str(show_split[1])
-					#print "show: ", show
 					icon = str(elem[0][0].attrib.get('src'))
-					#print "getShowMediaData: icon: ", icon
 					if icon is None:
-						#print "getShowMediaData: Setting Icon: ", icon
 						icon = ""
 
 				if elem.attrib.get('class') == "content":
-					#print "getShowMediaData: element = content"
 					contentSet = True
 					name_tmp = str(elem[0][0].text)
-					#print "name_tmp: ", name_tmp
 					date1 = _("Date aired:")+" "+str(elem[1].text)
-					#print "date1: ", date1
 					short_tmp = str(elem[2].text)
-					#print "short_tmp: ", short_tmp
 					dur_tmp = str(elem[3][0].text)
 					duration = dur_tmp.strip()
-					#print "duration: ", duration
 
 				if contentSet == True:
 					name = checkUnicode(name_tmp)
@@ -424,13 +405,58 @@ class StreamsThumb(Screen):
 					weekList.append((date1, name, short, channel, show, icon, icon_type, False))
 					contentSet = False
 
-			#root = parser.close()
-
 		except (Exception) as exception:
 			print 'getCatsMediaData: Error getting Media info: ', exception
 
-########### Retrieve the webpage data ####################################
+#===================================================================================
+	def getSearchMediaData(self, weekList, url, query):
 
+		short = ''
+		name = ''
+		date1 = ''
+		stream = ''
+		channel = ''
+		icon = ''
+
+		try:
+			# Parse the XML with elementTree
+			parser = etree.XMLParser(encoding='utf-8')
+			tree = etree.parse(url, parser)
+
+			# Find the first element <entry>
+			for elem in tree.xpath("//ITVCatchUpProgramme"):
+				# Iterate through the children of <ITVCatchUpProgramme>
+
+				name_tmp = str(elem[1].text)
+				name = checkUnicode(name_tmp)
+				print "getSearchMediaData: name: ", name
+				
+				# Only output the names that match the search query
+				if re.search(query, name, re.IGNORECASE):
+					stream = str(elem[0].text)
+					date_tmp = str(elem[4].text)
+					print "getSearchMediaData: date_tmp: ", date_tmp
+					icon = str(elem[3].text)
+					if icon is None or icon == "None":
+						icon = ""
+
+					year = int(date_tmp[0:4])
+					month = int(date_tmp[5:7])
+					day = int(date_tmp[8:10])
+					oldDate = date(int(year), int(month), int(day)) # year, month, day
+					dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+					newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16]
+					date1 = _("Last Updated:")+" "+str(newDate)
+
+					short = "The current list of episodes stored for " + str(name)
+					icon_type = '.jpg'
+
+					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+
+		except (Exception) as exception:
+			print 'getSearchMediaData: Error getting Media info: ', exception
+
+#========== Retrieve the webpage data ==============================================
 def wgetUrl(episodeID):
 	soapMessage = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	  <SOAP-ENV:Body>
@@ -492,10 +518,10 @@ def wgetUrl(episodeID):
 		else:
 			self.session.open(MessageBox, _("HTTPError: Problem Retrieving Stream"), MessageBox.TYPE_ERROR, timeout=5)
 			print "HTTPError: Error retrieving stream: ", exResp
-			return False
+			return ""
 	except (Exception) as exception2:
 		self.session.open(MessageBox, _("Exception: Problem Retrieving Stream"), MessageBox.TYPE_ERROR, timeout=5)
-		print "go: Error calling urllib2: ", exception2
-		return False
+		print "wgetUrl: Error calling urllib2: ", exception2
+		return ""
 		
 	return htmldoc
