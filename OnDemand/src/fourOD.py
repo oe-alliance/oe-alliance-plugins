@@ -42,10 +42,16 @@ import fourOD_token_decoder
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, RTMP
 
+#=================== Default URL's =======================================================
+
+fourodSearchDefault = u'http://www.channel4.com/search/predictive/?q='
+
 #=========================================================================================
 def wgetUrl(target):
 	try:
 		isUK = 0
+		outtxt = ""
+		
 		req = urllib2.Request(target)
 		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 		response = urllib2.urlopen(req)	
@@ -147,6 +153,7 @@ class fourODMainMenu(Screen):
 		self.url = "http://ps3.channel4.com/pmlsd/tags.json?platform=ps3&uid=%d"
 		osdList = []
 
+		osdList.append((_("Search"), "search"))
 		if self.action is "start":
 			# Read the URL for the selected category on the Main Menu.
 			try:
@@ -214,11 +221,13 @@ class fourODMainMenu(Screen):
 	def go(self):
 		title = self["fourODMainMenu"].l.getCurrentSelection()[0]
 		category = self["fourODMainMenu"].l.getCurrentSelection()[1]
-
+		
 		if category is "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
-		elif self.action is "start":
+		elif category is "search":
+			self.session.open(StreamsThumb, category, title, category)
+		else:
 			self.session.open(StreamsThumb, self.action, title, category)
 
 #==============================================================================
@@ -339,7 +348,12 @@ class StreamsThumb(Screen):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-		else:
+		elif retval == 'searchShow':
+			self.getShowMediaData(self.mediaList, self.level)
+			if len(self.mediaList) == 0:
+				self.mediaProblemPopup("Programme Not Available on PS3 4OD!")
+			self.updateMenu()
+		elif retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
 
@@ -354,8 +368,8 @@ class StreamsThumb(Screen):
 #==============================================================================
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
-			self.clearList()
-			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/search/protocol/html/searchString/" + callback, '')
+			self.setTitle("4OD: Search Listings for " +callback)
+			self.getSearchMediaData(self.mediaList, fourodSearchDefault + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
 				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
@@ -373,6 +387,8 @@ class StreamsThumb(Screen):
 
 		if self.cmd == 'start':
 			self.session.open(StreamsThumb, "show", showName, showID)
+		elif self.cmd == 'search':
+			self.session.open(StreamsThumb, "searchShow", showName, showID)
 		else:
 			try:
 				(fileUrl, rtmpvar, returnMessage) = self.getRTMPUrl(showID)
@@ -638,74 +654,76 @@ class StreamsThumb(Screen):
 				# Read the Show URL
 				(jsonText, isUK) = wgetUrl(self.nextUrl)
 
-				# Use JSON to parse the returned data
-				jsonData = simplejson.loads(jsonText)
+				# Only want to try and parse if stream data is returned.
+				if jsonText:
+					# Use JSON to parse the returned data
+					jsonData = simplejson.loads(jsonText)
 
-				if isinstance(jsonData['feed']['entry'], list):
-					entries = jsonData['feed']['entry']
-				else:
-					# Single entry, put in a list
-					entries = [ jsonData['feed']['entry'] ]
+					if isinstance(jsonData['feed']['entry'], list):
+						entries = jsonData['feed']['entry']
+					else:
+						# Single entry, put in a list
+						entries = [ jsonData['feed']['entry'] ]
 
-				for entry in entries:
+					for entry in entries:
 
-					try:
-						stream = entry[u'group'][u'player']['@url']
-					except (Exception) as exception:
-						stream = ""
+						try:
+							stream = entry[u'group'][u'player']['@url']
+						except (Exception) as exception:
+							stream = ""
 
-					try:
-						seriesNum = int(entry[u'dc:relation.SeriesNumber'])
-					except (Exception) as exception:
-						seriesNum = ""
+						try:
+							seriesNum = int(entry[u'dc:relation.SeriesNumber'])
+						except (Exception) as exception:
+							seriesNum = ""
 
-					try:
-						epNum = int(entry[u'dc:relation.EpisodeNumber'])
-					except (Exception) as exception:
-						epNum = ""
+						try:
+							epNum = int(entry[u'dc:relation.EpisodeNumber'])
+						except (Exception) as exception:
+							epNum = ""
 
-					try:
-						seriesData = " (S"+str(("%02d" % seriesNum))+"E"+str(("%02d" % epNum))+")"
-					except (Exception) as exception:
-						seriesData = ""
+						try:
+							seriesData = " (S"+str(("%02d" % seriesNum))+"E"+str(("%02d" % epNum))+")"
+						except (Exception) as exception:
+							seriesData = ""
 
-					try:
-						hasSubtitles = bool(entry['dc:relation.Subtitles'])
-					except (Exception) as exception:
-						hasSubtitles = False
+						try:
+							hasSubtitles = bool(entry['dc:relation.Subtitles'])
+						except (Exception) as exception:
+							hasSubtitles = False
 
-					try:
-						icon = entry[u'group'][u'thumbnail'][u'@url']
-					except (Exception) as exception:
-						icon = ""
+						try:
+							icon = entry[u'group'][u'thumbnail'][u'@url']
+						except (Exception) as exception:
+							icon = ""
 
-					try:
-						lastDate = datetime.fromtimestamp(mktime(strptime(entry[u'dc:date.TXDate'], u"%Y-%m-%dT%H:%M:%S.%fZ")))
-						date_tmp = lastDate.strftime(u"%a %b %d %Y")
-						date1 = _("Last Aired:")+" "+str(date_tmp)
-					except (Exception) as exception:
-						date1 = ""
+						try:
+							lastDate = datetime.fromtimestamp(mktime(strptime(entry[u'dc:date.TXDate'], u"%Y-%m-%dT%H:%M:%S.%fZ")))
+							date_tmp = lastDate.strftime(u"%a %b %d %Y")
+							date1 = _("Last Aired:")+" "+str(date_tmp)
+						except (Exception) as exception:
+							date1 = ""
 
-					try:
-						name = str(unicode(entry[u'title']))
-						name = remove_extra_spaces(name)
-						if seriesData:
-							name = name+seriesData
-					except (Exception) as exception:
-						name = ""
+						try:
+							name = str(unicode(entry[u'title']))
+							name = remove_extra_spaces(name)
+							if seriesData:
+								name = name+seriesData
+						except (Exception) as exception:
+							name = ""
 
-					try:
-						short = str(entry[u'summary'][u'$'])
-						short = remove_extra_spaces(short)
-					except (Exception) as exception:
-						short = ""
+						try:
+							short = str(entry[u'summary'][u'$'])
+							short = remove_extra_spaces(short)
+						except (Exception) as exception:
+							short = ""
 
-					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+						weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
 
-				if 'next' in jsonData['feed']['link']:
-					self.nextUrl = jsonData['feed']['link']['next']
-				else:
-					self.nextUrl = None
+					if 'next' in jsonData['feed']['link']:
+						self.nextUrl = jsonData['feed']['link']['next']
+					else:
+						self.nextUrl = None
 
 		except (Exception) as exception:
 			print 'getShowMediaData: Error parsing feed: ', exception
@@ -789,67 +807,143 @@ class StreamsThumb(Screen):
 				# Read the Category URL
 				(jsonText, isUK) = wgetUrl(self.nextUrl)
 
+				# Only want to try and parse if stream data is returned.
+				if jsonText:
+					# Use JSON to parse the returned data
+					jsonData = simplejson.loads(jsonText)
+
+					if isinstance(jsonData['feed']['entry'], list):
+						entries = jsonData['feed']['entry']
+					else:
+						# Single entry, put in a list
+						entries = [ jsonData['feed']['entry'] ] 
+
+					for entry in entries:
+
+						try:
+							id = entry['id']
+							pattern = '/programmes/(.+)'
+							match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
+							stream = str(match.group(1))
+						except (Exception) as exception:
+							stream = ""
+
+						try:
+							icon = entry['content']['thumbnail']['@url']
+						except (Exception) as exception:
+							icon = ""
+
+						try:
+							name = unicode(entry['title'])
+							name = str(name.replace(u'&amp;', u'&'))
+							name = remove_extra_spaces(name)
+						except (Exception) as exception:
+							name = ""
+
+						try:
+							short = entry['summary']['$']
+							short = str(short.replace(u'&amp;', u'&'))
+							short = remove_extra_spaces(short)
+						except (Exception) as exception:
+							short = ""
+
+						try:
+							lastDate = datetime.fromtimestamp(mktime(strptime(entry[u'dc:date.TXDate'], u"%Y-%m-%dT%H:%M:%S.%fZ")))
+							date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+							date1 = _("Last Updated:")+" "+str(date_tmp)
+						except (Exception) as exception:
+							date1 = ""
+
+						weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+
+					if 'next' in jsonData['feed']['link']:
+						self.nextUrl = jsonData['feed']['link']['next']
+					else:
+						self.nextUrl = None				
+
+		except (Exception) as exception:
+			print 'getCatsMediaData: Error parsing feed: ', exception
+
+#==============================================================================
+	def getSearchMediaData(self, weekList, searchUrl):
+
+		icon_type = ".jpg"
+		channel = "CH4"
+		short = ''
+		name = ''
+		date1 = ''
+		stream = ''
+		icon = ''
+
+		try:
+			# Read the Category URL
+			(jsonText, isUK) = wgetUrl(searchUrl)
+			
+			# Only want to try and parse if stream data is returned.
+			if jsonText:
+				# We need to tidy the returned search results, format not json friendly
+				jsonText = getJsonReady(jsonText)
+
 				# Use JSON to parse the returned data
 				jsonData = simplejson.loads(jsonText)
 
-				if isinstance(jsonData['feed']['entry'], list):
-					entries = jsonData['feed']['entry']
+				if isinstance(jsonData['results'], list):
+					entries = jsonData['results']
 				else:
 					# Single entry, put in a list
-					entries = [ jsonData['feed']['entry'] ] 
+					entries = [ jsonData['results'] ] 
 
+				# Loop through each of the search result entries.
 				for entry in entries:
 
+					# If this value is false then the programme is not available on 4OD
+					if entry['fourOnDemand'] == "false":
+						continue
+
 					try:
-						id = entry['id']
-						pattern = '/programmes/(.+)'
-						match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
-						stream = str(match.group(1))
+						stream_tmp = unicode(entry[u'siteUrl'])
+						stream_split = stream_tmp.rsplit('/',2)
+						stream = str(stream_split[1])
 					except (Exception) as exception:
 						stream = ""
 
 					try:
-						icon = entry['content']['thumbnail']['@url']
+						icon = str(unicode(entry[u'imgUrl']))
 					except (Exception) as exception:
 						icon = ""
 
 					try:
-						name = unicode(entry['title'])
+						name = unicode(entry[u'value'])
 						name = str(name.replace(u'&amp;', u'&'))
 						name = remove_extra_spaces(name)
 					except (Exception) as exception:
 						name = ""
 
 					try:
-						short = entry['summary']['$']
-						short = str(short.replace(u'&amp;', u'&'))
-						short = remove_extra_spaces(short)
+						short = "\nThe current list of episodes stored for " + str(name)
 					except (Exception) as exception:
 						short = ""
 
-					try:
-						lastDate = datetime.fromtimestamp(mktime(strptime(entry[u'dc:date.TXDate'], u"%Y-%m-%dT%H:%M:%S.%fZ")))
-						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-						date1 = _("Last Updated:")+" "+str(date_tmp)
-					except (Exception) as exception:
-						date1 = ""
-
-					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
-
-				if 'next' in jsonData['feed']['link']:
-					self.nextUrl = jsonData['feed']['link']['next']
-				else:
-					self.nextUrl = None				
+					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))		
 
 		except (Exception) as exception:
-			print 'getCatsMediaData: Error parsing feed: ', exception
-
+			print 'getSearchMediaData: Error parsing feed: ', exception
+			
 #==============================================================================
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	returnValue = stringValue.replace('&#39;', '\'')
 	return returnValue
 
+#==============================================================================
+def getJsonReady(value, **kwargs):
+	stringValue = str(value)
+	stringValue = stringValue.replace("(", "")
+	stringValue = stringValue.replace(")", "")
+	stringValue = stringValue.replace(";", "")
+	stringValue = stringValue.replace("\\'s", "'s")
+	return stringValue
+	
 #==========================================================================
 def remove_extra_spaces(data):
 	p = re.compile(r'\s+')
