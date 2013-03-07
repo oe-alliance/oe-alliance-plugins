@@ -29,8 +29,9 @@ from Components.Pixmap import Pixmap
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as os_walk
 
-from datetime import date
-from time import strftime
+import time, random
+from time import strftime, strptime, mktime
+from datetime import timedelta, date, datetime
 
 import urllib2, re
 
@@ -86,12 +87,12 @@ class RTEMenu(Screen):
 		self.value = value
 		osdList = []
 		if self.action is "start":
+			osdList.append((_("Search"), "search"))
 			osdList.append((_("Latest Episodes"), "latest"))
 			osdList.append((_("Most Popular Episodes"), "pop"))
 			osdList.append((_("Episodes by Date"), "by_date"))
 			osdList.append((_("Show Categories"), "cats"))
 			osdList.append((_("Shows A to Z"), "a_z"))
-			osdList.append((_("Search"), "search"))
 			osdList.append((_("Back"), "exit"))
 
 		self["RTEMenu"] = MenuList(osdList)
@@ -234,15 +235,6 @@ def main(session, **kwargs):
 ###########################################################################
 
 class StreamsThumb(Screen):
-
-	PROGDATE = 0
-	PROGNAME = 1
-	SHORT_DESCR = 2
-	CHANNELNAME = 3
-	STREAMURL = 4
-	ICON = 5
-	ICONTYPE = 6
-	MAX_PIC_PAGE = 5
 
 	TIMER_CMD_START = 0
 	TIMER_CMD_VKEY = 1
@@ -448,21 +440,19 @@ class StreamsThumb(Screen):
 				for elem in tree.xpath('//*[local-name() = "entry"]'):
 					# Iterate through the children of <entry>
 					stream = str(elem[0].text)
-					date_tmp = str(elem[1].text)
 					name_tmp = str(elem[3].text)
 					short_tmp = str(elem[4].text)
 					channel = str(elem[5].attrib.get('term'))
 					millisecs = int(elem[16].attrib.get('ms'))
 					icon_url = str(elem[23].attrib.get('url'))
 
-					# Tidy up the format of the data
-					year = int(date_tmp[0:4])
-					month = int(date_tmp[5:7])
-					day = int(date_tmp[8:10])
-					oldDate = date(year, month, day)  # year, month, day
-					dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-					date_tmp = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16] + " " + channel
-					date1 = _("Date Aired:")+" "+str(date_tmp)
+					try:
+						lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[1].text), "%Y-%m-%dT%H:%M:%S+00:00"))) #2012-12-31T12:54:29+00:00
+						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+						date1 = _("Added:")+" "+str(date_tmp)
+					except (Exception) as exception:
+						date1 = _("Added:")+" "+str(elem[4].text)
+						print "getMediaData: date1 parse error: ", exception
 
 					name = checkUnicode(name_tmp)
 					short = checkUnicode(short_tmp)
@@ -500,20 +490,19 @@ class StreamsThumb(Screen):
 			for elem in tree.xpath('//*[local-name() = "entry"]'):
 				# Iterate through the children of <entry>
 				stream = str(elem[1].text)
-				date_tmp = str(elem[3].text)
 				name_tmp = str(elem[5].text)
 				short_tmp = str(elem[6].text)
 				channel = str(elem[7].attrib.get('term'))
 				millisecs = int(elem[18].attrib.get('ms'))
 				icon_url = str(elem[23].attrib.get('url'))
 
-				year = int(date_tmp[0:4])
-				month = int(date_tmp[5:7])
-				day = int(date_tmp[8:10])
-				oldDate = date(int(year), int(month), int(day)) # year, month, day
-				dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-				date_tmp = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16] + " " + channel
-				date1 = _("Date Aired:")+" "+str(date_tmp)
+				try:
+					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[3].text), "%Y-%m-%dT%H:%M:%S+00:00"))) #2012-12-31T12:54:29+00:00
+					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+					date1 = _("Added:")+" "+str(date_tmp)
+				except (Exception) as exception:
+					date1 = _("Added:")+" "+str(elem[4].text)
+					print "getMediaData: date1 parse error: ", exception
 
 				name = checkUnicode(name_tmp)
 				short = checkUnicode(short_tmp)
@@ -550,17 +539,16 @@ class StreamsThumb(Screen):
 			for elem in tree.xpath('//*[local-name() = "entry"]'):
 				# Iterate through the children of <entry>
 				stream_tmp = str(elem[1].text)
-				date_tmp = str(elem[4].text)
 				name_tmp = str(elem[5].text)
 				icon_url = str(elem[23].attrib.get('url'))
 
-				year = int(date_tmp[0:4])
-				month = int(date_tmp[5:7])
-				day = int(date_tmp[8:10])
-				oldDate = date(int(year), int(month), int(day)) # year, month, day
-				dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-				date_tmp = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16]
-				date1 = _("Date Updated:")+" "+str(date_tmp)
+				try:
+					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[4].text), "%Y-%m-%dT%H:%M:%S+00:00"))) #2012-12-31T12:54:29+00:00
+					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+					date1 = _("Added:")+" "+str(date_tmp)
+				except (Exception) as exception:
+					date1 = _("Added:")+" "+str(elem[4].text)
+					print "getMediaData: date1 parse error: ", exception
 
 				stream = checkUnicode(stream_tmp)
 				name = checkUnicode(name_tmp)

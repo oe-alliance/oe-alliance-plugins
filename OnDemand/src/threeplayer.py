@@ -81,11 +81,11 @@ class threeMainMenu(Screen):
 
 		if self.action is "start":
 
+			osdList.append((_("Search"), "search"))
 			osdList.append((_("Most Talked About"), "talked"))
 			osdList.append((_("Straight Off The Telly"), "straight"))
 			osdList.append((_("Going, Going..."), "going"))
 			osdList.append((_("All Shows"), "all_shows"))
-			osdList.append((_("Search"), "search"))
 			osdList.append((_("Back"), "exit"))
 
 		Screen.__init__(self, session)

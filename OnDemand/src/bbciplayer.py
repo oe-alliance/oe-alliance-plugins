@@ -1,17 +1,19 @@
-
 """
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+	BBC iPlayer - Enigma2 Video Plugin
+	Copyright (C) 2013 rogerthis
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 # for localized messages
@@ -28,17 +30,22 @@ from Components.Pixmap import Pixmap
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as os_walk
 
-from datetime import date
-from time import strftime
+import time, random
+from time import strftime, strptime, mktime
+from datetime import timedelta, date, datetime
 
 import urllib2, re
 
 import xml.dom.minidom as dom
-from dns.resolver import Resolver
+from lxml import html
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler
 
-##########################################################################
+#=================== Default URL's =======================================
+
+bbcSearchDefault = "http://feeds.bbc.co.uk/iplayer/search/tv/?q="
+
+#===================================================================================
 
 def wgetUrl(target):
 	try:
@@ -51,15 +58,14 @@ def wgetUrl(target):
 		return ''
 	return outtxt
 
-##########################################################################
+#===================================================================================
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	returnValue = stringValue.replace('&#39;', '\'')
 	return returnValue
-###########################################################################
 
+#===================================================================================
 class BBCiMenu(Screen):
-	print "BBCiMenu"
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
 	
@@ -77,7 +83,7 @@ class BBCiMenu(Screen):
 		osdList = []
 		
 		if self.action is "start":
-			print "start"
+			osdList.append((_("Search"), "search"))
 			osdList.append((_("TV Highlights"), "bbchighlights"))
 			osdList.append((_("Most Popular TV"), "bbcpopular"))
 			osdList.append((_("Drama"), "bbcdrama"))
@@ -180,9 +186,11 @@ class BBCiMenu(Screen):
 			elif returnValue is "bbcsoaps":
 				self.session.open(StreamsThumb, "bbcsoaps", "Soaps", "http://feeds.bbc.co.uk/iplayer/soaps/tv/list")
 			elif returnValue is "bbcsport":
-				self.session.open(StreamsThumb, "bbcsport", "Sport", "http://feeds.bbc.co.uk/iplayer/sport/tv/list")
+				self.session.open(StreamsThumb, "bbcsport", "Sport", "http://feeds.bbc.co.uk/iplayer/categories/sport/tv/list")
 			elif returnValue is "bbcreligous":
 				self.session.open(StreamsThumb, "bbcreligous", "Religion", "http://feeds.bbc.co.uk/iplayer/religion_and_ethics/tv/list")
+			elif returnValue is "search":
+				self.session.open(StreamsThumb, "search", "Search", "http://feeds.bbc.co.uk/iplayer/search/tv/?q=")
 
 	def cancel(self):
 		self.removeFiles(self.imagedir)
@@ -193,17 +201,8 @@ class BBCiMenu(Screen):
 			for name in files:
 				os_remove(os_path.join(root, name))		
 
-###########################################################################
+#===================================================================================
 class StreamsThumb(Screen):
-
-	PROGDATE = 0
-	PROGNAME = 1
-	SHORT_DESCR = 2
-	CHANNELNAME = 3
-	STREAMURL = 4
-	ICON = 5
-	ICONTYPE = 6
-	MAX_PIC_PAGE = 5
 
 	TIMER_CMD_START = 0
 	TIMER_CMD_VKEY = 1
@@ -259,6 +258,7 @@ class StreamsThumb(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.cbTimer.start(10)
 
+#===================================================================================
 	def layoutFinished(self):
 		self.setTitle("BBC iPlayer: Listings for " +self.title)
 
@@ -291,15 +291,21 @@ class StreamsThumb(Screen):
 	def Exit(self):
 		self.close()
 
+#===================================================================================
 	def setupCallback(self, retval = None):
 		if retval == 'cancel' or retval is None:
 			return
 		
-		self.getMediaData(self.mediaList, self.url)
-		if len(self.mediaList) == 0:
-			self.mediaProblemPopup("No Episodes Found!")
-		self.updateMenu()
+		if retval == 'search':
+			self.timerCmd = self.TIMER_CMD_VKEY
+			self.cbTimer.start(10)
+		else:
+			self.getMediaData(self.mediaList, self.url)
+			if len(self.mediaList) == 0:
+				self.mediaProblemPopup("No Episodes Found!")
+			self.updateMenu()
 
+#===================================================================================
 	def timerCallback(self):
 		self.cbTimer.stop()
 		if self.timerCmd == self.TIMER_CMD_START:
@@ -309,31 +315,27 @@ class StreamsThumb(Screen):
 
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
-			self.clearList()
-			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/search/protocol/html/searchString/" + callback)
+			self.setTitle("BBC iPlayer: Search Listings for " +callback)
+			self.getMediaData(self.mediaList, bbcSearchDefault + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
 				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
 		else:
 			self.close()
 
+#===================================================================================
 	def mediaProblemPopup(self, error):
 		self.session.openWithCallback(self.close, MessageBox, _(error), MessageBox.TYPE_ERROR, timeout=5, simple = True)
 
+#===================================================================================
 	def go(self):
 		showID = self["list"].l.getCurrentSelection()[4]
 		showName = self["list"].l.getCurrentSelection()[1]
 		returnedData = (showID,showName)
-		print "showID", showID
-		print "showName", showName
 		self.session.open(bbcStreamUrl, "bbcStreamUrl", returnedData)
 
+#===================================================================================
 	def getMediaData(self, weekList, url):
-		data = wgetUrl(url)
-		
-		# If zero, an error occurred retrieving the url, throw an error
-		if len(data) == 0:
-			self.mediaProblemPopup()
 		
 		short = ''
 		name = ''
@@ -342,30 +344,94 @@ class StreamsThumb(Screen):
 		channel = ''
 		icon = ''
 		
-		links = (re.compile ('<entry>\n    <title type="text">(.+?)</title>\n    <id>tag:feeds.bbc.co.uk,2008:PIPS:(.+?)</id>\n    <updated>(.+?)</updated>\n    <content type="html">\n      &lt;p&gt;\n        &lt;a href=&quot;.+?&quot;&gt;\n          &lt;img src=&quot;(.+?)&quot; alt=&quot;.+?&quot; /&gt;\n        &lt;/a&gt;\n      &lt;/p&gt;\n      &lt;p&gt;\n        (.+?)\n      &lt;/p&gt;\n    </content>').findall(data))
-	        		
-		for line in links:
-			name = checkUnicode(line[0])
-			stream = line[1]
+		try:
+			# Retrieve the search results from the feeds.
+			data = wgetUrl(url)
 			
-			# Format the date to display onscreen
-			year = int(line[2][0:4])
-			month = int(line[2][5:7])
-			day = int(line[2][8:10])
-			oldDate = date(int(year), int(month), int(day)) # year, month, day
-			dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-			date_tmp = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +line[2][11:16]
-			date1 = _("Date Aired:")+" "+str(date_tmp)
-			icon = line[3]
-			icon_type = '.jpg'
-			short = checkUnicode(line[4])
-			channel = ""
-			weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
-			
+			# If we hit problems retrieving the data don't try to parse.
+			if data:
+				# Use Regex to parse out the required element data
+				links = (re.compile ('<entry>\n    <title type="text">(.+?)</title>\n    <id>tag:feeds.bbc.co.uk,2008:PIPS:(.+?)</id>\n    <updated>(.+?)</updated>\n    <content type="html">\n      &lt;p&gt;\n        &lt;a href=&quot;.+?&quot;&gt;\n          &lt;img src=&quot;(.+?)&quot; alt=&quot;.+?&quot; /&gt;\n        &lt;/a&gt;\n      &lt;/p&gt;\n      &lt;p&gt;\n        (.+?)\n      &lt;/p&gt;\n    </content>').findall(data))
 
-###########################################################################
+				# Loop through each element <entry>
+				for line in links:
+					name = checkUnicode(line[0])
+					stream = line[1]
+
+					# Format the date to display onscreen
+					try:
+						lastDate = datetime.fromtimestamp(mktime(strptime(str(line[2]), "%Y-%m-%dT%H:%M:%SZ"))) #2013-03-06T18:27:43Z
+						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+						date1 = _("Added:")+" "+str(date_tmp)
+					except (Exception) as exception:
+						date1=str(line[2])
+
+					icon = line[3]
+					icon_type = '.jpg'
+					short = checkUnicode(line[4])
+					channel = ""
+					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+
+		except (Exception) as exception:
+			print 'getMediaData: Error getting Media info: ', exception
+
+#===================================================================================
+	def getSearchMediaData(self, weekList, url):
+
+		#============ Not Used - More robust but not as quick ==============
+		
+		short = ''
+		name = ''
+		date1 = ''
+		stream = ''
+		channel = ''
+		icon = ''
+
+		try:
+			# Retrieve the search results from the feeds.
+			data = wgetUrl(url)
+			
+			# Problems with tags resulted in non-parsed tags, fix them.
+			data = data.replace("&lt;", "<")
+			data = data.replace("&gt;", ">")
+
+			# Parse the HTML with LXML-HTML
+			tree = html.document_fromstring(data)
+
+			# Find the first element <entry> and loop
+			for show in tree.xpath('//entry'):
+				# Iterate through the children of <entry>
+				select = lambda expr: show.cssselect(expr)[0]
+				
+				icon=select("thumbnail").get('url')
+				name_tmp=str(select('title').text_content())
+				
+				stream_tmp=select('id').text_content()
+				stream_split = stream_tmp.rsplit(':',1)
+				stream = stream_split[1]
+				
+				try:
+					lastDate = datetime.fromtimestamp(mktime(strptime(str(select('updated').text_content()), "%Y-%m-%dT%H:%M:%SZ"))) #2013-03-06T18:27:43Z
+					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+					date1 = _("Added:")+" "+str(date_tmp)
+				except (Exception) as exception:
+					date1=select('updated').text_content()
+					print "getMediaData: date1 parse error: ", exception
+				
+				short_tmp=str(select('content').text_content().strip())
+
+				name = checkUnicode(name_tmp)
+				short = checkUnicode(short_tmp)
+
+				icon_type = '.jpg'
+
+				weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+
+		except (Exception) as exception:
+			print 'getMediaData: Error getting Media info: ', exception
+			
+#===================================================================================
 class bbcStreamUrl(Screen):
-	print "BBC One"
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
 	
@@ -382,27 +448,16 @@ class bbcStreamUrl(Screen):
 		self.notUK = 0
 		self.title = returnValue[1]
 		fileUrl = returnValue[0]
-		#print 'title',self.title
-		#print 'fileurl',fileUrl
 		url1 = 'http://www.bbc.co.uk/iplayer/playlist/'+fileUrl
-		req = urllib2.Request(url1)
-		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-		response = urllib2.urlopen(req)
-		html = str(response.read())
-		response.close()
+		
+		html = wgetUrl(url1)
 		try:
 			links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[1])
 		except:
 			links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[0])
-		#print 'links',links
+		
 		url2 = 'http://www.bbc.co.uk/mediaselector/4/mtis/stream/'+links
-		#print 'url2',url2
-		req = urllib2.Request(url2)
-		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-		response = urllib2.urlopen(req)
-		html1 = str(response.read())
-		#print 'html1',html1
-		response.close()
+		html1 = html = wgetUrl(url2)
 		
 		if html1.find('notukerror') > 0:
 			self.notUK = 1
@@ -410,14 +465,11 @@ class bbcStreamUrl(Screen):
 			opener = urllib2.build_opener(MyHTTPHandler)
 			old_opener = urllib2._opener
 			urllib2.install_opener (opener)
-			#print 'links',links
 			url2 = 'http://www.bbc.co.uk/mediaselector/4/mtis/stream/'+links
-			#print 'url2',url2
 			req = urllib2.Request(url2)
 			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 			response = urllib2.urlopen(req)
 			html1 = str(response.read())
-			#print 'html1',html1
 			response.close()
 			urllib2.install_opener (old_opener)
 
@@ -435,20 +487,21 @@ class bbcStreamUrl(Screen):
 				service == 'iplayer_streaming_h264_flv' or \
 				service == 'iplayer_streaming_h264_flv_high':
 				conn  = media[i].getElementsByTagName( "connection" )[0]
+				
 				returnedList = self.getHosts(conn, self.title, service)
+				
 				if returnedList[0].find('akamai') > 0 and self.notUK == 1:
 					print "Not UK no Akamai"
 				else:
 					osdList.append(returnedList)
-				#print osdList
+				
 				conn  = media[i].getElementsByTagName( "connection" )[1]
 				returnedList = self.getHosts(conn, self.title, service)
-				#print "returnedList", returnedList
+				
 				if returnedList[0].find('akamai') > 0 and self.notUK == 1:
 					print "Not UK no Akamai"
 				else:
 					osdList.append(returnedList)
-				#print osdList
 				
 			i=i+1
 			
@@ -466,31 +519,26 @@ class bbcStreamUrl(Screen):
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
+#===================================================================================
 	def layoutFinished(self):
 		self.setTitle(_(self.title + " Choose Bitrate"))
 	
-
+#===================================================================================
 	def getHosts(self, conn, title, service):
-		#print conn
 		identifier  = conn.attributes['identifier'].nodeValue
-		#print identifier
 		server = conn.attributes['server'].nodeValue
-		#print server
 		auth = conn.attributes['authString'].nodeValue
-		#print auth
 		supplier = conn.attributes['supplier'].nodeValue
-		#print supplier
+		
 		try:
 			application = conn.attributes['application'].nodeValue
-			#print application
 		except:
 			print "application missing"
 			application = "none"
+			
 		if supplier == 'limelight':
-			print "limelight"
 			fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
 		elif supplier == 'akamai':
-			print "akamai"
 			fileUrl = "rtmp://"+server+":1935/ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
 		if service == 'iplayer_streaming_h264_flv_vlo':
 			bitrate = 400
@@ -501,26 +549,21 @@ class bbcStreamUrl(Screen):
 		elif service == 'iplayer_streaming_h264_flv_high':
 			bitrate = 1500
 		
-		#print "###fileUrl###"
-		#print fileUrl
 		fileUrlTitle = []
 		fileUrlTitle.append(fileUrl)
 		fileUrlTitle.append(title)
 		returnList = ((_(str(bitrate)+" "+str(supplier)), fileUrlTitle))
 		return returnList 
 
-
+#===================================================================================
 	def go(self):
 		returnValue = self["bbcStreamUrl"].l.getCurrentSelection()[1]
 		if returnValue is not None:
 			if returnValue is "exit":
 				self.close(None)
 			else:
-				#print "returnValue",returnValue
 				title = returnValue[1]
 				fileUrl = returnValue[0]
-				#print 'title',title
-				#print 'fileUrl',fileUrl
 				
 				fileRef = eServiceReference(4097,0,str(fileUrl))
 				fileRef.setName (title) 
@@ -530,10 +573,8 @@ class bbcStreamUrl(Screen):
 	def cancel(self):
 		self.close(None)
 
-########################################################################### 
+#===================================================================================
 def main(session, **kwargs):
 	action = "start"
 	value = 0 
-	start = session.open(BBCiMenu, action, value)
-
-###########################################################################	
+	start = session.open(BBCiMenu, action, value)	
