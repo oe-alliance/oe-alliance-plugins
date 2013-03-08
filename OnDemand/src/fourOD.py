@@ -668,7 +668,7 @@ class StreamsThumb(Screen):
 					for entry in entries:
 
 						try:
-							stream = entry[u'group'][u'player']['@url']
+							stream = str(entry[u'group'][u'player']['@url'])
 						except (Exception) as exception:
 							stream = ""
 
@@ -693,16 +693,18 @@ class StreamsThumb(Screen):
 							hasSubtitles = False
 
 						try:
-							icon = entry[u'group'][u'thumbnail'][u'@url']
+							icon = str(entry[u'group'][u'thumbnail'][u'@url'])
 						except (Exception) as exception:
 							icon = ""
 
 						try:
-							lastDate = datetime.fromtimestamp(mktime(strptime(entry[u'dc:date.TXDate'], u"%Y-%m-%dT%H:%M:%S.%fZ")))
+							lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'dc:date.TXDate']), u"%Y-%m-%dT%H:%M:%S.%fZ")))
 							date_tmp = lastDate.strftime(u"%a %b %d %Y")
-							date1 = _("Last Aired:")+" "+str(date_tmp)
+							date1 = _("Added:")+" "+str(date_tmp)
 						except (Exception) as exception:
-							date1 = ""
+							lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'updated']), u"%Y-%m-%dT%H:%M:%S.%fZ")))
+							date_tmp = lastDate.strftime(u"%a %b %d %Y")
+							date1 = _("Added:")+" "+str(date_tmp)
 
 						try:
 							name_tmp = str(unicode(entry[u'title']))
@@ -823,7 +825,7 @@ class StreamsThumb(Screen):
 					for entry in entries:
 
 						try:
-							id = entry['id']
+							id = str(entry['id'])
 							pattern = '/programmes/(.+)'
 							match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
 							stream = str(match.group(1))
@@ -831,7 +833,7 @@ class StreamsThumb(Screen):
 							stream = ""
 
 						try:
-							icon = entry['content']['thumbnail']['@url']
+							icon = str(entry['content']['thumbnail']['@url'])
 						except (Exception) as exception:
 							icon = ""
 
@@ -850,11 +852,13 @@ class StreamsThumb(Screen):
 							short = ""
 
 						try:
-							lastDate = datetime.fromtimestamp(mktime(strptime(entry[u'dc:date.TXDate'], u"%Y-%m-%dT%H:%M:%S.%fZ")))
+							lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'dc:date.TXDate']), u"%Y-%m-%dT%H:%M:%S.%fZ")))
 							date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-							date1 = _("Last Updated:")+" "+str(date_tmp)
+							date1 = _("Added:")+" "+str(date_tmp)
 						except (Exception) as exception:
-							date1 = ""
+							lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'updated']), u"%Y-%m-%dT%H:%M:%S.%fZ")))
+							date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+							date1 = _("Added:")+" "+str(date_tmp)
 
 						weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
 
@@ -903,7 +907,7 @@ class StreamsThumb(Screen):
 						continue
 
 					try:
-						stream_tmp = unicode(entry[u'siteUrl'])
+						stream_tmp = str(unicode(entry[u'siteUrl']))
 						stream_split = stream_tmp.rsplit('/',2)
 						stream = str(stream_split[1])
 					except (Exception) as exception:

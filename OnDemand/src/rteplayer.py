@@ -452,7 +452,9 @@ class StreamsThumb(Screen):
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 						date1 = _("Added:")+" "+str(date_tmp)
 					except (Exception) as exception:
-						date1 = _("Added:")+" "+str(elem[4].text)
+						lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[1].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
+						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+						date1 = _("Added:")+" "+str(date_tmp)
 						print "getMediaData: date1 parse error: ", exception
 
 					name = checkUnicode(name_tmp)
@@ -502,7 +504,9 @@ class StreamsThumb(Screen):
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 					date1 = _("Added:")+" "+str(date_tmp)
 				except (Exception) as exception:
-					date1 = _("Added:")+" "+str(elem[4].text)
+					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[3].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
+					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+					date1 = _("Added:")+" "+str(date_tmp)
 					print "getMediaData: date1 parse error: ", exception
 
 				name = checkUnicode(name_tmp)
@@ -548,7 +552,9 @@ class StreamsThumb(Screen):
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 					date1 = _("Added:")+" "+str(date_tmp)
 				except (Exception) as exception:
-					date1 = _("Added:")+" "+str(elem[4].text)
+					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[4].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
+					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+					date1 = _("Added:")+" "+str(date_tmp)
 					print "getMediaData: date1 parse error: ", exception
 
 				stream = checkUnicode(stream_tmp)
@@ -582,22 +588,22 @@ class StreamsThumb(Screen):
 				# Iterate through the children of <article>
 				select = lambda expr: article.cssselect(expr)[0]
 				title = select(".search-programme-title")
-				icon=select("img.thumbnail").get('src')
-				name_tmp=title.text_content()
+				icon = str(select("img.thumbnail").get('src'))
+				name_tmp = str(title.text_content())
 				
-				stream_tmp=title.find('a').get('href')
+				stream_tmp = str(title.find('a').get('href'))
 				stream_split = stream_tmp.rsplit('/',2)
 				stream = stream_split[1]
 				
-				date1=select(".search-programme-episodes").text_content()
-				short_tmp=select(".search-programme-description").text_content()
-				channel=select(".search-channel-icon").text_content()
+				date1 = str(select(".search-programme-episodes").text_content())
+				short_tmp = str(select(".search-programme-description").text_content())
+				channel = str(select(".search-channel-icon").text_content())
 
 				name = checkUnicode(name_tmp)
 				short = checkUnicode(short_tmp)
 
 				icon_type = '.jpg'
-				date1 = str(date1)+" "+str(channel)
+				date1 = _("Added:")+" "+str(date1)+" "+str(channel)
 
 				weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
 
