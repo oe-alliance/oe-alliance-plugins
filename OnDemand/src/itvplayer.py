@@ -164,8 +164,9 @@ class StreamsMenu(Screen):
 #===================================================================================
 def checkUnicode(value, **kwargs):
 	stringValue = value 
-	returnValue = stringValue.replace('&#39;', '\'')
-	return returnValue
+	stringValue = stringValue.replace('&#39;', '\'')
+	stringValue = stringValue.replace('&amp;', '&')
+	return stringValue
 
 #===================================================================================
 class StreamsThumb(Screen):
@@ -398,7 +399,7 @@ class StreamsThumb(Screen):
 					short = checkUnicode(short_tmp)
 
 					# Append duration onto the show description
-					short = short+"\nDuration: "+str(duration)
+					short = short+"\n"+str(duration)
 
 					icon_type = '.jpg'
 
@@ -429,7 +430,6 @@ class StreamsThumb(Screen):
 
 				name_tmp = str(elem[1].text)
 				name = checkUnicode(name_tmp)
-				print "getSearchMediaData: name: ", name
 				
 				# Only output the names that match the search query
 				if re.search(query, name, re.IGNORECASE):

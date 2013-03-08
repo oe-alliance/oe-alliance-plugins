@@ -222,8 +222,9 @@ def findPlayUrl(showID, **kwargs):
 
 def checkUnicode(value, **kwargs):
 	stringValue = value 
-	returnValue = stringValue.replace('&#39;', '\'')
-	return returnValue
+	stringValue = stringValue.replace('&#39;', '\'')
+	stringValue = stringValue.replace('&amp;', '&')
+	return stringValue
 
 ###########################################################################
 

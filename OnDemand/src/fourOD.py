@@ -705,16 +705,18 @@ class StreamsThumb(Screen):
 							date1 = ""
 
 						try:
-							name = str(unicode(entry[u'title']))
-							name = remove_extra_spaces(name)
+							name_tmp = str(unicode(entry[u'title']))
+							name_tmp1 = checkUnicode(name_tmp)
+							name = remove_extra_spaces(name_tmp1)
 							if seriesData:
 								name = name+seriesData
 						except (Exception) as exception:
 							name = ""
 
 						try:
-							short = str(entry[u'summary'][u'$'])
-							short = remove_extra_spaces(short)
+							short_tmp = str(entry[u'summary'][u'$'])
+							short_tmp1 = checkUnicode(short_tmp)
+							short = remove_extra_spaces(short_tmp1)
 						except (Exception) as exception:
 							short = ""
 
@@ -834,16 +836,16 @@ class StreamsThumb(Screen):
 							icon = ""
 
 						try:
-							name = unicode(entry['title'])
-							name = str(name.replace(u'&amp;', u'&'))
-							name = remove_extra_spaces(name)
+							name_tmp = str(unicode(entry['title']))
+							name_tmp1 = checkUnicode(name_tmp)
+							name = remove_extra_spaces(name_tmp1)
 						except (Exception) as exception:
 							name = ""
 
 						try:
-							short = entry['summary']['$']
-							short = str(short.replace(u'&amp;', u'&'))
-							short = remove_extra_spaces(short)
+							short_tmp = str(entry['summary']['$'])
+							short_tmp1 = checkUnicode(short_tmp)
+							short = remove_extra_spaces(short_tmp1)
 						except (Exception) as exception:
 							short = ""
 
@@ -913,9 +915,9 @@ class StreamsThumb(Screen):
 						icon = ""
 
 					try:
-						name = unicode(entry[u'value'])
-						name = str(name.replace(u'&amp;', u'&'))
-						name = remove_extra_spaces(name)
+						name_tmp = str(unicode(entry[u'value']))
+						name_tmp1 = checkUnicode(name_tmp)
+						name = remove_extra_spaces(name_tmp1)
 					except (Exception) as exception:
 						name = ""
 
@@ -932,8 +934,9 @@ class StreamsThumb(Screen):
 #==============================================================================
 def checkUnicode(value, **kwargs):
 	stringValue = value 
-	returnValue = stringValue.replace('&#39;', '\'')
-	return returnValue
+	stringValue = stringValue.replace('&#39;', '\'')
+	stringValue = stringValue.replace('&amp;', '&')
+	return stringValue
 
 #==============================================================================
 def getJsonReady(value, **kwargs):

@@ -328,15 +328,16 @@ class StreamsThumb(Screen):
 
 				if elem.tag == 'div':
 					stream = str(elem[0].attrib.get('href'))
-					print "getMediaData: stream: ", stream
 					titleData = elem[0].attrib.get('title')
 					titleDecode = titleData.encode('charmap', 'ignore')
 
 					match=re.search("3player\s+\|\s+(.+),\s+(\d\d/\d\d/\d\d\d\d)\.\s*(.*)", titleDecode) 
-					name = str(match.group(1))
+					name_tmp = str(match.group(1))
+					name = checkUnicode(name_tmp)
 					date_tmp = str(match.group(2))
 					date = _("Date Aired:")+" "+str(date_tmp)
-					short = str(match.group(3))
+					short_tmp = str(match.group(3))
+					short = checkUnicode(short_tmp)
 
 					if func == "slider1":
 						if funcDiff == "a":
@@ -379,9 +380,11 @@ class StreamsThumb(Screen):
 
 				if elem.tag == 'a':
 					stream = baseUrl + str(elem.attrib.get('href'))
-					name = str(elem.text)
+					name_tmp = str(elem.text)
+					name = checkUnicode(name_tmp)
 					date = " "
-					short = baseDescription + str(elem.text)				
+					short_tmp = baseDescription + str(elem.text)
+					short = checkUnicode(short_tmp)
 					hrefSet = True
 
 				if hrefSet == True:
@@ -423,11 +426,15 @@ class StreamsThumb(Screen):
 										
 					icon_url=select('img').get('src')
 					icon = str(icon_url)
-					name=select('h3').text_content()
-					short=show.get_element_by_id('videosearch_caption').text_content()
-					date_tmp=show.get_element_by_id('videosearch_date').text_content()
+					name_tmp = str(select('h3').text_content())
+					name = checkUnicode(name_tmp)
+					
+					short_tmp = str(show.get_element_by_id('videosearch_caption').text_content())
+					short = checkUnicode(short_tmp)
+					
+					date_tmp = show.get_element_by_id('videosearch_date').text_content()
 					date = _("Date Aired:")+" "+str(date_tmp)
-    					duration=show.get_element_by_id('videosearch_duration').text_content()
+    					duration = show.get_element_by_id('videosearch_duration').text_content()
 					
 					short = str(short)+"\nDuration: "+str(duration)
 					
@@ -479,8 +486,9 @@ class StreamsThumb(Screen):
 #===================================================================================
 def checkUnicode(value, **kwargs):
 	stringValue = value 
-	returnValue = stringValue.replace('&#39;', '\'')
-	return returnValue
+	stringValue = stringValue.replace('&#39;', '\'')
+	stringValue = stringValue.replace('&amp;', '&')
+	return stringValue
 #===================================================================================
 def main(session, **kwargs):
 	action = "start"
