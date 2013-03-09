@@ -471,7 +471,7 @@ class StreamsThumb(Screen):
 					return ""
 
 			url = (re.compile ('url: "mp4:(.+?)",').findall(html)[0])
-			connection = (re.compile ('netConnectionUrl: "rtmp://.+?content/videos/(.+?)/"').findall(html)[0])
+			connection = (re.compile ('netConnectionUrl: "rtmp.+?content/videos/(.+?)/"').findall(html)[0])
 			fileUrl = 'http://content.tv3.ie/content/videos/'+str(connection)+'/'+str(url)
 
 			return fileUrl
