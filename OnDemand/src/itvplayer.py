@@ -267,6 +267,7 @@ class StreamsThumb(Screen):
 
 #===================================================================================
 	def setupCallback(self, retval = None):
+
 		if retval == 'cancel' or retval is None:
 			return
 
@@ -275,11 +276,13 @@ class StreamsThumb(Screen):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
+
 		elif retval == 'one_show':
 			self.getShowMediaData(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
+
 		elif  retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
@@ -295,8 +298,6 @@ class StreamsThumb(Screen):
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
 			self.setTitle("ITV Player: Search Listings for " +callback)
-			print "keyboardCallback: self.url: ", self.url
-			print "keyboardCallback: callback: ", callback
 			self.getSearchMediaData(self.mediaList, self.url, callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
@@ -326,6 +327,7 @@ class StreamsThumb(Screen):
 		stream = ''
 		channel = ''
 		icon = ''
+		duration = ''
 
 		try:
 			# Parse the XML with elementTree
@@ -352,9 +354,8 @@ class StreamsThumb(Screen):
 
 				name = checkUnicode(name_tmp)
 				short = "The current list of episodes stored for " + str(name)
-				icon_type = '.jpg'
 
-				weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
 			print 'getMediaData: Error getting Media info: ', exception
@@ -369,6 +370,7 @@ class StreamsThumb(Screen):
 		stream = ''
 		channel = ''
 		icon = ''
+		duration = ''
 		contentSet = False
 
 		try:
@@ -389,7 +391,7 @@ class StreamsThumb(Screen):
 				if elem.attrib.get('class') == "content":
 					contentSet = True
 					name_tmp = str(elem[0][0].text)
-					date1 = _("Date aired:")+" "+str(elem[1].text)
+					date1 = _("Added: ")+str(elem[1].text)
 					short_tmp = str(elem[2].text)
 					dur_tmp = str(elem[3][0].text)
 					duration = dur_tmp.strip()
@@ -398,12 +400,7 @@ class StreamsThumb(Screen):
 					name = checkUnicode(name_tmp)
 					short = checkUnicode(short_tmp)
 
-					# Append duration onto the show description
-					short = short+"\n"+str(duration)
-
-					icon_type = '.jpg'
-
-					weekList.append((date1, name, short, channel, show, icon, icon_type, False))
+					weekList.append((date1, name, short, channel, show, icon, duration, False))
 					contentSet = False
 
 		except (Exception) as exception:
@@ -418,6 +415,7 @@ class StreamsThumb(Screen):
 		stream = ''
 		channel = ''
 		icon = ''
+		duration = ''
 
 		try:
 			# Parse the XML with elementTree
@@ -446,18 +444,18 @@ class StreamsThumb(Screen):
 					oldDate = date(int(year), int(month), int(day)) # year, month, day
 					dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 					newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16]
-					date1 = _("Last Updated:")+" "+str(newDate)
+					date1 = _("Added: ")+str(newDate)
 
 					short = "The current list of episodes stored for " + str(name)
-					icon_type = '.jpg'
 
-					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
 			print 'getSearchMediaData: Error getting Media info: ', exception
 
 #========== Retrieve the webpage data ==============================================
 def wgetUrl(episodeID):
+
 	soapMessage = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	  <SOAP-ENV:Body>
 		<tem:GetPlaylist xmlns:tem="http://tempuri.org/" xmlns:itv="http://schemas.datacontract.org/2004/07/Itv.BB.Mercury.Common.Types" xmlns:com="http://schemas.itv.com/2009/05/Common">
@@ -516,11 +514,9 @@ def wgetUrl(episodeID):
 			response.close()
 			urllib2.install_opener (old_opener)
 		else:
-			self.session.open(MessageBox, _("HTTPError: Problem Retrieving Stream"), MessageBox.TYPE_ERROR, timeout=5)
 			print "HTTPError: Error retrieving stream: ", exResp
 			return ""
 	except (Exception) as exception2:
-		self.session.open(MessageBox, _("Exception: Problem Retrieving Stream"), MessageBox.TYPE_ERROR, timeout=5)
 		print "wgetUrl: Error calling urllib2: ", exception2
 		return ""
 		

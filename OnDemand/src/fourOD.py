@@ -565,13 +565,13 @@ class StreamsThumb(Screen):
 	def getShowMediaData(self, weekList, showId):
 
 		self.url = u"http://ps3.channel4.com/pmlsd/%s/4od.json?platform=ps3&uid=%s" # showId, time
-		icon_type = ".jpg"
 		channel = "CH4"
 		short = ''
 		name = ''
 		date = ''
 		stream = ''
 		icon = ''
+		duration = ''
 
 		# Below is a sample of the returned data stream for a Show.
 		"""
@@ -722,7 +722,7 @@ class StreamsThumb(Screen):
 						except (Exception) as exception:
 							short = ""
 
-						weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+						weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 					if 'next' in jsonData['feed']['link']:
 						self.nextUrl = jsonData['feed']['link']['next']
@@ -736,13 +736,13 @@ class StreamsThumb(Screen):
 	def getCatsMediaData(self, weekList, category):
 
 		self.url = u"http://ps3.channel4.com/pmlsd/tags/%s/4od/title.json?platform=ps3" #category
-		icon_type = ".jpg"
 		channel = "CH4"
 		short = ''
 		name = ''
 		date1 = ''
 		stream = ''
 		icon = ''
+		duration = ''
 
 		# Below is a sample of the returned data stream for a Category.
 		"""
@@ -860,7 +860,7 @@ class StreamsThumb(Screen):
 							date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 							date1 = _("Added:")+" "+str(date_tmp)
 
-						weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+						weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 					if 'next' in jsonData['feed']['link']:
 						self.nextUrl = jsonData['feed']['link']['next']
@@ -873,13 +873,13 @@ class StreamsThumb(Screen):
 #==============================================================================
 	def getSearchMediaData(self, weekList, searchUrl):
 
-		icon_type = ".jpg"
 		channel = "CH4"
 		short = ''
 		name = ''
 		date1 = ''
 		stream = ''
 		icon = ''
+		duration = ''
 
 		try:
 			# Read the Category URL
@@ -930,7 +930,7 @@ class StreamsThumb(Screen):
 					except (Exception) as exception:
 						short = ""
 
-					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))		
+					weekList.append((date1, name, short, channel, stream, icon, duration, False))		
 
 		except (Exception) as exception:
 			print 'getSearchMediaData: Error parsing feed: ', exception

@@ -41,10 +41,6 @@ from lxml import html
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler
 
-#=================== Default URL's =======================================
-
-bbcSearchDefault = "http://feeds.bbc.co.uk/iplayer/search/tv/?q="
-
 #===================================================================================
 
 def wgetUrl(target):
@@ -317,7 +313,7 @@ class StreamsThumb(Screen):
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
 			self.setTitle("BBC iPlayer: Search Listings for " +callback)
-			self.getMediaData(self.mediaList, bbcSearchDefault + callback)
+			self.getMediaData(self.mediaList, self.url + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
 				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
@@ -344,6 +340,7 @@ class StreamsThumb(Screen):
 		stream = ''
 		channel = ''
 		icon = ''
+		duration = ''
 		
 		try:
 			# Retrieve the search results from the feeds.
@@ -368,10 +365,9 @@ class StreamsThumb(Screen):
 						date1=str(line[2])
 
 					icon = line[3]
-					icon_type = '.jpg'
 					short = checkUnicode(line[4])
-					channel = ""
-					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+
+					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
 			print 'getMediaData: Error getting Media info: ', exception
@@ -387,6 +383,7 @@ class StreamsThumb(Screen):
 		stream = ''
 		channel = ''
 		icon = ''
+		duration = ''
 
 		try:
 			# Retrieve the search results from the feeds.
@@ -424,9 +421,7 @@ class StreamsThumb(Screen):
 				name = checkUnicode(name_tmp)
 				short = checkUnicode(short_tmp)
 
-				icon_type = '.jpg'
-
-				weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
 			print 'getMediaData: Error getting Media info: ', exception

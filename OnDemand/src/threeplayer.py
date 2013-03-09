@@ -131,8 +131,6 @@ class StreamsThumb(Screen):
 	TIMER_CMD_START = 0
 	TIMER_CMD_VKEY = 1
 
-
-
 	def __init__(self, session, action, value, url):
 		self.skin = """
 				<screen position="80,70" size="e-160,e-110" title="">
@@ -229,26 +227,31 @@ class StreamsThumb(Screen):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
+			
 		elif  retval == 'straight':
 			self.getMediaData(self.mediaList, self.url, "slider2")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
+			
 		elif  retval == 'going':
 			self.getMediaData(self.mediaList, self.url, "slider3")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
+			
 		elif  retval == 'all_shows':
 			self.getAllShowsMediaData(self.mediaList, self.url, "gridshow")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
+			
 		elif  retval == 'one_show':
 			self.getMediaData(self.mediaList, self.url, "slider1a")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
+			
 		elif  retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
@@ -300,6 +303,8 @@ class StreamsThumb(Screen):
 				fileRef.setName (showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
+			else:
+				self.mediaProblemPopup("Sorry, unable to find playable stream!")
 
 #===================================================================================
 
@@ -335,20 +340,18 @@ class StreamsThumb(Screen):
 					name_tmp = str(match.group(1))
 					name = checkUnicode(name_tmp)
 					date_tmp = str(match.group(2))
-					date = _("Date Aired:")+" "+str(date_tmp)
+					date = _("Added: ")+str(date_tmp)
 					short_tmp = str(match.group(3))
 					short = checkUnicode(short_tmp)
 
 					if func == "slider1":
 						if funcDiff == "a":
-							duration = elem[3].text
+							duration = _("Duration: ")+str(elem[3].text)
 						else:
-							duration = elem[4].text
+							duration = _("Duration: ")+str(elem[4].text)
 
 				if iconSet == True:
-					if func == "slider1":
-						short = short+"\nDuration: "+str(duration)
-					weekList.append((date, name, short, channel, stream, icon, icon_type, False))
+					weekList.append((date, name, short, channel, stream, icon, duration, False))
 					iconSet = False
 
 		except (Exception) as exception:
@@ -361,7 +364,6 @@ class StreamsThumb(Screen):
 		baseUrl = "http://www.tv3.ie"
 		baseDescription = "A list of all shows currently stored for "
 		duration = ""
-		icon_type = ".jpg"
 		channel = "TV3"
 		short = ''
 		name = ''
@@ -388,7 +390,7 @@ class StreamsThumb(Screen):
 					hrefSet = True
 
 				if hrefSet == True:
-					weekList.append((date, name, short, channel, stream, icon, icon_type, False))
+					weekList.append((date, name, short, channel, stream, icon, duration, False))
 					hrefSet = False
 
 		except (Exception) as exception:
@@ -398,51 +400,47 @@ class StreamsThumb(Screen):
 
 	def getSearchMediaData(self, weekList, search):
 
-		print "getSearchMediaData: search: ", search
 		baseUrl = "http://www.tv3.ie"
 		duration = ""
-		icon_type = ".jpg"
 		channel = "TV3"
 		short = ''
 		name = ''
 		date = ''
 		stream = ''
 		icon = ''
-		iconSet = False
 
 		try:
 			# Retrieve the Search results from TV3.ie
 			data = wgetUrl(search)
-			
+
 			# Only attempt to parse if some data is returned
 			if data:
 				# Parse the returned data using LXML-HTML
 				tree = html.fromstring(data)
 				for show in tree.xpath('//li[@class="unselected_video"]'):
 					select = lambda expr: show.cssselect(expr)[0]
-					
-					stream_tmp=str(select('li.unselected_video').get('onclick'))
-					stream=baseUrl+stream_tmp[10:-3]
-										
-					icon_url=select('img').get('src')
+
+					stream_tmp = str(select('li.unselected_video').get('onclick'))
+					stream = baseUrl+stream_tmp[10:-3]
+
+					icon_url = select('img').get('src')
 					icon = str(icon_url)
 					name_tmp = str(select('h3').text_content())
 					name = checkUnicode(name_tmp)
-					
+
 					short_tmp = str(show.get_element_by_id('videosearch_caption').text_content())
 					short = checkUnicode(short_tmp)
-					
+
 					date_tmp = show.get_element_by_id('videosearch_date').text_content()
-					date = _("Date Aired:")+" "+str(date_tmp)
-    					duration = show.get_element_by_id('videosearch_duration').text_content()
-					
-					short = str(short)+"\nDuration: "+str(duration)
-					
-					weekList.append((date, name, short, channel, stream, icon, icon_type, False))
+					date = _("Added: ")+str(date_tmp)
+
+					duration = _("Duration: ")+str(show.get_element_by_id('videosearch_duration').text_content())
+
+					weekList.append((date, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
 			print 'getMediaData: Error parsing feed: ', exception
-			
+
 #===================================================================================
 	
 	def findPlayUrl(self, value):
@@ -451,6 +449,7 @@ class StreamsThumb(Screen):
 
 		try:
 			url1 = 'http://www.tv3.ie'+url
+			
 			req = urllib2.Request(url1)
 			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 			response = urllib2.urlopen(req)
@@ -467,10 +466,9 @@ class StreamsThumb(Screen):
 					html = str(response.read())
 					response.close()
 
-				except (Exception) as exception:
-					self.session.open(MessageBox, _("Exception: Problem Retrieving Age Restrict Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
+				except (Exception) as exception:				
 					print 'Error getting webpage for age restrict: ', exception
-					return False
+					return ""
 
 			url = (re.compile ('url: "mp4:(.+?)",').findall(html)[0])
 			connection = (re.compile ('netConnectionUrl: "rtmp://.+?content/videos/(.+?)/"').findall(html)[0])
@@ -478,10 +476,9 @@ class StreamsThumb(Screen):
 
 			return fileUrl
 
-		except (Exception) as exception:
-			self.session.open(MessageBox, _("Exception: Problem Retrieving Stream, Check Debug Logs!!"), MessageBox.TYPE_ERROR, timeout=5)					
+		except (Exception) as exception:					
 			print 'findPlayUrl: Error getting URLs: ', exception
-		return ""
+			return ""
 
 #===================================================================================
 def checkUnicode(value, **kwargs):
@@ -489,6 +486,7 @@ def checkUnicode(value, **kwargs):
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
+	
 #===================================================================================
 def main(session, **kwargs):
 	action = "start"

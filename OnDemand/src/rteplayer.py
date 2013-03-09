@@ -40,10 +40,6 @@ from lxml import html
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler
 
-#=================== Default URL's =======================================
-
-rteSearchDefault = "http://www.rte.ie/player/ie/search/?q="
-
 ########### Retrieve the webpage data ####################################
 
 def wgetUrl(target):
@@ -208,15 +204,16 @@ def findPlayUrl(showID, **kwargs):
 	try:
 		html = wgetUrl(url)
 
-		# If zero, an error occurred retrieving the url, throw an error
-		if len(html) == 0:
-			self.mediaProblemPopup()
-
-		links = (re.compile ('url="rtmpe://fmsod.rte.ie/rtevod/mp4:(.+?)" type="video/mp4"').findall(html)[0])
-		fileUrl = "rtmpe://fmsod.rte.ie/rtevod/ app=rtevod/ swfUrl=http://www.rte.ie/player/assets/player_458.swf swfVfy=1 timeout=180 playpath=mp4:"+links
-		return fileUrl
+		# If zero, an error occurred retrieving the url, pass empty string back
+		if html:
+			links = (re.compile ('url="rtmpe://fmsod.rte.ie/rtevod/mp4:(.+?)" type="video/mp4"').findall(html)[0])
+			fileUrl = "rtmpe://fmsod.rte.ie/rtevod/ app=rtevod/ swfUrl=http://www.rte.ie/player/assets/player_458.swf swfVfy=1 timeout=180 playpath=mp4:"+links
+			return fileUrl
+		else:
+			return ""
 	except (Exception) as exception:
 		print 'findPlayUrl: Problem rerieving URL: ', exception
+		return ""
 
 ###########################################################################
 
@@ -371,7 +368,7 @@ class StreamsThumb(Screen):
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
 			self.setTitle("RTE Player: Search Listings for " +callback)
-			self.getSearchMediaData(self.mediaList, rteSearchDefault + callback)
+			self.getSearchMediaData(self.mediaList, self.url + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
 				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
@@ -393,10 +390,14 @@ class StreamsThumb(Screen):
 			self.session.open(StreamsThumb, "programmeListMenu", showName, showID)
 		else:
 			fileUrl = findPlayUrl(showID)
-			fileRef = eServiceReference(4097,0,fileUrl)
-			fileRef.setName (showName)
-			lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			self.session.open(MoviePlayer, fileRef, None, lastservice)
+			
+			if fileUrl:
+				fileRef = eServiceReference(4097,0,fileUrl)
+				fileRef.setName (showName)
+				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+				self.session.open(MoviePlayer, fileRef, None, lastservice)
+			else:
+				self.mediaProblemPopup("Sorry, unable to find playable stream!")
 
 ##############################################################
 
@@ -415,7 +416,7 @@ class StreamsThumb(Screen):
 				showIDs.append(show)
 
 		except (Exception) as exception:
-			print 'canBeMultiple:-getShows: Error getting show numbers: ', exception
+			print 'canBeMultiple: getShows: Error getting show numbers: ', exception
 			showIDs.append(showID)
 
 
@@ -429,6 +430,7 @@ class StreamsThumb(Screen):
 		stream = ''
 		channel = ''
 		icon = ''
+		duration = ''
 
 		for show in showIDs:
 			newUrl = 'http://feeds.rasset.ie/rteavgen/player/playlist?showId='+show
@@ -450,26 +452,22 @@ class StreamsThumb(Screen):
 					try:
 						lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[1].text), "%Y-%m-%dT%H:%M:%S+00:00"))) #2012-12-31T12:54:29+00:00
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-						date1 = _("Added:")+" "+str(date_tmp)
+						date1 = _("Added: ")+str(date_tmp)
 					except (Exception) as exception:
 						lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[1].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-						date1 = _("Added:")+" "+str(date_tmp)
+						date1 = _("Added: ")+str(date_tmp)
 						print "getMediaData: date1 parse error: ", exception
 
 					name = checkUnicode(name_tmp)
 					short = checkUnicode(short_tmp)
 
 					# Calcualte the stream duration
-					duration = calcDuration(millisecs)
-
-					# Append duration onto the show description
-					short = short+"\nDuration: "+str(duration)+" mins"
+					duration = _("Duration: ")+str(calcDuration(millisecs))
 
 					icon = icon_url[0:-7]+"-261.jpg"
-					icon_type = '.jpg'
 
-					weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 			except (Exception) as exception:
 				print "canBeMultiple: Problem parsing data: ", exception
@@ -484,6 +482,7 @@ class StreamsThumb(Screen):
 		stream = ''
 		channel = ''
 		icon = ''
+		duration = ''
 
 		try:
 			# Parse the XML with elementTree
@@ -502,26 +501,23 @@ class StreamsThumb(Screen):
 				try:
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[3].text), "%Y-%m-%dT%H:%M:%S+00:00"))) #2012-12-31T12:54:29+00:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-					date1 = _("Added:")+" "+str(date_tmp)
+					date1 = _("Added: ")+str(date_tmp)
 				except (Exception) as exception:
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[3].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-					date1 = _("Added:")+" "+str(date_tmp)
+					date1 = _("Added: ")+" "+str(date_tmp)
 					print "getMediaData: date1 parse error: ", exception
 
 				name = checkUnicode(name_tmp)
 				short = checkUnicode(short_tmp)
+				
 				icon = icon_url[0:-4]+"-261.jpg" # higher quality image 261x147
 				#icon = line[5] lower quality image 150x84
-				icon_type = '.jpg'
 
 				# Calcualte the stream duration
-				duration = calcDuration(millisecs)
+				duration = _("Duration: ")+str(calcDuration(millisecs))
 
-				# Append duration onto the show description
-				short = short+"\nDuration: "+str(duration)+" mins"
-
-				weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
 			print 'getMediaData: Error getting Media info: ', exception
@@ -535,6 +531,7 @@ class StreamsThumb(Screen):
 		stream = ''
 		channel = ''
 		icon = ''
+		duration = ''
 
 		try:
 			# Parse the XML with elementTree
@@ -554,16 +551,17 @@ class StreamsThumb(Screen):
 				except (Exception) as exception:
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[4].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-					date1 = _("Added:")+" "+str(date_tmp)
+					date1 = _("Added: ")+str(date_tmp)
 					print "getMediaData: date1 parse error: ", exception
 
 				stream = checkUnicode(stream_tmp)
 				name = checkUnicode(name_tmp)
+				
 				short = "\nThe current list of episodes stored for " + str(name)
+				
 				icon = icon_url[0:-4]+"-261.jpg" # higher quality image 261x147
-				icon_type = '.jpg'
 
-				weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
 			print 'getCatsMediaData: Error getting Media info: ', exception
@@ -578,6 +576,7 @@ class StreamsThumb(Screen):
 		stream = ''
 		channel = ''
 		icon = ''
+		duration = ''
 
 		try:
 			# Parse the HTML with LXML-HTML
@@ -595,17 +594,14 @@ class StreamsThumb(Screen):
 				stream_split = stream_tmp.rsplit('/',2)
 				stream = stream_split[1]
 				
-				date1 = str(select(".search-programme-episodes").text_content())
+				date1 = _("Added: ")+str(select(".search-programme-episodes").text_content())
 				short_tmp = str(select(".search-programme-description").text_content())
 				channel = str(select(".search-channel-icon").text_content())
 
 				name = checkUnicode(name_tmp)
 				short = checkUnicode(short_tmp)
 
-				icon_type = '.jpg'
-				date1 = _("Added:")+" "+str(date1)+" "+str(channel)
-
-				weekList.append((date1, name, short, channel, stream, icon, icon_type, False))
+				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
 			print 'getSearchMediaData: Error getting Media info: ', exception

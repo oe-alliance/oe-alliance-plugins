@@ -402,7 +402,6 @@ class OpenUg(Screen):
 	def go(self):
 		currSel = self["list"].l.getCurrentSelection()
 		selIndex = self.mediaList.index(currSel)
-		print "go: selIndex: ", selIndex
 		
 		if len(self.mediaList) == 0 or selIndex > len(self.mediaList) - 1:
 			return
@@ -418,11 +417,14 @@ class OpenUg(Screen):
 				
 			elif self.level == self.UG_LEVEL_SERIE:
 				tmp = self.getRTLStream(self.mediaList[selIndex][self.UG_STREAMURL])
-				if tmp != '':
+				
+				if tmp:
 					myreference = eServiceReference(4097, 0, tmp)
 					myreference.setName(self.mediaList[selIndex][self.UG_PROGNAME])
 					lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 					self.session.open(MoviePlayer, myreference, None, lastservice)
+				else:
+					self.mediaProblemPopup("Sorry, unable to find playable stream!")
 
 		else:
 			if self.level == self.UG_LEVEL_ALL:
@@ -441,10 +443,14 @@ class OpenUg(Screen):
 #=========================================================================================
 	def doUGPlay(self, selIndex):
 		out = wgetUrl(self.STAGING_UG_BASE_URL + "streams/video/pr_id/" + self.mediaList[selIndex][self.UG_STREAMURL])
-		myreference = eServiceReference(4097, 0, out.split('stream_link":"')[1].split('\",')[0].replace('\/', '/'))
-		myreference.setName(self.mediaList[selIndex][self.UG_PROGNAME])
-		lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		self.session.open(MoviePlayer, myreference, None, lastservice)
+		
+		if out:
+			myreference = eServiceReference(4097, 0, out.split('stream_link":"')[1].split('\",')[0].replace('\/', '/'))
+			myreference.setName(self.mediaList[selIndex][self.UG_PROGNAME])
+			lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			self.session.open(MoviePlayer, myreference, None, lastservice)
+		else:
+			self.mediaProblemPopup("Sorry, unable to find playable stream!")
 
 #=========================================================================================
 	def getRTLStream(self, url):
@@ -464,279 +470,293 @@ class OpenUg(Screen):
 
 #=========================================================================================
 	def getRTLSerie(self, weekList, url):
+
 		data = wgetUrl(self.RTL_BASE_URL + url)
-		data = data.split('\n')
-		state = 0
-		name = ''
-		short = ''
-		icon = ''
-		stream = ''
-		date = ''
-		channel = ''
-		for line in data:
-			if "<li>" in line:
-				state = 1
-			if state == 1:
-				tmp = "<a href=\"video"
-				if tmp in line:
-					tmp = "<a href=\""
-					stream = line.split(tmp)[1].split('\">')[0]
 
-				tmp = "<img class=\"thumbnail\" src=\""
-				if tmp in line:
-					icon = line.split(tmp)[1].split('\" ')[0]
-					
-				tmp = "<div class=\"stationlogo\""
-				if tmp in line:
-					lineTmp = line.split(tmp)[1].split('</div>')[0]
-					channelTmp = lineTmp.rsplit('>',1)
-					channel = channelTmp[1]
-					
-				tmp = "<span class=\"title\">"
-				if tmp in line:
-					name = line.split(tmp)[1].split('</span>')[0]
-					name = checkUnicode(name)
-					state = 2					
+		# Only attempt to parse the data if anything returned.
+		if data:
+			data = data.split('\n')
 
-			elif state == 2:
-				if '<span class=\"extra_info\">' in line:
-					continue
-				date = line.split("<br />")[0].lstrip()
-				state = 3
+			state = 0
+			name = ''
+			short = ''
+			icon = ''
+			stream = ''
+			date = ''
+			channel = ''
+			duration = ''
 
-			elif state == 3:
-				tmp = "<span class=\"small\">"
-				if tmp in line:
-					short = line.split(tmp)[1].split('</span>')[0]
-					short = checkUnicode(short)
+			for line in data:
+				if "<li>" in line:
+					state = 1
+				if state == 1:
+					tmp = "<a href=\"video"
+					if tmp in line:
+						tmp = "<a href=\""
+						stream = line.split(tmp)[1].split('\">')[0]
 
-				icon_type = self.getIconType(icon)
-				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
-				state = 0
+					tmp = "<img class=\"thumbnail\" src=\""
+					if tmp in line:
+						icon = line.split(tmp)[1].split('\" ')[0]
+
+					tmp = "<div class=\"stationlogo\""
+					if tmp in line:
+						lineTmp = line.split(tmp)[1].split('</div>')[0]
+						channelTmp = lineTmp.rsplit('>',1)
+						channel = channelTmp[1]
+
+					tmp = "<span class=\"title\">"
+					if tmp in line:
+						name = line.split(tmp)[1].split('</span>')[0]
+						name = checkUnicode(name)
+						state = 2					
+
+				elif state == 2:
+					if '<span class=\"extra_info\">' in line:
+						continue
+					date = _("Added: ")+str(line.split("<br />")[0].lstrip())
+					state = 3
+
+				elif state == 3:
+					tmp = "<span class=\"small\">"
+					if tmp in line:
+						short = line.split(tmp)[1].split('</span>')[0]
+						short = checkUnicode(short)
+
+					weekList.append((date, name, short, channel, stream, icon, duration, False))
+					state = 0
 
 #=========================================================================================
 	def getRTLMediaData(self, weekList):
+
 		url = self.RTL_BASE_URL + "serieslist.php"
 		data = wgetUrl(url)
-		data = data.split('\n')
-		state = 0
-		name = ''
-		short = ''
-		icon = ''
-		stream = ''
-		date = ''
-		channel = ''
-		for line in data:
-			if "<li" in line:
-				tmp = "<a href=\""
-				if tmp in line:
-					stream = line.split(tmp)[1].split('\">')[0]
 
-				tmp = "<span class=\"title\">"
-				if tmp in line:
-					name = line.split(tmp)[1].split("</span>")[0]
-					name = checkUnicode(name)
-					icon_type = self.getIconType(icon)
+		# Only attempt to parse the data if anything returned.
+		if data:
+			data = data.split('\n')
+			
+			state = 0
+			name = ''
+			short = ''
+			icon = ''
+			stream = ''
+			date = ''
+			channel = ''
+			duration = ''
+			
+			for line in data:
+				if "<li" in line:
+					tmp = "<a href=\""
+					if tmp in line:
+						stream = line.split(tmp)[1].split('\">')[0]
 
-					ignore = False
-					for x in weekList:
-						if stream == x[self.UG_STREAMURL] and icon == x[self.UG_ICON]:
-							ignore = True
-							break
-					if ignore is False:
-						weekList.append((date, name, short, channel, stream, icon, icon_type, True))
+					tmp = "<span class=\"title\">"
+					if tmp in line:
+						name = line.split(tmp)[1].split("</span>")[0]
+						name = checkUnicode(name)
+
+						ignore = False
+						for x in weekList:
+							if stream == x[self.UG_STREAMURL] and icon == x[self.UG_ICON]:
+								ignore = True
+								break
+						if ignore is False:
+							weekList.append((date, name, short, channel, stream, icon, duration, True))
 
 #=========================================================================================
 	def getRTLMediaDataBack(self, weekList, days):
+
 		url = self.RTL_BASE_URL + "?daysback=" + '%d' % (days)
 		data = wgetUrl(url)
-		print "getRTLMediaDataBack1: data: ", data
-		data = data.split('\n')
-		state = 0
-		name = ''
-		short = ''
-		icon = ''
-		stream = ''
-		date = ''
-		channel = ''
-		for line in data:
-			if "<li>" in line:
-				state = 1
-			if state == 1:
-				if "<a href=\"video" in line:
-					stream = line.split("<a href=\"")[1].split('\" ')[0]
+		
+		# Only attempt to parse the data if anything returned.
+		if data:
+			data = data.split('\n')
+			state = 0
+			name = ''
+			short = ''
+			icon = ''
+			stream = ''
+			date = ''
+			channel = ''
+			duration = ''
+			
+			for line in data:
+				if "<li>" in line:
+					state = 1
+				if state == 1:
+					if "<a href=\"video" in line:
+						stream = line.split("<a href=\"")[1].split('\" ')[0]
 
-				tmp = "<img class=\"thumbnail\" src=\""
-				if tmp in line:
-					icon = line.split(tmp)[1].split('\" ')[0]
+					tmp = "<img class=\"thumbnail\" src=\""
+					if tmp in line:
+						icon = line.split(tmp)[1].split('\" ')[0]
 
-				tmp = "<div class=\"stationlogo\""
-				if tmp in line:
-					lineTmp = line.split(tmp)[1].split('</div>')[0]
-					channelTmp = lineTmp.rsplit('>',1)
-					channel = channelTmp[1]
-					
-				tmp = "<span class=\"title\">"
-				if tmp in line:
-					name = line.split(tmp)[1].split("</span>")[0]
-					name = checkUnicode(name)
-					if "<br />" in line:
-						short = line.split("<br />")[1]
-						short = checkUnicode(short)
-					state = 2
+					tmp = "<div class=\"stationlogo\""
+					if tmp in line:
+						lineTmp = line.split(tmp)[1].split('</div>')[0]
+						channelTmp = lineTmp.rsplit('>',1)
+						channel = channelTmp[1]
 
-			elif state == 2:
-				tmp = "<span class=\"extra_info\">"
-				if tmp in line:
-					state = 3
+					tmp = "<span class=\"title\">"
+					if tmp in line:
+						name = line.split(tmp)[1].split("</span>")[0]
+						name = checkUnicode(name)
+						if "<br />" in line:
+							short = line.split("<br />")[1]
+							short = checkUnicode(short)
+						state = 2
 
-			elif state == 3:
-				date = line[:5]+" "+channel
-				icon_type = self.getIconType(icon)
-				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
-				state = 0
+				elif state == 2:
+					tmp = "<span class=\"extra_info\">"
+					if tmp in line:
+						state = 3
+
+				elif state == 3:
+					date = _("Time: ")+str(line[:5])
+					weekList.append((date, name, short, channel, stream, icon, duration, False))
+					state = 0
 
 #=========================================================================================
 	def getMediaData(self, weekList, url):
 		data = wgetUrl(url)
-		state = 0
-		short = ''
-		name = ''
-		date = ''
-		stream = ''
-		channel = ''
-		icon = ''
-		data = data.split("\n")
-		for line in data:
-			if state == 0:
-				if "<div class=\"menuEntry\">" in line:
-					state = 1
-					short = ''
-					name = ''
-					date = ''
-					stream = ''
-					icon = ''
 
-			elif state == 1:
-				tmp = "<div class=\"programDetails\" id=\""
-				if  tmp in line:
-					stream = line.split(tmp)[1].split('\">')[0]
+		# Only attempt to parse the data if anything returned.
+		if data:
+			state = 0
+			short = ''
+			name = ''
+			date = ''
+			stream = ''
+			channel = ''
+			icon = ''
+			duration = ''
+			
+			data = data.split("\n")
+			
+			for line in data:
+				if state == 0:
+					if "<div class=\"menuEntry\">" in line:
+						state = 1
+						short = ''
+						name = ''
+						date = ''
+						stream = ''
+						icon = ''
 
-				tmp = "<h3>"
-				if tmp in line:
-					name = line.split(tmp)[1].split("</h3>")[0]
-					name = checkUnicode(name)
+				elif state == 1:
+					tmp = "<div class=\"programDetails\" id=\""
+					if  tmp in line:
+						stream = line.split(tmp)[1].split('\">')[0]
 
-				tmp = "<div class='short'>"
-				if tmp in line:
-					short = line.split(tmp)[1].split("</div>")[0]
-					short = checkUnicode(short)
-
-				tmp = "<div class='datum'>"
-				if tmp in line and date == '':
-					date = line.split(tmp)[1].split("</div>")[0]
-					channel = date[-3:]
-
-				tmp = "<img class='thumbnail' src='"
-				if tmp in line:
-					icon = line.split(tmp)[1].split("\'/>")[0]
-					if "http://" not in icon:
-						icon_tmp = self.UG_BASE_URL
-						icon =  icon_tmp + icon
-
-				if "</div>" in line[:6] and date and name and short and icon:
-					icon_type = self.getIconType(icon)
-					weekList.append((date, name, short, channel, stream, icon, icon_type, False))
-					state = 0
-
-#=========================================================================================
-	def getMediaDataAlph(self, weekList, url):
-		data = wgetUrl(url)
-		state = 0
-		short = ''
-		name = ''
-		date = ''
-		stream = ''
-		channel = ''
-		icon = ''
-		serieid = ''
-		data = data.split('\n')
-		for line in data:
-			if "<div class=\"menuItem" in line:
-				serieid = ''
-				short = ''
-				name = ''
-				date = ''
-				stream = ''
-				channel = ''
-				icon = ''
-				if "id=" in line:
-					serieid = line.split("id=\"")[1].split('\"')[0]
-				state = 1
-
-			if state == 1:
-				tmp = "<h3>"
-				if tmp in line and name == '':
-					name = line.split(tmp)[1].split("</h3>")[0]
-					name = checkUnicode(name)
-
-				tmp = "<div class=\"programDetails\" id=\""
-				if tmp in line and stream == '':
-					stream = line.split(tmp)[1].split("\"")[0]
-
-				if serieid == '':
-					tmp = "<img class='thumbnail' src='"
+					tmp = "<h3>"
 					if tmp in line:
-						icon = line.split(tmp)[1].split('\'/>')[0]
-						if "http://" not in icon:
-							icon_tmp = self.UG_BASE_URL
-							icon =  icon_tmp + icon
-
-					tmp = "<div class='datum'>"
-					if tmp in line and date == '':
-						date = line.split(tmp)[1].split("</div>")[0]
-						channel = date[-3:]
+						name = line.split(tmp)[1].split("</h3>")[0]
+						name = checkUnicode(name)
 
 					tmp = "<div class='short'>"
 					if tmp in line:
 						short = line.split(tmp)[1].split("</div>")[0]
 						short = checkUnicode(short)
-				else:
-					tmp = "<div class='thumbHolder'>"
+
+					tmp = "<div class='datum'>"
+					if tmp in line and date == '':
+						date = _("Added: ")+str(line.split(tmp)[1].split("</div>")[0])
+						channel = date[-3:]
+
+					tmp = "<img class='thumbnail' src='"
 					if tmp in line:
-						icon = line.split("url(\"")[1].split("\"")[0]
+						icon = line.split(tmp)[1].split("\'/>")[0]
 						if "http://" not in icon:
 							icon_tmp = self.UG_BASE_URL
 							icon =  icon_tmp + icon
 
-				isdone = False
-				if serieid == '':
-					if name and stream and icon and date:
-						isdone = True
-				else:
-					if name and serieid and icon:
-						isdone = True
-				if isdone:
-					if serieid != '':
-						icon_type = self.getIconType(icon)
-						weekList.append((date, name, short, channel, serieid, icon, icon_type, True))
-					else:
-						icon_type = self.getIconType(icon)
-						weekList.append((date, name, short, channel, stream, icon, icon_type, False))
-					state = 0
+					if "</div>" in line[:6] and date and name and short and icon:
+						weekList.append((date, name, short, channel, stream, icon, duration, False))
+						state = 0
 
 #=========================================================================================
-	def getIconType(self, data):
-		tmp = ".png"
-		if tmp in data:
-			return tmp
-		tmp = ".gif"
-		if tmp in data:
-			return tmp
-		tmp = ".jpg"
-		if tmp in data:
-			return tmp
-		return ""
+	def getMediaDataAlph(self, weekList, url):
+
+		data = wgetUrl(url)
+
+		# Only attempt to parse the data if anything returned.
+		if data:
+			state = 0
+			short = ''
+			name = ''
+			date = ''
+			stream = ''
+			channel = ''
+			icon = ''
+			serieid = ''
+			duration = ''
+
+			data = data.split('\n')
+
+			for line in data:
+				if "<div class=\"menuItem" in line:
+					serieid = ''
+					short = ''
+					name = ''
+					date = ''
+					stream = ''
+					channel = ''
+					icon = ''
+					if "id=" in line:
+						serieid = line.split("id=\"")[1].split('\"')[0]
+					state = 1
+
+				if state == 1:
+					tmp = "<h3>"
+					if tmp in line and name == '':
+						name = line.split(tmp)[1].split("</h3>")[0]
+						name = checkUnicode(name)
+
+					tmp = "<div class=\"programDetails\" id=\""
+					if tmp in line and stream == '':
+						stream = line.split(tmp)[1].split("\"")[0]
+
+					if serieid == '':
+						tmp = "<img class='thumbnail' src='"
+						if tmp in line:
+							icon = line.split(tmp)[1].split('\'/>')[0]
+							if "http://" not in icon:
+								icon_tmp = self.UG_BASE_URL
+								icon =  icon_tmp + icon
+
+						tmp = "<div class='datum'>"
+						if tmp in line and date == '':
+							date = _("Added: ")+str(line.split(tmp)[1].split("</div>")[0])
+							channel = date[-3:]
+
+						tmp = "<div class='short'>"
+						if tmp in line:
+							short = line.split(tmp)[1].split("</div>")[0]
+							short = checkUnicode(short)
+					else:
+						tmp = "<div class='thumbHolder'>"
+						if tmp in line:
+							icon = line.split("url(\"")[1].split("\"")[0]
+							if "http://" not in icon:
+								icon_tmp = self.UG_BASE_URL
+								icon =  icon_tmp + icon
+
+					isdone = False
+					if serieid == '':
+						if name and stream and icon and date:
+							isdone = True
+					else:
+						if name and serieid and icon:
+							isdone = True
+					if isdone:
+						if serieid != '':
+							weekList.append((date, name, short, channel, serieid, icon, duration, True))
+						else:
+							weekList.append((date, name, short, channel, stream, icon, duration, False))
+						state = 0
+
 #=========================================================================================
 def checkUnicode(value, **kwargs):
 	stringValue = value 
