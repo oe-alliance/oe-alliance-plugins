@@ -59,7 +59,6 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.configlist.append(getConfigListEntry((_("ITV Player:")), config.ondemand.ShowITVPlayer))
 		self.configlist.append(getConfigListEntry((_("4OD Player:")), config.ondemand.Show4ODPlayer))
 		self.configlist.append(getConfigListEntry((_("OUG Player:")), config.ondemand.ShowOUGPlayer))
-		self.configlist.append(getConfigListEntry((_("Show Images:")), config.ondemand.ShowImages))
 		self["config"].setList(self.configlist)
 		
 		self["key_red"] = StaticText(_("Cancel"))
@@ -93,14 +92,13 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 class chooseMenuList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, True, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", 20))
 
 class OnDemand_Screen(Screen, ConfigListScreen):
 	skin = 	"""
-		<screen position="center,center" size="500,300" >
-			<widget name="PlayerList" render="Listbox" position="0,0" size="500,300" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" scrollbarMode="showOnDemand" />
-			<ePixmap name="menu" position="10,275" zPosition="2" size="35,25" pixmap="skin_default/buttons/key_menu.png" transparent="1" alphatest="on" />
-			<ePixmap name="info" position="50,275" zPosition="2" size="35,25" pixmap="skin_default/buttons/key_info.png" transparent="1" alphatest="on" />
+		<screen position="e-215,0" size="215,e-0" backgroundColor="#ffffffff" flags="wfNoBorder" >
+			<widget name="PlayerList" position="0,0" size="215,e-50" backgroundColor="#80000000" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/selectbar.png" transparent="1" scrollbarMode="showNever" />
+			<ePixmap name="menu" position="e-95,e-30" zPosition="2" size="35,25" pixmap="skin_default/buttons/key_menu.png" transparent="1" alphatest="on" />
+			<ePixmap name="info" position="e-45,e-30" zPosition="2" size="35,25" pixmap="skin_default/buttons/key_info.png" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -124,36 +122,34 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 	def layoutFinished(self):
 		self.PlayerList = []
 
+		if config.ondemand.ShowBBCiPlayer.value:
+			self.PlayerList.append(self.OnDemandListEntry("BBC iPlayer", "bbciplayer"))
 		if config.ondemand.ShowITVPlayer.value:
 			self.PlayerList.append(self.OnDemandListEntry("ITV Player", "itvplayer"))
+		if config.ondemand.Show4ODPlayer.value:
+			self.PlayerList.append(self.OnDemandListEntry("4OD Player", "fourOD"))
 		if config.ondemand.ShowRTEPlayer.value:
 			self.PlayerList.append(self.OnDemandListEntry("RTE Player", "rteplayer"))		
 		if config.ondemand.Show3Player.value:
 			self.PlayerList.append(self.OnDemandListEntry("3 Player", "3player"))
-		if config.ondemand.ShowBBCiPlayer.value:
-			self.PlayerList.append(self.OnDemandListEntry("BBC iPlayer", "bbciplayer"))
-		if config.ondemand.Show4ODPlayer.value:
-			self.PlayerList.append(self.OnDemandListEntry("4OD Player", "fourOD"))
 		if config.ondemand.ShowOUGPlayer.value:
 			self.PlayerList.append(self.OnDemandListEntry("OUG Player", "OUG"))
 
-		self.PlayerList.sort()
 		self["PlayerList"].setList(self.PlayerList)
-		self["PlayerList"].l.setItemHeight(42)
+		self["PlayerList"].l.setItemHeight(100)
 
 	def OnDemandListEntry(self, name, jpg):
 		res = [(name, jpg)]
 		icon = resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/%s.png" % jpg)
 		if fileExists(icon):
-			self.picload.setPara((100, 40, 0, 0, 1, 1, "#00000000"))
+			self.picload.setPara((200, 100, 0, 0, 1, 1, "#00000000"))
 			self.picload.startDecode(icon, 0, 0, False)
 			pngthumb = self.picload.getData()
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 0), size=(100, 40), png=pngthumb))	
-		res.append(MultiContentEntryText(pos=(330, 0), size=(170, 40), font=0, text=name, flags=RT_HALIGN_RIGHT))
+			res.append(MultiContentEntryPixmapAlphaTest(pos=(15, 0), size=(200, 100), png=pngthumb))	
 		return res
 	
 	def keySetup(self):
-		self.session.open(OnDemandScreenSetup)
+		self.session.openWithCallback(self.layoutFinished, OnDemandScreenSetup)
 		
 	def keyInfo(self):
 		self.session.open(OnDemand_About)

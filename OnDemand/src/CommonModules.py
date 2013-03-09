@@ -21,8 +21,8 @@ from . import _
 from Components.GUIComponent import GUIComponent
 from Components.HTMLComponent import HTMLComponent
 from Screens.InfoBar import MoviePlayer as MP_parent
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from enigma import eSize, ePicLoad, eTimer, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_WRAP
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_ACTIVE_SKIN
+from enigma import eSize, ePicLoad, eTimer, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM, RT_WRAP
 from twisted.web import client
 from dns.resolver import Resolver
 from os import path as os_path, mkdir as os_mkdir
@@ -45,7 +45,6 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		self.picload = ePicLoad()
 		self.l = eListboxPythonMultiContent()
 		self.l.setBuildFunc(self.buildEntry)
-		self.l.setItemHeight(100)
 		self.onSelChanged = [ ]
 
 		self.titleFontName = "Regular"
@@ -114,7 +113,7 @@ class EpisodeList(HTMLComponent, GUIComponent):
 			self.instance.moveSelection(dir)
 
 	def setItemsPerPage(self):
-		itemHeight = 100
+		itemHeight = int(self.listHeight / 5)
 		self.l.setItemHeight(itemHeight)
 		self.instance.resize(eSize(self.listWidth, self.listHeight / itemHeight * itemHeight))
 
@@ -149,8 +148,8 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		res = [ None ]
 		
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.x+r1.w, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, name))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.x+r1.w, r2.y, r2.w, r2.h, 1, RT_HALIGN_RIGHT|RT_VALIGN_TOP, date))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x+r1.w, r3.y+r2.h, r3.w, r3.h, 2, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, short))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x+r1.w, r3.y+r2.h, r3.w, r3.h, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, date))
 
 		self.picload.setPara((r1.w, r1.h, 0, 0, 1, 1, "#00000000"))
 		self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/empty.png"), 0, 0, False)
@@ -184,6 +183,11 @@ class EpisodeList(HTMLComponent, GUIComponent):
 			self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, self.defaultImg), 0, 0, False)
 			pngthumb = self.picload.getData()
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
+
+		self.picload.setPara((self.l.getItemSize().width(), 2, 0, 0, 1, 1, "#00000000"))
+		self.picload.startDecode(resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png"), 0, 0, False)
+		pngthumb = self.picload.getData()
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 0, self.l.getItemSize().height()-2, self.l.getItemSize().width(), 2, pngthumb))
 
 
  		return res
