@@ -409,6 +409,7 @@ class StreamsThumb(StreamsThumbCommon):
 							akamaiFileUrl = fileUrl
 						else:
 							limelightFileUrl = fileUrl
+							break
 
 					elif quality > currQuality and quality < prefQuality:
 						currQuality = quality
@@ -432,6 +433,7 @@ class StreamsThumb(StreamsThumbCommon):
 							akamaiFileUrl = fileUrl
 						else:
 							limelightFileUrl = fileUrl
+							break
 
 					elif quality > currQuality and quality < prefQuality:
 						currQuality = quality

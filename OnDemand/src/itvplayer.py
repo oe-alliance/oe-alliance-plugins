@@ -319,6 +319,7 @@ class StreamsThumb(StreamsThumbCommon):
 					if quality == prefQuality:
 						prefStream = streamUrl
 						fileUrl = rtmp + " swfurl=http://www.itv.com/mercury/Mercury_VideoPlayer.swf playpath=" + prefStream + " swfvfy=true"
+						break
 					elif quality > currQuality and quality < prefQuality:
 						currQuality = quality
 						prefStream = streamUrl
