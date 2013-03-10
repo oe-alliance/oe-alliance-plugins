@@ -53,6 +53,8 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.configlist.append(getConfigListEntry((_("Show in plugin browser")), config.ondemand.ShowPluginBrowser))
 		self.configlist.append(getConfigListEntry((_("Show in extensions")), config.ondemand.ShowExtensions))
 
+		self.configlist.append(getConfigListEntry((_("Preferred Stream Quality")), config.ondemand.PreferredQuality))
+
 		self.configlist.append(getConfigListEntry((_("BBC iPlayer")), config.ondemand.ShowBBCiPlayer))
 		self.configlist.append(getConfigListEntry((_("ITV Player")), config.ondemand.ShowITVPlayer))
 		self.configlist.append(getConfigListEntry((_("4OD Player")), config.ondemand.Show4ODPlayer))

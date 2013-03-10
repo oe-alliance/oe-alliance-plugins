@@ -20,6 +20,7 @@
 from . import _
 
 from Screens.Screen import Screen
+from Components.config import config
 from Screens.MessageBox import MessageBox
 from enigma import eServiceReference, eTimer, getDesktop
 from Components.MenuList import MenuList
@@ -27,6 +28,7 @@ from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as os_walk
 
 import time, random
@@ -232,8 +234,15 @@ class StreamsThumb(StreamsThumbCommon):
 	def go(self):
 		showID = self["list"].l.getCurrentSelection()[4]
 		showName = self["list"].l.getCurrentSelection()[1]
-		returnedData = (showID,showName)
-		self.session.open(bbcStreamUrl, "bbcStreamUrl", returnedData)
+		fileUrl = self.findPlayUrl(showID)
+
+		if fileUrl:
+			fileRef = eServiceReference(4097,0,fileUrl)
+			fileRef.setData(2,10240*1024)
+			fileRef.setName(showName)
+			self.session.open(MoviePlayer, fileRef)
+		else:
+			self.mediaProblemPopup("Sorry, unable to find playable stream!")
 
 #===================================================================================
 	def getMediaData(self, weekList, url):
@@ -329,117 +338,140 @@ class StreamsThumb(StreamsThumbCommon):
 
 		except (Exception) as exception:
 			print 'getMediaData: Error getting Media info: ', exception
-			
-#===================================================================================
-class bbcStreamUrl(Screen):
-	wsize = getDesktop(0).size().width() - 200
-	hsize = getDesktop(0).size().height() - 300
-	
-	skin = """
-		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="" >
-		<widget name="bbcStreamUrl" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
-		</screen>"""
 
-	def __init__(self, session, action, value):
-		Screen.__init__(self, session)
-		self.action = action
-		returnValue = value
-		osdList = []
-		self.notUK = 0
-		self.title = returnValue[1]
-		fileUrl = returnValue[0]
-		url1 = 'http://www.bbc.co.uk/iplayer/playlist/'+fileUrl
+#===================================================================================
+	
+	def findPlayUrl(self, showID):
+
 		
-		html = wgetUrl(url1)
+		notUK = 0
+		url1 = 'http://www.bbc.co.uk/iplayer/playlist/'+showID
+		supplier = ""
+		fileUrl = ""
+		quality = 0
+		akamaiFileUrl = ""
+		limelightFileUrl = ""
+		currQuality = 0
+		prefQuality = int(config.ondemand.PreferredQuality.value)
+		
 		try:
-			links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[1])
-		except:
-			links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[0])
-		
-		url2 = 'http://www.bbc.co.uk/mediaselector/4/mtis/stream/'+links
-		html1 = html = wgetUrl(url2)
-		
-		if html1.find('notukerror') > 0:
-			self.notUK = 1
-			print "Non UK Address"
-			opener = urllib2.build_opener(MyHTTPHandler)
-			old_opener = urllib2._opener
-			urllib2.install_opener (opener)
+			# Read the URL to get the stream options
+			html = wgetUrl(url1)
+			try:
+				links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[1])
+			except:
+				links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[0])
+
 			url2 = 'http://www.bbc.co.uk/mediaselector/4/mtis/stream/'+links
-			req = urllib2.Request(url2)
-			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-			response = urllib2.urlopen(req)
-			html1 = str(response.read())
-			response.close()
-			urllib2.install_opener (old_opener)
+			html1 = html = wgetUrl(url2)
 
-		doc = dom.parseString(html1)
-		root = doc.documentElement
-		media = root.getElementsByTagName( "media" )
-		print "media length:", len(media)
-		i = 0
-		
-		for list in media:
-			service = media[i].attributes['service'].nodeValue
-			print service
-			if service == 'iplayer_streaming_h264_flv_vlo' or \
-				service == 'iplayer_streaming_h264_flv_lo' or \
-				service == 'iplayer_streaming_h264_flv' or \
-				service == 'iplayer_streaming_h264_flv_high':
-				conn  = media[i].getElementsByTagName( "connection" )[0]
+			if html1.find('notukerror') > 0:
+				notUK = 1
+				print "Non UK Address"
+				opener = urllib2.build_opener(MyHTTPHandler)
+				old_opener = urllib2._opener
+				urllib2.install_opener (opener)
+				req = urllib2.Request(url2)
+				req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
+				response = urllib2.urlopen(req)
+				html1 = str(response.read())
+				response.close()
+				urllib2.install_opener (old_opener)
+
+			# Parse the HTML returned
+			doc = dom.parseString(html1)
+			root = doc.documentElement
+			media = root.getElementsByTagName( "media" )
+			i = 0
+
+			# Loop for each streaming option available
+			for list in media:
+				service = media[i].attributes['service'].nodeValue
 				
-				returnedList = self.getHosts(conn, self.title, service)
-				
-				if returnedList[0].find('akamai') > 0 and self.notUK == 1:
-					print "Not UK no Akamai"
+				# If quality is Very-Low, Low, Normal or High proceed
+				if service == 'iplayer_streaming_h264_flv_vlo' or \
+					service == 'iplayer_streaming_h264_flv_lo' or \
+					service == 'iplayer_streaming_h264_flv' or \
+					service == 'iplayer_streaming_h264_flv_high':
+
+					# Get stream data for first Media element
+					conn  = media[i].getElementsByTagName( "connection" )[0]
+					returnedList = self.getHosts(conn, service)
+					
+					fileUrl = str(returnedList[0])
+					supplier = str(returnedList[1])
+					quality = int(returnedList[2])
+
+					# Try and match the stream quality to the preferred config stream quality
+					if quality == prefQuality:
+						currQuality = quality
+						if supplier == 'akamai':
+							akamaiFileUrl = fileUrl
+						else:
+							limelightFileUrl = fileUrl
+
+					elif quality > currQuality and quality < prefQuality:
+						currQuality = quality
+						if supplier == 'akamai':
+							akamaiFileUrl = fileUrl
+						else:
+							limelightFileUrl = fileUrl
+					
+					# Repeat for the second Media element
+					conn  = media[i].getElementsByTagName( "connection" )[1]
+					returnedList = self.getHosts(conn, service)
+					
+					fileUrl = str(returnedList[0])
+					supplier = str(returnedList[1])
+					quality = int(returnedList[2])
+
+					# Try and match the stream quality to the preferred config stream quality			
+					if quality == prefQuality:
+						currQuality = quality
+						if supplier == 'akamai':
+							akamaiFileUrl = fileUrl
+						else:
+							limelightFileUrl = fileUrl
+
+					elif quality > currQuality and quality < prefQuality:
+						currQuality = quality
+						if supplier == 'akamai':
+							akamaiFileUrl = fileUrl
+						else:
+							limelightFileUrl = fileUrl
+							
+				i=i+1
+
+			# If we have a Limelight URL then return as this can be played by everyone		
+			if limelightFileUrl:
+				return limelightFileUrl
+			else:
+				# Only return the Akamai url for UK users
+				if akamaiFileUrl and notUK == 0:
+					return akamaiFileUrl
 				else:
-					osdList.append(returnedList)
-				
-				conn  = media[i].getElementsByTagName( "connection" )[1]
-				returnedList = self.getHosts(conn, self.title, service)
-				
-				if returnedList[0].find('akamai') > 0 and self.notUK == 1:
-					print "Not UK no Akamai"
-				else:
-					osdList.append(returnedList)
-				
-			i=i+1
-			
+					print "findPlayUrl: Non-UK and no limelight, return blank: "
+					return ""
+
+		except (Exception) as exception:
+			print 'findPlayUrl: Error getting URLs: ', exception
+			return ""
 		
-		osdList.sort()
-		osdList.append((_("Exit"), "exit"))
-
-		Screen.__init__(self, session)
-		self["bbcStreamUrl"] = MenuList(osdList)
-		self["myActionMap"] = ActionMap(["SetupActions"],
-		{
-		"ok": self.go,
-		"cancel": self.cancel
-		}, -1)
-
-		self.onLayoutFinish.append(self.layoutFinished)
-
 #===================================================================================
-	def layoutFinished(self):
-		self.setTitle(_(self.title + " Choose Bitrate"))
-	
-#===================================================================================
-	def getHosts(self, conn, title, service):
-		identifier  = conn.attributes['identifier'].nodeValue
-		server = conn.attributes['server'].nodeValue
-		auth = conn.attributes['authString'].nodeValue
-		supplier = conn.attributes['supplier'].nodeValue
-		
-		try:
-			application = conn.attributes['application'].nodeValue
-		except:
-			print "application missing"
-			application = "none"
-			
+	def getHosts(self, conn, service):
+
+		identifier  = str(conn.attributes['identifier'].nodeValue)
+		server = str(conn.attributes['server'].nodeValue)
+		auth = str(conn.attributes['authString'].nodeValue)
+		supplier = str(conn.attributes['supplier'].nodeValue)
+
+		# Build up the stream URL based on the supplier
 		if supplier == 'limelight':
 			fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
 		elif supplier == 'akamai':
 			fileUrl = "rtmp://"+server+":1935/ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
+
+		# Determine the Bitrate from the Service idenifier
 		if service == 'iplayer_streaming_h264_flv_vlo':
 			bitrate = 400
 		elif service == 'iplayer_streaming_h264_flv_lo':
@@ -448,30 +480,14 @@ class bbcStreamUrl(Screen):
 			bitrate = 800
 		elif service == 'iplayer_streaming_h264_flv_high':
 			bitrate = 1500
-		
-		fileUrlTitle = []
-		fileUrlTitle.append(fileUrl)
-		fileUrlTitle.append(title)
-		returnList = ((_(str(bitrate)+" "+str(supplier)), fileUrlTitle))
-		return returnList 
+		elif service == 'pc_streaming_hd':     # Not yet possible, not sure what fileUrl above would be??
+			bitrate = 3200
 
-#===================================================================================
-	def go(self):
-		returnValue = self["bbcStreamUrl"].l.getCurrentSelection()[1]
-		if returnValue is not None:
-			if returnValue is "exit":
-				self.close(None)
-			else:
-				title = returnValue[1]
-				fileUrl = returnValue[0]
-				
-				fileRef = eServiceReference(4097,0,str(fileUrl))
-				fileRef.setName (title) 
-				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-				self.session.open(MoviePlayer, fileRef, None, lastservice)
-
-	def cancel(self):
-		self.close(None)
+		streamData = []
+		streamData.append(fileUrl)
+		streamData.append(supplier)
+		streamData.append(bitrate)
+		return streamData
 
 #===================================================================================
 def main(session, **kwargs):

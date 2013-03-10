@@ -35,6 +35,7 @@ config.ondemand.ShowITVPlayer = ConfigYesNo(default = True)
 config.ondemand.Show4ODPlayer = ConfigYesNo(default = True)
 config.ondemand.ShowOUGPlayer = ConfigYesNo(default = True)
 config.ondemand.ShowImages = ConfigYesNo(default = True)
+config.ondemand.PreferredQuality = ConfigSelection(default = "800", choices = [("400", _("Very Low")), ("480", _("Low")), ("800", _("Normal")), ("1500", _("High"))])
 		
 def OnDemanMenu(menuid):
 	if menuid == "mainmenu":

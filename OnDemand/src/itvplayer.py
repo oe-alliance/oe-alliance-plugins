@@ -20,7 +20,7 @@
 from . import _
 
 from Components.ActionMap import ActionMap
-from Components.config import config, getConfigListEntry
+from Components.config import config
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap
@@ -88,86 +88,13 @@ class ITVplayer(Screen):
 				os_remove(os_path.join(root, name))
 
 #===================================================================================
-class StreamsMenu(Screen):
-	wsize = getDesktop(0).size().width() - 200
-	hsize = getDesktop(0).size().height() - 300
-
-	skin = """
-		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" >
-			<widget name="latestMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
-		</screen>"""
-
-	def __init__(self, session, action, value, url):
-		Screen.__init__(self, session)
-		Screen.setTitle(self, _("ITV Player: Choose Your Stream Quality for "+str(value)))
-
-		self.action = action
-		self.value = value
-		osdList = []
-
-		# Read the URL for the selected category on the Main Menu.
-		try:
-			# Read the URL to get the stream options
-			html = wgetUrl(url)
-
-			# Only attempt to parse the XML if data has been returned
-			if html:
-				# Parse the XML with LXML
-				parser = etree.XMLParser(encoding='utf-8')
-				tree   = etree.fromstring(html, parser)
-
-				# Get the rtmpe stream URL
-				rtmp_list = tree.xpath("//VideoEntries//MediaFiles/@base")
-				self.rtmp = str(rtmp_list[0])
-
-				# Append each stream quality URL into the menu list
-				for elem in tree.xpath('//VideoEntries//MediaFiles//MediaFile'):
-					bitRate = elem.attrib.get("bitrate")
-					quality = int(bitRate) / 1000
-					osdList.append((_("Play With a Bitrate Quality of "+str(quality)), str(elem[0].text)))
-			else:
-				self.session.open(MessageBox, _("Exception: Problem Retrieving Stream"), MessageBox.TYPE_ERROR, timeout=5)
-
-		except (Exception) as exception:
-			print 'StreamsMenu: Error parsing BitRate feed: ', exception
-
-		osdList.sort()
-		osdList.append((_("Exit"), "exit"))
-
-		self["latestMenu"] = MenuList(osdList)
-		self["myActionMap"] = ActionMap(["SetupActions"],
-		{
-			"ok": self.go,
-			"cancel": self.cancel
-		}, -1) 
-
-	def go(self):
-		returnValue = self["latestMenu"].l.getCurrentSelection()[1]
-		title = self.value
-		if returnValue is not None:
-			if returnValue is "exit":
-				self.close(None)
-			else:
-				returnUrl = self.rtmp + " swfurl=http://www.itv.com/mercury/Mercury_VideoPlayer.swf playpath=" + returnValue + " swfvfy=true"
-				#print returnUrl
-
-				if returnUrl:		
-					fileRef = eServiceReference(4097,0,returnUrl)
-					fileRef.setData(2,10240*1024)
-					fileRef.setName(title)
-					self.session.open(MoviePlayer, fileRef)
-
-	def cancel(self):
-		self.close(None)
-
-#===================================================================================
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
 
-###########################################################################	   
+#===================================================================================
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/itvDefault.png"
@@ -213,7 +140,15 @@ class StreamsThumb(StreamsThumbCommon):
 		if self.cmd == "all_shows" or self.cmd == "search":
 			self.session.open(StreamsThumb, "one_show", showName, showID)
 		else:
-			self.session.open(StreamsMenu, "one_show", showName, showID)
+			fileUrl = self.findPlayUrl(showID)
+
+			if fileUrl:
+				fileRef = eServiceReference(4097,0,fileUrl)
+				fileRef.setData(2,10240*1024)
+				fileRef.setName(showName)
+				self.session.open(MoviePlayer, fileRef)
+			else:
+				self.mediaProblemPopup("Sorry, unable to find playable stream!")
 
 #===================================================================================
 	def getMediaData(self, weekList, url):
@@ -349,56 +284,91 @@ class StreamsThumb(StreamsThumbCommon):
 		except (Exception) as exception:
 			print 'getSearchMediaData: Error getting Media info: ', exception
 
-#========== Retrieve the webpage data ==============================================
-def wgetUrl(episodeID):
-
-	soapMessage = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	  <SOAP-ENV:Body>
-		<tem:GetPlaylist xmlns:tem="http://tempuri.org/" xmlns:itv="http://schemas.datacontract.org/2004/07/Itv.BB.Mercury.Common.Types" xmlns:com="http://schemas.itv.com/2009/05/Common">
-		  <tem:request>
-		<itv:RequestGuid>FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF</itv:RequestGuid>
-		<itv:Vodcrid>
-		  <com:Id>%s</com:Id>
-		  <com:Partition>itv.com</com:Partition>
-		</itv:Vodcrid>
-		  </tem:request>
-		  <tem:userInfo>
-		<itv:GeoLocationToken>
-		  <itv:Token/>
-		</itv:GeoLocationToken>
-		<itv:RevenueScienceValue>scc=true; svisit=1; sc4=Other</itv:RevenueScienceValue>
-		  </tem:userInfo>
-		  <tem:siteInfo>
-		<itv:Area>ITVPLAYER.VIDEO</itv:Area>
-		<itv:Platform>DotCom</itv:Platform>
-		<itv:Site>ItvCom</itv:Site>
-		  </tem:siteInfo>
-		</tem:GetPlaylist>
-	  </SOAP-ENV:Body>
-	</SOAP-ENV:Envelope>
-	"""%episodeID
+#===================================================================================
 	
-	url = 'http://mercury.itv.com/PlaylistService.svc'
-	htmldoc = ""
+	def findPlayUrl(self, url):
 
-	try:
-		req = urllib2.Request(url, soapMessage)
-		req.add_header("Host","mercury.itv.com")
-		req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
-		req.add_header("Content-type","text/xml; charset=\"UTF-8\"")
-		req.add_header("Content-length","%d" % len(soapMessage))
-		req.add_header("SOAPAction","http://tempuri.org/PlaylistService/GetPlaylist")	 
-		response = urllib2.urlopen(req)	  
-		htmldoc = str(response.read())
-		response.close()
-	except urllib2.HTTPError, exception:
-		exResp = str(exception.read())
+		fileUrl = ""
+		rtmp = ""
+		streamUrl = ""
+		bitRate = ""
+		quality = 0
+		currQuality = 0
+		prefQuality = int(config.ondemand.PreferredQuality.value)
 
-		if 'InvalidGeoRegion' in exResp:
-			print "Non UK Address"
-			opener = urllib2.build_opener(MyHTTPHandler)
-			old_opener = urllib2._opener
-			urllib2.install_opener (opener)
+		try:
+			# Read the URL to get the stream options
+			html = self.wgetUrl(url)
+
+			# Only attempt to parse the XML if data has been returned
+			if html:
+				# Parse the XML with LXML
+				parser = etree.XMLParser(encoding='utf-8')
+				tree   = etree.fromstring(html, parser)
+
+				# Get the rtmpe stream URL
+				rtmp_list = tree.xpath("//VideoEntries//MediaFiles/@base")
+				rtmp = str(rtmp_list[0])
+
+				# Append each stream quality URL into the menu list
+				for elem in tree.xpath('//VideoEntries//MediaFiles//MediaFile'):
+					streamUrl = str(elem[0].text)
+					bitRate = elem.attrib.get("bitrate")
+					quality = int(bitRate) / 1000
+					
+					if quality == prefQuality:
+						prefStream = streamUrl
+						fileUrl = rtmp + " swfurl=http://www.itv.com/mercury/Mercury_VideoPlayer.swf playpath=" + prefStream + " swfvfy=true"
+					elif quality > currQuality and quality < prefQuality:
+						currQuality = quality
+						prefStream = streamUrl
+						fileUrl = rtmp + " swfurl=http://www.itv.com/mercury/Mercury_VideoPlayer.swf playpath=" + prefStream + " swfvfy=true"
+			else:
+				return ""
+
+			# If we have found a stream then return it.
+			if fileUrl:
+				return fileUrl
+			else:
+				return ""
+
+		except (Exception) as exception:
+			print 'findPlayUrl: Error getting URLs: ', exception
+			return ""
+
+#========== Retrieve the webpage data ==============================================
+	def wgetUrl(self, episodeID):
+
+		soapMessage = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		  <SOAP-ENV:Body>
+			<tem:GetPlaylist xmlns:tem="http://tempuri.org/" xmlns:itv="http://schemas.datacontract.org/2004/07/Itv.BB.Mercury.Common.Types" xmlns:com="http://schemas.itv.com/2009/05/Common">
+			  <tem:request>
+			<itv:RequestGuid>FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF</itv:RequestGuid>
+			<itv:Vodcrid>
+			  <com:Id>%s</com:Id>
+			  <com:Partition>itv.com</com:Partition>
+			</itv:Vodcrid>
+			  </tem:request>
+			  <tem:userInfo>
+			<itv:GeoLocationToken>
+			  <itv:Token/>
+			</itv:GeoLocationToken>
+			<itv:RevenueScienceValue>scc=true; svisit=1; sc4=Other</itv:RevenueScienceValue>
+			  </tem:userInfo>
+			  <tem:siteInfo>
+			<itv:Area>ITVPLAYER.VIDEO</itv:Area>
+			<itv:Platform>DotCom</itv:Platform>
+			<itv:Site>ItvCom</itv:Site>
+			  </tem:siteInfo>
+			</tem:GetPlaylist>
+		  </SOAP-ENV:Body>
+		</SOAP-ENV:Envelope>
+		"""%episodeID
+
+		url = 'http://mercury.itv.com/PlaylistService.svc'
+		htmldoc = ""
+
+		try:
 			req = urllib2.Request(url, soapMessage)
 			req.add_header("Host","mercury.itv.com")
 			req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
@@ -408,12 +378,29 @@ def wgetUrl(episodeID):
 			response = urllib2.urlopen(req)	  
 			htmldoc = str(response.read())
 			response.close()
-			urllib2.install_opener (old_opener)
-		else:
-			print "HTTPError: Error retrieving stream: ", exResp
+		except urllib2.HTTPError, exception:
+			exResp = str(exception.read())
+
+			if 'InvalidGeoRegion' in exResp:
+				print "Non UK Address"
+				opener = urllib2.build_opener(MyHTTPHandler)
+				old_opener = urllib2._opener
+				urllib2.install_opener (opener)
+				req = urllib2.Request(url, soapMessage)
+				req.add_header("Host","mercury.itv.com")
+				req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
+				req.add_header("Content-type","text/xml; charset=\"UTF-8\"")
+				req.add_header("Content-length","%d" % len(soapMessage))
+				req.add_header("SOAPAction","http://tempuri.org/PlaylistService/GetPlaylist")	 
+				response = urllib2.urlopen(req)	  
+				htmldoc = str(response.read())
+				response.close()
+				urllib2.install_opener (old_opener)
+			else:
+				print "HTTPError: Error retrieving stream: ", exResp
+				return ""
+		except (Exception) as exception2:
+			print "wgetUrl: Error calling urllib2: ", exception2
 			return ""
-	except (Exception) as exception2:
-		print "wgetUrl: Error calling urllib2: ", exception2
-		return ""
 		
-	return htmldoc
+		return htmldoc
