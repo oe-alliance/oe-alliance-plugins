@@ -191,7 +191,6 @@ class EpisodeList(HTMLComponent, GUIComponent):
 				tmp_icon = self.getThumbnailName(x[5])
 				thumbnailFile = self.imagedir + tmp_icon
 				if not os_path.exists(thumbnailFile):
-					print 'Downloading:',x[5]
 					client.downloadPage(x[5], thumbnailFile)
 			
 		self.l.setList(mediaList)
