@@ -239,7 +239,14 @@ class MoviePlayer(MP_parent):
 		MP_parent.__init__(self, session, service, slist, lastservice)
 
 	def leavePlayer(self):
-		self.leavePlayerConfirmed([True,"quit"])
+		self.close()
+
+	def doEofInternal(self, playing):
+		if not self.execing:
+			return
+		if not playing :
+			return
+		self.close()
 
 ###########################################################################	   
 class RTMP:
