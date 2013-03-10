@@ -20,7 +20,7 @@
 # for localized messages
 from . import _
 
-from Components.config import config, ConfigYesNo, ConfigSubsection
+from Components.config import config, ConfigYesNo, ConfigSubsection, ConfigSelection
 from Plugins.Plugin import PluginDescriptor
 from ui import OnDemand_Screen
 
