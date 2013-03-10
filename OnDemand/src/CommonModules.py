@@ -221,7 +221,8 @@ class StreamsThumbCommon(Screen):
 		self.skin = """
 				<screen position="0,0" size="e,e" flags="wfNoBorder" >
 					<widget name="lab1" position="0,0" size="e,e" font="Regular;24" halign="center" valign="center" transparent="0" zPosition="5" />
-					<widget name="list" position="0,0" size="e,e" scrollbarMode="showOnDemand" transparent="1" />
+					<widget source="Title" render="Label" position="20,0" size="e,50" font="Boldit;32" />
+					<widget name="list" position="0,50" size="e,e-50" scrollbarMode="showOnDemand" transparent="1" />
 				</screen>"""
 		self.session = session
 		Screen.__init__(self, session)
