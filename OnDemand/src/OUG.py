@@ -41,7 +41,7 @@ from os import path as os_path, remove as os_remove, mkdir as os_mkdir
 import socket
 from datetime import date, timedelta
 
-from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler
+from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 #=========================================================================================
 def wgetUrl(target):
@@ -184,9 +184,8 @@ class DaysBackScreen(Screen):
 	def keyCancel(self):
 		self.close()
 
-#=========================================================================================
-class OpenUg(Screen):
-
+###########################################################################	   
+class OpenUg(StreamsThumbCommon):
 	UG_PROGDATE = 0
 	UG_PROGNAME = 1
 	UG_SHORT_DESCR = 2
@@ -199,103 +198,24 @@ class OpenUg(Screen):
 	UG_LEVEL_SERIE = 1
 	MAX_PIC_PAGE = 5
 
-	TIMER_CMD_START = 0
-	TIMER_CMD_VKEY = 1
-
 	UG_BASE_URL = "http://hbbtv.distributie.publiekeomroep.nl"
 	HBBTV_UG_BASE_URL = UG_BASE_URL + "/ug/ajax/action/"
 	STAGING_UG_BASE_URL = "http://staging.hbbtv.distributie.publiekeomroep.nl/"
 	RTL_BASE_URL = "http://rtl.ksya.net/"
 
-	def __init__(self, session, cmd):
-		self.skin = """
-				<screen position="80,70" size="e-160,e-110" title="">
-					<widget name="lab1" position="0,0" size="e-0,e-0" font="Regular;24" halign="center" valign="center" transparent="0" zPosition="5" />
-					<widget name="list" position="0,0" size="e-0,e-0" scrollbarMode="showOnDemand" transparent="1" />
-				</screen>"""
-		self.session = session
-		Screen.__init__(self, session)
-
-		self['lab1'] = Label(_('Wait please while gathering data...'))
-
-		self.cbTimer = eTimer()
-		self.cbTimer.callback.append(self.timerCallback)
-
-		self.color = "#33000000"
+	def __init__(self, session, action, value=None, url=None):
+		self.defaultImg = "Extensions/OnDemand/icons/OUG.png"
+		StreamsThumbCommon.__init__(self, session, action, value, url)
 
 		self.isAtotZ = False
 		self.isRtl = False
 		self.isRtlBack = False
 		self.level = self.UG_LEVEL_ALL
-		self.cmd = cmd
-		self.timerCmd = self.TIMER_CMD_START
-
-		self.tmplist = []
-		self.mediaList = []
-
-		self.refreshTimer = eTimer()
-		self.refreshTimer.timeout.get().append(self.refreshData)
-		self.hidemessage = eTimer()
-		self.hidemessage.timeout.get().append(self.hidewaitingtext)
 		
-		self.imagedir = "/tmp/onDemandImg/"
-		self.defaultImg = "Extensions/OnDemand/icons/OUG.png"
-		
-		if (os_path.exists(self.imagedir) != True):
-			os_mkdir(self.imagedir)
-		
-		self['list'] = EpisodeList(self.defaultImg)
-				
-		self.updateMenu()
-		
-		self["actions"] = ActionMap(["WizardActions", "MovieSelectionActions", "DirectionActions"],
-		{
-			"up": self.key_up,
-			"down": self.key_down,
-			"left": self.key_left,
-			"right": self.key_right,
-			"ok": self.go,
-			"back": self.Exit,
-		}
-		, -1)
-		self.onLayoutFinish.append(self.layoutFinished)
-		self.cbTimer.start(10)
-
-#=========================================================================================
 	def layoutFinished(self):
 		self.setTitle("Open Uitzending Gemist")
 
-	def updateMenu(self):
-		self['list'].recalcEntrySize()
-		self['list'].fillEpisodeList(self.mediaList)
-		self.hidemessage.start(10)
-		self.refreshTimer.start(3000)
-	
-	def clearList(self):
-		self['list'].setCurrentIndex(0)
-		self.mediaList = []
-		
-	def hidewaitingtext(self):
-		self.hidemessage.stop()
-		self['lab1'].hide()
-
-	def refreshData(self, force = False):
-		self.refreshTimer.stop()
-		self['list'].fillEpisodeList(self.mediaList)
-
-	def key_up(self):
-		self['list'].moveTo(self['list'].instance.moveUp)
-
-	def key_down(self):
-		self['list'].moveTo(self['list'].instance.moveDown)
-
-	def key_left(self):
-		self['list'].moveTo(self['list'].instance.pageUp)
-
-	def key_right(self):
-		self['list'].moveTo(self['list'].instance.pageDown)
-
-	def Exit(self):
+	def exit(self):
 		doExit = False
 		if self.level == self.UG_LEVEL_ALL:
 			doExit = True
@@ -313,7 +233,6 @@ class OpenUg(Screen):
 		if doExit:
 			self.close()
 
-#=========================================================================================
 	def setupCallback(self, retval = None):
 		if retval == 'cancel' or retval is None:
 			return
@@ -322,7 +241,6 @@ class OpenUg(Screen):
 		self.isRtlBack = False
 
 		if retval == 'recent':
-			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "archive_week/protocol/html")
 			if len(self.mediaList) == 0:
@@ -330,7 +248,6 @@ class OpenUg(Screen):
 			self.updateMenu()
 			
 		elif retval == 'pop':
-			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/popular/protocol/html")
 			if len(self.mediaList) == 0:
@@ -338,7 +255,6 @@ class OpenUg(Screen):
 			self.updateMenu()
 			
 		elif retval == 'atotz':
-			self.clearList()
 			self.isAtotZ = True
 			self.level = self.UG_LEVEL_ALL
 			self.getMediaDataAlph(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/0/protocol/html")
@@ -354,7 +270,6 @@ class OpenUg(Screen):
 			self.cbTimer.start(10)
 			
 		elif retval == 'rtl':
-			self.clearList()
 			self.isRtl = True
 			self.level = self.UG_LEVEL_ALL
 			self.getRTLMediaData(self.mediaList)
@@ -363,7 +278,6 @@ class OpenUg(Screen):
 			else:
 				self.updateMenu()
 		else:
-			self.clearList()
 			self.isRtl = True
 			self.isRtlBack = True
 			self.level = self.UG_LEVEL_SERIE
@@ -373,18 +287,8 @@ class OpenUg(Screen):
 			else:
 				self.updateMenu()
 
-#=========================================================================================
-	def timerCallback(self):
-		self.cbTimer.stop()
-		if self.timerCmd == self.TIMER_CMD_START:
-			self.setupCallback(self.cmd)
-		elif self.timerCmd == self.TIMER_CMD_VKEY:
-			self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title = (_("Search term")), text = "")
-
-#=========================================================================================
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
-			self.clearList()
 			self.isRtl = False
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/search/protocol/html/searchString/" + callback)
@@ -394,11 +298,6 @@ class OpenUg(Screen):
 		else:
 			self.close()
 
-#=========================================================================================
-	def mediaProblemPopup(self):
-		self.session.openWithCallback(self.close, MessageBox, _("There was a problem retrieving the media list"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
-
-#=========================================================================================
 	def go(self):
 		currSel = self["list"].l.getCurrentSelection()
 		selIndex = self.mediaList.index(currSel)
@@ -410,7 +309,6 @@ class OpenUg(Screen):
 			print "go: isRtl: ", self.isRtl
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[selIndex][self.UG_STREAMURL]
-				self.clearList()
 				self.getRTLSerie(self.mediaList, tmp)
 				self.level = self.UG_LEVEL_SERIE
 				self.updateMenu()
@@ -430,7 +328,6 @@ class OpenUg(Screen):
 			if self.level == self.UG_LEVEL_ALL:
 				if self.mediaList[selIndex][self.UG_SERIE]:
 					tmp = self.mediaList[selIndex][self.UG_STREAMURL]
-					self.clearList()
 					self.isRtl = False
 					self.level = self.UG_LEVEL_SERIE
 					self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/a2z-serie/a2zSerieId/" + tmp)

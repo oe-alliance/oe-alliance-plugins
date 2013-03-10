@@ -38,7 +38,7 @@ import urllib2, re
 from lxml import etree
 from lxml import html
 
-from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler
+from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 ########### Retrieve the webpage data ####################################
 
@@ -232,107 +232,20 @@ def main(session, **kwargs):
 
 ###########################################################################
 
-class StreamsThumb(Screen):
-
-	TIMER_CMD_START = 0
-	TIMER_CMD_VKEY = 1
-
-
-
+###########################################################################	   
+class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
-		self.skin = """
-				<screen position="80,70" size="e-160,e-110" title="">
-					<widget name="lab1" position="0,0" size="e-0,e-0" font="Regular;24" halign="center" valign="center" transparent="0" zPosition="5" />
-					<widget name="list" position="0,0" size="e-0,e-0" scrollbarMode="showOnDemand" transparent="1" />
-				</screen>"""
-		self.session = session
-		Screen.__init__(self, session)
-
-		self['lab1'] = Label(_('Wait please while gathering data...'))
-
-		self.cbTimer = eTimer()
-		self.cbTimer.callback.append(self.timerCallback)
-
-		self.color = "#33000000"
-
-		self.cmd = action
-		self.url = url
-		self.title = value
-		self.timerCmd = self.TIMER_CMD_START
-
-		self.tmplist = []
-		self.mediaList = []
-
-		self.refreshTimer = eTimer()
-		self.refreshTimer.timeout.get().append(self.refreshData)
-		self.hidemessage = eTimer()
-		self.hidemessage.timeout.get().append(self.hidewaitingtext)
-		
-		self.imagedir = "/tmp/onDemandImg/"
 		self.defaultImg = "Extensions/OnDemand/icons/rteDefault.png"
-		
-		if (os_path.exists(self.imagedir) != True):
-			os_mkdir(self.imagedir)
-
-		self['list'] = EpisodeList(self.defaultImg)
-		
-		self.updateMenu()
-		
-		self["actions"] = ActionMap(["WizardActions", "MovieSelectionActions", "DirectionActions"],
-		{
-			"up": self.key_up,
-			"down": self.key_down,
-			"left": self.key_left,
-			"right": self.key_right,
-			"ok": self.go,
-			"back": self.Exit,
-		}, -1)
-		self.onLayoutFinish.append(self.layoutFinished)
-		self.cbTimer.start(10)
-
-##############################################################
+		StreamsThumbCommon.__init__(self, session, action, value, url)
 
 	def layoutFinished(self):
 		self.setTitle("RTE Player: Listings for " +self.title)
-
-##############################################################
-
-	def updateMenu(self):
-		self['list'].recalcEntrySize()
-		self['list'].fillEpisodeList(self.mediaList)
-		self.hidemessage.start(10)
-		self.refreshTimer.start(3000)
-
-	def hidewaitingtext(self):
-		self.hidemessage.stop()
-		self['lab1'].hide()
-
-	def refreshData(self, force = False):
-		self.refreshTimer.stop()
-		self['list'].fillEpisodeList(self.mediaList)
-
-	def key_up(self):
-		self['list'].moveTo(self['list'].instance.moveUp)
-
-	def key_down(self):
-		self['list'].moveTo(self['list'].instance.moveDown)
-
-	def key_left(self):
-		self['list'].moveTo(self['list'].instance.pageUp)
-
-	def key_right(self):
-		self['list'].moveTo(self['list'].instance.pageDown)
-		
-	def Exit(self):
-		self.close()
-
-##############################################################
 
 	def setupCallback(self, retval = None):
 		if retval == 'cancel' or retval is None:
 			return
 
-		if retval == 'latest' or retval == 'pop' or retval == 'by_date':
+		elif retval == 'latest' or retval == 'pop' or retval == 'by_date':
 			self.getMediaData(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
@@ -354,17 +267,6 @@ class StreamsThumb(Screen):
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)			
 
-##############################################################
-
-	def timerCallback(self):
-		self.cbTimer.stop()
-		if self.timerCmd == self.TIMER_CMD_START:
-			self.setupCallback(self.cmd)
-		elif self.timerCmd == self.TIMER_CMD_VKEY:
-			self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title = (_("Search term")), text = "")
-
-##############################################################
-
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
 			self.setTitle("RTE Player: Search Listings for " +callback)
@@ -374,13 +276,6 @@ class StreamsThumb(Screen):
 				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
 		else:
 			self.close()
-
-##############################################################
-
-	def mediaProblemPopup(self, error):
-		self.session.openWithCallback(self.close, MessageBox, _(error), MessageBox.TYPE_ERROR, timeout=5, simple = True)
-
-##############################################################
 
 	def go(self):
 		showID = self["list"].l.getCurrentSelection()[4]

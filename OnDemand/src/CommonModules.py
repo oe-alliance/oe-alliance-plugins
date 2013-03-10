@@ -18,9 +18,14 @@
 
 # for localized messages
 from . import _
+
+from Components.ActionMap import ActionMap
+from Components.Label import Label
 from Components.GUIComponent import GUIComponent
 from Components.HTMLComponent import HTMLComponent
+from Screens.Screen import Screen
 from Screens.InfoBar import MoviePlayer as MP_parent
+from Screens.MessageBox import MessageBox
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_ACTIVE_SKIN
 from enigma import eSize, ePicLoad, eTimer, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM, RT_WRAP
 from twisted.web import client
@@ -164,18 +169,6 @@ class EpisodeList(HTMLComponent, GUIComponent):
 				pngthumb = self.picload.getData()
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
 			else:
-				# def fetchFinished(tmp_icon, failed = False):
-				# 	if failed:
-				# 		return
-				# 	self.picload.startDecode(thumbnailFile, 0, 0, False)
-				# 	pngthumb = self.picload.getData()
-				# 	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
-				# 
-				# def fetchFailed(string, picture_id):
-				# 	print "fetchFailed: Calling fetchFinished: ", picture_id
-				# 	fetchFinished(picture_id, failed = True)
-
-				# client.downloadPage(icon, thumbnailFile).addCallback(fetchFinished, tmp_icon).addErrback(fetchFailed, tmp_icon)
 				self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/empty.png"), 0, 0, False)
 				pngthumb = self.picload.getData()
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
@@ -220,7 +213,97 @@ class EpisodeList(HTMLComponent, GUIComponent):
 			return ''
 
 ###########################################################################
+class StreamsThumbCommon(Screen):
 
+	TIMER_CMD_START = 0
+	TIMER_CMD_VKEY = 1
+
+	def __init__(self, session, action, value, url):
+		self.skin = """
+				<screen position="0,0" size="e,e" flags="wfNoBorder" >
+					<widget name="lab1" position="0,0" size="e,e" font="Regular;24" halign="center" valign="center" transparent="0" zPosition="5" />
+					<widget name="list" position="0,0" size="e,e" scrollbarMode="showOnDemand" transparent="1" />
+				</screen>"""
+		self.session = session
+		Screen.__init__(self, session)
+
+		self['lab1'] = Label(_('Wait please while gathering data...'))
+
+		self.cbTimer = eTimer()
+		self.cbTimer.callback.append(self.timerCallback)
+
+		self.cmd = action
+		self.url = url
+		self.title = value
+		self.timerCmd = self.TIMER_CMD_START
+
+		self.tmplist = []
+		self.mediaList = []
+
+		self.refreshTimer = eTimer()
+		self.refreshTimer.timeout.get().append(self.refreshData)
+		self.hidemessage = eTimer()
+		self.hidemessage.timeout.get().append(self.hidewaitingtext)
+
+		self.imagedir = "/tmp/onDemandImg/"
+		if (os_path.exists(self.imagedir) != True):
+			os_mkdir(self.imagedir)
+
+		self['list'] = EpisodeList(self.defaultImg)
+		self.updateMenu()
+
+		self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
+		{
+			"up": self.key_up,
+			"down": self.key_down,
+			"left": self.key_left,
+			"right": self.key_right,
+			"ok": self.go,
+			"cancel": self.exit,
+		}, -1)
+		self.onLayoutFinish.append(self.layoutFinished)
+		self.cbTimer.start(10)
+
+	def updateMenu(self):
+		self['list'].recalcEntrySize()
+		self['list'].fillEpisodeList(self.mediaList)
+		self.hidemessage.start(12)
+		self.refreshTimer.start(4000)
+
+	def hidewaitingtext(self):
+		self.hidemessage.stop()
+		self['lab1'].hide()
+
+	def refreshData(self, force = False):
+		self.refreshTimer.stop()
+		self['list'].fillEpisodeList(self.mediaList)
+
+	def key_up(self):
+		self['list'].moveTo(self['list'].instance.moveUp)
+
+	def key_down(self):
+		self['list'].moveTo(self['list'].instance.moveDown)
+
+	def key_left(self):
+		self['list'].moveTo(self['list'].instance.pageUp)
+
+	def key_right(self):
+		self['list'].moveTo(self['list'].instance.pageDown)
+
+	def exit(self):
+		self.close()
+
+	def timerCallback(self):
+		self.cbTimer.stop()
+		if self.timerCmd == self.TIMER_CMD_START:
+			self.setupCallback(self.cmd)
+		elif self.timerCmd == self.TIMER_CMD_VKEY:
+			self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title = (_("Search term")), text = "")
+
+	def mediaProblemPopup(self, error):
+		self.session.openWithCallback(self.close, MessageBox, _(error), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+
+###########################################################################
 class MyHTTPConnection(HTTPConnection):
 	def connect (self):
 		resolver = Resolver()
