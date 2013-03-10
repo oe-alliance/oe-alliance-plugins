@@ -26,7 +26,6 @@ from Components.MenuList import MenuList
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
-from Screens.VirtualKeyBoard import VirtualKeyBoard
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as os_walk
 
 import time, random

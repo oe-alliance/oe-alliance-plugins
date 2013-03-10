@@ -20,12 +20,12 @@
 from . import _
 
 from Components.ActionMap import ActionMap
+from Components.config import config, getConfigListEntry
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 from enigma import eServiceReference, eTimer, getDesktop
 from lxml import etree

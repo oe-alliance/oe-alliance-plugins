@@ -30,7 +30,6 @@ from Components.Sources.StaticText import StaticText
 from enigma import eServiceReference, eTimer, iPlayableService, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_WRAP, RT_VALIGN_TOP, ePicLoad
 from ServiceReference import ServiceReference
 from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarSeek
-from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.MessageBox import MessageBox
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
