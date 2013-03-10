@@ -143,21 +143,23 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		width = esize.width()
 		height = esize.height()
 		self.image_rect = Rect(0, 0, 178, height)
-		self.name_rect = Rect(15, 0, width-178-35, 35)
-		self.descr_rect = Rect(15, 0, width-178-35, height-35)
+		self.name_rect = Rect(15, 0, width-178-35, 30)
+		self.descr_rect = Rect(15, 0, width-178-35, height-30-25)
+		self.date_rect = Rect(15, 0, width-178-35, 25)
 
 	def buildEntry(self, date, name, short, channel, show, icon, duration, test):
 		r1 = self.image_rect
 		r2 = self.name_rect
 		r3 = self.descr_rect
+		r4 = self.date_rect
 
 		res = [ None ]
 		
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.x+r1.w, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, name))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x+r1.w, r3.y+r2.h, r3.w, r3.h, 2, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, short))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x+r1.w, r3.y+r2.h, r3.w, r3.h, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, date))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x+r1.w, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, date))
 		if duration:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x+r1.w, r3.y+r2.h, r3.w, r3.h, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, duration))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x+r1.w, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, duration))
 
 		self.picload.setPara((r1.w, r1.h, 0, 0, 1, 1, "#00000000"))
 		self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/empty.png"), 0, 0, False)
