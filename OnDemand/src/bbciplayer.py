@@ -349,10 +349,12 @@ class StreamsThumb(StreamsThumbCommon):
 		fileUrl = ""
 		quality = 0
 		akamaiFileUrl = ""
+		akamaiFound = False
 		limelightFileUrl = ""
+		limelightFound = False
 		currQuality = 0
 		prefQuality = int(config.ondemand.PreferredQuality.value)
-		
+
 		try:
 			# Read the URL to get the stream options
 			html = wgetUrl(url1)
@@ -386,73 +388,83 @@ class StreamsThumb(StreamsThumbCommon):
 			# Loop for each streaming option available
 			for list in media:
 				service = media[i].attributes['service'].nodeValue
+				print "findPlayUrl: service: ", service
 				
-				# If quality is Very-Low, Low, Normal or High proceed
+				# If quality is Very-Low, Low, Normal, High or HD proceed
 				if service == 'iplayer_streaming_h264_flv_vlo' or \
 					service == 'iplayer_streaming_h264_flv_lo' or \
 					service == 'iplayer_streaming_h264_flv' or \
-					service == 'iplayer_streaming_h264_flv_high':
+					service == 'iplayer_streaming_h264_flv_high' or \
+					service == 'pc_streaming_hd':
 
 					# Get stream data for first Media element
 					conn  = media[i].getElementsByTagName( "connection" )[0]
 					returnedList = self.getHosts(conn, service)
-					
+
 					fileUrl = str(returnedList[0])
 					supplier = str(returnedList[1])
 					quality = int(returnedList[2])
 
-					# Try and match the stream quality to the preferred config stream quality
-					if quality == prefQuality:
-						currQuality = quality
-						if supplier == 'akamai':
-							akamaiFileUrl = fileUrl
-						else:
-							limelightFileUrl = fileUrl
-							break
+					if fileUrl:
+						# Try and match the stream quality to the preferred config stream quality
+						if quality == prefQuality:
+							currQuality = quality
+							if supplier == 'akamai':
+								akamaiFileUrl = fileUrl
+								akamaiFound = True
+							else:
+								limelightFileUrl = fileUrl
+								limelightFound = True
 
-					elif quality > currQuality and quality < prefQuality:
-						currQuality = quality
-						if supplier == 'akamai':
-							akamaiFileUrl = fileUrl
-						else:
-							limelightFileUrl = fileUrl
-					
+						elif quality > currQuality and quality < prefQuality:
+							currQuality = quality
+							if supplier == 'akamai':
+								akamaiFileUrl = fileUrl
+							else:
+								limelightFileUrl = fileUrl
+
 					# Repeat for the second Media element
 					conn  = media[i].getElementsByTagName( "connection" )[1]
 					returnedList = self.getHosts(conn, service)
-					
+
 					fileUrl = str(returnedList[0])
 					supplier = str(returnedList[1])
 					quality = int(returnedList[2])
 
-					# Try and match the stream quality to the preferred config stream quality			
-					if quality == prefQuality:
-						currQuality = quality
-						if supplier == 'akamai':
-							akamaiFileUrl = fileUrl
-						else:
-							limelightFileUrl = fileUrl
-							break
+					if fileUrl:
+						# Try and match the stream quality to the preferred config stream quality			
+						if quality == prefQuality:
+							currQuality = quality
+							if supplier == 'akamai':
+								akamaiFileUrl = fileUrl
+								akamaiFound = True
+							else:
+								limelightFileUrl = fileUrl
+								limelightFound = True
 
-					elif quality > currQuality and quality < prefQuality:
-						currQuality = quality
-						if supplier == 'akamai':
-							akamaiFileUrl = fileUrl
-						else:
-							limelightFileUrl = fileUrl
-							
+						elif quality > currQuality and quality < prefQuality:
+							currQuality = quality
+							if supplier == 'akamai':
+								akamaiFileUrl = fileUrl
+							else:
+								limelightFileUrl = fileUrl
+
 				i=i+1
 
-			# If we have a Limelight URL then return as this can be played by everyone		
-			if limelightFileUrl:
-				return limelightFileUrl
+			# If HD Quality is requested & Found and UK user pass back Akamai URL
+			if prefQuality == 3200 and akamaiFound and notUK == 0:
+				return akamaiFileUrl
 			else:
-				# Only return the Akamai url for UK users
-				if akamaiFileUrl and notUK == 0:
-					return akamaiFileUrl
+				# If we have a Limelight URL then return as this can be played by everyone
+				if limelightFileUrl:
+					return limelightFileUrl
 				else:
-					print "findPlayUrl: Non-UK and no limelight, return blank: "
-					return ""
+					# Only return the Akamai url for UK users
+					if akamaiFileUrl and notUK == 0:
+						return akamaiFileUrl
+					else:
+						print "findPlayUrl: Non-UK and no limelight, return blank: "
+						return ""
 
 		except (Exception) as exception:
 			print 'findPlayUrl: Error getting URLs: ', exception
@@ -471,6 +483,8 @@ class StreamsThumb(StreamsThumbCommon):
 			fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
 		elif supplier == 'akamai':
 			fileUrl = "rtmp://"+server+":1935/ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
+		else:
+			fileUrl = ""
 
 		# Determine the Bitrate from the Service idenifier
 		if service == 'iplayer_streaming_h264_flv_vlo':
@@ -481,7 +495,7 @@ class StreamsThumb(StreamsThumbCommon):
 			bitrate = 800
 		elif service == 'iplayer_streaming_h264_flv_high':
 			bitrate = 1500
-		elif service == 'pc_streaming_hd':     # Not yet possible, not sure what fileUrl above would be??
+		elif service == 'pc_streaming_hd':
 			bitrate = 3200
 
 		streamData = []
