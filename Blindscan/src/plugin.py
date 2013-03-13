@@ -23,9 +23,18 @@ from Tools.Directories import resolveFilename
 
 from enigma import eTimer, eDVBFrontendParametersSatellite, eComponentScan, eDVBSatelliteEquipmentControl, eDVBFrontendParametersTerrestrial, eDVBFrontendParametersCable, eConsoleAppContainer, eDVBResourceManager, getBoxType
 
+try:
+	from enigma import getImageVersionString, getBuildVersionString
+	versionstring = getImageVersionString()
+	buildstring = getBuildVersionString()
+except:
+	from Components.About import about
+	versionstring = about.getImageVersionString()
+	buildstring = about.getBuildVersionString()
+
 #used for the XML file
 from time import strftime, time
-from Components.About import about
+
 XML_BLINDSCAN_DIR = "/tmp"
 
 class Blindscan(ConfigListScreen, Screen):
@@ -808,8 +817,8 @@ class Blindscan(ConfigListScreen, Screen):
 		xml = ['<?xml version="1.0" encoding="iso-8859-1"?>\n\n']
 		xml.append('<!--\n')
 		xml.append('	File created on %s\n' % (strftime("%A, %d of %B %Y, %H:%M:%S")))
-		xml.append('	using %s receiver running Enigma2 image, version %s,\n' % (getBoxType(), about.getImageVersionString()))
-		xml.append('	build %s, with the blindscan plugin updated by Huevos\n\n' % (about.getBuildVersionString()))
+		xml.append('	using %s receiver running Enigma2 image, version %s,\n' % (getBoxType(), versionstring))
+		xml.append('	build %s, with the blindscan plugin updated by Huevos\n\n' % (buildstring))
 		xml.append('	Search parameters:\n')
 		xml.append('		Tuner: %s\n' % (tuner[self.feid]))
 		xml.append('		Satellite: %s\n' % (self.sat_name))
