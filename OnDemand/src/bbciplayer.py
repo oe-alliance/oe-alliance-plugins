@@ -388,7 +388,6 @@ class StreamsThumb(StreamsThumbCommon):
 			# Loop for each streaming option available
 			for list in media:
 				service = media[i].attributes['service'].nodeValue
-				print "findPlayUrl: service: ", service
 				
 				# If quality is Very-Low, Low, Normal, High or HD proceed
 				if service == 'iplayer_streaming_h264_flv_vlo' or \
@@ -451,20 +450,25 @@ class StreamsThumb(StreamsThumbCommon):
 
 				i=i+1
 
-			# If HD Quality is requested & Found and UK user pass back Akamai URL
-			if prefQuality == 3200 and akamaiFound and notUK == 0:
-				return akamaiFileUrl
+
+			# If we have found our required Stream andit's limelight return the URL.
+			if limelightFound:
+				return limelightFileUrl
 			else:
-				# If we have a Limelight URL then return as this can be played by everyone
-				if limelightFileUrl:
-					return limelightFileUrl
+				# If UK User and HD Quality Required & Found return the URL.
+				if prefQuality == 3200 and akamaiFound and notUK == 0:
+					return akamaiFileUrl
 				else:
-					# Only return the Akamai url for UK users
-					if akamaiFileUrl and notUK == 0:
-						return akamaiFileUrl
+					# If we have any Limelight URL saved then return it.
+					if limelightFileUrl:
+						return limelightFileUrl
 					else:
-						print "findPlayUrl: Non-UK and no limelight, return blank: "
-						return ""
+						# We have no Limelight URL so only return Akamai if UK user.
+						if akamaiFileUrl and notUK == 0:
+							return akamaiFileUrl
+						else:
+							print "findPlayUrl: Non-UK and no limelight, return blank: "
+							return ""
 
 		except (Exception) as exception:
 			print 'findPlayUrl: Error getting URLs: ', exception
@@ -479,10 +483,12 @@ class StreamsThumb(StreamsThumbCommon):
 		supplier = str(conn.attributes['supplier'].nodeValue)
 
 		# Build up the stream URL based on the supplier
-		if supplier == 'limelight':
+		if supplier == 'limelight':    # SD streams that can be played by all users.
 			fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
-		elif supplier == 'akamai':
+		elif supplier == 'akamai':     # SD & HD streams that only UK users can play.
 			fileUrl = "rtmp://"+server+":1935/ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
+		elif supplier == 'level3':     # HD Streams that can be played by all users.
+			fileUrl = "rtmp://"+server+":1935/iplayertok?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
 		else:
 			fileUrl = ""
 
