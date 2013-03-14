@@ -39,7 +39,7 @@ SUBDIRS += FPGAUpgrade VuRemote TransCodingSetup Blindscan
 endif
 
 if GIGABLUE
-SUBDIRS += GigaBlueVFDControl
+SUBDIRS += GigaBlueVFDControl Blindscan
 endif
 
 if XP1000
