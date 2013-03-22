@@ -528,7 +528,6 @@ class StreamsThumb(StreamsThumbCommon):
 
 				for entry in jsonData:
 
-					streamz = str(entry['x'])
 					try:
 						stream = str(entry['a'])
 					except (Exception) as exception:
