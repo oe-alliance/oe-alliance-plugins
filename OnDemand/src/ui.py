@@ -222,6 +222,7 @@ class OnDemand_About(Screen):
 		credit += "- subixonfire (used his version as a base for ITV)\n"
 		credit += "- mossy (used his version as a base for 4OD)\n"
 		credit += "- OpenUitzendingGemist team (used this as a design base)\n"
+		credit += "- Andy Botting (used his version as a base for ABC iView)\n"
 		credit += "- And every one else involved along the way as there are way to many to name!\n"
 		self["about"].setText(credit)
 		self.onFirstExecBegin.append(self.setImages)
