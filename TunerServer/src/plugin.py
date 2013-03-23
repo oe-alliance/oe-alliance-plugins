@@ -26,19 +26,6 @@ from enigma import eServiceCenter, eServiceReference, eTimer
 from shutil import rmtree, move, copy
 import os
 
-def getDistro():
-	try:
-		file = open('/etc/image-version', 'r')
-		lines = file.readlines()
-		file.close()
-		for x in lines:
-			splitted = x.split('=')
-			if splitted[0] == "comment":
-				result =  splitted[1].replace('\n','')
-	except:
-		result = None
-	return result
-
 class TunerServer(Screen):
 	skin = """
 	<screen position="center,center" size="800,505" >
@@ -192,7 +179,13 @@ def main(session, **kwargs):
 	session.open(TunerServer)
 
 def Plugins(**kwargs):
-	if getDistro() == "ViX":
+	try:
+		from enimga2 import getDistro
+		distro = getDistro()
+	except:
+		distro = None
+	
+	if distro == "openvix":
 		return PluginDescriptor(name=_("Tuner Server setup"), description=_("Allow Streaming From Box Tuners"), where = PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=settings)
 	else:
 		return PluginDescriptor(name=_("Tuner Server"), description=_("Allow Streaming From Box Tuners"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main)

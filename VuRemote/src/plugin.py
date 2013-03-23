@@ -11,19 +11,14 @@ from Tools.Directories import fileExists
 from enigma import eTimer
 
 try:
-	file = open('/etc/image-version', 'r')
-	lines = file.readlines()
-	file.close()
-	for x in lines:
-		splitted = x.split('=')
-		if splitted[0] == "comment":
-			distro = splitted[1].replace('\n','')
+	from enigma import getDistro
+	distro = getDistro()
 except:
 	distro=""
-if distro == "ViX":
-	config.misc.remotecontrol_text_support = ConfigYesNo(default = False)
 
-if  distro == "AAF":
+if distro == "openvix":
+	config.misc.remotecontrol_text_support = ConfigYesNo(default = False)
+elif  distro == "openaaf":
 	config.misc.remotecontrol_text_support = ConfigYesNo(default = True)	
 
 config.plugins.remotecontrolcode = ConfigSubsection()
@@ -106,7 +101,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		self.list = []
 		self.rcsctype = getConfigListEntry(_("Remote Control System Code"), config.plugins.remotecontrolcode.systemcode)
 		self.list.append( self.rcsctype )
-		if distro == "ViX" or distro == "AAF":
+		if distro == "openvix" or distro == "openaaf":
 			self.list.append(getConfigListEntry(_("Text support"), config.misc.remotecontrol_text_support))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
