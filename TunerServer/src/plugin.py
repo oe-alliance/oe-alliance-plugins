@@ -180,7 +180,7 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	try:
-		from enimga2 import getDistro
+		from enigma import getDistro
 		distro = getDistro()
 	except:
 		distro = None
