@@ -41,6 +41,9 @@ from lxml import html
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
+__plugin__  = "BBC iPlayer: "
+__version__ = "Version 1.0.1: "
+
 #===================================================================================
 
 def wgetUrl(target):
@@ -50,9 +53,10 @@ def wgetUrl(target):
 		response = urllib2.urlopen(req)
 		outtxt = str(response.read())
 		response.close()
-	except (URLError, HTTPException, socket.error):
-		return ''
-	return outtxt
+		return outtxt
+	except (Exception) as exception:
+		print __plugin__, __version__,"wgetUrl: Error reading URL: ", exception
+		return ""
 
 #===================================================================================
 def checkUnicode(value, **kwargs):
@@ -73,7 +77,7 @@ class BBCiMenu(Screen):
 			
 	def __init__(self, session, action, value):
 		
-		self.imagedir = "/tmp/openBbcImg/"
+		self.imagedir = "/tmp/onDemandImg/"
 		self.session = session
 		self.action = action
 		self.value = value
@@ -198,7 +202,7 @@ class BBCiMenu(Screen):
 			for name in files:
 				os_remove(os_path.join(root, name))		
 
-###########################################################################	   
+#===================================================================================
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/bbciplayer.png"
@@ -217,7 +221,7 @@ class StreamsThumb(StreamsThumbCommon):
 		else:
 			self.getMediaData(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
-				self.mediaProblemPopup("No Episodes Found!")
+				self.mediaProblemPopup("No Episodes Found for "+self.title)
 			self.updateMenu()
 
 	def keyboardCallback(self, callback = None):
@@ -226,22 +230,36 @@ class StreamsThumb(StreamsThumbCommon):
 			self.getMediaData(self.mediaList, self.url + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+				self.session.openWithCallback(self.close, MessageBox, _("No matching search items were found for "+callback), MessageBox.TYPE_INFO, timeout=5, simple = True)
 		else:
 			self.close()
 
 	def go(self):
 		showID = self["list"].l.getCurrentSelection()[4]
 		showName = self["list"].l.getCurrentSelection()[1]
-		fileUrl = self.findPlayUrl(showID)
+		
+		retMessage = ""
+		(fileUrl, retMessage) = self.findPlayUrl(showID)
 
+		# Only attempt to play the programme if a stream URL is returned.
 		if fileUrl:
-			fileRef = eServiceReference(4097,0,fileUrl)
-			fileRef.setData(2,10240*1024)
-			fileRef.setName(showName)
-			self.session.open(MoviePlayer, fileRef)
+			# If a warning message is returned then display this before playing the programme
+			if retMessage:
+				self.session.openWithCallback(self.play(fileUrl,showName), MessageBox, _(retMessage+str(showName)), timeout=5, type = MessageBox.TYPE_INFO)
+			else:
+				self.play(fileUrl,showName)
 		else:
-			self.mediaProblemPopup("Sorry, unable to find playable stream!")
+			# If not stream URL is returned and a warning message is returned then display it.
+			if retMessage:
+				self.mediaProblemPopup(retMessage+str(showName))
+			else:
+				self.mediaProblemPopup("Sorry, unable to find a playable stream for "+str(showName))
+
+	def play(self, fileUrl, showName):
+		fileRef = eServiceReference(4097,0,fileUrl)
+		fileRef.setData(2,10240*1024)
+		fileRef.setName(showName)
+		self.session.open(MoviePlayer, fileRef)
 
 #===================================================================================
 	def getMediaData(self, weekList, url):
@@ -282,7 +300,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print 'getMediaData: Error getting Media info: ', exception
+			print __plugin__, __version__,"getMediaData: Error getting Media info: ", exception
 
 #===================================================================================
 	def getSearchMediaData(self, weekList, url):
@@ -326,7 +344,7 @@ class StreamsThumb(StreamsThumbCommon):
 					date1 = _("Added:")+" "+str(date_tmp)
 				except (Exception) as exception:
 					date1=select('updated').text_content()
-					print "getMediaData: date1 parse error: ", exception
+					print __plugin__, __version__,"getMediaData: date1 parse error: ", exception
 				
 				short_tmp=str(select('content').text_content().strip())
 
@@ -336,7 +354,7 @@ class StreamsThumb(StreamsThumbCommon):
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print 'getMediaData: Error getting Media info: ', exception
+			print __plugin__, __version__,"getMediaData: Error getting Media info: ", exception
 
 #===================================================================================
 	
@@ -349,8 +367,10 @@ class StreamsThumb(StreamsThumbCommon):
 		fileUrl = ""
 		quality = 0
 		akamaiFileUrl = ""
+		otherAkamaiUrl = ""
 		akamaiFound = False
 		limelightFileUrl = ""
+		otherLimelightUrl = ""
 		limelightFound = False
 		currQuality = 0
 		prefQuality = int(config.ondemand.PreferredQuality.value)
@@ -368,7 +388,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 			if html1.find('notukerror') > 0:
 				notUK = 1
-				print "Non UK Address"
+				print __plugin__, __version__,"Non UK Address: Using TUNLR!!"
 				opener = urllib2.build_opener(MyHTTPHandler)
 				old_opener = urllib2._opener
 				urllib2.install_opener (opener)
@@ -400,9 +420,10 @@ class StreamsThumb(StreamsThumbCommon):
 					conn  = media[i].getElementsByTagName( "connection" )[0]
 					returnedList = self.getHosts(conn, service)
 
-					fileUrl = str(returnedList[0])
-					supplier = str(returnedList[1])
-					quality = int(returnedList[2])
+					if returnedList:
+						fileUrl = str(returnedList[0])
+						supplier = str(returnedList[1])
+						quality = int(returnedList[2])
 
 					if fileUrl:
 						# Try and match the stream quality to the preferred config stream quality
@@ -421,14 +442,20 @@ class StreamsThumb(StreamsThumbCommon):
 								akamaiFileUrl = fileUrl
 							else:
 								limelightFileUrl = fileUrl
+						else:
+							if supplier == 'akamai':
+								otherAkamaiUrl = fileUrl
+							else:
+								otherLimelightUrl = fileUrl
 
 					# Repeat for the second Media element
 					conn  = media[i].getElementsByTagName( "connection" )[1]
 					returnedList = self.getHosts(conn, service)
 
-					fileUrl = str(returnedList[0])
-					supplier = str(returnedList[1])
-					quality = int(returnedList[2])
+					if returnedList:
+						fileUrl = str(returnedList[0])
+						supplier = str(returnedList[1])
+						quality = int(returnedList[2])
 
 					if fileUrl:
 						# Try and match the stream quality to the preferred config stream quality			
@@ -447,68 +474,85 @@ class StreamsThumb(StreamsThumbCommon):
 								akamaiFileUrl = fileUrl
 							else:
 								limelightFileUrl = fileUrl
+						else:
+							if supplier == 'akamai':
+								otherAkamaiUrl = fileUrl
+							else:
+								otherLimelightUrl = fileUrl
 
 				i=i+1
 
 
-			# If we have found our required Stream andit's limelight return the URL.
+			# If we have found our required Stream Quality and it's limelight return the URL.
 			if limelightFound:
-				return limelightFileUrl
+				return (limelightFileUrl, "")
 			else:
 				# If UK User and HD Quality Required & Found return the URL.
 				if prefQuality == 3200 and akamaiFound and notUK == 0:
-					return akamaiFileUrl
+					return (akamaiFileUrl, "")
 				else:
 					# If we have any Limelight URL saved then return it.
 					if limelightFileUrl:
-						return limelightFileUrl
+						return (limelightFileUrl, "")
 					else:
 						# We have no Limelight URL so only return Akamai if UK user.
 						if akamaiFileUrl and notUK == 0:
-							return akamaiFileUrl
+							return (akamaiFileUrl, "")
 						else:
-							print "findPlayUrl: Non-UK and no limelight, return blank: "
-							return ""
+							# If we haven't found a matching stream quality or lower return whatever found
+							if otherLimelightUrl:
+								print __plugin__, __version__,"findPlayUrl: Unable to find Preferred Stream quality, playing only available stream!!"
+								return (otherLimelightUrl, "Unable to find Preferred Stream quality, playing only available stream for ")
+							elif otherAkamaiUrl and notUK == 0:
+								return (otherAkamaiUrl, "")
+							else:
+								print __plugin__, __version__,"findPlayUrl: Non-UK and no limelight, return blank: "
+								return ("", "Non-UK and no limelight, No playable stream for ")
 
 		except (Exception) as exception:
-			print 'findPlayUrl: Error getting URLs: ', exception
+			print __plugin__, __version__,"findPlayUrl: Error getting URLs: ", exception
 			return ""
 		
 #===================================================================================
 	def getHosts(self, conn, service):
 
-		identifier  = str(conn.attributes['identifier'].nodeValue)
-		server = str(conn.attributes['server'].nodeValue)
-		auth = str(conn.attributes['authString'].nodeValue)
-		supplier = str(conn.attributes['supplier'].nodeValue)
+		try:
+			identifier  = str(conn.attributes['identifier'].nodeValue)
+			server = str(conn.attributes['server'].nodeValue)
+			auth = str(conn.attributes['authString'].nodeValue)
+			supplier = str(conn.attributes['supplier'].nodeValue)
 
-		# Build up the stream URL based on the supplier
-		if supplier == 'limelight':    # SD streams that can be played by all users.
-			fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
-		elif supplier == 'akamai':     # SD & HD streams that only UK users can play.
-			fileUrl = "rtmp://"+server+":1935/ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
-		elif supplier == 'level3':     # HD Streams that can be played by all users.
-			fileUrl = "rtmp://"+server+":1935/iplayertok?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
-		else:
-			fileUrl = ""
+			# Build up the stream URL based on the supplier
+			if supplier == 'limelight':    # SD streams that can be played by all users.
+				fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
+			elif supplier == 'akamai':     # SD & HD streams that only UK users can play.
+				fileUrl = "rtmp://"+server+":1935/ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
+			elif supplier == 'level3':     # HD Streams that can be played by all users.
+				fileUrl = "rtmp://"+server+":1935/iplayertok?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
+			else:
+				fileUrl = ""
 
-		# Determine the Bitrate from the Service idenifier
-		if service == 'iplayer_streaming_h264_flv_vlo':
-			bitrate = 400
-		elif service == 'iplayer_streaming_h264_flv_lo':
-			bitrate = 480
-		elif service == 'iplayer_streaming_h264_flv':
-			bitrate = 800
-		elif service == 'iplayer_streaming_h264_flv_high':
-			bitrate = 1500
-		elif service == 'pc_streaming_hd':
-			bitrate = 3200
+			# Determine the Bitrate from the Service idenifier
+			if service == 'iplayer_streaming_h264_flv_vlo':
+				bitrate = 400
+			elif service == 'iplayer_streaming_h264_flv_lo':
+				bitrate = 480
+			elif service == 'iplayer_streaming_h264_flv':
+				bitrate = 800
+			elif service == 'iplayer_streaming_h264_flv_high':
+				bitrate = 1500
+			elif service == 'pc_streaming_hd':
+				bitrate = 3200
 
-		streamData = []
-		streamData.append(fileUrl)
-		streamData.append(supplier)
-		streamData.append(bitrate)
-		return streamData
+			streamData = []
+			streamData.append(fileUrl)
+			streamData.append(supplier)
+			streamData.append(bitrate)
+			return streamData
+
+		except (Exception) as exception:
+			print __plugin__, __version__,"getHosts: Error setting stream URL: ", exception
+			return ""
 
 #===================================================================================
 def main(session, **kwargs):
