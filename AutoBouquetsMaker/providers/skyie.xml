@@ -34,8 +34,8 @@
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
 	<channelsontop>
-		<channel number="143" />
-		<channel number="169" />
+		<channel number="141" />
+		<channel number="142" />
 		<channel number="178" />
 		<channel number="230" />
 		<channel number="171" />
@@ -88,7 +88,8 @@
 		<filter bouquet="0x1005" region="0x19" />
 		<filter bouquet="0x1007" region="0x43" />
 		<filter bouquet="0x1005" region="0x06" />
-		<channel number="143" with="101" />
+		<channel number="141" with="101" />
+		<channel number="142" with="102" />
 		<channel number="178" with="103" />
 		<channel number="230" with="104" />
 		<channel number="171" with="105" />
