@@ -27,8 +27,12 @@ from Screens.Screen import Screen
 from Screens.InfoBar import MoviePlayer as MP_parent
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_ACTIVE_SKIN
 from enigma import eSize, ePicLoad, eTimer, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM, RT_WRAP
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+try:
+	from Tools.Directories import SCOPE_ACTIVE_SKIN
+except:
+	from Tools.Directories import SCOPE_CURRENT_SKIN
 from twisted.web import client
 from dns.resolver import Resolver
 from os import path as os_path, mkdir as os_mkdir
@@ -183,7 +187,10 @@ class EpisodeList(HTMLComponent, GUIComponent):
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
 
 		self.picload.setPara((self.l.getItemSize().width(), 2, 0, 0, 1, 1, "#00000000"))
-		self.picload.startDecode(resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png"), 0, 0, False)
+		try:
+			self.picload.startDecode(resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png"), 0, 0, False)
+		except:
+			self.picload.startDecode(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"), 0, 0, False)
 		pngthumb = self.picload.getData()
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 0, self.l.getItemSize().height()-2, self.l.getItemSize().width(), 2, pngthumb))
 
