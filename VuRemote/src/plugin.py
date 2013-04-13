@@ -18,7 +18,7 @@ except:
 
 if distro == "openvix":
 	config.misc.remotecontrol_text_support = ConfigYesNo(default = False)
-elif  distro == "openaaf":
+elif  distro == "openatv":
 	config.misc.remotecontrol_text_support = ConfigYesNo(default = True)	
 
 config.plugins.remotecontrolcode = ConfigSubsection()
@@ -101,7 +101,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		self.list = []
 		self.rcsctype = getConfigListEntry(_("Remote Control System Code"), config.plugins.remotecontrolcode.systemcode)
 		self.list.append( self.rcsctype )
-		if distro == "openvix" or distro == "openaaf":
+		if distro == "openvix" or distro == "openatv":
 			self.list.append(getConfigListEntry(_("Text support"), config.misc.remotecontrol_text_support))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
