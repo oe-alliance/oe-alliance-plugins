@@ -28,7 +28,7 @@ from Components.Label import Label
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.MenuList import MenuList
 from Components.PluginComponent import plugins
-from Components.Pixmap import Pixmap
+from Components.Pixmap import Pixmap, MultiPixmap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from Plugins.Plugin import PluginDescriptor
@@ -38,6 +38,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from enigma import gFont, ePicLoad, eListboxPythonMultiContent, RT_HALIGN_RIGHT
 
 import bbciplayer, itvplayer, rteplayer, threeplayer, fourOD, OUG, iView
+from CommonModules import MainMenuList
 
 ##########################################################################
 
@@ -52,17 +53,17 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.configlist.append(getConfigListEntry((_("Show in main menu")), config.ondemand.ShowMainMenu))
 		self.configlist.append(getConfigListEntry((_("Show in plugin browser")), config.ondemand.ShowPluginBrowser))
 		self.configlist.append(getConfigListEntry((_("Show in extensions")), config.ondemand.ShowExtensions))
+		self.configlist.append(getConfigListEntry((_("Show thumbnails")), config.ondemand.ShowImages))
 
 		self.configlist.append(getConfigListEntry((_("Preferred Stream Quality")), config.ondemand.PreferredQuality))
 
 		self.configlist.append(getConfigListEntry((_("BBC iPlayer")), config.ondemand.ShowBBCiPlayer))
 		self.configlist.append(getConfigListEntry((_("ITV Player")), config.ondemand.ShowITVPlayer))
 		self.configlist.append(getConfigListEntry((_("4OD Player")), config.ondemand.Show4ODPlayer))
-		self.configlist.append(getConfigListEntry((_("RTE Player")), config.ondemand.ShowRTEPlayer))
 		self.configlist.append(getConfigListEntry((_("3 Player")), config.ondemand.Show3Player))
-		self.configlist.append(getConfigListEntry((_("OUG Player")), config.ondemand.ShowOUGPlayer))
 		self.configlist.append(getConfigListEntry((_("ABC iView")), config.ondemand.ShowiViewPlayer))
-		self.configlist.append(getConfigListEntry((_("Show thumbnails")), config.ondemand.ShowImages))
+		self.configlist.append(getConfigListEntry((_("OUG Player")), config.ondemand.ShowOUGPlayer))
+		self.configlist.append(getConfigListEntry((_("RTE Player")), config.ondemand.ShowRTEPlayer))
 		self["config"].setList(self.configlist)
 		
 		self["key_red"] = StaticText(_("Cancel"))
@@ -93,15 +94,13 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 	def keyCancel(self):
 		self.close()
 
-class chooseMenuList(MenuList):
-	def __init__(self, list):
-		MenuList.__init__(self, list, True, eListboxPythonMultiContent)
-
 class OnDemand_Screen(Screen, ConfigListScreen):
 	skin = 	"""
-		<screen position="e-215,0" size="215,e-0" backgroundColor="#ffffffff" flags="wfNoBorder" >
-			<widget name="PlayerList" position="0,0" size="215,e-50" backgroundColor="#80000000" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/selectbar.png" transparent="1" scrollbarMode="showNever" />
-			<ePixmap name="menu" position="e-95,e-30" zPosition="2" size="35,25" pixmap="skin_default/buttons/key_menu.png" transparent="1" alphatest="on" />
+		<screen position="e-203,0" size="203,e-0" backgroundColor="#ffffffff" flags="wfNoBorder" >
+			<widget name="arrowup" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/top.png,/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/arrow-up.png" position="e-203,0" size="203,25" alphatest="on" />
+			<widget name="PlayerList" position="0,25" size="203,670" backgroundColor="#80000000" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/selectbar.png" transparent="0" scrollbarMode="showNever" />
+			<widget name="arrowdown" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/bottom.png,/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/arrow-down.png" position="e-203,e-37" size="203,37" alphatest="on" />
+			<ePixmap name="menu" position="e-203,e-30" zPosition="2" size="35,25" pixmap="skin_default/buttons/key_menu.png" transparent="1" alphatest="on" />
 			<ePixmap name="info" position="e-45,e-30" zPosition="2" size="35,25" pixmap="skin_default/buttons/key_info.png" transparent="1" alphatest="on" />
 		</screen>"""
 
@@ -109,50 +108,41 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("OnDemand"))
 		
+		self["arrowup"]   = MultiPixmap()
+		self["arrowdown"]   = MultiPixmap()
+
 		self["actions"]  = ActionMap(["SetupActions", "TimerEditActions"], {
 			"ok"    : self.keyOK,
 			"cancel": self.keyCancel,
 			"menu" : self.keySetup,
 			"log" : self.keyInfo
 		}, -1)
-
-		self.picload = ePicLoad()
 		
-		self['PlayerList'] = chooseMenuList([])
-	
-		self.currenlist = "PlayerList"
+		self['PlayerList'] = MainMenuList()
 		self.onLayoutFinish.append(self.layoutFinished)
 		
 	def layoutFinished(self):
-		self.PlayerList = []
-
+		list = []
 		if config.ondemand.ShowBBCiPlayer.value:
-			self.PlayerList.append(self.OnDemandListEntry("BBC iPlayer", "bbciplayer"))
+			list.append(("BBC iPlayer", "bbciplayer"))
 		if config.ondemand.ShowITVPlayer.value:
-			self.PlayerList.append(self.OnDemandListEntry("ITV Player", "itvplayer"))
+			list.append(("ITV Player", "itvplayer"))
 		if config.ondemand.Show4ODPlayer.value:
-			self.PlayerList.append(self.OnDemandListEntry("4OD Player", "fourOD"))
-		if config.ondemand.ShowRTEPlayer.value:
-			self.PlayerList.append(self.OnDemandListEntry("RTE Player", "rteplayer"))		
+			list.append(("4OD Player", "fourOD"))
 		if config.ondemand.Show3Player.value:
-			self.PlayerList.append(self.OnDemandListEntry("3 Player", "3player"))
-		if config.ondemand.ShowOUGPlayer.value:
-			self.PlayerList.append(self.OnDemandListEntry("OUG Player", "OUG"))
+			list.append(("3 Player", "3player"))
 		if config.ondemand.ShowiViewPlayer.value:
-			self.PlayerList.append(self.OnDemandListEntry("ABC iView", "iView"))
+			list.append(("ABC iView", "iView"))
+		if config.ondemand.ShowOUGPlayer.value:
+			list.append(("OUG Player", "OUG"))
+		if config.ondemand.ShowRTEPlayer.value:
+			list.append(("RTE Player", "rteplayer"))
 
-		self["PlayerList"].setList(self.PlayerList)
-		self["PlayerList"].l.setItemHeight(100)
-
-	def OnDemandListEntry(self, name, jpg):
-		res = [(name, jpg)]
-		icon = resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/%s.png" % jpg)
-		if fileExists(icon):
-			self.picload.setPara((200, 100, 0, 0, 1, 1, "#00000000"))
-			self.picload.startDecode(icon, 0, 0, False)
-			pngthumb = self.picload.getData()
-			res.append(MultiContentEntryPixmapAlphaTest(pos=(15, 0), size=(200, 100), png=pngthumb))	
-		return res
+		self['PlayerList'].recalcEntrySize()
+		self['PlayerList'].fillList(list)
+		self['PlayerList'].showArrows()
+		self["arrowup"].setPixmapNum(self['PlayerList'].showArrows())
+		self["arrowdown"].setPixmapNum(self['PlayerList'].showArrows())
 	
 	def keySetup(self):
 		self.session.openWithCallback(self.layoutFinished, OnDemandScreenSetup)
@@ -161,12 +151,7 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 		self.session.open(OnDemand_About)
 		
 	def keyOK(self):
-		exist = self[self.currenlist].getCurrent()
-		if exist == None:
-			return
-		print self.currenlist
-		player = self[self.currenlist].getCurrent()[0][1]
-		print player
+		player = self['PlayerList'].l.getCurrentSelection()[1]
 		if player == "rteplayer":
 			self.session.open(rteplayer.RTEMenu, "start", "0")
 		elif player == "3player":

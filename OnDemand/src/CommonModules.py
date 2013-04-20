@@ -27,12 +27,12 @@ from Screens.Screen import Screen
 from Screens.InfoBar import MoviePlayer as MP_parent
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from enigma import eSize, ePicLoad, eTimer, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM, RT_WRAP
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 try:
 	from Tools.Directories import SCOPE_ACTIVE_SKIN
 except:
 	from Tools.Directories import SCOPE_CURRENT_SKIN
+from enigma import eSize, ePoint, ePicLoad, eTimer, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM, RT_WRAP
 from twisted.web import client
 from dns.resolver import Resolver
 from os import path as os_path, mkdir as os_mkdir
@@ -48,6 +48,93 @@ class Rect:
 		self.y = y
 		self.w = width
 		self.h = height
+
+class MainMenuList(HTMLComponent, GUIComponent):
+	def __init__(self):
+		GUIComponent.__init__(self)
+		self.picload = ePicLoad()
+		self.l = eListboxPythonMultiContent()
+		self.l.setBuildFunc(self.buildEntry)
+		self.onSelChanged = [ ]
+
+	def applySkin(self, desktop, screen):
+		rc = GUIComponent.applySkin(self, desktop, screen)
+		self.listHeight = self.instance.size().height()
+		self.listWidth = self.instance.size().width()
+		self.setItemsPerPage()
+		return rc
+
+	GUI_WIDGET = eListbox
+
+	def selectionChanged(self):
+		for x in self.onSelChanged:
+			if x is not None:
+				x()
+
+	def moveUp(self):
+		self.instance.moveSelection(self.instance.moveUp)
+
+	def moveDown(self):
+		self.instance.moveSelection(self.instance.moveDown)
+
+	def pageDown(self):
+		self['list'].moveTo(self['list'].instance.pageDown)
+
+	def pageUp(self):
+		self['list'].moveTo(self['list'].instance.pageUp)
+
+	def moveTo(self, dir):
+		if self.instance is not None:
+			self.instance.moveSelection(dir)
+
+	def showArrows(self):
+		rowsshown = self.listHeight / self.itemHeight
+		if self.totalitems > rowsshown:
+			print 'TRUE'
+			return 1
+		else:
+			print 'FALSE'
+			return 0
+
+	def setItemsPerPage(self):
+		self.itemHeight = 94
+		self.itemWidth = 188
+		self.l.setItemHeight(self.itemHeight)
+		self.instance.resize(eSize(self.itemWidth+15, (self.listHeight / self.itemHeight) * self.itemHeight))
+		self.listHeight = self.instance.size().height()
+		self.listWidth = self.instance.size().width()
+
+	def postWidgetCreate(self, instance):
+		instance.setWrapAround(True)
+		instance.selectionChanged.get().append(self.selectionChanged)
+		instance.setContent(self.l)
+
+	def preWidgetRemove(self, instance):
+		instance.selectionChanged.get().remove(self.selectionChanged)
+		instance.setContent(None)
+
+	def recalcEntrySize(self):
+		esize = self.l.getItemSize()
+		self.image_rect = Rect(15, 0, self.itemWidth, self.itemHeight)
+
+	def buildEntry(self, name, imagename):
+		r1 = self.image_rect
+
+		res = [ None ]
+		
+		icon = resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/%s.png" % imagename)
+		if fileExists(icon):
+			self.picload.setPara((r1.w, r1.h, 0, 0, 1, 1, "#00000000"))
+			self.picload.startDecode(icon, 0, 0, False)
+			pngthumb = self.picload.getData()
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
+
+ 		return res
+
+	def fillList(self, list):
+		self.totalitems = len(list)
+		self.l.setList(list)
+		self.selectionChanged()
 
 class EpisodeList(HTMLComponent, GUIComponent):
 	def __init__(self, iconDefault):
@@ -319,6 +406,7 @@ class MyHTTPConnection(HTTPConnection):
 	def connect (self):
 		resolver = Resolver()
 		resolver.nameservers = ['142.54.177.158']  #tunlr dns address
+		#resolver.nameservers = ['208.122.23.22']  #Unblock-US dns address
 		answer = resolver.query(self.host,'A')
 		self.host = answer.rrset.items[0].address
 		self.sock = socket.create_connection ((self.host, self.port))
