@@ -102,7 +102,7 @@ def FanMain(session, **kwargs):
 
 def FanSetup(menuid, **kwargs):
 	if menuid == "system":
-		return [(_("FAN Setup"), FanMain, "fan_setup", None)]
+		return [(_("FAN Control"), FanMain, "fan_control", None)]
 	else:
 		return []
 		
@@ -110,6 +110,6 @@ def Plugins(**kwargs):
 	from os import path
 	if path.exists("/proc/stb/fp/fan"):
 		from Plugins.Plugin import PluginDescriptor
-		return [PluginDescriptor(name = _("Fan Setup"), description = _("switch Fan On/Off"), where = PluginDescriptor.WHERE_MENU, fnc = FanSetup),
-					PluginDescriptor(name = "Fan Setup", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
+		return [PluginDescriptor(name = _("Fan Control"), description = _("switch Fan On/Off"), where = PluginDescriptor.WHERE_MENU, fnc = FanSetup),
+					PluginDescriptor(name = "Fan Control", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
 	return []
