@@ -37,6 +37,8 @@ from time import strftime, time
 
 XML_BLINDSCAN_DIR = "/tmp"
 
+_supportNimType = { 'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_'}
+
 class Blindscan(ConfigListScreen, Screen):
 	skin="""
 		<screen name="Blindscan" position="center,center" size="560,290" title="Blindscan">
@@ -408,6 +410,35 @@ class Blindscan(ConfigListScreen, Screen):
 
 
 	def doRun(self, tmp_list, tmp_pol, tmp_band):
+		def GetCommand(nimIdx):
+			_nimSocket = {}
+			fp = file('/proc/bus/nim_sockets')
+
+			sNo, sName = -1, ""
+			for line in fp:
+				line = line.strip()
+				if line.startswith('NIM Socket'):
+					sNo = line.split()[2][:-1]
+				elif line.startswith('Name:'):
+					sName = line.split()[3][4:-1]
+				if sNo >= 0 and sName != "":
+					_nimSocket[sNo] = sName
+					sNo   = -1
+					sName = ''
+			fp.close()
+
+			try:
+				sName = _nimSocket[str(nimIdx)]
+				sType = _supportNimType[sName]
+				return "vuplus_%(TYPE)sblindscan"%{'TYPE':sType}, None
+			except: pass
+			return "vuplus_blindscan", None
+		self.binName,nimName =  GetCommand(self.scan_nims.value)
+		if self.binName is None:
+			self.session.open(MessageBox, "Blindscan is not supported in " + nimName + " tuner.", MessageBox.TYPE_ERROR)
+			print nimName + " is not support blindscan."
+			return
+
 		self.full_data = ""
 		self.total_list=[]
 		for x in tmp_list:
@@ -521,7 +552,10 @@ class Blindscan(ConfigListScreen, Screen):
 		if getBoxType().startswith('venton'):
 			cmd = "venton_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) 
 		elif getBoxType().startswith('vu'):
-			cmd = "vuplus_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "vuplus_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
+			try:
+				cmd = "%s %d %d %d %d %d %d %d %d" % (self.binName, temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
+			except: return
+
 		elif getBoxType().startswith('et'):
 			cmd = "avl_xtrend_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "avl_xtrend_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
 		elif getBoxType().startswith('odin'):
