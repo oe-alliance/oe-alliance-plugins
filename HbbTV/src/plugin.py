@@ -1148,6 +1148,8 @@ class OperaBrowserSetting:
 		for line in f.readlines():
 			if line.startswith('start='):
 				tmp = line[6:len(line)-1].split()
+				if tmp[0] == "http://www2.vuplus.com/":
+					tmp[0] = "http://google.com/"
 				self._start = tmp[0]
 				if len(tmp) > 1:
 					self._type = int(tmp[1])
@@ -1213,7 +1215,7 @@ class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
 			d = OperaBrowserSetting().getData()
 			self._startPageUrl = d['start']
 			#d['type']
-		except: self._startPageUrl = 'http://vuplus.com'
+		except: self._startPageUrl = 'http://google.com'
 		self.updateStartPageUrl()
 
 	def updateStartPageUrl(self):
@@ -1939,7 +1941,7 @@ class OperaBrowser(Screen):
 			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
 			return
 		mode = 0
-		start = 'http://vuplus.com'
+		start = 'http://google.com'
 		try:
 			d = OperaBrowserSetting().getData()
 			start = d['start']
