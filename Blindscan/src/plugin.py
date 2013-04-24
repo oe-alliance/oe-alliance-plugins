@@ -433,11 +433,12 @@ class Blindscan(ConfigListScreen, Screen):
 				return "vuplus_%(TYPE)sblindscan"%{'TYPE':sType}, None
 			except: pass
 			return "vuplus_blindscan", None
-		self.binName,nimName =  GetCommand(self.scan_nims.value)
-		if self.binName is None:
-			self.session.open(MessageBox, "Blindscan is not supported in " + nimName + " tuner.", MessageBox.TYPE_ERROR)
-			print nimName + " is not support blindscan."
-			return
+		if getBoxType().startswith('vu'):
+			self.binName,nimName =  GetCommand(self.scan_nims.value)
+			if self.binName is None:
+				self.session.open(MessageBox, "Blindscan is not supported in " + nimName + " tuner.", MessageBox.TYPE_ERROR)
+				print nimName + " is not support blindscan."
+				return
 
 		self.full_data = ""
 		self.total_list=[]
