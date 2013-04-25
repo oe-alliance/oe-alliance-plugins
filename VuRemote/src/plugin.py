@@ -137,7 +137,7 @@ class MessageBoxConfirmCode(MessageBox):
 		MessageBox.__init__(self,session,text,type,timeout,close_on_any_key,default,enable_input,msgBoxID)
 		self.skinName = "MessageBox"
 		if type == MessageBox.TYPE_YESNO:
-			self.list = [ (_("Keep"), 0), (_("Restore"), 1) ]
+			self.list = [ (_("Keep"), True), (_("Restore"), False) ]
 			self["list"].setList(self.list)
 
 	def timerTick(self):
