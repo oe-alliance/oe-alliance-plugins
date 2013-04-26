@@ -38,14 +38,14 @@ if os.path.exists("/proc/stb/info/boxtype"):
 		fwdata= {
 			 "micom" : ["http://code-ini.com/software/micom/", "RHS500_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
-	elif info == "ini-5000R":
+	elif info == "ini-5000ru":
 		fwlist= [
 			("fp", _("Front Panel"))
 			]
 		fwdata= {
-			 "micom" : ["http://code-ini.com/software/micom/", "RHS500R_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS500RU_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
-	elif info == "ini-5000SV":
+	elif info == "ini-5000sv":
 		fwlist= [
 			("fp", _("Front Panel"))
 			]
@@ -73,7 +73,28 @@ if os.path.exists("/proc/stb/info/boxtype"):
 		fwdata= {
 			 "micom" : ["http://code-ini.com/software/micom/", "RHS300_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
-			
+	elif info == "ini-1000":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS100_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+	elif info == "ini-1000ru":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS100RU_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+	elif info == "ini-1000sv":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS100SV_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+		
 class Filebrowser(Screen):
 	skin = 	"""
 		<screen position="center,center" size="500,490" title="File Browser" >
