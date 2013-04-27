@@ -535,7 +535,7 @@ class OpenUg(Screen):
 		elif retval == 'pop':
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
-			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/popular/protocol/html")
+			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "popular/protocol/html")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup()
 			self.updateMenu()
