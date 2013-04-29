@@ -48,7 +48,7 @@ AM_CONDITIONAL(ET4X00, test "$BOXTYPE" == et4x00)
 AM_CONDITIONAL(ET5X00, test "$BOXTYPE" == et5x00)
 AM_CONDITIONAL(ET6X00, test "$BOXTYPE" == et6x00)
 AM_CONDITIONAL(ET9X00, test "$BOXTYPE" == et9x00)
-AM_CONDITIONAL(ODINM7, test "$BOXTYPE" == odinm9)
+AM_CONDITIONAL(ODINM7, test "$BOXTYPE" == odinm7)
 AM_CONDITIONAL(ODINM9, test "$BOXTYPE" == odinm9)
 AM_CONDITIONAL(TMTWIN, test "$BOXTYPE" == tmtwin)
 AM_CONDITIONAL(TM2T, test "$BOXTYPE" == tm2t)
@@ -156,10 +156,10 @@ HbbTV/src/Makefile
 HbbTV/meta/Makefile
 HbbTV/po/Makefile
 
-MaraM7VFDControl/Makefile
-MaraM7VFDControl/src/Makefile
-MaraM7VFDControl/meta/Makefile
-MaraM7VFDControl/po/Makefile
+OdinM7VFDControl/Makefile
+OdinM7VFDControl/src/Makefile
+OdinM7VFDControl/meta/Makefile
+OdinM7VFDControl/po/Makefile
 
 MICOMUpgrade/Makefile
 MICOMUpgrade/src/Makefile

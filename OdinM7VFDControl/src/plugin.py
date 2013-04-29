@@ -17,9 +17,9 @@ from time import localtime, time
 
 import Screens.Standby
 
-config.plugins.VFD_mara = ConfigSubsection()
-config.plugins.VFD_mara.showClock = ConfigSelection(default = _("Yes"), choices = [("False",_("in standby: ") + _("No")),("True",_("in standby: ") + _("Yes")),("True_All",_("Yes")),("Off",_("Off"))])
-config.plugins.VFD_mara.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.VFD_odin = ConfigSubsection()
+config.plugins.VFD_odin.showClock = ConfigSelection(default = _("Yes"), choices = [("False",_("in standby: ") + _("No")),("True",_("in standby: ") + _("Yes")),("True_All",_("Yes")),("Off",_("Off"))])
+config.plugins.VFD_odin.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
@@ -42,7 +42,7 @@ class Channelnumber:
 			})
 
 	def __eventInfoChanged(self):
-		if config.plugins.VFD_mara.showClock.value == 'Off' or config.plugins.VFD_mara.showClock.value == 'True_All':
+		if config.plugins.VFD_odin.showClock.value == 'Off' or config.plugins.VFD_odin.showClock.value == 'True_All':
 			return
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
@@ -94,10 +94,10 @@ class Channelnumber:
 		return chnr
 
 	def prikaz(self):
-		if config.plugins.VFD_mara.showClock.value == 'True' or config.plugins.VFD_mara.showClock.value == 'True_All':
+		if config.plugins.VFD_odin.showClock.value == 'True' or config.plugins.VFD_odin.showClock.value == 'True_All':
 			clock = str(localtime()[3])
 			clock1 = str(localtime()[4])
-			if config.plugins.VFD_mara.timeMode.value != '24h':
+			if config.plugins.VFD_odin.timeMode.value != '24h':
 				if int(clock) > 12:
 					clock = str(int(clock) - 12)
 
@@ -113,44 +113,44 @@ class Channelnumber:
 			vfd_write("    ")
 
 	def vrime(self):
-		if config.plugins.VFD_mara.showClock.value == 'Off':
+		if config.plugins.VFD_odin.showClock.value == 'Off':
 			vfd_write("    ")
 			self.zaPrik.start(self.updatetime, 1)
 			return
 		else:
 			self.zaPrik.start(1000, 1)
 
-		if Screens.Standby.inStandby or config.plugins.VFD_mara.showClock.value == 'True_All':
+		if Screens.Standby.inStandby or config.plugins.VFD_odin.showClock.value == 'True_All':
 			self.prikaz()
 
 ChannelnumberInstance = None
 
 def leaveStandby():
-	print "[VFD-MARAM7] Leave Standby"
+	print "[VFD-ODINM7] Leave Standby"
 
-	if config.plugins.VFD_mara.showClock.value == 'Off':
+	if config.plugins.VFD_odin.showClock.value == 'Off':
 		vfd_write("    ")
 
 def standbyCounterChanged(configElement):
-	print "[VFD-MARAM7] In Standby"
+	print "[VFD-ODINM7] In Standby"
 
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
 
-	if config.plugins.VFD_mara.showClock.value == 'Off':
+	if config.plugins.VFD_odin.showClock.value == 'Off':
 		vfd_write("    ")
 
 def initVFD():
-	print "[VFD-MARAM7] initVFD"
+	print "[VFD-ODINM7] initVFD"
 
-	if config.plugins.VFD_mara.showClock.value == 'Off':
+	if config.plugins.VFD_odin.showClock.value == 'Off':
 		vfd_write("    ")
 
-class VFD_MaraM7Setup(ConfigListScreen, Screen):
+class VFD_OdinM7Setup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
 
 		self.skin = """
-			<screen position="100,100" size="500,210" title="VFD_MaraM7 Setup" >
+			<screen position="100,100" size="500,210" title="VFD_M7 Setup" >
 				<widget name="config" position="20,15" size="460,150" scrollbarMode="showOnDemand" />
 				<ePixmap position="40,165" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
 				<ePixmap position="180,165" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
@@ -183,9 +183,9 @@ class VFD_MaraM7Setup(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show clock"), config.plugins.VFD_mara.showClock))
-		if config.plugins.VFD_mara.showClock.value != "Off":
-			self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_mara.timeMode))
+		self.list.append(getConfigListEntry(_("Show clock"), config.plugins.VFD_odin.showClock))
+		if config.plugins.VFD_odin.showClock.value != "Off":
+			self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_odin.timeMode))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -221,9 +221,9 @@ class VFD_MaraM7Setup(ConfigListScreen, Screen):
 		self.createSetup()
 		initVFD()
 
-class VFD_Mara:
+class VFD_Odin:
 	def __init__(self, session):
-		print "[VFD-MARAM7] initializing"
+		print "[VFD-ODINM7] initializing"
 		self.session = session
 		self.service = None
 		self.onClose = [ ]
@@ -240,37 +240,37 @@ class VFD_Mara:
 		self.abort()
 
 	def abort(self):
-		print "[VFD-MARAM7] aborting"
+		print "[VFD-ODINM7] aborting"
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
 	if menuid != "system":
 		return [ ]
-	return [(_("VFD_MaraM7"), startVFD, "VFD_MaraM7", None)]
+	return [(_("VFD_M7"), startVFD, "VFD_M7", None)]
 
 def startVFD(session, **kwargs):
-	session.open(VFD_MaraM7Setup)
+	session.open(VFD_OdinM7Setup)
 
-maram7Vfd = None
+odinm7Vfd = None
 gReason = -1
 mySession = None
 
-def controlmaram7Vfd():
-	global maram7Vfd
+def controlodinm7Vfd():
+	global odinm7Vfd
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and maram7Vfd == None:
-		print "[VFD-MARAM7] Starting !!"
-		maram7Vfd = VFD_Mara(mySession)
-	elif gReason == 1 and maram7Vfd != None:
-		print "[VFD-MARAM7] Stopping !!"
+	if gReason == 0 and mySession != None and odinm7Vfd == None:
+		print "[VFD-ODINM7] Starting !!"
+		odinm7Vfd = VFD_Odin(mySession)
+	elif gReason == 1 and odinm7Vfd != None:
+		print "[VFD-ODINM7] Stopping !!"
 
-		maram7Vfd = None
+		odinm7Vfd = None
 
 def sessionstart(reason, **kwargs):
-	print "[VFD-MARAM7] sessionstart"
-	global maram7Vfd
+	print "[VFD-ODINM7] sessionstart"
+	global odinm7Vfd
 	global gReason
 	global mySession
 
@@ -278,8 +278,8 @@ def sessionstart(reason, **kwargs):
 		mySession = kwargs["session"]
 	else:
 		gReason = reason
-	controlmaram7Vfd()
+	controlodinm7Vfd()
 
 def Plugins(**kwargs):
  	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
- 		PluginDescriptor(name="VFD_MaraM7", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+ 		PluginDescriptor(name="VFD_M7", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
