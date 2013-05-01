@@ -197,7 +197,7 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 
 	def newConfig(self):
 		print self["config"].getCurrent()[0]
-		if self["config"].getCurrent()[0] == _('Show clock'):
+		if self["config"].getCurrent()[0] == _('Show on VFD'):
 			self.createSetup()
 
 	def abort(self):
