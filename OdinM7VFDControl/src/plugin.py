@@ -18,7 +18,7 @@ from time import localtime, time
 import Screens.Standby
 
 config.plugins.VFD_odin = ConfigSubsection()
-config.plugins.VFD_odin.showClock = ConfigSelection(default = _("Yes"), choices = [("False",_("in standby: ") + _("No")),("True",_("in standby: ") + _("Yes")),("True_All",_("Yes")),("Off",_("Off"))])
+config.plugins.VFD_odin.showClock = ConfigSelection(default = "True_All", choices = [("False",_("in standby: ") + _("No")),("True",_("in standby: ") + _("Yes")),("True_All",_("Yes")),("Off",_("Off"))])
 config.plugins.VFD_odin.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
 
 def vfd_write(text):
@@ -28,7 +28,7 @@ class Channelnumber:
 
 	def __init__(self, session):
 		self.session = session
-		self.sign = 1
+		self.sign = 0
 		self.updatetime = 10000
 		self.blink = False
 		self.zaPrik = eTimer()
@@ -55,9 +55,9 @@ class Channelnumber:
 		########## Center Channel number #################
 		t = len(chnr)
 		if t == 1:
-			CentChnr = " " + chnr + "  " + '\n'
+			CentChnr = "." + chnr + "  " + '\n'
 		elif t == 2:
-			CentChnr = " " + chnr + " " + '\n'
+			CentChnr = "." + chnr + " " + '\n'
 		elif t == 3:
 			CentChnr = chnr + " " + '\n'
 		else:
@@ -106,15 +106,15 @@ class Channelnumber:
 				self.sign = 1
 			else:
 				clock2 = "%02d%02d" % (int(clock), int(clock1))
-				self.sign = 1 # disable : because it's not working yet
+				self.sign = 0
 
 			vfd_write(clock2)
 		else:
-			vfd_write("    ")
+			vfd_write("....")
 
 	def vrime(self):
 		if config.plugins.VFD_odin.showClock.value == 'Off':
-			vfd_write("    ")
+			vfd_write("....")
 			self.zaPrik.start(self.updatetime, 1)
 			return
 		else:
@@ -129,7 +129,7 @@ def leaveStandby():
 	print "[VFD-ODINM7] Leave Standby"
 
 	if config.plugins.VFD_odin.showClock.value == 'Off':
-		vfd_write("    ")
+		vfd_write("....")
 
 def standbyCounterChanged(configElement):
 	print "[VFD-ODINM7] In Standby"
@@ -138,13 +138,13 @@ def standbyCounterChanged(configElement):
 	inStandby.onClose.append(leaveStandby)
 
 	if config.plugins.VFD_odin.showClock.value == 'Off':
-		vfd_write("    ")
+		vfd_write("....")
 
 def initVFD():
 	print "[VFD-ODINM7] initVFD"
 
 	if config.plugins.VFD_odin.showClock.value == 'Off':
-		vfd_write("    ")
+		vfd_write("....")
 
 class VFD_OdinM7Setup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
