@@ -21,7 +21,7 @@ if getBoxType() == 'gb800se' or getBoxType() == 'gb800solo' or getBoxType() == '
 	from enigma import evfd
 
 config.plugins.VFD_Giga = ConfigSubsection()
-config.plugins.VFD_Giga.showClock = ConfigSelection(default = "Yes", choices = [("False",_("in standby: ") + _("No")),("True",_("in standby: ") + _("Yes")),("True_All",_("Yes")),("Off",_("Off"))])
+config.plugins.VFD_Giga.showClock = ConfigSelection(default = "True", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
 config.plugins.VFD_Giga.showClockDeepStandby = ConfigSelection(default = "False", choices = [("False",_("No")),("True",_("Yes"))])
 config.plugins.VFD_Giga.setLed = ConfigYesNo(default = True)
 config.plugins.VFD_Giga.recLedBlink = ConfigYesNo(default = True)
@@ -68,11 +68,11 @@ class Channelnumber:
 		########## Center Channel number #################
 		t = len(chnr)
 		if t == 1:
-			CentChnr = " " + chnr + "  " + '\n'
+			CentChnr = " 0" + chnr + "  " + '\n'
 		elif t == 2:
 			CentChnr = " " + chnr + " " + '\n'
 		elif t == 3:
-			CentChnr = chnr + " " + '\n'
+			CentChnr = "0" + chnr + '\n'
 		else:
 			CentChnr = chnr + '\n'
 		#################################################
@@ -261,7 +261,7 @@ class VFD_GigaSetup(ConfigListScreen, Screen):
 		else:
 			evfd.getInstance().vfd_led("0")
 		if getBoxType() == 'gb800se' or getBoxType() == 'gb800solo':
-			self.list.append(getConfigListEntry(_("Show clock"), config.plugins.VFD_Giga.showClock))
+			self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_Giga.showClock))
 			self.list.append(getConfigListEntry(_("Show clock in Deep Standby"), config.plugins.VFD_Giga.showClockDeepStandby))
 			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
 				self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_Giga.timeMode))
@@ -280,7 +280,7 @@ class VFD_GigaSetup(ConfigListScreen, Screen):
 			self.createSetup()
 		elif self["config"].getCurrent()[0][:3].upper() == 'LED':
 			evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledRUN.value)
-		elif self["config"].getCurrent()[0] == _('Show clock'):
+		elif self["config"].getCurrent()[0] == _('Show on VFD'):
 			self.createSetup()
 		elif self["config"].getCurrent()[0] == _('Show clock in Deep Standby'):
 			self.createSetup()
