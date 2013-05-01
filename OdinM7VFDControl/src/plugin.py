@@ -18,7 +18,7 @@ from time import localtime, time
 import Screens.Standby
 
 config.plugins.VFD_odin = ConfigSubsection()
-config.plugins.VFD_odin.showClock = ConfigSelection(default = "True_All", choices = [("False",_("in standby: ") + _("No")),("True",_("in standby: ") + _("Yes")),("True_All",_("Yes")),("Off",_("Off"))])
+config.plugins.VFD_odin.showClock = ConfigSelection(default = "True", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
 config.plugins.VFD_odin.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
 
 def vfd_write(text):
@@ -55,11 +55,11 @@ class Channelnumber:
 		########## Center Channel number #################
 		t = len(chnr)
 		if t == 1:
-			CentChnr = "." + chnr + "  " + '\n'
+			CentChnr = ".0" + chnr + '\n'
 		elif t == 2:
-			CentChnr = "." + chnr + " " + '\n'
+			CentChnr = "." + chnr + '\n'
 		elif t == 3:
-			CentChnr = chnr + " " + '\n'
+			CentChnr = "0" + chnr + '\n'
 		else:
 			CentChnr = chnr + '\n'
 		#################################################
@@ -183,7 +183,7 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show clock"), config.plugins.VFD_odin.showClock))
+		self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_odin.showClock))
 		if config.plugins.VFD_odin.showClock.value != "Off":
 			self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_odin.timeMode))
 
