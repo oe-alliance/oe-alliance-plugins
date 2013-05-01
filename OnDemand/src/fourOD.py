@@ -194,7 +194,7 @@ class fourODMainMenu(Screen):
 						continue
 
 					id = entry[u'id']
-					pattern = u'/programmes/tags/(.+)'
+					pattern = u'/programmes/categories/(.+)'
 					match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
 
 					categoryName = match.group(1)
