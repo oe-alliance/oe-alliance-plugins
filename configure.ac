@@ -141,6 +141,10 @@ FirmwareUpgrade/src/Makefile
 FirmwareUpgrade/meta/Makefile
 FirmwareUpgrade/po/Makefile
 
+Fempa/Makefile
+Fempa/meta/Makefile
+Fempa/src/Makefile
+
 FPGAUpgrade/Makefile
 FPGAUpgrade/src/Makefile
 FPGAUpgrade/meta/Makefile

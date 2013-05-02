@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+					<tag type="Network" />
+	  </prerequisites>
+		  <info>
+					<author>subixonfire@teamred</author>
+					<name>Fempa</name>
+					<packagename>enigma2-plugin-extensions-fempa</packagename>
+					<shortdescription>FEMPA-player</shortdescription>
+					<description>Norwegian P4 FEM PAA radio show player</description>
+		  </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-fempa" />
+	  </files>
+</default>
