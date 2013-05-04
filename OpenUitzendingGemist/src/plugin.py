@@ -585,7 +585,7 @@ class OpenUg(Screen):
 			self.clearList()
 			self.isRtl = False
 			self.level = self.UG_LEVEL_SERIE
-			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/search/protocol/html/searchString/" + callback)
+			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "search/protocol/html/searchString/" + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
 				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
@@ -802,11 +802,12 @@ class OpenUg(Screen):
 				tmp = "<span class=\"title\">"
 				if tmp in line:
 					name = line.split(tmp)[1].split("</span>")[0]
-					if "<br />" in line:
-						short = line.split("<br />")[1]
+					name.replace("&amp;", "&")
 					state = 2
 
 			elif state == 2:
+				if "<br />" in line:
+					short = line.split("<br />")[0]
 				state = 3
 
 			elif state == 3:
@@ -815,7 +816,7 @@ class OpenUg(Screen):
 				state = 4
 
 			elif state == 4:
-				date = line
+				date = line.split("</span>")[0]
 				icon_type = self.getIconType(icon)
 				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
 				state = 0
