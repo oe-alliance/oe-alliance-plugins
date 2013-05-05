@@ -416,7 +416,7 @@ class OpenUg(Screen):
 		self.timerCmd = self.TIMER_CMD_START
 
 		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/vix.png"))
-		
+
 		self.tmplist = []
 		self.mediaList = []
 
@@ -670,7 +670,7 @@ class OpenUg(Screen):
 					self.clearList()
 					self.isRtl = False
 					self.level = self.UG_LEVEL_SERIE
-					self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/a2z-serie/a2zSerieId/" + tmp)
+					self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z-serie/a2zSerieId/" + tmp)
 					self.updateMenu()
 				else:
 					self.doUGPlay()
@@ -805,7 +805,7 @@ class OpenUg(Screen):
 			elif state == 2:
 				if "<br />" in line:
 					short = line.split("<br />")[0]
-				state = 3
+					state = 3
 
 			elif state == 3:
 				tmp = line.split("<br")[0].split(" | ")
@@ -957,4 +957,6 @@ def main(session, **kwargs):
 	session.open(OpenUgSetupScreen)
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]
+
+	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="pli.png", fnc = main),
+			PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]
