@@ -106,6 +106,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self.i2c_mapping_table = None
 		self.makeNimSocket()
+		self.nimSockets = self.ScanNimsocket()
 
 		self.changedEntry()
 
@@ -126,8 +127,37 @@ class Blindscan(ConfigListScreen, Screen):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 
-	def makeNimSocket(self):
-		self.i2c_mapping_table = {0:2, 1:3, 2:1, 3:0}
+	def ScanNimsocket(self):
+		_nimSocket = {}
+		fp = file('/proc/bus/nim_sockets')
+
+		sNo, sName = -1, ""
+		for line in fp:
+			line = line.strip()
+			if line.startswith('NIM Socket'):
+				sNo = line.split()[2][:-1]
+				elif line.startswith('Name:') and len(line.split()) > 3:
+				sName = line.split()[3][4:-1]
+			if sNo >= 0 and sName != "":
+				_nimSocket[sNo] = sName
+				sNo   = -1
+				sName = ''
+		fp.close()
+		return _nimSocket
+
+	def makeNimSocket(self, nimname=""):
+		self.i2c_mapping_table = {}
+
+		if nimname == "AVL6222":
+			model = file('/proc/stb/info/vumodel').read().strip()
+			if model == "uno":
+				self.i2c_mapping_table = {0:3, 1:3, 2:1, 3:0}
+			elif model == "duo2":
+				if self.nimSockets['0'] == "AVL6222":
+					self.i2c_mapping_table = {0:2, 1:2, 2:4, 3:4}
+				else:	self.i2c_mapping_table = {0:2, 1:4, 2:4, 3:0}
+			else:	self.i2c_mapping_table = {0:2, 1:4, 2:0, 3:0}
+		else:	self.i2c_mapping_table = {0:2, 1:3, 2:1, 3:0}
 
 	def getNimSocket(self, slot_number):
 		if slot_number < 0 or slot_number > 3:
@@ -411,30 +441,17 @@ class Blindscan(ConfigListScreen, Screen):
 
 	def doRun(self, tmp_list, tmp_pol, tmp_band):
 		def GetCommand(nimIdx):
-			_nimSocket = {}
-			fp = file('/proc/bus/nim_sockets')
-
-			sNo, sName = -1, ""
-			for line in fp:
-				line = line.strip()
-				if line.startswith('NIM Socket'):
-					sNo = line.split()[2][:-1]
-				elif line.startswith('Name:') and len(line.split()) > 3:
-					sName = line.split()[3][4:-1]
-				if sNo >= 0 and sName != "":
-					_nimSocket[sNo] = sName
-					sNo   = -1
-					sName = ''
-			fp.close()
-
+			_nimSocket = self.nimSockets
 			try:
 				sName = _nimSocket[str(nimIdx)]
 				sType = _supportNimType[sName]
-				return "vuplus_%(TYPE)sblindscan"%{'TYPE':sType}, None
+				return "vuplus_%(TYPE)sblindscan"%{'TYPE':sType}, sName
 			except: pass
-			return "vuplus_blindscan", None
+			return "vuplus_blindscan", ""
 		if getBoxType().startswith('vu'):
 			self.binName,nimName =  GetCommand(self.scan_nims.value)
+
+			self.makeNimSocket(nimName)
 			if self.binName is None:
 				self.session.open(MessageBox, "Blindscan is not supported in " + nimName + " tuner.", MessageBox.TYPE_ERROR)
 				print nimName + " is not support blindscan."
