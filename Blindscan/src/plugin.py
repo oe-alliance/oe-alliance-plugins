@@ -136,7 +136,7 @@ class Blindscan(ConfigListScreen, Screen):
 			line = line.strip()
 			if line.startswith('NIM Socket'):
 				sNo = line.split()[2][:-1]
-				elif line.startswith('Name:') and len(line.split()) > 3:
+			elif line.startswith('Name:') and len(line.split()) > 3:
 				sName = line.split()[3][4:-1]
 			if sNo >= 0 and sName != "":
 				_nimSocket[sNo] = sName
