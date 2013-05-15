@@ -411,7 +411,7 @@ class AutoBouquetsMaker_Setup(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Setup mode"), config.autobouquetsmaker.level, _("Choose which level of setting's to display. 'Expert'-level shows all items, this also add's more options in the providers menu.")))
 		self.list.append(getConfigListEntry(_("Schedule scan"), config.autobouquetsmaker.schedule, _("Allows you to set a schedule to perform a scan ")))
 		if config.autobouquetsmaker.schedule.getValue():
-			self.list.append(getConfigListEntry(_("Time of backup to start"), config.autobouquetsmaker.scheduletime, _("Set the time of day to perform the scan.")))
+			self.list.append(getConfigListEntry(_("Time of scan to start"), config.autobouquetsmaker.scheduletime, _("Set the time of day to perform the scan.")))
 			self.list.append(getConfigListEntry(_("Repeat how often"), config.autobouquetsmaker.repeattype, _("Set the repeat interval of the schedule.")))
 		if config.autobouquetsmaker.level.value == "expert":
 			self.list.append(getConfigListEntry(_("Keep all bouquets"), config.autobouquetsmaker.keepallbouquets, _("When disabled this will enable the 'Keep bouquets' in the main menu, allowing you to hide some 'existing' bouquets.")))
