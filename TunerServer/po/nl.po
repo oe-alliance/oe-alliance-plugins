@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-12-03 15:01+0000\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2013-05-25 13:22+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: none\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -18,53 +18,58 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Allow Streaming From Box Tuners"
-msgstr ""
+msgstr "Sta streamen vanaf de tuners van de box toe"
 
 msgid "Build Complete!"
-msgstr ""
+msgstr "Bouwen gereed!"
 
 msgid "Build Server"
-msgstr ""
+msgstr "Bouw server"
 
 msgid "Close"
-msgstr ""
+msgstr "Sluit"
 
 msgid "Current Status:"
-msgstr ""
+msgstr "Huidiges status:"
 
 msgid "Disable Server"
-msgstr ""
+msgstr "Server uitschakelen"
 
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 msgid "Server Disabled"
-msgstr ""
+msgstr "Server uitgeschakeld"
 
 msgid "Server Enabled"
-msgstr ""
+msgstr "Server ingeschakeld"
 
 msgid "Server now disabled!"
-msgstr ""
+msgstr "Server is nu uitgeschakeld!"
 
 msgid "Sorry, but you need to have a device mounted at '/media/hd'"
-msgstr ""
+msgstr "Sorry, maar u moet een device gemount hebben op '/media/hd'"
 
 msgid "Tuner Server"
-msgstr ""
+msgstr "Tuner Server"
 
 msgid "Tuner Server Disabled."
-msgstr ""
+msgstr "Tuner Server uitgeschakeld."
 
 msgid "Tuner Server setup"
-msgstr ""
+msgstr "Tuner Server instellingen"
 
 msgid ""
 "Your server is now being deleted\n"
 "Please Wait ..."
 msgstr ""
+"Uw server wordt nu verwijderd\n"
+"Even wachten ..."
 
 msgid ""
 "Your server is now building\n"
 "Please wait ..."
 msgstr ""
+"Uw server wordt nu gebouwd\n"
+"Even wachten ..."
+
