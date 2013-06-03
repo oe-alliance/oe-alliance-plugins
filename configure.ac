@@ -170,6 +170,7 @@ MICOMUpgrade/src/Makefile
 MICOMUpgrade/src/bin/Makefile
 MICOMUpgrade/meta/Makefile
 MICOMUpgrade/po/Makefile
+MICOMUpgrade/buttons/Makefile
 
 OnDemand/Makefile
 OnDemand/src/Makefile
