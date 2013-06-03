@@ -98,8 +98,8 @@ if os.path.exists("/proc/stb/info/boxtype"):
 class Filebrowser(Screen):
 	skin = 	"""
 		<screen position="center,center" size="500,490" title="File Browser" >
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="5,7" size="140,40" alphatest="blend" />		
-			<ePixmap pixmap="skin_default/buttons/blue-340.png" position="150,7" size="340,40" alphatest="blend" />
+			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/buttons/yellow.png" position="5,7" size="140,40" alphatest="blend" />		
+			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/buttons/blue-340.png" position="150,7" size="340,40" alphatest="blend" />
 			<widget source="key_yellow" render="Label" position="5,7" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" transparent="1"/>
 			<widget source="key_blue" render="Label" position="150,7" zPosition="1" size="340,40" font="Regular;20" halign="center" valign="center" transparent="1"/>
 			<widget name="file_list" position="0,60" size="500,360" scrollbarMode="showOnDemand" />
@@ -316,8 +316,8 @@ class Filebrowser(Screen):
 class FirmwareUpgrade(Screen):
 	skin = 	"""
 		<screen position="center,center" size="530,295" title="Firmware Upgrade" >
-			<ePixmap pixmap="skin_default/buttons/red.png" position="80,7" size="140,40" alphatest="blend" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="320,7" size="140,40" alphatest="blend" />
+			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/buttons/red.png" position="80,7" size="140,40" alphatest="blend" />
+			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/buttons/green.png" position="320,7" size="140,40" alphatest="blend" />
 			<widget source="key_red" render="Label" position="80,7" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" transparent="1" />
 			<widget source="key_green" render="Label" position="320,7" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" transparent="1" />
 			<widget name="oldversion_label" position="80,100" size="290,25" font="Regular;20" />
