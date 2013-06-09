@@ -524,11 +524,11 @@ class StreamsThumb(StreamsThumbCommon):
 
 			# Build up the stream URL based on the supplier
 			if supplier == 'limelight':    # SD streams that can be played by all users.
-				fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
+				fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
 			elif supplier == 'akamai':     # SD & HD streams that only UK users can play.
-				fileUrl = "rtmp://"+server+":1935/ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
+				fileUrl = "rtmp://"+server+":1935/ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
 			elif supplier == 'level3':     # HD Streams that can be played by all users.
-				fileUrl = "rtmp://"+server+":1935/iplayertok?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/10player.swf swfvfy=true timeout=180"
+				fileUrl = "rtmp://"+server+":1935/iplayertok?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
 			else:
 				fileUrl = ""
 
