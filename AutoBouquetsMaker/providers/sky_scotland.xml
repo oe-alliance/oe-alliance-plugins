@@ -1,0 +1,132 @@
+<provider>
+	<name>SKY UK</name>
+	<protocol>sky</protocol>
+	<transponder frequency="10802750" symbol_rate="22000000" polarization="0"
+		fec_inner="4" orbital_position="282" inversion="2" system="0"
+		modulation="1" roll_off="0" pilot="2" />
+	<configurations>
+		<configuration key="border_scotland_hd" bouquet="0x1006" region="0x24" namespace="0x11a0000">Border Scotland HD</configuration>
+		<configuration key="border_scotland_sd" bouquet="0x1002" region="0x24" namespace="0x11a0000">Border Scotland SD</configuration>
+		<configuration key="scottish_east_hd" bouquet="0x1006" region="0x25" namespace="0x11a0000">Scottish East HD</configuration>
+		<configuration key="scottish_east_sd" bouquet="0x1002" region="0x25" namespace="0x11a0000">Scottish East SD</configuration>
+		<configuration key="scottish_west_hd" bouquet="0x1006" region="0x26" namespace="0x11a0000">Scottish West HD</configuration>
+		<configuration key="scottish_west_sd" bouquet="0x1002" region="0x26" namespace="0x11a0000">Scottish West SD</configuration>
+	</configurations>
+	<sections>
+		<section number="101">Entertainment</section>
+		<section number="240">Lifestyle and Culture</section>
+		<section number="301">Movies</section>
+		<section number="350">Music</section>
+		<section number="401">Sports</section>
+		<section number="501">News</section>
+		<section number="520">Documentaries</section>
+		<section number="580">Religious</section>
+		<section number="601">Kids</section>
+		<section number="640">Shopping</section>
+		<section number="700">Sky Box Office</section>
+		<section number="780">International</section>
+		<section number="861">Gaming and Dating</section>
+		<section number="881">Specialist</section>
+		<section number="889">Bonus channels</section>
+		<section number="899">Sky Information</section>
+		<section number="900">Adult</section>
+		<section number="950">Other</section>
+		<section number="1000">Sky Sports Interactive</section>
+		<section number="1020">BBC Interactive</section>
+	</sections>
+	<!-- channelsontop affect only HD bouquets -->
+	<channelsontop>
+		<channel number="141" />
+		<channel number="142" />
+		<channel number="178" />
+		<channel number="230" />
+		<channel number="171" />
+	</channelsontop>
+	<!-- swapchannels affect only main bouquet (the normal version) -->
+	<swapchannels>
+		<filter bouquet="0x1005" region="0x13" />
+		<filter bouquet="0x1005" region="0x0c" />
+		<filter bouquet="0x1006" region="0x24" />
+		<filter bouquet="0x1007" region="0x41" />
+		<filter bouquet="0x1005" region="0x03" />
+		<filter bouquet="0x1008" region="0x22" />
+		<filter bouquet="0x1005" region="0x14" />
+		<filter bouquet="0x1005" region="0x02" />
+		<filter bouquet="0x1005" region="0x18" />
+		<filter bouquet="0x1006" region="0x23" />
+		<filter bouquet="0x1005" region="0x07" />
+		<filter bouquet="0x1007" region="0x46" />
+		<filter bouquet="0x1007" region="0x2b" />
+		<filter bouquet="0x1005" region="0x04" />
+		<filter bouquet="0x1007" region="0x3f" />
+		<filter bouquet="0x1005" region="0x1d" />
+		<filter bouquet="0x1005" region="0x01" />
+		<filter bouquet="0x1005" region="0x12" />
+		<filter bouquet="0x1007" region="0x42" />
+		<filter bouquet="0x1007" region="0x40" />
+		<filter bouquet="0x1005" region="0x0b" />
+		<filter bouquet="0x1007" region="0x44" />
+		<filter bouquet="0x1005" region="0x05" />
+		<filter bouquet="0x1005" region="0x0a" />
+		<filter bouquet="0x1007" region="0x2d" />
+		<filter bouquet="0x1005" region="0x15" />
+		<filter bouquet="0x1007" region="0x3e" />
+		<filter bouquet="0x1005" region="0x08" />
+		<filter bouquet="0x1005" region="0x1a" />
+		<filter bouquet="0x1008" region="0x21" />
+		<filter bouquet="0x1007" region="0x47" />
+		<filter bouquet="0x1008" region="0x32" />
+		<filter bouquet="0x1007" region="0x29" />
+		<filter bouquet="0x1007" region="0x3d" />
+		<filter bouquet="0x1006" region="0x25" />
+		<filter bouquet="0x1006" region="0x26" />
+		<filter bouquet="0x1007" region="0x3c" />
+		<filter bouquet="0x1005" region="0x1c" />
+		<filter bouquet="0x1007" region="0x48" />
+		<filter bouquet="0x1007" region="0x45" />
+		<filter bouquet="0x1005" region="0x09" />
+		<filter bouquet="0x1005" region="0x1b" />
+		<filter bouquet="0x1005" region="0x0d" />
+		<filter bouquet="0x1005" region="0x19" />
+		<filter bouquet="0x1007" region="0x43" />
+		<filter bouquet="0x1005" region="0x06" />
+		<channel number="141" with="101" />
+		<channel number="142" with="102" />
+		<channel number="230" with="104" />
+		<channel number="171" with="105" />
+	</swapchannels>
+	<servicehacks>
+<![CDATA[
+if service["service_name"][-4:] == " (28)":
+	service["service_name"] = service["service_name"][:-4]
+	
+if service["transport_stream_id"] == 0x7db:
+	service["namespace"] = 0x11a2e8a
+
+if service["transport_stream_id"] == 0x7e3:
+	service["namespace"] = 0x11a2f26
+
+if service["service_type"] == 0x02 and service["number"] > 3000:
+	service["number"] -= 3000
+
+new_numbers = []	
+for number in service["numbers"]:
+	if number >= 3000 and number <= 3999:
+		new_numbers.append(number - 3000)
+	elif number > 999 or number < 100:
+		if service["channel_id"] > 1470 and service["channel_id"] < 1480:
+			new_numbers.append(service["channel_id"] - 471)
+			service["interactive_name"] = "Sky Sports Interactive " + str(service["channel_id"])
+		elif service["channel_id"] > 2142 and service["channel_id"] < 2148:
+			new_numbers.append(service["channel_id"] - 1123)
+			service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
+		else:
+			skip = True
+		break
+	else:
+		new_numbers.append(number)
+		
+service["numbers"] = new_numbers
+]]>
+	</servicehacks>
+</provider>

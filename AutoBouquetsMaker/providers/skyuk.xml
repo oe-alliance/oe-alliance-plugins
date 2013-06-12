@@ -9,8 +9,6 @@
 		<configuration key="atherstone_sd" bouquet="0x1001" region="0x13" namespace="0x11a0000">Atherstone SD</configuration>
 		<configuration key="border_england_hd" bouquet="0x1005" region="0x0c" namespace="0x11a0000">Border England HD</configuration>
 		<configuration key="border_england_sd" bouquet="0x1001" region="0x0c" namespace="0x11a0000">Border England SD</configuration>
-		<configuration key="border_scotland_hd" bouquet="0x1006" region="0x24" namespace="0x11a0000">Border Scotland HD</configuration>
-		<configuration key="border_scotland_sd" bouquet="0x1002" region="0x24" namespace="0x11a0000">Border Scotland SD</configuration>
 		<configuration key="brighton_hd" bouquet="0x1007" region="0x41" namespace="0x11a0000">Brighton HD</configuration>
 		<configuration key="brighton_sd" bouquet="0x1003" region="0x41" namespace="0x11a0000">Brighton SD</configuration>
 		<configuration key="central_midlands_hd" bouquet="0x1005" region="0x03" namespace="0x11a0000">Central Midlands HD</configuration>
@@ -69,10 +67,6 @@
 		<configuration key="ridge_hill_sd" bouquet="0x1003" region="0x29" namespace="0x11a0000">Ridge Hill SD</configuration>
 		<configuration key="scarborough_hd" bouquet="0x1007" region="0x3d" namespace="0x11a0000">Scarborough HD</configuration>
 		<configuration key="scarborough_sd" bouquet="0x1003" region="0x3d" namespace="0x11a0000">Scarborough SD</configuration>
-		<configuration key="scottish_east_hd" bouquet="0x1006" region="0x25" namespace="0x11a0000">Scottish East HD</configuration>
-		<configuration key="scottish_east_sd" bouquet="0x1002" region="0x25" namespace="0x11a0000">Scottish East SD</configuration>
-		<configuration key="scottish_west_hd" bouquet="0x1006" region="0x26" namespace="0x11a0000">Scottish West HD</configuration>
-		<configuration key="scottish_west_sd" bouquet="0x1002" region="0x26" namespace="0x11a0000">Scottish West SD</configuration>
 		<configuration key="sheffield_hd" bouquet="0x1007" region="0x3c" namespace="0x11a0000">Sheffield HD</configuration>
 		<configuration key="sheffield_sd" bouquet="0x1003" region="0x3c" namespace="0x11a0000">Sheffield SD</configuration>
 		<configuration key="south_lakeland_hd" bouquet="0x1005" region="0x1c" namespace="0x11a0000">South Lakeland HD</configuration>
