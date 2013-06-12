@@ -1,5 +1,5 @@
 <provider>
-	<name>SKY UK</name>
+	<name>SKY SCOTLAND</name>
 	<protocol>sky</protocol>
 	<transponder frequency="10802750" symbol_rate="22000000" polarization="0"
 		fec_inner="4" orbital_position="282" inversion="2" system="0"
