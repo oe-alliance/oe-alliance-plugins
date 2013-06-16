@@ -415,7 +415,7 @@ class OpenUg(Screen):
 		self.cmd = cmd
 		self.timerCmd = self.TIMER_CMD_START
 
-		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/vix.png"))
+		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/oe-alliance.png"))
 
 		self.tmplist = []
 		self.mediaList = []
