@@ -109,6 +109,7 @@
 		<section number="950">Other</section>
 		<section number="1000">Sky Sports Interactive</section>
 		<section number="1020">BBC Interactive</section>
+		<section number="1030">Sky Anytime</section>
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
 	<channelsontop>
@@ -176,9 +177,6 @@
 <![CDATA[
 if service["service_name"][-4:] == " (28)":
 	service["service_name"] = service["service_name"][:-4]
-	
-if service["transport_stream_id"] == 0x7db:
-	service["namespace"] = 0x11a2e8a
 
 if service["transport_stream_id"] == 0x7e3:
 	service["namespace"] = 0x11a2f26
@@ -191,18 +189,21 @@ for number in service["numbers"]:
 	if number >= 3000 and number <= 3999:
 		new_numbers.append(number - 3000)
 	elif number > 999 or number < 100:
-		if service["channel_id"] > 1470 and service["channel_id"] < 1480:
+		if service["channel_id"] > 1470 and service["channel_id"] < 1486:
 			new_numbers.append(service["channel_id"] - 471)
 			service["interactive_name"] = "Sky Sports Interactive " + str(service["channel_id"])
-		elif service["channel_id"] > 2142 and service["channel_id"] < 2148:
-			new_numbers.append(service["channel_id"] - 1123)
+		elif service["channel_id"] > 2050 and service["channel_id"] < 2053:
+			new_numbers.append(service["channel_id"] - 1031)
 			service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
+		elif service["channel_id"] > 4093 and service["channel_id"] < 4099:
+			new_numbers.append(service["channel_id"] - 3064)
+			service["interactive_name"] = "Sky Anytime " + str(service["channel_id"])
 		else:
 			skip = True
 		break
 	else:
 		new_numbers.append(number)
-		
+
 service["numbers"] = new_numbers
 ]]>
 	</servicehacks>
