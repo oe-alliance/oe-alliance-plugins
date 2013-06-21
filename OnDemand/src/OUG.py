@@ -243,14 +243,14 @@ class OpenUg(StreamsThumbCommon):
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "archive_week/protocol/html")
 			if len(self.mediaList) == 0:
-				self.mediaProblemPopup()
+				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
 			
 		elif retval == 'pop':
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "popular/protocol/html")
 			if len(self.mediaList) == 0:
-				self.mediaProblemPopup()
+				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
 			
 		elif retval == 'atotz':
@@ -261,7 +261,7 @@ class OpenUg(StreamsThumbCommon):
 			self.getMediaDataAlph(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/2/protocol/html")
 			self.getMediaDataAlph(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/3/protocol/html")
 			if len(self.mediaList) == 0:
-				self.mediaProblemPopup()
+				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
 			
 		elif retval == 'search':
@@ -273,7 +273,7 @@ class OpenUg(StreamsThumbCommon):
 			self.level = self.UG_LEVEL_ALL
 			self.getRTLMediaData(self.mediaList)
 			if len(self.mediaList) == 0:
-				self.mediaProblemPopup()
+				self.mediaProblemPopup("No Episodes Found!")
 			else:
 				self.updateMenu()
 		else:
@@ -282,7 +282,7 @@ class OpenUg(StreamsThumbCommon):
 			self.level = self.UG_LEVEL_SERIE
 			self.getRTLMediaDataBack(self.mediaList, retval)
 			if len(self.mediaList) == 0:
-				self.mediaProblemPopup()
+				self.mediaProblemPopup("No Episodes Found!")
 			else:
 				self.updateMenu()
 
