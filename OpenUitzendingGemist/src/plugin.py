@@ -380,9 +380,8 @@ class OpenUg(Screen):
 
 	TIMER_CMD_START = 0
 	TIMER_CMD_VKEY = 1
-
 	UG_BASE_URL = "http://hbbtv.distributie.publiekeomroep.nl"
-	HBBTV_UG_BASE_URL = UG_BASE_URL + "/ug/ajax/action/"
+	HBBTV_UG_BASE_URL = UG_BASE_URL + "/nu/ajax/action/"
 	STAGING_UG_BASE_URL = "http://staging.hbbtv.distributie.publiekeomroep.nl/"
 	RTL_BASE_URL = "http://rtl.ksya.net/"
 
@@ -543,10 +542,10 @@ class OpenUg(Screen):
 			self.clearList()
 			self.isAtotZ = True
 			self.level = self.UG_LEVEL_ALL
-			self.getMediaDataAlph(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/0/protocol/html")
-			self.getMediaDataAlph(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/1/protocol/html")
-			self.getMediaDataAlph(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/2/protocol/html")
-			self.getMediaDataAlph(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/3/protocol/html")
+			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/0/protocol/html")
+			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/1/protocol/html")
+			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/2/protocol/html")
+			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/3/protocol/html")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup()
 			self.updateMenu()
@@ -791,26 +790,29 @@ class OpenUg(Screen):
 			if state == 1:
 				if "<a href=\"video" in line:
 					stream = line.split("<a href=\"")[1].split('\" ')[0]
-
+					continue
 				tmp = "<img class=\"thumbnail\" src=\""
 				if tmp in line:
 					icon = line.split(tmp)[1].split('\" ')[0]
-
+					continue
 				tmp = "<span class=\"title\">"
 				if tmp in line:
 					name = line.split(tmp)[1].split("</span>")[0]
 					name.replace("&amp;", "&")
 					state = 2
+					continue;
 
 			elif state == 2:
 				if "<br />" in line:
 					short = line.split("<br />")[0]
 					state = 3
+					continue;
 
 			elif state == 3:
 				tmp = line.split("<br")[0].split(" | ")
 				channel = tmp[0]
 				state = 4
+				continue;
 
 			elif state == 4:
 				date = line.split("</span>")[0]
@@ -830,115 +832,50 @@ class OpenUg(Screen):
 		data = data.split("\n")
 		for line in data:
 			if state == 0:
-				if "<div class=\"menuEntry\">" in line:
+				tmp = "<div class=\"vid\"" 
+				if tmp in line:
 					state = 1
 					short = ''
 					name = ''
 					date = ''
 					stream = ''
 					icon = ''
+					continue
 
 			elif state == 1:
-				tmp = "<div class=\"programDetails\" id=\""
-				if  tmp in line:
-					stream = line.split(tmp)[1].split('\">')[0]
+				if (not icon or not stream):
+					tmp = "<img class=\"vid_view\" src=\""
+					if tmp in line:
+						icon = line.split(tmp)[1].split("\" />")[0]
+						tmp = "<img class=\"vid_view\" src=\"http://hbbtv.distributie.publiekeomroep.nl/imagecache/epg/pr_id/"
+						stream = line.split(tmp)[1].split('/')[0]
+						continue
+					
+				if (not short):
+					tmp = "<p class=\"titleshort\">"
+					if tmp in line:
+						short = line.split(tmp)[1].split("</p>")[0]
+						continue
 
-				tmp = "<h3>"
-				if tmp in line:
-					name = line.split(tmp)[1].split("</h3>")[0]
-
-				tmp = "<div class='short'>"
-				if tmp in line:
-					short = line.split(tmp)[1].split("</div>")[0]
-
-				tmp = "<div class='datum'>"
-				if tmp in line and date == '':
-					date = line.split(tmp)[1].split("</div>")[0]
-					channel = date[-3:]
-
-				tmp = "<img class='thumbnail' src='"
-				if tmp in line:
-					icon = line.split(tmp)[1].split("\'/>")[0]
-					if "http://" not in icon:
-						icon_tmp = self.UG_BASE_URL
-						icon =  icon_tmp + icon
-
-				if "</div>" in line[:6] and date and name and short and icon:
+				if (not name):
+					tmp = "<p class=\"title\">"
+					if tmp in line:
+						name = line.split(tmp)[1].split("</p>")[0]
+						continue
+				
+				if (not date):
+					tmp = "<p class=\"date_time bottom\">"
+					if tmp in line:
+						date = line.split(tmp)[1].split("</p>")[0]
+						
+				if stream and date and name and short and icon:
 					icon_type = self.getIconType(icon)
+					print "[UG] name: %s" % name
+					print "[UG] short: %s" % short
+					print "[UG] channel: %s" % channel
+					print "[UG] stream: %s" % stream
+					print "[UG] date: %s" % date
 					weekList.append((date, name, short, channel, stream, icon, icon_type, False))
-					state = 0
-
-	def getMediaDataAlph(self, weekList, url):
-		data = wgetUrl(url)
-		state = 0
-		short = ''
-		name = ''
-		date = ''
-		stream = ''
-		channel = ''
-		icon = ''
-		serieid = ''
-		data = data.split('\n')
-		for line in data:
-			if "<div class=\"menuItem" in line:
-				serieid = ''
-				short = ''
-				name = ''
-				date = ''
-				stream = ''
-				channel = ''
-				icon = ''
-				if "id=" in line:
-					serieid = line.split("id=\"")[1].split('\"')[0]
-				state = 1
-
-			if state == 1:
-				tmp = "<h3>"
-				if tmp in line and name == '':
-					name = line.split(tmp)[1].split("</h3>")[0]
-
-				tmp = "<div class=\"programDetails\" id=\""
-				if tmp in line and stream == '':
-					stream = line.split(tmp)[1].split("\"")[0]
-
-				if serieid == '':
-					tmp = "<img class='thumbnail' src='"
-					if tmp in line:
-						icon = line.split(tmp)[1].split('\'/>')[0]
-						if "http://" not in icon:
-							icon_tmp = self.UG_BASE_URL
-							icon =  icon_tmp + icon
-
-					tmp = "<div class='datum'>"
-					if tmp in line and date == '':
-						date = line.split(tmp)[1].split("</div>")[0]
-						channel = date[-3:]
-
-					tmp = "<div class='short'>"
-					if tmp in line:
-						short = line.split(tmp)[1].split("</div>")[0]
-				else:
-					tmp = "<div class='thumbHolder'>"
-					if tmp in line:
-						icon = line.split("url(\"")[1].split("\"")[0]
-						if "http://" not in icon:
-							icon_tmp = self.UG_BASE_URL
-							icon =  icon_tmp + icon
-
-				isdone = False
-				if serieid == '':
-					if name and stream and icon and date:
-						isdone = True
-				else:
-					if name and serieid and icon:
-						isdone = True
-				if isdone:
-					if serieid != '':
-						icon_type = self.getIconType(icon)
-						weekList.append((date, name, short, channel, serieid, icon, icon_type, True))
-					else:
-						icon_type = self.getIconType(icon)
-						weekList.append((date, name, short, channel, stream, icon, icon_type, False))
 					state = 0
 
 	def getIconType(self, data):
