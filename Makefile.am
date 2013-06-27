@@ -39,7 +39,7 @@ SUBDIRS += FPGAUpgrade VuRemote TransCodingSetup Blindscan
 endif
 
 if VUDUO2
-SUBDIRS += FPGAUpgrade VuRemote TransCodingSetup Blindscan
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup Blindscan
 endif
 
 if GIGABLUE
