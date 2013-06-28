@@ -118,6 +118,9 @@ for number in service["numbers"]:
 		elif service["channel_id"] > 2050 and service["channel_id"] < 2053:
 			new_numbers.append(service["channel_id"] - 1031)
 			service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
+		elif service["channel_id"] > 3542 and service["channel_id"] < 3545:
+			new_numbers.append(service["channel_id"] - 2521)
+			service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
 		elif service["channel_id"] > 4093 and service["channel_id"] < 4099:
 			new_numbers.append(service["channel_id"] - 3064)
 			service["interactive_name"] = "Sky Anytime " + str(service["channel_id"])
