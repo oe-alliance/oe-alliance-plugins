@@ -1,3 +1,4 @@
+# Odin
 # for localized messages
 from . import _
 
@@ -9,7 +10,7 @@ from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList
 from Components.config import config, configfile, ConfigSubsection, getConfigListEntry, ConfigSelection
 from Components.ConfigList import ConfigListScreen
-from enigma import iPlayableService, eServiceCenter, eTimer
+from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ServiceList import ServiceList
 from Screens.InfoBar import InfoBar
@@ -18,7 +19,7 @@ from time import localtime, time
 import Screens.Standby
 
 config.plugins.VFD_odin = ConfigSubsection()
-config.plugins.VFD_odin.showClock = ConfigSelection(default = "True", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
+config.plugins.VFD_odin.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
 config.plugins.VFD_odin.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
 
 def vfd_write(text):
@@ -31,6 +32,10 @@ class Channelnumber:
 		self.sign = 0
 		self.updatetime = 10000
 		self.blink = False
+		self.channelnrdelay = 15
+		self.begin = int(time())
+		self.endkeypress = True
+		eActionMap.getInstance().bindAction('', -0x7FFFFFFF, self.keyPressed)
 		self.zaPrik = eTimer()
 		self.zaPrik.timeout.get().append(self.vrime)
 		self.zaPrik.start(1000, 1)
@@ -94,7 +99,7 @@ class Channelnumber:
 		return chnr
 
 	def prikaz(self):
-		if config.plugins.VFD_odin.showClock.value == 'True' or config.plugins.VFD_odin.showClock.value == 'True_All':
+		if config.plugins.VFD_odin.showClock.value == 'True' or config.plugins.VFD_odin.showClock.value == 'True_All' or config.plugins.VFD_odin.showClock.value == 'True_Switch':
 			clock = str(localtime()[3])
 			clock1 = str(localtime()[4])
 			if config.plugins.VFD_odin.timeMode.value != '24h':
@@ -113,6 +118,17 @@ class Channelnumber:
 			vfd_write("....")
 
 	def vrime(self):
+		if (config.plugins.VFD_odin.showClock.value == 'True' or config.plugins.VFD_odin.showClock.value == 'False' or config.plugins.VFD_odin.showClock.value == 'True_Switch') and not Screens.Standby.inStandby:
+			if config.plugins.VFD_odin.showClock.value == 'True_Switch':
+				if time() >= self.begin:
+					self.endkeypress = False
+				if self.endkeypress:
+					self.__eventInfoChanged()
+				else:
+					self.prikaz()
+			else:
+				self.__eventInfoChanged()
+					
 		if config.plugins.VFD_odin.showClock.value == 'Off':
 			vfd_write("....")
 			self.zaPrik.start(self.updatetime, 1)
@@ -122,6 +138,10 @@ class Channelnumber:
 
 		if Screens.Standby.inStandby or config.plugins.VFD_odin.showClock.value == 'True_All':
 			self.prikaz()
+
+	def keyPressed(self, key, tag):
+		self.begin = time() + int(self.channelnrdelay)
+		self.endkeypress = True
 
 ChannelnumberInstance = None
 
