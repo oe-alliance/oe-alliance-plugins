@@ -1,3 +1,4 @@
+#Giga
 # for localized messages
 from . import _
 
@@ -8,7 +9,7 @@ from Components.ActionMap import ActionMap
 from Components.config import config, configfile, ConfigSubsection, ConfigEnableDisable, getConfigListEntry, ConfigInteger, ConfigSelection, ConfigYesNo
 from Components.ConfigList import ConfigListScreen, ConfigList
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from enigma import iPlayableService, eServiceCenter, eTimer, getBoxType
+from enigma import iPlayableService, eServiceCenter, eTimer, getBoxType, eActionMap
 from os import system
 from Plugins.Plugin import PluginDescriptor
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -21,7 +22,7 @@ if getBoxType() == 'gb800se' or getBoxType() == 'gb800solo' or getBoxType() == '
 	from enigma import evfd
 
 config.plugins.VFD_Giga = ConfigSubsection()
-config.plugins.VFD_Giga.showClock = ConfigSelection(default = "True", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
+config.plugins.VFD_Giga.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")),("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
 config.plugins.VFD_Giga.showClockDeepStandby = ConfigSelection(default = "False", choices = [("False",_("No")),("True",_("Yes"))])
 config.plugins.VFD_Giga.setLed = ConfigYesNo(default = True)
 config.plugins.VFD_Giga.recLedBlink = ConfigYesNo(default = True)
@@ -41,6 +42,10 @@ class Channelnumber:
 		self.sign = 0
 		self.updatetime = 1000
 		self.blink = False
+		self.channelnrdelay = 15
+		self.begin = int(time())
+		self.endkeypress = True
+		eActionMap.getInstance().bindAction('', -0x7FFFFFFF, self.keyPressed)
 		self.zaPrik = eTimer()
 		self.zaPrik.timeout.get().append(self.vrime)
 		self.zaPrik.start(1000, 1)
@@ -77,7 +82,7 @@ class Channelnumber:
 			CentChnr = chnr + '\n'
 		#################################################
 
-		open("/proc/vfd", "w").write(CentChnr)
+		evfd.getInstance().vfd_write_string(CentChnr)
 
 	def getchannelnr(self):
 		if InfoBar.instance is None:
@@ -107,9 +112,10 @@ class Channelnumber:
 		return chnr
 
 	def prikaz(self):
-		if config.plugins.VFD_Giga.showClock.value == 'True' or config.plugins.VFD_Giga.showClock.value == 'True_All':
+		if config.plugins.VFD_Giga.showClock.value == 'True' or config.plugins.VFD_Giga.showClock.value == 'True_All' or config.plugins.VFD_Giga.showClock.value == 'True_Switch':
 			clock = str(localtime()[3])
 			clock1 = str(localtime()[4])
+			clk = str(localtime()[5])
 			if config.plugins.VFD_Giga.timeMode.value != '24h':
 				if int(clock) > 12:
 					clock = str(int(clock) - 12)
@@ -120,7 +126,6 @@ class Channelnumber:
 			else:
 				clock2 = "%02d%02d" % (int(clock), int(clock1))
 				self.sign = 0
-
 			evfd.getInstance().vfd_write_string(clock2)
 		else:
 			evfd.getInstance().vfd_write_string("    ")
@@ -130,6 +135,18 @@ class Channelnumber:
 		if not getBoxType() == 'gb800se' and not getBoxType() == 'gb800solo':
 			self.zaPrik.start(self.updatetime, 1)
 			return
+
+		if (config.plugins.VFD_Giga.showClock.value == 'True' or config.plugins.VFD_Giga.showClock.value == 'False' or config.plugins.VFD_Giga.showClock.value == 'True_Switch') and not Screens.Standby.inStandby:
+			if config.plugins.VFD_Giga.showClock.value == 'True_Switch':
+				if time() >= self.begin:
+					self.endkeypress = False
+				if self.endkeypress:
+					self.__eventInfoChanged()
+				else:
+					self.prikaz()
+			else:
+				self.__eventInfoChanged()
+
 		if config.plugins.VFD_Giga.showClock.value == 'Off':
 			evfd.getInstance().vfd_write_string("    ")
 			self.zaPrik.start(self.updatetime, 1)
@@ -161,6 +178,10 @@ class Channelnumber:
 					evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledSBY.value)
 				else:
 					evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledRUN.value)
+
+	def keyPressed(self, key, tag):
+		self.begin = time() + int(self.channelnrdelay)
+		self.endkeypress = True
 
 ChannelnumberInstance = None
 
@@ -275,7 +296,7 @@ class VFD_GigaSetup(ConfigListScreen, Screen):
 		self.newConfig()
 
 	def newConfig(self):
-		print self["config"].getCurrent()[0]
+		# print self["config"].getCurrent()[0]
 		if self["config"].getCurrent()[0] == _('Enable led'):
 			self.createSetup()
 		elif self["config"].getCurrent()[0][:3].upper() == 'LED':
