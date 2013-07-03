@@ -49,7 +49,7 @@ class TranscodingSetupInit:
 
 	def createConfig(self):
 		config.plugins.transcodingsetup = ConfigSubsection()
-		config.plugins.transcodingsetup.transcoding = ConfigSelection(default = "disable", choices = [ ("enable", _("enable")), ("disable", _("disable"))] )
+		config.plugins.transcodingsetup.transcoding = ConfigSelection(default = "enable", choices = [ ("enable", _("enable")), ("disable", _("disable"))] )
 		config.plugins.transcodingsetup.port = ConfigSelection(default = "8002", choices = [ ("8001", "8001"), ("8002", "8002")] )
 		global TranscodingConfigList
 		for x in TranscodingConfigList:
