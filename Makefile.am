@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = AutoBouquetsMaker DLNABrowser DLNAServer StreamTV 3GModemManager WebBrowser OpenUitzendingGemist TunerServer OnDemand Fempa
+SUBDIRS = AutoBouquetsMaker DLNABrowser DLNAServer StreamTV 3GModemManager WebBrowser OpenUitzendingGemist TunerServer OnDemand Fempa LCD4linux
 
 if VUPLUS
 SUBDIRS += VuplusEvent HbbTV

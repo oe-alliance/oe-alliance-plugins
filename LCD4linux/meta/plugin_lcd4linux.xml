@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+					<tag type="Network" />
+	  </prerequisites>
+		  <info>
+					<author>IHAD joergm6 <joergm6@www.i-have-a-dreambox.com></author>
+					<name>LCD4Linux</name>
+					<packagename>enigma2-plugin-extensions-lcd4linux</packagename>
+					<shortdescription>Web/DPF/Samsung LCD Ansteuerung</shortdescription>
+					<description>Web/DPF/Samsung LCD Ansteuerung</description>
+		  </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-lcd4linux" />
+	  </files>
+</default>
