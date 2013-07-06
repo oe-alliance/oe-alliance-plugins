@@ -47,7 +47,7 @@ SUBDIRS += GigaBlueVFDControl Blindscan
 endif
 
 if XP1000
-SUBDIRS += XtrendRemote
+SUBDIRS += XtrendRemote SF8VFDControl
 endif
 
 if HAVE_TEMPFANCONTROL

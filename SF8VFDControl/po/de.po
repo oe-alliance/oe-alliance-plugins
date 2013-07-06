@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"PO-Revision-Date: 2013-07-05 22:57+0100\n"
+"Last-Translator: Nobody28 <Nobody28@hotmail.de>\n"
+"Language-Team: Deutsch <> j-ot&Trial\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+
+msgid "Blink Record Led"
+msgstr "Blinkende Aufnahme Led"
+
+msgid "Blue"
+msgstr "Blau"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Enable led"
+msgstr "Led aktivieren"
+
+msgid "Led state Deep Standby"
+msgstr "Led Status Deep Standby"
+
+msgid "Led state RUN"
+msgstr "Led Status RUN"
+
+msgid "Led state Record"
+msgstr "Led Status Aufnahme"
+
+msgid "Led state Standby"
+msgstr "Led Status Standby"
+
+msgid "No"
+msgstr "Nein"
+
+msgid "None"
+msgstr "Keine"
+
+msgid "Off"
+msgstr "Aus"
+
+msgid "Purple"
+msgstr "Violett"
+
+msgid "Red"
+msgstr "Rot"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Show clock"
+msgstr "Zeige Uhr"
+
+msgid "Show clock in Deep Standby"
+msgstr "Zeige Uhr im Deep Standby"
+
+msgid "Time mode"
+msgstr "Zeit Modus"
+
+msgid "Update Date/Time"
+msgstr "Datum/Uhrzeit aktuallisieren"
+
+msgid "VFD_Giga"
+msgstr ""
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "in standby: "
+msgstr "in Standby: "
