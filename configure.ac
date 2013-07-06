@@ -160,6 +160,21 @@ HbbTV/src/Makefile
 HbbTV/meta/Makefile
 HbbTV/po/Makefile
 
+LCD4linux/Makefile
+LCD4linux/src/Makefile
+LCD4linux/src/data/Makefile
+LCD4linux/src/data/Clock1/Makefile
+LCD4linux/src/data/Clock2/Makefile
+LCD4linux/src/data/Clock3/Makefile
+LCD4linux/src/data/Clock4/Makefile
+LCD4linux/src/data/Clock5/Makefile
+LCD4linux/src/data/Clock6/Makefile
+LCD4linux/src/meteo/Makefile
+LCD4linux/src/renderer/Makefile
+LCD4linux/src/wetter/Makefile
+LCD4linux/meta/Makefile
+LCD4linux/po/Makefile
+
 OdinM7VFDControl/Makefile
 OdinM7VFDControl/src/Makefile
 OdinM7VFDControl/meta/Makefile
