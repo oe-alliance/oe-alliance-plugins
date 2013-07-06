@@ -213,6 +213,11 @@ OpenUitzendingGemist/src/Makefile
 OpenUitzendingGemist/meta/Makefile
 OpenUitzendingGemist/po/Makefile
 
+SF8VFDControl/Makefile
+SF8VFDControl/src/Makefile
+SF8VFDControl/meta/Makefile
+SF8VFDControl/po/Makefile
+
 StreamTV/Makefile
 StreamTV/src/Makefile
 StreamTV/meta/Makefile
