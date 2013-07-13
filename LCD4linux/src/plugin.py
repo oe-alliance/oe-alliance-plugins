@@ -1651,24 +1651,24 @@ LCD4linux.StandbyBox2BackColor = ConfigSelection(choices = [("0", _("off"))] + F
 import traceback
 class MyTimer:
 	def __init__(self):
-		print "L4L create timer at:"
+		print "[LCD4linux] create timer at:"
 		traceback.print_stack(limit=2)
 		self.timer = eTimer()
-		print "L4L created timer", self.timer
+		print "[LCD4linux] created timer", self.timer
 	def __del__(self):
-		print "L4L destruct timer", self.timer
+		print "[LCD4linux] destruct timer", self.timer
 		traceback.print_stack(limit=2)
 		del self.timer
 	def start(self, msecs, singleShot=False):
-		print "L4L start timer", msecs, singleShot, self.timer
+		print "[LCD4linux] start timer", msecs, singleShot, self.timer
 		traceback.print_stack(limit=2)
 		self.timer.start(msecs, singleShot)
 	def	startLongTimer(self, secs):
-		print "L4L start longtimer", secs, self.timer
+		print "[LCD4linux] start longtimer", secs, self.timer
 		traceback.print_stack(limit=2)
 		self.timer.startLongTimer(secs)
 	def stop(self):
-		print "L4L stopped timer", self.timer
+		print "[LCD4linux] stopped timer", self.timer
 		traceback.print_stack(limit=2)
 		self.timer.stop()
 	def getCallback(self):
@@ -3237,7 +3237,7 @@ class L4LWorker(Thread):
 					ICSlist.append([rs,col])
 					return
 					gcal = icalendar.Calendar().from_string(rs)
-					print "ics",7
+					# print "ics",7
 				except:
 					L4log("Error: ICS not readable!",name)
 					return
@@ -3258,11 +3258,11 @@ class L4LWorker(Thread):
 								ICS[D]=[]
 							ICS[D].append([Code_utf8(component.get('summary')),component.decoded("dtstart"),col])
 							L4log(D,[component.get('summary'),component.decoded("dtstart")])
-				print "ics",8
+				# print "ics",8
 #				del gcal
-				print "ics",9
+				# print "ics",9
 #				del rs
-				print "ics",10
+				# print "ics",10
 			else:
 				L4logE("Error Read ICS",name)
 
@@ -3660,7 +3660,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 		else:
 			pic_h = int(size_h/2)
 		pic_h2 = pic_h*2
-		print "Hoehe",size_h,pic_h,pic_h2
+		# print "Hoehe",size_h,pic_h,pic_h2
 		skin = """
 			<screen position="center,%d" size="%d,%d" title="LCD4linux Settings" >
 			<widget name="config" position="0,0" size="600,%d" scrollbarMode="showOnDemand" enableWrapAround="1" />
@@ -5996,7 +5996,7 @@ class UpdateStatus(Screen):
 			self.TunerCallBack=True
 			res_mgr.frontendUseMaskChanged.get().append(self.tunerUseMaskChanged)
 		else:
-			print "[ERROR]no res_mgr!!"
+			print "[LCD4linux] ERROR no res_mgr!!"
 			
 	def offTunerCount(self):
 		if self.TunerCallBack:
@@ -6005,7 +6005,7 @@ class UpdateStatus(Screen):
 				self.TunerCallBack=False
 				res_mgr.frontendUseMaskChanged.get().remove(self.tunerUseMaskChanged)
 			else:
-				print "[ERROR]no res_mgr!!"
+				print "[LCD4linux] ERROR no res_mgr!!"
 			
 	def tunerUseMaskChanged(self, mask):
 		global TunerMask
@@ -8012,7 +8012,7 @@ def LCD4linuxPIC(self,session):
 		vt = "-v" if vidosd == "0" else ""
 		im = Image.new('RGB', (int(x), int(y)), (0, 0, 0, 0))
 #		GrabTV("/usr/bin/grab %s -j 40 -r %s /tmp/lcd4linux/tvgrab.jpg" % (vt,x))
-		print "OSD",TVrunning,ScreenActive,LCD4linux.TV.value
+		# print "OSD",TVrunning,ScreenActive,LCD4linux.TV.value
 		while TVrunning == True and ScreenActive in LCD4linux.TV.value:
 			GrabTV("/usr/bin/grab %s -j 40 -r %s %stvgrab.jpg" % (vt,x,TMPL))
 #			if lcd in ["1","3"]:
@@ -8255,7 +8255,7 @@ def LCD4linuxPIC(self,session):
 		event_run=0
 		ProgressBar = MAX_W-20
 		if self.LsreftoString is not None:
-#			print "L4L",self.LsreftoString
+#			print "[LCD4linux]",self.LsreftoString
 			if ConfigType[1:] == "1":
 				ms = 1.5
 			elif ConfigType[1:] == "2":
@@ -8264,17 +8264,17 @@ def LCD4linuxPIC(self,session):
 				ms = 1
 			font = ImageFont.truetype(FONT, int(ConfigSize*ms)+8, encoding='unic') #5
 			if self.Lpath: # Movie
-#				print "L4L Path",self.Lpath
+#				print "[LCD4linux] Path",self.Lpath
 				isVideoPlaying = 1
 				if self.Llength is not None:
-#					print "L4L Len",self.Llength
+#					print "[LCD4linux] Len",self.Llength
 					length = self.Llength
 					position = self.Lposition
-#					print "L4L Len",length,position
+#					print "[LCD4linux] Len",length,position
 					if length and position:
-#						print "L4L Len ok"
+#						print "[LCD4linux] Len ok"
 						if length[1] > 0:
-#							print "L4L Len >0"
+#							print "[LCD4linux] Len >0"
 							if ConfigType[0] in ["2","4","6","8","9","A"]:
 								if ConfigType[0] in ["8","9","A"]:
 									dur = int(position[1]/90000)
@@ -8320,9 +8320,9 @@ def LCD4linuxPIC(self,session):
 #							remaining = remaining / 90000
 			else: # DVB 
 				event_begin, event_end, duration, event_name = self.Levent_begin0, self.Levent_end0, self.Lduration0, self.Levent_name0
-#				print "L4L DVB",event_begin, event_end, duration, event_name
+#				print "[LCD4linux] DVB",event_begin, event_end, duration, event_name
 				if event_begin != 0:
-#					print "L4L DVB Begin",event_begin
+#					print "[LCD4linux] DVB Begin",event_begin
 					now = int(time())
 					event_run = now - event_begin
 					if ConfigType[0] in ["2","4","6","8","9","A"]:
@@ -8364,7 +8364,7 @@ def LCD4linuxPIC(self,session):
 					isData = True
 #					print event_begin, event_end, event.getDuration(), event.getPlayPosition()
 			if isData == True:
-#				print "L4L isdata"
+#				print "[LCD4linux] isdata"
 				if event_run <0:
 					event_run = 0
 				if event_run > ProgressBar:
