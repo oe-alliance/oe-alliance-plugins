@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = AutoBouquetsMaker DLNABrowser DLNAServer StreamTV 3GModemManager WebBrowser OpenUitzendingGemist TunerServer OnDemand Fempa
+SUBDIRS = AutoBouquetsMaker DLNABrowser DLNAServer StreamTV 3GModemManager WebBrowser OpenUitzendingGemist TunerServer OnDemand Fempa LCD4linux
 
 if VUPLUS
 SUBDIRS += VuplusEvent HbbTV
@@ -39,7 +39,7 @@ SUBDIRS += FPGAUpgrade VuRemote TransCodingSetup Blindscan
 endif
 
 if VUDUO2
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup Blindscan LCD4linux
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup Blindscan
 endif
 
 if GIGABLUE
