@@ -1,0 +1,1987 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: LCD4linux\n"
+"POT-Creation-Date: 2013-07-10 17:18+Mitteleuropäische Sommerzeit\n"
+"PO-Revision-Date: 2013-07-10 17:26+0100\n"
+"Last-Translator: joergm6 <joergm6@online.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "%"
+msgstr "%"
+
+msgid "% + BER"
+msgstr "% + BER"
+
+msgid "% + Load@1min"
+msgstr "% + Load@1min"
+
+msgid "% + Load@5min"
+msgstr "% + Load@5min"
+
+msgid "%d Mails  %d New  %s"
+msgstr "%d Mails  %d Neu  %s"
+
+msgid "-  Type"
+msgstr "-  Typ"
+
+msgid "- Alignment"
+msgstr "- Ausrichtung"
+
+msgid "- Analog Clock"
+msgstr "- Analog Uhr"
+
+msgid "- Background Color"
+msgstr "- Hintergrund Farbe"
+
+msgid "- Background/Transparency"
+msgstr "- Hintergrund/Transparenz"
+
+msgid "- Backlight Off [disable set Off=On]"
+msgstr "- Hintergrundbeleuchtung Aus [deaktiv bei Aus=Ein]"
+
+msgid "- Backlight On"
+msgstr "- Hintergrundbeleuchtung Ein"
+
+msgid "- Backlight Weekend Off [disable set Off=On]"
+msgstr "- Hintergrundbeleuchtung Wochenende Aus [deaktiv bei Aus=Ein]"
+
+msgid "- Backlight Weekend On"
+msgstr "- Hintergrundbeleuchtung Wochenende Ein"
+
+msgid "- Bar Range Max"
+msgstr "- Bar Bereich Max"
+
+msgid "- Bar Range Min"
+msgstr "- Bar Bereich Min"
+
+msgid "- CPU"
+msgstr "- CPU"
+
+msgid "- Caption Color"
+msgstr "- Beschriftung Farbe"
+
+msgid "- Color"
+msgstr "- Farbe"
+
+msgid "- Current Day Color"
+msgstr "- Aktueller Tag Farbe"
+
+msgid "- Cut Height [disable = 0]"
+msgstr "- Ausschneiden Höhe [deaktiviert = 0]"
+
+msgid "- Cut Width [disable = 0]"
+msgstr "- Ausschneiden Breite [deaktiviert = 0]"
+
+msgid "- Cut from X"
+msgstr "- Ausschneiden ab X"
+
+msgid "- Cut from Y"
+msgstr "- Ausschneiden ab Y"
+
+msgid "- Default Cover [ok]>"
+msgstr "- Standard Cover [ok]>"
+
+msgid "- Device Name"
+msgstr "- Geräte Name"
+
+msgid "- Download Cover from Google"
+msgstr "- Download Cover von Google"
+
+msgid "- Extra Color Chill"
+msgstr "- Extra Farbe Gefühlte"
+
+msgid "- Extra Color City"
+msgstr "- Extra Farbe Stadt"
+
+msgid "- Extra Zoom"
+msgstr "- Extra Zoom"
+
+msgid "- Fast Grab lower quality"
+msgstr "- schnelles Grab niedrige Qualität"
+
+msgid "- File [ok]>"
+msgstr "- Datei [ok]>"
+
+msgid "- File or Path [ok]>"
+msgstr "- Datei oder Verzeichnis [ok]>"
+
+msgid "- Font"
+msgstr "- Zeichensatz"
+
+msgid "- Font Size"
+msgstr "- Zeichen Größe"
+
+msgid "- Full Screen"
+msgstr "- Vollbild"
+
+msgid "- Gradient"
+msgstr "- Verlauf"
+
+msgid "- HTTP Height"
+msgstr "- HTTP Höhe"
+
+msgid "- HTTP Width"
+msgstr "- HTTP Breite"
+
+msgid "- LCD 1 Background Color"
+msgstr "- LCD 1 Hintergrund Farbe"
+
+msgid "- LCD 1 Background-Picture [ok]>"
+msgstr "- LCD 1 Hintergrund-Bild [ok]>"
+
+msgid "- LCD 1 Brightness [no SPF]"
+msgstr "- LCD 1 Helligkeit [nicht SPF]"
+
+msgid "- LCD 1 Rotate"
+msgstr "- LCD 1 Drehung"
+
+msgid "- LCD 2 Background Color"
+msgstr "- LCD 2 Hintergrund Farbe"
+
+msgid "- LCD 2 Background-Picture [ok]>"
+msgstr "- LCD 2 Hintergrund-Bild [ok]>"
+
+msgid "- LCD 2 Brightness [no SPF]"
+msgstr "- LCD 2 Helligkeit [nicht SPF]"
+
+msgid "- LCD 2 Rotate"
+msgstr "- LCD 2 Drehung"
+
+msgid "- LCD 3 Background Color"
+msgstr "- LCD 3 Hintergrund Farbe"
+
+msgid "- LCD 3 Background-Picture [ok]>"
+msgstr "- LCD 3 Hintergrund-Bild [ok]>"
+
+msgid "- LCD 3 Brightness [no SPF]"
+msgstr "- LCD 3 Helligkeit [nicht SPF]"
+
+msgid "- LCD 3 Rotate"
+msgstr "- LCD 3 Drehung"
+
+msgid "- Layout"
+msgstr "- Layout"
+
+msgid "- Length [Bar]"
+msgstr "- Länge [Balken]"
+
+msgid "- Lines"
+msgstr "- Zeilen"
+
+msgid "- Mail Konto"
+msgstr "- Mail Konto"
+
+msgid "- OSD Size"
+msgstr "- OSD Größe"
+
+msgid "- Online Name:Address"
+msgstr "- Online Name:Adresse"
+
+msgid "- Picon Cache Path [ok]>"
+msgstr "- Picon Cache Verz. [ok]>"
+
+msgid "- Picon Path 2 [ok]>"
+msgstr "- Picon Verzeichnis 2 [ok]>"
+
+msgid "- Picon Path [ok]>"
+msgstr "- Picon Verzeichnis [ok]>"
+
+msgid "- Picon Size"
+msgstr "- Picon Größe"
+
+msgid "- Picture Alignment"
+msgstr "- Bild Ausrichtung"
+
+msgid "- Picture Position"
+msgstr "- Bild Position"
+
+msgid "- Picture Size"
+msgstr "- Bild Größe"
+
+msgid "- Picture [ok]>"
+msgstr "- Bild [ok]>"
+
+msgid "- Position"
+msgstr "- Position"
+
+msgid "- Position x"
+msgstr "- Position x"
+
+msgid "- Position y"
+msgstr "- Position y"
+
+msgid "- Quick Update"
+msgstr "- Quick Aktualisierung"
+
+msgid "- Rain Color"
+msgstr "- Regen Farbe"
+
+msgid "- Rain Color 2"
+msgstr "- Regen Farbe 2"
+
+msgid "- Rain Zoom"
+msgstr "- Regen Zoom"
+
+msgid "- Rain use Color 2 from"
+msgstr "- Regen verwende Farbe 2 ab"
+
+msgid "- Screen 2 Changing Time"
+msgstr "- Schirm 2 Wechselzeit"
+
+msgid "- Screen 3 Changing Time"
+msgstr "- Schirm 3 Wechselzeit"
+
+msgid "- Screen 4 Changing Time"
+msgstr "- Schirm 4 Wechselzeit"
+
+msgid "- Screen 5 Changing Time"
+msgstr "- Schirm 5 Wechselzeit"
+
+msgid "- Screen 6 Changing Time"
+msgstr "- Schirm 6 Wechselzeit"
+
+msgid "- Screen 7 Changing Time"
+msgstr "- Schirm 7 Wechselzeit"
+
+msgid "- Screen 8 Changing Time"
+msgstr "- Schirm 8 Wechselzeit"
+
+msgid "- Screen 9 Changing Time"
+msgstr "- Schirm 9 Wechselzeit"
+
+msgid "- Screens used for Changing"
+msgstr "- Benutzte Schirme zum Wechsel"
+
+msgid "- Search Path [ok]>"
+msgstr "- Suche im Verzeichnis [ok]>"
+
+msgid "- Sensors"
+msgstr "- Sensoren"
+
+msgid "- Shaded"
+msgstr "- Schattiert"
+
+msgid "- Shadow Edges"
+msgstr "- Schattenkanten"
+
+msgid "- Show State"
+msgstr "- Zeige Status"
+
+msgid "- Show chill temperature from difference"
+msgstr "- Zeige gefühlte Temperatur ab Differenz"
+
+msgid "- Show in Mode"
+msgstr "- Zeige im Modus"
+
+msgid "- Size"
+msgstr "- Größe"
+
+msgid "- Size max Height"
+msgstr "- Größe max Höhe"
+
+msgid "- Size x"
+msgstr "- Größe x"
+
+msgid "- Size y"
+msgstr "- Größe y"
+
+msgid "- Spacing"
+msgstr "- Abstand"
+
+msgid "- Split Screen"
+msgstr "- Geteilter Schirm"
+
+msgid "- Text Size"
+msgstr "- Zeichen Größe"
+
+msgid "- Timeout"
+msgstr "- Timeout"
+
+msgid "- Transparency"
+msgstr "- Transparenz"
+
+msgid "- Tunerinfo"
+msgstr "- Tunerinfo"
+
+msgid "- Type"
+msgstr "- Typ"
+
+msgid "- URL"
+msgstr "- URL"
+
+msgid "- Weather Type"
+msgstr "- Wetter Typ"
+
+msgid "- Zoom"
+msgstr "- Zoom"
+
+msgid "- extra Info"
+msgstr "- extra Info"
+
+msgid "- max Width"
+msgstr "- max Breite"
+
+msgid "- maximum Lines"
+msgstr "- maximale Zeilen"
+
+msgid "- only active Tuner"
+msgstr "- nur aktive Tuner"
+
+msgid "- which LCD"
+msgstr "- welches LCD"
+
+msgid "0"
+msgstr "0"
+
+msgid "0.5"
+msgstr "0.5"
+
+msgid "1"
+msgstr "1"
+
+msgid "1-2"
+msgstr "1-2"
+
+msgid "1-3"
+msgstr "1-3"
+
+msgid "1-4"
+msgstr "1-4"
+
+msgid "1-5"
+msgstr "1-5"
+
+msgid "10"
+msgstr "10"
+
+msgid "10%"
+msgstr "10%"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "10min"
+msgstr "10min"
+
+msgid "10s"
+msgstr "10s"
+
+msgid "132x64"
+msgstr "132x64"
+
+msgid "15%"
+msgstr "15%"
+
+msgid "15min"
+msgstr "15min"
+
+msgid "15s"
+msgstr "15s"
+
+msgid "180"
+msgstr "180"
+
+msgid "1min"
+msgstr "1min"
+
+msgid "2"
+msgstr "2"
+
+msgid "2 Days 1 Line"
+msgstr "2 Tage 1 Zeile"
+
+msgid "2 Days 2 Line"
+msgstr "2 Tage 2 Zeilen"
+
+msgid "2 x FastForwardKey"
+msgstr "2 x VorSpulTaste"
+
+msgid "2 x FastForwardKey Type 2"
+msgstr "2 x VorSpulTaste Typ 2"
+
+msgid "2 x InfoKey"
+msgstr "2 x InfoTaste"
+
+msgid "20"
+msgstr "20"
+
+msgid "20%"
+msgstr "20%"
+
+msgid "20min"
+msgstr "20min"
+
+msgid "20s"
+msgstr "20s"
+
+msgid "220x176"
+msgstr "220x176"
+
+msgid "25%"
+msgstr "25%"
+
+msgid "255x64"
+msgstr "255x64"
+
+msgid "270"
+msgstr "270"
+
+msgid "2min"
+msgstr "2min"
+
+msgid "3"
+msgstr "3"
+
+msgid "30"
+msgstr "30"
+
+msgid "30%"
+msgstr "30%"
+
+msgid "30min"
+msgstr "30min"
+
+msgid "30s"
+msgstr "30s"
+
+msgid "32bit - color"
+msgstr "32bit - Farbe"
+
+msgid "35%"
+msgstr "35%"
+
+msgid "3min"
+msgstr "3min"
+
+msgid "4 Days 1 Line"
+msgstr "4 Tage 1 Zeile"
+
+msgid "4 Days 2 Lines"
+msgstr "4 Tage 2 Zeilen"
+
+msgid "4 Days Vertical View"
+msgstr "4 Tage Vertikale Ansicht"
+
+msgid "40%"
+msgstr "40%"
+
+msgid "400x240"
+msgstr "400x240"
+
+msgid "40s"
+msgstr "40s"
+
+msgid "45%"
+msgstr "45%"
+
+msgid "4min"
+msgstr "4min"
+
+msgid "5"
+msgstr "5"
+
+msgid "5 Days 1 Line"
+msgstr "5 Tage 1 Zeile"
+
+msgid "5 Days 2 Lines"
+msgstr "5 Tage 2 Zeilen"
+
+msgid "5 Days Vertical View"
+msgstr "5 Tage Vertikale Ansicht"
+
+msgid "5%"
+msgstr "5%"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "50s"
+msgstr "50s"
+
+msgid "55%"
+msgstr "55%"
+
+msgid "5min"
+msgstr "5min"
+
+msgid "5s"
+msgstr "5s"
+
+msgid "60%"
+msgstr "60%"
+
+msgid "60min"
+msgstr "60min"
+
+msgid "65%"
+msgstr "65%"
+
+msgid "70%"
+msgstr "70%"
+
+msgid "75%"
+msgstr "75%"
+
+msgid "80%"
+msgstr "80%"
+
+msgid "85%"
+msgstr "85%"
+
+msgid "8bit - grayscale/color"
+msgstr "8bit - Graustufen/Farbe"
+
+msgid "90"
+msgstr "90"
+
+msgid "90%"
+msgstr "90%"
+
+msgid "95%"
+msgstr "95%"
+
+msgid "96x64"
+msgstr "96x64"
+
+msgid "Active Screen"
+msgstr "Aktiver Schirm"
+
+msgid "All"
+msgstr "Alles"
+
+msgid "Always All"
+msgstr "Immer Alle"
+
+msgid "Always New"
+msgstr "Immer Neue"
+
+msgid "Analog"
+msgstr "Analog"
+
+msgid "Analog+Date"
+msgstr "Analog+Datum"
+
+msgid "Analog+Date+Weekday"
+msgstr "Analog+Datum+Wochentag"
+
+msgid "April"
+msgstr "April"
+
+msgid "Audio/Video"
+msgstr "Audio/Video"
+
+msgid "August"
+msgstr "August"
+
+msgid "Bar"
+msgstr "Balken"
+
+msgid "Bar+Value"
+msgstr "Balken+Wert"
+
+msgid "Bitrate"
+msgstr "Bitrate"
+
+msgid "Box-Skin-LCD"
+msgstr "Box-Skin-LCD"
+
+msgid "Box-Skin-LCD Color"
+msgstr "Box-Skin-LCD Farbe"
+
+msgid "Box-Skin-LCD Dimension"
+msgstr "Box-Skin-LCD Größe"
+
+msgid "Box-Skin-LCD Enable Idle-Mode"
+msgstr "Box-Skin-LCD Aktiviere Idle-Mode"
+
+msgid "Box-Skin-LCD Enable Media-Mode"
+msgstr "Box-Skin-LCD Aktiviere Media-Mode"
+
+msgid "Box-Skin-LCD Enable On-Mode"
+msgstr "Box-Skin-LCD Aktiviere On-Mode"
+
+msgid "C"
+msgstr "C"
+
+msgid "C + rmp"
+msgstr "C + rmp"
+
+msgid "C + rmp/2"
+msgstr "C + rmp/2"
+
+msgid "Calendar"
+msgstr "Kalender"
+
+msgid "Calendar Background Processing"
+msgstr "Kalender Hintergrund Verarbeitung"
+
+msgid "Calendar Day Event Preview"
+msgstr "Kalender Tage Ereignisvorschau"
+
+msgid "Calendar Line Thickness"
+msgstr "Kalender Linienstärke"
+
+msgid "Calendar Transparency"
+msgstr "Kalender Transparenz"
+
+msgid "Calendar ics-Path [ok]>"
+msgstr "Kalender ics-Verzeichnis [ok]>"
+
+msgid "Calendar ics-URL"
+msgstr "Kalender ics-URL"
+
+msgid "Cancel"
+msgstr "Abbruch"
+
+msgid "Choose dir"
+msgstr "Wähle Verzeichnis"
+
+msgid "Choose file"
+msgstr "Wähle Verzeichnis"
+
+msgid "Choose font"
+msgstr "Wähle Zeichensatz"
+
+msgid "Clock"
+msgstr "Uhrzeit"
+
+msgid "Clock 2"
+msgstr "Uhrzeit 2"
+
+msgid "Config Backup Path [ok]>"
+msgstr "Konfig Backup Verz. [ok]>"
+
+msgid "Console normal"
+msgstr "Konsole normal"
+
+msgid "Corner"
+msgstr "Ecke"
+
+msgid "Crashlog"
+msgstr "Crashlog"
+
+msgid "Current"
+msgstr "Aktuell"
+
+msgid "Current Temperature"
+msgstr "Aktuelle Temperatur"
+
+msgid "Current Temperature (+C)"
+msgstr "Aktuelle Temperatur (+C)"
+
+msgid "Current Temperature (-C)"
+msgstr "Aktuelle Temperatur (-C)"
+
+msgid "Current value: %s"
+msgstr "Aktueller Wert: %s"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Date+Time"
+msgstr "Datum+Uhrzeit"
+
+msgid "Date+Time+Weekday"
+msgstr "Datum+Uhrzeit+Wochentag"
+
+msgid "Dates"
+msgstr "Termine"
+
+msgid "Dates 1 Line"
+msgstr "Termine 1 Zeile"
+
+msgid "Dates 3 Lines"
+msgstr "Termine 3 Zeilen"
+
+msgid "Dates 5 Lines"
+msgstr "Termine 5 Zeilen"
+
+msgid "Dates 9 Lines"
+msgstr "Termine 9 Zeilen"
+
+msgid "Dates List"
+msgstr "Termine Liste"
+
+msgid "Dates compact"
+msgstr "Termine kompakt"
+
+msgid "Dates compact 2 Lines"
+msgstr "Termine kompakt 2 Zeilen"
+
+msgid "Dates compact 3 Lines"
+msgstr "Termine kompakt 3 Zeilen"
+
+msgid "Dates compact no Icon"
+msgstr "Termine kompakt kein Icon"
+
+msgid "Dates no Icon"
+msgstr "Termine kein Icon"
+
+msgid "Debug-Logging > /tmp/L4log.txt"
+msgstr "Debug-Logging > /tmp/L4log.txt"
+
+msgid "December"
+msgstr "Dezember"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Delete File?"
+msgstr "Datei löschen?"
+
+msgid "Display Delay [ms]"
+msgstr "Verzögerung [ms]"
+
+msgid "Double-button switches"
+msgstr "Doppel-Tasten Schalter"
+
+msgid "Event Icon Bar"
+msgstr "Ereigns Icon Bar"
+
+msgid "Exec"
+msgstr "Ausführung"
+
+msgid "Extended"
+msgstr "Erweitert"
+
+msgid "Extended (Short)"
+msgstr "Erweitert (Kurz)"
+
+msgid "Extended Description"
+msgstr "Erweiterte Beschreibung"
+
+msgid "Fastmode (2s)"
+msgstr "Fastmode (2s)"
+
+msgid "February"
+msgstr "Februar"
+
+msgid "First Quarter"
+msgstr "Erstes Viertel"
+
+msgid "Flaps Design"
+msgstr "Klappen Design"
+
+msgid "Font"
+msgstr "Zeichensatz"
+
+msgid "Font 1 [ok]>"
+msgstr "Zeichensatz 1 [ok]>"
+
+msgid "Font 2 [ok]>"
+msgstr "Zeichensatz 2 [ok]>"
+
+msgid "Font 3 [ok]>"
+msgstr "Zeichensatz 3 [ok]>"
+
+msgid "Font global [ok]>"
+msgstr "Zeichensatz Global [ok]>"
+
+msgid "Frame"
+msgstr "Rahmen"
+
+msgid "Fri"
+msgstr "Fr"
+
+msgid "Friday"
+msgstr "Freitag"
+
+msgid "FritzCall"
+msgstr "FritzCall"
+
+msgid "FritzCall Frame Picture [ok]>"
+msgstr "FritzCall Rahmen Bild [ok]>"
+
+msgid "FritzCall Number of List Entries"
+msgstr "FritzCall Anzahl Listeneinträge"
+
+msgid "FritzCall Number of Pictures"
+msgstr "FritzCall Anzahl Bilder"
+
+msgid "FritzCall Picture Orientation"
+msgstr "FritzCall Bilder Ausrichtung"
+
+msgid "FritzCall Picture Path [ok]>"
+msgstr "FritzCall Bilder Verz. [ok]>"
+
+msgid "FritzCall Pictures Search"
+msgstr "FritzCall Bilder Suche"
+
+msgid "FritzCall Popup Color"
+msgstr "FritzCall Popup Farbe"
+
+msgid "FritzCall Popup LCD"
+msgstr "FritzCall Popup LCD"
+
+msgid "FritzCall Popup-Time"
+msgstr "FritzCall Popup-Zeit"
+
+msgid "FritzCall remove Calls after hours"
+msgstr "FritzCall entferne Anrufe nach Stunden"
+
+msgid "Full Moon"
+msgstr "Vollmond"
+
+msgid "GUI Restart is required"
+msgstr "GUI Neustart ist notwendig"
+
+msgid ""
+"GUI needs a restart to apply the changes.\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+"GUI muss für das Aktiveren der Änderungen neu gestartet werden.\n"
+"Soll die GUI jetzt neu gestartet werden?"
+
+msgid "Global"
+msgstr "Global"
+
+msgid "HDD"
+msgstr "HDD"
+
+msgid "IMAP"
+msgstr "IMAP"
+
+msgid "IMAP-SSL"
+msgstr "IMAP-SSL"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Informations"
+msgstr "Informationen"
+
+msgid "Infos"
+msgstr "Infos"
+
+msgid "Internal Box-Skin-LCD"
+msgstr "Internes Box-Skin-LCD"
+
+msgid "Internal TFT-LCD 400x240"
+msgstr "Internes TFT-LCD 400x240"
+
+msgid "Internal Vu+ Duo2 LCD 400x240"
+msgstr "Internal Vu+ Duo2 LCD 400x240"
+
+msgid "January"
+msgstr "Januar"
+
+msgid "Javascript"
+msgstr "Javascript"
+
+msgid "July"
+msgstr "Juli"
+
+msgid "June"
+msgstr "Juni"
+
+msgid "Key for Screen Change"
+msgstr "Taste für Schirmwechsel"
+
+msgid "Knob"
+msgstr "Knopf"
+
+msgid "Knob+Value"
+msgstr "Knopf+Wert"
+
+msgid "LCD 1"
+msgstr "LCD 1"
+
+msgid "LCD 1 Type"
+msgstr "LCD 1 Typ"
+
+msgid "LCD 1+2"
+msgstr "LCD 1+2"
+
+msgid "LCD 1+2+3"
+msgstr "LCD 1+2+3"
+
+msgid "LCD 1+3"
+msgstr "LCD 1+3"
+
+msgid "LCD 2"
+msgstr "LCD 2"
+
+msgid "LCD 2 Type"
+msgstr "LCD 2 Typ"
+
+msgid "LCD 2+3"
+msgstr "LCD 2+3"
+
+msgid "LCD 3"
+msgstr "LCD 3"
+
+msgid "LCD 3 Type"
+msgstr "LCD 3 Type"
+
+msgid "LCD Custom Height"
+msgstr "LCD benutzerdefinierte Höhe"
+
+msgid "LCD Custom Width"
+msgstr "LCD benutzerdefinierte Breite"
+
+msgid "LCD Display"
+msgstr "LCD Anzeige"
+
+msgid "LCD4linux enabled"
+msgstr "LCD4linux aktiviert"
+
+msgid "Last Quarter"
+msgstr "Letztes Viertel"
+
+msgid "Load Active Config-File"
+msgstr "Lade aktive Konfig-Datei"
+
+msgid "Load Defaults"
+msgstr "Lade Standardwerte"
+
+msgid "Load File : %s"
+msgstr "Lade Datei : %s"
+
+msgid "Load@1min"
+msgstr "Load@1min"
+
+msgid "Load@5min"
+msgstr "Load@5min"
+
+msgid "Logfile extensive"
+msgstr "LogDatei umfangreich"
+
+msgid "Logfile normal"
+msgstr "LogDatei normal"
+
+msgid "Long FastForwardKey"
+msgstr "Lang VorSpulTaste"
+
+msgid "Long FastForwardKey Type 2"
+msgstr "Lang VorSpulTaste Typ 2"
+
+msgid "Mail"
+msgstr "Mail"
+
+msgid "Mail 1 Connect"
+msgstr "Mail 1 Connect"
+
+msgid "Mail 1 Password"
+msgstr "Mail 1 Passwort"
+
+msgid "Mail 1 Server"
+msgstr "Mail 1 Server"
+
+msgid "Mail 1 [Displayname:]Username"
+msgstr "Mail 1 [Anzeigename:]Nutzername"
+
+msgid "Mail 2 Connect"
+msgstr "Mail 2 Connect"
+
+msgid "Mail 2 Password"
+msgstr "Mail 2 Passwort"
+
+msgid "Mail 2 Server"
+msgstr "Mail 2 Server"
+
+msgid "Mail 2 [Displayname:]Username"
+msgstr "Mail 2 [Anzeigename:]Nutzername"
+
+msgid "Mail 3 Connect"
+msgstr "Mail 3 Connect"
+
+msgid "Mail 3 Password"
+msgstr "Mail 3 Passwort"
+
+msgid "Mail 3 Server"
+msgstr "Mail 3 Server"
+
+msgid "Mail 3 [Displayname:]Username"
+msgstr "Mail 3 [Anzeigename:]Nutzername"
+
+msgid "Mail 4 Connect"
+msgstr "Mail 4 Connect"
+
+msgid "Mail 4 Password"
+msgstr "Mail 4 Passwort"
+
+msgid "Mail 4 Server"
+msgstr "Mail 4 Server"
+
+msgid "Mail 4 [Displayname:]Username"
+msgstr "Mail 4 [Anzeigename:]Nutzername"
+
+msgid "Mail 5 Connect"
+msgstr "Mail 5 Connect"
+
+msgid "Mail 5 Password"
+msgstr "Mail 5 Passwort"
+
+msgid "Mail 5 Server"
+msgstr "Mail 5 Server"
+
+msgid "Mail 5 [Displayname:]Username"
+msgstr "Mail 5 [Anzeigename:]Nutzername"
+
+msgid "Mail Poll Interval"
+msgstr "Mail Abruf Interval"
+
+msgid "Mail Show Empty Mailboxes"
+msgstr "Mail Zeige Leere Mailboxen"
+
+msgid "March"
+msgstr "März"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "Memory"
+msgstr "Hauptspeicher"
+
+msgid "Meteo URL"
+msgstr "Meteo URL"
+
+msgid "Meteo-Weather Station"
+msgstr "Meteo-Wetter Station"
+
+msgid "Mini-EPG"
+msgstr "Mini-EPG"
+
+msgid "Mon"
+msgstr "Mo"
+
+msgid "Monday"
+msgstr "Montag"
+
+msgid "Month"
+msgstr "Monat"
+
+msgid "Month+Header"
+msgstr "Monat+Kopf"
+
+msgid "Moon-Icon-Path [ok]>"
+msgstr "Mond-Icon-Verz. [ok]>"
+
+msgid "Moonphase"
+msgstr "Mondphase"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Netatmo"
+msgstr "Netatmo"
+
+msgid "Netatmo CO2 Indicator"
+msgstr "Netatmo CO2 Indikator"
+
+msgid "Netatmo CO2 Max Range"
+msgstr "Netatmo CO2 Max Bereich"
+
+msgid "Netatmo CO2 Min Range"
+msgstr "Netatmo CO2 Min Bereich"
+
+msgid "New Moon"
+msgstr "Neumond"
+
+msgid "Next Program Info"
+msgstr "Nächste Programm Info"
+
+msgid "Next Timer Event"
+msgstr "Nächste Aufnahme"
+
+msgid "Normal (5s)"
+msgstr "Normal (5s)"
+
+msgid "November"
+msgstr "November"
+
+msgid "OSCAM not running"
+msgstr "OSCAM läuft nicht"
+
+msgid "OSD"
+msgstr "OSD"
+
+msgid "OSD [display time]"
+msgstr "OSD [Anzeigezeit]"
+
+msgid "October"
+msgstr "Oktober"
+
+msgid "Offline"
+msgstr "Offline"
+
+msgid "On"
+msgstr "On"
+
+msgid "On+Media+Standby"
+msgstr "On+Media+Standby"
+
+msgid "Online"
+msgstr "Online"
+
+msgid "Online [Ping]"
+msgstr "Online [Ping]"
+
+msgid "Online+Offline"
+msgstr "Online+Offline"
+
+msgid "Only New"
+msgstr "Nur Neue"
+
+msgid "Pearl (or compatible LCD) 240x320"
+msgstr "Pearl (oder kompatibles LCD) 240x320"
+
+msgid "Pearl (or compatible LCD) 320x240"
+msgstr "Pearl (oder kompatibles LCD) 320x240"
+
+msgid "Picon"
+msgstr "Picon"
+
+msgid "Picon 2"
+msgstr "Picon 2"
+
+msgid "Picon+Position below"
+msgstr "Picon+Position unterhalb"
+
+msgid "Picon+Position left"
+msgstr "Picon+Position links"
+
+msgid "Picon+Position right"
+msgstr "Picon+Position rechts"
+
+msgid "Picture"
+msgstr "Bild"
+
+msgid "Picture Changing Time"
+msgstr "Bild Wechselzeit"
+
+msgid "Picture Directory Recursive"
+msgstr "Bild Verzeichnis Rekursiv"
+
+msgid "Picture Quality for Resizing"
+msgstr "Bild Qualität für Größenänderung"
+
+msgid "Picture Quick Update Time [s]"
+msgstr "Bild Quick Aktualisierung Zeit [s]"
+
+msgid "Picture Sort"
+msgstr "Bild Sortierung"
+
+msgid "Pop3"
+msgstr "Pop3"
+
+msgid "Pop3-SSL"
+msgstr "Pop3-SSL"
+
+msgid "Popup Text"
+msgstr "Popup Text"
+
+msgid "Popup-Text"
+msgstr "Popup-Text"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Program Info"
+msgstr "Programm Info"
+
+msgid "Program Name"
+msgstr "Programm Name"
+
+msgid "Program Number"
+msgstr "Programm Nummer"
+
+msgid "Progress Bar"
+msgstr "Fortschrittsbalken"
+
+msgid "Provider"
+msgstr "Provider"
+
+msgid "Radio"
+msgstr "Radio"
+
+msgid "Radio+Media"
+msgstr "Radio+Media"
+
+msgid "Recording"
+msgstr "Aufnahme"
+
+msgid "Rectangle 1"
+msgstr "Rechteck 1"
+
+msgid "Rectangle 2"
+msgstr "Rechteck 2"
+
+msgid "Reload"
+msgstr "Neu Laden"
+
+msgid "Restart Displays"
+msgstr "Neustart Displays"
+
+msgid "Restart GUI now?"
+msgstr "Neustart GUI jetzt?"
+
+msgid "Samsung SPF-105P 1024x600"
+msgstr "Samsung SPF-105P 1024x600"
+
+msgid "Samsung SPF-107H 1024x600"
+msgstr "Samsung SPF-107H 1024x600"
+
+msgid "Samsung SPF-107H old 1024x600"
+msgstr "Samsung SPF-107H alt 1024x600"
+
+msgid "Samsung SPF-700T 800x600"
+msgstr "Samsung SPF-700T 800x600"
+
+msgid "Samsung SPF-72H 800x480"
+msgstr "Samsung SPF-72H 800x480"
+
+msgid "Samsung SPF-75H/76H 800x480"
+msgstr "Samsung SPF-75H/76H 800x480"
+
+msgid "Samsung SPF-83H 800x600"
+msgstr "Samsung SPF-83H 800x600"
+
+msgid "Samsung SPF-85H/86H 800x600"
+msgstr "Samsung SPF-85H/86H 800x600"
+
+msgid "Samsung SPF-85P/86P 800x600"
+msgstr "Samsung SPF-85P/86P 800x600"
+
+msgid "Samsung SPF-87H 800x480"
+msgstr "Samsung SPF-87H 800x480"
+
+msgid "Samsung SPF-87H old 800x480"
+msgstr "Samsung SPF-87H alt 800x480"
+
+msgid "Sat"
+msgstr "Sa"
+
+msgid "Satellite"
+msgstr "Satellit"
+
+msgid "Saturday"
+msgstr "Samstag"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Save Config to File... (%s)"
+msgstr "Speichere Konfig in Datei... (%s)"
+
+msgid "Save as Picture for WebIF"
+msgstr "Speichern als Bild für WebIF"
+
+msgid "Screen"
+msgstr "Schirm"
+
+msgid "Screen 1"
+msgstr "Schirm 1"
+
+msgid "Screen 1 Changing Time"
+msgstr "Schirm 1 Wechselzeit"
+
+msgid "Screen 1+2"
+msgstr "Schirm 1+2"
+
+msgid "Screen 1+2+3"
+msgstr "Schirm 1+2+3"
+
+msgid "Screen 1+2+3+4"
+msgstr "Schirm 1+2+3+4"
+
+msgid "Screen 1+2+4"
+msgstr "Schirm 1+2+4"
+
+msgid "Screen 1+3"
+msgstr "Schirm 1+3"
+
+msgid "Screen 1+3+4"
+msgstr "Schirm 1+3+4"
+
+msgid "Screen 1+3+5+7+9"
+msgstr "Schirm 1+3+5+7+9"
+
+msgid "Screen 1+4"
+msgstr "Schirm 1+4"
+
+msgid "Screen 1-2"
+msgstr "Schirm 1-2"
+
+msgid "Screen 1-3"
+msgstr "Schirm 1-3"
+
+msgid "Screen 1-4"
+msgstr "Schirm 1-4"
+
+msgid "Screen 1-5"
+msgstr "Schirm 1-5"
+
+msgid "Screen 1-6"
+msgstr "Schirm 1-6"
+
+msgid "Screen 1-7"
+msgstr "Schirm 1-7"
+
+msgid "Screen 1-8"
+msgstr "Schirm 1-8"
+
+msgid "Screen 1-9"
+msgstr "Schirm 1-9"
+
+msgid "Screen 2"
+msgstr "Schirm 2"
+
+msgid "Screen 2+3"
+msgstr "Schirm 2+3"
+
+msgid "Screen 2+3+4"
+msgstr "Schirm 2+3+4"
+
+msgid "Screen 2+4"
+msgstr "Schirm 2+4"
+
+msgid "Screen 2+4+6+8"
+msgstr "Schirm 2+4+6+8"
+
+msgid "Screen 3"
+msgstr "Schirm 3"
+
+msgid "Screen 3+4"
+msgstr "Schirm 3+4"
+
+msgid "Screen 4"
+msgstr "Schirm 4"
+
+msgid "Screen 5"
+msgstr "Schirm 5"
+
+msgid "Screen 5-9"
+msgstr "Schirm 5-9"
+
+msgid "Screen 6"
+msgstr "Schirm 6"
+
+msgid "Screen 7"
+msgstr "Schirm 7"
+
+msgid "Screen 8"
+msgstr "Schirm 8"
+
+msgid "Screen 9"
+msgstr "Schirm 9"
+
+msgid "Screens used for Changing"
+msgstr "Benutzte Schirme zum Wechsel"
+
+msgid "September"
+msgstr "September"
+
+msgid "Short"
+msgstr "Kurz"
+
+msgid "Short (Extended)"
+msgstr "Kurz (Erweitert)"
+
+msgid "Short+Extended"
+msgstr "Kurz+Erweitert"
+
+msgid "Show"
+msgstr "Zeige"
+
+msgid "Show Cover"
+msgstr "Zeige Cover"
+
+msgid "Show Crash Corner"
+msgstr "Zeige Crash Ecke"
+
+msgid "Show HTTP Text"
+msgstr "Zeige HTTP Text"
+
+msgid "Show Picture"
+msgstr "Zeige Bild"
+
+msgid "Show Picture 2"
+msgstr "Zeige Bild 2"
+
+msgid "Show Picture 3"
+msgstr "Zeige Bild 3"
+
+msgid "Show Picture 4"
+msgstr "Zeige Bild 4"
+
+msgid "Show Recording"
+msgstr "Zeige Aufnahme"
+
+msgid "Show Textfile"
+msgstr "Zeige Textdatei"
+
+msgid "Show Textfile 2"
+msgstr "Zeige Textdatei 2"
+
+msgid "Show Textfile 3"
+msgstr "Zeige Textdatei 3"
+
+msgid "Show ecm.info"
+msgstr "Zeige ecm.info"
+
+msgid "Show oscam.lcd"
+msgstr "Zeige oscam.lcd"
+
+msgid "Signal Quality Bar"
+msgstr "Signal Qualität Bar"
+
+msgid "Standby"
+msgstr "Standby"
+
+msgid "Storage-Devices"
+msgstr "Speicher-Geräte"
+
+msgid "Storage-Devices: Force Read"
+msgstr "Speicher-Geräte: erzwinge Lesen"
+
+msgid "Stutter TV"
+msgstr "Stotter TV"
+
+msgid "Sun"
+msgstr "So"
+
+msgid "Sunday"
+msgstr "Sonntag"
+
+msgid "Sunrise"
+msgstr "Sonnenaufgang"
+
+msgid "TV"
+msgstr "TV"
+
+msgid "TV+OSD"
+msgstr "TV+OSD"
+
+msgid "TV+Radio"
+msgstr "TV+Radio"
+
+msgid "TV+Radio+Media"
+msgstr "TV+Radio+Media"
+
+msgid "Temperature"
+msgstr "Temperatur"
+
+msgid "Temperature+Co2"
+msgstr "Temperatur+Co2"
+
+msgid "Temperature+Co2+Pressure"
+msgstr "Temperatur+Co2+Luftdruck"
+
+msgid "Threads per LCD"
+msgstr "Threads pro LCD"
+
+msgid "Thur"
+msgstr "Do"
+
+msgid "Thursday"
+msgstr "Donnerstag"
+
+msgid "Time"
+msgstr "Zeit"
+
+msgid "Time+Duration+Info"
+msgstr "Zeit+Info+Dauerr"
+
+msgid "Time+Info"
+msgstr "Zeit+Info"
+
+msgid "Time+Length+Info"
+msgstr "Zeit+Länge+Info"
+
+msgid "Time+Weekday"
+msgstr "Uhrzeit+Wochentag"
+
+msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
+msgstr "Timing ! rechne alle Zeiten um Zeit/5*2 im Fastmode"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Tue"
+msgstr "Di"
+
+msgid "Tuesday"
+msgstr "Dienstag"
+
+msgid "Tuner Color"
+msgstr "Tuner Farbe"
+
+msgid "Tuner Color Active"
+msgstr "Tuner Farbe Aktiv"
+
+msgid "Tuner Color On"
+msgstr "Tuner Farbe Ein"
+
+msgid "Underline"
+msgstr "Unterstrich"
+
+msgid "Underline 2"
+msgstr "Unterstrich 2"
+
+msgid "Used Tuner"
+msgstr "Verwendete Tuner"
+
+msgid "Volume"
+msgstr "Lautstärke"
+
+msgid "WWW Converter Poll Interval"
+msgstr "WWW Konverter Abruf Interval"
+
+msgid "WWW-Internet Converter"
+msgstr "WWW-Internet Konverter"
+
+msgid "Waning Crescent"
+msgstr "Abnehmender Halbmond"
+
+msgid "Waning Gibbous"
+msgstr "Abnehmender Mond"
+
+msgid "Waxing Crescent"
+msgstr "Zunehmender Halbmond"
+
+msgid "Waxing Gibbous"
+msgstr "Zunehmender Mond"
+
+msgid "Weather"
+msgstr "Wetter"
+
+msgid "Weather 2"
+msgstr "Wetter 2"
+
+msgid "Weather City"
+msgstr "Wetter Stadt"
+
+msgid "Weather City 2"
+msgstr "Wetter Stadt 2"
+
+msgid "Weather Extra Infos"
+msgstr "Wetter Extra Infos"
+
+msgid "Weather High Temperature Color"
+msgstr "Wetter Hohe Temperatur Farbe"
+
+msgid "Weather Lines"
+msgstr "Wetter Linien"
+
+msgid "Weather Low Temperature Color"
+msgstr "Wetter Niedrige Temperatur Farbe"
+
+msgid "Weather Rain Chance"
+msgstr "Wetter Regen Wahrscheinlichkeit"
+
+msgid "Weather Transparency"
+msgstr "Wetter Transparenz"
+
+msgid "Weather-Icon Zoom"
+msgstr "Wetter-Icon Zoom"
+
+msgid "Weather-Icon-Path [ok]>"
+msgstr "Wetter-Icon-Verz. [ok]>"
+
+msgid "WebIF Init Delay"
+msgstr "WebIF Init Verzögert"
+
+msgid "WebIF Refresh Type"
+msgstr "WebIF Aktualisierungstyp"
+
+msgid "WebIF Refresh [s]"
+msgstr "WebIF Aktualisierung [s]"
+
+msgid "Wed"
+msgstr "Mi"
+
+msgid "Wednesday"
+msgstr "Mittwoch"
+
+msgid "Week"
+msgstr "Woche"
+
+msgid "Week+Header"
+msgstr "Woche+Kopf"
+
+msgid "alphabetic"
+msgstr "alphabetisch"
+
+msgid "alternative Copy-Mode/DM800hd (24bit)"
+msgstr "alternativer Copy-Mode/DM800hd (24bit)"
+
+msgid "always"
+msgstr "immer"
+
+msgid "aquamarine"
+msgstr "aquamarine"
+
+msgid "better/slow"
+msgstr "besser/langsam"
+
+msgid "black"
+msgstr "schwarz"
+
+msgid "blue"
+msgstr "blau"
+
+msgid "blueviolet"
+msgstr "blauviolett"
+
+msgid "brown"
+msgstr "braun"
+
+msgid "cadetblue"
+msgstr "kadettblau"
+
+msgid "center"
+msgstr "zentriert"
+
+msgid "copy to Idle"
+msgstr "kopiere nach Idle"
+
+msgid "copy to Media"
+msgstr "kopiere nach Media"
+
+msgid "copy to On"
+msgstr "kopiere nach On"
+
+msgid "cornflowerblue"
+msgstr "kornblumenblau"
+
+msgid "currently set : %s"
+msgstr "aktuell eingestellt : %s"
+
+msgid "cyan"
+msgstr "cyan"
+
+msgid "darkblue"
+msgstr "dunkelblau"
+
+msgid "darkgreen"
+msgstr "dunkelgrün"
+
+msgid "darkorange"
+msgstr "dunkelorange"
+
+msgid "darkorchid"
+msgstr "dunkelorchidee"
+
+msgid "darkred"
+msgstr "dunkelrot"
+
+msgid "db"
+msgstr "db"
+
+msgid "db + %"
+msgstr "db + %"
+
+msgid "db + % + BER"
+msgstr "db + % + BER"
+
+msgid "db + BER"
+msgstr "db + BER"
+
+msgid "deeppink"
+msgstr "dunkelrosa"
+
+msgid "deleted"
+msgstr "gelöscht"
+
+msgid "disabled"
+msgstr "deaktiviert"
+
+msgid "full Screen"
+msgstr "Vollbild"
+
+msgid "gold"
+msgstr "gold"
+
+msgid "gray"
+msgstr "grau"
+
+msgid "green"
+msgstr "grün"
+
+msgid "greenyellow"
+msgstr "grüngelb"
+
+msgid "half left"
+msgstr "halb links"
+
+msgid "half right"
+msgstr "halb rechts"
+
+msgid "horizontally"
+msgstr "horizontal"
+
+msgid "indianred"
+msgstr "indianrot"
+
+msgid "indigo"
+msgstr "indigo"
+
+msgid "lawngreen"
+msgstr "rasengrün"
+
+msgid "left"
+msgstr "links"
+
+msgid "lightblue"
+msgstr "hellblau"
+
+msgid "lightgreen"
+msgstr "hellgrün"
+
+msgid "lime"
+msgstr "limone"
+
+msgid "low/fast (Picture only)"
+msgstr "niedrig/schnell (nur Bild)"
+
+msgid "low/fast (all)"
+msgstr "niedrig/schnell (alles)"
+
+msgid "magenta"
+msgstr "magenta"
+
+msgid "moccasin"
+msgstr "moccasin"
+
+msgid "no"
+msgstr "nein"
+
+msgid "no Calendar"
+msgstr "kein Kalender"
+
+msgid "no Dates"
+msgstr "keine Termine"
+
+msgid "no LCD1 Picture-File"
+msgstr "keine LCD1 Bild-Datei"
+
+msgid "no LCD2 Picture-File"
+msgstr "keine LCD2 Bild-Datei"
+
+msgid "no LCD3 Picture-File"
+msgstr "keine LCD3 Bild-Datei"
+
+msgid "no Netatmo-Plugin installed"
+msgstr "kein Netatmo-Plugin installiert"
+
+msgid "no Timer"
+msgstr "kein Timer"
+
+msgid "normal (full)"
+msgstr "normal (voll)"
+
+msgid "off"
+msgstr "aus"
+
+msgid "olive"
+msgstr "olive"
+
+msgid "on"
+msgstr "ein"
+
+msgid "only Picture 1024x600"
+msgstr "nur Bild 1024x600"
+
+msgid "only Picture 320x240"
+msgstr "nur Bild 320x240"
+
+msgid "only Picture 800x480"
+msgstr "nur Bild 800x480"
+
+msgid "only Picture 800x600"
+msgstr "nur Bild 800x600"
+
+msgid "only Picture Custom Size"
+msgstr "nur Bild benutzerdefinierte Größe"
+
+msgid "only Progress Bar"
+msgstr "nur Fortschrittsbalken"
+
+msgid "only use Timer"
+msgstr "verwende nur Timer"
+
+msgid "orange"
+msgstr "orange"
+
+msgid "orangered"
+msgstr "orangerot"
+
+msgid "other"
+msgstr "andere"
+
+msgid "random"
+msgstr "zufällig"
+
+msgid "red"
+msgstr "rot"
+
+msgid "right"
+msgstr "rechts"
+
+msgid "rosybrown"
+msgstr "rosigbraun"
+
+msgid "rpm"
+msgstr "rpm"
+
+msgid "rpm/2"
+msgstr "rpm/2"
+
+msgid "sandybrown"
+msgstr "sandbraun"
+
+msgid "set Settings"
+msgstr "setze Einstellungen"
+
+msgid "show run"
+msgstr "zeige aktiv"
+
+msgid "show run+sleep"
+msgstr "zeige aktiv+schlafend"
+
+msgid "silver"
+msgstr "silber"
+
+msgid "slategray"
+msgstr "schiefergrau"
+
+msgid "tomato"
+msgstr "tomato"
+
+msgid "trimmed (black)"
+msgstr "beschnitten (schwarz)"
+
+msgid "trimmed (transparent)"
+msgstr "beschnitten (transparent)"
+
+msgid "use lead-time"
+msgstr "verwende Vorlaufzeit"
+
+msgid "vertically"
+msgstr "vertikal"
+
+msgid "violet"
+msgstr "violett"
+
+msgid "white"
+msgstr "weiss"
+
+msgid "with Current 00:00"
+msgstr "mit Aktuell 00:00"
+
+msgid "with Current 00:00 (Size 1.5)"
+msgstr "mit Aktuell 00:00 (Größe 1.5)"
+
+msgid "with Current 00:00 (Size 2)"
+msgstr "mit Aktuell 00:00 (Größe 2)"
+
+msgid "with Current 00:00 (above)"
+msgstr "mit Aktuell 00:00 (oberhalb)"
+
+msgid "with Current 00:00 (above/Size 1.5)"
+msgstr "mit Aktuell 00:00 (oberhalb/Größe 1.5)"
+
+msgid "with Current 00:00 (above/Size 2)"
+msgstr "mit Aktuell 00:00 (oberhalb/Größe 2)"
+
+msgid "with Current 00:00 (below)"
+msgstr "mit Aktuell 00:00 (unterhalb)"
+
+msgid "with Current 00:00 (below/Size 1.5)"
+msgstr "mit Aktuell 00:00 (unterhalb/Größe 1.5)"
+
+msgid "with Current 00:00 (below/Size 2)"
+msgstr "mit Aktuell 00:00 (unterhalb/Größe 2)"
+
+msgid "with Percent"
+msgstr "mit Prozent"
+
+msgid "with Percent (Size 1.5)"
+msgstr "mit Prozent (Größe 1.5)"
+
+msgid "with Percent (Size 2)"
+msgstr "mit Prozent (Größe 2)"
+
+msgid "with Percent (above)"
+msgstr "mit Prozent (oberhalb)"
+
+msgid "with Percent (above/Size 1.5)"
+msgstr "mit Prozent (oberhalb/Größe 1.5)"
+
+msgid "with Percent (above/Size 2)"
+msgstr "mit Prozent (oberhalb/Größe 2)"
+
+msgid "with Percent (below)"
+msgstr "mit Prozent (unterhalb)"
+
+msgid "with Percent (below/Size 1.5)"
+msgstr "mit Prozent (unterhalb/Größe 1.5)"
+
+msgid "with Percent (below/Size 2)"
+msgstr "mit Prozent (unterhalb/Größe 2)"
+
+msgid "with Remaining Minutes"
+msgstr "mit verbleibenden Minuten"
+
+msgid "with Remaining Minutes (Size 1.5)"
+msgstr "mit verbleibenden Minuten (Größe 1.5)"
+
+msgid "with Remaining Minutes (Size 2)"
+msgstr "mit verbleibenden Minuten (Größe 2)"
+
+msgid "with Remaining Minutes (above)"
+msgstr "mit verbleibenden Minuten (oberhalb)"
+
+msgid "with Remaining Minutes (above/Size 1.5)"
+msgstr "mit verbleibenden Minuten (oberhalb/Größe 1.5)"
+
+msgid "with Remaining Minutes (above/Size 2)"
+msgstr "mit verbleibenden Minuten (oberhalb/Größe 2)"
+
+msgid "with Remaining Minutes (below)"
+msgstr "mit verbleibenden Minuten (unterhalb)"
+
+msgid "with Remaining Minutes (below/Size 1.5)"
+msgstr "mit verbleibenden Minuten (unterhalb/Größe 1.5)"
+
+msgid "with Remaining Minutes (below/Size 2)"
+msgstr "mit verbleibenden Minuten (unterhalb/Größe 2)"
+
+msgid "yellow"
+msgstr "gelb"
+
+msgid "yes"
+msgstr "ja"
+
+msgid "yes (32bit)"
+msgstr "ja (32bit)"
+
+msgid "yes + %"
+msgstr "ja + %"
+
+msgid "yes +25%"
+msgstr "ja +25%"
+
+msgid "yes except records"
+msgstr "ja außer Aufnahmen"
+
+msgid "yes, extended"
+msgstr "ja, erweitert"
+
+msgid "yes, long"
+msgstr "ja, lang"
+
+msgid "yes, short"
+msgstr "ja, kurz"
