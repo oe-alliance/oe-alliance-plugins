@@ -36,7 +36,7 @@ class LCD4linuxweb(resource.Resource):
 			JavaRefresh = " id=\"reloader%%d\" onload=\"setTimeout('document.getElementById(\\'reloader%%d\\').src=\\'/lcd4linux/%%s?\\'+new Date().getTime()', %d)\"" % (int(LCD4linux.WebIfRefresh.value)*1000)
 		html += "<title>LCD4linux</title>\n"
 		html += "</head>"
-		html += "<body bgcolor=\"#000000\" text=\"#FFFFFF\">\n"
+		html += "<body bgcolor=\"%s\" text=\"#FFFFFF\">\n" % ("#666666" if getConfigMode() == True else "#000000")
 		html += "<form method=\"POST\" action=\"--WEBBOT-SELF--\">\n"
 		datei = req.args.get("file",None)
 		if datei is not None:

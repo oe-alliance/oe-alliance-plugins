@@ -17,7 +17,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V3.6r1"
+Version = "V3.6r2"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -270,7 +270,7 @@ CalType = [("9", _("no Calendar")),("0", _("Month")), ("0A", _("Month+Header")),
 CalTypeE = [("0", _("no Dates")), ("D2", _("Dates compact 2 Lines")), ("D3", _("Dates compact 3 Lines")), ("C1", _("Dates 1 Line")), ("C3", _("Dates 3 Lines")), ("C5", _("Dates 5 Lines")), ("C9", _("Dates 9 Lines"))]
 CalLayout = [("0", _("Frame")), ("1", _("Underline")), ("2", _("Underline 2"))]
 CalListType = [("D", _("Dates compact")), ("D-", _("Dates compact no Icon")), ("C", _("Dates")), ("C-", _("Dates no Icon"))]
-InfoSensor = [("0", _("no")), ("R", _("rpm")), ("T", _("C")), ("RT", _("C + rmp"))]
+InfoSensor = [("0", _("no")), ("R", _("rpm/2")), ("r", _("rpm")), ("T", _("C")), ("RT", _("C + rmp/2")), ("rT", _("C + rmp"))]
 InfoCPU = [("0", _("no")), ("P", _("%")), ("L0", _("Load@1min")), ("L1", _("Load@5min")), ("PL0", _("% + Load@1min")), ("PL1", _("% + Load@5min"))]
 HddType = [("0", _("show run+sleep")), ("1", _("show run"))]
 MailType = [("A1", _("Always All")), ("A2", _("Always New")), ("B2", _("Only New"))]
@@ -318,7 +318,7 @@ LCD4linux.BilderRecursiv = ConfigYesNo(default = False)
 LCD4linux.BilderQuick = ConfigSelection(choices =  [("500", _("0.5")), ("1000", _("1")), ("2000", _("2")), ("3000", _("3")), ("5000", _("5")), ("10000", _("10")), ("20000", _("20")), ("30000", _("30"))], default="10000")
 LCD4linux.BilderJPEG = ConfigSelectionNumber(20, 100, 5, default = 75)
 LCD4linux.BilderJPEGQuick = ConfigSelectionNumber(20, 100, 5, default = 60)
-LCD4linux.Helligkeit = ConfigSelectionNumber(0, 10, 1, default = 1)
+LCD4linux.Helligkeit = ConfigSelectionNumber(0, 10, 1, default = 5)
 LCD4linux.Helligkeit2 = ConfigSelectionNumber(0, 10, 1, default = 5)
 LCD4linux.Helligkeit3 = ConfigSelectionNumber(0, 10, 1, default = 5)
 LCD4linux.LCDoff = ConfigClock(default = int(begin) ) # ((5 * 60 + 0) * 60)
@@ -339,13 +339,13 @@ LCD4linux.WetterLowColor = ConfigSelection(choices = Farbe, default="aquamarine"
 LCD4linux.WetterHighColor = ConfigSelection(choices = Farbe, default="violet")
 LCD4linux.WetterTransparenz = ConfigSelection(choices = [("false", _("no")), ("crop", _("alternative Copy-Mode/DM800hd (24bit)")), ("true", _("yes (32bit)"))], default = "false")
 LCD4linux.WetterIconZoom = ConfigSelectionNumber(30, 70, 1, default = 40)
-LCD4linux.WetterRain = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("true2", _("yes + %"))], default = "false")
+LCD4linux.WetterRain = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("true2", _("yes + %"))], default = "true")
 LCD4linux.WetterRainZoom = ConfigSlider(default = 100,  increment = 1, limits = (90, 200))
 LCD4linux.WetterRainColor = ConfigSelection(choices = Farbe, default="silver")
 LCD4linux.WetterRainColor2use = ConfigSelectionNumber(10, 100, 10, default = 80)
 LCD4linux.WetterRainColor2 = ConfigSelection(choices = Farbe, default="cyan")
-LCD4linux.WetterLine = ConfigSelection(choices = [("false", _("no")), ("true", _("yes, short")), ("trueLong", _("yes, long"))], default = "false")
-LCD4linux.WetterExtra = ConfigYesNo(default = False)
+LCD4linux.WetterLine = ConfigSelection(choices = [("false", _("no")), ("true", _("yes, short")), ("trueLong", _("yes, long"))], default = "trueLong")
+LCD4linux.WetterExtra = ConfigYesNo(default = True)
 LCD4linux.WetterExtraZoom = ConfigSlider(default = 100,  increment = 1, limits = (90, 200))
 LCD4linux.WetterExtraFeel = ConfigSelectionNumber(0, 5, 1, default = 3)
 LCD4linux.WetterExtraColorCity = ConfigSelection(choices = Farbe, default="silver")
@@ -1727,6 +1727,8 @@ def getScreenActive():
 	return ScreenActive
 def getConfigStandby():
 	return ConfigStandby
+def getConfigMode():
+	return ConfigMode
 def getisMediaPlayer():
 	return isMediaPlayer
 def getTMP():
@@ -6321,6 +6323,11 @@ class UpdateStatus(Screen):
 				if feinfo is not None:
 					self.LsignalQuality = feinfo.getFrontendInfo(iFrontendInformation.signalQuality)
 					self.LsignalQualitydB = feinfo.getFrontendInfo(iFrontendInformation.signalQualitydB)
+					if self.LsignalQualitydB > 50000:
+#						status = feinfo.getFrontendStatus()
+#						if status is not None:
+#							self.LsignalQualitydB = status.get("tuner_signal_quality_db")
+						self.LsignalQualitydB = 0
 					self.LbitErrorRate = feinfo.getFrontendInfo(iFrontendInformation.bitErrorRate)
 					data = feinfo and feinfo.getAll(False)
 					if data:
@@ -8744,6 +8751,10 @@ def LCD4linuxPIC(self,session):
 			if os.path.isfile("/proc/stb/fp/fan_speed"):
 				value = int(open("/proc/stb/fp/fan_speed", "r").readline().strip()[:-4])
 				i += " %drpm" % int(value / 2)
+		elif "r" in ConfigInfo:
+			if os.path.isfile("/proc/stb/fp/fan_speed"):
+				value = int(open("/proc/stb/fp/fan_speed", "r").readline().strip()[:-4])
+				i += " %drpm" % int(value)
 		if "P" in ConfigInfo:
 			if os.path.isfile("/proc/stat"):
 				v = open("/proc/stat", "r").readline().split()

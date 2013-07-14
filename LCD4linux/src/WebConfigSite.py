@@ -349,13 +349,13 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<p align=\"left\">"
 		d = glob.glob("%sdpf.*" % getTMPL())
 		if len(d)>0:
-			html += "<a href=\"/lcd4linux\"><img alt=\"LCD 1\" src=\"/lcd4linux/%s?%d\" height=\"80\" id=\"reloader1\" onload=\"setTimeout('document.getElementById(\\'reloader1\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
+			html += "<a href=\"/lcd4linux\"><img alt=\"LCD 1\" src=\"/lcd4linux/%s?%d\" border=\"1\" height=\"80\" id=\"reloader1\" onload=\"setTimeout('document.getElementById(\\'reloader1\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
 		d = glob.glob("%sdpf2.*" % getTMPL())
 		if len(d)>0:
-			html += "<a href=\"/lcd4linux?file=%s\"><img alt=\"LCD 2\" src=\"/lcd4linux/%s?%d\" height=\"80\" id=\"reloader2\" onload=\"setTimeout('document.getElementById(\\'reloader2\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
+			html += "<a href=\"/lcd4linux?file=%s\"><img alt=\"LCD 2\" src=\"/lcd4linux/%s?%d\" border=\"1\" height=\"80\" id=\"reloader2\" onload=\"setTimeout('document.getElementById(\\'reloader2\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
 		d = glob.glob("%sdpf3.*" % getTMPL())
 		if len(d)>0:
-			html += "<a href=\"/lcd4linux?file=%s\"><img alt=\"LCD 3\" src=\"/lcd4linux/%s?%d\" height=\"80\" id=\"reloader3\" onload=\"setTimeout('document.getElementById(\\'reloader3\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
+			html += "<a href=\"/lcd4linux?file=%s\"><img alt=\"LCD 3\" src=\"/lcd4linux/%s?%d\" border=\"1\" height=\"80\" id=\"reloader3\" onload=\"setTimeout('document.getElementById(\\'reloader3\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
 		html += "</p></td>\n"
 		if os.path.isfile(CrashFile):
 			html += "<td valign=\"top\" align=\"left\"  bgcolor=\"#000000\">\n"
@@ -553,7 +553,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			html += "</form>\n"
 	
 		html += "<hr><span style=\"font-size:8pt\">%s</span>" % getINFO()
-		
+		html += "<BR><a style=\"font-size:9pt\" href=\"http://www.i-have-a-dreambox.com/wbb2/thread.php?postid=1634882\">Support & FAQ</a>"
 		html += "</body>\n"
 		html += "</html>\n"
 
