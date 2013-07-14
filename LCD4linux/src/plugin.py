@@ -298,7 +298,7 @@ begin = mktime((
 )
 
 LCD4linux = Config()
-LCD4linux.Enable = ConfigYesNo(default = False)
+LCD4linux.Enable = ConfigYesNo(default = True)
 LCD4linux.FastMode = ConfigSelection(choices = [("5", _("Normal (5s)")), ("2", _("Fastmode (2s)"))], default="5")
 LCD4linux.ScreenActive = ConfigSelection(choices = [("1", _("Screen 1")), ("2", _("Screen 2")), ("3", _("Screen 3")), ("4", _("Screen 4")), ("5", _("Screen 5")), ("6", _("Screen 6")), ("7", _("Screen 7")), ("8", _("Screen 8")), ("9", _("Screen 9"))], default="1")
 LCD4linux.ScreenMax = ConfigSelection(choices = ScreenUse, default="1")
@@ -318,7 +318,7 @@ LCD4linux.BilderRecursiv = ConfigYesNo(default = False)
 LCD4linux.BilderQuick = ConfigSelection(choices =  [("500", _("0.5")), ("1000", _("1")), ("2000", _("2")), ("3000", _("3")), ("5000", _("5")), ("10000", _("10")), ("20000", _("20")), ("30000", _("30"))], default="10000")
 LCD4linux.BilderJPEG = ConfigSelectionNumber(20, 100, 5, default = 75)
 LCD4linux.BilderJPEGQuick = ConfigSelectionNumber(20, 100, 5, default = 60)
-LCD4linux.Helligkeit = ConfigSelectionNumber(0, 10, 1, default = 5)
+LCD4linux.Helligkeit = ConfigSelectionNumber(0, 10, 1, default = 1)
 LCD4linux.Helligkeit2 = ConfigSelectionNumber(0, 10, 1, default = 5)
 LCD4linux.Helligkeit3 = ConfigSelectionNumber(0, 10, 1, default = 5)
 LCD4linux.LCDoff = ConfigClock(default = int(begin) ) # ((5 * 60 + 0) * 60)
@@ -332,20 +332,20 @@ LCD4linux.SavePicture = ConfigSelection(choices =  [("0", _("no"))] + LCDSelect,
 LCD4linux.WebIfRefresh = ConfigSelectionNumber(1, 60, 1, default = 3)
 LCD4linux.WebIfType = ConfigSelection(choices = [("0", _("Javascript")), ("1", _("Reload"))], default="0")
 LCD4linux.WebIfInitDelay = ConfigYesNo(default = False)
-LCD4linux.WetterCity = ConfigText(default="Berlin", fixed_size=False)
+LCD4linux.WetterCity = ConfigText(default="London", fixed_size=False)
 LCD4linux.Wetter2City = ConfigText(default="Berlin", fixed_size=False)
 LCD4linux.WetterPath = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.WetterLowColor = ConfigSelection(choices = Farbe, default="aquamarine")
 LCD4linux.WetterHighColor = ConfigSelection(choices = Farbe, default="violet")
 LCD4linux.WetterTransparenz = ConfigSelection(choices = [("false", _("no")), ("crop", _("alternative Copy-Mode/DM800hd (24bit)")), ("true", _("yes (32bit)"))], default = "false")
 LCD4linux.WetterIconZoom = ConfigSelectionNumber(30, 70, 1, default = 40)
-LCD4linux.WetterRain = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("true2", _("yes + %"))], default = "true")
+LCD4linux.WetterRain = ConfigSelection(choices = [("false", _("no")), ("true", _("yes")), ("true2", _("yes + %"))], default = "false")
 LCD4linux.WetterRainZoom = ConfigSlider(default = 100,  increment = 1, limits = (90, 200))
 LCD4linux.WetterRainColor = ConfigSelection(choices = Farbe, default="silver")
 LCD4linux.WetterRainColor2use = ConfigSelectionNumber(10, 100, 10, default = 80)
 LCD4linux.WetterRainColor2 = ConfigSelection(choices = Farbe, default="cyan")
-LCD4linux.WetterLine = ConfigSelection(choices = [("false", _("no")), ("true", _("yes, short")), ("trueLong", _("yes, long"))], default = "trueLong")
-LCD4linux.WetterExtra = ConfigYesNo(default = True)
+LCD4linux.WetterLine = ConfigSelection(choices = [("false", _("no")), ("true", _("yes, short")), ("trueLong", _("yes, long"))], default = "false")
+LCD4linux.WetterExtra = ConfigYesNo(default = False)
 LCD4linux.WetterExtraZoom = ConfigSlider(default = 100,  increment = 1, limits = (90, 200))
 LCD4linux.WetterExtraFeel = ConfigSelectionNumber(0, 5, 1, default = 3)
 LCD4linux.WetterExtraColorCity = ConfigSelection(choices = Farbe, default="silver")
@@ -399,7 +399,7 @@ LCD4linux.Mail5User = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.Mail5Pass = ConfigPassword(default="", fixed_size=False, visible_width=50)
 LCD4linux.MailTime = ConfigSelection(choices = [("01", _("60min")), ("01,31", _("30min")), ("01,21,41", _("20min")), ("01,16,31,46", _("15min")), ("01,11,21,31,41,51", _("10min"))], default="01")
 LCD4linux.MailShow0 = ConfigYesNo(default = False)
-LCD4linux.Recording = ConfigSelection(choices = [("0", _("no"))] + LCDSelect, default="1")
+LCD4linux.Recording = ConfigSelection(choices = [("0", _("no"))] + LCDSelect, default="0")
 LCD4linux.RecordingType = ConfigSelection(choices = [("1", _("Corner")), ("2", _("Picon"))], default="1")
 LCD4linux.RecordingSize = ConfigSlider(default = 25,  increment = 1, limits = (10, 100))
 LCD4linux.RecordingPos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
@@ -551,11 +551,11 @@ LCD4linux.Picon2TextSize = ConfigSlider(default = 30,  increment = 2, limits = (
 LCD4linux.Picon2Cache = ConfigText(default="/usr/share/enigma2/picon2cache/", fixed_size=False, visible_width=50)
 LCD4linux.Clock = ConfigSelection(choices = ScreenSelect, default="1")
 LCD4linux.ClockLCD = ConfigSelection(choices = LCDSelect, default="1")
-LCD4linux.ClockType = ConfigSelection(choices = ClockType, default="2")
-LCD4linux.ClockSpacing = ConfigSelectionNumber(0, 3, 1, default = 0)
+LCD4linux.ClockType = ConfigSelection(choices = ClockType, default="12")
+LCD4linux.ClockSpacing = ConfigSelectionNumber(0, 3, 1, default = 2)
 LCD4linux.ClockAnalog = ConfigSelectionNumber(1, 6, 1, default = 1)
 LCD4linux.ClockSize = ConfigSlider(default = 70,  increment = 2, limits = (10, 400))
-LCD4linux.ClockPos = ConfigSlider(default = 4,  increment = 2, limits = (0, 1024))
+LCD4linux.ClockPos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
 LCD4linux.ClockAlign = ConfigSelection(choices = AlignType, default="2")
 LCD4linux.ClockSplit = ConfigYesNo(default = False)
 LCD4linux.ClockColor = ConfigSelection(choices = Farbe, default="white")
@@ -605,10 +605,10 @@ LCD4linux.DescShadow = ConfigYesNo(default = False)
 LCD4linux.DescFont = ConfigSelection(choices = FontType, default="0")
 LCD4linux.Prog = ConfigSelection(choices = ScreenSelect, default="1")
 LCD4linux.ProgLCD = ConfigSelection(choices = LCDSelect, default="1")
-LCD4linux.ProgType = ConfigSelection(choices = [("1", _("Time+Info")), ("2", _("Info")), ("3", _("Time+Duration+Info"))], default="1")
-LCD4linux.ProgSize = ConfigSlider(default = 40,  increment = 1, limits = (10, 150))
-LCD4linux.ProgLines = ConfigSelectionNumber(1, 9, 1, default = 3)
-LCD4linux.ProgPos = ConfigSlider(default = 122,  increment = 2, limits = (0, 1024))
+LCD4linux.ProgType = ConfigSelection(choices = [("1", _("Time+Info")), ("2", _("Info")), ("3", _("Time+Duration+Info"))], default="2")
+LCD4linux.ProgSize = ConfigSlider(default = 43,  increment = 1, limits = (10, 150))
+LCD4linux.ProgLines = ConfigSelectionNumber(1, 9, 1, default = 1)
+LCD4linux.ProgPos = ConfigSlider(default = 150,  increment = 2, limits = (0, 1024))
 LCD4linux.ProgAlign = ConfigSelection(choices = AlignType, default="1")
 LCD4linux.ProgSplit = ConfigYesNo(default = False)
 LCD4linux.ProgColor = ConfigSelection(choices = Farbe, default="white")
@@ -625,12 +625,12 @@ LCD4linux.ProgNextSplit = ConfigYesNo(default = False)
 LCD4linux.ProgNextColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.ProgNextShadow = ConfigYesNo(default = False)
 LCD4linux.ProgNextFont = ConfigSelection(choices = FontType, default="0")
-LCD4linux.Progress = ConfigSelection(choices = ScreenSelect, default="0")
+LCD4linux.Progress = ConfigSelection(choices = ScreenSelect, default="1")
 LCD4linux.ProgressLCD = ConfigSelection(choices = LCDSelect, default="1")
-LCD4linux.ProgressType = ConfigSelection(choices = ProgressType, default="1")
-LCD4linux.ProgressSize = ConfigSlider(default = 20,  increment = 1, limits = (5, 100))
+LCD4linux.ProgressType = ConfigSelection(choices = ProgressType, default="21")
+LCD4linux.ProgressSize = ConfigSlider(default = 25,  increment = 1, limits = (5, 100))
 LCD4linux.ProgressAlign = ConfigSelection(choices = [("0", _("half left")), ("1", _("center")), ("2", _("half right"))], default="1")
-LCD4linux.ProgressPos = ConfigSlider(default = 120,  increment = 2, limits = (0, 1024))
+LCD4linux.ProgressPos = ConfigSlider(default = 210,  increment = 2, limits = (0, 1024))
 LCD4linux.ProgressColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.ProgressShadow = ConfigYesNo(default = False)
 LCD4linux.ProgressShadow2 = ConfigYesNo(default = False)
@@ -679,11 +679,11 @@ LCD4linux.SignalColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.SignalGradient = ConfigYesNo(default = False)
 LCD4linux.SignalMin = ConfigSlider(default = 40,  increment = 5, limits = (0, 50))
 LCD4linux.SignalMax = ConfigSlider(default = 90,  increment = 5, limits = (50, 100))
-LCD4linux.Tuner = ConfigSelection(choices = ScreenSelect, default="0")
+LCD4linux.Tuner = ConfigSelection(choices = ScreenSelect, default="1")
 LCD4linux.TunerLCD = ConfigSelection(choices = LCDSelect, default="1")
-LCD4linux.TunerSize = ConfigSlider(default = 22,  increment = 1, limits = (10, 150))
-LCD4linux.TunerPos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
-LCD4linux.TunerAlign = ConfigSelection(choices = AlignType, default="0")
+LCD4linux.TunerSize = ConfigSlider(default = 48,  increment = 1, limits = (10, 150))
+LCD4linux.TunerPos = ConfigSlider(default = 70,  increment = 2, limits = (0, 1024))
+LCD4linux.TunerAlign = ConfigSelection(choices = AlignType, default="2")
 LCD4linux.TunerSplit = ConfigYesNo(default = False)
 LCD4linux.TunerType = ConfigSelection(choices = DirType, default="0")
 LCD4linux.TunerActive = ConfigYesNo(default = False)
@@ -960,12 +960,12 @@ LCD4linux.MPDescSplit = ConfigYesNo(default = False)
 LCD4linux.MPDescColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.MPDescShadow = ConfigYesNo(default = False)
 LCD4linux.MPDescFont = ConfigSelection(choices = FontType, default="0")
-LCD4linux.MPTitle = ConfigSelection(choices = ScreenSelect, default="1")
+LCD4linux.MPTitle = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.MPTitleLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.MPTitleSize = ConfigSlider(default = 32,  increment = 1, limits = (10, 150))
-LCD4linux.MPTitleLines = ConfigSelectionNumber(1, 9, 1, default = 3)
+LCD4linux.MPTitleLines = ConfigSelectionNumber(1, 9, 1, default = 2)
 LCD4linux.MPTitlePos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
-LCD4linux.MPTitleAlign = ConfigSelection(choices = AlignType, default="1")
+LCD4linux.MPTitleAlign = ConfigSelection(choices = AlignType, default="0")
 LCD4linux.MPTitleSplit = ConfigYesNo(default = False)
 LCD4linux.MPTitleColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.MPTitleShadow = ConfigYesNo(default = False)
@@ -973,18 +973,18 @@ LCD4linux.MPTitleFont = ConfigSelection(choices = FontType, default="0")
 LCD4linux.MPComm = ConfigSelection(choices = ScreenSelect, default="1")
 LCD4linux.MPCommLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.MPCommSize = ConfigSlider(default = 32,  increment = 1, limits = (10, 150))
-LCD4linux.MPCommLines = ConfigSelectionNumber(1, 9, 1, default = 3)
+LCD4linux.MPCommLines = ConfigSelectionNumber(1, 9, 1, default = 2)
 LCD4linux.MPCommPos = ConfigSlider(default = 130,  increment = 2, limits = (0, 1024))
 LCD4linux.MPCommAlign = ConfigSelection(choices = AlignType, default="1")
 LCD4linux.MPCommSplit = ConfigYesNo(default = False)
 LCD4linux.MPCommColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.MPCommShadow = ConfigYesNo(default = False)
 LCD4linux.MPCommFont = ConfigSelection(choices = FontType, default="0")
-LCD4linux.MPProgress = ConfigSelection(choices = ScreenSelect, default="0")
+LCD4linux.MPProgress = ConfigSelection(choices = ScreenSelect, default="1")
 LCD4linux.MPProgressLCD = ConfigSelection(choices = LCDSelect, default="1")
-LCD4linux.MPProgressType = ConfigSelection(choices = ProgressType, default="1")
-LCD4linux.MPProgressSize = ConfigSlider(default = 10,  increment = 1, limits = (5, 100))
-LCD4linux.MPProgressPos = ConfigSlider(default = 120,  increment = 2, limits = (0, 1024))
+LCD4linux.MPProgressType = ConfigSelection(choices = ProgressType, default="21")
+LCD4linux.MPProgressSize = ConfigSlider(default = 25,  increment = 1, limits = (5, 100))
+LCD4linux.MPProgressPos = ConfigSlider(default = 210,  increment = 2, limits = (0, 1024))
 LCD4linux.MPProgressAlign = ConfigSelection(choices = [("0", _("half left")), ("1", _("center")), ("2", _("half right"))], default="1")
 LCD4linux.MPProgressColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.MPProgressShadow = ConfigYesNo(default = False)
@@ -1014,14 +1014,14 @@ LCD4linux.MPPingName2 = ConfigText(default="", fixed_size=False)
 LCD4linux.MPPingName3 = ConfigText(default="", fixed_size=False)
 LCD4linux.MPPingName4 = ConfigText(default="", fixed_size=False)
 LCD4linux.MPPingName5 = ConfigText(default="", fixed_size=False)
-LCD4linux.MPClock = ConfigSelection(choices = ScreenSelect, default="0")
+LCD4linux.MPClock = ConfigSelection(choices = ScreenSelect, default="1")
 LCD4linux.MPClockLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.MPClockType = ConfigSelection(choices = ClockType, default="12")
 LCD4linux.MPClockSpacing = ConfigSelectionNumber(0, 3, 1, default = 0)
 LCD4linux.MPClockAnalog = ConfigSelectionNumber(1, 6, 1, default = 1)
 LCD4linux.MPClockSize = ConfigSlider(default = 70,  increment = 2, limits = (10, 400))
-LCD4linux.MPClockPos = ConfigSlider(default = 150,  increment = 2, limits = (0, 1024))
-LCD4linux.MPClockAlign = ConfigSelection(choices = AlignType, default="1")
+LCD4linux.MPClockPos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
+LCD4linux.MPClockAlign = ConfigSelection(choices = AlignType, default="2")
 LCD4linux.MPClockSplit = ConfigYesNo(default = False)
 LCD4linux.MPClockColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.MPClockShadow = ConfigYesNo(default = False)
@@ -1038,11 +1038,11 @@ LCD4linux.MPClock2Split = ConfigYesNo(default = False)
 LCD4linux.MPClock2Color = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.MPClock2Shadow = ConfigYesNo(default = False)
 LCD4linux.MPClock2Font = ConfigSelection(choices = FontType, default="0")
-LCD4linux.MPTuner = ConfigSelection(choices = ScreenSelect, default="0")
+LCD4linux.MPTuner = ConfigSelection(choices = ScreenSelect, default="1")
 LCD4linux.MPTunerLCD = ConfigSelection(choices = LCDSelect, default="1")
-LCD4linux.MPTunerSize = ConfigSlider(default = 22,  increment = 1, limits = (10, 150))
-LCD4linux.MPTunerPos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
-LCD4linux.MPTunerAlign = ConfigSelection(choices = AlignType, default="0")
+LCD4linux.MPTunerSize = ConfigSlider(default = 48,  increment = 1, limits = (10, 150))
+LCD4linux.MPTunerPos = ConfigSlider(default = 70,  increment = 2, limits = (0, 1024))
+LCD4linux.MPTunerAlign = ConfigSelection(choices = AlignType, default="2")
 LCD4linux.MPTunerSplit = ConfigYesNo(default = False)
 LCD4linux.MPTunerType = ConfigSelection(choices = DirType, default="0")
 LCD4linux.MPTunerActive = ConfigYesNo(default = False)
@@ -1101,10 +1101,10 @@ LCD4linux.MPHddSplit = ConfigYesNo(default = False)
 LCD4linux.MPHddType = ConfigSelection(choices = HddType, default="0")
 LCD4linux.MPTimer = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.MPTimerLCD = ConfigSelection(choices = LCDSelect, default="1")
-LCD4linux.MPTimerSize = ConfigSlider(default = 22,  increment = 1, limits = (10, 150))
+LCD4linux.MPTimerSize = ConfigSlider(default = 23,  increment = 1, limits = (10, 150))
 LCD4linux.MPTimerLines = ConfigSelectionNumber(1, 20, 1, default = 1)
-LCD4linux.MPTimerType = ConfigSelection(choices = [("0", _("use lead-time")), ("1", _("only use Timer"))], default="0")
-LCD4linux.MPTimerPos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
+LCD4linux.MPTimerType = ConfigSelection(choices = [("0", _("use lead-time")), ("1", _("only use Timer"))], default="1")
+LCD4linux.MPTimerPos = ConfigSlider(default = 32,  increment = 2, limits = (0, 1024))
 LCD4linux.MPTimerAlign = ConfigSelection(choices = [("0", _("left")), ("2", _("half right"))], default="0")
 LCD4linux.MPTimerSplit = ConfigYesNo(default = False)
 LCD4linux.MPTimerColor = ConfigSelection(choices = Farbe, default="white")
@@ -1651,24 +1651,24 @@ LCD4linux.StandbyBox2BackColor = ConfigSelection(choices = [("0", _("off"))] + F
 import traceback
 class MyTimer:
 	def __init__(self):
-		print "L4L create timer at:"
+		print "[LCD4linux] create timer at:"
 		traceback.print_stack(limit=2)
 		self.timer = eTimer()
-		print "L4L created timer", self.timer
+		print "[LCD4linux] created timer", self.timer
 	def __del__(self):
-		print "L4L destruct timer", self.timer
+		print "[LCD4linux] destruct timer", self.timer
 		traceback.print_stack(limit=2)
 		del self.timer
 	def start(self, msecs, singleShot=False):
-		print "L4L start timer", msecs, singleShot, self.timer
+		print "[LCD4linux] start timer", msecs, singleShot, self.timer
 		traceback.print_stack(limit=2)
 		self.timer.start(msecs, singleShot)
 	def	startLongTimer(self, secs):
-		print "L4L start longtimer", secs, self.timer
+		print "[LCD4linux] start longtimer", secs, self.timer
 		traceback.print_stack(limit=2)
 		self.timer.startLongTimer(secs)
 	def stop(self):
-		print "L4L stopped timer", self.timer
+		print "[LCD4linux] stopped timer", self.timer
 		traceback.print_stack(limit=2)
 		self.timer.stop()
 	def getCallback(self):
@@ -3237,7 +3237,7 @@ class L4LWorker(Thread):
 					ICSlist.append([rs,col])
 					return
 					gcal = icalendar.Calendar().from_string(rs)
-					print "ics",7
+					# print "ics",7
 				except:
 					L4log("Error: ICS not readable!",name)
 					return
@@ -3258,11 +3258,11 @@ class L4LWorker(Thread):
 								ICS[D]=[]
 							ICS[D].append([Code_utf8(component.get('summary')),component.decoded("dtstart"),col])
 							L4log(D,[component.get('summary'),component.decoded("dtstart")])
-				print "ics",8
+				# print "ics",8
 #				del gcal
-				print "ics",9
+				# print "ics",9
 #				del rs
-				print "ics",10
+				# print "ics",10
 			else:
 				L4logE("Error Read ICS",name)
 
@@ -3660,7 +3660,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 		else:
 			pic_h = int(size_h/2)
 		pic_h2 = pic_h*2
-		print "Hoehe",size_h,pic_h,pic_h2
+		# print "Hoehe",size_h,pic_h,pic_h2
 		skin = """
 			<screen position="center,%d" size="%d,%d" title="LCD4linux Settings" >
 			<widget name="config" position="0,0" size="600,%d" scrollbarMode="showOnDemand" enableWrapAround="1" />
@@ -5996,7 +5996,7 @@ class UpdateStatus(Screen):
 			self.TunerCallBack=True
 			res_mgr.frontendUseMaskChanged.get().append(self.tunerUseMaskChanged)
 		else:
-			print "[ERROR]no res_mgr!!"
+			print "[LCD4linux] ERROR no res_mgr!!"
 			
 	def offTunerCount(self):
 		if self.TunerCallBack:
@@ -6005,7 +6005,7 @@ class UpdateStatus(Screen):
 				self.TunerCallBack=False
 				res_mgr.frontendUseMaskChanged.get().remove(self.tunerUseMaskChanged)
 			else:
-				print "[ERROR]no res_mgr!!"
+				print "[LCD4linux] ERROR no res_mgr!!"
 			
 	def tunerUseMaskChanged(self, mask):
 		global TunerMask
@@ -8012,7 +8012,7 @@ def LCD4linuxPIC(self,session):
 		vt = "-v" if vidosd == "0" else ""
 		im = Image.new('RGB', (int(x), int(y)), (0, 0, 0, 0))
 #		GrabTV("/usr/bin/grab %s -j 40 -r %s /tmp/lcd4linux/tvgrab.jpg" % (vt,x))
-		print "OSD",TVrunning,ScreenActive,LCD4linux.TV.value
+		# print "OSD",TVrunning,ScreenActive,LCD4linux.TV.value
 		while TVrunning == True and ScreenActive in LCD4linux.TV.value:
 			GrabTV("/usr/bin/grab %s -j 40 -r %s %stvgrab.jpg" % (vt,x,TMPL))
 #			if lcd in ["1","3"]:
@@ -8255,7 +8255,7 @@ def LCD4linuxPIC(self,session):
 		event_run=0
 		ProgressBar = MAX_W-20
 		if self.LsreftoString is not None:
-#			print "L4L",self.LsreftoString
+#			print "[LCD4linux]",self.LsreftoString
 			if ConfigType[1:] == "1":
 				ms = 1.5
 			elif ConfigType[1:] == "2":
@@ -8264,17 +8264,17 @@ def LCD4linuxPIC(self,session):
 				ms = 1
 			font = ImageFont.truetype(FONT, int(ConfigSize*ms)+8, encoding='unic') #5
 			if self.Lpath: # Movie
-#				print "L4L Path",self.Lpath
+#				print "[LCD4linux] Path",self.Lpath
 				isVideoPlaying = 1
 				if self.Llength is not None:
-#					print "L4L Len",self.Llength
+#					print "[LCD4linux] Len",self.Llength
 					length = self.Llength
 					position = self.Lposition
-#					print "L4L Len",length,position
+#					print "[LCD4linux] Len",length,position
 					if length and position:
-#						print "L4L Len ok"
+#						print "[LCD4linux] Len ok"
 						if length[1] > 0:
-#							print "L4L Len >0"
+#							print "[LCD4linux] Len >0"
 							if ConfigType[0] in ["2","4","6","8","9","A"]:
 								if ConfigType[0] in ["8","9","A"]:
 									dur = int(position[1]/90000)
@@ -8320,9 +8320,9 @@ def LCD4linuxPIC(self,session):
 #							remaining = remaining / 90000
 			else: # DVB 
 				event_begin, event_end, duration, event_name = self.Levent_begin0, self.Levent_end0, self.Lduration0, self.Levent_name0
-#				print "L4L DVB",event_begin, event_end, duration, event_name
+#				print "[LCD4linux] DVB",event_begin, event_end, duration, event_name
 				if event_begin != 0:
-#					print "L4L DVB Begin",event_begin
+#					print "[LCD4linux] DVB Begin",event_begin
 					now = int(time())
 					event_run = now - event_begin
 					if ConfigType[0] in ["2","4","6","8","9","A"]:
@@ -8364,7 +8364,7 @@ def LCD4linuxPIC(self,session):
 					isData = True
 #					print event_begin, event_end, event.getDuration(), event.getPlayPosition()
 			if isData == True:
-#				print "L4L isdata"
+#				print "[LCD4linux] isdata"
 				if event_run <0:
 					event_run = 0
 				if event_run > ProgressBar:

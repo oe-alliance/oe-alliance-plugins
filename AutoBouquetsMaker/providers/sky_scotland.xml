@@ -7,10 +7,10 @@
 	<configurations>
 		<configuration key="border_scotland_hd" bouquet="0x1006" region="0x24" namespace="0x11a0000">Border Scotland HD</configuration>
 		<configuration key="border_scotland_sd" bouquet="0x1002" region="0x24" namespace="0x11a0000">Border Scotland SD</configuration>
-		<configuration key="scottish_east_hd" bouquet="0x1006" region="0x25" namespace="0x11a0000">Scottish East HD</configuration>
-		<configuration key="scottish_east_sd" bouquet="0x1002" region="0x25" namespace="0x11a0000">Scottish East SD</configuration>
-		<configuration key="scottish_west_hd" bouquet="0x1006" region="0x26" namespace="0x11a0000">Scottish West HD</configuration>
-		<configuration key="scottish_west_sd" bouquet="0x1002" region="0x26" namespace="0x11a0000">Scottish West SD</configuration>
+		<configuration key="scottish_west_hd" bouquet="0x1006" region="0x25" namespace="0x11a0000">Scottish West HD</configuration>
+		<configuration key="scottish_west_sd" bouquet="0x1002" region="0x25" namespace="0x11a0000">Scottish West SD</configuration>
+		<configuration key="scottish_east_hd" bouquet="0x1006" region="0x26" namespace="0x11a0000">Scottish East HD</configuration>
+		<configuration key="scottish_east_sd" bouquet="0x1002" region="0x26" namespace="0x11a0000">Scottish East SD</configuration>
 	</configurations>
 	<sections>
 		<section number="101">Entertainment</section>
