@@ -19,7 +19,7 @@ SUBDIRS += OdinM7VFDControl
 endif
 
 if VENTON
-SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade HbbTV TransCodingSetup
+SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade HbbTV
 endif
 
 if VUUNO
