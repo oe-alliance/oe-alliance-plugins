@@ -41,7 +41,7 @@ def ParseCode():
 	i3 = 0
 	i4 = 0
 	L4log("WebIF: parsing Code....")
-	if os.exists(Py):
+	if os.path.exists(Py):
 		for line in open(Py,"r").readlines():
 			print line
 			if line.find("self.list1.append") >= 0 or line.find("self.list2.append") >= 0 or line.find("self.list3.append") >= 0 or line.find("self.list4.append") >= 0:
