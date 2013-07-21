@@ -11,7 +11,7 @@ import datetime
 import glob
 import time
 
-Py = "/usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/plugin.pyo"
+Py = "/usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/plugin.py"
 
 L1 = []
 L2 = []
@@ -41,32 +41,33 @@ def ParseCode():
 	i3 = 0
 	i4 = 0
 	L4log("WebIF: parsing Code....")
-	for line in open(Py,"r").readlines():
-#		print line
-		if line.find("self.list1.append") >= 0 or line.find("self.list2.append") >= 0 or line.find("self.list3.append") >= 0 or line.find("self.list4.append") >= 0:
-			Z = line.replace("getConfigListEntry(_",",").replace(")","").replace("(","").replace(".append","").replace("\t","").replace("\n","").replace("\"","").split(",")
-			if Z[0]=="self.list1":
-				if Z[2].strip()[:13] in M1:
-					idx = M1.index(Z[2].strip()[:13])
-					i1 = idx+1
-				Z.append(i1)
-				i1 = 0
-				L1.append(Z)
-			elif Z[0]=="self.list2":
-				if Z[1][:1] != "-":
-					i2+=1
-				Z.append(i2)
-				L2.append(Z)
-			elif Z[0]=="self.list3":
-				if Z[1][:1] != "-":
-					i3+=1
-				Z.append(i3)
-				L3.append(Z)
-			elif Z[0]=="self.list4":
-				if Z[1][:1] != "-":
-					i4+=1
-				Z.append(i4)
-				L4.append(Z)
+	if os.exists(Py):
+		for line in open(Py,"r").readlines():
+			print line
+			if line.find("self.list1.append") >= 0 or line.find("self.list2.append") >= 0 or line.find("self.list3.append") >= 0 or line.find("self.list4.append") >= 0:
+				Z = line.replace("getConfigListEntry(_",",").replace(")","").replace("(","").replace(".append","").replace("\t","").replace("\n","").replace("\"","").split(",")
+				if Z[0]=="self.list1":
+					if Z[2].strip()[:13] in M1:
+						idx = M1.index(Z[2].strip()[:13])
+						i1 = idx+1
+					Z.append(i1)
+					i1 = 0
+					L1.append(Z)
+				elif Z[0]=="self.list2":
+					if Z[1][:1] != "-":
+						i2+=1
+					Z.append(i2)
+					L2.append(Z)
+				elif Z[0]=="self.list3":
+					if Z[1][:1] != "-":
+						i3+=1
+					Z.append(i3)
+					L3.append(Z)
+				elif Z[0]=="self.list4":
+					if Z[1][:1] != "-":
+						i4+=1
+					Z.append(i4)
+					L4.append(Z)
 
 def _l(st):
 	return codecs.encode(st.decode("utf-8","ignore").replace(" [ok]>",""),"latin","ignore")
