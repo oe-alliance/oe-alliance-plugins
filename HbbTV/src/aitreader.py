@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from subprocess import Popen, PIPE
-import os, xml.dom.minidom, re
+import os, xml.dom.minidom
 
 DUMPBIN = "/usr/lib/enigma2/python/Plugins/Extensions/HbbTV/dumpait"
 class eAITSectionReader:
@@ -43,17 +42,15 @@ class eAITSectionReader:
 		return self.mAppList
 
 	def doOpen(self):
-		p1 = Popen(self.mCommand, shell=True, stdout=PIPE)
-		document = p1.communicate()[0]
-
-		# strip all none printable charators from data grabed from stream.
-		control_chars = ''.join(map(unichr, range(0,32) + range(127,160)))
-		control_char_re = re.compile('[%s]' % re.escape(control_chars))
-		document = control_char_re.sub('', document)
-
+		document = ""
+		try:	document = os.popen(self.mCommand).read()
+		except Exception, ErrMsg:
+			print ErrMsg
+			return False
 		if len(document) == 0:
 			return False
-		self.mDocument = xml.dom.minidom.parseString(document.encode("utf-8"))
+		document = document.decode("cp1252").encode("utf-8")
+		self.mDocument = xml.dom.minidom.parseString(document)
 		return True
 
 	def doDump(self):
