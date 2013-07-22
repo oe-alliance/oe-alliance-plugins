@@ -27,7 +27,7 @@ SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade HbbTV
 endif
 
 if VUUNO
-SUBDIRS += FPGAUpgrade Blindscan VuRemote
+SUBDIRS += FirmwareUpgrade Blindscan VuRemote
 endif
 
 if VUULTIMO
@@ -39,7 +39,7 @@ SUBDIRS += VuDuoFanControl
 endif
 
 if VUSOLO2
-SUBDIRS += FPGAUpgrade VuRemote TransCodingSetup Blindscan
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup Blindscan
 endif
 
 if VUDUO2
