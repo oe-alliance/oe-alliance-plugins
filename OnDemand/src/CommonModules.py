@@ -405,7 +405,7 @@ class StreamsThumbCommon(Screen):
 class MyHTTPConnection(HTTPConnection):
 	def connect (self):
 		resolver = Resolver()
-		resolver.nameservers = ['142.54.177.158']  #tunlr dns address
+		resolver.nameservers = ['69.197.169.9']  #tunlr dns address
 		#resolver.nameservers = ['208.122.23.22']  #Unblock-US dns address
 		answer = resolver.query(self.host,'A')
 		self.host = answer.rrset.items[0].address
