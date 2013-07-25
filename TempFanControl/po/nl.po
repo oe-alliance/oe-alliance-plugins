@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: 2012-05-23 07:43+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2013-07-25 09:59+0200\n"
+"PO-Revision-Date: 2013-07-25 16:08+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: Nederlands\n"
 "MIME-Version: 1.0\n"
@@ -25,16 +25,29 @@ msgstr "Annuleren"
 msgid "Fan %d PWM"
 msgstr "Ventilator %d PWM"
 
+#, python-format
+msgid "Fan %d voltage"
+msgstr "Fan %d voltage"
+
 msgid "Fan Control"
 msgstr "Fan Control"
-
-msgid "Fan control"
-msgstr "Fan control"
 
 msgid "OK"
 msgstr "OK"
 
-#
 #, python-format
-msgid "Standby Fan %d PWM"
+msgid "Standby fan %d PWM"
 msgstr "Standby fan %d PWM"
+
+#, python-format
+msgid "Standby fan %d voltage"
+msgstr "Standby fan %d voltage"
+
+msgid "Temperature and Fan control"
+msgstr "Temperatuur en Fan controle"
+
+msgid "Temperature and fan control"
+msgstr "Temperatuur en Fan controle"
+
+#~ msgid "Fan control"
+#~ msgstr "Fan control"
