@@ -26,6 +26,14 @@ if VENTON
 SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade HbbTV
 endif
 
+if INI
+SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade HbbTV
+endif
+
+if INIHDP
+SUBDIRS += TransCodingSetup
+endif
+
 if VUUNO
 SUBDIRS += FirmwareUpgrade Blindscan VuRemote
 endif
