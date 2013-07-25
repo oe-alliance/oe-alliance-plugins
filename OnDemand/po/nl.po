@@ -1,0 +1,417 @@
+# Dutch translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-25 09:59+0200\n"
+"PO-Revision-Date: 2013-07-25 17:44+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: Andy Blackburn/Rob van der DOes\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: The Netherlands\n"
+
+msgid "0 - 9"
+msgstr "0 - 9"
+
+msgid "3 Player"
+msgstr "3 Player"
+
+msgid "4OD Player"
+msgstr "4OD Player"
+
+msgid "A - C"
+msgstr "A - C"
+
+msgid "A to Z"
+msgstr "A tot Z"
+
+msgid "ABC News 24"
+msgstr "ABC News 24"
+
+msgid "ABC iView"
+msgstr "ABC iView"
+
+msgid "ABC iView - A to Z"
+msgstr "ABC iView - A tot Z"
+
+msgid "ABC1"
+msgstr "ABC1"
+
+msgid "ABC2"
+msgstr "ABC2"
+
+msgid "ABC3"
+msgstr "ABC3"
+
+msgid "ABC4Kids"
+msgstr "ABC4Kids"
+
+msgid "About"
+msgstr "Over"
+
+msgid "Added:"
+msgstr "Toegevoegd:"
+
+msgid "Added: "
+msgstr "Toegevoegd:"
+
+msgid "All Shows"
+msgstr "Alle shows"
+
+msgid "Arts & Culture - Music"
+msgstr "Kunst & Cultuur - Muziek"
+
+msgid "Arts & Culture - People"
+msgstr "Kunst & Cultuur - Mensen"
+
+msgid "Arts & Culture - Performance"
+msgstr "Kunst & Cultuur - Voorstellingen"
+
+msgid "Arts & Culture - Reviews"
+msgstr "Kunst & Cultuur - Recenties"
+
+msgid "BBC Alba"
+msgstr "BBC Alba"
+
+msgid "BBC Four"
+msgstr "BBC Four"
+
+msgid "BBC HD"
+msgstr "BBC HD"
+
+msgid "BBC News"
+msgstr "BBC News"
+
+msgid "BBC Northern Ireland"
+msgstr "BBC Northern Ireland"
+
+msgid "BBC One"
+msgstr "BBC One"
+
+msgid "BBC Parliamanent"
+msgstr "BBC Parliamanent"
+
+msgid "BBC Scotland"
+msgstr "BBC Scotland"
+
+msgid "BBC Three"
+msgstr "BBC Three"
+
+msgid "BBC Two"
+msgstr "BBC Two"
+
+msgid "BBC Wales"
+msgstr "BBC Wales"
+
+msgid "BBC iPlayer"
+msgstr "BBC iPlayer"
+
+msgid "Back"
+msgstr "Terug"
+
+msgid "CBBC"
+msgstr "CBBC"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Cbeebies"
+msgstr "Cbeebies"
+
+msgid "Childrens"
+msgstr "Childrens"
+
+msgid "Close"
+msgstr "Sluit"
+
+msgid "Comedy"
+msgstr "Komedie"
+
+msgid "Comedy - Cult"
+msgstr "Komedie - Cult"
+
+msgid "Comedy - Satire"
+msgstr "Komedie - Satire"
+
+msgid "Comedy - Sitcom"
+msgstr "Komedie - Sticom"
+
+msgid "Comedy - Sketch"
+msgstr "Komedie - Sketches"
+
+msgid "D - F"
+msgstr "D - F"
+
+msgid "Documentary - Biography"
+msgstr "Documentaire - Biografie"
+
+msgid "Documentary - History"
+msgstr "Documentaire - Geschiedenis"
+
+msgid "Documentary - Nature"
+msgstr "Documentaire - Natuur"
+
+msgid "Documentary - Real Life"
+msgstr "Documentaire - Uit het leven"
+
+msgid "Documentary - Science"
+msgstr "Documentaire - Wetenschap"
+
+msgid "Drama"
+msgstr "Drama"
+
+msgid "Drama - Crime"
+msgstr "Drama - Misdaad"
+
+msgid "Drama - Historical"
+msgstr "Drama - Historisch"
+
+msgid "Drama - Period"
+msgstr "Drama - Periode"
+
+msgid "Drama - Romance"
+msgstr "Drama - Romantiek"
+
+msgid "Drama - Sci-fi"
+msgstr "Drama - Sci-fi"
+
+msgid "Duration: "
+msgstr "Duur:"
+
+msgid "Education"
+msgstr "Opvoeding"
+
+msgid "Entertainment"
+msgstr "Vermaak"
+
+msgid "Episodes by Date"
+msgstr "Episodes op datum"
+
+msgid "Episodes: "
+msgstr "Episodes"
+
+msgid "Exit"
+msgstr "Sluit af"
+
+msgid "Factual"
+msgstr "Feitelijk"
+
+msgid "Featured Programs"
+msgstr "Prominente programma's"
+
+msgid "G - J"
+msgstr "G - J"
+
+msgid "Going, Going..."
+msgstr "Gaan, gaan..."
+
+msgid "HD"
+msgstr "HD"
+
+msgid "Health And Wellbeing"
+msgstr "Gezondheid & welzijn"
+
+msgid "High"
+msgstr "Hoog"
+
+msgid "ITV Player"
+msgstr "ITV Player"
+
+msgid "Indigenous"
+msgstr "Autochtoon"
+
+msgid "K - M"
+msgstr "K - M"
+
+msgid "Last Chance"
+msgstr "Laatste kans"
+
+msgid "Last Updated:"
+msgstr "Laats geupdate:"
+
+msgid "Latest Episodes"
+msgstr "Laatste episodes"
+
+msgid "Lifestyle - Games"
+msgstr "Lifestyle - Spellen"
+
+msgid "Lifestyle - Reality"
+msgstr "Lifestyle - Reality"
+
+msgid "Low"
+msgstr "Laag"
+
+msgid "Most Popular Episodes"
+msgstr "Populairste episodes"
+
+msgid "Most Popular TV"
+msgstr "Populairste TV"
+
+msgid "Most Talked About"
+msgstr "Meest besproken"
+
+msgid "Movies"
+msgstr "Film"
+
+msgid "Music"
+msgstr "Muziek"
+
+msgid "N - P"
+msgstr "N - P"
+
+msgid "News"
+msgstr "Nieuws"
+
+msgid "News & Current Affairs"
+msgstr "Nieuws & Actualiteiten"
+
+msgid "No items matching your search criteria were found"
+msgstr "Niets gevonden dat aan uw zoekcriteria voldoet"
+
+msgid "No matching search items were found for "
+msgstr "Geen overeenkomsten gevonden voor"
+
+msgid "Normal"
+msgstr "Normaal"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "OUG Player"
+msgstr "OUG Speler"
+
+msgid "OnDemand"
+msgstr "OnDemand"
+
+msgid "OnDemand Configuration"
+msgstr "OnDemand Configuratie"
+
+msgid ""
+"Open Uitzending Gemist\n"
+"\n"
+"Based on Xtrend code"
+msgstr ""
+"Open Uitzending Gemist\n"
+"\n"
+"Gebaseerd op Xtrend code"
+
+msgid "Panel & Discussion"
+msgstr "Jury & discussie"
+
+msgid "Preferred Stream Quality"
+msgstr "Gewenste stream-kwaliteit"
+
+msgid "Q - T"
+msgstr "Q - T"
+
+msgid "RTE Player"
+msgstr "RTE Player"
+
+msgid "RTE Player - A to Z"
+msgstr "RTE Player - A tot Z"
+
+msgid "RTE Player - Categories"
+msgstr "RTE Player - Categorieen"
+
+msgid "RTE Player - Choose Date"
+msgstr "RTE Player - Kies datum"
+
+msgid "RTL Number of days back"
+msgstr "RTL Aantal dageb terug"
+
+msgid "RTL XL A-Z"
+msgstr "RTL XL A-Z"
+
+msgid "RTL XL Gemist"
+msgstr "RTL XL Gemist"
+
+msgid "Recently Added"
+msgstr "Recent toegevoegd"
+
+msgid "Religion"
+msgstr "Religie"
+
+msgid "Search"
+msgstr "Zoek"
+
+msgid "Search term"
+msgstr "Zoekterm"
+
+msgid "Show Categories"
+msgstr "Toon categorieen"
+
+msgid "Show in extensions"
+msgstr "Toon in extensies"
+
+msgid "Show in main menu"
+msgstr "Toon in hoofdmenu"
+
+msgid "Show in plugin browser"
+msgstr "Toon in pluginbrowser"
+
+msgid "Show thumbnails"
+msgstr "Toon plaatjes"
+
+msgid "Shows A to Z"
+msgstr "Shows A tot Z"
+
+msgid "Signed"
+msgstr "Getekend"
+
+msgid "Soaps"
+msgstr "Soaps"
+
+msgid "Sport"
+msgstr "Sport"
+
+msgid "Straight Off The Telly"
+msgstr "Nu op de TV"
+
+msgid "TV Highlights"
+msgstr "TV hoogtepunten"
+
+msgid "Time: "
+msgstr "Tijd:"
+
+msgid "Today"
+msgstr "Vandaag"
+
+msgid "Trailers"
+msgstr "Trailers"
+
+msgid "U - Z"
+msgstr "U - Z"
+
+msgid "UG A-Z"
+msgstr "UG A-Z"
+
+msgid "UG Popular"
+msgstr "UG Populair"
+
+msgid "UG Recently added"
+msgstr "UG Recent toegevoegd"
+
+msgid "UG Search"
+msgstr "UG Zoek"
+
+msgid "Very Low"
+msgstr "Erg laag"
+
+msgid "Wait please while gathering data..."
+msgstr "Wacht op het binnenhalen van data"
+
+msgid "Watch uitzending gemist"
+msgstr "Bekijk uitzending gemist"
+
+msgid "iView Exclusives"
+msgstr "iView Exclusives"
+
