@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: 2012-05-23 07:43+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2013-07-25 09:59+0200\n"
+"PO-Revision-Date: 2013-07-25 15:21+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: Nederlands\n"
 "MIME-Version: 1.0\n"
@@ -45,8 +45,11 @@ msgstr "Sluiten"
 msgid "Do you want to remove binary data?"
 msgstr "Wilt u de binary gegevens verwijderen?"
 
-msgid "Download the firmware (latest)"
-msgstr "Download de laatste firmware"
+msgid "Download"
+msgstr "Download"
+
+msgid "Duo/Solo was not support."
+msgstr "Duo/Solo worden niet ondersteund."
 
 msgid "FPGA"
 msgstr "FPGA"
@@ -85,11 +88,20 @@ msgstr "Status : 0%"
 msgid "Success. Press OK to exit."
 msgstr "Geslaagd. Druk op OK om af te sluiten."
 
-msgid "This plugin is supported only the Ultimo/Uno."
-msgstr "Deze plugin is uitsluitend voor de Ultimo/Uno."
-
 msgid "Upgrade"
 msgstr "Upgrade"
 
-msgid "You chose the incorrect file."
-msgstr "U heeft een verkeerd bestand gekozen."
+msgid "VFD Controller"
+msgstr "VFD Controller"
+
+msgid "You choose the incorrect file. "
+msgstr "U hebt het verkeerde bestand gekozen."
+
+#~ msgid "Download the firmware (latest)"
+#~ msgstr "Download de laatste firmware"
+
+#~ msgid "This plugin is supported only the Ultimo/Uno."
+#~ msgstr "Deze plugin is uitsluitend voor de Ultimo/Uno."
+
+#~ msgid "You chose the incorrect file."
+#~ msgstr "U heeft een verkeerd bestand gekozen."
