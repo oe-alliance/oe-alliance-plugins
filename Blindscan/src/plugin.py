@@ -567,7 +567,7 @@ class Blindscan(ConfigListScreen, Screen):
 			status_box_start_freq = temp_start_int_freq + uni_lnb_loc_osc[band]
 			status_box_end_freq = temp_end_int_freq + uni_lnb_loc_osc[band]
 			
-		if getBoxType().startswith('venton'):
+		if getBoxType().startswith('venton') or getBoxType().startswith('ini'):
 			cmd = "ini_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) 
 		elif getBoxType().startswith('vu'):
 			try:
@@ -581,7 +581,8 @@ class Blindscan(ConfigListScreen, Screen):
 		elif getBoxType().startswith('gb'):
 			cmd = "gigablue_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "vuplus_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
 		elif getBoxType().startswith('azbox'):
-			cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "avl_xtrend_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))			
+			cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))			
+			self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
 		print "prepared command : [%s]" % (cmd)
 
 		self.thisRun = [] # used to check result corresponds with values used above
@@ -645,7 +646,10 @@ class Blindscan(ConfigListScreen, Screen):
 					pol = {	"HORIZONTAL" : parm.Polarisation_Horizontal,
 						"VERTICAL" : parm.Polarisation_Vertical}
 					parm.orbital_position = self.orb_position
-					parm.polarisation = pol[data[1]]
+					if getBoxType().startswith('azbox'):
+						parm.polarisation = self.polsave
+					else:
+						parm.polarisation = pol[data[1]]
 					parm.frequency = int(data[2])
 					parm.symbol_rate = int(data[3])
 					parm.system = sys[data[4]]
