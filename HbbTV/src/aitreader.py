@@ -53,7 +53,7 @@ class eAITSectionReader:
 		control_chars = ''.join(map(unichr, range(0,32) + range(127,160)))
 		control_char_re = re.compile('[%s]' % re.escape(control_chars))
 		document = control_char_re.sub('', document)
-		self.mDocument = xml.dom.minidom.parseString(document)
+		self.mDocument = xml.dom.minidom.parseString(document.decode('latin-1').encode("utf8"))
 		return True
 
 	def doDump(self):
