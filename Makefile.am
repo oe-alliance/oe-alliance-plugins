@@ -55,7 +55,11 @@ SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup Blindscan
 endif
 
 if GIGABLUE
-SUBDIRS += GigaBlueVFDControl Blindscan WebBrowser
+SUBDIRS += GigaBlueVFDControl Blindscan
+endif
+
+if GBQUAD
+SUBDIRS += WebBrowser
 endif
 
 if XP1000
