@@ -6,7 +6,7 @@ from Screens.MessageBox import MessageBox
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import fileExists
-from enigma import eTimer
+from enigma import eTimer, getBoxType
 from os import system as os_system
 from __init__ import _
 
@@ -54,7 +54,11 @@ class TranscodingSetupInit:
 		global TranscodingConfigList
 		for x in TranscodingConfigList:
 			if x[0] == "Bitrate":
-				config.plugins.transcodingsetup.bitrate = ConfigInteger(default = 2000000, limits = (100000, 5000000))
+				if getBoxType() == "vusolo2":
+					default_bitrate = 400000
+				else:
+					default_bitrate = 2000000
+				config.plugins.transcodingsetup.bitrate = ConfigInteger(default = default_bitrate, limits = (100000, 5000000))
 				x.append(config.plugins.transcodingsetup.bitrate)
 			elif x[0] == "Framerate":
 				config.plugins.transcodingsetup.framerate = ConfigSelection(default = "30000", choices = [ ("23976", _("23976")), ("24000", _("24000")), ("29970", _("29970")), ("30000", _("30000")), ("59940", _("59940")), ("60000", _("60000"))])
@@ -163,6 +167,7 @@ class TranscodingSetupInit:
 			old_value = fd.read().strip(' ').strip('\n')
 			fd.close()
 			if old_value != value:
+				print "[TranscodingSetup] set %s "%procPath, value
 				fd = open(procPath,'w')
 				fd.write(value)
 				fd.close()
