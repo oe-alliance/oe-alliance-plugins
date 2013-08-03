@@ -69,7 +69,7 @@ class LCD4linuxweb(resource.Resource):
 			JR = "" if JavaRefresh == "" else JavaRefresh % (7,7,"dpf2.png")
 			html += "<a href=\"/lcd4linux/config\"><img border=\"0\" src=\"/lcd4linux/dpf2.png?%d\" %s %s></a> \n" % (t,JR,w)
 		else:
-			html += "<a href=\"/lcd4linux/config\">no Picture .... Config-WebIF</a>"
+			html += "<a style=\"color:#FFCC00\" href=\"/lcd4linux/config\">no Picture .... Config-WebIF</a>"
 		html += "</body>\n"
 		html += "</html>\n"
 

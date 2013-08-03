@@ -5,6 +5,9 @@ from plugin import *
 from __init__ import _
 from Components.config import configfile, config
 from enigma import eTimer
+from module import L4Lelement,L4LVtest
+
+L4LElement = L4Lelement()
 
 import os
 import datetime
@@ -43,7 +46,7 @@ def ParseCode():
 	L4log("WebIF: parsing Code....")
 	if os.path.exists(Py):
 		for line in open(Py,"r").readlines():
-			print line
+			# print line
 			if line.find("self.list1.append") >= 0 or line.find("self.list2.append") >= 0 or line.find("self.list3.append") >= 0 or line.find("self.list4.append") >= 0:
 				Z = line.replace("getConfigListEntry(_",",").replace(")","").replace("(","").replace(".append","").replace("\t","").replace("\n","").replace("\"","").split(",")
 				if Z[0]=="self.list1":
@@ -147,7 +150,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		el = req.args.get("Element",None)
 		sa = req.args.get("save.y",None)
 		self.restartTimer()
-		L4log("Command received %s" % (command))
+		L4log("Command received %s" % (command), ex)
 #		print "[L4L EX]-", ex,"-"
 		if self.CurrentMode == ("-","-"):
 			self.CurrentMode = (getConfigStandby(),getisMediaPlayer())
@@ -188,6 +191,12 @@ class LCD4linuxConfigweb(resource.Resource):
 			open(Push,"w").write("")
 		elif command[0] == "crashdel":
 			rmFile(CrashFile)
+		elif command[0] == "add" and ex is not None:
+			L4LElement.web(ex[0])
+		elif command[0] == "delete" and ex is not None:
+			L4LElement.delete(ex[0])
+		elif command[0] == "refresh":
+			open(Push,"w").write("")
 		elif command[0] == "copyMP":
 			for a in req.args.keys():
 				if ".Standby" in a:
@@ -304,7 +313,6 @@ class LCD4linuxConfigweb(resource.Resource):
 								Cwww = True
 #			print "L4L",Cfritz,	Cwetter, Cpicon
 			if Cfritz:
-				CheckFritz()
 				rmFile(PICfritz)
 			if Cwetter:
 				rmFile(PICwetter % "0")
@@ -345,18 +353,18 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<table border=\"1\" rules=\"groups\" width=\"100%\" bordercolorlight=\"#000000\" bordercolordark=\"#000000\" cellspacing=\"0\">"
 		html += "<tr><td bgcolor=\"#000000\" width=\"220\">\n"
 		html += "<p align=\"center\"><img alt=\"\" border=\"0\" src=\"/lcd4linux/data/WEBdreambox.png\" width=\"181\" height=\"10\">\n"
-		html += "<font color=\"#FFFFFF\"><b>LCD4linux Config</b></font><br />%s\n" % Version
+		html += "<font color=\"#FFFFFF\"><b>LCD4linux Config</b></font><br />%s\n" % (Version if L4LVtest(Version)==True else Version+"?")
 		html += "</p></td><td bgcolor=\"#000000\">\n"
 		html += "<p align=\"left\">"
 		d = glob.glob("%sdpf.*" % getTMPL())
 		if len(d)>0:
-			html += "<a href=\"/lcd4linux\"><img alt=\"LCD 1\" src=\"/lcd4linux/%s?%d\" border=\"1\" height=\"80\" id=\"reloader1\" onload=\"setTimeout('document.getElementById(\\'reloader1\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
+			html += "<a href=\"/lcd4linux\"><img style=\"color:#FFCC00\" alt=\"LCD 1\" src=\"/lcd4linux/%s?%d\" border=\"1\" height=\"80\" id=\"reloader1\" onload=\"setTimeout('document.getElementById(\\'reloader1\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
 		d = glob.glob("%sdpf2.*" % getTMPL())
 		if len(d)>0:
-			html += "<a href=\"/lcd4linux?file=%s\"><img alt=\"LCD 2\" src=\"/lcd4linux/%s?%d\" border=\"1\" height=\"80\" id=\"reloader2\" onload=\"setTimeout('document.getElementById(\\'reloader2\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
+			html += "<a href=\"/lcd4linux?file=%s\"><img style=\"color:#FFCC00\" alt=\"LCD 2\" src=\"/lcd4linux/%s?%d\" border=\"1\" height=\"80\" id=\"reloader2\" onload=\"setTimeout('document.getElementById(\\'reloader2\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
 		d = glob.glob("%sdpf3.*" % getTMPL())
 		if len(d)>0:
-			html += "<a href=\"/lcd4linux?file=%s\"><img alt=\"LCD 3\" src=\"/lcd4linux/%s?%d\" border=\"1\" height=\"80\" id=\"reloader3\" onload=\"setTimeout('document.getElementById(\\'reloader3\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
+			html += "<a href=\"/lcd4linux?file=%s\"><img style=\"color:#FFCC00\" alt=\"LCD 3\" src=\"/lcd4linux/%s?%d\" border=\"1\" height=\"80\" id=\"reloader3\" onload=\"setTimeout('document.getElementById(\\'reloader3\\').src=\\'/lcd4linux/%s?\\'+new Date().getTime()', 5000)\" ></a>" % (os.path.basename(d[0]),os.path.basename(d[0]),time.time(),os.path.basename(d[0]))
 		html += "</p></td>\n"
 		if os.path.isfile(CrashFile):
 			html += "<td valign=\"top\" align=\"left\"  bgcolor=\"#000000\">\n"
@@ -554,7 +562,17 @@ class LCD4linuxConfigweb(resource.Resource):
 			html += "</form>\n"
 	
 		html += "<hr><span style=\"font-size:8pt\">%s</span>" % getINFO()
-		html += "<BR><a style=\"font-size:9pt\" href=\"http://www.i-have-a-dreambox.com/wbb2/thread.php?postid=1634882\">Support & FAQ</a>"
+		html += "<BR><a style=\"font-size:9pt; color:#FFCC00;\" href=\"http://www.i-have-a-dreambox.com/wbb2/thread.php?postid=1634882\">Support & FAQ</a>"
+		if len(L4LElement.get()) > 0:
+			html += "<script language=\"JavaScript\">\n"
+			html += "function Efensterchen() {\n"
+			html += "fens1=window.open(\"\", \"Externals\",\"width=500,height=300,resizable=yes\");\n"
+			for CUR in L4LElement.get():
+				html += "fens1.document.write('%s %s<BR>');\n" % (CUR,str(L4LElement.get(CUR)).replace("\n","<br>").replace("'","\\'"))
+			html += "} </script>\n"
+			html += "<form method=\"post\"><br>\n"
+			html += "<input type=\"button\" value=\"%s\" style=\"font-size:8pt;\" onClick=\"Efensterchen()\">\n"  % _l(_("Show Externals"))
+			html += "</form></td>\n"
 		html += "</body>\n"
 		html += "</html>\n"
 
