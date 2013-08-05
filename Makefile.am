@@ -22,6 +22,10 @@ if ODINM7
 SUBDIRS += OdinM7VFDControl
 endif
 
+if ODINM6
+SUBDIRS += OdinM7VFDControl
+endif
+
 if VENTON
 SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade HbbTV
 endif
