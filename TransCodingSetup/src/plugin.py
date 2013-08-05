@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigInteger
@@ -6,7 +9,7 @@ from Screens.MessageBox import MessageBox
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import fileExists
-from enigma import eTimer
+from enigma import eTimer, getBoxType
 from os import system as os_system
 from __init__ import _
 
@@ -54,10 +57,14 @@ class TranscodingSetupInit:
 		global TranscodingConfigList
 		for x in TranscodingConfigList:
 			if x[0] == "Bitrate":
-				config.plugins.transcodingsetup.bitrate = ConfigInteger(default = 2000000, limits = (100000, 5000000))
+				if getBoxType() == "vusolo2":
+					default_bitrate = 400000
+				else:
+					default_bitrate = 2000000
+				config.plugins.transcodingsetup.bitrate = ConfigSelection(default = "500000", choices = [ ("100000", "100 Kbits"), ("500000", "500 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits")])
 				x.append(config.plugins.transcodingsetup.bitrate)
 			elif x[0] == "Framerate":
-				config.plugins.transcodingsetup.framerate = ConfigSelection(default = "30000", choices = [ ("23976", _("23976")), ("24000", _("24000")), ("29970", _("29970")), ("30000", _("30000")), ("59940", _("59940")), ("60000", _("60000"))])
+				config.plugins.transcodingsetup.framerate = ConfigSelection(default = "30000", choices = [ ("23976", "23.976 fps"), ("24000", "24 fps"), ("29970", "29.970 fps"), ("30000", "30 fps"), ("59940", "59.940 fps"), ("60000", "60 fps")])
 				x.append(config.plugins.transcodingsetup.framerate)
 
 	def setTranscoding(self, transcoding, port):
@@ -163,6 +170,7 @@ class TranscodingSetupInit:
 			old_value = fd.read().strip(' ').strip('\n')
 			fd.close()
 			if old_value != value:
+				print "[TranscodingSetup] set %s "%procPath, value
 				fd = open(procPath,'w')
 				fd.write(value)
 				fd.close()
@@ -175,42 +183,21 @@ class TranscodingSetupInit:
 		except:
 			return -1
 
-class TranscodingSetup(Screen,ConfigListScreen, TranscodingSetupInit):
+class TranscodingSetup(Screen, ConfigListScreen, TranscodingSetupInit):
 	skin =  """
-		<screen position="center,center" size="400,270" title="Transcoding Setup" >
+		<screen position="center,center" size="400,270" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="230,10" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="30,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="230,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
-			<widget name="config" zPosition="2" position="5,70" size="390,70" scrollbarMode="showOnDemand" transparent="1" />
-			<widget source="text" render="Label" position="20,140" size="370,130" font="Regular;18" halign="center" valign="center" />
+			<widget name="config" zPosition="2" position="5,70" size="390,125" scrollbarMode="showOnDemand" transparent="1" />
+			<widget source="text" render="Label" position="20,120" size="370,150" font="Regular;18" halign="center" valign="bottom" />
 		</screen>
 		"""
-	skin_ext =  """
-		<screen position="center,center" size="400,320" title="Transcoding Setup" >
-			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="230,10" size="140,40" alphatest="on" />
-			<widget source="key_red" render="Label" position="30,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
-			<widget source="key_green" render="Label" position="230,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
-			<widget name="config" zPosition="2" position="5,70" size="390,120" scrollbarMode="showOnDemand" transparent="1" />
-			<widget source="text" render="Label" position="20,190" size="370,130" font="Regular;18" halign="center" valign="center" />
-		</screen>
-		"""
-
 	def __init__(self,session):
-		if fileExists("/proc/stb/encoder/0/framerate"):
-			self.skin = TranscodingSetup.skin_ext
-			Screen.__init__(self,session)
-			self.skinName = "TranscodingSetup_ext"
-		else:
-			Screen.__init__(self,session)
-
-		if self.getModel() == "duo2":
-			TEXT = _("Transcoding can be started when there is no corresponding channel recordings.")
-			TEXT += _("\nWhen transcoding, PIP is disabled.")
-		else:
-			TEXT = _("Transcoding can be started when there is no corresponding channel recordings.")
-			TEXT += _("\nWhen transcoding, both PIP and analog video outputs are disabled.")
+		Screen.__init__(self,session)
+		self.setup_title = _('Transcoding Setup')
+		self.setTitle(self.setup_title)
 		self.session = session
 		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
 		{
@@ -219,24 +206,43 @@ class TranscodingSetup(Screen,ConfigListScreen, TranscodingSetupInit):
 			"red": self.keyCancel,
 			"green": self.keySave,
 		}, -2)
+		self.onChangedEntry = [ ]
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session = self.session)
+		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Ok"))
-		self["text"] = StaticText(_("%s")%TEXT)
+		self["text"] = StaticText()
 		self.createSetup()
 		self.onLayoutFinish.append(self.checkEncoder)
 		self.invaliedModelTimer = eTimer()
 		self.invaliedModelTimer.callback.append(self.invalidmodel)
+		if not self.selectionChanged in self["config"].onSelectionChanged:
+			self["config"].onSelectionChanged.append(self.selectionChanged)
+		self.selectionChanged()
 
-	def getModel(self):
-		if fileExists("/proc/stb/info/vumodel"):
-			fd = open("/proc/stb/info/vumodel")
-			vumodel=fd.read().strip()
-			fd.close()
-			return vumodel
+	def selectionChanged(self):
+		self.text = _("Transcoding can be started when there is no corresponding channel recordings.")
+		if getBoxType() == "vuduo2":
+			self.text += _("\nWhen transcoding, PIP is disabled.")
 		else:
-			return ""
+			self.text += _("\nWhen transcoding, both PIP and analog video outputs are disabled.")
+		self["text"].setText(_("%s")%self.text)
+
+	def createSummary(self):
+		from Screens.Setup import SetupSummary
+		return SetupSummary
+
+	# for summary:
+	def changedEntry(self):
+		for x in self.onChangedEntry:
+			x()
+		self.selectionChanged()
+
+	def getCurrentEntry(self):
+		return self["config"].getCurrent()[0]
+
+	def getCurrentValue(self):
+		return str(self["config"].getCurrent()[1].getText())
 
 	def checkEncoder(self):
 		if not fileExists("/proc/stb/encoder/enable"):

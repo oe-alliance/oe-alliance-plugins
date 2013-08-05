@@ -282,6 +282,7 @@ class AutoBouquetsMaker(Screen):
 		params.pilot = transponder["pilot"]
 		params_fe = eDVBFrontendParameters()
 		params_fe.setDVBS(params, False)
+		self.rawchannel.requestTsidOnid()
 		self.frontend.tune(params_fe)
 		self.manager.setAdapter(0)	# FIX: use the correct device
 		self.manager.setDemuxer(demuxer_id)
@@ -294,9 +295,12 @@ class AutoBouquetsMaker(Screen):
 
 	def checkTunerLock(self):
 		from Screens.Standby import inStandby
-		status = {}
-		self.frontend.getFrontendStatus(status)
-		if "tuner_locked" in status and status["tuner_locked"] == 1:
+		dict = {}
+		self.frontend.getFrontendStatus(dict)
+		if dict["tuner_state"] == "TUNING":
+			print>>log, "TUNING"
+		elif dict["tuner_state"] == "LOCKED":
+			print>>log, "ACQUIRING TSID/ONID"
 			self.progresscurrent += 1
 			if not inStandby:
 				self["progress"].setValue(self.progresscurrent)
@@ -306,6 +310,8 @@ class AutoBouquetsMaker(Screen):
 			self.timer.callback.append(self.doScan)
 			self.timer.start(100, 1)
 			return
+		elif dict["tuner_state"] == "LOSTLOCK" or dict["tuner_state"] == "FAILED":
+			print>>log, "FAILED"
 
 		self.lockcounter += 1
 		if self.lockcounter > self.LOCK_TIMEOUT:
