@@ -691,9 +691,9 @@ class OpenUg(Screen):
 		icon = ''
 		for line in data:
 			if ".mp4" in line:
-				tmp = "<source src=\""
+				tmp = 'href=\"'
 				if tmp in line:
-					url = line.split("src=\"")[1].split("\"")[0]
+					url = line.split(tmp)[1].split('\">')[0]
 				return url
 		return ''
 
