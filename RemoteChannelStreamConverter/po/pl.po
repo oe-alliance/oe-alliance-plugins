@@ -1,0 +1,110 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-07 22:45+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: blzr <blzr@o2.pl>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"Language: pl\n"
+
+msgid "Adress:"
+msgstr "Adres:"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Connection to remote IP ok"
+msgstr "Połączenie ze zdalnym IP poprawne"
+
+msgid "Convert remote channel list for streaming"
+msgstr "Skonwertuj zdalną listę kanałów do 'streamowania'"
+
+msgid "Could not connect to remote IP"
+msgstr "Nie można połaczyć się ze zdalnym IP"
+
+msgid "Download"
+msgstr "Pobierz"
+
+msgid "Download from remote failed"
+msgstr "Pobieranie ze zdalnego odbiornika nie powiodło się"
+
+msgid "Downloading remote services"
+msgstr "Pobieranie zdalnych kanałów"
+
+msgid "Enter address"
+msgstr "Wpisz adres"
+
+msgid "Enter password"
+msgstr "Wpisz hasło"
+
+msgid "Enter username"
+msgstr "Wpisz nazwę użytkownika"
+
+msgid "Exit"
+msgstr "Wyjdź"
+
+msgid "FTP Server Editor"
+msgstr "Edytor serwera FTP"
+
+msgid "FTP reading file %d of %d"
+msgstr "FTP odczyt pliku %d z  %d"
+
+msgid "FTPport:"
+msgstr "Port FTP :"
+
+msgid "IP:"
+msgstr "IP :"
+
+msgid "Invert"
+msgstr "Odwróć"
+
+msgid "Keyboard"
+msgstr "Klawiatura"
+
+msgid "Make your selection"
+msgstr "Wybierz"
+
+msgid "No bouquets selected"
+msgstr "Nie wybrano bukietów"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Passive:"
+msgstr "Pasywny:"
+
+msgid "Password:"
+msgstr "Hasło:"
+
+msgid "Remote channel stream converter"
+msgstr "Dodaj zdalne kanały (streaming)"
+
+msgid "Select a remote server IP first"
+msgstr "Najpierw wybierz IP serwera"
+
+msgid "Select bouquets to convert"
+msgstr "Wybierz bukiety do skonwertowania"
+
+msgid "Set server IP"
+msgstr "IP serwera"
+
+msgid "Telnetport:"
+msgstr "Port telnet:"
+
+msgid "Testing remote connection"
+msgstr "Test połączenia zdalnego"
+
+msgid "Use IP"
+msgstr "Użyj IP"
+
+msgid "Use address"
+msgstr "Użyj adresu"
+
+msgid "Username:"
+msgstr "Użytkownik :"
+

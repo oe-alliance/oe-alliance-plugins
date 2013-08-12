@@ -1,0 +1,143 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-07 22:45+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: plnick\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+#: ../../../plugin.py:34
+msgid "FTP Server Editor"
+msgstr "Konfiguriere entfernte STB"
+
+#: ../../../plugin.py:50
+msgid "Exit"
+msgstr "Beenden"
+
+#: ../../../plugin.py:51
+msgid "OK"
+msgstr "OK"
+
+#: ../../../plugin.py:94
+msgid "Keyboard"
+msgstr "Tastatur"
+
+#: ../../../plugin.py:100
+msgid "Use address"
+msgstr "Adresse"
+
+#: ../../../plugin.py:102
+msgid "Use IP"
+msgstr "IP"
+
+#: ../../../plugin.py:108
+msgid "IP:"
+msgstr "IP:"
+
+#: ../../../plugin.py:109 ../../../plugin.py:122
+msgid "Username:"
+msgstr "Benutzername:"
+
+#: ../../../plugin.py:110 ../../../plugin.py:123
+msgid "Password:"
+msgstr "Passwort:"
+
+#: ../../../plugin.py:111 ../../../plugin.py:124
+msgid "FTPport:"
+msgstr "FTP Port:"
+
+#: ../../../plugin.py:112 ../../../plugin.py:125
+msgid "Passive:"
+msgstr "Passiv:"
+
+#: ../../../plugin.py:113 ../../../plugin.py:126
+msgid "Telnetport:"
+msgstr "Telnet Port:"
+
+#: ../../../plugin.py:121
+msgid "Adress:"
+msgstr "Adresse:"
+
+#: ../../../plugin.py:141
+msgid "Enter address"
+msgstr "Adresse eingeben"
+
+#: ../../../plugin.py:144
+msgid "Enter username"
+msgstr "Benutzernamen eingeben"
+
+#: ../../../plugin.py:147
+msgid "Enter password"
+msgstr "Passwort eingeben"
+
+#: ../../../plugin.py:170
+msgid "Select bouquets to convert"
+msgstr "Wähle Bouquets für die Konvertierung"
+
+#: ../../../plugin.py:195
+msgid "Close"
+msgstr "Schließen"
+
+#: ../../../plugin.py:197
+msgid "Set server IP"
+msgstr "Server IP"
+
+#: ../../../plugin.py:199
+msgid "Select a remote server IP first"
+msgstr "Zuerst entfernte STB konfigurieren/auswählen"
+
+#: ../../../plugin.py:231
+msgid "Testing remote connection"
+msgstr "Teste Verbindung"
+
+#: ../../../plugin.py:240
+msgid "Connection to remote IP ok"
+msgstr "Verbindung zur entfernten STB ok"
+
+#: ../../../plugin.py:246
+msgid "Could not connect to remote IP"
+msgstr "Verbindung zur entfernten STB fehlgeschlagen"
+
+#: ../../../plugin.py:249
+msgid "Downloading remote services"
+msgstr "Herunterladen der Kanallisten"
+
+#: ../../../plugin.py:258 ../../../plugin.py:298
+msgid "Download from remote failed"
+msgstr "Herunterladen der Kanallisten fehlgeschlagen"
+
+#: ../../../plugin.py:303
+#, python-format
+msgid "FTP reading file %d of %d"
+msgstr "Lese Datei %d von %d"
+
+#: ../../../plugin.py:307
+msgid "Make your selection"
+msgstr "Bitte auswählen"
+
+#: ../../../plugin.py:314
+msgid "Download"
+msgstr "Herunterladen"
+
+#: ../../../plugin.py:315
+msgid "Invert"
+msgstr "Invertiere"
+
+#: ../../../plugin.py:453
+msgid "No bouquets selected"
+msgstr "Keine Favoritenlisten ausgewählt"
+
+#: ../../../plugin.py:566 ../../../plugin.py:571
+msgid "Remote channel stream converter"
+msgstr "Importiere externe Bouquets"
+
+#: ../../../plugin.py:571
+msgid "Convert remote channel list for streaming"
+msgstr "Importiere externe Bouquets"

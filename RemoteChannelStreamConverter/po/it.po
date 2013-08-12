@@ -1,0 +1,112 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: RemoteChannelStream\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-07 22:45+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Diamondear <diavar@tin.it>\n"
+"Language-Team: Diamondear <diavar@tin.it>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it_IT\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+msgid "Adress:"
+msgstr "Indirizzo:"
+
+msgid "Close"
+msgstr "Chiudi"
+
+msgid "Connection to remote IP ok"
+msgstr "Collegamento  IP Remoto OK"
+
+msgid "Convert remote channel list for streaming"
+msgstr "Convertire l'elenco Remoto dei canali per lo streaming"
+
+msgid "Could not connect to remote IP"
+msgstr "Impossibile connettersi all' IP Remoto"
+
+msgid "Download"
+msgstr "Scarica"
+
+msgid "Download from remote failed"
+msgstr "Scaricamento Remoto non riuscito"
+
+msgid "Downloading remote services"
+msgstr "Scaricamento dei Servizi Remoti"
+
+msgid "Enter address"
+msgstr "Inserire l'indirizzo"
+
+msgid "Enter password"
+msgstr "Inserire la Password"
+
+msgid "Enter username"
+msgstr "Inserire Utente"
+
+msgid "Exit"
+msgstr "Esci"
+
+msgid "FTP Server Editor"
+msgstr "FTP Server Editor"
+
+msgid "FTP reading file %d of %d"
+msgstr "FTP lettura del file %d di %d"
+
+msgid "FTPport:"
+msgstr "FTP Port:"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Invert"
+msgstr "Invertire"
+
+msgid "Keyboard"
+msgstr "Tastiera"
+
+msgid "Make your selection"
+msgstr "Fai la tua scelta"
+
+msgid "No bouquets selected"
+msgstr "Nessun Bouquet Selezionato"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Passive:"
+msgstr "Passivo:"
+
+msgid "Password:"
+msgstr "Password:"
+
+msgid "Remote channel stream converter"
+msgstr "Convertitore flusso Canale remoto"
+
+msgid "Select a remote server IP first"
+msgstr "Selezionare prima l'IP del Server Remoto"
+
+msgid "Select bouquets to convert"
+msgstr "Selezionare il Bouquet da Convertire"
+
+msgid "Set server IP"
+msgstr "Set IP Server"
+
+msgid "Telnetport:"
+msgstr "Telnet Port:"
+
+msgid "Testing remote connection"
+msgstr "Test della Connessione Remota"
+
+msgid "Use IP"
+msgstr "Usa IP"
+
+msgid "Use address"
+msgstr "Usa Indirizzo"
+
+msgid "Username:"
+msgstr "Utente:"

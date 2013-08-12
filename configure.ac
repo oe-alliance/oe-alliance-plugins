@@ -202,6 +202,10 @@ OnDemand/src/icons/Makefile
 OnDemand/meta/Makefile
 OnDemand/po/Makefile
 
+RemoteChannelStreamConverter/Makefile
+RemoteChannelStreamConverter/src/Makefile
+RemoteChannelStreamConverter/po/Makefile
+
 TempFanControl/Makefile
 TempFanControl/src/Makefile
 TempFanControl/meta/Makefile

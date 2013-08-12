@@ -1,0 +1,118 @@
+# Dutch translations for plugins package.
+# Copyright (C) 2012 THE plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plugins 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-25 09:58+0200\n"
+"PO-Revision-Date: 2013-07-25 15:27+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: Andy Blackburn, Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid "Adress:"
+msgstr "Adres:"
+
+msgid "Close"
+msgstr "Sluit"
+
+msgid "Connection to remote IP ok"
+msgstr "Verbinding met server OK"
+
+msgid "Convert remote channel list for streaming"
+msgstr "Converteert de server kanaallijst voor streaming"
+
+msgid "Could not connect to remote IP"
+msgstr "Kon niet met server verbinden"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Download from remote failed"
+msgstr "Download van serverbox mislukt"
+
+msgid "Downloading remote services"
+msgstr "Download kanalen van server"
+
+msgid "Enter address"
+msgstr "Geef adres"
+
+msgid "Enter password"
+msgstr "Geef wachtwoord"
+
+msgid "Enter username"
+msgstr "Geef gebruikersnaam"
+
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "FTP Server Editor"
+msgstr "FTP Server aanpassen"
+
+#, python-format
+msgid "FTP reading file %d of %d"
+msgstr "FTP leest bestand %d van %d"
+
+msgid "FTPport:"
+msgstr "FTP-poort:"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Invert"
+msgstr "Keer om"
+
+msgid "Keyboard"
+msgstr "Toetsenbord"
+
+msgid "Make your selection"
+msgstr "Maak uw keuze"
+
+msgid "No bouquets selected"
+msgstr "Geen favorieten gekozen"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Passive:"
+msgstr "Passief:"
+
+msgid "Password:"
+msgstr "Wachtwoord:"
+
+msgid "Remote channel stream converter"
+msgstr "Remote channel stream converter"
+
+msgid "Select a remote server IP first"
+msgstr "Kies eerst een server-IP"
+
+msgid "Select bouquets to convert"
+msgstr "Kies favorieten om te converteren"
+
+msgid "Set server IP"
+msgstr "Stel server IP in"
+
+msgid "Telnetport:"
+msgstr "Telnetpoort:"
+
+msgid "Testing remote connection"
+msgstr "Test verbinding met server"
+
+msgid "Use IP"
+msgstr "Gebruik IP"
+
+msgid "Use address"
+msgstr "Gebruik adres"
+
+msgid "Username:"
+msgstr "Gebruikersnaam:"
+

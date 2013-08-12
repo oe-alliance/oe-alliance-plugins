@@ -1,0 +1,111 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-07 22:45+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Roxy <vro@wo.cz>\n"
+"Language-Team: Roxy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"Language: cs\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+msgid "Adress:"
+msgstr "Adresa :"
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "Connection to remote IP ok"
+msgstr "Připojení na vzdálený přijímač je OK"
+
+msgid "Convert remote channel list for streaming"
+msgstr "Převod vzdál.seznamu kanálů pro sdílení"
+
+msgid "Could not connect to remote IP"
+msgstr "Na vzdálený sat.přijímač se nelze připojit !"
+
+msgid "Download"
+msgstr "Stáhnout"
+
+msgid "Download from remote failed"
+msgstr "Stažení seznamu kanálů selhalo !"
+
+msgid "Downloading remote services"
+msgstr "Stahování seznamu kanálů"
+
+msgid "Enter address"
+msgstr "Zadejte adresu"
+
+msgid "Enter password"
+msgstr "Zadejte heslo"
+
+msgid "Enter username"
+msgstr "Zadejte uživatele"
+
+msgid "Exit"
+msgstr "Konec"
+
+msgid "FTP Server Editor"
+msgstr "Konfigurace FTP serveru"
+
+msgid "FTP reading file %d of %d"
+msgstr "Načtení FTP souboru  %d z  %d"
+
+msgid "FTPport:"
+msgstr "FTP port :"
+
+msgid "IP:"
+msgstr "IP :"
+
+msgid "Invert"
+msgstr "Invertovat"
+
+msgid "Keyboard"
+msgstr "Klávesnice"
+
+msgid "Make your selection"
+msgstr "Vyberte"
+
+msgid "No bouquets selected"
+msgstr "Není vybraný seznam oblíbených kanálů"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Passive:"
+msgstr "Pasivní :"
+
+msgid "Password:"
+msgstr "Heslo :"
+
+msgid "Remote channel stream converter"
+msgstr "Kanály - přenos z jiného přijímače"
+
+msgid "Select a remote server IP first"
+msgstr "Nejprve vyberte vzdálený server"
+
+msgid "Select bouquets to convert"
+msgstr "Kanály pro převod..."
+
+msgid "Set server IP"
+msgstr "IP serveru"
+
+msgid "Telnetport:"
+msgstr "Telnet port :"
+
+msgid "Testing remote connection"
+msgstr "Test vzdáleného připojení"
+
+msgid "Use IP"
+msgstr "Použité IP"
+
+msgid "Use address"
+msgstr "Adresa"
+
+msgid "Username:"
+msgstr "Uživatel :"
