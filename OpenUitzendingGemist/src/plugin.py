@@ -243,8 +243,8 @@ class OpenUgConfigureScreen(Screen, ConfigListScreen):
 class OpenUgSetupScreen(Screen):
 	def __init__(self, session):
 		self.skin = """
-				<screen position="center,center" size="400,320" title="">
-					<widget name="menu" position="10,10"   size="e-20,180" scrollbarMode="showOnDemand" />
+				<screen position="center,center" size="400,400" title="">
+					<widget name="menu" position="10,10"   size="e-20,200" scrollbarMode="showOnDemand" />
 					<widget name="info" position="10,e-125" size="e-20,150" halign="center" font="Regular;22" />
 				</screen>"""
 		self.session = session
@@ -272,6 +272,7 @@ class OpenUgSetupScreen(Screen):
 		self.mmenu.append((_("UG Search"), 'search'))
 		self.mmenu.append((_("RTL XL A-Z"), 'rtl'))
 		self.mmenu.append((_("RTL XL Gemist"), 'rtlback'))
+		self.mmenu.append((_("RTL XL Search"), 'rsearch'))
 		self.mmenu.append((_("Setup"), 'setup'))
 		self["menu"] = MenuList(self.mmenu)
 
@@ -300,11 +301,15 @@ class OpenUgSetupScreen(Screen):
 			elif selection[1] == 'atotz':
 				self.session.open(OpenUg, selection[1])
 			elif selection[1] == 'search':
+				self.isRtl = False
 				self.session.open(OpenUg, selection[1])
 			elif selection[1] == 'rtl':
 				self.session.open(OpenUg, selection[1])
 			elif selection[1] == 'rtlback':
 				self.session.open(DaysBackScreen)
+			elif selection[1] == 'rsearch':
+				self.isRtl = True
+				self.session.open(OpenUg, selection[1])
 			elif selection[1] == 'setup':
 				self.session.open(OpenUgConfigureScreen)
 
@@ -415,7 +420,7 @@ class OpenUg(Screen):
 		self.timerCmd = self.TIMER_CMD_START
 
 		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/oe-alliance.png"))
-
+		
 		self.tmplist = []
 		self.mediaList = []
 
@@ -520,9 +525,6 @@ class OpenUg(Screen):
 	def setupCallback(self, retval = None):
 		if retval == 'cancel' or retval is None:
 			return
-		self.isAtotZ = False
-		self.isRtl = False
-		self.isRtlBack = False
 
 		if retval == 'recent':
 			self.clearList()
@@ -550,13 +552,18 @@ class OpenUg(Screen):
 				self.mediaProblemPopup()
 			self.updateMenu()
 		elif retval == 'search':
+			self.isRtl = False
+			self.timerCmd = self.TIMER_CMD_VKEY
+			self.cbTimer.start(10)
+		elif retval == 'rsearch':
+			self.isRtl = True
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
 		elif retval == 'rtl':
 			self.clearList()
 			self.isRtl = True
 			self.level = self.UG_LEVEL_ALL
-			self.getRTLMediaData(self.mediaList)
+			self.getRTLMediaData(self.mediaList, self.RTL_BASE_URL + "programmalijst.php")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup()
 			else:
@@ -582,10 +589,17 @@ class OpenUg(Screen):
 	def keyboardCallback(self, callback = None):
 		if callback is not None and len(callback):
 			self.clearList()
-			self.isRtl = False
 			self.level = self.UG_LEVEL_SERIE
-			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "search/protocol/html/searchString/" + callback)
-			self.updateMenu()
+			print "[UG] testing!"
+			if self.isRtl == False:
+				print "[UG] isRtl = False!"
+				self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "search/protocol/html/searchString/" + callback)
+				self.updateMenu()
+			elif self.isRtl == True:
+				print "[UG] isRtl = True!"
+				self.getRTLSerie(self.mediaList, "search.php?q=*" + callback + "*")
+				self.updateMenu()
+			print "[UG] testing2!"
 			if len(self.mediaList) == 0:
 				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
 		else:
@@ -728,19 +742,24 @@ class OpenUg(Screen):
 			elif state == 2:
 				if '<span class=\"extra_info\">' in line:
 					continue
-				date = line.split("<br />")[0].lstrip()
+				short = line.split("<br />")[0].lstrip()
 				state = 3
 
 			elif state == 3:
+				tmp = '<span class=\"extra_info\">'
+				if tmp in line:
+					continue
 				tmp = "<span class=\"small\">"
 				if tmp in line:
+					date = short
 					short = line.split(tmp)[1].split('</span>')[0]
+				else:
+					date = ' '.join(line.split())
 				icon_type = self.getIconType(icon)
 				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
 				state = 0
 
-	def getRTLMediaData(self, weekList):
-		url = self.RTL_BASE_URL + "serieslist.php"
+	def getRTLMediaData(self, weekList, url):
 		data = wgetUrl(url)
 		data = data.split('\n')
 		state = 0
@@ -752,9 +771,9 @@ class OpenUg(Screen):
 		channel = ''
 		for line in data:
 			if state == 0:
-				if "<li>" in line:
+				if "</li>" in line:
 					state = 1
-			elif state == 1:
+			if state == 1:
 				tmp = "<a href=\""
 				if tmp in line:
 					stream = line.split(tmp)[1].split('\">')[0]
@@ -763,7 +782,6 @@ class OpenUg(Screen):
 				if tmp in line:
 					name = line.split(tmp)[1].split("</span>")[0]
 					icon_type = self.getIconType(icon)
-
 					ignore = False
 					for x in weekList:
 						if stream == x[self.UG_STREAMURL] and icon == x[self.UG_ICON]:
@@ -772,7 +790,7 @@ class OpenUg(Screen):
 					if ignore is False:
 						weekList.append((date, name, short, channel, stream, icon, icon_type, True))
 					state = 0
-
+					
 	def getRTLMediaDataBack(self, weekList, days):
 		url = self.RTL_BASE_URL + "?daysback=" + '%d' % (days)
 		data = wgetUrl(url)
@@ -785,7 +803,7 @@ class OpenUg(Screen):
 		date = ''
 		channel = ''
 		for line in data:
-			if "<li>" in line:
+			if "</li>" in line:
 				state = 1
 			if state == 1:
 				if "<a href=\"video" in line:
@@ -832,7 +850,7 @@ class OpenUg(Screen):
 		data = data.split("\n")
 		for line in data:
 			if state == 0:
-				tmp = "<div class=\"vid\"" 
+				tmp = "<div class=\"vid\""
 				if tmp in line:
 					state = 1
 					short = ''
@@ -850,7 +868,7 @@ class OpenUg(Screen):
 						tmp = "<img class=\"vid_view\" src=\"http://hbbtv.distributie.publiekeomroep.nl/imagecache/epg/pr_id/"
 						stream = line.split(tmp)[1].split('/')[0]
 						continue
-					
+
 				if (not short):
 					tmp = "<p class=\"titleshort\">"
 					if tmp in line:
@@ -862,12 +880,12 @@ class OpenUg(Screen):
 					if tmp in line:
 						name = line.split(tmp)[1].split("</p>")[0]
 						continue
-				
+
 				if (not date):
 					tmp = "<p class=\"date_time bottom\">"
 					if tmp in line:
 						date = line.split(tmp)[1].split("</p>")[0]
-						
+
 				if stream and date and name and short and icon:
 					icon_type = self.getIconType(icon)
 					print "[UG] name: %s" % name
@@ -895,5 +913,5 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 
-	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="oe-alliance.png", fnc = main),
+	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="pli.png", fnc = main),
 			PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]
