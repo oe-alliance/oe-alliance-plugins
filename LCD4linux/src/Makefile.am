@@ -1,4 +1,4 @@
-SUBDIRS = data meteo wetter
+SUBDIRS = data meteo wetter renderer
 
 installdir = $(libdir)/enigma2/python/Plugins/Extensions/LCD4linux
 
