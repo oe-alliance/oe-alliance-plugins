@@ -1,0 +1,415 @@
+# Estonian translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-02 01:03+0100\n"
+"PO-Revision-Date: 2013-08-13 19:02+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: none\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "0 - 9"
+msgstr "0 - 9"
+
+msgid "3 Player"
+msgstr "3 pleier"
+
+msgid "4OD Player"
+msgstr "4OD pleier"
+
+msgid "A - C"
+msgstr ""
+
+msgid "A to Z"
+msgstr "A - Y"
+
+msgid "ABC News 24"
+msgstr ""
+
+msgid "ABC iView"
+msgstr ""
+
+msgid "ABC iView - A to Z"
+msgstr ""
+
+msgid "ABC1"
+msgstr ""
+
+msgid "ABC2"
+msgstr ""
+
+msgid "ABC3"
+msgstr ""
+
+msgid "ABC4Kids"
+msgstr ""
+
+msgid "About"
+msgstr "Programmist"
+
+msgid "Added:"
+msgstr "Lisatud:"
+
+msgid "Added: "
+msgstr "Lisatud: "
+
+msgid "All Shows"
+msgstr "Kõik saated"
+
+msgid "Arts & Culture - Music"
+msgstr "Kunst ja kultuur - Muusika"
+
+msgid "Arts & Culture - People"
+msgstr "Kunst ja kultuur - Inimesed"
+
+msgid "Arts & Culture - Performance"
+msgstr "Kunst ja kultuur - Performance"
+
+msgid "Arts & Culture - Reviews"
+msgstr "Kunst ja kultuur - Arvustused"
+
+msgid "BBC Alba"
+msgstr ""
+
+msgid "BBC Four"
+msgstr ""
+
+msgid "BBC HD"
+msgstr ""
+
+msgid "BBC News"
+msgstr ""
+
+msgid "BBC Northern Ireland"
+msgstr ""
+
+msgid "BBC One"
+msgstr ""
+
+msgid "BBC Parliamanent"
+msgstr ""
+
+msgid "BBC Scotland"
+msgstr ""
+
+msgid "BBC Three"
+msgstr ""
+
+msgid "BBC Two"
+msgstr ""
+
+msgid "BBC Wales"
+msgstr ""
+
+msgid "BBC iPlayer"
+msgstr ""
+
+msgid "Back"
+msgstr "Tagasi"
+
+msgid "CBBC"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Tühista"
+
+msgid "Cbeebies"
+msgstr ""
+
+msgid "Childrens"
+msgstr "Lastesaated"
+
+msgid "Close"
+msgstr "Sulge"
+
+msgid "Comedy"
+msgstr "Komöödia"
+
+msgid "Comedy - Cult"
+msgstr "Komöödia - Klassika"
+
+msgid "Comedy - Satire"
+msgstr "Komöödia - Satiir"
+
+msgid "Comedy - Sitcom"
+msgstr "Komöödia - Situatsioonikomöödia"
+
+msgid "Comedy - Sketch"
+msgstr "Komöödia - Lühinaljad"
+
+msgid "D - F"
+msgstr ""
+
+msgid "Documentary - Biography"
+msgstr "Dokk - Elulugu"
+
+msgid "Documentary - History"
+msgstr "Dokk - Ajalugu"
+
+msgid "Documentary - Nature"
+msgstr "Dokk - Loodus"
+
+msgid "Documentary - Real Life"
+msgstr "Dokk - Tõsielu"
+
+msgid "Documentary - Science"
+msgstr "Dokk - Teadus"
+
+msgid "Drama"
+msgstr "Draama"
+
+msgid "Drama - Crime"
+msgstr "Draama - Krimi"
+
+msgid "Drama - Historical"
+msgstr "Draama - Ajalooline"
+
+msgid "Drama - Period"
+msgstr "Draama - Ajastu"
+
+msgid "Drama - Romance"
+msgstr "Draama - Romantika"
+
+msgid "Drama - Sci-fi"
+msgstr "Draama - Ulme"
+
+msgid "Duration: "
+msgstr "Kestus"
+
+msgid "Education"
+msgstr "Haridus"
+
+msgid "Entertainment"
+msgstr "Meelelahutus"
+
+msgid "Episodes by Date"
+msgstr "Episoodid ajalises järjestuses"
+
+msgid "Episodes: "
+msgstr "Episoodid:"
+
+msgid "Exit"
+msgstr "Välju"
+
+msgid "Factual"
+msgstr ""
+
+msgid "Featured Programs"
+msgstr "Soovitatavad saated"
+
+msgid "G - J"
+msgstr ""
+
+msgid "Going, Going..."
+msgstr ""
+
+msgid "HD"
+msgstr ""
+
+msgid "Health And Wellbeing"
+msgstr "Tervis ja heaolu"
+
+msgid "High"
+msgstr "Kõrge"
+
+msgid "ITV Player"
+msgstr "ITV pleier"
+
+msgid "Indigenous"
+msgstr "Põlisrahvad"
+
+msgid "K - M"
+msgstr ""
+
+msgid "Last Chance"
+msgstr "Viimane esitus"
+
+msgid "Last Updated:"
+msgstr "Uuendati:"
+
+msgid "Latest Episodes"
+msgstr "Uusimad episoodid"
+
+msgid "Lifestyle - Games"
+msgstr "Elustiil - Mängud"
+
+msgid "Lifestyle - Reality"
+msgstr "Elustiil - Tõsielu"
+
+msgid "Low"
+msgstr "Madal"
+
+msgid "Most Popular Episodes"
+msgstr "Populaarseimad episoodid"
+
+msgid "Most Popular TV"
+msgstr "Enim vaadatud"
+
+msgid "Most Talked About"
+msgstr "Enim räägitud"
+
+msgid "Movies"
+msgstr "Filmid"
+
+msgid "Music"
+msgstr "Muusika"
+
+msgid "N - P"
+msgstr ""
+
+msgid "News"
+msgstr "Uudised"
+
+msgid "News & Current Affairs"
+msgstr "Uudised ja aktuaalsed sündmused"
+
+msgid "No items matching your search criteria were found"
+msgstr "Otsingu tingimustele ei leitud vastet"
+
+msgid "No matching search items were found for "
+msgstr "Ei leitud vastet otsingule"
+
+msgid "Normal"
+msgstr "Tavaline"
+
+msgid "OK"
+msgstr ""
+
+msgid "OUG Player"
+msgstr "OUG pleier"
+
+msgid "OnDemand"
+msgstr ""
+
+msgid "OnDemand Configuration"
+msgstr "OnDemand seadistused"
+
+msgid ""
+"Open Uitzending Gemist\n"
+"\n"
+"Based on Xtrend code"
+msgstr ""
+"Ava Uitzending Gemist\n"
+"\n"
+"Põhineb Xtrend koodil"
+
+msgid "Panel & Discussion"
+msgstr "Paneel ja arutelu"
+
+msgid "Preferred Stream Quality"
+msgstr "Eelistatud voo kvaliteet"
+
+msgid "Q - T"
+msgstr ""
+
+msgid "RTE Player"
+msgstr "RTE pleier"
+
+msgid "RTE Player - A to Z"
+msgstr "RTE pleier - A - Z"
+
+msgid "RTE Player - Categories"
+msgstr "RTE pleier - Kategooriad"
+
+msgid "RTE Player - Choose Date"
+msgstr "RTE pleier - Vali kuupäev"
+
+msgid "RTL Number of days back"
+msgstr "RTL - päevi tagasi"
+
+msgid "RTL XL A-Z"
+msgstr ""
+
+msgid "RTL XL Gemist"
+msgstr ""
+
+msgid "Recently Added"
+msgstr "Hiljuti lisatud"
+
+msgid "Religion"
+msgstr "Religioon"
+
+msgid "Search"
+msgstr "Otsing"
+
+msgid "Search term"
+msgstr "Otsisõna"
+
+msgid "Show Categories"
+msgstr "Näita kategooriaid"
+
+msgid "Show in extensions"
+msgstr "Näita lisamoodulite menüüs"
+
+msgid "Show in main menu"
+msgstr "Näita peamenüüs"
+
+msgid "Show in plugin browser"
+msgstr "Näita laienduste menüüs"
+
+msgid "Show thumbnails"
+msgstr "Näita pisipilte"
+
+msgid "Shows A to Z"
+msgstr "Saated A - Z"
+
+msgid "Signed"
+msgstr ""
+
+msgid "Soaps"
+msgstr "Seebikad"
+
+msgid "Sport"
+msgstr ""
+
+msgid "Straight Off The Telly"
+msgstr "Otse telekast"
+
+msgid "TV Highlights"
+msgstr "TV tipphetked"
+
+msgid "Time: "
+msgstr "Aeg:"
+
+msgid "Today"
+msgstr "Täna"
+
+msgid "Trailers"
+msgstr "Treilerid"
+
+msgid "U - Z"
+msgstr ""
+
+msgid "UG A-Z"
+msgstr ""
+
+msgid "UG Popular"
+msgstr "UG - Popid"
+
+msgid "UG Recently added"
+msgstr "UG - Hiljuti lisatud"
+
+msgid "UG Search"
+msgstr "UG otsing"
+
+msgid "Very Low"
+msgstr "Väga madal"
+
+msgid "Wait please while gathering data..."
+msgstr "Oota andmete kogumist..."
+
+msgid "Watch uitzending gemist"
+msgstr "Vaata uitzending gemist"
+
+msgid "iView Exclusives"
+msgstr "iView eksklusiivne"
+
