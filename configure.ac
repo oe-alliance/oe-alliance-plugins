@@ -169,6 +169,11 @@ HbbTV/src/Makefile
 HbbTV/meta/Makefile
 HbbTV/po/Makefile
 
+INIVFDControl/Makefile
+INIVFDControl/src/Makefile
+INIVFDControl/meta/Makefile
+INIVFDControl/po/Makefile
+
 LCD4linux/Makefile
 LCD4linux/src/Makefile
 LCD4linux/src/data/Makefile
