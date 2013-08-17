@@ -387,7 +387,6 @@ class OpenUg(Screen):
 	TIMER_CMD_VKEY = 1
 	UG_BASE_URL = "http://hbbtv.distributie.publiekeomroep.nl"
 	HBBTV_UG_BASE_URL = UG_BASE_URL + "/nu/ajax/action/"
-	STAGING_UG_BASE_URL = "http://staging.hbbtv.distributie.publiekeomroep.nl/"
 	RTL_BASE_URL = "http://rtl.ksya.net/"
 
 	def __init__(self, session, cmd):
@@ -691,10 +690,16 @@ class OpenUg(Screen):
 				self.doUGPlay()
 
 	def doUGPlay(self):
-		out = wgetUrl(self.STAGING_UG_BASE_URL + "streams/video/pr_id/" + self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
-		myreference = eServiceReference(4097, 0, out.split('stream_link":"')[1].split('\",')[0].replace('\/', '/'))
-		myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
-		self.session.open(UGMediaPlayer, myreference, 'npo')
+		url = self.UG_BASE_URL + "/streams/video/pr_id/" + self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
+		print "[UG] %s" % url 
+		out = wgetUrl(url)
+		print "[UG] %s" % out
+		if out !='':
+			url = out.split('stream_link":"')[1].split('\",')[0].replace('\/', '/')
+			if url != '':
+				myreference = eServiceReference(4097, 0, url)
+				myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
+				self.session.open(UGMediaPlayer, myreference, 'npo')
 
 	def getRTLStream(self, url):
 		data = wgetUrl(self.RTL_BASE_URL + url)
@@ -913,5 +918,5 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 
-	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="pli.png", fnc = main),
+	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="oe-alliance.png", fnc = main),
 			PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]
