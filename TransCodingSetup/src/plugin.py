@@ -36,10 +36,9 @@ class TranscodingSetupInit:
 		else:
 			self.port_value = config.plugins.transcodingsetup.port.value
 		self.transcoding_old = config.plugins.transcodingsetup.transcoding.value
-		# res = self.setTranscoding(self.transcoding_value, self.port_value)
 
 		def setTranscode(configElement):
-			self.setTranscoding(self.transcoding_value, self.port_value)
+			res = self.setTranscoding(self.transcoding_value, self.port_value)
 			if res is not None and res < 0:
 				print "[TranscodingSetup] set failed!(%s, %s, %d)"%(self.transcoding_value, self.port_value, res)
 		config.plugins.transcodingsetup.transcoding.addNotifier(setTranscode)
