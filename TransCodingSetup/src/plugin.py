@@ -36,9 +36,15 @@ class TranscodingSetupInit:
 		else:
 			self.port_value = config.plugins.transcodingsetup.port.value
 		self.transcoding_old = config.plugins.transcodingsetup.transcoding.value
-		res = self.setTranscoding(self.transcoding_value, self.port_value)
-		if res is not None and res < 0:
-			print "[TranscodingSetup] set failed!(%s, %s, %d)"%(self.transcoding_value, self.port_value, res)
+
+		def setTranscode(configElement):
+			res = self.setTranscoding(self.transcoding_value, self.port_value)
+			if res is not None and res < 0:
+				print "[TranscodingSetup] set failed!(%s, %s, %d)"%(self.transcoding_value, self.port_value, res)
+		config.plugins.transcodingsetup.transcoding.addNotifier(setTranscode)
+		config.plugins.transcodingsetup.port.addNotifier(setTranscode)
+		config.plugins.transcodingsetup.bitrate.addNotifier(setTranscode)
+		config.plugins.transcodingsetup.framerate.addNotifier(setTranscode)
 
 	def createConfigList(self):
 		global TranscodingConfigList
@@ -58,13 +64,12 @@ class TranscodingSetupInit:
 		for x in TranscodingConfigList:
 			if x[0] == "Bitrate":
 				if getBoxType() == "vusolo2":
-					default_bitrate = 400000
+					config.plugins.transcodingsetup.bitrate = ConfigSelection(default = "500000", choices = [ ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("200000", "200 Kbits"), ("300000", "300 Kbits"), ("400000", "400 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
 				else:
-					default_bitrate = 2000000
-				config.plugins.transcodingsetup.bitrate = ConfigSelection(default = "500000", choices = [ ("100000", "100 Kbits"), ("500000", "500 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits")])
+					config.plugins.transcodingsetup.bitrate = ConfigSelection(default = "500000", choices = [ ("100000", "100 Kbits"), ("500000", "500 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits")])
 				x.append(config.plugins.transcodingsetup.bitrate)
 			elif x[0] == "Framerate":
-				config.plugins.transcodingsetup.framerate = ConfigSelection(default = "30000", choices = [ ("23976", "23.976 fps"), ("24000", "24 fps"), ("29970", "29.970 fps"), ("30000", "30 fps"), ("59940", "59.940 fps"), ("60000", "60 fps")])
+				config.plugins.transcodingsetup.framerate = ConfigSelection(default = "30000", choices = [ ("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps"), ("30000", "30 fps"), ("50000", "50 fps"), ("59940", "59.940 fps"), ("60000", "60 fps")])
 				x.append(config.plugins.transcodingsetup.framerate)
 
 	def setTranscoding(self, transcoding, port):
@@ -258,7 +263,7 @@ class TranscodingSetup(Screen, ConfigListScreen, TranscodingSetupInit):
 		self.port = getConfigListEntry(_("Port"), config.plugins.transcodingsetup.port)
 		self.list.append( self.transcoding )
 		if config.plugins.transcodingsetup.transcoding.value == "enable":
-			self.list.append( self.port )
+			self.list.append(self.port)
 			for x in TranscodingConfigList:
 				self.list.append(getConfigListEntry(_(x[0]), x[3]))
 
