@@ -66,10 +66,6 @@ if GIGABLUE
 SUBDIRS += GigaBlueVFDControl Blindscan
 endif
 
-if GBQUAD
-SUBDIRS += WebBrowser
-endif
-
 if XP1000
 SUBDIRS += XtrendRemote SF8VFDControl
 endif
