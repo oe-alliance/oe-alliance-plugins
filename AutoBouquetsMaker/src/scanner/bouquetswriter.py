@@ -1,5 +1,5 @@
 from .. import log
-import os
+import os, codecs, re	
 
 class BouquetsWriter():
 	def writeLamedb(self, path, transponders):
@@ -8,7 +8,7 @@ class BouquetsWriter():
 		transponders_count = 0
 		services_count = 0
 
-		lamedb = open(path + "/lamedb", "w")
+		lamedb = codecs.open(path + "/lamedb", "w", "utf-8")
 		lamedb.write("eDVB services /4/\n")
 		lamedb.write("transponders\n")
 
@@ -88,8 +88,14 @@ class BouquetsWriter():
 					service["service_type"],
 					service["flags"]))
 
-				lamedb.write("%s\n" % service["service_name"])
-				lamedb.write("p:%s\n" % service["provider_name"])
+				control_chars = ''.join(map(unichr, range(0,32) + range(127,160)))
+				control_char_re = re.compile('[%s]' % re.escape(control_chars))
+
+				service_name = control_char_re.sub('', service["service_name"]).decode('latin-1').encode("utf8")
+				provider_name = control_char_re.sub('', service["provider_name"]).decode('latin-1').encode("utf8")
+
+				lamedb.write("%s\n" % service_name)
+				lamedb.write("p:%s\n" % provider_name)
 				services_count += 1
 
 		lamedb.write("end\nHave a lot of bugs!\n")

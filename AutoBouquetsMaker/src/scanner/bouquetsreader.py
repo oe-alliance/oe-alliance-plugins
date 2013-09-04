@@ -155,8 +155,8 @@ class BouquetsReader():
 				continue
 
 			service = {}
-			service["service_name"] = service_name
-			service["provider_name"] = service_provider[2:]
+			service["service_name"] = service_name.decode('latin-1').encode("utf8")
+			service["provider_name"] = service_provider[2:].encode("utf-8")
 			service["service_id"] = int(service_reference[0], 16)
 			service["namespace"] = int(service_reference[1], 16)
 			service["transport_stream_id"] = int(service_reference[2], 16)

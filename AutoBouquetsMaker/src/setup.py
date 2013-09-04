@@ -207,7 +207,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 			if self.providers[provider]["transponder"]["orbital_position"] not in self.orbital_supported:
 				continue
 
-			self.list.append(getConfigListEntry(self.providers[provider]["name"].encode("utf-8"), self.providers_configs[provider], _("This option enables the current selected provider.")))
+			self.list.append(getConfigListEntry(self.providers[provider]["name"], self.providers_configs[provider], _("This option enables the current selected provider.")))
 			if self.providers_configs[provider].value:
 				if self.providers[provider]["protocol"] == "sky" or self.providers[provider]["protocol"] == "freesat":
 					self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("area"), self.providers_area[provider], _("This option allows you to choose what region of the country you live in, so it populates the correct channels for your region.")))

@@ -45,7 +45,7 @@ class Providers():
 					if node.tagName == "name":
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
-							provider["name"] = node.childNodes[0].data
+							provider["name"] = node.childNodes[0].data.encode("utf-8")
 					elif node.tagName == "protocol":
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE and node.childNodes[0].data in self.VALID_PROTOCOLS:
