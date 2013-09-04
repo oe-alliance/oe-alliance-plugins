@@ -3,7 +3,7 @@ from . import _
 
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigInteger
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigInteger, NoSave
 from Components.ActionMap import ActionMap
 from Screens.MessageBox import MessageBox
 from Components.Sources.StaticText import StaticText
@@ -13,117 +13,103 @@ from enigma import eTimer, getBoxType
 from os import system as os_system
 from __init__ import _
 
-error_msg ={
-	-1 : "File not exist - /proc/stb/encoder/enable.",
-	-2 : "File not exist - /etc/inetd.conf.",
-	-3 : "File open error - /proc/stb/encoder/enable.",
-	-4 : "File open error - /etc/inetd.conf.",
-	-5 : "Set encoder error.",
-	-6 : "Set port error.",
-	-7 : "Setting value is incorrect.",
-	-8 : "Set encoder bitrate error.",
-	-9 : "Set encoder framerate error.",
-}
-TranscodingConfigList = []
+transcodingsetupinit = None
+	
+config.plugins.transcodingsetup = ConfigSubsection()
+config.plugins.transcodingsetup.transcoding = ConfigSelection(default = "enable", choices = [ ("enable", _("enable")), ("disable", _("disable"))] )
+config.plugins.transcodingsetup.port = ConfigSelection(default = "8002", choices = [ ("8001", "8001"), ("8002", "8002")] )
+if fileExists("/proc/stb/encoder/0/bitrate"):
+	if getBoxType() == "vusolo2":
+		config.plugins.transcodingsetup.bitrate = ConfigSelection(default = "500000", choices = [ ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("200000", "200 Kbits"), ("300000", "300 Kbits"), ("400000", "400 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
+	else:
+		config.plugins.transcodingsetup.bitrate = ConfigSelection(default = "500000", choices = [ ("100000", "100 Kbits"), ("500000", "500 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits")])
+if fileExists("/proc/stb/encoder/0/framerate"):
+	config.plugins.transcodingsetup.framerate = ConfigSelection(default = "30000", choices = [ ("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps"), ("30000", "30 fps"), ("50000", "50 fps"), ("59940", "59.940 fps"), ("60000", "60 fps")])
 
 class TranscodingSetupInit:
 	def __init__(self):
-		self.createConfigList()
-		self.createConfig()
-		self.transcoding_value = config.plugins.transcodingsetup.transcoding.value
-		if self.transcoding_value == "disable":
-			self.port_value = "8002"
-		else:
-			self.port_value = config.plugins.transcodingsetup.port.value
-		self.transcoding_old = config.plugins.transcodingsetup.transcoding.value
+		self.pluginsetup = None
+		config.plugins.transcodingsetup.transcoding.addNotifier(self.setTranscoding)
+		config.plugins.transcodingsetup.port.addNotifier(self.setPort)
+		if hasattr(config.plugins.transcodingsetup, "bitrate"):
+			config.plugins.transcodingsetup.bitrate.addNotifier(self.setBitrate)
+		if hasattr(config.plugins.transcodingsetup, "framerate"):
+			config.plugins.transcodingsetup.framerate.addNotifier(self.setFramerate)
 
-		def setTranscode(configElement):
-			res = self.setTranscoding(self.transcoding_value, self.port_value)
-			if res is not None and res < 0:
-				print "[TranscodingSetup] set failed!(%s, %s, %d)"%(self.transcoding_value, self.port_value, res)
-		config.plugins.transcodingsetup.transcoding.addNotifier(setTranscode)
-		config.plugins.transcodingsetup.port.addNotifier(setTranscode)
-		config.plugins.transcodingsetup.bitrate.addNotifier(setTranscode)
-		config.plugins.transcodingsetup.framerate.addNotifier(setTranscode)
-
-	def createConfigList(self):
-		global TranscodingConfigList
-		configList = [
-			["Bitrate", "/proc/stb/encoder/0/bitrate", -8],
-			["Framerate", "/proc/stb/encoder/0/framerate", -9]
-		]
-		for x in configList:
-			if fileExists(x[1]):
-				TranscodingConfigList.append(x)
-
-	def createConfig(self):
-		config.plugins.transcodingsetup = ConfigSubsection()
-		config.plugins.transcodingsetup.transcoding = ConfigSelection(default = "enable", choices = [ ("enable", _("enable")), ("disable", _("disable"))] )
-		config.plugins.transcodingsetup.port = ConfigSelection(default = "8002", choices = [ ("8001", "8001"), ("8002", "8002")] )
-		global TranscodingConfigList
-		for x in TranscodingConfigList:
-			if x[0] == "Bitrate":
-				if getBoxType() == "vusolo2":
-					config.plugins.transcodingsetup.bitrate = ConfigSelection(default = "500000", choices = [ ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("200000", "200 Kbits"), ("300000", "300 Kbits"), ("400000", "400 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
-				else:
-					config.plugins.transcodingsetup.bitrate = ConfigSelection(default = "500000", choices = [ ("100000", "100 Kbits"), ("500000", "500 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits")])
-				x.append(config.plugins.transcodingsetup.bitrate)
-			elif x[0] == "Framerate":
-				config.plugins.transcodingsetup.framerate = ConfigSelection(default = "30000", choices = [ ("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps"), ("30000", "30 fps"), ("50000", "50 fps"), ("59940", "59.940 fps"), ("60000", "60 fps")])
-				x.append(config.plugins.transcodingsetup.framerate)
-
-	def setTranscoding(self, transcoding, port):
-		if transcoding not in ["enable","disable"] or port not in ["8001","8002"]:
-#			print "Input error."
-			return -7
-		if not fileExists("/proc/stb/encoder/enable"):
+	def setConfig(self, procPath, value):
+		if not fileExists(procPath):
 			return -1
-		elif not fileExists("/etc/inetd.conf"):
-			return -2
-		res = self.setEncoderExtra()
-		if res < 0:
-			return res
-		if self.setEncoderEnable(transcoding) < 0:
-			return -5
-		res = self.setPort(port)
-		if res < 0:
-			self.setEncoderEnable(self.transcoding_old)
-			return res
+		if isinstance(value, str):
+			value = value.strip(' ').strip('\n')
 		else:
-			self.inetdRestart()
-		return res
-
-	def setEncoderEnable(self,mode = "disable"):
-#		print "<TranscodingSetup> set encoder %s" % mode
-		mode = mode.strip(' ').strip('\n')
+			value = str(value)
 		try:
-			fd = open("/proc/stb/encoder/enable",'r')
-			self.transcoding_old = fd.read()
+			fd = open(procPath,'r')
+			oldValue = fd.read().strip(' ').strip('\n')
 			fd.close()
-			fd = open("/proc/stb/encoder/enable",'w')
-			fd.write(mode)
-			fd.close()
-			fd = open("/proc/stb/encoder/enable",'r')
-			encoder_enable = fd.read().strip(' ').strip('\n')
-			fd.close()
-			if encoder_enable == mode:
+			if oldValue != value:
+				print "[TranscodingSetup] set %s "%procPath, value
+				fd = open(procPath,'w')
+				fd.write(value)
+				fd.close()
+				fd = open(procPath,'r')
+				setvalue = fd.read().strip(' ').strip('\n')
+				fd.close()
+				if value != setvalue:
+					print "[TranscodingSetup] set failed. (%s > %s)" % ( value, procPath )
+					return -1
 				return 0
-			else:
-#				print "<TranscodingSetup> can not setting."
-				return -1
 		except:
-#			print "setEncoderEnable exception error"
+			print "setConfig exception error (%s > %s)" % ( value, procPath )
 			return -1
 
-	def setPort(self, port = "8001"):
-#		print "<TranscodingSetup> set port %s" % port
+	def setTranscoding(self, configElement):
+		encoder = configElement.value
+		procPath = "/proc/stb/encoder/enable"
+		if self.setConfig(procPath, encoder):
+			self.showMessage("Set encoder %s failed."%encoder, MessageBox.TYPE_ERROR)
+		elif encoder == "enable" and config.plugins.transcodingsetup.port.value == "8001":
+			msg = "OK. Encoder enable.\nPC Streaming is replaced with mobile streaming."
+			self.showMessage(msg, MessageBox.TYPE_INFO)
+		else:
+			self.showMessage("OK. Encoder %s."%encoder, MessageBox.TYPE_INFO)
+			if encoder == "disable":
+				config.plugins.transcodingsetup.port.value = "8002"
+
+	def setBitrate(self, configElement):
+		bitrate = configElement.value
+		procPath = "/proc/stb/encoder/0/bitrate"
+		if self.setConfig(procPath, bitrate):
+			fd = open(procPath,'r')
+			curValue = fd.read().strip(' ').strip('\n')
+			fd.close()
+			if curValue.isdigit():
+				config.plugins.transcodingsetup.bitrate.value = int(curValue)
+				config.plugins.transcodingsetup.bitrate.save()
+			self.showMessage("Set bitrate failed.", MessageBox.TYPE_ERROR)
+
+	def setFramerate(self, configElement):
+		framerate = configElement.value
+		procPath = "/proc/stb/encoder/0/framerate"
+		if self.setConfig(procPath, framerate):
+			self.showMessage("Set framerate failed.", MessageBox.TYPE_ERROR)
+
+		refreshrate = config.plugins.transcodingsetup.framerate.value
+		procPath = "/proc/stb/encoder/0/refreshrate"
+		if self.setConfig(procPath, refreshrate):
+			self.showMessage("Set framerate failed.", MessageBox.TYPE_ERROR)
+
+	def setPort(self, configElement):
+		port = configElement.value
+		print "[TranscodingSetup] set port ",port
 		try:
 			fp = file('/etc/inetd.conf', 'r')
 			datas = fp.readlines()
 			fp.close()
 		except:
 #			print "file open error, inetd.conf!"
-			return -4
+			self.showMessage("Set port failed.", MessageBox.TYPE_ERROR)
+			return
 		try:
 			newdatas=""
 			s_port = ""
@@ -146,8 +132,12 @@ class TranscodingSetupInit:
 			fd.write(newdatas)
 			fd.close()
 		except:
-			return -6
-		return 0
+			self.showMessage("Set port failed.", MessageBox.TYPE_ERROR)
+			return
+		self.inetdRestart()
+		if config.plugins.transcodingsetup.transcoding.value == "enable" and port == "8001":
+			msg = "Set port OK.\nPC Streaming is replaced with mobile streaming."
+			self.showMessage(msg, MessageBox.TYPE_INFO)
 
 	def inetdRestart(self):
 		if fileExists("/etc/init.d/inetd"):
@@ -155,54 +145,32 @@ class TranscodingSetupInit:
 		elif fileExists("/etc/init.d/inetd.busybox"):
 			os_system("/etc/init.d/inetd.busybox restart")
 
-	def setEncoderExtra(self):
-		global TranscodingConfigList
-		for x in TranscodingConfigList:
-			if self.setEncoder(x[1], x[3].value):
-				return x[2]
-		return 0
+	def showMessage(self, msg, msgType):
+		if self.pluginsetup:
+			self.pluginsetup.showMessage(msg, msgType)
 
-	def setEncoder(self, procPath, value):
-#		print "<TranscodingSetup> set %s "%procPath, value
-		if not fileExists(procPath):
-			return -1
-		if isinstance(value, str):
-			value = value.strip(' ').strip('\n')
-		else:
-			value = str(value)
-		try:
-			fd = open(procPath,'r')
-			old_value = fd.read().strip(' ').strip('\n')
-			fd.close()
-			if old_value != value:
-				print "[TranscodingSetup] set %s "%procPath, value
-				fd = open(procPath,'w')
-				fd.write(value)
-				fd.close()
-				fd = open(procPath,'r')
-				encoder_value = fd.read().strip(' ').strip('\n')
-				fd.close()
-				if encoder_value != value:
-					return -1
-			return 0
-		except:
-			return -1
-
-class TranscodingSetup(Screen, ConfigListScreen, TranscodingSetupInit):
+class TranscodingSetup(Screen,ConfigListScreen):
 	skin =  """
-		<screen position="center,center" size="400,270" >
+		<screen position="center,center" size="540,320">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="230,10" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="200,10" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="370,10" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="30,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
-			<widget source="key_green" render="Label" position="230,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
-			<widget name="config" zPosition="2" position="5,70" size="390,125" scrollbarMode="showOnDemand" transparent="1" />
-			<widget source="text" render="Label" position="20,120" size="370,150" font="Regular;18" halign="center" valign="bottom" />
+			<widget source="key_green" render="Label" position="200,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
+			<widget source="key_yellow" render="Label" position="370,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" foregroundColor="#ffffff" transparent="1" />
+			<widget name="config" zPosition="2" position="20,70" size="500,120" scrollbarMode="showOnDemand" transparent="1" />
+			<widget source="text" render="Label" position="30,190" size="480,130" font="Regular;18" halign="center" valign="center" />
 		</screen>
 		"""
+
 	def __init__(self,session):
 		Screen.__init__(self,session)
-		self.setup_title = _('Transcoding Setup')
-		self.setTitle(self.setup_title)
+		self.setTitle(_("Transcoding Setup"))
+		TEXT = _("Transcoding can be started when there is no corresponding channel recordings.")
+		if getBoxType() == "vusolo2":
+			TEXT += _("\nWhen transcoding, both PIP and analog video outputs are disabled.")
+		else:
+			TEXT += _("\nWhen transcoding, PIP is disabled.")
 		self.session = session
 		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
 		{
@@ -210,44 +178,24 @@ class TranscodingSetup(Screen, ConfigListScreen, TranscodingSetupInit):
 			"cancel": self.keyCancel,
 			"red": self.keyCancel,
 			"green": self.keySave,
+			"yellow" : self.KeyDefault,
 		}, -2)
-		self.onChangedEntry = [ ]
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list,session = self.session)
 		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Ok"))
-		self["text"] = StaticText()
+		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText(_("Default"))
+		self["text"] = StaticText(_("%s")%TEXT)
 		self.createSetup()
 		self.onLayoutFinish.append(self.checkEncoder)
 		self.invaliedModelTimer = eTimer()
 		self.invaliedModelTimer.callback.append(self.invalidmodel)
-		if not self.selectionChanged in self["config"].onSelectionChanged:
-			self["config"].onSelectionChanged.append(self.selectionChanged)
-		self.selectionChanged()
+		global transcodingsetupinit
+		transcodingsetupinit.pluginsetup = self
+		self.onClose.append(self.onClosed)
 
-	def selectionChanged(self):
-		self.text = _("Transcoding can be started when there is no corresponding channel recordings.")
-		if getBoxType() == "vuduo2":
-			self.text += _("\nWhen transcoding, PIP is disabled.")
-		else:
-			self.text += _("\nWhen transcoding, both PIP and analog video outputs are disabled.")
-		self["text"].setText(_("%s")%self.text)
-
-	def createSummary(self):
-		from Screens.Setup import SetupSummary
-		return SetupSummary
-
-	# for summary:
-	def changedEntry(self):
-		for x in self.onChangedEntry:
-			x()
-		self.selectionChanged()
-
-	def getCurrentEntry(self):
-		return self["config"].getCurrent()[0]
-
-	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].getText())
+	def onClosed(self):
+		transcodingsetupinit.pluginsetup = None
 
 	def checkEncoder(self):
 		if not fileExists("/proc/stb/encoder/enable"):
@@ -257,46 +205,37 @@ class TranscodingSetup(Screen, ConfigListScreen, TranscodingSetupInit):
 		self.session.openWithCallback(self.close, MessageBox, _("This model is not support transcoding."), MessageBox.TYPE_ERROR)
 
 	def createSetup(self):
-		global TranscodingConfigList
 		self.list = []
 		self.transcoding = getConfigListEntry(_("Transcoding"), config.plugins.transcodingsetup.transcoding)
-		self.port = getConfigListEntry(_("Port"), config.plugins.transcodingsetup.port)
 		self.list.append( self.transcoding )
 		if config.plugins.transcodingsetup.transcoding.value == "enable":
-			self.list.append(self.port)
-			for x in TranscodingConfigList:
-				self.list.append(getConfigListEntry(_(x[0]), x[3]))
-
+			self.list.append(getConfigListEntry(_("Port"), config.plugins.transcodingsetup.port))
+			if hasattr(config.plugins.transcodingsetup, "bitrate"):
+				self.list.append(getConfigListEntry(_("Bitrate"), config.plugins.transcodingsetup.bitrate))
+			if hasattr(config.plugins.transcodingsetup, "framerate"):
+				self.list.append(getConfigListEntry(_("Framerate"), config.plugins.transcodingsetup.framerate))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
+	def showMessage(self, msg, msgType = MessageBox.TYPE_ERROR):
+		self.session.open(MessageBox, _(msg), msgType)
+
 	def keySave(self):
-		transcoding = config.plugins.transcodingsetup.transcoding.value
-		port = config.plugins.transcodingsetup.port.value
-#		print "<TranscodingSetup> Transcoding %s(port : %s)"%(transcoding, port)
-		ret = self.setupTranscoding(transcoding, port)
-		if ret is not None and ret <0 :
-			self.resetConfig()
-			global error_msg
-			self.session.openWithCallback(self.close, MessageBox, _("Failed, Encoder %s\n(%s).")%(transcoding, error_msg[ret]), MessageBox.TYPE_ERROR)
-		else:
-			self.saveAll()
-			if transcoding == "enable" and port == "8001" :
-				text = "PC Streaming is replaced with mobile streaming."
-				self.session.openWithCallback(self.close, MessageBox, _("OK. Encoder %s.\n%s")%(transcoding,text), MessageBox.TYPE_INFO)
-			else:
-				self.session.openWithCallback(self.close, MessageBox, _("OK. Encoder %s.")%transcoding, MessageBox.TYPE_INFO)
-			self.close()
+		self.saveAll()
+		self.close()
+
+	def KeyDefault(self):
+		config.plugins.transcodingsetup.port.value = config.plugins.transcodingsetup.port.default
+		if hasattr(config.plugins.transcodingsetup, "bitrate"):
+			config.plugins.transcodingsetup.bitrate.value = config.plugins.transcodingsetup.bitrate.default
+		if hasattr(config.plugins.transcodingsetup, "framerate"):
+			config.plugins.transcodingsetup.framerate.value = config.plugins.transcodingsetup.framerate.default
+			config.plugins.transcodingsetup.refreshrate.value = config.plugins.transcodingsetup.framerate.default
+		self.createSetup()
 
 	def resetConfig(self):
 		for x in self["config"].list:
 			x[1].cancel()
-
-	def setupTranscoding(self, transcoding = None, port = None):
-		if transcoding == "disable":
-			config.plugins.transcodingsetup.port.value = "8002"
-			port = "8002"
-		return self.setTranscoding(transcoding, port)
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -307,6 +246,26 @@ class TranscodingSetup(Screen, ConfigListScreen, TranscodingSetupInit):
 		ConfigListScreen.keyRight(self)
 		if self["config"].getCurrent() == self.transcoding:
 			self.createSetup()
+
+	def cancelConfirm(self, result):
+		if not result:
+			return
+		configlist = []
+		configlist.append(config.plugins.transcodingsetup.transcoding)
+		configlist.append(config.plugins.transcodingsetup.port)
+		configlist.append(config.plugins.transcodingsetup.bitrate)
+		configlist.append(config.plugins.transcodingsetup.framerate)
+		configlist.append(config.plugins.transcodingsetup.refreshrate)
+		for x in configlist:
+			x.cancel()
+		self.close()
+
+	def keyCancel(self):
+		transcodingsetupinit.pluginsetup = None
+		if self["config"].isChanged():
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
+		else:
+			self.close()
 
 def main(session, **kwargs):
 	session.open(TranscodingSetup)
