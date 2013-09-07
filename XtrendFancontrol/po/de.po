@@ -29,7 +29,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 msgid "Drive is sleeping\n"
-msgstr "HDD im Ruhezustand"
+msgstr "HDD im Ruhezustand\n"
 
 msgid "ERROR\n"
 msgstr "FEHLER\n"
