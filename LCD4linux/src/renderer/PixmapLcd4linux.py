@@ -6,6 +6,7 @@ class PixmapLcd4linux(Renderer):
 	def __init__(self):
 		Renderer.__init__(self)
 		self.mTime = 0
+		self.swap = "0"
 
 	GUI_WIDGET = ePixmap
 
@@ -18,7 +19,14 @@ class PixmapLcd4linux(Renderer):
 				mtime = os.stat("/tmp/l4ldisplay.png").st_mtime
 				if self.mTime != mtime:
 					if self.instance:
-						self.instance.setPixmapFromFile("/tmp/l4ldisplay.png")
+						self.instance.setScale(1)
+						if self.swap == "0":
+							self.swap = "1"
+							self.instance.setPixmapFromFile("/tmp/l4ldisplay.png")
+						else:
+							self.swap = "0"
+							self.instance.setPixmapFromFile("/tmp/lcd4linux/dpf.png")						
+						self.instance.show()
 						self.mTime = mtime
 					else:
 						self.mTime = 0

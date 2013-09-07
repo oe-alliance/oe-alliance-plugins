@@ -1,231 +1,231 @@
 <!--L4L01 On-->
 <!--InfoBarSummary-->
 	<screen name="InfoBarSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 <!--L4L01-->
 
 <!--L4L02 Mediaplayer-->
 <!--InfoBarMoviePlayerSummary-->
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 <!--MediaPlayerLCDScreen-->
 	<screen name="MediaPlayerLCDScreen" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 <!--MediaPlayer-->
 	<screen name="MediaPlayer_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 <!--EMCMoviePlayerSummary-->
 	<screen name="EMCMoviePlayerSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 <!-- EMC screen -->
 	<screen name="EMCMoviePlayerSummaryGBHDQ" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 <!--webradio FSdisplay-->
 	<screen name="webradioFSdisplay" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 <!--L4L02-->
 
 <!--L4L03 Idle-->
 <!--StandbySummary-->
 	<screen name="StandbySummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 <!--L4L03-->
 ######################################################################
 
 <!--ChannelSelection_summary-->
 	<screen name="ChannelSelection_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--AdvancedChannelSelection_summary-->
 	<screen name="AdvancedChannelSelection_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--ChannelSelectionRadio_summary-->
 	<screen name="ChannelSelectionRadio_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--MenuSummary-->
 	<screen name="MenuSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--SimpleSummary-->
 	<screen name="SimpleSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--SimpleLCDScreen-->
 	<screen name="SimpleLCDScreen" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--Jukebox_Summary-->
 	<screen name="Jukebox_Summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--DreamnetcastSummary-->
 	<screen name="DreamnetcastSummary" position="0,0" size="$w$,$h$" id="1">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--DVDSummary-->
 	<screen name="DVDSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--IMDbLCDScreen-->
 	<screen name="IMDbLCDScreen" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--AdvancedMovieSelection_summary-->
 	<screen name="AdvancedMovieSelection_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--MoviePlayerExtended_summary-->
 	<screen name="MoviePlayerExtended_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--LCDAusg-->
 	<screen name="LCDAusg" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--AutoTimerOverviewSummary-->
 	<screen name="AutoTimerOverviewSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--SetupSummary-->
 	<screen name="SetupSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--ServiceScanSummary-->
 	<screen name="ServiceScanSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--ChoiceBox_summary-->
 	<screen name="ChoiceBox_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--MessageBox_summary-->
 	<screen name="MessageBox_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--PluginBrowserSummary-->
 	<screen name="PluginBrowserSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--TeletextMenuSummary-->
 	<screen name="TeleTextMenuSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--TeletextransponderSummary-->
 	<screen name="TeleTextTransponderSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--TeletextSummary-->
 	<screen name="TeleTextSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--WizardSummary-->
 	<screen name="WizardSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--Browser_summary-->
 	<screen name="Browser_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--gDesktopSummary-->
 	<screen name="gDesktopSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--EMCSelection_summary-->
 	<screen name="EMCSelection_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!-- MerlinMusicPlayer -->
 	<screen name="MerlinMusicPlayerLCDScreen" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="MerlinMusicPlayerLCDScreenText" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!--CoolTV-->
 	<screen name="CoolTVGuide_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolMultiGuide_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolTinyGuide_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolNiceGuide_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolChannelGuide_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolChannelGuide2_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolChannelGuide3_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolInfoGuide_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolSingleGuide_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolSingleGuide2_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolSingleGuide3_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolEasyGuide_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolEasyGuide2_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolEasyGuide3_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 	<screen name="CoolSearch_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
 
 <!-- InternetRadio -->
 	<screen name="InternetRadioOledDisplay" size="$w$,$h$" position="0,0" id="1">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="on" />
 	</screen>
