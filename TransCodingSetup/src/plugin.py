@@ -230,7 +230,6 @@ class TranscodingSetup(Screen,ConfigListScreen):
 			config.plugins.transcodingsetup.bitrate.value = config.plugins.transcodingsetup.bitrate.default
 		if hasattr(config.plugins.transcodingsetup, "framerate"):
 			config.plugins.transcodingsetup.framerate.value = config.plugins.transcodingsetup.framerate.default
-			config.plugins.transcodingsetup.refreshrate.value = config.plugins.transcodingsetup.framerate.default
 		self.createSetup()
 
 	def resetConfig(self):
