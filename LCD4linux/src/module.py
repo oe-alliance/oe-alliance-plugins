@@ -2,6 +2,12 @@ import os
 
 class L4Lelement:
 	List = {}
+	Refresh = False
+	MAX_W = [0, 0, 0]
+	MAX_H = [0, 0, 0]
+	Screen = ''
+	LCD = ''
+	Hold = False
 
 	def __init__(self):
 		self.session = None
@@ -30,6 +36,42 @@ class L4Lelement:
 
 	def web(self, EX):
 		exec "self.add('%s)" % EX.replace(',', "',", 1)
+
+	def getResolution(self, LCD):
+		if LCD < 1 or LCD > 3:
+			return (0, 0)
+		return (L4Lelement.MAX_W[LCD - 1], L4Lelement.MAX_H[LCD - 1])
+
+	def setResolution(self, LCD, MW, MH):
+		L4Lelement.MAX_W[LCD - 1] = MW
+		L4Lelement.MAX_H[LCD - 1] = MH
+
+	def resetRefresh(self):
+		L4Lelement.Refresh = False
+
+	def setRefresh(self):
+		L4Lelement.Refresh = True
+
+	def getRefresh(self):
+		return L4Lelement.Refresh
+
+	def getHold(self):
+		return L4Lelement.Hold
+
+	def setHold(self, H):
+		L4Lelement.Hold = H
+
+	def getScreen(self):
+		return L4Lelement.Screen
+
+	def setScreen(self, S, Lcd = '', Hold = False):
+		L4Lelement.Screen = str(S)
+		L4Lelement.LCD = Lcd
+		L4Lelement.Hold = Hold
+		L4Lelement.Refresh = True
+
+	def getLcd(self):
+		return L4Lelement.LCD
 
 
 def L4LVtest(VV):

@@ -17,7 +17,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V3.7-r0"
+Version = "V3.7-r4"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -155,7 +155,6 @@ FritzFrame = Data+"fritzcallframe.png"
 FritzRing = Data+"fritzcallring.png"
 FritzPic = Data+"fritzpic.png"
 CrashFile="/tmp/L4Lcrash.txt"
-Push="%spush.txt" % TMPL
 PIC="%sdpf" % TMPL
 PICtmp="%sdpftmp" % TMPL
 PIC2="%sdpf2" % TMPL
@@ -190,7 +189,7 @@ wwwMeteo = ""
 MeteoType = ""
 MeteoZoom = ""
 PopText = ["",""]
-ScreenActive = "1"
+ScreenActive = ["1","","",""]
 ScreenTime= 0
 isVideoPlaying = 0
 AktHelligkeit = [0,0,0]
@@ -208,6 +207,8 @@ ThreadRunning = 0
 DeviceRemove = []
 QuickList = [[],[],[]]
 QuickIM = [None,None,None]
+SaveEventList = ["","",""]
+SaveEventListChanged = False
 ICS = {}
 ICSlist = []
 ICSrunning = False
@@ -256,6 +257,7 @@ Farbe = [("black", _("black")), ("white", _("white")),
 ]
 ScreenSelect = [("0", _("off")), ("1", _("Screen 1")), ("2", _("Screen 2")), ("3", _("Screen 3")), ("12", _("Screen 1+2")), ("13", _("Screen 1+3")), ("23", _("Screen 2+3")), ("123", _("Screen 1+2+3")), ("4", _("Screen 4")), ("14", _("Screen 1+4")), ("24", _("Screen 2+4")), ("34", _("Screen 3+4")), ("124", _("Screen 1+2+4")), ("134", _("Screen 1+3+4")), ("234", _("Screen 2+3+4")), ("1234", _("Screen 1+2+3+4")), ("5", _("Screen 5")), ("6", _("Screen 6")), ("7", _("Screen 7")), ("8", _("Screen 8")), ("9", _("Screen 9")), ("12345", _("Screen 1-5")), ("123456", _("Screen 1-6")), ("1234567", _("Screen 1-7")), ("12345678", _("Screen 1-8")), ("123456789", _("Screen 1-9")), ("56789", _("Screen 5-9")), ("13579", _("Screen 1+3+5+7+9")), ("2468", _("Screen 2+4+6+8"))]
 ScreenUse = [("1", _("Screen 1")), ("2", _("Screen 1-2")), ("3", _("Screen 1-3")), ("4", _("Screen 1-4")), ("5", _("Screen 1-5")), ("6", _("Screen 1-6")), ("7", _("Screen 1-7")), ("8", _("Screen 1-8")), ("9", _("Screen 1-9"))]
+ScreenSet = [("1", _("Screen 1")), ("2", _("Screen 2")), ("3", _("Screen 3")), ("4", _("Screen 4")), ("5", _("Screen 5")), ("6", _("Screen 6")), ("7", _("Screen 7")), ("8", _("Screen 8")), ("9", _("Screen 9"))]
 OnOffSelect = [("0", _("off")), ("1", _("on"))]
 TimeSelect = [("1", _("5s")), ("2", _("10s")), ("3", _("15s")), ("4", _("20s")), ("6", _("30s")), ("8", _("40s")), ("10", _("50s")), ("12", _("1min")), ("24", _("2min")), ("36", _("3min")), ("48", _("4min")), ("60", _("5min")), ("120", _("10min"))]
 LCDSelect = [("1", _("LCD 1")), ("2", _("LCD 2")), ("12", _("LCD 1+2")), ("3", _("LCD 3")), ("13", _("LCD 1+3")), ("23", _("LCD 2+3")), ("123", _("LCD 1+2+3"))]
@@ -280,6 +282,7 @@ CalType = [("9", _("no Calendar")),("0", _("Month")), ("0A", _("Month+Header")),
 CalTypeE = [("0", _("no Dates")), ("D2", _("Dates compact 2 Lines")), ("D3", _("Dates compact 3 Lines")), ("C1", _("Dates 1 Line")), ("C3", _("Dates 3 Lines")), ("C5", _("Dates 5 Lines")), ("C9", _("Dates 9 Lines"))]
 CalLayout = [("0", _("Frame")), ("1", _("Underline")), ("2", _("Underline 2"))]
 CalListType = [("D", _("Dates compact")), ("D-", _("Dates compact no Icon")), ("C", _("Dates")), ("C-", _("Dates no Icon"))]
+FritzType = [("L", _("with Icon")), ("L-", _("no Icon"))]
 InfoSensor = [("0", _("no")), ("R", _("rpm/2")), ("r", _("rpm")), ("T", _("C")), ("RT", _("C + rmp/2")), ("rT", _("C + rmp"))]
 InfoCPU = [("0", _("no")), ("P", _("%")), ("L0", _("Load@1min")), ("L1", _("Load@5min")), ("PL0", _("% + Load@1min")), ("PL1", _("% + Load@5min"))]
 HddType = [("0", _("show run+sleep")), ("1", _("show run"))]
@@ -310,7 +313,7 @@ begin = mktime((
 LCD4linux = Config()
 LCD4linux.Enable = ConfigYesNo(default = True)
 LCD4linux.FastMode = ConfigSelection(choices = [("5", _("Normal (5s)")), ("2", _("Fastmode (2s)"))], default="5")
-LCD4linux.ScreenActive = ConfigSelection(choices = [("1", _("Screen 1")), ("2", _("Screen 2")), ("3", _("Screen 3")), ("4", _("Screen 4")), ("5", _("Screen 5")), ("6", _("Screen 6")), ("7", _("Screen 7")), ("8", _("Screen 8")), ("9", _("Screen 9"))], default="1")
+LCD4linux.ScreenActive = ConfigSelection(choices = ScreenSet, default="1")
 LCD4linux.ScreenMax = ConfigSelection(choices = ScreenUse, default="1")
 LCD4linux.ScreenTime = ConfigSelection(choices = [("0", _("off"))] + TimeSelect, default="0")
 LCD4linux.ScreenTime2 = ConfigSelection(choices = TimeSelect, default="1")
@@ -342,9 +345,11 @@ LCD4linux.SavePicture = ConfigSelection(choices =  [("0", _("no"))] + LCDSelect,
 LCD4linux.WebIfRefresh = ConfigSelectionNumber(1, 60, 1, default = 3)
 LCD4linux.WebIfType = ConfigSelection(choices = [("0", _("Javascript")), ("1", _("Reload"))], default="0")
 LCD4linux.WebIfInitDelay = ConfigYesNo(default = False)
+LCD4linux.WebIfAllow = ConfigText(default="127. 192.168. 172. 10.", fixed_size=False)
+LCD4linux.WebIfDeny = ConfigText(default="", fixed_size=False)
 LCD4linux.WetterCity = ConfigText(default="London", fixed_size=False)
 LCD4linux.Wetter2City = ConfigText(default="Berlin", fixed_size=False)
-LCD4linux.WetterPath = ConfigText(default="", fixed_size=False, visible_width=50)
+LCD4linux.WetterPath = ConfigText(default=WetterPath, fixed_size=False, visible_width=50)
 LCD4linux.WetterLowColor = ConfigSelection(choices = Farbe, default="aquamarine")
 LCD4linux.WetterHighColor = ConfigSelection(choices = Farbe, default="violet")
 LCD4linux.WetterTransparenz = ConfigSelection(choices = [("false", _("no")), ("crop", _("alternative Copy-Mode/DM800hd (24bit)")), ("true", _("yes (32bit)"))], default = "false")
@@ -386,7 +391,8 @@ LCD4linux.xmlType03 = ConfigYesNo(default = False)
 LCD4linux.SizeW = ConfigSlider(default = 800,  increment = 1, limits = (100, 2000))
 LCD4linux.SizeH = ConfigSlider(default = 600,  increment = 1, limits = (100, 1000))
 LCD4linux.KeySwitch = ConfigYesNo(default = True)
-LCD4linux.KeyScreen = ConfigSelection(choices =  [("163", _("2 x FastForwardKey")),("208", _("2 x FastForwardKey Type 2")),("163l", _("Long FastForwardKey")),("2081", _("Long FastForwardKey Type 2")),("358", _("2 x InfoKey"))], default="163")
+LCD4linux.KeyScreen = ConfigSelection(choices =  [("163", _("2 x FastForwardKey")),("208", _("2 x FastForwardKey Type 2")),("163l", _("Long FastForwardKey")),("2081", _("Long FastForwardKey Type 2")),("358", _("2 x InfoKey")),("3581", _("Long InfoKey"))], default="163")
+LCD4linux.KeyOff = ConfigSelection(choices =  [("165", _("2 x FastBackwardKey")),("165l", _("Long FastBackwardKey")),("358", _("2 x InfoKey")),("3581", _("Long InfoKey"))], default="1651")
 LCD4linux.Mail1Pop = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.Mail1Connect = ConfigSelection(choices = MailConnect, default="0")
 LCD4linux.Mail1User = ConfigText(default="", fixed_size=False, visible_width=50)
@@ -445,7 +451,6 @@ LCD4linux.CalHttp3 = ConfigText(default="http...", fixed_size=False, visible_wid
 LCD4linux.CalHttp3Color = ConfigSelection(choices = Farbe, default="yellow")
 LCD4linux.CalLine = ConfigSelectionNumber(1, 2, 1, default = 1)
 LCD4linux.CalDays = ConfigSelection(choices = [("0", "0"), ("3", "3"), ("7", "7"), ("14", "14"), ("21", "21"), ("31", "31")], default="7")
-LCD4linux.CalThread = ConfigYesNo(default = False)
 LCD4linux.CalTransparenz = ConfigSelection(choices = [("false", _("no")), ("crop", _("alternative Copy-Mode/DM800hd (24bit)")), ("true", _("yes (32bit)"))], default = "false")
 LCD4linux.Cal = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.CalLCD = ConfigSelection(choices = LCDSelect, default="1")
@@ -515,6 +520,8 @@ LCD4linux.IconBarPos = ConfigSlider(default = 120,  increment = 2, limits = (0, 
 LCD4linux.IconBarAlign = ConfigSelection(choices = AlignType, default="1")
 LCD4linux.IconBarSplit = ConfigYesNo(default = False)
 LCD4linux.IconBarType = ConfigSelection(choices = DirType, default="0")
+LCD4linux.IconBarPopup = ConfigSelection(choices = [("0", _("off"))] + ScreenSet, default="0")
+LCD4linux.IconBarPopupLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.Sun = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.SunLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.SunSize = ConfigSlider(default = 20,  increment = 1, limits = (5, 150))
@@ -533,6 +540,7 @@ LCD4linux.FritzPos = ConfigSlider(default = 130,  increment = 2, limits = (0, 10
 LCD4linux.FritzAlign = ConfigSelection(choices = AlignType, default="0")
 LCD4linux.FritzColor = ConfigSelection(choices = Farbe, default="yellow")
 LCD4linux.FritzBackColor = ConfigSelection(choices = [("0", _("off"))] + Farbe, default="0")
+LCD4linux.FritzType = ConfigSelection(choices = FritzType, default="L")
 LCD4linux.FritzPicSize = ConfigSlider(default = 100,  increment = 1, limits = (10, 1024))
 LCD4linux.FritzPicPos = ConfigSlider(default = 30,  increment = 2, limits = (0, 1024))
 LCD4linux.FritzPicAlign = ConfigSlider(default = 0,  increment = 10, limits = (0, 1024))
@@ -543,13 +551,13 @@ LCD4linux.PiconLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.PiconPos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
 LCD4linux.PiconSize = ConfigSlider(default = 200,  increment = 10, limits = (10, 1024))
 LCD4linux.PiconFullScreen = ConfigYesNo(default = False)
-LCD4linux.PiconCache = ConfigText(default="/usr/share/enigma2/piconcache/", fixed_size=False, visible_width=50)
 LCD4linux.PiconAlign = ConfigSelection(choices = AlignType, default="0")
 LCD4linux.PiconSplit = ConfigYesNo(default = False)
 LCD4linux.PiconTextSize = ConfigSlider(default = 30,  increment = 2, limits = (10, 150))
 LCD4linux.PiconPath = ConfigText(default="/picon/", fixed_size=False, visible_width=50)
 LCD4linux.PiconPathAlt = ConfigText(default="/media/hdd/picon/", fixed_size=False, visible_width=50)
 LCD4linux.PiconTransparenz = ConfigSelection(choices = [("0", _("no")), ("2", _("yes (32bit)"))], default="2")
+LCD4linux.PiconCache = ConfigText(default="/usr/share/enigma2/piconcache/", fixed_size=False, visible_width=50)
 LCD4linux.Picon2 = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.Picon2LCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.Picon2Pos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
@@ -558,6 +566,8 @@ LCD4linux.Picon2FullScreen = ConfigYesNo(default = False)
 LCD4linux.Picon2Align = ConfigSelection(choices = AlignType, default="1")
 LCD4linux.Picon2Split = ConfigYesNo(default = False)
 LCD4linux.Picon2TextSize = ConfigSlider(default = 30,  increment = 2, limits = (10, 150))
+LCD4linux.Picon2Path = ConfigText(default=LCD4linux.PiconPath.value, fixed_size=False, visible_width=50)
+LCD4linux.Picon2PathAlt = ConfigText(default=LCD4linux.PiconPathAlt.value, fixed_size=False, visible_width=50)
 LCD4linux.Picon2Cache = ConfigText(default="/usr/share/enigma2/picon2cache/", fixed_size=False, visible_width=50)
 LCD4linux.Clock = ConfigSelection(choices = ScreenSelect, default="1")
 LCD4linux.ClockLCD = ConfigSelection(choices = LCDSelect, default="1")
@@ -750,6 +760,7 @@ LCD4linux.DevSplit = ConfigYesNo(default = False)
 LCD4linux.DevColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.DevShadow = ConfigYesNo(default = False)
 LCD4linux.DevFont = ConfigSelection(choices = FontType, default="0")
+LCD4linux.DevType = ConfigSelection(choices = DirType, default="0")
 LCD4linux.DevExtra = ConfigSelection(choices = [("0", _("no")), ("RAM", _("Memory"))], default="RAM")
 LCD4linux.DevName1 = ConfigText(default="/media/hdd", fixed_size=False)
 LCD4linux.DevName2 = ConfigText(default="", fixed_size=False)
@@ -952,6 +963,9 @@ LCD4linux.Box2x2 = ConfigSlider(default = 200,  increment = 1, limits = (0, 1024
 LCD4linux.Box2y2 = ConfigSlider(default = 1,  increment = 1, limits = (0, 1024))
 LCD4linux.Box2Color = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.Box2BackColor = ConfigSelection(choices = [("0", _("off"))] + Farbe, default="0")
+LCD4linux.MPHelligkeit = ConfigSelectionNumber(0, 10, 1, default = 5)
+LCD4linux.MPHelligkeit2 = ConfigSelectionNumber(0, 10, 1, default = 5)
+LCD4linux.MPHelligkeit3 = ConfigSelectionNumber(0, 10, 1, default = 5)
 LCD4linux.MPScreenMax = ConfigSelection(choices = ScreenUse, default="1")
 LCD4linux.MPLCDBild1 = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.MPLCDBild2 = ConfigText(default="", fixed_size=False, visible_width=50)
@@ -1096,6 +1110,7 @@ LCD4linux.MPDevSplit = ConfigYesNo(default = False)
 LCD4linux.MPDevColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.MPDevShadow = ConfigYesNo(default = False)
 LCD4linux.MPDevFont = ConfigSelection(choices = FontType, default="0")
+LCD4linux.MPDevType = ConfigSelection(choices = DirType, default="0")
 LCD4linux.MPDevExtra = ConfigSelection(choices = [("0", _("no")), ("RAM", _("Memory"))], default="RAM")
 LCD4linux.MPDevName1 = ConfigText(default="/media/hdd", fixed_size=False)
 LCD4linux.MPDevName2 = ConfigText(default="", fixed_size=False)
@@ -1242,6 +1257,8 @@ LCD4linux.MPIconBarPos = ConfigSlider(default = 120,  increment = 2, limits = (0
 LCD4linux.MPIconBarAlign = ConfigSelection(choices = AlignType, default="1")
 LCD4linux.MPIconBarSplit = ConfigYesNo(default = False)
 LCD4linux.MPIconBarType = ConfigSelection(choices = DirType, default="0")
+LCD4linux.MPIconBarPopup = ConfigSelection(choices = [("0", _("off"))] + ScreenSet, default="0")
+LCD4linux.MPIconBarPopupLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.MPSun = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.MPSunLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.MPSunSize = ConfigSlider(default = 20,  increment = 1, limits = (5, 150))
@@ -1260,6 +1277,7 @@ LCD4linux.MPFritzPos = ConfigSlider(default = 130,  increment = 2, limits = (0, 
 LCD4linux.MPFritzAlign = ConfigSelection(choices = AlignType, default="0")
 LCD4linux.MPFritzColor = ConfigSelection(choices = Farbe, default="yellow")
 LCD4linux.MPFritzBackColor = ConfigSelection(choices = [("0", _("off"))] + Farbe, default="0")
+LCD4linux.MPFritzType = ConfigSelection(choices = FritzType, default="L")
 LCD4linux.MPFritzPicSize = ConfigSlider(default = 100,  increment = 1, limits = (10, 800))
 LCD4linux.MPFritzPicPos = ConfigSlider(default = 30,  increment = 2, limits = (0, 1024))
 LCD4linux.MPFritzPicAlign = ConfigSlider(default = 0,  increment = 10, limits = (0, 1024))
@@ -1413,6 +1431,7 @@ LCD4linux.StandbyDevSplit = ConfigYesNo(default = False)
 LCD4linux.StandbyDevColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.StandbyDevShadow = ConfigYesNo(default = False)
 LCD4linux.StandbyDevFont = ConfigSelection(choices = FontType, default="0")
+LCD4linux.StandbyDevType = ConfigSelection(choices = DirType, default="0")
 LCD4linux.StandbyDevExtra = ConfigSelection(choices = [("0", _("no")), ("RAM", _("Memory"))], default="RAM")
 LCD4linux.StandbyDevName1 = ConfigText(default="/media/hdd", fixed_size=False)
 LCD4linux.StandbyDevName2 = ConfigText(default="", fixed_size=False)
@@ -1594,6 +1613,8 @@ LCD4linux.StandbyIconBarPos = ConfigSlider(default = 120,  increment = 2, limits
 LCD4linux.StandbyIconBarAlign = ConfigSelection(choices = AlignType, default="1")
 LCD4linux.StandbyIconBarSplit = ConfigYesNo(default = False)
 LCD4linux.StandbyIconBarType = ConfigSelection(choices = DirType, default="0")
+LCD4linux.StandbyIconBarPopup = ConfigSelection(choices = [("0", _("off"))] + ScreenSet, default="0")
+LCD4linux.StandbyIconBarPopupLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.StandbySun = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.StandbySunLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.StandbySunSize = ConfigSlider(default = 20,  increment = 1, limits = (5, 150))
@@ -1612,6 +1633,7 @@ LCD4linux.StandbyFritzPos = ConfigSlider(default = 130,  increment = 2, limits =
 LCD4linux.StandbyFritzAlign = ConfigSelection(choices = AlignType, default="0")
 LCD4linux.StandbyFritzColor = ConfigSelection(choices = Farbe, default="yellow")
 LCD4linux.StandbyFritzBackColor = ConfigSelection(choices = [("0", _("off"))] + Farbe, default="0")
+LCD4linux.StandbyFritzType = ConfigSelection(choices = FritzType, default="L")
 LCD4linux.StandbyFritzPicSize = ConfigSlider(default = 100,  increment = 1, limits = (10, 800))
 LCD4linux.StandbyFritzPicPos = ConfigSlider(default = 30,  increment = 2, limits = (0, 1024))
 LCD4linux.StandbyFritzPicAlign = ConfigSlider(default = 0,  increment = 10, limits = (0, 1024))
@@ -1751,18 +1773,30 @@ def setConfigStandby(w):
 def setisMediaPlayer(w):
 	global isMediaPlayer
 	isMediaPlayer = w
-def setScreenActive(w):
+def setScreenActive(w,lcd=""):
 	global ScreenActive
 	global ScreenTime
-	ScreenActive = w
+	if lcd=="":
+		if w=="0":
+			ScreenActive[-3:]=["","",""]
+		else:
+			ScreenActive[0] = w
+	else:
+		if w=="0":
+			w=""
+		ScreenActive[int(lcd)] = w
+	LCD4linux.ScreenActive.value = ScreenActive[0]
 	ScreenTime=0
 def setLCDon(w):
 	global LCDon
 	LCDon = w
+def setSaveEventListChanged(w):
+	global SaveEventListChanged
+	SaveEventListChanged = w
 def execexec(w):
 	exec(w)
 def getScreenActive():
-	return ScreenActive
+	return ScreenActive[0]
 def getConfigStandby():
 	return ConfigStandby
 def getConfigMode():
@@ -1775,6 +1809,8 @@ def getTMPL():
 	return TMPL
 def getINFO():
 	return INFO
+def getSaveEventListChanged():
+	return SaveEventListChanged
 def setPopText(w):
 	global PopText
 	PopText[0] = Code_utf8(_(strftime("%A"))) + strftime(" %H:%M")
@@ -1782,6 +1818,10 @@ def setPopText(w):
 def resetWetter():
 	global wwwWetter
 	wwwWetter = ["",""]
+
+def getSA(w):
+	return ScreenActive[0] if ScreenActive[w]=="" else ScreenActive[w]
+#	return ScreenActive[0] in w or (ScreenActive[-3:].strip() != "" and ScreenActive[-3:].strip() in w)
 
 def rmFile(fn):
 	if os.path.isfile(fn):
@@ -1833,9 +1873,9 @@ def ICSdownloads():
 	global ICS
 	global ICSlist
 	global ICSdownrun
-	if ICSrunning == True:
-		L4log("Block ICSdownloads...")
-		return
+#	if ICSrunning == True:
+#		L4log("Block ICSdownloads...")
+#		return
 	L4logE("ICSdownloads...",len(ICSlist))
 	if len(ICSlist)==0:
 		return
@@ -1989,22 +2029,26 @@ def getpiconres(x, y, full, ref, Picon2):
 	picon = str(rr.replace(":", "_")[:-1]) + ".png"
 #	print "Picon", ref, picon
 	if Picon2 == False:
-		P2 = LCD4linux.PiconCache.value
+		P2 = LCD4linux.PiconPath.value
+		P2A = LCD4linux.PiconPathAlt.value
+		P2C = LCD4linux.PiconCache.value
 	else:
-		P2 = LCD4linux.Picon2Cache.value
-	if len(P2) < 3:
+		P2 = LCD4linux.Picon2Path.value
+		P2A = LCD4linux.Picon2PathAlt.value
+		P2C = LCD4linux.Picon2Cache.value
+	if len(P2C) < 3:
 		return
-	if P2[-1:] != "/":
-		P2 += "/"
-	L4logE("get Picon",os.path.join(P2,picon))
-	if os.path.isdir(P2):
-		if not os.path.isfile(os.path.join(P2,picon)):
+	if P2C[-1:] != "/":
+		P2C += "/"
+	L4logE("get Picon",os.path.join(P2C,picon))
+	if os.path.isdir(P2C):
+		if not os.path.isfile(os.path.join(P2C,picon)):
 			L4log("Resize Picon")
 			PD = ""
-			if os.path.isfile(os.path.join(LCD4linux.PiconPath.value,picon)):
-				PD = os.path.join(LCD4linux.PiconPath.value,picon)
-			elif os.path.isfile(os.path.join(LCD4linux.PiconPathAlt.value,picon)) and len(LCD4linux.PiconPathAlt.value) > 3:
-				PD = os.path.join(LCD4linux.PiconPathAlt.value,picon)
+			if os.path.isfile(os.path.join(P2,picon)):
+				PD = os.path.join(P2,picon)
+			elif os.path.isfile(os.path.join(P2A,picon)) and len(P2A) > 3:
+				PD = os.path.join(P2A,picon)
 			L4logE("read Picon",PD)
 			if PD != "":
 				try:
@@ -2019,8 +2063,8 @@ def getpiconres(x, y, full, ref, Picon2):
 						image_new = pil_image.resize((x, y))
 					else:
 						image_new = pil_image.resize((x, y), Image.ANTIALIAS)
-					file_out = os.path.join(P2,picon)
-					s = os.statvfs(P2)
+					file_out = os.path.join(P2C,picon)
+					s = os.statvfs(P2C)
 					if (s.f_bsize * s.f_bavail / 1024) < 100:
 						L4log("Error: Cache Directory near full")
 						return ""			
@@ -2031,7 +2075,7 @@ def getpiconres(x, y, full, ref, Picon2):
 			else:
 				L4logE("no Picon found")
 				return ""
-		return os.path.join(P2,picon)
+		return os.path.join(P2C,picon)
 	else:
 		L4logE("no Cache")
 		# no picon for channel
@@ -2048,8 +2092,15 @@ def writeHelligkeit(hell,hell2,hell3,STOP = False):
 	global SamsungDevice2
 	global SamsungDevice3
 	global AktHelligkeit
+	R=""
+	if int(hell) == 0:
+		R += "1"
+	if int(hell2) == 0:
+		R += "2"
+	if int(hell3) == 0:
+		R += "3"
 	if AktHelligkeit == [hell,hell2,hell3]:
-		return
+		return R
 	AktHelligkeit = [hell,hell2,hell3]
 	L4logE("write Bright",AktHelligkeit)
 	if SamsungDevice is not None and LCD4linux.LCDType1.value[0] == "1":
@@ -2067,7 +2118,6 @@ def writeHelligkeit(hell,hell2,hell3,STOP = False):
 	if os.path.isfile("/etc/grautec/settings/takeownership") and STOP == False:
 		try:
 			if LCD4linux.LCDType1.value[0] == "4":
-#				if os.path.isfile("/etc/grautec/settings/noskin"):
 				if os.path.isfile("/tmp/usbtft-brightness"):
 					open("/tmp/usbtft-brightness","w").write(str(int(int(hell)*6.3)))
 				elif os.path.isfile("/proc/stb/lcd/oled_brightness"):
@@ -2079,9 +2129,9 @@ def writeHelligkeit(hell,hell2,hell3,STOP = False):
 					open("/proc/stb/lcd/oled_brightness","w").write(str(int(int(hell2)*25.5)))
 			if LCD4linux.LCDType3.value[0] == "4":
 				if os.path.isfile("/tmp/usbtft-brightness"):
-					open("/tmp/usbtft-brightness","w").write(str(int(int(hell2)*6.3)))
+					open("/tmp/usbtft-brightness","w").write(str(int(int(hell3)*6.3)))
 				elif os.path.isfile("/proc/stb/lcd/oled_brightness"):
-					open("/proc/stb/lcd/oled_brightness","w").write(str(int(int(hell2)*25.5)))
+					open("/proc/stb/lcd/oled_brightness","w").write(str(int(int(hell3)*25.5)))
 		except:
 			pass
 	if LCD4linux.LCDType1.value[0] == "9" or LCD4linux.LCDType2.value[0] == "9" or LCD4linux.LCDType3.value[0] == "9":
@@ -2091,6 +2141,7 @@ def writeHelligkeit(hell,hell2,hell3,STOP = False):
 		led_fd = open("/dev/lcd2",'w')
 		ioctl(led_fd, 0x10, hell)
 		led_fd.close()
+	return R
 
 def doDPF(dev,im):
 	global SamsungDevice
@@ -2364,60 +2415,68 @@ def writeLCD3(im3,quality,SAVE=True):
 			except:
 				L4log("Error write Picture3")
 
-def NextScreen():
+def NextScreen(PRESS):
 	global ScreenActive
 	global ScreenTime
+	if SaveEventListChanged == True:
+		L4log("Event Change Aktive")
+		return
 	if Standby.inStandby or ConfigStandby:
-		if ScreenActive == "1":
+		if ScreenActive[0] == "1":
 			ST = LCD4linux.StandbyScreenTime.value
-		elif ScreenActive == "2":
+		elif ScreenActive[0] == "2":
 			ST = LCD4linux.StandbyScreenTime2.value
-		elif ScreenActive == "3":
+		elif ScreenActive[0] == "3":
 			ST = LCD4linux.StandbyScreenTime3.value
-		elif ScreenActive == "4":
+		elif ScreenActive[0] == "4":
 			ST = LCD4linux.StandbyScreenTime4.value
-		elif ScreenActive == "5":
+		elif ScreenActive[0] == "5":
 			ST = LCD4linux.StandbyScreenTime5.value
-		elif ScreenActive == "6":
+		elif ScreenActive[0] == "6":
 			ST = LCD4linux.StandbyScreenTime6.value
-		elif ScreenActive == "7":
+		elif ScreenActive[0] == "7":
 			ST = LCD4linux.StandbyScreenTime7.value
-		elif ScreenActive == "8":
+		elif ScreenActive[0] == "8":
 			ST = LCD4linux.StandbyScreenTime8.value
-		elif ScreenActive == "9":
+		elif ScreenActive[0] == "9":
 			ST = LCD4linux.StandbyScreenTime9.value
-	else:
-		if ScreenActive == "1":
-			ST = LCD4linux.ScreenTime.value
-		elif ScreenActive == "2":
-			ST = LCD4linux.ScreenTime2.value
-		elif ScreenActive == "3":
-			ST = LCD4linux.ScreenTime3.value
-		elif ScreenActive == "4":
-			ST = LCD4linux.ScreenTime4.value
-		elif ScreenActive == "5":
-			ST = LCD4linux.ScreenTime5.value
-		elif ScreenActive == "6":
-			ST = LCD4linux.ScreenTime6.value
-		elif ScreenActive == "7":
-			ST = LCD4linux.ScreenTime7.value
-		elif ScreenActive == "8":
-			ST = LCD4linux.ScreenTime8.value
-		elif ScreenActive == "9":
-			ST = LCD4linux.ScreenTime9.value
-	if ScreenTime >= int(ST):
-		ScreenTime=0
-		ScreenActive = str(int(ScreenActive)+1)
-		if Standby.inStandby or ConfigStandby:
-			if int(ScreenActive) > int(LCD4linux.StandbyScreenMax.value):
-				ScreenActive = "1"
-		elif (isMediaPlayer != "" and isMediaPlayer != "radio"):
-			if int(ScreenActive) > int(LCD4linux.MPScreenMax.value):
-				ScreenActive = "1"
 		else:
-			if int(ScreenActive) > int(LCD4linux.ScreenMax.value):
-				ScreenActive = "1"
-	ScreenTime += 1
+			ST = "1"
+	else:
+		if ScreenActive[0] == "1":
+			ST = LCD4linux.ScreenTime.value
+		elif ScreenActive[0] == "2":
+			ST = LCD4linux.ScreenTime2.value
+		elif ScreenActive[0] == "3":
+			ST = LCD4linux.ScreenTime3.value
+		elif ScreenActive[0] == "4":
+			ST = LCD4linux.ScreenTime4.value
+		elif ScreenActive[0] == "5":
+			ST = LCD4linux.ScreenTime5.value
+		elif ScreenActive[0] == "6":
+			ST = LCD4linux.ScreenTime6.value
+		elif ScreenActive[0] == "7":
+			ST = LCD4linux.ScreenTime7.value
+		elif ScreenActive[0] == "8":
+			ST = LCD4linux.ScreenTime8.value
+		elif ScreenActive[0] == "9":
+			ST = LCD4linux.ScreenTime9.value
+		else:
+			ST = "1"
+	if ScreenTime >= int(ST) and int(ST) > 0 or PRESS == True:
+		ScreenTime=0
+		ScreenActive[0] = str(int(ScreenActive[0])+1)
+		if Standby.inStandby or ConfigStandby:
+			if int(ScreenActive[0]) > int(LCD4linux.StandbyScreenMax.value):
+				ScreenActive[0] = "1"
+		elif (isMediaPlayer != "" and isMediaPlayer != "radio"):
+			if int(ScreenActive[0]) > int(LCD4linux.MPScreenMax.value):
+				ScreenActive[0] = "1"
+		else:
+			if int(ScreenActive[0]) > int(LCD4linux.ScreenMax.value):
+				ScreenActive[0] = "1"
+	if LCD4linux.StandbyScreenTime.value > 0 or LCD4linux.ScreenTime.value > 0:
+		ScreenTime += 1
 
 def _getDirs(base):
 	return [x for x in glob.iglob(os.path.join( base, '*')) if os.path.isdir(x) ]
@@ -3222,7 +3281,7 @@ class L4LWorker(Thread):
 			Briefkasten.task_done() 
 #			print "worker e", self.index
 
-	def getICS(self,name,col):
+ 	def getICS(self,name,col):
 		global ICS
 		global ICSlist
 		if len(name)<3:
@@ -3292,6 +3351,7 @@ class L4LWorker(Thread):
 		self.getICS(LCD4linux.CalHttp.value,1)
 		self.getICS(LCD4linux.CalHttp2.value,2)
 		self.getICS(LCD4linux.CalHttp3.value,3)
+		ICSdownloads()
 		ICSrunning = False
 	
 	def hookWebif(self):
@@ -3811,7 +3871,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 		L4log("init Ende")
 
 	def NextScreenKey(self):
-		NextScreen()
+		NextScreen(True)
 
 	def ResetInfos(self):
 		global FritzList
@@ -4027,6 +4087,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 					self.list1.append(getConfigListEntry(_("- Picture [ok]>"), LCD4linux.RecordingPath))
 			self.list1.append(getConfigListEntry(_("Double-button switches"), LCD4linux.KeySwitch))
 			self.list1.append(getConfigListEntry(_("Key for Screen Change"), LCD4linux.KeyScreen))
+			self.list1.append(getConfigListEntry(_("Key for Screen On/Off"), LCD4linux.KeyOff))
 			self.list1.append(getConfigListEntry(_("FritzCall Picture Path [ok]>"), LCD4linux.FritzPath))
 			self.list1.append(getConfigListEntry(_("FritzCall Number of List Entries"), LCD4linux.FritzLines))
 			self.list1.append(getConfigListEntry(_("FritzCall Number of Pictures"), LCD4linux.FritzPictures))
@@ -4047,7 +4108,6 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			self.list1.append(getConfigListEntry(_("- Color"), LCD4linux.CalHttp3Color))
 			self.list1.append(getConfigListEntry(_("Calendar Line Thickness"), LCD4linux.CalLine))
 			self.list1.append(getConfigListEntry(_("Calendar Day Event Preview"), LCD4linux.CalDays))
-			self.list1.append(getConfigListEntry(_("Calendar Background Processing"), LCD4linux.CalThread))
 			self.list1.append(getConfigListEntry(_("Calendar Transparency"), LCD4linux.CalTransparenz))
 			self.list1.append(getConfigListEntry(_("Tuner Color"), LCD4linux.TunerColor))
 			self.list1.append(getConfigListEntry(_("Tuner Color Active"), LCD4linux.TunerColorActive))
@@ -4082,6 +4142,8 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			self.list1.append(getConfigListEntry(_("WebIF Refresh [s]"), LCD4linux.WebIfRefresh))
 			self.list1.append(getConfigListEntry(_("WebIF Refresh Type"), LCD4linux.WebIfType))
 			self.list1.append(getConfigListEntry(_("WebIF Init Delay"), LCD4linux.WebIfInitDelay))
+			self.list1.append(getConfigListEntry(_("WebIF IP Allow"), LCD4linux.WebIfAllow))
+			self.list1.append(getConfigListEntry(_("WebIF IP Deny"), LCD4linux.WebIfDeny))
 			self.list1.append(getConfigListEntry(_("Save as Picture for WebIF"), LCD4linux.SavePicture))
 			self.list1.append(getConfigListEntry(_("LCD Custom Width"), LCD4linux.SizeW))
 			self.list1.append(getConfigListEntry(_("LCD Custom Height"), LCD4linux.SizeH))
@@ -4121,6 +4183,8 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list2.append(getConfigListEntry(_("- Split Screen"), LCD4linux.Picon2Split))
 				self.list2.append(getConfigListEntry(_("- Full Screen"), LCD4linux.Picon2FullScreen))
 				self.list2.append(getConfigListEntry(_("- Text Size"), LCD4linux.Picon2TextSize))
+				self.list2.append(getConfigListEntry(_("- Picon Path [ok]>"), LCD4linux.Picon2Path))
+				self.list2.append(getConfigListEntry(_("- Picon Path 2 [ok]>"), LCD4linux.Picon2PathAlt))
 				self.list2.append(getConfigListEntry(_("- Picon Cache Path [ok]>"), LCD4linux.Picon2Cache))
 			self.list2.append(getConfigListEntry(_("Clock"), LCD4linux.Clock))
 			if LCD4linux.Clock.value != "0":
@@ -4347,6 +4411,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list2.append(getConfigListEntry(_("- Color"), LCD4linux.DevColor))
 				self.list2.append(getConfigListEntry(_("- Shadow Edges"), LCD4linux.DevShadow))
 				self.list2.append(getConfigListEntry(_("- Font"), LCD4linux.DevFont))
+				self.list2.append(getConfigListEntry(_("- Type"), LCD4linux.DevType))
 				self.list2.append(getConfigListEntry(_("- extra Info"), LCD4linux.DevExtra))
 				self.list2.append(getConfigListEntry(_("- Device Name"), LCD4linux.DevName1))
 				self.list2.append(getConfigListEntry(_("- Device Name"), LCD4linux.DevName2))
@@ -4568,6 +4633,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list2.append(getConfigListEntry(_("- Alignment"), LCD4linux.FritzAlign))
 				self.list2.append(getConfigListEntry(_("- Color"), LCD4linux.FritzColor))
 				self.list2.append(getConfigListEntry(_("- Background Color"), LCD4linux.FritzBackColor))
+				self.list2.append(getConfigListEntry(_("- Type"), LCD4linux.FritzType))
 				self.list2.append(getConfigListEntry(_("- Picture Size"), LCD4linux.FritzPicSize))
 				self.list2.append(getConfigListEntry(_("- Picture Position"), LCD4linux.FritzPicPos))
 				self.list2.append(getConfigListEntry(_("- Picture Alignment"), LCD4linux.FritzPicAlign))
@@ -4609,6 +4675,8 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list2.append(getConfigListEntry(_("- Alignment"), LCD4linux.IconBarAlign))
 				self.list2.append(getConfigListEntry(_("- Split Screen"), LCD4linux.IconBarSplit))
 				self.list2.append(getConfigListEntry(_("- Type"), LCD4linux.IconBarType))
+				self.list2.append(getConfigListEntry(_("- Popup Screen"), LCD4linux.IconBarPopup))
+				self.list2.append(getConfigListEntry(_("- Popup LCD"), LCD4linux.IconBarPopupLCD))
 			self.list2.append(getConfigListEntry(_("Rectangle 1"), LCD4linux.Box1))
 			if LCD4linux.Box1.value != "0":
 				self.list2.append(getConfigListEntry(_("- which LCD"), LCD4linux.Box1LCD))
@@ -4637,10 +4705,13 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			self.list3.append(getConfigListEntry(_("- Screens used for Changing"), LCD4linux.MPScreenMax))
 			self.list3.append(getConfigListEntry(_("- LCD 1 Background Color"), LCD4linux.MPLCDColor1))
 			self.list3.append(getConfigListEntry(_("- LCD 1 Background-Picture [ok]>"), LCD4linux.MPLCDBild1))
+			self.list3.append(getConfigListEntry(_("- LCD 1 Brightness [no SPF]"), LCD4linux.MPHelligkeit))
 			self.list3.append(getConfigListEntry(_("- LCD 2 Background Color"), LCD4linux.MPLCDColor2))
 			self.list3.append(getConfigListEntry(_("- LCD 2 Background-Picture [ok]>"), LCD4linux.MPLCDBild2))
+			self.list3.append(getConfigListEntry(_("- LCD 2 Brightness [no SPF]"), LCD4linux.MPHelligkeit2))
 			self.list3.append(getConfigListEntry(_("- LCD 3 Background Color"), LCD4linux.MPLCDColor3))
 			self.list3.append(getConfigListEntry(_("- LCD 3 Background-Picture [ok]>"), LCD4linux.MPLCDBild3))
+			self.list3.append(getConfigListEntry(_("- LCD 3 Brightness [no SPF]"), LCD4linux.MPHelligkeit3))
 			self.list3.append(getConfigListEntry(_("Title"), LCD4linux.MPTitle))
 			if LCD4linux.MPTitle.value != "0":
 				self.list3.append(getConfigListEntry(_("- which LCD"), LCD4linux.MPTitleLCD))
@@ -4807,6 +4878,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list3.append(getConfigListEntry(_("- Color"), LCD4linux.MPDevColor))
 				self.list3.append(getConfigListEntry(_("- Shadow Edges"), LCD4linux.MPDevShadow))
 				self.list3.append(getConfigListEntry(_("- Font"), LCD4linux.MPDevFont))
+				self.list3.append(getConfigListEntry(_("- Type"), LCD4linux.MPDevType))
 				self.list3.append(getConfigListEntry(_("- extra Info"), LCD4linux.MPDevExtra))
 				self.list3.append(getConfigListEntry(_("- Device Name"), LCD4linux.MPDevName1))
 				self.list3.append(getConfigListEntry(_("- Device Name"), LCD4linux.MPDevName2))
@@ -4968,6 +5040,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list3.append(getConfigListEntry(_("- Alignment"), LCD4linux.MPFritzAlign))
 				self.list3.append(getConfigListEntry(_("- Color"), LCD4linux.MPFritzColor))
 				self.list3.append(getConfigListEntry(_("- Background Color"), LCD4linux.MPFritzBackColor))
+				self.list3.append(getConfigListEntry(_("- Type"), LCD4linux.MPFritzType))
 				self.list3.append(getConfigListEntry(_("- Picture Size"), LCD4linux.MPFritzPicSize))
 				self.list3.append(getConfigListEntry(_("- Picture Position"), LCD4linux.MPFritzPicPos))
 				self.list3.append(getConfigListEntry(_("- Picture Alignment"), LCD4linux.MPFritzPicAlign))
@@ -5009,6 +5082,8 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list3.append(getConfigListEntry(_("- Alignment"), LCD4linux.MPIconBarAlign))
 				self.list3.append(getConfigListEntry(_("- Split Screen"), LCD4linux.MPIconBarSplit))
 				self.list3.append(getConfigListEntry(_("- Type"), LCD4linux.MPIconBarType))
+				self.list3.append(getConfigListEntry(_("- Popup Screen"), LCD4linux.MPIconBarPopup))
+				self.list3.append(getConfigListEntry(_("- Popup LCD"), LCD4linux.MPIconBarPopupLCD))
 			self.list3.append(getConfigListEntry(_("Rectangle 1"), LCD4linux.MPBox1))
 			if LCD4linux.MPBox1.value != "0":
 				self.list3.append(getConfigListEntry(_("- which LCD"), LCD4linux.MPBox1LCD))
@@ -5032,19 +5107,19 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			self.list4 = []
 			self.list4.append(getConfigListEntry(_("LCD Display"), LCD4linux.Standby))
 			self.list4.append(getConfigListEntry(_("- Screens used for Changing"), LCD4linux.StandbyScreenMax))
-			self.list4.append(getConfigListEntry(_("- LCD 1 Brightness [no SPF]"), LCD4linux.StandbyHelligkeit))
-			self.list4.append(getConfigListEntry(_("- LCD 2 Brightness [no SPF]"), LCD4linux.StandbyHelligkeit2))
-			self.list4.append(getConfigListEntry(_("- LCD 3 Brightness [no SPF]"), LCD4linux.StandbyHelligkeit3))
 			self.list4.append(getConfigListEntry(_("- Backlight Off [disable set Off=On]"), LCD4linux.StandbyLCDoff))
 			self.list4.append(getConfigListEntry(_("- Backlight On"), LCD4linux.StandbyLCDon))
 			self.list4.append(getConfigListEntry(_("- Backlight Weekend Off [disable set Off=On]"), LCD4linux.StandbyLCDWEoff))
 			self.list4.append(getConfigListEntry(_("- Backlight Weekend On"), LCD4linux.StandbyLCDWEon))
 			self.list4.append(getConfigListEntry(_("- LCD 1 Background Color"), LCD4linux.StandbyLCDColor1))
 			self.list4.append(getConfigListEntry(_("- LCD 1 Background-Picture [ok]>"), LCD4linux.StandbyLCDBild1))
+			self.list4.append(getConfigListEntry(_("- LCD 1 Brightness [no SPF]"), LCD4linux.StandbyHelligkeit))
 			self.list4.append(getConfigListEntry(_("- LCD 2 Background Color"), LCD4linux.StandbyLCDColor2))
 			self.list4.append(getConfigListEntry(_("- LCD 2 Background-Picture [ok]>"), LCD4linux.StandbyLCDBild2))
+			self.list4.append(getConfigListEntry(_("- LCD 2 Brightness [no SPF]"), LCD4linux.StandbyHelligkeit2))
 			self.list4.append(getConfigListEntry(_("- LCD 3 Background Color"), LCD4linux.StandbyLCDColor3))
 			self.list4.append(getConfigListEntry(_("- LCD 3 Background-Picture [ok]>"), LCD4linux.StandbyLCDBild3))
+			self.list4.append(getConfigListEntry(_("- LCD 3 Brightness [no SPF]"), LCD4linux.StandbyHelligkeit3))
 			self.list4.append(getConfigListEntry(_("Screen 1 Changing Time"), LCD4linux.StandbyScreenTime))
 			if LCD4linux.StandbyScreenTime.value != "0":
 				self.list4.append(getConfigListEntry(_("- Screen 2 Changing Time"), LCD4linux.StandbyScreenTime2))
@@ -5148,6 +5223,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list4.append(getConfigListEntry(_("- Color"), LCD4linux.StandbyDevColor))
 				self.list4.append(getConfigListEntry(_("- Shadow Edges"), LCD4linux.StandbyDevShadow))
 				self.list4.append(getConfigListEntry(_("- Font"), LCD4linux.StandbyDevFont))
+				self.list4.append(getConfigListEntry(_("- Type"), LCD4linux.StandbyDevType))
 				self.list4.append(getConfigListEntry(_("- extra Info"), LCD4linux.StandbyDevExtra))
 				self.list4.append(getConfigListEntry(_("- Device Name"), LCD4linux.StandbyDevName1))
 				self.list4.append(getConfigListEntry(_("- Device Name"), LCD4linux.StandbyDevName2))
@@ -5360,6 +5436,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list4.append(getConfigListEntry(_("- Alignment"), LCD4linux.StandbyFritzAlign))
 				self.list4.append(getConfigListEntry(_("- Color"), LCD4linux.StandbyFritzColor))
 				self.list4.append(getConfigListEntry(_("- Background Color"), LCD4linux.StandbyFritzBackColor))
+				self.list4.append(getConfigListEntry(_("- Type"), LCD4linux.StandbyFritzType))
 				self.list4.append(getConfigListEntry(_("- Picture Size"), LCD4linux.StandbyFritzPicSize))
 				self.list4.append(getConfigListEntry(_("- Picture Position"), LCD4linux.StandbyFritzPicPos))
 				self.list4.append(getConfigListEntry(_("- Picture Alignment"), LCD4linux.StandbyFritzPicAlign))
@@ -5401,6 +5478,8 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list4.append(getConfigListEntry(_("- Alignment"), LCD4linux.StandbyIconBarAlign))
 				self.list4.append(getConfigListEntry(_("- Split Screen"), LCD4linux.StandbyIconBarSplit))
 				self.list4.append(getConfigListEntry(_("- Type"), LCD4linux.StandbyIconBarType))
+				self.list4.append(getConfigListEntry(_("- Popup Screen"), LCD4linux.StandbyIconBarPopup))
+				self.list4.append(getConfigListEntry(_("- Popup LCD"), LCD4linux.StandbyIconBarPopupLCD))
 			self.list4.append(getConfigListEntry(_("Rectangle 1"), LCD4linux.StandbyBox1))
 			if LCD4linux.StandbyBox1.value != "0":
 				self.list4.append(getConfigListEntry(_("- which LCD"), LCD4linux.StandbyBox1LCD))
@@ -5457,7 +5536,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 		try:
 			if sel.value.lower().startswith("http"):
 				return
-			if sel in [LCD4linux.PiconPath, LCD4linux.PiconCache, LCD4linux.Picon2Cache, LCD4linux.PiconPathAlt, LCD4linux.ConfigPath, LCD4linux.WetterPath, LCD4linux.MPCoverPath1, LCD4linux.MPCoverPath2, LCD4linux.FritzPath, LCD4linux.CalPath, LCD4linux.SatPath, LCD4linux.ProvPath, LCD4linux.MoonPath]:
+			if sel in [LCD4linux.PiconPath, LCD4linux.Picon2Path, LCD4linux.PiconCache, LCD4linux.Picon2Cache, LCD4linux.PiconPathAlt, LCD4linux.Picon2PathAlt, LCD4linux.ConfigPath, LCD4linux.WetterPath, LCD4linux.MPCoverPath1, LCD4linux.MPCoverPath2, LCD4linux.FritzPath, LCD4linux.CalPath, LCD4linux.SatPath, LCD4linux.ProvPath, LCD4linux.MoonPath]:
 				L4log("select Dir 1")
 				self.session.openWithCallback(self.dirSelected, LCDdisplayFile, text = _("Choose dir"), FileName = self["config"].getCurrent()[1].value, showFiles = False)
 			elif sel in [LCD4linux.LCDBild1, LCD4linux.LCDBild2, LCD4linux.MPLCDBild1, LCD4linux.MPLCDBild2, LCD4linux.StandbyLCDBild1, LCD4linux.StandbyLCDBild2, LCD4linux.FritzFrame]:
@@ -5487,12 +5566,16 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				dir1 += "/"
 			if sel == LCD4linux.PiconPath:
 				LCD4linux.PiconPath.value = dir1
+			elif sel == LCD4linux.Picon2Path:
+				LCD4linux.Picon2Path.value = dir1
 			elif sel == LCD4linux.PiconCache:
 				LCD4linux.PiconCache.value = dir1
 			elif sel == LCD4linux.Picon2Cache:
 				LCD4linux.Picon2Cache.value = dir1
 			elif sel == LCD4linux.PiconPathAlt:
 				LCD4linux.PiconPathAlt.value = dir1
+			elif sel == LCD4linux.Picon2PathAlt:
+				LCD4linux.Picon2PathAlt.value = dir1
 			elif sel == LCD4linux.ConfigPath:
 				LCD4linux.ConfigPath.value = dir1
 			elif sel == LCD4linux.WetterPath:
@@ -5634,6 +5717,8 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			isMediaPlayer = ""
 		if LCD4linux.PiconPath.value == LCD4linux.PiconCache.value:
 			LCD4linux.PiconCache.value = "/usr/share/enigma2/piconcache/"
+		if LCD4linux.Picon2Path.value == LCD4linux.Picon2Cache.value:
+			LCD4linux.Picon2Cache.value = "/usr/share/enigma2/picon2cache/"
 		if self.SavePiconSize != LCD4linux.PiconSize.value or self.SavePiconFullScreen != LCD4linux.PiconFullScreen.value or self.SavePiconTransparenz != LCD4linux.PiconTransparenz.value:
 			self.SavePiconSize = LCD4linux.PiconSize.value
 			self.SavePiconFullScreen = LCD4linux.PiconFullScreen.value
@@ -5663,7 +5748,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			rmFile(PICmeteo)
 		if self.SaveScreenActive != LCD4linux.ScreenActive.value:
 			self.SaveScreenActive = LCD4linux.ScreenActive.value
-			ScreenActive = self.SaveScreenActive
+			ScreenActive[0] = self.SaveScreenActive
 		if LCD4linux.BildFile.isChanged() or LCD4linux.StandbyBildFile.isChanged() or LCD4linux.Bild2File.isChanged() or LCD4linux.StandbyBild2File.isChanged() or LCD4linux.Bild3File.isChanged() or LCD4linux.StandbyBild3File.isChanged() or LCD4linux.MPBildFile.isChanged() or LCD4linux.MPBild2File.isChanged():
 			getBilder()
 		if LCD4linux.FritzPictures.isChanged() or LCD4linux.FritzType.isChanged() or LCD4linux.FritzPicSize.isChanged() or LCD4linux.MPFritzPicSize.isChanged() or LCD4linux.StandbyFritzPicSize.isChanged():
@@ -5839,7 +5924,7 @@ class UpdateStatus(Screen):
 		global ScreenActive
 		Screen.__init__(self, session)
 
-		ScreenActive = LCD4linux.ScreenActive.value
+		ScreenActive[0] = LCD4linux.ScreenActive.value
 		self.ServiceChangeRunning = False
 		self.SaveTXTfile = 0
 		self.SaveMPTXTfile = 0
@@ -5934,6 +6019,9 @@ class UpdateStatus(Screen):
 		self.QuickTimer = eTimer()
 		self.QuickTimer.callback.append(self.QuickBildTimer)
 
+		self.CheckRefresh = eTimer()
+		self.CheckRefresh.callback.append(self.CallCheckRefresh)
+
 		if BitrateRegistred == True:
 			self.BitrateTimer = eTimer()
 			self.BitrateTimer.callback.append(self.runBitrateTimer)
@@ -5965,6 +6053,7 @@ class UpdateStatus(Screen):
 		getBilder()
 		self.StatusTimer.startLongTimer(int(LCD4linux.FastMode.value))
 		self.QuickTimer.start(int(LCD4linux.BilderQuick.value),True)
+		self.CheckRefresh.start(500,True)
 		self.SamsungStart()
 		self.DpfStart()
 		self.onTunerCount()
@@ -6002,7 +6091,7 @@ class UpdateStatus(Screen):
 			self.TunerCallBack=True
 			res_mgr.frontendUseMaskChanged.get().append(self.tunerUseMaskChanged)
 		else:
-			print "[LCD4linux] ERROR no res_mgr!!"
+			print "[ERROR]no res_mgr!!"
 			
 	def offTunerCount(self):
 		if self.TunerCallBack:
@@ -6011,7 +6100,7 @@ class UpdateStatus(Screen):
 				self.TunerCallBack=False
 				res_mgr.frontendUseMaskChanged.get().remove(self.tunerUseMaskChanged)
 			else:
-				print "[LCD4linux] ERROR no res_mgr!!"
+				print "[ERROR]no res_mgr!!"
 			
 	def tunerUseMaskChanged(self, mask):
 		global TunerMask
@@ -6024,6 +6113,19 @@ class UpdateStatus(Screen):
 		else:
 			L4log("Queue full, Thread hanging?")
 		self.QuickTimer.start(int(LCD4linux.BilderQuick.value),True)
+
+	def CallCheckRefresh(self):
+		global SaveEventListChanged
+		self.CheckRefresh.stop()
+		if L4LElist.getRefresh() == True:
+			if L4LElist.getScreen() != "":
+				SaveEventListChanged = L4LElist.getHold()
+				setScreenActive(str(L4LElist.getScreen()),str(L4LElist.getLcd()))
+				L4LElist.setScreen("")
+				L4LElist.setHold(False)
+			L4LElist.resetRefresh()
+			self.restartTimer()
+		self.CheckRefresh.start(500,True)
 
 	def getNetatmo(self):
 		if NetatmoOK==True:
@@ -6075,7 +6177,7 @@ class UpdateStatus(Screen):
 			self.getGoogleCover(self.LgetGoogleCover[0],self.LgetGoogleCover[1],self.LgetGoogleCover[2])
 		if FritzTime > 0:
 			FritzTime-=1
-		SaveScreenActive = ScreenActive
+		SaveScreenActive = ScreenActive[0]
 #		print "Desktop",getDesktop(0).size().width()
 		if LCD4linux.Text.value != "0":
 			if os.path.isfile(LCD4linux.TextFile.value):
@@ -6126,7 +6228,10 @@ class UpdateStatus(Screen):
 					self.SaveStandbyBildfile = 0
 					self.restartTimer()
 		if (LCD4linux.ScreenTime.value != "0" and not Standby.inStandby) or (LCD4linux.StandbyScreenTime.value != "0" and Standby.inStandby):
-			NextScreen()
+			NextScreen(False)
+		elif SaveEventListChanged == False:
+			ScreenActive[0] = LCD4linux.ScreenActive.value
+
 		if LCD4linux.BilderTime.value != "0":
 			if BilderTime >= int(LCD4linux.BilderTime.value):
 				BilderTime=0
@@ -6155,17 +6260,14 @@ class UpdateStatus(Screen):
 		if isVideoPlaying !=0:
 			isVideoPlaying+=1
 #		print "----",LCD4linuxPIC.TimeZone, LCD4linuxPIC.Long, LCD4linuxPIC.Lat
-#		print "--------",isVideoPlaying, isMediaPlayer, ConfigMode, ScreenActive
+#		print "--------",isVideoPlaying, isMediaPlayer, ConfigMode, ScreenActive[0]
 #		print BilderTime, OSDon,self.StandbyChanged,Standby.inStandby
-		if strftime("%M")!=self.DataMinute or BilderTime == 1 or self.StandbyChanged != Standby.inStandby or ConfigMode or (ScreenActive != SaveScreenActive) or isVideoPlaying > 3 or OSDon == 3 or os.path.isfile(Push) or FritzTime > 0:
+		if strftime("%M")!=self.DataMinute or BilderTime == 1 or self.StandbyChanged != Standby.inStandby or ConfigMode or (ScreenActive[0] != SaveScreenActive) or isVideoPlaying > 3 or OSDon == 3 or FritzTime > 0:
 			L4log("Data-Build")
-			if LCD4linux.CalThread.value == True:
-				if ICSdownrun == False:
-					Briefkasten.put(8)
-				else:
-					L4log("ICS is already running")
-			else:
-				ICSdownloads()
+#			if ICSdownrun == False:
+#				Briefkasten.put(8)
+#			else:
+#				L4log("ICS is already running")
 			isVideoPlaying = 0
 			if strftime("%M")!=self.DataMinute:
 				collected = gc.collect()
@@ -6221,14 +6323,14 @@ class UpdateStatus(Screen):
 					getWWW()
 			self.DataMinute = strftime("%M")
 			if self.StandbyChanged != Standby.inStandby:
-				ScreenActive = "1"
+				ScreenActive = ["1","","",""]
+				LCD4linux.ScreenActive.value = ScreenActive[0]
 				ScreenTime = 0
 				getBilder()
 				rmFile(PICfritz)
 				getWWW()
 			self.StandbyChanged = Standby.inStandby 
 			self.restartTimer()
-			rmFile(Push)
 		if ConfigMode == True:
 			self.StatusTimer.startLongTimer(2)
 		else:
@@ -6489,34 +6591,49 @@ class UpdateStatus(Screen):
 		global OSDtimer
 		global LCDon
 		global ScreenTime
-#		if LCD4linux.OSD.value == "0":
-#			return 0
+		global ScreenActive
+		global SaveEventListChanged
+		if SaveEventListChanged == True or ScreenActive[-3:] != ["","",""]:
+			L4log("Reset Event Changed")
+			SaveEventListChanged = False
+			ScreenActive = ["1","","",""]
+			LCD4linux.ScreenActive.value = ScreenActive[0]
+			ScreenTime = 0
+			self.restartTimer()
 		L4logE("Key", str(key)+" "+str(flag)) # Long: flag=3 
 		self.k = int(LCD4linux.KeyScreen.value[:3])
-		if key == 113:
+		self.ko = int(LCD4linux.KeyOff.value[:3])
+		if key == 113: # MUTE
 			if len(PopText[1])>2:
 				setPopText("")
 				self.restartTimer()
 		if LCD4linux.KeySwitch.value == True:
-			if LCD4linux.KeyScreen.value[-1:] == "l" and key == self.k and flag == 3:
-				ScreenTime = 9999
-				L4logE("Restart at longkey")
-				NextScreen()
-				self.restartTimer()
+			if flag == 3:
+				if LCD4linux.KeyScreen.value[-1:] == "l" and key == self.k:
+					ScreenTime = 9999
+					L4logE("Restart at Scr-longkey")
+					NextScreen(True)
+					LCD4linux.ScreenActive.value = ScreenActive[0]
+					self.restartTimer()
+				elif LCD4linux.KeyOff.value[-1:] == "l" and key == self.ko:
+					L4logE("Restart at Off-longkey")
+					LCDon = True if LCDon == False else False
+					self.restartTimer()
 			else:
 				if time()-self.KeyTime > 2 or (isMediaPlayer != "" and isMediaPlayer != "radio"):
 					self.KeyDoppel = 0
 				self.KeyTime = time()
 				if self.KeyDoppel == key and flag == 0:
 					self.KeyDoppel = 0
-					if key == 165:
+					if LCD4linux.KeyOff.value[-1:] != "l" and key == self.ko: # PREVIOUS
 						LCDon = True if LCDon == False else False
-						L4logE("Restart at doublekey",key)
+						L4logE("Restart at Off-doublekey",key)
 						self.restartTimer()
-					elif key == self.k:
+					elif LCD4linux.KeyScreen.value[-1:] != "l" and key == self.k: # FORWARD / INFO
 						ScreenTime = 9999
-						NextScreen()
-						L4logE("Restart at doublekey",key)
+						NextScreen(True)
+						LCD4linux.ScreenActive.value = ScreenActive[0]
+						L4logE("Restart at Scr-doublekey",key)
 						self.restartTimer()
 				elif flag == 0:
 					self.KeyDoppel = key
@@ -6525,7 +6642,7 @@ class UpdateStatus(Screen):
 						OSDtimer = 1
 						L4logE("Restart at key and OSD=2")
 						self.restartTimer()
-				if key == 165 or key == self.k:
+				if key == self.ko or key == self.k:
 					if len(PopText[1])>2:
 						setPopText("")
 						self.restartTimer()
@@ -6535,7 +6652,7 @@ class UpdateStatus(Screen):
 			self.restartTimer()
 			OSDon = 2
 			OSDtimer = 0
-		if ScreenActive in LCD4linux.Vol.value or ScreenActive in LCD4linux.MPVol.value:
+		if ScreenActive[0] in LCD4linux.Vol.value or ScreenActive[0] in LCD4linux.MPVol.value:
 			if key in [114,115]:
 				L4logE("Restart at volume")
 				self.restartTimer()
@@ -6755,9 +6872,12 @@ class UpdateStatus(Screen):
 			else:
 				quad = ""
 				album = "dvd "+album
-			url = "http://images.google.de/images?q=%s+%s&btnG=Bilder-Suchee&tbs=isz:m%s" % (quote(album.encode("latin","ignore")),quote(artist.encode("latin","ignore")),quad)
-			L4log("Cover Search",url)
-			sendUrlCommand(url, None,10).addCallback(self.googleImageCallback).addErrback(self.coverDownloadFailed)
+			try:
+				url = "http://images.google.de/images?q=%s+%s&btnG=Bilder-Suchee&tbs=isz:m%s" % (quote(Code_utf8(album).encode("latin","ignore")),quote(Code_utf8(artist).encode("latin","ignore")),quad)
+				L4log("Cover Search",url)
+				sendUrlCommand(url, None,10).addCallback(self.googleImageCallback).addErrback(self.coverDownloadFailed)
+			except:
+				L4log("Google Cover Error")
 			self.LgetGoogleCover = None
 
 	def googleImageCallback(self,result):
@@ -6768,14 +6888,11 @@ class UpdateStatus(Screen):
 			url = url.replace("%25","%")
 			parts = url.split("/")
 			filename=GoogleCover
-#			filename = parts[-1]
-#			filename = "/tmp/" + parts[-1]
 			L4log("downloading cover from",url)
 			downloadPage(url , filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(self.coverDownloadFailed)
 		else:
 			self.CoverCount += 1
 			L4log("no downloads found")
-
 
 def LCD4linuxPICThread(self,session):
 	global ThreadRunning
@@ -8011,7 +8128,7 @@ def LCD4linuxPIC(self,session):
 		vt = "-v" if vidosd == "0" else ""
 		im = Image.new('RGB', (int(x), int(y)), (0, 0, 0, 0))
 #		GrabTV("/usr/bin/grab %s -j 40 -r %s /tmp/lcd4linux/tvgrab.jpg" % (vt,x))
-		while TVrunning == True and ScreenActive in LCD4linux.TV.value:
+		while TVrunning == True and ScreenActive[0] in LCD4linux.TV.value:
 			GrabTV("/usr/bin/grab %s -j 40 -r %s %stvgrab.jpg" % (vt,x,TMPL))
 #			if lcd in ["1","3"]:
 #				Brief1.put([GrabTV,"/usr/bin/grab %s -j 40 -r %s %stvgrab.jpg" % (vt,x,TMPL)])
@@ -8129,8 +8246,8 @@ def LCD4linuxPIC(self,session):
 		for timerlist in self.Ltimer_list:
 			if timerlist.disabled == 0 and timerlist.justplay == 0:
 				if timercount < int(ConfigLines):
-					a = config.recording.margin_before.value*60 if ConfigType == "0" else 0
-					b = config.recording.margin_after.value*60 if ConfigType == "0" else 0
+					a = config.recording.margin_before.getValue()*60 if ConfigType == "0" else 0
+					b = config.recording.margin_after.getValue()*60 if ConfigType == "0" else 0
 					begin = strftime("%d. %H:%M", localtime(int(timerlist.begin)+a))
 					timer_name = Code_utf8(timerlist.name)
 					w,h = draw.textsize(begin, font=font)
@@ -8466,7 +8583,6 @@ def LCD4linuxPIC(self,session):
 		POSX = 0
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
-			self.LtransponderData = None
 		if self.LtransponderData is not None:
 			transponderData = self.LtransponderData
 			orbital = 0
@@ -8752,7 +8868,10 @@ def LCD4linuxPIC(self,session):
 				w = int(v[1])+int(v[2])+int(v[3])+int(v[4])
 				wa = w-CPUtotal
 				wi = int(v[4])-CPUidle
-				x = 100-100.0/wa*wi
+				if wa*wi > 0:
+					x = 100-100.0/wa*wi
+				else:
+					x = 0
 				i += " %.01f%%" % x
 				CPUtotal = w
 				CPUidle = int(v[4])
@@ -8777,7 +8896,7 @@ def LCD4linuxPIC(self,session):
 		MAX_W,MAX_H = im.size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
-		if self.LsVideoWidth is not None:
+		if self.LsVideoWidth is not None and self.LsVideoHeight is not None:
 			dat = "mpeg.png"
 			if self.Laudiodescription is not None:
 				dat = getAudio(self.Laudiodescription)
@@ -8874,17 +8993,20 @@ def LCD4linuxPIC(self,session):
 					L4log("Ping-Error",TT)
 
 # Data-Devices
-	def putDev((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigList, ConfigShadow, ConfigFont), draw, im):
+	def putDev((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigList, ConfigShadow, ConfigType, ConfigFont), draw, im):
 		global DeviceRemove
 		MAX_W,MAX_H = im.size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
 		font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 		w,h = draw.textsize("MByte", font=font)
-		co = 0
-		for l in ConfigList:
-			if len(l)>0:
-				co += 1
+		if ConfigType == "0":
+			co = 0
+			for l in ConfigList:
+				if len(l)>0:
+					co += 1
+		else:
+			co = 1
 		ly = ConfigPos
 		lx = getSplit(ConfigSplit,ConfigAlign,MAX_W,(w+20)*co)
 		for l in ConfigList:
@@ -8928,7 +9050,10 @@ def LCD4linuxPIC(self,session):
 					ShadowText(draw,lx+20,ly+h,"%sByte" % Einh,font,ConfigColor,ConfigShadow)
 					draw.rectangle((lx+8,ly,lx+18,ly+(2*h)), outline="lime", fill="lime")
 					draw.rectangle((lx+8,ly,lx+18,ly+Fpixel), outline="yellow", fill="yellow")
-					lx += w+20
+					if ConfigType == "0":
+						lx += w+20
+					else:
+						ly += 2*h+3
 				else:
 					L4log("remove Device",l)
 					DeviceRemove.append(l)
@@ -9191,7 +9316,7 @@ def LCD4linuxPIC(self,session):
 		return
 
 # show FritzCall
-	def putFritz((ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigPicPos, ConfigPicSize, ConfigPicAlign, ConfigShadow, ConfigFont), draw, im):
+	def putFritz((ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigType, ConfigPicPos, ConfigPicSize, ConfigPicAlign, ConfigShadow, ConfigFont), draw, im):
 		MAX_W,MAX_H = im.size
 		if FritzTime > 1:
 			if len(FritzList) == 0:
@@ -9264,7 +9389,7 @@ def LCD4linuxPIC(self,session):
 				for FL in reversed(FritzList+event):
 					if i < int(LCD4linux.FritzLines.value):
 						POSXi = POSX
-						if imW is not None:
+						if imW is not None and "-" not in ConfigType:
 							imW2 = imW
 							if FL[0]!="RING":
 								imW2 = imW2.transpose(Image.FLIP_LEFT_RIGHT)
@@ -9356,8 +9481,11 @@ def LCD4linuxPIC(self,session):
 					POSY += ConfigSize
 
 # show Ereignis Icon Bar
-	def putIconBar((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType), draw, im):
+	def putIconBar((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType, ConfigPopup, ConfigPopupLCD), draw, im):
+		global SaveEventList
+		global SaveEventListChanged
 		MAX_W,MAX_H = im.size
+		EVENTLIST = ["","",""]
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
 		find = ""
@@ -9370,20 +9498,34 @@ def LCD4linuxPIC(self,session):
 							break
 			if "A" in find:
 				break
+		EVENTLIST[0]=PopMailUid
 		if ConfigMode == True and "A" not in find:
 			find += "A"
 
-		if len(FritzList) > 0 or ConfigMode == True:
+		if len(FritzList) > 0:
+			EVENTLIST[1]=FritzList[-1]
 			find += "B"
 
+		icount=0
 		for t in sorted(ICS):
 			x=datetime.strptime(t,"%Y-%m-%d")
 			DTx = date(x.year,x.month,x.day)-date.today()
 			if (DTx >= timedelta(0) and DTx <= timedelta(int(LCD4linux.CalDays.value))) or ConfigMode == True:
-				find += "C"
-				break
+				if "C" not in find:
+					find += "C"
+				icount+=1
+		EVENTLIST[2] = icount
 		if len(find) == 0:
 			return
+#		print "-----",ConfigPopup,SaveEventList,EVENTLIST
+		if SaveEventList != EVENTLIST and ConfigPopup != "0" and ICSrunning == False and PopMail[5] == "" and OSDtimer >= 0 and ConfigMode == False:
+			if SaveEventList != ["","",""]:
+				L4log("Set Event Changed",EVENTLIST)
+				for L in str(ConfigPopupLCD):
+					setScreenActive(str(ConfigPopup),str(L))
+#				SaveEventListChanged = True
+			SaveEventList = EVENTLIST
+
 		POSY = ConfigPos
 		POSX = getSplit(ConfigSplit,ConfigAlign,MAX_W,ConfigSize*len(find) if ConfigType == "0" else ConfigSize)
 		if "A" in find:
@@ -9868,12 +10010,22 @@ def LCD4linuxPIC(self,session):
 
 # externe Elemente
 	def putL4LElist(MODE):
-		for E in L4LElist.get():
+		def Sync(L):
+			if "1" in L:
+				Brief1.join()
+			elif "2" in L and LCD4linux.LCDType2.value != "00":
+				Brief2.join()
+			elif "3" in L and LCD4linux.LCDType3.value != "00":
+				Brief3.join()
+
+		L4Lkeys = L4LElist.get().keys()
+		L4Lkeys.sort()
+		for E in L4Lkeys:
 			CUR = L4LElist.get(E)
-			L4logE("CUR: %s Active %s" % (CUR,ScreenActive))
-			if str(ScreenActive) in str(CUR.get("Screen","1")) and MODE in CUR.get("Mode","On"):
+			L4logE("CUR: %s Active %s" % (CUR,ScreenActive[0]))
+			LCD = str(CUR.get("Lcd","1"))
+			if getSA(int(LCD)) in str(CUR.get("Screen","1")) and MODE in CUR.get("Mode","On"):
 				Typ = CUR.get("Typ",None)
-				LCD = CUR.get("Lcd","1")
 				if "1" in LCD:
 					DR,IM = draw,im
 				elif "2" in LCD and LCD4linux.LCDType2.value != "00":
@@ -9895,12 +10047,15 @@ def LCD4linuxPIC(self,session):
 					elif Typ == "pic":
 						L4logE("Pic", CUR)
 						ShowPicture = getShowPicture(CUR.get("File",""),0)
-						putBild((CUR.get("Pos",0), CUR.get("Size",100), 0, CUR.get("Align","1"), False, CUR.get("Transp",False), ShowPicture, ShowPicture),0,DR,IM)
+						putBild((CUR.get("Pos",0), CUR.get("Size",100), 0, CUR.get("Align","1"), CUR.get("Quick",False), CUR.get("Transp",False), ShowPicture, ShowPicture),0,DR,IM)
 					elif Typ == "box":
 						if CUR.get("Fill",True) == False:
 							DR.rectangle((CUR.get("PosX",0), CUR.get("PosY",0), CUR.get("PosX",0)+CUR.get("Width",100), CUR.get("PosY",0)+CUR.get("Height",100)),outline=CUR.get("Color","white"))
 						else:
 							DR.rectangle((CUR.get("PosX",0), CUR.get("PosY",0), CUR.get("PosX",0)+CUR.get("Width",100), CUR.get("PosY",0)+CUR.get("Height",100)),fill=CUR.get("Color","white"),outline=CUR.get("Color","white"))
+							Sync(LCD)
+					elif Typ == "wait":
+						Sync(LCD)
 				else:
 					L4log("Elemente-Fehler",CUR)
 
@@ -9920,20 +10075,20 @@ def LCD4linuxPIC(self,session):
 			bT -= 86400
 		return (bT < tt < eT)
 
-	def Lput(LCD,FUNC,PARA):
-		if "1" in LCD:
+	def Lput(LCD,SCR,FUNC,PARA):
+		if "1" in LCD and getSA(1) in SCR:
 			Brief1.put([FUNC,PARA, draw, im])
-		if "2" in LCD and LCD4linux.LCDType2.value != "00":
+		if "2" in LCD and LCD4linux.LCDType2.value != "00" and getSA(2) in SCR:
 			Brief2.put([FUNC,PARA, draw2, im2])
-		if "3" in LCD and LCD4linux.LCDType3.value != "00":
+		if "3" in LCD and LCD4linux.LCDType3.value != "00" and getSA(3) in SCR:
 			Brief3.put([FUNC,PARA, draw3, im3])
 
-	def Lput4(LCD,FUNC,PARA):
-		if "1" in LCD:
+	def Lput4(LCD,SCR,FUNC,PARA):
+		if "1" in LCD and getSA(1) in SCR:
 			Brief1.put([FUNC,PARA,0, draw, im])
-		if "2" in LCD and LCD4linux.LCDType2.value != "00":
+		if "2" in LCD and LCD4linux.LCDType2.value != "00" and getSA(2) in SCR:
 			Brief2.put([FUNC,PARA,1, draw2, im2])
-		if "3" in LCD and LCD4linux.LCDType3.value != "00":
+		if "3" in LCD and LCD4linux.LCDType3.value != "00" and getSA(3) in SCR:
 			Brief3.put([FUNC,PARA,2, draw3, im3])
 
 ###############
@@ -9964,8 +10119,10 @@ def LCD4linuxPIC(self,session):
 			L4log("Service changed")
 			self.ref = sref
 #			self.LEventsNext = None
-			ScreenActive = "1"
-			ScreenTime = 0
+			if SaveEventListChanged == False:
+				ScreenActive[0] = "1"
+				LCD4linux.ScreenActive.value = ScreenActive[0]
+				ScreenTime = 0
 			SaveisMediaPlayer = isMediaPlayer
 			isMediaPlayer = ""
 			rmFile(MP3tmp)
@@ -9987,8 +10144,9 @@ def LCD4linuxPIC(self,session):
 				rmFile(PICfritz)
 
 	QuickList = [[],[],[]]
-	Dunkel = False
+	Dunkel = ""
 	MAX_W,MAX_H = getResolution(LCD4linux.LCDType1.value,LCD4linux.LCDRotate1.value)
+	L4LElist.setResolution(1,MAX_W,MAX_H)
 	pil_open = ""
 	col_back = "black"
 	if (Standby.inStandby or ConfigStandby):
@@ -10008,7 +10166,7 @@ def LCD4linuxPIC(self,session):
 	draw2 = draw
 	draw3 = draw
 	checkTVrunning = False
-	if ScreenActive in LCD4linux.TV.value and "1" in LCD4linux.TVLCD.value:
+	if ScreenActive[0] in LCD4linux.TV.value and "1" in LCD4linux.TVLCD.value:
 		checkTVrunning = True
 		if TVrunning == False:
 			if LCD4linux.LCDType1.value[0] == "1":
@@ -10032,6 +10190,7 @@ def LCD4linuxPIC(self,session):
 		pass
 	if LCD4linux.LCDType2.value != "00":
 		MAX_W,MAX_H = getResolution(LCD4linux.LCDType2.value,LCD4linux.LCDRotate2.value)
+		L4LElist.setResolution(2,MAX_W,MAX_H)
 		pil_open = ""
 		col_back = "black"
 		if (Standby.inStandby or ConfigStandby):
@@ -10046,7 +10205,7 @@ def LCD4linuxPIC(self,session):
 			col_back = LCD4linux.LCDColor2.value
 		im2 = Image.new('RGB', (MAX_W, MAX_H), col_back)
 		draw2 = ImageDraw.Draw(im2)
-		if ScreenActive in LCD4linux.TV.value and "2" in LCD4linux.TVLCD.value:
+		if ScreenActive[0] in LCD4linux.TV.value and "2" in LCD4linux.TVLCD.value:
 			checkTVrunning = True
 			if TVrunning == False:
 				if LCD4linux.LCDType2.value[0] == "1":
@@ -10069,6 +10228,7 @@ def LCD4linuxPIC(self,session):
 			pass
 	if LCD4linux.LCDType3.value != "00":
 		MAX_W,MAX_H = getResolution(LCD4linux.LCDType3.value,LCD4linux.LCDRotate3.value)
+		L4LElist.setResolution(3,MAX_W,MAX_H)
 		pil_open = ""
 		col_back = "black"
 		if (Standby.inStandby or ConfigStandby):
@@ -10083,7 +10243,7 @@ def LCD4linuxPIC(self,session):
 			col_back = LCD4linux.LCDColor3.value
 		im3 = Image.new('RGB', (MAX_W, MAX_H), col_back)
 		draw3 = ImageDraw.Draw(im3)
-#		if ScreenActive in LCD4linux.TV.value and "3" in LCD4linux.TVLCD.value:
+#		if ScreenActive[0] in LCD4linux.TV.value and "3" in LCD4linux.TVLCD.value:
 #			checkTVrunning = True
 #			if TVrunning == False:
 #				if LCD4linux.LCDType3.value[0] == "1":
@@ -10117,163 +10277,136 @@ def LCD4linuxPIC(self,session):
 				else:
 					if AktTFT != "DREAM":
 						TFTCheck(False,SetMode="DREAM")
-			writeHelligkeit(LCD4linux.StandbyHelligkeit.value,LCD4linux.StandbyHelligkeit2.value,LCD4linux.StandbyHelligkeit3.value)
+			Dunkel=writeHelligkeit(LCD4linux.StandbyHelligkeit.value,LCD4linux.StandbyHelligkeit2.value,LCD4linux.StandbyHelligkeit3.value)
 			if LCD4linux.StandbyHelligkeit.value == 0:
-				Dunkel=True
+				Dunkel=writeHelligkeit(0,0,0)
 # LCDoff
-			if LCD4linux.StandbyLCDoff.value != LCD4linux.StandbyLCDon.value or LCD4linux.StandbyLCDWEoff.value != LCD4linux.StandbyLCDWEon.value:
-				if isOffTime(LCD4linux.StandbyLCDoff.value,LCD4linux.StandbyLCDon.value,LCD4linux.StandbyLCDWEoff.value,LCD4linux.StandbyLCDWEon.value):
-					writeHelligkeit(0,0,0)
-					Dunkel=True
+			if LCD4linux.StandbyLCDoff.value != LCD4linux.StandbyLCDon.value or LCD4linux.StandbyLCDWEoff.value != LCD4linux.StandbyLCDWEon.value or LCDon == False:
+				if isOffTime(LCD4linux.StandbyLCDoff.value,LCD4linux.StandbyLCDon.value,LCD4linux.StandbyLCDWEoff.value,LCD4linux.StandbyLCDWEon.value) or LCDon == False:
+					Dunkel=writeHelligkeit(0,0,0)
 					L4log("LCD off")
 			if LCD4linux.StandbyFritz.value != "0" and FritzTime > 1:
 # FritzCall
-				Para = LCD4linux.StandbyFritzPos.value, LCD4linux.StandbyFritzSize.value, LCD4linux.StandbyFritzColor.value, LCD4linux.StandbyFritzBackColor.value, LCD4linux.StandbyFritzAlign.value, LCD4linux.StandbyFritzPicPos.value, LCD4linux.StandbyFritzPicSize.value, LCD4linux.StandbyFritzPicAlign.value, LCD4linux.StandbyFritzShadow.value, getFont(LCD4linux.StandbyFritzFont.value)
-				Lput(LCD4linux.FritzPopupLCD.value,putFritz,Para)
+				Para = LCD4linux.StandbyFritzPos.value, LCD4linux.StandbyFritzSize.value, LCD4linux.StandbyFritzColor.value, LCD4linux.StandbyFritzBackColor.value, LCD4linux.StandbyFritzAlign.value, LCD4linux.StandbyFritzType.value, LCD4linux.StandbyFritzPicPos.value, LCD4linux.StandbyFritzPicSize.value, LCD4linux.StandbyFritzPicAlign.value, LCD4linux.StandbyFritzShadow.value, getFont(LCD4linux.StandbyFritzFont.value)
+				Lput(LCD4linux.FritzPopupLCD.value,"123456789",putFritz,Para)
 			else:
 # Bild
-				if ScreenActive in LCD4linux.StandbyBild.value:
+				if ScreenActive[0] in LCD4linux.StandbyBild.value or ScreenActive[-3:] != ["","",""]:
 					ShowPicture = getShowPicture(LCD4linux.StandbyBildFile.value,0)
 					Para = LCD4linux.StandbyBildPos.value, LCD4linux.StandbyBildSize.value, 0, LCD4linux.StandbyBildAlign.value, LCD4linux.StandbyBildQuick.value, LCD4linux.StandbyBildTransp.value, ShowPicture, LCD4linux.StandbyBildFile.value
-					Lput4(LCD4linux.StandbyBildLCD.value,putBild,Para)
+					Lput4(LCD4linux.StandbyBildLCD.value,LCD4linux.StandbyBild.value,putBild,Para)
 # Bild 2
-				if ScreenActive in LCD4linux.StandbyBild2.value:
+				if ScreenActive[0] in LCD4linux.StandbyBild2.value or ScreenActive[-3:] != ["","",""]:
 					ShowPicture = getShowPicture(LCD4linux.StandbyBild2File.value,1)
 					Para = LCD4linux.StandbyBild2Pos.value, LCD4linux.StandbyBild2Size.value, 0, LCD4linux.StandbyBild2Align.value, LCD4linux.StandbyBild2Quick.value, LCD4linux.StandbyBild2Transp.value, ShowPicture, LCD4linux.StandbyBild2File.value
-					Lput4(LCD4linux.StandbyBild2LCD.value,putBild,Para)
+					Lput4(LCD4linux.StandbyBild2LCD.value,LCD4linux.StandbyBild2.value,putBild,Para)
 # Bild 3
-				if ScreenActive in LCD4linux.StandbyBild3.value:
+				if ScreenActive[0] in LCD4linux.StandbyBild3.value or ScreenActive[-3:] != ["","",""]:
 					ShowPicture = getShowPicture(LCD4linux.StandbyBild3File.value,2)
 					Para = LCD4linux.StandbyBild3Pos.value, LCD4linux.StandbyBild3Size.value, 0, LCD4linux.StandbyBild3Align.value, LCD4linux.StandbyBild3Quick.value, LCD4linux.StandbyBild3Transp.value, ShowPicture, LCD4linux.StandbyBild3File.value
-					Lput4(LCD4linux.StandbyBild3LCD.value,putBild,Para)
+					Lput4(LCD4linux.StandbyBild3LCD.value,LCD4linux.StandbyBild3.value,putBild,Para)
 # Bild 4
-				if ScreenActive in LCD4linux.StandbyBild4.value:
+				if ScreenActive[0] in LCD4linux.StandbyBild4.value or ScreenActive[-3:] != ["","",""]:
 					ShowPicture = getShowPicture(LCD4linux.StandbyBild4File.value,0)
 					Para = LCD4linux.StandbyBild4Pos.value, LCD4linux.StandbyBild4Size.value, 0, LCD4linux.StandbyBild4Align.value, LCD4linux.StandbyBild4Quick.value, LCD4linux.StandbyBild4Transp.value, ShowPicture, LCD4linux.StandbyBild4File.value
-					Lput4(LCD4linux.StandbyBild4LCD.value,putBild,Para)
+					Lput4(LCD4linux.StandbyBild4LCD.value, LCD4linux.StandbyBild4.value,putBild,Para)
 				Brief1.join()
 				Brief2.join()
 				Brief3.join()
 # Kalender
-				if ScreenActive in LCD4linux.StandbyCal.value:
-					Para = LCD4linux.StandbyCalPos.value,LCD4linux.StandbyCalZoom.value,LCD4linux.StandbyCalAlign.value,LCD4linux.StandbyCalSplit.value,LCD4linux.StandbyCalType.value,LCD4linux.StandbyCalTypeE.value,LCD4linux.StandbyCalLayout.value,LCD4linux.StandbyCalColor.value,LCD4linux.StandbyCalBackColor.value,LCD4linux.StandbyCalCaptionColor.value,LCD4linux.StandbyCalShadow.value,getFont(LCD4linux.StandbyCalFont.value)
-					Lput(LCD4linux.StandbyCalLCD.value,putCalendar,Para)
+				Para = LCD4linux.StandbyCalPos.value,LCD4linux.StandbyCalZoom.value,LCD4linux.StandbyCalAlign.value,LCD4linux.StandbyCalSplit.value,LCD4linux.StandbyCalType.value,LCD4linux.StandbyCalTypeE.value,LCD4linux.StandbyCalLayout.value,LCD4linux.StandbyCalColor.value,LCD4linux.StandbyCalBackColor.value,LCD4linux.StandbyCalCaptionColor.value,LCD4linux.StandbyCalShadow.value,getFont(LCD4linux.StandbyCalFont.value)
+				Lput(LCD4linux.StandbyCalLCD.value,LCD4linux.StandbyCal.value,putCalendar,Para)
 # Termin-List
-				if ScreenActive in LCD4linux.StandbyCalList.value:
-					Para = LCD4linux.StandbyCalListPos.value,LCD4linux.StandbyCalListSize.value,LCD4linux.StandbyCalListProzent.value,LCD4linux.StandbyCalListAlign.value,LCD4linux.StandbyCalListSplit.value,LCD4linux.StandbyCalListType.value,LCD4linux.StandbyCalListLines.value,LCD4linux.StandbyCalListColor.value,LCD4linux.StandbyCalListShadow.value,getFont(LCD4linux.StandbyCalListFont.value)
-					Lput(LCD4linux.StandbyCalListLCD.value,putCalendarList,Para)
+				Para = LCD4linux.StandbyCalListPos.value,LCD4linux.StandbyCalListSize.value,LCD4linux.StandbyCalListProzent.value,LCD4linux.StandbyCalListAlign.value,LCD4linux.StandbyCalListSplit.value,LCD4linux.StandbyCalListType.value,LCD4linux.StandbyCalListLines.value,LCD4linux.StandbyCalListColor.value,LCD4linux.StandbyCalListShadow.value,getFont(LCD4linux.StandbyCalListFont.value)
+				Lput(LCD4linux.StandbyCalListLCD.value,LCD4linux.StandbyCalList.value,putCalendarList,Para)
 # MSN Wetter
-				if ScreenActive in LCD4linux.StandbyWetter.value and wwwWetter[0].find("forecast") > 1:
+				if wwwWetter[0].find("forecast") > 1:
 					Para = LCD4linux.StandbyWetterPos.value,LCD4linux.StandbyWetterZoom.value,LCD4linux.StandbyWetterAlign.value,LCD4linux.StandbyWetterSplit.value,LCD4linux.StandbyWetterType.value,LCD4linux.StandbyWetterColor.value,LCD4linux.StandbyWetterShadow.value,0,getFont(LCD4linux.StandbyWetterFont.value)
-					Lput(LCD4linux.StandbyWetterLCD.value,putWetter,Para)
-				if ScreenActive in LCD4linux.StandbyWetter2.value and wwwWetter[1].find("forecast") > 1:
+					Lput(LCD4linux.StandbyWetterLCD.value,LCD4linux.StandbyWetter.value,putWetter,Para)
+				if wwwWetter[1].find("forecast") > 1:
 					Para = LCD4linux.StandbyWetter2Pos.value,LCD4linux.StandbyWetter2Zoom.value,LCD4linux.StandbyWetter2Align.value,LCD4linux.StandbyWetter2Split.value,LCD4linux.StandbyWetter2Type.value,LCD4linux.StandbyWetter2Color.value,LCD4linux.StandbyWetter2Shadow.value,1,getFont(LCD4linux.StandbyWetter2Font.value)
-					Lput(LCD4linux.StandbyWetter2LCD.value,putWetter,Para)
+					Lput(LCD4linux.StandbyWetter2LCD.value,LCD4linux.StandbyWetter2.value,putWetter,Para)
 # Netatmo CO2
-				if ScreenActive in LCD4linux.StandbyNetAtmoCO2.value:
-					Para = "CO2",LCD4linux.StandbyNetAtmoCO2Pos.value,LCD4linux.StandbyNetAtmoCO2Size.value,LCD4linux.StandbyNetAtmoCO2Len.value,LCD4linux.StandbyNetAtmoCO2Align.value,LCD4linux.StandbyNetAtmoCO2Split.value,LCD4linux.StandbyNetAtmoCO2Type.value
-					Lput(LCD4linux.StandbyNetAtmoCO2LCD.value,putNetatmoIllu,Para)
+				Para = "CO2",LCD4linux.StandbyNetAtmoCO2Pos.value,LCD4linux.StandbyNetAtmoCO2Size.value,LCD4linux.StandbyNetAtmoCO2Len.value,LCD4linux.StandbyNetAtmoCO2Align.value,LCD4linux.StandbyNetAtmoCO2Split.value,LCD4linux.StandbyNetAtmoCO2Type.value
+				Lput(LCD4linux.StandbyNetAtmoCO2LCD.value,LCD4linux.StandbyNetAtmoCO2.value,putNetatmoIllu,Para)
 # HTTP WWW Site
-				if ScreenActive in LCD4linux.StandbyWWW1.value:
-					Para = 1,LCD4linux.StandbyWWW1Pos.value,LCD4linux.StandbyWWW1Size.value,LCD4linux.StandbyWWW1Align.value,LCD4linux.StandbyWWW1CutX.value,LCD4linux.StandbyWWW1CutY.value,LCD4linux.StandbyWWW1CutW.value,LCD4linux.StandbyWWW1CutH.value
-					Lput(LCD4linux.StandbyWWW1LCD.value,putWWW,Para)
+				Para = 1,LCD4linux.StandbyWWW1Pos.value,LCD4linux.StandbyWWW1Size.value,LCD4linux.StandbyWWW1Align.value,LCD4linux.StandbyWWW1CutX.value,LCD4linux.StandbyWWW1CutY.value,LCD4linux.StandbyWWW1CutW.value,LCD4linux.StandbyWWW1CutH.value
+				Lput(LCD4linux.StandbyWWW1LCD.value,LCD4linux.StandbyWWW1.value,putWWW,Para)
 				Brief1.join()
 				Brief2.join()
 				Brief3.join()
 # Netatmo
-				if ScreenActive in LCD4linux.StandbyNetAtmo.value:
-					Para = LCD4linux.StandbyNetAtmoPos.value,LCD4linux.StandbyNetAtmoSize.value,LCD4linux.StandbyNetAtmoAlign.value,LCD4linux.StandbyNetAtmoSplit.value,LCD4linux.StandbyNetAtmoType.value,LCD4linux.StandbyNetAtmoColor.value,LCD4linux.StandbyNetAtmoShadow.value,getFont(LCD4linux.StandbyNetAtmoFont.value)
-					Lput(LCD4linux.StandbyNetAtmoLCD.value,putNetatmo,Para)
+				Para = LCD4linux.StandbyNetAtmoPos.value,LCD4linux.StandbyNetAtmoSize.value,LCD4linux.StandbyNetAtmoAlign.value,LCD4linux.StandbyNetAtmoSplit.value,LCD4linux.StandbyNetAtmoType.value,LCD4linux.StandbyNetAtmoColor.value,LCD4linux.StandbyNetAtmoShadow.value,getFont(LCD4linux.StandbyNetAtmoFont.value)
+				Lput(LCD4linux.StandbyNetAtmoLCD.value,LCD4linux.StandbyNetAtmo.value,putNetatmo,Para)
 # Box 1
-				if ScreenActive in LCD4linux.StandbyBox1.value:
-					Para = LCD4linux.StandbyBox1x1.value,LCD4linux.StandbyBox1y1.value,LCD4linux.StandbyBox1x2.value,LCD4linux.StandbyBox1y2.value,LCD4linux.StandbyBox1Color.value,LCD4linux.StandbyBox1BackColor.value
-					Lput(LCD4linux.StandbyBox1LCD.value,putBox,Para)
+				Para = LCD4linux.StandbyBox1x1.value,LCD4linux.StandbyBox1y1.value,LCD4linux.StandbyBox1x2.value,LCD4linux.StandbyBox1y2.value,LCD4linux.StandbyBox1Color.value,LCD4linux.StandbyBox1BackColor.value
+				Lput(LCD4linux.StandbyBox1LCD.value,LCD4linux.StandbyBox1.value,putBox,Para)
 # Box 2
-				if ScreenActive in LCD4linux.StandbyBox2.value:
-					Para = LCD4linux.StandbyBox2x1.value,LCD4linux.StandbyBox2y1.value,LCD4linux.StandbyBox2x2.value,LCD4linux.StandbyBox2y2.value,LCD4linux.StandbyBox2Color.value,LCD4linux.StandbyBox2BackColor.value
-					Lput(LCD4linux.StandbyBox2LCD.value,putBox,Para)
+				Para = LCD4linux.StandbyBox2x1.value,LCD4linux.StandbyBox2y1.value,LCD4linux.StandbyBox2x2.value,LCD4linux.StandbyBox2y2.value,LCD4linux.StandbyBox2Color.value,LCD4linux.StandbyBox2BackColor.value
+				Lput(LCD4linux.StandbyBox2LCD.value,LCD4linux.StandbyBox2.value,putBox,Para)
 # Moonphase
-				if ScreenActive in LCD4linux.StandbyMoon.value:
-					Para = LCD4linux.StandbyMoonPos.value,LCD4linux.StandbyMoonSize.value,LCD4linux.StandbyMoonAlign.value,LCD4linux.StandbyMoonSplit.value,LCD4linux.StandbyMoonColor.value,LCD4linux.StandbyMoonShadow.value,getFont(LCD4linux.StandbyMoonFont.value)
-					Lput(LCD4linux.StandbyMoonLCD.value,putMoon,Para)
+				Para = LCD4linux.StandbyMoonPos.value,LCD4linux.StandbyMoonSize.value,LCD4linux.StandbyMoonAlign.value,LCD4linux.StandbyMoonSplit.value,LCD4linux.StandbyMoonColor.value,LCD4linux.StandbyMoonShadow.value,getFont(LCD4linux.StandbyMoonFont.value)
+				Lput(LCD4linux.StandbyMoonLCD.value,LCD4linux.StandbyMoon.value,putMoon,Para)
 # Meteo station
-				if ScreenActive in LCD4linux.StandbyMeteo.value and wwwMeteo.find("current_conditions") > 1:
+				if wwwMeteo.find("current_conditions") > 1:
 					Para = LCD4linux.StandbyMeteoPos.value,LCD4linux.StandbyMeteoZoom.value,LCD4linux.StandbyMeteoAlign.value,LCD4linux.StandbyMeteoSplit.value,LCD4linux.StandbyMeteoType.value,LCD4linux.StandbyMeteoColor.value
-					Lput(LCD4linux.StandbyMeteoLCD.value,putMeteo,Para)
+					Lput(LCD4linux.StandbyMeteoLCD.value,LCD4linux.StandbyMeteo.value,putMeteo,Para)
 # get clock
-				if ScreenActive in LCD4linux.StandbyClock.value:
-					Para = LCD4linux.StandbyClockPos.value,LCD4linux.StandbyClockSize.value,LCD4linux.StandbyClockAlign.value,LCD4linux.StandbyClockSplit.value,LCD4linux.StandbyClockType.value,LCD4linux.StandbyClockSpacing.value,LCD4linux.StandbyClockAnalog.value,LCD4linux.StandbyClockColor.value,LCD4linux.StandbyClockShadow.value,getFont(LCD4linux.StandbyClockFont.value)
-					Lput(LCD4linux.StandbyClockLCD.value,putClock,Para)
-				if ScreenActive in LCD4linux.StandbyClock2.value:
-					Para = LCD4linux.StandbyClock2Pos.value,LCD4linux.StandbyClock2Size.value,LCD4linux.StandbyClock2Align.value,LCD4linux.StandbyClock2Split.value,LCD4linux.StandbyClock2Type.value,LCD4linux.StandbyClock2Spacing.value,LCD4linux.StandbyClock2Analog.value,LCD4linux.StandbyClock2Color.value,LCD4linux.StandbyClock2Shadow.value,getFont(LCD4linux.StandbyClock2Font.value)
-					Lput(LCD4linux.StandbyClock2LCD.value,putClock,Para)
+				Para = LCD4linux.StandbyClockPos.value,LCD4linux.StandbyClockSize.value,LCD4linux.StandbyClockAlign.value,LCD4linux.StandbyClockSplit.value,LCD4linux.StandbyClockType.value,LCD4linux.StandbyClockSpacing.value,LCD4linux.StandbyClockAnalog.value,LCD4linux.StandbyClockColor.value,LCD4linux.StandbyClockShadow.value,getFont(LCD4linux.StandbyClockFont.value)
+				Lput(LCD4linux.StandbyClockLCD.value,LCD4linux.StandbyClock.value,putClock,Para)
+				Para = LCD4linux.StandbyClock2Pos.value,LCD4linux.StandbyClock2Size.value,LCD4linux.StandbyClock2Align.value,LCD4linux.StandbyClock2Split.value,LCD4linux.StandbyClock2Type.value,LCD4linux.StandbyClock2Spacing.value,LCD4linux.StandbyClock2Analog.value,LCD4linux.StandbyClock2Color.value,LCD4linux.StandbyClock2Shadow.value,getFont(LCD4linux.StandbyClock2Font.value)
+				Lput(LCD4linux.StandbyClock2LCD.value,LCD4linux.StandbyClock2.value,putClock,Para)
 # Informationen
-				if ScreenActive in LCD4linux.StandbyInfo.value:
-					Para = LCD4linux.StandbyInfoPos.value, LCD4linux.StandbyInfoSize.value,LCD4linux.StandbyInfoAlign.value,LCD4linux.StandbyInfoLines.value,LCD4linux.StandbyInfoSplit.value,LCD4linux.StandbyInfoColor.value,LCD4linux.StandbyInfoSensor.value+LCD4linux.StandbyInfoCPU.value, LCD4linux.StandbyInfoShadow.value, getFont(LCD4linux.StandbyInfoFont.value)
-					Lput(LCD4linux.StandbyInfoLCD.value,putInfo,Para)
+				Para = LCD4linux.StandbyInfoPos.value, LCD4linux.StandbyInfoSize.value,LCD4linux.StandbyInfoAlign.value,LCD4linux.StandbyInfoLines.value,LCD4linux.StandbyInfoSplit.value,LCD4linux.StandbyInfoColor.value,LCD4linux.StandbyInfoSensor.value+LCD4linux.StandbyInfoCPU.value, LCD4linux.StandbyInfoShadow.value, getFont(LCD4linux.StandbyInfoFont.value)
+				Lput(LCD4linux.StandbyInfoLCD.value,LCD4linux.StandbyInfo.value,putInfo,Para)
 # Tuner
-				if ScreenActive in LCD4linux.StandbyTuner.value:
-					Para = LCD4linux.StandbyTunerPos.value, LCD4linux.StandbyTunerSize.value, LCD4linux.StandbyTunerAlign.value, LCD4linux.StandbyTunerSplit.value, LCD4linux.StandbyTunerType.value, LCD4linux.StandbyTunerActive.value,getFont(LCD4linux.StandbyTunerFont.value)
-					Lput(LCD4linux.StandbyTunerLCD.value,putTuner,Para)
+				Para = LCD4linux.StandbyTunerPos.value, LCD4linux.StandbyTunerSize.value, LCD4linux.StandbyTunerAlign.value, LCD4linux.StandbyTunerSplit.value, LCD4linux.StandbyTunerType.value, LCD4linux.StandbyTunerActive.value,getFont(LCD4linux.StandbyTunerFont.value)
+				Lput(LCD4linux.StandbyTunerLCD.value,LCD4linux.StandbyTuner.value,putTuner,Para)
 # Online-Ping
-				if ScreenActive in LCD4linux.StandbyPing.value:
-					Para = LCD4linux.StandbyPingPos.value, LCD4linux.StandbyPingSize.value, LCD4linux.StandbyPingAlign.value, LCD4linux.StandbyPingSplit.value, LCD4linux.StandbyPingColor.value, LCD4linux.StandbyPingType.value, LCD4linux.StandbyPingShow.value, LCD4linux.StandbyPingTimeout.value, (LCD4linux.StandbyPingName1.value,LCD4linux.StandbyPingName2.value,LCD4linux.StandbyPingName3.value,LCD4linux.StandbyPingName4.value,LCD4linux.StandbyPingName5.value), LCD4linux.StandbyPingShadow.value,getFont(LCD4linux.StandbyPingFont.value)
-					Lput(LCD4linux.StandbyPingLCD.value,putOnline,Para)
+				Para = LCD4linux.StandbyPingPos.value, LCD4linux.StandbyPingSize.value, LCD4linux.StandbyPingAlign.value, LCD4linux.StandbyPingSplit.value, LCD4linux.StandbyPingColor.value, LCD4linux.StandbyPingType.value, LCD4linux.StandbyPingShow.value, LCD4linux.StandbyPingTimeout.value, (LCD4linux.StandbyPingName1.value,LCD4linux.StandbyPingName2.value,LCD4linux.StandbyPingName3.value,LCD4linux.StandbyPingName4.value,LCD4linux.StandbyPingName5.value), LCD4linux.StandbyPingShadow.value,getFont(LCD4linux.StandbyPingFont.value)
+				Lput(LCD4linux.StandbyPingLCD.value,LCD4linux.StandbyPing.value,putOnline,Para)
 # next Timer Record
-				if ScreenActive in LCD4linux.StandbyTimer.value:
-					Para = LCD4linux.StandbyTimerPos.value, LCD4linux.StandbyTimerSize.value, LCD4linux.StandbyTimerLines.value, LCD4linux.StandbyTimerType.value, LCD4linux.StandbyTimerAlign.value, LCD4linux.StandbyTimerSplit.value, LCD4linux.StandbyTimerColor.value, LCD4linux.StandbyTimerShadow.value,getFont(LCD4linux.StandbyTimerFont.value)
-					Lput(LCD4linux.StandbyTimerLCD.value,putTimer,Para)
+				Para = LCD4linux.StandbyTimerPos.value, LCD4linux.StandbyTimerSize.value, LCD4linux.StandbyTimerLines.value, LCD4linux.StandbyTimerType.value, LCD4linux.StandbyTimerAlign.value, LCD4linux.StandbyTimerSplit.value, LCD4linux.StandbyTimerColor.value, LCD4linux.StandbyTimerShadow.value,getFont(LCD4linux.StandbyTimerFont.value)
+				Lput(LCD4linux.StandbyTimerLCD.value,LCD4linux.StandbyTimer.value,putTimer,Para)
 # Devices
-				if ScreenActive in LCD4linux.StandbyDev.value:
-					Para = LCD4linux.StandbyDevPos.value, LCD4linux.StandbyDevSize.value, LCD4linux.StandbyDevAlign.value, LCD4linux.StandbyDevSplit.value, LCD4linux.StandbyDevColor.value, (LCD4linux.StandbyDevExtra.value,LCD4linux.StandbyDevName1.value,LCD4linux.StandbyDevName2.value,LCD4linux.StandbyDevName3.value,LCD4linux.StandbyDevName4.value,LCD4linux.StandbyDevName5.value), LCD4linux.StandbyDevShadow.value,getFont(LCD4linux.StandbyDevFont.value)
-					Lput(LCD4linux.StandbyDevLCD.value,putDev,Para)
+				Para = LCD4linux.StandbyDevPos.value, LCD4linux.StandbyDevSize.value, LCD4linux.StandbyDevAlign.value, LCD4linux.StandbyDevSplit.value, LCD4linux.StandbyDevColor.value, (LCD4linux.StandbyDevExtra.value,LCD4linux.StandbyDevName1.value,LCD4linux.StandbyDevName2.value,LCD4linux.StandbyDevName3.value,LCD4linux.StandbyDevName4.value,LCD4linux.StandbyDevName5.value), LCD4linux.StandbyDevShadow.value, LCD4linux.StandbyDevType.value,getFont(LCD4linux.StandbyDevFont.value)
+				Lput(LCD4linux.StandbyDevLCD.value,LCD4linux.StandbyDev.value,putDev,Para)
 # HDD
-				if ScreenActive in LCD4linux.StandbyHdd.value:
-					Para = LCD4linux.StandbyHddPos.value, LCD4linux.StandbyHddSize.value, LCD4linux.StandbyHddAlign.value, LCD4linux.StandbyHddSplit.value, LCD4linux.StandbyHddType.value
-					Lput(LCD4linux.StandbyHddLCD.value,putHdd,Para)
+				Para = LCD4linux.StandbyHddPos.value, LCD4linux.StandbyHddSize.value, LCD4linux.StandbyHddAlign.value, LCD4linux.StandbyHddSplit.value, LCD4linux.StandbyHddType.value
+				Lput(LCD4linux.StandbyHddLCD.value,LCD4linux.StandbyHdd.value,putHdd,Para)
 # show OSCAM
-				if ScreenActive in LCD4linux.StandbyOSCAM.value:
-					Para = LCD4linux.StandbyOSCAMPos.value, LCD4linux.StandbyOSCAMSize.value, LCD4linux.StandbyOSCAMColor.value, LCD4linux.StandbyOSCAMBackColor.value, LCD4linux.StandbyOSCAMAlign.value, LCD4linux.StandbyOSCAMSplit.value
-					Lput(LCD4linux.StandbyOSCAMLCD.value,putOSCAM,Para)
+				Para = LCD4linux.StandbyOSCAMPos.value, LCD4linux.StandbyOSCAMSize.value, LCD4linux.StandbyOSCAMColor.value, LCD4linux.StandbyOSCAMBackColor.value, LCD4linux.StandbyOSCAMAlign.value, LCD4linux.StandbyOSCAMSplit.value
+				Lput(LCD4linux.StandbyOSCAMLCD.value,LCD4linux.StandbyOSCAM.value,putOSCAM,Para)
 # show Textfile
-				if ScreenActive in LCD4linux.StandbyText.value:
-					Para = LCD4linux.StandbyTextPos.value,LCD4linux.StandbyTextSize.value,getFont(LCD4linux.StandbyTextFont.value),LCD4linux.StandbyTextAlign.value,LCD4linux.StandbyTextColor.value,LCD4linux.StandbyTextBackColor.value,LCD4linux.StandbyTextShadow.value, LCD4linux.StandbyTextFile.value
-					Lput(LCD4linux.StandbyTextLCD.value,putTextFile,Para)
+				Para = LCD4linux.StandbyTextPos.value,LCD4linux.StandbyTextSize.value,getFont(LCD4linux.StandbyTextFont.value),LCD4linux.StandbyTextAlign.value,LCD4linux.StandbyTextColor.value,LCD4linux.StandbyTextBackColor.value,LCD4linux.StandbyTextShadow.value, LCD4linux.StandbyTextFile.value
+				Lput(LCD4linux.StandbyTextLCD.value,LCD4linux.StandbyText.value,putTextFile,Para)
 # show Textfile 2
-				if ScreenActive in LCD4linux.StandbyText2.value:
-					Para = LCD4linux.StandbyText2Pos.value,LCD4linux.StandbyText2Size.value,getFont(LCD4linux.StandbyText2Font.value),LCD4linux.StandbyText2Align.value,LCD4linux.StandbyText2Color.value,LCD4linux.StandbyText2BackColor.value,LCD4linux.StandbyText2Shadow.value, LCD4linux.StandbyText2File.value
-					Lput(LCD4linux.StandbyText2LCD.value,putTextFile,Para)
+				Para = LCD4linux.StandbyText2Pos.value,LCD4linux.StandbyText2Size.value,getFont(LCD4linux.StandbyText2Font.value),LCD4linux.StandbyText2Align.value,LCD4linux.StandbyText2Color.value,LCD4linux.StandbyText2BackColor.value,LCD4linux.StandbyText2Shadow.value, LCD4linux.StandbyText2File.value
+				Lput(LCD4linux.StandbyText2LCD.value,LCD4linux.StandbyText2.value,putTextFile,Para)
 # show Textfile 3
-				if ScreenActive in LCD4linux.StandbyText3.value:
-					Para = LCD4linux.StandbyText3Pos.value,LCD4linux.StandbyText3Size.value,getFont(LCD4linux.StandbyText3Font.value),LCD4linux.StandbyText3Align.value,LCD4linux.StandbyText3Color.value,LCD4linux.StandbyText3BackColor.value,LCD4linux.StandbyText3Shadow.value, LCD4linux.StandbyText3File.value
-					Lput(LCD4linux.StandbyText3LCD.value,putTextFile,Para)
+				Para = LCD4linux.StandbyText3Pos.value,LCD4linux.StandbyText3Size.value,getFont(LCD4linux.StandbyText3Font.value),LCD4linux.StandbyText3Align.value,LCD4linux.StandbyText3Color.value,LCD4linux.StandbyText3BackColor.value,LCD4linux.StandbyText3Shadow.value, LCD4linux.StandbyText3File.value
+				Lput(LCD4linux.StandbyText3LCD.value,LCD4linux.StandbyText3.value,putTextFile,Para)
 # show HTTP Text
-				if ScreenActive in LCD4linux.StandbyHTTP.value:
-					Para = LCD4linux.StandbyHTTPPos.value,LCD4linux.StandbyHTTPSize.value,LCD4linux.StandbyHTTPAlign.value,LCD4linux.StandbyHTTPColor.value,LCD4linux.StandbyHTTPBackColor.value, LCD4linux.StandbyHTTPURL.value, LCD4linux.StandbyHTTPShadow.value, getFont(LCD4linux.StandbyHTTPFont.value)
-					Lput(LCD4linux.StandbyHTTPLCD.value,putHTTP,Para)
+				Para = LCD4linux.StandbyHTTPPos.value,LCD4linux.StandbyHTTPSize.value,LCD4linux.StandbyHTTPAlign.value,LCD4linux.StandbyHTTPColor.value,LCD4linux.StandbyHTTPBackColor.value, LCD4linux.StandbyHTTPURL.value, LCD4linux.StandbyHTTPShadow.value, getFont(LCD4linux.StandbyHTTPFont.value)
+				Lput(LCD4linux.StandbyHTTPLCD.value,LCD4linux.StandbyHTTP.value,putHTTP,Para)
 # show Mail
-				if ScreenActive in LCD4linux.StandbyMail.value:
-					Para = LCD4linux.StandbyMailPos.value,LCD4linux.StandbyMailSize.value,LCD4linux.StandbyMailProzent.value,LCD4linux.StandbyMailColor.value,LCD4linux.StandbyMailBackColor.value,LCD4linux.StandbyMailAlign.value,LCD4linux.StandbyMailSplit.value,LCD4linux.StandbyMailLines.value, LCD4linux.StandbyMailType.value, LCD4linux.StandbyMailKonto.value, LCD4linux.StandbyMailShadow.value, getFont(LCD4linux.StandbyMailFont.value)
-					Lput(LCD4linux.StandbyMailLCD.value,putMail,Para)
+				Para = LCD4linux.StandbyMailPos.value,LCD4linux.StandbyMailSize.value,LCD4linux.StandbyMailProzent.value,LCD4linux.StandbyMailColor.value,LCD4linux.StandbyMailBackColor.value,LCD4linux.StandbyMailAlign.value,LCD4linux.StandbyMailSplit.value,LCD4linux.StandbyMailLines.value, LCD4linux.StandbyMailType.value, LCD4linux.StandbyMailKonto.value, LCD4linux.StandbyMailShadow.value, getFont(LCD4linux.StandbyMailFont.value)
+				Lput(LCD4linux.StandbyMailLCD.value,LCD4linux.StandbyMail.value,putMail,Para)
 # show Ereignis Icon Bar
-				if ScreenActive in LCD4linux.StandbyIconBar.value:
-					Para = LCD4linux.StandbyIconBarPos.value,LCD4linux.StandbyIconBarSize.value,LCD4linux.StandbyIconBarAlign.value,LCD4linux.StandbyIconBarSplit.value,LCD4linux.StandbyIconBarType.value
-					Lput(LCD4linux.StandbyIconBarLCD.value,putIconBar,Para)
+				Para = LCD4linux.StandbyIconBarPos.value,LCD4linux.StandbyIconBarSize.value,LCD4linux.StandbyIconBarAlign.value,LCD4linux.StandbyIconBarSplit.value,LCD4linux.StandbyIconBarType.value,LCD4linux.StandbyIconBarPopup.value,LCD4linux.StandbyIconBarPopupLCD.value
+				Lput(LCD4linux.StandbyIconBarLCD.value,LCD4linux.StandbyIconBar.value,putIconBar,Para)
 # show Sonnenaufgang
-				if ScreenActive in LCD4linux.StandbySun.value:
-					Para = LCD4linux.StandbySunPos.value,LCD4linux.StandbySunSize.value,LCD4linux.StandbySunColor.value,LCD4linux.StandbySunBackColor.value,LCD4linux.StandbySunAlign.value,LCD4linux.StandbySunSplit.value,LCD4linux.StandbySunType.value,LCD4linux.StandbySunShadow.value,getFont(LCD4linux.StandbySunFont.value)
-					Lput(LCD4linux.StandbySunLCD.value,putSun,Para)
+				Para = LCD4linux.StandbySunPos.value,LCD4linux.StandbySunSize.value,LCD4linux.StandbySunColor.value,LCD4linux.StandbySunBackColor.value,LCD4linux.StandbySunAlign.value,LCD4linux.StandbySunSplit.value,LCD4linux.StandbySunType.value,LCD4linux.StandbySunShadow.value,getFont(LCD4linux.StandbySunFont.value)
+				Lput(LCD4linux.StandbySunLCD.value,LCD4linux.StandbySun.value,putSun,Para)
 
 # externe Elementeliste
 				putL4LElist("Idle")
 
 # FritzCall
-				if ScreenActive in LCD4linux.StandbyFritz.value:
-					Para = LCD4linux.StandbyFritzPos.value, LCD4linux.StandbyFritzSize.value, LCD4linux.StandbyFritzColor.value, LCD4linux.StandbyFritzBackColor.value, LCD4linux.StandbyFritzAlign.value, LCD4linux.StandbyFritzPicPos.value, LCD4linux.StandbyFritzPicSize.value, LCD4linux.StandbyFritzPicAlign.value, LCD4linux.StandbyFritzShadow.value, getFont(LCD4linux.StandbyFritzFont.value)
-					Lput(LCD4linux.StandbyFritzLCD.value,putFritz,Para)
+				Para = LCD4linux.StandbyFritzPos.value, LCD4linux.StandbyFritzSize.value, LCD4linux.StandbyFritzColor.value, LCD4linux.StandbyFritzBackColor.value, LCD4linux.StandbyFritzAlign.value, LCD4linux.StandbyFritzType.value, LCD4linux.StandbyFritzPicPos.value, LCD4linux.StandbyFritzPicSize.value, LCD4linux.StandbyFritzPicAlign.value, LCD4linux.StandbyFritzShadow.value, getFont(LCD4linux.StandbyFritzFont.value)
+				Lput(LCD4linux.StandbyFritzLCD.value,LCD4linux.StandbyFritz.value,putFritz,Para)
 		else:
-			writeHelligkeit(0,0,0)
-			Dunkel=True
+			Dunkel=writeHelligkeit(0,0,0)
 
 ####
 #### MediaPlayer
@@ -10286,156 +10419,133 @@ def LCD4linuxPIC(self,session):
 			else:
 				if AktTFT != "DREAM":
 					TFTCheck(False,SetMode="DREAM")
-		writeHelligkeit(LCD4linux.Helligkeit.value,LCD4linux.Helligkeit2.value,LCD4linux.Helligkeit3.value)
+		Dunkel=writeHelligkeit(LCD4linux.MPHelligkeit.value,LCD4linux.MPHelligkeit2.value,LCD4linux.MPHelligkeit3.value)
+# LCDoff
+		if LCD4linux.LCDoff.value != LCD4linux.LCDon.value or LCD4linux.LCDWEoff.value != LCD4linux.LCDWEon.value or LCDon == False:
+			if isOffTime(LCD4linux.LCDoff.value,LCD4linux.LCDon.value,LCD4linux.LCDWEoff.value,LCD4linux.LCDWEon.value) or LCDon == False:
+				Dunkel=writeHelligkeit(0,0,0)
+				L4log("LCD off")
 # FritzCall
 		if LCD4linux.MPFritz.value != "0" and FritzTime > 1:
-			Para = LCD4linux.MPFritzPos.value, LCD4linux.MPFritzSize.value, LCD4linux.MPFritzColor.value, LCD4linux.MPFritzBackColor.value, LCD4linux.MPFritzAlign.value, LCD4linux.MPFritzPicPos.value, LCD4linux.MPFritzPicSize.value, LCD4linux.MPFritzPicAlign.value, LCD4linux.MPFritzShadow.value, getFont(LCD4linux.MPFritzFont.value)
-			Lput(LCD4linux.FritzPopupLCD.value,putFritz,Para)
+			Para = LCD4linux.MPFritzPos.value, LCD4linux.MPFritzSize.value, LCD4linux.MPFritzColor.value, LCD4linux.MPFritzBackColor.value, LCD4linux.MPFritzAlign.value, LCD4linux.MPFritzType.value, LCD4linux.MPFritzPicPos.value, LCD4linux.MPFritzPicSize.value, LCD4linux.MPFritzPicAlign.value, LCD4linux.MPFritzShadow.value, getFont(LCD4linux.MPFritzFont.value)
+			Lput(LCD4linux.FritzPopupLCD.value,"123456789",putFritz,Para)
 		else:
 # Bild
-			if ScreenActive in LCD4linux.MPBild.value:
+			if ScreenActive[0] in LCD4linux.MPBild.value or ScreenActive[-3:] != ["","",""]:
 				ShowPicture = getShowPicture(LCD4linux.MPBildFile.value,0)
 				Para = LCD4linux.MPBildPos.value, LCD4linux.MPBildSize.value, 0, LCD4linux.MPBildAlign.value, LCD4linux.MPBildQuick.value, LCD4linux.MPBildTransp.value, ShowPicture, LCD4linux.MPBildFile.value
-				Lput4(LCD4linux.MPBildLCD.value,putBild,Para)
+				Lput4(LCD4linux.MPBildLCD.value,LCD4linux.MPBild.value,putBild,Para)
 # Bild 2
-			if ScreenActive in LCD4linux.MPBild2.value:
+			if ScreenActive[0] in LCD4linux.MPBild2.value or ScreenActive[-3:] != ["","",""]:
 				ShowPicture = getShowPicture(LCD4linux.MPBild2File.value,1)
 				Para = LCD4linux.MPBild2Pos.value, LCD4linux.MPBild2Size.value, 0, LCD4linux.MPBild2Align.value, LCD4linux.MPBild2Quick.value, LCD4linux.MPBild2Transp.value, ShowPicture, LCD4linux.MPBild2File.value
-				Lput4(LCD4linux.MPBild2LCD.value,putBild,Para)
+				Lput4(LCD4linux.MPBild2LCD.value,LCD4linux.MPBild2.value,putBild,Para)
 # Cover
-			if ScreenActive in LCD4linux.MPCover.value:
+			if ScreenActive[0] in LCD4linux.MPCover.value or ScreenActive[-3:] != ["","",""]:
 				ShowPicture = getShowCover((LCD4linux.MPCoverPath1.value,LCD4linux.MPCoverPath2.value))
 				Para = LCD4linux.MPCoverPos.value, LCD4linux.MPCoverSize.value, LCD4linux.MPCoverSizeH.value, LCD4linux.MPCoverAlign.value, False, LCD4linux.MPCoverTransp.value, ShowPicture, ""
-				Lput4(LCD4linux.MPCoverLCD.value,putBild,Para)
+				Lput4(LCD4linux.MPCoverLCD.value,LCD4linux.MPCover.value,putBild,Para)
 # Kalender
-			if ScreenActive in LCD4linux.MPCal.value:
-				Para = LCD4linux.MPCalPos.value,LCD4linux.MPCalZoom.value,LCD4linux.MPCalAlign.value,LCD4linux.MPCalSplit.value,LCD4linux.MPCalType.value,LCD4linux.MPCalTypeE.value,LCD4linux.MPCalLayout.value,LCD4linux.MPCalColor.value,LCD4linux.MPCalBackColor.value,LCD4linux.MPCalCaptionColor.value,LCD4linux.MPCalShadow.value,getFont(LCD4linux.MPCalFont.value)
-				Lput(LCD4linux.MPCalLCD.value,putCalendar,Para)
+			Para = LCD4linux.MPCalPos.value,LCD4linux.MPCalZoom.value,LCD4linux.MPCalAlign.value,LCD4linux.MPCalSplit.value,LCD4linux.MPCalType.value,LCD4linux.MPCalTypeE.value,LCD4linux.MPCalLayout.value,LCD4linux.MPCalColor.value,LCD4linux.MPCalBackColor.value,LCD4linux.MPCalCaptionColor.value,LCD4linux.MPCalShadow.value,getFont(LCD4linux.MPCalFont.value)
+			Lput(LCD4linux.MPCalLCD.value,LCD4linux.MPCal.value,putCalendar,Para)
 # Termin-List
-			if ScreenActive in LCD4linux.MPCalList.value:
-				Para = LCD4linux.MPCalListPos.value,LCD4linux.MPCalListSize.value,LCD4linux.MPCalListProzent.value,LCD4linux.MPCalListAlign.value,LCD4linux.MPCalListSplit.value,LCD4linux.MPCalListType.value,LCD4linux.MPCalListLines.value,LCD4linux.MPCalListColor.value,LCD4linux.MPCalListShadow.value,getFont(LCD4linux.MPCalFont.value)
-				Lput(LCD4linux.MPCalListLCD.value,putCalendarList,Para)
+			Para = LCD4linux.MPCalListPos.value,LCD4linux.MPCalListSize.value,LCD4linux.MPCalListProzent.value,LCD4linux.MPCalListAlign.value,LCD4linux.MPCalListSplit.value,LCD4linux.MPCalListType.value,LCD4linux.MPCalListLines.value,LCD4linux.MPCalListColor.value,LCD4linux.MPCalListShadow.value,getFont(LCD4linux.MPCalFont.value)
+			Lput(LCD4linux.MPCalListLCD.value,LCD4linux.MPCalList.value,putCalendarList,Para)
 # MSN Wetter
-			if ScreenActive in LCD4linux.MPWetter.value and wwwWetter[0].find("forecast") > 1:
+			if wwwWetter[0].find("forecast") > 1:
 				Para = LCD4linux.MPWetterPos.value,LCD4linux.MPWetterZoom.value,LCD4linux.MPWetterAlign.value,LCD4linux.MPWetterSplit.value,LCD4linux.MPWetterType.value,LCD4linux.MPWetterColor.value,LCD4linux.MPWetterShadow.value,0,getFont(LCD4linux.MPWetterFont.value)
-				Lput(LCD4linux.MPWetterLCD.value,putWetter,Para)
-			if ScreenActive in LCD4linux.MPWetter2.value and wwwWetter[1].find("forecast") > 1:
+				Lput(LCD4linux.MPWetterLCD.value,LCD4linux.MPWetter.value,putWetter,Para)
+			if wwwWetter[1].find("forecast") > 1:
 				Para = LCD4linux.MPWetter2Pos.value,LCD4linux.MPWetter2Zoom.value,LCD4linux.MPWetter2Align.value,LCD4linux.MPWetter2Split.value,LCD4linux.MPWetter2Type.value,LCD4linux.MPWetter2Color.value,LCD4linux.MPWetter2Shadow.value,1,getFont(LCD4linux.MPWetter2Font.value)
-				Lput(LCD4linux.MPWetter2LCD.value,putWetter,Para)
+				Lput(LCD4linux.MPWetter2LCD.value,LCD4linux.MPWetter2.value,putWetter,Para)
 # Netatmo CO2
-			if ScreenActive in LCD4linux.MPNetAtmoCO2.value:
-				Para = "CO2",LCD4linux.MPNetAtmoCO2Pos.value,LCD4linux.MPNetAtmoCO2Size.value,LCD4linux.MPNetAtmoCO2Len.value,LCD4linux.MPNetAtmoCO2Align.value,LCD4linux.MPNetAtmoCO2Split.value,LCD4linux.MPNetAtmoCO2Type.value
-				Lput(LCD4linux.MPNetAtmoCO2LCD.value,putNetatmoIllu,Para)
+			Para = "CO2",LCD4linux.MPNetAtmoCO2Pos.value,LCD4linux.MPNetAtmoCO2Size.value,LCD4linux.MPNetAtmoCO2Len.value,LCD4linux.MPNetAtmoCO2Align.value,LCD4linux.MPNetAtmoCO2Split.value,LCD4linux.MPNetAtmoCO2Type.value
+			Lput(LCD4linux.MPNetAtmoCO2LCD.value,LCD4linux.MPNetAtmoCO2.value,putNetatmoIllu,Para)
 			Brief1.join()
 			Brief2.join()
 			Brief3.join()
 # Netatmo
-			if ScreenActive in LCD4linux.MPNetAtmo.value:
-				Para = LCD4linux.MPNetAtmoPos.value,LCD4linux.MPNetAtmoSize.value,LCD4linux.MPNetAtmoAlign.value,LCD4linux.MPNetAtmoSplit.value,LCD4linux.MPNetAtmoType.value,LCD4linux.MPNetAtmoColor.value,LCD4linux.MPNetAtmoShadow.value,getFont(LCD4linux.MPNetAtmoFont.value)
-				Lput(LCD4linux.MPNetAtmoLCD.value,putNetatmo,Para)
+			Para = LCD4linux.MPNetAtmoPos.value,LCD4linux.MPNetAtmoSize.value,LCD4linux.MPNetAtmoAlign.value,LCD4linux.MPNetAtmoSplit.value,LCD4linux.MPNetAtmoType.value,LCD4linux.MPNetAtmoColor.value,LCD4linux.MPNetAtmoShadow.value,getFont(LCD4linux.MPNetAtmoFont.value)
+			Lput(LCD4linux.MPNetAtmoLCD.value,LCD4linux.MPNetAtmo.value,putNetatmo,Para)
 # Meteo station
-			if ScreenActive in LCD4linux.MPMeteo.value and wwwMeteo.find("current_conditions") > 1:
+			if wwwMeteo.find("current_conditions") > 1:
 				Para = LCD4linux.MPMeteoPos.value,LCD4linux.MPMeteoZoom.value,LCD4linux.MPMeteoAlign.value,LCD4linux.MPMeteoSplit.value,LCD4linux.MPMeteoType.value,LCD4linux.MPMeteoColor.value
-				Lput(LCD4linux.MPMeteoLCD.value,putMeteo,Para)
+				Lput(LCD4linux.MPMeteoLCD.value,LCD4linux.MPMeteo.value,putMeteo,Para)
 # Box 1
-			if ScreenActive in LCD4linux.MPBox1.value:
-				Para = LCD4linux.MPBox1x1.value,LCD4linux.MPBox1y1.value,LCD4linux.MPBox1x2.value,LCD4linux.MPBox1y2.value,LCD4linux.MPBox1Color.value,LCD4linux.MPBox1BackColor.value
-				Lput(LCD4linux.MPBox1LCD.value,putBox,Para)
+			Para = LCD4linux.MPBox1x1.value,LCD4linux.MPBox1y1.value,LCD4linux.MPBox1x2.value,LCD4linux.MPBox1y2.value,LCD4linux.MPBox1Color.value,LCD4linux.MPBox1BackColor.value
+			Lput(LCD4linux.MPBox1LCD.value,LCD4linux.MPBox1.value,putBox,Para)
 # Box 2
-			if ScreenActive in LCD4linux.MPBox2.value:
-				Para = LCD4linux.MPBox2x1.value,LCD4linux.MPBox2y1.value,LCD4linux.MPBox2x2.value,LCD4linux.MPBox2y2.value,LCD4linux.MPBox2Color.value,LCD4linux.MPBox2BackColor.value
-				Lput(LCD4linux.MPBox2LCD.value,putBox,Para)
+			Para = LCD4linux.MPBox2x1.value,LCD4linux.MPBox2y1.value,LCD4linux.MPBox2x2.value,LCD4linux.MPBox2y2.value,LCD4linux.MPBox2Color.value,LCD4linux.MPBox2BackColor.value
+			Lput(LCD4linux.MPBox2LCD.value,LCD4linux.MPBox2.value,putBox,Para)
 # Progress Bar
-			if ScreenActive in LCD4linux.MPProgress.value:
-				Para = LCD4linux.MPProgressPos.value, LCD4linux.MPProgressSize.value, LCD4linux.MPProgressType.value, LCD4linux.MPProgressColor.value, LCD4linux.MPProgressAlign.value, LCD4linux.MPProgressShadow.value, LCD4linux.MPProgressShadow2.value
-				Lput(LCD4linux.MPProgressLCD.value,putProgress,Para)
+			Para = LCD4linux.MPProgressPos.value, LCD4linux.MPProgressSize.value, LCD4linux.MPProgressType.value, LCD4linux.MPProgressColor.value, LCD4linux.MPProgressAlign.value, LCD4linux.MPProgressShadow.value, LCD4linux.MPProgressShadow2.value
+			Lput(LCD4linux.MPProgressLCD.value,LCD4linux.MPProgress.value,putProgress,Para)
 # Volume
-			if ScreenActive in LCD4linux.MPVol.value:
-				Para = LCD4linux.MPVolPos.value, LCD4linux.MPVolSize.value, LCD4linux.MPVolAlign.value, LCD4linux.MPVolSplit.value, LCD4linux.MPVolColor.value, LCD4linux.MPVolShadow.value
-				Lput(LCD4linux.MPVolLCD.value,putVol,Para)
+			Para = LCD4linux.MPVolPos.value, LCD4linux.MPVolSize.value, LCD4linux.MPVolAlign.value, LCD4linux.MPVolSplit.value, LCD4linux.MPVolColor.value, LCD4linux.MPVolShadow.value
+			Lput(LCD4linux.MPVolLCD.value,LCD4linux.MPVol.value,putVol,Para)
 # extended Description
-			if ScreenActive in LCD4linux.MPDesc.value:
-				Para = LCD4linux.MPDescPos.value, LCD4linux.MPDescSize.value, LCD4linux.MPDescLines.value, LCD4linux.MPDescColor.value, LCD4linux.MPDescAlign.value, LCD4linux.MPDescSplit.value, LCD4linux.MPDescType.value, LCD4linux.MPDescShadow.value, getFont(LCD4linux.MPDescFont.value)
-				Lput(LCD4linux.MPDescLCD.value,putDescription,Para)
+			Para = LCD4linux.MPDescPos.value, LCD4linux.MPDescSize.value, LCD4linux.MPDescLines.value, LCD4linux.MPDescColor.value, LCD4linux.MPDescAlign.value, LCD4linux.MPDescSplit.value, LCD4linux.MPDescType.value, LCD4linux.MPDescShadow.value, getFont(LCD4linux.MPDescFont.value)
+			Lput(LCD4linux.MPDescLCD.value,LCD4linux.MPDesc.value,putDescription,Para)
 # Title
-			if ScreenActive in LCD4linux.MPTitle.value:
-				Para = LCD4linux.MPTitlePos.value, LCD4linux.MPTitleSize.value, LCD4linux.MPTitleLines.value, LCD4linux.MPTitleColor.value, LCD4linux.MPTitleAlign.value, LCD4linux.MPTitleSplit.value, LCD4linux.MPTitleShadow.value, getFont(LCD4linux.MPTitleFont.value)
-				Lput(LCD4linux.MPTitleLCD.value,putTitle,Para)
+			Para = LCD4linux.MPTitlePos.value, LCD4linux.MPTitleSize.value, LCD4linux.MPTitleLines.value, LCD4linux.MPTitleColor.value, LCD4linux.MPTitleAlign.value, LCD4linux.MPTitleSplit.value, LCD4linux.MPTitleShadow.value, getFont(LCD4linux.MPTitleFont.value)
+			Lput(LCD4linux.MPTitleLCD.value,LCD4linux.MPTitle.value,putTitle,Para)
 # Comm
-			if ScreenActive in LCD4linux.MPComm.value:
-				Para = LCD4linux.MPCommPos.value, LCD4linux.MPCommSize.value, LCD4linux.MPCommLines.value, LCD4linux.MPCommColor.value, LCD4linux.MPCommAlign.value, LCD4linux.MPCommSplit.value, LCD4linux.MPCommShadow.value, getFont(LCD4linux.MPCommFont.value)
-				Lput(LCD4linux.MPCommLCD.value,putComm,Para)
+			Para = LCD4linux.MPCommPos.value, LCD4linux.MPCommSize.value, LCD4linux.MPCommLines.value, LCD4linux.MPCommColor.value, LCD4linux.MPCommAlign.value, LCD4linux.MPCommSplit.value, LCD4linux.MPCommShadow.value, getFont(LCD4linux.MPCommFont.value)
+			Lput(LCD4linux.MPCommLCD.value,LCD4linux.MPComm.value,putComm,Para)
 # get clock
-			if ScreenActive in LCD4linux.MPClock.value:
-				Para = LCD4linux.MPClockPos.value,LCD4linux.MPClockSize.value,LCD4linux.MPClockAlign.value,LCD4linux.MPClockSplit.value,LCD4linux.MPClockType.value,LCD4linux.MPClockSpacing.value,LCD4linux.MPClockAnalog.value,LCD4linux.MPClockColor.value,LCD4linux.MPClockShadow.value,getFont(LCD4linux.MPClockFont.value)
-				Lput(LCD4linux.MPClockLCD.value,putClock,Para)
-			if ScreenActive in LCD4linux.MPClock2.value:
-				Para = LCD4linux.MPClock2Pos.value,LCD4linux.MPClock2Size.value,LCD4linux.MPClock2Align.value,LCD4linux.MPClock2Split.value,LCD4linux.MPClock2Type.value,LCD4linux.MPClock2Spacing.value,LCD4linux.MPClock2Analog.value,LCD4linux.MPClock2Color.value,LCD4linux.MPClock2Shadow.value,getFont(LCD4linux.MPClock2Font.value)
-				Lput(LCD4linux.MPClock2LCD.value,putClock,Para)
+			Para = LCD4linux.MPClockPos.value,LCD4linux.MPClockSize.value,LCD4linux.MPClockAlign.value,LCD4linux.MPClockSplit.value,LCD4linux.MPClockType.value,LCD4linux.MPClockSpacing.value,LCD4linux.MPClockAnalog.value,LCD4linux.MPClockColor.value,LCD4linux.MPClockShadow.value,getFont(LCD4linux.MPClockFont.value)
+			Lput(LCD4linux.MPClockLCD.value,LCD4linux.MPClock.value,putClock,Para)
+			Para = LCD4linux.MPClock2Pos.value,LCD4linux.MPClock2Size.value,LCD4linux.MPClock2Align.value,LCD4linux.MPClock2Split.value,LCD4linux.MPClock2Type.value,LCD4linux.MPClock2Spacing.value,LCD4linux.MPClock2Analog.value,LCD4linux.MPClock2Color.value,LCD4linux.MPClock2Shadow.value,getFont(LCD4linux.MPClock2Font.value)
+			Lput(LCD4linux.MPClock2LCD.value,LCD4linux.MPClock2.value,putClock,Para)
 # Informationen
-			if ScreenActive in LCD4linux.MPInfo.value:
-				Para = LCD4linux.MPInfoPos.value, LCD4linux.MPInfoSize.value,LCD4linux.MPInfoAlign.value,LCD4linux.MPInfoLines.value,LCD4linux.MPInfoSplit.value,LCD4linux.MPInfoColor.value,LCD4linux.MPInfoSensor.value+LCD4linux.MPInfoCPU.value, LCD4linux.MPInfoShadow.value, getFont(LCD4linux.MPInfoFont.value)
-				Lput(LCD4linux.MPInfoLCD.value,putInfo,Para)
+			Para = LCD4linux.MPInfoPos.value, LCD4linux.MPInfoSize.value,LCD4linux.MPInfoAlign.value,LCD4linux.MPInfoLines.value,LCD4linux.MPInfoSplit.value,LCD4linux.MPInfoColor.value,LCD4linux.MPInfoSensor.value+LCD4linux.MPInfoCPU.value, LCD4linux.MPInfoShadow.value, getFont(LCD4linux.MPInfoFont.value)
+			Lput(LCD4linux.MPInfoLCD.value,LCD4linux.MPInfo.value,putInfo,Para)
 # next Timer Record
-			if ScreenActive in LCD4linux.MPTimer.value:
-				Para = LCD4linux.MPTimerPos.value, LCD4linux.MPTimerSize.value, LCD4linux.MPTimerLines.value, LCD4linux.MPTimerType.value, LCD4linux.MPTimerAlign.value, LCD4linux.MPTimerSplit.value, LCD4linux.MPTimerColor.value, LCD4linux.MPTimerShadow.value, getFont(LCD4linux.MPTimerFont.value)
-				Lput(LCD4linux.MPTimerLCD.value,putTimer,Para)
+			Para = LCD4linux.MPTimerPos.value, LCD4linux.MPTimerSize.value, LCD4linux.MPTimerLines.value, LCD4linux.MPTimerType.value, LCD4linux.MPTimerAlign.value, LCD4linux.MPTimerSplit.value, LCD4linux.MPTimerColor.value, LCD4linux.MPTimerShadow.value, getFont(LCD4linux.MPTimerFont.value)
+			Lput(LCD4linux.MPTimerLCD.value,LCD4linux.MPTimer.value,putTimer,Para)
 # Tuner
-			if ScreenActive in LCD4linux.MPTuner.value:
-				Para = LCD4linux.MPTunerPos.value, LCD4linux.MPTunerSize.value, LCD4linux.MPTunerAlign.value, LCD4linux.MPTunerSplit.value, LCD4linux.MPTunerType.value, LCD4linux.MPTunerActive.value,getFont(LCD4linux.MPTunerFont.value)
-				Lput(LCD4linux.MPTunerLCD.value,putTuner,Para)
+			Para = LCD4linux.MPTunerPos.value, LCD4linux.MPTunerSize.value, LCD4linux.MPTunerAlign.value, LCD4linux.MPTunerSplit.value, LCD4linux.MPTunerType.value, LCD4linux.MPTunerActive.value,getFont(LCD4linux.MPTunerFont.value)
+			Lput(LCD4linux.MPTunerLCD.value,LCD4linux.MPTuner.value,putTuner,Para)
 # Audio/Video
-			if ScreenActive in LCD4linux.MPAV.value:
-				Para = LCD4linux.MPAVPos.value, LCD4linux.MPAVSize.value, LCD4linux.MPAVAlign.value, LCD4linux.MPAVSplit.value, LCD4linux.MPAVColor.value, LCD4linux.MPAVShadow.value,getFont(LCD4linux.MPAVFont.value)
-				Lput(LCD4linux.MPAVLCD.value,putAV,Para)
+			Para = LCD4linux.MPAVPos.value, LCD4linux.MPAVSize.value, LCD4linux.MPAVAlign.value, LCD4linux.MPAVSplit.value, LCD4linux.MPAVColor.value, LCD4linux.MPAVShadow.value,getFont(LCD4linux.MPAVFont.value)
+			Lput(LCD4linux.MPAVLCD.value,LCD4linux.MPAV.value,putAV,Para)
 # Bitrate
-			if ScreenActive in LCD4linux.MPBitrate.value:
-				Para = LCD4linux.MPBitratePos.value, LCD4linux.MPBitrateSize.value, LCD4linux.MPBitrateAlign.value, LCD4linux.MPBitrateSplit.value, LCD4linux.MPBitrateColor.value, LCD4linux.MPBitrateShadow.value,getFont(LCD4linux.MPBitrateFont.value)
-				Lput(LCD4linux.MPBitrateLCD.value,putBitrate,Para)
+			Para = LCD4linux.MPBitratePos.value, LCD4linux.MPBitrateSize.value, LCD4linux.MPBitrateAlign.value, LCD4linux.MPBitrateSplit.value, LCD4linux.MPBitrateColor.value, LCD4linux.MPBitrateShadow.value,getFont(LCD4linux.MPBitrateFont.value)
+			Lput(LCD4linux.MPBitrateLCD.value,LCD4linux.MPBitrate.value,putBitrate,Para)
 # Moonphase
-			if ScreenActive in LCD4linux.MPMoon.value:
-				Para = LCD4linux.MPMoonPos.value,LCD4linux.MPMoonSize.value,LCD4linux.MPMoonAlign.value,LCD4linux.MPMoonSplit.value,LCD4linux.MPMoonColor.value,LCD4linux.MPMoonShadow.value,getFont(LCD4linux.MPMoonFont.value)
-				Lput(LCD4linux.MPMoonLCD.value,putMoon,Para)
+			Para = LCD4linux.MPMoonPos.value,LCD4linux.MPMoonSize.value,LCD4linux.MPMoonAlign.value,LCD4linux.MPMoonSplit.value,LCD4linux.MPMoonColor.value,LCD4linux.MPMoonShadow.value,getFont(LCD4linux.MPMoonFont.value)
+			Lput(LCD4linux.MPMoonLCD.value,LCD4linux.MPMoon.value,putMoon,Para)
 # Online-Ping
-			if ScreenActive in LCD4linux.MPPing.value:
-				Para = LCD4linux.MPPingPos.value, LCD4linux.MPPingSize.value, LCD4linux.MPPingAlign.value, LCD4linux.MPPingSplit.value, LCD4linux.MPPingColor.value, LCD4linux.MPPingType.value, LCD4linux.MPPingShow.value, LCD4linux.MPPingTimeout.value, (LCD4linux.MPPingName1.value,LCD4linux.MPPingName2.value,LCD4linux.MPPingName3.value,LCD4linux.MPPingName4.value,LCD4linux.MPPingName5.value), LCD4linux.MPPingShadow.value,getFont(LCD4linux.MPPingFont.value)
-				Lput(LCD4linux.MPPingLCD.value,putOnline,Para)
+			Para = LCD4linux.MPPingPos.value, LCD4linux.MPPingSize.value, LCD4linux.MPPingAlign.value, LCD4linux.MPPingSplit.value, LCD4linux.MPPingColor.value, LCD4linux.MPPingType.value, LCD4linux.MPPingShow.value, LCD4linux.MPPingTimeout.value, (LCD4linux.MPPingName1.value,LCD4linux.MPPingName2.value,LCD4linux.MPPingName3.value,LCD4linux.MPPingName4.value,LCD4linux.MPPingName5.value), LCD4linux.MPPingShadow.value,getFont(LCD4linux.MPPingFont.value)
+			Lput(LCD4linux.MPPingLCD.value,LCD4linux.MPPing.value,putOnline,Para)
 # Devices
-			if ScreenActive in LCD4linux.MPDev.value:
-				Para = LCD4linux.MPDevPos.value, LCD4linux.MPDevSize.value, LCD4linux.MPDevAlign.value, LCD4linux.MPDevSplit.value, LCD4linux.MPDevColor.value, (LCD4linux.MPDevExtra.value,LCD4linux.MPDevName1.value,LCD4linux.MPDevName2.value,LCD4linux.MPDevName3.value,LCD4linux.MPDevName4.value,LCD4linux.MPDevName5.value), LCD4linux.MPDevShadow.value,getFont(LCD4linux.MPDevFont.value)
-				Lput(LCD4linux.MPDevLCD.value,putDev,Para)
+			Para = LCD4linux.MPDevPos.value, LCD4linux.MPDevSize.value, LCD4linux.MPDevAlign.value, LCD4linux.MPDevSplit.value, LCD4linux.MPDevColor.value, (LCD4linux.MPDevExtra.value,LCD4linux.MPDevName1.value,LCD4linux.MPDevName2.value,LCD4linux.MPDevName3.value,LCD4linux.MPDevName4.value,LCD4linux.MPDevName5.value), LCD4linux.MPDevShadow.value, LCD4linux.MPDevType.value,getFont(LCD4linux.MPDevFont.value)
+			Lput(LCD4linux.MPDevLCD.value,LCD4linux.MPDev.value,putDev,Para)
 # HDD
-			if ScreenActive in LCD4linux.MPHdd.value:
-				Para = LCD4linux.MPHddPos.value, LCD4linux.MPHddSize.value, LCD4linux.MPHddAlign.value, LCD4linux.MPHddSplit.value, LCD4linux.MPHddType.value
-				Lput(LCD4linux.MPHddLCD.value,putHdd,Para)
+			Para = LCD4linux.MPHddPos.value, LCD4linux.MPHddSize.value, LCD4linux.MPHddAlign.value, LCD4linux.MPHddSplit.value, LCD4linux.MPHddType.value
+			Lput(LCD4linux.MPHddLCD.value,LCD4linux.MPHdd.value,putHdd,Para)
 # show OSCAM
-			if ScreenActive in LCD4linux.MPOSCAM.value:
-				Para = LCD4linux.MPOSCAMPos.value, LCD4linux.MPOSCAMSize.value, LCD4linux.MPOSCAMColor.value, LCD4linux.MPOSCAMBackColor.value, LCD4linux.MPOSCAMAlign.value, LCD4linux.MPOSCAMSplit.value
-				Lput(LCD4linux.MPOSCAMLCD.value,putOSCAM,Para)
+			Para = LCD4linux.MPOSCAMPos.value, LCD4linux.MPOSCAMSize.value, LCD4linux.MPOSCAMColor.value, LCD4linux.MPOSCAMBackColor.value, LCD4linux.MPOSCAMAlign.value, LCD4linux.MPOSCAMSplit.value
+			Lput(LCD4linux.MPOSCAMLCD.value,LCD4linux.MPOSCAM.value,putOSCAM,Para)
 # show Textfile
-			if ScreenActive in LCD4linux.MPText.value:
-				Para = LCD4linux.MPTextPos.value,LCD4linux.MPTextSize.value,getFont(LCD4linux.MPTextFont.value),LCD4linux.MPTextAlign.value,LCD4linux.MPTextColor.value,LCD4linux.MPTextBackColor.value,LCD4linux.MPTextShadow.value, LCD4linux.MPTextFile.value
-				Lput(LCD4linux.MPTextLCD.value,putTextFile,Para)
+			Para = LCD4linux.MPTextPos.value,LCD4linux.MPTextSize.value,getFont(LCD4linux.MPTextFont.value),LCD4linux.MPTextAlign.value,LCD4linux.MPTextColor.value,LCD4linux.MPTextBackColor.value,LCD4linux.MPTextShadow.value, LCD4linux.MPTextFile.value
+			Lput(LCD4linux.MPTextLCD.value,LCD4linux.MPText.value,putTextFile,Para)
 # show Mail
-			if ScreenActive in LCD4linux.MPMail.value:
-				Para = LCD4linux.MPMailPos.value,LCD4linux.MPMailSize.value,LCD4linux.MPMailProzent.value,LCD4linux.MPMailColor.value,LCD4linux.MPMailBackColor.value,LCD4linux.MPMailAlign.value,LCD4linux.MPMailSplit.value,LCD4linux.MPMailLines.value, LCD4linux.MPMailType.value, LCD4linux.MPMailKonto.value, LCD4linux.MPMailShadow.value, getFont(LCD4linux.MPMailFont.value)
-				Lput(LCD4linux.MPMailLCD.value,putMail,Para)
+			Para = LCD4linux.MPMailPos.value,LCD4linux.MPMailSize.value,LCD4linux.MPMailProzent.value,LCD4linux.MPMailColor.value,LCD4linux.MPMailBackColor.value,LCD4linux.MPMailAlign.value,LCD4linux.MPMailSplit.value,LCD4linux.MPMailLines.value, LCD4linux.MPMailType.value, LCD4linux.MPMailKonto.value, LCD4linux.MPMailShadow.value, getFont(LCD4linux.MPMailFont.value)
+			Lput(LCD4linux.MPMailLCD.value,LCD4linux.MPMail.value,putMail,Para)
 # show Ereignis Icon Bar
-			if ScreenActive in LCD4linux.MPIconBar.value:
-				Para = LCD4linux.MPIconBarPos.value,LCD4linux.MPIconBarSize.value,LCD4linux.MPIconBarAlign.value,LCD4linux.MPIconBarSplit.value,LCD4linux.MPIconBarType.value
-				Lput(LCD4linux.MPIconBarLCD.value,putIconBar,Para)
+			Para = LCD4linux.MPIconBarPos.value,LCD4linux.MPIconBarSize.value,LCD4linux.MPIconBarAlign.value,LCD4linux.MPIconBarSplit.value,LCD4linux.MPIconBarType.value,LCD4linux.MPIconBarPopup.value,LCD4linux.MPIconBarPopupLCD.value
+			Lput(LCD4linux.MPIconBarLCD.value,LCD4linux.MPIconBar.value,putIconBar,Para)
 # show Sonnenaufgang
-			if ScreenActive in LCD4linux.MPSun.value:
-				Para = LCD4linux.MPSunPos.value,LCD4linux.MPSunSize.value,LCD4linux.MPSunColor.value,LCD4linux.MPSunBackColor.value,LCD4linux.MPSunAlign.value,LCD4linux.MPSunSplit.value,LCD4linux.MPSunType.value,LCD4linux.MPSunShadow.value,getFont(LCD4linux.MPSunFont.value)
-				Lput(LCD4linux.MPSunLCD.value,putSun,Para)
+			Para = LCD4linux.MPSunPos.value,LCD4linux.MPSunSize.value,LCD4linux.MPSunColor.value,LCD4linux.MPSunBackColor.value,LCD4linux.MPSunAlign.value,LCD4linux.MPSunSplit.value,LCD4linux.MPSunType.value,LCD4linux.MPSunShadow.value,getFont(LCD4linux.MPSunFont.value)
+			Lput(LCD4linux.MPSunLCD.value,LCD4linux.MPSun.value,putSun,Para)
 
 # externe Elementeliste
 			putL4LElist("Media")
 
 # FritzCall
-			if ScreenActive in LCD4linux.MPFritz.value:
-				Para = LCD4linux.MPFritzPos.value, LCD4linux.MPFritzSize.value, LCD4linux.MPFritzColor.value, LCD4linux.MPFritzBackColor.value, LCD4linux.MPFritzAlign.value, LCD4linux.MPFritzPicPos.value, LCD4linux.MPFritzPicSize.value, LCD4linux.MPFritzPicAlign.value, LCD4linux.MPFritzShadow.value, getFont(LCD4linux.MPFritzFont.value)
-				Lput(LCD4linux.MPFritzLCD.value,putFritz,Para)
+			Para = LCD4linux.MPFritzPos.value, LCD4linux.MPFritzSize.value, LCD4linux.MPFritzColor.value, LCD4linux.MPFritzBackColor.value, LCD4linux.MPFritzAlign.value, LCD4linux.MPFritzType.value, LCD4linux.MPFritzPicPos.value, LCD4linux.MPFritzPicSize.value, LCD4linux.MPFritzPicAlign.value, LCD4linux.MPFritzShadow.value, getFont(LCD4linux.MPFritzFont.value)
+			Lput(LCD4linux.MPFritzLCD.value,LCD4linux.MPFritz.value,putFritz,Para)
 # show OSD
 			if LCD4linux.OSD.value != "0" and ConfigMode == False and FritzTime == 0:
 				if OSDon >= 2 and "M" in LCD4linux.OSDshow.value:
@@ -10458,215 +10568,174 @@ def LCD4linuxPIC(self,session):
 			else:
 				if AktTFT != "DREAM":
 					TFTCheck(False,SetMode="DREAM")
-		writeHelligkeit(LCD4linux.Helligkeit.value,LCD4linux.Helligkeit2.value,LCD4linux.Helligkeit3.value)
+		Dunkel=writeHelligkeit(LCD4linux.Helligkeit.value,LCD4linux.Helligkeit2.value,LCD4linux.Helligkeit3.value)
 # LCDoff
 		if LCD4linux.LCDoff.value != LCD4linux.LCDon.value or LCD4linux.LCDWEoff.value != LCD4linux.LCDWEon.value or LCDon == False:
 			if isOffTime(LCD4linux.LCDoff.value,LCD4linux.LCDon.value,LCD4linux.LCDWEoff.value,LCD4linux.LCDWEon.value) or LCDon == False:
-				writeHelligkeit(0,0,0)
-				Dunkel = True
+				Dunkel=writeHelligkeit(0,0,0)
 				L4log("LCD off")
 # FritzCall
 		if LCD4linux.Fritz.value != "0" and FritzTime > 1:
-			Para = LCD4linux.FritzPos.value, LCD4linux.FritzSize.value, LCD4linux.FritzColor.value, LCD4linux.FritzBackColor.value, LCD4linux.FritzAlign.value, LCD4linux.FritzPicPos.value, LCD4linux.FritzPicSize.value, LCD4linux.FritzPicAlign.value, LCD4linux.FritzShadow.value, getFont(LCD4linux.FritzFont.value)
-			Lput(LCD4linux.FritzPopupLCD.value,putFritz,Para)
+			Para = LCD4linux.FritzPos.value, LCD4linux.FritzSize.value, LCD4linux.FritzColor.value, LCD4linux.FritzBackColor.value, LCD4linux.FritzAlign.value, LCD4linux.FritzType.value, LCD4linux.FritzPicPos.value, LCD4linux.FritzPicSize.value, LCD4linux.FritzPicAlign.value, LCD4linux.FritzShadow.value, getFont(LCD4linux.FritzFont.value)
+			Lput(LCD4linux.FritzPopupLCD.value,"123456789",putFritz,Para)
 		else:
 # Bild
-			if ScreenActive in LCD4linux.Bild.value:
+			if ScreenActive[0] in LCD4linux.Bild.value or ScreenActive[-3:] != ["","",""]:
 				ShowPicture = getShowPicture(LCD4linux.BildFile.value,0)
 				Para = LCD4linux.BildPos.value, LCD4linux.BildSize.value, 0, LCD4linux.BildAlign.value, LCD4linux.BildQuick.value, LCD4linux.BildTransp.value, ShowPicture, LCD4linux.BildFile.value
-				Lput4(LCD4linux.BildLCD.value,putBild,Para)
+				Lput4(LCD4linux.BildLCD.value,LCD4linux.Bild.value,putBild,Para)
 # Bild 2
-			if ScreenActive in LCD4linux.Bild2.value:
+			if ScreenActive[0] in LCD4linux.Bild2.value or ScreenActive[-3:] != ["","",""]:
 				ShowPicture = getShowPicture(LCD4linux.Bild2File.value,1)
 				Para = LCD4linux.Bild2Pos.value, LCD4linux.Bild2Size.value, 0, LCD4linux.Bild2Align.value, LCD4linux.Bild2Quick.value, LCD4linux.Bild2Transp.value, ShowPicture, LCD4linux.Bild2File.value
-				Lput4(LCD4linux.Bild2LCD.value,putBild,Para)
+				Lput4(LCD4linux.Bild2LCD.value,LCD4linux.Bild2.value,putBild,Para)
 # Bild 3
-			if ScreenActive in LCD4linux.Bild3.value:
+			if ScreenActive[0] in LCD4linux.Bild3.value or ScreenActive[-3:] != ["","",""]:
 				ShowPicture = getShowPicture(LCD4linux.Bild3File.value,2)
 				Para = LCD4linux.Bild3Pos.value, LCD4linux.Bild3Size.value, 0, LCD4linux.Bild3Align.value, LCD4linux.Bild3Quick.value, LCD4linux.Bild3Transp.value, ShowPicture, LCD4linux.Bild3File.value
-				Lput4(LCD4linux.Bild3LCD.value,putBild,Para)
+				Lput4(LCD4linux.Bild3LCD.value,LCD4linux.Bild3.value,putBild,Para)
 # Bild 4
-			if ScreenActive in LCD4linux.Bild4.value:
+			if ScreenActive[0] in LCD4linux.Bild4.value or ScreenActive[-3:] != ["","",""]:
 				ShowPicture = getShowPicture(LCD4linux.Bild4File.value,0)
 				Para = LCD4linux.Bild4Pos.value, LCD4linux.Bild4Size.value, 0, LCD4linux.Bild4Align.value, LCD4linux.Bild4Quick.value, LCD4linux.Bild4Transp.value, ShowPicture, LCD4linux.Bild4File.value
-				Lput4(LCD4linux.Bild4LCD.value,putBild,Para)
+				Lput4(LCD4linux.Bild4LCD.value,LCD4linux.Bild4.value,putBild,Para)
 # Picon
-			if ScreenActive in LCD4linux.Picon.value:
-				Para = LCD4linux.PiconSize.value, LCD4linux.PiconPos.value, LCD4linux.PiconAlign.value, LCD4linux.PiconFullScreen.value, LCD4linux.PiconSplit.value, LCD4linux.PiconTextSize.value, False
-				Lput(LCD4linux.PiconLCD.value,putPicon,Para)
+			Para = LCD4linux.PiconSize.value, LCD4linux.PiconPos.value, LCD4linux.PiconAlign.value, LCD4linux.PiconFullScreen.value, LCD4linux.PiconSplit.value, LCD4linux.PiconTextSize.value, False
+			Lput(LCD4linux.PiconLCD.value,LCD4linux.Picon.value,putPicon,Para)
 # Picon 2
-			if ScreenActive in LCD4linux.Picon2.value:
-				Para = LCD4linux.Picon2Size.value, LCD4linux.Picon2Pos.value, LCD4linux.Picon2Align.value, LCD4linux.Picon2FullScreen.value, LCD4linux.Picon2Split.value, LCD4linux.Picon2TextSize.value, True
-				Lput(LCD4linux.Picon2LCD.value,putPicon,Para)
+			Para = LCD4linux.Picon2Size.value, LCD4linux.Picon2Pos.value, LCD4linux.Picon2Align.value, LCD4linux.Picon2FullScreen.value, LCD4linux.Picon2Split.value, LCD4linux.Picon2TextSize.value, True
+			Lput(LCD4linux.Picon2LCD.value,LCD4linux.Picon2.value,putPicon,Para)
 # Kalender
-			if ScreenActive in LCD4linux.Cal.value:
-				Para = LCD4linux.CalPos.value,LCD4linux.CalZoom.value,LCD4linux.CalAlign.value,LCD4linux.CalSplit.value,LCD4linux.CalType.value,LCD4linux.CalTypeE.value,LCD4linux.CalLayout.value,LCD4linux.CalColor.value,LCD4linux.CalBackColor.value,LCD4linux.CalCaptionColor.value,LCD4linux.CalShadow.value,getFont(LCD4linux.CalFont.value)
-				Lput(LCD4linux.CalLCD.value,putCalendar,Para)
+			Para = LCD4linux.CalPos.value,LCD4linux.CalZoom.value,LCD4linux.CalAlign.value,LCD4linux.CalSplit.value,LCD4linux.CalType.value,LCD4linux.CalTypeE.value,LCD4linux.CalLayout.value,LCD4linux.CalColor.value,LCD4linux.CalBackColor.value,LCD4linux.CalCaptionColor.value,LCD4linux.CalShadow.value,getFont(LCD4linux.CalFont.value)
+			Lput(LCD4linux.CalLCD.value,LCD4linux.Cal.value,putCalendar,Para)
 # Termin-List
-			if ScreenActive in LCD4linux.CalList.value:
-				Para = LCD4linux.CalListPos.value,LCD4linux.CalListSize.value,LCD4linux.CalListProzent.value,LCD4linux.CalListAlign.value,LCD4linux.CalListSplit.value,LCD4linux.CalListType.value,LCD4linux.CalListLines.value,LCD4linux.CalListColor.value,LCD4linux.CalListShadow.value,getFont(LCD4linux.CalFont.value)
-				Lput(LCD4linux.CalListLCD.value,putCalendarList,Para)
+			Para = LCD4linux.CalListPos.value,LCD4linux.CalListSize.value,LCD4linux.CalListProzent.value,LCD4linux.CalListAlign.value,LCD4linux.CalListSplit.value,LCD4linux.CalListType.value,LCD4linux.CalListLines.value,LCD4linux.CalListColor.value,LCD4linux.CalListShadow.value,getFont(LCD4linux.CalFont.value)
+			Lput(LCD4linux.CalListLCD.value,LCD4linux.CalList.value,putCalendarList,Para)
 # MSN Wetter
-			if ScreenActive in LCD4linux.Wetter.value and "forecast" in wwwWetter[0]:
+			if "forecast" in wwwWetter[0]:
 				Para = LCD4linux.WetterPos.value,LCD4linux.WetterZoom.value,LCD4linux.WetterAlign.value,LCD4linux.WetterSplit.value,LCD4linux.WetterType.value,LCD4linux.WetterColor.value,LCD4linux.WetterShadow.value,0,getFont(LCD4linux.WetterFont.value)
-				Lput(LCD4linux.WetterLCD.value,putWetter,Para)
-			if ScreenActive in LCD4linux.Wetter2.value and "forecast" in wwwWetter[1]:
+				Lput(LCD4linux.WetterLCD.value,LCD4linux.Wetter.value,putWetter,Para)
+			if "forecast" in wwwWetter[1]:
 				Para = LCD4linux.Wetter2Pos.value,LCD4linux.Wetter2Zoom.value,LCD4linux.Wetter2Align.value,LCD4linux.Wetter2Split.value,LCD4linux.Wetter2Type.value,LCD4linux.Wetter2Color.value,LCD4linux.Wetter2Shadow.value,1,getFont(LCD4linux.Wetter2Font.value)
-				Lput(LCD4linux.Wetter2LCD.value,putWetter,Para)
+				Lput(LCD4linux.Wetter2LCD.value,LCD4linux.Wetter2.value,putWetter,Para)
 # Netatmo CO2
-			if ScreenActive in LCD4linux.NetAtmoCO2.value:
-				Para = "CO2",LCD4linux.NetAtmoCO2Pos.value,LCD4linux.NetAtmoCO2Size.value,LCD4linux.NetAtmoCO2Len.value,LCD4linux.NetAtmoCO2Align.value,LCD4linux.NetAtmoCO2Split.value,LCD4linux.NetAtmoCO2Type.value
-				Lput(LCD4linux.NetAtmoCO2LCD.value,putNetatmoIllu,Para)
+			Para = "CO2",LCD4linux.NetAtmoCO2Pos.value,LCD4linux.NetAtmoCO2Size.value,LCD4linux.NetAtmoCO2Len.value,LCD4linux.NetAtmoCO2Align.value,LCD4linux.NetAtmoCO2Split.value,LCD4linux.NetAtmoCO2Type.value
+			Lput(LCD4linux.NetAtmoCO2LCD.value,LCD4linux.NetAtmoCO2.value,putNetatmoIllu,Para)
 # HTTP WWW Site
-			if ScreenActive in LCD4linux.WWW1.value:
-				Para = 1,LCD4linux.WWW1Pos.value,LCD4linux.WWW1Size.value,LCD4linux.WWW1Align.value,LCD4linux.WWW1CutX.value,LCD4linux.WWW1CutY.value,LCD4linux.WWW1CutW.value,LCD4linux.WWW1CutH.value
-				Lput(LCD4linux.WWW1LCD.value,putWWW,Para)
+			Para = 1,LCD4linux.WWW1Pos.value,LCD4linux.WWW1Size.value,LCD4linux.WWW1Align.value,LCD4linux.WWW1CutX.value,LCD4linux.WWW1CutY.value,LCD4linux.WWW1CutW.value,LCD4linux.WWW1CutH.value
+			Lput(LCD4linux.WWW1LCD.value,LCD4linux.WWW1.value,putWWW,Para)
 			Brief1.join()
 			Brief2.join()
 			Brief3.join()
 # Box 1
-			if ScreenActive in LCD4linux.Box1.value:
-				Para = LCD4linux.Box1x1.value,LCD4linux.Box1y1.value,LCD4linux.Box1x2.value,LCD4linux.Box1y2.value,LCD4linux.Box1Color.value,LCD4linux.Box1BackColor.value
-				Lput(LCD4linux.Box1LCD.value,putBox,Para)
+			Para = LCD4linux.Box1x1.value,LCD4linux.Box1y1.value,LCD4linux.Box1x2.value,LCD4linux.Box1y2.value,LCD4linux.Box1Color.value,LCD4linux.Box1BackColor.value
+			Lput(LCD4linux.Box1LCD.value,LCD4linux.Box1.value,putBox,Para)
 # Box 2
-			if ScreenActive in LCD4linux.Box2.value:
-				Para = LCD4linux.Box2x1.value,LCD4linux.Box2y1.value,LCD4linux.Box2x2.value,LCD4linux.Box2y2.value,LCD4linux.Box2Color.value,LCD4linux.Box2BackColor.value
-				Lput(LCD4linux.Box2LCD.value,putBox,Para)
+			Para = LCD4linux.Box2x1.value,LCD4linux.Box2y1.value,LCD4linux.Box2x2.value,LCD4linux.Box2y2.value,LCD4linux.Box2Color.value,LCD4linux.Box2BackColor.value
+			Lput(LCD4linux.Box2LCD.value,LCD4linux.Box2.value,putBox,Para)
 # Moonphase
-			if ScreenActive in LCD4linux.Moon.value:
-				Para = LCD4linux.MoonPos.value,LCD4linux.MoonSize.value,LCD4linux.MoonAlign.value,LCD4linux.MoonSplit.value,LCD4linux.MoonColor.value,LCD4linux.MoonShadow.value,getFont(LCD4linux.MoonFont.value)
-				Lput(LCD4linux.MoonLCD.value,putMoon,Para)
+			Para = LCD4linux.MoonPos.value,LCD4linux.MoonSize.value,LCD4linux.MoonAlign.value,LCD4linux.MoonSplit.value,LCD4linux.MoonColor.value,LCD4linux.MoonShadow.value,getFont(LCD4linux.MoonFont.value)
+			Lput(LCD4linux.MoonLCD.value,LCD4linux.Moon.value,putMoon,Para)
 # Netatmo
-			if ScreenActive in LCD4linux.NetAtmo.value:
-				Para = LCD4linux.NetAtmoPos.value,LCD4linux.NetAtmoSize.value,LCD4linux.NetAtmoAlign.value,LCD4linux.NetAtmoSplit.value,LCD4linux.NetAtmoType.value,LCD4linux.NetAtmoColor.value,LCD4linux.NetAtmoShadow.value,getFont(LCD4linux.NetAtmoFont.value)
-				Lput(LCD4linux.NetAtmoLCD.value,putNetatmo,Para)
+			Para = LCD4linux.NetAtmoPos.value,LCD4linux.NetAtmoSize.value,LCD4linux.NetAtmoAlign.value,LCD4linux.NetAtmoSplit.value,LCD4linux.NetAtmoType.value,LCD4linux.NetAtmoColor.value,LCD4linux.NetAtmoShadow.value,getFont(LCD4linux.NetAtmoFont.value)
+			Lput(LCD4linux.NetAtmoLCD.value,LCD4linux.NetAtmo.value,putNetatmo,Para)
 # Meteo station
-			if ScreenActive in LCD4linux.Meteo.value and wwwMeteo.find("current_conditions") > 1:
+			if wwwMeteo.find("current_conditions") > 1:
 				Para = LCD4linux.MeteoPos.value,LCD4linux.MeteoZoom.value,LCD4linux.MeteoAlign.value,LCD4linux.MeteoSplit.value,LCD4linux.MeteoType.value,LCD4linux.MeteoColor.value
-				Lput(LCD4linux.MeteoLCD.value,putMeteo,Para)
+				Lput(LCD4linux.MeteoLCD.value,LCD4linux.Meteo.value,putMeteo,Para)
 # Signal Quality Bar
-			if ScreenActive in LCD4linux.Signal.value:
-				Para = LCD4linux.SignalPos.value, LCD4linux.SignalSize.value, LCD4linux.SignalAlign.value, LCD4linux.SignalSplit.value, LCD4linux.SignalColor.value, LCD4linux.SignalGradient.value
-				Lput(LCD4linux.SignalLCD.value,putSignal,Para)
+			Para = LCD4linux.SignalPos.value, LCD4linux.SignalSize.value, LCD4linux.SignalAlign.value, LCD4linux.SignalSplit.value, LCD4linux.SignalColor.value, LCD4linux.SignalGradient.value
+			Lput(LCD4linux.SignalLCD.value,LCD4linux.Signal.value,putSignal,Para)
 # get clock
-			if ScreenActive in LCD4linux.Clock.value:
-				Para = LCD4linux.ClockPos.value,LCD4linux.ClockSize.value,LCD4linux.ClockAlign.value,LCD4linux.ClockSplit.value,LCD4linux.ClockType.value,LCD4linux.ClockSpacing.value,LCD4linux.ClockAnalog.value,LCD4linux.ClockColor.value,LCD4linux.ClockShadow.value,getFont(LCD4linux.ClockFont.value)
-				Lput(LCD4linux.ClockLCD.value,putClock,Para)
-			if ScreenActive in LCD4linux.Clock2.value:
-				Para = LCD4linux.Clock2Pos.value,LCD4linux.Clock2Size.value,LCD4linux.Clock2Align.value,LCD4linux.Clock2Split.value,LCD4linux.Clock2Type.value,LCD4linux.Clock2Spacing.value,LCD4linux.Clock2Analog.value,LCD4linux.Clock2Color.value,LCD4linux.Clock2Shadow.value,getFont(LCD4linux.Clock2Font.value)
-				Lput(LCD4linux.Clock2LCD.value,putClock,Para)
+			Para = LCD4linux.ClockPos.value,LCD4linux.ClockSize.value,LCD4linux.ClockAlign.value,LCD4linux.ClockSplit.value,LCD4linux.ClockType.value,LCD4linux.ClockSpacing.value,LCD4linux.ClockAnalog.value,LCD4linux.ClockColor.value,LCD4linux.ClockShadow.value,getFont(LCD4linux.ClockFont.value)
+			Lput(LCD4linux.ClockLCD.value,LCD4linux.Clock.value,putClock,Para)
+			Para = LCD4linux.Clock2Pos.value,LCD4linux.Clock2Size.value,LCD4linux.Clock2Align.value,LCD4linux.Clock2Split.value,LCD4linux.Clock2Type.value,LCD4linux.Clock2Spacing.value,LCD4linux.Clock2Analog.value,LCD4linux.Clock2Color.value,LCD4linux.Clock2Shadow.value,getFont(LCD4linux.Clock2Font.value)
+			Lput(LCD4linux.Clock2LCD.value,LCD4linux.Clock2.value,putClock,Para)
 # Informationen
-			if ScreenActive in LCD4linux.Info.value:
-				Para = LCD4linux.InfoPos.value, LCD4linux.InfoSize.value,LCD4linux.InfoAlign.value,LCD4linux.InfoLines.value,LCD4linux.InfoSplit.value,LCD4linux.InfoColor.value,LCD4linux.InfoTuner.value+LCD4linux.InfoSensor.value+LCD4linux.InfoCPU.value, LCD4linux.InfoShadow.value, getFont(LCD4linux.InfoFont.value)
-				Lput(LCD4linux.InfoLCD.value,putInfo,Para)
+			Para = LCD4linux.InfoPos.value, LCD4linux.InfoSize.value,LCD4linux.InfoAlign.value,LCD4linux.InfoLines.value,LCD4linux.InfoSplit.value,LCD4linux.InfoColor.value,LCD4linux.InfoTuner.value+LCD4linux.InfoSensor.value+LCD4linux.InfoCPU.value, LCD4linux.InfoShadow.value, getFont(LCD4linux.InfoFont.value)
+			Lput(LCD4linux.InfoLCD.value,LCD4linux.Info.value,putInfo,Para)
 # Satellit
-			if ScreenActive in LCD4linux.Sat.value:
-				Para = LCD4linux.SatPos.value, LCD4linux.SatSize.value, LCD4linux.SatAlign.value, LCD4linux.SatSplit.value, LCD4linux.SatColor.value, LCD4linux.SatType.value, LCD4linux.SatShadow.value, getFont(LCD4linux.SatFont.value)
-				Lput(LCD4linux.SatLCD.value,putSat,Para)
+			Para = LCD4linux.SatPos.value, LCD4linux.SatSize.value, LCD4linux.SatAlign.value, LCD4linux.SatSplit.value, LCD4linux.SatColor.value, LCD4linux.SatType.value, LCD4linux.SatShadow.value, getFont(LCD4linux.SatFont.value)
+			Lput(LCD4linux.SatLCD.value,LCD4linux.Sat.value,putSat,Para)
 # Provider
-			if ScreenActive in LCD4linux.Prov.value:
-				Para = LCD4linux.ProvPos.value, LCD4linux.ProvSize.value, LCD4linux.ProvAlign.value, LCD4linux.ProvSplit.value, LCD4linux.ProvColor.value, LCD4linux.ProvType.value, LCD4linux.ProvShadow.value, getFont(LCD4linux.ProvFont.value)
-				Lput(LCD4linux.ProvLCD.value,putProv,Para)
+			Para = LCD4linux.ProvPos.value, LCD4linux.ProvSize.value, LCD4linux.ProvAlign.value, LCD4linux.ProvSplit.value, LCD4linux.ProvColor.value, LCD4linux.ProvType.value, LCD4linux.ProvShadow.value, getFont(LCD4linux.ProvFont.value)
+			Lput(LCD4linux.ProvLCD.value,LCD4linux.Prov.value,putProv,Para)
 # next Timer Record
-			if ScreenActive in LCD4linux.Timer.value:
-				Para = LCD4linux.TimerPos.value, LCD4linux.TimerSize.value, LCD4linux.TimerLines.value, LCD4linux.TimerType.value, LCD4linux.TimerAlign.value, LCD4linux.TimerSplit.value, LCD4linux.TimerColor.value, LCD4linux.TimerShadow.value, getFont(LCD4linux.TimerFont.value)
-				Lput(LCD4linux.TimerLCD.value,putTimer,Para)
+			Para = LCD4linux.TimerPos.value, LCD4linux.TimerSize.value, LCD4linux.TimerLines.value, LCD4linux.TimerType.value, LCD4linux.TimerAlign.value, LCD4linux.TimerSplit.value, LCD4linux.TimerColor.value, LCD4linux.TimerShadow.value, getFont(LCD4linux.TimerFont.value)
+			Lput(LCD4linux.TimerLCD.value,LCD4linux.Timer.value,putTimer,Para)
 # aktive Sendernummer
-			if ScreenActive in LCD4linux.ChannelNum.value:
-				Para = LCD4linux.ChannelNumPos.value, LCD4linux.ChannelNumSize.value, LCD4linux.ChannelNumAlign.value, LCD4linux.ChannelNumBackColor.value, LCD4linux.ChannelNumColor.value, LCD4linux.ChannelNumShadow.value ,getFont(LCD4linux.ChannelNumFont.value)
-				Lput(LCD4linux.ChannelNumLCD.value,putChannelNum,Para)
+			Para = LCD4linux.ChannelNumPos.value, LCD4linux.ChannelNumSize.value, LCD4linux.ChannelNumAlign.value, LCD4linux.ChannelNumBackColor.value, LCD4linux.ChannelNumColor.value, LCD4linux.ChannelNumShadow.value ,getFont(LCD4linux.ChannelNumFont.value)
+			Lput(LCD4linux.ChannelNumLCD.value,LCD4linux.ChannelNum.value,putChannelNum,Para)
 # aktive Sendername
-			if ScreenActive in LCD4linux.Channel.value:
-				Para = LCD4linux.ChannelPos.value, LCD4linux.ChannelSize.value, LCD4linux.ChannelLines.value, LCD4linux.ChannelAlign.value, LCD4linux.ChannelSplit.value, LCD4linux.ChannelColor.value, LCD4linux.ChannelShadow.value ,getFont(LCD4linux.ChannelFont.value)
-				Lput(LCD4linux.ChannelLCD.value,putChannel,Para)
+			Para = LCD4linux.ChannelPos.value, LCD4linux.ChannelSize.value, LCD4linux.ChannelLines.value, LCD4linux.ChannelAlign.value, LCD4linux.ChannelSplit.value, LCD4linux.ChannelColor.value, LCD4linux.ChannelShadow.value ,getFont(LCD4linux.ChannelFont.value)
+			Lput(LCD4linux.ChannelLCD.value,LCD4linux.Channel.value,putChannel,Para)
 # Progress Bar
-			if ScreenActive in LCD4linux.Progress.value:
-				Para = LCD4linux.ProgressPos.value, LCD4linux.ProgressSize.value, LCD4linux.ProgressType.value, LCD4linux.ProgressColor.value, LCD4linux.ProgressAlign.value, LCD4linux.ProgressShadow.value, LCD4linux.ProgressShadow2.value
-				Lput(LCD4linux.ProgressLCD.value,putProgress,Para)
+			Para = LCD4linux.ProgressPos.value, LCD4linux.ProgressSize.value, LCD4linux.ProgressType.value, LCD4linux.ProgressColor.value, LCD4linux.ProgressAlign.value, LCD4linux.ProgressShadow.value, LCD4linux.ProgressShadow2.value
+			Lput(LCD4linux.ProgressLCD.value,LCD4linux.Progress.value,putProgress,Para)
 # Volume
-			if ScreenActive in LCD4linux.Vol.value:
-				Para = LCD4linux.VolPos.value, LCD4linux.VolSize.value, LCD4linux.VolAlign.value, LCD4linux.VolSplit.value, LCD4linux.VolColor.value, LCD4linux.VolShadow.value
-				Lput(LCD4linux.VolLCD.value,putVol,Para)
+			Para = LCD4linux.VolPos.value, LCD4linux.VolSize.value, LCD4linux.VolAlign.value, LCD4linux.VolSplit.value, LCD4linux.VolColor.value, LCD4linux.VolShadow.value
+			Lput(LCD4linux.VolLCD.value,LCD4linux.Vol.value,putVol,Para)
 # extended Description
-			if ScreenActive in LCD4linux.Desc.value:
-				Para = LCD4linux.DescPos.value, LCD4linux.DescSize.value, LCD4linux.DescLines.value, LCD4linux.DescColor.value, LCD4linux.DescAlign.value, LCD4linux.DescSplit.value, LCD4linux.DescType.value, LCD4linux.DescShadow.value, getFont(LCD4linux.DescFont.value)
-				Lput(LCD4linux.DescLCD.value,putDescription,Para)
+			Para = LCD4linux.DescPos.value, LCD4linux.DescSize.value, LCD4linux.DescLines.value, LCD4linux.DescColor.value, LCD4linux.DescAlign.value, LCD4linux.DescSplit.value, LCD4linux.DescType.value, LCD4linux.DescShadow.value, getFont(LCD4linux.DescFont.value)
+			Lput(LCD4linux.DescLCD.value,LCD4linux.Desc.value,putDescription,Para)
 # aktive Event
-			if ScreenActive in LCD4linux.Prog.value:
-				Para = LCD4linux.ProgPos.value, LCD4linux.ProgSize.value, LCD4linux.ProgLines.value, LCD4linux.ProgType.value, LCD4linux.ProgColor.value, LCD4linux.ProgAlign.value, LCD4linux.ProgSplit.value, LCD4linux.ProgShadow.value, getFont(LCD4linux.ProgFont.value)
-				Lput(LCD4linux.ProgLCD.value,putProg,Para)
+			Para = LCD4linux.ProgPos.value, LCD4linux.ProgSize.value, LCD4linux.ProgLines.value, LCD4linux.ProgType.value, LCD4linux.ProgColor.value, LCD4linux.ProgAlign.value, LCD4linux.ProgSplit.value, LCD4linux.ProgShadow.value, getFont(LCD4linux.ProgFont.value)
+			Lput(LCD4linux.ProgLCD.value,LCD4linux.Prog.value,putProg,Para)
 # next Event
-			if ScreenActive in LCD4linux.ProgNext.value:
-				Para = LCD4linux.ProgNextPos.value, LCD4linux.ProgNextSize.value, LCD4linux.ProgNextLines.value, LCD4linux.ProgNextType.value, LCD4linux.ProgNextColor.value, LCD4linux.ProgNextAlign.value, LCD4linux.ProgNextSplit.value, LCD4linux.ProgNextShadow.value, getFont(LCD4linux.ProgNextFont.value)
-				Lput(LCD4linux.ProgNextLCD.value,putProgNext,Para)
+			Para = LCD4linux.ProgNextPos.value, LCD4linux.ProgNextSize.value, LCD4linux.ProgNextLines.value, LCD4linux.ProgNextType.value, LCD4linux.ProgNextColor.value, LCD4linux.ProgNextAlign.value, LCD4linux.ProgNextSplit.value, LCD4linux.ProgNextShadow.value, getFont(LCD4linux.ProgNextFont.value)
+			Lput(LCD4linux.ProgNextLCD.value,LCD4linux.ProgNext.value,putProgNext,Para)
 # Tuner
-			if ScreenActive in LCD4linux.Tuner.value:
-				Para = LCD4linux.TunerPos.value, LCD4linux.TunerSize.value, LCD4linux.TunerAlign.value, LCD4linux.TunerSplit.value, LCD4linux.TunerType.value, LCD4linux.TunerActive.value,getFont(LCD4linux.TunerFont.value)
-				Lput(LCD4linux.TunerLCD.value,putTuner,Para)
+			Para = LCD4linux.TunerPos.value, LCD4linux.TunerSize.value, LCD4linux.TunerAlign.value, LCD4linux.TunerSplit.value, LCD4linux.TunerType.value, LCD4linux.TunerActive.value,getFont(LCD4linux.TunerFont.value)
+			Lput(LCD4linux.TunerLCD.value,LCD4linux.Tuner.value,putTuner,Para)
 # Audio/Video
-			if ScreenActive in LCD4linux.AV.value:
-				Para = LCD4linux.AVPos.value, LCD4linux.AVSize.value, LCD4linux.AVAlign.value, LCD4linux.AVSplit.value, LCD4linux.AVColor.value, LCD4linux.AVShadow.value,getFont(LCD4linux.AVFont.value)
-				Lput(LCD4linux.AVLCD.value,putAV,Para)
+			Para = LCD4linux.AVPos.value, LCD4linux.AVSize.value, LCD4linux.AVAlign.value, LCD4linux.AVSplit.value, LCD4linux.AVColor.value, LCD4linux.AVShadow.value,getFont(LCD4linux.AVFont.value)
+			Lput(LCD4linux.AVLCD.value,LCD4linux.AV.value,putAV,Para)
 # Bitrate
-			if ScreenActive in LCD4linux.Bitrate.value:
-				Para = LCD4linux.BitratePos.value, LCD4linux.BitrateSize.value, LCD4linux.BitrateAlign.value, LCD4linux.BitrateSplit.value, LCD4linux.BitrateColor.value, LCD4linux.BitrateShadow.value,getFont(LCD4linux.BitrateFont.value)
-				Lput(LCD4linux.BitrateLCD.value,putBitrate,Para)
+			Para = LCD4linux.BitratePos.value, LCD4linux.BitrateSize.value, LCD4linux.BitrateAlign.value, LCD4linux.BitrateSplit.value, LCD4linux.BitrateColor.value, LCD4linux.BitrateShadow.value,getFont(LCD4linux.BitrateFont.value)
+			Lput(LCD4linux.BitrateLCD.value,LCD4linux.Bitrate.value,putBitrate,Para)
 # Online-Ping
-			if ScreenActive in LCD4linux.Ping.value:
-				Para = LCD4linux.PingPos.value, LCD4linux.PingSize.value, LCD4linux.PingAlign.value, LCD4linux.PingSplit.value, LCD4linux.PingColor.value, LCD4linux.PingType.value, LCD4linux.PingShow.value, LCD4linux.PingTimeout.value, (LCD4linux.PingName1.value,LCD4linux.PingName2.value,LCD4linux.PingName3.value,LCD4linux.PingName4.value,LCD4linux.PingName5.value), LCD4linux.PingShadow.value,getFont(LCD4linux.PingFont.value)
-				Lput(LCD4linux.PingLCD.value,putOnline,Para)
+			Para = LCD4linux.PingPos.value, LCD4linux.PingSize.value, LCD4linux.PingAlign.value, LCD4linux.PingSplit.value, LCD4linux.PingColor.value, LCD4linux.PingType.value, LCD4linux.PingShow.value, LCD4linux.PingTimeout.value, (LCD4linux.PingName1.value,LCD4linux.PingName2.value,LCD4linux.PingName3.value,LCD4linux.PingName4.value,LCD4linux.PingName5.value), LCD4linux.PingShadow.value,getFont(LCD4linux.PingFont.value)
+			Lput(LCD4linux.PingLCD.value,LCD4linux.Ping.value,putOnline,Para)
 # Devices
-			if ScreenActive in LCD4linux.Dev.value:
-				Para = LCD4linux.DevPos.value, LCD4linux.DevSize.value, LCD4linux.DevAlign.value, LCD4linux.DevSplit.value, LCD4linux.DevColor.value, (LCD4linux.DevExtra.value,LCD4linux.DevName1.value,LCD4linux.DevName2.value,LCD4linux.DevName3.value,LCD4linux.DevName4.value,LCD4linux.DevName5.value), LCD4linux.DevShadow.value,getFont(LCD4linux.DevFont.value)
-				Lput(LCD4linux.DevLCD.value,putDev,Para)
+			Para = LCD4linux.DevPos.value, LCD4linux.DevSize.value, LCD4linux.DevAlign.value, LCD4linux.DevSplit.value, LCD4linux.DevColor.value, (LCD4linux.DevExtra.value,LCD4linux.DevName1.value,LCD4linux.DevName2.value,LCD4linux.DevName3.value,LCD4linux.DevName4.value,LCD4linux.DevName5.value), LCD4linux.DevShadow.value, LCD4linux.DevType.value,getFont(LCD4linux.DevFont.value)
+			Lput(LCD4linux.DevLCD.value,LCD4linux.Dev.value,putDev,Para)
 # HDD
-			if ScreenActive in LCD4linux.Hdd.value:
-				Para = LCD4linux.HddPos.value, LCD4linux.HddSize.value, LCD4linux.HddAlign.value, LCD4linux.HddSplit.value, LCD4linux.HddType.value
-				Lput(LCD4linux.HddLCD.value,putHdd,Para)
+			Para = LCD4linux.HddPos.value, LCD4linux.HddSize.value, LCD4linux.HddAlign.value, LCD4linux.HddSplit.value, LCD4linux.HddType.value
+			Lput(LCD4linux.HddLCD.value,LCD4linux.Hdd.value,putHdd,Para)
 # show OSCAM
-			if ScreenActive in LCD4linux.OSCAM.value:
-				Para = LCD4linux.OSCAMPos.value, LCD4linux.OSCAMSize.value, LCD4linux.OSCAMColor.value, LCD4linux.OSCAMBackColor.value, LCD4linux.OSCAMAlign.value, LCD4linux.OSCAMSplit.value
-				Lput(LCD4linux.OSCAMLCD.value,putOSCAM,Para)
+			Para = LCD4linux.OSCAMPos.value, LCD4linux.OSCAMSize.value, LCD4linux.OSCAMColor.value, LCD4linux.OSCAMBackColor.value, LCD4linux.OSCAMAlign.value, LCD4linux.OSCAMSplit.value
+			Lput(LCD4linux.OSCAMLCD.value,LCD4linux.OSCAM.value,putOSCAM,Para)
 # show ECM
-			if ScreenActive in LCD4linux.ECM.value:
-				Para = LCD4linux.ECMPos.value, LCD4linux.ECMSize.value, LCD4linux.ECMColor.value, LCD4linux.ECMBackColor.value, LCD4linux.ECMAlign.value, LCD4linux.ECMSplit.value
-				Lput(LCD4linux.ECMLCD.value,putECM,Para)
+			Para = LCD4linux.ECMPos.value, LCD4linux.ECMSize.value, LCD4linux.ECMColor.value, LCD4linux.ECMBackColor.value, LCD4linux.ECMAlign.value, LCD4linux.ECMSplit.value
+			Lput(LCD4linux.ECMLCD.value,LCD4linux.ECM.value,putECM,Para)
 # show Textfile
-			if ScreenActive in LCD4linux.Text.value:
-				Para = LCD4linux.TextPos.value,LCD4linux.TextSize.value,getFont(LCD4linux.TextFont.value),LCD4linux.TextAlign.value,LCD4linux.TextColor.value,LCD4linux.TextBackColor.value,LCD4linux.TextShadow.value, LCD4linux.TextFile.value
-				Lput(LCD4linux.TextLCD.value,putTextFile,Para)
+			Para = LCD4linux.TextPos.value,LCD4linux.TextSize.value,getFont(LCD4linux.TextFont.value),LCD4linux.TextAlign.value,LCD4linux.TextColor.value,LCD4linux.TextBackColor.value,LCD4linux.TextShadow.value, LCD4linux.TextFile.value
+			Lput(LCD4linux.TextLCD.value,LCD4linux.Text.value,putTextFile,Para)
 # show Textfile 2
-			if ScreenActive in LCD4linux.Text2.value:
-				Para = LCD4linux.Text2Pos.value,LCD4linux.Text2Size.value,getFont(LCD4linux.Text2Font.value),LCD4linux.Text2Align.value,LCD4linux.Text2Color.value,LCD4linux.Text2BackColor.value,LCD4linux.Text2Shadow.value, LCD4linux.Text2File.value
-				Lput(LCD4linux.Text2LCD.value,putTextFile,Para)
+			Para = LCD4linux.Text2Pos.value,LCD4linux.Text2Size.value,getFont(LCD4linux.Text2Font.value),LCD4linux.Text2Align.value,LCD4linux.Text2Color.value,LCD4linux.Text2BackColor.value,LCD4linux.Text2Shadow.value, LCD4linux.Text2File.value
+			Lput(LCD4linux.Text2LCD.value,LCD4linux.Text2.value,putTextFile,Para)
 # show Textfile 3
-			if ScreenActive in LCD4linux.Text3.value:
-				Para = LCD4linux.Text3Pos.value,LCD4linux.Text3Size.value,getFont(LCD4linux.Text3Font.value),LCD4linux.Text3Align.value,LCD4linux.Text3Color.value,LCD4linux.Text3BackColor.value,LCD4linux.Text3Shadow.value, LCD4linux.Text3File.value
-				Lput(LCD4linux.Text3LCD.value,putTextFile,Para)
+			Para = LCD4linux.Text3Pos.value,LCD4linux.Text3Size.value,getFont(LCD4linux.Text3Font.value),LCD4linux.Text3Align.value,LCD4linux.Text3Color.value,LCD4linux.Text3BackColor.value,LCD4linux.Text3Shadow.value, LCD4linux.Text3File.value
+			Lput(LCD4linux.Text3LCD.value,LCD4linux.Text3.value,putTextFile,Para)
 # show HTTP Text
-			if ScreenActive in LCD4linux.HTTP.value:
-				Para = LCD4linux.HTTPPos.value,LCD4linux.HTTPSize.value,LCD4linux.HTTPAlign.value,LCD4linux.HTTPColor.value,LCD4linux.HTTPBackColor.value, LCD4linux.HTTPURL.value, LCD4linux.HTTPShadow.value, getFont(LCD4linux.HTTPFont.value)
-				Lput(LCD4linux.HTTPLCD.value,putHTTP,Para)
+			Para = LCD4linux.HTTPPos.value,LCD4linux.HTTPSize.value,LCD4linux.HTTPAlign.value,LCD4linux.HTTPColor.value,LCD4linux.HTTPBackColor.value, LCD4linux.HTTPURL.value, LCD4linux.HTTPShadow.value, getFont(LCD4linux.HTTPFont.value)
+			Lput(LCD4linux.HTTPLCD.value,LCD4linux.HTTP.value,putHTTP,Para)
 # show Mail
-			if ScreenActive in LCD4linux.Mail.value:
-				Para = LCD4linux.MailPos.value,LCD4linux.MailSize.value,LCD4linux.MailProzent.value,LCD4linux.MailColor.value,LCD4linux.MailBackColor.value,LCD4linux.MailAlign.value,LCD4linux.MailSplit.value,LCD4linux.MailLines.value, LCD4linux.MailType.value, LCD4linux.MailKonto.value, LCD4linux.MailShadow.value, getFont(LCD4linux.MailFont.value)
-				Lput(LCD4linux.MailLCD.value,putMail,Para)
+			Para = LCD4linux.MailPos.value,LCD4linux.MailSize.value,LCD4linux.MailProzent.value,LCD4linux.MailColor.value,LCD4linux.MailBackColor.value,LCD4linux.MailAlign.value,LCD4linux.MailSplit.value,LCD4linux.MailLines.value, LCD4linux.MailType.value, LCD4linux.MailKonto.value, LCD4linux.MailShadow.value, getFont(LCD4linux.MailFont.value)
+			Lput(LCD4linux.MailLCD.value,LCD4linux.Mail.value,putMail,Para)
 # show Ereignis Icon Bar
-			if ScreenActive in LCD4linux.IconBar.value:
-				Para = LCD4linux.IconBarPos.value,LCD4linux.IconBarSize.value,LCD4linux.IconBarAlign.value,LCD4linux.IconBarSplit.value,LCD4linux.IconBarType.value
-				Lput(LCD4linux.IconBarLCD.value,putIconBar,Para)
+			Para = LCD4linux.IconBarPos.value,LCD4linux.IconBarSize.value,LCD4linux.IconBarAlign.value,LCD4linux.IconBarSplit.value,LCD4linux.IconBarType.value,LCD4linux.IconBarPopup.value,LCD4linux.IconBarPopupLCD.value
+			Lput(LCD4linux.IconBarLCD.value,LCD4linux.IconBar.value,putIconBar,Para)
 # show Sonnenaufgang
-			if ScreenActive in LCD4linux.Sun.value:
-				Para = LCD4linux.SunPos.value,LCD4linux.SunSize.value,LCD4linux.SunColor.value,LCD4linux.SunBackColor.value,LCD4linux.SunAlign.value,LCD4linux.SunSplit.value,LCD4linux.SunType.value,LCD4linux.SunShadow.value,getFont(LCD4linux.SunFont.value)
-				Lput(LCD4linux.SunLCD.value,putSun,Para)
+			Para = LCD4linux.SunPos.value,LCD4linux.SunSize.value,LCD4linux.SunColor.value,LCD4linux.SunBackColor.value,LCD4linux.SunAlign.value,LCD4linux.SunSplit.value,LCD4linux.SunType.value,LCD4linux.SunShadow.value,getFont(LCD4linux.SunFont.value)
+			Lput(LCD4linux.SunLCD.value,LCD4linux.Sun.value,putSun,Para)
 
 # externe Elementeliste
 			putL4LElist("On")
 
 # FritzCall
-			if ScreenActive in LCD4linux.Fritz.value:
-				Para = LCD4linux.FritzPos.value, LCD4linux.FritzSize.value, LCD4linux.FritzColor.value, LCD4linux.FritzBackColor.value, LCD4linux.FritzAlign.value, LCD4linux.FritzPicPos.value, LCD4linux.FritzPicSize.value, LCD4linux.FritzPicAlign.value, LCD4linux.FritzShadow.value, getFont(LCD4linux.FritzFont.value)
-				Lput(LCD4linux.FritzLCD.value,putFritz,Para)
+			Para = LCD4linux.FritzPos.value, LCD4linux.FritzSize.value, LCD4linux.FritzColor.value, LCD4linux.FritzBackColor.value, LCD4linux.FritzAlign.value, LCD4linux.FritzType.value, LCD4linux.FritzPicPos.value, LCD4linux.FritzPicSize.value, LCD4linux.FritzPicAlign.value, LCD4linux.FritzShadow.value, getFont(LCD4linux.FritzFont.value)
+			Lput(LCD4linux.FritzLCD.value,LCD4linux.Fritz.value,putFritz,Para)
 # show OSD
 			if LCD4linux.OSD.value != "0" and ConfigMode == False and FritzTime == 0:
 				if OSDon >= 2 and ((isMediaPlayer == "" and "T" in LCD4linux.OSDshow.value) or (isMediaPlayer == "radio" and "R" in LCD4linux.OSDshow.value)):
@@ -10689,7 +10758,7 @@ def LCD4linuxPIC(self,session):
 	PUSH = "Push: %.3f (%d/%d/%d) Wait: %.3f" % (tp,q1,q2,q3,(time() - tw)) 
 	L4log(PUSH)
 # PopupText
-	if ScreenActive in LCD4linux.Popup.value and len(PopText[1]) > 2:
+	if ScreenActive[0] in LCD4linux.Popup.value and len(PopText[1]) > 2:
 		Para = LCD4linux.PopupPos.value, LCD4linux.PopupSize.value, LCD4linux.PopupColor.value, LCD4linux.PopupBackColor.value, LCD4linux.PopupAlign.value
 		if "1" in LCD4linux.PopupLCD.value:
 			Brief1.put([putPopup,Para, draw, im])
@@ -10711,7 +10780,7 @@ def LCD4linuxPIC(self,session):
 	Brief2.join()
 	Brief3.join()
 
-	if Dunkel == True:
+	if Dunkel and "1" in Dunkel:
 		MAX_W,MAX_H = im.size
 		draw.rectangle((0, 0, MAX_W, MAX_H),fill="black")
 		QuickList = [[],[],[]]
@@ -10725,7 +10794,7 @@ def LCD4linuxPIC(self,session):
 		QuickIM[0] = None
 #	TimeLCD1 = time() - tt - TimePicture
 	if LCD4linux.LCDType2.value != "00":
-		if Dunkel == True:
+		if Dunkel and "2" in Dunkel:
 			MAX_W,MAX_H = im2.size
 			draw2.rectangle((0, 0, MAX_W, MAX_H),fill="black")
 		if LCD4linux.LCDRotate2.value != "0":
@@ -10736,7 +10805,7 @@ def LCD4linuxPIC(self,session):
 		else:
 			QuickIM[1] = None
 	if LCD4linux.LCDType3.value != "00":
-		if Dunkel == True:
+		if Dunkel and "3" in Dunkel:
 			MAX_W,MAX_H = im3.size
 			draw3.rectangle((0, 0, MAX_W, MAX_H),fill="black")
 		if LCD4linux.LCDRotate3.value != "0":
@@ -10747,12 +10816,8 @@ def LCD4linuxPIC(self,session):
 		else:
 			QuickIM[2] = None
 	Brief1.join()
-#	draw,im = None,None
 	Brief2.join()
-#	draw2,im2 = None,None
 	Brief3.join()
-#	draw3,im3 = None,None
-#	TimeLCD2 = time() - tt - TimeLCD1 - TimePicture
 	TimeEnd = time() - tt
 	INFO = "RunTime: %.3f (Picture: %.3f / Write: %.3f)" % (TimeEnd,TimePicture,TimeEnd-TimePicture)
 	L4log(INFO) #  (%.3f/%.3f) ,TimeLCD1,TimeLCD2
@@ -10817,7 +10882,7 @@ def autostart(reason, **kwargs):
 			except:
 				L4log("Error save Fritzlist")
 		TFTCheck(False,SetMode="DREAM")
-		writeHelligkeit(0,0,0,STOP=True)
+		Dunkel=writeHelligkeit(0,0,0,True)
 		if SamsungDevice is not None and LCD4linux.LCDType1.value[0] == "2":
 			try:
 				MAX_W,MAX_H = getResolution(LCD4linux.LCDType1.value,LCD4linux.LCDRotate1.value)
