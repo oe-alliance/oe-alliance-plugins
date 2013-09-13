@@ -1,4 +1,4 @@
-from Plugins.Plugin import PluginDescriptor
+﻿from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.MenuList import MenuList
 from Components.Label import Label
@@ -23,6 +23,7 @@ from twisted.web import client
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir
 import socket
 from datetime import date, timedelta
+import time
 
 
 config.plugins.OpenUitzendingGemist = ConfigSubsection()
@@ -266,10 +267,9 @@ class OpenUgSetupScreen(Screen):
 		self["info"] = Label(_("Open Uitzending Gemist\n\nBased on Xtrend code"))
 
 		self.mmenu= []
-		self.mmenu.append((_("UG Recently added"), 'recent'))
+		self.mmenu.append((_("UG Uitgelicht"), 'uitgelicht'))
 		self.mmenu.append((_("UG Popular"), 'pop'))
-		self.mmenu.append((_("UG A-Z"), 'atotz'))
-		self.mmenu.append((_("UG Search"), 'search'))
+		self.mmenu.append((_("UG Gemist"), 'ugback'))
 		self.mmenu.append((_("RTL XL A-Z"), 'rtl'))
 		self.mmenu.append((_("RTL XL Gemist"), 'rtlback'))
 		self.mmenu.append((_("RTL XL Search"), 'rsearch'))
@@ -294,15 +294,12 @@ class OpenUgSetupScreen(Screen):
 	def keyGo(self):
 		selection = self["menu"].l.getCurrentSelection()
 		if selection is not None:
-			if selection[1] == 'recent':
+			if selection[1] == 'uitgelicht':
 				self.session.open(OpenUg, selection[1])
 			elif selection[1] == 'pop':
 				self.session.open(OpenUg, selection[1])
-			elif selection[1] == 'atotz':
-				self.session.open(OpenUg, selection[1])
-			elif selection[1] == 'search':
-				self.isRtl = False
-				self.session.open(OpenUg, selection[1])
+			elif selection[1] == 'ugback':
+				self.session.open(UgDaysBackScreen)
 			elif selection[1] == 'rtl':
 				self.session.open(OpenUg, selection[1])
 			elif selection[1] == 'rtlback':
@@ -369,6 +366,49 @@ class DaysBackScreen(Screen):
 	def keyCancel(self):
 		self.close()
 
+class UgDaysBackScreen(Screen):
+	def __init__(self, session):
+		self.skin = """
+				<screen position="center,center" size="400,400" title="">
+					<widget name="menu" position="10,10"   size="e-20,e-10" scrollbarMode="showOnDemand" />
+				</screen>"""
+		self.session = session
+		Screen.__init__(self, session)
+
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+
+		self["actions"] = ActionMap(["SetupActions"],
+		{
+			"ok": self.keyGo,
+			"cancel": self.keyCancel,
+		}, -2)
+
+		self.mmenu= []
+		count = 0
+		now = date.today()
+		while count < 8:
+			if count == 0:
+				self.mmenu.append((_("Today"), count + 128))
+			else:
+				self.mmenu.append(((now.strftime("%A")), count + 128))
+			now = now - timedelta(1)
+			count += 1
+		self["menu"] = MenuList(self.mmenu)
+
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self.setTitle(_("NPO Number of days back"))
+
+	def keyGo(self):
+		selection = self["menu"].l.getCurrentSelection()
+		self.session.open(OpenUg, selection[1])
+		self.close()
+
+	def keyCancel(self):
+		self.close()
+
 class OpenUg(Screen):
 
 	UG_PROGDATE = 0
@@ -378,7 +418,6 @@ class OpenUg(Screen):
 	UG_STREAMURL = 4
 	UG_ICON = 5
 	UG_ICONTYPE = 6
-	UG_SERIE = 7
 	UG_LEVEL_ALL = 0
 	UG_LEVEL_SERIE = 1
 	MAX_PIC_PAGE = 5
@@ -411,7 +450,6 @@ class OpenUg(Screen):
 
 		self.page = 0
 		self.numOfPics = 0
-		self.isAtotZ = False
 		self.isRtl = False
 		self.isRtlBack = False
 		self.level = self.UG_LEVEL_ALL
@@ -507,10 +545,7 @@ class OpenUg(Screen):
 				else:
 					self.setupCallback("rtl")
 			else:
-				if self.isAtotZ:
-					self.setupCallback("atotz")
-				else:
-					doExit = True
+				doExit = True
 		if doExit:
 			self.close()
 
@@ -525,35 +560,32 @@ class OpenUg(Screen):
 		if retval == 'cancel' or retval is None:
 			return
 
-		if retval == 'recent':
+		if retval == 'uitgelicht':
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
-			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "archive_week/protocol/html")
-			if len(self.mediaList) == 0:
-				self.mediaProblemPopup()
+			offset = 0
+			while 1:
+				self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "must_see/offset/%d/numrows/24?XHRUrlAddOn=1" % (offset))
+				if len(self.mediaList) == 0:
+					self.mediaProblemPopup()
+					break
+				if offset + 24 != len(self.mediaList):
+					break
+				offset += 24
 			self.updateMenu()
 		elif retval == 'pop':
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
-			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "popular/protocol/html")
-			if len(self.mediaList) == 0:
-				self.mediaProblemPopup()
+			offset = 0
+			while 1:
+				self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "popular/offset/%d/numrows/24?XHRUrlAddOn=1" % (offset))
+				if len(self.mediaList) == 0:
+					self.mediaProblemPopup()
+					break
+				if offset + 24 != len(self.mediaList):
+					break
+				offset += 24
 			self.updateMenu()
-		elif retval == 'atotz':
-			self.clearList()
-			self.isAtotZ = True
-			self.level = self.UG_LEVEL_ALL
-			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/0/protocol/html")
-			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/1/protocol/html")
-			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/2/protocol/html")
-			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z/a2zActiveIndex/3/protocol/html")
-			if len(self.mediaList) == 0:
-				self.mediaProblemPopup()
-			self.updateMenu()
-		elif retval == 'search':
-			self.isRtl = False
-			self.timerCmd = self.TIMER_CMD_VKEY
-			self.cbTimer.start(10)
 		elif retval == 'rsearch':
 			self.isRtl = True
 			self.timerCmd = self.TIMER_CMD_VKEY
@@ -568,6 +600,35 @@ class OpenUg(Screen):
 			else:
 				self.updateMenu()
 		else:
+			if retval >= 128:
+				retval -=  128
+				now = int(time.time())
+				worktime =  '%s' % (time.strftime("%H:%M:%S", time.localtime()))
+				wtime = worktime.split(":")
+				if int(wtime[0]) < 6:
+					t = int(wtime[0]) + (24 - 6)
+				else:
+					t = int(wtime[0]) - 6
+				t = (t * 3600) + int(wtime[1]) * 60 + int(wtime[2]) + 1
+				startime = int(now - t)
+				day = 3600 * 24
+				if (retval > 0):
+					day *= retval
+					startime -= day
+					now = startime + (3600 * 24)
+				self.clearList()
+				self.level = self.UG_LEVEL_SERIE
+				offset = 0
+				while 1:
+					self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "epg/timeStart/%d/timeEnd/%d/day/%d/offset/%d/numrows/24?XHRUrlAddOn=1" % (startime, now, retval, offset))
+					if len(self.mediaList) == 0:
+						self.mediaProblemPopup()
+						break
+					if offset + 24 != len(self.mediaList):
+						break
+					offset += 24
+				self.updateMenu()
+				return
 			self.clearList()
 			self.isRtl = True
 			self.isRtlBack = True
@@ -589,16 +650,9 @@ class OpenUg(Screen):
 		if callback is not None and len(callback):
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
-			print "[UG] testing!"
-			if self.isRtl == False:
-				print "[UG] isRtl = False!"
-				self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "search/protocol/html/searchString/" + callback)
-				self.updateMenu()
-			elif self.isRtl == True:
-				print "[UG] isRtl = True!"
+			if self.isRtl == True:
 				self.getRTLSerie(self.mediaList, "search.php?q=*" + callback + "*")
 				self.updateMenu()
-			print "[UG] testing2!"
 			if len(self.mediaList) == 0:
 				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
 		else:
@@ -676,26 +730,20 @@ class OpenUg(Screen):
 					self.session.open(UGMediaPlayer, myreference, 'rtl')
 
 		else:
-			if self.level == self.UG_LEVEL_ALL:
-				if self.mediaList[self["list"].getSelectionIndex()][self.UG_SERIE]:
-					tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-					self.clearList()
-					self.isRtl = False
-					self.level = self.UG_LEVEL_SERIE
-					self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "a2z-serie/a2zSerieId/" + tmp)
-					self.updateMenu()
-				else:
-					self.doUGPlay()
-			else:
-				self.doUGPlay()
+			self.doUGPlay()
 
 	def doUGPlay(self):
-		url = self.UG_BASE_URL + "/streams/video/pr_id/" + self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-		print "[UG] %s" % url 
-		out = wgetUrl(url)
-		print "[UG] %s" % out
+		out = wgetUrl(self.UG_BASE_URL + "/nu/bekijk/context/bekijk_gemist/trm_id/%s?XHRUrlAddOn=1" % (self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]))
 		if out !='':
-			url = out.split('stream_link":"')[1].split('\",')[0].replace('\/', '/')
+			url = ''
+			tmp = out.split('\n')
+			for x in tmp:
+				if 'fetchLinkAndStart' in x:
+					tmp =  x.split("('")[1].split("'")[0]
+					tmp = wgetUrl(self.UG_BASE_URL + tmp)
+					tmp = tmp.replace('\/', '/')
+					url = tmp.split("stream_link\":\"")[1].split("\",")[0]
+					break
 			if url != '':
 				myreference = eServiceReference(4097, 0, url)
 				myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
@@ -846,59 +894,35 @@ class OpenUg(Screen):
 	def getMediaData(self, weekList, url):
 		data = wgetUrl(url)
 		state = 0
-		short = ''
 		name = ''
 		date = ''
 		stream = ''
-		channel = ''
 		icon = ''
 		data = data.split("\n")
 		for line in data:
 			if state == 0:
-				tmp = "<div class=\"vid\""
+				
+				tmp = "class=\"vid\" rel=\""
 				if tmp in line:
 					state = 1
-					short = ''
 					name = ''
+					stream = line.split(tmp)[1].split("\"")[0]
 					date = ''
-					stream = ''
 					icon = ''
 					continue
-
 			elif state == 1:
-				if (not icon or not stream):
-					tmp = "<img class=\"vid_view\" src=\""
-					if tmp in line:
-						icon = line.split(tmp)[1].split("\" />")[0]
-						tmp = "<img class=\"vid_view\" src=\"http://hbbtv.distributie.publiekeomroep.nl/imagecache/epg/pr_id/"
-						stream = line.split(tmp)[1].split('/')[0]
-						continue
-
-				if (not short):
-					tmp = "<p class=\"titleshort\">"
-					if tmp in line:
-						short = line.split(tmp)[1].split("</p>")[0]
-						continue
-
-				if (not name):
-					tmp = "<p class=\"title\">"
-					if tmp in line:
-						name = line.split(tmp)[1].split("</p>")[0]
-						continue
-
-				if (not date):
-					tmp = "<p class=\"date_time bottom\">"
-					if tmp in line:
-						date = line.split(tmp)[1].split("</p>")[0]
-
-				if stream and date and name and short and icon:
+				tmp = "class=\"date_time bottom\">"
+				if tmp in line:
+					date = line.split(tmp)[1].split("</p>")[0]
+				tmp = "class=\"title\">"
+				if tmp in line:
+					name = line.split(tmp)[1].split("</p>")[0]
+				tmp = "<img class=\"vid_view\" src=\""
+				if tmp in line:
+					icon = line.split(tmp)[1].split("\"")[0]
+				if date and name and icon and stream:
 					icon_type = self.getIconType(icon)
-					print "[UG] name: %s" % name
-					print "[UG] short: %s" % short
-					print "[UG] channel: %s" % channel
-					print "[UG] stream: %s" % stream
-					print "[UG] date: %s" % date
-					weekList.append((date, name, short, channel, stream, icon, icon_type, False))
+					weekList.append((date, name, '', '', stream, icon, icon_type, False))
 					state = 0
 
 	def getIconType(self, data):
