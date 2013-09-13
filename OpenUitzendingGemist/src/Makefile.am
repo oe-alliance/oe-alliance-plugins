@@ -1,4 +1,5 @@
 ﻿installdir = $(libdir)/enigma2/python/Plugins/Extensions/OpenUitzendingGemist
 
 install_PYTHON = *.py
-	oe-alliance.png
+install_DATA = *.png
+
