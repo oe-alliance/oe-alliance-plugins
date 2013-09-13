@@ -1,4 +1,4 @@
-﻿from Plugins.Plugin import PluginDescriptor
+from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.MenuList import MenuList
 from Components.Label import Label
