@@ -57,19 +57,8 @@ class Channelnumber:
 			chnr = self.getchannelnr()
 		info = None
 		service = None
-		########## Center Channel number #################
-		t = len(chnr)
-		if t == 1:
-			CentChnr = ".0" + chnr + '\n'
-		elif t == 2:
-			CentChnr = "." + chnr + '\n'
-		elif t == 3:
-			CentChnr = "0" + chnr + '\n'
-		else:
-			CentChnr = chnr + '\n'
-		#################################################
-
-		vfd_write(CentChnr)
+		Channelnr = "%04d" % (int(chnr))
+		vfd_write(Channelnr)
 
 	def getchannelnr(self):
 		if InfoBar.instance is None:
