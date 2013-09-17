@@ -2080,10 +2080,10 @@ def getpiconres(x, y, full, ref, Picon2):
 	else:
 		L4logE("no Cache")
 		# no picon for channel
-		if not os.path.exists(P2):
-			L4logE("no Picon-Cachedir",P2)
+		if not os.path.exists(P2C):
+			L4logE("no Picon-Cachedir",P2C)
 			try:
-				os.mkdir(P2)
+				os.mkdir(P2C)
 			except:
 				L4log("Error: create Picon-Cache-Dir")
 		return ""
