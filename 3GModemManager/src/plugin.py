@@ -821,7 +821,7 @@ class ModemManager(Screen):
 		if not os.path.exists(devFile) :
 			message = "Can't found device file!! [%s]" % (devFile)
 			printInfoModemMgr(message)
-			self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO)
+			#self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO)
 			return
 
 		if self["key_green"].getText() == 'Disconnect':
