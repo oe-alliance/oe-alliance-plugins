@@ -52,17 +52,20 @@ class Channelnumber:
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
 		if info is None:
-			chnr = "---"
+			chnr = "----"
 		else:
 			chnr = self.getchannelnr()
 		info = None
 		service = None
-		Channelnr = "%04d" % (int(chnr))
-		vfd_write(Channelnr)
+		if chnr == "----":
+			vfd_write(chnr)
+		else:
+			Channelnr = "%04d" % (int(chnr))
+			vfd_write(Channelnr)
 
 	def getchannelnr(self):
 		if InfoBar.instance is None:
-			chnr = "---"
+			chnr = "----"
 			return chnr
 		MYCHANSEL = InfoBar.instance.servicelist
 		markersOffset = 0
