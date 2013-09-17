@@ -225,6 +225,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		elif command[0] == "refresh":
 			L4LElement.setRefresh()
 		elif command[0] == "hold":
+			setScreenActive("0")
 			setSaveEventListChanged(not getSaveEventListChanged())
 		elif command[0] == "copyMP":
 			for a in req.args.keys():
