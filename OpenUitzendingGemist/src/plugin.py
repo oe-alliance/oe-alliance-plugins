@@ -189,7 +189,14 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.close()
 
 	def leavePlayer(self):
-		self.handleLeave()
+		if self.shown:
+			self.hideInfobar()
+		else:
+			self.session.openWithCallback(self.exitCallback, MessageBox, _("Exit media player?"), simple = not self.shown)
+
+	def exitCallback(self, answer):
+		if answer:
+			self.handleLeave()
 
 	def doEofInternal(self, playing):
 		if not self.execing:
