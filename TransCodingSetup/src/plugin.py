@@ -254,7 +254,6 @@ class TranscodingSetup(Screen,ConfigListScreen):
 		configlist.append(config.plugins.transcodingsetup.port)
 		configlist.append(config.plugins.transcodingsetup.bitrate)
 		configlist.append(config.plugins.transcodingsetup.framerate)
-		configlist.append(config.plugins.transcodingsetup.refreshrate)
 		for x in configlist:
 			x.cancel()
 		self.close()
