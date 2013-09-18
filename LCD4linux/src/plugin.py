@@ -17,7 +17,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V3.7-r5"
+Version = "V3.7-r6"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -1916,7 +1916,6 @@ def ICSdownloads():
 			except:
 				pass
 	ICSlist = []
-	rmFile(PICcal)
 	L4logE("ICS laenge",len(ICS))
 	ICSdownrun = False
 
@@ -3373,6 +3372,7 @@ class L4LWorker(Thread):
 		self.getICS(LCD4linux.CalHttp2.value,2)
 		self.getICS(LCD4linux.CalHttp3.value,3)
 		ICSdownloads()
+		rmFile(PICcal)
 		ICSrunning = False
 	
 	def hookWebif(self):
@@ -6394,7 +6394,6 @@ class UpdateStatus(Screen):
 			self.LsreftoString = sref.toString()
 			serviceHandler = eServiceCenter.getInstance()
 			ref = eServiceReference(self.LsreftoString)
-			self.Lchannel_num = str(getNumber(ref))
 			self.Lpath = sref.getPath()
 			info = serviceHandler.info(ref)
 			if info is not None:
@@ -6486,6 +6485,9 @@ class UpdateStatus(Screen):
 				else:
 					self.Llength = None
 					self.Lposition = None
+			else:
+				self.Lchannel_num = str(getNumber(ref))
+
 			self.Levent_begin0, self.Levent_end0, self.Lduration0, self.Levent_name0 = getServiceInfo(self,0)
 			self.Levent_begin1, self.Levent_end1, self.Lduration1, self.Levent_name1 = getServiceInfo(self,1)
 
@@ -6964,6 +6966,7 @@ def getNumber(actservice):
 						else:
 							if actservice == service:
 								return number
+	L4logE("no Channel - Count:", number)
 	return None
 
 def getServiceInfo(self,NowNext):
