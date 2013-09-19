@@ -37,6 +37,9 @@ config.plugins.VFD_Giga.timeMode = ConfigSelection(default = "24h", choices = [(
 
 RecLed = None
 
+def vfd_write(text):
+	open("/dev/mcu", "w").write(text)
+
 def setLed(color):
 	# 0 = off
 	# 1 = blue
@@ -91,7 +94,7 @@ class Channelnumber:
 
 	def __eventInfoChanged(self):
 		self.RecordingLed()
-		if not BOX == 'gb800se' and not BOX == 'gb800solo':
+		if not BOX == 'gb800se' and not BOX == 'gb800solo' and not BOX == 'gb800seplus':
 			return
 		if config.plugins.VFD_Giga.showClock.value == 'Off' or config.plugins.VFD_Giga.showClock.value == 'True_All':
 			return
@@ -114,8 +117,10 @@ class Channelnumber:
 		else:
 			CentChnr = chnr + '\n'
 		#################################################
-
-		evfd.getInstance().vfd_write_string(CentChnr)
+		if BOX == 'gb800seplus':
+			vfd_write(CentChnr)
+		else:
+			evfd.getInstance().vfd_write_string(CentChnr)
 
 	def getchannelnr(self):
 		if InfoBar.instance is None:
@@ -159,13 +164,19 @@ class Channelnumber:
 			else:
 				clock2 = "%02d%02d" % (int(clock), int(clock1))
 				self.sign = 0
-			evfd.getInstance().vfd_write_string(clock2)
+			if BOX == 'gb800seplus':
+				vfd_write(clock2)
+			else:
+				evfd.getInstance().vfd_write_string(clock2)
 		else:
-			evfd.getInstance().vfd_write_string("    ")
+			if BOX == 'gb800seplus':
+				vfd_write("    ")
+			else:
+				evfd.getInstance().vfd_write_string("    ")
 
 	def vrime(self):
 		self.RecordingLed()
-		if not BOX == 'gb800se' and not BOX == 'gb800solo':
+		if not BOX == 'gb800se' and not BOX == 'gb800solo' and not BOX == 'gb800seplus':
 			self.zaPrik.start(self.updatetime, 1)
 			return
 
@@ -181,7 +192,10 @@ class Channelnumber:
 				self.__eventInfoChanged()
 
 		if config.plugins.VFD_Giga.showClock.value == 'Off':
-			evfd.getInstance().vfd_write_string("    ")
+			if BOX == 'gb800seplus':
+				vfd_write("    ")
+			else:
+				evfd.getInstance().vfd_write_string("    ")
 			self.zaPrik.start(self.updatetime, 1)
 			return
 		else:
@@ -199,12 +213,12 @@ class Channelnumber:
 			if not config.plugins.VFD_Giga.recLedBlink.value:
 				self.blink = True
 			if self.blink:
-				if BOX == "gbquad" or BOX == "gb800ueplus":
+				if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 					setLed(config.plugins.VFD_Giga.ledREC.getValue())
 				else:
 					evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledREC.value)
 			else:
-				if BOX == "gbquad" or BOX == "gb800ueplus":
+				if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 					setLed("0")
 				else:
 					evfd.getInstance().vfd_led("0")
@@ -214,12 +228,12 @@ class Channelnumber:
 			if RecLed is not None:
 				RecLed = None
 				if Screens.Standby.inStandby:
-					if BOX == "gbquad" or BOX == "gb800ueplus":
+					if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 						setLed(config.plugins.VFD_Giga.ledSBY.getValue())
 					else:
 						evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledSBY.value)
 				else:
-					if BOX == "gbquad" or BOX == "gb800ueplus":
+					if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 						setLed(config.plugins.VFD_Giga.ledRUN.getValue())
 					else:
 						evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledRUN.value)
@@ -234,21 +248,24 @@ def leaveStandby():
 	print "[VFD-GIGA] Leave Standby"
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
-		evfd.getInstance().vfd_write_string("    ")
+		if BOX == 'gb800seplus':
+			vfd_write("    ")
+		else:
+			evfd.getInstance().vfd_write_string("    ")
 
 	if RecLed is None:
 		if config.plugins.VFD_Giga.setLed.value:
-			if BOX == "gbquad" or BOX == "gb800ueplus":
+			if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 				setLed(config.plugins.VFD_Giga.ledRUN.getValue())
 			else:
 				evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledRUN.value)
 		else:
-			if BOX == "gbquad" or BOX == "gb800ueplus":
+			if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 				setLed("0")
 			else:
 				evfd.getInstance().vfd_led("0")
 	else:
-		if BOX == "gbquad" or BOX == "gb800ueplus":
+		if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 			setLed(config.plugins.VFD_Giga.ledREC.getValue())
 		else:
 			evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledREC.value)
@@ -260,21 +277,24 @@ def standbyCounterChanged(configElement):
 	inStandby.onClose.append(leaveStandby)
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
-		evfd.getInstance().vfd_write_string("    ")
+		if BOX == 'gb800seplus':
+			vfd_write("    ")
+		else:	
+			evfd.getInstance().vfd_write_string("    ")
 
 	if RecLed is None:
 		if config.plugins.VFD_Giga.setLed.value:
-			if BOX == "gbquad" or BOX == "gb800ueplus":
+			if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 				setLed(config.plugins.VFD_Giga.ledSBY.getValue())
 			else:
 				evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledSBY.value)
 		else:
-			if BOX == "gbquad" or BOX == "gb800ueplus":
+			if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 				setLed("0")
 			else:
 				evfd.getInstance().vfd_led("0")
 	else:
-		if BOX == "gbquad" or BOX == "gb800ueplus":
+		if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 			setLed(config.plugins.VFD_Giga.ledREC.getValue())
 		else:
 			evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledREC.value)
@@ -283,12 +303,12 @@ def initVFD():
 	print "[VFD-GIGA] initVFD"
 
 	if config.plugins.VFD_Giga.setLed.value:
-		if BOX == "gbquad" or BOX == "gb800ueplus":
+		if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 			setLed(config.plugins.VFD_Giga.ledRUN.getValue())
 		else:
 			evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledRUN.value)
 	else:
-		if BOX == "gbquad" or BOX == "gb800ueplus":
+		if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 			setLed("0")
 		else:
 			evfd.getInstance().vfd_led("0")
@@ -301,7 +321,10 @@ def initVFD():
 	res = system(cmd)
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
-		evfd.getInstance().vfd_write_string("    ")
+		if BOX == 'gb800seplus':
+			vfd_write("    ")
+		else:	
+			evfd.getInstance().vfd_write_string("    ")
 
 class VFD_GigaSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
@@ -347,21 +370,21 @@ class VFD_GigaSetup(ConfigListScreen, Screen):
 		if config.plugins.VFD_Giga.setLed.value:
 			self.list.append(getConfigListEntry(_("Led state RUN"), config.plugins.VFD_Giga.ledRUN))
 			self.list.append(getConfigListEntry(_("Led state Standby"), config.plugins.VFD_Giga.ledSBY))
-			if not BOX == "gbquad" or BOX == "gb800ueplus":
+			if not BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 				self.list.append(getConfigListEntry(_("Led state Deep Standby"), config.plugins.VFD_Giga.ledDSBY))
 			self.list.append(getConfigListEntry(_("Led state Record"), config.plugins.VFD_Giga.ledREC))
 			self.list.append(getConfigListEntry(_("Blink Record Led"), config.plugins.VFD_Giga.recLedBlink))
-			if BOX == "gbquad" or BOX == "gb800ueplus":
+			if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 				setLed(config.plugins.VFD_Giga.ledRUN.getValue())
 			else:
 				evfd.getInstance().vfd_led(str(config.plugins.VFD_Giga.ledRUN.value))
 		else:
-			if BOX == "gbquad" or BOX == "gb800ueplus":
+			if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 				setLed("0")
 			else:
 				evfd.getInstance().vfd_led("0")
 
-		if BOX == 'gb800se' or BOX == 'gb800solo':
+		if BOX == 'gb800se' or BOX == 'gb800solo' or BOX == "gb800seplus":
 			self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_Giga.showClock))
 			self.list.append(getConfigListEntry(_("Show clock in Deep Standby"), config.plugins.VFD_Giga.showClockDeepStandby))
 			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
@@ -380,7 +403,7 @@ class VFD_GigaSetup(ConfigListScreen, Screen):
 		if self["config"].getCurrent()[0] == _('Enable led'):
 			self.createSetup()
 		elif self["config"].getCurrent()[0][:3].upper() == 'LED':
-			if not BOX == "gbquad" and not BOX == "gb800ueplus":
+			if not BOX == "gbquad" and not BOX == "gb800ueplus" or BOX == "gb800seplus":
 				evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledRUN.value)
 			else:
 				setLed(config.plugins.VFD_Giga.ledRUN.getValue())
@@ -407,7 +430,7 @@ class VFD_GigaSetup(ConfigListScreen, Screen):
 		self.close()
 
 	def Update(self):
-		if not BOX == "gbquad" or BOX == "gb800ueplus":
+		if not BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
 			self.createSetup()
 			initVFD()
 
