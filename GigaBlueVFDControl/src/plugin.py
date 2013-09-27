@@ -403,7 +403,7 @@ class VFD_GigaSetup(ConfigListScreen, Screen):
 		if self["config"].getCurrent()[0] == _('Enable led'):
 			self.createSetup()
 		elif self["config"].getCurrent()[0][:3].upper() == 'LED':
-			if not BOX == "gbquad" and not BOX == "gb800ueplus" or BOX == "gb800seplus":
+			if not BOX == "gbquad" and not BOX == "gb800ueplus" and not BOX == "gb800seplus":
 				evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledRUN.value)
 			else:
 				setLed(config.plugins.VFD_Giga.ledRUN.getValue())
