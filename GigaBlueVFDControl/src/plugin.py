@@ -300,7 +300,7 @@ def standbyCounterChanged(configElement):
 			evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledREC.value)
 
 def initVFD():
-	print "[VFD-GIGA] initVFD"
+	print "[VFD-GIGA] initVFD box = %s" % BOX
 
 	if config.plugins.VFD_Giga.setLed.value:
 		if BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
@@ -317,7 +317,10 @@ def initVFD():
 		forcmd = '1'
 	else:
 		forcmd = '0'
-	cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/display_clock'
+	if BOX == "gb800seplus":
+		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
+	else:
+		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/display_clock'
 	res = system(cmd)
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
@@ -430,7 +433,7 @@ class VFD_GigaSetup(ConfigListScreen, Screen):
 		self.close()
 
 	def Update(self):
-		if not BOX == "gbquad" or BOX == "gb800ueplus" or BOX == "gb800seplus":
+		if not BOX == "gbquad":
 			self.createSetup()
 			initVFD()
 
@@ -455,12 +458,9 @@ class VFD_Giga:
 	def abort(self):
 		print "[VFD-GIGA] aborting"
 
-	#if BOX == 'gb800se' or BOX == 'gb800solo' or BOX == 'gb800ue':
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
-	#if not BOX == 'gb800se' and not BOX == 'gb800solo' and not BOX == 'gb800ue':
-	#	return [ ]
 	if menuid != "system":
 		return [ ]
 	if BOX == "gbquad" or BOX == "gb800ueplus":
@@ -482,13 +482,9 @@ def controlgigaVfd():
 
 	if gReason == 0 and mySession != None and gigaVfd == None:
 		print "[VFD-GIGA] Starting !!"
-		#if BOX == 'gb800se' or BOX == 'gb800solo' or BOX == 'gb800ue':
 		gigaVfd = VFD_Giga(mySession)
-		#else:
-			#gigaVfd = True
 	elif gReason == 1 and gigaVfd != None:
 		print "[VFD-GIGA] Stopping !!"
-		#SetTime()
 		if BOX == 'gb800se' or BOX == 'gb800solo' or BOX == 'gb800ue':
 			evfd.getInstance().vfd_led(config.plugins.VFD_Giga.ledDSBY.value)
 		else:
