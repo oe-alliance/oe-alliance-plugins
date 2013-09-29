@@ -106,21 +106,17 @@ class Channelnumber:
 			chnr = self.getchannelnr()
 		info = None
 		service = None
-		########## Center Channel number #################
-		t = len(chnr)
-		if t == 1:
-			CentChnr = " 0" + chnr + "  " + '\n'
-		elif t == 2:
-			CentChnr = " " + chnr + " " + '\n'
-		elif t == 3:
-			CentChnr = "0" + chnr + '\n'
+		if chnr == "----":
+			if BOX == 'gb800seplus':
+				vfd_write(chnr)
+			else:
+				evfd.getInstance().vfd_write_string(chnr)
 		else:
-			CentChnr = chnr + '\n'
-		#################################################
-		if BOX == 'gb800seplus':
-			vfd_write(CentChnr)
-		else:
-			evfd.getInstance().vfd_write_string(CentChnr)
+			Channelnr = "%04d" % (int(chnr))
+			if BOX == 'gb800seplus':
+				vfd_write(Channelnr)
+			else:
+				evfd.getInstance().vfd_write_string(Channelnr)
 
 	def getchannelnr(self):
 		if InfoBar.instance is None:
