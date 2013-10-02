@@ -37,7 +37,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 from enigma import gFont, ePicLoad, eListboxPythonMultiContent, RT_HALIGN_RIGHT
 
-import bbciplayer, itvplayer, rteplayer, threeplayer, iView
+import bbciplayer, itvplayer, rteplayer, threeplayer, iView, iRadio
 from CommonModules import MainMenuList
 
 ##########################################################################
@@ -53,7 +53,7 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.configlist.append(getConfigListEntry((_("Show in main menu")), config.ondemand.ShowMainMenu))
 		self.configlist.append(getConfigListEntry((_("Show in plugin browser")), config.ondemand.ShowPluginBrowser))
 		self.configlist.append(getConfigListEntry((_("Show in extensions")), config.ondemand.ShowExtensions))
-		self.configlist.append(getConfigListEntry((_("Show thumbnails")), config.ondemand.ShowImages))
+		self.configlist.append(getConfigListEntry((_("Show Thumbnails")), config.ondemand.ShowImages))
 
 		self.configlist.append(getConfigListEntry((_("Preferred Stream Quality")), config.ondemand.PreferredQuality))
 
@@ -62,6 +62,16 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.configlist.append(getConfigListEntry((_("3 Player")), config.ondemand.Show3Player))
 		self.configlist.append(getConfigListEntry((_("ABC iView")), config.ondemand.ShowiViewPlayer))
 		self.configlist.append(getConfigListEntry((_("RTE Player")), config.ondemand.ShowRTEPlayer))
+
+		self.configlist.append(getConfigListEntry((_("iRadio Player")), config.ondemand.ShowiRadioPlayer))
+		self.configlist.append(getConfigListEntry((_("iRadio: Display WMA Streams")), config.ondemand.ShowiRadioWMA))
+		self.configlist.append(getConfigListEntry((_("iRadio: Display Favorite Thumbnails")), config.ondemand.ShowFavoriteLogos))
+		self.configlist.append(getConfigListEntry((_("iRadio: Display Favorite Default Thumbnails")), config.ondemand.ShowFavoriteDefault))
+		self.configlist.append(getConfigListEntry((_("iRadio: Display SHOUTcast Thumbnails")), config.ondemand.ShowShoutcastLogos))
+		self.configlist.append(getConfigListEntry((_("iRadio: Display SHOUTcast Default Thumbnails")), config.ondemand.ShowShoutcastDefault))
+		self.configlist.append(getConfigListEntry((_("iRadio: Display Tunein Thumbnails")), config.ondemand.ShowTuneinLogos))
+		self.configlist.append(getConfigListEntry((_("iRadio: Display Tunein Default Thumbnails")), config.ondemand.ShowTuneinDefault))
+
 		self["config"].setList(self.configlist)
 		
 		self["key_red"] = StaticText(_("Cancel"))
@@ -131,6 +141,8 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 			list.append(("ABC iView", "iView"))
 		if config.ondemand.ShowRTEPlayer.value:
 			list.append(("RTE Player", "rteplayer"))
+		if config.ondemand.ShowiRadioPlayer.value:
+			list.append(("iRadio Player", "iRadio"))
 
 		self['PlayerList'].recalcEntrySize()
 		self['PlayerList'].fillList(list)
@@ -156,6 +168,8 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 			self.session.open(itvplayer.ITVplayer, "start", "0")
 		elif player == "iView":
 			self.session.open(iView.iViewMenu, "start", "0")
+		if player == "iRadio":
+			self.session.open(iRadio.iRadioMenu, "start", "0")
 
 	def keyCancel(self):
 		self.close()
@@ -198,6 +212,8 @@ class OnDemand_About(Screen):
 		credit += "- mossy (used his version as a base for 4OD)\n"
 		credit += "- OpenUitzendingGemist team (used this as a design base)\n"
 		credit += "- Andy Botting (used his version as a base for ABC iView)\n"
+		credit += "- Itzchak Rehberg & IzzySoft (use his Shoutcast API code to source iRadio)\n"
+		credit += "- brianhornsby (use his Tunein API to source iRadio)\n"
 		credit += "- And every one else involved along the way as there are way to many to name!\n"
 		self["about"].setText(credit)
 		self.onFirstExecBegin.append(self.setImages)

@@ -25,7 +25,7 @@ from Plugins.Plugin import PluginDescriptor
 from ui import OnDemand_Screen
 
 config.ondemand = ConfigSubsection()
-config.ondemand.ShowMainMenu = ConfigYesNo(default = True)
+config.ondemand.ShowMainMenu = ConfigYesNo(default = False)
 config.ondemand.ShowPluginBrowser = ConfigYesNo(default = True)
 config.ondemand.ShowExtensions = ConfigYesNo(default = True)
 config.ondemand.ShowRTEPlayer = ConfigYesNo(default = True)
@@ -35,6 +35,14 @@ config.ondemand.ShowITVPlayer = ConfigYesNo(default = True)
 config.ondemand.ShowiViewPlayer = ConfigYesNo(default = True)
 config.ondemand.ShowImages = ConfigYesNo(default = True)
 config.ondemand.PreferredQuality = ConfigSelection(default = "800", choices = [("400", _("Very Low")), ("480", _("Low")), ("800", _("Normal")), ("1500", _("High")), ("3200", _("HD"))])
+config.ondemand.ShowiRadioPlayer = ConfigYesNo(default = True)
+config.ondemand.ShowiRadioWMA = ConfigYesNo(default = False)
+config.ondemand.ShowFavoriteLogos = ConfigYesNo(default = True)
+config.ondemand.ShowFavoriteDefault = ConfigYesNo(default = True)
+config.ondemand.ShowShoutcastLogos = ConfigYesNo(default = True)
+config.ondemand.ShowShoutcastDefault = ConfigYesNo(default = True)
+config.ondemand.ShowTuneinLogos = ConfigYesNo(default = True)
+config.ondemand.ShowTuneinDefault = ConfigYesNo(default = True)
 		
 def OnDemanMenu(menuid):
 	if menuid == "mainmenu":
