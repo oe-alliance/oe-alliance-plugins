@@ -20,6 +20,7 @@
 from . import _
 
 from Screens.Screen import Screen
+from Components.config import config
 from Screens.MessageBox import MessageBox
 from enigma import eServiceReference, eTimer, getDesktop
 from Components.MenuList import MenuList
@@ -226,6 +227,7 @@ def main(session, **kwargs):
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/iView.png"
+		self.showIcon = str(config.ondemand.ShowImages.value)
 		StreamsThumbCommon.__init__(self, session, action, value, url)
 
 	def layoutFinished(self):
@@ -460,10 +462,14 @@ class StreamsThumb(StreamsThumbCommon):
 					except (Exception) as exception:
 						stream = ""
 
-					try:
-						icon = str(entry[u's'])
-					except (Exception) as exception:
-						icon = ""
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						try:
+							icon = str(entry[u's'])
+						except (Exception) as exception:
+							icon = ""
+					else:
+						icon = ''
 
 					try:
 						name_tmp = str(unicode(entry[u'b']))
@@ -533,10 +539,14 @@ class StreamsThumb(StreamsThumbCommon):
 					except (Exception) as exception:
 						stream = ""
 
-					try:
-						icon = str(entry['d'])
-					except (Exception) as exception:
-						icon = ""
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						try:
+							icon = str(entry['d'])
+						except (Exception) as exception:
+							icon = ""
+					else:
+						icon = ''
 
 					try:
 						name_tmp = str(entry['b'])
@@ -607,10 +617,14 @@ class StreamsThumb(StreamsThumbCommon):
 						except (Exception) as exception:
 							stream = ""
 
-						try:
-							icon = str(entry['d'])
-						except (Exception) as exception:
-							icon = ""
+						# Only set the Icon if they are enabled
+						if self.showIcon == 'True':
+							try:
+								icon = str(entry['d'])
+							except (Exception) as exception:
+								icon = ""
+						else:
+							icon = ''
 
 						try:
 							episodes = _("Episodes: ")+str(len(entry['f']))

@@ -19,6 +19,7 @@
 from . import _
 
 from Screens.Screen import Screen
+from Components.config import config
 from Screens.MessageBox import MessageBox
 from enigma import eServiceReference, eTimer, getDesktop
 from Components.MenuList import MenuList
@@ -129,6 +130,7 @@ class threeMainMenu(Screen):
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/threeDefault.png"
+		self.showIcon = str(config.ondemand.ShowImages.value)
 		StreamsThumbCommon.__init__(self, session, action, value, url)
 
 	def layoutFinished(self):
@@ -194,7 +196,8 @@ class StreamsThumb(StreamsThumbCommon):
 				fileUrl = self.findPlayUrl(showID)
 				print 'fileUrl: ', fileUrl
 			else:
-				fileUrl = str(icon[:-12])+'.mp4'
+				#fileUrl = str(icon[:-12])+'.mp4'
+				fileUrl = str(showID[:-12])+'.mp4'
 				fileUrl = fileUrl.replace('3player', '3Player')
 				print 'fileUrl: ', fileUrl
 				
@@ -229,7 +232,7 @@ class StreamsThumb(StreamsThumbCommon):
 			for elem in tree.xpath("//div[@id='"+func+"']//div[contains(@id,'gridshow')] | //div[@id='"+func+"']//div[contains(@id,'gridshow')]//img[@class='shadow smallroundcorner']"):
 				if elem.tag == 'img':
 					icon = str(elem.attrib.get('src'))
-					iconSet = True               
+					iconSet = True
 
 				if elem.tag == 'div':
 					stream = str(elem[0].attrib.get('href'))
@@ -251,6 +254,14 @@ class StreamsThumb(StreamsThumbCommon):
 							duration = _("Duration: ")+str(elem[4].text)
 
 				if iconSet == True:
+					# For all functions other than 'straight' we get the stream url from the icon url.
+					if self.cmd != 'straight':
+						stream = icon
+						
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'False':
+						icon = ''
+						
 					weekList.append((date, name, short, channel, stream, icon, duration, False))
 					iconSet = False
 
@@ -278,7 +289,11 @@ class StreamsThumb(StreamsThumbCommon):
 
 			for elem in tree.xpath("//div[contains(@class,'gridshow')]//h3//a | //div[contains(@class,'gridshow')]//a//img"):
 				if elem.tag == 'img':
-					icon = str(elem.attrib.get('src'))              
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						icon = str(elem.attrib.get('src'))
+					else:
+						icon = ''
 
 				if elem.tag == 'a':
 					stream = baseUrl + str(elem.attrib.get('href'))
@@ -325,6 +340,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 					icon_url = select('img').get('src')
 					icon = str(icon_url)
+
 					name_tmp = str(select('h3').text_content())
 					name = checkUnicode(name_tmp)
 
@@ -336,6 +352,13 @@ class StreamsThumb(StreamsThumbCommon):
 
 					duration = _("Duration: ")+str(show.get_element_by_id('videosearch_duration').text_content())
 
+					# For all functions other than 'straight' we get the stream url from the icon url.
+					stream = icon
+					
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'False':
+						icon = ''
+					
 					weekList.append((date, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:

@@ -21,6 +21,7 @@ from . import _
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
+from Components.config import config
 from Components.MenuList import MenuList
 from Components.Label import Label
 from Components.ActionMap import ActionMap
@@ -204,6 +205,7 @@ class OpenUg(StreamsThumbCommon):
 
 	def __init__(self, session, action, value=None, url=None):
 		self.defaultImg = "Extensions/OnDemand/icons/OUG.png"
+		self.showIcon = str(config.ondemand.ShowImages.value)
 		StreamsThumbCommon.__init__(self, session, action, value, url)
 
 		self.isAtotZ = False
@@ -391,9 +393,13 @@ class OpenUg(StreamsThumbCommon):
 						tmp = "<a href=\""
 						stream = line.split(tmp)[1].split('\">')[0]
 
-					tmp = "<img class=\"thumbnail\" src=\""
-					if tmp in line:
-						icon = line.split(tmp)[1].split('\" ')[0]
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						tmp = "<img class=\"thumbnail\" src=\""
+						if tmp in line:
+							icon = line.split(tmp)[1].split('\" ')[0]
+					else:
+						icon = ''
 
 					tmp = "<div class=\"stationlogo\""
 					if tmp in line:
@@ -485,9 +491,13 @@ class OpenUg(StreamsThumbCommon):
 					if "<a href=\"video" in line:
 						stream = line.split("<a href=\"")[1].split('\" ')[0]
 
-					tmp = "<img class=\"thumbnail\" src=\""
-					if tmp in line:
-						icon = line.split(tmp)[1].split('\" ')[0]
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						tmp = "<img class=\"thumbnail\" src=\""
+						if tmp in line:
+							icon = line.split(tmp)[1].split('\" ')[0]
+					else:
+						icon = ''
 
 					tmp = "<div class=\"stationlogo\""
 					if tmp in line:
@@ -561,16 +571,25 @@ class OpenUg(StreamsThumbCommon):
 						date = _("Added: ")+str(line.split(tmp)[1].split("</div>")[0])
 						channel = date[-3:]
 
-					tmp = "<img class='thumbnail' src='"
-					if tmp in line:
-						icon = line.split(tmp)[1].split("\'/>")[0]
-						if "http://" not in icon:
-							icon_tmp = self.UG_BASE_URL
-							icon =  icon_tmp + icon
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						tmp = "<img class='thumbnail' src='"
+						if tmp in line:
+							icon = line.split(tmp)[1].split("\'/>")[0]
+							if "http://" not in icon:
+								icon_tmp = self.UG_BASE_URL
+								icon =  icon_tmp + icon
+					else:
+						icon = ''
 
-					if "</div>" in line[:6] and date and name and short and icon:
-						weekList.append((date, name, short, channel, stream, icon, duration, False))
-						state = 0
+					if self.showIcon == 'True':
+						if "</div>" in line[:6] and date and name and short and icon:
+							weekList.append((date, name, short, channel, stream, icon, duration, False))
+							state = 0
+					else:
+						if "</div>" in line[:6] and date and name and short:
+							weekList.append((date, name, short, channel, stream, icon, duration, False))
+							state = 0
 
 #=========================================================================================
 	def getMediaDataAlph(self, weekList, url):
@@ -615,12 +634,16 @@ class OpenUg(StreamsThumbCommon):
 						stream = line.split(tmp)[1].split("\"")[0]
 
 					if serieid == '':
-						tmp = "<img class='thumbnail' src='"
-						if tmp in line:
-							icon = line.split(tmp)[1].split('\'/>')[0]
-							if "http://" not in icon:
-								icon_tmp = self.UG_BASE_URL
-								icon =  icon_tmp + icon
+						# Only set the Icon if they are enabled
+						if self.showIcon == 'True':
+							tmp = "<img class='thumbnail' src='"
+							if tmp in line:
+								icon = line.split(tmp)[1].split('\'/>')[0]
+								if "http://" not in icon:
+									icon_tmp = self.UG_BASE_URL
+									icon =  icon_tmp + icon
+						else:
+							icon = ''
 
 						tmp = "<div class='datum'>"
 						if tmp in line and date == '':
@@ -632,20 +655,33 @@ class OpenUg(StreamsThumbCommon):
 							short = line.split(tmp)[1].split("</div>")[0]
 							short = checkUnicode(short)
 					else:
-						tmp = "<div class='thumbHolder'>"
-						if tmp in line:
-							icon = line.split("url(\"")[1].split("\"")[0]
-							if "http://" not in icon:
-								icon_tmp = self.UG_BASE_URL
-								icon =  icon_tmp + icon
+						# Only set the Icon if they are enabled
+						if self.showIcon == 'True':
+							tmp = "<div class='thumbHolder'>"
+							if tmp in line:
+								icon = line.split("url(\"")[1].split("\"")[0]
+								if "http://" not in icon:
+									icon_tmp = self.UG_BASE_URL
+									icon =  icon_tmp + icon
+						else:
+							icon = ''
 
 					isdone = False
-					if serieid == '':
-						if name and stream and icon and date:
-							isdone = True
+					if self.showIcon == 'True':
+						if serieid == '':
+							if name and stream and icon and date:
+								isdone = True
+						else:
+							if name and serieid and icon:
+								isdone = True
 					else:
-						if name and serieid and icon:
-							isdone = True
+						if serieid == '':
+							if name and stream and date:
+								isdone = True
+						else:
+							if name and serieid:
+								isdone = True
+
 					if isdone:
 						if serieid != '':
 							weekList.append((date, name, short, channel, serieid, icon, duration, True))

@@ -244,6 +244,7 @@ class fourODMainMenu(Screen):
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/fourOD.png"
+		self.showIcon = str(config.ondemand.ShowImages.value)
 		StreamsThumbCommon.__init__(self, session, action, value, url)
 
 	def layoutFinished(self):
@@ -593,10 +594,14 @@ class StreamsThumb(StreamsThumbCommon):
 						except (Exception) as exception:
 							hasSubtitles = False
 
-						try:
-							icon = str(entry[u'group'][u'thumbnail'][u'@url'])
-						except (Exception) as exception:
-							icon = ""
+						# Only set the Icon if they are enabled
+						if self.showIcon == 'True':
+							try:
+								icon = str(entry[u'group'][u'thumbnail'][u'@url'])
+							except (Exception) as exception:
+								icon = ""
+						else:
+							icon = ''
 
 						try:
 							lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'dc:date.TXDate']), u"%Y-%m-%dT%H:%M:%S.%fZ")))
@@ -733,10 +738,14 @@ class StreamsThumb(StreamsThumbCommon):
 						except (Exception) as exception:
 							stream = ""
 
-						try:
-							icon = str(entry['content']['thumbnail']['@url'])
-						except (Exception) as exception:
-							icon = ""
+						# Only set the Icon if they are enabled
+						if self.showIcon == 'True':
+							try:
+								icon = str(entry['content']['thumbnail']['@url'])
+							except (Exception) as exception:
+								icon = ""
+						else:
+							icon = ''
 
 						try:
 							name_tmp = str(unicode(entry['title']))
@@ -814,10 +823,14 @@ class StreamsThumb(StreamsThumbCommon):
 					except (Exception) as exception:
 						stream = ""
 
-					try:
-						icon = str(unicode(entry[u'imgUrl']))
-					except (Exception) as exception:
-						icon = ""
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						try:
+							icon = str(unicode(entry[u'imgUrl']))
+						except (Exception) as exception:
+							icon = ""
+					else:
+						icon = ''
 
 					try:
 						name_tmp = str(unicode(entry[u'value']))

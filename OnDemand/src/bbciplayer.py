@@ -206,6 +206,7 @@ class BBCiMenu(Screen):
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/bbciplayer.png"
+		self.showIcon = str(config.ondemand.ShowImages.value)
 		StreamsThumbCommon.__init__(self, session, action, value, url)
 
 	def layoutFinished(self):
@@ -294,7 +295,12 @@ class StreamsThumb(StreamsThumbCommon):
 					except (Exception) as exception:
 						date1=str(line[2])
 
-					icon = line[3]
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						icon = line[3]
+					else:
+						icon = ''
+
 					short = checkUnicode(line[4])
 
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
@@ -331,7 +337,12 @@ class StreamsThumb(StreamsThumbCommon):
 				# Iterate through the children of <entry>
 				select = lambda expr: show.cssselect(expr)[0]
 				
-				icon=select("thumbnail").get('url')
+				# Only set the Icon if they are enabled
+				if self.showIcon == 'True':
+					icon=select("thumbnail").get('url')
+				else:
+					icon=''
+
 				name_tmp=str(select('title').text_content())
 				
 				stream_tmp=select('id').text_content()

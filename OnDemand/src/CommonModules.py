@@ -137,7 +137,7 @@ class MainMenuList(HTMLComponent, GUIComponent):
 		self.selectionChanged()
 
 class EpisodeList(HTMLComponent, GUIComponent):
-	def __init__(self, iconDefault):
+	def __init__(self, iconDefault, showIcon):
 		GUIComponent.__init__(self)
 		self.picload = ePicLoad()
 		self.l = eListboxPythonMultiContent()
@@ -153,6 +153,7 @@ class EpisodeList(HTMLComponent, GUIComponent):
 
 		self.imagedir = "/tmp/onDemandImg/"
 		self.defaultImg = iconDefault
+		self.showIcon = showIcon
 		
 		if not os_path.exists(self.imagedir):
 			os_mkdir(self.imagedir)
@@ -246,32 +247,40 @@ class EpisodeList(HTMLComponent, GUIComponent):
 
 		res = [ None ]
 		
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.x+r1.w, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, name))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x+r1.w, r3.y+r2.h, r3.w, r3.h, 2, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, short))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x+r1.w, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, date))
-		if duration:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x+r1.w, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, duration))
+		# If we don't want to show the icons then shift everything to the left.
+		if self.showIcon != 'False':
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.x+r1.w, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, name))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x+r1.w, r3.y+r2.h, r3.w, r3.h, 2, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, short))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x+r1.w, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, date))
+			if duration:
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x+r1.w, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, duration))
 
-		self.picload.setPara((r1.w, r1.h, 0, 0, 1, 1, "#00000000"))
-		self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/empty.png"), 0, 0, False)
-		pngthumb = self.picload.getData()
+			self.picload.setPara((r1.w, r1.h, 0, 0, 1, 1, "#00000000"))
+			self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/empty.png"), 0, 0, False)
+			pngthumb = self.picload.getData()
 
-		if icon:
-			tmp_icon = self.getThumbnailName(icon)
-			thumbnailFile = self.imagedir + tmp_icon
+			if icon:
+				tmp_icon = self.getThumbnailName(icon)
+				thumbnailFile = self.imagedir + tmp_icon
 
-			if os_path.exists(thumbnailFile):
-				self.picload.startDecode(thumbnailFile, 0, 0, False)
-				pngthumb = self.picload.getData()
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
+				if os_path.exists(thumbnailFile):
+					self.picload.startDecode(thumbnailFile, 0, 0, False)
+					pngthumb = self.picload.getData()
+					res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
+				else:
+					self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/empty.png"), 0, 0, False)
+					pngthumb = self.picload.getData()
+					res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
 			else:
-				self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/empty.png"), 0, 0, False)
+				self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, self.defaultImg), 0, 0, False)
 				pngthumb = self.picload.getData()
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
 		else:
-			self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, self.defaultImg), 0, 0, False)
-			pngthumb = self.picload.getData()
-			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, name))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y+r2.h, r3.w, r3.h, 2, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, short))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x+r1.w, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, date))
+			if duration:
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, duration))
 
 		self.picload.setPara((self.l.getItemSize().width(), 2, 0, 0, 1, 1, "#00000000"))
 		try:
@@ -347,7 +356,7 @@ class StreamsThumbCommon(Screen):
 		if (os_path.exists(self.imagedir) != True):
 			os_mkdir(self.imagedir)
 
-		self['list'] = EpisodeList(self.defaultImg)
+		self['list'] = EpisodeList(self.defaultImg, self.showIcon)
 		self.updateMenu()
 
 		self["actions"] = ActionMap(["SetupActions", "DirectionActions"],

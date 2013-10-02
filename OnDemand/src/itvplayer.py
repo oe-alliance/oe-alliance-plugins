@@ -98,6 +98,7 @@ def checkUnicode(value, **kwargs):
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/itvDefault.png"
+		self.showIcon = str(config.ondemand.ShowImages.value)
 		StreamsThumbCommon.__init__(self, session, action, value, url)
 
 	def layoutFinished(self):
@@ -171,9 +172,14 @@ class StreamsThumb(StreamsThumbCommon):
 				stream = str(elem[0].text)
 				date_tmp = str(elem[4].text)
 				name_tmp = str(elem[1].text)
-				icon = str(elem[3].text)
-				if icon is None or icon == "None":
-					icon = ""
+
+				# Only set the Icon if they are enabled
+				if self.showIcon == 'True':
+					icon = str(elem[3].text)
+					if icon is None or icon == "None":
+						icon = ""
+				else:
+					icon = ''
 
 				year = int(date_tmp[0:4])
 				month = int(date_tmp[5:7])
@@ -215,9 +221,14 @@ class StreamsThumb(StreamsThumbCommon):
 					show_url = str(elem[0].attrib.get('href'))
 					show_split = show_url.rsplit('=',1)
 					show = str(show_split[1])
-					icon = str(elem[0][0].attrib.get('src'))
-					if icon is None:
-						icon = ""
+
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						icon = str(elem[0][0].attrib.get('src'))
+						if icon is None:
+							icon = ""
+					else:
+						icon = ''
 
 				if elem.attrib.get('class') == "content":
 					contentSet = True
@@ -265,9 +276,14 @@ class StreamsThumb(StreamsThumbCommon):
 					stream = str(elem[0].text)
 					date_tmp = str(elem[4].text)
 					print "getSearchMediaData: date_tmp: ", date_tmp
-					icon = str(elem[3].text)
-					if icon is None or icon == "None":
-						icon = ""
+
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						icon = str(elem[3].text)
+						if icon is None or icon == "None":
+							icon = ""
+					else:
+						icon = ''
 
 					year = int(date_tmp[0:4])
 					month = int(date_tmp[5:7])
