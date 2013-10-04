@@ -28,6 +28,7 @@ ModeOld = ""
 Element = ""
 ElementList = []
 ExeMode = False
+StatusMode = False
 
 def ParseCode():
 	global L1
@@ -137,6 +138,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		global Element
 		global ElementList
 		global ExeMode
+		global StatusMode
 		Block = True
 		IP = req.getClientIP()
 		WL = LCD4linux.WebIfAllow.value
@@ -160,7 +162,8 @@ class LCD4linuxConfigweb(resource.Resource):
 			html += "<meta http-equiv=\"pragma\" content=\"no-cache\" />\n"
 			html += "<meta http-equiv=\"expires\" content=\"0\">\n"
 			html += "</head>"
-			html += "Config-WebIF Access Deny (IP: %s )" % IP
+			html += "Config-WebIF Access Deny ( IP: %s )<br>\n" % IP
+			html += "(Global Setup > %s)\n" % _l(_("WebIF IP Allow"))
 			html += "</body>\n"
 			html += "</html>\n"
 			return html
@@ -208,6 +211,8 @@ class LCD4linuxConfigweb(resource.Resource):
 			exec(ex[0])
 		elif command[0] == "enable":
 			ExeMode = True
+		elif command[0] == "status":
+			StatusMode = True
 		elif command[0] == "pop":
 			setPopText(req.args.get("PopText",[""])[0])
 			L4LElement.setRefresh()
@@ -582,6 +587,11 @@ class LCD4linuxConfigweb(resource.Resource):
 			html += "<input style=\"width: 400px\" type=\"text\" name=\"ex\">\n"
 			html += "<input type=\"submit\" value=\"%s\">\n" % _l(_("Exec"))
 			html += "</form>\n"
+		if StatusMode == True:
+			html += "<br />\n"
+			html += "Screen: %s<br />\n" % str(getScreenActive(True))
+			html += "Hold/HoldKey: %s/%s<br />\n" % (str(getSaveEventListChanged()),str(L4LElement.getHoldKey()))
+			html += "Brightness org/set %s/%s<br />\n" %(str(L4LElement.getBrightness()),str(L4LElement.getBrightness(0,False)))
 	
 		html += "<hr><span style=\"font-size:8pt\">%s (%s)</span>" % (getINFO(),IP)
 		html += "<BR><a style=\"font-size:9pt; color:#FFCC00;\" href=\"http://www.i-have-a-dreambox.com/wbb2/thread.php?postid=1634882\">Support & FAQ & Info & Donation</a>"
