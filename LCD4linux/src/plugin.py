@@ -11033,6 +11033,37 @@ def autostart(reason, **kwargs):
 			except:
 				pass
 
+def getDistro():
+	try:
+		from enigma import getDistro as e2_getDistro
+		return e2_getDistro()
+	except:
+		try:
+			file = open('/etc/image-version', 'r')
+			lines = file.readlines()
+			file.close()
+			for x in lines:
+				splitted = x.split('=')
+				if splitted[0] == "comment":
+					result =  splitted[1].replace('\n','')
+		except:
+			result = None
+		return result
+
+def setup(menuid, **kwargs):
+	print 'getDistro:',getDistro()
+	print 'YY:',getDistro() in ("openvix", "openaaf", "openmips", "ventonsupport", "egami")
+	if getDistro() in ("openvix", "openaaf", "openmips", "ventonsupport", "egami"):
+		if menuid == "display":
+			return [("LCD4linux", main, "lcd4linux", None)]
+		else:
+			return []
+	else:
+		if menuid == "setup":
+			return [("LCD4linux", main, "lcd4linux", None)]
+		else:
+			return []
+
 def Plugins(**kwargs):
 	list = [
 	PluginDescriptor(name="LCD4linux", 
@@ -11042,7 +11073,6 @@ def Plugins(**kwargs):
 	fnc = autostart)]
 	list.append(PluginDescriptor(name="LCD4linux", 
 	description="LCD4linux", 
-	where = PluginDescriptor.WHERE_PLUGINMENU,
-	icon = "plugin.png",
-	fnc = main))
+	where = PluginDescriptor.WHERE_MENU,
+	fnc = setup))
 	return list
