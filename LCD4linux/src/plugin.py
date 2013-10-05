@@ -11051,7 +11051,7 @@ def getDistro():
 		return result
 
 def setup(menuid, **kwargs):
-	if getDistro() in ("openvix", "openatv", "ventonsupport", "egami"):
+	if getDistro() in ("openvix", "openatv", "ventonsupport", "egami", "openhdf"):
 		if menuid == "display":
 			return [("LCD4linux", main, "lcd4linux", None)]
 		else:
