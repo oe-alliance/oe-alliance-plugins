@@ -1858,11 +1858,13 @@ def getTimeDiffUTC():
 def ConfTime(F,W):
 	try:
 		if os.path.exists(LCD4config) and W != [6,0]:
-			if open(LCD4config,"r").read().find("config."+F) == -1:
+			fconfig = open(LCD4config,"r")
+			if f.read().find("config."+F) == -1:
 				L4log("write alternate TimeConfig "+F,W)
 				f = open(LCD4config,"a")
 				f.write("config.%s=%d:%d\n" % (F,W[0],W[1]))
 				f.close()
+			fconfig.close()
 	except:
 		L4log("Errot: write alternate TimeConfig "+F,W)
 
@@ -2987,8 +2989,10 @@ def Exchange():
 
 def CheckFstab():
 	if os.path.isfile("/etc/fstab"):
-		if open("/etc/fstab","r").read().lower().find("usbfs") == -1:
+		f = open("/etc/fstab","r")
+		if f.read().lower().find("usbfs") == -1:
 			L4log("Info: no usbfs-Line in fstab")
+		f.close()
 
 def FritzCallLCD4Linux(event,Date,number,caller,phone):
 	global FritzTime
@@ -3022,10 +3026,13 @@ def NcidLCD4Linux(Date,number,caller):
 
 # Load Config
 if os.path.isfile(LCD4config):
-	L=open(LCD4config,"r").read()
+	f=open(LCD4config,"r").read()
 	if "Netatmo" in L:
-		L=L.replace("Netatmo","NetAtmo")
-		open(LCD4config,"w").write(L)
+		L=f.replace("Netatmo","NetAtmo")
+		w = open(LCD4config,"w")
+		w.write(L)
+		w.close()
+	f.close()
 	LCD4linux.loadFromFile(LCD4config)
 	LCD4linux.load()
 else:
