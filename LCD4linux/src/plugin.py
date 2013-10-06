@@ -3026,13 +3026,14 @@ def NcidLCD4Linux(Date,number,caller):
 
 # Load Config
 if os.path.isfile(LCD4config):
-	f=open(LCD4config,"r").read()
+	f=open(LCD4config,"r")
+	L = f.read()
+	f.close()
 	if "Netatmo" in L:
-		L=f.replace("Netatmo","NetAtmo")
+		L=L.replace("Netatmo","NetAtmo")
 		w = open(LCD4config,"w")
 		w.write(L)
 		w.close()
-	f.close()
 	LCD4linux.loadFromFile(LCD4config)
 	LCD4linux.load()
 else:
@@ -3293,7 +3294,7 @@ class L4LWorker(Thread):
 			Briefkasten.task_done() 
 #			print "worker e", self.index
 
- 	def getICS(self,name,col):
+	def getICS(self,name,col):
 		global ICS
 		global ICSlist
 		if len(name)<3 or "..." in name:
