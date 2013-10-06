@@ -228,11 +228,12 @@ class Blindscan(ConfigListScreen, Screen):
 		self.scan_sat = ConfigSubsection()
 		self.scan_networkScan = ConfigYesNo(default = False)
 
-		#ConfigYesNo(default = True)
-		self.blindscan_start_frequency = ConfigInteger(default = 10700, limits = (1, 99999))
-		self.blindscan_stop_frequency = ConfigInteger(default = 12750, limits = (1, 99999))
-		self.blindscan_start_symbol = ConfigInteger(default = 2, limits = (1, 99))
-		self.blindscan_stop_symbol = ConfigInteger(default = 45, limits = (1, 99))
+		self.blindscan_Ku_band_start_frequency = ConfigInteger(default = 10700, limits = (10700, 12749))
+		self.blindscan_Ku_band_stop_frequency = ConfigInteger(default = 12750, limits = (10701, 12750))
+		self.blindscan_C_band_start_frequency = ConfigInteger(default = 3600, limits = (3000, 4199))
+		self.blindscan_C_band_stop_frequency = ConfigInteger(default = 4200, limits = (3001, 4200))
+		self.blindscan_start_symbol = ConfigInteger(default = 2, limits = (1, 44))
+		self.blindscan_stop_symbol = ConfigInteger(default = 45, limits = (2, 45))
 		self.scan_clearallservices = ConfigYesNo(default = False)
 		self.scan_onlyfree = ConfigYesNo(default = False)
 		self.dont_scan_known_tps = ConfigYesNo(default = False)
@@ -305,14 +306,21 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self.systemEntry = None
 		self.modulationEntry = None
+		self.satelliteEntry = None
 		nim = nimmanager.nim_slots[index_to_scan]
 
 		self.scan_networkScan.value = False
-		if nim.isCompatible("DVB-S") :
-			self.list.append(getConfigListEntry(_('Satellite'), self.scan_satselection[self.getSelectedSatIndex(index_to_scan)],_('Select the satellite you wish to search')))
-			self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_start_frequency,_('Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the case of C-band satellites)')))
-			self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_stop_frequency,_('Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the case of C-band satellites)')))
-			self.list.append(getConfigListEntry(_("Polarisation"), self.scan_sat.polarization,_('If you are not sure what polarisations the satellite you wish to search transmits, select "vertical and horizontal"')))
+		if nim.isCompatible("DVB-S") : 
+			self.satelliteEntry = getConfigListEntry(_('Satellite'), self.scan_satselection[self.getSelectedSatIndex(index_to_scan)],_('Select the satellite you wish to search'))
+			self.list.append(self.satelliteEntry)
+			self.SatBandCheck()
+			if self.is_c_band_scan :
+				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_C_band_start_frequency,_('Frequency values must be between 3000 MHz and 4199 MHz (C-band)')))
+				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_C_band_stop_frequency,_('Frequency values must be between 3001 MHz and 4200 MHz (C-band)')))
+			else:
+				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_Ku_band_start_frequency,_('Frequency values must be between 10700 MHz and 12749 MHz')))
+				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_Ku_band_stop_frequency,_('Frequency values must be between 10701 MHz and 12750 MHz')))
+			self.list.append(getConfigListEntry(_("Polarisation"), self.scan_sat.polarization,_('The suggested polarisation for this satellite is "' + self.suggestedPolarisation + '"')))
 			self.list.append(getConfigListEntry(_('Scan start symbolrate'), self.blindscan_start_symbol,_('Symbol rate values are in megasymbols; enter a value between 1 and 44')))
 			self.list.append(getConfigListEntry(_('Scan stop symbolrate'), self.blindscan_stop_symbol,_('Symbol rate values are in megasymbols; enter a value between 2 and 45')))
 			self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices,_('If you select "yes" all channels on the satellite being search will be deleted before starting the current search')))
@@ -328,61 +336,9 @@ class Blindscan(ConfigListScreen, Screen):
 		print "cur is", cur
 		if cur == self.tunerEntry or \
 			cur == self.systemEntry or \
+			cur == self.satelliteEntry or \
 			(self.modulationEntry and self.systemEntry[1].value == eDVBFrontendParametersSatellite.System_DVB_S2 and cur == self.modulationEntry):
 			self.createSetup()
-
-	def checkSettings(self, orb):
-		self.ku_band_lower_limit = 10700
-		self.is_c_band_scan = False
-		band = self.SatBandCheck(orb)
-		if band :
-			if band == 'C' :
-				self.is_c_band_scan = True
-		else:
-			if self.blindscan_start_frequency.value < 4200 :
-				self.is_c_band_scan = True
-		if self.blindscan_start_symbol.value < 1 or self.blindscan_start_symbol.value > 44 :
-			self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nStart symbol rate must be between 1MHz and 44MHz."), MessageBox.TYPE_ERROR)
-			return False
-		if self.blindscan_stop_symbol.value < 2 or self.blindscan_stop_symbol.value > 45 :
-			self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nStop symbol rate must be between 2MHz and 45MHz."), MessageBox.TYPE_ERROR)
-			return False
-		if self.blindscan_start_symbol.value > self.blindscan_stop_symbol.value :
-			self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nSymbol rate start value is larger than stop value."), MessageBox.TYPE_ERROR)
-			return False
-		if self.blindscan_start_frequency.value > self.blindscan_stop_frequency.value :
-			self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nFrequency start value is larger than stop value."), MessageBox.TYPE_ERROR)
-			return False
-		if self.is_c_band_scan and band == 'C' :
-			if self.blindscan_start_frequency.value < 3000 :
-				self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nThat is a C-band satellite so frequency values \nneed to be between 3000MHz and 4200MHz."), MessageBox.TYPE_ERROR)
-				return False
-			if self.blindscan_stop_frequency.value > 4200 :
-				self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nThat is a C-band satellite so frequency values \nneed to be between 3000MHz and 4200MHz."), MessageBox.TYPE_ERROR)
-				return False
-			return True
-		if self.is_c_band_scan :
-			if self.blindscan_start_frequency.value < 3000 :
-				self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nStart frequency must be between 10700MHz and 12750MHz.\n(Or 3000MHz and 4200MHz in the case of c-band)."), MessageBox.TYPE_ERROR)
-				return False
-			if self.blindscan_stop_frequency.value > 4200 :
-				self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nFor C-band searches stop frequency must be between 3000MHz and 4200MHz."), MessageBox.TYPE_ERROR)
-				return False
-			return True
-		if band == 'Ku' :
-			if self.blindscan_start_frequency.value < 10700 or self.blindscan_start_frequency.value > 12750 :
-				self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nThat is a Ku-band satellite so frequency values \nneed to be between 10700MHz and 12750MHz."), MessageBox.TYPE_ERROR)
-				return False
-			if self.blindscan_stop_frequency.value < 10700 or self.blindscan_stop_frequency.value > 12750 :
-				self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nThat is a Ku-band satellite so frequency values \nneed to be between 10700MHz and 12750MHz."), MessageBox.TYPE_ERROR)
-				return False
-		if self.blindscan_start_frequency.value < 10700 or self.blindscan_start_frequency.value > 12750 :
-			self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nStart frequency must be between 10700MHz and 12750MHz.\n(Or 3000MHz and 4200MHz in the case of c-band)."), MessageBox.TYPE_ERROR)
-			return False
-		if self.blindscan_stop_frequency.value < 10700 or self.blindscan_stop_frequency.value > 12750 :
-			self.session.open(MessageBox, _("Invalid parameters entered. Please correct and try again.\nStop frequency must be between 10700MHz and 12750MHz.\n(Or 3000MHz and 4200MHz in the case of c-band)."), MessageBox.TYPE_ERROR)
-			return False
-		return True
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -414,11 +370,28 @@ class Blindscan(ConfigListScreen, Screen):
 		tmp_band = []
 		idx_selected_sat = int(self.getSelectedSatIndex(self.scan_nims.value))
 		tmp_list=[self.satList[int(self.scan_nims.value)][self.scan_satselection[idx_selected_sat].index]]
-		orb = tmp_list[0][0]
 
-		if self.checkSettings(orb) == False:
-			return
-
+		if self.is_c_band_scan :
+			self.blindscan_start_frequency = self.blindscan_C_band_start_frequency
+			self.blindscan_stop_frequency = self.blindscan_C_band_stop_frequency
+		else :
+			self.blindscan_start_frequency = self.blindscan_Ku_band_start_frequency
+			self.blindscan_stop_frequency = self.blindscan_Ku_band_stop_frequency
+		
+		# swap start and stop values if entered the wrong way round
+		if self.blindscan_start_frequency.value > self.blindscan_stop_frequency.value :
+			temp = self.blindscan_stop_frequency.value 
+			self.blindscan_stop_frequency.value = self.blindscan_start_frequency.value
+			self.blindscan_start_frequency.value = temp
+			del temp
+						
+		# swap start and stop values if entered the wrong way round
+		if self.blindscan_start_symbol.value > self.blindscan_stop_symbol.value :
+			temp = self.blindscan_stop_symbol.value 
+			self.blindscan_stop_symbol.value = self.blindscan_start_symbol.value
+			self.blindscan_start_symbol.value = temp
+			del temp
+			
 		uni_lnb_cutoff = 11700
 		if self.blindscan_start_frequency.value < uni_lnb_cutoff and self.blindscan_stop_frequency.value > uni_lnb_cutoff :
 			tmp_band=["low","high"]
@@ -454,7 +427,7 @@ class Blindscan(ConfigListScreen, Screen):
 			self.makeNimSocket(nimName)
 			if self.binName is None:
 				self.session.open(MessageBox, "Blindscan is not supported in " + nimName + " tuner.", MessageBox.TYPE_ERROR)
-				print nimName + " is not support blindscan."
+				print nimName + " does not support blindscan."
 				return
 
 		self.full_data = ""
@@ -897,20 +870,32 @@ class Blindscan(ConfigListScreen, Screen):
 		open(location, "w").writelines(xml)
 		return location
 
-	def SatBandCheck(self, pos) :
+	def SatBandCheck(self) :
+		pos = self.getOrbPos()
 		freq = 0
-		band = ''
+		band = 'Unknown'
+		self.is_c_band_scan = False
+		self.suggestedPolarisation = "vertical & horizontal"
 		tp_list = self.getKnownTransponders(pos)
 		if len(tp_list) :
 			freq = int(tp_list[0].frequency)
+			if int(tp_list[0].polarisation) > 1 :
+				self.suggestedPolarisation = "circular right & circular left"
 		if freq :
 			if freq < 4201000 and freq > 2999000 :
 				band = 'C'
+				self.is_c_band_scan = True
 			elif freq < 12751000 and freq > 10700000 :
 				band = 'Ku'
 		print "SatBandCheck band = %s" % (band)
-		return band
 
+	def getOrbPos(self):
+		idx_selected_sat = int(self.getSelectedSatIndex(self.scan_nims.value))
+		tmp_list=[self.satList[int(self.scan_nims.value)][self.scan_satselection[idx_selected_sat].index]]
+		orb = tmp_list[0][0]
+		print "orb = ", orb
+		return orb
+		
 def main(session, **kwargs):
 	session.open(Blindscan)
 
