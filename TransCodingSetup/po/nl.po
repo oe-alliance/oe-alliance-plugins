@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 09:59+0200\n"
-"PO-Revision-Date: 2013-07-25 16:13+0100\n"
+"POT-Creation-Date: 2013-10-05 17:39+0200\n"
+"PO-Revision-Date: 2013-10-06 17:17+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: \n"
@@ -37,55 +37,44 @@ msgstr ""
 msgid "%s"
 msgstr "%s"
 
-msgid "23976"
-msgstr "23976"
+msgid "Allows streams to be transcoded."
+msgstr "Maakt het mogelijk streams te transcoderen."
 
-msgid "24000"
-msgstr "24000"
-
-msgid "29970"
-msgstr "29970"
-
-msgid "30000"
-msgstr "30000"
-
-msgid "59940"
-msgstr "59940"
-
-msgid "60000"
-msgstr "60000"
+msgid "Bitrate"
+msgstr "Bitrate"
 
 msgid "Cancel"
 msgstr "Annuleer"
 
-#, python-format
-msgid ""
-"Failed, Encoder %s\n"
-"(%s)."
-msgstr ""
-"Mislukt, encoder %s\n"
-"(%s)."
+msgid "Default"
+msgstr "Default"
 
-#, python-format
-msgid "OK. Encoder %s."
-msgstr "OK. Encoder %s."
-
-#, python-format
-msgid ""
-"OK. Encoder %s.\n"
-"%s"
-msgstr ""
-"OK. Encoder %s.\n"
-"%s"
-
-msgid "Ok"
-msgstr "OK"
+msgid "Framerate"
+msgstr "Framerate"
 
 msgid "Port"
 msgstr "Poort"
 
+msgid "Really close without saving settings?"
+msgstr "Echt afsluiten zonder op te slaan?"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Set the port for transcode."
+msgstr "Stelt de poort voor transcoderen in."
+
+msgid "Sets the bitrate (quality)."
+msgstr "Stelt de bitrate (kwaliteit) in."
+
+msgid "Sets the framerate (fps)."
+msgstr "Stelt de framerate in (fps)."
+
 msgid "This model is not support transcoding."
 msgstr "Dit model ondersteunt transcoderen niet."
+
+msgid "Transcode settings"
+msgstr "Transcodeer instellingen"
 
 msgid "Transcoding"
 msgstr "Bezig met transcoderen"
@@ -104,6 +93,44 @@ msgstr "uitschakelen"
 
 msgid "enable"
 msgstr "inschakelen"
+
+#~ msgid "23976"
+#~ msgstr "23976"
+
+#~ msgid "24000"
+#~ msgstr "24000"
+
+#~ msgid "29970"
+#~ msgstr "29970"
+
+#~ msgid "30000"
+#~ msgstr "30000"
+
+#~ msgid "59940"
+#~ msgstr "59940"
+
+#~ msgid "60000"
+#~ msgstr "60000"
+
+#~ msgid ""
+#~ "Failed, Encoder %s\n"
+#~ "(%s)."
+#~ msgstr ""
+#~ "Mislukt, encoder %s\n"
+#~ "(%s)."
+
+#~ msgid "OK. Encoder %s."
+#~ msgstr "OK. Encoder %s."
+
+#~ msgid ""
+#~ "OK. Encoder %s.\n"
+#~ "%s"
+#~ msgstr ""
+#~ "OK. Encoder %s.\n"
+#~ "%s"
+
+#~ msgid "Ok"
+#~ msgstr "OK"
 
 #~ msgid "This Plugin is available on SOLO2/DUO2"
 #~ msgstr "Deze plugin is beschikbaar voor de SOLO2/DUO2"
