@@ -8358,6 +8358,12 @@ def LCD4linuxPIC(self,session):
 			if rr[-1] != ":":
 				rr+=":"
 			picon = str(rr.replace(":", "_")[:-1]) + ".png"
+			fields = picon.split('_', 3)
+			if len(fields) > 2 and fields[2] != '2':
+				#fallback to 1 for tv services with nonstandard servicetypes
+				fields[2] = '1'
+				picon = '_'.join(fields)
+			
 			if Picon2 == False:
 				P2 = LCD4linux.PiconPath.value
 				P2A = LCD4linux.PiconPathAlt.value
