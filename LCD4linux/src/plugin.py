@@ -8358,11 +8358,6 @@ def LCD4linuxPIC(self,session):
 			if rr[-1] != ":":
 				rr+=":"
 			picon = str(rr.replace(":", "_")[:-1]) + ".png"
-			fields = picon.split('_', 3)
-			if len(fields) > 2 and fields[2] != '2':
-				#fallback to 1 for tv services with nonstandard servicetypes
-				fields[2] = '1'
-				picon = '_'.join(fields)
 			
 			if Picon2 == False:
 				P2 = LCD4linux.PiconPath.value
@@ -8377,10 +8372,19 @@ def LCD4linuxPIC(self,session):
 				ret=getpiconres(MAX_W, MAX_H, ConfigFullScreen, picon, P2, P2A, P2C)
 			else:
 				useCache = False
+				fields = picon.split('_', 3)
+				if len(fields) > 2 and fields[2] != '2':
+					#fallback to 1 for tv services with nonstandard servicetypes
+					fields[2] = '1'
+					piconnew = '_'.join(fields)
 				if os.path.isfile(os.path.join(P2,picon)):
 					ret=os.path.join(P2,picon)
 				elif os.path.isfile(os.path.join(P2A,picon)) and len(P2A) > 3:
 					ret=os.path.join(P2A,picon)
+				elif os.path.exists(os.path.join(P2,piconnew)):
+					ret=os.path.join(P2,piconnew)
+				elif os.path.exists(os.path.join(P2A,piconnew)):
+					ret=os.path.join(P2A,piconnew)
 				else:
 					ret=""
 			POSX, POSY = 0,ConfigPos
