@@ -32,6 +32,7 @@ from Components.Network import iNetwork
 from Components.Input import Input
 from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
+from Components.SystemInfo import SystemInfo
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Screens.InfoBar import InfoBar
@@ -11070,7 +11071,9 @@ def getDistro():
 
 def setup(menuid, **kwargs):
 	if getDistro() in ("openvix", "openatv", "ventonsupport", "egami", "openhdf"):
-		if menuid == "display":
+		if menuid == "display" and SystemInfo["Display"]:
+			return [("LCD4linux", main, "lcd4linux", None)]
+		elif menuid == "system":
 			return [("LCD4linux", main, "lcd4linux", None)]
 		else:
 			return []
