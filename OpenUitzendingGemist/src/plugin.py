@@ -287,7 +287,7 @@ class OpenUgSetupScreen(Screen):
 		self.mmenu.append((_("RTL XL Gemist"), 'rtlback'))
 		self.mmenu.append((_("RTL XL Search"), 'rsearch'))
 		self.mmenu.append((_("NET5 Gemist"), 'net5'))
-		self.mmenu.append((_("SBS6 Gemist"), 'sbs'))
+		self.mmenu.append((_("SBS6 Gemist"), 'sbs6'))
 		self.mmenu.append((_("Veronica Gemist"), 'veronica'))
 		self.mmenu.append((_("Setup"), 'setup'))
 		self["menu"] = MenuList(self.mmenu)
@@ -325,7 +325,7 @@ class OpenUgSetupScreen(Screen):
 				self.session.open(OpenUg, selection[1])
 			elif selection[1] == 'net5':
 				self.session.open(OpenUg, selection[1])
-			elif selection[1] == 'sbs':
+			elif selection[1] == 'sbs6':
 				self.session.open(OpenUg, selection[1])
 			elif selection[1] == 'veronica':
 				self.session.open(OpenUg, selection[1])
@@ -635,7 +635,7 @@ class OpenUg(Screen):
 				self.mediaProblemPopup()
 			else:
 				self.updateMenu()
-		elif retval == 'sbs':
+		elif retval == 'sbs6':
 			self.clearList()
 			self.isSbs = True
 			self.channel = retval
@@ -1000,7 +1000,6 @@ class OpenUg(Screen):
 			if stream and date and name and short and icon:
 				icon_type = self.getIconType(icon)
 				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
-			
 			j = j +1
 
 	def sbsGetProgramList(self, progList):
@@ -1012,7 +1011,7 @@ class OpenUg(Screen):
 			stream = ''
 			icon = ''
 			icon_type = ''
-			if '<li ><a href=\\\"javascript:SBS.SecondScreen.Utils.loadPage(\'kijkdetail?videoId=' in x:
+			if '<li ><a href=\\\"javascript:sbs.SecondScreen.Utils.loadPage(\'kijkdetail?videoId=' in x:
 				name = x.split('>')[2].split('<')[0]
 				stream = x.split('>')[1].split('videoId=')[1].split('\'')[0]
 				progList.append((date, name, '', '', stream, icon, icon_type, False))
