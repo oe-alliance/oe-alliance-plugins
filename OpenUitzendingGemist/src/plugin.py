@@ -961,6 +961,7 @@ class OpenUg(Screen):
 				icon_type = self.getIconType(icon)
 				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
 				state = 0
+
 	def getMediaData(self, weekList, url):
 		data = wgetUrl(url)
 		state = 0
@@ -980,37 +981,26 @@ class OpenUg(Screen):
 			date = ''
 			stream = ''
 			icon = ''
-
 			line = data[j]
 			tmp = 'rel="'
 			if tmp in line:
 				stream = line.split(tmp)[1].split('"')[0]
-
 			tmp = "<img class=\"vid_view\" src=\""
 			if tmp in line:
-				icon = line.split(tmp)[1].split("\" />")[0]
-
+				icon = line.split(tmp)[1].split("\" />")[0]	
 			tmp = "<p class=\"titleshort\">"
 			if tmp in line:
 				short = line.split(tmp)[1].split("</p>")[0]
-
 			tmp = "<p class=\"title\">"
 			if tmp in line:
-				name = line.split(tmp)[1].split("</p>")[0]
-
+				name = line.split(tmp)[1].split("</p>")[0]	
 			tmp = "<p class=\"date_time bottom\">"
 			if tmp in line:
-				date = line.split(tmp)[1].split("</p>")[0]
-
+				date = line.split(tmp)[1].split("</p>")[0]	
 			if stream and date and name and short and icon:
 				icon_type = self.getIconType(icon)
-				print "[UG] name: %s" % name
-				print "[UG] short: %s" % short
-				print "[UG] channel: %s" % channel
-				print "[UG] stream: %s" % stream
-				print "[UG] date: %s" % date
 				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
-
+			
 			j = j +1
 
 	def sbsGetProgramList(self, progList):
