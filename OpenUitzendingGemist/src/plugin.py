@@ -961,40 +961,57 @@ class OpenUg(Screen):
 				icon_type = self.getIconType(icon)
 				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
 				state = 0
-
 	def getMediaData(self, weekList, url):
 		data = wgetUrl(url)
 		state = 0
+		short = ''
 		name = ''
 		date = ''
 		stream = ''
+		channel = ''
 		icon = ''
-		data = data.split("\n")
-		for line in data:
-			if state == 0:
+		tmp = "<div class=\"vid\""
+		i = data.count(tmp)
+		j = 1
+		data = data.split(tmp)
+		while j<i:
+			short = ''
+			name = ''
+			date = ''
+			stream = ''
+			icon = ''
 
-				tmp = "class=\"vid\" rel=\""
-				if tmp in line:
-					state = 1
-					name = ''
-					stream = line.split(tmp)[1].split("\"")[0]
-					date = ''
-					icon = ''
-					continue
-			elif state == 1:
-				tmp = "class=\"date_time bottom\">"
-				if tmp in line:
-					date = line.split(tmp)[1].split("</p>")[0]
-				tmp = "class=\"title\">"
-				if tmp in line:
-					name = line.split(tmp)[1].split("</p>")[0]
-				tmp = "<img class=\"vid_view\" src=\""
-				if tmp in line:
-					icon = line.split(tmp)[1].split("\"")[0]
-				if date and name and icon and stream:
-					icon_type = self.getIconType(icon)
-					weekList.append((date, name, '', '', stream, icon, icon_type, False))
-					state = 0
+			line = data[j]
+			tmp = 'rel="'
+			if tmp in line:
+				stream = line.split(tmp)[1].split('"')[0]
+
+			tmp = "<img class=\"vid_view\" src=\""
+			if tmp in line:
+				icon = line.split(tmp)[1].split("\" />")[0]
+
+			tmp = "<p class=\"titleshort\">"
+			if tmp in line:
+				short = line.split(tmp)[1].split("</p>")[0]
+
+			tmp = "<p class=\"title\">"
+			if tmp in line:
+				name = line.split(tmp)[1].split("</p>")[0]
+
+			tmp = "<p class=\"date_time bottom\">"
+			if tmp in line:
+				date = line.split(tmp)[1].split("</p>")[0]
+
+			if stream and date and name and short and icon:
+				icon_type = self.getIconType(icon)
+				print "[UG] name: %s" % name
+				print "[UG] short: %s" % short
+				print "[UG] channel: %s" % channel
+				print "[UG] stream: %s" % stream
+				print "[UG] date: %s" % date
+				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
+
+			j = j +1
 
 	def sbsGetProgramList(self, progList):
 		out = wgetUrl('%s/stations/%s/pages/kijk' % (self.SBS_BASE_URL, self.channel))
