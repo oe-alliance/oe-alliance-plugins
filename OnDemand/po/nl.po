@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 09:59+0200\n"
-"PO-Revision-Date: 2013-07-25 17:44+0100\n"
+"POT-Creation-Date: 2013-10-10 00:07+0200\n"
+"PO-Revision-Date: 2013-10-12 08:28+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der DOes\n"
 "Language: nl\n"
@@ -19,14 +19,20 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: The Netherlands\n"
 
+msgid ""
+"\n"
+"\n"
+"Genre: "
+msgstr ""
+"\n"
+"\n"
+"Genre: "
+
 msgid "0 - 9"
 msgstr "0 - 9"
 
 msgid "3 Player"
 msgstr "3 Player"
-
-msgid "4OD Player"
-msgstr "4OD Player"
 
 msgid "A - C"
 msgstr "A - C"
@@ -58,6 +64,9 @@ msgstr "ABC4Kids"
 msgid "About"
 msgstr "Over"
 
+msgid "Add to Favorites"
+msgstr "Voeg toe aan favorieten"
+
 msgid "Added:"
 msgstr "Toegevoegd:"
 
@@ -78,6 +87,12 @@ msgstr "Kunst & Cultuur - Voorstellingen"
 
 msgid "Arts & Culture - Reviews"
 msgstr "Kunst & Cultuur - Recenties"
+
+msgid "Audio: "
+msgstr "Audio: "
+
+msgid "Audio: Unknown"
+msgstr "Audio: onbekend"
 
 msgid "BBC Alba"
 msgstr "BBC Alba"
@@ -118,6 +133,12 @@ msgstr "BBC iPlayer"
 msgid "Back"
 msgstr "Terug"
 
+msgid "Bitrate: "
+msgstr "Bitrate: "
+
+msgid "Bitrate: Unknown"
+msgstr "Bitrate: onbekend"
+
 msgid "CBBC"
 msgstr "CBBC"
 
@@ -150,6 +171,9 @@ msgstr "Komedie - Sketches"
 
 msgid "D - F"
 msgstr "D - F"
+
+msgid "Delete from Favorites"
+msgstr ""
 
 msgid "Documentary - Biography"
 msgstr "Documentaire - Biografie"
@@ -204,6 +228,9 @@ msgstr "Sluit af"
 
 msgid "Factual"
 msgstr "Feitelijk"
+
+msgid "Favorites"
+msgstr ""
 
 msgid "Featured Programs"
 msgstr "Prominente programma's"
@@ -286,9 +313,6 @@ msgstr "Normaal"
 msgid "OK"
 msgstr "OK"
 
-msgid "OUG Player"
-msgstr "OUG Speler"
-
 msgid "OnDemand"
 msgstr "OnDemand"
 
@@ -337,8 +361,14 @@ msgstr "RTL XL Gemist"
 msgid "Recently Added"
 msgstr "Recent toegevoegd"
 
+msgid "Recently Played: "
+msgstr "Recent gespeeld: "
+
 msgid "Religion"
 msgstr "Religie"
+
+msgid "SHOUTcast Radio"
+msgstr "SHOUTcast Radio"
 
 msgid "Search"
 msgstr "Zoek"
@@ -346,8 +376,14 @@ msgstr "Zoek"
 msgid "Search term"
 msgstr "Zoekterm"
 
+msgid "Selection does not contain a stream!"
+msgstr "Selectie bevat geen stream!"
+
 msgid "Show Categories"
 msgstr "Toon categorieen"
+
+msgid "Show Thumbnails"
+msgstr "Toon miniaturen"
 
 msgid "Show in extensions"
 msgstr "Toon in extensies"
@@ -358,9 +394,6 @@ msgstr "Toon in hoofdmenu"
 msgid "Show in plugin browser"
 msgstr "Toon in pluginbrowser"
 
-msgid "Show thumbnails"
-msgstr "Toon plaatjes"
-
 msgid "Shows A to Z"
 msgstr "Shows A tot Z"
 
@@ -370,8 +403,29 @@ msgstr "Getekend"
 msgid "Soaps"
 msgstr "Soaps"
 
+msgid "Sorry, No Stations Found!"
+msgstr "Sorry, geen stations gevonden!"
+
+msgid "Sorry, unable to find playable stream!"
+msgstr "Kan geen afspeelbare stream vinden!"
+
 msgid "Sport"
 msgstr "Sport"
+
+msgid "Station Already Saved in Favorites!"
+msgstr "Het station bestaat al als favoriet"
+
+msgid "Station delete failed, please check the Debug logs!"
+msgstr "Verwijdere van station mislukt; zie info in debuglog!"
+
+msgid "Station deleted from Favorites!"
+msgstr "Station verwijderd als favoriet"
+
+msgid "Station save failed, please check the Debug logs!"
+msgstr "Opslaan van station mislukt; zie info in debuglog!"
+
+msgid "Station saved to Favorites!"
+msgstr "Station opgeslagen als favoriet!"
 
 msgid "Straight Off The Telly"
 msgstr "Nu op de TV"
@@ -387,6 +441,9 @@ msgstr "Vandaag"
 
 msgid "Trailers"
 msgstr "Trailers"
+
+msgid "Tunein Radio"
+msgstr "Tunein Radio"
 
 msgid "U - Z"
 msgstr "U - Z"
@@ -412,6 +469,50 @@ msgstr "Wacht op het binnenhalen van data"
 msgid "Watch uitzending gemist"
 msgstr "Bekijk uitzending gemist"
 
+msgid "iRadio Player"
+msgstr "iRadio Player"
+
+msgid "iRadio Player - Main Menu"
+msgstr "iRadio Player - hoofdmenu"
+
+msgid "iRadio Player - SHOUTcast Genres"
+msgstr "iRadio Player - SHOUTcast Genres"
+
+msgid "iRadio Player - SHOUTcast Sub Genres for "
+msgstr "iRadio Player - SHOUTcast Sub Genres voor "
+
+msgid "iRadio Player - Tunein Main Menu"
+msgstr "iRadio Player - Tunein hoofdmenu"
+
+msgid "iRadio: Display Favorite Default Thumbnails"
+msgstr "iRadio: toon favorieten standaard icoon"
+
+msgid "iRadio: Display Favorite Thumbnails"
+msgstr "iRadio: toon favorieten miniaturen"
+
+msgid "iRadio: Display SHOUTcast Default Thumbnails"
+msgstr "iRadio: toon SHOUTcast standaard icoon"
+
+msgid "iRadio: Display SHOUTcast Thumbnails"
+msgstr "iRadio: toon SHOUTcast miniaturen"
+
+msgid "iRadio: Display Tunein Default Thumbnails"
+msgstr "iRadio: toon Tunein standaard icoon"
+
+msgid "iRadio: Display Tunein Thumbnails"
+msgstr "iRadio: toon Tunein miniaturen"
+
+msgid "iRadio: Display WMA Streams"
+msgstr "iRadio: toon WMA Streams"
+
 msgid "iView Exclusives"
 msgstr "iView Exclusives"
 
+#~ msgid "4OD Player"
+#~ msgstr "4OD Player"
+
+#~ msgid "OUG Player"
+#~ msgstr "OUG Speler"
+
+#~ msgid "Show thumbnails"
+#~ msgstr "Toon plaatjes"

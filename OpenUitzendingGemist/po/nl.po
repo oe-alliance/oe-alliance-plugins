@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 09:59+0200\n"
-"PO-Revision-Date: 2013-07-25 17:25+0100\n"
+"POT-Creation-Date: 2013-10-10 00:07+0200\n"
+"PO-Revision-Date: 2013-10-12 08:20+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
@@ -21,6 +21,15 @@ msgstr ""
 
 msgid "Cancel"
 msgstr "Annuleer"
+
+msgid "Exit movie player?"
+msgstr "Speler verlaten?"
+
+msgid "NET5 Gemist"
+msgstr "NET5 Gemist"
+
+msgid "NPO Number of days back"
+msgstr "NPO aantal dagen terug"
 
 msgid "No items matching your search criteria were found"
 msgstr "Geen items gevonden die aan uw zoekcritria voldoen"
@@ -49,6 +58,12 @@ msgstr "RTL XL A-Z"
 msgid "RTL XL Gemist"
 msgstr "RTL XL Gemist"
 
+msgid "RTL XL Search"
+msgstr "RTL XL zoeken"
+
+msgid "SBS6 Gemist"
+msgstr "SBS6 Gemist"
+
 msgid "Search term"
 msgstr "Zoekterm"
 
@@ -64,18 +79,26 @@ msgstr "Er was een probleem met het binnenhalen van de medialijst"
 msgid "Today"
 msgstr "Vandaag"
 
-msgid "UG A-Z"
-msgstr "UG A-Z"
+msgid "UG Gemist"
+msgstr "UG Gemist"
 
 msgid "UG Popular"
 msgstr "UG Populair"
 
-msgid "UG Recently added"
-msgstr "UG Recent toegevoegd"
+msgid "UG Uitgelicht"
+msgstr "UG Uitgelicht"
 
-msgid "UG Search"
-msgstr "UG zoeken"
+msgid "Veronica Gemist"
+msgstr "Veronica Gemist"
 
 msgid "Watch uitzending gemist"
 msgstr "Bekijk Uitzending Gemist"
 
+#~ msgid "UG A-Z"
+#~ msgstr "UG A-Z"
+
+#~ msgid "UG Recently added"
+#~ msgstr "UG Recent toegevoegd"
+
+#~ msgid "UG Search"
+#~ msgstr "UG zoeken"
