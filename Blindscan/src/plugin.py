@@ -876,10 +876,11 @@ class Blindscan(ConfigListScreen, Screen):
 		band = 'Unknown'
 		self.is_c_band_scan = False
 		self.suggestedPolarisation = "vertical & horizontal"
+		# check in satellites.xml to work out band
 		tp_list = self.getKnownTransponders(pos)
 		if len(tp_list) :
 			freq = int(tp_list[0].frequency)
-			if int(tp_list[0].polarisation) > 1 :
+			if int(tp_list[0].polarisation) > 1 : # for hints text
 				self.suggestedPolarisation = "circular right & circular left"
 		if freq :
 			if freq < 4201000 and freq > 2999000 :
@@ -887,7 +888,24 @@ class Blindscan(ConfigListScreen, Screen):
 				self.is_c_band_scan = True
 			elif freq < 12751000 and freq > 10700000 :
 				band = 'Ku'
+		# if satellites.xml didn't contain any entries for this satellite check 
+		# LNB type instead. Assumes the tuner is configured correctly for C-band.
+		if band == "Unknown" and self.isCbandLNB(pos): 
+			band = 'C'
+			self.is_c_band_scan = True 
 		print "SatBandCheck band = %s" % (band)
+		
+	def isCbandLNB(self, cur_orb_pos):
+		nim = nimmanager.nim_slots[int(self.scan_nims.value)]
+		if nim.config.configMode.getValue() == "advanced":
+			currSat = nim.config.advanced.sat[cur_orb_pos]
+			lnbnum = int(currSat.lnb.getValue())
+			currLnb = nim.config.advanced.lnb[lnbnum]
+			lof = currLnb.lof.getValue()
+			print "LNB type: ", lof
+			if lof == "c_band":
+				return True
+		return False
 
 	def getOrbPos(self):
 		idx_selected_sat = int(self.getSelectedSatIndex(self.scan_nims.value))
