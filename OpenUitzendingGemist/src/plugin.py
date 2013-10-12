@@ -64,7 +64,7 @@ def MPanelEntryComponent(channel, text, png):
 class MPanelList(MenuList):
 	def __init__(self, list, selection = 0, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", 18))
+		self.l.setFont(0, gFont("Regular", 22))
 		self.l.setItemHeight(120)
 		self.selection = selection
 
