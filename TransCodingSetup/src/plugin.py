@@ -16,7 +16,7 @@ from __init__ import _
 transcodingsetupinit = None
 	
 config.plugins.transcodingsetup = ConfigSubsection()
-config.plugins.transcodingsetup.transcoding = ConfigSelection(default = "enable", choices = [ ("enable", _("enable")), ("disable", _("disable"))] )
+config.plugins.transcodingsetup.transcoding = ConfigSelection(default = "enable", choices = [ ("enable", _("enabled")), ("disable", _("disabled"))] )
 config.plugins.transcodingsetup.port = ConfigSelection(default = "8002", choices = [ ("8001", "8001"), ("8002", "8002")] )
 if fileExists("/proc/stb/encoder/0/bitrate"):
 	if getBoxType() == "vusolo2":
@@ -64,16 +64,17 @@ class TranscodingSetupInit:
 			return -1
 
 	def setTranscoding(self, configElement):
-		encoder = configElement.value
+		encoder = configElement.getValue()
+		encodertext = configElement.getText()
 		procPath = "/proc/stb/encoder/enable"
 		if self.setConfig(procPath, encoder):
-			self.showMessage("Set encoder %s failed."%encoder, MessageBox.TYPE_ERROR)
+			self.showMessage("Set encoder %s failed."%encodertext, MessageBox.TYPE_ERROR)
 		elif encoder == "enable" and config.plugins.transcodingsetup.port.value == "8001":
 			msg = "OK. Encoder enable.\nPC Streaming is replaced with mobile streaming."
 			self.showMessage(msg, MessageBox.TYPE_INFO)
 		else:
-			self.showMessage("OK. Encoder %s."%encoder, MessageBox.TYPE_INFO)
-			if encoder == "disable":
+			self.showMessage("OK. Encoder %s."%encodertext, MessageBox.TYPE_INFO)
+			if encoder == "disabled":
 				config.plugins.transcodingsetup.port.value = "8002"
 
 	def setBitrate(self, configElement):
@@ -94,10 +95,9 @@ class TranscodingSetupInit:
 		if self.setConfig(procPath, framerate):
 			self.showMessage("Set framerate failed.", MessageBox.TYPE_ERROR)
 
-		refreshrate = config.plugins.transcodingsetup.framerate.value
 		procPath = "/proc/stb/encoder/0/refreshrate"
-		if self.setConfig(procPath, refreshrate):
-			self.showMessage("Set framerate failed.", MessageBox.TYPE_ERROR)
+		if fileExists(procPath) and self.setConfig(procPath, framerate):
+			self.showMessage("Set refreshrate failed.", MessageBox.TYPE_ERROR)
 
 	def setPort(self, configElement):
 		port = configElement.value
