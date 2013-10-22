@@ -298,9 +298,9 @@ class AutoBouquetsMaker(Screen):
 		dict = {}
 		self.frontend.getFrontendStatus(dict)
 		if dict["tuner_state"] == "TUNING":
-			print>>log, "TUNING"
+			print>>log, "[AutoBouquetsMaker] TUNING"
 		elif dict["tuner_state"] == "LOCKED":
-			print>>log, "ACQUIRING TSID/ONID"
+			print>>log, "[AutoBouquetsMaker] ACQUIRING TSID/ONID"
 			self.progresscurrent += 1
 			if not inStandby:
 				self["progress"].setValue(self.progresscurrent)
@@ -311,7 +311,7 @@ class AutoBouquetsMaker(Screen):
 			self.timer.start(100, 1)
 			return
 		elif dict["tuner_state"] == "LOSTLOCK" or dict["tuner_state"] == "FAILED":
-			print>>log, "FAILED"
+			print>>log, "[AutoBouquetsMaker] FAILED"
 
 		self.lockcounter += 1
 		if self.lockcounter > self.LOCK_TIMEOUT:
