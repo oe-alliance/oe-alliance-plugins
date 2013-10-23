@@ -41,9 +41,6 @@ class TranscodingSetupInit:
 		if hasattr(config.plugins.transcodingsetup, "framerate"):
 			config.plugins.transcodingsetup.framerate.addNotifier(self.setFramerate)
 
-		self.setSteamPort(config.plugins.transcodingsetup.port)
-		self.setTSPort(config.plugins.transcodingsetup.tsport)
-
 	def setConfig(self, procPath, value):
 		if not fileExists(procPath):
 			return -1
@@ -261,9 +258,9 @@ class TranscodingSetup(Screen,ConfigListScreen):
 		self.session.open(MessageBox, _(msg), msgType)
 
 	def keySave(self):
+		self.saveAll()
 		transcodingsetupinit.setSteamPort(config.plugins.transcodingsetup.port)
 		transcodingsetupinit.setTSPort(config.plugins.transcodingsetup.tsport)
-		self.saveAll()
 		self.close()
 
 	def KeyDefault(self):
