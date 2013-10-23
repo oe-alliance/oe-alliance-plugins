@@ -122,38 +122,38 @@ class TranscodingSetupInit:
 			datas = fp.readlines()
 			fp.close()
 		except:
-#			print "file open error, inetd.conf!"
+			print "file open error, inetd.conf!"
 			self.showMessage("Set port failed.", MessageBox.TYPE_ERROR)
 			return
-		# try:
-		newdatas=""
-		s_port = ""
-		if self.SteamPort == "8001":
-			s_port = "8002"
-		else:
-			s_port = "8001"
-		for line in datas:
-			if line.find("transtreamproxy") != -1:
-				p=line.replace('\t',' ').find(' ')
-				line = self.SteamPort+line[p:]
-			elif line.find("filestreamproxy") != -1:
-				p=line.replace('\t',' ').find(' ')
-				line = self.TSPort+line[p:]
-			elif line.find("streamproxy") != -1:
-				p=line.replace('\t',' ').find(' ')
-				line = s_port+line[p:]
-			newdatas+=line
+		try:
+			newdatas=""
+			s_port = ""
+			if self.SteamPort == "8001":
+				s_port = "8002"
+			else:
+				s_port = "8001"
+			for line in datas:
+				if line.find("transtreamproxy") != -1:
+					p=line.replace('\t',' ').find(' ')
+					line = self.SteamPort+line[p:]
+				elif line.find("filestreamproxy") != -1:
+					p=line.replace('\t',' ').find(' ')
+					line = self.TSPort+line[p:]
+				elif line.find("streamproxy") != -1:
+					p=line.replace('\t',' ').find(' ')
+					line = s_port+line[p:]
+				newdatas+=line
 
-		if newdatas.find("transtreamproxy") == -1:
-			newdatas+=self.SteamPort+'\t'+'stream'+'\t'+'tcp'+'\t'+'nowait'+'\t'+'root'+'\t'+'/usr/bin/transtreamproxy'+'\t'+'transtreamproxy\n'
-		if newdatas.find("filestreamproxy") == -1:
-			newdatas+=self.TSPort+'\t'+'stream'+'\t'+'tcp'+'\t'+'nowait'+'\t'+'root'+'\t'+'/usr/bin/filestreamproxy'+'\t'+'filestreamproxy\n'
-		fd = file("/etc/inetd.conf",'w')
-		fd.write(newdatas)
-		fd.close()
-		# except:
-		# 	self.showMessage("Set port failed.", MessageBox.TYPE_ERROR)
-		# 	return
+			if newdatas.find("transtreamproxy") == -1:
+				newdatas+=self.SteamPort+'\t'+'stream'+'\t'+'tcp'+'\t'+'nowait'+'\t'+'root'+'\t'+'/usr/bin/transtreamproxy'+'\t'+'transtreamproxy\n'
+			if newdatas.find("filestreamproxy") == -1:
+				newdatas+=self.TSPort+'\t'+'stream'+'\t'+'tcp'+'\t'+'nowait'+'\t'+'root'+'\t'+'/usr/bin/filestreamproxy'+'\t'+'filestreamproxy\n'
+			fd = file("/etc/inetd.conf",'w')
+			fd.write(newdatas)
+			fd.close()
+		except:
+			self.showMessage("Set port failed.", MessageBox.TYPE_ERROR)
+			return
 		self.inetdRestart()
 		if config.plugins.transcodingsetup.transcoding.value == "enable" and self.SteamPort == "8001":
 			msg = "Set port OK.\nPC Streaming is replaced with mobile streaming."
@@ -170,19 +170,6 @@ class TranscodingSetupInit:
 			self.pluginsetup.showMessage(msg, msgType)
 
 class TranscodingSetup(Screen,ConfigListScreen):
-	skin =  """
-		<screen position="center,center" size="540,320">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="200,10" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="370,10" size="140,40" alphatest="on" />
-			<widget source="key_red" render="Label" position="30,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
-			<widget source="key_green" render="Label" position="200,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
-			<widget source="key_yellow" render="Label" position="370,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" foregroundColor="#ffffff" transparent="1" />
-			<widget name="config" zPosition="2" position="20,70" size="500,120" scrollbarMode="showOnDemand" transparent="1" />
-			<widget source="text" render="Label" position="30,190" size="480,130" font="Regular;18" halign="center" valign="center" />
-		</screen>
-		"""
-
 	def __init__(self,session):
 		Screen.__init__(self,session)
 		self.setTitle(_("Transcoding Setup"))
@@ -221,8 +208,6 @@ class TranscodingSetup(Screen,ConfigListScreen):
 		self.invaliedModelTimer.callback.append(self.invalidmodel)
 		global transcodingsetupinit
 		transcodingsetupinit.pluginsetup = self
-		# if not self.SelectionChanged in self["config"].onSelectionChanged:
-		# 	self["config"].onSelectionChanged.append(self.SelectionChanged)
 		self.changedEntry()
 		self.onClose.append(self.onClosed)
 
@@ -249,10 +234,6 @@ class TranscodingSetup(Screen,ConfigListScreen):
 				self.list.append(getConfigListEntry(_("Framerate"), config.plugins.transcodingsetup.framerate))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
-
-	# def SelectionChanged(self):
-	# 	if self["config"].getCurrent() == self.transcoding:
-	# 		self.createSetup()
 
 	def showMessage(self, msg, msgType = MessageBox.TYPE_ERROR):
 		self.session.open(MessageBox, _(msg), msgType)
