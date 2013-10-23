@@ -11072,26 +11072,26 @@ def getDistro():
 def setup(menuid, **kwargs):
 	if getDistro() in ("openvix", "openatv", "ventonsupport", "egami", "openhdf"):
 		if menuid == "display" and SystemInfo["Display"]:
-			return [("LCD4linux", main, "lcd4linux", None)]
-		elif menuid == "system":
-			return [("LCD4linux", main, "lcd4linux", None)]
+			return [("LCD4Linux", main, "lcd4linux", None)]
+		elif menuid == "system" and not SystemInfo["Display"]:
+			return [("LCD4Linux", main, "lcd4linux", None)]
 		else:
 			return []
 	else:
 		if menuid == "setup":
-			return [("LCD4linux", main, "lcd4linux", None)]
+			return [("LCD4Linux", main, "lcd4linux", None)]
 		else:
 			return []
 
 def Plugins(**kwargs):
 	list = [
-	PluginDescriptor(name="LCD4linux", 
-	description="LCD4linux", 
+	PluginDescriptor(name="LCD4Linux", 
+	description="LCD4Linux", 
 	where = [PluginDescriptor.WHERE_SESSIONSTART, 
 	PluginDescriptor.WHERE_AUTOSTART], 
 	fnc = autostart)]
-	list.append(PluginDescriptor(name="LCD4linux", 
-	description="LCD4linux", 
+	list.append(PluginDescriptor(name="LCD4Linux", 
+	description="LCD4Linux", 
 	where = PluginDescriptor.WHERE_MENU,
 	fnc = setup))
 	return list
