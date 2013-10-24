@@ -32,6 +32,23 @@ except:
 	versionstring = about.getImageVersionString()
 	buildstring = about.getBuildVersionString()
 
+def getDistro():
+	try:
+		from enigma import getDistro as e2_getDistro
+		return e2_getDistro()
+	except:
+		try:
+			file = open('/etc/image-version', 'r')
+			lines = file.readlines()
+			file.close()
+			for x in lines:
+				splitted = x.split('=')
+				if splitted[0] == "comment":
+					result =  splitted[1].replace('\n','')
+		except:
+			result = None
+		return result
+
 #used for the XML file
 from time import strftime, time
 
@@ -924,7 +941,7 @@ def BlindscanSetup(menuid, **kwargs):
 		return []
 
 def Plugins(**kwargs):
-	if (nimmanager.hasNimType("DVB-S")):
+	if (nimmanager.hasNimType("DVB-S")) and getDistro() != 'openvix':
 		return PluginDescriptor(name=_("Blind Scan"), description="Scan cable provider channels", where = PluginDescriptor.WHERE_MENU, fnc=BlindscanSetup)
 	else:
 		return []
