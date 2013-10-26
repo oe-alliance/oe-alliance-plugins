@@ -72,7 +72,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.setup_title = _("Blindscan")
 		Screen.setTitle(self, _(self.setup_title))
 		self.skinName = "Setup"
-		self.current_play_service = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.session.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
 
 		self.onChangedEntry = [ ]
 		self["HelpWindow"] = Pixmap()
@@ -366,7 +366,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.newConfig()
 
 	def keyCancel(self):
-		self.session.nav.playService(self.current_play_service)
+		self.session.nav.playService(self.session.postScanService)
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close()
@@ -723,7 +723,7 @@ class Blindscan(ConfigListScreen, Screen):
 			flags |= eComponentScan.scanDontRemoveUnscanned
 		if self.scan_onlyfree.value:
 			flags |= eComponentScan.scanOnlyFree
-		self.session.open(ServiceScan, [{"transponders": tlist, "feid": feid, "flags": flags, "networkid": networkid}])
+		self.session.openWithCallback(self.startScanCallback, ServiceScan, [{"transponders": tlist, "feid": feid, "flags": flags, "networkid": networkid}])
 
 	def getKnownTransponders(self, pos):
 		tlist = []
@@ -930,6 +930,11 @@ class Blindscan(ConfigListScreen, Screen):
 		orb = tmp_list[0][0]
 		print "orb = ", orb
 		return orb
+		
+	def startScanCallback(self, answer):
+		if answer:
+			self.session.nav.playService(self.session.postScanService)
+			self.close(True)
 		
 def main(session, **kwargs):
 	session.open(Blindscan)
