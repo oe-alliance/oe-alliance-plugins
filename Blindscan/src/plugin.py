@@ -946,7 +946,7 @@ def BlindscanSetup(menuid, **kwargs):
 		return []
 
 def Plugins(**kwargs):
-	if (nimmanager.hasNimType("DVB-S")) and getDistro() != 'openvix':
+	if nimmanager.hasNimType("DVB-S"):
 		return PluginDescriptor(name=_("Blind Scan"), description="Scan cable provider channels", where = PluginDescriptor.WHERE_MENU, fnc=BlindscanSetup)
 	else:
 		return []
