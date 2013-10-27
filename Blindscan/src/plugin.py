@@ -936,12 +936,12 @@ class Blindscan(ConfigListScreen, Screen):
 			self.session.nav.playService(self.session.postScanService)
 			self.close(True)
 		
-def main(session, **kwargs):
+def main(session, close=None, **kwargs):
 	session.open(Blindscan)
 
 def BlindscanSetup(menuid, **kwargs):
 	if menuid == "scan":
-		return [(_("Blind scan"), main, "blindscan", 25)]
+		return [(_("Blind scan"), main, "blindscan", 25, True)]
 	else:
 		return []
 
