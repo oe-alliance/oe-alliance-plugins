@@ -937,7 +937,7 @@ class Blindscan(ConfigListScreen, Screen):
 			self.close(True)
 		
 def main(session, close=None, **kwargs):
-	session.open(Blindscan)
+	session.openWithCallback(close, Blindscan)
 
 def BlindscanSetup(menuid, **kwargs):
 	if menuid == "scan":
@@ -947,6 +947,6 @@ def BlindscanSetup(menuid, **kwargs):
 
 def Plugins(**kwargs):
 	if nimmanager.hasNimType("DVB-S"):
-		return PluginDescriptor(name=_("Blind scan"), description=_("Scan cable provider channels"), where = PluginDescriptor.WHERE_MENU, fnc=BlindscanSetup)
+		return PluginDescriptor(name=_("Blind scan"), description=_("Scan satellites for new transponders"), where = PluginDescriptor.WHERE_MENU, fnc=BlindscanSetup)
 	else:
 		return []
