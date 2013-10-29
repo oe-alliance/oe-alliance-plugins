@@ -1,8 +1,8 @@
-﻿msgid ""
+msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "POT-Creation-Date: 2012-12-18 09:59+KST\n"
-"PO-Revision-Date: 2012-12-18 17:31+0100\n"
+"PO-Revision-Date: 2013-10-29 18:09+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: ViX <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -98,9 +98,6 @@ msgstr "Этот ресивер не поддерживает транскоди
 msgid "Transcode settings"
 msgstr "Настройки транскодирования"
 
-msgid "Transcoding"
-msgstr "Транскодирование"
-
 msgid "Transcoding Setup"
 msgstr "Настройка транскодирования"
 
@@ -112,3 +109,4 @@ msgstr "Порт канала"
 
 msgid "Media Port"
 msgstr "Медиа порт"
+
