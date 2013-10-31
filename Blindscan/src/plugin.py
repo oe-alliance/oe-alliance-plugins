@@ -122,8 +122,8 @@ class Blindscan(ConfigListScreen, Screen):
 			self["introduction"] = Label(_("Please setup your tuner configuration."))
 
 		self.i2c_mapping_table = None
-		self.makeNimSocket()
 		self.nimSockets = self.ScanNimsocket()
+		self.makeNimSocket()
 
 		self.changedEntry()
 
@@ -148,31 +148,51 @@ class Blindscan(ConfigListScreen, Screen):
 		_nimSocket = {}
 		fp = file('/proc/bus/nim_sockets')
 
-		sNo, sName = -1, ""
+		sNo, sName, sI2C = -1, "", -1
 		for line in fp:
 			line = line.strip()
 			if line.startswith('NIM Socket'):
-				sNo = line.split()[2][:-1]
-			elif line.startswith('Name:') and len(line.split()) > 3:
-				sName = line.split()[3][4:-1]
+				sNo, sName, sI2C = -1, '', -1
+				try:    sNo = line.split()[2][:-1]
+				except:	sNo = -1
+			elif line.startswith('I2C_Device:'):
+				try:    sI2C = line.split()[1]
+				except: sI2C = -1
+			elif line.startswith('Name:'):
+				try:    sName = line.split()[3][4:-1]
+				except: sName = ""
 			if sNo >= 0 and sName != "":
-				_nimSocket[sNo] = sName
-				sNo   = -1
-				sName = ''
+				if sI2C != -1:
+					_nimSocket[sNo] = [sName, sI2C]
+				else:	_nimSocket[sNo] = [sName]
 		fp.close()
+		print "parsed nimsocket :", _nimSocket
 		return _nimSocket
 
 	def makeNimSocket(self, nimname=""):
-		self.i2c_mapping_table = {}
+		is_exist_i2c = False
+		self.i2c_mapping_table = {0:2, 1:3, 2:1, 3:0}
+		if self.nimSockets is not None:
+			for XX in self.nimSockets.keys():
+				nimsocket = self.nimSockets[XX]
+				if len(nimsocket) > 1:
+					try:	self.i2c_mapping_table[int(XX)] = int(nimsocket[1])
+					except: continue
+					is_exist_i2c = True
+		print "i2c_mapping_table :", self.i2c_mapping_table, ", is_exist_i2c :", is_exist_i2c
+		if is_exist_i2c: return
 
 		if nimname == "AVL6222":
 			model = file('/proc/stb/info/vumodel').read().strip()
 			if model == "uno":
 				self.i2c_mapping_table = {0:3, 1:3, 2:1, 3:0}
 			elif model == "duo2":
-				if self.nimSockets['0'] == "AVL6222":
-					self.i2c_mapping_table = {0:2, 1:2, 2:4, 3:4}
-				else:	self.i2c_mapping_table = {0:2, 1:4, 2:4, 3:0}
+				nimdata = self.nimSockets['0']
+				try:
+					if nimdata[0] == "AVL6222":
+						self.i2c_mapping_table = {0:2, 1:2, 2:4, 3:4}
+					else:	self.i2c_mapping_table = {0:2, 1:4, 2:4, 3:0}
+				except: self.i2c_mapping_table = {0:2, 1:4, 2:4, 3:0}
 			else:	self.i2c_mapping_table = {0:2, 1:4, 2:0, 3:0}
 		else:	self.i2c_mapping_table = {0:2, 1:3, 2:1, 3:0}
 
@@ -433,7 +453,7 @@ class Blindscan(ConfigListScreen, Screen):
 		def GetCommand(nimIdx):
 			_nimSocket = self.nimSockets
 			try:
-				sName = _nimSocket[str(nimIdx)]
+				sName = _nimSocket[str(nimIdx)][0]
 				sType = _supportNimType[sName]
 				return "vuplus_%(TYPE)sblindscan"%{'TYPE':sType}, sName
 			except: pass
