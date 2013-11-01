@@ -20,8 +20,8 @@ L1 = []
 L2 = []
 L3 = []
 L4 = []
-M1 = ["LCD4linux.OSD","LCD4linux.Scr","LCD4linux.Bil","LCD4linux.Rec","LCD4linux.Wet","LCD4linux.Pop","LCD4linux.Fri","LCD4linux.Fon","LCD4linux.Mai","LCD4linux.Cal","LCD4linux.xml"]
-M2 = [_("OSD"),_("Screen"),_("Picture"),_("Recording"),_("Weather"),_("Popup-Text"),_("FritzCall"),_("Font"),_("Mail"),_("Calendar"),_("Box-Skin-LCD")]
+M1 = ["LCD4linux.OSD","LCD4linux.Scr","LCD4linux.Bil","LCD4linux.Wet","LCD4linux.Pop","LCD4linux.Fri","LCD4linux.Fon","LCD4linux.Mai","LCD4linux.Cal","LCD4linux.Web","LCD4linux.xml"]
+M2 = [_("OSD"),_("Screen"),_("Picture"),_("Weather"),_("Popup-Text"),_("FritzCall"),_("Font"),_("Mail"),_("Calendar"),_("WebIF"),_("Box-Skin-LCD")]
 
 Mode = "1"
 ModeOld = ""
@@ -422,7 +422,7 @@ class LCD4linuxConfigweb(resource.Resource):
 
 		html += "<form method=\"get\">"
 		html += "<fieldset style=\"width:auto\" name=\"Mode1\">"
-		html += "<legend style=\"color: #FFCC00\">Modus</legend>\n"
+		html += "<legend style=\"color: #FFCC00\">Modus&nbsp;</legend>\n"
 		html += "<input id=\"r1\" name=\"Mode\" type=\"radio\" value=\"1\" %s onclick=\"this.form.submit();\"><label %s for=\"r1\">Global&nbsp;&nbsp;</label>\n" % (AktiveMode("1"))
 		html += "<input id=\"r2\" name=\"Mode\" type=\"radio\" value=\"2\" %s onclick=\"this.form.submit();\"><label %s for=\"r2\">On&nbsp;&nbsp;</label>\n" % (AktiveMode("2"))
 		html += "<input id=\"r3\" name=\"Mode\" type=\"radio\" value=\"3\" %s onclick=\"this.form.submit();\"><label %s for=\"r3\">Media&nbsp;&nbsp;</label>\n" % (AktiveMode("3"))
@@ -444,11 +444,15 @@ class LCD4linuxConfigweb(resource.Resource):
 				Mode == "1"
 				L = L1
 				Element = "other"
+			if LCD4linux.WebIfDesign.value == "2":
+				html += "<table border=\"0\"width=\"100%\" cellspacing=\"1\">"
+				html += "<tr><td valign=\"top\" width=\"250\">"
 			html += "<form method=\"get\">"
 			html += "<fieldset style=\"width:auto\" name=\"Mode2\">"
-			html += "<legend style=\"color: #FFCC00\">Element</legend>\n"
+			html += "<legend style=\"color: #FFCC00\">Element&nbsp;</legend>\n"
 			i=0
 			ElementList = []
+			ElementText = ""
 			for LL in L:
 				Conf = LL[2].strip()
 				if Mode == "1":
@@ -460,13 +464,31 @@ class LCD4linuxConfigweb(resource.Resource):
 					ElementList.append(Conf)
 					i+=1
 					Ea,Ec = AktiveElement(Conf)
+#					html += Conf
+					if Mode != "1":
+						exec("Curr = %s.value" % Conf)
+						L4log("Curr = %s.value" % Conf,Curr)
+						if Curr != "0":
+							if Ec == "":
+								Ec = "style=\"font-weight:bold;color:#CCFFBB\""
+							else:
+								Ec = Ec.replace("=\"","=\"font-weight:bold;")
+					if Ea == "checked":
+						ElementText = (_l(_(LL[1])) if Mode !="1" else M2[LL[3]-1])
 					html += "<input id=\"e%d\" name=\"Element\" type=\"radio\" value=\"%s\" %s onclick=\"this.form.submit();\"><label %s for=\"e%d\">%s&nbsp;&nbsp;</label>\n" % (i,Conf,Ea,Ec,i, (_l(_(LL[1])) if Mode !="1" else M2[LL[3]-1]) )
+					if LCD4linux.WebIfDesign.value == "2":
+						html += "<br>"
 			Ea,Ec = AktiveElement("other")
-			html += "<input id=\"e%d\" name=\"Element\" type=\"radio\" value=\"%s\" %s onclick=\"this.form.submit();\"><label %s for=\"e%d\">%s&nbsp;&nbsp;</label>\n" % (0,"other",Ea,Ec,0,_("other"))
+			if Ea == "checked":
+				ElementText = _l(_("other"))
+			html += "<input id=\"e%d\" name=\"Element\" type=\"radio\" value=\"%s\" %s onclick=\"this.form.submit();\"><label %s for=\"e%d\">%s&nbsp;&nbsp;</label>\n" % (0,"other",Ea,Ec,0,_l(_("other")))
 			html += "</fieldset></form>\n"
+			if LCD4linux.WebIfDesign.value == "2":
+				html += "<br></td><td valign=\"top\">"
 
 			html += "<form name=\"Eingabe\" method=\"POST\">\n"
-
+			if LCD4linux.WebIfDesign.value == "2":
+				html += "<fieldset style=\"width:auto\" name=\"Mode3\"><legend style=\"color: #FFCC00\">%s&nbsp;</legend>" % ElementText
 			html += "<table border=\"1\" rules=\"groups\" width=\"100%\">"
 			AktCode = 0
 			isOn = False
@@ -570,6 +592,8 @@ class LCD4linuxConfigweb(resource.Resource):
 				if Mode in ["2","3"] and isSb:
 					html += "<input type=\"button\" align=\"middle\" style=\"text-align:center; font-size:8pt\" value=\"%s\" onclick=\"this.form.cmd.value = 'copyIdle'; this.form.submit(); \">\n" % _("copy to Idle")
 			html += "</form>\n"
+			if LCD4linux.WebIfDesign.value == "2":
+				html += "</fieldset></td></tr></table>"
 		elif Mode == "5":
 			html += "<form method=\"POST\">\n"
 			html += "<fieldset style=\"width:auto\" name=\"Mode2\">\n"

@@ -19,16 +19,20 @@ class L4Lelement:
 	def __init__(self):
 		self.session = None
 	def add(self,element,para):
-		print "Add" , element,para
+		print "[LCD4linuxE] Add" , element,para
 		if "%" in para.get("Align",""):
 			para["Align"] = ("0000"+para["Align"].replace("%","00"))[-4:]
 		if para.get("Value",None) is not None:
 			para["Value"] = min(max(int(para["Value"]),0),100)
 		L4Lelement.List[element]=para
 	def delete(self,element):
-		print "Del" , element
+		print "[LCD4linuxE] Del" , element
 		if L4Lelement.List.get(element,None) is not None:
 			del L4Lelement.List[element]
+		else:
+			for x in list(L4Lelement.List):
+				if x.startswith(element):
+					del L4Lelement.List[x]
 	def show(self):
 		print L4Lelement.List
 	def get(self,element=None):
@@ -40,14 +44,14 @@ class L4Lelement:
 		try:
 			exec("self.add('%s)" % EX.replace(",","',",1))
 		except:
-			print "Error: L4L Web-Elements"
+			print "[LCD4linuxE] Error: L4L Web-Elements"
 	def getResolution(self,LCD):
-		if LCD<1 or LCD>3:
+		if int(LCD)<1 or int(LCD)>3:
 			return 0,0
-		return L4Lelement.MAX_W[LCD-1],L4Lelement.MAX_H[LCD-1]
+		return L4Lelement.MAX_W[int(LCD)-1],L4Lelement.MAX_H[int(LCD)-1]
 	def setResolution(self,LCD,MW,MH):
-		L4Lelement.MAX_W[LCD-1]=MW
-		L4Lelement.MAX_H[LCD-1]=MH
+		L4Lelement.MAX_W[int(LCD)-1]=int(MW)
+		L4Lelement.MAX_H[int(LCD)-1]=int(MH)
 	def resetRefresh(self):
 		L4Lelement.Refresh = False
 	def setRefresh(self):
@@ -57,16 +61,19 @@ class L4Lelement:
 	def getHold(self):
 		return L4Lelement.Hold
 	def setHold(self,H):
+		print "[LCD4linuxE] Hold" , H
 		L4Lelement.Hold = H
 	def getHoldKey(self):
 		return L4Lelement.HoldKey
 	def setHoldKey(self,H=False):
+		print "[LCD4linuxE] HoldKey" , H
 		L4Lelement.HoldKey = H
 	def getScreen(self):
 		return L4Lelement.Screen
 	def setScreen(self,S,Lcd="",Hold=False):
-		if len(str(Lcd))>1:
-			Lcd = "1"
+		if Lcd != "":
+			if len(str(Lcd))>1 or int(Lcd)>3:
+				Lcd = "1"
 		L4Lelement.Screen = str(S)
 		L4Lelement.LCD = str(Lcd)
 		L4Lelement.Hold = Hold

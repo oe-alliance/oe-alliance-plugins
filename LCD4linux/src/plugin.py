@@ -17,7 +17,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V3.7-r8"
+Version = "V3.8-r0"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -76,8 +76,7 @@ from datetime import datetime, timedelta, date
 dummy = datetime.strptime('2000-01-01', '%Y-%m-%d').date()
 
 from Components.ServiceEventTracker import ServiceEventTracker
-from enigma import eTimer, eEPGCache, eServiceReference, eServiceCenter, \
-	iPlayableService
+from enigma import eTimer, eEPGCache, eServiceReference, eServiceCenter, iPlayableService
 from RecordTimer import RecordTimer, RecordTimerEntry, parseEvent
 from threading import Thread, Lock
 import Queue
@@ -108,18 +107,6 @@ import icalendar
 from module import L4Lelement,L4LVtest
 
 L4LElist = L4Lelement()
-
-try:
-	from Plugins.Extensions.Netatmo.Netatmo import netatmo
-	from Plugins.Extensions.Netatmo.NetatmoCore import NetatmoUnit
-	NetatmoOK = True
-except:
-	NetatmoOK = False
-try:
-	from Plugins.Extensions.webradioFS.plugin import l4l_info
-	WebradiofsOK = True
-except:
-	WebradiofsOK = False
 
 try:
 	from fcntl import ioctl
@@ -204,7 +191,6 @@ BilderIndex = [0,0,0]
 BilderTime = 0
 FritzTime = 0
 FritzList = []
-BitrateRegistred = False
 xmlList = []
 ThreadRunning = 0
 DeviceRemove = []
@@ -351,9 +337,10 @@ LCD4linux.WebIfType = ConfigSelection(choices = [("0", _("Javascript")), ("1", _
 LCD4linux.WebIfInitDelay = ConfigYesNo(default = False)
 LCD4linux.WebIfAllow = ConfigText(default="127. 192.168. 172. 10.", fixed_size=False)
 LCD4linux.WebIfDeny = ConfigText(default="", fixed_size=False)
+LCD4linux.WebIfDesign = ConfigSelection(choices = [("1", _("1 - normal")), ("2", _("2 - side by side"))], default = "2")
 LCD4linux.WetterCity = ConfigText(default="London", fixed_size=False)
 LCD4linux.Wetter2City = ConfigText(default="Berlin", fixed_size=False)
-LCD4linux.WetterPath = ConfigText(default=WetterPath, fixed_size=False, visible_width=50)
+LCD4linux.WetterPath = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.WetterLowColor = ConfigSelection(choices = Farbe, default="aquamarine")
 LCD4linux.WetterHighColor = ConfigSelection(choices = Farbe, default="violet")
 LCD4linux.WetterTransparenz = ConfigSelection(choices = [("false", _("no")), ("crop", _("alternative Copy-Mode/DM800hd (24bit)")), ("true", _("yes (32bit)"))], default = "false")
@@ -369,6 +356,7 @@ LCD4linux.WetterExtraZoom = ConfigSlider(default = 100,  increment = 1, limits =
 LCD4linux.WetterExtraFeel = ConfigSelectionNumber(0, 5, 1, default = 3)
 LCD4linux.WetterExtraColorCity = ConfigSelection(choices = Farbe, default="silver")
 LCD4linux.WetterExtraColorFeel = ConfigSelection(choices = Farbe, default="silver")
+LCD4linux.WetterWind = ConfigSelection(choices = [("0", _("km/h")), ("1", _("m/s"))], default = "0")
 LCD4linux.MeteoURL = ConfigText(default="http://", fixed_size=False, visible_width=50)
 LCD4linux.MoonPath = ConfigText(default="", fixed_size=False, visible_width=50)
 if PNGutilOK:
@@ -419,7 +407,8 @@ LCD4linux.Mail5User = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.Mail5Pass = ConfigPassword(default="", fixed_size=False, visible_width=50)
 LCD4linux.MailTime = ConfigSelection(choices = [("01", _("60min")), ("01,31", _("30min")), ("01,21,41", _("20min")), ("01,16,31,46", _("15min")), ("01,11,21,31,41,51", _("10min"))], default="01")
 LCD4linux.MailShow0 = ConfigYesNo(default = False)
-LCD4linux.Recording = ConfigSelection(choices = [("0", _("no"))] + LCDSelect, default="0")
+LCD4linux.Recording = ConfigSelection(choices = ScreenSelect, default="0")
+LCD4linux.RecordingLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.RecordingType = ConfigSelection(choices = [("1", _("Corner")), ("2", _("Picon"))], default="1")
 LCD4linux.RecordingSize = ConfigSlider(default = 25,  increment = 1, limits = (10, 100))
 LCD4linux.RecordingPos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
@@ -453,6 +442,8 @@ LCD4linux.CalHttp2 = ConfigText(default="http...", fixed_size=False, visible_wid
 LCD4linux.CalHttp2Color = ConfigSelection(choices = Farbe, default="greenyellow")
 LCD4linux.CalHttp3 = ConfigText(default="http...", fixed_size=False, visible_width=50)
 LCD4linux.CalHttp3Color = ConfigSelection(choices = Farbe, default="yellow")
+LCD4linux.CalPlanerFS = ConfigYesNo(default = False)
+LCD4linux.CalPlanerFSColor = ConfigSelection(choices = Farbe, default="orange")
 LCD4linux.CalLine = ConfigSelectionNumber(1, 2, 1, default = 1)
 LCD4linux.CalDays = ConfigSelection(choices = [("0", "0"), ("3", "3"), ("7", "7"), ("14", "14"), ("21", "21"), ("31", "31")], default="7")
 LCD4linux.CalTime = ConfigSelection(choices = [("03", _("60min")), ("03,33", _("30min")), ("03,23,43", _("20min")), ("03,18,33,48", _("15min"))], default="03")
@@ -746,6 +737,7 @@ LCD4linux.AVAlign = ConfigSelection(choices = AlignType, default="0")
 LCD4linux.AVSplit = ConfigYesNo(default = False)
 LCD4linux.AVColor = ConfigSelection(choices = Farbe, default="gold")
 LCD4linux.AVShadow = ConfigYesNo(default = False)
+LCD4linux.AVType = ConfigSelection(choices = [("1", _("one line")), ("2", _("two lines"))], default="1")
 LCD4linux.AVFont = ConfigSelection(choices = FontType, default="0")
 LCD4linux.Bitrate = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.BitrateLCD = ConfigSelection(choices = LCDSelect, default="1")
@@ -835,6 +827,7 @@ LCD4linux.NetAtmoPos = ConfigSlider(default = 50,  increment = 2, limits = (0, 1
 LCD4linux.NetAtmoAlign = ConfigSelection(choices = AlignType, default="0")
 LCD4linux.NetAtmoSplit = ConfigYesNo(default = False)
 LCD4linux.NetAtmoType = ConfigSelection(choices = NetatmoType, default="THCPN")
+LCD4linux.NetAtmoType2 = ConfigSelection(choices = DirType, default="0")
 LCD4linux.NetAtmoSize = ConfigSlider(default = 30,  increment = 1, limits = (10, 100))
 LCD4linux.NetAtmoColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.NetAtmoShadow = ConfigYesNo(default = False)
@@ -1017,6 +1010,16 @@ LCD4linux.MPCommSplit = ConfigYesNo(default = False)
 LCD4linux.MPCommColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.MPCommShadow = ConfigYesNo(default = False)
 LCD4linux.MPCommFont = ConfigSelection(choices = FontType, default="0")
+LCD4linux.MPChannel = ConfigSelection(choices = ScreenSelect, default="0")
+LCD4linux.MPChannelLCD = ConfigSelection(choices = LCDSelect, default="1")
+LCD4linux.MPChannelSize = ConfigSlider(default = 50,  increment = 2, limits = (10, 300))
+LCD4linux.MPChannelPos = ConfigSlider(default = 10,  increment = 2, limits = (0, 1024))
+LCD4linux.MPChannelLines = ConfigSelectionNumber(1, 9, 1, default = 1)
+LCD4linux.MPChannelAlign = ConfigSelection(choices = AlignType, default="1")
+LCD4linux.MPChannelSplit = ConfigYesNo(default = False)
+LCD4linux.MPChannelColor = ConfigSelection(choices = Farbe, default="white")
+LCD4linux.MPChannelShadow = ConfigYesNo(default = False)
+LCD4linux.MPChannelFont = ConfigSelection(choices = FontType, default="0")
 LCD4linux.MPProgress = ConfigSelection(choices = ScreenSelect, default="1")
 LCD4linux.MPProgressLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.MPProgressType = ConfigSelection(choices = ProgressType, default="61")
@@ -1104,6 +1107,7 @@ LCD4linux.MPAVAlign = ConfigSelection(choices = AlignType, default="0")
 LCD4linux.MPAVSplit = ConfigYesNo(default = False)
 LCD4linux.MPAVColor = ConfigSelection(choices = Farbe, default="gold")
 LCD4linux.MPAVShadow = ConfigYesNo(default = False)
+LCD4linux.MPAVType = ConfigSelection(choices = [("1", _("one line")), ("2", _("two lines"))], default="1")
 LCD4linux.MPAVFont = ConfigSelection(choices = FontType, default="0")
 LCD4linux.MPBitrate = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.MPBitrateLCD = ConfigSelection(choices = LCDSelect, default="1")
@@ -1191,6 +1195,7 @@ LCD4linux.MPNetAtmoPos = ConfigSlider(default = 50,  increment = 2, limits = (0,
 LCD4linux.MPNetAtmoAlign = ConfigSelection(choices = AlignType, default="0")
 LCD4linux.MPNetAtmoSplit = ConfigYesNo(default = False)
 LCD4linux.MPNetAtmoType = ConfigSelection(choices = NetatmoType, default="THCPN")
+LCD4linux.MPNetAtmoType2 = ConfigSelection(choices = DirType, default="0")
 LCD4linux.MPNetAtmoSize = ConfigSlider(default = 30,  increment = 1, limits = (10, 100))
 LCD4linux.MPNetAtmoColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.MPNetAtmoShadow = ConfigYesNo(default = False)
@@ -1346,6 +1351,13 @@ LCD4linux.MPBox2x2 = ConfigSlider(default = 200,  increment = 1, limits = (0, 10
 LCD4linux.MPBox2y2 = ConfigSlider(default = 1,  increment = 1, limits = (0, 1024))
 LCD4linux.MPBox2Color = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.MPBox2BackColor = ConfigSelection(choices = [("0", _("off"))] + Farbe, default="0")
+LCD4linux.MPRecording = ConfigSelection(choices = ScreenSelect, default="0")
+LCD4linux.MPRecordingLCD = ConfigSelection(choices = LCDSelect, default="1")
+LCD4linux.MPRecordingType = ConfigSelection(choices = [("1", _("Corner")), ("2", _("Picon"))], default="1")
+LCD4linux.MPRecordingSize = ConfigSlider(default = 25,  increment = 1, limits = (10, 100))
+LCD4linux.MPRecordingPos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
+LCD4linux.MPRecordingAlign = ConfigSelection(choices = AlignType, default="2")
+LCD4linux.MPRecordingSplit = ConfigYesNo(default = False)
 LCD4linux.Standby = ConfigSelection(choices = [("0", _("off")), ("1", _("on"))], default="1")
 LCD4linux.StandbyScreenMax = ConfigSelection(choices = ScreenUse, default="1")
 LCD4linux.StandbyHelligkeit = ConfigSelectionNumber(0, 10, 1, default = 1)
@@ -1509,6 +1521,7 @@ LCD4linux.StandbyNetAtmoPos = ConfigSlider(default = 50,  increment = 2, limits 
 LCD4linux.StandbyNetAtmoAlign = ConfigSelection(choices = AlignType, default="0")
 LCD4linux.StandbyNetAtmoSplit = ConfigYesNo(default = False)
 LCD4linux.StandbyNetAtmoType = ConfigSelection(choices = NetatmoType, default="THCPN")
+LCD4linux.StandbyNetAtmoType2 = ConfigSelection(choices = DirType, default="0")
 LCD4linux.StandbyNetAtmoSize = ConfigSlider(default = 30,  increment = 1, limits = (10, 100))
 LCD4linux.StandbyNetAtmoColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.StandbyNetAtmoShadow = ConfigYesNo(default = False)
@@ -1710,6 +1723,13 @@ LCD4linux.StandbyBox2x2 = ConfigSlider(default = 200,  increment = 1, limits = (
 LCD4linux.StandbyBox2y2 = ConfigSlider(default = 1,  increment = 1, limits = (0, 1024))
 LCD4linux.StandbyBox2Color = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.StandbyBox2BackColor = ConfigSelection(choices = [("0", _("off"))] + Farbe, default="0")
+LCD4linux.StandbyRecording = ConfigSelection(choices = ScreenSelect, default="0")
+LCD4linux.StandbyRecordingLCD = ConfigSelection(choices = LCDSelect, default="1")
+LCD4linux.StandbyRecordingType = ConfigSelection(choices = [("1", _("Corner")), ("2", _("Picon"))], default="1")
+LCD4linux.StandbyRecordingSize = ConfigSlider(default = 25,  increment = 1, limits = (10, 100))
+LCD4linux.StandbyRecordingPos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
+LCD4linux.StandbyRecordingAlign = ConfigSelection(choices = AlignType, default="2")
+LCD4linux.StandbyRecordingSplit = ConfigYesNo(default = False)
 
 class MyTimer: # only for debug
 	import traceback
@@ -1888,6 +1908,44 @@ def ICSdownloads():
 		return
 	ICSdownrun = True
 	ICS.clear()
+	if LCD4linux.CalPlanerFS.value == True:
+		try:
+			from Plugins.Extensions.PlanerFS.PFSl4l import l4l_export
+			liste=l4l_export("50").planerfs_liste
+			PlanerFSok = True
+			L4logE("PlanerFS registered")
+		except:
+			PlanerFSok = False
+			L4log("PlanerFS not registered")
+
+		if PlanerFSok == True:
+			L4log(liste)
+			for Icomp in liste:
+				DT=Icomp[0]
+				L4logE(Icomp)
+				D = "%04d-%02d-%02d"  % (DT.year,DT.month,DT.day)
+				if Icomp[4] == (0,0):
+					dateT = date(DT.year,DT.month,DT.day)
+				else:
+					dateT = DT
+				if Icomp[6] == 0:
+					dateS = Code_utf8(Icomp[1])
+				else:
+					dateS = "%s (%d)" % (Code_utf8(Icomp[1]),Icomp[6])
+				inew=[dateS,dateT,4]
+				Doppel = False
+				if ICS.get(D,None) is None:
+					ICS[D]=[]
+				else:
+					for ii in ICS[D]:
+						if ii[:2] == inew[:2]:
+							Doppel = True
+							L4logE("ICS ignore",inew)
+				L4log(Doppel)
+				if Doppel == False:
+					ICS[D].append(inew)
+					L4logE(D,inew)
+
 	for name in ICSlist:
 		L4log("ICS read Col",name[1])
 		try:
@@ -1909,10 +1967,18 @@ def ICSdownloads():
 					DTstart = str(Icomp.decoded("dtstart"))
 					if strftime("%Y-%m") == DTstart[:7] or nextmonth.strftime("%Y-%m") == DTstart[:7] or nextmonth2.strftime("%Y-%m") == DTstart[:7]:
 						D = DTstart[:10]
+						inew=[Code_utf8(Icomp.get('summary')),Icomp.decoded("dtstart"),name[1]]
+						Doppel = False
 						if ICS.get(D,None) is None:
 							ICS[D]=[]
-						ICS[D].append([Code_utf8(Icomp.get('summary')),Icomp.decoded("dtstart"),name[1]])
-						L4log(D,[Icomp.get('summary'),Icomp.decoded("dtstart")])
+						else:
+							for ii in ICS[D]:
+								if ii[:2] == inew[:2]:
+									Doppel = True
+									L4log("ICS ignore",inew)
+						if Doppel == False:
+							ICS[D].append(inew)
+							L4log(D,inew)
 		except:
 			from traceback import format_exc
 			L4log("Error ICS",name)
@@ -3059,7 +3125,26 @@ try:
 	BitrateRegistred = True
 	L4log("Register Bitrate ok")
 except:
+	BitrateRegistred = False
 	L4log("Bitrate not registered")
+
+try:
+	from Plugins.Extensions.webradioFS.ext import ext_l4l
+	WebRadioFS = ext_l4l()
+	WebRadioFSok = True
+	L4log("Register WebRadioFS ok")
+except:
+	WebRadioFSok = False
+	L4log("WebRadioFS not registered")
+
+try:
+	from Plugins.Extensions.Netatmo.Netatmo import netatmo
+	from Plugins.Extensions.Netatmo.NetatmoCore import NetatmoUnit
+	NetatmoOK = True
+	L4log("Register Netatmo ok")
+except:
+	NetatmoOK = False
+	L4log("Netatmo not registered")
 
 class GrabOSD:
 	def __init__(self, cmd):
@@ -3322,27 +3407,9 @@ class L4LWorker(Thread):
 					r.close()
 					ICSlist.append([rs,col])
 					return
-					gcal = icalendar.Calendar().from_string(rs)
 				except:
 					L4log("Error: ICS not readable!",name)
 					return
-				for component in gcal.walk():
-					if component.name == "VEVENT":
-						L4logE(component["dtstart"],component.get('summary'))
-						rrule=str(component.get("rrule",""))
-						if "YEARLY" in rrule:
-							dt=str(component["dtstart"])
-							component.set('dtstart', date(datetime.now().year,int(dt[4:6]),int(dt[6:8])))
-						today=date.today()
-						nextmonth=today + timedelta(calendar.mdays[today.month]) # 2012-01-23
-						nextmonth2=today + timedelta(calendar.mdays[today.month]-3) # save Month+1 if days to long
-						DTstart = str(component.decoded("dtstart"))
-						if strftime("%Y-%m") == DTstart[:7] or nextmonth.strftime("%Y-%m") == DTstart[:7] or nextmonth2.strftime("%Y-%m") == DTstart[:7]:
-							D = DTstart[:10]
-							if ICS.get(D,None) is None:
-								ICS[D]=[]
-							ICS[D].append([Code_utf8(component.get('summary')),component.decoded("dtstart"),col])
-							L4log(D,[component.get('summary'),component.decoded("dtstart")])
 			else:
 				L4logE("Error Read ICS",name)
 
@@ -3885,7 +3952,11 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			self["LCD3"].hide()
 		else:
 			self.onLayoutFinish.append(self.showpic)
+		self.onLayoutFinish.append(self.layoutFinished)
 		L4log("init Ende")
+
+	def layoutFinished(self):
+		self["config"].l.setSeperation(int(self["config"].l.getItemSize().width()*.7)) # use 30% of list width for sliders
 
 	def NextScreenKey(self):
 		NextScreen(True)
@@ -4079,6 +4150,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			self.list1.append(getConfigListEntry(_("Weather High Temperature Color"), LCD4linux.WetterHighColor))
 			self.list1.append(getConfigListEntry(_("Weather Transparency"), LCD4linux.WetterTransparenz))
 			self.list1.append(getConfigListEntry(_("Weather Rain Chance"), LCD4linux.WetterRain))
+			self.list1.append(getConfigListEntry(_("Weather Wind speed unit"), LCD4linux.WetterWind))
 			if LCD4linux.WetterRain.value != "false":
 				self.list1.append(getConfigListEntry(_("- Rain Zoom"), LCD4linux.WetterRainZoom))
 				self.list1.append(getConfigListEntry(_("- Rain Color"), LCD4linux.WetterRainColor))
@@ -4095,15 +4167,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			self.list1.append(getConfigListEntry(_("Netatmo CO2 Max Range"), LCD4linux.NetAtmoCO2Max))
 			self.list1.append(getConfigListEntry(_("Meteo URL"), LCD4linux.MeteoURL))
 			self.list1.append(getConfigListEntry(_("Moon-Icon-Path [ok]>"), LCD4linux.MoonPath))
-			self.list1.append(getConfigListEntry(_("Show Recording"), LCD4linux.Recording))
-			if LCD4linux.Recording.value != "0":
-				self.list1.append(getConfigListEntry(_("-  Type"), LCD4linux.RecordingType))
-				self.list1.append(getConfigListEntry(_("- Size"), LCD4linux.RecordingSize))
-				if LCD4linux.RecordingType.value == "2":
-					self.list1.append(getConfigListEntry(_("- Position"), LCD4linux.RecordingPos))
-					self.list1.append(getConfigListEntry(_("- Alignment"), LCD4linux.RecordingAlign))
-					self.list1.append(getConfigListEntry(_("- Split Screen"), LCD4linux.RecordingSplit))
-					self.list1.append(getConfigListEntry(_("- Picture [ok]>"), LCD4linux.RecordingPath))
+			self.list1.append(getConfigListEntry(_("Recording Picture [ok]>"), LCD4linux.RecordingPath))
 			self.list1.append(getConfigListEntry(_("Double-button switches"), LCD4linux.KeySwitch))
 			self.list1.append(getConfigListEntry(_("Key for Screen Change"), LCD4linux.KeyScreen))
 			self.list1.append(getConfigListEntry(_("Key for Screen On/Off"), LCD4linux.KeyOff))
@@ -4125,6 +4189,8 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			self.list1.append(getConfigListEntry(_("- Color"), LCD4linux.CalHttp2Color))
 			self.list1.append(getConfigListEntry(_("Calendar ics-URL"), LCD4linux.CalHttp3))
 			self.list1.append(getConfigListEntry(_("- Color"), LCD4linux.CalHttp3Color))
+			self.list1.append(getConfigListEntry(_("Calendar planerFS"), LCD4linux.CalPlanerFS))
+			self.list1.append(getConfigListEntry(_("- Color"), LCD4linux.CalPlanerFSColor))
 			self.list1.append(getConfigListEntry(_("Calendar Line Thickness"), LCD4linux.CalLine))
 			self.list1.append(getConfigListEntry(_("Calendar Day Event Preview"), LCD4linux.CalDays))
 			self.list1.append(getConfigListEntry(_("Calendar Transparency"), LCD4linux.CalTransparenz))
@@ -4164,6 +4230,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			self.list1.append(getConfigListEntry(_("WebIF Init Delay"), LCD4linux.WebIfInitDelay))
 			self.list1.append(getConfigListEntry(_("WebIF IP Allow"), LCD4linux.WebIfAllow))
 			self.list1.append(getConfigListEntry(_("WebIF IP Deny"), LCD4linux.WebIfDeny))
+			self.list1.append(getConfigListEntry(_("WebIF Design"), LCD4linux.WebIfDesign))
 			self.list1.append(getConfigListEntry(_("Save as Picture for WebIF"), LCD4linux.SavePicture))
 			self.list1.append(getConfigListEntry(_("LCD Custom Width"), LCD4linux.SizeW))
 			self.list1.append(getConfigListEntry(_("LCD Custom Height"), LCD4linux.SizeH))
@@ -4389,6 +4456,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list2.append(getConfigListEntry(_("- which LCD"), LCD4linux.AVLCD))
 				self.list2.append(getConfigListEntry(_("- Font Size"), LCD4linux.AVSize))
 				self.list2.append(getConfigListEntry(_("- Position"), LCD4linux.AVPos))
+				self.list2.append(getConfigListEntry(_("- Type"), LCD4linux.AVType))
 				self.list2.append(getConfigListEntry(_("- Alignment"), LCD4linux.AVAlign))
 				self.list2.append(getConfigListEntry(_("- Split Screen"), LCD4linux.AVSplit))
 				self.list2.append(getConfigListEntry(_("- Color"), LCD4linux.AVColor))
@@ -4486,6 +4554,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list2.append(getConfigListEntry(_("- Alignment"), LCD4linux.NetAtmoAlign))
 				self.list2.append(getConfigListEntry(_("- Split Screen"), LCD4linux.NetAtmoSplit))
 				self.list2.append(getConfigListEntry(_("- Type"), LCD4linux.NetAtmoType))
+				self.list2.append(getConfigListEntry(_("- Type"), LCD4linux.NetAtmoType2))
 				self.list2.append(getConfigListEntry(_("- Color"), LCD4linux.NetAtmoColor))
 				self.list2.append(getConfigListEntry(_("- Shadow Edges"), LCD4linux.NetAtmoShadow))
 				self.list2.append(getConfigListEntry(_("- Font"), LCD4linux.NetAtmoFont))
@@ -4726,6 +4795,14 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list2.append(getConfigListEntry(_("- Size y"), LCD4linux.Box2y2))
 				self.list2.append(getConfigListEntry(_("- Color"), LCD4linux.Box2Color))
 				self.list2.append(getConfigListEntry(_("- Background Color"), LCD4linux.Box2BackColor))
+			self.list2.append(getConfigListEntry(_("Recording"), LCD4linux.Recording))
+			if LCD4linux.Recording.value != "0":
+				self.list2.append(getConfigListEntry(_("-  Type"), LCD4linux.RecordingType))
+				self.list2.append(getConfigListEntry(_("- Size"), LCD4linux.RecordingSize))
+				if LCD4linux.RecordingType.value == "2":
+					self.list2.append(getConfigListEntry(_("- Position"), LCD4linux.RecordingPos))
+					self.list2.append(getConfigListEntry(_("- Alignment"), LCD4linux.RecordingAlign))
+					self.list2.append(getConfigListEntry(_("- Split Screen"), LCD4linux.RecordingSplit))
 			self.list2.append(getConfigListEntry(_("Stutter TV"), LCD4linux.TV))
 			if LCD4linux.TV.value != "0":
 				self.list2.append(getConfigListEntry(_("- which LCD"), LCD4linux.TVLCD))
@@ -4777,6 +4854,17 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list3.append(getConfigListEntry(_("- Color"), LCD4linux.MPDescColor))
 				self.list3.append(getConfigListEntry(_("- Shadow Edges"), LCD4linux.MPDescShadow))
 				self.list3.append(getConfigListEntry(_("- Font"), LCD4linux.MPDescFont))
+			self.list3.append(getConfigListEntry(_("Program Name"), LCD4linux.MPChannel))
+			if LCD4linux.MPChannel.value != "0":
+				self.list3.append(getConfigListEntry(_("- which LCD"), LCD4linux.MPChannelLCD))
+				self.list3.append(getConfigListEntry(_("- Font Size"), LCD4linux.MPChannelSize))
+				self.list3.append(getConfigListEntry(_("- maximum Lines"), LCD4linux.MPChannelLines))
+				self.list3.append(getConfigListEntry(_("- Position"), LCD4linux.MPChannelPos))
+				self.list3.append(getConfigListEntry(_("- Alignment"), LCD4linux.MPChannelAlign))
+				self.list3.append(getConfigListEntry(_("- Split Screen"), LCD4linux.MPChannelSplit))
+				self.list3.append(getConfigListEntry(_("- Color"), LCD4linux.MPChannelColor))
+				self.list3.append(getConfigListEntry(_("- Shadow Edges"), LCD4linux.MPChannelShadow))
+				self.list3.append(getConfigListEntry(_("- Font"), LCD4linux.MPChannelFont))
 			self.list3.append(getConfigListEntry(_("Progress Bar"), LCD4linux.MPProgress))
 			if LCD4linux.MPProgress.value != "0":
 				self.list3.append(getConfigListEntry(_("- which LCD"), LCD4linux.MPProgressLCD))
@@ -4866,6 +4954,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list3.append(getConfigListEntry(_("- which LCD"), LCD4linux.MPAVLCD))
 				self.list3.append(getConfigListEntry(_("- Font Size"), LCD4linux.MPAVSize))
 				self.list3.append(getConfigListEntry(_("- Position"), LCD4linux.MPAVPos))
+				self.list3.append(getConfigListEntry(_("- Type"), LCD4linux.MPAVType))
 				self.list3.append(getConfigListEntry(_("- Alignment"), LCD4linux.MPAVAlign))
 				self.list3.append(getConfigListEntry(_("- Split Screen"), LCD4linux.MPAVSplit))
 				self.list3.append(getConfigListEntry(_("- Color"), LCD4linux.MPAVColor))
@@ -4963,6 +5052,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list3.append(getConfigListEntry(_("- Alignment"), LCD4linux.MPNetAtmoAlign))
 				self.list3.append(getConfigListEntry(_("- Split Screen"), LCD4linux.MPNetAtmoSplit))
 				self.list3.append(getConfigListEntry(_("- Type"), LCD4linux.MPNetAtmoType))
+				self.list3.append(getConfigListEntry(_("- Type"), LCD4linux.MPNetAtmoType2))
 				self.list3.append(getConfigListEntry(_("- Color"), LCD4linux.MPNetAtmoColor))
 				self.list3.append(getConfigListEntry(_("- Shadow Edges"), LCD4linux.MPNetAtmoShadow))
 				self.list3.append(getConfigListEntry(_("- Font"), LCD4linux.MPNetAtmoFont))
@@ -5142,6 +5232,14 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list3.append(getConfigListEntry(_("- Size y"), LCD4linux.MPBox2y2))
 				self.list3.append(getConfigListEntry(_("- Color"), LCD4linux.MPBox2Color))
 				self.list3.append(getConfigListEntry(_("- Background Color"), LCD4linux.MPBox2BackColor))
+			self.list3.append(getConfigListEntry(_("Recording"), LCD4linux.MPRecording))
+			if LCD4linux.MPRecording.value != "0":
+				self.list3.append(getConfigListEntry(_("-  Type"), LCD4linux.MPRecordingType))
+				self.list3.append(getConfigListEntry(_("- Size"), LCD4linux.MPRecordingSize))
+				if LCD4linux.MPRecordingType.value == "2":
+					self.list3.append(getConfigListEntry(_("- Position"), LCD4linux.MPRecordingPos))
+					self.list3.append(getConfigListEntry(_("- Alignment"), LCD4linux.MPRecordingAlign))
+					self.list3.append(getConfigListEntry(_("- Split Screen"), LCD4linux.MPRecordingSplit))
 			self["config"].setList(self.list3)
 		elif self.mode == "Idle":
 			self.list4 = []
@@ -5317,6 +5415,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list4.append(getConfigListEntry(_("- Alignment"), LCD4linux.StandbyNetAtmoAlign))
 				self.list4.append(getConfigListEntry(_("- Split Screen"), LCD4linux.StandbyNetAtmoSplit))
 				self.list4.append(getConfigListEntry(_("- Type"), LCD4linux.StandbyNetAtmoType))
+				self.list4.append(getConfigListEntry(_("- Type"), LCD4linux.StandbyNetAtmoType2))
 				self.list4.append(getConfigListEntry(_("- Color"), LCD4linux.StandbyNetAtmoColor))
 				self.list4.append(getConfigListEntry(_("- Shadow Edges"), LCD4linux.StandbyNetAtmoShadow))
 				self.list4.append(getConfigListEntry(_("- Font"), LCD4linux.StandbyNetAtmoFont))
@@ -5547,6 +5646,14 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list4.append(getConfigListEntry(_("- Size y"), LCD4linux.StandbyBox2y2))
 				self.list4.append(getConfigListEntry(_("- Color"), LCD4linux.StandbyBox2Color))
 				self.list4.append(getConfigListEntry(_("- Background Color"), LCD4linux.StandbyBox2BackColor))
+			self.list4.append(getConfigListEntry(_("Recording"), LCD4linux.StandbyRecording))
+			if LCD4linux.StandbyRecording.value != "0":
+				self.list4.append(getConfigListEntry(_("-  Type"), LCD4linux.StandbyRecordingType))
+				self.list4.append(getConfigListEntry(_("- Size"), LCD4linux.StandbyRecordingSize))
+				if LCD4linux.StandbyRecordingType.value == "2":
+					self.list4.append(getConfigListEntry(_("- Position"), LCD4linux.StandbyRecordingPos))
+					self.list4.append(getConfigListEntry(_("- Alignment"), LCD4linux.StandbyRecordingAlign))
+					self.list4.append(getConfigListEntry(_("- Split Screen"), LCD4linux.StandbyRecordingSplit))
 			self["config"].setList(self.list4)
 
 	def Page(self):
@@ -6190,7 +6297,10 @@ class UpdateStatus(Screen):
 				self.iP=str(netatmo.stations[0].indoor.pressure)
 				self.iN=str(netatmo.stations[0].indoor.noise)
 				self.iC=str(netatmo.stations[0].indoor.co2)
-				self.iIDX = str(netatmo.stations[0].indoor.idx_total)
+				try:
+					self.iIDX = str(netatmo.stations[0].indoor.idx_total)
+				except:
+					L4log("please use newer Netatmo-Plugin")
 				self.oM=[]
 				for Mod in netatmo.stations[0].modules:
 					oT=str(Mod.outdoor.temperature)+".0"
@@ -6419,17 +6529,12 @@ class UpdateStatus(Screen):
 			self.Lpath = sref.getPath()
 			if not self.Lpath:
 				self.Lchannel_num = str(getNumber(ref))
-			elif WebradiofsOK == True:
-				try:
-					from Plugins.Extensions.webradioFS.plugin import l4l_info
-					self.l4l_info = l4l_info
-				except:
-					pass
+			elif WebRadioFSok == True:
+				self.l4l_info = WebRadioFS.get_l4l_info()
 			serviceHandler = eServiceCenter.getInstance()
 			info = serviceHandler.info(ref)
 			if info is not None:
 				self.Lchannel_name = info and Code_utf8(info.getName(ref))
-
 			self.Lprovider = None
 			self.LtransponderData = None
 			self.LsVideoWidth = None
@@ -6509,16 +6614,16 @@ class UpdateStatus(Screen):
 							i = audio.getTrackInfo(idx)
 							self.Laudiodescription = i.getDescription()
 							L4logE("Audio %d" % idx, self.Laudiodescription)
-
 			self.Levent_begin0, self.Levent_end0, self.Lduration0, self.Levent_name0 = getServiceInfo(self,0)
 			self.Levent_begin1, self.Levent_end1, self.Lduration1, self.Levent_name1 = getServiceInfo(self,1)
 
 #			self.LEventsNext = None
 			self.LEventsDesc = None
-			epgcache = eEPGCache.getInstance()
-			if epgcache is not None:
-				self.LEventsNext = epgcache.lookupEvent(['RIBDT', (self.LsreftoString, 0, -1, 1440)])
-				self.LEventsDesc = epgcache.lookupEvent(['IBDCTSERNX', (self.LsreftoString, 0, -1)])
+			if self.LsreftoString.startswith("4097:0") == False:
+				epgcache = eEPGCache.getInstance()
+				if epgcache is not None:
+					self.LEventsNext = epgcache.lookupEvent(['RIBDT', (self.LsreftoString, 0, -1, 1440)])
+					self.LEventsDesc = epgcache.lookupEvent(['IBDCTSERNX', (self.LsreftoString, 0, -1)])
 
 		else:
 			self.LsreftoString = None
@@ -6827,6 +6932,10 @@ class UpdateStatus(Screen):
 				self.WDay[ConfigWWW]["Temp_c"] = curr[0].getAttribute("temperature") + "\xc2\xb0"
 				self.WDay[ConfigWWW]["Hum"] = curr[0].getAttribute("humidity") + "%"
 				self.WDay[ConfigWWW]["Wind"] = curr[0].getAttribute("winddisplay")
+				if LCD4linux.WetterWind.value == "1":
+					x=self.WDay[ConfigWWW]["Wind"].split()
+					if len(x) == 3:
+						self.WDay[ConfigWWW]["Wind"]="%.1f m/s %s" % (float(int(x[0])/3.6),x[2])
 				self.WDay[ConfigWWW]["Cond"] = curr[0].getAttribute("skytext")
 				self.WDay[ConfigWWW]["Icon"] = curr[0].getAttribute("skycode") + ".png"
 				self.WDay[ConfigWWW]["Feel"] = curr[0].getAttribute("feelslike")
@@ -7372,12 +7481,12 @@ def LCD4linuxPIC(self,session):
 			if cover=="" and os.path.isfile("/tmp/.cover"):
 				cover = "/tmp/.cover"
 			if LCD4linux.MPCoverPiconFirst.value == True:
-				if cover=="" and WebradiofsOK == True and os.path.isfile(self.l4l_info.get("Logo","")):
+				if cover=="" and WebRadioFSok == True and os.path.isfile(self.l4l_info.get("Logo","")):
 					cover = self.l4l_info.get("Logo","")
 			if cover=="" and os.path.isfile("/tmp/.wbrfs_pic"):
 				cover = "/tmp/.wbrfs_pic"
 			if LCD4linux.MPCoverPiconFirst.value == False:
-				if cover=="" and WebradiofsOK == True and os.path.isfile(self.l4l_info.get("Logo","")):
+				if cover=="" and WebRadioFSok == True and os.path.isfile(self.l4l_info.get("Logo","")):
 					cover = self.l4l_info.get("Logo","")
 			if cover=="" and isMediaPlayer=="record":
 				if os.path.isfile(sreffile+".meta") and LCD4linux.MPCoverGoogle.value != "1":
@@ -7396,7 +7505,8 @@ def LCD4linuxPIC(self,session):
 					except:
 						pass
 			Title = ""
-			Title = self.LsTagTitle
+			if self.LsTagTitle is not None:
+				Title = self.LsTagTitle
 			Video = Title.endswith(".mpg") or Title.endswith(".vob") or Title.endswith(".avi") or Title.endswith(".divx") or Title.endswith(".mv4") or Title.endswith(".mkv") or Title.endswith(".mp4") or Title.endswith(".ts")
 			isVid = sreffile.endswith(".mpg") or sreffile.endswith(".vob") or sreffile.endswith(".avi") or sreffile.endswith(".divx") or sreffile.endswith(".mv4") or sreffile.endswith(".mkv") or sreffile.endswith(".mp4") or sreffile.endswith(".ts")
 			if Title == "" or Video == True:
@@ -7852,7 +7962,7 @@ def LCD4linuxPIC(self,session):
 # Mondphase
 	def putMoon((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont),draw,im):
 		MAX_W,MAX_H = im.size
-		if LCD4linux.RecordingSplit.value == True:
+		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
 		POS = MoonPosition()
 		PHASE = MoonPhase(POS)
@@ -7956,8 +8066,8 @@ def LCD4linuxPIC(self,session):
 					pil_image = pil_image.resize((ConfigSize,y), Image.ANTIALIAS)
 				POSX = getSplit(False,ConfigAlign,MAX_W,ConfigSize)
 				im.paste(pil_image,(POSX,ConfigPos))
-				im.save(WWWpic % (str(PIC)+"p"))
-	
+				pil_image.save(WWWpic % (str(PIC)+"p"))
+
 # Clock
 	def putClock((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType, ConfigSpacing, ConfigAnalog, ConfigColor, ConfigShadow, ConfigFont), draw, im):
 		MAX_W,MAX_H = im.size
@@ -8359,7 +8469,6 @@ def LCD4linuxPIC(self,session):
 			if rr[-1] != ":":
 				rr+=":"
 			picon = str(rr.replace(":", "_")[:-1]) + ".png"
-			
 			if Picon2 == False:
 				P2 = LCD4linux.PiconPath.value
 				P2A = LCD4linux.PiconPathAlt.value
@@ -8993,15 +9102,15 @@ def LCD4linuxPIC(self,session):
 		writeMultiline(i,ConfigSize,ConfigPos,ConfigLines,ConfigColor,ConfigAlign,ConfigSplit,draw,im,False, ConfigFont=ConfigFont, Shadow=ConfigShadow)
 
 # Audio/Video
-	def putAV((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont), draw, im):
+	def putAV((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigType, ConfigFont), draw, im):
 		def getAudio(description):
 			if description in ["AC3", "AC-3", "Dolby Digital", "AC-3 audio"]:
 				return "dolby.png"
-			elif description in "DTS":
-				return "dts.png"
-			elif description in "DTS-HD":
+			elif "DTS-HD" in description:
 				return "dtsHD.png"
-			elif description in "AC3+":
+			elif "DTS" in description:
+				return "dts.png"
+			elif description in ["Dolby Digital+", "AC3+"]:
 				return "dolbyplus.png"
 			else:
 				return "mpeg.png"
@@ -9019,7 +9128,9 @@ def LCD4linuxPIC(self,session):
 			font = ImageFont.truetype(ConfigFont, ConfigSize-2, encoding='unic')
 			w,h = draw.textsize(Video, font=font)
 			px = 75.0/ConfigSize
-			cl = int(375/px)+w+15
+			cl = int(375/px)+15
+			if ConfigType == "1":
+				cl += w
 			lx = getSplit(ConfigSplit,ConfigAlign,MAX_W,cl)
 			pil_image = None
 			if os.path.isfile(Data+dat):
@@ -9041,9 +9152,13 @@ def LCD4linuxPIC(self,session):
 				im.paste(pil_image,(lx+int(300/px)+10,ConfigPos))
 			except:
 				L4log("Error Crypted")
-			ShadowText(draw,lx+int(375/px)+15,ConfigPos+2,Video,font,ConfigColor,ConfigShadow)
-#				print "Videotype",info.getInfo(iServiceInformation.sVideoType)
-#				print "Framerate",info.getInfo(iServiceInformation.sFrameRate)
+			if ConfigType == "1":
+				Posx=int(375/px)+15
+				Posy=ConfigPos+2
+			else:
+				Posx=(int(375/px/2)) - int(w/2)
+				Posy=ConfigPos+ConfigSize
+			ShadowText(draw,lx+Posx,Posy,Video,font,ConfigColor,ConfigShadow)
 
 # Bitrate
 	def putBitrate((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont), draw, im):
@@ -9319,7 +9434,7 @@ def LCD4linuxPIC(self,session):
 		MAX_W,MAX_H = im.size
 		if self.LsTagArtist is not None:
 			Info = ""
-			if WebradiofsOK == True and self.l4l_info.get("Station","") != "":
+			if WebRadioFSok == True and self.l4l_info.get("Station","") != "":
 				Info += self.l4l_info.get("Station","") + " - "
 				if self.l4l_info.get("Fav","") != "":
 					Info += self.l4l_info.get("Fav","") + " - "
@@ -9741,7 +9856,7 @@ def LCD4linuxPIC(self,session):
 			ShadowText(draw,POSXi,POSY,"%02d:%02d" % L4LMoon,font,ConfigColor,ConfigShadow)
 
 # Netatmo
-	def putNetatmo((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType, ConfigColor, ConfigShadow, ConfigFont), draw, im):
+	def putNetatmo((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType, ConfigType2, ConfigColor, ConfigShadow, ConfigFont), draw, im):
 		MAX_W,MAX_H = im.size
 		font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 		font2 = ImageFont.truetype(ConfigFont, int(ConfigSize/2), encoding='unic')
@@ -9755,10 +9870,17 @@ def LCD4linuxPIC(self,session):
 		w1,h1 = draw.textsize("-88", font=font)
 		w2,h2 = draw.textsize(".8", font=font2)
 		w3,h3 = draw.textsize("88888"+self.PRESSURE,font=font2)
-		w12 = w1+w2+w2
-		w123 = w12+(w12*len(self.oM))
-		if "C" in ConfigType:
-			w123+=w3
+		if ConfigType2 == "0":
+			w12 = w1+w2+w2
+			w123 = w12+(w12*len(self.oM))
+			if "C" in ConfigType:
+				w123+=w3
+		else:
+			w12 = w1+w2
+			w123 = w12+w2
+			if "H" in ConfigType:
+				w4,h4 = draw.textsize("88%",font=font2)
+				w123+=w4
 		POSX = getSplit(ConfigSplit,ConfigAlign,MAX_W,w123)
 		for Mod in self.oM:
 			ShadowText(draw,POSX,POSY,Mod[0].split(".")[0],font,ConfigColor,ConfigShadow) 
@@ -9767,19 +9889,37 @@ def LCD4linuxPIC(self,session):
 			ShadowText(draw,POSX+w,POSY,self.TEMPERATURE.decode(),font2,ConfigColor,ConfigShadow)
 			if "H" in ConfigType:
 				w,h = draw.textsize(Mod[1], font=font2)
-				ShadowText(draw,POSX+int((w1-w)/2),POSY+h1,Mod[1],font2,ConfigColor,ConfigShadow)
-				ShadowText(draw,POSX+w+int((w1-w)/2),POSY+h1,self.HUMIDITY,font3,ConfigColor,ConfigShadow)
-			POSX +=w12
+				if ConfigType2 == "0":
+					PX=int((w1-w)/2)
+					PY=h1
+				else:
+					PX=w1+w2
+					PY=int(h1/5*2)
+				ShadowText(draw,POSX+PX,POSY+PY,Mod[1],font2,ConfigColor,ConfigShadow)
+				ShadowText(draw,POSX+w+PX,POSY+PY,self.HUMIDITY,font3,ConfigColor,ConfigShadow)
+			if ConfigType2 == "0":
+				POSX += w12
+			else:
+				POSY += h1
 		ShadowText(draw,POSX,POSY,self.iT.split(".")[0],font,ConfigColor,ConfigShadow) 
 		w,h = draw.textsize(self.iT.split(".")[0], font=font)
 		ShadowText(draw,POSX+w,POSY+int(h/5*2),"."+self.iT.split(".")[1],font2,ConfigColor,ConfigShadow) 
 		ShadowText(draw,POSX+w,POSY,self.TEMPERATURE.decode(),font2,ConfigColor,ConfigShadow) 
 		if "H" in ConfigType:
 			w,h = draw.textsize(self.iH, font=font2)
-			ShadowText(draw,POSX+int((w1-w)/2),POSY+h1,self.iH,font2,ConfigColor,ConfigShadow)
-			ShadowText(draw,POSX+w+int((w1-w)/2),POSY+h1,self.HUMIDITY,font3,ConfigColor,ConfigShadow)
+			if ConfigType2 == "0":
+				PX=int((w1-w)/2)
+				PY=h1
+			else:
+				PX=w1+w2
+				PY=int(h1/5*2)
+			ShadowText(draw,POSX+PX,POSY+PY,self.iH,font2,ConfigColor,ConfigShadow)
+			ShadowText(draw,POSX+w+PX,POSY+PY,self.HUMIDITY,font3,ConfigColor,ConfigShadow)
 
-		POSX +=w12
+		if ConfigType2 == "0":
+			POSX += w12
+		else:
+			POSY += h1
 		if "C" in ConfigType:
 			ShadowText(draw,POSX,POSY,self.iC,font2,ConfigColor,ConfigShadow)
 			w,h = draw.textsize(self.iC, font=font2)
@@ -9792,7 +9932,7 @@ def LCD4linuxPIC(self,session):
 			ShadowText(draw,POSX,POSY+h+h,self.iN,font2,ConfigColor,ConfigShadow)
 			w,h = draw.textsize(self.iN, font=font2)
 			ShadowText(draw,POSX+w,POSY+h+h,self.NOISE,font3,ConfigColor,ConfigShadow)
-		
+
 # Netstmo CO2
 	def putNetatmoIllu((CW, ConfigPos, ConfigSize, ConfigLen, ConfigAlign, ConfigSplit, ConfigType), draw, im):
 		MAX_W,MAX_H = im.size
@@ -9883,7 +10023,7 @@ def LCD4linuxPIC(self,session):
 			CalType=[ConfigType,ConfigTypeE,LCD4linux.CalDays.value]
 			CalZoom=ConfigZoom
 			CalColor=[ConfigColor,ConfigBackColor,ConfigCaptionColor]
-			CC=[LCD4linux.CalPathColor.value,LCD4linux.CalHttpColor.value,LCD4linux.CalHttp2Color.value,LCD4linux.CalHttp3Color.value]
+			CC=[LCD4linux.CalPathColor.value,LCD4linux.CalHttpColor.value,LCD4linux.CalHttp2Color.value,LCD4linux.CalHttp3Color.value,LCD4linux.CalPlanerFSColor.value]
 			if LCD4linux.CalTransparenz.value == "true":
 				imW = Image.new('RGBA', (MAX_W, MAX_H), (0, 0, 0, 0))
 			else:
@@ -10096,25 +10236,25 @@ def LCD4linuxPIC(self,session):
 			writeMultiline(aa[:-2],int(ConfigSize),POSY,int(ConfigLines),ConfigColor,ConfigAlign,ConfigSplit,draw,im,ConfigFont=ConfigFont,Shadow=ConfigShadow,Width=CW,PosX=POSX)
 
 # show isRecording
-	def putRecording(draw,im):
+	def putRecording((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType),draw,im):
 		MAX_W,MAX_H = im.size
 		if self.LisRecording or ConfigMode == True:
-			if LCD4linux.RecordingType.value == "1":
-				draw.ellipse((MAX_W-LCD4linux.RecordingSize.value, -LCD4linux.RecordingSize.value, MAX_W+LCD4linux.RecordingSize.value, LCD4linux.RecordingSize.value), fill="red")
+			if ConfigType == "1":
+				draw.ellipse((MAX_W-ConfigSize, -ConfigSize, MAX_W+ConfigSize, ConfigSize), fill="red")
 			else:
 				try:
-					if LCD4linux.RecordingSplit.value == True:
+					if ConfigSplit == True:
 						MAX_W = int(MAX_W/2)
 					pil_image = Image.open(LCD4linux.RecordingPath.value if os.path.isfile(LCD4linux.RecordingPath.value) else RecPic )
 					xx,yy = pil_image.size
-					x=int(float(LCD4linux.RecordingSize.value)/yy*xx)
-					pil_image = pil_image.resize((x, LCD4linux.RecordingSize.value))
-					POSX = getSplit(LCD4linux.RecordingSplit.value,LCD4linux.RecordingAlign.value,MAX_W,x)
+					x=int(float(ConfigSize)/yy*xx)
+					pil_image = pil_image.resize((x, ConfigSize))
+					POSX = getSplit(ConfigSplit,ConfigAlign,MAX_W,x)
 					if LCD4linux.WetterTransparenz.value == "true":
 						pil_image = pil_image.convert("RGBA")
-						im.paste(pil_image,(POSX,LCD4linux.RecordingPos.value),pil_image)
+						im.paste(pil_image,(POSX,ConfigPos),pil_image)
 					else:
-						im.paste(pil_image,(POSX,LCD4linux.RecordingPos.value))
+						im.paste(pil_image,(POSX,ConfigPos))
 				except:
 					L4log("Error Recording Pic")
 
@@ -10175,6 +10315,7 @@ def LCD4linuxPIC(self,session):
 						if CUR.get("Fill",True) == False:
 							DR.rectangle((int(CUR.get("PosX",0)),int(CUR.get("PosY",0)),int(CUR.get("PosX",0))+int(CUR.get("Width",100)),int(CUR.get("PosY",0))+int(CUR.get("Height",100))),outline=CUR.get("Color","white"))
 						else:
+							Sync(LCD)
 							DR.rectangle((int(CUR.get("PosX",0)),int(CUR.get("PosY",0)),int(CUR.get("PosX",0))+int(CUR.get("Width",100)),int(CUR.get("PosY",0))+int(CUR.get("Height",100))),fill=CUR.get("Color","white"),outline=CUR.get("Color","white"))
 							Sync(LCD)
 					elif Typ == "wait":
@@ -10462,7 +10603,7 @@ def LCD4linuxPIC(self,session):
 				Brief2.join()
 				Brief3.join()
 # Netatmo
-				Para = LCD4linux.StandbyNetAtmoPos.value,LCD4linux.StandbyNetAtmoSize.value,LCD4linux.StandbyNetAtmoAlign.value,LCD4linux.StandbyNetAtmoSplit.value,LCD4linux.StandbyNetAtmoType.value,LCD4linux.StandbyNetAtmoColor.value,LCD4linux.StandbyNetAtmoShadow.value,getFont(LCD4linux.StandbyNetAtmoFont.value)
+				Para = LCD4linux.StandbyNetAtmoPos.value,LCD4linux.StandbyNetAtmoSize.value,LCD4linux.StandbyNetAtmoAlign.value,LCD4linux.StandbyNetAtmoSplit.value,LCD4linux.StandbyNetAtmoType.value,LCD4linux.StandbyNetAtmoType2.value,LCD4linux.StandbyNetAtmoColor.value,LCD4linux.StandbyNetAtmoShadow.value,getFont(LCD4linux.StandbyNetAtmoFont.value)
 				Lput(LCD4linux.StandbyNetAtmoLCD.value,LCD4linux.StandbyNetAtmo.value,putNetatmo,Para)
 # Box 1
 				Para = LCD4linux.StandbyBox1x1.value,LCD4linux.StandbyBox1y1.value,LCD4linux.StandbyBox1x2.value,LCD4linux.StandbyBox1y2.value,LCD4linux.StandbyBox1Color.value,LCD4linux.StandbyBox1BackColor.value
@@ -10531,6 +10672,9 @@ def LCD4linuxPIC(self,session):
 # FritzCall
 				Para = LCD4linux.StandbyFritzPos.value, LCD4linux.StandbyFritzSize.value, LCD4linux.StandbyFritzColor.value, LCD4linux.StandbyFritzBackColor.value, LCD4linux.StandbyFritzAlign.value, LCD4linux.StandbyFritzType.value, LCD4linux.StandbyFritzPicPos.value, LCD4linux.StandbyFritzPicSize.value, LCD4linux.StandbyFritzPicAlign.value, LCD4linux.StandbyFritzShadow.value, getFont(LCD4linux.StandbyFritzFont.value)
 				Lput(LCD4linux.StandbyFritzLCD.value,LCD4linux.StandbyFritz.value,putFritz,Para)
+# Recording
+				Para = LCD4linux.StandbyRecordingPos.value, LCD4linux.StandbyRecordingSize.value, LCD4linux.StandbyRecordingAlign.value, LCD4linux.StandbyRecordingSplit.value, LCD4linux.StandbyRecordingType.value
+				Lput(LCD4linux.StandbyRecordingLCD.value,LCD4linux.StandbyRecording.value,putRecording,Para)
 		else:
 			Dunkel=writeHelligkeit(0,0,0)
 
@@ -10594,7 +10738,7 @@ def LCD4linuxPIC(self,session):
 			Brief2.join()
 			Brief3.join()
 # Netatmo
-			Para = LCD4linux.MPNetAtmoPos.value,LCD4linux.MPNetAtmoSize.value,LCD4linux.MPNetAtmoAlign.value,LCD4linux.MPNetAtmoSplit.value,LCD4linux.MPNetAtmoType.value,LCD4linux.MPNetAtmoColor.value,LCD4linux.MPNetAtmoShadow.value,getFont(LCD4linux.MPNetAtmoFont.value)
+			Para = LCD4linux.MPNetAtmoPos.value,LCD4linux.MPNetAtmoSize.value,LCD4linux.MPNetAtmoAlign.value,LCD4linux.MPNetAtmoSplit.value,LCD4linux.MPNetAtmoType.value,LCD4linux.MPNetAtmoType2.value,LCD4linux.MPNetAtmoColor.value,LCD4linux.MPNetAtmoShadow.value,getFont(LCD4linux.MPNetAtmoFont.value)
 			Lput(LCD4linux.MPNetAtmoLCD.value,LCD4linux.MPNetAtmo.value,putNetatmo,Para)
 # Meteo station
 			if wwwMeteo.find("current_conditions") > 1:
@@ -10621,6 +10765,9 @@ def LCD4linuxPIC(self,session):
 # Comm
 			Para = LCD4linux.MPCommPos.value, LCD4linux.MPCommSize.value, LCD4linux.MPCommLines.value, LCD4linux.MPCommColor.value, LCD4linux.MPCommAlign.value, LCD4linux.MPCommSplit.value, LCD4linux.MPCommShadow.value, getFont(LCD4linux.MPCommFont.value)
 			Lput(LCD4linux.MPCommLCD.value,LCD4linux.MPComm.value,putComm,Para)
+# aktive Sendername
+			Para = LCD4linux.MPChannelPos.value, LCD4linux.MPChannelSize.value, LCD4linux.MPChannelLines.value, LCD4linux.MPChannelAlign.value, LCD4linux.MPChannelSplit.value, LCD4linux.MPChannelColor.value, LCD4linux.MPChannelShadow.value ,getFont(LCD4linux.MPChannelFont.value)
+			Lput(LCD4linux.MPChannelLCD.value,LCD4linux.MPChannel.value,putChannel,Para)
 # get clock
 			Para = LCD4linux.MPClockPos.value,LCD4linux.MPClockSize.value,LCD4linux.MPClockAlign.value,LCD4linux.MPClockSplit.value,LCD4linux.MPClockType.value,LCD4linux.MPClockSpacing.value,LCD4linux.MPClockAnalog.value,LCD4linux.MPClockColor.value,LCD4linux.MPClockShadow.value,getFont(LCD4linux.MPClockFont.value)
 			Lput(LCD4linux.MPClockLCD.value,LCD4linux.MPClock.value,putClock,Para)
@@ -10636,7 +10783,7 @@ def LCD4linuxPIC(self,session):
 			Para = LCD4linux.MPTunerPos.value, LCD4linux.MPTunerSize.value, LCD4linux.MPTunerAlign.value, LCD4linux.MPTunerSplit.value, LCD4linux.MPTunerType.value, LCD4linux.MPTunerActive.value,getFont(LCD4linux.MPTunerFont.value)
 			Lput(LCD4linux.MPTunerLCD.value,LCD4linux.MPTuner.value,putTuner,Para)
 # Audio/Video
-			Para = LCD4linux.MPAVPos.value, LCD4linux.MPAVSize.value, LCD4linux.MPAVAlign.value, LCD4linux.MPAVSplit.value, LCD4linux.MPAVColor.value, LCD4linux.MPAVShadow.value,getFont(LCD4linux.MPAVFont.value)
+			Para = LCD4linux.MPAVPos.value, LCD4linux.MPAVSize.value, LCD4linux.MPAVAlign.value, LCD4linux.MPAVSplit.value, LCD4linux.MPAVColor.value, LCD4linux.MPAVShadow.value, LCD4linux.MPAVType.value, getFont(LCD4linux.MPAVFont.value)
 			Lput(LCD4linux.MPAVLCD.value,LCD4linux.MPAV.value,putAV,Para)
 # Bitrate
 			Para = LCD4linux.MPBitratePos.value, LCD4linux.MPBitrateSize.value, LCD4linux.MPBitrateAlign.value, LCD4linux.MPBitrateSplit.value, LCD4linux.MPBitrateColor.value, LCD4linux.MPBitrateShadow.value,getFont(LCD4linux.MPBitrateFont.value)
@@ -10675,6 +10822,9 @@ def LCD4linuxPIC(self,session):
 # FritzCall
 			Para = LCD4linux.MPFritzPos.value, LCD4linux.MPFritzSize.value, LCD4linux.MPFritzColor.value, LCD4linux.MPFritzBackColor.value, LCD4linux.MPFritzAlign.value, LCD4linux.MPFritzType.value, LCD4linux.MPFritzPicPos.value, LCD4linux.MPFritzPicSize.value, LCD4linux.MPFritzPicAlign.value, LCD4linux.MPFritzShadow.value, getFont(LCD4linux.MPFritzFont.value)
 			Lput(LCD4linux.MPFritzLCD.value,LCD4linux.MPFritz.value,putFritz,Para)
+# Recording
+			Para = LCD4linux.MPRecordingPos.value, LCD4linux.MPRecordingSize.value, LCD4linux.MPRecordingAlign.value, LCD4linux.MPRecordingSplit.value, LCD4linux.MPRecordingType.value
+			Lput(LCD4linux.MPRecordingLCD.value,LCD4linux.MPRecording.value,putRecording,Para)
 # show OSD
 			if LCD4linux.OSD.value != "0" and ConfigMode == False and FritzTime == 0:
 				if OSDon >= 2 and "M" in LCD4linux.OSDshow.value:
@@ -10769,7 +10919,7 @@ def LCD4linuxPIC(self,session):
 			Para = LCD4linux.MoonPos.value,LCD4linux.MoonSize.value,LCD4linux.MoonAlign.value,LCD4linux.MoonSplit.value,LCD4linux.MoonColor.value,LCD4linux.MoonShadow.value,getFont(LCD4linux.MoonFont.value)
 			Lput(LCD4linux.MoonLCD.value,LCD4linux.Moon.value,putMoon,Para)
 # Netatmo
-			Para = LCD4linux.NetAtmoPos.value,LCD4linux.NetAtmoSize.value,LCD4linux.NetAtmoAlign.value,LCD4linux.NetAtmoSplit.value,LCD4linux.NetAtmoType.value,LCD4linux.NetAtmoColor.value,LCD4linux.NetAtmoShadow.value,getFont(LCD4linux.NetAtmoFont.value)
+			Para = LCD4linux.NetAtmoPos.value,LCD4linux.NetAtmoSize.value,LCD4linux.NetAtmoAlign.value,LCD4linux.NetAtmoSplit.value,LCD4linux.NetAtmoType.value,LCD4linux.NetAtmoType2.value,LCD4linux.NetAtmoColor.value,LCD4linux.NetAtmoShadow.value,getFont(LCD4linux.NetAtmoFont.value)
 			Lput(LCD4linux.NetAtmoLCD.value,LCD4linux.NetAtmo.value,putNetatmo,Para)
 # Meteo station
 			if wwwMeteo.find("current_conditions") > 1:
@@ -10820,7 +10970,7 @@ def LCD4linuxPIC(self,session):
 			Para = LCD4linux.TunerPos.value, LCD4linux.TunerSize.value, LCD4linux.TunerAlign.value, LCD4linux.TunerSplit.value, LCD4linux.TunerType.value, LCD4linux.TunerActive.value,getFont(LCD4linux.TunerFont.value)
 			Lput(LCD4linux.TunerLCD.value,LCD4linux.Tuner.value,putTuner,Para)
 # Audio/Video
-			Para = LCD4linux.AVPos.value, LCD4linux.AVSize.value, LCD4linux.AVAlign.value, LCD4linux.AVSplit.value, LCD4linux.AVColor.value, LCD4linux.AVShadow.value,getFont(LCD4linux.AVFont.value)
+			Para = LCD4linux.AVPos.value, LCD4linux.AVSize.value, LCD4linux.AVAlign.value, LCD4linux.AVSplit.value, LCD4linux.AVColor.value, LCD4linux.AVShadow.value, LCD4linux.AVType.value, getFont(LCD4linux.AVFont.value)
 			Lput(LCD4linux.AVLCD.value,LCD4linux.AV.value,putAV,Para)
 # Bitrate
 			Para = LCD4linux.BitratePos.value, LCD4linux.BitrateSize.value, LCD4linux.BitrateAlign.value, LCD4linux.BitrateSplit.value, LCD4linux.BitrateColor.value, LCD4linux.BitrateShadow.value,getFont(LCD4linux.BitrateFont.value)
@@ -10868,6 +11018,9 @@ def LCD4linuxPIC(self,session):
 # FritzCall
 			Para = LCD4linux.FritzPos.value, LCD4linux.FritzSize.value, LCD4linux.FritzColor.value, LCD4linux.FritzBackColor.value, LCD4linux.FritzAlign.value, LCD4linux.FritzType.value, LCD4linux.FritzPicPos.value, LCD4linux.FritzPicSize.value, LCD4linux.FritzPicAlign.value, LCD4linux.FritzShadow.value, getFont(LCD4linux.FritzFont.value)
 			Lput(LCD4linux.FritzLCD.value,LCD4linux.Fritz.value,putFritz,Para)
+# Recording
+			Para = LCD4linux.RecordingPos.value, LCD4linux.RecordingSize.value, LCD4linux.RecordingAlign.value, LCD4linux.RecordingSplit.value, LCD4linux.RecordingType.value
+			Lput(LCD4linux.RecordingLCD.value,LCD4linux.Recording.value,putRecording,Para)
 # show OSD
 			if LCD4linux.OSD.value != "0" and ConfigMode == False and FritzTime == 0:
 				if OSDon >= 2 and ((isMediaPlayer == "" and "T" in LCD4linux.OSDshow.value) or (isMediaPlayer == "radio" and "R" in LCD4linux.OSDshow.value)):
@@ -10898,13 +11051,6 @@ def LCD4linuxPIC(self,session):
 			Brief2.put([putPopup,Para, draw2, im2])
 		if "3" in LCD4linux.PopupLCD.value and LCD4linux.LCDType3.value != "00":
 			Brief2.put([putPopup,Para, draw3, im3])
-# show isRecording
-	if "1" in LCD4linux.Recording.value:
-		Brief1.put([putRecording,draw,im])
-	if "2" in LCD4linux.Recording.value and LCD4linux.LCDType2.value != "00":
-		Brief2.put([putRecording,draw2,im2])
-	if "3" in LCD4linux.Recording.value and LCD4linux.LCDType3.value != "00":
-		Brief3.put([putRecording,draw3,im3])
 # show isCrashlog
 	if LCD4linux.Crash.value == True:
 		Brief1.put([putCrash,draw,im])
