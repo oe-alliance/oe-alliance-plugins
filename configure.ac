@@ -42,6 +42,7 @@ AM_CONDITIONAL(ODIN, test `echo "$BOXTYPE" | cut -b 1-4` == "odin")
 AM_CONDITIONAL(EDISION, test `echo "$BOXTYPE" | cut -b 1-7` == "edision")
 AM_CONDITIONAL(JEPSSEN, test `echo "$BOXTYPE" | cut -b 1-7` == "jepssen")
 AM_CONDITIONAL(VENTON, test `echo "$BOXTYPE" | cut -b 1-6` == "venton")
+AM_CONDITIONAL(CUBE, test "$BOXTYPE" == cube)
 AM_CONDITIONAL(DM8000, test "$BOXTYPE" == dm8000)
 AM_CONDITIONAL(DM7020HD, test "$BOXTYPE" == dm7020hd)
 AM_CONDITIONAL(DM800, test "$BOXTYPE" == dm800)
@@ -193,6 +194,8 @@ LCD4linux/src/data/Clock6/Makefile
 LCD4linux/src/meteo/Makefile
 LCD4linux/src/renderer/Makefile
 LCD4linux/src/wetter/Makefile
+LCD4linux/src/arm/Makefile
+LCD4linux/src/mips/Makefile
 LCD4linux/meta/Makefile
 LCD4linux/po/Makefile
 
