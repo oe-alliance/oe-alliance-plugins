@@ -17,7 +17,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V3.8-r0"
+Version = "V3.8-r1"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -1904,14 +1904,14 @@ def ICSdownloads():
 	global ICSlist
 	global ICSdownrun
 	L4logE("ICSdownloads...",len(ICSlist))
-	if len(ICSlist)==0:
+	if len(ICSlist)==0 and LCD4linux.CalPlanerFS.value == False:
 		return
 	ICSdownrun = True
 	ICS.clear()
 	if LCD4linux.CalPlanerFS.value == True:
 		try:
 			from Plugins.Extensions.PlanerFS.PFSl4l import l4l_export
-			liste=l4l_export("50").planerfs_liste
+			liste=l4l_export("2").planerfs_liste
 			PlanerFSok = True
 			L4logE("PlanerFS registered")
 		except:
@@ -1941,7 +1941,6 @@ def ICSdownloads():
 						if ii[:2] == inew[:2]:
 							Doppel = True
 							L4logE("ICS ignore",inew)
-				L4log(Doppel)
 				if Doppel == False:
 					ICS[D].append(inew)
 					L4logE(D,inew)
@@ -10100,14 +10099,12 @@ def LCD4linuxPIC(self,session):
 				aa = ""
 				al = 1
 				font = ImageFont.truetype(ConfigFont, int(ConfigSize*0.8), encoding='unic')
-				w1,h1 = drawW.textsize("88. ", font=font)
+				w1,h1 = drawW.textsize("88.88. ", font=font)
 				for t in sorted(ICS):
-#					L4log(t)
 					x=datetime.strptime(t,"%Y-%m-%d")
 					DTx = date(x.year,x.month,x.day)-date.today()
-#					print timedelta(0), DTx, timedelta(int(LCD4linux.CalDays.value))
 					if DTx >= timedelta(0) and DTx <= timedelta(int(LCD4linux.CalDays.value)):
-						aa = "%02d. " % x.day
+						aa = "%02d.%02d. " % (x.day,x.month)
 						w,h = drawW.textsize(Code_utf8(aa), font=font)
 						POSX=w1-w
 						ShadowText(drawW,POSX, POSY, Code_utf8(aa), font, ConfigColor,ConfigShadow)
@@ -10117,9 +10114,7 @@ def LCD4linuxPIC(self,session):
 							if isinstance(x,datetime):
 								Time = x.time().strftime("%H:%M ")
 							else:
-#							if a[1].time().strftime("%H%M") == "0000":
 								Time = ""
-#							b.append("%s%s | " %(Time,a[0]))
 							b.append("%s%s" %(Time,a[0]))
 						for a in sorted(b):
 							aa += a
@@ -10128,15 +10123,10 @@ def LCD4linuxPIC(self,session):
 							al+=1
 							if al > int(ConfigTypeE[1]):
 								break
-#						w,h = drawW.textsize(Code_utf8(aa[:-2]), font=font)
-#						drawW.text((POSX, POSY), Code_utf8(aa[:-2]), font=font, fill=ConfigColor)
-#						POSY += h
-#						al+=1
 						if al > int(ConfigTypeE[1]):
 							break
 			if "D" == ConfigTypeE[0]:
 				aa = ""
-#				font = ImageFont.truetype(ConfigFont, int(ConfigSize), encoding='unic')
 				for t in sorted(ICS):
 					x=datetime.strptime(t,"%Y-%m-%d")
 					DTx = date(x.year,x.month,x.day)-date.today()
@@ -10199,7 +10189,6 @@ def LCD4linuxPIC(self,session):
 			for t in sorted(ICS):
 				x=datetime.strptime(t,"%Y-%m-%d")
 				DTx = date(x.year,x.month,x.day)-date.today()
-#					print timedelta(0), DTx, timedelta(int(LCD4linux.CalDays.value))
 				if DTx >= timedelta(0) and DTx <= timedelta(int(LCD4linux.CalDays.value)):
 					aa = "%02d.%02d. " % (x.day,x.month)
 					w,h = draw.textsize(Code_utf8(aa), font=font)

@@ -139,20 +139,23 @@ class LCD4linuxConfigweb(resource.Resource):
 		global ElementList
 		global ExeMode
 		global StatusMode
-		Block = True
 		IP = req.getClientIP()
-		WL = LCD4linux.WebIfAllow.value
-		for x in WL.split():
-			if IP.startswith(x):
-				Block = False
-				break
-		if "*" in WL:
+		if IP is None:
 			Block = False
-		WL = LCD4linux.WebIfDeny.value
-		for x in WL.split():
-			if IP.startswith(x):
-				Block = True
-				break
+		else:
+			Block = True
+			WL = LCD4linux.WebIfAllow.value
+			for x in WL.split():
+				if IP.startswith(x):
+					Block = False
+					break
+			if "*" in WL:
+				Block = False
+			WL = LCD4linux.WebIfDeny.value
+			for x in WL.split():
+				if IP.startswith(x):
+					Block = True
+					break
 		if Block == True:
 			html = "<html>"
 			html += "<head>\n"
@@ -384,6 +387,8 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<tr><td bgcolor=\"#000000\" width=\"220\">\n"
 		html += "<p align=\"center\"><img title=\"\" border=\"0\" src=\"/lcd4linux/data/WEBdreambox.png\" width=\"181\" height=\"10\">\n"
 		html += "<font color=\"#FFFFFF\"><b>LCD4linux Config</b></font><br />%s\n" % (Version if L4LVtest(Version)==True else Version+"?")
+		if IP is None:
+			html += "<br><span style=\"font-size:7pt;color: #FF0000\">%s!</span>" % _l(_("IP seurity sot supported by Box"))
 		html += "</p></td><td bgcolor=\"#000000\">\n"
 		html += "<p align=\"left\">"
 		d = glob.glob("%sdpf.*" % getTMPL())
