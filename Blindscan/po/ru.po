@@ -3,22 +3,29 @@ msgstr ""
 "Project-Id-Version: Blindscan\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: 2012-12-12 19:01+0100\n"
+"PO-Revision-Date: 2013-11-02 20:45+0400\n"
 "Last-Translator: xxx\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.3\n"
 
 #: ../src/plugin.py:282
-msgid "\"channel scan\" searches for channels and saves them to your receiver; \"save to XML file\" does a transponder search and saves found transponders to an XML file in satellites.xml format"
-msgstr "\"сканирование каналов\" сканировать и сохранить каналы в ресивере; \"сохранить в XML файле\" ищет по транспондерам и сохраняет в XML файлe в satellites.xml формате"
+msgid ""
+"\"channel scan\" searches for channels and saves them to your receiver; "
+"\"save to XML file\" does a transponder search and saves found transponders "
+"to an XML file in satellites.xml format"
+msgstr ""
+"\"сканирование каналов\" сканировать и сохранить каналы в ресивере; "
+"\"сохранить в XML файле\" ищет по транспондерам и сохраняет в XML файлe в "
+"satellites.xml формате"
 
-#: ../src/plugin.py:841
-#: ../src/plugin.py:849
-#: ../src/plugin.py:855
+#: ../src/plugin.py:841 ../src/plugin.py:849 ../src/plugin.py:855
 msgid "Blind Scan"
+msgstr "Слепой поиск"
+
+msgid "Blind scan"
 msgstr "Слепой поиск"
 
 #: ../src/plugin.py:45
@@ -29,8 +36,7 @@ msgstr "Слепой поиск"
 msgid "Clear before scan"
 msgstr "Очистить перед сканированием"
 
-#: ../src/plugin.py:80
-#: ../src/plugin.py:92
+#: ../src/plugin.py:80 ../src/plugin.py:92
 msgid "Exit"
 msgstr "Выход"
 
@@ -38,26 +44,45 @@ msgstr "Выход"
 msgid "Filter out adjacent satellites"
 msgstr "Отфильтровывать соседние спутники"
 
-#: ../src/plugin.py:273
-#: ../src/plugin.py:274
-msgid "Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the case of C-band satellites)"
-msgstr "Значение частот должны быть между 10700 и 12750 (или 3000 и 4200 в случае C-band диапазона)"
+#: ../src/plugin.py:273 ../src/plugin.py:274
+msgid ""
+"Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the "
+"case of C-band satellites)"
+msgstr ""
+"Значение частот должны быть между 10700 и 12750 (или 3000 и 4200 в случае C-"
+"band диапазона)"
 
 #: ../src/plugin.py:275
-msgid "If you are not sure what polarisations the satellite you wish to search transmits, select \"vertical and horizontal\""
-msgstr "Если вы не знаете поляризацию спутника, выберите \"вертикальная и горизонтальная\""
+msgid ""
+"If you are not sure what polarisations the satellite you wish to search "
+"transmits, select \"vertical and horizontal\""
+msgstr ""
+"Если вы не знаете поляризацию спутника, выберите \"вертикальная и "
+"горизонтальная\""
 
 #: ../src/plugin.py:278
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
-msgstr "Если вы выберите \"да\",все каналы, которые были найдены, будут удалены перед началом поиска"
+msgid ""
+"If you select \"yes\" all channels on the satellite being search will be "
+"deleted before starting the current search"
+msgstr ""
+"Если вы выберите \"да\",все каналы, которые были найдены, будут удалены "
+"перед началом поиска"
 
 #: ../src/plugin.py:279
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
-msgstr "Если вы выберите \"да\" , то ресивер будет искать только каналы без кодировки; \"нет\" будет искать кодированные и некодированные каналы"
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not "
+"encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgstr ""
+"Если вы выберите \"да\" , то ресивер будет искать только каналы без "
+"кодировки; \"нет\" будет искать кодированные и некодированные каналы"
 
 #: ../src/plugin.py:280
-msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
-msgstr "Если вы выберите \"да\" , то ресивер будет искать транспондеры не указанные в файле satellites.xml"
+msgid ""
+"If you select \"yes\" the scan will only search transponders not listed in "
+"satellites.xml"
+msgstr ""
+"Если вы выберите \"да\" , то ресивер будет искать транспондеры не указанные "
+"в файле satellites.xml"
 
 #: ../src/plugin.py:329
 msgid ""
@@ -75,8 +100,7 @@ msgstr ""
 "Введены неправильные данные. Измените и попробуйте снова.\n"
 "Значение частоты начала больше, чем значение конечной частоты."
 
-#: ../src/plugin.py:326
-#: ../src/plugin.py:340
+#: ../src/plugin.py:326 ../src/plugin.py:340
 msgid ""
 "Invalid parameters entered. Please correct and try again.\n"
 "Start frequency must be between 10700MHz and 12750MHz.\n"
@@ -120,8 +144,7 @@ msgstr ""
 "Введены неправильные данные. Измените и попробуйте снова.\n"
 "Значение начальной символьной скорости больше, чем значение конечной."
 
-#: ../src/plugin.py:318
-#: ../src/plugin.py:321
+#: ../src/plugin.py:318 ../src/plugin.py:321
 msgid ""
 "Invalid parameters entered. Please correct and try again.\n"
 "That is a C-band satellite so frequency values \n"
@@ -131,8 +154,7 @@ msgstr ""
 "Значение частоты в C-band диапазоне должны быть \n"
 "в диапазоне 3000MHz и 4200MHz."
 
-#: ../src/plugin.py:334
-#: ../src/plugin.py:337
+#: ../src/plugin.py:334 ../src/plugin.py:337
 msgid ""
 "Invalid parameters entered. Please correct and try again.\n"
 "That is a Ku-band satellite so frequency values \n"
@@ -265,18 +287,18 @@ msgid "Tuner"
 msgstr "Тюнер"
 
 #: ../src/plugin.py:281
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
-msgstr "Когда сигнал от соседнего спутника очень сильный, это позволяет избежать поиска ТП с этого спутника"
+msgid ""
+"When a neighbouring satellite is very strong this avoids searching "
+"transponders known to be coming from the neighbouring satellite"
+msgstr ""
+"Когда сигнал от соседнего спутника очень сильный, это позволяет избежать "
+"поиска ТП с этого спутника"
 
-#: ../src/plugin.py:232
-#: ../src/plugin.py:530
-#: ../src/plugin.py:533
+#: ../src/plugin.py:232 ../src/plugin.py:530 ../src/plugin.py:533
 msgid "circular left"
 msgstr "круговая левая"
 
-#: ../src/plugin.py:231
-#: ../src/plugin.py:528
-#: ../src/plugin.py:535
+#: ../src/plugin.py:231 ../src/plugin.py:528 ../src/plugin.py:535
 msgid "circular right"
 msgstr "круговая правая"
 
@@ -319,4 +341,3 @@ msgstr "вертикальная"
 #: ../src/plugin.py:227
 msgid "vertical and horizontal"
 msgstr "вертикальная и горизонтальная"
-
