@@ -3,7 +3,7 @@ from . import _
 
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigNumber, NoSave
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigInteger, NoSave
 from Components.ActionMap import ActionMap
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
@@ -20,8 +20,7 @@ transcodingsetupinit = None
 	
 config.plugins.transcodingsetup = ConfigSubsection()
 config.plugins.transcodingsetup.transcoding = ConfigSelection(default = "enable", choices = [ ("enable", _("enabled")), ("disable", _("disabled"))] )
-config.plugins.transcodingsetup.port = ConfigNumber(default = 8002)
-config.plugins.transcodingsetup.tsport = ConfigNumber(default = 8003)
+config.plugins.transcodingsetup.port = ConfigInteger(default = 8002, limits = (8002, 6555))
 if fileExists("/proc/stb/encoder/0/bitrate"):
 	if getBoxType() == "vusolo2":
 		config.plugins.transcodingsetup.bitrate = ConfigSelection(default = "100000", choices = [ ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("200000", "200 Kbits"), ("300000", "300 Kbits"), ("400000", "400 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
@@ -33,9 +32,8 @@ if fileExists("/proc/stb/encoder/0/framerate"):
 class TranscodingSetupInit:
 	def __init__(self):
 		self.pluginsetup = None
-		config.plugins.transcodingsetup.transcoding.addNotifier(self.setTranscoding)
-		config.plugins.transcodingsetup.port.addNotifier(self.setSteamPort)
-		config.plugins.transcodingsetup.tsport.addNotifier(self.setTSPort)
+		# config.plugins.transcodingsetup.transcoding.addNotifier(self.setTranscoding)
+		config.plugins.transcodingsetup.port.addNotifier(self.setPort)
 		if hasattr(config.plugins.transcodingsetup, "bitrate"):
 			config.plugins.transcodingsetup.bitrate.addNotifier(self.setBitrate)
 		if hasattr(config.plugins.transcodingsetup, "framerate"):
@@ -104,60 +102,40 @@ class TranscodingSetupInit:
 		if fileExists(procPath) and self.setConfig(procPath, framerate):
 			self.showMessage("Set refreshrate failed.", MessageBox.TYPE_ERROR)
 
-	def setSteamPort(self, configElement):
-		self.SteamPort = str(configElement.getValue())
-		self.TSPort = str(config.plugins.transcodingsetup.tsport.getValue())
-		print "[TranscodingSetup] set Channel port",self.SteamPort
-		self.setPort()
+	def setPort(self, configElement):
+		port = configElement.value
 
-	def setTSPort(self, configElement):
-		self.SteamPort = str(config.plugins.transcodingsetup.port.getValue())
-		self.TSPort = str(configElement.getValue())
-		print "[TranscodingSetup] set Channel port",self.TSPort
-		self.setPort()
-
-	def setPort(self):
+		print "[TranscodingSetup] set port",port
 		try:
 			fp = file('/etc/inetd.conf', 'r')
-			datas = fp.readlines()
+			datas = fp.read()
 			fp.close()
-		except:
-			print "file open error, inetd.conf!"
-			self.showMessage("Set port failed.", MessageBox.TYPE_ERROR)
-			return
-		try:
-			newdatas=""
-			s_port = ""
-			if self.SteamPort == "8001":
-				s_port = "8002"
-			else:
-				s_port = "8001"
-			for line in datas:
-				if line.find("transtreamproxy") != -1:
-					p=line.replace('\t',' ').find(' ')
-					line = self.SteamPort+line[p:]
-				elif line.find("filestreamproxy") != -1:
-					p=line.replace('\t',' ').find(' ')
-					line = self.TSPort+line[p:]
-				elif line.find("streamproxy") != -1:
-					p=line.replace('\t',' ').find(' ')
-					line = s_port+line[p:]
-				newdatas+=line
 
-			if newdatas.find("transtreamproxy") == -1:
-				newdatas+=self.SteamPort+'\t'+'stream'+'\t'+'tcp'+'\t'+'nowait'+'\t'+'root'+'\t'+'/usr/bin/transtreamproxy'+'\t'+'transtreamproxy\n'
-			if newdatas.find("filestreamproxy") == -1:
-				newdatas+=self.TSPort+'\t'+'stream'+'\t'+'tcp'+'\t'+'nowait'+'\t'+'root'+'\t'+'/usr/bin/filestreamproxy'+'\t'+'filestreamproxy\n'
+			newConfigData = ""
+			oldConfigData = datas
+			for L in oldConfigData.splitlines():
+				try:
+					if L[0] == '#':
+						newConfigData += L + '\n'
+						continue
+				except: continue
+				LL = L.split()
+				if LL[5] == '/usr/bin/transtreamproxy':
+					LL[0] = port
+				if LL[5] == '/usr/bin/filestreamproxy':
+					LL = ''
+				newConfigData += ''.join(str(X) + "\t" for X in LL) + '\n'
+
+			if newConfigData.find("transtreamproxy") == -1:
+				newConfigData += port + "/tstream\ttcp\tnowait\troot\t/usr/bin/transtreamproxy\ttranstreamproxy\n"
 			fd = file("/etc/inetd.conf",'w')
-			fd.write(newdatas)
+			fd.write(newConfigData)
 			fd.close()
 		except:
 			self.showMessage("Set port failed.", MessageBox.TYPE_ERROR)
 			return
+
 		self.inetdRestart()
-		if config.plugins.transcodingsetup.transcoding.value == "enable" and self.SteamPort == "8001":
-			msg = "Set port OK.\nPC Streaming is replaced with mobile streaming."
-			self.showMessage(msg, MessageBox.TYPE_INFO)
 
 	def inetdRestart(self):
 		if fileExists("/etc/init.d/inetd"):
@@ -223,11 +201,10 @@ class TranscodingSetup(Screen,ConfigListScreen):
 
 	def createSetup(self):
 		self.list = []
-		self.transcoding = getConfigListEntry(_("Transcoding"), config.plugins.transcodingsetup.transcoding)
-		self.list.append( self.transcoding )
+		# self.transcoding = getConfigListEntry(_("Transcoding"), config.plugins.transcodingsetup.transcoding)
+		# self.list.append( self.transcoding )
 		if config.plugins.transcodingsetup.transcoding.value == "enable":
 			self.list.append(getConfigListEntry(_("Channel Port"), config.plugins.transcodingsetup.port))
-			self.list.append(getConfigListEntry(_("Media Port"), config.plugins.transcodingsetup.tsport))
 			if hasattr(config.plugins.transcodingsetup, "bitrate"):
 				self.list.append(getConfigListEntry(_("Bitrate"), config.plugins.transcodingsetup.bitrate))
 			if hasattr(config.plugins.transcodingsetup, "framerate"):
@@ -240,8 +217,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 
 	def keySave(self):
 		self.saveAll()
-		transcodingsetupinit.setSteamPort(config.plugins.transcodingsetup.port)
-		transcodingsetupinit.setTSPort(config.plugins.transcodingsetup.tsport)
+		transcodingsetupinit.setPort(config.plugins.transcodingsetup.port)
 		self.close()
 
 	def KeyDefault(self):
@@ -263,7 +239,6 @@ class TranscodingSetup(Screen,ConfigListScreen):
 		configlist = []
 		configlist.append(config.plugins.transcodingsetup.transcoding)
 		configlist.append(config.plugins.transcodingsetup.port)
-		configlist.append(config.plugins.transcodingsetup.tsport)
 		configlist.append(config.plugins.transcodingsetup.bitrate)
 		configlist.append(config.plugins.transcodingsetup.framerate)
 		for x in configlist:
@@ -281,8 +256,6 @@ class TranscodingSetup(Screen,ConfigListScreen):
 	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
-		if self["config"].getCurrent() == self.transcoding:
-			self.createSetup()
 
 	def getCurrentEntry(self):
 		return self["config"].getCurrent()[0]
@@ -301,4 +274,3 @@ def Plugins(**kwargs):
 	return [PluginDescriptor(name=_("TranscodingSetup"), description=_("Transcoding Setup"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main)]
 
 transcodingsetupinit = TranscodingSetupInit()
-
