@@ -441,7 +441,7 @@ class VFD_Giga:
 		self.onClose = [ ]
 
 		self.Console = Console()
-		self.firstinit = 0
+
 		initVFD()
 		self.Timer = eTimer()
 		self.Timer.callback.append(self.delay_init)
