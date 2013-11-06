@@ -258,10 +258,12 @@ class TranscodingSetup(Screen,ConfigListScreen):
 			x()
 
 	def getCurrentEntry(self):
-		return self["config"].getCurrent()[0]
+		if self["config"].getCurrent():
+			return self["config"].getCurrent()[0]
 
 	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].getText())
+		if self["config"].getCurrent():
+			return str(self["config"].getCurrent()[1].getText())
 
 	def createSummary(self):
 		from Screens.Setup import SetupSummary
