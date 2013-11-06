@@ -204,7 +204,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 		# self.transcoding = getConfigListEntry(_("Transcoding"), config.plugins.transcodingsetup.transcoding)
 		# self.list.append( self.transcoding )
 		if config.plugins.transcodingsetup.transcoding.value == "enable":
-			self.list.append(getConfigListEntry(_("Channel Port"), config.plugins.transcodingsetup.port))
+			self.list.append(getConfigListEntry(_("Port"), config.plugins.transcodingsetup.port))
 			if hasattr(config.plugins.transcodingsetup, "bitrate"):
 				self.list.append(getConfigListEntry(_("Bitrate"), config.plugins.transcodingsetup.bitrate))
 			if hasattr(config.plugins.transcodingsetup, "framerate"):
