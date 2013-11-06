@@ -20,7 +20,7 @@ transcodingsetupinit = None
 	
 config.plugins.transcodingsetup = ConfigSubsection()
 config.plugins.transcodingsetup.transcoding = ConfigSelection(default = "enable", choices = [ ("enable", _("enabled")), ("disable", _("disabled"))] )
-config.plugins.transcodingsetup.port = ConfigInteger(default = 8002, limits = (8002, 6555))
+config.plugins.transcodingsetup.port = ConfigInteger(default = 8002, limits = (8002, 9999))
 if fileExists("/proc/stb/encoder/0/bitrate"):
 	if getBoxType() == "vusolo2":
 		config.plugins.transcodingsetup.bitrate = ConfigSelection(default = "100000", choices = [ ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("200000", "200 Kbits"), ("300000", "300 Kbits"), ("400000", "400 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
