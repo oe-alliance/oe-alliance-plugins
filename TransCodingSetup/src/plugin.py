@@ -139,10 +139,10 @@ class TranscodingSetupInit:
 class TranscodingSetup(Screen,ConfigListScreen):
 	def __init__(self,session):
 		Screen.__init__(self,session)
-		self.setTitle(_("Transcoding Setup"))
 		self.onChangedEntry = [ ]
-		self.skinName = ["Setup" ]
-		self.setup_title = _("Video enhancement setup")
+		self.skinName = ["TranscodingSetup", "Setup"]
+		self.setup_title = _("Transcoding Setup")
+		self.setTitle(self.setup_title)
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
