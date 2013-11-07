@@ -19,7 +19,6 @@ from __init__ import _
 transcodingsetupinit = None
 	
 config.plugins.transcodingsetup = ConfigSubsection()
-config.plugins.transcodingsetup.transcoding = ConfigSelection(default = "enable", choices = [ ("enable", _("enabled")), ("disable", _("disabled"))] )
 config.plugins.transcodingsetup.port = ConfigInteger(default = 8002, limits = (8002, 9999))
 if fileExists("/proc/stb/encoder/0/bitrate"):
 	if getBoxType() == "vusolo2":
@@ -32,12 +31,12 @@ if fileExists("/proc/stb/encoder/0/framerate"):
 class TranscodingSetupInit:
 	def __init__(self):
 		self.pluginsetup = None
-		# config.plugins.transcodingsetup.transcoding.addNotifier(self.setTranscoding)
 		config.plugins.transcodingsetup.port.addNotifier(self.setPort)
 		if hasattr(config.plugins.transcodingsetup, "bitrate"):
 			config.plugins.transcodingsetup.bitrate.addNotifier(self.setBitrate)
 		if hasattr(config.plugins.transcodingsetup, "framerate"):
 			config.plugins.transcodingsetup.framerate.addNotifier(self.setFramerate)
+		self.setTranscoding()
 
 	def setConfig(self, procPath, value):
 		if not fileExists(procPath):
@@ -66,19 +65,9 @@ class TranscodingSetupInit:
 			print "setConfig exception error (%s > %s)" % ( value, procPath )
 			return -1
 
-	def setTranscoding(self, configElement):
-		encoder = configElement.getValue()
-		encodertext = configElement.getText()
+	def setTranscoding(self):
 		procPath = "/proc/stb/encoder/enable"
-		if self.setConfig(procPath, encoder):
-			self.showMessage("Set encoder %s failed."%encodertext, MessageBox.TYPE_ERROR)
-		elif encoder == "enable" and config.plugins.transcodingsetup.port.value == "8001":
-			msg = "OK. Encoder enable.\nPC Streaming is replaced with mobile streaming."
-			self.showMessage(msg, MessageBox.TYPE_INFO)
-		else:
-			self.showMessage("OK. Encoder %s."%encodertext, MessageBox.TYPE_INFO)
-			if encoder == "disabled":
-				config.plugins.transcodingsetup.port.value = "8002"
+		self.setConfig(procPath, 'enable')
 
 	def setBitrate(self, configElement):
 		bitrate = configElement.value
@@ -201,14 +190,11 @@ class TranscodingSetup(Screen,ConfigListScreen):
 
 	def createSetup(self):
 		self.list = []
-		# self.transcoding = getConfigListEntry(_("Transcoding"), config.plugins.transcodingsetup.transcoding)
-		# self.list.append( self.transcoding )
-		if config.plugins.transcodingsetup.transcoding.value == "enable":
-			self.list.append(getConfigListEntry(_("Port"), config.plugins.transcodingsetup.port))
-			if hasattr(config.plugins.transcodingsetup, "bitrate"):
-				self.list.append(getConfigListEntry(_("Bitrate"), config.plugins.transcodingsetup.bitrate))
-			if hasattr(config.plugins.transcodingsetup, "framerate"):
-				self.list.append(getConfigListEntry(_("Framerate"), config.plugins.transcodingsetup.framerate))
+		self.list.append(getConfigListEntry(_("Port"), config.plugins.transcodingsetup.port))
+		if hasattr(config.plugins.transcodingsetup, "bitrate"):
+			self.list.append(getConfigListEntry(_("Bitrate"), config.plugins.transcodingsetup.bitrate))
+		if hasattr(config.plugins.transcodingsetup, "framerate"):
+			self.list.append(getConfigListEntry(_("Framerate"), config.plugins.transcodingsetup.framerate))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -222,7 +208,6 @@ class TranscodingSetup(Screen,ConfigListScreen):
 
 	def KeyDefault(self):
 		config.plugins.transcodingsetup.port.value = config.plugins.transcodingsetup.port.default
-		config.plugins.transcodingsetup.tsport.value = config.plugins.transcodingsetup.tsport.default
 		if hasattr(config.plugins.transcodingsetup, "bitrate"):
 			config.plugins.transcodingsetup.bitrate.value = config.plugins.transcodingsetup.bitrate.default
 		if hasattr(config.plugins.transcodingsetup, "framerate"):
@@ -237,7 +222,6 @@ class TranscodingSetup(Screen,ConfigListScreen):
 		if not result:
 			return
 		configlist = []
-		configlist.append(config.plugins.transcodingsetup.transcoding)
 		configlist.append(config.plugins.transcodingsetup.port)
 		configlist.append(config.plugins.transcodingsetup.bitrate)
 		configlist.append(config.plugins.transcodingsetup.framerate)
