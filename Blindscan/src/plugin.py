@@ -222,6 +222,24 @@ class Blindscan(ConfigListScreen, Screen):
 		else:
 			print "getResourceManager instance failed"
 		return False
+		
+	def prepareFrontend(self):
+		self.frontend = None
+		if hasattr(self, 'raw_channel'):
+			del self.raw_channel
+		if not self.openFrontend():
+			self.oldref = self.session.nav.getCurrentlyPlayingServiceReference()
+			self.session.nav.stopService()
+			if not self.openFrontend():
+				if self.session.pipshown:
+					self.session.pipshown = False
+					del self.session.pip
+					self.openFrontend()
+		if self.frontend == None :
+			self.session.open(MessageBox, _("Sorry, this tuner is in use."), MessageBox.TYPE_ERROR)
+			return False
+		self.tuner = Tuner(self.frontend)
+		return True
 
 	def createConfig(self):
 		self.feinfo = None
@@ -316,6 +334,7 @@ class Blindscan(ConfigListScreen, Screen):
 		for slot in nimmanager.nim_slots:
 			if slot.isCompatible("DVB-S"):
 				self.scan_satselection.append(getConfigSatlist(defaultSat["orbpos"], self.satList[slot.slot]))
+		self.frontend = None # set for later use
 		return True
 
 	def getSelectedSatIndex(self, v):
@@ -367,14 +386,13 @@ class Blindscan(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Search type"), self.search_type,_('"channel scan" searches for channels and saves them to your receiver; "save to XML file" does a transponder search and saves found transponders to an XML file in satellites.xml format')))
 			self["config"].list = self.list
 			self["config"].l.setList(self.list)
+			self.startDishMovingIfRotorSat()
 
 	def newConfig(self):
 		cur = self["config"].getCurrent()
 		print "cur is", cur
 		if cur == self.tunerEntry or \
-			cur == self.systemEntry or \
-			cur == self.satelliteEntry or \
-			(self.modulationEntry and self.systemEntry[1].value == eDVBFrontendParametersSatellite.System_DVB_S2 and cur == self.modulationEntry):
+			cur == self.satelliteEntry:
 			self.createSetup()
 
 	def keyLeft(self):
@@ -515,19 +533,8 @@ class Blindscan(ConfigListScreen, Screen):
 
 		returnvalue = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
-		self.frontend = None
-		if not self.openFrontend():
-			self.oldref = self.session.nav.getCurrentlyPlayingServiceReference()
-			self.session.nav.stopService()
-			if not self.openFrontend():
-				if self.session.pipshown:
-					self.session.pipshown = False
-					del self.session.pip
-					self.openFrontend()
-		if self.frontend == None :
-			self.session.open(MessageBox, _("Sorry, this tuner is in use."), MessageBox.TYPE_ERROR)
+		if not self.prepareFrontend():
 			return False
-		self.tuner = Tuner(self.frontend)
 
 		if self.is_c_band_scan :
 			self.scan_sat.frequency.value = 3600
@@ -682,9 +689,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.blindscan_container = None
 		time.sleep(2)
 
-		if self.frontend:
-			self.frontend = None
-			del self.raw_channel
+		self.releaseFrontend()
 
 		if val[0] == False:
 			self.tmp_tplist = []
@@ -886,7 +891,7 @@ class Blindscan(ConfigListScreen, Screen):
 		xml.append('<!--\n')
 		xml.append('	File created on %s\n' % (strftime("%A, %d of %B %Y, %H:%M:%S")))
 		xml.append('	using %s receiver running Enigma2 image, version %s,\n' % (getBoxType(), versionstring))
-		xml.append('	build %s, with the blindscan plugin updated by Huevos\n\n' % (buildstring))
+		xml.append('	build %s, with the blindscan plugin \n\n' % (buildstring))
 		xml.append('	Search parameters:\n')
 		xml.append('		Tuner: %s\n' % (tuner[self.feid]))
 		xml.append('		Satellite: %s\n' % (self.sat_name))
@@ -956,6 +961,36 @@ class Blindscan(ConfigListScreen, Screen):
 			self.session.nav.playService(self.session.postScanService)
 			self.close(True)
 		
+	def startDishMovingIfRotorSat(self):
+		orb_pos = self.getOrbPos()
+		self.feid = int(self.scan_nims.value)
+		rotorSatsForNim = nimmanager.getRotorSatListForNim(self.feid)
+		if len(rotorSatsForNim) < 1:
+			self.releaseFrontend() # stop dish if moving due to previous call
+			return False
+		rotorSat = False
+		for sat in rotorSatsForNim:
+			if sat[0] == orb_pos:
+				rotorSat = True
+				break
+		if not rotorSat:
+			self.releaseFrontend() # stop dish if moving due to previous call
+			return False
+		tps = nimmanager.getTransponders(orb_pos)
+		if len(tps) < 1:
+			return False
+		# freq, sr, pol, fec, inv, orb, sys, mod, roll, pilot 
+		transponder = (tps[0][1] / 1000, tps[0][2] / 1000, tps[0][3], tps[0][4], 2, orb_pos, tps[0][5], tps[0][6], tps[0][8], tps[0][9])
+		if not self.prepareFrontend():
+			return False
+		self.tuner.tune(transponder)
+		return True
+
+	def releaseFrontend(self):
+		if self.frontend:
+			self.frontend = None
+			del self.raw_channel
+
 def main(session, close=None, **kwargs):
 	session.openWithCallback(close, Blindscan)
 
