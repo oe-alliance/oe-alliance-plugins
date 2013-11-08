@@ -455,6 +455,7 @@ class AutoAutoBouquetsMakerTimer:
 		# If we're close enough, we're okay...
 		atLeast = 0
 		if wake - now < 60:
+			atLeast = 60
 			print>>log, "[AutoBouquetsMaker] AutoBouquetsMaker onTimer occured at", strftime("%c", localtime(now))
 			from Screens.Standby import inStandby
 			if not inStandby:
@@ -463,8 +464,7 @@ class AutoAutoBouquetsMakerTimer:
 				ybox.setTitle('Scheduled AutoBouquetsMaker.')
 			else:
 				self.doAutoBouquetsMaker(True)
-		else:
-			self.autobouquetsmakerdate(60)
+		self.autobouquetsmakerdate(atLeast)
 
 	def doAutoBouquetsMaker(self, answer):
 		now = int(time())
