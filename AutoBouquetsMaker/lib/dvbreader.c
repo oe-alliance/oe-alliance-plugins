@@ -36,6 +36,18 @@ PyObject *ss_open(PyObject *self, PyObject *args) {
 	case 3:
 		ssource = DMX_SOURCE_FRONT3;
 		break;
+	case 4:
+		ssource = DMX_SOURCE_FRONT4;
+		break;
+	case 5:
+		ssource = DMX_SOURCE_FRONT5;
+		break;
+	case 6:
+		ssource = DMX_SOURCE_FRONT6;
+		break;
+	case 7:
+		ssource = DMX_SOURCE_FRONT7;
+		break;
 	default:
 		ssource = DMX_SOURCE_FRONT0;
 	}
