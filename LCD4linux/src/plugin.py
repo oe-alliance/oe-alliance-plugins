@@ -8482,6 +8482,7 @@ def LCD4linuxPIC(self,session):
 			else:
 				useCache = False
 				fields = picon.split('_', 3)
+				piconnew = ""
 				if len(fields) > 2 and fields[2] != '2':
 					#fallback to 1 for tv services with nonstandard servicetypes
 					fields[2] = '1'
