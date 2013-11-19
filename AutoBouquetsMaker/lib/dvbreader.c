@@ -25,20 +25,7 @@ PyObject *ss_open(PyObject *self, PyObject *args) {
 	sfilter.timeout = 0;
 	sfilter.flags = DMX_IMMEDIATE_START | DMX_CHECK_CRC;
 	
-	switch(frontend)
-	{
-	case 1:
-		ssource = DMX_SOURCE_FRONT1;
-		break;
-	case 2:
-		ssource = DMX_SOURCE_FRONT2;
-		break;
-	case 3:
-		ssource = DMX_SOURCE_FRONT3;
-		break;
-	default:
-		ssource = DMX_SOURCE_FRONT0;
-	}
+	ssource = DMX_SOURCE_FRONT0 + frontend;
 
 	if ((fd = open(demuxer, O_RDWR | O_NONBLOCK)) < 0) {
 		printf("Cannot open demuxer '%s'", demuxer);

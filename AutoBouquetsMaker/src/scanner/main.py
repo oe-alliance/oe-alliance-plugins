@@ -219,18 +219,17 @@ class AutoBouquetsMaker(Screen):
 
 		nimList.reverse() # start from the last
 		for slotid in nimList:
-			if slotid <= 3: # only support first 4 frontends.
-				sats = nimmanager.getSatListForNim(slotid)
-				for sat in sats:
-					if sat[0] == transponder["orbital_position"]:
-						if current_slotid == -1:	# mark the first valid slotid in case of no other one is free
-							current_slotid = slotid
+			sats = nimmanager.getSatListForNim(slotid)
+			for sat in sats:
+				if sat[0] == transponder["orbital_position"]:
+					if current_slotid == -1:	# mark the first valid slotid in case of no other one is free
+						current_slotid = slotid
 
-						self.rawchannel = resmanager.allocateRawChannel(slotid)
-						if self.rawchannel:
-							print>>log, "[AutoBouquetsMaker] Nim found on slot id %d with sat %s" % (slotid, sat[1])
-							current_slotid = slotid
-							break
+					self.rawchannel = resmanager.allocateRawChannel(slotid)
+					if self.rawchannel:
+						print>>log, "[AutoBouquetsMaker] Nim found on slot id %d with sat %s" % (slotid, sat[1])
+						current_slotid = slotid
+						break
 
 			if self.rawchannel:
 				break
