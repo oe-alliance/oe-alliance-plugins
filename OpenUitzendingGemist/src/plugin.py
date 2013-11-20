@@ -64,7 +64,7 @@ def MPanelEntryComponent(channel, text, png):
 class MPanelList(MenuList):
 	def __init__(self, list, selection = 0, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", 22))
+		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setItemHeight(120)
 		self.selection = selection
 
@@ -284,8 +284,8 @@ class OpenUgSetupScreen(Screen):
 		self.mmenu.append((_("UG Popular"), 'pop'))
 		self.mmenu.append((_("UG Gemist"), 'ugback'))
 		self.mmenu.append((_("RTL XL A-Z"), 'rtl'))
-		self.mmenu.append((_("RTL XL Gemist"), 'rtlback'))
-		self.mmenu.append((_("RTL XL Search"), 'rsearch'))
+		#self.mmenu.append((_("RTL XL Gemist"), 'rtlback'))
+		#self.mmenu.append((_("RTL XL Search"), 'rsearch'))
 		self.mmenu.append((_("NET5 Gemist"), 'net5'))
 		self.mmenu.append((_("SBS6 Gemist"), 'sbs6'))
 		self.mmenu.append((_("Veronica Gemist"), 'veronica'))
@@ -482,7 +482,7 @@ class OpenUg(Screen):
 		self.cmd = cmd
 		self.timerCmd = self.TIMER_CMD_START
 
-		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/oe-alliance.png"))
+		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/pli.png"))
 
 		self.tmplist = []
 		self.mediaList = []
@@ -533,7 +533,7 @@ class OpenUg(Screen):
 	def getThumbnailName(self, x):
 		if self.isRtl:
 			if x[self.UG_ICON]:
-				return str(x[self.UG_ICON]).split("/uuid=")[1].split("/")[0] + ".jpg"
+				return ""
 			else:
 				return ""
 		return str(x[self.UG_STREAMURL]) + str(x[self.UG_ICONTYPE])
@@ -620,7 +620,7 @@ class OpenUg(Screen):
 			self.clearList()
 			self.isRtl = True
 			self.level = self.UG_LEVEL_ALL
-			self.getRTLMediaData(self.mediaList, self.RTL_BASE_URL + "programmalijst.php")
+			self.getRTLMediaData(self.mediaList, "http://www.rtl.nl/system/s4m/ipadfd/d=ipad/fun=az/fmt=progressive")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup()
 			else:
@@ -794,7 +794,7 @@ class OpenUg(Screen):
 				self.updateMenu()
 				self.loadPicPage()
 			elif self.level == self.UG_LEVEL_SERIE:
-				tmp = self.getRTLStream(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
+				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
 				if tmp != '':
 					myreference = eServiceReference(4097, 0, tmp)
 					myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
@@ -836,56 +836,9 @@ class OpenUg(Screen):
 		return ''
 
 	def getRTLSerie(self, weekList, url):
-		data = wgetUrl(self.RTL_BASE_URL + url)
-		data = data.split('\n')
-		state = 0
-		name = ''
-		short = ''
-		icon = ''
-		stream = ''
-		date = ''
-		channel = ''
-		for line in data:
-			if "<li>" in line:
-				state = 1
-			if state == 1:
-				tmp = "<a href=\"video"
-				if tmp in line:
-					tmp = "<a href=\""
-					stream = line.split(tmp)[1].split('\">')[0]
-
-				tmp = "<img class=\"thumbnail\" src=\""
-				if tmp in line:
-					icon = line.split(tmp)[1].split('\" ')[0]
-
-				tmp = "<span class=\"title\">"
-				if tmp in line:
-					name = line.split(tmp)[1].split('</span>')[0]
-					state = 2
-
-			elif state == 2:
-				if '<span class=\"extra_info\">' in line:
-					continue
-				short = line.split("<br />")[0].lstrip()
-				state = 3
-
-			elif state == 3:
-				tmp = '<span class=\"extra_info\">'
-				if tmp in line:
-					continue
-				tmp = "<span class=\"small\">"
-				if tmp in line:
-					date = short
-					short = line.split(tmp)[1].split('</span>')[0]
-				else:
-					date = ' '.join(line.split())
-				icon_type = self.getIconType(icon)
-				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
-				state = 0
-
-	def getRTLMediaData(self, weekList, url):
+		url = 'http://www.rtl.nl/system/s4m/ipadfd/d=ipad/fmt=progressive/ak=' + url
 		data = wgetUrl(url)
-		data = data.split('\n')
+		data = data.split('</item>')
 		state = 0
 		name = ''
 		short = ''
@@ -895,25 +848,61 @@ class OpenUg(Screen):
 		channel = ''
 		for line in data:
 			if state == 0:
-				if "</li>" in line:
+				if "<movie>" in line:
 					state = 1
 			if state == 1:
-				tmp = "<a href=\""
+				tmp = "<movie>"
 				if tmp in line:
-					stream = line.split(tmp)[1].split('\">')[0]
+					tmp = "<movie>"
+					stream = line.split(tmp)[1].split('</movie>')[0]
+				tmp = "<thumbnail>"
+				if tmp in line:
+					icon = line.split(tmp)[1].split('</thumbnail>')[0]
+					icon_type = icon
+				tmp = "<title>"
+				if tmp in line:
+					name = line.split(tmp)[1].split('</title>')[0]
+				tmp = '<samenvattingkort>'
+				if tmp in line:
+					short = line.split(tmp)[1].split("</samenvattingkort>")[0]
+				tmp = "<broadcastdatetime>"
+				if tmp in line:
+					date = line.split(tmp)[1].split('</broadcastdatetime>')[0].replace('T', ' ')
+				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
+				state = 0
+			
+			if state == 2:
+				weekList.append((date, 'No episodes found', 'Sorry', channel, stream, icon, icon, False))
 
-				tmp = "<span class=\"title\">"
+	def getRTLMediaData(self, weekList, url):
+		data = wgetUrl(url)
+		data = data.split('</serieitem>')
+		state = 0
+		name = ''
+		short = ''
+		icon = ''
+		stream = ''
+		date = ''
+		channel = ''
+		for line in data:
+			if state == 0:
+				if "<itemsperserie_url>" in line:
+					state = 1
+			if state == 1:
+				tmp = "<serieskey>"
 				if tmp in line:
-					name = line.split(tmp)[1].split("</span>")[0]
-					icon_type = self.getIconType(icon)
-					ignore = False
-					for x in weekList:
-						if stream == x[self.UG_STREAMURL] and icon == x[self.UG_ICON]:
-							ignore = True
-							break
-					if ignore is False:
-						weekList.append((date, name, short, channel, stream, icon, icon_type, True))
-					state = 0
+					stream = line.split(tmp)[1].split('</serieskey>')[0]
+					
+				tmp = "<seriescoverurl>"
+				if tmp in line:
+					icon = line.split(tmp)[1].split('</seriescoverurl>')[0]
+					icon_type = icon
+				
+				tmp = "<serienaam>"
+				if tmp in line:
+					name = line.split(tmp)[1].split('</serienaam>')[0]
+				weekList.append((date, name, short, channel, stream, icon, icon_type, True))
+				state = 0
 
 	def getRTLMediaDataBack(self, weekList, days):
 		url = self.RTL_BASE_URL + "?daysback=" + '%d' % (days)
@@ -987,20 +976,20 @@ class OpenUg(Screen):
 				stream = line.split(tmp)[1].split('"')[0]
 			tmp = "<img class=\"vid_view\" src=\""
 			if tmp in line:
-				icon = line.split(tmp)[1].split("\" />")[0]	
+				icon = line.split(tmp)[1].split("\" />")[0]
 			tmp = "<p class=\"titleshort\">"
 			if tmp in line:
 				short = line.split(tmp)[1].split("</p>")[0]
 			tmp = "<p class=\"title\">"
 			if tmp in line:
-				name = line.split(tmp)[1].split("</p>")[0]	
+				name = line.split(tmp)[1].split("</p>")[0]
 			tmp = "<p class=\"date_time bottom\">"
 			if tmp in line:
-				date = line.split(tmp)[1].split("</p>")[0]	
+				date = line.split(tmp)[1].split("</p>")[0]
 			if stream and date and name and short and icon:
 				icon_type = self.getIconType(icon)
 				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
-			j = j +1
+			j = j + 1
 
 	def sbsGetProgramList(self, progList):
 		out = wgetUrl('%s/stations/%s/pages/kijk' % (self.SBS_BASE_URL, self.channel))
@@ -1011,7 +1000,7 @@ class OpenUg(Screen):
 			stream = ''
 			icon = ''
 			icon_type = ''
-			if '<li ><a href=\\\"javascript:sbs.SecondScreen.Utils.loadPage(\'kijkdetail?videoId=' in x:
+			if '<li ><a href=\\\"javascript:SBS.SecondScreen.Utils.loadPage(\'kijkdetail?videoId=' in x:
 				name = x.split('>')[2].split('<')[0]
 				stream = x.split('>')[1].split('videoId=')[1].split('\'')[0]
 				progList.append((date, name, '', '', stream, icon, icon_type, False))
@@ -1092,3 +1081,4 @@ def Plugins(**kwargs):
 
 	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="oe-alliance.png", fnc = main),
 			PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]
+
