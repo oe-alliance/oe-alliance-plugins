@@ -10,5 +10,8 @@ install_DATA = plugin.png History.txt
 if CUBE
 SUBDIRS += arm
 else
-SUBDIRS += mips
+	if SU980
+	SUBDIRS += arm
+	else
+	SUBDIRS += mips
 endif
