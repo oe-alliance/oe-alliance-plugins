@@ -120,7 +120,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		{
 				"ok": self.ok,
 				"cancel": self.leavePlayer,
-				"stop": self.leavePlayer,
+				"stop": self.handleLeave,
 				"showEventInfo": self.showVideoInfo,
 			}, -2)
 		self.hidetimer = eTimer()
@@ -286,9 +286,9 @@ class OpenUgSetupScreen(Screen):
 		self.mmenu.append((_("RTL XL A-Z"), 'rtl'))
 		#self.mmenu.append((_("RTL XL Gemist"), 'rtlback'))
 		#self.mmenu.append((_("RTL XL Search"), 'rsearch'))
-		self.mmenu.append((_("NET5 Gemist"), 'net5'))
 		self.mmenu.append((_("SBS6 Gemist"), 'sbs6'))
 		self.mmenu.append((_("Veronica Gemist"), 'veronica'))
+		self.mmenu.append((_("NET5 Gemist"), 'net5'))
 		self.mmenu.append((_("Setup"), 'setup'))
 		self["menu"] = MenuList(self.mmenu)
 
@@ -383,7 +383,6 @@ class DaysBackScreen(Screen):
 	def keyGo(self):
 		selection = self["menu"].l.getCurrentSelection()
 		self.session.open(OpenUg, selection[1])
-		self.close()
 
 	def keyCancel(self):
 		self.close()
@@ -426,7 +425,6 @@ class UgDaysBackScreen(Screen):
 	def keyGo(self):
 		selection = self["menu"].l.getCurrentSelection()
 		self.session.open(OpenUg, selection[1])
-		self.close()
 
 	def keyCancel(self):
 		self.close()
@@ -442,6 +440,7 @@ class OpenUg(Screen):
 	UG_ICONTYPE = 6
 	UG_LEVEL_ALL = 0
 	UG_LEVEL_SERIE = 1
+	UG_LEVEL_SEASON = 2
 	MAX_PIC_PAGE = 5
 
 	TIMER_CMD_START = 0
@@ -482,7 +481,7 @@ class OpenUg(Screen):
 		self.cmd = cmd
 		self.timerCmd = self.TIMER_CMD_START
 
-		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/pli.png"))
+		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/oe-alliance.png"))
 
 		self.tmplist = []
 		self.mediaList = []
@@ -507,7 +506,15 @@ class OpenUg(Screen):
 		self.cbTimer.start(10)
 
 	def layoutFinished(self):
-		self.setTitle("Open Uitzending Gemist")
+		if self.cmd == None or self.cmd == '':
+			self.setTitle("Open Uitzending Gemist")
+		elif '|' in str(self.cmd):
+			title = self.cmd.split('|')[0]
+			self.setTitle("Open Uitzending Gemist " + title)
+		elif 'sbs6' == self.cmd or 'veronica' == self.cmd or 'net5' == self.cmd or 'rtl' == self.cmd:
+			self.setTitle("Open Uitzending Gemist " + self.cmd)
+		else:
+			self.setTitle("Open Uitzending Gemist NPO")
 
 	def updatePage(self):
 		if self.page != self["list"].getSelectedIndex() / self.MAX_PIC_PAGE:
@@ -569,7 +576,7 @@ class OpenUg(Screen):
 				if self.isRtlBack:
 					doExit = True
 				else:
-					self.setupCallback("rtl")
+					doExit = True
 			else:
 				doExit = True
 		if doExit:
@@ -585,8 +592,43 @@ class OpenUg(Screen):
 	def setupCallback(self, retval = None):
 		if retval == 'cancel' or retval is None:
 			return
+			
+		if '|' in str(retval):
+			retval = retval.split('|')
+			if retval[0] == 'sbs':
+				tmp = retval[1]
+				self.clearList()
+				self.isSbs = True
+				self.channel = retval[2]
+				self.level = self.UG_LEVEL_SERIE
+				self.sbsGetEpisodeList(self.mediaList, tmp)
+				if len(self.mediaList) == 0:
+					self.mediaProblemPopup()
+				else:
+					self.updateMenu()
+			elif retval[0] == 'rtlseason':
+				tmp = retval[1]
+				self.clearList()
+				self.isRtl = True
+				self.level = self.UG_LEVEL_SEASON
+				self.getRTLMediaDataSeason(self.mediaList, tmp)
+				if len(self.mediaList) == 0:
+					self.mediaProblemPopup()
+				else:
+					self.updateMenu()
+			elif retval[0] == 'rtlepisode':
+				tmp = retval[1]
+				Skey = retval[2]
+				self.clearList()
+				self.isRtl = True
+				self.level = self.UG_LEVEL_SERIE
+				self.getRTLSerie(self.mediaList, tmp, Skey)
+				if len(self.mediaList) == 0:
+					self.mediaProblemPopup()
+				else:
+					self.updateMenu()
 
-		if retval == 'uitgelicht':
+		elif retval == 'uitgelicht':
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
 			offset = 0
@@ -620,7 +662,7 @@ class OpenUg(Screen):
 			self.clearList()
 			self.isRtl = True
 			self.level = self.UG_LEVEL_ALL
-			self.getRTLMediaData(self.mediaList, "http://www.rtl.nl/system/s4m/ipadfd/d=ipad/fun=az/fmt=progressive")
+			self.getRTLMediaData(self.mediaList, "http://www.rtl.nl/system/s4m/vfd/version=1/d=pc/output=json/fun=az/fmt=smooth")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup()
 			else:
@@ -773,11 +815,7 @@ class OpenUg(Screen):
 		if self.isSbs:
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.clearList()
-				self.sbsGetEpisodeList(self.mediaList, tmp)
-				self.level = self.UG_LEVEL_SERIE
-				self.updateMenu()
-				self.loadPicPage()
+				self.session.open(OpenUg, 'sbs|' + tmp + '|' + self.channel)
 			elif self.level == self.UG_LEVEL_SERIE:
 				tmp = self.sbsGetMediaUrl(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
 				if tmp != '':
@@ -788,13 +826,12 @@ class OpenUg(Screen):
 		elif self.isRtl:
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.clearList()
-				self.getRTLSerie(self.mediaList, tmp)
-				self.level = self.UG_LEVEL_SERIE
-				self.updateMenu()
-				self.loadPicPage()
-			elif self.level == self.UG_LEVEL_SERIE:
+				self.session.open(OpenUg, 'rtlseason|' + tmp)
+			elif self.level == self.UG_LEVEL_SEASON:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
+				self.session.open(OpenUg, 'rtlepisode|' + tmp)
+			elif self.level == self.UG_LEVEL_SERIE:
+				tmp = self.getRTLStream(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
 				if tmp != '':
 					myreference = eServiceReference(4097, 0, tmp)
 					myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
@@ -821,24 +858,27 @@ class OpenUg(Screen):
 				self.session.open(UGMediaPlayer, myreference, 'npo')
 
 	def getRTLStream(self, url):
-		data = wgetUrl(self.RTL_BASE_URL + url)
-		data = data.split('\n')
+		uuid = url
+		data = wgetUrl('http://www.rtl.nl/system/s4m/xldata/ux/'+ url +'?context=rtlxl&d=pc&fmt=adaptive&version=3')
 		state = 0
 		url = ''
 		name = ''
 		icon = ''
-		for line in data:
-			if ".mp4" in line:
-				tmp = 'href=\"'
-				if tmp in line:
-					url = line.split(tmp)[1].split('\">')[0]
-				return url
-		return ''
+		tmp = '<component_uri>'
+		if tmp in data:
+			url = data.split(tmp)[1].split('</component_uri>')[0]
+			url = 'http://pg.us.rtl.nl/rtlxl/network/ipad/progressive' + url + '.ssm/' + uuid + '.mp4'
+			return url
+		else:
+			return ''
 
-	def getRTLSerie(self, weekList, url):
-		url = 'http://www.rtl.nl/system/s4m/ipadfd/d=ipad/fmt=progressive/ak=' + url
+	def getRTLSerie(self, weekList, url, Skey):
+		url = 'http://www.rtl.nl/system/s4m/vfd/version=1/d=pc/output=json/ak='+ url +'/sk='+ Skey +'/pg=1'
 		data = wgetUrl(url)
-		data = data.split('</item>')
+		data = data.split('\"material\":')
+		uuiddata = data[1].split('},{')
+		data = data[0].split('\"episodes\"')[1]
+		data = data.split('\"key\"')
 		state = 0
 		name = ''
 		short = ''
@@ -848,35 +888,80 @@ class OpenUg(Screen):
 		channel = ''
 		for line in data:
 			if state == 0:
-				if "<movie>" in line:
+				if "\"name\":" in line:
 					state = 1
 			if state == 1:
-				tmp = "<movie>"
+				tmp = "\"name\":\""
 				if tmp in line:
-					tmp = "<movie>"
-					stream = line.split(tmp)[1].split('</movie>')[0]
-				tmp = "<thumbnail>"
+					name = line.split(tmp)[1].split('"')[0]
+				tmp = '\"synopsis\":\"'
 				if tmp in line:
-					icon = line.split(tmp)[1].split('</thumbnail>')[0]
-					icon_type = icon
-				tmp = "<title>"
-				if tmp in line:
-					name = line.split(tmp)[1].split('</title>')[0]
-				tmp = '<samenvattingkort>'
-				if tmp in line:
-					short = line.split(tmp)[1].split("</samenvattingkort>")[0]
-				tmp = "<broadcastdatetime>"
-				if tmp in line:
-					date = line.split(tmp)[1].split('</broadcastdatetime>')[0].replace('T', ' ')
-				weekList.append((date, name, short, channel, stream, icon, icon_type, False))
+					short = line.split(tmp)[1].split('\"')[0]
+				
+				key = line.split('\"')[1]
+				key = "\"episode_key\":\"" + key
+				for line in uuiddata:
+					if key in line:
+						tmp = "\"uuid\":\""
+						if tmp in line:
+							stream = line.split(tmp)[1].split('"')[0]
+						tmp = '\"station\":\"'
+						if tmp in line:
+							channel = line.split(tmp)[1].split('\"')[0]
+						tmp = '\"duration\":\"'
+						if tmp in line:
+							date = line.split(tmp)[1].split('\"')[0]
+				#icon = "http://data.rtl.nl/system/thumb/sz=195x93/uuid=" + stream
+				icon_type = icon
+				weekList.append((date, name, short, channel, stream, icon, icon_type, True))
 				state = 0
-			
-			if state == 2:
-				weekList.append((date, 'No episodes found', 'Sorry', channel, stream, icon, icon, False))
+				
+	def getRTLMediaDataSeason(self, weekList, url):
+		data = wgetUrl('http://www.rtl.nl/system/s4m/vfd/version=1/d=pc/output=json/fun=getseasons/ak=' + url)
+		data = data.split('\"seasons\":')[1]
+		data = data.split('\"key\"')
+		state = 0
+		name = ''
+		short = ''
+		icon = ''
+		stream = ''
+		date = ''
+		channel = ''
+		for line in data:
+			if state == 0:
+				if "\"name\"" in line:
+					state = 1
+			if state == 1:
+				stream = line.split('\"')[1].replace(' ','')
+				tmp = ".png"
+				icon_type = ''
+				if tmp in line:
+					tmp = "\"proglogo\":\""
+					#icon = line.split(tmp)[1].split('"')[0]
+					#icon = "http://data.rtl.nl/service/programma_logos/" + icon
+					icon_type = icon
+					
+				tmp = '\"synopsis\":\"'
+				if tmp in line:
+					short = line.split(tmp)[1].split('\"')[0]
+					
+				tmp = '\"station\":\"'
+				if tmp in line:
+					channel = line.split(tmp)[1].split('\"')[0]
+					
+				tmp = '\"abstract_key\":\"'
+				if tmp in line:
+					stream = (line.split(tmp)[1].split('\"')[0]) + '|' + stream
+					
+				tmp = "\"name\":\""
+				if tmp in line:
+					name = line.split(tmp)[1].split('"')[0]
+				weekList.append((date, name, short, channel, stream, icon, icon_type, True))
+				state = 0
 
 	def getRTLMediaData(self, weekList, url):
 		data = wgetUrl(url)
-		data = data.split('</serieitem>')
+		data = data.split('\"key\"')
 		state = 0
 		name = ''
 		short = ''
@@ -886,21 +971,28 @@ class OpenUg(Screen):
 		channel = ''
 		for line in data:
 			if state == 0:
-				if "<itemsperserie_url>" in line:
+				if "\"name\"" in line:
 					state = 1
 			if state == 1:
-				tmp = "<serieskey>"
+				stream = line.split('\"')[1].replace(' ','')
+				tmp = ".png"
 				if tmp in line:
-					stream = line.split(tmp)[1].split('</serieskey>')[0]
-					
-				tmp = "<seriescoverurl>"
-				if tmp in line:
-					icon = line.split(tmp)[1].split('</seriescoverurl>')[0]
+					tmp = "\"proglogo\":\""
+					#icon = line.split(tmp)[1].split('"')[0]
+					#icon = "http://data.rtl.nl/service/programma_logos/" + icon
 					icon_type = icon
-				
-				tmp = "<serienaam>"
+					
+				tmp = '\"synopsis\":\"'
 				if tmp in line:
-					name = line.split(tmp)[1].split('</serienaam>')[0]
+					short = line.split(tmp)[1].split('\"')[0]
+					
+				tmp = '\"station\":\"'
+				if tmp in line:
+					channel = line.split(tmp)[1].split('\"')[0]
+					
+				tmp = "\"name\":\""
+				if tmp in line:
+					name = line.split(tmp)[1].split('"')[0]
 				weekList.append((date, name, short, channel, stream, icon, icon_type, True))
 				state = 0
 
@@ -1020,6 +1112,9 @@ class OpenUg(Screen):
 			tmp = '<p class=\\"program\\">'
 			if tmp in x:
 				name = x.split(tmp)[1].split('<')[0]
+			#tmp = '<p class=\\"time\\">'
+			#if tmp in x:
+			#	date = x.split(tmp)[1].split('<')[0]
 			tmp = '<img src=\\"'
 			if tmp in x:
 				icon = x.split(tmp)[1].split('\\\"')[0].replace('\\', '')
@@ -1039,6 +1134,9 @@ class OpenUg(Screen):
 		id = ''
 		key = ''
 		vplayer = ''
+		oldBW = '1'
+		BW = ''
+		stream = ''
 		for x in data:
 			tmp = '\"myExperience'
 			if tmp in x:
@@ -1060,6 +1158,30 @@ class OpenUg(Screen):
 			for x in tmp:
 				if 'defaultURL\":' in x and 'defaultURL\":null' not in x:
 					url = x.split('defaultURL\":\"')[1].split('\"')[0].replace('\\', '')
+		data = ''
+		return url
+		if '.mp4' in url:
+			return url
+		if '.m3u8' in url:
+			data = wgetUrl(url)
+		if data !='':
+			tmp = '#EXT-X-STREAM-INF:'
+			if tmp in data:
+				data = data.split(tmp)
+				for line in data:
+					tmp = 'BANDWIDTH='
+					if tmp in line:
+						BW = line.split(tmp)[1].split(',')[0]
+						oldBW = max([int(oldBW),  int(BW)])
+						oldBW = str(oldBW)
+						if BW == oldBW:
+							stream = line.replace('\r','').replace('\n','').split('\"')[2]
+				if stream == '':
+					return url
+				p1 = url.rfind('/')
+				p1 = url[0:p1] + '/' + stream
+				url = p1
+					
 		return url
 
 	def getIconType(self, data):
