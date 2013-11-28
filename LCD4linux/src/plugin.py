@@ -17,7 +17,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V3.8-r1"
+Version = "V3.8-r2"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -71,7 +71,7 @@ import glob
 import random
 import struct
 import string
-from time import gmtime, strftime, localtime, mktime, time, sleep, timezone, altzone
+from time import gmtime, strftime, localtime, mktime, time, sleep, timezone, altzone, daylight
 from datetime import datetime, timedelta, date
 dummy = datetime.strptime('2000-01-01', '%Y-%m-%d').date()
 
@@ -103,7 +103,6 @@ from mutagen.id3 import ID3
 from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
 from mutagen.flac import FLAC
-import icalendar
 from module import L4Lelement,L4LVtest
 
 L4LElist = L4Lelement()
@@ -262,7 +261,7 @@ if PNGutilOK:
 xmlLCDType = [("96x64", _("96x64")), ("132x64", _("132x64")), ("220x176", _("220x176")), ("255x64", _("255x64")), ("400x240", _("400x240"))]
 WetterType =  [("12", _("2 Days 1 Line")), ("22", _("2 Days 2 Line")), ("1", _("4 Days 1 Line")), ("2", _("4 Days 2 Lines")), ("11", _("5 Days 1 Line")), ("21", _("5 Days 2 Lines")), ("3", _("Current")), ("4", _("Current Temperature (+C)")), ("41", _("Current Temperature (-C)")), ("5", _("4 Days Vertical View")), ("51", _("5 Days Vertical View"))]
 MeteoType = [("1", _("Current")), ("2", _("Current Temperature"))]
-NetatmoType = [("THCPN", _("All")), ("T", _("Temperature")), ("TC", _("Temperature+Co2")), ("TCP", _("Temperature+Co2+Pressure"))]
+NetatmoType = [("THCPN", _("All")), ("T", _("Temperature")), ("TH", _("Temperature+Humidity")), ("TC", _("Temperature+Co2")), ("TCP", _("Temperature+Co2+Pressure"))]
 CO2Type = [("0", _("Bar")), ("09", _("Bar+Value")), ("1", _("Knob")), ("19", _("Knob+Value"))]
 ClockType = [("12", _("Time")), ("112", _("Date+Time")), ("1123", _("Date+Time+Weekday")), ("11", _("Date")), ("123", _("Time+Weekday")), ("13", _("Weekday")), ("4", _("Flaps Design")), ("51", _("Analog")), ("52", _("Analog+Date")), ("521", _("Analog+Date+Weekday")), ("521+", _("Analog+Date+Weekday 2"))]
 AlignType = [("0", _("left")), ("1", _("center")), ("2", _("right")), ("0500", _("5%")), ("1000", _("10%")), ("1500", _("15%")), ("2000", _("20%")), ("2500", _("25%")), ("3000", _("30%")), ("3500", _("35%")), ("4000", _("40%")), ("4500", _("45%")), ("5000", _("50%")), ("5500", _("55%")), ("6000", _("60%")), ("6500", _("65%")), ("7000", _("70%")), ("7500", _("75%")), ("8000", _("80%")), ("8500", _("85%")), ("9000", _("90%")), ("9500", _("95%"))]
@@ -448,6 +447,7 @@ LCD4linux.CalLine = ConfigSelectionNumber(1, 2, 1, default = 1)
 LCD4linux.CalDays = ConfigSelection(choices = [("0", "0"), ("3", "3"), ("7", "7"), ("14", "14"), ("21", "21"), ("31", "31")], default="7")
 LCD4linux.CalTime = ConfigSelection(choices = [("03", _("60min")), ("03,33", _("30min")), ("03,23,43", _("20min")), ("03,18,33,48", _("15min"))], default="03")
 LCD4linux.CalTransparenz = ConfigSelection(choices = [("false", _("no")), ("crop", _("alternative Copy-Mode/DM800hd (24bit)")), ("true", _("yes (32bit)"))], default = "false")
+LCD4linux.CalTimeZone = ConfigSelection(choices = [("-3", "-3"), ("-2", "-2"), ("-1", "-1"), ("0", "0"), ("1", "1"), ("2", "2"), ("3", "3")], default="0")
 LCD4linux.Cal = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.CalLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.CalPos = ConfigSlider(default = 50,  increment = 2, limits = (0, 1024))
@@ -1876,6 +1876,10 @@ def getTimeDiffUTC():
 	t=datetime.now() - datetime.utcnow()
 	return int(t.days*24+round(t.seconds/3600.0))
 
+def getTimeDiffUTC2():
+	is_dst = daylight and localtime().tm_isdst > 0
+	return -((altzone if is_dst else timezone)/3600)
+
 def ConfTime(F,W):
 	try:
 		if os.path.exists(LCD4config) and W != [6,0]:
@@ -1945,22 +1949,35 @@ def ICSdownloads():
 					ICS[D].append(inew)
 					L4logE(D,inew)
 
+	import icalendar
 	for name in ICSlist:
 		L4log("ICS read Col",name[1])
 		try:
 			gcal = icalendar.Calendar().from_string(name[0])
+			L4log("use iCal 2.x")
 		except:
-			L4log("Error: ICS not readable!",name[1])
-			continue
+			try:
+				gcal = icalendar.Calendar().from_ical(name[0])
+				L4log("use iCal 3.x")
+			except:
+				from traceback import format_exc
+				L4log("Error: ICS not readable!",format_exc() )
+				continue
 		try:
-			for Icomp in gcal.walk():
+			for Icomp in gcal.walk("VEVENT"):
 				if Icomp.name == "VEVENT":
 					L4logE(Icomp["dtstart"],Icomp.get('summary'))
 					rrule=str(Icomp.get("rrule",""))
 					if "YEARLY" in rrule:
-						dt=str(Icomp["dtstart"])
-						Icomp.set('dtstart', date(datetime.now().year,int(dt[4:6]),int(dt[6:8])))
+						dt=str(Icomp.decoded("dtstart"))
+#						L4log(dt, date(datetime.now().year, int(dt[5:7]),int(dt[8:10])))
+						Icomp.set('dtstart', date(datetime.now().year,int(dt[5:7]),int(dt[8:10])))
 					today=date.today()
+					WEEKLY = []
+					if "WEEKLY" in rrule:
+						for i in range(1,5):
+							WEEKLY.append(Icomp.decoded("dtstart") + timedelta(i*7))
+					L4log("Weekly",WEEKLY)
 					nextmonth=today + timedelta(calendar.mdays[today.month]) # 2012-01-23
 					nextmonth2=today + timedelta(calendar.mdays[today.month]-3) # save Month+1 if days to long
 					DTstart = str(Icomp.decoded("dtstart"))
@@ -1978,6 +1995,14 @@ def ICSdownloads():
 						if Doppel == False:
 							ICS[D].append(inew)
 							L4log(D,inew)
+							for w in WEEKLY:
+								L4log("WEEKLY",w)
+								D = str(w)[:10]
+								if ICS.get(D,None) is None:
+									ICS[D]=[]
+								L4log(D,w)
+								ICS[D].append([inew[0],w,inew[2]])
+								L4log("weekly",w)
 		except:
 			from traceback import format_exc
 			L4log("Error ICS",name)
@@ -2373,7 +2398,7 @@ def writeLCD2(im2,quality,SAVE=True):
 			if os.path.isfile(PIC2tmp+".png"):
 				os.rename(PIC2tmp+".png",PIC2+".png")
 		except:
-			L4log("Error write Picture")
+			L4log("Error write Picture2")
 		if pngutilconnect != 0:
 			pngutil.send(PIC2+".png")
 	else:
@@ -4192,6 +4217,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			self.list1.append(getConfigListEntry(_("- Color"), LCD4linux.CalPlanerFSColor))
 			self.list1.append(getConfigListEntry(_("Calendar Line Thickness"), LCD4linux.CalLine))
 			self.list1.append(getConfigListEntry(_("Calendar Day Event Preview"), LCD4linux.CalDays))
+			self.list1.append(getConfigListEntry(_("Calendar Timezone Correction"), LCD4linux.CalTimeZone))
 			self.list1.append(getConfigListEntry(_("Calendar Transparency"), LCD4linux.CalTransparenz))
 			self.list1.append(getConfigListEntry(_("Calendar Poll Interval"), LCD4linux.CalTime))
 			self.list1.append(getConfigListEntry(_("Tuner Color"), LCD4linux.TunerColor))
@@ -4796,6 +4822,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list2.append(getConfigListEntry(_("- Background Color"), LCD4linux.Box2BackColor))
 			self.list2.append(getConfigListEntry(_("Recording"), LCD4linux.Recording))
 			if LCD4linux.Recording.value != "0":
+				self.list2.append(getConfigListEntry(_("- which LCD"), LCD4linux.RecordingLCD))
 				self.list2.append(getConfigListEntry(_("-  Type"), LCD4linux.RecordingType))
 				self.list2.append(getConfigListEntry(_("- Size"), LCD4linux.RecordingSize))
 				if LCD4linux.RecordingType.value == "2":
@@ -5233,6 +5260,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list3.append(getConfigListEntry(_("- Background Color"), LCD4linux.MPBox2BackColor))
 			self.list3.append(getConfigListEntry(_("Recording"), LCD4linux.MPRecording))
 			if LCD4linux.MPRecording.value != "0":
+				self.list3.append(getConfigListEntry(_("- which LCD"), LCD4linux.MPRecordingLCD))
 				self.list3.append(getConfigListEntry(_("-  Type"), LCD4linux.MPRecordingType))
 				self.list3.append(getConfigListEntry(_("- Size"), LCD4linux.MPRecordingSize))
 				if LCD4linux.MPRecordingType.value == "2":
@@ -5647,6 +5675,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list4.append(getConfigListEntry(_("- Background Color"), LCD4linux.StandbyBox2BackColor))
 			self.list4.append(getConfigListEntry(_("Recording"), LCD4linux.StandbyRecording))
 			if LCD4linux.StandbyRecording.value != "0":
+				self.list4.append(getConfigListEntry(_("- which LCD"), LCD4linux.StandbyRecordingLCD))
 				self.list4.append(getConfigListEntry(_("-  Type"), LCD4linux.StandbyRecordingType))
 				self.list4.append(getConfigListEntry(_("- Size"), LCD4linux.StandbyRecordingSize))
 				if LCD4linux.StandbyRecordingType.value == "2":
@@ -6428,6 +6457,7 @@ class UpdateStatus(Screen):
 			L4log("Data-Build")
 			isVideoPlaying = 0
 			if strftime("%M")!=self.DataMinute:
+#				collected = gc.collect()
 				if int(strftime("%M")) % 10 == 0:
 					self.getNetatmo()
 				if LCD4linux.StandbyWetter.value != "0" or LCD4linux.Wetter.value != "0" or LCD4linux.MPWetter.value != "0":
@@ -7039,10 +7069,15 @@ class UpdateStatus(Screen):
 			self.LgetGoogleCover = None
 
 	def googleImageCallback(self,result):
-		foundPos = result.find("imgres?imgurl=")
-		foundPos2 = result.find("&amp;imgrefurl=")
+		foundPos = result.find("amp;imgurl=")
+		foundPos2 = result.find("&amp",foundPos+1)
 		if foundPos != -1 and foundPos2 != -1:
-			url = result[foundPos+14:foundPos2]
+			url = result[foundPos+11:foundPos2]
+			if not (url.endswith("jpg") or url.endswith("png") or url.endswith("gif")):
+				foundPos = result.find("amp;imgurl=",foundPos2)
+				foundPos2 = result.find("&amp",foundPos+1)
+		if foundPos != -1 and foundPos2 != -1:
+			url = result[foundPos+11:foundPos2]
 			url = url.replace("%25","%")
 			parts = url.split("/")
 			filename=GoogleCover
@@ -7210,7 +7245,7 @@ def writeMultiline(sts,ConfigSize,ConfigPos,ConfigLines,ConfigColor,ConfigAlign,
 		W = Width
 	lists = (textwrap.TextWrapper(width=int(W*2/ConfigSize), break_long_words=False).wrap(line) for line in lines)
 	body  = "\n".join("\n".join(list) for list in lists)
-	para = string.split(body, '\n')
+	para = body.split('\n')
 	current_h=ConfigPos
 	while len(para) > int(ConfigLines):
 		del para[len(para)-1]
@@ -7279,7 +7314,7 @@ def getMem():
 
 class myHTTPClientFactory(HTTPClientFactory):
 	def __init__(self, url, method='GET', postdata=None, headers=None,
-	agent="SHOUTcast", timeout=0, cookies=None,
+	agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.11 (KHTML, like Gecko) Ubuntu/11.04 Chromium/17.0.963.56 Chrome/17.0.963.56 Safari/535.11", timeout=0, cookies=None,
 	followRedirect=1, lastModified=None, etag=None):
 		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies,followRedirect=followRedirect)
@@ -9137,12 +9172,15 @@ def LCD4linuxPIC(self,session):
 				pil_image = Image.open(Data+dat)
 				pil_image = pil_image.resize((int(200/px), ConfigSize))
 				im.paste(pil_image,(lx,ConfigPos))
-			if self.LsAspect in (3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10):
-				pil_image = Image.open(Data+"widescreen.png")
-			else:
-				pil_image = Image.open(Data+"letterbox.png")
-			pil_image = pil_image.resize((int(100/px), ConfigSize))
-			im.paste(pil_image,(lx+int(200/px)+5,ConfigPos))
+			try:
+				if self.LsAspect in (3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10):
+					pil_image = Image.open(Data+"widescreen.png")
+				else:
+					pil_image = Image.open(Data+"letterbox.png")
+				pil_image = pil_image.resize((int(100/px), ConfigSize))
+				im.paste(pil_image,(lx+int(200/px)+5,ConfigPos))
+			except:
+				L4log("Error Aspect")
 			try:
 				if self.LsIsCrypted == 1:
 					pil_image = Image.open(Data+"crypted.png")
@@ -9592,9 +9630,9 @@ def LCD4linuxPIC(self,session):
 			except:
 				pass		
 		else:
+			event = []
 			if int(LCD4linux.FritzLines.value) > 0:
 				CS=int(ConfigSize*1.8)
-				event = []
 				if ConfigMode == True and len(FritzList) == 0:
 					event.append(["RING","01.01.2000 01:00","0123/4567890","Demo Call 1","123"])
 					event.append(["OUT","01.01.2000 02:00","0123/4567890","Demo Call 2","123"])
@@ -10111,7 +10149,7 @@ def LCD4linuxPIC(self,session):
 						ShadowText(drawW,POSX, POSY, Code_utf8(aa), font, ConfigColor,ConfigShadow)
 						b=[]
 						for a in ICS.get(t,[]):
-							x = a[1] + timedelta(hours=getTimeDiff())
+							x = a[1] + timedelta(hours=getTimeDiffUTC()+int(LCD4linux.CalTimeZone.value))
 							if isinstance(x,datetime):
 								Time = x.time().strftime("%H:%M ")
 							else:
@@ -10135,7 +10173,12 @@ def LCD4linuxPIC(self,session):
 						if x.day != datetime.now().day:
 							aa += "%02d.%02d. " % (x.day,x.month)
 						for a in ICS.get(t,[]):
-							aa += a[0] + " | "
+							x = a[1] + timedelta(hours=getTimeDiffUTC()+int(LCD4linux.CalTimeZone.value))
+							if isinstance(x,datetime):
+								Time = x.time().strftime("%H:%M ")
+							else:
+								Time = ""
+							aa += Time + a[0] + " | "
 				writeMultiline(aa[:-2],int(ConfigSize*0.8),POSY,int(ConfigTypeE[1]),ConfigColor,"0",False,drawW,imW,ConfigFont=ConfigFont,Shadow=ConfigShadow)
 			imW.save(PICcal)
 			POSX = getSplit(ConfigSplit,ConfigAlign,MAX_Wi,MAX_W)
@@ -10197,7 +10240,7 @@ def LCD4linuxPIC(self,session):
 					ShadowText(draw,PX, POSY, Code_utf8(aa), font, ConfigColor, ConfigShadow)
 					b=[]
 					for a in ICS.get(t,[]):
-						x = a[1] + timedelta(hours=getTimeDiff())
+						x = a[1] + timedelta(hours=getTimeDiffUTC()+int(LCD4linux.CalTimeZone.value))
 						if isinstance(x,datetime):
 							Time = x.time().strftime("%H:%M ")
 						else:
@@ -10222,7 +10265,12 @@ def LCD4linuxPIC(self,session):
 					if x.day != datetime.now().day:
 						aa += "%02d.%02d. " % (x.day,x.month)
 					for a in ICS.get(t,[]):
-						aa += a[0] + " | "
+						x = a[1] + timedelta(hours=getTimeDiffUTC()+int(LCD4linux.CalTimeZone.value))
+						if isinstance(x,datetime):
+							Time = x.time().strftime("%H:%M ")
+						else:
+							Time = ""
+						aa += Time + a[0] + " | "
 			writeMultiline(aa[:-2],int(ConfigSize),POSY,int(ConfigLines),ConfigColor,ConfigAlign,ConfigSplit,draw,im,ConfigFont=ConfigFont,Shadow=ConfigShadow,Width=CW,PosX=POSX)
 
 # show isRecording
