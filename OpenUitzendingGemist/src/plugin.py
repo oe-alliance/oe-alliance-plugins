@@ -876,10 +876,31 @@ class OpenUg(Screen):
 	def getRTLSerie(self, weekList, url, Skey):
 		url = self.RTL_BASE_URL + '/ak='+ url +'/sk='+ Skey +'/pg=1'
 		data = wgetUrl(url)
-		data = data.split('\"material\":')
-		uuiddata = data[1].split('},{')
-		data = data[0].split('\"episodes\"')[1]
-		data = data.split('\"key\"')
+		tmp = '\"schedule\":'
+		if tmp in data:
+			data = data.split(tmp)
+			scheduledata = data[1].split('},{')
+			data = data[0]
+		tmp = '\"material\":'
+		if tmp in data:
+			data = data.split(tmp)
+			uuiddata = data[1].split('},{')
+			data = data[0]
+		tmp = '\"episodes\":'
+		if tmp in data:
+			data = data.split(tmp)
+			episode = data[1].split('\"key\"')
+			data = data[0]
+		tmp = '\"seasons\":'
+		if tmp in data:
+			data = data.split(tmp)
+			seasons = data[1].split('\"key\"')
+			data = data[0]
+		tmp = '\"abstracts\":'
+		if tmp in data:
+			data = data.split(tmp)
+			abstract = data[1].split('\"key\"')
+			data = data[0]
 		state = 0
 		name = ''
 		short = ''
@@ -887,7 +908,7 @@ class OpenUg(Screen):
 		stream = ''
 		date = ''
 		channel = ''
-		for line in data:
+		for line in episode:
 			if state == 0:
 				if "\"name\":" in line:
 					state = 1
@@ -902,7 +923,7 @@ class OpenUg(Screen):
 				key = line.split('\"')[1]
 				key = "\"episode_key\":\"" + key
 				for line in uuiddata:
-					if key in line:
+					if key in line and '\"classname\":\"uitzending\"' in line:
 						tmp = "\"uuid\":\""
 						if tmp in line:
 							stream = line.split(tmp)[1].split('"')[0]
@@ -913,13 +934,44 @@ class OpenUg(Screen):
 						if tmp in line:
 							date = line.split(tmp)[1].split('\"')[0]
 				icon_type = icon
-				weekList.append((date, name, short, channel, stream, icon, icon_type, True))
+				if stream != '':
+					weekList.append((date, name, short, channel, stream, icon, icon_type, True))
+				name = ''
+				short = ''
+				icon = ''
+				stream = ''
+				date = ''
+				channel = ''
 				state = 0
-				
+		
+		
 	def getRTLMediaDataSeason(self, weekList, url):
 		data = wgetUrl(self.RTL_BASE_URL + '/fun=getseasons/ak=' + url)
-		data = data.split('\"seasons\":')[1]
-		data = data.split('\"key\"')
+		tmp = '\"schedule\":'
+		if tmp in data:
+			data = data.split(tmp)
+			scheduledata = data[1].split('},{')
+			data = data[0]
+		tmp = '\"material\":'
+		if tmp in data:
+			data = data.split(tmp)
+			uuiddata = data[1].split('},{')
+			data = data[0]
+		tmp = '\"episodes\":'
+		if tmp in data:
+			data = data.split(tmp)
+			episode = data[1].split('\"key\"')
+			data = data[0]
+		tmp = '\"seasons\":'
+		if tmp in data:
+			data = data.split(tmp)
+			seasons = data[1].split('\"key\"')
+			data = data[0]
+		tmp = '\"abstracts\":'
+		if tmp in data:
+			data = data.split(tmp)
+			abstract = data[1].split('\"key\"')
+			data = data[0]
 		state = 0
 		name = ''
 		short = ''
@@ -927,7 +979,7 @@ class OpenUg(Screen):
 		stream = ''
 		date = ''
 		channel = ''
-		for line in data:
+		for line in seasons:
 			if state == 0:
 				if "\"name\"" in line:
 					state = 1
@@ -995,16 +1047,31 @@ class OpenUg(Screen):
 	def getRTLMediaDataBack(self, weekList, days):
 		url = self.RTL_BASE_URL + "/fun=catchup/pg=1/bcdate=%s/station=RTL4,RTL5,RTL7,RTL8" % (days)
 		data = wgetUrl(url)
-		data = data.split('\"schedule\":')
-		scheduledata = data[1].split('},{')
-		data = data[0].split('\"material\":')
-		uuiddata = data[1].split('},{')
-		data = data[0].split('\"episodes\":')
-		episode = data[1].split('\"key\"')
-		data = data[0].split('\"seasons\":')
-		seasons = data[1].split('\"key\"')
-		data = data[0].split('\"abstracts\":')
-		abstract = data[1].split('\"key\"')
+		tmp = '\"schedule\":'
+		if tmp in data:
+			data = data.split(tmp)
+			scheduledata = data[1].split('},{')
+			data = data[0]
+		tmp = '\"material\":'
+		if tmp in data:
+			data = data.split(tmp)
+			uuiddata = data[1].split('},{')
+			data = data[0]
+		tmp = '\"episodes\":'
+		if tmp in data:
+			data = data.split(tmp)
+			episode = data[1].split('\"key\"')
+			data = data[0]
+		tmp = '\"seasons\":'
+		if tmp in data:
+			data = data.split(tmp)
+			seasons = data[1].split('\"key\"')
+			data = data[0]
+		tmp = '\"abstracts\":'
+		if tmp in data:
+			data = data.split(tmp)
+			abstract = data[1].split('\"key\"')
+			data = data[0]
 		state = 0
 		name = ''
 		short = ''
