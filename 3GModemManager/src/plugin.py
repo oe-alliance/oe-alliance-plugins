@@ -1066,11 +1066,11 @@ class ModemManager(Screen):
 
 	def getUSBList(self):
 		kernel_ver = about.getKernelVersionString()
-		if kernel_ver >= "3.3.0":
-		  cmd = "/usr/bin/usb-devices"
+		if kernel_ver <= "3.0.0":
+			cmd = "cat /proc/bus/usb/devices"
 		else:
-		  cmd = "cat /proc/bus/usb/devices"
-		  
+			cmd = "/usr/bin/usb-devices"
+
 		parsed_usb_list = []
 		usb_devices = os.popen(cmd).read()
 		tmp_device = {}
