@@ -2,7 +2,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.MenuList import MenuList
 from Components.Label import Label
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -14,6 +14,7 @@ from ServiceReference import ServiceReference
 from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarSeek
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.MessageBox import MessageBox
+from Tools import NumericalTextInput
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -71,7 +72,16 @@ class MPanelList(MenuList):
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		self.moveToIndex(self.selection)
-
+		
+def getShortName(name, serviceref):
+	if serviceref.flags & eServiceReference.mustDescent: #Directory			
+		pathName = serviceref.getPath()
+		p = os.path.split(pathName)
+		if not p[1]: #if path ends in '/', p is blank.
+			p = os.path.split(p[0])
+		return p[1].upper()
+	else:
+		return name
 
 class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	STATE_IDLE = 0
@@ -455,6 +465,7 @@ class OpenUg(Screen):
 				<screen position="80,70" size="e-160,e-110" title="">
 					<widget name="list" position="0,0" size="e-0,e-0" scrollbarMode="showOnDemand" transparent="1" zPosition="2"/>
 					<widget name="thumbnail" position="0,0" size="150,150" alphatest="on" />
+					<widget name="chosenletter" position="10,10" size="e-20,150" halign="center" font="Regular;30" foregroundColor="#FFFF00" />
 				</screen>"""
 		self.session = session
 		Screen.__init__(self, session)
@@ -469,6 +480,10 @@ class OpenUg(Screen):
 		self.pixmaps_to_load = []
 		self.picloads = {}
 		self.color = "#33000000"
+		
+		self.numericalTextInput = NumericalTextInput.NumericalTextInput(mapping=NumericalTextInput.MAP_SEARCH_UPCASE)
+		self["chosenletter"] = Label("")
+		self["chosenletter"].visible = False 
 
 		self.page = 0
 		self.numOfPics = 0
@@ -490,6 +505,7 @@ class OpenUg(Screen):
 			os_mkdir(self.imagedir)
 
 		self["list"] = MPanelList(list = self.tmplist, selection = 0)
+		self.list = self["list"]
 		self.updateMenu()
 		self["actions"] = ActionMap(["WizardActions", "MovieSelectionActions", "DirectionActions"],
 		{
@@ -501,8 +517,87 @@ class OpenUg(Screen):
 			"back": self.Exit,
 		}
 		, -1)
+		self["NumberActions"] = NumberActionMap(["NumberActions", "InputAsciiActions"],
+			{
+				"gotAsciiCode": self.keyAsciiCode,
+				"0": self.keyNumberGlobal,
+				"1": self.keyNumberGlobal,
+				"2": self.keyNumberGlobal,
+				"3": self.keyNumberGlobal,
+				"4": self.keyNumberGlobal,
+				"5": self.keyNumberGlobal,
+				"6": self.keyNumberGlobal,
+				"7": self.keyNumberGlobal,
+				"8": self.keyNumberGlobal,
+				"9": self.keyNumberGlobal
+			}) 
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.cbTimer.start(10)
+		
+	def keyNumberGlobal(self, number):
+		unichar = self.numericalTextInput.getKey(number)
+		charstr = unichar.encode("utf-8")
+		if len(charstr) == 1:
+			self.moveToChar(charstr[0], self["chosenletter"])
+				
+	def keyAsciiCode(self):
+		unichar = unichr(getPrevAsciiCode())
+		charstr = unichar.encode("utf-8")
+		if len(charstr) == 1:
+			self.moveToString(charstr[0], self["chosenletter"])
+			
+	def moveToChar(self, char, lbl=None):
+		self._char = char
+		self._lbl = lbl
+		if lbl:			
+			lbl.setText(self._char)
+			lbl.visible = True
+		self.moveToCharTimer = eTimer()
+		self.moveToCharTimer.callback.append(self._moveToChrStr)
+		self.moveToCharTimer.start(1000, True) #time to wait for next key press to decide which letter to use...
+
+	def moveToString(self, char, lbl=None):
+		self._char = self._char + char.upper()
+		self._lbl = lbl
+		if lbl:			
+			lbl.setText(self._char)
+			lbl.visible = True
+		self.moveToCharTimer = eTimer()
+		self.moveToCharTimer.callback.append(self._moveToChrStr)
+		self.moveToCharTimer.start(1000, True) #time to wait for next key press to decide which letter to use...
+
+	def _moveToChrStr(self):
+		currentIndex = self["list"].getSelectionIndex()
+		found = False
+		if currentIndex < (len(self.mediaList) - 1):
+			itemsBelow = self.mediaList[currentIndex + 1:]
+			#first search the items below the selection
+			for index, item in enumerate(itemsBelow):
+				itemName = self.mediaList[index][self.UG_PROGNAME]
+				if len(self._char) == 1 and itemName.startswith(self._char):
+					found = True
+					self["list"].moveToIndex(index)
+					break
+				elif len(self._char) > 1 and itemName.find(self._char) >= 0:
+					found = True
+					self["list"].moveToIndex(index)
+					break
+		if found == False and currentIndex > 0:
+			itemsAbove = self.mediaList[1:currentIndex]
+			#first item (0) points parent folder - no point to include
+			for index, item in enumerate(itemsAbove):
+				itemName = self.mediaList[index][self.UG_PROGNAME]
+				if len(self._char) == 1 and itemName.startswith(self._char):
+					found = True
+					self["list"].moveToIndex(index)
+					break
+				elif len(self._char) > 1 and itemName.find(self._char) >= 0:
+					found = True
+					self["list"].moveToIndex(index)
+					break
+		self._char = ''
+		if self._lbl:
+			self._lbl.visible = False
 
 	def layoutFinished(self):
 		if self.cmd == None or self.cmd == '':
@@ -795,7 +890,6 @@ class OpenUg(Screen):
 		if ptr != None:
 			if self.Details.has_key(picture_id):
 				self.Details[picture_id]["thumbnail"] = ptr
-
 		self.tmplist = []
 		pos = 0
 		for x in self.mediaList:
@@ -803,14 +897,12 @@ class OpenUg(Screen):
 				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.Details[self.getThumbnailName(x)]["thumbnail"]))
 			else:
 				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.png))
-
 			pos += 1
 		self["list"].setList(self.tmplist)
 
 	def go(self):
 		if len(self.mediaList) == 0 or self["list"].getSelectionIndex() > len(self.mediaList) - 1:
 			return
-
 		if self.isSbs:
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
@@ -821,7 +913,6 @@ class OpenUg(Screen):
 					myreference = eServiceReference(4097, 0, tmp)
 					myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
 					self.session.open(UGMediaPlayer, myreference, 'sbs')
-
 		elif self.isRtl:
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
@@ -837,7 +928,6 @@ class OpenUg(Screen):
 					self.session.open(UGMediaPlayer, myreference, 'rtl')
 				else:
 					self.session.openWithCallback(self.close, MessageBox, _("Voor deze aflevering moet waarschijnlijk betaald worden."), MessageBox.TYPE_ERROR, timeout=5, simple = True)
-
 		else:
 			self.doUGPlay()
 
@@ -919,7 +1009,6 @@ class OpenUg(Screen):
 				tmp = '\"synopsis\":\"'
 				if tmp in line:
 					short = line.split(tmp)[1].split('\"')[0]
-				
 				key = line.split('\"')[1]
 				key = "\"episode_key\":\"" + key
 				for line in uuiddata:
@@ -943,7 +1032,6 @@ class OpenUg(Screen):
 				date = ''
 				channel = ''
 				state = 0
-		
 		
 	def getRTLMediaDataSeason(self, weekList, url):
 		data = wgetUrl(self.RTL_BASE_URL + '/fun=getseasons/ak=' + url)
@@ -990,19 +1078,15 @@ class OpenUg(Screen):
 				if tmp in line:
 					tmp = "\"proglogo\":\""
 					icon_type = icon
-					
 				tmp = '\"synopsis\":\"'
 				if tmp in line:
 					short = line.split(tmp)[1].split('\"')[0]
-					
 				tmp = '\"station\":\"'
 				if tmp in line:
 					channel = line.split(tmp)[1].split('\"')[0]
-					
 				tmp = '\"abstract_key\":\"'
 				if tmp in line:
 					stream = [(line.split(tmp)[1].split('\"')[0]) , stream]
-					
 				tmp = "\"name\":\""
 				if tmp in line:
 					name = line.split(tmp)[1].split('"')[0]
