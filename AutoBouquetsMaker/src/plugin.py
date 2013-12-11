@@ -5,7 +5,7 @@ from Plugins.Plugin import PluginDescriptor
 from Components.NimManager import nimmanager
 
 from menu import AutoBouquetsMaker_Menu
-from scanner.main import AutoBouquetsMakerautostart
+from scanner.main import AutoBouquetsMakerautostart, AutoBouquetsMaker
 
 from Components.config import config, configfile, ConfigSubsection, ConfigYesNo, ConfigSelection, ConfigText, ConfigNumber, NoSave, ConfigClock, getConfigListEntry
 config.autobouquetsmaker = ConfigSubsection()
@@ -23,9 +23,13 @@ config.autobouquetsmaker.keepallbouquets = ConfigYesNo(default = True)
 config.autobouquetsmaker.keepbouquets = ConfigText("", False)
 config.autobouquetsmaker.hidesections = ConfigText("", False)
 config.autobouquetsmaker.addprefix = ConfigYesNo(default = False)
+config.autobouquetsmaker.extensions = ConfigYesNo(default = False)
 
 def main(session, **kwargs):
 	session.open(AutoBouquetsMaker_Menu)
+
+def startscan(session, **kwargs):
+	session.open(AutoBouquetsMaker)
 
 def AutoBouquetsMakerSetup(menuid, **kwargs):
 	if menuid == "scan":
@@ -37,5 +41,7 @@ def Plugins(**kwargs):
 	plist = [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=AutoBouquetsMakerautostart)]
 	if (nimmanager.hasNimType("DVB-S")):
 		plist.append(PluginDescriptor(name=_("AutoBouquetsMaker"), description="Scan and create bouquets.", where = PluginDescriptor.WHERE_MENU, fnc=AutoBouquetsMakerSetup))
+		if config.autobouquetsmaker.extensions.getValue():
+			plist.append(PluginDescriptor(name=_("AutoBouquetsMaker"), description="Scan and create bouquets.", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=startscan))
 	return plist
 

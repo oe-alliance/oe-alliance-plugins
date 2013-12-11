@@ -417,6 +417,7 @@ class AutoBouquetsMaker_Setup(ConfigListScreen, Screen):
 		if config.autobouquetsmaker.level.value == "expert":
 			self.list.append(getConfigListEntry(_("Keep all bouquets"), config.autobouquetsmaker.keepallbouquets, _("When disabled this will enable the 'Keep bouquets' in the main menu, allowing you to hide some 'existing' bouquets.")))
 			self.list.append(getConfigListEntry(_("Add provider prefix to bouquets"), config.autobouquetsmaker.addprefix, _("This option will prepend the provider name to bouquet name ")))
+		self.list.append(getConfigListEntry(_("Show in extensions"), config.autobouquetsmaker.extensions, _("When enable allow you start a scan from the extensions list.")))
 
 		self["config"].list = self.list
 		self["config"].setList(self.list)
