@@ -27,8 +27,8 @@ class FanSetupScreen(Screen, ConfigListScreen):
 		from Components.ActionMap import ActionMap
 		from Components.Sources.StaticText import StaticText
 
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("OK"))
+		self["key_red"] = StaticText(_("OK"))
+		self["key_green"] = StaticText(_("Cancel"))
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "CiSelectionActions"],
 		{
