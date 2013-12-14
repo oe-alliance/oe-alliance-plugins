@@ -114,7 +114,7 @@
 	<!-- channelsontop affect only HD bouquets -->
 	<channelsontop>
 		<channel number="141" />
-		<channel number="142" />
+		<channel number="102" />
 		<channel number="178" />
 		<channel number="230" />
 		<channel number="171" />
@@ -168,7 +168,6 @@
 		<filter bouquet="0x1008" region="0x22" />
 		<filter bouquet="0x1008" region="0x32" />	
 		<channel number="141" with="101" />
-		<channel number="142" with="102" />
 		<channel number="178" with="103" />
 		<channel number="230" with="104" />
 		<channel number="171" with="105" />
