@@ -21,4 +21,6 @@
     <apn region="Ukraine" carrier="Utel" apn="3g.utel.ua" phone="*99#" />
     <apn region="Egypt" carrier="Vodafone" apn="internet.vodafone.net" phone="*99#" />
     <apn region="Poland" carrier="T-Mobile PL" apn="internet" user="internet" password="internet" pin="" phone="*99#" />
+	<apn region="Germany" carrier="Vodafone.de" apn="web.vodafone.de" phone="*99#" />
+	<apn region="Germany" carrier="T-Mobile Internet" apn="internet.t-mobile" user="t-mobile" password="tm" phone="*99#" />
 </apns>
