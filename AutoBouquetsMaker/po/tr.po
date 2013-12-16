@@ -1,0 +1,202 @@
+# Turkish translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-14 19:35+0100\n"
+"PO-Revision-Date: 2013-12-16 08:25+0100\n"
+"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"Language-Team: CÜNEYT OCAKLILAR <ocaklilar@gmail.com>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "30 Days"
+msgstr "30 Gün"
+
+msgid "About"
+msgstr "Hakkında"
+
+msgid "Add provider prefix to bouquets"
+msgstr "Buketlere sağlayıcı öneki ekle"
+
+msgid "Allows you to set a schedule to perform a scan "
+msgstr "Taramayı programa bağlamanızı sağlar"
+
+msgid "AutoBouquetsMaker"
+msgstr "Oto Buket Yapıcı"
+
+msgid "AutoBouquetsMaker Configure"
+msgstr "Oto Buket Yapıcı Yapılandırma"
+
+msgid "AutoBouquetsMaker Hide sections"
+msgstr "Oto Buket Yapıcı bölümleri gizle"
+
+msgid "AutoBouquetsMaker Keep bouquets"
+msgstr "Oto Buket Yapıcı buketleri tut"
+
+msgid "AutoBouquetsMaker Log"
+msgstr "Oto Buket Yapıcı Günlük"
+
+msgid "AutoBouquetsMaker Providers"
+msgstr "Oto Buket Yapıcı Sağlayıcılar"
+
+msgid "Bouquets order"
+msgstr "Buket düzeni"
+
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "Choose which level of setting's to display. 'Expert'-level shows all items, this also add's more options in the providers menu."
+msgstr "Ayarların hangi düzeyde gösterileceğini seç. 'Uzman' düzeyi tüm maddeleri gösterir, ayrıca sağlayıcılar menüsüne daha fazla seçenek ekler."
+
+msgid "Close"
+msgstr "Kapat"
+
+msgid "Configure"
+msgstr "Yapılandır"
+
+msgid "Daily"
+msgstr "Günlük"
+
+msgid "Hide sections"
+msgstr "Bölümleri gizle"
+
+msgid "Keep all bouquets"
+msgstr "Tüm buketleri tut"
+
+msgid "Keep bouquets"
+msgstr "Buketleri tut"
+
+msgid "Move down"
+msgstr "Aşağı in"
+
+msgid "Move up"
+msgstr "Yukarı çık"
+
+msgid "OK"
+msgstr "Tamam"
+
+msgid "Please wait..."
+msgstr "Lütfen bekleyin..."
+
+msgid "Providers"
+msgstr "Sağlayıcılar"
+
+msgid "Providers order"
+msgstr "Sağlayıcı düzeni"
+
+msgid "Really close without saving settings?"
+msgstr "Ayarları kaydetmeden mi çıkıyorsunuz?"
+
+msgid "Repeat how often"
+msgstr "Ne sıklıkta tekrar"
+
+msgid "Schedule scan"
+msgstr "Taramayı programla"
+
+msgid "Select your own bouquet from the list, please note that the only the first 100 channels for this bouquet will be used."
+msgstr "Listeden kendi buketinizi seçin, unutmayın, bu buketin sadece ilk 100 kanalı kullanılacak."
+
+msgid "Set the repeat interval of the schedule."
+msgstr "Programın tekrarlanma aralığını belirleyin."
+
+msgid "Set the time of day to perform the scan."
+msgstr "Günün tarama yapılacak zamanını belirleyin."
+
+msgid "Setup mode"
+msgstr "Kurulum modu"
+
+msgid "Show in extensions"
+msgstr "Uzantılarda göster"
+
+msgid "Show log"
+msgstr "Günlük göster"
+
+msgid "Start scan"
+msgstr "Taramaya başla"
+
+msgid "This option allows you to choose what region of the country you live in, so it populates the correct channels for your region."
+msgstr "Bu seçenekte ülkenin hangi bölgesinde yaşadığınızı belirtin ki,bölgenizin doğru kanalları toplansın."
+
+msgid "This option enables the current selected provider."
+msgstr "Bu seçenek şimdi seçtiğiniz sağlayıcıyı etkinleştirir."
+
+msgid "This option has several choices \"Yes\", (create a bouquet with all the channels in it), \"Yes HD only\", (will group all HD channels into this bouquet), \"Custom\", (allows you to select your own bouquet), \"No\", (do not use a main bouquet)"
+msgstr "Bu seçenek çok şıklı: \"Evet\", (bütün kanalları barındıran bir buket yarat), \"ssdece HD evet\", (bu bukette tüm HD kanallar gruplanacak),\"Özel\", (buketinizi kendiniz berirlersiniz), \"Hayır\", (bir ana buket kullanmayın)"
+
+msgid "This option will create a FreeToAir bouquet, it will group all none encrypted channels into this bouquet."
+msgstr "Bu seçenek tüm şifresiz kanalları toplayacak bir buket yaratacak."
+
+msgid "This option will create a High Definition bouquet, it will group all HD channels into this bouquet."
+msgstr "Bu seçenek, tüm Hd kanalların bir bukette toplanmasını sağlayacak."
+
+msgid "This option will create bouquets for each type of channel, ie Entertainment, Movies, Documentary."
+msgstr "Bu seçenek her kanal tipi için ayrı buket yaratacak, yani Eğlence, Filmler, Belgeseller."
+
+msgid "This option will prepend the provider name to bouquet name "
+msgstr "Bu seçenek sağlayıcı adını buket adının başına ekliyecek"
+
+msgid "This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)"
+msgstr "Bu seçenek SD kanalları HD olanlarla değiştirecek."
+
+msgid "Time of scan to start"
+msgstr "Tarama başlama saati"
+
+msgid "Weekly"
+msgstr "Haftalık"
+
+msgid "When disabled this will enable the 'Keep bouquets' in the main menu, allowing you to hide some 'existing' bouquets."
+msgstr "Kapatılınca, ana menüde 'Buketleri tut' etkinleşerek,bazı buketleri gizlemenizi sağlayacak."
+
+msgid "When enable allow you start a scan from the extensions list."
+msgstr "Etkinleşince uzantılar listesinden tarama başlatmanızı sağlayacak."
+
+msgid "area"
+msgstr "alan"
+
+msgid "custom bouquet for main"
+msgstr "Özel ana buket"
+
+msgid "expert"
+msgstr "uzman"
+
+msgid "generate FTA bouquet"
+msgstr "Şifresiz buketi üret"
+
+msgid "generate HD bouquet"
+msgstr "HD buketi üret"
+
+msgid "generate main bouquet"
+msgstr "Ana buketi üret"
+
+msgid "generate sections bouquets"
+msgstr "Bölümlü buketleri üret"
+
+msgid "no"
+msgstr "hayır"
+
+msgid "simple"
+msgstr "basit"
+
+msgid "swap channels"
+msgstr "kanalları yer değiştir"
+
+msgid "yes"
+msgstr "evet"
+
+msgid "yes (custom)"
+msgstr "evet (özel)"
+
+msgid "yes (only HD)"
+msgstr "evet (sadece HD)"
+
