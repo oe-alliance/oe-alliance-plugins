@@ -197,7 +197,10 @@ class AutoBouquetsMaker(Screen):
 	def doTune(self):
 		from Screens.Standby import inStandby
 		transponder = self.providers[self.currentAction]["transponder"]
-		nimList = nimmanager.getNimListOfType("DVB-S")
+		nimList = []
+		for nim in nimmanager.nim_slots:
+			if nim.isCompatible("DVB-S") and nim.config_mode not in ("loopthrough"):
+				nimList.append(nim.slot)
 		if len(nimList) == 0:
 			print>>log, "[AutoBouquetsMaker] No DVB-S NIMs founds"
 			self.showError(_('No DVB-S NIMs founds'))
