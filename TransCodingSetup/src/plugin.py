@@ -7,12 +7,13 @@ from Components.config import config, configfile, ConfigSubList, getConfigListEn
 from Components.ActionMap import ActionMap
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
+from Components.Button import Button
 from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import fileExists
-from enigma import eTimer, getBoxType, getDesktop
+from enigma import eTimer, getBoxType
 from os import system as os_system, path as os_path, listdir as os_listdir
 
 def getProcValue(procPath):
@@ -129,7 +130,6 @@ if len(encoders) > 1:
 	for encoder in encoders:
 		choices.append((encoder, encoder))
 	config.plugins.transcodingsetup.encodernum = ConfigSelection(default = '0', choices = choices)
-
 
 transcodingsetupinit = None
 class TranscodingSetupInit:
@@ -315,57 +315,26 @@ class TranscodingSetupInit:
 			self.pluginsetup.showMessage(msg, msgType)
 
 class TranscodingSetup(Screen,ConfigListScreen):
-	size = getDesktop(0).size()
-	if checkSupportAdvanced():
-		if size.width() > 750:
-			size_h = 450
-		else:
-			size_h = 370
-	else:
-		size_h = 280
-
-	pos_h = (size_h , size_h - 150 , (size_h - 150) + 70, (size_h - 150) + 70 + 60)
-	skin_advanced =  """
-		<screen name="TranscodingSetupAdvanced" position="center,center" size="600,%d">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
-			<widget source="key_red" render="Label" position="5,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
-			<widget source="key_green" render="Label" position="155,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
-			<widget source="key_yellow" render="Label" position="305,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" foregroundColor="#ffffff" transparent="1" />
-			<widget source="key_blue" render="Label" position="455,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" foregroundColor="#ffffff" transparent="1" />
-			<widget name="config" zPosition="2" position="25,70" size="560,%d" scrollbarMode="showOnDemand" transparent="1" />
-			<widget source="description" render="Label" position="20,%d" size="540,60" font="Regular;20" halign="center" valign="center" />
-			<widget source="text" render="Label" position="20,%d" size="540,20" font="Regular;22" halign="center" valign="center" />
+	skin =  """
+		<screen name="TranscodingSetup" position="center,center" size="600,450">
+			<widget name="red" pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
+			<widget name="green" pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
+			<widget name="yellow" pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
+			<widget name="blue" pixmap="skin_default/buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
+			<widget name="key_red" position="5,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
+			<widget name="key_green" position="155,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
+			<widget name="key_yellow" position="305,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" foregroundColor="#ffffff" transparent="1" />
+			<widget name="key_blue" render="Label" position="455,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" foregroundColor="#ffffff" transparent="1" />
+			<widget name="config" zPosition="2" position="25,70" size="560,300" scrollbarMode="showOnDemand" transparent="1" />
+			<widget source="description" render="Label" position="20,370" size="540,60" font="Regular;20" halign="center" valign="center" />
+			<widget source="text" render="Label" position="20,430" size="540,20" font="Regular;22" halign="center" valign="center" />
 		</screen>
-		""" % pos_h
-
-	skin_normal =  """
-		<screen position="center,center" size="600,%d">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="40,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="230,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="420,0" size="140,40" alphatest="on" />
-			<widget source="key_red" render="Label" position="40,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
-			<widget source="key_green" render="Label" position="230,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
-			<widget source="key_yellow" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" foregroundColor="#ffffff" transparent="1" />
-			<widget name="config" zPosition="2" position="25,70" size="560,%d" scrollbarMode="showOnDemand" transparent="1" />
-			<widget source="description" render="Label" position="20,%d" size="540,60" font="Regular;20" halign="center" valign="center" />
-			<widget source="text" render="Label" position="20,%d" size="540,20" font="Regular;22" halign="center" valign="center" />
-		</screen>
-		""" % pos_h
+		"""
 
 	def __init__(self,session):
 		Screen.__init__(self,session)
 		self.session = session
 		self.onChangedEntry = [ ]
-		if checkSupportAdvanced():
-			self.skin = TranscodingSetup.skin_advanced
-			self.skinName = "TranscodingSetupAdvanced"
-		else:
-			self.skin = TranscodingSetup.skin_normal
-			self.skinName = "TranscodingSetup"
-
 		self.skinName = "TranscodingSetup"
 		self.setup_title = _("Transcoding Setup")
 		self.setTitle(self.setup_title)
@@ -376,10 +345,20 @@ class TranscodingSetup(Screen,ConfigListScreen):
 			TEXT = _("2nd transcoding and PIP are mutually exclusive.")
 		self["text"] = Label(_("%s")%TEXT)
 
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Save"))
-		self["key_yellow"] = StaticText(_("Default"))
-		self["key_blue"] = StaticText(_("Advanced"))
+		self["key_red"] = Button(_("Cancel"))
+		self["key_green"] = Button(_("Save"))
+		self["key_yellow"] = Button(_("Default"))
+		self["key_blue"] = Button(_("Advanced"))
+
+		# Background for Buttons
+		self["red"] = Pixmap()
+		self["green"] = Pixmap()
+		self["yellow"] = Pixmap()
+		self["blue"] = Pixmap()
+
+		if not checkSupportAdvanced():
+			self["blue"].hide()
+			self["key_blue"].hide()
 
 		self["description"] = Label()
 
