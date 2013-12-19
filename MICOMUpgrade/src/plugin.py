@@ -31,49 +31,7 @@ if os.path.exists("/proc/stb/info/boxtype"):
 	info = inimodel.read().strip()
 	inimodel.close()
 
-	if info == "ini-5000":
-		fwlist= [
-			("fp", _("Front Panel"))
-			]
-		fwdata= {
-			 "micom" : ["http://code-ini.com/software/micom/", "RHS500_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
-			}
-	elif info == "ini-5000ru":
-		fwlist= [
-			("fp", _("Front Panel"))
-			]
-		fwdata= {
-			 "micom" : ["http://code-ini.com/software/micom/", "RHS500RU_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
-			}
-	elif info == "ini-5000sv":
-		fwlist= [
-			("fp", _("Front Panel"))
-			]
-		fwdata= {
-			 "micom" : ["http://code-ini.com/software/micom/", "RHS500SV_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
-			}			
-	elif info == "ini-7000":
-		fwlist= [
-			("fp", _("Front Panel"))
-			]
-		fwdata= {
-			 "micom" : ["http://code-ini.com/software/micom/", "RHS700_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
-			}
-	elif info == "ini-7012":
-		fwlist= [
-			("fp", _("Front Panel"))
-			]
-		fwdata= {
-			 "micom" : ["http://code-ini.com/software/micom/", "RHS712_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
-			}
-	elif info == "ini-3000":
-		fwlist= [
-			("fp", _("Front Panel"))
-			]
-		fwdata= {
-			 "micom" : ["http://code-ini.com/software/micom/", "RHS300_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
-			}
-	elif info == "ini-1000":
+	if info == "ini-1000":
 		fwlist= [
 			("fp", _("Front Panel"))
 			]
@@ -94,7 +52,70 @@ if os.path.exists("/proc/stb/info/boxtype"):
 		fwdata= {
 			 "micom" : ["http://code-ini.com/software/micom/", "RHS100SV_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
-		
+	elif info == "ini-1000de":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS100DE_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+	elif info == "ini-3000":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS300_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+	elif info == "ini-5000":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS500_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+	elif info == "ini-5000ru":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS500RU_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+	elif info == "ini-5000sv":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS500SV_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+	elif info == "ini-7000":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS700_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+	elif info == "ini-7012":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS712_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+	elif info == "ini-9000de":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "INI900DE_Micom.bin", "/proc/vfd;/dev/mcu;"]
+			}
+	elif info == "ini-9000ru":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "INI900RU_Micom.bin", "/proc/vfd;/dev/mcu;"]
+			}
+			
 class Filebrowser(Screen):
 	skin = 	"""
 		<screen position="center,center" size="500,490" title="File Browser" >
@@ -401,9 +422,14 @@ class FirmwareUpgrade(Screen):
 			except:
 				"N/A"
 			self["newversion"].setText(self.verfile)
-			if int(self.verfile) <= int(self.version):
-				self["status"].setText("You have already latest front panel version")
-			else:
+			
+			# HACK for samples, which does not have micom version
+			try:
+				if int(self.verfile) <= int(self.version):
+					self["status"].setText("You have already latest front panel version")
+				else:
+					self["status"].setText("Press the Green/OK button, if you want to upgrade to this file:\n%s\n" % (data))
+			except:
 				self["status"].setText("Press the Green/OK button, if you want to upgrade to this file:\n%s\n" % (data))
 			self.updateFilePath = data
 			if self.fileopenmode == False:
@@ -443,9 +469,13 @@ class FirmwareUpgrade(Screen):
 			self.doFileOpen()
 			return
 		# check if downloaded verion is newer then flashed one
-		if int(self.verfile) <= int(self.version):      
-			self.session.open(MessageBox, _("You can not upgrade to the same or lower version !"), MessageBox.TYPE_INFO, timeout = 10)
-			return
+		# HACK for samples, which does not have micom version
+		try:
+			if int(self.verfile) <= int(self.version):      
+				self.session.open(MessageBox, _("You can not upgrade to the same or lower version !"), MessageBox.TYPE_INFO, timeout = 10)
+				return
+		except:
+			pass # always flash when no micom version
 		msg = "You should not be stop during the upgrade.\nDo you want to upgrade?"
 		self.session.openWithCallback(self.cbRunUpgrade, MessageBox, _(msg), MessageBox.TYPE_YESNO, timeout = 15, default = True)
 		self.fileopenmode = False
