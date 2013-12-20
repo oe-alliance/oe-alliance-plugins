@@ -326,8 +326,8 @@ class TranscodingSetup(Screen,ConfigListScreen):
 			<widget source="key_yellow" render="Label" position="305,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" foregroundColor="#ffffff" transparent="1" />
 			<widget name="key_blue" render="Label" position="455,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" foregroundColor="#ffffff" transparent="1" />
 			<widget name="config" zPosition="2" position="25,70" size="560,300" scrollbarMode="showOnDemand" transparent="1" />
-			<widget source="description" render="Label" position="20,370" size="540,60" font="Regular;20" halign="center" valign="center" />
-			<widget source="text" render="Label" position="20,430" size="540,20" font="Regular;22" halign="center" valign="center" />
+			<widget name="description" position="20,370" size="540,60" font="Regular;20" halign="center" valign="center" />
+			<widget name="text" position="20,430" size="540,20" font="Regular;22" halign="center" valign="center" />
 		</screen>
 		"""
 
