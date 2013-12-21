@@ -490,7 +490,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 		if not result:
 			return
 		for x in self["config"].list:
-			x.cancel()
+			x[1].cancel()
 		self.close()
 
 	def keyCancel(self):
