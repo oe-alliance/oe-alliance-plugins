@@ -7,7 +7,7 @@ SUBDIRS += Blindscan
 endif
 
 if VUPLUS
-SUBDIRS += VuplusEvent HbbTV
+SUBDIRS += VuplusEvent HbbTV AudioEffect
 endif
 
 if XTREND

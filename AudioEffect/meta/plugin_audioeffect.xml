@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>hschang(hschang@dev3)</author>
+                    <name>Audio Effect</name>
+                    <packagename>enigma2-plugin-systemplugins-audioeffect</packagename>
+                    <shortdescription>Audio Effect</shortdescription>
+                    <description>Audio Effect</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-audioeffect" />
+	</files>
+</default>

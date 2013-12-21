@@ -157,6 +157,11 @@ AutoBouquetsMaker/providers/Makefile
 AutoBouquetsMaker/src/Makefile
 AutoBouquetsMaker/src/scanner/Makefile
 
+AudioEffect/Makefile
+AudioEffect/src/Makefile
+AudioEffect/meta/Makefile
+AudioEffect/po/Makefile
+
 Blindscan/Makefile
 Blindscan/src/Makefile
 Blindscan/meta/Makefile
