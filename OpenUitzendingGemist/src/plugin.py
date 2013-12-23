@@ -1113,15 +1113,12 @@ class OpenUg(Screen):
 				if tmp in line:
 					tmp = "\"proglogo\":\""
 					icon_type = icon
-					
 				tmp = '\"synopsis\":\"'
 				if tmp in line:
 					short = line.split(tmp)[1].split('\"')[0]
-					
 				tmp = '\"station\":\"'
 				if tmp in line:
 					channel = line.split(tmp)[1].split('\"')[0]
-					
 				tmp = "\"name\":\""
 				if tmp in line:
 					name = line.split(tmp)[1].split('"')[0]
@@ -1187,7 +1184,6 @@ class OpenUg(Screen):
 						tmp = '\"synopsis\":\"'
 						if tmp in line:
 							short = line.split(tmp)[1].split('\"')[0]
-				
 				ekey = "\"episode_key\":\"" + ekey
 				for line in uuiddata:
 					if ekey in line:
@@ -1200,7 +1196,6 @@ class OpenUg(Screen):
 						tmp = "\"abstract_key\":\""
 						if tmp in line:
 							akey = line.split(tmp)[1].split('"')[0]
-				
 				for line in abstract:
 					if akey in line:
 						tmp = "\"name\":\""
