@@ -82,7 +82,8 @@ def getAudioOutTypes():
 		aTypes.append( aType )
 	return aTypes
 
-AUDIOOUT_TYPES = getAudioOutTypes()
+if SUPPORT_AUDIOEFFECT:
+	AUDIOOUT_TYPES = getAudioOutTypes()
 
 def getSpeakerPosition():
 	choices = []
@@ -249,7 +250,8 @@ def OnSessionStart(session, **kwargs):
 	setAudioEffectConfigs()
 
 def Plugins(**kwargs):
-	pList = []
-	pList.append( PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=OnSessionStart))
-	pList.append( PluginDescriptor(name=_("AudioEffect"), description=_("sets the audio effetcs"), where = PluginDescriptor.WHERE_AUDIOMENU, fnc=main))
-	return pList
+	if SUPPORT_AUDIOEFFECT:
+		return [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=OnSessionStart),
+				PluginDescriptor(name=_("AudioEffect"), description=_("sets the audio effetcs"), where = PluginDescriptor.WHERE_AUDIOMENU, fnc=main)]
+	else:
+		return []
