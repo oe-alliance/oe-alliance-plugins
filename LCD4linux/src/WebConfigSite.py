@@ -347,13 +347,11 @@ class LCD4linuxConfigweb(resource.Resource):
 			if Cfritz:
 				rmFile(PICfritz)
 			if Cwetter:
-				rmFile(PICwetter % "0")
-				rmFile(PICwetter % "1")
 				resetWetter()
 			if Cpicon:
 				rmFiles(LCD4linux.PiconCache.value + "*.png")
 			if Ccal:
-				rmFile(PICcal)
+				resetCal()
 			if Cwww:
 				getWWW()
 
