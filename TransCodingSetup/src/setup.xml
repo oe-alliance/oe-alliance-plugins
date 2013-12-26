@@ -1,9 +1,9 @@
 <setupxml>
-	<setup key="transcoding" title="Transcoding Setup" showOpenWebIF="1">
-		<item level="0" text="Port">config.plugins.transcodingsetup.port</item>
-		<item level="0" text="Bitrate">config.plugins.transcodingsetup.bitrate</item>
-		<item level="0" text="Framerate">config.plugins.transcodingsetup.framerate</item>
-		<item level="0" text="Auto mode (Bitrate/Framerate)" requires="AdvancedTranscoding">config.plugins.transcodingsetup.automode</item>
-		<item level="0" text="Resolution" requires="AdvancedTranscoding">config.plugins.transcodingsetup.resolution</item>
+	<setup key="transcodesetup" title="Transcode settings" showOpenWebIF="1">
+		<item level="2" text="Transcoding" summary="Allows streams to be transcoded.">config.plugins.transcodingsetup.transcoding</item>
+		<item level="2" text="Channel Port" summary="Set the port for transcode.">config.plugins.transcodingsetup.port</item>
+		<item level="2" text="Media Port" summary="Set the port for transcode.">config.plugins.transcodingsetup.port</item>
+		<item level="2" text="Bitrate" summary="Sets the bitrate (quality).">config.plugins.transcodingsetup.bitrate</item>
+		<item level="2" text="Framerate" summary="Sets the framerate (fps).">config.plugins.transcodingsetup.framerate</item>
 	</setup>
 </setupxml>
