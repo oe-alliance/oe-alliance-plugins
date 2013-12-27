@@ -5,6 +5,7 @@ from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, configfile, ConfigSubList, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigInteger, integer_limits, NoSave
 from Components.ActionMap import ActionMap
+from Components.SystemInfo import SystemInfo
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
 from Components.Button import Button
@@ -130,6 +131,9 @@ if len(encoders) > 1:
 	for encoder in encoders:
 		choices.append((encoder, encoder))
 	config.plugins.transcodingsetup.encodernum = ConfigSelection(default = '0', choices = choices)
+
+SystemInfo["AdvancedTranscoding"] = checkSupportAdvanced()
+SystemInfo["MultipleEncoders"] = len(encoders) > 1
 
 transcodingsetupinit = None
 class TranscodingSetupInit:

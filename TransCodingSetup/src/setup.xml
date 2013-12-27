@@ -1,9 +1,28 @@
 <setupxml>
-	<setup key="transcodesetup" title="Transcode settings" showOpenWebIF="1">
-		<item level="2" text="Transcoding" summary="Allows streams to be transcoded.">config.plugins.transcodingsetup.transcoding</item>
-		<item level="2" text="Channel Port" summary="Set the port for transcode.">config.plugins.transcodingsetup.port</item>
-		<item level="2" text="Media Port" summary="Set the port for transcode.">config.plugins.transcodingsetup.port</item>
-		<item level="2" text="Bitrate" summary="Sets the bitrate (quality).">config.plugins.transcodingsetup.bitrate</item>
-		<item level="2" text="Framerate" summary="Sets the framerate (fps).">config.plugins.transcodingsetup.framerate</item>
+	<setup key="transcoding" title="Transcoding Setup" showOpenWebIF="1">
+		<item level="0" text="Port">config.plugins.transcodingsetup.port</item>
+		<item level="0" text="Encoder" requires="MultipleEncoders">config.plugins.transcodingsetup.encodernum</item>
+		<item level="0" text="Encoder 0: Auto mode (Bitrate/Framerate)" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].automode</item>
+		<item level="0" text="Encoder 0: Bitrate">config.plugins.transcodingsetup.encoder[0].bitrate</item>
+		<item level="0" text="Encoder 0: Framerate">config.plugins.transcodingsetup.encoder[0].framerate</item>
+		<item level="0" text="Encoder 0: Resolution" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].resolution</item>
+		<item level="0" text="Encoder 0: Aspect Ratio" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].aspectratio</item>
+		<item level="0" text="Encoder 0: Audio codec" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].audiocodec</item>
+		<item level="0" text="Encoder 0: Video codec" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].videocodec</item>
+		<item level="0" text="Encoder 0: GOP Frame B" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].gopframeb</item>
+		<item level="0" text="Encoder 0: GOP Frame P" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].gopframep</item>
+		<item level="0" text="Encoder 0: Level" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].level</item>
+		<item level="0" text="Encoder 0: Profile" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].profile</item>
+		<item level="0" text="Encoder 1: Auto mode (Bitrate/Framerate)" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].automode</item>
+		<item level="0" text="Encoder 1: Bitrate" requires="MultipleEncoders">config.plugins.transcodingsetup.encoder[0].bitrate</item>
+		<item level="0" text="Encoder 1: Framerate" requires="MultipleEncoders">config.plugins.transcodingsetup.encoder[0].framerate</item>
+		<item level="0" text="Encoder 1: Resolution" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].resolution</item>
+		<item level="0" text="Encoder 1: Aspect Ratio" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].aspectratio</item>
+		<item level="0" text="Encoder 1: Audio codec" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].audiocodec</item>
+		<item level="0" text="Encoder 1: Video codec" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].videocodec</item>
+		<item level="0" text="Encoder 1: GOP Frame B" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].gopframeb</item>
+		<item level="0" text="Encoder 1: GOP Frame P" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].gopframep</item>
+		<item level="0" text="Encoder 1: Level" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].level</item>
+		<item level="0" text="Encoder 1: Profile" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].profile</item>
 	</setup>
 </setupxml>
