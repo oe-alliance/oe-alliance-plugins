@@ -63,7 +63,7 @@ def createTransCodingConfig(encoder):
 		if getBoxType() == "vusolo2":
 			choice = ConfigSelection(default = "400000", choices=[("50000", "50 Kbits"), ("100000", "100 Kbits"), ("200000", "200 Kbits"), ("300000", "300 Kbits"), ("400000", "400 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
 		else:
-			choice = ConfigSelection(default = "2000000", choices=[("100000", "100 Kbits"), ("500000", "500 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits"), ("10000000", "10 Mbits")])
+			choice = ConfigSelection(default = "2000000", choices=[("100000", "100 Kbits"), ("250000", "250 Kbits"), ("500000", "500 Kbits"), ("750000", "750 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits"), ("10000000", "10 Mbits")])
 		config.plugins.transcodingsetup.encoder[int(encoder)].bitrate = choice
 
 	if fileExists(getProcPath(encoder ,"framerate")):
