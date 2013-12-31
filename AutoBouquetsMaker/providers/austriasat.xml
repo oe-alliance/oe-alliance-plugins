@@ -1,5 +1,5 @@
 <provider>
-	<name>Canal Digitaal SD Astra 1</name>
+	<name>AustriaSat</name>
 	<protocol>fastscan</protocol>
 	<!-- namespace could change even on the same sat...
 	     in case of use the service hacks to fix it -->
@@ -7,10 +7,10 @@
 	<transponder frequency="12515000" symbol_rate="22000000" polarization="0"
 		fec_inner="4" orbital_position="192" inversion="2" system="0"
 		modulation="1" roll_off="0" pilot="2"
-		nit_pid="0x384" nit_current_table_id="0xbc" nit_other_table_id="0x00"
-		fastscan_pid="0x384" fastscan_table_id="0xbd" />
+		nit_pid="0x3b6" nit_current_table_id="0xbc" nit_other_table_id="0x00"
+		fastscan_pid="0x3b6" fastscan_table_id="0xbd" />
 	<sections>
-		<section number="1">Canal Digitaal SD</section>
+		<section number="1">AustriaSat</section>
 	</sections>
 	<servicehacks>
 <![CDATA[
