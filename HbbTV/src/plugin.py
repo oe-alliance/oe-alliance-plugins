@@ -170,54 +170,6 @@ def _pack(opcode, params=None, reserved=0):
 	packed_data = struct.pack(h, m, opcode, len(params), reserved)
 	return packed_data + params
 
-class MMSStreamURL:
-	headers = [
-				   'GET %s HTTP/1.0'
-				  ,'Accept: */* '
-				  ,'User-Agent: NSPlayer/7.10.0.3059 '
-				  ,'Host: %s '
-				  ,'Connection: Close '
-			]
-
-	def __init__(self):
-		self.sendmsg = ''
-		for m in self.headers:
-			self.sendmsg += m + '\n'
-		self.sendmsg += '\n\n'
-
-	def request(self, host, port=80, location='/'):
-		sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-		sock.connect((host, port))
-		sock.send(self.sendmsg%(location, host))
-		#print "Request."
-		#print self.sendmsg%(location, host)
-		fullydata = ''
-		while 1:
-			res = sock.recv(1024)
-			if res == '': break
-			fullydata += res
-		sock.close()
-		return fullydata
-
-	def parse(self, data):
-		for d in data.splitlines():
-			if d.startswith('Location: '):
-				return d[9:]
-		return None
-
-	def getLocationData(self, url):
-		url_list,host,location = None,None,None
-		try:
-			url = url[url.find(':')+3:]
-			url_list = url.split('/')
-			host = url_list[0]
-			location = url[len(url_list[0]):]
-		except Exception, err_msg:
-			print err_msg
-			return None
-		html = self.request(host=host, location=location)
-		return self.parse(html)
-
 class OpCodeSet:
 	def __init__(self):
 		self._opcode_ = {
@@ -788,12 +740,6 @@ class HandlerHbbTV(Handler):
 		vodUri = data[hl:hl+uriLength]
 		self._handle_dump(self._cb_handleVODPlayerURI, opcode, vodUri)
 		self._vod_uri = vodUri
-#		try:
-#			if vodUri.find('/zdf/') >= 0:
-#				tmpUri = MMSStreamURL().getLocationData(vodUri).strip()
-#				if not strIsEmpty(tmpUri):
-#					self._vod_uri = tmpUri
-#		except: pass
 		return (0, "OK")
 
 	def doStop(self, restoreBeforeService=True, needStop=True):
@@ -867,7 +813,6 @@ class HbbTVWindow(Screen, InfoBarNotifications):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap = {
-			iPlayableService.evUser+20: self._serviceForbiden,
 			iPlayableService.evStart: self._serviceStarted,
 			iPlayableService.evEOF: self._serviceEOF,
 		})
@@ -902,8 +847,9 @@ class HbbTVWindow(Screen, InfoBarNotifications):
 			seek = service and service.seek()
 			l = seek.getLength()
 			p = seek.getPlayPosition()
-			#return (p[1]/90000, l[1]/90000)
-			return (p[1], l[1])
+			if(not l[0] and not p[0]):
+				return (p[1], l[1])
+			return (90000,90000)
 		except: pass
 		return (-1,-1)
 
@@ -974,14 +920,6 @@ class HbbTVWindow(Screen, InfoBarNotifications):
 		eRCInput.getInstance().unlock()
 		self.close()
 
-	def _serviceForbiden(self):
-		global __gval__
-		real_url = MMSStreamURL().getLocationData(__gval__.hbbtv_handelr.getUrl())
-		#print "Received URI :\n", real_url
-
-		if real_url is not None:
-			__gval__.hbbtv_handelr.doRetryOpen(real_url.strip())
-
 	def _cb_set_page_title(self, title=None):
 		print "page title :",title
 		if title is None:
@@ -994,8 +932,6 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 		global __gval__
 		__gval__.hbbtv_handelr = HandlerHbbTV(session)
 		__gval__.command_server = ServerFactory().doListenUnixTCP('/tmp/.sock.hbbtv.url', __gval__.hbbtv_handelr)
-
-		self._urls = None
 
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
@@ -1017,6 +953,8 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 			_g_ssm_ = SimpleSharedMemory()
 			_g_ssm_.doConnect()
 
+		self._callbackStartStop = None
+
 		self.__et = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evHBBTVInfo: self._cb_detectedAIT,
 				iPlayableService.evUpdatedInfo: self._cb_updateInfo
@@ -1033,16 +971,16 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 	def _cb_detectedAIT(self):
 		name = self._cb_ready_for_ait()
 		if name is not None and self.mVuplusBox:
-			from Screens.InfoBarGenerics import gHbbTvApplication
-			gHbbTvApplication.setApplicationName(str(name))
+			from Screens.InfoBarGenerics import gHbbtvApplication
+			gHbbtvApplication.setApplicationName(str(name))
 
 	def _cb_updateInfo(self):
 		if not self._excuted_browser:
 			command_util = getCommandUtil()
 			command_util.sendCommand('OP_HBBTV_UNLOAD_AIT')
 		if self.mVuplusBox:
-			from Screens.InfoBarGenerics import gHbbTvApplication
-			gHbbTvApplication.setApplicationName("")
+			from Screens.InfoBarGenerics import gHbbtvApplication
+			gHbbtvApplication.setApplicationName("")
 		#self._applicationList = None
 
 	def _cb_registrate_infobar(self):
@@ -1065,7 +1003,7 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 				name = ""
 
 			pmtid = info.getInfo(iServiceInformation.sPMTPID)
-			demux = info.getInfoString(iServiceInformation.sLiveStreamDemuxId)
+			demux = 0#info.getInfoString(iServiceInformation.sLiveStreamDemuxId)
 
 			from aitreader import eAITSectionReader
 			reader = eAITSectionReader(demux, pmtid, sid)
@@ -1143,7 +1081,7 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 
 	def getStartHbbTVUrl(self):
 		url, self._profile = None, 0
-		if self._applicationList and len(self._applicationList) > 0:
+		if self._applicationList is not None:
 			self._profile = self._applicationList[0]["profile"]
 			url = self._applicationList[0]["url"]
 		if url is None:
@@ -1163,7 +1101,9 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 		self._session.openWithCallback(self._application_selected, ChoiceBox, title=_("Please choose an HbbTV application."), list=applications)
 
 	def _application_selected(self, selected):
+		print selected
 		try:
+			if selected[1] is None: return
 			self._cb_hbbtv_activated(selected[1]["name"], selected[1]["url"])
 		except Exception, ErrMsg: print ErrMsg
 
@@ -1307,12 +1247,6 @@ class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
 
 	def layoutFinished(self):
 		self.setTitle(_('Preference'))
-		try:
-			d = OperaBrowserSetting().getData()
-			self._startPageUrl = d['start']
-			#d['type']
-		except: self._startPageUrl = 'http://google.com'
-		self.updateStartPageUrl()
 
 	def updateStartPageUrl(self):
 		if self.menuItemStartpage.value == "startpage":
@@ -2024,6 +1958,7 @@ class OperaBrowser(Screen):
 		self._enableKeyEvent = True
 		#if not self.toggleListViewFlag:
 		#	self.keyDown()
+
 		self._currentPageUrl = ''
 		if self.paramUrl is not None:
 			self.keyCancel()
@@ -2052,6 +1987,7 @@ class OperaBrowser(Screen):
 			command_server.onHbbTVCloseCB.append(self._on_close_window)
 		self.toggleMainScreen()
 		self.enableRCMouse(True)
+
 		fbClass.getInstance().lock()
 		eRCInput.getInstance().lock()
 
