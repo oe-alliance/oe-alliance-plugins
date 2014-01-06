@@ -1,14 +1,16 @@
 <provider>
-	<name>SKY IRL</name>
+	<name>Sky Scotland</name>
 	<protocol>sky</protocol>
 	<transponder frequency="10802750" symbol_rate="22000000" polarization="0"
 		fec_inner="4" orbital_position="282" inversion="2" system="0"
 		modulation="1" roll_off="0" pilot="2" />
 	<configurations>
-		<configuration key="northern_ireland_hd" bouquet="0x1008" region="0x21" namespace="0x11a0000">Northern Ireland HD</configuration>
-		<configuration key="northern_ireland_sd" bouquet="0x1004" region="0x21" namespace="0x11a0000">Northern Ireland SD</configuration>
-		<configuration key="republic_of_ireland_hd" bouquet="0x1008" region="0x32" namespace="0x11a0000">Republic of Ireland HD</configuration>
-		<configuration key="republic_of_ireland_sd" bouquet="0x1004" region="0x32" namespace="0x11a0000">Republic of Ireland SD</configuration>
+		<configuration key="hd_border_scotland" bouquet="0x1006" region="0x24" namespace="0x11a0000">Border Scotland HD</configuration>
+		<configuration key="sd_border_scotland" bouquet="0x1002" region="0x24" namespace="0x11a0000">Border Scotland SD</configuration>
+		<configuration key="hd_scottish_west" bouquet="0x1006" region="0x25" namespace="0x11a0000">Scottish West HD</configuration>
+		<configuration key="sd_scottish_west" bouquet="0x1002" region="0x25" namespace="0x11a0000">Scottish West SD</configuration>
+		<configuration key="hd_scottish_east" bouquet="0x1006" region="0x26" namespace="0x11a0000">Scottish East HD</configuration>
+		<configuration key="sd_scottish_east" bouquet="0x1002" region="0x26" namespace="0x11a0000">Scottish East SD</configuration>
 	</configurations>
 	<sections>
 		<section number="101">Entertainment</section>
@@ -35,17 +37,16 @@
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
 	<channelsontop>
-		<channel number="141" />
+		<channel number="101" />
 		<channel number="142" />
-		<channel number="178" />
 		<channel number="230" />
 		<channel number="171" />
 	</channelsontop>
 	<!-- swapchannels affect only main bouquet (the normal version) -->
 	<swapchannels>
-		<filter bouquet="0x1008" region="0x21" />
-		<filter bouquet="0x1008" region="0x32" />	
-		<channel number="141" with="101" />
+		<filter bouquet="0x1006" region="0x24" />
+		<filter bouquet="0x1006" region="0x25" />
+		<filter bouquet="0x1006" region="0x26" />
 		<channel number="142" with="102" />
 		<channel number="230" with="104" />
 		<channel number="171" with="105" />
@@ -61,7 +62,7 @@ if service["transport_stream_id"] == 0x7e3:
 if service["service_type"] == 0x02 and service["number"] > 3000:
 	service["number"] -= 3000
 
-new_numbers = []	
+new_numbers = []		
 for number in service["numbers"]:
 	if number >= 3000 and number <= 3999:
 		new_numbers.append(number - 3000)
@@ -83,7 +84,6 @@ for number in service["numbers"]:
 		break
 	else:
 		new_numbers.append(number)
-
 service["numbers"] = new_numbers
 ]]>
 	</servicehacks>

@@ -1,0 +1,209 @@
+<provider>
+	<name>Sky England</name>
+	<protocol>sky</protocol>
+	<transponder frequency="10802750" symbol_rate="22000000" polarization="0"
+		fec_inner="4" orbital_position="282" inversion="2" system="0"
+		modulation="1" roll_off="0" pilot="2" />
+	<configurations>
+		<configuration key="hd_atherstone" bouquet="0x1005" region="0x13" namespace="0x11a0000">Atherstone HD</configuration>
+		<configuration key="sd_atherstone" bouquet="0x1001" region="0x13" namespace="0x11a0000">Atherstone SD</configuration>
+		<configuration key="hd_border_england" bouquet="0x1005" region="0x0c" namespace="0x11a0000">Border England HD</configuration>
+		<configuration key="sd_border_england" bouquet="0x1001" region="0x0c" namespace="0x11a0000">Border England SD</configuration>
+		<configuration key="hd_brighton" bouquet="0x1007" region="0x41" namespace="0x11a0000">Brighton HD</configuration>
+		<configuration key="sd_brighton" bouquet="0x1003" region="0x41" namespace="0x11a0000">Brighton SD</configuration>
+		<configuration key="hd_central_midlands" bouquet="0x1005" region="0x03" namespace="0x11a0000">Central Midlands HD</configuration>
+		<configuration key="sd_central_midlands" bouquet="0x1001" region="0x03" namespace="0x11a0000">Central Midlands SD</configuration>
+		<configuration key="hd_channel_isles" bouquet="0x1008" region="0x22" namespace="0x11a0000">Channel Isles HD</configuration> 
+		<configuration key="sd_channel_isles" bouquet="0x1004" region="0x22" namespace="0x11a0000">Channel Isles SD</configuration>
+		<configuration key="hd_east_midlands" bouquet="0x1005" region="0x14" namespace="0x11a0000">East Midlands HD</configuration>
+		<configuration key="sd_east_midlands" bouquet="0x1001" region="0x14" namespace="0x11a0000">East Midlands SD</configuration>
+		<configuration key="hd_essex" bouquet="0x1005" region="0x02" namespace="0x11a0000">Essex HD</configuration>
+		<configuration key="sd_essex" bouquet="0x1001" region="0x02" namespace="0x11a0000">Essex SD</configuration>
+		<configuration key="hd_gloucester" bouquet="0x1005" region="0x18" namespace="0x11a0000">Gloucester HD</configuration>
+		<configuration key="sd_gloucester" bouquet="0x1001" region="0x18" namespace="0x11a0000">Gloucester SD</configuration>
+		<configuration key="hd_grampian" bouquet="0x1006" region="0x23" namespace="0x11a0000">Grampian HD</configuration>
+		<configuration key="sd_grampian" bouquet="0x1002" region="0x23" namespace="0x11a0000">Grampian SD</configuration>
+		<configuration key="hd_granada" bouquet="0x1005" region="0x07" namespace="0x11a0000">Granada HD</configuration>
+		<configuration key="sd_granada" bouquet="0x1001" region="0x07" namespace="0x11a0000">Granada SD</configuration>
+		<configuration key="hd_henley_on_thames" bouquet="0x1007" region="0x46" namespace="0x11a0000">Henley On Thames HD</configuration>
+		<configuration key="sd_henley_on_thames" bouquet="0x1003" region="0x46" namespace="0x11a0000">Henley On Thames SD</configuration>
+		<configuration key="hd_htv_west" bouquet="0x1005" region="0x04" namespace="0x11a0000">HTV West HD</configuration>
+		<configuration key="sd_htv_west" bouquet="0x1001" region="0x04" namespace="0x11a0000">HTV West SD</configuration>
+		<configuration key="hd_htv_west_thames_valley" bouquet="0x1007" region="0x3f" namespace="0x11a0000">HTV West / Thames Valley HD</configuration>
+		<configuration key="sd_htv_west_thames_valley" bouquet="0x1003" region="0x3f" namespace="0x11a0000">HTV West / Thames Valley SD</configuration>
+		<configuration key="hd_humber" bouquet="0x1005" region="0x1d" namespace="0x11a0000">Humber HD</configuration>
+		<configuration key="sd_humber" bouquet="0x1001" region="0x1d" namespace="0x11a0000">Humber SD</configuration>
+		<configuration key="hd_london" bouquet="0x1005" region="0x01" namespace="0x11a0000">London HD</configuration>
+		<configuration key="sd_london" bouquet="0x1001" region="0x01" namespace="0x11a0000">London SD</configuration>
+		<configuration key="hd_london_essex" bouquet="0x1005" region="0x12" namespace="0x11a0000">London / Essex HD</configuration>
+		<configuration key="sd_london_essex" bouquet="0x1001" region="0x12" namespace="0x11a0000">London / Essex SD</configuration>
+		<configuration key="hd_london_thames_valley" bouquet="0x1007" region="0x42" namespace="0x11a0000">London / Thames Valley HD</configuration>
+		<configuration key="sd_london_thames_valley" bouquet="0x1003" region="0x42" namespace="0x11a0000">London / Thames Valley SD</configuration>
+		<configuration key="hd_london_kent" bouquet="0x1007" region="0x40" namespace="0x11a0000">London Kent HD</configuration>
+		<configuration key="sd_london_kent" bouquet="0x1003" region="0x40" namespace="0x11a0000">London Kent SD</configuration>
+		<configuration key="hd_meridian_east" bouquet="0x1005" region="0x0b" namespace="0x11a0000">Meridian East HD</configuration>
+		<configuration key="sd_meridian_north" bouquet="0x1003" region="0x44" namespace="0x11a0000">Meridian North SD</configuration>
+		<configuration key="sd_meridian_east" bouquet="0x1001" region="0x0b" namespace="0x11a0000">Meridian East SD</configuration>
+		<configuration key="hd_meridian_north" bouquet="0x1007" region="0x44" namespace="0x11a0000">Meridian North HD</configuration>
+		<configuration key="hd_meridian_south" bouquet="0x1005" region="0x05" namespace="0x11a0000">Meridian South HD</configuration>
+		<configuration key="sd_meridian_south" bouquet="0x1001" region="0x05" namespace="0x11a0000">Meridian South SD</configuration>
+		<configuration key="hd_meridian_south_east" bouquet="0x1005" region="0x0a" namespace="0x11a0000">Meridian South East HD</configuration>
+		<configuration key="sd_meridian_south_east" bouquet="0x1001" region="0x0a" namespace="0x11a0000">Meridian South East SD</configuration>
+		<configuration key="hd_merseyside" bouquet="0x1007" region="0x2d" namespace="0x11a0000">Merseyside HD</configuration>
+		<configuration key="sd_merseyside" bouquet="0x1003" region="0x2d" namespace="0x11a0000">Merseyside SD</configuration>
+		<configuration key="hd_norfolk" bouquet="0x1005" region="0x15" namespace="0x11a0000">Norfolk HD</configuration>
+		<configuration key="sd_norfolk" bouquet="0x1001" region="0x15" namespace="0x11a0000">Norfolk SD</configuration>
+		<configuration key="hd_north_east_midlands" bouquet="0x1007" region="0x3e" namespace="0x11a0000">North East Midlands HD</configuration>
+		<configuration key="sd_north_east_midlands" bouquet="0x1003" region="0x3e" namespace="0x11a0000">North East Midlands SD</configuration>
+		<configuration key="hd_north_west_yorkshire" bouquet="0x1005" region="0x08" namespace="0x11a0000">North West Yorkshire HD</configuration>
+		<configuration key="sd_north_west_yorkshire" bouquet="0x1001" region="0x08" namespace="0x11a0000">North West Yorkshire SD</configuration>
+		<configuration key="hd_north_yorkshire" bouquet="0x1005" region="0x1a" namespace="0x11a0000">North Yorkshire HD</configuration>
+		<configuration key="sd_north_yorkshire" bouquet="0x1001" region="0x1a" namespace="0x11a0000">North Yorkshire SD</configuration>
+		<configuration key="hd_oxford" bouquet="0x1007" region="0x47" namespace="0x11a0000">Oxford HD</configuration>
+		<configuration key="sd_oxford" bouquet="0x1003" region="0x47" namespace="0x11a0000">Oxford SD</configuration>
+		<configuration key="hd_ridge_hill" bouquet="0x1007" region="0x29" namespace="0x11a0000">Ridge Hill HD</configuration>
+		<configuration key="sd_ridge_hill" bouquet="0x1003" region="0x29" namespace="0x11a0000">Ridge Hill SD</configuration>
+		<configuration key="hd_scarborough" bouquet="0x1007" region="0x3d" namespace="0x11a0000">Scarborough HD</configuration>
+		<configuration key="sd_scarborough" bouquet="0x1003" region="0x3d" namespace="0x11a0000">Scarborough SD</configuration>
+		<configuration key="hd_sheffield" bouquet="0x1007" region="0x3c" namespace="0x11a0000">Sheffield HD</configuration>
+		<configuration key="sd_sheffield" bouquet="0x1003" region="0x3c" namespace="0x11a0000">Sheffield SD</configuration>
+		<configuration key="hd_south_lakeland" bouquet="0x1005" region="0x1c" namespace="0x11a0000">South Lakeland HD</configuration>
+		<configuration key="sd_south_lakeland" bouquet="0x1001" region="0x1c" namespace="0x11a0000">South Lakeland SD</configuration>
+		<configuration key="hd_south_yorkshire" bouquet="0x1007" region="0x48" namespace="0x11a0000">South Yorkshire HD</configuration>
+		<configuration key="sd_south_yorkshire" bouquet="0x1003" region="0x48" namespace="0x11a0000">South Yorkshire SD</configuration>
+		<configuration key="hd_tees" bouquet="0x1007" region="0x45" namespace="0x11a0000">Tees HD</configuration>
+		<configuration key="sd_tees" bouquet="0x1003" region="0x45" namespace="0x11a0000">Tees SD</configuration>
+		<configuration key="hd_thames_valley" bouquet="0x1005" region="0x09" namespace="0x11a0000">Thames Valley HD</configuration>
+		<configuration key="sd_thames_valley" bouquet="0x1001" region="0x09" namespace="0x11a0000">Thames Valley SD</configuration>
+		<configuration key="hd_tring" bouquet="0x1005" region="0x1b" namespace="0x11a0000">Tring HD</configuration>
+		<configuration key="sd_tring" bouquet="0x1001" region="0x1b" namespace="0x11a0000">Tring SD</configuration>
+		<configuration key="hd_tyne" bouquet="0x1005" region="0x0d" namespace="0x11a0000">Tyne HD</configuration>
+		<configuration key="sd_tyne" bouquet="0x1001" region="0x0d" namespace="0x11a0000">Tyne SD</configuration>
+		<configuration key="hd_west_anglia" bouquet="0x1005" region="0x19" namespace="0x11a0000">West Anglia HD</configuration>
+		<configuration key="sd_west_anglia" bouquet="0x1001" region="0x19" namespace="0x11a0000">West Anglia SD</configuration> 
+		<configuration key="hd_west_dorset" bouquet="0x1007" region="0x43" namespace="0x11a0000">West Dorset HD</configuration>
+		<configuration key="sd_west_dorset" bouquet="0x1003" region="0x43" namespace="0x11a0000">West Dorset SD</configuration>
+		<configuration key="hd_westcountry" bouquet="0x1005" region="0x06" namespace="0x11a0000">Westcountry HD</configuration>
+		<configuration key="sd_westcountry" bouquet="0x1001" region="0x06" namespace="0x11a0000">Westcountry SD</configuration>
+	</configurations>
+	<sections>
+		<section number="101">Entertainment</section>
+		<section number="240">Lifestyle and Culture</section>
+		<section number="301">Movies</section>
+		<section number="350">Music</section>
+		<section number="401">Sports</section>
+		<section number="501">News</section>
+		<section number="520">Documentaries</section>
+		<section number="580">Religious</section>
+		<section number="601">Kids</section>
+		<section number="640">Shopping</section>
+		<section number="700">Sky Box Office</section>
+		<section number="780">International</section>
+		<section number="861">Gaming and Dating</section>
+		<section number="881">Specialist</section>
+		<section number="889">Bonus channels</section>
+		<section number="899">Sky Information</section>
+		<section number="900">Adult</section>
+		<section number="950">Other</section>
+		<section number="1000">Sky Sports Interactive</section>
+		<section number="1020">BBC Interactive</section>
+		<section number="1030">Sky Anytime</section>
+	</sections>
+	<!-- channelsontop affect only HD bouquets -->
+	<channelsontop>
+		<channel number="141" />
+		<channel number="102" />
+		<channel number="178" />
+		<channel number="230" />
+		<channel number="171" />
+	</channelsontop>
+	<!-- swapchannels affect only main bouquet (the normal version) -->
+	<swapchannels>
+		<filter bouquet="0x1005" region="0x13" />
+		<filter bouquet="0x1005" region="0x0c" />
+		<filter bouquet="0x1005" region="0x03" />
+		<filter bouquet="0x1005" region="0x14" />
+		<filter bouquet="0x1005" region="0x02" />
+		<filter bouquet="0x1005" region="0x18" />
+		<filter bouquet="0x1005" region="0x07" />
+		<filter bouquet="0x1005" region="0x04" />
+		<filter bouquet="0x1005" region="0x1d" />
+		<filter bouquet="0x1005" region="0x01" />
+		<filter bouquet="0x1005" region="0x12" />
+		<filter bouquet="0x1005" region="0x0b" />
+		<filter bouquet="0x1005" region="0x05" />
+		<filter bouquet="0x1005" region="0x0a" />
+		<filter bouquet="0x1005" region="0x15" />
+		<filter bouquet="0x1005" region="0x08" />
+		<filter bouquet="0x1005" region="0x1a" />
+		<filter bouquet="0x1005" region="0x1c" />
+		<filter bouquet="0x1005" region="0x09" />
+		<filter bouquet="0x1005" region="0x1b" />
+		<filter bouquet="0x1005" region="0x0d" />
+		<filter bouquet="0x1005" region="0x19" />
+		<filter bouquet="0x1005" region="0x06" />
+		<filter bouquet="0x1006" region="0x24" />
+		<filter bouquet="0x1006" region="0x23" />
+		<filter bouquet="0x1006" region="0x25" />
+		<filter bouquet="0x1006" region="0x26" />
+		<filter bouquet="0x1007" region="0x41" />
+		<filter bouquet="0x1007" region="0x46" />
+		<filter bouquet="0x1007" region="0x3f" />
+		<filter bouquet="0x1007" region="0x42" />
+		<filter bouquet="0x1007" region="0x40" />
+		<filter bouquet="0x1007" region="0x44" />
+		<filter bouquet="0x1007" region="0x2d" />
+		<filter bouquet="0x1007" region="0x3e" />
+		<filter bouquet="0x1007" region="0x47" />
+		<filter bouquet="0x1007" region="0x29" />
+		<filter bouquet="0x1007" region="0x3d" />
+		<filter bouquet="0x1007" region="0x3c" />
+		<filter bouquet="0x1007" region="0x48" />
+		<filter bouquet="0x1007" region="0x45" />
+		<filter bouquet="0x1007" region="0x43" />
+		<filter bouquet="0x1008" region="0x21" />
+		<filter bouquet="0x1008" region="0x22" />
+		<filter bouquet="0x1008" region="0x32" /> 
+		<channel number="141" with="101" />
+		<channel number="178" with="103" />
+		<channel number="230" with="104" />
+		<channel number="171" with="105" />
+		<channel number="570" with="503" />
+	</swapchannels>
+	<servicehacks>
+<![CDATA[
+if service["service_name"][-4:] == " (28)":
+	service["service_name"] = service["service_name"][:-4]
+
+if service["transport_stream_id"] == 0x7e3:
+	service["namespace"] = 0x11a2f26
+
+if service["service_type"] == 0x02 and service["number"] > 3000:
+	service["number"] -= 3000
+
+new_numbers = []		
+for number in service["numbers"]:
+	if number >= 3000 and number <= 3999:
+		new_numbers.append(number - 3000)
+	elif number > 999 or number < 100:
+		if service["channel_id"] > 1470 and service["channel_id"] < 1486:
+				new_numbers.append(service["channel_id"] - 471)
+				service["interactive_name"] = "Sky Sports Interactive " + str(service["channel_id"])
+		elif service["channel_id"] > 2050 and service["channel_id"] < 2053:
+				new_numbers.append(service["channel_id"] - 1031)
+				service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
+		elif service["channel_id"] > 3542 and service["channel_id"] < 3545:
+				new_numbers.append(service["channel_id"] - 2521)
+				service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
+		elif service["channel_id"] > 4093 and service["channel_id"] < 4099:
+				new_numbers.append(service["channel_id"] - 3064)
+				service["interactive_name"] = "Sky Anytime " + str(service["channel_id"])
+		else:
+				skip = True
+		break
+	else:
+		new_numbers.append(number)
+service["numbers"] = new_numbers
+]]>
+	</servicehacks>
+</provider>

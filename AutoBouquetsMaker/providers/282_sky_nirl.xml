@@ -1,16 +1,12 @@
 <provider>
-	<name>SKY SCOTLAND</name>
+	<name>Sky North Irl</name>
 	<protocol>sky</protocol>
 	<transponder frequency="10802750" symbol_rate="22000000" polarization="0"
 		fec_inner="4" orbital_position="282" inversion="2" system="0"
 		modulation="1" roll_off="0" pilot="2" />
 	<configurations>
-		<configuration key="border_scotland_hd" bouquet="0x1006" region="0x24" namespace="0x11a0000">Border Scotland HD</configuration>
-		<configuration key="border_scotland_sd" bouquet="0x1002" region="0x24" namespace="0x11a0000">Border Scotland SD</configuration>
-		<configuration key="scottish_west_hd" bouquet="0x1006" region="0x25" namespace="0x11a0000">Scottish West HD</configuration>
-		<configuration key="scottish_west_sd" bouquet="0x1002" region="0x25" namespace="0x11a0000">Scottish West SD</configuration>
-		<configuration key="scottish_east_hd" bouquet="0x1006" region="0x26" namespace="0x11a0000">Scottish East HD</configuration>
-		<configuration key="scottish_east_sd" bouquet="0x1002" region="0x26" namespace="0x11a0000">Scottish East SD</configuration>
+		<configuration key="hd_northern_ireland" bouquet="0x1008" region="0x21" namespace="0x11a0000">Northern Ireland HD</configuration>
+		<configuration key="sd_northern_ireland" bouquet="0x1004" region="0x21" namespace="0x11a0000">Northern Ireland SD</configuration>			
 	</configurations>
 	<sections>
 		<section number="101">Entertainment</section>
@@ -37,64 +33,20 @@
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
 	<channelsontop>
-		<channel number="141" />
+		<channel number="101" />
 		<channel number="142" />
-		<channel number="178" />
+		<channel number="103" />
 		<channel number="230" />
 		<channel number="171" />
 	</channelsontop>
 	<!-- swapchannels affect only main bouquet (the normal version) -->
 	<swapchannels>
-		<filter bouquet="0x1005" region="0x13" />
-		<filter bouquet="0x1005" region="0x0c" />
-		<filter bouquet="0x1006" region="0x24" />
-		<filter bouquet="0x1007" region="0x41" />
-		<filter bouquet="0x1005" region="0x03" />
-		<filter bouquet="0x1008" region="0x22" />
-		<filter bouquet="0x1005" region="0x14" />
-		<filter bouquet="0x1005" region="0x02" />
-		<filter bouquet="0x1005" region="0x18" />
-		<filter bouquet="0x1006" region="0x23" />
-		<filter bouquet="0x1005" region="0x07" />
-		<filter bouquet="0x1007" region="0x46" />
-		<filter bouquet="0x1007" region="0x2b" />
-		<filter bouquet="0x1005" region="0x04" />
-		<filter bouquet="0x1007" region="0x3f" />
-		<filter bouquet="0x1005" region="0x1d" />
-		<filter bouquet="0x1005" region="0x01" />
-		<filter bouquet="0x1005" region="0x12" />
-		<filter bouquet="0x1007" region="0x42" />
-		<filter bouquet="0x1007" region="0x40" />
-		<filter bouquet="0x1005" region="0x0b" />
-		<filter bouquet="0x1007" region="0x44" />
-		<filter bouquet="0x1005" region="0x05" />
-		<filter bouquet="0x1005" region="0x0a" />
-		<filter bouquet="0x1007" region="0x2d" />
-		<filter bouquet="0x1005" region="0x15" />
-		<filter bouquet="0x1007" region="0x3e" />
-		<filter bouquet="0x1005" region="0x08" />
-		<filter bouquet="0x1005" region="0x1a" />
 		<filter bouquet="0x1008" region="0x21" />
-		<filter bouquet="0x1007" region="0x47" />
-		<filter bouquet="0x1008" region="0x32" />
-		<filter bouquet="0x1007" region="0x29" />
-		<filter bouquet="0x1007" region="0x3d" />
-		<filter bouquet="0x1006" region="0x25" />
-		<filter bouquet="0x1006" region="0x26" />
-		<filter bouquet="0x1007" region="0x3c" />
-		<filter bouquet="0x1005" region="0x1c" />
-		<filter bouquet="0x1007" region="0x48" />
-		<filter bouquet="0x1007" region="0x45" />
-		<filter bouquet="0x1005" region="0x09" />
-		<filter bouquet="0x1005" region="0x1b" />
-		<filter bouquet="0x1005" region="0x0d" />
-		<filter bouquet="0x1005" region="0x19" />
-		<filter bouquet="0x1007" region="0x43" />
-		<filter bouquet="0x1005" region="0x06" />
-		<channel number="141" with="101" />
+		<filter bouquet="0x1008" region="0x32" />		 
 		<channel number="142" with="102" />
 		<channel number="230" with="104" />
 		<channel number="171" with="105" />
+		<channel number="570" with="503" />
 	</swapchannels>
 	<servicehacks>
 <![CDATA[
@@ -107,7 +59,7 @@ if service["transport_stream_id"] == 0x7e3:
 if service["service_type"] == 0x02 and service["number"] > 3000:
 	service["number"] -= 3000
 
-new_numbers = []	
+new_numbers = []		
 for number in service["numbers"]:
 	if number >= 3000 and number <= 3999:
 		new_numbers.append(number - 3000)
@@ -129,7 +81,6 @@ for number in service["numbers"]:
 		break
 	else:
 		new_numbers.append(number)
-
 service["numbers"] = new_numbers
 ]]>
 	</servicehacks>
