@@ -1,5 +1,6 @@
 from .. import log
-import os, codecs, re	
+from Components.config import config
+import os, codecs, re
 
 class BouquetsWriter():
 	def writeLamedb(self, path, transponders):
@@ -167,6 +168,13 @@ class BouquetsWriter():
 
 		customfilenames = []
 
+		if config.autobouquetsmaker.placement.getValue() == 'bottom':
+			for filename in bouquetsToKeep["tv"]:
+				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename)
+
+			for filename in bouquetsToKeep["radio"]:
+				bouquets_radio.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename)
+
 		for section_identifier in bouquetsOrder:
 			sections = providers[section_identifier]["sections"]
 
@@ -176,7 +184,7 @@ class BouquetsWriter():
 				else:
 					bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.main.tv\" ORDER BY bouquet\n" % section_identifier)
 				bouquetsToKeep2["tv"].append("autobouquet.%s.main.tv" % section_identifier)
-			elif provider_configs[section_identifier].isMakeCustomMain():
+			elif provider_configs[section_identifier].isMakeCustomMain() and config.autobouquetsmaker.placement.getValue() == 'top':
 				customfilename = provider_configs[section_identifier].getCustomFilename()
 				if self.containServices(path, customfilename):
 					bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % customfilename)
@@ -207,13 +215,14 @@ class BouquetsWriter():
 			bouquets_radio.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.main.radio\" ORDER BY bouquet\n" % section_identifier)
 			bouquetsToKeep2["radio"].append("autobouquet.%s.main.radio" % section_identifier)
 
-		for filename in bouquetsToKeep["tv"]:
-			if filename in customfilenames:
-				continue
-			bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename)
+		if config.autobouquetsmaker.placement.getValue() == 'top':
+			for filename in bouquetsToKeep["tv"]:
+				if filename in customfilenames:
+					continue
+				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename)
 
-		for filename in bouquetsToKeep["radio"]:
-			bouquets_radio.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename)
+			for filename in bouquetsToKeep["radio"]:
+				bouquets_radio.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename)
 
 		bouquets_tv.close()
 		bouquets_radio.close()
