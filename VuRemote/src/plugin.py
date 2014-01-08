@@ -16,10 +16,7 @@ try:
 except:
 	distro=""
 
-if distro == "openvix":
-	config.misc.remotecontrol_text_support = ConfigYesNo(default = False)
-elif  distro == "openatv":
-	config.misc.remotecontrol_text_support = ConfigYesNo(default = True)	
+config.plugins.remotecontrolcode.textsupport = ConfigYesNo(default = True)
 
 config.plugins.remotecontrolcode = ConfigSubsection()
 if fileExists("/proc/stb/info/vumodel"):
@@ -102,12 +99,12 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		self.rcsctype = getConfigListEntry(_("Remote Control System Code"), config.plugins.remotecontrolcode.systemcode)
 		self.list.append( self.rcsctype )
 		if distro == "openvix" or distro == "openatv":
-			self.list.append(getConfigListEntry(_("Text support"), config.misc.remotecontrol_text_support))
+			self.list.append(getConfigListEntry(_("Text support"), config.plugins.remotecontrolcode))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
 	def keySave(self):
-		config.misc.remotecontrol_text_support.save()
+		config.plugins.remotecontrolcode.save()
 		configfile.save()
 		if self.codestartup != config.plugins.remotecontrolcode.systemcode.value:
 			print "<RemoteControlCode> Selected System Code : ",config.plugins.remotecontrolcode.systemcode.value
