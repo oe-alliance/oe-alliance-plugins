@@ -16,6 +16,7 @@ class L4Lelement:
 	LCD = ""
 	Hold = False
 	HoldKey = False
+	Font = ["","","",""]
 	def __init__(self):
 		self.session = None
 	def add(self,element,para):
@@ -68,6 +69,13 @@ class L4Lelement:
 	def setHoldKey(self,H=False):
 		print "[LCD4linuxE] HoldKey" , H
 		L4Lelement.HoldKey = H
+	def getFont(self,F="0"):
+		if L4Lelement.Font[int(F)].endswith(".ttf") and os.path.isfile(L4Lelement.Font[int(F)]):
+			return L4Lelement.Font[int(F)]
+		else:
+			return L4Lelement.Font[0]
+	def setFont(self,F):
+		L4Lelement.Font = F
 	def getScreen(self):
 		return L4Lelement.Screen
 	def setScreen(self,S,Lcd="",Hold=False):

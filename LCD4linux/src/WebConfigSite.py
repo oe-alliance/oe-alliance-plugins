@@ -4,6 +4,7 @@ from twisted.web import resource, http
 from plugin import *
 from __init__ import _
 from Components.config import configfile, config
+from urllib import urlencode, quote
 from enigma import eTimer
 from module import L4Lelement,L4LVtest
 
@@ -73,7 +74,8 @@ def ParseCode():
 				L4.append(Z)
 
 def _l(st):
-	return codecs.encode(st.decode("utf-8","ignore").replace(" [ok]>",""),"latin","ignore")
+	return st.decode("utf-8","ignore").replace(" [ok]>","").encode('ascii', 'xmlcharrefreplace')
+
 def _l2(st):
 	return st.decode("latin").encode("utf-8")
 
@@ -476,8 +478,8 @@ class LCD4linuxConfigweb(resource.Resource):
 							else:
 								Ec = Ec.replace("=\"","=\"font-weight:bold;")
 					if Ea == "checked":
-						ElementText = (_l(_(LL[1])) if Mode !="1" else M2[LL[3]-1])
-					html += "<input id=\"e%d\" name=\"Element\" type=\"radio\" value=\"%s\" %s onclick=\"this.form.submit();\"><label %s for=\"e%d\">%s&nbsp;&nbsp;</label>\n" % (i,Conf,Ea,Ec,i, (_l(_(LL[1])) if Mode !="1" else M2[LL[3]-1]) )
+						ElementText = (_l(_(LL[1])) if Mode !="1" else _l(M2[LL[3]-1]))
+					html += "<input id=\"e%d\" name=\"Element\" type=\"radio\" value=\"%s\" %s onclick=\"this.form.submit();\"><label %s for=\"e%d\">%s&nbsp;&nbsp;</label>\n" % (i,Conf,Ea,Ec,i, (_l(_(LL[1])) if Mode !="1" else _l(M2[LL[3]-1])) )
 					if LCD4linux.WebIfDesign.value == "2":
 						html += "<br>"
 			Ea,Ec = AktiveElement("other")
@@ -585,14 +587,14 @@ class LCD4linuxConfigweb(resource.Resource):
 
 			html += "</tr></table>\n"
 			html += "<input type=\"hidden\" name=\"cmd\" value=\"config\">\n"
-			html += "<input type=\"submit\" style=\"background-color: #FFCC00\" value=\"%s\">\n" % _("set Settings")
+			html += "<input type=\"submit\" style=\"background-color: #FFCC00\" value=\"%s\">\n" % _l(_("set Settings"))
 			if Element != "other":
 				if Mode in ["3","4"] and isOn:
-					html += "<input type=\"button\" align=\"middle\" style=\"text-align:center; font-size:8pt\" value=\"%s\" onclick=\"this.form.cmd.value = 'copyOn'; this.form.submit(); \">\n" % _("copy to On")
+					html += "<input type=\"button\" align=\"middle\" style=\"text-align:center; font-size:8pt\" value=\"%s\" onclick=\"this.form.cmd.value = 'copyOn'; this.form.submit(); \">\n" % _l(_("copy to On"))
 				if Mode in ["2","4"] and isMP:
-					html += "<input type=\"button\" align=\"middle\" style=\"text-align:center; font-size:8pt\" value=\"%s\" onclick=\"this.form.cmd.value = 'copyMP'; this.form.submit(); \">\n" % _("copy to Media")
+					html += "<input type=\"button\" align=\"middle\" style=\"text-align:center; font-size:8pt\" value=\"%s\" onclick=\"this.form.cmd.value = 'copyMP'; this.form.submit(); \">\n" % _l(_("copy to Media"))
 				if Mode in ["2","3"] and isSb:
-					html += "<input type=\"button\" align=\"middle\" style=\"text-align:center; font-size:8pt\" value=\"%s\" onclick=\"this.form.cmd.value = 'copyIdle'; this.form.submit(); \">\n" % _("copy to Idle")
+					html += "<input type=\"button\" align=\"middle\" style=\"text-align:center; font-size:8pt\" value=\"%s\" onclick=\"this.form.cmd.value = 'copyIdle'; this.form.submit(); \">\n" % _l(_("copy to Idle"))
 			html += "</form>\n"
 			if LCD4linux.WebIfDesign.value == "2":
 				html += "</fieldset></td></tr></table>"
@@ -601,7 +603,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			html += "<fieldset style=\"width:auto\" name=\"Mode2\">\n"
 			html += "<textarea name=\"PopText\" style=\"height: 120px; width: 416px\">%s</textarea>" % PopText[1]
 			html += "<input type=\"hidden\" name=\"cmd\" value=\"pop\">\n"
-			html += "<input type=\"submit\" style=\"background-color: #FFCC00\" value=\"%s\">\n" % _("set Settings")
+			html += "<input type=\"submit\" style=\"background-color: #FFCC00\" value=\"%s\">\n" % _l(_("set Settings"))
 			html += "</fieldset></form>\n"
 
 		if LCD4linuxConfigweb.RestartGUI == True:
