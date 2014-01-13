@@ -30,6 +30,10 @@ if INIHDE
 SUBDIRS += INIVFDControl
 endif
 
+if ENFINITY
+SUBDIRS += EVOVFDControl
+endif
+
 if VENTON
 SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade
 endif
