@@ -111,7 +111,7 @@ class AutoBouquetsMaker_Menu(Screen):
 		return((pixmap, description))
 
 	def openSetup(self):
-		self.session.open(AutoBouquetsMaker_ProvidersSetup)
+		self.session.open(AutoBouquetsMaker_Setup)
 
 	def refresh(self):
 		AutoAutoBouquetsMakerTimer.instance.doneConfiguring()
