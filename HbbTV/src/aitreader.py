@@ -47,7 +47,6 @@ class eAITSectionReader:
 		l = []
 
 		if self.mVuplusBox:
-			print 'URL:',iServiceInformation.sHBBTVUrl
 			for application in self.mInfo.getInfoObject(iServiceInformation.sHBBTVUrl):
 				item = self.__application(application)
 				l.append(item)

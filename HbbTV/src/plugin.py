@@ -182,6 +182,7 @@ class OpCodeSet:
 			,"OP_HBBTV_TITLE"					: 0x0006
 			,"OP_HBBTV_RETRY_OPEN_URL"			: 0x0009
 			,"OP_HBBTV_CHANGE_CHANNEL"			: 0x000A
+			,"OP_HBBTV_ABORT_SIG"				: 0x000B
 			,"OP_OIPF_GET_CHANNEL_INFO_URL"		: 0x0101
 			,"OP_OIPF_GET_CHANNEL_INFO_AIT"		: 0x0102
 			,"OP_OIPF_GET_CHANNEL_INFO_LIST"	: 0x0103
@@ -222,6 +223,7 @@ class OpCodeSet:
 			,0x0006 : "OP_HBBTV_TITLE"
 			,0x0009 : "OP_HBBTV_RETRY_OPEN_URL"
 			,0x000A : "OP_HBBTV_CHANGE_CHANNEL"
+			,0x000B : "OP_HBBTV_ABORT_SIG"
 			,0x0101 : "OP_OIPF_GET_CHANNEL_INFO_URL"
 			,0x0102 : "OP_OIPF_GET_CHANNEL_INFO_AIT"
 			,0x0103 : "OP_OIPF_GET_CHANNEL_INFO_LIST"
@@ -444,29 +446,30 @@ class HandlerHbbTV(Handler):
 		self._session = session
 		self.opcode = OpCodeSet()
 		self.handle_map = {
-			0x0001 : self._cb_handleCloseHbbTVBrowser,
-			0x0006 : self._cb_handleSetPageTitle,
-			0x0009 : self._cb_handleHbbTVRetryOpen,
-			0x000A : self._cb_handleHbbTVChangeChannel,
-			0x0101 : self._cb_handleGetChannelInfoForUrl,
-			0x0102 : self._cb_handleGetChannelInfoForAIT,
-			0x0103 : self._cb_handleGetChannelInfoList,
-			0x0201 : self._cb_handleVODPlayerURI,
-			0x0202 : self._cb_handleVODPlayerPlay,
-			0x0203 : self._cb_handleVODPlayerStop,
-			0x0204 : self._cb_handleVODPlayerPlayPause,
-			0x0401 : self._cb_handleDVBAppVolUp,
-			0x0402 : self._cb_handleDVBAppVolDown,
-			0x0403 : self._cb_handleDVBAppSetVol,
-			0x0208 : self._cb_handleVODSpeedCtrl,
-			0x0209 : self._cb_handleVODSeekCtrl,
-			0x0501 : self._cb_handleSystemOutOfMemory,
-			0x0502 : self._cb_handleSystemNotufyMyPID,
-			0x0309 : self._cb_handleShowVirtualKeyboard,
-			0x030B : self._cb_handlePasteVirtualKeyboard,
-			0x030E : self._cb_handleBrowserMenuReq,
-			0x0601 : self._cb_handleVideobackendEnable,
-			0x0602 : self._cb_handleVideobackendDisable
+			 0x0001 : self._cb_handleCloseHbbTVBrowser
+			,0x0006 : self._cb_handleSetPageTitle
+			,0x0009 : self._cb_handleHbbTVRetryOpen
+			,0x000A : self._cb_handleHbbTVChangeChannel
+			,0x000B : self._cb_handleHbbTVAbortSig
+			,0x0101 : self._cb_handleGetChannelInfoForUrl
+			,0x0102 : self._cb_handleGetChannelInfoForAIT
+			,0x0103 : self._cb_handleGetChannelInfoList
+			,0x0201 : self._cb_handleVODPlayerURI
+			,0x0202 : self._cb_handleVODPlayerPlay
+			,0x0203 : self._cb_handleVODPlayerStop
+			,0x0204 : self._cb_handleVODPlayerPlayPause
+			,0x0401 : self._cb_handleDVBAppVolUp
+			,0x0402 : self._cb_handleDVBAppVolDown
+			,0x0403 : self._cb_handleDVBAppSetVol
+			,0x0208 : self._cb_handleVODSpeedCtrl
+			,0x0209 : self._cb_handleVODSeekCtrl
+			,0x0501 : self._cb_handleSystemOutOfMemory
+			,0x0502 : self._cb_handleSystemNotufyMyPID
+			,0x0309 : self._cb_handleShowVirtualKeyboard
+			,0x030B : self._cb_handlePasteVirtualKeyboard
+			,0x030E : self._cb_handleBrowserMenuReq
+			,0x0601 : self._cb_handleVideobackendEnable
+			,0x0602 : self._cb_handleVideobackendDisable
 		}
 		self._on_close_cb = None
 		self._on_set_title_cb = None
@@ -479,6 +482,7 @@ class HandlerHbbTV(Handler):
 		self._curren_title = None
 		self._max_volume  = -1
 		self._soft_volume = -1
+		self._videobackend_activate = False
 
 	def _handle_dump(self, handle, opcode, data=None):
 		if True: return
@@ -521,6 +525,7 @@ class HandlerHbbTV(Handler):
 		service = self._session.nav.getCurrentlyPlayingServiceReference()
 		setBeforeService(service)
 		self._session.nav.stopService()
+		self._videobackend_activate = True
 		return (0, "OK")
 
 	def _cb_handleVideobackendDisable(self, opcode, data):
@@ -528,6 +533,7 @@ class HandlerHbbTV(Handler):
 		before_service = getBeforeService()
 		if before_service is not None:
 			self._session.nav.playService(before_service)
+		self._videobackend_activate = False
 		return (0, "OK")
 
 	def _cb_handleHbbTVChangeChannel(self, opcode, data):
@@ -729,6 +735,11 @@ class HandlerHbbTV(Handler):
 						self._on_set_title_cb.remove(x)
 		return (0, "OK")
 
+	def _cb_handleHbbTVAbortSig(self, opcode, data):
+		self._cb_handleCloseHbbTVBrowser(opcode, data)
+		global __gval__
+		return (0, struct.pack('!II', __gval__.resX, __gval__.resY));
+
 	def _cb_handleCloseHbbTVBrowser(self, opcode, data):
 		self._timer_retry_open.stop()
 		try:
@@ -746,11 +757,11 @@ class HandlerHbbTV(Handler):
 
 		command_util = getCommandUtil()
 		command_util.sendCommand('OP_HBBTV_FULLSCREEN', None)
-
-		before_service = getBeforeService()
-		if before_service is not None:
-			self._session.nav.playService(before_service)
-			self._vod_uri = None
+		if self._videobackend_activate == False:
+			before_service = getBeforeService()
+			if before_service is not None:
+				self._session.nav.playService(before_service)
+				self._vod_uri = None
 
 		#restoreResolution()
 		return (0, "OK")
@@ -886,7 +897,7 @@ class HbbTVWindow(Screen, InfoBarNotifications):
 			self._vod_length = length
 			if position == -1 and length == -1:
 				raise Exception("Can't get play status")
-			#print getTimeString(position), "/", getTimeString(length)
+			#print position, "/", length, " - ", getTimeString(position), "/", getTimeString(length)
 			self._ssm.setStatus(position, length, 1)
 		except Exception, ErrMsg:
 			print ErrMsg
@@ -987,12 +998,11 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 			})
 		self._applicationList = None
 
-		self.mVuplusBox = False
-		f = open("/etc/issue")
-		issue = f.read()
-		f.close()
-		if(issue.startswith("Vuplus")):
-			self.mVuplusBox = True
+		try:
+			from Screens.InfoBarGenerics import gHbbtvApplication
+			self.mVuplusBox = gHbbtvApplication.getUseAit()
+		except:
+			self.mVuplusBox = False
 
 	def _cb_detectedAIT(self):
 		name = self._cb_ready_for_ait()
@@ -1033,8 +1043,6 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 
 			from aitreader import eAITSectionReader
 			reader = eAITSectionReader(demux, pmtid, sid)
-			print 'self.mVuplusBox:',self.mVuplusBox
-			print 'INFO:',info
 			if reader.doOpen(info, self.mVuplusBox):
 				reader.doParseApplications()
 				reader.doDump()
@@ -1099,6 +1107,7 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 		global HBBTVAPP_PATH
 		try:	os.system('%s/launcher stop'%(HBBTVAPP_PATH))
 		except: pass
+		return True
 
 	def _restart_opera(self):
 		global HBBTVAPP_PATH
@@ -1117,7 +1126,8 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 		if url is None:
 			service = self._session.nav.getCurrentService()
 			info = service and service.info()
-			url = info.getInfoString(iServiceInformation.sHBBTVUrl)
+			if info:
+				url = info.getInfoString(iServiceInformation.sHBBTVUrl)
 		return url
 
 	def showApplicationSelectionBox(self):
@@ -2357,7 +2367,7 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
     def makeConfigList(self):
 	self.menulist = []
 	entryUri = getConfigListEntry(_("YouTube TV URL"), config.plugins.youtubetv.uri)
-	entryShowHelp = getConfigListEntry(_("Do not show YouTube TV Stater again"), config.plugins.youtubetv.showhelp)
+	entryShowHelp = getConfigListEntry(_("Do not show YouTube TV Starter again"), config.plugins.youtubetv.showhelp)
 	self.menulist.append(entryUri)
 	self.menulist.append(entryShowHelp)
 
