@@ -22,7 +22,7 @@ from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
 from enigma import ePicLoad, ePixmap
-from boxbranding import getBoxType, getDistro
+from boxbranding import getBoxType, getImageDistro
 
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
@@ -11356,7 +11356,7 @@ def autostart(reason, **kwargs):
 				pass
 
 def setup(menuid, **kwargs):
-	if getDistro() in ("openvix", "openatv", "ventonsupport", "egami", "openhdf"):
+	if getImageDistro() in ("openvix", "openatv", "ventonsupport", "egami", "openhdf"):
 		if menuid == "display" and SystemInfo["Display"]:
 			return [("LCD4Linux", main, "lcd4linux", None)]
 		elif menuid == "system" and not SystemInfo["Display"]:

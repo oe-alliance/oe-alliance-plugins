@@ -23,7 +23,7 @@ from Components.Label import Label
 from Components.Network import iNetwork
 from Tools.Directories import fileExists
 from enigma import eServiceCenter, eServiceReference, eTimer
-from boxbranding import getDistro
+from boxbranding import getImageDistro
 from shutil import rmtree, move, copy
 import os
 
@@ -180,7 +180,7 @@ def main(session, **kwargs):
 	session.open(TunerServer)
 
 def Plugins(**kwargs):
-	if getDistro() == "openvix":
+	if getImageDistro() == "openvix":
 		return PluginDescriptor(name=_("Tuner Server setup"), description=_("Allow Streaming From Box Tuners"), where = PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=settings)
 	else:
 		return PluginDescriptor(name=_("Tuner Server"), description=_("Allow Streaming From Box Tuners"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main)
