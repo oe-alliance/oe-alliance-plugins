@@ -13,7 +13,7 @@ from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.FanControl import fancontrol
 
-from  enigma import getBoxType
+from boxbranding import getBoxType
 
 class TempFanControl(Screen, ConfigListScreen):
 	skin = """

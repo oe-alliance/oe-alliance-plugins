@@ -21,7 +21,8 @@ Version = "V3.9-r3"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
-from enigma import ePicLoad, ePixmap, getBoxType
+from enigma import ePicLoad, ePixmap
+from boxbranding import getBoxType
 
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor

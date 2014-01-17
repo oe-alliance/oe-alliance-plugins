@@ -14,7 +14,8 @@ from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import fileExists
-from enigma import eTimer, getBoxType
+from enigma import eTimer
+from boxbranding import getBoxType
 from os import system as os_system, path as os_path, listdir as os_listdir
 
 def getProcValue(procPath):

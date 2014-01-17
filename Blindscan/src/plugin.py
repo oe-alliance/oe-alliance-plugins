@@ -21,7 +21,8 @@ from Components.Pixmap import Pixmap
 from Tools.HardwareInfo import HardwareInfo
 from Tools.Directories import resolveFilename
 
-from enigma import eTimer, eDVBFrontendParametersSatellite, eComponentScan, eDVBSatelliteEquipmentControl, eDVBFrontendParametersTerrestrial, eDVBFrontendParametersCable, eConsoleAppContainer, eDVBResourceManager, getBoxType
+from enigma import eTimer, eDVBFrontendParametersSatellite, eComponentScan, eDVBSatelliteEquipmentControl, eDVBFrontendParametersTerrestrial, eDVBFrontendParametersCable, eConsoleAppContainer, eDVBResourceManager
+from boxbranding import getBoxType
 
 try:
 	from enigma import getImageVersionString, getBuildVersionString
