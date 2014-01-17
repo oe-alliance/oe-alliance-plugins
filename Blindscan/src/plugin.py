@@ -24,14 +24,9 @@ from Tools.Directories import resolveFilename
 from enigma import eTimer, eDVBFrontendParametersSatellite, eComponentScan, eDVBSatelliteEquipmentControl, eDVBFrontendParametersTerrestrial, eDVBFrontendParametersCable, eConsoleAppContainer, eDVBResourceManager
 from boxbranding import getBoxType
 
-try:
-	from enigma import getImageVersionString, getBuildVersionString
-	versionstring = getImageVersionString()
-	buildstring = getBuildVersionString()
-except:
-	from Components.About import about
-	versionstring = about.getImageVersionString()
-	buildstring = about.getBuildVersionString()
+from boxbranding import getImageVersion, getImageBuild
+versionstring = getImageVersion()
+buildstring = getImageBuild()
 
 def getDistro():
 	try:
