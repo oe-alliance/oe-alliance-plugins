@@ -22,7 +22,7 @@ from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
 from enigma import ePicLoad, ePixmap
-from boxbranding import getBoxType
+from boxbranding import getBoxType, getDistro
 
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
@@ -11354,23 +11354,6 @@ def autostart(reason, **kwargs):
 				SamsungDevice3 = None
 			except:
 				pass
-
-def getDistro():
-	try:
-		from enigma import getDistro as e2_getDistro
-		return e2_getDistro()
-	except:
-		try:
-			file = open('/etc/image-version', 'r')
-			lines = file.readlines()
-			file.close()
-			for x in lines:
-				splitted = x.split('=')
-				if splitted[0] == "comment":
-					result =  splitted[1].replace('\n','')
-		except:
-			result = None
-		return result
 
 def setup(menuid, **kwargs):
 	if getDistro() in ("openvix", "openatv", "ventonsupport", "egami", "openhdf"):

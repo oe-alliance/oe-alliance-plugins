@@ -22,28 +22,10 @@ from Tools.HardwareInfo import HardwareInfo
 from Tools.Directories import resolveFilename
 
 from enigma import eTimer, eDVBFrontendParametersSatellite, eComponentScan, eDVBSatelliteEquipmentControl, eDVBFrontendParametersTerrestrial, eDVBFrontendParametersCable, eConsoleAppContainer, eDVBResourceManager
-from boxbranding import getBoxType
 
-from boxbranding import getImageVersion, getImageBuild
+from boxbranding import getBoxType, getImageVersion, getImageBuild
 versionstring = getImageVersion()
 buildstring = getImageBuild()
-
-def getDistro():
-	try:
-		from enigma import getDistro as e2_getDistro
-		return e2_getDistro()
-	except:
-		try:
-			file = open('/etc/image-version', 'r')
-			lines = file.readlines()
-			file.close()
-			for x in lines:
-				splitted = x.split('=')
-				if splitted[0] == "comment":
-					result =  splitted[1].replace('\n','')
-		except:
-			result = None
-		return result
 
 #used for the XML file
 from time import strftime, time
