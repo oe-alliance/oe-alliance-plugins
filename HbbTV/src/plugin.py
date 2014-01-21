@@ -7,7 +7,6 @@ from Screens.Screen import Screen
 from Screens.InfoBar import InfoBar
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
-from Screens.InfoBarGenerics import InfoBarNotifications
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.HelpMenu import HelpableScreen
 from Screens.ChannelSelection import service_types_tv
@@ -833,7 +832,7 @@ class HandlerHbbTV(Handler):
 
 from libshm import SimpleSharedMemory
 _g_ssm_ = None
-class HbbTVWindow(Screen, InfoBarNotifications):
+class HbbTVWindow(Screen):
 	skin = """
 		<screen name="HbbTVWindow" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder" title="HbbTV Plugin">
 		</screen>
@@ -845,7 +844,6 @@ class HbbTVWindow(Screen, InfoBarNotifications):
 		eRCInput.getInstance().lock()
 
 		Screen.__init__(self, session)
-		InfoBarNotifications.__init__(self)
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap = {
 			iPlayableService.evStart: self._serviceStarted,
 			iPlayableService.evEOF: self._serviceEOF,
@@ -962,7 +960,7 @@ class HbbTVWindow(Screen, InfoBarNotifications):
 			return
 		self.setTitle(title)
 
-class HbbTVHelper(Screen, InfoBarNotifications):
+class HbbTVHelper(Screen):
 	skin = """<screen name="HbbTVHelper" position="0,0" size="0,0" backgroundColor="transparent" flags="wfNoBorder" title=" "></screen>"""
 	def __init__(self, session):
 		global __gval__
@@ -970,7 +968,6 @@ class HbbTVHelper(Screen, InfoBarNotifications):
 		__gval__.command_server = ServerFactory().doListenUnixTCP('/tmp/.sock.hbbtv.url', __gval__.hbbtv_handelr)
 
 		Screen.__init__(self, session)
-		InfoBarNotifications.__init__(self)
 
 		self._session = session
 
@@ -2377,7 +2374,9 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 def auto_start_main(reason, **kwargs):
 	if reason:
 		command_server = getCommandServer()
-		command_server.stop()
+		try:
+			command_server.stop()
+		except: pass
 
 from  Screens.HelpMenu import HelpableScreen
 def session_start_main(session, reason, **kwargs):
