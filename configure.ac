@@ -17,6 +17,10 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_CHECK_HEADERS([dbox/fp.h dbox/lcd-ks0713.h])
 
 AC_PATH_PROG(MSGFMT, msgfmt, AC_MSG_ERROR(Could not find msgfmt))
+AC_PATH_PROG(MSGINIT, msginit, AC_MSG_ERROR(Could not find msginit))
+AC_PATH_PROG(MSGMERGE, msgmerge, AC_MSG_ERROR(Could not find msgmerge))
+AC_PATH_PROG(MSGUNIQ, msguniq, AC_MSG_ERROR(Could not find msguniq))
+AC_PATH_PROG(XGETTEXT, xgettext, AC_MSG_ERROR(Could not find xgettext))
 
 AM_PATH_PYTHON
 AX_PYTHON_DEVEL
@@ -104,37 +108,6 @@ AM_CONDITIONAL(VENTONHDX, test "$BOXTYPE" == ventonhdx)
 AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
 
 AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm500hd -o "$BOXTYPE" == vuuno -o "$BOXTYPE" == vuultimo -o "$BOXTYPE" == vusolo2 -o "$BOXTYPE" == vuduo2 -o "$BOXTYPE" == tmsingle -o "$BOXTYPE" == tmtwin -o "$BOXTYPE" == tm2t -o "$BOXTYPE" == tmnano -o "$BOXTYPE" == iqonios100hd -o "$BOXTYPE" == iqonios200hd -o "$BOXTYPE" == iqonios300hd -o "$BOXTYPE" == optimussos1 -o "$BOXTYPE" == optimussos2)
-
-AC_ARG_WITH(tpm,
-	AS_HELP_STRING([--with-tpm], [enable plugins that require a TPM]),
-	[with_tpm="$withval"],[with_tpm="no"])
-if test "$with_tpm" = "yes"; then
-	AC_DEFINE([HAVE_TPM],[1],[Define to 1 to enable plugins that require a TPM])
-fi
-AM_CONDITIONAL(TPM, test "$with_tpm" = "yes")
-
-AC_ARG_WITH(debug,
-	AS_HELP_STRING([--without-debug],[disable debugging code]),
-	[with_debug="$withval"],[with_debug="yes"])
-if test "$with_debug" = "yes"; then
-	DEBUG_CFLAGS="-ggdb3"
-	AC_DEFINE([DEBUG],[1],[Define to 1 to enable debugging code])
-fi
-AC_SUBST(DEBUG_CFLAGS)
-
-AC_ARG_WITH(po,
-	AS_HELP_STRING([--with-po],[enable updating of po files]),
-	[with_po="$withval"],[with_po="no"])
-if test "$with_po" = "yes"; then
-	AC_PATH_PROG(MSGINIT, msginit)
-	AC_PATH_PROG(MSGMERGE, msgmerge)
-	AC_PATH_PROG(MSGUNIQ, msguniq)
-	AC_PATH_PROG(XGETTEXT, xgettext)
-	if test -z "$MSGINIT" -o -z "$MSGMERGE" -o -z "$MSGUNIQ" -o -z "$XGETTEXT"; then
-		AC_MSG_ERROR([Could not find required gettext tools])
-	fi
-fi
-AM_CONDITIONAL(UPDATE_PO, test "$with_po" = "yes")
 
 AC_CONFIG_FILES([
 Makefile
