@@ -1,5 +1,4 @@
-AM_CFLAGS = \
-	-Wall \
+AM_CFLAGS = -Wall
 
 AM_CPPFLAGS = \
 	@PYTHON_CPPFLAGS@ \
