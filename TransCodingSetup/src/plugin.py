@@ -123,15 +123,17 @@ for encoder in numofencoders:
 	if fileExists(os_path.join(encPath, "bitrate")):
 		encoders.append(encoder)
 		config.plugins.transcodingsetup.encoder.append(ConfigSubsection())
-		print 'config.plugins.transcodingsetup.encoder:',config.plugins.transcodingsetup.encoder
 		createTransCodingConfig(encoder)
 
+choices = []
 if len(encoders) > 1:
 	encoders.sort()
-	choices = []
 	for encoder in encoders:
 		choices.append((encoder, encoder))
-	config.plugins.transcodingsetup.encodernum = ConfigSelection(default = '0', choices = choices)
+else:
+	choices.append(('0','0'))
+
+config.plugins.transcodingsetup.encodernum = ConfigSelection(default = '0', choices = choices)
 
 SystemInfo["AdvancedTranscoding"] = checkSupportAdvanced()
 SystemInfo["MultipleEncoders"] = len(encoders) > 1
