@@ -54,6 +54,23 @@ def wgetUrlRefer(target, refer):
 	except:
 		outtxt = ''
 	return outtxt
+	
+def wgetUrlCookie(target, cookie):
+	req = Request(target)
+	req.add_header('Cookie', cookie)
+	try:
+		r = urlopen2(req)
+		outtxt = r.read()
+	except:
+		outtxt = ''
+	return outtxt
+	
+def Csplit(data, string, number = None):
+	if string in data:
+		data = data.split(string)
+		if number != None:
+			data = data[number]
+	return data
 
 def MPanelEntryComponent(channel, text, png):
 	res = [ text ]
@@ -72,9 +89,9 @@ class MPanelList(MenuList):
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		self.moveToIndex(self.selection)
-		
+
 def getShortName(name, serviceref):
-	if serviceref.flags & eServiceReference.mustDescent: #Directory			
+	if serviceref.flags & eServiceReference.mustDescent: #Directory
 		pathName = serviceref.getPath()
 		p = os.path.split(pathName)
 		if not p[1]: #if path ends in '/', p is blank.
@@ -290,14 +307,16 @@ class OpenUgSetupScreen(Screen):
 		self["info"] = Label(_("Open Uitzending Gemist\n\nBased on Xtrend code"))
 
 		self.mmenu= []
-		self.mmenu.append((_("UG Uitgelicht"), 'uitgelicht'))
-		self.mmenu.append((_("UG Popular"), 'pop'))
-		self.mmenu.append((_("UG Gemist"), 'ugback'))
+		self.mmenu.append((_("NPO Uitgelicht"), 'uitgelicht'))
+		self.mmenu.append((_("NPO Popular"), 'pop'))
+		self.mmenu.append((_("NPO Gemist"), 'ugback'))
 		self.mmenu.append((_("RTL XL A-Z"), 'rtl'))
 		self.mmenu.append((_("RTL XL Gemist"), 'rtlback'))
 		self.mmenu.append((_("SBS6 Gemist"), 'sbs6'))
 		self.mmenu.append((_("Veronica Gemist"), 'veronica'))
 		self.mmenu.append((_("NET5 Gemist"), 'net5'))
+		self.mmenu.append((_("Radio Gemist"), 'radio'))
+		self.mmenu.append((_("InternetTV"), 'inetTV'))
 		self.mmenu.append((_("Setup"), 'setup'))
 		self["menu"] = MenuList(self.mmenu)
 
@@ -319,27 +338,12 @@ class OpenUgSetupScreen(Screen):
 	def keyGo(self):
 		selection = self["menu"].l.getCurrentSelection()
 		if selection is not None:
-			if selection[1] == 'uitgelicht':
-				self.session.open(OpenUg, selection[1])
-			elif selection[1] == 'pop':
-				self.session.open(OpenUg, selection[1])
-			elif selection[1] == 'ugback':
-				self.session.open(UgDaysBackScreen)
-			elif selection[1] == 'rtl':
-				self.session.open(OpenUg, selection[1])
-			elif selection[1] == 'rtlback':
-				self.session.open(DaysBackScreen)
-			elif selection[1] == 'rsearch':
-				self.isRtl = True
-				self.session.open(OpenUg, selection[1])
-			elif selection[1] == 'net5':
-				self.session.open(OpenUg, selection[1])
-			elif selection[1] == 'sbs6':
-				self.session.open(OpenUg, selection[1])
-			elif selection[1] == 'veronica':
-				self.session.open(OpenUg, selection[1])
+			if selection[1] == 'ugback' or selection[1] == 'rtlback' or selection[1] == 'radio' or selection[1] == 'inetTV':
+				self.session.open(SmallScreen, selection[1])
 			elif selection[1] == 'setup':
 				self.session.open(OpenUgConfigureScreen)
+			else:
+				self.session.open(OpenUg, selection[1])
 
 	def keyCancel(self):
 		self.removeFiles(self.imagedir)
@@ -354,8 +358,8 @@ class OpenUgSetupScreen(Screen):
 				os.remove(os.path.join(root, name))
 
 
-class DaysBackScreen(Screen):
-	def __init__(self, session):
+class SmallScreen(Screen):
+	def __init__(self, session, cmd):
 		self.skin = """
 				<screen position="center,center" size="400,400" title="">
 					<widget name="menu" position="10,10"   size="e-20,e-10" scrollbarMode="showOnDemand" />
@@ -371,69 +375,63 @@ class DaysBackScreen(Screen):
 			"ok": self.keyGo,
 			"cancel": self.keyCancel,
 		}, -2)
-
-		self.mmenu= []
-		count = 0
-		now = date.today()
-		while count < 15:
-			if count == 0:
-				self.mmenu.append((_("Today"), now.strftime('%Y%m%d')))
-			else:
-				self.mmenu.append(((now.strftime("%A")), now.strftime('%Y%m%d')))
-			now = now - timedelta(1)
-			count += 1
+		self.cmd = cmd
+		self.mmenu = []
+		self.ttitle = 'Error'
+		if cmd == 'rtlback' or cmd == 'ugback':
+			count = 0
+			now = date.today()
+			if cmd == 'rtlback':
+				self.ttitle = "RTL Number of days back"
+				while count < 15:
+					if count == 0:
+						self.mmenu.append((_("Today"), now.strftime('%Y%m%d')))
+					else:
+						self.mmenu.append(((now.strftime("%A")), now.strftime('%Y%m%d')))
+					now = now - timedelta(1)
+					count += 1
+			elif cmd == 'ugback':
+				self.ttitle = "NPO Number of days back"
+				while count < 8:
+					if count == 0:
+						self.mmenu.append((_("Today"), count + 128))
+					else:
+						self.mmenu.append(((now.strftime("%A")), count + 128))
+					now = now - timedelta(1)
+					count += 1
+		elif cmd == 'radio':
+			self.ttitle = "Radio gemist"
+			#self.mmenu.append((_("Radio538"), 'R538'))
+			self.mmenu.append((_("Veronica"), 'Rver'))
+		elif cmd == 'inetTV':
+			self.ttitle = "InternetTV"
+			self.mmenu.append((_("Dumpert.nl"), 'dumpert'))
+			#self.mmenu.append((_("VKMag.com"), 'vkmag'))
+		elif cmd == 'dumpert':
+			self.ttitle = "Dumpert.nl"
+			self.mmenu.append((_("Nieuw"), 'dumpert-nieuw'))
+			self.mmenu.append((_("Toppers"), 'dumpert-toppers'))
+		elif cmd == 'Rver':
+			self.ttitle = "Radio Veronica"
+			self.mmenu.append((_("highlights"), 'Rverhighlights'))
+			#self.mmenu.append((_("Kies programma"), 'Rverkies'))
+		else:
+			self.mmenu.append((_("Error..."), None))
 		self["menu"] = MenuList(self.mmenu)
-
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		self.setTitle(_("RTL Number of days back"))
+		if self.ttitle != '':
+			self.setTitle(_(self.ttitle))
 
 	def keyGo(self):
 		selection = self["menu"].l.getCurrentSelection()
-		self.session.open(OpenUg, ['rtlback', selection[1]])
-
-	def keyCancel(self):
-		self.close()
-
-class UgDaysBackScreen(Screen):
-	def __init__(self, session):
-		self.skin = """
-				<screen position="center,center" size="400,400" title="">
-					<widget name="menu" position="10,10"   size="e-20,e-10" scrollbarMode="showOnDemand" />
-				</screen>"""
-		self.session = session
-		Screen.__init__(self, session)
-
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("OK"))
-
-		self["actions"] = ActionMap(["SetupActions"],
-		{
-			"ok": self.keyGo,
-			"cancel": self.keyCancel,
-		}, -2)
-
-		self.mmenu= []
-		count = 0
-		now = date.today()
-		while count < 8:
-			if count == 0:
-				self.mmenu.append((_("Today"), count + 128))
-			else:
-				self.mmenu.append(((now.strftime("%A")), count + 128))
-			now = now - timedelta(1)
-			count += 1
-		self["menu"] = MenuList(self.mmenu)
-
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(_("NPO Number of days back"))
-
-	def keyGo(self):
-		selection = self["menu"].l.getCurrentSelection()
-		self.session.open(OpenUg, selection[1])
+		if self.cmd == 'rtlback':
+			self.session.open(OpenUg, ['rtlback', selection[1]])
+		elif self.cmd == 'radio' or self.cmd == 'inetTV':
+			self.session.open(SmallScreen, selection[1])
+		else:
+			self.session.open(OpenUg, selection[1])
 
 	def keyCancel(self):
 		self.close()
@@ -459,6 +457,7 @@ class OpenUg(Screen):
 	RTL_BASE_URL = "http://www.rtl.nl/system/s4m/vfd/version=1/d=pc/output=json"
 	SBS_BASE_URL = "http://plus-api.sbsnet.nl"
 	EMBED_BASE_URL = "http://embed.kijk.nl/?width=868&height=488&video="
+	DUMPERT_BASE_URL = "http://www.dumpert.nl"
 
 	def __init__(self, session, cmd):
 		self.skin = """
@@ -472,7 +471,7 @@ class OpenUg(Screen):
 
 		self["thumbnail"] = Pixmap()
 		self["thumbnail"].hide()
-
+		self.title
 		self.cbTimer = eTimer()
 		self.cbTimer.callback.append(self.timerCallback)
 
@@ -480,16 +479,18 @@ class OpenUg(Screen):
 		self.pixmaps_to_load = []
 		self.picloads = {}
 		self.color = "#33000000"
-		
+
 		self.numericalTextInput = NumericalTextInput.NumericalTextInput(mapping=NumericalTextInput.MAP_SEARCH_UPCASE)
 		self["chosenletter"] = Label("")
-		self["chosenletter"].visible = False 
+		self["chosenletter"].visible = False
 
 		self.page = 0
 		self.numOfPics = 0
 		self.isRtl = False
 		self.isRtlBack = False
 		self.isSbs = False
+		self.isDumpert = False
+		self.isRver = False
 		self.channel = ''
 		self.level = self.UG_LEVEL_ALL
 		self.cmd = cmd
@@ -530,26 +531,26 @@ class OpenUg(Screen):
 				"7": self.keyNumberGlobal,
 				"8": self.keyNumberGlobal,
 				"9": self.keyNumberGlobal
-			}) 
+			})
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.cbTimer.start(10)
-		
+
 	def keyNumberGlobal(self, number):
 		unichar = self.numericalTextInput.getKey(number)
 		charstr = unichar.encode("utf-8")
 		if len(charstr) == 1:
 			self.moveToChar(charstr[0], self["chosenletter"])
-				
+
 	def keyAsciiCode(self):
 		unichar = unichr(getPrevAsciiCode())
 		charstr = unichar.encode("utf-8")
 		if len(charstr) == 1:
 			self.moveToString(charstr[0], self["chosenletter"])
-			
+
 	def moveToChar(self, char, lbl=None):
 		self._char = char
 		self._lbl = lbl
-		if lbl:			
+		if lbl:
 			lbl.setText(self._char)
 			lbl.visible = True
 		self.moveToCharTimer = eTimer()
@@ -559,7 +560,7 @@ class OpenUg(Screen):
 	def moveToString(self, char, lbl=None):
 		self._char = self._char + char.upper()
 		self._lbl = lbl
-		if lbl:			
+		if lbl:
 			lbl.setText(self._char)
 			lbl.visible = True
 		self.moveToCharTimer = eTimer()
@@ -600,15 +601,10 @@ class OpenUg(Screen):
 			self._lbl.visible = False
 
 	def layoutFinished(self):
-		if self.cmd == None or self.cmd == '':
+		if self.title == None or self.title == '':
 			self.setTitle("Open Uitzending Gemist")
-		elif type(self.cmd) == list:
-			title = self.cmd[0]
-			self.setTitle("Open Uitzending Gemist " + title)
-		elif 'sbs6' == self.cmd or 'veronica' == self.cmd or 'net5' == self.cmd or 'rtl' == self.cmd:
-			self.setTitle("Open Uitzending Gemist " + self.cmd)
 		else:
-			self.setTitle("Open Uitzending Gemist NPO")
+			self.setTitle(self.title)
 
 	def updatePage(self):
 		if self.page != self["list"].getSelectedIndex() / self.MAX_PIC_PAGE:
@@ -662,19 +658,7 @@ class OpenUg(Screen):
 			self["list"].setList(self.tmplist)
 
 	def Exit(self):
-		doExit = False
-		if self.level == self.UG_LEVEL_ALL:
-			doExit = True
-		else:
-			if self.isRtl:
-				if self.isRtlBack:
-					doExit = True
-				else:
-					doExit = True
-			else:
-				doExit = True
-		if doExit:
-			self.close()
+		self.close()
 
 	def clearList(self):
 		elist = []
@@ -684,11 +668,13 @@ class OpenUg(Screen):
 		self.page = 0
 
 	def setupCallback(self, retval = None):
+		self.retval = retval
 		if retval == 'cancel' or retval is None:
 			return
-			
+
 		if type(retval) == list:
 			if retval[0] == 'sbs':
+				self.title = retval[2]
 				tmp = retval[1]
 				self.clearList()
 				self.isSbs = True
@@ -700,6 +686,7 @@ class OpenUg(Screen):
 				else:
 					self.updateMenu()
 			elif retval[0] == 'rtlseason':
+				self.title = 'rtl seizoen'
 				tmp = retval[1]
 				self.clearList()
 				self.isRtl = True
@@ -710,6 +697,7 @@ class OpenUg(Screen):
 				else:
 					self.updateMenu()
 			elif retval[0] == 'rtlepisode':
+				self.title = 'rtl aflevering'
 				tmp = retval[1]
 				Skey = retval[2]
 				self.clearList()
@@ -721,6 +709,7 @@ class OpenUg(Screen):
 				else:
 					self.updateMenu()
 			elif retval[0] == 'rtlback':
+				self.title = 'rtl'
 				self.clearList()
 				self.isRtl = True
 				self.isRtlBack = True
@@ -730,8 +719,21 @@ class OpenUg(Screen):
 					self.mediaProblemPopup()
 				else:
 					self.updateMenu()
-
+			elif retval[0] == 'dumpert':
+				if 'toppers' in retval[1]:
+					self.title = retval[0] + '-toppers pagina' + retval[1].split('/')[2]
+				else:
+					self.title = retval[0] + '-nieuw pagina' + self.cmd[1].split('/')[1]
+				self.clearList()
+				self.isDumpert = True
+				self.level = self.UG_LEVEL_SERIE
+				self.dumpert(self.mediaList, retval[1])
+				if len(self.mediaList) == 0:
+					self.mediaProblemPopup()
+				else:
+					self.updateMenu()
 		elif retval == 'uitgelicht':
+			self.title = "Open Uitzending Gemist NPO"
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
 			offset = 0
@@ -745,6 +747,7 @@ class OpenUg(Screen):
 				offset += 24
 			self.updateMenu()
 		elif retval == 'pop':
+			self.title = "Open Uitzending Gemist NPO"
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
 			offset = 0
@@ -762,6 +765,7 @@ class OpenUg(Screen):
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
 		elif retval == 'rtl':
+			self.title = retval
 			self.clearList()
 			self.isRtl = True
 			self.level = self.UG_LEVEL_ALL
@@ -770,7 +774,8 @@ class OpenUg(Screen):
 				self.mediaProblemPopup()
 			else:
 				self.updateMenu()
-		elif retval == 'net5':
+		elif retval == 'net5' or retval == 'sbs6' or retval == 'veronica':
+			self.title = retval
 			self.clearList()
 			self.isSbs = True
 			self.channel = retval
@@ -780,27 +785,38 @@ class OpenUg(Screen):
 				self.mediaProblemPopup()
 			else:
 				self.updateMenu()
-		elif retval == 'sbs6':
+		elif retval == 'dumpert-nieuw':
+			self.title = retval
 			self.clearList()
-			self.isSbs = True
-			self.channel = retval
-			self.level = self.UG_LEVEL_ALL
-			self.sbsGetProgramList(self.mediaList)
+			self.isDumpert = True
+			self.level = self.UG_LEVEL_SERIE
+			self.dumpert(self.mediaList, "")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup()
 			else:
 				self.updateMenu()
-		elif retval == 'veronica':
+		elif retval == 'dumpert-toppers':
+			self.title = retval
 			self.clearList()
-			self.isSbs = True
-			self.channel = retval
-			self.level = self.UG_LEVEL_ALL
-			self.sbsGetProgramList(self.mediaList)
+			self.isDumpert = True
+			self.level = self.UG_LEVEL_SERIE
+			self.dumpert(self.mediaList, "/toppers/")
+			if len(self.mediaList) == 0:
+				self.mediaProblemPopup()
+			else:
+				self.updateMenu()
+		elif retval == 'Rverhighlights':
+			self.title = 'Radio Veronica highlights'
+			self.clearList()
+			self.isRver = True
+			self.level = self.UG_LEVEL_SERIE
+			self.rver(self.mediaList, 'http://www.radioveronica.nl/gemist/highlights')
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup()
 			else:
 				self.updateMenu()
 		else:
+			self.title = "Open Uitzending Gemist NPO"
 			if retval >= 128:
 				retval -=  128
 				now = int(time.time())
@@ -928,6 +944,27 @@ class OpenUg(Screen):
 					self.session.open(UGMediaPlayer, myreference, 'rtl')
 				else:
 					self.session.openWithCallback(self.close, MessageBox, _("Voor deze aflevering moet waarschijnlijk betaald worden."), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+		elif self.isDumpert:
+			if self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME] == ' ---> Volgende Pagina':
+				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
+				self.session.open(OpenUg, ['dumpert' , tmp])
+				self.close()
+			elif self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME] == ' <--- Vorige Pagina':
+				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
+				self.session.open(OpenUg, ['dumpert' , tmp])
+				self.close()
+			else:
+				tmp = self.getDumpertStream(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
+				if tmp != '':
+					myreference = eServiceReference(4097, 0, tmp)
+					myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
+					self.session.open(UGMediaPlayer, myreference, 'rtl')
+		elif self.isRver:
+			tmp = self.getRverStream(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
+			if tmp != '':
+				myreference = eServiceReference(4097, 0, tmp)
+				myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
+				self.session.open(UGMediaPlayer, myreference, 'rtl')
 		else:
 			self.doUGPlay()
 
@@ -1032,7 +1069,7 @@ class OpenUg(Screen):
 				date = ''
 				channel = ''
 				state = 0
-		
+
 	def getRTLMediaDataSeason(self, weekList, url):
 		data = wgetUrl(self.RTL_BASE_URL + '/fun=getseasons/ak=' + url)
 		tmp = '\"schedule\":'
@@ -1318,6 +1355,110 @@ class OpenUg(Screen):
 				if 'defaultURL\":' in x and 'defaultURL\":null' not in x:
 					url = x.split('defaultURL\":\"')[1].split('\"')[0].replace('\\', '')
 		return url
+		
+	def dumpert(self, mediaList, url):
+		data = wgetUrlCookie(self.DUMPERT_BASE_URL + url, 'filter=video')
+		data = Csplit(data, '<section id="content">',1)
+		data = Csplit(data, '<div id="footcontainer">', 0)
+		nexturl = ''
+		prevurl = ''
+		if '<li class="volgende">' in data:
+			nexturl = data.split('<li class="volgende"><a href="')[1].split('"')[0]
+		if '<li class="vorige">' in data:
+			prevurl = data.split('<li class="vorige"><a href="')[1].split('"')[0]
+			mediaList.append(('', ' <--- Vorige Pagina', '', '', prevurl, '', '', True))
+		data = Csplit(data, '</ol>', 1)
+		data = Csplit(data, '</a>')
+		state = 0
+		name = ''
+		short = ''
+		icon = ''
+		stream = ''
+		date = ''
+		channel = ''
+		for line in data:
+			if state == 0:
+				if 'class="dumpthumb"' in line:
+					state = 1
+			if state == 1:
+				stream = line.split('<a href="')[1].split('"')[0]
+				tmp = 'title="'
+				if tmp in line:
+					name = line.split(tmp)[1].split('"')[0]
+				tmp = '<img src="'
+				if tmp in line:
+					icon = line.split(tmp)[1].split('"')[0]
+					icon_type = icon
+				#tmp = '<span class="'
+				#if tmp in line:
+				#	name = name + ' | ' +line.split(tmp)[1].split('"')[0]
+				tmp = '<date>'
+				if tmp in line:
+					date = line.split(tmp)[1].split('</date>')[0]
+				tmp = '<p class="stats">'
+				if tmp in line:
+					date = date + ' | ' + line.split(tmp)[1].split('</p>')[0]
+				tmp = '<p class="description">'
+				if tmp in line:
+					short = line.split(tmp)[1].split('</p>')[0]
+				mediaList.append((date, name, short, channel, stream, icon, icon_type, True))
+				state = 0
+		mediaList.append(('', ' ---> Volgende Pagina', '', '', nexturl, '', '', True))
+		
+	def getDumpertStream(self, url):
+		data = wgetUrl(url)
+		url = ''
+		data = Csplit(data, '<section id="content">', 1)
+		data = Csplit(data, '<div id="commentscontainer">', 0)
+		tmp = 'data-vidurl="'
+		if tmp in data:
+			url = data.split(tmp)[1].split('"')[0]
+		return url
+		
+	def rver(self, mediaList, url):
+		data = wgetUrl(url)
+		data = Csplit(data, '<h5>Kies programma</h5>', 1)
+		data = Csplit(data, '</ul>', 0)
+		data = Csplit(data, '<li data-category="', )
+		state = 0
+		name = ''
+		short = ''
+		icon = ''
+		stream = ''
+		date = ''
+		channel = ''
+		for line in data:
+			if state == 0:
+				if '<a href="' in line:
+					state = 1
+			if state == 1:
+				name = line.split('"')[0]
+				stream = line.split('<a href="')[1].split('"')[0]
+				tmp = '<li data-category="'
+				if tmp in line:
+					name = line.split(tmp)[1].split('"')[0]
+				tmp = '<span class="datum">'
+				if tmp in line:
+					date = line.split(tmp)[1].split('</span>')[0]
+				tmp = '<br />'
+				if tmp in line:
+					short = line.split(tmp)[1].split('</a>')[0]
+				mediaList.append((date, name, short, channel, stream, icon, '', True))
+				state = 0
+
+	def getRverStream(self, url):
+		data = wgetUrl('http://www.radioveronica.nl' + url)
+		url = ''
+		tmp = '<meta property="og:audio" content="'
+		if tmp in data:
+			url = data.split(tmp)[1].split('"')[0]
+			if '.MP3' in url:
+				return url
+		data = Csplit(data, '</head>', 1)
+		tmp = '<audio  src="'
+		if tmp in data:
+			url = data.split(tmp)[1].split('"')[0]
+		return url
 
 	def getIconType(self, data):
 		tmp = ".png"
@@ -1338,4 +1479,3 @@ def Plugins(**kwargs):
 
 	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="oe-alliance.png", fnc = main),
 			PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]
-
