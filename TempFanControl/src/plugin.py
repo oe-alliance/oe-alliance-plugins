@@ -13,7 +13,7 @@ from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.FanControl import fancontrol
 
-from boxbranding import getBoxType
+from boxbranding import getBrandOEM
 
 class TempFanControl(Screen, ConfigListScreen):
 	skin = """
@@ -109,10 +109,10 @@ class TempFanControl(Screen, ConfigListScreen):
 		for count in range(8):
 			if count < tempcount:
 				id = templist[count]
-				if not getBoxType().startswith('tm') and not getBoxType().startswith('vu'):
+				if getBrandOEM() not in ('dags', 'vuplus'):
 					self["SensorTempText%d" % count] = StaticText(sensors.getSensorName(id))
 					self["SensorTemp%d" % count] = SensorSource(sensorid = id)
-				elif getBoxType().startswith('tm') or getBoxType().startswith('vu') and id < 1:
+				elif getBrandOEM() in ('dags', 'vuplus') and id < 1:
 					self["SensorTempText%d" % count] = StaticText(sensors.getSensorName(id))
 					self["SensorTemp%d" % count] = SensorSource(sensorid = id)
 				else:
@@ -132,10 +132,10 @@ class TempFanControl(Screen, ConfigListScreen):
 
 		self.list = []
 		for count in range(fancontrol.getFanCount()):
-			if not getBoxType().startswith('tm') and not getBoxType().startswith('vu'):
+			if getBrandOEM() not in ('dags', 'vuplus'):
 				self.list.append(getConfigListEntry(_("Fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt))
 			self.list.append(getConfigListEntry(_("Fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm))
-			if not getBoxType().startswith('tm') and not getBoxType().startswith('vu'):
+			if getBrandOEM() not in ('dags', 'vuplus'):
 				self.list.append(getConfigListEntry(_("Standby fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt_standby))
 			self.list.append(getConfigListEntry(_("Standby fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm_standby))
 
@@ -155,20 +155,20 @@ class TempFanControl(Screen, ConfigListScreen):
 
 	def save(self):
 		for count in range(fancontrol.getFanCount()):
-			if not getBoxType().startswith('tm') or not getBoxType().startswith('vu'):
+			if getBrandOEM() not in ('dags', 'vuplus'):
 				fancontrol.getConfig(count).vlt.save()
 			fancontrol.getConfig(count).pwm.save()
-			if not getBoxType().startswith('tm') or not getBoxType().startswith('vu'):
+			if getBrandOEM() not in ('dags', 'vuplus'):
 				fancontrol.getConfig(count).vlt_standby.save()
 			fancontrol.getConfig(count).pwm_standby.save()
 		self.close()
 
 	def revert(self):
 		for count in range(fancontrol.getFanCount()):
-			if not getBoxType().startswith('tm') or not getBoxType().startswith('vu'):
+			if getBrandOEM() not in ('dags', 'vuplus'):
 				fancontrol.getConfig(count).vlt.load()
 			fancontrol.getConfig(count).pwm.load()
-			if not getBoxType().startswith('tm') or not getBoxType().startswith('vu'):
+			if getBrandOEM() not in ('dags', 'vuplus'):
 				fancontrol.getConfig(count).vlt_standby.load()
 			fancontrol.getConfig(count).pwm_standby.load()
 		self.close()

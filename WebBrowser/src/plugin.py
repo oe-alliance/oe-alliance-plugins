@@ -37,14 +37,14 @@ from Screens.MessageBox import MessageBox
 from Screens.InfoBarGenerics import InfoBarNotifications
 
 from enigma import eTimer, eServiceReference, iPlayableService, fbClass, eRCInput, eConsoleAppContainer
-from boxbranding import getBoxType
+from boxbranding import getBrandOEM
 
 HTTPConnection.debuglevel = 1
 
 model_rc = "rc_wb_desc.png"
-if getBoxType().startswith('gb'):
+if getBrandOEM() =='gigablue':
 	model_rc = "rc_wb_desc_gb.png"
-elif getBoxType().startswith('venton') or getBoxType().startswith('ini'):
+elif getBrandOEM() == 'ini':
 	model_rc = "rc_wb_desc_hdx.png"
 
 def excute_cmd(cmd):

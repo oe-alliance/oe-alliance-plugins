@@ -22,7 +22,7 @@ from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
 from enigma import ePicLoad, ePixmap
-from boxbranding import getBoxType, getImageDistro
+from boxbranding import getBrandOEM, getImageDistro
 
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
@@ -122,7 +122,7 @@ L4LdoThread = True
 LCD4config = "/etc/enigma2/lcd4config"
 LCD4plugin ="/usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/"
 Data = LCD4plugin+"data/"
-if getBoxType().startswith("gb"):
+if getBrandOEM() == 'gigablue':
 	LCD4default = Data+"default.gigablue"
 else:	
 	LCD4default = Data+"default.lcd"
