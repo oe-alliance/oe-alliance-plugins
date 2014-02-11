@@ -25,6 +25,9 @@ from os import path as os_path, remove as os_remove, mkdir as os_mkdir
 import socket
 from datetime import date, timedelta
 import time
+import urlparse
+import httplib
+
 
 
 config.plugins.OpenUitzendingGemist = ConfigSubsection()
@@ -65,6 +68,22 @@ def wgetUrlCookie(target, cookie):
 		outtxt = ''
 	return outtxt
 	
+def resolve_http_redirect(url, depth=0):
+	if depth > 10:
+		raise Exception("Redirected "+depth+" times, giving up.")
+	o = urlparse.urlparse(url,allow_fragments=True)
+	conn = httplib.HTTPConnection(o.netloc)
+	path = o.path
+	if o.query:
+		path +='?'+o.query
+	conn.request("HEAD", path)
+	res = conn.getresponse()
+	headers = dict(res.getheaders())
+	if headers.has_key('location') and headers['location'] != url:
+		return resolve_http_redirect(headers['location'], depth+1)
+	else:
+		return url
+
 def Csplit(data, string, number = None):
 	if string in data:
 		data = data.split(string)
@@ -127,16 +146,20 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		</widget>
 		</screen>"""
 
-	def __init__(self, session, service, mediatype):
+	def __init__(self, session, service, seekable = False, pauseable = False, radio = False):
 		Screen.__init__(self, session)
 		self.skinName = "MoviePlayer"
 		InfoBarNotifications.__init__(self)
-		if mediatype == 'rtl':
+		if seekable == True:
+			InfoBarSeek.__init__(self)
+		elif pauseable == True:
 			InfoBarSeek.__init__(self)
 		self.session = session
 		self.service = service
+		self.seekable = seekable
+		self.pauseable = pauseable
+		self.radio = radio
 		self.screen_timeout = 3000
-		self.mediatype = mediatype
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
 			{
 				iPlayableService.evStart: self.__serviceStarted,
@@ -149,6 +172,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 				"cancel": self.leavePlayer,
 				"stop": self.handleLeave,
 				"showEventInfo": self.showVideoInfo,
+				"playpauseService": self.playpauseService,
 			}, -2)
 		self.hidetimer = eTimer()
 		self.hidetimer.timeout.get().append(self.ok)
@@ -160,8 +184,10 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.onClose.append(self.__onClose)
 
 	def __seekableStatusChanged(self):
-		if self.mediatype != 'rtl':
+		if self.seekable == False:
 			return
+		self.show()
+		self.__setHideTimer()
 		if not self.isSeekable():
 			self["SeekActions"].setEnabled(False)
 			self.setSeekState(self.STATE_PLAYING)
@@ -179,7 +205,9 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 
 	def showInfobar(self):
 		self.show()
-		if self.state == self.STATE_PLAYING:
+		if self.radio:
+			pass
+		elif self.state == self.STATE_PLAYING:
 			self.__setHideTimer()
 		else:
 			pass
@@ -210,8 +238,28 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 				self.__setHideTimer()
 		self.state = self.STATE_PLAYING
 		self.session.nav.playService(self.service)
-		if self.shown:
+		if self.shown and self.radio == False:
 			self.__setHideTimer()
+			
+	def playpauseService(self):
+		if self.pauseable == False:
+			return
+		if self.state == self.STATE_PLAYING:
+			self.pauseService()
+		elif self.state == self.STATE_PAUSED:
+			self.unPauseService()
+
+	def pauseService(self):
+		if self.pauseable == False:
+			return
+		if self.state == self.STATE_PLAYING:
+			self.setSeekState(self.STATE_PAUSED)
+
+	def unPauseService(self):
+		if self.pauseable == False:
+			return
+		if self.state == self.STATE_PAUSED:
+			self.setSeekState(self.STATE_PLAYING)
 
 	def stopCurrent(self):
 		self.session.nav.stopService()
@@ -220,6 +268,11 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def __serviceStarted(self):
 		self.state = self.STATE_PLAYING
 		self.__seekableStatusChanged()
+	
+	def playagain(self):
+		if self.state != self.STATE_IDLE:
+			self.stopCurrent()
+			self.play()
 
 	def handleLeave(self):
 		self.close()
@@ -243,6 +296,39 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 
 	def unlockShow(self):
 		return
+		
+	def setSeekState(self, wantstate, onlyGUI = False):
+		print "setSeekState"
+		if wantstate == self.STATE_PAUSED:
+			print "trying to switch to Pause- state:",self.STATE_PAUSED
+		elif wantstate == self.STATE_PLAYING:
+			print "trying to switch to playing- state:",self.STATE_PLAYING
+		service = self.session.nav.getCurrentService()
+		if service is None:
+			print "No Service found"
+			return False
+		pauseable = service.pause()
+		if pauseable is None:
+			print "not pauseable."
+			self.state = self.STATE_PLAYING
+		if pauseable is not None:
+			print "service is pausable"
+			if wantstate == self.STATE_PAUSED:
+				print "WANT TO PAUSE"
+				pauseable.pause()
+				self.state = self.STATE_PAUSED
+				if not self.shown:
+					self.hidetimer.stop()
+					self.show()
+			elif wantstate == self.STATE_PLAYING:
+				print "WANT TO PLAY"
+				pauseable.unpause()
+				self.state = self.STATE_PLAYING
+				if self.shown:
+					self.__setHideTimer()
+		for c in self.onPlayStateChanged:
+			c(self.state)
+		return True
 
 class OpenUgConfigureScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
@@ -403,18 +489,43 @@ class SmallScreen(Screen):
 			self.ttitle = "Radio gemist"
 			#self.mmenu.append((_("Radio538"), 'R538'))
 			self.mmenu.append((_("Veronica"), 'Rver'))
+			self.mmenu.append((_("Decibel"), 'Rdec'))
 		elif cmd == 'inetTV':
 			self.ttitle = "InternetTV"
 			self.mmenu.append((_("Dumpert.nl"), 'dumpert'))
-			#self.mmenu.append((_("VKMag.com"), 'vkmag'))
+			self.mmenu.append((_("VKMag.com"), 'vkmag'))
+			self.mmenu.append((_("Livestreams"), 'livestreams'))
 		elif cmd == 'dumpert':
 			self.ttitle = "Dumpert.nl"
 			self.mmenu.append((_("Nieuw"), 'dumpert-nieuw'))
 			self.mmenu.append((_("Toppers"), 'dumpert-toppers'))
+		elif cmd == 'vkmag':
+			self.ttitle = "vkmag.com"
+			self.mmenu.append((_("Video's"), 'vkmagVid'))
+			#self.mmenu.append((_("Afbeeldingen"), 'vkmagPic'))
 		elif cmd == 'Rver':
 			self.ttitle = "Radio Veronica"
 			self.mmenu.append((_("highlights"), 'Rverhighlights'))
 			#self.mmenu.append((_("Kies programma"), 'Rverkies'))
+		elif cmd == 'Rdec':
+			self.ttitle = "Radio Decibel"
+			self.mmenu.append((_("Podcasts"), 'Rdecpodcast'))
+		elif cmd == 'livestreams':
+			self.ttitle = "Live Streams"
+			self.mmenu.append((_("Nederland 1"), 'tvlive/ned1/ned1.isml/ned1.m3u8', 'npo'))
+			self.mmenu.append((_("Nederland 2"), 'tvlive/ned2/ned2.isml/ned2.m3u8', 'npo'))
+			self.mmenu.append((_("Nederland 3"), 'tvlive/ned3/ned3.isml/ned3.m3u8', 'npo'))
+			self.mmenu.append((_("Politiek 24"), 'thematv/politiek24/politiek24.isml/politiek24.m3u8', 'npo'))
+			self.mmenu.append((_("Journaal 24"), 'thematv/journaal24/journaal24.isml/journaal24.m3u8', 'npo'))
+			self.mmenu.append((_("Humor TV 24"), 'thematv/humor24/humor24.isml/humor24.m3u8', 'npo'))
+			self.mmenu.append((_("Holland Doc 24"), 'thematv/hollanddoc24/hollanddoc24.isml/hollanddoc24.m3u8', 'npo'))
+			self.mmenu.append((_("Z@ppelin/ Zapp"), 'thematv/zappelin24/zappelin24.isml/zappelin24.m3u8', 'npo'))
+			self.mmenu.append((_("Cultura 24"), 'thematv/cultura24/cultura24.isml/cultura24.m3u8', 'npo'))
+			self.mmenu.append((_("Best 24"), 'thematv/best24/best24.isml/best24.m3u8', 'npo'))
+			self.mmenu.append((_("101 TV"), 'thematv/101tv/101tv.isml/101tv.m3u8', 'npo'))
+			self.mmenu.append((_("Slam! Hardstyle"), 'http://82.201.100.23:80/WEB17_Hardstyle_AAC', ''))
+			self.mmenu.append((_("538 Party"), 'http://82.201.100.9:8000/WEB16_WEB_MP3', ''))
+			self.mmenu.append((_("Q-Music Het Foute Non Stop"), 'http://vip2.str.reasonnet.com/streamfout.mp3.96', ''))
 		else:
 			self.mmenu.append((_("Error..."), None))
 		self["menu"] = MenuList(self.mmenu)
@@ -430,6 +541,23 @@ class SmallScreen(Screen):
 			self.session.open(OpenUg, ['rtlback', selection[1]])
 		elif self.cmd == 'radio' or self.cmd == 'inetTV':
 			self.session.open(SmallScreen, selection[1])
+		elif self.cmd == 'livestreams':
+			if selection[2] == 'npo':
+				API_URL = 'http://ida.omroep.nl/aapi/?stream='
+				BASE_URL = 'http://livestreams.omroep.nl/live/npo/'
+				data = wgetUrl(API_URL+BASE_URL+selection[1])
+				data = Csplit(data, "?hash=", 1)
+				data = Csplit(data, '"', 0)
+				if data != '':
+					url = BASE_URL+selection[1]+'?hash='+data
+					url = resolve_http_redirect(url, 3)
+					myreference = eServiceReference(4097, 0, url)
+					myreference.setName(selection[0])
+					self.session.open(UGMediaPlayer, myreference)
+			else:
+				myreference = eServiceReference(4097, 0, selection[1])
+				myreference.setName(selection[0])
+				self.session.open(UGMediaPlayer, myreference, False, False, True)
 		else:
 			self.session.open(OpenUg, selection[1])
 
@@ -486,11 +614,8 @@ class OpenUg(Screen):
 
 		self.page = 0
 		self.numOfPics = 0
-		self.isRtl = False
 		self.isRtlBack = False
-		self.isSbs = False
-		self.isDumpert = False
-		self.isRver = False
+		self.choice = []
 		self.channel = ''
 		self.level = self.UG_LEVEL_ALL
 		self.cmd = cmd
@@ -628,7 +753,7 @@ class OpenUg(Screen):
 		self.updatePage()
 
 	def getThumbnailName(self, x):
-		if self.isRtl:
+		if self.choice == 'rtl':
 			if x[self.UG_ICON]:
 				return ""
 			else:
@@ -677,7 +802,7 @@ class OpenUg(Screen):
 				self.title = retval[2]
 				tmp = retval[1]
 				self.clearList()
-				self.isSbs = True
+				self.choice = 'sbs'
 				self.channel = retval[2]
 				self.level = self.UG_LEVEL_SERIE
 				self.sbsGetEpisodeList(self.mediaList, tmp)
@@ -689,7 +814,7 @@ class OpenUg(Screen):
 				self.title = 'rtl seizoen'
 				tmp = retval[1]
 				self.clearList()
-				self.isRtl = True
+				self.choice = 'rtl'
 				self.level = self.UG_LEVEL_SEASON
 				self.getRTLMediaDataSeason(self.mediaList, tmp)
 				if len(self.mediaList) == 0:
@@ -701,7 +826,7 @@ class OpenUg(Screen):
 				tmp = retval[1]
 				Skey = retval[2]
 				self.clearList()
-				self.isRtl = True
+				self.choice = 'rtl'
 				self.level = self.UG_LEVEL_SERIE
 				self.getRTLSerie(self.mediaList, tmp, Skey)
 				if len(self.mediaList) == 0:
@@ -711,7 +836,7 @@ class OpenUg(Screen):
 			elif retval[0] == 'rtlback':
 				self.title = 'rtl'
 				self.clearList()
-				self.isRtl = True
+				self.choice = 'rtl'
 				self.isRtlBack = True
 				self.level = self.UG_LEVEL_SERIE
 				self.getRTLMediaDataBack(self.mediaList, retval[1])
@@ -725,9 +850,19 @@ class OpenUg(Screen):
 				else:
 					self.title = retval[0] + '-nieuw pagina' + self.cmd[1].split('/')[1]
 				self.clearList()
-				self.isDumpert = True
+				self.choice = 'dumpert'
 				self.level = self.UG_LEVEL_SERIE
 				self.dumpert(self.mediaList, retval[1])
+				if len(self.mediaList) == 0:
+					self.mediaProblemPopup()
+				else:
+					self.updateMenu()
+			elif retval[0] == 'Rdecpodcast':
+				self.title = 'Radio Decibel Podcasts'
+				self.clearList()
+				self.choice = 'rdec'
+				self.level = self.UG_LEVEL_SERIE
+				self.rdec(self.mediaList, 'http://www.decibel.nl'+retval[1], True)
 				if len(self.mediaList) == 0:
 					self.mediaProblemPopup()
 				else:
@@ -761,13 +896,13 @@ class OpenUg(Screen):
 				offset += 24
 			self.updateMenu()
 		elif retval == 'rsearch':
-			self.isRtl = True
+			self.choice = 'rtl'
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
 		elif retval == 'rtl':
 			self.title = retval
 			self.clearList()
-			self.isRtl = True
+			self.choice = 'rtl'
 			self.level = self.UG_LEVEL_ALL
 			self.getRTLMediaData(self.mediaList, "/fun=az/fmt=smooth")
 			if len(self.mediaList) == 0:
@@ -777,7 +912,7 @@ class OpenUg(Screen):
 		elif retval == 'net5' or retval == 'sbs6' or retval == 'veronica':
 			self.title = retval
 			self.clearList()
-			self.isSbs = True
+			self.choice = 'sbs'
 			self.channel = retval
 			self.level = self.UG_LEVEL_ALL
 			self.sbsGetProgramList(self.mediaList)
@@ -788,7 +923,7 @@ class OpenUg(Screen):
 		elif retval == 'dumpert-nieuw':
 			self.title = retval
 			self.clearList()
-			self.isDumpert = True
+			self.choice = 'dumpert'
 			self.level = self.UG_LEVEL_SERIE
 			self.dumpert(self.mediaList, "")
 			if len(self.mediaList) == 0:
@@ -798,7 +933,7 @@ class OpenUg(Screen):
 		elif retval == 'dumpert-toppers':
 			self.title = retval
 			self.clearList()
-			self.isDumpert = True
+			self.choice = 'dumpert'
 			self.level = self.UG_LEVEL_SERIE
 			self.dumpert(self.mediaList, "/toppers/")
 			if len(self.mediaList) == 0:
@@ -808,9 +943,29 @@ class OpenUg(Screen):
 		elif retval == 'Rverhighlights':
 			self.title = 'Radio Veronica highlights'
 			self.clearList()
-			self.isRver = True
+			self.choice = 'rver'
 			self.level = self.UG_LEVEL_SERIE
 			self.rver(self.mediaList, 'http://www.radioveronica.nl/gemist/highlights')
+			if len(self.mediaList) == 0:
+				self.mediaProblemPopup()
+			else:
+				self.updateMenu()
+		elif retval == 'vkmagVid':
+			self.title = "Vkmag Video's"
+			self.clearList()
+			self.choice = 'vkmagvideo'
+			self.level = self.UG_LEVEL_SERIE
+			self.vkmag(self.mediaList, 'http://www.vkmag.com/magazine/video_archive')
+			if len(self.mediaList) == 0:
+				self.mediaProblemPopup()
+			else:
+				self.updateMenu()
+		elif retval == 'Rdecpodcast':
+			self.title = 'Radio Decibel Podcasts'
+			self.clearList()
+			self.choice = 'rdec'
+			self.level = self.UG_LEVEL_ALL
+			self.rdec(self.mediaList, 'http://www.decibel.nl/radio/podcasts')
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup()
 			else:
@@ -858,7 +1013,7 @@ class OpenUg(Screen):
 		if callback is not None and len(callback):
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
-			if self.isRtl == True:
+			if self.choice == 'rtl':
 				self.getRTLSerie(self.mediaList, "search.php?q=*" + callback + "*")
 				self.updateMenu()
 			if len(self.mediaList) == 0:
@@ -919,7 +1074,7 @@ class OpenUg(Screen):
 	def go(self):
 		if len(self.mediaList) == 0 or self["list"].getSelectionIndex() > len(self.mediaList) - 1:
 			return
-		if self.isSbs:
+		if self.choice == 'sbs':
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
 				self.session.open(OpenUg, ['sbs' , tmp , self.channel])
@@ -928,8 +1083,8 @@ class OpenUg(Screen):
 				if tmp != '':
 					myreference = eServiceReference(4097, 0, tmp)
 					myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
-					self.session.open(UGMediaPlayer, myreference, 'sbs')
-		elif self.isRtl:
+					self.session.open(UGMediaPlayer, myreference, False)
+		elif self.choice == 'rtl':
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
 				self.session.open(OpenUg, ['rtlseason' , tmp])
@@ -941,10 +1096,10 @@ class OpenUg(Screen):
 				if tmp != '':
 					myreference = eServiceReference(4097, 0, tmp)
 					myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
-					self.session.open(UGMediaPlayer, myreference, 'rtl')
+					self.session.open(UGMediaPlayer, myreference, True, True)
 				else:
 					self.session.openWithCallback(self.close, MessageBox, _("Voor deze aflevering moet waarschijnlijk betaald worden."), MessageBox.TYPE_ERROR, timeout=5, simple = True)
-		elif self.isDumpert:
+		elif self.choice == 'dumpert':
 			if self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME] == ' ---> Volgende Pagina':
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
 				self.session.open(OpenUg, ['dumpert' , tmp])
@@ -958,13 +1113,29 @@ class OpenUg(Screen):
 				if tmp != '':
 					myreference = eServiceReference(4097, 0, tmp)
 					myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
-					self.session.open(UGMediaPlayer, myreference, 'rtl')
-		elif self.isRver:
+					self.session.open(UGMediaPlayer, myreference, True, True)
+		elif self.choice == 'rver':
 			tmp = self.getRverStream(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
 			if tmp != '':
 				myreference = eServiceReference(4097, 0, tmp)
 				myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
-				self.session.open(UGMediaPlayer, myreference, 'rtl')
+				self.session.open(UGMediaPlayer, myreference, True, True, True)
+		elif self.choice == 'vkmagvideo':
+			tmp = self.getvkmagStream(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
+			if tmp != '':
+				myreference = eServiceReference(4097, 0, tmp)
+				myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
+				self.session.open(UGMediaPlayer, myreference, True, True)
+		elif self.choice == 'rdec':
+			if self.level == self.UG_LEVEL_ALL:
+				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
+				self.session.open(OpenUg, ['Rdecpodcast' , tmp])
+			else:
+				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
+				if tmp != '':
+					myreference = eServiceReference(4097, 0, tmp)
+					myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
+					self.session.open(UGMediaPlayer, myreference, True, True, True)
 		else:
 			self.doUGPlay()
 
@@ -983,7 +1154,7 @@ class OpenUg(Screen):
 			if url != '':
 				myreference = eServiceReference(4097, 0, url)
 				myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
-				self.session.open(UGMediaPlayer, myreference, 'npo')
+				self.session.open(UGMediaPlayer, myreference, False)
 
 	def getRTLStream(self, url):
 		uuid = url
@@ -1459,6 +1630,79 @@ class OpenUg(Screen):
 		if tmp in data:
 			url = data.split(tmp)[1].split('"')[0]
 		return url
+		
+	def vkmag(self, mediaList, url):
+		data = wgetUrl(url)
+		data = Csplit(data, '<div class="archive">', 1)
+		data = Csplit(data, '<h4>Zoeken</h4>', 0)
+		data = Csplit(data, '</article>', )
+		state = 0
+		name = ''
+		short = ''
+		icon = ''
+		stream = ''
+		date = ''
+		channel = ''
+		for line in data:
+			if state == 0:
+				if '<a href="' in line:
+					state = 1
+			if state == 1:
+				name = line.split('"')[0]
+				stream = line.split('<a href="')[1].split('"')[0]
+				tmp = 'alt="'
+				if tmp in line:
+					name = line.split(tmp)[1].split('"')[0]
+				tmp = '<img src="'
+				if tmp in line:
+					icon = line.split(tmp)[1].split('"')[0]
+				tmp = '<date>'
+				if tmp in line:
+					date = line.split(tmp)[1].split('</date>')[0]
+				mediaList.append((date, name, short, channel, stream, icon, '', True))
+				state = 0
+				
+	def getvkmagStream(self, url):
+		data = wgetUrl(url)
+		url = ''
+		data = Csplit(data, "jwplayer('my-video').setup({", 1)
+		tmp = "file: '"
+		if tmp in data:
+			url = data.split(tmp)[1].split("'")[0]
+		return url
+		
+	def rdec(self, mediaList, url, podcast=False):
+		data = wgetUrl(url)
+		data = Csplit(data, '<div class="contentBlok">', 1)
+		data = Csplit(data, '<div id="footerContent">', 0)
+		if podcast == True:
+			data = Csplit(data, '<a href="', )
+		else:
+			data = Csplit(data, '<div class="top">', )
+		state = 0
+		name = ''
+		short = ''
+		icon = ''
+		stream = ''
+		date = ''
+		channel = ''
+		for line in data:
+			if state == 0:
+				if '<a href="' in line and podcast == False:
+					state = 1
+				elif 'class="potscast"' in line and podcast == True:
+					state = 1
+			if state == 1:
+				if podcast == False:
+					stream = line.split('<a href="')[1].split('"')[0]
+				elif podcast == True:
+					stream = line.split('"')[0]
+				name = line.split('</div>')[0]		
+				tmp = '>&#8226;'
+				if tmp in line:
+					name = line.split(tmp)[1].split('</a>')[0]
+				mediaList.append((date, name, short, channel, stream, icon, '', True))
+				state = 0
 
 	def getIconType(self, data):
 		tmp = ".png"
