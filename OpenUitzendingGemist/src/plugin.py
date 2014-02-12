@@ -32,6 +32,7 @@ import httplib
 
 config.plugins.OpenUitzendingGemist = ConfigSubsection()
 config.plugins.OpenUitzendingGemist.showpictures = ConfigBoolean(default = True)
+config.plugins.OpenUitzendingGemist.Npolivestreams = ConfigBoolean(default = False)
 
 
 def wgetUrl(target):
@@ -350,6 +351,7 @@ class OpenUgConfigureScreen(Screen, ConfigListScreen):
 
 		self["config"].list = self.list
 		self.list.append(getConfigListEntry(_("Show pictures"), config.plugins.OpenUitzendingGemist.showpictures))
+		self.list.append(getConfigListEntry(_("Show NPO livestreams"), config.plugins.OpenUitzendingGemist.Npolivestreams))
 		self["config"].l.setList(self.list)
 
 		self.onLayoutFinish.append(self.layoutFinished)
@@ -487,9 +489,9 @@ class SmallScreen(Screen):
 					count += 1
 		elif cmd == 'radio':
 			self.ttitle = "Radio gemist"
-			#self.mmenu.append((_("Radio538"), 'R538'))
 			self.mmenu.append((_("Veronica"), 'Rver'))
 			self.mmenu.append((_("Decibel"), 'Rdec'))
+			self.mmenu.append((_("Internet radio"), 'Rinetradio'))
 		elif cmd == 'inetTV':
 			self.ttitle = "InternetTV"
 			self.mmenu.append((_("Dumpert.nl"), 'dumpert'))
@@ -502,30 +504,41 @@ class SmallScreen(Screen):
 		elif cmd == 'vkmag':
 			self.ttitle = "vkmag.com"
 			self.mmenu.append((_("Video's"), 'vkmagVid'))
-			#self.mmenu.append((_("Afbeeldingen"), 'vkmagPic'))
 		elif cmd == 'Rver':
 			self.ttitle = "Radio Veronica"
 			self.mmenu.append((_("highlights"), 'Rverhighlights'))
-			#self.mmenu.append((_("Kies programma"), 'Rverkies'))
 		elif cmd == 'Rdec':
 			self.ttitle = "Radio Decibel"
 			self.mmenu.append((_("Podcasts"), 'Rdecpodcast'))
+		elif cmd == 'Rinetradio':
+			self.ttitle = "Internet radio"
+			self.mmenu.append((_("538 Party"), 'http://82.201.100.9:8000/WEB16_WEB_MP3', ''))
+			self.mmenu.append((_("538 Hitzone"), 'http://82.201.100.10:8000/WEB11', ''))
+			self.mmenu.append((_("538 NonStop40"), 'http://82.201.100.9:8000/juizefm', ''))
+			self.mmenu.append((_("Radio 53L8"), 'http://82.201.100.10:8000/WEB21', ''))
+			self.mmenu.append((_("Radio 2 Top 2000"), 'http://icecast.omroep.nl/radio2-top2000-aac', ''))
+			self.mmenu.append((_("Radio 2 In Concert"), 'http://icecast.omroep.nl/radio2-inconcert-aac', ''))
+			self.mmenu.append((_("3FM Alternative"), 'http://icecast.omroep.nl/3fm-alternative-aac', ''))
+			self.mmenu.append((_("Slam! Hardstyle"), 'http://82.201.100.23:80/WEB17_Hardstyle_AAC', ''))
+			self.mmenu.append((_("NERadio Hardstyle"), 'http://load.hardstyle.nu:443/', ''))
+			self.mmenu.append((_("NERadio Sweden - Best of Techno & Trance"), 'http://bigbrother.dinmamma.be:8000', ''))
+			self.mmenu.append((_("Q-Music Het Foute Non Stop"), 'http://vip2.str.reasonnet.com/streamfout.mp3.96', ''))
 		elif cmd == 'livestreams':
 			self.ttitle = "Live Streams"
-			self.mmenu.append((_("Nederland 1"), 'tvlive/ned1/ned1.isml/ned1.m3u8', 'npo'))
-			self.mmenu.append((_("Nederland 2"), 'tvlive/ned2/ned2.isml/ned2.m3u8', 'npo'))
-			self.mmenu.append((_("Nederland 3"), 'tvlive/ned3/ned3.isml/ned3.m3u8', 'npo'))
-			self.mmenu.append((_("Politiek 24"), 'thematv/politiek24/politiek24.isml/politiek24.m3u8', 'npo'))
-			self.mmenu.append((_("Journaal 24"), 'thematv/journaal24/journaal24.isml/journaal24.m3u8', 'npo'))
-			self.mmenu.append((_("Humor TV 24"), 'thematv/humor24/humor24.isml/humor24.m3u8', 'npo'))
-			self.mmenu.append((_("Holland Doc 24"), 'thematv/hollanddoc24/hollanddoc24.isml/hollanddoc24.m3u8', 'npo'))
-			self.mmenu.append((_("Z@ppelin/ Zapp"), 'thematv/zappelin24/zappelin24.isml/zappelin24.m3u8', 'npo'))
-			self.mmenu.append((_("Cultura 24"), 'thematv/cultura24/cultura24.isml/cultura24.m3u8', 'npo'))
-			self.mmenu.append((_("Best 24"), 'thematv/best24/best24.isml/best24.m3u8', 'npo'))
-			self.mmenu.append((_("101 TV"), 'thematv/101tv/101tv.isml/101tv.m3u8', 'npo'))
-			self.mmenu.append((_("Slam! Hardstyle"), 'http://82.201.100.23:80/WEB17_Hardstyle_AAC', ''))
-			self.mmenu.append((_("538 Party"), 'http://82.201.100.9:8000/WEB16_WEB_MP3', ''))
-			self.mmenu.append((_("Q-Music Het Foute Non Stop"), 'http://vip2.str.reasonnet.com/streamfout.mp3.96', ''))
+			if config.plugins.OpenUitzendingGemist.Npolivestreams:
+				self.mmenu.append((_("Nederland 1"), 'tvlive/ned1/ned1.isml/ned1.m3u8', 'npo'))
+				self.mmenu.append((_("Nederland 2"), 'tvlive/ned2/ned2.isml/ned2.m3u8', 'npo'))
+				self.mmenu.append((_("Nederland 3"), 'tvlive/ned3/ned3.isml/ned3.m3u8', 'npo'))
+				self.mmenu.append((_("Politiek 24"), 'thematv/politiek24/politiek24.isml/politiek24.m3u8', 'npo'))
+				self.mmenu.append((_("Journaal 24"), 'thematv/journaal24/journaal24.isml/journaal24.m3u8', 'npo'))
+				self.mmenu.append((_("Humor TV 24"), 'thematv/humor24/humor24.isml/humor24.m3u8', 'npo'))
+				self.mmenu.append((_("Holland Doc 24"), 'thematv/hollanddoc24/hollanddoc24.isml/hollanddoc24.m3u8', 'npo'))
+				self.mmenu.append((_("Z@ppelin/ Zapp"), 'thematv/zappelin24/zappelin24.isml/zappelin24.m3u8', 'npo'))
+				self.mmenu.append((_("Cultura 24"), 'thematv/cultura24/cultura24.isml/cultura24.m3u8', 'npo'))
+				self.mmenu.append((_("Best 24"), 'thematv/best24/best24.isml/best24.m3u8', 'npo'))
+				self.mmenu.append((_("101 TV"), 'thematv/101tv/101tv.isml/101tv.m3u8', 'npo'))
+			else:
+				self.mmenu.append((_("No streams avaible"), None))
 		else:
 			self.mmenu.append((_("Error..."), None))
 		self["menu"] = MenuList(self.mmenu)
@@ -537,6 +550,8 @@ class SmallScreen(Screen):
 
 	def keyGo(self):
 		selection = self["menu"].l.getCurrentSelection()
+		if selection[1] == None:
+			return
 		if self.cmd == 'rtlback':
 			self.session.open(OpenUg, ['rtlback', selection[1]])
 		elif self.cmd == 'radio' or self.cmd == 'inetTV':
@@ -558,6 +573,10 @@ class SmallScreen(Screen):
 				myreference = eServiceReference(4097, 0, selection[1])
 				myreference.setName(selection[0])
 				self.session.open(UGMediaPlayer, myreference, False, False, True)
+		elif self.cmd == 'Rinetradio':
+			myreference = eServiceReference(4097, 0, selection[1])
+			myreference.setName(selection[0])
+			self.session.open(UGMediaPlayer, myreference, False, False, True)
 		else:
 			self.session.open(OpenUg, selection[1])
 
@@ -1560,9 +1579,6 @@ class OpenUg(Screen):
 				if tmp in line:
 					icon = line.split(tmp)[1].split('"')[0]
 					icon_type = icon
-				#tmp = '<span class="'
-				#if tmp in line:
-				#	name = name + ' | ' +line.split(tmp)[1].split('"')[0]
 				tmp = '<date>'
 				if tmp in line:
 					date = line.split(tmp)[1].split('</date>')[0]
