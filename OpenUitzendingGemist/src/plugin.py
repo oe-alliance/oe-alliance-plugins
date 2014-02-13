@@ -58,7 +58,7 @@ def wgetUrlRefer(target, refer):
 	except:
 		outtxt = ''
 	return outtxt
-	
+
 def wgetUrlCookie(target, cookie):
 	req = Request(target)
 	req.add_header('Cookie', cookie)
@@ -68,7 +68,7 @@ def wgetUrlCookie(target, cookie):
 	except:
 		outtxt = ''
 	return outtxt
-	
+
 def resolve_http_redirect(url, depth=0):
 	if depth > 10:
 		raise Exception("Redirected "+depth+" times, giving up.")
@@ -97,7 +97,6 @@ def MPanelEntryComponent(channel, text, png):
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 200, 15, 800, 100, 0, RT_HALIGN_LEFT|RT_WRAP|RT_VALIGN_TOP, text))
 	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 5, 150, 150, png))
 	return res
-
 
 class MPanelList(MenuList):
 	def __init__(self, list, selection = 0, enableWrapAround=True):
@@ -202,7 +201,8 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.handleLeave()
 
 	def __setHideTimer(self):
-		self.hidetimer.start(self.screen_timeout)
+		if self.radio == False:
+			self.hidetimer.start(self.screen_timeout)
 
 	def showInfobar(self):
 		self.show()
@@ -239,9 +239,9 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 				self.__setHideTimer()
 		self.state = self.STATE_PLAYING
 		self.session.nav.playService(self.service)
-		if self.shown and self.radio == False:
+		if self.shown:
 			self.__setHideTimer()
-			
+
 	def playpauseService(self):
 		if self.pauseable == False:
 			return
@@ -269,7 +269,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def __serviceStarted(self):
 		self.state = self.STATE_PLAYING
 		self.__seekableStatusChanged()
-	
+
 	def playagain(self):
 		if self.state != self.STATE_IDLE:
 			self.stopCurrent()
@@ -297,7 +297,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 
 	def unlockShow(self):
 		return
-		
+
 	def setSeekState(self, wantstate, onlyGUI = False):
 		print "setSeekState"
 		if wantstate == self.STATE_PAUSED:
@@ -339,21 +339,17 @@ class OpenUgConfigureScreen(Screen, ConfigListScreen):
 				</screen>"""
 		self.session = session
 		Screen.__init__(self, session)
-
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session = self.session)
-
 		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.keyGo,
-			"cancel": self.keyCancel,
+			"cancel": self.leavePlayer,
 		}, -2)
-
 		self["config"].list = self.list
 		self.list.append(getConfigListEntry(_("Show pictures"), config.plugins.OpenUitzendingGemist.showpictures))
 		self.list.append(getConfigListEntry(_("Show NPO livestreams"), config.plugins.OpenUitzendingGemist.Npolivestreams))
 		self["config"].l.setList(self.list)
-
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
@@ -363,6 +359,15 @@ class OpenUgConfigureScreen(Screen, ConfigListScreen):
 		for x in self["config"].list:
 			x[1].save()
 		self.close()
+
+	def leavePlayer(self):
+		self.session.openWithCallback(self.leavePlayerOnExitCallback, MessageBox, _("Save settings?"), simple=True)
+
+	def leavePlayerOnExitCallback(self, answer):
+		if answer == True:
+			self.keyGo()
+		else:
+			self.keyCancel()
 
 	def keyCancel(self):
 		for x in self["config"].list:
@@ -378,22 +383,16 @@ class OpenUgSetupScreen(Screen):
 				</screen>"""
 		self.session = session
 		Screen.__init__(self, session)
-
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
-
 		self.lastservice = session.nav.getCurrentlyPlayingServiceReference()
-
 		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.keyGo,
 			"cancel": self.keyCancel,
 		}, -2)
-
 		self.imagedir = '/tmp/openUgImg/'
-
 		self["info"] = Label(_("Open Uitzending Gemist\n\nBased on Xtrend code"))
-
 		self.mmenu= []
 		self.mmenu.append((_("NPO Uitgelicht"), 'uitgelicht'))
 		self.mmenu.append((_("NPO Popular"), 'pop'))
@@ -407,7 +406,6 @@ class OpenUgSetupScreen(Screen):
 		self.mmenu.append((_("InternetTV"), 'inetTV'))
 		self.mmenu.append((_("Setup"), 'setup'))
 		self["menu"] = MenuList(self.mmenu)
-
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def loadUrl(self, url, sub):
@@ -454,10 +452,8 @@ class SmallScreen(Screen):
 				</screen>"""
 		self.session = session
 		Screen.__init__(self, session)
-
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
-
 		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.keyGo,
@@ -525,7 +521,7 @@ class SmallScreen(Screen):
 			self.mmenu.append((_("Q-Music Het Foute Non Stop"), 'http://vip2.str.reasonnet.com/streamfout.mp3.96', ''))
 		elif cmd == 'livestreams':
 			self.ttitle = "Live Streams"
-			if config.plugins.OpenUitzendingGemist.Npolivestreams:
+			if config.plugins.OpenUitzendingGemist.Npolivestreams.value:
 				self.mmenu.append((_("Nederland 1"), 'tvlive/ned1/ned1.isml/ned1.m3u8', 'npo'))
 				self.mmenu.append((_("Nederland 2"), 'tvlive/ned2/ned2.isml/ned2.m3u8', 'npo'))
 				self.mmenu.append((_("Nederland 3"), 'tvlive/ned3/ned3.isml/ned3.m3u8', 'npo'))
@@ -596,7 +592,6 @@ class OpenUg(Screen):
 	UG_LEVEL_SERIE = 1
 	UG_LEVEL_SEASON = 2
 	MAX_PIC_PAGE = 5
-
 	TIMER_CMD_START = 0
 	TIMER_CMD_VKEY = 1
 	UG_BASE_URL = "http://hbbtv.distributie.publiekeomroep.nl"
@@ -615,22 +610,18 @@ class OpenUg(Screen):
 				</screen>"""
 		self.session = session
 		Screen.__init__(self, session)
-
 		self["thumbnail"] = Pixmap()
 		self["thumbnail"].hide()
 		self.title
 		self.cbTimer = eTimer()
 		self.cbTimer.callback.append(self.timerCallback)
-
 		self.Details = {}
 		self.pixmaps_to_load = []
 		self.picloads = {}
 		self.color = "#33000000"
-
 		self.numericalTextInput = NumericalTextInput.NumericalTextInput(mapping=NumericalTextInput.MAP_SEARCH_UPCASE)
 		self["chosenletter"] = Label("")
 		self["chosenletter"].visible = False
-
 		self.page = 0
 		self.numOfPics = 0
 		self.isRtlBack = False
@@ -639,16 +630,12 @@ class OpenUg(Screen):
 		self.level = self.UG_LEVEL_ALL
 		self.cmd = cmd
 		self.timerCmd = self.TIMER_CMD_START
-
 		self.png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenUitzendingGemist/oe-alliance.png"))
-
 		self.tmplist = []
 		self.mediaList = []
-
 		self.imagedir = "/tmp/openUgImg/"
 		if (os_path.exists(self.imagedir) != True):
 			os_mkdir(self.imagedir)
-
 		self["list"] = MPanelList(list = self.tmplist, selection = 0)
 		self.list = self["list"]
 		self.updateMenu()
@@ -788,10 +775,8 @@ class OpenUg(Screen):
 				tmp_icon = self.getThumbnailName(x)
 				thumbnailFile = self.imagedir + tmp_icon
 				self.pixmaps_to_load.append(tmp_icon)
-
 				if not self.Details.has_key(tmp_icon):
 					self.Details[tmp_icon] = { 'thumbnail': None}
-
 				if x[self.UG_ICON] != '':
 					if (os_path.exists(thumbnailFile) == True):
 						self.fetchFinished(True, picture_id = tmp_icon, failed = False)
@@ -1545,7 +1530,7 @@ class OpenUg(Screen):
 				if 'defaultURL\":' in x and 'defaultURL\":null' not in x:
 					url = x.split('defaultURL\":\"')[1].split('\"')[0].replace('\\', '')
 		return url
-		
+
 	def dumpert(self, mediaList, url):
 		data = wgetUrlCookie(self.DUMPERT_BASE_URL + url, 'filter=video')
 		data = Csplit(data, '<section id="content">',1)
@@ -1591,7 +1576,7 @@ class OpenUg(Screen):
 				mediaList.append((date, name, short, channel, stream, icon, icon_type, True))
 				state = 0
 		mediaList.append(('', ' ---> Volgende Pagina', '', '', nexturl, '', '', True))
-		
+
 	def getDumpertStream(self, url):
 		data = wgetUrl(url)
 		url = ''
@@ -1601,7 +1586,7 @@ class OpenUg(Screen):
 		if tmp in data:
 			url = data.split(tmp)[1].split('"')[0]
 		return url
-		
+
 	def rver(self, mediaList, url):
 		data = wgetUrl(url)
 		data = Csplit(data, '<h5>Kies programma</h5>', 1)
@@ -1646,7 +1631,7 @@ class OpenUg(Screen):
 		if tmp in data:
 			url = data.split(tmp)[1].split('"')[0]
 		return url
-		
+
 	def vkmag(self, mediaList, url):
 		data = wgetUrl(url)
 		data = Csplit(data, '<div class="archive">', 1)
@@ -1677,7 +1662,7 @@ class OpenUg(Screen):
 					date = line.split(tmp)[1].split('</date>')[0]
 				mediaList.append((date, name, short, channel, stream, icon, '', True))
 				state = 0
-				
+
 	def getvkmagStream(self, url):
 		data = wgetUrl(url)
 		url = ''
@@ -1686,7 +1671,7 @@ class OpenUg(Screen):
 		if tmp in data:
 			url = data.split(tmp)[1].split("'")[0]
 		return url
-		
+
 	def rdec(self, mediaList, url, podcast=False):
 		data = wgetUrl(url)
 		data = Csplit(data, '<div class="contentBlok">', 1)
