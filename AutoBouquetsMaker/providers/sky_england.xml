@@ -1,9 +1,14 @@
 <provider>
 	<name>Sky England</name>
 	<protocol>sky</protocol>
+	<transponder frequency="11778000" symbol_rate="27500000" polarization="1"
+		fec_inner="2" orbital_position="282" inversion="2" system="0"
+		modulation="1" roll_off="0" pilot="2" />
+		<!--
 	<transponder frequency="10802750" symbol_rate="22000000" polarization="0"
 		fec_inner="4" orbital_position="282" inversion="2" system="0"
 		modulation="1" roll_off="0" pilot="2" />
+		-->
 	<configurations>
 		<configuration key="hd_atherstone" bouquet="0x1005" region="0x13" namespace="0x11a0000">Atherstone HD</configuration>
 		<configuration key="sd_atherstone" bouquet="0x1001" region="0x13" namespace="0x11a0000">Atherstone SD</configuration>
