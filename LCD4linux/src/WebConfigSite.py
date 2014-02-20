@@ -4,7 +4,6 @@ from twisted.web import resource, http
 from plugin import *
 from __init__ import _
 from Components.config import configfile, config
-from urllib import urlencode, quote
 from enigma import eTimer
 from module import L4Lelement,L4LVtest
 
@@ -182,7 +181,6 @@ class LCD4linuxConfigweb(resource.Resource):
 		ex = req.args.get("ex",None)
 		mo = req.args.get("Mode",None)
 		el = req.args.get("Element",None)
-		sa = req.args.get("save.y",None)
 		self.restartTimer()
 		L4log("Command received %s" % (command), ex)
 #		print "[L4L EX]-", ex,"-"
@@ -203,11 +201,41 @@ class LCD4linuxConfigweb(resource.Resource):
 			elif Mode == "5":
 				self.resetWeb()
 			getBilder()
+		html = ""
 		if el is not None:
 			Element = el[0]
-		if sa is not None:
+		if req.args.get("save.y",None) is not None:
+			L4log("WebIF: save Config-File")
 			LCD4linux.save()
 			LCD4linux.saveToFile(LCD4config)
+		if req.args.get("download.y",None) is not None:
+			L4log("WebIF: download Config")
+			req.setResponseCode(http.OK)
+			lcd4config = "/etc/enigma2/lcd4config"
+			req.setHeader('Content-type', 'text/plain')
+			req.setHeader('Content-Disposition', 'attachment;filename=lcd4config')
+			req.setHeader('Content-Length', os.stat(lcd4config).st_size)
+			req.setHeader('charset', 'UTF-8')
+			f = open(lcd4config,"r")
+			html = f.read()
+			f.close()
+			return html
+		if req.args.get("upload.y",None) is not None:
+			L4log("WebIF: upload Config")
+			lcd4config = "/tmp/test"
+			data = req.args["uploadName"][0]
+			if len(data) > 0 and data.startswith("config."):
+				f = open(lcd4config,"wb")
+				f.write(data)
+				f.close()
+				if os.path.isfile(lcd4config):
+					L4LoadNewConfig(lcd4config)
+			else:
+				L4log("WebIF: Error upload")
+				html += "<script language=\"JavaScript\">\n"
+				html += "alert(\"%s\")\n" % _("No or wrong File selected, try a correct File first !")
+				html += "</script>\n"
+
 		if command is None:
 			L4logE("no command")
 		elif command[0] == "exec" and ex is not None:
@@ -351,7 +379,10 @@ class LCD4linuxConfigweb(resource.Resource):
 			if Cwetter:
 				resetWetter()
 			if Cpicon:
-				rmFiles(LCD4linux.PiconCache.value + "*.png")
+				if len(LCD4linux.PiconCache.value)>2:
+					rmFiles(os.path.join(LCD4linux.PiconCache.value,"*.png"))
+				if len(LCD4linux.Picon2Cache.value)>2:
+					rmFiles(os.path.join(LCD4linux.Picon2Cache.value,"*.png"))
 			if Ccal:
 				resetCal()
 			if Cwww:
@@ -361,10 +392,10 @@ class LCD4linuxConfigweb(resource.Resource):
 #####################
 # Anzeige
 #####################
-		html = "<html>"
+		html += "<html>"
 		html += "<head>\n"
 		html += "<meta http-equiv=\"Content-Language\" content=\"de\">\n"
-		html += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">\n"
+		html += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
 		html += "<meta http-equiv=\"cache-control\" content=\"no-cache\" />\n"
 		html += "<meta http-equiv=\"pragma\" content=\"no-cache\" />\n"
 		html += "<meta http-equiv=\"expires\" content=\"0\">\n"
@@ -375,6 +406,10 @@ class LCD4linuxConfigweb(resource.Resource):
 			for line in open(CrashFile,"r").readlines():
 				html += "fens1.document.write('%s');\n" % line.replace("\n","<br>").replace("'","\\'")
 			html += "} </script>\n"
+		html += "<style type=\"text/css\">\n"
+		html += ".style1 {\n"
+		html += "vertical-align: middle; font-size:8px; }\n"
+		html += "</style>\n"
 		if L4LElement.getRefresh() == True:
 			html += "<meta http-equiv=\"refresh\" content=\"6\">\n"
 		html += "<title>LCD4linux</title>\n"
@@ -407,9 +442,12 @@ class LCD4linuxConfigweb(resource.Resource):
 			html += "<input type=\"button\" value=\"%s\" style=\"font-size:8pt;\" onClick=\"fensterchen()\">\n"  % _l(_("Show"))
 			html += "<input type=\"button\" value=\"%s\" style=\"font-size:8pt;\"   onclick=\"this.form.cmd.value = 'crashdel'; this.form.submit();\">\n"  % _l(_("Delete"))
 			html += "</form></td>\n"
-		html += "<td  valign=\"top\" align=\"right\"  bgcolor=\"#000000\">\n"
-		html += "<form method=\"post\">\n"
-		html += "<input type=\"image\" name=\"save\" value=\"klick\" src=\"/lcd4linux/data/WEBsave.png\" height=\"40\" title=\"Save Config\">\n"
+		html += "<td valign=\"top\" align=\"right\"  bgcolor=\"#000000\">\n"
+		html += "<form method=\"post\" enctype=\"multipart/form-data\">\n"
+		html += "<input type=\"file\" name=\"uploadName\" title=\"File Name\" class=\"style1\" >\n"
+		html += "<input type=\"image\" name=\"upload\" value=\"klick\" src=\"/lcd4linux/data/WEBupload.png\" height=\"25\" title=\"%s\" class=\"style1\"  >\n" % _l(_("Restore Config"))
+		html += "<input type=\"image\" name=\"download\" value=\"klick\" src=\"/lcd4linux/data/WEBdownload.png\" height=\"25\" title=\"%s\" class=\"style1\" >\n" % _l(_("Backup Config"))
+		html += "<input type=\"image\" name=\"save\" value=\"klick\" src=\"/lcd4linux/data/WEBsave.png\" height=\"40\" title=\"%s\" class=\"style1\" >\n" % _l(_("Save Config"))
 		html += "</form>\n"
 		html += "<form method=\"post\"><font color=\"#FFFFFF\">%s</font>\n" % _l(_("Screen"))
 
