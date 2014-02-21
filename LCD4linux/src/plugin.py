@@ -1911,7 +1911,7 @@ def resetWetter():
 def resetCal():
 	global PICcal
 	PICcal=None
-def	L4LoadNewConfig(cfg):
+def L4LoadNewConfig(cfg):
 	P1=LCD4linux.ConfigPath.value
 	P2=LCD4linux.PiconPath.value
 	P3=LCD4linux.PiconPathAlt.value
