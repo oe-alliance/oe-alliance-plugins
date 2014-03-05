@@ -3,7 +3,6 @@
                     <tag type="System" />
 	  </prerequisites>
           <info>
-                    <author>doliyu and oskwon</author>
                     <name>Blindscan</name>
                     <packagename>enigma2-plugin-systemplugins-blindscan</packagename>
                     <shortdescription>blindscan...</shortdescription>
