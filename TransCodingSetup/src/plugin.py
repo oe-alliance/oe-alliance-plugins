@@ -227,15 +227,15 @@ class TranscodingSetupInit:
 		# print "[TranscodingSetup]  setAutomode, configName %s, value %s" % (configName, configElement.value)
 		if configElement.value == "On":
 			autoValue = str(-1)
-			if (hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0]], "bitrate") and self.setConfig(getProcPath(int(extra_args[0]) ,"bitrate"), autoValue)) or (hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0]], "framerate") and self.setConfig(getProcPath(int(extra_args[0]) ,"framerate"), autoValue)):
+			if (hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "bitrate") and self.setConfig(getProcPath(int(extra_args[0]) ,"bitrate"), autoValue)) or (hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "framerate") and self.setConfig(getProcPath(int(extra_args[0]), "framerate"), autoValue)):
 				configElement.value = "Off" # set config failed, reset to previous value
 				configElement.save()
 				self.showMessage("Set %s failed." % (configName), MessageBox.TYPE_ERROR)
 		else: # Off
-			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0]], "bitrate"):
-				self.setBitrate(config.plugins.transcodingsetup.encoder[int(extra_args[0]].bitrate)
-			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0]], "framerate"):
-				self.setFramerate(config.plugins.transcodingsetup.encoder[int(extra_args[0]].framerate)
+			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "bitrate"):
+				self.setBitrate(config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate)
+			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "framerate"):
+				self.setFramerate(config.plugins.transcodingsetup.encoder[int(extra_args[0])].framerate)
 
 	def setBitrate(self, configElement, extra_args):
 		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"bitrate"))
