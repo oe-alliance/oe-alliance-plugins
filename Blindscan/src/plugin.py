@@ -34,20 +34,9 @@ from time import strftime, time
 
 XML_BLINDSCAN_DIR = "/tmp"
 
-_modelName = file('/proc/stb/info/vumodel').read().strip()
 _supportNimType = { 'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_', 'BCM7356':'bcm7346_'}
 
 class Blindscan(ConfigListScreen, Screen):
-	skin="""
-		<screen name="Blindscan" position="center,center" size="560,290" title="Blindscan">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="config" position="5,50" size="550,200" scrollbarMode="showOnDemand" />
-			<widget name="introduction" position="0,265" size="560,20" font="Regular;20" halign="center" />
-		</screen>
-		"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setup_title = _("Blindscan")
@@ -88,7 +77,7 @@ class Blindscan(ConfigListScreen, Screen):
 			}, -2)
 			self["key_red"] = StaticText(_("Exit"))
 			self["key_green"] = StaticText(_("Scan"))
-			self["introduction"] = Label(_("Press Green/OK to start the scan"))
+			self["footnote"] = Label(_("Press Green/OK to start the scan"))
 			self.createSetup()
 		else :
 			self["actions"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
@@ -100,7 +89,7 @@ class Blindscan(ConfigListScreen, Screen):
 			}, -2)
 			self["key_red"] = StaticText(_("Exit"))
 			self["key_green"] = StaticText(" ")
-			self["introduction"] = Label(_("Please setup your tuner configuration."))
+			self["footnote"] = Label(_("Please setup your tuner configuration."))
 
 		self.i2c_mapping_table = None
 		self.nimSockets = self.ScanNimsocket()
@@ -171,10 +160,9 @@ class Blindscan(ConfigListScreen, Screen):
 		if is_exist_i2c: return
 
 		if nimname == "AVL6222":
-			model = _modelName #file('/proc/stb/info/vumodel').read().strip()
-			if model == "uno":
+			if boxtype == "vuuno":
 				self.i2c_mapping_table = {0:3, 1:3, 2:1, 3:0}
-			elif model == "duo2":
+			elif boxtype == "vuduo2":
 				nimdata = self.nimSockets['0']
 				try:
 					if nimdata[0] == "AVL6222":
@@ -223,7 +211,8 @@ class Blindscan(ConfigListScreen, Screen):
 					self.session.pipshown = False
 					del self.session.pip
 					self.openFrontend()
-		if self.frontend == None :
+		print 'self.frontend:',self.frontend
+		if self.frontend == None:
 			self.session.open(MessageBox, _("Sorry, this tuner is in use."), MessageBox.TYPE_ERROR)
 			return False
 		self.tuner = Tuner(self.frontend)
@@ -611,7 +600,12 @@ class Blindscan(ConfigListScreen, Screen):
 			else:
 				display_pol = _("circular right")
 
-		tmpstr = _("Looking for available transponders.\nThis will take a short while.\n\n   Current Status : %d/%d\n   Satellite : %s\n   Polarization : %s\n   Frequency range : %d - %d MHz\n   Symbol rates : %d - %d MHz") %(self.running_count, self.max_count, orb[1], display_pol, status_box_start_freq, status_box_end_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value)
+		tmpmes = _("Current Status : %d/%d\n   Satellite : %s\n   Polarization : %s\n   Frequency range : %d - %d MHz\n   Symbol rates : %d - %d MHz") %(self.running_count, self.max_count, orb[1], display_pol, status_box_start_freq, status_box_end_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value)
+		if boxtype == ('vusolo2'):
+			tmpmes2 = _("Looking for available transponders.\nThis will take a long time, please be patient.")
+		else:
+			tmpmes2 = _("Looking for available transponders.\nThis will take a short while.")
+		tmpstr = tmpmes + '\n\n' + tmpmes2 + '\n\n'
 		if is_scan :
 			self.blindscan_session = self.session.openWithCallback(self.blindscanSessionClose, MessageBox, tmpstr, MessageBox.TYPE_INFO)
 		else:
