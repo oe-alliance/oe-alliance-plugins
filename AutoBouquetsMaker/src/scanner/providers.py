@@ -46,6 +46,10 @@ class Providers():
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
 							provider["name"] = node.childNodes[0].data.encode("utf-8")
+					elif node.tagName == "streamtype":
+						node.normalize()
+						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
+							provider["streamtype"] = node.childNodes[0].data.encode("utf-8")
 					elif node.tagName == "protocol":
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE and node.childNodes[0].data in self.VALID_PROTOCOLS:
@@ -91,6 +95,18 @@ class Providers():
 								transponder["roll_off"] = int(node.attributes.item(i).value)
 							elif node.attributes.item(i).name == "pilot":
 								transponder["pilot"] = int(node.attributes.item(i).value)
+							elif node.attributes.item(i).name == "bandwidth":
+								transponder["bandwidth"] = int(node.attributes.item(i).value)
+							elif node.attributes.item(i).name == "code_rate_hp":
+								transponder["code_rate_hp"] = int(node.attributes.item(i).value)
+							elif node.attributes.item(i).name == "code_rate_lp":
+								transponder["code_rate_lp"] = int(node.attributes.item(i).value)
+							elif node.attributes.item(i).name == "transmission_mode":
+								transponder["transmission_mode"] = int(node.attributes.item(i).value)
+							elif node.attributes.item(i).name == "guard_interval":
+								transponder["guard_interval"] = int(node.attributes.item(i).value)
+							elif node.attributes.item(i).name == "hierarchy":
+								transponder["hierarchy"] = int(node.attributes.item(i).value)
 							elif node.attributes.item(i).name == "nit_pid":
 								transponder["nit_pid"] = int(node.attributes.item(i).value, 16)
 							elif node.attributes.item(i).name == "nit_current_table_id":
@@ -112,7 +128,7 @@ class Providers():
 							elif node.attributes.item(i).name == "fastscan_table_id":
 								transponder["fastscan_table_id"] = int(node.attributes.item(i).value, 16)
 
-						if len(transponder.keys()) == 20:
+						if len(transponder.keys()) in (21, 17):
 							provider["transponder"] = transponder
 
 					elif node.tagName == "configurations":
@@ -202,6 +218,7 @@ class Providers():
 
 			if not ("name" in provider
 					and "protocol" in provider
+					and "streamtype" in provider
 					and "namespace" in provider
 					and "bouquets" in provider
 					and "sections" in provider

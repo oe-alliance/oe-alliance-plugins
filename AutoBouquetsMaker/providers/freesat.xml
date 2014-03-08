@@ -1,38 +1,24 @@
 <provider>
 	<name>FreeSat</name>
+	<streamtype>dvbs</streamtype>
 	<protocol>freesat</protocol>
 	<transponder frequency="12207000" symbol_rate="27500000" polarization="1"
 		fec_inner="2" orbital_position="282" inversion="2" system="0"
 		modulation="1" roll_off="0" pilot="2"
 		bat_pid="0xf01" />
-		<!--
-	<transponder frequency="10802750" symbol_rate="22000000" polarization="0"
-		fec_inner="4" orbital_position="282" inversion="2" system="0"
-		modulation="1" roll_off="0" pilot="2"
-		bat_pid="0xf01" />
-		-->
 	<configurations>
 		<configuration key="freesat_100_1" bouquet="0x100" region="0x1" namespace="0x11a0000">England SD: London/London</configuration>
 		<configuration key="freesat_100_2" bouquet="0x100" region="0x2" namespace="0x11a0000">England SD: East (W)/Anglia W</configuration>
 		<configuration key="freesat_100_3" bouquet="0x100" region="0x3" namespace="0x11a0000">England SD: East (W)/Central S</configuration>
-		<!--
-		<configuration key="freesat_100_4" bouquet="0x100" region="0x4" namespace="0x11a0000">England SD: East (W)/Anglia W</configuration>
-		-->
 		<configuration key="freesat_100_5" bouquet="0x100" region="0x5" namespace="0x11a0000">England SD: W Mids/Central W</configuration>
 		<configuration key="freesat_100_6" bouquet="0x100" region="0x6" namespace="0x11a0000">England SD: W Mids/Central SW</configuration>
 		<configuration key="freesat_100_7" bouquet="0x100" region="0x7" namespace="0x11a0000">England SD: N West/Granada</configuration>
 		<configuration key="freesat_100_8" bouquet="0x100" region="0x8" namespace="0x11a0000">England SD: N West/BorderEng</configuration>
 		<configuration key="freesat_100_9" bouquet="0x100" region="0x9" namespace="0x11a0000">England SD: EYrks&amp;Lin/Yorkshire E</configuration>
 		<configuration key="freesat_100_a" bouquet="0x100" region="0xa" namespace="0x11a0000">England SD: Yorkshire/Yorkshire W</configuration>
-		<!--
-		<configuration key="freesat_100_b" bouquet="0x100" region="0xb" namespace="0x11a0000">England SD: Yorkshire/Yorkshire W</configuration>
-		-->
 		<configuration key="freesat_100_c" bouquet="0x100" region="0xc" namespace="0x11a0000">England SD: Yorkshire/Tyne Tees S</configuration>
 		<configuration key="freesat_100_d" bouquet="0x100" region="0xd" namespace="0x11a0000">England SD: E Midlands/Central E</configuration>
 		<configuration key="freesat_100_e" bouquet="0x100" region="0xe" namespace="0x11a0000">England SD: E Midlands/Central W</configuration>
-		<!--
-		<configuration key="freesat_100_f" bouquet="0x100" region="0xf" namespace="0x11a0000">England SD: E Midlands/Central E</configuration>
-		-->
 		<configuration key="freesat_100_10" bouquet="0x100" region="0x10" namespace="0x11a0000">England SD: E Midlands/Yorkshire E</configuration>
 		<configuration key="freesat_100_11" bouquet="0x100" region="0x11" namespace="0x11a0000">England SD: East (E)/Anglia S</configuration>
 		<configuration key="freesat_100_12" bouquet="0x100" region="0x12" namespace="0x11a0000">England SD: East (E)/London</configuration>
@@ -40,9 +26,6 @@
 		<configuration key="freesat_100_14" bouquet="0x100" region="0x14" namespace="0x11a0000">England SD: West/West</configuration>
 		<configuration key="freesat_100_15" bouquet="0x100" region="0x15" namespace="0x11a0000">England SD: West/Central S</configuration>
 		<configuration key="freesat_100_16" bouquet="0x100" region="0x16" namespace="0x11a0000">England SD: West/Meridian N</configuration>
-		<!--
-		<configuration key="freesat_100_17" bouquet="0x100" region="0x17" namespace="0x11a0000">England SD: West/Meridian N</configuration>
-		-->
 		<configuration key="freesat_100_18" bouquet="0x100" region="0x18" namespace="0x11a0000">England SD: S East/Meridian S</configuration>
 		<configuration key="freesat_100_19" bouquet="0x100" region="0x19" namespace="0x11a0000">England SD: S East/Meridian SE</configuration>
 		<configuration key="freesat_100_1a" bouquet="0x100" region="0x1a" namespace="0x11a0000">England SD: S East/Meridian E</configuration>
@@ -58,21 +41,11 @@
 		<configuration key="freesat_100_24" bouquet="0x100" region="0x24" namespace="0x11a0000">England SD: NE &amp; C/Tyne Tees S</configuration>
 		<configuration key="freesat_100_25" bouquet="0x100" region="0x25" namespace="0x11a0000">England SD: Oxford/Central S</configuration>
 		<configuration key="freesat_100_26" bouquet="0x100" region="0x26" namespace="0x11a0000">England SD: Oxford/London</configuration>
-		<!--
-		<configuration key="freesat_100_27" bouquet="0x100" region="0x27" namespace="0x11a0000">England SD: N West/Granada</configuration>
-		<configuration key="freesat_100_28" bouquet="0x100" region="0x28" namespace="0x11a0000">England SD: Yorkshire/Yorkshire W</configuration>
-		-->
 		<configuration key="freesat_100_29" bouquet="0x100" region="0x29" namespace="0x11a0000">England SD: Channel Islands/Channel Islands</configuration>
 		<configuration key="freesat_100_2a" bouquet="0x100" region="0x2a" namespace="0x11a0000">England SD: Yorkshire/Yorkshire E</configuration>
 		<configuration key="freesat_100_2b" bouquet="0x100" region="0x2b" namespace="0x11a0000">England SD: Isle of Man</configuration>
 		<configuration key="freesat_100_32" bouquet="0x100" region="0x32" namespace="0x11a0000">England SD: Default (London/Central W)</configuration>
-		<!--
-		<configuration key="freesat_100_64" bouquet="0x100" region="0x64" namespace="0x11a0000">England SD: -</configuration>
-		-->
 		<configuration key="freesat_101_3c" bouquet="0x101" region="0x3c" namespace="0x11a0000">Scotland SD: Scotland/Grampian</configuration>
-		<!--
-		<configuration key="freesat_101_3d" bouquet="0x101" region="0x3d" namespace="0x11a0000">Scotland SD: Scotland/Grampian</configuration>
-		-->
 		<configuration key="freesat_101_3e" bouquet="0x101" region="0x3e" namespace="0x11a0000">Scotland SD: Scotland/BorderSco</configuration>
 		<configuration key="freesat_101_3f" bouquet="0x101" region="0x3f" namespace="0x11a0000">Scotland SD: Scotland/Scottish (Glasgow)</configuration>
 		<configuration key="freesat_101_40" bouquet="0x101" region="0x40" namespace="0x11a0000">Scotland SD: Scotland/Scottish (Edinburgh)</configuration>
@@ -81,24 +54,15 @@
 		<configuration key="freesat_110_1" bouquet="0x110" region="0x1" namespace="0x11a0000">England HD: London/London</configuration>
 		<configuration key="freesat_110_2" bouquet="0x110" region="0x2" namespace="0x11a0000">England HD: East (W)/Anglia W</configuration>
 		<configuration key="freesat_110_3" bouquet="0x110" region="0x3" namespace="0x11a0000">England HD: East (W)/Central S</configuration>
-		<!--
-		<configuration key="freesat_110_4" bouquet="0x110" region="0x4" namespace="0x11a0000">England HD: East (W)/Anglia W</configuration>
-		-->
 		<configuration key="freesat_110_5" bouquet="0x110" region="0x5" namespace="0x11a0000">England HD: W Mids/Central W</configuration>
 		<configuration key="freesat_110_6" bouquet="0x110" region="0x6" namespace="0x11a0000">England HD: W Mids/Central SW</configuration>
 		<configuration key="freesat_110_7" bouquet="0x110" region="0x7" namespace="0x11a0000">England HD: N West/Granada</configuration>
 		<configuration key="freesat_110_8" bouquet="0x110" region="0x8" namespace="0x11a0000">England HD: N West/BorderEng</configuration>
 		<configuration key="freesat_110_9" bouquet="0x110" region="0x9" namespace="0x11a0000">England HD: EYrks&amp;Lin/Yorkshire E</configuration>
 		<configuration key="freesat_110_a" bouquet="0x110" region="0xa" namespace="0x11a0000">England HD: Yorkshire/Yorkshire W</configuration>
-		<!--
-		<configuration key="freesat_110_b" bouquet="0x110" region="0xb" namespace="0x11a0000">England HD: Yorkshire/Yorkshire W</configuration>
-		-->
 		<configuration key="freesat_110_c" bouquet="0x110" region="0xc" namespace="0x11a0000">England HD: Yorkshire/Tyne Tees S</configuration>
 		<configuration key="freesat_110_d" bouquet="0x110" region="0xd" namespace="0x11a0000">England HD: E Midlands/Central E</configuration>
 		<configuration key="freesat_110_e" bouquet="0x110" region="0xe" namespace="0x11a0000">England HD: E Midlands/Central W</configuration>
-		<!--
-		<configuration key="freesat_110_f" bouquet="0x110" region="0xf" namespace="0x11a0000">England HD: E Midlands/Central E</configuration>
-		-->
 		<configuration key="freesat_110_10" bouquet="0x110" region="0x10" namespace="0x11a0000">England HD: E Midlands/Yorkshire E</configuration>
 		<configuration key="freesat_110_11" bouquet="0x110" region="0x11" namespace="0x11a0000">England HD: East (E)/Anglia S</configuration>
 		<configuration key="freesat_110_12" bouquet="0x110" region="0x12" namespace="0x11a0000">England HD: East (E)/London</configuration>
@@ -106,9 +70,6 @@
 		<configuration key="freesat_110_14" bouquet="0x110" region="0x14" namespace="0x11a0000">England HD: West/West</configuration>
 		<configuration key="freesat_110_15" bouquet="0x110" region="0x15" namespace="0x11a0000">England HD: West/Central S</configuration>
 		<configuration key="freesat_110_16" bouquet="0x110" region="0x16" namespace="0x11a0000">England HD: West/Meridian N</configuration>
-		<!--
-		<configuration key="freesat_110_17" bouquet="0x110" region="0x17" namespace="0x11a0000">England HD: West/Meridian N</configuration>
-		-->
 		<configuration key="freesat_110_18" bouquet="0x110" region="0x18" namespace="0x11a0000">England HD: S East/Meridian S</configuration>
 		<configuration key="freesat_110_19" bouquet="0x110" region="0x19" namespace="0x11a0000">England HD: S East/Meridian SE</configuration>
 		<configuration key="freesat_110_1a" bouquet="0x110" region="0x1a" namespace="0x11a0000">England HD: S East/Meridian E</configuration>
@@ -124,80 +85,16 @@
 		<configuration key="freesat_110_24" bouquet="0x110" region="0x24" namespace="0x11a0000">England HD: NE &amp; C/Tyne Tees S</configuration>
 		<configuration key="freesat_110_25" bouquet="0x110" region="0x25" namespace="0x11a0000">England HD: Oxford/Central S</configuration>
 		<configuration key="freesat_110_26" bouquet="0x110" region="0x26" namespace="0x11a0000">England HD: Oxford/London</configuration>
-		<!--
-		<configuration key="freesat_110_27" bouquet="0x110" region="0x27" namespace="0x11a0000">England HD: N West/Granada</configuration>
-		<configuration key="freesat_110_28" bouquet="0x110" region="0x28" namespace="0x11a0000">England HD: Yorkshire/Yorkshire W</configuration>
-		-->
 		<configuration key="freesat_110_29" bouquet="0x110" region="0x29" namespace="0x11a0000">England HD: Channel Islands/Channel Islands</configuration>
 		<configuration key="freesat_110_2a" bouquet="0x110" region="0x2a" namespace="0x11a0000">England HD: Yorkshire/Yorkshire E</configuration>
 		<configuration key="freesat_110_2b" bouquet="0x110" region="0x2b" namespace="0x11a0000">England HD: Isle of Man</configuration>
 		<configuration key="freesat_110_32" bouquet="0x110" region="0x32" namespace="0x11a0000">England HD: Default (London/Central W)</configuration>
-		<!--
-		<configuration key="freesat_110_64" bouquet="0x110" region="0x64" namespace="0x11a0000">England HD: -</configuration>
-		-->
 		<configuration key="freesat_111_3c" bouquet="0x111" region="0x3c" namespace="0x11a0000">Scotland HD: Scotland/Grampian</configuration>
-		<!--
-		<configuration key="freesat_111_3d" bouquet="0x111" region="0x3d" namespace="0x11a0000">Scotland HD: Scotland/Grampian</configuration>
-		-->
 		<configuration key="freesat_111_3e" bouquet="0x111" region="0x3e" namespace="0x11a0000">Scotland HD: Scotland/BorderSco</configuration>
 		<configuration key="freesat_111_3f" bouquet="0x111" region="0x3f" namespace="0x11a0000">Scotland HD: Scotland/Scottish (Glasgow)</configuration>
 		<configuration key="freesat_111_40" bouquet="0x111" region="0x40" namespace="0x11a0000">Scotland HD: Scotland/Scottish (Edinburgh)</configuration>
 		<configuration key="freesat_112_50" bouquet="0x112" region="0x50" namespace="0x11a0000">Wales HD: Wales</configuration>
 		<configuration key="freesat_113_5a" bouquet="0x113" region="0x5a" namespace="0x11a0000">Northern Ireland HD: Northern Ireland</configuration>
-		<!--
-		<configuration key="freesat_118_1" bouquet="0x118" region="0x1" namespace="0x11a0000">England G2: London/London</configuration>
-		<configuration key="freesat_118_2" bouquet="0x118" region="0x2" namespace="0x11a0000">England G2: East (W)/Anglia W</configuration>
-		<configuration key="freesat_118_3" bouquet="0x118" region="0x3" namespace="0x11a0000">England G2: East (W)/Central S</configuration>
-		<configuration key="freesat_118_4" bouquet="0x118" region="0x4" namespace="0x11a0000">England G2: East (W)/Anglia W</configuration>
-		<configuration key="freesat_118_5" bouquet="0x118" region="0x5" namespace="0x11a0000">England G2: W Mids/Central W</configuration>
-		<configuration key="freesat_118_6" bouquet="0x118" region="0x6" namespace="0x11a0000">England G2: W Mids/Central SW</configuration>
-		<configuration key="freesat_118_7" bouquet="0x118" region="0x7" namespace="0x11a0000">England G2: N West/Granada</configuration>
-		<configuration key="freesat_118_8" bouquet="0x118" region="0x8" namespace="0x11a0000">England G2: N West/BorderEng</configuration>
-		<configuration key="freesat_118_9" bouquet="0x118" region="0x9" namespace="0x11a0000">England G2: EYrks&amp;Lin/Yorkshire E</configuration>
-		<configuration key="freesat_118_a" bouquet="0x118" region="0xa" namespace="0x11a0000">England G2: Yorkshire/Yorkshire W</configuration>
-		<configuration key="freesat_118_b" bouquet="0x118" region="0xb" namespace="0x11a0000">England G2: Yorkshire/Yorkshire W</configuration>
-		<configuration key="freesat_118_c" bouquet="0x118" region="0xc" namespace="0x11a0000">England G2: Yorkshire/Tyne Tees S</configuration>
-		<configuration key="freesat_118_d" bouquet="0x118" region="0xd" namespace="0x11a0000">England G2: E Midlands/Central E</configuration>
-		<configuration key="freesat_118_e" bouquet="0x118" region="0xe" namespace="0x11a0000">England G2: E Midlands/Central W</configuration>
-		<configuration key="freesat_118_f" bouquet="0x118" region="0xf" namespace="0x11a0000">England G2: E Midlands/Central E</configuration>
-		<configuration key="freesat_118_10" bouquet="0x118" region="0x10" namespace="0x11a0000">England G2: E Midlands/Yorkshire E</configuration>
-		<configuration key="freesat_118_11" bouquet="0x118" region="0x11" namespace="0x11a0000">England G2: East (E)/Anglia S</configuration>
-		<configuration key="freesat_118_12" bouquet="0x118" region="0x12" namespace="0x11a0000">England G2: East (E)/London</configuration>
-		<configuration key="freesat_118_13" bouquet="0x118" region="0x13" namespace="0x11a0000">England G2: East (E)/Anglia E</configuration>
-		<configuration key="freesat_118_14" bouquet="0x118" region="0x14" namespace="0x11a0000">England G2: West/West</configuration>
-		<configuration key="freesat_118_15" bouquet="0x118" region="0x15" namespace="0x11a0000">England G2: West/Central S</configuration>
-		<configuration key="freesat_118_16" bouquet="0x118" region="0x16" namespace="0x11a0000">England G2: West/Meridian N</configuration>
-		<configuration key="freesat_118_17" bouquet="0x118" region="0x17" namespace="0x11a0000">England G2: West/Meridian N</configuration>
-		<configuration key="freesat_118_18" bouquet="0x118" region="0x18" namespace="0x11a0000">England G2: S East/Meridian S</configuration>
-		<configuration key="freesat_118_19" bouquet="0x118" region="0x19" namespace="0x11a0000">England G2: S East/Meridian SE</configuration>
-		<configuration key="freesat_118_1a" bouquet="0x118" region="0x1a" namespace="0x11a0000">England G2: S East/Meridian E</configuration>
-		<configuration key="freesat_118_1b" bouquet="0x118" region="0x1b" namespace="0x11a0000">England G2: S East/London</configuration>
-		<configuration key="freesat_118_1c" bouquet="0x118" region="0x1c" namespace="0x11a0000">England G2: South/Meridian S</configuration>
-		<configuration key="freesat_118_1d" bouquet="0x118" region="0x1d" namespace="0x11a0000">England G2: South/Meridian SE</configuration>
-		<configuration key="freesat_118_1e" bouquet="0x118" region="0x1e" namespace="0x11a0000">England G2: South/W Country</configuration>
-		<configuration key="freesat_118_1f" bouquet="0x118" region="0x1f" namespace="0x11a0000">England G2: South/London</configuration>
-		<configuration key="freesat_118_20" bouquet="0x118" region="0x20" namespace="0x11a0000">England G2: South/Meridian N</configuration>
-		<configuration key="freesat_118_21" bouquet="0x118" region="0x21" namespace="0x11a0000">England G2: S West/W Country</configuration>
-		<configuration key="freesat_118_22" bouquet="0x118" region="0x22" namespace="0x11a0000">England G2: NE &amp; C/BorderEng</configuration>
-		<configuration key="freesat_118_23" bouquet="0x118" region="0x23" namespace="0x11a0000">England G2: NE &amp; C/Tyne Tees N</configuration>
-		<configuration key="freesat_118_24" bouquet="0x118" region="0x24" namespace="0x11a0000">England G2: NE &amp; C/Tyne Tees S</configuration>
-		<configuration key="freesat_118_25" bouquet="0x118" region="0x25" namespace="0x11a0000">England G2: Oxford/Central S</configuration>
-		<configuration key="freesat_118_26" bouquet="0x118" region="0x26" namespace="0x11a0000">England G2: Oxford/London</configuration>
-		<configuration key="freesat_118_27" bouquet="0x118" region="0x27" namespace="0x11a0000">England G2: N West/Granada</configuration>
-		<configuration key="freesat_118_28" bouquet="0x118" region="0x28" namespace="0x11a0000">England G2: Yorkshire/Yorkshire W</configuration>
-		<configuration key="freesat_118_29" bouquet="0x118" region="0x29" namespace="0x11a0000">England G2: Channel Islands/Channel Islands</configuration>
-		<configuration key="freesat_118_2a" bouquet="0x118" region="0x2a" namespace="0x11a0000">England G2: Yorkshire/Yorkshire E</configuration>
-		<configuration key="freesat_118_2b" bouquet="0x118" region="0x2b" namespace="0x11a0000">England G2: Isle of Man</configuration>
-		<configuration key="freesat_118_32" bouquet="0x118" region="0x32" namespace="0x11a0000">England G2: Default (London/Central W)</configuration>
-		<configuration key="freesat_118_64" bouquet="0x118" region="0x64" namespace="0x11a0000">England G2: -</configuration>
-		<configuration key="freesat_119_3c" bouquet="0x119" region="0x3c" namespace="0x11a0000">Scotland G2: Scotland/Grampian</configuration>
-		<configuration key="freesat_119_3d" bouquet="0x119" region="0x3d" namespace="0x11a0000">Scotland G2: Scotland/Grampian</configuration>
-		<configuration key="freesat_119_3e" bouquet="0x119" region="0x3e" namespace="0x11a0000">Scotland G2: Scotland/BorderSco</configuration>
-		<configuration key="freesat_119_3f" bouquet="0x119" region="0x3f" namespace="0x11a0000">Scotland G2: Scotland/Scottish (Glasgow)</configuration>
-		<configuration key="freesat_119_40" bouquet="0x119" region="0x40" namespace="0x11a0000">Scotland G2: Scotland/Scottish (Edinburgh)</configuration>
-		<configuration key="freesat_11a_50" bouquet="0x11a" region="0x50" namespace="0x11a0000">Wales G2: Wales</configuration>
-		<configuration key="freesat_11b_5a" bouquet="0x11b" region="0x5a" namespace="0x11a0000">Northern Ireland G2: Northern Ireland</configuration>
-		-->
 	</configurations>
 	<sections>
 		<section number="101">Entertainment</section>
@@ -207,9 +104,6 @@
 		<section number="500">Music</section>
 		<section number="600">Children</section>
 		<section number="650">Special Interest</section>
-		<!--
-		<section number="700">Radio</section>
-		-->
 		<section number="800">Shopping</section>
 		<section number="870">Adult</section>
 		<section number="950">Regional</section>

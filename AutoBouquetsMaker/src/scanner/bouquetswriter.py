@@ -20,7 +20,7 @@ class BouquetsWriter():
 				transponder["transport_stream_id"],
 				transponder["original_network_id"]))
 
-			if transponder["dvb_type"] == "s":
+			if transponder["dvb_type"] == "dvbs":
 				if transponder["orbital_position"] > 1800:
 					orbital_position = transponder["orbital_position"] - 3600
 				else:
@@ -48,7 +48,7 @@ class BouquetsWriter():
 						transponder["modulation_type"],
 						transponder["roll_off"],
 						transponder["pilot"]))
-			elif transponder["dvb_type"] == "t":
+			elif transponder["dvb_type"] == "dvbt":
 				lamedb.write("\tt %d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d\n" %
 					(transponder["frequency"],
 					transponder["bandwidth"],
@@ -61,7 +61,7 @@ class BouquetsWriter():
 					transponder["inversion"],
 					transponder["flags"],
 					transponder["modulation_system"]))
-			elif transponder["dvb_type"] == "c":
+			elif transponder["dvb_type"] == "dvbc":
 				lamedb.write("\tc %d:%d:%d:%d:%d:%d:%d\n" %
 					(transponder["frequency"],
 					transponder["symbol_rate"],

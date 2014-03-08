@@ -14,7 +14,7 @@ from Components.config import config
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.TuneTest import Tuner
 from Components.NimManager import nimmanager
-from enigma import eTimer, eServiceReference, eDVBDB, iPlayableService, eDVBFrontendParametersSatellite, eDVBResourceManager, eDVBFrontendParameters
+from enigma import eTimer, eServiceReference, eDVBDB, iPlayableService, eDVBFrontendParametersSatellite,eDVBFrontendParametersTerrestrial, eDVBFrontendParametersCable, eDVBResourceManager, eDVBFrontendParameters
 
 from manager import Manager
 from providerconfig import ProviderConfig
@@ -199,11 +199,11 @@ class AutoBouquetsMaker(Screen):
 		transponder = self.providers[self.currentAction]["transponder"]
 		nimList = []
 		for nim in nimmanager.nim_slots:
-			if nim.isCompatible("DVB-S") and nim.config_mode not in ("loopthrough"):
+			if (self.providers[self.currentAction]["streamtype"] == "dvbs" and nim.isCompatible("DVB-S") and nim.config_mode not in ("loopthrough")) or (self.providers[self.currentAction]["streamtype"] == "dvbc" and nim.isCompatible("DVB-C")) or (self.providers[self.currentAction]["streamtype"] == "dvbt" and nim.isCompatible("DVB-T")):
 				nimList.append(nim.slot)
 		if len(nimList) == 0:
-			print>>log, "[AutoBouquetsMaker] No DVB-S NIMs founds"
-			self.showError(_('No DVB-S NIMs founds'))
+			print>>log, "[AutoBouquetsMaker] No NIMs found"
+			self.showError(_('No NIMs found'))
 			return
 
 		resmanager = eDVBResourceManager.getInstance()
@@ -212,7 +212,11 @@ class AutoBouquetsMaker(Screen):
 			self.showError(_('Cannot retrieve Resource Manager instance'))
 			return
 
-		print>>log, "[AutoBouquetsMaker] Search NIM for orbital position %d" % transponder["orbital_position"]
+		if self.providers[self.currentAction]["streamtype"] == "dvbs":
+			print>>log, "[AutoBouquetsMaker] Search NIM for orbital position %d" % transponder["orbital_position"]
+		else:
+			print>>log, "[AutoBouquetsMaker] Search NIM"
+
 		current_slotid = -1
 		if self.rawchannel:
 			del(self.rawchannel)
@@ -222,17 +226,27 @@ class AutoBouquetsMaker(Screen):
 
 		nimList.reverse() # start from the last
 		for slotid in nimList:
-			sats = nimmanager.getSatListForNim(slotid)
-			for sat in sats:
-				if sat[0] == transponder["orbital_position"]:
-					if current_slotid == -1:	# mark the first valid slotid in case of no other one is free
-						current_slotid = slotid
+			if self.providers[self.currentAction]["streamtype"] == "dvbs":
+				sats = nimmanager.getSatListForNim(slotid)
+				for sat in sats:
+					if sat[0] == transponder["orbital_position"]:
+						if current_slotid == -1:	# mark the first valid slotid in case of no other one is free
+							current_slotid = slotid
 
-					self.rawchannel = resmanager.allocateRawChannel(slotid)
-					if self.rawchannel:
-						print>>log, "[AutoBouquetsMaker] Nim found on slot id %d with sat %s" % (slotid, sat[1])
-						current_slotid = slotid
-						break
+						self.rawchannel = resmanager.allocateRawChannel(slotid)
+						if self.rawchannel:
+							print>>log, "[AutoBouquetsMaker] Nim found on slot id %d with sat %s" % (slotid, sat[1])
+							current_slotid = slotid
+							break
+			else:
+				if current_slotid == -1:	# mark the first valid slotid in case of no other one is free
+					current_slotid = slotid
+				self.rawchannel = resmanager.allocateRawChannel(slotid)
+				if self.rawchannel:
+ 					print>>log, "[AutoBouquetsMaker] Nim found on slot id %d" % (slotid)
+					current_slotid = slotid
+					break
+
 
 			if self.rawchannel:
 				break
@@ -272,19 +286,46 @@ class AutoBouquetsMaker(Screen):
 			self.showError(_('Cannot allocate the demuxer'))
 			return
 
-		params = eDVBFrontendParametersSatellite()
-		params.frequency = transponder["frequency"]
-		params.symbol_rate = transponder["symbol_rate"]
-		params.polarisation = transponder["polarization"]
-		params.fec = transponder["fec_inner"]
-		params.inversion = transponder["inversion"]
-		params.orbital_position = transponder["orbital_position"]
-		params.system = transponder["system"]
-		params.modulation = transponder["modulation"]
-		params.rolloff = transponder["roll_off"]
-		params.pilot = transponder["pilot"]
-		params_fe = eDVBFrontendParameters()
-		params_fe.setDVBS(params, False)
+		if self.providers[self.currentAction]["streamtype"] == "dvbs":
+			params = eDVBFrontendParametersSatellite()
+			params.frequency = transponder["frequency"]
+			params.symbol_rate = transponder["symbol_rate"]
+			params.polarisation = transponder["polarization"]
+			params.fec = transponder["fec_inner"]
+			params.inversion = transponder["inversion"]
+			params.orbital_position = transponder["orbital_position"]
+			params.system = transponder["system"]
+			params.modulation = transponder["modulation"]
+			params.rolloff = transponder["roll_off"]
+			params.pilot = transponder["pilot"]
+			params_fe = eDVBFrontendParameters()
+			params_fe.setDVBS(params, False)
+
+		elif self.providers[self.currentAction]["streamtype"] == "dvbt":
+			params = eDVBFrontendParametersTerrestrial()
+			params.frequency = transponder["frequency"]
+			params.bandwidth = transponder["bandwidth"]
+			params.code_rate_hp = transponder["code_rate_hp"]
+			params.code_rate_lp = transponder["code_rate_lp"]
+			params.inversion = transponder["inversion"]
+			params.system = transponder["system"]
+			params.modulation = transponder["modulation"]
+			params.transmission_mode = transponder["transmission_mode"]
+			params.guard_interval = transponder["guard_interval"]
+			params.hierarchy = transponder["hierarchy"]
+			params_fe = eDVBFrontendParameters()
+			params_fe.setDVBT(params)
+
+		elif self.providers[self.currentAction]["streamtype"] == "dvbc":
+			params = eDVBFrontendParametersCable()
+			params.frequency = transponder["frequency"]
+			params.symbol_rate = transponder["symbol_rate"]
+			params.fec_inner = transponder["fec_inner"]
+			params.inversion = transponder["inversion"]
+			params.modulation = transponder["modulation"]
+			params_fe = eDVBFrontendParameters()
+			params_fe.setDVBC(params)
+
 		self.rawchannel.requestTsidOnid()
 		self.frontend.tune(params_fe)
 		self.manager.setAdapter(0)	# FIX: use the correct device

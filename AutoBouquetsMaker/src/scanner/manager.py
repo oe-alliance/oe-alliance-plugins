@@ -162,6 +162,7 @@ class Manager():
 				scanner.setAdapter(self.adapter)
 				scanner.setDemuxer(self.demuxer)
 				scanner.setFrontend(self.frontend)
+				scanner.setDVBType(providers[provider_key]["streamtype"])
 
 				scanner.setNitPid(providers[provider_key]["transponder"]["nit_pid"])
 				scanner.setNitCurrentTableId(providers[provider_key]["transponder"]["nit_current_table_id"])

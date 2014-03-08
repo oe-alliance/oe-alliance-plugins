@@ -1,5 +1,6 @@
 <provider>
 	<name>TéléSAT SD Aatra 3</name>
+	<streamtype>dvbs</streamtype>
 	<protocol>fastscan</protocol>
 	<!-- namespace could change even on the same sat...
 	     in case of use the service hacks to fix it -->

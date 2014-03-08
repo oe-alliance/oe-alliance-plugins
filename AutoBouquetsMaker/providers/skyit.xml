@@ -1,5 +1,6 @@
 <provider>
 	<name>SKY Italy</name>
+	<streamtype>dvbs</streamtype>
 	<protocol>sky</protocol>
 	<transponder frequency="11976000" symbol_rate="29900000" polarization="0"
 		fec_inner="4" orbital_position="130" inversion="2" system="0"

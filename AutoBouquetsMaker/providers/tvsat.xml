@@ -1,5 +1,6 @@
 <provider>
 	<name>TVSat</name>
+	<streamtype>dvbs</streamtype>
 	<protocol>lcn</protocol>
 	<!-- namespace could change even on the same sat...
 	     in case of use the service hacks to fix it -->

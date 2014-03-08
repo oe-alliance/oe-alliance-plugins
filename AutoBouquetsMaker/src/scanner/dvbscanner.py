@@ -68,6 +68,10 @@ class DvbScanner():
 		self.frontend = id
 		print>>log, "[DvbScanner] Frontend %d" % self.frontend
 
+	def setDVBType(self, id):
+		self.dvbtype = id
+		print>>log, "[DvbScanner] DVBType %s" % self.dvbtype
+
 	def setNitPid(self, value):
 		self.nit_pid = value
 		print>>log, "[DvbScanner] NIT pid: 0x%x" % self.nit_pid
@@ -157,10 +161,9 @@ class DvbScanner():
 				time.sleep(0.1)	# no data.. so we wait a bit
 				continue
 
-			if section["header"]["table_id"] == self.nit_current_table_id and not nit_current_completed:
-				if (section["header"]["version_number"] != nit_current_section_version
-					or section["header"]["network_id"] != nit_current_section_network_id):
 
+			if section["header"]["table_id"] == self.nit_current_table_id and not nit_current_completed:
+				if (section["header"]["version_number"] != nit_current_section_version or section["header"]["network_id"] != nit_current_section_network_id):
 					nit_current_section_version = section["header"]["version_number"]
 					nit_current_section_network_id = section["header"]["network_id"]
 					nit_current_sections_read = []
@@ -175,9 +178,7 @@ class DvbScanner():
 						nit_current_completed = True
 
 			elif section["header"]["table_id"] == self.nit_other_table_id and not nit_other_completed:
-				if (section["header"]["version_number"] != nit_other_section_version
-					or section["header"]["network_id"] != nit_other_section_network_id):
-
+				if (section["header"]["version_number"] != nit_other_section_version or section["header"]["network_id"] != nit_other_section_network_id):
 					nit_other_section_version = section["header"]["version_number"]
 					nit_other_section_network_id = section["header"]["network_id"]
 					nit_other_sections_read = []
@@ -208,7 +209,7 @@ class DvbScanner():
 				logical_channel_number_dict[key] = transponder
 				continue
 			transponder["services"] = {}
-			transponder["dvb_type"] = "s"
+			transponder["dvb_type"] = self.dvbtype
 			transponder["frequency"] = transponder["frequency"] * 10
 			transponder["symbol_rate"] = transponder["symbol_rate"] * 100
 			if transponder["fec_inner"] != 15 and transponder["fec_inner"] > 9:
