@@ -128,7 +128,7 @@ class Providers():
 							elif node.attributes.item(i).name == "fastscan_table_id":
 								transponder["fastscan_table_id"] = int(node.attributes.item(i).value, 16)
 
-						if len(transponder.keys()) in (21, 17):
+						if len(transponder.keys()) in (20, 16):
 							provider["transponder"] = transponder
 
 					elif node.tagName == "configurations":
