@@ -864,7 +864,7 @@ class Blindscan(ConfigListScreen, Screen):
 		else :
 			pos_name = '%dE' % (abs(int(pos))/10)
 		location = '%s/blindscan_%s_%s.xml' %(save_xml_dir, pos_name, strftime("%d-%m-%Y_%H-%M-%S"))
-		tuner = ['A', 'B', 'C', 'D']
+		tuner = nimmanager.nim_slots[self.feid].friendly_full_description
 		polarisation = ['horizontal', 'vertical', 'circular left', 'circular right', 'vertical and horizontal', 'circular right and circular left']
 		adjacent = ['no', 'up to 1 degree', 'up to 2 degrees', 'up to 3 degrees']
 		known_txp = 'no'
@@ -876,7 +876,7 @@ class Blindscan(ConfigListScreen, Screen):
 		xml.append('	using %s receiver running Enigma2 image, version %s,\n' % (boxtype, versionstring))
 		xml.append('	build %s, with the blindscan plugin \n\n' % (buildstring))
 		xml.append('	Search parameters:\n')
-		xml.append('		Tuner: %s\n' % (tuner[self.feid]))
+		xml.append('		%s\n' % (tuner))
 		xml.append('		Satellite: %s\n' % (self.sat_name))
 		xml.append('		Start frequency: %dMHz\n' % (self.blindscan_start_frequency.value))
 		xml.append('		Stop frequency: %dMHz\n' % (self.blindscan_stop_frequency.value))
