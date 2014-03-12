@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2013-07-10 16:40+0100\n"
-"Last-Translator: Nobody28 <Nobody28@hotmail.de>\n"
+"PO-Revision-Date: 2014-03-12 20:14+0100\n"
+"Last-Translator: mike99 <mike99@gmx.net>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -76,3 +76,12 @@ msgstr "Ja"
 
 msgid "in standby: "
 msgstr "in Standby: "
+
+msgid "VFD_INI"
+msgstr "VFD-Einstellungen"
+
+msgid "VFD_INI Setup"
+msgstr "VFD-Einstellungen"
+
+msgid "Show on VFD"
+msgstr "Zeige im VFD"
