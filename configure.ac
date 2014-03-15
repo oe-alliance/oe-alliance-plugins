@@ -277,6 +277,11 @@ WebBrowser/keymap/Makefile
 WebBrowser/icons/Makefile
 WebBrowser/po/Makefile
 
+WirelessAccessPoint/Makefile
+WirelessAccessPoint/src/Makefile
+WirelessAccessPoint/meta/Makefile
+WirelessAccessPoint/po/Makefile
+
 XtrendFancontrol/Makefile
 XtrendFancontrol/src/Makefile
 XtrendFancontrol/meta/Makefile
