@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
-import os, xml.dom.minidom
+import os, xml.dom.minidom, re
 from enigma import iServiceInformation
+
+RE_XML_ILLEGAL = u'([\u0000-\u0008\u000b-\u000c\u000e-\u001f\ufffe-\uffff])' + \
+                 u'|' + \
+                 u'([%s-%s][^%s-%s])|([^%s-%s][%s-%s])|([%s-%s]$)|(^[%s-%s])' % \
+                  (unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff),
+                   unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff),
+                   unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff))
 
 DUMPBIN = "/usr/lib/enigma2/python/Plugins/Extensions/HbbTV/dumpait"
 class eAITSectionReader:
@@ -72,6 +79,7 @@ class eAITSectionReader:
 			return False
 		if len(document) == 0:
 			return False
+		document = re.sub(RE_XML_ILLEGAL, "?", document)
 		document = document.decode("cp1252").encode("utf-8")
 		#print document
 		self.mDocument = xml.dom.minidom.parseString(document)
