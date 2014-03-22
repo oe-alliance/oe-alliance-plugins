@@ -296,7 +296,7 @@ def sessionstart(reason, **kwargs):
 
 def Plugins(**kwargs):
 		if getBoxType() in ('xpeedlx1'):
-			return []
-		else:
 			return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
 				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+		else:
+			return []
