@@ -764,8 +764,16 @@ class Blindscan(ConfigListScreen, Screen):
 					tplist[x] = k
 					break
 			x += 1
+		tplist = self.removeDuplicateTransponders(tplist)
 		return tplist
 
+	def removeDuplicateTransponders(self, tplist) :
+		new_tplist = []
+		for t in tplist:
+			if t not in new_tplist:
+				new_tplist.append(t)
+		return new_tplist
+		
 	def removeKnownTransponders(self, tplist, knowntp) :
 		new_tplist = []
 		tolerance = 5
