@@ -1215,7 +1215,7 @@ class OperaBrowserSetting:
 		for line in f.readlines():
 			if line.startswith('start='):
 				tmp = line[6:len(line)-1].split()
-				if tmp[0] == "http://www2.vuplus.com/":
+				if tmp[0] == "http://www.google.com/":
 					tmp[0] = "http://google.com/"
 				self._start = tmp[0]
 				if len(tmp) > 1:
@@ -1351,7 +1351,7 @@ class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
 			self._startPageUrl = d['start']
 			self._keymapType = d['keymap']
 			#d['type']
-		except: self._startPageUrl = 'http://vuplus.com'
+		except: self._startPageUrl = 'http://google.com'
 		self.updateStartPageUrl()
 
 		if self._keymapType is None or len(self._keymapType) == 0:
@@ -2261,7 +2261,7 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 
 	def layoutFinished(self):
 		self.setTitle(_('Start YouTube TV'))
-		self["infomation"].setText(_("YouTube TV is a new way to watch YouTube videos on Vu+"))
+		self["infomation"].setText(_("YouTube TV is a new way to watch YouTube videos on STB"))
 		self["startdesc" ].setText(_("* Start YouTube TV"))
 		self["helpdesc"  ].setText(_("* RC Help"))
 
