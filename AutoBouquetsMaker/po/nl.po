@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 09:59+0200\n"
-"PO-Revision-Date: 2013-07-25 15:56+0100\n"
+"POT-Creation-Date: 2014-04-06 20:28+0100\n"
+"PO-Revision-Date: 2014-04-07 07:21+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Andy Blacburn. Rob van der Does\n"
 "Language: nl\n"
@@ -49,6 +49,12 @@ msgstr "AutoBouquetsMaker log"
 msgid "AutoBouquetsMaker Providers"
 msgstr "AutoBouquetsMaker providers"
 
+msgid "AutoBouquetsMaker Scanner"
+msgstr "Autobouquetsmaker scanner"
+
+msgid "Bottom"
+msgstr "Onderin"
+
 msgid "Bouquets order"
 msgstr "Volgorde van favorietenlijsten"
 
@@ -85,6 +91,9 @@ msgstr "Verplaats omhoog"
 msgid "OK"
 msgstr "OK"
 
+msgid "Place bouquets at"
+msgstr "Plaats favorietenlijsten"
+
 msgid "Please wait..."
 msgstr "Even wachten..."
 
@@ -115,6 +124,9 @@ msgstr "Tijdstip voor de dagelijkse scan."
 msgid "Setup mode"
 msgstr "Instellingen modus"
 
+msgid "Show in extensions"
+msgstr "Toon in extensies"
+
 msgid "Show log"
 msgstr "Toon log"
 
@@ -130,6 +142,9 @@ msgstr "Deze optie schakeld de gekozen provider in."
 msgid "This option has several choices \"Yes\", (create a bouquet with all the channels in it), \"Yes HD only\", (will group all HD channels into this bouquet), \"Custom\", (allows you to select your own bouquet), \"No\", (do not use a main bouquet)"
 msgstr "Deze optie kent diverse keuzes \"Ja\", (creeert een lijst met alle kanalen), \"Ja alleen HD\", (alle HD-kanalen komen in in deze lijst), \"Aangepast\", (laat u uw eigen lijst kiezen), \"Nee\", (gebruik geen hoofdlijst)"
 
+msgid "This option will alow you choose where to place the created bouquets."
+msgstr "Deze optie geeft u de keuze waar de lijsten geplaatst worden."
+
 msgid "This option will create a FreeToAir bouquet, it will group all none encrypted channels into this bouquet."
 msgstr "Deze optie maakt een FTA-lijst; alle niet versleutelde kanalen komen hierin."
 
@@ -139,8 +154,8 @@ msgstr "Deze optie maakt een HD-lijst; alle HD-kanalen komen hierin."
 msgid "This option will create bouquets for each type of channel, ie Entertainment, Movies, Documentary."
 msgstr "Deze optie maakt een lijst voor elk type zender, zoals Amusement. Film, documentaires."
 
-msgid "This option will prepend the provider name to bouquet name "
-msgstr "Deze optie plaatst de naam van de provider voor de lijst."
+msgid "This option will prepend the provider name to bouquet name."
+msgstr "Deze optie zal de naam van de provider voor de naam van de lijst zetten"
 
 msgid "This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)"
 msgstr "Deze optie wisselt SD kanalen met de HD versies (b.v.101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)"
@@ -148,11 +163,17 @@ msgstr "Deze optie wisselt SD kanalen met de HD versies (b.v.101 BBC One, 103 IT
 msgid "Time of scan to start"
 msgstr "Tijdstip waarop scan moet starten"
 
+msgid "Top"
+msgstr "Bovenin"
+
 msgid "Weekly"
 msgstr "Wekelijks"
 
 msgid "When disabled this will enable the 'Keep bouquets' in the main menu, allowing you to hide some 'existing' bouquets."
 msgstr "Indien uitgeschakeld zal dit 'Bewaar favorietenlijsten' inschakelen, wat het u mogelijk maakt enkele bestaande lijsten te verbergen."
+
+msgid "When enable allow you start a scan from the extensions list."
+msgstr "Indien ingeschakeld kunt u een scan starten vanuit extensies."
 
 msgid "area"
 msgstr "gebied"
@@ -192,6 +213,9 @@ msgstr "ja (aangepast)"
 
 msgid "yes (only HD)"
 msgstr "ja  (alleen HD)"
+
+#~ msgid "This option will prepend the provider name to bouquet name "
+#~ msgstr "Deze optie plaatst de naam van de provider voor de lijst."
 
 #~ msgid "Time of backup to start"
 #~ msgstr "Tijdstip dat backup start"
