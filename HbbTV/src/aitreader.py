@@ -80,6 +80,7 @@ class eAITSectionReader:
 		if len(document) == 0:
 			return False
 		document = re.sub(RE_XML_ILLEGAL, "?", document)
+		document = re.sub("&", "+", document)
 		document = document.decode("cp1252").encode("utf-8")
 		#print document
 		self.mDocument = xml.dom.minidom.parseString(document)
