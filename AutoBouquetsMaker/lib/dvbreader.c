@@ -251,7 +251,7 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 			unsigned char descriptor_tag = data[offset2];
 			unsigned char descriptor_length = data[offset2 + 1];
 
-			if (descriptor_tag == 0x43)
+			if (descriptor_tag == 0x43)	// Satellite delivery system descriptor
 			{
 				int frequency = (data[offset2 + 2] >> 4) * 10000000;
 				frequency += (data[offset2 + 2] & 0x0f) * 1000000;
@@ -295,6 +295,79 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 				PyList_Append(list, item);
 				Py_DECREF(item);
 			}
+			else if (descriptor_tag == 0x44)	// Cable delivery system descriptor
+			{		
+				int frequency = (data[offset2 + 2] >> 4) * 10000000;
+				frequency += (data[offset2 + 2] & 0x0f) * 1000000;
+				frequency += (data[offset2 + 3] >> 4) * 100000;
+				frequency += (data[offset2 + 3] & 0x0f) * 10000;
+				frequency += (data[offset2 + 4] >> 4) * 1000;
+				frequency += (data[offset2 + 4] & 0x0f) * 100;
+				frequency += (data[offset2 + 5] >> 4) * 10;
+				frequency += data[offset2 + 5] & 0x0f;
+				
+				int fec_outer = data[offset2 + 7] & 0xf;
+				int modulation_type = data[offset2 + 8];
+
+				int symbol_rate = (data[offset2 + 9] >> 4) * 1000000;
+				symbol_rate += (data[offset2 + 9] & 0xf) * 100000;
+				symbol_rate += (data[offset2 + 10] >> 4) * 10000;
+				symbol_rate += (data[offset2 + 10] & 0xf) * 1000;
+				symbol_rate += (data[offset2 + 11] >> 4) * 100;
+				symbol_rate += (data[offset2 + 11] & 0xf) * 10;
+				symbol_rate += data[offset2 + 12] >> 4;
+				
+				int fec_inner = data[offset2 + 12] & 0xf;
+
+				PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i,s:i}",
+						"transport_stream_id", transport_stream_id,
+						"original_network_id", original_network_id,
+						"frequency", frequency,
+						"fec_outer", fec_outer,
+						"modulation_type", modulation_type,
+						"symbol_rate", symbol_rate,
+						"fec_inner", fec_inner);
+						
+				PyList_Append(list, item);
+				Py_DECREF(item);
+			}
+			else if (descriptor_tag == 0x5A)	// Terrestrial delivery system descriptor
+			{
+				int frequency = ((data[offset2 + 2] << 24) | (data[offset2 + 3] << 16) | (data[offset2 + 4] << 8) | (data[offset2 + 5]));
+				
+				int bandwidth = (data[offset2 + 6] >> 5 & 0x07);
+				int priority = (data[offset2 + 6] >> 4 & 0x01);
+				int time_slicing = (data[offset2 + 6] >> 3 & 0x01);
+				int mpe_fec = (data[offset2 + 6] >> 2 & 0x01);
+				
+				int modulation = (data[offset2 + 7] >> 6 & 0x03);
+				int hierarchy = (data[offset2 + 7] >> 3 & 0x07);
+				int code_rate_hp = (data[offset2 + 7] & 0x07);
+				
+				int code_rate_lp = (data[offset2 + 8] >> 5 & 0x07);
+				int guard_interval = (data[offset2 + 8] >> 3 & 0x03);
+				int transmission_mode = (data[offset2 + 8] >> 1 & 0x03);
+				int other_frequency_flag = (data[offset2 + 8] & 0x01);
+				
+				PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i}",
+						"transport_stream_id", transport_stream_id,
+						"original_network_id", original_network_id,
+						"frequency", frequency,
+						"bandwidth", bandwidth,
+						"priority", priority,
+						"time_slicing", time_slicing,
+						"mpe_fec", mpe_fec,
+						"modulation", modulation,
+						"hierarchy", hierarchy,
+						"code_rate_hp", code_rate_hp,
+						"code_rate_lp", code_rate_lp,
+						"guard_interval", guard_interval,
+						"transmission_mode", transmission_mode,
+						"other_frequency_flag", other_frequency_flag);
+						
+				PyList_Append(list, item);
+				Py_DECREF(item);
+			}
 			else if (descriptor_tag == 0x83)	// lcn_descriptor
 			{
 				int offset3 = offset2 + 2;
@@ -311,6 +384,28 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 							"service_id", service_id,
 							"visible_service_flag", visible_service_flag,
 							"logical_channel_number", logical_channel_number);
+							
+					PyList_Append(list, item);
+					Py_DECREF(item);
+				}
+			}
+			else if (descriptor_tag == 0x88)	// HD simulcast logical channel descriptor
+			{
+				int offset3 = offset2 + 2;
+				while (offset3 < (offset2 + descriptor_length + 2))
+				{
+					int service_id = (data[offset3] << 8) | data[offset3 + 1];
+					int visible_service_flag = (data[offset3 + 2] >> 7) & 0x01;
+					int hd_logical_channel_number = ((data[offset3 + 2] & 0x03) << 8) | data[offset3 + 3];
+
+					offset3 += 4;
+					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:s}",
+							"transport_stream_id", transport_stream_id,
+							"original_network_id", original_network_id,
+							"service_id", service_id,
+							"visible_service_flag", visible_service_flag,
+							"logical_channel_number", hd_logical_channel_number,
+							"logical_channel_number_type", "HD");
 							
 					PyList_Append(list, item);
 					Py_DECREF(item);

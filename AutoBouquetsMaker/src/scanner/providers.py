@@ -50,6 +50,9 @@ class Providers():
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
 							provider["streamtype"] = node.childNodes[0].data.encode("utf-8")
+							if provider["streamtype"] != "dvbc":	# prepare an empty dictionary for bouquettype
+								provider["bouquettype"] = None
+								provider["netid"] = None
 					elif node.tagName == "protocol":
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE and node.childNodes[0].data in self.VALID_PROTOCOLS:
@@ -130,6 +133,16 @@ class Providers():
 
 						if len(transponder.keys()) in (20, 16):
 							provider["transponder"] = transponder
+
+					elif node.tagName == "bouquettype":
+						node.normalize()
+						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
+							provider["bouquettype"] = node.childNodes[0].data.encode("utf-8")
+
+					elif node.tagName == "netid":
+						node.normalize()
+						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
+							provider["netid"] = node.childNodes[0].data.encode("utf-8")
 
 					elif node.tagName == "configurations":
 						provider["bouquets"] = {}
@@ -219,6 +232,8 @@ class Providers():
 			if not ("name" in provider
 					and "protocol" in provider
 					and "streamtype" in provider
+					and "bouquettype" in provider
+					and "netid" in provider
 					and "namespace" in provider
 					and "bouquets" in provider
 					and "sections" in provider

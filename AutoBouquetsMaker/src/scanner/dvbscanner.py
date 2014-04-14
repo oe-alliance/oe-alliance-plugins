@@ -72,6 +72,14 @@ class DvbScanner():
 		self.dvbtype = id
 		print>>log, "[DvbScanner] DVBType %s" % self.dvbtype
 
+	def setBouquetType(self, id):
+		self.bouquettype = id
+		print>>log, "[DvbScanner] BouquetType %s" % self.bouquettype
+		
+	def setNetId(self, id):
+		self.netid = id
+		print>>log, "[DvbScanner] NetId %s" % self.netid
+
 	def setNitPid(self, value):
 		self.nit_pid = value
 		print>>log, "[DvbScanner] NIT pid: 0x%x" % self.nit_pid
@@ -130,6 +138,11 @@ class DvbScanner():
 		else:
 			mask = self.nit_current_table_id ^ self.nit_other_table_id ^ 0xff
 
+		print>>log, "[DvbScanner] demuxer_device", str(self.demuxer_device)
+		print>>log, "[DvbScanner] nit_pid", str(self.nit_pid)
+		print>>log, "[DvbScanner] nit_current_table_id", str(self.nit_current_table_id)
+		print>>log, "[DvbScanner] mask", str(mask)
+		print>>log, "[DvbScanner] frontend", str(self.frontend)
 		fd = dvbreader.open(self.demuxer_device, self.nit_pid, self.nit_current_table_id, mask, self.frontend)
 		if fd < 0:
 			print>>log, "[DvbScanner] Cannot open the demuxer"
@@ -162,7 +175,8 @@ class DvbScanner():
 				continue
 
 
-			if section["header"]["table_id"] == self.nit_current_table_id and not nit_current_completed:
+			if (section["header"]["table_id"] == self.nit_current_table_id 
+				and self.dvbtype != 'dvbc' and not nit_current_completed):
 				if (section["header"]["version_number"] != nit_current_section_version or section["header"]["network_id"] != nit_current_section_network_id):
 					nit_current_section_version = section["header"]["version_number"]
 					nit_current_section_network_id = section["header"]["network_id"]
@@ -176,6 +190,23 @@ class DvbScanner():
 
 					if len(nit_current_sections_read) == nit_current_sections_count:
 						nit_current_completed = True
+					
+			elif (str(section["header"]["network_id"]) == self.netid and self.dvbtype == 'dvbc' and not nit_current_completed):
+				if (section["header"]["version_number"] != nit_current_section_version or section["header"]["network_id"] != nit_current_section_network_id):
+					nit_current_section_version = section["header"]["version_number"]
+					nit_current_section_network_id = section["header"]["network_id"]
+					nit_current_sections_read = []
+					nit_current_content = []
+					nit_current_sections_count = section["header"]["last_section_number"] + 1
+					
+				if section["header"]["section_number"] not in nit_current_sections_read:
+					nit_current_sections_read.append(section["header"]["section_number"])
+					nit_current_content += section["content"]
+					
+					if len(nit_current_sections_read) == nit_current_sections_count:
+						nit_current_completed = True
+						nit_other_completed = True
+
 
 			elif section["header"]["table_id"] == self.nit_other_table_id and not nit_other_completed:
 				if (section["header"]["version_number"] != nit_other_section_version or section["header"]["network_id"] != nit_other_section_network_id):
@@ -193,6 +224,7 @@ class DvbScanner():
 						nit_other_completed = True
 
 			if nit_current_completed and nit_other_completed:
+				print>>log, "[DvbScanner] Scan complete, netid: ", str(self.netid)
 				break
 
 		dvbreader.close(fd)
@@ -202,34 +234,54 @@ class DvbScanner():
 
 		transport_stream_id_list = []
 		logical_channel_number_dict = {}
+		logical_channel_number_dict_tmp = {}
+		hd_logical_channel_number_dict_tmp = {}
 		transponders_count = 0
 		for transponder in nit_content:
+			print 'LINE:',transponder
 			if len(transponder) == 5: # lcn
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
-				logical_channel_number_dict[key] = transponder
+				logical_channel_number_dict_tmp[key] = transponder
+				continue
+			if len(transponder) == 6: # HD lcn
+				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
+				hd_logical_channel_number_dict_tmp[key] = transponder
 				continue
 			transponder["services"] = {}
 			transponder["dvb_type"] = self.dvbtype
-			transponder["frequency"] = transponder["frequency"] * 10
-			transponder["symbol_rate"] = transponder["symbol_rate"] * 100
-			if transponder["fec_inner"] != 15 and transponder["fec_inner"] > 9:
-				transponder["fec_inner"] = 0
+			transponder["bouquet_type"] = self.bouquettype
+			
+			if transponder["dvb_type"] == 'dvbc': # DVB-C
+				transponder["symbol_rate"] = transponder["symbol_rate"] * 100
+				transponder["flags"] = 0
+				if transponder["fec_inner"] != 15 and transponder["fec_inner"] > 9:
+					transponder["fec_inner"] = 0
+				transponder["frequency"] = transponder["frequency"] / 10
+				transponder["namespace"] = 0xFFFF0000
+				transponder["inversion"] = transponder["fec_outer"]
+				transponder["modulation_system"] = 0
+			elif transponder["dvb_type"] == 'dvbt': # DVB-T
+				transponder["namespace"] = 0xEEEE0000
+				transponder["frequency"] = transponder["frequency"] * 10
+			elif transponder["dvb_type"] == 'dvbs': # DVB-S
+				transponder["symbol_rate"] = transponder["symbol_rate"] * 100
+				transponder["flags"] = 0
+				if transponder["fec_inner"] != 15 and transponder["fec_inner"] > 9:
+					transponder["fec_inner"] = 0
+				transponder["frequency"] = transponder["frequency"] * 10
+				orbital_position = ((transponder["orbital_position"] >> 12) & 0x0F) * 1000
+				orbital_position += ((transponder["orbital_position"] >> 8) & 0x0F) * 100
+				orbital_position += ((transponder["orbital_position"] >> 4) & 0x0F) * 10
+				orbital_position += transponder["orbital_position"] & 0x0F
+				if orbital_position != 0 and transponder["west_east_flag"] == 0:
+					orbital_position = 3600 - orbital_position
+				transponder["orbital_position"] = orbital_position
+				transponder["pilot"] = 2
 
-			orbital_position = ((transponder["orbital_position"] >> 12) & 0x0F) * 1000
-			orbital_position += ((transponder["orbital_position"] >> 8) & 0x0F) * 100
-			orbital_position += ((transponder["orbital_position"] >> 4) & 0x0F) * 10
-			orbital_position += transponder["orbital_position"] & 0x0F
-			if orbital_position != 0 and transponder["west_east_flag"] == 0:
-				orbital_position = 3600 - orbital_position
-			transponder["orbital_position"] = orbital_position
-
-			if transponder["modulation_system"] == 0 and transponder["modulation_type"] == 2:
-				transponder["modulation_type"] = 1
-
-			transponder["namespace"] = self.buildNamespace(transponder)
-			transponder["inversion"] = 2
-			transponder["flags"] = 0
-			transponder["pilot"] = 2
+				if transponder["modulation_system"] == 0 and transponder["modulation_type"] == 2:
+					transponder["modulation_type"] = 1
+				transponder["inversion"] = 2
+				transponder["namespace"] = self.buildNamespace(transponder)
 
 			key = "%x:%x:%x" % (transponder["namespace"],
 				transponder["transport_stream_id"],
@@ -247,6 +299,16 @@ class DvbScanner():
 			print>>log, "[DvbScanner] Added/Updated %d transponders with network_id = 0x%x and network_id = 0x%x" % (transponders_count, nit_current_section_network_id, nit_other_section_network_id)
 		else:
 			print>>log, "[DvbScanner] Added/Updated %d transponders with network_id = 0x%x" % (transponders_count, nit_current_section_network_id)
+
+		if len(hd_logical_channel_number_dict_tmp) > 0 and self.bouquettype == 'hd': 
+			for id in logical_channel_number_dict_tmp:
+				if id in hd_logical_channel_number_dict_tmp:
+					logical_channel_number_dict[id] = hd_logical_channel_number_dict_tmp[id]
+				else:
+					logical_channel_number_dict[id] = logical_channel_number_dict_tmp[id]
+		else:
+			for id in logical_channel_number_dict_tmp:
+				logical_channel_number_dict[id] = logical_channel_number_dict_tmp[id]
 
 		return {
 			"transport_stream_id_list": transport_stream_id_list,

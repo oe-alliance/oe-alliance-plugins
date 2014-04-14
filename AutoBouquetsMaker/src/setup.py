@@ -79,12 +79,15 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		self.orbital_supported = []
 
 		# get supported orbital positions
-		nims = nimmanager.getNimListOfType("DVB-S")
-		for nim in nims:
+		dvbs_nims = nimmanager.getNimListOfType("DVB-S")
+		for nim in dvbs_nims:
 			sats = nimmanager.getSatListForNim(nim)
 			for sat in sats:
 				if sat[0] not in self.orbital_supported:
 					self.orbital_supported.append(sat[0])
+
+		self.dvbc_nims = nimmanager.getNimListOfType("DVB-C")
+		self.dvbt_nims = nimmanager.getNimListOfType("DVB-T")
 
 		# read providers configurations
 		providers_tmp_configs = {}
@@ -98,6 +101,10 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 			if provider_config.getProvider() not in self.providers:
 				continue
 			if self.providers[provider_config.getProvider()]["streamtype"] == 'dvbs' and self.providers[provider_config.getProvider()]["transponder"]["orbital_position"] not in self.orbital_supported:
+				continue
+			if self.providers[provider_config.getProvider()]["streamtype"] == 'dvbc' and len(self.dvbc_nims) <= 0:
+				continue
+			if self.providers[provider_config.getProvider()]["streamtype"] == 'dvbt' and len(self.dvbt_nims) <= 0:
 				continue
 
 			self.providers_order.append(provider_config.getProvider())
@@ -204,6 +211,10 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		providers_enabled = []
 		for provider in sorted(self.providers.keys()):
 			if self.providers[provider]["streamtype"] == 'dvbs' and self.providers[provider]["transponder"]["orbital_position"] not in self.orbital_supported:
+				continue
+			if self.providers[provider]["streamtype"] == 'dvbc' and len(self.dvbc_nims) <= 0:
+				continue
+			if self.providers[provider]["streamtype"] == 'dvbt' and len(self.dvbt_nims) <= 0:
 				continue
 
 			self.list.append(getConfigListEntry(self.providers[provider]["name"], self.providers_configs[provider], _("This option enables the current selected provider.")))
