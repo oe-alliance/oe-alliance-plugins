@@ -300,9 +300,15 @@ class DvbScanner():
 		else:
 			print>>log, "[DvbScanner] Added/Updated %d transponders with network_id = 0x%x" % (transponders_count, nit_current_section_network_id)
 
-		if len(hd_logical_channel_number_dict_tmp) > 0 and self.bouquettype == 'hd': 
+		if len(hd_logical_channel_number_dict_tmp) > 0 and self.bouquettype == 'hd':
 			for id in logical_channel_number_dict_tmp:
 				if id in hd_logical_channel_number_dict_tmp:
+					lcntofind = hd_logical_channel_number_dict_tmp[id]["logical_channel_number"]
+					lcnreplace = logical_channel_number_dict_tmp[id]["logical_channel_number"]
+					for id2 in logical_channel_number_dict_tmp:
+						if logical_channel_number_dict_tmp[id2]["logical_channel_number"] == lcntofind:
+							logical_channel_number_dict[id] = logical_channel_number_dict_tmp[id2]
+							logical_channel_number_dict[id]["logical_channel_number"] = lcnreplace
 					logical_channel_number_dict[id] = hd_logical_channel_number_dict_tmp[id]
 				else:
 					logical_channel_number_dict[id] = logical_channel_number_dict_tmp[id]
