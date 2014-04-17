@@ -1,0 +1,18 @@
+<provider>
+	<name>SKV HD</name>
+	<protocol>lcn</protocol>
+	<streamtype>dvbc</streamtype>
+	<namespace>0xffff0000</namespace>
+	<transponder frequency="234000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3" />
+	<bouquettype>hd</bouquettype>
+	<netid>9640</netid>
+	<sections>
+		<section number="1">SKV</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+if service["number"] > 999 or service["number"] < 1:
+	skip = True
+]]>
+	</servicehacks>
+</provider>
