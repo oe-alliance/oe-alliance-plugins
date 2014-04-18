@@ -1,17 +1,17 @@
 <provider>
-	<name>TéléSAT SD Aatra 1</name>
+	<name>TV Vlaanderen SD</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>fastscan</protocol>
 	<!-- namespace could change even on the same sat...
 	     in case of use the service hacks to fix it -->
 	<namespace>c00000</namespace>
-	<transponder frequency="12515000" symbol_rate="22000000" polarization="0"
-		fec_inner="4" orbital_position="192" inversion="2" system="0"
+	<transponder frequency="12070000" symbol_rate="27500000" polarization="0"
+		fec_inner="3" orbital_position="235" inversion="2" system="0"
 		modulation="1" roll_off="0" pilot="2"
-		nit_pid="0x398" nit_current_table_id="0xbc" nit_other_table_id="0x00"
-		fastscan_pid="0x398" fastscan_table_id="0xbd" />
+		nit_pid="0x38e" nit_current_table_id="0xbc" nit_other_table_id="0x00"
+		fastscan_pid="0x38e" fastscan_table_id="0xbd" />
 	<sections>
-		<section number="1">TéléSAT SD</section>
+		<section number="1">TV Vlaanderen SD</section>
 	</sections>
 	<servicehacks>
 <![CDATA[
