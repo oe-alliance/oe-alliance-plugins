@@ -1,0 +1,38 @@
+<provider>
+	<name>FreeView</name>
+	<streamtype>dvbt</streamtype>
+	<protocol>lcn</protocol>
+	<namespace>0xeeee0000</namespace>
+	<transponder frequency="697999889" inversion="0" modulation="4" system="1" bandwidth="8000000" 
+		code_rate_hp="5" code_rate_lp="5" transmission_mode="6" guard_interval="5" hierarchy="4" 
+		nit_other_table_id="0x00" />
+	<sections>
+		<section number="101">Entertainment</section>
+		<section number="240">Lifestyle and Culture</section>
+		<section number="301">Movies</section>
+		<section number="350">Music</section>
+		<section number="401">Sports</section>
+		<section number="501">News</section>
+		<section number="520">Documentaries</section>
+		<section number="580">Religious</section>
+		<section number="601">Kids</section>
+		<section number="640">Shopping</section>
+		<section number="700">Sky Box Office</section>
+		<section number="780">International</section>
+		<section number="861">Gaming and Dating</section>
+		<section number="881">Specialist</section>
+		<section number="889">Bonus channels</section>
+		<section number="899">Sky Information</section>
+		<section number="900">Adult</section>
+		<section number="950">Other</section>
+		<section number="1000">Sky Sports Interactive</section>
+		<section number="1020">BBC Interactive</section>
+		<section number="1030">Sky Anytime</section>
+	</sections>
+	<servicehacks>
+		<![CDATA[
+		if service["number"] > 999 or service["number"] < 100:
+			skip = True
+		]]>
+	</servicehacks>
+</provider>
