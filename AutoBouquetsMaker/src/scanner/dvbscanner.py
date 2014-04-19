@@ -263,6 +263,10 @@ class DvbScanner():
 			elif transponder["dvb_type"] == 'dvbt': # DVB-T
 				transponder["namespace"] = 0xEEEE0000
 				transponder["frequency"] = transponder["frequency"] * 10
+				transponder["inversion"] = 0
+				transponder["plpid"] = 0
+				transponder["flags"] = 0
+				transponder["system"] = 0
 			elif transponder["dvb_type"] == 'dvbs': # DVB-S
 				transponder["symbol_rate"] = transponder["symbol_rate"] * 100
 				transponder["flags"] = 0
