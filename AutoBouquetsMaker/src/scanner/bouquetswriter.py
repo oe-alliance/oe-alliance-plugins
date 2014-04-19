@@ -49,18 +49,19 @@ class BouquetsWriter():
 						transponder["roll_off"],
 						transponder["pilot"]))
 			elif transponder["dvb_type"] == "dvbt":
-				lamedb.write("\tt %d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d\n" %
+				lamedb.write("\tt %d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d\n" %
 					(transponder["frequency"],
 					transponder["bandwidth"],
 					transponder["code_rate_hp"],
 					transponder["code_rate_lp"],
-					transponder["modulation_type"],
+					transponder["modulation"],
 					transponder["transmission_mode"],
 					transponder["guard_interval"],
 					transponder["hierarchy"],
 					transponder["inversion"],
 					transponder["flags"],
-					transponder["modulation_system"]))
+					transponder["system"],
+					transponder["plpid"]))
 			elif transponder["dvb_type"] == "dvbc":
 				lamedb.write("\tc %d:%d:%d:%d:%d:%d:%d\n" %
 					(transponder["frequency"],
