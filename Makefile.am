@@ -89,3 +89,11 @@ endif
 if GBQUAD
 SUBDIRS += AudioEffect
 endif
+
+if GB800SEPLUS
+SUBDIRS += AudioEffect
+endif
+
+if GB800UEPLUS
+SUBDIRS += AudioEffect
+endif
