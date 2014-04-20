@@ -1170,7 +1170,7 @@ class OpenUg(Screen):
 		tmp = '<component_uri>'
 		if tmp in data:
 			url = data.split(tmp)[1].split('</component_uri>')[0]
-			url = 'http://pg.us.rtl.nl/rtlxl/network/ipad/progressive' + url + '.ssm/' + uuid + '.mp4'
+			url = 'http://pg.us.rtl.nl/rtlxl/network/a3m/progressive' + url + '.ssm/' + uuid + '.mp4'
 			return url
 		else:
 			return ''
