@@ -1,0 +1,27 @@
+<provider>
+	<name>UPC (NL)</name>
+	<streamtype>dvbc</streamtype>
+	<protocol>lcn</protocol>
+	<namespace>0xffff0000</namespace>
+	<dvbcconfigs>
+		<configuration key="upc43136hd" netid="43136" bouquettype="hd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43136 HD</configuration>
+		<configuration key="upc43136sd" netid="43136" bouquettype="sd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43136 SD</configuration>
+		<configuration key="upc43138hd" netid="43138" bouquettype="hd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43138 HD</configuration>
+		<configuration key="upc43138sd" netid="43138" bouquettype="sd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43138 SD</configuration>
+		<configuration key="upc43140hd" netid="43140" bouquettype="hd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43140 HD</configuration>
+		<configuration key="upc43140sd" netid="43140" bouquettype="sd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43140 SD</configuration>
+		<configuration key="upc43142hd" netid="43142" bouquettype="hd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43142 HD</configuration>
+		<configuration key="upc43142sd" netid="43142" bouquettype="sd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43142 SD</configuration>
+		<configuration key="upc43144hd" netid="43144" bouquettype="hd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43144 HD</configuration>
+		<configuration key="upc43144sd" netid="43144" bouquettype="sd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43144 SD</configuration>
+		<configuration key="upc43146hd" netid="43146" bouquettype="hd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43146 HD</configuration>
+		<configuration key="upc43146sd" netid="43146" bouquettype="sd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">43146 SD</configuration>
+	</dvbcconfigs>
+	<sections>
+		<section number="1">UPC</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>

@@ -5,7 +5,7 @@
 	<transponder frequency="11778000" symbol_rate="27500000" polarization="1"
 		fec_inner="2" orbital_position="282" inversion="2" system="0"
 		modulation="1" roll_off="0" pilot="2" />
-	<configurations>
+	<dvbsconfigs>
 		<configuration key="hd_atherstone" bouquet="0x1005" region="0x13" namespace="0x11a0000">Atherstone HD</configuration>
 		<configuration key="sd_atherstone" bouquet="0x1001" region="0x13" namespace="0x11a0000">Atherstone SD</configuration>
 		<configuration key="hd_border_england" bouquet="0x1005" region="0x0c" namespace="0x11a0000">Border England HD</configuration>
@@ -86,7 +86,7 @@
 		<configuration key="sd_west_dorset" bouquet="0x1003" region="0x43" namespace="0x11a0000">West Dorset SD</configuration>
 		<configuration key="hd_westcountry" bouquet="0x1005" region="0x06" namespace="0x11a0000">Westcountry HD</configuration>
 		<configuration key="sd_westcountry" bouquet="0x1001" region="0x06" namespace="0x11a0000">Westcountry SD</configuration>
-	</configurations>
+	</dvbsconfigs>
 	<sections>
 		<section number="101">Entertainment</section>
 		<section number="240">Lifestyle and Culture</section>

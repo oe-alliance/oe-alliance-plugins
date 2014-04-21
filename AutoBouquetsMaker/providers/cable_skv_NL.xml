@@ -1,0 +1,17 @@
+<provider>
+	<name>SKV (NL)</name>
+	<streamtype>dvbc</streamtype>
+	<protocol>lcn</protocol>
+	<namespace>0xffff0000</namespace>
+	<dvbcconfigs>
+		<configuration key="skv_hd" netid="9640" bouquettype="hd" frequency="234000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">HD sortering</configuration>
+		<configuration key="skv_sd" netid="9640" bouquettype="sd" frequency="234000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">SD sortering</configuration>
+	</dvbcconfigs>
+	<sections>
+		<section number="1">SKV</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>

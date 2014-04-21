@@ -5,10 +5,10 @@
 	<transponder frequency="11976000" symbol_rate="29900000" polarization="0"
 		fec_inner="4" orbital_position="130" inversion="2" system="0"
 		modulation="1" roll_off="0" pilot="2" />
-	<configurations>
+	<dvbsconfigs>
 		<configuration key="sd_sky_italy" bouquet="0x6250" region="0x05" namespace="0x820000">SKY Italy SD</configuration>
 		<configuration key="hd_sky_italy" bouquet="0x6250" region="0x04" namespace="0x820000">SKY Italy HD</configuration>
-	</configurations>
+	</dvbsconfigs>
 	<sections>
 		<section number="100">Intrattenimento</section>
 		<section number="200">Sport</section>

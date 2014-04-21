@@ -107,7 +107,7 @@ class Manager():
 					prefix = providers[provider_key]["name"]
 
 				current_bouquet_key = self.providerConfigs[provider_key].getArea()
-				if current_bouquet_key in providers[provider_key]["bouquets"]:
+				if current_bouquet_key in providers[provider_key]["bouquets"] and providers[provider_key]["protocol"] in ("sky", "freesat"):
 					current_bouquet = providers[provider_key]["bouquets"][current_bouquet_key]["bouquet"]
 					current_region = providers[provider_key]["bouquets"][current_bouquet_key]["region"]
 				else:
@@ -163,9 +163,6 @@ class Manager():
 				scanner.setDemuxer(self.demuxer)
 				scanner.setFrontend(self.frontend)
 				scanner.setDVBType(providers[provider_key]["streamtype"])
-				scanner.setBouquetType(providers[provider_key]["bouquettype"])
-				scanner.setNetId(providers[provider_key]["netid"])
-
 				scanner.setNitPid(providers[provider_key]["transponder"]["nit_pid"])
 				scanner.setNitCurrentTableId(providers[provider_key]["transponder"]["nit_current_table_id"])
 				scanner.setNitOtherTableId(providers[provider_key]["transponder"]["nit_other_table_id"])
@@ -175,9 +172,11 @@ class Manager():
 					scanner.setSdtCurrentTableId(providers[provider_key]["transponder"]["sdt_current_table_id"])
 					scanner.setSdtOtherTableId(providers[provider_key]["transponder"]["sdt_other_table_id"])
 
-					print 'self.transponders:',self.transponders
-					tmp = scanner.updateTransponders(self.transponders, True)
-					print 'TmP:',tmp
+					if providers[provider_key]["streamtype"] == 'dvbc':
+						bouquet = providers[provider_key]["bouquets"][bouquet_key]
+						tmp = scanner.updateTransponders(self.transponders, True, bouquet["netid"],bouquet["bouquettype"])
+					else:
+						tmp = scanner.updateTransponders(self.transponders, True)
 					self.services[provider_key] = scanner.updateAndReadServicesLCN(
 							providers[provider_key]["namespace"], self.transponders,
 							providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],

@@ -195,7 +195,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 			for bouquet in bouquets.keys():
 				arealist.append((bouquet, self.providers[provider]["bouquets"][bouquet]["name"]))
 			arealist.sort()
-			if self.providers[provider]["protocol"] == "sky" or self.providers[provider]["protocol"] == "freesat":
+			if self.providers[provider]["protocol"] == "sky" or self.providers[provider]["protocol"] == "freesat" or self.providers[provider]["streamtype"] == "dvbc":
 				default_area = None
 				if provider in providers_tmp_configs:
 					default_area = providers_tmp_configs[provider].getArea()
@@ -219,7 +219,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 
 			self.list.append(getConfigListEntry(self.providers[provider]["name"], self.providers_configs[provider], _("This option enables the current selected provider.")))
 			if self.providers_configs[provider].value:
-				if self.providers[provider]["protocol"] == "sky" or self.providers[provider]["protocol"] == "freesat":
+				if self.providers[provider]["protocol"] == "sky" or self.providers[provider]["protocol"] == "freesat" or self.providers[provider]["streamtype"] == "dvbc":
 					self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("area"), self.providers_area[provider], _("This option allows you to choose what region of the country you live in, so it populates the correct channels for your region.")))
 
 				if config.autobouquetsmaker.level.value == "expert":
@@ -311,7 +311,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 				provider_config.unsetAllFlags()
 
 				provider_config.setProvider(provider)
-				if self.providers[provider]["protocol"] == "sky" or self.providers[provider]["protocol"] == "freesat":
+				if self.providers[provider]["protocol"] == "sky" or self.providers[provider]["protocol"] == "freesat" or self.providers[provider]["streamtype"] == "dvbc":
 					provider_config.setArea(self.providers_area[provider].value)
 
 				if self.providers_makemain[provider] is None or self.providers_makemain[provider].value == "yes":

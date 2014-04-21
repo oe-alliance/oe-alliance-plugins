@@ -1,0 +1,41 @@
+<provider>
+	<name>Ziggo (NL)</name>
+	<streamtype>dvbc</streamtype>
+	<protocol>lcn</protocol>
+	<namespace>0xffff0000</namespace>
+	<dvbcconfigs>
+		<configuration key="ziggo1111hd" netid="1111" bouquettype="hd" frequency="356000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">1111 HD</configuration>
+		<configuration key="ziggo1111sd" netid="1111" bouquettype="sd" frequency="356000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">1111 SD</configuration>
+		<configuration key="ziggo5555hd" netid="5555" bouquettype="hd" frequency="372000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">5555 HD</configuration>
+		<configuration key="ziggo5555sd" netid="5555" bouquettype="sd" frequency="372000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">5555 SD</configuration>
+		<configuration key="ziggo7271hd" netid="7271" bouquettype="hd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">7271 HD</configuration>
+		<configuration key="ziggo7271sd" netid="7271" bouquettype="sd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">7271 SD</configuration>
+		<configuration key="ziggo7800hd" netid="7800" bouquettype="hd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">7800 HD</configuration>
+		<configuration key="ziggo7800sd" netid="7800" bouquettype="sd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">7800 SD</configuration>
+		<configuration key="ziggo7900hd" netid="7900" bouquettype="hd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">7900 HD</configuration>
+		<configuration key="ziggo7900sd" netid="7900" bouquettype="sd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">7900 SD</configuration>
+		<configuration key="ziggo8400hd" netid="8400" bouquettype="hd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">8400 HD</configuration>
+		<configuration key="ziggo8400sd" netid="8400" bouquettype="sd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">8400 SD</configuration>
+		<configuration key="ziggo8600hd" netid="8600" bouquettype="hd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">8600 HD</configuration>
+		<configuration key="ziggo8600sd" netid="8600" bouquettype="sd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">8600 SD</configuration>
+		<configuration key="ziggo8888hd" netid="8888" bouquettype="hd" frequency="514000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">8888 HD</configuration>
+		<configuration key="ziggo8888sd" netid="8888" bouquettype="sd" frequency="514000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">8888 SD</configuration>
+		<configuration key="ziggo9001hd" netid="9001" bouquettype="hd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">9001 HD</configuration>
+		<configuration key="ziggo9001sd" netid="9001" bouquettype="sd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">9001 SD</configuration>
+		<configuration key="ziggo9003hd" netid="9003" bouquettype="hd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">9003 HD</configuration>
+		<configuration key="ziggo9003sd" netid="9003" bouquettype="sd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">9003 SD</configuration>
+		<configuration key="ziggo9004hd" netid="9004" bouquettype="hd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">9004 HD</configuration>
+		<configuration key="ziggo9004sd" netid="9004" bouquettype="sd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">9004 SD</configuration>
+		<configuration key="ziggo9600hd" netid="9600" bouquettype="hd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">9600 HD</configuration>
+		<configuration key="ziggo9600sd" netid="9600" bouquettype="sd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">9600 SD</configuration>
+		<configuration key="ziggo9700hd" netid="9700" bouquettype="hd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">9700 HD</configuration>
+		<configuration key="ziggo9700sd" netid="9700" bouquettype="sd" frequency="369000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">9700 SD</configuration>
+	</dvbcconfigs>
+	<sections>
+		<section number="1">Ziggo</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>

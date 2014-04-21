@@ -72,14 +72,6 @@ class DvbScanner():
 		self.dvbtype = id
 		print>>log, "[DvbScanner] DVBType %s" % self.dvbtype
 
-	def setBouquetType(self, id):
-		self.bouquettype = id
-		print>>log, "[DvbScanner] BouquetType %s" % self.bouquettype
-		
-	def setNetId(self, id):
-		self.netid = id
-		print>>log, "[DvbScanner] NetId %s" % self.netid
-
 	def setNitPid(self, value):
 		self.nit_pid = value
 		print>>log, "[DvbScanner] NIT pid: 0x%x" % self.nit_pid
@@ -130,7 +122,7 @@ class DvbScanner():
 
 		return namespace
 
-	def updateTransponders(self, transponders, read_other_section = False):
+	def updateTransponders(self, transponders, read_other_section = False, netid = None, bouquettype = None):
 		print>>log, "[DvbScanner] Reading transponders..."
 
 		if self.nit_other_table_id == 0x00:
@@ -191,7 +183,7 @@ class DvbScanner():
 					if len(nit_current_sections_read) == nit_current_sections_count:
 						nit_current_completed = True
 					
-			elif (str(section["header"]["network_id"]) == self.netid and self.dvbtype == 'dvbc' and not nit_current_completed):
+			elif (str(section["header"]["network_id"]) == str(netid) and self.dvbtype == 'dvbc' and not nit_current_completed):
 				if (section["header"]["version_number"] != nit_current_section_version or section["header"]["network_id"] != nit_current_section_network_id):
 					nit_current_section_version = section["header"]["version_number"]
 					nit_current_section_network_id = section["header"]["network_id"]
@@ -224,7 +216,7 @@ class DvbScanner():
 						nit_other_completed = True
 
 			if nit_current_completed and nit_other_completed:
-				print>>log, "[DvbScanner] Scan complete, netid: ", str(self.netid)
+				print>>log, "[DvbScanner] Scan complete, netid: ", str(netid)
 				break
 
 		dvbreader.close(fd)
@@ -249,7 +241,7 @@ class DvbScanner():
 				continue
 			transponder["services"] = {}
 			transponder["dvb_type"] = self.dvbtype
-			transponder["bouquet_type"] = self.bouquettype
+			transponder["bouquet_type"] = bouquettype
 			
 			if transponder["dvb_type"] == 'dvbc': # DVB-C
 				transponder["symbol_rate"] = transponder["symbol_rate"] * 100
@@ -304,7 +296,7 @@ class DvbScanner():
 		else:
 			print>>log, "[DvbScanner] Added/Updated %d transponders with network_id = 0x%x" % (transponders_count, nit_current_section_network_id)
 
-		if len(hd_logical_channel_number_dict_tmp) > 0 and self.bouquettype == 'hd':
+		if len(hd_logical_channel_number_dict_tmp) > 0 and bouquettype == 'hd':
 			for id in logical_channel_number_dict_tmp:
 				if id in hd_logical_channel_number_dict_tmp:
 					lcntofind = hd_logical_channel_number_dict_tmp[id]["logical_channel_number"]

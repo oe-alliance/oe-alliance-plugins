@@ -50,14 +50,11 @@ class Providers():
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
 							provider["streamtype"] = node.childNodes[0].data.encode("utf-8")
-							if provider["streamtype"] != "dvbc":	# prepare an empty dictionary for bouquettype
-								provider["bouquettype"] = None
-								provider["netid"] = None
 					elif node.tagName == "protocol":
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE and node.childNodes[0].data in self.VALID_PROTOCOLS:
 							provider["protocol"] = node.childNodes[0].data
-							if provider["protocol"] != "sky" and  provider["protocol"] != "freesat":	# prepare an empty dictionary for bouquets
+							if provider["protocol"] not in ("sky", "freesat") and not provider["streamtype"] == "dvbc":	# prepare an empty dictionary for bouquets
 								provider["bouquets"] = {}
 							else:
 								provider["namespace"] = 0
@@ -144,7 +141,7 @@ class Providers():
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
 							provider["netid"] = node.childNodes[0].data.encode("utf-8")
 
-					elif node.tagName == "configurations":
+					elif node.tagName == "dvbsconfigs":
 						provider["bouquets"] = {}
 						for node2 in node.childNodes:
 							if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "configuration":
@@ -165,6 +162,51 @@ class Providers():
 
 								if len(configuration.keys()) == 5:
 									provider["bouquets"][configuration["key"]] = configuration
+
+					elif node.tagName == "dvbcconfigs":
+						provider["bouquets"] = {}
+						transponder = {}
+						transponder["nit_pid"] = 0x10
+						transponder["nit_current_table_id"] = 0x40
+						transponder["nit_other_table_id"] = 0x41
+						transponder["sdt_pid"] = 0x11
+						transponder["sdt_current_table_id"] = 0x42
+						transponder["sdt_other_table_id"] = 0x46
+						transponder["bat_pid"] = 0x11
+						transponder["bat_table_id"] = 0x4a
+						for node2 in node.childNodes:
+							if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "configuration":
+								configuration = {}
+								for i in range(0, node2.attributes.length):
+									if node2.attributes.item(i).name == "key":
+										configuration["key"] = node2.attributes.item(i).value
+									elif node2.attributes.item(i).name == "netid":
+										configuration["netid"] = int(node2.attributes.item(i).value)
+									elif node2.attributes.item(i).name == "bouquettype":
+										configuration["bouquettype"] = node2.attributes.item(i).value
+									elif node2.attributes.item(i).name == "frequency":
+										transponder["frequency"] = int(node2.attributes.item(i).value)
+									elif node2.attributes.item(i).name == "symbol_rate":
+										transponder["symbol_rate"] = int(node2.attributes.item(i).value)
+									elif node2.attributes.item(i).name == "fec_inner":
+										transponder["fec_inner"] = int(node2.attributes.item(i).value)
+									elif node2.attributes.item(i).name == "inversion":
+										transponder["inversion"] = int(node2.attributes.item(i).value)
+									elif node2.attributes.item(i).name == "system":
+										transponder["system"] = int(node2.attributes.item(i).value)
+									elif node2.attributes.item(i).name == "modulation":
+										transponder["modulation"] = int(node2.attributes.item(i).value)
+
+								node2.normalize()
+								if len(node2.childNodes) == 1 and node2.childNodes[0].nodeType == node2.TEXT_NODE:
+									configuration["name"] = node2.childNodes[0].data
+
+								if len(configuration.keys()) == 4:
+									provider["bouquets"][configuration["key"]] = configuration
+
+						if len(transponder.keys()) == 14:
+							provider["transponder"] = transponder
+
 
 					elif node.tagName == "sections":
 						provider["sections"] = {}
@@ -232,8 +274,6 @@ class Providers():
 			if not ("name" in provider
 					and "protocol" in provider
 					and "streamtype" in provider
-					and "bouquettype" in provider
-					and "netid" in provider
 					and "namespace" in provider
 					and "bouquets" in provider
 					and "sections" in provider

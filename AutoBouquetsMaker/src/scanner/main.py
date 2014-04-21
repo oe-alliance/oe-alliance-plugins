@@ -34,7 +34,7 @@ except:
 
 class AutoBouquetsMaker(Screen):
 	skin = """
-	<screen position="c-300,e-80" size="600,70" title="CrossEPG" flags="wfNoBorder" >
+	<screen position="c-300,e-80" size="600,70" flags="wfNoBorder" >
 		<widget name="background" position="0,0" size="600,70" zPosition="-1" />
 		<widget name="action" halign="center" valign="center" position="65,10" size="520,20" font="Regular;18" backgroundColor="#11404040" transparent="1" />
 		<widget name="status" halign="center" valign="center" position="65,35" size="520,20" font="Regular;18" backgroundColor="#11000000" transparent="1" />
@@ -516,7 +516,6 @@ class AutoAutoBouquetsMakerTimer:
 		now = int(time())
 		if answer is False:
 			if config.autobouquetsmaker.retrycount.value < 2:
-				print '[AutoBouquetsMaker] Number of retries',config.autobouquetsmaker.retrycount.value
 				print>>log, "[AutoBouquetsMaker] AutoBouquetsMaker delayed."
 				repeat = config.autobouquetsmaker.retrycount.value
 				repeat += 1
@@ -537,7 +536,6 @@ class AutoAutoBouquetsMakerTimer:
 			self.timer.start(100, 1)
 
 	def doautostartscan(self):
-		print 'STARTing'
 		self.session.open(AutoBouquetsMaker)
 
 	def doneConfiguring(self):

@@ -5,10 +5,10 @@
 	<transponder frequency="11778000" symbol_rate="27500000" polarization="1"
 		fec_inner="2" orbital_position="282" inversion="2" system="0"
 		modulation="1" roll_off="0" pilot="2" />
-	<configurations>
+	<dvbsconfigs>
 		<configuration key="hd_htv_wales" bouquet="0x1007" region="0x2b" namespace="0x11a0000">HTV Wales HD</configuration>
 		<configuration key="sd_htv_wales" bouquet="0x1003" region="0x2b" namespace="0x11a0000">HTV Wales SD</configuration>
-	</configurations>
+	</dvbsconfigs>
 	<sections>
 		<section number="101">Entertainment</section>
 		<section number="240">Lifestyle and Culture</section>

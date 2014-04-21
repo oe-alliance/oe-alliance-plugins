@@ -6,7 +6,7 @@
 		fec_inner="2" orbital_position="282" inversion="2" system="0"
 		modulation="1" roll_off="0" pilot="2"
 		bat_pid="0xf01" />
-	<configurations>
+	<dvbsconfigs>
 		<configuration key="freesat_100_1" bouquet="0x100" region="0x1" namespace="0x11a0000">England SD: London/London</configuration>
 		<configuration key="freesat_100_2" bouquet="0x100" region="0x2" namespace="0x11a0000">England SD: East (W)/Anglia W</configuration>
 		<configuration key="freesat_100_3" bouquet="0x100" region="0x3" namespace="0x11a0000">England SD: East (W)/Central S</configuration>
@@ -95,7 +95,7 @@
 		<configuration key="freesat_111_40" bouquet="0x111" region="0x40" namespace="0x11a0000">Scotland HD: Scotland/Scottish (Edinburgh)</configuration>
 		<configuration key="freesat_112_50" bouquet="0x112" region="0x50" namespace="0x11a0000">Wales HD: Wales</configuration>
 		<configuration key="freesat_113_5a" bouquet="0x113" region="0x5a" namespace="0x11a0000">Northern Ireland HD: Northern Ireland</configuration>
-	</configurations>
+	</dvbsconfigs>
 	<sections>
 		<section number="101">Entertainment</section>
 		<section number="200">News and Sport</section>

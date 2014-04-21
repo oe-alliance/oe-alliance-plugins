@@ -1,0 +1,41 @@
+<provider>
+	<name>Caiway (NL)</name>
+	<streamtype>dvbc</streamtype>
+	<protocol>lcn</protocol>
+	<namespace>0xffff0000</namespace>
+	<dvbcconfigs>
+		<configuration key="caiway2249hd" netid="2249" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">2249 HD</configuration>
+		<configuration key="caiway2249sd" netid="2249" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">2249 SD</configuration>
+		<configuration key="caiway6227hd" netid="6227" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">6227 HD</configuration>
+		<configuration key="caiway6227sd" netid="6227" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">6227 SD</configuration>
+		<configuration key="caiway2257hd" netid="2257" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">2257 HD</configuration>
+		<configuration key="caiway2257sd" netid="2257" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">2257 SD</configuration>
+		<configuration key="caiway6536hd" netid="6536" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">6536 HD</configuration>
+		<configuration key="caiway6536sd" netid="6536" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">6536 SD</configuration>
+		<configuration key="caiway5636hd" netid="5636" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">5636 HD</configuration>
+		<configuration key="caiway5636sd" netid="5636" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">5636 SD</configuration>
+		<configuration key="caiway7244hd" netid="7244" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">7244 HD</configuration>
+		<configuration key="caiway7244sd" netid="7244" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">7244 SD</configuration>
+		<configuration key="caiway7224hd" netid="7224" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">7224 HD</configuration>
+		<configuration key="caiway7224sd" netid="7224" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">7224 SD</configuration>
+		<configuration key="caiway3667hd" netid="3667" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">3667 HD</configuration>
+		<configuration key="caiway3667sd" netid="3667" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">3667 SD</configuration>
+		<configuration key="caiway4683hd" netid="4683" bouquettype="hd" frequency="538000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">4683 HD</configuration>
+		<configuration key="caiway4683sd" netid="4683" bouquettype="sd" frequency="538000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">4683 SD</configuration>
+		<configuration key="caiway4458hd" netid="4458" bouquettype="hd" frequency="444000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">4458 HD</configuration>
+		<configuration key="caiway4458sd" netid="4458" bouquettype="sd" frequency="444000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">4458 SD</configuration>
+		<configuration key="caiway2273hd" netid="2273" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">2273 HD</configuration>
+		<configuration key="caiway2273sd" netid="2273" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">2273 SD</configuration>
+		<configuration key="caiway2222hd" netid="2222" bouquettype="hd" frequency="338000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">2222 HD</configuration>
+		<configuration key="caiway2222sd" netid="2222" bouquettype="sd" frequency="338000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">2222 SD</configuration>
+		<configuration key="caiway2000hd" netid="2000" bouquettype="hd" frequency="325000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">2000 HD</configuration>
+		<configuration key="caiway2000sd" netid="2000" bouquettype="sd" frequency="325000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">2000 SD</configuration>
+	</dvbcconfigs>
+	<sections>
+		<section number="1">Caiway</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>
