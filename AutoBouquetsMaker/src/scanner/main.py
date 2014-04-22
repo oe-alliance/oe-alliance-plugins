@@ -198,7 +198,25 @@ class AutoBouquetsMaker(Screen):
 
 	def doTune(self):
 		from Screens.Standby import inStandby
-		transponder = self.providers[self.currentAction]["transponder"]
+		if self.providers[self.currentAction]["streamtype"] == "dvbs":
+			transponder = self.providers[self.currentAction]["transponder"]
+		else:
+			bouquet_key = None
+			providers_tmp = config.autobouquetsmaker.providers.value.split("|")
+			for provider_tmp in providers_tmp:
+				provider_config = ProviderConfig(provider_tmp)
+				provider_key = provider_config.getProvider()
+				if self.currentAction != provider_key:
+					continue
+				bouquet_key = provider_config.getArea()
+
+			if not bouquet_key:
+				print>>log, "[AutoBouquetsMaker] No area found"
+				self.showError(_('No area found'))
+				return
+			
+			transponder = self.providers[self.currentAction]["bouquets"][bouquet_key]
+
 		nimList = []
 		for nim in nimmanager.nim_slots:
 			if (self.providers[self.currentAction]["streamtype"] == "dvbs" and nim.isCompatible("DVB-S") and nim.config_mode not in ("loopthrough")) or (self.providers[self.currentAction]["streamtype"] == "dvbc" and nim.isCompatible("DVB-C")) or (self.providers[self.currentAction]["streamtype"] == "dvbt" and nim.isCompatible("DVB-T")):
