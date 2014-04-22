@@ -23,6 +23,7 @@ from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.GUIComponent import GUIComponent
 from Components.HTMLComponent import HTMLComponent
+from Components.config import config
 from Screens.Screen import Screen
 from Screens.InfoBar import MoviePlayer as MP_parent
 from Screens.MessageBox import MessageBox
@@ -413,13 +414,37 @@ class StreamsThumbCommon(Screen):
 ###########################################################################
 class MyHTTPConnection(HTTPConnection):
 	def connect (self):
-		resolver = Resolver()
-		resolver.nameservers = ['185.37.37.37']  #Unlocator dns address
-		#resolver.nameservers = ['69.197.169.9']  #tunlr dns address (Now losed down)
-		#resolver.nameservers = ['208.122.23.22']  #Unblock-US dns address (Premium DNS)
-		answer = resolver.query(self.host,'A')
-		self.host = answer.rrset.items[0].address
-		self.sock = socket.create_connection ((self.host, self.port))
+		try:
+			primaryDNS = str(config.ondemand.PrimaryDNS.value)[1:-1]
+			primaryDNS = primaryDNS.replace(" ", "")
+			primaryDNS = primaryDNS.replace(",", ".")
+			myDNS = []
+			myDNS.append(primaryDNS)
+			resolver = Resolver()
+			resolver.nameservers = myDNS  #DNS Now coming from OnDemand Settings
+			answer = resolver.query(self.host,'A')
+			self.host = answer.rrset.items[0].address
+			self.sock = socket.create_connection ((self.host, self.port))
+		except (Exception) as exception:
+			print "MyHTTPConnection: Failed to Connect to: ", primaryDNS, " , error: ", exception
+
+			try:
+				secondaryDNS = str(config.ondemand.SecondaryDNS.value)
+
+				if  secondaryDNS != str(config.ondemand.SecondaryDNS.default):
+					secondaryDNS = str(config.ondemand.SecondaryDNS.value)[1:-1]
+					secondaryDNS = secondaryDNS.replace(" ", "")
+					secondaryDNS = secondaryDNS.replace(",", ".")
+					myDNS = []
+					myDNS.append(secondaryDNS)
+					resolver = Resolver()
+					resolver.nameservers = myDNS  #DNS Now coming from OnDemand Settings
+					answer = resolver.query(self.host,'A')
+					self.host = answer.rrset.items[0].address
+					self.sock = socket.create_connection ((self.host, self.port))
+
+			except (Exception) as exception:
+				print "MyHTTPConnection: Failed to Connect to: ", secondaryDNS, " , error: ", exception
 
 class MyHTTPHandler(urllib2.HTTPHandler):
 	def http_open(self, req):

@@ -20,7 +20,7 @@
 # for localized messages
 from . import _
 
-from Components.config import config, ConfigYesNo, ConfigSubsection, ConfigSelection
+from Components.config import config, ConfigYesNo, ConfigSubsection, ConfigSelection, ConfigIP
 from Plugins.Plugin import PluginDescriptor
 from ui import OnDemand_Screen
 
@@ -43,6 +43,8 @@ config.ondemand.ShowShoutcastLogos = ConfigYesNo(default = True)
 config.ondemand.ShowShoutcastDefault = ConfigYesNo(default = True)
 config.ondemand.ShowTuneinLogos = ConfigYesNo(default = True)
 config.ondemand.ShowTuneinDefault = ConfigYesNo(default = True)
+config.ondemand.PrimaryDNS = ConfigIP(default = [0,0,0,0])
+config.ondemand.SecondaryDNS = ConfigIP(default = [0,0,0,0])
 		
 def OnDemanMenu(menuid):
 	if menuid == "mainmenu":

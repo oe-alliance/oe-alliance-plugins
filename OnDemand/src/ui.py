@@ -71,6 +71,9 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.configlist.append(getConfigListEntry((_("iRadio: Display SHOUTcast Default Thumbnails")), config.ondemand.ShowShoutcastDefault))
 		self.configlist.append(getConfigListEntry((_("iRadio: Display Tunein Thumbnails")), config.ondemand.ShowTuneinLogos))
 		self.configlist.append(getConfigListEntry((_("iRadio: Display Tunein Default Thumbnails")), config.ondemand.ShowTuneinDefault))
+		
+		self.configlist.append(getConfigListEntry((_("Primary DNS: To watch UK Streams outside the UK")), config.ondemand.PrimaryDNS))
+		self.configlist.append(getConfigListEntry((_("Secondary DNS: A backup DNS if the primary is down")), config.ondemand.SecondaryDNS))
 
 		self["config"].setList(self.configlist)
 		

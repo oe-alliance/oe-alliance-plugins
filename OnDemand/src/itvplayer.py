@@ -38,6 +38,9 @@ import urllib2, re
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
+__plugin__  = "ITV Player: "
+__version__ = "Version 1.0.2: "
+
 #===================================================================================
 class ITVplayer(Screen):
 	wsize = getDesktop(0).size().width() - 200
@@ -141,7 +144,8 @@ class StreamsThumb(StreamsThumbCommon):
 		if self.cmd == "all_shows" or self.cmd == "search":
 			self.session.open(StreamsThumb, "one_show", showName, showID)
 		else:
-			fileUrl = self.findPlayUrl(showID)
+			retMessage = ""
+			(fileUrl, retMessage) = self.findPlayUrl(showID)
 
 			if fileUrl:
 				fileRef = eServiceReference(4097,0,fileUrl)
@@ -149,7 +153,10 @@ class StreamsThumb(StreamsThumbCommon):
 				fileRef.setName(showName)
 				self.session.open(MoviePlayer, fileRef)
 			else:
-				self.mediaProblemPopup("Sorry, unable to find playable stream!")
+				if retMessage:
+					self.mediaProblemPopup(retMessage+str(showName))
+				else:
+					self.mediaProblemPopup("Sorry, unable to find a playable stream for "+str(showName))
 
 #===================================================================================
 	def getMediaData(self, weekList, url):
@@ -195,7 +202,7 @@ class StreamsThumb(StreamsThumbCommon):
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print 'getMediaData: Error getting Media info: ', exception
+			print __plugin__, __version__,'getMediaData: Error getting Media info: ', exception
 
 #===================================================================================
 	def getShowMediaData(self, weekList, progID):
@@ -246,7 +253,7 @@ class StreamsThumb(StreamsThumbCommon):
 					contentSet = False
 
 		except (Exception) as exception:
-			print 'getCatsMediaData: Error getting Media info: ', exception
+			print __plugin__, __version__,'getCatsMediaData: Error getting Media info: ', exception
 
 #===================================================================================
 	def getSearchMediaData(self, weekList, url, query):
@@ -275,7 +282,6 @@ class StreamsThumb(StreamsThumbCommon):
 				if re.search(query, name, re.IGNORECASE):
 					stream = str(elem[0].text)
 					date_tmp = str(elem[4].text)
-					print "getSearchMediaData: date_tmp: ", date_tmp
 
 					# Only set the Icon if they are enabled
 					if self.showIcon == 'True':
@@ -298,7 +304,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print 'getSearchMediaData: Error getting Media info: ', exception
+			print __plugin__, __version__,'getSearchMediaData: Error getting Media info: ', exception
 
 #===================================================================================
 	
@@ -314,7 +320,8 @@ class StreamsThumb(StreamsThumbCommon):
 
 		try:
 			# Read the URL to get the stream options
-			html = self.wgetUrl(url)
+			retMessage = ""
+			(html, retMessage) = self.wgetUrl(url)
 
 			# Only attempt to parse the XML if data has been returned
 			if html:
@@ -340,18 +347,19 @@ class StreamsThumb(StreamsThumbCommon):
 						currQuality = quality
 						prefStream = streamUrl
 						fileUrl = rtmp + " swfurl=http://www.itv.com/mercury/Mercury_VideoPlayer.swf playpath=" + prefStream + " swfvfy=true"
-			else:
-				return ""
 
 			# If we have found a stream then return it.
 			if fileUrl:
-				return fileUrl
+				return (fileUrl,"")
 			else:
-				return ""
+				if retMessage:
+					return ("", retMessage)
+				else:
+					return ("", "Unable to find a playable stream! Could not play ")
 
 		except (Exception) as exception:
-			print 'findPlayUrl: Error getting URLs: ', exception
-			return ""
+			print __plugin__, __version__,'findPlayUrl: Error getting URLs: ', exception
+			return ("", "findPlayUrl: Error getting URLs! Could not play ")
 
 #========== Retrieve the webpage data ==============================================
 	def wgetUrl(self, episodeID):
@@ -384,6 +392,9 @@ class StreamsThumb(StreamsThumbCommon):
 
 		url = 'http://mercury.itv.com/PlaylistService.svc'
 		htmldoc = ""
+		primaryDNS = str(config.ondemand.PrimaryDNS.value)
+		print __plugin__, __version__,"DNS Set: ", primaryDNS
+		print __plugin__, __version__,"Default DNS Set: ", str(config.ondemand.PrimaryDNS.default)
 
 		try:
 			req = urllib2.Request(url, soapMessage)
@@ -399,25 +410,36 @@ class StreamsThumb(StreamsThumbCommon):
 			exResp = str(exception.read())
 
 			if 'InvalidGeoRegion' in exResp:
-				print "Non UK Address"
-				opener = urllib2.build_opener(MyHTTPHandler)
-				old_opener = urllib2._opener
-				urllib2.install_opener (opener)
-				req = urllib2.Request(url, soapMessage)
-				req.add_header("Host","mercury.itv.com")
-				req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
-				req.add_header("Content-type","text/xml; charset=\"UTF-8\"")
-				req.add_header("Content-length","%d" % len(soapMessage))
-				req.add_header("SOAPAction","http://tempuri.org/PlaylistService/GetPlaylist")	 
-				response = urllib2.urlopen(req)	  
-				htmldoc = str(response.read())
-				response.close()
-				urllib2.install_opener (old_opener)
+				print __plugin__, __version__,"Non UK Address!!"
+				
+				if  primaryDNS == str(config.ondemand.PrimaryDNS.default):
+					print __plugin__, __version__,"Non UK Address: NO DNS Set!! ", primaryDNS
+					return ("", "Non-UK IP Address and no DNS set in OnDemand Settings! Not able to play ")
+				else:
+					try:
+						opener = urllib2.build_opener(MyHTTPHandler)
+						old_opener = urllib2._opener
+						urllib2.install_opener (opener)
+						req = urllib2.Request(url, soapMessage)
+						req.add_header("Host","mercury.itv.com")
+						req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
+						req.add_header("Content-type","text/xml; charset=\"UTF-8\"")
+						req.add_header("Content-length","%d" % len(soapMessage))
+						req.add_header("SOAPAction","http://tempuri.org/PlaylistService/GetPlaylist")	 
+						response = urllib2.urlopen(req)	  
+						htmldoc = str(response.read())
+						response.close()
+						urllib2.install_opener (old_opener)
+
+					except (Exception) as exception:
+						print __plugin__, __version__,"wgetUrl: Unable to connect to DNS: ", exception
+						return ("", "Could not connect to "+primaryDNS+", make sure your subscription is valid! Not able to play ")
 			else:
-				print "HTTPError: Error retrieving stream: ", exResp
-				return ""
+				print __plugin__, __version__,"HTTPError: Error retrieving stream: ", exResp
+				return ("", "Could not retrieve a playable stream for ")
+
 		except (Exception) as exception2:
-			print "wgetUrl: Error calling urllib2: ", exception2
-			return ""
+			print __plugin__, __version__,"wgetUrl: Error calling urllib2: ", exception2
+			return ("", "Could not retrieve a playable stream for ")
 		
-		return htmldoc
+		return (htmldoc, "")

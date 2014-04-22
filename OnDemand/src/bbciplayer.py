@@ -42,7 +42,7 @@ from lxml import html
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 __plugin__  = "BBC iPlayer: "
-__version__ = "Version 1.0.1: "
+__version__ = "Version 1.0.2: "
 
 #===================================================================================
 
@@ -385,6 +385,9 @@ class StreamsThumb(StreamsThumbCommon):
 		limelightFound = False
 		currQuality = 0
 		prefQuality = int(config.ondemand.PreferredQuality.value)
+		primaryDNS = str(config.ondemand.PrimaryDNS.value)
+		print __plugin__, __version__,"DNS Set: ", primaryDNS
+		print __plugin__, __version__,"Default DNS Set: ", str(config.ondemand.PrimaryDNS.default)
 
 		try:
 			# Read the URL to get the stream options
@@ -399,16 +402,26 @@ class StreamsThumb(StreamsThumbCommon):
 
 			if html1.find('notukerror') > 0:
 				notUK = 1
-				print __plugin__, __version__,"Non UK Address: Using TUNLR!!"
-				opener = urllib2.build_opener(MyHTTPHandler)
-				old_opener = urllib2._opener
-				urllib2.install_opener (opener)
-				req = urllib2.Request(url2)
-				req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-				response = urllib2.urlopen(req)
-				html1 = str(response.read())
-				response.close()
-				urllib2.install_opener (old_opener)
+				print __plugin__, __version__,"Non UK Address!!"
+				
+				if  primaryDNS == str(config.ondemand.PrimaryDNS.default):
+					print __plugin__, __version__,"Non UK Address: NO DNS Set!! ", primaryDNS
+					return ("", "Non-UK IP Address and no DNS set in OnDemand Settings! Not able to play ")
+				else:
+					try:
+						opener = urllib2.build_opener(MyHTTPHandler)
+						old_opener = urllib2._opener
+						urllib2.install_opener (opener)
+						req = urllib2.Request(url2)
+						req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
+						response = urllib2.urlopen(req)
+						html1 = str(response.read())
+						response.close()
+						urllib2.install_opener (old_opener)
+
+					except (Exception) as exception:
+						print __plugin__, __version__,"findPlayUrl: Unable to connect to DNS: ", exception
+						return ("", "Could not connect to "+primaryDNS+", make sure your subscription is valid! Not able to play ")
 
 			# Parse the HTML returned
 			doc = dom.parseString(html1)
@@ -522,7 +535,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 		except (Exception) as exception:
 			print __plugin__, __version__,"findPlayUrl: Error getting URLs: ", exception
-			return ""
+			return ("", "findPlayUrl: Error getting URLs! Could not play ")
 		
 #===================================================================================
 	def getHosts(self, conn, service):
