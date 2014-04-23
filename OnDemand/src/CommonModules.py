@@ -415,9 +415,7 @@ class StreamsThumbCommon(Screen):
 class MyHTTPConnection(HTTPConnection):
 	def connect (self):
 		try:
-			primaryDNS = str(config.ondemand.PrimaryDNS.value)[1:-1]
-			primaryDNS = primaryDNS.replace(" ", "")
-			primaryDNS = primaryDNS.replace(",", ".")
+			primaryDNS = ".".join("%d" % d for d in config.ondemand.PrimaryDNS.value)
 			myDNS = []
 			myDNS.append(primaryDNS)
 			resolver = Resolver()
@@ -432,9 +430,7 @@ class MyHTTPConnection(HTTPConnection):
 				secondaryDNS = str(config.ondemand.SecondaryDNS.value)
 
 				if  secondaryDNS != str(config.ondemand.SecondaryDNS.default):
-					secondaryDNS = str(config.ondemand.SecondaryDNS.value)[1:-1]
-					secondaryDNS = secondaryDNS.replace(" ", "")
-					secondaryDNS = secondaryDNS.replace(",", ".")
+					secondaryDNS = ".".join("%d" % d for d in config.ondemand.SecondaryDNS.value)
 					myDNS = []
 					myDNS.append(secondaryDNS)
 					resolver = Resolver()
