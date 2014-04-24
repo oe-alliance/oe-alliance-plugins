@@ -1,7 +1,6 @@
 <setupxml>
 	<setup key="transcoding" title="Transcoding Setup" showOpenWebIF="1">
 		<item level="0" text="Port">config.plugins.transcodingsetup.port</item>
-		<item level="0" text="Encoder" requires="MultipleEncoders">config.plugins.transcodingsetup.encodernum</item>
 		<item level="0" text="Encoder 0: Auto mode (Bitrate/Framerate)" requires="AdvancedTranscoding">config.plugins.transcodingsetup.encoder[0].automode</item>
 		<item level="0" text="Encoder 0: Bitrate">config.plugins.transcodingsetup.encoder[0].bitrate</item>
 		<item level="0" text="Encoder 0: Framerate">config.plugins.transcodingsetup.encoder[0].framerate</item>

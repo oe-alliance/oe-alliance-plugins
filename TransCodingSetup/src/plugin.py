@@ -26,7 +26,7 @@ def getProcValue(procPath):
 	return curValue
 
 def setProcValue(procPath, value):
-#	print "[TranscodingSetup] set %s to %s" % (procPath, value)
+	print "[TranscodingSetup] set %s to %s" % (procPath, value)
 	fd = open(procPath,'w')
 	fd.write(value)
 	fd.close()
@@ -61,13 +61,13 @@ config.plugins.transcodingsetup.encoder = ConfigSubList()
 def createTransCodingConfig(encoder):
 	if fileExists(getProcPath(encoder ,"bitrate")):
 		if getBoxType() == "vusolo2":
-			choice = ConfigSelection(default = "400000", choices=[("50000", "50 Kbits"), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
+			choice = ConfigSelection(default = "400000", choices=[("-1", "Auto"), ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
 		else:
-			choice = ConfigSelection(default = "2000000", choices=[("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("750000", "750 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits"), ("10000000", "10 Mbits")])
+			choice = ConfigSelection(default = "2000000", choices=[("-1", "Auto"), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("750000", "750 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits"), ("10000000", "10 Mbits")])
 		config.plugins.transcodingsetup.encoder[int(encoder)].bitrate = choice
 
 	if fileExists(getProcPath(encoder ,"framerate")):
-		choice = ConfigSelection(default = "50000", choices = [("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps"), ("30000", "30 fps"), ("50000", "50 fps"), ("59940", "59.940 fps"), ("60000", "60 fps")])
+		choice = ConfigSelection(default = "50000", choices = [("-1", "Auto"), ("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps"), ("30000", "30 fps"), ("50000", "50 fps"), ("59940", "59.940 fps"), ("60000", "60 fps")])
 		config.plugins.transcodingsetup.encoder[int(encoder)].framerate = choice
 	
 	if checkSupportAdvanced():
@@ -143,10 +143,6 @@ class TranscodingSetupInit:
 		self.pluginsetup = None
 		self.setTranscoding()
 		for encoder in encoders:
-			if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "automode"):
-				if config.plugins.transcodingsetup.encoder[int(encoder)].automode.getValue() == "On":
-					config.plugins.transcodingsetup.encoder[int(encoder)].automode.addNotifier(self.setAutomode, extra_args=[int(encoder)])
-
 			if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "bitrate"):
 				config.plugins.transcodingsetup.encoder[int(encoder)].bitrate.addNotifier(self.setBitrate, extra_args=[int(encoder)])
 
@@ -177,6 +173,9 @@ class TranscodingSetupInit:
 			if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "profile"):
 				config.plugins.transcodingsetup.encoder[int(encoder)].profile.addNotifier(self.setProfile, extra_args=[int(encoder)])
 
+			if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "automode"):
+				config.plugins.transcodingsetup.encoder[int(encoder)].automode.addNotifier(self.setAutomode, extra_args=[int(encoder)])
+
 		config.plugins.transcodingsetup.port.addNotifier(self.setPort)
 
 	def setConfig(self, procPath, value):
@@ -187,15 +186,12 @@ class TranscodingSetupInit:
 		else:
 			value = str(value)
 		try:
-			oldValue = getProcValue(procPath)
-			if oldValue != value:
-				# print "[TranscodingSetup] set %s "%procPath, value
-				setProcValue(procPath, value)
-				setValue = getProcValue(procPath)
-				if value != setValue:
-					print "[TranscodingSetup] set failed. (%s > %s)" % (value, procPath)
-					return -1
-				return 0
+			setProcValue(procPath, value)
+			setValue = getProcValue(procPath)
+			if value != setValue:
+				print "[TranscodingSetup] set failed. (%s > %s)" % (value, procPath)
+				return -1
+			return 0
 		except:
 			print "setConfig exception error (%s > %s)" % (value, procPath)
 			return -1
@@ -203,9 +199,8 @@ class TranscodingSetupInit:
 
 	def setupConfig(self, configElement, procPath):
 		if fileExists(procPath):
-			print "[TranscodingSetup] set %s to %s" % (procPath, configElement.value)
-			configValue = configElement.getValue()
-			if self.setConfig(procPath, configValue):
+			# print "[TranscodingSetup] set %s to %s" % (procPath, configElement.value)
+			if self.setConfig(procPath, configElement.value):
 				# set config failed, reset to current proc value
 				self.getConfigFromProc(procPath, configElement)
 				self.showMessage("Set %s failed." % (procPath), MessageBox.TYPE_ERROR)
@@ -224,18 +219,20 @@ class TranscodingSetupInit:
 
 	def setAutomode(self, configElement, extra_args):
 		configName = "AutoMode"
-		# print "[TranscodingSetup]  setAutomode, configName %s, value %s" % (configName, configElement.value)
+		SystemInfo["NoAuto"+str(extra_args[0])] = config.plugins.transcodingsetup.encoder[int(extra_args[0])].automode.value == 'Off'
 		if configElement.value == "On":
-			autoValue = str(-1)
-			if (hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "bitrate") and self.setConfig(getProcPath(int(extra_args[0]) ,"bitrate"), autoValue)) or (hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "framerate") and self.setConfig(getProcPath(int(extra_args[0]), "framerate"), autoValue)):
-				configElement.value = "Off" # set config failed, reset to previous value
+			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "bitrate") and hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "framerate"):
+				config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.setValue("-1")
+				config.plugins.transcodingsetup.encoder[int(extra_args[0])].framerate.setValue("-1")
+			else:
+				configElement.setValue("Off") # set config failed, reset to previous value
 				configElement.save()
 				self.showMessage("Set %s failed." % (configName), MessageBox.TYPE_ERROR)
 		else: # Off
 			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "bitrate"):
-				self.setBitrate(config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate)
+				config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.setValue(config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.default)
 			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "framerate"):
-				self.setFramerate(config.plugins.transcodingsetup.encoder[int(extra_args[0])].framerate)
+				config.plugins.transcodingsetup.encoder[int(extra_args[0])].framerate.setValue(config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.default)
 
 	def setBitrate(self, configElement, extra_args):
 		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"bitrate"))
@@ -423,7 +420,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 			if self.automode is not None:
 				self.list.append(self.automode)
 
-			if not hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "automode") or (hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "automode") and config.plugins.transcodingsetup.encoder[int(encoder)].automode.getValue() != "On"):
+			if SystemInfo["NoAuto"+str(encoder)]:
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "bitrate"):
 					self.list.append(getConfigListEntry(_("Bitrate"), config.plugins.transcodingsetup.encoder[int(encoder)].bitrate))
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "framerate"):
@@ -492,7 +489,10 @@ class TranscodingSetup(Screen,ConfigListScreen):
 
 	def KeyDefault(self):
 		for x in self["config"].list:
-			x[1].setValue(x[1].default)
+			if x[0] != 'Encoder':
+				x[1].setValue(x[1].default)
+				x[1].save()
+			configfile.save()
 		self.createSetup()
 
 	def cancelConfirm(self, result):
