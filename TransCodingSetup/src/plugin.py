@@ -129,8 +129,10 @@ if len(encoders) > 1:
 	encoders.sort()
 	for encoder in encoders:
 		choices.append((encoder, encoder))
+		SystemInfo["NoAuto"+str(encoder)] = True
 else:
 	choices.append(('0','0'))
+	SystemInfo["NoAuto0"] = True
 	
 config.plugins.transcodingsetup.encodernum = ConfigSelection(default = '0', choices = choices)
 
