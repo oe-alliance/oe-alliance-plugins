@@ -27,6 +27,7 @@ from datetime import date, timedelta
 import time
 import urlparse
 import httplib
+import base64
 
 
 
@@ -37,7 +38,7 @@ config.plugins.OpenUitzendingGemist.Npolivestreams = ConfigBoolean(default = Fal
 
 def wgetUrl(target):
 	std_headers = {
-		'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
+		'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:28.0) Gecko/20100101 Firefox/28.0',
 		'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
 		'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 		'Accept-Language': 'en-us,en;q=0.5',
@@ -1580,12 +1581,23 @@ class OpenUg(Screen):
 	def getDumpertStream(self, url):
 		data = wgetUrl(url)
 		url = ''
-		data = Csplit(data, '<section id="content">', 1)
+		data = Csplit(data, '<div class="dump-player">', 1)
 		data = Csplit(data, '<div id="commentscontainer">', 0)
-		tmp = 'data-vidurl="'
+		tmp = 'class="videoplayer"'
 		if tmp in data:
-			url = data.split(tmp)[1].split('"')[0]
-		return url
+			tmp = 'data-files="'
+			if tmp in data:
+				url = data.split(tmp)[1].split('"')[0]
+				url = base64.b64decode(url)
+				url = url.replace("{","").replace("}","").split(",")
+				for line in url:
+					if '"720p"' in line:
+						url = line.split('":"')[1].replace("\/","/").replace('"','')
+						return url
+					if '"tablet"' in line:
+						url = line.split('":"')[1].replace("\/","/").replace('"','')
+				return url
+		return
 
 	def rver(self, mediaList, url):
 		data = wgetUrl(url)
