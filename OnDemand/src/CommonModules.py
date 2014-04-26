@@ -463,9 +463,10 @@ class MoviePlayer(MP_parent):
 
 ###########################################################################	   
 class RTMP:
-	def __init__(self, rtmp, auth = None, app = None, playPath = None, swfUrl = None, swfVfy = None, pageUrl = None, live = None):
-				
+	def __init__(self, rtmp, tcUrl = None, auth = None, app = None, playPath = None, swfUrl = None, swfVfy = None, pageUrl = None, live = None, socks = None, port = None):
+
 		self.rtmp = rtmp
+		self.tcUrl = tcUrl
 		self.auth = auth
 		self.app = app
 		self.playPath = playPath
@@ -473,8 +474,35 @@ class RTMP:
 		self.swfVfy = swfVfy
 		self.pageUrl = pageUrl
 		self.live = live
+		self.socks = socks
+		self.port = port
+
+		self.rtmpdumpPath = None
+		self.downloadFolder = None
+
+	# hostname:port
+	def setProxyString(self, string):
+		self.socks = string
+
+	def setDownloadDetails(self, rtmpdumpPath, downloadFolder):
+		self.rtmpdumpPath = rtmpdumpPath
+		self.downloadFolder = downloadFolder
+
+	def getDumpCommand(self):
+		if self.rtmpdumpPath is None or self.rtmpdumpPath == '':
+			# rtmpdump path is not set
+			raise exception
+
+		args = [ self.rtmpdumpPath ]
+		args.append(getParameters())
+		command = ' '.join(args)
+
+		return command
 
 	def getSimpleParameters(self):
+		if self.downloadFolder is None or self.downloadFolder == '':
+			# Download Folder is not set
+			raise exception;
 
 		if self.rtmp is None or self.rtmp == '':
 			# rtmp url is not set
@@ -482,38 +510,51 @@ class RTMP:
 
 		parameters = {}
 
-		parameters["url"] = self.rtmp
+		parameters[u"url"] = self.rtmp
+		parameters[u"download_path"] = self.downloadFolder
 
 		if self.auth is not None:
-			parameters["auth"] = self.auth
+			parameters[u"auth"] = self.auth
 
 		if self.app is not None:
-			parameters["app"] = self.app
+			parameters[u"app"] = self.app
 
 		if self.playPath is not None:
-			parameters["playpath"] = self.playPath
+			parameters[u"playpath"] = self.playPath
+
+		if self.tcUrl is not None:
+			parameters[u"tcUrl"] = self.tcUrl
 
 		if self.swfUrl is not None:
-			parameters["swfUrl"] = self.swfUrl
+			parameters[u"swfUrl"] = self.swfUrl
 
 		if self.swfVfy is not None:
-			parameters["swfVfy"] = self.swfVfy
+			parameters[u"swfVfy"] = self.swfVfy
 
 		if self.pageUrl is not None:
-			parameters["pageUrl"] = self.pageUrl
+			parameters[u"pageUrl"] = self.pageUrl
 
-		if self.live is not None:
-			parameters["live"] = "true"
+		if self.live is not None and self.live is not False:
+			parameters[u"live"] = u"true"
+
+		if self.socks is not None:
+			parameters[u"socks"] = self.socks
+
+		if self.port is not None:
+			parameters[u"port"] = self.port
 
 		return parameters
 
 	def getParameters(self):
+		if self.downloadFolder is None or self.downloadFolder == '':
+			# Download Folder is not set
+			raise exception;
 
 		if self.rtmp is None or self.rtmp == '':
 			# rtmp url is not set
 			raise exception;
 
-		args = [ u"--rtmp", u'"%s"' % self.rtmp, u"-o", u'"%s"' ]
+		args = [ u"--rtmp", u'"%s"' % self.rtmp, u"-o", u'"%s"' % self.downloadFolder ]
 
 		if self.auth is not None:
 			args.append(u"--auth")
@@ -531,6 +572,10 @@ class RTMP:
 			args.append(u"--swfUrl")
 			args.append(u'"%s"' % self.swfUrl)
 
+		if self.tcUrl is not None:
+			args.append(u"--tcUrl")
+			args.append(u'"%s"' % self.tcUrl)
+
 		if self.swfVfy is not None:
 			args.append(u"--swfVfy")
 			args.append(u'"%s"' % self.swfVfy)
@@ -539,8 +584,16 @@ class RTMP:
 			args.append(u"--pageUrl")
 			args.append(u'"%s"' % self.pageUrl)
 
-		if self.live is not None:
+		if self.live is not None and self.live is not False:
 			args.append(u"--live")
+
+		if self.socks is not None:
+			args.append(u"--socks")
+			args.append(u'"%s"' % self.socks)
+
+		if self.port is not None:
+			args.append(u"--port")
+			args.append(u'%d' % self.port)
 
 		parameters = u' '.join(args)
 
@@ -551,7 +604,19 @@ class RTMP:
 			# rtmp url is not set
 			raise exception;
 
-		args = [u"%s" % self.rtmp]
+		if self.port is None:
+			args = [u"%s" % self.rtmp]
+		else:
+			try:
+				# Replace "rtmp://abc.def.com:default_port/ghi/jkl" with "rtmp://abc.def.com:port/ghi/jkl"
+				match=re.search("(.+//[^/]+):\d+(/.*)", self.rtmp,  re.DOTALL | re.IGNORECASE )
+				if match is None:
+					# Replace "rtmp://abc.def.com/ghi/jkl" with "rtmp://abc.def.com:port/ghi/jkl"
+					match=re.search("(.+//[^/]+)(/.*)", self.rtmp,  re.DOTALL | re.IGNORECASE )
+
+				args = [u"%s:%d%s" % (match.group(1), self.port, match.group(2))]
+			except (Exception) as exception:
+				args = [u"%s" % self.rtmp]
 
 		if self.auth is not None:
 			args.append(u"auth=%s" % self.auth)
@@ -565,6 +630,9 @@ class RTMP:
 		if self.swfUrl is not None:
 			args.append(u"swfurl=%s" % self.swfUrl)
 
+		if self.tcUrl is not None:
+			args.append(u"tcUrl=%s" % self.tcUrl)
+
 		if self.swfVfy is not None:
 			args.append(u"swfurl=%s" % self.swfVfy)
 			args.append(u"swfvfy=true")
@@ -572,10 +640,12 @@ class RTMP:
 		if self.pageUrl is not None:
 			args.append(u"pageurl=%s" % self.pageUrl)
 
-		if self.live is not None:
+		if self.live is not None and self.live is not False:
 			args.append(u"live=true")
+
+		if self.socks is not None:
+			args.append(u"socks=%s" % self.socks)
 
 		playURL = u' '.join(args)
 
 		return playURL
-

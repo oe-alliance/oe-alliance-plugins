@@ -20,6 +20,7 @@
 from . import _
 
 from Screens.Screen import Screen
+from Components.config import config
 from Screens.MessageBox import MessageBox
 from enigma import eServiceReference, eTimer, getDesktop
 from Components.MenuList import MenuList
@@ -41,15 +42,31 @@ import fourOD_token_decoder
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon, RTMP
 
+__plugin__  = "4OD: "
+__version__ = "Version 1.0.2: "
+
 #=================== Default URL's =======================================================
 
 fourodSearchDefault = u'http://www.channel4.com/search/predictive/?q='
 
 #=========================================================================================
+def readUrl(target):
+	try:
+		req = urllib2.Request(target)
+		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
+		response = urllib2.urlopen(req)
+		outtxt = str(response.read())
+		response.close()
+		return outtxt
+	except:
+		return ''
+
 def wgetUrl(target):
 	try:
 		isUK = 0
 		outtxt = ""
+		primaryDNS = str(config.ondemand.PrimaryDNS.value)
+		print __plugin__, __version__,"DNS Set: ", primaryDNS
 		
 		req = urllib2.Request(target)
 		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
@@ -73,44 +90,54 @@ def wgetUrl(target):
 		response.close()
 
 		# If the returned data contains ERROR then geo restriction has applied.
-		# Now attempt to use TUNLR to bypass the Geo restriction.
+		# Now attempt to use your proxy DNS to bypass the Geo restriction.
 		if outtxt.find('ERROR') > 0:
-			print "Non UK Address"
+			print __plugin__, __version__,"Non UK Address"
 			isUK = 1
-			opener = urllib2.build_opener(MyHTTPHandler)
-			old_opener = urllib2._opener
-			urllib2.install_opener (opener)
-			req = urllib2.Request(target)
-			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-			response = urllib2.urlopen(req)
-
-			# Find out the character set of the returned data
-			charset = GetCharset(response)
-
-			data = response.read()
-
-			if charset is None:
+							
+			if  primaryDNS == str(config.ondemand.PrimaryDNS.default):
+				print __plugin__, __version__,"Non UK Address: NO DNS Set!! ", primaryDNS
+				return ("NODNS", isUK)
+			else:
 				try:
-					data.decode('utf-8')
-					charset = 'utf-8'
-				except:
-					charset = 'latin1'
+					opener = urllib2.build_opener(MyHTTPHandler)
+					old_opener = urllib2._opener
+					urllib2.install_opener (opener)
+					req = urllib2.Request(target)
+					req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
+					response = urllib2.urlopen(req)
 
-			outtxt = str(data.decode(charset))			
-			response.close()
-			urllib2.install_opener (old_opener)		
+					# Find out the character set of the returned data
+					charset = GetCharset(response)
+
+					data = response.read()
+
+					if charset is None:
+						try:
+							data.decode('utf-8')
+							charset = 'utf-8'
+						except:
+							charset = 'latin1'
+
+					outtxt = str(data.decode(charset))			
+					response.close()
+					urllib2.install_opener (old_opener)
+
+				except (Exception) as exception:
+					print __plugin__, __version__,"wgetUrl: Unable to connect to DNS: ", exception
+					return ("NOCONNECT", isUK)
 
 		# Now return the decoded webpage
 		return (outtxt, isUK)
 
 	except (Exception) as exception:
-		print "wgetUrl: Exception: ", exception
+		print __plugin__, __version__,"wgetUrl: Exception: ", exception
 		outtxt = str(response.read())
 		response.close()
 		
 		# If we managed to read the URL then return data, might have failed on decode.
 		if outtxt:
-			print "wgetUrl: Exception: outtxt: ", outtxt
+			print __plugin__, __version__,"wgetUrl: Exception: outtxt: ", outtxt
 			return (outtxt, isUK)
 		else:
 			return ("", isUK)
@@ -149,62 +176,58 @@ class fourODMainMenu(Screen):
 		self.session = session
 		self.action = action
 		self.value = value
-		self.url = "http://ps3.channel4.com/pmlsd/tags.json?platform=ps3&uid=%d"
+		self.url = "http://m.channel4.com/4od/tags"
 		osdList = []
 
 		osdList.append((_("Search"), "search"))
 		if self.action is "start":
 			# Read the URL for the selected category on the Main Menu.
 			try:
-				(data, isUK) = wgetUrl(self.url % int(time.time()*1000))
+				(data, isUK) = wgetUrl(self.url)
 
-				jsonData = simplejson.loads(data)
+				if data:
+					soup = BeautifulSoup(data)
+					categoriesSection = soup.find('section', id="categories")
+					entries = categoriesSection.find('nav').findAll('a')
 
-				if isinstance(jsonData['feed']['entry'], list):
-					entries = jsonData['feed']['entry']
-				else:
-					# Single entry, put in a list
-					entries = [ jsonData['feed']['entry'] ]
+					pattern = u'/4od/tags/(.+)'
 
-				#TODO Error handling?
+					for entry in entries:
+						"""
+						  <section id="categories" class="clearfix">
 
-				for entry in entries:
-					"""
-					{"link":
-						{"self":"http:\/\/ps3.channel4.com\/pmlsd\/tags\/animals.json?platform=ps3",
-						"related":
-							["http:\/\/ps3.channel4.com\/pmlsd\/tags\/animals\/title.json?platform=ps3",
-							"http:\/\/ps3.channel4.com\/pmlsd\/tags\/animals\/4od.json?platform=ps3",
-							"http:\/\/ps3.channel4.com\/pmlsd\/tags\/animals\/4od\/title.json?platform=ps3"]
-						},
-					"$":"\n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  ",
-					"id":"tag:ps3.channel4.com,2009:\/programmes\/tags\/animals",
-					"title":"Animals",
-					"summary":
-						{"@type":"html",
-						"$":"Channel 4 Animals Programmes"
-						},
-					"updated":"2013-01-29T13:34:11.491Z",
-					"dc:relation.CategoryType":"None",
-					"dc:relation.AllProgrammeCount":5,
-					"dc:relation.4oDProgrammeCount":1
-					}
-					"""
-					if entry['dc:relation.4oDProgrammeCount'] == 0:
-						continue
+						    <aside class="catNav clearfix">
+							<nav>
+							    <h2>Most popular</h2>
+							    <ul>
 
-					id = entry[u'id']
-					pattern = u'/programmes/categories/(.+)'
-					match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
+								<li class="active">
+								    <span class="chevron"></span>
+								    <a href="/4od/tags/comedy">Comedy (100)</a>
+								</li>
+							    </ul>
 
-					categoryName = match.group(1)
-					#label = unicode(entry[u'title']) + u' (' + unicode(entry['dc:relation.4oDProgrammeCount']) + u')'
-					summary = unicode(entry[u'summary'][u'$']) + u' (' + unicode(entry['dc:relation.4oDProgrammeCount']) + u')' 
-					
-					osdList.append((_(str(summary)), str(categoryName)))
+							    <h2>More categories</h2>
+
+							    <ul>
+								<li>
+								    <span class="chevron"></span>
+								    <a href="/4od/tags/animals">Animals (4)</a>
+								</li>
+
+						"""
+
+						id = entry['href']
+						match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
+
+						categoryName = match.group(1)
+						label = unicode(entry.text).replace('\r\n', '')
+						label = re.sub(' +', ' ', label)
+
+						osdList.append((_(str(label)), str(categoryName)))
 
 			except (Exception) as exception:
-				print 'StreamsMenu: Error parsing feed: ', exception
+				print __plugin__, __version__,'StreamsMenu: Error parsing feed: ', exception
 
 			osdList.append((_("Back"), "exit"))
 
@@ -307,13 +330,15 @@ class StreamsThumb(StreamsThumbCommon):
 						self.mediaProblemPopup("Problem retreiving the stream URL!")
 					
 			except (Exception) as exception:
-				print 'go: Error getting fileUrl: ', exception
+				print __plugin__, __version__,'go: Error getting fileUrl: ', exception
 
 #==============================================================================
-	def getRTMPUrl(self, assetUrl):
+	def getRTMPUrl(self, showID):
 		playUrl = None
 
 		try:
+			aisUrl = "http://ais.channel4.com/asset/%s"
+			assetUrl = aisUrl % showID
 			(rtmpvar, returnMessage) = self.InitialiseRTMP(assetUrl)
 			if rtmpvar:
 				playUrl = rtmpvar.getPlayUrl()    
@@ -323,14 +348,14 @@ class StreamsThumb(StreamsThumbCommon):
 				return ("", "", returnMessage)
 
 		except (Exception) as exception:
-			print 'getRTMPUrl: Error getting playUrl: ', exception
+			print __plugin__, __version__,'getRTMPUrl: Error getting playUrl: ', exception
 			return ("", "", "")
 
 #==============================================================================			
 	def InitialiseRTMP(self, assetUrl):
 
 		try:
-			self.urlRoot = u"http://www.channel4.com"
+			self.urlRoot = u"http://m.channel4.com"
 			streamUri = ""
 			auth = ""
 			
@@ -338,21 +363,26 @@ class StreamsThumb(StreamsThumbCommon):
 			(streamUri, auth, returnMessage) = self.GetStreamInfo(assetUrl)
 			
 			if streamUri:
-				url = re.search('(.*?)mp4:', streamUri).group(1)
-				app = re.search('.com/(.*?)mp4:', streamUri).group(1)
-				playPath = re.search('(mp4:.*)', streamUri).group(1) + "?" + auth
+				url = re.search(u'(.*?)mp4:', streamUri).group(1)
+				app = re.search(u'.com/(.*?)mp4:', streamUri).group(1)
+				playPath = re.search(u'(mp4:.*)', streamUri).group(1)
+
 				if "ll."  not in streamUri: 
-					url = url + "?ovpfv=1.1&" + auth
-					app = app + "?ovpfv=1.1&" + auth
+					app = app + u"?ovpfv=1.1&" + auth
+				else:
+					playPath += "?" + auth
 
 				swfPlayer = self.GetSwfPlayer()
-				rtmpvar = RTMP(rtmp = streamUri, app = app, swfVfy = swfPlayer, playPath = playPath, pageUrl = self.urlRoot)
+				
+				port = None
+				
+				rtmpvar =  RTMP(rtmp = streamUri, app = app, swfVfy = swfPlayer, playPath = playPath, pageUrl = self.urlRoot, port = port)
 				return (rtmpvar, returnMessage)
 			else:
 				return ("", returnMessage)
 		except (Exception) as exception:
-			print 'InitialiseRTMP: Error getting mp4: ', exception
-			return ("", "")
+			print __plugin__, __version__,'InitialiseRTMP: Error getting mp4: ', exception
+			return ("", "InitialiseRTMP: Error getting mp4")
 
 #==============================================================================
 	def GetStreamInfo(self, assetUrl):
@@ -365,35 +395,49 @@ class StreamsThumb(StreamsThumbCommon):
 		for attemptNumber in range(0, maxAttempts):
 			(xml, isUK) = wgetUrl( assetUrl )
 			
-			# Parse the returned XML
-			soup = BeautifulSoup(xml)
+			# No DNS set in Settings, exit.NOCONNECT
+			if (xml == "NODNS"):
+				return (streamURI, auth, "Non-UK User!!\n\nYou need to specify a DNS in the OnDemand Settings!!")
+				break
 
-			uriData = soup.find(u'uridata')
-			streamURI = uriData.find(u'streamuri').text
-			
-			# If call is from Outside UK then stream URL might need to be altered.
-			if isUK == 1:
-				print "GetStreamInfo: notUK user: streamURI: ", streamURI, " streamURI[:10]: ", streamURI[:10]
-				if streamURI[:10] <> "rtmpe://ll":
-					streamURI = ""
+			# No DNS set in Settings, exit.
+			if (xml == "NOCONNECT"):
+				return (streamURI, auth, "Non-UK User!!\n\nCould not connect to your specified DNS!\n\n Check the DNS in the OnDemand Settings!!")
+				break
+
+			# Only check stream data if data has been returned.
+			if xml:
+				# Parse the returned XML
+				soup = BeautifulSoup(xml)
+
+				uriData = soup.find(u'uridata')
+				streamURI = uriData.find(u'streamuri').text
+
+				# If call is from Outside UK then stream URL might need to be altered.
+				if isUK == 1:
+					print __plugin__, __version__,"GetStreamInfo: notUK user: streamURI: ", streamURI, " streamURI[:10]: ", streamURI[:10]
+					if streamURI[:10] <> "rtmpe://ll":
+						streamURI = ""
+						continue
+
+				# If HTTP Dynamic Streaming is used for this show then there will be no mp4 file,
+				# and decoding the token will fail, therefore we abort before
+				# parsing authentication info if there is no mp4 file.
+				if u'mp4:' not in streamURI.lower():
+					# Unable to find MP4 video file to play.
+					# No MP4 found, probably HTTP Dynamic Streaming. Stream URI - %s
+					raise exception
+
+				auth =  self.GetAuthentication(uriData)
+
+				if auth is None:
+					# If we didn't get the cdn we're looking for then try again
+					# Error getting correct cdn, trying again
 					continue
 
-			# If HTTP Dynamic Streaming is used for this show then there will be no mp4 file,
-			# and decoding the token will fail, therefore we abort before
-			# parsing authentication info if there is no mp4 file.
-			if u'mp4:' not in streamURI.lower():
-				# Unable to find MP4 video file to play.
-				# No MP4 found, probably HTTP Dynamic Streaming. Stream URI - %s
-				raise exception
-
-			auth =  self.GetAuthentication(uriData)
-
-			if auth is None:
-				# If we didn't get the cdn we're looking for then try again
-				# Error getting correct cdn, trying again
-				continue
-
-			break
+				break
+			else:
+				break
 		
 		if streamURI:
 			return (streamURI, auth, "")
@@ -405,11 +449,16 @@ class StreamsThumb(StreamsThumbCommon):
 		token = uriData.find(u'token').string
 		cdn = uriData.find(u'cdn').string
 
-		decodedToken = fourOD_token_decoder.Decode4odToken(token)
+		try:
+			decodedToken = fourOD_token_decoder.Decode4odToken(token)
+		except (Exception) as exception:
+			print __plugin__, __version__,'GetAuthentication: Error getting decodedToken: ', exception
+			return ("")
 
 		if ( cdn ==  u"ll" ):
 			ip = uriData.find(u'ip')
 			e = uriData.find(u'e')
+
 			if (ip):
 				auth = u"e=%s&ip=%s&h=%s" % (e.string, ip.string, decodedToken)
 			else:
@@ -425,40 +474,29 @@ class StreamsThumb(StreamsThumbCommon):
 #==============================================================================
 	def GetSwfPlayer(self):
 		try:
-			self.ps3Root = u"http://ps3.channel4.com"
-			self.swfDefault = u"http://ps3.channel4.com/swf/ps3player-9.0.124-1.27.2.swf"
-
-			rootHtml = None
-			(rootHtml, isUK) = wgetUrl(self.ps3Root)
-
-			soup = BeautifulSoup(rootHtml)
-			
-			script = soup.find('script', src=re.compile('.+com.channel4.aggregated.+', re.DOTALL | re.IGNORECASE))
-			jsUrl = script['src']
+			self.urlRoot = u"http://m.channel4.com"
+			self.jsRoot = u"http://m.channel4.com/js/script.js"
+			self.swfDefault = u"http://m.channel4.com/swf/mobileplayer-10.2.0-1.43.swf"
 
 			jsHtml = None
-			(jsHtml, isUK) = wgetUrl(self.ps3Root + '/' + jsUrl)
-            
+			(jsHtml, isUK) = wgetUrl(self.jsRoot)
+
 			# Looking for the string below
 			"""
-			getPlayerSwf:function(){return"swf/ps3player-9.0.124-1.27.2.swf"},
+			getPlayerSwf:function(){return"swf/mobileplayer-10.2.0-1.43.swf"},
 			"""
-			pattern = "getPlayerSwf[^\"]+\"([^\"]+)\""
+			pattern = u"options.swfPath = \"(/swf/mobileplayer-10.2.0-1.43.swf)\";"
 			match = re.search(pattern, jsHtml, re.DOTALL | re.IGNORECASE)
 
-			swfPlayer = self.ps3Root + '/' + match.group(1)
+			swfPlayer = self.urlRoot + match.group(1)
 
 		except (Exception) as exception:
-			if rootHtml is not None:
-				msg = "rootHtml:\n\n%s\n\n" % rootHtml
-				print "GetSwfPlayer: Error getting player: ", msg
-
 			if jsHtml is not None:
 				msg = "jsHtml:\n\n%s\n\n" % jsHtml
-				print "GetSwfPlayer: Error getting player: ", msg
+				print __plugin__, __version__,"GetSwfPlayer: Error getting player: ", msg
 
 			# Unable to determine swfPlayer URL. Using default:
-			print "GetSwfPlayer: Unable to determine swfPlayer URL. Using default: ", exception
+			print __plugin__, __version__,"GetSwfPlayer: Unable to determine swfPlayer URL. Using default: ", exception
 			swfPlayer = self.swfDefault
 
 		return swfPlayer
@@ -466,182 +504,146 @@ class StreamsThumb(StreamsThumbCommon):
 #==============================================================================
 	def getShowMediaData(self, weekList, showId):
 
-		self.url = u"http://ps3.channel4.com/pmlsd/%s/4od.json?platform=ps3&uid=%s" # showId, time
+		self.url = u"http://m.channel4.com/4od/%s%s" # (showId, /series-1 )
 		channel = "CH4"
 		short = ''
 		name = ''
-		date = ''
+		date1 = ''
 		stream = ''
 		icon = ''
 		duration = ''
+		season = ''
 
 		# Below is a sample of the returned data stream for a Show.
 		"""
-		{"feed":
-			{"link":
-				{"self":"http:\/\/ps3.channel4.com\/pmlsd\/the-horse-hoarder.json?platform=ps3",
-				"related":["http:\/\/ps3.channel4.com\/pmlsd\/the-horse-hoarder\/episode-guide.json?platform=ps3","http:\/\/ps3.channel4.com\/pmlsd\/the-horse-hoarder\/4od.json?platform=ps3","http:\/\/ps3.channel4.com\/pmlsd\/the-horse-hoarder\/4od\/recommendations.json?platform=ps3"]
-				},
-				"$":"\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n",
-				"id":"tag:ps3.channel4.com,2009:\/programmes\/the-horse-hoarder",
-				"title":"The Horse Hoarder",
-				"subtitle":
-					{"@type":"html",
-					"$":"Pensioner Clwyd Davies has accumulated 52 untamed horses, which he keeps at his home in Wrexham's suburbs"
-					},
-				"updated":"2013-01-07T12:30:53.872Z",
-				"author":
-					{"$":"\n	\n  ",
-					"name":"Channel 4 Television"
-					},
-				"logo":
-					{"@imageSource":"own",
-					"$":"http:\/\/cache.channel4.com\/assets\/programmes\/images\/the-horse-hoarder\/ea8a20f0-2ba9-4648-8eec-d25a0fe35d3c_200x113.jpg"
-					},
-				"category":[
-					{"@term":"http:\/\/ps3.channel4.com\/pmlsd\/tags\/animals.atom?platform=ps3",
-					"@scheme":"tag:ps3.channel4.com,2010:\/category\/primary",
-					"@label":"Animals"
-					},
-					{"@term":"http:\/\/ps3.channel4.com\/pmlsd\/tags\/documentaries.atom?platform=ps3",
-					"@scheme":"tag:ps3.channel4.com,2010:\/category\/secondary",
-					"@label":"Documentaries"
-					}],
-				"dc:relation.BrandFlattened":false,
-				"dc:relation.presentationBrand":"C4",
-				"dc:relation.platformClientVersion":1,
-				"dc:relation.BrandWebSafeTitle":"the-horse-hoarder",
-				"dc:relation.BrandTitle":"The Horse Hoarder",
-				"dc:relation.ProgrammeType":"OOS",
-				"generator":
-					{"@version":"1.43","$":"PMLSD"},
-				"entry":
-					{"link":
-						{"related":"http:\/\/ais.channel4.com\/asset\/3464654",
-						"self":"http:\/\/ps3.channel4.com\/pmlsd\/the-horse-hoarder\/episode-guide\/series-1\/episode-1.json?platform=ps3"
-						},
-					"$":"\n	\n	\n	\n	\n	\n	\n	\n	\n	\n	\n	\n  ",
-					"id":"tag:ps3.channel4.com,2009:\/programmes\/the-horse-hoarder\/episode-guide\/series-1\/episode-1",
-					"title":"The Horse Hoarder",
-					"summary":
-						{"@type":"html",
-						"$":"Pensioner Clwyd Davies squats in a derelict house, dedicating his life to caring for 52 wild horses. But he has been reported to the RSPCA. This documentary follows Clwyd's battle to keep his horses."
-						},
-					"updated":"2013-01-07T12:30:54.027Z",
-					"content":
-						{"$":"\n	  \n	",
-						"thumbnail":
-							{"@url":"http:\/\/cache.channel4.com\/assets\/programmes\/images\/the-horse-hoarder\/series-1\/episode-1\/e5c98d93-4f82-4174-b3f1-a1f7d180958a_200x113.jpg",
-							"@height":"113",
-							"@width":"200",
-							"@imageSource":"own",
-							"@altText":"The Horse Hoarder"
-							}
-						},
-					"dc:relation.SeriesNumber":1,
-					"dc:relation.EpisodeNumber":1,
-					"dc:date.Last":"2013-01-07T20:30:00.000Z",
-					"dc:relation.LastChannel":"C4"
-				}
-			}
-		}
+		<article class="episode clearfix" data-rating="18"
+			 data-wsbrandtitle="/shameless" data-preselectasseturl="http://ais.channel4.com/asset/3270370"
+			 data-preselectassetguidance="Very strong language and sexual scenes">
+
+		<div class="screenshotCont">
+		    <a href="">
+			<img class="screenShot" src="http://cache.channel4.com/assets/programmes/images/shameless/series-1/episode-1/c06b3dbe-c9d6-4908-9f2c-708518482916_200x113.jpg" width="160" height="91"
+			     alt="Shameless"><span></span>
+		    </a>
+		</div>
+		<div class="details">
+		    <h1>
+			<a href="/4od/shameless/series-1/3270370">
+				Shameless</a>
+		    </h1>
+			<p>
+				Series 1
+				Episode 1
+
+			</p>
+			<p>
+			    12am
+			     Tue 13 Jan
+			     2004
+			</p>
+		    <p>
+				Channel 4
+			(49min)
+			    <span class="guidance">Very strong language and sexual scenes</span>
+		    </p>
+		</div>
+		<div class="rightLinks">
+				 <a class="seeAll" href="/4od/shameless/series-1/3270370"><span>More</span></a>
+		</div>
+		</article>
 		"""
 
 		# Need to loop here until last page reached or 500 entries returned
-		self.nextUrl = self.url % (showId, int(time.time()*1000))
+		self.nextUrl = self.url % (showId, season)
 
 		try:
-			while len(weekList) < 500 and self.nextUrl is not None:
 
-				# Read the Show URL
-				(jsonText, isUK) = wgetUrl(self.nextUrl)
+			# Read the Show URL
+			data = readUrl(self.nextUrl)
 
-				# Only want to try and parse if stream data is returned.
-				if jsonText:
-					# Use JSON to parse the returned data
-					jsonData = simplejson.loads(jsonText)
+			# Only want to try and parse if stream data is returned.
+			if data:
+				# Use BeautifulSoup to parse the returned data
+				soup = BeautifulSoup(data)
+				
+				# I'm afraid that each episode does not have it's own description.
+				summary = soup.find("div", id="aboutTheShow").findAll('p')
+				sum1 = str(summary[0])
+				sum1 = re.sub('<p>', '', sum1)
+				sum1 = re.sub('</p>', '', sum1)
+				short = sum1.strip()
 
-					if isinstance(jsonData['feed']['entry'], list):
-						entries = jsonData['feed']['entry']
+				entries = soup.find("section", id="episodeList").findAll('article')
+
+				for entry in entries:
+
+					details = entry.find('div', 'details')
+					pList = details.findAll('p')
+
+					try:
+						assetUrl = entry['data-preselectasseturl']
+						match = re.search(u'http://ais.channel4.com/asset/(\d+)', assetUrl)
+						stream= str(match.group(1))
+					except (Exception) as exception:
+						stream = ""
+
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						try:
+							icon = entry.find('img')['src']
+						except (Exception) as exception:
+							icon = ""
 					else:
-						# Single entry, put in a list
-						entries = [ jsonData['feed']['entry'] ]
+						icon = ''
 
-					for entry in entries:
-
-						try:
-							stream = str(entry[u'group'][u'player']['@url'])
-						except (Exception) as exception:
-							stream = ""
-
-						try:
-							seriesNum = int(entry[u'dc:relation.SeriesNumber'])
-						except (Exception) as exception:
-							seriesNum = ""
-
-						try:
-							epNum = int(entry[u'dc:relation.EpisodeNumber'])
-						except (Exception) as exception:
-							epNum = ""
-
-						try:
-							seriesData = " (S"+str(("%02d" % seriesNum))+"E"+str(("%02d" % epNum))+")"
-						except (Exception) as exception:
-							seriesData = ""
-
-						try:
-							hasSubtitles = bool(entry['dc:relation.Subtitles'])
-						except (Exception) as exception:
-							hasSubtitles = False
-
-						# Only set the Icon if they are enabled
-						if self.showIcon == 'True':
+					try:
+						for p in pList:
 							try:
-								icon = str(entry[u'group'][u'thumbnail'][u'@url'])
+								timeString = p.text.replace('\r\n', '').replace('Sept', 'Sep').replace('July', 'Jul').replace('June', 'Jun')
+								timeString = re.sub(' +', ' ', timeString)
+								time_split = timeString.rsplit('m ',1)
+								lastDate = date.fromtimestamp(mktime(strptime(time_split[1].strip(), u"%a %d %b %Y")))
+								premieredDate = lastDate.strftime(u"%a %b %d %Y")
+								date1 = _("Added:")+" "+str(premieredDate)
+								break
 							except (Exception) as exception:
-								icon = ""
-						else:
-							icon = ''
+								date1 = ""
+					except (Exception) as exception:
+						print __plugin__, __version__,'getShowMediaData: name error: ', exception
+						date1 = ""
 
-						try:
-							lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'dc:date.TXDate']), u"%Y-%m-%dT%H:%M:%S.%fZ")))
-							date_tmp = lastDate.strftime(u"%a %b %d %Y")
-							date1 = _("Added:")+" "+str(date_tmp)
-						except (Exception) as exception:
-							lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'updated']), u"%Y-%m-%dT%H:%M:%S.%fZ")))
-							date_tmp = lastDate.strftime(u"%a %b %d %Y")
-							date1 = _("Added:")+" "+str(date_tmp)
+					try:
+						name_tmp = details.find('p').text.replace('\r\n', '')
+						name_tmp1 = re.sub(' +', ' ', name_tmp)
+						name_tmp1 = checkUnicode(str(name_tmp1))
+						name = name_tmp1.strip()
+					except (Exception) as exception:
+						print __plugin__, __version__,'getShowMediaData: name error: ', exception
+						name = ""
+					
+					try:
+						pattern = u'\s*Channel\s4\s*\((.*?)\)'
+						for p in pList:
+							try:
+								durationMatch = re.search( pattern, p.text, re.DOTALL | re.IGNORECASE )
+								duration = _("Duration:")+" "+str(durationMatch.group(1))
+								break
+							except (Exception) as exception:
+								duration = ""
+					                    
+					except (Exception) as exception:
+						print __plugin__, __version__,'getShowMediaData: name error: ', exception
+						duration = ""
 
-						try:
-							name_tmp = str(unicode(entry[u'title']))
-							name_tmp1 = checkUnicode(name_tmp)
-							name = remove_extra_spaces(name_tmp1)
-							if seriesData:
-								name = name+seriesData
-						except (Exception) as exception:
-							name = ""
-
-						try:
-							short_tmp = str(entry[u'summary'][u'$'])
-							short_tmp1 = checkUnicode(short_tmp)
-							short = remove_extra_spaces(short_tmp1)
-						except (Exception) as exception:
-							short = ""
-
-						weekList.append((date1, name, short, channel, stream, icon, duration, False))
-
-					if 'next' in jsonData['feed']['link']:
-						self.nextUrl = jsonData['feed']['link']['next']
-					else:
-						self.nextUrl = None
+					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print 'getShowMediaData: Error parsing feed: ', exception
+			print __plugin__, __version__,'getShowMediaData: Error parsing feed: ', exception
 
 #==============================================================================
 	def getCatsMediaData(self, weekList, category):
 
-		self.url = u"http://ps3.channel4.com/pmlsd/tags/%s/4od/title.json?platform=ps3" #category
+		self.url = u"http://m.channel4.com/4od/tags/%s%s%s" # % (category, /order?, /page-X? )
 		channel = "CH4"
 		short = ''
 		name = ''
@@ -652,133 +654,77 @@ class StreamsThumb(StreamsThumbCommon):
 
 		# Below is a sample of the returned data stream for a Category.
 		"""
-		{"feed":
-		    {"link":
-			{"self":"http:\/\/ps3.channel4.com\/pmlsd\/tags\/animals\/4od.json?platform=ps3",
-			"up":"http:\/\/ps3.channel4.com\/pmlsd\/tags\/animals.json?platform=ps3"},
-			"$":"\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n",
-			"id":"tag:ps3.channel4.com,2009:\/programmes\/tags\/animals\/4od",
-			"title":"4oD Animals Programmes",
-			"updated":"2013-01-29T15:12:58.105Z",
-			"author":
-			    {"$":"\n    \n  ",
-			    "name":"Channel 4 Television"
-			    },
-			"logo":
-			    {"@imageSource":"default",
-			    "$":"http:\/\/cache.channel4.com\/static\/programmes\/images\/c4-atom-logo.gif"
-			    },
-			"fh:complete":"",
-			"dc:relation.CategoryType":"None",
-			"dc:relation.AllProgrammeCount":5,
-			"dc:relation.4oDProgrammeCount":1,
-			"dc:relation.platformClientVersion":1,
-			"generator":{"@version":"1.43","$":"PMLSD"},
-			"entry":
-			    {"link":
-				{"self":"http:\/\/ps3.channel4.com\/pmlsd\/the-horse-hoarder.json?platform=ps3",
-				"related":["http:\/\/ps3.channel4.com\/pmlsd\/the-horse-hoarder\/4od.json?platform=ps3",
-				"http:\/\/ps3.channel4.com\/pmlsd\/the-horse-hoarder\/episode-guide.json?platform=ps3"]
-				},
-			    "$":"\n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  ",
-			    "id":"tag:ps3.channel4.com,2009:\/programmes\/the-horse-hoarder",
-			    "title":"The Horse Hoarder",
-			    "summary":
-				{"@type":"html",
-				"$":"Pensioner Clwyd Davies has accumulated 52 untamed horses, which he keeps at his home in Wrexham's suburbs"
-				},
-			    "updated":"2013-01-07T12:30:53.872Z",
-			    "dc:relation.sortLetter":"H",
-			    "dc:date.TXDate":"2013-01-13T02:40:00.000Z",
-			    "dc:relation.BrandWebSafeTitle":"the-horse-hoarder",
-			    "content":
-				{"$":"\n      \n
-				    ",
-				"thumbnail":
-				    {"@url":"http:\/\/cache.channel4.com\/assets\/programmes\/images\/the-horse-hoarder\/ea8a20f0-2ba9-4648-8eec-d25a0fe35d3c_200x113.jpg",
-				    "@height":"113",
-				    "@width":"200",
-				    "@imageSource":"own",
-				    "@altText":"The Horse Hoarder"
-				    }
-				}
-			    }
-			}
-		}
-
+		{"count":50,"results":[
+		    {    "title":"The Function Room",
+			 "url":"/4od/the-function-room",
+			 "img":"http://cache.channel4.com/assets/programmes/images/the-function-room/7d5d701c-f7f8-4357-a128-67cac7896f95_200x113.jpg"
+		    },...        
 		"""
 
+		# You can specify the order and page number but I'm just hard-coding for now.
+		page = '1'
+		order = u'/atoz'
+		
 		# Need to loop here until last page is reached or 500 entries have been returned.
-		self.nextUrl = self.url % category
+		self.nextUrl = self.url % (category, order, u'/page-%s' % page)
 
 		try:
-			while len(weekList) < 500 and self.nextUrl is not None:
+			# Read the Category URL
+			(jsonText, isUK) = wgetUrl(self.nextUrl)
 
-				# Read the Category URL
-				(jsonText, isUK) = wgetUrl(self.nextUrl)
+			# Only want to try and parse if stream data is returned.
+			if jsonText:
+				# Use JSON to parse the returned data
+				jsonData = simplejson.loads(jsonText)
 
-				# Only want to try and parse if stream data is returned.
-				if jsonText:
-					# Use JSON to parse the returned data
-					jsonData = simplejson.loads(jsonText)
+				entries = jsonData[u'results'] 
 
-					if isinstance(jsonData['feed']['entry'], list):
-						entries = jsonData['feed']['entry']
+				for entry in entries:
+
+					try:
+						id = str(entry['url'])
+						pattern = '/4od/(.+)'
+						match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
+						stream = str(match.group(1))
+					except (Exception) as exception:
+						stream = ""
+
+					# Only set the Icon if they are enabled
+					if self.showIcon == 'True':
+						try:
+							icon = str(entry['img'])
+						except (Exception) as exception:
+							icon = ""
 					else:
-						# Single entry, put in a list
-						entries = [ jsonData['feed']['entry'] ] 
+						icon = ''
 
-					for entry in entries:
+					try:
+						name_tmp = str(unicode(entry['title']))
+						name_tmp1 = checkUnicode(name_tmp)
+						name = remove_extra_spaces(name_tmp1)
+					except (Exception) as exception:
+						name = ""
 
-						try:
-							id = str(entry['id'])
-							pattern = '/programmes/(.+)'
-							match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
-							stream = str(match.group(1))
-						except (Exception) as exception:
-							stream = ""
+					#try:
+					#	short_tmp = str(entry['summary']['$'])
+					#	short_tmp1 = checkUnicode(short_tmp)
+					#	short = remove_extra_spaces(short_tmp1)
+					#except (Exception) as exception:
+					#	short = ""
 
-						# Only set the Icon if they are enabled
-						if self.showIcon == 'True':
-							try:
-								icon = str(entry['content']['thumbnail']['@url'])
-							except (Exception) as exception:
-								icon = ""
-						else:
-							icon = ''
+					#try:
+					#	lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'dc:date.TXDate']), u"%Y-%m-%dT%H:%M:%S.%fZ")))
+					#	date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+					#	date1 = _("Added:")+" "+str(date_tmp)
+					#except (Exception) as exception:
+					#	lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'updated']), u"%Y-%m-%dT%H:%M:%S.%fZ")))
+					#	date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
+					#	date1 = _("Added:")+" "+str(date_tmp)
 
-						try:
-							name_tmp = str(unicode(entry['title']))
-							name_tmp1 = checkUnicode(name_tmp)
-							name = remove_extra_spaces(name_tmp1)
-						except (Exception) as exception:
-							name = ""
-
-						try:
-							short_tmp = str(entry['summary']['$'])
-							short_tmp1 = checkUnicode(short_tmp)
-							short = remove_extra_spaces(short_tmp1)
-						except (Exception) as exception:
-							short = ""
-
-						try:
-							lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'dc:date.TXDate']), u"%Y-%m-%dT%H:%M:%S.%fZ")))
-							date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-							date1 = _("Added:")+" "+str(date_tmp)
-						except (Exception) as exception:
-							lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'updated']), u"%Y-%m-%dT%H:%M:%S.%fZ")))
-							date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-							date1 = _("Added:")+" "+str(date_tmp)
-
-						weekList.append((date1, name, short, channel, stream, icon, duration, False))
-
-					if 'next' in jsonData['feed']['link']:
-						self.nextUrl = jsonData['feed']['link']['next']
-					else:
-						self.nextUrl = None				
+					weekList.append((date1, name, short, channel, stream, icon, duration, False))				
 
 		except (Exception) as exception:
-			print 'getCatsMediaData: Error parsing feed: ', exception
+			print __plugin__, __version__,'getCatsMediaData: Error parsing feed: ', exception
 
 #==============================================================================
 	def getSearchMediaData(self, weekList, searchUrl):
@@ -847,7 +793,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))		
 
 		except (Exception) as exception:
-			print 'getSearchMediaData: Error parsing feed: ', exception
+			print __plugin__, __version__,'getSearchMediaData: Error parsing feed: ', exception
 			
 #==============================================================================
 def checkUnicode(value, **kwargs):
