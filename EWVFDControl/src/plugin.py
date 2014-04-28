@@ -18,9 +18,9 @@ from Tools.Directories import fileExists
 
 import Screens.Standby
 
-config.plugins.vfd_evo = ConfigSubsection()
-config.plugins.vfd_evo.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.vfd_evo.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.vfd_ew = ConfigSubsection()
+config.plugins.vfd_ew.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
+config.plugins.vfd_ew.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
@@ -47,7 +47,7 @@ class Channelnumber:
 			})
 
 	def __eventInfoChanged(self):
-		if config.plugins.vfd_evo.showClock.value == 'Off' or config.plugins.vfd_evo.showClock.value == 'True_All':
+		if config.plugins.vfd_ew.showClock.value == 'Off' or config.plugins.vfd_ew.showClock.value == 'True_All':
 			return
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
@@ -91,10 +91,10 @@ class Channelnumber:
 		return chnr
 
 	def prikaz(self):
-		if config.plugins.vfd_evo.showClock.value == 'True' or config.plugins.vfd_evo.showClock.value == 'True_All' or config.plugins.vfd_evo.showClock.value == 'True_Switch':
+		if config.plugins.vfd_ew.showClock.value == 'True' or config.plugins.vfd_ew.showClock.value == 'True_All' or config.plugins.vfd_ew.showClock.value == 'True_Switch':
 			clock = str(localtime()[3])
 			clock1 = str(localtime()[4])
-			if config.plugins.vfd_evo.timeMode.value != '24h':
+			if config.plugins.vfd_ew.timeMode.value != '24h':
 				if int(clock) > 12:
 					clock = str(int(clock) - 12)
 
@@ -110,8 +110,8 @@ class Channelnumber:
 			vfd_write("....")
 
 	def vrime(self):
-		if (config.plugins.vfd_evo.showClock.value == 'True' or config.plugins.vfd_evo.showClock.value == 'False' or config.plugins.vfd_evo.showClock.value == 'True_Switch') and not Screens.Standby.inStandby:
-			if config.plugins.vfd_evo.showClock.value == 'True_Switch':
+		if (config.plugins.vfd_ew.showClock.value == 'True' or config.plugins.vfd_ew.showClock.value == 'False' or config.plugins.vfd_ew.showClock.value == 'True_Switch') and not Screens.Standby.inStandby:
+			if config.plugins.vfd_ew.showClock.value == 'True_Switch':
 				if time() >= self.begin:
 					self.endkeypress = False
 				if self.endkeypress:
@@ -121,14 +121,14 @@ class Channelnumber:
 			else:
 				self.__eventInfoChanged()
 					
-		if config.plugins.vfd_evo.showClock.value == 'Off':
+		if config.plugins.vfd_ew.showClock.value == 'Off':
 			vfd_write("....")
 			self.zaPrik.start(self.updatetime, 1)
 			return
 		else:
 			self.zaPrik.start(1000, 1)
 
-		if Screens.Standby.inStandby or config.plugins.vfd_evo.showClock.value == 'True_All':
+		if Screens.Standby.inStandby or config.plugins.vfd_ew.showClock.value == 'True_All':
 			self.prikaz()
 
 	def keyPressed(self, key, tag):
@@ -138,31 +138,31 @@ class Channelnumber:
 ChannelnumberInstance = None
 
 def leaveStandby():
-	print "[VFD-EVO] Leave Standby"
+	print "[VFD-EW] Leave Standby"
 
-	if config.plugins.vfd_evo.showClock.value == 'Off':
+	if config.plugins.vfd_ew.showClock.value == 'Off':
 		vfd_write("....")
 
 def standbyCounterChanged(configElement):
-	print "[VFD-EVO] In Standby"
+	print "[VFD-EW] In Standby"
 
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
 
-	if config.plugins.vfd_evo.showClock.value == 'Off':
+	if config.plugins.vfd_ew.showClock.value == 'Off':
 		vfd_write("....")
 
 def initVFD():
-	print "[VFD-EVO] initVFD"
+	print "[VFD-EW] initVFD"
 
-	if config.plugins.vfd_evo.showClock.value == 'Off':
+	if config.plugins.vfd_ew.showClock.value == 'Off':
 		vfd_write("....")
 
-class vfd_evoSetup(ConfigListScreen, Screen):
+class vfd_ewSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
 
 		self.skin = """
-			<screen position="100,100" size="500,210" title="vfd_evo Setup" >
+			<screen position="100,100" size="500,210" title="vfd_ew Setup" >
 				<widget name="config" position="20,15" size="460,150" scrollbarMode="showOnDemand" />
 				<ePixmap position="40,165" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
 				<ePixmap position="180,165" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
@@ -195,9 +195,9 @@ class vfd_evoSetup(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.vfd_evo.showClock))
-		if config.plugins.vfd_evo.showClock.value != "Off":
-			self.list.append(getConfigListEntry(_("Time mode"), config.plugins.vfd_evo.timeMode))
+		self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.vfd_ew.showClock))
+		if config.plugins.vfd_ew.showClock.value != "Off":
+			self.list.append(getConfigListEntry(_("Time mode"), config.plugins.vfd_ew.timeMode))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -233,9 +233,9 @@ class vfd_evoSetup(ConfigListScreen, Screen):
 		self.createSetup()
 		initVFD()
 
-class vfd_evo:
+class vfd_ew:
 	def __init__(self, session):
-		print "[VFD-EVO] initializing"
+		print "[VFD-EW] initializing"
 		self.session = session
 		self.service = None
 		self.onClose = [ ]
@@ -252,37 +252,37 @@ class vfd_evo:
 		self.abort()
 
 	def abort(self):
-		print "[VFD-EVO] aborting"
+		print "[VFD-EW] aborting"
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
 	if menuid != "system":
 		return [ ]
-	return [(_("vfd_evo"), startVFD, "vfd_evo", None)]
+	return [(_("vfd_ew"), startVFD, "vfd_ew", None)]
 
 def startVFD(session, **kwargs):
-	session.open(vfd_evoSetup)
+	session.open(vfd_ewSetup)
 
-evoVfd = None
+ewVfd = None
 gReason = -1
 mySession = None
 
-def controlevoVfd():
-	global evoVfd
+def controlewVfd():
+	global ewVfd
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and evoVfd == None:
-		print "[VFD-EVO] Starting !!"
-		evoVfd = vfd_evo(mySession)
-	elif gReason == 1 and evoVfd != None:
-		print "[VFD-EVO] Stopping !!"
+	if gReason == 0 and mySession != None and ewVfd == None:
+		print "[VFD-EW] Starting !!"
+		ewVfd = vfd_ew(mySession)
+	elif gReason == 1 and ewVfd != None:
+		print "[VFD-EW] Stopping !!"
 
-		evoVfd = None
+		ewVfd = None
 
 def sessionstart(reason, **kwargs):
-	print "[VFD-EVO] sessionstart"
-	global evoVfd
+	print "[VFD-EW] sessionstart"
+	global ewVfd
 	global gReason
 	global mySession
 
@@ -290,7 +290,7 @@ def sessionstart(reason, **kwargs):
 		mySession = kwargs["session"]
 	else:
 		gReason = reason
-	controlevoVfd()
+	controlewVfd()
 
 def Plugins(**kwargs):
 		if fileExists("/proc/stb/fp/version"):
@@ -301,4 +301,4 @@ def Plugins(**kwargs):
 			return []
 		else:
 			return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-				PluginDescriptor(name="vfd_evo", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+				PluginDescriptor(name="vfd_ew", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]

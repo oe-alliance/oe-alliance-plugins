@@ -30,8 +30,8 @@ if INIHDE
 SUBDIRS += INIVFDControl
 endif
 
-if ENFINITY
-SUBDIRS += EVOVFDControl
+if EW7358
+SUBDIRS += EWVFDControl
 endif
 
 if VENTON
