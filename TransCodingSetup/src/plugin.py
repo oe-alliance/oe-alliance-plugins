@@ -231,9 +231,9 @@ class TranscodingSetupInit:
 				configElement.save()
 				self.showMessage("Set %s failed." % (configName), MessageBox.TYPE_ERROR)
 		else: # Off
-			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "bitrate"):
+			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "bitrate") and config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.value == '-1':
 				config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.setValue(config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.default)
-			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "framerate"):
+			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "framerate") and config.plugins.transcodingsetup.encoder[int(extra_args[0])].framerate.value == '-1':
 				config.plugins.transcodingsetup.encoder[int(extra_args[0])].framerate.setValue(config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.default)
 
 	def setBitrate(self, configElement, extra_args):
