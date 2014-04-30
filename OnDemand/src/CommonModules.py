@@ -332,9 +332,9 @@ class StreamsThumbCommon(Screen):
 					<widget source="Title" render="Label" position="20,0" size="e,50" font="Regular;32" />
 					<widget name="list" position="0,50" size="e,e-50" scrollbarMode="showOnDemand" transparent="1" />
 				</screen>"""
-		self.skinName = [name, "StreamsThumbCommon"]
 		self.session = session
 		Screen.__init__(self, session)
+		self.skinName = [name, "StreamsThumbCommon"]
 
 		self['lab1'] = Label(_('Wait please while gathering data...'))
 
