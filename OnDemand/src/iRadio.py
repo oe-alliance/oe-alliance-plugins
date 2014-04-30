@@ -472,7 +472,8 @@ class shoutGenresThumb(StreamsThumbCommon):
 		self.favoriteConfig.Entries = ConfigSubList()
 		self.initFavoriteConfig()
 
-		StreamsThumbCommon.__init__(self, session, action, value, url)
+		self.screenName = "ShoutStreamsThumbCommon"
+		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 		self.skin = """
 				<screen position="0,0" size="e,e" flags="wfNoBorder" >
@@ -706,7 +707,8 @@ class FavoritesThumb(StreamsThumbCommon):
 		self.favoriteConfig.Entries = ConfigSubList()
 		self.initFavoriteConfig()
 
-		StreamsThumbCommon.__init__(self, session, action, value, url)
+		self.screenName = "RadioFavStreamsThumbCommon"
+		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 		self.skin = """
 				<screen position="0,0" size="e,e" flags="wfNoBorder" >
@@ -892,7 +894,8 @@ class tuneinGenresThumb(StreamsThumbCommon):
 		self.genreList = []
 		self.getGenreList(self.genreList)
 
-		StreamsThumbCommon.__init__(self, session, action, value, url)
+		self.screenName = "TuneinStreamsThumbCommon"
+		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 		self.skin = """
 				<screen position="0,0" size="e,e" flags="wfNoBorder" >

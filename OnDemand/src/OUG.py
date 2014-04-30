@@ -206,7 +206,8 @@ class OpenUg(StreamsThumbCommon):
 	def __init__(self, session, action, value=None, url=None):
 		self.defaultImg = "Extensions/OnDemand/icons/OUG.png"
 		self.showIcon = str(config.ondemand.ShowImages.value)
-		StreamsThumbCommon.__init__(self, session, action, value, url)
+		self.screenName = "OUGStreamsThumbCommon"
+		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 		self.isAtotZ = False
 		self.isRtl = False

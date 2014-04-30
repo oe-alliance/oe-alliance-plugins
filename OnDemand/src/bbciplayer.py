@@ -207,7 +207,8 @@ class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/bbciplayer.png"
 		self.showIcon = str(config.ondemand.ShowImages.value)
-		StreamsThumbCommon.__init__(self, session, action, value, url)
+		self.screenName = "BBCiStreamsThumbCommon"
+		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
 		self.setTitle("BBC iPlayer: Listings for " +self.title)

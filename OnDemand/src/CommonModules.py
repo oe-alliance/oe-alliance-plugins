@@ -325,13 +325,14 @@ class StreamsThumbCommon(Screen):
 	TIMER_CMD_START = 0
 	TIMER_CMD_VKEY = 1
 
-	def __init__(self, session, action, value, url):
+	def __init__(self, session, action, value, url, name):
 		self.skin = """
 				<screen position="0,0" size="e,e" flags="wfNoBorder" >
 					<widget name="lab1" position="0,0" size="e,e" font="Regular;24" halign="center" valign="center" transparent="0" zPosition="5" />
 					<widget source="Title" render="Label" position="20,0" size="e,50" font="Regular;32" />
 					<widget name="list" position="0,50" size="e,e-50" scrollbarMode="showOnDemand" transparent="1" />
 				</screen>"""
+		self.skinName = [name, "StreamsThumbCommon"]
 		self.session = session
 		Screen.__init__(self, session)
 

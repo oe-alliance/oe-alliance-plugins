@@ -268,7 +268,8 @@ class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/fourOD.png"
 		self.showIcon = str(config.ondemand.ShowImages.value)
-		StreamsThumbCommon.__init__(self, session, action, value, url)
+		self.screenName = "4ODStreamsThumbCommon"
+		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
 		self.setTitle("4OD Player: Listings for " +self.title)

@@ -237,7 +237,8 @@ class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/rteDefault.png"
 		self.showIcon = str(config.ondemand.ShowImages.value)
-		StreamsThumbCommon.__init__(self, session, action, value, url)
+		self.screenName = "RTEStreamsThumbCommon"
+		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
 		self.setTitle("RTE Player: Listings for " +self.title)

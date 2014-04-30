@@ -131,7 +131,8 @@ class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/threeDefault.png"
 		self.showIcon = str(config.ondemand.ShowImages.value)
-		StreamsThumbCommon.__init__(self, session, action, value, url)
+		self.screenName = "TV3StreamsThumbCommon"
+		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
 		self.setTitle("3 Player: Listings for " +self.title)

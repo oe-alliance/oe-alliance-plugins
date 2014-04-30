@@ -46,7 +46,7 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("OnDemand Configuration"))
-		self.skinName = "Setup"
+		self.skinName = ["OnDemandScreenSetup", "Setup"]
 		
 		self.configlist = []
 		ConfigListScreen.__init__(self, self.configlist)
