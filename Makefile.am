@@ -22,10 +22,6 @@ if ODINM7
 SUBDIRS += OdinM7VFDControl
 endif
 
-if ODINM6
-SUBDIRS += OdinM7VFDControl
-endif
-
 if INIHDE
 SUBDIRS += INIVFDControl
 endif
