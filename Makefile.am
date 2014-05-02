@@ -34,15 +34,7 @@ if EW7358
 SUBDIRS += EWVFDControl
 endif
 
-if VENTON
-SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade
-endif
-
 if INI
-SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade
-endif
-
-if MIRACLEBOX
 SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade
 endif
 
