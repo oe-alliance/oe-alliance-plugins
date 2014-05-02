@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"POT-Creation-Date: 2014-05-02 12:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,125 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:8
-msgid "Auto"
+msgid " ver. 3.2"
 msgstr ""
 
-#: ../src/plugin.py:31
+msgid "All"
+msgstr ""
+
 msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:102 ../src/plugin.py:108
+msgid "End time"
+msgstr ""
+
+msgid "Fan - Auto"
+msgstr ""
+
+msgid "Fan - Off"
+msgstr ""
+
+msgid "Fan - On"
+msgstr ""
+
 msgid "Fan Control"
 msgstr ""
 
-#: ../src/plugin.py:48
+msgid "Fan Setup"
+msgstr ""
+
 msgid "Fan mode"
 msgstr ""
 
-#: ../src/plugin.py:30
-msgid "OK"
+msgid "Fan setup:"
 msgstr ""
 
-#: ../src/plugin.py:8
+msgid "HDD Sleeping"
+msgstr ""
+
+msgid "HDD Temperature"
+msgstr ""
+
+msgid ""
+"Harddisk standby after - no standby\n"
+"You may not use this mode!"
+msgstr ""
+
+msgid "Harddisk temperature"
+msgstr ""
+
+msgid "Harddisks:"
+msgstr ""
+
+msgid "Initial fan speed"
+msgstr ""
+
+msgid "No harddisk with temperature sensor found!"
+msgstr ""
+
+msgid "No system temperature sensor found!"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
 msgid "Off"
 msgstr ""
 
-#: ../src/plugin.py:8
 msgid "On"
 msgstr ""
 
-#: ../src/plugin.py:108
+msgid "Power status"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Select internal HDD device"
+msgstr ""
+
+msgid "Show Temp"
+msgstr ""
+
+msgid "Show temp. HDD to extensions menu"
+msgstr ""
+
+msgid "Start time"
+msgstr ""
+
+msgid ""
+"Start time OFF mode equal End time OFF mode\n"
+"You may not use this time settings!"
+msgstr ""
+
+msgid "Switch Fan mode on time setting"
+msgstr ""
+
+msgid "Switch OFF mode on HDD sleep"
+msgstr ""
+
+msgid "Switch ON mode on HDD max.temp. (0 - disable)"
+msgstr ""
+
+msgid "Switch ON on system temp"
+msgstr ""
+
+msgid "System temperature"
+msgstr ""
+
+msgid "Watch HDD state"
+msgstr ""
+
+msgid "Watch system temp"
+msgstr ""
+
+msgid ""
+"You may not use this mode!\n"
+"Not found an internal hard drive!"
+msgstr ""
+
+msgid "n.a."
+msgstr ""
+
 msgid "switch Fan On/Off"
 msgstr ""

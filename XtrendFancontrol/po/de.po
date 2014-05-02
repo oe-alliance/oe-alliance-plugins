@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-09 00:14+0100\n"
+"POT-Creation-Date: 2014-05-02 12:28+0200\n"
 "PO-Revision-Date: 2013-09-08 22:08+0100\n"
 "Last-Translator: husky <husky@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -14,23 +14,14 @@ msgstr ""
 "X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-msgid " "
-msgstr ""
-
-msgid " ver. 3.1"
-msgstr " Version 3.1"
+msgid " ver. 3.2"
+msgstr " Version 3.2"
 
 msgid "All"
 msgstr "Alle"
 
 msgid "Cancel"
 msgstr "Abbrechen"
-
-msgid "Drive is sleeping\n"
-msgstr "HDD im Ruhezustand\n"
-
-msgid "ERROR\n"
-msgstr "FEHLER\n"
 
 msgid "End time"
 msgstr "End-Zeit"
@@ -56,9 +47,6 @@ msgstr "Lüftermodus"
 msgid "Fan setup:"
 msgstr "Lüfter Konfiguration:"
 
-msgid "Found internal HDD !\n"
-msgstr "Interne HDD gefunden !\n"
-
 msgid "HDD Sleeping"
 msgstr "HDD im Ruhezustand"
 
@@ -72,14 +60,29 @@ msgstr ""
 "HDD Standby nach - kein Standby\n"
 "Dieser Modus kann nicht verwendet werden !"
 
-msgid "HddTempWatcher not running!"
-msgstr "Hdd-Temp.Wächter läuft nicht !"
+msgid "Harddisk temperature"
+msgstr "HDD Temperatur"
+
+msgid "Harddisks:"
+msgstr "Festplatten:"
+
+msgid "Initial fan speed"
+msgstr "Initiale Lüftergeschw."
+
+msgid "No harddisk with temperature sensor found!"
+msgstr "Keine Festplatte mit Temperatur Sensor gefunden!"
+
+msgid "No system temperature sensor found!"
+msgstr "Kein System Temperatursensor gefunden!"
 
 msgid "None"
 msgstr "Nein"
 
-msgid "Not found an internal HDD !"
-msgstr "Keine Interne HDD gefunden !"
+msgid "Off"
+msgstr "Aus"
+
+msgid "On"
+msgstr "An"
 
 msgid "Power status"
 msgstr "Power Status"
@@ -90,14 +93,11 @@ msgstr "Speichern"
 msgid "Select internal HDD device"
 msgstr "Interne HDD wählen"
 
-msgid "Show HDDTemp"
-msgstr "Zeige HDD-Temp."
+msgid "Show Temp"
+msgstr "Zeige Temperaturen"
 
 msgid "Show temp. HDD to extensions menu"
 msgstr "Zeige HDD-Temp. im Erweiterungs-Menü"
-
-msgid "Show temp.HDD"
-msgstr "Zeige HDD-Temp."
 
 msgid "Start time"
 msgstr "Start-Zeit"
@@ -118,8 +118,17 @@ msgstr "Lüfter ausschalten wenn HDD schläft"
 msgid "Switch ON mode on HDD max.temp. (0 - disable)"
 msgstr "Lüfter anschalten bei HDD-Temp.max.(0 = deaktiv)"
 
+msgid "Switch ON on system temp"
+msgstr "Lüfter anschalten bei Systemtemperatur"
+
+msgid "System temperature"
+msgstr "System Temperatur"
+
 msgid "Watch HDD state"
-msgstr "Lüfter Status überwachen"
+msgstr "HDD Status überwachen"
+
+msgid "Watch system temp"
+msgstr "System Temperatur überwachen"
 
 msgid ""
 "You may not use this mode!\n"
@@ -128,29 +137,8 @@ msgstr ""
 "Dieser Modus kann nicht verwendet werden.\n"
 "Keine Interne HDD gefunden !"
 
-msgid "hddtemp not installed!"
-msgstr "HDDtemp ist nicht installiert !"
+msgid "n.a."
+msgstr "n.v."
 
 msgid "switch Fan On/Off"
 msgstr "Lüfter Ein/Aus schalten"
-
-msgid "temp : "
-msgstr "Temp. : "
-
-msgid "true"
-msgstr "Ja"
-
-msgid "false"
-msgstr "Nein"
-
-#~ msgid "Auto"
-#~ msgstr "Auto"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "Off"
-#~ msgstr "Aus"
-
-#~ msgid "On"
-#~ msgstr "An"
