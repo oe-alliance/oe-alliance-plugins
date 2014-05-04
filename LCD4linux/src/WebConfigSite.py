@@ -412,7 +412,12 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "vertical-align: middle; font-size:8px; }\n"
 		html += "</style>\n"
 		if L4LElement.getRefresh() == True:
-			html += "<meta http-equiv=\"refresh\" content=\"6\">\n"
+			GI = getINFO().split()
+			if len(GI)>6:
+				GR = min(int(float(GI[6]))+1,6)
+			else:
+				GR = 6
+			html += "<meta http-equiv=\"refresh\" content=\"%d\">\n" % GR
 		html += "<title>LCD4linux</title>\n"
 		html += "</head>"
 		html += "<body bgcolor=\"#666666\" text=\"#FFFFFF\">\n"
