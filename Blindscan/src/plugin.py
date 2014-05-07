@@ -360,7 +360,7 @@ class Blindscan(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree,_('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels')))
 			self.list.append(getConfigListEntry(_("Only scan unknown transponders"), self.dont_scan_known_tps,_('If you select "yes" the scan will only search transponders not listed in satellites.xml')))
 			self.list.append(getConfigListEntry(_("Filter out adjacent satellites"), self.filter_off_adjacent_satellites,_('When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite')))
-			self.list.append(getConfigListEntry(_("Search type"), self.search_type,_('"channel scan" searches for channels and saves them to your receiver; "save to XML file" does a transponder search and saves found transponders to an XML file in satellites.xml format')))
+			self.list.append(getConfigListEntry(_("Search type"), self.search_type,_('"channel scan" searches for channels and saves them to your receiver; both options do a transponder search and save the result in /tmp in an XML file in satellites.xml format')))
 			self["config"].list = self.list
 			self["config"].l.setList(self.list)
 			self.startDishMovingIfRotorSat()
@@ -703,11 +703,11 @@ class Blindscan(ConfigListScreen, Screen):
 				for p in self.tmp_tplist:
 					print "data : [%d][%d][%d][%d][%d][%d][%d][%d][%d][%d]" % (p.orbital_position, p.polarisation, p.frequency, p.symbol_rate, p.system, p.inversion, p.pilot, p.fec, p.modulation, p.modulation)
 
+				self.tmp_tplist = sorted(self.tmp_tplist, key=lambda transponder: transponder.frequency)
+				xml_location = self.createSatellitesXMLfile(self.tmp_tplist, XML_BLINDSCAN_DIR)
 				if self.search_type.value == 0 : # Do a service scan
 					self.startScan(self.tmp_tplist, self.feid)
 				else: # Save transponder data to file. No service scan.
-					self.tmp_tplist = sorted(self.tmp_tplist, key=lambda transponder: transponder.frequency)
-					xml_location = self.createSatellitesXMLfile(self.tmp_tplist, XML_BLINDSCAN_DIR)
 					msg = _("Search completed. %d transponders found.\n\nDetails saved in:\n%s")%(len(self.tmp_tplist), xml_location)
 					self.session.openWithCallback(self.callbackNone, MessageBox, msg, MessageBox.TYPE_INFO, timeout=300)
 			else:
