@@ -97,7 +97,11 @@ class BouquetsWriter():
 				provider_name = control_char_re.sub('', service["provider_name"]).decode('latin-1').encode("utf8")
 
 				lamedb.write("%s\n" % service_name)
-				lamedb.write("p:%s\n" % provider_name)
+
+				if service["free_ca"] == 0:
+					lamedb.write("p:%s\n" % provider_name)
+				else:
+					lamedb.write("p:%s,C:0000\n" % provider_name)
 				services_count += 1
 
 		lamedb.write("end\nHave a lot of bugs!\n")
