@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 13:52+0000\n"
-"PO-Revision-Date: 2013-07-25 17:09+0100\n"
+"POT-Creation-Date: 2014-05-08 13:54+0100\n"
+"PO-Revision-Date: 2014-05-12 12:35+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
@@ -27,11 +27,20 @@ msgstr ""
 "!!(Leeg)\n"
 "Geef in naar"
 
+msgid "* RC Help"
+msgstr "* AB Help"
+
+msgid "* Start YouTube TV"
+msgstr "* Start YouTube TV"
+
 msgid "About"
 msgstr "About"
 
 msgid "Add"
 msgstr "Voeg toe"
+
+msgid "Back"
+msgstr "Terug"
 
 msgid "Backspace Key"
 msgstr "Backspace toets"
@@ -88,6 +97,9 @@ msgstr "Direkte invoer (bladwijzer)"
 msgid "Direct Input(Category)"
 msgstr "Direkte invoer (categorie)"
 
+msgid "Do not show YouTube TV Starter again"
+msgstr "Toon YouTube TV Starter niet meer"
+
 msgid "Do you want to delete the bookmark?"
 msgstr "Wilt u deze bladwijzer verwijderen?"
 
@@ -111,6 +123,9 @@ msgstr "Verlaat"
 
 msgid "Exit the Opera browser."
 msgstr "Verlaat de Opera browser."
+
+msgid "Exit the YouTube TV"
+msgstr "Verlaat the YouTube TV"
 
 msgid "File"
 msgstr "Bestand"
@@ -168,6 +183,9 @@ msgstr "Beweegt de muisaanwijzer naar boven."
 msgid "Keyboard"
 msgstr "Toetsenbord"
 
+msgid "Keyboard Layout"
+msgstr "Toetsenbord indeling"
+
 msgid "Left Key"
 msgstr "Toets naar links"
 
@@ -176,6 +194,18 @@ msgstr "Linker muistoets"
 
 msgid "Mouse"
 msgstr "Muis"
+
+msgid "Move down"
+msgstr "Verplaats omlaag"
+
+msgid "Move left"
+msgstr "Verplaats naar links"
+
+msgid "Move right"
+msgstr "Verplaats naar rechts"
+
+msgid "Move up"
+msgstr "Verplaats omhoog"
 
 msgid "Name"
 msgstr "Naam"
@@ -211,6 +241,15 @@ msgstr "Toets pagina naar beneden"
 msgid "PageUp Key"
 msgstr "Toets pagina naar boven"
 
+msgid "Pause current video"
+msgstr "Pauzeer huidige video"
+
+msgid "Play current video"
+msgstr "Spel huidige video"
+
+msgid "Play ther selected the video"
+msgstr "Speel de geselecteerde video's"
+
 msgid "Please choose an HbbTV application."
 msgstr "Kies een HbbTV applicatie."
 
@@ -238,6 +277,9 @@ msgstr "Rechter muistoets"
 msgid "Save"
 msgstr "Sla op"
 
+msgid "Search a video"
+msgstr "Zoek een video"
+
 msgid "Set as Startpage"
 msgstr "Stel in als startpagina"
 
@@ -247,11 +289,20 @@ msgstr "Toon menuvenster"
 msgid "Show the Virtual keyboard window."
 msgstr "Toon virtuele toetsenbord"
 
+msgid "Skip backward 10 sec"
+msgstr "Spring 10 sec achteruit"
+
+msgid "Skip forward 10 sec"
+msgstr "Spring 10 sec vooruit"
+
 msgid "Start"
 msgstr "Start"
 
 msgid "Start Page"
 msgstr "Startpagina"
+
+msgid "Start YouTube TV"
+msgstr "Start YouTube TV"
 
 msgid "Start/Stop"
 msgstr "Start/Stop"
@@ -261,6 +312,9 @@ msgstr "Startpagina"
 
 msgid "Stop"
 msgstr "Stop"
+
+msgid "Stop current video"
+msgstr "Stop huidige video"
 
 msgid "Switch to keyboard/mouse mode."
 msgstr "Schakel tussen toetsenbord en muis modus"
@@ -276,6 +330,18 @@ msgstr "Toets naar boven"
 
 msgid "Url"
 msgstr "Url"
+
+msgid "YouTube TV"
+msgstr "YouTube TV"
+
+msgid "YouTube TV Settings"
+msgstr "YouTube TV instellingen"
+
+msgid "YouTube TV URL"
+msgstr "YouTube TV URL"
+
+msgid "YouTube TV is a new way to watch YouTube videos on STB"
+msgstr "YouTube TV is een nieuwe manier om YouTube video's op een STB te bekijken"
 
 msgid "start opera web browser"
 msgstr "start opera web browser"
