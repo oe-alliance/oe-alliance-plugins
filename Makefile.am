@@ -14,6 +14,10 @@ if XTREND
 SUBDIRS += XtrendFancontrol Blindscan XtrendRemote
 endif
 
+if MUTANT2400
+SUBDIRS += XtrendFancontrol XtrendRemote
+endif
+
 if ODIN
 SUBDIRS += XtrendFancontrol Blindscan
 endif
