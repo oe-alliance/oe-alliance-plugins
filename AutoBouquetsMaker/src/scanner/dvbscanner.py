@@ -228,9 +228,13 @@ class DvbScanner():
 		logical_channel_number_dict = {}
 		logical_channel_number_dict_tmp = {}
 		hd_logical_channel_number_dict_tmp = {}
+		service_dict_tmp ={}
 		transponders_count = 0
 		for transponder in nit_content:
-			print 'LINE:',transponder
+			if len(transponder) == 4: # service
+				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
+				service_dict_tmp[key] = transponder
+				continue
 			if len(transponder) == 5: # lcn
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
 				logical_channel_number_dict_tmp[key] = transponder
@@ -314,10 +318,11 @@ class DvbScanner():
 
 		return {
 			"transport_stream_id_list": transport_stream_id_list,
-			"logical_channel_number_dict": logical_channel_number_dict
+			"logical_channel_number_dict": logical_channel_number_dict,
+			"service_dict_tmp": service_dict_tmp
 		}
 
-	def updateAndReadServicesLCN(self, namespace, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict):
+	def updateAndReadServicesLCN(self, namespace, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict, service_dict_tmp):
 		print>>log, "[DvbScanner] Reading services..."
 
 		if self.sdt_other_table_id == 0x00:
@@ -384,15 +389,19 @@ class DvbScanner():
 
 				key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
 
-				if key not in logical_channel_number_dict:
-					continue
 
-				if logical_channel_number_dict[key]["visible_service_flag"] == 0:
+				if logical_channel_number_dict and (key not in logical_channel_number_dict or logical_channel_number_dict[key]["visible_service_flag"] == 0):
+					continue
+				if service_dict_tmp and key not in service_dict_tmp:
 					continue
 
 				service["namespace"] = namespace
 				service["flags"] = 0
-				service["number"] = logical_channel_number_dict[key]["logical_channel_number"]
+
+				if not logical_channel_number_dict:
+					service["number"] = service["logical_channel_number"]
+				else:
+					service["number"] = logical_channel_number_dict[key]["logical_channel_number"]
 
 				if key in tmp_services_dict:
 					tmp_services_dict[key]["numbers"].append(service["number"])

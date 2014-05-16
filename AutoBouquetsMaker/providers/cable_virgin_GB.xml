@@ -1,0 +1,30 @@
+<provider>
+<name>Virgin (UK)</name>
+	<streamtype>dvbc</streamtype>
+	<protocol>lcn</protocol>
+	<namespace>0xffff0000</namespace>
+	<dvbcconfigs>
+		<configuration key="41050" netid="41050" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">Seven Kings</configuration>
+		<configuration key="40985" netid="40985" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="5">Haringey</configuration>
+	</dvbcconfigs>
+	<sections>
+		<section number="100">Entertainment</section>
+		<section number="206">Factual</section>
+		<section number="260">Lifestyle</section>
+		<section number="300">Music</section>
+		<section number="400">Movies</section>
+		<section number="470">Adult</section>
+		<section number="511">Sports</section>
+		<section number="601">News</section>
+		<section number="700">Kids</section>
+		<section number="740">Shopping</section>
+		<section number="801">International</section>
+		<section number="851">Audio Description</section>
+		<section number="901">Radio</section>
+		<section number="998">Information</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>

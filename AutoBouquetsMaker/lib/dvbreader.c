@@ -368,6 +368,25 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 				PyList_Append(list, item);
 				Py_DECREF(item);
 			}
+			else if (descriptor_tag == 0x41)	// service_list_descriptor
+			{
+				int offset3 = offset2 + 2;
+				while (offset3 < (offset2 + descriptor_length + 2))
+				{
+					int service_id = (data[offset3] << 8) | data[offset3 + 1];
+					int service_type = data[offset3 + 2];
+
+					offset3 += 3;
+					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i}",
+							"transport_stream_id", transport_stream_id,
+							"original_network_id", original_network_id,
+							"service_id", service_id,
+							"service_type", service_type);
+							
+					PyList_Append(list, item);
+					Py_DECREF(item);
+				}
+			}
 			else if (descriptor_tag == 0x83)	// lcn_descriptor
 			{
 				int offset3 = offset2 + 2;
@@ -436,6 +455,8 @@ PyObject *ss_parse_sdt(unsigned char *data, int length) {
 		char service_name[256];
 		char provider_name[256];
 		int service_type = 0;
+		int lcn_id = 0;
+		int bouquets_id = 0;
 		memset(service_name, '\0', 256);
 		memset(provider_name, '\0', 256);
 		
@@ -472,6 +493,13 @@ PyObject *ss_parse_sdt(unsigned char *data, int length) {
 				memset(service_name, '\0', 256);
 				memcpy(service_name, data + offset2 + 2, size);
 			}
+			if (tag == 0xca)	//User defined. Virgin LCN and Bouquets id
+			{
+				lcn_id = ((data[offset2 + 2] & 0x03) << 8) | data[offset2 + 3];
+				int name_length = data[offset2 + 4];
+				//service name is taken from descriptor 48
+				bouquets_id = data[offset2 + 5 + name_length];
+			}
 			descriptors_loop_length -= (size + 2);
 			offset2 += (size + 2);
 		}
@@ -488,14 +516,16 @@ PyObject *ss_parse_sdt(unsigned char *data, int length) {
 		else if (service_name[0] == 0x05)
 				service_name_ptr++;
 		
-		PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:s,s:s}",
+		PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:s,s:s,s:i,s:i}",
 					"transport_stream_id", transport_stream_id,
 					"original_network_id", original_network_id,
 					"service_id", service_id,
 					"service_type", service_type,
 					"free_ca", free_ca,
 					"service_name", service_name_ptr,
-					"provider_name", provider_name_ptr);
+					"provider_name", provider_name_ptr,
+					"logical_channel_number", lcn_id,
+					"bouquets_id", bouquets_id);
 		PyList_Append(list, item);
 		Py_DECREF(item);
 	}
