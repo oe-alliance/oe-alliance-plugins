@@ -75,6 +75,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		self.providers_makesections = {}
 		self.providers_makehd = {}
 		self.providers_makefta = {}
+		self.providers_makeftahd = {}
 		self.providers_order = []
 		self.orbital_supported = []
 
@@ -131,6 +132,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 			self.providers_makesections[provider] = None
 			self.providers_makehd[provider] = None
 			self.providers_makefta[provider] = None
+			self.providers_makeftahd[provider] = None
 
 			if len(self.providers[provider]["sections"].keys()) > 1:	# only if there's more then one section
 				sections_default = True
@@ -142,11 +144,15 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 			if self.providers[provider]["protocol"] != "fastscan":	# fastscan doesn't have enough information to make HD and/or FTA bouquets
 				hd_default = True
 				fta_default = True
+				ftahd_default = True
 				if provider in providers_tmp_configs:
 					hd_default = providers_tmp_configs[provider].isMakeHD()
 					fta_default = providers_tmp_configs[provider].isMakeFTA()
+					ftahd_default = providers_tmp_configs[provider].isMakeFTAHD()
+					print 'ftahd_default:',ftahd_default
 				self.providers_makehd[provider] = ConfigYesNo(default = hd_default)
 				self.providers_makefta[provider] = ConfigYesNo(default = fta_default)
+				self.providers_makeftahd[provider] = ConfigYesNo(default = ftahd_default)
 				custom_bouquets_exists = True
 
 			if sorted(self.providers[provider]["sections"].keys())[0] > 1:
@@ -162,8 +168,11 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 
 				if self.providers[provider]["protocol"] != "fastscan":
 					makemain_list.append(("hd", _("yes (only HD)")))
+					makemain_list.append(("ftahd", _("yes (only FTA HD)")))
 					if provider in providers_tmp_configs and providers_tmp_configs[provider].isMakeHDMain():
 						makemain_default = "hd"
+					if provider in providers_tmp_configs and providers_tmp_configs[provider].isMakeFTAHDMain():
+						makemain_default = "ftahd"
 
 				if len(bouquets_list) > 0:
 					makemain_list.append(("custom", _("yes (custom)")))
@@ -237,6 +246,9 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 
 					if self.providers_makefta[provider]:
 						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate FTA bouquet"), self.providers_makefta[provider], _("This option will create a FreeToAir bouquet, it will group all none encrypted channels into this bouquet.")))
+
+					if self.providers_makeftahd[provider] and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "ftahd"):
+						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate FTA HD bouquet"), self.providers_makeftahd[provider], _("This option will create a FreeToAir High Definition bouquet, it will group all HD channels into this bouquet.")))
 
 					if self.providers_makemain[provider] and self.providers_makemain[provider].value == "yes":
 						if self.providers[provider]["protocol"] == "sky":
@@ -318,6 +330,8 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 					provider_config.setMakeNormalMain()
 				elif self.providers_makemain[provider].value == "hd":
 					provider_config.setMakeHDMain()
+				elif self.providers_makemain[provider].value == "ftahd":
+					provider_config.setMakeFTAHDMain()
 				elif self.providers_makemain[provider].value == "custom":
 					provider_config.setMakeCustomMain()
 					provider_config.setCustomFilename(self.providers_custommain[provider].value)
@@ -330,6 +344,11 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 
 				if self.providers_makefta[provider] and self.providers_makefta[provider].value:
 					provider_config.setMakeFTA()
+
+				print 'self.providers_makeftahd[provider].value',self.providers_makeftahd[provider].value
+				print 'self.providers_makemain[provider].value:',self.providers_makemain[provider].value
+				if self.providers_makeftahd[provider] and self.providers_makeftahd[provider].value and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "ftahd"):
+					provider_config.setMakeFTAHD()
 
 				if self.providers_swapchannels[provider] and self.providers_swapchannels[provider].value:
 					provider_config.setSwapChannels()
