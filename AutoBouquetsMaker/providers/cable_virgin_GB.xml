@@ -4,8 +4,76 @@
 	<protocol>lcn</protocol>
 	<namespace>0xffff0000</namespace>
 	<dvbcconfigs>
-		<configuration key="41050" netid="41050" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">Seven Kings</configuration>
-		<configuration key="40985" netid="40985" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="5">Haringey</configuration>
+		<configuration key="00013_dvbc_uk" netid="00013" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00013 Reading</configuration>
+		<configuration key="00021_dvbc_uk" netid="00021" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00021 Belfast</configuration>
+		<configuration key="40961_dvbc_uk" netid="40961" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40961 Barnsley 600MHz (Barnsley 1)</configuration>
+		<configuration key="40962_dvbc_uk" netid="40962" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40962 Barnsley 860MHz (Barnsley 2)</configuration>
+		<configuration key="40963_dvbc_uk" netid="40963" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40963 Sheffield 600MHz (Barnsley 3)</configuration>
+		<configuration key="40964_dvbc_uk" netid="40964" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40964 Sheffield 860MHz (Barnsley 4)</configuration>
+		<configuration key="40965_dvbc_uk" netid="40965" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40965 Knowsley 1</configuration>
+		<configuration key="40966_dvbc_uk" netid="40966" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40966 Knowsley 2</configuration>
+		<configuration key="40967_dvbc_uk" netid="40967" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40967 Preston 1</configuration>
+		<configuration key="40968_dvbc_uk" netid="40968" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40968 Preston 2</configuration>
+		<configuration key="40969_dvbc_uk" netid="40969" bouquettype="hd" frequency="571000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40969 Gateshead</configuration>
+		<configuration key="40970_dvbc_uk" netid="40970" bouquettype="hd" frequency="651000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40970 Bristol 1 (ex Aztec)</configuration>
+		<configuration key="40971_dvbc_uk" netid="40971" bouquettype="hd" frequency="651000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40971 Bristol 2 (ex Aztec)</configuration>
+		<configuration key="40973_dvbc_uk" netid="40973" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40973 Wolverhampton 1</configuration>
+		<configuration key="40974_dvbc_uk" netid="40974" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40974 Wolverhampton 2</configuration>
+		<configuration key="40975_dvbc_uk" netid="40975" bouquettype="hd" frequency="411000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40975 Basildon 1</configuration>
+		<configuration key="40976_dvbc_uk" netid="40976" bouquettype="hd" frequency="411000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40976 Basildon 2</configuration>
+		<configuration key="40977_dvbc_uk" netid="40977" bouquettype="hd" frequency="411000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40977 Basildon 3</configuration>
+		<configuration key="40978_dvbc_uk" netid="40978" bouquettype="hd" frequency="411000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40978 Basildon 4</configuration>
+		<configuration key="40979_dvbc_uk" netid="40979" bouquettype="hd" frequency="411000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40979 Croydon</configuration>
+		<configuration key="40980_dvbc_uk" netid="40980" bouquettype="hd" frequency="539000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40980 Hayes</configuration>
+		<configuration key="40981_dvbc_uk" netid="40981" bouquettype="hd" frequency="619000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40981 Edinburgh 1 (SCOTLAND)</configuration>
+		<configuration key="40982_dvbc_uk" netid="40982" bouquettype="hd" frequency="619000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40982 Dundee (Edinburgh 2 SCOTLAND)</configuration>
+		<configuration key="40983_dvbc_uk" netid="40983" bouquettype="hd" frequency="539000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40983 TTA Knowsley DMC (Hayes_RHE)</configuration>
+		<configuration key="40984_dvbc_uk" netid="40984" bouquettype="hd" frequency="619000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40984 Uddingston (SCOTLAND)</configuration>
+		<configuration key="40985_dvbc_uk" netid="40985" bouquettype="hd" frequency="603000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40985 Haringey</configuration>
+		<configuration key="40986_dvbc_uk" netid="40986" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40986 NGRHEE Knowsley</configuration>
+		<configuration key="40987_dvbc_uk" netid="40987" bouquettype="hd" frequency="643000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40987 Exeter</configuration>
+		<configuration key="40988_dvbc_uk" netid="40988" bouquettype="hd" frequency="643000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40988 Plymouth</configuration>
+		<configuration key="40990_dvbc_uk" netid="40990" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40990 Barnsley 2 TRIALS</configuration>
+		<configuration key="40995_dvbc_uk" netid="40995" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40995 Wolverhampton TRIALS</configuration>
+		<configuration key="40998_dvbc_uk" netid="40998" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40998 Barnsley 1 TRIALS</configuration>
+		<configuration key="40999_dvbc_uk" netid="40999" bouquettype="hd" frequency="619000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40999 Perth (SCOTLAND)</configuration>
+		<configuration key="41003_dvbc_uk" netid="41003" bouquettype="hd" frequency="619000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41003 Edinburgh 1 TRIALS (SCOTLAND)</configuration>
+		<configuration key="41008_dvbc_uk" netid="41008" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41008 Liverpool TDN TRIALS</configuration>
+		<configuration key="41009_dvbc_uk" netid="41009" bouquettype="hd" frequency="619000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41009 Falkirk (SCOTLAND) </configuration>
+		<configuration key="41011_dvbc_uk" netid="41011" bouquettype="hd" frequency="643000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41011 Birmingham 750</configuration>
+		<configuration key="41013_dvbc_uk" netid="41013" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41013 TTA Knowsley 1 (Knowsley RHE)</configuration>
+		<configuration key="41015_dvbc_uk" netid="41015" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41015 Birmingham TDN</configuration>
+		<configuration key="41016_dvbc_uk" netid="41016" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41016 Liverpool TDN</configuration>
+		<configuration key="41018_dvbc_uk" netid="41018" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41018 Preston TDN</configuration>
+		<configuration key="41020_dvbc_uk" netid="41020" bouquettype="hd" frequency="411000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41020 Crawley</configuration>
+		<configuration key="41026_dvbc_uk" netid="41026" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41026 Southport</configuration>
+		<configuration key="41040_dvbc_uk" netid="41040" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41040 Leeds TRIALS</configuration>
+		<configuration key="41041_dvbc_uk" netid="41041" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41041 Bromley</configuration>
+		<configuration key="41042_dvbc_uk" netid="41042" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41042 Portsmouth</configuration>
+		<configuration key="41043_dvbc_uk" netid="41043" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41043 Poole</configuration>
+		<configuration key="41044_dvbc_uk" netid="41044" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41044 Brighton</configuration>
+		<configuration key="41045_dvbc_uk" netid="41045" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41045 Hersham</configuration>
+		<configuration key="41046_dvbc_uk" netid="41046" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41046 Derby</configuration>
+		<configuration key="41048_dvbc_uk" netid="41048" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41048 Manchester 3</configuration>
+		<configuration key="41049_dvbc_uk" netid="41049" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41049 Peterborough</configuration>
+		<configuration key="41050_dvbc_uk" netid="41050" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41050 Seven Kings</configuration>
+		<configuration key="41051_dvbc_uk" netid="41051" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41051 Watford</configuration>
+		<configuration key="41052_dvbc_uk" netid="41052" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41052 Ashford</configuration>
+		<configuration key="41053_dvbc_uk" netid="41053" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41053 Leeds</configuration>
+		<configuration key="41054_dvbc_uk" netid="41054" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41054 Wearside</configuration>
+		<configuration key="41055_dvbc_uk" netid="41055" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41055 Norwich</configuration>
+		<configuration key="41056_dvbc_uk" netid="41056" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41056 NGRHEE Bromley</configuration>
+		<configuration key="41059_dvbc_uk" netid="41059" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41059 Brighton TRIALS </configuration>
+		<configuration key="41060_dvbc_uk" netid="41060" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41060 Manchester 1</configuration>
+		<configuration key="41061_dvbc_uk" netid="41061" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41061 Code Download Test (Portsmouth)</configuration>
+		<configuration key="41063_dvbc_uk" netid="41063" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41063 Stoke (FF Manchester)</configuration>
+		<configuration key="41064_dvbc_uk" netid="41064" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41064 York (FF Leeds)</configuration>
+		<configuration key="41065_dvbc_uk" netid="41065" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41065 Portsmouth TRIALS</configuration>
+		<configuration key="41066_dvbc_uk" netid="41066" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41066 Manchester 2</configuration>
+		<configuration key="41067_dvbc_uk" netid="41067" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41067 TTA Bromley DMC (Bromley RHE)</configuration>
+		<configuration key="41068_dvbc_uk" netid="41068" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41068 Manchester TRIALS</configuration>
+		<configuration key="41069_dvbc_uk" netid="41069" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41069 Lewisham</configuration>
+		<configuration key="41071_dvbc_uk" netid="41071" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41071 Southampton</configuration>
 	</dvbcconfigs>
 	<sections>
 		<section number="100">Entertainment</section>
