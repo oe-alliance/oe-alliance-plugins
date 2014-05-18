@@ -127,13 +127,17 @@ class Manager():
 									preferred_order = swapchannels_set["preferred_order"]
 									break
 
+				if current_bouquet_key.startswith('hd'):
+					channelsontop = providers[provider_key]["hdchannelsontop"],
+				else:
+					channelsontop = providers[provider_key]["sdchannelsontop"],
 				writer.buildBouquets(self.path,
 						self.providerConfigs[provider_key],
 						self.services[provider_key],
 						providers[provider_key]["sections"],
 						provider_key,
 						preferred_order,
-						providers[provider_key]["channelsontop"],
+						channelsontop,
 						bouquetsToHide,
 						prefix)
 

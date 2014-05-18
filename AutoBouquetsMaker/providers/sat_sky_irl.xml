@@ -33,10 +33,14 @@
 		<section number="1030">Sky Anytime</section>
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
-	<channelsontop>
+	<hdchannelsontop>
 		<channel number="101" />
 		<channel number="102" />
-	</channelsontop>
+	</hdchannelsontop>
+	<sdchannelsontop>
+		<channel number="215" />
+		<channel number="142" />
+	</sdchannelsontop>
 	<!-- swapchannels affect only main bouquet (the normal version) -->
 	<swapchannels>
 		<filter bouquet="0x1008" region="0x32" />	

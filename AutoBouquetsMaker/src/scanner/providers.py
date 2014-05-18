@@ -36,7 +36,8 @@ class Providers():
 			provider = {}
 			provider["key"] = filename[:-4]
 			provider["swapchannels"] = []
-			provider["channelsontop"] = []
+			provider["hdchannelsontop"] = []
+			provider["sdchannelsontop"] = []
 			if dom.documentElement.nodeType == dom.documentElement.ELEMENT_NODE and dom.documentElement.tagName == "provider":
 				for node in dom.documentElement.childNodes:
 					if node.nodeType != node.ELEMENT_NODE:
@@ -308,15 +309,22 @@ class Providers():
 
 						provider["swapchannels"].append(swapchannels_set)
 
-					elif node.tagName == "channelsontop":
-						provider["channelsontop"] = []
-
+					elif node.tagName == "hdchannelsontop":
+						provider["hdchannelsontop"] = []
 						for node2 in node.childNodes:
 							if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "channel":
 								for i in range(0, node2.attributes.length):
 									if node2.attributes.item(i).name == "number":
-										provider["channelsontop"].append(int(node2.attributes.item(i).value))
+										provider["hdchannelsontop"].append(int(node2.attributes.item(i).value))
 
+					elif node.tagName == "sdchannelsontop":
+						provider["sdchannelsontop"] = []
+						for node2 in node.childNodes:
+							if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "channel":
+								for i in range(0, node2.attributes.length):
+									if node2.attributes.item(i).name == "number":
+										provider["sdchannelsontop"].append(int(node2.attributes.item(i).value))
+										
 					elif node.tagName == "servicehacks":
 						node.normalize()
 						for i in range(0, len(node.childNodes)):
