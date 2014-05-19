@@ -345,8 +345,6 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 				if self.providers_makefta[provider] and self.providers_makefta[provider].value:
 					provider_config.setMakeFTA()
 
-				print 'self.providers_makeftahd[provider].value',self.providers_makeftahd[provider].value
-				print 'self.providers_makemain[provider].value:',self.providers_makemain[provider].value
 				if self.providers_makeftahd[provider] and self.providers_makeftahd[provider].value and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "ftahd"):
 					provider_config.setMakeFTAHD()
 
