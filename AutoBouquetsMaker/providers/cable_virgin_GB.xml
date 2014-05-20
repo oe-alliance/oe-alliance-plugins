@@ -6,6 +6,7 @@
 	<dvbcconfigs>
 		<configuration key="00002_dvbc_uk" netid="00002" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00002 Glasgow</configuration>
 		<configuration key="00013_dvbc_uk" netid="00013" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00013 Reading</configuration>
+		<configuration key="00017_dvbc_uk" netid="00017" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00017 Hemel</configuration>
 		<configuration key="00018_dvbc_uk" netid="00018" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00018 Northampton</configuration>
 		<configuration key="00021_dvbc_uk" netid="00021" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00021 Belfast</configuration>
 		<configuration key="40961_dvbc_uk" netid="40961" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40961 Barnsley 600MHz (Barnsley 1)</configuration>
