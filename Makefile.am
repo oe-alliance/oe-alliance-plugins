@@ -26,12 +26,16 @@ if ODINM7
 SUBDIRS += OdinM7VFDControl
 endif
 
+if EW7358
+SUBDIRS += EWVFDControl
+endif
+
 if INIHDE
 SUBDIRS += INIVFDControl
 endif
 
-if EW7358
-SUBDIRS += EWVFDControl
+if INIHDE2
+SUBDIRS += INIVFDControl
 endif
 
 if INI
