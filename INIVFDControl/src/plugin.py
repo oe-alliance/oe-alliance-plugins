@@ -260,7 +260,7 @@ class VFD_INI:
 def main(menuid):
 	if menuid != "system":
 		return [ ]
-	return [(_("VFD_INI"), startVFD, "VFD_INI", None)]
+	return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
 
 def startVFD(session, **kwargs):
 	session.open(VFD_INISetup)
