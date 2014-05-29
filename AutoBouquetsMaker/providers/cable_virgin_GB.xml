@@ -4,11 +4,28 @@
 	<protocol>lcn</protocol>
 	<namespace>0xffff0000</namespace>
 	<dvbcconfigs>
+		<configuration key="00001_dvbc_uk" netid="00001" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00001 West Yorkshire</configuration>
 		<configuration key="00002_dvbc_uk" netid="00002" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00002 Glasgow</configuration>
+		<configuration key="00003_dvbc_uk" netid="00003" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00003 Farnborough</configuration>
+		<configuration key="00004_dvbc_uk" netid="00004" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00004 Bridgend</configuration>
+		<configuration key="00005_dvbc_uk" netid="00005" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00005 NW of London</configuration>
+		<configuration key="00006_dvbc_uk" netid="00006" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00006 Swindon</configuration>
+		<configuration key="00007_dvbc_uk" netid="00007" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00007 Port Talbot</configuration>
+		<configuration key="00008_dvbc_uk" netid="00008" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00008 Nottingham</configuration>
+		<configuration key="00009_dvbc_uk" netid="00009" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00009 Cambridge</configuration>
+		<configuration key="00010_dvbc_uk" netid="00010" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00010 Teesside</configuration>
+		<configuration key="00011_dvbc_uk" netid="00011" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00011 Ipswich</configuration>
+		<configuration key="00012_dvbc_uk" netid="00012" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00012 Leicester</configuration>
 		<configuration key="00013_dvbc_uk" netid="00013" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00013 Reading</configuration>
+		<configuration key="00014_dvbc_uk" netid="00014" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00014 Salisbury</configuration>
+		<configuration key="00015_dvbc_uk" netid="00015" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00015 Stafford</configuration>
+		<configuration key="00016_dvbc_uk" netid="00016" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00016 Warwick</configuration>
 		<configuration key="00017_dvbc_uk" netid="00017" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00017 Hemel</configuration>
 		<configuration key="00018_dvbc_uk" netid="00018" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00018 Northampton</configuration>
+		<configuration key="00019_dvbc_uk" netid="00019" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00019 Coventry</configuration>
+		<configuration key="00020_dvbc_uk" netid="00020" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00020 Oxford</configuration>
 		<configuration key="00021_dvbc_uk" netid="00021" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00021 Belfast</configuration>
+		<configuration key="00022_dvbc_uk" netid="00022" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00022 Grimsby</configuration>	
 		<configuration key="40961_dvbc_uk" netid="40961" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40961 Barnsley 600MHz (Barnsley 1)</configuration>
 		<configuration key="40962_dvbc_uk" netid="40962" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40962 Barnsley 860MHz (Barnsley 2)</configuration>
 		<configuration key="40963_dvbc_uk" netid="40963" bouquettype="hd" frequency="595000" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">40963 Sheffield 600MHz (Barnsley 3)</configuration>
@@ -77,6 +94,9 @@
 		<configuration key="41068_dvbc_uk" netid="41068" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41068 Manchester TRIALS</configuration>
 		<configuration key="41069_dvbc_uk" netid="41069" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41069 Lewisham</configuration>
 		<configuration key="41071_dvbc_uk" netid="41071" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41071 Southampton</configuration>
+		<configuration key="42753_dvbc_uk" netid="42753" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">42753 Dublin</configuration>
+		<configuration key="42754_dvbc_uk" netid="42754" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">42754 Waterford 1</configuration>
+		<configuration key="42757_dvbc_uk" netid="42757" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">42757 Waterford 2</configuration>		
 	</dvbcconfigs>
 	<sections>
 		<section number="100">Entertainment</section>
@@ -91,6 +111,7 @@
 		<section number="740">Shopping</section>
 		<section number="801">International</section>
 		<section number="851">Audio Description</section>
+		<section number="861">Local</section>
 		<section number="901">Radio</section>
 		<section number="998">Information</section>
 	</sections>
