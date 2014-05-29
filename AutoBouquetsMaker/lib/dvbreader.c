@@ -457,6 +457,7 @@ PyObject *ss_parse_sdt(unsigned char *data, int length) {
 		int service_type = 0;
 		int lcn_id = 0;
 		int bouquets_id = 0;
+		int service_group_id = 0;
 		memset(service_name, '\0', 256);
 		memset(provider_name, '\0', 256);
 		
@@ -499,6 +500,7 @@ PyObject *ss_parse_sdt(unsigned char *data, int length) {
 				int name_length = data[offset2 + 4];
 				//service name is taken from descriptor 48
 				bouquets_id = data[offset2 + 5 + name_length];
+				service_group_id = data[offset2 + 6 + name_length];
 			}
 			descriptors_loop_length -= (size + 2);
 			offset2 += (size + 2);
@@ -516,7 +518,7 @@ PyObject *ss_parse_sdt(unsigned char *data, int length) {
 		else if (service_name[0] == 0x05)
 				service_name_ptr++;
 		
-		PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:s,s:s,s:i,s:i}",
+		PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:s,s:s,s:i,s:i,s:i}",
 					"transport_stream_id", transport_stream_id,
 					"original_network_id", original_network_id,
 					"service_id", service_id,
@@ -525,7 +527,8 @@ PyObject *ss_parse_sdt(unsigned char *data, int length) {
 					"service_name", service_name_ptr,
 					"provider_name", provider_name_ptr,
 					"logical_channel_number", lcn_id,
-					"bouquets_id", bouquets_id);
+					"bouquets_id", bouquets_id,
+					"service_group_id", service_group_id);
 		PyList_Append(list, item);
 		Py_DECREF(item);
 	}

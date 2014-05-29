@@ -400,6 +400,8 @@ class DvbScanner():
 
 				if not logical_channel_number_dict:
 					service["number"] = service["logical_channel_number"]
+					if service["service_type"] == 1 and service["service_group_id"] == 17:
+						service["service_type"] = 17
 				else:
 					service["number"] = logical_channel_number_dict[key]["logical_channel_number"]
 
