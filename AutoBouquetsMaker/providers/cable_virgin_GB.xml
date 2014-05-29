@@ -115,6 +115,14 @@
 		<section number="901">Radio</section>
 		<section number="998">Information</section>
 	</sections>
+	<!-- channelsontop affect only HD bouquets -->
+	<hdchannelsontop>
+		<channel number="108" />
+		<channel number="162" />
+		<channel number="113" />
+		<channel number="142" />
+		<channel number="150" />
+	</hdchannelsontop>
 	<servicehacks>
 <![CDATA[
 ]]>
