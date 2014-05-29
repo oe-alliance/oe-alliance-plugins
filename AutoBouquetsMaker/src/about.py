@@ -48,6 +48,7 @@ class AutoBouquetsMaker_About(Screen):
 		credit += "Application credits:\n"
 		credit += "- Sandro Cavazzoni aka skaman (main developer)\n"
 		credit += "- Andrew Blackburn aka AndyBlac (main developer)\n\n"
+		credit += "- Peter de Jonge aka PeterJ (cable/terrestrial developer)\n\n"
 		credit += "Sources credits:\n"
 		credit += "- LraiZer (used his AutoBouquets script as a start point)"
 		self["about"].setText(credit)
