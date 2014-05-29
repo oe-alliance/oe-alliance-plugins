@@ -44,12 +44,12 @@
 		<channel number="230" />
 		<channel number="171" />
 	</hdchannelsontop>
-	<ftahdchannelsontop>
+	<sdchannelsontop>
 		<channel number="141" />
 		<channel number="142" />
 		<channel number="178" />
 		<channel number="230" />
-	</ftahdchannelsontop>
+	</sdchannelsontop>
 	<!-- swapchannels affect only main bouquet (the normal version) -->
 	<swapchannels>
 		<filter bouquet="0x1006" region="0x24" />
