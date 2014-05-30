@@ -26,6 +26,14 @@ if ODINM7
 SUBDIRS += OdinM7VFDControl
 endif
 
+if ODINM7S
+SUBDIRS += OdinM7VFDControl
+endif
+
+if ODINM7C
+SUBDIRS += OdinM7VFDControl
+endif
+
 if EW7358
 SUBDIRS += EWVFDControl
 endif
