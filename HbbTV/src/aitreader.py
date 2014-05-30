@@ -82,6 +82,7 @@ class eAITSectionReader:
 		document = re.sub(RE_XML_ILLEGAL, "?", document)
 		document = re.sub("&", "+", document)
 		document = document.decode("cp1252").encode("utf-8")
+		document = "<URL>" + document + "</URL>"
 		#print document
 		self.mDocument = xml.dom.minidom.parseString(document)
 		return True
