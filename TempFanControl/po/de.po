@@ -35,3 +35,6 @@ msgstr "OK"
 #, python-format
 msgid "Standby Fan %d PWM"
 msgstr "Standby Lüfter %d PWM"
+
+msgid "Temperature and fan control"
+msgstr "Temperatur und Lüftersteuerung"
