@@ -164,7 +164,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
 
 		self.skin = """
-			<screen position="100,100" size="500,210" title="VFD_INI Setup" >
+			<screen position="100,100" size="500,210" title="LED Display Setup" >
 				<widget name="config" position="20,15" size="460,150" scrollbarMode="showOnDemand" />
 				<ePixmap position="40,165" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
 				<ePixmap position="180,165" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
@@ -295,7 +295,7 @@ def sessionstart(reason, **kwargs):
 	controliniVfd()
 
 def Plugins(**kwargs):
-		if getBoxType() in ('xpeedlx1'):
+		if getBoxType() in ('xpeedlx1', 'atemio6100'):
 			return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
 				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
 		else:
