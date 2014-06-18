@@ -109,20 +109,23 @@ from module import L4Lelement,L4LVtest
 
 L4LElist = L4Lelement()
 
+L4LdoThread = True
+LCD4config = "/etc/enigma2/lcd4config"
+LCD4plugin ="/usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/"
+Data = LCD4plugin+"data/"
+
 try:
 	from fcntl import ioctl
 	from pngutil import png_util
 	pngutil = png_util.PNGUtil()
 	pngutilconnect = pngutil.connect()
+	if pngutilconnect:
+		pngutil.send(Data + "lcdblank.png")
 	PNGutilOK = True
 except:
 	PNGutilOK = False
 
 # globals
-L4LdoThread = True
-LCD4config = "/etc/enigma2/lcd4config"
-LCD4plugin ="/usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/"
-Data = LCD4plugin+"data/"
 if getBoxType() in ('gbquad','gb800ue','gb800ueplus'):
 	LCD4default = Data+"default.gigablue"
 elif getBoxType() == 'gbquadplus':
