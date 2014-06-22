@@ -123,6 +123,11 @@
 		<channel number="142" />
 		<channel number="178" />
 		<channel number="230" />
+		<channel number="171" />
+		<channel number="217" />
+		<channel number="235" />
+		<channel number="231" />
+		<channel number="204" />
 	</sdchannelsontop>
 	<!-- swapchannels affect only main bouquet (the normal version) -->
 	<swapchannels>
