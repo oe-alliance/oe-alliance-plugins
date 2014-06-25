@@ -59,6 +59,13 @@ if os.path.exists("/proc/stb/info/boxtype"):
 		fwdata= {
 			 "micom" : ["http://code-ini.com/software/micom/", "RHS100DE_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
+	elif info == "ini-1000am":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS300AM_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
 	elif info == "ini-3000":
 		fwlist= [
 			("fp", _("Front Panel"))
