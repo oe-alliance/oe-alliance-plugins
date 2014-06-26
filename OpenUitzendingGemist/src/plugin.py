@@ -35,37 +35,18 @@ config.plugins.OpenUitzendingGemist = ConfigSubsection()
 config.plugins.OpenUitzendingGemist.showpictures = ConfigBoolean(default = True)
 config.plugins.OpenUitzendingGemist.Npolivestreams = ConfigBoolean(default = False)
 
-
-def wgetUrl(target):
-	std_headers = {
-		'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:28.0) Gecko/20100101 Firefox/28.0',
-		'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-		'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-		'Accept-Language': 'en-us,en;q=0.5',
-	}
-	outtxt = Request(target, None, std_headers)
-	try:
-		outtxt = urlopen2(target, timeout = 5).read()
-	except (URLError, HTTPException, socket.error):
-		return ''
-	return outtxt
-
-def wgetUrlRefer(target, refer):
+def wgetUrl(target, refer='', cookie=''):
 	req = Request(target)
-	req.add_header('Referer', refer)
+	req.add_header('User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:30.0) Gecko/20100101 Firefox/30.0')
+	if refer != '':
+		req.add_header('Referer', refer)
+	if cookie != '':
+		req.add_header('Cookie', cookie)
+	req.add_header('DNT', '1')
 	try:
-		r = urlopen2(req)
+		r = urlopen2(req, timeout = 5)
 		outtxt = r.read()
-	except:
-		outtxt = ''
-	return outtxt
-
-def wgetUrlCookie(target, cookie):
-	req = Request(target)
-	req.add_header('Cookie', cookie)
-	try:
-		r = urlopen2(req)
-		outtxt = r.read()
+		r.close()
 	except:
 		outtxt = ''
 	return outtxt
@@ -561,7 +542,7 @@ class SmallScreen(Screen):
 			if selection[2] == 'npo':
 				API_URL = 'http://ida.omroep.nl/aapi/?stream='
 				BASE_URL = 'http://livestreams.omroep.nl/live/npo/'
-				data = wgetUrl(API_URL+BASE_URL+selection[1])
+				data = wgetUrl(API_URL+BASE_URL+selection[1], 'http://www.npo.nl')
 				data = Csplit(data, "?hash=", 1)
 				data = Csplit(data, '"', 0)
 				if data != '':
@@ -1520,7 +1501,7 @@ class OpenUg(Screen):
 				icon_type = ''
 
 	def sbsGetMediaUrl(self, uid):
-		out = wgetUrlRefer('%s%s' % (self.EMBED_BASE_URL, uid), '%s/kijkframe.php?videoId=%sW&width=868&height=488' % (self.SBS_BASE_URL, uid))
+		out = wgetUrl('%s%s' % (self.EMBED_BASE_URL, uid), '%s/kijkframe.php?videoId=%sW&width=868&height=488' % (self.SBS_BASE_URL, uid))
 		data = out.split('\n')
 		myexp = ''
 		id = ''
@@ -1545,7 +1526,7 @@ class OpenUg(Screen):
 		url = ''
 		if myexp != '' and id != '' and key != '' and vplayer != '':
 			target = "http://c.brightcove.com/services/viewer/htmlFederated?&width=868&height=488&flashID=myExperience%s&bgcolor=%%23FFFFFF&playerID=%s&playerKey=%s&isVid=true&isUI=true&dynamicStreaming=true&wmode=opaque&%%40videoPlayer=%s&branding=sbs&playertitle=true&autoStart=&debuggerID=&refURL=%s/kijkframe.php?videoId=%s&width=868&height=488" % (myexp, id, key, vplayer, self.SBS_BASE_URL, uid)
-			out = wgetUrlRefer(target, '%s%s' % (self.EMBED_BASE_URL, uid))
+			out = wgetUrl(target, '%s%s' % (self.EMBED_BASE_URL, uid))
 			tmp = out.split('{')
 			for x in tmp:
 				if 'defaultURL\":' in x and 'defaultURL\":null' not in x:
@@ -1553,9 +1534,12 @@ class OpenUg(Screen):
 		return url
 
 	def dumpert(self, mediaList, url):
-		data = wgetUrlCookie(self.DUMPERT_BASE_URL + url, 'nsfw=1')
+		data = wgetUrl(self.DUMPERT_BASE_URL + url, 'http://www.dumpert.nl/', 'playersize=large; nsfw=1')
 		data = Csplit(data, '<section id="content">',1)
+		data = Csplit(data, '<section class="dump-cnt">',1)
+		data = Csplit(data, '<div class="pagecontainer">',1)
 		data = Csplit(data, '<div id="footcontainer">', 0)
+		data = Csplit(data, '<footer class="dump-ftr">', 0)
 		nexturl = ''
 		prevurl = ''
 		if '<li class="volgende">' in data:
@@ -1599,12 +1583,14 @@ class OpenUg(Screen):
 					short = line.split(tmp)[1].split('</p>')[0]
 				mediaList.append((date, name, short, channel, stream, icon, icon_type, True))
 				state = 0
-		mediaList.append(('', ' ---> Volgende Pagina', '', '', nexturl, '', '', True))
+		if nexturl != '':
+			mediaList.append(('', ' ---> Volgende Pagina', '', '', nexturl, '', '', True))
 
 	def getDumpertStream(self, url):
-		data = wgetUrl(url)
+		data = wgetUrl(url, 'http://www.dumpert.nl/', 'playersize=large; nsfw=1')
 		url = ''
-		data = Csplit(data, '<div class="dump-player">', 1)
+		data = Csplit(data, '<div class="dump-pan">', 1)
+		data = Csplit(data, '<div class="dump-player"', 1)
 		data = Csplit(data, '<div id="commentscontainer">', 0)
 		tmp = 'class="videoplayer"'
 		if tmp in data:
@@ -1616,11 +1602,13 @@ class OpenUg(Screen):
 				for line in url:
 					if '"720p"' in line:
 						vidurl = line.split('":"')[1].replace("\/","/").replace('"','')
-						return vidurl
+						if 'dumpert' in vidurl:
+							return vidurl
 					if '"tablet"' in line:
 						vidurl = line.split('":"')[1].replace("\/","/").replace('"','')
-				return vidurl
-		return
+				if 'dumpert' in vidurl:
+					return vidurl
+		return ''
 
 	def rver(self, mediaList, url):
 		data = wgetUrl(url)
