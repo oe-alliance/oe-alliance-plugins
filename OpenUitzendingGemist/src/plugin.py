@@ -106,7 +106,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	STATE_PLAYING = 1
 	STATE_PAUSED = 2
 
-	skin = """<screen name="MediaPlayer" flags="wfNoBorder" position="0,380" size="720,160" title="Media player" backgroundColor="transparent">
+	skin = """<screen name="UGMediaPlayer" flags="wfNoBorder" position="0,380" size="720,160" title="Media player" backgroundColor="transparent">
 		<ePixmap position="0,0" pixmap="skin_default/info-bg_mp.png" zPosition="-1" size="720,160" />
 		<ePixmap position="29,40" pixmap="skin_default/screws_mp.png" size="665,104" alphatest="on" />
 		<ePixmap position="48,70" pixmap="skin_default/icons/mp_buttons.png" size="108,13" alphatest="on" />
@@ -137,6 +137,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		elif pauseable == True:
 			InfoBarSeek.__init__(self)
 		self.session = session
+		self.lastservice = None
 		self.service = service
 		self.seekable = seekable
 		self.pauseable = pauseable
@@ -258,6 +259,8 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 			self.play()
 
 	def handleLeave(self):
+		if self.lastservice is not None:
+			self.session.nav.playService(self.lastservice)
 		self.close()
 
 	def leavePlayer(self):
@@ -390,16 +393,6 @@ class OpenUgSetupScreen(Screen):
 		self["menu"] = MenuList(self.mmenu)
 		self.onLayoutFinish.append(self.layoutFinished)
 
-	def loadUrl(self, url, sub):
-		try:
-			lines = open(url).readlines()
-			for x in lines:
-				if sub in x.lower():
-					return True
-		except:
-			return False
-		return False
-
 	def layoutFinished(self):
 		self.setTitle('Open Uitzending Gemist')
 
@@ -424,7 +417,6 @@ class OpenUgSetupScreen(Screen):
 		for root, dirs, files in os.walk(targetdir):
 			for name in files:
 				os.remove(os.path.join(root, name))
-
 
 class SmallScreen(Screen):
 	def __init__(self, session, cmd):
@@ -1376,8 +1368,10 @@ class OpenUg(Screen):
 		channel = ''
 		akey = ''
 		ekey = ''
+		tarrif = ''
 		for line in scheduledata:
 			if state == 0:
+				tarrif = '0'
 				if "\"episode_key\":" in line:
 					state = 1
 			if state == 1:
@@ -1404,19 +1398,26 @@ class OpenUg(Screen):
 						tmp = "\"uuid\":\""
 						if tmp in line:
 							stream = line.split(tmp)[1].split('"')[0]
+						tmp = '\"quality\":\"'
+						if tmp in line:
+							date = (line.split(tmp)[1].split('\"')[0] + ' | ' + date)
 						tmp = '\"duration\":\"'
 						if tmp in line:
 							date = (line.split(tmp)[1].split('\"')[0] + ' | ' + date)
 						tmp = "\"abstract_key\":\""
 						if tmp in line:
 							akey = line.split(tmp)[1].split('"')[0]
+						tmp = "\"tariff\":"
+						if tmp in line:
+							tarrif = line.split(tmp)[1].split(',')[0]
 				for line in abstract:
 					if akey in line:
 						tmp = "\"name\":\""
 						if tmp in line:
 							name = line.split(tmp)[1].split('"')[0]
 				icon_type = icon
-				weekList.append((date, name, short, channel, stream, icon, icon_type, True))
+				if tarrif == '0':
+					weekList.append((date, name, short, channel, stream, icon, icon_type, True))
 				state = 0
 
 	def getMediaData(self, weekList, url):
