@@ -66,6 +66,13 @@ if os.path.exists("/proc/stb/info/boxtype"):
 		fwdata= {
 			 "micom" : ["http://code-ini.com/software/micom/", "RHS300AM_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
+	elif info == "ini-2000am":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS200AM_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
 	elif info == "ini-3000":
 		fwlist= [
 			("fp", _("Front Panel"))
@@ -107,6 +114,27 @@ if os.path.exists("/proc/stb/info/boxtype"):
 			]
 		fwdata= {
 			 "micom" : ["http://code-ini.com/software/micom/", "RHS712_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+	elif info == "ini-7012au":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "RHS712AU_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
+			}
+	elif info == "ini-8000am":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "INI800AM_Micom.bin", "/proc/vfd;/dev/mcu;"]
+			}
+	elif info == "ini-8000sv":
+		fwlist= [
+			("fp", _("Front Panel"))
+			]
+		fwdata= {
+			 "micom" : ["http://code-ini.com/software/micom/", "INI800SV_Micom.bin", "/proc/vfd;/dev/mcu;"]
 			}
 	elif info == "ini-9000de":
 		fwlist= [
