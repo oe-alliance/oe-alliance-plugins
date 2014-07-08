@@ -511,6 +511,9 @@ class SmallScreen(Screen):
 				self.mmenu.append((_("Cultura 24"), 'thematv/cultura24/cultura24.isml/cultura24.m3u8', 'npo'))
 				self.mmenu.append((_("Best 24"), 'thematv/best24/best24.isml/best24.m3u8', 'npo'))
 				self.mmenu.append((_("101 TV"), 'thematv/101tv/101tv.isml/101tv.m3u8', 'npo'))
+				self.mmenu.append((_("Radio 1 Webcam"), 'visualradio/radio1/radio1.isml/radio1.m3u8', 'npo'))
+				self.mmenu.append((_("Radio 2 Webcam"), 'visualradio/radio2/radio2.isml/radio2.m3u8', 'npo'))
+				self.mmenu.append((_("Radio 3 Webcam"), 'visualradio/3fm/3fm.isml/3fm.m3u8', 'npo'))
 			else:
 				self.mmenu.append((_("No streams avaible"), None))
 		else:
