@@ -9,20 +9,16 @@ from Screens.MessageBox import MessageBox
 from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists
 from enigma import eTimer
-from boxbranding import getImageDistro
+from boxbranding import getImageDistro, getBoxType
 
 config.misc.remotecontrol_text_support = ConfigYesNo(default = True)	
 
 config.plugins.remotecontrolcode = ConfigSubsection()
-if fileExists("/proc/stb/info/vumodel"):
-	vumodel = open("/proc/stb/info/vumodel")
-	info=vumodel.read().strip()
-	vumodel.close()
-	if info == "uno" or info == "ultimo" or info == "solo2" or info == "duo2":
-		config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "2", choices =
-			[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
-	elif info == "solo" or info == "duo":
-		config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "1", choices =
+if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose"):
+	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "2", choices =
+		[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
+elif getBoxType() in ("vusolo", "vuduo"):
+	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "1", choices =
 			[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
 
 class RemoteControlCodeInit:
@@ -39,14 +35,8 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if fileExists("/proc/stb/info/vumodel"):
-			vumodel = open("/proc/stb/info/vumodel")
-			info=vumodel.read().strip()
-			vumodel.close()
-			if info in ["uno", "ultimo", "solo2", "duo2"]:
-				return True
-			else:
-				return False
+		if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose"):
+			return True
 		else:
 			return False
 
@@ -87,7 +77,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 			self.checkModelTimer.start(1000,True)
 
 	def invalidmodel(self):
-			self.session.openWithCallback(self.close, MessageBox, _("This Plugin only supports") + " Uno/Ultimo/Solo2/Duo2", MessageBox.TYPE_ERROR)
+		self.session.openWithCallback(self.close, MessageBox, _("This Plugin only supports") + " Uno/Ultimo/Solo2/Duo2", MessageBox.TYPE_ERROR)
 
 	def createSetup(self):
 		self.list = []
