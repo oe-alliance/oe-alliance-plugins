@@ -71,6 +71,8 @@ AM_CONDITIONAL(ET9X00, test "$BOXTYPE" == "et9x00")
 AM_CONDITIONAL(ET8000, test "$BOXTYPE" == "et8000")
 AM_CONDITIONAL(ET10000, test "$BOXTYPE" == "et10000")
 AM_CONDITIONAL(EW7358, test `echo "$BOXTYPE"` == "ew7358")
+AM_CONDITIONAL(FORMULER1, test "$BOXTYPE" == formuler1)
+AM_CONDITIONAL(FORMULER3, test "$BOXTYPE" == formuler3)
 AM_CONDITIONAL(GB800SOLO, test "$BOXTYPE" == "gb800solo")
 AM_CONDITIONAL(GB800SE, test "$BOXTYPE" == "gb800se")
 AM_CONDITIONAL(GB800UE, test "$BOXTYPE" == "gb800ue")
@@ -170,6 +172,11 @@ EWVFDControl/Makefile
 EWVFDControl/src/Makefile
 EWVFDControl/meta/Makefile
 EWVFDControl/po/Makefile
+
+F3LEDControl/Makefile
+F3LEDControl/src/Makefile
+F3LEDControl/meta/Makefile
+F3LEDControl/po/Makefile
 
 LCD4linux/Makefile
 LCD4linux/src/Makefile

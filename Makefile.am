@@ -58,6 +58,10 @@ if INIHDP
 SUBDIRS += TransCodingSetup
 endif
 
+if FORMULER3
+SUBDIRS += F3LEDControl
+endif
+
 if VUUNO
 SUBDIRS += FirmwareUpgrade Blindscan VuRemote
 endif
