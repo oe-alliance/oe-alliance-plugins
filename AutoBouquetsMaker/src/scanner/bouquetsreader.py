@@ -59,7 +59,7 @@ class BouquetsReader():
 		content = lamedb.read()
 		lamedb.close()
 
-		tp_start = content.find("transponder\n")
+		tp_start = content.find("transponders\n")
 		tp_stop = content.find("end\n")
 
 		tp_blocks = content[tp_start + 13:tp_stop].strip().split("/")
@@ -83,19 +83,19 @@ class BouquetsReader():
 			#print>>log, "%x:%x:%x" % (namespace, transport_stream_id, original_network_id)
 			second_row = rows[1].strip()
 			transponder["dvb_type"] = second_row[0]
-			if transponder["dvb_type"] not in ["dvbs", "dvbt", "dvbc"]:
+			if transponder["dvb_type"] not in ["s", "t", "c"]:
 				continue
 
 			second_row = second_row[2:].split(":")
 
-			if transponder["dvb_type"] == "dvbs" and len(second_row) != 7 and len(second_row) != 11:
+			if transponder["dvb_type"] == "s" and len(second_row) != 7 and len(second_row) != 11:
 				continue
-			if transponder["dvb_type"] == "dvbt" and len(second_row) != 11:
+			if transponder["dvb_type"] == "t" and len(second_row) != 11:
 				continue
-			if transponder["dvb_type"] == "dvbc" and len(second_row) != 7:
+			if transponder["dvb_type"] == "c" and len(second_row) != 7:
 				continue
 
-			if transponder["dvb_type"] == "dvbs":
+			if transponder["dvb_type"] == "s":
 				transponder["frequency"] = int(second_row[0])
 				transponder["symbol_rate"] = int(second_row[1])
 				transponder["polarization"] = int(second_row[2])
@@ -115,19 +115,20 @@ class BouquetsReader():
 					transponder["pilot"] = int(second_row[10])
 				else:
 					transponder["modulation_system"] = 0
-			elif transponder["dvb_type"] == "dvbt":
+			elif transponder["dvb_type"] == "t":
 				transponder["frequency"] = int(second_row[0])
 				transponder["bandwidth"] = int(second_row[1])
 				transponder["code_rate_hp"] = int(second_row[2])
 				transponder["code_rate_lp"] = int(second_row[3])
-				transponder["modulation_type"] = int(second_row[4])
+				transponder["modulation"] = int(second_row[4])
 				transponder["transmission_mode"] = int(second_row[5])
 				transponder["guard_interval"] = int(second_row[6])
 				transponder["hierarchy"] = int(second_row[7])
 				transponder["inversion"] = int(second_row[8])
 				transponder["flags"] = int(second_row[9])
-				transponder["modulation_system"] = int(second_row[10])
-			elif transponder["dvb_type"] == "dvbc":
+				transponder["system"] = int(second_row[10])
+				transponder["plpid"] = int(second_row[11])
+			elif transponder["dvb_type"] == "c":
 				transponder["frequency"] = int(second_row[0])
 				transponder["symbol_rate"] = int(second_row[1])
 				transponder["inversion"] = int(second_row[2])
@@ -154,9 +155,18 @@ class BouquetsReader():
 			if len(service_reference) != 6:
 				continue
 
+			service_provider = service_provider.split(",")
+			provider_name = service_provider[0][2:]
+
+			if len(service_provider) > 1:
+				free_ca = 1
+			else:
+				free_ca = 0
+
 			service = {}
-			service["service_name"] = service_name.decode('latin-1').encode("utf8")
-			service["provider_name"] = service_provider[2:].decode('latin-1').encode("utf-8")
+			service["service_name"] = service_name.decode('latin-1').encode("utf-8")
+			service["provider_name"] = provider_name.decode('latin-1').encode("utf-8")
+			service["free_ca"] = free_ca
 			service["service_id"] = int(service_reference[0], 16)
 			service["namespace"] = int(service_reference[1], 16)
 			service["transport_stream_id"] = int(service_reference[2], 16)
