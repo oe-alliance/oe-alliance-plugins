@@ -92,16 +92,20 @@ class BouquetsWriter():
 
 				control_chars = ''.join(map(unichr, range(0,32) + range(127,160)))
 				control_char_re = re.compile('[%s]' % re.escape(control_chars))
-
-				service_name = control_char_re.sub('', service["service_name"]).decode('latin-1').encode("utf8")
-				provider_name = control_char_re.sub('', service["provider_name"]).decode('latin-1').encode("utf8")
+				if 'provider_name' in service.keys():
+					service_name = control_char_re.sub('', service["service_name"]).decode('latin-1').encode("utf8")
+					provider_name = control_char_re.sub('', service["provider_name"]).decode('latin-1').encode("utf8")
+				else:
+					service_name = service["service_name"]
 
 				lamedb.write("%s\n" % service_name)
 
-				if service["free_ca"] == 0:
-					lamedb.write("p:%s\n" % provider_name)
-				else:
+				if 'free_ca' in service.keys() and service["free_ca"] != 0:
 					lamedb.write("p:%s,C:0000\n" % provider_name)
+				elif 'service_line' in service.keys():
+					lamedb.write("%s\n" % service["service_line"])
+				else:
+					lamedb.write("p:%s\n" % provider_name)
 				services_count += 1
 
 		lamedb.write("end\nHave a lot of bugs!\n")

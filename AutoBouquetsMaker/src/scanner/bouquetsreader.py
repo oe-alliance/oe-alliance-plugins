@@ -155,18 +155,11 @@ class BouquetsReader():
 			if len(service_reference) != 6:
 				continue
 
-			service_provider = service_provider.split(",")
 			provider_name = service_provider[0][2:]
 
-			if len(service_provider) > 1:
-				free_ca = 1
-			else:
-				free_ca = 0
-
 			service = {}
-			service["service_name"] = service_name.decode('latin-1').encode("utf-8")
-			service["provider_name"] = provider_name.decode('latin-1').encode("utf-8")
-			service["free_ca"] = free_ca
+			service["service_name"] = service_name
+			service["service_line"] = service_provider
 			service["service_id"] = int(service_reference[0], 16)
 			service["namespace"] = int(service_reference[1], 16)
 			service["transport_stream_id"] = int(service_reference[2], 16)
