@@ -8,7 +8,7 @@
 		<configuration key="00002_dvbc_uk" netid="00002" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00002 Glasgow</configuration>
 		<configuration key="00003_dvbc_uk" netid="00003" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00003 Farnborough</configuration>
 		<configuration key="00004_dvbc_uk" netid="00004" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00004 Bridgend</configuration>
-		<configuration key="00005_dvbc_uk" netid="00005" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00005 NW of London</configuration>
+		<configuration key="00005_dvbc_uk" netid="00005" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00005 Luton</configuration>
 		<configuration key="00006_dvbc_uk" netid="00006" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00006 Swindon</configuration>
 		<configuration key="00007_dvbc_uk" netid="00007" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00007 Port Talbot</configuration>
 		<configuration key="00008_dvbc_uk" netid="00008" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00008 Nottingham</configuration>
