@@ -521,7 +521,7 @@ class AutoAutoBouquetsMakerTimer:
 			print>>log, "[AutoBouquetsMaker] AutoBouquetsMaker onTimer occured at", strftime("%c", localtime(now))
 			from Screens.Standby import inStandby
 			if not inStandby:
-				message = _("Your bouquets are about to be updated,\nDo you want to allow this?"))
+				message = _("Your bouquets are about to be updated,\nDo you want to allow this?")
 				ybox = self.session.openWithCallback(self.doAutoBouquetsMaker, MessageBox, message, MessageBox.TYPE_YESNO, timeout = 30)
 				ybox.setTitle('Scheduled AutoBouquetsMaker.')
 			else:
