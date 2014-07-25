@@ -20,8 +20,6 @@ from manager import Manager
 from providerconfig import ProviderConfig
 from time import localtime, time, strftime, mktime
 
-from boxbranding import getMachineBrand, getMachineName
-
 from .. import log
 import os
 import sys
@@ -523,7 +521,7 @@ class AutoAutoBouquetsMakerTimer:
 			print>>log, "[AutoBouquetsMaker] AutoBouquetsMaker onTimer occured at", strftime("%c", localtime(now))
 			from Screens.Standby import inStandby
 			if not inStandby:
-				message = _("Your %s %s is about to update your bouquets,\nDo you want to allow this?") % (getMachineBrand(), getMachineName())
+				message = _("Your bouquets are about to be updated,\nDo you want to allow this?"))
 				ybox = self.session.openWithCallback(self.doAutoBouquetsMaker, MessageBox, message, MessageBox.TYPE_YESNO, timeout = 30)
 				ybox.setTitle('Scheduled AutoBouquetsMaker.')
 			else:
