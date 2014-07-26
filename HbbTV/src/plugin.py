@@ -419,12 +419,6 @@ def start_youtubetv_main(session, **kwargs):
 	else:
 		session.openWithCallback(_cb_youtubetv_close, YoutubeTVWindow)
 
-
-def menu_start_youtube(menuid, **kwargs):
-	if menuid == "mainmenu":
-		return [(_("YouTube TV"), start_youtubetv_main, "youtube_tv", 46)]
-	return []
-
 def plugin_setting_youtube(session, **kwargs):
 	session.open(YoutubeTVSettings)
 
@@ -443,7 +437,7 @@ def Plugins(**kwargs):
 	l = []
 	l.append(PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=auto_start_main))
 	l.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, needsRestart=True, fnc=session_start_main, weight=-10))
-	l.append(PluginDescriptor(name=_("YouTube TV"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=menu_start_youtube))
+	l.append(PluginDescriptor(name=_("YouTube TV"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=start_youtubetv_main, needsRestart=True))
 	l.append(PluginDescriptor(name=_("YouTube TV Settings"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=plugin_setting_youtube))
 	l.append(PluginDescriptor(name=_("Browser Start/Stop"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=True, fnc=extension_toggle_browser))
 	l.append(PluginDescriptor(name=_("HbbTV Applications"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=True, fnc=extension_start_application))
