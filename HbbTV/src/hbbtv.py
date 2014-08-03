@@ -54,7 +54,7 @@ class HbbTVWindow(Screen):
 		vbcfg.LOG("Starting HbbTV")
 
 		vbcfg.DEBUG("url : %s" % self._url and self._url)
-		vbcfg.DEBUG("info: %s" % self._info and self._info["url"])
+		vbcfg.DEBUG("info: %s" % self._info and self._info)
 
 		if self._info and self._info["control"] == 1 and vbcfg.g_channel_info is not None:
 			(sid, onid, tsid, name) = vbcfg.g_channel_info
