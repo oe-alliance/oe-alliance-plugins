@@ -455,7 +455,7 @@ class FirmwareUpgrade(Screen):
 				fp.close()
 				self.verfile = self.verfile.strip("\n")
 			except:
-				"N/A"
+				self.verfile = "N/A"
 			self["newversion"].setText(self.verfile)
 			
 			# HACK for samples, which does not have micom version
