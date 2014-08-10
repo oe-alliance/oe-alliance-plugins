@@ -532,6 +532,7 @@ def sessionstart(reason, **kwargs):
 		gReason = reason
 	controlgigaVfd()
 
+
 def Plugins(**kwargs):
  	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
  		PluginDescriptor(name="VFD_Giga", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
