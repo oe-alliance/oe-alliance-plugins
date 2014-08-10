@@ -20,8 +20,8 @@ L1 = []
 L2 = []
 L3 = []
 L4 = []
-M1 = ["LCD4linux.OSD","LCD4linux.Scr","LCD4linux.Bil","LCD4linux.Wet","LCD4linux.Pop","LCD4linux.Fri","LCD4linux.Fon","LCD4linux.Mai","LCD4linux.Cal","LCD4linux.Web","LCD4linux.xml"]
-M2 = [_("OSD"),_("Screen"),_("Picture"),_("Weather"),_("Popup-Text"),_("FritzCall"),_("Font"),_("Mail"),_("Calendar"),_("WebIF"),_("Box-Skin-LCD")]
+M1 = ["LCD4linux.OSD","LCD4linux.Scr","LCD4linux.Bil","LCD4linux.Wet","LCD4linux.Pop","LCD4linux.Fri","LCD4linux.Fon","LCD4linux.Mai","LCD4linux.Cal","LCD4linux.Web","LCD4linux.MJP","LCD4linux.xml"]
+M2 = [_("OSD"),_("Screen"),_("Picture"),_("Weather"),_("Popup-Text"),_("FritzCall"),_("Font"),_("Mail"),_("Calendar"),_("WebIF"),_("MJPEG Stream"),_("Box-Skin-LCD")]
 
 Mode = "1"
 ModeOld = ""
@@ -75,9 +75,6 @@ def ParseCode():
 
 def _l(st):
 	return st.decode("utf-8","ignore").replace(" [ok]>","").encode('ascii', 'xmlcharrefreplace')
-
-def _l2(st):
-	return st.decode("latin").encode("utf-8")
 
 def AktiveMode(Test):
 	Aktiv = ""
@@ -209,6 +206,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			L4log("WebIF: save Config-File")
 			LCD4linux.save()
 			LCD4linux.saveToFile(LCD4config)
+			ConfTimeCheck()
 		if req.args.get("download.y",None) is not None:
 			L4log("WebIF: download Config")
 			req.setResponseCode(http.OK)
@@ -236,6 +234,22 @@ class LCD4linuxConfigweb(resource.Resource):
 				html += "<script language=\"JavaScript\">\n"
 				html += "alert(\"%s\")\n" % _("No or wrong File selected, try a correct File first !")
 				html += "</script>\n"
+		if req.args.get("logdel.y",None) is not None:
+			L4log("WebIF: delete Logfile")
+			rmFile("/tmp/L4log.txt")
+		if req.args.get("logdownload.y",None) is not None:
+			L4log("WebIF: download Logfile")
+			lcd4config = "/tmp/L4log.txt"
+			if os.path.isfile(lcd4config):
+				req.setResponseCode(http.OK)
+				req.setHeader('Content-type', 'text/plain')
+				req.setHeader('Content-Disposition', 'attachment;filename=l4log.txt')
+				req.setHeader('Content-Length', os.stat(lcd4config).st_size)
+				req.setHeader('charset', 'UTF-8')
+				f = open(lcd4config,"r")
+				html = f.read()
+				f.close()
+				return html
 
 		if command is None:
 			L4logE("no command")
@@ -327,7 +341,14 @@ class LCD4linuxConfigweb(resource.Resource):
 #ConfigText
 							exec("Typ = isinstance(%s,ConfigText)" % a)
 							if Typ == True:
-								exec("%s.value = '%s'" % (a,_l2(req.args.get(a,"")[0])))
+								V = _l(req.args.get(a,"")[0])
+								try:
+									import HTMLParser
+									parse=HTMLParser.HTMLParser()
+									V = parse.unescape(V)
+								except:
+									L4log("WebIF Error: Parse Text")
+								exec("%s.value = '%s'" % (a,V))
 							else:
 #ConfigSlider
 								exec("Typ = isinstance(%s,ConfigSlider)" % a)
@@ -365,6 +386,9 @@ class LCD4linuxConfigweb(resource.Resource):
 								xmlWrite()
 								LCD4linuxConfigweb.RestartGUI = True
 							xmlClear()
+						elif a.find(".MJPEG") >0:
+							MJPEG_start()
+							MJPEG_stop()
 						if a.find("WetterCity") >0:
 							resetWetter()
 						if a.find("ScreenActive") >0:
@@ -400,6 +424,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<meta http-equiv=\"cache-control\" content=\"no-cache\" />\n"
 		html += "<meta http-equiv=\"pragma\" content=\"no-cache\" />\n"
 		html += "<meta http-equiv=\"expires\" content=\"0\">\n"
+		html += "<link rel=\"shortcut icon\" href=\"/lcd4linux/data/favicon.png\">"
 		if os.path.isfile(CrashFile):
 			html += "<script language=\"JavaScript\">\n"
 			html += "function fensterchen() {\n"
@@ -426,9 +451,10 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<table border=\"1\" rules=\"groups\" width=\"100%\" bordercolorlight=\"#000000\" bordercolordark=\"#000000\" cellspacing=\"0\">"
 		html += "<tr><td bgcolor=\"#000000\" width=\"220\">\n"
 		html += "<p align=\"center\"><img title=\"\" border=\"0\" src=\"/lcd4linux/data/WEBdreambox.png\" width=\"181\" height=\"10\">\n"
-		html += "<font color=\"#FFFFFF\"><b>LCD4linux Config</b></font><br />%s\n" % (Version if L4LVtest(Version)==True else Version+"?")
+		CCM = "#FFFFFF" if getConfigMode() == False else "#FFCC00"
+		html += "<font color=\"%s\"><b>LCD4linux Config</b></font><br />%s\n" % (CCM,Version if L4LVtest(Version)==True else Version+"?")
 		if IP is None:
-			html += "<br><span style=\"font-size:7pt;color: #FF0000\">%s!</span>" % _l(_("IP seurity sot supported by Box"))
+			html += "<br><span style=\"font-size:7pt;color: #FF0000\">%s!</span>" % _l(_("IP seurity not supported by Box"))
 		html += "</p></td><td bgcolor=\"#000000\">\n"
 		html += "<p align=\"left\">"
 		d = glob.glob("%sdpf.*" % getTMPL())
@@ -443,16 +469,19 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "</p></td>\n"
 		if os.path.isfile(CrashFile):
 			html += "<td valign=\"top\" align=\"left\"  bgcolor=\"#000000\">\n"
-			html += "<form method=\"post\"><font color=\"#FFFFFF\">%s</font><br>\n" % _l(_("Crashlog"))
+			html += "<form method=\"post\"><font color=\"#FFFF00\">%s</font><br>\n" % _l(_("Crashlog"))
 			html += "<input type=\"hidden\" name=\"cmd\" value=\"\">\n"
-			html += "<input type=\"button\" value=\"%s\" style=\"font-size:8pt;\" onClick=\"fensterchen()\">\n"  % _l(_("Show"))
-			html += "<input type=\"button\" value=\"%s\" style=\"font-size:8pt;\"   onclick=\"this.form.cmd.value = 'crashdel'; this.form.submit();\">\n"  % _l(_("Delete"))
+			html += "<input type=\"button\" value=\"%s\" style=\"font-size:8pt;background-color:yellow;\" onClick=\"fensterchen()\">\n"  % _l(_("Show"))
+			html += "<input type=\"button\" value=\"%s\" style=\"font-size:8pt;background-color:yellow;\"   onclick=\"this.form.cmd.value = 'crashdel'; this.form.submit();\">\n"  % _l(_("Delete"))
 			html += "</form></td>\n"
 		html += "<td valign=\"top\" align=\"right\"  bgcolor=\"#000000\">\n"
 		html += "<form method=\"post\" enctype=\"multipart/form-data\">\n"
 		html += "<input type=\"file\" name=\"uploadName\" title=\"File Name\" class=\"style1\" >\n"
 		html += "<input type=\"image\" name=\"upload\" value=\"klick\" src=\"/lcd4linux/data/WEBupload.png\" height=\"25\" title=\"%s\" class=\"style1\"  >\n" % _l(_("Restore Config"))
 		html += "<input type=\"image\" name=\"download\" value=\"klick\" src=\"/lcd4linux/data/WEBdownload.png\" height=\"25\" title=\"%s\" class=\"style1\" >\n" % _l(_("Backup Config"))
+		if os.path.isfile("/tmp/L4log.txt"):
+			html += "<input type=\"image\" name=\"logdel\" value=\"klick\" src=\"/lcd4linux/data/WEBlogdel.png\" height=\"25\" title=\"%s\" class=\"style1\"  >\n" % _l(_("Delete Logfile"))
+			html += "<input type=\"image\" name=\"logdownload\" value=\"klick\" src=\"/lcd4linux/data/WEBlogshow.png\" height=\"25\" title=\"%s\" class=\"style1\" >\n" % _l(_("Download Logfile"))
 		html += "<input type=\"image\" name=\"save\" value=\"klick\" src=\"/lcd4linux/data/WEBsave.png\" height=\"40\" title=\"%s\" class=\"style1\" >\n" % _l(_("Save Config"))
 		html += "</form>\n"
 		html += "<form method=\"post\"><font color=\"#FFFFFF\">%s</font>\n" % _l(_("Screen"))

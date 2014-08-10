@@ -31,6 +31,7 @@ class LCD4linuxweb(resource.Resource):
 		html += "<meta http-equiv=\"cache-control\" content=\"no-cache\" />\n"
 		html += "<meta http-equiv=\"pragma\" content=\"no-cache\" />\n"
 		html += "<meta http-equiv=\"expires\" content=\"0\">\n"
+		html += "<link rel=\"shortcut icon\" href=\"/lcd4linux/data/favicon.png\">"
 		if LCD4linux.WebIfType.value == "1":
 			JavaRefresh = ""
 			html += "<meta http-equiv=\"refresh\" content=\"%s\">\n" % LCD4linux.WebIfRefresh.value
@@ -51,26 +52,26 @@ class LCD4linuxweb(resource.Resource):
 			t=os.path.getmtime("%sdpf.jpg" % getTMPL())
 			JR = "" if JavaRefresh == "" else JavaRefresh % (2,2,"dpf.jpg")
 			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf.jpg?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
-		elif os.path.isfile("%sdpf2.jpg" % getTMPL()):
-			t=os.path.getmtime("%sdpf2.jpg" % getTMPL())
-			JR = "" if JavaRefresh == "" else JavaRefresh % (3,3,"dpf2.jpg")
-			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf2.jpg?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
 		elif os.path.isfile("%sdpf.png" % getTMPL()):
 			t=os.path.getmtime("%sdpf.png" % getTMPL())
-			JR = "" if JavaRefresh == "" else JavaRefresh % (4,4,"dpf.png")
+			JR = "" if JavaRefresh == "" else JavaRefresh % (3,3,"dpf.png")
 			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf.png?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
+		elif os.path.isfile("%sdpf2.jpg" % getTMPL()):
+			t=os.path.getmtime("%sdpf2.jpg" % getTMPL())
+			JR = "" if JavaRefresh == "" else JavaRefresh % (4,4,"dpf2.jpg")
+			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf2.jpg?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
 		elif os.path.isfile("%sdpf2.png" % getTMPL()):
 			t=os.path.getmtime("%sdpf2.png" % getTMPL())
 			JR = "" if JavaRefresh == "" else JavaRefresh % (5,5,"dpf2.png")
 			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf2.png?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
-		elif os.path.isfile("%sdpf2.jpg" % getTMPL()):
-			t=os.path.getmtime("%sdpf2.jpg" % getTMPL())
-			JR = "" if JavaRefresh == "" else JavaRefresh % (6,6,"dpf2.jpg")
-			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf2.jpg?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
-		elif os.path.isfile("%sdpf2.png" % getTMPL()):
-			t=os.path.getmtime("%sdpf2.png" % getTMPL())
-			JR = "" if JavaRefresh == "" else JavaRefresh % (7,7,"dpf2.png")
-			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf2.png?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
+		elif os.path.isfile("%sdpf3.jpg" % getTMPL()):
+			t=os.path.getmtime("%sdpf3.jpg" % getTMPL())
+			JR = "" if JavaRefresh == "" else JavaRefresh % (6,6,"dpf3.jpg")
+			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf3.jpg?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
+		elif os.path.isfile("%sdpf3.png" % getTMPL()):
+			t=os.path.getmtime("%sdpf3.png" % getTMPL())
+			JR = "" if JavaRefresh == "" else JavaRefresh % (7,7,"dpf3.png")
+			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf3.png?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
 		else:
 			html += "<a style=\"color:#FFCC00\" %s>no Picture .... Config-WebIF</a>" % self.HREF
 		html += "</body>\n"
