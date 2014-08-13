@@ -414,7 +414,7 @@ def controlgigaLED():
 
 	if gReason == 0 and mySession != None and gigaLED == None:
 		print "[LED-GIGA] Starting !!"
-		gigaLED = VFD_Giga(mySession)
+		gigaLED = LED_Giga(mySession)
 	elif gReason == 1 and gigaLED != None:
 		print "[LED-GIGA] Stopping !!"
 		gigaLED = None
