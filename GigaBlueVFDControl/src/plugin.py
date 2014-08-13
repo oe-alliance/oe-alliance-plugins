@@ -316,7 +316,7 @@ def initVFD():
 		forcmd = '0'
 	if BOX in ('gb800seplus'):
 		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
-	elif BOX in ('gbquad', 'gbquadplus', 'gb800ueplus'):
+	elif BOX in ("gbquad", "gb800ueplus", "gbquadplus", "gbipbox"):
 		cmd = 'echo STB does not support to show clock in Deep Standby'
 	else:
 		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/display_clock'

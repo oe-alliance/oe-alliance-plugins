@@ -1,3 +1,5 @@
+import vbcfg
+
 class BookmarkData:
 	def __init__(self, _id, _title, _url, _parent, _type):
 		self.mId 	= _id
@@ -38,7 +40,6 @@ class SimpleConfigParser:
 	def _read(self):
 		if self.mDataValid:
 			return
-		print "populate!!"
 		self.mConfig.read(self.mFileName)
 
 		self.mCategoryCurrentIdx = self.getNumber('__SYS__', 'category_current_idx')
@@ -52,7 +53,6 @@ class SimpleConfigParser:
 		self.mPopulateValid = False
 
 	def _del(self, _section, _option=None):
-		#print _section, ' :', _option
 		if _option is None:
 			if not self.exist(_section):
 				return
@@ -66,7 +66,7 @@ class SimpleConfigParser:
 		try:
 			data = self.mConfig.get(_section, _option)
 		except Exception, e:
-			#print e
+			vbcfg.ERR(e)
 			return _default
 		else :	return data
 
@@ -121,59 +121,41 @@ class BookmarkManager(SimpleConfigParser):
 
 		import os
 		if not os.path.exists(_dbFileName):
-			model = ""
-			if os.path.exists('/proc/stb/info/vumodel'):
-				f = file('/proc/stb/info/vumodel')
-				model = f.read().strip()
-				f.close()
-			elif os.path.exists('/proc/stb/info/gbmodel'):
-				f = file('/proc/stb/info/gbmodel')
-				model = f.read().strip()
-				f.close()
+			f = file('/proc/stb/info/vumodel')
+			model = f.read().strip()
+			f.close()
+			manualmode = (model == "solo2" or model == "duo2" or model == "solose")
 
-			manualmode = (model == "solo2" or model == "duo2" or model == "quad")
-			out = open(_dbFileName, 'w')
-			line = "[__SYS__]\n"
-			line = line + "category_current_idx = 1\n"
+			os.system('echo "[__SYS__]" > %s'%(_dbFileName))
+			os.system('echo "category_current_idx = 1" >> %s'%(_dbFileName))
 			if manualmode :
-				line = line + "bookmark_current_idx = 3\n"
-			else:
-				line = line + "bookmark_current_idx = 2\n"
-			line = line + "\n"
-			line = line + "[c-1]\n"
-			line = line + "id = 1\n"
-			line = line + "name = My favorite\n"
-			line = line + "\n"
-			line = line + "[b-1]\n"
-			line = line + "id = 1\n"
-			line = line + "title = Google\n"
-			line = line + "url = http://www.google.com/\n"
-			line = line + "parent = 1\n"
-			line = line + "type = 0\n"
-			line = line + "\n"
-			line = line + "[b-2]\n"
-			line = line + "id = 2\n"
-			line = line + "title = HBBig\n"
-			line = line + "url = http://www.hbbig.com/\n"
-			line = line + "parent = 1\n"
-			line = line + "type = 0\n"
-			line = line + "\n"
-			if manualmode:
-				line = line + "[b-3]\n"
-				line = line + "url = file:///usr/local/manual/main.html\n"
-				line = line + "id = 2\n"
-				line = line + "parent = 1\n"
-				line = line + "title = User Manual\n"
-				line = line + "type = 1\n"
-			out.write(line)
+				os.system('echo "bookmark_current_idx = 2" >> %s'%(_dbFileName))
+			else:	os.system('echo "bookmark_current_idx = 1" >> %s'%(_dbFileName))
+			os.system('echo "[c-1]" >> %s'%(_dbFileName))
+			os.system('echo "id = 1" >> %s'%(_dbFileName))
+			os.system('echo "name = My favorite" >> %s'%(_dbFileName))
+			os.system('echo "[b-1]" >> %s'%(_dbFileName))
+			os.system('echo "url = http://www.vuplus.com/" >> %s'%(_dbFileName))
+			os.system('echo "id = 1" >> %s'%(_dbFileName))
+			os.system('echo "parent = 1" >> %s'%(_dbFileName))
+			os.system('echo "title = Vuplus Home" >> %s'%(_dbFileName))
+			os.system('echo "type = 0" >> %s'%(_dbFileName))
+			if manualmode :
+				os.system('echo "[b-2]" >> %s'%(_dbFileName))
+				os.system('echo "url = file:///usr/local/manual/main.html" >> %s'%(_dbFileName))
+				os.system('echo "id = 2" >> %s'%(_dbFileName))
+				os.system('echo "parent = 1" >> %s'%(_dbFileName))
+				os.system('echo "title = User Manual" >> %s'%(_dbFileName))
+				os.system('echo "type = 1" >> %s'%(_dbFileName))
 		self.init(_dbFileName)
 
 	def message(self, format, params=None):
 		if not self.mDebugEnable:
 			return
 		if params is None:
-			print format
-		else:	print format % (params)
+			vbcfg.DEBUG(format)
+		else:
+			vbcfg.DEBUG(format % (params))
 
 	def getBookmark(self, _title):
 		self.populate()
@@ -306,6 +288,6 @@ class BookmarkManager(SimpleConfigParser):
 
 	@staticmethod
 	def getInstance():
-		return BookmarkManager('/etc/enigma2/hbbtv_bookmark.ini')
+		return BookmarkManager(vbcfg.PLUGINROOT + "/bookmark.ini")
 
 

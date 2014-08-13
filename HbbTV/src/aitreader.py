@@ -8,8 +8,8 @@ RE_XML_ILLEGAL = u'([\u0000-\u0008\u000b-\u000c\u000e-\u001f\ufffe-\uffff])' + \
                   (unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff),
                    unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff),
                    unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff))
-
-DUMPBIN = "/usr/lib/enigma2/python/Plugins/Extensions/HbbTV/dumpait"
+import vbcfg
+DUMPBIN = vbcfg.PLUGINROOT + "/dumpait"
 class eAITSectionReader:
 	def __init__(self, demux, pmtid, sid):
 		self.mVuplusBox = False
@@ -75,7 +75,7 @@ class eAITSectionReader:
 		document = ""
 		try:	document = os.popen(self.mCommand).read()
 		except Exception, ErrMsg:
-			print ErrMsg
+			vbcfg.ERR(ErrMsg)
 			return False
 		if len(document) == 0:
 			return False
@@ -84,7 +84,11 @@ class eAITSectionReader:
 		document = document.decode("cp1252").encode("utf-8")
 		document = "<URL>" + document + "</URL>"
 		#print document
-		self.mDocument = xml.dom.minidom.parseString(document)
+		try:
+			self.mDocument = xml.dom.minidom.parseString(document)
+		except Exception, ErrMsg:
+			vbcfg.ERR("XML parse: %s" % ErrMsg)
+			return False
 		return True
 
 	def doDump(self):
@@ -102,7 +106,8 @@ def unit_test(demux, pmtid, sid):
 	if reader.doOpen():
 		reader.doParseApplications()
 		reader.doDump()
-	else:	print "no data!!"
+	else:
+		vbcfg.ERR("no data!!")
 
 #unit_test('0', 0x17d4, 0x2b66)
 
