@@ -403,7 +403,7 @@ def main(menuid):
 def startLED(session, **kwargs):
 	session.open(LED_GigaSetup)
 
-gigaVfd = None
+gigaLED = None
 gReason = -1
 mySession = None
 
@@ -412,10 +412,10 @@ def controlgigaLED():
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and gigaVfd == None:
+	if gReason == 0 and mySession != None and gigaLED == None:
 		print "[LED-GIGA] Starting !!"
 		gigaLED = VFD_Giga(mySession)
-	elif gReason == 1 and gigaVfd != None:
+	elif gReason == 1 and gigaLED != None:
 		print "[LED-GIGA] Stopping !!"
 		gigaLED = None
 
