@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = AutoBouquetsMaker DLNABrowser DLNAServer StreamTV 3GModemManager OpenUitzendingGemist TunerServer OnDemand Fempa LCD4linux RemoteChannelStreamConverter
+SUBDIRS = AutoBouquetsMaker DLNABrowser DLNAServer StreamTV 3GModemManager OpenUitzendingGemist TunerServer OnDemand Fempa LCD4linux RemoteChannelStreamConverter 
 
 if HAVE_WIRELESSACCESSPOINT
 SUBDIRS += WirelessAccessPoint
@@ -94,6 +94,10 @@ if XP1000
 SUBDIRS += XtrendRemote SF8VFDControl
 endif
 
+if SPARK
+SUBDIRS += SparkVFDControl SparkUnionTunerType SH4BoosterControl SH4OSDAdjustment
+endif
+
 if HAVE_TEMPFANCONTROL
 SUBDIRS += TempFanControl
 endif
@@ -113,3 +117,4 @@ endif
 if GB800UEPLUS
 SUBDIRS += AudioEffect
 endif
+

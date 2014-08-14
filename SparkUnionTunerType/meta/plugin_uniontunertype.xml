@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+					<tag type="Network" />
+	  </prerequisites>
+		  <info>
+					<author>skl@skl.net</author>
+					<name>UnionTunerType</name>
+					<packagename>enigma2-plugin-systemplugins-uniontunertype</packagename>
+					<shortdescription>UnionTunerType</shortdescription>
+					<description>Switch between dvb-t and dvb-c driver for spark7162</description>
+		  </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-uniontunertype" />
+	  </files>
+</default>
