@@ -254,13 +254,10 @@ def initLED():
 		forcmd = '1'
 	else:
 		forcmd = '0'
-	if BOX in ('gb800seplus'):
-	#CHECK IF STILL DIFFERENCE BETWEEN SOLO,SE,SEPLUS
-		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
-	elif BOX in ("gbquad", "gb800ueplus", "gbquadplus", "gbipbox"):
+	if BOX in ("gbquad", "gb800ueplus", "gbquadplus", "gbipbox"):
 		cmd = 'echo STB does not support to show clock in Deep Standby'
 	else:
-		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/display_clock'
+		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
 	res = system(cmd)
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
