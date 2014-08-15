@@ -46,21 +46,38 @@ def setLed(color):
 	led0 = '/proc/stb/fp/led0_pattern'
 	led1 = '/proc/stb/fp/led1_pattern'
 	
-	if color == '0':
-		value0 = 0
-		value1 = 0
-	elif color == '1':
-		value0 = 0
-		value1 = 1
-	elif color == '2':
-		value0 = 1
-		value1 = 0
-	elif color == '3':
-		value0 = 1
-		value1 = 1
+	if BOX in ('gb800se', 'gb800solo', 'gb800ue'):
+		if color == '0':
+			value0 = 0
+			value1 = 0
+		elif color == '1':
+			value0 = 1
+			value1 = 1
+		elif color == '2':
+			value0 = 2
+			value1 = 2
+		elif color == '3':
+			value0 = 3
+			value1 = 3
+		else:
+			value0 = 0
+			value1 = 0
 	else:
-		value0 = 0
-		value1 = 0
+		if color == '0':
+			value0 = 0
+			value1 = 0
+		elif color == '1':
+			value0 = 0
+			value1 = 1
+		elif color == '2':
+			value0 = 1
+			value1 = 0
+		elif color == '3':
+			value0 = 1
+			value1 = 1
+		else:
+			value0 = 0
+			value1 = 0
 
 	f = open(led0,"w")
 	f.write(str(value0))
@@ -267,12 +284,12 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
 
 		self.skin = """
-			<screen position="100,100" size="500,210" title="LED_Giga Setup" >
-				<widget name="config" position="20,15" size="460,150" scrollbarMode="showOnDemand" />
-				<ePixmap position="40,165" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
-				<ePixmap position="180,165" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
-				<widget name="key_green" position="40,165" size="140,40" font="Regular;20" backgroundColor="#1f771f" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_red" position="180,165" size="140,40" font="Regular;20" backgroundColor="#9f1313" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+			<screen position="center,center" size="500,340" title="GigaBlue Setup" >
+				<widget name="config" position="20,15" size="460,230" scrollbarMode="showOnDemand" />
+				<ePixmap position="40,270" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
+				<ePixmap position="180,270" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
+				<widget name="key_green" position="40,270" size="140,40" font="Regular;20" backgroundColor="#1f771f" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_red" position="180,270" size="140,40" font="Regular;20" backgroundColor="#9f1313" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 			</screen>"""
 
 		Screen.__init__(self, session)
@@ -395,7 +412,10 @@ class LED_Giga:
 def main(menuid):
 	if menuid != "system":
 		return [ ]
-	return [(_("Giga LED Setup"), startLED, "LED_Giga", None)]
+	if BOX in ('gb800se', 'gb800solo', 'gb800seplus'):
+		return [(_("Display/LED Setup"), startLED, "LED_Giga", None)]
+	else:
+		return [(_("LED Setup"), startLED, "LED_Giga", None)]
 
 def startLED(session, **kwargs):
 	session.open(LED_GigaSetup)
