@@ -116,14 +116,12 @@
 		<channel number="102" />
 		<channel number="178" />
 		<channel number="230" />
-		<channel number="171" />
 	</hdchannelsontop>
 	<sdchannelsontop>
 		<channel number="141" />
 		<channel number="142" />
 		<channel number="178" />
 		<channel number="230" />
-		<channel number="171" />
 		<channel number="217" />
 		<channel number="235" />
 		<channel number="231" />
@@ -179,10 +177,17 @@
 		<channel number="141" with="101" />
 		<channel number="178" with="103" />
 		<channel number="230" with="104" />
-		<channel number="171" with="105" />
 	</swapchannels>
 	<servicehacks>
 <![CDATA[
+# a black and whitelist to allow you to keep or automatically delete a channel from the list based 
+# on it's channel number or name enclosed in double quotes. if using channel swaps, its a good idea 
+# to put both channel numbers in.
+##########################################
+whitelist = [178,"BT Sport 1 HD","BT Sport 2 HD","Sky News HD","Film4 HD","RTE TWO HD","ESPN HD","BoxNation HD"]
+blacklist = []
+##########################################
+
 if service["service_name"][-4:] == " (28)":
 	service["service_name"] = service["service_name"][:-4]
 
@@ -192,7 +197,25 @@ if service["transport_stream_id"] == 0x7e3:
 if service["service_type"] == 0x02 and service["number"] > 3000:
 	service["number"] -= 3000
 
-new_numbers = []		
+
+# channels that are not whitelisted will get deleted if their CA is not free and they are HD. this is for the sky uk anti-cs measures
+if service["number"] in whitelist and service["service_type"] != 2:
+	print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] WHITELISTED"
+elif service["service_name"] in whitelist and service["service_type"] != 2:
+	print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] WHITELISTED"
+elif service["number"] in blacklist and service["service_type"] != 2:
+	print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] BLACKLISTED"
+	skip = True
+elif service["service_name"] in blacklist and service["service_type"] != 2:
+	print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] BLACKLISTED"
+	skip = True
+elif service["service_type"] >= 17 and service["service_type"] <= 25 and service["free_ca"] != 0:
+	print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] Type  " + str (service["service_type"]) + "AUTODELETED"
+	skip = True
+##########################################
+
+new_numbers = []
+
 for number in service["numbers"]:
 	if number >= 3000 and number <= 3999:
 		new_numbers.append(number - 3000)
