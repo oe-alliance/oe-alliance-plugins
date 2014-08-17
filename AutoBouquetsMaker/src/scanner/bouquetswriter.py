@@ -277,16 +277,7 @@ class BouquetsWriter():
 			bouquet_current = open(path + "/autobouquet.%s.main.tv" % section_identifier, "w")
 			bouquet_current.write("#NAME %sAll channels\n" % section_prefix)
 
-			# due an issue with the patch for hidden channels,
-			# the first tag must be a description to keep the
-			# numeration correct
 			first_section = sorted(sections.keys())[0]
-			bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-			if first_section not in bouquets_to_hide:
-				bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[first_section]))
-			else:
-				bouquet_current.write("#DESCRIPTION \n")
-
 			# small hack to handle the "preferred_order" list
 			higher_number = sorted(services["video"].keys())[-1]
 			preferred_order_tmp = []
@@ -304,19 +295,19 @@ class BouquetsWriter():
 
 			for number in preferred_order_tmp:
 				if number not in bouquets_to_hide:
-					if number in sections and number != first_section:
+					if number in sections:
 						bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
 						bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[number]))
-				if number in services["video"] and number not in bouquets_to_hide:
-					bouquet_current.write("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
-							services["video"][number]["service_type"],
-							services["video"][number]["service_id"],
-							services["video"][number]["transport_stream_id"],
-							services["video"][number]["original_network_id"],
-							services["video"][number]["namespace"]
-						))
-					if "interactive_name" in services["video"][number]:
-						bouquet_current.write("#DESCRIPTION %s\n" % services["video"][number]["interactive_name"])
+					if number in services["video"]:
+						bouquet_current.write("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
+								services["video"][number]["service_type"],
+								services["video"][number]["service_id"],
+								services["video"][number]["transport_stream_id"],
+								services["video"][number]["original_network_id"],
+								services["video"][number]["namespace"]
+							))
+						if "interactive_name" in services["video"][number]:
+							bouquet_current.write("#DESCRIPTION %s\n" % services["video"][number]["interactive_name"])
 				else:
 					bouquet_current.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
 					bouquet_current.write("#DESCRIPTION  \n")
@@ -424,7 +415,7 @@ class BouquetsWriter():
 					bouquet_current.write("#NAME %s%s\n" % (section_prefix, section_name))
 					bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
 					bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, section_name))
-				else:
+				elif section_current_number == 0:
 					bouquet_current.write("#NAME %sHidden\n" % section_prefix)
 					bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
 					bouquet_current.write("#DESCRIPTION %sHidden\n" % section_prefix)
@@ -454,7 +445,6 @@ class BouquetsWriter():
 		# HD channels
 		if provider_config.isMakeHD():
 			bouquet_current = open(path + "/autobouquet.%s.hd.tv" % section_identifier, "w")
-
 			bouquet_current.write("#NAME %sHD Channels\n" % section_prefix)
 
 			section_keys_temp = sorted(sections.keys())
@@ -473,17 +463,21 @@ class BouquetsWriter():
 
 			for number in hd_channels_numbers:
 				if number >= section_key_current:
+					todo = None
 					if section_key_current not in bouquets_to_hide:
 						bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
 						bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[section_key_current]))
+						todo = section_key_current
+
 					section_keys_temp.remove(section_key_current)
 					if len(section_keys_temp) > 0:
 						section_key_current = section_keys_temp[0]
 					else:
 						section_key_current = 65535
 
-				if section_key_current not in bouquets_to_hide:
-					if services["video"][number]["service_type"] >= 17:		# from 17 to higher are HD?
+				if todo and number >= todo:
+					if services["video"][number]["service_type"] >= 17:  # from 17 to higher are HD?
+						current_number += 1
 						bouquet_current.write("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
 								services["video"][number]["service_type"],
 								services["video"][number]["service_id"],
@@ -494,7 +488,9 @@ class BouquetsWriter():
 						if "interactive_name" in services["video"][number]:
 							bouquet_current.write("#DESCRIPTION %s\n" % services["video"][number]["interactive_name"])
 
-						current_number += 1
+			for x in range(current_number, (int(current_number/1000) + 1) * 1000):
+				bouquet_current.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
+				bouquet_current.write("#DESCRIPTION  \n")
 
 			bouquet_current.close()
 
@@ -554,17 +550,21 @@ class BouquetsWriter():
 
 			for number in hd_channels_numbers:
 				if number >= section_key_current:
+					todo = None
 					if section_key_current not in bouquets_to_hide:
 						bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
 						bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[section_key_current]))
+						todo = section_key_current
+
 					section_keys_temp.remove(section_key_current)
 					if len(section_keys_temp) > 0:
 						section_key_current = section_keys_temp[0]
 					else:
 						section_key_current = 65535
 
-				if section_key_current not in bouquets_to_hide:
-					if services["video"][number]["service_type"] >= 17 and services["video"][number]["free_ca"] == 0 and number not in bouquets_to_hide:		# from 17 to higher are HD?
+				if todo and number >= todo:
+					if services["video"][number]["service_type"] >= 17 and services["video"][number]["free_ca"] == 0: # from 17 to higher are HD?
+						current_number += 1
 						bouquet_current.write("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
 								services["video"][number]["service_type"],
 								services["video"][number]["service_id"],
@@ -575,7 +575,9 @@ class BouquetsWriter():
 						if "interactive_name" in services["video"][number]:
 							bouquet_current.write("#DESCRIPTION %s\n" % services["video"][number]["interactive_name"])
 
-						current_number += 1
+			for x in range(current_number, (int(current_number/1000) + 1) * 1000):
+				bouquet_current.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
+				bouquet_current.write("#DESCRIPTION  \n")
 
 			bouquet_current.close()
 
