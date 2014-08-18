@@ -76,3 +76,6 @@ msgstr "Ja"
 
 msgid "in standby: "
 msgstr "in Standby: "
+
+msgid "Channel number with leading zeros"
+msgstr "Kanalnummern mit führenden Nullen"
