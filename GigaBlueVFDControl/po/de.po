@@ -1,3 +1,5 @@
+# German translations for Enigma2
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
@@ -76,3 +78,6 @@ msgstr "Ja"
 
 msgid "in standby: "
 msgstr "in Standby: "
+
+msgid "Channel number with leading zeros"
+msgstr "Kanalnummern mit führenden Nullen"

@@ -24,6 +24,7 @@ BOX = getBoxType()
 config.plugins.VFD_Giga = ConfigSubsection()
 config.plugins.VFD_Giga.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")),("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
 config.plugins.VFD_Giga.showClockDeepStandby = ConfigSelection(default = "False", choices = [("False",_("No")),("True",_("Yes"))])
+config.plugins.VFD_Giga.channelnrformat = ConfigSelection(default = "True", choices = [("False",_("No")),("True",_("Yes"))])
 config.plugins.VFD_Giga.setLed = ConfigYesNo(default = True)
 config.plugins.VFD_Giga.recLedBlink = ConfigYesNo(default = True)
 led = [("0",_("None")),("1",_("Blue")),("2",_("Red")),("3",_("Purple"))]
@@ -46,21 +47,38 @@ def setLed(color):
 	led0 = '/proc/stb/fp/led0_pattern'
 	led1 = '/proc/stb/fp/led1_pattern'
 	
-	if color == '0':
-		value0 = 0
-		value1 = 0
-	elif color == '1':
-		value0 = 0
-		value1 = 1
-	elif color == '2':
-		value0 = 1
-		value1 = 0
-	elif color == '3':
-		value0 = 1
-		value1 = 1
+	if BOX in ('gb800se', 'gb800solo', 'gb800ue'):
+		if color == '0':
+			value0 = 0
+			value1 = 0
+		elif color == '1':
+			value0 = 1
+			value1 = 1
+		elif color == '2':
+			value0 = 2
+			value1 = 2
+		elif color == '3':
+			value0 = 3
+			value1 = 3
+		else:
+			value0 = 0
+			value1 = 0
 	else:
-		value0 = 0
-		value1 = 0
+		if color == '0':
+			value0 = 0
+			value1 = 0
+		elif color == '1':
+			value0 = 0
+			value1 = 1
+		elif color == '2':
+			value0 = 1
+			value1 = 0
+		elif color == '3':
+			value0 = 1
+			value1 = 1
+		else:
+			value0 = 0
+			value1 = 0
 
 	f = open(led0,"w")
 	f.write(str(value0))
@@ -107,7 +125,10 @@ class Channelnumber:
 		if chnr == "----":
 			vfd_write(chnr)
 		else:
-			Channelnr = "%04d" % (int(chnr))
+			if config.plugins.VFD_Giga.channelnrformat.value =='True':
+				Channelnr = "%04d" % (int(chnr))
+			else:
+				Channelnr = "% 4d" % (int(chnr))
 			vfd_write(Channelnr)
 
 	def getchannelnr(self):
@@ -254,13 +275,10 @@ def initLED():
 		forcmd = '1'
 	else:
 		forcmd = '0'
-	if BOX in ('gb800seplus'):
-	#CHECK IF STILL DIFFERENCE BETWEEN SOLO,SE,SEPLUS
-		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
-	elif BOX in ("gbquad", "gb800ueplus", "gbquadplus", "gbipbox"):
+	if BOX in ("gbquad", "gb800ueplus", "gbquadplus", "gbipbox"):
 		cmd = 'echo STB does not support to show clock in Deep Standby'
 	else:
-		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/display_clock'
+		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
 	res = system(cmd)
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
@@ -270,12 +288,12 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
 
 		self.skin = """
-			<screen position="100,100" size="500,210" title="LED_Giga Setup" >
-				<widget name="config" position="20,15" size="460,150" scrollbarMode="showOnDemand" />
-				<ePixmap position="40,165" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
-				<ePixmap position="180,165" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
-				<widget name="key_green" position="40,165" size="140,40" font="Regular;20" backgroundColor="#1f771f" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_red" position="180,165" size="140,40" font="Regular;20" backgroundColor="#9f1313" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+			<screen position="center,center" size="500,340" title="GigaBlue Setup" >
+				<widget name="config" position="20,15" size="460,230" scrollbarMode="showOnDemand" />
+				<ePixmap position="40,270" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
+				<ePixmap position="180,270" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
+				<widget name="key_green" position="40,270" size="140,40" font="Regular;20" backgroundColor="#1f771f" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_red" position="180,270" size="140,40" font="Regular;20" backgroundColor="#9f1313" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 			</screen>"""
 
 		Screen.__init__(self, session)
@@ -319,10 +337,11 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 			setLed("0")
 
 		if BOX in ('gb800se', 'gb800solo', "gb800seplus"):
-			self.list.append(getConfigListEntry(_("Show on LED"), config.plugins.VFD_Giga.showClock))
+			self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_Giga.showClock))
 			self.list.append(getConfigListEntry(_("Show clock in Deep Standby"), config.plugins.VFD_Giga.showClockDeepStandby))
 			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
 				self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_Giga.timeMode))
+			self.list.append(getConfigListEntry(_("Channel number with leading zeros"), config.plugins.VFD_Giga.channelnrformat))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -398,7 +417,10 @@ class LED_Giga:
 def main(menuid):
 	if menuid != "system":
 		return [ ]
-	return [(_("Giga LED Setup"), startLED, "LED_Giga", None)]
+	if BOX in ('gb800se', 'gb800solo', 'gb800seplus'):
+		return [(_("Display/LED Setup"), startLED, "LED_Giga", None)]
+	else:
+		return [(_("LED Setup"), startLED, "LED_Giga", None)]
 
 def startLED(session, **kwargs):
 	session.open(LED_GigaSetup)
