@@ -24,6 +24,7 @@ BOX = getBoxType()
 config.plugins.VFD_Giga = ConfigSubsection()
 config.plugins.VFD_Giga.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")),("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
 config.plugins.VFD_Giga.showClockDeepStandby = ConfigSelection(default = "False", choices = [("False",_("No")),("True",_("Yes"))])
+config.plugins.VFD_Giga.channelnrformat = ConfigSelection(default = "True", choices = [("False",_("No")),("True",_("Yes"))])
 config.plugins.VFD_Giga.setLed = ConfigYesNo(default = True)
 config.plugins.VFD_Giga.recLedBlink = ConfigYesNo(default = True)
 led = [("0",_("None")),("1",_("Blue")),("2",_("Red")),("3",_("Purple"))]
@@ -124,7 +125,10 @@ class Channelnumber:
 		if chnr == "----":
 			vfd_write(chnr)
 		else:
-			Channelnr = "%04d" % (int(chnr))
+			if config.plugins.VFD_Giga.channelnrformat.value =='True':
+				Channelnr = "%04d" % (int(chnr))
+			else:
+				Channelnr = "% 4d" % (int(chnr))
 			vfd_write(Channelnr)
 
 	def getchannelnr(self):
@@ -333,10 +337,11 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 			setLed("0")
 
 		if BOX in ('gb800se', 'gb800solo', "gb800seplus"):
-			self.list.append(getConfigListEntry(_("Show on LED"), config.plugins.VFD_Giga.showClock))
+			self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_Giga.showClock))
 			self.list.append(getConfigListEntry(_("Show clock in Deep Standby"), config.plugins.VFD_Giga.showClockDeepStandby))
 			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
 				self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_Giga.timeMode))
+			self.list.append(getConfigListEntry(_("Channel number with leading zeros"), config.plugins.VFD_Giga.channelnrformat))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
