@@ -1,4 +1,4 @@
-msgid ""
+﻿msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
@@ -78,4 +78,4 @@ msgid "in standby: "
 msgstr "in Standby: "
 
 msgid "Channel number with leading zeros"
-msgstr "Kanalnummern mit f�hrenden Nullen"
+msgstr "Kanalnummern mit führenden Nullen"
