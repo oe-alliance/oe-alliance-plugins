@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>noname</author>
+                    <name>SH4CEControl</name>
+                    <packagename>enigma2-plugin-systemplugins-sh4cecontrol</packagename>
+                    <shortdescription>SH4CEControl</shortdescription>
+                    <description>SH4CEControl</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-sh4cecontrol" />
+	</files>
+</default>
