@@ -294,20 +294,19 @@ class BouquetsWriter():
 					preferred_order_tmp[swaprule[1] - 1] = tmp
 
 			for number in preferred_order_tmp:
-				if number not in bouquets_to_hide:
-					if number in sections:
-						bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-						bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[number]))
-					if number in services["video"]:
-						bouquet_current.write("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
-								services["video"][number]["service_type"],
-								services["video"][number]["service_id"],
-								services["video"][number]["transport_stream_id"],
-								services["video"][number]["original_network_id"],
-								services["video"][number]["namespace"]
-							))
-						if "interactive_name" in services["video"][number]:
-							bouquet_current.write("#DESCRIPTION %s\n" % services["video"][number]["interactive_name"])
+				if number in sections and number not in bouquets_to_hide:
+					bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
+					bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[number]))
+				if number in services["video"] and number not in bouquets_to_hide:
+					bouquet_current.write("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
+							services["video"][number]["service_type"],
+							services["video"][number]["service_id"],
+							services["video"][number]["transport_stream_id"],
+							services["video"][number]["original_network_id"],
+							services["video"][number]["namespace"]
+						))
+					if "interactive_name" in services["video"][number]:
+						bouquet_current.write("#DESCRIPTION %s\n" % services["video"][number]["interactive_name"])
 				else:
 					bouquet_current.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
 					bouquet_current.write("#DESCRIPTION  \n")
