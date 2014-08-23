@@ -244,10 +244,6 @@ SH4OSDAdjustment/src/Makefile
 SH4OSDAdjustment/meta/Makefile
 SH4OSDAdjustment/po/Makefile
 
-SH4CEControl/Makefile
-SH4CEControl/src/Makefile
-SH4CEControl/meta/Makefile
-
 TempFanControl/Makefile
 TempFanControl/src/Makefile
 TempFanControl/meta/Makefile

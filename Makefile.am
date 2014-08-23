@@ -95,7 +95,7 @@ SUBDIRS += XtrendRemote SF8VFDControl
 endif
 
 if SPARK
-SUBDIRS += SparkVFDControl SparkUnionTunerType SH4BoosterControl SH4OSDAdjustment SH4CEControl
+SUBDIRS += SparkVFDControl SparkUnionTunerType SH4BoosterControl SH4OSDAdjustment
 endif
 
 if HAVE_TEMPFANCONTROL

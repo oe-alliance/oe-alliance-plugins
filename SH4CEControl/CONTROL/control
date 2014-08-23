@@ -1,5 +1,0 @@
-Package: enigma2-plugin-systemplugins-sh4cecontrol
-Version: 0.1-r0
-Description: SH4CEControl
-Maintainer: noname
-Depends: enigma2
