@@ -278,6 +278,10 @@ class BouquetsWriter():
 			bouquet_current.write("#NAME %sAll channels\n" % section_prefix)
 
 			first_section = sorted(sections.keys())[0]
+			if first_section not in bouquets_to_hide:
+				first_section_header = True
+			else:
+				first_section_header = False
 			# small hack to handle the "preferred_order" list
 			higher_number = sorted(services["video"].keys())[-1]
 			preferred_order_tmp = []
@@ -308,6 +312,10 @@ class BouquetsWriter():
 					if "interactive_name" in services["video"][number]:
 						bouquet_current.write("#DESCRIPTION %s\n" % services["video"][number]["interactive_name"])
 				else:
+					if first_section_header:
+						bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
+						bouquet_current.write("#DESCRIPTION  \n")
+						first_section_header = False
 					bouquet_current.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
 					bouquet_current.write("#DESCRIPTION  \n")
 
