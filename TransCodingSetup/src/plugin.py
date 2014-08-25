@@ -274,7 +274,7 @@ class TranscodingSetupInit:
 		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"profile"))
 
 	def setPort(self, configElement):
-		port = configElement.getValue()
+		port = str(configElement.getValue())
 
 		print "[TranscodingSetup] set port",port
 		try:
