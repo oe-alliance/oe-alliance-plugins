@@ -18,8 +18,12 @@ if XTREND
 SUBDIRS += XtrendFancontrol Blindscan XtrendRemote
 endif
 
-if MUTANT2400
+if HD2400
 SUBDIRS += XtrendFancontrol XtrendRemote
+endif
+
+if HD1100
+SUBDIRS += F3LEDControl XtrendRemote
 endif
 
 if ODIN
