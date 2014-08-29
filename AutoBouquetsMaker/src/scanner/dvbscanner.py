@@ -849,6 +849,13 @@ class DvbScanner():
 		
 		print>>log, "[DvbScanner] Reading services extra info..."
 
+		#Clear double services values
+		for key in tmp_services_dict:
+			if len(tmp_services_dict[key]["numbers"]) > 1:
+				tmp_services_dict[key]["numbers"][0] = tmp_services_dict[key]["numbers"][1]
+				tmp_services_dict[key]["number"] = tmp_services_dict[key]["numbers"][1]
+				del tmp_services_dict[key]["numbers"][1]
+				
 		if self.sdt_other_table_id == 0x00:
 			mask = 0xff
 		else:
