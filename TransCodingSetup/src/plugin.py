@@ -274,7 +274,7 @@ class TranscodingSetupInit:
 		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"profile"))
 
 	def setPort(self, configElement):
-		port = configElement.getValue()
+		port = str(configElement.getValue())
 
 		print "[TranscodingSetup] set port",port
 		try:
@@ -298,7 +298,7 @@ class TranscodingSetupInit:
 				newConfigData += ''.join(str(X) + "\t" for X in LL) + '\n'
 
 			if newConfigData.find("transtreamproxy") == -1:
-				newConfigData += port + "/tstream\ttcp\tnowait\troot\t/usr/bin/transtreamproxy\ttranstreamproxy\n"
+				newConfigData += port + "\tstream\ttcp\tnowait\troot\t/usr/bin/transtreamproxy\ttranstreamproxy\n"
 			fd = file("/etc/inetd.conf",'w')
 			fd.write(newConfigData)
 			fd.close()

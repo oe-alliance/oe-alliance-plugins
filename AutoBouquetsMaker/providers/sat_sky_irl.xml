@@ -1,5 +1,5 @@
 <provider>
-	<name>Sky Republic Ireland</name>
+	<name>Sky ROI</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>sky</protocol>
 	<transponder frequency="11778000" symbol_rate="27500000" polarization="1"
@@ -19,7 +19,7 @@
 		<section number="520">Documentaries</section>
 		<section number="580">Religious</section>
 		<section number="601">Kids</section>
-		<section number="640">Shopping</section>
+		<section number="650">Shopping</section>
 		<section number="700">Sky Box Office</section>
 		<section number="780">International</section>
 		<section number="861">Gaming and Dating</section>
@@ -43,7 +43,8 @@
 	</sdchannelsontop>
 	<!-- swapchannels affect only main bouquet (the normal version) -->
 	<swapchannels>
-		<filter bouquet="0x1008" region="0x32" />	
+		<filter bouquet="0x1008" region="0x32" />
+	<channel number="102" with="115" /><!-- RTE Two HD -->	
 	</swapchannels>
 	<servicehacks>
 <![CDATA[

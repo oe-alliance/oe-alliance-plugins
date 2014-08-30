@@ -97,7 +97,7 @@
 		<section number="520">Documentaries</section>
 		<section number="580">Religious</section>
 		<section number="601">Kids</section>
-		<section number="640">Shopping</section>
+		<section number="650">Shopping</section>
 		<section number="700">Sky Box Office</section>
 		<section number="780">International</section>
 		<section number="861">Gaming and Dating</section>
@@ -115,19 +115,18 @@
 		<channel number="141" />
 		<channel number="102" />
 		<channel number="178" />
-		<channel number="230" />
+		<channel number="227" />
 		<channel number="171" />
 	</hdchannelsontop>
 	<sdchannelsontop>
-		<channel number="141" />
+		<channel number="141" /><!-- BBC 1 HD -->
 		<channel number="142" />
 		<channel number="178" />
-		<channel number="230" />
+		<channel number="227" />
 		<channel number="171" />
-		<channel number="217" />
-		<channel number="235" />
-		<channel number="231" />
-		<channel number="204" />
+		<channel number="217" /><!-- SKY 1 HD -->
+		<channel number="230" /><!-- SKY Living HD -->
+		<channel number="228" /><!-- SKY Atlantic HD -->
 	</sdchannelsontop>
 	<!-- swapchannels affect only main bouquet (the normal version) -->
 	<swapchannels>
@@ -178,7 +177,7 @@
 		<filter bouquet="0x1008" region="0x32" /> 
 		<channel number="141" with="101" />
 		<channel number="178" with="103" />
-		<channel number="230" with="104" />
+		<channel number="227" with="104" />
 		<channel number="171" with="105" />
 	</swapchannels>
 	<servicehacks>

@@ -114,6 +114,9 @@ if service["number"] > 999 or service["number"] < 1:
 	skip = True
 if service["number"] >= 700 and service["number"] < 800:
 	service["service_type"] = 2
+if service["service_type"] == 1 and service["service_name"][-2:] == 'HD':
+	service["service_type"] = 25
+	print>>log, "[FreesatHack] %s, changed from type 1 to 25" % (service["service_name"])
 ]]>
 	</servicehacks>
 </provider>

@@ -277,7 +277,6 @@ class BouquetsWriter():
 			bouquet_current = open(path + "/autobouquet.%s.main.tv" % section_identifier, "w")
 			bouquet_current.write("#NAME %sAll channels\n" % section_prefix)
 
-			first_section = sorted(sections.keys())[0]
 			# small hack to handle the "preferred_order" list
 			higher_number = sorted(services["video"].keys())[-1]
 			preferred_order_tmp = []
@@ -293,8 +292,16 @@ class BouquetsWriter():
 					preferred_order_tmp[swaprule[0] - 1] = preferred_order_tmp[swaprule[1] - 1]
 					preferred_order_tmp[swaprule[1] - 1] = tmp
 
+			# always write first not hidden section on top of list
 			for number in preferred_order_tmp:
 				if number in sections and number not in bouquets_to_hide:
+					bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
+					bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[number]))
+					first_section = number
+					break
+					
+			for number in preferred_order_tmp:
+				if number in sections and number not in bouquets_to_hide and number != first_section:
 					bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
 					bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[number]))
 				if number in services["video"] and number not in bouquets_to_hide:
