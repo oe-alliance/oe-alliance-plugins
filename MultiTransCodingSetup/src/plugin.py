@@ -10,8 +10,8 @@ from Components.Label import Label
 from Components.Button import Button
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
-from Tools.Directories import fileExists
 from enigma import eTimer
+from os import path
 
 
 config.plugins.transcodingsetup = ConfigSubsection()
@@ -92,7 +92,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 		self["config"].onSelectionChanged.append(self.showDescription)
 
 	def checkEncoder(self):
-		if not fileExists("/proc/stb/encoder/enable"):
+		if not path.exists("/proc/stb/encoder"):
 			self.invaliedModelTimer.start(100,True)
 
 	def invalidmodel(self):
