@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>a4tech</author>
+                    <name>MultiTranscodingSetup</name>
+                    <packagename>enigma2-plugin-systemplugins-multitranscodingsetup</packagename>
+                    <shortdescription>Setup transcoding of your INI HDp</shortdescription>
+                    <description>Setup transcoding of your INI HDp</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-multitranscodingsetup" />
+	</files>
+</default>

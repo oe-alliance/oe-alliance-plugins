@@ -59,7 +59,7 @@ SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade
 endif
 
 if INIHDP
-SUBDIRS += TransCodingSetup
+SUBDIRS += MultiTransCodingSetup BTDevicesManager
 endif
 
 if FORMULER3
