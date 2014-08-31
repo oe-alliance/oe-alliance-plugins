@@ -3,7 +3,7 @@ from . import _
 
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, configfile, ConfigSubList, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigInteger, integer_limits, NoSave
+from Components.config import config, configfile, ConfigSubList, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigInteger, integer_limits, NoSave, ConfigSelectionNumber
 from Components.ActionMap import ActionMap
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
@@ -16,8 +16,7 @@ from os import path
 
 config.plugins.transcodingsetup = ConfigSubsection()
 config.plugins.transcodingsetup.transcoding = ConfigSelection(default = "enable", choices = [ ("enable", _("enable")), ("disable", _("disable"))])
-
-choice = ConfigSelection(default = "400000", choices=[("50000", "50 Kbits"), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
+choice = ConfigSelectionNumber(min = 100000, max = 10000000, stepwidth = 100000, default = 400000, wraparound = True)
 config.plugins.transcodingsetup.bitrate = choice
 
 choice = ConfigSelection(default = "854x480", choices = [ ("854x480", _("480p")), ("768x576", _("576p")), ("1280x720", _("720p")), ("320x240", _("320x240")), ("160x120", _("160x120")) ])
@@ -26,7 +25,7 @@ config.plugins.transcodingsetup.resolution = choice
 choice = ConfigSelection(default = "50000", choices = [("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps"), ("30000", "30 fps"), ("50000", "50 fps"), ("59940", "59.940 fps"), ("60000", "60 fps")])
 config.plugins.transcodingsetup.framerate = choice
 
-config.plugins.transcodingsetup.aspectratio = ConfigSelection(default = "16:9", choices = [("4:3", _("4x3")), ("16:9", _("16x9")), ("Auto", _("Auto")) ])
+config.plugins.transcodingsetup.aspectratio = ConfigSelection(default = "Auto", choices = [("4:3", _("4x3")), ("16:9", _("16x9")), ("Auto", _("Auto")) ])
 
 config.plugins.transcodingsetup.interlaced = ConfigSelection(default = "0", choices = [ ("1", _("Yes")), ("0", _("No"))])
 
@@ -88,7 +87,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 		
 		self.invaliedModelTimer = eTimer()
 		self.invaliedModelTimer.callback.append(self.invalidmodel)
-				
+
 		self["config"].onSelectionChanged.append(self.showDescription)
 
 	def checkEncoder(self):
@@ -100,7 +99,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 
 	def createSetup(self):
 		self.list = []
-		self.list.append(getConfigListEntry(_("Bitrate"), config.plugins.transcodingsetup.bitrate))
+		self.list.append(getConfigListEntry(_("Bitrate in bits"), config.plugins.transcodingsetup.bitrate))
 		self.list.append(getConfigListEntry(_("Framerate"), config.plugins.transcodingsetup.framerate))
 		self.list.append(getConfigListEntry(_("Resolution"), config.plugins.transcodingsetup.resolution))
 		self.list.append(getConfigListEntry(_("Aspect Ratio"), config.plugins.transcodingsetup.aspectratio))
@@ -124,6 +123,9 @@ class TranscodingSetup(Screen,ConfigListScreen):
 			limits = current.limits[0]
 			text = configName
 			text += "%s : %d, %s : %d" % (_("Min"), limits[0], _("Max"), limits[1])
+		elif className == "ConfigSelectionNumber":
+			text = configName
+			text += "min : 100 Kbits, max : 10 Mbits, step : 100 Kbits"
 
 		text = str(text).split("\n")[1]
 		self["description"].setText(_(text))
