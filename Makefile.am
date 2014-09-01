@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = AutoBouquetsMaker DLNABrowser DLNAServer StreamTV 3GModemManager OpenUitzendingGemist TunerServer OnDemand Fempa LCD4linux RemoteChannelStreamConverter 
+SUBDIRS = AutoBouquetsMaker DLNABrowser DLNAServer StreamTV 3GModemManager OpenUitzendingGemist TunerServer OnDemand Fempa LCD4linux RemoteChannelStreamConverter BTDevicesManager
 
 if HAVE_WIRELESSACCESSPOINT
 SUBDIRS += WirelessAccessPoint
@@ -18,8 +18,12 @@ if XTREND
 SUBDIRS += XtrendFancontrol Blindscan XtrendRemote
 endif
 
+if ET10000
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if HD2400
-SUBDIRS += XtrendFancontrol XtrendRemote
+SUBDIRS += XtrendFancontrol XtrendRemote MultiTransCodingSetup
 endif
 
 if HD1100
@@ -59,7 +63,7 @@ SUBDIRS += VentonFancontrol Blindscan MICOMUpgrade
 endif
 
 if INIHDP
-SUBDIRS += TransCodingSetup
+SUBDIRS += MultiTransCodingSetup
 endif
 
 if FORMULER3
@@ -102,6 +106,7 @@ if SPARK
 SUBDIRS += SparkVFDControl SparkUnionTunerType SH4BoosterControl SH4OSDAdjustment
 endif
 
+
 if HAVE_TEMPFANCONTROL
 SUBDIRS += TempFanControl
 endif
@@ -121,4 +126,3 @@ endif
 if GB800UEPLUS
 SUBDIRS += AudioEffect
 endif
-

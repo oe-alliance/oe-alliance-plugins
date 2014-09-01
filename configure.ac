@@ -147,6 +147,10 @@ Blindscan/src/Makefile
 Blindscan/meta/Makefile
 Blindscan/po/Makefile
 
+BTDevicesManager/Makefile
+BTDevicesManager/src/Makefile
+BTDevicesManager/meta/Makefile
+
 DLNABrowser/Makefile
 DLNABrowser/src/Makefile
 DLNABrowser/icons/Makefile
@@ -224,6 +228,11 @@ MICOMUpgrade/src/bin/Makefile
 MICOMUpgrade/meta/Makefile
 MICOMUpgrade/po/Makefile
 MICOMUpgrade/buttons/Makefile
+
+MultiTransCodingSetup/Makefile
+MultiTransCodingSetup/src/Makefile
+MultiTransCodingSetup/meta/Makefile
+MultiTransCodingSetup/po/Makefile
 
 OnDemand/Makefile
 OnDemand/src/Makefile
