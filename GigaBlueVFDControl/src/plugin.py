@@ -110,7 +110,7 @@ class Channelnumber:
 
 	def __eventInfoChanged(self):
 		self.RecordingLed()
-		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus'):
+		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra'):
 			return
 		if config.plugins.VFD_Giga.showClock.value == 'Off' or config.plugins.VFD_Giga.showClock.value == 'True_All':
 			return
@@ -179,7 +179,7 @@ class Channelnumber:
 
 	def vrime(self):
 		self.RecordingLed()
-		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus'):
+		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra'):
 			self.zaPrik.start(self.updatetime, 1)
 			return
 
@@ -328,7 +328,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		if config.plugins.VFD_Giga.setLed.value:
 			self.list.append(getConfigListEntry(_("Led state RUN"), config.plugins.VFD_Giga.ledRUN))
 			self.list.append(getConfigListEntry(_("Led state Standby"), config.plugins.VFD_Giga.ledSBY))
-			if BOX not in ("gbquad", "gb800ueplus", "gb800seplus", "gbquadplus", "gbipbox"):
+			if BOX not in ("gbquad", "gb800ueplus", "gb800seplus", "gbquadplus", "gbipbox", "gbultra"):
 				self.list.append(getConfigListEntry(_("Led state Deep Standby"), config.plugins.VFD_Giga.ledDSBY))
 			self.list.append(getConfigListEntry(_("Led state Record"), config.plugins.VFD_Giga.ledREC))
 			self.list.append(getConfigListEntry(_("Blink Record Led"), config.plugins.VFD_Giga.recLedBlink))
@@ -336,7 +336,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		else:
 			setLed("0")
 
-		if BOX in ('gb800se', 'gb800solo', "gb800seplus"):
+		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra"):
 			self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_Giga.showClock))
 			self.list.append(getConfigListEntry(_("Show clock in Deep Standby"), config.plugins.VFD_Giga.showClockDeepStandby))
 			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
@@ -417,7 +417,7 @@ class LED_Giga:
 def main(menuid):
 	if menuid != "system":
 		return [ ]
-	if BOX in ('gb800se', 'gb800solo', 'gb800seplus'):
+	if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra'):
 		return [(_("Display/LED Setup"), startLED, "LED_Giga", None)]
 	else:
 		return [(_("LED Setup"), startLED, "LED_Giga", None)]
