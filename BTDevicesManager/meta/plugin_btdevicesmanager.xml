@@ -1,0 +1,18 @@
+<default>
+	  <prerequisites>
+                    <tag type="Network" />
+	  </prerequisites>
+          <info>
+                    <author>a4tech</author>
+                    <name>BTDevicesManager</name>
+                    <packagename>enigma2-plugin-extensions-btdevicesmanager</packagename>
+                    <shortdescription>this is bt devices manger</shortdescription>
+                    <description>this is bt devices manger to pair e.x keyboard or mouse</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-btdevicesmanager" />
+                <file type="package" name="bluez4-testtools" />
+                <file type="package" name="bluez4" />
+                <file type="package" name="bluez-hcidump" />
+  	  </files>
+</default>

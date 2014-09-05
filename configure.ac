@@ -26,6 +26,16 @@ AM_PATH_PYTHON
 AX_PYTHON_DEVEL
 AX_PTHREAD
 
+AC_ARG_WITH(arch,
+	[  --with-arch=NAME box arch [[none,ah4,mipsel...]]],
+	[ARCH="$withval"],[ARCH="mipsel"])
+AC_SUBST(ARCH)
+AC_DEFINE_UNQUOTED(ARCH,"$ARCH",[box arch])
+
+AM_CONDITIONAL(SH4, test `echo "$ARCH" | cut -b 1-3` == "sh4")
+AM_CONDITIONAL(MIPSEL, test `echo "$ARCH" | cut -b 1-6` == "mipsel")
+AM_CONDITIONAL(ARM, test `echo "$ARCH" | cut -b 1-3` == "arm")
+
 AC_ARG_WITH(boxtype,
 	[  --with-boxtype=NAME box type [[none,dm7025,dm800...]]],
 	[BOXTYPE="$withval"],[BOXTYPE="dm800"])
@@ -42,6 +52,7 @@ AM_CONDITIONAL(INI, test `echo "$BOXTYPE" | cut -b 1-3` == "ini")
 AM_CONDITIONAL(GIGABLUE, test `echo "$BOXTYPE" | cut -b 1-2` == "gb")
 AM_CONDITIONAL(ODIN, test `echo "$BOXTYPE" | cut -b 1-4` == "odin")
 AM_CONDITIONAL(EBOX, test `echo "$BOXTYPE" | cut -b 1-4` == "ebox")
+AM_CONDITIONAL(SPARK, test `echo "$BOXTYPE" | cut -b 1-5` == "spark")
 
 AM_CONDITIONAL(AZBOXHD, test "$BOXTYPE" == "azboxhd")
 AM_CONDITIONAL(AZBOXME, test "$BOXTYPE" == "azboxme")
@@ -70,6 +81,7 @@ AM_CONDITIONAL(ET6X00, test "$BOXTYPE" == "et6x00")
 AM_CONDITIONAL(ET9X00, test "$BOXTYPE" == "et9x00")
 AM_CONDITIONAL(ET8000, test "$BOXTYPE" == "et8000")
 AM_CONDITIONAL(ET10000, test "$BOXTYPE" == "et10000")
+AM_CONDITIONAL(KMT3000, test `echo "$BOXTYPE"` == "kmt3000")
 AM_CONDITIONAL(EW7358, test `echo "$BOXTYPE"` == "ew7358")
 AM_CONDITIONAL(FORMULER1, test "$BOXTYPE" == formuler1)
 AM_CONDITIONAL(FORMULER3, test "$BOXTYPE" == formuler3)
@@ -101,9 +113,13 @@ AM_CONDITIONAL(VUDUO, test "$BOXTYPE" == vuduo)
 AM_CONDITIONAL(VUSOLO2, test "$BOXTYPE" == vusolo2)
 AM_CONDITIONAL(VUDUO2, test "$BOXTYPE" == vuduo2)
 AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
+AM_CONDITIONAL(SPARK, test `echo "$BOXTYPE" | cut -b 1-5` == spark)
+if test `echo "$BOXTYPE" | cut -b 1-2` == "dm"; then
+	AC_DEFINE(DREAMBOX, 1, [Dreambox hardware])
+fi
 
 AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm500hd -o "$BOXTYPE" == vuuno -o "$BOXTYPE" == vuultimo -o "$BOXTYPE" == vusolo2 -o "$BOXTYPE" == vuduo2 -o "$BOXTYPE" == tmsingle -o "$BOXTYPE" == tmtwin -o "$BOXTYPE" == tm2t -o "$BOXTYPE" == tmnano -o "$BOXTYPE" == iqonios100hd -o "$BOXTYPE" == iqonios200hd -o "$BOXTYPE" == iqonios300hd -o "$BOXTYPE" == optimussos1 -o "$BOXTYPE" == optimussos2 -o "$BOXTYPE" == dags1 -o "$BOXTYPE" == dags2 -o "$BOXTYPE" == dags3)
-AM_CONDITIONAL(HAVE_WIRELESSACCESSPOINT, test "$BOXTYPE" != cube)
+AM_CONDITIONAL(HAVE_WIRELESSACCESSPOINT, test "$BOXTYPE" != cube -a `echo "$BOXTYPE" | cut -b 1-5` != spark)
 
 AC_CONFIG_FILES([
 Makefile
@@ -131,6 +147,10 @@ Blindscan/Makefile
 Blindscan/src/Makefile
 Blindscan/meta/Makefile
 Blindscan/po/Makefile
+
+BTDevicesManager/Makefile
+BTDevicesManager/src/Makefile
+BTDevicesManager/meta/Makefile
 
 DLNABrowser/Makefile
 DLNABrowser/src/Makefile
@@ -194,6 +214,7 @@ LCD4linux/src/renderer/Makefile
 LCD4linux/src/wetter/Makefile
 LCD4linux/src/arm/Makefile
 LCD4linux/src/mips/Makefile
+LCD4linux/src/sh4/Makefile
 LCD4linux/meta/Makefile
 LCD4linux/po/Makefile
 
@@ -209,6 +230,11 @@ MICOMUpgrade/meta/Makefile
 MICOMUpgrade/po/Makefile
 MICOMUpgrade/buttons/Makefile
 
+MultiTransCodingSetup/Makefile
+MultiTransCodingSetup/src/Makefile
+MultiTransCodingSetup/meta/Makefile
+MultiTransCodingSetup/po/Makefile
+
 OnDemand/Makefile
 OnDemand/src/Makefile
 OnDemand/src/icons/Makefile
@@ -218,6 +244,16 @@ OnDemand/po/Makefile
 RemoteChannelStreamConverter/Makefile
 RemoteChannelStreamConverter/src/Makefile
 RemoteChannelStreamConverter/po/Makefile
+
+SH4BoosterControl/Makefile
+SH4BoosterControl/src/Makefile
+SH4BoosterControl/meta/Makefile
+SH4BoosterControl/po/Makefile
+
+SH4OSDAdjustment/Makefile
+SH4OSDAdjustment/src/Makefile
+SH4OSDAdjustment/meta/Makefile
+SH4OSDAdjustment/po/Makefile
 
 TempFanControl/Makefile
 TempFanControl/src/Makefile
@@ -291,6 +327,14 @@ XtrendRemote/src/Makefile
 XtrendRemote/meta/Makefile
 XtrendRemote/po/Makefile
 
+SparkVFDControl/Makefile
+SparkVFDControl/src/Makefile
+SparkVFDControl/meta/Makefile
+SparkVFDControl/po/Makefile
+
+SparkUnionTunerType/Makefile
+SparkUnionTunerType/src/Makefile
+SparkUnionTunerType/meta/Makefile
 
 ])
 AC_OUTPUT

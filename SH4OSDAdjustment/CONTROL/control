@@ -1,0 +1,5 @@
+Package: enigma2-plugin-systemplugins-sh4osdadjustment
+Version: 0.1-r0
+Description: SH4OSDAdjustment
+Maintainer: noname
+Depends: enigma2

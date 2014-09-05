@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TransCodingSetup\n"
+"POT-Creation-Date: 2012-12-18 09:59+KST\n"
+"PO-Revision-Date: 2012-12-18 17:31+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: ViX <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../plugin.py:14
+msgid "disabled"
+msgstr ""
+
+#: ../plugin.py:14
+msgid "enabled"
+msgstr ""
+
+#: ../plugin.py:157
+msgid "Cancel"
+msgstr ""
+
+#: ../plugin.py:158
+msgid "Ok"
+msgstr ""
+
+#: ../plugin.py:159
+msgid "%s"
+msgstr ""
+
+#: ../plugin.py:170
+msgid "This Plugin is available on SOLO2/DUO2"
+msgstr ""
+
+#: ../plugin.py:174
+msgid "Transcoding"
+msgstr ""
+
+#: ../plugin.py:175
+msgid "Port"
+msgstr ""
+
+#: ../plugin.py:190
+msgid ""
+"Failed, Encoder %s\n"
+"(%s)."
+msgstr ""
+
+#: ../plugin.py:195
+msgid ""
+"OK. Encoder %s.\n"
+"%s"
+msgstr ""
+
+#: ../plugin.py:197
+msgid "OK. Encoder %s."
+msgstr ""
+
+#: ../plugin.py:224
+msgid "TranscodingSetup"
+msgstr ""
+
