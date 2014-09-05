@@ -849,12 +849,24 @@ class DvbScanner():
 		
 		print>>log, "[DvbScanner] Reading services extra info..."
 
-		#Clear double services values
+		#Clear double LCN values
+		tmp_numbers =[]
+		tmp_double_numbers = []
 		for key in tmp_services_dict:
 			if len(tmp_services_dict[key]["numbers"]) > 1:
-				tmp_services_dict[key]["numbers"][0] = tmp_services_dict[key]["numbers"][1]
-				tmp_services_dict[key]["number"] = tmp_services_dict[key]["numbers"][1]
-				del tmp_services_dict[key]["numbers"][1]
+				if tmp_services_dict[key]["numbers"][0] not in tmp_numbers:
+					tmp_numbers.append (tmp_services_dict[key]["numbers"][0])
+				else:
+					tmp_double_numbers.append (tmp_services_dict[key]["numbers"][0])
+				if tmp_services_dict[key]["numbers"][1] not in tmp_numbers:
+					tmp_numbers.append (tmp_services_dict[key]["numbers"][1])
+				else:
+					tmp_double_numbers.append (tmp_services_dict[key]["numbers"][1])
+		for key in tmp_services_dict:
+			if len(tmp_services_dict[key]["numbers"]) > 1:	
+				if tmp_services_dict[key]["numbers"][0] in tmp_double_numbers:
+					print>>log, "[DvbScanner] Deleted double LCN: %d" % (tmp_services_dict[key]["numbers"][0])
+					del tmp_services_dict[key]["numbers"][0]
 				
 		if self.sdt_other_table_id == 0x00:
 			mask = 0xff
