@@ -108,6 +108,15 @@
 		<section number="870">Adult</section>
 		<section number="950">Regional</section>
 	</sections>
+		<!-- channelsontop affect only HD bouquets -->
+	<hdchannelsontop>
+		<channel number="101" /><!-- BBC 1 Simulcast -->
+		<channel number="108" /><!-- BBC 1 -->	
+		<channel number="102" /><!-- BBC 2 Simulcast -->
+		<channel number="109" /><!-- BBC 2 -->
+		<channel number="119" />
+		<channel number="126" />
+	</hdchannelsontop>	
 	<servicehacks>
 <![CDATA[
 if service["number"] > 999 or service["number"] < 1:
