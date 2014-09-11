@@ -10,7 +10,7 @@ from Components.config import config, configfile, ConfigSubsection, ConfigEnable
 from Components.ConfigList import ConfigListScreen, ConfigList
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap
-from boxbranding import getBoxType
+from boxbranding import getBoxType, getImageDistro
 from os import system
 from Plugins.Plugin import PluginDescriptor
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -415,8 +415,13 @@ class LED_Giga:
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
-	if menuid != "system":
-		return [ ]
+	if getImageDistro() in ('openmips'):
+		if menuid != "frontpanel_menu":
+			return [ ]
+	else:
+		if menuid != "system":
+			return [ ]
+
 	if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra'):
 		return [(_("Display/LED Setup"), startLED, "LED_Giga", None)]
 	else:
