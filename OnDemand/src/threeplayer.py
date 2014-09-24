@@ -73,7 +73,7 @@ class threeMainMenu(Screen):
 
 	def __init__(self, session, action, value):
 
-		self.imagedir = "/tmp/openThreeImg/"
+		self.imagedir = "/tmp/onDemandImg/"
 		self.session = session
 		self.action = action
 		self.value = value
