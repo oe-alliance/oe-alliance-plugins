@@ -199,7 +199,7 @@ class StreamsThumb(StreamsThumbCommon):
 			else:
 				#fileUrl = str(icon[:-12])+'.mp4'
 				fileUrl = str(showID[:-12])+'.mp4'
-				fileUrl = fileUrl.replace('3player', '3Player')
+				#fileUrl = fileUrl.replace('3player', '3Player')
 				print 'fileUrl: ', fileUrl
 				
 			if fileUrl:
