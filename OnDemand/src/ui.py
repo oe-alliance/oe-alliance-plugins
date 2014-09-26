@@ -37,7 +37,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 from enigma import gFont, ePicLoad, eListboxPythonMultiContent, RT_HALIGN_RIGHT
 
-import bbciplayer, itvplayer, rteplayer, threeplayer, iView, iRadio, fourOD
+import bbciplayer, itvplayer, rteplayer, threeplayer, iView, iRadio
 from CommonModules import MainMenuList
 
 ##########################################################################
@@ -59,7 +59,7 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 
 		self.configlist.append(getConfigListEntry((_("BBC iPlayer")), config.ondemand.ShowBBCiPlayer))
 		self.configlist.append(getConfigListEntry((_("ITV Player")), config.ondemand.ShowITVPlayer))
-		self.configlist.append(getConfigListEntry((_("4OD Player")), config.ondemand.Show4ODPlayer))
+		#self.configlist.append(getConfigListEntry((_("4OD Player")), config.ondemand.Show4ODPlayer))
 		self.configlist.append(getConfigListEntry((_("3 Player")), config.ondemand.Show3Player))
 		self.configlist.append(getConfigListEntry((_("ABC iView")), config.ondemand.ShowiViewPlayer))
 		self.configlist.append(getConfigListEntry((_("RTE Player")), config.ondemand.ShowRTEPlayer))
@@ -139,8 +139,8 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 			list.append(("BBC iPlayer", "bbciplayer"))
 		if config.ondemand.ShowITVPlayer.value:
 			list.append(("ITV Player", "itvplayer"))
-		if config.ondemand.Show4ODPlayer.value:
-			list.append(("4OD Player", "fourOD"))
+		#if config.ondemand.Show4ODPlayer.value:
+			#list.append(("4OD Player", "fourOD"))
 		if config.ondemand.Show3Player.value:
 			list.append(("3 Player", "3player"))
 		if config.ondemand.ShowiViewPlayer.value:
@@ -172,8 +172,8 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 			self.session.open(bbciplayer.BBCiMenu, "start", "0")
 		elif player == "itvplayer":
 			self.session.open(itvplayer.ITVplayer, "start", "0")
-		elif player == "fourOD":
-			self.session.open(fourOD.fourODMainMenu, "start", "0")
+		#elif player == "fourOD":
+			#self.session.open(fourOD.fourODMainMenu, "start", "0")
 		elif player == "iView":
 			self.session.open(iView.iViewMenu, "start", "0")
 		if player == "iRadio":
@@ -217,8 +217,8 @@ class OnDemand_About(Screen):
 		credit += "- kitesurfing (used VODie as a base for the Irish plugins)\n"
 		credit += "- XBMC BBC iPlayer team (used as a base for iPlayer)\n"
 		credit += "- subixonfire (used his version as a base for ITV)\n"
-		credit += "- mossy (used his version as a base for 4OD)\n"
-		credit += "- OpenUitzendingGemist team (used this as a design base)\n"
+		#credit += "- mossy (used his version as a base for 4OD)\n"
+		#credit += "- OpenUitzendingGemist team (used this as a design base)\n"
 		credit += "- Andy Botting (used his version as a base for ABC iView)\n"
 		credit += "- Itzchak Rehberg & IzzySoft (use his Shoutcast API code to source iRadio)\n"
 		credit += "- brianhornsby (use his Tunein API to source iRadio)\n"
