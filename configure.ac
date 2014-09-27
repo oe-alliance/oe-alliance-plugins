@@ -106,6 +106,7 @@ AM_CONDITIONAL(ODINM7, test "$BOXTYPE" == odinm7)
 AM_CONDITIONAL(ODINM7S, test "$BOXTYPE" == odinm7s)
 AM_CONDITIONAL(ODINM7C, test "$BOXTYPE" == odinm7c)
 AM_CONDITIONAL(ODINM9, test "$BOXTYPE" == odinm9)
+AM_CONDITIONAL(VP7358CI, test "$BOXTYPE" == "vp7358ci")
 AM_CONDITIONAL(VUUNO, test "$BOXTYPE" == vuuno)
 AM_CONDITIONAL(VUULTIMO, test "$BOXTYPE" == vuultimo)
 AM_CONDITIONAL(VUSOLO, test "$BOXTYPE" == vusolo)
@@ -200,6 +201,11 @@ F3LEDControl/Makefile
 F3LEDControl/src/Makefile
 F3LEDControl/meta/Makefile
 F3LEDControl/po/Makefile
+
+VPLEDControl/Makefile
+VPLEDControl/src/Makefile
+VPLEDControl/meta/Makefile
+VPLEDControl/po/Makefile
 
 LCD4linux/Makefile
 LCD4linux/src/Makefile

@@ -74,6 +74,10 @@ if KMT3000
 SUBDIRS += F3LEDControl
 endif
 
+if VP7358CI
+SUBDIRS += VPLEDControl
+endif
+
 if VUUNO
 SUBDIRS += FirmwareUpgrade Blindscan VuRemote
 endif
