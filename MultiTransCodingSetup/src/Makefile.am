@@ -5,3 +5,5 @@ install_PYTHON = \
 	plugin.py 
 
 install_DATA = setup.xml
+
+install_DATA = *.png

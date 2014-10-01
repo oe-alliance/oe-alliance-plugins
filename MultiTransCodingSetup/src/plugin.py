@@ -156,4 +156,10 @@ def main(session, **kwargs):
 	session.open(TranscodingSetup)
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name=_("Multi-Transcoding Setup"), description=_("Multi device transcoding setup"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main)]
+	return [PluginDescriptor(
+		name=_("Multi-Transcoding Setup"),
+		description=_("Multi device transcoding setup"),
+		where = PluginDescriptor.WHERE_PLUGINMENU,
+		needsRestart = False,
+		icon="./plugin.png",
+		fnc=main)]
