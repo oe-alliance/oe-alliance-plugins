@@ -146,9 +146,6 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 			InfoBarSeek.__init__(self)
 		self.session = session
 		self.lastservice = session.nav.getCurrentlyPlayingServiceReference()
-		print 'Old service:'
-		print self.lastservice
-		print session.nav.getCurrentService()
 		self.service = service
 		self.seekable = seekable
 		self.pauseable = pauseable
@@ -266,8 +263,6 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 			self.play()
 
 	def handleLeave(self):
-		print self.lastservice
-		print 'leave'
 		if self.lastservice is not None:
 			self.session.nav.playService(self.lastservice)
 		self.close()
@@ -364,6 +359,7 @@ class OpenUgConfigureScreen(Screen, ConfigListScreen):
 	def keyGo(self):
 		for x in self["config"].list:
 			x[1].save()
+		self.session.open(OpenUgSetupScreen)
 		self.close()
 
 	def leavePlayer(self):
@@ -378,6 +374,7 @@ class OpenUgConfigureScreen(Screen, ConfigListScreen):
 	def keyCancel(self):
 		for x in self["config"].list:
 			x[1].cancel()
+		self.session.open(OpenUgSetupScreen)
 		self.close()
 
 class OpenUgSetupScreen(Screen):
@@ -443,7 +440,10 @@ class OpenUgSetupScreen(Screen):
 			selection = self.mmenu[self.CurSel]
 			self["menu"] = Label(selection[0])
 			self["menuup"] = Label()
-			selectiondown = self.mmenu[self.CurSel+1]
+			if len(self.mmenu)==1:
+				self["menudown"] = Label()
+			else:
+				selectiondown = self.mmenu[self.CurSel+1]
 			self["menudown"] = Label(selectiondown[0])
 		else:
 			self["menu"] = MenuList(self.mmenu)
@@ -653,7 +653,10 @@ class SmallScreen(Screen):
 			selection = self.mmenu[self.CurSel]
 			self["menu"] = Label(selection[0])
 			self["menuup"] = Label()
-			selectiondown = self.mmenu[self.CurSel+1]
+			if len(self.mmenu)==1:
+				self["menudown"] = Label()
+			else:
+				selectiondown = self.mmenu[self.CurSel+1]
 			self["menudown"] = Label(selectiondown[0])
 		else:
 			self["menu"] = MenuList(self.mmenu)
@@ -708,8 +711,6 @@ class SmallScreen(Screen):
 
 	def down(self):
 		sel = self.CurSel
-		print 'len menu'
-		print len(self.mmenu)-1
 		if sel == len(self.mmenu)-1:
 			self.CurSel = 0
 		else:
