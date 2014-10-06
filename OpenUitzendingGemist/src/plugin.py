@@ -8,7 +8,7 @@ from Components.AVSwitch import AVSwitch
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.StaticText import StaticText
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSubsection, ConfigBoolean, ConfigSelection, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigBoolean, ConfigInteger, ConfigSelection, getConfigListEntry
 from enigma import eServiceReference, eTimer, iPlayableService, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_WRAP, RT_VALIGN_TOP, ePicLoad
 from ServiceReference import ServiceReference
 from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarSeek
@@ -41,6 +41,7 @@ config.plugins.OpenUitzendingGemist.RTL = ConfigBoolean(default = True)
 config.plugins.OpenUitzendingGemist.SBS = ConfigBoolean(default = True)
 config.plugins.OpenUitzendingGemist.RADIO = ConfigBoolean(default = True)
 config.plugins.OpenUitzendingGemist.INETTV = ConfigBoolean(default = True)
+config.plugins.OpenUitzendingGemist.ListFontSize = ConfigInteger(default = 18, limits=(18, 36) )
 
 def wgetUrl(target, refer='', cookie=''):
 	req = Request(target)
@@ -90,7 +91,7 @@ def MPanelEntryComponent(channel, text, png):
 class MPanelList(MenuList):
 	def __init__(self, list, selection = 0, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", 18))
+		self.l.setFont(0, gFont("Regular", config.plugins.OpenUitzendingGemist.ListFontSize.value))
 		self.l.setItemHeight(120)
 		self.selection = selection
 
@@ -353,6 +354,7 @@ class OpenUgConfigureScreen(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Show SBS"), config.plugins.OpenUitzendingGemist.SBS))
 		self.list.append(getConfigListEntry(_("Show RADIO"), config.plugins.OpenUitzendingGemist.RADIO))
 		self.list.append(getConfigListEntry(_("Show INTERNETTV"), config.plugins.OpenUitzendingGemist.INETTV))
+		self.list.append(getConfigListEntry(_("Font Size in List"), config.plugins.OpenUitzendingGemist.ListFontSize))
 		self["config"].l.setList(self.list)
 		self.onLayoutFinish.append(self.layoutFinished)
 
