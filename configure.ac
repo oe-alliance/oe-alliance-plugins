@@ -139,6 +139,7 @@ AutoBouquetsMaker/po/Makefile
 AutoBouquetsMaker/providers/Makefile
 AutoBouquetsMaker/src/Makefile
 AutoBouquetsMaker/src/scanner/Makefile
+AutoBouquetsMaker/custom/Makefile
 
 AudioEffect/Makefile
 AudioEffect/src/Makefile
