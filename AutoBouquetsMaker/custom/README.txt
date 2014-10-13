@@ -6,6 +6,8 @@ How to change the file.
 Just cut and past the line into the order you wants.
 DO NOT use channels more then 1 time in the list!!
 
+Don't forget to add the custom folder into the backup files.
+
 example original:
 <custom>
 	<lcnlist>
