@@ -423,9 +423,9 @@ def main(menuid):
 			return [ ]
 
 	if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra'):
-		return [(_("Display/LED Setup"), startLED, "LED_Giga", None)]
+		return [(_("Display/LED"), startLED, "LED_Giga", None)]
 	else:
-		return [(_("LED Setup"), startLED, "LED_Giga", None)]
+		return [(_("LED"), startLED, "LED_Giga", None)]
 
 def startLED(session, **kwargs):
 	session.open(LED_GigaSetup)

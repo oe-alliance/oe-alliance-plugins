@@ -1,5 +1,6 @@
 from .. import log
 from Components.config import config
+from tools import Tools
 import os, codecs, re
 
 class BouquetsWriter():
@@ -291,6 +292,12 @@ class BouquetsWriter():
 					tmp = preferred_order_tmp[swaprule[0] - 1]
 					preferred_order_tmp[swaprule[0] - 1] = preferred_order_tmp[swaprule[1] - 1]
 					preferred_order_tmp[swaprule[1] - 1] = tmp
+			
+			# CustomLCN process 
+			customLCN_tmp = Tools().customLCN(services, preferred_order_tmp, higher_number, section_identifier)
+			if len(customLCN_tmp) > 0:
+				preferred_order_tmp = customLCN_tmp
+				print>>log, "[BouquetsWriter] CustomLCN file used."
 
 			# always write first not hidden section on top of list
 			for number in preferred_order_tmp:

@@ -25,7 +25,7 @@ config.plugins.transcodingsetup.resolution = choice
 choice = ConfigSelection(default = "50000", choices = [("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps"), ("30000", "30 fps"), ("50000", "50 fps"), ("59940", "59.940 fps"), ("60000", "60 fps")])
 config.plugins.transcodingsetup.framerate = choice
 
-config.plugins.transcodingsetup.aspectratio = ConfigSelection(default = "Auto", choices = [("4:3", _("4x3")), ("16:9", _("16x9")), ("Auto", _("Auto")) ])
+config.plugins.transcodingsetup.aspectratio = ConfigSelection(default = "2", choices = [("0", _("4x3")), ("1", _("16x9")), ("2", _("Auto")) ])
 
 config.plugins.transcodingsetup.interlaced = ConfigSelection(default = "0", choices = [ ("1", _("Yes")), ("0", _("No"))])
 
@@ -156,4 +156,10 @@ def main(session, **kwargs):
 	session.open(TranscodingSetup)
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name=_("Multi-Transcoding Setup"), description=_("Multi device transcoding setup"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main)]
+	return [PluginDescriptor(
+		name=_("Multi-Transcoding Setup"),
+		description=_("Multi device transcoding setup"),
+		where = PluginDescriptor.WHERE_PLUGINMENU,
+		needsRestart = False,
+		icon="./plugin.png",
+		fnc=main)]
