@@ -175,7 +175,7 @@ class Channelnumber:
 				self.sign = 0
 			vfd_write(clock2)
 		else:
-			vfd_write("    ")
+			vfd_write("	   ")
 
 	def vrime(self):
 		self.RecordingLed()
@@ -195,7 +195,7 @@ class Channelnumber:
 				self.__eventInfoChanged()
 
 		if config.plugins.VFD_Giga.showClock.value == 'Off':
-			vfd_write("    ")
+			vfd_write("	   ")
 			self.zaPrik.start(self.updatetime, 1)
 			return
 		else:
@@ -236,7 +236,7 @@ def leaveStandby():
 	print "[LED-GIGA] Leave Standby"
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
-		vfd_write("    ")
+		vfd_write("	   ")
 
 	if RecLed is None:
 		if config.plugins.VFD_Giga.setLed.value:
@@ -253,7 +253,7 @@ def standbyCounterChanged(configElement):
 	inStandby.onClose.append(leaveStandby)
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
-		vfd_write("    ")
+		vfd_write("	   ")
 
 	if RecLed is None:
 		if config.plugins.VFD_Giga.setLed.value:
@@ -282,7 +282,7 @@ def initLED():
 	res = system(cmd)
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
-		vfd_write("    ")
+		vfd_write("	   ")
 
 class LED_GigaSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
@@ -414,18 +414,26 @@ class LED_Giga:
 
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
-def main(menuid):
-	if getImageDistro() in ('openmips'):
-		if menuid != "frontpanel_menu":
-			return [ ]
+def main(menuid, **kwargs):
+	if getImageDistro() in ("openvix", "openvixhd"):
+		if menuid == "display":
+			if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra'):
+				return [(_("Display/LED"), startLED, "LED_Giga", None)]
+			else:
+				return [(_("LED"), startLED, "LED_Giga", None)]
+		else:
+			return []
 	else:
-		if menuid != "system":
-			return [ ]
-
-	if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra'):
-		return [(_("Display/LED"), startLED, "LED_Giga", None)]
-	else:
-		return [(_("LED"), startLED, "LED_Giga", None)]
+		if getImageDistro() in ('openmips'):
+			if menuid != "frontpanel_menu":
+				return [ ]
+		else:
+			if menuid != "system":
+				return [ ]
+		if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra'):
+			return [(_("Display/LED"), startLED, "LED_Giga", None)]
+		else:
+			return [(_("LED"), startLED, "LED_Giga", None)]
 
 def startLED(session, **kwargs):
 	session.open(LED_GigaSetup)
@@ -482,5 +490,5 @@ def sessionstart(reason, **kwargs):
 	controlgigaLED()
 
 def Plugins(**kwargs):
- 	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
- 		PluginDescriptor(name="LED_Giga", description="Change LED display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+		PluginDescriptor(name="LED_Giga", description="Change LED display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
