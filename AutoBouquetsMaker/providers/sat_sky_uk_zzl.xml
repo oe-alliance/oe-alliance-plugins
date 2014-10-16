@@ -152,7 +152,7 @@
 		<channel number="227" with="104" /><!-- Channel 4 HD -->
 		<channel number="210" with="115" /><!-- BBC Three HD -->
 		<channel number="211" with="116" /><!-- BBC Four HD -->
-		<channel number="224" with="162" /><!-- RTE TWO HD -->
+		<channel number="224" with="162" /><!-- RTE2 HD -->
 		<channel number="342" with="315" /><!-- Film4 HD -->
 		<channel number="426" with="413" /><!-- BT Sport 1 HD -->
 		<channel number="427" with="414" /><!-- BT Sport 2 HD -->
@@ -174,7 +174,7 @@
 # make your changes in the two lines below
 #
 ##########################################
-whitelist = [178,"BT Sport 1 HD","BT Sport 2 HD","Sky News HD","Film4 HD","RTE TWO HD","ESPN HD","BoxNation HD"]
+whitelist = [178,"BT Sport 1 HD","BT Sport 2 HD","Sky News HD","Film4 HD","RTE2 HD","ESPN HD","BoxNation HD"]
 blacklist = [950,998,999]
 log_servicehacks = 0
 ##########################################
