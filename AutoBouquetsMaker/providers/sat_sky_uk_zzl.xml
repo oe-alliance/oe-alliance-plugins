@@ -148,7 +148,7 @@
 		<filter bouquet="0x1008" region="0x21" />
 		<channel number="141" with="101" /><!-- BBC One HD -->
 		<channel number="142" with="102" /><!-- BBC Two HD -->
-		<channel number="178" with="103" /><!-- ITV1 HD -->
+		<channel number="178" with="103" /><!-- ITV HD -->
 		<channel number="227" with="104" /><!-- Channel 4 HD -->
 		<channel number="210" with="115" /><!-- BBC Three HD -->
 		<channel number="211" with="116" /><!-- BBC Four HD -->
@@ -189,7 +189,7 @@ adult = [range(900,950)] # all channels in range 900 - 950
 # you can specify channel numbers, names or pre-defined channel lists
 #################################################################################
 
-whitelist = ['ITV1 HD',hdsports,'Sky News HD','Film4 HD','RTE2 HD']
+whitelist = ['ITV HD',hdsports,'Sky News HD','Film4 HD','RTE2 HD']
 blacklist = [899,950,998,999]
 #blacklist = [adult,899,950,998,999] # uncomment this line to blacklist adult channels
 
