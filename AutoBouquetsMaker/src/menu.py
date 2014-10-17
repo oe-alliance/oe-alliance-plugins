@@ -31,7 +31,7 @@ import os, sys, log
 
 class AutoBouquetsMaker_Menu(Screen):
 	skin = """
-<screen position="360,170" size="560,360" >
+<screen position="center,center" size="560,360" >
 	<widget source="list" render="Listbox" position="0,0" size="560,360" scrollbarMode="showOnDemand">
 		<convert type="TemplatedMultiContent">
 			{"template": [
