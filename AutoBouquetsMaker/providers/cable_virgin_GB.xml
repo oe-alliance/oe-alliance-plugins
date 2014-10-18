@@ -17,7 +17,7 @@
 		<configuration key="00011_dvbc_uk" netid="00011" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00011 Ipswich</configuration>
 		<configuration key="00012_dvbc_uk" netid="00012" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00012 Leicester</configuration>
 		<configuration key="00013_dvbc_uk" netid="00013" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00013 Reading</configuration>
-		<configuration key="00014_dvbc_uk" netid="00014" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00014 Salisbury</configuration>
+		<configuration key="00014_dvbc_uk" netid="00014" bouquettype="hd" frequency="754250" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00014 Andover</configuration>
 		<configuration key="00015_dvbc_uk" netid="00015" bouquettype="hd" frequency="642250" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00015 Lichfield</configuration>
 		<configuration key="00016_dvbc_uk" netid="00016" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00016 Warwick</configuration>
 		<configuration key="00017_dvbc_uk" netid="00017" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00017 Hemel</configuration>
