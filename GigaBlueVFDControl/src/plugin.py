@@ -30,7 +30,7 @@ config.plugins.VFD_Giga.recLedBlink = ConfigYesNo(default = True)
 led = [("0",_("None")),("1",_("Blue")),("2",_("Red")),("3",_("Purple"))]
 config.plugins.VFD_Giga.ledRUN = ConfigSelection(led, default = "1")
 config.plugins.VFD_Giga.ledSBY = ConfigSelection(led, default = "2")
-config.plugins.VFD_Giga.ledREC = ConfigSelection(led, default = "2")
+config.plugins.VFD_Giga.ledREC = ConfigSelection(led, default = "3")
 config.plugins.VFD_Giga.ledDSBY = ConfigSelection(led, default = "2")
 config.plugins.VFD_Giga.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
 
@@ -209,13 +209,16 @@ class Channelnumber:
 		recordings = self.session.nav.getRecordings()
 		if recordings:
 			self.updatetime = 1000
-			self.blink = not self.blink
 			if not config.plugins.VFD_Giga.recLedBlink.value:
 				self.blink = True
 			if self.blink:
 				setLed(config.plugins.VFD_Giga.ledREC.getValue())
 			else:
-				setLed("0")
+				if config.plugins.VFD_Giga.ledREC.value == "3":
+					setLed("2")
+				else:
+					setLed("0")
+			self.blink = not self.blink
 			RecLed = True
 		else:
 			self.updatetime = 10000
