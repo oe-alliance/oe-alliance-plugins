@@ -70,7 +70,7 @@ if FORMULER3
 SUBDIRS += F3LEDControl
 endif
 
-if KMT3000
+if VG5000
 SUBDIRS += F3LEDControl
 endif
 
