@@ -256,7 +256,7 @@ class BouquetsWriter():
 					continue
 		print>>log, "[BouquetsWriter] Done"
 
-	def buildBouquets(self, path, provider_config, services, sections, section_identifier, preferred_order, channels_on_top, bouquets_to_hide, section_prefix):
+	def buildBouquets(self, path, provider_config, services, sections, section_identifier, preferred_order, channels_on_top, bouquets_to_hide, section_prefix, current_bouquet_key):
 		channels_on_top = channels_on_top[0]
 		if len(section_prefix) > 0:
 			section_prefix = section_prefix + " - "
@@ -294,7 +294,7 @@ class BouquetsWriter():
 					preferred_order_tmp[swaprule[1] - 1] = tmp
 			
 			# CustomLCN process 
-			customLCN_tmp = Tools().customLCN(services, preferred_order_tmp, higher_number, section_identifier)
+			customLCN_tmp = Tools().customLCN(services, preferred_order_tmp, higher_number, section_identifier, current_bouquet_key)
 			if len(customLCN_tmp) > 0:
 				preferred_order_tmp = customLCN_tmp
 				print>>log, "[BouquetsWriter] CustomLCN file used."

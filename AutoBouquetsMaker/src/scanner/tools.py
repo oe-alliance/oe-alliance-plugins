@@ -20,25 +20,32 @@ class Tools():
 		tool.close()
 		return dom
 		
-	def customLCN(self, services, preferred_order_tmp, higher_number, section_identifier):
+	def customLCN(self, services, preferred_order_tmp, higher_number, section_identifier, current_bouquet_key):
 		customLCN_tmp = []
 		custom_dir = os.path.dirname(__file__) + "/../custom"
+		skipextrachannels = 0
 		
-		# Write Example custom file		
-		logout = open(custom_dir + "/EXAMPLE_" + section_identifier + "_CustomLCN.xml", "w")
-		logout.write("<custom>\n\t<lcnlist>\n")
+		# Write Example custom file	
+		if current_bouquet_key.startswith('sd'):		
+			xmlout = open(custom_dir + "/EXAMPLE_sd_" + section_identifier + "_CustomLCN.xml", "w")
+		else:
+			xmlout = open(custom_dir + "/EXAMPLE_hd_" + section_identifier + "_CustomLCN.xml", "w")
+		xmlout.write("<custom>\n\t<include>yes</include>\n\t<lcnlist>\n")
 		for number in preferred_order_tmp:
 			if number in services["video"]:
-					logout.write("\t\t<configuration lcn=\"%d\" channelnumber=\"%d\" description=\"%s\"></configuration>\n" % (
+					xmlout.write("\t\t<configuration lcn=\"%d\" channelnumber=\"%d\" description=\"%s\"></configuration>\n" % (
 							number,
 							number,
 							(services["video"][number]["service_name"]).replace("&","+")
 						))
-		logout.write("\t</lcnlist>\n</custom>\n")
-		logout.close()
+		xmlout.write("\t</lcnlist>\n</custom>\n")
+		xmlout.close()
 		
 		# Read custom file
-		customfile = custom_dir + "/" + section_identifier + "_CustomLCN.xml"
+		if current_bouquet_key.startswith('sd'):
+			customfile = custom_dir + "/sd_" + section_identifier + "_CustomLCN.xml"
+		else:
+			customfile = custom_dir + "/hd_" + section_identifier + "_CustomLCN.xml"
 		dom = self.parseXML(customfile)
 		if dom is None:
 			print>>log, "[Tools] No custom file."
@@ -48,6 +55,11 @@ class Tools():
 			for node in dom.documentElement.childNodes:
 				if node.nodeType != node.ELEMENT_NODE:
 					continue
+				if node.tagName == "include":
+					node.normalize()
+					if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
+						if node.childNodes[0].data.encode("utf-8") == 'no':
+							skipextrachannels = 1
 				if node.tagName == "lcnlist":
 					for node2 in node.childNodes:
 						if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "configuration":
@@ -84,7 +96,8 @@ class Tools():
 						x += 1
 						
 			# Add new services at end of list.
-			for i in range(0, len(newservices)):
-				customLCN_tmp.append(newservices[i])
+			if skipextrachannels == 0:
+				for i in range(0, len(newservices)):
+					customLCN_tmp.append(newservices[i])
 					
 		return customLCN_tmp

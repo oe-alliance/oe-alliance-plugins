@@ -1,5 +1,5 @@
-ABM is making an example file for each provider which is scanned by ABM, e.g. 'EXAMPLE_sat_freesat_CustomLCN.xml'.
-Making your own custom LCN file just delete the 'EXAMPLE_' is the name of the file (sat_freesat_CustomLCN.xml). 
+ABM is making an example file for each provider which is scanned by ABM, e.g. 'EXAMPLE_hd_sat_freesat_CustomLCN.xml'.
+Making your own custom LCN file just delete the 'EXAMPLE_' is the name of the file (hd_sat_freesat_CustomLCN.xml). 
 This file will overwrite the ordering of channels ABM is doing normally in the MAIN bouquet.
 
 How to change the file.
@@ -10,6 +10,7 @@ Don't forget to add the custom folder into the backup files.
 
 example original:
 <custom>
+	<include>yes</include>
 	<lcnlist>
 		<configuration lcn="101" channelnumber="101" description="BBC One Lon"></configuration>
 		<configuration lcn="102" channelnumber="102" description="BBC Two HD"></configuration>
@@ -25,6 +26,7 @@ example original:
 *Swap channels.*		
 If you want to swap ITV (103) with BBC Three HD (106) cut and past both lines.
 <custom>
+	<include>yes</include>
 	<lcnlist>
 		<configuration lcn="101" channelnumber="101" description="BBC One Lon"></configuration>
 		<configuration lcn="102" channelnumber="102" description="BBC Two HD"></configuration>
@@ -38,6 +40,7 @@ If you want to swap ITV (103) with BBC Three HD (106) cut and past both lines.
 		<configuration lcn="110" channelnumber="110" description="BBC ALBA"></configuration>
 Now change the lcn numbers. lcn numbers must be in order!!
 <custom>
+	<include>yes</include>
 	<lcnlist>
 		<configuration lcn="101" channelnumber="101" description="BBC One Lon"></configuration>
 		<configuration lcn="102" channelnumber="102" description="BBC Two HD"></configuration>
@@ -52,12 +55,13 @@ Now change the lcn numbers. lcn numbers must be in order!!
 		
 *Remove channels.*
 Removing channels, just delete the line.
-NOTE: All channels not configured in the custom xml will be added at the end of the main bouquet.
+NOTE: When <include>is set to 'yes', all channels not configured in the custom xml will be added at the end of the main bouquet.
 This way also new services (channels) of the provider are added at the end of the main bouquet.
 
 *Changing 'channel numbers'.*
 If you wants your own numbering, edit the lcn numbers. lcn numbers must be in order!!
 <custom>
+	<include>no</include>
 	<lcnlist>
 		<configuration lcn="1" channelnumber="101" description="BBC One Lon"></configuration>
 		<configuration lcn="2" channelnumber="102" description="BBC Two HD"></configuration>

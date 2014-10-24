@@ -139,7 +139,8 @@ class Manager():
 						preferred_order,
 						channelsontop,
 						bouquetsToHide,
-						prefix)
+						prefix,
+						current_bouquet_key)
 
 		writer.buildBouquetsIndex(self.path, self.bouquetsOrder, providers,
 				self.bouquetsToKeep, currentBouquets, self.bouquetsToHide,
