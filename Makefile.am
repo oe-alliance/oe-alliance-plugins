@@ -74,6 +74,10 @@ if VG5000
 SUBDIRS += F3LEDControl
 endif
 
+if SH1
+SUBDIRS += F3LEDControl
+endif
+
 if VP7358CI
 SUBDIRS += VPLEDControl
 endif
