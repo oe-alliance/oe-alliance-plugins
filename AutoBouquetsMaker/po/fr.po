@@ -1,0 +1,234 @@
+# English translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2012 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-11 16:18+0000\n"
+"PO-Revision-Date: 2014-10-26 21:28+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.6.10\n"
+
+msgid "30 Days"
+msgstr "30 jours"
+
+msgid "About"
+msgstr "À propos"
+
+msgid "Add provider prefix to bouquets"
+msgstr "Ajouter le préfix du fournisseur aux bouquets"
+
+msgid "Allows you to set a schedule to perform a scan "
+msgstr "Vous permet de programmer un scan"
+
+msgid "AutoBouquetsMaker"
+msgstr "AutoBouquetsMaker"
+
+msgid "AutoBouquetsMaker Configure"
+msgstr "AutoBouquetsMaker Configurer"
+
+msgid "AutoBouquetsMaker Hide sections"
+msgstr "AutoBouquetsMaker Cacher sections"
+
+msgid "AutoBouquetsMaker Keep bouquets"
+msgstr "AutoBouquetsMaker Conserver bouquets"
+
+msgid "AutoBouquetsMaker Log"
+msgstr "AutoBouquetsMaker Log"
+
+msgid "AutoBouquetsMaker Providers"
+msgstr "AutoBouquetsMaker Fournisseurs"
+
+msgid "Bouquets order"
+msgstr "Ordre des bouquets"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid ""
+"Choose which level of setting's to display. 'Expert'-level shows all items, "
+"this also add's more options in the providers menu."
+msgstr ""
+"Choisissez le niveau des paramètres a afficher. Le niveau 'Expert' affiche "
+"toutes les éléments, cela ajoute aussi plus d'options dans le menu des "
+"fournisseurs."
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Configure"
+msgstr "Configurer"
+
+msgid "Daily"
+msgstr "Journalier"
+
+msgid "Hide sections"
+msgstr "Cacher sections"
+
+msgid "Keep all bouquets"
+msgstr "Garder tous les bouquets"
+
+msgid "Keep bouquets"
+msgstr "Garder bouquets"
+
+msgid "Move down"
+msgstr "Vers le bas"
+
+msgid "Move up"
+msgstr "Vers le haut"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Please wait..."
+msgstr "Patientez..."
+
+msgid "Providers"
+msgstr "Fournisseurs"
+
+msgid "Providers order"
+msgstr "Ordre des fournisseurs"
+
+msgid "Really close without saving settings?"
+msgstr "Vraiment quitter sans sauvegarder les paramètres?"
+
+msgid "Repeat how often"
+msgstr "Répéter à quelle fréquence"
+
+msgid "Schedule scan"
+msgstr "Programmer un scan"
+
+msgid ""
+"Select your own bouquet from the list, please note that the only the first "
+"100 channels for this bouquet will be used."
+msgstr ""
+"Choisir votre propre bouquet dans la liste, notez que seul les 100 premières "
+"chaînes de ce bouquet seront utilisées."
+
+msgid "Set the repeat interval of the schedule."
+msgstr "Définir l'interval de répétition pour cette programmation."
+
+msgid "Set the time of day to perform the scan."
+msgstr "Définir l'heure de la journée pour effectuer le scan."
+
+msgid "Setup mode"
+msgstr "Mode configuration"
+
+msgid "Show log"
+msgstr "Afficher log"
+
+msgid "Start scan"
+msgstr "Démarrer scan"
+
+msgid ""
+"This option allows you to choose what region of the country you live in, so "
+"it populates the correct channels for your region."
+msgstr ""
+"Cette option vous permets de définir la région du pays dans lequel vous "
+"vivez, et donc les chaînes régionales seront correctement provisionnées."
+
+msgid "This option enables the current selected provider."
+msgstr "Cette options actives le fournisseur actuellement sélectionné."
+
+msgid ""
+"This option has several choices \"Yes\", (create a bouquet with all the "
+"channels in it), \"Yes HD only\", (will group all HD channels into this "
+"bouquet), \"Custom\", (allows you to select your own bouquet), \"No\", (do "
+"not use a main bouquet)"
+msgstr ""
+"Cette option a plusieurs choix \"Oui\", (créer un bouquet contenant toutes "
+"les chaînes), \"Oui seulement HD \", (regroupera toutes les chaînes HD de ce "
+"bouquet), \"Personnalisé\", (vous permet de choisir votre propre bouquet), "
+"\"Non\", (ne pas utiliser un bouquet principal)"
+
+msgid ""
+"This option will create a FreeToAir bouquet, it will group all none "
+"encrypted channels into this bouquet."
+msgstr ""
+"Cette option va créer un bouquet en clair, il va regrouper toutes les "
+"chaînes non encryptées dans ce bouquet."
+
+msgid ""
+"This option will create a High Definition bouquet, it will group all HD "
+"channels into this bouquet."
+msgstr ""
+"Cette option va créer un bouquet Haute Définition, il va regrouper toutes "
+"les chaînes HD dans ce bouquet."
+
+msgid ""
+"This option will create bouquets for each type of channel, ie Entertainment, "
+"Movies, Documentary."
+msgstr ""
+"Cette option va créer des bouquets pour chaque type de chaîne, ex Loisirs, "
+"Films, Documentaire."
+
+msgid "This option will prepend the provider name to bouquet name "
+msgstr "Cette option va préfixer le nom du fournisseur au nom du bouquet"
+
+msgid ""
+"This option will swap SD versions of channels with HD versions. (ie 101 BBC "
+"One, 103 ITV, 104 Channel Four, 105 Channel Five)"
+msgstr ""
+"Cette option va remplacer les chaînes en version SD par celle en HD (ex 101 "
+"BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)"
+
+msgid "Time of backup to start"
+msgstr "Heure de démarrage du backup"
+
+msgid "Weekly"
+msgstr "Hebdomadaire"
+
+msgid ""
+"When disabled this will enable the 'Keep bouquets' in the main menu, "
+"allowing you to hide some 'existing' bouquets."
+msgstr ""
+"Lorsqu'elle est désactivée cela activera le 'Conserver bouquets' dans le "
+"menu principal, vous permettant de cacher certains bouquets 'existants'."
+
+msgid "area"
+msgstr "région"
+
+msgid "custom bouquet for main"
+msgstr "bouquet personnalisé comme principal"
+
+msgid "expert"
+msgstr "expert"
+
+msgid "generate FTA bouquet"
+msgstr "générer le boquet FTA (en clair)"
+
+msgid "generate HD bouquet"
+msgstr "générer le bouqet HD"
+
+msgid "generate main bouquet"
+msgstr "générer le bouquet principal"
+
+msgid "generate sections bouquets"
+msgstr "générer les bouquets sections"
+
+msgid "no"
+msgstr "non"
+
+msgid "simple"
+msgstr "simple"
+
+msgid "swap channels"
+msgstr "permuter les chaînes"
+
+msgid "yes"
+msgstr "oui"
+
+msgid "yes (custom)"
+msgstr "oui (personalisé)"
+
+msgid "yes (only HD)"
+msgstr "oui (seulement HD)"

@@ -1,0 +1,103 @@
+# Dutch translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-10 00:07+0200\n"
+"PO-Revision-Date: 2014-10-27 17:58+0100\n"
+"Last-Translator: OEA\n"
+"Language-Team: OEA\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.6.10\n"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Exit movie player?"
+msgstr "Quitter Movie Player?"
+
+msgid "NET5 Gemist"
+msgstr "NET5 manqué"
+
+msgid "NPO Number of days back"
+msgstr "NPO nombre de jour en arrière"
+
+msgid "No items matching your search criteria were found"
+msgstr "Aucun élément trouvé suivant votre critère de recherche"
+
+msgid "OK"
+msgstr "OK"
+
+msgid ""
+"Open Uitzending Gemist\n"
+"\n"
+"Based on Xtrend code"
+msgstr ""
+"Open Uitzending Gemist\n"
+"\n"
+"basé sur  le code de Xtrend"
+
+msgid "Open Uitzending Gemist options"
+msgstr "Open Uitzending Gemist options"
+
+msgid "RTL Number of days back"
+msgstr "RTL nombre de jours en arrière"
+
+msgid "RTL XL A-Z"
+msgstr "RTL XL A-Z"
+
+msgid "RTL XL Gemist"
+msgstr "RTL XL manqué"
+
+msgid "RTL XL Search"
+msgstr "RTL XL recherche"
+
+msgid "SBS6 Gemist"
+msgstr "SBS6 manqué"
+
+msgid "Search term"
+msgstr "Terme de recherche"
+
+msgid "Setup"
+msgstr "Configuration"
+
+msgid "Show pictures"
+msgstr "Afficher images"
+
+msgid "There was a problem retrieving the media list"
+msgstr "il y a un problème pour retrouver la liste des médias"
+
+msgid "Today"
+msgstr "Aujourd'hui"
+
+msgid "UG Gemist"
+msgstr "UG manqué"
+
+msgid "UG Popular"
+msgstr "UG Populaire"
+
+msgid "UG Uitgelicht"
+msgstr "UG Sélection"
+
+msgid "Veronica Gemist"
+msgstr "Veronica manqué"
+
+msgid "Watch uitzending gemist"
+msgstr "Regarder Uitzending Gemist"
+
+#~ msgid "UG A-Z"
+#~ msgstr "UG A-Z"
+
+#~ msgid "UG Recently added"
+#~ msgstr "UG Recent toegevoegd"
+
+#~ msgid "UG Search"
+#~ msgstr "UG zoeken"

@@ -3,69 +3,69 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-29 16:40+0100\n"
-"PO-Revision-Date: 2012-05-18 01:41+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"PO-Revision-Date: 2014-10-27 18:43+0100\n"
+"Last-Translator: OEA\n"
 "Language-Team: french\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: French\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Country: FRANCE\n"
 
 msgid "1-1. Serial Number (The first two or three letters of SN)"
-msgstr ""
+msgstr "1-1. Numéro de série (Les deux ou trois premières lettres du SN)"
 
 msgid "1-2. Serial Number (The remaining numbers of SN)"
-msgstr ""
+msgstr "1-2. Numéro de série (les nombres restants du SN)"
 
 msgid "2. Contact"
-msgstr ""
+msgstr "2. Contact"
 
 msgid "Agree"
-msgstr ""
+msgstr "Accepter"
 
 msgid "Exit"
 msgstr "Quitter"
 
 msgid "For use this plugin, you must update the kernel version to 3.1 or later"
 msgstr ""
+"Pour ce plugin, vous devez mettre à jour votre noyau (kernel) à la version "
+"3.1 ou plus récent"
 
 msgid "MA"
-msgstr ""
+msgstr "MA"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MC"
-msgstr ""
+msgstr "MC"
 
 msgid "MD"
-msgstr ""
+msgstr "MD"
 
 msgid "ME"
-msgstr ""
+msgstr "ME"
 
 msgid "MF"
-msgstr ""
+msgstr "MF"
 
 msgid "MG"
-msgstr ""
+msgstr "MG"
 
 msgid "MH"
-msgstr ""
+msgstr "MH"
 
 msgid "MSA"
-msgstr ""
+msgstr "MSA"
 
 msgid "Restart"
 msgstr "Redémarrer"
 
 msgid "Return the Love Event"
-msgstr ""
+msgstr "Retour au \"Love Event\""
 
 msgid "Start"
-msgstr ""
+msgstr "Démarrer"

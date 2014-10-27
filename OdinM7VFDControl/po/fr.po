@@ -3,78 +3,76 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-05-18 01:41+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"PO-Revision-Date: 2014-10-27 17:12+0100\n"
+"Last-Translator: OEA\n"
 "Language-Team: french\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: French\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Country: FRANCE\n"
 
 msgid "Blink Record Led"
-msgstr ""
+msgstr "LED d'enregistrement clignotante"
 
 msgid "Blue"
-msgstr ""
+msgstr "Bleu"
 
 msgid "Cancel"
 msgstr "Annuler"
 
 msgid "Enable led"
-msgstr ""
+msgstr "Activer LED"
 
 msgid "Led state Deep Standby"
-msgstr ""
+msgstr "État LED en Veille Profonde"
 
 msgid "Led state RUN"
-msgstr ""
+msgstr "État LED en fonctionnement"
 
 msgid "Led state Record"
-msgstr ""
+msgstr "État LED en enregistrement"
 
 msgid "Led state Standby"
-msgstr ""
+msgstr "État LED en veille"
 
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 msgid "Off"
-msgstr ""
+msgstr "Off"
 
 msgid "Purple"
-msgstr ""
+msgstr "Pourpre"
 
 msgid "Red"
-msgstr ""
+msgstr "Rouge"
 
 msgid "Save"
 msgstr "Sauver"
 
 msgid "Show clock"
-msgstr ""
+msgstr "Afficher horloge"
 
 msgid "Show clock in Deep Standby"
-msgstr ""
+msgstr "Afficher horloge en veille profonde"
 
 msgid "Time mode"
-msgstr ""
+msgstr "Mode heure"
 
 msgid "Update Date/Time"
-msgstr ""
+msgstr "Mise-à-jour Date/Heure"
 
 msgid "VFD_Giga"
-msgstr ""
+msgstr "VFD_Giga"
 
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 msgid "in standby: "
-msgstr ""
+msgstr "en veille:"

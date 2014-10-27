@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-29 16:40+0100\n"
-"PO-Revision-Date: 2012-05-18 01:41+0100\n"
+"PO-Revision-Date: 2014-10-27 11:55+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,17 +11,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: French\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Country: FRANCE\n"
 
 #, python-format
 msgid "%d / 100"
-msgstr ""
+msgstr "%d / 100"
 
 msgid "Can't cancel during upgrade!!"
-msgstr ""
+msgstr "Impossible d'annuler pendant une mise-à-jour!"
 
 msgid "Close"
 msgstr "Fermer"
@@ -30,28 +28,30 @@ msgid "Download"
 msgstr "Télécharge"
 
 msgid "Downloaded "
-msgstr ""
+msgstr "Téléchargé"
 
 msgid "Downloading..."
-msgstr ""
+msgstr "Téléchargement en cours..."
 
 #, python-format
 msgid ""
 "Error[%d] : %s.\n"
 "Press OK to exit."
 msgstr ""
+"Erreur[%d] : %s.\n"
+"Appuyez sur OK pour sortir."
 
 msgid "FPGA Upgrade"
-msgstr ""
+msgstr "Mise-à-jour FPGA"
 
 msgid "File not found"
-msgstr ""
+msgstr "Fichier non trouvé"
 
 msgid "Status : 0%"
-msgstr ""
+msgstr "Statut : 0%"
 
 msgid "Succeed"
-msgstr ""
+msgstr "Succès"
 
 msgid "Upgrade"
-msgstr ""
+msgstr "Mise-à-jour"

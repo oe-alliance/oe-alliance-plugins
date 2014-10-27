@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-03 13:52+0000\n"
-"PO-Revision-Date: 2012-11-27 12:36+0000\n"
+"PO-Revision-Date: 2014-10-27 13:35+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -16,253 +16,265 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.6.10\n"
 
 msgid ""
 "!!(Empty)\n"
 "Please, Input to the"
 msgstr ""
+"!!(Vide)\n"
+"S'il vous plait, introduire le"
 
 msgid "About"
-msgstr ""
+msgstr "À propos"
 
 msgid "Add"
-msgstr ""
+msgstr "Ajouter"
 
 msgid "Backspace Key"
-msgstr ""
+msgstr "Touche retour arrière"
 
 msgid "Bookmark"
-msgstr ""
+msgstr "Favori"
 
 msgid "Bookmark Title"
-msgstr ""
+msgstr "Titre du favori"
 
 msgid "Bookmark URL"
-msgstr ""
+msgstr "URL favori"
 
 msgid "Browser Help"
-msgstr ""
+msgstr "Aide browser"
 
 msgid "Browser Start/Stop"
-msgstr ""
+msgstr "Démarrer/Arrêter le Browser"
 
 msgid "BrowserMain"
-msgstr ""
+msgstr "Écran principal du Browser"
 
 msgid ""
 "Can't open selected bookmark.\n"
 "   - URL data is empty!!"
 msgstr ""
+"Impossible d'ouvrir le favori sélectionné.\n"
+"   - l'URL est vide!!"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 msgid "Category Name"
-msgstr ""
+msgstr "Nom de la catégorie"
 
 msgid "Current Page"
-msgstr ""
+msgstr "Page courante"
 
 msgid "Current page is already exist."
-msgstr ""
+msgstr "La page courante existe déjà"
 
 msgid "Currentpage(Bookmark)"
-msgstr ""
+msgstr "Page courante (Favori)"
 
 msgid "Delete"
-msgstr ""
+msgstr "Effacer"
 
 msgid "Direct Input"
-msgstr ""
+msgstr "Encodage direct"
 
 msgid "Direct Input(Bookmark)"
-msgstr ""
+msgstr "Encode direct (Favori)"
 
 msgid "Direct Input(Category)"
-msgstr ""
+msgstr "Encodage direct (Catégorie)"
 
 msgid "Do you want to delete the bookmark?"
-msgstr ""
+msgstr "Voulez-vous effacer le favori?"
 
 msgid "Do you want to delete the category and the bookmarks?"
-msgstr ""
+msgstr "Voulez-vous effacer la catégorie et le favori?"
 
 msgid "Do you want to set selected url to the Startpage?"
-msgstr ""
+msgstr "Voulez-vous définir l'url sélectionnée comme page de démarrage?"
 
 msgid "Down Key"
-msgstr ""
+msgstr "Touche bas"
 
 msgid "Edit"
-msgstr ""
+msgstr "Éditer"
 
 msgid "Enter Key"
-msgstr ""
+msgstr "Entrer clé"
 
 msgid "Exit"
-msgstr ""
+msgstr "Sortir"
 
 msgid "Exit the Opera browser."
-msgstr ""
+msgstr "Quitter le browser Opera."
 
 msgid "File"
-msgstr ""
+msgstr "Fichier"
 
 msgid "Global"
-msgstr ""
+msgstr "Global"
 
 msgid "Go to next page."
-msgstr ""
+msgstr "Aller à la page suivante."
 
 msgid "Go to previous page."
-msgstr ""
+msgstr "Aller à la page précédente."
 
 msgid "HbbTV Applications"
-msgstr ""
+msgstr "Applications HbbTV"
 
 msgid ""
 "HbbTV Browser was not running.\n"
 "Please running browser before start HbbTV Application."
 msgstr ""
+"Le browser HbbTV n'est pas en cours d'exécution.\n"
+"Merci de démarrer le browser avant de lancer une application HbbTV."
 
 msgid "HbbTV Plugin"
-msgstr ""
+msgstr "HbbTV Plugin"
 
 msgid "Help"
-msgstr ""
+msgstr "Aide"
 
 msgid "Invalid "
-msgstr ""
+msgstr "Invalide"
 
 msgid ""
 "Invalid URL!!(Empty)\n"
 "Please, Input to the URL."
 msgstr ""
+"URL non valide! (Vide)\n"
+"S'il-vous-plaît, entrez une URL."
 
 msgid "Invalid URL. Please check again!!"
-msgstr ""
+msgstr "URL non valide. Merci de réessayer à nouveau!"
 
 msgid "It will move the mouse pointer down."
-msgstr ""
+msgstr "Le curseur de la souris se déplacera vers le bas."
 
 msgid "It will move the mouse pointer left."
-msgstr ""
+msgstr "Le curseur de la souris se déplacera à gauche."
 
 msgid "It will move the mouse pointer right."
-msgstr ""
+msgstr "Le curseur de la souris se déplacera à droite."
 
 msgid "It will move the mouse pointer up."
-msgstr ""
+msgstr "Le curseur de la souris se déplacera vers le haut."
 
 msgid "Keyboard"
-msgstr ""
+msgstr "Clavier"
 
 msgid "Left Key"
-msgstr ""
+msgstr "Touche gauche"
 
 msgid "Left Mouse Button"
-msgstr ""
+msgstr "Bouton gauche de la souris"
 
 msgid "Mouse"
-msgstr ""
+msgstr "Souris"
 
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 msgid "No detected HbbTV applications."
-msgstr ""
+msgstr "Pas d'applications HbbTV détectée."
 
 msgid "Open Startpage"
-msgstr ""
+msgstr "Ouvrir la page d'accueil."
 
 msgid "Open URL"
-msgstr ""
+msgstr "Ouvrir URL"
 
 msgid "Opera Browser"
-msgstr ""
+msgstr "Browser Opera"
 
 msgid ""
 "Opera Browser was not running.\n"
 "Please running browser using [File]>[Start/Stop] menu."
 msgstr ""
+"Le browser Opera n'est pas en cous d'exécution.\n"
+"Merci de démarrer le browser en utilisant le menu [Fichier]>[Démarrer/"
+"Arrêter]"
 
 msgid "Opera Web Browser"
-msgstr ""
+msgstr "Opera Web Browser"
 
 msgid "Opera Web Browser Plugin v1.0"
-msgstr ""
+msgstr "Opera Web Browser Plugin v1.0"
 
 msgid "PageDown Key"
-msgstr ""
+msgstr "Touche page du bas"
 
 msgid "PageUp Key"
-msgstr ""
+msgstr "Touche page du haut"
 
 msgid "Please choose an HbbTV application."
-msgstr ""
+msgstr "Merci de choisir une application HbbTV."
 
 msgid "Please choose one."
-msgstr ""
+msgstr "Merci d'en choisir un."
 
 msgid "Please choose."
-msgstr ""
+msgstr "Merci de choisir."
 
 msgid "Please enter URL here"
-msgstr ""
+msgstr "Entrer l'URL ici"
 
 msgid "Preference"
-msgstr ""
+msgstr "Préférence"
 
 msgid "Return"
-msgstr ""
+msgstr "Retour"
 
 msgid "Right Key"
-msgstr ""
+msgstr "Touche droite"
 
 msgid "Right Mouse Button"
-msgstr ""
+msgstr "Bouton droit de la souris"
 
 msgid "Save"
-msgstr ""
+msgstr "Sauvegarder"
 
 msgid "Set as Startpage"
-msgstr ""
+msgstr "Définir une page d'accueil"
 
 msgid "Show the Menu window."
-msgstr ""
+msgstr "Afficher la fenêtre du menu."
 
 msgid "Show the Virtual keyboard window."
-msgstr ""
+msgstr "Afficher la fenêtre du clavier virtuel."
 
 msgid "Start"
-msgstr ""
+msgstr "Démarrer"
 
 msgid "Start Page"
-msgstr ""
+msgstr "Page d'accueil"
 
 msgid "Start/Stop"
-msgstr ""
+msgstr "Démarrer/Arrêter"
 
 msgid "Startpage"
-msgstr ""
+msgstr "Page d'acceuil"
 
 msgid "Stop"
-msgstr ""
+msgstr "Arrêter"
 
 msgid "Switch to keyboard/mouse mode."
-msgstr ""
+msgstr "Basculer entre le mode clavier/souris"
 
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 msgid "Tools"
-msgstr ""
+msgstr "Outils"
 
 msgid "Up Key"
-msgstr ""
+msgstr "Touche haut"
 
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 msgid "start opera web browser"
-msgstr ""
+msgstr "Démarrer Opera web browser"

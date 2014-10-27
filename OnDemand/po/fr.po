@@ -1,0 +1,517 @@
+# Dutch translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-10 00:07+0200\n"
+"PO-Revision-Date: 2014-10-27 17:51+0100\n"
+"Last-Translator: OEA\n"
+"Language-Team: french\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.6.10\n"
+
+msgid ""
+"\n"
+"\n"
+"Genre: "
+msgstr ""
+"\n"
+"\n"
+"Genre: "
+
+msgid "0 - 9"
+msgstr "0 - 9"
+
+msgid "3 Player"
+msgstr "3 Player"
+
+msgid "A - C"
+msgstr "A - C"
+
+msgid "A to Z"
+msgstr "A tot Z"
+
+msgid "ABC News 24"
+msgstr "ABC News 24"
+
+msgid "ABC iView"
+msgstr "ABC iView"
+
+msgid "ABC iView - A to Z"
+msgstr "ABC iView - A tot Z"
+
+msgid "ABC1"
+msgstr "ABC1"
+
+msgid "ABC2"
+msgstr "ABC2"
+
+msgid "ABC3"
+msgstr "ABC3"
+
+msgid "ABC4Kids"
+msgstr "ABC4Kids"
+
+msgid "About"
+msgstr "À propos"
+
+msgid "Add to Favorites"
+msgstr "Ajouter aux favoris"
+
+msgid "Added:"
+msgstr "Ajouté:"
+
+msgid "Added: "
+msgstr "Ajouté:"
+
+msgid "All Shows"
+msgstr "Tous les shows"
+
+msgid "Arts & Culture - Music"
+msgstr "Kunst & Cultuur - Musique"
+
+msgid "Arts & Culture - People"
+msgstr "Kunst & Cultuur - People"
+
+msgid "Arts & Culture - Performance"
+msgstr "Kunst & Cultuur - Performance"
+
+msgid "Arts & Culture - Reviews"
+msgstr "Kunst & Cultuur - Critiques"
+
+msgid "Audio: "
+msgstr "Audio: "
+
+msgid "Audio: Unknown"
+msgstr "Audio: inconnu"
+
+msgid "BBC Alba"
+msgstr "BBC Alba"
+
+msgid "BBC Four"
+msgstr "BBC Four"
+
+msgid "BBC HD"
+msgstr "BBC HD"
+
+msgid "BBC News"
+msgstr "BBC News"
+
+msgid "BBC Northern Ireland"
+msgstr "BBC Northern Ireland"
+
+msgid "BBC One"
+msgstr "BBC One"
+
+msgid "BBC Parliamanent"
+msgstr "BBC Parliamanent"
+
+msgid "BBC Scotland"
+msgstr "BBC Scotland"
+
+msgid "BBC Three"
+msgstr "BBC Three"
+
+msgid "BBC Two"
+msgstr "BBC Two"
+
+msgid "BBC Wales"
+msgstr "BBC Wales"
+
+msgid "BBC iPlayer"
+msgstr "BBC iPlayer"
+
+msgid "Back"
+msgstr "Retour"
+
+msgid "Bitrate: "
+msgstr "Débit: "
+
+msgid "Bitrate: Unknown"
+msgstr "Débit: inconnu"
+
+msgid "CBBC"
+msgstr "CBBC"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Cbeebies"
+msgstr "Cbeebies"
+
+msgid "Childrens"
+msgstr "Enfants"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Comedy"
+msgstr "Comédie"
+
+msgid "Comedy - Cult"
+msgstr "Comédie - Culte"
+
+msgid "Comedy - Satire"
+msgstr "Comédie - Satire"
+
+msgid "Comedy - Sitcom"
+msgstr "Comédie - Série"
+
+msgid "Comedy - Sketch"
+msgstr "Comédié - Sketchs"
+
+msgid "D - F"
+msgstr "D - F"
+
+msgid "Delete from Favorites"
+msgstr "Effacer des Favoris"
+
+msgid "Documentary - Biography"
+msgstr "Documentaire - Biographie"
+
+msgid "Documentary - History"
+msgstr "Documentaire - Histoire"
+
+msgid "Documentary - Nature"
+msgstr "Documentaire - Nature"
+
+msgid "Documentary - Real Life"
+msgstr "Documentaire - Vie réelle"
+
+msgid "Documentary - Science"
+msgstr "Documentaire - Science"
+
+msgid "Drama"
+msgstr "Drame"
+
+msgid "Drama - Crime"
+msgstr "Drame - Crime"
+
+msgid "Drama - Historical"
+msgstr "Drame - Historique"
+
+msgid "Drama - Period"
+msgstr "Drame - Époque"
+
+msgid "Drama - Romance"
+msgstr "Drame - Romantique"
+
+msgid "Drama - Sci-fi"
+msgstr "Drame - Science-fiction"
+
+msgid "Duration: "
+msgstr "Durée:"
+
+msgid "Education"
+msgstr "Éducatif"
+
+msgid "Entertainment"
+msgstr "Divertissement"
+
+msgid "Episodes by Date"
+msgstr "Épisodes par date"
+
+msgid "Episodes: "
+msgstr "Épisodes"
+
+msgid "Exit"
+msgstr "Sortir"
+
+msgid "Factual"
+msgstr "Réel"
+
+msgid "Favorites"
+msgstr "Favoris"
+
+msgid "Featured Programs"
+msgstr "Programmes vedettes"
+
+msgid "G - J"
+msgstr "G - J"
+
+msgid "Going, Going..."
+msgstr "Aller, Aller..."
+
+msgid "HD"
+msgstr "HD"
+
+msgid "Health And Wellbeing"
+msgstr "Santé & Bien-être"
+
+msgid "High"
+msgstr "Haut"
+
+msgid "ITV Player"
+msgstr "ITV Player"
+
+msgid "Indigenous"
+msgstr "Indigène"
+
+msgid "K - M"
+msgstr "K - M"
+
+msgid "Last Chance"
+msgstr "Dernière chance"
+
+msgid "Last Updated:"
+msgstr "Dernière mise à jour:"
+
+msgid "Latest Episodes"
+msgstr "Derniers épisodes"
+
+msgid "Lifestyle - Games"
+msgstr "Style de vie - jeux"
+
+msgid "Lifestyle - Reality"
+msgstr "Style de vie - Réalité"
+
+msgid "Low"
+msgstr "Bas"
+
+msgid "Most Popular Episodes"
+msgstr "Épisodes les plus populaires"
+
+msgid "Most Popular TV"
+msgstr "TV les plus populaires"
+
+msgid "Most Talked About"
+msgstr "On en parle le plus"
+
+msgid "Movies"
+msgstr "Films"
+
+msgid "Music"
+msgstr "Musique"
+
+msgid "N - P"
+msgstr "N - P"
+
+msgid "News"
+msgstr "Nouveaux"
+
+msgid "News & Current Affairs"
+msgstr "Nouvelles & Affaires en cours"
+
+msgid "No items matching your search criteria were found"
+msgstr "Aucun élément trouvé pour vos critères de recherche"
+
+msgid "No matching search items were found for "
+msgstr "Aucun élément trouvé pour vos critères de recherche"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "OnDemand"
+msgstr "OnDemand"
+
+msgid "OnDemand Configuration"
+msgstr "OnDemand Configuration"
+
+msgid ""
+"Open Uitzending Gemist\n"
+"\n"
+"Based on Xtrend code"
+msgstr ""
+"Ouvrir diffusion manquée \"Uitzending Gemist\"\n"
+"\n"
+"basé sur le code de Xtrend"
+
+msgid "Panel & Discussion"
+msgstr "Jury & discussion"
+
+msgid "Preferred Stream Quality"
+msgstr "Qualité de préférée du stream"
+
+msgid "Q - T"
+msgstr "Q - T"
+
+msgid "RTE Player"
+msgstr "RTE Player"
+
+msgid "RTE Player - A to Z"
+msgstr "RTE Player - A tot Z"
+
+msgid "RTE Player - Categories"
+msgstr "RTE Player - Catégories"
+
+msgid "RTE Player - Choose Date"
+msgstr "RTE Player - choisir une date"
+
+msgid "RTL Number of days back"
+msgstr "RTL nombre de jours en arrière"
+
+msgid "RTL XL A-Z"
+msgstr "RTL XL A-Z"
+
+msgid "RTL XL Gemist"
+msgstr "RTL XL manqué"
+
+msgid "Recently Added"
+msgstr "Récemment ajouté"
+
+msgid "Recently Played: "
+msgstr "Récemment lu: "
+
+msgid "Religion"
+msgstr "Religion"
+
+msgid "SHOUTcast Radio"
+msgstr "SHOUTcast Radio"
+
+msgid "Search"
+msgstr "Recherche"
+
+msgid "Search term"
+msgstr "Terme de recherche"
+
+msgid "Selection does not contain a stream!"
+msgstr "La sélection ne contient pas de stream!"
+
+msgid "Show Categories"
+msgstr "Afficher les catégories"
+
+msgid "Show Thumbnails"
+msgstr "Afficher les miniatures"
+
+msgid "Show in extensions"
+msgstr "Afficher dans les extensions"
+
+msgid "Show in main menu"
+msgstr "Afficher dans le menu principal"
+
+msgid "Show in plugin browser"
+msgstr "Afficher dans les plugins du browser"
+
+msgid "Shows A to Z"
+msgstr "Afficher A à Z"
+
+msgid "Signed"
+msgstr "Signé"
+
+msgid "Soaps"
+msgstr "Soaps"
+
+msgid "Sorry, No Stations Found!"
+msgstr "Désolé, aucune station trouvée!"
+
+msgid "Sorry, unable to find playable stream!"
+msgstr "Désolé, impossible de trouver un stream lisible!"
+
+msgid "Sport"
+msgstr "Sport"
+
+msgid "Station Already Saved in Favorites!"
+msgstr "Station déjà sauvegardée dans les favoris!"
+
+msgid "Station delete failed, please check the Debug logs!"
+msgstr "Éched de l'effacement de la station, merci de vérifier le debug log!"
+
+msgid "Station deleted from Favorites!"
+msgstr "Station effacée des favoris!"
+
+msgid "Station save failed, please check the Debug logs!"
+msgstr "Sauvegarde de la station a échoué, merci de vérifier le debug log!"
+
+msgid "Station saved to Favorites!"
+msgstr "Station sauvée dans les favoris!"
+
+msgid "Straight Off The Telly"
+msgstr "Maintenant à la TV"
+
+msgid "TV Highlights"
+msgstr "TV mise en évidence"
+
+msgid "Time: "
+msgstr "Heure:"
+
+msgid "Today"
+msgstr "Aujourd'hui"
+
+msgid "Trailers"
+msgstr "Bandes-annonces"
+
+msgid "Tunein Radio"
+msgstr "Tunein Radio"
+
+msgid "U - Z"
+msgstr "U - Z"
+
+msgid "UG A-Z"
+msgstr "UG A-Z"
+
+msgid "UG Popular"
+msgstr "UG Populaire"
+
+msgid "UG Recently added"
+msgstr "UG Récemment ajouté"
+
+msgid "UG Search"
+msgstr "UG recherche"
+
+msgid "Very Low"
+msgstr "Très bas"
+
+msgid "Wait please while gathering data..."
+msgstr "Merci de patienter pendant la collecte des données..."
+
+msgid "Watch uitzending gemist"
+msgstr "Regarder les émissions manquées"
+
+msgid "iRadio Player"
+msgstr "iRadio Player"
+
+msgid "iRadio Player - Main Menu"
+msgstr "iRadio Player - Menu principal"
+
+msgid "iRadio Player - SHOUTcast Genres"
+msgstr "iRadio Player - SHOUTcast Catégories"
+
+msgid "iRadio Player - SHOUTcast Sub Genres for "
+msgstr "iRadio Player - SHOUTcast sous Catégories pour"
+
+msgid "iRadio Player - Tunein Main Menu"
+msgstr "iRadio Player - Tunein Menu Principal"
+
+msgid "iRadio: Display Favorite Default Thumbnails"
+msgstr "iRadio: Afficher les miniatures des favoris par défaut"
+
+msgid "iRadio: Display Favorite Thumbnails"
+msgstr "iRadio: Afficher les favoris en miniatures"
+
+msgid "iRadio: Display SHOUTcast Default Thumbnails"
+msgstr "iRadio: afficher les miniatures SHOUTcast par défaut."
+
+msgid "iRadio: Display SHOUTcast Thumbnails"
+msgstr "iRadio: afficher les miniatures SHOUTcast"
+
+msgid "iRadio: Display Tunein Default Thumbnails"
+msgstr "iRadio: afficher les icônes standard de Tunein"
+
+msgid "iRadio: Display Tunein Thumbnails"
+msgstr "iRadio: afficher les miniatures de Tunein"
+
+msgid "iRadio: Display WMA Streams"
+msgstr "iRadio: afficher les stream WMA"
+
+msgid "iView Exclusives"
+msgstr "iView Exclusives"
+
+#~ msgid "4OD Player"
+#~ msgstr "4OD Player"
+
+#~ msgid "OUG Player"
+#~ msgstr "OUG Speler"
+
+#~ msgid "Show thumbnails"
+#~ msgstr "Toon plaatjes"

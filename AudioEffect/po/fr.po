@@ -1,0 +1,64 @@
+# English translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-21 17:17+0100\n"
+"PO-Revision-Date: 2014-10-27 09:00+0100\n"
+"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Language-Team: none\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.6.10\n"
+
+msgid "3D Surround"
+msgstr "3D Surround"
+
+msgid "3D Surround Speaker Position"
+msgstr "3D Surround position des hauts-parleurs"
+
+msgid "AVL (Automatic Volume Leveler)"
+msgstr "AVL (Ajustement automatique du volume)"
+
+msgid "Audio Effect Setup"
+msgstr "Audio Effect Configuration"
+
+msgid "Audio Effect Setup is not supported."
+msgstr "Audio Effect Configuration n'est pas supporté."
+
+msgid "AudioEffect"
+msgstr "AudioEffect"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Default"
+msgstr "Défaut"
+
+msgid "Effect"
+msgstr "Effet"
+
+msgid "Off"
+msgstr "Off"
+
+msgid "On"
+msgstr "On"
+
+msgid "Really close without saving settings?"
+msgstr "Vraiment fermer sans sauvegarder les configurations?"
+
+msgid "Save"
+msgstr "Sauvegarder"
+
+msgid "none"
+msgstr "aucun"
+
+msgid "sets the audio effetcs"
+msgstr "Définir les effets audio"

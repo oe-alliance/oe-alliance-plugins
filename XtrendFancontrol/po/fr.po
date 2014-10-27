@@ -3,135 +3,140 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-09 00:14+0100\n"
-"PO-Revision-Date: 2012-05-18 01:41+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"PO-Revision-Date: 2014-10-27 19:00+0100\n"
+"Last-Translator: OEA\n"
 "Language-Team: french\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: French\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Country: FRANCE\n"
 
 msgid " "
 msgstr ""
 
 msgid " ver. 3.1"
-msgstr ""
+msgstr " ver. 3.1"
 
 msgid "All"
-msgstr ""
+msgstr "Tout"
 
 msgid "Cancel"
 msgstr "Annuler"
 
 msgid "Drive is sleeping\n"
-msgstr ""
+msgstr "Le disque est en veille\n"
 
 msgid "ERROR\n"
-msgstr ""
+msgstr "ERREUR\n"
 
 msgid "End time"
-msgstr ""
+msgstr "Heure de fin"
 
 msgid "Fan - Auto"
-msgstr ""
+msgstr "Ventilateur - Auto"
 
 msgid "Fan - Off"
-msgstr ""
+msgstr "Ventilateur - Arrêt"
 
 msgid "Fan - On"
-msgstr ""
+msgstr "Ventilateur - Marche"
 
 msgid "Fan Control"
-msgstr ""
+msgstr "Contrôle Ventilateur"
 
 msgid "Fan Setup"
-msgstr ""
+msgstr "Configuration ventilateur"
 
 msgid "Fan mode"
-msgstr ""
+msgstr "Mode ventilateur"
 
 msgid "Fan setup:"
-msgstr ""
+msgstr "Configuration ventilateur:"
 
 msgid "Found internal HDD !\n"
-msgstr ""
+msgstr "Trouvé un disque dur interne!\n"
 
 msgid "HDD Sleeping"
-msgstr ""
+msgstr "Disque dur en veille"
 
 msgid "HDD Temperature"
-msgstr ""
+msgstr "Disque dur température"
 
 msgid ""
 "Harddisk standby after - no standby\n"
 "You may not use this mode!"
 msgstr ""
+"Disque dur en veille après - pas de veille\n"
+"Vous ne pouvez pas utiliser ce mode!"
 
 msgid "HddTempWatcher not running!"
 msgstr ""
+"Le contrôleur de température du disque dur (HddTempWatcher) n'est pas lancé!"
 
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 msgid "Not found an internal HDD !"
-msgstr ""
+msgstr "Aucun disque dur interne trouvé!"
 
 msgid "Power status"
-msgstr ""
+msgstr "Statut de l'alimentation"
 
 msgid "Save"
-msgstr ""
+msgstr "Sauvegarder"
 
 msgid "Select internal HDD device"
-msgstr ""
+msgstr "Sélectionner un disque dur interne"
 
 msgid "Show HDDTemp"
-msgstr ""
+msgstr "Afficher la température du disque dur"
 
 msgid "Show temp. HDD to extensions menu"
-msgstr ""
+msgstr "Afficher la température du HDD dans le menu extensions"
 
 msgid "Show temp.HDD"
-msgstr ""
+msgstr "Afficher temp.HDD"
 
 msgid "Start time"
-msgstr ""
+msgstr "Heure de début"
 
 msgid ""
 "Start time OFF mode equal End time OFF mode\n"
 "You may not use this time settings!"
 msgstr ""
+"L'heure de début et égale à l'heure de fin\n"
+"Vous ne pouvez pas utiliser ces paramètres!"
 
 msgid "Switch Fan mode on time setting"
-msgstr ""
+msgstr "Activer le mode ventilateur sur base de l'heure"
 
 msgid "Switch OFF mode on HDD sleep"
-msgstr ""
+msgstr "Activer le mode OFF quand le HDD est en veille"
 
 msgid "Switch ON mode on HDD max.temp. (0 - disable)"
-msgstr ""
+msgstr "Activer le mode ON quand la temp. max. du HDD (0 - désactivé)"
 
 msgid "Watch HDD state"
-msgstr ""
+msgstr "Surveiller l'état du HDD"
 
 msgid ""
 "You may not use this mode!\n"
 "Not found an internal hard drive!"
 msgstr ""
+"Vous ne pouvez pas utiliser ce mode!\n"
+"Aucun disque dur interne détecté!"
 
 msgid "hddtemp not installed!"
-msgstr ""
+msgstr "hddtemp n'est  pas installé!"
 
 msgid "switch Fan On/Off"
-msgstr ""
+msgstr "basculer le ventilateur On/Off"
 
 msgid "temp : "
-msgstr ""
+msgstr "temp:"
 
 #~ msgid "Auto"
 #~ msgstr "Auto"
