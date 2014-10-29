@@ -15,6 +15,8 @@ from urllib import quote
 
 from FTPDownloader import FTPDownloader
 
+from boxbranding import getBoxType, getImageDistro
+
 from . import _
 
 DIR_ENIGMA2 = '/etc/enigma2/'
@@ -562,10 +564,16 @@ def main(session, **kwargs):
 	session.open(StreamingChannelFromServerScreen)
 
 def mainInMenu(menuid, **kwargs):
-	if menuid == "scan":
-		return [(_("Remote channel stream converter"), main, "streamconvert", 99)]
+	if getImageDistro() in ('openmips') and getBoxType() in ('gbipbox'):
+		if menuid == "setup":
+			return [(_("Remote channel stream converter"), main, "streamconvert", 20)]
+		else:
+			return []
 	else:
-		return []
+		if menuid == "scan":
+			return [(_("Remote channel stream converter"), main, "streamconvert", 99)]
+		else:
+			return []
 
 def Plugins(**kwargs):
 	return [ PluginDescriptor(name = _("Remote channel stream converter"), description = _("Convert remote channel list for streaming"), where = PluginDescriptor.WHERE_MENU, fnc = mainInMenu) ]
