@@ -54,25 +54,30 @@ class Channelnumber:
 		session.nav.record_event.append(self.gotRecordEvent)
 
 	def __eventInfoChanged(self):
-		if config.plugins.VFD_spark.showClock.value == 'Off' or config.plugins.VFD_spark.showClock.value == 'True_All':
+		val = config.plugins.VFD_spark.showClock.value
+		if val == 'Off' or val == 'True_All':
 			return
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
 		if info is None:
 			chnr = "----"
+			name = "----"
 		else:
-			if config.plugins.VFD_spark.showClock.value == 'NameOff' or config.plugins.VFD_spark.showClock.value == 'NameOn':
+			if val == 'NameOff' or val == 'NameOn':
 				na = info.getName()
 				name = na.replace('\xc2\x87', '').replace('\xc2\x86', '')
 			else:
 				chnr = self.getchannelnr()
 		info = None
 		service = None
-		if chnr == "----":
-			vfd_write(chnr)
-		else:
-			if config.plugins.VFD_spark.showClock.value == 'NameOff' or config.plugins.VFD_spark.showClock.value == 'NameOn':
+		if val == 'NameOff' or val == 'NameOn':
+			if name == "----":
 				vfd_write(name)
+			else:
+				vfd_write(name)
+		else:
+			if chnr == "----":
+				vfd_write(chnr)
 			else:
 				Channelnr = "%04d" % (int(chnr))
 				vfd_write(Channelnr)
@@ -105,7 +110,8 @@ class Channelnumber:
 		return chnr
 
 	def prikaz(self):
-		if config.plugins.VFD_spark.showClock.value == 'True' or config.plugins.VFD_spark.showClock.value == 'NameOn' or config.plugins.VFD_spark.showClock.value == 'True_All' or config.plugins.VFD_spark.showClock.value == 'True_Switch':
+		val = config.plugins.VFD_spark.showClock.value
+		if val == 'True' or val == 'NameOn' or val == 'True_All' or val == 'True_Switch':
 			clock = str(localtime()[3])
 			clock1 = str(localtime()[4])
 			if config.plugins.VFD_spark.timeMode.value != '24h':
@@ -124,8 +130,9 @@ class Channelnumber:
 			vfd_write("....")
 
 	def vrime(self):
-		if (config.plugins.VFD_spark.showClock.value == 'True' or config.plugins.VFD_spark.showClock.value == 'False' or config.plugins.VFD_spark.showClock.value == 'NameOff' or config.plugins.VFD_spark.showClock.value == 'NameOn' or config.plugins.VFD_spark.showClock.value == 'True_Switch') and not Screens.Standby.inStandby:
-			if config.plugins.VFD_spark.showClock.value == 'True_Switch':
+		val = config.plugins.VFD_spark.showClock.value
+		if (val == 'True' or val == 'False' or val == 'NameOff' or val == 'NameOn' or val == 'True_Switch') and not Screens.Standby.inStandby:
+			if val == 'True_Switch':
 				if time() >= self.begin:
 					self.endkeypress = False
 				if self.endkeypress:
@@ -135,14 +142,14 @@ class Channelnumber:
 			else:
 				self.__eventInfoChanged()
 					
-		if config.plugins.VFD_spark.showClock.value == 'Off':
+		if val == 'Off':
 			vfd_write("....")
 			self.zaPrik.start(self.updatetime, 1)
 			return
 		else:
 			self.zaPrik.start(1000, 1)
 
-		if Screens.Standby.inStandby or config.plugins.VFD_spark.showClock.value == 'True_All':
+		if Screens.Standby.inStandby or val == 'True_All':
 			self.prikaz()
 
 	def keyPressed(self, key, tag):
