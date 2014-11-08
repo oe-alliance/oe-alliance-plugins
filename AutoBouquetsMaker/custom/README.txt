@@ -1,6 +1,6 @@
 ABM is making an example file for each provider which is scanned by ABM, e.g. 'EXAMPLE_hd_sat_freesat_CustomLCN.xml'.
 Making your own custom LCN file just delete the 'EXAMPLE_' is the name of the file (hd_sat_freesat_CustomLCN.xml). 
-This file will overwrite the ordering of channels ABM is doing normally in the MAIN bouquet.
+Configurations in provider xml, like channel swap, on-top, etc, will be done after custom LCN is processed.
 
 How to change the file.
 Just cut and past the line into the order you wants.
@@ -57,6 +57,7 @@ Now change the lcn numbers. lcn numbers must be in order!!
 Removing channels, just delete the line.
 NOTE: When <include>is set to 'yes', all channels not configured in the custom xml will be added at the end of the main bouquet.
 This way also new services (channels) of the provider are added at the end of the main bouquet.
+You can always see 'new channels' in ABM log.
 
 *Changing 'channel numbers'.*
 If you wants your own numbering, edit the lcn numbers. lcn numbers must be in order!!
