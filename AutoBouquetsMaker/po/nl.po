@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-06 20:28+0100\n"
-"PO-Revision-Date: 2014-04-07 07:21+0100\n"
+"POT-Creation-Date: 2014-10-31 05:43+0000\n"
+"PO-Revision-Date: 2014-11-09 13:46+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Andy Blacburn. Rob van der Does\n"
 "Language: nl\n"
@@ -145,6 +145,9 @@ msgstr "Deze optie kent diverse keuzes \"Ja\", (creeert een lijst met alle kanal
 msgid "This option will alow you choose where to place the created bouquets."
 msgstr "Deze optie geeft u de keuze waar de lijsten geplaatst worden."
 
+msgid "This option will create a FreeToAir High Definition bouquet, it will group all HD channels into this bouquet."
+msgstr "Hiermee kunt u een FTA-HD lijst maken; alle FTA HD kanalen zullen hierin komen."
+
 msgid "This option will create a FreeToAir bouquet, it will group all none encrypted channels into this bouquet."
 msgstr "Deze optie maakt een FTA-lijst; alle niet versleutelde kanalen komen hierin."
 
@@ -184,6 +187,9 @@ msgstr "aangepaste hoofdlijst"
 msgid "expert"
 msgstr "expert"
 
+msgid "generate FTA HD bouquet"
+msgstr "genereer FTA HD lijst"
+
 msgid "generate FTA bouquet"
 msgstr "genereer FTA favorietenlijst"
 
@@ -210,6 +216,9 @@ msgstr "ja"
 
 msgid "yes (custom)"
 msgstr "ja (aangepast)"
+
+msgid "yes (only FTA HD)"
+msgstr "ja (alleen FTA HD)"
 
 msgid "yes (only HD)"
 msgstr "ja  (alleen HD)"
