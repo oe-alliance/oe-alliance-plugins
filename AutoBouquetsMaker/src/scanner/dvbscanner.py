@@ -398,7 +398,7 @@ class DvbScanner():
 					i += 1
 				else:
 					lcn_temp[key]["visible_service_flag"] = 0
-			logical_channel_number_dict = lcn_temp
+			#logical_channel_number_dict = lcn_temp
 
 		service_count = 0
 		tmp_services_dict = {}
