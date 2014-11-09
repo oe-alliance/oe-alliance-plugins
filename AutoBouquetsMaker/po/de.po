@@ -56,7 +56,7 @@ msgid "Cancel"
 msgstr "Abbruch"
 
 msgid "Choose which level of setting's to display. 'Expert'-level shows all items, this also add's more options in the providers menu."
-msgstr "Wähloe Level der Anzeige. 'Experte' zeigt alle Einträge auch in den Anbieter-Menüs."
+msgstr "Wähle Level der Anzeige. 'Experte' zeigt alle Einträge auch in den Anbieter-Menüs."
 
 msgid "Close"
 msgstr "Schließen"
