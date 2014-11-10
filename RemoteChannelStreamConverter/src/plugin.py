@@ -268,15 +268,17 @@ class StreamingChannelFromServerScreen(Screen):
 
 	def parserWork(self, list, name):
 		try:
-			lines = open(name).readlines()
-			for line in lines:
-				tmp = line.split('userbouquet.')
-				if len(tmp) > 1:
-					if '\"' in line:
-						tmp2 = tmp[1].split('\"')
-					else:
-						tmp2 = tmp[1].split('\n')
-					list.append(tmp2[0])
+			file = open(name)
+			lines = file.readlines()
+			file.close()
+			if len(lines) > 0:
+				for line in lines:
+					if line.startswith('#SERVICE'):
+						line = line.replace('\n', '').replace('\r', '').split()
+						if len(line) > 3 and (line[3].find('.tv.') != -1 or line[3].find('.radio.')):
+							tmp = line[3].replace('"', '')
+							if len(tmp) > 1:
+								list.append(tmp)
 		except:
 			pass
 
@@ -287,7 +289,7 @@ class StreamingChannelFromServerScreen(Screen):
 		self.readIndex = 0
 		self.workList = []
 		for listindex in range(len(list)):
-			self.workList.append('userbouquet.' + list[listindex])
+			self.workList.append(list[listindex])
 		self.workList.append('lamedb')
 		self.download(self.workList[0]).addCallback(self.fetchUserBouquetsFinished).addErrback(self.fetchUserBouquetsFailed)
 
@@ -337,7 +339,7 @@ class StreamingChannelFromServerScreen(Screen):
 				filename = DIR_TMP + self.workList[self.readIndex]
 				hasRemoteTag = False
 				if self.checkBouquetAllreadyInList(self.workList[self.readIndex], self.workList[self.readIndex]) is True:
-					self.workList[self.readIndex] = self.workList[self.readIndex].replace('userbouquet.', 'userbouquet.remote_')
+					self.workList[self.readIndex] = self.workList[self.readIndex].replace('.tv', '_remote.tv').replace('.radio', '_remote.radio')
 					hasRemoteTag = True
 
 				fp = open(DIR_ENIGMA2 + self.workList[self.readIndex], 'w')
@@ -409,7 +411,6 @@ class StreamingChannelFromServerScreen(Screen):
 					fp.write(line)
 
 	def checkBouquetAllreadyInList(self, typestr, item):
-		item = item.replace('userbouquet.', '')
 		list = []
 		if '.tv' in typestr:
 			self.readBouquetList(list, '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
@@ -432,7 +433,10 @@ class StreamingChannelFromServerScreen(Screen):
 			for item in self.workList:
 				if typestr in item:
 					if self.checkBouquetAllreadyInList(typestr, item) is True:
-						item = item.replace('userbouquet.', 'userbouquet.remote_')
+						if item.find('.tv') != -1:
+							item = item.replace('.tv','_remote.tv')
+						elif item.find('.radio') != -1:
+							item = item.replace('.radio','_remote.radio')
 					tmp = matchstr + item + '\" ORDER BY bouquet\n'
 					match = False
 					for x in tmpFile:
@@ -542,11 +546,11 @@ class StreamingChannelFromServerScreen(Screen):
 						service = servicelist.getNext()
 						if not service.valid():
 							break
-						tmp = service.toString().split('userbouquet.')
-						if len(tmp[1]) > 0:
-							tmp2 = tmp[1].split('\"')
-							name = self.readBouquetName(DIR_ENIGMA2 + 'userbouquet.' + tmp2[0])
-							list.append((name, tmp2[0]))
+						tmp = service.toString()
+						if len(tmp) > 1 and len(tmp[1]) > 0:
+							tmp2 = tmp.split()[2].replace('"','')
+							name = self.readBouquetName(DIR_ENIGMA2 + tmp2)
+							list.append((name, tmp2))
 
 	def removeFiles(self, targetdir, target):
 		import os
