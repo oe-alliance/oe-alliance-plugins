@@ -172,7 +172,7 @@ class Manager():
 				scanner.setNitCurrentTableId(providers[provider_key]["transponder"]["nit_current_table_id"])
 				scanner.setNitOtherTableId(providers[provider_key]["transponder"]["nit_other_table_id"])
 
-				if providers[provider_key]["protocol"] == "lcn":
+				if providers[provider_key]["protocol"] == "lcn" or providers[provider_key]["protocol"] == "nolcn":
 					scanner.setSdtPid(providers[provider_key]["transponder"]["sdt_pid"])
 					scanner.setSdtCurrentTableId(providers[provider_key]["transponder"]["sdt_current_table_id"])
 					scanner.setSdtOtherTableId(providers[provider_key]["transponder"]["sdt_other_table_id"])
@@ -185,7 +185,7 @@ class Manager():
 					self.services[provider_key] = scanner.updateAndReadServicesLCN(
 							providers[provider_key]["namespace"], self.transponders,
 							providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
-							tmp["logical_channel_number_dict"], tmp["service_dict_tmp"])
+							tmp["logical_channel_number_dict"], tmp["service_dict_tmp"], providers[provider_key]["protocol"])
 
 					ret = len(self.services[provider_key]["video"].keys()) > 0 or len(self.services[provider_key]["radio"].keys()) > 0
 

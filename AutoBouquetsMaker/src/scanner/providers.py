@@ -3,7 +3,7 @@ import os
 import xml.dom.minidom
 
 class Providers():
-	VALID_PROTOCOLS = [ "sky", "lcn", "fastscan", "freesat", "lcnbat" ]
+	VALID_PROTOCOLS = [ "sky", "lcn", "nolcn", "fastscan", "freesat", "lcnbat" ]
 	def parseXML(self, filename):
 		try:
 			provider = open(filename, "r")

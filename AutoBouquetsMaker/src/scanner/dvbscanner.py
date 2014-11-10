@@ -1,7 +1,7 @@
 from .. import log
 import dvbreader
 import datetime
-import time
+import time, os
 
 class DvbScanner():
 	TIMEOUT_SEC = 20
@@ -322,7 +322,7 @@ class DvbScanner():
 			"service_dict_tmp": service_dict_tmp
 		}
 
-	def updateAndReadServicesLCN(self, namespace, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict, service_dict_tmp):
+	def updateAndReadServicesLCN(self, namespace, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict, service_dict_tmp, protocol):
 		print>>log, "[DvbScanner] Reading services..."
 
 		if self.sdt_other_table_id == 0x00:
@@ -382,7 +382,7 @@ class DvbScanner():
 		dvbreader.close(fd)
 
 		# When no LCN available, create fake LCN numbers and use customlcn file for final channel numbers
-		if len(logical_channel_number_dict) == 0:
+		if len(logical_channel_number_dict) == 0 and protocol == "nolcn":
 			lcn_temp = {}
 			for key in sdt_secions_status:
 				for section_content in sdt_secions_status[key]["content"]:
@@ -398,7 +398,7 @@ class DvbScanner():
 					i += 1
 				else:
 					lcn_temp[key]["visible_service_flag"] = 0
-			#logical_channel_number_dict = lcn_temp
+			logical_channel_number_dict = lcn_temp
 
 		service_count = 0
 		tmp_services_dict = {}
