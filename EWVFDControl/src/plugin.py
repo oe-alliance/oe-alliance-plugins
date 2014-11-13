@@ -162,7 +162,7 @@ class vfd_ewSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
 
 		self.skin = """
-			<screen position="100,100" size="500,210" title="vfd_ew Setup" >
+			<screen position="100,100" size="500,210" title="LED Display Setup" >
 				<widget name="config" position="20,15" size="460,150" scrollbarMode="showOnDemand" />
 				<ePixmap position="40,165" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
 				<ePixmap position="180,165" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
@@ -195,7 +195,7 @@ class vfd_ewSetup(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.vfd_ew.showClock))
+		self.list.append(getConfigListEntry(_("Show on LED"), config.plugins.vfd_ew.showClock))
 		if config.plugins.vfd_ew.showClock.value != "Off":
 			self.list.append(getConfigListEntry(_("Time mode"), config.plugins.vfd_ew.timeMode))
 
@@ -209,7 +209,7 @@ class vfd_ewSetup(ConfigListScreen, Screen):
 
 	def newConfig(self):
 		print self["config"].getCurrent()[0]
-		if self["config"].getCurrent()[0] == _('Show on VFD'):
+		if self["config"].getCurrent()[0] == _('Show on LED'):
 			self.createSetup()
 
 	def abort(self):
@@ -258,7 +258,7 @@ class vfd_ew:
 def main(menuid):
 	if menuid != "system":
 		return [ ]
-	return [(_("vfd_ew"), startVFD, "vfd_ew", None)]
+	return [(_("LED Display Setup"), startVFD, "vfd_ew", None)]
 
 def startVFD(session, **kwargs):
 	session.open(vfd_ewSetup)
@@ -301,4 +301,4 @@ def Plugins(**kwargs):
 			return []
 		else:
 			return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-				PluginDescriptor(name="vfd_ew", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+				PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
