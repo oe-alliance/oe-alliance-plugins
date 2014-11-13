@@ -50,6 +50,10 @@ if EW7358
 SUBDIRS += EWVFDControl
 endif
 
+if EW7362
+SUBDIRS += EWVFDControl
+endif
+
 if INIHDE
 SUBDIRS += INIVFDControl
 endif
