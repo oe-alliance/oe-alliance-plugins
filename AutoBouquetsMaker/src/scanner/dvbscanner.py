@@ -243,6 +243,8 @@ class DvbScanner():
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
 				hd_logical_channel_number_dict_tmp[key] = transponder
 				continue
+			if len(transponder) == 7: # DVB-T2 part, not ready yet.
+				continue
 			transponder["services"] = {}
 			transponder["dvb_type"] = self.dvbtype
 			transponder["bouquet_type"] = bouquettype
