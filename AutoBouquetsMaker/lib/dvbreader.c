@@ -368,6 +368,30 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 				PyList_Append(list, item);
 				Py_DECREF(item);
 			}
+			else if (descriptor_tag == 0x7f)	// DVB-T2 delivery system descriptor when descriptor_tag_extension == 4
+			{
+				unsigned char descriptor_tag_extension = data[offset2 + 2];
+				if (descriptor_tag_extension == 0x04)
+				{
+					int system = 1;
+					int inversion = 0;
+					int plp_id = data[offset2 + 3];
+					int T2_system_id = (data[offset2 + 4] << 8) | data[offset2 + 5];
+					
+					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:s,s:i,s:i}",
+							"transport_stream_id", transport_stream_id,
+							"original_network_id", original_network_id,
+							"plp_id", plp_id,
+							"T2_system_id", T2_system_id,
+							"delivery_system_type", "DVB-T2",
+							"system", system,
+							"inversion", inversion);
+						
+					PyList_Append(list, item);
+					Py_DECREF(item);
+				}
+			
+			}
 			else if (descriptor_tag == 0x41)	// service_list_descriptor
 			{
 				int offset3 = offset2 + 2;
@@ -628,6 +652,48 @@ PyObject *ss_parse_header(unsigned char *data, int length, const char *variable_
 		"section_number", section_number, "last_section_number", last_section_number);
 }
 
+PyObject *ss_parse_table(unsigned char *data, int length) {
+	PyObject* list = PyList_New(0);
+	int i = 0;
+	while (length > 0)
+	{
+		int value = data[i];
+		PyObject *item = Py_BuildValue("i", value);
+		PyList_Append(list, item);
+		Py_DECREF(item);
+		i += 1;
+		length -= 1;
+	}
+	return list;
+}
+
+PyObject *ss_read_ts(PyObject *self, PyObject *args) {
+	PyObject *content = NULL, *header = NULL, *buffer1 = NULL;
+	unsigned char buffer[4096], table_id_current, table_id_other;
+	int fd;
+	
+	if (!PyArg_ParseTuple(args, "ibb", &fd, &table_id_current, &table_id_other))
+		return Py_None;
+	
+	int size = read(fd, buffer, sizeof(buffer));
+	if (size < 3)
+		return Py_None;
+		
+	if (buffer[0] != table_id_current && buffer[0] != table_id_other)
+		return Py_None;
+		
+	int section_length = ((buffer[1] & 0x0f) << 8) | buffer[2];
+	
+	if (size != section_length + 3)
+		return Py_None;
+		
+	content = ss_parse_table(buffer, section_length);
+
+	PyObject *ret = Py_BuildValue("O", content);
+	Py_DECREF(content);
+	return ret;
+}
+
 PyObject *ss_read_bat(PyObject *self, PyObject *args) {
 	PyObject *content = NULL, *header = NULL;
 	unsigned char buffer[4096], table_id;
@@ -763,6 +829,7 @@ static PyMethodDef dvbreaderMethods[] = {
 		{ "read_nit", ss_read_nit, METH_VARARGS },
 		{ "read_sdt", ss_read_sdt, METH_VARARGS },
 		{ "read_fastscan", ss_read_fastscan, METH_VARARGS },
+		{ "read_ts", ss_read_ts, METH_VARARGS },
 		{ NULL, NULL }
 };
 
