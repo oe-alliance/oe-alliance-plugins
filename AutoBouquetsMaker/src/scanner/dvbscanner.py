@@ -386,21 +386,25 @@ class DvbScanner():
 		# When no LCN available, create fake LCN numbers and use customlcn file for final channel numbers
 		if len(logical_channel_number_dict) == 0 and protocol == "nolcn":
 			lcn_temp = {}
+			lcn_dict = {}
 			for key in sdt_secions_status:
 				for section_content in sdt_secions_status[key]["content"]:
 					service = section_content
-					key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
+					key = "%x:%x" % (service["original_network_id"], service["service_id"])
 					lcn_temp[key] = service
 			lcn_temp_sorted = sorted(lcn_temp)
 			i = 1
 			for key in lcn_temp_sorted:
-				if lcn_temp[key]["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES or lcn_temp[key]["service_type"] in DvbScanner.AUDIO_ALLOWED_TYPES or lcn_temp[key]["service_type"] in DvbScanner.INTERACTIVE_ALLOWED_TYPES:
-					lcn_temp[key]["logical_channel_number"] = i
-					lcn_temp[key]["visible_service_flag"] = 1
+				service = lcn_temp[key]
+				key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
+				lcn_dict[key] = service 
+				if lcn_dict[key]["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES or lcn_dict[key]["service_type"] in DvbScanner.AUDIO_ALLOWED_TYPES or lcn_dict[key]["service_type"] in DvbScanner.INTERACTIVE_ALLOWED_TYPES:
+					lcn_dict[key]["logical_channel_number"] = i
+					lcn_dict[key]["visible_service_flag"] = 1
 					i += 1
 				else:
-					lcn_temp[key]["visible_service_flag"] = 0
-			logical_channel_number_dict = lcn_temp
+					lcn_dict[key]["visible_service_flag"] = 0
+			logical_channel_number_dict = lcn_dict
 
 		service_count = 0
 		tmp_services_dict = {}
