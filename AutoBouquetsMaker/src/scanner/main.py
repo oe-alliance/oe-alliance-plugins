@@ -234,6 +234,11 @@ class AutoBouquetsMaker(Screen):
 			print>>log, "[AutoBouquetsMaker] Search NIM for orbital position %d" % transponder["orbital_position"]
 		else:
 			print>>log, "[AutoBouquetsMaker] Search NIM"
+		
+		# stop pip if running
+		if self.session.pipshown:
+			self.session.pipshown = False
+			print>>log, "[AutoBouquetsMaker] Stopping PIP."
 
 		current_slotid = -1
 		if self.rawchannel:
@@ -283,8 +288,6 @@ class AutoBouquetsMaker(Screen):
 
 			self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
 			self.session.nav.stopService()
-			if self.session.pipshown:
-				self.session.pipshown = False
 
 			self.rawchannel = resmanager.allocateRawChannel(current_slotid)
 			if not self.rawchannel:
