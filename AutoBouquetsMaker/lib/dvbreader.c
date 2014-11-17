@@ -378,14 +378,15 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 					int plp_id = data[offset2 + 3];
 					int T2_system_id = (data[offset2 + 4] << 8) | data[offset2 + 5];
 					
-					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:s,s:i,s:i}",
+					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:s,s:i,s:i,s:s}",
 							"transport_stream_id", transport_stream_id,
 							"original_network_id", original_network_id,
 							"plp_id", plp_id,
 							"T2_system_id", T2_system_id,
 							"delivery_system_type", "DVB-T2",
 							"system", system,
-							"inversion", inversion);
+							"inversion", inversion,
+							"dummy", "dummy");
 						
 					PyList_Append(list, item);
 					Py_DECREF(item);
