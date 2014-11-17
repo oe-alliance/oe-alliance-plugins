@@ -239,6 +239,7 @@ class AutoBouquetsMaker(Screen):
 		# stop pip if running
 		if self.session.pipshown:
 			self.session.pipshown = False
+			del self.session.pip
 			print>>log, "[AutoBouquetsMaker] Stopping PIP."
 
 		# stop currently playing service if it is using a tuner in ("loopthrough", "satposdepends")
