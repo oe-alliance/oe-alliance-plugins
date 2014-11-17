@@ -39,7 +39,9 @@ class AutoBouquetsMaker(Screen):
 		<widget name="progress" position="65,55" size="520,5" borderWidth="1" backgroundColor="#11000000"/>
 	</screen>"""
 
-	LOCK_TIMEOUT = 300 	# 100ms for tick - 30 sec
+	LOCK_TIMEOUT_FIXED = 100 	# 100ms for tick - 10 sec
+	LOCK_TIMEOUT_ROTOR = 1200 	# 100ms for tick - 120 sec
+	
 
 	def __init__(self, session, args = 0):
 		self.session = session
@@ -239,7 +241,7 @@ class AutoBouquetsMaker(Screen):
 		if self.session.pipshown:
 			self.session.pipshown = False
 			print>>log, "[AutoBouquetsMaker] Stopping PIP."
-
+			
 		# stop currently playing service if it is using a tuner in ("loopthrough", "satposdepends")
 		currentlyPlayingNIM = None
 		currentService = self.session and self.session.nav.getCurrentService()
@@ -325,6 +327,14 @@ class AutoBouquetsMaker(Screen):
 					self.showError(_('Cannot get the NIM'))
 					return
 					
+		# set extended timeout for rotors
+		if self.providers[self.currentAction]["streamtype"] == "dvbs" and self.isRotorSat(slotid, transponder["orbital_position"]):
+			self.LOCK_TIMEOUT = self.LOCK_TIMEOUT_ROTOR
+			print>>log, "[AutoBouquetsMaker] Motorised dish. Will wait up to %i seconds for tuner lock." % (self.LOCK_TIMEOUT/10)
+		else:
+			self.LOCK_TIMEOUT = self.LOCK_TIMEOUT_FIXED
+			print>>log, "[AutoBouquetsMaker] Fixed dish. Will wait up to %i seconds for tuner lock." % (self.LOCK_TIMEOUT/10)
+
 		self.frontend = self.rawchannel.getFrontend()
 		if not self.frontend:
 			print>>log, "[AutoBouquetsMaker] Cannot get frontend"
@@ -450,6 +460,14 @@ class AutoBouquetsMaker(Screen):
 		self.timer.callback.append(self.close)
 		self.timer.start(2000, 1)
 
+	def isRotorSat(self, slot, orb_pos):
+		rotorSatsForNim = nimmanager.getRotorSatListForNim(slot)
+		if len(rotorSatsForNim) > 0:
+			for sat in rotorSatsForNim:
+				if sat[0] == orb_pos:
+					return True
+		return False
+		
 	def about(self):
 		self.session.open(MessageBox,"AutoBouquetsMaker\nVersion date - 21/10/2012\n\nCoded by:\n\nSkaman and AndyBlac",MessageBox.TYPE_INFO)
 
