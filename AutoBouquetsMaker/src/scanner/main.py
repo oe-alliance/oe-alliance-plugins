@@ -240,6 +240,23 @@ class AutoBouquetsMaker(Screen):
 			self.session.pipshown = False
 			print>>log, "[AutoBouquetsMaker] Stopping PIP."
 
+		# stop currently playing service if it is using a tuner in ("loopthrough", "satposdepends")
+		currentlyPlayingNIM = None
+		currentService = self.session and self.session.nav.getCurrentService()
+		frontendInfo = currentService and currentService.frontendInfo()
+		frontendData = frontendInfo and frontendInfo.getAll(True)
+		if frontendData is not None:
+			currentlyPlayingNIM = frontendData.get("tuner_number", None)
+			if self.providers[self.currentAction]["streamtype"] == "dvbs" and currentlyPlayingNIM is not None:
+				nimConfigMode = nimmanager.nim_slots[currentlyPlayingNIM].config_mode
+				if nimConfigMode in ("loopthrough", "satposdepends"):
+					self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
+					self.session.nav.stopService()
+					currentlyPlayingNIM = None
+					print>>log, "[AutoBouquetsMaker] The active service was using a %s tuner, so had to be stopped (slot id %s)." % (nimConfigMode, currentlyPlayingNIM)
+		del frontendInfo
+		del currentService
+			
 		current_slotid = -1
 		if self.rawchannel:
 			del(self.rawchannel)
