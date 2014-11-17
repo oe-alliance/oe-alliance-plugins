@@ -297,21 +297,34 @@ class AutoBouquetsMaker(Screen):
 			return
 
 		if not self.rawchannel:
-			print>>log, "[AutoBouquetsMaker] Nim found on slot id %d but it's busy. Stop current service" % current_slotid
-			if self.session.nav.RecordTimer.isRecording():
-				print>>log, "[AutoBouquetsMaker] Cannot free NIM because a record is in progress"
-				self.showError(_('Cannot free NIM because a record is in progress'))
-				return
-
-			self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
-			self.session.nav.stopService()
-
-			self.rawchannel = resmanager.allocateRawChannel(current_slotid)
+			# if we are here the only possible option is to close the active service
+			if currentlyPlayingNIM in nimList: 
+				if self.providers[self.currentAction]["streamtype"] == "dvbs":
+					sats = nimmanager.getSatListForNim(currentlyPlayingNIM)
+					slotid = currentlyPlayingNIM
+					for sat in sats:
+						if sat[0] == transponder["orbital_position"]:
+							print>>log, "[AutoBouquetsMaker] Nim found on slot id %d but it's busy. Stopping active service" % currentlyPlayingNIM
+							self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
+							self.session.nav.stopService()
+							self.rawchannel = resmanager.allocateRawChannel(slotid)
+							break
+				else:
+					print>>log, "[AutoBouquetsMaker] Nim found on slot id %d but it's busy. Stopping active service" % currentlyPlayingNIM
+					self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
+					self.session.nav.stopService()
+					self.rawchannel = resmanager.allocateRawChannel(slotid)
+		
 			if not self.rawchannel:
-				print>>log, "[AutoBouquetsMaker] Cannot get the NIM"
-				self.showError(_('Cannot get the NIM'))
-				return
-
+				if self.session.nav.RecordTimer.isRecording():
+					print>>log, "[AutoBouquetsMaker] Cannot free NIM because a record is in progress"
+					self.showError(_('Cannot free NIM because a recording is in progress'))
+					return
+				else:
+					print>>log, "[AutoBouquetsMaker] Cannot get the NIM"
+					self.showError(_('Cannot get the NIM'))
+					return
+					
 		self.frontend = self.rawchannel.getFrontend()
 		if not self.frontend:
 			print>>log, "[AutoBouquetsMaker] Cannot get frontend"
