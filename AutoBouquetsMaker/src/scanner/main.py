@@ -217,7 +217,7 @@ class AutoBouquetsMaker(Screen):
 
 		nimList = []
 		for nim in nimmanager.nim_slots:
-			if (self.providers[self.currentAction]["streamtype"] == "dvbs" and nim.isCompatible("DVB-S") and nim.config_mode not in ("loopthrough")) or (self.providers[self.currentAction]["streamtype"] == "dvbc" and nim.isCompatible("DVB-C")) or (self.providers[self.currentAction]["streamtype"] == "dvbt" and nim.isCompatible("DVB-T")):
+			if (nim.config_mode not in ("loopthrough", "satdepends", "nothing")) and ((self.providers[self.currentAction]["streamtype"] == "dvbs" and nim.isCompatible("DVB-S")) or (self.providers[self.currentAction]["streamtype"] == "dvbc" and nim.isCompatible("DVB-C")) or (self.providers[self.currentAction]["streamtype"] == "dvbt" and nim.isCompatible("DVB-T"))):
 				nimList.append(nim.slot)
 		if len(nimList) == 0:
 			print>>log, "[AutoBouquetsMaker] No NIMs found"
