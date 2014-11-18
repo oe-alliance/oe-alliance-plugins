@@ -1,3 +1,7 @@
+# for localized messages
+from . import _
+from boxbranding import getBoxType, getImageDistro
+
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
@@ -15,10 +19,6 @@ from urllib import quote
 
 from FTPDownloader import FTPDownloader
 
-from boxbranding import getBoxType, getImageDistro
-
-from . import _
-
 DIR_ENIGMA2 = '/etc/enigma2/'
 DIR_TMP = '/tmp/'
 
@@ -34,7 +34,7 @@ config.plugins.RemoteStreamConverter.telnetport = ConfigInteger(23, (0, 65535))
 
 class ServerEditor(ConfigListScreen, Screen):
 	skin = """
-		<screen position="center,center" size="560,230" title="FTP Server Editor">
+		<screen position="center,center" size="560,230" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" transparent="1" alphatest="on" />
@@ -48,6 +48,7 @@ class ServerEditor(ConfigListScreen, Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		Screen.setTitle(self, _("FTP Server Editor"))
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText("")
@@ -69,7 +70,6 @@ class ServerEditor(ConfigListScreen, Screen):
 				"blue": self.enterUrl,
 				"yellow": self.switchMode
 			}, -2)
-		self.setTitle(_("FTP Server Editor"))
 
 	def keyUp(self):
 		if self["config"].getCurrentIndex() > 0:
@@ -170,7 +170,7 @@ class ServerEditor(ConfigListScreen, Screen):
 
 class StreamingChannelFromServerScreen(Screen):
 	skin = """
-		<screen name="StreamingChannelFromServerScreen" position="center,center" size="550,450" title="Select bouquets to convert" >
+		<screen name="StreamingChannelFromServerScreen" position="center,center" size="550,450" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
@@ -186,6 +186,7 @@ class StreamingChannelFromServerScreen(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		Screen.setTitle(self, _("Select bouquets to convert"))
 		self.session = session
 		self.workList = []
 		self.readIndex = 0
@@ -207,7 +208,6 @@ class StreamingChannelFromServerScreen(Screen):
 			"yellow": self.keyYellow,
 			"blue": self.keyBlue
 		}, -1)
-		self.setTitle(_("Select bouquets to convert"))
 
 	def keyOk(self):
 		if self.working:
@@ -267,20 +267,20 @@ class StreamingChannelFromServerScreen(Screen):
 			self.parseBouqets()
 
 	def parserWork(self, list, name):
-		try:
-			file = open(name)
-			lines = file.readlines()
-			file.close()
-			if len(lines) > 0:
-				for line in lines:
-					if line.startswith('#SERVICE'):
-						line = line.replace('\n', '').replace('\r', '').split()
-						if len(line) > 3 and (line[3].find('.tv.') != -1 or line[3].find('.radio.')):
-							tmp = line[3].replace('"', '')
-							if len(tmp) > 1:
-								list.append(tmp)
-		except:
-			pass
+		file = open(name)
+		lines = file.readlines()
+		file.close()
+		if len(lines) > 0:
+			for line in lines:
+				if line.startswith('#SERVICE'):
+					line = line.replace('\n', '').replace('\r', '').split()
+					if len(line) > 3 and line[2] == 'BOUQUET' and (line[3].find('.tv') != -1 or line[3].find('.radio')):
+						tmp = line[3].replace('"', '')
+						if len(tmp) > 1:
+							list.append(tmp)
+					elif line[1].find('0:0:0:0:0:0:0:'):
+						tmp = line[1].split('0:0:0:0:0:0:0:')
+						list.append(tmp[1])
 
 	def parseBouqets(self):
 		list = []
