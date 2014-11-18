@@ -124,7 +124,7 @@ class BookmarkManager(SimpleConfigParser):
 			f = file('/proc/stb/info/vumodel')
 			model = f.read().strip()
 			f.close()
-			manualmode = (model == "solo2" or model == "duo2" or model == "solose")
+			manualmode = (model == "solo2" or model == "duo2" or model == "solose" or model == "zero")
 
 			os.system('echo "[__SYS__]" > %s'%(_dbFileName))
 			os.system('echo "category_current_idx = 1" >> %s'%(_dbFileName))

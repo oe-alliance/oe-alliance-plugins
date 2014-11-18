@@ -529,6 +529,7 @@ class Blindscan(ConfigListScreen, Screen):
 					 eDVBFrontendParametersSatellite.System_DVB_S,
 					 0,
 					 0,
+					 0,
 					 0)
 		self.tuner.tune(returnvalue)
 
@@ -575,7 +576,7 @@ class Blindscan(ConfigListScreen, Screen):
 		elif brandoem == 'gigablue':
 			cmd = "gigablue_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "vuplus_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
 		elif brandoem == 'azbox':
-			cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))			
+			cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
 			self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
 		print "prepared command : [%s]" % (cmd)
 
@@ -617,13 +618,15 @@ class Blindscan(ConfigListScreen, Screen):
 		for line in lines:
 			data = line.split()
 			print "cnt :", len(data), ", data :", data
-			if len(data) >= 10 and self.dataIsGood(data) :
+			if len(data) >= 11 and self.dataIsGood(data) :
 				if data[0] == 'OK':
 					parm = eDVBFrontendParametersSatellite()
 					sys = { "DVB-S" : eDVBFrontendParametersSatellite.System_DVB_S,
 						"DVB-S2" : eDVBFrontendParametersSatellite.System_DVB_S2}
 					qam = { "QPSK" : parm.Modulation_QPSK,
-						"8PSK" : parm.Modulation_8PSK}
+						"8PSK" : parm.Modulation_8PSK,
+						"16APSK" : parm.Modulation_16APSK,
+						"32APSK" : parm.Modulation_32APSK}
 					inv = { "INVERSION_OFF" : parm.Inversion_Off,
 						"INVERSION_ON" : parm.Inversion_On,
 						"INVERSION_AUTO" : parm.Inversion_Unknown}
@@ -643,8 +646,9 @@ class Blindscan(ConfigListScreen, Screen):
 					pilot={ "PILOT_ON" : parm.Pilot_On,
 						"PILOT_OFF" : parm.Pilot_Off,
 						"PILOT_AUTO" : parm.Pilot_Unknown}
-					pol = {	"HORIZONTAL" : parm.Polarisation_Horizontal,
+					pol = { "HORIZONTAL" : parm.Polarisation_Horizontal,
 						"VERTICAL" : parm.Polarisation_Vertical}
+					is_id={ "Input Stream ID" : 0}
 					parm.orbital_position = self.orb_position
 					if brandoem == 'azbox':
 						parm.polarisation = self.polsave
@@ -658,6 +662,7 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.fec = fec[data[7]]
 					parm.modulation = qam[data[8]]
 					parm.rolloff = roll[data[9]]
+					parm.is_id = is_id[data[10]]
 					self.tmp_tplist.append(parm)
 		self.blindscan_session.close(True)
 
@@ -749,6 +754,7 @@ class Blindscan(ConfigListScreen, Screen):
 				parm.modulation = x[6]
 				parm.rolloff = x[8]
 				parm.pilot = x[9]
+				parm.is_id = x[10]
 				tlist.append(parm)
 		return tlist
 

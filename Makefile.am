@@ -110,6 +110,10 @@ if VUDUO2
 SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup Blindscan
 endif
 
+if VUZERO
+SUBDIRS += FirmwareUpgrade VuRemote Blindscan
+endif
+
 if GIGABLUE
 SUBDIRS += GigaBlueVFDControl Blindscan AudioEffect
 endif
