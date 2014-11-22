@@ -1,6 +1,6 @@
 #====================================================
 # Bluetooth Devices Manager - basic version
-# Version date - 8th July 2014
+# Version date - 20.11.2014
 # Coding by a4tech - darezik@gmail.com (oe-alliance)
 #
 # requierments: bluez4-testtools bluez4 bluez-hcidump
@@ -16,6 +16,8 @@
 # kernel-module-hid-wacom 
 #====================================================
 
+from boxbranding import getImageDistro
+
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer, eConsoleAppContainer
 
@@ -27,7 +29,7 @@ from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import NumberActionMap, ActionMap
-from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigDirectory, ConfigYesNo, ConfigSelection
+from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigSubsection, ConfigYesNo, ConfigSelection
 from Components.MenuList import MenuList
 
 import os
@@ -92,10 +94,54 @@ class TaskManager:
 		self.gTaskInstance.execute(command)
 		self.taskIdx += 1
 		return True
-	      
+
+config.btdevicesmanager = ConfigSubsection()
+config.btdevicesmanager.autostart = ConfigYesNo(default=False)
+
+class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
+	__module__ = __name__
+	def __init__(self, session, args = 0):
+		Screen.__init__(self, session)
+		Screen.setTitle(self, _("Bluetooth Devices Manager Setup"))
+		self.skinName = ["Setup"]
+			
+		list = []
+		list.append(getConfigListEntry(_('Autostart'), config.btdevicesmanager.autostart))
+
+		self["key_red"] = Label(_("Exit"))
+		self["key_green"] = Label(_("Save"))
+			
+		ConfigListScreen.__init__(self, list)
+		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], 
+		{
+			'red' : self.dontSaveAndExit,  
+			'green': self.saveAndExit, 
+			'cancel': self.dontSaveAndExit
+		}, -1)
+
+	def saveAndExit(self):
+		for x in self['config'].list:
+			x[1].save()
+		if config.btdevicesmanager.autostart.getValue():
+			print "[BluetoothManager] Autostart: Loading driver"
+			os.system("modprobe rtk_btusb")
+		else:
+			print "[BluetoothManager] Autostart: Unloading driver"
+			os.system("rmmod rtk_btusb")
+		
+		config.btdevicesmanager.save()
+		
+		self.close()
+
+	def dontSaveAndExit(self):
+		for x in self['config'].list:
+		    x[1].cancel()
+
+		self.close()
+		
 class BluetoothDevicesManager(Screen):
 	skin = 	"""
-		<screen name="BluetoothDevicesManager" position="center,center" size="600,450" title="Bluetooth Devices Manager">
+		<screen name="BluetoothDevicesManager" position="center,center" size="600,450" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
@@ -112,10 +158,15 @@ class BluetoothDevicesManager(Screen):
 		"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		Screen.setTitle(self, _("Bluetooth Devices Manager"))
 		
 		self.taskManager = TaskManager()
 		
-		self.initDevice()
+		self["ConnStatus"] = Label(_("Please load BT driver by pressing BLUE button."))
+		
+		if config.btdevicesmanager.autostart.getValue():
+			self.initDevice()
+			self["ConnStatus"] = Label(_("No connected to any device"))
 		
 		self["actions"]  = ActionMap(["OkCancelActions","WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
 			"ok"    : self.keyOK,
@@ -129,16 +180,13 @@ class BluetoothDevicesManager(Screen):
 		self["key_red"]    = Label(_("Exit"))
 		self["key_green"]  = Label(_("(Re)Scan"))
 		self["key_yellow"] = Label(_("Connect"))
-		self["key_blue"]   = StaticText()
-		
-		self["ConnStatus"] = Label(_("No connected to any device"))
-			       
+		self["key_blue"]   = Label(_("Config"))
+    
 		self.devicelist = []
 		self["devicelist"] = MenuList(self.devicelist)
 
 	def initDevice(self):
 		print "[BluetoothManager] initDevice"
-		
 		cmd = "hciconfig hci0 up"
 		self.taskManager.append(cmd, self.cbPrintAvailBTDev, self.cbRunNextTask)
 		cmd = "hcitool dev" ## check if hci0 is on the dev list, then make scan
@@ -155,7 +203,12 @@ class BluetoothDevicesManager(Screen):
 			
 	def keyGreen(self):
 		print "[BluetoothManager] keyGreen"  
-		self.scanForDevices()
+		if config.btdevicesmanager.autostart.getValue():
+			self["ConnStatus"].setText(_("No connected to any device"))
+			self.initDevice()
+		else:
+			self["devicelist"].setList([])
+			self["ConnStatus"].setText(_("Please load BT driver by pressing BLUE button."))
 	  
 	def scanForDevices(self):  
 		print "[BluetoothManager] scanForDevices"
@@ -242,6 +295,7 @@ class BluetoothDevicesManager(Screen):
 			
 	def keyBlue(self):
 		print "[BluetoothManager] keyBlue"
+		self.session.openWithCallback(self.keyGreen, BluetoothDevicesManagerSetup)
 
 	def showMessage(self,msg):
 		self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, 3)
@@ -263,9 +317,30 @@ class BluetoothDevicesManager(Screen):
 
 	def setListOnView(self):
 		return self.devicelist
-	      
+
+def start_menu_main(menuid, **kwargs):
+	if menuid == "system":
+		return [(_("Bluetooth Devices Manager"), main, "bt_control", None)]
+	else:
+		return []
+		      
 def main(session, **kwargs):
 	session.open(BluetoothDevicesManager)
 
+def autostart(reason, **kwargs):
+	if reason == 0:
+		if config.btdevicesmanager.autostart.getValue():
+			print "[BluetoothManager] Autostart: Loading driver" ## We have it on a blacklist because We want to have faster system loading, so We load driver while we enable it.
+			os.system("modprobe rtk_btusb")
+		else:
+			print "[BluetoothManager] Autostart: Unloading driver" ## We know it is blacklisted, but try to remove it anyway.
+			os.system("rmmod rtk_btusb")
+			
 def Plugins(**kwargs):
-	return [PluginDescriptor(name=_("Bluetooth Devices Manager"), description="This is bt devices manager", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)]
+	l = []
+	l.append(PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart))
+	if getImageDistro() in ("miracleboxhd", "miraclebox"):
+		l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), where=PluginDescriptor.WHERE_MENU, fnc=start_menu_main))
+	else:
+		l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), description="This is bt devices manager", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main))
+	return l  
