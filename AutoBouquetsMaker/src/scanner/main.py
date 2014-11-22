@@ -301,9 +301,9 @@ class AutoBouquetsMaker(Screen):
 		if not self.rawchannel:
 			# if we are here the only possible option is to close the active service
 			if currentlyPlayingNIM in nimList:
+				slotid = currentlyPlayingNIM
 				if self.providers[self.currentAction]["streamtype"] == "dvbs":
 					sats = nimmanager.getSatListForNim(currentlyPlayingNIM)
-					slotid = currentlyPlayingNIM
 					for sat in sats:
 						if sat[0] == transponder["orbital_position"]:
 							print>>log, "[AutoBouquetsMaker] Nim found on slot id %d but it's busy. Stopping active service" % currentlyPlayingNIM
