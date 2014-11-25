@@ -1,0 +1,6 @@
+<custom>
+	<transponderlist>
+		<configuration key="crystal_palace_____" transport_stream_id="4084" frequency="546000000" bandwidth="0" code_rate_hp="5" code_rate_lp="5" modulation="4" transmission_mode="3" guard_interval="4" hierarchy="4" inversion="2" flags="0" system="1" plpid="0"></configuration>
+		<configuration key="crystal_palace_____" transport_stream_id="a000" frequency="570000000" bandwidth="0" code_rate_hp="5" code_rate_lp="5" modulation="4" transmission_mode="3" guard_interval="4" hierarchy="4" inversion="2" flags="0" system="1" plpid="0"></configuration>
+	</transponderlist>
+</custom>
