@@ -6,7 +6,7 @@ class BouquetsReader():
 		ret = []
 		rows = content.split("\n")
 		for row in rows:
-			result = re.match("^.*FROM BOUQUET \"(.*)\" ORDER BY.*$", row) or re.match("[#]SERVICE[:] (?:[0-9a-f][:])+(.+[.](?:tv|radio))$", row, re.IGNORECASE)
+			result = re.match("^.*FROM BOUQUET \"(.*)\" ORDER BY.*$", row) or re.match("[#]SERVICE[:] (?:[0-9a-f]+[:])+([^:]+[.](?:tv|radio))$", row, re.IGNORECASE)
 			if result is None:
 				continue
 
