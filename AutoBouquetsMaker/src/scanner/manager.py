@@ -2,6 +2,7 @@ from dvbscanner import DvbScanner
 from bouquetswriter import BouquetsWriter
 from bouquetsreader import BouquetsReader
 from providers import Providers
+from tools import Tools
 from .. import log
 
 class Manager():
@@ -158,6 +159,18 @@ class Manager():
 		else:
 			print>>log, "[Manager] Reading %s..." % provider_key
 
+		# read custom transponder file
+		transponder_dict_tmp = {}
+		transponder_tmp = {}
+		transponder_dict_tmp = Tools().customtransponder(provider_key)
+		if len(transponder_dict_tmp) > 0:
+			for key in transponder_dict_tmp:
+				if bouquet_key is not None and len(bouquet_key) > 0:
+					if transponder_dict_tmp[key]["key"] == bouquet_key:
+						transponder_tmp[key] = transponder_dict_tmp[key]
+				else:
+					transponder_tmp[key] = transponder_dict_tmp[key]
+					
 		self.providerConfigs[provider_key] = provider_config
 
 		providers = Providers().read()
@@ -179,9 +192,9 @@ class Manager():
 
 					if providers[provider_key]["streamtype"] == 'dvbc':
 						bouquet = providers[provider_key]["bouquets"][bouquet_key]
-						tmp = scanner.updateTransponders(self.transponders, True, bouquet["netid"],bouquet["bouquettype"])
+						tmp = scanner.updateTransponders(transponder_tmp, self.transponders, True, bouquet["netid"],bouquet["bouquettype"])
 					else:
-						tmp = scanner.updateTransponders(self.transponders, True)
+						tmp = scanner.updateTransponders(transponder_tmp, self.transponders, True)
 					self.services[provider_key] = scanner.updateAndReadServicesLCN(
 							providers[provider_key]["namespace"], self.transponders,
 							providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
@@ -196,7 +209,7 @@ class Manager():
 					scanner.setFastscanPid(providers[provider_key]["transponder"]["fastscan_pid"])
 					scanner.setFastscanTableId(providers[provider_key]["transponder"]["fastscan_table_id"])
 
-					tmp = scanner.updateTransponders(self.transponders, True)
+					tmp = scanner.updateTransponders(transponder_tmp, self.transponders, True)
 					self.services[provider_key] = scanner.updateAndReadServicesFastscan(
 							providers[provider_key]["namespace"], self.transponders,
 							providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
@@ -214,7 +227,7 @@ class Manager():
 					scanner.setBatPid(providers[provider_key]["transponder"]["bat_pid"])
 					scanner.setBatTableId(providers[provider_key]["transponder"]["bat_table_id"])
 
-					scanner.updateTransponders(self.transponders, False)
+					scanner.updateTransponders(transponder_tmp, self.transponders, False)
 					bouquet = providers[provider_key]["bouquets"][bouquet_key]
 					self.services[provider_key] = scanner.updateAndReadServicesSKY(bouquet["bouquet"],
 							bouquet["region"], bouquet["namespace"], self.transponders,
@@ -232,7 +245,7 @@ class Manager():
 					scanner.setBatPid(providers[provider_key]["transponder"]["bat_pid"])
 					scanner.setBatTableId(providers[provider_key]["transponder"]["bat_table_id"])
 
-					scanner.updateTransponders(self.transponders, False)
+					scanner.updateTransponders(transponder_tmp, self.transponders, False)
 					bouquet = providers[provider_key]["bouquets"][bouquet_key]
 					self.services[provider_key] = scanner.updateAndReadServicesFreeSat(bouquet["bouquet"],
 							bouquet["region"], bouquet["namespace"], self.transponders,

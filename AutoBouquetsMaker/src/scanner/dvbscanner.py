@@ -122,9 +122,9 @@ class DvbScanner():
 
 		return namespace
 
-	def updateTransponders(self, transponders, read_other_section = False, netid = None, bouquettype = None):
+	def updateTransponders(self, transponder_dict_tmp, transponders, read_other_section = False, netid = None, bouquettype = None):
 		print>>log, "[DvbScanner] Reading transponders..."
-
+		
 		if self.nit_other_table_id == 0x00:
 			mask = 0xff
 		else:
@@ -228,8 +228,9 @@ class DvbScanner():
 		logical_channel_number_dict = {}
 		logical_channel_number_dict_tmp = {}
 		hd_logical_channel_number_dict_tmp = {}
-		service_dict_tmp ={}
+		service_dict_tmp = {}
 		transponders_count = 0
+
 		for transponder in nit_content:
 			if len(transponder) == 4: # service
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
@@ -243,8 +244,14 @@ class DvbScanner():
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
 				hd_logical_channel_number_dict_tmp[key] = transponder
 				continue
-			if len(transponder) == 8: # DVB-T2 part, not ready yet.
+			transponder_tmp = {}
+			if len(transponder_dict_tmp) > 0 and self.dvbtype == 'dvbt': # Only for DVB-T/T2 transponder override.
+				for key in transponder_dict_tmp:
+					if transponder_dict_tmp[key]["transport_stream_id"] == transponder["transport_stream_id"]:
+						transponder_tmp = transponder_dict_tmp[key]
+			if len(transponder) == 8 and len(transponder_tmp) == 0: #no custom information for DVB-T2
 				continue
+
 			transponder["services"] = {}
 			transponder["dvb_type"] = self.dvbtype
 			transponder["bouquet_type"] = bouquettype
@@ -259,12 +266,27 @@ class DvbScanner():
 				transponder["inversion"] = transponder["fec_outer"]
 				transponder["modulation_system"] = 0
 			elif transponder["dvb_type"] == 'dvbt': # DVB-T
-				transponder["namespace"] = 0xEEEE0000
-				transponder["frequency"] = transponder["frequency"] * 10
-				transponder["inversion"] = 0
-				transponder["plpid"] = 0
-				transponder["flags"] = 0
-				transponder["system"] = 0
+				if len(transponder_tmp) == 0: #no override or DVB-T2 transponder
+					transponder["namespace"] = 0xEEEE0000
+					transponder["frequency"] = transponder["frequency"] * 10
+					transponder["inversion"] = 0
+					transponder["plpid"] = 0
+					transponder["flags"] = 0
+					transponder["system"] = 0
+				else:
+					transponder["namespace"] = 0xEEEE0000
+					transponder["frequency"] = transponder_tmp["frequency"]
+					transponder["bandwidth"] = transponder_tmp["bandwidth"]
+					transponder["code_rate_hp"] = transponder_tmp["code_rate_hp"]
+					transponder["code_rate_lp"] = transponder_tmp["code_rate_lp"]
+					transponder["modulation"] = transponder_tmp["modulation"]
+					transponder["transmission_mode"] = transponder_tmp["transmission_mode"]
+					transponder["guard_interval"] = transponder_tmp["guard_interval"]
+					transponder["hierarchy"] = transponder_tmp["hierarchy"]
+					transponder["inversion"] = transponder_tmp["inversion"]
+					transponder["flags"] = transponder_tmp["flags"]
+					transponder["system"] = transponder_tmp["system"]
+					transponder["plpid"] = transponder_tmp["plpid"]
 			elif transponder["dvb_type"] == 'dvbs': # DVB-S
 				transponder["symbol_rate"] = transponder["symbol_rate"] * 100
 				transponder["flags"] = 0

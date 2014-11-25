@@ -71,10 +71,12 @@
 	</dvbtconfigs>
 	<sections>
 		<section number="1">Entertainment</section>
+		<section number="100">High Definition</section>
 		<section number="120">Children</section>
 		<section number="130">News</section>		
 		<section number="170">Adult</section>
-		<section number="200">BBC Interactive</section>
+		<section number="601">BBC Interactive</section>
+		
 	</sections>
 	<servicehacks>
 		<![CDATA[
