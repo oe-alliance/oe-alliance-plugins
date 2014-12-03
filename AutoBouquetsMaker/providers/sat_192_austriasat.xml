@@ -1,5 +1,5 @@
 <provider>
-    <name>192 Austriasat</name>
+    <name>Austriasat</name>
     <streamtype>dvbs</streamtype>
     <protocol>fastscan</protocol>
     <!-- namespace could change even on the same sat...
