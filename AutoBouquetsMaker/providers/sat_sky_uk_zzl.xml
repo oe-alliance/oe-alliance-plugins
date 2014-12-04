@@ -189,7 +189,7 @@ adult = [range(900,950)] # all channels in range 900 - 950
 # you can specify channel numbers, names or pre-defined channel lists
 #################################################################################
 
-whitelist = ['ITV HD',hdsports,'Sky News HD','Film4 HD','RTE2 HD']
+whitelist = ['ITV HD',hdsports,'Sky News HD',752,'RTE2 HD']
 blacklist = [899,950,998,999]
 #blacklist = [adult,899,950,998,999] # uncomment this line to blacklist adult channels
 
