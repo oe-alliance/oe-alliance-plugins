@@ -74,6 +74,7 @@
         <section number="951">BBC Regionals</section>
         <section number="980">BBC Interactive</section>
         <section number="1000">Sky Sports Interactive</section>
+        <section number="1020">BT Sport Extra</section>
         <section number="1030">Sky Anytime</section>
     </sections>
 	<!-- channelsontop affect only HD bouquets -->
@@ -295,6 +296,9 @@ for number in service["numbers"]:
 			# k=list(video_services.keys())
 			# highestservice = k[v.index(max(v))]
 			# # # # # # # # # # # # # # # # # # # #
+		elif service["channel_id"] >= 5031 and service["channel_id"] < 5040:
+			if log_servicehacks == 1  : print>>log,"[SERVICEHACKS] (" + str (service["channel_id"]) + ") [" + service["service_name"] + "] [" + str (service["service_type"]) + "] ??NEW BT SPORT EXTRA??"
+			new_numbers.append(service["channel_id"] - 4011)
 		else:
 			skip = True
 		break
