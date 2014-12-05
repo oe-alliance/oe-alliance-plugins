@@ -260,6 +260,9 @@ elif service["service_name"] in bl and service["service_type"] != 2:
 elif service["service_type"] >= 17 and service["service_type"] <= 25 and service["free_ca"] != 0:
 	if log_servicehacks == 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] Type  " + str (service["service_type"]) + "AUTODELETED"
 	skip = True
+elif service["service_type"] == 135: # HD PPV - Blacklisted (BETA)
+	if log_servicehacks == 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] [" + str (service["service_type"]) + "] PPV AUTODELETED"
+	skip = True
 
 if service["channel_id"] > 2050 and service["channel_id"] < 2053: # BBC RB Find Highest Programmed channel_id
 	highestbbci = 980
