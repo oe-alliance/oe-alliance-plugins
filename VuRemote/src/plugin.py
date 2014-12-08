@@ -11,10 +11,10 @@ from Tools.Directories import fileExists
 from enigma import eTimer
 from boxbranding import getImageDistro, getBoxType
 
-config.misc.remotecontrol_text_support = ConfigYesNo(default = True)	
+config.misc.remotecontrol_text_support = ConfigYesNo(default = True)
 
 config.plugins.remotecontrolcode = ConfigSubsection()
-if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose"):
+if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose", "vuzero"):
 	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "2", choices =
 		[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
 elif getBoxType() in ("vusolo", "vuduo"):
