@@ -1,28 +1,28 @@
 <provider>
-	<name>TV Vlaanderen</name>
+	<name>TéléSAT</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>fastscan</protocol>
 	<!-- namespace now read direct from fastscan table -->
-	<namespace>c00000</namespace>
-    <transponder
-		orbital_position="192"
-		frequency="12515000"
-		symbol_rate="22000000"
+	<namespace>eb0000</namespace>
+	<transponder
+		orbital_position="235"
+		frequency="12070000"
+		symbol_rate="27500000"
 		polarization="0"
-		fec_inner="4"
+		fec_inner="3"
 		inversion="2"
 		system="0"
 		modulation="1"
 		roll_off="0"
 		pilot="2"
-		nit_pid="0x38f"
+		nit_pid="0x399"
 		nit_current_table_id="0xbc"
 		nit_other_table_id="0x00"
-		fastscan_pid="0x38f"
+		fastscan_pid="0x399"
 		fastscan_table_id="0xbd"
 	/>
 	<sections>
-		<section number="1">TV Vlaanderen</section>
+		<section number="1">TéléSAT</section>
 	</sections>
 	<servicehacks>
 <![CDATA[

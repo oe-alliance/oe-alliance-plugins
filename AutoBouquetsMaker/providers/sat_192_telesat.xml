@@ -1,10 +1,10 @@
 <provider>
-	<name>TéléSAT HD</name>
+	<name>TéléSAT</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>fastscan</protocol>
 	<!-- namespace now read direct from fastscan table -->
 	<namespace>c00000</namespace>
-    <transponder
+	<transponder
 		orbital_position="192"
 		frequency="12515000"
 		symbol_rate="22000000"
@@ -22,7 +22,7 @@
 		fastscan_table_id="0xbd"
 	/>
 	<sections>
-		<section number="1">TéléSAT HD</section>
+		<section number="1">TéléSAT</section>
 	</sections>
 	<servicehacks>
 <![CDATA[

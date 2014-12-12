@@ -53,29 +53,29 @@
 		<configuration key="hd_northern_ireland" bouquet="0x1004" region="0x21" namespace="0x11a0000">Northern Ireland</configuration>
 		<configuration key="hd_republic_of_ireland" bouquet="0x1008" region="0x32" namespace="0x11a0000">Republic of Ireland</configuration>
 	</dvbsconfigs>
-    <sections>
-        <section number="101">Entertainment</section>
-        <section number="240">Lifestyle and Culture</section>
-        <section number="301">Movies</section>
-        <section number="350">Music</section>
-        <section number="401">Sports</section>
-        <section number="501">News</section>
-        <section number="520">Documentaries</section>
-        <section number="580">Religious</section>
-        <section number="601">Kids</section>
-        <section number="640">Shopping</section>
-        <section number="700">Sky Box Office</section>
-        <section number="780">International</section>
-        <section number="861">Gaming and Dating</section>
-        <section number="881">Specialist</section>
-        <section number="889">Bonus channels</section>
-        <section number="899">Sky Information</section>
-        <section number="900">Adult</section>
-        <section number="951">BBC Regionals</section>
-        <section number="980">BBC Interactive</section>
-        <section number="1000">Sky Sports Interactive</section>
-        <section number="1030">Sky Anytime</section>
-    </sections>
+	<sections>
+		<section number="101">Entertainment</section>
+		<section number="240">Lifestyle and Culture</section>
+		<section number="301">Movies</section>
+		<section number="350">Music</section>
+		<section number="401">Sports</section>
+		<section number="501">News</section>
+		<section number="520">Documentaries</section>
+		<section number="580">Religious</section>
+		<section number="601">Kids</section>
+		<section number="640">Shopping</section>
+		<section number="700">Sky Box Office</section>
+		<section number="780">International</section>
+		<section number="861">Gaming and Dating</section>
+		<section number="881">Specialist</section>
+		<section number="889">Bonus channels</section>
+		<section number="899">Sky Information</section>
+		<section number="900">Adult</section>
+		<section number="951">BBC Regionals</section>
+		<section number="980">BBC Interactive</section>
+		<section number="1000">Sky Sports Interactive</section>
+		<section number="1030">Sky Anytime</section>
+	</sections>
 	<!-- channelsontop affect only HD bouquets -->
 	<hdchannelsontop>
 		<channel number="141" />

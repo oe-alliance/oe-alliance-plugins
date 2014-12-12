@@ -4,7 +4,7 @@
 	<protocol>fastscan</protocol>
 	<!-- namespace now read direct from fastscan table -->
 	<namespace>c00000</namespace>
-    <transponder
+	<transponder
 		orbital_position="192"
 		frequency="12515000"
 		symbol_rate="22000000"
