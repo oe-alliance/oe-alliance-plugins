@@ -223,6 +223,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		self.editListEntry = None
 		self.list = []
 		providers_enabled = []
+		providers_already_loaded = []
 		for provider in self.providerKeysInNameOrder(self.providers):
 			if self.providers[provider]["streamtype"] == 'dvbs' and self.providers[provider]["transponder"]["orbital_position"] not in self.orbital_supported:
 				continue
@@ -230,6 +231,10 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 				continue
 			if self.providers[provider]["streamtype"] == 'dvbt' and len(self.dvbt_nims) <= 0:
 				continue
+			if self.providers[provider]["name"] in providers_already_loaded:
+				continue
+			else:
+				providers_already_loaded.append(self.providers[provider]["name"])
 
 			self.list.append(getConfigListEntry(self.providers[provider]["name"], self.providers_configs[provider], _("This option enables the current selected provider.")))
 			if self.providers_configs[provider].value:
