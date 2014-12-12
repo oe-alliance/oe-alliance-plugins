@@ -585,6 +585,7 @@ class DvbScanner():
 		radio_services = {}
 
 		service_extra_count = 0
+		services_without_transponders = 0
 
 		for key in tmp_services_dict:
 			service = tmp_services_dict[key]
@@ -598,6 +599,7 @@ class DvbScanner():
 
 			tpkey = "%x:%x:%x" % (service["namespace"], service["transport_stream_id"], service["original_network_id"])
 			if tpkey not in transponders:
+				services_without_transponders += 1
 				continue
 
 
@@ -614,6 +616,8 @@ class DvbScanner():
 						radio_services[number] = service
 
 		print>>log, "[DvbScanner] %d valid services" % service_extra_count
+		if services_without_transponders:
+			print>>log, "[DvbScanner] %d services omitted as there is no corresponding transponder" % services_without_transponders
 		return {
 			"video": video_services,
 			"radio": radio_services
