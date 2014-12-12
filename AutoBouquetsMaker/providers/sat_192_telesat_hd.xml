@@ -1,7 +1,7 @@
 <provider>
-    <name>AustriaSat</name>
-    <streamtype>dvbs</streamtype>
-    <protocol>fastscan</protocol>
+	<name>TéléSAT HD</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>fastscan</protocol>
 	<!-- namespace now read direct from fastscan table -->
 	<namespace>c00000</namespace>
     <transponder
@@ -15,17 +15,19 @@
 		modulation="1"
 		roll_off="0"
 		pilot="2"
-        nit_pid="0x3b6"
+		nit_pid="0x399"
 		nit_current_table_id="0xbc"
 		nit_other_table_id="0x00"
-        fastscan_pid="0x3b6"
+		fastscan_pid="0x399"
 		fastscan_table_id="0xbd"
 	/>
-    <sections>
-        <section number="1">AustriaSat</section>
-    </sections>
-    <servicehacks>
+	<sections>
+		<section number="1">TéléSAT HD</section>
+	</sections>
+	<servicehacks>
 <![CDATA[
+if service["number"] > 999 or service["number"] < 1:
+	skip = True
 if service["service_name"][-5:] == " (28)" or service["service_name"][-5:] == " (13)":
 	service["service_name"] = service["service_name"][:len(service["service_name"])-5]
 ]]>
