@@ -213,11 +213,17 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		self["pleasewait"].hide()
 		self["actions"].setEnabled(True)
 
+	def providerKeysInNameOrder(self, providers):
+		temp = []
+		for provider in providers.keys():
+			temp.append((provider, providers[provider]["name"]))
+		return [i[0] for i in sorted(temp, key=lambda p: p[1].lower().decode('ascii','ignore'))]
+
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
 		providers_enabled = []
-		for provider in sorted(self.providers.keys()):
+		for provider in self.providerKeysInNameOrder(self.providers):
 			if self.providers[provider]["streamtype"] == 'dvbs' and self.providers[provider]["transponder"]["orbital_position"] not in self.orbital_supported:
 				continue
 			if self.providers[provider]["streamtype"] == 'dvbc' and len(self.dvbc_nims) <= 0:
