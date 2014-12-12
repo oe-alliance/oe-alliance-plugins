@@ -239,6 +239,10 @@ class DvbScanner():
 			if len(transponder) == 5: # lcn
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
 				logical_channel_number_dict_tmp[key] = transponder
+				try:
+					logical_channel_number_dict_tmp[key]["transponder"] = lastTransponder
+				except:
+					continue
 				continue
 			if len(transponder) == 6: # HD lcn
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
@@ -306,6 +310,8 @@ class DvbScanner():
 					transponder["modulation_type"] = 1
 				transponder["inversion"] = 2
 				transponder["namespace"] = self.buildNamespace(transponder)
+				
+				lastTransponder = transponder
 
 			key = "%x:%x:%x" % (transponder["namespace"],
 				transponder["transport_stream_id"],
@@ -551,9 +557,18 @@ class DvbScanner():
 			if logical_channel_number_dict[key]["visible_service_flag"] == 0:
 				continue
 
-			service["free_ca"] = 1
-			service["namespace"] = namespace
-			service["flags"] = 0
+			if not hasattr(service, "free_ca"):
+				service["free_ca"] = 1
+			
+			if not hasattr(service, "namespace"):
+				try:
+					service["namespace"] = service["namespace"] = logical_channel_number_dict[key]["transponder"]["namespace"]
+				except:
+					service["namespace"] = namespace
+					
+			if not hasattr(service, "flags"):
+				service["flags"] = 0
+				
 			service["number"] = logical_channel_number_dict[key]["logical_channel_number"]
 
 			if key in tmp_services_dict:
