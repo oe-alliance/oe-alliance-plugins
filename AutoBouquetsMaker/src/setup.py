@@ -212,7 +212,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		self.createSetup()
 		self["pleasewait"].hide()
 		self["actions"].setEnabled(True)
-
+		
 	def providerKeysInNameOrder(self, providers):
 		temp = []
 		for provider in providers.keys():
@@ -455,6 +455,7 @@ class AutoBouquetsMaker_Setup(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Keep all bouquets"), config.autobouquetsmaker.keepallbouquets, _("When disabled this will enable the 'Keep bouquets' in the main menu, allowing you to hide some 'existing' bouquets.")))
 			self.list.append(getConfigListEntry(_("Add provider prefix to bouquets"), config.autobouquetsmaker.addprefix, _("This option will prepend the provider name to bouquet name.")))
 			self.list.append(getConfigListEntry(_("Place bouquets at"), config.autobouquetsmaker.placement, _("This option will alow you choose where to place the created bouquets.")))
+			self.list.append(getConfigListEntry(_("Skip services on not configured sats"), config.autobouquetsmaker.skipservices, _("If a service is carried on a satellite that is not configured, 'yes' means the channel will will not appear in the channel list, 'no' means the channel will show in the channel list but be greyed out and not be accessible.")))
 		self.list.append(getConfigListEntry(_("Show in extensions"), config.autobouquetsmaker.extensions, _("When enable allow you start a scan from the extensions list.")))
 
 		self["config"].list = self.list

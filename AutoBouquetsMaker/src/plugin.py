@@ -25,6 +25,7 @@ config.autobouquetsmaker.hidesections = ConfigText("", False)
 config.autobouquetsmaker.addprefix = ConfigYesNo(default = False)
 config.autobouquetsmaker.extensions = ConfigYesNo(default = False)
 config.autobouquetsmaker.placement = ConfigSelection(default = "top", choices = [("top", _("Top")), ("bottom", _("Bottom"))])
+config.autobouquetsmaker.skipservices = ConfigYesNo(default = True)
 
 def main(session, **kwargs):
 	session.open(AutoBouquetsMaker_Menu)

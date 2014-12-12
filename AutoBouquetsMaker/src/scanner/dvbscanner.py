@@ -543,6 +543,18 @@ class DvbScanner():
 						break
 
 		dvbreader.close(fd)
+		
+		# to ignore services on not configured satellites
+		from Components.config import config
+		if config.autobouquetsmaker.skipservices.value:
+			from Components.NimManager import nimmanager
+			nims = nimmanager.getNimListOfType("DVB-S")
+			orbitals_configured = []
+			for nim in nims:
+				sats = nimmanager.getSatListForNim(nim)
+				for sat in sats:
+					if sat[0] not in orbitals_configured:
+						orbitals_configured.append(sat[0])
 
 		service_count = 0
 		tmp_services_dict = {}
@@ -570,6 +582,8 @@ class DvbScanner():
 				service["flags"] = 0
 				
 			service["number"] = logical_channel_number_dict[key]["logical_channel_number"]
+			
+			service["orbital_position"] = service["namespace"] / (16**4)
 
 			if key in tmp_services_dict:
 				tmp_services_dict[key]["numbers"].append(service["number"])
@@ -586,10 +600,13 @@ class DvbScanner():
 
 		service_extra_count = 0
 		services_without_transponders = 0
-
+		
 		for key in tmp_services_dict:
 			service = tmp_services_dict[key]
-
+			
+			if config.autobouquetsmaker.skipservices.value and service["orbital_position"] not in orbitals_configured:
+				continue
+			
 			if len(servicehacks) > 0:
 				skip = False
 				exec(servicehacks)
