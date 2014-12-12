@@ -18,6 +18,7 @@ from enigma import eTimer, eServiceReference, eDVBDB, iPlayableService, eDVBFron
 
 from manager import Manager
 from providerconfig import ProviderConfig
+from providers import Providers
 from time import localtime, time, strftime, mktime
 
 from .. import log
@@ -114,7 +115,7 @@ class AutoBouquetsMaker(Screen):
 		providers_tmp = config.autobouquetsmaker.providers.value.split("|")
 		for provider_tmp in providers_tmp:
 			provider_config = ProviderConfig(provider_tmp)
-			if provider_config.isValid():
+			if provider_config.isValid() and Providers().providerFileExists(provider_config.getProvider()):
 				self.actionsList.append(provider_config.getProvider())
 				self.selectedProviders[provider_config.getProvider()] = provider_config
 
