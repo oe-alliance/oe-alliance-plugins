@@ -3,9 +3,18 @@
 	<streamtype>dvbs</streamtype>
 	<protocol>nolcn</protocol>
 	<namespace>01a40000</namespace>
-	<transponder frequency="11012000" symbol_rate="30000000" polarization="1"
-		fec_inner="4" orbital_position="420" inversion="2" system="0"
-		modulation="1" roll_off="0" pilot="2"/>
+	<transponder
+		frequency="11012000"
+		symbol_rate="30000000"
+		polarization="1"
+		fec_inner="4"
+		orbital_position="420"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+	/>
 	<sections>
 		<section number="1">Turksat</section>
 	</sections>
