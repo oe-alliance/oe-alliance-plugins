@@ -2,9 +2,18 @@
 	<name>Sky ZZL</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>sky</protocol>
-	<transponder frequency="11778000" symbol_rate="27500000" polarization="1"
-		fec_inner="2" orbital_position="282" inversion="2" system="0"
-		modulation="1" roll_off="0" pilot="2" />
+	<transponder 
+		orbital_position="282"
+		frequency="11778000"
+		symbol_rate="27500000"
+		polarization="1"
+		fec_inner="2"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+	/>
 	<dvbsconfigs>
 		<configuration key="hd_atherstone" bouquet="0x1001" region="0x13" namespace="0x11a0000">Atherstone</configuration>
 		<configuration key="hd_border_england" bouquet="0x1001" region="0x0c" namespace="0x11a0000">Border England</configuration>
