@@ -4,11 +4,11 @@
 	<protocol>nolcn</protocol>
 	<namespace>01a40000</namespace>
 	<transponder
+		orbital_position="420"
 		frequency="11012000"
 		symbol_rate="30000000"
 		polarization="1"
 		fec_inner="4"
-		orbital_position="420"
 		inversion="2"
 		system="0"
 		modulation="1"
