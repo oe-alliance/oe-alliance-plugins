@@ -1,10 +1,19 @@
 <provider>
-	<name>Sky ZZL</name>
+	<name>Sky UK (SD)</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>sky</protocol>
-	<transponder frequency="11778000" symbol_rate="27500000" polarization="1"
-		fec_inner="2" orbital_position="282" inversion="2" system="0"
-		modulation="1" roll_off="0" pilot="2" />
+	<transponder 
+		orbital_position="282"
+		frequency="11778000"
+		symbol_rate="27500000"
+		polarization="1"
+		fec_inner="2"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+	/>
 	<dvbsconfigs>
 		<configuration key="hd_atherstone" bouquet="0x1001" region="0x13" namespace="0x11a0000">Atherstone</configuration>
 		<configuration key="hd_border_england" bouquet="0x1001" region="0x0c" namespace="0x11a0000">Border England</configuration>
@@ -153,7 +162,6 @@
 		<channel number="210" with="115" /><!-- BBC Three HD -->
 		<channel number="211" with="116" /><!-- BBC Four HD -->
 		<channel number="224" with="162" /><!-- RTE2 HD -->
-		<channel number="342" with="315" /><!-- Film4 HD -->
 		<channel number="426" with="413" /><!-- BT Sport 1 HD -->
 		<channel number="427" with="414" /><!-- BT Sport 2 HD -->
 		<channel number="433" with="417" /><!-- ESPN HD -->

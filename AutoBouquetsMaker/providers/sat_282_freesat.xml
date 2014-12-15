@@ -2,10 +2,19 @@
 	<name>FreeSat (UK)</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>freesat</protocol>
-	<transponder frequency="12207000" symbol_rate="27500000" polarization="1"
-		fec_inner="2" orbital_position="282" inversion="2" system="0"
-		modulation="1" roll_off="0" pilot="2"
-		bat_pid="0xf01" />
+	<transponder 
+		orbital_position="282"
+		frequency="12207000" 
+		symbol_rate="27500000"
+		polarization="1"
+		fec_inner="2"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+		bat_pid="0xf01"
+	/>
 	<dvbsconfigs>
 		<configuration key="hd_freesat_110_1" bouquet="0x110" region="0x1" namespace="0x11a0000">England HD: London/London</configuration>
 		<configuration key="hd_freesat_110_2" bouquet="0x110" region="0x2" namespace="0x11a0000">England HD: East (W)/Anglia W</configuration>
