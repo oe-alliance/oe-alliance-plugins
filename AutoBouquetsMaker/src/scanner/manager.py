@@ -94,10 +94,12 @@ class Manager():
 					# expand section keys in channels numbers
 					sections = sorted(providers[provider_key]["sections"].keys())
 					for bouquetToHide in self.bouquetsToHide[provider_key]:
-						index = sections.index(bouquetToHide)
-						if index == -1:
+						try:
+							#get closest section, just in case section numbers in the provider file have been updated
+							bouquetToHide = min(sections, key=lambda x:abs(x-bouquetToHide))
+							index = sections.index(bouquetToHide)
+						except:
 							continue
-
 						if index < len(sections) - 1:
 							bouquetsToHide += range(bouquetToHide, sections[index + 1])
 						else:
