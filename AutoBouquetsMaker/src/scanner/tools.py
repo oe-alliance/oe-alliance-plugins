@@ -7,7 +7,7 @@ class Tools():
 		try:
 			tool = open(filename, "r")
 		except Exception, e:
-			print>>log, "[Tools] Cannot open %s: %s" % (filename, e)
+			#print>>log, "[Tools] Cannot open %s: %s" % (filename, e)
 			return None
 
 		try:
