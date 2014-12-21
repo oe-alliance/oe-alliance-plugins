@@ -17,6 +17,7 @@ class L4Lelement:
 	Hold = False
 	HoldKey = False
 	Font = ["","","",""]
+	Version = False
 	def __init__(self):
 		self.session = None
 	def add(self,element,para):
@@ -103,20 +104,45 @@ class L4Lelement:
 			return L4Lelement.Bright if ORG == False else L4Lelement.BrightAkt
 	def getLcd(self):
 		return L4Lelement.LCD
+	def setVersion(self,V):
+		L4Lelement.Version = L4LVtest(V)
+	def getVersion(self):
+		return L4Lelement.Version
+
+def getstatusoutput(cmd):
+	try:
+		pipe = os.popen('{ ' + cmd + '; } 2>&1', 'r')
+		text = pipe.read()
+		sts = pipe.close()
+		if sts is None: sts = 0
+		if text[-1:] == '\n': text = text[:-1]
+	except:
+		sts = 1
+		text = "- -"
+		print "[LCD4linux] Error on os-call"
+	finally:
+		return sts, text
 
 def L4LVtest(VV):
-	L4Linfo = "/%s/lib/opkg/info/enigma2-plugin-extensions-lcd4linux.control"
+	L4Linfo = "/%s/lib/%s/info/enigma2-plugin-extensions-lcd4linux.control"
 	O = ""
-	if os.path.exists(L4Linfo % "var"):
+	OO = False
+	P = "opkg"
+	if os.path.exists(L4Linfo % ("var","opkg")):
 		O = "var"
-	elif os.path.exists(L4Linfo % "usr"):
-		O = "usr"
+	elif os.path.exists(L4Linfo % ("var","dpkg")):
+		O = "var"
+		P = "dpkg"
+	elif os.path.exists("/var/lib/dpkg/status"):
+		(r1,r2) = getstatusoutput("dpkg -s enigma2-plugin-extensions-lcd4linux | grep Version")
+		if r1 == 0:
+			OO = r2.strip().split()[1].startswith(VV[1:])
 	if O != "":
 		try:
-			f = open(L4Linfo % O)
+			f = open(L4Linfo % (O,P))
 			B = f.readline()
-			O = f.readline().strip().split()[1].startswith(VV[1:])
+			OO = f.readline().strip().split()[1].startswith(VV[1:])
 			f.close()
 		except:
 			pass
-	return O
+	return OO

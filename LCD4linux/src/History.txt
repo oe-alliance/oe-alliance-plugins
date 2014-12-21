@@ -1,14 +1,84 @@
 History:
+4.4r0 (29.11.2014)
+ - Remote Box Anzeige (Sender/Sendung)
+ - IMAP-Mail Begrenzung auf letzen x Tage
+ - Mail: +Anzeige Datum
+ - Anzeige auf verfügbaren Hauptspeicher geändert
+ - Fritzcall-Bilder mit Transparenz
+ - Erweiterte Beschreibung: + Anzeige Dateiname.txt
+ - externe WebIF Steuerungsaufrufe: +"screen" , +"brightness"
+ - weitere kleine Fixes
+4.3r0 (05.10.2014)
+ - Testrelease OE2.2 (DM7080hd)
+ r4 (30.10.): Fix Cover-Download (DM7080 + neuere Fremdboxen-Images)
+4.2r0 (08.07.2014)
+ - LCD Ausgabe als MJPEG Stream
+ - virtuelle Helligkeit für "Samsung..." und "nur Bild..."
+ - Helligkeit Nachtabsenkung
+ r1 (12.07.): kleine Fixes (Sonnenaufgang,...) ; MJPEG Standardwerte angepasst
+ r2 (20.07.): Tuneränderung erzeugt Aktualisierung; beachtet wenn Boxtreiber leere Sensorwerte erzeugt 
+ r3 (29.07.): nur kleinere Anpassungen
+ r4 (02.08.): Fix: virtuelle Helligkeit bei Quick Aktualisierung; direkte Schirm Schalter Auswahl im Erweiterungsmenü (MQB möglich); StotterTV: interne Codevereinfachung
+ r5 (03.09.): WWW-Konverter cloudconvert.org hinzugefügt (API-Key nötig) ; Cover auch PNG möglich ; ...
+4.1r0 (01.06.2014)
+ - Netatmo: Regensensor ; +Modulname ; +Modulauswahl
+ - Fortschrittbar: +Element "00 % 00:00 / 00:00" ; +Zeichensatz
+ - Kalender: +Sa/So Farbdefinition
+r1 (21.06.): WebIF +Logdateidownload ; Serviceinfos Now/Next (alternativ EPG) ; einige kleine Fixes
+r2 (22.06.): Fix: Farbe Regenwahrscheinlichkeit
+4.0r0 (15.02.2014)
+ - MP: Support für GP3-Jukebox (dreamnetcast)
+ - WebIF: Konfig Up/Download
+ - Wechsel auf Google-Bilder-API
+ - Defaultpicon Nutzung
+ - Anzeige Gesamtzahl Aufnahmen abschaltbar
+ r1 (16.02.): Fix Piconaktualisierung im Konfigmode
+ r2 (18.04.): in/out Fritzcallpicons, Corby@Pearl( 128x128 ) ...
+ r3 (26.04.): Fix: zeitgleiche Nutzung von 2 analogen Uhren
+ r4 (30.04.): Fix: Defaultcover bei Googlesuche ; Fortschrittbar: +Verlauf , Fix: Schattiert
+ r5 (03.05.): Speicher-Geräte: +frei Warnung ; Fix: Synchronisieren nach Bilddaten im On-Mode ; Config-WebIF: Refresh laufzeitabhängig ; Fritzcall: +3zeilig
+ r6 (04.05.): Fix: Einstellung in Media-Fortschrittsbar ohne Funktion
+3.9r0 (22.12.2013)
+ - mehr Positionsmöglichkeiten: Fortschrittbar/Lautstärke/Signalstärke
+ - Hintergrundbild wird auf LCD angepasst
+ - Piconerkennung verbessert (IP-Services/Service-Fallback)
+ - Readonly-WebIF-Bild (.../lcd4linux/view)
+ - umfangreicher interner Umbau für weniger Bilddatei Operationen
+r1 (23.12.): Fix keine Picon bei umbenanntem Service
+r2 (31.12.): Fix: Fehler bei alternativer Wettertransparenz ; Art der Hintergrundbildbehandlung einstellbar ; Einstellung Signal-Qualitäts-Korrektur für DVB-T Tuner (ungetestet)
+r3 (07.01.): LCD-Aktualisierung auf 1/min einstellbar ; interner Covercache ; Fix: einige Zeichenprobleme bestimmter Sprachen ; Fix: Crash bei doppelter Elementenutzung
+3.8r0 (31.10.2013)
+ - Aufnahmeecke ist normales Element
+ - alternative ConfigWeb-Ansicht
+ - Audio/Video +2zeilig
+ - Netatmo +vertikal
+ - Kalender +direkte planerFS Unterstützung ; ignorieren identischer Termine
+ - wie immer auch einige Fixes
+ r1 (02.11.): kleiner Fix für planerFS-only-Nutzung ; WebConfigSicherheit deaktiviert wenn vom System nicht unterstützt (Workaround)
+ r2 (27.11.): iCalendar 3.x Support; Fix Google-Cover; Fix Auswahl Aufnahme-LCD
+3.7r0 (28.07.2013)
+ - externe Elementeregistrierung mit Plugin & WebIF (Text, Bild, Progressbar, Rechteck) lese Infos in ExternalElements.txt
+ r1 (27.08.): Ereignisbar Popup-Schirm bei Änderungen; Picon2 eigener/anderer Path; MP-LCD-Helligkeit; u.a. kleine Anpassungen/Fixes
+ r2 (28.08.): Anpassungen für externe Elemente ; fehlerhafte Pakete
+ r3 (01.09.): externe Schirmsteuerung verbessert
+ r4 (03.09.): Sicherheitsupdate: Config-WebIF nur aus lokalem Netz nutzbar; Speichergeräte vertikal
+ r5 (14.09.): Fixes/Änderungen im FritzCall; Uhr; Info; externe Elemente; ...
+ r6 (17.09.): kleine Fixes
+ r7 (19.09.): kleine Änderungen an externer Elementeunterstützung
+ r8 (02.10.): bissel aufgeräumt/gefixt; Netatmo(x-Module/Komfort-Indikator Version r29 notwendig!!!!); Picons ohne Cache Nutzung (wenn Cachepfad nicht definiert) ...
 3.6r0 (01.07.2013)
  - Text-Schatten-Umrandung
  - One-Shoot-Bitrate (Dr.Best-Bitrate-Plugin notwendig)
+ r1 (04.07.): kleine Fixes: erw. Beschreibung ; Mini-EPG ; Terminliste
+ r2 (10.07.): Lüfterinfo rpm oder rpm/2 einstellbar ; WebIF Hintergrund grau im Config-Modus
+ r3 (22.07.): etwas bessere webradioFS-Unterstützung (Danke shadowrider)
 3.5r0 (07.06.2013)
  - 3.LCD (aber weiterhin nur 2 gleichen Typen)
  - extra Terminliste
  - LCD-Hntergrundfarbe einstellbar
  - mehr Farben/horiz.Positionen
  - Signalstärkebar als Verlauf
- - Programmvortschritt/Lautstärke schattiert
+ - Programmfortschritt/Lautstärke schattiert
  - Netatmo CO2 Visualisierung
  - Sonnenaufgang umgestellt auf openweathermap.org
  - LCD-OFF Zeiten für Wochentag/-ende
