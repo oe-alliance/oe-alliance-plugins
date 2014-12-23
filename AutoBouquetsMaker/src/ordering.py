@@ -12,15 +12,15 @@ from scanner.providerconfig import ProviderConfig
 
 class AutoBouquetsMaker_Ordering(Screen):
 	skin = """
-		<screen position="center,center" size="600,500" >
+		<screen position="center,center" size="600,500">
 			<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#9f1313" font="Regular;18" transparent="1"/>
 			<widget name="key_green" position="150,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#1f771f" font="Regular;18" transparent="1"/>
 			<widget name="key_yellow" position="300,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#a08500" font="Regular;18" transparent="1"/>
 			<widget name="key_blue" position="450,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#18188b" font="Regular;18" transparent="1"/>
-			<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green" position="150,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="300,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue" position="450,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
+			<ePixmap name="green" position="150,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
+			<ePixmap name="yellow" position="300,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on"/>
+			<ePixmap name="blue" position="450,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on"/>
 			<widget source="list" render="Listbox" position="20,50" size="560,360" scrollbarMode="showOnDemand">
 				<convert type="TemplatedMultiContent">
 					{"template": [
@@ -31,7 +31,7 @@ class AutoBouquetsMaker_Ordering(Screen):
 					}
 				</convert>
 			</widget>
-			<widget name="pleasewait" position="10,60" size="580,140" font="Regular;18" halign="center" valign="center" transparent="0" zPosition="1" />
+			<widget name="pleasewait" position="10,60" size="580,140" font="Regular;18" halign="center" valign="center" transparent="0" zPosition="1"/>
 		</screen>"""
 
 	def __init__(self, session):

@@ -12,11 +12,11 @@ import sys
 
 class AutoBouquetsMaker_About(Screen):
 	skin="""
-<screen position="center,center" size="600,350" title="AutoBouquetsMaker - About">
-	<widget name="about" position="10,10" size="580,430" font="Regular;15" />
+<screen position="center,center" size="600,350">
+	<widget name="about" position="10,10" size="580,430" font="Regular;15"/>
 	<widget name="key_red" position="0,310" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
 	<ePixmap name="red" pixmap="skin_default/buttons/red.png" position="0,310" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
-	<widget name="oealogo" position="400,215" size="200,135"  zPosition="4" transparent="1" alphatest="blend" />
+	<widget name="oealogo" position="400,215" size="200,135"  zPosition="4" transparent="1" alphatest="blend"/>
 </screen>"""
 
 	def __init__(self, session):

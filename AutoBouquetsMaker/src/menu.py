@@ -31,7 +31,7 @@ import os, sys, log
 
 class AutoBouquetsMaker_Menu(Screen):
 	skin = """
-<screen position="center,center" size="560,360" >
+<screen position="center,center" size="560,360">
 	<widget source="list" render="Listbox" position="0,0" size="560,360" scrollbarMode="showOnDemand">
 		<convert type="TemplatedMultiContent">
 			{"template": [
@@ -197,8 +197,8 @@ class AutoBouquetsMaker_MenuSummary(Screen):
 
 class AutoBouquetsMaker_Log(Screen):
 	skin = """
-<screen name="AutoBouquetsMakerLogView" position="center,center" size="600,500" title="Backup Log" >
-	<widget name="list" position="0,0" size="600,500" font="Regular;16" />
+<screen name="AutoBouquetsMakerLogView" position="center,center" size="600,500" title="Backup Log">
+	<widget name="list" position="0,0" size="600,500" font="Regular;16"/>
 </screen>"""
 	def __init__(self, session):
 		self.session = session
