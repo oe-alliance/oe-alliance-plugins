@@ -76,10 +76,11 @@
 		<section number="130">News</section>		
 		<section number="170">Adult</section>
 		<section number="601">BBC Interactive</section>
-		
 	</sections>
 	<servicehacks>
 		<![CDATA[
+	if service["service_type"] == 0xc:
+		skip = True	
 		]]>
 	</servicehacks>
 </provider>
