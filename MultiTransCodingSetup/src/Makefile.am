@@ -4,6 +4,4 @@ install_PYTHON = \
 	__init__.py \
 	plugin.py 
 
-install_DATA = setup.xml
-
-install_DATA = *.png
+install_DATA = setup.xml *.png
