@@ -80,6 +80,8 @@
 	</sections>
 	<servicehacks>
 		<![CDATA[
+	if service["service_type"] == 0xc:
+		skip = True	
 		]]>
 	</servicehacks>
 </provider>
