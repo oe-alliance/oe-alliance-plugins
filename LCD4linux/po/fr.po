@@ -1,22 +1,11 @@
-# English translations for LCD package.
-# Copyright (C) 2013 THE LCD'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the LCD package.
-# Automatically generated, 2013.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: LCD 4linux\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-10 18:35+0100\n"
-"PO-Revision-Date: 2014-10-27 16:22+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: LCD4linux\n"
+"Language: fr\n"
 
 msgid "%"
 msgstr "%"
@@ -24,15 +13,12 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
-#, python-format
 msgid "% + Load@1min"
 msgstr "% + Load@1min"
 
-#, python-format
 msgid "% + Load@5min"
 msgstr "% + Load@5min"
 
-#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr "%d Mails  %d Info  %s"
 
@@ -77,9 +63,6 @@ msgstr "- Couleur sous titre"
 
 msgid "- Color"
 msgstr "- Couleur"
-
-msgid "- Current Day Color"
-msgstr "- Couleur du jour actuel"
 
 msgid "- Cut Height [disable = 0]"
 msgstr "- Couper Hauteur [désactiver = 0]"
@@ -144,9 +127,6 @@ msgstr "- LCD 1 Couleur du fond"
 msgid "- LCD 1 Background-Picture [ok]>"
 msgstr "- LCD 1 Image de fond [ok]>"
 
-msgid "- LCD 1 Brightness [no SPF]"
-msgstr "- LCD 1 Luminosité [pas SPF]"
-
 msgid "- LCD 1 Rotate"
 msgstr "- LCD 1 Rotation"
 
@@ -156,9 +136,6 @@ msgstr "- LCD 2 Couleur de fond"
 msgid "- LCD 2 Background-Picture [ok]>"
 msgstr "- LCD 2 Image de fond [ok]>"
 
-msgid "- LCD 2 Brightness [no SPF]"
-msgstr "- LCD 2 Luminosité [pas SPF]"
-
 msgid "- LCD 2 Rotate"
 msgstr "- LCD 2 Rotation"
 
@@ -167,9 +144,6 @@ msgstr "- LCD 3 Couleur du fond"
 
 msgid "- LCD 3 Background-Picture [ok]>"
 msgstr "- LCD 3 Image de fond [ok]>"
-
-msgid "- LCD 3 Brightness [no SPF]"
-msgstr "- LCD 3 Luminosité [no SPF]"
 
 msgid "- LCD 3 Rotate"
 msgstr "- LCD 3 Rotation"
@@ -212,9 +186,6 @@ msgstr "- Position Image"
 
 msgid "- Picture Size"
 msgstr "- Taille Image"
-
-msgid "- Picture [ok]>"
-msgstr "- Image [ok]>"
 
 msgid "- Position"
 msgstr "- Position"
@@ -309,9 +280,6 @@ msgstr "- Écran partagé"
 msgid "- Text Size"
 msgstr "- Taille du texte"
 
-msgid "- Timeout"
-msgstr "- Timeout"
-
 msgid "- Transparency"
 msgstr "- Transparence"
 
@@ -345,14 +313,8 @@ msgstr "- seulement le tuner actif"
 msgid "- which LCD"
 msgstr "- quel LCD"
 
-msgid "0"
-msgstr "0"
-
 msgid "0.5"
 msgstr "0.5"
-
-msgid "1"
-msgstr "1"
 
 msgid "1-2"
 msgstr "1-2"
@@ -365,9 +327,6 @@ msgstr "1-4"
 
 msgid "1-5"
 msgstr "1-5"
-
-msgid "10"
-msgstr "10"
 
 msgid "10%"
 msgstr "10%"
@@ -393,14 +352,8 @@ msgstr "15min"
 msgid "15s"
 msgstr "15s"
 
-msgid "180"
-msgstr "180"
-
 msgid "1min"
 msgstr "1min"
-
-msgid "2"
-msgstr "2"
 
 msgid "2 Days 1 Line"
 msgstr "2 jours 1 Ligne"
@@ -416,9 +369,6 @@ msgstr "2 x Touche avance rapide Type 2"
 
 msgid "2 x InfoKey"
 msgstr "2 x Touche Info"
-
-msgid "20"
-msgstr "20"
 
 msgid "20%"
 msgstr "20%"
@@ -438,17 +388,11 @@ msgstr "25%"
 msgid "255x64"
 msgstr "255x64"
 
-msgid "270"
-msgstr "270"
-
 msgid "2min"
 msgstr "2min"
 
-msgid "3"
-msgstr "3"
-
-msgid "30"
-msgstr "30"
+msgid "0"
+msgstr "0"
 
 msgid "30%"
 msgstr "30%"
@@ -467,6 +411,9 @@ msgstr "35%"
 
 msgid "3min"
 msgstr "3min"
+
+msgid "180"
+msgstr "180"
 
 msgid "4 Days 1 Line"
 msgstr "4 Jours 1 Ligne"
@@ -492,8 +439,8 @@ msgstr "45%"
 msgid "4min"
 msgstr "4min"
 
-msgid "5"
-msgstr "5"
+msgid "270"
+msgstr "270"
 
 msgid "5 Days 1 Line"
 msgstr "5 Days 1 Line"
@@ -545,9 +492,6 @@ msgstr "85%"
 
 msgid "8bit - grayscale/color"
 msgstr "8bit - échelle de gris/couleur"
-
-msgid "90"
-msgstr "90"
 
 msgid "90%"
 msgstr "90%"
@@ -612,14 +556,8 @@ msgstr "Box-Skin-LCD Activer le mode On"
 msgid "C"
 msgstr "C"
 
-msgid "C + rmp"
-msgstr "C + rmp"
-
 msgid "Calendar"
 msgstr "Calendrier"
-
-msgid "Calendar Background Processing"
-msgstr "Calendrier traitement en tâche de fond"
 
 msgid "Calendar Day Event Preview"
 msgstr "Calendrier prévisualisation de l'évènement du jour"
@@ -677,10 +615,6 @@ msgstr "Température courante (+C)"
 
 msgid "Current Temperature (-C)"
 msgstr "Température courante (-C)"
-
-#, python-format
-msgid "Current value: %s"
-msgstr "Valeur actuelle: %s"
 
 msgid "Date"
 msgstr "Date"
@@ -914,16 +848,12 @@ msgstr "LCD4linux activé"
 msgid "Last Quarter"
 msgstr "Dernier Quart"
 
-msgid "List of Storage Devices"
-msgstr "Liste des périphériques de stockages"
-
 msgid "Load Active Config-File"
 msgstr "Charger le fichier Config Active"
 
 msgid "Load Defaults"
 msgstr "Charger les valeurs par défaut"
 
-#, python-format
 msgid "Load File : %s"
 msgstr "Charger fichier : %s"
 
@@ -1017,9 +947,6 @@ msgstr "Mail afficher les boîtes vides"
 msgid "Media"
 msgstr "Média"
 
-msgid "Memory"
-msgstr "Mémoire"
-
 msgid "Meteo URL"
 msgstr "URL Météo"
 
@@ -1097,9 +1024,6 @@ msgstr "En ligne+hors ligne"
 
 msgid "Only New"
 msgstr "Seulement nouveau"
-
-msgid "Parent Directory"
-msgstr "Répertoire parent"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (ou compatible LCD) 240x320"
@@ -1233,7 +1157,6 @@ msgstr "Satellite"
 msgid "Save"
 msgstr "Sauvegarder"
 
-#, python-format
 msgid "Save Config to File... (%s)"
 msgstr "Sauvegarde du fichier de config... (%s)"
 
@@ -1374,9 +1297,6 @@ msgstr "Afficher image 3"
 
 msgid "Show Picture 4"
 msgstr "Afficher image 4"
-
-msgid "Show Recording"
-msgstr "Afficher enregistrement"
 
 msgid "Show Textfile"
 msgstr "Afficher fichier texte"
@@ -1591,7 +1511,6 @@ msgstr "Copier en On"
 msgid "cornflowerblue"
 msgstr "bleu fleur de maïs"
 
-#, python-format
 msgid "currently set : %s"
 msgstr "actuellement défini : %s"
 

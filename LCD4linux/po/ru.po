@@ -1,0 +1,2020 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: LCD4linux\n"
+"POT-Creation-Date: 2013-05-02 23:18+Mitteleuropäische Sommerzeit\n"
+"PO-Revision-Date: 2013-09-05 16:19+0200\n"
+"Last-Translator: Paly4 <vuplusru@mail.ru>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Language: de_DE\n"
+"X-Generator: Poedit 1.5.5\n"
+
+msgid "%"
+msgstr "%"
+
+msgid "% + BER"
+msgstr "% + BER"
+
+msgid "% + Load@1min"
+msgstr "% + Загрузка@1мин"
+
+msgid "% + Load@5min"
+msgstr "% + Загрузка@5мин"
+
+msgid "%d Mails  %d New  %s"
+msgstr "%d Почта  %d Новая  %s"
+
+msgid "%s - Current value: %s"
+msgstr "%s - Текущее значение: %s"
+
+msgid "-  Type"
+msgstr "-  Тип"
+
+msgid "- Alignment"
+msgstr "- Выравнивание"
+
+msgid "- Analog Clock"
+msgstr "- Аналоговые часы"
+
+msgid "- Background Color"
+msgstr "- Цвет фона"
+
+msgid "- Background/Transparency"
+msgstr "- Фон/Прозрачность"
+
+msgid "- Backlight Off [disable set Off=On]"
+msgstr "- Выключение подсветки [Off = On]"
+
+msgid "- Backlight On"
+msgstr "- Включение подсветки"
+
+msgid "- Backlight Weekend Off [disable set Off=On]"
+msgstr "- Подсвечивать выходные [для отключения установить Off = On]"
+
+msgid "- Backlight Weekend On"
+msgstr "- Hintergrundbeleuchtung Wochenende Ein"
+
+msgid "- Bar Range Max"
+msgstr "- Бар диапазон макс."
+
+msgid "- Bar Range Min"
+msgstr "- Бар диапазон мин."
+
+msgid "- CPU"
+msgstr "- CPU"
+
+msgid "- Caption Color"
+msgstr "- Название цвета"
+
+msgid "- Color"
+msgstr "- Цвет"
+
+msgid "- Current Day Color"
+msgstr "- Цвет текущего дня"
+
+msgid "- Cut Height [disable = 0]"
+msgstr "- Обрезать по высоте [выкл. = 0]"
+
+msgid "- Cut Width [disable = 0]"
+msgstr "- Обрезать по ширине [выкл. = 0]"
+
+msgid "- Cut from X"
+msgstr "- Вырезать из X"
+
+msgid "- Cut from Y"
+msgstr "- Вырезать из Y"
+
+msgid "- Default Cover [ok]>"
+msgstr "- По умолчанию обложка [ok]>"
+
+msgid "- Device Name"
+msgstr "- Имя устройства"
+
+msgid "- Download Cover from Google"
+msgstr "- Загрузить обложку из Google"
+
+msgid "- Extra Color Chill"
+msgstr "- Дополнительные цвета"
+
+msgid "- Extra Color City"
+msgstr "- Дополнительные цвета городов"
+
+msgid "- Extra Zoom"
+msgstr "- Экстра увеличение"
+
+msgid "- Fast Grab lower quality"
+msgstr "- Быстрый Grab низкого качества"
+
+msgid "- File [ok]>"
+msgstr "- Файл [ok]>"
+
+msgid "- File or Path [ok]>"
+msgstr "- Файл или путь [ok]>"
+
+msgid "- Font"
+msgstr "- Шрифт"
+
+msgid "- Font Size"
+msgstr "- Размер шрифта"
+
+msgid "- Full Screen"
+msgstr "- На весь экран"
+
+msgid "- Gradient"
+msgstr "- Градиент"
+
+msgid "- HTTP Height"
+msgstr "- HTTP Высота"
+
+msgid "- HTTP Width"
+msgstr "- HTTP Ширина"
+
+msgid "- LCD 1 Background Color"
+msgstr "- LCD 1 Цвет фона"
+
+msgid "- LCD 1 Background-Picture [ok]>"
+msgstr "- LCD 1 Фон-картинка [ok]>"
+
+msgid "- LCD 1 Brightness [no SPF]"
+msgstr "- LCD 1 Яркость [no SPF]"
+
+msgid "- LCD 1 Rotate"
+msgstr "- LCD 1 чередовать"
+
+msgid "- LCD 2 Background Color"
+msgstr "- LCD 2 Цвет фона"
+
+msgid "- LCD 2 Background-Picture [ok]>"
+msgstr "- LCD 2 Фон-Картинка [ok]>"
+
+msgid "- LCD 2 Brightness [no SPF]"
+msgstr "- LCD 2 Яркость [no SPF]"
+
+msgid "- LCD 2 Rotate"
+msgstr "- LCD 2 Чередовать"
+
+msgid "- LCD 3 Background Color"
+msgstr "- LCD 3 Цвет фона"
+
+msgid "- LCD 3 Background-Picture [ok]>"
+msgstr "- LCD 3 Фон-Картинка [ok]>"
+
+msgid "- LCD 3 Brightness [no SPF]"
+msgstr "- LCD 3 Яркость [без SPF]"
+
+msgid "- LCD 3 Rotate"
+msgstr "- LCD 3 Чередовать"
+
+msgid "- Layout"
+msgstr "- Макет"
+
+msgid "- Length [Bar]"
+msgstr "- Длинна [Бар]"
+
+msgid "- Lines"
+msgstr "- Линий"
+
+msgid "- Mail Konto"
+msgstr "- Учетная запись почты"
+
+msgid "- OSD Size"
+msgstr "- Размер OSD"
+
+msgid "- Online Name:Address"
+msgstr "- Ник:адрес"
+
+msgid "- Picon Cache Path [ok]>"
+msgstr "- Picon Cache путь [ok]>"
+
+msgid "- Picon First"
+msgstr "- Первый пикон"
+
+msgid "- Picon Path 2 [ok]>"
+msgstr "- Путь к пиконам 2 [ok]>"
+
+msgid "- Picon Path [ok]>"
+msgstr "- Путь к пиконам [ok]>"
+
+msgid "- Picon Size"
+msgstr "- Размер пиконов"
+
+msgid "- Picture Alignment"
+msgstr "- Выравнивание изображения"
+
+msgid "- Picture Position"
+msgstr "-Позиция изображения"
+
+msgid "- Picture Size"
+msgstr "- Размер картинки"
+
+msgid "- Picture [ok]>"
+msgstr "- Изображение [ok]>"
+
+msgid "- Popup LCD"
+msgstr "- Popup LCD"
+
+msgid "- Popup Screen"
+msgstr "- Popup Screen"
+
+msgid "- Position"
+msgstr "- Позиция"
+
+msgid "- Position x"
+msgstr "- Позиция по оси x"
+
+msgid "- Position y"
+msgstr "- Позиция по оси y"
+
+msgid "- Quick Update"
+msgstr "- Быстрое обновление"
+
+msgid "- Rain Color"
+msgstr "- Цвет дождя"
+
+msgid "- Rain Color 2"
+msgstr "- Цвет дождя 2"
+
+msgid "- Rain Zoom"
+msgstr "- Увеличение дождя"
+
+msgid "- Rain use Color 2 from"
+msgstr "- Rain use Color 2 from"
+
+msgid "- Screen 2 Changing Time"
+msgstr "- Экран 2 Изменение времени"
+
+msgid "- Screen 3 Changing Time"
+msgstr "- Экран 3 Изменение времени"
+
+msgid "- Screen 4 Changing Time"
+msgstr "- Экран 4 Изменение времени"
+
+msgid "- Screen 5 Changing Time"
+msgstr "- Экран 5 Изменение времени"
+
+msgid "- Screen 6 Changing Time"
+msgstr "- Экран 6 Изменение времени"
+
+msgid "- Screen 7 Changing Time"
+msgstr "- Экран 7 Изменение времени"
+
+msgid "- Screen 8 Changing Time"
+msgstr "- Экран 8 Изменение времени"
+
+msgid "- Screen 9 Changing Time"
+msgstr "- Экран 9 Изменение времени"
+
+msgid "- Screens used for Changing"
+msgstr "Функция используется для изменения экранов"
+
+msgid "- Search Path [ok]>"
+msgstr "- Поиск пути [ok]>"
+
+msgid "- Sensors"
+msgstr "- Сенсор "
+
+msgid "- Shaded"
+msgstr "- Затенить"
+
+msgid "- Shadow Edges"
+msgstr "- Теневые грани"
+
+msgid "- Show State"
+msgstr "- Показать состояние"
+
+msgid "- Show chill temperature from difference"
+msgstr "- Показать разницу температур"
+
+msgid "- Show in Mode"
+msgstr "- Показать в режиме"
+
+msgid "- Size"
+msgstr "- Размер"
+
+msgid "- Size max Height"
+msgstr "- Высота макс."
+
+msgid "- Size x"
+msgstr "- Размер по оси x"
+
+msgid "- Size y"
+msgstr "- Размер по оси y"
+
+msgid "- Spacing"
+msgstr "- Растояние"
+
+msgid "- Split Screen"
+msgstr "- Разделение экрана"
+
+msgid "- Text Size"
+msgstr "- Размер текста"
+
+msgid "- Timeout"
+msgstr "- Таймаут"
+
+msgid "- Transparency"
+msgstr "- Прозрачность"
+
+msgid "- Tunerinfo"
+msgstr "- Инфо о тюнере"
+
+msgid "- Type"
+msgstr "- Тип"
+
+msgid "- URL"
+msgstr "- URL"
+
+msgid "- Weather Type"
+msgstr "- Тип погоды"
+
+msgid "- Zoom"
+msgstr "- Увеличение"
+
+msgid "- extra Info"
+msgstr "- экстра инфо"
+
+msgid "- max Width"
+msgstr "- ширина макс."
+
+msgid "- maximum Lines"
+msgstr "- маскимум линий"
+
+msgid "- only active Tuner"
+msgstr "- только активный тюнер"
+
+msgid "- which LCD"
+msgstr "- какой LCD"
+
+msgid "0"
+msgstr "0"
+
+msgid "0.5"
+msgstr "0.5"
+
+msgid "1"
+msgstr "1"
+
+msgid "1-2"
+msgstr "1-2"
+
+msgid "1-3"
+msgstr "1-3"
+
+msgid "1-4"
+msgstr "1-4"
+
+msgid "1-5"
+msgstr "1-5"
+
+msgid "10"
+msgstr "10"
+
+msgid "10%"
+msgstr "10%"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "10min"
+msgstr "10мин"
+
+msgid "10s"
+msgstr "10с"
+
+msgid "132x64"
+msgstr "132x64"
+
+msgid "15%"
+msgstr "15%"
+
+msgid "15min"
+msgstr "15мин"
+
+msgid "15s"
+msgstr "15с"
+
+msgid "180"
+msgstr "180"
+
+msgid "1min"
+msgstr "1мин"
+
+msgid "2"
+msgstr "2"
+
+msgid "2 Days 1 Line"
+msgstr "2 дня 1 линия"
+
+msgid "2 Days 2 Line"
+msgstr "2 дня 2 линии"
+
+msgid "2 x FastBackwardKey"
+msgstr "2 x <<"
+
+msgid "2 x FastForwardKey"
+msgstr "2 x  >>"
+
+msgid "2 x FastForwardKey Type 2"
+msgstr "2 x >> Тип 2"
+
+msgid "2 x InfoKey"
+msgstr "2 x EPG"
+
+msgid "20"
+msgstr "20"
+
+msgid "20%"
+msgstr "20%"
+
+msgid "20min"
+msgstr "20мин."
+
+msgid "20s"
+msgstr "20с"
+
+msgid "220x176"
+msgstr "220x176"
+
+msgid "25%"
+msgstr "25%"
+
+msgid "255x64"
+msgstr "255x64"
+
+msgid "270"
+msgstr "270"
+
+msgid "2min"
+msgstr "2мин."
+
+msgid "3"
+msgstr "3"
+
+msgid "30"
+msgstr "30"
+
+msgid "30%"
+msgstr "30%"
+
+msgid "30min"
+msgstr "30мин."
+
+msgid "30s"
+msgstr "30с"
+
+msgid "32bit - color"
+msgstr "32bit -Цвет"
+
+msgid "35%"
+msgstr "35%"
+
+msgid "3min"
+msgstr "3мин."
+
+msgid "4 Days 1 Line"
+msgstr "4 дня 1 линия"
+
+msgid "4 Days 2 Lines"
+msgstr "4 дня 2 линии"
+
+msgid "4 Days Vertical View"
+msgstr "4 дня вертикально"
+
+msgid "40%"
+msgstr "40%"
+
+msgid "400x240"
+msgstr "400x240"
+
+msgid "40s"
+msgstr "40с"
+
+msgid "45%"
+msgstr "45%"
+
+msgid "4min"
+msgstr "4мин"
+
+msgid "5"
+msgstr "5"
+
+msgid "5 Days 1 Line"
+msgstr "5 дней в 1 линию"
+
+msgid "5 Days 2 Lines"
+msgstr "5 дней в 2 линии"
+
+msgid "5 Days Vertical View"
+msgstr "5 дней вертикально"
+
+msgid "5%"
+msgstr "5%"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "50s"
+msgstr "50с"
+
+msgid "55%"
+msgstr "55%"
+
+msgid "5min"
+msgstr "5мин."
+
+msgid "5s"
+msgstr "5с"
+
+msgid "60%"
+msgstr "60%"
+
+msgid "60min"
+msgstr "60мин."
+
+msgid "65%"
+msgstr "65%"
+
+msgid "70%"
+msgstr "70%"
+
+msgid "75%"
+msgstr "75%"
+
+msgid "80%"
+msgstr "80%"
+
+msgid "85%"
+msgstr "85%"
+
+msgid "8bit - grayscale/color"
+msgstr "8bit - серый/цветной"
+
+msgid "90"
+msgstr "90"
+
+msgid "90%"
+msgstr "90%"
+
+msgid "95%"
+msgstr "95%"
+
+msgid "96x64"
+msgstr "96x64"
+
+msgid "Active Screen"
+msgstr "Активный экран"
+
+msgid "All"
+msgstr "Все"
+
+msgid "Always All"
+msgstr "Всегда все"
+
+msgid "Always New"
+msgstr "Всегда новые"
+
+msgid "Analog"
+msgstr "Аналоговый"
+
+msgid "Analog+Date"
+msgstr "Аналоговые+дата"
+
+msgid "Analog+Date+Weekday"
+msgstr "Аналоговые+дата+будни"
+
+msgid "April"
+msgstr "Апреля"
+
+msgid "Audio/Video"
+msgstr "Аудио/Видео"
+
+msgid "August"
+msgstr "Августа"
+
+msgid "Bar"
+msgstr "Balken"
+
+msgid "Bar+Value"
+msgstr "Balken+Wert"
+
+msgid "Bitrate"
+msgstr "Bitrate"
+
+msgid "Box-Skin-LCD"
+msgstr "Box-Skin-LCD"
+
+msgid "Box-Skin-LCD Color"
+msgstr "Box-Skin-LCD цвет"
+
+msgid "Box-Skin-LCD Dimension"
+msgstr "Box-Skin-LCD размер"
+
+msgid "Box-Skin-LCD Enable Idle-Mode"
+msgstr "Box-Skin-LCD Aktiviere Idle-Mode"
+
+msgid "Box-Skin-LCD Enable Media-Mode"
+msgstr "Box-Skin-LCD включить медиа режим"
+
+msgid "Box-Skin-LCD Enable On-Mode"
+msgstr "Box-Skin-LCD Enable On-Mode"
+
+msgid "C"
+msgstr "C"
+
+msgid "C + rmp"
+msgstr "C + rmp"
+
+msgid "C + rmp/2"
+msgstr "C + rmp/2"
+
+msgid "Calendar"
+msgstr "Календарь"
+
+msgid "Calendar Day Event Preview"
+msgstr "Calendar Day Event Preview"
+
+msgid "Calendar Line Thickness"
+msgstr "Календарь-толщина линий"
+
+msgid "Calendar Transparency"
+msgstr "Прозрачность календаря"
+
+msgid "Calendar ics-Path [ok]>"
+msgstr "Календарь ics-путь [ok]>"
+
+msgid "Calendar ics-URL"
+msgstr "Календарь ics-URL"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Choose dir"
+msgstr "Выберите каталог"
+
+msgid "Choose file"
+msgstr "Выберите файл"
+
+msgid "Choose font"
+msgstr "Выберите шрифт"
+
+msgid "Clock"
+msgstr "Часы"
+
+msgid "Clock 2"
+msgstr "Часы 2"
+
+msgid "Config Backup Path [ok]>"
+msgstr "Путь для сохранения [ok]>"
+
+msgid "Console normal"
+msgstr "Konsole normal"
+
+msgid "Corner"
+msgstr "Угол"
+
+msgid "Crashlog"
+msgstr "Креш лог"
+
+msgid "Current"
+msgstr "Текущий"
+
+msgid "Current Temperature"
+msgstr "Текущяя температура"
+
+msgid "Current Temperature (+C)"
+msgstr "Текущяя температура (+C)"
+
+msgid "Current Temperature (-C)"
+msgstr "Текущяя температура (-C)"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Date+Time"
+msgstr "Дата+Время"
+
+msgid "Date+Time+Weekday"
+msgstr "Дата + время + день недели"
+
+msgid "Dates"
+msgstr "Даты"
+
+msgid "Dates 1 Line"
+msgstr "Даты в 1 линию"
+
+msgid "Dates 3 Lines"
+msgstr "Даты в 3 линии"
+
+msgid "Dates 5 Lines"
+msgstr "Даты в 5 линий"
+
+msgid "Dates 9 Lines"
+msgstr "Даты в 9 линий"
+
+msgid "Dates List"
+msgstr "Список дат"
+
+msgid "Dates compact"
+msgstr "Даты компактно"
+
+msgid "Dates compact 2 Lines"
+msgstr "Даты компактно в 2 линии"
+
+msgid "Dates compact 3 Lines"
+msgstr "Даты компактно в 3 линии"
+
+msgid "Dates compact no Icon"
+msgstr "Даты компактно без иконок"
+
+msgid "Dates no Icon"
+msgstr "Даты без иконок"
+
+msgid "Debug-Logging > /tmp/L4log.txt"
+msgstr "Debug-Logging > /tmp/L4log.txt"
+
+msgid "December"
+msgstr "Декабря"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Delete File?"
+msgstr "Удалить файл?"
+
+msgid "Display Delay [ms]"
+msgstr "Задержка [ms]"
+
+msgid "Double-button switches"
+msgstr "Double-button switches"
+
+msgid "Event Icon Bar"
+msgstr "Event Icon Bar"
+
+msgid "Exec"
+msgstr "Выполнение"
+
+msgid "Extended"
+msgstr "Расширенное"
+
+msgid "Extended (Short)"
+msgstr "Расширенное (Short)"
+
+msgid "Extended Description"
+msgstr "Расширенное описание"
+
+msgid "Fastmode (2s)"
+msgstr "Fastmode (2s)"
+
+msgid "February"
+msgstr "Февраля"
+
+msgid "First Quarter"
+msgstr "Первая четверть"
+
+msgid "Flaps Design"
+msgstr "Дизайн Flaps"
+
+msgid "Font"
+msgstr "Шрифт"
+
+msgid "Font 1 [ok]>"
+msgstr "Шрифт 1 [ok]>"
+
+msgid "Font 2 [ok]>"
+msgstr "Шрифт 2 [ok]>"
+
+msgid "Font 3 [ok]>"
+msgstr "Шрифт 3 [ok]>"
+
+msgid "Font global [ok]>"
+msgstr "Zeichensatz Global [ok]>"
+
+msgid "Frame"
+msgstr "Фрейм"
+
+msgid "Fri"
+msgstr "Пятн."
+
+msgid "Friday"
+msgstr "Пятница"
+
+msgid "FritzCall"
+msgstr "FritzCall"
+
+msgid "FritzCall Frame Picture [ok]>"
+msgstr "FritzCall Frame Picture [ok]>"
+
+msgid "FritzCall Number of List Entries"
+msgstr "FritzCall Number of List Entries"
+
+msgid "FritzCall Number of Pictures"
+msgstr "FritzCall Number of Pictures"
+
+msgid "FritzCall Picture Orientation"
+msgstr "FritzCall Picture Orientation"
+
+msgid "FritzCall Picture Path [ok]>"
+msgstr "FritzCall Picture Path [ok]>"
+
+msgid "FritzCall Pictures Search"
+msgstr "FritzCall Pictures Search"
+
+msgid "FritzCall Popup Color"
+msgstr "FritzCall Popup Color"
+
+msgid "FritzCall Popup LCD"
+msgstr "FritzCall Popup LCD"
+
+msgid "FritzCall Popup-Time"
+msgstr "FritzCall Popup-Time"
+
+msgid "FritzCall remove Calls after hours"
+msgstr "FritzCall remove Calls after hours"
+
+msgid "Full Moon"
+msgstr "Полнолуние"
+
+msgid "GUI Restart is required"
+msgstr "GUI необходимо перезагрузить"
+
+msgid ""
+"GUI needs a restart to apply the changes.\n"
+"Do you want to Restart the GUI now?"
+msgstr ""
+"GUI должен быть перезапущен для активации изменений.\n"
+"Сделать это сейчас?"
+
+msgid "Global"
+msgstr "Глобально"
+
+msgid "HDD"
+msgstr "HDD"
+
+msgid "IMAP"
+msgstr "IMAP"
+
+msgid "IMAP-SSL"
+msgstr "IMAP-SSL"
+
+msgid "Info"
+msgstr "Инфо"
+
+msgid "Informations"
+msgstr "Информация"
+
+msgid "Infos"
+msgstr "Узнайте больше"
+
+msgid "Internal Box-Skin-LCD"
+msgstr "Internal Box-Skin-LCD"
+
+msgid "Internal TFT-LCD 400x240"
+msgstr "Internal TFT-LCD 400x240"
+
+msgid "Internal Vu+ Duo2 LCD 400x240"
+msgstr "Internes Vu+ Duo2 LCD 400x240"
+
+msgid "January"
+msgstr "Января"
+
+msgid "Javascript"
+msgstr "JavaScript"
+
+msgid "July"
+msgstr "Июля"
+
+msgid "June"
+msgstr "Июня"
+
+msgid "Key for Screen Change"
+msgstr "Клавиша изменения экрана"
+
+msgid "Key for Screen On/Off"
+msgstr "Key for Screen On/Off"
+
+msgid "Knob"
+msgstr "Кнопка"
+
+msgid "Knob+Value"
+msgstr "Кнопка + значение"
+
+msgid "LCD 1"
+msgstr "LCD 1"
+
+msgid "LCD 1 Type"
+msgstr "LCD 1 Тип"
+
+msgid "LCD 1+2"
+msgstr "LCD 1+2"
+
+msgid "LCD 1+2+3"
+msgstr "LCD 1+2+3"
+
+msgid "LCD 1+3"
+msgstr "LCD 1+3"
+
+msgid "LCD 2"
+msgstr "LCD 2"
+
+msgid "LCD 2 Type"
+msgstr "LCD 2 Тип"
+
+msgid "LCD 2+3"
+msgstr "LCD 2+3"
+
+msgid "LCD 3"
+msgstr "LCD 3"
+
+msgid "LCD 3 Type"
+msgstr "LCD 3 Тип"
+
+msgid "LCD Custom Height"
+msgstr "Своя высота LCD"
+
+msgid "LCD Custom Width"
+msgstr "Своя высота LCD"
+
+msgid "LCD Display"
+msgstr "LCD Дисплей"
+
+msgid "LCD4linux enabled"
+msgstr "LCD4linux включен"
+
+msgid "Last Quarter"
+msgstr "Последняя четверть"
+
+msgid "Load Active Config-File"
+msgstr "Загрузить активный конфиг"
+
+msgid "Load Defaults"
+msgstr "Загрузить по умолчанию"
+
+msgid "Load File : %s"
+msgstr "Загрузить Файл : %s"
+
+msgid "Load@1min"
+msgstr "Загрузить@1мин."
+
+msgid "Load@5min"
+msgstr "Загрузить@5мин."
+
+msgid "Logfile extensive"
+msgstr "Logfile extensive"
+
+msgid "Logfile normal"
+msgstr "Logfile normal"
+
+msgid "Long FastBackwardKey"
+msgstr "Долгое нажатие <<"
+
+msgid "Long FastForwardKey"
+msgstr "Долгое нажатие >>"
+
+msgid "Long FastForwardKey Type 2"
+msgstr "Долгое нажатие >> Тип 2"
+
+msgid "Long InfoKey"
+msgstr "Долгое нажатие EPG"
+
+msgid "Mail"
+msgstr "Почта"
+
+msgid "Mail 1 Connect"
+msgstr "Почта 1 подключить"
+
+msgid "Mail 1 Password"
+msgstr "Почта 1 - пароль"
+
+msgid "Mail 1 Server"
+msgstr "Почта 1 Сервер"
+
+msgid "Mail 1 [Displayname:]Username"
+msgstr "Почта 1 Имя пользователя"
+
+msgid "Mail 2 Connect"
+msgstr "Mail 2 Connect"
+
+msgid "Mail 2 Password"
+msgstr "Mail 2 Passwort"
+
+msgid "Mail 2 Server"
+msgstr "Mail 2 Server"
+
+msgid "Mail 2 [Displayname:]Username"
+msgstr "Mail 2 [Anzeigename:]Nutzername"
+
+msgid "Mail 3 Connect"
+msgstr "Mail 3 Connect"
+
+msgid "Mail 3 Password"
+msgstr "Mail 3 Passwort"
+
+msgid "Mail 3 Server"
+msgstr "Mail 3 Server"
+
+msgid "Mail 3 [Displayname:]Username"
+msgstr "Mail 3 [Anzeigename:]Nutzername"
+
+msgid "Mail 4 Connect"
+msgstr "Mail 4 Connect"
+
+msgid "Mail 4 Password"
+msgstr "Mail 4 Passwort"
+
+msgid "Mail 4 Server"
+msgstr "Mail 4 Server"
+
+msgid "Mail 4 [Displayname:]Username"
+msgstr "Mail 4 [Anzeigename:]Nutzername"
+
+msgid "Mail 5 Connect"
+msgstr "Mail 5 Connect"
+
+msgid "Mail 5 Password"
+msgstr "Mail 5 Passwort"
+
+msgid "Mail 5 Server"
+msgstr "Mail 5 Server"
+
+msgid "Mail 5 [Displayname:]Username"
+msgstr "Mail 5 [Anzeigename:]Nutzername"
+
+msgid "Mail Poll Interval"
+msgstr "Интервал проверки почты"
+
+msgid "Mail Show Empty Mailboxes"
+msgstr "Почта-Показывать пустые почтовые ящики"
+
+msgid "March"
+msgstr "Марта"
+
+msgid "May"
+msgstr "Мая"
+
+msgid "Media"
+msgstr "Медиа"
+
+msgid "Memory"
+msgstr "Память"
+
+msgid "Meteo URL"
+msgstr "Погода URL"
+
+msgid "Meteo-Weather Station"
+msgstr "Погода-Источник"
+
+msgid "Mini-EPG"
+msgstr "Mini-EPG"
+
+msgid "Mon"
+msgstr "Пон"
+
+msgid "Monday"
+msgstr "Понедельник"
+
+msgid "Month"
+msgstr "Месяц"
+
+msgid "Month+Header"
+msgstr "Месяц + заголовок"
+
+msgid "Moon-Icon-Path [ok]>"
+msgstr "Месяц-путь к иконкам[ok]>"
+
+msgid "Moonphase"
+msgstr "Фазы Луны"
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "Netatmo"
+msgstr "Чистый атмосферный"
+
+msgid "Netatmo CO2 Indicator"
+msgstr "Netatmo CO2 Indikator"
+
+msgid "Netatmo CO2 Max Range"
+msgstr "Netatmo CO2 Max Range"
+
+msgid "Netatmo CO2 Min Range"
+msgstr "Netatmo CO2 Min Range"
+
+msgid "New Moon"
+msgstr "Новолуние"
+
+msgid "Next Program Info"
+msgstr "Инфо о следующей программе"
+
+msgid "Next Timer Event"
+msgstr "Следующее событие таймера"
+
+msgid "Normal (5s)"
+msgstr "Нормальный (5с)"
+
+msgid "November"
+msgstr "Ноября"
+
+msgid "OSCAM not running"
+msgstr "OSCAMне запущен"
+
+msgid "OSD"
+msgstr "OSD"
+
+msgid "OSD [display time]"
+msgstr "OSD [Отображение времени]"
+
+msgid "October"
+msgstr "Октября"
+
+msgid "Offline"
+msgstr "Оффлайн"
+
+msgid "On"
+msgstr "Вкл."
+
+msgid "On+Media+Standby"
+msgstr "On+Media+Standby"
+
+msgid "Online"
+msgstr "Онлайн"
+
+msgid "Online [Ping]"
+msgstr "Онлайн [Пинг]"
+
+msgid "Online+Offline"
+msgstr "Онлайн+Оффлайн"
+
+msgid "Only New"
+msgstr "Только новости"
+
+msgid "Pearl (or compatible LCD) 240x320"
+msgstr "Pearl (or compatible LCD) 240x320"
+
+msgid "Pearl (or compatible LCD) 320x240"
+msgstr "Pearl (or compatible LCD) 320x240"
+
+msgid "Picon"
+msgstr "Пикон"
+
+msgid "Picon 2"
+msgstr "Пикон 2"
+
+msgid "Picon+Position below"
+msgstr "Пикон+позиция ниже"
+
+msgid "Picon+Position left"
+msgstr "Пикон+позиция слева"
+
+msgid "Picon+Position right"
+msgstr "Пикон+позиция справа"
+
+msgid "Picture"
+msgstr "Картинка"
+
+msgid "Picture Changing Time"
+msgstr "Время смены картинок"
+
+msgid "Picture Directory Recursive"
+msgstr "Фото Каталог рекурсивно"
+
+msgid "Picture Quality for Resizing"
+msgstr "Качество изображения для изменения размеров"
+
+msgid "Picture Quick Update Time [s]"
+msgstr "Время обновления картинок [s]"
+
+msgid "Picture Sort"
+msgstr "Сортировка картинок"
+
+msgid "Pop3"
+msgstr "Pop3"
+
+msgid "Pop3-SSL"
+msgstr "Pop3-SSL"
+
+msgid "Popup Text"
+msgstr "Всплывающий текст"
+
+msgid "Popup-Text"
+msgstr "Всплывающий- текст"
+
+msgid "Position"
+msgstr "Позиция"
+
+msgid "Program Info"
+msgstr "Инфо о програме"
+
+msgid "Program Name"
+msgstr "Название передачи"
+
+msgid "Program Number"
+msgstr "Номер канала"
+
+msgid "Progress Bar"
+msgstr "Прогресс бар"
+
+msgid "Provider"
+msgstr "Провайдер"
+
+msgid "Radio"
+msgstr "Радио"
+
+msgid "Radio+Media"
+msgstr "Радио+Медиа"
+
+msgid "Recording"
+msgstr "Запись"
+
+msgid "Rectangle 1"
+msgstr "Прямоугольник 1"
+
+msgid "Rectangle 2"
+msgstr "Прямоугольник 2"
+
+msgid "Reload"
+msgstr "Перезагрузить"
+
+msgid "Restart Displays"
+msgstr "Рестарт дисплея"
+
+msgid "Restart GUI now?"
+msgstr "Перегрузить GUI сейчас?"
+
+msgid "Samsung SPF-105P 1024x600"
+msgstr "Samsung SPF-105P 1024x600"
+
+msgid "Samsung SPF-107H 1024x600"
+msgstr "Samsung SPF-107H 1024x600"
+
+msgid "Samsung SPF-107H old 1024x600"
+msgstr "Samsung SPF-107H alt 1024x600"
+
+msgid "Samsung SPF-700T 800x600"
+msgstr "Samsung SPF-700T 800x600"
+
+msgid "Samsung SPF-72H 800x480"
+msgstr "Samsung SPF-72H 800x480"
+
+msgid "Samsung SPF-75H/76H 800x480"
+msgstr "Samsung SPF-75H/76H 800x480"
+
+msgid "Samsung SPF-83H 800x600"
+msgstr "Samsung SPF-83H 800x600"
+
+msgid "Samsung SPF-85H/86H 800x600"
+msgstr "Samsung SPF-85H/86H 800x600"
+
+msgid "Samsung SPF-85P/86P 800x600"
+msgstr "Samsung SPF-85P/86P 800x600"
+
+msgid "Samsung SPF-87H 800x480"
+msgstr "Samsung SPF-87H 800x480"
+
+msgid "Samsung SPF-87H old 800x480"
+msgstr "Samsung SPF-87H alt 800x480"
+
+msgid "Sat"
+msgstr "Субб."
+
+msgid "Satellite"
+msgstr "Спутник"
+
+msgid "Saturday"
+msgstr "Суббота"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save Config to File... (%s)"
+msgstr "Сохранить конфиг в файл... (%s)"
+
+msgid "Save as Picture for WebIF"
+msgstr "Сохранить как рисунок для WebIF"
+
+msgid "Screen"
+msgstr "Экран"
+
+msgid "Screen 1"
+msgstr "Экран 1"
+
+msgid "Screen 1 Changing Time"
+msgstr "Экран 1-Изменить время"
+
+msgid "Screen 1+2"
+msgstr "Экран 1+2"
+
+msgid "Screen 1+2+3"
+msgstr "Экран 1+2+3"
+
+msgid "Screen 1+2+3+4"
+msgstr "Экран 1+2+3+4"
+
+msgid "Screen 1+2+4"
+msgstr "Экран 1+2+4"
+
+msgid "Screen 1+3"
+msgstr "Экран 1+3"
+
+msgid "Screen 1+3+4"
+msgstr "Экран 1+3+4"
+
+msgid "Screen 1+3+5+7+9"
+msgstr "Экран 1+3+5+7+9"
+
+msgid "Screen 1+4"
+msgstr "Экран 1+4"
+
+msgid "Screen 1-2"
+msgstr "Экран 1-2"
+
+msgid "Screen 1-3"
+msgstr "Экран 1-3"
+
+msgid "Screen 1-4"
+msgstr "Экран 1-4"
+
+msgid "Screen 1-5"
+msgstr "Экран 1-5"
+
+msgid "Screen 1-6"
+msgstr "Экран 1-6"
+
+msgid "Screen 1-7"
+msgstr "Экран 1-7"
+
+msgid "Screen 1-8"
+msgstr "Экран 1-8"
+
+msgid "Screen 1-9"
+msgstr "Экран 1-9"
+
+msgid "Screen 2"
+msgstr "Экран 2"
+
+msgid "Screen 2+3"
+msgstr "Экран 2+3"
+
+msgid "Screen 2+3+4"
+msgstr "Экран 2+3+4"
+
+msgid "Screen 2+4"
+msgstr "Экран 2+4"
+
+msgid "Screen 2+4+6+8"
+msgstr "Экран 2+4+6+8"
+
+msgid "Screen 3"
+msgstr "Экран 3"
+
+msgid "Screen 3+4"
+msgstr "Экран 3+4"
+
+msgid "Screen 4"
+msgstr "Экран 4"
+
+msgid "Screen 5"
+msgstr "Экран 5"
+
+msgid "Screen 5-9"
+msgstr "Экран 5-9"
+
+msgid "Screen 6"
+msgstr "Экран 6"
+
+msgid "Screen 7"
+msgstr "Экран 7"
+
+msgid "Screen 8"
+msgstr "Экран 8"
+
+msgid "Screen 9"
+msgstr "Экран 9"
+
+msgid "Screens used for Changing"
+msgstr "Функция используется для изменения экрана"
+
+msgid "September"
+msgstr "Сентября"
+
+msgid "Short"
+msgstr "Краткий"
+
+msgid "Short (Extended)"
+msgstr "Краткий (Расширенный)"
+
+msgid "Short+Extended"
+msgstr "Краткий+Расширенный"
+
+msgid "Show"
+msgstr "Показать"
+
+msgid "Show Cover"
+msgstr "Показать обложку"
+
+msgid "Show Crash Corner"
+msgstr "Показать Crash Corner"
+
+msgid "Show HTTP Text"
+msgstr "Показать HTTP текст"
+
+msgid "Show Picture"
+msgstr "Показать картинку"
+
+msgid "Show Picture 2"
+msgstr "Показать картинку 2"
+
+msgid "Show Picture 3"
+msgstr "Показать картинку 3"
+
+msgid "Show Picture 4"
+msgstr "Показать картинку 4"
+
+msgid "Show Recording"
+msgstr "Показать запись"
+
+msgid "Show Textfile"
+msgstr "Показать текст. файл"
+
+msgid "Show Textfile 2"
+msgstr "Показать текст. файл 2"
+
+msgid "Show Textfile 3"
+msgstr "Показать текст. файл 3"
+
+msgid "Show ecm.info"
+msgstr "Показать ecm.info"
+
+msgid "Show oscam.lcd"
+msgstr "Показать oscam.lcd"
+
+msgid "Signal Quality Bar"
+msgstr "Уровень сигнала"
+
+msgid "Standby"
+msgstr "Standby"
+
+msgid "Storage-Devices"
+msgstr "Хранение-Устройство"
+
+msgid "Storage-Devices: Force Read"
+msgstr "Хранение-Устройство: Принудит Чтение"
+
+msgid "Stutter TV"
+msgstr "Stutter TV"
+
+msgid "Sun"
+msgstr "Воскр."
+
+msgid "Sunday"
+msgstr "Воскресенье"
+
+msgid "Sunrise"
+msgstr "Восход солнца"
+
+msgid "TV"
+msgstr "TV"
+
+msgid "TV+OSD"
+msgstr "TV+OSD"
+
+msgid "TV+Radio"
+msgstr "TV+Radio"
+
+msgid "TV+Radio+Media"
+msgstr "TV+Радио+Медиа"
+
+msgid "Temperature"
+msgstr "Температура"
+
+msgid "Temperature+Co2"
+msgstr "Температура+Co2"
+
+msgid "Temperature+Co2+Pressure"
+msgstr "Температура+Co2+Давление"
+
+msgid "Threads per LCD"
+msgstr "Threads pro LCD"
+
+msgid "Thur"
+msgstr "Чет"
+
+msgid "Thursday"
+msgstr "Четверг"
+
+msgid "Time"
+msgstr "Время"
+
+msgid "Time+Duration+Info"
+msgstr "Время +Продолжительность+Информация"
+
+msgid "Time+Info"
+msgstr "Время +Информация"
+
+msgid "Time+Length+Info"
+msgstr "Время+Длинна+Инфо"
+
+msgid "Time+Weekday"
+msgstr "Время+День"
+
+msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
+msgstr "Выбор времени! calc all Times to Time/5*2 in Fastmode"
+
+msgid "Title"
+msgstr "Заголовок"
+
+msgid "Tue"
+msgstr "Вт"
+
+msgid "Tuesday"
+msgstr "Вторник"
+
+msgid "Tuner Color"
+msgstr "Цвет тюнера"
+
+msgid "Tuner Color Active"
+msgstr "Цвет активного тюнера"
+
+msgid "Tuner Color On"
+msgstr "Цвет тюнера"
+
+msgid "Underline"
+msgstr "Подчеркивание"
+
+msgid "Underline 2"
+msgstr "Подчеркивание 2"
+
+msgid "Used Tuner"
+msgstr "Используемый тюнер"
+
+msgid "Volume"
+msgstr "Громкость"
+
+msgid "WWW Converter Poll Interval"
+msgstr "WWW Converter Poll Interval"
+
+msgid "WWW-Internet Converter"
+msgstr "WWW-Internet Converter"
+
+msgid "Waning Crescent"
+msgstr "Убывающая луна"
+
+msgid "Waning Gibbous"
+msgstr "Убывающая луна"
+
+msgid "Waxing Crescent"
+msgstr "Растущий серп"
+
+msgid "Waxing Gibbous"
+msgstr "Растущая луна"
+
+msgid "Weather"
+msgstr "Погода"
+
+msgid "Weather 2"
+msgstr "Погода 2"
+
+msgid "Weather City"
+msgstr "Погода-Город"
+
+msgid "Weather City 2"
+msgstr "Погода-Город 2"
+
+msgid "Weather Extra Infos"
+msgstr "Погода-Экстра инфо"
+
+msgid "Weather High Temperature Color"
+msgstr "Высокая температура(погода)-Цвет"
+
+msgid "Weather Lines"
+msgstr "Погода-Линии"
+
+msgid "Weather Low Temperature Color"
+msgstr "Низкая температура(погода)-Цвет"
+
+msgid "Weather Rain Chance"
+msgstr "Возможен дождь"
+
+msgid "Weather Transparency"
+msgstr "Погода-Прозрачность"
+
+msgid "Weather-Icon Zoom"
+msgstr "Погода-Увеличение иконок"
+
+msgid "Weather-Icon-Path [ok]>"
+msgstr "Погода-путь к иконкам [ok]>"
+
+msgid "WebIF IP Allow"
+msgstr "WebIF IP Allow"
+
+msgid "WebIF IP Deny"
+msgstr "WebIF IP Deny"
+
+msgid "WebIF Init Delay"
+msgstr "WebIF Init Delay"
+
+msgid "WebIF Refresh Type"
+msgstr "WebIF тип обновления"
+
+msgid "WebIF Refresh [s]"
+msgstr "WebIF обновление [s]"
+
+msgid "Wed"
+msgstr "Ср."
+
+msgid "Wednesday"
+msgstr "Среда"
+
+msgid "Week"
+msgstr "Неделя"
+
+msgid "Week+Header"
+msgstr "Неделя+Заголовок"
+
+msgid "alphabetic"
+msgstr "По алфавиту"
+
+msgid "alternative Copy-Mode/DM800hd (24bit)"
+msgstr "alternative Copy-Mode/DM800hd (24bit)"
+
+msgid "always"
+msgstr "всегда"
+
+msgid "aquamarine"
+msgstr "aquamarine"
+
+msgid "better/slow"
+msgstr "лучше/медленная"
+
+msgid "black"
+msgstr "черный"
+
+msgid "blue"
+msgstr "синий"
+
+msgid "blueviolet"
+msgstr "blauviolett"
+
+msgid "brown"
+msgstr "коричневый"
+
+msgid "cadetblue"
+msgstr "cadetblue"
+
+msgid "center"
+msgstr "центр"
+
+msgid "copy to Idle"
+msgstr "копировать в фоне"
+
+msgid "copy to Media"
+msgstr "копировать в медиа"
+
+msgid "copy to On"
+msgstr "copy to On"
+
+msgid "cornflowerblue"
+msgstr "cornflowerblue"
+
+msgid "currently set : %s"
+msgstr "настоящее время установлен : %s"
+
+msgid "cyan"
+msgstr "голубой"
+
+msgid "darkblue"
+msgstr "темносиний"
+
+msgid "darkgreen"
+msgstr "темнозеленый"
+
+msgid "darkorange"
+msgstr "темнооранжевый"
+
+msgid "darkorchid"
+msgstr "dunkelorchidee"
+
+msgid "darkred"
+msgstr "dunkelrot"
+
+msgid "db"
+msgstr "db"
+
+msgid "db + %"
+msgstr "db + %"
+
+msgid "db + % + BER"
+msgstr "db + % + BER"
+
+msgid "db + BER"
+msgstr "db + BER"
+
+msgid "deeppink"
+msgstr "deeppink"
+
+msgid "deleted"
+msgstr "удаленный"
+
+msgid "disabled"
+msgstr "выключен"
+
+msgid "full Screen"
+msgstr "во весь экран"
+
+msgid "gold"
+msgstr "золотой"
+
+msgid "gray"
+msgstr "серый"
+
+msgid "green"
+msgstr "зеленый"
+
+msgid "greenyellow"
+msgstr "greenyellow"
+
+msgid "half left"
+msgstr "левая половина"
+
+msgid "half right"
+msgstr "правая половина"
+
+msgid "horizontally"
+msgstr "горизонтально"
+
+msgid "indianred"
+msgstr "indianrot"
+
+msgid "indigo"
+msgstr "indigo"
+
+msgid "lawngreen"
+msgstr "lawngreen"
+
+msgid "left"
+msgstr "слева"
+
+msgid "lightblue"
+msgstr "светло-синий"
+
+msgid "lightgreen"
+msgstr "светло-зеленый"
+
+msgid "lime"
+msgstr "лайм"
+
+msgid "low/fast (Picture only)"
+msgstr "низкий/быстрый (Только изображения)"
+
+msgid "low/fast (all)"
+msgstr "низкий/быстрый (Все)"
+
+msgid "magenta"
+msgstr "пурпурный"
+
+msgid "moccasin"
+msgstr "moccasin"
+
+msgid "no"
+msgstr "нет"
+
+msgid "no Calendar"
+msgstr "нет календаря"
+
+msgid "no Dates"
+msgstr "нет даты"
+
+msgid "no Icon"
+msgstr "kein Icon"
+
+msgid "no LCD1 Picture-File"
+msgstr "no LCD1 Picture-File"
+
+msgid "no LCD2 Picture-File"
+msgstr "no LCD2 Picture-File"
+
+msgid "no LCD3 Picture-File"
+msgstr "keine LCD3 Bild-Datei"
+
+msgid "no Netatmo-Plugin installed"
+msgstr "Netatmo-Plugin не установлен"
+
+msgid "no Timer"
+msgstr "нет таймера"
+
+msgid "normal (full)"
+msgstr "нормальный (полный)"
+
+msgid "off"
+msgstr "выкл."
+
+msgid "olive"
+msgstr "оливковый"
+
+msgid "on"
+msgstr "вкл."
+
+msgid "only Picture 1024x600"
+msgstr "только фото 1024x600"
+
+msgid "only Picture 320x240"
+msgstr "только фото 320x240"
+
+msgid "only Picture 800x480"
+msgstr "только фото 800x480"
+
+msgid "only Picture 800x600"
+msgstr "только фото 800x600"
+
+msgid "only Picture Custom Size"
+msgstr "только фото своего размера"
+
+msgid "only Progress Bar"
+msgstr "только прогресс-бар"
+
+msgid "only use Timer"
+msgstr "использовать только таймер"
+
+msgid "orange"
+msgstr "оранжевый"
+
+msgid "orangered"
+msgstr "orangered"
+
+msgid "other"
+msgstr "прочие"
+
+msgid "random"
+msgstr "случайно"
+
+msgid "red"
+msgstr "красный"
+
+msgid "right"
+msgstr "справа"
+
+msgid "rosybrown"
+msgstr "rosigbraun"
+
+msgid "rpm"
+msgstr "rpm"
+
+msgid "rpm/2"
+msgstr "rpm/2"
+
+msgid "sandybrown"
+msgstr "sandbraun"
+
+msgid "set Settings"
+msgstr "меню Настройки"
+
+msgid "show run"
+msgstr "показать запущенные"
+
+msgid "show run+sleep"
+msgstr "показать запущенные+sleep"
+
+msgid "silver"
+msgstr "серебро"
+
+msgid "slategray"
+msgstr "сланец серый"
+
+msgid "stop Screencycle"
+msgstr "Schirmwechsel anhalten"
+
+msgid "tomato"
+msgstr "tomato"
+
+msgid "trimmed (black)"
+msgstr "обрезается (черный)"
+
+msgid "trimmed (transparent)"
+msgstr "обрезается (прозрачный)"
+
+msgid "use lead-time"
+msgstr "Использовать время"
+
+msgid "vertically"
+msgstr "вертикально"
+
+msgid "violet"
+msgstr "фиолетовый"
+
+msgid "white"
+msgstr "белый"
+
+msgid "with Current 00:00"
+msgstr "от текущего"
+
+msgid "with Current 00:00 (Size 1.5)"
+msgstr "от текущего 00:00 (размер 1.5)"
+
+msgid "with Current 00:00 (Size 2)"
+msgstr "от текущего 00:00 (размер 2)"
+
+msgid "with Current 00:00 (above)"
+msgstr "от текущего 00:00 (выше)"
+
+msgid "with Current 00:00 (above/Size 1.5)"
+msgstr "with Current 00:00 (above/Size 1.5)"
+
+msgid "with Current 00:00 (above/Size 2)"
+msgstr "with Current 00:00 (above/Size 2)"
+
+msgid "with Current 00:00 (below)"
+msgstr "with Current 00:00 (below)"
+
+msgid "with Current 00:00 (below/Size 1.5)"
+msgstr "with Current 00:00 (below/Size 1.5)"
+
+msgid "with Current 00:00 (below/Size 2)"
+msgstr "with Current 00:00 (below/Size 2)"
+
+msgid "with Icon"
+msgstr "mit Icon"
+
+msgid "with Percent"
+msgstr "вместе с процентами"
+
+msgid "with Percent (Size 1.5)"
+msgstr "вместе с процентами (Размер 1.5)"
+
+msgid "with Percent (Size 2)"
+msgstr "вместе с процентами (Размер 2)"
+
+msgid "with Percent (above)"
+msgstr "вместе с процентами (см. выше)"
+
+msgid "with Percent (above/Size 1.5)"
+msgstr "with Percent (above/Size 1.5)"
+
+msgid "with Percent (above/Size 2)"
+msgstr "with Percent (above/Size 2)"
+
+msgid "with Percent (below)"
+msgstr "with Percent (below)"
+
+msgid "with Percent (below/Size 1.5)"
+msgstr "with Percent (below/Size 1.5)"
+
+msgid "with Percent (below/Size 2)"
+msgstr "with Percent (below/Size 2)"
+
+msgid "with Remaining Minutes"
+msgstr "with Remaining Minutes"
+
+msgid "with Remaining Minutes (Size 1.5)"
+msgstr "вместе с оставшиеся минуты (размер 1,5)"
+
+msgid "with Remaining Minutes (Size 2)"
+msgstr "вместе с оставшиеся минуты (размер 2)"
+
+msgid "with Remaining Minutes (above)"
+msgstr "вместе с оставшиеся минуты (см.выше)"
+
+msgid "with Remaining Minutes (above/Size 1.5)"
+msgstr "with Remaining Minutes (above/Size 1.5)"
+
+msgid "with Remaining Minutes (above/Size 2)"
+msgstr "with Remaining Minutes (above/Size 2)"
+
+msgid "with Remaining Minutes (below)"
+msgstr "with Remaining Minutes (below)"
+
+msgid "with Remaining Minutes (below/Size 1.5)"
+msgstr "with Remaining Minutes (below/Size 1.5)"
+
+msgid "with Remaining Minutes (below/Size 2)"
+msgstr "with Remaining Minutes (below/Size 2)"
+
+msgid "yellow"
+msgstr "желтый"
+
+msgid "yes"
+msgstr "да"
+
+msgid "yes (32bit)"
+msgstr "да (32bit)"
+
+msgid "yes + %"
+msgstr "да + %"
+
+msgid "yes +25%"
+msgstr "да +25%"
+
+msgid "yes except records"
+msgstr "да, за исключением записей"
+
+msgid "yes, extended"
+msgstr "да, продлен"
+
+msgid "yes, long"
+msgstr "да, долго"
+
+msgid "yes, short"
+msgstr "да, коротко"

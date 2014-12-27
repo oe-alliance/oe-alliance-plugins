@@ -1,0 +1,80 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: LCD4linux\n"
+"Language: es\n"
+
+msgid "0"
+msgstr ""
+
+msgid "aquamarine"
+msgstr "aguamarina"
+
+msgid "black"
+msgstr "negro"
+
+msgid "blue"
+msgstr "azul"
+
+msgid "blueviolet"
+msgstr "azulvioleta"
+
+msgid "darkgreen"
+msgstr "verdeoscuro"
+
+msgid "darkorange"
+msgstr "naranjaoscuro"
+
+msgid "darkred"
+msgstr "rojooscuro"
+
+msgid "gold"
+msgstr "dorado"
+
+msgid "gray"
+msgstr "gris"
+
+msgid "green"
+msgstr "verde"
+
+msgid "greenyellow"
+msgstr "verdeamarillo"
+
+msgid "indianred"
+msgstr "pielroja"
+
+msgid "lawngreen"
+msgstr "verdecésped"
+
+msgid "lightgreen"
+msgstr "verdeclaro"
+
+msgid "lime"
+msgstr "lima"
+
+msgid "orange"
+msgstr "naranja"
+
+msgid "orangered"
+msgstr "rojoanaranjado"
+
+msgid "red"
+msgstr "rojo"
+
+msgid "silver"
+msgstr "plateado"
+
+msgid "slategray"
+msgstr "grispizarra"
+
+msgid "tomato"
+msgstr "tomate"
+
+msgid "white"
+msgstr "blanco"
+
+msgid "yellow"
+msgstr "amarillo"

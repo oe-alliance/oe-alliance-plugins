@@ -1,18 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: LCD4linux\n"
-"POT-Creation-Date: 2014-11-20 10:46+Mitteleuropäische Zeit\n"
-"PO-Revision-Date: 2014-11-20 10:47+0100\n"
-"Last-Translator: joergm6 <joergm6@online.de>\n"
-"Language-Team: \n"
-"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: LCD4linux\n"
+"Language: sk\n"
 
 msgid "%"
 msgstr "%"
@@ -27,331 +20,331 @@ msgid "% + Load@5min"
 msgstr "% + Load@5min"
 
 msgid "%d Mails  %d New  %s"
-msgstr "%d Mails  %d Neu  %s"
+msgstr "%d Správ  %d Nové  %s"
 
 msgid "%s - Current value: %s"
-msgstr "%s - Aktueller Wert: %s"
+msgstr "%s - Aktuálna hodnota: %s"
 
 msgid "-  Type"
 msgstr "-  Typ"
 
 msgid "- Alignment"
-msgstr "- Ausrichtung"
+msgstr "- Zarovnanie"
 
 msgid "- Analog Clock"
-msgstr "- Analog Uhr"
+msgstr "- Analogové Hodiny"
 
 msgid "- Background Color"
-msgstr "- Hintergrund Farbe"
+msgstr "- Farba pozadia"
 
 msgid "- Background/Transparency"
-msgstr "- Hintergrund/Transparenz"
+msgstr "- Pozadie/Priehľadnosť"
 
 msgid "- Backlight Off [disable set Off=On]"
-msgstr "- Hintergrundbeleuchtung Aus [deaktiv bei Aus=Ein]"
+msgstr "- Podsvietenie vyp. [ Zap.=Vyp.]"
 
 msgid "- Backlight On"
-msgstr "- Hintergrundbeleuchtung Ein"
+msgstr "- Podsvietenie zap."
 
 msgid "- Backlight Weekend Off [disable set Off=On]"
-msgstr "- Hintergrundbeleuchtung Wochenende Aus [deaktiv bei Aus=Ein]"
+msgstr "- Podsvietenie cez víkend vyp. [ Zap.=Vyp.]"
 
 msgid "- Backlight Weekend On"
-msgstr "- Hintergrundbeleuchtung Wochenende Ein"
+msgstr "- Podsvietenie cez víkend zap."
 
 msgid "- Bar Range Max"
-msgstr "- Bar Bereich Max"
+msgstr "- Bar rozsah Max"
 
 msgid "- Bar Range Min"
-msgstr "- Bar Bereich Min"
+msgstr "- Bar rozsah Min"
 
 msgid "- Base"
-msgstr "- Basis"
+msgstr "- Základ"
 
 msgid "- CPU"
 msgstr "- CPU"
 
 msgid "- Caption Color"
-msgstr "- Beschriftung Farbe"
+msgstr "- farba titulku"
 
 msgid "- Color"
-msgstr "- Farbe"
+msgstr "- Farba"
 
 msgid "- Current Day Background Color"
-msgstr "- Aktueller Tag Hintergrund Farbe"
+msgstr "- Farba pozadia aktuálneho dňa"
 
 msgid "- Cut Height [disable = 0]"
-msgstr "- Ausschneiden Höhe [deaktiviert = 0]"
+msgstr "- výška orezania [vyp. = 0]"
 
 msgid "- Cut Width [disable = 0]"
-msgstr "- Ausschneiden Breite [deaktiviert = 0]"
+msgstr "- šírka orezania [vyp. = 0]"
 
 msgid "- Cut from X"
-msgstr "- Ausschneiden ab X"
+msgstr "- orezanie z X"
 
 msgid "- Cut from Y"
-msgstr "- Ausschneiden ab Y"
+msgstr "- orezanie z Y"
 
 msgid "- Default Cover [ok]>"
-msgstr "- Standard Cover [ok]>"
+msgstr "- predvolená obálka [ok]>"
 
 msgid "- Device Name"
-msgstr "- Geräte Name"
+msgstr "- meno zariadenia"
 
 msgid "- Download Cover from Google"
-msgstr "- Download Cover von Google"
+msgstr "- stiahnuť obálku z Googla"
 
 msgid "- Extra Color Chill"
-msgstr "- Extra Farbe Gefühlte"
+msgstr "- Extra farba ochladenia"
 
 msgid "- Extra Color City"
-msgstr "- Extra Farbe Stadt"
+msgstr "- Extra farba mesta"
 
 msgid "- Extra Zoom"
-msgstr "- Extra Zoom"
+msgstr "- Extra zväčšenie"
 
 msgid "- Fast Grab lower quality"
-msgstr "- schnelles Grab niedrige Qualität"
+msgstr "- rýchly snímok nízkej kvality"
 
 msgid "- File [ok]>"
-msgstr "- Datei [ok]>"
+msgstr "- súbor [ok]>"
 
 msgid "- File or Path [ok]>"
-msgstr "- Datei oder Verzeichnis [ok]>"
+msgstr "- súbor alebo cesta [ok]>"
 
 msgid "- Font"
-msgstr "- Zeichensatz"
+msgstr "- písmo"
 
 msgid "- Font Size"
-msgstr "- Zeichen Größe"
+msgstr "- veľkosť písma"
 
 msgid "- Full Screen"
-msgstr "- Vollbild"
+msgstr "- celá obrazovka"
 
 msgid "- Gradient"
-msgstr "- Verlauf"
+msgstr "- spád"
 
 msgid "- HTTP Height"
-msgstr "- HTTP Höhe"
+msgstr "- HTTP výška"
 
 msgid "- HTTP Width"
-msgstr "- HTTP Breite"
+msgstr "- HTTP šírka"
 
 msgid "- LCD 1 Background Color"
-msgstr "- LCD 1 Hintergrund Farbe"
+msgstr "- LCD 1 farba pozadia"
 
 msgid "- LCD 1 Background-Picture [ok]>"
-msgstr "- LCD 1 Hintergrund-Bild [ok]>"
+msgstr "- LCD 1 obrázok pozadia [ok]>"
 
 msgid "- LCD 1 Brightness"
-msgstr "- LCD 1 Helligkeit"
+msgstr "- LCD 1 Jas"
 
 msgid "- LCD 1 Night Reduction"
-msgstr "- LCD 1 Nachtabsenkung"
+msgstr "- LCD 1 Nočná redukcia"
 
 msgid "- LCD 1 Refresh"
-msgstr "- LCD 1 Aktualisierung"
+msgstr "- LCD 1 obnova"
 
 msgid "- LCD 1 Rotate"
-msgstr "- LCD 1 Drehung"
+msgstr "- LCD 1 otočiť"
 
 msgid "- LCD 2 Background Color"
-msgstr "- LCD 2 Hintergrund Farbe"
+msgstr "- LCD 2 farba pozadia"
 
 msgid "- LCD 2 Background-Picture [ok]>"
-msgstr "- LCD 2 Hintergrund-Bild [ok]>"
+msgstr "- LCD 2 obrázok pozadia [ok]>"
 
 msgid "- LCD 2 Brightness"
-msgstr "- LCD 2 Helligkeit"
+msgstr "- LCD 2 Jas"
 
 msgid "- LCD 2 Night Reduction"
-msgstr "- LCD 2 Nachtabsenkung"
+msgstr "- LCD 2 Nočná redukcia"
 
 msgid "- LCD 2 Refresh"
-msgstr "- LCD 2 Aktualisierung"
+msgstr "- LCD 2 obnova"
 
 msgid "- LCD 2 Rotate"
-msgstr "- LCD 2 Drehung"
+msgstr "- LCD 2 otočiť"
 
 msgid "- LCD 3 Background Color"
-msgstr "- LCD 3 Hintergrund Farbe"
+msgstr "- LCD 3 farba pozadia"
 
 msgid "- LCD 3 Background-Picture [ok]>"
-msgstr "- LCD 3 Hintergrund-Bild [ok]>"
+msgstr "- LCD 3 obrázok pozadia [ok]>"
 
 msgid "- LCD 3 Brightness"
-msgstr "- LCD 3 Helligkeit"
+msgstr "- LCD 3 Jas"
 
 msgid "- LCD 3 Night Reduction"
-msgstr "- LCD 3 Nachtabsenkung"
+msgstr "- LCD 3 Nočná redukcia"
 
 msgid "- LCD 3 Refresh"
-msgstr "- LCD 3 Aktualisierung"
+msgstr "- LCD 3 obnova"
 
 msgid "- LCD 3 Rotate"
-msgstr "- LCD 3 Drehung"
+msgstr "- LCD 3 otočiť"
 
 msgid "- Layout"
-msgstr "- Layout"
+msgstr "- rozmiestnenie"
 
 msgid "- Length"
-msgstr "- Länge"
+msgstr "- dĺžka"
 
 msgid "- Length [Bar]"
-msgstr "- Länge [Balken]"
+msgstr "- dĺžka [Bar]"
 
 msgid "- Lines"
-msgstr "- Zeilen"
+msgstr "- riadky"
 
 msgid "- Mail Konto"
-msgstr "- Mail Konto"
+msgstr "- e-mailové konto"
 
 msgid "- Module"
 msgstr "- Modul"
 
 msgid "- Name"
-msgstr "- Name"
+msgstr "- Meno"
 
 msgid "- OSD Size"
-msgstr "- OSD Größe"
+msgstr "- veľkosť OSD"
 
 msgid "- Online Name:Address"
-msgstr "- Online Name:Adresse"
+msgstr "- sieťové meno :Adresa"
 
 msgid "- Picon Cache Path [ok]>"
-msgstr "- Picon Cache Verz. [ok]>"
+msgstr "- Picon Cache cesta [ok]>"
 
 msgid "- Picon First"
-msgstr "- Picon zuerst"
+msgstr "- najprv Picon"
 
 msgid "- Picon Path 2 [ok]>"
-msgstr "- Picon Verzeichnis 2 [ok]>"
+msgstr "- Picon cesta 2 [ok]>"
 
 msgid "- Picon Path [ok]>"
-msgstr "- Picon Verzeichnis [ok]>"
+msgstr "- Picon cesta [ok]>"
 
 msgid "- Picon Size"
-msgstr "- Picon Größe"
+msgstr "- Picon veľkosť"
 
 msgid "- Picture Alignment"
-msgstr "- Bild Ausrichtung"
+msgstr "- zarovnanie obrázka"
 
 msgid "- Picture Position"
-msgstr "- Bild Position"
+msgstr "- umiestnenie obrázka"
 
 msgid "- Picture Size"
-msgstr "- Bild Größe"
+msgstr "- veľkosť obrázka"
 
 msgid "- Popup LCD"
-msgstr "- Popup LCD"
+msgstr "- vyskakovacie LCD"
 
 msgid "- Popup Screen"
-msgstr "- Popup Schirm"
+msgstr "- vyskakovacia obrazovka"
 
 msgid "- Position"
-msgstr "- Position"
+msgstr "- umiestnenie"
 
 msgid "- Position x"
-msgstr "- Position x"
+msgstr "- pozícia x"
 
 msgid "- Position y"
-msgstr "- Position y"
+msgstr "- pozícia y"
 
 msgid "- Quick Update"
-msgstr "- Quick Aktualisierung"
+msgstr "- rýchla aktualizácia"
 
 msgid "- Rain Color"
-msgstr "- Regen Farbe"
+msgstr "- farba dažďa"
 
 msgid "- Rain Color 2"
-msgstr "- Regen Farbe 2"
+msgstr "- farba dažďa 2"
 
 msgid "- Rain Zoom"
-msgstr "- Regen Zoom"
+msgstr "- zväčšenie dažďa"
 
 msgid "- Rain use Color 2 from"
-msgstr "- Regen verwende Farbe 2 ab"
+msgstr "- dážď používa farbu 2 z"
 
 msgid "- Screen 2 Changing Time"
-msgstr "- Schirm 2 Wechselzeit"
+msgstr "- čas zmeny obrazovky 2"
 
 msgid "- Screen 3 Changing Time"
-msgstr "- Schirm 3 Wechselzeit"
+msgstr "- čas zmeny obrazovky 3"
 
 msgid "- Screen 4 Changing Time"
-msgstr "- Schirm 4 Wechselzeit"
+msgstr "- čas zmeny obrazovky 4"
 
 msgid "- Screen 5 Changing Time"
-msgstr "- Schirm 5 Wechselzeit"
+msgstr "- čas zmeny obrazovky 5"
 
 msgid "- Screen 6 Changing Time"
-msgstr "- Schirm 6 Wechselzeit"
+msgstr "- čas zmeny obrazovky 6"
 
 msgid "- Screen 7 Changing Time"
-msgstr "- Schirm 7 Wechselzeit"
+msgstr "- čas zmeny obrazovky 7"
 
 msgid "- Screen 8 Changing Time"
-msgstr "- Schirm 8 Wechselzeit"
+msgstr "- čas zmeny obrazovky 8"
 
 msgid "- Screen 9 Changing Time"
-msgstr "- Schirm 9 Wechselzeit"
+msgstr "- čas zmeny obrazovky 9"
 
 msgid "- Screens used for Changing"
-msgstr "- Benutzte Schirme zum Wechsel"
+msgstr "- použité obrazovky na výmenu"
 
 msgid "- Search Path [ok]>"
-msgstr "- Suche im Verzeichnis [ok]>"
+msgstr "- prehľadávaná cesta [ok]>"
 
 msgid "- Sensors"
-msgstr "- Sensoren"
+msgstr "- snímače"
 
 msgid "- Shaded"
-msgstr "- Schattiert"
+msgstr "- tieňované"
 
 msgid "- Shadow Edges"
-msgstr "- Schattenkanten"
+msgstr "- hrany tieňa"
 
 msgid "- Show State"
-msgstr "- Zeige Status"
+msgstr "- zobraz stav"
 
 msgid "- Show chill temperature from difference"
-msgstr "- Zeige gefühlte Temperatur ab Differenz"
+msgstr "- zobraz teplotu ochladenia ak je rozdiel"
 
 msgid "- Show in Mode"
-msgstr "- Zeige im Modus"
+msgstr "- zobraz v móde"
 
 msgid "- Size"
-msgstr "- Größe"
+msgstr "- veľkosť"
 
 msgid "- Size max Height"
-msgstr "- Größe max Höhe"
+msgstr "- max výška"
 
 msgid "- Size x"
-msgstr "- Größe x"
+msgstr "- veľkosť x"
 
 msgid "- Size y"
-msgstr "- Größe y"
+msgstr "- veľkosť y"
 
 msgid "- Spacing"
-msgstr "- Abstand"
+msgstr "- rozstup"
 
 msgid "- Split Screen"
-msgstr "- Geteilter Schirm"
+msgstr "- rozdelená obrazovka"
 
 msgid "- Station"
-msgstr "- Station"
+msgstr "- Stanica"
 
 msgid "- Text Size"
-msgstr "- Zeichen Größe"
+msgstr "- veľkosť textu"
 
 msgid "- Timeout [ms]"
-msgstr "- Timeout [ms]"
+msgstr "- čas vypršania [ms]"
 
 msgid "- Transparency"
-msgstr "- Transparenz"
+msgstr "- priehľadnosť"
 
 msgid "- Tunerinfo"
-msgstr "- Tunerinfo"
+msgstr "- Tuner nfo"
 
 msgid "- Type"
 msgstr "- Typ"
@@ -360,58 +353,52 @@ msgid "- URL"
 msgstr "- URL"
 
 msgid "- Weather Type"
-msgstr "- Wetter Typ"
+msgstr "- typ počasia"
 
 msgid "- Zoom"
-msgstr "- Zoom"
+msgstr "- zväčšenie"
 
 msgid "- extra Info"
 msgstr "- extra Info"
 
 msgid "- free Warning"
-msgstr "- frei Warnung"
+msgstr "- bez varovania"
 
 msgid "- max Width"
-msgstr "- max Breite"
+msgstr "- max šírka"
 
 msgid "- maximum Lines"
-msgstr "- maximale Zeilen"
+msgstr "- maximum riadkov"
 
 msgid "- only active Tuner"
-msgstr "- nur aktive Tuner"
+msgstr "- len aktívny tuner"
 
 msgid "- which LCD"
-msgstr "- welches LCD"
+msgstr "- ktoré LCD"
 
-msgid "0"
-msgstr "0"
+msgid "101"
+msgstr "101"
 
 msgid "0.5"
 msgstr "0.5"
 
-msgid "001"
-msgstr "001"
-
 msgid "011"
 msgstr "011"
-
-msgid "020"
-msgstr "020"
 
 msgid "021"
 msgstr "021"
 
-msgid "1"
-msgstr "1"
+msgid "110"
+msgstr "110"
 
 msgid "1 - normal"
-msgstr "1 - normal"
+msgstr "1 - normalne"
 
 msgid "1 / min"
 msgstr "1 / min"
 
 msgid "1-2"
-msgstr "1-2"
+msgstr "1"
 
 msgid "1-3"
 msgstr "1-3"
@@ -422,17 +409,11 @@ msgstr "1-4"
 msgid "1-5"
 msgstr "1-5"
 
-msgid "10"
-msgstr "10"
-
 msgid "10%"
-msgstr "10%"
+msgstr "10"
 
 msgid "100%"
 msgstr "100%"
-
-msgid "101"
-msgstr "101"
 
 msgid "10min"
 msgstr "10min"
@@ -440,23 +421,8 @@ msgstr "10min"
 msgid "10s"
 msgstr "10s"
 
-msgid "110"
-msgstr "110"
-
-msgid "111"
-msgstr "111"
-
-msgid "128x32"
-msgstr "128x32"
-
-msgid "128x64"
-msgstr "128x64"
-
 msgid "132x64"
 msgstr "132x64"
-
-msgid "14"
-msgstr "14"
 
 msgid "15%"
 msgstr "15%"
@@ -467,50 +433,44 @@ msgstr "15min"
 msgid "15s"
 msgstr "15s"
 
-msgid "180"
-msgstr "180"
-
 msgid "1min"
 msgstr "1min"
 
-msgid "2"
-msgstr "2"
+msgid "111"
+msgstr "111"
 
 msgid "2 - side by side"
-msgstr "2 - nebeneinander"
+msgstr "2 - bok po boku"
 
 msgid "2 Days 1 Line"
-msgstr "2 Tage 1 Zeile"
+msgstr "2 dni 1 riadok"
 
 msgid "2 Days 2 Line"
-msgstr "2 Tage 2 Zeilen"
+msgstr "2 dni 2 riadky"
 
 msgid "2 x FastBackwardKey"
-msgstr "2 x RückSpulTaste"
+msgstr "2 x rýchlospäť tlačidlo"
 
 msgid "2 x FastBackwardKey Type 2"
-msgstr "2 x RückSpulTaste Typ 2"
+msgstr "2 x Rýchlo späť tlačítko Typ 2"
 
 msgid "2 x FastForwardKey"
-msgstr "2 x VorSpulTaste"
+msgstr "2 x rýchlo vred tlačidlo"
 
 msgid "2 x FastForwardKey Type 2"
-msgstr "2 x VorSpulTaste Typ 2"
+msgstr "2 x rýchlo vred tlačidlo typ 2"
 
 msgid "2 x InfoKey"
-msgstr "2 x InfoTaste"
+msgstr "2 x Info tlačidlo"
 
 msgid "2 x Mute"
-msgstr "2 x Mute"
+msgstr "2 x stlmiť zvuk"
 
 msgid "2%"
-msgstr "2%"
-
-msgid "20"
-msgstr "20"
+msgstr "2"
 
 msgid "20%"
-msgstr "20%"
+msgstr "20"
 
 msgid "20min"
 msgstr "20min"
@@ -527,23 +487,17 @@ msgstr "25%"
 msgid "255x64"
 msgstr "255x64"
 
-msgid "270"
-msgstr "270"
-
 msgid "2min"
 msgstr "2min"
 
-msgid "3"
-msgstr "3"
+msgid "0"
+msgstr "0"
 
 msgid "3%"
-msgstr "3%"
-
-msgid "30"
-msgstr "30"
+msgstr "3"
 
 msgid "30%"
-msgstr "30%"
+msgstr "30"
 
 msgid "30min"
 msgstr "30min"
@@ -552,7 +506,7 @@ msgid "30s"
 msgstr "30s"
 
 msgid "32bit - color"
-msgstr "32bit - Farbe"
+msgstr "32bit - farba"
 
 msgid "35%"
 msgstr "35%"
@@ -560,17 +514,17 @@ msgstr "35%"
 msgid "3min"
 msgstr "3min"
 
-msgid "4"
-msgstr "4"
+msgid "180"
+msgstr "180"
 
 msgid "4 Days 1 Line"
-msgstr "4 Tage 1 Zeile"
+msgstr "4 dni 1 riadok"
 
 msgid "4 Days 2 Lines"
-msgstr "4 Tage 2 Zeilen"
+msgstr "4 dni 2 riadky"
 
 msgid "4 Days Vertical View"
-msgstr "4 Tage Vertikale Ansicht"
+msgstr "4 dni zvislý pohľad"
 
 msgid "40%"
 msgstr "40%"
@@ -587,20 +541,20 @@ msgstr "45%"
 msgid "4min"
 msgstr "4min"
 
-msgid "5"
-msgstr "5"
+msgid "270"
+msgstr "270"
 
 msgid "5 Days 1 Line"
-msgstr "5 Tage 1 Zeile"
+msgstr "5 dní 1 riadok"
 
 msgid "5 Days 2 Lines"
-msgstr "5 Tage 2 Zeilen"
+msgstr "5 dní 2 riadky"
 
 msgid "5 Days Vertical View"
-msgstr "5 Tage Vertikale Ansicht"
+msgstr "5 dní zvislý pohľad"
 
 msgid "5%"
-msgstr "5%"
+msgstr "5"
 
 msgid "50%"
 msgstr "50%"
@@ -626,9 +580,6 @@ msgstr "60min"
 msgid "65%"
 msgstr "65%"
 
-msgid "7"
-msgstr "7"
-
 msgid "70%"
 msgstr "70%"
 
@@ -642,13 +593,10 @@ msgid "85%"
 msgstr "85%"
 
 msgid "8bit - grayscale/color"
-msgstr "8bit - Graustufen/Farbe"
-
-msgid "90"
-msgstr "90"
+msgstr "8bit - čb/farba"
 
 msgid "90%"
-msgstr "90%"
+msgstr "90"
 
 msgid "95%"
 msgstr "95%"
@@ -657,31 +605,31 @@ msgid "96x64"
 msgstr "96x64"
 
 msgid "Active Screen"
-msgstr "Aktiver Schirm"
+msgstr "aktívna obrazovka"
 
 msgid "All"
-msgstr "Alles"
+msgstr "všetko"
 
 msgid "Always All"
-msgstr "Immer Alle"
+msgstr "vždy všetko"
 
 msgid "Always New"
-msgstr "Immer Neue"
+msgstr "vždy nové"
 
 msgid "Analog"
-msgstr "Analog"
+msgstr "analógové"
 
 msgid "Analog+Date"
-msgstr "Analog+Datum"
+msgstr "analógové+dátum"
 
 msgid "Analog+Date+Weekday"
-msgstr "Analog+Datum+Wochentag"
+msgstr "analógové+dátum+deň týždňa"
 
 msgid "Analog+Date+Weekday 2"
-msgstr "Analog+Datum+Wochentag 2"
+msgstr "analógové+dátum+deň týždňa 2"
 
 msgid "April"
-msgstr "April"
+msgstr "Apríl"
 
 msgid "Audio/Video"
 msgstr "Audio/Video"
@@ -690,16 +638,16 @@ msgid "August"
 msgstr "August"
 
 msgid "Background-Picture Type"
-msgstr " Hintergrund-Bild Typ"
+msgstr "Typ obrázka pozadia"
 
 msgid "Backup Config"
-msgstr "Sicherung der Einstellungen"
+msgstr "Záloha cfg"
 
 msgid "Bar"
-msgstr "Balken"
+msgstr "Stĺpec"
 
 msgid "Bar+Value"
-msgstr "Balken+Wert"
+msgstr "Stĺpec+hodnota"
 
 msgid "Bitrate"
 msgstr "Bitrate"
@@ -708,302 +656,290 @@ msgid "Box-Skin-LCD"
 msgstr "Box-Skin-LCD"
 
 msgid "Box-Skin-LCD Color"
-msgstr "Box-Skin-LCD Farbe"
+msgstr "Box-Skin-LCD Farba"
 
 msgid "Box-Skin-LCD Dimension"
-msgstr "Box-Skin-LCD Größe"
+msgstr "Box-Skin-LCD rozmery"
 
 msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "Box-Skin-LCD Aktiviere Idle-Mode"
+msgstr "Box-Skin-LCD povoliť čakací mód"
 
 msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "Box-Skin-LCD Aktiviere Media-Mode"
+msgstr "Box-Skin-LCD povoliť média mód"
 
 msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "Box-Skin-LCD Aktiviere On-Mode"
+msgstr "Box-Skin-LCD povoliť zap. mód"
 
 msgid "C"
 msgstr "C"
 
 msgid "C + rpm"
-msgstr "C + rpm"
+msgstr "C + otáčky"
 
 msgid "C + rpm/2"
-msgstr "C + rpm/2"
+msgstr "C + otáčky/2"
 
 msgid "Calendar"
-msgstr "Kalender"
+msgstr "Kalendár"
 
 msgid "Calendar Day Event Preview"
-msgstr "Kalender Tage Ereignisvorschau"
+msgstr "Kalendár denny prehľad"
 
 msgid "Calendar Line Thickness"
-msgstr "Kalender Linienstärke"
+msgstr "Kalendár hrúbka čiary"
 
 msgid "Calendar Poll Interval"
-msgstr "Kalender Abruf Interval"
+msgstr "Kalendár čas obnovy"
 
 msgid "Calendar Saturday Color"
-msgstr "Kalender Samstag Farbe"
+msgstr "Kalendár farba soboty"
 
 msgid "Calendar Sunday Color"
-msgstr "Kalender Sonntag Farbe"
+msgstr "Kalendár farba nedele"
 
 msgid "Calendar Timezone Correction"
-msgstr "Kalender Zeitzone Korrektur"
+msgstr "Kalendár korekcia časovej zóny"
 
 msgid "Calendar Transparency"
-msgstr "Kalender Transparenz"
+msgstr "Kalendár priehľadnosť"
 
 msgid "Calendar ics-Path [ok]>"
-msgstr "Kalender ics-Verzeichnis [ok]>"
+msgstr "Kalendár ics-cesta [ok]>"
 
 msgid "Calendar ics-URL"
-msgstr "Kalender ics-URL"
+msgstr "Kalendár ics-URL"
 
 msgid "Calendar planerFS"
-msgstr "Kalender planerFS"
+msgstr "Kalendár plánovač"
 
 msgid "Cancel"
-msgstr "Abbruch"
-
-msgid "Channel"
-msgstr "Kanal"
-
-msgid "Channel+Title"
-msgstr "Kanal+Titel"
+msgstr "Zrušiť"
 
 msgid "Choose dir"
-msgstr "Wähle Verzeichnis"
+msgstr "Zvoľ priečinok"
 
 msgid "Choose file"
-msgstr "Wähle Verzeichnis"
+msgstr "Zvoľ súbor"
 
 msgid "Choose font"
-msgstr "Wähle Zeichensatz"
+msgstr "Zvoľ písmo"
 
 msgid "Clock"
-msgstr "Uhrzeit"
+msgstr "Hodiny"
 
 msgid "Clock 2"
-msgstr "Uhrzeit 2"
+msgstr "Hodiny 2"
 
 msgid "Config Backup Path [ok]>"
-msgstr "Konfig Backup Verz. [ok]>"
-
-msgid "Config Restore All Settings"
-msgstr "Alle Einstellungen wiederherstellen"
+msgstr "cesta zálohy konfig. [ok]>"
 
 msgid "Console normal"
-msgstr "Konsole normal"
+msgstr "bežná konzola"
 
 msgid "Corby@Pearl 128x128"
 msgstr "Corby@Pearl 128x128"
 
 msgid "Corner"
-msgstr "Ecke"
+msgstr "roh"
 
 msgid "Crashlog"
-msgstr "Crashlog"
+msgstr "chybový výpis"
 
 msgid "Current"
-msgstr "Aktuell"
+msgstr "aktuálny"
 
 msgid "Current Temperature"
-msgstr "Aktuelle Temperatur"
+msgstr "aktuálna teplota"
 
 msgid "Current Temperature (+C)"
-msgstr "Aktuelle Temperatur (+C)"
+msgstr "aktuálna teplota (+C)"
 
 msgid "Current Temperature (-C)"
-msgstr "Aktuelle Temperatur (-C)"
+msgstr "aktuálna teplota (-C)"
 
 msgid "DVB-T Signal-Quality Correction"
-msgstr "DVB-T Signal-Qualitäts-Korrektur"
+msgstr "DVB-T korekcia kvality signálu"
 
 msgid "Date"
-msgstr "Datum"
+msgstr "Dátum"
 
 msgid "Date+Time"
-msgstr "Datum+Uhrzeit"
+msgstr "Dátum+čas"
 
 msgid "Date+Time+Weekday"
-msgstr "Datum+Uhrzeit+Wochentag"
+msgstr "Dátum+čas+deň týždňa"
 
 msgid "Dates"
-msgstr "Termine"
+msgstr "Dátumy"
 
 msgid "Dates 1 Line"
-msgstr "Termine 1 Zeile"
+msgstr "Dátumy 1 riadok"
 
 msgid "Dates 3 Lines"
-msgstr "Termine 3 Zeilen"
+msgstr "Dátumy 3 riadky"
 
 msgid "Dates 5 Lines"
-msgstr "Termine 5 Zeilen"
+msgstr "Dátumy 5 riadkov"
 
 msgid "Dates 9 Lines"
-msgstr "Termine 9 Zeilen"
+msgstr "Dátumy 9 riadkov"
 
 msgid "Dates List"
-msgstr "Termine Liste"
+msgstr "Zoznam dátumov"
 
 msgid "Dates compact"
-msgstr "Termine kompakt"
+msgstr "Kompaktné dátumy"
 
 msgid "Dates compact 2 Lines"
-msgstr "Termine kompakt 2 Zeilen"
+msgstr "Kompaktné dátumy 2 riadky"
 
 msgid "Dates compact 3 Lines"
-msgstr "Termine kompakt 3 Zeilen"
+msgstr "Kompaktné dátumy 3 riadky"
 
 msgid "Dates compact no Icon"
-msgstr "Termine kompakt kein Icon"
+msgstr "Kompaktné dátumy bez ikon"
 
 msgid "Dates no Icon"
-msgstr "Termine kein Icon"
+msgstr "Dátumy bez ikon"
 
 msgid "Debug-Logging > /tmp/L4log.txt"
-msgstr "Debug-Logging > /tmp/L4log.txt"
+msgstr "Logovanie > /tmp/L4log.txt"
 
 msgid "December"
-msgstr "Dezember"
+msgstr "December"
 
 msgid "Delete"
-msgstr "Löschen"
+msgstr "Zmazať"
 
 msgid "Delete File?"
-msgstr "Datei löschen?"
+msgstr "Zmazať súbor?"
 
 msgid "Delete Logfile"
-msgstr "Logdatei löschen"
+msgstr "Zmazanie log súboru"
 
 msgid "Display Delay [ms]"
-msgstr "Verzögerung [ms]"
+msgstr "Oneskorenie zobrazovača [ms]"
 
 msgid "Double-button switches"
-msgstr "Doppel-Tasten Schalter"
+msgstr "Zmena dvoj-stlačením tlačidla"
 
 msgid "Download Logfile"
-msgstr "Download Logdatei"
+msgstr "stiahnuť log súbor"
 
 msgid "EPG"
 msgstr "EPG"
 
 msgid "Event Icon Bar"
-msgstr "Ereigns Icon Bar"
+msgstr "Stĺpec ikon udalosti"
 
 msgid "Exec"
-msgstr "Ausführung"
+msgstr "Vykonať"
 
 msgid "Extended"
-msgstr "Erweitert"
+msgstr "Rozšírený"
 
 msgid "Extended (Short)"
-msgstr "Erweitert (Kurz)"
+msgstr "Rozšírený (menej info)"
 
 msgid "Extended Description"
-msgstr "Erweiterte Beschreibung"
+msgstr "Rozšírený popis"
 
 msgid "Fastmode (2s)"
-msgstr "Fastmode (2s)"
+msgstr "Rýchly mód (2s)"
 
 msgid "February"
-msgstr "Februar"
+msgstr "Február"
 
 msgid "First Quarter"
-msgstr "Erstes Viertel"
+msgstr "Prvá štvrtina"
 
 msgid "Flaps Design"
-msgstr "Klappen Design"
+msgstr "Vzhľad klapiek"
 
 msgid "Font"
-msgstr "Zeichensatz"
+msgstr "Písmo"
 
 msgid "Font 1 [ok]>"
-msgstr "Zeichensatz 1 [ok]>"
+msgstr "Písmo1 [ok]>"
 
 msgid "Font 2 [ok]>"
-msgstr "Zeichensatz 2 [ok]>"
+msgstr "Písmo 2 [ok]>"
 
 msgid "Font 3 [ok]>"
-msgstr "Zeichensatz 3 [ok]>"
+msgstr "Písmo 3 [ok]>"
 
 msgid "Font 4 [ok]>"
-msgstr "Zeichensatz 4 [ok]>"
+msgstr "Font 4 [ok]>"
 
 msgid "Font 5 [ok]>"
-msgstr "Zeichensatz 5 [ok]>"
+msgstr "Font 5 [ok]>"
 
 msgid "Font global [ok]>"
-msgstr "Zeichensatz Global [ok]>"
+msgstr "Písmo celkovo [ok]>"
 
 msgid "Frame"
-msgstr "Rahmen"
+msgstr "Rámček"
 
 msgid "Fri"
-msgstr "Fr"
+msgstr "Pi"
 
 msgid "Friday"
-msgstr "Freitag"
+msgstr "Piatok"
 
 msgid "FritzCall"
 msgstr "FritzCall"
 
 msgid "FritzCall Frame Picture [ok]>"
-msgstr "FritzCall Rahmen Bild [ok]>"
+msgstr "FritzCall obrázok rámčeka [ok]>"
 
 msgid "FritzCall Number of Lines per Entry"
-msgstr "FritzCall Anzahl Zeilen je Eintrag"
+msgstr "FritzCall počet riadkov na vstupny údaj"
 
 msgid "FritzCall Number of List Entries"
-msgstr "FritzCall Anzahl Listeneinträge"
+msgstr "FritzCall počet položiek zoznamu"
 
 msgid "FritzCall Number of Pictures"
-msgstr "FritzCall Anzahl Bilder"
+msgstr "FritzCall počet obrázkov"
 
 msgid "FritzCall Picture Orientation"
-msgstr "FritzCall Bilder Ausrichtung"
+msgstr "FritzCall orientácia obrázka"
 
 msgid "FritzCall Picture Path [ok]>"
-msgstr "FritzCall Bilder Verz. [ok]>"
-
-msgid "FritzCall Picture Transparency"
-msgstr "FritzCall Bilder Transparenz"
+msgstr "FritzCall cesta k obrázkom [ok]>"
 
 msgid "FritzCall Pictures Search"
-msgstr "FritzCall Bilder Suche"
+msgstr "FritzCall vyhľadávanie obrázkov"
 
 msgid "FritzCall Popup Color"
-msgstr "FritzCall Popup Farbe"
+msgstr "FritzCall farba vyskakovacieho okna"
 
 msgid "FritzCall Popup LCD"
-msgstr "FritzCall Popup LCD"
+msgstr "FritzCall vyskakovací LCD"
 
 msgid "FritzCall Popup-Time"
-msgstr "FritzCall Popup-Zeit"
+msgstr "FritzCall čas vyskakovaieho okna"
 
 msgid "FritzCall remove Calls after hours"
-msgstr "FritzCall entferne Anrufe nach Stunden"
+msgstr "FritzCall odobrať volania po hodinách"
 
 msgid "Full Moon"
-msgstr "Vollmond"
+msgstr "Spln mesiaca"
 
 msgid "GUI Restart is required"
-msgstr "GUI Neustart ist notwendig"
+msgstr "vyžaduje sa reštart GUI"
 
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
 msgstr ""
-"GUI muss für das Aktiveren der Änderungen neu gestartet werden.\n"
-"Soll die GUI jetzt neu gestartet werden?"
+"Je potrebné reštartovať GUI aby sa aplikovali zmeny.\n"
+"Chceš restartovať GUI teraz?"
 
 msgid "Global"
-msgstr "Global"
+msgstr "Celkovo"
 
 msgid "Gradient"
-msgstr "Verlauf"
+msgstr "Spád"
 
 msgid "HDD"
 msgstr "HDD"
@@ -1015,55 +951,55 @@ msgid "IMAP-SSL"
 msgstr "IMAP-SSL"
 
 msgid "IP seurity not supported by Box"
-msgstr "IP Sicherheit durch Box nicht unterstützt"
+msgstr "IP zabezpečenie nie je podporované v box-e"
 
 msgid "Info"
 msgstr "Info"
 
 msgid "Informations"
-msgstr "Informationen"
+msgstr "Informácie"
 
 msgid "Informations 2"
-msgstr "Informationen 2"
+msgstr "Informácie 2"
 
 msgid "Infos"
-msgstr "Infos"
+msgstr "Informácie"
 
 msgid "Internal Box-Skin-LCD"
-msgstr "Internes Box-Skin-LCD"
+msgstr "Zabudovaný Box-Skin-LCD"
 
 msgid "Internal TFT-LCD 400x240"
-msgstr "Internes TFT-LCD 400x240"
+msgstr "Zabudovaný TFT-LCD 400x240"
 
 msgid "Internal Vu+ Duo2 LCD 400x240"
-msgstr "Internes Vu+ Duo2 LCD 400x240"
+msgstr "Zabudovaný Vu+ Duo2 LCD 400x240"
 
 msgid "JPG"
 msgstr "JPG"
 
 msgid "January"
-msgstr "Januar"
+msgstr "Január"
 
 msgid "Javascript"
 msgstr "Javascript"
 
 msgid "July"
-msgstr "Juli"
+msgstr "Júl"
 
 msgid "June"
-msgstr "Juni"
+msgstr "Jún"
 
 msgid "Key for Screen Change"
-msgstr "Taste für Schirmwechsel"
+msgstr "tlačidlo pre zmenu obrazovky"
 
 msgid "Key for Screen On/Off"
-msgstr "Taste für LCD Ein/Aus"
+msgstr "tlačidlo pre zap./vyp. obrazovky"
 
 msgid "Knob"
-msgstr "Knopf"
+msgstr "Tlačidlo"
 
 msgid "Knob+Value"
-msgstr "Knopf+Wert"
+msgstr "Tlačidlo+hodnota"
 
 msgid "LCD 1"
 msgstr "LCD 1"
@@ -1099,31 +1035,31 @@ msgid "LCD 3 Type"
 msgstr "LCD 3 Typ"
 
 msgid "LCD Custom Height"
-msgstr "LCD benutzerdefinierte Höhe"
+msgstr "LCD voliteľná výška"
 
 msgid "LCD Custom Width"
-msgstr "LCD benutzerdefinierte Breite"
+msgstr "LCD voliteľná šírka"
 
 msgid "LCD Display"
-msgstr "LCD Anzeige"
+msgstr "LCD zobrazovač"
 
 msgid "LCD4linux Screen Switch"
-msgstr "LCD4linux Schirm Schalter"
+msgstr "Prepínač obrazovky LCD4linux"
 
 msgid "LCD4linux enabled"
-msgstr "LCD4linux aktiviert"
+msgstr "LCD4linux povolený"
 
 msgid "Last Quarter"
-msgstr "Letztes Viertel"
+msgstr "Posledná štvrtina"
 
 msgid "Load Active Config-File"
-msgstr "Lade aktive Konfig-Datei"
+msgstr "Nahraj aktívny konfig. súbor"
 
 msgid "Load Defaults"
-msgstr "Lade Standardwerte"
+msgstr "Nahraj predvolené nastavenia"
 
 msgid "Load File : %s"
-msgstr "Lade Datei : %s"
+msgstr "Nahraj súbor : %s"
 
 msgid "Load@1min"
 msgstr "Load@1min"
@@ -1132,151 +1068,139 @@ msgid "Load@5min"
 msgstr "Load@5min"
 
 msgid "Logfile extensive"
-msgstr "LogDatei umfangreich"
+msgstr "Rozsiahly log súbor"
 
 msgid "Logfile normal"
-msgstr "LogDatei normal"
+msgstr "Normálny log súbor"
 
 msgid "Long FastBackwardKey"
-msgstr "Lang RückSpulTaste"
+msgstr "Dlhé tlačidlo rýchlospäť"
 
 msgid "Long FastBackwardKey Type 2"
-msgstr "Lang RückSpulTaste Typ 2"
+msgstr "dlhé Rýchlo späť tlačítko Typ 2"
 
 msgid "Long FastForwardKey"
-msgstr "Lang VorSpulTaste"
+msgstr "Dlhé tlačidlo rýchlovpred"
 
 msgid "Long FastForwardKey Type 2"
-msgstr "Lang VorSpulTaste Typ 2"
+msgstr "Dlhé tlačidlo rýchlovpred typ 2"
 
 msgid "Long InfoKey"
-msgstr "Lang InfoTaste"
+msgstr "Dlhé tlačidlo info"
 
 msgid "MJPEG Boundary Mode"
-msgstr "MJPEG Boundary Modus"
+msgstr "MJPEG hraničný mód"
 
 msgid "MJPEG Header Mode"
-msgstr "MJPEG Header Modus"
+msgstr "MJPEG režim hlavičky"
 
 msgid "MJPEG Stream"
 msgstr "MJPEG Stream"
 
 msgid "MJPEG Stream LCD 1 Port"
-msgstr "MJPEG Stream LCD 1 Port"
+msgstr "port MJPEG stream-u pre LCD 1"
 
 msgid "MJPEG Stream LCD 1 enable"
-msgstr "MJPEG Stream LCD 1 aktiv"
+msgstr "povoliť MJPEG stream pre LCD 1"
 
 msgid "MJPEG Stream LCD 2 Port"
-msgstr "MJPEG Stream LCD 2 Port"
+msgstr "port MJPEG stream-u pre LCD 2"
 
 msgid "MJPEG Stream LCD 2 enable"
-msgstr "MJPEG Stream LCD 2 aktiv"
+msgstr "povoliť MJPEG stream pre LCD 2"
 
 msgid "MJPEG Stream LCD 3 Port"
-msgstr "MJPEG Stream LCD 3 Port"
+msgstr "port MJPEG stream-u pre LCD 3"
 
 msgid "MJPEG Stream LCD 3 enable"
-msgstr "MJPEG Stream LCD 3 aktiv"
+msgstr "povoliť MJPEG stream pre LCD 3"
 
 msgid "Mail"
-msgstr "Mail"
+msgstr "Pošta"
 
 msgid "Mail 1 Connect"
-msgstr "Mail 1 Connect"
+msgstr "Pošta 1 pripojenie"
 
 msgid "Mail 1 Password"
-msgstr "Mail 1 Passwort"
+msgstr "Pošta 1 heslo"
 
 msgid "Mail 1 Server"
-msgstr "Mail 1 Server"
+msgstr "Pošta 1 server"
 
 msgid "Mail 1 [Displayname:]Username"
-msgstr "Mail 1 [Anzeigename:]Nutzername"
+msgstr "Pošta 1 [Zobrazované meno:]Meno používateľa"
 
 msgid "Mail 2 Connect"
-msgstr "Mail 2 Connect"
+msgstr "Pošta 2 pripojenie"
 
 msgid "Mail 2 Password"
-msgstr "Mail 2 Passwort"
+msgstr "Pošta 2 heslo"
 
 msgid "Mail 2 Server"
-msgstr "Mail 2 Server"
+msgstr "Pošta 2 server"
 
 msgid "Mail 2 [Displayname:]Username"
-msgstr "Mail 2 [Anzeigename:]Nutzername"
+msgstr "Pošta 2 [Zobrazované meno:]Meno používateľa"
 
 msgid "Mail 3 Connect"
-msgstr "Mail 3 Connect"
+msgstr "Pošta 3 pripojenie"
 
 msgid "Mail 3 Password"
-msgstr "Mail 3 Passwort"
+msgstr "Pošta 3 heslo"
 
 msgid "Mail 3 Server"
-msgstr "Mail 3 Server"
+msgstr "Pošta 3 server"
 
 msgid "Mail 3 [Displayname:]Username"
-msgstr "Mail 3 [Anzeigename:]Nutzername"
+msgstr "Pošta 3 [Zobrazované meno:]Meno používateľa"
 
 msgid "Mail 4 Connect"
-msgstr "Mail 4 Connect"
+msgstr "Pošta 4 pripojenie"
 
 msgid "Mail 4 Password"
-msgstr "Mail 4 Passwort"
+msgstr "Pošta 4 heslo"
 
 msgid "Mail 4 Server"
-msgstr "Mail 4 Server"
+msgstr "Pošta 4 server"
 
 msgid "Mail 4 [Displayname:]Username"
-msgstr "Mail 4 [Anzeigename:]Nutzername"
+msgstr "Pošta 4 [Zobrazované meno:]Meno používateľa"
 
 msgid "Mail 5 Connect"
-msgstr "Mail 5 Connect"
+msgstr "Pošta 5 pripojenie"
 
 msgid "Mail 5 Password"
-msgstr "Mail 5 Passwort"
+msgstr "Pošta 5 heslo"
 
 msgid "Mail 5 Server"
-msgstr "Mail 5 Server"
+msgstr "Pošta 5 server"
 
 msgid "Mail 5 [Displayname:]Username"
-msgstr "Mail 5 [Anzeigename:]Nutzername"
-
-msgid "Mail Hide Mailadress"
-msgstr "Mail verberge Mailadresse"
-
-msgid "Mail IMAP limit to last days"
-msgstr "Mail IMAP begrenze auf letze Tage"
+msgstr "Pošta 5 [Zobrazované meno:]Meno používateľa"
 
 msgid "Mail Poll Interval"
-msgstr "Mail Abruf Interval"
-
-msgid "Mail Show Date"
-msgstr "Mail zeige Datum"
+msgstr "Pošta obnovovací interval"
 
 msgid "Mail Show Empty Mailboxes"
-msgstr "Mail Zeige Leere Mailboxen"
+msgstr "Pošta zobraz prázdne kontá"
 
 msgid "March"
-msgstr "März"
+msgstr "Marec"
 
 msgid "May"
-msgstr "Mai"
+msgstr "Máj"
 
 msgid "Media"
-msgstr "Media"
+msgstr "Média"
 
-msgid "Memory available"
-msgstr "Hauptspeicher verfügbar"
-
-msgid "Memory free"
-msgstr "Hauptspeicher frei"
+msgid "Memory"
+msgstr "Pamäť"
 
 msgid "Meteo URL"
-msgstr "Meteo URL"
+msgstr "URL počasia"
 
 msgid "Meteo-Weather Station"
-msgstr "Meteo-Wetter Station"
+msgstr "Meteo stanica"
 
 msgid "Mini-EPG"
 msgstr "Mini-EPG"
@@ -1333,25 +1257,25 @@ msgid "Module 5"
 msgstr "Modul 5"
 
 msgid "Mon"
-msgstr "Mo"
+msgstr "Po"
 
 msgid "Monday"
-msgstr "Montag"
+msgstr "Pondelok"
 
 msgid "Month"
-msgstr "Monat"
+msgstr "Mesiac"
 
 msgid "Month+Header"
-msgstr "Monat+Kopf"
+msgstr "Mesiac+hlavička"
 
 msgid "Moon-Icon-Path [ok]>"
-msgstr "Mond-Icon-Verz. [ok]>"
+msgstr "Cesta k ikone mesiaca [ok]>"
 
 msgid "Moonphase"
-msgstr "Mondphase"
+msgstr "Fáza mesiaca"
 
 msgid "Name"
-msgstr "Name"
+msgstr "Meno"
 
 msgid "Netatmo"
 msgstr "Netatmo"
@@ -1360,83 +1284,82 @@ msgid "Netatmo 2"
 msgstr "Netatmo 2"
 
 msgid "Netatmo CO2 Indicator"
-msgstr "Netatmo CO2 Indikator"
+msgstr "Netatmo CO2 Indikátor"
 
 msgid "Netatmo CO2 Max Range"
-msgstr "Netatmo CO2 Max Bereich"
+msgstr "Netatmo CO2 Max rozsah"
 
 msgid "Netatmo CO2 Min Range"
-msgstr "Netatmo CO2 Min Bereich"
+msgstr "Netatmo CO2 Min rozsah"
 
 msgid "Netatmo Comfort Indicator"
-msgstr "Netatmo Komfort Indikator"
+msgstr "Netatmo Komfortný Indikátor"
 
 msgid "New Moon"
-msgstr "Neumond"
+msgstr "Nový mesiac"
 
 msgid "Next Program Info"
-msgstr "Nächste Programm Info"
+msgstr "Info o ďalšom programe"
 
 msgid "Next Timer Event"
-msgstr "Nächste Aufnahme"
+msgstr "Ďalší časovač udalostí"
 
 msgid "No or wrong File selected, try a correct File first !"
-msgstr ""
-"Keine oder eine falsche Datei ausgewählt, wähle zuerst eine richtige Datei !"
+msgstr "Žiadny alebo nesprávny zvolený súbor, skús najprv správny súbor !"
 
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normalne"
 
 msgid "Normal (5s)"
-msgstr "Normal (5s)"
+msgstr "Normalne (5s)"
 
 msgid "November"
 msgstr "November"
 
 msgid "Now/Next"
-msgstr "Now/Next"
+msgstr "Teraz/Ďalší"
 
 msgid "OSCAM not running"
-msgstr "OSCAM läuft nicht"
+msgstr "OSCAM nebeží"
 
 msgid "OSD"
 msgstr "OSD"
 
 msgid "OSD [display time]"
-msgstr "OSD [Anzeigezeit]"
+msgstr "OSD [čas zobrazenia]"
 
 msgid "October"
-msgstr "Oktober"
+msgstr "Október"
 
 msgid "Offline"
-msgstr "Offline"
+msgstr "Vypnuté"
 
 msgid "On"
-msgstr "On"
+msgstr "Zapnuté"
 
 msgid "On+Media+Standby"
-msgstr "On+Media+Standby"
+msgstr "Zapnuté+Média+Pohotovostný režim"
 
 msgid "Online"
-msgstr "Online"
+msgstr "Aktívný"
 
 msgid "Online [Ping]"
-msgstr "Online [Ping]"
+msgstr "Stav siete [Ping]"
 
 msgid "Online+Offline"
-msgstr "Online+Offline"
+msgstr "Aktívný+Neaktívny"
 
 msgid "Only New"
-msgstr "Nur Neue"
+msgstr "len nové"
 
 msgid "PNG"
 msgstr "PNG"
 
 msgid "Pearl (or compatible LCD) 240x320"
-msgstr "Pearl (oder kompatibles LCD) 240x320"
+msgstr "Pearl (alebo kompatibilné LCD) 240x320"
 
 msgid "Pearl (or compatible LCD) 320x240"
-msgstr "Pearl (oder kompatibles LCD) 320x240"
+msgstr "Pearl (alebo kompatibilné LCD) 320x240"
 
 msgid "Picon"
 msgstr "Picon"
@@ -1444,44 +1367,38 @@ msgstr "Picon"
 msgid "Picon 2"
 msgstr "Picon 2"
 
-msgid "Picon+Channel"
-msgstr "Picon+Kanal"
-
-msgid "Picon+Channel+Title"
-msgstr "Picon+Kanal+Titel"
-
 msgid "Picon+Position below"
-msgstr "Picon+Position unterhalb"
+msgstr "Picon+Pozícia pod "
 
 msgid "Picon+Position left"
-msgstr "Picon+Position links"
+msgstr "Picon+Pozícia vľavo"
 
 msgid "Picon+Position right"
-msgstr "Picon+Position rechts"
+msgstr "Picon+Pozícia vpravo"
 
 msgid "Picture"
-msgstr "Bild"
+msgstr "Obrázok"
 
 msgid "Picture Changing Time"
-msgstr "Bild Wechselzeit"
+msgstr "Obrázok čas zmeny"
 
 msgid "Picture Directory Recursive"
-msgstr "Bild Verzeichnis Rekursiv"
+msgstr "Obrázok rekurzívny priečinok"
 
 msgid "Picture Quality for Resizing"
-msgstr "Bild Qualität für Größenänderung"
+msgstr "Obrázok kvalita pri zmenu veľkosti"
 
 msgid "Picture Quick Update Time [s]"
-msgstr "Bild Quick Aktualisierung Zeit [s]"
+msgstr "Obrázok čas rychlej aktualizácie [s]"
 
 msgid "Picture Sort"
-msgstr "Bild Sortierung"
+msgstr "Zotriedenie obrázkov"
 
 msgid "Picture Type [only Picture]"
-msgstr "Bild Typ [nur Bild]"
+msgstr "Typ obrázka [len obrázok]"
 
 msgid "Plug Tuner"
-msgstr "Steck Tuner"
+msgstr "Zabudovaný tuner"
 
 msgid "Pop3"
 msgstr "Pop3"
@@ -1490,79 +1407,58 @@ msgid "Pop3-SSL"
 msgstr "Pop3-SSL"
 
 msgid "Popup Text"
-msgstr "Popup Text"
+msgstr "vyskakovací text"
 
 msgid "Popup-Text"
-msgstr "Popup-Text"
+msgstr "vyskakovací-text"
 
 msgid "Position"
-msgstr "Position"
+msgstr "Umiestnenie"
 
 msgid "Program Info"
-msgstr "Programm Info"
+msgstr "Info o programe"
 
 msgid "Program Name"
-msgstr "Programm Name"
+msgstr "Názov kanálu"
 
 msgid "Program Number"
-msgstr "Programm Nummer"
+msgstr "Číslo kanálu"
 
 msgid "Progress Bar"
-msgstr "Fortschrittsbalken"
+msgstr "priebeh"
 
 msgid "Provider"
-msgstr "Provider"
+msgstr "Poskytovateľ"
 
 msgid "Radio"
-msgstr "Radio"
+msgstr "Rádio"
 
 msgid "Radio+Media"
-msgstr "Radio+Media"
+msgstr "Rádio+Média"
 
 msgid "Recording"
-msgstr "Aufnahme"
+msgstr "Záznam"
 
 msgid "Recording Picture [ok]>"
-msgstr "Aufnahme Bilddatei [ok]>"
+msgstr "Obrázok záznamu [ok]>"
 
 msgid "Rectangle 1"
-msgstr "Rechteck 1"
+msgstr "Obdĺžnik 1"
 
 msgid "Rectangle 2"
-msgstr "Rechteck 2"
+msgstr "Obdĺžnik 2"
 
 msgid "Reload"
-msgstr "Neu Laden"
-
-msgid "Remote Box"
-msgstr "Remote Box"
-
-msgid "Remote Box 1 [Displayname:]IP/Name"
-msgstr "Remote Box 1 [Anzeigename:]IP/Name"
-
-msgid "Remote Box 2 [Displayname:]IP/Name"
-msgstr "Remote Box 2 [Anzeigename:]IP/Name"
-
-msgid "Remote Box 3 [Displayname:]IP/Name"
-msgstr "Remote Box 3 [Anzeigename:]IP/Name"
-
-msgid "Remote Box 4 [Displayname:]IP/Name"
-msgstr "Remote Box 4 [Anzeigename:]IP/Name"
-
-msgid "Remote Box 5 [Displayname:]IP/Name"
-msgstr "Remote Box 5 [Anzeigename:]IP/Name"
-
-msgid "Remote Box Poll every Minutes"
-msgstr "Remote Box Abruf alle Minuten"
+msgstr "Znovu nahratie"
 
 msgid "Restart Displays"
-msgstr "Neustart Displays"
+msgstr "Reštart zobrazovačov"
 
 msgid "Restart GUI now?"
-msgstr "Neustart GUI jetzt?"
+msgstr "Reštartovať GUI teraz?"
 
 msgid "Restore Config"
-msgstr "Wiederherstellung der Einstellungen"
+msgstr "Obnova cfg"
 
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
@@ -1598,220 +1494,220 @@ msgid "Samsung SPF-87H old 800x480"
 msgstr "Samsung SPF-87H alt 800x480"
 
 msgid "Sat"
-msgstr "Sa"
+msgstr "So"
 
 msgid "Satellite"
-msgstr "Satellit"
+msgstr "Satelit"
 
 msgid "Saturday"
-msgstr "Samstag"
+msgstr "Sobota"
 
 msgid "Save"
-msgstr "Speichern"
+msgstr "Uložiť"
 
 msgid "Save Config"
-msgstr "Speichern der Einstellungen"
+msgstr "Ulož cfg"
 
 msgid "Save Config to File... (%s)"
-msgstr "Speichere Konfig in Datei... (%s)"
+msgstr "Uložiť konfig do súboru... (%s)"
 
 msgid "Save as Picture for WebIF"
-msgstr "Speichern als Bild für WebIF"
+msgstr "Uložiť ako obrázok pre WebIF"
 
 msgid "Screen"
-msgstr "Schirm"
+msgstr "Obrazovka"
 
 msgid "Screen 1"
-msgstr "Schirm 1"
+msgstr "Obrazovka 1"
 
 msgid "Screen 1 Changing Time"
-msgstr "Schirm 1 Wechselzeit"
+msgstr "Obrazovka 1 čas zmeny"
 
 msgid "Screen 1+2"
-msgstr "Schirm 1+2"
+msgstr "Obrazovka 1+2"
 
 msgid "Screen 1+2+3"
-msgstr "Schirm 1+2+3"
+msgstr "Obrazovka 1+2+3"
 
 msgid "Screen 1+2+3+4"
-msgstr "Schirm 1+2+3+4"
+msgstr "Obrazovka 1+2+3+4"
 
 msgid "Screen 1+2+4"
-msgstr "Schirm 1+2+4"
+msgstr "Obrazovka 1+2+4"
 
 msgid "Screen 1+3"
-msgstr "Schirm 1+3"
+msgstr "Obrazovka 1+3"
 
 msgid "Screen 1+3+4"
-msgstr "Schirm 1+3+4"
+msgstr "Obrazovka 1+3+4"
 
 msgid "Screen 1+3+5+7+9"
-msgstr "Schirm 1+3+5+7+9"
+msgstr "Obrazovka 1+3+5+7+9"
 
 msgid "Screen 1+4"
-msgstr "Schirm 1+4"
+msgstr "Obrazovka 1+4"
 
 msgid "Screen 1-2"
-msgstr "Schirm 1-2"
+msgstr "Obrazovka 1-2"
 
 msgid "Screen 1-3"
-msgstr "Schirm 1-3"
+msgstr "Obrazovka 1-3"
 
 msgid "Screen 1-4"
-msgstr "Schirm 1-4"
+msgstr "Obrazovka 1-4"
 
 msgid "Screen 1-5"
-msgstr "Schirm 1-5"
+msgstr "Obrazovka 1-5"
 
 msgid "Screen 1-6"
-msgstr "Schirm 1-6"
+msgstr "Obrazovka 1-6"
 
 msgid "Screen 1-7"
-msgstr "Schirm 1-7"
+msgstr "Obrazovka 1-7"
 
 msgid "Screen 1-8"
-msgstr "Schirm 1-8"
+msgstr "Obrazovka 1-8"
 
 msgid "Screen 1-9"
-msgstr "Schirm 1-9"
+msgstr "Obrazovka 1-9"
 
 msgid "Screen 2"
-msgstr "Schirm 2"
+msgstr "Obrazovka 2"
 
 msgid "Screen 2+3"
-msgstr "Schirm 2+3"
+msgstr "Obrazovka 2+3"
 
 msgid "Screen 2+3+4"
-msgstr "Schirm 2+3+4"
+msgstr "Obrazovka 2+3+4"
 
 msgid "Screen 2+4"
-msgstr "Schirm 2+4"
+msgstr "Obrazovka 2+4"
 
 msgid "Screen 2+4+6+8"
-msgstr "Schirm 2+4+6+8"
+msgstr "Obrazovka 2+4+6+8"
 
 msgid "Screen 3"
-msgstr "Schirm 3"
+msgstr "Obrazovka 3"
 
 msgid "Screen 3+4"
-msgstr "Schirm 3+4"
+msgstr "Obrazovka 3+4"
 
 msgid "Screen 4"
-msgstr "Schirm 4"
+msgstr "Obrazovka 4"
 
 msgid "Screen 5"
-msgstr "Schirm 5"
+msgstr "Obrazovka 5"
 
 msgid "Screen 5-9"
-msgstr "Schirm 5-9"
+msgstr "Obrazovka 5-9"
 
 msgid "Screen 6"
-msgstr "Schirm 6"
+msgstr "Obrazovka 6"
 
 msgid "Screen 7"
-msgstr "Schirm 7"
+msgstr "Obrazovka 7"
 
 msgid "Screen 8"
-msgstr "Schirm 8"
+msgstr "Obrazovka 8"
 
 msgid "Screen 9"
-msgstr "Schirm 9"
+msgstr "Obrazovka 9"
 
 msgid "Screen Switch Select - LCD"
-msgstr "Schirm Schalter Auswahl - LCD"
+msgstr "Výber prepínača obrazovky - LCD"
 
 msgid "Screen Switch Select - Screen"
-msgstr "Schirm Schalter Auswahl - Schirm"
+msgstr "Výber prepínača obrazovky - Obrazovka"
 
 msgid "Screens used for Changing"
-msgstr "Benutzte Schirme zum Wechsel"
+msgstr "Obrazovky použité na výmenu"
 
 msgid "September"
 msgstr "September"
 
 msgid "Service search first"
-msgstr "Service Suche zuerst"
+msgstr "Najprv prehľadať kanál"
 
 msgid "Shadow Edges"
-msgstr "Schattenkanten"
+msgstr "Hrany tieňa"
 
 msgid "Short"
-msgstr "Kurz"
+msgstr "Krátky"
 
 msgid "Short (Extended)"
-msgstr "Kurz (Erweitert)"
+msgstr "Krátky(rozširený)"
 
 msgid "Short+Extended"
-msgstr "Kurz+Erweitert"
+msgstr "Krátky+rozšírený"
 
 msgid "Show"
-msgstr "Zeige"
+msgstr "Zobraziť"
 
 msgid "Show 'no ....' Messages"
-msgstr "Zeige 'keine ....' Mitteilungen"
+msgstr "Zobraz 'žiadne ....' hlásenia"
 
 msgid "Show Cover"
-msgstr "Zeige Cover"
+msgstr "Zobraz obálku"
 
 msgid "Show Crash Corner"
-msgstr "Zeige Crash Ecke"
+msgstr "Zobraz chybové hlásenia"
 
 msgid "Show Externals"
-msgstr "Zeige Externe"
+msgstr "Zobraz vonkajšie"
 
 msgid "Show HTTP Text"
-msgstr "Zeige HTTP Text"
+msgstr "Zobraz HTTP Text"
 
 msgid "Show Picture"
-msgstr "Zeige Bild"
+msgstr "Zobraz obrázok"
 
 msgid "Show Picture 2"
-msgstr "Zeige Bild 2"
+msgstr "Zobraz obrázok 2"
 
 msgid "Show Picture 3"
-msgstr "Zeige Bild 3"
+msgstr "Zobraz obrázok 3"
 
 msgid "Show Picture 4"
-msgstr "Zeige Bild 4"
+msgstr "Zobraz obrázok 4"
 
 msgid "Show Textfile"
-msgstr "Zeige Textdatei"
+msgstr "Zobraz textový súbor"
 
 msgid "Show Textfile 2"
-msgstr "Zeige Textdatei 2"
+msgstr "Zobraz textový súbor 2"
 
 msgid "Show Textfile 3"
-msgstr "Zeige Textdatei 3"
+msgstr "Zobraz textový súbor 3"
 
 msgid "Show ecm.info"
-msgstr "Zeige ecm.info"
+msgstr "Zobraz ecm.info"
 
 msgid "Show oscam.lcd"
-msgstr "Zeige oscam.lcd"
+msgstr "Zobraz oscam.lcd"
 
 msgid "Signal Quality Bar"
-msgstr "Signal Qualität Bar"
+msgstr "Stĺpec kvality signálu"
 
 msgid "Standby"
-msgstr "Standby"
+msgstr "Pohotovostný režim"
 
 msgid "Storage-Devices"
-msgstr "Speicher-Geräte"
+msgstr "Pamäťové-zariadenia"
 
 msgid "Storage-Devices: Force Read"
-msgstr "Speicher-Geräte: erzwinge Lesen"
+msgstr "Pamäťové-zariadenia: vynútené čítanie"
 
 msgid "Stutter TV"
-msgstr "Stotter TV"
+msgstr "Koktavá TV"
 
 msgid "Sun"
-msgstr "So"
+msgstr "Ne"
 
 msgid "Sunday"
-msgstr "Sonntag"
+msgstr "Nedeľa"
 
 msgid "Sunrise"
-msgstr "Sonnenaufgang"
+msgstr "Východ slnka"
 
 msgid "TV"
 msgstr "TV"
@@ -1820,268 +1716,247 @@ msgid "TV+OSD"
 msgstr "TV+OSD"
 
 msgid "TV+Radio"
-msgstr "TV+Radio"
+msgstr "TV+Rádio"
 
 msgid "TV+Radio+Media"
-msgstr "TV+Radio+Media"
+msgstr "TV+Rádio+Média"
 
 msgid "Temperature"
-msgstr "Temperatur"
+msgstr "Teplota"
 
 msgid "Temperature+Co2"
-msgstr "Temperatur+Co2"
+msgstr "Teplota+Co2"
 
 msgid "Temperature+Co2+Pressure"
-msgstr "Temperatur+Co2+Luftdruck"
+msgstr "Teplota+Co2+Tlak"
 
 msgid "Temperature+Humidity"
-msgstr "Temperatur+Luftfeuchte"
+msgstr "Teplota+Vlhkosť"
 
 msgid "Threads per LCD"
-msgstr "Threads pro LCD"
+msgstr "Témy pre LCD"
 
 msgid "Thur"
-msgstr "Do"
+msgstr "Št"
 
 msgid "Thursday"
-msgstr "Donnerstag"
+msgstr "Štvrtok"
 
 msgid "Time"
-msgstr "Zeit"
+msgstr "Čas"
 
 msgid "Time+Duration+Info"
-msgstr "Zeit+Info+Dauerr"
+msgstr "Čas+Trvanie+Info"
 
 msgid "Time+Info"
-msgstr "Zeit+Info"
+msgstr "Čas+Info"
 
 msgid "Time+Length+Info"
-msgstr "Zeit+Länge+Info"
+msgstr "Čas+Dĺžka+Info"
 
 msgid "Time+Weekday"
-msgstr "Uhrzeit+Wochentag"
+msgstr "Čas+Deň týždňa"
 
 msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
-msgstr "Timing ! rechne alle Zeiten um Zeit/5*2 im Fastmode"
+msgstr "Časovanie ! vypočet všetkých časov na Čas/5*2 v rýchlom móde"
 
 msgid "Title"
-msgstr "Titel"
+msgstr "Titulok"
 
 msgid "Tue"
-msgstr "Di"
+msgstr "Ut"
 
 msgid "Tuesday"
-msgstr "Dienstag"
+msgstr "Utorok"
 
 msgid "Tuner Color"
-msgstr "Tuner Farbe"
+msgstr "Farba tunera"
 
 msgid "Tuner Color Active"
-msgstr "Tuner Farbe Aktiv"
+msgstr "Farba tunera aktívny"
 
 msgid "Tuner Color On"
-msgstr "Tuner Farbe Ein"
+msgstr "Farba tunera zapnutý"
 
 msgid "USB Tuner"
 msgstr "USB Tuner"
 
 msgid "Underline"
-msgstr "Unterstrich"
+msgstr "Podčiarknutie"
 
 msgid "Underline 2"
-msgstr "Unterstrich 2"
+msgstr "Podčiarknutie 2"
 
 msgid "Used Tuner"
-msgstr "Verwendete Tuner"
+msgstr "Použitý tuner"
 
 msgid "Volume"
-msgstr "Lautstärke"
-
-msgid "WWW ApiKey from cloudconvert.org"
-msgstr "WWW ApiKey von cloudconvert.org"
-
-msgid "WWW ApiKey from convertapi.com"
-msgstr "WWW ApiKey von convertapi.com"
-
-msgid "WWW Converter"
-msgstr "WWW Konverter"
+msgstr "Hlasitosť"
 
 msgid "WWW Converter Poll Interval"
-msgstr "WWW Konverter Abruf Interval"
-
-msgid "WWW Converter Usage"
-msgstr "WWW Konverter Verwendung"
+msgstr "WWW Konvertor čas obnovy"
 
 msgid "WWW-Internet Converter"
-msgstr "WWW-Internet Konverter"
+msgstr "Konvertor web stránok"
 
 msgid "Waning Crescent"
-msgstr "Abnehmender Halbmond"
+msgstr "Ubúdajúci kosáčik"
 
 msgid "Waning Gibbous"
-msgstr "Abnehmender Mond"
+msgstr "Ubúdajúci mesiac"
 
 msgid "Waxing Crescent"
-msgstr "Zunehmender Halbmond"
+msgstr "Dorastajúci kosáčik"
 
 msgid "Waxing Gibbous"
-msgstr "Zunehmender Mond"
+msgstr "Dorastajúci mesiac"
 
 msgid "Weather"
-msgstr "Wetter"
+msgstr "Počasie"
 
 msgid "Weather 2"
-msgstr "Wetter 2"
+msgstr "Počasie 2"
 
 msgid "Weather City"
-msgstr "Wetter Stadt"
+msgstr "Počasie pre mesto"
 
 msgid "Weather City 2"
-msgstr "Wetter Stadt 2"
+msgstr "Počasie pre mesto 2"
 
 msgid "Weather Extra Infos"
-msgstr "Wetter Extra Infos"
+msgstr "Počasie rozšírené info"
 
 msgid "Weather High Temperature Color"
-msgstr "Wetter Hohe Temperatur Farbe"
+msgstr "Počasie farba vysokej teploty"
 
 msgid "Weather Lines"
-msgstr "Wetter Linien"
+msgstr "Počasie riadky"
 
 msgid "Weather Low Temperature Color"
-msgstr "Wetter Niedrige Temperatur Farbe"
+msgstr "Počasie farba nízkej teploty"
 
 msgid "Weather Rain Chance"
-msgstr "Wetter Regen Wahrscheinlichkeit"
+msgstr "Počasie pravdepodobnosť dažďa"
 
 msgid "Weather Transparency"
-msgstr "Wetter Transparenz"
+msgstr "Počasie priehľadnosť"
 
 msgid "Weather Wind speed unit"
-msgstr "Wetter Wind Einheit"
+msgstr "Počasie jednotky rýchlosti vetra"
 
 msgid "Weather-Icon Zoom"
-msgstr "Wetter-Icon Zoom"
+msgstr "Počasie-Ikona zväčšenie"
 
 msgid "Weather-Icon-Path [ok]>"
-msgstr "Wetter-Icon-Verz. [ok]>"
+msgstr "Počasie-Ikona-Cesta [ok]>"
 
 msgid "WebIF"
 msgstr "WebIF"
 
 msgid "WebIF Design"
-msgstr "WebIF Design"
+msgstr "WebIF vzhľad"
 
 msgid "WebIF IP Allow"
-msgstr "WebIF IP erlaubt"
+msgstr "WebIF IP povoľ"
 
 msgid "WebIF IP Deny"
-msgstr "WebIF IP verweigert"
+msgstr "WebIF IP zakáž"
 
 msgid "WebIF Init Delay"
-msgstr "WebIF Init Verzögert"
+msgstr "WebIF Inicializácia oneskorenie"
 
 msgid "WebIF Refresh Type"
-msgstr "WebIF Aktualisierungstyp"
+msgstr "WebIF typ aktualizácie"
 
 msgid "WebIF Refresh [s]"
-msgstr "WebIF Aktualisierung [s]"
+msgstr "WebIF aktualizácia [s]"
 
 msgid "Wed"
-msgstr "Mi"
+msgstr "St"
 
 msgid "Wednesday"
-msgstr "Mittwoch"
+msgstr "Streda"
 
 msgid "Week"
-msgstr "Woche"
+msgstr "Týždeň"
 
 msgid "Week+Header"
-msgstr "Woche+Kopf"
+msgstr "Týždeň+Hlavička"
 
 msgid "Weekday"
-msgstr "Wochentag"
-
-msgid "all"
-msgstr "Alles"
+msgstr "Deň týždňa"
 
 msgid "alphabetic"
-msgstr "alphabetisch"
+msgstr "abecedne"
 
 msgid "alternative Copy-Mode/DM800hd (24bit)"
-msgstr "alternativer Copy-Mode/DM800hd (24bit)"
+msgstr "alternatívny Mód kopírovania/DM800hd (24bit)"
 
 msgid "always"
-msgstr "immer"
+msgstr "vždy"
 
 msgid "aquamarine"
-msgstr "aquamarine"
+msgstr "akvamarín"
 
 msgid "better/slow"
-msgstr "besser/langsam"
+msgstr "lepší/pomalší"
 
 msgid "black"
-msgstr "schwarz"
+msgstr "čierna"
 
 msgid "blue"
-msgstr "blau"
+msgstr "modrá"
 
 msgid "blueviolet"
-msgstr "blauviolett"
+msgstr "modrofialová"
 
 msgid "brown"
-msgstr "braun"
+msgstr "hnedá"
 
 msgid "cache + adjustment (high quality, slow)"
-msgstr "Cache + Anpassung (hoche Qualität, langsam)"
+msgstr "cache + prispôsobenie(vysoká kvalita, pomalšie) "
 
 msgid "cache + adjustment (low quality, fast)"
-msgstr "Cache + Anpassung (niedrige Qualität, schnell)"
+msgstr "cache + prispôsobenie(nízka kvalita, rýchlejšie) "
 
 msgid "cadetblue"
-msgstr "kadettblau"
+msgstr "kadet modrá"
 
 msgid "center"
-msgstr "zentriert"
-
-msgid "cloudconvert.org"
-msgstr "cloudconvert.org"
-
-msgid "convertapi.com"
-msgstr "convertapi.com"
+msgstr "vycentrovať"
 
 msgid "copy to Idle"
-msgstr "kopiere nach Idle"
+msgstr "kopírovať do pohotovostných"
 
 msgid "copy to Media"
-msgstr "kopiere nach Media"
+msgstr "kopírovať do Média"
 
 msgid "copy to On"
-msgstr "kopiere nach On"
+msgstr "kopírovať do aktívných"
 
 msgid "cornflowerblue"
-msgstr "kornblumenblau"
+msgstr "nevädza modrá"
 
 msgid "currently set : %s"
-msgstr "aktuell eingestellt : %s"
+msgstr "aktuálne nastavené : %s"
 
 msgid "cyan"
-msgstr "cyan"
+msgstr "svetlomodrá"
 
 msgid "darkblue"
-msgstr "dunkelblau"
+msgstr "tmavomodrá"
 
 msgid "darkgreen"
-msgstr "dunkelgrün"
+msgstr "tmavozelená"
 
 msgid "darkorange"
-msgstr "dunkelorange"
+msgstr "tmavooranžová"
 
 msgid "darkorchid"
-msgstr "dunkelorchidee"
+msgstr "tmavá orchidea"
 
 msgid "darkred"
-msgstr "dunkelrot"
+msgstr "tmavočervená"
 
 msgid "db"
 msgstr "db"
@@ -2096,40 +1971,40 @@ msgid "db + BER"
 msgstr "db + BER"
 
 msgid "deeppink"
-msgstr "dunkelrosa"
+msgstr "tmavoružová"
 
 msgid "deleted"
-msgstr "gelöscht"
+msgstr "zmazané"
 
 msgid "disabled"
-msgstr "deaktiviert"
+msgstr "zakázané"
 
 msgid "full Screen"
-msgstr "Vollbild"
+msgstr "na celú obrazovku"
 
 msgid "gold"
-msgstr "gold"
+msgstr "zlatá"
 
 msgid "gray"
-msgstr "grau"
+msgstr "šedá"
 
 msgid "green"
-msgstr "grün"
+msgstr "zelená"
 
 msgid "greenyellow"
-msgstr "grüngelb"
+msgstr "zelenožltá"
 
 msgid "half left"
-msgstr "halb links"
+msgstr "polovica vľavo"
 
 msgid "half right"
-msgstr "halb rechts"
+msgstr "polovica vpravo"
 
 msgid "horizontally"
-msgstr "horizontal"
+msgstr "vodorovne"
 
 msgid "indianred"
-msgstr "indianrot"
+msgstr "indiánska červená"
 
 msgid "indigo"
 msgstr "indigo"
@@ -2138,310 +2013,310 @@ msgid "km/h"
 msgstr "km/h"
 
 msgid "lawngreen"
-msgstr "rasengrün"
+msgstr "zelený trávnik"
 
 msgid "left"
-msgstr "links"
+msgstr "ľavý"
 
 msgid "lightblue"
-msgstr "hellblau"
+msgstr "svetlosvetlomodrá"
 
 msgid "lightgreen"
-msgstr "hellgrün"
+msgstr "svetlosvetlozelená"
 
 msgid "lime"
-msgstr "limone"
+msgstr "limetka"
 
 msgid "low/fast (Picture only)"
-msgstr "niedrig/schnell (nur Bild)"
+msgstr "pomaly/rýchlo (len obrázok)"
 
 msgid "low/fast (all)"
-msgstr "niedrig/schnell (alles)"
+msgstr "pomaly/rýchlo (všetko)"
 
 msgid "m/s"
 msgstr "m/s"
 
 msgid "magenta"
-msgstr "magenta"
+msgstr "purpurová"
 
 msgid "moccasin"
-msgstr "moccasin"
+msgstr "mokasín"
 
 msgid "no"
-msgstr "nein"
+msgstr "nie"
 
 msgid "no Calendar"
-msgstr "kein Kalender"
+msgstr "žiaden kalendár"
 
 msgid "no Calls"
-msgstr "keine Anrufe"
+msgstr "žiadne volania"
 
 msgid "no Dates"
-msgstr "keine Termine"
+msgstr "žiadne termíny"
 
 msgid "no Icon"
-msgstr "kein Icon"
+msgstr "žiadna ikona"
 
 msgid "no Icon, with Targetnumber"
-msgstr "ohne Icon, mit Zielnummer"
+msgstr "žiadna ikona, s cieľovým počtom"
 
 msgid "no LCD1 Picture-File"
-msgstr "keine LCD1 Bild-Datei"
+msgstr "žiadne LCD1 Obrazkové data"
 
 msgid "no LCD2 Picture-File"
-msgstr "keine LCD2 Bild-Datei"
+msgstr "žiadne LCD2 Obrazkové data"
 
 msgid "no LCD3 Picture-File"
-msgstr "keine LCD3 Bild-Datei"
+msgstr "žiadne LCD3 Obrazkové data"
 
 msgid "no Netatmo-Plugin installed"
-msgstr "kein Netatmo-Plugin installiert"
+msgstr "nenainštalovaný Netatmo-Plugin"
 
 msgid "no Timer"
-msgstr "kein Timer"
+msgstr "žiaden časovač"
 
 msgid "no cache + no adjustment"
-msgstr "kein Cache + keine Anpassung"
+msgstr "bez cache + bez nastavovania"
 
 msgid "no total Timer"
-msgstr "keine Timeranzahl"
+msgstr "žiaden celkový časovač"
 
 msgid "normal"
-msgstr "normal"
+msgstr "normálne"
 
 msgid "normal (full)"
-msgstr "normal (voll)"
+msgstr "normálne (plné)"
 
 msgid "off"
-msgstr "aus"
+msgstr "vypnuté"
 
 msgid "olive"
-msgstr "olive"
+msgstr "olivová"
 
 msgid "on"
-msgstr "ein"
+msgstr "zapnuté"
 
 msgid "one line"
-msgstr "eine Zeile"
+msgstr "jeden riadok"
 
 msgid "only Picture 1024x600"
-msgstr "nur Bild 1024x600"
+msgstr "len obrázok 1024x600"
 
 msgid "only Picture 320x240"
-msgstr "nur Bild 320x240"
+msgstr "len obrázok 320x240"
 
 msgid "only Picture 800x480"
-msgstr "nur Bild 800x480"
+msgstr "len obrázok 800x480"
 
 msgid "only Picture 800x600"
-msgstr "nur Bild 800x600"
+msgstr "len obrázok 800x600"
 
 msgid "only Picture Custom Size"
-msgstr "nur Bild benutzerdefinierte Größe"
+msgstr "len obrázok vlastná veľkosť"
 
 msgid "only Progress Bar"
-msgstr "nur Fortschrittsbalken"
+msgstr "len stĺpec priebehu"
 
 msgid "only use Timer"
-msgstr "verwende nur Timer"
+msgstr "len použitý časovač"
 
 msgid "orange"
-msgstr "orange"
+msgstr "oranžová"
 
 msgid "orangered"
-msgstr "orangerot"
+msgstr "oranžovočervená"
 
 msgid "other"
-msgstr "andere"
+msgstr "iné"
 
 msgid "random"
-msgstr "zufällig"
+msgstr "náhodne"
 
 msgid "red"
-msgstr "rot"
+msgstr "červená"
 
 msgid "reduced"
-msgstr "reduziert"
+msgstr "redukované"
 
 msgid "right"
-msgstr "rechts"
+msgstr "vpravo"
 
 msgid "rosybrown"
-msgstr "rosigbraun"
+msgstr "ružovohnedá"
 
 msgid "rpm"
-msgstr "rpm"
+msgstr "otáčky"
 
 msgid "rpm/2"
-msgstr "rpm/2"
+msgstr "otáčky/2"
 
 msgid "sandybrown"
-msgstr "sandbraun"
+msgstr "pieskovohnedá"
 
 msgid "set Settings"
-msgstr "setze Einstellungen"
+msgstr "aktivuj nastavenia"
 
 msgid "show run"
-msgstr "zeige aktiv"
+msgstr "zobraz aktívne"
 
 msgid "show run+sleep"
-msgstr "zeige aktiv+schlafend"
+msgstr "zobraz aktívne+čakajúce"
 
 msgid "show total Timer"
-msgstr "zeige Timeranzahl"
+msgstr "Zobraz celkový časovač"
 
 msgid "silver"
-msgstr "silber"
+msgstr "strieborná"
 
 msgid "slategray"
-msgstr "schiefergrau"
+msgstr "bridlicovo sivá"
 
 msgid "stop Screencycle"
-msgstr "Schirmwechsel anhalten"
+msgstr "Zastav výmenu obrazoviek"
 
 msgid "tomato"
-msgstr "tomato"
+msgstr "paradajková"
 
 msgid "trimmed (black)"
-msgstr "beschnitten (schwarz)"
+msgstr "zdobené (čierna)"
 
 msgid "trimmed (transparent)"
-msgstr "beschnitten (transparent)"
+msgstr "zdobené (priehľadné)"
 
 msgid "two lines"
-msgstr "zwei Zeilen"
+msgstr "dva riadky"
 
 msgid "use lead-time"
-msgstr "verwende Vorlaufzeit"
+msgstr "použiť čas dodania"
 
 msgid "vertically"
-msgstr "vertikal"
+msgstr "zvislo"
 
 msgid "violet"
-msgstr "violett"
+msgstr "fialová"
 
 msgid "white"
-msgstr "weiss"
+msgstr "biela"
 
 msgid "with Current 00:00"
-msgstr "mit Aktuell 00:00"
+msgstr "s aktuálnym 00:00"
 
 msgid "with Current 00:00 (Size 1.5)"
-msgstr "mit Aktuell 00:00 (Größe 1.5)"
+msgstr "s aktuálnym 00:00 (veľkosť 1.5)"
 
 msgid "with Current 00:00 (Size 2)"
-msgstr "mit Aktuell 00:00 (Größe 2)"
+msgstr "s aktuálnym 00:00 (veľkosť 2)"
 
 msgid "with Current 00:00 (above)"
-msgstr "mit Aktuell 00:00 (oberhalb)"
+msgstr "s aktuálnym 00:00 (nad)"
 
 msgid "with Current 00:00 (above/Size 1.5)"
-msgstr "mit Aktuell 00:00 (oberhalb/Größe 1.5)"
+msgstr "s aktuálnym 00:00 (nad/veľkosť 1.5)"
 
 msgid "with Current 00:00 (above/Size 2)"
-msgstr "mit Aktuell 00:00 (oberhalb/Größe 2)"
+msgstr "s aktuálnym 00:00 (nad/veľkosť 2)"
 
 msgid "with Current 00:00 (below)"
-msgstr "mit Aktuell 00:00 (unterhalb)"
+msgstr "s aktuálnym 00:00 (pod)"
 
 msgid "with Current 00:00 (below/Size 1.5)"
-msgstr "mit Aktuell 00:00 (unterhalb/Größe 1.5)"
+msgstr "s aktuálnym 00:00 (pod/veľkosť 1.5)"
 
 msgid "with Current 00:00 (below/Size 2)"
-msgstr "mit Aktuell 00:00 (unterhalb/Größe 2)"
+msgstr "s aktuálnym 00:00 (pod/veľkosť 2)"
 
 msgid "with Icon"
-msgstr "mit Icon"
+msgstr "s ikonou"
 
 msgid "with Icon & Targetnumber"
-msgstr "mit Icon & Zielnummer"
+msgstr "s ikonou & cieľové číslo"
 
 msgid "with Percent"
-msgstr "mit Prozent"
+msgstr "a percenta"
 
 msgid "with Percent (Size 1.5)"
-msgstr "mit Prozent (Größe 1.5)"
+msgstr "a percenta (veľkosť 1.5)"
 
 msgid "with Percent (Size 2)"
-msgstr "mit Prozent (Größe 2)"
+msgstr "a percenta (veľkosť 2)"
 
 msgid "with Percent (above)"
-msgstr "mit Prozent (oberhalb)"
+msgstr "s percentami (nad)"
 
 msgid "with Percent (above/Size 1.5)"
-msgstr "mit Prozent (oberhalb/Größe 1.5)"
+msgstr "s percentami (nad/veľkosť 1.5)"
 
 msgid "with Percent (above/Size 2)"
-msgstr "mit Prozent (oberhalb/Größe 2)"
+msgstr "s percentami (nad/veľkosť 2)"
 
 msgid "with Percent (below)"
-msgstr "mit Prozent (unterhalb)"
+msgstr "s percentami (pod)"
 
 msgid "with Percent (below/Size 1.5)"
-msgstr "mit Prozent (unterhalb/Größe 1.5)"
+msgstr "s percentami (pod/veľkosť 1.5)"
 
 msgid "with Percent (below/Size 2)"
-msgstr "mit Prozent (unterhalb/Größe 2)"
+msgstr "s percentami (nad/veľkosť 2)"
 
 msgid "with Percent Minutes / Total (above)"
-msgstr "mit Prozent Minuten / Gesamt (oberhalb)"
+msgstr "s percentami minút / Celkovo (nad)"
 
 msgid "with Percent Minutes / Total (above/Size 1.5)"
-msgstr "mit Prozent Minuten / Gesamt (oberhalb/Größe 1.5)"
+msgstr "s percentami minút / Celkovo (nad/veľkosť 1.5)"
 
 msgid "with Percent Minutes / Total (above/Size 2)"
-msgstr "mit Prozent Minuten / Gesamt  (oberhalb/Größe 2)"
+msgstr "s percentami minút / Celkovo (nad/veľkosť 2)"
 
 msgid "with Remaining Minutes"
-msgstr "mit verbleibenden Minuten"
+msgstr "a zostávajúce minúty"
 
 msgid "with Remaining Minutes (Size 1.5)"
-msgstr "mit verbleibenden Minuten (Größe 1.5)"
+msgstr "a zostávajúce minúty (veľkosť 1.5)"
 
 msgid "with Remaining Minutes (Size 2)"
-msgstr "mit verbleibenden Minuten (Größe 2)"
+msgstr "a zostávajúce minúty (veľkosť 2)"
 
 msgid "with Remaining Minutes (above)"
-msgstr "mit verbleibenden Minuten (oberhalb)"
+msgstr "a zostávajúce minúty (nad)"
 
 msgid "with Remaining Minutes (above/Size 1.5)"
-msgstr "mit verbleibenden Minuten (oberhalb/Größe 1.5)"
+msgstr "a zostávajúce minúty (nad/veľkosť 1.5)"
 
 msgid "with Remaining Minutes (above/Size 2)"
-msgstr "mit verbleibenden Minuten (oberhalb/Größe 2)"
+msgstr "a zostávajúce minúty (nad/veľkosť 2)"
 
 msgid "with Remaining Minutes (below)"
-msgstr "mit verbleibenden Minuten (unterhalb)"
+msgstr "a zostávajúce minúty (pod)"
 
 msgid "with Remaining Minutes (below/Size 1.5)"
-msgstr "mit verbleibenden Minuten (unterhalb/Größe 1.5)"
+msgstr "a zostávajúce minúty (pod/veľkosť 1.5)"
 
 msgid "with Remaining Minutes (below/Size 2)"
-msgstr "mit verbleibenden Minuten (unterhalb/Größe 2)"
+msgstr "a zostávajúce minúty (pod/veľkosť 2)"
 
 msgid "yellow"
-msgstr "gelb"
+msgstr "žltá"
 
 msgid "yes"
-msgstr "ja"
+msgstr "áno"
 
 msgid "yes (32bit)"
-msgstr "ja (32bit)"
+msgstr "áno (32bit)"
 
 msgid "yes + %"
-msgstr "ja + %"
+msgstr "áno + %"
 
 msgid "yes +25%"
-msgstr "ja +25%"
+msgstr "áno +25%"
 
 msgid "yes except records"
-msgstr "ja außer Aufnahmen"
+msgstr "áno okrem nahrávok"
 
 msgid "yes, extended"
-msgstr "ja, erweitert"
+msgstr "áno, rozšírené"
 
 msgid "yes, long"
-msgstr "ja, lang"
+msgstr "áno, dlhé"
 
 msgid "yes, short"
-msgstr "ja, kurz"
+msgstr "áno, krátke"

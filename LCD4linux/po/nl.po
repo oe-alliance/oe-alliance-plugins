@@ -1,15 +1,10 @@
-# Dutch translations for LCD package.
-# Copyright (C) 2013 THE LCD'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the LCD package.
-# Automatically generated, 2013.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: LCD 4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-21 10:06+0100\n"
-"PO-Revision-Date: 2013-07-22 16:51+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"PO-Revision-Date: 2013-07-27 18:50+0100\n"
+"Last-Translator: joergm6 <joergm6@online.de>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -25,15 +20,12 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
-#, python-format
 msgid "% + Load@1min"
 msgstr "% + Load@1min"
 
-#, python-format
 msgid "% + Load@5min"
 msgstr "% + Load@5min"
 
-#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr "%d Mail  %d Nieuw  %s"
 
@@ -64,17 +56,8 @@ msgstr "- Achtergrondverlichting weekeinde uit"
 msgid "- Backlight Weekend On"
 msgstr "- Achtergrondverlichting  Weekeinde Aan"
 
-msgid "- Bar Range Max"
-msgstr ""
-
-msgid "- Bar Range Min"
-msgstr ""
-
 msgid "- CPU"
 msgstr "- CPU"
-
-msgid "- Caption Color"
-msgstr ""
 
 msgid "- Color"
 msgstr "- Kleur"
@@ -82,38 +65,8 @@ msgstr "- Kleur"
 msgid "- Current Day Color"
 msgstr "- Kleur huidige dag"
 
-msgid "- Cut Height [disable = 0]"
-msgstr ""
-
-msgid "- Cut Width [disable = 0]"
-msgstr ""
-
-msgid "- Cut from X"
-msgstr ""
-
-msgid "- Cut from Y"
-msgstr ""
-
-msgid "- Default Cover [ok]>"
-msgstr ""
-
-msgid "- Device Name"
-msgstr ""
-
-msgid "- Download Cover from Google"
-msgstr ""
-
-msgid "- Extra Color Chill"
-msgstr ""
-
-msgid "- Extra Color City"
-msgstr ""
-
 msgid "- Extra Zoom"
 msgstr "- Extra Zoom"
-
-msgid "- Fast Grab lower quality"
-msgstr ""
 
 msgid "- File [ok]>"
 msgstr "- Bestand [ok]>"
@@ -178,14 +131,8 @@ msgstr "- LCD 3 Roteer"
 msgid "- Layout"
 msgstr "- Lay-out"
 
-msgid "- Length [Bar]"
-msgstr ""
-
 msgid "- Lines"
 msgstr "- Lijnen"
-
-msgid "- Mail Konto"
-msgstr ""
 
 msgid "- OSD Size"
 msgstr "- OSD Maat"
@@ -274,17 +221,8 @@ msgstr "- Zoekpad [ok]>"
 msgid "- Sensors"
 msgstr "- Sensors"
 
-msgid "- Shaded"
-msgstr ""
-
-msgid "- Shadow Edges"
-msgstr ""
-
 msgid "- Show State"
 msgstr "- Toon status"
-
-msgid "- Show chill temperature from difference"
-msgstr ""
 
 msgid "- Show in Mode"
 msgstr "- Toon in mode"
@@ -403,18 +341,6 @@ msgstr "1min"
 msgid "2"
 msgstr "2"
 
-msgid "2 Days 1 Line"
-msgstr ""
-
-msgid "2 Days 2 Line"
-msgstr ""
-
-msgid "2 x FastForwardKey"
-msgstr ""
-
-msgid "2 x FastForwardKey Type 2"
-msgstr ""
-
 msgid "2 x InfoKey"
 msgstr "2 x Info-toets"
 
@@ -469,15 +395,6 @@ msgstr "35%"
 msgid "3min"
 msgstr "3min"
 
-msgid "4 Days 1 Line"
-msgstr ""
-
-msgid "4 Days 2 Lines"
-msgstr ""
-
-msgid "4 Days Vertical View"
-msgstr ""
-
 msgid "40%"
 msgstr "40%"
 
@@ -495,15 +412,6 @@ msgstr "4min"
 
 msgid "5"
 msgstr "5"
-
-msgid "5 Days 1 Line"
-msgstr ""
-
-msgid "5 Days 2 Lines"
-msgstr ""
-
-msgid "5 Days Vertical View"
-msgstr ""
 
 msgid "5%"
 msgstr "5%"
@@ -544,9 +452,6 @@ msgstr "80%"
 msgid "85%"
 msgstr "85%"
 
-msgid "8bit - grayscale/color"
-msgstr ""
-
 msgid "90"
 msgstr "90"
 
@@ -580,89 +485,14 @@ msgstr "Analoog+Datum"
 msgid "Analog+Date+Weekday"
 msgstr "Analoog+Datum+Dag"
 
-msgid "Audio/Video"
-msgstr ""
-
-msgid "Bar"
-msgstr ""
-
-msgid "Bar+Value"
-msgstr ""
-
 msgid "Bitrate"
 msgstr "Bitrate"
-
-msgid "Box-Skin-LCD"
-msgstr ""
-
-msgid "Box-Skin-LCD Color"
-msgstr ""
-
-msgid "Box-Skin-LCD Dimension"
-msgstr ""
-
-msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr ""
-
-msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr ""
-
-msgid "Box-Skin-LCD Enable On-Mode"
-msgstr ""
 
 msgid "C"
 msgstr "C"
 
-msgid "C + rmp"
-msgstr ""
-
-msgid "C + rmp/2"
-msgstr ""
-
-msgid "Calendar"
-msgstr ""
-
-msgid "Calendar Background Processing"
-msgstr ""
-
-msgid "Calendar Day Event Preview"
-msgstr ""
-
-msgid "Calendar Line Thickness"
-msgstr ""
-
-msgid "Calendar Transparency"
-msgstr ""
-
-msgid "Calendar ics-Path [ok]>"
-msgstr ""
-
-msgid "Calendar ics-URL"
-msgstr ""
-
 msgid "Cancel"
 msgstr "Annuleer"
-
-msgid "Choose dir"
-msgstr ""
-
-msgid "Choose file"
-msgstr ""
-
-msgid "Choose font"
-msgstr ""
-
-msgid "Clock"
-msgstr ""
-
-msgid "Clock 2"
-msgstr ""
-
-msgid "Config Backup Path [ok]>"
-msgstr ""
-
-msgid "Console normal"
-msgstr ""
 
 msgid "Corner"
 msgstr "Hoek"
@@ -682,7 +512,6 @@ msgstr "Huidige temperatuur (+C)"
 msgid "Current Temperature (-C)"
 msgstr "Huidige temperatuur (-C)"
 
-#, python-format
 msgid "Current value: %s"
 msgstr "Huidige waarde: %s"
 
@@ -710,62 +539,11 @@ msgstr "Data 5 regels"
 msgid "Dates 9 Lines"
 msgstr "Data 9 regels"
 
-msgid "Dates List"
-msgstr ""
-
-msgid "Dates compact"
-msgstr ""
-
-msgid "Dates compact 2 Lines"
-msgstr ""
-
-msgid "Dates compact 3 Lines"
-msgstr ""
-
-msgid "Dates compact no Icon"
-msgstr ""
-
-msgid "Dates no Icon"
-msgstr ""
-
-msgid "Debug-Logging > /tmp/L4log.txt"
-msgstr ""
-
 msgid "Delete"
 msgstr "Verwijder"
 
 msgid "Delete File?"
 msgstr "Verwijder bestand?"
-
-msgid "Display Delay [ms]"
-msgstr ""
-
-msgid "Double-button switches"
-msgstr ""
-
-msgid "Event Icon Bar"
-msgstr ""
-
-msgid "Exec"
-msgstr ""
-
-msgid "Extended"
-msgstr ""
-
-msgid "Extended (Short)"
-msgstr ""
-
-msgid "Extended Description"
-msgstr ""
-
-msgid "Fastmode (2s)"
-msgstr ""
-
-msgid "First Quarter"
-msgstr ""
-
-msgid "Flaps Design"
-msgstr ""
 
 msgid "Font"
 msgstr "Lettertype"
@@ -788,46 +566,8 @@ msgstr "Frame"
 msgid "FritzCall"
 msgstr "FritzCall"
 
-msgid "FritzCall Frame Picture [ok]>"
-msgstr ""
-
-msgid "FritzCall Number of List Entries"
-msgstr ""
-
-msgid "FritzCall Number of Pictures"
-msgstr ""
-
-msgid "FritzCall Picture Orientation"
-msgstr ""
-
-msgid "FritzCall Picture Path [ok]>"
-msgstr ""
-
-msgid "FritzCall Pictures Search"
-msgstr ""
-
-msgid "FritzCall Popup Color"
-msgstr ""
-
-msgid "FritzCall Popup LCD"
-msgstr ""
-
-msgid "FritzCall Popup-Time"
-msgstr ""
-
-msgid "FritzCall remove Calls after hours"
-msgstr ""
-
 msgid "Full Moon"
 msgstr "Volle maan"
-
-msgid "GUI Restart is required"
-msgstr ""
-
-msgid ""
-"GUI needs a restart to apply the changes.\n"
-"Do you want to Restart the GUI now?"
-msgstr ""
 
 msgid "Global"
 msgstr "Globaal"
@@ -850,26 +590,8 @@ msgstr "Informatie"
 msgid "Infos"
 msgstr "Infos"
 
-msgid "Internal Box-Skin-LCD"
-msgstr ""
-
-msgid "Internal TFT-LCD 400x240"
-msgstr ""
-
-msgid "Internal Vu+ Duo2 LCD 400x240"
-msgstr ""
-
 msgid "Javascript"
 msgstr "Javascript"
-
-msgid "Key for Screen Change"
-msgstr ""
-
-msgid "Knob"
-msgstr ""
-
-msgid "Knob+Value"
-msgstr ""
 
 msgid "LCD 1"
 msgstr "LCD 1"
@@ -901,57 +623,11 @@ msgstr "LCD 3"
 msgid "LCD 3 Type"
 msgstr "LCD 3 Type"
 
-msgid "LCD Custom Height"
-msgstr ""
-
-msgid "LCD Custom Width"
-msgstr ""
-
 msgid "LCD Display"
 msgstr "LCD Display"
 
-msgid "LCD4linux enabled"
-msgstr ""
-
-msgid "Last Quarter"
-msgstr ""
-
-msgid "List of Storage Devices"
-msgstr ""
-
-msgid "Load Active Config-File"
-msgstr ""
-
-msgid "Load Defaults"
-msgstr ""
-
-#, python-format
-msgid "Load File : %s"
-msgstr ""
-
-msgid "Load@1min"
-msgstr ""
-
-msgid "Load@5min"
-msgstr ""
-
-msgid "Logfile extensive"
-msgstr ""
-
-msgid "Logfile normal"
-msgstr ""
-
-msgid "Long FastForwardKey"
-msgstr ""
-
-msgid "Long FastForwardKey Type 2"
-msgstr ""
-
 msgid "Mail"
 msgstr "Mail"
-
-msgid "Mail 1 Connect"
-msgstr ""
 
 msgid "Mail 1 Password"
 msgstr "Mail 1 Wachtwoord"
@@ -959,62 +635,20 @@ msgstr "Mail 1 Wachtwoord"
 msgid "Mail 1 Server"
 msgstr "Mail 1 Server"
 
-msgid "Mail 1 [Displayname:]Username"
-msgstr ""
-
-msgid "Mail 2 Connect"
-msgstr ""
-
-msgid "Mail 2 Password"
-msgstr ""
-
 msgid "Mail 2 Server"
 msgstr "Mail 2 Server"
-
-msgid "Mail 2 [Displayname:]Username"
-msgstr ""
-
-msgid "Mail 3 Connect"
-msgstr ""
-
-msgid "Mail 3 Password"
-msgstr ""
 
 msgid "Mail 3 Server"
 msgstr "Mail 3 Server"
 
-msgid "Mail 3 [Displayname:]Username"
-msgstr ""
-
-msgid "Mail 4 Connect"
-msgstr ""
-
-msgid "Mail 4 Password"
-msgstr ""
-
 msgid "Mail 4 Server"
 msgstr "Mail 4 Server"
-
-msgid "Mail 4 [Displayname:]Username"
-msgstr ""
-
-msgid "Mail 5 Connect"
-msgstr ""
-
-msgid "Mail 5 Password"
-msgstr ""
 
 msgid "Mail 5 Server"
 msgstr "Mail 5 Server"
 
-msgid "Mail 5 [Displayname:]Username"
-msgstr ""
-
 msgid "Mail Poll Interval"
 msgstr "Mail Poll Interval"
-
-msgid "Mail Show Empty Mailboxes"
-msgstr ""
 
 msgid "Media"
 msgstr "Media"
@@ -1025,68 +659,20 @@ msgstr "Geheugen"
 msgid "Meteo URL"
 msgstr "Meteo URL"
 
-msgid "Meteo-Weather Station"
-msgstr ""
-
 msgid "Mini-EPG"
 msgstr "Mini-EPG"
-
-msgid "Month"
-msgstr ""
-
-msgid "Month+Header"
-msgstr ""
-
-msgid "Moon-Icon-Path [ok]>"
-msgstr ""
-
-msgid "Moonphase"
-msgstr ""
 
 msgid "Name"
 msgstr "Naam"
 
-msgid "Netatmo"
-msgstr ""
-
-msgid "Netatmo CO2 Indicator"
-msgstr ""
-
-msgid "Netatmo CO2 Max Range"
-msgstr ""
-
-msgid "Netatmo CO2 Min Range"
-msgstr ""
-
-msgid "New Moon"
-msgstr ""
-
-msgid "Next Program Info"
-msgstr ""
-
-msgid "Next Timer Event"
-msgstr ""
-
 msgid "Normal (5s)"
 msgstr "Normaal (5s)"
-
-msgid "OSCAM not running"
-msgstr ""
 
 msgid "OSD"
 msgstr "OSD"
 
-msgid "OSD [display time]"
-msgstr ""
-
 msgid "Offline"
 msgstr "Offline"
-
-msgid "On"
-msgstr ""
-
-msgid "On+Media+Standby"
-msgstr ""
 
 msgid "Online"
 msgstr "Online"
@@ -1097,77 +683,17 @@ msgstr "Online [Ping]"
 msgid "Online+Offline"
 msgstr "Online+Offline"
 
-msgid "Only New"
-msgstr ""
-
-msgid "Parent Directory"
-msgstr ""
-
-msgid "Pearl (or compatible LCD) 240x320"
-msgstr ""
-
-msgid "Pearl (or compatible LCD) 320x240"
-msgstr ""
-
 msgid "Picon"
 msgstr "Picon"
 
 msgid "Picon 2"
 msgstr "Picon 2"
 
-msgid "Picon+Position below"
-msgstr ""
-
-msgid "Picon+Position left"
-msgstr ""
-
-msgid "Picon+Position right"
-msgstr ""
-
-msgid "Picture"
-msgstr ""
-
-msgid "Picture Changing Time"
-msgstr ""
-
-msgid "Picture Directory Recursive"
-msgstr ""
-
-msgid "Picture Quality for Resizing"
-msgstr ""
-
-msgid "Picture Quick Update Time [s]"
-msgstr ""
-
-msgid "Picture Sort"
-msgstr ""
-
 msgid "Pop3"
 msgstr "Pop3"
 
 msgid "Pop3-SSL"
 msgstr "Pop3-SSL"
-
-msgid "Popup Text"
-msgstr ""
-
-msgid "Popup-Text"
-msgstr ""
-
-msgid "Position"
-msgstr ""
-
-msgid "Program Info"
-msgstr ""
-
-msgid "Program Name"
-msgstr ""
-
-msgid "Program Number"
-msgstr ""
-
-msgid "Progress Bar"
-msgstr ""
 
 msgid "Provider"
 msgstr "Provider"
@@ -1177,24 +703,6 @@ msgstr "Radio"
 
 msgid "Radio+Media"
 msgstr "Radio+Media"
-
-msgid "Recording"
-msgstr ""
-
-msgid "Rectangle 1"
-msgstr ""
-
-msgid "Rectangle 2"
-msgstr ""
-
-msgid "Reload"
-msgstr ""
-
-msgid "Restart Displays"
-msgstr ""
-
-msgid "Restart GUI now?"
-msgstr ""
 
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
@@ -1234,13 +742,6 @@ msgstr "Satelliet"
 
 msgid "Save"
 msgstr "Opslaan"
-
-#, python-format
-msgid "Save Config to File... (%s)"
-msgstr ""
-
-msgid "Save as Picture for WebIF"
-msgstr ""
 
 msgid "Screen"
 msgstr "Scherm"
@@ -1407,9 +908,6 @@ msgstr "Opslag media"
 msgid "Storage-Devices: Force Read"
 msgstr "Opslag media: force read"
 
-msgid "Stutter TV"
-msgstr ""
-
 msgid "Sunrise"
 msgstr "Zonsopkomst"
 
@@ -1434,9 +932,6 @@ msgstr "Temperatuur+Co2"
 msgid "Temperature+Co2+Pressure"
 msgstr "Temperatuur+Co2+Druk"
 
-msgid "Threads per LCD"
-msgstr ""
-
 msgid "Time"
 msgstr "Tijd"
 
@@ -1451,9 +946,6 @@ msgstr "Tijd+Lengte+Info"
 
 msgid "Time+Weekday"
 msgstr "Tijd+Dag"
-
-msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
-msgstr ""
 
 msgid "Title"
 msgstr "Titel"
@@ -1484,18 +976,6 @@ msgstr "WWW Converter Poll Interval"
 
 msgid "WWW-Internet Converter"
 msgstr "WWW-Internet Converter"
-
-msgid "Waning Crescent"
-msgstr ""
-
-msgid "Waning Gibbous"
-msgstr ""
-
-msgid "Waxing Crescent"
-msgstr ""
-
-msgid "Waxing Gibbous"
-msgstr ""
 
 msgid "Weather"
 msgstr "Weer"
@@ -1533,26 +1013,11 @@ msgstr "Weer-ikoon zoom"
 msgid "Weather-Icon-Path [ok]>"
 msgstr "Weer-ikoon-Pad [ok]>"
 
-msgid "WebIF Init Delay"
-msgstr ""
-
-msgid "WebIF Refresh Type"
-msgstr ""
-
-msgid "WebIF Refresh [s]"
-msgstr ""
-
 msgid "Week"
 msgstr "Week"
 
-msgid "Week+Header"
-msgstr ""
-
 msgid "alphabetic"
 msgstr "alfabetisch"
-
-msgid "alternative Copy-Mode/DM800hd (24bit)"
-msgstr ""
 
 msgid "always"
 msgstr "altijd"
@@ -1575,9 +1040,6 @@ msgstr "blauw paars"
 msgid "brown"
 msgstr "bruin"
 
-msgid "cadetblue"
-msgstr ""
-
 msgid "center"
 msgstr "midden"
 
@@ -1593,10 +1055,6 @@ msgstr "Kopieer naar Aan"
 msgid "cornflowerblue"
 msgstr "korenbloem blauw"
 
-#, python-format
-msgid "currently set : %s"
-msgstr ""
-
 msgid "cyan"
 msgstr "groenblauw"
 
@@ -1608,9 +1066,6 @@ msgstr "donker groen"
 
 msgid "darkorange"
 msgstr "donker oranje"
-
-msgid "darkorchid"
-msgstr ""
 
 msgid "darkred"
 msgstr "donker rood"
@@ -1660,12 +1115,6 @@ msgstr "half rechts"
 msgid "horizontally"
 msgstr "horizontaal"
 
-msgid "indianred"
-msgstr ""
-
-msgid "indigo"
-msgstr ""
-
 msgid "lawngreen"
 msgstr "grasgroen"
 
@@ -1689,9 +1138,6 @@ msgstr "laag/snel (alle)"
 
 msgid "magenta"
 msgstr "magenta"
-
-msgid "moccasin"
-msgstr ""
 
 msgid "no"
 msgstr "Nee"
@@ -1747,9 +1193,6 @@ msgstr "alleen foto aangepaste grootte"
 msgid "only Progress Bar"
 msgstr "alleen voortgangsbalk"
 
-msgid "only use Timer"
-msgstr ""
-
 msgid "orange"
 msgstr "oranje"
 
@@ -1768,9 +1211,6 @@ msgstr "rood"
 msgid "right"
 msgstr "rechts"
 
-msgid "rosybrown"
-msgstr ""
-
 msgid "rpm"
 msgstr "omw/min"
 
@@ -1779,15 +1219,6 @@ msgstr "omw/min/2"
 
 msgid "sandybrown"
 msgstr "zandbruin"
-
-msgid "set Settings"
-msgstr ""
-
-msgid "show run"
-msgstr ""
-
-msgid "show run+sleep"
-msgstr ""
 
 msgid "silver"
 msgstr "zilver"
@@ -1798,15 +1229,6 @@ msgstr "leigrijs"
 msgid "tomato"
 msgstr "tomaat"
 
-msgid "trimmed (black)"
-msgstr ""
-
-msgid "trimmed (transparent)"
-msgstr ""
-
-msgid "use lead-time"
-msgstr ""
-
 msgid "vertically"
 msgstr "vertikaal"
 
@@ -1815,87 +1237,6 @@ msgstr "paars"
 
 msgid "white"
 msgstr "wit"
-
-msgid "with Current 00:00"
-msgstr ""
-
-msgid "with Current 00:00 (Size 1.5)"
-msgstr ""
-
-msgid "with Current 00:00 (Size 2)"
-msgstr ""
-
-msgid "with Current 00:00 (above)"
-msgstr ""
-
-msgid "with Current 00:00 (above/Size 1.5)"
-msgstr ""
-
-msgid "with Current 00:00 (above/Size 2)"
-msgstr ""
-
-msgid "with Current 00:00 (below)"
-msgstr ""
-
-msgid "with Current 00:00 (below/Size 1.5)"
-msgstr ""
-
-msgid "with Current 00:00 (below/Size 2)"
-msgstr ""
-
-msgid "with Percent"
-msgstr ""
-
-msgid "with Percent (Size 1.5)"
-msgstr ""
-
-msgid "with Percent (Size 2)"
-msgstr ""
-
-msgid "with Percent (above)"
-msgstr ""
-
-msgid "with Percent (above/Size 1.5)"
-msgstr ""
-
-msgid "with Percent (above/Size 2)"
-msgstr ""
-
-msgid "with Percent (below)"
-msgstr ""
-
-msgid "with Percent (below/Size 1.5)"
-msgstr ""
-
-msgid "with Percent (below/Size 2)"
-msgstr ""
-
-msgid "with Remaining Minutes"
-msgstr ""
-
-msgid "with Remaining Minutes (Size 1.5)"
-msgstr ""
-
-msgid "with Remaining Minutes (Size 2)"
-msgstr ""
-
-msgid "with Remaining Minutes (above)"
-msgstr ""
-
-msgid "with Remaining Minutes (above/Size 1.5)"
-msgstr ""
-
-msgid "with Remaining Minutes (above/Size 2)"
-msgstr ""
-
-msgid "with Remaining Minutes (below)"
-msgstr ""
-
-msgid "with Remaining Minutes (below/Size 1.5)"
-msgstr ""
-
-msgid "with Remaining Minutes (below/Size 2)"
-msgstr ""
 
 msgid "yellow"
 msgstr "Geel"
@@ -1923,4 +1264,3 @@ msgstr "ja, lang"
 
 msgid "yes, short"
 msgstr "ja, kort"
-
