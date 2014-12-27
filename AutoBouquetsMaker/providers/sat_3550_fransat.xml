@@ -1,0 +1,37 @@
+<provider>
+	<name>FranSat</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>nolcn</protocol>
+	<namespace>dde0000</namespace>
+	<transponder
+		frequency="10972000"
+		symbol_rate="29950000"
+		polarization="1"
+		fec_inner="5"
+		orbital_position="3550"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+	/>
+	<sections>
+		<section number="1">Chaines TNT gratuites</section>
+		<section number="30">Sport</section>
+		<section number="40">Généraliste</section>
+		<section number="50">Information</section>
+		<section number="60">Jeunesse</section>
+		<section number="70">Culture découverte</section>
+		<section number="80">Cinéma</section>
+		<section number="100">TV Locales</section>
+		<section number="200">TV Autres</section>
+		<section number="280">Adultes</section>
+		<section number="300">Regionales</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+if service["service_type"] == 1 and service["service_name"][-2:] == 'HD':
+	service["service_type"] = 25
+]]>
+	</servicehacks>
+</provider>
