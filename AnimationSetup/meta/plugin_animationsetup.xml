@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>hschang(hschang@dev3)</author>
+                    <name>Animations Setup</name>
+                    <packagename>enigma2-plugin-systemplugins-animationsetup</packagename>
+                    <shortdescription>Animation Setup</shortdescription>
+                    <description>Animation Setup</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-animationsetup" />
+	</files>
+</default>
