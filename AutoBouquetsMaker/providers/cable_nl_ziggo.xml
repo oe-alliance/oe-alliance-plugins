@@ -4,6 +4,8 @@
 	<protocol>lcn</protocol>
 	<namespace>0xffff0000</namespace>
 	<dvbcconfigs>
+		<configuration key="ziggo_hd" netid="5555" bouquettype="hd" frequency="474000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">Ziggo HD</configuration>
+		<configuration key="ziggo_sd" netid="5555" bouquettype="sd" frequency="474000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">Ziggo SD</configuration>
 		<configuration key="ziggo1111hd" netid="1111" bouquettype="hd" frequency="356000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">1111 HD</configuration>
 		<configuration key="ziggo1111sd" netid="1111" bouquettype="sd" frequency="356000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">1111 SD</configuration>
 		<configuration key="ziggo5555hd" netid="5555" bouquettype="hd" frequency="372000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">5555 HD</configuration>
