@@ -169,6 +169,19 @@ class BouquetsWriter():
 			return len(content) > 2
 		except Exception, e:
 			return False
+			
+	def containServicesLines(self, path, filename):
+		try:
+			bouquets = open(path + "/" + filename, "r")
+			content = bouquets.read().strip().split("\n")
+			bouquets.close()
+			for line in content:
+				if line[:13] == "#SERVICE 1:0:":		#service line found
+					return True
+					break
+			return False
+		except Exception, e:
+			return False
 
 	def buildBouquetsIndex(self, path, bouquetsOrder, providers, bouquetsToKeep, currentBouquets, bouquets_to_hide, provider_configs):
 		print>>log, "[BouquetsWriter] Writing bouquets index..."
@@ -218,15 +231,15 @@ class BouquetsWriter():
 						bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.%d.tv\" ORDER BY bouquet\n" % (section_identifier, section_number))
 					bouquetsToKeep2["tv"].append("autobouquet.%s.%d.tv" % (section_identifier, section_number))
 
-			if provider_configs[section_identifier].isMakeHD():
+			if provider_configs[section_identifier].isMakeHD() and self.containServicesLines(path, "autobouquet.%s.hd.tv" % section_identifier):
 				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.hd.tv\" ORDER BY bouquet\n" % section_identifier)
 				bouquetsToKeep2["tv"].append("autobouquet.%s.hd.tv" % section_identifier)
 
-			if provider_configs[section_identifier].isMakeFTAHD():
+			if provider_configs[section_identifier].isMakeFTAHD() and self.containServicesLines(path, "autobouquet.%s.ftahd.tv" % section_identifier):
 				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.ftahd.tv\" ORDER BY bouquet\n" % section_identifier)
 				bouquetsToKeep2["tv"].append("autobouquet.%s.ftahd.tv" % section_identifier)
 
-			if provider_configs[section_identifier].isMakeFTA():
+			if provider_configs[section_identifier].isMakeFTA() and self.containServicesLines(path, "autobouquet.%s.fta.tv" % section_identifier):
 				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.fta.tv\" ORDER BY bouquet\n" % section_identifier)
 				bouquetsToKeep2["tv"].append("autobouquet.%s.fta.tv" % section_identifier)
 
