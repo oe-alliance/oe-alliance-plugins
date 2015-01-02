@@ -438,7 +438,7 @@ class DvbScanner():
 
 				if logical_channel_number_dict and (key not in logical_channel_number_dict or logical_channel_number_dict[key]["visible_service_flag"] == 0):
 					continue
-				if service_dict_tmp and key not in service_dict_tmp:
+				if service_dict_tmp and key not in service_dict_tmp and protocol != "lcn2":
 					continue
 
 				service["namespace"] = namespace
@@ -465,7 +465,7 @@ class DvbScanner():
 		radio_services = {}
 
 		service_extra_count = 0
-
+		
 		for key in tmp_services_dict:
 			service = tmp_services_dict[key]
 

@@ -187,7 +187,7 @@ class Manager():
 				scanner.setNitCurrentTableId(providers[provider_key]["transponder"]["nit_current_table_id"])
 				scanner.setNitOtherTableId(providers[provider_key]["transponder"]["nit_other_table_id"])
 
-				if providers[provider_key]["protocol"] == "lcn" or providers[provider_key]["protocol"] == "nolcn":
+				if providers[provider_key]["protocol"] == "lcn" or providers[provider_key]["protocol"] == "lcn2" or providers[provider_key]["protocol"] == "nolcn":
 					scanner.setSdtPid(providers[provider_key]["transponder"]["sdt_pid"])
 					scanner.setSdtCurrentTableId(providers[provider_key]["transponder"]["sdt_current_table_id"])
 					scanner.setSdtOtherTableId(providers[provider_key]["transponder"]["sdt_other_table_id"])
