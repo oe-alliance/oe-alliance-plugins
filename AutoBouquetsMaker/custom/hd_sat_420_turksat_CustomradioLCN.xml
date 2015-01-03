@@ -1,0 +1,85 @@
+<custom>
+	<include>yes</include>
+	<lcnlist>
+		<configuration lcn="1" channelnumber="2" description="TRKMENEL FM"></configuration>
+		<configuration lcn="2" channelnumber="3" description="METRO FM"></configuration>
+		<configuration lcn="3" channelnumber="4" description="SUPER FM"></configuration>
+		<configuration lcn="4" channelnumber="5" description="RADYO M"></configuration>
+		<configuration lcn="5" channelnumber="6" description="VIRGIN RADYO"></configuration>
+		<configuration lcn="6" channelnumber="7" description="JOY FM "></configuration>
+		<configuration lcn="7" channelnumber="4616" description="RADIO CITY"></configuration>
+		<configuration lcn="8" channelnumber="23" description="MELTEM RADYO"></configuration>
+		<configuration lcn="9" channelnumber="10508" description="TRT RADYO 1"></configuration>
+		<configuration lcn="10" channelnumber="13" description="NTVSpor Radyo"></configuration>
+		<configuration lcn="11" channelnumber="10510" description="TRT GAP RADYOSU"></configuration>
+		<configuration lcn="12" channelnumber="7439" description="MASAL RADYO"></configuration>
+		<configuration lcn="13" channelnumber="10512" description="TRT RADYO 4"></configuration>
+		<configuration lcn="14" channelnumber="10513" description="TRT RADYO 6"></configuration>
+		<configuration lcn="15" channelnumber="10514" description="VOICE OF TURKEY"></configuration>
+		<configuration lcn="16" channelnumber="1171" description="Azadliq VOA Azeri"></configuration>
+		<configuration lcn="17" channelnumber="10516" description="METEOR FM"></configuration>
+		<configuration lcn="18" channelnumber="1173" description="PAL FM"></configuration>
+		<configuration lcn="19" channelnumber="22" description="OLAY FM"></configuration>
+		<configuration lcn="20" channelnumber="1175" description="PAL STATION"></configuration>
+		<configuration lcn="21" channelnumber="10520" description="TRT AVRUPA FM"></configuration>
+		<configuration lcn="22" channelnumber="1177" description="POPKRT FM"></configuration>
+		<configuration lcn="23" channelnumber="10523" description="VOICE OF TURKEY"></configuration>
+		<configuration lcn="24" channelnumber="28" description="POWERTURK FM"></configuration>
+		<configuration lcn="25" channelnumber="1181" description="DELTA FM"></configuration>
+		<configuration lcn="26" channelnumber="14623" description="POWER FM"></configuration>
+		<configuration lcn="27" channelnumber="14624" description="POWERTRK FM"></configuration>
+		<configuration lcn="28" channelnumber="51617" description="NUMBER ONE FM"></configuration>
+		<configuration lcn="29" channelnumber="1179" description="EKN RADYO"></configuration>
+		<configuration lcn="30" channelnumber="51313" description="SPER FM"></configuration>
+		<configuration lcn="31" channelnumber="1197" description="TEK-4"></configuration>
+		<configuration lcn="32" channelnumber="1373" description="RADYO D"></configuration>
+		<configuration lcn="33" channelnumber="27" description="POWER FM"></configuration>
+		<configuration lcn="34" channelnumber="1391" description="SERVICE 1"></configuration>
+		<configuration lcn="35" channelnumber="50612" description="RADYO SLOW TIME"></configuration>
+		<configuration lcn="36" channelnumber="50613" description="RADYO SPOR"></configuration>
+		<configuration lcn="37" channelnumber="10810" description="KRAL FM"></configuration>
+		<configuration lcn="38" channelnumber="10807" description="NTV RADYO"></configuration>
+		<configuration lcn="39" channelnumber="11320" description="BUR FM"></configuration>
+		<configuration lcn="40" channelnumber="51316" description="VIRGIN RADIO"></configuration>
+		<configuration lcn="41" channelnumber="11322" description="DNYA RADYO"></configuration>
+		<configuration lcn="42" channelnumber="12603" description="TGRT FM"></configuration>
+		<configuration lcn="43" channelnumber="10521" description="TRT TRK"></configuration>
+		<configuration lcn="44" channelnumber="11325" description="AKRA FM"></configuration>
+		<configuration lcn="45" channelnumber="11326" description="MORAL FM"></configuration>
+		<configuration lcn="46" channelnumber="51317" description="MELTEM RADYO"></configuration>
+		<configuration lcn="47" channelnumber="64" description="MARMARA RADYO"></configuration>
+		<configuration lcn="48" channelnumber="19" description="RADYO TATLISES"></configuration>
+		<configuration lcn="49" channelnumber="51315" description="JOY FM"></configuration>
+		<configuration lcn="50" channelnumber="14625" description="POWERLOVE"></configuration>
+		<configuration lcn="51" channelnumber="10905" description="KRAL FM"></configuration>
+		<configuration lcn="52" channelnumber="12" description="RADYO VVA"></configuration>
+		<configuration lcn="53" channelnumber="51716" description="NR1 TRK FM "></configuration>
+		<configuration lcn="54" channelnumber="10509" description="TRT RADYO 3"></configuration>
+		<configuration lcn="55" channelnumber="11704" description="RADYO 7"></configuration>
+		<configuration lcn="56" channelnumber="14627" description="RADYO FENOMEN"></configuration>
+		<configuration lcn="57" channelnumber="10809" description="KRAL POP FM"></configuration>
+		<configuration lcn="58" channelnumber="1371" description="CNN TRK RADYO"></configuration>
+		<configuration lcn="59" channelnumber="51616" description="NUMBER ONE TRK FM"></configuration>
+		<configuration lcn="60" channelnumber="11706" description="STANBULUN SES"></configuration>
+		<configuration lcn="61" channelnumber="1375" description="SLOW TRK"></configuration>
+		<configuration lcn="62" channelnumber="1377" description="BEST FM"></configuration>
+		<configuration lcn="63" channelnumber="11405" description="BUR FM"></configuration>
+		<configuration lcn="64" channelnumber="10811" description="RADYO EKSEN"></configuration>
+		<configuration lcn="65" channelnumber="10808" description="CAPITAL RADIO"></configuration>
+		<configuration lcn="66" channelnumber="16" description="METRO FM"></configuration>
+		<configuration lcn="67" channelnumber="17" description="SPER FM"></configuration>
+		<configuration lcn="68" channelnumber="10511" description="TRT FM"></configuration>
+		<configuration lcn="69" channelnumber="51717" description="NR1 FM"></configuration>
+		<configuration lcn="70" channelnumber="11501" description="RADYO 7"></configuration>
+		<configuration lcn="71" channelnumber="10899" description="NTV TEST"></configuration>
+		<configuration lcn="72" channelnumber="51312" description="METRO FM"></configuration>
+		<configuration lcn="73" channelnumber="1393" description="SERVICE 2"></configuration>
+		<configuration lcn="74" channelnumber="51314" description="JOY TRK"></configuration>
+		<configuration lcn="75" channelnumber="1395" description="SERVICE 3"></configuration>
+		<configuration lcn="76" channelnumber="25" description="POWERLOVE"></configuration>
+		<configuration lcn="77" channelnumber="1397" description="SERVICE 4"></configuration>
+		<configuration lcn="78" channelnumber="10812" description="Radyo Voyage"></configuration>
+		<configuration lcn="79" channelnumber="10813" description="Maximusic"></configuration>
+		<configuration lcn="80" channelnumber="10517" description="VOICE OF TURKEY"></configuration>
+	</lcnlist>
+</custom>
