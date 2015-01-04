@@ -60,7 +60,7 @@
 		<configuration key="hd_scottish_east" bouquet="0x1002" region="0x26" namespace="0x11a0000">Scottish East</configuration>
 		<configuration key="hd_scottish_west" bouquet="0x1002" region="0x25" namespace="0x11a0000">Scottish West</configuration>
 		<configuration key="hd_northern_ireland" bouquet="0x1004" region="0x21" namespace="0x11a0000">Northern Ireland</configuration>
-		<configuration key="hd_republic_of_ireland" bouquet="0x1008" region="0x32" namespace="0x11a0000">Republic of Ireland</configuration>
+		<configuration key="hd_republic_of_ireland" bouquet="0x1004" region="0x32" namespace="0x11a0000">Republic of Ireland</configuration>
 	</dvbsconfigs>
 	<sections>
 		<section number="101">Entertainment</section>
