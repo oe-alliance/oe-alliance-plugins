@@ -4,6 +4,9 @@ from tools import Tools
 import os, codecs, re
 
 class BouquetsWriter():
+	
+	ABM_BOUQUET_PREFIX = "userbouquet.abm."
+		
 	def writeLamedb(self, path, transponders):
 		print>>log, "[BouquetsWriter] Writing lamedb..."
 
@@ -169,7 +172,7 @@ class BouquetsWriter():
 			return len(content) > 2
 		except Exception, e:
 			return False
-			
+
 	def containServicesLines(self, path, filename):
 		try:
 			bouquets = open(path + "/" + filename, "r")
@@ -209,11 +212,11 @@ class BouquetsWriter():
 			sections = providers[section_identifier]["sections"]
 
 			if provider_configs[section_identifier].isMakeNormalMain() or provider_configs[section_identifier].isMakeHDMain() or provider_configs[section_identifier].isMakeFTAHDMain():
-				if self.containServices(path, "autobouquet.%s.main.tv" % section_identifier):
-					bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.main.tv\" ORDER BY bouquet\n" % section_identifier)
+				if self.containServices(path, "%s%s.main.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier)):
+					bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.main.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 				else:
-					bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.main.tv\" ORDER BY bouquet\n" % section_identifier)
-				bouquetsToKeep2["tv"].append("autobouquet.%s.main.tv" % section_identifier)
+					bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.main.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
+				bouquetsToKeep2["tv"].append("%s%s.main.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 			elif provider_configs[section_identifier].isMakeCustomMain() and config.autobouquetsmaker.placement.getValue() == 'top':
 				customfilename = provider_configs[section_identifier].getCustomFilename()
 				if self.containServices(path, customfilename):
@@ -226,28 +229,28 @@ class BouquetsWriter():
 			if provider_configs[section_identifier].isMakeSections():
 				for section_number in sorted(sections.keys()):
 					if section_identifier in bouquets_to_hide and section_number in bouquets_to_hide[section_identifier]:
-						bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.%d.tv\" ORDER BY bouquet\n" % (section_identifier, section_number))
+						bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%d.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_number))
 					else:
-						bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.%d.tv\" ORDER BY bouquet\n" % (section_identifier, section_number))
-					bouquetsToKeep2["tv"].append("autobouquet.%s.%d.tv" % (section_identifier, section_number))
+						bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%d.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_number))
+					bouquetsToKeep2["tv"].append("%s%s.%d.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_number))
 
-			if provider_configs[section_identifier].isMakeHD() and self.containServicesLines(path, "autobouquet.%s.hd.tv" % section_identifier):
-				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.hd.tv\" ORDER BY bouquet\n" % section_identifier)
-				bouquetsToKeep2["tv"].append("autobouquet.%s.hd.tv" % section_identifier)
+			if provider_configs[section_identifier].isMakeHD() and self.containServicesLines(path, "%s%s.ftahd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier)):
+				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.hd.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
+				bouquetsToKeep2["tv"].append("%s%s.hd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 
-			if provider_configs[section_identifier].isMakeFTAHD() and self.containServicesLines(path, "autobouquet.%s.ftahd.tv" % section_identifier):
-				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.ftahd.tv\" ORDER BY bouquet\n" % section_identifier)
-				bouquetsToKeep2["tv"].append("autobouquet.%s.ftahd.tv" % section_identifier)
+			if provider_configs[section_identifier].isMakeFTAHD() and self.containServicesLines(path, "%s%s.ftahd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier)):
+				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.ftahd.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
+				bouquetsToKeep2["tv"].append("%s%s.ftahd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 
-			if provider_configs[section_identifier].isMakeFTA() and self.containServicesLines(path, "autobouquet.%s.fta.tv" % section_identifier):
-				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.fta.tv\" ORDER BY bouquet\n" % section_identifier)
-				bouquetsToKeep2["tv"].append("autobouquet.%s.fta.tv" % section_identifier)
+			if provider_configs[section_identifier].isMakeFTA() and self.containServicesLines(path, "%s%s.ftahd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier)):
+				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.fta.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
+				bouquetsToKeep2["tv"].append("%s%s.fta.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 
-			bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.separator.tv\" ORDER BY bouquet\n" % section_identifier)
-			bouquetsToKeep2["tv"].append("autobouquet.%s.separator.tv" % section_identifier)
+			bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.separator.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
+			bouquetsToKeep2["tv"].append("%s%s.separator.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 
-			bouquets_radio.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"autobouquet.%s.main.radio\" ORDER BY bouquet\n" % section_identifier)
-			bouquetsToKeep2["radio"].append("autobouquet.%s.main.radio" % section_identifier)
+			bouquets_radio.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.main.radio\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
+			bouquetsToKeep2["radio"].append("%s%s.main.radio" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 
 		if config.autobouquetsmaker.placement.getValue() == 'top':
 			for filename in bouquetsToKeep["tv"]:
@@ -263,9 +266,6 @@ class BouquetsWriter():
 
 		for bouquet_type in ["tv", "radio"]:
 			for filename in currentBouquets[bouquet_type]:
-				if filename[:12] == "autobouquet.":
-					continue
-
 				if filename in bouquetsToKeep[bouquet_type] or filename in bouquetsToKeep2[bouquet_type]:
 					continue
 
@@ -298,7 +298,7 @@ class BouquetsWriter():
 
 		force_keep_numbers = False
 		if provider_config.isMakeNormalMain():
-			bouquet_current = open(path + "/autobouquet.%s.main.tv" % section_identifier, "w")
+			bouquet_current = open(path + "/%s%s.main.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			bouquet_current.write("#NAME %sAll channels\n" % section_prefix)
 
 			# small hack to handle the "preferred_order" list
@@ -350,7 +350,7 @@ class BouquetsWriter():
 			bouquet_current.close()
 
 		elif provider_config.isMakeHDMain() or provider_config.isMakeFTAHDMain():
-			bouquet_current = open(path + "/autobouquet.%s.main.tv" % section_identifier, "w")
+			bouquet_current = open(path + "/%s%s.main.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			if provider_config.isMakeHDMain():
 				bouquet_current.write("#NAME %sHD Channels\n" % section_prefix)
 			elif provider_config.isMakeFTAHDMain():
@@ -443,7 +443,7 @@ class BouquetsWriter():
 					higher_number = sorted(services["video"].keys())[-1]	# the highest number!
 
 				# write it!
-				bouquet_current = open(path + "/autobouquet.%s.%d.tv" % (section_identifier, section_number), "w")
+				bouquet_current = open(path + "/%s%s.%d.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_number), "w")
 				if section_number not in bouquets_to_hide:
 					bouquet_current.write("#NAME %s%s\n" % (section_prefix, section_name))
 					bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
@@ -477,7 +477,7 @@ class BouquetsWriter():
 
 		# HD channels
 		if provider_config.isMakeHD():
-			bouquet_current = open(path + "/autobouquet.%s.hd.tv" % section_identifier, "w")
+			bouquet_current = open(path + "/%s%s.hd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			bouquet_current.write("#NAME %sHD Channels\n" % section_prefix)
 
 			section_keys_temp = sorted(sections.keys())
@@ -529,7 +529,7 @@ class BouquetsWriter():
 
 		# FTA channels
 		if provider_config.isMakeFTA():
-			bouquet_current = open(path + "/autobouquet.%s.fta.tv" % section_identifier, "w")
+			bouquet_current = open(path + "/%s%s.fta.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			bouquet_current.write("#NAME %sFTA Channels\n" % section_prefix)
 			bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
 			bouquet_current.write("#DESCRIPTION %sFTA Channels\n" % section_prefix)
@@ -549,7 +549,7 @@ class BouquetsWriter():
 
 			bouquet_current.close()
 
-		bouquet_current = open(path + "/autobouquet.%s.separator.tv" % section_identifier, "w")
+		bouquet_current = open(path + "/%s%s.separator.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 		bouquet_current.write("#NAME %sSeparator\n" % section_prefix)
 		bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
 		bouquet_current.write("#DESCRIPTION %sSeparator\n" % section_prefix)
@@ -563,7 +563,7 @@ class BouquetsWriter():
 
 		# FTA HD channels
 		if provider_config.isMakeFTAHD():
-			bouquet_current = open(path + "/autobouquet.%s.ftahd.tv" % section_identifier, "w")
+			bouquet_current = open(path + "/%s%s.ftahd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 
 			bouquet_current.write("#NAME %sFTA HD Channels\n" % section_prefix)
 
@@ -615,7 +615,7 @@ class BouquetsWriter():
 			bouquet_current.close()
 
 		# now the radio bouquet
-		bouquet_current = open(path + "/autobouquet.%s.main.radio" % section_identifier, "w")
+		bouquet_current = open(path + "/%s%s.main.radio" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 		bouquet_current.write("#NAME %sRadio channels\n" % section_prefix)
 		bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
 		bouquet_current.write("#DESCRIPTION %sRadio channels\n" % section_prefix)

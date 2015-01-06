@@ -36,6 +36,8 @@ class AutoBouquetsMaker_KeepBouquets(Screen):
 			</widget>
 		</screen>"""
 
+	ABM_BOUQUET_PREFIX = "userbouquet.abm."
+		
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
@@ -80,7 +82,7 @@ class AutoBouquetsMaker_KeepBouquets(Screen):
 
 		if self.listTv is not None and self.listRadio is not None:
 			for bouquet in self.listTv:
-				if bouquet["filename"][:12] == "autobouquet.":
+				if bouquet["filename"][:12] == "autobouquet." or bouquet["filename"][:len(self.ABM_BOUQUET_PREFIX)] == self.ABM_BOUQUET_PREFIX:
 					continue
 				if bouquet["filename"] in self.bouquets:
 					self.drawList.append(self.buildListEntry(True, bouquet["name"], "TV"))
@@ -89,7 +91,7 @@ class AutoBouquetsMaker_KeepBouquets(Screen):
 				self.listAll.append(bouquet["filename"])
 
 			for bouquet in self.listRadio:
-				if bouquet["filename"][:12] == "autobouquet.":
+				if bouquet["filename"][:12] == "autobouquet." or bouquet["filename"][:len(self.ABM_BOUQUET_PREFIX)] == self.ABM_BOUQUET_PREFIX:
 					continue
 				if bouquet["filename"] in self.bouquets:
 					self.drawList.append(self.buildListEntry(True, bouquet["name"], "Radio"))

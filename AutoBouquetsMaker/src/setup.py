@@ -30,6 +30,8 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 			<widget name="pleasewait" position="10,60" size="580,230" font="Regular;18" halign="center" valign="center" transparent="0" zPosition="2"/>
 		</screen>"""
 
+	ABM_BOUQUET_PREFIX = "userbouquet.abm."
+		
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
@@ -117,7 +119,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 
 		if bouquets["tv"] is not None:
 			for bouquet in bouquets["tv"]:
-				if bouquet["filename"][:12] == "autobouquet.":
+				if bouquet["filename"][:12] == "autobouquet." or bouquet["filename"][:len(self.ABM_BOUQUET_PREFIX)] == self.ABM_BOUQUET_PREFIX:
 					continue
 				bouquets_list.append((bouquet["filename"], bouquet["name"]))
 
