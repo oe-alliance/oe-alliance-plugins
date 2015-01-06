@@ -22,7 +22,7 @@ from FTPDownloader import FTPDownloader
 
 DIR_ENIGMA2 = '/etc/enigma2/'
 DIR_TMP = '/tmp/'
-RCSC_PREFIX = 'rcscbouquet.'
+RCSC_PREFIX = 'userbouquet.rcsc.'
 
 config.plugins.RemoteStreamConverter = ConfigSubsection()
 config.plugins.RemoteStreamConverter.address = ConfigText(default = "", fixed_size = False)
