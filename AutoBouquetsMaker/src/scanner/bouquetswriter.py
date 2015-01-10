@@ -234,7 +234,7 @@ class BouquetsWriter():
 						bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%d.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_number))
 					bouquetsToKeep2["tv"].append("%s%s.%d.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_number))
 
-			if provider_configs[section_identifier].isMakeHD() and self.containServicesLines(path, "%s%s.ftahd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier)):
+			if provider_configs[section_identifier].isMakeHD() and self.containServicesLines(path, "%s%s.hd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier)):
 				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.hd.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 				bouquetsToKeep2["tv"].append("%s%s.hd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 
@@ -242,7 +242,7 @@ class BouquetsWriter():
 				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.ftahd.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 				bouquetsToKeep2["tv"].append("%s%s.ftahd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 
-			if provider_configs[section_identifier].isMakeFTA() and self.containServicesLines(path, "%s%s.ftahd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier)):
+			if provider_configs[section_identifier].isMakeFTA() and self.containServicesLines(path, "%s%s.fta.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier)):
 				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.fta.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 				bouquetsToKeep2["tv"].append("%s%s.fta.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 
