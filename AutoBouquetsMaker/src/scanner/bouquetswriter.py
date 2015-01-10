@@ -480,7 +480,11 @@ class BouquetsWriter():
 			bouquet_current = open(path + "/%s%s.hd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			bouquet_current.write("#NAME %sHD Channels\n" % section_prefix)
 
-			section_keys_temp = sorted(sections.keys())
+			# Clear unused sections
+			sections_c = sections.copy()
+			sections_c = Tools().clearsections(services, sections_c, "HD", "video")
+			
+			section_keys_temp = sorted(sections_c.keys())
 			section_key_current = section_keys_temp[0]
 
 			# small hack to handle the "channels_on_top" list
@@ -499,7 +503,7 @@ class BouquetsWriter():
 					todo = None
 					if section_key_current not in bouquets_to_hide:
 						bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-						bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[section_key_current]))
+						bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections_c[section_key_current]))
 						todo = section_key_current
 
 					section_keys_temp.remove(section_key_current)
@@ -564,10 +568,13 @@ class BouquetsWriter():
 		# FTA HD channels
 		if provider_config.isMakeFTAHD():
 			bouquet_current = open(path + "/%s%s.ftahd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
-
 			bouquet_current.write("#NAME %sFTA HD Channels\n" % section_prefix)
+			
+			# Clear unused sections
+			sections_c = sections.copy()
+			sections_c = Tools().clearsections(services, sections_c, "FTAHD", "video")
 
-			section_keys_temp = sorted(sections.keys())
+			section_keys_temp = sorted(sections_c.keys())
 			section_key_current = section_keys_temp[0]
 
 			# small hack to handle the "channels_on_top" list
@@ -586,7 +593,7 @@ class BouquetsWriter():
 					todo = None
 					if section_key_current not in bouquets_to_hide:
 						bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-						bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[section_key_current]))
+						bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections_c[section_key_current]))
 						todo = section_key_current
 
 					section_keys_temp.remove(section_key_current)

@@ -247,15 +247,18 @@ class Tools():
 
 		return customtransponderdict
 		
-	def clearsections(self, services, sections, bouquettype, servicetype):
+	def clearsections(self, services, sections_c, bouquettype, servicetype):
 		# Bouquettype = HD, FTAHD
 		# servicetype = video, radio
+		
+		if len(sections_c) == 1:
+			return sections_c
 
 		section_numbers = []
 		section_ranges = {}
 		services_tmp = services[servicetype]
 		
-		for number in sorted(sections.keys()):
+		for number in sorted(sections_c.keys()):
 			section_numbers.append(number)
 
 		last_section = section_numbers[-1]
@@ -277,17 +280,15 @@ class Tools():
 						del_section = "no"
 						break
 				if del_section == "yes":
-					sections.pop(key)
-					print>>log, "[Tools] HD Delete section: ", key
+					sections_c.pop(key)
 			#last section check.
 			del_section = "yes"
 			for key in services_tmp:
 				if key >= last_section and services_tmp[key]["service_type"] >= 17:
-					del_section = "no"
+					del_section_c = "no"
 					break
 			if del_section == "yes":
-				del sections[last_section]
-				print>>log, "[Tools] HD Delete last section: ", last_section
+				del sections_c[last_section]
 					
 		#FTA-HD
 		if bouquettype == "FTAHD":
@@ -299,8 +300,7 @@ class Tools():
 						del_section = "no"
 						break
 				if del_section == "yes":
-					sections.pop(key)
-					print>>log, "[Tools] FTAHD Delete section: ", key
+					sections_c.pop(key)
 			#last section check.
 			del_section = "yes"
 			for key in services_tmp:
@@ -308,7 +308,6 @@ class Tools():
 					del_section = "no"
 					break
 			if del_section == "yes":
-				del sections[last_section]
-				print>>log, "[Tools] FTAHD Delete last section: ", last_section
+				del sections_c[last_section]
 	
-		return sections
+		return sections_c
