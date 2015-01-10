@@ -246,3 +246,69 @@ class Tools():
 							j += 1
 
 		return customtransponderdict
+		
+	def clearsections(self, services, sections, bouquettype, servicetype):
+		# Bouquettype = HD, FTAHD
+		# servicetype = video, radio
+
+		section_numbers = []
+		section_ranges = {}
+		services_tmp = services[servicetype]
+		
+		for number in sorted(sections.keys()):
+			section_numbers.append(number)
+
+		last_section = section_numbers[-1]
+
+		for i in range(len(section_numbers) - 1):
+			section_ranges_tmp = []
+			range_lenght = section_numbers[i+1] -  section_numbers[i]
+			for j in range(section_numbers[i], range_lenght + section_numbers[i]):
+				section_ranges_tmp.append(j)
+			section_ranges[section_numbers[i]] = section_ranges_tmp
+			
+		#HD
+		if bouquettype == "HD":
+			for key in section_ranges:
+				del_section = "yes"
+				section_ranges_tmp = section_ranges[key]
+				for number in section_ranges_tmp:
+					if number in services[servicetype] and services_tmp[number]["service_type"] >= 17:
+						del_section = "no"
+						break
+				if del_section == "yes":
+					sections.pop(key)
+					print>>log, "[Tools] HD Delete section: ", key
+			#last section check.
+			del_section = "yes"
+			for key in services_tmp:
+				if key >= last_section and services_tmp[key]["service_type"] >= 17:
+					del_section = "no"
+					break
+			if del_section == "yes":
+				del sections[last_section]
+				print>>log, "[Tools] HD Delete last section: ", last_section
+					
+		#FTA-HD
+		if bouquettype == "FTAHD":
+			for key in section_ranges:
+				del_section = "yes"
+				section_ranges_tmp = section_ranges[key]
+				for number in section_ranges_tmp:
+					if number in services[servicetype] and services_tmp[number]["free_ca"] == 0 and services_tmp[number]["service_type"] >= 17:
+						del_section = "no"
+						break
+				if del_section == "yes":
+					sections.pop(key)
+					print>>log, "[Tools] FTAHD Delete section: ", key
+			#last section check.
+			del_section = "yes"
+			for key in services_tmp:
+				if key >= last_section and services_tmp[key]["free_ca"] == 0 and services_tmp[key]["service_type"] >= 17:
+					del_section = "no"
+					break
+			if del_section == "yes":
+				del sections[last_section]
+				print>>log, "[Tools] FTAHD Delete last section: ", last_section
+	
+		return sections
