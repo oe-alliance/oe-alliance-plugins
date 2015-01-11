@@ -286,7 +286,7 @@ class Tools():
 			del_section = "yes"
 			for key in services_tmp:
 				if key >= last_section and services_tmp[key]["service_type"] >= 17:
-					del_section_c = "no"
+					del_section = "no"
 					break
 			if del_section == "yes":
 				del sections_c[last_section]
