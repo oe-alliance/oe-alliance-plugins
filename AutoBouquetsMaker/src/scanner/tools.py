@@ -247,13 +247,14 @@ class Tools():
 
 		return customtransponderdict
 		
-	def clearsections(self, services, sections_c, bouquettype, servicetype):
+	def clearsections(self, services, sections, bouquettype, servicetype):
 		# Bouquettype = HD, FTAHD
 		# servicetype = video, radio
 		
-		if len(sections_c) == 1:
-			return sections_c
+		if len(sections) == 1:
+			return sections
 
+		sections_c = sections.copy()
 		section_numbers = []
 		section_ranges = {}
 		services_tmp = services[servicetype]
@@ -310,4 +311,7 @@ class Tools():
 			if del_section == "yes":
 				del sections_c[last_section]
 	
-		return sections_c
+		if len(sections_c) == 0:
+			return sections
+		else:
+			return sections_c
