@@ -364,12 +364,19 @@ class BouquetsWriter():
 		elif provider_config.isMakeHDMain() or provider_config.isMakeFTAHDMain():
 			bouquet_current = open(path + "/%s%s.main.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			if provider_config.isMakeHDMain():
+				hd_or_ftahd = "HD"
 				bouquet_current.write("#NAME %sHD Channels\n" % section_prefix)
 			elif provider_config.isMakeFTAHDMain():
+				hd_or_ftahd = "FTAHD"
 				bouquet_current.write("#NAME %sFTA HD Channels\n" % section_prefix)
 
 			higher_number = sorted(sections.keys())[0]
-			section_keys_temp = sorted(sections.keys())
+			
+			# Clear unused sections
+			sections_c = sections.copy()
+			sections_c = Tools().clearsections(services, sections_c, hd_or_ftahd, "video")
+			
+			section_keys_temp = sorted(sections_c.keys())
 			section_key_current = section_keys_temp[0]
 
 			if higher_number > 1:
@@ -384,12 +391,13 @@ class BouquetsWriter():
 				hd_channels_numbers = channels_on_top_tmp
 				hd_channels_numbers += hd_channels_numbers_tmp
 
+				todo = None
 				for number in hd_channels_numbers:
 					if number >= section_key_current:
 						todo = None
 						if section_key_current not in bouquets_to_hide:
 							bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-							bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[section_key_current]))
+							bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections_c[section_key_current]))
 							todo = section_key_current
 
 						section_keys_temp.remove(section_key_current)
@@ -510,6 +518,7 @@ class BouquetsWriter():
 			hd_channels_numbers = channels_on_top_tmp
 			hd_channels_numbers += hd_channels_numbers_tmp
 
+			todo = None
 			for number in hd_channels_numbers:
 				if number >= section_key_current:
 					todo = None
@@ -547,21 +556,43 @@ class BouquetsWriter():
 		if provider_config.isMakeFTA():
 			bouquet_current = open(path + "/%s%s.fta.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			bouquet_current.write("#NAME %sFTA Channels\n" % section_prefix)
-			bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-			bouquet_current.write("#DESCRIPTION %sFTA Channels\n" % section_prefix)
+			
+			# Clear unused sections
+			sections_c = sections.copy()
+			sections_c = Tools().clearsections(services, sections_c, "FTA", "video")
+			
+			section_keys_temp = sorted(sections_c.keys())
+			section_key_current = section_keys_temp[0]
+
 			higher_number = sorted(services["video"].keys())[-1]
+			
+			todo = None
 			for number in range(1, higher_number + 1):
-				if number in services["video"] and services["video"][number]["free_ca"] == 0 and number not in bouquets_to_hide:
-					bouquet_current.write("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
-							services["video"][number]["service_type"],
-							services["video"][number]["service_id"],
-							services["video"][number]["transport_stream_id"],
-							services["video"][number]["original_network_id"],
-							services["video"][number]["namespace"]
-						))
-					if "interactive_name" in services["video"][number]:
-						bouquet_current.write("#DESCRIPTION %s\n" % services["video"][number]["interactive_name"])
-					current_number += 1
+				if number >= section_key_current:
+					todo = None
+					if section_key_current not in bouquets_to_hide:
+						bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
+						bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections_c[section_key_current]))
+						todo = section_key_current
+
+					section_keys_temp.remove(section_key_current)
+					if len(section_keys_temp) > 0:
+						section_key_current = section_keys_temp[0]
+					else:
+						section_key_current = 65535
+
+				if todo and number >= todo:
+					if number in services["video"] and services["video"][number]["free_ca"] == 0 and number not in bouquets_to_hide:
+						bouquet_current.write("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
+								services["video"][number]["service_type"],
+								services["video"][number]["service_id"],
+								services["video"][number]["transport_stream_id"],
+								services["video"][number]["original_network_id"],
+								services["video"][number]["namespace"]
+							))
+						if "interactive_name" in services["video"][number]:
+							bouquet_current.write("#DESCRIPTION %s\n" % services["video"][number]["interactive_name"])
+						current_number += 1
 
 			bouquet_current.close()
 
@@ -575,7 +606,6 @@ class BouquetsWriter():
 			bouquet_current.write("#DESCRIPTION  \n")
 
 		bouquet_current.close()
-
 
 		# FTA HD channels
 		if provider_config.isMakeFTAHD():

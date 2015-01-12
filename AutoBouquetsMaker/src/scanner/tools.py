@@ -248,70 +248,17 @@ class Tools():
 		return customtransponderdict
 		
 	def clearsections(self, services, sections, bouquettype, servicetype):
-		# Bouquettype = HD, FTAHD
+		# bouquettype = HD, FTAHD, FTA
 		# servicetype = video, radio
-		
 		if len(sections) == 1:
 			return sections
-
-		sections_c = sections.copy()
-		section_numbers = []
-		section_ranges = {}
-		services_tmp = services[servicetype]
-		
-		for number in sorted(sections_c.keys()):
-			section_numbers.append(number)
-
-		last_section = section_numbers[-1]
-
-		for i in range(len(section_numbers) - 1):
-			section_ranges_tmp = []
-			range_lenght = section_numbers[i+1] -  section_numbers[i]
-			for j in range(section_numbers[i], range_lenght + section_numbers[i]):
-				section_ranges_tmp.append(j)
-			section_ranges[section_numbers[i]] = section_ranges_tmp
 			
-		#HD
-		if bouquettype == "HD":
-			for key in section_ranges:
-				del_section = "yes"
-				section_ranges_tmp = section_ranges[key]
-				for number in section_ranges_tmp:
-					if number in services[servicetype] and services_tmp[number]["service_type"] >= 17:
-						del_section = "no"
-						break
-				if del_section == "yes":
-					sections_c.pop(key)
-			#last section check.
-			del_section = "yes"
-			for key in services_tmp:
-				if key >= last_section and services_tmp[key]["service_type"] >= 17:
-					del_section = "no"
-					break
-			if del_section == "yes":
-				del sections_c[last_section]
-					
-		#FTA-HD
-		if bouquettype == "FTAHD":
-			for key in section_ranges:
-				del_section = "yes"
-				section_ranges_tmp = section_ranges[key]
-				for number in section_ranges_tmp:
-					if number in services[servicetype] and services_tmp[number]["free_ca"] == 0 and services_tmp[number]["service_type"] >= 17:
-						del_section = "no"
-						break
-				if del_section == "yes":
-					sections_c.pop(key)
-			#last section check.
-			del_section = "yes"
-			for key in services_tmp:
-				if key >= last_section and services_tmp[key]["free_ca"] == 0 and services_tmp[key]["service_type"] >= 17:
-					del_section = "no"
-					break
-			if del_section == "yes":
-				del sections_c[last_section]
-	
-		if len(sections_c) == 0:
-			return sections
-		else:
-			return sections_c
+		active_sections = {}
+		for key in services[servicetype].keys():
+			if ("FTA" not in bouquettype or services[servicetype][key]["free_ca"] == 0) and ("HD" not in bouquettype or services[servicetype][key]["service_type"] >= 17):
+				section_number = max((x for x in sections if int(x) <= key))
+				if section_number not in active_sections:
+					active_sections[section_number] = sections[section_number]
+		if active_sections:
+			return active_sections
+		return sections
