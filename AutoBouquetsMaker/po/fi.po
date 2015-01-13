@@ -1,0 +1,267 @@
+# Finnish translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2014 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-14 19:10+0000\n"
+"PO-Revision-Date: 2015-01-05 14:56+0200\n"
+"Last-Translator: Samzam <http://www.world-of-satellite.com/>\n"
+"Language-Team: none\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.7\n"
+
+msgid "30 Days"
+msgstr "30 päivää"
+
+msgid "About"
+msgstr "Tietoja"
+
+msgid "Add provider prefix to bouquets"
+msgstr "Lisää palveluntarjoajan nimi suosikkilistoihin"
+
+msgid "Allows you to set a schedule to perform a scan "
+msgstr "Asettaa ajastetun haun"
+
+msgid "AutoBouquetsMaker"
+msgstr "Automaattiset suosikkilistat"
+
+msgid "AutoBouquetsMaker Configure"
+msgstr "Asetukset"
+
+msgid "AutoBouquetsMaker Hide sections"
+msgstr "Piilota osiot"
+
+msgid "AutoBouquetsMaker Keep bouquets"
+msgstr "Pidä suosikkilistat"
+
+msgid "AutoBouquetsMaker Log"
+msgstr "Loki"
+
+msgid "AutoBouquetsMaker Providers"
+msgstr "Palveluntarjoajat"
+
+msgid "AutoBouquetsMaker Scanner"
+msgstr "Haku"
+
+msgid "Bottom"
+msgstr "Alimmainen"
+
+msgid "Bouquets order"
+msgstr "Listojen järjestys"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid ""
+"Choose which level of setting's to display. 'Expert'-level shows all items, "
+"this also add's more options in the providers menu."
+msgstr ""
+"Valitse näyttötaso. Laaja taso näyttää kaikki asetukset ja lisää "
+"vaihtoehtoja palveluntarjoajien valikkoon"
+
+msgid "Close"
+msgstr "Sulje"
+
+msgid "Configure"
+msgstr "Asetukset"
+
+msgid "Daily"
+msgstr "Päivittäin"
+
+msgid "Hide sections"
+msgstr "Piilota osiot"
+
+msgid ""
+"If a service is carried on a satellite that is not configured, 'yes' means "
+"the channel will not appear in the channel list, 'no' means the channel will "
+"show in the channel list but be greyed out and not be accessible."
+msgstr ""
+"Jos palvelu on satelliitissa jota ei ole määritelty \"kyllä\" tarkoittaa "
+"että kanava ei näy kanavalistassa,\"ei\" tarkoittaa että kanava näkyy "
+"kanavalistassa mutta harmaana (ei käytettävissä)"
+
+msgid "Keep all non-ABM bouquets"
+msgstr "Säilytä kaikki alkuperäiset suosikkilistat"
+
+msgid "Keep bouquets"
+msgstr "Säilytä kaikki aikaisemmin haetut suosikkilistat"
+
+msgid "Move down"
+msgstr "Siirä alas"
+
+msgid "Move up"
+msgstr "Siirrä ylös"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Place bouquets at"
+msgstr "Sijoita suosikkilista"
+
+msgid "Please wait..."
+msgstr "Odota..."
+
+msgid "Providers"
+msgstr "Palveluntarjoajat"
+
+msgid "Providers order"
+msgstr "Palveluntarjoajien järjestys"
+
+msgid "Really close without saving settings?"
+msgstr "Haluatko poistua tallentamatta asetuksia?"
+
+msgid "Repeat how often"
+msgstr "Kuinka usein toistetaan"
+
+msgid "Schedule scan"
+msgstr "Ajastettu haku"
+
+msgid ""
+"Select your own bouquet from the list, please note that the only the first "
+"100 channels for this bouquet will be used."
+msgstr ""
+"Valitse oma kanavalistasi. Huom. vain ensimmäiset 100 kanavaa käytetään."
+
+msgid "Set the repeat interval of the schedule."
+msgstr "Valitse toistojen väli"
+
+msgid "Set the time of day to perform the scan."
+msgstr "Valitse haun aika"
+
+msgid "Setup mode"
+msgstr "Asetustila"
+
+msgid "Show in extensions"
+msgstr "Näytä laajennuksissa"
+
+msgid "Show log"
+msgstr "Näytä loki"
+
+msgid "Skip services on not configured sats"
+msgstr "Ohita palvelut näkymättömissä satelliiteissa"
+
+msgid "Start scan"
+msgstr "Aloita haku"
+
+msgid ""
+"This option allows you to choose what region of the country you live in, so "
+"it populates the correct channels for your region."
+msgstr "Valitse maakunta jotta oikeat alueohjelmat tulee valituksi"
+
+msgid "This option enables the current selected provider."
+msgstr "Valitse nykyinen palveluntarjoaja"
+
+msgid ""
+"This option has several choices \"Yes\", (create a bouquet with all the "
+"channels in it), \"Yes HD only\", (will group all HD channels into this "
+"bouquet), \"Custom\", (allows you to select your own bouquet), \"No\", (do "
+"not use a main bouquet)"
+msgstr ""
+"Tässä on useita valintoja: \"kyllä\" luo listan jossa on kanavat, \"kyllä "
+"vain HD:t\" luo lista jossa on vain HD-kanavat, \"kyllä (asetuksin)\" luo "
+"valitsemasi tyylisen listan, \"ei\" ei luo päälistaa"
+
+msgid "This option will alow you choose where to place the created bouquets."
+msgstr "Valitse suosikkilistan sijoituspaikka"
+
+msgid ""
+"This option will create a FreeToAir High Definition bouquet, it will group "
+"all HD channels into this bouquet."
+msgstr "Tämä luo suosikkilistan jossa on vain vapaat HD-kanavat"
+
+msgid ""
+"This option will create a FreeToAir bouquet, it will group all none "
+"encrypted channels into this bouquet."
+msgstr "Tämä luo suosikkilistan jossa on vain vapaat kanavat"
+
+msgid ""
+"This option will create a High Definition bouquet, it will group all HD "
+"channels into this bouquet."
+msgstr "Tämä luo suosikkilistan jossa on vain HD-kanavat"
+
+msgid ""
+"This option will create bouquets for each type of channel, ie Entertainment, "
+"Movies, Documentary."
+msgstr "Tämä luo jaotellut suosikkilistat kanavien ohjelmatyypin mukaan"
+
+msgid "This option will prepend the provider name to bouquet name."
+msgstr "Tämä lisää palveluntarjoajan nimen suosikkilistan nimeen"
+
+msgid ""
+"This option will swap SD versions of channels with HD versions. (ie 101 BBC "
+"One, 103 ITV, 104 Channel Four, 105 Channel Five)"
+msgstr "Tämä vaihtaa kanavien SD-versiot HD-versioihin"
+
+msgid "Time of scan to start"
+msgstr "Haun aloitusaika"
+
+msgid "Top"
+msgstr "Ylin"
+
+msgid "Weekly"
+msgstr "Viikottain"
+
+msgid ""
+"When disabled this will enable the 'Keep bouquets' option in the main menu, "
+"allowing you to hide some 'existing' bouquets."
+msgstr ""
+"Kun ei ole valittuna sallii pitää ja piilottaa suosikkilistoja päävalikossa"
+
+msgid "When enable allow you start a scan from the extensions list."
+msgstr "Antaa aloittaa haun laajennusvalikosta"
+
+msgid "area"
+msgstr "alue"
+
+msgid "custom bouquet for main"
+msgstr "muokatut päälistat"
+
+msgid "expert"
+msgstr "Laaja"
+
+msgid "generate FTA HD bouquet"
+msgstr "luo vapaat HD:t-lista"
+
+msgid "generate FTA bouquet"
+msgstr "luo vapaat-lista"
+
+msgid "generate HD bouquet"
+msgstr "luo HD:t-lista"
+
+msgid "generate main bouquet"
+msgstr "luo päälistat"
+
+msgid "generate sections bouquets"
+msgstr "luo jaotellut listat"
+
+msgid "no"
+msgstr "Ei"
+
+msgid "simple"
+msgstr "yksinkertainen"
+
+msgid "swap channels"
+msgstr "vaihda kanavia"
+
+msgid "yes"
+msgstr "kyllä"
+
+msgid "yes (custom)"
+msgstr "kyllä (asetuksin)"
+
+msgid "yes (only FTA HD)"
+msgstr "kyllä (vain vapaat HD:t)"
+
+msgid "yes (only HD)"
+msgstr "kyllä (vain HD:t)"
+
+msgid "Save"
+msgstr "Tallenna"
