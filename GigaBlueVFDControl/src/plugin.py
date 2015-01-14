@@ -6,7 +6,7 @@ from Screens.Screen import Screen
 from Components.Console import Console
 from Components.Button import Button
 from Components.ActionMap import ActionMap
-from Components.config import config, configfile, ConfigSubsection, ConfigEnableDisable, getConfigListEntry, ConfigInteger, ConfigSelection, ConfigYesNo
+from Components.config import config, configfile, ConfigSubsection, ConfigEnableDisable, getConfigListEntry, ConfigInteger, ConfigSelection, ConfigYesNo, ConfigSlider
 from Components.ConfigList import ConfigListScreen, ConfigList
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap
@@ -33,11 +33,18 @@ config.plugins.VFD_Giga.ledSBY = ConfigSelection(led, default = "2")
 config.plugins.VFD_Giga.ledREC = ConfigSelection(led, default = "3")
 config.plugins.VFD_Giga.ledDSBY = ConfigSelection(led, default = "2")
 config.plugins.VFD_Giga.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.VFD_Giga.vfdBrightness = ConfigSlider(default=255, increment = 5, limits=(0,255))
+config.plugins.VFD_Giga.vfdBrightnessStandby = ConfigSlider(default=255, increment = 5, limits=(0,255))
 
 RecLed = None
 
 def vfd_write(text):
 	open("/dev/mcu", "w").write(text)
+
+def setvfdBrightness(value):
+		f = open("/proc/stb/fp/oled_brightness", "w")
+		f.write(str(value))
+		f.close()
 
 def setLed(color):
 	# 0 = off
@@ -175,7 +182,7 @@ class Channelnumber:
 				self.sign = 0
 			vfd_write(clock2)
 		else:
-			vfd_write("	   ")
+			vfd_write("    ")
 
 	def vrime(self):
 		self.RecordingLed()
@@ -195,7 +202,7 @@ class Channelnumber:
 				self.__eventInfoChanged()
 
 		if config.plugins.VFD_Giga.showClock.value == 'Off':
-			vfd_write("	   ")
+			vfd_write("    ")
 			self.zaPrik.start(self.updatetime, 1)
 			return
 		else:
@@ -239,7 +246,7 @@ def leaveStandby():
 	print "[LED-GIGA] Leave Standby"
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
-		vfd_write("	   ")
+		vfd_write("    ")
 
 	if RecLed is None:
 		if config.plugins.VFD_Giga.setLed.value:
@@ -249,6 +256,12 @@ def leaveStandby():
 	else:
 		setLed(config.plugins.VFD_Giga.ledREC.getValue())
 
+	if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase'):
+		if config.plugins.VFD_Giga.vfdBrightness.value:
+			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightness.getValue())
+		else:
+			setvfdBrightness("255")
+
 def standbyCounterChanged(configElement):
 	print "[LED-GIGA] In Standby"
 
@@ -256,7 +269,7 @@ def standbyCounterChanged(configElement):
 	inStandby.onClose.append(leaveStandby)
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
-		vfd_write("	   ")
+		vfd_write("    ")
 
 	if RecLed is None:
 		if config.plugins.VFD_Giga.setLed.value:
@@ -265,6 +278,12 @@ def standbyCounterChanged(configElement):
 			setLed("0")
 	else:
 		setLed(config.plugins.VFD_Giga.ledREC.getValue())
+
+	if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase'):
+		if config.plugins.VFD_Giga.vfdBrightnessStandby.value:
+			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightnessStandby.getValue())
+		else:
+			setvfdBrightness("0")
 
 def initLED():
 	print "[LED-GIGA] initVFD box = %s" % BOX
@@ -285,18 +304,24 @@ def initLED():
 	res = system(cmd)
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
-		vfd_write("	   ")
+		vfd_write("    ")
+
+	if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase'):
+		if config.plugins.VFD_Giga.vfdBrightness.value:
+			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightness.getValue())
+		else:
+			setvfdBrightness("255")
 
 class LED_GigaSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
 
 		self.skin = """
-			<screen position="center,center" size="500,340" title="GigaBlue Setup" >
-				<widget name="config" position="20,15" size="460,230" scrollbarMode="showOnDemand" />
-				<ePixmap position="40,270" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
-				<ePixmap position="180,270" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
-				<widget name="key_green" position="40,270" size="140,40" font="Regular;20" backgroundColor="#1f771f" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-				<widget name="key_red" position="180,270" size="140,40" font="Regular;20" backgroundColor="#9f1313" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+			<screen position="center,center" size="700,540" title="GigaBlue Setup" >
+				<widget name="config" position="20,15" size="660,450" scrollbarMode="showOnDemand" />
+				<ePixmap position="40,470" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
+				<ePixmap position="180,470" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
+				<widget name="key_green" position="40,470" size="140,40" font="Regular;20" backgroundColor="#1f771f" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+				<widget name="key_red" position="180,470" size="140,40" font="Regular;20" backgroundColor="#9f1313" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 			</screen>"""
 
 		Screen.__init__(self, session)
@@ -340,6 +365,8 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 			setLed("0")
 
 		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase"):
+			self.list.append(getConfigListEntry(_("Brightness"), config.plugins.VFD_Giga.vfdBrightness))
+			self.list.append(getConfigListEntry(_("Brightness Standby"), config.plugins.VFD_Giga.vfdBrightnessStandby))
 			self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_Giga.showClock))
 			self.list.append(getConfigListEntry(_("Show clock in Deep Standby"), config.plugins.VFD_Giga.showClockDeepStandby))
 			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
@@ -360,10 +387,14 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 			self.createSetup()
 		elif self["config"].getCurrent()[0][:3].upper() == 'LED':
 			setLed(config.plugins.VFD_Giga.ledRUN.getValue())
-		elif self["config"].getCurrent()[0] == _('Show on LED'):
+		elif self["config"].getCurrent()[0] == _('Show on VFD'):
 			self.createSetup()
 		elif self["config"].getCurrent()[0] == _('Show clock in Deep Standby'):
 			self.createSetup()
+		elif self["config"].getCurrent()[0] == _('Brightness'):
+			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightness.getValue())
+		elif self["config"].getCurrent()[0] == _('Brightness Standby'):
+			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightnessStandby.getValue())
 
 	def abort(self):
 		print "aborting"

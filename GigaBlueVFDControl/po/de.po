@@ -81,3 +81,27 @@ msgstr "in Standby: "
 
 msgid "Channel number with leading zeros"
 msgstr "Kanalnummern mit führenden Nullen"
+
+msgid "Show on VFD"
+msgstr "Zeige in der Anzeige"
+
+msgid "Brightness"
+msgstr "Helligkeit"
+
+msgid "Brightness Standby"
+msgstr "Helligkeit Standby"
+
+msgid "Channelnumber in Standby off"
+msgstr "Kanalnummer im Standby Aus"
+
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalnummer im Standby Uhr"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanalnummer/Uhr im Standby Uhr"
+
+msgid "Clock always"
+msgstr "Immer Uhr"
+
+msgid "Always off"
+msgstr "Immer Aus"
