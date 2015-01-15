@@ -256,7 +256,7 @@ def leaveStandby():
 	else:
 		setLed(config.plugins.VFD_Giga.ledREC.getValue())
 
-	if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase'):
+	if BOX in ('gb800seplus', 'gbultra', 'gbultrase'):
 		if config.plugins.VFD_Giga.vfdBrightness.value:
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightness.getValue())
 		else:
@@ -279,7 +279,7 @@ def standbyCounterChanged(configElement):
 	else:
 		setLed(config.plugins.VFD_Giga.ledREC.getValue())
 
-	if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase'):
+	if BOX in ('gb800seplus', 'gbultra', 'gbultrase'):
 		if config.plugins.VFD_Giga.vfdBrightnessStandby.value:
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightnessStandby.getValue())
 		else:
@@ -306,7 +306,7 @@ def initLED():
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
 		vfd_write("    ")
 
-	if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase'):
+	if BOX in ('gb800seplus', 'gbultra', 'gbultrase'):
 		if config.plugins.VFD_Giga.vfdBrightness.value:
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightness.getValue())
 		else:
@@ -364,9 +364,10 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		else:
 			setLed("0")
 
-		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase"):
+		if BOX in ("gb800seplus", "gbultra", "gbultrase"):
 			self.list.append(getConfigListEntry(_("Brightness"), config.plugins.VFD_Giga.vfdBrightness))
 			self.list.append(getConfigListEntry(_("Brightness Standby"), config.plugins.VFD_Giga.vfdBrightnessStandby))
+		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase"):
 			self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_Giga.showClock))
 			self.list.append(getConfigListEntry(_("Show clock in Deep Standby"), config.plugins.VFD_Giga.showClockDeepStandby))
 			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
