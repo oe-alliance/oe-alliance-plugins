@@ -1067,7 +1067,7 @@ class DvbScanner():
 				if number < 1450:
 					LCNs.append(number)
 		current_lcn = max(LCNs) + 50
-		while current_lcn% 50:
+		while current_lcn % 50:
 			current_lcn+= 1
 		import re
 		sort_list = []
