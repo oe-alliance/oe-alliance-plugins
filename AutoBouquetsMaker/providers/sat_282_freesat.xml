@@ -128,7 +128,7 @@
 	</hdchannelsontop>	
 	<servicehacks>
 <![CDATA[
-if service["number"] > 999 or service["number"] < 1:
+if service["number"] > 999 or service["number"] < 101:
 	skip = True
 if service["number"] >= 700 and service["number"] < 800:
 	service["service_type"] = 2

@@ -282,7 +282,7 @@ for number in service["numbers"]:
 
 	if number >= 3000 and number <= 3999:
 		new_numbers.append(number - 3000)
-	elif number > 999 or number < 100:
+	elif number > 999 or number < 101:
 		if service["channel_id"] > 1470 and service["channel_id"] < 1486:
 			new_numbers.append(service["channel_id"] - 471)
 			service["interactive_name"] = "Sky Sports Interactive " + str(service["channel_id"])
