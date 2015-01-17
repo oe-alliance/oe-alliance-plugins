@@ -1,5 +1,5 @@
 <provider>
-	<name>Sky Italy</name>
+	<name>Sky Italia</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>sky</protocol>
 	<transponder
@@ -15,8 +15,8 @@
 		pilot="2"
 	/>
 	<dvbsconfigs>
-		<configuration key="sd_sky_italy" bouquet="0x6250" region="0x05" namespace="0x820000">SKY Italy SD</configuration>
-		<configuration key="hd_sky_italy" bouquet="0x6250" region="0x04" namespace="0x820000">SKY Italy HD</configuration>
+		<configuration key="sd_sky_italy" bouquet="0x6250" region="0x05" namespace="0x820000">Sky Italia SD</configuration>
+		<configuration key="hd_sky_italy" bouquet="0x6250" region="0x04" namespace="0x820000">Sky Italia HD</configuration>
 	</dvbsconfigs>
 	<sections>
 		<section number="100">Intrattenimento</section>
