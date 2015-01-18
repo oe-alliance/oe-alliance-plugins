@@ -465,10 +465,10 @@ class DvbScanner():
 		radio_services = {}
 
 		service_extra_count = 0
-
+		
 		for key in tmp_services_dict:
 			service = tmp_services_dict[key]
-
+			
 			if len(servicehacks) > 0:
 				skip = False
 				exec(servicehacks)
@@ -799,7 +799,7 @@ class DvbScanner():
 
 		service_extra_count = 0
 
-		tmp_services_dict, LCNs_in_use = self.SkyExtrasHelper(tmp_services_dict, extras, namespace)
+		tmp_services_dict, LCNs_in_use = self.extrasHelper(tmp_services_dict, extras, namespace, True)
 
 		for key in tmp_services_dict:
 			service = tmp_services_dict[key]
@@ -889,6 +889,9 @@ class DvbScanner():
 			if service["descriptor_tag"] != 0xd3:
 				continue
 
+			if service["transport_stream_id"] not in transport_stream_id_list:
+				transport_stream_id_list.append(service["transport_stream_id"])
+
 			if service["region_id"] != region_id and service["region_id"] != 0xffff:
 				continue
 
@@ -907,9 +910,6 @@ class DvbScanner():
 				tmp_services_dict[key] = service
 
 			service_count += 1
-
-			if service["transport_stream_id"] not in transport_stream_id_list:
-				transport_stream_id_list.append(service["transport_stream_id"])
 
 		for service in bat_content:
 			if service["descriptor_tag"] != 0x41:
@@ -1003,12 +1003,15 @@ class DvbScanner():
 			print>>log, "[DvbScanner] Cannot fetch SDT for the following transport_stream_id list: ", transport_stream_id_list
 
 		dvbreader.close(fd)
+		
+		extras = []
 
 		for key in sdt_secions_status:
 			for section in sdt_secions_status[key]["content"]:
 				srvkey = "%x:%x:%x" % (section["transport_stream_id"], section["original_network_id"], section["service_id"])
 
 				if srvkey not in tmp_services_dict:
+					extras.append(section)
 					continue
 
 				service = tmp_services_dict[srvkey]
@@ -1021,6 +1024,8 @@ class DvbScanner():
 		radio_services = {}
 
 		service_extra_count = 0
+
+		tmp_services_dict, LCNs_in_use = self.extrasHelper(tmp_services_dict, extras, namespace, False)
 
 		for key in tmp_services_dict:
 			service = tmp_services_dict[key]
@@ -1059,46 +1064,53 @@ class DvbScanner():
 			"radio": radio_services
 		}
 
-	def SkyExtrasHelper(self, tmp_services_dict, extras, namespace):
+	def extrasHelper(self, tmp_services_dict, extras, namespace, allow_encrypted):
+		max_channel_number = 1450
+		space_for_iteractive = 50
+		round_to_nearest = 50
 		LCNs = []
 		for key in tmp_services_dict:
 			service = tmp_services_dict[key]
 			for number in service["numbers"]:
-				if number < 1450:
+				if number <= max_channel_number:
 					LCNs.append(number)
-		current_lcn = max(LCNs) + 50
-		while current_lcn % 50:
+		current_lcn = max(LCNs) + space_for_iteractive
+		while current_lcn % round_to_nearest:
 			current_lcn+= 1
-		import re
-		sort_list = []
-		i = 0
-		for service in extras:
-			if service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES:
-				sort_list.append((i, re.sub('^(?![a-z])', 'zzzzz', service['service_name'].lower())))
-			i += 1
-		sort_list = sorted(sort_list, key=lambda listItem: listItem[1])
-		for item in sort_list:
-			LCNs.append(current_lcn)
-			service = extras[item[0]]
-			srvkey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
-			new_service = {
-				'region_id': 255,
-				'free_ca': service["free_ca"],
-				'original_network_id': service["original_network_id"],
-				'service_name': service["service_name"],
-				'namespace': namespace,
-				'number': current_lcn,
-				'service_type': service["service_type"],
-				'flags': 0,
-				'numbers': [current_lcn],
-				'service_id': service["service_id"],
-				'descriptor_tag': 177,
-				'transport_stream_id': service["transport_stream_id"],
-				'provider_name': service["provider_name"],
-				'channel_id': 0
-			}
-			current_lcn += 1
-			srvkey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
-			tmp_services_dict[srvkey] = new_service
+		if current_lcn <= max_channel_number:
+			import re
+			sort_list = []
+			i = 0
+			for service in extras:
+				if service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and (allow_encrypted or service["free_ca"] == 0):
+					# sort flat, alphabetic before numbers
+					sort_list.append((i, re.sub('^(?![a-z])', 'zzzzz', service['service_name'].lower())))
+				i += 1
+			sort_list = sorted(sort_list, key=lambda listItem: listItem[1])
+			for item in sort_list:
+				if current_lcn > max_channel_number:
+					break
+				LCNs.append(current_lcn)
+				service = extras[item[0]]
+				srvkey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
+				new_service = {
+					'region_id': 255,
+					'free_ca': service["free_ca"],
+					'original_network_id': service["original_network_id"],
+					'service_name': service["service_name"],
+					'namespace': namespace,
+					'number': current_lcn,
+					'service_type': service["service_type"],
+					'flags': 0,
+					'numbers': [current_lcn],
+					'service_id': service["service_id"],
+					'descriptor_tag': 177,
+					'transport_stream_id': service["transport_stream_id"],
+					'provider_name': service["provider_name"],
+					'channel_id': 0
+				}
+				srvkey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
+				tmp_services_dict[srvkey] = new_service
+				current_lcn += 1
 
 		return tmp_services_dict, LCNs
