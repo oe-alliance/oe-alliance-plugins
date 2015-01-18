@@ -465,10 +465,10 @@ class DvbScanner():
 		radio_services = {}
 
 		service_extra_count = 0
-		
+
 		for key in tmp_services_dict:
 			service = tmp_services_dict[key]
-			
+
 			if len(servicehacks) > 0:
 				skip = False
 				exec(servicehacks)
