@@ -1,6 +1,7 @@
 from .. import log
 import os, codecs, re
 import xml.dom.minidom
+from Components.config import config
 
 class Tools():
 	def parseXML(self, filename):
@@ -74,7 +75,7 @@ class Tools():
 				if node.tagName == "include":
 					node.normalize()
 					if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
-						if node.childNodes[0].data.encode("utf-8") == 'no':
+						if node.childNodes[0].data.encode("utf-8") == 'no' or not config.autobouquetsmaker.showextraservices.value:
 							skipextrachannels = 1
 				if node.tagName == "lcnlist":
 					for node2 in node.childNodes:

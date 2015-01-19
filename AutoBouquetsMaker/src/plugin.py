@@ -26,6 +26,7 @@ config.autobouquetsmaker.addprefix = ConfigYesNo(default = False)
 config.autobouquetsmaker.extensions = ConfigYesNo(default = False)
 config.autobouquetsmaker.placement = ConfigSelection(default = "top", choices = [("top", _("Top")), ("bottom", _("Bottom"))])
 config.autobouquetsmaker.skipservices = ConfigYesNo(default = True)
+config.autobouquetsmaker.showextraservices = ConfigYesNo(default = False)
 
 def main(session, **kwargs):
 	session.open(AutoBouquetsMaker_Menu)
@@ -45,4 +46,3 @@ def Plugins(**kwargs):
 	if config.autobouquetsmaker.extensions.getValue():
 		plist.append(PluginDescriptor(name=_("AutoBouquetsMaker Scanner"), description="Scan and create bouquets.", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=startscan))
 	return plist
-

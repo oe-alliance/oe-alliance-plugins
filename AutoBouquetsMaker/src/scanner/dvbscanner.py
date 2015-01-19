@@ -2,6 +2,7 @@ from .. import log
 import dvbreader
 import datetime
 import time, os
+from Components.config import config
 
 class DvbScanner():
 	TIMEOUT_SEC = 20
@@ -545,7 +546,6 @@ class DvbScanner():
 		dvbreader.close(fd)
 
 		# to ignore services on not configured satellites
-		from Components.config import config
 		if config.autobouquetsmaker.skipservices.value:
 			from Components.NimManager import nimmanager
 			nims = nimmanager.getNimListOfType("DVB-S")
@@ -785,7 +785,8 @@ class DvbScanner():
 				srvkey = "%x:%x:%x" % (section["transport_stream_id"], section["original_network_id"], section["service_id"])
 
 				if srvkey not in tmp_services_dict:
-					extras.append(section)
+					if config.autobouquetsmaker.showextraservices.value:
+						extras.append(section)
 					continue
 
 				service = tmp_services_dict[srvkey]
@@ -1011,7 +1012,8 @@ class DvbScanner():
 				srvkey = "%x:%x:%x" % (section["transport_stream_id"], section["original_network_id"], section["service_id"])
 
 				if srvkey not in tmp_services_dict:
-					extras.append(section)
+					if config.autobouquetsmaker.showextraservices.value:
+						extras.append(section)
 					continue
 
 				service = tmp_services_dict[srvkey]
