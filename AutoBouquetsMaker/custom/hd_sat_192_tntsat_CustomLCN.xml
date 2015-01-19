@@ -1,0 +1,67 @@
+<custom>
+	<include>yes</include>
+	<lcnlist>
+		<configuration lcn="1" channelnumber="9001" description="TF1 HD"></configuration>
+		<configuration lcn="2" channelnumber="9314" description="FRANCE 2 HD"></configuration>
+		<configuration lcn="3" channelnumber="8208" description="FRANCE 3"></configuration>
+		<configuration lcn="4" channelnumber="8801" description="CANAL+ HD"></configuration>
+		<configuration lcn="5" channelnumber="8724" description="FRANCE 5"></configuration>
+		<configuration lcn="6" channelnumber="9310" description="M6 HD"></configuration>
+		<configuration lcn="7" channelnumber="9304" description="ARTE HD"></configuration>
+		<configuration lcn="8" channelnumber="8721" description="D8"></configuration>
+		<configuration lcn="9" channelnumber="8728" description="W9"></configuration>
+		<configuration lcn="10" channelnumber="8211" description="TMC"></configuration>
+		<configuration lcn="11" channelnumber="12164" description="NT1"></configuration>
+		<configuration lcn="12" channelnumber="8206" description="NRJ 12"></configuration>
+		<configuration lcn="13" channelnumber="8727" description="LCP"></configuration>
+		<configuration lcn="14" channelnumber="8723" description="FRANCE 4"></configuration>
+		<configuration lcn="15" channelnumber="12170" description="BFM TV"></configuration>
+		<configuration lcn="17" channelnumber="8124" description="D17"></configuration>
+		<configuration lcn="18" channelnumber="8729" description="GULLI"></configuration>
+		<configuration lcn="19" channelnumber="8722" description="FRANCE \xd4"></configuration>
+		<configuration lcn="20" channelnumber="9007" description="HD1 HD"></configuration>
+		<configuration lcn="21" channelnumber="31409" description="L'EQUIPE 21"></configuration>
+		<configuration lcn="22" channelnumber="9602" description="6TER HD"></configuration>
+		<configuration lcn="23" channelnumber="8572" description="NUMERO 23"></configuration>
+		<configuration lcn="24" channelnumber="10079" description="RMC DECOUVERTE"></configuration>
+		<configuration lcn="25" channelnumber="28550" description="CHERIE 25"></configuration>
+		<configuration lcn="26" channelnumber="8803" description="CANAL+ CINEMA HD"></configuration>
+		<configuration lcn="27" channelnumber="8804" description="CANAL+ SPORT HD"></configuration>
+		<configuration lcn="28" channelnumber="8805" description="CANAL+ FAMILY HD"></configuration>
+		<configuration lcn="29" channelnumber="8802" description="CANAL+ DECALE HD"></configuration>
+		<configuration lcn="30" channelnumber="8806" description="CANAL+ SERIES HD"></configuration>
+		<configuration lcn="31" channelnumber="8109" description="PARIS PREMIERE"></configuration>
+		<configuration lcn="32" channelnumber="8204" description="CANAL+ SPORT"></configuration>
+		<configuration lcn="33" channelnumber="6405" description="OFFRES CANAL READY"></configuration>
+		<configuration lcn="40" channelnumber="6905" description="FRANCE 24"></configuration>
+		<configuration lcn="41" channelnumber="31220" description="EURONEWS"></configuration>
+		<configuration lcn="51" channelnumber="8730" description="TF1"></configuration>
+		<configuration lcn="52" channelnumber="8209" description="FRANCE 2"></configuration>
+		<configuration lcn="56" channelnumber="8726" description="M6"></configuration>
+		<configuration lcn="57" channelnumber="8732" description="ARTE"></configuration>
+		<configuration lcn="301" channelnumber="9808" description="F3 ALPES"></configuration>
+		<configuration lcn="302" channelnumber="9810" description="F3 ALSACE"></configuration>
+		<configuration lcn="303" channelnumber="9703" description="F3 AQUITAINE"></configuration>
+		<configuration lcn="304" channelnumber="9705" description="F3 AUVERGNE"></configuration>
+		<configuration lcn="305" channelnumber="9801" description="F3 BNORMANDIE"></configuration>
+		<configuration lcn="306" channelnumber="9805" description="F3 BOURGOGNE"></configuration>
+		<configuration lcn="307" channelnumber="9707" description="F3 BRETAGNE"></configuration>
+		<configuration lcn="308" channelnumber="9804" description="F3 CENTRE"></configuration>
+		<configuration lcn="309" channelnumber="9807" description="F3 CHAMP ARDENNE"></configuration>
+		<configuration lcn="310" channelnumber="9812" description="F3 CORSEVIASTELL"></configuration>
+		<configuration lcn="311" channelnumber="9803" description="F3 COTE D'AZUR"></configuration>
+		<configuration lcn="312" channelnumber="9702" description="F3 FRANCHE COMTE"></configuration>
+		<configuration lcn="313" channelnumber="9708" description="F3 HNORMANDIE"></configuration>
+		<configuration lcn="314" channelnumber="9811" description="F3 LANGUEDOCROU"></configuration>
+		<configuration lcn="315" channelnumber="9709" description="F3 LIMOUSIN"></configuration>
+		<configuration lcn="316" channelnumber="9704" description="F3 LORRAINE"></configuration>
+		<configuration lcn="317" channelnumber="9712" description="F3 MIDI PYRENEES"></configuration>
+		<configuration lcn="318" channelnumber="9809" description="F3 NORD PDC"></configuration>
+		<configuration lcn="319" channelnumber="9706" description="F3 PARIS IDF"></configuration>
+		<configuration lcn="320" channelnumber="9802" description="F3 PAYS DE LOIRE"></configuration>
+		<configuration lcn="321" channelnumber="9701" description="F3 PICARDIE"></configuration>
+		<configuration lcn="322" channelnumber="9806" description="F3 POITOUCHAR"></configuration>
+		<configuration lcn="323" channelnumber="9711" description="F3 PROV ALPES"></configuration>
+		<configuration lcn="324" channelnumber="9710" description="F3 RHONE ALPES"></configuration>
+	</lcnlist>
+</custom>

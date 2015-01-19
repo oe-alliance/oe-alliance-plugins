@@ -1,0 +1,27 @@
+<provider>
+	<name>TNTSat</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>nolcn</protocol>
+	<namespace>c00000</namespace>
+	<transponder
+		orbital_position="192"
+		frequency="12402000"
+		symbol_rate="27500000"
+		polarization="1"
+		fec_inner="3"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+	/>
+	<sections>
+		<section number="1">Chaines</section>
+		<section number="300">Regionales</section>
+		<section number="325">Non indexée</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>

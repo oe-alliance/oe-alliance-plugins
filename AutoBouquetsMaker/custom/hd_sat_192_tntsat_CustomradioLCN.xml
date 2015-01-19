@@ -1,0 +1,43 @@
+<custom>
+	<include>yes</include>
+	<lcnlist>
+		<configuration lcn="1" channelnumber="8563" description="FRANCE CULTURE"></configuration>
+		<configuration lcn="2" channelnumber="8519" description="FRANCE MUSIQUE"></configuration>
+		<configuration lcn="3" channelnumber="8520" description="FIP"></configuration>
+		<configuration lcn="4" channelnumber="8521" description="FRANCE INFO"></configuration>
+		<configuration lcn="5" channelnumber="8522" description="FRANCE INTER"></configuration>
+		<configuration lcn="5" channelnumber="8523" description="FRANCE BLEU"></configuration>
+		<configuration lcn="6" channelnumber="8541" description="LE MOUV'"></configuration>
+		<configuration lcn="7" channelnumber="8565" description="BBCW SERVICE"></configuration>
+		<configuration lcn="8" channelnumber="9102" description="AUDIO PRIMO"></configuration>
+		<configuration lcn="9" channelnumber="8507" description="CANALSAT RADIOS"></configuration>
+		<configuration lcn="10" channelnumber="8524" description="RFI INTERNAT"></configuration>
+		<configuration lcn="11" channelnumber="8525" description="RADIO CLASSIQUE"></configuration>
+		<configuration lcn="12" channelnumber="8526" description="EUROPE 1"></configuration>
+		<configuration lcn="13" channelnumber="8527" description="RMC INFO"></configuration>
+		<configuration lcn="14" channelnumber="8528" description="RTL"></configuration>
+		<configuration lcn="15" channelnumber="8529" description="RIRE + CHANSONS"></configuration>
+		<configuration lcn="16" channelnumber="8530" description="SUD RADIO"></configuration>
+		<configuration lcn="17" channelnumber="8531" description="MC DOUALIYA"></configuration>
+		<configuration lcn="18" channelnumber="8532" description="TSF JAZZ"></configuration>
+		<configuration lcn="19" channelnumber="8533" description="NOSTALGIE"></configuration>
+		<configuration lcn="20" channelnumber="8534" description="BFM BUSINESS"></configuration>
+		<configuration lcn="21" channelnumber="8535" description="JAZZ RADIO"></configuration>
+		<configuration lcn="22" channelnumber="8536" description="NRJ"></configuration>
+		<configuration lcn="23" channelnumber="8537" description="VIRGIN RADIO"></configuration>
+		<configuration lcn="24" channelnumber="8538" description="RTL2"></configuration>
+		<configuration lcn="25" channelnumber="8539" description="SKYROCK"></configuration>
+		<configuration lcn="26" channelnumber="8540" description="FUN RADIO"></configuration>
+		<configuration lcn="27" channelnumber="8542" description="NOVA"></configuration>
+		<configuration lcn="28" channelnumber="8543" description="RADIO DJ FG"></configuration>
+		<configuration lcn="29" channelnumber="8545" description="CONTACT FM"></configuration>
+		<configuration lcn="30" channelnumber="8547" description="RFM"></configuration>
+		<configuration lcn="31" channelnumber="8548" description="CHERIE FM"></configuration>
+		<configuration lcn="32" channelnumber="8551" description="OUI FM"></configuration>
+		<configuration lcn="33" channelnumber="8555" description="RADIO NOTRE DAME"></configuration>
+		<configuration lcn="34" channelnumber="8556" description="RADIO ALFA"></configuration>
+		<configuration lcn="35" channelnumber="8558" description="BEUR FM"></configuration>
+		<configuration lcn="36" channelnumber="8559" description="BBC ARABIC"></configuration>
+		<configuration lcn="37" channelnumber="8566" description="RADIO COURTOISIE"></configuration>
+	</lcnlist>
+</custom>
