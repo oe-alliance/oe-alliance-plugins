@@ -228,7 +228,7 @@ class BouquetsWriter():
 
 			if provider_configs[section_identifier].isMakeSections():
 				for section_number in sorted(sections.keys()):
-					if section_identifier in bouquets_to_hide and section_number in bouquets_to_hide[section_identifier]:
+					if (section_identifier in bouquets_to_hide and section_number in bouquets_to_hide[section_identifier]) or not self.containServicesLines(path, "%s%s.%d.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_number)):
 						bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%d.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_number))
 					else:
 						bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%d.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_number))
@@ -238,25 +238,25 @@ class BouquetsWriter():
 				section_type = "hd"
 				if self.containServicesLines(path, "%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type)):
 					bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%s.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
-					bouquetsToKeep2["tv"].append("%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
-				if not "%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type) in currentBouquets["tv"]:
-					currentBouquets["tv"].append("%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
+				else:
+					bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%s.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
+				bouquetsToKeep2["tv"].append("%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
 				
 			if provider_configs[section_identifier].isMakeFTAHD():
 				section_type = "ftahd"
 				if self.containServicesLines(path, "%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type)):
 					bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%s.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
-					bouquetsToKeep2["tv"].append("%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
-				if not "%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type) in currentBouquets["tv"]:
-					currentBouquets["tv"].append("%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
+				else:
+					bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%s.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
+				bouquetsToKeep2["tv"].append("%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
 				
 			if provider_configs[section_identifier].isMakeFTA():
 				section_type = "fta"
 				if self.containServicesLines(path, "%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type)):
 					bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%s.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
-					bouquetsToKeep2["tv"].append("%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
-				if not "%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type) in currentBouquets["tv"]:
-					currentBouquets["tv"].append("%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
+				else:
+					bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%s.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
+				bouquetsToKeep2["tv"].append("%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
 			
 			bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.separator.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 			bouquetsToKeep2["tv"].append("%s%s.separator.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
