@@ -140,9 +140,9 @@ class AutoBouquetsMaker(Screen):
 			bouquets_tv = []
 			bouquets_radio = []
 			for bouquet in bouquets:
-				if bouquet[-3:] == ".tv":
+				if bouquet.endswith(".tv"):
 					bouquets_tv.append(bouquet)
-				else:
+				elif bouquet.endswith(".radio"):
 					bouquets_radio.append(bouquet)
 			self.manager.setBouquetsToKeep(bouquets_tv, bouquets_radio)
 
