@@ -128,6 +128,7 @@
 		<section number="1000">Sky Sports Interactive</section>
 		<section number="1020">BBC Interactive</section>
 		<section number="1030">Sky Anytime</section>
+		<section number="1050">Not indexed</section>
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
 	<hdchannelsontop>
@@ -207,6 +208,23 @@ if service["service_name"][-4:] == " (28)":
 if service["transport_stream_id"] == 0x7e3:
 	service["namespace"] = 0x11a2f26
 
+# start: slot some extra channels into vacant slots in the provider list
+########################################################################
+#
+# format: "channel name": number,
+#
+# example: "ITV 2": 118,
+#
+########################################################################
+channels_to_add = {
+	
+}
+if service["service_name"] in channels_to_add and service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and channels_to_add[service["service_name"]] not in LCNs_in_use:
+	LCNs_in_use.append(channels_to_add[service["service_name"]])
+	service["number"] = channels_to_add[service["service_name"]]
+	service["numbers"] = [channels_to_add[service["service_name"]]]
+# end: slot some extra channels into vacant slots in the provider list
+
 if service["service_type"] == 0x02 and service["number"] > 3000:
 	service["number"] -= 3000
 
@@ -214,6 +232,8 @@ new_numbers = []
 for number in service["numbers"]:
 	if number >= 3000 and number <= 3999:
 		new_numbers.append(number - 3000)
+	elif number >= 1050 and number <= max(LCNs_in_use): # not indexed channels
+		new_numbers.append(number)
 	elif number > 999 or number < 101:
 		if service["channel_id"] > 1470 and service["channel_id"] < 1486:
 				new_numbers.append(service["channel_id"] - 471)

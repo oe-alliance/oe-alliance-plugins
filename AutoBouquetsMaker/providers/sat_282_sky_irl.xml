@@ -28,7 +28,7 @@
 		<section number="520">Documentaries</section>
 		<section number="580">Religious</section>
 		<section number="601">Kids</section>
-		<section number="640">Shopping</section>
+		<section number="650">Shopping</section>
 		<section number="700">Sky Box Office</section>
 		<section number="780">International</section>
 		<section number="861">Gaming and Dating</section>
@@ -40,6 +40,7 @@
 		<section number="1000">Sky Sports Interactive</section>
 		<section number="1020">BBC Interactive</section>
 		<section number="1030">Sky Anytime</section>
+		<section number="1050">Not indexed</section>
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
 	<hdchannelsontop>
@@ -61,6 +62,41 @@ if service["service_name"][-4:] == " (28)":
 
 if service["transport_stream_id"] == 0x7e3:
 	service["namespace"] = 0x11a2f26
+	
+# start: slot some extra channels into vacant slots in the provider list
+########################################################################
+#
+# format: "channel name": number,
+#
+# example: "ITV 2": 118,
+#
+########################################################################
+channels_to_add = {
+	'UTV HD': 117,
+	'ITV2': 118,
+	'ITV3': 119,
+	'ITV4': 120,
+	'ITV HD': 275,
+	'ITV +1': 276,
+	'ITV2+1': 277,
+	'ITV3+1': 278,
+	'ITV4+1': 279,
+	'ITVBe':  280,
+	'ITVBe+1': 281,
+	'ITV Encore': 282,
+	'ITV Encore+1': 283,
+	'Channel 4 HD': 284,
+	'Channel 4 +1': 285,
+	'Channel 5': 286,
+	'Channel 5+1': 287,
+	'Channel 5+24': 288,
+	'CITV': 640
+}
+if service["service_name"] in channels_to_add and service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and channels_to_add[service["service_name"]] not in LCNs_in_use:
+	LCNs_in_use.append(channels_to_add[service["service_name"]])
+	service["number"] = channels_to_add[service["service_name"]]
+	service["numbers"] = [channels_to_add[service["service_name"]]]
+# end: slot some extra channels into vacant slots in the provider list
 
 if service["service_type"] == 0x02 and service["number"] > 3000:
 	service["number"] -= 3000
@@ -69,6 +105,8 @@ new_numbers = []
 for number in service["numbers"]:
 	if number >= 3000 and number <= 3999:
 		new_numbers.append(number - 3000)
+	elif number >= 1050 and number <= max(LCNs_in_use): # not indexed channels
+		new_numbers.append(number)
 	elif number > 999 or number < 101:
 		if service["channel_id"] > 1470 and service["channel_id"] < 1486:
 				new_numbers.append(service["channel_id"] - 471)
