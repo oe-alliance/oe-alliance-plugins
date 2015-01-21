@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = AutoBouquetsMaker DLNABrowser DLNAServer StreamTV 3GModemManager OpenUitzendingGemist TunerServer OnDemand Fempa LCD4linux RemoteChannelStreamConverter BTDevicesManager
+SUBDIRS = AutoBouquetsMaker DLNABrowser DLNAServer StreamTV 3GModemManager TunerServer OnDemand Fempa LCD4linux RemoteChannelStreamConverter BTDevicesManager
 
 if HAVE_WIRELESSACCESSPOINT
 SUBDIRS += WirelessAccessPoint

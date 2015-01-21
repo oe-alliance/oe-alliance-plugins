@@ -287,11 +287,6 @@ TunerServer/src/Makefile
 TunerServer/meta/Makefile
 TunerServer/po/Makefile
 
-OpenUitzendingGemist/Makefile
-OpenUitzendingGemist/src/Makefile
-OpenUitzendingGemist/meta/Makefile
-OpenUitzendingGemist/po/Makefile
-
 SF8VFDControl/Makefile
 SF8VFDControl/src/Makefile
 SF8VFDControl/meta/Makefile
