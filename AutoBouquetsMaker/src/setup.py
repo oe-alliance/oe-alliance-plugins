@@ -175,7 +175,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 					if provider in providers_tmp_configs and providers_tmp_configs[provider].isMakeFTAHDMain():
 						makemain_default = "ftahd"
 
-				if len(bouquets_list) > 0:
+				if len(bouquets_list) > 0 and config.autobouquetsmaker.placement.getValue() == 'top':
 					makemain_list.append(("custom", _("yes (custom)")))
 					if provider in providers_tmp_configs and providers_tmp_configs[provider].isMakeCustomMain():
 						makemain_default = "custom"
