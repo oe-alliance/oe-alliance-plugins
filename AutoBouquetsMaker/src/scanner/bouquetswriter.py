@@ -473,7 +473,7 @@ class BouquetsWriter():
 			bouquet_current.close()
 			force_keep_numbers = True
 
-		elif provider_config.isMakeCustomMain():
+		elif provider_config.isMakeCustomMain() and config.autobouquetsmaker.placement.getValue() == 'top':
 			current_number = sorted(sections.keys())[0] - 1
 			self.transformCustomInMain(path, provider_config.getCustomFilename(), current_number)
 			force_keep_numbers = True
