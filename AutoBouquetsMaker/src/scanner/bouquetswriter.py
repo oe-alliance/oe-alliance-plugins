@@ -124,8 +124,8 @@ class BouquetsWriter():
 
 		print>>log, "[BouquetsWriter] Wrote %d transponders and %d services" % (transponders_count, services_count)
 
-	def transformCustomInMain(self, path, filename, max_count):
-		print>>log, "[BouquetsWriter] Transform bouquet %s in main bouquet..." % filename
+	def makeCustomSeparator(self, path, filename, max_count):
+		print>>log, "[BouquetsWriter] Make custom seperator for %s in main bouquet..." % filename
 
 		try:
 			bouquet_in = open(path + "/" + filename, "r")
@@ -135,25 +135,37 @@ class BouquetsWriter():
 
 		content = bouquet_in.read()
 		bouquet_in.close()
-
+		
+		seperator_name = "/%s%s.separator.tv" % (self.ABM_BOUQUET_PREFIX, filename[:len(filename)-3])
 		try:
-			bouquet_out = open(path + "/" + filename, "w")
+			bouquet_out = open(path + seperator_name, "w")
 		except Exception, e:
 			print>>log, "[BouquetsWriter]", e
 			return
-
+			
 		rows = content.split("\n")
 		count = 0
+		
+		name = ''
 		for row in rows:
 			if len(row.strip()) == 0:
 				break
+				
+			if row[:5] == "#NAME" and name == '':
+				name = row.strip()[6:]
 
 			if row[:8] == "#SERVICE" and row[:13] != "#SERVICE 1:64":
 				count += 1
 				if count > max_count:
 					break
 
-			bouquet_out.write(row + "\n")
+			#bouquet_out.write(row + "\n")
+		
+		print>>log, "[BouquetsWriter] Custom seperator name: %s" % name
+
+		bouquet_out.write("#NAME CustomSeparatorMain for %s\n" % name)
+		bouquet_out.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
+		bouquet_out.write("#DESCRIPTION CustomSeparatorMain for %s\n" % name)
 
 		if count < max_count:
 			for i in range(count, max_count):
@@ -161,8 +173,8 @@ class BouquetsWriter():
 				bouquet_out.write("#DESCRIPTION  \n")
 
 		bouquet_out.close()
-
-		print>>log, "[BouquetsWriter] Done"
+		
+		print>>log, "[BouquetsWriter] Custom seperator made. %s" % seperator_name
 
 	def containServices(self, path, filename):
 		try:
@@ -248,7 +260,10 @@ class BouquetsWriter():
 			elif provider_configs[section_identifier].isMakeCustomMain() and config.autobouquetsmaker.placement.getValue() == 'top':
 				customfilename = provider_configs[section_identifier].getCustomFilename()
 				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % customfilename)
+				customseperator = "%s%s.separator.tv" % (self.ABM_BOUQUET_PREFIX, customfilename[:len(customfilename)-3])
+				bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % customseperator)
 				bouquetsToKeep2["tv"].append(customfilename)
+				bouquetsToKeep2["tv"].append(customseperator)
 				customfilenames.append(customfilename)
 
 			if provider_configs[section_identifier].isMakeSections():
@@ -475,7 +490,7 @@ class BouquetsWriter():
 
 		elif provider_config.isMakeCustomMain() and config.autobouquetsmaker.placement.getValue() == 'top':
 			current_number = sorted(sections.keys())[0] - 1
-			self.transformCustomInMain(path, provider_config.getCustomFilename(), current_number)
+			self.makeCustomSeparator(path, provider_config.getCustomFilename(), current_number)
 			force_keep_numbers = True
 		else:
 			force_keep_numbers = True
