@@ -247,10 +247,7 @@ class BouquetsWriter():
 				bouquetsToKeep2["tv"].append("%s%s.main.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 			elif provider_configs[section_identifier].isMakeCustomMain() and config.autobouquetsmaker.placement.getValue() == 'top':
 				customfilename = provider_configs[section_identifier].getCustomFilename()
-				if self.containServices(path, customfilename):
-					bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % customfilename)
-				else:
-					bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % customfilename)
+				bouquets_tv.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % customfilename)
 				bouquetsToKeep2["tv"].append(customfilename)
 				customfilenames.append(customfilename)
 
