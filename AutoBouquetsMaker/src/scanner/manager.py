@@ -33,6 +33,9 @@ class Manager():
 	def setPath(self, path):
 		self.path = path
 
+	def getPath(self):
+		return self.path
+
 	def setBouquetsToKeep(self, bouquetsToKeepTv, bouquetsToKeepRadio):
 		self.bouquetsToKeep["tv"] = bouquetsToKeepTv
 		self.bouquetsToKeep["radio"] = bouquetsToKeepRadio
