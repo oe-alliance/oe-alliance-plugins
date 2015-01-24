@@ -217,7 +217,7 @@ class BouquetsWriter():
 		if config.autobouquetsmaker.placement.getValue() == 'bottom':
 			for bouquet_type in ["tv", "radio"]:
 				for filename in currentBouquets[bouquet_type]:
-					if filename[:len(self.ABM_BOUQUET_PREFIX)] == self.ABM_BOUQUET_PREFIX or filename in customfilenames:
+					if filename[:len(self.ABM_BOUQUET_PREFIX)] == self.ABM_BOUQUET_PREFIX:
 						continue
 					if filename in bouquetsToKeep[bouquet_type]:
 						to_write = "#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename
