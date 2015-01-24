@@ -215,38 +215,19 @@ class BouquetsWriter():
 		hidden_non_abm_bouquet = []
 		
 		if config.autobouquetsmaker.placement.getValue() == 'bottom':
-			# need to be sure first bouquet is not a hidden one, as E2 wouldn't like it
-			first_visible = {}
-			first_visible["tv"] = False
-			first_visible["radio"] = False
-			hidden_not_yet_written = {}
-			hidden_not_yet_written["tv"] = []
-			hidden_not_yet_written["radio"] = []
 			for bouquet_type in ["tv", "radio"]:
 				for filename in currentBouquets[bouquet_type]:
-					if filename[:len(self.ABM_BOUQUET_PREFIX)] == self.ABM_BOUQUET_PREFIX:
+					if filename[:len(self.ABM_BOUQUET_PREFIX)] == self.ABM_BOUQUET_PREFIX or filename in customfilenames:
 						continue
-					if bouquet_type == "tv":
-						bouquet_file = bouquets_tv
-					else:
-						bouquet_file = bouquets_radio
 					if filename in bouquetsToKeep[bouquet_type]:
-						first_visible[bouquet_type] = True
-						hidden_non_abm_bouquet.append(filename)
-						bouquet_file.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename)
-						for f in hidden_not_yet_written[bouquet_type]:
-							bouquet_file.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % f)
-							hidden_non_abm_bouquet.append(f)
-						hidden_not_yet_written[bouquet_type] = []
+						to_write = "#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename
 					else:
-						if first_visible[bouquet_type]:
-							bouquet_file.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename)
-							hidden_non_abm_bouquet.append(filename)
-						else:
-							hidden_not_yet_written[bouquet_type].append(filename)
-						
-					
-					
+						to_write = "#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename
+						hidden_non_abm_bouquet.append(filename)
+					if bouquet_type == "tv":
+						bouquets_tv.write(to_write)
+					else:
+						bouquets_radio.write(to_write)
 
 		for section_identifier in bouquetsOrder:
 			sections = providers[section_identifier]["sections"]
@@ -304,17 +285,6 @@ class BouquetsWriter():
 			bouquets_radio.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.main.radio\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 			bouquetsToKeep2["radio"].append("%s%s.main.radio" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 
-		if config.autobouquetsmaker.placement.getValue() == 'bottom':
-			# write any outstanding hidden bouquets now
-			for bouquet_type in ["tv", "radio"]:
-				for filename in hidden_not_yet_written[bouquet_type]:
-					hidden_non_abm_bouquet.append(filename)
-					if bouquet_type == "tv":
-						bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename)
-					else:
-						bouquets_radio.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename)
-			
-			
 		if config.autobouquetsmaker.placement.getValue() == 'top':
 			for bouquet_type in ["tv", "radio"]:
 				for filename in currentBouquets[bouquet_type]:
