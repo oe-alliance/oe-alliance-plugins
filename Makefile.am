@@ -54,6 +54,10 @@ if EW7362
 SUBDIRS += EWVFDControl
 endif
 
+if EW7356
+SUBDIRS += TransCodingSetup
+endif
+
 if INIHDE
 SUBDIRS += INIVFDControl
 endif
