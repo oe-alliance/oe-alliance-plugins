@@ -313,8 +313,14 @@ msgstr "- seulement le tuner actif"
 msgid "- which LCD"
 msgstr "- quel LCD"
 
+msgid "0"
+msgstr "0"
+
 msgid "0.5"
 msgstr "0.5"
+
+msgid "180"
+msgstr "180"
 
 msgid "1-2"
 msgstr "1-2"
@@ -355,6 +361,9 @@ msgstr "15s"
 msgid "1min"
 msgstr "1min"
 
+msgid "270"
+msgstr "270"
+
 msgid "2 Days 1 Line"
 msgstr "2 jours 1 Ligne"
 
@@ -391,9 +400,6 @@ msgstr "255x64"
 msgid "2min"
 msgstr "2min"
 
-msgid "0"
-msgstr "0"
-
 msgid "30%"
 msgstr "30%"
 
@@ -411,9 +417,6 @@ msgstr "35%"
 
 msgid "3min"
 msgstr "3min"
-
-msgid "180"
-msgstr "180"
 
 msgid "4 Days 1 Line"
 msgstr "4 Jours 1 Ligne"
@@ -438,9 +441,6 @@ msgstr "45%"
 
 msgid "4min"
 msgstr "4min"
-
-msgid "270"
-msgstr "270"
 
 msgid "5 Days 1 Line"
 msgstr "5 Days 1 Line"

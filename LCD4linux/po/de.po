@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
-"POT-Creation-Date: 2014-11-20 10:46+Mitteleuropäische Zeit\n"
-"PO-Revision-Date: 2014-11-20 10:47+0100\n"
+"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
+"PO-Revision-Date: 2015-01-25 13:04+0100\n"
 "Last-Translator: joergm6 <joergm6@online.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -67,6 +67,9 @@ msgstr "- Bar Bereich Min"
 
 msgid "- Base"
 msgstr "- Basis"
+
+msgid "- Border"
+msgstr "- Umrandung"
 
 msgid "- CPU"
 msgstr "- CPU"
@@ -242,6 +245,9 @@ msgstr "- Bild Position"
 msgid "- Picture Size"
 msgstr "- Bild Größe"
 
+msgid "- Picture [ok]>"
+msgstr "- Bild [ok]>"
+
 msgid "- Popup LCD"
 msgstr "- Popup LCD"
 
@@ -359,6 +365,9 @@ msgstr "- Typ"
 msgid "- URL"
 msgstr "- URL"
 
+msgid "- Unit min"
+msgstr "- Einheit min"
+
 msgid "- Weather Type"
 msgstr "- Wetter Typ"
 
@@ -388,18 +397,6 @@ msgstr "0"
 
 msgid "0.5"
 msgstr "0.5"
-
-msgid "001"
-msgstr "001"
-
-msgid "011"
-msgstr "011"
-
-msgid "020"
-msgstr "020"
-
-msgid "021"
-msgstr "021"
 
 msgid "1"
 msgstr "1"
@@ -431,20 +428,11 @@ msgstr "10%"
 msgid "100%"
 msgstr "100%"
 
-msgid "101"
-msgstr "101"
-
 msgid "10min"
 msgstr "10min"
 
 msgid "10s"
 msgstr "10s"
-
-msgid "110"
-msgstr "110"
-
-msgid "111"
-msgstr "111"
 
 msgid "128x32"
 msgstr "128x32"
@@ -632,6 +620,9 @@ msgstr "7"
 msgid "70%"
 msgstr "70%"
 
+msgid "720x405"
+msgstr "720x405"
+
 msgid "75%"
 msgstr "75%"
 
@@ -688,6 +679,9 @@ msgstr "Audio/Video"
 
 msgid "August"
 msgstr "August"
+
+msgid "Background"
+msgstr "Hintergrund"
 
 msgid "Background-Picture Type"
 msgstr " Hintergrund-Bild Typ"
@@ -887,8 +881,17 @@ msgstr "Doppel-Tasten Schalter"
 msgid "Download Logfile"
 msgstr "Download Logdatei"
 
+msgid "E"
+msgstr "O"
+
+msgid "ENE"
+msgstr "ONO"
+
 msgid "EPG"
 msgstr "EPG"
+
+msgid "ESE"
+msgstr "OSO"
 
 msgid "Event Icon Bar"
 msgstr "Ereigns Icon Bar"
@@ -1179,6 +1182,9 @@ msgstr "MJPEG Stream LCD 3 Port"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 aktiv"
 
+msgid "MSN"
+msgstr "MSN"
+
 msgid "Mail"
 msgstr "Mail"
 
@@ -1350,6 +1356,21 @@ msgstr "Mond-Icon-Verz. [ok]>"
 msgid "Moonphase"
 msgstr "Mondphase"
 
+msgid "N"
+msgstr "N"
+
+msgid "NE"
+msgstr "NO"
+
+msgid "NNE"
+msgstr "NNO"
+
+msgid "NNW"
+msgstr "NNW"
+
+msgid "NW"
+msgstr "NW"
+
 msgid "Name"
 msgstr "Name"
 
@@ -1429,6 +1450,9 @@ msgstr "Online+Offline"
 msgid "Only New"
 msgstr "Nur Neue"
 
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
 msgid "PNG"
 msgstr "PNG"
 
@@ -1501,6 +1525,9 @@ msgstr "Position"
 msgid "Program Info"
 msgstr "Programm Info"
 
+msgid "Program Info 2"
+msgstr "Programm Info 2"
+
 msgid "Program Name"
 msgstr "Programm Name"
 
@@ -1563,6 +1590,21 @@ msgstr "Neustart GUI jetzt?"
 
 msgid "Restore Config"
 msgstr "Wiederherstellung der Einstellungen"
+
+msgid "S"
+msgstr "S"
+
+msgid "SE"
+msgstr "SO"
+
+msgid "SSE"
+msgstr "SSO"
+
+msgid "SSW"
+msgstr "SSW"
+
+msgid "SW"
+msgstr "SW"
 
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
@@ -1813,6 +1855,9 @@ msgstr "Sonntag"
 msgid "Sunrise"
 msgstr "Sonnenaufgang"
 
+msgid "Switch FrameBuffer [if possible]"
+msgstr "FramBuffer umschalten [wenn möglich]"
+
 msgid "TV"
 msgstr "TV"
 
@@ -1897,6 +1942,15 @@ msgstr "Verwendete Tuner"
 msgid "Volume"
 msgstr "Lautstärke"
 
+msgid "W"
+msgstr "W"
+
+msgid "WNW"
+msgstr "WNW"
+
+msgid "WSW"
+msgstr "WSW"
+
 msgid "WWW ApiKey from cloudconvert.org"
 msgstr "WWW ApiKey von cloudconvert.org"
 
@@ -1932,6 +1986,12 @@ msgstr "Wetter"
 
 msgid "Weather 2"
 msgstr "Wetter 2"
+
+msgid "Weather API"
+msgstr "Wetter API"
+
+msgid "Weather API-Key OpenWeatherMap"
+msgstr "Wetter API-Key OpenWeatherMap"
 
 msgid "Weather City"
 msgstr "Wetter Stadt"

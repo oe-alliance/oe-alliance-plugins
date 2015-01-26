@@ -1,18 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: LCD4linux\n"
-"POT-Creation-Date: 2013-05-02 23:18+Mitteleuropäische Sommerzeit\n"
-"PO-Revision-Date: 2013-09-05 16:19+0200\n"
-"Last-Translator: Paly4 <vuplusru@mail.ru>\n"
-"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"Language: de_DE\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: LCD4linux\n"
+"Language: ru\n"
 
 msgid "%"
 msgstr "%"
@@ -73,9 +66,6 @@ msgstr "- Название цвета"
 
 msgid "- Color"
 msgstr "- Цвет"
-
-msgid "- Current Day Color"
-msgstr "- Цвет текущего дня"
 
 msgid "- Cut Height [disable = 0]"
 msgstr "- Обрезать по высоте [выкл. = 0]"
@@ -140,9 +130,6 @@ msgstr "- LCD 1 Цвет фона"
 msgid "- LCD 1 Background-Picture [ok]>"
 msgstr "- LCD 1 Фон-картинка [ok]>"
 
-msgid "- LCD 1 Brightness [no SPF]"
-msgstr "- LCD 1 Яркость [no SPF]"
-
 msgid "- LCD 1 Rotate"
 msgstr "- LCD 1 чередовать"
 
@@ -152,9 +139,6 @@ msgstr "- LCD 2 Цвет фона"
 msgid "- LCD 2 Background-Picture [ok]>"
 msgstr "- LCD 2 Фон-Картинка [ok]>"
 
-msgid "- LCD 2 Brightness [no SPF]"
-msgstr "- LCD 2 Яркость [no SPF]"
-
 msgid "- LCD 2 Rotate"
 msgstr "- LCD 2 Чередовать"
 
@@ -163,9 +147,6 @@ msgstr "- LCD 3 Цвет фона"
 
 msgid "- LCD 3 Background-Picture [ok]>"
 msgstr "- LCD 3 Фон-Картинка [ok]>"
-
-msgid "- LCD 3 Brightness [no SPF]"
-msgstr "- LCD 3 Яркость [без SPF]"
 
 msgid "- LCD 3 Rotate"
 msgstr "- LCD 3 Чередовать"
@@ -211,9 +192,6 @@ msgstr "-Позиция изображения"
 
 msgid "- Picture Size"
 msgstr "- Размер картинки"
-
-msgid "- Picture [ok]>"
-msgstr "- Изображение [ok]>"
 
 msgid "- Popup LCD"
 msgstr "- Popup LCD"
@@ -314,9 +292,6 @@ msgstr "- Разделение экрана"
 msgid "- Text Size"
 msgstr "- Размер текста"
 
-msgid "- Timeout"
-msgstr "- Таймаут"
-
 msgid "- Transparency"
 msgstr "- Прозрачность"
 
@@ -356,8 +331,8 @@ msgstr "0"
 msgid "0.5"
 msgstr "0.5"
 
-msgid "1"
-msgstr "1"
+msgid "180"
+msgstr "180"
 
 msgid "1-2"
 msgstr "1-2"
@@ -370,9 +345,6 @@ msgstr "1-4"
 
 msgid "1-5"
 msgstr "1-5"
-
-msgid "10"
-msgstr "10"
 
 msgid "10%"
 msgstr "10%"
@@ -398,14 +370,11 @@ msgstr "15мин"
 msgid "15s"
 msgstr "15с"
 
-msgid "180"
-msgstr "180"
-
 msgid "1min"
 msgstr "1мин"
 
-msgid "2"
-msgstr "2"
+msgid "270"
+msgstr "270"
 
 msgid "2 Days 1 Line"
 msgstr "2 дня 1 линия"
@@ -425,8 +394,8 @@ msgstr "2 x >> Тип 2"
 msgid "2 x InfoKey"
 msgstr "2 x EPG"
 
-msgid "20"
-msgstr "20"
+msgid "2%"
+msgstr "2%"
 
 msgid "20%"
 msgstr "20%"
@@ -446,17 +415,11 @@ msgstr "25%"
 msgid "255x64"
 msgstr "255x64"
 
-msgid "270"
-msgstr "270"
-
 msgid "2min"
 msgstr "2мин."
 
-msgid "3"
-msgstr "3"
-
-msgid "30"
-msgstr "30"
+msgid "3%"
+msgstr "3%"
 
 msgid "30%"
 msgstr "30%"
@@ -499,9 +462,6 @@ msgstr "45%"
 
 msgid "4min"
 msgstr "4мин"
-
-msgid "5"
-msgstr "5"
 
 msgid "5 Days 1 Line"
 msgstr "5 дней в 1 линию"
@@ -553,9 +513,6 @@ msgstr "85%"
 
 msgid "8bit - grayscale/color"
 msgstr "8bit - серый/цветной"
-
-msgid "90"
-msgstr "90"
 
 msgid "90%"
 msgstr "90%"
@@ -625,12 +582,6 @@ msgstr "Box-Skin-LCD Enable On-Mode"
 
 msgid "C"
 msgstr "C"
-
-msgid "C + rmp"
-msgstr "C + rmp"
-
-msgid "C + rmp/2"
-msgstr "C + rmp/2"
 
 msgid "Calendar"
 msgstr "Календарь"
@@ -1059,9 +1010,6 @@ msgstr "Мая"
 msgid "Media"
 msgstr "Медиа"
 
-msgid "Memory"
-msgstr "Память"
-
 msgid "Meteo URL"
 msgstr "Погода URL"
 
@@ -1433,9 +1381,6 @@ msgstr "Показать картинку 3"
 
 msgid "Show Picture 4"
 msgstr "Показать картинку 4"
-
-msgid "Show Recording"
-msgstr "Показать запись"
 
 msgid "Show Textfile"
 msgstr "Показать текст. файл"

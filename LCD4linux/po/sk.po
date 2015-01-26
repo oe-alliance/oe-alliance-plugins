@@ -61,6 +61,9 @@ msgstr "- Bar rozsah Min"
 msgid "- Base"
 msgstr "- Základ"
 
+msgid "- Border"
+msgstr "- Okraj"
+
 msgid "- CPU"
 msgstr "- CPU"
 
@@ -235,6 +238,9 @@ msgstr "- umiestnenie obrázka"
 msgid "- Picture Size"
 msgstr "- veľkosť obrázka"
 
+msgid "- Picture [ok]>"
+msgstr "- Obrázok [ok]>"
+
 msgid "- Popup LCD"
 msgstr "- vyskakovacie LCD"
 
@@ -352,6 +358,9 @@ msgstr "- Typ"
 msgid "- URL"
 msgstr "- URL"
 
+msgid "- Unit min"
+msgstr "- Jednotka min"
+
 msgid "- Weather Type"
 msgstr "- typ počasia"
 
@@ -376,20 +385,14 @@ msgstr "- len aktívny tuner"
 msgid "- which LCD"
 msgstr "- ktoré LCD"
 
-msgid "101"
-msgstr "101"
+msgid "0"
+msgstr "0"
 
 msgid "0.5"
 msgstr "0.5"
 
-msgid "011"
-msgstr "011"
-
-msgid "021"
-msgstr "021"
-
-msgid "110"
-msgstr "110"
+msgid "180"
+msgstr "180"
 
 msgid "1 - normal"
 msgstr "1 - normalne"
@@ -398,7 +401,7 @@ msgid "1 / min"
 msgstr "1 / min"
 
 msgid "1-2"
-msgstr "1"
+msgstr "1-2"
 
 msgid "1-3"
 msgstr "1-3"
@@ -410,7 +413,7 @@ msgid "1-5"
 msgstr "1-5"
 
 msgid "10%"
-msgstr "10"
+msgstr "10%"
 
 msgid "100%"
 msgstr "100%"
@@ -420,6 +423,12 @@ msgstr "10min"
 
 msgid "10s"
 msgstr "10s"
+
+msgid "128x32"
+msgstr "128x32"
+
+msgid "128x64"
+msgstr "128x64"
 
 msgid "132x64"
 msgstr "132x64"
@@ -436,8 +445,8 @@ msgstr "15s"
 msgid "1min"
 msgstr "1min"
 
-msgid "111"
-msgstr "111"
+msgid "270"
+msgstr "270"
 
 msgid "2 - side by side"
 msgstr "2 - bok po boku"
@@ -467,10 +476,10 @@ msgid "2 x Mute"
 msgstr "2 x stlmiť zvuk"
 
 msgid "2%"
-msgstr "2"
+msgstr "2%"
 
 msgid "20%"
-msgstr "20"
+msgstr "20%"
 
 msgid "20min"
 msgstr "20min"
@@ -490,14 +499,14 @@ msgstr "255x64"
 msgid "2min"
 msgstr "2min"
 
-msgid "0"
-msgstr "0"
+msgid "14"
+msgstr "14"
 
 msgid "3%"
-msgstr "3"
+msgstr "3%"
 
 msgid "30%"
-msgstr "30"
+msgstr "30%"
 
 msgid "30min"
 msgstr "30min"
@@ -514,8 +523,8 @@ msgstr "35%"
 msgid "3min"
 msgstr "3min"
 
-msgid "180"
-msgstr "180"
+msgid "7"
+msgstr "7"
 
 msgid "4 Days 1 Line"
 msgstr "4 dni 1 riadok"
@@ -541,9 +550,6 @@ msgstr "45%"
 msgid "4min"
 msgstr "4min"
 
-msgid "270"
-msgstr "270"
-
 msgid "5 Days 1 Line"
 msgstr "5 dní 1 riadok"
 
@@ -554,7 +560,7 @@ msgid "5 Days Vertical View"
 msgstr "5 dní zvislý pohľad"
 
 msgid "5%"
-msgstr "5"
+msgstr "5%"
 
 msgid "50%"
 msgstr "50%"
@@ -596,7 +602,7 @@ msgid "8bit - grayscale/color"
 msgstr "8bit - čb/farba"
 
 msgid "90%"
-msgstr "90"
+msgstr "90%"
 
 msgid "95%"
 msgstr "95%"
@@ -636,6 +642,9 @@ msgstr "Audio/Video"
 
 msgid "August"
 msgstr "August"
+
+msgid "Background"
+msgstr "Pozadie"
 
 msgid "Background-Picture Type"
 msgstr "Typ obrázka pozadia"
@@ -715,6 +724,12 @@ msgstr "Kalendár plánovač"
 msgid "Cancel"
 msgstr "Zrušiť"
 
+msgid "Channel"
+msgstr "Kanál"
+
+msgid "Channel+Title"
+msgstr "Kanál+titulok"
+
 msgid "Choose dir"
 msgstr "Zvoľ priečinok"
 
@@ -732,6 +747,9 @@ msgstr "Hodiny 2"
 
 msgid "Config Backup Path [ok]>"
 msgstr "cesta zálohy konfig. [ok]>"
+
+msgid "Config Restore All Settings"
+msgstr "Konfigurácia obnova všetkých nastavení"
 
 msgid "Console normal"
 msgstr "bežná konzola"
@@ -826,8 +844,17 @@ msgstr "Zmena dvoj-stlačením tlačidla"
 msgid "Download Logfile"
 msgstr "stiahnuť log súbor"
 
+msgid "E"
+msgstr "V"
+
+msgid "ENE"
+msgstr "VSV"
+
 msgid "EPG"
 msgstr "EPG"
+
+msgid "ESE"
+msgstr "VJV"
 
 msgid "Event Icon Bar"
 msgstr "Stĺpec ikon udalosti"
@@ -906,6 +933,9 @@ msgstr "FritzCall orientácia obrázka"
 
 msgid "FritzCall Picture Path [ok]>"
 msgstr "FritzCall cesta k obrázkom [ok]>"
+
+msgid "FritzCall Picture Transparency"
+msgstr "FritzCall priehľadnosť obrázka"
 
 msgid "FritzCall Pictures Search"
 msgstr "FritzCall vyhľadávanie obrázkov"
@@ -1115,6 +1145,9 @@ msgstr "port MJPEG stream-u pre LCD 3"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "povoliť MJPEG stream pre LCD 3"
 
+msgid "MSN"
+msgstr "MSN"
+
 msgid "Mail"
 msgstr "Pošta"
 
@@ -1178,8 +1211,17 @@ msgstr "Pošta 5 server"
 msgid "Mail 5 [Displayname:]Username"
 msgstr "Pošta 5 [Zobrazované meno:]Meno používateľa"
 
+msgid "Mail Hide Mailadress"
+msgstr "pošta skryť adresy"
+
+msgid "Mail IMAP limit to last days"
+msgstr "Pošta IMAP limit na posledné dni"
+
 msgid "Mail Poll Interval"
 msgstr "Pošta obnovovací interval"
+
+msgid "Mail Show Date"
+msgstr "Pošta zobraz dátum"
 
 msgid "Mail Show Empty Mailboxes"
 msgstr "Pošta zobraz prázdne kontá"
@@ -1193,8 +1235,11 @@ msgstr "Máj"
 msgid "Media"
 msgstr "Média"
 
-msgid "Memory"
-msgstr "Pamäť"
+msgid "Memory available"
+msgstr "Dostupná pamäť"
+
+msgid "Memory free"
+msgstr "Voľná pamäť"
 
 msgid "Meteo URL"
 msgstr "URL počasia"
@@ -1274,6 +1319,21 @@ msgstr "Cesta k ikone mesiaca [ok]>"
 msgid "Moonphase"
 msgstr "Fáza mesiaca"
 
+msgid "N"
+msgstr "S"
+
+msgid "NE"
+msgstr "SV"
+
+msgid "NNE"
+msgstr "SSV"
+
+msgid "NNW"
+msgstr "SSZ"
+
+msgid "NW"
+msgstr "SZ"
+
 msgid "Name"
 msgstr "Meno"
 
@@ -1352,6 +1412,9 @@ msgstr "Aktívný+Neaktívny"
 msgid "Only New"
 msgstr "len nové"
 
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
 msgid "PNG"
 msgstr "PNG"
 
@@ -1366,6 +1429,12 @@ msgstr "Picon"
 
 msgid "Picon 2"
 msgstr "Picon 2"
+
+msgid "Picon+Channel"
+msgstr "Picon+kanál"
+
+msgid "Picon+Channel+Title"
+msgstr "Picon+kanál+titulok"
 
 msgid "Picon+Position below"
 msgstr "Picon+Pozícia pod "
@@ -1418,6 +1487,9 @@ msgstr "Umiestnenie"
 msgid "Program Info"
 msgstr "Info o programe"
 
+msgid "Program Info 2"
+msgstr "Program Info 2"
+
 msgid "Program Name"
 msgstr "Názov kanálu"
 
@@ -1451,6 +1523,27 @@ msgstr "Obdĺžnik 2"
 msgid "Reload"
 msgstr "Znovu nahratie"
 
+msgid "Remote Box"
+msgstr "Vzdialený Box"
+
+msgid "Remote Box 1 [Displayname:]IP/Name"
+msgstr "Vzdialený Box 1 [zobrazované meno:]IP/Meno"
+
+msgid "Remote Box 2 [Displayname:]IP/Name"
+msgstr "Vzdialený Box 2 [zobrazované meno:]IP/Meno"
+
+msgid "Remote Box 3 [Displayname:]IP/Name"
+msgstr "Vzdialený Box 3 [zobrazované meno:]IP/Meno"
+
+msgid "Remote Box 4 [Displayname:]IP/Name"
+msgstr "Vzdialený Box 4 [zobrazované meno:]IP/Meno"
+
+msgid "Remote Box 5 [Displayname:]IP/Name"
+msgstr "Vzdialený Box 5 [zobrazované meno:]IP/Meno"
+
+msgid "Remote Box Poll every Minutes"
+msgstr "Vzdialený Box obnova v minútach"
+
 msgid "Restart Displays"
 msgstr "Reštart zobrazovačov"
 
@@ -1459,6 +1552,21 @@ msgstr "Reštartovať GUI teraz?"
 
 msgid "Restore Config"
 msgstr "Obnova cfg"
+
+msgid "S"
+msgstr "J"
+
+msgid "SE"
+msgstr "JV"
+
+msgid "SSE"
+msgstr "JJV"
+
+msgid "SSW"
+msgstr "JJZ"
+
+msgid "SW"
+msgstr "JZ"
 
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
@@ -1793,8 +1901,29 @@ msgstr "Použitý tuner"
 msgid "Volume"
 msgstr "Hlasitosť"
 
+msgid "W"
+msgstr "Z"
+
+msgid "WNW"
+msgstr "ZSZ"
+
+msgid "WSW"
+msgstr "ZJZ"
+
+msgid "WWW ApiKey from cloudconvert.org"
+msgstr "WWW ApiKey z cloudconvert.org"
+
+msgid "WWW ApiKey from convertapi.com"
+msgstr "WWW ApiKey z convertapi.com"
+
+msgid "WWW Converter"
+msgstr "WWW konvertor"
+
 msgid "WWW Converter Poll Interval"
 msgstr "WWW Konvertor čas obnovy"
+
+msgid "WWW Converter Usage"
+msgstr "použiť WWW konvertor"
 
 msgid "WWW-Internet Converter"
 msgstr "Konvertor web stránok"
@@ -1816,6 +1945,12 @@ msgstr "Počasie"
 
 msgid "Weather 2"
 msgstr "Počasie 2"
+
+msgid "Weather API"
+msgstr "API počasia"
+
+msgid "Weather API-Key OpenWeatherMap"
+msgstr "Počasie API-key OpenWeatherMap"
 
 msgid "Weather City"
 msgstr "Počasie pre mesto"
@@ -1886,6 +2021,9 @@ msgstr "Týždeň+Hlavička"
 msgid "Weekday"
 msgstr "Deň týždňa"
 
+msgid "all"
+msgstr "všetko"
+
 msgid "alphabetic"
 msgstr "abecedne"
 
@@ -1924,6 +2062,12 @@ msgstr "kadet modrá"
 
 msgid "center"
 msgstr "vycentrovať"
+
+msgid "cloudconvert.org"
+msgstr "cloudconvert.org"
+
+msgid "convertapi.com"
+msgstr "convertapi.com"
 
 msgid "copy to Idle"
 msgstr "kopírovať do pohotovostných"

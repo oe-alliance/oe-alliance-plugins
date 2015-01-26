@@ -16,9 +16,10 @@ import time
 
 Py = "/usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/plugin.py"
 
-if os.path.exists("/var/lib/dpkg/status"):
+try:
+	from enigma import eMediaDatabase
 	DPKG = True
-else:
+except:
 	DPKG = False
 
 L1 = []

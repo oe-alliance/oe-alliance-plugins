@@ -1,18 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: LCD 4linux\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-21 10:06+0100\n"
-"PO-Revision-Date: 2013-07-27 18:50+0100\n"
-"Last-Translator: joergm6 <joergm6@online.de>\n"
-"Language-Team: Andy Blackburn/Rob van der Does\n"
-"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: The Netherlands\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: LCD4linux\n"
+"Language: nl\n"
 
 msgid "%"
 msgstr "%"
@@ -62,9 +55,6 @@ msgstr "- CPU"
 msgid "- Color"
 msgstr "- Kleur"
 
-msgid "- Current Day Color"
-msgstr "- Kleur huidige dag"
-
 msgid "- Extra Zoom"
 msgstr "- Extra Zoom"
 
@@ -98,9 +88,6 @@ msgstr "- LCD 1 Achtergrond kleur"
 msgid "- LCD 1 Background-Picture [ok]>"
 msgstr "- LCD 1 Achtergrond-Foto [ok]>"
 
-msgid "- LCD 1 Brightness [no SPF]"
-msgstr "- LCD 1 Helderheid [no SPF]"
-
 msgid "- LCD 1 Rotate"
 msgstr "- LCD 1 Roteer"
 
@@ -110,9 +97,6 @@ msgstr "- LCD 2 Achtergrond kleur"
 msgid "- LCD 2 Background-Picture [ok]>"
 msgstr "- LCD 2 Achtergrond-Foto [ok]>"
 
-msgid "- LCD 2 Brightness [no SPF]"
-msgstr "- LCD 2 Helderheid [no SPF]"
-
 msgid "- LCD 2 Rotate"
 msgstr "- LCD 2 Roteer"
 
@@ -121,9 +105,6 @@ msgstr "- LCD 3 Achtergrond kleur"
 
 msgid "- LCD 3 Background-Picture [ok]>"
 msgstr "- LCD 3 Achtergrond-Foto [ok]>"
-
-msgid "- LCD 3 Brightness [no SPF]"
-msgstr "- LCD 3 Helderheid [no SPF]"
 
 msgid "- LCD 3 Rotate"
 msgstr "- LCD 3 Roteer"
@@ -160,9 +141,6 @@ msgstr "- Picture Positie"
 
 msgid "- Picture Size"
 msgstr "- Foto grootte"
-
-msgid "- Picture [ok]>"
-msgstr "- Foto [ok]>"
 
 msgid "- Position"
 msgstr "- Positie"
@@ -248,9 +226,6 @@ msgstr "- Gedeeld scherm"
 msgid "- Text Size"
 msgstr "- Tekst grootte"
 
-msgid "- Timeout"
-msgstr "- Timeout"
-
 msgid "- Transparency"
 msgstr "- Transparantie"
 
@@ -290,8 +265,8 @@ msgstr "0"
 msgid "0.5"
 msgstr "0,5"
 
-msgid "1"
-msgstr "1"
+msgid "180"
+msgstr "180"
 
 msgid "1-2"
 msgstr "1-2"
@@ -304,9 +279,6 @@ msgstr "1-4"
 
 msgid "1-5"
 msgstr "1-5"
-
-msgid "10"
-msgstr "10"
 
 msgid "10%"
 msgstr "10%"
@@ -332,20 +304,17 @@ msgstr "15min"
 msgid "15s"
 msgstr "15s"
 
-msgid "180"
-msgstr "180"
-
 msgid "1min"
 msgstr "1min"
 
-msgid "2"
-msgstr "2"
+msgid "270"
+msgstr "270"
 
 msgid "2 x InfoKey"
 msgstr "2 x Info-toets"
 
-msgid "20"
-msgstr "20"
+msgid "2%"
+msgstr "2%"
 
 msgid "20%"
 msgstr "20%"
@@ -365,17 +334,11 @@ msgstr "25%"
 msgid "255x64"
 msgstr "255x64"
 
-msgid "270"
-msgstr "270"
-
 msgid "2min"
 msgstr "2min"
 
-msgid "3"
-msgstr "3"
-
-msgid "30"
-msgstr "30"
+msgid "3%"
+msgstr "3%"
 
 msgid "30%"
 msgstr "30%"
@@ -409,9 +372,6 @@ msgstr "45%"
 
 msgid "4min"
 msgstr "4min"
-
-msgid "5"
-msgstr "5"
 
 msgid "5%"
 msgstr "5%"
@@ -451,9 +411,6 @@ msgstr "80%"
 
 msgid "85%"
 msgstr "85%"
-
-msgid "90"
-msgstr "90"
 
 msgid "90%"
 msgstr "90%"
@@ -511,9 +468,6 @@ msgstr "Huidige temperatuur (+C)"
 
 msgid "Current Temperature (-C)"
 msgstr "Huidige temperatuur (-C)"
-
-msgid "Current value: %s"
-msgstr "Huidige waarde: %s"
 
 msgid "Date"
 msgstr "Datum"
@@ -652,9 +606,6 @@ msgstr "Mail Poll Interval"
 
 msgid "Media"
 msgstr "Media"
-
-msgid "Memory"
-msgstr "Geheugen"
 
 msgid "Meteo URL"
 msgstr "Meteo URL"
@@ -877,9 +828,6 @@ msgstr "Toon foto 3"
 
 msgid "Show Picture 4"
 msgstr "Toon foto 4"
-
-msgid "Show Recording"
-msgstr "Toon opname"
 
 msgid "Show Textfile"
 msgstr "Toon tekstbestand"

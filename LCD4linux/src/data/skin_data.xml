@@ -3,6 +3,23 @@
 	<screen name="InfoBarSummary" position="0,0" size="$w$,$h$">
 		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
 	</screen>
+<!--ChannelSelection_summary-->
+	<screen name="ChannelSelection_summary" position="0,0" size="$w$,$h$">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--MenuSummary-->
+	<screen name="MenuSummary" position="0,0" size="$w$,$h$">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--SimpleSummary-->
+	<screen name="SimpleSummary" position="0,0" size="$w$,$h$">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--ChannelSelectionRadio_summary-->
+	<screen name="ChannelSelectionRadio_summary" position="0,0" size="$w$,$h$">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+
 <!--L4L01-->
 
 <!--L4L02 Mediaplayer-->
@@ -40,28 +57,8 @@
 <!--L4L03-->
 ######################################################################
 
-<!--ChannelSelection_summary-->
-	<screen name="ChannelSelection_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
-	</screen>
-
 <!--AdvancedChannelSelection_summary-->
 	<screen name="AdvancedChannelSelection_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
-	</screen>
-
-<!--ChannelSelectionRadio_summary-->
-	<screen name="ChannelSelectionRadio_summary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
-	</screen>
-
-<!--MenuSummary-->
-	<screen name="MenuSummary" position="0,0" size="$w$,$h$">
-		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
-	</screen>
-
-<!--SimpleSummary-->
-	<screen name="SimpleSummary" position="0,0" size="$w$,$h$">
 		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
 	</screen>
 
