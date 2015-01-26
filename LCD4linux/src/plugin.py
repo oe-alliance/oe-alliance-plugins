@@ -145,6 +145,8 @@ elif getBoxType() == 'gbquadplus':
 	LCD4default = Data+"default.quadplus"
 elif getBoxType() == 'vuduo2':
 	LCD4default = Data+"default.vuduo2"
+elif getBoxType() == 'et8500':
+	LCD4default = Data+"default.et8500"
 else:
 	LCD4default = Data+"default.lcd"
 WetterPath = LCD4plugin+"wetter/"
