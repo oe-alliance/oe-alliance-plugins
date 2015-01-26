@@ -105,7 +105,6 @@
 		<section number="260">Lifestyle</section>
 		<section number="300">Music</section>
 		<section number="400">Movies</section>
-		<section number="470">Adult</section>
 		<section number="500">Sports</section>
 		<section number="601">News</section>
 		<section number="700">Kids</section>
@@ -113,6 +112,7 @@
 		<section number="801">International</section>
 		<section number="851">Audio Description</section>
 		<section number="861">Local</section>
+		<section number="969">Adult</section>		
 		<section number="990">BBC Interactive</section>
 		<section number="998">Information</section>
 	</sections>
