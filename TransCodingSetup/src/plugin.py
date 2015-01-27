@@ -183,7 +183,7 @@ class TranscodingSetupInit:
 			if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "automode"):
 				config.plugins.transcodingsetup.encoder[int(encoder)].automode.addNotifier(self.setAutomode, extra_args=[int(encoder)])
 
-		config.plugins.transcodingsetup.port.addNotifier(self.setPort)
+		config.plugins.transcodingsetup.port.addNotifier(self.setPort, initial_call = False)
 
 	def setConfig(self, procPath, value):
 		if not fileExists(procPath):
@@ -491,7 +491,6 @@ class TranscodingSetup(Screen,ConfigListScreen):
 
 	def keySave(self):
 		self.saveAll()
-		transcodingsetupinit.setPort(config.plugins.transcodingsetup.port)
 		self.close()
 
 	def KeyDefault(self):
@@ -548,7 +547,9 @@ class TranscodingSetup(Screen,ConfigListScreen):
 def main(session, **kwargs):
 	session.open(TranscodingSetup)
 
-def Plugins(**kwargs):
-	return [PluginDescriptor(name=_("TranscodingSetup"), description=_("Transcoding Setup"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main)]
+def startSession(reason):
+	global transcodingsetupinit
+	transcodingsetupinit = TranscodingSetupInit()
 
-transcodingsetupinit = TranscodingSetupInit()
+def Plugins(**kwargs):
+	return [PluginDescriptor(name=_("TranscodingSetup"), description=_("Transcoding Setup"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main), PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=startSession)]
