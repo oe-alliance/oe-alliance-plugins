@@ -14,7 +14,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V4.5-r0"
+Version = "V4.5-r1"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -733,7 +733,7 @@ LCD4linux.ProgressAlign = ConfigSelection(choices = [("5", _("half left")), ("6"
 LCD4linux.ProgressPos = ConfigSlider(default = 210,  increment = 2, limits = (0, 1024))
 LCD4linux.ProgressColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.ProgressMinutes = ConfigYesNo(default = True)
-LCD4linux.ProgressBorder = ConfigYesNo(default = True)
+LCD4linux.ProgressBorder = ConfigSelection(choices = [("true", _("Frame")), ("false", _("no Frame")), ("line", _("Line"))], default="true")
 LCD4linux.ProgressShadow = ConfigYesNo(default = False)
 LCD4linux.ProgressShadow2 = ConfigSelection(choices = [("false", _("Normal")), ("true", _("Shadow Edges")), ("gradient", _("Gradient"))], default="false")
 LCD4linux.ProgressFont = ConfigSelection(choices = FontType, default="0")
@@ -1185,7 +1185,7 @@ LCD4linux.MPProgressPos = ConfigSlider(default = 6,  increment = 2, limits = (0,
 LCD4linux.MPProgressAlign = ConfigSelection(choices = [("5", _("half left")), ("6", _("half right"))] + AlignType, default="1")
 LCD4linux.MPProgressColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.MPProgressMinutes = ConfigYesNo(default = True)
-LCD4linux.MPProgressBorder = ConfigYesNo(default = True)
+LCD4linux.MPProgressBorder = ConfigSelection(choices = [("true", _("Frame")), ("false", _("no Frame")), ("line", _("Line"))], default="true")
 LCD4linux.MPProgressShadow = ConfigYesNo(default = False)
 LCD4linux.MPProgressShadow2 = ConfigSelection(choices = [("false", _("Normal")), ("true", _("Shadow Edges")), ("gradient", _("Gradient"))], default="false")
 LCD4linux.MPProgressFont = ConfigSelection(choices = FontType, default="0")
@@ -10053,7 +10053,7 @@ def LCD4linuxPIC(self,session):
 				ConfigSize -= 1
 				font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 				w,h = self.draw[draw].textsize(channel_name, font=font)
-			POSX = getSplit(ConfigSplit,ConfigAlign,Progress,w)
+			POSX = getSplit(ConfigSplit,ConfigAlign,MAX_W,w)
 			ShadowText(draw,POSX,ConfigPos,channel_name,font,ConfigColor,ConfigShadow)
 		else:
 			writeMultiline(channel_name,ConfigSize,ConfigPos,ConfigLines,ConfigColor,ConfigAlign,ConfigSplit,draw,im,ConfigFont=ConfigFont,Shadow=ConfigShadow,Width=Progress)
@@ -10222,8 +10222,10 @@ def LCD4linuxPIC(self,session):
 #					print event_begin, event_end, event.getDuration(), event.getPlayPosition()
 			if isData == True:
 				event_run=min(max(event_run,0),ProgressBar)
-				if ConfigBorder:
+				if ConfigBorder == "true":
 					self.draw[draw].rectangle((POSX+9,ConfigPos,POSX+ProgressBar+11,ConfigPos+ConfigSize),outline=ConfigColor)
+				elif ConfigBorder == "line":
+					self.draw[draw].rectangle((POSX+10,ConfigPos+int(ConfigSize/2)-1,POSX+ProgressBar+10,ConfigPos+int(ConfigSize/2)+1),outline=ConfigColor,fill=ConfigColor)
 				self.draw[draw].rectangle((POSX+10,ConfigPos,POSX+event_run+10,ConfigPos+ConfigSize),fill=ConfigColor)
 				if ConfigShadowBar == "true":
 					if os.path.isfile(os.path.join(Data,"progress.png")):
@@ -10235,6 +10237,8 @@ def LCD4linuxPIC(self,session):
 							L4log("Progress Shade Error")
 				elif ConfigShadowBar == "gradient":
 					if os.path.isfile(os.path.join(Data,"gradient.png")):
+						if ConfigBorder == "line":
+							self.draw[draw].rectangle((POSX+10,ConfigPos+int(ConfigSize/2)-1,POSX+ProgressBar+10,ConfigPos+int(ConfigSize/2)+1),outline="yellow",fill="yellow")
 						try:
 							imW = Image.open(os.path.join(Data,"gradient.png"))
 							imW = imW.resize((ProgressBar,ConfigSize))
@@ -10242,7 +10246,7 @@ def LCD4linuxPIC(self,session):
 							self.im[im].paste(imW,(POSX+10,ConfigPos))
 						except:
 							L4log("Progress Gradient Error")
-					if ConfigBorder:
+					if ConfigBorder == "true":
 						self.draw[draw].rectangle((POSX+9,ConfigPos,POSX+ProgressBar+11,ConfigPos+ConfigSize),outline="yellow")
 
 # Popup Text
@@ -10337,6 +10341,7 @@ def LCD4linuxPIC(self,session):
 				orbital=""
 				if (transponderData["tuner_type"] == "DVB-S") or (transponderData["tuner_type"] == "DVB-S2"):
 					orbital = transponderData["orbital_position"]
+					L4logE("Orbital",orbital)
 					orbital = int(orbital)
 					if orbital > 1800:
 						orbital = str((float(3600 - orbital))/10.0) + "W"
@@ -10437,6 +10442,8 @@ def LCD4linuxPIC(self,session):
 # aktive Event
 	def putProg((ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigType, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont), draw, im):
 		MAX_W,MAX_H = self.im[im].size
+		if ConfigSplit == True:
+			MAX_W = int(MAX_W/2)
 		event_begin, event_end, duration, event_name = self.Levent_begin0, self.Levent_end0, self.Lduration0, self.Levent_name0
 		if event_begin != 0:
 			begin = strftime("%H:%M", localtime(event_begin))
@@ -10454,6 +10461,8 @@ def LCD4linuxPIC(self,session):
 # next Event
 	def putProgNext((ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigType, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont), draw, im):
 		MAX_W,MAX_H = self.im[im].size
+		if ConfigSplit == True:
+			MAX_W = int(MAX_W/2)
 		if ConfigType == "4":
 			font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 			POSY = ConfigPos
@@ -10501,6 +10510,8 @@ def LCD4linuxPIC(self,session):
 # show extended Description
 	def putDescription((ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, ConfigType, ConfigShadow, ConfigFont), draw, im):
 		MAX_W,MAX_H = self.im[im].size
+		if ConfigSplit == True:
+			MAX_W = int(MAX_W/2)
 		event_name = ""
 		if self.LEventsDesc is not None and len(self.LEventsDesc)>0:
 			if self.LEventsDesc[0][4]:
@@ -11020,6 +11031,8 @@ def LCD4linuxPIC(self,session):
 # show Title
 	def putTitle((ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont), draw, im):
 		MAX_W,MAX_H = self.im[im].size
+		if ConfigSplit == True:
+			MAX_W = int(MAX_W/2)
 		Title = ""
 		if self.LsreftoString is not None:
 			sref = self.LsreftoString
@@ -11064,6 +11077,8 @@ def LCD4linuxPIC(self,session):
 			return "%s\n" % r if "<" in d and r.strip() != "" else r
 
 		MAX_W,MAX_H = self.im[im].size
+		if ConfigSplit == True:
+			MAX_W = int(MAX_W/2)
 		if self.LsTagArtist is not None:
 			Info = ""
 			if WebRadioFSok == True and self.l4l_info.get("Station","") != "":
