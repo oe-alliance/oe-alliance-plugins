@@ -30,7 +30,8 @@ config.ondemand.ShowPluginBrowser = ConfigYesNo(default = True)
 config.ondemand.ShowExtensions = ConfigYesNo(default = True)
 config.ondemand.ShowRTEPlayer = ConfigYesNo(default = True)
 config.ondemand.Show3Player = ConfigYesNo(default = True)
-config.ondemand.ShowBBCiPlayer = ConfigYesNo(default = True)
+# Streams removed from BBC so no longer working.
+#config.ondemand.ShowBBCiPlayer = ConfigYesNo(default = True)
 config.ondemand.ShowITVPlayer = ConfigYesNo(default = True)
 # Streams removed from 4OD so no longer working.
 #config.ondemand.Show4ODPlayer = ConfigYesNo(default = True)
