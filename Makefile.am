@@ -63,7 +63,7 @@ SUBDIRS += EWVFDControl
 endif
 
 if EW7356
-SUBDIRS += MultiTransCodingSetup
+SUBDIRS += TransCodingSetup
 endif
 
 if INIHDE
