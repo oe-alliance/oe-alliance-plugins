@@ -37,7 +37,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 from enigma import gFont, ePicLoad, eListboxPythonMultiContent, RT_HALIGN_RIGHT
 
-import bbciplayer, itvplayer, rteplayer, threeplayer, iView, iRadio
+import itvplayer, rteplayer, threeplayer, iView, iRadio
 from CommonModules import MainMenuList
 
 ##########################################################################
@@ -57,7 +57,7 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 
 		self.configlist.append(getConfigListEntry((_("Preferred Stream Quality")), config.ondemand.PreferredQuality))
 
-		self.configlist.append(getConfigListEntry((_("BBC iPlayer")), config.ondemand.ShowBBCiPlayer))
+		#self.configlist.append(getConfigListEntry((_("BBC iPlayer")), config.ondemand.ShowBBCiPlayer))
 		self.configlist.append(getConfigListEntry((_("ITV Player")), config.ondemand.ShowITVPlayer))
 		#self.configlist.append(getConfigListEntry((_("4OD Player")), config.ondemand.Show4ODPlayer))
 		self.configlist.append(getConfigListEntry((_("3 Player")), config.ondemand.Show3Player))
@@ -135,8 +135,8 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 		
 	def layoutFinished(self):
 		list = []
-		if config.ondemand.ShowBBCiPlayer.value:
-			list.append(("BBC iPlayer", "bbciplayer"))
+		#if config.ondemand.ShowBBCiPlayer.value:
+			#list.append(("BBC iPlayer", "bbciplayer"))
 		if config.ondemand.ShowITVPlayer.value:
 			list.append(("ITV Player", "itvplayer"))
 		#if config.ondemand.Show4ODPlayer.value:
@@ -168,8 +168,8 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 			self.session.open(rteplayer.RTEMenu, "start", "0")
 		elif player == "3player":
 			self.session.open(threeplayer.threeMainMenu, "start", "0")
-		elif player == "bbciplayer":
-			self.session.open(bbciplayer.BBCiMenu, "start", "0")
+		#elif player == "bbciplayer":
+			#self.session.open(bbciplayer.BBCiMenu, "start", "0")
 		elif player == "itvplayer":
 			self.session.open(itvplayer.ITVplayer, "start", "0")
 		#elif player == "fourOD":
@@ -215,7 +215,7 @@ class OnDemand_About(Screen):
 		credit += "- The whole Vix team for Design, Graphics, Code optimisation, Geo unlock & Testing\n\n"
 		credit += "Sources credits:\n"
 		credit += "- kitesurfing (used VODie as a base for the Irish plugins)\n"
-		credit += "- XBMC BBC iPlayer team (used as a base for iPlayer)\n"
+		#credit += "- XBMC BBC iPlayer team (used as a base for iPlayer)\n"
 		credit += "- subixonfire (used his version as a base for ITV)\n"
 		#credit += "- mossy (used his version as a base for 4OD)\n"
 		#credit += "- OpenUitzendingGemist team (used this as a design base)\n"
