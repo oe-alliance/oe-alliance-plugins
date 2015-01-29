@@ -10,6 +10,14 @@ if AZBOX
 SUBDIRS += Blindscan
 endif
 
+if DAGS3
+SUBDIRS += TransCodingSetup
+endif
+
+if DAGS4
+SUBDIRS += TransCodingSetup
+endif
+
 if VUPLUS
 SUBDIRS += VuplusEvent HbbTV AudioEffect
 endif

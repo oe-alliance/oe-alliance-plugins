@@ -60,7 +60,7 @@ config.plugins.transcodingsetup.encoder = ConfigSubList()
 
 def createTransCodingConfig(encoder):
 	if fileExists(getProcPath(encoder ,"bitrate")):
-		if getBoxType() in ('vusolo2') or getMachineBuild() in ('ew7356'):
+		if getBoxType() in ('vusolo2') or getMachineBuild() in ('ew7356', 'dags3', 'dags4'):
 			choice = ConfigSelection(default = "400000", choices=[("-1", "Auto"), ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
 		elif getBoxType() in ('gbquad', 'gbquadplus'):
 			choice = ConfigSelection(default = "-1", choices=[("-1", "Auto"), ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
@@ -348,7 +348,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 		self.setup_title = _("Transcoding Setup")
 		self.setTitle(self.setup_title)
 
-		if getBoxType() in ('vusolo2', 'gbquad', 'gbquadplus') or getMachineBuild() in ('ew7356'):
+		if getBoxType() in ('vusolo2', 'gbquad', 'gbquadplus') or getMachineBuild() in ('ew7356', 'dags3', 'dags4'):
 			TEXT = _("Transcoding and PIP are mutually exclusive.")
 		else:
 			TEXT = _("2nd transcoding and PIP are mutually exclusive.")
