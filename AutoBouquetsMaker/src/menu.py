@@ -8,7 +8,7 @@ from setup import AutoBouquetsMaker_Setup, AutoBouquetsMaker_ProvidersSetup
 from hidesections import AutoBouquetsMaker_HideSections
 from keepbouquets import AutoBouquetsMaker_KeepBouquets
 from ordering import AutoBouquetsMaker_Ordering
-from delete import AutoBouquetsMaker_DeleteBouquets, AutoBouquetsMaker_DeleteMsg
+from deletebouquets import AutoBouquetsMaker_DeleteBouquets, AutoBouquetsMaker_DeleteMsg
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox

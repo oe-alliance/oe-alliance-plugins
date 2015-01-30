@@ -28,7 +28,7 @@ class AutoBouquetsMaker_DeleteBouquets():
 			
 class AutoBouquetsMaker_DeleteMsg(MessageBox):
 	def __init__(self, session):
-		MessageBox.__init__(self, session, _("Are you sure you want to remove all bouquets created ABM?"), MessageBox.TYPE_YESNO, default=False)
+		MessageBox.__init__(self, session, _("Are you sure you want to remove all bouquets by created ABM?"), MessageBox.TYPE_YESNO, default=False)
 		self.skinName = "MessageBox"
 	
 		
