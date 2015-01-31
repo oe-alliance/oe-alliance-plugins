@@ -6,6 +6,7 @@ from Components.config import config
 
 class DvbScanner():
 	TIMEOUT_SEC = 20
+	SDT_TIMEOUT = 60
 
 	VIDEO_ALLOWED_TYPES = [1, 4, 5, 17, 22, 24, 25, 27, 135]
 	AUDIO_ALLOWED_TYPES = [2, 10]
@@ -375,7 +376,7 @@ class DvbScanner():
 			sdt_secions_status[transport_stream_id]["content"] = []
 
 		timeout = datetime.datetime.now()
-		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
+		timeout += datetime.timedelta(0, self.SDT_TIMEOUT)
 		while True:
 			if datetime.datetime.now() > timeout:
 				print>>log, "[DvbScanner] Timed out"
@@ -741,7 +742,7 @@ class DvbScanner():
 			sdt_secions_status[transport_stream_id]["content"] = []
 
 		timeout = datetime.datetime.now()
-		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
+		timeout += datetime.timedelta(0, self.SDT_TIMEOUT)
 		while True:
 			if datetime.datetime.now() > timeout:
 				print>>log, "[DvbScanner] Timed out"
@@ -968,7 +969,7 @@ class DvbScanner():
 			sdt_secions_status[transport_stream_id]["content"] = []
 
 		timeout = datetime.datetime.now()
-		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
+		timeout += datetime.timedelta(0, self.SDT_TIMEOUT)
 		while True:
 			if datetime.datetime.now() > timeout:
 				print>>log, "[DvbScanner] Timed out"
