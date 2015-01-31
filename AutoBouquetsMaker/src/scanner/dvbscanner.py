@@ -1076,6 +1076,8 @@ class DvbScanner():
 			for number in service["numbers"]:
 				if number <= max_channel_number:
 					LCNs.append(number)
+		if len(LCNs) == 0:
+			return tmp_services_dict, LCNs
 		current_lcn = max(LCNs) + space_for_iteractive
 		while current_lcn % round_to_nearest:
 			current_lcn+= 1
