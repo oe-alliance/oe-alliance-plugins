@@ -54,7 +54,7 @@ class Channelnumber:
 		if info is None:
 			chnr = "----"
 		else:
-			chnr = self.getchannelnr()
+			chnr = self.getChannelNumber()
 		info = None
 		service = None
 		if chnr == "----":
@@ -63,7 +63,7 @@ class Channelnumber:
 			Channelnr = "%04d" % (int(chnr))
 			vfd_write(Channelnr)
 
-	def getchannelnr(self):
+	def getChannelNumber(self):
 		if InfoBar.instance is None:
 			chnr = "----"
 			return chnr
@@ -90,7 +90,7 @@ class Channelnumber:
 		chnr = str(chx + rx)
 		return chnr
 
-	def prikaz(self):
+	def show(self):
 		if config.plugins.VFD_odin.showClock.value == 'True' or config.plugins.VFD_odin.showClock.value == 'True_All' or config.plugins.VFD_odin.showClock.value == 'True_Switch':
 			clock = str(localtime()[3])
 			clock1 = str(localtime()[4])
@@ -117,7 +117,7 @@ class Channelnumber:
 				if self.endkeypress:
 					self.__eventInfoChanged()
 				else:
-					self.prikaz()
+					self.show()
 			else:
 				self.__eventInfoChanged()
 					
@@ -129,7 +129,7 @@ class Channelnumber:
 			self.zaPrik.start(1000, 1)
 
 		if Screens.Standby.inStandby or config.plugins.VFD_odin.showClock.value == 'True_All':
-			self.prikaz()
+			self.show()
 
 	def keyPressed(self, key, tag):
 		self.begin = time() + int(self.channelnrdelay)
@@ -161,8 +161,7 @@ def initVFD():
 class VFD_OdinM7Setup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
 
-		self.skin = """
-			<screen position="100,100" size="500,210" title="VFD_M7 Setup" >
+		self.skin = """<screen position="100,100" size="500,210" title="LED Display Setup" >
 				<widget name="config" position="20,15" size="460,150" scrollbarMode="showOnDemand" />
 				<ePixmap position="40,165" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
 				<ePixmap position="180,165" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
@@ -171,6 +170,8 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 			</screen>"""
 
 		Screen.__init__(self, session)
+		Screen.setTitle(self, _("7-LED Display Setup"))
+		self.skinName = ["Setup"]
 		self.onClose.append(self.abort)
 
 		self.onChangedEntry = [ ]
@@ -182,20 +183,18 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 		self.Console = Console()
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
-		self["key_yellow"] = Button(_("Update Date/Time"))
 
 		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
 			"ok": self.save,
-			"yellow": self.Update,
 		}, -2)
 
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_odin.showClock))
+		self.list.append(getConfigListEntry(_("Show on display"), config.plugins.VFD_odin.showClock))
 		if config.plugins.VFD_odin.showClock.value != "Off":
 			self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_odin.timeMode))
 
@@ -209,7 +208,7 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 
 	def newConfig(self):
 		print self["config"].getCurrent()[0]
-		if self["config"].getCurrent()[0] == _('Show on VFD'):
+		if self["config"].getCurrent()[0] == _('Show on display'):
 			self.createSetup()
 
 	def abort(self):
@@ -228,10 +227,6 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].cancel()
 		self.close()
-
-	def Update(self):
-		self.createSetup()
-		initVFD()
 
 class VFD_Odin:
 	def __init__(self, session):
@@ -258,7 +253,7 @@ class VFD_Odin:
 def main(menuid):
 	if menuid != "system":
 		return [ ]
-	return [(_("VFD_M7"), startVFD, "VFD_M7", None)]
+	return [(_("LED Display Setup"), startVFD, "VFD_M7", None)]
 
 def startVFD(session, **kwargs):
 	session.open(VFD_OdinM7Setup)
@@ -294,4 +289,4 @@ def sessionstart(reason, **kwargs):
 
 def Plugins(**kwargs):
  	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
- 		PluginDescriptor(name="VFD_M7", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+ 		PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
