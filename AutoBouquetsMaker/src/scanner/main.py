@@ -114,6 +114,10 @@ class AutoBouquetsMaker(Screen):
 		self.actionsList = []
 
 		providers_tmp = config.autobouquetsmaker.providers.value.split("|")
+		
+		# selective rescan
+		providers_tmp = self.manager.checkRescan(providers_tmp)
+		
 		for provider_tmp in providers_tmp:
 			provider_config = ProviderConfig(provider_tmp)
 			if provider_config.isValid() and Providers().providerFileExists(provider_config.getProvider()):

@@ -1,3 +1,4 @@
+from Components.config import config
 from dvbscanner import DvbScanner
 from bouquetswriter import BouquetsWriter
 from bouquetsreader import BouquetsReader
@@ -6,6 +7,9 @@ from tools import Tools
 from .. import log
 
 class Manager():
+	
+	ABM_PREFIX = "userbouquet.abm."
+
 	def __init__(self):
 		self.path = "/etc/enigma2"
 		self.bouquetsToKeep = {}
@@ -32,6 +36,9 @@ class Manager():
 
 	def setPath(self, path):
 		self.path = path
+
+	def getPath(self):
+		return self.path
 
 	def setBouquetsToKeep(self, bouquetsToKeepTv, bouquetsToKeepRadio):
 		self.bouquetsToKeep["tv"] = bouquetsToKeepTv
@@ -74,6 +81,9 @@ class Manager():
 			self.bouquetsToKeep["tv"] = []
 		if "radio" not in self.bouquetsToKeep:
 			self.bouquetsToKeep["radio"] = []
+		
+		# selective rescan	
+		currentBouquets, self.bouquetsToKeep = self.checkRescan2(currentBouquets, self.bouquetsToKeep, old_bouquets)
 
 		print>>log, "[Manager] Bouquets to hide:", self.bouquetsToHide
 		print>>log, "[Manager] TV bouquets to keep:", self.bouquetsToKeep["tv"]
@@ -87,6 +97,7 @@ class Manager():
 		writer = BouquetsWriter()
 		writer.writeLamedb(self.path, self.transponders)
 		providers = Providers().read()
+		bouquetsToHide = []
 		for provider_key in self.bouquetsOrder:
 			if provider_key in providers:
 				bouquetsToHide = []
@@ -272,6 +283,62 @@ class Manager():
 
 	def getProviders(self):
 		return Providers().read()
+		
+	def checkRescan(self, providers):
+		# remove previously scanned providers from "providers"
+		no_rescan = config.autobouquetsmaker.no_rescan.value
+		if config.autobouquetsmaker.level.value == "simple" or no_rescan == '':
+			return providers
+		no_rescan = no_rescan.split('|')
+		current_abm_bouquets = []
+		old_bouquets = self.getBouquetsList()
+		if "tv" not in old_bouquets:
+			old_bouquets["tv"] = []
+		if "radio" not in old_bouquets:
+			old_bouquets["radio"] = []
+		for bouquet_type in ["tv", "radio"]:
+			for bouquet in old_bouquets[bouquet_type]:
+				if bouquet["filename"][:len(self.ABM_PREFIX)] == self.ABM_PREFIX:
+					providername = bouquet["filename"][len(self.ABM_PREFIX):].split('.')[0]
+					if providername not in current_abm_bouquets:
+						current_abm_bouquets.append(providername)
+		remove_provider_from_scan = []
+		for provider in current_abm_bouquets:
+			if provider in no_rescan and provider not in remove_provider_from_scan:
+				remove_provider_from_scan.append(provider)
+		new_providers = []
+		for provider in providers:
+			if provider.split(':')[0] not in remove_provider_from_scan:
+				new_providers.append(provider)
+		return new_providers
+				
+	def checkRescan2(self, currentbouquets, bouquetstokeep, oldbouquets):
+		# update "currentbouquets" and "bouquetstokeep" to include "no rescan" bouquets
+		no_rescan = config.autobouquetsmaker.no_rescan.value
+		if config.autobouquetsmaker.level.value == "simple" or no_rescan == '':
+			return currentbouquets, bouquetstokeep
+		no_rescanProviders = no_rescan.split('|')		
+		toHide = []
+		toRename = []
+		
+		for bouquet_type in ["tv", "radio"]:
+			for bouquet in oldbouquets[bouquet_type]:
+				for provider in no_rescanProviders:
+					if provider in bouquet["filename"]:
+						toRename.append(bouquet["filename"])
+						if "Unknown" in bouquet["name"] or "Separator" in bouquet["name"]: # These get the hidden flag in bouquetwriter
+							toHide.append(bouquet["filename"])
+						break
+							
+		for bouquet_type in ["tv", "radio"]:
+			for bouquet in currentbouquets[bouquet_type]:
+				if bouquet in toRename:
+					currentbouquets[bouquet_type][currentbouquets[bouquet_type].index(bouquet)] = self.ABM_PREFIX[:-1] + '+' + bouquet[len(self.ABM_PREFIX)-1:]
+					if bouquet not in toHide:
+						bouquetstokeep[bouquet_type].append(bouquet)
+						
+		return currentbouquets, bouquetstokeep
+		
 
 #manager = Manager()
 # #print manager.getBouquetsList()

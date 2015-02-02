@@ -78,6 +78,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		self.providers_makehd = {}
 		self.providers_makefta = {}
 		self.providers_makeftahd = {}
+		self.providers_rescan = {}
 		self.providers_order = []
 		self.orbital_supported = []
 
@@ -210,7 +211,12 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 				if provider in providers_tmp_configs:
 					default_area = providers_tmp_configs[provider].getArea()
 				self.providers_area[provider] = ConfigSelection(default = default_area, choices = arealist)
-
+			
+			# selective rescan
+			no_rescan = config.autobouquetsmaker.no_rescan.value.split("|")
+			rescan = config.autobouquetsmaker.level.value == "simple" or provider not in no_rescan
+			self.providers_rescan[provider] = ConfigYesNo(default = rescan)
+			
 		self.createSetup()
 		self["pleasewait"].hide()
 		self["actions"].setEnabled(True)
@@ -285,6 +291,9 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 							if len(self.providers[provider]["swapchannels"]) > 0:
 								self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("swap channels"), self.providers_swapchannels[provider], _("This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)")))
 
+					# selective rescan
+					self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("Rescan every time"), self.providers_rescan[provider], _("If set to 'no' the original scan of this provider will persist and not be updated on subsequent scans.")))
+								
 				providers_enabled.append(provider)
 
 		for provider in providers_enabled:
@@ -324,6 +333,8 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 	def saveAll(self):
 		for x in self["config"].list:
 			x[1].save()
+			
+		no_rescan = []
 
 		config_string = ""
 		for provider in self.providers_order:
@@ -364,7 +375,16 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 					provider_config.setSwapChannels()
 
 				config_string += provider_config.serialize()
+				
+				if not self.providers_rescan[provider].value:
+					no_rescan.append(provider)
 
+		# selective rescan
+		config.autobouquetsmaker.no_rescan.value = ''
+		if no_rescan:
+			config.autobouquetsmaker.no_rescan.value = '|'.join(no_rescan)
+		config.autobouquetsmaker.no_rescan.save()
+		
 		config.autobouquetsmaker.providers.value = config_string
 		config.autobouquetsmaker.providers.save()
 		configfile.save()
