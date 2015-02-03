@@ -14,7 +14,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V4.5-r1"
+Version = "V4.5-r2"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -695,7 +695,7 @@ LCD4linux.ProgSize = ConfigSlider(default = 43,  increment = 1, limits = (8, 150
 LCD4linux.ProgLines = ConfigSelectionNumber(1, 9, 1, default = 1)
 LCD4linux.ProgPos = ConfigSlider(default = 150,  increment = 2, limits = (0, 1024))
 LCD4linux.ProgAlign = ConfigSelection(choices = AlignType, default="1")
-LCD4linux.ProgLen = ConfigSelection(choices = ProzentType, default="50")
+LCD4linux.ProgLen = ConfigSelection(choices = ProzentType, default="100")
 LCD4linux.ProgSplit = ConfigYesNo(default = False)
 LCD4linux.ProgColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.ProgShadow = ConfigYesNo(default = False)
@@ -707,7 +707,7 @@ LCD4linux.Prog2Size = ConfigSlider(default = 32,  increment = 1, limits = (8, 15
 LCD4linux.Prog2Lines = ConfigSelectionNumber(1, 9, 1, default = 3)
 LCD4linux.Prog2Pos = ConfigSlider(default = 120,  increment = 2, limits = (0, 1024))
 LCD4linux.Prog2Align = ConfigSelection(choices = AlignType, default="1")
-LCD4linux.Prog2Len = ConfigSelection(choices = ProzentType, default="50")
+LCD4linux.Prog2Len = ConfigSelection(choices = ProzentType, default="100")
 LCD4linux.Prog2Split = ConfigYesNo(default = False)
 LCD4linux.Prog2Color = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.Prog2Shadow = ConfigYesNo(default = False)
@@ -719,7 +719,7 @@ LCD4linux.ProgNextSize = ConfigSlider(default = 32,  increment = 1, limits = (8,
 LCD4linux.ProgNextLines = ConfigSelectionNumber(1, 20, 1, default = 3)
 LCD4linux.ProgNextPos = ConfigSlider(default = 120,  increment = 2, limits = (0, 1024))
 LCD4linux.ProgNextAlign = ConfigSelection(choices = AlignType, default="1")
-LCD4linux.ProgNextLen = ConfigSelection(choices = ProzentType, default="50")
+LCD4linux.ProgNextLen = ConfigSelection(choices = ProzentType, default="100")
 LCD4linux.ProgNextSplit = ConfigYesNo(default = False)
 LCD4linux.ProgNextColor = ConfigSelection(choices = Farbe, default="white")
 LCD4linux.ProgNextShadow = ConfigYesNo(default = False)
@@ -2092,6 +2092,13 @@ def setLCDon(w):
 def setSaveEventListChanged(w):
 	global SaveEventListChanged
 	SaveEventListChanged = w
+def setFONT(f):
+	global FONT
+	if f.endswith(".ttf") and os.path.isfile(f):
+		FONT = f
+	else:
+		FONT = FONTdefault
+	LCD4linux.Font.value = FONT
 def execexec(w):
 	exec(w)
 def getScreenActive(All=False):
@@ -6829,7 +6836,6 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				LCD4linux.MoonPath.value = dir1
 
 	def fileSelected(self, dir, dir1):
-		global FONT
 		if dir is None or dir1 is None:
 			return
 		sel = self["config"].getCurrent()[1]
@@ -6896,9 +6902,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			elif sel == LCD4linux.StandbyBackground1Bild:
 				LCD4linux.StandbyBackground1Bild.value = dirdir
 			elif sel == LCD4linux.Font:
-				if dirdir.endswith(".ttf") and os.path.isfile(dirdir):
-					LCD4linux.Font.value = dirdir
-					FONT = dirdir
+				setFONT(dirdir)
 			elif sel == LCD4linux.Font1:
 				if dirdir.endswith(".ttf") and os.path.isfile(dirdir):
 					LCD4linux.Font1.value = dirdir
@@ -8832,7 +8836,7 @@ def LCD4linuxPIC(self,session):
 			Title = self.LgetName
 			if len(os.path.splitext(Title)[1]) == 4:
 				Title = os.path.splitext(Title)[0]
-			Title = Title.replace("/","_").replace("&"," ").replace("+","_").replace(":","_").replace("?","_").replace("*","_").strip()
+			Title = Title.replace("/","_").replace("&"," ").replace("+","_").replace(":","_").replace("?","_").replace("*","_").replace('\xc2\x86', '').replace('\xc2\x87', '').strip()
 			L4logE("Title",Title)
 			sreffile = self.LsrefFile
 			sreffile2 = os.path.splitext(sreffile)[0]
@@ -9941,7 +9945,7 @@ def LCD4linuxPIC(self,session):
 			ret=""
 			if len(P2C)>2:
 				useCache = True
-				ret=getpiconres(MAX_W, MAX_H, ConfigFullScreen, picon, P2, P2A, P2C)
+				ret=getpiconres(ConfigSize, MAX_H, ConfigFullScreen, picon, P2, P2A, P2C)
 			else:
 				useCache = False
 				PIC = []
@@ -9990,9 +9994,10 @@ def LCD4linuxPIC(self,session):
 							if str(LCD4linux.PiconTransparenz.value) == "2":
 								self.PiconIm[Puse] = self.PiconIm[Puse].convert("RGBA")
 							xx,yy = self.PiconIm[Puse].size
-							y = MAX_H
 							if ConfigFullScreen == False:
-								y=int(float(ConfigSize)/xx*yy)-ConfigPos
+								y = int(float(ConfigSize)/xx*yy)
+							else:
+								y = MAX_H-ConfigPos
 							if str(LCD4linux.BilderQuality.value) == "0":
 								self.PiconIm[Puse] = self.PiconIm[Puse].resize((ConfigSize, y))
 							else:
@@ -10339,7 +10344,7 @@ def LCD4linuxPIC(self,session):
 				return
 			if transponderData.has_key("tuner_type"):
 				orbital=""
-				if (transponderData["tuner_type"] == "DVB-S") or (transponderData["tuner_type"] == "DVB-S2"):
+				if (transponderData["tuner_type"] == "DVB-S") or (transponderData["tuner_type"] == "DVB-S2") or (transponderData["tuner_type"] == 0):
 					orbital = transponderData["orbital_position"]
 					L4logE("Orbital",orbital)
 					orbital = int(orbital)
@@ -10367,7 +10372,11 @@ def LCD4linuxPIC(self,session):
 										L4logE(position,name)
 						orbital = SAT.get(orbital,orbital)
 				else:
-					orbital = transponderData["tuner_type"]
+					if isinstance(transponderData["tuner_type"],int):
+						orbital = { 0 : 'DVB-S', 1 : 'DVB-C', 2 : 'DVB-T' }.get(transponderData["tuner_type"], "-")
+					else:
+						orbital = transponderData["tuner_type"]
+					L4logE("Orbital2",orbital)
 				font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 				w,h = self.draw[draw].textsize(str(orbital), font=font)
 				if ConfigType[0] == "2" and os.path.isfile(os.path.join(LCD4linux.SatPath.value,str(orbital).replace(".","") + ".png")):
@@ -12934,7 +12943,6 @@ def screenswitch(session,**kwargs):
 
 def autostart(reason, **kwargs):
 	global session
-	global FONT
 	global LCDon
 	global SamsungDevice
 	global SamsungDevice2
@@ -12963,8 +12971,7 @@ def autostart(reason, **kwargs):
 				L4log("create Link")
 			except:
 				L4log("Error create Link")
-		if LCD4linux.Font.value.endswith(".ttf") and os.path.isfile(LCD4linux.Font.value):
-			FONT = LCD4linux.Font.value
+		setFONT(LCD4linux.Font.value)
 		if os.path.exists(LCD4config) and LCD4linux.L4LVersion.value != Version:
 			L4log("Version changed from",LCD4linux.L4LVersion.value)
 			LCD4linux.L4LVersion.value = Version

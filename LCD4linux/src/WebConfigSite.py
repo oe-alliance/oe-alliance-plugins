@@ -416,6 +416,8 @@ class LCD4linuxConfigweb(resource.Resource):
 						elif a.find(".MJPEG") >0:
 							MJPEG_start()
 							MJPEG_stop()
+						elif a.find(".Font") >0:
+							setFONT(LCD4linux.Font.value)
 						if a.find("WetterCity") >0:
 							resetWetter()
 						if a.find("ScreenActive") >0:
