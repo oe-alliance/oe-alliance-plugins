@@ -72,7 +72,7 @@
 		<section number="520">Documentaries</section>
 		<section number="580">Religious</section>
 		<section number="601">Kids</section>
-		<section number="640">Shopping</section>
+		<section number="650">Shopping</section>
 		<section number="700">Sky Box Office</section>
 		<section number="780">International</section>
 		<section number="861">Gaming and Dating</section>
@@ -80,10 +80,11 @@
 		<section number="889">Bonus channels</section>
 		<section number="899">Sky Information</section>
 		<section number="900">Adult</section>
-		<section number="951">BBC Regionals</section>
+		<section number="950">Regional Variations</section>
 		<section number="980">BBC Interactive</section>
 		<section number="1000">Sky Sports Interactive</section>
 		<section number="1030">Sky Anytime</section>
+		<section number="1050">Not indexed</section>
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
 	<hdchannelsontop>
@@ -174,10 +175,23 @@
 	</swapchannels>
 	<servicehacks>
 <![CDATA[
-#################################################################################
-# updated by zoomzoomluke 17/10/2014
+# start: slot some extra channels into vacant slots in the provider list
+########################################################################
 #
-# a black and whitelist to allow you to keep or automatically delete a channel from the list based 
+# format: "channel name": number,
+#
+# example: "Setanta Ireland": 423,"Setanta Sports1": 424,"RTE One": 161,"RTE2 HD": 224,
+#
+########################################################################
+channels_to_add = {
+
+}
+
+#################################################################################
+#
+# Black and Whitelist
+#
+# To allow you to keep or automatically delete a channel from the list based 
 # on it's channel number, name enclosed in quotes or a range of channels in the following sytax:
 # range(start,end) eg: range(900,950) will select the range of channels 900 - 950.
 # please be careful of the syntax of the range command as this is a built-in python function and bad
@@ -203,10 +217,10 @@ blacklist = [899,950,998,999]
 
 #################################################################################
 # LOGGING
-# change 'log_servicehacks = 0' to 'log_servicehacks = 1' if you wish to
+# change 'verbosity = 0' to 'verbosity = 1' if you wish to
 # enable logging
 
-log_servicehacks = 0
+verbosity = 0
 
 #################################################################################
 # DO NOT CHANGE ANYTHING BELOW THIS LINE UNLESS YOU KNOW EXACTLY WHAT
@@ -221,7 +235,7 @@ for middle_list in whitelist:
 			if isinstance(inner_list, list):	
 				for item in inner_list:
 					if isinstance(item, list):
-						if log_servicehacks == 1 : print>>log,"[ZZL DEBUG] nesting too deep " + str(item)
+						if verbosity >= 1 : print>>log,"[ZZL DEBUG] nesting too deep " + str(item)
 					else:
 						wl.append(item)
 			else:
@@ -238,7 +252,7 @@ for middle_list in blacklist:
 			if isinstance(inner_list, list):	
 				for item in inner_list:
 					if isinstance(item, list):
-						if log_servicehacks == 1 : print>>log,"[ZZL DEBUG] nesting too deep " + str(item)
+						if verbosity >= 1 : print>>log,"[ZZL DEBUG] nesting too deep " + str(item)
 					else:
 						bl.append(item)
 			else:
@@ -248,25 +262,35 @@ for middle_list in blacklist:
 
 if service["service_name"][-4:] == " (28)":
 	service["service_name"] = service["service_name"][:-4]
-
 if service["transport_stream_id"] == 0x7e3:
 	service["namespace"] = 0x11a2f26
+
+if service["service_name"] in channels_to_add and channels_to_add[service["service_name"]] in LCNs_in_use:
+	if verbosity >= 1 :print>>log,"[NON IDX HACK] (" + str(service["number"]) + ") [" + service["service_name"] + "] found LCN already in use"
+
+if service["service_name"] in channels_to_add and service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and channels_to_add[service["service_name"]] not in LCNs_in_use:
+	LCNs_in_use.append(channels_to_add[service["service_name"]])
+	service["number"] = channels_to_add[service["service_name"]]
+	service["numbers"] = [channels_to_add[service["service_name"]]]
+	if verbosity >= 1 :print>>log,"[NON IDX HACK] (" + str(service["number"]) + ") [" + service["service_name"] + "] added to custom LCN"
+# end: slot some extra channels into vacant slots in the provider list
+
 
 if service["service_type"] == 0x02 and service["number"] > 3000:
 	service["number"] -= 3000
 
 if service["number"] in wl and service["service_type"] != 2:
-	if log_servicehacks == 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] WHITELISTED"
+	if verbosity >= 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] WHITELISTED"
 elif service["service_name"] in wl and service["service_type"] != 2:
-	if log_servicehacks == 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] WHITELISTED"
+	if verbosity >= 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] WHITELISTED"
 elif service["number"] in bl and service["service_type"] != 2:
-	if log_servicehacks == 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] BLACKLISTED"
+	if verbosity >= 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] BLACKLISTED"
 	skip = True
 elif service["service_name"] in bl and service["service_type"] != 2:
-	if log_servicehacks == 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] BLACKLISTED"
+	if verbosity >= 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] BLACKLISTED"
 	skip = True
 elif service["service_type"] >= 17 and service["service_type"] <= 25 and service["free_ca"] != 0:
-	if log_servicehacks == 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] Type  " + str (service["service_type"]) + "AUTODELETED"
+	if verbosity >= 1 : print>>log,"[SERVICEHACKS] (" + str(service["number"]) + ") [" + service["service_name"] + "] Type  " + str (service["service_type"]) + "AUTODELETED"
 	skip = True
 
 if service["channel_id"] > 2050 and service["channel_id"] < 2053: # BBC RB Find Highest Programmed channel_id
@@ -275,13 +299,15 @@ if service["channel_id"] > 2050 and service["channel_id"] < 2053: # BBC RB Find 
 		if bbcinum in video_services:
 			if bbcinum >= highestbbci:
 				highestbbci = bbcinum
-				if log_servicehacks == 1 : print>>log,"[ZZL DEBUG] highest bbcinum: " + str(highestbbci)
+				if verbosity >= 1 : print>>log,"[ZZL DEBUG] highest bbcinum: " + str(highestbbci)
 
 new_numbers = []		
 for number in service["numbers"]:
-
 	if number >= 3000 and number <= 3999:
 		new_numbers.append(number - 3000)
+	elif number >= 1050 and number <= max(LCNs_in_use): # not indexed channels
+		new_numbers.append(number)
+		if verbosity >= 2 : print>>log,"[NOT INDEXED HACK] (" + str(number) + ") [" + service["service_name"] + "] added to not indexed bouquet"
 	elif number > 999 or number < 101:
 		if service["channel_id"] > 1470 and service["channel_id"] < 1486:
 			new_numbers.append(service["channel_id"] - 471)
@@ -290,7 +316,7 @@ for number in service["numbers"]:
 			new_numbers.append(service["channel_id"] - 3064)
 			service["interactive_name"] = "Sky Anytime " + str(service["channel_id"])
 		elif service["channel_id"] > 2050 and service["channel_id"] < 2053: # BBCi FIX START
-			if log_servicehacks == 1 : print>>log,"[SERVICEHACKS] Moving BBCi Channel. " + str (service["channel_id"]) + " to " + str(highestbbci + 1)
+			if verbosity >= 1 : print>>log,"[SERVICEHACKS] Moving BBCi Channel. " + str (service["channel_id"]) + " to " + str(highestbbci + 1)
 			new_numbers.append(highestbbci + 1)
 			highestbbci += 1
 			service["interactive_name"] = "BBCi " + str(service["channel_id"])
