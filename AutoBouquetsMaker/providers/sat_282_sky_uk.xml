@@ -4,7 +4,7 @@
 	<protocol>sky</protocol>
 	<transponder
 		orbital_position="282"
-		frequency="11778000"
+		frequency="11934000"
 		symbol_rate="27500000"
 		polarization="1"
 		fec_inner="2"
