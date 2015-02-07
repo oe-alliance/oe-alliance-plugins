@@ -77,13 +77,13 @@ msgid "Scan"
 msgstr "Skanowanie"
 
 msgid "Scan start frequency"
-msgstr "Rozpocząć skanowanie częstotliwości"
+msgstr "Rozpoczęcie skanowania częstotliwości"
 
 msgid "Scan start symbolrate"
 msgstr "Szybkość symbolu początkowego skanowania"
 
 msgid "Scan stop frequency"
-msgstr "Zakończyć skanowanie częstotliwość"
+msgstr "Zakończenie skanowania częstotliwość"
 
 msgid "Scan stop symbolrate"
 msgstr "Szybkość symbolu końcowego skanowania"
@@ -118,7 +118,7 @@ msgstr ""
 "Wartość szybkości symbolu są w mega symbolach; Wprowadź wartość od 2 do 45"
 
 msgid "The blindscan run was cancelled by the user."
-msgstr "Wprowadzone 'ślepe' skanowanie zostało anulowane przez użytkownika."
+msgstr "Wprowadzone 'Blind skanowanie' zostało anulowane przez użytkownika."
 
 msgid "Tuner"
 msgstr "Tuner"
@@ -127,7 +127,7 @@ msgid ""
 "When a neighbouring satellite is very strong this avoids searching "
 "transponders known to be coming from the neighbouring satellite"
 msgstr ""
-"Jeśli satelita sąsiadni jest bardzo silny,zapobiega przeglądaniu "
+"Jeśli satelita sąsiedni jest bardzo silny,zapobiega przeglądaniu "
 "transponderów, które leżą na tej satelicie"
 
 msgid "circular left"
@@ -155,10 +155,10 @@ msgid "up to 1 degree"
 msgstr "do 1 stopnia"
 
 msgid "up to 2 degrees"
-msgstr "do 2 stopnia"
+msgstr "do 2 stopni"
 
 msgid "up to 3 degrees"
-msgstr "do 3 stopnia"
+msgstr "do 3 stopni"
 
 msgid "vertical"
 msgstr "pionowa"
@@ -167,7 +167,7 @@ msgid "Polarisation"
 msgstr "Polaryzacja"
 
 msgid "vertical and horizontal"
-msgstr "pionowe i poziome"
+msgstr "pionowa i pozioma"
 
 msgid "Frequency values must be between 10700 MHz and 12749 MHz"
 msgstr "Wartość częstotliwości musi być między 10.700 MHz i 12.749 MHz"
@@ -177,7 +177,7 @@ msgstr "Wartość częstotliwości musi być między 10.701 MHz i 12.750 MHz"
 
 msgid ""
 "The suggested polarisation for this satellite is \"vertical & horizontal\""
-msgstr "Zalecane jest ustawienie w pionie i poziomie"
+msgstr "Zalecane jest ustawienie pionowe i poziome"
 
 msgid ""
 "\"channel scan\" searches for channels and saves them to your receiver; both "
