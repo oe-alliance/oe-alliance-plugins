@@ -104,10 +104,10 @@ msgstr "Typ wyszukiwania"
 
 msgid "Select a tuner that is configured for the satellite you wish to search"
 msgstr ""
-"Wybierz tuner, który jest skonfigurowany do satelity,którego chcesz wyszukać"
+"Wybierz tuner, który jest skonfigurowany do satelity,którą chcesz skanować"
 
 msgid "Select the satellite you wish to search"
-msgstr "Wybierz satelitę, którego chcesz wyszukać"
+msgstr "Wybierz satelitę, którą chcesz skanować"
 
 msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
 msgstr ""
@@ -176,10 +176,6 @@ msgid "Frequency values must be between 10701 MHz and 12750 MHz"
 msgstr "Wartość częstotliwości musi być między 10.701 MHz i 12.750 MHz"
 
 msgid ""
-"The suggested polarisation for this satellite is \"vertical & horizontal\""
-msgstr "Zalecane jest ustawienie pionowe i poziome"
-
-msgid ""
 "\"channel scan\" searches for channels and saves them to your receiver; both "
 "options do a transponder search and save the result in /tmp in an XML file in "
 "satellites.xml format"
@@ -187,3 +183,7 @@ msgstr ""
 "'Skanowanie kanałów' wyszukuje kanały i zapisuje je do odbiornika; Obie opcje "
 "szukają transpondery i zapisują wyniki w 'tmp' w pliku satellites.xml w "
 "formacie XML"
+
+msgid ""
+"The suggested polarisation for this satellite is \"vertical & horizontal\""
+msgstr "Zalecane jest ustawienie \"pionowa i pozioma\""
