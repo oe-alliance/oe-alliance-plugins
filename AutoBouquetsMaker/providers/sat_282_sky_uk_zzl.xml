@@ -64,7 +64,6 @@
 	</dvbsconfigs>
 	<sections>
 		<section number="101">Entertainment</section>
-		<section number="240">Lifestyle and Culture</section>
 		<section number="301">Movies</section>
 		<section number="350">Music</section>
 		<section number="401">Sports</section>
@@ -184,7 +183,7 @@
 #
 ########################################################################
 channels_to_add = {
-
+"London Live": 117,"RTE One": 161,"RTE2": 162,"TG4": 163,"RTE2 HD": 224,"Setanta Ireland": 423,"Setanta Sports1": 424,"Oireachtas TV": 574,"RTEjr": 635,
 }
 
 #################################################################################
