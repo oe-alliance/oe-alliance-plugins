@@ -115,6 +115,7 @@
 		<section number="969">Adult</section>		
 		<section number="990">BBC Interactive</section>
 		<section number="998">Information</section>
+		<section number="1000">Red button</section>
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
 	<hdchannelsontop>
@@ -124,8 +125,67 @@
 		<channel number="142" />
 		<channel number="150" />
 	</hdchannelsontop>
+ <!-- swapchannels only applies to the main bouquet  -->
+	<swapchannels>
+		 <channel number="101" with="108" /><!-- BBC ONE HD -->
+		 <channel number="102" with="162" /><!-- BBC TWO HD -->
+		 <channel number="103" with="113" /><!-- ITV HD -->
+		 <channel number="104" with="142" /><!-- Channel 4HD -->
+		 <channel number="105" with="150" /><!-- Channel 5 HD -->
+		 <channel number="106" with="163" /><!-- BBC THREE HD -->
+		 <channel number="107" with="164" /><!-- BBC FOUR HD -->
+		 <channel number="115" with="176" /><!-- ITV2 HD -->
+		 <channel number="117" with="177" /><!-- ITV3 HD -->
+		 <channel number="118" with="178" /><!-- ITV4 HD -->  
+		 <channel number="119" with="179" /><!-- ITVBe HD -->
+		 <channel number="128" with="194" /><!-- Dave HD -->
+		 <channel number="130" with="200" /><!-- alibi HD -->
+		 <channel number="132" with="181" /><!-- Comedy Central HD -->
+		 <channel number="134" with="183" /><!-- MTV HD -->
+		 <channel number="135" with="165" /><!-- Syfy HD -->
+		 <channel number="147" with="203" /><!-- More 4 HD -->
+		 <channel number="401" with="431" /><!-- Sky Premiere HD -->
+		 <channel number="403" with="433" /><!-- Sky Showcase HD -->
+		 <channel number="404" with="434" /><!-- Sky Oscars HD -->
+		 <channel number="405" with="435" /><!-- Sky Disney HD -->
+		 <channel number="406" with="436" /><!-- Sky Family HD -->
+		 <channel number="407" with="437" /><!-- Sky Action HD -->
+		 <channel number="408" with="438" /><!-- Sky Comedy HD -->
+		 <channel number="409" with="439" /><!-- Sky Thriller HD -->
+		 <channel number="410" with="440" /><!-- Sky Drama Rom HD -->
+		 <channel number="411" with="441" /><!-- Sky SciFi Hor HD -->
+		 <channel number="412" with="442" /><!-- Sky Select HD -->
+		 <channel number="501" with="511" /><!-- Sky Sports News HQ -->
+		 <channel number="502" with="512" /><!-- Sky Sports 1 -->
+		 <channel number="503" with="513" /><!-- Sky Sports 2HD -->
+		 <channel number="504" with="514" /><!-- Sky Sports 3 -->
+		 <channel number="505" with="515" /><!-- Sky Sports 4 -->
+		 <channel number="506" with="516" /><!-- Sky Sports 5 -->
+		 <channel number="507" with="517" /><!-- Sky Sports F1 -->
+	</swapchannels>	
 	<servicehacks>
 <![CDATA[
+blacklist = ['M Pack Tier 1','More TV Pack Tier 2','M+ Pack Tier 3','L Pack Tier 4','XL Pack Tier 5'] # channel names have quotes. Channel numbers do not. Example: ['ITV HD', 250, 500]
+
+for number in service["numbers"]:
+	if number in blacklist:
+		skip = True
+		break
+	elif number >= 50 and number <= 64:
+		service["numbers"] = [number + 951]
+		break
+	elif number == 43:
+		service["numbers"] = [number + 957]
+		break
+		
+if service["service_name"] in blacklist:
+	skip = True
+		
+if service["provider_name"] == 'Unknown':
+	service["provider_name"] = 'Virgin'
+		
+if service["service_name"].startswith("DL_") or service["service_name"].startswith("Hidden"):
+	skip = True
 ]]>
 	</servicehacks>
 </provider>
