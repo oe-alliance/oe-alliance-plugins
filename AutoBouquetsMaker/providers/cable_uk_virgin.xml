@@ -181,9 +181,6 @@ for number in service["numbers"]:
 if service["service_name"] in blacklist:
 	skip = True
 		
-if service["provider_name"] == 'Unknown':
-	service["provider_name"] = 'Virgin'
-		
 if service["service_name"].startswith("DL_") or service["service_name"].startswith("Hidden"):
 	skip = True
 ]]>
