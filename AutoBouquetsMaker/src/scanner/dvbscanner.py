@@ -950,6 +950,20 @@ class DvbScanner():
 					print>>log, "[DvbScanner] Deleted double LCN: %d" % (tmp_services_dict[key]["numbers"][0])
 					del tmp_services_dict[key]["numbers"][0]
 
+		#remove other duplicates (single and dual LCN values)
+		tmp_numbers =[]
+		for key in tmp_services_dict:
+			if tmp_services_dict[key]["region_id"] != 0xffff:
+				for number in tmp_services_dict[key]["numbers"]:
+					tmp_numbers.append(number)
+		for key in tmp_services_dict.keys():
+			if tmp_services_dict[key]["region_id"] == 0xffff:
+				for number in tmp_services_dict[key]["numbers"]:
+					if number in tmp_numbers:
+						del tmp_services_dict[key]["numbers"][tmp_services_dict[key]["numbers"].index(number)]
+				if len(tmp_services_dict[key]["numbers"]) == 0:
+					del tmp_services_dict[key]
+
 		if self.sdt_other_table_id == 0x00:
 			mask = 0xff
 		else:
