@@ -1,22 +1,18 @@
-# English translations for enigma2-oe-alliance-plugins package.
-# Copyright (C) 2012 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
-# Automatically generated, 2012.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-11 16:18+0000\n"
-"PO-Revision-Date: 2014-10-26 21:28+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: fr_FR\n"
+"POT-Creation-Date: 2015-02-02 12:19-0700\n"
+"PO-Revision-Date: 2015-02-02 22:44+0100\n"
+"Last-Translator: mimi74\n"
+"Language-Team: french-EGAMI\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Poedit 1.6.10\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
 
 msgid "30 Days"
 msgstr "30 jours"
@@ -25,7 +21,7 @@ msgid "About"
 msgstr "À propos"
 
 msgid "Add provider prefix to bouquets"
-msgstr "Ajouter le préfix du fournisseur aux bouquets"
+msgstr "Ajouter le préfix de l'opérateur aux bouquets"
 
 msgid "Allows you to set a schedule to perform a scan "
 msgstr "Vous permet de programmer un scan"
@@ -33,34 +29,40 @@ msgstr "Vous permet de programmer un scan"
 msgid "AutoBouquetsMaker"
 msgstr "AutoBouquetsMaker"
 
+msgid "-AutoBouquetsMaker"
+msgstr "-AutoBouquetsMaker"
+
 msgid "AutoBouquetsMaker Configure"
-msgstr "AutoBouquetsMaker Configurer"
+msgstr "AutoBouquetsMaker - Configurer"
 
 msgid "AutoBouquetsMaker Hide sections"
-msgstr "AutoBouquetsMaker Cacher sections"
+msgstr "AutoBouquetsMaker - Cacher sections"
 
 msgid "AutoBouquetsMaker Keep bouquets"
-msgstr "AutoBouquetsMaker Conserver bouquets"
+msgstr "AutoBouquetsMaker - Conserver bouquets"
 
 msgid "AutoBouquetsMaker Log"
-msgstr "AutoBouquetsMaker Log"
+msgstr "AutoBouquetsMaker - Log"
 
 msgid "AutoBouquetsMaker Providers"
-msgstr "AutoBouquetsMaker Fournisseurs"
+msgstr "AutoBouquetsMaker - Opérateurs"
+
+msgid "Bottom"
+msgstr "Dessous"
 
 msgid "Bouquets order"
 msgstr "Ordre des bouquets"
 
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Abandon"
 
 msgid ""
 "Choose which level of setting's to display. 'Expert'-level shows all items, "
 "this also add's more options in the providers menu."
 msgstr ""
-"Choisissez le niveau des paramètres a afficher. Le niveau 'Expert' affiche "
-"toutes les éléments, cela ajoute aussi plus d'options dans le menu des "
-"fournisseurs."
+"Choisissez le niveau des paramètres à afficher. Le niveau 'Expert' affiche "
+"tous les éléments, cela ajoute également plus d'options dans le menu des "
+"opérateurs."
 
 msgid "Close"
 msgstr "Fermer"
@@ -74,8 +76,19 @@ msgstr "Journalier"
 msgid "Hide sections"
 msgstr "Cacher sections"
 
-msgid "Keep all bouquets"
-msgstr "Garder tous les bouquets"
+msgid ""
+"If a service is carried on a satellite that is not "
+"configured, 'yes' means the channel will not appear in "
+"the channel list, 'no' means the channel will show in the "
+"channel list but be greyed out and not be accessible."
+msgstr ""
+"Si un service est affecté à un satellite qui n'est pas "
+"configuré, «oui» signifie que la chaîne n'apparaîtra pas "
+"dans la liste des chaînes, «non» signifie que la chaîne"
+"s'affichera dans la liste des chaînes, mais grisée et inaccessible."
+
+msgid "Keep all non-ABM bouquets"
+msgstr "Garder tous bouquets non-ABM"
 
 msgid "Keep bouquets"
 msgstr "Garder bouquets"
@@ -89,20 +102,29 @@ msgstr "Vers le haut"
 msgid "OK"
 msgstr "OK"
 
+msgid "Place bouquets at"
+msgstr "Placer bouquets vers"
+
+msgid "Please first setup, in configuration"
+msgstr "Veuillez procéder à la configuration d'abord"
+
 msgid "Please wait..."
-msgstr "Patientez..."
+msgstr "Veuillez patientez..."
 
 msgid "Providers"
-msgstr "Fournisseurs"
+msgstr "Opérateurs"
 
 msgid "Providers order"
-msgstr "Ordre des fournisseurs"
+msgstr "Classement opérateurs"
 
 msgid "Really close without saving settings?"
 msgstr "Vraiment quitter sans sauvegarder les paramètres?"
 
 msgid "Repeat how often"
 msgstr "Répéter à quelle fréquence"
+
+msgid "Save"
+msgstr "Sauver"
 
 msgid "Schedule scan"
 msgstr "Programmer un scan"
@@ -126,8 +148,17 @@ msgstr "Mode configuration"
 msgid "Show log"
 msgstr "Afficher log"
 
+msgid "Show in extensions"
+msgstr "Afficher dans les extensions"
+
+msgid "Skip services on not configured sats"
+msgstr "Sauter services des satellites non configurés"
+
 msgid "Start scan"
 msgstr "Démarrer scan"
+
+msgid "Time of scan to start"
+msgstr "Heure démarrage du scan"
 
 msgid ""
 "This option allows you to choose what region of the country you live in, so "
@@ -137,7 +168,7 @@ msgstr ""
 "vivez, et donc les chaînes régionales seront correctement provisionnées."
 
 msgid "This option enables the current selected provider."
-msgstr "Cette options actives le fournisseur actuellement sélectionné."
+msgstr "Cette options actives l'opérateur actuellement sélectionné."
 
 msgid ""
 "This option has several choices \"Yes\", (create a bouquet with all the "
@@ -149,6 +180,11 @@ msgstr ""
 "les chaînes), \"Oui seulement HD \", (regroupera toutes les chaînes HD de ce "
 "bouquet), \"Personnalisé\", (vous permet de choisir votre propre bouquet), "
 "\"Non\", (ne pas utiliser un bouquet principal)"
+
+msgid ""
+"This option will alow you choose where to place the created bouquets."
+msgstr ""
+"Cette option vous permettra de choisir ou placer les bouquets créés."
 
 msgid ""
 "This option will create a FreeToAir bouquet, it will group all none "
@@ -171,8 +207,10 @@ msgstr ""
 "Cette option va créer des bouquets pour chaque type de chaîne, ex Loisirs, "
 "Films, Documentaire."
 
-msgid "This option will prepend the provider name to bouquet name "
-msgstr "Cette option va préfixer le nom du fournisseur au nom du bouquet"
+msgid ""
+"This option will prepend the provider name to bouquet name."
+msgstr ""
+"Cette option passera le nom opérateur en préfixe au nom du bouquet."
 
 msgid ""
 "This option will swap SD versions of channels with HD versions. (ie 101 BBC "
@@ -181,18 +219,26 @@ msgstr ""
 "Cette option va remplacer les chaînes en version SD par celle en HD (ex 101 "
 "BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)"
 
-msgid "Time of backup to start"
-msgstr "Heure de démarrage du backup"
+msgid "Top"
+msgstr "Dessus"
+
+msgid ""
+"When enable allow you start a scan from the extensions list."
+msgstr ""
+"Quand elle est activée, cette option vous permet de lancer "
+"un scan depuis la liste des extensions."
+
+msgid ""
+"When disabled this will enable the 'Keep bouquets' "
+"option in the main menu, allowing you to hide some "
+"'existing' bouquets."
+msgstr ""
+"Quand elle est désactivée, cela active l'option "
+"'garder bouquets' dans le menu principal, permettant "
+"de cacher des bouquets 'existants'."
 
 msgid "Weekly"
 msgstr "Hebdomadaire"
-
-msgid ""
-"When disabled this will enable the 'Keep bouquets' in the main menu, "
-"allowing you to hide some 'existing' bouquets."
-msgstr ""
-"Lorsqu'elle est désactivée cela activera le 'Conserver bouquets' dans le "
-"menu principal, vous permettant de cacher certains bouquets 'existants'."
 
 msgid "area"
 msgstr "région"
@@ -204,7 +250,7 @@ msgid "expert"
 msgstr "expert"
 
 msgid "generate FTA bouquet"
-msgstr "générer le boquet FTA (en clair)"
+msgstr "générer le bouquet FTA (en clair)"
 
 msgid "generate HD bouquet"
 msgstr "générer le bouqet HD"
