@@ -389,7 +389,7 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 		for iface in iNetwork.getAdapterList():
 			if iface != 'eth0' or not iNetwork.onRemoteRootFS():
 				self.commands.append("ifdown " + iface)
-				self.commands.append("ip addr flush dev " + iface)
+				self.commands.append("ip addr flush dev " + iface + "scope global")
 		self.commands.append("/etc/init.d/hostapd stop")
 		self.commands.append("/etc/init.d/networking stop")
 		self.commands.append("killall -9 udhcpc")
