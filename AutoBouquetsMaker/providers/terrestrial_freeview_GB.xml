@@ -78,9 +78,17 @@
 		<section number="601">BBC Interactive</section>
 	</sections>
 	<servicehacks>
-		<![CDATA[
-	if service["service_type"] == 0xc:
-		skip = True	
-		]]>
+	<![CDATA[
+blacklist = [170,200,790, "BBC Red Button", "Adult Section"] # channel names have quotes. Channel numbers do not. Example: ['ITV HD', 250, 500]
+
+for number in service["numbers"]:
+	if number in blacklist:
+		skip = True		
+
+if service["service_type"] == 0xc:
+	skip = True	
+elif service["service_type"] == 0x16:
+	skip = True		
+	]]>
 	</servicehacks>
 </provider>
