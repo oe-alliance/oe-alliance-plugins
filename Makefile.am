@@ -42,6 +42,10 @@ if HD1200
 SUBDIRS += F3LEDControl XtrendRemote
 endif
 
+if HD500C
+SUBDIRS += F3LEDControl XtrendRemote
+endif
+
 if ODIN
 SUBDIRS += XtrendFancontrol Blindscan
 endif
