@@ -191,7 +191,7 @@ class BouquetsWriter():
 			content = bouquets.read().strip().split("\n")
 			bouquets.close()
 			for line in content:
-				if line[:13] == "#SERVICE 1:0:":		#service line found
+				if line[:13] == "#SERVICE 1:0:" or line[:16] == "#SERVICE 4097:0:":		#service or iptv line found
 					return True
 					break
 			return False
