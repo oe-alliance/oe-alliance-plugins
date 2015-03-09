@@ -331,6 +331,13 @@ for number in service["numbers"]:
 	else:
 		new_numbers.append(number)
 service["numbers"] = new_numbers
+
+#Some channels have the FTA flag when they should not.
+fta_corrections = ['BoxNation', 'MOTORS TV UK', 'MTV Live', 'Nick Jr+1', 'Sony Movies', 'Sony Movies+1','Sony TV', 'Sony TV +1', 'TLC+2', ]
+if service["service_name"] in fta_corrections:
+ service["free_ca"] = 1
+#end fta correction
+
 ]]>
 	</servicehacks>
 </provider>
