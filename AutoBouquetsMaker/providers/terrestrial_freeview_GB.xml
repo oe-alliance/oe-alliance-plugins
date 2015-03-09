@@ -85,7 +85,7 @@ for number in service["numbers"]:
 	if number in blacklist:
 		skip = True		
 
-if service["service_name"] in blacklist or service["service_type"] == 0xc or service["service_type"] == 0x16:
+if service["service_name"] in blacklist or service["service_type"] == 0xc:
 	skip = True		
 	]]>
 	</servicehacks>
