@@ -1,5 +1,0 @@
-Package: enigma2-plugin-extensions-vuplusevent
-Version: 1.0-r0
-Description: Return the Love Event (only for genuine box)
-Maintainer: hschang
-Depends: enigma2 (>= 2.6git20091203)

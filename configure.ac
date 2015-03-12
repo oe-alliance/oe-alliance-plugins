@@ -316,11 +316,6 @@ VuDuoFanControl/src/Makefile
 VuDuoFanControl/meta/Makefile
 VuDuoFanControl/po/Makefile
 
-VuplusEvent/Makefile
-VuplusEvent/src/Makefile
-VuplusEvent/meta/Makefile
-VuplusEvent/po/Makefile
-
 WebBrowser/Makefile
 WebBrowser/src/Makefile
 WebBrowser/meta/Makefile
