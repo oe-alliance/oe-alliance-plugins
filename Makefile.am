@@ -166,3 +166,7 @@ endif
 if GB800UEPLUS
 SUBDIRS += AudioEffect
 endif
+
+if VUPLUS
+SUBDIRS += HbbTV AudioEffect
+endif
