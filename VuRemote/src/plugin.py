@@ -125,7 +125,7 @@ class MessageBoxConfirmCode(MessageBox):
 	def timerTick(self):
 		if self.execing:
 			self.timeout -= 1
-			self["text"].setText(self.text + " in %d seconds." %self.timeout)
+			self["text"].setText(self.text + (_(" in %d seconds.")) %self.timeout)
 			if self.timeout == 0:
 				self.timer.stop()
 				self.timerRunning = False
