@@ -213,6 +213,7 @@ class BouquetsWriter():
 
 		customfilenames = []
 		hidden_non_abm_bouquet = []
+		display_empty_bouquet = ['userbouquet.favourites.tv', 'userbouquet.favourites.radio', 'userbouquet.LastScanned.tv']
 		
 		if config.autobouquetsmaker.placement.getValue() == 'bottom':
 			for bouquet_type in ["tv", "radio"]:
@@ -221,7 +222,7 @@ class BouquetsWriter():
 						continue
 					if filename[:len(self.ABM_BOUQUET_PREFIX)-2] == self.ABM_BOUQUET_PREFIX[:-2]: # selective rescan clause
 						filename = self.ABM_BOUQUET_PREFIX[:-1] + filename[len(self.ABM_BOUQUET_PREFIX):]
-					if filename in bouquetsToKeep[bouquet_type] and self.containServicesLines(path, filename):
+					if filename in bouquetsToKeep[bouquet_type] and (self.containServicesLines(path, filename) or filename in display_empty_bouquet):
 						to_write = "#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename
 					else:
 						to_write = "#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename
@@ -293,7 +294,7 @@ class BouquetsWriter():
 						continue
 					if filename[:len(self.ABM_BOUQUET_PREFIX)-2] == self.ABM_BOUQUET_PREFIX[:-2]: # selective rescan clause
 						filename = self.ABM_BOUQUET_PREFIX[:-1] + filename[len(self.ABM_BOUQUET_PREFIX):]
-					if filename in bouquetsToKeep[bouquet_type] and self.containServicesLines(path, filename):
+					if filename in bouquetsToKeep[bouquet_type] and (self.containServicesLines(path, filename) or filename in display_empty_bouquet):
 						to_write = "#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename
 					else:
 						to_write = "#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s\" ORDER BY bouquet\n" % filename
