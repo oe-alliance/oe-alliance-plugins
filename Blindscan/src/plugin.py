@@ -577,6 +577,14 @@ class Blindscan(ConfigListScreen, Screen):
 		elif brandoem == 'azbox':
 			cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))			
 			self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
+		elif brandoem == 'xcore':
+			cmd = "blindscan --start=%d --stop=%d --min=%d --max=%d --slot=%d --i2c=%d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, self.feid, self.getNimSocket(self.feid))
+			if tab_pol[pol]:
+				cmd += " --vertical"
+			if self.is_c_band_scan:
+				cmd += " --cband"
+			elif tab_hilow[band]:
+				cmd += " --high"
 		print "prepared command : [%s]" % (cmd)
 
 		self.thisRun = [] # used to check result corresponds with values used above
