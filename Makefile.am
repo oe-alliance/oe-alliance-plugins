@@ -170,3 +170,7 @@ endif
 if VUPLUS
 SUBDIRS += HbbTV AudioEffect
 endif
+
+if TOMCAT
+SUBDIRS += Blindscan
+endif
