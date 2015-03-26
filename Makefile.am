@@ -171,6 +171,6 @@ if VUPLUS
 SUBDIRS += HbbTV AudioEffect
 endif
 
-if TOMCAT
+if XC7362
 SUBDIRS += Blindscan
 endif
