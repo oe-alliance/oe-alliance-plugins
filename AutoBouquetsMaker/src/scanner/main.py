@@ -45,6 +45,7 @@ class AutoBouquetsMaker(Screen):
 	ABM_BOUQUET_PREFIX = "userbouquet.abm."
 		
 	def __init__(self, session, args = 0):
+		self.printconfig()
 		self.session = session
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("AutoBouquetsMaker"))
@@ -473,6 +474,30 @@ class AutoBouquetsMaker(Screen):
 				if sat[0] == orb_pos:
 					return True
 		return False
+			
+	def printconfig(self):
+		print "[ABM-config] level: ",config.autobouquetsmaker.level.value
+		print "[ABM-config] providers: ",config.autobouquetsmaker.providers.value
+		if config.autobouquetsmaker.bouquetsorder.value:
+			print "[ABM-config] bouquetsorder: ",config.autobouquetsmaker.bouquetsorder.value
+		if config.autobouquetsmaker.keepallbouquets.value:
+			print "[ABM-config] keepbouquets: All"
+		else:
+			print "[ABM-config] keepbouquets: ",config.autobouquetsmaker.keepbouquets.value
+		if config.autobouquetsmaker.hidesections.value:
+			print "[ABM-config] hidesections: ",config.autobouquetsmaker.hidesections.value
+		print "[ABM-config] add provider prefix: ",config.autobouquetsmaker.addprefix.value
+		print "[ABM-config] show in extensions menu: ",config.autobouquetsmaker.extensions.value
+		print "[ABM-config] placement: ",config.autobouquetsmaker.placement.value
+		print "[ABM-config] skip services on non-configured satellites: ",config.autobouquetsmaker.skipservices.value
+		print "[ABM-config] show non-indexed: ",config.autobouquetsmaker.showextraservices.value
+		if config.autobouquetsmaker.no_rescan.value:
+			print "[ABM-config] no_rescan: ",config.autobouquetsmaker.no_rescan.value
+		print "[ABM-config] schedule: ",config.autobouquetsmaker.schedule.value
+		if config.autobouquetsmaker.schedule.value:
+			print "[ABM-config] schedule time: ",config.autobouquetsmaker.scheduletime.value
+			print "[ABM-config] schedule repeat: ",config.autobouquetsmaker.repeattype.value
+			
 
 	def about(self):
 		self.session.open(MessageBox,"AutoBouquetsMaker\nVersion date - 21/10/2012\n\nCoded by:\n\nSkaman and AndyBlac",MessageBox.TYPE_INFO)
@@ -628,3 +653,4 @@ class AutoAutoBouquetsMakerTimer:
 			autobouquetsmakertext = strftime(_("%a %e %b  %-H:%M"), t)
 		else:
 			autobouquetsmakertext = ""
+		
