@@ -124,6 +124,7 @@ AM_CONDITIONAL(VUDUO2, test "$BOXTYPE" == vuduo2)
 AM_CONDITIONAL(VUZERO, test "$BOXTYPE" == vuzero)
 AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
 AM_CONDITIONAL(SH1, test `echo "$BOXTYPE"` == "sh1")
+AM_CONDITIONAL(SH2, test `echo "$BOXTYPE"` == "sh2")
 AM_CONDITIONAL(SPARK, test `echo "$BOXTYPE" | cut -b 1-5` == spark)
 AM_CONDITIONAL(XC7362, test "$BOXTYPE" == xc7362)
 if test `echo "$BOXTYPE" | cut -b 1-2` == "dm"; then
