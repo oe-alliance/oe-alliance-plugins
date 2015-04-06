@@ -297,7 +297,7 @@ def initLED():
 		forcmd = '1'
 	else:
 		forcmd = '0'
-	if BOX in ("gbquad", "gb800ueplus", "gbquadplus", "gbipbox"):
+	if BOX in ("gbquad", "gb800ueplus", "gbquadplus", "gbipbox", "gbx1"):
 		cmd = 'echo STB does not support to show clock in Deep Standby'
 	else:
 		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
@@ -336,7 +336,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		self.Console = Console()
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
-		if BOX in ("gbquad", "gb800ueplus", "gbquadplus", "gbipbox"):
+		if BOX in ("gbquad", "gb800ueplus", "gbquadplus", "gbipbox", "gbx1"):
 			self["key_yellow"] = Button("")
 		else:
 			self["key_yellow"] = Button(_("Update Date/Time"))
@@ -356,7 +356,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		if config.plugins.VFD_Giga.setLed.value:
 			self.list.append(getConfigListEntry(_("Led state RUN"), config.plugins.VFD_Giga.ledRUN))
 			self.list.append(getConfigListEntry(_("Led state Standby"), config.plugins.VFD_Giga.ledSBY))
-			if BOX not in ("gbquad", "gb800ueplus", "gb800seplus", "gbquadplus", "gbipbox", "gbultra", "gbultraue", "gbultrase"):
+			if BOX not in ("gbquad", "gb800ueplus", "gb800seplus", "gbquadplus", "gbipbox", "gbultra", "gbultraue", "gbultrase", "gbx1"):
 				self.list.append(getConfigListEntry(_("Led state Deep Standby"), config.plugins.VFD_Giga.ledDSBY))
 			self.list.append(getConfigListEntry(_("Led state Record"), config.plugins.VFD_Giga.ledREC))
 			self.list.append(getConfigListEntry(_("Blink Record Led"), config.plugins.VFD_Giga.recLedBlink))
