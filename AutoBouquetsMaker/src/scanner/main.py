@@ -491,6 +491,8 @@ class AutoBouquetsMaker(Screen):
 		print "[ABM-config] placement: ",config.autobouquetsmaker.placement.value
 		print "[ABM-config] skip services on non-configured satellites: ",config.autobouquetsmaker.skipservices.value
 		print "[ABM-config] show non-indexed: ",config.autobouquetsmaker.showextraservices.value
+		if config.autobouquetsmaker.FTA_only.value:
+			print "[ABM-config] FTA_only: ",config.autobouquetsmaker.FTA_only.value
 		if config.autobouquetsmaker.no_rescan.value:
 			print "[ABM-config] no_rescan: ",config.autobouquetsmaker.no_rescan.value
 		print "[ABM-config] schedule: ",config.autobouquetsmaker.schedule.value

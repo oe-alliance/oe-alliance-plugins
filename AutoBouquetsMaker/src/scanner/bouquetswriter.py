@@ -324,6 +324,15 @@ class BouquetsWriter():
 			section_prefix = section_prefix + " - "
 		current_number = 0
 		
+		# fta only
+		if config.autobouquetsmaker.level.value == "expert" and section_identifier in config.autobouquetsmaker.FTA_only.value:
+			video_services_tmp = {}
+			for number in services["video"]:
+				if services["video"][number]["free_ca"] == 0:
+					video_services_tmp[number] = services["video"][number]
+			services["video"] = video_services_tmp
+				
+		
 		# swap services if customLCN
 		services = Tools().customLCN(services, section_identifier, current_bouquet_key)
 

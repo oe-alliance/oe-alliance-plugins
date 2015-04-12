@@ -79,6 +79,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		self.providers_makefta = {}
 		self.providers_makeftahd = {}
 		self.providers_rescan = {}
+		self.providers_FTA_only = {}
 		self.providers_order = []
 		self.orbital_supported = []
 
@@ -212,6 +213,11 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 					default_area = providers_tmp_configs[provider].getArea()
 				self.providers_area[provider] = ConfigSelection(default = default_area, choices = arealist)
 			
+			# FTA only
+			FTA_only = config.autobouquetsmaker.FTA_only.value.split("|")
+			FTA = config.autobouquetsmaker.level.value == "expert" and provider in FTA_only
+			self.providers_FTA_only[provider] = ConfigYesNo(default = FTA)
+			
 			# selective rescan
 			no_rescan = config.autobouquetsmaker.no_rescan.value.split("|")
 			rescan = config.autobouquetsmaker.level.value == "simple" or provider not in no_rescan
@@ -250,6 +256,9 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 					self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("area"), self.providers_area[provider], _("This option allows you to choose what region of the country you live in, so it populates the correct channels for your region.")))
 
 				if config.autobouquetsmaker.level.value == "expert":
+					# fta only
+					self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("FTA only"), self.providers_FTA_only[provider], _("This affects all bouquets. Select 'no' to scan in all services. Select 'yes' to skip encrypted ones.")))
+					
 					if self.providers_makemain[provider]:
 						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate main bouquet"), self.providers_makemain[provider], _('This option has several choices "Yes", (create a bouquet with all the channels in it), "Yes HD only", (will group all HD channels into this bouquet), "Custom", (allows you to select your own bouquet), "No", (do not use a main bouquet)')))
 
@@ -262,10 +271,10 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 					if self.providers_makehd[provider] and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "hd") and self.providers[provider]["streamtype"] not in ("dvbt"):
 						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate HD bouquet"), self.providers_makehd[provider], _("This option will create a High Definition bouquet, it will group all HD channels into this bouquet.")))
 
-					if self.providers_makefta[provider]:
+					if self.providers_makefta[provider] and not self.providers_FTA_only[provider].value:
 						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate FTA bouquet"), self.providers_makefta[provider], _("This option will create a FreeToAir bouquet, it will group all none encrypted channels into this bouquet.")))
-
-					if self.providers_makeftahd[provider] and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "ftahd") and self.providers[provider]["streamtype"] not in ("dvbt"):
+					
+					if self.providers_makeftahd[provider] and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "ftahd") and self.providers[provider]["streamtype"] not in ("dvbt") and not self.providers_FTA_only[provider].value:
 						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate FTA HD bouquet"), self.providers_makeftahd[provider], _("This option will create a FreeToAir High Definition bouquet, it will group all HD channels into this bouquet.")))
 
 					if self.providers_makemain[provider] and self.providers_makemain[provider].value == "yes" and self.providers[provider]["streamtype"] not in ("dvbt"):
@@ -334,6 +343,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			x[1].save()
 			
+		FTA_only = []
 		no_rescan = []
 
 		config_string = ""
@@ -365,10 +375,10 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 				if self.providers_makehd[provider] and self.providers_makehd[provider].value and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "hd") and self.providers[provider]["streamtype"] not in ("dvbt"):
 					provider_config.setMakeHD()
 
-				if self.providers_makefta[provider] and self.providers_makefta[provider].value:
+				if self.providers_makefta[provider] and self.providers_makefta[provider].value and not self.providers_FTA_only[provider].value:
 					provider_config.setMakeFTA()
 
-				if self.providers_makeftahd[provider] and self.providers_makeftahd[provider].value and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "ftahd") and self.providers[provider]["streamtype"] not in ("dvbt"):
+				if self.providers_makeftahd[provider] and self.providers_makeftahd[provider].value and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "ftahd") and self.providers[provider]["streamtype"] not in ("dvbt") and not self.providers_FTA_only[provider].value:
 					provider_config.setMakeFTAHD()
 
 				if self.providers_swapchannels[provider] and self.providers_swapchannels[provider].value and self.providers[provider]["streamtype"] not in ("dvbt"):
@@ -376,9 +386,18 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 
 				config_string += provider_config.serialize()
 				
+				if self.providers_FTA_only[provider].value:
+					FTA_only.append(provider)
+				
 				if not self.providers_rescan[provider].value:
 					no_rescan.append(provider)
 
+		# fta only
+		config.autobouquetsmaker.FTA_only.value = ''
+		if FTA_only:
+			config.autobouquetsmaker.FTA_only.value = '|'.join(FTA_only)
+		config.autobouquetsmaker.FTA_only.save()
+		
 		# selective rescan
 		config.autobouquetsmaker.no_rescan.value = ''
 		if no_rescan:
