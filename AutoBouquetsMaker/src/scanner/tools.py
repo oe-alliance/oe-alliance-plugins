@@ -32,7 +32,8 @@ class Tools():
 		else:
 			xmlout = open(custom_dir + "/EXAMPLE_hd_" + section_identifier + "_CustomLCN.xml", "w")
 		xmlout.write("<custom>\n\t<include>yes</include>\n\t<lcnlist>\n")
-		for number in services["video"]:
+		numbers = sorted(services["video"].keys())
+		for number in numbers:
 			servicename = unicode(services["video"][number]["service_name"], errors='ignore')
 			xmlout.write("\t\t<configuration lcn=\"%d\" channelnumber=\"%d\" description=\"%s\"></configuration>\n" % (
 				number,
@@ -48,7 +49,8 @@ class Tools():
 		else:
 			xmlout = open(custom_dir + "/EXAMPLE_hd_" + section_identifier + "_CustomradioLCN.xml", "w")
 		xmlout.write("<custom>\n\t<include>yes</include>\n\t<lcnlist>\n")
-		for number in services["radio"]:
+		numbers = sorted(services["radio"].keys())
+		for number in numbers:
 			servicename = unicode(services["radio"][number]["service_name"], errors='ignore')
 			xmlout.write("\t\t<configuration lcn=\"%d\" channelnumber=\"%d\" description=\"%s\"></configuration>\n" % (
 				number,
