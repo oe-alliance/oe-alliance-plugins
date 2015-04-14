@@ -1,0 +1,64 @@
+# English translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-21 17:17+0100\n"
+"PO-Revision-Date: 2015-04-13 15:25+0200\n"
+"Last-Translator: Hasan Kiran <sunder67@hotmail.com>\n"
+"Language-Team: none\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.7.5\n"
+
+msgid "3D Surround"
+msgstr "3B Ses"
+
+msgid "3D Surround Speaker Position"
+msgstr "3B Ses Hoparlör Pozisyonu"
+
+msgid "AVL (Automatic Volume Leveler)"
+msgstr "AVL (Otomatik Ses Seviyesi)"
+
+msgid "Audio Effect Setup"
+msgstr "Ses Efekt Ayarı"
+
+msgid "Audio Effect Setup is not supported."
+msgstr "Ses Efekt Kurulumu desteklenmiyor"
+
+msgid "AudioEffect"
+msgstr "Ses Efekti"
+
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "Default"
+msgstr "Varsayılan"
+
+msgid "Effect"
+msgstr "Efekt"
+
+msgid "Off"
+msgstr "Kapalı"
+
+msgid "On"
+msgstr "Açık"
+
+msgid "Really close without saving settings?"
+msgstr "Ayarları kaydetmeden kapatmak istiyor musunuz?"
+
+msgid "Save"
+msgstr "kaydet"
+
+msgid "none"
+msgstr "hiçbiri"
+
+msgid "sets the audio effetcs"
+msgstr "ses efekt ayarları"
