@@ -104,56 +104,6 @@
 	</sdchannelsontop>
 	<!-- swapchannels affect only main bouquet (the normal version) -->
 	<swapchannels>
-		<filter bouquet="0x1001" region="0x01" />
-		<filter bouquet="0x1001" region="0x02" />
-		<filter bouquet="0x1001" region="0x03" />
-		<filter bouquet="0x1001" region="0x04" />
-		<filter bouquet="0x1001" region="0x05" />
-		<filter bouquet="0x1001" region="0x06" />
-		<filter bouquet="0x1001" region="0x07" />
-		<filter bouquet="0x1001" region="0x08" />
-		<filter bouquet="0x1001" region="0x09" />
-		<filter bouquet="0x1001" region="0x0a" />
-		<filter bouquet="0x1001" region="0x0b" />
-		<filter bouquet="0x1001" region="0x0c" />
-		<filter bouquet="0x1001" region="0x0d" />
-		<filter bouquet="0x1001" region="0x12" />
-		<filter bouquet="0x1001" region="0x13" />
-		<filter bouquet="0x1001" region="0x14" />
-		<filter bouquet="0x1001" region="0x15" />
-		<filter bouquet="0x1001" region="0x18" />
-		<filter bouquet="0x1001" region="0x19" />
-		<filter bouquet="0x1001" region="0x1a" />
-		<filter bouquet="0x1001" region="0x1b" />
-		<filter bouquet="0x1001" region="0x1c" />
-		<filter bouquet="0x1001" region="0x1d" />
-		<filter bouquet="0x1002" region="0x23" />
-		<filter bouquet="0x1002" region="0x24" />
-		<filter bouquet="0x1002" region="0x25" />
-		<filter bouquet="0x1002" region="0x26" />
-		<filter bouquet="0x1003" region="0x29" />
-		<filter bouquet="0x1003" region="0x2b" />
-		<filter bouquet="0x1003" region="0x2d" />
-		<filter bouquet="0x1003" region="0x3c" />
-		<filter bouquet="0x1003" region="0x3d" />
-		<filter bouquet="0x1003" region="0x3e" />
-		<filter bouquet="0x1003" region="0x3f" />
-		<filter bouquet="0x1003" region="0x40" />
-		<filter bouquet="0x1003" region="0x41" />
-		<filter bouquet="0x1003" region="0x42" />
-		<filter bouquet="0x1003" region="0x43" />
-		<filter bouquet="0x1003" region="0x44" />
-		<filter bouquet="0x1003" region="0x45" />
-		<filter bouquet="0x1003" region="0x46" />
-		<filter bouquet="0x1003" region="0x47" />
-		<filter bouquet="0x1003" region="0x48" />
-		<filter bouquet="0x1004" region="0x21" />
-		<filter bouquet="0x1004" region="0x22" />
-		<filter bouquet="0x1006" region="0x24" />
-		<filter bouquet="0x1006" region="0x25" />
-		<filter bouquet="0x1006" region="0x26" />
-		<filter bouquet="0x1007" region="0x2b" />
-		<filter bouquet="0x1008" region="0x21" />
 		<channel number="141" with="101" /><!-- BBC One HD -->
 		<channel number="142" with="102" /><!-- BBC Two HD -->
 		<channel number="178" with="103" /><!-- ITV HD -->
