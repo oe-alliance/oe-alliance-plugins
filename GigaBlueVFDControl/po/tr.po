@@ -5,80 +5,79 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-05-18 01:40+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"PO-Revision-Date: 2015-04-14 09:37+0200\n"
+"Last-Translator: Hasan Kiran <sunder67@hotmail.com>\n"
 "Language-Team: CÜNEYT OCAKLILAR <ocaklilar@gmail.com>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.0.3\n"
+"X-Generator: Poedit 1.7.5\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Country: TURKEY\n"
 "X-Poedit-Bookmarks: 2450,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 msgid "Blink Record Led"
 msgstr ""
 
 msgid "Blue"
-msgstr ""
+msgstr "Mavi"
 
 #
 msgid "Cancel"
 msgstr "İptal"
 
 msgid "Enable led"
-msgstr ""
+msgstr "Led etkinleştir"
 
 msgid "Led state Deep Standby"
-msgstr ""
+msgstr "Derin beklemede led durumu"
 
 msgid "Led state RUN"
-msgstr ""
+msgstr "ÇALIŞIRKEN led durumu"
 
 msgid "Led state Record"
-msgstr ""
+msgstr "Kayıtta led durumu"
 
 msgid "Led state Standby"
-msgstr ""
+msgstr "Beklemede led durumu"
 
 msgid "No"
-msgstr ""
+msgstr "Hayır"
 
 msgid "None"
-msgstr ""
+msgstr "Hiçbiri"
 
 msgid "Off"
-msgstr ""
+msgstr "Kapalı"
 
 msgid "Purple"
-msgstr ""
+msgstr "Mor"
 
 msgid "Red"
-msgstr ""
+msgstr "Kırmızı"
 
 #
 msgid "Save"
 msgstr "Kaydet"
 
 msgid "Show clock"
-msgstr ""
+msgstr "Saati göster"
 
 msgid "Show clock in Deep Standby"
-msgstr ""
+msgstr "Derin beklemede saati göster"
 
 msgid "Time mode"
-msgstr ""
+msgstr "Zaman kipi"
 
 msgid "Update Date/Time"
-msgstr ""
+msgstr "Tarih/Saat  güncelle"
 
 msgid "VFD_Giga"
-msgstr ""
+msgstr "VFD_Giga"
 
 msgid "Yes"
-msgstr ""
+msgstr "Evet"
 
 msgid "in standby: "
-msgstr ""
+msgstr "Beklemede:"
