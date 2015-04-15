@@ -483,6 +483,12 @@ class BouquetsWriter():
 			else:
 				section_current_number = sorted(sections.keys())[0] - 1
 
+			# sections swap
+			sectionsSwap = {}
+			for swaprule in preferred_order:
+				sectionsSwap[swaprule[0]] = swaprule[1]
+				sectionsSwap[swaprule[1]] = swaprule[0]
+				
 			for section_number in sorted(sections.keys()):
 				section_name = sections[section_number]
 
@@ -515,6 +521,8 @@ class BouquetsWriter():
 				#current_number += 1
 				section_current_number += 1
 				for number in range(section_current_number, higher_number + 1):
+					if number in sectionsSwap and sectionsSwap[number] in services["video"]:
+						number = sectionsSwap[number]
 					if number in services["video"] and section_number not in bouquets_to_hide:
 						bouquet_current.write("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
 								services["video"][number]["service_type"],

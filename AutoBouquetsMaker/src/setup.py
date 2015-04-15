@@ -277,7 +277,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 					if self.providers_makeftahd[provider] and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "ftahd") and self.providers[provider]["streamtype"] not in ("dvbt") and not self.providers_FTA_only[provider].value:
 						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate FTA HD bouquet"), self.providers_makeftahd[provider], _("This option will create a FreeToAir High Definition bouquet, it will group all HD channels into this bouquet.")))
 
-					if self.providers_makemain[provider] and self.providers_makemain[provider].value == "yes" and self.providers[provider]["streamtype"] not in ("dvbt"):
+					if ((self.providers_makemain[provider] and self.providers_makemain[provider].value == "yes") or (self.providers_makesections[provider] and self.providers_makesections[provider].value == True)) and self.providers[provider]["streamtype"] not in ("dvbt"):
 						if self.providers[provider]["protocol"] == "sky":
 							for swapchannel in self.providers[provider]["swapchannels"]:
 								if len(swapchannel["filters"]) == 0:

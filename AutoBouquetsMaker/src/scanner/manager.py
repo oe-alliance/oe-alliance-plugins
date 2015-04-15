@@ -129,7 +129,7 @@ class Manager():
 					current_region = -1
 
 				preferred_order = []
-				if self.providerConfigs[provider_key].isMakeNormalMain() and self.providerConfigs[provider_key].isSwapChannels():
+				if (self.providerConfigs[provider_key].isMakeNormalMain() or self.providerConfigs[provider_key].isMakeSections()) and self.providerConfigs[provider_key].isSwapChannels():
 					for swapchannels_set in providers[provider_key]["swapchannels"]:
 						if len(preferred_order) == 0 and len(swapchannels_set["filters"]) == 0:
 							preferred_order = swapchannels_set["preferred_order"]
