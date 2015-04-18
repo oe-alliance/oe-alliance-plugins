@@ -4,8 +4,8 @@
 	<protocol>lcn</protocol>
 	<namespace>0xffff0000</namespace>
 	<dvbcconfigs>
-		<configuration key="kabeltex_hd" netid="1791" bouquettype="hd" frequency="284000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">HD sortering</configuration>
-		<configuration key="kabeltex_sd" netid="1791" bouquettype="sd" frequency="284000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">SD sortering</configuration>
+		<configuration key="hd_kabeltex" netid="1791" bouquettype="hd" frequency="284000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">HD sortering</configuration>
+		<configuration key="hd_kabeltex" netid="1791" bouquettype="sd" frequency="284000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">SD sortering</configuration>
 	</dvbcconfigs>
 	<sections>
 		<section number="1">Kabeltex</section>
