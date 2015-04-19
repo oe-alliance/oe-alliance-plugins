@@ -4,8 +4,8 @@
 	<protocol>lcn</protocol>
 	<namespace>0xffff0000</namespace>
 	<dvbcconfigs>
-		<configuration key="harderwijk_hd" netid="2244" bouquettype="hd" frequency="456000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">HD sortering</configuration>
-		<configuration key="harderwijk_sd" netid="2244" bouquettype="sd" frequency="456000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">SD sortering</configuration>
+		<configuration key="hd_harderwijk" netid="2244" bouquettype="hd" frequency="456000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">HD sortering</configuration>
+		<configuration key="sd_harderwijk" netid="2244" bouquettype="sd" frequency="456000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">SD sortering</configuration>
 	</dvbcconfigs>
 	<sections>
 		<section number="1">Harderwijk</section>

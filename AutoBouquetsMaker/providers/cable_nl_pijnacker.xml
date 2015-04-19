@@ -4,8 +4,8 @@
 	<protocol>lcn</protocol>
 	<namespace>0xffff0000</namespace>
 	<dvbcconfigs>
-		<configuration key="pijnacker_hd" netid="757" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">HD sortering</configuration>
-		<configuration key="pijnacker_sd" netid="757" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">SD sortering</configuration>
+		<configuration key="hd_pijnacker" netid="757" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">HD sortering</configuration>
+		<configuration key="sd_pijnacker" netid="757" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">SD sortering</configuration>
 	</dvbcconfigs>
 	<sections>
 		<section number="1">Pijnacker</section>
