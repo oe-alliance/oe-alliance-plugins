@@ -641,7 +641,7 @@ class DvbScanner():
 			"radio": radio_services
 		}
 
-	def updateAndReadServicesSKY(self, bouquet_id, region_id, namespace, transponders, servicehacks):
+	def updateAndReadServicesSKY(self, bouquet_id, region_id, namespace, bouquet_key, transponders, servicehacks):
 		print>>log, "[DvbScanner] Reading services..."
 
 		fd = dvbreader.open(self.demuxer_device, self.bat_pid, self.bat_table_id, 0xff, self.frontend)
@@ -839,7 +839,7 @@ class DvbScanner():
 			"radio": radio_services
 		}
 
-	def updateAndReadServicesFreeSat(self, bouquet_id, region_id, namespace, transponders, servicehacks):
+	def updateAndReadServicesFreeSat(self, bouquet_id, region_id, namespace, bouquet_key, transponders, servicehacks):
 		print>>log, "[DvbScanner] Reading services..."
 
 		fd = dvbreader.open(self.demuxer_device, self.bat_pid, self.bat_table_id, 0xff, self.frontend)

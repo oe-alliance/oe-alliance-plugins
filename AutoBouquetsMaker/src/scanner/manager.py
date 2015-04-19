@@ -243,7 +243,7 @@ class Manager():
 					scanner.updateTransponders(transponder_tmp, self.transponders, False)
 					bouquet = providers[provider_key]["bouquets"][bouquet_key]
 					self.services[provider_key] = scanner.updateAndReadServicesSKY(bouquet["bouquet"],
-							bouquet["region"], bouquet["namespace"], self.transponders,
+							bouquet["region"], bouquet["namespace"], bouquet["key"], self.transponders,
 							providers[provider_key]["servicehacks"])
 
 					ret = len(self.services[provider_key]["video"].keys()) > 0 or len(self.services[provider_key]["radio"].keys()) > 0
@@ -261,7 +261,7 @@ class Manager():
 					scanner.updateTransponders(transponder_tmp, self.transponders, False)
 					bouquet = providers[provider_key]["bouquets"][bouquet_key]
 					self.services[provider_key] = scanner.updateAndReadServicesFreeSat(bouquet["bouquet"],
-							bouquet["region"], bouquet["namespace"], self.transponders,
+							bouquet["region"], bouquet["namespace"], bouquet["key"], self.transponders,
 							providers[provider_key]["servicehacks"])
 
 					ret = len(self.services[provider_key]["video"].keys()) > 0 or len(self.services[provider_key]["radio"].keys()) > 0
