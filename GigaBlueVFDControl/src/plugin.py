@@ -450,12 +450,13 @@ class LED_Giga:
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid, **kwargs):
-	if getImageDistro() in ("openvix", "openvixhd"):
-		if menuid == "display":
-			if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase'):
-				return [(_("Display/LED"), startLED, "LED_Giga", None)]
-			else:
-				return [(_("LED"), startLED, "LED_Giga", None)]
+	if getImageDistro() == "openvix":
+		if BOX in ('gb800se', 'gb800solo') and menuid == "leddisplay":
+			return [(_("Display/LED"), startLED, "LED_Giga", None)]
+		elif BOX in ('gb800seplus', 'gbultra', 'gbultrase') and menuid == "display":
+			return [(_("Display/LED"), startLED, "LED_Giga", None)]
+		elif menuid == "display":
+			return [(_("LED"), startLED, "LED_Giga", None)]
 		else:
 			return []
 	else:
