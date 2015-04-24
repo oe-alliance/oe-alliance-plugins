@@ -7,7 +7,7 @@
 		frequency="12207000" 
 		symbol_rate="27500000"
 		polarization="1"
-		fec_inner="4"
+		fec_inner="0"
 		inversion="2"
 		system="0"
 		modulation="1"
