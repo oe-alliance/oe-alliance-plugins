@@ -348,6 +348,14 @@ class BouquetsWriter():
 		print>>log, "[BouquetsWriter] Writing %s bouquet..." % section_identifier
 
 		force_keep_numbers = False
+		
+		# swap channels
+		swapDict = {}
+		for swaprule in preferred_order:
+			if swaprule[0] in services["video"] and swaprule[1] in services["video"] and services["video"][swaprule[1]]["service_type"] >= 17:
+				swapDict[swaprule[0]] = swaprule[1]
+				swapDict[swaprule[1]] = swaprule[0]
+		
 		if provider_config.isMakeNormalMain():
 			bouquet_current = open(path + "/%s%s.main.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			bouquet_current.write("#NAME %sAll channels\n" % section_prefix)
@@ -359,13 +367,6 @@ class BouquetsWriter():
 			# expand a range into a list
 			for number in range(1, higher_number + 1):
 				preferred_order_tmp.append(number)
-
-			# swap channels
-			for swaprule in preferred_order:
-				if len(preferred_order_tmp) >= swaprule[0] and len(preferred_order_tmp) >= swaprule[1] and swaprule[0] > 0 and swaprule[1] > 0:
-					tmp = preferred_order_tmp[swaprule[0] - 1]
-					preferred_order_tmp[swaprule[0] - 1] = preferred_order_tmp[swaprule[1] - 1]
-					preferred_order_tmp[swaprule[1] - 1] = tmp
 
 			# Always write first not hidden section on top of list
 			for number in preferred_order_tmp:
@@ -381,6 +382,8 @@ class BouquetsWriter():
 				if section_number in sections and section_number not in bouquets_to_hide and section_number != first_section:
 					bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
 					bouquet_current.write("#DESCRIPTION %s%s\n" % (section_prefix, sections[section_number]))
+				if number in swapDict:
+					number = swapDict[number]
 				if number in services["video"] and number not in bouquets_to_hide:
 					bouquet_current.write("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
 							services["video"][number]["service_type"],
@@ -483,12 +486,6 @@ class BouquetsWriter():
 			else:
 				section_current_number = sorted(sections.keys())[0] - 1
 
-			# sections swap
-			sectionsSwap = {}
-			for swaprule in preferred_order:
-				sectionsSwap[swaprule[0]] = swaprule[1]
-				sectionsSwap[swaprule[1]] = swaprule[0]
-				
 			for section_number in sorted(sections.keys()):
 				section_name = sections[section_number]
 
@@ -521,8 +518,8 @@ class BouquetsWriter():
 				#current_number += 1
 				section_current_number += 1
 				for number in range(section_current_number, higher_number + 1):
-					if number in sectionsSwap and sectionsSwap[number] in services["video"]:
-						number = sectionsSwap[number]
+					if number in swapDict:
+						number = swapDict[number]
 					if number in services["video"] and section_number not in bouquets_to_hide:
 						bouquet_current.write("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
 								services["video"][number]["service_type"],
