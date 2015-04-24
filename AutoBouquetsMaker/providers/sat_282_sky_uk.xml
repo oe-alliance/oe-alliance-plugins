@@ -243,7 +243,7 @@ if service["service_type"] == 0x02 and service["number"] > 3000:
 
 if service["service_type"] != 2 and (service["number"] in whitelist or service["service_name"] in whitelist):
 	pass
-elif service["service_type"] != 2 and (service["number"] in blacklist or service["service_name"] in blacklist):
+elif custom and service["service_type"] != 2 and (service["number"] in blacklist or service["service_name"] in blacklist):
 	skip = True
 elif custom and service["service_type"] >= 17 and service["service_type"] <= 25 and service["free_ca"] != 0:
 	skip = True
