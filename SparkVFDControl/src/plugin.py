@@ -15,6 +15,8 @@ from Components.ServiceList import ServiceList
 from Screens.InfoBar import InfoBar
 from time import localtime, time
 from Tools.Directories import fileExists
+from enigma import pNavigation
+import Components.RecordingConfig
 
 from boxbranding import getBoxType
 
@@ -163,7 +165,11 @@ class Channelnumber:
 			self.RecTimer.start(1000, True)
     
 	def showRec(self):
-		recordings = len(NavigationInstance.instance.getRecordings())
+		try:
+			#not all images support recording type indicators
+			recordings = len(NavigationInstance.instance.getRecordings(False,Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue())))
+		except:
+			recordings = len(NavigationInstance.instance.getRecordings())
 		
 		if recordings >= 1:
 			pattern = 4294967295
