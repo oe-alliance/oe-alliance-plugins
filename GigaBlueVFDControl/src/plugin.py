@@ -18,6 +18,8 @@ from Components.ServiceList import ServiceList
 from Screens.InfoBar import InfoBar
 from time import localtime, time
 import Screens.Standby
+from enigma import pNavigation
+import Components.RecordingConfig
 
 BOX = getBoxType()
 
@@ -213,7 +215,11 @@ class Channelnumber:
 
 	def RecordingLed(self):
 		global RecLed
-		recordings = self.session.nav.getRecordings()
+		try:
+			#not all images support recording type indicators
+			recordings = self.session.nav.getRecordings(False,Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue()))
+		except:
+			recordings = self.session.nav.getRecordings()
 		if recordings:
 			self.updatetime = 1000
 			if not config.plugins.VFD_Giga.recLedBlink.value:
