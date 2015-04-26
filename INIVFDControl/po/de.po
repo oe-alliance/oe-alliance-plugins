@@ -30,7 +30,7 @@ msgid "Led state Deep Standby"
 msgstr "Led Farbe im Deepstandby"
 
 msgid "Led state RUN"
-msgstr "Led Farbe wenn Eingeschaltet"
+msgstr "Led Farbe wenn eingeschaltet"
 
 msgid "Led state Record"
 msgstr "Led Farbe bei Aufnahme"
