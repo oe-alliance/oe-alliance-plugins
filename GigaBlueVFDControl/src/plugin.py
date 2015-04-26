@@ -12,7 +12,6 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap
 from boxbranding import getBoxType, getImageDistro
 from os import system
-import os
 from Plugins.Plugin import PluginDescriptor
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ServiceList import ServiceList
@@ -35,8 +34,6 @@ config.plugins.VFD_Giga.ledRUN = ConfigSelection(led, default = "1")
 config.plugins.VFD_Giga.ledSBY = ConfigSelection(led, default = "2")
 config.plugins.VFD_Giga.ledREC = ConfigSelection(led, default = "3")
 config.plugins.VFD_Giga.ledDSBY = ConfigSelection(led, default = "2")
-config.plugins.VFD_Giga.ledSDA1 = ConfigSelection(led, default = "0")
-config.plugins.VFD_Giga.ledSDB1 = ConfigSelection(led, default = "0")
 config.plugins.VFD_Giga.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
 config.plugins.VFD_Giga.vfdBrightness = ConfigSlider(default=255, increment = 5, limits=(0,255))
 config.plugins.VFD_Giga.vfdBrightnessStandby = ConfigSlider(default=255, increment = 5, limits=(0,255))
@@ -216,63 +213,24 @@ class Channelnumber:
 		if Screens.Standby.inStandby or config.plugins.VFD_Giga.showClock.value == 'True_All':
 			self.prikaz()
 
-	#from Plugins/Extensions/Infopanel/plugin.py
-	def command(self,commandline, strip=1):
-		commandline = commandline + " >/tmp/command.txt"
-		os.system(commandline)
-		text = ""
-		if os.path.exists("/tmp/command.txt") is True:
-			file = open("/tmp/command.txt", "r")
-			if strip == 1:
-				for line in file:
-					text = text + line.strip() + '\n'
-			else:
-				for line in file:
-					text = text + line
-					if text[-1:] != '\n': text = text + "\n"
-			file.close()
-		# if one or last line then remove linefeed
-		if text[-1:] == '\n': text = text[:-1]
-		os.system("rm /tmp/command.txt")
-		return text
-
 	def RecordingLed(self):
 		global RecLed
-		led_sda1 = "0"
-		if config.plugins.VFD_Giga.ledSDA1.getValue() != "0":
-			try:
-				sda1_status = self.command('hdparm -C /dev/sda1')
-				for line in sda1_status.splitlines():
-					if 'active' in line:
-						led_sda1 = config.plugins.VFD_Giga.ledSDA1.getValue()
-			except:
-				pass
-		led_sdb1 = "0"
-		if config.plugins.VFD_Giga.ledSDB1.getValue() != "0":
-			try:
-				sdb1_status = self.command('hdparm -C /dev/sdb1')
-				for line in sdb1_status.splitlines():
-					if 'active' in line:
-						led_sdb1 = config.plugins.VFD_Giga.ledSDB1.getValue()
-			except:
-				pass
 		try:
 			#not all images support recording type indicators
 			recordings = self.session.nav.getRecordings(False,Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue()))
 		except:
 			recordings = self.session.nav.getRecordings()
-		led_rec = "0"
 		if recordings:
 			self.updatetime = 1000
 			if not config.plugins.VFD_Giga.recLedBlink.value:
 				self.blink = True
 			if self.blink:
-				led_rec = config.plugins.VFD_Giga.ledREC.getValue()
+				setLed(config.plugins.VFD_Giga.ledREC.getValue())
 			else:
 				if config.plugins.VFD_Giga.ledREC.value == "3":
-					led_rec = "2"
+					setLed("2")
 				else:
-					led_rec = "0"
+					setLed("0")
 			self.blink = not self.blink
 			RecLed = True
 		else:
@@ -280,11 +238,10 @@ class Channelnumber:
 			if RecLed is not None:
 				RecLed = None
 				if Screens.Standby.inStandby:
-					led_rec = config.plugins.VFD_Giga.ledSBY.getValue()
+					setLed(config.plugins.VFD_Giga.ledSBY.getValue())
 				else:
-					led_rec = config.plugins.VFD_Giga.ledRUN.getValue()
-		setLed(str(int(led_sda1) | int(led_sdb1) | int(led_rec)))
-					
+					setLed(config.plugins.VFD_Giga.ledRUN.getValue())
+
 	def keyPressed(self, key, tag):
 		self.begin = time() + int(self.channelnrdelay)
 		self.endkeypress = True
@@ -409,8 +366,6 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("Led state Deep Standby"), config.plugins.VFD_Giga.ledDSBY))
 			self.list.append(getConfigListEntry(_("Led state Record"), config.plugins.VFD_Giga.ledREC))
 			self.list.append(getConfigListEntry(_("Blink Record Led"), config.plugins.VFD_Giga.recLedBlink))
-			self.list.append(getConfigListEntry(_("Led state /dev/sda1 active"), config.plugins.VFD_Giga.ledSDA1))
-			self.list.append(getConfigListEntry(_("Led state /dev/sdb1 active"), config.plugins.VFD_Giga.ledSDB1))
 			setLed(config.plugins.VFD_Giga.ledRUN.getValue())
 		else:
 			setLed("0")
