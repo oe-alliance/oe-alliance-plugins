@@ -261,6 +261,7 @@ class Channelnumber:
 			recordings = self.session.nav.getRecordings(False,Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue()))
 		except:
 			recordings = self.session.nav.getRecordings()
+		led_rec = "0"
 		if recordings:
 			self.updatetime = 1000
 			if not config.plugins.VFD_Giga.recLedBlink.value:
