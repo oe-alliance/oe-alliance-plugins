@@ -189,15 +189,27 @@
 		<channel number="227" />
 		<channel number="171" />
 	</sdchannelsontop>
-	<!-- swapchannels affects main and sections bouquets. -->
+	<!-- swapchannels affects main and sections bouquets. "number" is the SD channel. "with" is the HD channel. Swap will not occur if target is not HD -->
 	<swapchannels>
-		<channel number="101" with="141" />
-		<channel number="102" with="142" />
-		<channel number="103" with="178" />
-		<channel number="104" with="227" />
-		<channel number="105" with="171" />
-		<channel number="503" with="570" />		
-	</swapchannels>
+		<channel number="101" with="141" /><!-- BBC One HD -->
+		<channel number="102" with="142" /><!-- BBC Two HD -->
+		<channel number="103" with="178" /><!-- ITV HD -->
+		<channel number="104" with="227" /><!-- Channel 4 HD -->
+		<channel number="105" with="171" /><!-- Channel 5 HD -->
+		<channel number="115" with="210" /><!-- BBC Three HD -->
+		<channel number="116" with="211" /><!-- BBC Four HD -->
+		<channel number="123" with="269" /><!-- ITV Encore HD -->		
+		<channel number="162" with="224" /><!-- RTE2 HD -->
+		<channel number="413" with="426" /><!-- BT Sport 1 HD -->
+		<channel number="414" with="427" /><!-- BT Sport 2 HD -->
+		<channel number="417" with="433" /><!-- ESPN HD -->		
+		<channel number="437" with="490" /><!-- BoxNation HD -->	
+		<channel number="501" with="516" /><!-- Sky News HD -->
+		<channel number="512" with="518" /><!-- RT HD -->
+		<channel number="503" with="570" /><!-- BBC News HD -->
+		<channel number="613" with="633" /><!-- CBBC HD -->
+		<channel number="614" with="624" /><!-- CBeebies HD -->
+	</swapchannels>		
 	<servicehacks>
 <![CDATA[
 try: 
