@@ -337,7 +337,7 @@ class StreamingChannelFromServerScreen(Screen):
 				self["key_blue"].setText(_("Invert"))
 				self["key_yellow"].setText("")
 
-	def download(self, file, contextFactory = one, *args, **kwargs):
+	def download(self, file, contextFactory = None, *args, **kwargs):
 		client = FTPDownloader(
 			self.getRemoteAdress(),
 			config.plugins.RemoteStreamConverter.port.value,
