@@ -279,11 +279,12 @@ class StreamingChannelFromServerScreen(Screen):
 					if not int(line[1].split(":")[1]) & eServiceReference.isInvisible:
 						if len(line) > 3 and line[2] == 'BOUQUET' and (line[3].find('.tv') != -1 or line[3].find('.radio')):
 							tmp = line[3].replace('"', '')
-							if len(tmp) > 1:
+							if len(tmp) > 1 and tmp not in list:
 								list.append(tmp)
 						elif line[1].find('0:0:0:0:0:0:0:'):
 							tmp = line[1].split('0:0:0:0:0:0:0:')
-							list.append(tmp[1])
+							if tmp[1] not in list:
+								list.append(tmp[1])
 
 	def parseBouqets(self):
 		list = []
