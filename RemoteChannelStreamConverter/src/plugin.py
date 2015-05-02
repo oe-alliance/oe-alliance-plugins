@@ -318,7 +318,7 @@ class StreamingChannelFromServerScreen(Screen):
 				self.alternativesCounter = 0
 				if len(self.alternatives) > 0:
 					self.download(self.alternatives[self.alternativesCounter]).addCallback(self.downloadAlternativesCallback).addErrback(self.downloadAlternativesErrback)
-				
+
 				self["statusbar"].setText(_("Make your selection"))
 				self.editBouquetNames()
 				bouquetFilesContents = ''
@@ -336,8 +336,8 @@ class StreamingChannelFromServerScreen(Screen):
 				self["key_green"].setText(_("Download"))
 				self["key_blue"].setText(_("Invert"))
 				self["key_yellow"].setText("")
-				
-	def download(self, file, contextFactory = None, *args, **kwargs):
+
+	def download(self, file, contextFactory = one, *args, **kwargs):
 		client = FTPDownloader(
 			self.getRemoteAdress(),
 			config.plugins.RemoteStreamConverter.port.value,
@@ -378,7 +378,7 @@ class StreamingChannelFromServerScreen(Screen):
 								line = self.getAlternativeLine(line)
 								if line == None:
 									continue
-							# normal services 
+							# normal services
 							line = line.strip('\r\n')
 							line = line.strip('\n')
 							tmp = line.split('#SERVICE')
@@ -618,7 +618,7 @@ class StreamingChannelFromServerScreen(Screen):
 								self.alternatives.append(result.group(1))
 				except:
 					pass
-					
+
 	def downloadAlternativesCallback(self, string):
 		self.alternativesCounter += 1
 		if self.alternativesCounter < len(self.alternatives):
@@ -626,11 +626,11 @@ class StreamingChannelFromServerScreen(Screen):
 			self.download(self.alternatives[self.alternativesCounter]).addCallback(self.downloadAlternativesCallback).addErrback(self.downloadAlternativesErrback)
 		else:
 			self["statusbar"].setText(_("Make your selection"))
-			
+
 	def downloadAlternativesErrback(self, string):
 		print "[RCSC] error downloading alternative: '%s', error: %s" % (self.alternatives[self.alternativesCounter], string)
 		self.downloadAlternativesCallback(string)
-									
+
 	def getAlternativeLine(self, line):
 		result = re.match("^.*FROM BOUQUET \"(.+)\" ORDER BY.*$", line) or re.match("[#]SERVICE[:] (?:[0-9a-f]+[:])+([^:]+[.](?:tv|radio))$", line, re.IGNORECASE)
 		if result is None:
