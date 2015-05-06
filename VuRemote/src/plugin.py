@@ -35,7 +35,7 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose"):
+		if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose", "vuzero"):
 			return True
 		else:
 			return False
