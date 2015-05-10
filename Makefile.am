@@ -106,10 +106,6 @@ if SH2
 SUBDIRS += F3LEDControl
 endif
 
-if VP7358CI
-SUBDIRS += VPLEDControl
-endif
-
 if VUUNO
 SUBDIRS += FirmwareUpgrade Blindscan VuRemote
 endif
@@ -177,4 +173,12 @@ endif
 
 if XC7362
 SUBDIRS += Blindscan
+endif
+
+if XC7358
+SUBDIRS += Blindscan VPLEDControl
+endif
+
+if XC7358CI
+SUBDIRS += Blindscan VPLEDControl
 endif
