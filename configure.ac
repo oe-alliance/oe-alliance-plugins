@@ -181,6 +181,10 @@ DLNAServer/Makefile
 DLNAServer/src/Makefile
 DLNAServer/meta/Makefile
 
+DMBlindscan/Makefile
+DMBlindscan/src/Makefile
+DMBlindscan/meta/Makefile
+
 FirmwareUpgrade/Makefile
 FirmwareUpgrade/src/Makefile
 FirmwareUpgrade/meta/Makefile

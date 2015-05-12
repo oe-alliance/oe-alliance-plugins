@@ -18,6 +18,10 @@ if DAGS4
 SUBDIRS += TransCodingSetup
 endif
 
+if DREAMBOX
+SUBDIRS +=  DMBlindscan
+endif
+
 if XTREND
 SUBDIRS += XtrendFancontrol Blindscan XtrendRemote
 endif
