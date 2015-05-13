@@ -153,8 +153,7 @@ class Manager():
 						preferred_order,
 						channelsontop,
 						bouquetsToHide,
-						prefix,
-						current_bouquet_key)
+						prefix)
 
 		writer.buildBouquetsIndex(self.path, self.bouquetsOrder, providers,
 				self.bouquetsToKeep, currentBouquets, self.bouquetsToHide,
@@ -275,6 +274,18 @@ class Manager():
 
 				if provider_key not in self.bouquetsOrder:
 					self.bouquetsOrder.append(provider_key)
+					
+				# fta only
+				if config.autobouquetsmaker.level.value == "expert" and provider_key in config.autobouquetsmaker.FTA_only.value:
+					video_services_tmp = {}
+					for number in self.services[provider_key]["video"]:
+						if self.services[provider_key]["video"][number]["free_ca"] == 0:
+							video_services_tmp[number] = self.services[provider_key]["video"][number]
+					self.services[provider_key]["video"] = video_services_tmp
+						
+				# swap services if customLCN
+				self.services[provider_key] = Tools().customLCN(self.services[provider_key], provider_key, self.providerConfigs[provider_key].getArea())
+
 		print>>log, "[Manager] Done"
 		return ret
 

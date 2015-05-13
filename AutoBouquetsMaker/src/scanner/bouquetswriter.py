@@ -318,24 +318,12 @@ class BouquetsWriter():
 					continue
 		print>>log, "[BouquetsWriter] Done"
 
-	def buildBouquets(self, path, provider_config, services, sections, section_identifier, preferred_order, channels_on_top, bouquets_to_hide, section_prefix, current_bouquet_key):
+	def buildBouquets(self, path, provider_config, services, sections, section_identifier, preferred_order, channels_on_top, bouquets_to_hide, section_prefix):
 		channels_on_top = channels_on_top[0]
 		if len(section_prefix) > 0:
 			section_prefix = section_prefix + " - "
 		current_number = 0
 		
-		# fta only
-		if config.autobouquetsmaker.level.value == "expert" and section_identifier in config.autobouquetsmaker.FTA_only.value:
-			video_services_tmp = {}
-			for number in services["video"]:
-				if services["video"][number]["free_ca"] == 0:
-					video_services_tmp[number] = services["video"][number]
-			services["video"] = video_services_tmp
-				
-		
-		# swap services if customLCN
-		services = Tools().customLCN(services, section_identifier, current_bouquet_key)
-
 		# as first thing we're going to cleanup channels
 		# with a numeration inferior to the first section
 		first_section_number = sorted(sections.keys())[0]
