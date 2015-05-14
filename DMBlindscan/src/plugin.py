@@ -1,7 +1,7 @@
 from boxbranding import getBoxType
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.config import config, ConfigSubsection, ConfigSelection, \
-	ConfigYesNo, ConfigInteger, getConfigListEntry, ConfigSlider, ConfigEnableDisable
+	ConfigYesNo, ConfigInteger, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.NimManager import nimmanager, getConfigSatlist
@@ -9,7 +9,7 @@ from Components.Sources.CanvasSource import CanvasSource
 from Components.Sources.List import List
 from enigma import eDVBFrontendParameters, eDVBFrontendParametersSatellite, \
 	eComponentScan, eDVBSatelliteEquipmentControl as secClass, \
-	eTimer, eConsoleAppContainer, eDVBResourceManager
+	eTimer, eDVBResourceManager
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
@@ -41,21 +41,24 @@ class TransponderSearchSupport:
 
 class SatBlindscanState(Screen):
 	skin="""
-	<screen position="center,center" size="620,436" title="Satellite Blindscan">
-		<widget name="text" position="10,10" size="600,20" font="Regular;19" />
-		<widget name="progress" position="10,35" size="600,20" font="Regular;19" />
-		<widget source="list" render="Listbox" position="10,65" size="335,360" scrollbarMode="showAlways" >
-		    <convert type="TemplatedMultiContent">
-			{"template": [ MultiContentEntryText(pos = (0, 0), size = (335, 20), flags = RT_HALIGN_LEFT, text = 0) ],
-			 "fonts": [gFont("Regular", 16)],
-			 "itemHeight": 20
-			}
-		    </convert>
+	<screen position="center,center" size="820,520" title="Satellite Blindscan">
+		<widget name="text" position="10,10" size="800,25" font="Regular;20" />
+		<widget name="progress" position="10,40" size="800,25" font="Regular;20" />
+		<eLabel	position="10,70" size="800,1" backgroundColor="grey"/>
+		<widget source="list" render="Listbox" position="10,82" size="524,425" scrollbarMode="showAlways" >
+			<convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (5, 2), size = (514, 22), flags = RT_HALIGN_LEFT, text = 0) ],
+				 "fonts": [gFont("Regular", 19)],
+				 "itemHeight": 25
+				}
+			</convert>
 		</widget>
-		<widget name="post_action" position="354,65" size="256,100" font="Regular;19" halign="right" />
-		<widget source="constellation" render="Canvas" position="354,170" size="256,256" correct_aspect="width" />
+		<eLabel	position="544,70" size="1,440" backgroundColor="grey"/>
+		<widget name="post_action" position="554,90" size="256,140" font="Regular;19" halign="center"/>
+		<widget source="constellation" render="Canvas" position="554,254" size="256,256" correct_aspect="width" />
 	</screen>
-		"""
+	"""
+	
 	def __init__(self, session, fe_num, text):
 		Screen.__init__(self, session)
 		self["list"]=List()
@@ -406,10 +409,10 @@ class SatelliteTransponderSearchSupport:
 
 class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTransponderSearchSupport):
 	skin="""
-	<screen position="center,120" size="620,450" title="Satellite Blindscan">
-	<widget name="config" position="10,10" size="600,360" itemHeight="30" scrollbarMode="showOnDemand" />
-	<eLabel	position="10,390" size="600,1" backgroundColor="grey"/>
-	<widget name="introduction" position="10,398" size="600,25" font="Regular;22" halign="center" />
+	<screen position="center,center" size="620,430" title="Satellite Blindscan">
+		<widget name="config" position="10,10" size="600,360" itemHeight="30" scrollbarMode="showOnDemand" />
+		<eLabel	position="10,390" size="600,1" backgroundColor="grey"/>
+		<widget name="introduction" position="10,398" size="600,25" font="Regular;22" halign="center" />
 	</screen>
 	"""
 
@@ -576,60 +579,6 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 
 			self.scan_nims = ConfigSelection(choices = nim_list)
 
-			# sat
-			self.scan_sat.system = ConfigSelection(default = defaultSat["system"], choices = [
-				(eDVBFrontendParametersSatellite.System_DVB_S, _("DVB-S")),
-				(eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S2"))])
-			self.scan_sat.frequency = ConfigInteger(default = defaultSat["frequency"], limits = (1, 99999))
-			self.scan_sat.inversion = ConfigSelection(default = defaultSat["inversion"], choices = [
-				(eDVBFrontendParametersSatellite.Inversion_Off, _("Off")),
-				(eDVBFrontendParametersSatellite.Inversion_On, _("On")),
-				(eDVBFrontendParametersSatellite.Inversion_Unknown, _("Auto"))])
-			self.scan_sat.symbolrate = ConfigInteger(default = defaultSat["symbolrate"], limits = (1, 99999))
-			self.scan_sat.polarization = ConfigSelection(default = defaultSat["polarization"], choices = [
-				(eDVBFrontendParametersSatellite.Polarisation_Horizontal, _("horizontal")),
-				(eDVBFrontendParametersSatellite.Polarisation_Vertical, _("vertical")),
-				(eDVBFrontendParametersSatellite.Polarisation_CircularLeft, _("circular left")),
-				(eDVBFrontendParametersSatellite.Polarisation_CircularRight, _("circular right"))])
-			self.scan_sat.fec = ConfigSelection(default = defaultSat["fec"], choices = [
-				(eDVBFrontendParametersSatellite.FEC_Auto, _("Auto")),
-				(eDVBFrontendParametersSatellite.FEC_1_2, "1/2"),
-				(eDVBFrontendParametersSatellite.FEC_2_3, "2/3"),
-				(eDVBFrontendParametersSatellite.FEC_3_4, "3/4"),
-				(eDVBFrontendParametersSatellite.FEC_5_6, "5/6"),
-				(eDVBFrontendParametersSatellite.FEC_7_8, "7/8"),
-				(eDVBFrontendParametersSatellite.FEC_None, _("None"))])
-			self.scan_sat.fec_s2_qpsk = ConfigSelection(default = defaultSat["fec_s2_qpsk"], choices = [
-				(eDVBFrontendParametersSatellite.FEC_Auto, _("Auto")),
-				(eDVBFrontendParametersSatellite.FEC_1_2, "1/2"),
-				(eDVBFrontendParametersSatellite.FEC_2_3, "2/3"),
-				(eDVBFrontendParametersSatellite.FEC_3_4, "3/4"),
-				(eDVBFrontendParametersSatellite.FEC_3_5, "3/5"),
-				(eDVBFrontendParametersSatellite.FEC_4_5, "4/5"),
-				(eDVBFrontendParametersSatellite.FEC_5_6, "5/6"),
-				(eDVBFrontendParametersSatellite.FEC_8_9, "8/9"),
-				(eDVBFrontendParametersSatellite.FEC_9_10, "9/10")])
-			self.scan_sat.fec_s2_8psk = ConfigSelection(default = defaultSat["fec_s2_8psk"], choices = [
-				(eDVBFrontendParametersSatellite.FEC_Auto, _("Auto")),
-				(eDVBFrontendParametersSatellite.FEC_2_3, "2/3"),
-				(eDVBFrontendParametersSatellite.FEC_3_4, "3/4"),
-				(eDVBFrontendParametersSatellite.FEC_3_5, "3/5"),
-				(eDVBFrontendParametersSatellite.FEC_5_6, "5/6"),
-				(eDVBFrontendParametersSatellite.FEC_8_9, "8/9"),
-				(eDVBFrontendParametersSatellite.FEC_9_10, "9/10")])
-			self.scan_sat.modulation = ConfigSelection(default = defaultSat["modulation"], choices = [
-				(eDVBFrontendParametersSatellite.Modulation_QPSK, "QPSK"),
-				(eDVBFrontendParametersSatellite.Modulation_8PSK, "8PSK")])
-			self.scan_sat.rolloff = ConfigSelection(default = defaultSat.get("rolloff", eDVBFrontendParametersSatellite.RollOff_alpha_0_35), choices = [
-				(eDVBFrontendParametersSatellite.RollOff_alpha_0_35, "0.35"),
-				(eDVBFrontendParametersSatellite.RollOff_alpha_0_25, "0.25"),
-				(eDVBFrontendParametersSatellite.RollOff_alpha_0_20, "0.20")])
-			self.scan_sat.pilot = ConfigSelection(default = defaultSat.get("pilot", eDVBFrontendParametersSatellite.Pilot_Unknown), choices = [
-				(eDVBFrontendParametersSatellite.Pilot_Off, _("Off")),
-				(eDVBFrontendParametersSatellite.Pilot_On, _("On")),
-				(eDVBFrontendParametersSatellite.Pilot_Unknown, _("Auto"))])
-
-
 			self.scan_sat.bs_system = ConfigSelection(default = eDVBFrontendParametersSatellite.System_DVB_S2, 
 				choices = [ (eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S + DVB-S2")),
 					(eDVBFrontendParametersSatellite.System_DVB_S, _("DVB-S only"))])
@@ -658,7 +607,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 					for sat in satlist_for_slot:
 						orbpos = sat[0]
 #						sat_freq_range[orbpos] = sec.getFrequencyRangeList(slot_id, orbpos)
-#					self.nim_sat_frequency_range.append(sat_freq_range)
+					self.nim_sat_frequency_range.append(sat_freq_range)
 				else:
 					self.nim_sat_frequency_range.append(None)
 					self.scan_satselection.append(None)
