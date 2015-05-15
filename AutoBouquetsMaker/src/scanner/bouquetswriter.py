@@ -281,8 +281,13 @@ class BouquetsWriter():
 					bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.%s.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
 				bouquetsToKeep2["tv"].append("%s%s.%s.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier, section_type))
 			
-			bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.separator.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
-			bouquetsToKeep2["tv"].append("%s%s.separator.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
+			if provider_configs[section_identifier].isMakeNormalMain() or \
+				provider_configs[section_identifier].isMakeHDMain() or \
+				provider_configs[section_identifier].isMakeFTAHDMain() or \
+				provider_configs[section_identifier].isMakeSections() or \
+				provider_configs[section_identifier].isMakeHD():
+				bouquets_tv.write("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.separator.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
+				bouquetsToKeep2["tv"].append("%s%s.separator.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 
 			bouquets_radio.write("#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.main.radio\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 			bouquetsToKeep2["radio"].append("%s%s.main.radio" % (self.ABM_BOUQUET_PREFIX, section_identifier))
@@ -628,16 +633,21 @@ class BouquetsWriter():
 
 			bouquet_current.close()
 
-		bouquet_current = open(path + "/%s%s.separator.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
-		bouquet_current.write("#NAME %sSeparator\n" % section_prefix)
-		bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-		bouquet_current.write("#DESCRIPTION %sSeparator\n" % section_prefix)
+		if provider_config.isMakeNormalMain() or \
+			provider_config.isMakeHDMain() or \
+			provider_config.isMakeFTAHDMain() or \
+			provider_config.isMakeSections() or \
+			provider_config.isMakeHD():
+			bouquet_current = open(path + "/%s%s.separator.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
+			bouquet_current.write("#NAME %sSeparator\n" % section_prefix)
+			bouquet_current.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
+			bouquet_current.write("#DESCRIPTION %sSeparator\n" % section_prefix)
+	
+			for x in range(current_number, (int(current_number/1000) + 1) * 1000):
+				bouquet_current.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
+				bouquet_current.write("#DESCRIPTION  \n")
 
-		for x in range(current_number, (int(current_number/1000) + 1) * 1000):
-			bouquet_current.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
-			bouquet_current.write("#DESCRIPTION  \n")
-
-		bouquet_current.close()
+			bouquet_current.close()
 
 		# FTA HD channels
 		if provider_config.isMakeFTAHD():
