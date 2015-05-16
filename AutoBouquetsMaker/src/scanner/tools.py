@@ -107,6 +107,38 @@ class Tools():
 
 		return services
 
+	def customMix(self, services, section_identifier):
+		custom_dir = os.path.dirname(__file__) + "/../custom"
+		custimized = {"video":{}, "radio":{}}
+		for type in ["video", "radio"]:
+			for number in services[section_identifier][type]:
+				custimized[type][number] = services[section_identifier][type][number]
+		# Read CustomMix file
+		customfile = custom_dir + "/" + section_identifier + "_CustomMix.xml"
+		dom = self.parseXML(customfile)
+		if dom is None:
+			print>>log, "[Tools] No CustomMix file for " + section_identifier + "."
+		elif dom.documentElement.nodeType == dom.documentElement.ELEMENT_NODE and dom.documentElement.tagName == "custommix":
+			for node in dom.documentElement.childNodes:
+				if node.nodeType != node.ELEMENT_NODE:
+					continue
+				if node.tagName == "inserts":
+					for node2 in node.childNodes:
+						if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "insert":
+							provider = ''
+							source = ''
+							target = ''
+							for i in range(0, node2.attributes.length):
+								if node2.attributes.item(i).name == "provider":
+									provider = node2.attributes.item(i).value
+								elif node2.attributes.item(i).name == "source":
+									source = int(node2.attributes.item(i).value)
+								elif node2.attributes.item(i).name == "target":
+									target = int(node2.attributes.item(i).value)
+							if provider and source and target and provider in services and source in services[provider]["video"]:
+								custimized["video"][target] = services[provider]["video"][source]
+		return custimized
+
 	def customtransponder(self, provider_key):
 		customtransponderdict = {}
 		custom_dir = os.path.dirname(__file__) + "/../custom"
@@ -158,6 +190,98 @@ class Tools():
 							j += 1
 
 		return customtransponderdict
+
+	def favourites(self, path, services, providers, providerConfigs, bouquetsOrder):
+		custom_dir = os.path.dirname(__file__) + "/../custom"
+		provider_key = "favourites"
+		customized = {"video":{}, "radio":{}}
+		name = ""
+		prefix = ""
+		sections = {}
+		bouquets = {"main":1, "sections":1}
+		area_key = ""
+		bouquets_to_hide = []
+		bouquetsToHide = []
+		channels_on_top = [[]]
+		swaprules = []
+
+		# Read favourites file
+		dom = self.parseXML(custom_dir + "/favourites.xml")
+		if dom is None:
+			print>>log, "[Tools] No favorite.xml file"
+		elif dom.documentElement.nodeType == dom.documentElement.ELEMENT_NODE and dom.documentElement.tagName == "favourites":
+			for node in dom.documentElement.childNodes:
+				if node.nodeType != node.ELEMENT_NODE:
+					continue
+
+				if node.tagName == "name":
+					node.normalize()
+					if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
+						name = node.childNodes[0].data.encode("utf-8")
+
+				elif node.tagName == "sections":
+					sections = {}
+					for node2 in node.childNodes:
+						if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "section":
+							number = -1
+							for i in range(0, node2.attributes.length):
+								if node2.attributes.item(i).name == "number":
+									number = int(node2.attributes.item(i).value)
+								if number == -1:
+									continue
+
+								node2.normalize()
+								if len(node2.childNodes) == 1 and node2.childNodes[0].nodeType == node2.TEXT_NODE:
+									sections[number] = node2.childNodes[0].data
+
+				elif node.tagName == "inserts":
+					for node2 in node.childNodes:
+						if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "insert":
+							provider = ''
+							source = ''
+							target = ''
+							for i in range(0, node2.attributes.length):
+								if node2.attributes.item(i).name == "provider":
+									provider = node2.attributes.item(i).value
+								elif node2.attributes.item(i).name == "source":
+									source = int(node2.attributes.item(i).value)
+								elif node2.attributes.item(i).name == "target":
+									target = int(node2.attributes.item(i).value)
+							if provider and source and target and provider in services and source in services[provider]["video"]:
+								customized["video"][target] = services[provider]["video"][source]
+
+				elif node.tagName == "bouquets":
+					for node2 in node.childNodes:
+						if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "main":
+							node2.normalize()
+							if len(node2.childNodes) == 1 and node2.childNodes[0].nodeType == node2.TEXT_NODE and node2.childNodes[0].data != "1":
+								bouquets["main"] = 0
+						elif node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "sections":
+							node2.normalize()
+							if len(node2.childNodes) == 1 and node2.childNodes[0].nodeType == node2.TEXT_NODE and node2.childNodes[0].data != "1":
+								bouquets["sections"] = 0
+
+			providers[provider_key] = {}
+			providers[provider_key]["name"] = name
+			providers[provider_key]["bouquets"] = area_key
+			providers[provider_key]["protocol"] = 'nolcn'
+			providers[provider_key]["swapchannels"] = []
+			providers[provider_key]["sdchannelsontop"] = []
+			providers[provider_key]["hdchannelsontop"] = []
+			providers[provider_key]["sections"] = sections
+			if config.autobouquetsmaker.addprefix.value:
+				prefix = name
+			services[provider_key] = customized
+			bouquetsOrder.insert(0, provider_key)
+
+			from providerconfig import ProviderConfig
+			providerConfigs[provider_key] = ProviderConfig("%s::0:" % provider_key)
+			if bouquets["main"] == 1:
+				providerConfigs[provider_key].setMakeNormalMain()
+			if bouquets["sections"] == 1:
+				providerConfigs[provider_key].setMakeSections()
+			from bouquetswriter import BouquetsWriter
+			BouquetsWriter().buildBouquets(path, providerConfigs[provider_key], services[provider_key], sections, provider_key, swaprules, channels_on_top, bouquets_to_hide, prefix)
 
 	def clearsections(self, services, sections, bouquettype, servicetype):
 		# bouquettype = HD, FTAHD, FTA

@@ -145,15 +145,22 @@ class Manager():
 					channelsontop = providers[provider_key]["sdchannelsontop"],
 				else:
 					channelsontop = providers[provider_key]["hdchannelsontop"],
+
+				# swap services between providers
+				services = Tools().customMix(self.services, provider_key)
+
 				writer.buildBouquets(self.path,
 						self.providerConfigs[provider_key],
-						self.services[provider_key],
+						services,
 						providers[provider_key]["sections"],
 						provider_key,
 						preferred_order,
 						channelsontop,
 						bouquetsToHide,
 						prefix)
+
+		# add a custom favourites list
+		Tools().favourites(self.path, self.services, providers, self.providerConfigs, self.bouquetsOrder)
 
 		writer.buildBouquetsIndex(self.path, self.bouquetsOrder, providers,
 				self.bouquetsToKeep, currentBouquets, self.bouquetsToHide,
