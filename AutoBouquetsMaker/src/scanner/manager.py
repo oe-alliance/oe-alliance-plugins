@@ -7,7 +7,7 @@ from tools import Tools
 from .. import log
 
 class Manager():
-	
+
 	ABM_PREFIX = "userbouquet.abm."
 
 	def __init__(self):
@@ -81,8 +81,8 @@ class Manager():
 			self.bouquetsToKeep["tv"] = []
 		if "radio" not in self.bouquetsToKeep:
 			self.bouquetsToKeep["radio"] = []
-		
-		# selective rescan	
+
+		# selective rescan
 		currentBouquets, self.bouquetsToKeep = self.checkRescan2(currentBouquets, self.bouquetsToKeep, old_bouquets)
 
 		print>>log, "[Manager] Bouquets to hide:", self.bouquetsToHide
@@ -165,7 +165,7 @@ class Manager():
 		ret = False
 		provider_key = provider_config.getProvider()
 		bouquet_key = provider_config.getArea()
-		
+
 		if bouquet_key is not None and len(bouquet_key) > 0:
 			print>>log, "[Manager] Reading %s (%s)..." % (provider_key, bouquet_key)
 		else:
@@ -182,7 +182,7 @@ class Manager():
 						transponder_tmp[key] = transponder_dict_tmp[key]
 				else:
 					transponder_tmp[key] = transponder_dict_tmp[key]
-					
+
 		self.providerConfigs[provider_key] = provider_config
 
 		providers = Providers().read()
@@ -267,14 +267,14 @@ class Manager():
 
 					self.serviceVideoRead += len(self.services[provider_key]["video"].keys())
 					self.serviceAudioRead += len(self.services[provider_key]["radio"].keys())
-				
+
 				else:
 					print>>log, "[Manager] Unsupported protocol %s" % providers[provider_key]["protocol"]
 					ret = False
 
 				if provider_key not in self.bouquetsOrder:
 					self.bouquetsOrder.append(provider_key)
-					
+
 				# fta only
 				if config.autobouquetsmaker.level.value == "expert" and provider_key in config.autobouquetsmaker.FTA_only.value:
 					video_services_tmp = {}
@@ -282,7 +282,7 @@ class Manager():
 						if self.services[provider_key]["video"][number]["free_ca"] == 0:
 							video_services_tmp[number] = self.services[provider_key]["video"][number]
 					self.services[provider_key]["video"] = video_services_tmp
-						
+
 				# swap services if customLCN
 				self.services[provider_key] = Tools().customLCN(self.services[provider_key], provider_key, self.providerConfigs[provider_key].getArea())
 
@@ -294,7 +294,7 @@ class Manager():
 
 	def getProviders(self):
 		return Providers().read()
-		
+
 	def checkRescan(self, providers):
 		# remove previously scanned providers from "providers"
 		no_rescan = config.autobouquetsmaker.no_rescan.value
@@ -322,16 +322,16 @@ class Manager():
 			if provider.split(':')[0] not in remove_provider_from_scan:
 				new_providers.append(provider)
 		return new_providers
-				
+
 	def checkRescan2(self, currentbouquets, bouquetstokeep, oldbouquets):
 		# update "currentbouquets" and "bouquetstokeep" to include "no rescan" bouquets
 		no_rescan = config.autobouquetsmaker.no_rescan.value
 		if config.autobouquetsmaker.level.value == "simple" or no_rescan == '':
 			return currentbouquets, bouquetstokeep
-		no_rescanProviders = no_rescan.split('|')		
+		no_rescanProviders = no_rescan.split('|')
 		toHide = []
 		toRename = []
-		
+
 		for bouquet_type in ["tv", "radio"]:
 			for bouquet in oldbouquets[bouquet_type]:
 				for provider in no_rescanProviders:
@@ -340,16 +340,15 @@ class Manager():
 						if "Unknown" in bouquet["name"] or "Separator" in bouquet["name"]: # These get the hidden flag in bouquetwriter
 							toHide.append(bouquet["filename"])
 						break
-							
+
 		for bouquet_type in ["tv", "radio"]:
 			for bouquet in currentbouquets[bouquet_type]:
 				if bouquet in toRename:
 					currentbouquets[bouquet_type][currentbouquets[bouquet_type].index(bouquet)] = self.ABM_PREFIX[:-1] + '+' + bouquet[len(self.ABM_PREFIX)-1:]
 					if bouquet not in toHide:
 						bouquetstokeep[bouquet_type].append(bouquet)
-						
+
 		return currentbouquets, bouquetstokeep
-		
 
 #manager = Manager()
 # #print manager.getBouquetsList()

@@ -20,17 +20,17 @@ class Tools():
 
 		tool.close()
 		return dom
-		
+
 	def customLCN(self, services, section_identifier, current_bouquet_key):
 		custom_dir = os.path.dirname(__file__) + "/../custom"
 		is_sorted = False
-		
+
 		for number in services["video"]:
 			if number == services["video"][number]["service_id"]:
 				continue
 			is_sorted = True
 			break
-			
+
 		for type in ["video", "radio"]:
 			skipextrachannels = 0
 
@@ -47,7 +47,7 @@ class Tools():
 					))
 			xmlout.write("\t</lcnlist>\n</custom>\n")
 			xmlout.close()
-		
+
 			# Read CustomLCN file
 			customfile = custom_dir + "/" + ("sd" if current_bouquet_key.startswith('sd') else "hd") + "_" + section_identifier + "_Custom" + ("radio" if type == "radio" else "") + "LCN.xml"
 			dom = self.parseXML(customfile)
@@ -75,10 +75,10 @@ class Tools():
 										channelnumber = int(node2.attributes.item(i).value)
 								if channelnumber and lcn:
 									customlcndict[channelnumber] = lcn
-	
+
 				temp_services = {}
 				extra_services = {}
-				
+
 				# add services from CustomLCN file
 				for number in services[type]:
 					if number in customlcndict and customlcndict[number] not in temp_services:
@@ -92,7 +92,7 @@ class Tools():
 						if number not in temp_services: # CustomLCN has priority
 							temp_services[number] = extra_services[number]
 							del extra_services[number]
-				
+
 				#add any remaining services to the end of list
 				if is_sorted or skipextrachannels == 0:
 					lastlcn = len(temp_services) and max(temp_services.keys())
@@ -102,11 +102,11 @@ class Tools():
 						lastlcn += 1
 						newservices.append(number)
 					print>>log, "[Tools] New " + type + " services %s" % (str(newservices))
-				
+
 				services[type] = temp_services
-			
+
 		return services
-		
+
 	def customtransponder(self, provider_key):
 		customtransponderdict = {}
 		custom_dir = os.path.dirname(__file__) + "/../custom"
@@ -158,13 +158,13 @@ class Tools():
 							j += 1
 
 		return customtransponderdict
-		
+
 	def clearsections(self, services, sections, bouquettype, servicetype):
 		# bouquettype = HD, FTAHD, FTA
 		# servicetype = video, radio
 		if len(sections) == 1:
 			return sections
-			
+
 		active_sections = {}
 		for key in services[servicetype].keys():
 			if ("FTA" not in bouquettype or services[servicetype][key]["free_ca"] == 0) and ("HD" not in bouquettype or services[servicetype][key]["service_type"] >= 17):
