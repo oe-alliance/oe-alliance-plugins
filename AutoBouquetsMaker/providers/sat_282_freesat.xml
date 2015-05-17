@@ -124,9 +124,14 @@
 		<channel number="108" /><!-- BBC 1 -->	
 		<channel number="102" /><!-- BBC 2 Simulcast -->
 		<channel number="109" /><!-- BBC 2 -->
-		<channel number="119" />
-		<channel number="126" />
-	</hdchannelsontop>	
+		<channel number="119" /><!-- ITV HD -->
+		<channel number="126" /><!-- Channel 4 HD -->
+	</hdchannelsontop>
+	<swapchannels>
+		<channel number="101" with="108" /><!-- BBC One HD -->
+		<channel number="103" with="119" /><!-- ITV HD -->
+		<channel number="104" with="126" /><!-- Channel 4 HD -->
+	</swapchannels>	
 	<servicehacks>
 <![CDATA[
 # start: slot some extra channels into vacant slots in the provider list
