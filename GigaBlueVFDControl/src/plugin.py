@@ -12,7 +12,6 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap
 from boxbranding import getBoxType, getImageDistro
 from os import system
-import os
 from Plugins.Plugin import PluginDescriptor
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ServiceList import ServiceList
@@ -21,6 +20,7 @@ from time import localtime, time
 import Screens.Standby
 from enigma import pNavigation
 import Components.RecordingConfig
+from Components.Harddisk import harddiskmanager
 
 BOX = getBoxType()
 
@@ -216,44 +216,24 @@ class Channelnumber:
 		if Screens.Standby.inStandby or config.plugins.VFD_Giga.showClock.value == 'True_All':
 			self.prikaz()
 
-	#from Plugins/Extensions/Infopanel/plugin.py
-	def command(self,commandline, strip=1):
-		commandline = commandline + " >/tmp/command.txt"
-		os.system(commandline)
-		text = ""
-		if os.path.exists("/tmp/command.txt") is True:
-			file = open("/tmp/command.txt", "r")
-			if strip == 1:
-				for line in file:
-					text = text + line.strip() + '\n'
-			else:
-				for line in file:
-					text = text + line
-					if text[-1:] != '\n': text = text + "\n"
-			file.close()
-		# if one or last line then remove linefeed
-		if text[-1:] == '\n': text = text[:-1]
-		os.system("rm /tmp/command.txt")
-		return text
-
 	def RecordingLed(self):
 		global RecLed
 		led_sda1 = "0"
 		if config.plugins.VFD_Giga.ledSDA1.getValue() != "0":
 			try:
-				sda1_status = self.command('hdparm -C /dev/sda1')
-				for line in sda1_status.splitlines():
-					if 'active' in line:
-						led_sda1 = config.plugins.VFD_Giga.ledSDA1.getValue()
+				for hdd in harddiskmanager.HDDList():
+					if hdd[1].getDeviceName().startswith("/dev/sda"):
+						if not hdd[1].isSleeping():
+							led_sda1 = config.plugins.VFD_Giga.ledSDA1.getValue()
 			except:
 				pass
 		led_sdb1 = "0"
 		if config.plugins.VFD_Giga.ledSDB1.getValue() != "0":
 			try:
-				sdb1_status = self.command('hdparm -C /dev/sdb1')
-				for line in sdb1_status.splitlines():
-					if 'active' in line:
-						led_sdb1 = config.plugins.VFD_Giga.ledSDB1.getValue()
+				for hdd in harddiskmanager.HDDList():
+					if hdd[1].getDeviceName().startswith("/dev/sdb"):
+						if not hdd[1].isSleeping():
+							led_sdb1 = config.plugins.VFD_Giga.ledSDB1.getValue()
 			except:
 				pass
 		try:
@@ -412,8 +392,8 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("Led state Deep Standby"), config.plugins.VFD_Giga.ledDSBY))
 			self.list.append(getConfigListEntry(_("Led state Record"), config.plugins.VFD_Giga.ledREC))
 			self.list.append(getConfigListEntry(_("Blink Record Led"), config.plugins.VFD_Giga.recLedBlink))
-			self.list.append(getConfigListEntry(_("Led state HDD /dev/sda1 active"), config.plugins.VFD_Giga.ledSDA1))
-			self.list.append(getConfigListEntry(_("Led state HDD /dev/sdb1 active"), config.plugins.VFD_Giga.ledSDB1))
+			self.list.append(getConfigListEntry(_("Led state HDD /dev/sda active"), config.plugins.VFD_Giga.ledSDA1))
+			self.list.append(getConfigListEntry(_("Led state HDD /dev/sdb active"), config.plugins.VFD_Giga.ledSDB1))
 			setLed(config.plugins.VFD_Giga.ledRUN.getValue())
 		else:
 			setLed("0")
