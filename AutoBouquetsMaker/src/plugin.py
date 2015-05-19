@@ -28,7 +28,6 @@ config.autobouquetsmaker.placement = ConfigSelection(default = "top", choices = 
 config.autobouquetsmaker.skipservices = ConfigYesNo(default = True)
 config.autobouquetsmaker.showextraservices = ConfigYesNo(default = False)
 config.autobouquetsmaker.FTA_only = ConfigText("", False)
-config.autobouquetsmaker.no_rescan = ConfigText("", False)
 
 def main(session, **kwargs):
 	session.open(AutoBouquetsMaker_Menu)

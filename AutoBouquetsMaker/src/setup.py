@@ -78,7 +78,6 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		self.providers_makehd = {}
 		self.providers_makefta = {}
 		self.providers_makeftahd = {}
-		self.providers_rescan = {}
 		self.providers_FTA_only = {}
 		self.providers_order = []
 		self.orbital_supported = []
@@ -218,11 +217,6 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 			FTA = config.autobouquetsmaker.level.value == "expert" and provider in FTA_only
 			self.providers_FTA_only[provider] = ConfigYesNo(default = FTA)
 			
-			# selective rescan
-			no_rescan = config.autobouquetsmaker.no_rescan.value.split("|")
-			rescan = config.autobouquetsmaker.level.value == "simple" or provider not in no_rescan
-			self.providers_rescan[provider] = ConfigYesNo(default = rescan)
-			
 		self.createSetup()
 		self["pleasewait"].hide()
 		self["actions"].setEnabled(True)
@@ -299,9 +293,6 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 						else:
 							if len(self.providers[provider]["swapchannels"]) > 0:
 								self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("swap channels"), self.providers_swapchannels[provider], _("This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)")))
-
-					# selective rescan
-					self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("Rescan every time"), self.providers_rescan[provider], _("If set to 'no' the original scan of this provider will persist and not be updated on subsequent scans.")))
 								
 				providers_enabled.append(provider)
 
@@ -344,7 +335,6 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 			x[1].save()
 			
 		FTA_only = []
-		no_rescan = []
 
 		config_string = ""
 		for provider in self.providers_order:
@@ -388,21 +378,12 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 				
 				if self.providers_FTA_only[provider].value:
 					FTA_only.append(provider)
-				
-				if not self.providers_rescan[provider].value:
-					no_rescan.append(provider)
 
 		# fta only
 		config.autobouquetsmaker.FTA_only.value = ''
 		if FTA_only:
 			config.autobouquetsmaker.FTA_only.value = '|'.join(FTA_only)
 		config.autobouquetsmaker.FTA_only.save()
-		
-		# selective rescan
-		config.autobouquetsmaker.no_rescan.value = ''
-		if no_rescan:
-			config.autobouquetsmaker.no_rescan.value = '|'.join(no_rescan)
-		config.autobouquetsmaker.no_rescan.save()
 		
 		config.autobouquetsmaker.providers.value = config_string
 		config.autobouquetsmaker.providers.save()

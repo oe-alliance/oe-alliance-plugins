@@ -116,9 +116,6 @@ class AutoBouquetsMaker(Screen):
 
 		providers_tmp = config.autobouquetsmaker.providers.value.split("|")
 		
-		# selective rescan
-		providers_tmp = self.manager.checkRescan(providers_tmp)
-		
 		for provider_tmp in providers_tmp:
 			provider_config = ProviderConfig(provider_tmp)
 			if provider_config.isValid() and Providers().providerFileExists(provider_config.getProvider()):
@@ -493,8 +490,6 @@ class AutoBouquetsMaker(Screen):
 		print "[ABM-config] show non-indexed: ",config.autobouquetsmaker.showextraservices.value
 		if config.autobouquetsmaker.FTA_only.value:
 			print "[ABM-config] FTA_only: ",config.autobouquetsmaker.FTA_only.value
-		if config.autobouquetsmaker.no_rescan.value:
-			print "[ABM-config] no_rescan: ",config.autobouquetsmaker.no_rescan.value
 		print "[ABM-config] schedule: ",config.autobouquetsmaker.schedule.value
 		if config.autobouquetsmaker.schedule.value:
 			print "[ABM-config] schedule time: ",config.autobouquetsmaker.scheduletime.value
