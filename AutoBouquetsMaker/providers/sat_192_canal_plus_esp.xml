@@ -34,6 +34,7 @@ if first_loop:
 		sort_list.append((x["numbers"][0], re.sub('^(?![a-z])', 'zzzzz', x['service_name'].lower())))
 	sort_list = sorted(sort_list, key=lambda listItem: listItem[1])
 	LCN_list = [x[0] for x in sort_list]
+	LCN_list.insert(0, None) # add fake entry at index 0, so channel numbers start from 1
 	del sort_list
 service["numbers"][0] = LCN_list.index(service["numbers"][0])
 ]]>
