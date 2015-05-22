@@ -261,27 +261,30 @@ class Tools():
 							if len(node2.childNodes) == 1 and node2.childNodes[0].nodeType == node2.TEXT_NODE and node2.childNodes[0].data != "1":
 								bouquets["sections"] = 0
 
-			providers[provider_key] = {}
-			providers[provider_key]["name"] = name
-			providers[provider_key]["bouquets"] = area_key
-			providers[provider_key]["protocol"] = 'nolcn'
-			providers[provider_key]["swapchannels"] = []
-			providers[provider_key]["sdchannelsontop"] = []
-			providers[provider_key]["hdchannelsontop"] = []
-			providers[provider_key]["sections"] = sections
-			if config.autobouquetsmaker.addprefix.value:
-				prefix = name
-			services[provider_key] = customized
-			bouquetsOrder.insert(0, provider_key)
+			if len(customized["video"]) > 0:
+				providers[provider_key] = {}
+				providers[provider_key]["name"] = name
+				providers[provider_key]["bouquets"] = area_key
+				providers[provider_key]["protocol"] = 'nolcn'
+				providers[provider_key]["swapchannels"] = []
+				providers[provider_key]["sdchannelsontop"] = []
+				providers[provider_key]["hdchannelsontop"] = []
+				providers[provider_key]["sections"] = sections
+				if config.autobouquetsmaker.addprefix.value:
+					prefix = name
+				services[provider_key] = customized
+				bouquetsOrder.insert(0, provider_key)
 
-			from providerconfig import ProviderConfig
-			providerConfigs[provider_key] = ProviderConfig("%s::0:" % provider_key)
-			if bouquets["main"] == 1:
-				providerConfigs[provider_key].setMakeNormalMain()
-			if bouquets["sections"] == 1:
-				providerConfigs[provider_key].setMakeSections()
-			from bouquetswriter import BouquetsWriter
-			BouquetsWriter().buildBouquets(path, providerConfigs[provider_key], services[provider_key], sections, provider_key, swaprules, channels_on_top, bouquets_to_hide, prefix)
+				from providerconfig import ProviderConfig
+				providerConfigs[provider_key] = ProviderConfig("%s::0:" % provider_key)
+				if bouquets["main"] == 1:
+					providerConfigs[provider_key].setMakeNormalMain()
+				if bouquets["sections"] == 1:
+					providerConfigs[provider_key].setMakeSections()
+				from bouquetswriter import BouquetsWriter
+				BouquetsWriter().buildBouquets(path, providerConfigs[provider_key], services[provider_key], sections, provider_key, swaprules, channels_on_top, bouquets_to_hide, prefix)
+			else:
+				print>>log, "[Tools] Favourites list is zero length."
 
 	def clearsections(self, services, sections, bouquettype, servicetype):
 		# bouquettype = HD, FTAHD, FTA
