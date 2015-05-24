@@ -656,6 +656,7 @@ class DvbScanner():
 
 		timeout = datetime.datetime.now()
 		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
+		transport_stream_id_list = []
 		while True:
 			if datetime.datetime.now() > timeout:
 				print>>log, "[DvbScanner] Timed out"
@@ -668,6 +669,10 @@ class DvbScanner():
 
 			if section["header"]["table_id"] == self.bat_table_id:
 				if section["header"]["bouquet_id"] != bouquet_id:
+					if config.autobouquetsmaker.showextraservices.value:
+						for content_tmp in section["content"]:
+							if content_tmp["descriptor_tag"] == 0xd3 and content_tmp["transport_stream_id"] not in transport_stream_id_list:
+								transport_stream_id_list.append(content_tmp["transport_stream_id"])
 					continue
 
 				if section["header"]["version_number"] != bat_section_version:
@@ -686,7 +691,6 @@ class DvbScanner():
 		dvbreader.close(fd)
 
 		service_count = 0
-		transport_stream_id_list = []
 		tmp_services_dict = {}
 		for service in bat_content:
 			if service["descriptor_tag"] != 0xb1:
@@ -854,6 +858,7 @@ class DvbScanner():
 
 		timeout = datetime.datetime.now()
 		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
+		transport_stream_id_list = []
 		while True:
 			if datetime.datetime.now() > timeout:
 				print>>log, "[DvbScanner] Timed out"
@@ -866,6 +871,10 @@ class DvbScanner():
 
 			if section["header"]["table_id"] == self.bat_table_id:
 				if section["header"]["bouquet_id"] != bouquet_id:
+					if config.autobouquetsmaker.showextraservices.value:
+						for content_tmp in section["content"]:
+							if content_tmp["descriptor_tag"] == 0xd3 and content_tmp["transport_stream_id"] not in transport_stream_id_list:
+								transport_stream_id_list.append(content_tmp["transport_stream_id"])
 					continue
 
 				if section["header"]["version_number"] != bat_section_version:
@@ -884,7 +893,6 @@ class DvbScanner():
 		dvbreader.close(fd)
 
 		service_count = 0
-		transport_stream_id_list = []
 		tmp_services_dict = {}
 
 		for service in bat_content:
