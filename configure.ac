@@ -298,6 +298,10 @@ TunerServer/src/Makefile
 TunerServer/meta/Makefile
 TunerServer/po/Makefile
 
+SatipClient/Makefile
+SatipClient/src/Makefile
+SatipClient/meta/Makefile
+
 SF8VFDControl/Makefile
 SF8VFDControl/src/Makefile
 SF8VFDControl/meta/Makefile
