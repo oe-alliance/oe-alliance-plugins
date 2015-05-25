@@ -300,6 +300,7 @@ TunerServer/po/Makefile
 
 SatipClient/Makefile
 SatipClient/src/Makefile
+SatipClient/po/Makefile
 SatipClient/meta/Makefile
 
 SF8VFDControl/Makefile
