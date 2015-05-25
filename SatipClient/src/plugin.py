@@ -352,11 +352,11 @@ class SatIPclientSetup(Screen,ConfigListScreen):
 		return SetupSummary
 
 def main(session, close=None, **kwargs):
-	session.openWithCallback(close, SatIPclientSetup)
+	session.open(SatIPclientSetup)
 
 def TunerSetup(menuid, **kwargs):
 	if menuid == "scan":
-		return [(_("SAT>IP Client Setup"), main, "satipclient", 25, True)]
+		return [(_("SAT>IP Client Setup"), main, "satipclient", 10)]
 	else:
 		return []
 
