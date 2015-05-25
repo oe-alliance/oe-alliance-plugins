@@ -13080,4 +13080,9 @@ def Plugins(**kwargs):
 	description="LCD4Linux", 
 	where = PluginDescriptor.WHERE_MENU,
 	fnc = setup))
+	list.append(PluginDescriptor(name = _("LCD4Linux"),
+	description = _("LCD4Linux"),
+	where = PluginDescriptor.WHERE_PLUGINMENU,
+	fnc = main,
+	icon = "plugin.png"))
 	return list
