@@ -153,6 +153,9 @@ This is an example xml configuration file for Sky UK. Filename as above.
 		<insert provider="cable_uk_virgin" source="150" target="171"></insert> <!-- channel5 hd -->
 		<insert provider="cable_uk_virgin" source="110" target="106"></insert> <!-- sky one hd -->
 	</inserts>
+	<deletes>
+		<delete target="170"></delete> <!-- Sky 3D -->
+	</deletes>
 </custommix>
 
 The "insert" lines are what do the work but all the tags must be present. The "insert" line has 3 
@@ -160,6 +163,9 @@ attributes, "provider", "source", and "target". "provider" is the key of provide
 channel is being imported. See below for a list of provider keys. "source" is the channel number 
 being imported. And "target" is the slot in the Sky UK bouquet into which that channel will be 
 inserted. Each channel that is to be moved requires an "insert" line.
+
+"Delete" lines allow you to remove individual channels from the provider you are customising. Just 
+set "target" to the number of the channel you want to remove and it will disappear on the next scan.
 
 
 ---------------------------------------------------------------------------------------------- 
