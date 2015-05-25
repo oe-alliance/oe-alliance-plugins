@@ -109,10 +109,10 @@ class Tools():
 
 	def customMix(self, services, section_identifier):
 		custom_dir = os.path.dirname(__file__) + "/../custom"
-		custimized = {"video":{}, "radio":{}}
+		customised = {"video":{}, "radio":{}}
 		for type in ["video", "radio"]:
 			for number in services[section_identifier][type]:
-				custimized[type][number] = services[section_identifier][type][number]
+				customised[type][number] = services[section_identifier][type][number]
 		# Read CustomMix file
 		customfile = custom_dir + "/" + section_identifier + "_CustomMix.xml"
 		dom = self.parseXML(customfile)
@@ -136,8 +136,18 @@ class Tools():
 								elif node2.attributes.item(i).name == "target":
 									target = int(node2.attributes.item(i).value)
 							if provider and source and target and provider in services and source in services[provider]["video"]:
-								custimized["video"][target] = services[provider]["video"][source]
-		return custimized
+								customised["video"][target] = services[provider]["video"][source]
+
+				elif node.tagName == "deletes":
+					for node2 in node.childNodes:
+						if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "delete":
+							target = ''
+							for i in range(0, node2.attributes.length):
+								if node2.attributes.item(i).name == "target":
+									target = int(node2.attributes.item(i).value)
+									if target and target in customised["video"]:
+										del customised["video"][target]
+		return customised
 
 	def customtransponder(self, provider_key):
 		customtransponderdict = {}
