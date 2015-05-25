@@ -1,15 +1,19 @@
+# -*- coding: utf-8 -*-
 from Components.Language import language
-from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
-import gettext, os
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
+import os, gettext
 
-lang = language.getLanguage()
-os.environ["LANGUAGE"] = lang[:2]
-gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-gettext.textdomain("enigma2")
-gettext.bindtextdomain("SatipClient", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/SatipClient/locale/"))
+PluginLanguageDomain = "SatipClient"
+PluginLanguagePath = "Extensions/SatipClient/locale"
+
+def localeInit():
+	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
-	t = gettext.dgettext("SatipClient", txt)
-	if t == txt:
-		t = gettext.gettext(txt)
-	return t
+	if gettext.dgettext(PluginLanguageDomain, txt):
+		return gettext.dgettext(PluginLanguageDomain, txt)
+	else:
+		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		return gettext.gettext(txt)
+
+language.addCallback(localeInit())

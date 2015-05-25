@@ -1,4 +1,4 @@
-from __init__ import _
+from . import _
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from Components.ConfigList import ConfigListScreen
