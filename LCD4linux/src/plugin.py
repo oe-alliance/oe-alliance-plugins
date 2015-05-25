@@ -1,6 +1,6 @@
 ﻿# -*- coding: utf-8 -*-#
 #
-# LCD4linux - Pearl DPF LCD Display, Samsung SPF-Line, Grautec-TFT, WLAN-LCDs, internes LCD über Skin
+# LCD4linux - Pearl DPF LCD Display, Samsung SPF-Line, Grautec-TFT, WLAN-LCDs, internes LCD uber Skin
 #
 # written by joergm6 @ IHAD
 # (Meteo-Station @ compilator)
@@ -14,7 +14,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V4.5-r2"
+Version = "V4.6-r1"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -51,6 +51,9 @@ import simplejson
 import calendar
 import math
 import gc
+import os
+import re
+import unicodedata
 
 url2 = False
 try:
@@ -2479,6 +2482,7 @@ def find_dev2(idVendor, idProduct, idVendor2, idProduct2):
 	L4log("Vendor=%04x ProdID=%04x or Vendor=%04x ProdID=%04x" % (idVendor,idProduct,idVendor2,idProduct2), gefunden)
 	return gefunden
 
+
 # get picon path
 def getpiconres(x, y, full, picon, P2, P2A, P2C):
 	if len(P2C) < 3:
@@ -2542,6 +2546,7 @@ def getpiconres(x, y, full, picon, P2, P2A, P2C):
 			except:
 				L4log("Error: create Picon-Cache-Dir")
 		return ""
+
 
 def isOffTime(b,e,bw,ew):
 	t=localtime()
@@ -9932,6 +9937,7 @@ def LCD4linuxPIC(self,session):
 			if pos != -1:
 				rr = rr[:pos]
 			picon = str(rr.rstrip(":").replace(":", "_")) + ".png"
+			
 			if Picon2 == False:
 				P2 = LCD4linux.PiconPath.value
 				P2A = LCD4linux.PiconPathAlt.value
@@ -9942,16 +9948,44 @@ def LCD4linuxPIC(self,session):
 				P2A = LCD4linux.Picon2PathAlt.value
 				P2C = LCD4linux.Picon2Cache.value
 				Puse = 1
+			
 			ret=""
 			if len(P2C)>2:
 				useCache = True
 				ret=getpiconres(ConfigSize, MAX_H, ConfigFullScreen, picon, P2, P2A, P2C)
+				if ret == "":
+					name = str(""+self.Lchannel_name)
+					name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
+					name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
+					name= name +".png"
+					ret=getpiconres(ConfigSize, MAX_H, ConfigFullScreen, name, P2, P2A, P2C)
+
 			else:
 				useCache = False
 				PIC = []
+				
+				#
+				# SNAME ADditions
+				# Determine the SNAME Picon file then 
+				# add this to the picon file list for checking/loading
+				#
+				name = str(""+self.Lchannel_name)
+				name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
+				name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
+				name= name +".png"
+				
+				L4logE("SNAME Picon: ",str(""+os.path.join(P2,name)));
+				
+				PIC.append(os.path.join(P2,name))
+				if len(P2A) > 3:
+					PIC.append(os.path.join(P2A,name))
+				
 				PIC.append(os.path.join(P2,picon))
 				if len(P2A) > 3:
 					PIC.append(os.path.join(P2A,picon))
+				#
+				# End of SNAME additions
+				#
 				fields = picon.split("_", 3)
 				if len(fields) > 2 and fields[2] not in ["1","2"]:
 					fields[2] = "1"
