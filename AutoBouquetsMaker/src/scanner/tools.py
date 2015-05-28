@@ -149,57 +149,69 @@ class Tools():
 										del customised["video"][target]
 		return customised
 
-	def customtransponder(self, provider_key):
-		customtransponderdict = {}
-		custom_dir = os.path.dirname(__file__) + "/../custom"
+	def customtransponder(self, provider_key, bouquet_key):
+		customtransponders = []
+		providers_dir = os.path.dirname(__file__) + "/../providers"
 
 		# Read custom file
 		print>>log, "[Tools] Transponder provider name", provider_key
-		customfile = custom_dir + "/" + provider_key + "_Custom_transponder.xml"
-		dom = self.parseXML(customfile)
+		providerfile = providers_dir + "/" + provider_key + ".xml"
+		dom = self.parseXML(providerfile)
 		if dom is None:
-			print>>log, "[Tools] No custom transponder file."
-		elif dom.documentElement.nodeType == dom.documentElement.ELEMENT_NODE and dom.documentElement.tagName == "custom":
-			j = 0
+			print>>log, "[Tools] Cannot read custom transponders from provider file."
+		elif dom.documentElement.nodeType == dom.documentElement.ELEMENT_NODE and dom.documentElement.tagName == "provider":
 			for node in dom.documentElement.childNodes:
 				if node.nodeType != node.ELEMENT_NODE:
 					continue
-				if node.tagName == "transponderlist":
+				elif node.tagName == "customtransponders":
 					for node2 in node.childNodes:
-						if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "configuration":
-							customtransponderdict[j] = {}
+						if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "customtransponder":
+							customtransponder = {} # add some defaults. Key, frequency and TSID must come from the provider file.
+							customtransponder["bandwidth"] = 0
+							customtransponder["code_rate_hp"] = 5
+							customtransponder["code_rate_lp"] = 5
+							customtransponder["modulation"] = 0
+							customtransponder["transmission_mode"] = 3
+							customtransponder["guard_interval"] = 4
+							customtransponder["hierarchy"] = 4
+							customtransponder["inversion"] = 2
+							customtransponder["flags"] = 0
+							customtransponder["system"] = 0
+							customtransponder["plpid"] = 0
 							for i in range(0, node2.attributes.length):
 								if node2.attributes.item(i).name == "key":
-									customtransponderdict[j]["key"] = node2.attributes.item(i).value
+									customtransponder["key"] = node2.attributes.item(i).value
 								elif node2.attributes.item(i).name == "transport_stream_id":
-									customtransponderdict[j]["transport_stream_id"] = int(node2.attributes.item(i).value, 16)
+									customtransponder["transport_stream_id"] = int(node2.attributes.item(i).value, 16)
 								elif node2.attributes.item(i).name == "frequency":
-									customtransponderdict[j]["frequency"] = int(node2.attributes.item(i).value)
+									customtransponder["frequency"] = int(node2.attributes.item(i).value)
 								elif node2.attributes.item(i).name == "bandwidth":
-									customtransponderdict[j]["bandwidth"] = int(node2.attributes.item(i).value)
+									customtransponder["bandwidth"] = int(node2.attributes.item(i).value)
 								elif node2.attributes.item(i).name == "code_rate_hp":
-									customtransponderdict[j]["code_rate_hp"] = int(node2.attributes.item(i).value)
+									customtransponder["code_rate_hp"] = int(node2.attributes.item(i).value)
 								elif node2.attributes.item(i).name == "code_rate_lp":
-									customtransponderdict[j]["code_rate_lp"] = int(node2.attributes.item(i).value)
+									customtransponder["code_rate_lp"] = int(node2.attributes.item(i).value)
 								elif node2.attributes.item(i).name == "modulation":
-									customtransponderdict[j]["modulation"] = int(node2.attributes.item(i).value)
+									customtransponder["modulation"] = int(node2.attributes.item(i).value)
 								elif node2.attributes.item(i).name == "transmission_mode":
-									customtransponderdict[j]["transmission_mode"] = int(node2.attributes.item(i).value)
+									customtransponder["transmission_mode"] = int(node2.attributes.item(i).value)
 								elif node2.attributes.item(i).name == "guard_interval":
-									customtransponderdict[j]["guard_interval"] = int(node2.attributes.item(i).value)
+									customtransponder["guard_interval"] = int(node2.attributes.item(i).value)
 								elif node2.attributes.item(i).name == "hierarchy":
-									customtransponderdict[j]["hierarchy"] = int(node2.attributes.item(i).value)
+									customtransponder["hierarchy"] = int(node2.attributes.item(i).value)
 								elif node2.attributes.item(i).name == "inversion":
-									customtransponderdict[j]["inversion"] = int(node2.attributes.item(i).value)
+									customtransponder["inversion"] = int(node2.attributes.item(i).value)
 								elif node2.attributes.item(i).name == "flags":
-									customtransponderdict[j]["flags"] = int(node2.attributes.item(i).value)
+									customtransponder["flags"] = int(node2.attributes.item(i).value)
 								elif node2.attributes.item(i).name == "system":
-									customtransponderdict[j]["system"] = int(node2.attributes.item(i).value)
+									customtransponder["system"] = int(node2.attributes.item(i).value)
 								elif node2.attributes.item(i).name == "plpid":
-									customtransponderdict[j]["plpid"] = int(node2.attributes.item(i).value)
-							j += 1
-
-		return customtransponderdict
+									customtransponder["plpid"] = int(node2.attributes.item(i).value)
+							if "key" in customtransponder and customtransponder["key"] == bouquet_key and "transport_stream_id" in customtransponder and "frequency" in customtransponder:
+								customtransponders.append(customtransponder)
+			if len(customtransponders) > 0:
+				print>>log, "[Tools] %d custom transponders found for that region." % len(customtransponders)
+		return customtransponders
 
 	def favourites(self, path, services, providers, providerConfigs, bouquetsOrder):
 		custom_dir = os.path.dirname(__file__) + "/../custom"
