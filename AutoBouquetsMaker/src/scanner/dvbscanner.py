@@ -252,7 +252,7 @@ class DvbScanner():
 				continue
 			customtransponder = {}
 			if len(customtransponders) > 0 and self.dvbtype == 'dvbt': # Only for DVB-T/T2 transponder override.
-				for key in customtransponders:
+				for key in range(0, len(customtransponders)):
 					if customtransponders[key]["transport_stream_id"] == transponder["transport_stream_id"]:
 						customtransponder = customtransponders[key]
 						break
