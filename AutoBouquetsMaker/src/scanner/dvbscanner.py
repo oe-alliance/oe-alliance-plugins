@@ -358,7 +358,7 @@ class DvbScanner():
 			"service_dict_tmp": service_dict_tmp
 		}
 
-	def updateAndReadServicesLCN(self, namespace, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict, service_dict_tmp, protocol):
+	def updateAndReadServicesLCN(self, namespace, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict, service_dict_tmp, protocol, bouquet_key):
 		print>>log, "[DvbScanner] Reading services..."
 
 		if self.sdt_other_table_id == 0x00:

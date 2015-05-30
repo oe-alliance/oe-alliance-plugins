@@ -207,7 +207,7 @@ class Manager():
 					self.services[provider_key] = scanner.updateAndReadServicesLCN(
 							providers[provider_key]["namespace"], self.transponders,
 							providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
-							tmp["logical_channel_number_dict"], tmp["service_dict_tmp"], providers[provider_key]["protocol"])
+							tmp["logical_channel_number_dict"], tmp["service_dict_tmp"], providers[provider_key]["protocol"], bouquet_key)
 
 					ret = len(self.services[provider_key]["video"].keys()) > 0 or len(self.services[provider_key]["radio"].keys()) > 0
 
