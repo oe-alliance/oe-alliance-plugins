@@ -108,7 +108,11 @@ for number in service["numbers"]:
 		skip = True		
 
 if service["service_name"] in blacklist or service["service_type"] == 0xc:
-	skip = True		
+	skip = True
+	
+if service["service_type"] == 22 and service["service_name"][-2:] != 'HD':
+	service["service_type"] = 1
+	
 	]]>
 	</servicehacks>
 </provider>
