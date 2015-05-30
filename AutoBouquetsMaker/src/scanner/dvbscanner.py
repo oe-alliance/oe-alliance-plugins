@@ -256,9 +256,12 @@ class DvbScanner():
 					if customtransponders[key]["transport_stream_id"] == transponder["transport_stream_id"]:
 						customtransponder = customtransponders[key]
 						break
-			if len(transponder) == 8 and len(customtransponder) == 0: #no custom information for DVB-T2
-				continue
-
+			if len(transponder) == 8 and len(customtransponder) == 0: #no custom transponer information for DVB-T2
+				#look in lamedb just in case it is already there
+				key = "%x:%x:%x" % (0xEEEE0000, transponder["transport_stream_id"], transponder["original_network_id"])
+				if key not in transponders: 
+					continue
+				customtransponder = transponders[key]
 			transponder["services"] = {}
 			transponder["dvb_type"] = self.dvbtype
 			transponder["bouquet_type"] = bouquettype
