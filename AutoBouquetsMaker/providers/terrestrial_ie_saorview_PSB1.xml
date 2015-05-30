@@ -4,112 +4,133 @@
 	<protocol>lcn</protocol>
 	<namespace>0xeeee0000</namespace>
 	<dvbtconfigs>
-		<configuration key="mount_leinster" frequency="666000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Carlow MOUNT LEINSTER</configuration>
-		<configuration key="maghera" frequency="690000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Clare MAGHERA</configuration>
-		<configuration key="woodcock_hill" frequency="682000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Clare WOODCOCK HILL</configuration>
-		<configuration key="bantry_hp" frequency="722000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork BANTRY HP</configuration>
-		<configuration key="bantry_vp" frequency="722000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork BANTRY VP</configuration>
-		<configuration key="castletownbere" frequency="746000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork CASTLETOWNBERE</configuration>
-		<configuration key="clonakilty" frequency="690000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork CLONAKILTY</configuration>
-		<configuration key="collins_barracks" frequency="706000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork COLLINS BARRACKS</configuration>
-		<configuration key="crosshaven" frequency="674000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork CROSSHAVEN</configuration>
-		<configuration key="fermoy" frequency="722000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork FERMOY</configuration>
-		<configuration key="glanmire" frequency="682000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork GLANMIRE</configuration>
-		<configuration key="kinsale" frequency="546000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork KINSALE</configuration>
-		<configuration key="mitchelstown" frequency="626000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork MITCHELSTOWN</configuration>
-		<configuration key="mullaghanish" frequency="474000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork MULLAGHANISH</configuration>
-		<configuration key="spur_hill" frequency="666000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork SPUR HILL</configuration>
-		<configuration key="aranmore" frequency="682000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal ARANMORE</configuration>
-		<configuration key="ballybofey" frequency="682000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal BALLYBOFEY</configuration>
-		<configuration key="fanad" frequency="746000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal FANAD</configuration>
-		<configuration key="glencolumbkille" frequency="666000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal GLENCOLUMBKILLE</configuration>
-		<configuration key="holywell_hill" frequency="546000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal HOLYWELL HILL</configuration>
-		<configuration key="letterkenny" frequency="730000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal LETTERKENNY</configuration>
-		<configuration key="magheraroarty_falcarragh" frequency="482000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal MAGHERAROARTY/FALCARRAGH</configuration>
-		<configuration key="malin" frequency="530000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal MALIN</configuration>
-		<configuration key="moville" frequency="666000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal MOVILLE</configuration>
-		<configuration key="three_rock" frequency="738000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Dublin THREE ROCK</configuration>
-		<configuration key="casla" frequency="666000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Galway CASLA</configuration>
-		<configuration key="clifden" frequency="514000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Galway CLIFDEN</configuration>
-		<configuration key="tonabrocky" frequency="514000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Galway TONABROCKY</configuration>
-		<configuration key="kilkeaveragh" frequency="682000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry KILKEAVERAGH</configuration>
-		<configuration key="knockanore" frequency="682000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry KNOCKANORE</configuration>
-		<configuration key="knockmoyle" frequency="722000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry KNOCKMOYLE</configuration>
-		<configuration key="maamclassach" frequency="674000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry MAAMCLASSACH</configuration>
-		<configuration key="suir_valley" frequency="722000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kilkenny SUIR VALLEY</configuration>
-		<configuration key="cairn_hill" frequency="682000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Longford CAIRN HILL</configuration>
-		<configuration key="clermont_carn" frequency="730000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Louth CLERMONT CARN</configuration>
-		<configuration key="achill" frequency="682000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Mayo ACHILL</configuration>
-		<configuration key="castlebar" frequency="482000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Mayo CASTLEBAR</configuration>
-		<configuration key="dooncarton_iorras" frequency="522000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Mayo DOONCARTON / IORRAS</configuration>
-		<configuration key="monaghan" frequency="746000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Monaghan MONAGHAN</configuration>
-		<configuration key="truskmore" frequency="730000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Sligo TRUSKMORE</configuration>
-		<configuration key="cahir" frequency="530000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Tipperary CAHIR</configuration>
-		<configuration key="kilduff" frequency="722000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Tipperary KILDUFF</configuration>
-		<configuration key="clonmel" frequency="746000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Waterford CLONMEL</configuration>
-		<configuration key="dungarvan" frequency="746000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Waterford DUNGARVAN</configuration>
-		<configuration key="ferrypoint" frequency="682000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Waterford FERRYPOINT</configuration>
-		<configuration key="waterford" frequency="482000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Waterford WATERFORD</configuration>
-		<configuration key="gorey" frequency="746000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wexford GOREY</configuration>
-		<configuration key="forth_mountain" frequency="722000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wexford FORTH MOUNTAIN</configuration>
-		<configuration key="arklow" frequency="474000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wicklow ARKLOW</configuration>
-		<configuration key="greystones" frequency="722000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wicklow GREYSTONES</configuration>
-		<configuration key="kippure" frequency="738000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wicklow KIPPURE</configuration>
-		<configuration key="laragh" frequency="682000000" inversion="2" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wicklow LARAGH</configuration>
+		<configuration key="clare_ennistymon" frequency="722000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Clare, Ennistymon</configuration>
+		<configuration key="clare_maghera" frequency="690000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Clare, Maghera</configuration>
+		<configuration key="clare_woodcock_hill" frequency="682000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Clare, Woodcock Hill</configuration>
+		<configuration key="cork_bandon" frequency="682000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Bandon</configuration>
+		<configuration key="cork_bantry" frequency="722000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Bantry</configuration>
+		<configuration key="cork_castletownbere" frequency="746000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Castletownbere</configuration>
+		<configuration key="cork_clonakilty" frequency="690000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Clonakilty</configuration>
+		<configuration key="cork_collins_barracks" frequency="706000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Collins Barracks</configuration>
+		<configuration key="cork_crosshaven" frequency="674000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Crosshaven</configuration>
+		<configuration key="cork_drimoleague" frequency="642000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Drimoleague</configuration>
+		<configuration key="cork_fermoy" frequency="722000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Fermoy</configuration>
+		<configuration key="cork_glanmire" frequency="682000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Glanmire</configuration>
+		<configuration key="cork_kinsale" frequency="546000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Kinsale</configuration>
+		<configuration key="cork_leap" frequency="674000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Leap</configuration>
+		<configuration key="cork_mitchelstown" frequency="626000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Mitchelstown</configuration>
+		<configuration key="cork_rosscarbery" frequency="730000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Rosscarbery</configuration>
+		<configuration key="cork_spur_hill" frequency="666000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Spur Hill</configuration>
+		<configuration key="cork_timoleague" frequency="514000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Timoleague</configuration>
+		<configuration key="donegal_aranmore" frequency="682000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal, Aranmore</configuration>
+		<configuration key="donegal_ballybofey" frequency="682000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal, Ballybofey</configuration>
+		<configuration key="donegal_clonmany" frequency="730000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal, Clonmany</configuration>
+		<configuration key="donegal_fanad" frequency="746000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal, Fanad</configuration>
+		<configuration key="donegal_glencolumcille" frequency="666000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal, Glencolumcille</configuration>
+		<configuration key="donegal_glenties" frequency="674000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal, Glenties</configuration>
+		<configuration key="donegal_holywell_hill" frequency="546000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal, Holywell Hill</configuration>
+		<configuration key="donegal_letterkenny" frequency="730000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal, Letterkenny</configuration>
+		<configuration key="donegal_magheraroarty" frequency="482000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal, Magheraroarty</configuration>
+		<configuration key="donegal_malin" frequency="530000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal, Malin</configuration>
+		<configuration key="donegal_moville" frequency="666000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Donegal, Moville</configuration>
+		<configuration key="dublin_three_rock" frequency="546000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Dublin, Three Rock</configuration>
+		<configuration key="galway_casla" frequency="666000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Galway, Casla</configuration>
+		<configuration key="galway_clifden" frequency="514000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Galway, Clifden</configuration>
+		<configuration key="galway_tonabrocky" frequency="514000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Galway, Tonabrocky</configuration>
+		<configuration key="kerry_dingle" frequency="546000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry, Dingle</configuration>
+		<configuration key="kerry_kilkeaveragh" frequency="682000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry, Kilkeaveragh</configuration>
+		<configuration key="kerry_knockmoyle" frequency="722000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry, Knockmoyle</configuration>
+		<configuration key="kerry_maamclassach" frequency="674000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry, Maamclassach</configuration>
+		<configuration key="kerry_mullaghanish" frequency="474000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry, Mullaghanish</configuration>
+		<configuration key="kilkenny_suir_valley" frequency="722000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kilkenny, Suir Valley</configuration>
+		<configuration key="longford_cairn_hill" frequency="682000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Longford, Cairn Hill</configuration>
+		<configuration key="louth_clermont_carn" frequency="722000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Louth, Clermont Carn</configuration>
+		<configuration key="louth_greenore" frequency="650000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Louth, Greenore</configuration>
+		<configuration key="mayo_achill" frequency="682000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Mayo, Achill</configuration>
+		<configuration key="mayo_castlebar" frequency="482000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Mayo, Castlebar</configuration>
+		<configuration key="mayo_dooncarton" frequency="522000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Mayo, Dooncarton</configuration>
+		<configuration key="monaghan_monaghan" frequency="746000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Monaghan, Monaghan</configuration>
+		<configuration key="sligo_truskmore" frequency="730000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Sligo, Truskmore</configuration>
+		<configuration key="tipperary_ballina" frequency="770000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Tipperary, Ballina</configuration>
+		<configuration key="tipperary_cahir" frequency="530000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Tipperary, Cahir</configuration>
+		<configuration key="tipperary_clonmel" frequency="746000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Tipperary, Clonmel</configuration>
+		<configuration key="tipperary_kilduff" frequency="722000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Tipperary, Kilduff</configuration>
+		<configuration key="waterford_dungarvan" frequency="746000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Waterford, Dungarvan</configuration>
+		<configuration key="waterford_ferrypoint" frequency="682000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Waterford, Ferrypoint</configuration>
+		<configuration key="waterford_gallows_hill" frequency="482000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Waterford, Gallows Hill</configuration>
+		<configuration key="waterford_kilmacthomas" frequency="674000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Waterford, Kilmacthomas</configuration>
+		<configuration key="wexford_forth_mountain" frequency="722000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wexford, Forth Mountain</configuration>
+		<configuration key="wexford_gorey" frequency="746000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wexford, Gorey</configuration>
+		<configuration key="wexford_mount_leinster" frequency="490000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wexford, Mount Leinster</configuration>
+		<configuration key="wicklow_arklow" frequency="474000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wicklow, Arklow</configuration>
+		<configuration key="wicklow_greystones" frequency="722000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wicklow, Greystones</configuration>
+		<configuration key="wicklow_kippure" frequency="738000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wicklow, Kippure</configuration>
+		<configuration key="wicklow_laragh" frequency="682000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Wicklow, Laragh</configuration>
 	</dvbtconfigs>
 	<customtransponders>
-		<customtransponder key="mount_leinster" transport_stream_id="03e9" frequency="666000000" />
-		<customtransponder key="maghera" transport_stream_id="03e9" frequency="690000000" />
-		<customtransponder key="woodcock_hill" transport_stream_id="03e9" frequency="682000000" />
-		<customtransponder key="bantry_hp" transport_stream_id="03e9" frequency="722000000" />
-		<customtransponder key="bantry_vp" transport_stream_id="03e9" frequency="722000000" />
-		<customtransponder key="castletownbere" transport_stream_id="03e9" frequency="746000000" />
-		<customtransponder key="clonakilty" transport_stream_id="03e9" frequency="690000000" />
-		<customtransponder key="collins_barracks" transport_stream_id="03e9" frequency="706000000" />
-		<customtransponder key="crosshaven" transport_stream_id="03e9" frequency="674000000" />
-		<customtransponder key="fermoy" transport_stream_id="03e9" frequency="722000000" />
-		<customtransponder key="glanmire" transport_stream_id="03e9" frequency="682000000" />
-		<customtransponder key="kinsale" transport_stream_id="03e9" frequency="546000000" />
-		<customtransponder key="mitchelstown" transport_stream_id="03e9" frequency="626000000" />
-		<customtransponder key="mullaghanish" transport_stream_id="03e9" frequency="474000000" />
-		<customtransponder key="spur_hill" transport_stream_id="03e9" frequency="666000000" />
-		<customtransponder key="aranmore" transport_stream_id="03e9" frequency="682000000" />
-		<customtransponder key="ballybofey" transport_stream_id="03e9" frequency="682000000" />
-		<customtransponder key="fanad" transport_stream_id="03e9" frequency="746000000" />
-		<customtransponder key="glencolumbkille" transport_stream_id="03e9" frequency="666000000" />
-		<customtransponder key="holywell_hill" transport_stream_id="03e9" frequency="546000000" />
-		<customtransponder key="letterkenny" transport_stream_id="03e9" frequency="730000000" />
-		<customtransponder key="magheraroarty_falcarragh" transport_stream_id="03e9" frequency="482000000" />
-		<customtransponder key="malin" transport_stream_id="03e9" frequency="530000000" />
-		<customtransponder key="moville" transport_stream_id="03e9" frequency="666000000" />
-		<customtransponder key="three_rock" transport_stream_id="03e9" frequency="738000000" />
-		<customtransponder key="casla" transport_stream_id="03e9" frequency="666000000" />
-		<customtransponder key="clifden" transport_stream_id="03e9" frequency="514000000" />
-		<customtransponder key="tonabrocky" transport_stream_id="03e9" frequency="514000000" />
-		<customtransponder key="kilkeaveragh" transport_stream_id="03e9" frequency="682000000" />
-		<customtransponder key="knockanore" transport_stream_id="03e9" frequency="682000000" />
-		<customtransponder key="knockmoyle" transport_stream_id="03e9" frequency="722000000" />
-		<customtransponder key="maamclassach" transport_stream_id="03e9" frequency="674000000" />
-		<customtransponder key="suir_valley" transport_stream_id="03e9" frequency="722000000" />
-		<customtransponder key="cairn_hill" transport_stream_id="03e9" frequency="682000000" />
-		<customtransponder key="clermont_carn" transport_stream_id="03e9" frequency="730000000" />
-		<customtransponder key="achill" transport_stream_id="03e9" frequency="682000000" />
-		<customtransponder key="castlebar" transport_stream_id="03e9" frequency="482000000" />
-		<customtransponder key="dooncarton_iorras" transport_stream_id="03e9" frequency="522000000" />
-		<customtransponder key="monaghan" transport_stream_id="03e9" frequency="746000000" />
-		<customtransponder key="truskmore" transport_stream_id="03e9" frequency="730000000" />
-		<customtransponder key="cahir" transport_stream_id="03e9" frequency="530000000" />
-		<customtransponder key="kilduff" transport_stream_id="03e9" frequency="722000000" />
-		<customtransponder key="clonmel" transport_stream_id="03e9" frequency="746000000" />
-		<customtransponder key="dungarvan" transport_stream_id="03e9" frequency="746000000" />
-		<customtransponder key="ferrypoint" transport_stream_id="03e9" frequency="682000000" />
-		<customtransponder key="waterford" transport_stream_id="03e9" frequency="482000000" />
-		<customtransponder key="gorey" transport_stream_id="03e9" frequency="746000000" />
-		<customtransponder key="forth_mountain" transport_stream_id="03e9" frequency="722000000" />
-		<customtransponder key="arklow" transport_stream_id="03e9" frequency="474000000" />
-		<customtransponder key="greystones" transport_stream_id="03e9" frequency="722000000" />
-		<customtransponder key="kippure" transport_stream_id="03e9" frequency="738000000" />
-		<customtransponder key="laragh" transport_stream_id="03e9" frequency="682000000" />
+		<customtransponder key="clare_ennistymon" transport_stream_id="03e9" frequency="722000000" />
+		<customtransponder key="clare_maghera" transport_stream_id="03e9" frequency="690000000" />
+		<customtransponder key="clare_woodcock_hill" transport_stream_id="03e9" frequency="682000000" />
+		<customtransponder key="cork_bandon" transport_stream_id="03e9" frequency="682000000" />
+		<customtransponder key="cork_bantry" transport_stream_id="03e9" frequency="722000000" />
+		<customtransponder key="cork_castletownbere" transport_stream_id="03e9" frequency="746000000" />
+		<customtransponder key="cork_clonakilty" transport_stream_id="03e9" frequency="690000000" />
+		<customtransponder key="cork_collins_barracks" transport_stream_id="03e9" frequency="706000000" />
+		<customtransponder key="cork_crosshaven" transport_stream_id="03e9" frequency="674000000" />
+		<customtransponder key="cork_drimoleague" transport_stream_id="03e9" frequency="642000000" />
+		<customtransponder key="cork_fermoy" transport_stream_id="03e9" frequency="722000000" />
+		<customtransponder key="cork_glanmire" transport_stream_id="03e9" frequency="682000000" />
+		<customtransponder key="cork_kinsale" transport_stream_id="03e9" frequency="546000000" />
+		<customtransponder key="cork_leap" transport_stream_id="03e9" frequency="674000000" />
+		<customtransponder key="cork_mitchelstown" transport_stream_id="03e9" frequency="626000000" />
+		<customtransponder key="cork_rosscarbery" transport_stream_id="03e9" frequency="730000000" />
+		<customtransponder key="cork_spur_hill" transport_stream_id="03e9" frequency="666000000" />
+		<customtransponder key="cork_timoleague" transport_stream_id="03e9" frequency="514000000" />
+		<customtransponder key="donegal_aranmore" transport_stream_id="03e9" frequency="682000000" />
+		<customtransponder key="donegal_ballybofey" transport_stream_id="03e9" frequency="682000000" />
+		<customtransponder key="donegal_clonmany" transport_stream_id="03e9" frequency="730000000" />
+		<customtransponder key="donegal_fanad" transport_stream_id="03e9" frequency="746000000" />
+		<customtransponder key="donegal_glencolumcille" transport_stream_id="03e9" frequency="666000000" />
+		<customtransponder key="donegal_glenties" transport_stream_id="03e9" frequency="674000000" />
+		<customtransponder key="donegal_holywell_hill" transport_stream_id="03e9" frequency="546000000" />
+		<customtransponder key="donegal_letterkenny" transport_stream_id="03e9" frequency="730000000" />
+		<customtransponder key="donegal_magheraroarty" transport_stream_id="03e9" frequency="482000000" />
+		<customtransponder key="donegal_malin" transport_stream_id="03e9" frequency="530000000" />
+		<customtransponder key="donegal_moville" transport_stream_id="03e9" frequency="666000000" />
+		<customtransponder key="dublin_three_rock" transport_stream_id="03e9" frequency="546000000" />
+		<customtransponder key="galway_casla" transport_stream_id="03e9" frequency="666000000" />
+		<customtransponder key="galway_clifden" transport_stream_id="03e9" frequency="514000000" />
+		<customtransponder key="galway_tonabrocky" transport_stream_id="03e9" frequency="514000000" />
+		<customtransponder key="kerry_dingle" transport_stream_id="03e9" frequency="546000000" />
+		<customtransponder key="kerry_kilkeaveragh" transport_stream_id="03e9" frequency="682000000" />
+		<customtransponder key="kerry_knockmoyle" transport_stream_id="03e9" frequency="722000000" />
+		<customtransponder key="kerry_maamclassach" transport_stream_id="03e9" frequency="674000000" />
+		<customtransponder key="kerry_mullaghanish" transport_stream_id="03e9" frequency="474000000" />
+		<customtransponder key="kilkenny_suir_valley" transport_stream_id="03e9" frequency="722000000" />
+		<customtransponder key="longford_cairn_hill" transport_stream_id="03e9" frequency="682000000" />
+		<customtransponder key="louth_clermont_carn" transport_stream_id="03e9" frequency="722000000" />
+		<customtransponder key="louth_greenore" transport_stream_id="03e9" frequency="650000000" />
+		<customtransponder key="mayo_achill" transport_stream_id="03e9" frequency="682000000" />
+		<customtransponder key="mayo_castlebar" transport_stream_id="03e9" frequency="482000000" />
+		<customtransponder key="mayo_dooncarton" transport_stream_id="03e9" frequency="522000000" />
+		<customtransponder key="monaghan_monaghan" transport_stream_id="03e9" frequency="746000000" />
+		<customtransponder key="sligo_truskmore" transport_stream_id="03e9" frequency="730000000" />
+		<customtransponder key="tipperary_ballina" transport_stream_id="03e9" frequency="770000000" />
+		<customtransponder key="tipperary_cahir" transport_stream_id="03e9" frequency="530000000" />
+		<customtransponder key="tipperary_clonmel" transport_stream_id="03e9" frequency="746000000" />
+		<customtransponder key="tipperary_kilduff" transport_stream_id="03e9" frequency="722000000" />
+		<customtransponder key="waterford_dungarvan" transport_stream_id="03e9" frequency="746000000" />
+		<customtransponder key="waterford_ferrypoint" transport_stream_id="03e9" frequency="682000000" />
+		<customtransponder key="waterford_gallows_hill" transport_stream_id="03e9" frequency="482000000" />
+		<customtransponder key="waterford_kilmacthomas" transport_stream_id="03e9" frequency="674000000" />
+		<customtransponder key="wexford_forth_mountain" transport_stream_id="03e9" frequency="722000000" />
+		<customtransponder key="wexford_gorey" transport_stream_id="03e9" frequency="746000000" />
+		<customtransponder key="wexford_mount_leinster" transport_stream_id="03e9" frequency="490000000" />
+		<customtransponder key="wicklow_arklow" transport_stream_id="03e9" frequency="474000000" />
+		<customtransponder key="wicklow_greystones" transport_stream_id="03e9" frequency="722000000" />
+		<customtransponder key="wicklow_kippure" transport_stream_id="03e9" frequency="738000000" />
+		<customtransponder key="wicklow_laragh" transport_stream_id="03e9" frequency="682000000" />
+
 	</customtransponders>
 	<sections>
 		<section number="1">Saorview</section>
