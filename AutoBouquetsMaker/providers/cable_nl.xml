@@ -54,9 +54,10 @@
 	</sections>
 	<servicehacks>
 <![CDATA[
-ftachannels = [1,2,3,4,5,6,7,8,9,10,11]
-if service["number"] in ftachannels:
-	service["free_ca"] = 0
+if "d_skv_" in bouquet_key:
+	ftachannels = [1,2,3,4,5,6,7,8,9,10,11]
+	if service["number"] in ftachannels:
+		service["free_ca"] = 0
 ]]>
 	</servicehacks>
 </provider>
