@@ -1,5 +1,6 @@
 <provider>
-	<name>Saorview 2</name>
+	<name>Saorview 2/2</name>
+	<dependent>terrestrial_ie_saorview_PSB1</dependent>
 	<streamtype>dvbt</streamtype>
 	<protocol>lcn</protocol>
 	<namespace>0xeeee0000</namespace>
@@ -19,6 +20,7 @@
 		<configuration key="cork_kinsale" frequency="514000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Kinsale</configuration>
 		<configuration key="cork_leap" frequency="690000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Leap</configuration>
 		<configuration key="cork_mitchelstown" frequency="650000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Mitchelstown</configuration>
+		<configuration key="cork_mount_gabriel" frequency="554000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Mount Gabriel</configuration>
 		<configuration key="cork_rosscarbery" frequency="762000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Rosscarbery</configuration>
 		<configuration key="cork_spur_hill" frequency="698000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Spur Hill</configuration>
 		<configuration key="cork_timoleague" frequency="538000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Cork, Timoleague</configuration>
@@ -39,6 +41,7 @@
 		<configuration key="galway_tonabrocky" frequency="490000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Galway, Tonabrocky</configuration>
 		<configuration key="kerry_dingle" frequency="514000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry, Dingle</configuration>
 		<configuration key="kerry_kilkeaveragh" frequency="658000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry, Kilkeaveragh</configuration>
+		<configuration key="kerry_knockanore" frequency="658000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry, Knockanore</configuration>
 		<configuration key="kerry_knockmoyle" frequency="754000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry, Knockmoyle</configuration>
 		<configuration key="kerry_maamclassach" frequency="714000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry, Maamclassach</configuration>
 		<configuration key="kerry_mullaghanish" frequency="498000000" inversion="2" modulation="3" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="2" guard_interval="4" hierarchy="4">Kerry, Mullaghanish</configuration>
@@ -83,6 +86,7 @@
 		<customtransponder key="cork_kinsale" transport_stream_id="03ea" frequency="514000000" />
 		<customtransponder key="cork_leap" transport_stream_id="03ea" frequency="690000000" />
 		<customtransponder key="cork_mitchelstown" transport_stream_id="03ea" frequency="650000000" />
+		<customtransponder key="cork_mount_gabriel" transport_stream_id="03ea" frequency="554000000" />
 		<customtransponder key="cork_rosscarbery" transport_stream_id="03ea" frequency="762000000" />
 		<customtransponder key="cork_spur_hill" transport_stream_id="03ea" frequency="698000000" />
 		<customtransponder key="cork_timoleague" transport_stream_id="03ea" frequency="538000000" />
@@ -103,6 +107,7 @@
 		<customtransponder key="galway_tonabrocky" transport_stream_id="03ea" frequency="490000000" />
 		<customtransponder key="kerry_dingle" transport_stream_id="03ea" frequency="514000000" />
 		<customtransponder key="kerry_kilkeaveragh" transport_stream_id="03ea" frequency="658000000" />
+		<customtransponder key="kerry_knockanore" transport_stream_id="03ea" frequency="658000000" />
 		<customtransponder key="kerry_knockmoyle" transport_stream_id="03ea" frequency="754000000" />
 		<customtransponder key="kerry_maamclassach" transport_stream_id="03ea" frequency="714000000" />
 		<customtransponder key="kerry_mullaghanish" transport_stream_id="03ea" frequency="498000000" />
