@@ -6,7 +6,7 @@ from Components.config import config
 
 class DvbScanner():
 	TIMEOUT_SEC = 20
-	SDT_TIMEOUT = 60
+	SDT_TIMEOUT = 20
 
 	VIDEO_ALLOWED_TYPES = [1, 4, 5, 17, 22, 24, 25, 27, 135]
 	AUDIO_ALLOWED_TYPES = [2, 10]
