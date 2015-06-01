@@ -517,11 +517,6 @@ class AutoBouquetsMaker(Screen):
 					providers_extra.append('|' + descendent + ':' + provider_str.split(":", 1)[1])
 		return config.autobouquetsmaker.providers.value + ''.join(providers_extra)
 
-		if hasattr(self, "withdescendents"):
-			return self.withdescendents
-		self.withdescendents = Tools().getProviderConfig()
-		return	self.withdescendents
-
 	def about(self):
 		self.session.open(MessageBox,"AutoBouquetsMaker\nVersion date - 21/10/2012\n\nCoded by:\n\nSkaman and AndyBlac",MessageBox.TYPE_INFO)
 
