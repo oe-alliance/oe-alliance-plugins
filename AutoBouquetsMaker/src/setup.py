@@ -92,6 +92,13 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 
 		self.dvbc_nims = nimmanager.getNimListOfType("DVB-C")
 		self.dvbt_nims = nimmanager.getNimListOfType("DVB-T")
+		
+		# dependent providers
+		self.dependents_list = []
+		for provider_key in self.providers:
+			if len(self.providers[provider_key]["dependent"]) > 0 and self.providers[provider_key]["dependent"] in self.providers:
+				self.dependents_list.append(provider_key)
+		
 
 		# read providers configurations
 		providers_tmp_configs = {}
@@ -126,7 +133,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 
 		# build providers configurations
 		for provider in self.providers.keys():
-			self.providers_configs[provider] = ConfigYesNo(default = (provider in providers_tmp_configs.keys()))
+			self.providers_configs[provider] = ConfigYesNo(default = (provider not in self.dependents_list and provider in providers_tmp_configs.keys()))
 			self.providers_swapchannels[provider] = ConfigYesNo(default = (provider in providers_tmp_configs and providers_tmp_configs[provider].isSwapChannels()))
 
 			custom_bouquets_exists = False
@@ -233,6 +240,8 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		providers_enabled = []
 		providers_already_loaded = []
 		for provider in self.providerKeysInNameOrder(self.providers):
+			if provider in self.dependents_list:
+				continue
 			if self.providers[provider]["streamtype"] == 'dvbs' and self.providers[provider]["transponder"]["orbital_position"] not in self.orbital_supported:
 				continue
 			if self.providers[provider]["streamtype"] == 'dvbc' and len(self.dvbc_nims) <= 0:

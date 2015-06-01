@@ -21,7 +21,7 @@ class Providers():
 
 		provider.close()
 		return dom
-		
+
 	def providerFileExists(self, name):
 		providers_dir = self.PROVIDERS_DIR
 		filename = name + ".xml"
@@ -44,6 +44,7 @@ class Providers():
 			provider["swapchannels"] = []
 			provider["hdchannelsontop"] = []
 			provider["sdchannelsontop"] = []
+			provider["dependent"] = ''
 			if dom.documentElement.nodeType == dom.documentElement.ELEMENT_NODE and dom.documentElement.tagName == "provider":
 				for node in dom.documentElement.childNodes:
 					if node.nodeType != node.ELEMENT_NODE:
@@ -330,12 +331,17 @@ class Providers():
 								for i in range(0, node2.attributes.length):
 									if node2.attributes.item(i).name == "number":
 										provider["sdchannelsontop"].append(int(node2.attributes.item(i).value))
-										
+
 					elif node.tagName == "servicehacks":
 						node.normalize()
 						for i in range(0, len(node.childNodes)):
 							if node.childNodes[i].nodeType == node.CDATA_SECTION_NODE:
 								provider["servicehacks"] = node.childNodes[i].data.strip()
+
+					elif node.tagName == "dependent":
+						node.normalize()
+						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
+							provider["dependent"] = node.childNodes[0].data.encode("utf-8")
 
 			if not ("name" in provider
 					and "protocol" in provider

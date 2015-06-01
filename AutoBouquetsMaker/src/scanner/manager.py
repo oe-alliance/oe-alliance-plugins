@@ -62,7 +62,16 @@ class Manager():
 		self.transponders = reader.readLamedb(self.path)
 		print>>log, "[Manager] Done"
 
-	def save(self):
+	def save(self, dependent_providers = {}):
+		#merge dependent providers
+		for provider_key in dependent_providers:
+			if provider_key in self.services:
+				for dependent_key in dependent_providers[provider_key]:
+					if dependent_key in self.services:
+						for type in ["video", "radio"]:
+							for number in self.services[dependent_key][type]:
+								self.services[provider_key][type][number] = self.services[dependent_key][type][number]
+
 		print>>log, "[Manager] Saving..."
 
 		old_bouquets = BouquetsReader().getBouquetsList(self.path)
@@ -142,6 +151,17 @@ class Manager():
 					channelsontop = providers[provider_key]["sdchannelsontop"],
 				else:
 					channelsontop = providers[provider_key]["hdchannelsontop"],
+
+				# fta only
+				if config.autobouquetsmaker.level.value == "expert" and provider_key in config.autobouquetsmaker.FTA_only.value:
+					video_services_tmp = {}
+					for number in self.services[provider_key]["video"]:
+						if self.services[provider_key]["video"][number]["free_ca"] == 0:
+							video_services_tmp[number] = self.services[provider_key]["video"][number]
+					self.services[provider_key]["video"] = video_services_tmp
+
+				# swap services if customLCN
+				self.services[provider_key] = Tools().customLCN(self.services[provider_key], provider_key, self.providerConfigs[provider_key].getArea())
 
 				# swap services between providers
 				services = Tools().customMix(self.services, provider_key)
@@ -270,18 +290,8 @@ class Manager():
 					ret = False
 
 				if provider_key not in self.bouquetsOrder:
-					self.bouquetsOrder.append(provider_key)
-
-				# fta only
-				if config.autobouquetsmaker.level.value == "expert" and provider_key in config.autobouquetsmaker.FTA_only.value:
-					video_services_tmp = {}
-					for number in self.services[provider_key]["video"]:
-						if self.services[provider_key]["video"][number]["free_ca"] == 0:
-							video_services_tmp[number] = self.services[provider_key]["video"][number]
-					self.services[provider_key]["video"] = video_services_tmp
-
-				# swap services if customLCN
-				self.services[provider_key] = Tools().customLCN(self.services[provider_key], provider_key, self.providerConfigs[provider_key].getArea())
+					if provider_key in config.autobouquetsmaker.providers.value: # not a descendent provider
+						self.bouquetsOrder.append(provider_key)
 
 		print>>log, "[Manager] Done"
 		return ret
