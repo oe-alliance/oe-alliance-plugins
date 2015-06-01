@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-31 16:29+0200\n"
-"PO-Revision-Date: 2015-05-31 16:30+0100\n"
+"POT-Creation-Date: 2015-06-01 15:16+0200\n"
+"PO-Revision-Date: 2015-06-01 15:25+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
@@ -16,103 +16,129 @@ msgstr ""
 
 #: plugin.py:28
 msgid "Channelnumber in Standby off"
-msgstr ""
+msgstr "Kanalnummer im Standby aus"
 
 #: plugin.py:28
 msgid "Channelnumber in Standby Clock"
-msgstr ""
+msgstr "Kanalnummer im Standby Uhr"
 
 #: plugin.py:28
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
+msgstr "Kanalnummer/Uhr im Standby Uhr"
 
 #: plugin.py:28
 msgid "Clock always"
-msgstr ""
+msgstr "Uhr immer anzeigen"
 
 #: plugin.py:28
 msgid "Always off"
-msgstr ""
+msgstr "Immer aus"
 
-#: plugin.py:29
+#: plugin.py:29 plugin.py:30
 msgid "No"
 msgstr "Nein"
 
-#: plugin.py:29
+#: plugin.py:29 plugin.py:30
 msgid "Yes"
 msgstr "Ja"
 
-#: plugin.py:32
+#: plugin.py:33
 msgid "None"
 msgstr "Keine"
 
-#: plugin.py:32
+#: plugin.py:33
 msgid "Blue"
 msgstr "Blau"
 
-#: plugin.py:32
+#: plugin.py:33
 msgid "Red"
 msgstr "Rot"
 
-#: plugin.py:32
+#: plugin.py:33
 msgid "Purple"
 msgstr "Violett"
 
-#: plugin.py:353
+#: plugin.py:369
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: plugin.py:354
+#: plugin.py:370
 msgid "Save"
 msgstr "Speichern"
 
-#: plugin.py:358
+#: plugin.py:374
 msgid "Update Date/Time"
 msgstr "Datum/Uhrzeit aktuallisieren"
 
-#: plugin.py:371 plugin.py:405
+#: plugin.py:387 plugin.py:421
 msgid "Enable led"
 msgstr "Led aktivieren"
 
-#: plugin.py:373
+#: plugin.py:389
 msgid "Led state RUN"
 msgstr "Led Farbe wenn Eingeschaltet"
 
-#: plugin.py:374
+#: plugin.py:390
 msgid "Led state Standby"
 msgstr "Led Farbe im Standby"
 
-#: plugin.py:376
+#: plugin.py:392
 msgid "Led state Deep Standby"
 msgstr "Led Farbe im Deepstandby"
 
-#: plugin.py:377
+#: plugin.py:393
 msgid "Led state Record"
 msgstr "Led Farbe bei Aufnahme"
 
-#: plugin.py:378
+#: plugin.py:394
 msgid "Blink Record Led"
 msgstr "Blinkende Aufnahme Led"
 
-#: plugin.py:390 plugin.py:412
-msgid "Show on VFD"
+#: plugin.py:395
+msgid "Led state HDD /dev/sda active"
 msgstr ""
 
-#: plugin.py:391 plugin.py:414
+#: plugin.py:396
+msgid "Led state HDD /dev/sdb active"
+msgstr ""
+
+#: plugin.py:402 plugin.py:429
+msgid "Brightness"
+msgstr "Helligkeit"
+
+#: plugin.py:403 plugin.py:431
+msgid "Brightness Standby"
+msgstr "Helligkeit im Standby"
+
+#: plugin.py:405 plugin.py:425
+msgid "Show on VFD"
+msgstr "Im VFD anzeigen"
+
+#: plugin.py:406 plugin.py:427
 msgid "Show clock in Deep Standby"
 msgstr "Zeige Uhr im Deep Standby"
 
-#: plugin.py:393
+#: plugin.py:408
 msgid "Time mode"
 msgstr "Zeit Modus"
 
-#: plugin.py:473
-msgid "Giga LED Setup"
-msgstr "Giga LED-Einstellungen"
+#: plugin.py:409
+msgid "Channel number with leading zeros"
+msgstr "Kanalnummer mit führenden Nullen"
 
-#: plugin.py:475
-msgid "VFD_Giga"
-msgstr "VFD-Giga"
+#: plugin.py:489 plugin.py:491 plugin.py:504
+msgid "Display/LED"
+msgstr ""
+
+#: plugin.py:493 plugin.py:506
+msgid "LED"
+msgstr ""
+
+#~ msgid "Giga LED Setup"
+#~ msgstr "Giga LED-Einstellungen"
+
+#~ msgid "VFD_Giga"
+#~ msgstr "VFD-Giga"
 
 #~ msgid "Off"
 #~ msgstr "Aus"
