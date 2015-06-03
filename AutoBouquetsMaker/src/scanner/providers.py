@@ -3,7 +3,7 @@ import os
 import xml.dom.minidom
 
 class Providers():
-	VALID_PROTOCOLS = [ "sky", "lcn", "lcn2", "nolcn", "fastscan", "freesat", "lcnbat" ]
+	VALID_PROTOCOLS = [ "sky", "lcn", "lcn2", "nolcn", "fastscan", "freesat" ]
 	PROVIDERS_DIR = os.path.dirname(__file__) + "/../providers"
 	def parseXML(self, filename):
 		try:
