@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-01 15:16+0200\n"
-"PO-Revision-Date: 2015-06-01 15:25+0100\n"
+"PO-Revision-Date: 2015-06-05 20:04+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
@@ -76,31 +76,31 @@ msgstr "Led aktivieren"
 
 #: plugin.py:389
 msgid "Led state RUN"
-msgstr "Led Farbe wenn Eingeschaltet"
+msgstr "Led-Farbe wenn Eingeschaltet"
 
 #: plugin.py:390
 msgid "Led state Standby"
-msgstr "Led Farbe im Standby"
+msgstr "Led-Farbe im Standby"
 
 #: plugin.py:392
 msgid "Led state Deep Standby"
-msgstr "Led Farbe im Deepstandby"
+msgstr "Led-Farbe im Deepstandby"
 
 #: plugin.py:393
 msgid "Led state Record"
-msgstr "Led Farbe bei Aufnahme"
+msgstr "Led-Farbe bei Aufnahme"
 
 #: plugin.py:394
 msgid "Blink Record Led"
-msgstr "Blinkende Aufnahme Led"
+msgstr "Blinkende Aufnahme-Led"
 
 #: plugin.py:395
 msgid "Led state HDD /dev/sda active"
-msgstr ""
+msgstr "Led-Farbe wenn HDD /dev/sda aktiv ist"
 
 #: plugin.py:396
 msgid "Led state HDD /dev/sdb active"
-msgstr ""
+msgstr "Led-Farbe wenn HDD /dev/sdb aktiv ist"
 
 #: plugin.py:402 plugin.py:429
 msgid "Brightness"
