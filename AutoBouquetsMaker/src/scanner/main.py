@@ -443,14 +443,14 @@ class AutoBouquetsMaker(Screen):
 		self.locktimer.start(100, 1)
 
 	def doScan(self):
-		if not self.manager.read(self.selectedProviders[self.currentAction]):
+		if not self.manager.read(self.selectedProviders[self.currentAction], self.providers):
 			print>>log, "[AutoBouquetsMaker] Cannot read data"
 			self.showError(_('Cannot read data'))
 			return
 		self.doActions()
 
 	def doBuildIndex(self):
-		self.manager.save(self.dependents)
+		self.manager.save(self.providers, self.dependents)
 		self.scanComplete()
 
 	def scanComplete(self):

@@ -62,7 +62,7 @@ class Manager():
 		self.transponders = reader.readLamedb(self.path)
 		print>>log, "[Manager] Done"
 
-	def save(self, dependent_providers = {}):
+	def save(self, providers, dependent_providers = {}):
 		#merge dependent providers
 		for provider_key in dependent_providers:
 			if provider_key in self.services:
@@ -102,7 +102,7 @@ class Manager():
 
 		writer = BouquetsWriter()
 		writer.writeLamedb(self.path, self.transponders)
-		providers = Providers().read()
+		#providers = Providers().read()
 		bouquetsToHide = []
 		for provider_key in self.bouquetsOrder:
 			if provider_key in providers:
@@ -185,7 +185,7 @@ class Manager():
 
 		print>>log, "[Manager] Done"
 
-	def read(self, provider_config):
+	def read(self, provider_config, providers):
 		ret = False
 		provider_key = provider_config.getProvider()
 		bouquet_key = provider_config.getArea()
@@ -202,7 +202,7 @@ class Manager():
 
 		self.providerConfigs[provider_key] = provider_config
 
-		providers = Providers().read()
+		#providers = Providers().read()
 		if provider_key in providers:
 			if bouquet_key in providers[provider_key]["bouquets"] or providers[provider_key]["protocol"] != "sky":
 				scanner = DvbScanner()

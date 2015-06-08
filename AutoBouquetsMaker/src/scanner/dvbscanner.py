@@ -661,6 +661,7 @@ class DvbScanner():
 		timeout = datetime.datetime.now()
 		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
 		transport_stream_id_list = []
+		extraservices = config.autobouquetsmaker.level.value == "expert" and config.autobouquetsmaker.showextraservices.value
 		while True:
 			if datetime.datetime.now() > timeout:
 				print>>log, "[DvbScanner] Timed out"
@@ -673,7 +674,7 @@ class DvbScanner():
 
 			if section["header"]["table_id"] == self.bat_table_id:
 				if section["header"]["bouquet_id"] != bouquet_id:
-					if config.autobouquetsmaker.showextraservices.value:
+					if extraservices:
 						for content_tmp in section["content"]:
 							if content_tmp["descriptor_tag"] == 0xd3 and content_tmp["transport_stream_id"] not in transport_stream_id_list:
 								transport_stream_id_list.append(content_tmp["transport_stream_id"])
@@ -794,7 +795,7 @@ class DvbScanner():
 				srvkey = "%x:%x:%x" % (section["transport_stream_id"], section["original_network_id"], section["service_id"])
 
 				if srvkey not in tmp_services_dict:
-					if config.autobouquetsmaker.showextraservices.value:
+					if extraservices:
 						extras.append(section)
 					continue
 
@@ -863,6 +864,7 @@ class DvbScanner():
 		timeout = datetime.datetime.now()
 		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
 		transport_stream_id_list = []
+		extraservices = config.autobouquetsmaker.level.value == "expert" and config.autobouquetsmaker.showextraservices.value
 		while True:
 			if datetime.datetime.now() > timeout:
 				print>>log, "[DvbScanner] Timed out"
@@ -875,7 +877,7 @@ class DvbScanner():
 
 			if section["header"]["table_id"] == self.bat_table_id:
 				if section["header"]["bouquet_id"] != bouquet_id:
-					if config.autobouquetsmaker.showextraservices.value:
+					if extraservices:
 						for content_tmp in section["content"]:
 							if content_tmp["descriptor_tag"] == 0xd3 and content_tmp["transport_stream_id"] not in transport_stream_id_list:
 								transport_stream_id_list.append(content_tmp["transport_stream_id"])
@@ -1039,7 +1041,7 @@ class DvbScanner():
 				srvkey = "%x:%x:%x" % (section["transport_stream_id"], section["original_network_id"], section["service_id"])
 
 				if srvkey not in tmp_services_dict:
-					if config.autobouquetsmaker.showextraservices.value:
+					if extraservices:
 						extras.append(section)
 					continue
 
