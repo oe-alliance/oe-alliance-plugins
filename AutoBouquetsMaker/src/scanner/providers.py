@@ -1,6 +1,7 @@
 from .. import log
 import os
 import xml.dom.minidom
+import cPickle as pickle
 
 class Providers():
 	VALID_PROTOCOLS = [ "sky", "lcn", "lcn2", "nolcn", "fastscan", "freesat" ]
@@ -29,12 +30,31 @@ class Providers():
 
 	def read(self):
 		providers_dir = self.PROVIDERS_DIR
+		cachefile = "providers.cache" # cache file
 		providers = {}
-
+		
+		# check if providers cache exists and data is fresh
+		newest = 0
 		for filename in os.listdir(providers_dir):
 			if filename[-4:] != ".xml":
 				continue
+			filetime = os.path.getmtime(providers_dir + "/" + filename)
+			if filetime > newest:
+				newest = filetime
+		try:
+			if os.path.exists(providers_dir + "/" + cachefile) and os.path.getmtime(providers_dir + "/" + cachefile) > newest:
+				with open(providers_dir + "/" + cachefile, 'rb') as cache_input:
+					providers = pickle.load(cache_input)
+					cache_input.close()
+					return providers
+		except:
+			pass
 
+		# cache file does not exist or data is stale
+		for filename in os.listdir(providers_dir):
+			if filename[-4:] != ".xml":
+				continue
+			
 			dom = self.parseXML(providers_dir + "/" + filename)
 			if dom is None:
 				continue
@@ -356,5 +376,10 @@ class Providers():
 				continue
 
 			providers[provider["key"]] = provider
-
+		try: 
+			with open(providers_dir + "/" + cachefile, 'wb') as cache_output:
+				pickle.dump(providers, cache_output, pickle.HIGHEST_PROTOCOL)
+				cache_output.close()
+		except:
+			pass
 		return providers
