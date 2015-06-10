@@ -263,7 +263,7 @@ except:
 		"RTEjr": 635
 	}
 	
-	whitelist = ['ITV HD','ITV Encore HD',752,'RTE2 HD','BT Sport 1 HD','BT Sport 2 HD','ESPN HD','BoxNation HD','BT Preview HD','BT Sport EurHD']
+	whitelist = ['ITV HD','ITV Encore HD',752,'RTE2 HD','BT Sport 1 HD','BT Sport 2 HD','ESPN HD','BoxNation HD','BT Preview HD','BT Sport EurHD','BTSpt/ESPN HD']
 	blacklist = [899,950,998,999] # block Sky intro
 	
 	
