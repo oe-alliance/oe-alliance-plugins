@@ -27,6 +27,8 @@
 		<configuration key="sd_central_midlands" bouquet="0x1001" region="0x03" namespace="0x11a0000">Central Midlands SD</configuration>
 		<configuration key="hd_channel_isles" bouquet="0x1008" region="0x22" namespace="0x11a0000">Channel Isles HD</configuration> 
 		<configuration key="sd_channel_isles" bouquet="0x1004" region="0x22" namespace="0x11a0000">Channel Isles SD</configuration>
+		<configuration key="hd_dundee" bouquet="0x1006" region="0x27" namespace="0x11a0000">Dundee HD</configuration>
+		<configuration key="sd_dundee" bouquet="0x1002" region="0x27" namespace="0x11a0000">Dundee SD</configuration>
 		<configuration key="hd_east_midlands" bouquet="0x1005" region="0x14" namespace="0x11a0000">East Midlands HD</configuration>
 		<configuration key="sd_east_midlands" bouquet="0x1001" region="0x14" namespace="0x11a0000">East Midlands SD</configuration>
 		<configuration key="hd_essex" bouquet="0x1005" region="0x02" namespace="0x11a0000">Essex HD</configuration>
@@ -111,6 +113,7 @@
 		<configuration key="sdcustom_brighton" bouquet="0x1003" region="0x41" namespace="0x11a0000">Brighton Custom</configuration>
 		<configuration key="sdcustom_central_midlands" bouquet="0x1001" region="0x03" namespace="0x11a0000">Central Midlands Custom</configuration>
 		<configuration key="sdcustom_channel_isles" bouquet="0x1004" region="0x22" namespace="0x11a0000">Channel Isles Custom</configuration>
+		<configuration key="sdcustom_dundee" bouquet="0x1002" region="0x27" namespace="0x11a0000">Dundee Custom</configuration>
 		<configuration key="sdcustom_east_midlands" bouquet="0x1001" region="0x14" namespace="0x11a0000">East Midlands Custom</configuration>
 		<configuration key="sdcustom_essex" bouquet="0x1001" region="0x02" namespace="0x11a0000">Essex Custom</configuration>
 		<configuration key="sdcustom_gloucester" bouquet="0x1001" region="0x18" namespace="0x11a0000">Gloucester Custom</configuration>
