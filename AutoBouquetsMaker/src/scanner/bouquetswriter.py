@@ -268,7 +268,7 @@ class BouquetsWriter():
 				provider_configs[section_identifier].isMakeHDMain() or \
 				provider_configs[section_identifier].isMakeFTAHDMain() or \
 				provider_configs[section_identifier].isMakeSections() or \
-				provider_configs[section_identifier].isMakeHD():
+				provider_configs[section_identifier].isMakeCustomMain():
 				bouquets_tv_list.append("#SERVICE 1:519:1:0:0:0:0:0:0:0:FROM BOUQUET \"%s%s.separator.tv\" ORDER BY bouquet\n" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 				bouquetsToKeep2["tv"].append("%s%s.separator.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier))
 
@@ -556,7 +556,7 @@ class BouquetsWriter():
 			provider_config.isMakeHDMain() or \
 			provider_config.isMakeFTAHDMain() or \
 			provider_config.isMakeSections() or \
-			provider_config.isMakeHD():
+			provider_config.isMakeCustomMain():
 			bouquet_current = open(path + "/%s%s.separator.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			current_bouquet_list = []
 			current_bouquet_list.append("#NAME %sSeparator\n" % section_prefix)
