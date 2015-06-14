@@ -4,7 +4,7 @@ import xml.dom.minidom
 import cPickle as pickle
 
 class Providers():
-	VALID_PROTOCOLS = [ "sky", "lcn", "lcn2", "nolcn", "fastscan", "freesat" ]
+	VALID_PROTOCOLS = [ "fastscan", "freesat", "lcn", "lcn2", "nolcn", "sky", "vmuk" ]
 	PROVIDERS_DIR = os.path.dirname(__file__) + "/../providers"
 	def parseXML(self, filename):
 		try:

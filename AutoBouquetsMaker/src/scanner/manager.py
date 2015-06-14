@@ -214,7 +214,7 @@ class Manager():
 				scanner.setNitCurrentTableId(providers[provider_key]["transponder"]["nit_current_table_id"])
 				scanner.setNitOtherTableId(providers[provider_key]["transponder"]["nit_other_table_id"])
 
-				if providers[provider_key]["protocol"] == "lcn" or providers[provider_key]["protocol"] == "lcn2" or providers[provider_key]["protocol"] == "nolcn":
+				if providers[provider_key]["protocol"] in ('lcn', 'lcn2', 'nolcn', 'vmuk'):
 					scanner.setSdtPid(providers[provider_key]["transponder"]["sdt_pid"])
 					scanner.setSdtCurrentTableId(providers[provider_key]["transponder"]["sdt_current_table_id"])
 					scanner.setSdtOtherTableId(providers[provider_key]["transponder"]["sdt_other_table_id"])
@@ -224,10 +224,16 @@ class Manager():
 						tmp = scanner.updateTransponders(self.transponders, True, customtransponders, bouquet["netid"],bouquet["bouquettype"])
 					else:
 						tmp = scanner.updateTransponders(self.transponders, True, customtransponders)
-					self.services[provider_key] = scanner.updateAndReadServicesLCN(
-							providers[provider_key]["namespace"], self.transponders,
-							providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
-							tmp["logical_channel_number_dict"], tmp["service_dict_tmp"], providers[provider_key]["protocol"], bouquet_key)
+					if providers[provider_key]["protocol"] == 'vmuk':
+						self.services[provider_key] = scanner.updateAndReadServicesVMUK(
+								providers[provider_key]["namespace"], self.transponders,
+								providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
+								tmp["service_dict_tmp"], bouquet_key)					
+					else:
+						self.services[provider_key] = scanner.updateAndReadServicesLCN(
+								providers[provider_key]["namespace"], self.transponders,
+								providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
+								tmp["logical_channel_number_dict"], tmp["service_dict_tmp"], providers[provider_key]["protocol"], bouquet_key)
 
 					ret = len(self.services[provider_key]["video"].keys()) > 0 or len(self.services[provider_key]["radio"].keys()) > 0
 
