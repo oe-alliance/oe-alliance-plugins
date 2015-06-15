@@ -13,6 +13,9 @@ from Components.Console import Console
 from Tools.Directories import fileExists
 from Plugins.Plugin import PluginDescriptor
 from os import path as os_path
+import urllib2
+
+from xml.dom import minidom
 
 Config_Path = "/etc/satip-client.conf"
 
@@ -20,6 +23,102 @@ def modTupByIndex(tup, index, ins):
 	lst = list(tup)
 	lst[index] = ins
 	return tuple(lst)
+
+class SatIPclientSearch(Screen):
+	skin =  """
+		<screen name="SatIPclientSearch" position="center,center" size="450,350">
+			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
+			<widget source="key_green" render="Label" position="155,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
+			<widget name="text" position="10,80" size="440,300" font="Regular;22" halign="left" valign="top" />
+		</screen>
+		"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.session = session
+		self.skinName = "SatIPclientSearch"
+		self.setup_title = _("SAT>IP Client Search")
+		self.setTitle(self.setup_title)
+		self["text"] = Label()
+		self["key_green"] = StaticText(_("Back"))
+
+		self["OkCancelActions"] = ActionMap(["OkCancelActions"],
+			{
+			"cancel": self.keyOK,
+			"ok": self.keyOK,
+			})
+
+		self["ColorActions"] = ActionMap(["ColorActions"],
+			{
+			"green": self.keyOK,
+			})
+		
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def keyOK(self):
+		self.close()
+
+	def layoutFinished(self):
+		import socket
+
+		SSDP_ADDR = "239.255.255.250"
+		SSDP_PORT = 1900
+		SSDP_MX = 1
+		SSDP_ST = "urn:ses-com:device:SatIPServer:1"
+		recv = None
+
+		ssdpRequest = "M-SEARCH * HTTP/1.1\r\n" + \
+				"HOST: %s:%d\r\n" % (SSDP_ADDR, SSDP_PORT) + \
+				"MAN: \"ssdp:discover\"\r\n" + \
+				"MX: %d\r\n" % (SSDP_MX, ) + \
+				"ST: %s\r\n" % (SSDP_ST, ) + "\r\n"
+
+		sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		sock.settimeout(10)
+		try:
+			sock.sendto(ssdpRequest, (SSDP_ADDR, SSDP_PORT))
+			recv = sock.recv(1000)
+		except:
+			print "No Sat>IP Server found !!"
+			self["text"].text = _("No Sat>IP Server found")
+
+		if recv:
+			self.get_Location(recv)		
+
+	def get_Location(self, ret):
+		descurl = None
+		if ret:
+			lines = ret.split("\n")
+			for x in lines:
+				if x.startswith("LOCATION: http://"):
+					descurl = x[10:-1]
+					descxml = minidom.parse(urllib2.urlopen(descurl))
+					satiplist = []
+					satiptext = ""
+					for desc_node in descxml.firstChild.childNodes:
+						if desc_node.nodeType == desc_node.ELEMENT_NODE and desc_node.localName == "device":
+							friendlyName = desc_node.getElementsByTagName("friendlyName")[0]
+							manufacturer = desc_node.getElementsByTagName("manufacturer")[0]
+							manufacturerURL = desc_node.getElementsByTagName("manufacturerURL")[0]
+							modelDescription = desc_node.getElementsByTagName("modelDescription")[0]
+							modelName = desc_node.getElementsByTagName("modelName")[0]
+							presentationURL = desc_node.getElementsByTagName("presentationURL")[0]
+							satip_X = desc_node.getElementsByTagName("satip:X_SATIPCAP")[0]
+							satiplist.append("Name: \t%s" % (friendlyName.firstChild and str(friendlyName.firstChild.data) or None))
+							satiplist.append("Manufacturer: \t%s" % (manufacturer.firstChild and str(manufacturer.firstChild.data) or None))
+							satiplist.append("URL: \t%s" % (manufacturerURL.firstChild and str(manufacturerURL.firstChild.data) or None))
+							satiplist.append("Description: \t%s" % (modelDescription.firstChild and str(modelDescription.firstChild.data) or None))
+							satiplist.append("Model: \t%s" % (modelName.firstChild and str(modelName.firstChild.data) or None))
+							satiplist.append("")
+							Purl = presentationURL.firstChild and str(presentationURL.firstChild.data) or None
+							if Purl.startswith("http://"):
+								satiplist.append("IP: \t%s" % (Purl[7:-1]))
+							satiplist.append("Tuners: \t%s" % (satip_X.firstChild and str(satip_X.firstChild.data) or None))
+							
+							for text in satiplist:
+								satiptext += text + "\n"
+							self["text"].text = satiptext
+					break
 
 class SatIPclientSetup(Screen,ConfigListScreen):
 	skin =  """
@@ -76,7 +175,7 @@ class SatIPclientSetup(Screen,ConfigListScreen):
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
-		self["key_yellow"] = StaticText(_("Auto Config"))
+		self["key_yellow"] = StaticText(_("Search"))
 		
 
 		self["OkCancelActions"] = ActionMap(["OkCancelActions"],
@@ -152,9 +251,17 @@ class SatIPclientSetup(Screen,ConfigListScreen):
 		self.Store_CurrentServerlist()
 		self.Create_Config()
 		if fileExists('/etc/init.d/satip-client'):
-			if not self.satipserver_old == self.satipserver or not self.ServerDisabled_old == self.disabledEntry[1].value:
-				self.Console.ePopen('/etc/init.d/satip-client restart')
-				self.session.openWithCallback(self.CB_RestartGUI, MessageBox, _("To enable the vtuners you need to Resart the GUI.\nRestart GUI now?"), MessageBox.TYPE_YESNO)
+			if (not self.satipserver_old == self.satipserver or not self.ServerDisabled_old == self.disabledEntry[1].value):
+				if self.disabledEntry[1].value:
+					self.Console.ePopen('start-stop-daemon -K -p /var/run/satip-client0 /usr/bin/satip-client')
+					self.Console.ePopen('start-stop-daemon -K -p /var/run/satip-client1 /usr/bin/satip-client')
+					self.Console.ePopen('start-stop-daemon -K -p /var/run/satip-client2 /usr/bin/satip-client')
+					self.Console.ePopen('start-stop-daemon -K -p /var/run/satip-client3 /usr/bin/satip-client')
+					MsgText = _("To disable the vtuners you need to Resart the GUI.\nRestart GUI now?")
+				else:
+					self.Console.ePopen('/etc/init.d/satip-client restart')
+					MsgText = _("To enable the vtuners you need to Resart the GUI.\nRestart GUI now?")
+				self.session.openWithCallback(self.CB_RestartGUI, MessageBox, MsgText, MessageBox.TYPE_YESNO)
 			else:
 				self.close()
 		else:
@@ -168,8 +275,7 @@ class SatIPclientSetup(Screen,ConfigListScreen):
 			self.close()
 
 	def KeyAuto(self):
-		self.session.open(MessageBox, _("Not yet implemented,\nComing soon ..."), MessageBox.TYPE_INFO, simple=True)
-		return
+		self.session.open(SatIPclientSearch)
 
 	def cancelConfirm(self, result):
 		if not result:
