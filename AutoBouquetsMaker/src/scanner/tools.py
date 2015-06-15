@@ -35,18 +35,21 @@ class Tools():
 			skipextrachannels = 0
 
 			# Write Example CustomLCN file
-			xmlout = open(custom_dir + "/EXAMPLE_" + ("sd" if current_bouquet_key.startswith('sd') else "hd") + "_" + section_identifier + "_Custom" + ("radio" if type == "radio" else "") + "LCN.xml", "w")
-			xmlout.write("<custom>\n\t<include>yes</include>\n\t<lcnlist>\n")
+			xml_out_list = []
+			xml_out_list.append("<custom>\n\t<include>yes</include>\n\t<lcnlist>\n")
 			numbers = sorted(services[type].keys())
 			for number in numbers:
 				servicename = unicode(services[type][number]["service_name"], errors='ignore')
-				xmlout.write("\t\t<configuration lcn=\"%d\" channelnumber=\"%d\" description=\"%s\"></configuration>\n" % (
+				xml_out_list.append("\t\t<configuration lcn=\"%d\" channelnumber=\"%d\" description=\"%s\"></configuration>\n" % (
 					number,
 					number,
 					servicename.replace("&","+")
 					))
-			xmlout.write("\t</lcnlist>\n</custom>\n")
+			xml_out_list.append("\t</lcnlist>\n</custom>\n")
+			xmlout = open(custom_dir + "/EXAMPLE_" + ("sd" if current_bouquet_key.startswith('sd') else "hd") + "_" + section_identifier + "_Custom" + ("radio" if type == "radio" else "") + "LCN.xml", "w")
+			xmlout.write(''.join(xml_out_list))
 			xmlout.close()
+			del xml_out_list
 
 			# Read CustomLCN file
 			customfile = custom_dir + "/" + ("sd" if current_bouquet_key.startswith('sd') else "hd") + "_" + section_identifier + "_Custom" + ("radio" if type == "radio" else "") + "LCN.xml"
