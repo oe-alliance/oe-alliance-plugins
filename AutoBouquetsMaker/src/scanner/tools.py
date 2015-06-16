@@ -229,6 +229,7 @@ class Tools():
 		bouquetsToHide = []
 		channels_on_top = [[]]
 		swaprules = []
+		placement = 0
 
 		# Read favourites file
 		dom = self.parseXML(custom_dir + "/favourites.xml")
@@ -285,6 +286,13 @@ class Tools():
 							node2.normalize()
 							if len(node2.childNodes) == 1 and node2.childNodes[0].nodeType == node2.TEXT_NODE and node2.childNodes[0].data != "1":
 								bouquets["sections"] = 0
+								
+				elif node.tagName == "placement":
+					node.normalize()
+					if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
+						placement = min(int(node.childNodes[0].data) -1, len(bouquetsOrder))
+						if placement < 0:
+							placement = 0
 
 			if len(customized["video"]) > 0:
 				providers[provider_key] = {}
@@ -298,7 +306,7 @@ class Tools():
 				if config.autobouquetsmaker.addprefix.value:
 					prefix = name
 				services[provider_key] = customized
-				bouquetsOrder.insert(0, provider_key)
+				bouquetsOrder.insert(placement, provider_key)
 
 				from providerconfig import ProviderConfig
 				providerConfigs[provider_key] = ProviderConfig("%s::0:" % provider_key)
