@@ -176,7 +176,7 @@ SUBDIRS += HbbTV AudioEffect
 endif
 
 if XC7362
-SUBDIRS += Blindscan
+SUBDIRS += Blindscan VPLEDControl
 endif
 
 if XC7358
