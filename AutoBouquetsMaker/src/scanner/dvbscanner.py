@@ -259,7 +259,7 @@ class DvbScanner():
 			if len(transponder) == 8 and len(customtransponder) == 0: #no custom transponer information for DVB-T2
 				#look in lamedb just in case it is already there
 				key = "%x:%x:%x" % (0xEEEE0000, transponder["transport_stream_id"], transponder["original_network_id"])
-				if key not in transponders: 
+				if key not in transponders:
 					continue
 				customtransponder = transponders[key]
 			transponder["services"] = {}
@@ -883,10 +883,19 @@ class DvbScanner():
 				continue
 
 			if section["header"]["table_id"] == self.sdt_current_table_id or section["header"]["table_id"] == self.sdt_other_table_id:
-				if section["header"]["transport_stream_id"] not in transport_stream_id_list:
-					continue
-
 				transport_stream_id = section["header"]["transport_stream_id"]
+
+				if section["header"]["transport_stream_id"] not in transport_stream_id_list:
+					if extraservices: # this is only needed for extra services (channels without LCN) to collect their TSIDs from SDT if not in BAT.
+						sdt_secions_status[transport_stream_id] = {}
+						sdt_secions_status[transport_stream_id]["section_version"] = -1
+						sdt_secions_status[transport_stream_id]["sections_read"] = []
+						sdt_secions_status[transport_stream_id]["sections_count"] = 0
+						sdt_secions_status[transport_stream_id]["content"] = []
+						transport_stream_id_list.append(transport_stream_id)
+					else:
+						continue
+
 				if section["header"]["version_number"] != sdt_secions_status[transport_stream_id]["section_version"]:
 					sdt_secions_status[transport_stream_id]["section_version"] = section["header"]["version_number"]
 					sdt_secions_status[transport_stream_id]["sections_read"] = []
@@ -1129,10 +1138,19 @@ class DvbScanner():
 				continue
 
 			if section["header"]["table_id"] == self.sdt_current_table_id or section["header"]["table_id"] == self.sdt_other_table_id:
-				if section["header"]["transport_stream_id"] not in transport_stream_id_list:
-					continue
-
 				transport_stream_id = section["header"]["transport_stream_id"]
+
+				if section["header"]["transport_stream_id"] not in transport_stream_id_list:
+					if extraservices: # this is only needed for extra services (channels without LCN) to collect their TSIDs from SDT if not in BAT.
+						sdt_secions_status[transport_stream_id] = {}
+						sdt_secions_status[transport_stream_id]["section_version"] = -1
+						sdt_secions_status[transport_stream_id]["sections_read"] = []
+						sdt_secions_status[transport_stream_id]["sections_count"] = 0
+						sdt_secions_status[transport_stream_id]["content"] = []
+						transport_stream_id_list.append(transport_stream_id)
+					else:
+						continue
+
 				if section["header"]["version_number"] != sdt_secions_status[transport_stream_id]["section_version"]:
 					sdt_secions_status[transport_stream_id]["section_version"] = section["header"]["version_number"]
 					sdt_secions_status[transport_stream_id]["sections_read"] = []
