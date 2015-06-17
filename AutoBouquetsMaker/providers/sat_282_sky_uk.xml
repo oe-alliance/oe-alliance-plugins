@@ -225,6 +225,9 @@
 		<channel number="105" with="171" /><!-- Channel 5 HD -->
 		<channel number="115" with="210" /><!-- BBC Three HD -->
 		<channel number="116" with="211" /><!-- BBC Four HD -->
+		<channel number="118" with="225" /><!-- ITV2 HD -->
+		<channel number="119" with="263" /><!-- ITV3 HD -->
+		<channel number="120" with="268" /><!-- ITV4 HD -->			
 		<channel number="123" with="269" /><!-- ITV Encore HD -->		
 		<channel number="162" with="224" /><!-- RTE2 HD -->
 		<channel number="413" with="427" /><!-- BT Sport 1 HD -->
@@ -267,7 +270,7 @@ except:
 		"RTEjr": 635
 	}
 	
-	whitelist = ['ITV HD','ITV Encore HD',752,'RTE2 HD','BT Sport 1 HD','BT Sport 2 HD','ESPN HD','BoxNation HD','BT Preview HD','BT Sport EurHD','BTSpt/ESPN HD']
+	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BT Sport 1 HD','BT Sport 2 HD','ESPN HD','BoxNation HD','BT Preview HD','BT Sport EurHD','BTSpt/ESPN HD']
 	blacklist = [899,950,998,999] # block Sky intro
 	
 	
