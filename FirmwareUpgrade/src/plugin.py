@@ -852,5 +852,5 @@ def main(session, **kwargs):
 	session.open(FirmwareUpgrade)
 
 def Plugins(**kwargs):           
-	return PluginDescriptor(name=_("Firmware Upgrade"), description="Upgrade Firmware..", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
+	return PluginDescriptor(name=_("Firmware Upgrade"), description=_("Upgrade Firmware.."), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
 
