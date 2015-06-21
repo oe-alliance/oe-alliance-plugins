@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-#
+# -*- coding: utf-8 -*-#
 #
 # LCD4linux - Pearl DPF LCD Display, Samsung SPF-Line, Grautec-TFT, WLAN-LCDs, internes LCD uber Skin
 #
@@ -14,7 +14,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V4.6-r1"
+Version = "V4.7-r2"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -9051,15 +9051,18 @@ def LCD4linuxPIC(self,session):
 					if (i<4 and ConfigType in ["1","2","5"]) or (i<5 and ConfigType in ["11","21","51"]) or (i<2 and ConfigType in ["12","22"]):
 						i+=1
 						High = curr.get("High","0")
+						High = curr.get("High","0")
 						Low = curr.get("Low","0")
 						Day = curr.get("Day","")
 						Icon = curr.get("Icon","0")
 						Cond = curr.get("Cond","")
 						Regen = curr.get("Regen","0")
-						if "." in Regen:
-							Regen += "mm" if LCD4linux.WetterRain.value == "true2" else ""
-						else:
-							Regen += "%" if LCD4linux.WetterRain.value == "true2" else ""
+					
+						if not Regen=="":
+							if "." in Regen:
+								Regen += "mm" if LCD4linux.WetterRain.value == "true2" else ""
+							else:
+								Regen += "%" if LCD4linux.WetterRain.value == "true2" else ""
 						if ConfigType[0] == "5":
 							font = ImageFont.truetype(ConfigFont,int(14*Wmulti), encoding='unic')
 							fontD = ImageFont.truetype(ConfigFont,int(14*Wmulti), encoding='unic')
@@ -9113,12 +9116,13 @@ def LCD4linuxPIC(self,session):
 								font = ImageFont.truetype(ConfigFont,int(int(LCD4linux.WetterRainZoom.value)*Wmulti/10.0), encoding='unic')
 								w,h = self.draw[Wim].textsize(Regen, font=font)
 								RColor = LCD4linux.WetterRainColor.value
-								if "." in Regen:
-									if float(Regen.replace("m",""))*10 >= int(LCD4linux.WetterRainColor2use.value):
-										RColor = LCD4linux.WetterRainColor2.value
-								else:
-									if int(Regen.replace("%","")) >= int(LCD4linux.WetterRainColor2use.value):
-										RColor = LCD4linux.WetterRainColor2.value
+								if not Regen=="":
+									if "." in Regen:
+										if float(Regen.replace("m",""))*10 >= int(LCD4linux.WetterRainColor2use.value):
+											RColor = LCD4linux.WetterRainColor2.value
+									else:
+										if int(Regen.replace("%","")) >= int(LCD4linux.WetterRainColor2use.value):
+											RColor = LCD4linux.WetterRainColor2.value
 								ShadowText(Wim,MAX_W-w, POSY, Regen, font, RColor, ConfigShadow)
 						else:
 							Leer,h = self.draw[Wim].textsize(" ", font=font)
@@ -9140,12 +9144,13 @@ def LCD4linuxPIC(self,session):
 								font = ImageFont.truetype(ConfigFont,int(int(LCD4linux.WetterRainZoom.value)*Wmulti/10.0), encoding='unic')
 								w,h = self.draw[Wim].textsize(Regen, font=font)
 								RColor = LCD4linux.WetterRainColor.value
-								if "." in Regen:
-									if float(Regen.replace("m",""))*10 >= int(LCD4linux.WetterRainColor2use.value):
-										RColor = LCD4linux.WetterRainColor2.value
-								else:
-									if int(Regen.replace("%","")) >= int(LCD4linux.WetterRainColor2use.value):
-										RColor = LCD4linux.WetterRainColor2.value
+								if not Regen=="":
+									if "." in Regen:
+										if float(Regen.replace("m",""))*10 >= int(LCD4linux.WetterRainColor2use.value):
+											RColor = LCD4linux.WetterRainColor2.value
+									else:
+										if int(Regen.replace("%","")) >= int(LCD4linux.WetterRainColor2use.value):
+											RColor = LCD4linux.WetterRainColor2.value
 								ShadowText(Wim,POSX+int(54*Wmulti)-w-2, POSY+Dayh-int(h/2), Regen, font, RColor, ConfigShadow)
 							if LCD4linux.WetterLine.value == "true":
 								self.draw[Wim].line((POSX,1,POSX,POSY+int(60*Wmulti)),fill=ConfigColor)
@@ -9190,6 +9195,8 @@ def LCD4linuxPIC(self,session):
 				Feel = self.WDay[ConfigWWW].get("Feel","")
 				if self.WetterOK==False:
 					Wtime = self.WDay[ConfigWWW].get("Wtime","00:00")
+				Feel = re.sub('[^0-9]', '',Feel);
+				L4logE("feel is:",Feel);
 				if Feel=="" or abs(int(Feel or "0")-int(Temp_c[:-1] or "0")) < int(LCD4linux.WetterExtraFeel.value) or LCD4linux.WetterExtra.value == False:
 					Feel = ""
 				else:
