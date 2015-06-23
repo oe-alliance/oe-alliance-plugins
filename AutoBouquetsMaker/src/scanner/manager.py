@@ -164,12 +164,12 @@ class Manager():
 				self.services[provider_key] = Tools().customLCN(self.services[provider_key], provider_key, self.providerConfigs[provider_key].getArea())
 
 				# swap services between providers
-				self.services, providers[provider_key]["sections"] = Tools().customMix(self.services, provider_key, providers[provider_key]["sections"])
+				services, sections = Tools().customMix(self.services, provider_key, providers[provider_key]["sections"])
 
 				writer.buildBouquets(self.path,
 						self.providerConfigs[provider_key],
-						self.services[provider_key],
-						providers[provider_key]["sections"],
+						services,
+						sections,
 						provider_key,
 						preferred_order,
 						channelsontop,

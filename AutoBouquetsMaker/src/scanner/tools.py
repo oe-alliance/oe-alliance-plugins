@@ -110,9 +110,16 @@ class Tools():
 
 		return services
 
-	def customMix(self, services, section_identifier, sections):
+	def customMix(self, services, section_identifier, orig_sections):
 		custom_dir = os.path.dirname(__file__) + "/../custom"
 		customfile = custom_dir + "/" + section_identifier + "_CustomMix.xml"
+		customised = {"video":{}, "radio":{}}
+		for type in ["video", "radio"]:
+			for number in services[section_identifier][type]:
+				customised[type][number] = services[section_identifier][type][number]
+		sections = {}
+		for sec in orig_sections:
+			sections[sec] = orig_sections[sec]
 		dom = self.parseXML(customfile)
 		if dom is None:
 			print>>log, "[Tools] No CustomMix file for " + section_identifier + "."
@@ -134,7 +141,7 @@ class Tools():
 								elif node2.attributes.item(i).name == "target":
 									target = int(node2.attributes.item(i).value)
 							if provider and source and target and provider in services and source in services[provider]["video"]:
-								services[section_identifier]["video"][target] = services[provider]["video"][source]
+								customised["video"][target] = services[provider]["video"][source]
 
 				elif node.tagName == "deletes":
 					for node2 in node.childNodes:
@@ -143,8 +150,8 @@ class Tools():
 							for i in range(0, node2.attributes.length):
 								if node2.attributes.item(i).name == "target":
 									target = int(node2.attributes.item(i).value)
-									if target and target in services[section_identifier]["video"]:
-										del services[section_identifier]["video"][target]
+									if target and target in customised["video"]:
+										del customised["video"][target]
 										
 				elif node.tagName == "sections":
 					for node2 in node.childNodes:
@@ -160,7 +167,7 @@ class Tools():
 								if len(node2.childNodes) == 1 and node2.childNodes[0].nodeType == node2.TEXT_NODE:
 									sections[number] = node2.childNodes[0].data.encode("utf-8")
 
-		return services, sections
+		return customised, sections
 
 	def customtransponder(self, provider_key, bouquet_key):
 		customtransponders = []
