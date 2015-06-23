@@ -168,10 +168,10 @@
 		<section number="780">International</section>
 		<section number="861">Gaming and Dating</section>
 		<section number="881">Specialist</section>
-		<section number="889">Bonus channels</section>
-		<section number="899">Sky Information</section>
 		<section number="900">Adult</section>
-		<section number="950">Other</section>
+		<section number="950">BBC Regions</section>
+		<section number="980">BBC Interactive</section>
+		<section number="998">Sky Info</section>		
 		<section number="1000">Sky Sports Interactive</section>
 		<section number="1020">BBC Interactive</section>
 		<section number="1030">Sky Anytime</section>
@@ -271,7 +271,7 @@ except:
 	}
 	
 	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BT Sport 1 HD','BT Sport 2 HD','ESPN HD','BoxNation HD','BT Preview HD','BT Sport EurHD','BTSpt/ESPN HD']
-	blacklist = [899,950,998,999] # block Sky intro
+	blacklist = [899,950,998,999,'Sky Intro'] # block Sky intro
 	
 	
 if service["transport_stream_id"] == 0x7e3:
@@ -299,21 +299,30 @@ for number in service["numbers"]:
 	elif number >= 1050 and number <= max(LCNs_in_use): # not indexed channels
 		new_numbers.append(number)
 	elif number > 999 or number < 101:
-		if service["channel_id"] > 1470 and service["channel_id"] < 1486:
-				new_numbers.append(service["channel_id"] - 471)
-				service["interactive_name"] = "Sky Sports Interactive " + str(service["channel_id"])
-		elif service["channel_id"] > 2050 and service["channel_id"] < 2053:
-				new_numbers.append(service["channel_id"] - 1031)
-				service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
-		elif service["channel_id"] > 3542 and service["channel_id"] < 3545:
-				new_numbers.append(service["channel_id"] - 2521)
-				service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
-		elif service["channel_id"] > 4093 and service["channel_id"] < 4099:
-				new_numbers.append(service["channel_id"] - 3064)
-				service["interactive_name"] = "Sky Anytime " + str(service["channel_id"])
-		else:
+		if service["channel_id"] > 1470 and service["channel_id"] < 1486: # Sky Sports Interactive
+			new_numbers.append(service["channel_id"] - 471)
+			service["interactive_name"] = "Sky Sports Interactive " + str(service["channel_id"])
+		elif service["channel_id"] > 2050 and service["channel_id"] < 2053: #BBC Interactive
+			free_slot_found = False
+			for i in range(980, 996):
+				if i in LCNs_in_use:
+					continue
+				else:
+					free_slot_found = True
+					LCNs_in_use.append(i)
+					new_numbers.append(i)
+					service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
+					break
+			if not free_slot_found:
 				skip = True
+		elif service["channel_id"] > 4093 and service["channel_id"] < 4099: # Sky Anytime
+			new_numbers.append(service["channel_id"] - 3064)
+			service["interactive_name"] = "Sky Anytime " + str(service["channel_id"])
+		else:
+			skip = True
 		break
+	elif service["service_name"] in ('Sky Intro') and number < 998: # Sky Intro
+		skip = True
 	else:
 		new_numbers.append(number)
 service["numbers"] = new_numbers
