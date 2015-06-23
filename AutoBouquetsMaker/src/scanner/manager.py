@@ -104,6 +104,20 @@ class Manager():
 		writer.writeLamedb(self.path, self.transponders)
 		#providers = Providers().read()
 		bouquetsToHide = []
+		
+		for provider_key in self.bouquetsOrder:
+			if provider_key in providers:
+				# CustomLCN
+				self.services[provider_key] = Tools().customLCN(self.services[provider_key], provider_key, self.providerConfigs[provider_key].getArea())
+				
+				# FTA_only
+				if config.autobouquetsmaker.level.value == "expert" and provider_key in config.autobouquetsmaker.FTA_only.value:
+					video_services_tmp = {}
+					for number in self.services[provider_key]["video"]:
+						if self.services[provider_key]["video"][number]["free_ca"] == 0:
+							video_services_tmp[number] = self.services[provider_key]["video"][number]
+					self.services[provider_key]["video"] = video_services_tmp
+				
 		for provider_key in self.bouquetsOrder:
 			if provider_key in providers:
 				bouquetsToHide = []
@@ -151,17 +165,6 @@ class Manager():
 					channelsontop = providers[provider_key]["sdchannelsontop"],
 				else:
 					channelsontop = providers[provider_key]["hdchannelsontop"],
-
-				# fta only
-				if config.autobouquetsmaker.level.value == "expert" and provider_key in config.autobouquetsmaker.FTA_only.value:
-					video_services_tmp = {}
-					for number in self.services[provider_key]["video"]:
-						if self.services[provider_key]["video"][number]["free_ca"] == 0:
-							video_services_tmp[number] = self.services[provider_key]["video"][number]
-					self.services[provider_key]["video"] = video_services_tmp
-
-				# swap services if customLCN
-				self.services[provider_key] = Tools().customLCN(self.services[provider_key], provider_key, self.providerConfigs[provider_key].getArea())
 
 				# swap services between providers
 				services, sections = Tools().customMix(self.services, provider_key, providers[provider_key]["sections"])
