@@ -183,6 +183,9 @@ if service["service_name"] in blacklist:
 		
 if service["service_name"].startswith("DL_") or service["service_name"].startswith("Hidden"):
 	skip = True
+	
+if service["service_name"].startswith("SptsETV"):
+	service["free_ca"] = 1		
 ]]>
 	</servicehacks>
 </provider>
