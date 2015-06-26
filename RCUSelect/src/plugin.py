@@ -40,19 +40,19 @@ class RCUSelect(Screen):
 		{
 			"ok": self.action,
 			"cancel": self.close,
-			"green": self.close,
-			"red": self.action,
+			"red": self.close,
+			"green": self.action,
 		}, -1)
-		self["key_green"] = Button(_("Cancel"))
-		self["key_red"] = Button(_("Apply"))
+		self["key_green"] = Button(_("Apply"))
+		self["key_red"] = Button(_("Cancel"))
 		
 		self.testlist = []
 		self["info"] = Label()
 		self["list"] = MenuList(self.rcuvalOSD)
-		title = "RCU Select"
+		title = _("RCU Select")
 		self.setTitle(title)
 		self["pixmap"] = Pixmap()
-		self.rcuval = ["WeTek Play ( Origin.) RCU", "WeTek Play Enigma2 RCU"]
+		self.rcuval = ["WeTek Play (Classic) RCU", "WeTek Play Enigma2 RCU"]
 		self.SetOSDList()
 
 	def SetOSDList(self):
