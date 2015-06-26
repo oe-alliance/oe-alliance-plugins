@@ -175,6 +175,10 @@ if VUPLUS
 SUBDIRS += HbbTV AudioEffect
 endif
 
+if WETEK
+SUBDIRS += RCUSelect
+endif
+
 if XC7362
 SUBDIRS += Blindscan VPLEDControl
 endif

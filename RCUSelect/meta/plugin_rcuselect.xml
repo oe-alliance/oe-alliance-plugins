@@ -1,0 +1,17 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info language="en">
+                    <author>telesat@weteke2.com</author>
+                    <name>RCUSelect</name>
+                    <packagename>enigma2-plugin-extensions-rcuselect</packagename>
+                    <shortdescription>Remote Controller Setup.</shortdescription>
+                    <description>Switch WeTek and E2 remote.
+                    </description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-rcuselect" />
+	</files>
+
+</default>
