@@ -13,11 +13,6 @@ from Components.Button import Button
 from Tools.HardwareInfo import HardwareInfo
 import os
 
-############################################################
-#         Coded by telesat@weteke2.com, June 2015          #
-############################################################
-
-
 class RCUSelect(Screen):
 	skin = """
 	<screen name="Menusimple" position="center,center" size="350,175" title="" >
