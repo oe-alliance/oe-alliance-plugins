@@ -23,7 +23,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-msgid "Are you shure !?"
+msgid "Are you sure !?"
 msgstr ""
 
 msgid "RCU Select"

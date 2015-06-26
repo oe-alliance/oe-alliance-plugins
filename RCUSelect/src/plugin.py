@@ -76,7 +76,7 @@ class RCUSelect(Screen):
 
 	def action(self):
 		from Screens.MessageBox import MessageBox
-		self.session.openWithCallback(self.confirm, MessageBox, _("Are you shure !?"), MessageBox.TYPE_YESNO, timeout = 15, default = False)
+		self.session.openWithCallback(self.confirm, MessageBox, _("Are you sure !?"), MessageBox.TYPE_YESNO, timeout = 15, default = False)
 
 	def confirm(self, confirmed):
 		if not confirmed:
@@ -86,7 +86,7 @@ class RCUSelect(Screen):
 			var = self["list"].getSelectionIndex()
 			self.rcuv = self.rcuval[var]
 			try:
-				if self.rcuv == 'OLD':
+				if self.rcuv == 'WeTek Play (Classic) RCU':
 					os.system("cp -f /etc/amremote/wetek1.conf /etc/amremote/wetek.conf &")
 				else:
 					os.system("cp -f /etc/amremote/wetek2.conf /etc/amremote/wetek.conf &")
