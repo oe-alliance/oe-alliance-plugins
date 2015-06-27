@@ -100,7 +100,7 @@ class Tools():
 				if is_sorted or skipextrachannels == 0:
 					lastlcn = len(temp_services) and max(temp_services.keys())
 					newservices = []
-					for number in extra_services:
+					for number in self.sortServicesAlpha(extra_services):
 						temp_services[lastlcn + 1] = extra_services[number]
 						lastlcn += 1
 						newservices.append(number)
@@ -109,6 +109,15 @@ class Tools():
 				services[type] = temp_services
 
 		return services
+		
+	def sortServicesAlpha(self, services):
+		# services is a dict with LCNs as keys
+		# returns keys, sorted flat alphabetic by service name
+		sort_list = []
+		for lcn in services:
+			sort_list.append((lcn, re.sub('^(?![a-z])', 'zzzzz', services[lcn]['service_name'].lower())))
+		sort_list = sorted(sort_list, key=lambda listItem: listItem[1])
+		return [i[0] for i in sort_list]
 
 	def customMix(self, services, section_identifier, orig_sections):
 		custom_dir = os.path.dirname(__file__) + "/../custom"
