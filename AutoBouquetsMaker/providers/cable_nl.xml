@@ -9,9 +9,9 @@
 		<configuration key="hd_pijnacker_" netid="757" bouquettype="hd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Pijnacker HD</configuration>
 		<configuration key="sd_pijnacker_" netid="757" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Pijnacker SD</configuration>
 		<configuration key="hd_kabeltex__" netid="1791" bouquettype="hd" frequency="284000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">Kabeltex HD</configuration>
-		<configuration key="hd_kabeltex__" netid="1791" bouquettype="sd" frequency="284000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">Kabeltex SD</configuration>
+		<configuration key="sd_kabeltex__" netid="1791" bouquettype="sd" frequency="284000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">Kabeltex SD</configuration>
 		<configuration key="hd_kabelnoord" netid="9101" bouquettype="hd" frequency="306000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="5">KabelNoord HD</configuration>
-		<configuration key="hd_kabelnoord" netid="9101" bouquettype="sd" frequency="306000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="5">KabelNoord SD</configuration>
+		<configuration key="sd_kabelnoord" netid="9101" bouquettype="sd" frequency="306000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="5">KabelNoord SD</configuration>
 		<configuration key="hd_harderwijk" netid="2244" bouquettype="hd" frequency="456000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">Harderwijk HD</configuration>
 		<configuration key="sd_harderwijk" netid="2244" bouquettype="sd" frequency="456000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">Harderwijk SD</configuration>
 		<configuration key="hd_delta1000_" netid="1000" bouquettype="hd" frequency="402000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">Delta1000 HD</configuration>
@@ -43,7 +43,7 @@
 		<configuration key="sd_caiway4683" netid="4683" bouquettype="sd" frequency="538000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Caiway4683 SD</configuration>
 		<configuration key="sd_caiway5636" netid="5636" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Caiway5636 SD</configuration>
 		<configuration key="sd_caiway6227" netid="6227" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Caiway6227 SD</configuration>
-		<configuration key="sd_caiway6536" netid="6536" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Caiway536 SD</configuration>
+		<configuration key="sd_caiway6536" netid="6536" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Caiway6536 SD</configuration>
 		<configuration key="sd_caiway7224" netid="7224" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Caiway7224 SD</configuration>
 		<configuration key="sd_caiway7244" netid="7244" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Caiway7244 SD</configuration>
 		<configuration key="hd_ziggo_____" netid="5555" bouquettype="hd" frequency="474000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">Ziggo HD</configuration>
@@ -54,10 +54,6 @@
 	</sections>
 	<servicehacks>
 <![CDATA[
-if "d_skv_" in bouquet_key:
-	ftachannels = [1,2,3,4,5,6,7,8,9,10,11]
-	if service["number"] in ftachannels:
-		service["free_ca"] = 0
 ]]>
 	</servicehacks>
 </provider>
