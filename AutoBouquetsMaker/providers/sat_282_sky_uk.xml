@@ -173,8 +173,7 @@
 		<section number="980">BBC Interactive</section>
 		<section number="998">Sky Info</section>		
 		<section number="1000">Sky Sports Interactive</section>
-		<section number="1020">BBC Interactive</section>
-		<section number="1030">Sky Anytime</section>
+		<section number="1020">Sky Anytime</section>
 		<section number="1050">Not indexed</section>
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
@@ -302,21 +301,27 @@ for number in service["numbers"]:
 		if service["channel_id"] > 1470 and service["channel_id"] < 1486: # Sky Sports Interactive
 			new_numbers.append(service["channel_id"] - 471)
 			service["interactive_name"] = "Sky Sports Interactive " + str(service["channel_id"])
-		elif service["channel_id"] > 2050 and service["channel_id"] < 2053: #BBC Interactive
-			free_slot_found = False
-			for i in range(980, 996):
-				if i in LCNs_in_use:
-					continue
-				else:
-					free_slot_found = True
-					LCNs_in_use.append(i)
-					new_numbers.append(i)
-					service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
-					break
-			if not free_slot_found:
-				skip = True
+		elif service["channel_id"] > 2050 and service["channel_id"] < 2060: #BBC Interactive
+			if service["channel_id"] in [2056,2057,2058]:
+				LCNs_in_use.append(service["channel_id"] - 1072)
+				new_numbers.append(service["channel_id"] - 1072)
+				service["interactive_name"] = "BBC RB " + str(service["channel_id"] - 2052)
+			else:
+				print "BBC interactive service?", service
+			#	free_slot_found = False
+			#	for i in range(987, 996):
+			#		if i in LCNs_in_use:
+			#			continue
+			#		else:
+			#			free_slot_found = True
+			#			LCNs_in_use.append(i)
+			#			new_numbers.append(i)
+			#			service["interactive_name"] = "BBC Interactive " + str(service["channel_id"])
+			#			break
+			#	if not free_slot_found:
+			#		skip = True
 		elif service["channel_id"] > 4093 and service["channel_id"] < 4099: # Sky Anytime
-			new_numbers.append(service["channel_id"] - 3064)
+			new_numbers.append(service["channel_id"] - 3074)
 			service["interactive_name"] = "Sky Anytime " + str(service["channel_id"])
 		else:
 			skip = True
