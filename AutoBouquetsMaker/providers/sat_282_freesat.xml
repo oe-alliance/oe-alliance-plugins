@@ -116,6 +116,7 @@
 		<section number="800">Shopping</section>
 		<section number="870">Adult</section>
 		<section number="950">Regional</section>
+		<section number="980">BBC Red Button</section>		
 		<section number="1050">Not indexed</section>
 	</sections>
 		<!-- channelsontop affect only HD bouquets -->
