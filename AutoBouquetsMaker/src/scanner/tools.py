@@ -129,6 +129,7 @@ class Tools():
 		sections = {}
 		for sec in orig_sections:
 			sections[sec] = orig_sections[sec]
+		hacks = ""
 		dom = self.parseXML(customfile)
 		if dom is None:
 			print>>log, "[Tools] No CustomMix file for " + section_identifier + "."
@@ -175,6 +176,15 @@ class Tools():
 								node2.normalize()
 								if len(node2.childNodes) == 1 and node2.childNodes[0].nodeType == node2.TEXT_NODE:
 									sections[number] = node2.childNodes[0].data.encode("utf-8")
+							
+				elif node.tagName == "hacks":
+					node.normalize()
+					for i in range(0, len(node.childNodes)):
+						if node.childNodes[i].nodeType == node.CDATA_SECTION_NODE:
+							hacks = node.childNodes[i].data.strip()
+
+			if len(hacks) > 0:
+				exec(hacks)
 
 		return customised, sections
 
@@ -256,6 +266,7 @@ class Tools():
 		channels_on_top = [[]]
 		swaprules = []
 		placement = 0
+		hacks = ""
 
 		# Read favourites file
 		dom = self.parseXML(custom_dir + "/favourites.xml")
@@ -319,6 +330,15 @@ class Tools():
 						placement = min(int(node.childNodes[0].data) -1, len(bouquetsOrder))
 						if placement < 0:
 							placement = 0
+							
+				elif node.tagName == "hacks":
+					node.normalize()
+					for i in range(0, len(node.childNodes)):
+						if node.childNodes[i].nodeType == node.CDATA_SECTION_NODE:
+							hacks = node.childNodes[i].data.strip()
+
+			if len(hacks) > 0:
+				exec(hacks)
 
 			if len(customized["video"]) > 0:
 				providers[provider_key] = {}
