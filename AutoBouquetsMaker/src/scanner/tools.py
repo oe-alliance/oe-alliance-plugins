@@ -366,14 +366,14 @@ class Tools():
 				print>>log, "[Tools] Favourites list is zero length."
 
 	def clearsections(self, services, sections, bouquettype, servicetype):
-		# bouquettype = HD, FTAHD, FTA
+		# bouquettype = HD, FTAHD, FTA, ALL
 		# servicetype = video, radio
 		if len(sections) == 1:
 			return sections
 
 		active_sections = {}
 		for key in services[servicetype].keys():
-			if ("FTA" not in bouquettype or services[servicetype][key]["free_ca"] == 0) and ("HD" not in bouquettype or services[servicetype][key]["service_type"] >= 17):
+			if (("FTA" not in bouquettype or services[servicetype][key]["free_ca"] == 0) and ("HD" not in bouquettype or services[servicetype][key]["service_type"] >= 17)) or 'ALL' in bouquettype:
 				section_number = max((x for x in sections if int(x) <= key))
 				if section_number not in active_sections:
 					active_sections[section_number] = sections[section_number]
