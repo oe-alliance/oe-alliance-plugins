@@ -62,7 +62,7 @@ timsetlist = {"none": _("None"), "off": _("Fan - Off"), "on": _("Fan - On"), "au
 syswatchlist = {"off": _("Off"), "on": _("On")}
 
 config.plugins.FanSetup = ConfigSubsection()
-config.plugins.FanSetup.mode = ConfigSelection(choices = modelist, default = "off")
+config.plugins.FanSetup.mode = ConfigSelection(choices = modelist, default = "auto")
 config.plugins.FanSetup.timeset = ConfigSelection(choices = timsetlist, default = "none")
 config.plugins.FanSetup.timestartoff = ConfigClock(default = ((21 * 60 + 30) * 60) )
 config.plugins.FanSetup.timeendoff = ConfigClock(default = ((7 * 60 + 0) * 60) )
