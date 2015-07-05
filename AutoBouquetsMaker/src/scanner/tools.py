@@ -100,7 +100,7 @@ class Tools():
 				if is_sorted or skipextrachannels == 0:
 					lastlcn = len(temp_services) and max(temp_services.keys())
 					newservices = []
-					for number in extra_services:
+					for number in self.sortServicesAlpha(extra_services):
 						temp_services[lastlcn + 1] = extra_services[number]
 						lastlcn += 1
 						newservices.append(number)
@@ -109,6 +109,15 @@ class Tools():
 				services[type] = temp_services
 
 		return services
+		
+	def sortServicesAlpha(self, services):
+		# services is a dict with LCNs as keys
+		# returns keys, sorted flat alphabetic by service name
+		sort_list = []
+		for lcn in services:
+			sort_list.append((lcn, re.sub('^(?![a-z])', 'zzzzz', services[lcn]['service_name'].lower())))
+		sort_list = sorted(sort_list, key=lambda listItem: listItem[1])
+		return [i[0] for i in sort_list]
 
 	def customMix(self, services, section_identifier, orig_sections):
 		custom_dir = os.path.dirname(__file__) + "/../custom"
@@ -120,6 +129,7 @@ class Tools():
 		sections = {}
 		for sec in orig_sections:
 			sections[sec] = orig_sections[sec]
+		hacks = ""
 		dom = self.parseXML(customfile)
 		if dom is None:
 			print>>log, "[Tools] No CustomMix file for " + section_identifier + "."
@@ -166,6 +176,15 @@ class Tools():
 								node2.normalize()
 								if len(node2.childNodes) == 1 and node2.childNodes[0].nodeType == node2.TEXT_NODE:
 									sections[number] = node2.childNodes[0].data.encode("utf-8")
+							
+				elif node.tagName == "hacks":
+					node.normalize()
+					for i in range(0, len(node.childNodes)):
+						if node.childNodes[i].nodeType == node.CDATA_SECTION_NODE:
+							hacks = node.childNodes[i].data.strip()
+
+			if len(hacks) > 0:
+				exec(hacks)
 
 		return customised, sections
 
@@ -247,6 +266,7 @@ class Tools():
 		channels_on_top = [[]]
 		swaprules = []
 		placement = 0
+		hacks = ""
 
 		# Read favourites file
 		dom = self.parseXML(custom_dir + "/favourites.xml")
@@ -310,6 +330,15 @@ class Tools():
 						placement = min(int(node.childNodes[0].data) -1, len(bouquetsOrder))
 						if placement < 0:
 							placement = 0
+							
+				elif node.tagName == "hacks":
+					node.normalize()
+					for i in range(0, len(node.childNodes)):
+						if node.childNodes[i].nodeType == node.CDATA_SECTION_NODE:
+							hacks = node.childNodes[i].data.strip()
+
+			if len(hacks) > 0:
+				exec(hacks)
 
 			if len(customized["video"]) > 0:
 				providers[provider_key] = {}
@@ -337,14 +366,14 @@ class Tools():
 				print>>log, "[Tools] Favourites list is zero length."
 
 	def clearsections(self, services, sections, bouquettype, servicetype):
-		# bouquettype = HD, FTAHD, FTA
+		# bouquettype = HD, FTAHD, FTA, ALL
 		# servicetype = video, radio
 		if len(sections) == 1:
 			return sections
 
 		active_sections = {}
 		for key in services[servicetype].keys():
-			if ("FTA" not in bouquettype or services[servicetype][key]["free_ca"] == 0) and ("HD" not in bouquettype or services[servicetype][key]["service_type"] >= 17):
+			if (("FTA" not in bouquettype or services[servicetype][key]["free_ca"] == 0) and ("HD" not in bouquettype or services[servicetype][key]["service_type"] >= 17)) or 'ALL' in bouquettype:
 				section_number = max((x for x in sections if int(x) <= key))
 				if section_number not in active_sections:
 					active_sections[section_number] = sections[section_number]

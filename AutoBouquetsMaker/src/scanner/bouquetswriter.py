@@ -363,6 +363,10 @@ class BouquetsWriter():
 			bouquet_current = open(path + "/%s%s.main.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			current_bouquet_list = []
 			current_bouquet_list.append("#NAME %sAll channels\n" % section_prefix)
+			
+			# Clear unused sections
+			sections_c = sections.copy()
+			sections_c = Tools().clearsections(services, sections_c, 'ALL', "video")
 
 			# small hack to handle the "preferred_order" list
 			higher_number = sorted(services["video"].keys())[-1]
@@ -374,18 +378,18 @@ class BouquetsWriter():
 
 			# Always write first not hidden section on top of list
 			for number in preferred_order_tmp:
-				if number in sections and number not in bouquets_to_hide:
+				if number in sections_c and number not in bouquets_to_hide:
 					current_bouquet_list.append("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-					current_bouquet_list.append("#DESCRIPTION %s%s\n" % (section_prefix, sections[number]))
+					current_bouquet_list.append("#DESCRIPTION %s%s\n" % (section_prefix, sections_c[number]))
 					first_section = number
 					break
 					
 			# Use separate section counter. Preferred_order_tmp has swapped numbers. Can put sections on wrong places
 			section_number = 1
 			for number in preferred_order_tmp:
-				if section_number in sections and section_number not in bouquets_to_hide and section_number != first_section:
+				if section_number in sections_c and section_number not in bouquets_to_hide and section_number != first_section:
 					current_bouquet_list.append("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-					current_bouquet_list.append("#DESCRIPTION %s%s\n" % (section_prefix, sections[section_number]))
+					current_bouquet_list.append("#DESCRIPTION %s%s\n" % (section_prefix, sections_c[section_number]))
 				if number in swapDict:
 					number = swapDict[number]
 				if number in services["video"] and number not in bouquets_to_hide:
