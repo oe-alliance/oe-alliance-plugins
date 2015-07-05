@@ -156,19 +156,11 @@ SUBDIRS += TempFanControl
 endif
 
 if GBQUADPLUS
-SUBDIRS += AudioEffect TransCodingSetup
+SUBDIRS += TransCodingSetup
 endif
 
 if GBQUAD
-SUBDIRS += AudioEffect TransCodingSetup
-endif
-
-if GB800SEPLUS
-SUBDIRS += AudioEffect
-endif
-
-if GB800UEPLUS
-SUBDIRS += AudioEffect
+SUBDIRS += TransCodingSetup
 endif
 
 if VUPLUS
