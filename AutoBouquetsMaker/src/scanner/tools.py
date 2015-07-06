@@ -64,7 +64,7 @@ class Tools():
 					if node.tagName == "include":
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
-							if node.childNodes[0].data.encode("utf-8") == 'no' or not config.autobouquetsmaker.showextraservices.value:
+							if node.childNodes[0].data.encode("utf-8") == 'no':
 								skipextrachannels = 1
 					if node.tagName == "lcnlist":
 						for node2 in node.childNodes:
