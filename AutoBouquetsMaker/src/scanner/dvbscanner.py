@@ -782,6 +782,7 @@ class DvbScanner():
 		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
 		transport_stream_id_list = []
 		extraservices = config.autobouquetsmaker.level.value == "expert" and config.autobouquetsmaker.showextraservices.value
+		extra_channel_id_dict = {}
 		while True:
 			if datetime.datetime.now() > timeout:
 				print>>log, "[DvbScanner] Timed out"
@@ -798,6 +799,10 @@ class DvbScanner():
 						for content_tmp in section["content"]:
 							if content_tmp["descriptor_tag"] == 0xd3 and content_tmp["transport_stream_id"] not in transport_stream_id_list:
 								transport_stream_id_list.append(content_tmp["transport_stream_id"])
+							if content_tmp["descriptor_tag"] == 0xb1:
+								key = "%x:%x:%x" % (content_tmp["transport_stream_id"], content_tmp["original_network_id"], content_tmp["service_id"])
+								if key not in extra_channel_id_dict:
+									extra_channel_id_dict[key] = content_tmp["channel_id"]
 					continue
 
 				if section["header"]["version_number"] != bat_section_version:
@@ -827,7 +832,10 @@ class DvbScanner():
 			if service["transport_stream_id"] not in transport_stream_id_list:
 				transport_stream_id_list.append(service["transport_stream_id"])
 
+			key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
 			if service["region_id"] != region_id and service["region_id"] != 0xff:
+				if extraservices and key not in extra_channel_id_dict:
+					extra_channel_id_dict[key] = service["channel_id"]
 				continue
 
 			if service["service_type"] == 0x05:
@@ -839,7 +847,6 @@ class DvbScanner():
 			service["namespace"] = namespace
 			service["flags"] = 0
 
-			key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
 			if key in tmp_services_dict:
 				tmp_services_dict[key]["numbers"].append(service["number"])
 			else:
@@ -925,6 +932,8 @@ class DvbScanner():
 
 				if srvkey not in tmp_services_dict:
 					if extraservices:
+						if srvkey in extra_channel_id_dict:
+							section["channel_id"] = extra_channel_id_dict[srvkey]
 						extras.append(section)
 					continue
 
@@ -1263,7 +1272,8 @@ class DvbScanner():
 					break
 				LCNs.append(current_lcn)
 				service = extras[item[0]]
-				srvkey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
+				if "channel_id" not in service:
+					service["channel_id"] = 0
 				new_service = {
 					'region_id': 255,
 					'free_ca': service["free_ca"],
@@ -1278,7 +1288,7 @@ class DvbScanner():
 					'descriptor_tag': 177,
 					'transport_stream_id': service["transport_stream_id"],
 					'provider_name': service["provider_name"],
-					'channel_id': 0
+					'channel_id': service["channel_id"]
 				}
 				srvkey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
 				tmp_services_dict[srvkey] = new_service
