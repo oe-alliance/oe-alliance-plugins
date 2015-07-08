@@ -1,4 +1,4 @@
-Package: enigma2-plugin-extensions-satipclient
+Package: enigma2-plugin-systemplugins-satipclient
 Version: 1.0-r0
 Description: Satip Client
 Maintainer: oe-a

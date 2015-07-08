@@ -5,12 +5,12 @@
           <info>
                     <author>oe-a</author>
                     <name>SatipClient</name>
-                    <packagename>enigma2-plugin-extensions-satipclient</packagename>
+                    <packagename>enigma2-plugin-systemplugins-satipclient</packagename>
                     <shortdescription>SatipClient Setup</shortdescription>
                     <description>SatipClient Setup</description>
           </info>
 	  <files type="package"> <!-- without version, without .ipk -->
-		<file type="package" name="enigma2-plugin-extensions-satipclient" />
+		<file type="package" name="enigma2-plugin-systemplugins-satipclient" />
                 <file type="package" name="satip-client" />
   	  </files>
 </default>
