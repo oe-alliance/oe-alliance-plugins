@@ -3,3 +3,5 @@ Version: 1.0-r0
 Description: Satip Client
 Maintainer: oe-a
 Depends: enigma2 , satip-client
+Conflicts: enigma2-plugin-extensions-satipclient
+Replaces: enigma2-plugin-extensions-satipclient
