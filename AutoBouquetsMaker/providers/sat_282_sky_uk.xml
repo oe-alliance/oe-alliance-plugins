@@ -313,7 +313,7 @@ except:
 		6505: "ITV Granada HD"
 	}
 	
-	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BT Sport 1 HD','BT Sport 2 HD','ESPN HD','BoxNation HD','BT Preview HD','BT Sport EurHD','BTSpt/ESPN HD']
+	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BT Sport 1 HD','BT Sport 2 HD','ESPN HD','BoxNation HD','BT Preview HD','BT Sport EurHD','BTSpt/ESPN HD',458]
 	blacklist = [899,950,998,999,'Sky Intro'] # block Sky intro
 	
 	
