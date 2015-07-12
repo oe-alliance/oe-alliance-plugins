@@ -101,6 +101,8 @@
 		<configuration key="sd_tring" bouquet="0x1001" region="0x1b" namespace="0x11a0000">Tring SD</configuration>
 		<configuration key="hd_tyne" bouquet="0x1005" region="0x0d" namespace="0x11a0000">Tyne HD</configuration>
 		<configuration key="sd_tyne" bouquet="0x1001" region="0x0d" namespace="0x11a0000">Tyne SD</configuration>
+		<configuration key="hd_wales" bouquet="0x1008" region="0x20" namespace="0x11a0000">Wales HD</configuration>
+		<configuration key="sd_wales" bouquet="0x1004" region="0x20" namespace="0x11a0000">Wales SD</configuration>
 		<configuration key="hd_west_anglia" bouquet="0x1005" region="0x19" namespace="0x11a0000">West Anglia HD</configuration>
 		<configuration key="sd_west_anglia" bouquet="0x1001" region="0x19" namespace="0x11a0000">West Anglia SD</configuration>
 		<configuration key="hd_west_dorset" bouquet="0x1007" region="0x43" namespace="0x11a0000">West Dorset HD</configuration>
@@ -150,6 +152,7 @@
 		<configuration key="sdcustom_thames_valley" bouquet="0x1001" region="0x09" namespace="0x11a0000">Thames Valley Custom</configuration>
 		<configuration key="sdcustom_tring" bouquet="0x1001" region="0x1b" namespace="0x11a0000">Tring Custom</configuration>
 		<configuration key="sdcustom_tyne" bouquet="0x1001" region="0x0d" namespace="0x11a0000">Tyne Custom</configuration>
+		<configuration key="sdcustom_wales" bouquet="0x1004" region="0x20" namespace="0x11a0000">Wales Custom</configuration>
 		<configuration key="sdcustom_west_anglia" bouquet="0x1001" region="0x19" namespace="0x11a0000">West Anglia Custom</configuration>
 		<configuration key="sdcustom_west_dorset" bouquet="0x1003" region="0x43" namespace="0x11a0000">West Dorset Custom</configuration>
 		<configuration key="sdcustom_westcountry" bouquet="0x1001" region="0x06" namespace="0x11a0000">Westcountry Custom</configuration>
