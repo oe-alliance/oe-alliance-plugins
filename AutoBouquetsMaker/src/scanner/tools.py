@@ -119,16 +119,13 @@ class Tools():
 		sort_list = sorted(sort_list, key=lambda listItem: listItem[1])
 		return [i[0] for i in sort_list]
 
-	def customMix(self, services, section_identifier, orig_sections):
+	def customMix(self, services, section_identifier, sections):
 		custom_dir = os.path.dirname(__file__) + "/../custom"
 		customfile = custom_dir + "/" + section_identifier + "_CustomMix.xml"
 		customised = {"video":{}, "radio":{}}
 		for type in ["video", "radio"]:
 			for number in services[section_identifier][type]:
 				customised[type][number] = services[section_identifier][type][number]
-		sections = {}
-		for sec in orig_sections:
-			sections[sec] = orig_sections[sec]
 		hacks = ""
 		dom = self.parseXML(customfile)
 		if dom is None:
