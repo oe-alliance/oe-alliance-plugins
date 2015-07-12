@@ -661,6 +661,7 @@ class BouquetsWriter():
 			hd_channels_numbers = channels_on_top_tmp
 			hd_channels_numbers += hd_channels_numbers_tmp
 
+			todo = None
 			for number in hd_channels_numbers:
 				if number >= section_key_current:
 					todo = None
