@@ -252,7 +252,7 @@ class Tools():
 	def favourites(self, path, services, providers, providerConfigs, bouquetsOrder):
 		custom_dir = os.path.dirname(__file__) + "/../custom"
 		provider_key = "favourites"
-		customized = {"video":{}, "radio":{}}
+		customised = {"video":{}, "radio":{}}
 		name = ""
 		prefix = ""
 		sections = {}
@@ -308,7 +308,7 @@ class Tools():
 								elif node2.attributes.item(i).name == "target":
 									target = int(node2.attributes.item(i).value)
 							if provider and source and target and provider in services and source in services[provider]["video"]:
-								customized["video"][target] = services[provider]["video"][source]
+								customised["video"][target] = services[provider]["video"][source]
 
 				elif node.tagName == "bouquets":
 					for node2 in node.childNodes:
@@ -337,7 +337,7 @@ class Tools():
 			if len(hacks) > 0:
 				exec(hacks)
 
-			if len(customized["video"]) > 0:
+			if len(customised["video"]) > 0:
 				providers[provider_key] = {}
 				providers[provider_key]["name"] = name
 				providers[provider_key]["bouquets"] = area_key
@@ -348,7 +348,7 @@ class Tools():
 				providers[provider_key]["sections"] = sections
 				if config.autobouquetsmaker.addprefix.value:
 					prefix = name
-				services[provider_key] = customized
+				services[provider_key] = customised
 				bouquetsOrder.insert(placement, provider_key)
 
 				from providerconfig import ProviderConfig
