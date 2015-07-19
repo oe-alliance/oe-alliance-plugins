@@ -93,12 +93,63 @@ except:
 		'CITV': 640
 	}
 	
-	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BT Sport 1 HD','BT Sport 2 HD','ESPN HD','BoxNation HD','BT Preview HD','BT Sport EurHD','BTSpt/ESPN HD']
-	blacklist = [899,950,998,999]
-	
+	ITVs = {
+		1020: "ITV Border Scotland",
+		3527: "STV Edinburgh",
+		4055: "STV HD",
+		4012: "UTV Ireland",
+		5070: "STV Glasgow",
+		6000: "ITV London",
+		6010: "ITV Central South",
+		6011: "ITV Central East",
+		6015: "ITV Central SW",
+		6030: "ITV West",
+		6040: "ITV West Country",
+		6089: "ITV Anglia East",
+		6130: "ITV Granada",
+		6140: "ITV Meridian South",
+		6142: "ITV Meridian East",
+		6143: "ITV Meridian North",
+		6160: "ITV Yorkshire West",
+		6161: "ITV Yorkshire East",
+		6200: "ITV Channel Isles",
+		6300: "ITV Central",
+		6381: "ITV Anglia West",
+		6390: "ITV Tyne Tees",
+		6110: "ITV Border",
+		6020: "ITV Wales",
+		6012: "ITV +1 Wales",
+		6065: "ITV +1 Yorkshire",
+		6125: "ITV +1 West Country",
+		6126: "ITV +1 Tyne Tees",
+		6127: "ITV +1 West",
+		6128: "ITV +1 Anglia",
+		6145: "ITV +1 Central",
+		6155: "ITV +1 London",
+		6355: "ITV +1 Granada",
+		6365: "ITV +1 Meridian",
+		6210: "STV Grampian",
+		6220: "STV Scottish East",
+		6230: "UTV",
+		6371: "STV Scottish West",
+		6500: "ITV Yorkshire West",
+		6501: "ITV Wales HD",
+		6502: "ITV Meridian South HD",
+		6503: "ITV Central West HD",
+		6504: "ITV London HD",
+		6505: "ITV Granada HD",
+		6510: "UTV HD"
+	}
+
+	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BoxNation HD','BT Preview HD']
+	whitelist_by_id = [3661,5032,3663,3141,3625,3629,3627,4037,4040,5152,5153,5154]
+	blacklist = [899,950]
 	
 if service["transport_stream_id"] == 0x7e3:
 	service["namespace"] = 0x11a2f26
+	
+if "channel_id" in service and service["channel_id"] in ITVs: # sort out ITV channel names
+	service["interactive_name"] = ITVs[service["channel_id"]]	
 
 if custom and service["service_name"] in channels_to_add and service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and channels_to_add[service["service_name"]] not in LCNs_in_use:
 	LCNs_in_use.append(channels_to_add[service["service_name"]])
@@ -108,7 +159,7 @@ if custom and service["service_name"] in channels_to_add and service["service_ty
 if service["service_type"] == 0x02 and service["number"] > 3000:
 	service["number"] -= 3000
 
-if service["service_type"] != 2 and (service["number"] in whitelist or  service["service_name"] in whitelist):
+if service["service_type"] != 2 and (service["number"] in whitelist or service["service_name"] in whitelist or ("channel_id" in service and service["channel_id"] in whitelist_by_id)):
 	pass
 elif custom and service["service_type"] != 2 and (service["number"] in blacklist or  service["service_name"] in blacklist):
 	skip = True
