@@ -276,6 +276,7 @@ except:
 	ITVs = {
 		1020: "ITV Border Scotland",
 		3527: "STV Edinburgh",
+		4012: "UTV Ireland",
 		4055: "STV HD",
 		5070: "STV Glasgow",
 		6000: "ITV London",
@@ -309,16 +310,20 @@ except:
 		6365: "ITV +1 Meridian",
 		6210: "STV Grampian",
 		6220: "STV Scottish East",
+		6230: "UTV",
 		6371: "STV Scottish West",
+		6500: "ITV Yorkshire West",
+		6501: "ITV Wales HD",
 		6502: "ITV Meridian South HD",
 		6503: "ITV Central West HD",
 		6504: "ITV London HD",
-		6505: "ITV Granada HD"
+		6505: "ITV Granada HD",
+		6510: "UTV HD"
 	}
 
 	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BoxNation HD','BT Preview HD']
 	whitelist_by_id = [3661,5032,3663,3141,3625,3629,3627,4040,5152,5153,5154]
-	blacklist = [899,950,998,999,'Sky Intro'] # block Sky intro
+	blacklist = []
 
 if service["transport_stream_id"] == 0x7e3:
 	service["namespace"] = 0x11a2f26
