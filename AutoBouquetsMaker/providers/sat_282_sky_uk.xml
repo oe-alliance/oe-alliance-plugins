@@ -235,7 +235,9 @@
 		<channel number="413" with="427" /><!-- BT Sport 1 HD -->
 		<channel number="414" with="433" /><!-- BT Sport EurHD -->
 		<channel number="417" with="457" /><!-- BT Sport 2 HD -->
+		<channel number="424" with="460" /><!-- Setanta HD -->		
 		<channel number="426" with="458" /><!-- BTSpt/ESPN HD -->
+		<channel number="428" with="462" /><!-- Premier HD -->		
 		<channel number="437" with="490" /><!-- BoxNation HD -->
 		<channel number="501" with="516" /><!-- Sky News HD -->
 		<channel number="512" with="518" /><!-- RT HD -->
@@ -269,6 +271,7 @@ except:
 		"Setanta Ireland": 423,
 		"Setanta Sports1": 424,
 		"Premier Sports": 428,
+		"Premier HD": 462,		
 		"Oireachtas TV": 574,
 		"RTEjr": 635
 	}
