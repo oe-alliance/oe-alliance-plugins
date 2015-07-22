@@ -3,7 +3,7 @@ Contents:
 1) CustomLCN
 2) CustomMix
 3) Favourites
-4) Simple favourites
+4) Hacks
 5) Provider keys
 
 ---------------------------------------------------------------------------------------------- 
@@ -220,118 +220,59 @@ bouquets as per the section numbers above. All tags in the above example a neces
 
 ----------------------------------------------------------------------------------------------
 
-Simple favourites
------------------
+Hacks
+-----
 
-You may just want to add a short favourites list to the beginning of one single provider. This is possible 
-where the provider's channel numbering does not start at 1 and there is a group of empty slots that could 
-be used. For example Sky UK's channel numbering starts at 101, so there are 100 unused slots that could be 
-used for favourites. 
+"Hacks" is available in "Favourites" and "CustomMix". "Hacks" allows Python code to be use to 
+modify the channel list and sections markers, sort channels by name, make a "+1" bouquet, etc, etc, 
+and that this can be done dynamically rather than just creating static lists. With "Hacks" the sky 
+really is the limit in what bouquets can be created by ABM. Here's how "Hacks" looks in a CustomMix
+file.
 
-To do this create a copy of the provider's file and rename it. Provider's files are stored in:
-/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/providers
-For example, if you want to do this with Sky UK open the file: sat_282_sky_uk.xml and rename it to something 
-like sat_282_my_sky_uk.xml. 
-
-Inside the file change the provider name...
-
-So:
-<name>Sky UK</name>
-
-will become [...] or whatever name you choose:
-<name>My Sky</name>
-
-The add a new first section at the top of the sections, so sections changes from this:
-	<section number="101">Entertainment</section>
-	<section number="301">Movies</section>
-	<section number="350">Music</section>
-	<section number="401">Sports</section>
-	
-to this:
-	<section number="1">My Favourites</section>
-	<section number="101">Entertainment</section>
-	<section number="301">Movies</section>
-	<section number="350">Music</section>
-	<section number="401">Sports</section>
-	
-Lastly you need to add the channels you want to include in your simple favourites list. Lets say 
-you want to add the following channels, BBC1 HD (141), BBC2 HD (102), ITV1 HD (178), C4 HD (227) 
-and C5 (105), and you want to put those channels into positions 1, 2, 3, 4, and 5 in your simple 
-favourites list. Make a Python dictionary as follows:
-my_favourites = {141:1, 102:2, 178:3, 227:4, 105:5} # LCN of channel to add followed by position.
-
-Now that has to be added to <servicehacks> with a little bit of code to make it work, as follows:
-
-Here is the code:
-
-#################################################################################################
-# add some channels to a favourites bouquet
-x = 0
-my_favourites = {141:1, 102:2, 178:3, 227:4, 105:5} # LCN of channel to add followed by position.
-for n in service["numbers"]:
-	if n in my_favourites:
-		x = n
-		break
-if x:
-	service["numbers"].append(my_favourites[x])
-#################################################################################################
-	
-This is what it looks like added to <servicehacks>:
-
-
-#################################################################################################
-	<servicehacks>
+<custommix>
+	<hacks>
 <![CDATA[
-# add some channels to a favourites bouquet
-x = 0
-my_favourites = {141:1, 102:2, 178:3, 227:4, 105:5} # LCN of channel to add followed by position.
-for n in service["numbers"]:
-	if n in my_favourites:
-		x = n
-		break
-if x:
-	service["numbers"].append(my_favourites[x])
+
+# Python code here
+			
 ]]>
-	</servicehacks>
-#################################################################################################
-	
+	</hacks>
+</custommix>
 
-If there is already code in <servicehacks> add this code at the end of the <servicehacks> section 
-after all other code, and just before the "]]>".
+"Hacks" is provided for those with the ability to use it and there will only be basic support 
+for this feature.
 
-That's it. Just save the file and then select "My Sky" from the ABM providers list and run a scan.
-
----------------------------------------------------------------------------------------------- 
+----------------------------------------------------------------------------------------------
 
 Provider keys
 -------------
 
 Provider name: Caiway (NL)
-Provider key: cable_nl_caiway
+Provider key: cable_nl
 
 Provider name: Delta (NL)
-Provider key: cable_nl_delta
+Provider key: cable_nl
 
 Provider name: Harderwijk (NL)
-Provider key: cable_nl_harderwijk
+Provider key: cable_nl
 
 Provider name: KabelNoord (NL)
-Provider key: cable_nl_kabelnoord
+Provider key: cable_nl
 
 Provider name: Kabeltex (NL)
-Provider key: cable_nl_kabeltex
+Provider key: cable_nl
 
 Provider name: Pijnacker (NL)
-Provider key: cable_nl_pijnacker
+Provider key: cable_nl
 
 Provider name: SKV (NL)
-Provider key: cable_nl_skv
+Provider key: cable_nl
 
 Provider name: UPC (NL)
-Provider key: cable_nl_upc
+Provider key: cable_nl
 
 Provider name: Ziggo (NL)
-Provider key: cable_nl_ziggo
+Provider key: cable_nl
 
 Provider name: Virgin (UK)
 Provider key: cable_uk_virgin
@@ -404,4 +345,7 @@ Provider key: sat_420_turksat
 
 Provider name: FreeView (UK)
 Provider key: terrestrial_uk_freeview
+
+Provider name: Saorview (IE)
+Provider key: terrestrial_ie_saorview_PSB1
 
