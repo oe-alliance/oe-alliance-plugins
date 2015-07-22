@@ -316,7 +316,7 @@ except:
 		6220: "STV Scottish East",
 		6230: "UTV",
 		6371: "STV Scottish West",
-		6500: "ITV Yorkshire West",
+		6500: "ITV Yorkshire West HD",
 		6501: "ITV Wales HD",
 		6502: "ITV Meridian South HD",
 		6503: "ITV Central West HD",
