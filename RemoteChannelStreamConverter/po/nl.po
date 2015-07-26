@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plugins 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 09:58+0200\n"
-"PO-Revision-Date: 2013-07-25 15:27+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2015-07-25 12:53+0100\n"
+"PO-Revision-Date: 2015-07-26 19:39+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,9 @@ msgstr ""
 
 msgid "Adress:"
 msgstr "Adres:"
+
+msgid "Checking for alternatives"
+msgstr "Zoekt naar alternatieven"
 
 msgid "Close"
 msgstr "Sluit"
@@ -59,8 +62,12 @@ msgid "FTP Server Editor"
 msgstr "FTP Server aanpassen"
 
 #, python-format
-msgid "FTP reading file %d of %d"
-msgstr "FTP leest bestand %d van %d"
+msgid "FTP reading alternatives %d of %d"
+msgstr "FTP leest alternatieven %d van %d"
+
+#, python-format
+msgid "FTP reading bouquets %d of %d"
+msgstr "FTP leest boeketten %d van %d"
 
 msgid "FTPport:"
 msgstr "FTP-poort:"
@@ -116,3 +123,8 @@ msgstr "Gebruik adres"
 msgid "Username:"
 msgstr "Gebruikersnaam:"
 
+msgid "remote of"
+msgstr "remote van"
+
+#~ msgid "FTP reading file %d of %d"
+#~ msgstr "FTP leest bestand %d van %d"
