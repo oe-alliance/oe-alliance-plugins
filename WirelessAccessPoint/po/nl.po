@@ -1,0 +1,204 @@
+# Dutch translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2015 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-25 12:53+0100\n"
+"PO-Revision-Date: 2015-07-26 22:35+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid " "
+msgstr ""
+
+msgid "AP Device"
+msgstr "AP Device"
+
+msgid "AP Mode"
+msgstr "AP Mode"
+
+msgid ""
+"Are you sure you want to setup your AP?\n"
+"\n"
+msgstr ""
+"Weet u zeker dat u uw AP wilt instellen?\n"
+"\n"
+
+msgid "Atheros"
+msgstr "Atheros"
+
+msgid "Beacon (15~65535)"
+msgstr "Beacon (15~65535)"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Channel (1~13)"
+msgstr "Kanaal (1~13)"
+
+msgid "Configuration your AP is finished"
+msgstr "Configureren van uw AP is gereed"
+
+msgid "Current settings (interface : br0)"
+msgstr "Huidige instellingen (interface : br0)"
+
+msgid "Enable 128 bit (Input 26 hex keys)"
+msgstr "Schakel 128 bit in (invoer 26 hex keys)"
+
+msgid "Enable 64 bit (Input 10 hex keys)"
+msgstr "Schakel 64 bit in (invoer 10 hex keys)"
+
+msgid "Encrypt"
+msgstr "Codeer"
+
+msgid "FRAGM Threshold (256~2346)"
+msgstr "FRAGM drempelwaarde (256~2346)"
+
+msgid "Gateway"
+msgstr "Gateway"
+
+msgid "Group Rekey Interval"
+msgstr ""
+
+msgid "IP Address"
+msgstr "IP-adres"
+
+msgid "Ignore Broadcast SSID"
+msgstr "Negeer omroep SSID"
+
+msgid "Invalid Fragm Threshold\n"
+msgstr "Ongeldige Fragm drempelwaarde\n"
+
+msgid "Invalid RTS Threshold\n"
+msgstr "Ongeldige RTS drempelwaarde\n"
+
+msgid "Invalid SSID\n"
+msgstr "Ongeldige SSID\n"
+
+msgid ""
+"Invalid WEP key\n"
+"\n"
+msgstr ""
+"Ongeldige WEP key\n"
+"\n"
+
+msgid ""
+"Invalid WPA key\n"
+"\n"
+msgstr ""
+"Ongeldige WPA key\n"
+"\n"
+
+msgid "Invalid beacon\n"
+msgstr "Ongeldig beacon\n"
+
+msgid "Invalid channel\n"
+msgstr "Ongeldig kanaal\n"
+
+msgid "Invalid model or Image."
+msgstr "Ongeldig model of image."
+
+msgid "Invalid wpagrouprekey\n"
+msgstr "Ongeldige wpagrouprekey\n"
+
+msgid "KEY (8~63 Characters)"
+msgstr "KEY (8~63 karakters)"
+
+msgid "KeyType"
+msgstr "KeyType"
+
+msgid "Method"
+msgstr "Methode"
+
+msgid "N/A"
+msgstr "NVT"
+
+msgid "NetMask"
+msgstr "NetMask"
+
+msgid "Netmask"
+msgstr "Netmask"
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Please wait for AP Configuration....\n"
+msgstr "Wacht op de AP configuratie...\n"
+
+msgid "Preamble"
+msgstr "Preamble"
+
+msgid "RTS Threshold (0~2347)"
+msgstr "RTS drempelwaarde (0~2347)"
+
+msgid "Ralink"
+msgstr "Ralink"
+
+msgid "Realtek"
+msgstr "Realtek"
+
+msgid "SSID (1~32 Characters)"
+msgstr "SSID (1~32 Characters)"
+
+msgid "Setup Mode"
+msgstr "instellingsmodus"
+
+msgid "Unknown network adapter"
+msgstr "Onbekende networkadapter"
+
+msgid "Use AP Mode"
+msgstr "Gebruik AP modus"
+
+msgid "Use DHCP"
+msgstr "Gebruik DHCP"
+
+msgid "WEP"
+msgstr "WEP"
+
+msgid "WEP Key (HEX)"
+msgstr "WEP Key (HEX)"
+
+msgid "WLAN adapter"
+msgstr "WLAN adapter"
+
+msgid "WLAN adapter."
+msgstr "WLAN adapter."
+
+msgid "WPA"
+msgstr "WPA"
+
+msgid "WPA/WPA2"
+msgstr "WPA/WPA2"
+
+msgid "WPA2"
+msgstr "WPA2"
+
+msgid "Wireless Access Point"
+msgstr "Wireless Access Point"
+
+msgid "Wireless Lan Device is not detected."
+msgstr "Wireless Lan Device niet gedetecteerd."
+
+msgid "Zydas"
+msgstr "Zydas"
+
+msgid "disabled"
+msgstr "uitgeschakeld"
+
+msgid "enabled"
+msgstr "ingeschakeld"
+
+msgid "not set"
+msgstr "niet ingesteld"
+
