@@ -104,17 +104,18 @@ class RCUSelect(Screen):
 def startConfig(session, **kwargs):
         session.open(RCUSelect)
 
-def mainmenu(menuid):
-        if menuid != "setup":
-                return [ ]
-        return [(_("RCU Select"), startConfig, "RCU Select", None)]
+def system(menuid):
+	if menuid == "system":
+		return [(_("RCU Select"), startConfig, "RCU Select", None)]
+	else:
+		return []
         
 
 def Plugins(**kwargs):
 	boxime = HardwareInfo().get_device_name()
 	if boxime == 'wetekplay' :
 		return \
-			[PluginDescriptor(name=_("RCU Select"), where = PluginDescriptor.WHERE_MENU, fnc=mainmenu),
+			[PluginDescriptor(name=_("RCU Select"), where = PluginDescriptor.WHERE_MENU, fnc=system),
 			]
 	else:
 		return []
