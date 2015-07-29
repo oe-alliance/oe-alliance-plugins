@@ -326,7 +326,7 @@ except:
 	}
 
 	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BoxNation HD','BT Preview HD']
-	whitelist_by_id = [3661,5032,3663,3141,3625,3629,3627,4040,5152,5153,5154]
+	whitelist_by_id = [3661,5032,3663,3141,3625,3629,3627,4040,5152,5153,5154,5382,5383,5384,5385,5386,5662,5663,3622,3623]
 	blacklist = []
 
 if service["transport_stream_id"] == 0x7e3:
