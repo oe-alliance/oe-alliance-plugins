@@ -101,8 +101,8 @@
 	</dvbcconfigs>
 	<sections>
 		<section number="100">Entertainment</section>
-		<section number="206">Factual</section>
-		<section number="260">Lifestyle</section>
+		<section number="245">Factual</section>
+		<section number="278">Lifestyle</section>
 		<section number="300">Music</section>
 		<section number="400">Movies</section>
 		<section number="500">Sports</section>
@@ -155,13 +155,6 @@
 		 <channel number="410" with="440" /><!-- Sky Drama Rom HD -->
 		 <channel number="411" with="441" /><!-- Sky SciFi Hor HD -->
 		 <channel number="412" with="442" /><!-- Sky Select HD -->
-		 <channel number="501" with="511" /><!-- Sky Sports News HQ -->
-		 <channel number="502" with="512" /><!-- Sky Sports 1 -->
-		 <channel number="503" with="513" /><!-- Sky Sports 2HD -->
-		 <channel number="504" with="514" /><!-- Sky Sports 3 -->
-		 <channel number="505" with="515" /><!-- Sky Sports 4 -->
-		 <channel number="506" with="516" /><!-- Sky Sports 5 -->
-		 <channel number="507" with="517" /><!-- Sky Sports F1 -->
 	</swapchannels>	
 	<servicehacks>
 <![CDATA[
