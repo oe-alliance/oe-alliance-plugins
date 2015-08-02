@@ -177,6 +177,7 @@
 		<section number="998">Sky Info</section>
 		<section number="1000">Sky Sports Interactive</section>
 		<section number="1020">Sky Anytime</section>
+		<section number="1030">BT Sports Interactive</section>
 		<section number="1050">Not indexed</section>
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
@@ -277,7 +278,8 @@ except:
 		"RTEjr": 635
 	}
 
-	ITVs = {
+	rename = {
+		# ITV regions
 		1020: "ITV Border Scotland",
 		3527: "STV Edinburgh",
 		4012: "UTV Ireland",
@@ -322,18 +324,31 @@ except:
 		6503: "ITV Central West HD",
 		6504: "ITV London HD",
 		6505: "ITV Granada HD",
-		6510: "UTV HD"
+		6510: "UTV HD",
+		
+		# BT Interactive
+		5381: "BT Sport Mosaic Extra",
+		5382: "BT Sport Extra 2",
+        5383: "BT Sport Extra 3",
+        5384: "BT Sport Extra 4",
+        5385: "BT Sport Extra 5",
+        5386: "BT Sport Extra 6"
 	}
 
 	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BoxNation HD','BT Preview HD']
 	whitelist_by_id = [3141,3625,3627,3629,3622,3623,3661,3663,4040,5032,5152,5153,5154,5662,5663]
 	blacklist = []
+	bt_sports_id = [5030,5381,5031,5382,5383,5384,5385,5386]
 
 if service["transport_stream_id"] == 0x7e3:
 	service["namespace"] = 0x11a2f26
 
-if "channel_id" in service and service["channel_id"] in ITVs: # sort out ITV channel names
-	service["interactive_name"] = ITVs[service["channel_id"]]
+if "channel_id" in service and service["channel_id"] in rename: # sort out ITV channel names
+	service["interactive_name"] = rename[service["channel_id"]]
+	
+if "channel_id" in service and service["channel_id"] in bt_sports_id and 65535 not in service["numbers"]: # temp BT Sport Interactive fix
+	service["number"] = 65535
+	service["numbers"] = [65535]
 
 if custom and service["service_name"] in channels_to_add and service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and channels_to_add[service["service_name"]] not in LCNs_in_use:
 	LCNs_in_use.append(channels_to_add[service["service_name"]])
@@ -366,7 +381,7 @@ for number in service["numbers"]:
 				new_numbers.append(service["channel_id"] - 1072)
 				service["interactive_name"] = "BBC RB " + str(service["channel_id"] - 2052)
 			else:
-				print "BBC interactive service?", service
+				pass
 			#	free_slot_found = False
 			#	for i in range(987, 996):
 			#		if i in LCNs_in_use:
@@ -382,8 +397,17 @@ for number in service["numbers"]:
 		elif service["channel_id"] > 4093 and service["channel_id"] < 4099: # Sky Anytime
 			new_numbers.append(service["channel_id"] - 3074)
 			service["interactive_name"] = "Sky Anytime " + str(service["channel_id"])
+		elif service["channel_id"] in bt_sports_id:
+			new_numbers.append(1030 + bt_sports_id.index(service["channel_id"]))
 		else:
-			skip = True
+			if extraservices:
+				i = 1450
+				while i > 1049 and i not in LCNs_in_use:
+					i -= 1
+				LCNs_in_use.append(i+1)
+				new_numbers.append(i+1)
+			else:
+				skip = True
 		break
 	elif service["service_name"] in ('Sky Intro') and number < 998: # Sky Intro
 		skip = True
