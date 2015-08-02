@@ -353,7 +353,7 @@ class Blindscan(ConfigListScreen, Screen):
 			else:
 				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_Ku_band_start_frequency,_('Frequency values must be between 10700 MHz and 12749 MHz')))
 				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_Ku_band_stop_frequency,_('Frequency values must be between 10701 MHz and 12750 MHz')))
-			self.list.append(getConfigListEntry(_("Polarisation"), self.scan_sat.polarization,_('The suggested polarisation for this satellite is "' + self.suggestedPolarisation + '"')))
+			self.list.append(getConfigListEntry(_("Polarisation"), self.scan_sat.polarization,_('The suggested polarisation for this satellite is "%s"') % (self.suggestedPolarisation)))
 			self.list.append(getConfigListEntry(_('Scan start symbolrate'), self.blindscan_start_symbol,_('Symbol rate values are in megasymbols; enter a value between 1 and 44')))
 			self.list.append(getConfigListEntry(_('Scan stop symbolrate'), self.blindscan_stop_symbol,_('Symbol rate values are in megasymbols; enter a value between 2 and 45')))
 			self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices,_('If you select "yes" all channels on the satellite being search will be deleted before starting the current search')))
@@ -917,13 +917,13 @@ class Blindscan(ConfigListScreen, Screen):
 		freq = 0
 		band = 'Unknown'
 		self.is_c_band_scan = False
-		self.suggestedPolarisation = "vertical & horizontal"
+		self.suggestedPolarisation = _("vertical and horizontal")
 		# check in satellites.xml to work out band
 		tp_list = self.getKnownTransponders(pos)
 		if len(tp_list) :
 			freq = int(tp_list[0].frequency)
 			if int(tp_list[0].polarisation) > 1 : # for hints text
-				self.suggestedPolarisation = "circular right & circular left"
+				self.suggestedPolarisation = _("circular right and circular left")
 		if freq :
 			if freq < 4201000 and freq > 2999000 :
 				band = 'C'
