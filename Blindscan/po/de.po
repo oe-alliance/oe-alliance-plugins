@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-02 23:43-0800\n"
-"PO-Revision-Date: 2015-08-02 14:21+0200\n"
+"PO-Revision-Date: 2015-08-02 17:34+0200\n"
 "Last-Translator: husky <husky@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
@@ -168,6 +168,12 @@ msgstr "vertikal"
 
 msgid "vertical and horizontal"
 msgstr "Vertikal und Horizontal"
+
+msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
+msgstr "Frequenzwerte müssen zwischen 3000 MHz und 4199 MHz liegen (C-Band)."
+
+msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
+msgstr "Frequenzwerte müssen zwischen 3001 MHz und 4200 MHz liegen (C-Band)."
 
 msgid "Frequency values must be between 10700 MHz and 12749 MHz"
 msgstr "Frequenzwerte müssen zwischen 10700 MHz und 12749 MHz liegen."
