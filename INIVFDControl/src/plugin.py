@@ -286,7 +286,7 @@ def sessionstart(reason, **kwargs):
 	controliniVfd()
 
 def Plugins(**kwargs):
-		if getBoxType() in ('xpeedlx1', 'atemio6000', 'atemio6100', 'bwidowx', 'bwidowx2', 'mbhybrid'):
+		if getBoxType() in ('xpeedlx1', 'atemio6000', 'atemio6100', 'bwidowx', 'bwidowx2', 'mbhybrid', 'opticumtt'):
 			return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
 				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
 		else:
