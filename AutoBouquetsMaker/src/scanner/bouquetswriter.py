@@ -461,7 +461,7 @@ class BouquetsWriter():
 							section_key_current = 65535
 
 					if todo and number >= todo:
-						if services["video"][number]["service_type"] >= 17 and (provider_config.isMakeHDMain() or (provider_config.isMakeFTAHDMain() and services["video"][number]["free_ca"] == 0)):  # from 17 to higher are HD?
+						if services["video"][number]["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and services["video"][number]["service_type"] >= 17 and (provider_config.isMakeHDMain() or (provider_config.isMakeFTAHDMain() and services["video"][number]["free_ca"] == 0)):  # from 17 to higher are HD?
 							current_number += 1
 							current_bouquet_list.append("#SERVICE 1:0:%x:%x:%x:%x:%x:0:0:0:\n" % (
 									services["video"][number]["service_type"],
