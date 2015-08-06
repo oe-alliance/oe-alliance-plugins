@@ -2,6 +2,7 @@ from .. import log
 import os, codecs, re
 import xml.dom.minidom
 from Components.config import config
+from dvbscanner import DvbScanner
 
 class Tools():
 	def parseXML(self, filename):
@@ -370,7 +371,7 @@ class Tools():
 
 		active_sections = {}
 		for key in services[servicetype].keys():
-			if (("FTA" not in bouquettype or services[servicetype][key]["free_ca"] == 0) and ("HD" not in bouquettype or services[servicetype][key]["service_type"] >= 17)) or 'ALL' in bouquettype:
+			if (("FTA" not in bouquettype or services[servicetype][key]["free_ca"] == 0) and ("HD" not in bouquettype or (services[servicetype][key]["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and services[servicetype][key]["service_type"] >= 17))) or 'ALL' in bouquettype:
 				section_number = max((x for x in sections if int(x) <= key))
 				if section_number not in active_sections:
 					active_sections[section_number] = sections[section_number]
