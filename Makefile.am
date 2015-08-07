@@ -18,6 +18,10 @@ if DAGS4
 SUBDIRS += TransCodingSetup
 endif
 
+if DAGS7356
+SUBDIRS += TransCodingSetup
+endif
+
 if DREAMBOX
 SUBDIRS +=  DMBlindscan
 endif
