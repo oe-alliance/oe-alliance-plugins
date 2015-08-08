@@ -1,0 +1,16 @@
+<keymap>
+	<map context="SATIPCliActions">
+		<key id="KEY_ENTER" mapto="ok" flags="m" />
+		<key id="KEY_OK" mapto="ok" flags="m" />
+		<key id="KEY_EXIT" mapto="cancel" flags="m" />
+		<key id="KEY_ESC" mapto="cancel" flags="m" />
+		<key id="KEY_F1" mapto="red" flags="mr" />
+		<key id="KEY_F2" mapto="yellow" flags="mr" />
+		<key id="KEY_F3" mapto="green" flags="mr" />
+		<key id="KEY_F4" mapto="blue" flags="mr" />
+		<key id="KEY_RED" mapto="red" flags="mr" />
+		<key id="KEY_YELLOW" mapto="yellow" flags="mr" />
+		<key id="KEY_GREEN" mapto="green" flags="mr" />
+		<key id="KEY_BLUE" mapto="blue" flags="mr" />
+	</map>
+</keymap>
