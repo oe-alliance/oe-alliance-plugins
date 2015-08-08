@@ -17,32 +17,82 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Disable SAT>IP-client"
+msgid "SAT>IP Client Tuner Setup"
 msgstr ""
 
-msgid "Enable Vtuner%s"
+msgid "Cancel"
 msgstr ""
 
-msgid "Server IP-adress"
+msgid "Ok"
 msgstr ""
 
-msgid "Frontend type"
+msgid "Discover"
 msgstr ""
 
-msgid "Loglevel"
+msgid "Starting..."
 msgstr ""
 
-msgid "Workarounds for various SAT>IP server quirks"
+msgid "SAT>IP server discovering for %d seconds..."
+msgstr ""
+
+msgid "SAT>IP server is not detected."
+msgstr ""
+
+msgid "SAT>IP Server : "
+msgstr ""
+
+msgid "SAT>IP Tuner Type : "
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Manufacturer"
+msgstr ""
+
+msgid "Server capacity is fulled."
 msgstr ""
 
 msgid "SAT>IP Client Setup"
 msgstr ""
 
-msgid "Auto Config"
+msgid "Save"
 msgstr ""
 
-msgid "To enable the vtuners you need to Resart the GUI.\nRestart GUI now?"
+msgid "Setup"
 msgstr ""
 
-msgid "SAT>IP Client not installed !!"
+msgid "Disable"
 msgstr ""
+
+msgid "Select tuner and press setup key (Yellow)"
+msgstr ""
+
+msgid "You should now reboot your STB to change SAT>IP Configuration.\n\nReboot now ?\n\n"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
+msgid "VIRTUAL TUNER %s"
+msgstr ""
+
+msgid "TYPE : %s"
+msgstr ""
+
+msgid "IP : %s"
+msgstr ""
+
+msgid "TUNER TYPE : %s"
+msgstr ""
+
+msgid "SAT>IP SERVER : %s"
+msgstr ""
+
+msgid "SAT>IP Client"
+msgstr ""
+
+msgid "SAT>IP Client attached to vtuner."
+msgstr ""
+
+
