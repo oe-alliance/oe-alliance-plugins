@@ -95,3 +95,6 @@ msgstr "SAT>IP Client"
 
 msgid "SAT>IP Client attached to vtuner."
 msgstr "SAT>IP Client Anbindung über Vtuner"
+
+msgid "Select"
+msgstr "Auswahl"

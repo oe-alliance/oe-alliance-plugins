@@ -95,4 +95,5 @@ msgstr ""
 msgid "SAT>IP Client attached to vtuner."
 msgstr ""
 
-
+msgid "Select"
+msgstr ""
