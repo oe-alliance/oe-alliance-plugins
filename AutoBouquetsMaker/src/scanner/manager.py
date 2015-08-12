@@ -167,7 +167,7 @@ class Manager():
 					channelsontop = providers[provider_key]["hdchannelsontop"],
 
 				# swap services between providers
-				services, providers[provider_key]["sections"] = Tools().customMix(self.services, provider_key, providers[provider_key]["sections"])
+				services, providers[provider_key]["sections"] = Tools().customMix(self.services, provider_key, providers[provider_key]["sections"], self.providerConfigs[provider_key])
 
 				writer.buildBouquets(self.path,
 						self.providerConfigs[provider_key],
