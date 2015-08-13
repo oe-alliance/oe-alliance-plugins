@@ -22,9 +22,6 @@ config.plugins.VFD_odin = ConfigSubsection()
 config.plugins.VFD_odin.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
 config.plugins.VFD_odin.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
 
-#Workaround for driver issue
-open("/proc/stb/lcd/oled_brightness", "w").write("8")
-
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
 
