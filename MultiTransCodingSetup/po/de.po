@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-16 14:59+0200\n"
-"PO-Revision-Date: 2015-08-16 15:01+0100\n"
+"PO-Revision-Date: 2015-08-16 17:43+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: ViX <LL@li.org>\n"
 "Language: nl_DE\n"
@@ -20,11 +20,11 @@ msgstr ""
 
 #: plugin.py:19
 msgid "enable"
-msgstr ""
+msgstr "aktivieren"
 
 #: plugin.py:19
 msgid "disable"
-msgstr ""
+msgstr "deaktivieren"
 
 #: plugin.py:30
 msgid "480p"
@@ -89,10 +89,12 @@ msgid ""
 "Transcoding from HDMI-IN e.x:\n"
 "\n"
 msgstr ""
+"Transcodierung von HDMI-IN e.x:\n"
+"\n"
 
 #: plugin.py:101
 msgid "This model does not support transcoding."
-msgstr ""
+msgstr "Dieses Modell unterstützt kein Transcoding."
 
 #: plugin.py:106 plugin.py:109
 msgid "Bitrate in bits"
@@ -100,15 +102,15 @@ msgstr ""
 
 #: plugin.py:107 plugin.py:110
 msgid "Framerate"
-msgstr ""
+msgstr "Wiederholrate"
 
 #: plugin.py:111
 msgid "Resolution"
-msgstr ""
+msgstr "Auflösung"
 
 #: plugin.py:112
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "Seitenverhältnis"
 
 #: plugin.py:113
 msgid "Interlaced"
@@ -116,11 +118,11 @@ msgstr ""
 
 #: plugin.py:132
 msgid "Min"
-msgstr ""
+msgstr "Min."
 
 #: plugin.py:132
 msgid "Max"
-msgstr ""
+msgstr "Max."
 
 #: plugin.py:158
 msgid "Really close without saving settings?"
@@ -132,4 +134,4 @@ msgstr "Multi-Transcoding Einstellungen"
 
 #: plugin.py:168
 msgid "Multi device transcoding setup"
-msgstr "Multi-Geräte-Transcoding Einstellungen"
+msgstr "Einstellungen Multi-Geräte-Transcoding"
