@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-16 14:59+0200\n"
-"PO-Revision-Date: 2015-08-16 17:43+0100\n"
+"PO-Revision-Date: 2015-08-16 18:29+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: ViX <LL@li.org>\n"
 "Language: nl_DE\n"
@@ -83,6 +83,8 @@ msgid ""
 "To use transcoding You can build URL for VLC by Yourself\n"
 "\n"
 msgstr ""
+"Für Transcoding, können Sie eine eigene URL für VLC erstellen\n"
+"\n"
 
 #: plugin.py:83
 msgid ""
@@ -126,7 +128,7 @@ msgstr "Max."
 
 #: plugin.py:158
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Wirklich beenden ohne die Einstellungen zu sichern?"
 
 #: plugin.py:167
 msgid "Multi-Transcoding Setup"
