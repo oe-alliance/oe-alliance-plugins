@@ -3,8 +3,8 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import os, gettext
 
-PluginLanguageDomain = "TransCodingSetup"
-PluginLanguagePath = "SystemPlugins/TransCodingSetup/locale"
+PluginLanguageDomain = "MultiTransCodingSetup"
+PluginLanguagePath = "SystemPlugins/MultiTransCodingSetup/locale"
 
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
