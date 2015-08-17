@@ -221,7 +221,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 			
 			# FTA only
 			FTA_only = config.autobouquetsmaker.FTA_only.value.split("|")
-			FTA = config.autobouquetsmaker.level.value == "expert" and provider in FTA_only
+			FTA = self.providers[provider]["protocol"] != "fastscan" and config.autobouquetsmaker.level.value == "expert" and provider in FTA_only
 			self.providers_FTA_only[provider] = ConfigYesNo(default = FTA)
 			
 		self.createSetup()
@@ -260,7 +260,8 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 
 				if config.autobouquetsmaker.level.value == "expert":
 					# fta only
-					self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("FTA only"), self.providers_FTA_only[provider], _("This affects all bouquets. Select 'no' to scan in all services. Select 'yes' to skip encrypted ones.")))
+					if self.providers[provider]["protocol"] != "fastscan":
+						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("FTA only"), self.providers_FTA_only[provider], _("This affects all bouquets. Select 'no' to scan in all services. Select 'yes' to skip encrypted ones.")))
 					
 					if self.providers_makemain[provider]:
 						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate main bouquet"), self.providers_makemain[provider], _('This option has several choices "Yes", (create a bouquet with all the channels in it), "Yes HD only", (will group all HD channels into this bouquet), "Custom", (allows you to select your own bouquet), "No", (do not use a main bouquet)')))
