@@ -710,6 +710,9 @@ class DvbScanner():
 
 			service["orbital_position"] = service["namespace"] / (16**4)
 
+			if service["service_type"] < 17 and (service["service_name"][-2:] == 'HD' or ' HD ' in service["service_name"]):
+				service["service_type"] = 25
+
 			if key in tmp_services_dict:
 				tmp_services_dict[key]["numbers"].append(service["number"])
 			else:
