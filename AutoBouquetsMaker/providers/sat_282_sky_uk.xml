@@ -278,6 +278,10 @@ except:
 		"RTEjr": 635
 	}
 
+	channels_to_add_by_id = {
+		
+	}
+
 	rename = {
 		# ITV regions
 		1020: "ITV Border Scotland",
@@ -346,14 +350,17 @@ if service["transport_stream_id"] == 0x7e3:
 if "channel_id" in service and service["channel_id"] in rename: # sort out ITV channel names
 	service["interactive_name"] = rename[service["channel_id"]]
 	
-if "channel_id" in service and service["channel_id"] in bt_sports_id and 65535 not in service["numbers"]: # temp BT Sport Interactive fix
-	service["number"] = 65535
-	service["numbers"] = [65535]
-
+# Add channels by name
 if custom and service["service_name"] in channels_to_add and service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and channels_to_add[service["service_name"]] not in LCNs_in_use:
 	LCNs_in_use.append(channels_to_add[service["service_name"]])
 	service["number"] = channels_to_add[service["service_name"]]
 	service["numbers"] = [channels_to_add[service["service_name"]]]
+
+# Add channels by ID
+if custom and service["channel_id"] in channels_to_add_by_id and service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and channels_to_add_by_id[service["channel_id"]] not in LCNs_in_use:
+	LCNs_in_use.append(channels_to_add_by_id[service["channel_id"]])
+	service["number"] = channels_to_add_by_id[service["channel_id"]]
+	service["numbers"] = [channels_to_add_by_id[service["channel_id"]]]
 
 if service["service_type"] == 0x02 and service["number"] > 3000:
 	service["number"] -= 3000

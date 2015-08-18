@@ -116,6 +116,7 @@
 		<section number="990">BBC Interactive</section>
 		<section number="998">Information</section>
 		<section number="1000">Red button</section>
+		<section number="1020">BT Sport Interactive</section>
 	</sections>
 	<!-- channelsontop affect only HD bouquets -->
 	<hdchannelsontop>
@@ -159,6 +160,7 @@
 	<servicehacks>
 <![CDATA[
 blacklist = ['M Pack Tier 1','More TV Pack Tier 2','M+ Pack Tier 3','L Pack Tier 4','XL Pack Tier 5'] # channel names have quotes. Channel numbers do not. Example: ['ITV HD', 250, 500]
+bt_sports_xtra = ["BT Sport Extra 1","BT Sport Extra 2","BT Sport Extra 3","BT Sport Extra 4","BT Sport Extra 5","BT Sport Extra 6"]
 
 for number in service["numbers"]:
 	if number in blacklist:
@@ -170,6 +172,9 @@ for number in service["numbers"]:
 	elif number == 43:
 		service["numbers"] = [number + 957]
 		break
+	elif number < 100 and service["service_name"] in bt_sports_xtra:
+		service["numbers"] = [1020 + bt_sports_xtra.index(service["service_name"])]
+		break
 		
 if service["service_name"] in blacklist:
 	skip = True
@@ -178,7 +183,8 @@ if service["service_name"].startswith("DL_") or service["service_name"].startswi
 	skip = True
 	
 if service["service_name"].startswith("SptsETV"):
-	service["free_ca"] = 1		
+	service["free_ca"] = 1
+	
 ]]>
 	</servicehacks>
 </provider>
