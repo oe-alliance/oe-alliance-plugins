@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-03 17:28+0000\n"
-"PO-Revision-Date: 2015-03-06 21:41+0100\n"
-"Last-Translator: Peterj <peter@jonge.nu>\n"
+"POT-Creation-Date: 2015-08-23 01:17+0100\n"
+"PO-Revision-Date: 2015-08-23 09:36+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blacburn. Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -78,14 +78,14 @@ msgstr "Dagelijks"
 msgid "Delete bouquets"
 msgstr "Verwijder favorietenlijsten"
 
+msgid "FTA only"
+msgstr "Alleen FTA"
+
 msgid "Hide sections"
 msgstr "Verberg secties"
 
 msgid "If a service is carried on a satellite that is not configured, 'yes' means the channel will not appear in the channel list, 'no' means the channel will show in the channel list but be greyed out and not be accessible."
 msgstr "Wanneer een satelliet service niet geconfigureerd is, betekent 'ja' dat het kanaal niet in de lijst verschijnt en 'nee' dat het kanaal zichtbaar is (grijs), maar niet benaderbaar."
-
-msgid "If set to 'no' the original scan of this provider will persist and not be updated on subsequent scans."
-msgstr "Bij 'nee' zal de huidige favorietenlijst van deze provider worden behouden en niet worden bijgewerkt bij de dagelijke scan."
 
 msgid "Include 'not indexed' channels"
 msgstr "Inclusief 'niet geindexeerde' kanalen"
@@ -123,9 +123,6 @@ msgstr "Echt afsluiten zonder op te slaan?"
 msgid "Repeat how often"
 msgstr "Hoe vaak herhalen?"
 
-msgid "Rescan every time"
-msgstr "Altijd scannen"
-
 msgid "Schedule scan"
 msgstr "Plan scan"
 
@@ -152,6 +149,9 @@ msgstr "Sla services van niet geconfigureerde sats over"
 
 msgid "Start scan"
 msgstr "Start scan"
+
+msgid "This affects all bouquets. Select 'no' to scan in all services. Select 'yes' to skip encrypted ones."
+msgstr "Dit betreft alle favorietenlijsten. Kies 'Nee' om alle kanalen te scannen; kies 'Ja' om gecodeerde kanalen over te slaan."
 
 msgid "This option allows you to choose what region of the country you live in, so it populates the correct channels for your region."
 msgstr "Hier kiest u de regio zodat de voor uw regio juiste kanalen worden getoond."
@@ -246,8 +246,14 @@ msgstr "ja (alleen FTA HD)"
 msgid "yes (only HD)"
 msgstr "ja (alleen HD)"
 
+#~ msgid "If set to 'no' the original scan of this provider will persist and not be updated on subsequent scans."
+#~ msgstr "Bij 'nee' zal de huidige favorietenlijst van deze provider worden behouden en niet worden bijgewerkt bij de dagelijke scan."
+
 #~ msgid "Keep all bouquets"
 #~ msgstr "Behoud alle favorietenlijsten"
+
+#~ msgid "Rescan every time"
+#~ msgstr "Altijd scannen"
 
 #~ msgid "This option will prepend the provider name to bouquet name "
 #~ msgstr "Deze optie plaatst de naam van de provider voor de lijst."
