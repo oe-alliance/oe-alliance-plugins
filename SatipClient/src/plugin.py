@@ -198,22 +198,27 @@ class SATIPDiscovery:
 		print "[SATIPClient] Parsing %s" % location
 
 		address = ""
-		port = None
+		port = "80"
 		request = ""
 
 		try:
 			location = location.strip().split("http://")[1]
 			AAA = location.find(':')
 			BBB = location.find('/')
+			if AAA == -1:
+				address = location[AAA+1 : BBB]
+				port = "80"
+				request = location[BBB:]
+			else:
+				address = location[:AAA]
+				port = location[AAA+1 : BBB]
+				request = location[BBB:]
 
-			address = location[:AAA]
-			port = int(location[AAA+1 : BBB])
-			request = location[BBB:]
-#			print "address : ", address
-#			print "port: " , port
-#			print "request : ", request
+			#print "address2 : ", address
+			#print "port2: " , port
+			#print "request : ", request
 
-			conn = httplib.HTTPConnection(address, port)
+			conn = httplib.HTTPConnection(address, int(port))
 			conn.request("GET", request)
 			res = conn.getresponse()
 		except Exception, ErrMsg:
