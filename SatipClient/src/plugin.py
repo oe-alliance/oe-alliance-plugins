@@ -90,7 +90,7 @@ DEVICE_ATTR = [
 'presentationURL'
 ]
 
-discoveryTimeoutMS = 2000;
+discoveryTimeoutMS = 5000;
 
 class SATIPDiscovery:
 	def __init__(self):
