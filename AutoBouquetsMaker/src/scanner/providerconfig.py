@@ -109,7 +109,7 @@ class ProviderConfig():
 		self.flags |= 0x80
 
 	def unsetMakeFTAHD(self):
-		self.flags &= 0xf7
+		self.flags &= 0x7f
 
 	def setSwapChannels(self):
 		self.flags |= 0x20
