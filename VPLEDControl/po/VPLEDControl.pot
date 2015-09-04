@@ -8,51 +8,59 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"POT-Creation-Date: 2015-09-04 18:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/plugin.py:118
+#: plugin.py:24
+msgid "Channelnumber in Standby off"
+msgstr ""
+
+#: plugin.py:24
+msgid "Channelnumber in Standby Clock"
+msgstr ""
+
+#: plugin.py:24
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+#: plugin.py:24
+msgid "Clock always"
+msgstr ""
+
+#: plugin.py:24
+msgid "Always off"
+msgstr ""
+
+#: plugin.py:185
 msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:131
-msgid "Enable led"
-msgstr ""
-
-#: ../src/plugin.py:134
-msgid "Led state RUN"
-msgstr ""
-
-#: ../src/plugin.py:136
-msgid "Led state Record"
-msgstr ""
-
-#: ../src/plugin.py:135
-msgid "Led state Standby"
-msgstr ""
-
-#: ../src/plugin.py:119
+#: plugin.py:186
 msgid "Save"
 msgstr ""
 
-#: ../src/plugin.py:140
-msgid "Show clock"
-msgstr ""
-
-#: ../src/plugin.py:142
-msgid "Time mode"
-msgstr ""
-
-#: ../src/plugin.py:120
+#: plugin.py:187
 msgid "Update Date/Time"
 msgstr ""
 
-#: ../src/plugin.py:218
-msgid "VFD_Giga"
+#: plugin.py:200
+msgid "Show on LED"
+msgstr ""
+
+#: plugin.py:202
+msgid "Time mode"
+msgstr ""
+
+#: plugin.py:214
+msgid "Show on VFD"
+msgstr ""
+
+#: plugin.py:263
+msgid "LED Display Setup"
 msgstr ""
