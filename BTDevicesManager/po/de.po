@@ -1,0 +1,83 @@
+# German translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-04 21:16+0200\n"
+"PO-Revision-Date: 2015-09-04 21:24+0100\n"
+"Last-Translator: mike99 <mike99@mail.to>\n"
+"Language-Team: openATV\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: plugin.py:107
+msgid "Bluetooth Devices Manager Setup"
+msgstr ""
+
+#: plugin.py:111
+msgid "Autostart"
+msgstr "Autostart"
+
+#: plugin.py:113 plugin.py:182
+msgid "Exit"
+msgstr "Beenden"
+
+#: plugin.py:114
+msgid "Save"
+msgstr "Speichern"
+
+#: plugin.py:163 plugin.py:331 plugin.py:352 plugin.py:354
+msgid "Bluetooth Devices Manager"
+msgstr ""
+
+#: plugin.py:167 plugin.py:218
+msgid "Please load BT driver by pressing BLUE button."
+msgstr ""
+
+#: plugin.py:171 plugin.py:214 plugin.py:272
+msgid "No connected to any device"
+msgstr ""
+
+#: plugin.py:183
+msgid "(Re)Scan"
+msgstr ""
+
+#
+#: plugin.py:184 plugin.py:273
+msgid "Connect"
+msgstr "Verbinden"
+
+#: plugin.py:188
+msgid "Config"
+msgstr ""
+
+#: plugin.py:206
+msgid "No BT devices found!"
+msgstr ""
+
+#: plugin.py:249
+msgid "Not detected devices around STB"
+msgstr ""
+
+#: plugin.py:262
+msgid "Connection with:\n"
+msgstr ""
+
+#
+#: plugin.py:264 plugin.py:267
+msgid "Disconnect"
+msgstr "Trennen"
+
+#: plugin.py:282
+msgid "Trying to pair with:"
+msgstr ""
+
+#: plugin.py:291 plugin.py:300
+msgid "Can't not pair with selected device!"
+msgstr ""

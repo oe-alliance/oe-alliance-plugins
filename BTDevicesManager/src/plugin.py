@@ -16,6 +16,7 @@
 # kernel-module-hid-wacom 
 #====================================================
 
+from . import _
 from boxbranding import getImageDistro, getBrandOEM
 
 from Plugins.Plugin import PluginDescriptor
