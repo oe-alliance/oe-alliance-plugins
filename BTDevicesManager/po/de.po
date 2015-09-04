@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-04 21:16+0200\n"
-"PO-Revision-Date: 2015-09-04 21:24+0100\n"
+"PO-Revision-Date: 2015-09-04 22:36+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: openATV\n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: plugin.py:107
 msgid "Bluetooth Devices Manager Setup"
-msgstr ""
+msgstr "Bluetooth Geräte-Manager Einstellungen"
 
 #: plugin.py:111
 msgid "Autostart"
@@ -34,19 +34,19 @@ msgstr "Speichern"
 
 #: plugin.py:163 plugin.py:331 plugin.py:352 plugin.py:354
 msgid "Bluetooth Devices Manager"
-msgstr ""
+msgstr "Bluetooth Geräte-Manager"
 
 #: plugin.py:167 plugin.py:218
 msgid "Please load BT driver by pressing BLUE button."
-msgstr ""
+msgstr "Blaue Taste drücken, um den BT-Treiber zu laden."
 
 #: plugin.py:171 plugin.py:214 plugin.py:272
 msgid "No connected to any device"
-msgstr ""
+msgstr "Mit keinem Gerät verbunden."
 
 #: plugin.py:183
 msgid "(Re)Scan"
-msgstr ""
+msgstr "Suche wiederholen"
 
 #
 #: plugin.py:184 plugin.py:273
@@ -55,19 +55,19 @@ msgstr "Verbinden"
 
 #: plugin.py:188
 msgid "Config"
-msgstr ""
+msgstr "Konfiguration"
 
 #: plugin.py:206
 msgid "No BT devices found!"
-msgstr ""
+msgstr "Keine BT-Geräte gefunden!"
 
 #: plugin.py:249
 msgid "Not detected devices around STB"
-msgstr ""
+msgstr "Keine erkannten Geräte in der Umgebung"
 
 #: plugin.py:262
 msgid "Connection with:\n"
-msgstr ""
+msgstr "Verbunden mit:\n"
 
 #
 #: plugin.py:264 plugin.py:267
@@ -76,8 +76,8 @@ msgstr "Trennen"
 
 #: plugin.py:282
 msgid "Trying to pair with:"
-msgstr ""
+msgstr "Versuche zu koppeln mit:"
 
 #: plugin.py:291 plugin.py:300
 msgid "Can't not pair with selected device!"
-msgstr ""
+msgstr "Kann nicht mit ausgewähltem Gerät koppeln!"
