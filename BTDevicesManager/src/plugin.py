@@ -349,7 +349,7 @@ def Plugins(**kwargs):
 	l = []
 	l.append(PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart))
 	if getImageDistro() in ("miracleboxhd", "miraclebox"):
-		l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), where=PluginDescriptor.WHERE_MENU, fnc=start_menu_main))
+		l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), icon="plugin.png", where=PluginDescriptor.WHERE_MENU, fnc=start_menu_main))
 	else:
-		l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), description="This is bt devices manager", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main))
+		l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), description="This is bt devices manager", icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main))
 	return l  
