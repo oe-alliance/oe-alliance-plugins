@@ -16,7 +16,7 @@ from Screens.InfoBar import InfoBar
 from time import localtime, time
 from Tools.Directories import fileExists
 
-from boxbranding import getBoxType
+from boxbranding import getImageDistro, getBoxType
 
 import Screens.Standby
 
@@ -259,9 +259,16 @@ class VFD_INI:
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
-	if menuid != "system":
-		return [ ]
-	return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
+		if getImageDistro() in ("openatv"):
+			if menuid == "display":
+				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
+			else:
+				return[ ]
+		else:
+			if menuid != "system":
+				return [ ]
+			else:
+				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
 
 def startVFD(session, **kwargs):
 	session.open(VFD_INISetup)
