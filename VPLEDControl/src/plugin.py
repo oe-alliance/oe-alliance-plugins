@@ -173,6 +173,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 			</screen>"""
 
 		Screen.__init__(self, session)
+		self.setTitle(_("LED Display Setup"))
 		self.onClose.append(self.abort)
 
 		self.onChangedEntry = [ ]

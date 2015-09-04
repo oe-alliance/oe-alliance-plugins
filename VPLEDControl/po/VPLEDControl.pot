@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-04 18:59+0200\n"
+"POT-Creation-Date: 2015-09-04 20:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,30 +37,30 @@ msgstr ""
 msgid "Always off"
 msgstr ""
 
-#: plugin.py:185
-msgid "Cancel"
+#: plugin.py:176 plugin.py:264
+msgid "LED Display Setup"
 msgstr ""
 
 #: plugin.py:186
-msgid "Save"
+msgid "Cancel"
 msgstr ""
 
 #: plugin.py:187
+msgid "Save"
+msgstr ""
+
+#: plugin.py:188
 msgid "Update Date/Time"
 msgstr ""
 
-#: plugin.py:200
+#: plugin.py:201
 msgid "Show on LED"
 msgstr ""
 
-#: plugin.py:202
+#: plugin.py:203
 msgid "Time mode"
 msgstr ""
 
-#: plugin.py:214
+#: plugin.py:215
 msgid "Show on VFD"
-msgstr ""
-
-#: plugin.py:263
-msgid "LED Display Setup"
 msgstr ""

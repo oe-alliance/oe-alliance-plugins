@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-04 18:59+0200\n"
-"PO-Revision-Date: 2015-09-04 19:14+0100\n"
+"POT-Creation-Date: 2015-09-04 20:54+0200\n"
+"PO-Revision-Date: 2015-09-04 20:55+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
@@ -34,30 +34,30 @@ msgstr "Immer Uhr"
 msgid "Always off"
 msgstr "Immer aus"
 
-#: plugin.py:185
+#: plugin.py:176 plugin.py:264
+msgid "LED Display Setup"
+msgstr "LED Display Einstellungen"
+
+#: plugin.py:186
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: plugin.py:186
+#: plugin.py:187
 msgid "Save"
 msgstr "Speichern"
 
-#: plugin.py:187
+#: plugin.py:188
 msgid "Update Date/Time"
 msgstr "Datum/Uhrzeit aktuallisieren"
 
-#: plugin.py:200
+#: plugin.py:201
 msgid "Show on LED"
 msgstr "Displayanzeige"
 
-#: plugin.py:202
+#: plugin.py:203
 msgid "Time mode"
 msgstr "Zeit Modus"
 
-#: plugin.py:214
+#: plugin.py:215
 msgid "Show on VFD"
 msgstr "Zeige im VFD"
-
-#: plugin.py:263
-msgid "LED Display Setup"
-msgstr "LED Display Einstellungen"
