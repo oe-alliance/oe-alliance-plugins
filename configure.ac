@@ -175,6 +175,7 @@ Blindscan/po/Makefile
 BTDevicesManager/Makefile
 BTDevicesManager/src/Makefile
 BTDevicesManager/meta/Makefile
+BTDevicesManager/po/Makefile
 
 DLNABrowser/Makefile
 DLNABrowser/src/Makefile
