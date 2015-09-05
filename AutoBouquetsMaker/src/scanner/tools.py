@@ -116,7 +116,10 @@ class Tools():
 		# returns keys, sorted flat alphabetic by service name
 		sort_list = []
 		for lcn in services:
-			sort_list.append((lcn, re.sub('^(?![a-z])', 'zzzzz', services[lcn]['service_name'].lower())))
+			if "interactive_name" in services[lcn]:
+				sort_list.append((lcn, re.sub('^(?![a-z])', 'zzzzz', services[lcn]['interactive_name'].lower())))
+			else:
+				sort_list.append((lcn, re.sub('^(?![a-z])', 'zzzzz', services[lcn]['service_name'].lower())))
 		sort_list = sorted(sort_list, key=lambda listItem: listItem[1])
 		return [i[0] for i in sort_list]
 
