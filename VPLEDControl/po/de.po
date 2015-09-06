@@ -61,3 +61,7 @@ msgstr "Zeit Modus"
 #: plugin.py:215
 msgid "Show on VFD"
 msgstr "Zeige im VFD"
+
+#: plugin.py:226
+msgid "Show REC-Symbol in Display"
+msgstr "Zeige REC-Symbol im Display"
