@@ -117,7 +117,7 @@ class Channelnumber:
 
 				vfd_write(clock2)
 			else:
-				vfd_write("....")
+				vfd_write("    ")
 
 	def vrime(self):
 		if (config.plugins.VFD_ini.showClock.value == 'True' or config.plugins.VFD_ini.showClock.value == 'False' or config.plugins.VFD_ini.showClock.value == 'True_Switch') and not Screens.Standby.inStandby:
@@ -132,7 +132,7 @@ class Channelnumber:
 				self.__eventInfoChanged()
 					
 		if config.plugins.VFD_ini.showClock.value == 'Off':
-			vfd_write("....")
+			vfd_write("    ")
 			self.zaPrik.start(self.updatetime, 1)
 			return
 		else:
@@ -164,7 +164,7 @@ def leaveStandby():
 	print "[Stb LED] Leave Standby"
 
 	if config.plugins.VFD_ini.showClock.value == 'Off':
-		vfd_write("....")
+		vfd_write("    ")
 
 def standbyCounterChanged(configElement):
 	print "[Stb LED] In Standby"
@@ -173,13 +173,13 @@ def standbyCounterChanged(configElement):
 	inStandby.onClose.append(leaveStandby)
 
 	if config.plugins.VFD_ini.showClock.value == 'Off':
-		vfd_write("....")
+		vfd_write("    ")
 
 def initVFD():
 	print "[Stb LED] initVFD"
 
 	if config.plugins.VFD_ini.showClock.value == 'Off':
-		vfd_write("....")
+		vfd_write("    ")
 
 class VFD_INISetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
