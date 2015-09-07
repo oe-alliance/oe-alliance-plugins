@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-04 21:16+0200\n"
-"PO-Revision-Date: 2015-09-04 22:36+0100\n"
+"POT-Creation-Date: 2015-09-07 14:58+0200\n"
+"PO-Revision-Date: 2015-09-07 15:12+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: openATV\n"
 "Language: de\n"
@@ -16,68 +16,72 @@ msgstr ""
 "X-Generator: Poedit 1.7.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: plugin.py:107
+#: plugin.py:108
 msgid "Bluetooth Devices Manager Setup"
 msgstr "Bluetooth Geräte-Manager Einstellungen"
 
-#: plugin.py:111
+#: plugin.py:112
 msgid "Autostart"
 msgstr "Autostart"
 
-#: plugin.py:113 plugin.py:182
+#: plugin.py:114 plugin.py:183
 msgid "Exit"
 msgstr "Beenden"
 
-#: plugin.py:114
+#: plugin.py:115
 msgid "Save"
 msgstr "Speichern"
 
-#: plugin.py:163 plugin.py:331 plugin.py:352 plugin.py:354
+#: plugin.py:164 plugin.py:332 plugin.py:353 plugin.py:355
 msgid "Bluetooth Devices Manager"
 msgstr "Bluetooth Geräte-Manager"
 
-#: plugin.py:167 plugin.py:218
+#: plugin.py:168 plugin.py:219
 msgid "Please load BT driver by pressing BLUE button."
 msgstr "Blaue Taste drücken, um den BT-Treiber zu laden."
 
-#: plugin.py:171 plugin.py:214 plugin.py:272
+#: plugin.py:172 plugin.py:215 plugin.py:273
 msgid "No connected to any device"
 msgstr "Mit keinem Gerät verbunden."
 
-#: plugin.py:183
+#: plugin.py:184
 msgid "(Re)Scan"
 msgstr "Suche wiederholen"
 
 #
-#: plugin.py:184 plugin.py:273
+#: plugin.py:185 plugin.py:274
 msgid "Connect"
 msgstr "Verbinden"
 
-#: plugin.py:188
+#: plugin.py:189
 msgid "Config"
 msgstr "Konfiguration"
 
-#: plugin.py:206
+#: plugin.py:207
 msgid "No BT devices found!"
 msgstr "Keine BT-Geräte gefunden!"
 
-#: plugin.py:249
+#: plugin.py:250
 msgid "Not detected devices around STB"
 msgstr "Keine erkannten Geräte in der Umgebung"
 
-#: plugin.py:262
+#: plugin.py:263
 msgid "Connection with:\n"
 msgstr "Verbunden mit:\n"
 
 #
-#: plugin.py:264 plugin.py:267
+#: plugin.py:265 plugin.py:268
 msgid "Disconnect"
 msgstr "Trennen"
 
-#: plugin.py:282
+#: plugin.py:283
 msgid "Trying to pair with:"
 msgstr "Versuche zu koppeln mit:"
 
-#: plugin.py:291 plugin.py:300
+#: plugin.py:292 plugin.py:301
 msgid "Can't not pair with selected device!"
 msgstr "Kann nicht mit ausgewähltem Gerät koppeln!"
+
+#: plugin.py:355
+msgid "This is bt devices manager"
+msgstr "Bluetooth-Konfiguration"
