@@ -104,12 +104,9 @@ class Manager():
 		writer.writeLamedb(self.path, self.transponders)
 		#providers = Providers().read()
 		bouquetsToHide = []
-		
+
 		for provider_key in self.bouquetsOrder:
 			if provider_key in providers:
-				# CustomLCN
-				self.services[provider_key] = Tools().customLCN(self.services[provider_key], provider_key, self.providerConfigs[provider_key].getArea())
-				
 				# FTA_only
 				if config.autobouquetsmaker.level.value == "expert" and provider_key in config.autobouquetsmaker.FTA_only.value:
 					video_services_tmp = {}
@@ -117,7 +114,10 @@ class Manager():
 						if self.services[provider_key]["video"][number]["free_ca"] == 0:
 							video_services_tmp[number] = self.services[provider_key]["video"][number]
 					self.services[provider_key]["video"] = video_services_tmp
-				
+
+				# CustomLCN
+				self.services[provider_key] = Tools().customLCN(self.services[provider_key], provider_key, self.providerConfigs[provider_key].getArea())
+
 		for provider_key in self.bouquetsOrder:
 			if provider_key in providers:
 				bouquetsToHide = []
@@ -231,7 +231,7 @@ class Manager():
 						self.services[provider_key] = scanner.updateAndReadServicesVMUK(
 								providers[provider_key]["namespace"], self.transponders,
 								providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
-								tmp["service_dict_tmp"], bouquet_key)					
+								tmp["service_dict_tmp"], bouquet_key)
 					else:
 						self.services[provider_key] = scanner.updateAndReadServicesLCN(
 								providers[provider_key]["namespace"], self.transponders,
