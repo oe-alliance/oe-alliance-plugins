@@ -106,6 +106,10 @@ if VG5000
 SUBDIRS += F3LEDControl
 endif
 
+if JJ7362
+SUBDIRS += F3LEDControl
+endif
+
 if S7300S
 SUBDIRS += F3LEDControl
 endif
