@@ -18,9 +18,15 @@
 	<sections>
 		<section number="1">Tivusat</section>
 	</sections>
+	<!-- channelsontop only affects HD bouquets -->
+	<hdchannelsontop>
+		<channel number="101" /><!-- Rai 1 HD -->
+		<channel number="102" /><!-- Rai 2 HD -->	
+		<channel number="103" /><!-- Rai 3 HD -->
+	</hdchannelsontop>
 	<servicehacks>
 <![CDATA[
-ftachannels = [1,2,3,4,6,20,21,22,23,24,26,28,32,33,35,36,37,41,42,43,44,55,56,60,61,62,63,64,65,66,67,68,69,71,73,74,75,76,77,120,122,145,701]
+ftachannels = [1,2,3,20,21,22,23,24,26,28,31,32,33,35,36,37,41,42,43,44,55,57,60,61,62,63,64,65,66,67,68,69,71,73,74,75,76,77,120,122,145,188,701]
 if service["number"] in ftachannels:
 	service["free_ca"] = 0
 ]]>
