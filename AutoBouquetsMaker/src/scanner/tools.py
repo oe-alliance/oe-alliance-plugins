@@ -56,9 +56,10 @@ class Tools():
 			customfile = custom_dir + "/" + ("sd" if current_bouquet_key.startswith('sd') else "hd") + "_" + section_identifier + "_Custom" + ("radio" if type == "radio" else "") + "LCN.xml"
 			dom = self.parseXML(customfile)
 			if dom is None:
-				print>>log, "[Tools] No custom " + type + " LCN file."
+				print>>log, "[Tools] No custom " + type + " LCN file for " + section_identifier + "."
 			elif dom.documentElement.nodeType == dom.documentElement.ELEMENT_NODE and dom.documentElement.tagName == "custom":
 				customlcndict = {}
+				sort_order = [] # to process this file top down
 				for node in dom.documentElement.childNodes:
 					if node.nodeType != node.ELEMENT_NODE:
 						continue
@@ -79,12 +80,19 @@ class Tools():
 										channelnumber = int(node2.attributes.item(i).value)
 								if channelnumber and lcn:
 									customlcndict[channelnumber] = lcn
-
+									if channelnumber in services[type]:
+										sort_order.append(channelnumber)
+				
 				temp_services = {}
 				extra_services = {}
+				
+				# add channels not in the CustomLCN file to the sort list.
+				for number in sorted(services[type].keys()):
+					if number not in sort_order:
+						sort_order.append(number)
 
 				# add services from CustomLCN file
-				for number in services[type]:
+				for number in sort_order:
 					if number in customlcndict and customlcndict[number] not in temp_services:
 						temp_services[customlcndict[number]] = services[type][number]
 					else:
@@ -113,7 +121,7 @@ class Tools():
 		
 	def sortServicesAlpha(self, services):
 		# services is a dict with LCNs as keys
-		# returns keys, sorted flat alphabetic by service name
+		# returns keys, sorted flat alphabetic by service name (or interactive name if it is set).
 		sort_list = []
 		for lcn in services:
 			if "interactive_name" in services[lcn]:
