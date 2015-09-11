@@ -363,7 +363,7 @@ class BouquetsWriter():
 		if provider_config.isMakeNormalMain():
 			bouquet_current = open(path + "/%s%s.main.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			current_bouquet_list = []
-			current_bouquet_list.append("#NAME %sAll channels\n" % section_prefix)
+			current_bouquet_list.append("#NAME %s%s\n" % (section_prefix, _('All channels')))
 			
 			# Clear unused sections
 			sections_c = sections.copy()
@@ -419,10 +419,10 @@ class BouquetsWriter():
 			current_bouquet_list = []
 			if provider_config.isMakeHDMain():
 				hd_or_ftahd = "HD"
-				current_bouquet_list.append("#NAME %sHD Channels\n" % section_prefix)
+				current_bouquet_list.append("#NAME %s%s\n" % (section_prefix, _('HD Channels')))
 			elif provider_config.isMakeFTAHDMain():
 				hd_or_ftahd = "FTAHD"
-				current_bouquet_list.append("#NAME %sFTA HD Channels\n" % section_prefix)
+				current_bouquet_list.append("#NAME %s%s\n" % (section_prefix, _('FTA HD Channels')))
 
 			higher_number = sorted(sections.keys())[0]
 			
@@ -581,7 +581,7 @@ class BouquetsWriter():
 		if provider_config.isMakeHD():
 			bouquet_current = open(path + "/%s%s.hd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			current_bouquet_list = []
-			current_bouquet_list.append("#NAME %sHD Channels\n" % section_prefix)
+			current_bouquet_list.append("#NAME %s%s\n" % (section_prefix, _('HD Channels')))
 
 			# Clear unused sections
 			sections_c = sections.copy()
@@ -642,7 +642,7 @@ class BouquetsWriter():
 		if provider_config.isMakeFTAHD():
 			bouquet_current = open(path + "/%s%s.ftahd.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			current_bouquet_list = []
-			current_bouquet_list.append("#NAME %sFTA HD Channels\n" % section_prefix)
+			current_bouquet_list.append("#NAME %s%s\n" % (section_prefix, _('FTA HD Channels')))
 			
 			# Clear unused sections
 			sections_c = sections.copy()
@@ -703,7 +703,7 @@ class BouquetsWriter():
 		if provider_config.isMakeFTA():
 			bouquet_current = open(path + "/%s%s.fta.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			current_bouquet_list = []
-			current_bouquet_list.append("#NAME %sFTA Channels\n" % section_prefix)
+			current_bouquet_list.append("#NAME %s%s\n" % (section_prefix, _('FTA Channels')))
 			
 			# Clear unused sections
 			sections_c = sections.copy()
@@ -754,7 +754,7 @@ class BouquetsWriter():
 		# now the radio bouquet
 		bouquet_current = open(path + "/%s%s.main.radio" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 		current_bouquet_list = []
-		current_bouquet_list.append("#NAME %sRadio channels\n" % section_prefix)
+		current_bouquet_list.append("#NAME %s%s\n" % (section_prefix, _('Radio Channels')))
 		current_bouquet_list.append("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
 		current_bouquet_list.append("#DESCRIPTION %sRadio channels\n" % section_prefix)
 
