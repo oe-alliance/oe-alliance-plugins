@@ -5,7 +5,7 @@ LANGMO = $(LANGS:=.mo)
 LANGPO = $(LANGS:=.po)
 
 # the TRANSLATORS: allows putting translation comments before the to-be-translated line.
-$(PLUGIN)-py.pot: $(srcdir)/../src/*.py $(srcdir)/../src/*/*.py
+$(PLUGIN)-py.pot: $(srcdir)/../src/*.py
 	$(XGETTEXT) --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d $(PLUGIN) -s -o $@ $^
 
 $(PLUGIN).pot: $(PLUGIN)-py.pot
