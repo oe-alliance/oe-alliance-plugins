@@ -239,6 +239,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 		self.list = []
 		providers_enabled = []
 		providers_already_loaded = []
+		indent = '- '
 		for provider in self.providerKeysInNameOrder(self.providers):
 			if provider in self.dependents_list:
 				continue
@@ -256,36 +257,36 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(self.providers[provider]["name"], self.providers_configs[provider], _("This option enables the current selected provider.")))
 			if self.providers_configs[provider].value:
 				if self.providers[provider]["protocol"] == "sky" or self.providers[provider]["protocol"] == "freesat" or self.providers[provider]["streamtype"] in ("dvbc", "dvbt"):
-					self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("area"), self.providers_area[provider], _("This option allows you to choose what region of the country you live in, so it populates the correct channels for your region.")))
+					self.list.append(getConfigListEntry(indent + self.providers[provider]["name"] + ": " + _("area"), self.providers_area[provider], _("This option allows you to choose what region of the country you live in, so it populates the correct channels for your region.")))
 
 				if config.autobouquetsmaker.level.value == "expert":
 					# fta only
 					if self.providers[provider]["protocol"] != "fastscan":
-						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("FTA only"), self.providers_FTA_only[provider], _("This affects all bouquets. Select 'no' to scan in all services. Select 'yes' to skip encrypted ones.")))
+						self.list.append(getConfigListEntry(indent + self.providers[provider]["name"] + ": " + _("FTA only"), self.providers_FTA_only[provider], _("This affects all bouquets. Select 'no' to scan in all services. Select 'yes' to skip encrypted ones.")))
 					
 					if self.providers_makemain[provider]:
-						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate main bouquet"), self.providers_makemain[provider], _('This option has several choices "Yes", (create a bouquet with all the channels in it), "Yes HD only", (will group all HD channels into this bouquet), "Custom", (allows you to select your own bouquet), "No", (do not use a main bouquet)')))
+						self.list.append(getConfigListEntry(indent + self.providers[provider]["name"] + ": " + _("generate main bouquet"), self.providers_makemain[provider], _('This option has several choices "Yes", (create a bouquet with all the channels in it), "Yes HD only", (will group all HD channels into this bouquet), "Custom", (allows you to select your own bouquet), "No", (do not use a main bouquet)')))
 
 					if self.providers_custommain[provider] and self.providers_makemain[provider] and self.providers_makemain[provider].value == "custom":
-						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("custom bouquet for main"), self.providers_custommain[provider], _("Select your own bouquet from the list, please note that the only the first 100 channels for this bouquet will be used.")))
+						self.list.append(getConfigListEntry(indent + self.providers[provider]["name"] + ": " + _("custom bouquet for main"), self.providers_custommain[provider], _("Select your own bouquet from the list, please note that the only the first 100 channels for this bouquet will be used.")))
 
 					if self.providers_makesections[provider]:
-						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate sections bouquets"), self.providers_makesections[provider], _("This option will create bouquets for each type of channel, ie Entertainment, Movies, Documentary.")))
+						self.list.append(getConfigListEntry(indent + self.providers[provider]["name"] + ": " + _("generate sections bouquets"), self.providers_makesections[provider], _("This option will create bouquets for each type of channel, ie Entertainment, Movies, Documentary.")))
 
 					if self.providers_makehd[provider] and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "hd"):
-						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate HD bouquet"), self.providers_makehd[provider], _("This option will create a High Definition bouquet, it will group all HD channels into this bouquet.")))
+						self.list.append(getConfigListEntry(indent + self.providers[provider]["name"] + ": " + _("generate HD bouquet"), self.providers_makehd[provider], _("This option will create a High Definition bouquet, it will group all HD channels into this bouquet.")))
 
 					if self.providers_makefta[provider] and not self.providers_FTA_only[provider].value:
-						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate FTA bouquet"), self.providers_makefta[provider], _("This option will create a FreeToAir bouquet, it will group all none encrypted channels into this bouquet.")))
+						self.list.append(getConfigListEntry(indent + self.providers[provider]["name"] + ": " + _("generate FTA bouquet"), self.providers_makefta[provider], _("This option will create a FreeToAir bouquet, it will group all none encrypted channels into this bouquet.")))
 					
 					if self.providers_makeftahd[provider] and (self.providers_makemain[provider] is None or self.providers_makemain[provider].value != "ftahd") and not self.providers_FTA_only[provider].value:
-						self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("generate FTA HD bouquet"), self.providers_makeftahd[provider], _("This option will create a FreeToAir High Definition bouquet, it will group all HD channels into this bouquet.")))
+						self.list.append(getConfigListEntry(indent + self.providers[provider]["name"] + ": " + _("generate FTA HD bouquet"), self.providers_makeftahd[provider], _("This option will create a FreeToAir High Definition bouquet, it will group all HD channels into this bouquet.")))
 
 					if ((self.providers_makemain[provider] and self.providers_makemain[provider].value == "yes") or (self.providers_makesections[provider] and self.providers_makesections[provider].value == True)):
 						if self.providers[provider]["protocol"] == "sky":
 							for swapchannel in self.providers[provider]["swapchannels"]:
 								if len(swapchannel["filters"]) == 0:
-									self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("swap channels"), self.providers_swapchannels[provider], _("This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)")))
+									self.list.append(getConfigListEntry(indent + self.providers[provider]["name"] + ": " + _("swap channels"), self.providers_swapchannels[provider], _("This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)")))
 									break
 
 								done = False
@@ -302,7 +303,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 									break
 						else:
 							if len(self.providers[provider]["swapchannels"]) > 0:
-								self.list.append(getConfigListEntry(self.providers[provider]["name"] + ": " + _("swap channels"), self.providers_swapchannels[provider], _("This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)")))
+								self.list.append(getConfigListEntry(indent + self.providers[provider]["name"] + ": " + _("swap channels"), self.providers_swapchannels[provider], _("This option will swap SD versions of channels with HD versions. (ie 101 BBC One, 103 ITV, 104 Channel Four, 105 Channel Five)")))
 								
 				providers_enabled.append(provider)
 
