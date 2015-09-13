@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-23 01:17+0100\n"
-"PO-Revision-Date: 2015-08-23 09:36+0100\n"
+"POT-Creation-Date: 2015-09-12 20:05+0100\n"
+"PO-Revision-Date: 2015-09-13 11:50+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blacburn. Rob van der Does\n"
 "Language: nl\n"
@@ -18,6 +18,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.7.4\n"
 
+msgid "%a %e %b  %-H:%M"
+msgstr "%a %e %b  %-H:%M"
+
 msgid "30 Days"
 msgstr "30 dagen"
 
@@ -26,6 +29,9 @@ msgstr "Over"
 
 msgid "Add provider prefix to bouquets"
 msgstr "Voeg providerprefix toe aan favorietenlijsten"
+
+msgid "All channels"
+msgstr "All kanalen"
 
 msgid "Allows you to set a schedule to perform a scan "
 msgstr "U kunt een schema instellen voor het uitvoeren van een scan"
@@ -57,11 +63,32 @@ msgstr "Autobouquetsmaker scanner"
 msgid "Bottom"
 msgstr "Onderin"
 
+msgid "Bouquets generation..."
+msgstr "Genereert favorietenlijsten..."
+
 msgid "Bouquets order"
 msgstr "Volgorde van favorietenlijsten"
 
 msgid "Cancel"
 msgstr "Annuleer"
+
+msgid "Cannot allocate the demuxer"
+msgstr "Kan de demuxer niet toewijzen."
+
+msgid "Cannot free NIM because a recording is in progress"
+msgstr "Geen vrije tuner vanwege opname(s)"
+
+msgid "Cannot get frontend"
+msgstr "Kan niet over de tuner beschikken"
+
+msgid "Cannot get the NIM"
+msgstr "Kan niet over de tuner beschikken"
+
+msgid "Cannot read data"
+msgstr "Kan de data niet lezen"
+
+msgid "Cannot retrieve Resource Manager instance"
+msgstr "Resourcemanager niet beschikbaar"
 
 msgid "Choose which level of setting's to display. 'Expert'-level shows all items, this also add's more options in the providers menu."
 msgstr "Kies het niveau van de te maken instellingen. 'Expert'-niveau toont alle items en er worden opties aan het providers menu toegevoegd."
@@ -78,8 +105,23 @@ msgstr "Dagelijks"
 msgid "Delete bouquets"
 msgstr "Verwijder favorietenlijsten"
 
+msgid "Done"
+msgstr "Klaar"
+
+msgid "Enough Retries, delaying till next schedule."
+msgstr "Vaak genoeg geprobeerd; stel uit tot de volgende keer."
+
+msgid "FTA Channels"
+msgstr "FTA-kanalen"
+
+msgid "FTA HD Channels"
+msgstr "FTA HD-kanalen"
+
 msgid "FTA only"
 msgstr "Alleen FTA"
+
+msgid "HD Channels"
+msgstr "HD-kanalen"
 
 msgid "Hide sections"
 msgstr "Verberg secties"
@@ -96,17 +138,32 @@ msgstr "Behoud alle niet-ABM favorietenlijsten"
 msgid "Keep bouquets"
 msgstr "Behoud favorietenlijsten"
 
+msgid "Loading bouquets..."
+msgstr "Bezig favorietenlijsten te laden..."
+
 msgid "Move down"
 msgstr "Verplaats omlaag"
 
 msgid "Move up"
 msgstr "Verplaats omhoog"
 
+msgid "No NIMs found"
+msgstr "Geen tuner gevonden"
+
+msgid "No area found"
+msgstr "Geen gebied gevonden"
+
+msgid "No valid NIM found"
+msgstr "Geen geldige tuner gevonden"
+
 msgid "OK"
 msgstr "OK"
 
 msgid "Place bouquets at"
 msgstr "Plaats favorietenlijsten"
+
+msgid "Please first setup, in configuration"
+msgstr "Eerst instellen, in configuratie"
 
 msgid "Please wait..."
 msgstr "Even wachten..."
@@ -116,6 +173,13 @@ msgstr "Providers"
 
 msgid "Providers order"
 msgstr "Providers volgorde"
+
+msgid "Radio Channels"
+msgstr "Radiokanalen"
+
+#, python-format
+msgid "Reading %s..."
+msgstr "Leest %s..."
 
 msgid "Really close without saving settings?"
 msgstr "Echt afsluiten zonder op te slaan?"
@@ -128,6 +192,13 @@ msgstr "Plan scan"
 
 msgid "Select your own bouquet from the list, please note that the only the first 100 channels for this bouquet will be used."
 msgstr "Kies uw eiegn favorietenlijst in de lijst. Let op dat alleen de eerste 100 kanalen voor deze lijst zullen worden gebruikt."
+
+#, python-format
+msgid "Services: %d video - %d radio"
+msgstr "Kanalen: %d video - %d radio"
+
+msgid "Services: 0 video - 0 radio"
+msgstr "Kanalen: 0 video - 0 radio"
 
 msgid "Set the repeat interval of the schedule."
 msgstr "Bepaal het herhalingsinterval van het schema."
@@ -149,6 +220,9 @@ msgstr "Sla services van niet geconfigureerde sats over"
 
 msgid "Start scan"
 msgstr "Start scan"
+
+msgid "Starting scanner"
+msgstr "Start scanner"
 
 msgid "This affects all bouquets. Select 'no' to scan in all services. Select 'yes' to skip encrypted ones."
 msgstr "Dit betreft alle favorietenlijsten. Kies 'Nee' om alle kanalen te scannen; kies 'Ja' om gecodeerde kanalen over te slaan."
@@ -186,8 +260,15 @@ msgstr "Deze optie wisselt SD kanalen met de HD versies (b.v.101 BBC One, 103 IT
 msgid "Time of scan to start"
 msgstr "Tijdstip waarop scan moet starten"
 
+msgid "Timeout for tuner lock"
+msgstr "Time-out voor tuner"
+
 msgid "Top"
 msgstr "Bovenin"
+
+#, python-format
+msgid "Tuning %s..."
+msgstr "Stemt af op %s..."
 
 msgid "Weekly"
 msgstr "Wekelijks"
@@ -200,6 +281,13 @@ msgstr "Bij uitschakelen zal dit in het hoofdmenu 'Behoud favorietenlijsten' ins
 
 msgid "When enable allow you start a scan from the extensions list."
 msgstr "Indien ingeschakeld kunt u een scan starten vanuit extensies."
+
+msgid ""
+"Your bouquets are about to be updated,\n"
+"Do you want to allow this?"
+msgstr ""
+"Uw favorieten worden zo geupdate.\n"
+"Wilt u dat toestaan?"
 
 msgid "area"
 msgstr "gebied"
