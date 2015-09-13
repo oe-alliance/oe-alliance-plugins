@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 12:53+0100\n"
-"PO-Revision-Date: 2015-07-26 22:35+0100\n"
+"POT-Creation-Date: 2015-09-12 20:05+0100\n"
+"PO-Revision-Date: 2015-09-13 16:15+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: none\n"
 "Language: nl\n"
@@ -20,20 +20,13 @@ msgstr ""
 "X-Poedit-Country: NETHERLANDS\n"
 
 msgid " "
-msgstr ""
+msgstr " "
 
 msgid "AP Device"
 msgstr "AP Device"
 
 msgid "AP Mode"
 msgstr "AP Mode"
-
-msgid ""
-"Are you sure you want to setup your AP?\n"
-"\n"
-msgstr ""
-"Weet u zeker dat u uw AP wilt instellen?\n"
-"\n"
 
 msgid "Atheros"
 msgstr "Atheros"
@@ -69,7 +62,7 @@ msgid "Gateway"
 msgstr "Gateway"
 
 msgid "Group Rekey Interval"
-msgstr ""
+msgstr "Group Rekey Interval"
 
 msgid "IP Address"
 msgstr "IP-adres"
@@ -106,9 +99,6 @@ msgstr "Ongeldig beacon\n"
 msgid "Invalid channel\n"
 msgstr "Ongeldig kanaal\n"
 
-msgid "Invalid model or Image."
-msgstr "Ongeldig model of image."
-
 msgid "Invalid wpagrouprekey\n"
 msgstr "Ongeldige wpagrouprekey\n"
 
@@ -123,6 +113,9 @@ msgstr "Methode"
 
 msgid "N/A"
 msgstr "NVT"
+
+msgid "Nameserver"
+msgstr "Nameserver"
 
 msgid "NetMask"
 msgstr "NetMask"
@@ -163,6 +156,9 @@ msgstr "Gebruik AP modus"
 msgid "Use DHCP"
 msgstr "Gebruik DHCP"
 
+msgid "Using a Wireless module as access point."
+msgstr "Gebruik een draadloze module als access point."
+
 msgid "WEP"
 msgstr "WEP"
 
@@ -187,9 +183,6 @@ msgstr "WPA2"
 msgid "Wireless Access Point"
 msgstr "Wireless Access Point"
 
-msgid "Wireless Lan Device is not detected."
-msgstr "Wireless Lan Device niet gedetecteerd."
-
 msgid "Zydas"
 msgstr "Zydas"
 
@@ -202,3 +195,15 @@ msgstr "ingeschakeld"
 msgid "not set"
 msgstr "niet ingesteld"
 
+#~ msgid ""
+#~ "Are you sure you want to setup your AP?\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Weet u zeker dat u uw AP wilt instellen?\n"
+#~ "\n"
+
+#~ msgid "Invalid model or Image."
+#~ msgstr "Ongeldig model of image."
+
+#~ msgid "Wireless Lan Device is not detected."
+#~ msgstr "Wireless Lan Device niet gedetecteerd."

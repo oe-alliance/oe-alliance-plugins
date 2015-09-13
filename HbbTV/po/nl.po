@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-08 13:54+0100\n"
-"PO-Revision-Date: 2014-05-12 12:35+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2015-09-12 20:05+0100\n"
+"PO-Revision-Date: 2015-09-13 15:52+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,9 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: The Netherlands\n"
+
+msgid " "
+msgstr " "
 
 msgid ""
 "!!(Empty)\n"
@@ -121,8 +124,8 @@ msgstr "Enter toets"
 msgid "Exit"
 msgstr "Verlaat"
 
-msgid "Exit the Opera browser."
-msgstr "Verlaat de Opera browser."
+msgid "Exit the Browser."
+msgstr "Sluit browser af."
 
 msgid "Exit the YouTube TV"
 msgstr "Verlaat the YouTube TV"
@@ -219,9 +222,6 @@ msgstr "Open startpagina"
 msgid "Open URL"
 msgstr "Open URL"
 
-msgid "Opera Browser"
-msgstr "Opera Browser"
-
 msgid ""
 "Opera Browser was not running.\n"
 "Please running browser using [File]>[Start/Stop] menu."
@@ -232,8 +232,8 @@ msgstr ""
 msgid "Opera Web Browser"
 msgstr "Opera Web Browser"
 
-msgid "Opera Web Browser Plugin v1.0"
-msgstr "Opera Web Browser Plugin v1.0"
+msgid "Opera Web Browser Plugin v2.0"
+msgstr "Opera Web Browser Plugin v2.0"
 
 msgid "PageDown Key"
 msgstr "Toets pagina naar beneden"
@@ -262,8 +262,14 @@ msgstr "Kies."
 msgid "Please enter URL here"
 msgstr "Geef URL hier in"
 
+msgid "Position Setup"
+msgstr "Positie instellingen"
+
 msgid "Preference"
 msgstr "Voorkeur"
+
+msgid "Really close without saving settings?"
+msgstr "Echt afsluiten zonder op te slaan?"
 
 msgid "Return"
 msgstr "Terug"
@@ -340,9 +346,32 @@ msgstr "YouTube TV instellingen"
 msgid "YouTube TV URL"
 msgstr "YouTube TV URL"
 
-msgid "YouTube TV is a new way to watch YouTube videos on STB"
-msgstr "YouTube TV is een nieuwe manier om YouTube video's op een STB te bekijken"
+msgid "YouTube TV is a new way to watch YouTube videos on Vu+"
+msgstr "YouTube is een nieuwe manier om YouTube video's op een VU+ te bekijen."
+
+msgid "height"
+msgstr "hoogte"
+
+msgid "left"
+msgstr "links"
 
 msgid "start opera web browser"
 msgstr "start opera web browser"
 
+msgid "top"
+msgstr "boven"
+
+msgid "width"
+msgstr "breedte"
+
+#~ msgid "Exit the Opera browser."
+#~ msgstr "Verlaat de Opera browser."
+
+#~ msgid "Opera Browser"
+#~ msgstr "Opera Browser"
+
+#~ msgid "Opera Web Browser Plugin v1.0"
+#~ msgstr "Opera Web Browser Plugin v1.0"
+
+#~ msgid "YouTube TV is a new way to watch YouTube videos on STB"
+#~ msgstr "YouTube TV is een nieuwe manier om YouTube video's op een STB te bekijken"

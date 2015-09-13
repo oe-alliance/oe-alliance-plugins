@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 09:59+0200\n"
-"PO-Revision-Date: 2013-11-19 04:05+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2015-09-12 20:05+0100\n"
+"PO-Revision-Date: 2015-09-13 16:05+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: Nederlands\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,10 @@ msgstr ""
 "X-Poedit-Language: Nederlands\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Country: NEDERLAND\n"
+
+#, python-format
+msgid " in %d seconds."
+msgstr " in %d seconde."
 
 msgid "Cancel"
 msgstr "Annuleren"
@@ -44,14 +48,18 @@ msgstr "Herstellen"
 msgid "Save"
 msgstr "Opslaan"
 
+#, python-format
+msgid "Sorry, but %s is not supported."
+msgstr "Sorry, maar %s wordt niet ondersteund."
+
 msgid "Text support"
 msgstr "Tekst ondersteuning"
 
 msgid "Then choose 'Keep' within seconds"
 msgstr "Druk op 'Behouden' binnen secondes"
 
-msgid "This Plugin only supports"
-msgstr "Deze plugin ondersteunt alleen UNO/Ultimo/Solo2/DUO2"
-
 #~ msgid "This Plugin only support for UNO/ULTIMO"
 #~ msgstr "Deze plugin is uitsluitend bestemd voor de UNO/ULTIMO"
+
+#~ msgid "This Plugin only supports"
+#~ msgstr "Deze plugin ondersteunt alleen UNO/Ultimo/Solo2/DUO2"

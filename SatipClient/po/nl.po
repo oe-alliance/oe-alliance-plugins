@@ -1,0 +1,111 @@
+# Dutch translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2015 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-12 20:05+0100\n"
+"PO-Revision-Date: 2015-09-13 16:12+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
+"Language-Team: Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid " "
+msgstr " "
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "DVB-S"
+msgstr "DVB-S"
+
+msgid "Description"
+msgstr "Beschrijving"
+
+msgid "Disable"
+msgstr "Schakel uit"
+
+msgid "Discover"
+msgstr "Zoek"
+
+#, python-format
+msgid "IP : %s"
+msgstr "IP : %s"
+
+msgid "Manufacturer"
+msgstr "Fabrikant"
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Really close without saving settings?"
+msgstr "Echt afsluiten zonder op te slaan?"
+
+msgid "SAT>IP Client"
+msgstr "SAT>IP Client"
+
+msgid "SAT>IP Client Setup"
+msgstr "SAT>IP Client-instellingen"
+
+msgid "SAT>IP Client Tuner Setup"
+msgstr "SAT>IP Client tunerinstellingen"
+
+msgid "SAT>IP Client attached to vtuner."
+msgstr "SAT>IP Client toegewezen aan vtuner."
+
+#, python-format
+msgid "SAT>IP SERVER : %s"
+msgstr "SAT>IP SERVER : %s"
+
+msgid "SAT>IP Server : "
+msgstr "SAT>IP Server : "
+
+msgid "SAT>IP Tuner Type : "
+msgstr "SAT>IP Tunertype : "
+
+#, python-format
+msgid "SAT>IP server discovering for %d seconds..."
+msgstr "SAT>IP server zoeken gedurende %d secondes..."
+
+msgid "SAT>IP server is not detected."
+msgstr "SAT>IP server is niet gedetecteerd."
+
+msgid "Save"
+msgstr "Sla op"
+
+msgid "Select"
+msgstr "Kies"
+
+msgid "Select tuner and press setup key (Yellow)"
+msgstr "Kies tuner en druk op de gele toets (instellingen)"
+
+msgid "Server capacity is fulled."
+msgstr "Servercapaciteit bezet. "
+
+msgid "Setup"
+msgstr "Instellingen"
+
+msgid "Starting..."
+msgstr "Bezig te starten..."
+
+#, python-format
+msgid "TUNER TYPE : %s"
+msgstr "TUNER TYPE : %s"
+
+#, python-format
+msgid "TYPE : %s"
+msgstr "TYPE : %s"
+
+#, python-format
+msgid "VIRTUAL TUNER %s"
+msgstr "VIRTUAL TUNER %s"
+
