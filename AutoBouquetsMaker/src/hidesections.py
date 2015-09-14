@@ -46,7 +46,7 @@ class AutoBouquetsMaker_HideSections(Screen):
 
 		self["list"] = List(self.drawList)
 		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button("Save")
+		self["key_green"] = Button(_("Save"))
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 				{
 					"red": self.keyCancel,
