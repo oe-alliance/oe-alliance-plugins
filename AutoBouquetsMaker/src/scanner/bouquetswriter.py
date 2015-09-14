@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# for localized messages
+from .. import _
+
 from .. import log
 from Components.config import config
 from tools import Tools
@@ -363,7 +367,8 @@ class BouquetsWriter():
 		if provider_config.isMakeNormalMain():
 			bouquet_current = open(path + "/%s%s.main.tv" % (self.ABM_BOUQUET_PREFIX, section_identifier), "w")
 			current_bouquet_list = []
-			current_bouquet_list.append("#NAME %s%s\n" % (section_prefix, _('All channels')))
+			n = _('All channels')
+			current_bouquet_list.append("#NAME %s%s\n" % (section_prefix, n))
 			
 			# Clear unused sections
 			sections_c = sections.copy()

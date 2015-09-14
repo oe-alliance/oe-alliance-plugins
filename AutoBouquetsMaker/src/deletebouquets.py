@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# for localized messages
+from . import _
+
 from enigma import eDVBDB
 from Screens.MessageBox import MessageBox
 from scanner.bouquetsreader import BouquetsReader
