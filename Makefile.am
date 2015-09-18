@@ -118,7 +118,7 @@ if SH1
 SUBDIRS += F3LEDControl
 endif
 
-if SH2
+if H3
 SUBDIRS += F3LEDControl
 endif
 
