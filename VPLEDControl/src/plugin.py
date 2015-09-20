@@ -235,7 +235,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 
 	def newConfig(self):
 		print self["config"].getCurrent()[0]
-		if self["config"].getCurrent()[0] == _('Show on VFD'):
+		if self["config"].getCurrent()[0] == _('Show on LED'):
 			self.createSetup()
 
 	def abort(self):
