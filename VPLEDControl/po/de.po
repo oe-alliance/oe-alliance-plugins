@@ -34,34 +34,42 @@ msgstr "Immer Uhr"
 msgid "Always off"
 msgstr "Immer aus"
 
-#: plugin.py:176 plugin.py:264
+#: plugin.py:28
+msgid "On/Off"
+msgstr "An/Aus"
+
+#: plugin.py:28
+msgid "Brightness level"
+msgstr "Helligkeitsstufe"
+
+#: plugin.py:222 plugin.py:316 plugin.py:323
 msgid "LED Display Setup"
 msgstr "LED Display Einstellungen"
 
-#: plugin.py:186
+#: plugin.py:233
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: plugin.py:187
+#: plugin.py:234
 msgid "Save"
 msgstr "Speichern"
 
-#: plugin.py:188
+#: plugin.py:235
 msgid "Update Date/Time"
 msgstr "Datum/Uhrzeit aktuallisieren"
 
-#: plugin.py:201
+#: plugin.py:248 plugin.py:265
 msgid "Show on LED"
 msgstr "Displayanzeige"
 
-#: plugin.py:203
+#: plugin.py:250
 msgid "Time mode"
 msgstr "Zeit Modus"
 
-#: plugin.py:215
-msgid "Show on VFD"
-msgstr "Zeige im VFD"
-
-#: plugin.py:226
+#: plugin.py:251
 msgid "Show REC-Symbol in Display"
 msgstr "Zeige REC-Symbol im Display"
+
+#: plugin.py:253
+msgid "Show blinking Clock on Display during recording"
+msgstr "Blinkende Uhr im Display während Aufnahmen"
