@@ -9,7 +9,7 @@ from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList
 from Components.config import config, configfile, ConfigSubsection, getConfigListEntry, ConfigSelection
 from Components.ConfigList import ConfigListScreen
-from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap
+from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap, eDBoxLCD
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ServiceList import ServiceList
 from Screens.InfoBar import InfoBar
@@ -25,6 +25,7 @@ config.plugins.VFD_ini = ConfigSubsection()
 config.plugins.VFD_ini.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
 config.plugins.VFD_ini.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
 config.plugins.VFD_ini.recDisplay = ConfigSelection(default = "False", choices = [("True",_("yes")),("False",_("no"))])
+config.plugins.VFD_ini.recClockBlink = ConfigSelection(default = "off", choices = [("off",_("Off")),("on_off",_("On/Off")),("brightness",_("Brightness level"))])
 
 MyRecLed = False
 
@@ -38,8 +39,10 @@ class Channelnumber:
 		self.sign = 0
 		self.updatetime = 10000
 		self.blink = False
+		self.blinkCounter = 0
 		self.channelnrdelay = 15
 		self.begin = int(time())
+		self.blinktime = int(time())
 		self.endkeypress = True
 		eActionMap.getInstance().bindAction('', -0x7FFFFFFF, self.keyPressed)
 		self.zaPrik = eTimer()
@@ -54,21 +57,23 @@ class Channelnumber:
 
 	def __eventInfoChanged(self):
 		self.RecordingLed()
-		if MyRecLed == False:
-			if config.plugins.VFD_ini.showClock.value == 'Off' or config.plugins.VFD_ini.showClock.value == 'True_All':
-				return
-			service = self.session.nav.getCurrentService()
-			info = service and service.info()
-			if info is None:
-				chnr = "----"
+		if config.plugins.VFD_ini.showClock.value == 'Off' or config.plugins.VFD_ini.showClock.value == 'True_All':
+			return
+		service = self.session.nav.getCurrentService()
+		info = service and service.info()
+		if info is None:
+			chnr = "----"
+		else:
+			chnr = self.getchannelnr()
+		info = None
+		service = None
+		if chnr == "----":
+			vfd_write(chnr)
+		else:
+			Channelnr = "%04d" % (int(chnr))
+			if config.plugins.VFD_ini.recDisplay.value == 'True' and MyRecLed:
+				vfd_write(" rec")
 			else:
-				chnr = self.getchannelnr()
-			info = None
-			service = None
-			if chnr == "----":
-				vfd_write(chnr)
-			else:
-				Channelnr = "%04d" % (int(chnr))
 				vfd_write(Channelnr)
 
 	def getchannelnr(self):
@@ -100,24 +105,41 @@ class Channelnumber:
 
 	def prikaz(self):
 		self.RecordingLed()
-		if MyRecLed == False:
-			if config.plugins.VFD_ini.showClock.value == 'True' or config.plugins.VFD_ini.showClock.value == 'True_All' or config.plugins.VFD_ini.showClock.value == 'True_Switch':
-				clock = str(localtime()[3])
-				clock1 = str(localtime()[4])
-				if config.plugins.VFD_ini.timeMode.value != '24h':
-					if int(clock) > 12:
-						clock = str(int(clock) - 12)
-
-				if self.sign == 0:
-					clock2 = "%02d:%02d" % (int(clock), int(clock1))
-					self.sign = 1
+		if config.plugins.VFD_ini.recClockBlink.value != "off" and MyRecLed and config.plugins.VFD_ini.recDisplay.value == 'False':
+			self.blinkCounter += 1
+			if self.blinkCounter >= 2:
+				self.blinkCounter = 0
+				if self.blink:
+					if config.plugins.VFD_ini.recClockBlink.value == "brightness":
+						eDBoxLCD.getInstance().setLCDBrightness(config.lcd.bright.value * 255 / 10)
+					self.blink = False
 				else:
-					clock2 = "%02d%02d" % (int(clock), int(clock1))
-					self.sign = 0
+					if config.plugins.VFD_ini.recClockBlink.value == "brightness":
+						eDBoxLCD.getInstance().setLCDBrightness(config.lcd.bright.value * 255 / 10 / 2 )
+					else:
+						vfd_write("    ")
+					self.blink = True
 
-				vfd_write(clock2)
+		if config.plugins.VFD_ini.showClock.value == 'True' or config.plugins.VFD_ini.showClock.value == 'True_All' or config.plugins.VFD_ini.showClock.value == 'True_Switch':
+			clock = str(localtime()[3])
+			clock1 = str(localtime()[4])
+			if config.plugins.VFD_ini.timeMode.value != '24h':
+				if int(clock) > 12:
+					clock = str(int(clock) - 12)
+
+			if self.sign == 0:
+				clock2 = "%02d:%02d" % (int(clock), int(clock1))
+				self.sign = 1
 			else:
-				vfd_write("    ")
+				clock2 = "%02d%02d" % (int(clock), int(clock1))
+				self.sign = 0
+
+			if config.plugins.VFD_ini.recDisplay.value == 'True' and MyRecLed:
+				vfd_write(" rec")
+			elif not self.blink or config.plugins.VFD_ini.recClockBlink.value == "off":
+					vfd_write(clock2)
+		else:
+			vfd_write("    ")
 
 	def vrime(self):
 		if (config.plugins.VFD_ini.showClock.value == 'True' or config.plugins.VFD_ini.showClock.value == 'False' or config.plugins.VFD_ini.showClock.value == 'True_Switch') and not Screens.Standby.inStandby:
@@ -152,11 +174,13 @@ class Channelnumber:
 			recordings = self.session.nav.getRecordings(False,Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue()))
 		except:
 			recordings = self.session.nav.getRecordings()
-		if recordings and config.plugins.VFD_ini.recDisplay.value == 'True':
+		if recordings:
 			MyRecLed = True
-			vfd_write(" rec")
 		else:
 			MyRecLed = False
+			if self.blink:
+				eDBoxLCD.getInstance().setLCDBrightness(config.lcd.bright.value * 255 / 10)
+				self.blink = False
 			
 ChannelnumberInstance = None
 
@@ -223,7 +247,9 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Show on LED"), config.plugins.VFD_ini.showClock))
 		if config.plugins.VFD_ini.showClock.value != "Off":
 			self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_ini.timeMode))
-		self.list.append(getConfigListEntry(_("Show REC-Symbol in Display"), config.plugins.VFD_ini.recDisplay))
+			self.list.append(getConfigListEntry(_("Show REC-Symbol in Display"), config.plugins.VFD_ini.recDisplay))
+			if config.plugins.VFD_ini.recDisplay.value == "False":
+				self.list.append(getConfigListEntry(_("Show blinking Clock on Display during recording"), config.plugins.VFD_ini.recClockBlink))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -236,6 +262,8 @@ class VFD_INISetup(ConfigListScreen, Screen):
 	def newConfig(self):
 		print self["config"].getCurrent()[0]
 		if self["config"].getCurrent()[0] == _('Show on LED'):
+			self.createSetup()
+		elif self["config"].getCurrent()[0] == _('Show REC-Symbol in Display'):
 			self.createSetup()
 
 	def abort(self):
