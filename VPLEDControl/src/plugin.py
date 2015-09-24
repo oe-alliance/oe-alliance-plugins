@@ -42,7 +42,6 @@ class Channelnumber:
 		self.blinkCounter = 0
 		self.channelnrdelay = 15
 		self.begin = int(time())
-		self.blinktime = int(time())
 		self.endkeypress = True
 		eActionMap.getInstance().bindAction('', -0x7FFFFFFF, self.keyPressed)
 		self.zaPrik = eTimer()
