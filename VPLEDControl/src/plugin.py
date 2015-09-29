@@ -115,8 +115,6 @@ class Channelnumber:
 				else:
 					if config.plugins.VFD_ini.recClockBlink.value == "brightness":
 						eDBoxLCD.getInstance().setLCDBrightness(config.lcd.bright.value * 255 / 10 / 2 )
-					else:
-						vfd_write("    ")
 					self.blink = True
 
 		if config.plugins.VFD_ini.showClock.value == 'True' or config.plugins.VFD_ini.showClock.value == 'True_All' or config.plugins.VFD_ini.showClock.value == 'True_Switch':
@@ -135,8 +133,10 @@ class Channelnumber:
 
 			if config.plugins.VFD_ini.recDisplay.value == 'True' and MyRecLed:
 				vfd_write(" rec")
-			elif not self.blink or config.plugins.VFD_ini.recClockBlink.value == "off":
-					vfd_write(clock2)
+			elif config.plugins.VFD_ini.recClockBlink.value == 'on_off' and self.blink:
+				vfd_write("    ")
+			else:
+				vfd_write(clock2)
 		else:
 			vfd_write("    ")
 
