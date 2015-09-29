@@ -47,7 +47,7 @@ class RCUSelect(Screen):
 		title = _("RCU Select")
 		self.setTitle(title)
 		self["pixmap"] = Pixmap()
-		self.rcuval = ["WeTek Play (Classic) RCU", "WeTek Play Enigma2 RCU"]
+		self.rcuval = ["WeTek Play (Classic) RCU", "WeTek Play Enigma2 RCU", "xtrend ET10000 RCU", "Mutant HD2400 RCU"]
 		self.SetOSDList()
 
 	def SetOSDList(self):
@@ -83,6 +83,10 @@ class RCUSelect(Screen):
 			try:
 				if self.rcuv == 'WeTek Play (Classic) RCU':
 					os.system("cp -f /etc/amremote/wetek1.conf /etc/amremote/wetek.conf &")
+				elif self.rcuv == 'xtrend ET10000 RCU':
+					os.system("cp -f /etc/amremote/wetek_et10000remote.conf /etc/amremote/wetek.conf &")
+				elif self.rcuv == 'Mutant HD2400 RCU':
+					os.system("cp -f /etc/amremote/wetek_hd2400remote.conf /etc/amremote/wetek.conf &")
 				else:
 					os.system("cp -f /etc/amremote/wetek2.conf /etc/amremote/wetek.conf &")
 				f = open("/etc/amremote/.choice", "w")
