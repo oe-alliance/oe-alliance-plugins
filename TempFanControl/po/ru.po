@@ -1,12 +1,10 @@
-# Russian translations for Enigma2.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: 2012-05-18 01:40+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2015-09-08 07:14+0200\n"
+"PO-Revision-Date: 2015-09-20 18:15+0500\n"
+"Last-Translator: ака Учкун <madamin2007@mail.ru>\n"
 "Language-Team: Russian / enigma(c) Ukraine, Kiev>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -14,31 +12,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: Русский\n"
-"X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Country: RUSSIA\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-SourceCharset: iso-8859-5\n"
 
-#
 msgid "Cancel"
 msgstr "Отменить"
 
-#
-#, python-format
-msgid "Fan %d PWM"
-msgstr ""
+msgid "Fan 1 PWM"
+msgstr "Вентилятор 1 PWM"
 
-msgid "Fan Control"
-msgstr ""
-
-msgid "Fan control"
-msgstr ""
-
-#
 msgid "OK"
 msgstr "OK"
 
-#
-#, python-format
-msgid "Standby Fan %d PWM"
-msgstr ""
+msgid "Standby fan 1 PWM"
+msgstr "Режим ожидания 1 PWM"
+
+msgid "Temperature and fan control"
+msgstr "Контроль температуры и вентилятора"
