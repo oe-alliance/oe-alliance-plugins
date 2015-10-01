@@ -30,7 +30,10 @@ config.plugins.VFD_ini.recClockBlink = ConfigSelection(default = "off", choices 
 MyRecLed = False
 
 def vfd_write(text):
-	open("/dev/dbox/lcd0", "w").write(text)
+	try:
+		open("/dev/dbox/lcd0", "w").write(text)
+	except:
+		pass
 
 class Channelnumber:
 
