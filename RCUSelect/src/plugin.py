@@ -47,7 +47,14 @@ class RCUSelect(Screen):
 		title = _("RCU Select")
 		self.setTitle(title)
 		self["pixmap"] = Pixmap()
-		self.rcuval = ["WeTek Play (Classic) RCU", "WeTek Play Enigma2 RCU", "xtrend ET10000 RCU", "Mutant HD2400 RCU"]
+		self.rcuval = ["WeTek Play (Classic) RCU",
+		"WeTek Play Enigma2 RCU",
+		"WeTek Play OpenElec RCU",
+		"Alein2/1 RCU",
+		"Alien1 old RCU",
+		"Octagon SF8 RCU",
+		"xtrend ET10000 RCU",
+		"Mutant HD2400 RCU"]
 		self.SetOSDList()
 
 	def SetOSDList(self):
@@ -57,17 +64,11 @@ class RCUSelect(Screen):
 		except IOError:
 			pass
 		for x in self.rcuval:
-			print "*****************"
-			print choice[11:17]
-			print choice
-			print "*****************"
-			#if x == choice[11:17]:
 			if x == choice:
 				self.rcuvalOSD.append(x + "  -  SET")
 			else:
 				self.rcuvalOSD.append(x)
 		self["list"].setList(self.rcuvalOSD)
-
 
 	def action(self):
 		from Screens.MessageBox import MessageBox
@@ -83,6 +84,14 @@ class RCUSelect(Screen):
 			try:
 				if self.rcuv == 'WeTek Play (Classic) RCU':
 					os.system("cp -f /etc/amremote/wetek1.conf /etc/amremote/wetek.conf &")
+				elif self.rcuv == 'WeTek Play OpenElec RCU':
+					os.system("cp -f /etc/amremote/wetek3.conf /etc/amremote/wetek.conf &")
+				elif self.rcuv == 'Alein2/1 RCU':
+					os.system("cp -f /etc/amremote/alien2.conf /etc/amremote/wetek.conf &")
+				elif self.rcuv == 'Alien1 old RCU':
+					os.system("cp -f /etc/amremote/alien.conf /etc/amremote/wetek.conf &")
+				elif self.rcuv == 'Octagon SF8 RCU':
+					os.system("cp -f /etc/amremote/octagonsf8.conf /etc/amremote/wetek.conf &")
 				elif self.rcuv == 'xtrend ET10000 RCU':
 					os.system("cp -f /etc/amremote/wetek_et10000remote.conf /etc/amremote/wetek.conf &")
 				elif self.rcuv == 'Mutant HD2400 RCU':
@@ -101,10 +110,6 @@ class RCUSelect(Screen):
 	def cancel(self):
 		self.close()
 
-
-
-
-###################################                
 def startConfig(session, **kwargs):
         session.open(RCUSelect)
 
@@ -114,7 +119,6 @@ def system(menuid):
 	else:
 		return []
         
-
 def Plugins(**kwargs):
 	boxime = HardwareInfo().get_device_name()
 	if boxime == 'wetekplay' :
