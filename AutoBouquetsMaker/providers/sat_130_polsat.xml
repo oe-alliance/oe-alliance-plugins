@@ -1,0 +1,86 @@
+<provider>
+	<name>Polsat</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>lcn</protocol>
+	<namespace>0x820000</namespace>
+	<transponder
+		orbital_position="130"
+		frequency="10719000"		
+		symbol_rate="27500000"
+		polarization="1"
+		fec_inner="0"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+	/>
+	<sections>
+		<section number="1">Polsat</section>
+	</sections>
+
+	<servicehacks>
+<![CDATA[
+try:
+	is_assigned
+except:
+	is_assigned = True
+	provider_names = []
+	TSIDs = [300,400,500,1000,1100,1300,1500,1600,7400,7800,7900,11000,11400,11600,11900,12000,12800,13200]
+	TSID_SID = {
+		200:[13801,13831],
+		700:[1,2,3], 
+		1400:[29,32], 
+		8900:[2005,2006],
+		11700:[1201,3101,3201,3301], 
+		13000:[14602,14603,14604,14605,14612,14613],
+		13100:[7324], 
+		13300:[4907], 
+		13400:[4779],
+		15400:[13515],
+		15700:[10633],
+		15800:[16932,16933,16955,16956,16958,16960]
+	}
+	ftachannels = [2005,2204,3101,3201,3301,4314,4315,4316,4321,4344,4348,4403,4410,4907,5102,5110,15814,15815,15845] # SIDs
+	
+	import re
+	sort_list_tv = []
+	sort_list_radio = []
+	for key in tmp_services_dict:
+		x = tmp_services_dict[key]
+		x['service_name'] = x['service_name'].strip()
+		if x['service_name'] != '' and (x['transport_stream_id'] in TSIDs or (x['transport_stream_id'] in TSID_SID and x['service_id'] in TSID_SID[x['transport_stream_id']])):
+			if x['service_type'] in DvbScanner.VIDEO_ALLOWED_TYPES:
+				sort_list_tv.append((x["numbers"][0], re.sub('^(?![a-z])', 'zzzzz', x['service_name'].lower())))
+			elif x['service_type'] in DvbScanner.AUDIO_ALLOWED_TYPES:
+				sort_list_radio.append((x["numbers"][0], re.sub('^(?![a-z])', 'zzzzz', x['service_name'].lower())))
+			else:
+				tmp_services_dict[key]["numbers"][0] = -1
+		else:
+			tmp_services_dict[key]["numbers"][0] = -1
+	sort_list_tv = sorted(sort_list_tv, key=lambda listItem: listItem[1])
+	sort_list_radio = sorted(sort_list_radio, key=lambda listItem: listItem[1])
+	LCN_list_tv = [x[0] for x in sort_list_tv]
+	LCN_list_radio = [x[0] for x in sort_list_radio]
+	LCN_list_tv.insert(0, None) # add fake entry at index 0, so channel numbers start from 1
+	LCN_list_radio.insert(0, None) # add fake entry at index 0, so channel numbers start from 1
+	del sort_list_tv
+	del sort_list_radio
+	
+if service['service_type'] in DvbScanner.VIDEO_ALLOWED_TYPES and service["numbers"][0] in LCN_list_tv:
+	service["numbers"][0] = LCN_list_tv.index(service["numbers"][0])
+	if service["service_id"] in ftachannels:
+		service["free_ca"] = 0
+	else:
+		service["free_ca"] = 1
+	if service["service_name"][-2:] == 'HD' or ' HD ' in service["service_name"]:
+		service["service_type"] = 25
+	else:
+		service["service_type"] = 1
+elif service['service_type'] in DvbScanner.AUDIO_ALLOWED_TYPES and service["numbers"][0] in LCN_list_radio:
+	service["numbers"][0] = LCN_list_radio.index(service["numbers"][0])
+else:
+	skip = True
+]]>
+	</servicehacks>
+</provider>
