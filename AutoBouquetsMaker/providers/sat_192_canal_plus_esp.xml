@@ -33,7 +33,6 @@ if first_loop:
 	sort_list_radio = []
 	for key in tmp_services_dict:
 		x = tmp_services_dict[key]
-		print "x",x
 		if x["service_name"] in avoid or x["service_name"] in ('', 'Unknown') or x["service_name"].lower().startswith('test'):
 			tmp_services_dict[key]["numbers"][0] = -1
 			continue
