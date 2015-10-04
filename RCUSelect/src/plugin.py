@@ -50,7 +50,7 @@ class RCUSelect(Screen):
 		self.rcuval = ["WeTek Play (Classic) RCU",
 		"WeTek Play Enigma2 RCU",
 		"WeTek Play OpenElec RCU",
-		"Alein2/1 RCU",
+		"Alien2/1 RCU",
 		"Alien1 old RCU",
 		"Octagon SF8 RCU",
 		"xtrend ET10000 RCU",
