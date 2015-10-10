@@ -160,7 +160,7 @@ class DvbScanner():
 		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
 		while True:
 			if datetime.datetime.now() > timeout:
-				print>>log, "[DvbScanner] Timed out"
+				print>>log, "[DvbScanner] Timed out reading nit"
 				break
 
 			section = dvbreader.read_nit(fd, self.nit_current_table_id, self.nit_other_table_id)
@@ -383,7 +383,7 @@ class DvbScanner():
 		timeout += datetime.timedelta(0, self.SDT_TIMEOUT)
 		while True:
 			if datetime.datetime.now() > timeout:
-				print>>log, "[DvbScanner] Timed out"
+				print>>log, "[DvbScanner] Timed out reading SDT"
 				break
 
 			section = dvbreader.read_sdt(fd, self.sdt_current_table_id, self.sdt_other_table_id)
@@ -526,7 +526,7 @@ class DvbScanner():
 		timeout += datetime.timedelta(0, self.SDT_TIMEOUT)
 		while True:
 			if datetime.datetime.now() > timeout:
-				print>>log, "[DvbScanner] Timed out"
+				print>>log, "[DvbScanner] Timed out reading SDT"
 				break
 
 			section = dvbreader.read_sdt(fd, self.sdt_current_table_id, self.sdt_other_table_id)
@@ -643,7 +643,7 @@ class DvbScanner():
 		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
 		while True:
 			if datetime.datetime.now() > timeout:
-				print>>log, "[DvbScanner] Timed out"
+				print>>log, "[DvbScanner] Timed out reading fastscan"
 				break
 
 			section = dvbreader.read_fastscan(fd, self.fastscan_table_id)
@@ -788,7 +788,7 @@ class DvbScanner():
 		extra_channel_id_dict = {}
 		while True:
 			if datetime.datetime.now() > timeout:
-				print>>log, "[DvbScanner] Timed out"
+				print>>log, "[DvbScanner] Timed out reading BAT"
 				break
 
 			section = dvbreader.read_bat(fd, self.bat_table_id)
@@ -884,7 +884,7 @@ class DvbScanner():
 		timeout += datetime.timedelta(0, self.SDT_TIMEOUT)
 		while True:
 			if datetime.datetime.now() > timeout:
-				print>>log, "[DvbScanner] Timed out"
+				print>>log, "[DvbScanner] Timed out reading SDT"
 				break
 
 			section = dvbreader.read_sdt(fd, self.sdt_current_table_id, self.sdt_other_table_id)
@@ -1008,7 +1008,7 @@ class DvbScanner():
 		extraservices = config.autobouquetsmaker.level.value == "expert" and config.autobouquetsmaker.showextraservices.value
 		while True:
 			if datetime.datetime.now() > timeout:
-				print>>log, "[DvbScanner] Timed out"
+				print>>log, "[DvbScanner] Timed out reading BAT"
 				break
 
 			section = dvbreader.read_bat(fd, self.bat_table_id)
@@ -1141,7 +1141,7 @@ class DvbScanner():
 		timeout += datetime.timedelta(0, self.SDT_TIMEOUT)
 		while True:
 			if datetime.datetime.now() > timeout:
-				print>>log, "[DvbScanner] Timed out"
+				print>>log, "[DvbScanner] Timed out reading SDT"
 				break
 
 			section = dvbreader.read_sdt(fd, self.sdt_current_table_id, self.sdt_other_table_id)
