@@ -160,7 +160,7 @@ class DvbScanner():
 		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
 		while True:
 			if datetime.datetime.now() > timeout:
-				print>>log, "[DvbScanner] Timed out reading nit"
+				print>>log, "[DvbScanner] Timed out reading NIT"
 				break
 
 			section = dvbreader.read_nit(fd, self.nit_current_table_id, self.nit_other_table_id)
@@ -234,11 +234,11 @@ class DvbScanner():
 		transponders_count = 0
 
 		for transponder in nit_content:
-			if len(transponder) == 4: # service
+			if "descriptor_tag" in transponder and transponder["descriptor_tag"] == 0x41: # service
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
 				service_dict_tmp[key] = transponder
 				continue
-			if len(transponder) == 5: # lcn
+			if "descriptor_tag" in transponder and transponder["descriptor_tag"] == 0x83: # lcn
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
 				logical_channel_number_dict_tmp[key] = transponder
 				try:
@@ -246,7 +246,7 @@ class DvbScanner():
 				except:
 					continue
 				continue
-			if len(transponder) == 6: # HD lcn
+			if "descriptor_tag" in transponder and transponder["descriptor_tag"] == 0x88: # HD lcn
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
 				hd_logical_channel_number_dict_tmp[key] = transponder
 				continue
@@ -256,8 +256,8 @@ class DvbScanner():
 					if customtransponders[key]["transport_stream_id"] == transponder["transport_stream_id"]:
 						customtransponder = customtransponders[key]
 						break
-			if len(transponder) == 8 and len(customtransponder) == 0: #no custom transponer information for DVB-T2
-				#look in lamedb just in case it is already there
+			if "descriptor_tag" in transponder and transponder["descriptor_tag"] == 0x7f and len(customtransponder) == 0: #DVB-T2
+				# if no custom transponer information is available look in lamedb just in case it is already there
 				key = "%x:%x:%x" % (0xEEEE0000, transponder["transport_stream_id"], transponder["original_network_id"])
 				if key not in transponders:
 					continue

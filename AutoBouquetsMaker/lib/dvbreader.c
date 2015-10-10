@@ -279,7 +279,7 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 				
 				int fec_inner = data[offset2 + 12] & 0xf;
 
-				PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i}",
+				PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i}",
 						"transport_stream_id", transport_stream_id,
 						"original_network_id", original_network_id,
 						"frequency", frequency,
@@ -290,7 +290,8 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 						"modulation_system", modulation_system,
 						"modulation_type", modulation_type,
 						"symbol_rate", symbol_rate,
-						"fec_inner", fec_inner);
+						"fec_inner", fec_inner,
+						"descriptor_tag", descriptor_tag);
 						
 				PyList_Append(list, item);
 				Py_DECREF(item);
@@ -319,14 +320,15 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 				
 				int fec_inner = data[offset2 + 12] & 0xf;
 
-				PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i,s:i}",
+				PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i}",
 						"transport_stream_id", transport_stream_id,
 						"original_network_id", original_network_id,
 						"frequency", frequency,
 						"fec_outer", fec_outer,
 						"modulation_type", modulation_type,
 						"symbol_rate", symbol_rate,
-						"fec_inner", fec_inner);
+						"fec_inner", fec_inner,
+						"descriptor_tag", descriptor_tag);
 						
 				PyList_Append(list, item);
 				Py_DECREF(item);
@@ -349,7 +351,7 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 				int transmission_mode = (data[offset2 + 8] >> 1 & 0x03);
 				int other_frequency_flag = (data[offset2 + 8] & 0x01);
 				
-				PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i}",
+				PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i,s:i}",
 						"transport_stream_id", transport_stream_id,
 						"original_network_id", original_network_id,
 						"frequency", frequency,
@@ -363,7 +365,8 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 						"code_rate_lp", code_rate_lp,
 						"guard_interval", guard_interval,
 						"transmission_mode", transmission_mode,
-						"other_frequency_flag", other_frequency_flag);
+						"other_frequency_flag", other_frequency_flag,
+						"descriptor_tag", descriptor_tag);
 						
 				PyList_Append(list, item);
 				Py_DECREF(item);
@@ -378,7 +381,7 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 					int plp_id = data[offset2 + 3];
 					int T2_system_id = (data[offset2 + 4] << 8) | data[offset2 + 5];
 					
-					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:s,s:i,s:i,s:s}",
+					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:s,s:i,s:i,s:i}",
 							"transport_stream_id", transport_stream_id,
 							"original_network_id", original_network_id,
 							"plp_id", plp_id,
@@ -386,7 +389,7 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 							"delivery_system_type", "DVB-T2",
 							"system", system,
 							"inversion", inversion,
-							"dummy", "dummy");
+							"descriptor_tag", descriptor_tag);
 						
 					PyList_Append(list, item);
 					Py_DECREF(item);
@@ -402,11 +405,12 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 					int service_type = data[offset3 + 2];
 
 					offset3 += 3;
-					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i}",
+					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i}",
 							"transport_stream_id", transport_stream_id,
 							"original_network_id", original_network_id,
 							"service_id", service_id,
-							"service_type", service_type);
+							"service_type", service_type,
+							"descriptor_tag", descriptor_tag);
 							
 					PyList_Append(list, item);
 					Py_DECREF(item);
@@ -422,12 +426,13 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 					int logical_channel_number = ((data[offset3 + 2] & 0x03) << 8) | data[offset3 + 3];
 
 					offset3 += 4;
-					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i}",
+					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i}",
 							"transport_stream_id", transport_stream_id,
 							"original_network_id", original_network_id,
 							"service_id", service_id,
 							"visible_service_flag", visible_service_flag,
-							"logical_channel_number", logical_channel_number);
+							"logical_channel_number", logical_channel_number,
+							"descriptor_tag", descriptor_tag);
 							
 					PyList_Append(list, item);
 					Py_DECREF(item);
@@ -443,13 +448,14 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 					int hd_logical_channel_number = ((data[offset3 + 2] & 0x03) << 8) | data[offset3 + 3];
 
 					offset3 += 4;
-					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:s}",
+					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:s,s:i}",
 							"transport_stream_id", transport_stream_id,
 							"original_network_id", original_network_id,
 							"service_id", service_id,
 							"visible_service_flag", visible_service_flag,
 							"logical_channel_number", hd_logical_channel_number,
-							"logical_channel_number_type", "HD");
+							"logical_channel_number_type", "HD",
+							"descriptor_tag", descriptor_tag);
 							
 					PyList_Append(list, item);
 					Py_DECREF(item);
