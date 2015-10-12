@@ -229,9 +229,13 @@ class Manager():
 
 					if providers[provider_key]["streamtype"] == 'dvbc':
 						bouquet = providers[provider_key]["bouquets"][bouquet_key]
-						tmp = scanner.updateTransponders(self.transponders, True, customtransponders, bouquet["netid"],bouquet["bouquettype"])
+						tmp = scanner.updateTransponders(self.transponders, True, customtransponders, bouquet["netid"], bouquet["bouquettype"])
 					else:
-						tmp = scanner.updateTransponders(self.transponders, True, customtransponders)
+						try:
+							bouquet_id = providers[provider_key]["bouquets"][bouquet_key]["bouquet"]
+						except:
+							bouquet_id = -1
+						tmp = scanner.updateTransponders(self.transponders, True, customtransponders, bouquet_id = bouquet_id)
 					if providers[provider_key]["protocol"] == 'vmuk':
 						self.services[provider_key] = scanner.updateAndReadServicesVMUK(
 								namespace, self.transponders,

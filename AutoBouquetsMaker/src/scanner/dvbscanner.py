@@ -124,7 +124,7 @@ class DvbScanner():
 
 		return namespace
 
-	def updateTransponders(self, transponders, read_other_section = False, customtransponders = {}, netid = None, bouquettype = None):
+	def updateTransponders(self, transponders, read_other_section = False, customtransponders = {}, netid = None, bouquettype = None, bouquet_id = -1):
 		print>>log, "[DvbScanner] Reading transponders..."
 
 		if self.nit_other_table_id == 0x00:
@@ -244,7 +244,12 @@ class DvbScanner():
 				try:
 					logical_channel_number_dict_tmp[key]["transponder"] = lastTransponder
 				except:
-					continue
+					pass
+				continue
+			if "descriptor_tag" in transponder and transponder["descriptor_tag"] == 0x87: # LCN V2
+				if transponder["channel_list_id"] == bouquet_id:
+					key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
+					logical_channel_number_dict_tmp[key] = transponder
 				continue
 			if "descriptor_tag" in transponder and transponder["descriptor_tag"] == 0x88: # HD lcn
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
@@ -481,7 +486,6 @@ class DvbScanner():
 			tpkey = "%x:%x:%x" % (service["namespace"], service["transport_stream_id"], service["original_network_id"])
 			if tpkey not in transponders:
 				continue
-
 
 			transponders[tpkey]["services"][service["service_id"]] = service
 			service_extra_count += 1
