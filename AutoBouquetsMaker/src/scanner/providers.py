@@ -32,7 +32,7 @@ class Providers():
 		providers_dir = self.PROVIDERS_DIR
 		cachefile = "providers.cache" # cache file
 		providers = {}
-		
+
 		# check if providers cache exists and data is fresh
 		newest = 0
 		for filename in os.listdir(providers_dir):
@@ -54,7 +54,7 @@ class Providers():
 		for filename in os.listdir(providers_dir):
 			if filename[-4:] != ".xml":
 				continue
-			
+
 			dom = self.parseXML(providers_dir + "/" + filename)
 			if dom is None:
 				continue
@@ -65,6 +65,8 @@ class Providers():
 			provider["hdchannelsontop"] = []
 			provider["sdchannelsontop"] = []
 			provider["dependent"] = ''
+			provider["bouquets"] = {}
+			provider["namespace"] = None
 			if dom.documentElement.nodeType == dom.documentElement.ELEMENT_NODE and dom.documentElement.tagName == "provider":
 				for node in dom.documentElement.childNodes:
 					if node.nodeType != node.ELEMENT_NODE:
@@ -82,10 +84,6 @@ class Providers():
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE and node.childNodes[0].data in self.VALID_PROTOCOLS:
 							provider["protocol"] = node.childNodes[0].data
-							if provider["protocol"] not in ("sky", "freesat") and provider["streamtype"] not in ("dvbc", "dvbt"):	# prepare an empty dictionary for bouquets
-								provider["bouquets"] = {}
-							else:
-								provider["namespace"] = 0
 					elif node.tagName == "namespace":
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
@@ -170,7 +168,6 @@ class Providers():
 							provider["netid"] = node.childNodes[0].data.encode("utf-8")
 
 					elif node.tagName == "dvbsconfigs":
-						provider["bouquets"] = {}
 						for node2 in node.childNodes:
 							if node2.nodeType == node2.ELEMENT_NODE and node2.tagName == "configuration":
 								configuration = {}
@@ -190,9 +187,11 @@ class Providers():
 
 								if len(configuration.keys()) == 5:
 									provider["bouquets"][configuration["key"]] = configuration
+									if provider["namespace"] is None:
+										provider["namespace"] = 0
+
 
 					elif node.tagName == "dvbcconfigs":
-						provider["bouquets"] = {}
 						transponder = {}
 						transponder["nit_pid"] = 0x10
 						transponder["nit_current_table_id"] = 0x40
@@ -236,7 +235,6 @@ class Providers():
 							provider["transponder"] = transponder
 
 					elif node.tagName == "dvbtconfigs":
-						provider["bouquets"] = {}
 						transponder = {}
 						transponder["nit_pid"] = 0x10
 						transponder["nit_current_table_id"] = 0x40
@@ -366,7 +364,7 @@ class Providers():
 			if not ("name" in provider
 					and "protocol" in provider
 					and "streamtype" in provider
-					and "namespace" in provider
+					and provider["namespace"] is not None
 					and "bouquets" in provider
 					and "sections" in provider
 					and "transponder" in provider
@@ -376,7 +374,7 @@ class Providers():
 				continue
 
 			providers[provider["key"]] = provider
-		try: 
+		try:
 			with open(providers_dir + "/" + cachefile, 'wb') as cache_output:
 				pickle.dump(providers, cache_output, pickle.HIGHEST_PROTOCOL)
 				cache_output.close()

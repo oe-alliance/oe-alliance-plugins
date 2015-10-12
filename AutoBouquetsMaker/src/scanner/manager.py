@@ -217,6 +217,11 @@ class Manager():
 				scanner.setNitCurrentTableId(providers[provider_key]["transponder"]["nit_current_table_id"])
 				scanner.setNitOtherTableId(providers[provider_key]["transponder"]["nit_other_table_id"])
 
+				try:
+					namespace = providers[provider_key]["bouquets"][bouquet_key]["namespace"]
+				except:
+					namespace = providers[provider_key]["namespace"]
+
 				if providers[provider_key]["protocol"] in ('lcn', 'lcn2', 'nolcn', 'vmuk'):
 					scanner.setSdtPid(providers[provider_key]["transponder"]["sdt_pid"])
 					scanner.setSdtCurrentTableId(providers[provider_key]["transponder"]["sdt_current_table_id"])
@@ -229,12 +234,12 @@ class Manager():
 						tmp = scanner.updateTransponders(self.transponders, True, customtransponders)
 					if providers[provider_key]["protocol"] == 'vmuk':
 						self.services[provider_key] = scanner.updateAndReadServicesVMUK(
-								providers[provider_key]["namespace"], self.transponders,
+								namespace, self.transponders,
 								providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
 								tmp["service_dict_tmp"], bouquet_key)
 					else:
 						self.services[provider_key] = scanner.updateAndReadServicesLCN(
-								providers[provider_key]["namespace"], self.transponders,
+								namespace, self.transponders,
 								providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
 								tmp["logical_channel_number_dict"], tmp["service_dict_tmp"], providers[provider_key]["protocol"], bouquet_key)
 
