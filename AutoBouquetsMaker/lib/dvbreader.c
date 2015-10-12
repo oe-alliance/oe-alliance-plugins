@@ -416,7 +416,7 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 					Py_DECREF(item);
 				}
 			}
-			else if (descriptor_tag == 0x83)	// lcn_descriptor
+			else if (descriptor_tag == 0x83)	// LCN
 			{
 				int offset3 = offset2 + 2;
 				while (offset3 < (offset2 + descriptor_length + 2))
@@ -438,7 +438,48 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 					Py_DECREF(item);
 				}
 			}
-			else if (descriptor_tag == 0x88)	// HD simulcast logical channel descriptor
+			else if (descriptor_tag == 0x87)	// LCN V2
+			{
+				int offset3 = offset2 + 2;
+				int channel_list_id = data[offset3];
+				int channel_list_name_length = data[offset3 + 1];
+
+				char channel_list_name[channel_list_name_length + 1];
+				memset(channel_list_name, '\0', channel_list_name_length + 1);
+				memcpy(channel_list_name, data + offset3 + 2, channel_list_name_length);
+				char *channel_list_name_ptr = channel_list_name;
+					
+				char country_code[3];
+				memset(country_code, '\0', 3);
+				memcpy(country_code, data + offset3 + 2 + channel_list_name_length, 3);
+				char *country_code_ptr = country_code;
+				
+				int descriptor_length_2 = offset3 + 2 + channel_list_name_length + 3;
+				int offset4 = offset3 + 2 + channel_list_name_length + 3 + 1;
+				
+				while (offset4 < (offset3 + descriptor_length_2 + 2))
+				{
+					int service_id = (data[offset4] << 8) | data[offset4 + 1];
+					int visible_service_flag = (data[offset4 + 2] >> 7) & 0x01;
+					int logical_channel_number = ((data[offset4 + 2] & 0x03) << 8) | data[offset4 + 3];
+
+					offset4 += 4;
+					PyObject *item = Py_BuildValue("{s:i,s:s,s:s,s:i,s:i,s:i,s:i,s:i,s:i}",
+							"channel_list_id", channel_list_id,
+							"channel_list_name", channel_list_name_ptr,
+							"country_code", country_code_ptr,
+							"transport_stream_id", transport_stream_id,
+							"original_network_id", original_network_id,
+							"service_id", service_id,
+							"visible_service_flag", visible_service_flag,
+							"logical_channel_number", logical_channel_number,
+							"descriptor_tag", descriptor_tag);
+							
+					PyList_Append(list, item);
+					Py_DECREF(item);
+				}
+			}
+			else if (descriptor_tag == 0x88)	// HD simulcast LCN
 			{
 				int offset3 = offset2 + 2;
 				while (offset3 < (offset2 + descriptor_length + 2))
@@ -448,13 +489,12 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 					int hd_logical_channel_number = ((data[offset3 + 2] & 0x03) << 8) | data[offset3 + 3];
 
 					offset3 += 4;
-					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:s,s:i}",
+					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i}",
 							"transport_stream_id", transport_stream_id,
 							"original_network_id", original_network_id,
 							"service_id", service_id,
 							"visible_service_flag", visible_service_flag,
 							"logical_channel_number", hd_logical_channel_number,
-							"logical_channel_number_type", "HD",
 							"descriptor_tag", descriptor_tag);
 							
 					PyList_Append(list, item);
