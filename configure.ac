@@ -308,6 +308,7 @@ TunerServer/po/Makefile
 
 RCUSelect/Makefile
 RCUSelect/src/Makefile
+RCUSelect/conf/Makefile
 RCUSelect/po/Makefile
 RCUSelect/meta/Makefile
 
