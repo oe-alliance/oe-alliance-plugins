@@ -1,21 +1,23 @@
 # Turkish translations for enigma2-oe-alliance-plugins package.
 # Copyright (C) 2012 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
-# Automatically generated, 2012.
 #
+# Automatically generated, 2012.
+# Hasan Kiran <sunder67@hotmail.com>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-03 13:52+0000\n"
-"PO-Revision-Date: 2012-11-27 12:36+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2015-10-17 15:59+0300\n"
+"Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
+"Language-Team: Turkish <Sunder67@hotmail.com>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.4\n"
 
 msgid ""
 "!!(Empty)\n"
@@ -23,16 +25,16 @@ msgid ""
 msgstr ""
 
 msgid "About"
-msgstr ""
+msgstr "Hakkında"
 
 msgid "Add"
-msgstr ""
+msgstr "Ekle"
 
 msgid "Backspace Key"
 msgstr ""
 
 msgid "Bookmark"
-msgstr ""
+msgstr "Yer İmlerine Ekle"
 
 msgid "Bookmark Title"
 msgstr ""
@@ -55,13 +57,13 @@ msgid ""
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "İptal"
 
 msgid "Category Name"
 msgstr ""
 
 msgid "Current Page"
-msgstr ""
+msgstr "Geçerli Sayfa"
 
 msgid "Current page is already exist."
 msgstr ""
@@ -70,7 +72,7 @@ msgid "Currentpage(Bookmark)"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 msgid "Direct Input"
 msgstr ""
@@ -94,19 +96,19 @@ msgid "Down Key"
 msgstr ""
 
 msgid "Edit"
-msgstr ""
+msgstr "Düzenle"
 
 msgid "Enter Key"
 msgstr ""
 
 msgid "Exit"
-msgstr ""
+msgstr "Çıkış"
 
 msgid "Exit the Opera browser."
 msgstr ""
 
 msgid "File"
-msgstr ""
+msgstr "Dosya"
 
 msgid "Global"
 msgstr ""
@@ -129,10 +131,10 @@ msgid "HbbTV Plugin"
 msgstr ""
 
 msgid "Help"
-msgstr ""
+msgstr "Yardım"
 
 msgid "Invalid "
-msgstr ""
+msgstr "Geçersiz "
 
 msgid ""
 "Invalid URL!!(Empty)\n"
@@ -155,7 +157,7 @@ msgid "It will move the mouse pointer up."
 msgstr ""
 
 msgid "Keyboard"
-msgstr ""
+msgstr "Klavye"
 
 msgid "Left Key"
 msgstr ""
@@ -164,10 +166,10 @@ msgid "Left Mouse Button"
 msgstr ""
 
 msgid "Mouse"
-msgstr ""
+msgstr "fare"
 
 msgid "Name"
-msgstr ""
+msgstr "Isim"
 
 msgid "No detected HbbTV applications."
 msgstr ""
@@ -176,7 +178,7 @@ msgid "Open Startpage"
 msgstr ""
 
 msgid "Open URL"
-msgstr ""
+msgstr "URL Aç"
 
 msgid "Opera Browser"
 msgstr ""
@@ -187,7 +189,7 @@ msgid ""
 msgstr ""
 
 msgid "Opera Web Browser"
-msgstr ""
+msgstr "Opera Web Tarayıcı"
 
 msgid "Opera Web Browser Plugin v1.0"
 msgstr ""
@@ -223,7 +225,7 @@ msgid "Right Mouse Button"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "Kaydet"
 
 msgid "Set as Startpage"
 msgstr ""
@@ -235,10 +237,10 @@ msgid "Show the Virtual keyboard window."
 msgstr ""
 
 msgid "Start"
-msgstr ""
+msgstr "Başlat"
 
 msgid "Start Page"
-msgstr ""
+msgstr "Başlangıç Sayfası"
 
 msgid "Start/Stop"
 msgstr ""
@@ -247,22 +249,22 @@ msgid "Startpage"
 msgstr ""
 
 msgid "Stop"
-msgstr ""
+msgstr "Durdur"
 
 msgid "Switch to keyboard/mouse mode."
 msgstr ""
 
 msgid "Title"
-msgstr ""
+msgstr "Başlık"
 
 msgid "Tools"
-msgstr ""
+msgstr "Araçlar"
 
 msgid "Up Key"
 msgstr ""
 
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 msgid "start opera web browser"
 msgstr ""
