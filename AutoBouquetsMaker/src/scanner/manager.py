@@ -222,7 +222,7 @@ class Manager():
 				except:
 					namespace = providers[provider_key]["namespace"]
 
-				if providers[provider_key]["protocol"] in ('lcn', 'lcn2', 'nolcn', 'vmuk'):
+				if providers[provider_key]["protocol"] in ('lcn', 'lcn2', 'lcnbat', 'nolcn', 'vmuk'):
 					scanner.setSdtPid(providers[provider_key]["transponder"]["sdt_pid"])
 					scanner.setSdtCurrentTableId(providers[provider_key]["transponder"]["sdt_current_table_id"])
 					scanner.setSdtOtherTableId(providers[provider_key]["transponder"]["sdt_other_table_id"])
@@ -242,6 +242,10 @@ class Manager():
 								providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
 								tmp["service_dict_tmp"], bouquet_key)
 					else:
+						if providers[provider_key]["protocol"] == 'lcnbat':
+							scanner.setBatPid(providers[provider_key]["transponder"]["bat_pid"])
+							scanner.setBatTableId(providers[provider_key]["transponder"]["bat_table_id"])
+							tmp["logical_channel_number_dict"] = scanner.readLCNBAT(bouquet_id, providers[provider_key]["bouquets"][bouquet_key]["region"])
 						self.services[provider_key] = scanner.updateAndReadServicesLCN(
 								namespace, self.transponders,
 								providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],

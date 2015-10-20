@@ -363,8 +363,64 @@ class DvbScanner():
 			"service_dict_tmp": service_dict_tmp
 		}
 
+	def readLCNBAT(self, bouquet_id, descriptor_tag):
+		print>>log, "[DvbScanner] Reading BAT..."
+
+		fd = dvbreader.open(self.demuxer_device, self.bat_pid, self.bat_table_id, 0xff, self.frontend)
+		if fd < 0:
+			print>>log, "[DvbScanner] Cannot open the demuxer"
+			return {}
+
+		bat_section_version = -1
+		bat_sections_read = []
+		bat_sections_count = 0
+		bat_content = []
+
+		timeout = datetime.datetime.now()
+		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
+		transport_stream_id_list = []
+
+		while True:
+			if datetime.datetime.now() > timeout:
+				print>>log, "[DvbScanner] Timed out reading BAT"
+				break
+
+			section = dvbreader.read_bat(fd, self.bat_table_id)
+			if section is None:
+				time.sleep(0.1)	# no data.. so we wait a bit
+				continue
+
+			if section["header"]["table_id"] == self.bat_table_id:
+				if section["header"]["bouquet_id"] != bouquet_id:
+					continue
+
+				if section["header"]["version_number"] != bat_section_version:
+					bat_section_version = section["header"]["version_number"]
+					bat_sections_read = []
+					bat_content = []
+					bat_sections_count = section["header"]["last_section_number"] + 1
+
+				if section["header"]["section_number"] not in bat_sections_read:
+					bat_sections_read.append(section["header"]["section_number"])
+					bat_content += section["content"]
+
+					if len(bat_sections_read) == bat_sections_count:
+						break
+
+		dvbreader.close(fd)
+
+		logical_channel_number_dict = {}
+
+		for service in bat_content:
+			if service["descriptor_tag"] != descriptor_tag:
+				continue
+			key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
+			logical_channel_number_dict[key] = service
+
+		return logical_channel_number_dict
+
 	def updateAndReadServicesLCN(self, namespace, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict, service_dict_tmp, protocol, bouquet_key):
-		print>>log, "[DvbScanner] Reading services..."
+		print>>log, "[DvbScanner] Reading services (lcn)..."
 
 		if self.sdt_other_table_id == 0x00:
 			mask = 0xff
@@ -447,8 +503,7 @@ class DvbScanner():
 
 				key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
 
-
-				if logical_channel_number_dict and (key not in logical_channel_number_dict or logical_channel_number_dict[key]["visible_service_flag"] == 0):
+				if logical_channel_number_dict and (key not in logical_channel_number_dict or "visible_service_flag" in logical_channel_number_dict[key] and logical_channel_number_dict[key]["visible_service_flag"] == 0):
 					continue
 				if service_dict_tmp and key not in service_dict_tmp and protocol != "lcn2":
 					continue
@@ -506,7 +561,7 @@ class DvbScanner():
 		}
 
 	def updateAndReadServicesVMUK(self, namespace, transponders, servicehacks, transport_stream_id_list, service_dict_tmp, bouquet_key):
-		print>>log, "[DvbScanner] Reading services..."
+		print>>log, "[DvbScanner] Reading services (vmuk)..."
 
 		if self.sdt_other_table_id == 0x00:
 			mask = 0xff
@@ -630,7 +685,7 @@ class DvbScanner():
 		}
 
 	def updateAndReadServicesFastscan(self, namespace, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict):
-		print>>log, "[DvbScanner] Reading services..."
+		print>>log, "[DvbScanner] Reading services (fastscan)..."
 
 		fd = dvbreader.open(self.demuxer_device, self.fastscan_pid, self.fastscan_table_id, 0xff, self.frontend)
 		if fd < 0:
@@ -773,7 +828,7 @@ class DvbScanner():
 		}
 
 	def updateAndReadServicesSKY(self, bouquet_id, region_id, namespace, bouquet_key, transponders, servicehacks):
-		print>>log, "[DvbScanner] Reading services..."
+		print>>log, "[DvbScanner] Reading services (sky)..."
 
 		fd = dvbreader.open(self.demuxer_device, self.bat_pid, self.bat_table_id, 0xff, self.frontend)
 		if fd < 0:
@@ -994,7 +1049,7 @@ class DvbScanner():
 		}
 
 	def updateAndReadServicesFreeSat(self, bouquet_id, region_id, namespace, bouquet_key, transponders, servicehacks):
-		print>>log, "[DvbScanner] Reading services..."
+		print>>log, "[DvbScanner] Reading services (freesat)..."
 
 		fd = dvbreader.open(self.demuxer_device, self.bat_pid, self.bat_table_id, 0xff, self.frontend)
 		if fd < 0:
