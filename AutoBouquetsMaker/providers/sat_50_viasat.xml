@@ -1,0 +1,53 @@
+<provider>
+	<name>Viasat</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>lcnbat</protocol>
+	<transponder 
+		orbital_position="50"
+		frequency="11862000" 
+		symbol_rate="27500000"
+		polarization="1"
+		fec_inner="3"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+		bat_pid="0x3a"
+	/>
+	<dvbsconfigs>
+		<!-- region="Viasat BAT descriptor" bouquets="Current from the BAT on 20151021" -->
+		<!--<configuration key="zz_zzz_25000" bouquet="0x61a8" region="0xe2" namespace="0x320000">Viasat 25000</configuration>--><!-- description="TEST Fredrik" -->
+		<configuration key="zz_zzz_25280" bouquet="0x62c0" region="0xe2" namespace="0x320000">Viasat 25280</configuration><!-- description="Viasat XSI Bouquet 2" -->
+		<configuration key="hd_swe_25281" bouquet="0x62c1" region="0xe2" namespace="0x320000">Sweden HD</configuration><!-- description="Viasat HD SWE" -->
+		<configuration key="hd_nor_25282" bouquet="0x62c2" region="0xe2" namespace="0x320000">Norway HD</configuration><!-- description="Viasat HD NOR" -->
+		<configuration key="hd_dnk_25283" bouquet="0x62c3" region="0xe2" namespace="0x320000">Denmark HD</configuration><!-- description="Viasat HD DEN" -->
+		<configuration key="hd_fin_25284" bouquet="0x62c4" region="0xe2" namespace="0x320000">Finland HD</configuration><!-- description="Viasat HD FIN" -->
+		<configuration key="hd_est_25285" bouquet="0x62c5" region="0xe2" namespace="0x320000">Estonia HD</configuration><!-- description="Viasat HD Estonia" -->
+		<configuration key="hd_lva_25286" bouquet="0x62c6" region="0xe2" namespace="0x320000">Latvia HD</configuration><!-- description="Viasat HD Latvia" -->
+		<configuration key="hd_ltu_25287" bouquet="0x62c7" region="0xe2" namespace="0x320000">Lithuania HD</configuration><!-- description="Viasat HD Lithuania" -->
+		<configuration key="hd_rus_25288" bouquet="0x62c8" region="0xe2" namespace="0x320000">Russia HD</configuration><!-- description="Viasat HD Russia" -->
+		<configuration key="sd_swe_25291" bouquet="0x62cb" region="0xe2" namespace="0x320000">Sweden SD</configuration><!-- description="Unknown" -->
+		<configuration key="sd_nor_25292" bouquet="0x62cc" region="0xe2" namespace="0x320000">Norway SD</configuration><!-- description="Unknown" -->
+		<configuration key="sd_dnk_25293" bouquet="0x62cd" region="0xe2" namespace="0x320000">Denmark SD</configuration><!-- description="Unknown" -->
+		<configuration key="zz_zzz_25294" bouquet="0x62ce" region="0xe2" namespace="0x320000">Viasat 25294</configuration><!-- description="Unknown" -->
+		<configuration key="zz_zzz_25301" bouquet="0x62d5" region="0xe2" namespace="0x320000">Viasat 25301</configuration><!-- description="Viasat DCL SWE" -->
+		<configuration key="zz_zzz_25302" bouquet="0x62d6" region="0xe2" namespace="0x320000">Viasat 25302</configuration><!-- description="Viasat DCL NOR" -->
+		<configuration key="zz_zzz_25303" bouquet="0x62d7" region="0xe2" namespace="0x320000">Viasat 25303</configuration><!-- description="Viasat HD DEN" -->
+		<configuration key="zz_zzz_25330" bouquet="0x62f2" region="0xe2" namespace="0x320000">Viasat 25330</configuration><!-- description="Viasat OTT DNK" -->
+		<configuration key="zz_zzz_25331" bouquet="0x62f3" region="0xe2" namespace="0x320000">Viasat 25331</configuration><!-- description="Viasat OTT SWE" -->
+		<configuration key="zz_zzz_25332" bouquet="0x62f4" region="0xe2" namespace="0x320000">Viasat 25332</configuration><!-- description="Viasat OTT NOR" -->
+		<configuration key="zz_zzz_25333" bouquet="0x62f5" region="0xe2" namespace="0x320000">Viasat 25333</configuration><!-- description="Viasat OTT DNK" -->
+		<configuration key="zz_zzz_25334" bouquet="0x62f6" region="0xe2" namespace="0x320000">Viasat 25334</configuration><!-- description="Viasat OTT FIN" -->
+		<configuration key="zz_zzz_25335" bouquet="0x62f7" region="0xe2" namespace="0x320000">Viasat 25335</configuration><!-- description="Viasat OTT EST" -->
+		<configuration key="zz_zzz_25336" bouquet="0x62f8" region="0xe2" namespace="0x320000">Viasat 25336</configuration><!-- description="Viasat OTT LAT" -->
+		<configuration key="zz_zzz_25337" bouquet="0x62f9" region="0xe2" namespace="0x320000">Viasat 25337</configuration><!-- description="Viasat OTT LIT" -->
+	</dvbsconfigs>
+	<sections>
+		<section number="1">Viasat</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>
