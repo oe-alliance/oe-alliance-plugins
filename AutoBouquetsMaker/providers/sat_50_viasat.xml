@@ -34,14 +34,14 @@
 		<configuration key="zz_zzz_25301" bouquet="0x62d5" region="0xe2" namespace="0x320000">Viasat 25301</configuration><!-- description="Viasat DCL SWE" -->
 		<configuration key="zz_zzz_25302" bouquet="0x62d6" region="0xe2" namespace="0x320000">Viasat 25302</configuration><!-- description="Viasat DCL NOR" -->
 		<configuration key="zz_zzz_25303" bouquet="0x62d7" region="0xe2" namespace="0x320000">Viasat 25303</configuration><!-- description="Viasat HD DEN" -->
-		<configuration key="zz_zzz_25330" bouquet="0x62f2" region="0xe2" namespace="0x320000">Viasat 25330</configuration><!-- description="Viasat OTT DNK" -->
-		<configuration key="zz_zzz_25331" bouquet="0x62f3" region="0xe2" namespace="0x320000">Viasat 25331</configuration><!-- description="Viasat OTT SWE" -->
-		<configuration key="zz_zzz_25332" bouquet="0x62f4" region="0xe2" namespace="0x320000">Viasat 25332</configuration><!-- description="Viasat OTT NOR" -->
-		<configuration key="zz_zzz_25333" bouquet="0x62f5" region="0xe2" namespace="0x320000">Viasat 25333</configuration><!-- description="Viasat OTT DNK" -->
-		<configuration key="zz_zzz_25334" bouquet="0x62f6" region="0xe2" namespace="0x320000">Viasat 25334</configuration><!-- description="Viasat OTT FIN" -->
-		<configuration key="zz_zzz_25335" bouquet="0x62f7" region="0xe2" namespace="0x320000">Viasat 25335</configuration><!-- description="Viasat OTT EST" -->
-		<configuration key="zz_zzz_25336" bouquet="0x62f8" region="0xe2" namespace="0x320000">Viasat 25336</configuration><!-- description="Viasat OTT LAT" -->
-		<configuration key="zz_zzz_25337" bouquet="0x62f9" region="0xe2" namespace="0x320000">Viasat 25337</configuration><!-- description="Viasat OTT LIT" -->
+		<!--<configuration key="zz_zzz_25330" bouquet="0x62f2" region="0xe2" namespace="0x320000">Viasat 25330</configuration><!-- description="Viasat OTT DNK" -->
+		<!--<configuration key="zz_zzz_25331" bouquet="0x62f3" region="0xe2" namespace="0x320000">Viasat 25331</configuration><!-- description="Viasat OTT SWE" -->
+		<!--<configuration key="zz_zzz_25332" bouquet="0x62f4" region="0xe2" namespace="0x320000">Viasat 25332</configuration><!-- description="Viasat OTT NOR" -->
+		<!--<configuration key="zz_zzz_25333" bouquet="0x62f5" region="0xe2" namespace="0x320000">Viasat 25333</configuration><!-- description="Viasat OTT DNK" -->
+		<!--<configuration key="zz_zzz_25334" bouquet="0x62f6" region="0xe2" namespace="0x320000">Viasat 25334</configuration><!-- description="Viasat OTT FIN" -->
+		<!--<configuration key="zz_zzz_25335" bouquet="0x62f7" region="0xe2" namespace="0x320000">Viasat 25335</configuration><!-- description="Viasat OTT EST" -->
+		<!--<configuration key="zz_zzz_25336" bouquet="0x62f8" region="0xe2" namespace="0x320000">Viasat 25336</configuration><!-- description="Viasat OTT LAT" -->
+		<!--<configuration key="zz_zzz_25337" bouquet="0x62f9" region="0xe2" namespace="0x320000">Viasat 25337</configuration><!-- description="Viasat OTT LIT" -->
 	</dvbsconfigs>
 	<sections>
 		<section number="1">Viasat</section>
