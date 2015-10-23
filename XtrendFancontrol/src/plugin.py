@@ -32,6 +32,7 @@ import gettext
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.Label import Label
+from boxbranding import getImageDistro
 
 PLUGIN_VERSION = _(" ver. 3.2")
 
@@ -475,8 +476,12 @@ def getHddTemp():
 	return None, None
 
 def selSetup(menuid, **kwargs):
-	if menuid != "system":
-		return [ ]
+	if getImageDistro() in ("openatv"):
+		if menuid != "extended":
+			return [ ]
+	else:
+		if menuid != "system":
+			return [ ]
 	return [(_("Fan Control"), main, "fansetup_config", 70)]
 
 def show_temp(session, **kwargs):
