@@ -247,6 +247,7 @@
 		<channel number="613" with="633" /><!-- CBBC HD -->
 		<channel number="614" with="624" /><!-- CBeebies HD -->
 		<channel number="795" with="853" /><!-- &TV HD -->
+		<channel number="801" with="856" /><!-- TV Record HD -->		
 	</swapchannels>
 	<servicehacks>
 <![CDATA[
