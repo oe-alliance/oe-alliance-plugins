@@ -16,7 +16,7 @@ from Screens.InfoBar import InfoBar
 from time import localtime, time
 from Tools.Directories import fileExists
 
-from boxbranding import getBoxType
+from boxbranding import getImageDistro, getBoxType
 
 import Screens.Standby
 
@@ -106,7 +106,6 @@ class Channelnumber:
 			else:
 				clock2 = "%02d%02d" % (int(clock), int(clock1))
 				self.sign = 0
-
 			vfd_write(clock2)
 		else:
 			vfd_write("....")
@@ -173,6 +172,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 			</screen>"""
 
 		Screen.__init__(self, session)
+		self.setTitle(_("LED Display Setup"))
 		self.onClose.append(self.abort)
 
 		self.onChangedEntry = [ ]
@@ -211,7 +211,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 
 	def newConfig(self):
 		print self["config"].getCurrent()[0]
-		if self["config"].getCurrent()[0] == _('Show on VFD'):
+		if self["config"].getCurrent()[0] == _('Show on LED'):
 			self.createSetup()
 
 	def abort(self):
@@ -258,9 +258,16 @@ class VFD_INI:
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
-	if menuid != "system":
-		return [ ]
-	return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
+		if getImageDistro() in ("openatv"):
+			if menuid == "display":
+				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
+			else:
+				return[ ]
+		else:
+			if menuid != "system":
+				return [ ]
+			else:
+				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
 
 def startVFD(session, **kwargs):
 	session.open(VFD_INISetup)
