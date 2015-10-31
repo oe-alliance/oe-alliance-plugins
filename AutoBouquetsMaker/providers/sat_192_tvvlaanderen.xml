@@ -2,8 +2,6 @@
 	<name>TV Vlaanderen</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>fastscan</protocol>
-	<!-- namespace now read direct from fastscan table -->
-	<namespace>c00000</namespace>
 	<transponder
 		orbital_position="192"
 		frequency="12515000"

@@ -15,8 +15,8 @@
 		pilot="2"
 	/>
 	<dvbsconfigs>
-		<configuration key="sd_sky_italy" bouquet="0x6250" region="0x00" namespace="0x820000">Sky Italia SD</configuration>
-		<configuration key="hd_sky_italy" bouquet="0x6250" region="0x04" namespace="0x820000">Sky Italia HD</configuration>
+		<configuration key="sd_sky_italy" bouquet="0x6250" region="0x00">Sky Italia SD</configuration>
+		<configuration key="hd_sky_italy" bouquet="0x6250" region="0x04">Sky Italia HD</configuration>
 	</dvbsconfigs>
 	<sections>
 		<section number="100">Intrattenimento</section>

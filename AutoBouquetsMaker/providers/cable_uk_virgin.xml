@@ -2,7 +2,6 @@
 <name>Virgin (UK)</name>
 	<streamtype>dvbc</streamtype>
 	<protocol>vmuk</protocol>
-	<namespace>0xffff0000</namespace>
 	<dvbcconfigs>
 		<configuration key="hd_00001_dvbc_uk" netid="00001" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00001 West Yorkshire</configuration>
 		<configuration key="hd_00002_dvbc_uk" netid="00002" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">00002 Glasgow</configuration>

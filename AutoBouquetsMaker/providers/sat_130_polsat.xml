@@ -2,7 +2,6 @@
 	<name>Polsat</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>lcn</protocol>
-	<namespace>0x820000</namespace>
 	<transponder
 		orbital_position="130"
 		frequency="10719000"		

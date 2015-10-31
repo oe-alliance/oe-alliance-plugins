@@ -2,8 +2,6 @@
 	<name>AustriaSat 9E</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>fastscan</protocol>
-	<!-- namespace now read direct from fastscan table -->
-	<namespace>5a0000</namespace>
 	<transponder
 		orbital_position="90"
 		frequency="12074000"

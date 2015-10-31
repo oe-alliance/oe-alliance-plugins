@@ -2,7 +2,6 @@
 	<name>FranSat</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>nolcn</protocol>
-	<namespace>dde0000</namespace>
 	<transponder
 		frequency="10972000"
 		symbol_rate="29950000"

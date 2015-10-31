@@ -2,8 +2,6 @@
 	<name>AustriaSat</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>fastscan</protocol>
-	<!-- namespace now read direct from fastscan table -->
-	<namespace>c00000</namespace>
 	<transponder
 		orbital_position="235"
 		frequency="12070000"

@@ -2,7 +2,6 @@
 	<name>FreeView (UK)</name>
 	<streamtype>dvbt</streamtype>
 	<protocol>lcn</protocol>
-	<namespace>0xeeee0000</namespace>
 	<dvbtconfigs>
 		<configuration key="angus______________" frequency="785800000" inversion="0" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="6" guard_interval="5" hierarchy="4">Angus</configuration>
 		<configuration key="beacon_hill________" frequency="785800000" inversion="0" modulation="4" system="0" bandwidth="8000000" code_rate_hp="5" code_rate_lp="5" transmission_mode="6" guard_interval="5" hierarchy="4">Beacon Hill</configuration>

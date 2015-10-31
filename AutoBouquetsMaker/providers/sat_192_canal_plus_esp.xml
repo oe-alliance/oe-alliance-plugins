@@ -2,7 +2,6 @@
 	<name>Canal+ Esp</name>
 	<streamtype>dvbs</streamtype>
 	<protocol>nolcn</protocol>
-	<namespace>c00000</namespace>
 	<transponder
 		orbital_position="192"
 		frequency="10758000"

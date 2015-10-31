@@ -15,9 +15,9 @@
 		pilot="2"
 	/>
 	<dvbsconfigs>
-		<configuration key="hd_republic_of_ireland" bouquet="0x1008" region="0x32" namespace="0x11a0000">ROI HD</configuration>
-		<configuration key="sd_republic_of_ireland" bouquet="0x1004" region="0x32" namespace="0x11a0000">ROI SD</configuration>
-		<configuration key="sdcustom_republic_of_ireland" bouquet="0x1004" region="0x32" namespace="0x11a0000">ROI Custom</configuration>
+		<configuration key="hd_republic_of_ireland" bouquet="0x1008" region="0x32">ROI HD</configuration>
+		<configuration key="sd_republic_of_ireland" bouquet="0x1004" region="0x32">ROI SD</configuration>
+		<configuration key="sdcustom_republic_of_ireland" bouquet="0x1004" region="0x32">ROI Custom</configuration>
 	</dvbsconfigs>
 	<sections>
 		<section number="101">Entertainment</section>
@@ -144,9 +144,6 @@ except:
 	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BoxNation HD','BT Preview HD']
 	whitelist_by_id = [3661,5032,3663,3141,3625,3629,3627,4037,4040,5152,5153,5154]
 	blacklist = [899,950]
-	
-if service["transport_stream_id"] == 0x7e3:
-	service["namespace"] = 0x11a2f26
 	
 if "channel_id" in service and service["channel_id"] in ITVs: # sort out ITV channel names
 	service["interactive_name"] = ITVs[service["channel_id"]]	
