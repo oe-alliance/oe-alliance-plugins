@@ -320,6 +320,12 @@ class DvbScanner():
 				if transponder["modulation_system"] == 0 and transponder["modulation_type"] == 2:
 					transponder["modulation_type"] = 1
 				transponder["inversion"] = 2
+				# shift 5.0E and 1.0W positions to correspond with satellites.xml
+				if transponder["orbital_position"] in (50, 3590):
+					if transponder["orbital_position"] == 50:
+						transponder["orbital_position"] -= 2
+					elif transponder["orbital_position"] == 3590:
+						transponder["orbital_position"] += 2
 				transponder["namespace"] = self.buildNamespace(transponder)
 
 				lastTransponder = transponder
