@@ -66,7 +66,6 @@ class Providers():
 			provider["sdchannelsontop"] = []
 			provider["dependent"] = ''
 			provider["bouquets"] = {}
-			provider["namespace"] = None
 			if dom.documentElement.nodeType == dom.documentElement.ELEMENT_NODE and dom.documentElement.tagName == "provider":
 				for node in dom.documentElement.childNodes:
 					if node.nodeType != node.ELEMENT_NODE:
@@ -84,10 +83,6 @@ class Providers():
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE and node.childNodes[0].data in self.VALID_PROTOCOLS:
 							provider["protocol"] = node.childNodes[0].data
-					elif node.tagName == "namespace":
-						node.normalize()
-						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
-							provider["namespace"] = int(node.childNodes[0].data, 16)
 					elif node.tagName == "transponder":
 						transponder = {}
 						transponder["nit_pid"] = 0x10
@@ -178,18 +173,13 @@ class Providers():
 										configuration["bouquet"] = int(node2.attributes.item(i).value, 16)
 									elif node2.attributes.item(i).name == "region":
 										configuration["region"] = int(node2.attributes.item(i).value, 16)
-									elif node2.attributes.item(i).name == "namespace":
-										configuration["namespace"] = int(node2.attributes.item(i).value, 16)
 
 								node2.normalize()
 								if len(node2.childNodes) == 1 and node2.childNodes[0].nodeType == node2.TEXT_NODE:
 									configuration["name"] = node2.childNodes[0].data
 
-								if len(configuration.keys()) == 5:
+								if len(configuration.keys()) == 4:
 									provider["bouquets"][configuration["key"]] = configuration
-									if provider["namespace"] is None:
-										provider["namespace"] = 0
-
 
 					elif node.tagName == "dvbcconfigs":
 						transponder = {}
@@ -364,7 +354,6 @@ class Providers():
 			if not ("name" in provider
 					and "protocol" in provider
 					and "streamtype" in provider
-					and provider["namespace"] is not None
 					and "bouquets" in provider
 					and "sections" in provider
 					and "transponder" in provider

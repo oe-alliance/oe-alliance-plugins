@@ -232,6 +232,7 @@ class DvbScanner():
 		hd_logical_channel_number_dict_tmp = {}
 		service_dict_tmp = {}
 		transponders_count = 0
+		self.namespace_dict = {}
 
 		for transponder in nit_content:
 			if "descriptor_tag" in transponder and transponder["descriptor_tag"] == 0x41: # service
@@ -241,10 +242,6 @@ class DvbScanner():
 			if "descriptor_tag" in transponder and transponder["descriptor_tag"] == 0x83: # lcn
 				key = "%x:%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"], transponder["service_id"])
 				logical_channel_number_dict_tmp[key] = transponder
-				try:
-					logical_channel_number_dict_tmp[key]["transponder"] = lastTransponder
-				except:
-					pass
 				continue
 			if "descriptor_tag" in transponder and transponder["descriptor_tag"] == 0x87: # LCN V2
 				if transponder["channel_list_id"] == bouquet_id:
@@ -328,8 +325,6 @@ class DvbScanner():
 						transponder["orbital_position"] += 2
 				transponder["namespace"] = self.buildNamespace(transponder)
 
-				lastTransponder = transponder
-
 			key = "%x:%x:%x" % (transponder["namespace"],
 				transponder["transport_stream_id"],
 				transponder["original_network_id"])
@@ -341,6 +336,10 @@ class DvbScanner():
 
 			if transponder["transport_stream_id"] not in transport_stream_id_list:
 				transport_stream_id_list.append(transponder["transport_stream_id"])
+
+			namespace_key = "%x:%x" % (transponder["transport_stream_id"], transponder["original_network_id"])
+			if namespace_key not in self.namespace_dict:
+				self.namespace_dict[namespace_key] = transponder["namespace"]
 
 		if read_other_section:
 			print>>log, "[DvbScanner] Added/Updated %d transponders with network_id = 0x%x and network_id = 0x%x" % (transponders_count, nit_current_section_network_id, nit_other_section_network_id)
@@ -421,11 +420,13 @@ class DvbScanner():
 			if service["descriptor_tag"] != descriptor_tag:
 				continue
 			key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
+			if 'logical_channel_number' not in service: # use SID when output doesn't have LCN
+				service["logical_channel_number"] = service["service_id"]
 			logical_channel_number_dict[key] = service
 
 		return logical_channel_number_dict
 
-	def updateAndReadServicesLCN(self, namespace, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict, service_dict_tmp, protocol, bouquet_key):
+	def updateAndReadServicesLCN(self, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict, service_dict_tmp, protocol, bouquet_key):
 		print>>log, "[DvbScanner] Reading services (lcn)..."
 
 		if self.sdt_other_table_id == 0x00:
@@ -514,7 +515,11 @@ class DvbScanner():
 				if service_dict_tmp and key not in service_dict_tmp and protocol != "lcn2":
 					continue
 
-				service["namespace"] = namespace
+				namespace_key = "%x:%x" % (service["transport_stream_id"], service["original_network_id"])
+				if namespace_key not in self.namespace_dict:
+					continue
+				service["namespace"] = self.namespace_dict[namespace_key]
+
 				service["flags"] = 0
 
 				service["number"] = logical_channel_number_dict[key]["logical_channel_number"]
@@ -566,7 +571,7 @@ class DvbScanner():
 			"radio": radio_services
 		}
 
-	def updateAndReadServicesVMUK(self, namespace, transponders, servicehacks, transport_stream_id_list, service_dict_tmp, bouquet_key):
+	def updateAndReadServicesVMUK(self, transponders, servicehacks, transport_stream_id_list, service_dict_tmp, bouquet_key):
 		print>>log, "[DvbScanner] Reading services (vmuk)..."
 
 		if self.sdt_other_table_id == 0x00:
@@ -636,7 +641,10 @@ class DvbScanner():
 				if service_dict_tmp and key not in service_dict_tmp:
 					continue
 
-				service["namespace"] = namespace
+				namespace_key = "%x:%x" % (service["transport_stream_id"], service["original_network_id"])
+				if namespace_key not in self.namespace_dict:
+					continue
+				service["namespace"] = self.namespace_dict[namespace_key]
 				service["flags"] = 0
 
 				service["number"] = service["logical_channel_number"]
@@ -690,7 +698,7 @@ class DvbScanner():
 			"radio": radio_services
 		}
 
-	def updateAndReadServicesFastscan(self, namespace, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict):
+	def updateAndReadServicesFastscan(self, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict):
 		print>>log, "[DvbScanner] Reading services (fastscan)..."
 
 		fd = dvbreader.open(self.demuxer_device, self.fastscan_pid, self.fastscan_table_id, 0xff, self.frontend)
@@ -762,11 +770,10 @@ class DvbScanner():
 			if not hasattr(service, "free_ca"):
 				service["free_ca"] = 1
 
-			if not hasattr(service, "namespace"):
-				try:
-					service["namespace"] = service["namespace"] = logical_channel_number_dict[key]["transponder"]["namespace"]
-				except:
-					service["namespace"] = namespace
+			namespace_key = "%x:%x" % (service["transport_stream_id"], service["original_network_id"])
+			if namespace_key not in self.namespace_dict:
+				continue
+			service["namespace"] = self.namespace_dict[namespace_key]
 
 			if not hasattr(service, "flags"):
 				service["flags"] = 0
@@ -833,7 +840,7 @@ class DvbScanner():
 			"radio": radio_services
 		}
 
-	def updateAndReadServicesSKY(self, bouquet_id, region_id, namespace, bouquet_key, transponders, servicehacks):
+	def updateAndReadServicesSKY(self, bouquet_id, region_id, bouquet_key, transponders, servicehacks):
 		print>>log, "[DvbScanner] Reading services (sky)..."
 
 		fd = dvbreader.open(self.demuxer_device, self.bat_pid, self.bat_table_id, 0xff, self.frontend)
@@ -912,7 +919,10 @@ class DvbScanner():
 			service["free_ca"] = 1
 			service["service_name"] = "Unknown"
 			service["provider_name"] = "Unknown"
-			service["namespace"] = namespace
+			namespace_key = "%x:%x" % (service["transport_stream_id"], service["original_network_id"])
+			if namespace_key not in self.namespace_dict:
+				continue
+			service["namespace"] = self.namespace_dict[namespace_key]
 			service["flags"] = 0
 
 			if key in tmp_services_dict:
@@ -1016,7 +1026,7 @@ class DvbScanner():
 
 		service_extra_count = 0
 
-		tmp_services_dict, LCNs_in_use = self.extrasHelper(tmp_services_dict, extras, namespace, True)
+		tmp_services_dict, LCNs_in_use = self.extrasHelper(tmp_services_dict, extras, True)
 
 		for key in self.LCN_order(tmp_services_dict):
 			service = tmp_services_dict[key]
@@ -1054,7 +1064,7 @@ class DvbScanner():
 			"radio": radio_services
 		}
 
-	def updateAndReadServicesFreeSat(self, bouquet_id, region_id, namespace, bouquet_key, transponders, servicehacks):
+	def updateAndReadServicesFreeSat(self, bouquet_id, region_id, bouquet_key, transponders, servicehacks):
 		print>>log, "[DvbScanner] Reading services (freesat)..."
 
 		fd = dvbreader.open(self.demuxer_device, self.bat_pid, self.bat_table_id, 0xff, self.frontend)
@@ -1121,7 +1131,10 @@ class DvbScanner():
 			service["free_ca"] = 1
 			service["service_name"] = "Unknown"
 			service["provider_name"] = "Unknown"
-			service["namespace"] = namespace
+			namespace_key = "%x:%x" % (service["transport_stream_id"], service["original_network_id"])
+			if namespace_key not in self.namespace_dict:
+				continue
+			service["namespace"] = self.namespace_dict[namespace_key]
 			service["flags"] = 0
 
 			key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
@@ -1271,7 +1284,7 @@ class DvbScanner():
 
 		service_extra_count = 0
 
-		tmp_services_dict, LCNs_in_use = self.extrasHelper(tmp_services_dict, extras, namespace, False)
+		tmp_services_dict, LCNs_in_use = self.extrasHelper(tmp_services_dict, extras, False)
 
 		for key in self.LCN_order(tmp_services_dict):
 			service = tmp_services_dict[key]
@@ -1310,7 +1323,7 @@ class DvbScanner():
 			"radio": radio_services
 		}
 
-	def extrasHelper(self, tmp_services_dict, extras, namespace, allow_encrypted):
+	def extrasHelper(self, tmp_services_dict, extras, allow_encrypted):
 		max_channel_number = 1450
 		space_for_iteractive = 50
 		round_to_nearest = 50
@@ -1338,8 +1351,12 @@ class DvbScanner():
 			for item in sort_list:
 				if current_lcn > max_channel_number:
 					break
-				LCNs.append(current_lcn)
 				service = extras[item[0]]
+				namespace_key = "%x:%x" % (service["transport_stream_id"], service["original_network_id"])
+				if namespace_key not in self.namespace_dict:
+					continue
+				namespace = self.namespace_dict[namespace_key]
+				LCNs.append(current_lcn)
 				if "channel_id" not in service:
 					service["channel_id"] = 0
 				new_service = {
