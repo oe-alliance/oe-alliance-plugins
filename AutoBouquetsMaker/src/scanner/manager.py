@@ -217,7 +217,7 @@ class Manager():
 				scanner.setNitCurrentTableId(providers[provider_key]["transponder"]["nit_current_table_id"])
 				scanner.setNitOtherTableId(providers[provider_key]["transponder"]["nit_other_table_id"])
 
-				if providers[provider_key]["protocol"] in ('lcn', 'lcn2', 'lcnbat', 'nolcn', 'vmuk'):
+				if providers[provider_key]["protocol"] in ('lcn', 'lcn2', 'lcnbat', 'lcnbat2', 'nolcn', 'vmuk'):
 					scanner.setSdtPid(providers[provider_key]["transponder"]["sdt_pid"])
 					scanner.setSdtCurrentTableId(providers[provider_key]["transponder"]["sdt_current_table_id"])
 					scanner.setSdtOtherTableId(providers[provider_key]["transponder"]["sdt_other_table_id"])
@@ -231,7 +231,7 @@ class Manager():
 						except:
 							bouquet_id = -1
 						tmp = scanner.updateTransponders(self.transponders, True, customtransponders, bouquet_id = bouquet_id)
-					if providers[provider_key]["protocol"] == 'lcnbat':
+					if providers[provider_key]["protocol"] in ("lcnbat", "lcnbat2"):
 						scanner.setBatPid(providers[provider_key]["transponder"]["bat_pid"])
 						scanner.setBatTableId(providers[provider_key]["transponder"]["bat_table_id"])
 						tmp["logical_channel_number_dict"] = scanner.readLCNBAT(bouquet_id, providers[provider_key]["bouquets"][bouquet_key]["region"])
