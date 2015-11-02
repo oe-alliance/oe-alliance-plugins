@@ -161,6 +161,9 @@
 blacklist = ['M Pack Tier 1','More TV Pack Tier 2','M+ Pack Tier 3','L Pack Tier 4','XL Pack Tier 5'] # channel names have quotes. Channel numbers do not. Example: ['ITV HD', 250, 500]
 bt_sports_xtra = ["BT Sport Extra 1","BT Sport Extra 2","BT Sport Extra 3","BT Sport Extra 4","BT Sport Extra 5","BT Sport Extra 6"]
 
+if service["service_type"] == 1 and service["service_group_id"] in(17,21):
+	service["service_type"] = 25
+
 for number in service["numbers"]:
 	if number in blacklist:
 		skip = True
