@@ -214,6 +214,7 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 					PyList_Append(list, item);
 					Py_DECREF(item);
 					
+					offset3 += 4;
 					descriptor_length -= 4;
 				}
 			}
@@ -235,6 +236,7 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 					PyList_Append(list, item);
 					Py_DECREF(item);
 					
+					offset3 += 4;
 					descriptor_length -= 4;
 				}
 			}
