@@ -231,18 +231,13 @@ class Manager():
 						except:
 							bouquet_id = -1
 						tmp = scanner.updateTransponders(self.transponders, True, customtransponders, bouquet_id = bouquet_id)
-					if providers[provider_key]["protocol"] == 'vmuk':
-						self.services[provider_key] = scanner.updateAndReadServicesVMUK(self.transponders,
-								providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
-								tmp["service_dict_tmp"], bouquet_key)
-					else:
-						if providers[provider_key]["protocol"] == 'lcnbat':
-							scanner.setBatPid(providers[provider_key]["transponder"]["bat_pid"])
-							scanner.setBatTableId(providers[provider_key]["transponder"]["bat_table_id"])
-							tmp["logical_channel_number_dict"] = scanner.readLCNBAT(bouquet_id, providers[provider_key]["bouquets"][bouquet_key]["region"])
-						self.services[provider_key] = scanner.updateAndReadServicesLCN(
-								self.transponders, providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
-								tmp["logical_channel_number_dict"], tmp["service_dict_tmp"], providers[provider_key]["protocol"], bouquet_key)
+					if providers[provider_key]["protocol"] == 'lcnbat':
+						scanner.setBatPid(providers[provider_key]["transponder"]["bat_pid"])
+						scanner.setBatTableId(providers[provider_key]["transponder"]["bat_table_id"])
+						tmp["logical_channel_number_dict"] = scanner.readLCNBAT(bouquet_id, providers[provider_key]["bouquets"][bouquet_key]["region"])
+					self.services[provider_key] = scanner.updateAndReadServicesLCN(
+						self.transponders, providers[provider_key]["servicehacks"], tmp["transport_stream_id_list"],
+						tmp["logical_channel_number_dict"], tmp["service_dict_tmp"], providers[provider_key]["protocol"], bouquet_key)
 
 					ret = len(self.services[provider_key]["video"].keys()) > 0 or len(self.services[provider_key]["radio"].keys()) > 0
 

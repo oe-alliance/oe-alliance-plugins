@@ -485,6 +485,14 @@ class DvbScanner():
 
 		dvbreader.close(fd)
 
+		# Create logical_channel_number_dict for VMUK
+		if protocol == 'vmuk':
+			for key in sdt_secions_status:
+				for section in sdt_secions_status[key]["content"]:
+					if "logical_channel_number" in section and section["logical_channel_number"] > 0:
+						servicekey = "%x:%x:%x" % (section["transport_stream_id"], section["original_network_id"], section["service_id"])
+						logical_channel_number_dict[servicekey] = {"transport_stream_id": section["transport_stream_id"], "original_network_id": section["original_network_id"], "service_id": section["service_id"], "logical_channel_number": section["logical_channel_number"]}
+
 		# When no LCN available, create fake LCN numbers (service-id) and use customlcn file for final channel numbers
 		if len(logical_channel_number_dict) == 0:
 			print>>log, "[DvbScanner] LCN protocol but no LCNs found in NIT. Falling back to service ID."
@@ -508,11 +516,11 @@ class DvbScanner():
 			for section in sdt_secions_status[key]["content"]:
 				service = section
 
-				key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
+				servicekey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
 
-				if logical_channel_number_dict and (key not in logical_channel_number_dict or "visible_service_flag" in logical_channel_number_dict[key] and logical_channel_number_dict[key]["visible_service_flag"] == 0):
+				if logical_channel_number_dict and (servicekey not in logical_channel_number_dict or "visible_service_flag" in logical_channel_number_dict[servicekey] and logical_channel_number_dict[servicekey]["visible_service_flag"] == 0):
 					continue
-				if service_dict_tmp and key not in service_dict_tmp and protocol != "lcn2":
+				if service_dict_tmp and servicekey not in service_dict_tmp and protocol != "lcn2":
 					continue
 
 				namespace_key = "%x:%x" % (service["transport_stream_id"], service["original_network_id"])
@@ -522,140 +530,13 @@ class DvbScanner():
 
 				service["flags"] = 0
 
-				service["number"] = logical_channel_number_dict[key]["logical_channel_number"]
+				service["number"] = logical_channel_number_dict[servicekey]["logical_channel_number"]
 
-				if key in tmp_services_dict:
-					tmp_services_dict[key]["numbers"].append(service["number"])
+				if servicekey in tmp_services_dict:
+					tmp_services_dict[servicekey]["numbers"].append(service["number"])
 				else:
 					service["numbers"] = [service["number"]]
-					tmp_services_dict[key] = service
-
-				service_count += 1
-
-		print>>log, "[DvbScanner] Read %d services" % service_count
-
-		video_services = {}
-		radio_services = {}
-
-		service_extra_count = 0
-
-		for key in self.LCN_order(tmp_services_dict):
-			service = tmp_services_dict[key]
-
-			if len(servicehacks) > 0:
-				skip = False
-				exec(servicehacks)
-
-				if skip:
-					continue
-
-			tpkey = "%x:%x:%x" % (service["namespace"], service["transport_stream_id"], service["original_network_id"])
-			if tpkey not in transponders:
-				continue
-
-			transponders[tpkey]["services"][service["service_id"]] = service
-			service_extra_count += 1
-
-			if service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES or service["service_type"] in DvbScanner.INTERACTIVE_ALLOWED_TYPES:
-				for number in service["numbers"]:
-					if number not in video_services:
-						video_services[number] = service
-			else:
-				for number in service["numbers"]:
-					if number not in radio_services:
-						radio_services[number] = service
-
-		print>>log, "[DvbScanner] %d valid services" % service_extra_count
-		return {
-			"video": video_services,
-			"radio": radio_services
-		}
-
-	def updateAndReadServicesVMUK(self, transponders, servicehacks, transport_stream_id_list, service_dict_tmp, bouquet_key):
-		print>>log, "[DvbScanner] Reading services (vmuk)..."
-
-		if self.sdt_other_table_id == 0x00:
-			mask = 0xff
-		else:
-			mask = self.sdt_current_table_id ^ self.sdt_other_table_id ^ 0xff
-
-		fd = dvbreader.open(self.demuxer_device, self.sdt_pid, self.sdt_current_table_id, mask, self.frontend)
-		if fd < 0:
-			print>>log, "[DvbScanner] Cannot open the demuxer"
-			return None
-
-		sdt_secions_status = {}
-		for transport_stream_id in transport_stream_id_list:
-			sdt_secions_status[transport_stream_id] = {}
-			sdt_secions_status[transport_stream_id]["section_version"] = -1
-			sdt_secions_status[transport_stream_id]["sections_read"] = []
-			sdt_secions_status[transport_stream_id]["sections_count"] = 0
-			sdt_secions_status[transport_stream_id]["content"] = []
-
-		timeout = datetime.datetime.now()
-		timeout += datetime.timedelta(0, self.SDT_TIMEOUT)
-		while True:
-			if datetime.datetime.now() > timeout:
-				print>>log, "[DvbScanner] Timed out reading SDT"
-				break
-
-			section = dvbreader.read_sdt(fd, self.sdt_current_table_id, self.sdt_other_table_id)
-			if section is None:
-				time.sleep(0.1)	# no data.. so we wait a bit
-				continue
-
-			if section["header"]["table_id"] == self.sdt_current_table_id or section["header"]["table_id"] == self.sdt_other_table_id:
-				if section["header"]["transport_stream_id"] not in transport_stream_id_list:
-					continue
-
-				transport_stream_id = section["header"]["transport_stream_id"]
-				if section["header"]["version_number"] != sdt_secions_status[transport_stream_id]["section_version"]:
-					sdt_secions_status[transport_stream_id]["section_version"] = section["header"]["version_number"]
-					sdt_secions_status[transport_stream_id]["sections_read"] = []
-					sdt_secions_status[transport_stream_id]["content"] = []
-					sdt_secions_status[transport_stream_id]["sections_count"] = section["header"]["last_section_number"] + 1
-
-				if section["header"]["section_number"] not in sdt_secions_status[transport_stream_id]["sections_read"]:
-					sdt_secions_status[transport_stream_id]["sections_read"].append(section["header"]["section_number"])
-					sdt_secions_status[transport_stream_id]["content"] += section["content"]
-
-					if len(sdt_secions_status[transport_stream_id]["sections_read"]) == sdt_secions_status[transport_stream_id]["sections_count"]:
-						transport_stream_id_list.remove(transport_stream_id)
-
-			if len(transport_stream_id_list) == 0:
-				break
-
-		if len(transport_stream_id_list) > 0:
-			print>>log, "[DvbScanner] Cannot fetch SDT for the following transport_stream_id list: ", transport_stream_id_list
-
-		dvbreader.close(fd)
-
-		service_count = 0
-		tmp_services_dict = {}
-		for key in sdt_secions_status:
-			for section in sdt_secions_status[key]["content"]:
-				service = section
-
-				key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
-
-				if service_dict_tmp and key not in service_dict_tmp:
-					continue
-
-				namespace_key = "%x:%x" % (service["transport_stream_id"], service["original_network_id"])
-				if namespace_key not in self.namespace_dict:
-					continue
-				service["namespace"] = self.namespace_dict[namespace_key]
-				service["flags"] = 0
-
-				service["number"] = service["logical_channel_number"]
-				if service["service_type"] == 1 and (service["service_group_id"] == 17 or service["service_group_id"] == 21):
-					service["service_type"] = 17
-
-				if key in tmp_services_dict:
-					tmp_services_dict[key]["numbers"].append(service["number"])
-				else:
-					service["numbers"] = [service["number"]]
-					tmp_services_dict[key] = service
+					tmp_services_dict[servicekey] = service
 
 				service_count += 1
 
