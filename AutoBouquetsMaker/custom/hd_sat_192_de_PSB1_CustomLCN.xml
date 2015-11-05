@@ -1,0 +1,21 @@
+<custom>
+	<include>yes</include>
+	<lcnlist>
+		<configuration lcn="1" channelnumber="10301" description="Das Erste HD" />
+		<configuration lcn="2" channelnumber="11110" description="ZDF HD" />
+		<configuration lcn="3" channelnumber="61200" description="RTL HD" />
+		<configuration lcn="3" channelnumber="12003" description="RTL Television" />
+		<configuration lcn="4" channelnumber="61300" description="SAT.1 HD" />
+		<configuration lcn="4" channelnumber="17500" description="SAT.1" />
+		<configuration lcn="5" channelnumber="61301" description="ProSieben HD" />
+		<configuration lcn="5" channelnumber="17501" description="ProSieben" />
+		<configuration lcn="6" channelnumber="61201" description="VOX HD" />
+		<configuration lcn="6" channelnumber="12060" description="VOX" />
+		<configuration lcn="7" channelnumber="61302" description="kabel eins HD" />
+		<configuration lcn="7" channelnumber="17502" description="kabel eins" />
+		<configuration lcn="8" channelnumber="61205" description="RTL2 HD" />
+		<configuration lcn="8" channelnumber="12020" description="RTL2" />
+		<configuration lcn="9" channelnumber="10302" description="arte HD" />
+		<configuration lcn="10" channelnumber="11160" description="KiKA HD" />
+	</lcnlist>
+</custom>

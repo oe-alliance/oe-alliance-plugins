@@ -1,0 +1,27 @@
+<provider>
+	<name>Deutsche Sender 6/9</name>
+	<dependent>sat_192_de_PSB1</dependent>
+	<streamtype>dvbs</streamtype>
+	<protocol>lcn</protocol>
+	<transponder
+		orbital_position="192"
+		frequency="10803000"
+		symbol_rate="22000000"
+		polarization="0"
+		fec_inner="3"
+		inversion="2"
+		system="1"
+		modulation="2"
+		roll_off="0"
+		pilot="2"
+	/>
+	<sections>
+		<section number="1">Deutsche Sender</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+if service['service_name'] in ('', '.'):
+	skip = True
+]]>
+	</servicehacks>
+</provider>
