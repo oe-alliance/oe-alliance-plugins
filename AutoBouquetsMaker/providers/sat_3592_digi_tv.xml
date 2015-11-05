@@ -21,7 +21,7 @@
 	<dvbsconfigs>
 		<configuration key="sd_ROU_50" bouquet="0x32" region="0x86" namespace="0xe080000">Romania SD</configuration>
 		<configuration key="sd_HUN_51" bouquet="0x33" region="0x86" namespace="0xe080000">Hungary SD</configuration>
-		<configuration key="hd_SVK_52" bouquet="0x34" region="0x86" namespace="0xe080000">Slovakia SD</configuration>
+		<configuration key="sd_SVK_52" bouquet="0x34" region="0x86" namespace="0xe080000">Slovakia SD</configuration>
 		<configuration key="sd_HRV_53" bouquet="0x35" region="0x86" namespace="0xe080000">Croatia SD</configuration>
 		<configuration key="sd_CZE_54" bouquet="0x36" region="0x86" namespace="0xe080000">Czech SD</configuration>
 		<configuration key="sd_SRB_55" bouquet="0x37" region="0x86" namespace="0xe080000">Serbia SD</configuration>
@@ -29,7 +29,7 @@
 		<configuration key="hd_ROU_57" bouquet="0x39" region="0x86" namespace="0xe080000">Romania HD</configuration>
 		<configuration key="hd_HUN_58" bouquet="0x3a" region="0x86" namespace="0xe080000">Hungary HD</configuration>
 		<configuration key="hd_SVK_59" bouquet="0x3b" region="0x86" namespace="0xe080000">Slovakia HD</configuration>
-		<configuration key="hd_HRV_60" bouquet="0x3c" region="0x86" namespace="0xe080000">Croatia SD</configuration>
+		<configuration key="hd_HRV_60" bouquet="0x3c" region="0x86" namespace="0xe080000">Croatia HD</configuration>
 		<configuration key="hd_CZE_61" bouquet="0x3d" region="0x86" namespace="0xe080000">Czech HD</configuration>
 		<configuration key="hd_SRB_62" bouquet="0x3e" region="0x86" namespace="0xe080000">Serbia HD</configuration>
 		<configuration key="hd_ALL_63" bouquet="0x3f" region="0x86" namespace="0xe080000">All HD</configuration>
