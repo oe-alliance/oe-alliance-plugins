@@ -150,6 +150,10 @@ if VUZERO
 SUBDIRS += FirmwareUpgrade VuRemote Blindscan
 endif
 
+if VUSOLO4K
+SUBDIRS += FirmwareUpgrade VuRemote Blindscan
+endif
+
 if GIGABLUE
 SUBDIRS += GigaBlueVFDControl Blindscan AudioEffect
 endif
