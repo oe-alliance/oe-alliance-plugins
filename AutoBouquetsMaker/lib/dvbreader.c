@@ -194,6 +194,28 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 					descriptor_length -= 3;
 				}
 			}
+			else if (descriptor_tag == 0x81)	// UPC LCN descriptor
+			{
+				while (descriptor_length > 0)
+				{
+					int service_id = (data[offset3] << 8) | data[offset3 + 1];
+					int logical_channel_number = (data[offset3 + 2] << 8) | data[offset3 + 3];
+
+					PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i}",
+							"bouquet_id", bouquet_id,
+							"transport_stream_id", transport_stream_id,
+							"original_network_id", original_network_id,
+							"service_id", service_id,
+							"logical_channel_number", logical_channel_number,
+							"descriptor_tag", descriptor_tag);
+							
+					PyList_Append(list, item);
+					Py_DECREF(item);
+					
+					offset3 += 4;
+					descriptor_length -= 4;
+				}
+			}
 			else if (descriptor_tag == 0x83)	// LCN descriptor
 			{
 				while (descriptor_length > 0)
