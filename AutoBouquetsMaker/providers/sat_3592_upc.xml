@@ -1,0 +1,31 @@
+<provider>
+	<name>UPC</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>lcnbat2</protocol>
+	<transponder
+		orbital_position="3592"
+		frequency="12188000"		
+		symbol_rate="28000000"
+		polarization="1"
+		fec_inner="0"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+		bat_pid="0x11"
+	/>
+	<sections>
+		<section number="1">UPC</section>
+	</sections>
+	<dvbsconfigs>
+		<configuration key="hd_HUN" bouquet="0x2011" region="0x81" namespace="0xe080000">Hungary</configuration>
+		<configuration key="hd_CZE" bouquet="0x2012" region="0x81" namespace="0xe080000">Czech Republic</configuration>
+		<configuration key="hd_SVK" bouquet="0x2013" region="0x81" namespace="0xe080000">Slovakia</configuration>
+		<configuration key="hd_ROU" bouquet="0x2014" region="0x81" namespace="0xe080000">Romania</configuration>
+	</dvbsconfigs>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>
