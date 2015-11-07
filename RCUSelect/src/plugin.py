@@ -48,14 +48,14 @@ class RCUSelect(Screen):
 		title = _("RCU Select")
 		self.setTitle(title)
 		self["pixmap"] = Pixmap()
-		self.rcuval = ["WeTek Play (Classic) RCU",
-		"WeTek Play Enigma2 RCU",
-		"WeTek Play OpenElec RCU",
-		"Alien2/1 RCU",
-		"Alien1 old RCU",
-		"Octagon SF8 RCU",
-		"xtrend ET10000 RCU",
-		"Mutant HD2400 RCU"]
+		self.rcuval = [_("WeTek Play (Classic) RCU"),
+		_("WeTek Play Enigma2 RCU"),
+		_("WeTek Play OpenElec RCU"),
+		_("Alien2/1 RCU"),
+		_("Alien1 old RCU"),
+		_("Octagon SF8 RCU"),
+		_("xtrend ET10000 RCU"),
+		_("Mutant HD2400 RCU")]
 		self.SetOSDList()
 		self.MakeKeymapBckUp()
 
