@@ -237,6 +237,7 @@
 		<channel number="413" with="427" /><!-- BT Sport 1 HD -->
 		<channel number="414" with="433" /><!-- BT Sport EurHD -->
 		<channel number="417" with="457" /><!-- BT Sport 2 HD -->
+		<channel number="418" with="453" /><!-- MUTV HD -->		
 		<channel number="424" with="460" /><!-- Setanta HD -->		
 		<channel number="426" with="458" /><!-- BTSpt/ESPN HD -->
 		<channel number="428" with="462" /><!-- Premier HD -->		
@@ -342,7 +343,7 @@ except:
 	}
 
 	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BoxNation HD','BT Preview HD']
-	whitelist_by_id = [3141,3625,3627,3629,3622,3623,3661,3663,4040,5032,5037,5152,5153,5154,5662,5663]
+	whitelist_by_id = [1003,3141,3625,3627,3629,3622,3623,3661,3663,4040,5032,5037,5152,5153,5154,5662,5663]
 	blacklist = []
 	bt_sports_id = [5030,5381,5031,5382,5383,5384,5385,5386]
 
