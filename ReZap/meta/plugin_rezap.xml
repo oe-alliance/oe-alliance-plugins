@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info language="en">
+                    <author>telesat@weteke2.com</author>
+                    <name>ReZap</name>
+                    <packagename>enigma2-plugin-extensions-rezap</packagename>
+                    <shortdescription>ReZap A/V Sync Tool.</shortdescription>
+                    <description>ReZap A/V Sync Tool.</description>
+          </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-rezap" />
+	</files>
+
+</default>

@@ -307,6 +307,10 @@ TunerServer/src/Makefile
 TunerServer/meta/Makefile
 TunerServer/po/Makefile
 
+ReZap/Makefile
+ReZap/src/Makefile
+ReZap/meta/Makefile
+
 RCUSelect/Makefile
 RCUSelect/src/Makefile
 RCUSelect/conf/Makefile
