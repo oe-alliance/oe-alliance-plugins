@@ -46,6 +46,10 @@ if HD1200
 SUBDIRS += F3LEDControl XtrendRemote
 endif
 
+if HD1265
+SUBDIRS += F3LEDControl XtrendRemote
+endif
+
 if HD500C
 SUBDIRS += F3LEDControl XtrendRemote
 endif
