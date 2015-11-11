@@ -1,7 +1,7 @@
 <provider>
 	<name>FranSat</name>
 	<streamtype>dvbs</streamtype>
-	<protocol>nolcn</protocol>
+	<protocol>lcnbat2</protocol>
 	<transponder
 		frequency="10972000"
 		symbol_rate="29950000"
@@ -13,6 +13,7 @@
 		modulation="1"
 		roll_off="0"
 		pilot="2"
+		bat_pid="0x11"
 	/>
 	<sections>
 		<section number="1">Chaines TNT gratuites</section>
@@ -24,9 +25,17 @@
 		<section number="80">Cinéma</section>
 		<section number="100">TV Locales</section>
 		<section number="200">TV Autres</section>
-		<section number="280">Adultes</section>
+		<!--<section number="280">Adultes</section>-->
 		<section number="300">Regionales</section>
 	</sections>
+	<dvbsconfigs>
+		<configuration key="sd_00112" bouquet="0x70" region="0x83">Fransat SD</configuration>
+		<configuration key="hd_00113" bouquet="0x71" region="0x83">Fransat HD</configuration>
+		<!--<configuration key="hd_00127" bouquet="0x7f" region="0x83">France 3 Regionales</configuration>-->
+		<!--<configuration key="hd_01360" bouquet="0x550" region="0x83">1360</configuration>-->
+		<!--<configuration key="hd_01361" bouquet="0x551" region="0x83">1361</configuration>-->
+		<!--<configuration key="hd_65280" bouquet="0xff00" region="0x83">SSU</configuration>-->
+	</dvbsconfigs>
 	<servicehacks>
 <![CDATA[
 if service["service_type"] == 1 and service["service_name"][-2:] == 'HD':
