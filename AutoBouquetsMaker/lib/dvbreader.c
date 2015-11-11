@@ -68,6 +68,7 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 	{
 		unsigned char descriptor_tag = data[offset1];
 		unsigned char descriptor_length = data[offset1 + 1];
+		int offset2 = offset1 + 2;
 		
 		if (descriptor_tag == 0xd4)
 		{
@@ -110,6 +111,31 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 						
 			PyList_Append(list, item);
 			Py_DECREF(item);
+		}
+		else if (descriptor_tag == 0x83)	// LCN descriptor (Eutelsat)
+		{
+			int size = descriptor_length;
+			while (size > 0)
+			{
+				int original_network_id = (data[offset2] << 8) | data[offset2 + 1];
+				int transport_stream_id = (data[offset2 + 2] << 8) | data[offset2 + 3];
+				int service_id = (data[offset2 + 4] << 8) | data[offset2 + 5];
+				int logical_channel_number = (data[offset2 + 6] << 4) | (data[offset2 + 7] >> 4);
+
+				PyObject *item = Py_BuildValue("{s:i,s:i,s:i,s:i,s:i,s:i}",
+						"bouquet_id", bouquet_id,
+						"original_network_id", original_network_id,
+						"transport_stream_id", transport_stream_id,
+						"service_id", service_id,
+						"logical_channel_number", logical_channel_number,
+						"descriptor_tag", descriptor_tag);
+							
+				PyList_Append(list, item);
+				Py_DECREF(item);
+				
+				offset2 += 8;
+				size -= 8;
+			}
 		}
 		
 		offset1 += (descriptor_length + 2);
