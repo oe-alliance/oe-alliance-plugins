@@ -15,6 +15,14 @@ if MIPSEL
 SUBDIRS += mips
 endif
 
-if ARM
-SUBDIRS += arm
+if CUBE
+SUBDIRS += cube
+endif
+
+if WETEK
+SUBDIRS += wetek
+endif
+
+if VUSOLO4K
+SUBDIRS += solo4k
 endif
