@@ -1,5 +1,9 @@
 import Image
-import dpflib
+try:
+	import dpflib
+except:
+	print "[LCD4linux] dpflib-Error"
+
 
 PROPERTY_BRIGHTNESS   = 0x01
 PROPERTY_FGCOLOR      = 0x02
@@ -33,7 +37,7 @@ def open(usb):
 		d = None
 		print "[LCD4linux] open Error",usb
 	return d
-	
+
 def close(dev):
 	try:
 		if dev is not None:

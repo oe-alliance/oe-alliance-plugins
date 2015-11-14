@@ -82,13 +82,13 @@ def ParseCode():
 def _l(st):
 	return st.decode("utf-8","ignore").replace(" [ok]>","").encode('ascii', 'xmlcharrefreplace')
 
-def AktiveMode(Test):
+def AktiveMode(Test,R):
 	Aktiv = ""
 	Color = ""
 	if Mode == Test:
 		Aktiv = "checked"
 		Color = "style=\"color: #FFCC00\""
-	return Aktiv,Color
+	return Aktiv,Color,R
 
 def AktiveElement(Test):
 	Aktiv = ""
@@ -147,8 +147,10 @@ class LCD4linuxConfigweb(resource.Resource):
 		global ExeMode
 		global StatusMode
 		IP = req.getClientIP()
+		L4logE("IP1:",IP)
 		if IP is None:
 			IP = req.client.host.split(":")[-1]
+			L4logE("IP2:",req.client.host)
 			if IP.find(".") == -1:
 				IP = None
 		if IP is None:
@@ -336,10 +338,12 @@ class LCD4linuxConfigweb(resource.Resource):
 					b = a.replace(".MP",".")
 					if (" "+b) in zip(*L2)[2]:
 						print a,b
+						exec("%s.value = %s.value" % (b,a))
 				elif ".Standby" in a:
 					b = a.replace(".Standby",".")
 					if (" "+b) in zip(*L2)[2]:
 						print a,b
+						exec("%s.value = %s.value" % (b,a))
 
 #####################
 # Konfig schreiben
@@ -530,12 +534,12 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<form method=\"get\">"
 		html += "<fieldset style=\"width:auto\" name=\"Mode1\">"
 		html += "<legend style=\"color: #FFCC00\">Modus&nbsp;</legend>\n"
-		html += "<input id=\"r1\" name=\"Mode\" type=\"radio\" value=\"1\" %s onclick=\"this.form.submit();\"><label %s for=\"r1\">Global&nbsp;&nbsp;</label>\n" % (AktiveMode("1"))
-		html += "<input id=\"r2\" name=\"Mode\" type=\"radio\" value=\"2\" %s onclick=\"this.form.submit();\"><label %s for=\"r2\">On&nbsp;&nbsp;</label>\n" % (AktiveMode("2"))
-		html += "<input id=\"r3\" name=\"Mode\" type=\"radio\" value=\"3\" %s onclick=\"this.form.submit();\"><label %s for=\"r3\">Media&nbsp;&nbsp;</label>\n" % (AktiveMode("3"))
-		html += "<input id=\"r4\" name=\"Mode\" type=\"radio\" value=\"4\" %s onclick=\"this.form.submit();\"><label %s for=\"r4\">Idle&nbsp;&nbsp;</label>\n" % (AktiveMode("4"))
+		html += "<input id=\"r1\" name=\"Mode\" type=\"radio\" value=\"1\" %s onclick=\"this.form.submit();\"><label %s for=\"r1\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("1",_l(_("Global"))))
+		html += "<input id=\"r2\" name=\"Mode\" type=\"radio\" value=\"2\" %s onclick=\"this.form.submit();\"><label %s for=\"r2\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("2",_l(_("On"))))
+		html += "<input id=\"r3\" name=\"Mode\" type=\"radio\" value=\"3\" %s onclick=\"this.form.submit();\"><label %s for=\"r3\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("3",_l(_("Media"))))
+		html += "<input id=\"r4\" name=\"Mode\" type=\"radio\" value=\"4\" %s onclick=\"this.form.submit();\"><label %s for=\"r4\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("4",_l(_("Idle"))))
 		if str(LCD4linux.Popup.value) != "0":
-			html += "<input id=\"r5\" name=\"Mode\" type=\"radio\" value=\"5\" %s onclick=\"this.form.submit();\"><label %s for=\"r5\">Popup-Text&nbsp;&nbsp;</label>\n" % (AktiveMode("5"))
+			html += "<input id=\"r5\" name=\"Mode\" type=\"radio\" value=\"5\" %s onclick=\"this.form.submit();\"><label %s for=\"r5\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("5","Popup-Text"))
 		html += "</fieldset></form>\n"
 
 		if Mode != "5":
