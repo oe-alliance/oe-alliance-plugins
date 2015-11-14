@@ -155,6 +155,8 @@ elif getBoxType() == 'vuduo2':
 	LCD4default = Data+"default.vuduo2"
 elif getBoxType() == 'et8500':
 	LCD4default = Data+"default.et8500"
+elif getBoxType() == 'vusolo4k':
+	LCD4default = Data+"default.solo4k"
 else:
 	LCD4default = Data+"default.lcd"
 WetterPath = LCD4plugin+"wetter/"
@@ -4938,6 +4940,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 		self.mode = _("Global")
 		self.LastSelect="4"
 		self.SetList()
+		self.selectionChanged()
 		if not self.selectionChanged in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 		if str(LCD4linux.LCDType3.value) == "00":
@@ -4953,10 +4956,9 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 
 	def layoutFinished(self):
 		self["config"].l.setSeperation(int(self["config"].l.getItemSize().width()*.7)) # use 30% of list width for sliders
-		self.mode = _("Idle")
-		self.LastSelect="5"
+		self.setTitle(_("LCD4linux Settings"))
+		self["key_blue"].setText(_("Set On >>"))
 		self.Page()
-		self.selectionChanged()
 
 	def NextScreenKey(self):
 		NextScreen(True)

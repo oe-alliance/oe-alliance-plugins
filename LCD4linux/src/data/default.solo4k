@@ -1,0 +1,6 @@
+config.Enable=true
+config.LCDType1=50
+config.xmlLCDType=480x320
+config.xmlType01=true
+config.xmlType02=true
+config.xmlType03=true
