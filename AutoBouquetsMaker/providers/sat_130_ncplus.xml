@@ -1,0 +1,35 @@
+<provider>
+	<name>NC+</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>lcnbat</protocol>
+	<transponder
+		orbital_position="130"
+		frequency="10719000"		
+		symbol_rate="27500000"
+		polarization="1"
+		fec_inner="0"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+		bat_pid="0x11"
+	/>
+	<sections>
+		<section number="1">NC+</section>
+	</sections>
+	<dvbsconfigs>
+		<configuration key="sd_02020" bouquet="0x2020" region="0x83">NC+</configuration>
+		<!--configuration key="sd_02021" bouquet="0x2021" region="0x83">2021</configuration-->
+		<!--configuration key="sd_02022" bouquet="0x2022" region="0x83">2022</configuration-->
+		<!--configuration key="sd_0C022" bouquet="0xC022" region="0x83">C023</configuration-->
+		<!--configuration key="sd_0C023" bouquet="0xC023" region="0x83">C023</configuration-->
+		<!--configuration key="sd_0C024" bouquet="0xC024" region="0x83">C024</configuration-->
+	</dvbsconfigs>
+	<servicehacks>
+<![CDATA[
+if service["service_type"] == 1 and service["service_name"][-2:] == 'HD':
+	service["service_type"] = 25
+]]>
+	</servicehacks>
+</provider>
