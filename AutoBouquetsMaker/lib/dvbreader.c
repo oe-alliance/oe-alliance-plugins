@@ -112,7 +112,7 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 			PyList_Append(list, item);
 			Py_DECREF(item);
 		}
-		else if (descriptor_tag == 0x83)	// LCN descriptor (Eutelsat)
+		else if (descriptor_tag == 0x83)	// LCN descriptor (Fransat, 5W)
 		{
 			int size = descriptor_length;
 			while (size > 0)
@@ -220,7 +220,7 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 					descriptor_length -= 3;
 				}
 			}
-			else if (descriptor_tag == 0x81)	// UPC LCN descriptor
+			else if (descriptor_tag == 0x81)	// LCN descriptor (UPC, 0.8W)
 			{
 				while (descriptor_length > 0)
 				{
@@ -242,7 +242,7 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 					descriptor_length -= 4;
 				}
 			}
-			else if (descriptor_tag == 0x83)	// LCN descriptor
+			else if (descriptor_tag == 0x83)	// LCN descriptor (NC+, 13E)
 			{
 				while (descriptor_length > 0)
 				{
@@ -266,7 +266,7 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 					descriptor_length -= 4;
 				}
 			}
-			else if (descriptor_tag == 0x86)	// DIGI LCN descriptor
+			else if (descriptor_tag == 0x86)	// LCN descriptor (DIGI 0.8W)
 			{
 				while (descriptor_length > 0)
 				{
@@ -288,7 +288,7 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 					descriptor_length -= 4;
 				}
 			}
-			else if (descriptor_tag == 0x93)	// NOVA LCN descriptor
+			else if (descriptor_tag == 0x93)	// LCN descriptor (NOVA, 13E)
 			{
 				while (descriptor_length > 0)
 				{
@@ -345,7 +345,7 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 					}
 				}
 			}
-			else if (descriptor_tag == 0xe2) // User defined Viasat bouquet
+			else if (descriptor_tag == 0xe2) // LCN descriptor (Viasat, 4.8E)
 			{
 				while (descriptor_length > 0)
 				{
@@ -583,7 +583,7 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 					Py_DECREF(item);
 				}
 			}
-			else if (descriptor_tag == 0x87)	// LCN V2 descriptor
+			else if (descriptor_tag == 0x87)	// LCN V2 descriptor (Canal Digital Nordic 0.8W)
 			{
 				int offset3 = offset2 + 2;
 				int channel_list_id = data[offset3];
