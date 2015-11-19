@@ -496,25 +496,16 @@ class DvbScanner():
 		# When no LCN available, create fake LCN numbers (service-id) and use customlcn file for final channel numbers
 		if len(logical_channel_number_dict) == 0:
 			print>>log, "[DvbScanner] LCN protocol but no LCNs found in NIT. Falling back to service ID."
-			lcn_temp = {}
 			for key in sdt_secions_status:
-				for section_content in sdt_secions_status[key]["content"]:
-					service = section_content
-					key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
-					lcn_temp[key] = service
-			for key in lcn_temp:
-				if lcn_temp[key]["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES or lcn_temp[key]["service_type"] in DvbScanner.AUDIO_ALLOWED_TYPES or lcn_temp[key]["service_type"] in DvbScanner.INTERACTIVE_ALLOWED_TYPES:
-					lcn_temp[key]["logical_channel_number"] = lcn_temp[key]["service_id"]
-					lcn_temp[key]["visible_service_flag"] = 1
-				else:
-					lcn_temp[key]["visible_service_flag"] = 0
-			logical_channel_number_dict = lcn_temp
+				for service in sdt_secions_status[key]["content"]:
+					servicekey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
+					service["logical_channel_number"] = service["service_id"]
+					logical_channel_number_dict[servicekey] = service
 
 		service_count = 0
 		tmp_services_dict = {}
 		for key in sdt_secions_status:
-			for section in sdt_secions_status[key]["content"]:
-				service = section
+			for service in sdt_secions_status[key]["content"]:
 
 				servicekey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
 
@@ -637,15 +628,14 @@ class DvbScanner():
 
 		service_count = 0
 		tmp_services_dict = {}
-		for section in fastscan_content:
-			service = section
+		for service in fastscan_content:
 
-			key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
+			servicekey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
 
-			if key not in logical_channel_number_dict:
+			if servicekey not in logical_channel_number_dict:
 				continue
 
-			if logical_channel_number_dict[key]["visible_service_flag"] == 0:
+			if logical_channel_number_dict[servicekey]["visible_service_flag"] == 0:
 				continue
 
 			if not hasattr(service, "free_ca"):
@@ -659,18 +649,18 @@ class DvbScanner():
 			if not hasattr(service, "flags"):
 				service["flags"] = 0
 
-			service["number"] = logical_channel_number_dict[key]["logical_channel_number"]
+			service["number"] = logical_channel_number_dict[servicekey]["logical_channel_number"]
 
 			service["orbital_position"] = service["namespace"] / (16**4)
 
 			if service["service_type"] < 17 and (service["service_name"][-2:] == 'HD' or ' HD ' in service["service_name"]):
 				service["service_type"] = 25
 
-			if key in tmp_services_dict:
-				tmp_services_dict[key]["numbers"].append(service["number"])
+			if servicekey in tmp_services_dict:
+				tmp_services_dict[servicekey]["numbers"].append(service["number"])
 			else:
 				service["numbers"] = [service["number"]]
-				tmp_services_dict[key] = service
+				tmp_services_dict[servicekey] = service
 
 			service_count += 1
 
