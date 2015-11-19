@@ -488,19 +488,18 @@ class DvbScanner():
 		# Create logical_channel_number_dict for VMUK
 		if protocol == 'vmuk':
 			for key in sdt_secions_status:
-				for section in sdt_secions_status[key]["content"]:
-					if "logical_channel_number" in section and section["logical_channel_number"] > 0:
-						servicekey = "%x:%x:%x" % (section["transport_stream_id"], section["original_network_id"], section["service_id"])
-						logical_channel_number_dict[servicekey] = {"transport_stream_id": section["transport_stream_id"], "original_network_id": section["original_network_id"], "service_id": section["service_id"], "logical_channel_number": section["logical_channel_number"]}
+				for service in sdt_secions_status[key]["content"]:
+					if "logical_channel_number" in service and service["logical_channel_number"] > 0:
+						servicekey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
+						logical_channel_number_dict[servicekey] = {"transport_stream_id": service["transport_stream_id"], "original_network_id": service["original_network_id"], "service_id": service["service_id"], "logical_channel_number": service["logical_channel_number"]}
 
 		# When no LCN available, create fake LCN numbers (service-id) and use customlcn file for final channel numbers
 		if len(logical_channel_number_dict) == 0:
-			print>>log, "[DvbScanner] LCN protocol but no LCNs found in NIT. Falling back to service ID."
+			print>>log, "[DvbScanner] No LCNs found. Falling back to service ID."
 			for key in sdt_secions_status:
 				for service in sdt_secions_status[key]["content"]:
 					servicekey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
-					service["logical_channel_number"] = service["service_id"]
-					logical_channel_number_dict[servicekey] = service
+					logical_channel_number_dict[servicekey] = {"transport_stream_id": service["transport_stream_id"], "original_network_id": service["original_network_id"], "service_id": service["service_id"], "logical_channel_number": service["service_id"]}
 
 		service_count = 0
 		tmp_services_dict = {}
