@@ -568,7 +568,7 @@ class DvbScanner():
 				for number in service["numbers"]:
 					if number not in video_services:
 						video_services[number] = service
-			else:
+			elif service["service_type"] in DvbScanner.AUDIO_ALLOWED_TYPES:
 				for number in service["numbers"]:
 					if number not in radio_services:
 						radio_services[number] = service
@@ -708,7 +708,7 @@ class DvbScanner():
 				for number in service["numbers"]:
 					if number not in video_services:
 						video_services[number] = service
-			else:
+			elif service["service_type"] in DvbScanner.AUDIO_ALLOWED_TYPES:
 				for number in service["numbers"]:
 					if number not in radio_services:
 						radio_services[number] = service
@@ -933,7 +933,7 @@ class DvbScanner():
 							video_services[number] = service
 					else:
 						video_services[number] = service
-			else:
+			elif service["service_type"] in DvbScanner.AUDIO_ALLOWED_TYPES:
 				for number in service["numbers"]:
 					if number not in radio_services:
 						radio_services[number] = service
