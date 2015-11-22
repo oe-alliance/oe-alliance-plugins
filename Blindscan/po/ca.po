@@ -1,132 +1,86 @@
-# Catalan translations for Enigma2.
-#
-# Oriol Pellicer i Sabrià <oriol@elsud.org>, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2\n"
+"Project-Id-Version: Blindscan\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: 2012-05-18 01:41+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
-"Language-Team: \n"
-"Language: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-11-21 19:23+0100\n"
+"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
+"Language-Team: OpenSPA <openspa.info>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Catalan\n"
 "X-Poedit-Country: CATALONIA\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Poedit 1.5.4\n"
 
-msgid ""
-"\"channel scan\" searches for channels and saves them to your receiver; "
-"\"save to XML file\" does a transponder search and saves found transponders "
-"to an XML file in satellites.xml format"
-msgstr ""
+msgid "\"channel scan\" searches for channels and saves them to your receiver; both options do a transponder search and save the result in /tmp in an XML file in satellites.xml format"
+msgstr "\"Cercar canals\" cerca canals i els desa al receptor; les dues opcions cerquen transponedors i desen el resultat en un arxiu .XML a /tmp, amb el mateix format que satellites.xml"
 
-msgid "Blind Scan"
-msgstr ""
+msgid "Blind scan"
+msgstr "Recerca cega"
 
 msgid "Blindscan"
-msgstr ""
+msgstr "Recerca cega"
 
-#
 msgid "Clear before scan"
-msgstr "Netejar abans de buscar"
-
-#
-msgid "Exit"
-msgstr ""
-
-msgid "Filter out adjacent satellites"
-msgstr ""
+msgstr "Netejar abans de cercar"
 
 msgid ""
-"Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the "
-"case of C-band satellites)"
-msgstr ""
-
-msgid ""
-"If you are not sure what polarisations the satellite you wish to search "
-"transmits, select \"vertical and horizontal\""
-msgstr ""
-
-msgid ""
-"If you select \"yes\" all channels on the satellite being search will be "
-"deleted before starting the current search"
-msgstr ""
-
-msgid ""
-"If you select \"yes\" the scan will only save channels that are not "
-"encrypted; \"no\" will find encrypted and non-encrypted channels"
-msgstr ""
-
-msgid ""
-"If you select \"yes\" the scan will only search transponders not listed in "
-"satellites.xml"
-msgstr ""
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"For C-band searches stop frequency must be between 3000MHz and 4200MHz."
-msgstr ""
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Frequency start value is larger than stop value."
-msgstr ""
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Start frequency must be between 10700MHz and 12750MHz.\n"
-"(Or 3000MHz and 4200MHz in the case of c-band)."
-msgstr ""
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Start symbol rate must be between 1MHz and 44MHz."
-msgstr ""
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Stop frequency must be between 10700MHz and 12750MHz.\n"
-"(Or 3000MHz and 4200MHz in the case of c-band)."
-msgstr ""
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Stop symbol rate must be between 2MHz and 45MHz."
-msgstr ""
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Symbol rate start value is larger than stop value."
-msgstr ""
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"That is a C-band satellite so frequency values \n"
-"need to be between 3000MHz and 4200MHz."
-msgstr ""
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"That is a Ku-band satellite so frequency values \n"
-"need to be between 10700MHz and 12750MHz."
-msgstr ""
-
-#, python-format
-msgid ""
-"Looking for available transponders.\n"
-"This will take a short while.\n"
-"\n"
-"   Current Status : %d/%d\n"
+"Current Status : %d/%d\n"
 "   Satellite : %s\n"
 "   Polarization : %s\n"
 "   Frequency range : %d - %d MHz\n"
 "   Symbol rates : %d - %d MHz"
 msgstr ""
+"Estado: %d/%d\n"
+"   Satèl·lit: %s\n"
+"   Polarització: %s\n"
+"   Rang de freqüències: %d - %d MHz\n"
+"   Veloc. de símbol: %d - %d MHz"
+
+msgid "Exit"
+msgstr "Sortir"
+
+msgid "Filter out adjacent satellites"
+msgstr "Filtrar satèl·lits propers"
+
+msgid "Frequency values must be between 10700 MHz and 12749 MHz"
+msgstr "Les freqüències cal que estiguin compreses entre 10700 MHz i 12749 MHz"
+
+msgid "Frequency values must be between 10701 MHz and 12750 MHz"
+msgstr "Les freqüències cal que estiguin compreses entre 10701 MHz i 12750 MHz"
+
+msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
+msgstr "Les freqüències cal que estiguin compreses entre 3000 MHz i 4199 MHz (banda-C)"
+
+msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
+msgstr "Les freqüències cal que estiguin compreses entre 3001 MHz i 4200 MHz (banda-C)"
+
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgstr "Si seleccioneu \"Si\", tots els canals del satèl·lit a escanejar seràn eliminats abans de començar la recerca cega"
+
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgstr "Si seleccioneu \"Si\", l'escaneig només desarà els canals no encriptats; triar \"No\" cercarà canals encriptats i no encriptats"
+
+msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
+msgstr "Si seleccioneu \"Si\", nomes es cercaràn transponedors no inclosos a satellites.xml"
+
+msgid ""
+"Looking for available transponders.\n"
+"This will take a long time, please be patient."
+msgstr ""
+"S'estan cercant transponedors disponibles.\n"
+"Aquesta recerca trigarà una estona. Si us plau, sigueu pacients."
+
+msgid ""
+"Looking for available transponders.\n"
+"This will take a short while."
+msgstr ""
+"S'estan cercant transponedors disponibles.\n"
+"Aquesta recerca no trigarà en acabar"
 
 msgid ""
 "No new transponders found! \n"
@@ -134,116 +88,124 @@ msgid ""
 "Only transponders already listed in satellites.xml \n"
 "have been found for those search parameters!"
 msgstr ""
+"No s'han trobat transponedors nous.\n"
+"\n"
+"Només s'han trobat els transponedors \n"
+"llistats a satellites.xml per a aquests paràmetres."
 
 msgid "No transponders were found for those search parameters!"
-msgstr ""
+msgstr "No s'han trobat transponedors amb aquests paràmetres de cerca."
 
 msgid "Only free scan"
-msgstr ""
+msgstr "Cercar només lliures"
 
 msgid "Only scan unknown transponders"
-msgstr ""
+msgstr "Cercar només transponedors desconeguts"
 
 msgid "Please setup your tuner configuration."
-msgstr ""
+msgstr "Configureu les opcions del sintonitzador"
 
 msgid "Polarisation"
-msgstr ""
+msgstr "Polarització"
 
 msgid "Press Green/OK to start the scan"
-msgstr ""
+msgstr "Premeu Verd/OK per començar la recerca"
 
-#
 msgid "Satellite"
 msgstr "Satèl·lit"
 
 msgid "Scan"
-msgstr ""
+msgstr "Cercar"
+
+msgid "Scan satellites for new transponders"
+msgstr "S'estan cercant transponedors nous"
 
 msgid "Scan start frequency"
-msgstr ""
+msgstr "Freqüència inicial de la recerca"
 
 msgid "Scan start symbolrate"
-msgstr ""
+msgstr "Velocitat de símbol inicial"
 
 msgid "Scan stop frequency"
-msgstr ""
+msgstr "Freqüència final de la recerca"
 
 msgid "Scan stop symbolrate"
-msgstr ""
+msgstr "Velocitat de símbol final"
 
-#, python-format
 msgid ""
 "Search completed. %d transponders found.\n"
 "\n"
 "Details saved in:\n"
 "%s"
 msgstr ""
+"Recerca finalitzada. S'han trobat %d transponedors.\n"
+"\n"
+"Dades desades a:\n"
+"%s"
 
 msgid "Search type"
-msgstr ""
+msgstr "Tipus de recerca"
 
 msgid "Select a tuner that is configured for the satellite you wish to search"
-msgstr ""
+msgstr "Trieu un sintonitzador configurat per al satèl·lit que voleu escanejar"
 
 msgid "Select the satellite you wish to search"
-msgstr ""
+msgstr "Seleccioneu el satèl·lit que voleu escanejar"
+
+msgid "Sorry, this tuner is in use."
+msgstr "Aquest sintonitzador està en ús"
 
 msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
-msgstr ""
+msgstr "Els valors de la velocitat de símbol estan en megasímbols. Introduïu una xifra entre 1 i 44"
 
 msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
-msgstr ""
+msgstr "Els valors de la velocitat de símbol estan en megasímbols. Introduïu una xifra entre 2 i 45"
 
 msgid "The blindscan run was cancelled by the user."
-msgstr ""
+msgstr "La recerca cega ha estat cancel·lada per l'usuari"
 
-#
+msgid "The suggested polarisation for this satellite is \"%s\""
+msgstr "La polarització suggerida per a aquest satèl·lit es \"%s\""
+
 msgid "Tuner"
 msgstr "Sintonitzador"
 
-msgid ""
-"When a neighbouring satellite is very strong this avoids searching "
-"transponders known to be coming from the neighbouring satellite"
-msgstr ""
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgstr "Quan un satèl·lit proper és molt potent, això evita cercar transponedors procedents d'aquest satèl·lit"
 
-#
 msgid "circular left"
-msgstr "circular esq."
+msgstr "Circular esquerra"
 
-#
 msgid "circular right"
-msgstr "circular dreta"
+msgstr "Circular dreta"
 
 msgid "circular right and circular left"
-msgstr ""
+msgstr "Circular dreta i circular esquerra"
 
-#
 msgid "horizontal"
-msgstr "horitzontal"
+msgstr "Horitzontal"
 
-#
 msgid "no"
-msgstr "no"
+msgstr "No"
 
 msgid "save to XML file"
-msgstr ""
+msgstr "Desar a arxiu XML"
 
 msgid "scan for channels"
-msgstr ""
+msgstr "Cercar canals"
 
 msgid "up to 1 degree"
-msgstr ""
+msgstr "Fins a 1º"
 
 msgid "up to 2 degrees"
-msgstr ""
+msgstr "Fins a 2º"
 
 msgid "up to 3 degrees"
-msgstr ""
+msgstr "Fins a 3º"
 
-#
 msgid "vertical"
-msgstr "vertical"
+msgstr "Vertical"
 
 msgid "vertical and horizontal"
-msgstr ""
+msgstr "Vertical i Horitzontal"
+

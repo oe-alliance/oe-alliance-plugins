@@ -1,144 +1,86 @@
-# Spanish translations for Enigma2.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2\n"
+"Project-Id-Version: Blindscan\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-06 21:13+0000\n"
-"PO-Revision-Date: 2013-01-25 19:24+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
-"Language-Team: none\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-11-21 19:23+0100\n"
+"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
+"Language-Team: OpenSPA <openspa.info>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Generator: Poedit 1.5.4\n"
 
-msgid "\"channel scan\" searches for channels and saves them to your receiver; \"save to XML file\" does a transponder search and saves found transponders to an XML file in satellites.xml format"
-msgstr "\"Buscar canales\" busca canales y los guarda en el receptor. \"Guardar en archivo XML\" inicia una búsqueda de transpondedor y guarda los transpondedores encontrados en un archivo XML en formato satellites.xml."
+msgid "\"channel scan\" searches for channels and saves them to your receiver; both options do a transponder search and save the result in /tmp in an XML file in satellites.xml format"
+msgstr "\"Buscar canales\" busca canales y los guarda en el receptor; las dos opciones buscan transpondedores y guardan el resultado en un archivo .XML en /tmp, con el mismo formato que satellites.xml"
 
-msgid "Blind Scan"
+msgid "Blind scan"
 msgstr "Búsqueda ciega"
 
 msgid "Blindscan"
 msgstr "Búsqueda ciega"
 
-#
 msgid "Clear before scan"
 msgstr "Limpiar antes de buscar"
 
-#
+msgid ""
+"Current Status : %d/%d\n"
+"   Satellite : %s\n"
+"   Polarization : %s\n"
+"   Frequency range : %d - %d MHz\n"
+"   Symbol rates : %d - %d MHz"
+msgstr ""
+"Estado: %d/%d\n"
+"   Satélite: %s\n"
+"   Polarización: %s\n"
+"   Rango de frecuencias: %d - %d MHz\n"
+"   Veloc. de símbolo: %d - %d MHz"
+
 msgid "Exit"
 msgstr "Salir"
 
 msgid "Filter out adjacent satellites"
 msgstr "Filtrar satélites adyacentes"
 
-msgid "Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the case of C-band satellites)"
-msgstr "Los valores de frecuencia deben estar entre 10700 y 12750 (o 3000 y 4200 en caso de satélites de banda C)"
+msgid "Frequency values must be between 10700 MHz and 12749 MHz"
+msgstr "Las frecuencias deben estar comprendidas entre 10700 MHz y 12749 MHz"
 
-msgid "If you are not sure what polarisations the satellite you wish to search transmits, select \"vertical and horizontal\""
-msgstr "Si no estás seguro de qué polarizaciones transmite el satélite que quieres buscar, selecciona \"vertical y horizontal\""
+msgid "Frequency values must be between 10701 MHz and 12750 MHz"
+msgstr "Las frecuencias deben estar comprendidas entre 10701 MHz y 12750 MHz"
+
+msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
+msgstr "Las frecuencias deben estar comprendidas entre 3000 MHz y 4199 MHz (banda-C)"
+
+msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
+msgstr "Las frecuencias deben estar comprendidas entre 3001 MHz y 4200 MHz (banda-C)"
 
 msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
-msgstr "Si seleccionas \"sí\", todos los canales del satélite buscado se borrarán antes de empezar la búsqueda actual"
+msgstr "Si selecciona \"Si\", todos los canales del satélite a escanear serán borrados antes de empezar la búsqueda ciega"
 
 msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
-msgstr "Si seleccionas \"sí\", la búsqueda sólo guardará los canales no encriptaos; \"no\" encontrará canales encriptados y no encriptados"
+msgstr "Si selecciona \"Si\", la búsqueda sólo guardará los canales no encriptados; elegir \"No\" buscará canales encriptados y no encriptados"
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
-msgstr "Si seleccionas \"sí\", sólo se buscarán transpondedores no incluidos en satellites.xml"
+msgstr "Si selecciona \"Si\", sólo se buscarán transpondedores no incluidos en satellites.xml"
 
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"For C-band searches stop frequency must be between 3000MHz and 4200MHz."
-msgstr ""
-"Parámetros no válidos. Corrígelo y vuelve a intentarlo.\n"
-"En búsquedas de banda C, la frecuencia de paro debe estar entre 3000MHz y 4200MHz."
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Frequency start value is larger than stop value."
-msgstr ""
-"Parámetros no válidos. Corrígelo y vuelve a intentarlo.\n"
-"El valor de inicio de frecuencia es mayor que el de paro."
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Start frequency must be between 10700MHz and 12750MHz.\n"
-"(Or 3000MHz and 4200MHz in the case of c-band)."
-msgstr ""
-"Parámetros no válidos. Corrígelo y vuelve a intentarlo.\n"
-"La frecuencia de inicio debe estar entre 10700MHz y 12750MHz."
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Start symbol rate must be between 1MHz and 44MHz."
-msgstr ""
-"Parámetros no válidos. Corrígelo y vuelve a intentarlo.\n"
-"El índice del símbolo de inicio debe estar entre 1MHz y 44MHz."
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Stop frequency must be between 10700MHz and 12750MHz.\n"
-"(Or 3000MHz and 4200MHz in the case of c-band)."
-msgstr ""
-"Parámetros no válidos. Corrígelo y vuelve a intentarlo.\n"
-"La frecuencia de paro debe estar entre 10700MHz y 12750MHz."
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Stop symbol rate must be between 2MHz and 45MHz."
-msgstr ""
-"Parámetros no válidos. Corrígelo y vuelve a intentarlo.\n"
-"El índice del símbolo de paro debe estar entre 2MHz y 45MHz."
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"Symbol rate start value is larger than stop value."
-msgstr ""
-"Parámetros no válidos. Corrígelo y vuelve a intentarlo.\n"
-"El índice del símbolo de inicio es mayor que el valor de paro."
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"That is a C-band satellite so frequency values \n"
-"need to be between 3000MHz and 4200MHz."
-msgstr ""
-"Parámetros no válidos. Corrígelo y vuelve a intentarlo.\n"
-"Es un satélite de banda C. Los valores de frecuencia \n"
-"tienen que estar entre 3000MHz y 4200MHz."
-
-msgid ""
-"Invalid parameters entered. Please correct and try again.\n"
-"That is a Ku-band satellite so frequency values \n"
-"need to be between 10700MHz and 12750MHz."
-msgstr ""
-"Parámetros no válidos. Corrígelo y vuelve a intentarlo.\n"
-"Es un satélite de banda Ku. Los valores de frecuencia \n"
-"tienen que estar entre 10700MHz y 12750MHz."
-
-#, python-format
 msgid ""
 "Looking for available transponders.\n"
-"This will take a short while.\n"
-"\n"
-"   Current Status : %d/%d\n"
-"   Satellite : %s\n"
-"   Polarization : %s\n"
-"   Frequency range : %d - %d MHz\n"
-"   Symbol rates : %d - %d MHz"
+"This will take a long time, please be patient."
 msgstr ""
-"Buscando transpondedores disponibles.\n"
-"Llevará algún tiempo.\n"
-"\n"
-"   Estado actual: %d/%d\n"
-"   Satélite: %s\n"
-"   Polarización : %s\n"
-"   Rango de frecuencia: %d - %d MHz\n"
-"   SR: %d - %d MHz"
+"Buscando transpondedore disponibles.\n"
+"Esta búsqueda tardará en finalizar. Por favor, tenga paciencia."
+
+msgid ""
+"Looking for available transponders.\n"
+"This will take a short while."
+msgstr ""
+"Buscando transpondedore disponibles.\n"
+"Esta búsqueda no tardará en finalizar"
 
 msgid ""
 "No new transponders found! \n"
@@ -155,40 +97,41 @@ msgid "No transponders were found for those search parameters!"
 msgstr "No se han encontrado transpondedores con esos parámetros de búsqueda."
 
 msgid "Only free scan"
-msgstr "Sólo búsqueda libre."
+msgstr "Buscar sólo libres"
 
 msgid "Only scan unknown transponders"
-msgstr "Sólo buscar transpondedores desconocidos"
+msgstr "Buscar sólo transpondedores desconocidos"
 
 msgid "Please setup your tuner configuration."
-msgstr "Por favor configura los ajustes del sintonizador"
+msgstr "Por favor configure las opciones del sintonizador"
 
 msgid "Polarisation"
 msgstr "Polarización"
 
 msgid "Press Green/OK to start the scan"
-msgstr "Pulsa Verde/OK para iniciar la búsqueda"
+msgstr "Pulse Verde/OK para iniciar la búsqueda"
 
-#
 msgid "Satellite"
 msgstr "Satélite"
 
 msgid "Scan"
 msgstr "Buscar"
 
+msgid "Scan satellites for new transponders"
+msgstr "Buscando transpondedores nuevos"
+
 msgid "Scan start frequency"
-msgstr "Buscar frecuencia de inicio"
+msgstr "Frecuencia inicial de la búsqueda"
 
 msgid "Scan start symbolrate"
-msgstr "Buscar velocidad de símbolo de inicio"
+msgstr "Velocidad de símbolo inicial"
 
 msgid "Scan stop frequency"
-msgstr "Buscar frecuencia de paro"
+msgstr "Frecuencia final de la búsqueda"
 
 msgid "Scan stop symbolrate"
-msgstr "Buscar velocidad de símbolo de paro"
+msgstr "Velocidad de símbolo final"
 
-#, python-format
 msgid ""
 "Search completed. %d transponders found.\n"
 "\n"
@@ -204,48 +147,46 @@ msgid "Search type"
 msgstr "Tipo de búsqueda"
 
 msgid "Select a tuner that is configured for the satellite you wish to search"
-msgstr "Escoge un sintonizador configurado para el satélite que quieras buscar"
+msgstr "Elija un sintonizador configurado para el satélite que quiera escanear"
 
 msgid "Select the satellite you wish to search"
-msgstr "Selecciona el satélite que quieres buscar"
+msgstr "Seleccione el satélite que quiera escanear"
 
 msgid "Sorry, this tuner is in use."
-msgstr "Este sintonizador está en uso."
+msgstr "Este sintonizador está en uso"
 
 msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
-msgstr "Los valores de índice de símbolo están en megasímbolos. Introduce una cifra entre 1 y 44"
+msgstr "Los valores de velocidad de símbolo están en megasímbolos. Introduzca una cifra entre 1 y 44"
 
 msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
-msgstr "Los valores de índice de símbolo están en megasímbolos. Introduce una cifra entre 2 y 45"
+msgstr "Los valores de velocidad de símbolo están en megasímbolos. Introduzca una cifra entre 2 y 45"
 
 msgid "The blindscan run was cancelled by the user."
 msgstr "La búsqueda ciega ha sido cancelada por el usuario"
 
-#
+msgid "The suggested polarisation for this satellite is \"%s\""
+msgstr "La polarización sugerida para este satélite es \"%s\""
+
 msgid "Tuner"
 msgstr "Sintonizador"
 
 msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
-msgstr "Cuando un satélite vecino es muy fuerte, se evita buscar transpondedores procedentes de ese satélite."
+msgstr "Cuando un satélite cercano es muy potente, se evita buscar transpondedores procedentes de ese satélite"
 
-#
 msgid "circular left"
-msgstr "circular izda"
+msgstr "Circular izda."
 
-#
 msgid "circular right"
-msgstr "circular dcha"
+msgstr "Circular dcha."
 
 msgid "circular right and circular left"
 msgstr "Circular derecha y circular izquierda"
 
-#
 msgid "horizontal"
-msgstr "horizontal"
+msgstr "Horizontal"
 
-#
 msgid "no"
-msgstr "no"
+msgstr "No"
 
 msgid "save to XML file"
 msgstr "Guardar en archivo XML"
@@ -262,10 +203,9 @@ msgstr "Hasta 2º"
 msgid "up to 3 degrees"
 msgstr "Hasta 3º"
 
-#
 msgid "vertical"
-msgstr "vertical"
+msgstr "Vertical"
 
 msgid "vertical and horizontal"
-msgstr "Vertical y horizontal"
+msgstr "Vertical y Horizontal"
 
