@@ -3,11 +3,10 @@ from Screens.Screen import Screen
 import os
 from enigma import eTimer
 from time import sleep
-from Components.ConfigList import ConfigListScreen
 
 #########
 
-class LoopSyncMain(ConfigListScreen, Screen):
+class LoopSyncMain(Screen):
 	def __init__(self, session, args = None):
 		Screen.__init__(self, session)
 		self.session = session
