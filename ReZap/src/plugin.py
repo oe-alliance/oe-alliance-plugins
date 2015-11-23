@@ -3,16 +3,18 @@ from Screens.Screen import Screen
 import os
 from enigma import eTimer
 from time import sleep
+from Components.ConfigList import ConfigListScreen
 
-#############
+#########
 
-class LoopSyncMain(Screen):
+class LoopSyncMain(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
 		Screen.__init__(self, session)
 		self.session = session
 		self.gotSession()
 
 	def gotSession(self):
+		self.buffr = 0
 		self.AVSyncTimer = eTimer()
 		self.AVSyncTimer.callback.append(self.updateAVSync)
 		self.AVSyncTimer.start(10000, True)
@@ -43,13 +45,42 @@ class LoopSyncMain(Screen):
 				buff = line1[strf2+18:strf3]
 		except Exception, e:
 			print "[ReZap] Can't read class"
-		msg = str(pts_diff)
-		if pts_diff > 9000 and pts_video != 0: msg = msg + " Need restart !"
-		if (pts_diff > 9000 and pts_video != 0 and pts_diff < 1000000) or (int(buff) > 47721800 and pts_video != 0):
-			f_tmp = open("/tmp/restart.audio", "a")
-			f_tmp.write("ReZap\n")
+		if int(buff) > 47721700 :
+			self.buffr = self.buffr + 1
+		else:
+			self.buffr = 0
+		if (pts_diff > 9000 and pts_video != 0 and pts_diff < 1000000) or (self.buffr > 2 and pts_video != 0):
+			self.session.open(DoAVSync)
+			self.buffr = 0
+		self.AVSyncTimer.start(9000, True)
+                
+###################################                
+class DoAVSync(Screen):
+  
+	skin = """
+		<screen position="center,center" size="1920,1080" title="ReZap" >
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+
+		try:
+			f_tmp = open("/sys/class/video/blackout_policy", "w")
+			f_tmp.write("0")
 			f_tmp.close()
-		self.AVSyncTimer.start(5000, True)
+		except Exception, e:
+			print "[ReZap] Can't change policy"
+		self.current_service		= self.session.nav.getCurrentlyPlayingServiceReference()
+		self.session.nav.stopService()
+		self.session.nav.playService(self.current_service)
+		try:
+			f_tmp = open("/sys/class/video/blackout_policy", "w")
+			f_tmp.write("1")
+			f_tmp.close()
+		except Exception, e:
+			print "[ReZap] Can't change policy"
+		self.close()	
+
 
 ###################################                
 
