@@ -508,7 +508,7 @@ class DvbScanner():
 
 				servicekey = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
 
-				if logical_channel_number_dict and (servicekey not in logical_channel_number_dict or "visible_service_flag" in logical_channel_number_dict[servicekey] and logical_channel_number_dict[servicekey]["visible_service_flag"] == 0):
+				if servicekey not in logical_channel_number_dict or "visible_service_flag" in logical_channel_number_dict[servicekey] and logical_channel_number_dict[servicekey]["visible_service_flag"] == 0:
 					continue
 				if service_dict_tmp and servicekey not in service_dict_tmp and protocol not in ("lcn2", "lcnbat2"):
 					continue
