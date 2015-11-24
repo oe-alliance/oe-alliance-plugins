@@ -27,6 +27,7 @@ config.autobouquetsmaker.extensions = ConfigYesNo(default = False)
 config.autobouquetsmaker.placement = ConfigSelection(default = "top", choices = [("top", _("Top")), ("bottom", _("Bottom"))])
 config.autobouquetsmaker.skipservices = ConfigYesNo(default = True)
 config.autobouquetsmaker.showextraservices = ConfigYesNo(default = False)
+config.autobouquetsmaker.extra_debug = ConfigYesNo(default = False)
 config.autobouquetsmaker.FTA_only = ConfigText("", False)
 
 def main(session, **kwargs):

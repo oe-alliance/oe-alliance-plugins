@@ -490,6 +490,7 @@ class AutoBouquetsMaker_Setup(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Place bouquets at"), config.autobouquetsmaker.placement, _("This option will alow you choose where to place the created bouquets.")))
 			self.list.append(getConfigListEntry(_("Skip services on not configured sats"), config.autobouquetsmaker.skipservices, _("If a service is carried on a satellite that is not configured, 'yes' means the channel will not appear in the channel list, 'no' means the channel will show in the channel list but be greyed out and not be accessible.")))
 			self.list.append(getConfigListEntry(_("Include 'not indexed' channels"), config.autobouquetsmaker.showextraservices, _("When a search finds extra channels that do not have an allocated channel number, 'yes' will add these at the end of the channel list, and 'no' means these will not be included.")))
+			self.list.append(getConfigListEntry(_("Extra debug"), config.autobouquetsmaker.extra_debug, _("This feature is for development only. Requires debug logs to be enabled or enigma2 to be started in console mode.")))
 		self.list.append(getConfigListEntry(_("Show in extensions"), config.autobouquetsmaker.extensions, _("When enable allow you start a scan from the extensions list.")))
 
 		self["config"].list = self.list
