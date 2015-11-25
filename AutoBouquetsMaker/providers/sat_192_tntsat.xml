@@ -1,24 +1,44 @@
 <provider>
 	<name>TNTSat</name>
 	<streamtype>dvbs</streamtype>
-	<protocol>nolcn</protocol>
+	<protocol>lcnbat2</protocol>
 	<transponder
 		orbital_position="192"
-		frequency="12402000"
+		frequency="11856000"		
 		symbol_rate="27500000"
 		polarization="1"
-		fec_inner="3"
+		fec_inner="0"
 		inversion="2"
 		system="0"
 		modulation="1"
 		roll_off="0"
 		pilot="2"
+		bat_pid="0x11"
 	/>
 	<sections>
 		<section number="1">Chaines</section>
 		<section number="300">Regionales</section>
-		<section number="325">Non indexée</section>
 	</sections>
+	<dvbsconfigs>
+		<!--<configuration key="hd_49153" bouquet="0xc001" region="0x83">CanalSatellite</configuration>--><!-- empty -->
+		<!--<configuration key="hd_49157" bouquet="0xc005" region="0x83">TNTSAT</configuration>--><!-- 26 channels -->
+		<!--<configuration key="hd_49162" bouquet="0xc00a" region="0x83">TNTSAT HD</configuration>--><!-- 29 channels -->
+		<!--<configuration key="hd_49163" bouquet="0xc00b" region="0x83">TNTSAT SPS</configuration>--><!-- empty -->
+		<!--<configuration key="hd_49164" bouquet="0xc00c" region="0x83">TNTSAT C1</configuration>--><!-- 1 info channel -->
+		<!--<configuration key="hd_49165" bouquet="0xc00d" region="0x83">CanalSat HD</configuration>--><!-- 271 channels -->
+		<configuration key="sd_49166" bouquet="0xc00e" region="0x83">TNTSAT SD</configuration><!-- 53 channels -->
+		<configuration key="hd_49167" bouquet="0xc00f" region="0x83">TNTSAT HD</configuration><!-- 53 channels -->
+		<!--<configuration key="hd_49169" bouquet="0xc011" region="0x83">Hospitality Ref</configuration>--><!-- empty -->
+		<!--<configuration key="hd_49170" bouquet="0xc012" region="0x83">TNT TRIAX</configuration>--><!-- empty -->
+		<!--<configuration key="hd_49171" bouquet="0xc013" region="0x83">TNTSAT pro</configuration>--><!-- 49 channels -->
+		<!--<configuration key="hd_49172" bouquet="0xc014" region="0x83">REDSAT BASIC</configuration>--><!-- 90 channels -->
+		<!--<configuration key="hd_49173" bouquet="0xc015" region="0x83">REDSAT CPLUS</configuration>--><!-- 98 channels -->
+		<!--<configuration key="hd_49174" bouquet="0xc016" region="0x83">REDSAT CSAT</configuration>--><!-- 271 channels -->
+		<!--<configuration key="hd_49180" bouquet="0xc01c" region="0x83">CANAL READY SUISSE</configuration>--><!-- 100+ channels -->
+		<!--<configuration key="hd_49181" bouquet="0xc01d" region="0x83">CANAL PRO Phase 2</configuration>--><!-- empty -->
+		<!--<configuration key="hd_49182" bouquet="0xc01e" region="0x83">CANAL+ R7 Prod</configuration>--><!-- 20 channels -->
+		<!--<configuration key="hd_49183" bouquet="0xc01f" region="0x83">CANAL+ R7 Test</configuration>--><!-- 20 channels -->
+	</dvbsconfigs>
 	<servicehacks>
 <![CDATA[
 ]]>
