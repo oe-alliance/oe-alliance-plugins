@@ -155,7 +155,7 @@ SUBDIRS += FirmwareUpgrade VuRemote Blindscan
 endif
 
 if VUSOLO4K
-SUBDIRS += FirmwareUpgrade VuRemote Blindscan
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup Blindscan 
 endif
 
 if GIGABLUE

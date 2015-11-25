@@ -79,9 +79,12 @@ def createTransCodingConfig(encoder):
 		if (hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "bitrate") or hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "framerate")):
 			choice = ConfigSelection(default = "Off", choices = [ ("On", _("On")), ("Off", _("Off")) ])
 			config.plugins.transcodingsetup.encoder[int(encoder)].automode = choice
-	
+
 		if fileExists(getProcPath(encoder, "resolution")):
-			choice = ConfigSelection(default = "480p", choices = [ ("480p", _("480p")), ("576p", _("576p")), ("720p", _("720p")), ("320x240", _("320x240")), ("160x120", _("160x120")) ])
+			resolutaion_choices = [ ("480p", _("480p")), ("576p", _("576p")), ("720p", _("720p")), ("320x240", _("320x240")), ("160x120", _("160x120")) ]
+			if getBoxType in ("vusolo4k"):
+				resolutaion_choices.insert(3, ("1080p", _("1080p")))
+			choice = configSelection(encoder, default = "480p", choices = resolutaion_choices )
 			config.plugins.transcodingsetup.encoder[int(encoder)].resolution = choice
 	
 		if fileExists(getProcPath(encoder, "aspectratio")):
@@ -198,6 +201,16 @@ class TranscodingSetupInit:
 			if value != setValue:
 				print "[TranscodingSetup] set failed. (%s > %s)" % (value, procPath)
 				return -1
+			# Set bitrate "-1" when automode is "ON" and display_format is changed.
+			# At custom mode, set display_format -> width -> height -> bitrate (-1)
+			setname = procPath.split('/')[-1]
+			encoder = procPath.split('/')[-2]
+			if (setname == "display_format" and value != "custom") or (setname == "height"):
+				if hasAttr("automode", encoder) and getAttr("automode", encoder).value == "On":
+					if hasAttr("bitrate", encoder):
+						setProcValue(getProcPath(encoder ,"bitrate"), str(-1))
+					elif hasAttr("framerate", encoder):
+						setProcValue(getProcPath(encoder ,"framerate"), str(-1))
 			return 0
 		except:
 			print "setConfig exception error (%s > %s)" % (value, procPath)
