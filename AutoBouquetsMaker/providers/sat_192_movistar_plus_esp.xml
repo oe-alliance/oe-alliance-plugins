@@ -1,0 +1,37 @@
+<provider>
+	<name>Movistar+ Esp</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>lcnbat2</protocol>
+	<transponder
+		orbital_position="192"
+		frequency="10729000"
+		symbol_rate="22000000"
+		polarization="1"
+		fec_inner="2"
+		inversion="2"
+		system="1"
+		modulation="2"
+		roll_off="0"
+		pilot="2"
+		bat_pid="0x11"
+	/>
+	<dvbsconfigs>
+		<configuration key="hd_1" bouquet="0x21" region="0x83">Movistar+ HD</configuration>
+	</dvbsconfigs>
+	<sections>
+		<section number="1">Entretenimiento</section>
+		<section number="31">Pelis</section>
+		<section number="46">Deportes</section>
+		<section number="70">Documentales</section>
+		<section number="94">Infantil</section>
+		<section number="119">Noticias</section>
+		<section number="167">Taquilla</section>
+		<section number="400">No HD</section>
+		<section number="470">Otros</section>
+	</sections>
+	<visibleserviceflag ignore="1"/>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>
