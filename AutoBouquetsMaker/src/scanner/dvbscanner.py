@@ -27,6 +27,7 @@ class DvbScanner():
 		self.bat_table_id = 0x4a
 		self.fastscan_pid = 0x00
 		self.fastscan_table_id = 0x00
+		self.ignore_visible_service_flag = 0
 		self.extra_debug = config.autobouquetsmaker.level.value == "expert" and config.autobouquetsmaker.extra_debug.value
 
 	def isValidOnidTsid(self, orbital_position, onid, tsid):
@@ -114,6 +115,10 @@ class DvbScanner():
 	def setFastscanTableId(self, value):
 		self.fastscan_table_id = value
 		print>>log, "[DvbScanner] Fastscan table id: 0x%x" % self.fastscan_table_id
+
+	def setVisibleServiceFlagIgnore(self, value):
+		self.ignore_visible_service_flag = value
+		print>>log, "[DvbScanner] Ignore visible service flag: %d" % self.ignore_visible_service_flag
 
 	def buildNamespace(self, transponder):
 		orbital_position = transponder['orbital_position']
@@ -555,7 +560,7 @@ class DvbScanner():
 					if service["transport_stream_id"] not in tsid_list:
 						tsid_list.append(service["transport_stream_id"])
 
-				if servicekey not in logical_channel_number_dict or "visible_service_flag" in logical_channel_number_dict[servicekey] and logical_channel_number_dict[servicekey]["visible_service_flag"] == 0:
+				if servicekey not in logical_channel_number_dict or not self.ignore_visible_service_flag and "visible_service_flag" in logical_channel_number_dict[servicekey] and logical_channel_number_dict[servicekey]["visible_service_flag"] == 0:
 					continue
 				if service_dict_tmp and servicekey not in service_dict_tmp and protocol not in ("lcn2", "lcnbat2"):
 					continue

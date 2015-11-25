@@ -6,6 +6,7 @@ import cPickle as pickle
 class Providers():
 	VALID_PROTOCOLS = ( "fastscan", "freesat", "lcn", "lcn2", "lcnbat", "lcnbat2", "nolcn", "sky", "vmuk" )
 	PROVIDERS_DIR = os.path.dirname(__file__) + "/../providers"
+
 	def parseXML(self, filename):
 		try:
 			provider = open(filename, "r")
@@ -66,6 +67,7 @@ class Providers():
 			provider["sdchannelsontop"] = []
 			provider["dependent"] = ''
 			provider["bouquets"] = {}
+			provider["ignore_visible_service_flag"] = 0
 			if dom.documentElement.nodeType == dom.documentElement.ELEMENT_NODE and dom.documentElement.tagName == "provider":
 				for node in dom.documentElement.childNodes:
 					if node.nodeType != node.ELEMENT_NODE:
@@ -350,6 +352,11 @@ class Providers():
 						node.normalize()
 						if len(node.childNodes) == 1 and node.childNodes[0].nodeType == node.TEXT_NODE:
 							provider["dependent"] = node.childNodes[0].data.encode("utf-8")
+							
+					elif node.tagName == "visibleserviceflag":
+						for i in range(0, node.attributes.length):
+							if node.attributes.item(i).name == "ignore" and int(node.attributes.item(i).value) != 0:
+								provider["ignore_visible_service_flag"] = 1
 
 			if not ("name" in provider
 					and "protocol" in provider
