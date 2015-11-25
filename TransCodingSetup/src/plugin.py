@@ -82,7 +82,7 @@ def createTransCodingConfig(encoder):
 
 		if fileExists(getProcPath(encoder, "resolution")):
 			resolutaion_choices = [ ("480p", _("480p")), ("576p", _("576p")), ("720p", _("720p")), ("320x240", _("320x240")), ("160x120", _("160x120")) ]
-			if getBoxType in ("vusolo4k"):
+			if getBoxType() in ("vusolo4k"):
 				resolutaion_choices.insert(3, ("1080p", _("1080p")))
 			choice = configSelection(encoder, default = "480p", choices = resolutaion_choices )
 			config.plugins.transcodingsetup.encoder[int(encoder)].resolution = choice
