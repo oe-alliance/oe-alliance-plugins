@@ -1,0 +1,30 @@
+<provider>
+	<name>CanalSat FR</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>lcnbat2</protocol>
+	<transponder
+		orbital_position="192"
+		frequency="11856000"		
+		symbol_rate="27500000"
+		polarization="1"
+		fec_inner="0"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+		bat_pid="0x11"
+	/>
+	<sections>
+		<section number="1">Chaines</section>
+		<section number="350">Regionales</section>
+		<section number="400">Autres</section>
+	</sections>
+	<dvbsconfigs>
+		<configuration key="hd_49165" bouquet="0xc00d" region="0x83">CanalSat HD</configuration><!-- 271 channels -->
+	</dvbsconfigs>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>
