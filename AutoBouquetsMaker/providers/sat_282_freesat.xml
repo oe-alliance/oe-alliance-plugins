@@ -4,16 +4,17 @@
 	<protocol>freesat</protocol>
 	<transponder 
 		orbital_position="282"
-		frequency="12207000" 
+		frequency="11426000" 
 		symbol_rate="27500000"
-		polarization="1"
+		polarization="0"
 		fec_inner="0"
 		inversion="2"
 		system="0"
 		modulation="1"
 		roll_off="0"
 		pilot="2"
-		bat_pid="0xf01"
+		sdt_pid="0xbba"
+		bat_pid="0xbba"
 	/>
 	<dvbsconfigs>
 		<configuration key="hd_freesat_110_1" bouquet="0x110" region="0x1">England HD: London/London</configuration>
