@@ -137,6 +137,48 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 				size -= 8;
 			}
 		}
+		else  // unknown descriptors
+		{
+			char description[2 * descriptor_length + 5];
+			memset(description, '\0', 2 * descriptor_length + 5);
+			int length = descriptor_length + 2;
+			int i = 0, j = 0;
+			while (length > 0)
+			{
+				int decimalNumber = data[offset2 + i - 2];
+				int quotient, n=0, temp;
+				char hextemp[3] = {'0','0','\0'};
+				quotient = decimalNumber;
+				while(quotient!=0) 
+				{
+					temp = quotient % 16;
+					if (temp < 10)
+						temp = temp + 48; 
+					else
+						temp = temp + 55;
+					hextemp[n]= temp;
+					n += 1;
+					quotient = quotient / 16;
+				}
+				//swap result
+				description[j] = hextemp[1];
+				j += 1;
+				description[j] = hextemp[0];
+				j += 1;
+				i += 1;
+				length -= 1;
+			}
+			if (strlen(description) == 0)
+				strcpy(description, "Empty");
+		
+			PyObject *item = Py_BuildValue("{s:i,s:i,s:s}",
+						"descriptor_tag", descriptor_tag,
+						"descriptor_length", descriptor_length,
+						"hexcontent", description);
+						
+			PyList_Append(list, item);
+			Py_DECREF(item);
+		}
 		
 		offset1 += (descriptor_length + 2);
 		bouquet_descriptors_length -= (descriptor_length + 2);
@@ -366,6 +408,47 @@ PyObject *ss_parse_bat(unsigned char *data, int length) {
 					offset3 += 4;
 					descriptor_length -= 4;
 				}
+			}
+			else  // unknown descriptors
+			{
+				char description[2 * descriptor_length + 5];
+				memset(description, '\0', 2 * descriptor_length + 5);
+				int length = descriptor_length + 2;
+				int i = 0, j = 0;
+				while (length > 0)
+				{
+					int decimalNumber = data[offset3 + i - 2];
+					int quotient, n=0, temp;
+					char hextemp[3] = {'0','0','\0'};
+					quotient = decimalNumber;
+					while(quotient!=0) 
+					{
+						temp = quotient % 16;
+						if (temp < 10)
+							temp = temp + 48; 
+						else
+							temp = temp + 55;
+						hextemp[n]= temp;
+						n += 1;
+						quotient = quotient / 16;
+					}
+					description[j] = hextemp[1];
+					j += 1;
+					description[j] = hextemp[0];
+					j += 1;
+					i += 1;
+					length -= 1;
+				}
+				if (strlen(description) == 0)
+					strcpy(description, "Empty");
+			
+				PyObject *item = Py_BuildValue("{s:i,s:i,s:s}",
+							"descriptor_tag", descriptor_tag,
+							"descriptor_length", descriptor_length,
+							"hexcontent", description);
+						
+				PyList_Append(list, item);
+				Py_DECREF(item);
 			}
 		}
 	}
