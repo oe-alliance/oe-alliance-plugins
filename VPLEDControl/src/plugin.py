@@ -7,7 +7,7 @@ from Components.Console import Console
 from Components.Button import Button
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList
-from Components.config import config, configfile, ConfigSubsection, getConfigListEntry, ConfigSelection
+from Components.config import config, configfile, ConfigSubsection, getConfigListEntry, ConfigSelection, ConfigSlider
 from Components.ConfigList import ConfigListScreen
 from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap, eDBoxLCD
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -26,6 +26,8 @@ config.plugins.VFD_ini.showClock = ConfigSelection(default = "True_Switch", choi
 config.plugins.VFD_ini.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
 config.plugins.VFD_ini.recDisplay = ConfigSelection(default = "False", choices = [("True",_("yes")),("False",_("no"))])
 config.plugins.VFD_ini.recClockBlink = ConfigSelection(default = "off", choices = [("off",_("Off")),("on_off",_("On/Off")),("brightness",_("Brightness level"))])
+config.plugins.VFD_ini.ClockLevel1 = ConfigSlider(default=1, limits=(0, 10))
+config.plugins.VFD_ini.ClockLevel2 = ConfigSlider(default=4, limits=(1, 10))
 
 MyRecLed = False
 
@@ -113,11 +115,11 @@ class Channelnumber:
 				self.blinkCounter = 0
 				if self.blink:
 					if config.plugins.VFD_ini.recClockBlink.value == "brightness":
-						eDBoxLCD.getInstance().setLCDBrightness(config.lcd.bright.value * 255 / 10)
+						eDBoxLCD.getInstance().setLCDBrightness(config.plugins.VFD_ini.ClockLevel2.value * 255 / 10)
 					self.blink = False
 				else:
 					if config.plugins.VFD_ini.recClockBlink.value == "brightness":
-						eDBoxLCD.getInstance().setLCDBrightness(config.lcd.bright.value * 255 / 10 / 2 )
+						eDBoxLCD.getInstance().setLCDBrightness(config.plugins.VFD_ini.ClockLevel1.value * 255 / 10)
 					self.blink = True
 
 		if config.plugins.VFD_ini.showClock.value == 'True' or config.plugins.VFD_ini.showClock.value == 'True_All' or config.plugins.VFD_ini.showClock.value == 'True_Switch':
@@ -252,6 +254,9 @@ class VFD_INISetup(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Show REC-Symbol in Display"), config.plugins.VFD_ini.recDisplay))
 			if config.plugins.VFD_ini.recDisplay.value == "False":
 				self.list.append(getConfigListEntry(_("Show blinking Clock on Display during recording"), config.plugins.VFD_ini.recClockBlink))
+				if config.plugins.VFD_ini.recClockBlink.value == "brightness":
+					self.list.append(getConfigListEntry(_("Brightness Level 1"), config.plugins.VFD_ini.ClockLevel1))
+					self.list.append(getConfigListEntry(_("Brightness Level 2"), config.plugins.VFD_ini.ClockLevel2))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -266,6 +271,8 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		if self["config"].getCurrent()[0] == _('Show on LED'):
 			self.createSetup()
 		elif self["config"].getCurrent()[0] == _('Show REC-Symbol in Display'):
+			self.createSetup()
+		elif self["config"].getCurrent()[0] == _('Show blinking Clock on Display during recording'):
 			self.createSetup()
 
 	def abort(self):
