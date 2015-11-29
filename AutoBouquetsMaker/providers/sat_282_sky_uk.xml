@@ -206,11 +206,11 @@
 		<channel number="227" /><!-- Channel 4 HD -->
 		<channel number="171" /><!-- Channel 5 HD -->
 		<channel number="217" /><!-- Sky 1 HD -->
-		<channel number="230" /><!-- Sky Living HD -->
-		<channel number="228" /><!-- Sky Atlantic HD -->
+		<channel number="221" /><!-- Sky Living HD -->
+		<channel number="222" /><!-- Sky Atlantic HD -->
 		<channel number="245" /><!-- Watch HD -->
 		<channel number="246" /><!-- Dave HD -->
-		<channel number="335" /><!-- Comedy Central HD -->
+		<channel number="205" /><!-- Comedy Central HD -->
 		<channel number="204" /><!-- Universal HD -->
 		<channel number="201" /><!-- Syfy HD -->
 		<channel number="210" /><!-- BBC Three HD -->
