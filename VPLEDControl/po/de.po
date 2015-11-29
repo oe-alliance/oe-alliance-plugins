@@ -73,3 +73,11 @@ msgstr "Zeige REC-Symbol im Display"
 #: plugin.py:253
 msgid "Show blinking Clock on Display during recording"
 msgstr "Blinkende Uhr im Display während Aufnahmen"
+
+#: plugin.py:258
+msgid "Brightness Level 1"
+msgstr "Helligkeitsstufe 1"
+
+#: plugin.py:259
+msgid "Brightness Level 2"
+msgstr "Helligkeitsstufe 2"
