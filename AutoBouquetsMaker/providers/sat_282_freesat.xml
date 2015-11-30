@@ -118,8 +118,7 @@
 		<section number="870">Adult</section>
 		<section number="950">Regional</section>
 		<section number="980">BBC Red Button</section>
-		<section number="999">Freesat Info</section>		
-		<section number="1050">Not indexed</section>
+		<section number="999">Freesat Info</section>
 	</sections>
 		<!-- channelsontop affect only HD bouquets -->
 	<hdchannelsontop>
@@ -137,25 +136,8 @@
 	</swapchannels>	
 	<servicehacks>
 <![CDATA[
-# start: slot some extra channels into vacant slots in the provider list
-########################################################################
-#
-# format: "channel name": number,
-#
-# example: "ITV 2": 118,
-#
-########################################################################
-channels_to_add = {
-	
-}
-if service["service_name"] in channels_to_add and service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and channels_to_add[service["service_name"]] not in LCNs_in_use:
-	LCNs_in_use.append(channels_to_add[service["service_name"]])
-	service["number"] = channels_to_add[service["service_name"]]
-	service["numbers"] = [channels_to_add[service["service_name"]]]
-# end: slot some extra channels into vacant slots in the provider list
-
-if service["number"] >= 1050 and service["number"] <= max(LCNs_in_use): # not indexed channels
-	pass
+if (service["namespace"]/(16**4)) != 282:
+	skip = True
 elif service["number"] in range(984, 987): # BBC RB 4/5/6
 	service["interactive_name"] = "BBC RB " + str(service["number"] - 980)
 elif service["number"] == 999: # Freesat info

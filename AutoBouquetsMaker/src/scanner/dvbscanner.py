@@ -1016,7 +1016,6 @@ class DvbScanner():
 		timeout = datetime.datetime.now()
 		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
 		transport_stream_id_list = []
-		extraservices = config.autobouquetsmaker.level.value == "expert" and config.autobouquetsmaker.showextraservices.value
 		while True:
 			if datetime.datetime.now() > timeout:
 				print>>log, "[DvbScanner] Timed out reading BAT"
@@ -1029,10 +1028,6 @@ class DvbScanner():
 
 			if section["header"]["table_id"] == self.bat_table_id:
 				if section["header"]["bouquet_id"] != bouquet_id:
-					if extraservices:
-						for content_tmp in section["content"]:
-							if content_tmp["descriptor_tag"] == 0xd3 and content_tmp["transport_stream_id"] not in transport_stream_id_list:
-								transport_stream_id_list.append(content_tmp["transport_stream_id"])
 					continue
 
 				if section["header"]["version_number"] != bat_section_version:
@@ -1119,20 +1114,6 @@ class DvbScanner():
 					print>>log, "[DvbScanner] Deleted double LCN: %d" % (tmp_services_dict[key]["numbers"][0])
 					del tmp_services_dict[key]["numbers"][0]
 
-		#remove other duplicates (single and dual LCN values)
-		tmp_numbers =[]
-		for key in tmp_services_dict:
-			if tmp_services_dict[key]["region_id"] != 0xffff:
-				for number in tmp_services_dict[key]["numbers"]:
-					tmp_numbers.append(number)
-		for key in tmp_services_dict.keys():
-			if tmp_services_dict[key]["region_id"] == 0xffff:
-				for number in tmp_services_dict[key]["numbers"]:
-					if number in tmp_numbers:
-						del tmp_services_dict[key]["numbers"][tmp_services_dict[key]["numbers"].index(number)]
-				if len(tmp_services_dict[key]["numbers"]) == 0:
-					del tmp_services_dict[key]
-
 		if self.sdt_other_table_id == 0x00:
 			mask = 0xff
 		else:
@@ -1167,15 +1148,7 @@ class DvbScanner():
 				transport_stream_id = section["header"]["transport_stream_id"]
 
 				if section["header"]["transport_stream_id"] not in transport_stream_id_list:
-					if extraservices: # this is only needed for extra services (channels without LCN) to collect their TSIDs from SDT if not in BAT.
-						sdt_secions_status[transport_stream_id] = {}
-						sdt_secions_status[transport_stream_id]["section_version"] = -1
-						sdt_secions_status[transport_stream_id]["sections_read"] = []
-						sdt_secions_status[transport_stream_id]["sections_count"] = 0
-						sdt_secions_status[transport_stream_id]["content"] = []
-						transport_stream_id_list.append(transport_stream_id)
-					else:
-						continue
+					continue
 
 				if section["header"]["version_number"] != sdt_secions_status[transport_stream_id]["section_version"]:
 					sdt_secions_status[transport_stream_id]["section_version"] = section["header"]["version_number"]
@@ -1198,15 +1171,11 @@ class DvbScanner():
 
 		dvbreader.close(fd)
 
-		extras = []
-
 		for key in sdt_secions_status:
 			for section in sdt_secions_status[key]["content"]:
 				srvkey = "%x:%x:%x" % (section["transport_stream_id"], section["original_network_id"], section["service_id"])
 
 				if srvkey not in tmp_services_dict:
-					if extraservices:
-						extras.append(section)
 					continue
 
 				service = tmp_services_dict[srvkey]
@@ -1219,8 +1188,6 @@ class DvbScanner():
 		radio_services = {}
 
 		service_extra_count = 0
-
-		tmp_services_dict, LCNs_in_use = self.extrasHelper(tmp_services_dict, extras, False)
 
 		for key in self.LCN_order(tmp_services_dict):
 			service = tmp_services_dict[key]
