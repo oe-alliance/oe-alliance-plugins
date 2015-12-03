@@ -224,6 +224,7 @@ class AutoBouquetsMaker_Log(Screen):
 		}, -2)
 
 		self["key_yellow"] = Button(_("Save Log"))
+		self["key_red"] = Button(_("Close"))		
 
 	def save(self):
 		output = open('/tmp/abm.log', 'w')
