@@ -205,6 +205,8 @@ class AutoBouquetsMaker_Log(Screen):
 	skin = """
 <screen name="AutoBouquetsMakerLogView" position="center,center" size="600,500" title="Backup Log">
 	<widget name="list" position="0,0" size="600,500" font="Regular;16"/>
+	<widget name="key_yellow" position="0,310" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
+	<ePixmap name="yellow" pixmap="skin_default/buttons/yellow.png" position="0,310" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
 </screen>"""
 	def __init__(self, session):
 		self.session = session
@@ -218,7 +220,16 @@ class AutoBouquetsMaker_Log(Screen):
 			"up": self["list"].pageUp,
 			"down": self["list"].pageDown,
 			"menu": self.closeRecursive,
+			"yellow": self.save,
 		}, -2)
+
+		self["key_yellow"] = Button(_("Save Log"))
+
+	def save(self):
+		output = open('/tmp/abm.log', 'w')
+		output.write(log.getvalue())
+		output.close()
+		self.session.open(MessageBox,_("Log now saved to /tmp/abm.log"),MessageBox.TYPE_INFO, timeout = 5)
 
 	def cancel(self):
 		self.close()
