@@ -174,6 +174,8 @@ class DvbScanner():
 				time.sleep(0.1)	# no data.. so we wait a bit
 				continue
 
+			if self.extra_debug:
+				print "NIT raw section", section
 
 			if (section["header"]["table_id"] == self.nit_current_table_id
 				and self.dvbtype != 'dvbc' and not nit_current_completed):
@@ -400,6 +402,13 @@ class DvbScanner():
 		timeout += datetime.timedelta(0, self.TIMEOUT_SEC)
 		transport_stream_id_list = []
 
+		if self.extra_debug:
+			lcn_list = []
+			sid_list = []
+			tsid_list = []
+			hex_list = []
+			xml_dict = {}
+
 		while True:
 			if datetime.datetime.now() > timeout:
 				print>>log, "[DvbScanner] Timed out reading BAT"
@@ -411,7 +420,12 @@ class DvbScanner():
 				continue
 
 			if self.extra_debug:
-				print "BAT section", section
+				print "BAT raw section", section
+				for service in section["content"]:
+					if "hexcontent" in service:
+						hex_list.append(service)
+					if service["descriptor_tag"] == 71:
+						xml_dict[service["bouquet_id"]] = service["description"]
 
 			if section["header"]["table_id"] == self.bat_table_id:
 				if section["header"]["bouquet_id"] != bouquet_id:
@@ -454,11 +468,30 @@ class DvbScanner():
 				print "LCN entry", key, service
 
 			logical_channel_number_dict[key] = service
+			
+			if self.extra_debug:
+				print "LCN entry", key, service
+				sid_list.append(service["service_id"])
+				lcn_list.append(service["logical_channel_number"])
+				if service["transport_stream_id"] not in tsid_list:
+					tsid_list.append(service["transport_stream_id"])
 
 		if self.extra_debug:
 			print "TSID list from BAT", sorted(tsid_list)
 			print "SID list from BAT", sorted(sid_list)
 			print "LCN list from BAT", sorted(lcn_list)
+			for service in hex_list:
+				print "hexcontent", service
+				bytes = [int(''.join(service["hexcontent"][i:i+2]), 16) for i in range(0, len(service["hexcontent"]), 2)][2:]
+				hexchars = []
+				for byte in bytes:
+					if byte > 31 and byte < 127:
+						hexchars.append(chr(byte))
+					else:
+						hexchars.append('.')
+				print ''.join(hexchars)
+			for key in sorted(xml_dict.keys()):
+				print '		<configuration key="sd_%d" bouquet="0x%x" region="DESCRIPTOR">%s</configuration>' % (key, key, xml_dict[key])
 
 		return logical_channel_number_dict
 
@@ -494,6 +527,9 @@ class DvbScanner():
 			if section is None:
 				time.sleep(0.1)	# no data.. so we wait a bit
 				continue
+
+			if self.extra_debug:
+				print "SDT raw section", section
 
 			if section["header"]["table_id"] == self.sdt_current_table_id or section["header"]["table_id"] == self.sdt_other_table_id:
 				if section["header"]["transport_stream_id"] not in transport_stream_id_list:
@@ -652,6 +688,9 @@ class DvbScanner():
 			if section is None:
 				time.sleep(0.1)	# no data.. so we wait a bit
 				continue
+
+			if self.extra_debug:
+				print "Fastscan raw section", section
 
 			if section["header"]["table_id"] == self.fastscan_table_id:
 				if (section["header"]["version_number"] != fastscan_section_version
