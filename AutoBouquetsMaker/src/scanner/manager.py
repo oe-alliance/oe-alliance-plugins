@@ -252,7 +252,7 @@ class Manager():
 					tmp = scanner.updateTransponders(self.transponders, True)
 					self.services[provider_key] = scanner.updateAndReadServicesFastscan(
 							self.transponders, providers[provider_key]["servicehacks"],
-							tmp["transport_stream_id_list"], tmp["logical_channel_number_dict"])
+							tmp["logical_channel_number_dict"])
 
 					ret = len(self.services[provider_key]["video"].keys()) > 0 or len(self.services[provider_key]["radio"].keys()) > 0
 

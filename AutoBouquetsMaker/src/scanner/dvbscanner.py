@@ -450,8 +450,6 @@ class DvbScanner():
 					tsid_list.append(service["transport_stream_id"])
 
 			key = "%x:%x:%x" % (service["transport_stream_id"], service["original_network_id"], service["service_id"])
-			if 'logical_channel_number' not in service: # use SID when output doesn't have LCN
-				service["logical_channel_number"] = service["service_id"]
 			if self.extra_debug:
 				print "LCN entry", key, service
 
@@ -629,7 +627,7 @@ class DvbScanner():
 			"radio": radio_services
 		}
 
-	def updateAndReadServicesFastscan(self, transponders, servicehacks, transport_stream_id_list, logical_channel_number_dict):
+	def updateAndReadServicesFastscan(self, transponders, servicehacks, logical_channel_number_dict):
 		print>>log, "[DvbScanner] Reading services (fastscan)..."
 
 		fd = dvbreader.open(self.demuxer_device, self.fastscan_pid, self.fastscan_table_id, 0xff, self.frontend)
