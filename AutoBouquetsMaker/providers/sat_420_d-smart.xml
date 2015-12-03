@@ -1,0 +1,45 @@
+<provider>
+	<name>D-Smart</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>lcnbat</protocol>
+	<transponder
+		orbital_position="420"
+		frequency="10970000"
+		symbol_rate="30000000"
+		polarization="1"
+		fec_inner="4"
+		inversion="2"
+		system="1"
+		modulation="2"
+		roll_off="0"
+		pilot="2"
+	/>
+	<dvbsconfigs>
+		<configuration key="sd_24656" bouquet="0x6050" region="0xe2">DOGAN TV - TICARI HDS</configuration>
+		<configuration key="sd_24657" bouquet="0x6051" region="0xe2">DOGAN TV - TKC</configuration>
+		<configuration key="sd_24658" bouquet="0x6052" region="0xe2">DOGAN TV - PDL TEST</configuration>
+		<configuration key="sd_24659" bouquet="0x6053" region="0xe2">DOGAN TV - TKC_TV</configuration>
+		<configuration key="sd_24664" bouquet="0x6058" region="0xe2">DOGAN TV - HD</configuration>
+		<configuration key="sd_24665" bouquet="0x6059" region="0xe2">DOGAN TV - HOTBIRD - HD</configuration>
+		<configuration key="sd_24666" bouquet="0x605a" region="0xe2">DOGAN TV - HOTBIRD - HD - FTA</configuration>
+		<configuration key="sd_24720" bouquet="0x6090" region="0xe2">DOGAN TV</configuration>
+		<configuration key="sd_24721" bouquet="0x6091" region="0xe2">DOGAN TV - HOTBIRD</configuration>
+		<configuration key="sd_24725" bouquet="0x6095" region="0xe2">DOGAN TV - TICARI</configuration>
+		<configuration key="sd_24726" bouquet="0x6096" region="0xe2">DOGAN TV - HD TESHIR</configuration>
+		<configuration key="sd_24728" bouquet="0x6098" region="0xe2">DOGAN TV - AVRUPA HOTBIRD</configuration>
+		<configuration key="sd_24729" bouquet="0x6099" region="0xe2">DOGAN TV - SUSPEND</configuration>
+		<configuration key="sd_24730" bouquet="0x609a" region="0xe2">DOGAN TV - SUSPEND</configuration>
+		<configuration key="sd_24731" bouquet="0x609b" region="0xe2">DOGAN TV - MCR</configuration>
+		<configuration key="sd_24732" bouquet="0x609c" region="0xe2">DOGAN TV - MCR HOTBIRD</configuration>
+		<configuration key="sd_24733" bouquet="0x609d" region="0xe2">DOGAN TV - MCR - HD</configuration>
+		<configuration key="sd_24734" bouquet="0x609e" region="0xe2">DOGAN TV - OTELLER</configuration>
+		<configuration key="sd_24735" bouquet="0x609f" region="0xe2">DOGAN TV - OTELLER PLUS</configuration>
+	</dvbsconfigs>
+	<sections>
+		<section number="1">D-Smart</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>
