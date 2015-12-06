@@ -309,6 +309,8 @@ class DvbScanner():
 					transponder["system"] = customtransponder["system"]
 					transponder["plpid"] = customtransponder["plpid"]
 			elif transponder["dvb_type"] == 'dvbs': # DVB-S
+				if transponder["descriptor_tag"] != 0x43: # Confirm DVB SI data is DVB-S
+					continue
 				transponder["symbol_rate"] = transponder["symbol_rate"] * 100
 				transponder["flags"] = 0
 				if transponder["fec_inner"] != 15 and transponder["fec_inner"] > 9:
