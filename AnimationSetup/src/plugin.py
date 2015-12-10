@@ -11,8 +11,8 @@ from enigma import setAnimation_current, setAnimation_speed
 
 # default = slide to left
 g_default = {
-        "current": 6,
-        "speed"  : 20,
+		"current": 6,
+		"speed"	 : 20,
 }
 g_max_speed = 30
 
@@ -20,7 +20,7 @@ config.misc.window_animation_default = ConfigNumber(default=g_default["current"]
 config.misc.window_animation_speed = ConfigSelectionNumber(1, g_max_speed, 1, default=g_default["speed"])
 
 class AnimationSetupConfig(ConfigListScreen, Screen):
-	skin=   """
+	skin=	"""
 		<screen position="center,center" size="600,140" title="Animation Settings">
 			<widget name="config" position="0,0" size="600,100" scrollbarMode="showOnDemand" />
 
@@ -42,13 +42,13 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.entrylist)
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
-			"ok"     : self.keyGreen,
-			"green"  : self.keyGreen,
+			"ok"	 : self.keyGreen,
+			"green"	 : self.keyGreen,
 			"yellow" : self.keyYellow,
-			"red"    : self.keyRed,
+			"red"	 : self.keyRed,
 			"cancel" : self.keyRed,
 		}, -2)
-		self["key_red"]   = StaticText(_("Cancel"))
+		self["key_red"]	  = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self["key_yellow"] = StaticText(_("Default"))
 
@@ -60,7 +60,7 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 
 	def keyGreen(self):
 		config.misc.window_animation_speed.save()
-                setAnimation_speed(int(config.misc.window_animation_speed.value))
+		setAnimation_speed(int(config.misc.window_animation_speed.value))
 		self.close()
 
 	def keyRed(self):
@@ -68,8 +68,8 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 		self.close()
 
 	def keyYellow(self):
-                global g_default
-                config.misc.window_animation_speed.value = g_default["speed"]
+		global g_default
+		config.misc.window_animation_speed.value = g_default["speed"]
 		self.makeConfigList()
 
 	def keyLeft(self):
@@ -80,7 +80,6 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 
 	def makeConfigList(self):
 		self.entrylist = []
-
 		entrySpeed = getConfigListEntry(_("Animation Speed"), config.misc.window_animation_speed)
 		self.entrylist.append(entrySpeed)
 		self["config"].list = self.entrylist
@@ -113,7 +112,7 @@ class AnimationSetupScreen(Screen):
 			<widget source="key_blue" render="Label" position="420,0" zPosition="2" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#18188b" transparent="1" />
 
 			<widget name="list" position="10,60" size="560,364" scrollbarMode="showOnDemand" />
-	                <widget source="introduction" render="Label" position="0,370" size="560,40" zPosition="10" font="Regular;20" valign="center" backgroundColor="#25062748" transparent="1" />
+			<widget source="introduction" render="Label" position="0,370" size="560,40" zPosition="10" font="Regular;20" valign="center" backgroundColor="#25062748" transparent="1" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -162,13 +161,13 @@ class AnimationSetupScreen(Screen):
 			setAnimation_current(key)
 		self.close()
 
-        def keyclose(self):
+	def keyclose(self):
 		setAnimation_current(config.misc.window_animation_default.value)
-                setAnimation_speed(int(config.misc.window_animation_speed.value))
+		setAnimation_speed(int(config.misc.window_animation_speed.value))
 		self.close()
 
 	def config(self):
-                self.session.open(AnimationSetupConfig)
+		self.session.open(AnimationSetupConfig)
 
 	def preview(self):
 		current = self["list"].getCurrent()
@@ -190,7 +189,7 @@ def sessionAnimationSetup(session, reason, **kwargs):
 	setAnimation_speed(int(config.misc.window_animation_speed.value))
 
 def Plugins(**kwargs):
-	plugin_list = [
+	return [
 		PluginDescriptor(
 			name = "Animations",
 			description = "Setup UI animations",
@@ -200,6 +199,5 @@ def Plugins(**kwargs):
 		PluginDescriptor(
 			where = PluginDescriptor.WHERE_SESSIONSTART,
 			needsRestart = False,
-			fnc = sessionAnimationSetup),
+			fnc = sessionAnimationSetup)
 	]
-	return plugin_list;
