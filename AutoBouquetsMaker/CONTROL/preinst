@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo "Checking for an ABM cache file"
+
+if [ -d /usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/providers/providers.cache ]; then
+	rm -rf /usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/providers/providers.cache > /dev/null 2>&1
+	echo "Cache file has bee removed"
+else
+	echo "No cache file found"
+fi
+
+exit 0
