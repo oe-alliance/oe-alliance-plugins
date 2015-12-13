@@ -1,0 +1,29 @@
+<provider>
+	<name>Vivacom</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>lcnbat</protocol>
+	<transponder
+		orbital_position="450"
+		frequency="11468000"
+		symbol_rate="30000000"
+		polarization="1"
+		fec_inner="3"
+		inversion="2"
+		system="1"
+		modulation="2"
+		roll_off="0"
+		pilot="2"
+	/>
+	<dvbsconfigs>
+		<configuration key="sd_24920" bouquet="0x6158" region="0xe2">Bouquet 1</configuration>
+		<configuration key="sd_24921" bouquet="0x6159" region="0xe2">Bouquet 2</configuration>
+		<configuration key="sd_24925" bouquet="0x615d" region="0xe2">Bouquet 3</configuration>
+	</dvbsconfigs>
+	<sections>
+		<section number="1">Vivacom</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>
