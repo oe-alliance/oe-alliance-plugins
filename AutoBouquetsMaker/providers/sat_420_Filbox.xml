@@ -1,0 +1,28 @@
+<provider>
+	<name>Filbox</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>lcnbat2</protocol>
+	<transponder
+		orbital_position="420"
+		frequency="11775000"
+		symbol_rate="27500000"
+		polarization="1"
+		fec_inner="3"
+		inversion="2"
+		system="1"
+		modulation="2"
+		roll_off="0"
+		pilot="2"
+	/>
+	<dvbsconfigs>
+		<configuration key="sd_7" bouquet="0x7" region="0x93">SinemaTV</configuration>
+		<configuration key="sd_13858" bouquet="0x3622" region="0x93">Master</configuration>
+	</dvbsconfigs>
+	<sections>
+		<section number="1">Filbox</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>
