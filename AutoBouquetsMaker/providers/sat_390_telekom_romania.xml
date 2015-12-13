@@ -1,0 +1,29 @@
+<provider>
+	<name>Telekom Romania</name>
+	<streamtype>dvbs</streamtype>
+	<protocol>lcnbat</protocol>
+	<transponder
+		orbital_position="390"
+		frequency="12524000"
+		symbol_rate="30000000"
+		polarization="1"
+		fec_inner="5"
+		inversion="2"
+		system="0"
+		modulation="1"
+		roll_off="0"
+		pilot="2"
+	/>
+	<dvbsconfigs>
+		<configuration key="sd_24704" bouquet="0x6080" region="0xe2">Bouquet 1</configuration>
+		<configuration key="sd_24705" bouquet="0x6081" region="0xe2">Bouquet 2</configuration>
+		<configuration key="sd_24919" bouquet="0x6157" region="0xe2">Bouquet 3 (NewCardOnly)</configuration>
+	</dvbsconfigs>
+	<sections>
+		<section number="1">Telekom Romania</section>
+	</sections>
+	<servicehacks>
+<![CDATA[
+]]>
+	</servicehacks>
+</provider>
