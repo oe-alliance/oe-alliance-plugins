@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-14 21:02+0100\n"
-"PO-Revision-Date: 2015-09-15 06:23+0100\n"
+"POT-Creation-Date: 2015-12-13 07:15+0000\n"
+"PO-Revision-Date: 2015-12-14 08:31+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blacburn. Rob van der Does\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.8.6\n"
 
 msgid "%a %e %b  %-H:%M"
 msgstr "%a %e %b  %-H:%M"
@@ -111,6 +111,9 @@ msgstr "Klaar"
 msgid "Enough Retries, delaying till next schedule."
 msgstr "Vaak genoeg geprobeerd; stel uit tot de volgende keer."
 
+msgid "Extra debug"
+msgstr "Extra debug"
+
 msgid "FTA Channels"
 msgstr "FTA-kanalen"
 
@@ -140,6 +143,9 @@ msgstr "Behoud favorietenlijsten"
 
 msgid "Loading bouquets..."
 msgstr "Bezig favorietenlijsten te laden..."
+
+msgid "Log now saved to /tmp/abm.log"
+msgstr "Log is opgeslagen in /tmp/abm.log"
 
 msgid "Move down"
 msgstr "Verplaats omlaag"
@@ -190,6 +196,9 @@ msgstr "Hoe vaak herhalen?"
 msgid "Save"
 msgstr "Sla op"
 
+msgid "Save Log"
+msgstr "Sla log op"
+
 msgid "Schedule scan"
 msgstr "Plan scan"
 
@@ -229,6 +238,9 @@ msgstr "Start scanner"
 
 msgid "This affects all bouquets. Select 'no' to scan in all services. Select 'yes' to skip encrypted ones."
 msgstr "Dit betreft alle favorietenlijsten. Kies 'Nee' om alle kanalen te scannen; kies 'Ja' om gecodeerde kanalen over te slaan."
+
+msgid "This feature is for development only. Requires debug logs to be enabled or enigma2 to be started in console mode."
+msgstr "Dit is alleen voor ontwikkeling. Het vereist dat de debuglogs zijn geactiveerd of dar Enigma2 in console draait."
 
 msgid "This option allows you to choose what region of the country you live in, so it populates the correct channels for your region."
 msgstr "Hier kiest u de regio zodat de voor uw regio juiste kanalen worden getoond."
