@@ -13,7 +13,7 @@ class LoopSyncMain(Screen):
 		self.gotSession()
 
 	def gotSession(self):
-		self.debug = 1
+		self.debug = 0
 		self.lstate = 0
 		self.count1 = 0
 		self.count2 = 0
