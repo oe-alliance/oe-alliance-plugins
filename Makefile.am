@@ -187,6 +187,10 @@ if GBQUAD
 SUBDIRS += TransCodingSetup
 endif
 
+if GB7356
+SUBDIRS += TransCodingSetup
+endif
+
 if VUPLUS
 SUBDIRS += HbbTV AudioEffect
 endif
