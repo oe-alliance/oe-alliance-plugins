@@ -70,6 +70,10 @@ if ODINM7C
 SUBDIRS += OdinM7VFDControl
 endif
 
+if PROTEK9900LX
+SUBDIRS += OdinM7VFDControl
+endif
+
 if EW7358
 SUBDIRS += EWVFDControl
 endif
