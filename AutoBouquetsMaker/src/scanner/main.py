@@ -3,18 +3,13 @@ from .. import _
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Components.MenuList import MenuList
-from Components.ActionMap import ActionMap
-from Components.Button import Button
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 
 from Components.config import config
-from Components.ServiceEventTracker import ServiceEventTracker
-from Components.TuneTest import Tuner
 from Components.NimManager import nimmanager
-from enigma import eTimer, eServiceReference, eDVBDB, iPlayableService, eDVBFrontendParametersSatellite,eDVBFrontendParametersTerrestrial, eDVBFrontendParametersCable, eDVBResourceManager, eDVBFrontendParameters
+from enigma import eTimer, eDVBDB, eDVBFrontendParametersSatellite,eDVBFrontendParametersTerrestrial, eDVBFrontendParametersCable, eDVBResourceManager, eDVBFrontendParameters
 
 from manager import Manager
 from providerconfig import ProviderConfig
@@ -25,7 +20,7 @@ from .. import log
 import os
 import sys
 
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists
+from Tools.Directories import resolveFilename, fileExists
 try:
 	from Tools.Directories import SCOPE_ACTIVE_SKIN
 except:
