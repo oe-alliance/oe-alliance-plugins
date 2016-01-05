@@ -166,18 +166,20 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 
 			if sorted(self.providers[provider]["sections"].keys())[0] > 1:
 				makemain_default = "no"
-				makemain_list = []
-				makemain_list.append(("yes", _("yes")))
+				makemain_list = [("yes", _("yes"))]
+				if self.providers[provider]["protocol"] != "fastscan":
+					makemain_list.append(("hd", _("yes (only HD)")))
+					makemain_list.append(("ftahd", _("yes (only FTA HD)")))
 
-				if provider not in providers_tmp_configs:
+				if provider not in providers_tmp_configs and self.providers[provider]["protocol"] == "sky":
+					makemain_default = "ftahd"	# HD only as default
+				elif provider not in providers_tmp_configs:
 					makemain_default = "yes"	# enabled as default
 
 				if provider in providers_tmp_configs and providers_tmp_configs[provider].isMakeNormalMain():
 					makemain_default = "yes"
 
 				if self.providers[provider]["protocol"] != "fastscan":
-					makemain_list.append(("hd", _("yes (only HD)")))
-					makemain_list.append(("ftahd", _("yes (only FTA HD)")))
 					if provider in providers_tmp_configs and providers_tmp_configs[provider].isMakeHDMain():
 						makemain_default = "hd"
 					if provider in providers_tmp_configs and providers_tmp_configs[provider].isMakeFTAHDMain():
