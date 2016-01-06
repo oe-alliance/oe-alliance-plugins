@@ -171,7 +171,7 @@ class AutoBouquetsMaker_ProvidersSetup(ConfigListScreen, Screen):
 					makemain_list.append(("hd", _("yes (only HD)")))
 					makemain_list.append(("ftahd", _("yes (only FTA HD)")))
 
-				if provider not in providers_tmp_configs and self.providers[provider]["protocol"] in ("sky", "vmuk"):
+				if provider not in providers_tmp_configs and self.providers[provider]["protocol"] == "sky":
 					makemain_default = "ftahd"	# FTA HD only as default
 				elif provider not in providers_tmp_configs:
 					makemain_default = "yes"	# enabled as default
