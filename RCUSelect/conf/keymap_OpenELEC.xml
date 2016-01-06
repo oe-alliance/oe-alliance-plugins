@@ -60,8 +60,8 @@
 	</map>
 
 	<map context="InfobarEPGActions">
-		<key id="KEY_F4" mapto="showEventInfo" flags="b" />
-		<key id="KEY_F4" mapto="showEventInfoPlugin" flags="l" />
+		<key id="KEY_F5" mapto="showEventInfo" flags="b" />
+		<key id="KEY_F5" mapto="showEventInfoPlugin" flags="l" />
 		<key id="KEY_EPG" mapto="showEventInfoSingleEPG" flags="b" />
 		<key id="KEY_EPG" mapto="showEventGuidePlugin" flags="l" />
 	</map>
@@ -74,20 +74,9 @@
 	</map>
 
 	<map context="InfobarExtensions">
-		<key id="KEY_F8" mapto="RedPressed" flags="b" />
-		<key id="KEY_F9" mapto="openTimerList" flags="b" />
-		<key id="KEY_F9" mapto="openAutoTimerList" flags="l" />
-		<key id="KEY_F10" mapto="openEPGSearch" flags="b" />
-		<key id="KEY_F10" mapto="openIMDB" flags="l" />
-		<key id="KEY_F4" mapto="openEPGSearch" flags="b" />
-		<key id="KEY_F4" mapto="openIMDB" flags="l" />
-		<key id="KEY_INS_LINE" mapto="showPluginBrowser" flags="l" />
+		<!--<key id="KEY_F9" mapto="showPluginBrowser" flags="b" />-->
 		<key id="KEY_INS_LINE" mapto="extensions" flags="b" />
 	</map>
-
-	<map context="InfoBarQuickMenu">
-		<key id="KEY_INS_LINE" mapto="quickmenu" flags="b" />
- 	</map>
 
 	<map context="SatlistShortcutAction">
 		<key id="KEY_F10" mapto="changetype" flags="b"/>
@@ -164,8 +153,7 @@
 	</map>
 
 	<map context="InfobarAudioSelectionActions">
-		<key id="KEY_F5" mapto="audioSelection" flags="b" />
-		<key id="KEY_F5" mapto="audioSelectionLong" flags="l" />
+		<key id="KEY_F10" mapto="audioSelection" flags="m" />
 	</map>
 
 	<map context="InfobarAspectSelectionActions">
@@ -360,25 +348,22 @@
 	</map>
 
 	<map context="InfobarTimeshiftActions">
-		<key id="KEY_PLAYPAUSE" mapto="timeshiftStart" flags="b" />
-		<key id="KEY_PLAYPAUSE" mapto="timeshiftStart" flags="l" />
-		<key id="KEY_STOPCD" mapto="timeshiftStop" flags="b" />
-		<key id="KEY_RECORD" mapto="instantRecord" flags="b" />
-		<key id="KEY_PREVIOUSSONG" mapto="jumpPreviousFile" flags="b" />
-		<key id="KEY_NEXTSONG" mapto="jumpNextFile" flags="b" />
-		<key id="KEY_STOPCD" mapto="instantRecord" flags="l" />
+		<key id="KEY_PLAYPAUSE" mapto="timeshiftStart" flags="m" />
+		<key id="KEY_STOPCD" mapto="timeshiftStop" flags="m" />
+		<key id="KEY_RECORD" mapto="instantRecord" flags="m" />
+		<key id="KEY_PREVIOUSSONG" mapto="jumpPreviousFile" flags="m" />
+		<key id="KEY_NEXTSONG" mapto="jumpNextFile" flags="m" />
 	</map>
 
 	<map context="InfobarTimeshiftActivateActions">
-		<key id="KEY_PLAYPAUSE" mapto="timeshiftActivateEndAndPause" flags="b" />
-		<key id="KEY_PLAYPAUSE" mapto="timeshiftActivateEndAndPause" flags="l" />
-		<key id="KEY_REWIND" mapto="timeshiftActivateEnd" flags="b" />
+		<key id="KEY_PLAYPAUSE" mapto="timeshiftActivateEndAndPause" flags="m" />
+		<key id="KEY_REWIND" mapto="timeshiftActivateEnd" flags="m" />
 		<key id="KEY_PREVIOUSSONG" mapto="timeshiftActivateEnd" flags="b" />
 	</map>
 
 	<map context="InfobarTimeshiftSeekPointerActions">
-		<key id="KEY_PLAYPAUSE" mapto="SeekPointerPlay" flags="b" />
-		<key id="KEY_OK" mapto="SeekPointerOK" flags="b" />
+		<key id="KEY_PLAYPAUSE" mapto="SeekPointerPlay" flags="m" />
+		<key id="KEY_OK" mapto="SeekPointerOK" flags="m" />
 		<key id="KEY_LEFT" mapto="SeekPointerLeft" flags="mr" />
 		<key id="KEY_RIGHT" mapto="SeekPointerRight" flags="mr" />
 	</map>
