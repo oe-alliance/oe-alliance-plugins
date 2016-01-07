@@ -956,7 +956,7 @@ class Blindscan(ConfigListScreen, Screen):
 		print "orb = ", orb
 		return orb
 		
-	def startScanCallback(self, answer):
+	def startScanCallback(self, answer=True):
 		if answer:
 			self.session.nav.playService(self.session.postScanService)
 			self.close(True)
