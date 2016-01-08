@@ -74,7 +74,7 @@
 	</map>
 
 	<map context="InfobarExtensions">
-		<!--<key id="KEY_F9" mapto="showPluginBrowser" flags="b" />-->
+		<key id="KEY_F9" mapto="showPluginBrowser" flags="b" />
 		<key id="KEY_INS_LINE" mapto="extensions" flags="b" />
 	</map>
 
