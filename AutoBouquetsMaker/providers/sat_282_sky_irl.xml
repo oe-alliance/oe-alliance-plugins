@@ -145,6 +145,18 @@ except:
 	whitelist_by_id = [1003,3661,5032,3663,3141,3625,3629,3627,4037,4040,5152,5153,5154]
 	blacklist = [899,950]
 	
+	RTE = {
+		1251: 'RTE One',
+		2808: 'RTE One +1',
+		2816: 'RTE One HD',
+		1252: 'RTE2',
+		1270: 'RTE2 HD',
+		1256: 'RTEjr',
+	}
+
+if "channel_id" in service and service["channel_id"] in RTE: # sort out RTE channel names
+	service["service_name"] = RTE[service["channel_id"]]
+
 if "channel_id" in service and service["channel_id"] in ITVs: # sort out ITV channel names
 	service["interactive_name"] = ITVs[service["channel_id"]]	
 

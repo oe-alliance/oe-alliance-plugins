@@ -347,10 +347,22 @@ except:
 	whitelist_by_id = [1003,3141,3625,3627,3629,3622,3623,3661,3663,4040,5032,5037,5152,5153,5154,5662,5663]
 	blacklist = []
 	bt_sports_id = [5030,5381,5031,5382,5383,5384,5385,5386]
+	
+	RTE = {
+		1251: 'RTE One',
+		2808: 'RTE One +1',
+		2816: 'RTE One HD',
+		1252: 'RTE2',
+		1270: 'RTE2 HD',
+		1256: 'RTEjr',
+	}
+
+if "channel_id" in service and service["channel_id"] in RTE: # sort out RTE channel names
+	service["service_name"] = RTE[service["channel_id"]]
 
 if "channel_id" in service and service["channel_id"] in rename: # sort out ITV channel names
 	service["interactive_name"] = rename[service["channel_id"]]
-	
+
 # Add channels by name
 if custom and service["service_name"] in channels_to_add and service["service_type"] in DvbScanner.VIDEO_ALLOWED_TYPES and channels_to_add[service["service_name"]] not in LCNs_in_use:
 	LCNs_in_use.append(channels_to_add[service["service_name"]])
