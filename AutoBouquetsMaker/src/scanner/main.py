@@ -444,7 +444,7 @@ class AutoBouquetsMaker(Screen):
 
 	# for compatibility with some third party images
 	def gotTsidOnid(self, tsid, onid):
-		print>>log, "got tsid, onid:", tsid, onid
+		print>>log, "[AutoBouquetsMaker] got tsid, onid:", tsid, onid
 
 		INTERNAL_PID_STATUS_NOOP = 0
 		INTERNAL_PID_STATUS_WAITING = 1
