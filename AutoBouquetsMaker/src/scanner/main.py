@@ -398,7 +398,12 @@ class AutoBouquetsMaker(Screen):
 			params_fe = eDVBFrontendParameters()
 			params_fe.setDVBC(params)
 
-		self.rawchannel.requestTsidOnid()
+		try:
+			self.rawchannel.requestTsidOnid()
+		except (TypeError):
+			# for compatibility with some third party images
+			self.rawchannel.requestTsidOnid(self.gotTsidOnid)
+
 		self.frontend.tune(params_fe)
 		self.manager.setAdapter(0)	# FIX: use the correct device
 		self.manager.setDemuxer(demuxer_id)
@@ -436,6 +441,25 @@ class AutoBouquetsMaker(Screen):
 			return
 
 		self.locktimer.start(100, 1)
+
+	# for compatibility with some third party images
+	def gotTsidOnid(self, tsid, onid):
+		print>>log, "got tsid, onid:", tsid, onid
+
+		INTERNAL_PID_STATUS_NOOP = 0
+		INTERNAL_PID_STATUS_WAITING = 1
+		INTERNAL_PID_STATUS_SUCCESSFUL = 2
+		INTERNAL_PID_STATUS_FAILED = 3
+
+		if tsid is not None and onid is not None:
+			self.pidStatus = INTERNAL_PID_STATUS_SUCCESSFUL
+			self.tsid = tsid
+			self.onid = onid
+		else:
+			self.pidStatus = INTERNAL_PID_STATUS_FAILED
+			self.tsid = -1
+			self.onid = -1
+		self.timer.start(100, True)
 
 	def doScan(self):
 		if not self.manager.read(self.selectedProviders[self.currentAction], self.providers):
