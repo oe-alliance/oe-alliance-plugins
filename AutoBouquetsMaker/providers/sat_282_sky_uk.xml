@@ -269,21 +269,20 @@ except:
 	########################################################################
 	channels_to_add = {
 		"London Live": 117,
-		"RTE One": 161,
-		"RTE2": 162,
 		"TG4": 163,
-		"RTE2 HD": 224,
 		"Setanta Ireland": 423,
 		"Setanta Sports1": 424,
 		"Premier Sports": 428,
 		"Setanta HD": 460,
 		"Premier HD": 462,		
-		"Oireachtas TV": 574,
-		"RTEjr": 635
+		"Oireachtas TV": 574
 	}
 
 	channels_to_add_by_id = {
-		
+		1251: 161, # RTE One
+		1252: 162, # RTE2
+		1270: 224, # RTE2 HD
+		1256: 635  # RTEjr
 	}
 
 	rename = {
@@ -343,22 +342,29 @@ except:
 		5386: "BT Sport Extra 6"
 	}
 
-	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'RTE2 HD','BoxNation HD','BT Preview HD']
-	whitelist_by_id = [1003,3141,3625,3627,3629,3622,3623,3661,3663,4040,5032,5037,5152,5153,5154,5662,5663]
+	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'BoxNation HD','BT Preview HD']
+	whitelist_by_id = [
+		1003, # MUTV HD
+		1270, # RTE2 HD
+		3141, # BT Sport/ESPN
+		3622, # 50682
+		3623, # 50683
+		3625, # BT Sport 1 HD
+		3627, # BT Sport 2 HD
+		3629, # BT SportEurHD
+		3661, # BT Sport 1
+		3663, # BT Sport 2
+		4040, # BT Sport/ESPNHD
+		5032, # BT Sport Europe
+		5037, # AMC from BTHD
+		5152, # Setanta HD
+		5153, # Premier HD
+		5154, # Setanta HD
+		5662, # 50662
+		5663  # 50683
+	]
 	blacklist = []
 	bt_sports_id = [5030,5381,5031,5382,5383,5384,5385,5386]
-	
-	RTE = {
-		1251: 'RTE One',
-		2808: 'RTE One +1',
-		2816: 'RTE One HD',
-		1252: 'RTE2',
-		1270: 'RTE2 HD',
-		1256: 'RTEjr',
-	}
-
-if "channel_id" in service and service["channel_id"] in RTE: # sort out RTE channel names
-	service["service_name"] = RTE[service["channel_id"]]
 
 if "channel_id" in service and service["channel_id"] in rename: # sort out ITV channel names
 	service["interactive_name"] = rename[service["channel_id"]]
