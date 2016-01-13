@@ -269,19 +269,19 @@ except:
 	########################################################################
 	channels_to_add = {
 		"London Live": 117,
-		"TG4": 163,
-		"Setanta Ireland": 423,
-		"Setanta Sports1": 424,
-		"Premier Sports": 428,
-		"Setanta HD": 460,
-		"Premier HD": 462,		
-		"Oireachtas TV": 574
+		"Setanta Ireland": 423, #3601 and 5122
+		"Setanta Sports1": 424, #4551 and 5123
+		"Setanta HD": 460  	#5152 and 5154
 	}
 
 	channels_to_add_by_id = {
 		1251: 161, # RTE One
 		1252: 162, # RTE2
+		1253: 163, # TG4
 		1270: 224, # RTE2 HD
+		5311: 428, # Premier Sports
+		5153: 462, # Premier HD
+		1257: 574, # Oireachtas TV
 		1256: 635  # RTEjr
 	}
 
