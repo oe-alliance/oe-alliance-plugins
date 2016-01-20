@@ -122,6 +122,10 @@ if S7300S
 SUBDIRS += F3LEDControl
 endif
 
+if S7400S
+SUBDIRS += F3LEDControl
+endif
+
 if SH1
 SUBDIRS += F3LEDControl
 endif
