@@ -788,7 +788,7 @@ PyObject *ss_parse_sdt(unsigned char *data, int length) {
 				memcpy(provider_name, data + offset2 + 4, service_provider_name_length);
 				memcpy(service_name, data + offset2 + 5 + service_provider_name_length, service_name_length);
 			}
-			if (tag == 0xc0)	// sky custom descriptor????
+			if (tag == 0xc0)	// Sky protocol. Used for NVOD service names.
 			{
 				memset(service_name, '\0', 256);
 				memcpy(service_name, data + offset2 + 2, size);
