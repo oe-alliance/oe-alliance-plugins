@@ -788,15 +788,10 @@ PyObject *ss_parse_sdt(unsigned char *data, int length) {
 				memcpy(provider_name, data + offset2 + 4, service_provider_name_length);
 				memcpy(service_name, data + offset2 + 5 + service_provider_name_length, service_name_length);
 			}
-			if (tag == 0xc0)	// sky/Virgin user defined descriptor????
+			if (tag == 0xc0)	// sky custom descriptor????
 			{
-				//memset(service_name, '\0', 256);
-				//memcpy(service_name, data + offset2 + 2, size);
-				lcn_id = ((data[offset2 + 2] & 0x03) << 8) | data[offset2 + 3];
-				int name_length = data[offset2 + 4];
-				//service name is taken from descriptor 48
-				bouquets_id = data[offset2 + 5 + name_length];
-				service_group_id = data[offset2 + 6 + name_length];
+				memset(service_name, '\0', 256);
+				memcpy(service_name, data + offset2 + 2, size);
 			}
 			if (tag == 0xca)	//User defined. Virgin LCN and Bouquets id
 			{
