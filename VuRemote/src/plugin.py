@@ -28,7 +28,7 @@ class RemoteControlCodeInit:
 	def setSystemCode(self, type = 2):
 		if not fileExists("/proc/stb/fp/remote_code"):
 			return -1
-		print "<RemoteControlCode> Write Remote Control Code : %d" % type
+		print "[RemoteControlCode] Write Remote Control Code : %d" % type
 		f = open("/proc/stb/fp/remote_code", "w")
 		f.write("%d" % type)
 		f.close()
@@ -92,7 +92,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		config.misc.remotecontrol_text_support.save()
 		configfile.save()
 		if self.codestartup != config.plugins.remotecontrolcode.systemcode.value:
-			print "<RemoteControlCode> Selected System Code : ",config.plugins.remotecontrolcode.systemcode.value
+			print "[RemoteControlCode] Selected System Code : ",config.plugins.remotecontrolcode.systemcode.value
 			ret = self.setSystemCode(int(config.plugins.remotecontrolcode.systemcode.value))
 			if ret == -1:
 				self.restoreCode()
