@@ -109,7 +109,7 @@ msgid "FTA HD Channels"
 msgstr "Canales FTA HD"
 
 msgid "FTA only"
-msgstr "S´olo FTA"
+msgstr "Sólo FTA"
 
 msgid "HD Channels"
 msgstr "Canales HD"
