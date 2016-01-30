@@ -19,7 +19,7 @@ if CUBE
 SUBDIRS += cube
 endif
 
-if WETEK
+if WETEKPLAY
 SUBDIRS += wetek
 endif
 
