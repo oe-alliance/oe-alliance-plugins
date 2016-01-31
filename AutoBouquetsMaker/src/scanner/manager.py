@@ -60,7 +60,7 @@ class Manager():
 		print>>log, "[Manager] Loading settings..."
 		reader = BouquetsReader()
 		self.transponders = reader.readLamedb(self.path)
-		print>>log, "[Manager] Done"
+		print>>log, "[Manager] Settings loaded"
 
 	def save(self, providers, dependent_providers = {}):
 		#merge dependent providers
@@ -186,7 +186,7 @@ class Manager():
 				self.bouquetsToKeep, currentBouquets, self.bouquetsToHide,
 				self.providerConfigs)
 
-		print>>log, "[Manager] Done"
+		print>>log, "[Manager] write bouquets, Done"
 
 	def read(self, provider_config, providers):
 		ret = False
@@ -303,7 +303,7 @@ class Manager():
 					if provider_key in config.autobouquetsmaker.providers.value: # not a descendent provider
 						self.bouquetsOrder.append(provider_key)
 
-		print>>log, "[Manager] Done"
+		print>>log, "[Manager] read %s, Done" % provider_key
 		return ret
 
 	def getBouquetsList(self):

@@ -207,6 +207,7 @@ class AutoBouquetsMaker(Screen):
 		self.timer.start(100, 1)
 
 	def doTune(self):
+		print>>log, "[AutoBouquetsMaker] searching for tuner for %s" % self.providers[self.currentAction]["name"]
 		from Screens.Standby import inStandby
 		if self.providers[self.currentAction]["streamtype"] == "dvbs":
 			transponder = self.providers[self.currentAction]["transponder"]
@@ -233,7 +234,7 @@ class AutoBouquetsMaker(Screen):
 				nimList.append(nim.slot)
 		if len(nimList) == 0:
 			print>>log, "[AutoBouquetsMaker] No NIMs found"
-			self.showError(_('No NIMs found'))
+			self.showError(_('No NIMs found for ') + self.providers[self.currentAction]["name"])
 			return
 
 		resmanager = eDVBResourceManager.getInstance()
@@ -306,7 +307,7 @@ class AutoBouquetsMaker(Screen):
 
 		if current_slotid == -1:
 			print>>log, "[AutoBouquetsMaker] No valid NIM found"
-			self.showError(_('No valid NIM found'))
+			self.showError(_('No valid NIM found for ') + self.providers[self.currentAction]["name"])
 			return
 
 		if not self.rawchannel:
