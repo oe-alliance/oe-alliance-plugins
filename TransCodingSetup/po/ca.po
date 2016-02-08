@@ -10,8 +10,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-Country: SPAIN\n"
+"X-Poedit-Language: catalan\n"
+"X-Poedit-Country: CATALONIA\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
@@ -37,7 +37,7 @@ msgid "2.2"
 msgstr ".2."
 
 msgid "2nd transcoding and PIP are mutually exclusive."
-msgstr "2º transcoding y PiP son mutuamente excluyentes."
+msgstr "2on transcoding i PiP s'exclouen mutuament."
 
 msgid "3.0"
 msgstr "3.0"
@@ -76,13 +76,13 @@ msgid "720p"
 msgstr "720p"
 
 msgid "Advanced"
-msgstr "Avanzado"
+msgstr "Avançat"
 
 msgid "Aspect Ratio"
-msgstr "Relación de aspecto"
+msgstr "Relació d'aspecte"
 
 msgid "Audio codec"
-msgstr "Codec de audio"
+msgstr "Codec d'àudio"
 
 msgid "Auto set Framerate / Bitrate"
 msgstr "Autoajustar Framerate/Bitrate"
@@ -91,10 +91,10 @@ msgid "Bitrate"
 msgstr "Bitrate"
 
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Cancel·lar"
 
 msgid "Default"
-msgstr "Predefinidos"
+msgstr "Predefinits"
 
 msgid "Encoder"
 msgstr "Codificador"
@@ -116,71 +116,71 @@ msgid "GOP Frame P"
 msgstr "GOP Frame P"
 
 msgid "Level"
-msgstr "Nivel"
+msgstr "Nivell"
 
 msgid "Max"
-msgstr "Máx"
+msgstr "Màx"
 
 msgid "Normal"
 msgstr "Normal"
 
 msgid "Off"
-msgstr "Apagado"
+msgstr "Apagat"
 
 msgid "OK. Encoder %s."
-msgstr "Correcto. Codificador %s."
+msgstr "Correcte. Codificador %s."
 
 msgid ""
 "OK. Encoder %s.\n"
 "%s"
 msgstr ""
-"Correcto. Codificador %s.\n"
+"Correcte. Codificador %s.\n"
 "(%s)."
 
 msgid "Ok"
-msgstr "De acuerdo"
+msgstr "D'acord"
 
 msgid "On"
-msgstr "Encendido"
+msgstr "Encès"
 
 msgid "Port"
-msgstr "Puerto"
+msgstr "Port"
 
 msgid "Profile"
 msgstr "Perfil"
 
 msgid "Really close without saving settings?"
-msgstr "Seguro que quiere salir sin guardar los cambios?"
+msgstr "Segur que voleu sortir sense desar els canvis?"
 
 msgid "Resolution"
-msgstr "Resolución"
+msgstr "Resolució"
 
 msgid "Save"
-msgstr "Guardar"
+msgstr "Desar"
 
 msgid "Set %s failed."
-msgstr "Fallo de conf. de %s"
+msgstr "Error de conf. de %s"
 
 msgid "Set port failed."
-msgstr "Configuración de puerto errónea."
+msgstr "Configuració de port errònia."
 
 msgid "This model is not support transcoding."
-msgstr "Este modelo no soporta la transcodificación"
+msgstr "Aquest model no suporta la transcodificació"
 
 msgid "This Plugin is available on SOLO2/DUO2"
-msgstr "Este plugin está disponible para SOLO2/DUO2"
+msgstr "Aquest plugin està disponible per a SOLO2/DUO2"
 
 msgid "Transcoding"
-msgstr "Transcodificación"
+msgstr "Transcodificació"
 
 msgid "Transcoding Setup"
 msgstr "Configurar Transcoding"
 
 msgid "Transcoding and PIP are mutually exclusive."
-msgstr "Transcoding y PiP son mutuamente excluyentes."
+msgstr "Transcoding y PiP s'exclouen mutuamente."
 
 msgid "TranscodingSetup"
-msgstr "Transcodificación"
+msgstr "Transcodificació"
 
 msgid "Video codec"
 msgstr "Codec de video"
@@ -201,34 +201,34 @@ msgid "ac3"
 msgstr "ac3"
 
 msgid "advancedsimple"
-msgstr "Avanzado-simple"
+msgstr "Avançat-simple"
 
 msgid "auto"
 msgstr "Auto"
 
 msgid "baseline"
-msgstr "Linea básica"
+msgstr "Línia bàsica"
 
 msgid "disable"
 msgstr "deshabilitar"
 
 msgid "disabled"
-msgstr "Deshabilitado"
+msgstr "Deshabilitat"
 
 msgid "enable"
 msgstr "Habilitar"
 
 msgid "enabled"
-msgstr "Habilitado"
+msgstr "Habilitat"
 
 msgid "h264"
 msgstr "h264"
 
 msgid "high"
-msgstr "Alto"
+msgstr "Alt"
 
 msgid "low"
-msgstr "Bajo"
+msgstr "Baix"
 
 msgid "main"
 msgstr "Principal"
@@ -240,17 +240,17 @@ msgid "mpg"
 msgstr "mpg"
 
 msgid "simple"
-msgstr "Sencillo"
+msgstr "Senzill"
 
 # setup.xml
 msgid "Encoder 0: Aspect Ratio"
-msgstr "Codificador 0: Relación de aspecto"
+msgstr "Codificador 0: Relació d'aspecte"
 
 msgid "Encoder 0: Audio codec"
-msgstr "Codificador 0: Codec de audio"
+msgstr "Codificador 0: Codec d'àudio"
 
 msgid "Encoder 0: Auto mode (Bitrate/Framerate)"
-msgstr "Codificador 0: Modo auto (Bitrate/Framerate)"
+msgstr "Codificador 0: Mode auto (Bitrate/Framerate)"
 
 msgid "Encoder 0: Bitrate"
 msgstr "Codificador 0: Bitrate"
@@ -271,19 +271,19 @@ msgid "Encoder 0: Profile"
 msgstr "Codificador 0: Perfil"
 
 msgid "Encoder 0: Resolution"
-msgstr "Codificador 0: Resolución"
+msgstr "Codificador 0: Resolució"
 
 msgid "Encoder 0: Video codec"
 msgstr "Codificador 0: Codec de video"
 
 msgid "Encoder 1: Aspect Ratio"
-msgstr "Codificador 1: Relación de aspecto"
+msgstr "Codificador 1: Relació d'aspecte"
 
 msgid "Encoder 1: Audio codec"
-msgstr "Codificador 1: Codec de audio"
+msgstr "Codificador 1: Codec d'àudio"
 
 msgid "Encoder 1: Auto mode (Bitrate/Framerate)"
-msgstr "Codificador 1: Modo auto (Bitrate/Framerate)"
+msgstr "Codificador 1: Mode auto (Bitrate/Framerate)"
 
 msgid "Encoder 1: Bitrate"
 msgstr "Codificador 1: Bitrate"
@@ -298,13 +298,13 @@ msgid "Encoder 1: GOP Frame P"
 msgstr "Codificador 1: GOP Frame P"
 
 msgid "Encoder 1: Level"
-msgstr "Codificador 1: Nivel"
+msgstr "Codificador 1: Nivell"
 
 msgid "Encoder 1: Profile"
 msgstr "Codificador 1: Perfil"
 
 msgid "Encoder 1: Resolution"
-msgstr "Codificador 1: Resolución"
+msgstr "Codificador 1: Resolució"
 
 msgid "Encoder 1: Video codec"
 msgstr "Codificador 1: Codec de video"
