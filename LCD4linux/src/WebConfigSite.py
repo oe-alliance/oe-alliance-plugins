@@ -26,8 +26,8 @@ L1 = []
 L2 = []
 L3 = []
 L4 = []
-M1 = ["LCD4linux.OSD","LCD4linux.Scr","LCD4linux.Bil","LCD4linux.Wet","LCD4linux.Pop","LCD4linux.Fri","LCD4linux.Fon","LCD4linux.Mai","LCD4linux.Cal","LCD4linux.RBo","LCD4linux.Www","LCD4linux.Web","LCD4linux.MJP","LCD4linux.xml"]
-M2 = [_("OSD"),_("Screen"),_("Picture"),_("Weather"),_("Popup-Text"),_("FritzCall"),_("Font"),_("Mail"),_("Calendar"),_("Remote Box"),_("WWW Converter"),_("WebIF"),_("MJPEG Stream"),_("Box-Skin-LCD")]
+M1 = ["LCD4linux.OSD","LCD4linux.Scr","LCD4linux.Bil","LCD4linux.Wet","LCD4linux.Net","LCD4linux.Pop","LCD4linux.Fri","LCD4linux.Fon","LCD4linux.Mai","LCD4linux.Cal","LCD4linux.RBo","LCD4linux.Www","LCD4linux.Web","LCD4linux.MJP","LCD4linux.xml","LCD4linux.Tun","LCD4linux.Key","LCD4linux.Son"]
+M2 = [_("OSD"),_("Screen"),_("Picture"),_("Weather"),_("Netatmo"),_("Popup-Text"),_("FritzCall"),_("Font"),_("Mail"),_("Calendar"),_("Remote Box"),_("WWW Converter"),_("WebIF"),_("MJPEG Stream"),_("Box-Skin-LCD"),_("Tuner"),_("Key"),_("Sonos")]
 
 Mode = "1"
 ModeOld = ""
@@ -51,33 +51,32 @@ def ParseCode():
 	i3 = 0
 	i4 = 0
 	L4log("WebIF: parsing Code....")
-	if os.path.exists(Py):
-		for line in open(Py,"r").readlines():
-	#		print line
-			if line.find("self.list1.append") >= 0 or line.find("self.list2.append") >= 0 or line.find("self.list3.append") >= 0 or line.find("self.list4.append") >= 0:
-				Z = line.replace("getConfigListEntry(_",",").replace(")","").replace("(","").replace(".append","").replace("\t","").replace("\n","").replace("\"","").split(",")
-				if Z[0]=="self.list1":
-					if Z[2].strip()[:13] in M1:
-						idx = M1.index(Z[2].strip()[:13])
-						i1 = idx+1
-					Z.append(i1)
-					i1 = 0
-					L1.append(Z)
-				elif Z[0]=="self.list2":
-					if Z[1][:1] != "-":
-						i2+=1
-					Z.append(i2)
-					L2.append(Z)
-				elif Z[0]=="self.list3":
-					if Z[1][:1] != "-":
-						i3+=1
-					Z.append(i3)
-					L3.append(Z)
-				elif Z[0]=="self.list4":
-					if Z[1][:1] != "-":
-						i4+=1
-					Z.append(i4)
-					L4.append(Z)
+	for line in open(Py,"r").readlines():
+#		print line
+		if line.find("self.list1.append") >= 0 or line.find("self.list2.append") >= 0 or line.find("self.list3.append") >= 0 or line.find("self.list4.append") >= 0:
+			Z = line.replace("getConfigListEntry(_",",").replace(")","").replace("(","").replace(".append","").replace("\t","").replace("\n","").replace("\"","").split(",")
+			if Z[0]=="self.list1":
+				if Z[2].strip()[:13] in M1:
+					idx = M1.index(Z[2].strip()[:13])
+					i1 = idx+1
+				Z.append(i1)
+				i1 = 0
+				L1.append(Z)
+			elif Z[0]=="self.list2":
+				if Z[1][:1] != "-":
+					i2+=1
+				Z.append(i2)
+				L2.append(Z)
+			elif Z[0]=="self.list3":
+				if Z[1][:1] != "-":
+					i3+=1
+				Z.append(i3)
+				L3.append(Z)
+			elif Z[0]=="self.list4":
+				if Z[1][:1] != "-":
+					i4+=1
+				Z.append(i4)
+				L4.append(Z)
 
 def _l(st):
 	return st.decode("utf-8","ignore").replace(" [ok]>","").encode('ascii', 'xmlcharrefreplace')
@@ -153,7 +152,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			L4logE("IP2:",req.client.host)
 			if IP.find(".") == -1:
 				IP = None
-		if IP is None:
+		if IP is None:	
 			Block = False
 		else:
 			Block = True
@@ -276,7 +275,14 @@ class LCD4linuxConfigweb(resource.Resource):
 		elif command[0] == "status":
 			StatusMode = True
 		elif command[0] == "pop":
-			setPopText(req.args.get("PopText",[""])[0])
+			V = _l(req.args.get("PopText","")[0])
+			try:
+				import HTMLParser
+				parse=HTMLParser.HTMLParser()
+				V = parse.unescape(V)
+			except:
+				L4log("WebIF Error: Parse Text")
+			setPopText(V)
 			L4LElement.setRefresh()
 		elif command[0] == "popclear":
 			setPopText("")
@@ -308,6 +314,16 @@ class LCD4linuxConfigweb(resource.Resource):
 				L4LElement.setBrightness(exs[0])
 			elif len(exs) == 2:
 				L4LElement.setBrightness(exs[0],exs[1])
+		elif command[0] == "getbrightness" and ex is not None:
+			if int(ex[0])<1 or int(ex[0])>3:
+				return "0"
+			else:
+				return str(L4LElement.getBrightness(int(ex[0])))
+		elif command[0] == "getmjpeg" and ex is not None:
+			if int(ex[0])<1 or int(ex[0])>3:
+				return "0"
+			else:
+				return str(getMJPEGreader(ex[0]))
 		elif command[0] == "copyMP":
 			for a in req.args.keys():
 				if ".Standby" in a:
@@ -419,7 +435,7 @@ class LCD4linuxConfigweb(resource.Resource):
 							xmlClear()
 						elif a.find(".MJPEG") >0:
 							MJPEG_start()
-							MJPEG_stop()
+							MJPEG_stop("")
 						elif a.find(".Font") >0:
 							setFONT(LCD4linux.Font.value)
 						if a.find("WetterCity") >0:
@@ -708,7 +724,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		elif Mode == "5":
 			html += "<form method=\"POST\">\n"
 			html += "<fieldset style=\"width:auto\" name=\"Mode2\">\n"
-			html += "<textarea name=\"PopText\" style=\"height: 120px; width: 416px\">%s</textarea>" % PopText[1]
+			html += "<textarea name=\"PopText\" style=\"height: 120px; width: 416px\">%s</textarea>" % _l(PopText[1])
 			html += "<input type=\"hidden\" name=\"cmd\" value=\"pop\">\n"
 			html += "<input type=\"submit\" style=\"background-color: #FFCC00\" value=\"%s\">\n" % _l(_("set Settings"))
 			html += "</fieldset></form>\n"
