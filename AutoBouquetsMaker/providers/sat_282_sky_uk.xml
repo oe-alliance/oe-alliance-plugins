@@ -278,7 +278,6 @@ except:
 		1251: 161, # RTE One
 		1252: 162, # RTE2
 		1253: 163, # TG4
-		1270: 224, # RTE2 HD
 		5311: 428, # Premier Sports
 		5153: 462, # Premier HD
 		1257: 574, # Oireachtas TV
@@ -345,7 +344,6 @@ except:
 	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'BoxNation HD','BT Preview HD']
 	whitelist_by_id = [
 		1003, # MUTV HD
-		1270, # RTE2 HD
 		3141, # BT Sport/ESPN
 		3622, # 50682
 		3623, # 50683
