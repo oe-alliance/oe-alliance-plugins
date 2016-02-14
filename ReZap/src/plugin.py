@@ -11,28 +11,52 @@ class LoopSyncMain(Screen):
 		self.gotSession()
 
 	def gotSession(self):
+		self.ResetFlag()
 		self.AVSyncTimer = eTimer()
 		self.AVSyncTimer.callback.append(self.UpdateStatus)
 		self.AVSyncTimer.start(10000, True)
 
 	def UpdateStatus(self):
-		rst_status = 0
+		frontendDataOrg = ""
+		service1 = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+		if service1:
+			service = self.session.nav.getCurrentService()
+			if service:
+				feinfo = service.frontendInfo()
+				frontendDataOrg = feinfo and feinfo.getAll(True)
+				if frontendDataOrg:		### DVB-S/C/T ###
+					if self.CheckFlag():
+						print "[ReZap] DoReZap !!!"
+						self.AVSyncTimer.start(500, True)
+						self.ResetFlag()
+						try:
+							self.session.open(DoReZap,service1)
+						except Exception, e:
+							print "[ReZap] Can't ReZap"
+					self.AVSyncTimer.start(100, True)
+					return
+				else:		### IPTV or VOD ###
+					self.ResetFlag()
+					self.AVSyncTimer.start(500, True)
+					return
+			else:
+				self.AVSyncTimer.start(500, True)
+				return
+
+	def CheckFlag(self):
 		try:
-			f = open("/sys/class/tsync/reset_flag", "r")
-			rst_status = int(f.read(),16)
-			f.close()
+			if int(open("/sys/class/tsync/reset_flag", "r").read(),16) == 1: return True;
 		except Exception, e:
 			print "[ReZap] Can't read class"
-			self.AVSyncTimer.start(300, True)
-			return
-		if rst_status == 1 :
-			print "[ReZap] DoReZap !!!"
-			rst_status = 0
-			self.session.open(DoReZap)
-			self.AVSyncTimer.start(5000, True)
-			return
-		self.AVSyncTimer.start(100, True)
-               
+			self.AVSyncTimer.start(500, True)
+		return False;
+
+	def ResetFlag(self):
+		try:
+			open("/sys/class/tsync/reset_flag", "w").write("0")
+		except Exception, e:
+			print "[ReZap] Can't ResetFlag"
+
 ###################################                
 class DoReZap(Screen):
   
@@ -40,35 +64,26 @@ class DoReZap(Screen):
 		<screen position="center,center" size="1920,1080" title="" >
 		</screen>"""
 
-	def __init__(self, session):
+	def __init__(self, session, xxx):
 		Screen.__init__(self, session)
 
 		try:
-			f_tmp = open("/sys/class/video/blackout_policy", "w")
-			f_tmp.write("0")
-			f_tmp.close()
-			f_tmp = open("/sys/class/tsync/reset_flag", "w")
-			f_tmp.write("0")
-			f_tmp.close()
+			open("/sys/class/video/blackout_policy", "w").write("0")
 		except Exception, e:
 			print "[ReZap] Can't change policy(0)"
-		self.current_service		= self.session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
-		self.session.nav.playService(self.current_service)
+		self.session.nav.playService(xxx)
 		try:
-			f_tmp = open("/sys/class/video/blackout_policy", "w")
-			f_tmp.write("1")
-			f_tmp.close()
+			open("/sys/class/video/blackout_policy", "w").write("1")
 		except Exception, e:
 			print "[ReZap] Can't change policy(1)"
-		self.close()	
-
+		self.close()
 
 ###################################                
 
 def sessionstart(session, **kwargs):
 	session.open(LoopSyncMain)
-       
+
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)
