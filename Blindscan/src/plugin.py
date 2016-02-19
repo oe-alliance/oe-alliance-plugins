@@ -1007,12 +1007,7 @@ def BlindscanSetup(menuid, **kwargs):
 
 def Plugins(**kwargs):
 	if nimmanager.hasNimType("DVB-S"):
-		nimsAvailable = 0
 		for n in nimmanager.nim_slots:
-			if n.isCompatible("DVB-S"):
-				if n.description in _unsupportedNims: # DVB-S NIMs without blindscan hardware or software
-					continue
-				nimsAvailable += 1
-		if nimsAvailable > 0:
-			return PluginDescriptor(name=_("Blind scan"), description=_("Scan satellites for new transponders"), where = PluginDescriptor.WHERE_MENU, fnc=BlindscanSetup)
+			if n.isCompatible("DVB-S") and n.description not in _unsupportedNims: # DVB-S NIMs without blindscan hardware or software
+				return PluginDescriptor(name=_("Blind scan"), description=_("Scan satellites for new transponders"), where = PluginDescriptor.WHERE_MENU, fnc=BlindscanSetup)
 	return []
