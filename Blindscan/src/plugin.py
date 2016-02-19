@@ -36,6 +36,9 @@ XML_BLINDSCAN_DIR = "/tmp"
 
 _supportNimType = { 'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_', 'BCM7356':'bcm7346_'}
 
+# For STBs that support multiple DVB-S tuner models, e.g. Solo 4K.
+_unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', ) # format = nim.description from nimmanager
+
 class Blindscan(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -284,7 +287,9 @@ class Blindscan(ConfigListScreen, Screen):
 		for n in nimmanager.nim_slots:
 			if n.config_mode == "nothing":
 				continue
-			if n.isCompatible("DVB-S") and len(nimmanager.getSatListForNim(n.slot)) < 1:
+			if n.isCompatible("DVB-S") and len(nimmanager.getSatListForNim(n.slot)) < 1: # empty setup
+				continue
+			if n.isCompatible("DVB-S") and n.description in _unsupportedNims: # DVB-S NIMs without blindscan hardware or software
 				continue
 			if n.config_mode in ("loopthrough", "satposdepends"):
 				root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
@@ -1002,6 +1007,12 @@ def BlindscanSetup(menuid, **kwargs):
 
 def Plugins(**kwargs):
 	if nimmanager.hasNimType("DVB-S"):
-		return PluginDescriptor(name=_("Blind scan"), description=_("Scan satellites for new transponders"), where = PluginDescriptor.WHERE_MENU, fnc=BlindscanSetup)
-	else:
-		return []
+		nimsAvailable = 0
+		for n in nimmanager.nim_slots:
+			if n.isCompatible("DVB-S"):
+				if n.description in _unsupportedNims: # DVB-S NIMs without blindscan hardware or software
+					continue
+				nimsAvailable += 1
+		if nimsAvailable > 0:
+			return PluginDescriptor(name=_("Blind scan"), description=_("Scan satellites for new transponders"), where = PluginDescriptor.WHERE_MENU, fnc=BlindscanSetup)
+	return []
