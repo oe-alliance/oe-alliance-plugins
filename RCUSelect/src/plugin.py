@@ -54,9 +54,10 @@ class RCUSelect(Screen):
 		_("WeTek Play OpenElec RCU"),
 		_("Alien2/1 RCU"),
 		_("Alien1 old RCU"),
+		_("Mutant HD2400 RCU"),
 		_("Octagon SF8 RCU"),
-		_("xtrend ET10000 RCU"),
-		_("Mutant HD2400 RCU")]
+		_("Technomate Nano RCU"),
+		_("xtrend ET10000 RCU")]
 		self.SetOSDList()
 		self.MakeKeymapBckUp()
 
@@ -107,6 +108,8 @@ class RCUSelect(Screen):
 					os.system("cp -f /etc/amremote/wetek_et10000remote.conf /etc/amremote/wetek.conf &")
 				elif self.rcuv == 'Mutant HD2400 RCU':
 					os.system("cp -f /etc/amremote/wetek_hd2400remote.conf /etc/amremote/wetek.conf &")
+				elif self.rcuv == 'Technomate Nano RCU':
+					os.system("cp -f /etc/amremote/wetek_tmnanoremote.conf /etc/amremote/wetek.conf &")					
 				else:
 					os.system("cp -f /etc/amremote/wetek2.conf /etc/amremote/wetek.conf &")
 				f = open("/etc/amremote/.choice", "w")
