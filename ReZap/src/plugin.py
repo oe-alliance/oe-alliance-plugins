@@ -27,8 +27,8 @@ class LoopSyncMain(Screen):
 				if frontendDataOrg:		### DVB-S/C/T ###
 					if self.CheckFlag():
 						print "[ReZap] DoReZap !!!"
-						self.AVSyncTimer.start(500, True)
 						self.ResetFlag()
+						self.AVSyncTimer.start(500, True)						
 						try:
 							self.session.open(DoReZap,service1)
 						except Exception, e:
