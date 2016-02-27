@@ -124,7 +124,8 @@ class BookmarkManager(SimpleConfigParser):
 			f = file('/proc/stb/info/vumodel')
 			model = f.read().strip()
 			f.close()
-			manualmode = (model == "solo2" or model == "duo2" or model == "solose" or model == "zero")
+			#manualmode = (model == "solo2" or model == "duo2" or model == "solose" or model == "zero")
+			manualmode = False
 
 			os.system('echo "[__SYS__]" > %s'%(_dbFileName))
 			os.system('echo "category_current_idx = 1" >> %s'%(_dbFileName))
@@ -135,10 +136,10 @@ class BookmarkManager(SimpleConfigParser):
 			os.system('echo "id = 1" >> %s'%(_dbFileName))
 			os.system('echo "name = My favorite" >> %s'%(_dbFileName))
 			os.system('echo "[b-1]" >> %s'%(_dbFileName))
-			os.system('echo "url = http://www.vuplus.com/" >> %s'%(_dbFileName))
+			os.system('echo "url = http://wiki.opena.tv/" >> %s'%(_dbFileName))
 			os.system('echo "id = 1" >> %s'%(_dbFileName))
 			os.system('echo "parent = 1" >> %s'%(_dbFileName))
-			os.system('echo "title = Vuplus Home" >> %s'%(_dbFileName))
+			os.system('echo "title = open Alliance WIKI" >> %s'%(_dbFileName))
 			os.system('echo "type = 0" >> %s'%(_dbFileName))
 			if manualmode :
 				os.system('echo "[b-2]" >> %s'%(_dbFileName))

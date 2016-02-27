@@ -20,6 +20,10 @@ SOCKETFILE  = None
 CONTROLFILE = None
 
 def getPosition():
+	dst_left = 0
+	dst_width = 720
+	dst_top = 0
+	dst_height = 576
 	if fileExists("/proc/stb/fb/dst_left"):
 		try:
 			file = open("/proc/stb/fb/dst_left", "r")
