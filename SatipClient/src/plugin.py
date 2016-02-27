@@ -30,8 +30,6 @@ import copy
 
 from Components.config import config, ConfigSubList, ConfigSelection, ConfigElement
 
-from boxbranding import getImageDistro, getBoxType
-
 def isEmpty(x):
 		return len(x) == 0
 
@@ -800,8 +798,6 @@ def main(session, **kwargs):
 
 def menu(menuid, **kwargs):
 	if menuid == "scan":
-		return [(_("SAT>IP Client"), main, "sat_ip_client", 55)]
-	elif getBoxType() in ("gbipbox") and menuid == "system":
 		return [(_("SAT>IP Client"), main, "sat_ip_client", 55)]
 	return []
 
