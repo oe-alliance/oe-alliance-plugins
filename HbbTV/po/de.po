@@ -277,3 +277,18 @@ msgstr "URL"
 
 msgid "start opera web browser"
 msgstr "Opera starten"
+
+msgid "Do not show YouTube TV Starter again"
+msgstr "Zeige YouTube TV Starter nicht mehr"
+
+msgid "YouTube TV"
+msgstr "YouTube TV"
+
+msgid "YouTube TV Settings"
+msgstr "YouTube TV Einstellungen"
+
+msgid "YouTube TV URL"
+msgstr "YouTube TV URL"
+
+msgid "YouTube TV is a new way to watch YouTube videos"
+msgstr "YouTube TV ist eine neue Möglichkeit YouTube Videos anzuschauen"

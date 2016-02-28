@@ -346,8 +346,8 @@ msgstr "YouTube TV instellingen"
 msgid "YouTube TV URL"
 msgstr "YouTube TV URL"
 
-msgid "YouTube TV is a new way to watch YouTube videos on Vu+"
-msgstr "YouTube is een nieuwe manier om YouTube video's op een VU+ te bekijen."
+msgid "YouTube TV is a new way to watch YouTube videos"
+msgstr "YouTube TV is een nieuwe manier om YouTube video's te bekijen."
 
 msgid "height"
 msgstr "hoogte"

@@ -51,7 +51,7 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 
 	def layoutFinished(self):
 		self.setTitle(_('Start YouTube TV'))
-		self["infomation"].setText(_("YouTube TV is a new way to watch YouTube videos on Vu+"))
+		self["infomation"].setText(_("YouTube TV is a new way to watch YouTube videos"))
 		self["startdesc" ].setText(_("* Start YouTube TV"))
 		self["helpdesc"  ].setText(_("* RC Help"))
 
