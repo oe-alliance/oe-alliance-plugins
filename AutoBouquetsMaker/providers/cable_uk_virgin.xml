@@ -94,9 +94,6 @@
 		<configuration key="hd_41068_dvbc_uk" netid="41068" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41068 Manchester TRIALS</configuration>
 		<configuration key="hd_41069_dvbc_uk" netid="41069" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41069 Lewisham</configuration>
 		<configuration key="hd_41071_dvbc_uk" netid="41071" bouquettype="hd" frequency="666750" symbol_rate="6952000" system="0" fec_inner="3" inversion="2" modulation="3">41071 Southampton</configuration>
-		<configuration key="hd_42753_dvbc_uk" netid="42753" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">42753 Dublin</configuration>
-		<configuration key="hd_42754_dvbc_uk" netid="42754" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">42754 Waterford 1</configuration>
-		<configuration key="hd_42757_dvbc_uk" netid="42757" bouquettype="hd" frequency="643000" symbol_rate="6887000" system="0" fec_inner="3" inversion="2" modulation="3">42757 Waterford 2</configuration>
 	</dvbcconfigs>
 	<sections>
 		<section number="100">Entertainment</section>
