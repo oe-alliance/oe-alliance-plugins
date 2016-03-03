@@ -222,7 +222,7 @@ class BluetoothDevicesManager(Screen):
 		print "[BluetoothManager] scanForDevices"
 		# lets clear the list before Rescanning
 		self.devicelist = []
-		self.devicelist.append(("Scanning for devices...", "Scanning..."))
+		self.devicelist.append((_("Scanning for devices..."), _("Scanning...")))
 		self["devicelist"].setList(self.devicelist)
 		
 		# add background task for scanning
@@ -234,7 +234,7 @@ class BluetoothDevicesManager(Screen):
 		print "[BluetoothManager] cbPrintAvailDevices"
 		
 		self.devicelist = []
-		self.devicelist.append(("MAC:\t\tDevice name:","entry"))
+		self.devicelist.append((_("MAC:\t\tDevice name:"),_("entry")))
 		
 		data = data.splitlines()
 		i = 1
@@ -246,7 +246,7 @@ class BluetoothDevicesManager(Screen):
 		
 		if i == 1: ## Not sure if it is good idea, but worth to inform user that BT can not detect any other devices
 			self.devicelist = []
-			self.devicelist.append(("MAC:\t\tDevice name:","entry"))
+			self.devicelist.append((_("MAC:\t\tDevice name:"),_("entry")))
 			self["ConnStatus"].setText(_("Not detected devices around STB"))
 			
 		self["devicelist"].setList(self.devicelist)

@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BTDevicesManager\n"
+"Report-Msgid-Bugs-To: openspa.info\n"
+"POT-Creation-Date: 2015-09-07 14:58+0200\n"
+"PO-Revision-Date: 2016-03-02 17:15+0100\n"
+"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
+"Language-Team: openspa <openspa.info>\n"
+"Language: ES_es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Bluetooth Devices Manager Setup"
+msgstr "Configuración del gestor de dipos. bluetooth"
+
+msgid "Autostart"
+msgstr "Autoinicio"
+
+msgid "Exit"
+msgstr "Salir"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Bluetooth Devices Manager"
+msgstr "Gestor de dipositivos Bluetooth"
+
+msgid "Please load BT driver by pressing BLUE button."
+msgstr "Cargue el controlador BT pulsando el botón AZUL"
+
+msgid "No connected to any device"
+msgstr "No se ha conectado a ningún dispositivo"
+
+msgid "(Re)Scan"
+msgstr "(Re)escanear"
+
+msgid "Connect"
+msgstr "Conectar"
+
+msgid "Config"
+msgstr "Configurar"
+
+msgid "No BT devices found!"
+msgstr "No se ha encontrado ningún dispositivo Bluetooth"
+
+msgid "Not detected devices around STB"
+msgstr "No se ha detectado ningún dispositivo cercano"
+
+msgid "Connection with:\n"
+msgstr "Conectado con:\n"
+
+msgid "Disconnect"
+msgstr "Desconectar"
+
+msgid "Trying to pair with:"
+msgstr "Intentando emparejar con:"
+
+msgid "Can't not pair with selected device!"
+msgstr "No se puede emparejar con este dispositivo."
+
+msgid "This is bt devices manager"
+msgstr "Gestión de los dispositivos Bluetooth"
+
+msgid "Scanning for devices..."
+msgstr "Buscando dispositivos..."
+
+msgid "entry"
+msgstr " "
+
+msgid "MAC:\t\tDevice name:"
+msgstr "MAC:\t\tNombre:"
+
+msgid "Scanning..."
+msgstr "Buscando..."
+

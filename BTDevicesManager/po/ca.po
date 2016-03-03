@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BTDevicesManager\n"
+"Report-Msgid-Bugs-To: openspa.info\n"
+"POT-Creation-Date: 2015-09-07 14:58+0200\n"
+"PO-Revision-Date: 2016-03-02 17:14+0100\n"
+"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
+"Language-Team: openspa <openspa.info>\n"
+"Language: CA_ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"X-Poedit-Language: Catalan\n"
+"X-Poedit-Country: CATALONIA\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Bluetooth Devices Manager Setup"
+msgstr "Configuració del gestor de disp. Bluetooth"
+
+msgid "Autostart"
+msgstr "Autoinici"
+
+msgid "Exit"
+msgstr "Sortir"
+
+msgid "Save"
+msgstr "Desar"
+
+msgid "Bluetooth Devices Manager"
+msgstr "Gestor de dispositius Bluetooth"
+
+msgid "Please load BT driver by pressing BLUE button."
+msgstr "Carregueu el driver BT mitjançant el botó BLAU."
+
+msgid "No connected to any device"
+msgstr "No s'ha connectat a cap dispositiu"
+
+msgid "(Re)Scan"
+msgstr "(Re)escanejar"
+
+msgid "Connect"
+msgstr "Connectar"
+
+msgid "Config"
+msgstr "onfiguració"
+
+msgid "No BT devices found!"
+msgstr "No s'ha trobat cap dispositiu Bluetooth"
+
+msgid "Not detected devices around STB"
+msgstr "No s'ha detectat cap dispositiu aprop"
+
+msgid "Connection with:\n"
+msgstr "Connectat amb:\n"
+
+msgid "Disconnect"
+msgstr "Desconnectar"
+
+msgid "Trying to pair with:"
+msgstr "Intentant vincular amb:"
+
+msgid "Can't not pair with selected device!"
+msgstr "No es pot vincular amb aquest dispositiu!"
+
+msgid "This is bt devices manager"
+msgstr "Gestió dels dispositius Bluetooth"
+
+msgid "Scanning for devices..."
+msgstr "Cercant dispositius..."
+
+msgid "entry"
+msgstr " "
+
+msgid "MAC:\t\tDevice name:"
+msgstr "MAC:\t\tNom:"
+
+msgid "Scanning..."
+msgstr "Cercant..."
+
