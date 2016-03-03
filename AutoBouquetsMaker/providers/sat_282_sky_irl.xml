@@ -153,6 +153,7 @@ except:
 		3661, # BT Sport 1
 		3663, # BT Sport 2
 		4040, # BT Sport/ESPNHD
+		4058, # Channel 5HD		
 		5032, # BT Sport Europe
 		5037, # AMC from BTHD
 		5152, # Setanta HD
