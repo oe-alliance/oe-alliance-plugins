@@ -16,98 +16,98 @@
 	/>
 	<dvbsconfigs>
 		<configuration key="hd_atherstone" bouquet="0x1005" region="0x13">Atherstone HD</configuration>
-		<configuration key="sd_atherstone" bouquet="0x1001" region="0x13">Atherstone SD</configuration>
 		<configuration key="hd_border_england" bouquet="0x1005" region="0x0c">Border England HD</configuration>
-		<configuration key="sd_border_england" bouquet="0x1001" region="0x0c">Border England SD</configuration>
 		<configuration key="hd_border_scotland" bouquet="0x1006" region="0x24">Border Scotland HD</configuration>
-		<configuration key="sd_border_scotland" bouquet="0x1002" region="0x24">Border Scotland SD</configuration>
 		<configuration key="hd_brighton" bouquet="0x1007" region="0x41">Brighton HD</configuration>
-		<configuration key="sd_brighton" bouquet="0x1003" region="0x41">Brighton SD</configuration>
 		<configuration key="hd_central_midlands" bouquet="0x1005" region="0x03">Central Midlands HD</configuration>
-		<configuration key="sd_central_midlands" bouquet="0x1001" region="0x03">Central Midlands SD</configuration>
 		<configuration key="hd_channel_isles" bouquet="0x1008" region="0x22">Channel Isles HD</configuration>
-		<configuration key="sd_channel_isles" bouquet="0x1004" region="0x22">Channel Isles SD</configuration>
 		<configuration key="hd_dundee" bouquet="0x1006" region="0x27">Dundee HD</configuration>
-		<configuration key="sd_dundee" bouquet="0x1002" region="0x27">Dundee SD</configuration>
 		<configuration key="hd_east_midlands" bouquet="0x1005" region="0x14">East Midlands HD</configuration>
-		<configuration key="sd_east_midlands" bouquet="0x1001" region="0x14">East Midlands SD</configuration>
 		<configuration key="hd_essex" bouquet="0x1005" region="0x02">Essex HD</configuration>
-		<configuration key="sd_essex" bouquet="0x1001" region="0x02">Essex SD</configuration>
 		<configuration key="hd_gloucester" bouquet="0x1005" region="0x18">Gloucester HD</configuration>
-		<configuration key="sd_gloucester" bouquet="0x1001" region="0x18">Gloucester SD</configuration>
 		<configuration key="hd_grampian" bouquet="0x1006" region="0x23">Grampian HD</configuration>
-		<configuration key="sd_grampian" bouquet="0x1002" region="0x23">Grampian SD</configuration>
 		<configuration key="hd_granada" bouquet="0x1005" region="0x07">Granada HD</configuration>
-		<configuration key="sd_granada" bouquet="0x1001" region="0x07">Granada SD</configuration>
 		<configuration key="hd_henley_on_thames" bouquet="0x1007" region="0x46">Henley On Thames HD</configuration>
-		<configuration key="sd_henley_on_thames" bouquet="0x1003" region="0x46">Henley On Thames SD</configuration>
 		<configuration key="hd_htv_wales" bouquet="0x1007" region="0x2b">HTV Wales HD</configuration>
-		<configuration key="sd_htv_wales" bouquet="0x1003" region="0x2b">HTV Wales SD</configuration>
 		<configuration key="hd_htv_west" bouquet="0x1005" region="0x04">HTV West HD</configuration>
-		<configuration key="sd_htv_west" bouquet="0x1001" region="0x04">HTV West SD</configuration>
 		<configuration key="hd_htv_west_thames_valley" bouquet="0x1007" region="0x3f">HTV West / Thames Valley HD</configuration>
-		<configuration key="sd_htv_west_thames_valley" bouquet="0x1003" region="0x3f">HTV West / Thames Valley SD</configuration>
 		<configuration key="hd_humber" bouquet="0x1005" region="0x1d">Humber HD</configuration>
-		<configuration key="sd_humber" bouquet="0x1001" region="0x1d">Humber SD</configuration>
 		<configuration key="hd_london" bouquet="0x1005" region="0x01">London HD</configuration>
-		<configuration key="sd_london" bouquet="0x1001" region="0x01">London SD</configuration>
 		<configuration key="hd_london_essex" bouquet="0x1005" region="0x12">London / Essex HD</configuration>
-		<configuration key="sd_london_essex" bouquet="0x1001" region="0x12">London / Essex SD</configuration>
-		<configuration key="hd_london_thames_valley" bouquet="0x1007" region="0x42">London / Thames Valley HD</configuration>
-		<configuration key="sd_london_thames_valley" bouquet="0x1003" region="0x42">London / Thames Valley SD</configuration>
 		<configuration key="hd_london_kent" bouquet="0x1007" region="0x40">London Kent HD</configuration>
-		<configuration key="sd_london_kent" bouquet="0x1003" region="0x40">London Kent SD</configuration>
+		<configuration key="hd_london_thames_valley" bouquet="0x1007" region="0x42">London / Thames Valley HD</configuration>
 		<configuration key="hd_meridian_east" bouquet="0x1005" region="0x0b">Meridian East HD</configuration>
-		<configuration key="sd_meridian_north" bouquet="0x1003" region="0x44">Meridian North SD</configuration>
-		<configuration key="sd_meridian_east" bouquet="0x1001" region="0x0b">Meridian East SD</configuration>
 		<configuration key="hd_meridian_north" bouquet="0x1007" region="0x44">Meridian North HD</configuration>
 		<configuration key="hd_meridian_south" bouquet="0x1005" region="0x05">Meridian South HD</configuration>
-		<configuration key="sd_meridian_south" bouquet="0x1001" region="0x05">Meridian South SD</configuration>
 		<configuration key="hd_meridian_south_east" bouquet="0x1005" region="0x0a">Meridian South East HD</configuration>
-		<configuration key="sd_meridian_south_east" bouquet="0x1001" region="0x0a">Meridian South East SD</configuration>
 		<configuration key="hd_merseyside" bouquet="0x1007" region="0x2d">Merseyside HD</configuration>
-		<configuration key="sd_merseyside" bouquet="0x1003" region="0x2d">Merseyside SD</configuration>
 		<configuration key="hd_norfolk" bouquet="0x1005" region="0x15">Norfolk HD</configuration>
-		<configuration key="sd_norfolk" bouquet="0x1001" region="0x15">Norfolk SD</configuration>
 		<configuration key="hd_north_east_midlands" bouquet="0x1007" region="0x3e">North East Midlands HD</configuration>
-		<configuration key="sd_north_east_midlands" bouquet="0x1003" region="0x3e">North East Midlands SD</configuration>
 		<configuration key="hd_north_west_yorkshire" bouquet="0x1005" region="0x08">North West Yorkshire HD</configuration>
-		<configuration key="sd_north_west_yorkshire" bouquet="0x1001" region="0x08">North West Yorkshire SD</configuration>
 		<configuration key="hd_north_yorkshire" bouquet="0x1005" region="0x1a">North Yorkshire HD</configuration>
-		<configuration key="sd_north_yorkshire" bouquet="0x1001" region="0x1a">North Yorkshire SD</configuration>
 		<configuration key="hd_northern_ireland" bouquet="0x1008" region="0x21">Northern Ireland HD</configuration>
-		<configuration key="sd_northern_ireland" bouquet="0x1004" region="0x21">Northern Ireland SD</configuration>
 		<configuration key="hd_oxford" bouquet="0x1007" region="0x47">Oxford HD</configuration>
-		<configuration key="sd_oxford" bouquet="0x1003" region="0x47">Oxford SD</configuration>
 		<configuration key="hd_ridge_hill" bouquet="0x1007" region="0x29">Ridge Hill HD</configuration>
-		<configuration key="sd_ridge_hill" bouquet="0x1003" region="0x29">Ridge Hill SD</configuration>
 		<configuration key="hd_scarborough" bouquet="0x1007" region="0x3d">Scarborough HD</configuration>
-		<configuration key="sd_scarborough" bouquet="0x1003" region="0x3d">Scarborough SD</configuration>
-		<configuration key="hd_scottish_west" bouquet="0x1006" region="0x25">Scottish West HD</configuration>
-		<configuration key="sd_scottish_west" bouquet="0x1002" region="0x25">Scottish West SD</configuration>
 		<configuration key="hd_scottish_east" bouquet="0x1006" region="0x26">Scottish East HD</configuration>
-		<configuration key="sd_scottish_east" bouquet="0x1002" region="0x26">Scottish East SD</configuration>
+		<configuration key="hd_scottish_west" bouquet="0x1006" region="0x25">Scottish West HD</configuration>
 		<configuration key="hd_sheffield" bouquet="0x1007" region="0x3c">Sheffield HD</configuration>
-		<configuration key="sd_sheffield" bouquet="0x1003" region="0x3c">Sheffield SD</configuration>
 		<configuration key="hd_south_lakeland" bouquet="0x1005" region="0x1c">South Lakeland HD</configuration>
-		<configuration key="sd_south_lakeland" bouquet="0x1001" region="0x1c">South Lakeland SD</configuration>
 		<configuration key="hd_south_yorkshire" bouquet="0x1007" region="0x48">South Yorkshire HD</configuration>
-		<configuration key="sd_south_yorkshire" bouquet="0x1003" region="0x48">South Yorkshire SD</configuration>
 		<configuration key="hd_tees" bouquet="0x1007" region="0x45">Tees HD</configuration>
-		<configuration key="sd_tees" bouquet="0x1003" region="0x45">Tees SD</configuration>
 		<configuration key="hd_thames_valley" bouquet="0x1005" region="0x09">Thames Valley HD</configuration>
-		<configuration key="sd_thames_valley" bouquet="0x1001" region="0x09">Thames Valley SD</configuration>
 		<configuration key="hd_tring" bouquet="0x1005" region="0x1b">Tring HD</configuration>
-		<configuration key="sd_tring" bouquet="0x1001" region="0x1b">Tring SD</configuration>
 		<configuration key="hd_tyne" bouquet="0x1005" region="0x0d">Tyne HD</configuration>
-		<configuration key="sd_tyne" bouquet="0x1001" region="0x0d">Tyne SD</configuration>
 		<configuration key="hd_wales" bouquet="0x1008" region="0x20">Wales HD</configuration>
-		<configuration key="sd_wales" bouquet="0x1004" region="0x20">Wales SD</configuration>
 		<configuration key="hd_west_anglia" bouquet="0x1005" region="0x19">West Anglia HD</configuration>
-		<configuration key="sd_west_anglia" bouquet="0x1001" region="0x19">West Anglia SD</configuration>
 		<configuration key="hd_west_dorset" bouquet="0x1007" region="0x43">West Dorset HD</configuration>
-		<configuration key="sd_west_dorset" bouquet="0x1003" region="0x43">West Dorset SD</configuration>
 		<configuration key="hd_westcountry" bouquet="0x1005" region="0x06">Westcountry HD</configuration>
+		<configuration key="sd_atherstone" bouquet="0x1001" region="0x13">Atherstone SD</configuration>
+		<configuration key="sd_border_england" bouquet="0x1001" region="0x0c">Border England SD</configuration>
+		<configuration key="sd_border_scotland" bouquet="0x1002" region="0x24">Border Scotland SD</configuration>
+		<configuration key="sd_brighton" bouquet="0x1003" region="0x41">Brighton SD</configuration>
+		<configuration key="sd_central_midlands" bouquet="0x1001" region="0x03">Central Midlands SD</configuration>
+		<configuration key="sd_channel_isles" bouquet="0x1004" region="0x22">Channel Isles SD</configuration>
+		<configuration key="sd_dundee" bouquet="0x1002" region="0x27">Dundee SD</configuration>
+		<configuration key="sd_east_midlands" bouquet="0x1001" region="0x14">East Midlands SD</configuration>
+		<configuration key="sd_essex" bouquet="0x1001" region="0x02">Essex SD</configuration>
+		<configuration key="sd_gloucester" bouquet="0x1001" region="0x18">Gloucester SD</configuration>
+		<configuration key="sd_grampian" bouquet="0x1002" region="0x23">Grampian SD</configuration>
+		<configuration key="sd_granada" bouquet="0x1001" region="0x07">Granada SD</configuration>
+		<configuration key="sd_henley_on_thames" bouquet="0x1003" region="0x46">Henley On Thames SD</configuration>
+		<configuration key="sd_htv_wales" bouquet="0x1003" region="0x2b">HTV Wales SD</configuration>
+		<configuration key="sd_htv_west" bouquet="0x1001" region="0x04">HTV West SD</configuration>
+		<configuration key="sd_htv_west_thames_valley" bouquet="0x1003" region="0x3f">HTV West / Thames Valley SD</configuration>
+		<configuration key="sd_humber" bouquet="0x1001" region="0x1d">Humber SD</configuration>
+		<configuration key="sd_london" bouquet="0x1001" region="0x01">London SD</configuration>
+		<configuration key="sd_london_essex" bouquet="0x1001" region="0x12">London / Essex SD</configuration>
+		<configuration key="sd_london_kent" bouquet="0x1003" region="0x40">London Kent SD</configuration>
+		<configuration key="sd_london_thames_valley" bouquet="0x1003" region="0x42">London / Thames Valley SD</configuration>
+		<configuration key="sd_meridian_east" bouquet="0x1001" region="0x0b">Meridian East SD</configuration>
+		<configuration key="sd_meridian_north" bouquet="0x1003" region="0x44">Meridian North SD</configuration>
+		<configuration key="sd_meridian_south" bouquet="0x1001" region="0x05">Meridian South SD</configuration>
+		<configuration key="sd_meridian_south_east" bouquet="0x1001" region="0x0a">Meridian South East SD</configuration>
+		<configuration key="sd_merseyside" bouquet="0x1003" region="0x2d">Merseyside SD</configuration>
+		<configuration key="sd_norfolk" bouquet="0x1001" region="0x15">Norfolk SD</configuration>
+		<configuration key="sd_north_east_midlands" bouquet="0x1003" region="0x3e">North East Midlands SD</configuration>
+		<configuration key="sd_north_west_yorkshire" bouquet="0x1001" region="0x08">North West Yorkshire SD</configuration>
+		<configuration key="sd_north_yorkshire" bouquet="0x1001" region="0x1a">North Yorkshire SD</configuration>
+		<configuration key="sd_northern_ireland" bouquet="0x1004" region="0x21">Northern Ireland SD</configuration>
+		<configuration key="sd_oxford" bouquet="0x1003" region="0x47">Oxford SD</configuration>
+		<configuration key="sd_ridge_hill" bouquet="0x1003" region="0x29">Ridge Hill SD</configuration>
+		<configuration key="sd_scarborough" bouquet="0x1003" region="0x3d">Scarborough SD</configuration>
+		<configuration key="sd_scottish_east" bouquet="0x1002" region="0x26">Scottish East SD</configuration>
+		<configuration key="sd_scottish_west" bouquet="0x1002" region="0x25">Scottish West SD</configuration>
+		<configuration key="sd_sheffield" bouquet="0x1003" region="0x3c">Sheffield SD</configuration>
+		<configuration key="sd_south_lakeland" bouquet="0x1001" region="0x1c">South Lakeland SD</configuration>
+		<configuration key="sd_south_yorkshire" bouquet="0x1003" region="0x48">South Yorkshire SD</configuration>
+		<configuration key="sd_tees" bouquet="0x1003" region="0x45">Tees SD</configuration>
+		<configuration key="sd_thames_valley" bouquet="0x1001" region="0x09">Thames Valley SD</configuration>
+		<configuration key="sd_tring" bouquet="0x1001" region="0x1b">Tring SD</configuration>
+		<configuration key="sd_tyne" bouquet="0x1001" region="0x0d">Tyne SD</configuration>
+		<configuration key="sd_wales" bouquet="0x1004" region="0x20">Wales SD</configuration>
+		<configuration key="sd_west_anglia" bouquet="0x1001" region="0x19">West Anglia SD</configuration>
+		<configuration key="sd_west_dorset" bouquet="0x1003" region="0x43">West Dorset SD</configuration>
 		<configuration key="sd_westcountry" bouquet="0x1001" region="0x06">Westcountry SD</configuration>
 		<configuration key="sdcustom_atherstone" bouquet="0x1001" region="0x13">Atherstone Custom</configuration>
 		<configuration key="sdcustom_border_england" bouquet="0x1001" region="0x0c">Border England Custom</configuration>
@@ -237,19 +237,20 @@
 		<channel number="413" with="427" /><!-- BT Sport 1 HD -->
 		<channel number="414" with="433" /><!-- BT Sport EurHD -->
 		<channel number="417" with="457" /><!-- BT Sport 2 HD -->
-		<channel number="418" with="453" /><!-- MUTV HD -->		
-		<channel number="424" with="460" /><!-- Setanta HD -->		
+		<channel number="418" with="453" /><!-- MUTV HD -->
+		<channel number="424" with="460" /><!-- Setanta HD -->
 		<channel number="426" with="458" /><!-- BTSpt/ESPN HD -->
-		<channel number="428" with="462" /><!-- Premier HD -->		
+		<channel number="428" with="462" /><!-- Premier HD -->
+		<channel number="432" with="466" /><!-- Racing UK HD -->
 		<channel number="437" with="490" /><!-- BoxNation HD -->
 		<channel number="501" with="516" /><!-- Sky News HD -->
 		<channel number="512" with="518" /><!-- RT HD -->
 		<channel number="503" with="570" /><!-- BBC News HD -->
-		<channel number="583" with="596" /><!-- Daystar HD -->		
+		<channel number="583" with="596" /><!-- Daystar HD -->
 		<channel number="613" with="633" /><!-- CBBC HD -->
 		<channel number="614" with="624" /><!-- CBeebies HD -->
 		<channel number="795" with="853" /><!-- &TV HD -->
-		<channel number="801" with="856" /><!-- TV Record HD -->		
+		<channel number="801" with="856" /><!-- TV Record HD -->
 	</swapchannels>
 	<servicehacks>
 <![CDATA[
@@ -281,12 +282,16 @@ except:
 		5311: 428, # Premier Sports
 		5153: 462, # Premier HD
 		1257: 574, # Oireachtas TV
+		2804: 578, # RTE News Now
 		1256: 635  # RTEjr
 	}
 
 	rename = {
 		# ITV regions
 		1020: "ITV Border Scotland",
+		1043: "ITV Tyne Tees HD",
+		1044: "ITV Yorkshire HD",
+		1045: "ITV Anglia HD",
 		3527: "STV Edinburgh",
 		4012: "UTV Ireland",
 		4055: "STV HD",
@@ -331,36 +336,43 @@ except:
 		6504: "ITV London HD",
 		6505: "ITV Granada HD",
 		6510: "UTV HD",
-		
+
 		# BT Interactive
 		5381: "BT Sport Mosaic Extra",
 		5382: "BT Sport Extra 2",
 		5383: "BT Sport Extra 3",
 		5384: "BT Sport Extra 4",
 		5385: "BT Sport Extra 5",
-		5386: "BT Sport Extra 6"
+		5386: "BT Sport Extra 6",
+
+		# Other channels
+		3622: "BT SportEurHD",
+		3623: "BT SportEurHD",
+		5662: "BT Sport 1 HD",
+		5663: "BT Sport 2 HD",
+		2079: "BBC One HD"
 	}
 
 	whitelist = ['ITV HD','ITV2 HD','ITV3 HD','ITV4 HD','ITV Encore HD',752,'BoxNation HD','BT Preview HD']
 	whitelist_by_id = [
 		1003, # MUTV HD
 		3141, # BT Sport/ESPN
-		3622, # 50682
-		3623, # 50683
+		3622, # 50682 BT SportEurHD
+		3623, # 50683 BT SportEurHD
 		3625, # BT Sport 1 HD
 		3627, # BT Sport 2 HD
 		3629, # BT SportEurHD
 		3661, # BT Sport 1
 		3663, # BT Sport 2
 		4040, # BT Sport/ESPNHD
-		4058, # Channel 5HD
 		5032, # BT Sport Europe
 		5037, # AMC from BTHD
 		5152, # Setanta HD
 		5153, # Premier HD
 		5154, # Setanta HD
-		5662, # 50662
-		5663  # 50683
+		5272, # Racing UK HD
+		5662, # 50662 BT Sport 1 HD
+		5663  # 50683 BT Sport 2 HD
 	]
 	blacklist = []
 	bt_sports_id = [5030,5381,5031,5382,5383,5384,5385,5386]
