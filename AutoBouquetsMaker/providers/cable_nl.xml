@@ -47,6 +47,8 @@
 		<configuration key="sd_caiway7244" netid="7244" bouquettype="sd" frequency="554000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Caiway7244 SD</configuration>
 		<configuration key="hd_ziggo_____" netid="5555" bouquettype="hd" frequency="474000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">Ziggo HD</configuration>
 		<configuration key="sd_ziggo_____" netid="5555" bouquettype="sd" frequency="474000" symbol_rate="6875000" system="0" fec_inner="0" inversion="2" modulation="3">Ziggo SD</configuration>
+		<configuration key="hd_ziggo43136" netid="43136" bouquettype="hd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Ziggo43136 HD</configuration>
+		<configuration key="sd_ziggo43136" netid="43136" bouquettype="sd" frequency="164000" symbol_rate="6900000" system="0" fec_inner="0" inversion="2" modulation="3">Ziggo43136 SD</configuration>
 	</dvbcconfigs>
 	<sections>
 		<section number="1">Kanaal lijst</section>
