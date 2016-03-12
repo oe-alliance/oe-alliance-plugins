@@ -1,0 +1,36 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "MANUALLY start service searching, press green to change"
+msgstr "Manuelle service suche, zum ändern Taste grün drücken"
+
+msgid "AUTOMATICALLY start service searching, press green to change"
+msgstr "Automatische service suche, zum ändern Taste grün drücken"
+
+msgid "Transponder searching finished!"
+msgstr "Transpondersuche abgeschlossen!"
+
+msgid "Press green to start service searching!"
+msgstr "Drücke Taste grün zum start der service suche!"
+
+msgid "%d transponders found at %d:%02dmin"
+msgstr "%d transponder gefunden in %d:%02dmin"
+
+msgid "Change"
+msgstr "Ändern"

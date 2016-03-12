@@ -70,6 +70,7 @@ class SatBlindscanState(Screen):
 		{
 			"ok": self.keyOk,
 			"cancel": self.keyCancel,
+			"red": self.keyCancel,
 			"green": self.keyGreen,
 		}, -2)
 		self.fe_num = fe_num
