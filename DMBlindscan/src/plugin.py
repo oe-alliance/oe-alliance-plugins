@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 from boxbranding import getBoxType
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.config import config, ConfigSubsection, ConfigSelection, \
