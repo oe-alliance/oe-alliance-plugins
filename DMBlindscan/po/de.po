@@ -34,3 +34,43 @@ msgstr "%d transponder gefunden in %d:%02dmin"
 
 msgid "Change"
 msgstr "Ändern"
+
+msgid "Try to find used satellite transponders..."
+msgstr "Versuche belegte Satelliten Transponder zu finden..."
+
+msgid "Nothing to scan! Press Exit!"
+msgstr "Nichts zutun! Drücke Exit!"
+
+
+msgid "Blindscan is not supported by this tuner (%s)"
+msgstr "Blindscan wird von diesen Tuner nicht unterstützt (%s)"
+
+msgid "Press OK to start the scan"
+msgstr "Drücke OK um den Scan zu starten"
+
+msgid "Nothing to scan!\nPlease setup your tuner settings before you start a service scan."
+msgstr "Nichts zutun!\nBitte stellen sie die Tuner Einstellungen ein vor der service suche."
+
+msgid "Frequency start"
+msgstr "Frequenz anfang"
+
+msgid "Frequency stop"
+msgstr "Frequenz ende"
+
+msgid "Accuracy (higher is better)"
+msgstr "Genauigkeit (höher ist besser)"
+
+msgid "Horizontal"
+msgstr "Horizontal"
+
+msgid "Vertical"
+msgstr "Vertikal"
+
+msgid "Network scan"
+msgstr "Netzwerk suche"
+
+msgid "Clear before scan"
+msgstr "Löschen vor der suche"
+
+msgid "Only free scan"
+msgstr "Nur freie Sender suchen"
