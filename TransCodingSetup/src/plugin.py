@@ -555,4 +555,12 @@ def startSession(reason):
 	transcodingsetupinit = TranscodingSetupInit()
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name=_("TranscodingSetup"), description=_("Transcoding Setup"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main), PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=startSession)]
+	return [PluginDescriptor(
+			name=_("TranscodingSetup"), 
+			description=_("Transcoding Setup"), 
+			where = PluginDescriptor.WHERE_PLUGINMENU, 
+			needsRestart = False, 
+			icon="plugin.png", 
+			fnc=main), 
+			PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], 
+			fnc=startSession)]
