@@ -636,7 +636,9 @@ class Blindscan(ConfigListScreen, Screen):
 					sys = { "DVB-S" : eDVBFrontendParametersSatellite.System_DVB_S,
 						"DVB-S2" : eDVBFrontendParametersSatellite.System_DVB_S2}
 					qam = { "QPSK" : parm.Modulation_QPSK,
-						"8PSK" : parm.Modulation_8PSK}
+								"8PSK" : parm.Modulation_8PSK,
+								"16APSK" : parm.Modulation_16APSK,
+								"32APSK" : parm.Modulation_32APSK}
 					inv = { "INVERSION_OFF" : parm.Inversion_Off,
 						"INVERSION_ON" : parm.Inversion_On,
 						"INVERSION_AUTO" : parm.Inversion_Unknown}
