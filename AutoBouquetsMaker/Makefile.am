@@ -1,1 +1,0 @@
-SUBDIRS = images lib meta po providers src custom
