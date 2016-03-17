@@ -1,268 +1,348 @@
 # Estonian translations for enigma2-oe-alliance-plugins package.
 # Copyright (C) 2012 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
-# Automatically generated, 2012.
 #
+# Automatically generated, 2012, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 13:52+0000\n"
-"PO-Revision-Date: 2012-11-27 12:36+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: et\n"
+"POT-Creation-Date: 2012-12-02 03:12+0000\n"
+"PO-Revision-Date: 2016-03-17 11:17+0200\n"
+"Last-Translator: rimas\n"
+"Language-Team: \n"
+"Language: et_EE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7\n"
 
 msgid ""
 "!!(Empty)\n"
 "Please, Input to the"
 msgstr ""
+"!!(Tühi)\n"
+"Palun sisesta"
 
 msgid "About"
-msgstr ""
+msgstr "Teave"
 
 msgid "Add"
-msgstr ""
+msgstr "Lisa"
 
 msgid "Backspace Key"
-msgstr ""
+msgstr "Tagasilükkeklahv"
 
 msgid "Bookmark"
-msgstr ""
+msgstr "Järjehoidja"
 
 msgid "Bookmark Title"
-msgstr ""
+msgstr "Pealkiri järjehoidjaks"
 
 msgid "Bookmark URL"
-msgstr ""
+msgstr "URL järjehoidjaks"
 
 msgid "Browser Help"
-msgstr ""
+msgstr "Lehitseja abi"
 
 msgid "Browser Start/Stop"
-msgstr ""
+msgstr "Opera"
 
 msgid "BrowserMain"
-msgstr ""
+msgstr "Avaleht"
 
 msgid ""
 "Can't open selected bookmark.\n"
 "   - URL data is empty!!"
 msgstr ""
+"Valitud järjehoidjat ei õnnestu avada.\n"
+"   - URL andmed puuduvad!!"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Tühista"
 
 msgid "Category Name"
-msgstr ""
+msgstr "Kategooria nimi"
 
 msgid "Current Page"
-msgstr ""
+msgstr "Praegune leht"
 
 msgid "Current page is already exist."
-msgstr ""
+msgstr "Praegune leht juba eksisteerib."
 
 msgid "Currentpage(Bookmark)"
-msgstr ""
+msgstr "Praegune leht (järjehoidja)"
 
 msgid "Delete"
-msgstr ""
+msgstr "Kustuta"
 
 msgid "Direct Input"
-msgstr ""
+msgstr "Otsetee"
 
 msgid "Direct Input(Bookmark)"
-msgstr ""
+msgstr "Otsetee (järjehoidja)"
 
 msgid "Direct Input(Category)"
-msgstr ""
+msgstr "Otsetee (kategooria)"
 
 msgid "Do you want to delete the bookmark?"
-msgstr ""
+msgstr "Kas kustutad järjehoidja?"
 
 msgid "Do you want to delete the category and the bookmarks?"
-msgstr ""
+msgstr "Kas kustutad kategooria ja järjehoidjad?"
 
 msgid "Do you want to set selected url to the Startpage?"
-msgstr ""
+msgstr "Kas valitud URL määratakse avaleheks?"
 
 msgid "Down Key"
-msgstr ""
+msgstr "Alla klahv"
 
 msgid "Edit"
-msgstr ""
+msgstr "Muutmine"
 
 msgid "Enter Key"
-msgstr ""
+msgstr "ENTER klahv"
 
 msgid "Exit"
-msgstr ""
+msgstr "Välju"
 
 msgid "Exit the Opera browser."
-msgstr ""
+msgstr "Sulge Opera."
 
 msgid "File"
-msgstr ""
+msgstr "Fail"
 
 msgid "Global"
-msgstr ""
+msgstr "Üldine"
 
 msgid "Go to next page."
-msgstr ""
+msgstr "Järgmine leht."
 
 msgid "Go to previous page."
-msgstr ""
+msgstr "Eelmine leht."
 
 msgid "HbbTV Applications"
-msgstr ""
+msgstr "HbbTV rakendused"
 
 msgid ""
 "HbbTV Browser was not running.\n"
 "Please running browser before start HbbTV Application."
 msgstr ""
+"HbbTV lehitseja ei tööta.\n"
+"Käivita see enne HbbTV rakenduse kasutamist."
 
 msgid "HbbTV Plugin"
-msgstr ""
+msgstr "HbbTV plugin"
 
 msgid "Help"
-msgstr ""
+msgstr "Abi"
 
 msgid "Invalid "
-msgstr ""
+msgstr "Kehtetu"
 
 msgid ""
 "Invalid URL!!(Empty)\n"
 "Please, Input to the URL."
 msgstr ""
+"Kehtetu URL!!(Tühi)\n"
+"Sisesta URL."
 
 msgid "Invalid URL. Please check again!!"
-msgstr ""
+msgstr "Kehtetu URL. Kontrolli üle!!"
 
 msgid "It will move the mouse pointer down."
-msgstr ""
+msgstr "Hiirekursorit liigutatakse alla."
 
 msgid "It will move the mouse pointer left."
-msgstr ""
+msgstr "Hiirekursorit liigutatakse vasakule."
 
 msgid "It will move the mouse pointer right."
-msgstr ""
+msgstr "Hiirekursorit liigutatakse paremale."
 
 msgid "It will move the mouse pointer up."
-msgstr ""
+msgstr "Hiirekursorit liigutatakse üles."
 
 msgid "Keyboard"
-msgstr ""
+msgstr "Klaviatuur"
 
 msgid "Left Key"
-msgstr ""
+msgstr "Vasak klahv"
 
 msgid "Left Mouse Button"
-msgstr ""
+msgstr "Vasak hiireklahv"
 
 msgid "Mouse"
-msgstr ""
+msgstr "Hiir"
 
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 msgid "No detected HbbTV applications."
-msgstr ""
+msgstr "HbbTV rakendust ei tuvastatud."
 
 msgid "Open Startpage"
-msgstr ""
+msgstr "Avaleht"
 
 msgid "Open URL"
-msgstr ""
+msgstr "Ava URL"
 
 msgid "Opera Browser"
-msgstr ""
+msgstr "Opera"
 
 msgid ""
 "Opera Browser was not running.\n"
 "Please running browser using [File]>[Start/Stop] menu."
 msgstr ""
+"Opera ei tööta.\n"
+"Käivita see [Fail]>[Käivita/peata] menüüs."
 
 msgid "Opera Web Browser"
-msgstr ""
+msgstr "Opera veebilehitseja"
 
 msgid "Opera Web Browser Plugin v1.0"
-msgstr ""
+msgstr "Opera plugin v1.0"
 
 msgid "PageDown Key"
-msgstr ""
+msgstr "PageDown klahv"
 
 msgid "PageUp Key"
-msgstr ""
+msgstr "PageUp klahv"
 
 msgid "Please choose an HbbTV application."
-msgstr ""
+msgstr "Vali HbbTV rakendus."
 
 msgid "Please choose one."
-msgstr ""
+msgstr "Tee valik."
 
 msgid "Please choose."
-msgstr ""
+msgstr "Tee valik."
 
 msgid "Please enter URL here"
-msgstr ""
+msgstr "Sisesta URL"
 
 msgid "Preference"
-msgstr ""
+msgstr "Eelistused"
 
 msgid "Return"
-msgstr ""
+msgstr "Tagasi"
 
 msgid "Right Key"
-msgstr ""
+msgstr "Parem klahv"
 
 msgid "Right Mouse Button"
-msgstr ""
+msgstr "Parem hiireklahv"
 
 msgid "Save"
-msgstr ""
+msgstr "Salvesta"
 
 msgid "Set as Startpage"
-msgstr ""
+msgstr "Määra avaleheks"
 
 msgid "Show the Menu window."
-msgstr ""
+msgstr "Kuva menüü"
 
 msgid "Show the Virtual keyboard window."
-msgstr ""
+msgstr "Kuva virtuaalklahvistik"
 
 msgid "Start"
-msgstr ""
+msgstr "Käivita"
 
 msgid "Start Page"
-msgstr ""
+msgstr "Avaleht"
 
 msgid "Start/Stop"
-msgstr ""
+msgstr "Käivita/peata"
 
 msgid "Startpage"
-msgstr ""
+msgstr "Avaleht"
 
 msgid "Stop"
-msgstr ""
+msgstr "Stopp"
 
 msgid "Switch to keyboard/mouse mode."
-msgstr ""
+msgstr "Lülitu klaviatuuri/hiire režiimi."
 
 msgid "Title"
-msgstr ""
+msgstr "Pealkiri"
 
 msgid "Tools"
-msgstr ""
+msgstr "Tööriistad"
 
 msgid "Up Key"
-msgstr ""
+msgstr "Üles klahv"
 
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 msgid "start opera web browser"
-msgstr ""
+msgstr "Käivita Opera"
+
+msgid "Do not show YouTube TV Starter again"
+msgstr "YouTube TV käivitajat rohkem ei näidata"
+
+msgid "YouTube TV"
+msgstr "YouTube TV"
+
+msgid "YouTube TV Settings"
+msgstr "YouTube TV seaded"
+
+msgid "YouTube TV URL"
+msgstr "YouTube TV URL"
+
+msgid "YouTube TV is a new way to watch YouTube videos"
+msgstr "YouTube TV on uus võimalus YouTube videote vaatamiseks"
+
+msgid "* RC Help"
+msgstr "* RC abi"
+
+msgid "* Start YouTube TV"
+msgstr "* Käivita YouTube TV"
+
+msgid "Back"
+msgstr "Tagasi"
+
+msgid "Exit the YouTube TV"
+msgstr "Sulge YouTube TV"
+
+msgid "Keyboard Layout"
+msgstr "Klaviatuuripaigutus"
+
+msgid "Move down"
+msgstr "Liigu alla"
+
+msgid "Move left"
+msgstr "Liigu vasakule"
+
+msgid "Move right"
+msgstr "Liigu paremale"
+
+msgid "Move up"
+msgstr "Liigu üles"
+
+msgid "Pause current video"
+msgstr "Pausi praegune video"
+
+msgid "Play current video"
+msgstr "Praeguse video esitamine"
+
+msgid "Play ther selected the video"
+msgstr "Valitud video esitamine"
+
+msgid "Search a video"
+msgstr "Video otsing"
+
+msgid "Skip backward 10 sec"
+msgstr "Tagasihüpe 10 sek"
+
+msgid "Skip forward 10 sec"
+msgstr "Edasihüpe 10 sek"
+
+msgid "Start YouTube TV"
+msgstr "Käivita YouTube TV"
+
+msgid "Stop current video"
+msgstr "Peata see video"
+
+msgid "YouTube TV is a new way to watch YouTube videos on STB"
+msgstr "YouTube TV on uus viis vastuvõtjaga YouTube videote vaatamiseks"
