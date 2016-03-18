@@ -182,7 +182,7 @@ msgid "No detected HbbTV applications."
 msgstr "Keine HbbTV Anwendungen gefunden."
 
 msgid "Open Startpage"
-msgstr "Öffne STartseite"
+msgstr "Öffne Startseite"
 
 msgid "Open URL"
 msgstr "Öffne URL"
@@ -228,7 +228,7 @@ msgid "Return"
 msgstr "Zurück"
 
 msgid "Right Key"
-msgstr "REchts Taste"
+msgstr "Rechts Taste"
 
 msgid "Right Mouse Button"
 msgstr "Rechte Maus Taste"
@@ -237,7 +237,7 @@ msgid "Save"
 msgstr "Speichern"
 
 msgid "Set as Startpage"
-msgstr "Als STartseite benutzen"
+msgstr "Als Startseite benutzen"
 
 msgid "Show the Menu window."
 msgstr "Menüfenster zeigen."
