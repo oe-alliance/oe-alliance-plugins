@@ -2662,7 +2662,7 @@ def find_dev(Anzahl, idVendor, idProduct):
 				gefunden = True
 	elif USBok == True:
 		try:
-			if len(usb.core.find(idVendor=idVendor, idProduct=idProduct, find_all=True)) >= Anzahl:
+			if usb.core.find(idVendor=idVendor, idProduct=idProduct, find_all=1) is not None:
 				L4logE("usb.core find")
 				gefunden = True
 		except:
