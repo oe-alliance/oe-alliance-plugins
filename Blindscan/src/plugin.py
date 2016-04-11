@@ -780,7 +780,7 @@ class Blindscan(ConfigListScreen, Screen):
 					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
 					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier) :
 					tplist[x] = k
-					break
+					#break
 			x += 1
 		tplist = self.removeDuplicateTransponders(tplist)
 		return tplist
@@ -804,7 +804,7 @@ class Blindscan(ConfigListScreen, Screen):
 					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
 					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier) :
 					isnt_known = False
-					break
+					#break
 			x += 1
 			if isnt_known :
 				new_tplist.append(t)
