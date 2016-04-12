@@ -11,15 +11,25 @@ class LoopSyncMain(Screen):
 		self.gotSession()
 
 	def gotSession(self):
+		self.stopped = 0
 		self.ResetFlag()
 		self.AVSyncTimer = eTimer()
 		self.AVSyncTimer.callback.append(self.UpdateStatus)
 		self.AVSyncTimer.start(10000, True)
 
 	def UpdateStatus(self):
+		if self.stopped == 1:
+			try:
+				self.session.open(DoReZap, self.srv)
+			except Exception as e:
+				print "[ReZap] Can't Zap"
+			self.stopped = 0
+			self.AVSyncTimer.start(100, True)
+			return
 		frontendDataOrg = ""
-		service1 = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		if service1:
+		#self.srv = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+		self.srv = self.session.nav.getCurrentlyPlayingServiceReference()
+		if self.srv:
 			service = self.session.nav.getCurrentService()
 			if service:
 				feinfo = service.frontendInfo()
@@ -28,20 +38,23 @@ class LoopSyncMain(Screen):
 					if self.CheckFlag():
 						print "[ReZap] DoReZap !!!"
 						self.ResetFlag()
-						self.AVSyncTimer.start(500, True)						
-						try:
-							self.session.open(DoReZap,service1)
-						except Exception, e:
-							print "[ReZap] Can't ReZap"
+						self.session.nav.stopService()
+						self.session.nav.playService(None)
+						self.stopped = 1
+						self.AVSyncTimer.start(10, True)
 					self.AVSyncTimer.start(100, True)
 					return
 				else:		### IPTV or VOD ###
 					self.ResetFlag()
 					self.AVSyncTimer.start(500, True)
-					return
+					return				
 			else:
 				self.AVSyncTimer.start(500, True)
 				return
+		else:
+			### NoService ###
+			self.AVSyncTimer.start(500, True)
+			return
 
 	def CheckFlag(self):
 		try:
@@ -71,19 +84,19 @@ class DoReZap(Screen):
 			open("/sys/class/video/blackout_policy", "w").write("0")
 		except Exception, e:
 			print "[ReZap] Can't change policy(0)"
-		self.session.nav.stopService()
 		self.session.nav.playService(xxx)
 		try:
 			open("/sys/class/video/blackout_policy", "w").write("1")
 		except Exception, e:
 			print "[ReZap] Can't change policy(1)"
-		self.close()
+		self.close()	
+
 
 ###################################                
 
 def sessionstart(session, **kwargs):
 	session.open(LoopSyncMain)
-
+       
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)
