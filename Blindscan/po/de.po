@@ -146,7 +146,7 @@ msgid "horizontal"
 msgstr "horizontal"
 
 msgid "no"
-msgstr "nein"
+msgstr "Nein"
 
 msgid "save to XML file"
 msgstr "Sichere in XML-Datei"
