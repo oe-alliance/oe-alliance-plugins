@@ -110,6 +110,10 @@ if FORMULER3
 SUBDIRS += F3LEDControl
 endif
 
+if FORMULER4
+SUBDIRS += F3LEDControl
+endif
+
 if VG2000
 SUBDIRS += F3LEDControl
 endif
