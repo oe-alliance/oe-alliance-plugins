@@ -833,7 +833,10 @@ class Blindscan(ConfigListScreen, Screen):
 						"CIRCULARLEFT" : parm.Polarisation_CircularLeft,
 						"VERTICAL" : parm.Polarisation_Vertical}
 					parm.orbital_position = self.orb_position
-					parm.polarisation = pol[data[1]]
+					if brandoem == 'azbox':
+						parm.polarisation = self.polsave
+					else:
+						parm.polarisation = pol[data[1]]
 					parm.frequency = int(data[2])
 					parm.symbol_rate = int(data[3])
 					parm.system = sys[data[4]]
