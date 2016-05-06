@@ -441,9 +441,9 @@ class SatelliteTransponderSearchSupport:
 			tuner_no = x["tuner_number"]
 		else:
 			tmpstr = _("Blindscan is not supported by this tuner (%s)") %tunername
-		self.satellite_search_session = self.session.openWithCallback(self.satelliteTransponderSearchSessionClosed, SatBlindscanState, tuner_no, tmpstr)
 		self.timer = eTimer()
 		self.timer.callback.append(self.updateStateSat)
+		self.satellite_search_session = self.session.openWithCallback(self.satelliteTransponderSearchSessionClosed, SatBlindscanState, tuner_no, tmpstr)
 		self.updateStateSat()
 
 
