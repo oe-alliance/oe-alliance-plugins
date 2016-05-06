@@ -6,61 +6,95 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-04 20:54+0200\n"
+"POT-Creation-Date: 2016-05-06 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#: plugin.py:24
+#: ../src/plugin.py:25
 msgid "Channelnumber in Standby off"
 msgstr ""
 
-#: plugin.py:24
+#: ../src/plugin.py:25
 msgid "Channelnumber in Standby Clock"
 msgstr ""
 
-#: plugin.py:24
+#: ../src/plugin.py:25
 msgid "Channelnumber/Clock in Standby Clock"
 msgstr ""
 
-#: plugin.py:24
+#: ../src/plugin.py:25
 msgid "Clock always"
 msgstr ""
 
-#: plugin.py:24
+#: ../src/plugin.py:25
 msgid "Always off"
 msgstr ""
 
-#: plugin.py:176 plugin.py:264
+#: ../src/plugin.py:27
+msgid "yes"
+msgstr ""
+
+#: ../src/plugin.py:27
+msgid "no"
+msgstr ""
+
+#: ../src/plugin.py:28
+msgid "Off"
+msgstr ""
+
+#: ../src/plugin.py:28
+msgid "On/Off"
+msgstr ""
+
+#: ../src/plugin.py:28
+msgid "Brightness level"
+msgstr ""
+
+#: ../src/plugin.py:225 ../src/plugin.py:324 ../src/plugin.py:331
 msgid "LED Display Setup"
 msgstr ""
 
-#: plugin.py:186
+#: ../src/plugin.py:236
 msgid "Cancel"
 msgstr ""
 
-#: plugin.py:187
+#: ../src/plugin.py:237
 msgid "Save"
 msgstr ""
 
-#: plugin.py:188
+#: ../src/plugin.py:238
 msgid "Update Date/Time"
 msgstr ""
 
-#: plugin.py:201
+#: ../src/plugin.py:251 ../src/plugin.py:271
 msgid "Show on LED"
 msgstr ""
 
-#: plugin.py:203
+#: ../src/plugin.py:253
 msgid "Time mode"
 msgstr ""
 
-#: plugin.py:215
-msgid "Show on VFD"
+#: ../src/plugin.py:254 ../src/plugin.py:273
+msgid "Show REC-Symbol in Display"
+msgstr ""
+
+#: ../src/plugin.py:256 ../src/plugin.py:275
+msgid "Show blinking Clock on Display during recording"
+msgstr ""
+
+#: ../src/plugin.py:258
+msgid "Brightness Level 1"
+msgstr ""
+
+#: ../src/plugin.py:259
+msgid "Brightness Level 2"
 msgstr ""

@@ -7,124 +7,160 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plugins 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 12:53+0100\n"
-"PO-Revision-Date: 2015-07-26 19:39+0100\n"
-"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
+"POT-Creation-Date: 2016-05-06 16:49+0200\n"
+"PO-Revision-Date: 2016-05-06 16:49+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-msgid "Adress:"
-msgstr "Adres:"
-
-msgid "Checking for alternatives"
-msgstr "Zoekt naar alternatieven"
-
-msgid "Close"
-msgstr "Sluit"
-
-msgid "Connection to remote IP ok"
-msgstr "Verbinding met server OK"
-
-msgid "Convert remote channel list for streaming"
-msgstr "Converteert de server kanaallijst voor streaming"
-
-msgid "Could not connect to remote IP"
-msgstr "Kon niet met server verbinden"
-
-msgid "Download"
-msgstr "Download"
-
-msgid "Download from remote failed"
-msgstr "Download van serverbox mislukt"
-
-msgid "Downloading remote services"
-msgstr "Download kanalen van server"
-
-msgid "Enter address"
-msgstr "Geef adres"
-
-msgid "Enter password"
-msgstr "Geef wachtwoord"
-
-msgid "Enter username"
-msgstr "Geef gebruikersnaam"
-
-msgid "Exit"
-msgstr "Afsluiten"
-
+#: ../src/plugin.py:53
 msgid "FTP Server Editor"
 msgstr "FTP Server aanpassen"
 
-#, python-format
-msgid "FTP reading alternatives %d of %d"
-msgstr "FTP leest alternatieven %d van %d"
+#: ../src/plugin.py:54
+msgid "Exit"
+msgstr "Afsluiten"
 
+#: ../src/plugin.py:55
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:98
+msgid "Keyboard"
+msgstr "Toetsenbord"
+
+#: ../src/plugin.py:104
+msgid "Use address"
+msgstr "Gebruik adres"
+
+#: ../src/plugin.py:106
+msgid "Use IP"
+msgstr "Gebruik IP"
+
+#: ../src/plugin.py:112
+msgid "IP:"
+msgstr "IP:"
+
+#: ../src/plugin.py:113 ../src/plugin.py:126
+msgid "Username:"
+msgstr "Gebruikersnaam:"
+
+#: ../src/plugin.py:114 ../src/plugin.py:127
+msgid "Password:"
+msgstr "Wachtwoord:"
+
+#: ../src/plugin.py:115 ../src/plugin.py:128
+msgid "FTPport:"
+msgstr "FTP-poort:"
+
+#: ../src/plugin.py:116 ../src/plugin.py:129
+msgid "Passive:"
+msgstr "Passief:"
+
+#: ../src/plugin.py:117 ../src/plugin.py:130
+msgid "Telnetport:"
+msgstr "Telnetpoort:"
+
+#: ../src/plugin.py:125
+msgid "Adress:"
+msgstr "Adres:"
+
+#: ../src/plugin.py:145
+msgid "Enter address"
+msgstr "Geef adres"
+
+#: ../src/plugin.py:148
+msgid "Enter username"
+msgstr "Geef gebruikersnaam"
+
+#: ../src/plugin.py:151
+msgid "Enter password"
+msgstr "Geef wachtwoord"
+
+#: ../src/plugin.py:191
+msgid "Select bouquets to convert"
+msgstr "Kies favorieten om te converteren"
+
+#: ../src/plugin.py:199
+msgid "Close"
+msgstr "Sluit"
+
+#: ../src/plugin.py:201
+msgid "Set server IP"
+msgstr "Stel server IP in"
+
+#: ../src/plugin.py:203
+msgid "Select a remote server IP first"
+msgstr "Kies eerst een server-IP"
+
+#: ../src/plugin.py:235
+msgid "Testing remote connection"
+msgstr "Test verbinding met server"
+
+#: ../src/plugin.py:244
+msgid "Connection to remote IP ok"
+msgstr "Verbinding met server OK"
+
+#: ../src/plugin.py:250
+msgid "Could not connect to remote IP"
+msgstr "Kon niet met server verbinden"
+
+#: ../src/plugin.py:253
+msgid "Downloading remote services"
+msgstr "Download kanalen van server"
+
+#: ../src/plugin.py:262 ../src/plugin.py:307
+msgid "Download from remote failed"
+msgstr "Download van serverbox mislukt"
+
+#: ../src/plugin.py:312
 #, python-format
 msgid "FTP reading bouquets %d of %d"
 msgstr "FTP leest boeketten %d van %d"
 
-msgid "FTPport:"
-msgstr "FTP-poort:"
-
-msgid "IP:"
-msgstr "IP:"
-
-msgid "Invert"
-msgstr "Keer om"
-
-msgid "Keyboard"
-msgstr "Toetsenbord"
-
+#: ../src/plugin.py:322 ../src/plugin.py:628
 msgid "Make your selection"
 msgstr "Maak uw keuze"
 
+#: ../src/plugin.py:336
+msgid "Download"
+msgstr "Download"
+
+#: ../src/plugin.py:337
+msgid "Invert"
+msgstr "Keer om"
+
+#: ../src/plugin.py:369
+msgid "remote of"
+msgstr "remote van"
+
+#: ../src/plugin.py:472
 msgid "No bouquets selected"
 msgstr "Geen favorieten gekozen"
 
-msgid "OK"
-msgstr "OK"
+#: ../src/plugin.py:604
+msgid "Checking for alternatives"
+msgstr "Zoekt naar alternatieven"
 
-msgid "Passive:"
-msgstr "Passief:"
+#: ../src/plugin.py:625
+#, python-format
+msgid "FTP reading alternatives %d of %d"
+msgstr "FTP leest alternatieven %d van %d"
 
-msgid "Password:"
-msgstr "Wachtwoord:"
-
+#: ../src/plugin.py:657 ../src/plugin.py:662 ../src/plugin.py:667
 msgid "Remote channel stream converter"
 msgstr "Remote channel stream converter"
 
-msgid "Select a remote server IP first"
-msgstr "Kies eerst een server-IP"
-
-msgid "Select bouquets to convert"
-msgstr "Kies favorieten om te converteren"
-
-msgid "Set server IP"
-msgstr "Stel server IP in"
-
-msgid "Telnetport:"
-msgstr "Telnetpoort:"
-
-msgid "Testing remote connection"
-msgstr "Test verbinding met server"
-
-msgid "Use IP"
-msgstr "Gebruik IP"
-
-msgid "Use address"
-msgstr "Gebruik adres"
-
-msgid "Username:"
-msgstr "Gebruikersnaam:"
-
-msgid "remote of"
-msgstr "remote van"
+#: ../src/plugin.py:667
+msgid "Convert remote channel list for streaming"
+msgstr "Converteert de server kanaallijst voor streaming"
 
 #~ msgid "FTP reading file %d of %d"
 #~ msgstr "FTP leest bestand %d van %d"

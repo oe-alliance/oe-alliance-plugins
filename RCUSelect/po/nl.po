@@ -3,78 +3,79 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-06 16:47+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2016-05-06 16:48+0200\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 1.8.7\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../src/plugin.py:43
 msgid "Apply"
-msgstr ""
+msgstr "Toepassen"
 
 #: ../src/plugin.py:44
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: ../src/plugin.py:49 ../src/plugin.py:150 ../src/plugin.py:158
 msgid "RCU Select"
-msgstr ""
+msgstr "RCU selecteren"
 
 #: ../src/plugin.py:52
 msgid "WeTek Play (Classic) RCU"
-msgstr ""
+msgstr "WeTek Play (Classic) RCU"
 
 #: ../src/plugin.py:53
 msgid "WeTek Play Enigma2 RCU"
-msgstr ""
+msgstr "WeTek Play Enigma2 RCU"
 
 #: ../src/plugin.py:54
 msgid "WeTek Play OpenElec RCU"
-msgstr ""
+msgstr "WeTek Play OpenElec RCU"
 
 #: ../src/plugin.py:55
 msgid "Alien2/1 RCU"
-msgstr ""
+msgstr "Alien2/1 RCU"
 
 #: ../src/plugin.py:56
 msgid "Alien1 old RCU"
-msgstr ""
+msgstr "Alien1 old RCU"
 
 #: ../src/plugin.py:57
 msgid "GI LX3 RCU"
-msgstr ""
+msgstr "GI LX3 RCU"
 
 #: ../src/plugin.py:58
 msgid "Gigablue 800 UE Plus RCU"
-msgstr ""
+msgstr "Gigablue 800 UE Plus RCU"
 
 #: ../src/plugin.py:59
 msgid "Mutant HD2400 RCU"
-msgstr ""
+msgstr "Mutant HD2400 RCU"
 
 #: ../src/plugin.py:60
 msgid "Octagon SF8 RCU"
-msgstr ""
+msgstr "Octagon SF8 RCU"
 
 #: ../src/plugin.py:61
 msgid "Technomate Nano RCU"
-msgstr ""
+msgstr "Technomate Nano RCU"
 
 #: ../src/plugin.py:62
 msgid "xtrend ET10000 RCU"
-msgstr ""
+msgstr "xtrend ET10000 RCU"
 
 #: ../src/plugin.py:88
 msgid "Are you sure?"
-msgstr ""
+msgstr "Weet je het zeker?"
