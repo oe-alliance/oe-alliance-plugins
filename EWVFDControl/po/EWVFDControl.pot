@@ -6,57 +6,59 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-21 14:46+0200\n"
+"POT-Creation-Date: 2016-05-06 15:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#: plugin.py:22
+#: ../src/plugin.py:22
 msgid "Channelnumber in Standby off"
 msgstr ""
 
-#: plugin.py:22
+#: ../src/plugin.py:22
 msgid "Channelnumber in Standby Clock"
 msgstr ""
 
-#: plugin.py:22
+#: ../src/plugin.py:22
 msgid "Channelnumber/Clock in Standby Clock"
 msgstr ""
 
-#: plugin.py:22
+#: ../src/plugin.py:22
 msgid "Clock always"
 msgstr ""
 
-#: plugin.py:22
+#: ../src/plugin.py:22
 msgid "Always off"
 msgstr ""
 
-#: plugin.py:183
+#: ../src/plugin.py:183
 msgid "Cancel"
 msgstr ""
 
-#: plugin.py:184
+#: ../src/plugin.py:184
 msgid "Save"
 msgstr ""
 
-#: plugin.py:185
+#: ../src/plugin.py:185
 msgid "Update Date/Time"
 msgstr ""
 
-#: plugin.py:198 plugin.py:212
+#: ../src/plugin.py:198 ../src/plugin.py:212
 msgid "Show on LED"
 msgstr ""
 
-#: plugin.py:200
+#: ../src/plugin.py:200
 msgid "Time mode"
 msgstr ""
 
-#: plugin.py:261
+#: ../src/plugin.py:261
 msgid "LED Display Setup"
 msgstr ""

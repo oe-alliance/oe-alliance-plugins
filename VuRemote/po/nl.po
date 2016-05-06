@@ -4,59 +4,77 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-12 20:05+0100\n"
-"PO-Revision-Date: 2015-09-13 16:05+0100\n"
-"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
+"POT-Creation-Date: 2016-05-06 17:38+0200\n"
+"PO-Revision-Date: 2016-05-06 17:38+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
-"Language: Nederlands\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Nederlands\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Country: NEDERLAND\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#, python-format
-msgid " in %d seconds."
-msgstr " in %d seconde."
-
-msgid "Cancel"
-msgstr "Annuleren"
-
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr "BESTAND BESTAAT NIET: /proc/stb/fp/remote_code"
-
-msgid "Keep"
-msgstr "Behoud"
-
-msgid "Please change your remote mode"
-msgstr "Verander nu de mode van uw AB"
-
-msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
-msgstr "Druk tegelijkertijd op '2' & '7' tot de rode LED constant brandt, druk dan op 'Help' en vervolgens op '000X'"
-
+#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
 msgid "Remote Control Code"
 msgstr "Afstandsbedienings code"
 
-msgid "Remote Control System Code"
-msgstr "Afstandsbedienings systeem code"
+#: ../src/plugin.py:68
+msgid "Cancel"
+msgstr "Annuleren"
 
-msgid "Restore"
-msgstr "Herstellen"
-
+#: ../src/plugin.py:69
 msgid "Save"
 msgstr "Opslaan"
 
+#: ../src/plugin.py:80
 #, python-format
 msgid "Sorry, but %s is not supported."
 msgstr "Sorry, maar %s wordt niet ondersteund."
 
+#: ../src/plugin.py:84
+msgid "Remote Control System Code"
+msgstr "Afstandsbedienings systeem code"
+
+#: ../src/plugin.py:87
 msgid "Text support"
 msgstr "Tekst ondersteuning"
 
+#: ../src/plugin.py:99
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr "BESTAND BESTAAT NIET: /proc/stb/fp/remote_code"
+
+#: ../src/plugin.py:101
+msgid "Please change your remote mode"
+msgstr "Verander nu de mode van uw AB"
+
+#: ../src/plugin.py:101
+msgid ""
+"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
+"press '000"
+msgstr ""
+"Druk tegelijkertijd op '2' & '7' tot de rode LED constant brandt, druk dan "
+"op 'Help' en vervolgens op '000X'"
+
+#: ../src/plugin.py:101
 msgid "Then choose 'Keep' within seconds"
 msgstr "Druk op 'Behouden' binnen secondes"
+
+#: ../src/plugin.py:122
+msgid "Keep"
+msgstr "Behoud"
+
+#: ../src/plugin.py:122
+msgid "Restore"
+msgstr "Herstellen"
+
+#: ../src/plugin.py:128
+#, python-format
+msgid " in %d seconds."
+msgstr " in %d seconde."
 
 #~ msgid "This Plugin only support for UNO/ULTIMO"
 #~ msgstr "Deze plugin is uitsluitend bestemd voor de UNO/ULTIMO"

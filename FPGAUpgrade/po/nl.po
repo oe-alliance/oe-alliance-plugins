@@ -4,38 +4,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 16:40+0100\n"
-"PO-Revision-Date: 2012-05-23 07:43+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2016-05-06 16:06+0200\n"
+"PO-Revision-Date: 2016-05-06 16:06+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
-"Language: Nederlands\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Nederlands\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Country: NEDERLAND\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#, python-format
-msgid "%d / 100"
-msgstr "%d / 100"
-
+#: ../src/plugin.py:152
 msgid "Can't cancel during upgrade!!"
 msgstr "Kan tijdens de upgrade niet annuleren!"
 
-msgid "Close"
-msgstr "Sluiten"
+#: ../src/plugin.py:154
+msgid "Status : 0%"
+msgstr "Status : 0%"
 
-msgid "Download"
-msgstr "Downloaden"
+#: ../src/plugin.py:175
+msgid "Succeed"
+msgstr "Gelukt"
 
-msgid "Downloaded "
-msgstr "Gedownload"
-
-msgid "Downloading..."
-msgstr "Aan het downloaden....."
-
+#: ../src/plugin.py:189
 #, python-format
 msgid ""
 "Error[%d] : %s.\n"
@@ -44,17 +39,35 @@ msgstr ""
 "Foutr[%d] : %s.\n"
 "Druk op OK om af te sluiten."
 
+#: ../src/plugin.py:195
+#, python-format
+msgid "%d / 100"
+msgstr "%d / 100"
+
+#: ../src/plugin.py:232 ../src/plugin.py:401
 msgid "FPGA Upgrade"
 msgstr "FPGA Upgrade"
 
-msgid "File not found"
-msgstr "Bestand niet gevonden"
+#: ../src/plugin.py:234
+msgid "Close"
+msgstr "Sluiten"
 
-msgid "Status : 0%"
-msgstr "Status : 0%"
-
-msgid "Succeed"
-msgstr "Gelukt"
-
+#: ../src/plugin.py:235
 msgid "Upgrade"
 msgstr "Upgrade"
+
+#: ../src/plugin.py:237
+msgid "Download"
+msgstr "Downloaden"
+
+#: ../src/plugin.py:293
+msgid "Downloaded "
+msgstr "Gedownload"
+
+#: ../src/plugin.py:295
+msgid "Downloading..."
+msgstr "Aan het downloaden....."
+
+#: ../src/plugin.py:353
+msgid "File not found"
+msgstr "Bestand niet gevonden"

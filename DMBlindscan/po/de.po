@@ -3,74 +3,156 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2016-05-06 16:01+0200\n"
+"PO-Revision-Date: 2016-05-06 16:01+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
 
+#: ../src/plugin.py:98
 msgid "MANUALLY start service searching, press green to change"
 msgstr "Manuelle service suche, zum ändern Taste grün drücken"
 
+#: ../src/plugin.py:100
 msgid "AUTOMATICALLY start service searching, press green to change"
 msgstr "Automatische service suche, zum ändern Taste grün drücken"
 
+#: ../src/plugin.py:105
 msgid "Transponder searching finished!"
 msgstr "Transpondersuche abgeschlossen!"
 
+#: ../src/plugin.py:106
 msgid "Press green to start service searching!"
 msgstr "Drücke Taste grün zum start der service suche!"
 
+#: ../src/plugin.py:281
+#, python-format
+msgid "%dMhz scanned"
+msgstr ""
+
+#: ../src/plugin.py:283
+#, python-format
 msgid "%d transponders found at %d:%02dmin"
 msgstr "%d transponder gefunden in %d:%02dmin"
 
-msgid "Change"
-msgstr "Ändern"
+#: ../src/plugin.py:305
+#, python-format
+msgid "%d transponder(s) found"
+msgstr ""
 
+#: ../src/plugin.py:310
+#, python-format
+msgid "%d:%02d/%d:%02dmin"
+msgstr ""
+
+#: ../src/plugin.py:436
 msgid "Try to find used satellite transponders..."
 msgstr "Versuche belegte Satelliten Transponder zu finden..."
 
+#: ../src/plugin.py:438
 msgid "Nothing to scan! Press Exit!"
 msgstr "Nichts zutun! Drücke Exit!"
 
-
+#: ../src/plugin.py:443
+#, python-format
 msgid "Blindscan is not supported by this tuner (%s)"
 msgstr "Blindscan wird von diesen Tuner nicht unterstützt (%s)"
 
+#: ../src/plugin.py:488
 msgid "Press OK to start the scan"
 msgstr "Drücke OK um den Scan zu starten"
 
-msgid "Nothing to scan!\nPlease setup your tuner settings before you start a service scan."
-msgstr "Nichts zutun!\nBitte stellen sie die Tuner Einstellungen ein vor der service suche."
+#: ../src/plugin.py:490 ../src/plugin.py:758 ../src/plugin.py:760
+msgid ""
+"Nothing to scan!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Nichts zutun!\n"
+"Bitte stellen sie die Tuner Einstellungen ein vor der service suche."
 
+#: ../src/plugin.py:512
+msgid "Tuner"
+msgstr ""
+
+#: ../src/plugin.py:534
+msgid "Satellite"
+msgstr ""
+
+#: ../src/plugin.py:536
 msgid "Frequency start"
 msgstr "Frequenz anfang"
 
+#: ../src/plugin.py:537
 msgid "Frequency stop"
 msgstr "Frequenz ende"
 
+#: ../src/plugin.py:539
 msgid "Accuracy (higher is better)"
 msgstr "Genauigkeit (höher ist besser)"
 
+#: ../src/plugin.py:540
 msgid "Horizontal"
 msgstr "Horizontal"
 
+#: ../src/plugin.py:541
 msgid "Vertical"
 msgstr "Vertikal"
 
+#: ../src/plugin.py:543
 msgid "Network scan"
 msgstr "Netzwerk suche"
 
+#: ../src/plugin.py:544
 msgid "Clear before scan"
 msgstr "Löschen vor der suche"
 
+#: ../src/plugin.py:545
 msgid "Only free scan"
 msgstr "Nur freie Sender suchen"
+
+#: ../src/plugin.py:602
+msgid "no"
+msgstr "nein"
+
+#: ../src/plugin.py:602
+msgid "yes"
+msgstr ""
+
+#: ../src/plugin.py:602
+msgid "yes (keep feeds)"
+msgstr ""
+
+#: ../src/plugin.py:625
+msgid "DVB-S + DVB-S2"
+msgstr ""
+
+#: ../src/plugin.py:626
+msgid "DVB-S only"
+msgstr ""
+
+#: ../src/plugin.py:698
+msgid ""
+"No tuner is enabled!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+
+#: ../src/plugin.py:773 ../src/plugin.py:779
+msgid "Blind scan"
+msgstr ""
+
+#: ../src/plugin.py:779
+msgid "Scan satellites for new transponders"
+msgstr ""
+
+#~ msgid "Change"
+#~ msgstr "Ändern"

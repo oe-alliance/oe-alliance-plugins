@@ -2,53 +2,118 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 16:40+0100\n"
-"PO-Revision-Date: 2013-11-19 04:02+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2016-05-06 17:42+0200\n"
+"PO-Revision-Date: 2016-05-06 17:44+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
-"Language: de\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: Dutch\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
 
+#: ../src/plugin.py:12
+msgid "OdinM9"
+msgstr "OdinM9"
+
+#: ../src/plugin.py:12
+msgid "ET9000/ET9100"
+msgstr "ET9000/ET9100"
+
+#: ../src/plugin.py:12
+msgid "DMM/DMM ADV"
+msgstr "DMM/DMM ADV"
+
+#: ../src/plugin.py:12
+msgid "ET5000/ET6000"
+msgstr "ET5000/ET6000"
+
+#: ../src/plugin.py:12
+msgid "Vu"
+msgstr "Vu"
+
+#: ../src/plugin.py:12
+msgid "ET6500/ET9500"
+msgstr "ET6500/ET9500"
+
+#: ../src/plugin.py:12
+msgid "ET9200/ET9500"
+msgstr "ET9200/ET9500"
+
+#: ../src/plugin.py:12
+msgid "ET4000"
+msgstr "ET4000"
+
+#: ../src/plugin.py:12
+msgid "XP1000"
+msgstr "XP1000"
+
+#: ../src/plugin.py:12
+msgid "HD1100"
+msgstr "HD1100"
+
+#: ../src/plugin.py:12
+msgid "XP3000"
+msgstr "XP3000"
+
+#: ../src/plugin.py:12
+msgid "F1/F3"
+msgstr "F1/F3"
+
+#: ../src/plugin.py:12
+msgid "HD2400"
+msgstr "HD2400"
+
+#: ../src/plugin.py:66
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:67
 msgid "Cancel"
 msgstr "Annuleren"
 
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr "BESTAND BESTAAT NIET: /proc/stb/fp/remote_code"
+#: ../src/plugin.py:90
+msgid "Remote"
+msgstr "Afstandsbediening"
 
-msgid "Keep"
-msgstr "Behoud"
+#: ../src/plugin.py:101
+msgid "Is this remote ok?"
+msgstr "Is deze afstandsbediening ok?"
 
-msgid "Please change your remote mode"
-msgstr "Verander nu de mode van uw AB"
-
-msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
-msgstr "Druk tegelijkertijd op '2' & '7' tot de rode LED constant brandt, druk dan op 'Help' en vervolgens op '000X'"
-
+#: ../src/plugin.py:187 ../src/plugin.py:194
 msgid "Remote Control Code"
 msgstr "Afstandsbedienings code"
 
-msgid "Remote Control System Code"
-msgstr "Afstandsbedienings systeem code"
+#~ msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+#~ msgstr "BESTAND BESTAAT NIET: /proc/stb/fp/remote_code"
 
-msgid "Restore"
-msgstr "Herstellen"
+#~ msgid "Keep"
+#~ msgstr "Behoud"
 
-msgid "Save"
-msgstr "Opslaan"
+#~ msgid "Please change your remote mode"
+#~ msgstr "Verander nu de mode van uw AB"
 
-msgid "Text support"
-msgstr "Tekst ondersteuning"
+#~ msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+#~ msgstr "Druk tegelijkertijd op '2' & '7' tot de rode LED constant brandt, druk dan op 'Help' en vervolgens op '000X'"
 
-msgid "Then choose 'Keep' within seconds"
-msgstr "Druk op 'Behouden' binnen secondes"
+#~ msgid "Remote Control System Code"
+#~ msgstr "Afstandsbedienings systeem code"
 
-msgid "This Plugin only support for UNO/ULTIMO"
-msgstr "Deze plugin is uitsluitend bestemd voor de UNO/ULTIMO/Solo2/DUO2"
+#~ msgid "Restore"
+#~ msgstr "Herstellen"
 
+#~ msgid "Save"
+#~ msgstr "Opslaan"
+
+#~ msgid "Text support"
+#~ msgstr "Tekst ondersteuning"
+
+#~ msgid "Then choose 'Keep' within seconds"
+#~ msgstr "Druk op 'Behouden' binnen secondes"
+
+#~ msgid "This Plugin only support for UNO/ULTIMO"
+#~ msgstr "Deze plugin is uitsluitend bestemd voor de UNO/ULTIMO/Solo2/DUO2"

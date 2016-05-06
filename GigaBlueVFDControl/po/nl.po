@@ -4,79 +4,148 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2013-06-30 06:37+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2016-05-06 16:12+0200\n"
+"PO-Revision-Date: 2016-05-06 16:12+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
-"Language: Nederlands\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Nederlands\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Country: NEDERLAND\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-msgid "Blink Record Led"
-msgstr "Opname LED knippert"
+#: ../src/plugin.py:28
+msgid "Channelnumber in Standby off"
+msgstr "Kanaalnummer in Standby uit"
 
-msgid "Blue"
-msgstr "Blauw"
+#: ../src/plugin.py:28
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanaalnummer in Standby Klok"
 
-msgid "Cancel"
-msgstr "Annuleren"
+#: ../src/plugin.py:28
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanaalnummer/Klok in Standby Klok"
 
-msgid "Enable led"
-msgstr "LED ingeschakeld"
+#: ../src/plugin.py:28
+msgid "Clock always"
+msgstr "Klok altijd"
 
-msgid "Led state Deep Standby"
-msgstr "LED in deep standby"
+#: ../src/plugin.py:28
+msgid "Always off"
+msgstr "Altijd uit"
 
-msgid "Led state RUN"
-msgstr "LED status RUN"
-
-msgid "Led state Record"
-msgstr "LED status Opname"
-
-msgid "Led state Standby"
-msgstr "LED status Stand-by"
-
+#: ../src/plugin.py:29 ../src/plugin.py:30
 msgid "No"
 msgstr "Nee"
 
-msgid "None"
-msgstr "Geen"
-
-msgid "Off"
-msgstr "Uit"
-
-msgid "Purple"
-msgstr "Paars"
-
-msgid "Red"
-msgstr "Rood"
-
-msgid "Save"
-msgstr "Opslaan"
-
-msgid "Show clock"
-msgstr "Toon klok"
-
-msgid "Show clock in Deep Standby"
-msgstr "Toon klok in deep standby"
-
-msgid "Time mode"
-msgstr "Tijd modus"
-
-msgid "Update Date/Time"
-msgstr "Update Datum/Tjd"
-
-msgid "VFD_Giga"
-msgstr "VFD_Giga"
-
+#: ../src/plugin.py:29 ../src/plugin.py:30
 msgid "Yes"
 msgstr "Ja"
 
-msgid "in standby: "
-msgstr "in standby: "
+#: ../src/plugin.py:33
+msgid "None"
+msgstr "Geen"
 
+#: ../src/plugin.py:33
+msgid "Blue"
+msgstr "Blauw"
+
+#: ../src/plugin.py:33
+msgid "Red"
+msgstr "Rood"
+
+#: ../src/plugin.py:33
+msgid "Purple"
+msgstr "Paars"
+
+#: ../src/plugin.py:369
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: ../src/plugin.py:370
+msgid "Save"
+msgstr "Opslaan"
+
+#: ../src/plugin.py:374
+msgid "Update Date/Time"
+msgstr "Update Datum/Tjd"
+
+#: ../src/plugin.py:387 ../src/plugin.py:421
+msgid "Enable led"
+msgstr "LED ingeschakeld"
+
+#: ../src/plugin.py:389
+msgid "Led state RUN"
+msgstr "LED status RUN"
+
+#: ../src/plugin.py:390
+msgid "Led state Standby"
+msgstr "LED status Stand-by"
+
+#: ../src/plugin.py:392
+msgid "Led state Deep Standby"
+msgstr "LED in deep standby"
+
+#: ../src/plugin.py:393
+msgid "Led state Record"
+msgstr "LED status Opname"
+
+#: ../src/plugin.py:394
+msgid "Blink Record Led"
+msgstr "Opname LED knippert"
+
+#: ../src/plugin.py:395
+msgid "Led state HDD /dev/sda active"
+msgstr "LED status HDD/dev/sda actief"
+
+#: ../src/plugin.py:396
+msgid "Led state HDD /dev/sdb active"
+msgstr "LED status HDD/dev/sdb actief"
+
+#: ../src/plugin.py:402 ../src/plugin.py:429
+msgid "Brightness"
+msgstr "Helderheid"
+
+#: ../src/plugin.py:403 ../src/plugin.py:431
+msgid "Brightness Standby"
+msgstr "Helderheid (standby)"
+
+#: ../src/plugin.py:405 ../src/plugin.py:425
+msgid "Show on VFD"
+msgstr "Toon op VFD"
+
+#: ../src/plugin.py:406 ../src/plugin.py:427
+msgid "Show clock in Deep Standby"
+msgstr "Toon klok in deep standby"
+
+#: ../src/plugin.py:408
+msgid "Time mode"
+msgstr "Tijd modus"
+
+#: ../src/plugin.py:409
+msgid "Channel number with leading zeros"
+msgstr "Kanaal nummers met nullen beginnen"
+
+#: ../src/plugin.py:489 ../src/plugin.py:491 ../src/plugin.py:504
+msgid "Display/LED"
+msgstr "Display/LED"
+
+#: ../src/plugin.py:493 ../src/plugin.py:506
+msgid "LED"
+msgstr "LED"
+
+#~ msgid "Off"
+#~ msgstr "Uit"
+
+#~ msgid "Show clock"
+#~ msgstr "Toon klok"
+
+#~ msgid "VFD_Giga"
+#~ msgstr "VFD_Giga"
+
+#~ msgid "in standby: "
+#~ msgstr "in standby: "

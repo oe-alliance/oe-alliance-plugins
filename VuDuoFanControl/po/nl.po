@@ -16,6 +16,8 @@ msgstr ""
 "X-Poedit-Language: Nederlands\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Country: NEDERLAND\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
 
 msgid "Close"
 msgstr "Sluiten"

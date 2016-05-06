@@ -11,6 +11,8 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: \n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
 
 msgid "%"
 msgstr "%"
