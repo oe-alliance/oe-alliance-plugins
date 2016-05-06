@@ -442,10 +442,9 @@ class SatelliteTransponderSearchSupport:
 		else:
 			tmpstr = _("Blindscan is not supported by this tuner (%s)") %tunername
 		self.satellite_search_session = self.session.openWithCallback(self.satelliteTransponderSearchSessionClosed, SatBlindscanState, tuner_no, tmpstr)
-		if self.auto_scan:
-			self.timer = eTimer()
-			self.timer.callback.append(self.updateStateSat)
-			self.updateStateSat()
+		self.timer = eTimer()
+		self.timer.callback.append(self.updateStateSat)
+		self.updateStateSat()
 
 
 class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTransponderSearchSupport):
