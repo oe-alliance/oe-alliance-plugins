@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-08 07:14+0200\n"
-"PO-Revision-Date: 2015-09-20 18:15+0500\n"
-"Last-Translator: ака Учкун <madamin2007@mail.ru>\n"
+"POT-Creation-Date: 2016-05-07 14:06+0200\n"
+"PO-Revision-Date: 2016-05-07 14:06+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Russian / enigma(c) Ukraine, Kiev>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -12,20 +12,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-5\n"
 
+#: ../src/plugin.py:99 ../src/plugin.py:191
+msgid "Fan Control"
+msgstr ""
+
+#: ../src/plugin.py:106
 msgid "Cancel"
 msgstr "Отменить"
 
-msgid "Fan 1 PWM"
-msgstr "Вентилятор 1 PWM"
-
+#: ../src/plugin.py:107
 msgid "OK"
 msgstr "OK"
 
-msgid "Standby fan 1 PWM"
-msgstr "Режим ожидания 1 PWM"
+#: ../src/plugin.py:136
+#, python-format
+msgid "Fan %d voltage"
+msgstr ""
 
+#: ../src/plugin.py:137
+#, python-format
+msgid "Fan %d PWM"
+msgstr ""
+
+#: ../src/plugin.py:139
+#, python-format
+msgid "Standby fan %d voltage"
+msgstr ""
+
+#: ../src/plugin.py:140
+#, python-format
+msgid "Standby fan %d PWM"
+msgstr ""
+
+#: ../src/plugin.py:186
 msgid "Temperature and fan control"
 msgstr "Контроль температуры и вентилятора"
+
+#: ../src/plugin.py:191
+msgid "Temperature and Fan control"
+msgstr ""
+
+#~ msgid "Fan 1 PWM"
+#~ msgstr "Вентилятор 1 PWM"
+
+#~ msgid "Standby fan 1 PWM"
+#~ msgstr "Режим ожидания 1 PWM"

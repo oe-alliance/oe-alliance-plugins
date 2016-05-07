@@ -2,77 +2,109 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2014-10-27 11:39+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2016-05-07 13:16+0200\n"
+"PO-Revision-Date: 2016-05-07 13:16+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-msgid "Blink Record Led"
-msgstr "LED clignote en enregistrement"
+#: ../src/plugin.py:24
+msgid "Channelnumber in Standby off"
+msgstr ""
 
-msgid "Blue"
-msgstr "Bleu"
+#: ../src/plugin.py:24
+msgid "Channelnumber in Standby Clock"
+msgstr ""
 
+#: ../src/plugin.py:24
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+#: ../src/plugin.py:24
+msgid "Clock always"
+msgstr ""
+
+#: ../src/plugin.py:24
+msgid "Always off"
+msgstr ""
+
+#: ../src/plugin.py:175 ../src/plugin.py:263 ../src/plugin.py:270
+msgid "LED Display Setup"
+msgstr ""
+
+#: ../src/plugin.py:185
 msgid "Cancel"
 msgstr "Annuler"
 
-msgid "Enable led"
-msgstr "Activer LED"
-
-msgid "Led state Deep Standby"
-msgstr "État de la LED en veille profonde"
-
-msgid "Led state RUN"
-msgstr "État de la LED en fonctionnement"
-
-msgid "Led state Record"
-msgstr "État de la LED en enregistrement"
-
-msgid "Led state Standby"
-msgstr "État de la LED en veille"
-
-msgid "No"
-msgstr "Non"
-
-msgid "None"
-msgstr "Aucun"
-
-msgid "Off"
-msgstr "Off"
-
-msgid "Purple"
-msgstr "Pourpre"
-
-msgid "Red"
-msgstr "Rouge"
-
+#: ../src/plugin.py:186
 msgid "Save"
 msgstr "Sauver"
 
-msgid "Show clock"
-msgstr "Afficher l'horloge"
-
-msgid "Show clock in Deep Standby"
-msgstr "Afficher l'horloge en veille profonde"
-
-msgid "Time mode"
-msgstr "Mode heure"
-
+#: ../src/plugin.py:187
 msgid "Update Date/Time"
 msgstr "Mettre à jour Date/Heure"
 
-msgid "VFD_Giga"
-msgstr "VFD_Giga"
+#: ../src/plugin.py:200 ../src/plugin.py:214
+msgid "Show on LED"
+msgstr ""
 
-msgid "Yes"
-msgstr "Oui"
+#: ../src/plugin.py:202
+msgid "Time mode"
+msgstr "Mode heure"
 
-msgid "in standby: "
-msgstr "en veille:"
+#~ msgid "Blink Record Led"
+#~ msgstr "LED clignote en enregistrement"
+
+#~ msgid "Blue"
+#~ msgstr "Bleu"
+
+#~ msgid "Enable led"
+#~ msgstr "Activer LED"
+
+#~ msgid "Led state Deep Standby"
+#~ msgstr "État de la LED en veille profonde"
+
+#~ msgid "Led state RUN"
+#~ msgstr "État de la LED en fonctionnement"
+
+#~ msgid "Led state Record"
+#~ msgstr "État de la LED en enregistrement"
+
+#~ msgid "Led state Standby"
+#~ msgstr "État de la LED en veille"
+
+#~ msgid "No"
+#~ msgstr "Non"
+
+#~ msgid "None"
+#~ msgstr "Aucun"
+
+#~ msgid "Off"
+#~ msgstr "Off"
+
+#~ msgid "Purple"
+#~ msgstr "Pourpre"
+
+#~ msgid "Red"
+#~ msgstr "Rouge"
+
+#~ msgid "Show clock"
+#~ msgstr "Afficher l'horloge"
+
+#~ msgid "Show clock in Deep Standby"
+#~ msgstr "Afficher l'horloge en veille profonde"
+
+#~ msgid "VFD_Giga"
+#~ msgstr "VFD_Giga"
+
+#~ msgid "Yes"
+#~ msgstr "Oui"
+
+#~ msgid "in standby: "
+#~ msgstr "en veille:"

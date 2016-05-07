@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 12:53+0100\n"
+"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
+"PO-Revision-Date: 2016-05-07 13:07+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
-"PO-Revision-Date: \n"
-"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
-"Language-Team: \n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
@@ -20,19 +20,15 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
-#, python-format
 msgid "% + Load@1min"
 msgstr "% + Load@1min"
 
-#, python-format
 msgid "% + Load@5min"
 msgstr "% + Load@5min"
 
-#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr "%d Mail  %d Nieuw  %s"
 
-#, python-format
 msgid "%s - Current value: %s"
 msgstr "%s - Huidige waarde: %s"
 
@@ -675,8 +671,14 @@ msgstr "Analoog+Datum+Dag"
 msgid "Analog+Date+Weekday 2"
 msgstr "Analoog+datum+dag 2"
 
+msgid "April"
+msgstr ""
+
 msgid "Audio/Video"
 msgstr "Audio/Video"
+
+msgid "August"
+msgstr ""
 
 msgid "Background"
 msgstr "Achtergrond"
@@ -858,6 +860,9 @@ msgstr "Datums geen ikoon"
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr "Debuglogs > /tmp/L4log.txt"
 
+msgid "December"
+msgstr ""
+
 msgid "Delete"
 msgstr "Verwijder"
 
@@ -906,6 +911,9 @@ msgstr "Uitgebreide beschrijving"
 msgid "Fastmode (2s)"
 msgstr "Snelle modus (2s)"
 
+msgid "February"
+msgstr ""
+
 msgid "First Quarter"
 msgstr "Eerste kwartier"
 
@@ -938,6 +946,9 @@ msgstr "Frame"
 
 msgid "Fri"
 msgstr "vr"
+
+msgid "Friday"
+msgstr ""
 
 msgid "FritzCall"
 msgstr "FritzCall"
@@ -1033,8 +1044,17 @@ msgstr "Intern Vu+ Duo2 LCD 400x240"
 msgid "JPG"
 msgstr "JPG"
 
+msgid "January"
+msgstr ""
+
 msgid "Javascript"
 msgstr "Javascript"
+
+msgid "July"
+msgstr ""
+
+msgid "June"
+msgstr ""
 
 msgid "Key for Screen Change"
 msgstr "Sleutel for scherm verandern"
@@ -1090,8 +1110,8 @@ msgstr "LCD aangepaste breedte"
 msgid "LCD Display"
 msgstr "LCD Display"
 
-msgid "LCD4Linux"
-msgstr "LCD4Linux"
+msgid "LCD4linux Screen Switch"
+msgstr ""
 
 msgid "LCD4linux enabled"
 msgstr "LCD4linux ingeschakeld"
@@ -1099,19 +1119,12 @@ msgstr "LCD4linux ingeschakeld"
 msgid "Last Quarter"
 msgstr "Laatste kwartier"
 
-msgid "Line"
-msgstr "Regel"
-
-msgid "List of Storage Devices"
-msgstr "Lijst van opslagmedia"
-
 msgid "Load Active Config-File"
 msgstr "Laad actieve configuratiebestand"
 
 msgid "Load Defaults"
 msgstr "Laad standaard waardes"
 
-#, python-format
 msgid "Load File : %s"
 msgstr "Laad bestand: %s"
 
@@ -1250,6 +1263,12 @@ msgstr "Mail toon datum"
 msgid "Mail Show Empty Mailboxes"
 msgstr "Mail toon lege mailboxen"
 
+msgid "March"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
 msgid "Media"
 msgstr "Media"
 
@@ -1322,6 +1341,9 @@ msgstr "Module 5"
 msgid "Mon"
 msgstr "ma"
 
+msgid "Monday"
+msgstr ""
+
 msgid "Month"
 msgstr "Maand"
 
@@ -1388,6 +1410,9 @@ msgstr "Normaal"
 msgid "Normal (5s)"
 msgstr "Normaal (5s)"
 
+msgid "November"
+msgstr ""
+
 msgid "Now/Next"
 msgstr "Nu/Straks"
 
@@ -1399,6 +1424,9 @@ msgstr "OSD"
 
 msgid "OSD [display time]"
 msgstr "OSD [vertoon tijd]"
+
+msgid "October"
+msgstr ""
 
 msgid "Offline"
 msgstr "Offline"
@@ -1426,9 +1454,6 @@ msgstr ""
 
 msgid "PNG"
 msgstr "PNG"
-
-msgid "Parent Directory"
-msgstr "Bovengelegen map"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (of compatible LCD) 240x320"
@@ -1619,13 +1644,15 @@ msgstr "za"
 msgid "Satellite"
 msgstr "Satelliet"
 
+msgid "Saturday"
+msgstr ""
+
 msgid "Save"
 msgstr "Opslaan"
 
 msgid "Save Config"
 msgstr "Sla configuratie op"
 
-#, python-format
 msgid "Save Config to File... (%s)"
 msgstr "Sla configuratiebestand op ,,,(%s)"
 
@@ -1740,6 +1767,9 @@ msgstr ""
 msgid "Screens used for Changing"
 msgstr "Schermen gebruikt voor veranderen"
 
+msgid "September"
+msgstr ""
+
 msgid "Service search first"
 msgstr ""
 
@@ -1818,6 +1848,9 @@ msgstr "Stotter-TV"
 msgid "Sun"
 msgstr "zo "
 
+msgid "Sunday"
+msgstr ""
+
 msgid "Sunrise"
 msgstr "Zonsopkomst"
 
@@ -1854,6 +1887,9 @@ msgstr "Draden per LCD"
 msgid "Thur"
 msgstr "do"
 
+msgid "Thursday"
+msgstr ""
+
 msgid "Time"
 msgstr "Tijd"
 
@@ -1877,6 +1913,9 @@ msgstr "Titel"
 
 msgid "Tue"
 msgstr "di"
+
+msgid "Tuesday"
+msgstr ""
 
 msgid "Tuner Color"
 msgstr "Tuner kleur"
@@ -2010,6 +2049,9 @@ msgstr "WEB-IF verversing [s]"
 msgid "Wed"
 msgstr "wo"
 
+msgid "Wednesday"
+msgstr ""
+
 msgid "Week"
 msgstr "Week"
 
@@ -2079,7 +2121,6 @@ msgstr "Kopieer naar Aan"
 msgid "cornflowerblue"
 msgstr "korenbloem blauw"
 
-#, python-format
 msgid "currently set : %s"
 msgstr "momenteel ingesteld: %s"
 
@@ -2196,9 +2237,6 @@ msgstr "geen oproepen"
 
 msgid "no Dates"
 msgstr "Geen datums"
-
-msgid "no Frame"
-msgstr "geen rand"
 
 msgid "no Icon"
 msgstr "geen ikoon"
@@ -2467,3 +2505,47 @@ msgstr "ja, lang"
 msgid "yes, short"
 msgstr "ja, kort"
 
+msgid "- Current Day Color"
+msgstr "- Current Day Color"
+
+msgid "- LCD 1 Brightness [no SPF]"
+msgstr "- LCD 1 Brightness [no SPF]"
+
+msgid "- LCD 2 Brightness [no SPF]"
+msgstr "- LCD 2 Brightness [no SPF]"
+
+msgid "- LCD 3 Brightness [no SPF]"
+msgstr "- LCD 3 Brightness [no SPF]"
+
+msgid "- Timeout"
+msgstr "- Timeout"
+
+msgid "C + rmp"
+msgstr "C + rmp"
+
+msgid "Calendar Background Processing"
+msgstr "Calendar Background Processing"
+
+msgid "Current value: %s"
+msgstr "Current value: %s"
+
+msgid "Memory"
+msgstr "Memory"
+
+msgid "Show Recording"
+msgstr "Show Recording"
+
+#~ msgid "List of Storage Devices"
+#~ msgstr "Lijst van opslagmedia"
+
+#~ msgid "Parent Directory"
+#~ msgstr "Bovengelegen map"
+
+#~ msgid "LCD4Linux"
+#~ msgstr "LCD4Linux"
+
+#~ msgid "Line"
+#~ msgstr "Regel"
+
+#~ msgid "no Frame"
+#~ msgstr "geen rand"

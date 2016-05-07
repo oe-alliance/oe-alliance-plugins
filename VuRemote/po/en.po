@@ -4,49 +4,74 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 16:40+0100\n"
-"PO-Revision-Date: 2013-11-19 04:03+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2016-05-07 14:20+0200\n"
+"PO-Revision-Date: 2016-05-07 14:20+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7\n"
 
-msgid "Cancel"
-msgstr "Cancel"
-
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr "FILE NOT EXIST : /proc/stb/fp/remote_code"
-
-msgid "Keep"
-msgstr "Keep"
-
-msgid "Please change your remote mode"
-msgstr "Please change your remote mode"
-
-msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
-msgstr "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
-
+#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
 msgid "Remote Control Code"
 msgstr "Remote Control Code"
 
-msgid "Remote Control System Code"
-msgstr "Remote Control System Code"
+#: ../src/plugin.py:68
+msgid "Cancel"
+msgstr "Cancel"
 
-msgid "Restore"
-msgstr "Restore"
-
+#: ../src/plugin.py:69
 msgid "Save"
 msgstr "Save"
 
+#: ../src/plugin.py:80
+#, python-format
+msgid "Sorry, but %s is not supported."
+msgstr ""
+
+#: ../src/plugin.py:84
+msgid "Remote Control System Code"
+msgstr "Remote Control System Code"
+
+#: ../src/plugin.py:87
 msgid "Text support"
 msgstr "Text support"
 
+#: ../src/plugin.py:99
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr "FILE NOT EXIST : /proc/stb/fp/remote_code"
+
+#: ../src/plugin.py:101
+msgid "Please change your remote mode"
+msgstr "Please change your remote mode"
+
+#: ../src/plugin.py:101
+msgid ""
+"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
+"press '000"
+msgstr ""
+"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
+"press '000"
+
+#: ../src/plugin.py:101
 msgid "Then choose 'Keep' within seconds"
 msgstr "Then choose 'Keep' within seconds"
 
-msgid "This Plugin only support for UNO/ULTIMO"
-msgstr "This Plugin only support for UNO/ULTIMO/Solo2/DUO2"
+#: ../src/plugin.py:122
+msgid "Keep"
+msgstr "Keep"
 
+#: ../src/plugin.py:122
+msgid "Restore"
+msgstr "Restore"
+
+#: ../src/plugin.py:128
+#, python-format
+msgid " in %d seconds."
+msgstr ""
+
+#~ msgid "This Plugin only support for UNO/ULTIMO"
+#~ msgstr "This Plugin only support for UNO/ULTIMO/Solo2/DUO2"

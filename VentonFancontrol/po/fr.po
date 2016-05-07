@@ -2,50 +2,84 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: 2014-10-27 18:33+0100\n"
-"Last-Translator: OEA\n"
+"POT-Creation-Date: 2016-05-07 14:09+0200\n"
+"PO-Revision-Date: 2016-05-07 14:09+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-msgid "Close"
-msgstr "Fermer"
+#: ../src/plugin.py:6
+msgid "Off"
+msgstr ""
 
-msgid "Fan Control"
-msgstr "Contrôle Ventilateur"
+#: ../src/plugin.py:6
+msgid "On"
+msgstr ""
 
-msgid "Fan basic action"
-msgstr "Ventilateur action de base"
+#: ../src/plugin.py:6
+msgid "Auto"
+msgstr ""
 
-msgid "Fan off duration time"
-msgstr "Durée pendant laquelle le ventilateur est éteind"
+#: ../src/plugin.py:25
+msgid "Fan setup"
+msgstr ""
 
-msgid "Fan on duration time"
-msgstr "Durée pendant laquelle le ventilateur est opérationnel"
+#: ../src/plugin.py:30
+msgid "Cancel"
+msgstr ""
 
-msgid "Really close without saving settings?"
-msgstr "Vraiment fermer sans sauver les paramètres?"
-
+#: ../src/plugin.py:31
 msgid "Save"
 msgstr "Sauver"
 
-msgid "Use Fan timer"
-msgstr "Utiliser le timer du ventilateur"
+#: ../src/plugin.py:48
+msgid "Fan mode"
+msgstr ""
 
-msgid "no"
-msgstr "non"
+#: ../src/plugin.py:105
+msgid "FAN Control"
+msgstr ""
 
-msgid "off"
-msgstr "arrêt"
+#: ../src/plugin.py:113
+msgid "Fan Control"
+msgstr "Contrôle Ventilateur"
 
-msgid "on"
-msgstr "marche"
+#: ../src/plugin.py:113
+msgid "switch Fan On/Off"
+msgstr ""
 
-msgid "yes"
-msgstr "oui"
+#~ msgid "Close"
+#~ msgstr "Fermer"
+
+#~ msgid "Fan basic action"
+#~ msgstr "Ventilateur action de base"
+
+#~ msgid "Fan off duration time"
+#~ msgstr "Durée pendant laquelle le ventilateur est éteind"
+
+#~ msgid "Fan on duration time"
+#~ msgstr "Durée pendant laquelle le ventilateur est opérationnel"
+
+#~ msgid "Really close without saving settings?"
+#~ msgstr "Vraiment fermer sans sauver les paramètres?"
+
+#~ msgid "Use Fan timer"
+#~ msgstr "Utiliser le timer du ventilateur"
+
+#~ msgid "no"
+#~ msgstr "non"
+
+#~ msgid "off"
+#~ msgstr "arrêt"
+
+#~ msgid "on"
+#~ msgstr "marche"
+
+#~ msgid "yes"
+#~ msgstr "oui"

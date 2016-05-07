@@ -2,26 +2,77 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 16:40+0100\n"
-"PO-Revision-Date: 2015-07-29 21:09+0100\n"
-"Last-Translator: madie <madie1@gmx.de>\n"
+"POT-Creation-Date: 2016-05-07 13:49+0200\n"
+"PO-Revision-Date: 2016-05-07 13:49+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-msgid "Cancel"
-msgstr "Abbrechen"
-
+#: ../src/plugin.py:43
 msgid "Apply"
 msgstr "Anwenden"
 
-msgid "Are you sure !?"
-msgstr "Bist du sicher !?"
+#: ../src/plugin.py:44
+msgid "Cancel"
+msgstr "Abbrechen"
 
+#: ../src/plugin.py:49 ../src/plugin.py:150 ../src/plugin.py:158
 msgid "RCU Select"
 msgstr "RCU Auswahl"
+
+#: ../src/plugin.py:52
+msgid "WeTek Play (Classic) RCU"
+msgstr ""
+
+#: ../src/plugin.py:53
+msgid "WeTek Play Enigma2 RCU"
+msgstr ""
+
+#: ../src/plugin.py:54
+msgid "WeTek Play OpenElec RCU"
+msgstr ""
+
+#: ../src/plugin.py:55
+msgid "Alien2/1 RCU"
+msgstr ""
+
+#: ../src/plugin.py:56
+msgid "Alien1 old RCU"
+msgstr ""
+
+#: ../src/plugin.py:57
+msgid "GI LX3 RCU"
+msgstr ""
+
+#: ../src/plugin.py:58
+msgid "Gigablue 800 UE Plus RCU"
+msgstr ""
+
+#: ../src/plugin.py:59
+msgid "Mutant HD2400 RCU"
+msgstr ""
+
+#: ../src/plugin.py:60
+msgid "Octagon SF8 RCU"
+msgstr ""
+
+#: ../src/plugin.py:61
+msgid "Technomate Nano RCU"
+msgstr ""
+
+#: ../src/plugin.py:62
+msgid "xtrend ET10000 RCU"
+msgstr ""
+
+#: ../src/plugin.py:88
+msgid "Are you sure?"
+msgstr ""
+
+#~ msgid "Are you sure !?"
+#~ msgstr "Bist du sicher !?"

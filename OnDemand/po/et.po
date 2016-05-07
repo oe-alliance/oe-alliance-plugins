@@ -7,292 +7,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-02 01:03+0100\n"
-"PO-Revision-Date: 2013-08-13 19:02+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-05-07 13:47+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7\n"
 
-msgid "0 - 9"
-msgstr "0 - 9"
+#: ../src/CommonModules.py:339
+msgid "Wait please while gathering data..."
+msgstr "Oota andmete kogumist..."
 
-msgid "3 Player"
-msgstr "3 pleier"
+#: ../src/CommonModules.py:410
+msgid "Search term"
+msgstr "Otsisõna"
 
-msgid "4OD Player"
-msgstr "4OD pleier"
-
-msgid "A - C"
-msgstr ""
-
-msgid "A to Z"
-msgstr "A - Y"
-
-msgid "ABC News 24"
-msgstr ""
-
-msgid "ABC iView"
-msgstr ""
-
-msgid "ABC iView - A to Z"
-msgstr ""
-
-msgid "ABC1"
-msgstr ""
-
-msgid "ABC2"
-msgstr ""
-
-msgid "ABC3"
-msgstr ""
-
-msgid "ABC4Kids"
-msgstr ""
-
-msgid "About"
-msgstr "Programmist"
-
-msgid "Added:"
-msgstr "Lisatud:"
-
-msgid "Added: "
-msgstr "Lisatud: "
-
-msgid "All Shows"
-msgstr "Kõik saated"
-
-msgid "Arts & Culture - Music"
-msgstr "Kunst ja kultuur - Muusika"
-
-msgid "Arts & Culture - People"
-msgstr "Kunst ja kultuur - Inimesed"
-
-msgid "Arts & Culture - Performance"
-msgstr "Kunst ja kultuur - Performance"
-
-msgid "Arts & Culture - Reviews"
-msgstr "Kunst ja kultuur - Arvustused"
-
-msgid "BBC Alba"
-msgstr ""
-
-msgid "BBC Four"
-msgstr ""
-
-msgid "BBC HD"
-msgstr ""
-
-msgid "BBC News"
-msgstr ""
-
-msgid "BBC Northern Ireland"
-msgstr ""
-
-msgid "BBC One"
-msgstr ""
-
-msgid "BBC Parliamanent"
-msgstr ""
-
-msgid "BBC Scotland"
-msgstr ""
-
-msgid "BBC Three"
-msgstr ""
-
-msgid "BBC Two"
-msgstr ""
-
-msgid "BBC Wales"
-msgstr ""
-
-msgid "BBC iPlayer"
-msgstr ""
-
-msgid "Back"
-msgstr "Tagasi"
-
-msgid "CBBC"
-msgstr ""
-
+#: ../src/OUG.py:73 ../src/OUG.py:153 ../src/ui.py:81
 msgid "Cancel"
 msgstr "Tühista"
 
-msgid "Cbeebies"
-msgstr ""
-
-msgid "Childrens"
-msgstr "Lastesaated"
-
-msgid "Close"
-msgstr "Sulge"
-
-msgid "Comedy"
-msgstr "Komöödia"
-
-msgid "Comedy - Cult"
-msgstr "Komöödia - Klassika"
-
-msgid "Comedy - Satire"
-msgstr "Komöödia - Satiir"
-
-msgid "Comedy - Sitcom"
-msgstr "Komöödia - Situatsioonikomöödia"
-
-msgid "Comedy - Sketch"
-msgstr "Komöödia - Lühinaljad"
-
-msgid "D - F"
-msgstr ""
-
-msgid "Documentary - Biography"
-msgstr "Dokk - Elulugu"
-
-msgid "Documentary - History"
-msgstr "Dokk - Ajalugu"
-
-msgid "Documentary - Nature"
-msgstr "Dokk - Loodus"
-
-msgid "Documentary - Real Life"
-msgstr "Dokk - Tõsielu"
-
-msgid "Documentary - Science"
-msgstr "Dokk - Teadus"
-
-msgid "Drama"
-msgstr "Draama"
-
-msgid "Drama - Crime"
-msgstr "Draama - Krimi"
-
-msgid "Drama - Historical"
-msgstr "Draama - Ajalooline"
-
-msgid "Drama - Period"
-msgstr "Draama - Ajastu"
-
-msgid "Drama - Romance"
-msgstr "Draama - Romantika"
-
-msgid "Drama - Sci-fi"
-msgstr "Draama - Ulme"
-
-msgid "Duration: "
-msgstr "Kestus"
-
-msgid "Education"
-msgstr "Haridus"
-
-msgid "Entertainment"
-msgstr "Meelelahutus"
-
-msgid "Episodes by Date"
-msgstr "Episoodid ajalises järjestuses"
-
-msgid "Episodes: "
-msgstr "Episoodid:"
-
-msgid "Exit"
-msgstr "Välju"
-
-msgid "Factual"
-msgstr ""
-
-msgid "Featured Programs"
-msgstr "Soovitatavad saated"
-
-msgid "G - J"
-msgstr ""
-
-msgid "Going, Going..."
-msgstr ""
-
-msgid "HD"
-msgstr ""
-
-msgid "Health And Wellbeing"
-msgstr "Tervis ja heaolu"
-
-msgid "High"
-msgstr "Kõrge"
-
-msgid "ITV Player"
-msgstr "ITV pleier"
-
-msgid "Indigenous"
-msgstr "Põlisrahvad"
-
-msgid "K - M"
-msgstr ""
-
-msgid "Last Chance"
-msgstr "Viimane esitus"
-
-msgid "Last Updated:"
-msgstr "Uuendati:"
-
-msgid "Latest Episodes"
-msgstr "Uusimad episoodid"
-
-msgid "Lifestyle - Games"
-msgstr "Elustiil - Mängud"
-
-msgid "Lifestyle - Reality"
-msgstr "Elustiil - Tõsielu"
-
-msgid "Low"
-msgstr "Madal"
-
-msgid "Most Popular Episodes"
-msgstr "Populaarseimad episoodid"
-
-msgid "Most Popular TV"
-msgstr "Enim vaadatud"
-
-msgid "Most Talked About"
-msgstr "Enim räägitud"
-
-msgid "Movies"
-msgstr "Filmid"
-
-msgid "Music"
-msgstr "Muusika"
-
-msgid "N - P"
-msgstr ""
-
-msgid "News"
-msgstr "Uudised"
-
-msgid "News & Current Affairs"
-msgstr "Uudised ja aktuaalsed sündmused"
-
-msgid "No items matching your search criteria were found"
-msgstr "Otsingu tingimustele ei leitud vastet"
-
-msgid "No matching search items were found for "
-msgstr "Ei leitud vastet otsingule"
-
-msgid "Normal"
-msgstr "Tavaline"
-
+#: ../src/OUG.py:74 ../src/OUG.py:154 ../src/ui.py:82
 msgid "OK"
 msgstr ""
 
-msgid "OUG Player"
-msgstr "OUG pleier"
-
-msgid "OnDemand"
-msgstr ""
-
-msgid "OnDemand Configuration"
-msgstr "OnDemand seadistused"
-
+#: ../src/OUG.py:86
 msgid ""
 "Open Uitzending Gemist\n"
 "\n"
@@ -302,114 +44,654 @@ msgstr ""
 "\n"
 "Põhineb Xtrend koodil"
 
-msgid "Panel & Discussion"
-msgstr "Paneel ja arutelu"
-
-msgid "Preferred Stream Quality"
-msgstr "Eelistatud voo kvaliteet"
-
-msgid "Q - T"
-msgstr ""
-
-msgid "RTE Player"
-msgstr "RTE pleier"
-
-msgid "RTE Player - A to Z"
-msgstr "RTE pleier - A - Z"
-
-msgid "RTE Player - Categories"
-msgstr "RTE pleier - Kategooriad"
-
-msgid "RTE Player - Choose Date"
-msgstr "RTE pleier - Vali kuupäev"
-
-msgid "RTL Number of days back"
-msgstr "RTL - päevi tagasi"
-
-msgid "RTL XL A-Z"
-msgstr ""
-
-msgid "RTL XL Gemist"
-msgstr ""
-
-msgid "Recently Added"
-msgstr "Hiljuti lisatud"
-
-msgid "Religion"
-msgstr "Religioon"
-
-msgid "Search"
-msgstr "Otsing"
-
-msgid "Search term"
-msgstr "Otsisõna"
-
-msgid "Show Categories"
-msgstr "Näita kategooriaid"
-
-msgid "Show in extensions"
-msgstr "Näita lisamoodulite menüüs"
-
-msgid "Show in main menu"
-msgstr "Näita peamenüüs"
-
-msgid "Show in plugin browser"
-msgstr "Näita laienduste menüüs"
-
-msgid "Show thumbnails"
-msgstr "Näita pisipilte"
-
-msgid "Shows A to Z"
-msgstr "Saated A - Z"
-
-msgid "Signed"
-msgstr ""
-
-msgid "Soaps"
-msgstr "Seebikad"
-
-msgid "Sport"
-msgstr ""
-
-msgid "Straight Off The Telly"
-msgstr "Otse telekast"
-
-msgid "TV Highlights"
-msgstr "TV tipphetked"
-
-msgid "Time: "
-msgstr "Aeg:"
-
-msgid "Today"
-msgstr "Täna"
-
-msgid "Trailers"
-msgstr "Treilerid"
-
-msgid "U - Z"
-msgstr ""
-
-msgid "UG A-Z"
-msgstr ""
-
-msgid "UG Popular"
-msgstr "UG - Popid"
-
+#: ../src/OUG.py:89
 msgid "UG Recently added"
 msgstr "UG - Hiljuti lisatud"
 
+#: ../src/OUG.py:90
+msgid "UG Popular"
+msgstr "UG - Popid"
+
+#: ../src/OUG.py:91
+msgid "UG A-Z"
+msgstr ""
+
+#: ../src/OUG.py:92
 msgid "UG Search"
 msgstr "UG otsing"
 
-msgid "Very Low"
-msgstr "Väga madal"
+#: ../src/OUG.py:93
+msgid "RTL XL A-Z"
+msgstr ""
 
-msgid "Wait please while gathering data..."
-msgstr "Oota andmete kogumist..."
+#: ../src/OUG.py:94
+msgid "RTL XL Gemist"
+msgstr ""
 
+#: ../src/OUG.py:167
+msgid "Today"
+msgstr "Täna"
+
+#: ../src/OUG.py:177
+msgid "RTL Number of days back"
+msgstr "RTL - päevi tagasi"
+
+#: ../src/OUG.py:299 ../src/fourOD.py:306 ../src/iRadio.py:615
+#: ../src/iRadio.py:1023 ../src/iView.py:264 ../src/itvplayer.py:137
+#: ../src/rteplayer.py:278 ../src/threeplayer.py:184
+msgid "No items matching your search criteria were found"
+msgstr "Otsingu tingimustele ei leitud vastet"
+
+#: ../src/OUG.py:420 ../src/OUG.py:572 ../src/OUG.py:651
+#: ../src/itvplayer.py:244 ../src/itvplayer.py:301 ../src/rteplayer.py:375
+#: ../src/rteplayer.py:379 ../src/rteplayer.py:456 ../src/rteplayer.py:460
+#: ../src/rteplayer.py:523 ../src/rteplayer.py:598 ../src/threeplayer.py:247
+#: ../src/threeplayer.py:352
+msgid "Added: "
+msgstr "Lisatud: "
+
+#: ../src/OUG.py:524
+msgid "Time: "
+msgstr "Aeg:"
+
+#: ../src/OUG.py:702
 msgid "Watch uitzending gemist"
 msgstr "Vaata uitzending gemist"
 
+#: ../src/bbciplayer.py:87 ../src/fourOD.py:182 ../src/iRadio.py:163
+#: ../src/iRadio.py:306 ../src/iView.py:87 ../src/itvplayer.py:62
+#: ../src/rteplayer.py:86 ../src/threeplayer.py:84
+msgid "Search"
+msgstr "Otsing"
+
+#: ../src/bbciplayer.py:88
+msgid "TV Highlights"
+msgstr "TV tipphetked"
+
+#: ../src/bbciplayer.py:89
+msgid "Most Popular TV"
+msgstr "Enim vaadatud"
+
+#: ../src/bbciplayer.py:90
+msgid "Drama"
+msgstr "Draama"
+
+#: ../src/bbciplayer.py:91
+msgid "Entertainment"
+msgstr "Meelelahutus"
+
+#: ../src/bbciplayer.py:92
+msgid "Movies"
+msgstr "Filmid"
+
+#: ../src/bbciplayer.py:93
+msgid "Factual"
+msgstr ""
+
+#: ../src/bbciplayer.py:94
+msgid "Comedy"
+msgstr "Komöödia"
+
+#: ../src/bbciplayer.py:95
+msgid "Soaps"
+msgstr "Seebikad"
+
+#: ../src/bbciplayer.py:96
+msgid "Childrens"
+msgstr "Lastesaated"
+
+#: ../src/bbciplayer.py:97
+msgid "News"
+msgstr "Uudised"
+
+#: ../src/bbciplayer.py:98 ../src/iView.py:106
+msgid "Sport"
+msgstr ""
+
+#: ../src/bbciplayer.py:99
+msgid "Music"
+msgstr "Muusika"
+
+#: ../src/bbciplayer.py:100
+msgid "Health And Wellbeing"
+msgstr "Tervis ja heaolu"
+
+#: ../src/bbciplayer.py:101
+msgid "Religion"
+msgstr "Religioon"
+
+#: ../src/bbciplayer.py:102
+msgid "Signed"
+msgstr ""
+
+#: ../src/bbciplayer.py:103
+msgid "BBC Northern Ireland"
+msgstr ""
+
+#: ../src/bbciplayer.py:104
+msgid "BBC Wales"
+msgstr ""
+
+#: ../src/bbciplayer.py:105
+msgid "BBC Scotland"
+msgstr ""
+
+#: ../src/bbciplayer.py:106
+msgid "BBC One"
+msgstr ""
+
+#: ../src/bbciplayer.py:107
+msgid "BBC Two"
+msgstr ""
+
+#: ../src/bbciplayer.py:108
+msgid "BBC Three"
+msgstr ""
+
+#: ../src/bbciplayer.py:109
+msgid "BBC Four"
+msgstr ""
+
+#: ../src/bbciplayer.py:110
+msgid "CBBC"
+msgstr ""
+
+#: ../src/bbciplayer.py:111
+msgid "Cbeebies"
+msgstr ""
+
+#: ../src/bbciplayer.py:112
+msgid "BBC Parliamanent"
+msgstr ""
+
+#: ../src/bbciplayer.py:113
+msgid "BBC News"
+msgstr ""
+
+#: ../src/bbciplayer.py:114
+msgid "BBC Alba"
+msgstr ""
+
+#: ../src/bbciplayer.py:115
+msgid "BBC HD"
+msgstr ""
+
+#: ../src/bbciplayer.py:117 ../src/fourOD.py:232 ../src/iRadio.py:109
+#: ../src/iView.py:124 ../src/itvplayer.py:64 ../src/rteplayer.py:92
+#: ../src/threeplayer.py:89
+msgid "Back"
+msgstr "Tagasi"
+
+#: ../src/bbciplayer.py:235
+msgid "No matching search items were found for "
+msgstr "Ei leitud vastet otsingule"
+
+#: ../src/bbciplayer.py:295 ../src/bbciplayer.py:356 ../src/fourOD.py:608
+#: ../src/iView.py:499 ../src/iView.py:503 ../src/rteplayer.py:519
+msgid "Added:"
+msgstr "Lisatud:"
+
+#: ../src/fourOD.py:630
+msgid "Duration:"
+msgstr ""
+
+#: ../src/iRadio.py:98
+msgid "iRadio Player - Main Menu"
+msgstr ""
+
+#: ../src/iRadio.py:106
+msgid "Favorites"
+msgstr ""
+
+#: ../src/iRadio.py:107
+msgid "SHOUTcast Radio"
+msgstr ""
+
+#: ../src/iRadio.py:108
+msgid "Tunein Radio"
+msgstr ""
+
+#: ../src/iRadio.py:156
+msgid "iRadio Player - SHOUTcast Genres"
+msgstr ""
+
+#: ../src/iRadio.py:186 ../src/iRadio.py:260 ../src/iRadio.py:328
+#: ../src/iView.py:184 ../src/rteplayer.py:173
+msgid "Exit"
+msgstr "Välju"
+
+#: ../src/iRadio.py:225
+msgid "iRadio Player - SHOUTcast Sub Genres for "
+msgstr ""
+
+#: ../src/iRadio.py:299
+msgid "iRadio Player - Tunein Main Menu"
+msgstr ""
+
+#: ../src/iRadio.py:487 ../src/iRadio.py:909
+msgid "Add to Favorites"
+msgstr ""
+
+#: ../src/iRadio.py:524 ../src/iRadio.py:946
+msgid "Station saved to Favorites!"
+msgstr ""
+
+#: ../src/iRadio.py:526 ../src/iRadio.py:948
+msgid "Station save failed, please check the Debug logs!"
+msgstr ""
+
+#: ../src/iRadio.py:528 ../src/iRadio.py:950
+msgid "Station Already Saved in Favorites!"
+msgstr ""
+
+#: ../src/iRadio.py:531 ../src/iRadio.py:953
+msgid "Selection does not contain a stream!"
+msgstr ""
+
+#: ../src/iRadio.py:632 ../src/iRadio.py:830 ../src/iRadio.py:1048
+msgid "Sorry, unable to find playable stream!"
+msgstr ""
+
+#: ../src/iRadio.py:669 ../src/iRadio.py:671 ../src/iRadio.py:1097
+#: ../src/iRadio.py:1099
+msgid "Recently Played: "
+msgstr ""
+
+#: ../src/iRadio.py:669 ../src/iRadio.py:1097
+msgid ""
+"\n"
+"\n"
+"Genre: "
+msgstr ""
+
+#: ../src/iRadio.py:674 ../src/iRadio.py:1093
+msgid "Bitrate: "
+msgstr ""
+
+#: ../src/iRadio.py:676 ../src/iRadio.py:1091
+msgid "Bitrate: Unknown"
+msgstr ""
+
+#: ../src/iRadio.py:679 ../src/iRadio.py:1104
+msgid "Audio: "
+msgstr ""
+
+#: ../src/iRadio.py:681 ../src/iRadio.py:1102
+msgid "Audio: Unknown"
+msgstr ""
+
+#: ../src/iRadio.py:722
+msgid "Delete from Favorites"
+msgstr ""
+
+#: ../src/iRadio.py:748
+msgid "Station deleted from Favorites!"
+msgstr ""
+
+#: ../src/iRadio.py:750
+msgid "Station delete failed, please check the Debug logs!"
+msgstr ""
+
+#: ../src/iRadio.py:1012
+msgid "Sorry, No Stations Found!"
+msgstr ""
+
+#: ../src/iView.py:88
+msgid "Recently Added"
+msgstr "Hiljuti lisatud"
+
+#: ../src/iView.py:89
+msgid "Comedy - Cult"
+msgstr "Komöödia - Klassika"
+
+#: ../src/iView.py:90
+msgid "Comedy - Satire"
+msgstr "Komöödia - Satiir"
+
+#: ../src/iView.py:91
+msgid "Comedy - Sitcom"
+msgstr "Komöödia - Situatsioonikomöödia"
+
+#: ../src/iView.py:92
+msgid "Comedy - Sketch"
+msgstr "Komöödia - Lühinaljad"
+
+#: ../src/iView.py:93
+msgid "Drama - Crime"
+msgstr "Draama - Krimi"
+
+#: ../src/iView.py:94
+msgid "Drama - Historical"
+msgstr "Draama - Ajalooline"
+
+#: ../src/iView.py:95
+msgid "Drama - Period"
+msgstr "Draama - Ajastu"
+
+#: ../src/iView.py:96
+msgid "Drama - Romance"
+msgstr "Draama - Romantika"
+
+#: ../src/iView.py:97
+msgid "Drama - Sci-fi"
+msgstr "Draama - Ulme"
+
+#: ../src/iView.py:98
+msgid "Documentary - Biography"
+msgstr "Dokk - Elulugu"
+
+#: ../src/iView.py:99
+msgid "Documentary - History"
+msgstr "Dokk - Ajalugu"
+
+#: ../src/iView.py:100
+msgid "Documentary - Nature"
+msgstr "Dokk - Loodus"
+
+#: ../src/iView.py:101
+msgid "Documentary - Science"
+msgstr "Dokk - Teadus"
+
+#: ../src/iView.py:102
+msgid "Documentary - Real Life"
+msgstr "Dokk - Tõsielu"
+
+#: ../src/iView.py:103
+msgid "Lifestyle - Games"
+msgstr "Elustiil - Mängud"
+
+#: ../src/iView.py:104
+msgid "Lifestyle - Reality"
+msgstr "Elustiil - Tõsielu"
+
+#: ../src/iView.py:105
+msgid "News & Current Affairs"
+msgstr "Uudised ja aktuaalsed sündmused"
+
+#: ../src/iView.py:107
+msgid "Arts & Culture - Music"
+msgstr "Kunst ja kultuur - Muusika"
+
+#: ../src/iView.py:108
+msgid "Arts & Culture - People"
+msgstr "Kunst ja kultuur - Inimesed"
+
+#: ../src/iView.py:109
+msgid "Arts & Culture - Performance"
+msgstr "Kunst ja kultuur - Performance"
+
+#: ../src/iView.py:110
+msgid "Arts & Culture - Reviews"
+msgstr "Kunst ja kultuur - Arvustused"
+
+#: ../src/iView.py:111
 msgid "iView Exclusives"
 msgstr "iView eksklusiivne"
 
+#: ../src/iView.py:112
+msgid "Featured Programs"
+msgstr "Soovitatavad saated"
+
+#: ../src/iView.py:113
+msgid "Panel & Discussion"
+msgstr "Paneel ja arutelu"
+
+#: ../src/iView.py:114
+msgid "Last Chance"
+msgstr "Viimane esitus"
+
+#: ../src/iView.py:115
+msgid "ABC4Kids"
+msgstr ""
+
+#: ../src/iView.py:116
+msgid "Education"
+msgstr "Haridus"
+
+#: ../src/iView.py:117
+msgid "Indigenous"
+msgstr "Põlisrahvad"
+
+#: ../src/iView.py:118
+msgid "Trailers"
+msgstr "Treilerid"
+
+#: ../src/iView.py:119
+msgid "ABC1"
+msgstr ""
+
+#: ../src/iView.py:120
+msgid "ABC2"
+msgstr ""
+
+#: ../src/iView.py:121
+msgid "ABC3"
+msgstr ""
+
+#: ../src/iView.py:122
+msgid "ABC News 24"
+msgstr ""
+
+#: ../src/iView.py:123
+msgid "A to Z"
+msgstr "A - Y"
+
+#: ../src/iView.py:169
+msgid "ABC iView - A to Z"
+msgstr ""
+
+#: ../src/iView.py:175 ../src/itvplayer.py:63 ../src/threeplayer.py:88
+msgid "All Shows"
+msgstr "Kõik saated"
+
+#: ../src/iView.py:176
+msgid "A - C"
+msgstr ""
+
+#: ../src/iView.py:177
+msgid "D - F"
+msgstr ""
+
+#: ../src/iView.py:178
+msgid "G - J"
+msgstr ""
+
+#: ../src/iView.py:179
+msgid "K - M"
+msgstr ""
+
+#: ../src/iView.py:180
+msgid "N - P"
+msgstr ""
+
+#: ../src/iView.py:181
+msgid "Q - T"
+msgstr ""
+
+#: ../src/iView.py:182
+msgid "U - Z"
+msgstr ""
+
+#: ../src/iView.py:183
+msgid "0 - 9"
+msgstr "0 - 9"
+
+#: ../src/iView.py:492 ../src/rteplayer.py:386 ../src/rteplayer.py:479
+#: ../src/threeplayer.py:253 ../src/threeplayer.py:255
+#: ../src/threeplayer.py:354
+msgid "Duration: "
+msgstr "Kestus"
+
+#: ../src/iView.py:567 ../src/iView.py:631
+msgid "Episodes: "
+msgstr "Episoodid:"
+
+#: ../src/itvplayer.py:198
+msgid "Last Updated:"
+msgstr "Uuendati:"
+
+#: ../src/plugin.py:40
+msgid "Very Low"
+msgstr "Väga madal"
+
+#: ../src/plugin.py:40
+msgid "Low"
+msgstr "Madal"
+
+#: ../src/plugin.py:40
+msgid "Normal"
+msgstr "Tavaline"
+
+#: ../src/plugin.py:40
+msgid "High"
+msgstr "Kõrge"
+
+#: ../src/plugin.py:40
+msgid "HD"
+msgstr ""
+
+#: ../src/plugin.py:54 ../src/plugin.py:63 ../src/plugin.py:65 ../src/ui.py:121
+#: ../src/ui.py:196
+msgid "OnDemand"
+msgstr ""
+
+#: ../src/rteplayer.py:87
+msgid "Latest Episodes"
+msgstr "Uusimad episoodid"
+
+#: ../src/rteplayer.py:88
+msgid "Most Popular Episodes"
+msgstr "Populaarseimad episoodid"
+
+#: ../src/rteplayer.py:89
+msgid "Episodes by Date"
+msgstr "Episoodid ajalises järjestuses"
+
+#: ../src/rteplayer.py:90
+msgid "Show Categories"
+msgstr "Näita kategooriaid"
+
+#: ../src/rteplayer.py:91
+msgid "Shows A to Z"
+msgstr "Saated A - Z"
+
+#: ../src/rteplayer.py:143
+msgid "RTE Player - Choose Date"
+msgstr "RTE pleier - Vali kuupäev"
+
+#: ../src/rteplayer.py:145
+msgid "RTE Player - Categories"
+msgstr "RTE pleier - Kategooriad"
+
+#: ../src/rteplayer.py:147
+msgid "RTE Player - A to Z"
+msgstr "RTE pleier - A - Z"
+
+#: ../src/threeplayer.py:85
+msgid "Most Talked About"
+msgstr "Enim räägitud"
+
+#: ../src/threeplayer.py:86
+msgid "Straight Off The Telly"
+msgstr "Otse telekast"
+
+#: ../src/threeplayer.py:87
+msgid "Going, Going..."
+msgstr ""
+
+#: ../src/ui.py:48
+msgid "OnDemand Configuration"
+msgstr "OnDemand seadistused"
+
+#: ../src/ui.py:53
+msgid "Show in main menu"
+msgstr "Näita peamenüüs"
+
+#: ../src/ui.py:54
+msgid "Show in plugin browser"
+msgstr "Näita laienduste menüüs"
+
+#: ../src/ui.py:55
+msgid "Show in extensions"
+msgstr "Näita lisamoodulite menüüs"
+
+#: ../src/ui.py:56
+msgid "Show Thumbnails"
+msgstr ""
+
+#: ../src/ui.py:58
+msgid "Preferred Stream Quality"
+msgstr "Eelistatud voo kvaliteet"
+
+#: ../src/ui.py:61
+msgid "ITV Player"
+msgstr "ITV pleier"
+
+#: ../src/ui.py:63
+msgid "3 Player"
+msgstr "3 pleier"
+
+#: ../src/ui.py:64
+msgid "ABC iView"
+msgstr ""
+
+#: ../src/ui.py:65
+msgid "RTE Player"
+msgstr "RTE pleier"
+
+#: ../src/ui.py:67
+msgid "iRadio Player"
+msgstr ""
+
+#: ../src/ui.py:68
+msgid "iRadio: Display WMA Streams"
+msgstr ""
+
+#: ../src/ui.py:69
+msgid "iRadio: Display Favorite Thumbnails"
+msgstr ""
+
+#: ../src/ui.py:70
+msgid "iRadio: Display Favorite Default Thumbnails"
+msgstr ""
+
+#: ../src/ui.py:71
+msgid "iRadio: Display SHOUTcast Thumbnails"
+msgstr ""
+
+#: ../src/ui.py:72
+msgid "iRadio: Display SHOUTcast Default Thumbnails"
+msgstr ""
+
+#: ../src/ui.py:73
+msgid "iRadio: Display Tunein Thumbnails"
+msgstr ""
+
+#: ../src/ui.py:74
+msgid "iRadio: Display Tunein Default Thumbnails"
+msgstr ""
+
+#: ../src/ui.py:76
+msgid "Primary DNS: To watch UK Streams outside the UK"
+msgstr ""
+
+#: ../src/ui.py:77
+msgid "Secondary DNS: A backup DNS if the primary is down"
+msgstr ""
+
+#: ../src/ui.py:196
+msgid "About"
+msgstr "Programmist"
+
+#: ../src/ui.py:208
+msgid "Close"
+msgstr "Sulge"
+
+#~ msgid "4OD Player"
+#~ msgstr "4OD pleier"
+
+#~ msgid "OUG Player"
+#~ msgstr "OUG pleier"
+
+#~ msgid "Show thumbnails"
+#~ msgstr "Näita pisipilte"

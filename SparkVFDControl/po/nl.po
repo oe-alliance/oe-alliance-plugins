@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 17:10+0200\n"
-"PO-Revision-Date: 2016-05-06 17:13+0200\n"
+"POT-Creation-Date: 2016-05-07 14:02+0200\n"
+"PO-Revision-Date: 2016-05-07 14:02+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
@@ -18,92 +18,84 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:28
-msgid "Channelname in Standby off"
-msgstr "Kanaalnaam in Standby uit"
-
-#: ../src/plugin.py:28
-msgid "Channelname in Standby Clock"
-msgstr "Kanaalnaam in Standby Klok"
-
-#: ../src/plugin.py:28
-msgid "Channelnumber in Standby off"
-msgstr "Kanaalnummer in Standby uit"
-
-#: ../src/plugin.py:28
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanaalnummer in Standby Klok"
-
-#: ../src/plugin.py:28
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanaalnummer/Klok in Standby Klok"
-
-#: ../src/plugin.py:28
-msgid "Clock always"
-msgstr "Klok altijd"
-
-#: ../src/plugin.py:28
-msgid "Always off"
-msgstr "Altijd uit"
-
-#: ../src/plugin.py:30 ../src/plugin.py:31
-msgid "Off"
-msgstr "Uit"
-
-#: ../src/plugin.py:30 ../src/plugin.py:31
-msgid "Standby only"
-msgstr "alleen Standby"
-
-#: ../src/plugin.py:30
-msgid "Record only"
-msgstr "alleen Opname"
-
-#: ../src/plugin.py:230
+#: ../src/plugin.py:118
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../src/plugin.py:231
+#: ../src/plugin.py:131
+msgid "Enable led"
+msgstr "LED ingeschakeld"
+
+#: ../src/plugin.py:134
+msgid "Led state RUN"
+msgstr "LED status RUN"
+
+#: ../src/plugin.py:136
+msgid "Led state Record"
+msgstr "LED status Opname"
+
+#: ../src/plugin.py:135
+msgid "Led state Standby"
+msgstr "LED status Stand-by"
+
+#: ../src/plugin.py:119
 msgid "Save"
 msgstr "Opslaan"
 
-#: ../src/plugin.py:232
-msgid "Update Date/Time"
-msgstr "Update Datum/Tjd"
+#: ../src/plugin.py:140
+msgid "Show clock"
+msgstr "Toon klok"
 
-#: ../src/plugin.py:245 ../src/plugin.py:261
-msgid "Show on VFD"
-msgstr "Toon op VFD"
-
-#: ../src/plugin.py:247
+#: ../src/plugin.py:142
 msgid "Time mode"
 msgstr "Tijd modus"
 
-#: ../src/plugin.py:248
-msgid "Show red LED on VFD"
-msgstr "Toon rode LED op VFD"
+#: ../src/plugin.py:120
+msgid "Update Date/Time"
+msgstr "Update Datum/Tjd"
 
-#: ../src/plugin.py:249
-msgid "Show green LED on VFD"
-msgstr "Toon groene LED op VFD"
+#: ../src/plugin.py:218
+msgid "VFD_Giga"
+msgstr "VFD_Giga"
 
-#: ../src/plugin.py:368
-msgid "LED Display Setup"
-msgstr "LED Scherm Instellen"
+#~ msgid "Channelname in Standby off"
+#~ msgstr "Kanaalnaam in Standby uit"
 
-#~ msgid "Enable led"
-#~ msgstr "LED ingeschakeld"
+#~ msgid "Channelname in Standby Clock"
+#~ msgstr "Kanaalnaam in Standby Klok"
 
-#~ msgid "Led state RUN"
-#~ msgstr "LED status RUN"
+#~ msgid "Channelnumber in Standby off"
+#~ msgstr "Kanaalnummer in Standby uit"
 
-#~ msgid "Led state Record"
-#~ msgstr "LED status Opname"
+#~ msgid "Channelnumber in Standby Clock"
+#~ msgstr "Kanaalnummer in Standby Klok"
 
-#~ msgid "Led state Standby"
-#~ msgstr "LED status Stand-by"
+#~ msgid "Channelnumber/Clock in Standby Clock"
+#~ msgstr "Kanaalnummer/Klok in Standby Klok"
 
-#~ msgid "Show clock"
-#~ msgstr "Toon klok"
+#~ msgid "Clock always"
+#~ msgstr "Klok altijd"
 
-#~ msgid "VFD_Giga"
-#~ msgstr "VFD_Giga"
+#~ msgid "Always off"
+#~ msgstr "Altijd uit"
+
+#~ msgid "Off"
+#~ msgstr "Uit"
+
+#~ msgid "Standby only"
+#~ msgstr "alleen Standby"
+
+#~ msgid "Record only"
+#~ msgstr "alleen Opname"
+
+#~ msgid "Show on VFD"
+#~ msgstr "Toon op VFD"
+
+#~ msgid "Show red LED on VFD"
+#~ msgstr "Toon rode LED op VFD"
+
+#~ msgid "Show green LED on VFD"
+#~ msgstr "Toon groene LED op VFD"
+
+#~ msgid "LED Display Setup"
+#~ msgstr "LED Scherm Instellen"

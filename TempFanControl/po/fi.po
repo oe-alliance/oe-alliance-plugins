@@ -4,50 +4,57 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 12:09+0100\n"
-"PO-Revision-Date: 2013-11-19 03:46+0100\n"
-"Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
+"POT-Creation-Date: 2016-05-07 14:05+0200\n"
+"PO-Revision-Date: 2016-05-07 14:05+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: AndyBlac/TimoJ\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: Finnish\n"
-"X-Poedit-Country: FINLAND\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#
-msgid "Cancel"
-msgstr "Peruuta"
-
-#, python-format
-msgid "Fan %d PWM"
-msgstr "Tuuletin %d PWM"
-
-#, python-format
-msgid "Fan %d voltage"
-msgstr "Tuuletin %d jännite"
-
+#: ../src/plugin.py:99 ../src/plugin.py:191
 msgid "Fan Control"
 msgstr "Tuulettimen säätö"
 
 #
+#: ../src/plugin.py:106
+msgid "Cancel"
+msgstr "Peruuta"
+
+#
+#: ../src/plugin.py:107
 msgid "OK"
 msgstr "OK"
 
+#: ../src/plugin.py:136
 #, python-format
-msgid "Standby fan %d PWM"
-msgstr "Valmiustila tuuletin %d PWM"
+msgid "Fan %d voltage"
+msgstr "Tuuletin %d jännite"
 
+#: ../src/plugin.py:137
+#, python-format
+msgid "Fan %d PWM"
+msgstr "Tuuletin %d PWM"
+
+#: ../src/plugin.py:139
 #, python-format
 msgid "Standby fan %d voltage"
 msgstr "Valmiustila tuuletin %d jännite"
 
-msgid "Temperature and Fan control"
+#: ../src/plugin.py:140
+#, python-format
+msgid "Standby fan %d PWM"
+msgstr "Valmiustila tuuletin %d PWM"
+
+#: ../src/plugin.py:186
+msgid "Temperature and fan control"
 msgstr "Lämpötila ja tuulettimen säätö"
 
-msgid "Temperature and fan control"
+#: ../src/plugin.py:191
+msgid "Temperature and Fan control"
 msgstr "Lämpötila ja tuulettimen säätö"
 
 #~ msgid "Standby Fan %d PWM"

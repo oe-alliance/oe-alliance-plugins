@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 16:00+0200\n"
+"POT-Creation-Date: 2016-05-07 12:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,119 +35,119 @@ msgstr ""
 msgid "Press green to start service searching!"
 msgstr ""
 
-#: ../src/plugin.py:281
+#: ../src/plugin.py:283
 #, python-format
 msgid "%dMhz scanned"
 msgstr ""
 
-#: ../src/plugin.py:283
+#: ../src/plugin.py:285
 #, python-format
 msgid "%d transponders found at %d:%02dmin"
 msgstr ""
 
-#: ../src/plugin.py:305
+#: ../src/plugin.py:307
 #, python-format
 msgid "%d transponder(s) found"
 msgstr ""
 
-#: ../src/plugin.py:310
+#: ../src/plugin.py:312
 #, python-format
 msgid "%d:%02d/%d:%02dmin"
 msgstr ""
 
-#: ../src/plugin.py:436
+#: ../src/plugin.py:438
 msgid "Try to find used satellite transponders..."
 msgstr ""
 
-#: ../src/plugin.py:438
+#: ../src/plugin.py:440
 msgid "Nothing to scan! Press Exit!"
 msgstr ""
 
-#: ../src/plugin.py:443
+#: ../src/plugin.py:445
 #, python-format
 msgid "Blindscan is not supported by this tuner (%s)"
 msgstr ""
 
-#: ../src/plugin.py:488
+#: ../src/plugin.py:489
 msgid "Press OK to start the scan"
 msgstr ""
 
-#: ../src/plugin.py:490 ../src/plugin.py:758 ../src/plugin.py:760
+#: ../src/plugin.py:491 ../src/plugin.py:759 ../src/plugin.py:761
 msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
 msgstr ""
 
-#: ../src/plugin.py:512
+#: ../src/plugin.py:513
 msgid "Tuner"
 msgstr ""
 
-#: ../src/plugin.py:534
+#: ../src/plugin.py:535
 msgid "Satellite"
 msgstr ""
 
-#: ../src/plugin.py:536
+#: ../src/plugin.py:537
 msgid "Frequency start"
 msgstr ""
 
-#: ../src/plugin.py:537
+#: ../src/plugin.py:538
 msgid "Frequency stop"
 msgstr ""
 
-#: ../src/plugin.py:539
+#: ../src/plugin.py:540
 msgid "Accuracy (higher is better)"
 msgstr ""
 
-#: ../src/plugin.py:540
+#: ../src/plugin.py:541
 msgid "Horizontal"
 msgstr ""
 
-#: ../src/plugin.py:541
+#: ../src/plugin.py:542
 msgid "Vertical"
 msgstr ""
 
-#: ../src/plugin.py:543
+#: ../src/plugin.py:544
 msgid "Network scan"
 msgstr ""
 
-#: ../src/plugin.py:544
+#: ../src/plugin.py:545
 msgid "Clear before scan"
 msgstr ""
 
-#: ../src/plugin.py:545
+#: ../src/plugin.py:546
 msgid "Only free scan"
 msgstr ""
 
-#: ../src/plugin.py:602
+#: ../src/plugin.py:603
 msgid "no"
 msgstr ""
 
-#: ../src/plugin.py:602
+#: ../src/plugin.py:603
 msgid "yes"
 msgstr ""
 
-#: ../src/plugin.py:602
+#: ../src/plugin.py:603
 msgid "yes (keep feeds)"
 msgstr ""
 
-#: ../src/plugin.py:625
+#: ../src/plugin.py:626
 msgid "DVB-S + DVB-S2"
 msgstr ""
 
-#: ../src/plugin.py:626
+#: ../src/plugin.py:627
 msgid "DVB-S only"
 msgstr ""
 
-#: ../src/plugin.py:698
+#: ../src/plugin.py:699
 msgid ""
 "No tuner is enabled!\n"
 "Please setup your tuner settings before you start a service scan."
 msgstr ""
 
-#: ../src/plugin.py:773 ../src/plugin.py:779
+#: ../src/plugin.py:774 ../src/plugin.py:780
 msgid "Blind scan"
 msgstr ""
 
-#: ../src/plugin.py:779
+#: ../src/plugin.py:780
 msgid "Scan satellites for new transponders"
 msgstr ""

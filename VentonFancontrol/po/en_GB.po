@@ -7,50 +7,83 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: 2012-05-18 01:45+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2016-05-07 14:09+0200\n"
+"PO-Revision-Date: 2016-05-07 14:09+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: ViX\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: English\n"
-"X-Poedit-Country: UNITED KINGDOM\n"
+"X-Generator: Poedit 1.8.7\n"
 
-msgid "Close"
-msgstr "Close"
+#: ../src/plugin.py:6
+msgid "Off"
+msgstr ""
 
-msgid "Fan Control"
-msgstr "Fan Control"
+#: ../src/plugin.py:6
+msgid "On"
+msgstr ""
 
-msgid "Fan basic action"
-msgstr "Fan basic action"
+#: ../src/plugin.py:6
+msgid "Auto"
+msgstr ""
 
-msgid "Fan off duration time"
-msgstr "Fan off duration time"
+#: ../src/plugin.py:25
+msgid "Fan setup"
+msgstr ""
 
-msgid "Fan on duration time"
-msgstr "Fan on duration time"
+#: ../src/plugin.py:30
+msgid "Cancel"
+msgstr ""
 
-msgid "Really close without saving settings?"
-msgstr "Really close without saving settings?"
-
+#: ../src/plugin.py:31
 msgid "Save"
 msgstr "Save"
 
-msgid "Use Fan timer"
-msgstr "Use Fan timer"
+#: ../src/plugin.py:48
+msgid "Fan mode"
+msgstr ""
 
-msgid "no"
-msgstr "no"
+#: ../src/plugin.py:105
+msgid "FAN Control"
+msgstr ""
 
-msgid "off"
-msgstr "off"
+#: ../src/plugin.py:113
+msgid "Fan Control"
+msgstr "Fan Control"
 
-msgid "on"
-msgstr "on"
+#: ../src/plugin.py:113
+msgid "switch Fan On/Off"
+msgstr ""
 
-msgid "yes"
-msgstr "yes"
+#~ msgid "Close"
+#~ msgstr "Close"
+
+#~ msgid "Fan basic action"
+#~ msgstr "Fan basic action"
+
+#~ msgid "Fan off duration time"
+#~ msgstr "Fan off duration time"
+
+#~ msgid "Fan on duration time"
+#~ msgstr "Fan on duration time"
+
+#~ msgid "Really close without saving settings?"
+#~ msgstr "Really close without saving settings?"
+
+#~ msgid "Use Fan timer"
+#~ msgstr "Use Fan timer"
+
+#~ msgid "no"
+#~ msgstr "no"
+
+#~ msgid "off"
+#~ msgstr "off"
+
+#~ msgid "on"
+#~ msgstr "on"
+
+#~ msgid "yes"
+#~ msgstr "yes"

@@ -7,80 +7,95 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-05-18 01:41+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2016-05-07 14:15+0200\n"
+"PO-Revision-Date: 2016-05-07 14:15+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Arabic <moustafagamal@hotmail.com>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: Arabic\n"
-"X-Poedit-Country: EGYPT\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-msgid "Blink Record Led"
+#: ../src/plugin.py:25
+msgid "Channelnumber in Standby off"
 msgstr ""
 
-msgid "Blue"
+#: ../src/plugin.py:25
+msgid "Channelnumber in Standby Clock"
 msgstr ""
 
-#
-msgid "Cancel"
-msgstr "בטל"
-
-msgid "Enable led"
+#: ../src/plugin.py:25
+msgid "Channelnumber/Clock in Standby Clock"
 msgstr ""
 
-msgid "Led state Deep Standby"
+#: ../src/plugin.py:25
+msgid "Clock always"
 msgstr ""
 
-msgid "Led state RUN"
+#: ../src/plugin.py:25
+msgid "Always off"
 msgstr ""
 
-msgid "Led state Record"
+#: ../src/plugin.py:27
+msgid "yes"
 msgstr ""
 
-msgid "Led state Standby"
+#: ../src/plugin.py:27
+msgid "no"
 msgstr ""
 
-msgid "No"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
+#: ../src/plugin.py:28
 msgid "Off"
 msgstr ""
 
-msgid "Purple"
+#: ../src/plugin.py:28
+msgid "On/Off"
 msgstr ""
 
-msgid "Red"
+#: ../src/plugin.py:28
+msgid "Brightness level"
 msgstr ""
 
+#: ../src/plugin.py:225 ../src/plugin.py:324 ../src/plugin.py:331
+msgid "LED Display Setup"
+msgstr ""
+
+#
+#: ../src/plugin.py:236
+msgid "Cancel"
+msgstr "בטל"
+
+#: ../src/plugin.py:237
 msgid "Save"
 msgstr "שמור"
 
-msgid "Show clock"
-msgstr ""
-
-msgid "Show clock in Deep Standby"
-msgstr ""
-
-msgid "Time mode"
-msgstr ""
-
+#: ../src/plugin.py:238
 msgid "Update Date/Time"
 msgstr ""
 
-msgid "VFD_Giga"
+#: ../src/plugin.py:251 ../src/plugin.py:271
+msgid "Show on LED"
 msgstr ""
 
-msgid "Yes"
+#: ../src/plugin.py:253
+msgid "Time mode"
 msgstr ""
 
-msgid "in standby: "
+#: ../src/plugin.py:254 ../src/plugin.py:273
+msgid "Show REC-Symbol in Display"
+msgstr ""
+
+#: ../src/plugin.py:256 ../src/plugin.py:275
+msgid "Show blinking Clock on Display during recording"
+msgstr ""
+
+#: ../src/plugin.py:258
+msgid "Brightness Level 1"
+msgstr ""
+
+#: ../src/plugin.py:259
+msgid "Brightness Level 2"
 msgstr ""

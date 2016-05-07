@@ -7,133 +7,158 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plugins 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-13 12:34+0100\n"
-"PO-Revision-Date: 2012-04-13 12:34+0100\n"
-"Last-Translator: Automatically generated\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-05-07 13:49+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:121
-msgid "Adress:"
-msgstr "Adress:"
+#: ../src/plugin.py:53
+msgid "FTP Server Editor"
+msgstr ""
 
-#: ../src/plugin.py:194
-msgid "Close"
-msgstr "Close"
-
-#: ../src/plugin.py:236
-msgid "Connection to remote IP ok"
-msgstr "Connection to remote IP ok"
-
-#: ../src/plugin.py:567
-msgid "Convert remote channel list for streaming"
-msgstr "Convert remote channel list for streaming"
-
-#: ../src/plugin.py:242
-msgid "Could not connect to remote IP"
-msgstr "Could not connect to remote IP"
-
-#: ../src/plugin.py:310
-msgid "Download"
-msgstr "Download"
-
-#: ../src/plugin.py:254 ../src/plugin.py:294
-msgid "Download from remote failed"
-msgstr "Download from remote failed"
-
-#: ../src/plugin.py:245
-msgid "Downloading remote services"
-msgstr "Downloading remote services"
-
-#: ../src/plugin.py:141
-msgid "Enter address"
-msgstr "Enter address"
-
-#: ../src/plugin.py:147
-msgid "Enter password"
-msgstr "Enter password"
-
-#: ../src/plugin.py:144
-msgid "Enter username"
-msgstr "Enter username"
-
-#: ../src/plugin.py:50
+#: ../src/plugin.py:54
 msgid "Exit"
 msgstr "Exit"
 
-#: ../src/plugin.py:299
-#, python-format
-msgid "FTP reading file %d of %d"
-msgstr "FTP reading file %d of %d"
-
-#: ../src/plugin.py:111 ../src/plugin.py:124
-msgid "FTPport:"
-msgstr "FTPport:"
-
-#: ../src/plugin.py:108
-msgid "IP:"
-msgstr "IP:"
-
-#: ../src/plugin.py:311
-msgid "Invert"
-msgstr "Invert"
-
-#: ../src/plugin.py:94
-msgid "Keyboard"
-msgstr "Keyboard"
-
-#: ../src/plugin.py:303
-msgid "Make your selection"
-msgstr "Make your selection"
-
-#: ../src/plugin.py:449
-msgid "No bouquets selected"
-msgstr "No bouquets selected"
-
-#: ../src/plugin.py:51
+#: ../src/plugin.py:55
 msgid "OK"
 msgstr "OK"
 
-#: ../src/plugin.py:112 ../src/plugin.py:125
-msgid "Passive:"
-msgstr "Passive:"
+#: ../src/plugin.py:98
+msgid "Keyboard"
+msgstr "Keyboard"
 
-#: ../src/plugin.py:110 ../src/plugin.py:123
-msgid "Password:"
-msgstr "Password:"
-
-#: ../src/plugin.py:562 ../src/plugin.py:567
-msgid "Remote channel stream converter"
-msgstr "Remote channel stream converter"
-
-#: ../src/plugin.py:198
-msgid "Select a remote server IP first"
-msgstr "Select a remote server IP first"
-
-#: ../src/plugin.py:196
-msgid "Set server IP"
-msgstr "Set server IP"
-
-#: ../src/plugin.py:113 ../src/plugin.py:126
-msgid "Telnetport:"
-msgstr "Telnetport:"
-
-#: ../src/plugin.py:227
-msgid "Testing remote connection"
-msgstr "Testing remote connection"
-
-#: ../src/plugin.py:102
-msgid "Use IP"
-msgstr "Use IP"
-
-#: ../src/plugin.py:100
+#: ../src/plugin.py:104
 msgid "Use address"
 msgstr "Use address"
 
-#: ../src/plugin.py:109 ../src/plugin.py:122
+#: ../src/plugin.py:106
+msgid "Use IP"
+msgstr "Use IP"
+
+#: ../src/plugin.py:112
+msgid "IP:"
+msgstr "IP:"
+
+#: ../src/plugin.py:113 ../src/plugin.py:126
 msgid "Username:"
 msgstr "Username:"
+
+#: ../src/plugin.py:114 ../src/plugin.py:127
+msgid "Password:"
+msgstr "Password:"
+
+#: ../src/plugin.py:115 ../src/plugin.py:128
+msgid "FTPport:"
+msgstr "FTPport:"
+
+#: ../src/plugin.py:116 ../src/plugin.py:129
+msgid "Passive:"
+msgstr "Passive:"
+
+#: ../src/plugin.py:117 ../src/plugin.py:130
+msgid "Telnetport:"
+msgstr "Telnetport:"
+
+#: ../src/plugin.py:125
+msgid "Adress:"
+msgstr "Adress:"
+
+#: ../src/plugin.py:145
+msgid "Enter address"
+msgstr "Enter address"
+
+#: ../src/plugin.py:148
+msgid "Enter username"
+msgstr "Enter username"
+
+#: ../src/plugin.py:151
+msgid "Enter password"
+msgstr "Enter password"
+
+#: ../src/plugin.py:191
+msgid "Select bouquets to convert"
+msgstr ""
+
+#: ../src/plugin.py:199
+msgid "Close"
+msgstr "Close"
+
+#: ../src/plugin.py:201
+msgid "Set server IP"
+msgstr "Set server IP"
+
+#: ../src/plugin.py:203
+msgid "Select a remote server IP first"
+msgstr "Select a remote server IP first"
+
+#: ../src/plugin.py:235
+msgid "Testing remote connection"
+msgstr "Testing remote connection"
+
+#: ../src/plugin.py:244
+msgid "Connection to remote IP ok"
+msgstr "Connection to remote IP ok"
+
+#: ../src/plugin.py:250
+msgid "Could not connect to remote IP"
+msgstr "Could not connect to remote IP"
+
+#: ../src/plugin.py:253
+msgid "Downloading remote services"
+msgstr "Downloading remote services"
+
+#: ../src/plugin.py:262 ../src/plugin.py:307
+msgid "Download from remote failed"
+msgstr "Download from remote failed"
+
+#: ../src/plugin.py:312
+#, python-format
+msgid "FTP reading bouquets %d of %d"
+msgstr ""
+
+#: ../src/plugin.py:322 ../src/plugin.py:628
+msgid "Make your selection"
+msgstr "Make your selection"
+
+#: ../src/plugin.py:336
+msgid "Download"
+msgstr "Download"
+
+#: ../src/plugin.py:337
+msgid "Invert"
+msgstr "Invert"
+
+#: ../src/plugin.py:369
+msgid "remote of"
+msgstr ""
+
+#: ../src/plugin.py:472
+msgid "No bouquets selected"
+msgstr "No bouquets selected"
+
+#: ../src/plugin.py:604
+msgid "Checking for alternatives"
+msgstr ""
+
+#: ../src/plugin.py:625
+#, python-format
+msgid "FTP reading alternatives %d of %d"
+msgstr ""
+
+#: ../src/plugin.py:657 ../src/plugin.py:662 ../src/plugin.py:667
+msgid "Remote channel stream converter"
+msgstr "Remote channel stream converter"
+
+#: ../src/plugin.py:667
+msgid "Convert remote channel list for streaming"
+msgstr "Convert remote channel list for streaming"
+
+#~ msgid "FTP reading file %d of %d"
+#~ msgstr "FTP reading file %d of %d"

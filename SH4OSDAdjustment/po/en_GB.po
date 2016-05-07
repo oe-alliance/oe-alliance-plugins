@@ -7,76 +7,118 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-12-03 17:19-0000\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2016-05-07 13:58+0200\n"
+"PO-Revision-Date: 2016-05-07 13:58+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: ViX\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7\n"
 
-msgid "Blink Record Led"
-msgstr "Blink Record Led"
+#: ../src/plugin.py:29
+msgid "cancel"
+msgstr ""
 
-msgid "Blue"
-msgstr "Blue"
+#: ../src/plugin.py:30
+msgid "save"
+msgstr ""
 
-msgid "Cancel"
-msgstr "Cancel"
+#: ../src/plugin.py:31
+msgid "set default"
+msgstr ""
 
-msgid "Enable led"
-msgstr "Enable led"
+#: ../src/plugin.py:32
+msgid "change sides"
+msgstr ""
 
-msgid "Led state Deep Standby"
-msgstr "Led state Deep Standby"
+#: ../src/plugin.py:33 ../src/plugin.py:336
+msgid "OSD Adjustment"
+msgstr ""
 
-msgid "Led state RUN"
-msgstr "Led state RUN"
+#: ../src/plugin.py:34
+msgid ""
+"Here you can change the screen positions with the arrow buttons on your "
+"remote control!"
+msgstr ""
 
-msgid "Led state Record"
-msgstr "Led state Record"
+#: ../src/plugin.py:35 ../src/plugin.py:151
+msgid ""
+"Now you can change the position of the upper and left side. Press blue "
+"button to switch..."
+msgstr ""
 
-msgid "Led state Standby"
-msgstr "Led state Standby"
+#: ../src/plugin.py:148
+msgid ""
+"Now you can change the position of the lower and right side. Press blue "
+"button to switch..."
+msgstr ""
 
-msgid "No"
-msgstr "No"
+#: ../src/plugin.py:344
+msgid "change the OSD screen size"
+msgstr ""
 
-msgid "None"
-msgstr "None"
+#~ msgid "Blink Record Led"
+#~ msgstr "Blink Record Led"
 
-msgid "Off"
-msgstr "Off"
+#~ msgid "Blue"
+#~ msgstr "Blue"
 
-msgid "Purple"
-msgstr "Purple"
+#~ msgid "Cancel"
+#~ msgstr "Cancel"
 
-msgid "Red"
-msgstr "Red"
+#~ msgid "Enable led"
+#~ msgstr "Enable led"
 
-msgid "Save"
-msgstr "Save"
+#~ msgid "Led state Deep Standby"
+#~ msgstr "Led state Deep Standby"
 
-msgid "Show clock"
-msgstr "Show clock"
+#~ msgid "Led state RUN"
+#~ msgstr "Led state RUN"
 
-msgid "Show clock in Deep Standby"
-msgstr "Show clock in Deep Standby"
+#~ msgid "Led state Record"
+#~ msgstr "Led state Record"
 
-msgid "Time mode"
-msgstr "Time mode"
+#~ msgid "Led state Standby"
+#~ msgstr "Led state Standby"
 
-msgid "Update Date/Time"
-msgstr "Update Date/Time"
+#~ msgid "No"
+#~ msgstr "No"
 
-msgid "VFD_Giga"
-msgstr "VFD_Giga"
+#~ msgid "None"
+#~ msgstr "None"
 
-msgid "Yes"
-msgstr "Yes"
+#~ msgid "Off"
+#~ msgstr "Off"
 
-msgid "in standby: "
-msgstr "in standby: "
+#~ msgid "Purple"
+#~ msgstr "Purple"
+
+#~ msgid "Red"
+#~ msgstr "Red"
+
+#~ msgid "Save"
+#~ msgstr "Save"
+
+#~ msgid "Show clock"
+#~ msgstr "Show clock"
+
+#~ msgid "Show clock in Deep Standby"
+#~ msgstr "Show clock in Deep Standby"
+
+#~ msgid "Time mode"
+#~ msgstr "Time mode"
+
+#~ msgid "Update Date/Time"
+#~ msgstr "Update Date/Time"
+
+#~ msgid "VFD_Giga"
+#~ msgstr "VFD_Giga"
+
+#~ msgid "Yes"
+#~ msgstr "Yes"
+
+#~ msgid "in standby: "
+#~ msgstr "in standby: "

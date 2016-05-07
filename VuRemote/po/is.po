@@ -4,56 +4,72 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 16:40+0100\n"
-"PO-Revision-Date: 2012-05-18 01:40+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2016-05-07 14:21+0200\n"
+"PO-Revision-Date: 2016-05-07 14:21+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Polar Team/LT Team <baddi@oreind.is>\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: Icelandic\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Country: ICELAND\n"
 
+#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
+msgid "Remote Control Code"
+msgstr ""
+
+#: ../src/plugin.py:68
 msgid "Cancel"
 msgstr "Hætta við"
 
+#
+#: ../src/plugin.py:69
+msgid "Save"
+msgstr "Vista"
+
+#: ../src/plugin.py:80
+#, python-format
+msgid "Sorry, but %s is not supported."
+msgstr ""
+
+#: ../src/plugin.py:84
+msgid "Remote Control System Code"
+msgstr ""
+
+#: ../src/plugin.py:87
+msgid "Text support"
+msgstr ""
+
+#: ../src/plugin.py:99
 msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
 msgstr ""
 
-msgid "Keep"
-msgstr ""
-
+#: ../src/plugin.py:101
 msgid "Please change your remote mode"
 msgstr ""
 
+#: ../src/plugin.py:101
 msgid ""
 "Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
 "press '000"
 msgstr ""
 
-msgid "Remote Control Code"
-msgstr ""
-
-msgid "Remote Control System Code"
-msgstr ""
-
-#
-msgid "Restore"
-msgstr "Setja inn"
-
-#
-msgid "Save"
-msgstr "Vista"
-
-msgid "Text support"
-msgstr ""
-
+#: ../src/plugin.py:101
 msgid "Then choose 'Keep' within seconds"
 msgstr ""
 
-msgid "This Plugin only support for UNO/ULTIMO"
+#: ../src/plugin.py:122
+msgid "Keep"
+msgstr ""
+
+#
+#: ../src/plugin.py:122
+msgid "Restore"
+msgstr "Setja inn"
+
+#: ../src/plugin.py:128
+#, python-format
+msgid " in %d seconds."
 msgstr ""

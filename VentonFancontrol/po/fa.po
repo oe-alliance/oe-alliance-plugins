@@ -4,51 +4,71 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: 2012-05-18 01:41+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2016-05-07 14:09+0200\n"
+"PO-Revision-Date: 2016-05-07 14:09+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: Persian\n"
-"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+"X-Generator: Poedit 1.8.7\n"
 
-msgid "Close"
-msgstr "بستن"
-
-msgid "Fan Control"
+#: ../src/plugin.py:6
+msgid "Off"
 msgstr ""
 
-msgid "Fan basic action"
+#: ../src/plugin.py:6
+msgid "On"
 msgstr ""
 
-msgid "Fan off duration time"
+#: ../src/plugin.py:6
+msgid "Auto"
 msgstr ""
 
-msgid "Fan on duration time"
+#: ../src/plugin.py:25
+msgid "Fan setup"
 msgstr ""
 
-msgid "Really close without saving settings?"
-msgstr "خروج بدون ذخیره کردن تنظیمات ؟"
+#: ../src/plugin.py:30
+msgid "Cancel"
+msgstr ""
 
+#: ../src/plugin.py:31
 msgid "Save"
 msgstr "ذخیره"
 
-msgid "Use Fan timer"
+#: ../src/plugin.py:48
+msgid "Fan mode"
 msgstr ""
 
-msgid "no"
-msgstr "خیر"
+#: ../src/plugin.py:105
+msgid "FAN Control"
+msgstr ""
 
-msgid "off"
-msgstr "خاموش"
+#: ../src/plugin.py:113
+msgid "Fan Control"
+msgstr ""
 
-msgid "on"
-msgstr "روشن"
+#: ../src/plugin.py:113
+msgid "switch Fan On/Off"
+msgstr ""
 
-msgid "yes"
-msgstr "بله"
+#~ msgid "Close"
+#~ msgstr "بستن"
+
+#~ msgid "Really close without saving settings?"
+#~ msgstr "خروج بدون ذخیره کردن تنظیمات ؟"
+
+#~ msgid "no"
+#~ msgstr "خیر"
+
+#~ msgid "off"
+#~ msgstr "خاموش"
+
+#~ msgid "on"
+#~ msgstr "روشن"
+
+#~ msgid "yes"
+#~ msgstr "بله"

@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-09 13:04+0100\n"
-"PO-Revision-Date: 2015-02-09 13:04+0100\n"
-"Last-Translator: mimi74 <>n"
+"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
+"PO-Revision-Date: 2016-05-07 13:39+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.8.7\n"
 
 msgid "%"
 msgstr "%"
@@ -614,6 +614,7 @@ msgstr "60min"
 
 msgid "65%"
 msgstr "65%"
+
 msgid "7"
 msgstr "7"
 
@@ -671,8 +672,14 @@ msgstr "Analogique+Date+jour de la semaine"
 msgid "Analog+Date+Weekday 2"
 msgstr "Analogique+Date+Joursemaine 2"
 
+msgid "April"
+msgstr ""
+
 msgid "Audio/Video"
 msgstr "Audio/Vidéo"
+
+msgid "August"
+msgstr ""
 
 msgid "Background"
 msgstr "Arrière plan"
@@ -854,6 +861,9 @@ msgstr "Dates pas d'icône"
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr "Journal-Debug > /tmp/L4log.txt"
 
+msgid "December"
+msgstr ""
+
 msgid "Delete"
 msgstr "Effacer"
 
@@ -902,6 +912,9 @@ msgstr "Description étendue"
 msgid "Fastmode (2s)"
 msgstr "mode rapide (2s)"
 
+msgid "February"
+msgstr ""
+
 msgid "First Quarter"
 msgstr "Premier quart"
 
@@ -934,6 +947,9 @@ msgstr "Cadre"
 
 msgid "Fri"
 msgstr "Ven"
+
+msgid "Friday"
+msgstr ""
 
 msgid "FritzCall"
 msgstr "FritzCall"
@@ -996,9 +1012,6 @@ msgstr "Dégradé"
 msgid "HDD"
 msgstr "HDD"
 
-msgid "Idle"
-msgstr "Veille"
-
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1032,8 +1045,17 @@ msgstr "InterneVu+ Duo2 LCD 400x240"
 msgid "JPG"
 msgstr "JPG"
 
+msgid "January"
+msgstr ""
+
 msgid "Javascript"
 msgstr "Javascript"
+
+msgid "July"
+msgstr ""
+
+msgid "June"
+msgstr ""
 
 msgid "Key for Screen Change"
 msgstr "Touche pour changer d'écran"
@@ -1089,20 +1111,11 @@ msgstr "LCD largeur personnalisée"
 msgid "LCD Display"
 msgstr "LCD affichage"
 
+msgid "LCD4linux Screen Switch"
+msgstr ""
+
 msgid "LCD4linux enabled"
 msgstr "LCD4linux activé"
-
-msgid "LCD4linux Display-Mode On"
-msgstr "LCD4linux - Affichage 'En'"
-
-msgid "LCD4linux Display-Mode MediaPlayer"
-msgstr "LCD4linux - Affichage 'Lecteur médias'"
-
-msgid "LCD4linux Display-Mode Idle"
-msgstr "LCD4linux - Affichage 'Veille'"
-
-msgid "LCD4linux Settings"
-msgstr "Paramètres LCD4linux"
 
 msgid "Last Quarter"
 msgstr "Dernier Quart"
@@ -1251,6 +1264,12 @@ msgstr "Mail Afficher les dates"
 msgid "Mail Show Empty Mailboxes"
 msgstr "Mail Afficher les boîtes vides"
 
+msgid "March"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
 msgid "Media"
 msgstr "Média"
 
@@ -1323,6 +1342,9 @@ msgstr "Modul 5"
 msgid "Mon"
 msgstr "Lun"
 
+msgid "Monday"
+msgstr ""
+
 msgid "Month"
 msgstr "Mois"
 
@@ -1381,14 +1403,16 @@ msgid "Next Timer Event"
 msgstr "Evénement prog suivant"
 
 msgid "No or wrong File selected, try a correct File first !"
-msgstr ""
-"Aucun ou mauvais fichier sélectionné, essayer un fichier correct d'abord!"
+msgstr "Aucun ou mauvais fichier sélectionné, essayer un fichier correct d'abord!"
 
 msgid "Normal"
 msgstr "Normal"
 
 msgid "Normal (5s)"
 msgstr "normal (5s)"
+
+msgid "November"
+msgstr ""
 
 msgid "Now/Next"
 msgstr "actuellement/suivant"
@@ -1401,6 +1425,9 @@ msgstr "OSD"
 
 msgid "OSD [display time]"
 msgstr "OSD [afficher l'heure]"
+
+msgid "October"
+msgstr ""
 
 msgid "Offline"
 msgstr "Hors-ligne"
@@ -1618,6 +1645,9 @@ msgstr "Sam"
 msgid "Satellite"
 msgstr "Satellite"
 
+msgid "Saturday"
+msgstr ""
+
 msgid "Save"
 msgstr "Sauver"
 
@@ -1738,20 +1768,11 @@ msgstr "Ecran sélection commutation  - Ecran"
 msgid "Screens used for Changing"
 msgstr "Ecran utilisé pour changer"
 
+msgid "September"
+msgstr ""
+
 msgid "Service search first"
 msgstr "Recherche service en premier"
-
-msgid "Set Global >>"
-msgstr "Réglages globaux >>"
-
-msgid "Set Idle >>"
-msgstr "Réglages veille >>"
-
-msgid "Set Media >>"
-msgstr "Réglages média >>"
-
-msgid "Set On >>"
-msgstr "Réglages en >>"
 
 msgid "Shadow Edges"
 msgstr "Bords ombrés"
@@ -1828,6 +1849,9 @@ msgstr "Sacades TV"
 msgid "Sun"
 msgstr "Dim"
 
+msgid "Sunday"
+msgstr ""
+
 msgid "Sunrise"
 msgstr "Levé du soleil"
 
@@ -1864,6 +1888,9 @@ msgstr "Processus par LCD"
 msgid "Thur"
 msgstr "Jeu"
 
+msgid "Thursday"
+msgstr ""
+
 msgid "Time"
 msgstr "Heure"
 
@@ -1887,6 +1914,9 @@ msgstr "Titre"
 
 msgid "Tue"
 msgstr "Mar"
+
+msgid "Tuesday"
+msgstr ""
 
 msgid "Tuner Color"
 msgstr "Couleur tuner"
@@ -2019,6 +2049,9 @@ msgstr "WebIF rafraîchissement [s]"
 
 msgid "Wed"
 msgstr "Mer"
+
+msgid "Wednesday"
+msgstr ""
 
 msgid "Week"
 msgstr "Semaine"
@@ -2472,3 +2505,30 @@ msgstr "oui, long"
 
 msgid "yes, short"
 msgstr "oui, court"
+
+#~ msgid "Idle"
+#~ msgstr "Veille"
+
+#~ msgid "LCD4linux Display-Mode On"
+#~ msgstr "LCD4linux - Affichage 'En'"
+
+#~ msgid "LCD4linux Display-Mode MediaPlayer"
+#~ msgstr "LCD4linux - Affichage 'Lecteur médias'"
+
+#~ msgid "LCD4linux Display-Mode Idle"
+#~ msgstr "LCD4linux - Affichage 'Veille'"
+
+#~ msgid "LCD4linux Settings"
+#~ msgstr "Paramètres LCD4linux"
+
+#~ msgid "Set Global >>"
+#~ msgstr "Réglages globaux >>"
+
+#~ msgid "Set Idle >>"
+#~ msgstr "Réglages veille >>"
+
+#~ msgid "Set Media >>"
+#~ msgstr "Réglages média >>"
+
+#~ msgid "Set On >>"
+#~ msgstr "Réglages en >>"

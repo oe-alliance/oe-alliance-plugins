@@ -1,116 +1,310 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openATV-TransCodingSetup\n"
-"POT-Creation-Date: 2012-12-18 09:59+KST\n"
-"PO-Revision-Date: 2015-02-14 08:18+0100\n"
-"Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-07 14:04+0200\n"
+"PO-Revision-Date: 2016-05-07 14:04+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: openATV <Mariusz1970@onet.eu>\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: pl\n"
-"X-Generator: Poedit 1.7.4\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.8.7\n"
 
-msgid "disabled"
-msgstr "wyłączyć"
-
-msgid "enabled"
-msgstr "włączyć"
-
-msgid "Cancel"
-msgstr "Anuluj"
-
-msgid "Ok"
-msgstr "OK"
-
-msgid "%s"
-msgstr "%s"
-
-msgid "This Plugin is available on SOLO2/DUO2"
-msgstr "Ta wtyczka jest dostępna na SOLO2/DUO2"
-
-msgid "Transcoding"
-msgstr "Transkodowanie"
-
-msgid "Port"
-msgstr "Port"
-
-msgid ""
-"Failed, Encoder %s\n"
-"(%s)."
+#: ../src/plugin.py:57
+msgid "enable"
 msgstr ""
-"Nie powiodło się odkodowanie %s\n"
-"(%s)."
 
-msgid ""
-"OK. Encoder %s.\n"
-"%s"
+#: ../src/plugin.py:57
+msgid "disable"
 msgstr ""
-"odkodowanie OK. %s.\n"
-"%s"
 
-msgid "OK. Encoder %s."
-msgstr "odkodowanie OK %s."
+#: ../src/plugin.py:80
+msgid "On"
+msgstr ""
 
-msgid "TranscodingSetup"
-msgstr "Ustawienia transkodowania"
+#: ../src/plugin.py:80
+msgid "Off"
+msgstr ""
 
-msgid "Transcoding Setup"
-msgstr "Ustawienia przekodowywania"
+#: ../src/plugin.py:84
+msgid "480p"
+msgstr ""
 
-msgid "Encoder"
-msgstr "Czynny"
+#: ../src/plugin.py:84
+msgid "576p"
+msgstr ""
 
-msgid "Auto set Framerate / Bitrate"
-msgstr "Auto.ustawić ilość klatek na sekundę/szybkość transmisji"
+#: ../src/plugin.py:84
+msgid "720p"
+msgstr ""
 
-msgid "Bitrate"
-msgstr "Szybkość transmisji"
+#: ../src/plugin.py:84
+msgid "320x240"
+msgstr ""
 
-msgid "Framerate"
-msgstr "Ilość klatek na sekundę"
+#: ../src/plugin.py:84
+msgid "160x120"
+msgstr ""
 
-msgid "2nd transcoding and PIP are mutually exclusive."
-msgstr "2-gie transkodowanie i PIP wzajemnie się wykluczają."
+#: ../src/plugin.py:86
+msgid "1080p"
+msgstr ""
 
-msgid "Save"
-msgstr "Zapisz"
+#: ../src/plugin.py:91
+msgid "auto"
+msgstr ""
 
-msgid "Default"
-msgstr "Domyślne"
+#: ../src/plugin.py:91
+msgid "4x3"
+msgstr ""
 
-msgid "Advanced"
-msgstr "Zaawansowane"
+#: ../src/plugin.py:91
+msgid "16x9"
+msgstr ""
 
-msgid "Resolution"
-msgstr "Rozdzielczość"
+#: ../src/plugin.py:95
+msgid "mpg"
+msgstr ""
 
-msgid "Aspect Ratio"
-msgstr "Proporcje obrazu"
+#: ../src/plugin.py:95
+msgid "mp3"
+msgstr ""
 
-msgid "Audio codec"
-msgstr "Kodek audio"
+#: ../src/plugin.py:95
+msgid "aac"
+msgstr ""
 
-msgid "Video codec"
-msgstr "Kodek wideo"
+#: ../src/plugin.py:95
+msgid "aac+"
+msgstr ""
 
-msgid "GOP Frame P"
-msgstr "Rama GOP; P"
+#: ../src/plugin.py:95
+msgid "aac+loas"
+msgstr ""
 
-msgid "Level"
-msgstr "Poziom"
+#: ../src/plugin.py:95
+msgid "aac+adts"
+msgstr ""
 
-msgid "Profile"
-msgstr "Profil"
+#: ../src/plugin.py:95
+msgid "ac3"
+msgstr ""
 
-msgid "baseline"
-msgstr "linia bazowa"
+#: ../src/plugin.py:99
+msgid "h264"
+msgstr ""
 
+#: ../src/plugin.py:111
+msgid "1.0"
+msgstr ""
+
+#: ../src/plugin.py:111
+msgid "2.0"
+msgstr ""
+
+#: ../src/plugin.py:112
+msgid "2.1"
+msgstr ""
+
+#: ../src/plugin.py:112
+msgid "2.2"
+msgstr ""
+
+#: ../src/plugin.py:112
+msgid "3.0"
+msgstr ""
+
+#: ../src/plugin.py:112
+msgid "3.1"
+msgstr ""
+
+#: ../src/plugin.py:113
+msgid "3.2"
+msgstr ""
+
+#: ../src/plugin.py:113
+msgid "4.0"
+msgstr ""
+
+#: ../src/plugin.py:113
+msgid "4.1"
+msgstr ""
+
+#: ../src/plugin.py:113
+msgid "4.2"
+msgstr ""
+
+#: ../src/plugin.py:114
+msgid "5.0"
+msgstr ""
+
+#: ../src/plugin.py:114
+msgid "low"
+msgstr ""
+
+#: ../src/plugin.py:114 ../src/plugin.py:118
 msgid "main"
 msgstr "główny"
 
+#: ../src/plugin.py:114 ../src/plugin.py:118
+msgid "high"
+msgstr ""
+
+#: ../src/plugin.py:118
+msgid "baseline"
+msgstr "linia bazowa"
+
+#: ../src/plugin.py:118
+msgid "simple"
+msgstr ""
+
+#: ../src/plugin.py:118
 msgid "advancedsimple"
 msgstr "zaawansowane proste"
+
+#: ../src/plugin.py:351 ../src/plugin.py:560
+msgid "Transcoding Setup"
+msgstr "Ustawienia przekodowywania"
+
+#: ../src/plugin.py:355
+msgid "Transcoding and PIP are mutually exclusive."
+msgstr ""
+
+#: ../src/plugin.py:357
+msgid "2nd transcoding and PIP are mutually exclusive."
+msgstr "2-gie transkodowanie i PIP wzajemnie się wykluczają."
+
+#: ../src/plugin.py:358
+#, python-format
+msgid "%s"
+msgstr "%s"
+
+#: ../src/plugin.py:360
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: ../src/plugin.py:361
+msgid "Save"
+msgstr "Zapisz"
+
+#: ../src/plugin.py:362
+msgid "Default"
+msgstr "Domyślne"
+
+#: ../src/plugin.py:363 ../src/plugin.py:529
+msgid "Advanced"
+msgstr "Zaawansowane"
+
+#: ../src/plugin.py:407
+msgid "This model is not support transcoding."
+msgstr ""
+
+#: ../src/plugin.py:411
+msgid "Port"
+msgstr "Port"
+
+#: ../src/plugin.py:417
+msgid "Encoder"
+msgstr "Czynny"
+
+#: ../src/plugin.py:428
+msgid "Auto set Framerate / Bitrate"
+msgstr "Auto.ustawić ilość klatek na sekundę/szybkość transmisji"
+
+#: ../src/plugin.py:435
+msgid "Bitrate"
+msgstr "Szybkość transmisji"
+
+#: ../src/plugin.py:437
+msgid "Framerate"
+msgstr "Ilość klatek na sekundę"
+
+#: ../src/plugin.py:441
+msgid "Resolution"
+msgstr "Rozdzielczość"
+
+#: ../src/plugin.py:444
+msgid "Aspect Ratio"
+msgstr "Proporcje obrazu"
+
+#: ../src/plugin.py:447
+msgid "Audio codec"
+msgstr "Kodek audio"
+
+#: ../src/plugin.py:450
+msgid "Video codec"
+msgstr "Kodek wideo"
+
+#: ../src/plugin.py:453
+msgid "GOP Frame B"
+msgstr ""
+
+#: ../src/plugin.py:456
+msgid "GOP Frame P"
+msgstr "Rama GOP; P"
+
+#: ../src/plugin.py:459
+msgid "Level"
+msgstr "Poziom"
+
+#: ../src/plugin.py:462
+msgid "Profile"
+msgstr "Profil"
+
+#: ../src/plugin.py:484
+msgid "Min"
+msgstr ""
+
+#: ../src/plugin.py:484
+msgid "Max"
+msgstr ""
+
+#: ../src/plugin.py:517
+msgid "Really close without saving settings?"
+msgstr ""
+
+#: ../src/plugin.py:526
+msgid "Normal"
+msgstr ""
+
+#: ../src/plugin.py:559
+msgid "TranscodingSetup"
+msgstr "Ustawienia transkodowania"
+
+#~ msgid "disabled"
+#~ msgstr "wyłączyć"
+
+#~ msgid "enabled"
+#~ msgstr "włączyć"
+
+#~ msgid "Ok"
+#~ msgstr "OK"
+
+#~ msgid "This Plugin is available on SOLO2/DUO2"
+#~ msgstr "Ta wtyczka jest dostępna na SOLO2/DUO2"
+
+#~ msgid "Transcoding"
+#~ msgstr "Transkodowanie"
+
+#~ msgid ""
+#~ "Failed, Encoder %s\n"
+#~ "(%s)."
+#~ msgstr ""
+#~ "Nie powiodło się odkodowanie %s\n"
+#~ "(%s)."
+
+#~ msgid ""
+#~ "OK. Encoder %s.\n"
+#~ "%s"
+#~ msgstr ""
+#~ "odkodowanie OK. %s.\n"
+#~ "%s"
+
+#~ msgid "OK. Encoder %s."
+#~ msgstr "odkodowanie OK %s."

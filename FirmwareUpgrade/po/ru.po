@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: 2012-05-18 01:40+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2016-05-07 13:20+0200\n"
+"PO-Revision-Date: 2016-05-07 13:20+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Russian / enigma(c) Ukraine, Kiev>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -14,49 +14,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: Русский\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Poedit-Country: RUSSIA\n"
 
+#: ../src/plugin.py:34 ../src/plugin.py:43 ../src/plugin.py:50
+#: ../src/plugin.py:59 ../src/plugin.py:70
+msgid "FPGA"
+msgstr ""
+
+#: ../src/plugin.py:35 ../src/plugin.py:51 ../src/plugin.py:60
+#: ../src/plugin.py:71
+msgid "Front Processor"
+msgstr ""
+
+#: ../src/plugin.py:61
+msgid "VFD Controller"
+msgstr ""
+
+#: ../src/plugin.py:348
+msgid "Can't cancel during upgrade!!"
+msgstr ""
+
+#: ../src/plugin.py:350
+msgid "Status : 0%"
+msgstr ""
+
+#: ../src/plugin.py:383
+msgid "Fail to upgrade!! Retry!!"
+msgstr ""
+
+#: ../src/plugin.py:385
 #, python-format
 msgid "%d / 100"
 msgstr ""
 
-msgid "Can't cancel during upgrade!!"
+#: ../src/plugin.py:388
+msgid "Success. Press OK to exit."
 msgstr ""
 
-msgid "Can't find /usr/bin/md5sum"
-msgstr ""
-
-msgid "Can't found MD5 file."
-msgstr ""
-
-msgid "Can't found binary file."
-msgstr ""
-
-msgid "Can't found device file!!"
-msgstr ""
-
-msgid "Can't found model name."
-msgstr ""
-
-#
-msgid "Close"
-msgstr "Закрыть"
-
+#: ../src/plugin.py:417
 msgid "Do you want to remove binary data?"
 msgstr ""
 
-msgid "Download the firmware (latest)"
+#: ../src/plugin.py:435
+msgid "Download"
 msgstr ""
 
-msgid "FPGA"
+#: ../src/plugin.py:476
+msgid "Can't found binary file."
 msgstr ""
 
-msgid "Fail to upgrade!! Retry!!"
+#: ../src/plugin.py:479
+msgid "Can't found MD5 file."
 msgstr ""
 
+#: ../src/plugin.py:490 ../src/plugin.py:494
+msgid "You choose the incorrect file. "
+msgstr ""
+
+#: ../src/plugin.py:498
+msgid "Can't find /usr/bin/md5sum"
+msgstr ""
+
+#: ../src/plugin.py:505
 #, python-format
 msgid ""
 "Fail to verify data file. \n"
@@ -64,32 +84,43 @@ msgid ""
 "md5[%s]"
 msgstr ""
 
-msgid "Firmware"
-msgstr ""
-
-msgid "Firmware Upgrade"
-msgstr ""
-
+#: ../src/plugin.py:578
 msgid "Firmware does not exist."
 msgstr ""
 
-msgid "Front Processor"
+#: ../src/plugin.py:617
+msgid "Can't found model name."
 msgstr ""
 
-msgid "No selected binary data!!"
+#
+#: ../src/plugin.py:689
+msgid "Close"
+msgstr "Закрыть"
+
+#: ../src/plugin.py:700
+msgid "Duo/Solo was not support."
 msgstr ""
 
-msgid "Status : 0%"
-msgstr ""
-
-msgid "Success. Press OK to exit."
-msgstr ""
-
-msgid "This plugin is supported only the Ultimo/Uno."
-msgstr ""
-
+#: ../src/plugin.py:702
 msgid "Upgrade"
 msgstr ""
 
-msgid "You chose the incorrect file."
+#: ../src/plugin.py:710
+msgid "Firmware"
+msgstr ""
+
+#: ../src/plugin.py:761
+msgid "No selected binary data!!"
+msgstr ""
+
+#: ../src/plugin.py:768
+msgid "Can't found device file!!"
+msgstr ""
+
+#: ../src/plugin.py:855
+msgid "Firmware Upgrade"
+msgstr ""
+
+#: ../src/plugin.py:855
+msgid "Upgrade Firmware.."
 msgstr ""

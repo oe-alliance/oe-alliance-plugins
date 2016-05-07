@@ -1,112 +1,315 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
-"POT-Creation-Date: 2012-12-18 09:59+KST\n"
-"PO-Revision-Date: 2013-10-29 18:09+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-07 14:04+0200\n"
+"PO-Revision-Date: 2016-05-07 14:04+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: ViX <LL@li.org>\n"
+"Language: nl_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: ../plugin.py:14
-msgid "disabled"
-msgstr "Отключен"
-
-#: ../plugin.py:14
-msgid "enabled"
-msgstr "Включен"
-
-#: ../plugin.py:157
-msgid "Cancel"
-msgstr "Отменить"
-
-#: ../plugin.py:158
-msgid "Ok"
-msgstr "ОК"
-
-#: ../plugin.py:159
-msgid "%s"
+#: ../src/plugin.py:57
+msgid "enable"
 msgstr ""
 
-#: ../plugin.py:170
-msgid "This Plugin is available on Sezam Marvel"
-msgstr "Этот плагин доступен для Sezam Marvel"
-
-#: ../plugin.py:174
-msgid "Transcoding"
-msgstr "Транскодирование"
-
-#: ../plugin.py:175
-msgid "Port"
-msgstr "Порт"
-
-#: ../plugin.py:190
-msgid ""
-"Failed, Encoder %s\n"
-"(%s)."
+#: ../src/plugin.py:57
+msgid "disable"
 msgstr ""
 
-#: ../plugin.py:195
-msgid ""
-"OK. Encoder %s.\n"
-"%s"
+#: ../src/plugin.py:80
+msgid "On"
 msgstr ""
 
-#: ../plugin.py:197
-msgid "OK. Encoder %s."
+#: ../src/plugin.py:80
+msgid "Off"
 msgstr ""
 
-#: ../plugin.py:224
-msgid "TranscodingSetup"
-msgstr "Настройки"
+#: ../src/plugin.py:84
+msgid "480p"
+msgstr ""
 
-msgid "Allows streams to be transcoded."
-msgstr "Разрешить транскодирование для потоков."
+#: ../src/plugin.py:84
+msgid "576p"
+msgstr ""
 
-msgid "Bitrate"
-msgstr "Битрейт"
+#: ../src/plugin.py:84
+msgid "720p"
+msgstr ""
 
-msgid "Default"
-msgstr "По умолчанию"
+#: ../src/plugin.py:84
+msgid "320x240"
+msgstr ""
 
-msgid "Framerate"
-msgstr "Частота кадров"
+#: ../src/plugin.py:84
+msgid "160x120"
+msgstr ""
 
-msgid "Really close without saving settings?"
-msgstr "Закрыть без сохранения?"
+#: ../src/plugin.py:86
+msgid "1080p"
+msgstr ""
 
-msgid "Save"
-msgstr "Сохранить"
+#: ../src/plugin.py:91
+msgid "auto"
+msgstr ""
 
-msgid "Set the port for transcode."
-msgstr "Порт для транскодирования."
+#: ../src/plugin.py:91
+msgid "4x3"
+msgstr ""
 
-msgid "Sets the bitrate (quality)."
-msgstr "Выбрать качество(битрейт)."
+#: ../src/plugin.py:91
+msgid "16x9"
+msgstr ""
 
-msgid "Sets the framerate (fps)."
-msgstr "Выбрать частоту кадров(fps)."
+#: ../src/plugin.py:95
+msgid "mpg"
+msgstr ""
 
-msgid "This model is not support transcoding."
-msgstr "Этот ресивер не поддерживает транскодирование."
+#: ../src/plugin.py:95
+msgid "mp3"
+msgstr ""
 
-msgid "Transcode settings"
-msgstr "Настройки транскодирования"
+#: ../src/plugin.py:95
+msgid "aac"
+msgstr ""
 
+#: ../src/plugin.py:95
+msgid "aac+"
+msgstr ""
+
+#: ../src/plugin.py:95
+msgid "aac+loas"
+msgstr ""
+
+#: ../src/plugin.py:95
+msgid "aac+adts"
+msgstr ""
+
+#: ../src/plugin.py:95
+msgid "ac3"
+msgstr ""
+
+#: ../src/plugin.py:99
+msgid "h264"
+msgstr ""
+
+#: ../src/plugin.py:111
+msgid "1.0"
+msgstr ""
+
+#: ../src/plugin.py:111
+msgid "2.0"
+msgstr ""
+
+#: ../src/plugin.py:112
+msgid "2.1"
+msgstr ""
+
+#: ../src/plugin.py:112
+msgid "2.2"
+msgstr ""
+
+#: ../src/plugin.py:112
+msgid "3.0"
+msgstr ""
+
+#: ../src/plugin.py:112
+msgid "3.1"
+msgstr ""
+
+#: ../src/plugin.py:113
+msgid "3.2"
+msgstr ""
+
+#: ../src/plugin.py:113
+msgid "4.0"
+msgstr ""
+
+#: ../src/plugin.py:113
+msgid "4.1"
+msgstr ""
+
+#: ../src/plugin.py:113
+msgid "4.2"
+msgstr ""
+
+#: ../src/plugin.py:114
+msgid "5.0"
+msgstr ""
+
+#: ../src/plugin.py:114
+msgid "low"
+msgstr ""
+
+#: ../src/plugin.py:114 ../src/plugin.py:118
+msgid "main"
+msgstr ""
+
+#: ../src/plugin.py:114 ../src/plugin.py:118
+msgid "high"
+msgstr ""
+
+#: ../src/plugin.py:118
+msgid "baseline"
+msgstr ""
+
+#: ../src/plugin.py:118
+msgid "simple"
+msgstr ""
+
+#: ../src/plugin.py:118
+msgid "advancedsimple"
+msgstr ""
+
+#: ../src/plugin.py:351 ../src/plugin.py:560
 msgid "Transcoding Setup"
 msgstr "Настройка транскодирования"
 
-msgid "Transcoding can be started when there is no corresponding channel recordings."
-msgstr "Транскодирование может быть запущено, если не используется запись этого канала."
+#: ../src/plugin.py:355
+msgid "Transcoding and PIP are mutually exclusive."
+msgstr ""
 
-msgid "Channel Port"
-msgstr "Порт канала"
+#: ../src/plugin.py:357
+msgid "2nd transcoding and PIP are mutually exclusive."
+msgstr ""
 
-msgid "Media Port"
-msgstr "Медиа порт"
+#: ../src/plugin.py:358
+#, python-format
+msgid "%s"
+msgstr ""
 
+#: ../src/plugin.py:360
+msgid "Cancel"
+msgstr "Отменить"
+
+#: ../src/plugin.py:361
+msgid "Save"
+msgstr "Сохранить"
+
+#: ../src/plugin.py:362
+msgid "Default"
+msgstr "По умолчанию"
+
+#: ../src/plugin.py:363 ../src/plugin.py:529
+msgid "Advanced"
+msgstr ""
+
+#: ../src/plugin.py:407
+msgid "This model is not support transcoding."
+msgstr "Этот ресивер не поддерживает транскодирование."
+
+#: ../src/plugin.py:411
+msgid "Port"
+msgstr "Порт"
+
+#: ../src/plugin.py:417
+msgid "Encoder"
+msgstr ""
+
+#: ../src/plugin.py:428
+msgid "Auto set Framerate / Bitrate"
+msgstr ""
+
+#: ../src/plugin.py:435
+msgid "Bitrate"
+msgstr "Битрейт"
+
+#: ../src/plugin.py:437
+msgid "Framerate"
+msgstr "Частота кадров"
+
+#: ../src/plugin.py:441
+msgid "Resolution"
+msgstr ""
+
+#: ../src/plugin.py:444
+msgid "Aspect Ratio"
+msgstr ""
+
+#: ../src/plugin.py:447
+msgid "Audio codec"
+msgstr ""
+
+#: ../src/plugin.py:450
+msgid "Video codec"
+msgstr ""
+
+#: ../src/plugin.py:453
+msgid "GOP Frame B"
+msgstr ""
+
+#: ../src/plugin.py:456
+msgid "GOP Frame P"
+msgstr ""
+
+#: ../src/plugin.py:459
+msgid "Level"
+msgstr ""
+
+#: ../src/plugin.py:462
+msgid "Profile"
+msgstr ""
+
+#: ../src/plugin.py:484
+msgid "Min"
+msgstr ""
+
+#: ../src/plugin.py:484
+msgid "Max"
+msgstr ""
+
+#: ../src/plugin.py:517
+msgid "Really close without saving settings?"
+msgstr "Закрыть без сохранения?"
+
+#: ../src/plugin.py:526
+msgid "Normal"
+msgstr ""
+
+#: ../src/plugin.py:559
+msgid "TranscodingSetup"
+msgstr "Настройки"
+
+#~ msgid "disabled"
+#~ msgstr "Отключен"
+
+#~ msgid "enabled"
+#~ msgstr "Включен"
+
+#~ msgid "Ok"
+#~ msgstr "ОК"
+
+#~ msgid "This Plugin is available on Sezam Marvel"
+#~ msgstr "Этот плагин доступен для Sezam Marvel"
+
+#~ msgid "Transcoding"
+#~ msgstr "Транскодирование"
+
+#~ msgid "Allows streams to be transcoded."
+#~ msgstr "Разрешить транскодирование для потоков."
+
+#~ msgid "Set the port for transcode."
+#~ msgstr "Порт для транскодирования."
+
+#~ msgid "Sets the bitrate (quality)."
+#~ msgstr "Выбрать качество(битрейт)."
+
+#~ msgid "Sets the framerate (fps)."
+#~ msgstr "Выбрать частоту кадров(fps)."
+
+#~ msgid "Transcode settings"
+#~ msgstr "Настройки транскодирования"
+
+#~ msgid "Transcoding can be started when there is no corresponding channel recordings."
+#~ msgstr "Транскодирование может быть запущено, если не используется запись этого канала."
+
+#~ msgid "Channel Port"
+#~ msgstr "Порт канала"
+
+#~ msgid "Media Port"
+#~ msgstr "Медиа порт"

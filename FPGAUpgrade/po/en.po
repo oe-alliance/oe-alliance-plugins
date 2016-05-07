@@ -4,35 +4,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 16:40+0100\n"
-"PO-Revision-Date: 2012-05-18 01:41+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2016-05-07 13:22+0200\n"
+"PO-Revision-Date: 2016-05-07 13:22+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#, python-format
-msgid "%d / 100"
-msgstr "%d / 100"
-
+#: ../src/plugin.py:152
 msgid "Can't cancel during upgrade!!"
 msgstr "Can't cancel during upgrade!!"
 
-msgid "Close"
-msgstr "Close"
+#: ../src/plugin.py:154
+msgid "Status : 0%"
+msgstr "Status : 0%"
 
-msgid "Download"
-msgstr "Download"
+#: ../src/plugin.py:175
+msgid "Succeed"
+msgstr "Succeed"
 
-msgid "Downloaded "
-msgstr "Downloaded "
-
-msgid "Downloading..."
-msgstr "Downloading..."
-
+#: ../src/plugin.py:189
 #, python-format
 msgid ""
 "Error[%d] : %s.\n"
@@ -41,17 +36,35 @@ msgstr ""
 "Error[%d] : %s.\n"
 "Press OK to exit."
 
+#: ../src/plugin.py:195
+#, python-format
+msgid "%d / 100"
+msgstr "%d / 100"
+
+#: ../src/plugin.py:232 ../src/plugin.py:401
 msgid "FPGA Upgrade"
 msgstr "FPGA Upgrade"
 
-msgid "File not found"
-msgstr "File not found"
+#: ../src/plugin.py:234
+msgid "Close"
+msgstr "Close"
 
-msgid "Status : 0%"
-msgstr "Status : 0%"
-
-msgid "Succeed"
-msgstr "Succeed"
-
+#: ../src/plugin.py:235
 msgid "Upgrade"
 msgstr "Upgrade"
+
+#: ../src/plugin.py:237
+msgid "Download"
+msgstr "Download"
+
+#: ../src/plugin.py:293
+msgid "Downloaded "
+msgstr "Downloaded "
+
+#: ../src/plugin.py:295
+msgid "Downloading..."
+msgstr "Downloading..."
+
+#: ../src/plugin.py:353
+msgid "File not found"
+msgstr "File not found"

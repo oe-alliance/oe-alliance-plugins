@@ -1,11 +1,15 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: LCD4linux\n"
+"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
+"PO-Revision-Date: 2016-05-07 13:07+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Language-Team: \n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
-"Project-Id-Version: LCD4linux\n"
-"Language: sk\n"
+"X-Generator: Poedit 1.8.7\n"
 
 msgid "%"
 msgstr "%"
@@ -391,8 +395,8 @@ msgstr "0"
 msgid "0.5"
 msgstr "0.5"
 
-msgid "180"
-msgstr "180"
+msgid "1"
+msgstr ""
 
 msgid "1 - normal"
 msgstr "1 - normalne"
@@ -411,6 +415,9 @@ msgstr "1-4"
 
 msgid "1-5"
 msgstr "1-5"
+
+msgid "10"
+msgstr ""
 
 msgid "10%"
 msgstr "10%"
@@ -433,6 +440,9 @@ msgstr "128x64"
 msgid "132x64"
 msgstr "132x64"
 
+msgid "14"
+msgstr "14"
+
 msgid "15%"
 msgstr "15%"
 
@@ -442,11 +452,14 @@ msgstr "15min"
 msgid "15s"
 msgstr "15s"
 
+msgid "180"
+msgstr "180"
+
 msgid "1min"
 msgstr "1min"
 
-msgid "270"
-msgstr "270"
+msgid "2"
+msgstr ""
 
 msgid "2 - side by side"
 msgstr "2 - bok po boku"
@@ -478,6 +491,9 @@ msgstr "2 x stlmiť zvuk"
 msgid "2%"
 msgstr "2%"
 
+msgid "20"
+msgstr ""
+
 msgid "20%"
 msgstr "20%"
 
@@ -496,14 +512,20 @@ msgstr "25%"
 msgid "255x64"
 msgstr "255x64"
 
+msgid "270"
+msgstr "270"
+
 msgid "2min"
 msgstr "2min"
 
-msgid "14"
-msgstr "14"
+msgid "3"
+msgstr ""
 
 msgid "3%"
 msgstr "3%"
+
+msgid "30"
+msgstr ""
 
 msgid "30%"
 msgstr "30%"
@@ -523,8 +545,8 @@ msgstr "35%"
 msgid "3min"
 msgstr "3min"
 
-msgid "7"
-msgstr "7"
+msgid "4"
+msgstr ""
 
 msgid "4 Days 1 Line"
 msgstr "4 dni 1 riadok"
@@ -549,6 +571,9 @@ msgstr "45%"
 
 msgid "4min"
 msgstr "4min"
+
+msgid "5"
+msgstr ""
 
 msgid "5 Days 1 Line"
 msgstr "5 dní 1 riadok"
@@ -586,8 +611,14 @@ msgstr "60min"
 msgid "65%"
 msgstr "65%"
 
+msgid "7"
+msgstr "7"
+
 msgid "70%"
 msgstr "70%"
+
+msgid "720x405"
+msgstr ""
 
 msgid "75%"
 msgstr "75%"
@@ -600,6 +631,9 @@ msgstr "85%"
 
 msgid "8bit - grayscale/color"
 msgstr "8bit - čb/farba"
+
+msgid "90"
+msgstr ""
 
 msgid "90%"
 msgstr "90%"
@@ -1816,6 +1850,9 @@ msgstr "Nedeľa"
 
 msgid "Sunrise"
 msgstr "Východ slnka"
+
+msgid "Switch FrameBuffer [if possible]"
+msgstr ""
 
 msgid "TV"
 msgstr "TV"
