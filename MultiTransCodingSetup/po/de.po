@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-16 14:59+0200\n"
-"PO-Revision-Date: 2015-08-16 18:29+0100\n"
-"Last-Translator: mike99 <mike99@mail.to>\n"
+"POT-Creation-Date: 2016-05-07 13:44+0200\n"
+"PO-Revision-Date: 2016-05-07 13:44+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: ViX <LL@li.org>\n"
 "Language: nl_DE\n"
 "MIME-Version: 1.0\n"
@@ -16,69 +16,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: plugin.py:19
+#: ../src/plugin.py:19
 msgid "enable"
 msgstr "aktivieren"
 
-#: plugin.py:19
+#: ../src/plugin.py:19
 msgid "disable"
 msgstr "deaktivieren"
 
-#: plugin.py:30
+#: ../src/plugin.py:30
 msgid "480p"
 msgstr ""
 
-#: plugin.py:30
+#: ../src/plugin.py:30
 msgid "576p"
 msgstr ""
 
-#: plugin.py:30
+#: ../src/plugin.py:30
 msgid "720p"
 msgstr ""
 
-#: plugin.py:30
+#: ../src/plugin.py:30
 msgid "320x240"
 msgstr ""
 
-#: plugin.py:30
+#: ../src/plugin.py:30
 msgid "160x120"
 msgstr ""
 
-#: plugin.py:32
+#: ../src/plugin.py:32
 msgid "4x3"
 msgstr ""
 
-#: plugin.py:32
+#: ../src/plugin.py:32
 msgid "16x9"
 msgstr ""
 
-#: plugin.py:32
+#: ../src/plugin.py:32
 msgid "Auto"
 msgstr ""
 
-#: plugin.py:33
+#: ../src/plugin.py:33
 msgid "Yes"
 msgstr "Ja"
 
-#: plugin.py:33
+#: ../src/plugin.py:33
 msgid "No"
 msgstr "Nein"
 
-#: plugin.py:56
+#: ../src/plugin.py:56
 msgid "Transcoding Setup"
 msgstr "Transcoding Einstellungen"
 
-#: plugin.py:71
+#: ../src/plugin.py:71
 msgid "Exit"
 msgstr "Abbrechen"
 
-#: plugin.py:72
+#: ../src/plugin.py:72
 msgid "Save"
 msgstr "Speichern"
 
-#: plugin.py:76
+#: ../src/plugin.py:76
 msgid ""
 "To use transcoding You can build URL for VLC by Yourself\n"
 "\n"
@@ -86,7 +86,7 @@ msgstr ""
 "Für Transcoding, können Sie eine eigene URL für VLC erstellen\n"
 "\n"
 
-#: plugin.py:83
+#: ../src/plugin.py:83
 msgid ""
 "Transcoding from HDMI-IN e.x:\n"
 "\n"
@@ -94,46 +94,46 @@ msgstr ""
 "Transcodierung von HDMI-IN e.x:\n"
 "\n"
 
-#: plugin.py:101
+#: ../src/plugin.py:101
 msgid "This model does not support transcoding."
 msgstr "Dieses Modell unterstützt kein Transcoding."
 
-#: plugin.py:106 plugin.py:109
+#: ../src/plugin.py:106 ../src/plugin.py:109
 msgid "Bitrate in bits"
 msgstr ""
 
-#: plugin.py:107 plugin.py:110
+#: ../src/plugin.py:107 ../src/plugin.py:110
 msgid "Framerate"
 msgstr "Wiederholrate"
 
-#: plugin.py:111
+#: ../src/plugin.py:111
 msgid "Resolution"
 msgstr "Auflösung"
 
-#: plugin.py:112
+#: ../src/plugin.py:112
 msgid "Aspect Ratio"
 msgstr "Seitenverhältnis"
 
-#: plugin.py:113
+#: ../src/plugin.py:113
 msgid "Interlaced"
 msgstr ""
 
-#: plugin.py:132
+#: ../src/plugin.py:132
 msgid "Min"
 msgstr "Min."
 
-#: plugin.py:132
+#: ../src/plugin.py:132
 msgid "Max"
 msgstr "Max."
 
-#: plugin.py:158
+#: ../src/plugin.py:158
 msgid "Really close without saving settings?"
 msgstr "Wirklich beenden ohne die Einstellungen zu sichern?"
 
-#: plugin.py:167
+#: ../src/plugin.py:167
 msgid "Multi-Transcoding Setup"
 msgstr "Multi-Transcoding Einstellungen"
 
-#: plugin.py:168
+#: ../src/plugin.py:168
 msgid "Multi device transcoding setup"
 msgstr "Einstellungen Multi-Geräte-Transcoding"

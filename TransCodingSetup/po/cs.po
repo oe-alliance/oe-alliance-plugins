@@ -2,274 +2,274 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-30 17:25+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: mike99 <mike99@mail.to>\n"
+"POT-Creation-Date: 2016-05-07 14:04+0200\n"
+"PO-Revision-Date: 2016-05-07 13:07+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: plugin.py:57
+#: ../src/plugin.py:57
 msgid "enable"
 msgstr "Povolit"
 
-#: plugin.py:57
+#: ../src/plugin.py:57
 msgid "disable"
 msgstr "Zakázat"
 
-#: plugin.py:80
+#: ../src/plugin.py:80
 msgid "On"
 msgstr "Zapnuto"
 
-#: plugin.py:80
+#: ../src/plugin.py:80
 msgid "Off"
 msgstr "Vypnuto"
 
-#: plugin.py:84
+#: ../src/plugin.py:84
 msgid "480p"
 msgstr "480p"
 
-#: plugin.py:84
+#: ../src/plugin.py:84
 msgid "576p"
 msgstr "576p"
 
-#: plugin.py:84
+#: ../src/plugin.py:84
 msgid "720p"
 msgstr "720p"
 
-#: plugin.py:84
+#: ../src/plugin.py:84
 msgid "320x240"
 msgstr "320x240"
 
-#: plugin.py:84
+#: ../src/plugin.py:84
 msgid "160x120"
 msgstr "160x120"
 
-#: plugin.py:86
+#: ../src/plugin.py:86
 msgid "1080p"
 msgstr "1080p"
 
-#: plugin.py:91
+#: ../src/plugin.py:91
 msgid "auto"
 msgstr "Auto"
 
-#: plugin.py:91
+#: ../src/plugin.py:91
 msgid "4x3"
 msgstr "4:3"
 
-#: plugin.py:91
+#: ../src/plugin.py:91
 msgid "16x9"
 msgstr "16:9"
 
-#: plugin.py:95
+#: ../src/plugin.py:95
 msgid "mpg"
 msgstr "mpg"
 
-#: plugin.py:95
+#: ../src/plugin.py:95
 msgid "mp3"
 msgstr "mp3"
 
-#: plugin.py:95
+#: ../src/plugin.py:95
 msgid "aac"
 msgstr "AAC"
 
-#: plugin.py:95
+#: ../src/plugin.py:95
 msgid "aac+"
 msgstr "AAC+"
 
-#: plugin.py:95
+#: ../src/plugin.py:95
 msgid "aac+loas"
 msgstr "AAC+LOAS"
 
-#: plugin.py:95
+#: ../src/plugin.py:95
 msgid "aac+adts"
 msgstr "AAC+ADTS"
 
-#: plugin.py:95
+#: ../src/plugin.py:95
 msgid "ac3"
 msgstr "AC3"
 
-#: plugin.py:99
+#: ../src/plugin.py:99
 msgid "h264"
 msgstr "h264"
 
-#: plugin.py:111
+#: ../src/plugin.py:111
 msgid "1.0"
 msgstr "1.0"
 
-#: plugin.py:111
+#: ../src/plugin.py:111
 msgid "2.0"
 msgstr "2.0"
 
-#: plugin.py:112
+#: ../src/plugin.py:112
 msgid "2.1"
 msgstr "2.1"
 
-#: plugin.py:112
+#: ../src/plugin.py:112
 msgid "2.2"
 msgstr "2.2"
 
-#: plugin.py:112
+#: ../src/plugin.py:112
 msgid "3.0"
 msgstr "3.0"
 
-#: plugin.py:112
+#: ../src/plugin.py:112
 msgid "3.1"
 msgstr "3.1"
 
-#: plugin.py:113
+#: ../src/plugin.py:113
 msgid "3.2"
 msgstr "3.2"
 
-#: plugin.py:113
+#: ../src/plugin.py:113
 msgid "4.0"
 msgstr "4.0"
 
-#: plugin.py:113
+#: ../src/plugin.py:113
 msgid "4.1"
 msgstr "4.1"
 
-#: plugin.py:113
+#: ../src/plugin.py:113
 msgid "4.2"
 msgstr "4.2"
 
-#: plugin.py:114
+#: ../src/plugin.py:114
 msgid "5.0"
 msgstr "5.0"
 
-#: plugin.py:114
+#: ../src/plugin.py:114
 msgid "low"
 msgstr "Low/Nízký"
 
-#: plugin.py:114 plugin.py:118
+#: ../src/plugin.py:114 ../src/plugin.py:118
 msgid "main"
 msgstr "Main/Hlavní"
 
-#: plugin.py:114 plugin.py:118
+#: ../src/plugin.py:114 ../src/plugin.py:118
 msgid "high"
 msgstr "High/Vysoký"
 
-#: plugin.py:118
+#: ../src/plugin.py:118
 msgid "baseline"
 msgstr "Baseline/Základní"
 
-#: plugin.py:118
+#: ../src/plugin.py:118
 msgid "simple"
 msgstr "Simple/Jednoduchý"
 
-#: plugin.py:118
+#: ../src/plugin.py:118
 msgid "advancedsimple"
 msgstr "Jednoduchý-rozšířený"
 
-#: plugin.py:351 plugin.py:560
+#: ../src/plugin.py:351 ../src/plugin.py:560
 msgid "Transcoding Setup"
 msgstr "Nastavení překódování"
 
-#: plugin.py:355
+#: ../src/plugin.py:355
 msgid "Transcoding and PIP are mutually exclusive."
 msgstr "Překódování a PIP se vzájemně vylučují."
 
-#: plugin.py:357
+#: ../src/plugin.py:357
 msgid "2nd transcoding and PIP are mutually exclusive."
 msgstr "Druhé překódování a PIP se vzájemně vylučují."
 
-#: plugin.py:358
+#: ../src/plugin.py:358
 #, python-format
 msgid "%s"
 msgstr "%s"
 
-#: plugin.py:360
+#: ../src/plugin.py:360
 msgid "Cancel"
 msgstr "Zavřít"
 
-#: plugin.py:361
+#: ../src/plugin.py:361
 msgid "Save"
 msgstr "Uložit"
 
-#: plugin.py:362
+#: ../src/plugin.py:362
 msgid "Default"
 msgstr "Výchozí"
 
-#: plugin.py:363 plugin.py:529
+#: ../src/plugin.py:363 ../src/plugin.py:529
 msgid "Advanced"
 msgstr "Rozšířený"
 
-#: plugin.py:407
+#: ../src/plugin.py:407
 msgid "This model is not support transcoding."
 msgstr "Tento model je nepodporuje překódování."
 
-#: plugin.py:411
+#: ../src/plugin.py:411
 msgid "Port"
 msgstr "Port"
 
-#: plugin.py:417
+#: ../src/plugin.py:417
 msgid "Encoder"
 msgstr "Encoder"
 
-#: plugin.py:428
+#: ../src/plugin.py:428
 msgid "Auto set Framerate / Bitrate"
 msgstr "Automatické nastavení Snímková frekvence / Datový tok"
 
-#: plugin.py:435
+#: ../src/plugin.py:435
 msgid "Bitrate"
 msgstr "Datový tok"
 
-#: plugin.py:437
+#: ../src/plugin.py:437
 msgid "Framerate"
 msgstr "Snímková frekvence obrazu"
 
-#: plugin.py:441
+#: ../src/plugin.py:441
 msgid "Resolution"
 msgstr "Rozlišení"
 
-#: plugin.py:444
+#: ../src/plugin.py:444
 msgid "Aspect Ratio"
 msgstr "Poměr stran"
 
-#: plugin.py:447
+#: ../src/plugin.py:447
 msgid "Audio codec"
 msgstr "Zvukový kodek"
 
-#: plugin.py:450
+#: ../src/plugin.py:450
 msgid "Video codec"
 msgstr "Video kodek"
 
-#: plugin.py:453
+#: ../src/plugin.py:453
 msgid "GOP Frame B"
 msgstr "GOP Snímek B"
 
-#: plugin.py:456
+#: ../src/plugin.py:456
 msgid "GOP Frame P"
 msgstr "GOP Snímek P"
 
-#: plugin.py:459
+#: ../src/plugin.py:459
 msgid "Level"
 msgstr "Úroveň / Level"
 
-#: plugin.py:462
+#: ../src/plugin.py:462
 msgid "Profile"
 msgstr "Profil"
 
-#: plugin.py:484
+#: ../src/plugin.py:484
 msgid "Min"
 msgstr "Min"
 
-#: plugin.py:484
+#: ../src/plugin.py:484
 msgid "Max"
 msgstr "Max"
 
-#: plugin.py:517
+#: ../src/plugin.py:517
 msgid "Really close without saving settings?"
 msgstr "Opravdu zavřít bez uloženého nastavení?"
 
-#: plugin.py:526
+#: ../src/plugin.py:526
 msgid "Normal"
 msgstr "Normální"
 
-#: plugin.py:559
+#: ../src/plugin.py:559
 msgid "TranscodingSetup"
 msgstr "Nastavení překódování"

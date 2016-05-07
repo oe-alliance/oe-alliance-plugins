@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: LCD4linux\n"
+"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
+"PO-Revision-Date: 2016-05-07 13:07+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Language-Team: OpenPlus\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.4\n"
-"Project-Id-Version: LCD4linux\n"
-"Language: es\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: VillaK\n"
-"Language-Team: OpenPlus\n"
+"X-Generator: Poedit 1.8.7\n"
 
 msgid "%"
 msgstr "%"
@@ -395,8 +395,8 @@ msgstr "0"
 msgid "0.5"
 msgstr "0.5 "
 
-msgid "180"
-msgstr "180"
+msgid "1"
+msgstr ""
 
 msgid "1 - normal"
 msgstr "1 - normal"
@@ -415,6 +415,9 @@ msgstr "1-4"
 
 msgid "1-5"
 msgstr "1-5"
+
+msgid "10"
+msgstr ""
 
 msgid "10%"
 msgstr "10%"
@@ -439,6 +442,9 @@ msgstr "128x64 "
 msgid "132x64"
 msgstr "132x64"
 
+msgid "14"
+msgstr "14"
+
 msgid "15%"
 msgstr "15%"
 
@@ -448,11 +454,14 @@ msgstr "15min"
 msgid "15s"
 msgstr "15s"
 
+msgid "180"
+msgstr "180"
+
 msgid "1min"
 msgstr "1min"
 
-msgid "270"
-msgstr "270"
+msgid "2"
+msgstr ""
 
 msgid "2 - side by side"
 msgstr "2 - cara a cara"
@@ -484,6 +493,9 @@ msgstr "2 x Silencio"
 msgid "2%"
 msgstr "2% "
 
+msgid "20"
+msgstr ""
+
 msgid "20%"
 msgstr "20%"
 
@@ -502,14 +514,20 @@ msgstr "25%"
 msgid "255x64"
 msgstr "255x64"
 
+msgid "270"
+msgstr "270"
+
 msgid "2min"
 msgstr "2min"
 
-msgid "14"
-msgstr "14"
+msgid "3"
+msgstr ""
 
 msgid "3%"
 msgstr "3%"
+
+msgid "30"
+msgstr ""
 
 msgid "30%"
 msgstr "30%"
@@ -529,8 +547,8 @@ msgstr "35%"
 msgid "3min"
 msgstr "3min"
 
-msgid "7"
-msgstr "7"
+msgid "4"
+msgstr ""
 
 msgid "4 Days 1 Line"
 msgstr "4 Dias 1 Linea"
@@ -555,6 +573,9 @@ msgstr "45%"
 
 msgid "4min"
 msgstr "4min"
+
+msgid "5"
+msgstr ""
 
 msgid "5 Days 1 Line"
 msgstr "5 Dias 1 Linea"
@@ -592,6 +613,9 @@ msgstr "60min"
 msgid "65%"
 msgstr "65%"
 
+msgid "7"
+msgstr "7"
+
 msgid "70%"
 msgstr "70%"
 
@@ -609,6 +633,9 @@ msgstr "85%"
 
 msgid "8bit - grayscale/color"
 msgstr "8bit - gris/color"
+
+msgid "90"
+msgstr ""
 
 msgid "90%"
 msgstr "90%"
@@ -891,11 +918,8 @@ msgstr "Febrero"
 msgid "First Quarter"
 msgstr "Cuarto Creciente"
 
-msgid "Flaps Design Date"
-msgstr "Diseño Etiqueta Fecha"
-
-msgid "Flaps Design Weekday"
-msgstr "Diseño Etiqueta Dia de la Semana"
+msgid "Flaps Design"
+msgstr ""
 
 msgid "Font"
 msgstr "Fuente"
@@ -997,9 +1021,6 @@ msgstr "IMAP-SSL"
 msgid "IP seurity not supported by Box"
 msgstr "Seguridad de IP no soprtada por el dispositivo"
 
-msgid "Idle"
-msgstr "En Reposo"
-
 msgid "Info"
 msgstr "Info"
 
@@ -1090,29 +1111,14 @@ msgstr "Anchura Personalizada del LCD"
 msgid "LCD Display"
 msgstr "Pantalla LCD"
 
-msgid "LCD4linux Display-Mode Idle"
-msgstr "Modo de la Pantalla LCD4linux en Espera"
-
-msgid "LCD4linux Display-Mode MediaPlayer"
-msgstr "Modo de la Pantalla LCD4linux en Reproductor"
-
-msgid "LCD4linux Display-Mode On"
-msgstr "Modo de la Pantalla LCD4linux Encendido"
-
 msgid "LCD4linux Screen Switch"
 msgstr "Cambiar a Pantalla LCD4linux"
-
-msgid "LCD4linux Settings"
-msgstr "Ajustes de LCD4linux"
 
 msgid "LCD4linux enabled"
 msgstr "LCD4linux activado"
 
 msgid "Last Quarter"
 msgstr "Cuarto Menguante"
-
-msgid "Line"
-msgstr "Línea"
 
 msgid "Load Active Config-File"
 msgstr "Cargar Archivo de Configuración Activo"
@@ -1387,9 +1393,6 @@ msgstr "Netatmo CO2 Rango Mínimo"
 msgid "Netatmo Comfort Indicator"
 msgstr "Netatmo Indicador de Comodidad"
 
-msgid "Network Check active"
-msgstr "Comprobación de Red activa"
-
 msgid "New Moon"
 msgstr "Luna Nueva"
 
@@ -1400,8 +1403,7 @@ msgid "Next Timer Event"
 msgstr "Próximo Evento Programado"
 
 msgid "No or wrong File selected, try a correct File first !"
-msgstr ""
-"No hay archivo seleccionado o es equivocado, trata de corregir esto primero!"
+msgstr "No hay archivo seleccionado o es equivocado, trata de corregir esto primero!"
 
 msgid "Normal"
 msgstr "Normal"
@@ -1771,18 +1773,6 @@ msgstr "Septiembre"
 
 msgid "Service search first"
 msgstr "Primero Búsqueda de Canales"
-
-msgid "Set Global >>"
-msgstr "Ir a Global >>"
-
-msgid "Set Idle >>"
-msgstr "Ir a Espera >>"
-
-msgid "Set Media >>"
-msgstr "Ir a Reproductor >>"
-
-msgid "Set On >>"
-msgstr "Ir a On >>"
 
 msgid "Shadow Edges"
 msgstr "Bordes de Sombra"
@@ -2242,9 +2232,6 @@ msgstr "mocasín"
 msgid "no"
 msgstr "no"
 
-msgid "no Bar"
-msgstr "Sin Barra"
-
 msgid "no Calendar"
 msgstr "Sin Calendario"
 
@@ -2253,9 +2240,6 @@ msgstr "sin Llamadas"
 
 msgid "no Dates"
 msgstr "sin Fechas"
-
-msgid "no Frame"
-msgstr "Sin Marco"
 
 msgid "no Icon"
 msgstr "sin Icono"
@@ -2523,3 +2507,48 @@ msgstr "sí, largo"
 
 msgid "yes, short"
 msgstr "sí, corto"
+
+#~ msgid "Flaps Design Date"
+#~ msgstr "Diseño Etiqueta Fecha"
+
+#~ msgid "Flaps Design Weekday"
+#~ msgstr "Diseño Etiqueta Dia de la Semana"
+
+#~ msgid "Idle"
+#~ msgstr "En Reposo"
+
+#~ msgid "LCD4linux Display-Mode Idle"
+#~ msgstr "Modo de la Pantalla LCD4linux en Espera"
+
+#~ msgid "LCD4linux Display-Mode MediaPlayer"
+#~ msgstr "Modo de la Pantalla LCD4linux en Reproductor"
+
+#~ msgid "LCD4linux Display-Mode On"
+#~ msgstr "Modo de la Pantalla LCD4linux Encendido"
+
+#~ msgid "LCD4linux Settings"
+#~ msgstr "Ajustes de LCD4linux"
+
+#~ msgid "Line"
+#~ msgstr "Línea"
+
+#~ msgid "Network Check active"
+#~ msgstr "Comprobación de Red activa"
+
+#~ msgid "Set Global >>"
+#~ msgstr "Ir a Global >>"
+
+#~ msgid "Set Idle >>"
+#~ msgstr "Ir a Espera >>"
+
+#~ msgid "Set Media >>"
+#~ msgstr "Ir a Reproductor >>"
+
+#~ msgid "Set On >>"
+#~ msgstr "Ir a On >>"
+
+#~ msgid "no Bar"
+#~ msgstr "Sin Barra"
+
+#~ msgid "no Frame"
+#~ msgstr "Sin Marco"

@@ -1,78 +1,98 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BTDevicesManager\n"
-"Report-Msgid-Bugs-To: openspa.info\n"
-"POT-Creation-Date: 2015-09-07 14:58+0200\n"
-"PO-Revision-Date: 2016-03-02 17:14+0100\n"
-"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-07 13:09+0200\n"
+"PO-Revision-Date: 2016-05-07 13:09+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: openspa <openspa.info>\n"
-"Language: CA_ca\n"
+"Language: ca_CA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"X-Poedit-Language: Catalan\n"
-"X-Poedit-Country: CATALONIA\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
 
+#: ../src/plugin.py:108
 msgid "Bluetooth Devices Manager Setup"
 msgstr "Configuració del gestor de disp. Bluetooth"
 
+#: ../src/plugin.py:112
 msgid "Autostart"
 msgstr "Autoinici"
 
+#: ../src/plugin.py:114 ../src/plugin.py:183
 msgid "Exit"
 msgstr "Sortir"
 
+#: ../src/plugin.py:115
 msgid "Save"
 msgstr "Desar"
 
+#: ../src/plugin.py:164 ../src/plugin.py:332 ../src/plugin.py:353
+#: ../src/plugin.py:355
 msgid "Bluetooth Devices Manager"
 msgstr "Gestor de dispositius Bluetooth"
 
+#: ../src/plugin.py:168 ../src/plugin.py:219
 msgid "Please load BT driver by pressing BLUE button."
 msgstr "Carregueu el driver BT mitjançant el botó BLAU."
 
+#: ../src/plugin.py:172 ../src/plugin.py:215 ../src/plugin.py:273
 msgid "No connected to any device"
 msgstr "No s'ha connectat a cap dispositiu"
 
+#: ../src/plugin.py:184
 msgid "(Re)Scan"
 msgstr "(Re)escanejar"
 
+#: ../src/plugin.py:185 ../src/plugin.py:274
 msgid "Connect"
 msgstr "Connectar"
 
+#: ../src/plugin.py:189
 msgid "Config"
 msgstr "onfiguració"
 
+#: ../src/plugin.py:207
 msgid "No BT devices found!"
 msgstr "No s'ha trobat cap dispositiu Bluetooth"
 
-msgid "Not detected devices around STB"
-msgstr "No s'ha detectat cap dispositiu aprop"
-
-msgid "Connection with:\n"
-msgstr "Connectat amb:\n"
-
-msgid "Disconnect"
-msgstr "Desconnectar"
-
-msgid "Trying to pair with:"
-msgstr "Intentant vincular amb:"
-
-msgid "Can't not pair with selected device!"
-msgstr "No es pot vincular amb aquest dispositiu!"
-
-msgid "This is bt devices manager"
-msgstr "Gestió dels dispositius Bluetooth"
-
+#: ../src/plugin.py:225
 msgid "Scanning for devices..."
 msgstr "Cercant dispositius..."
 
-msgid "entry"
-msgstr " "
-
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC:\t\tNom:"
-
+#: ../src/plugin.py:225
 msgid "Scanning..."
 msgstr "Cercant..."
 
+#: ../src/plugin.py:237 ../src/plugin.py:249
+msgid "MAC:\t\tDevice name:"
+msgstr "MAC:\t\tNom:"
+
+#: ../src/plugin.py:237 ../src/plugin.py:249
+msgid "entry"
+msgstr " "
+
+#: ../src/plugin.py:250
+msgid "Not detected devices around STB"
+msgstr "No s'ha detectat cap dispositiu aprop"
+
+#: ../src/plugin.py:263
+msgid "Connection with:\n"
+msgstr "Connectat amb:\n"
+
+#: ../src/plugin.py:265 ../src/plugin.py:268
+msgid "Disconnect"
+msgstr "Desconnectar"
+
+#: ../src/plugin.py:283
+msgid "Trying to pair with:"
+msgstr "Intentant vincular amb:"
+
+#: ../src/plugin.py:292 ../src/plugin.py:301
+msgid "Can't not pair with selected device!"
+msgstr "No es pot vincular amb aquest dispositiu!"
+
+#: ../src/plugin.py:355
+msgid "This is bt devices manager"
+msgstr "Gestió dels dispositius Bluetooth"

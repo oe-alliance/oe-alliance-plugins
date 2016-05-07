@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD 4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-10 18:35+0100\n"
-"PO-Revision-Date: 2013-07-10 18:35+0100\n"
-"Last-Translator: Automatically generated\n"
+"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
+"PO-Revision-Date: 2016-05-07 13:38+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7\n"
 
 msgid "%"
 msgstr "%"
@@ -23,17 +24,17 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
-#, python-format
 msgid "% + Load@1min"
 msgstr "% + Load@1min"
 
-#, python-format
 msgid "% + Load@5min"
 msgstr "% + Load@5min"
 
-#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr "%d Mails  %d New  %s"
+
+msgid "%s - Current value: %s"
+msgstr ""
 
 msgid "-  Type"
 msgstr "-  Type"
@@ -68,6 +69,12 @@ msgstr "- Bar Range Max"
 msgid "- Bar Range Min"
 msgstr "- Bar Range Min"
 
+msgid "- Base"
+msgstr ""
+
+msgid "- Border"
+msgstr ""
+
 msgid "- CPU"
 msgstr "- CPU"
 
@@ -77,8 +84,8 @@ msgstr "- Caption Color"
 msgid "- Color"
 msgstr "- Color"
 
-msgid "- Current Day Color"
-msgstr "- Current Day Color"
+msgid "- Current Day Background Color"
+msgstr ""
 
 msgid "- Cut Height [disable = 0]"
 msgstr "- Cut Height [disable = 0]"
@@ -143,8 +150,14 @@ msgstr "- LCD 1 Background Color"
 msgid "- LCD 1 Background-Picture [ok]>"
 msgstr "- LCD 1 Background-Picture [ok]>"
 
-msgid "- LCD 1 Brightness [no SPF]"
-msgstr "- LCD 1 Brightness [no SPF]"
+msgid "- LCD 1 Brightness"
+msgstr ""
+
+msgid "- LCD 1 Night Reduction"
+msgstr ""
+
+msgid "- LCD 1 Refresh"
+msgstr ""
 
 msgid "- LCD 1 Rotate"
 msgstr "- LCD 1 Rotate"
@@ -155,8 +168,14 @@ msgstr "- LCD 2 Background Color"
 msgid "- LCD 2 Background-Picture [ok]>"
 msgstr "- LCD 2 Background-Picture [ok]>"
 
-msgid "- LCD 2 Brightness [no SPF]"
-msgstr "- LCD 2 Brightness [no SPF]"
+msgid "- LCD 2 Brightness"
+msgstr ""
+
+msgid "- LCD 2 Night Reduction"
+msgstr ""
+
+msgid "- LCD 2 Refresh"
+msgstr ""
 
 msgid "- LCD 2 Rotate"
 msgstr "- LCD 2 Rotate"
@@ -167,14 +186,23 @@ msgstr "- LCD 3 Background Color"
 msgid "- LCD 3 Background-Picture [ok]>"
 msgstr "- LCD 3 Background-Picture [ok]>"
 
-msgid "- LCD 3 Brightness [no SPF]"
-msgstr "- LCD 3 Brightness [no SPF]"
+msgid "- LCD 3 Brightness"
+msgstr ""
+
+msgid "- LCD 3 Night Reduction"
+msgstr ""
+
+msgid "- LCD 3 Refresh"
+msgstr ""
 
 msgid "- LCD 3 Rotate"
 msgstr "- LCD 3 Rotate"
 
 msgid "- Layout"
 msgstr "- Layout"
+
+msgid "- Length"
+msgstr ""
 
 msgid "- Length [Bar]"
 msgstr "- Length [Bar]"
@@ -185,6 +213,12 @@ msgstr "- Lines"
 msgid "- Mail Konto"
 msgstr "- Mail Konto"
 
+msgid "- Module"
+msgstr ""
+
+msgid "- Name"
+msgstr ""
+
 msgid "- OSD Size"
 msgstr "- OSD Size"
 
@@ -193,6 +227,9 @@ msgstr "- Online Name:Address"
 
 msgid "- Picon Cache Path [ok]>"
 msgstr "- Picon Cache Path [ok]>"
+
+msgid "- Picon First"
+msgstr ""
 
 msgid "- Picon Path 2 [ok]>"
 msgstr "- Picon Path 2 [ok]>"
@@ -214,6 +251,12 @@ msgstr "- Picture Size"
 
 msgid "- Picture [ok]>"
 msgstr "- Picture [ok]>"
+
+msgid "- Popup LCD"
+msgstr ""
+
+msgid "- Popup Screen"
+msgstr ""
 
 msgid "- Position"
 msgstr "- Position"
@@ -305,11 +348,14 @@ msgstr "- Spacing"
 msgid "- Split Screen"
 msgstr "- Split Screen"
 
+msgid "- Station"
+msgstr ""
+
 msgid "- Text Size"
 msgstr "- Text Size"
 
-msgid "- Timeout"
-msgstr "- Timeout"
+msgid "- Timeout [ms]"
+msgstr ""
 
 msgid "- Transparency"
 msgstr "- Transparency"
@@ -323,6 +369,9 @@ msgstr "- Type"
 msgid "- URL"
 msgstr "- URL"
 
+msgid "- Unit min"
+msgstr ""
+
 msgid "- Weather Type"
 msgstr "- Weather Type"
 
@@ -331,6 +380,9 @@ msgstr "- Zoom"
 
 msgid "- extra Info"
 msgstr "- extra Info"
+
+msgid "- free Warning"
+msgstr ""
 
 msgid "- max Width"
 msgstr "- max Width"
@@ -352,6 +404,12 @@ msgstr "0.5"
 
 msgid "1"
 msgstr "1"
+
+msgid "1 - normal"
+msgstr ""
+
+msgid "1 / min"
+msgstr ""
 
 msgid "1-2"
 msgstr "1-2"
@@ -380,8 +438,17 @@ msgstr "10min"
 msgid "10s"
 msgstr "10s"
 
+msgid "128x32"
+msgstr ""
+
+msgid "128x64"
+msgstr ""
+
 msgid "132x64"
 msgstr "132x64"
+
+msgid "14"
+msgstr ""
 
 msgid "15%"
 msgstr "15%"
@@ -401,11 +468,20 @@ msgstr "1min"
 msgid "2"
 msgstr "2"
 
+msgid "2 - side by side"
+msgstr ""
+
 msgid "2 Days 1 Line"
 msgstr "2 Days 1 Line"
 
 msgid "2 Days 2 Line"
 msgstr "2 Days 2 Line"
+
+msgid "2 x FastBackwardKey"
+msgstr ""
+
+msgid "2 x FastBackwardKey Type 2"
+msgstr ""
 
 msgid "2 x FastForwardKey"
 msgstr "2 x FastForwardKey"
@@ -415,6 +491,12 @@ msgstr "2 x FastForwardKey Type 2"
 
 msgid "2 x InfoKey"
 msgstr "2 x InfoKey"
+
+msgid "2 x Mute"
+msgstr ""
+
+msgid "2%"
+msgstr ""
 
 msgid "20"
 msgstr "20"
@@ -446,6 +528,9 @@ msgstr "2min"
 msgid "3"
 msgstr "3"
 
+msgid "3%"
+msgstr ""
+
 msgid "30"
 msgstr "30"
 
@@ -466,6 +551,9 @@ msgstr "35%"
 
 msgid "3min"
 msgstr "3min"
+
+msgid "4"
+msgstr ""
 
 msgid "4 Days 1 Line"
 msgstr "4 Days 1 Line"
@@ -530,8 +618,14 @@ msgstr "60min"
 msgid "65%"
 msgstr "65%"
 
+msgid "7"
+msgstr ""
+
 msgid "70%"
 msgstr "70%"
+
+msgid "720x405"
+msgstr ""
 
 msgid "75%"
 msgstr "75%"
@@ -578,8 +672,26 @@ msgstr "Analog+Date"
 msgid "Analog+Date+Weekday"
 msgstr "Analog+Date+Weekday"
 
+msgid "Analog+Date+Weekday 2"
+msgstr ""
+
+msgid "April"
+msgstr ""
+
 msgid "Audio/Video"
 msgstr "Audio/Video"
+
+msgid "August"
+msgstr ""
+
+msgid "Background"
+msgstr ""
+
+msgid "Background-Picture Type"
+msgstr ""
+
+msgid "Backup Config"
+msgstr ""
 
 msgid "Bar"
 msgstr "Bar"
@@ -611,20 +723,32 @@ msgstr "Box-Skin-LCD Enable On-Mode"
 msgid "C"
 msgstr "C"
 
-msgid "C + rmp"
-msgstr "C + rmp"
+msgid "C + rpm"
+msgstr ""
+
+msgid "C + rpm/2"
+msgstr ""
 
 msgid "Calendar"
 msgstr "Calendar"
-
-msgid "Calendar Background Processing"
-msgstr "Calendar Background Processing"
 
 msgid "Calendar Day Event Preview"
 msgstr "Calendar Day Event Preview"
 
 msgid "Calendar Line Thickness"
 msgstr "Calendar Line Thickness"
+
+msgid "Calendar Poll Interval"
+msgstr ""
+
+msgid "Calendar Saturday Color"
+msgstr ""
+
+msgid "Calendar Sunday Color"
+msgstr ""
+
+msgid "Calendar Timezone Correction"
+msgstr ""
 
 msgid "Calendar Transparency"
 msgstr "Calendar Transparency"
@@ -635,8 +759,17 @@ msgstr "Calendar ics-Path [ok]>"
 msgid "Calendar ics-URL"
 msgstr "Calendar ics-URL"
 
+msgid "Calendar planerFS"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Cancel"
+
+msgid "Channel"
+msgstr ""
+
+msgid "Channel+Title"
+msgstr ""
 
 msgid "Choose dir"
 msgstr "Choose dir"
@@ -656,8 +789,14 @@ msgstr "Clock 2"
 msgid "Config Backup Path [ok]>"
 msgstr "Config Backup Path [ok]>"
 
+msgid "Config Restore All Settings"
+msgstr ""
+
 msgid "Console normal"
 msgstr "Console normal"
+
+msgid "Corby@Pearl 128x128"
+msgstr ""
 
 msgid "Corner"
 msgstr "Corner"
@@ -677,9 +816,8 @@ msgstr "Current Temperature (+C)"
 msgid "Current Temperature (-C)"
 msgstr "Current Temperature (-C)"
 
-#, python-format
-msgid "Current value: %s"
-msgstr "Current value: %s"
+msgid "DVB-T Signal-Quality Correction"
+msgstr ""
 
 msgid "Date"
 msgstr "Date"
@@ -726,17 +864,38 @@ msgstr "Dates no Icon"
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr "Debug-Logging > /tmp/L4log.txt"
 
+msgid "December"
+msgstr ""
+
 msgid "Delete"
 msgstr "Delete"
 
 msgid "Delete File?"
 msgstr "Delete File?"
 
+msgid "Delete Logfile"
+msgstr ""
+
 msgid "Display Delay [ms]"
 msgstr "Display Delay [ms]"
 
 msgid "Double-button switches"
 msgstr "Double-button switches"
+
+msgid "Download Logfile"
+msgstr ""
+
+msgid "E"
+msgstr ""
+
+msgid "ENE"
+msgstr ""
+
+msgid "EPG"
+msgstr ""
+
+msgid "ESE"
+msgstr ""
 
 msgid "Event Icon Bar"
 msgstr "Event Icon Bar"
@@ -756,6 +915,9 @@ msgstr "Extended Description"
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
 
+msgid "February"
+msgstr ""
+
 msgid "First Quarter"
 msgstr "First Quarter"
 
@@ -774,17 +936,32 @@ msgstr "Font 2 [ok]>"
 msgid "Font 3 [ok]>"
 msgstr "Font 3 [ok]>"
 
+msgid "Font 4 [ok]>"
+msgstr ""
+
+msgid "Font 5 [ok]>"
+msgstr ""
+
 msgid "Font global [ok]>"
 msgstr "Font global [ok]>"
 
 msgid "Frame"
 msgstr "Frame"
 
+msgid "Fri"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
 msgid "FritzCall"
 msgstr "FritzCall"
 
 msgid "FritzCall Frame Picture [ok]>"
 msgstr "FritzCall Frame Picture [ok]>"
+
+msgid "FritzCall Number of Lines per Entry"
+msgstr ""
 
 msgid "FritzCall Number of List Entries"
 msgstr "FritzCall Number of List Entries"
@@ -797,6 +974,9 @@ msgstr "FritzCall Picture Orientation"
 
 msgid "FritzCall Picture Path [ok]>"
 msgstr "FritzCall Picture Path [ok]>"
+
+msgid "FritzCall Picture Transparency"
+msgstr ""
 
 msgid "FritzCall Pictures Search"
 msgstr "FritzCall Pictures Search"
@@ -829,6 +1009,9 @@ msgstr ""
 msgid "Global"
 msgstr "Global"
 
+msgid "Gradient"
+msgstr ""
+
 msgid "HDD"
 msgstr "HDD"
 
@@ -838,11 +1021,17 @@ msgstr "IMAP"
 msgid "IMAP-SSL"
 msgstr "IMAP-SSL"
 
+msgid "IP seurity not supported by Box"
+msgstr ""
+
 msgid "Info"
 msgstr "Info"
 
 msgid "Informations"
 msgstr "Informations"
+
+msgid "Informations 2"
+msgstr ""
 
 msgid "Infos"
 msgstr "Infos"
@@ -856,11 +1045,26 @@ msgstr "Internal TFT-LCD 400x240"
 msgid "Internal Vu+ Duo2 LCD 400x240"
 msgstr "Internal Vu+ Duo2 LCD 400x240"
 
+msgid "JPG"
+msgstr ""
+
+msgid "January"
+msgstr ""
+
 msgid "Javascript"
 msgstr "Javascript"
 
+msgid "July"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
 msgid "Key for Screen Change"
 msgstr "Key for Screen Change"
+
+msgid "Key for Screen On/Off"
+msgstr ""
 
 msgid "Knob"
 msgstr "Knob"
@@ -882,6 +1086,9 @@ msgstr "LCD 1+2+3"
 
 msgid "LCD 1+3"
 msgstr "LCD 1+3"
+
+msgid "LCD 1-3"
+msgstr ""
 
 msgid "LCD 2"
 msgstr "LCD 2"
@@ -907,14 +1114,14 @@ msgstr "LCD Custom Width"
 msgid "LCD Display"
 msgstr "LCD Display"
 
+msgid "LCD4linux Screen Switch"
+msgstr ""
+
 msgid "LCD4linux enabled"
 msgstr "LCD4linux enabled"
 
 msgid "Last Quarter"
 msgstr "Last Quarter"
-
-msgid "List of Storage Devices"
-msgstr "List of Storage Devices"
 
 msgid "Load Active Config-File"
 msgstr "Load Active Config-File"
@@ -922,7 +1129,6 @@ msgstr "Load Active Config-File"
 msgid "Load Defaults"
 msgstr "Load Defaults"
 
-#, python-format
 msgid "Load File : %s"
 msgstr "Load File : %s"
 
@@ -938,11 +1144,50 @@ msgstr "Logfile extensive"
 msgid "Logfile normal"
 msgstr "Logfile normal"
 
+msgid "Long FastBackwardKey"
+msgstr ""
+
+msgid "Long FastBackwardKey Type 2"
+msgstr ""
+
 msgid "Long FastForwardKey"
 msgstr "Long FastForwardKey"
 
 msgid "Long FastForwardKey Type 2"
 msgstr "Long FastForwardKey Type 2"
+
+msgid "Long InfoKey"
+msgstr ""
+
+msgid "MJPEG Boundary Mode"
+msgstr ""
+
+msgid "MJPEG Header Mode"
+msgstr ""
+
+msgid "MJPEG Stream"
+msgstr ""
+
+msgid "MJPEG Stream LCD 1 Port"
+msgstr ""
+
+msgid "MJPEG Stream LCD 1 enable"
+msgstr ""
+
+msgid "MJPEG Stream LCD 2 Port"
+msgstr ""
+
+msgid "MJPEG Stream LCD 2 enable"
+msgstr ""
+
+msgid "MJPEG Stream LCD 3 Port"
+msgstr ""
+
+msgid "MJPEG Stream LCD 3 enable"
+msgstr ""
+
+msgid "MSN"
+msgstr ""
 
 msgid "Mail"
 msgstr "Mail"
@@ -1007,17 +1252,35 @@ msgstr "Mail 5 Server"
 msgid "Mail 5 [Displayname:]Username"
 msgstr "Mail 5 [Displayname:]Username"
 
+msgid "Mail Hide Mailadress"
+msgstr ""
+
+msgid "Mail IMAP limit to last days"
+msgstr ""
+
 msgid "Mail Poll Interval"
 msgstr "Mail Poll Interval"
+
+msgid "Mail Show Date"
+msgstr ""
 
 msgid "Mail Show Empty Mailboxes"
 msgstr "Mail Show Empty Mailboxes"
 
+msgid "March"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
 msgid "Media"
 msgstr "Media"
 
-msgid "Memory"
-msgstr "Memory"
+msgid "Memory available"
+msgstr ""
+
+msgid "Memory free"
+msgstr ""
 
 msgid "Meteo URL"
 msgstr "Meteo URL"
@@ -1027,6 +1290,63 @@ msgstr "Meteo-Weather Station"
 
 msgid "Mini-EPG"
 msgstr "Mini-EPG"
+
+msgid "Module 1"
+msgstr ""
+
+msgid "Module 1+2"
+msgstr ""
+
+msgid "Module 1+2+3"
+msgstr ""
+
+msgid "Module 1+2+4"
+msgstr ""
+
+msgid "Module 1+3"
+msgstr ""
+
+msgid "Module 1+3+4"
+msgstr ""
+
+msgid "Module 1+4"
+msgstr ""
+
+msgid "Module 1-4"
+msgstr ""
+
+msgid "Module 1-5"
+msgstr ""
+
+msgid "Module 2"
+msgstr ""
+
+msgid "Module 2+3"
+msgstr ""
+
+msgid "Module 2+3+4"
+msgstr ""
+
+msgid "Module 2+4"
+msgstr ""
+
+msgid "Module 3"
+msgstr ""
+
+msgid "Module 3+4"
+msgstr ""
+
+msgid "Module 4"
+msgstr ""
+
+msgid "Module 5"
+msgstr ""
+
+msgid "Mon"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
 
 msgid "Month"
 msgstr "Month"
@@ -1040,11 +1360,29 @@ msgstr "Moon-Icon-Path [ok]>"
 msgid "Moonphase"
 msgstr "Moonphase"
 
+msgid "N"
+msgstr ""
+
+msgid "NE"
+msgstr ""
+
+msgid "NNE"
+msgstr ""
+
+msgid "NNW"
+msgstr ""
+
+msgid "NW"
+msgstr ""
+
 msgid "Name"
 msgstr "Name"
 
 msgid "Netatmo"
 msgstr "Netatmo"
+
+msgid "Netatmo 2"
+msgstr ""
 
 msgid "Netatmo CO2 Indicator"
 msgstr "Netatmo CO2 Indicator"
@@ -1055,6 +1393,9 @@ msgstr "Netatmo CO2 Max Range"
 msgid "Netatmo CO2 Min Range"
 msgstr "Netatmo CO2 Min Range"
 
+msgid "Netatmo Comfort Indicator"
+msgstr ""
+
 msgid "New Moon"
 msgstr "New Moon"
 
@@ -1064,8 +1405,20 @@ msgstr "Next Program Info"
 msgid "Next Timer Event"
 msgstr "Next Timer Event"
 
+msgid "No or wrong File selected, try a correct File first !"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
 msgid "Normal (5s)"
 msgstr "Normal (5s)"
+
+msgid "November"
+msgstr ""
+
+msgid "Now/Next"
+msgstr ""
 
 msgid "OSCAM not running"
 msgstr "OSCAM not running"
@@ -1075,6 +1428,9 @@ msgstr "OSD"
 
 msgid "OSD [display time]"
 msgstr "OSD [display time]"
+
+msgid "October"
+msgstr ""
 
 msgid "Offline"
 msgstr "Offline"
@@ -1097,8 +1453,11 @@ msgstr "Online+Offline"
 msgid "Only New"
 msgstr "Only New"
 
-msgid "Parent Directory"
-msgstr "Parent Directory"
+msgid "OpenWeatherMap"
+msgstr ""
+
+msgid "PNG"
+msgstr ""
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (or compatible LCD) 240x320"
@@ -1111,6 +1470,12 @@ msgstr "Picon"
 
 msgid "Picon 2"
 msgstr "Picon 2"
+
+msgid "Picon+Channel"
+msgstr ""
+
+msgid "Picon+Channel+Title"
+msgstr ""
 
 msgid "Picon+Position below"
 msgstr "Picon+Position below"
@@ -1139,6 +1504,12 @@ msgstr "Picture Quick Update Time [s]"
 msgid "Picture Sort"
 msgstr "Picture Sort"
 
+msgid "Picture Type [only Picture]"
+msgstr ""
+
+msgid "Plug Tuner"
+msgstr ""
+
 msgid "Pop3"
 msgstr "Pop3"
 
@@ -1156,6 +1527,9 @@ msgstr "Position"
 
 msgid "Program Info"
 msgstr "Program Info"
+
+msgid "Program Info 2"
+msgstr ""
 
 msgid "Program Name"
 msgstr "Program Name"
@@ -1178,6 +1552,9 @@ msgstr "Radio+Media"
 msgid "Recording"
 msgstr "Recording"
 
+msgid "Recording Picture [ok]>"
+msgstr ""
+
 msgid "Rectangle 1"
 msgstr "Rectangle 1"
 
@@ -1187,11 +1564,50 @@ msgstr "Rectangle 2"
 msgid "Reload"
 msgstr "Reload"
 
+msgid "Remote Box"
+msgstr ""
+
+msgid "Remote Box 1 [Displayname:]IP/Name"
+msgstr ""
+
+msgid "Remote Box 2 [Displayname:]IP/Name"
+msgstr ""
+
+msgid "Remote Box 3 [Displayname:]IP/Name"
+msgstr ""
+
+msgid "Remote Box 4 [Displayname:]IP/Name"
+msgstr ""
+
+msgid "Remote Box 5 [Displayname:]IP/Name"
+msgstr ""
+
+msgid "Remote Box Poll every Minutes"
+msgstr ""
+
 msgid "Restart Displays"
 msgstr "Restart Displays"
 
 msgid "Restart GUI now?"
 msgstr "Restart GUI now?"
+
+msgid "Restore Config"
+msgstr ""
+
+msgid "S"
+msgstr ""
+
+msgid "SE"
+msgstr ""
+
+msgid "SSE"
+msgstr ""
+
+msgid "SSW"
+msgstr ""
+
+msgid "SW"
+msgstr ""
 
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
@@ -1226,13 +1642,21 @@ msgstr "Samsung SPF-87H 800x480"
 msgid "Samsung SPF-87H old 800x480"
 msgstr "Samsung SPF-87H old 800x480"
 
+msgid "Sat"
+msgstr ""
+
 msgid "Satellite"
 msgstr "Satellite"
+
+msgid "Saturday"
+msgstr ""
 
 msgid "Save"
 msgstr "Save"
 
-#, python-format
+msgid "Save Config"
+msgstr ""
+
 msgid "Save Config to File... (%s)"
 msgstr "Save Config to File... (%s)"
 
@@ -1338,8 +1762,23 @@ msgstr "Screen 8"
 msgid "Screen 9"
 msgstr "Screen 9"
 
+msgid "Screen Switch Select - LCD"
+msgstr ""
+
+msgid "Screen Switch Select - Screen"
+msgstr ""
+
 msgid "Screens used for Changing"
 msgstr "Screens used for Changing"
+
+msgid "September"
+msgstr ""
+
+msgid "Service search first"
+msgstr ""
+
+msgid "Shadow Edges"
+msgstr ""
 
 msgid "Short"
 msgstr "Short"
@@ -1353,11 +1792,17 @@ msgstr "Short+Extended"
 msgid "Show"
 msgstr "Show"
 
+msgid "Show 'no ....' Messages"
+msgstr ""
+
 msgid "Show Cover"
 msgstr "Show Cover"
 
 msgid "Show Crash Corner"
 msgstr "Show Crash Corner"
+
+msgid "Show Externals"
+msgstr ""
 
 msgid "Show HTTP Text"
 msgstr "Show HTTP Text"
@@ -1373,9 +1818,6 @@ msgstr "Show Picture 3"
 
 msgid "Show Picture 4"
 msgstr "Show Picture 4"
-
-msgid "Show Recording"
-msgstr "Show Recording"
 
 msgid "Show Textfile"
 msgstr "Show Textfile"
@@ -1407,8 +1849,17 @@ msgstr "Storage-Devices: Force Read"
 msgid "Stutter TV"
 msgstr "Stutter TV"
 
+msgid "Sun"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
 msgid "Sunrise"
 msgstr "Sunrise"
+
+msgid "Switch FrameBuffer [if possible]"
+msgstr ""
 
 msgid "TV"
 msgstr "TV"
@@ -1431,8 +1882,17 @@ msgstr "Temperature+Co2"
 msgid "Temperature+Co2+Pressure"
 msgstr "Temperature+Co2+Pressure"
 
+msgid "Temperature+Humidity"
+msgstr ""
+
 msgid "Threads per LCD"
 msgstr "Threads per LCD"
+
+msgid "Thur"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
 
 msgid "Time"
 msgstr "Time"
@@ -1455,6 +1915,12 @@ msgstr "Timing ! calc all Times to Time/5*2 in Fastmode"
 msgid "Title"
 msgstr "Title"
 
+msgid "Tue"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
 msgid "Tuner Color"
 msgstr "Tuner Color"
 
@@ -1463,6 +1929,9 @@ msgstr "Tuner Color Active"
 
 msgid "Tuner Color On"
 msgstr "Tuner Color On"
+
+msgid "USB Tuner"
+msgstr ""
 
 msgid "Underline"
 msgstr "Underline"
@@ -1476,8 +1945,29 @@ msgstr "Used Tuner"
 msgid "Volume"
 msgstr "Volume"
 
+msgid "W"
+msgstr ""
+
+msgid "WNW"
+msgstr ""
+
+msgid "WSW"
+msgstr ""
+
+msgid "WWW ApiKey from cloudconvert.org"
+msgstr ""
+
+msgid "WWW ApiKey from convertapi.com"
+msgstr ""
+
+msgid "WWW Converter"
+msgstr ""
+
 msgid "WWW Converter Poll Interval"
 msgstr "WWW Converter Poll Interval"
+
+msgid "WWW Converter Usage"
+msgstr ""
 
 msgid "WWW-Internet Converter"
 msgstr "WWW-Internet Converter"
@@ -1499,6 +1989,12 @@ msgstr "Weather"
 
 msgid "Weather 2"
 msgstr "Weather 2"
+
+msgid "Weather API"
+msgstr ""
+
+msgid "Weather API-Key OpenWeatherMap"
+msgstr ""
 
 msgid "Weather City"
 msgstr "Weather City"
@@ -1524,11 +2020,26 @@ msgstr "Weather Rain Chance"
 msgid "Weather Transparency"
 msgstr "Weather Transparency"
 
+msgid "Weather Wind speed unit"
+msgstr ""
+
 msgid "Weather-Icon Zoom"
 msgstr "Weather-Icon Zoom"
 
 msgid "Weather-Icon-Path [ok]>"
 msgstr "Weather-Icon-Path [ok]>"
+
+msgid "WebIF"
+msgstr ""
+
+msgid "WebIF Design"
+msgstr ""
+
+msgid "WebIF IP Allow"
+msgstr ""
+
+msgid "WebIF IP Deny"
+msgstr ""
 
 msgid "WebIF Init Delay"
 msgstr "WebIF Init Delay"
@@ -1539,11 +2050,23 @@ msgstr "WebIF Refresh Type"
 msgid "WebIF Refresh [s]"
 msgstr "WebIF Refresh [s]"
 
+msgid "Wed"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
 msgid "Week"
 msgstr "Week"
 
 msgid "Week+Header"
 msgstr "Week+Header"
+
+msgid "Weekday"
+msgstr ""
+
+msgid "all"
+msgstr ""
 
 msgid "alphabetic"
 msgstr "alphabetic"
@@ -1572,11 +2095,23 @@ msgstr "blueviolet"
 msgid "brown"
 msgstr "brown"
 
+msgid "cache + adjustment (high quality, slow)"
+msgstr ""
+
+msgid "cache + adjustment (low quality, fast)"
+msgstr ""
+
 msgid "cadetblue"
 msgstr "cadetblue"
 
 msgid "center"
 msgstr "center"
+
+msgid "cloudconvert.org"
+msgstr ""
+
+msgid "convertapi.com"
+msgstr ""
 
 msgid "copy to Idle"
 msgstr "copy to Idle"
@@ -1590,7 +2125,6 @@ msgstr "copy to On"
 msgid "cornflowerblue"
 msgstr "cornflowerblue"
 
-#, python-format
 msgid "currently set : %s"
 msgstr "currently set : %s"
 
@@ -1663,6 +2197,9 @@ msgstr "indianred"
 msgid "indigo"
 msgstr "indigo"
 
+msgid "km/h"
+msgstr ""
+
 msgid "lawngreen"
 msgstr "lawngreen"
 
@@ -1684,6 +2221,9 @@ msgstr "low/fast (Picture only)"
 msgid "low/fast (all)"
 msgstr "low/fast (all)"
 
+msgid "m/s"
+msgstr ""
+
 msgid "magenta"
 msgstr "magenta"
 
@@ -1696,8 +2236,17 @@ msgstr "no"
 msgid "no Calendar"
 msgstr "no Calendar"
 
+msgid "no Calls"
+msgstr ""
+
 msgid "no Dates"
 msgstr "no Dates"
+
+msgid "no Icon"
+msgstr ""
+
+msgid "no Icon, with Targetnumber"
+msgstr ""
 
 msgid "no LCD1 Picture-File"
 msgstr "no LCD1 Picture-File"
@@ -1714,6 +2263,15 @@ msgstr "no Netatmo-Plugin installed"
 msgid "no Timer"
 msgstr "no Timer"
 
+msgid "no cache + no adjustment"
+msgstr ""
+
+msgid "no total Timer"
+msgstr ""
+
+msgid "normal"
+msgstr ""
+
 msgid "normal (full)"
 msgstr "normal (full)"
 
@@ -1725,6 +2283,9 @@ msgstr "olive"
 
 msgid "on"
 msgstr "on"
+
+msgid "one line"
+msgstr ""
 
 msgid "only Picture 1024x600"
 msgstr "only Picture 1024x600"
@@ -1762,6 +2323,9 @@ msgstr "random"
 msgid "red"
 msgstr "red"
 
+msgid "reduced"
+msgstr ""
+
 msgid "right"
 msgstr "right"
 
@@ -1770,6 +2334,9 @@ msgstr "rosybrown"
 
 msgid "rpm"
 msgstr "rpm"
+
+msgid "rpm/2"
+msgstr ""
 
 msgid "sandybrown"
 msgstr "sandybrown"
@@ -1783,11 +2350,17 @@ msgstr "show run"
 msgid "show run+sleep"
 msgstr "show run+sleep"
 
+msgid "show total Timer"
+msgstr ""
+
 msgid "silver"
 msgstr "silver"
 
 msgid "slategray"
 msgstr "slategray"
+
+msgid "stop Screencycle"
+msgstr ""
 
 msgid "tomato"
 msgstr "tomato"
@@ -1797,6 +2370,9 @@ msgstr "trimmed (black)"
 
 msgid "trimmed (transparent)"
 msgstr "trimmed (transparent)"
+
+msgid "two lines"
+msgstr ""
 
 msgid "use lead-time"
 msgstr "use lead-time"
@@ -1837,6 +2413,12 @@ msgstr "with Current 00:00 (below/Size 1.5)"
 msgid "with Current 00:00 (below/Size 2)"
 msgstr "with Current 00:00 (below/Size 2)"
 
+msgid "with Icon"
+msgstr ""
+
+msgid "with Icon & Targetnumber"
+msgstr ""
+
 msgid "with Percent"
 msgstr "with Percent"
 
@@ -1863,6 +2445,15 @@ msgstr "with Percent (below/Size 1.5)"
 
 msgid "with Percent (below/Size 2)"
 msgstr "with Percent (below/Size 2)"
+
+msgid "with Percent Minutes / Total (above)"
+msgstr ""
+
+msgid "with Percent Minutes / Total (above/Size 1.5)"
+msgstr ""
+
+msgid "with Percent Minutes / Total (above/Size 2)"
+msgstr ""
 
 msgid "with Remaining Minutes"
 msgstr "with Remaining Minutes"
@@ -1917,3 +2508,39 @@ msgstr "yes, long"
 
 msgid "yes, short"
 msgstr "yes, short"
+
+#~ msgid "- Current Day Color"
+#~ msgstr "- Current Day Color"
+
+#~ msgid "- LCD 1 Brightness [no SPF]"
+#~ msgstr "- LCD 1 Brightness [no SPF]"
+
+#~ msgid "- LCD 2 Brightness [no SPF]"
+#~ msgstr "- LCD 2 Brightness [no SPF]"
+
+#~ msgid "- LCD 3 Brightness [no SPF]"
+#~ msgstr "- LCD 3 Brightness [no SPF]"
+
+#~ msgid "- Timeout"
+#~ msgstr "- Timeout"
+
+#~ msgid "C + rmp"
+#~ msgstr "C + rmp"
+
+#~ msgid "Calendar Background Processing"
+#~ msgstr "Calendar Background Processing"
+
+#~ msgid "Current value: %s"
+#~ msgstr "Current value: %s"
+
+#~ msgid "List of Storage Devices"
+#~ msgstr "List of Storage Devices"
+
+#~ msgid "Memory"
+#~ msgstr "Memory"
+
+#~ msgid "Parent Directory"
+#~ msgstr "Parent Directory"
+
+#~ msgid "Show Recording"
+#~ msgstr "Show Recording"

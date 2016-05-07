@@ -1,78 +1,98 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BTDevicesManager\n"
-"Report-Msgid-Bugs-To: openspa.info\n"
-"POT-Creation-Date: 2015-09-07 14:58+0200\n"
-"PO-Revision-Date: 2016-03-02 17:15+0100\n"
-"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-07 13:09+0200\n"
+"PO-Revision-Date: 2016-05-07 13:09+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: openspa <openspa.info>\n"
-"Language: ES_es\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-Country: SPAIN\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
 
+#: ../src/plugin.py:108
 msgid "Bluetooth Devices Manager Setup"
 msgstr "Configuración del gestor de dipos. bluetooth"
 
+#: ../src/plugin.py:112
 msgid "Autostart"
 msgstr "Autoinicio"
 
+#: ../src/plugin.py:114 ../src/plugin.py:183
 msgid "Exit"
 msgstr "Salir"
 
+#: ../src/plugin.py:115
 msgid "Save"
 msgstr "Guardar"
 
+#: ../src/plugin.py:164 ../src/plugin.py:332 ../src/plugin.py:353
+#: ../src/plugin.py:355
 msgid "Bluetooth Devices Manager"
 msgstr "Gestor de dipositivos Bluetooth"
 
+#: ../src/plugin.py:168 ../src/plugin.py:219
 msgid "Please load BT driver by pressing BLUE button."
 msgstr "Cargue el controlador BT pulsando el botón AZUL"
 
+#: ../src/plugin.py:172 ../src/plugin.py:215 ../src/plugin.py:273
 msgid "No connected to any device"
 msgstr "No se ha conectado a ningún dispositivo"
 
+#: ../src/plugin.py:184
 msgid "(Re)Scan"
 msgstr "(Re)escanear"
 
+#: ../src/plugin.py:185 ../src/plugin.py:274
 msgid "Connect"
 msgstr "Conectar"
 
+#: ../src/plugin.py:189
 msgid "Config"
 msgstr "Configurar"
 
+#: ../src/plugin.py:207
 msgid "No BT devices found!"
 msgstr "No se ha encontrado ningún dispositivo Bluetooth"
 
-msgid "Not detected devices around STB"
-msgstr "No se ha detectado ningún dispositivo cercano"
-
-msgid "Connection with:\n"
-msgstr "Conectado con:\n"
-
-msgid "Disconnect"
-msgstr "Desconectar"
-
-msgid "Trying to pair with:"
-msgstr "Intentando emparejar con:"
-
-msgid "Can't not pair with selected device!"
-msgstr "No se puede emparejar con este dispositivo."
-
-msgid "This is bt devices manager"
-msgstr "Gestión de los dispositivos Bluetooth"
-
+#: ../src/plugin.py:225
 msgid "Scanning for devices..."
 msgstr "Buscando dispositivos..."
 
-msgid "entry"
-msgstr " "
-
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC:\t\tNombre:"
-
+#: ../src/plugin.py:225
 msgid "Scanning..."
 msgstr "Buscando..."
 
+#: ../src/plugin.py:237 ../src/plugin.py:249
+msgid "MAC:\t\tDevice name:"
+msgstr "MAC:\t\tNombre:"
+
+#: ../src/plugin.py:237 ../src/plugin.py:249
+msgid "entry"
+msgstr " "
+
+#: ../src/plugin.py:250
+msgid "Not detected devices around STB"
+msgstr "No se ha detectado ningún dispositivo cercano"
+
+#: ../src/plugin.py:263
+msgid "Connection with:\n"
+msgstr "Conectado con:\n"
+
+#: ../src/plugin.py:265 ../src/plugin.py:268
+msgid "Disconnect"
+msgstr "Desconectar"
+
+#: ../src/plugin.py:283
+msgid "Trying to pair with:"
+msgstr "Intentando emparejar con:"
+
+#: ../src/plugin.py:292 ../src/plugin.py:301
+msgid "Can't not pair with selected device!"
+msgstr "No se puede emparejar con este dispositivo."
+
+#: ../src/plugin.py:355
+msgid "This is bt devices manager"
+msgstr "Gestión de los dispositivos Bluetooth"

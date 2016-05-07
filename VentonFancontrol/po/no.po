@@ -4,58 +4,79 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: 2012-05-18 01:40+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2016-05-07 14:10+0200\n"
+"PO-Revision-Date: 2016-05-07 14:10+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
-"Language: \n"
+"Language: no\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Norwegian\n"
-"X-Poedit-Country: NORWAY\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Generator: Poedit 1.8.7\n"
+
+#: ../src/plugin.py:6
+msgid "Off"
+msgstr ""
+
+#: ../src/plugin.py:6
+msgid "On"
+msgstr ""
+
+#: ../src/plugin.py:6
+msgid "Auto"
+msgstr ""
+
+#: ../src/plugin.py:25
+msgid "Fan setup"
+msgstr ""
+
+#: ../src/plugin.py:30
+msgid "Cancel"
+msgstr ""
 
 #
-msgid "Close"
-msgstr "Lukk"
-
-msgid "Fan Control"
-msgstr ""
-
-msgid "Fan basic action"
-msgstr ""
-
-msgid "Fan off duration time"
-msgstr ""
-
-msgid "Fan on duration time"
-msgstr ""
-
-#
-msgid "Really close without saving settings?"
-msgstr "Vil du virkelig lukke uten å lagre"
-
-#
+#: ../src/plugin.py:31
 msgid "Save"
 msgstr ""
 
-msgid "Use Fan timer"
+#: ../src/plugin.py:48
+msgid "Fan mode"
+msgstr ""
+
+#: ../src/plugin.py:105
+msgid "FAN Control"
+msgstr ""
+
+#: ../src/plugin.py:113
+msgid "Fan Control"
+msgstr ""
+
+#: ../src/plugin.py:113
+msgid "switch Fan On/Off"
 msgstr ""
 
 #
-msgid "no"
-msgstr "Nei"
+#~ msgid "Close"
+#~ msgstr "Lukk"
 
 #
-msgid "off"
-msgstr "Av"
+#~ msgid "Really close without saving settings?"
+#~ msgstr "Vil du virkelig lukke uten å lagre"
 
 #
-msgid "on"
-msgstr "På"
+#~ msgid "no"
+#~ msgstr "Nei"
 
 #
-msgid "yes"
-msgstr "Ja"
+#~ msgid "off"
+#~ msgstr "Av"
+
+#
+#~ msgid "on"
+#~ msgstr "På"
+
+#
+#~ msgid "yes"
+#~ msgstr "Ja"

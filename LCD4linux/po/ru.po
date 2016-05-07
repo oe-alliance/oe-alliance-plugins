@@ -1,11 +1,15 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: LCD4linux\n"
+"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
+"PO-Revision-Date: 2016-05-07 13:07+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Language-Team: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
-"Project-Id-Version: LCD4linux\n"
-"Language: ru\n"
+"X-Generator: Poedit 1.8.7\n"
 
 msgid "%"
 msgstr "%"
@@ -58,6 +62,12 @@ msgstr "- Бар диапазон макс."
 msgid "- Bar Range Min"
 msgstr "- Бар диапазон мин."
 
+msgid "- Base"
+msgstr ""
+
+msgid "- Border"
+msgstr ""
+
 msgid "- CPU"
 msgstr "- CPU"
 
@@ -66,6 +76,9 @@ msgstr "- Название цвета"
 
 msgid "- Color"
 msgstr "- Цвет"
+
+msgid "- Current Day Background Color"
+msgstr ""
 
 msgid "- Cut Height [disable = 0]"
 msgstr "- Обрезать по высоте [выкл. = 0]"
@@ -130,6 +143,15 @@ msgstr "- LCD 1 Цвет фона"
 msgid "- LCD 1 Background-Picture [ok]>"
 msgstr "- LCD 1 Фон-картинка [ok]>"
 
+msgid "- LCD 1 Brightness"
+msgstr ""
+
+msgid "- LCD 1 Night Reduction"
+msgstr ""
+
+msgid "- LCD 1 Refresh"
+msgstr ""
+
 msgid "- LCD 1 Rotate"
 msgstr "- LCD 1 чередовать"
 
@@ -138,6 +160,15 @@ msgstr "- LCD 2 Цвет фона"
 
 msgid "- LCD 2 Background-Picture [ok]>"
 msgstr "- LCD 2 Фон-Картинка [ok]>"
+
+msgid "- LCD 2 Brightness"
+msgstr ""
+
+msgid "- LCD 2 Night Reduction"
+msgstr ""
+
+msgid "- LCD 2 Refresh"
+msgstr ""
 
 msgid "- LCD 2 Rotate"
 msgstr "- LCD 2 Чередовать"
@@ -148,11 +179,23 @@ msgstr "- LCD 3 Цвет фона"
 msgid "- LCD 3 Background-Picture [ok]>"
 msgstr "- LCD 3 Фон-Картинка [ok]>"
 
+msgid "- LCD 3 Brightness"
+msgstr ""
+
+msgid "- LCD 3 Night Reduction"
+msgstr ""
+
+msgid "- LCD 3 Refresh"
+msgstr ""
+
 msgid "- LCD 3 Rotate"
 msgstr "- LCD 3 Чередовать"
 
 msgid "- Layout"
 msgstr "- Макет"
+
+msgid "- Length"
+msgstr ""
 
 msgid "- Length [Bar]"
 msgstr "- Длинна [Бар]"
@@ -162,6 +205,12 @@ msgstr "- Линий"
 
 msgid "- Mail Konto"
 msgstr "- Учетная запись почты"
+
+msgid "- Module"
+msgstr ""
+
+msgid "- Name"
+msgstr ""
 
 msgid "- OSD Size"
 msgstr "- Размер OSD"
@@ -192,6 +241,9 @@ msgstr "-Позиция изображения"
 
 msgid "- Picture Size"
 msgstr "- Размер картинки"
+
+msgid "- Picture [ok]>"
+msgstr ""
 
 msgid "- Popup LCD"
 msgstr "- Popup LCD"
@@ -289,8 +341,14 @@ msgstr "- Растояние"
 msgid "- Split Screen"
 msgstr "- Разделение экрана"
 
+msgid "- Station"
+msgstr ""
+
 msgid "- Text Size"
 msgstr "- Размер текста"
+
+msgid "- Timeout [ms]"
+msgstr ""
 
 msgid "- Transparency"
 msgstr "- Прозрачность"
@@ -304,6 +362,9 @@ msgstr "- Тип"
 msgid "- URL"
 msgstr "- URL"
 
+msgid "- Unit min"
+msgstr ""
+
 msgid "- Weather Type"
 msgstr "- Тип погоды"
 
@@ -312,6 +373,9 @@ msgstr "- Увеличение"
 
 msgid "- extra Info"
 msgstr "- экстра инфо"
+
+msgid "- free Warning"
+msgstr ""
 
 msgid "- max Width"
 msgstr "- ширина макс."
@@ -331,8 +395,14 @@ msgstr "0"
 msgid "0.5"
 msgstr "0.5"
 
-msgid "180"
-msgstr "180"
+msgid "1"
+msgstr ""
+
+msgid "1 - normal"
+msgstr ""
+
+msgid "1 / min"
+msgstr ""
 
 msgid "1-2"
 msgstr "1-2"
@@ -346,6 +416,9 @@ msgstr "1-4"
 msgid "1-5"
 msgstr "1-5"
 
+msgid "10"
+msgstr ""
+
 msgid "10%"
 msgstr "10%"
 
@@ -358,8 +431,17 @@ msgstr "10мин"
 msgid "10s"
 msgstr "10с"
 
+msgid "128x32"
+msgstr ""
+
+msgid "128x64"
+msgstr ""
+
 msgid "132x64"
 msgstr "132x64"
+
+msgid "14"
+msgstr ""
 
 msgid "15%"
 msgstr "15%"
@@ -370,11 +452,17 @@ msgstr "15мин"
 msgid "15s"
 msgstr "15с"
 
+msgid "180"
+msgstr "180"
+
 msgid "1min"
 msgstr "1мин"
 
-msgid "270"
-msgstr "270"
+msgid "2"
+msgstr ""
+
+msgid "2 - side by side"
+msgstr ""
 
 msgid "2 Days 1 Line"
 msgstr "2 дня 1 линия"
@@ -385,6 +473,9 @@ msgstr "2 дня 2 линии"
 msgid "2 x FastBackwardKey"
 msgstr "2 x <<"
 
+msgid "2 x FastBackwardKey Type 2"
+msgstr ""
+
 msgid "2 x FastForwardKey"
 msgstr "2 x  >>"
 
@@ -394,8 +485,14 @@ msgstr "2 x >> Тип 2"
 msgid "2 x InfoKey"
 msgstr "2 x EPG"
 
+msgid "2 x Mute"
+msgstr ""
+
 msgid "2%"
 msgstr "2%"
+
+msgid "20"
+msgstr ""
 
 msgid "20%"
 msgstr "20%"
@@ -415,11 +512,20 @@ msgstr "25%"
 msgid "255x64"
 msgstr "255x64"
 
+msgid "270"
+msgstr "270"
+
 msgid "2min"
 msgstr "2мин."
 
+msgid "3"
+msgstr ""
+
 msgid "3%"
 msgstr "3%"
+
+msgid "30"
+msgstr ""
 
 msgid "30%"
 msgstr "30%"
@@ -438,6 +544,9 @@ msgstr "35%"
 
 msgid "3min"
 msgstr "3мин."
+
+msgid "4"
+msgstr ""
 
 msgid "4 Days 1 Line"
 msgstr "4 дня 1 линия"
@@ -462,6 +571,9 @@ msgstr "45%"
 
 msgid "4min"
 msgstr "4мин"
+
+msgid "5"
+msgstr ""
 
 msgid "5 Days 1 Line"
 msgstr "5 дней в 1 линию"
@@ -499,8 +611,14 @@ msgstr "60мин."
 msgid "65%"
 msgstr "65%"
 
+msgid "7"
+msgstr ""
+
 msgid "70%"
 msgstr "70%"
+
+msgid "720x405"
+msgstr ""
 
 msgid "75%"
 msgstr "75%"
@@ -513,6 +631,9 @@ msgstr "85%"
 
 msgid "8bit - grayscale/color"
 msgstr "8bit - серый/цветной"
+
+msgid "90"
+msgstr ""
 
 msgid "90%"
 msgstr "90%"
@@ -544,6 +665,9 @@ msgstr "Аналоговые+дата"
 msgid "Analog+Date+Weekday"
 msgstr "Аналоговые+дата+будни"
 
+msgid "Analog+Date+Weekday 2"
+msgstr ""
+
 msgid "April"
 msgstr "Апреля"
 
@@ -552,6 +676,15 @@ msgstr "Аудио/Видео"
 
 msgid "August"
 msgstr "Августа"
+
+msgid "Background"
+msgstr ""
+
+msgid "Background-Picture Type"
+msgstr ""
+
+msgid "Backup Config"
+msgstr ""
 
 msgid "Bar"
 msgstr "Balken"
@@ -583,6 +716,12 @@ msgstr "Box-Skin-LCD Enable On-Mode"
 msgid "C"
 msgstr "C"
 
+msgid "C + rpm"
+msgstr ""
+
+msgid "C + rpm/2"
+msgstr ""
+
 msgid "Calendar"
 msgstr "Календарь"
 
@@ -591,6 +730,18 @@ msgstr "Calendar Day Event Preview"
 
 msgid "Calendar Line Thickness"
 msgstr "Календарь-толщина линий"
+
+msgid "Calendar Poll Interval"
+msgstr ""
+
+msgid "Calendar Saturday Color"
+msgstr ""
+
+msgid "Calendar Sunday Color"
+msgstr ""
+
+msgid "Calendar Timezone Correction"
+msgstr ""
 
 msgid "Calendar Transparency"
 msgstr "Прозрачность календаря"
@@ -601,8 +752,17 @@ msgstr "Календарь ics-путь [ok]>"
 msgid "Calendar ics-URL"
 msgstr "Календарь ics-URL"
 
+msgid "Calendar planerFS"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Отмена"
+
+msgid "Channel"
+msgstr ""
+
+msgid "Channel+Title"
+msgstr ""
 
 msgid "Choose dir"
 msgstr "Выберите каталог"
@@ -622,8 +782,14 @@ msgstr "Часы 2"
 msgid "Config Backup Path [ok]>"
 msgstr "Путь для сохранения [ok]>"
 
+msgid "Config Restore All Settings"
+msgstr ""
+
 msgid "Console normal"
 msgstr "Konsole normal"
+
+msgid "Corby@Pearl 128x128"
+msgstr ""
 
 msgid "Corner"
 msgstr "Угол"
@@ -642,6 +808,9 @@ msgstr "Текущяя температура (+C)"
 
 msgid "Current Temperature (-C)"
 msgstr "Текущяя температура (-C)"
+
+msgid "DVB-T Signal-Quality Correction"
+msgstr ""
 
 msgid "Date"
 msgstr "Дата"
@@ -697,11 +866,29 @@ msgstr "Удалить"
 msgid "Delete File?"
 msgstr "Удалить файл?"
 
+msgid "Delete Logfile"
+msgstr ""
+
 msgid "Display Delay [ms]"
 msgstr "Задержка [ms]"
 
 msgid "Double-button switches"
 msgstr "Double-button switches"
+
+msgid "Download Logfile"
+msgstr ""
+
+msgid "E"
+msgstr ""
+
+msgid "ENE"
+msgstr ""
+
+msgid "EPG"
+msgstr ""
+
+msgid "ESE"
+msgstr ""
 
 msgid "Event Icon Bar"
 msgstr "Event Icon Bar"
@@ -742,6 +929,12 @@ msgstr "Шрифт 2 [ok]>"
 msgid "Font 3 [ok]>"
 msgstr "Шрифт 3 [ok]>"
 
+msgid "Font 4 [ok]>"
+msgstr ""
+
+msgid "Font 5 [ok]>"
+msgstr ""
+
 msgid "Font global [ok]>"
 msgstr "Zeichensatz Global [ok]>"
 
@@ -760,6 +953,9 @@ msgstr "FritzCall"
 msgid "FritzCall Frame Picture [ok]>"
 msgstr "FritzCall Frame Picture [ok]>"
 
+msgid "FritzCall Number of Lines per Entry"
+msgstr ""
+
 msgid "FritzCall Number of List Entries"
 msgstr "FritzCall Number of List Entries"
 
@@ -771,6 +967,9 @@ msgstr "FritzCall Picture Orientation"
 
 msgid "FritzCall Picture Path [ok]>"
 msgstr "FritzCall Picture Path [ok]>"
+
+msgid "FritzCall Picture Transparency"
+msgstr ""
 
 msgid "FritzCall Pictures Search"
 msgstr "FritzCall Pictures Search"
@@ -803,6 +1002,9 @@ msgstr ""
 msgid "Global"
 msgstr "Глобально"
 
+msgid "Gradient"
+msgstr ""
+
 msgid "HDD"
 msgstr "HDD"
 
@@ -812,11 +1014,17 @@ msgstr "IMAP"
 msgid "IMAP-SSL"
 msgstr "IMAP-SSL"
 
+msgid "IP seurity not supported by Box"
+msgstr ""
+
 msgid "Info"
 msgstr "Инфо"
 
 msgid "Informations"
 msgstr "Информация"
+
+msgid "Informations 2"
+msgstr ""
 
 msgid "Infos"
 msgstr "Узнайте больше"
@@ -829,6 +1037,9 @@ msgstr "Internal TFT-LCD 400x240"
 
 msgid "Internal Vu+ Duo2 LCD 400x240"
 msgstr "Internes Vu+ Duo2 LCD 400x240"
+
+msgid "JPG"
+msgstr ""
 
 msgid "January"
 msgstr "Января"
@@ -869,6 +1080,9 @@ msgstr "LCD 1+2+3"
 msgid "LCD 1+3"
 msgstr "LCD 1+3"
 
+msgid "LCD 1-3"
+msgstr ""
+
 msgid "LCD 2"
 msgstr "LCD 2"
 
@@ -892,6 +1106,9 @@ msgstr "Своя высота LCD"
 
 msgid "LCD Display"
 msgstr "LCD Дисплей"
+
+msgid "LCD4linux Screen Switch"
+msgstr ""
 
 msgid "LCD4linux enabled"
 msgstr "LCD4linux включен"
@@ -923,6 +1140,9 @@ msgstr "Logfile normal"
 msgid "Long FastBackwardKey"
 msgstr "Долгое нажатие <<"
 
+msgid "Long FastBackwardKey Type 2"
+msgstr ""
+
 msgid "Long FastForwardKey"
 msgstr "Долгое нажатие >>"
 
@@ -931,6 +1151,36 @@ msgstr "Долгое нажатие >> Тип 2"
 
 msgid "Long InfoKey"
 msgstr "Долгое нажатие EPG"
+
+msgid "MJPEG Boundary Mode"
+msgstr ""
+
+msgid "MJPEG Header Mode"
+msgstr ""
+
+msgid "MJPEG Stream"
+msgstr ""
+
+msgid "MJPEG Stream LCD 1 Port"
+msgstr ""
+
+msgid "MJPEG Stream LCD 1 enable"
+msgstr ""
+
+msgid "MJPEG Stream LCD 2 Port"
+msgstr ""
+
+msgid "MJPEG Stream LCD 2 enable"
+msgstr ""
+
+msgid "MJPEG Stream LCD 3 Port"
+msgstr ""
+
+msgid "MJPEG Stream LCD 3 enable"
+msgstr ""
+
+msgid "MSN"
+msgstr ""
 
 msgid "Mail"
 msgstr "Почта"
@@ -995,8 +1245,17 @@ msgstr "Mail 5 Server"
 msgid "Mail 5 [Displayname:]Username"
 msgstr "Mail 5 [Anzeigename:]Nutzername"
 
+msgid "Mail Hide Mailadress"
+msgstr ""
+
+msgid "Mail IMAP limit to last days"
+msgstr ""
+
 msgid "Mail Poll Interval"
 msgstr "Интервал проверки почты"
+
+msgid "Mail Show Date"
+msgstr ""
 
 msgid "Mail Show Empty Mailboxes"
 msgstr "Почта-Показывать пустые почтовые ящики"
@@ -1010,6 +1269,12 @@ msgstr "Мая"
 msgid "Media"
 msgstr "Медиа"
 
+msgid "Memory available"
+msgstr ""
+
+msgid "Memory free"
+msgstr ""
+
 msgid "Meteo URL"
 msgstr "Погода URL"
 
@@ -1018,6 +1283,57 @@ msgstr "Погода-Источник"
 
 msgid "Mini-EPG"
 msgstr "Mini-EPG"
+
+msgid "Module 1"
+msgstr ""
+
+msgid "Module 1+2"
+msgstr ""
+
+msgid "Module 1+2+3"
+msgstr ""
+
+msgid "Module 1+2+4"
+msgstr ""
+
+msgid "Module 1+3"
+msgstr ""
+
+msgid "Module 1+3+4"
+msgstr ""
+
+msgid "Module 1+4"
+msgstr ""
+
+msgid "Module 1-4"
+msgstr ""
+
+msgid "Module 1-5"
+msgstr ""
+
+msgid "Module 2"
+msgstr ""
+
+msgid "Module 2+3"
+msgstr ""
+
+msgid "Module 2+3+4"
+msgstr ""
+
+msgid "Module 2+4"
+msgstr ""
+
+msgid "Module 3"
+msgstr ""
+
+msgid "Module 3+4"
+msgstr ""
+
+msgid "Module 4"
+msgstr ""
+
+msgid "Module 5"
+msgstr ""
 
 msgid "Mon"
 msgstr "Пон"
@@ -1037,11 +1353,29 @@ msgstr "Месяц-путь к иконкам[ok]>"
 msgid "Moonphase"
 msgstr "Фазы Луны"
 
+msgid "N"
+msgstr ""
+
+msgid "NE"
+msgstr ""
+
+msgid "NNE"
+msgstr ""
+
+msgid "NNW"
+msgstr ""
+
+msgid "NW"
+msgstr ""
+
 msgid "Name"
 msgstr "Имя"
 
 msgid "Netatmo"
 msgstr "Чистый атмосферный"
+
+msgid "Netatmo 2"
+msgstr ""
 
 msgid "Netatmo CO2 Indicator"
 msgstr "Netatmo CO2 Indikator"
@@ -1052,6 +1386,9 @@ msgstr "Netatmo CO2 Max Range"
 msgid "Netatmo CO2 Min Range"
 msgstr "Netatmo CO2 Min Range"
 
+msgid "Netatmo Comfort Indicator"
+msgstr ""
+
 msgid "New Moon"
 msgstr "Новолуние"
 
@@ -1061,11 +1398,20 @@ msgstr "Инфо о следующей программе"
 msgid "Next Timer Event"
 msgstr "Следующее событие таймера"
 
+msgid "No or wrong File selected, try a correct File first !"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
 msgid "Normal (5s)"
 msgstr "Нормальный (5с)"
 
 msgid "November"
 msgstr "Ноября"
+
+msgid "Now/Next"
+msgstr ""
 
 msgid "OSCAM not running"
 msgstr "OSCAMне запущен"
@@ -1100,6 +1446,12 @@ msgstr "Онлайн+Оффлайн"
 msgid "Only New"
 msgstr "Только новости"
 
+msgid "OpenWeatherMap"
+msgstr ""
+
+msgid "PNG"
+msgstr ""
+
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (or compatible LCD) 240x320"
 
@@ -1111,6 +1463,12 @@ msgstr "Пикон"
 
 msgid "Picon 2"
 msgstr "Пикон 2"
+
+msgid "Picon+Channel"
+msgstr ""
+
+msgid "Picon+Channel+Title"
+msgstr ""
 
 msgid "Picon+Position below"
 msgstr "Пикон+позиция ниже"
@@ -1139,6 +1497,12 @@ msgstr "Время обновления картинок [s]"
 msgid "Picture Sort"
 msgstr "Сортировка картинок"
 
+msgid "Picture Type [only Picture]"
+msgstr ""
+
+msgid "Plug Tuner"
+msgstr ""
+
 msgid "Pop3"
 msgstr "Pop3"
 
@@ -1156,6 +1520,9 @@ msgstr "Позиция"
 
 msgid "Program Info"
 msgstr "Инфо о програме"
+
+msgid "Program Info 2"
+msgstr ""
 
 msgid "Program Name"
 msgstr "Название передачи"
@@ -1178,6 +1545,9 @@ msgstr "Радио+Медиа"
 msgid "Recording"
 msgstr "Запись"
 
+msgid "Recording Picture [ok]>"
+msgstr ""
+
 msgid "Rectangle 1"
 msgstr "Прямоугольник 1"
 
@@ -1187,11 +1557,50 @@ msgstr "Прямоугольник 2"
 msgid "Reload"
 msgstr "Перезагрузить"
 
+msgid "Remote Box"
+msgstr ""
+
+msgid "Remote Box 1 [Displayname:]IP/Name"
+msgstr ""
+
+msgid "Remote Box 2 [Displayname:]IP/Name"
+msgstr ""
+
+msgid "Remote Box 3 [Displayname:]IP/Name"
+msgstr ""
+
+msgid "Remote Box 4 [Displayname:]IP/Name"
+msgstr ""
+
+msgid "Remote Box 5 [Displayname:]IP/Name"
+msgstr ""
+
+msgid "Remote Box Poll every Minutes"
+msgstr ""
+
 msgid "Restart Displays"
 msgstr "Рестарт дисплея"
 
 msgid "Restart GUI now?"
 msgstr "Перегрузить GUI сейчас?"
+
+msgid "Restore Config"
+msgstr ""
+
+msgid "S"
+msgstr ""
+
+msgid "SE"
+msgstr ""
+
+msgid "SSE"
+msgstr ""
+
+msgid "SSW"
+msgstr ""
+
+msgid "SW"
+msgstr ""
 
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
@@ -1237,6 +1646,9 @@ msgstr "Суббота"
 
 msgid "Save"
 msgstr "Сохранить"
+
+msgid "Save Config"
+msgstr ""
 
 msgid "Save Config to File... (%s)"
 msgstr "Сохранить конфиг в файл... (%s)"
@@ -1343,11 +1755,23 @@ msgstr "Экран 8"
 msgid "Screen 9"
 msgstr "Экран 9"
 
+msgid "Screen Switch Select - LCD"
+msgstr ""
+
+msgid "Screen Switch Select - Screen"
+msgstr ""
+
 msgid "Screens used for Changing"
 msgstr "Функция используется для изменения экрана"
 
 msgid "September"
 msgstr "Сентября"
+
+msgid "Service search first"
+msgstr ""
+
+msgid "Shadow Edges"
+msgstr ""
 
 msgid "Short"
 msgstr "Краткий"
@@ -1361,11 +1785,17 @@ msgstr "Краткий+Расширенный"
 msgid "Show"
 msgstr "Показать"
 
+msgid "Show 'no ....' Messages"
+msgstr ""
+
 msgid "Show Cover"
 msgstr "Показать обложку"
 
 msgid "Show Crash Corner"
 msgstr "Показать Crash Corner"
+
+msgid "Show Externals"
+msgstr ""
 
 msgid "Show HTTP Text"
 msgstr "Показать HTTP текст"
@@ -1421,6 +1851,9 @@ msgstr "Воскресенье"
 msgid "Sunrise"
 msgstr "Восход солнца"
 
+msgid "Switch FrameBuffer [if possible]"
+msgstr ""
+
 msgid "TV"
 msgstr "TV"
 
@@ -1441,6 +1874,9 @@ msgstr "Температура+Co2"
 
 msgid "Temperature+Co2+Pressure"
 msgstr "Температура+Co2+Давление"
+
+msgid "Temperature+Humidity"
+msgstr ""
 
 msgid "Threads per LCD"
 msgstr "Threads pro LCD"
@@ -1487,6 +1923,9 @@ msgstr "Цвет активного тюнера"
 msgid "Tuner Color On"
 msgstr "Цвет тюнера"
 
+msgid "USB Tuner"
+msgstr ""
+
 msgid "Underline"
 msgstr "Подчеркивание"
 
@@ -1499,8 +1938,29 @@ msgstr "Используемый тюнер"
 msgid "Volume"
 msgstr "Громкость"
 
+msgid "W"
+msgstr ""
+
+msgid "WNW"
+msgstr ""
+
+msgid "WSW"
+msgstr ""
+
+msgid "WWW ApiKey from cloudconvert.org"
+msgstr ""
+
+msgid "WWW ApiKey from convertapi.com"
+msgstr ""
+
+msgid "WWW Converter"
+msgstr ""
+
 msgid "WWW Converter Poll Interval"
 msgstr "WWW Converter Poll Interval"
+
+msgid "WWW Converter Usage"
+msgstr ""
 
 msgid "WWW-Internet Converter"
 msgstr "WWW-Internet Converter"
@@ -1522,6 +1982,12 @@ msgstr "Погода"
 
 msgid "Weather 2"
 msgstr "Погода 2"
+
+msgid "Weather API"
+msgstr ""
+
+msgid "Weather API-Key OpenWeatherMap"
+msgstr ""
 
 msgid "Weather City"
 msgstr "Погода-Город"
@@ -1547,11 +2013,20 @@ msgstr "Возможен дождь"
 msgid "Weather Transparency"
 msgstr "Погода-Прозрачность"
 
+msgid "Weather Wind speed unit"
+msgstr ""
+
 msgid "Weather-Icon Zoom"
 msgstr "Погода-Увеличение иконок"
 
 msgid "Weather-Icon-Path [ok]>"
 msgstr "Погода-путь к иконкам [ok]>"
+
+msgid "WebIF"
+msgstr ""
+
+msgid "WebIF Design"
+msgstr ""
 
 msgid "WebIF IP Allow"
 msgstr "WebIF IP Allow"
@@ -1580,6 +2055,12 @@ msgstr "Неделя"
 msgid "Week+Header"
 msgstr "Неделя+Заголовок"
 
+msgid "Weekday"
+msgstr ""
+
+msgid "all"
+msgstr ""
+
 msgid "alphabetic"
 msgstr "По алфавиту"
 
@@ -1607,11 +2088,23 @@ msgstr "blauviolett"
 msgid "brown"
 msgstr "коричневый"
 
+msgid "cache + adjustment (high quality, slow)"
+msgstr ""
+
+msgid "cache + adjustment (low quality, fast)"
+msgstr ""
+
 msgid "cadetblue"
 msgstr "cadetblue"
 
 msgid "center"
 msgstr "центр"
+
+msgid "cloudconvert.org"
+msgstr ""
+
+msgid "convertapi.com"
+msgstr ""
 
 msgid "copy to Idle"
 msgstr "копировать в фоне"
@@ -1697,6 +2190,9 @@ msgstr "indianrot"
 msgid "indigo"
 msgstr "indigo"
 
+msgid "km/h"
+msgstr ""
+
 msgid "lawngreen"
 msgstr "lawngreen"
 
@@ -1718,6 +2214,9 @@ msgstr "низкий/быстрый (Только изображения)"
 msgid "low/fast (all)"
 msgstr "низкий/быстрый (Все)"
 
+msgid "m/s"
+msgstr ""
+
 msgid "magenta"
 msgstr "пурпурный"
 
@@ -1730,11 +2229,17 @@ msgstr "нет"
 msgid "no Calendar"
 msgstr "нет календаря"
 
+msgid "no Calls"
+msgstr ""
+
 msgid "no Dates"
 msgstr "нет даты"
 
 msgid "no Icon"
 msgstr "kein Icon"
+
+msgid "no Icon, with Targetnumber"
+msgstr ""
 
 msgid "no LCD1 Picture-File"
 msgstr "no LCD1 Picture-File"
@@ -1751,6 +2256,15 @@ msgstr "Netatmo-Plugin не установлен"
 msgid "no Timer"
 msgstr "нет таймера"
 
+msgid "no cache + no adjustment"
+msgstr ""
+
+msgid "no total Timer"
+msgstr ""
+
+msgid "normal"
+msgstr ""
+
 msgid "normal (full)"
 msgstr "нормальный (полный)"
 
@@ -1762,6 +2276,9 @@ msgstr "оливковый"
 
 msgid "on"
 msgstr "вкл."
+
+msgid "one line"
+msgstr ""
 
 msgid "only Picture 1024x600"
 msgstr "только фото 1024x600"
@@ -1799,6 +2316,9 @@ msgstr "случайно"
 msgid "red"
 msgstr "красный"
 
+msgid "reduced"
+msgstr ""
+
 msgid "right"
 msgstr "справа"
 
@@ -1823,6 +2343,9 @@ msgstr "показать запущенные"
 msgid "show run+sleep"
 msgstr "показать запущенные+sleep"
 
+msgid "show total Timer"
+msgstr ""
+
 msgid "silver"
 msgstr "серебро"
 
@@ -1840,6 +2363,9 @@ msgstr "обрезается (черный)"
 
 msgid "trimmed (transparent)"
 msgstr "обрезается (прозрачный)"
+
+msgid "two lines"
+msgstr ""
 
 msgid "use lead-time"
 msgstr "Использовать время"
@@ -1883,6 +2409,9 @@ msgstr "with Current 00:00 (below/Size 2)"
 msgid "with Icon"
 msgstr "mit Icon"
 
+msgid "with Icon & Targetnumber"
+msgstr ""
+
 msgid "with Percent"
 msgstr "вместе с процентами"
 
@@ -1909,6 +2438,15 @@ msgstr "with Percent (below/Size 1.5)"
 
 msgid "with Percent (below/Size 2)"
 msgstr "with Percent (below/Size 2)"
+
+msgid "with Percent Minutes / Total (above)"
+msgstr ""
+
+msgid "with Percent Minutes / Total (above/Size 1.5)"
+msgstr ""
+
+msgid "with Percent Minutes / Total (above/Size 2)"
+msgstr ""
 
 msgid "with Remaining Minutes"
 msgstr "with Remaining Minutes"

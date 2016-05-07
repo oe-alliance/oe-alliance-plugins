@@ -2,224 +2,341 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-10 12:19-0700\n"
-"PO-Revision-Date: 2015-02-10 22:44+0100\n"
-"Last-Translator: mimi74\n"
+"POT-Creation-Date: 2016-05-07 14:04+0200\n"
+"PO-Revision-Date: 2016-05-07 14:04+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french-EGAMI\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-msgid "%s"
-msgstr "%s"
+#: ../src/plugin.py:57
+msgid "enable"
+msgstr ""
 
-msgid "1.0"
-msgstr "1.0"
+#: ../src/plugin.py:57
+msgid "disable"
+msgstr ""
 
-msgid "160x120"
-msgstr "160x120"
-
-msgid "16x9"
-msgstr "16x9"
-
-msgid "2.0"
-msgstr "2.0"
-
-msgid "2.1"
-msgstr "2.1"
-
-msgid "2.2"
-msgstr "2.2"
-
-msgid "2nd transcoding and PIP are mutually exclusive."
-msgstr "2nd transcodage et PIP sont mutuellement exclusif."
-
-msgid "3.0"
-msgstr "3.0"
-
-msgid "3.1"
-msgstr "3.1"
-
-msgid "3.2"
-msgstr "3.2"
-
-msgid "320x240"
-msgstr "320x240"
-
-msgid "4.0"
-msgstr "4.0"
-
-msgid "4.1"
-msgstr "4.1"
-
-msgid "4.2"
-msgstr "4.2"
-
-msgid "480p"
-msgstr "480p"
-
-msgid "4x3"
-msgstr "4x3"
-
-msgid "5.0"
-msgstr "5.0"
-
-msgid "576p"
-msgstr "576p"
-
-msgid "720p"
-msgstr "720p"
-
-msgid "Advanced"
-msgstr "avancé"
-
-msgid "Aspect Ratio"
-msgstr "Aspect Ratio"
-
-msgid "Audio codec"
-msgstr "Codec audio"
-
-msgid "Auto set Framerate / Bitrate"
-msgstr "Réglage auto Cadence / Débit"
-
-msgid "Bitrate"
-msgstr "Débit binaire"
-
-msgid "Cancel"
-msgstr "Annuler"
-
-msgid "Default"
-msgstr "Standard"
-
-msgid "Encoder"
-msgstr "Encoder"
-
-msgid "Encoder 0: Aspect Ratio"
-msgstr "Encodeur 0: Aspectratio"
-
-msgid "Encoder 0: Audio codec"
-msgstr "Encodeur 0: Codec audio"
-
-msgid "Encoder 0: Auto mode (Bitrate/Framerate)"
-msgstr "Encodeur 0: Mode auto (Débit/Cadence)"
-
-msgid "Encoder 0: Bitrate"
-msgstr "Encodeur 0: Débit binaire"
-
-msgid "Encoder 0: Framerate"
-msgstr "Encodeur 0: Cadence trame"
-
-msgid "Encoder 0: GOP Frame B"
-msgstr "Encodeur 0: GOP Trame B"
-
-msgid "Encoder 0: GOP Frame P"
-msgstr "Encodeur 0: GOP Trame P"
-
-msgid "Encoder 0: Level"
-msgstr "Encodeur 0: Level"
-
-msgid "Encoder 0: Profile"
-msgstr "Encodeur 0: Profil"
-
-msgid "Encoder 0: Resolution"
-msgstr "Encodeur 0: Résolution"
-
-msgid "Encoder 0: Video codec"
-msgstr "Encodeur 0: Codec vidéo"
-
-msgid "Encoder 1: Aspect Ratio"
-msgstr "Encodeur 1: Aspect Ratio"
-
-msgid "Encoder 1: Audio codec"
-msgstr "Encodeur 1: Codec audio"
-
-msgid "Encoder 1: Auto mode (Bitrate/Framerate)"
-msgstr "Encodeur 1: Mode auto (Débit/Cadence)"
-
-msgid "Encoder 1: Bitrate"
-msgstr "Encodeur 1: Débit binaire"
-
-msgid "Encoder 1: Framerate"
-msgstr "Encodeur 1: Cadence trame"
-
-msgid "Encoder 1: GOP Frame B"
-msgstr "Encodeur 1: GOP Trame B"
-
-msgid "Encoder 1: GOP Frame P"
-msgstr "Encodeur 1: GOP Trame P"
-
-msgid "Encoder 1: Level"
-msgstr "Encodeur 1: Level"
-
-msgid "Encoder 1: Profile"
-msgstr "Encodeur 1: Profil"
-
-msgid "Encoder 1: Resolution"
-msgstr "Encodeur 1: Résolution"
-
-msgid "Encoder 1: Video codec"
-msgstr "Encodeur 1: Codec vidéo"
-
-msgid "Framerate"
-msgstr "Cadence trame"
-
-msgid "GOP Frame B"
-msgstr "GOP Trame B"
-
-msgid "GOP Frame P"
-msgstr "GOP Trame P"
-
-msgid "Level"
-msgstr "Level"
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Min"
-msgstr "Min"
-
-msgid "Normal"
-msgstr "Normal"
-
-msgid "Off"
-msgstr "Hors"
-
+#: ../src/plugin.py:80
 msgid "On"
 msgstr "En"
 
-msgid "Port"
-msgstr "Port"
+#: ../src/plugin.py:80
+msgid "Off"
+msgstr "Hors"
 
-msgid "Profile"
-msgstr "Profile"
+#: ../src/plugin.py:84
+msgid "480p"
+msgstr "480p"
 
-msgid "Really close without saving settings?"
-msgstr "Vraiment fermer sans sauver les paramètres?"
+#: ../src/plugin.py:84
+msgid "576p"
+msgstr "576p"
 
-msgid "Resolution"
-msgstr "Résolution"
+#: ../src/plugin.py:84
+msgid "720p"
+msgstr "720p"
 
-msgid "Save"
-msgstr "Sauver"
+#: ../src/plugin.py:84
+msgid "320x240"
+msgstr "320x240"
 
-msgid "This model is not support transcoding."
-msgstr "Ce modèle ne supporte pas le transcodage."
+#: ../src/plugin.py:84
+msgid "160x120"
+msgstr "160x120"
 
+#: ../src/plugin.py:86
+msgid "1080p"
+msgstr ""
+
+#: ../src/plugin.py:91
+msgid "auto"
+msgstr ""
+
+#: ../src/plugin.py:91
+msgid "4x3"
+msgstr "4x3"
+
+#: ../src/plugin.py:91
+msgid "16x9"
+msgstr "16x9"
+
+#: ../src/plugin.py:95
+msgid "mpg"
+msgstr ""
+
+#: ../src/plugin.py:95
+msgid "mp3"
+msgstr ""
+
+#: ../src/plugin.py:95
+msgid "aac"
+msgstr "aac"
+
+#: ../src/plugin.py:95
+msgid "aac+"
+msgstr ""
+
+#: ../src/plugin.py:95
+msgid "aac+loas"
+msgstr ""
+
+#: ../src/plugin.py:95
+msgid "aac+adts"
+msgstr ""
+
+#: ../src/plugin.py:95
+msgid "ac3"
+msgstr ""
+
+#: ../src/plugin.py:99
+msgid "h264"
+msgstr ""
+
+#: ../src/plugin.py:111
+msgid "1.0"
+msgstr "1.0"
+
+#: ../src/plugin.py:111
+msgid "2.0"
+msgstr "2.0"
+
+#: ../src/plugin.py:112
+msgid "2.1"
+msgstr "2.1"
+
+#: ../src/plugin.py:112
+msgid "2.2"
+msgstr "2.2"
+
+#: ../src/plugin.py:112
+msgid "3.0"
+msgstr "3.0"
+
+#: ../src/plugin.py:112
+msgid "3.1"
+msgstr "3.1"
+
+#: ../src/plugin.py:113
+msgid "3.2"
+msgstr "3.2"
+
+#: ../src/plugin.py:113
+msgid "4.0"
+msgstr "4.0"
+
+#: ../src/plugin.py:113
+msgid "4.1"
+msgstr "4.1"
+
+#: ../src/plugin.py:113
+msgid "4.2"
+msgstr "4.2"
+
+#: ../src/plugin.py:114
+msgid "5.0"
+msgstr "5.0"
+
+#: ../src/plugin.py:114
+msgid "low"
+msgstr ""
+
+#: ../src/plugin.py:114 ../src/plugin.py:118
+msgid "main"
+msgstr ""
+
+#: ../src/plugin.py:114 ../src/plugin.py:118
+msgid "high"
+msgstr ""
+
+#: ../src/plugin.py:118
+msgid "baseline"
+msgstr ""
+
+#: ../src/plugin.py:118
+msgid "simple"
+msgstr ""
+
+#: ../src/plugin.py:118
+msgid "advancedsimple"
+msgstr ""
+
+#: ../src/plugin.py:351 ../src/plugin.py:560
 msgid "Transcoding Setup"
 msgstr "Paramètres transcodage"
 
+#: ../src/plugin.py:355
 msgid "Transcoding and PIP are mutually exclusive."
 msgstr "Transcodage et PIP sont mutuellement exclusif."
 
-msgid "TranscodingSetup"
-msgstr "Paramètres transcode"
+#: ../src/plugin.py:357
+msgid "2nd transcoding and PIP are mutually exclusive."
+msgstr "2nd transcodage et PIP sont mutuellement exclusif."
 
+#: ../src/plugin.py:358
+#, python-format
+msgid "%s"
+msgstr "%s"
+
+#: ../src/plugin.py:360
+msgid "Cancel"
+msgstr "Annuler"
+
+#: ../src/plugin.py:361
+msgid "Save"
+msgstr "Sauver"
+
+#: ../src/plugin.py:362
+msgid "Default"
+msgstr "Standard"
+
+#: ../src/plugin.py:363 ../src/plugin.py:529
+msgid "Advanced"
+msgstr "avancé"
+
+#: ../src/plugin.py:407
+msgid "This model is not support transcoding."
+msgstr "Ce modèle ne supporte pas le transcodage."
+
+#: ../src/plugin.py:411
+msgid "Port"
+msgstr "Port"
+
+#: ../src/plugin.py:417
+msgid "Encoder"
+msgstr "Encoder"
+
+#: ../src/plugin.py:428
+msgid "Auto set Framerate / Bitrate"
+msgstr "Réglage auto Cadence / Débit"
+
+#: ../src/plugin.py:435
+msgid "Bitrate"
+msgstr "Débit binaire"
+
+#: ../src/plugin.py:437
+msgid "Framerate"
+msgstr "Cadence trame"
+
+#: ../src/plugin.py:441
+msgid "Resolution"
+msgstr "Résolution"
+
+#: ../src/plugin.py:444
+msgid "Aspect Ratio"
+msgstr "Aspect Ratio"
+
+#: ../src/plugin.py:447
+msgid "Audio codec"
+msgstr "Codec audio"
+
+#: ../src/plugin.py:450
 msgid "Video codec"
 msgstr "Codec vidéo"
 
-msgid "aac"
-msgstr "aac"
+#: ../src/plugin.py:453
+msgid "GOP Frame B"
+msgstr "GOP Trame B"
+
+#: ../src/plugin.py:456
+msgid "GOP Frame P"
+msgstr "GOP Trame P"
+
+#: ../src/plugin.py:459
+msgid "Level"
+msgstr "Level"
+
+#: ../src/plugin.py:462
+msgid "Profile"
+msgstr "Profile"
+
+#: ../src/plugin.py:484
+msgid "Min"
+msgstr "Min"
+
+#: ../src/plugin.py:484
+msgid "Max"
+msgstr "Max"
+
+#: ../src/plugin.py:517
+msgid "Really close without saving settings?"
+msgstr "Vraiment fermer sans sauver les paramètres?"
+
+#: ../src/plugin.py:526
+msgid "Normal"
+msgstr "Normal"
+
+#: ../src/plugin.py:559
+msgid "TranscodingSetup"
+msgstr "Paramètres transcode"
+
+#~ msgid "Encoder 0: Aspect Ratio"
+#~ msgstr "Encodeur 0: Aspectratio"
+
+#~ msgid "Encoder 0: Audio codec"
+#~ msgstr "Encodeur 0: Codec audio"
+
+#~ msgid "Encoder 0: Auto mode (Bitrate/Framerate)"
+#~ msgstr "Encodeur 0: Mode auto (Débit/Cadence)"
+
+#~ msgid "Encoder 0: Bitrate"
+#~ msgstr "Encodeur 0: Débit binaire"
+
+#~ msgid "Encoder 0: Framerate"
+#~ msgstr "Encodeur 0: Cadence trame"
+
+#~ msgid "Encoder 0: GOP Frame B"
+#~ msgstr "Encodeur 0: GOP Trame B"
+
+#~ msgid "Encoder 0: GOP Frame P"
+#~ msgstr "Encodeur 0: GOP Trame P"
+
+#~ msgid "Encoder 0: Level"
+#~ msgstr "Encodeur 0: Level"
+
+#~ msgid "Encoder 0: Profile"
+#~ msgstr "Encodeur 0: Profil"
+
+#~ msgid "Encoder 0: Resolution"
+#~ msgstr "Encodeur 0: Résolution"
+
+#~ msgid "Encoder 0: Video codec"
+#~ msgstr "Encodeur 0: Codec vidéo"
+
+#~ msgid "Encoder 1: Aspect Ratio"
+#~ msgstr "Encodeur 1: Aspect Ratio"
+
+#~ msgid "Encoder 1: Audio codec"
+#~ msgstr "Encodeur 1: Codec audio"
+
+#~ msgid "Encoder 1: Auto mode (Bitrate/Framerate)"
+#~ msgstr "Encodeur 1: Mode auto (Débit/Cadence)"
+
+#~ msgid "Encoder 1: Bitrate"
+#~ msgstr "Encodeur 1: Débit binaire"
+
+#~ msgid "Encoder 1: Framerate"
+#~ msgstr "Encodeur 1: Cadence trame"
+
+#~ msgid "Encoder 1: GOP Frame B"
+#~ msgstr "Encodeur 1: GOP Trame B"
+
+#~ msgid "Encoder 1: GOP Frame P"
+#~ msgstr "Encodeur 1: GOP Trame P"
+
+#~ msgid "Encoder 1: Level"
+#~ msgstr "Encodeur 1: Level"
+
+#~ msgid "Encoder 1: Profile"
+#~ msgstr "Encodeur 1: Profil"
+
+#~ msgid "Encoder 1: Resolution"
+#~ msgstr "Encodeur 1: Résolution"
+
+#~ msgid "Encoder 1: Video codec"
+#~ msgstr "Encodeur 1: Codec vidéo"

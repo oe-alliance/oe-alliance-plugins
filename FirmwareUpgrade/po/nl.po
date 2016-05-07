@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 16:05+0200\n"
-"PO-Revision-Date: 2016-05-06 16:05+0200\n"
+"POT-Creation-Date: 2016-05-07 13:20+0200\n"
+"PO-Revision-Date: 2016-05-07 13:20+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
@@ -75,7 +75,7 @@ msgstr "U hebt het verkeerde bestand gekozen."
 
 #: ../src/plugin.py:498
 msgid "Can't find /usr/bin/md5sum"
-msgstr "Kan  /usr/bin/md5sum  niet vinden"
+msgstr "Kan /usr/bin/md5sum niet vinden"
 
 #: ../src/plugin.py:505
 #, python-format

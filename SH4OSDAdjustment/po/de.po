@@ -2,50 +2,92 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-21 :12+0000\n"
-"PO-Revision-Date: 2014-07-21 12:07+0100\n"
-"Last-Translator: Captain\n"
+"POT-Creation-Date: 2016-05-07 13:58+0200\n"
+"PO-Revision-Date: 2016-05-07 13:58+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-msgid "Blue"
-msgstr "Blau"
+#: ../src/plugin.py:29
+msgid "cancel"
+msgstr ""
 
-msgid "Cancel"
-msgstr "Abbrechen"
+#: ../src/plugin.py:30
+msgid "save"
+msgstr ""
 
-msgid "No"
-msgstr "Nein"
+#: ../src/plugin.py:31
+msgid "set default"
+msgstr ""
 
-msgid "None"
-msgstr "Keine"
+#: ../src/plugin.py:32
+msgid "change sides"
+msgstr ""
 
-msgid "Off"
-msgstr "Aus"
+#: ../src/plugin.py:33 ../src/plugin.py:336
+msgid "OSD Adjustment"
+msgstr ""
 
-msgid "Purple"
-msgstr "Violett"
+#: ../src/plugin.py:34
+msgid ""
+"Here you can change the screen positions with the arrow buttons on your "
+"remote control!"
+msgstr ""
 
-msgid "Red"
-msgstr "Rot"
+#: ../src/plugin.py:35 ../src/plugin.py:151
+msgid ""
+"Now you can change the position of the upper and left side. Press blue "
+"button to switch..."
+msgstr ""
 
-msgid "Save"
-msgstr "Speichern"
+#: ../src/plugin.py:148
+msgid ""
+"Now you can change the position of the lower and right side. Press blue "
+"button to switch..."
+msgstr ""
 
-msgid "Yes"
-msgstr "Ja"
+#: ../src/plugin.py:344
+msgid "change the OSD screen size"
+msgstr ""
 
-msgid "Start boot frequency"
-msgstr "Start Frequenz"
+#~ msgid "Blue"
+#~ msgstr "Blau"
 
-msgid "Normal running frequency"
-msgstr "Betrieb Frequenz"
+#~ msgid "Cancel"
+#~ msgstr "Abbrechen"
 
-msgid "Standby saver frequency"
-msgstr "Standby Frequenz"
+#~ msgid "No"
+#~ msgstr "Nein"
+
+#~ msgid "None"
+#~ msgstr "Keine"
+
+#~ msgid "Off"
+#~ msgstr "Aus"
+
+#~ msgid "Purple"
+#~ msgstr "Violett"
+
+#~ msgid "Red"
+#~ msgstr "Rot"
+
+#~ msgid "Save"
+#~ msgstr "Speichern"
+
+#~ msgid "Yes"
+#~ msgstr "Ja"
+
+#~ msgid "Start boot frequency"
+#~ msgstr "Start Frequenz"
+
+#~ msgid "Normal running frequency"
+#~ msgstr "Betrieb Frequenz"
+
+#~ msgid "Standby saver frequency"
+#~ msgstr "Standby Frequenz"

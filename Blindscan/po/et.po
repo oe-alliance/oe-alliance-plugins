@@ -2,35 +2,239 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-22 22:46+0200\n"
-"PO-Revision-Date: 2014-04-06 10:24+0300\n"
-"Last-Translator: rimas\n"
+"POT-Creation-Date: 2016-05-07 13:05+0200\n"
+"PO-Revision-Date: 2016-05-07 13:06+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7\n"
 
-msgid ""
-"\"channel scan\" searches for channels and saves them to your receiver; "
-"\"save to XML file\" does a transponder search and saves found transponders "
-"to an XML file in satellites.xml format"
-msgstr ""
-"\"kanaliotsing\" otsib kanaleid ja salvestab need vastuvõtjasse; \"salvesta "
-"XML faili\" otsib transpondereid ja salvestab need XML faili 'satellites."
-"xml' vormis"
-
-msgid "Blind scan"
-msgstr "Pimeotsing"
-
+#: ../src/plugin.py:61
 msgid "Blindscan"
 msgstr "Pimeotsing"
 
+#: ../src/plugin.py:113 ../src/plugin.py:125
+msgid "Exit"
+msgstr "Välju"
+
+#: ../src/plugin.py:114
+msgid "Scan"
+msgstr "Otsi"
+
+#: ../src/plugin.py:115
+msgid "Press Green/OK to start the scan"
+msgstr "Otsingu alustamiseks vajuta OK või rohelist"
+
+#: ../src/plugin.py:127
+msgid "Please setup your tuner configuration."
+msgstr "Häälesta tuuner."
+
+#: ../src/plugin.py:249
+msgid "Sorry, this tuner is in use."
+msgstr "See tuuner on kasutuses."
+
+#: ../src/plugin.py:306
+msgid "no"
+msgstr "ei"
+
+#: ../src/plugin.py:307
+msgid "up to 1 degree"
+msgstr "kuni 1 kraad"
+
+#: ../src/plugin.py:308
+msgid "up to 2 degrees"
+msgstr "kuni 2 kraadi"
+
+#: ../src/plugin.py:309
+msgid "up to 3 degrees"
+msgstr "kuni 3 kraadi"
+
+#: ../src/plugin.py:311
+msgid "scan for channels"
+msgstr "kanaliotsing"
+
+#: ../src/plugin.py:312
+msgid "save to XML file"
+msgstr "salvesta XML faili"
+
+#: ../src/plugin.py:335 ../src/plugin.py:1150
+msgid "vertical and horizontal"
+msgstr "vertikaalne ja horisontaalne"
+
+#: ../src/plugin.py:336 ../src/plugin.py:707
+msgid "vertical"
+msgstr "vertikaalne"
+
+#: ../src/plugin.py:337 ../src/plugin.py:705
+msgid "horizontal"
+msgstr "horisontaalne"
+
+#: ../src/plugin.py:338 ../src/plugin.py:1157
+msgid "circular right and circular left"
+msgstr "ringpolarisatsioon parem ja vasak"
+
+#: ../src/plugin.py:339 ../src/plugin.py:696 ../src/plugin.py:703
+msgid "circular right"
+msgstr "ringpolarisatsioon parem"
+
+#: ../src/plugin.py:340 ../src/plugin.py:698 ../src/plugin.py:701
+msgid "circular left"
+msgstr "ringpolarisatsioon vasak"
+
+#: ../src/plugin.py:378
+msgid ""
+"\n"
+"Second slot dual tuner may not be supported blind scan."
+msgstr ""
+
+#: ../src/plugin.py:380
+msgid ""
+"\n"
+"You must use the power adapter."
+msgstr ""
+
+#: ../src/plugin.py:382
+msgid "Tuner"
+msgstr "Tuuner"
+
+#: ../src/plugin.py:382
+msgid "Select a tuner that is configured for the satellite you wish to search"
+msgstr "Vali tuuner, mis on häälestatud otsitavale satelliidile"
+
+#: ../src/plugin.py:391
+msgid "Satellite"
+msgstr "Satelliit"
+
+#: ../src/plugin.py:391
+msgid "Select the satellite you wish to search"
+msgstr "Vali otsinguks satelliit"
+
+#: ../src/plugin.py:395 ../src/plugin.py:398
+msgid "Scan start frequency"
+msgstr "Otsingu alumine sagedus"
+
+#: ../src/plugin.py:395
+msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
+msgstr "Sagedusvahemik peab olema 3000 MHz kuni4199 MHz (C-band)"
+
+#: ../src/plugin.py:396 ../src/plugin.py:399
+msgid "Scan stop frequency"
+msgstr "Otsingu ülemine sagedus"
+
+#: ../src/plugin.py:396
+msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
+msgstr "Sagedusvahemik peab olema 3001 MHz kuni 4200 MHz (C-band)"
+
+#: ../src/plugin.py:398
+msgid "Frequency values must be between 10700 MHz and 12749 MHz"
+msgstr "Sagedusvahemik peab olema 10700 MHz kuni 12749 MHz"
+
+#: ../src/plugin.py:399
+msgid "Frequency values must be between 10701 MHz and 12750 MHz"
+msgstr "Sagedusvahemik peab olema 10701 MHz and 12750 MHz"
+
+#: ../src/plugin.py:400
+msgid "Polarisation"
+msgstr "Polarisatsioon"
+
+#: ../src/plugin.py:400
+#, python-format
+msgid "The suggested polarisation for this satellite is \"%s\""
+msgstr ""
+
+#: ../src/plugin.py:401
+msgid "Scan start symbolrate"
+msgstr "Otsingu alumine sümbolikiirus"
+
+#: ../src/plugin.py:401
+msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+msgstr ""
+"Sümbolikiiruse väärtused on megasümbolites; sisesta väärtus vahemikus 1 kuni "
+"44"
+
+#: ../src/plugin.py:402
+msgid "Scan stop symbolrate"
+msgstr "Otsingu ülemine sümbolikiirus"
+
+#: ../src/plugin.py:402
+msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
+msgstr ""
+"Sümbolikiiruse väärtused on megasümbolites; sisesta väärtus vahemikus 2 kuni "
+"45"
+
+#: ../src/plugin.py:403
 msgid "Clear before scan"
 msgstr "Kustuta enne otsingut kanalid"
 
+#: ../src/plugin.py:403
+msgid ""
+"If you select \"yes\" all channels on the satellite being search will be "
+"deleted before starting the current search"
+msgstr ""
+"Määrates 'jah', kustutatakse kõik otsitava satelliidi kanalid enne "
+"kanaliotsingu alustamist"
+
+#: ../src/plugin.py:404
+msgid "Only free scan"
+msgstr "Ainult vabakanalid"
+
+#: ../src/plugin.py:404
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not "
+"encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgstr ""
+"Määrates 'jah', salvestab otsing ainult koodivabad kanalid; 'ei' leiab "
+"kodeeritud ja koodivabad kanalid"
+
+#: ../src/plugin.py:405
+msgid "Only scan unknown transponders"
+msgstr "Ainult tundmatud transponderid"
+
+#: ../src/plugin.py:405
+msgid ""
+"If you select \"yes\" the scan will only search transponders not listed in "
+"satellites.xml"
+msgstr ""
+"Valides 'jah', otsitakse ainult transpondereid, mida ei leidu 'satellites."
+"xml' failis"
+
+#: ../src/plugin.py:406
+msgid "Filter out adjacent satellites"
+msgstr "Filtreeri kõrvutised satelliidid"
+
+#: ../src/plugin.py:406
+msgid ""
+"When a neighbouring satellite is very strong this avoids searching "
+"transponders known to be coming from the neighbouring satellite"
+msgstr ""
+"Kui naabersatelliit on väga tugeva signaaliga, väldib see otsimist "
+"transponderitelt, mis tulevad naabersatelliidilt."
+
+#: ../src/plugin.py:407
+msgid "Search type"
+msgstr "Otsingu tüüp"
+
+#: ../src/plugin.py:407
+msgid ""
+"\"channel scan\" searches for channels and saves them to your receiver; both "
+"options do a transponder search and save the result in /tmp in an XML file "
+"in satellites.xml format"
+msgstr ""
+
+#: ../src/plugin.py:651
+#, python-format
+msgid "Not found blind scan utility '%s'!"
+msgstr ""
+
+#: ../src/plugin.py:710
+msgid "   Starting Sundtek hardware blind scan."
+msgstr ""
+
+#: ../src/plugin.py:712
 #, python-format
 msgid ""
 "Current Status : %d/%d\n"
@@ -45,45 +249,7 @@ msgstr ""
 "   Sagedusvahemik : %d - %d MHz\n"
 "   Sümbolikiirused : %d - %d MHz"
 
-msgid "Exit"
-msgstr "Välju"
-
-msgid "Filter out adjacent satellites"
-msgstr "Filtreeri kõrvutised satelliidid"
-
-msgid "Frequency values must be between 10700 MHz and 12749 MHz"
-msgstr "Sagedusvahemik peab olema 10700 MHz kuni 12749 MHz"
-
-msgid "Frequency values must be between 10701 MHz and 12750 MHz"
-msgstr "Sagedusvahemik peab olema 10701 MHz and 12750 MHz"
-
-msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
-msgstr "Sagedusvahemik peab olema 3000 MHz kuni4199 MHz (C-band)"
-
-msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
-msgstr "Sagedusvahemik peab olema 3001 MHz kuni 4200 MHz (C-band)"
-
-msgid ""
-"If you select \"yes\" all channels on the satellite being search will be "
-"deleted before starting the current search"
-msgstr ""
-"Määrates 'jah', kustutatakse kõik otsitava satelliidi kanalid enne "
-"kanaliotsingu alustamist"
-
-msgid ""
-"If you select \"yes\" the scan will only save channels that are not "
-"encrypted; \"no\" will find encrypted and non-encrypted channels"
-msgstr ""
-"Määrates 'jah', salvestab otsing ainult koodivabad kanalid; 'ei' leiab "
-"kodeeritud ja koodivabad kanalid"
-
-msgid ""
-"If you select \"yes\" the scan will only search transponders not listed in "
-"satellites.xml"
-msgstr ""
-"Valides 'jah', otsitakse ainult transpondereid, mida ei leidu 'satellites."
-"xml' failis"
-
+#: ../src/plugin.py:714
 msgid ""
 "Looking for available transponders.\n"
 "This will take a long time, please be patient."
@@ -91,6 +257,7 @@ msgstr ""
 "Saadaolevate transponderite otsing.\n"
 "See kestab kaua, ole kannatlik."
 
+#: ../src/plugin.py:716
 msgid ""
 "Looking for available transponders.\n"
 "This will take a short while."
@@ -98,56 +265,12 @@ msgstr ""
 "Saadaolevate transponderite otsing.\n"
 "See läheb ruttu."
 
-msgid ""
-"No new transponders found! \n"
-"\n"
-"Only transponders already listed in satellites.xml \n"
-"have been found for those search parameters!"
+#: ../src/plugin.py:889
+#, python-format
+msgid "%d transponders found at %d:%02d min"
 msgstr ""
-"Uusi transpondereid ei leitud! \n"
-"\n"
-"Kõik nende otsingu parameetrite järgi leitud transponderid\n"
-"juba leiduvad satellites.xml failis!"
 
-msgid "No transponders were found for those search parameters!"
-msgstr "Nende otsingu parameetritega transpondereid ei leitud!"
-
-msgid "Only free scan"
-msgstr "Ainult vabakanalid"
-
-msgid "Only scan unknown transponders"
-msgstr "Ainult tundmatud transponderid"
-
-msgid "Please setup your tuner configuration."
-msgstr "Häälesta tuuner."
-
-msgid "Polarisation"
-msgstr "Polarisatsioon"
-
-msgid "Press Green/OK to start the scan"
-msgstr "Otsingu alustamiseks vajuta OK või rohelist"
-
-msgid "Satellite"
-msgstr "Satelliit"
-
-msgid "Scan"
-msgstr "Otsi"
-
-msgid "Scan satellites for new transponders"
-msgstr "Otsi uusi transpondereid"
-
-msgid "Scan start frequency"
-msgstr "Otsingu alumine sagedus"
-
-msgid "Scan start symbolrate"
-msgstr "Otsingu alumine sümbolikiirus"
-
-msgid "Scan stop frequency"
-msgstr "Otsingu ülemine sagedus"
-
-msgid "Scan stop symbolrate"
-msgstr "Otsingu ülemine sümbolikiirus"
-
+#: ../src/plugin.py:949
 #, python-format
 msgid ""
 "Search completed. %d transponders found.\n"
@@ -160,79 +283,49 @@ msgstr ""
 "Üksikasjad salvestati:\n"
 "%s"
 
-msgid "Search type"
-msgstr "Otsingu tüüp"
-
-msgid "Select a tuner that is configured for the satellite you wish to search"
-msgstr "Vali tuuner, mis on häälestatud otsitavale satelliidile"
-
-msgid "Select the satellite you wish to search"
-msgstr "Vali otsinguks satelliit"
-
-msgid "Sorry, this tuner is in use."
-msgstr "See tuuner on kasutuses."
-
-msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+#: ../src/plugin.py:952
+msgid ""
+"No new transponders found! \n"
+"\n"
+"Only transponders already listed in satellites.xml \n"
+"have been found for those search parameters!"
 msgstr ""
-"Sümbolikiiruse väärtused on megasümbolites; sisesta väärtus vahemikus 1 kuni "
-"44"
+"Uusi transpondereid ei leitud! \n"
+"\n"
+"Kõik nende otsingu parameetrite järgi leitud transponderid\n"
+"juba leiduvad satellites.xml failis!"
 
-msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
-msgstr ""
-"Sümbolikiiruse väärtused on megasümbolites; sisesta väärtus vahemikus 2 kuni "
-"45"
+#: ../src/plugin.py:956
+msgid "No transponders were found for those search parameters!"
+msgstr "Nende otsingu parameetritega transpondereid ei leitud!"
 
+#: ../src/plugin.py:958
 msgid "The blindscan run was cancelled by the user."
 msgstr "Kasutaja katkestas pimeotsingu."
 
-msgid "The suggested polarisation for this satellite is \""
-msgstr "Soovitatav polarisatsioon antud satellidile on \""
-
-msgid "Tuner"
-msgstr "Tuuner"
-
-msgid ""
-"When a neighbouring satellite is very strong this avoids searching "
-"transponders known to be coming from the neighbouring satellite"
+#: ../src/plugin.py:1170
+msgid "circular right & circular left"
 msgstr ""
-"Kui naabersatelliit on väga tugeva signaaliga, väldib see otsimist "
-"transponderitelt, mis tulevad naabersatelliidilt."
 
-msgid "circular left"
-msgstr "ringpolarisatsioon vasak"
+#: ../src/plugin.py:1236 ../src/plugin.py:1244
+msgid "Blind scan"
+msgstr "Pimeotsing"
 
-msgid "circular right"
-msgstr "ringpolarisatsioon parem"
+#: ../src/plugin.py:1244
+msgid "Scan satellites for new transponders"
+msgstr "Otsi uusi transpondereid"
 
-msgid "circular right and circular left"
-msgstr "ringpolarisatsioon parem ja vasak"
+#~ msgid ""
+#~ "\"channel scan\" searches for channels and saves them to your receiver; "
+#~ "\"save to XML file\" does a transponder search and saves found "
+#~ "transponders to an XML file in satellites.xml format"
+#~ msgstr ""
+#~ "\"kanaliotsing\" otsib kanaleid ja salvestab need vastuvõtjasse; "
+#~ "\"salvesta XML faili\" otsib transpondereid ja salvestab need XML faili "
+#~ "'satellites.xml' vormis"
 
-msgid "horizontal"
-msgstr "horisontaalne"
-
-msgid "no"
-msgstr "ei"
-
-msgid "save to XML file"
-msgstr "salvesta XML faili"
-
-msgid "scan for channels"
-msgstr "kanaliotsing"
-
-msgid "up to 1 degree"
-msgstr "kuni 1 kraad"
-
-msgid "up to 2 degrees"
-msgstr "kuni 2 kraadi"
-
-msgid "up to 3 degrees"
-msgstr "kuni 3 kraadi"
-
-msgid "vertical"
-msgstr "vertikaalne"
-
-msgid "vertical and horizontal"
-msgstr "vertikaalne ja horisontaalne"
+#~ msgid "The suggested polarisation for this satellite is \""
+#~ msgstr "Soovitatav polarisatsioon antud satellidile on \""
 
 #~ msgid "Blind Scan"
 #~ msgstr "Pimeotsing"

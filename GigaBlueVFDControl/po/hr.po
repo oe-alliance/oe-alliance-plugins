@@ -4,78 +4,134 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-05-18 01:41+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
-"Language-Team:  <jurica@dream-multimedia.eu>\n"
-"Language: \n"
+"POT-Creation-Date: 2016-05-07 13:27+0200\n"
+"PO-Revision-Date: 2016-05-07 13:27+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Language-Team: jurica@dream-multimedia.eu\n"
+"Language: hr_HR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Croatian\n"
-"X-Poedit-Country: CROATIA\n"
+"X-Generator: Poedit 1.8.7\n"
 
-msgid "Blink Record Led"
+#: ../src/plugin.py:28
+msgid "Channelnumber in Standby off"
 msgstr ""
 
-msgid "Blue"
+#: ../src/plugin.py:28
+msgid "Channelnumber in Standby Clock"
 msgstr ""
 
-#
-msgid "Cancel"
-msgstr "Odustani"
-
-msgid "Enable led"
+#: ../src/plugin.py:28
+msgid "Channelnumber/Clock in Standby Clock"
 msgstr ""
 
-msgid "Led state Deep Standby"
+#: ../src/plugin.py:28
+msgid "Clock always"
 msgstr ""
 
-msgid "Led state RUN"
+#: ../src/plugin.py:28
+msgid "Always off"
 msgstr ""
 
-msgid "Led state Record"
-msgstr ""
-
-msgid "Led state Standby"
-msgstr ""
-
+#: ../src/plugin.py:29 ../src/plugin.py:30
 msgid "No"
 msgstr ""
 
-msgid "None"
-msgstr ""
-
-msgid "Off"
-msgstr ""
-
-msgid "Purple"
-msgstr ""
-
-msgid "Red"
-msgstr ""
-
-#
-msgid "Save"
-msgstr ""
-
-msgid "Show clock"
-msgstr ""
-
-msgid "Show clock in Deep Standby"
-msgstr ""
-
-msgid "Time mode"
-msgstr ""
-
-msgid "Update Date/Time"
-msgstr ""
-
-msgid "VFD_Giga"
-msgstr ""
-
+#: ../src/plugin.py:29 ../src/plugin.py:30
 msgid "Yes"
 msgstr ""
 
-msgid "in standby: "
+#: ../src/plugin.py:33
+msgid "None"
+msgstr ""
+
+#: ../src/plugin.py:33
+msgid "Blue"
+msgstr ""
+
+#: ../src/plugin.py:33
+msgid "Red"
+msgstr ""
+
+#: ../src/plugin.py:33
+msgid "Purple"
+msgstr ""
+
+#
+#: ../src/plugin.py:369
+msgid "Cancel"
+msgstr "Odustani"
+
+#
+#: ../src/plugin.py:370
+msgid "Save"
+msgstr ""
+
+#: ../src/plugin.py:374
+msgid "Update Date/Time"
+msgstr ""
+
+#: ../src/plugin.py:387 ../src/plugin.py:421
+msgid "Enable led"
+msgstr ""
+
+#: ../src/plugin.py:389
+msgid "Led state RUN"
+msgstr ""
+
+#: ../src/plugin.py:390
+msgid "Led state Standby"
+msgstr ""
+
+#: ../src/plugin.py:392
+msgid "Led state Deep Standby"
+msgstr ""
+
+#: ../src/plugin.py:393
+msgid "Led state Record"
+msgstr ""
+
+#: ../src/plugin.py:394
+msgid "Blink Record Led"
+msgstr ""
+
+#: ../src/plugin.py:395
+msgid "Led state HDD /dev/sda active"
+msgstr ""
+
+#: ../src/plugin.py:396
+msgid "Led state HDD /dev/sdb active"
+msgstr ""
+
+#: ../src/plugin.py:402 ../src/plugin.py:429
+msgid "Brightness"
+msgstr ""
+
+#: ../src/plugin.py:403 ../src/plugin.py:431
+msgid "Brightness Standby"
+msgstr ""
+
+#: ../src/plugin.py:405 ../src/plugin.py:425
+msgid "Show on VFD"
+msgstr ""
+
+#: ../src/plugin.py:406 ../src/plugin.py:427
+msgid "Show clock in Deep Standby"
+msgstr ""
+
+#: ../src/plugin.py:408
+msgid "Time mode"
+msgstr ""
+
+#: ../src/plugin.py:409
+msgid "Channel number with leading zeros"
+msgstr ""
+
+#: ../src/plugin.py:489 ../src/plugin.py:491 ../src/plugin.py:504
+msgid "Display/LED"
+msgstr ""
+
+#: ../src/plugin.py:493 ../src/plugin.py:506
+msgid "LED"
 msgstr ""

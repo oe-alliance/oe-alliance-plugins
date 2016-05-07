@@ -1,0 +1,88 @@
+# Translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../src/plugin.py:47 ../src/plugin.py:176 ../src/plugin.py:184
+msgid "Tuner Server setup"
+msgstr ""
+
+#: ../src/plugin.py:59
+msgid "Current Status:"
+msgstr ""
+
+#: ../src/plugin.py:60
+msgid "Server Disabled"
+msgstr ""
+
+#: ../src/plugin.py:61
+msgid "Server Enabled"
+msgstr ""
+
+#: ../src/plugin.py:62
+msgid "Build Server"
+msgstr ""
+
+#: ../src/plugin.py:63
+msgid "Disable Server"
+msgstr ""
+
+#: ../src/plugin.py:64
+msgid "Close"
+msgstr ""
+
+#: ../src/plugin.py:83
+msgid ""
+"Your server is now building\n"
+"Please wait ..."
+msgstr ""
+
+#: ../src/plugin.py:86
+msgid "Sorry, but you need to have a device mounted at '/media/hd'"
+msgstr ""
+
+#: ../src/plugin.py:111
+msgid "Build Complete!"
+msgstr ""
+
+#: ../src/plugin.py:149
+msgid ""
+"Your server is now being deleted\n"
+"Please Wait ..."
+msgstr ""
+
+#: ../src/plugin.py:152
+msgid "Tuner Server Disabled."
+msgstr ""
+
+#: ../src/plugin.py:153
+msgid "Info"
+msgstr ""
+
+#: ../src/plugin.py:155
+msgid "Server now disabled!"
+msgstr ""
+
+#: ../src/plugin.py:184 ../src/plugin.py:186
+msgid "Allow Streaming From Box Tuners"
+msgstr ""
+
+#: ../src/plugin.py:186
+msgid "Tuner Server"
+msgstr ""

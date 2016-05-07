@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 17:41+0200\n"
+"POT-Creation-Date: 2016-05-07 12:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,11 +63,12 @@ msgstr ""
 msgid "Power status"
 msgstr ""
 
-#: ../src/plugin.py:118 ../src/plugin.py:171
+#: ../src/plugin.py:118 ../src/plugin.py:169 ../src/plugin.py:171
+#: ../src/plugin.py:499
 msgid "System temperature"
 msgstr ""
 
-#: ../src/plugin.py:119 ../src/plugin.py:175
+#: ../src/plugin.py:119 ../src/plugin.py:175 ../src/plugin.py:177
 msgid "Harddisk temperature"
 msgstr ""
 

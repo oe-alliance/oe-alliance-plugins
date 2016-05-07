@@ -2,32 +2,53 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 18:20+0100\n"
-"PO-Revision-Date: 2012-05-18 01:41+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2016-05-07 14:05+0200\n"
+"PO-Revision-Date: 2016-05-07 14:05+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Bulgarian\n"
-"Language: \n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7\n"
 
+#: ../src/plugin.py:99 ../src/plugin.py:191
+msgid "Fan Control"
+msgstr ""
+
+#: ../src/plugin.py:106
 msgid "Cancel"
 msgstr "Отказ"
 
+#: ../src/plugin.py:107
+msgid "OK"
+msgstr ""
+
+#: ../src/plugin.py:136
+#, python-format
+msgid "Fan %d voltage"
+msgstr ""
+
+#: ../src/plugin.py:137
 #, python-format
 msgid "Fan %d PWM"
 msgstr ""
 
-msgid "Fan Control"
-msgstr ""
-
-msgid "Fan control"
-msgstr ""
-
-msgid "OK"
-msgstr ""
-
+#: ../src/plugin.py:139
 #, python-format
-msgid "Standby Fan %d PWM"
+msgid "Standby fan %d voltage"
+msgstr ""
+
+#: ../src/plugin.py:140
+#, python-format
+msgid "Standby fan %d PWM"
+msgstr ""
+
+#: ../src/plugin.py:186
+msgid "Temperature and fan control"
+msgstr ""
+
+#: ../src/plugin.py:191
+msgid "Temperature and Fan control"
 msgstr ""

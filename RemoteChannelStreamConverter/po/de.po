@@ -2,142 +2,159 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-07 22:45+0100\n"
-"PO-Revision-Date: \n"
-"Last-Translator: plnick\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-05-07 13:07+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../../../plugin.py:34
+#: ../src/plugin.py:53
 msgid "FTP Server Editor"
 msgstr "Konfiguriere entfernte STB"
 
-#: ../../../plugin.py:50
+#: ../src/plugin.py:54
 msgid "Exit"
 msgstr "Beenden"
 
-#: ../../../plugin.py:51
+#: ../src/plugin.py:55
 msgid "OK"
 msgstr "OK"
 
-#: ../../../plugin.py:94
+#: ../src/plugin.py:98
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: ../../../plugin.py:100
+#: ../src/plugin.py:104
 msgid "Use address"
 msgstr "Adresse"
 
-#: ../../../plugin.py:102
+#: ../src/plugin.py:106
 msgid "Use IP"
 msgstr "IP"
 
-#: ../../../plugin.py:108
+#: ../src/plugin.py:112
 msgid "IP:"
 msgstr "IP:"
 
-#: ../../../plugin.py:109 ../../../plugin.py:122
+#: ../src/plugin.py:113 ../src/plugin.py:126
 msgid "Username:"
 msgstr "Benutzername:"
 
-#: ../../../plugin.py:110 ../../../plugin.py:123
+#: ../src/plugin.py:114 ../src/plugin.py:127
 msgid "Password:"
 msgstr "Passwort:"
 
-#: ../../../plugin.py:111 ../../../plugin.py:124
+#: ../src/plugin.py:115 ../src/plugin.py:128
 msgid "FTPport:"
 msgstr "FTP Port:"
 
-#: ../../../plugin.py:112 ../../../plugin.py:125
+#: ../src/plugin.py:116 ../src/plugin.py:129
 msgid "Passive:"
 msgstr "Passiv:"
 
-#: ../../../plugin.py:113 ../../../plugin.py:126
+#: ../src/plugin.py:117 ../src/plugin.py:130
 msgid "Telnetport:"
 msgstr "Telnet Port:"
 
-#: ../../../plugin.py:121
+#: ../src/plugin.py:125
 msgid "Adress:"
 msgstr "Adresse:"
 
-#: ../../../plugin.py:141
+#: ../src/plugin.py:145
 msgid "Enter address"
 msgstr "Adresse eingeben"
 
-#: ../../../plugin.py:144
+#: ../src/plugin.py:148
 msgid "Enter username"
 msgstr "Benutzernamen eingeben"
 
-#: ../../../plugin.py:147
+#: ../src/plugin.py:151
 msgid "Enter password"
 msgstr "Passwort eingeben"
 
-#: ../../../plugin.py:170
+#: ../src/plugin.py:191
 msgid "Select bouquets to convert"
 msgstr "Wähle Bouquets für die Konvertierung"
 
-#: ../../../plugin.py:195
+#: ../src/plugin.py:199
 msgid "Close"
 msgstr "Schließen"
 
-#: ../../../plugin.py:197
+#: ../src/plugin.py:201
 msgid "Set server IP"
 msgstr "Server IP"
 
-#: ../../../plugin.py:199
+#: ../src/plugin.py:203
 msgid "Select a remote server IP first"
 msgstr "Zuerst entfernte STB konfigurieren/auswählen"
 
-#: ../../../plugin.py:231
+#: ../src/plugin.py:235
 msgid "Testing remote connection"
 msgstr "Teste Verbindung"
 
-#: ../../../plugin.py:240
+#: ../src/plugin.py:244
 msgid "Connection to remote IP ok"
 msgstr "Verbindung zur entfernten STB ok"
 
-#: ../../../plugin.py:246
+#: ../src/plugin.py:250
 msgid "Could not connect to remote IP"
 msgstr "Verbindung zur entfernten STB fehlgeschlagen"
 
-#: ../../../plugin.py:249
+#: ../src/plugin.py:253
 msgid "Downloading remote services"
 msgstr "Herunterladen der Kanallisten"
 
-#: ../../../plugin.py:258 ../../../plugin.py:298
+#: ../src/plugin.py:262 ../src/plugin.py:307
 msgid "Download from remote failed"
 msgstr "Herunterladen der Kanallisten fehlgeschlagen"
 
-#: ../../../plugin.py:303
+#: ../src/plugin.py:312
 #, python-format
-msgid "FTP reading file %d of %d"
-msgstr "Lese Datei %d von %d"
+msgid "FTP reading bouquets %d of %d"
+msgstr ""
 
-#: ../../../plugin.py:307
+#: ../src/plugin.py:322 ../src/plugin.py:628
 msgid "Make your selection"
 msgstr "Bitte auswählen"
 
-#: ../../../plugin.py:314
+#: ../src/plugin.py:336
 msgid "Download"
 msgstr "Herunterladen"
 
-#: ../../../plugin.py:315
+#: ../src/plugin.py:337
 msgid "Invert"
 msgstr "Invertiere"
 
-#: ../../../plugin.py:453
+#: ../src/plugin.py:369
+msgid "remote of"
+msgstr ""
+
+#: ../src/plugin.py:472
 msgid "No bouquets selected"
 msgstr "Keine Favoritenlisten ausgewählt"
 
-#: ../../../plugin.py:566 ../../../plugin.py:571
+#: ../src/plugin.py:604
+msgid "Checking for alternatives"
+msgstr ""
+
+#: ../src/plugin.py:625
+#, python-format
+msgid "FTP reading alternatives %d of %d"
+msgstr ""
+
+#: ../src/plugin.py:657 ../src/plugin.py:662 ../src/plugin.py:667
 msgid "Remote channel stream converter"
 msgstr "Importiere externe Bouquets"
 
-#: ../../../plugin.py:571
+#: ../src/plugin.py:667
 msgid "Convert remote channel list for streaming"
 msgstr "Importiere externe Bouquets"
+
+#~ msgid "FTP reading file %d of %d"
+#~ msgstr "Lese Datei %d von %d"
