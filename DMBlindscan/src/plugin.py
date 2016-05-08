@@ -280,7 +280,7 @@ class SatelliteTransponderSearchSupport:
 					tparm.setDVBS(self.parm, False)
 					self.frontend.tune(tparm)
 				else:
-					tmpstr = _("%dMhz scanned") %mhz_complete
+					tmpstr = _("%dMHz scanned") %mhz_complete
 					tmpstr += ', '
 					tmpstr += _("%d transponders found at %d:%02dmin") %(len(self.tp_found),seconds_done / 60, seconds_done % 60)
 					state["progress"].setText(tmpstr)
@@ -301,7 +301,7 @@ class SatelliteTransponderSearchSupport:
 				tmpstr += "R"
 
 			tmpstr += ', '
-			tmpstr += "%d/%dMhz" %(mhz_done, mhz_complete)
+			tmpstr += "%d/%dMHz" %(mhz_done, mhz_complete)
 
 			tmpstr += ", "
 			tmpstr += _("%d transponder(s) found") %len(self.tp_found)
@@ -374,6 +374,8 @@ class SatelliteTransponderSearchSupport:
 		self.range_list = [ ]
 		tuner_no = -1
 		self.auto_scan = False
+		self.timer = eTimer()
+		self.timer.callback.append(self.updateStateSat)
 
 		print "tunername", tunername
 		if tunername in ("BCM4505", "BCM4506 (internal)", "BCM4506", "Alps BSBE1 C01A/D01A.", "Si2166B"):
@@ -393,8 +395,7 @@ class SatelliteTransponderSearchSupport:
 						return
 #			self.frontend.getStateChangeSignal().append(self.frontendStateChanged)
 
-#			band_cutoff_frequency = self.nim_sat_band_cutoff_frequency[nim_idx][orb_pos][0]
-			band_cutoff_frequency = 11700000
+			band_cutoff_frequency = self.nim_sat_band_cutoff_frequency[nim_idx][orb_pos][0]
 
 			s1 = self.scan_sat.bs_freq_start.value * 1000
 			s2 = self.scan_sat.bs_freq_stop.value * 1000
@@ -402,7 +403,7 @@ class SatelliteTransponderSearchSupport:
 			start = self.min_freq = min(s1,s2)
 			stop = self.max_freq = max(s1,s2)
 
-			if self.auto_scan: # hack for driver based blindscan... extend search range +/- 50Mhz
+			if self.auto_scan: # hack for driver based blindscan... extend search range +/- 50MHz
 				limits = self.scan_sat.bs_freq_limits
 				start -= 50000
 				stop += 50000
@@ -441,12 +442,10 @@ class SatelliteTransponderSearchSupport:
 			x = { }
 			data = self.frontend.getFrontendData(x)
 			tuner_no = x["tuner_number"]
+			self.updateStateSat()
 		else:
 			tmpstr = _("Blindscan is not supported by this tuner (%s)") %tunername
-		self.timer = eTimer()
-		self.timer.callback.append(self.updateStateSat)
 		self.satellite_search_session = self.session.openWithCallback(self.satelliteTransponderSearchSessionClosed, SatBlindscanState, tuner_no, tmpstr)
-		self.updateStateSat()
 
 
 class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTransponderSearchSupport):
@@ -526,10 +525,9 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 		if nim.isCompatible("DVB-S"):
 			self.updateSatList()
 			selected_sat_pos = self.scan_satselection[index_to_scan].value
-			#limit_list = self.nim_sat_frequency_range[index_to_scan][int(selected_sat_pos)]
-			#l = limit_list[0]
-			#limits = ( l[0]/1000, l[1]/1000 )
-			limits = ( 10700, 12750 )
+			limit_list = self.nim_sat_frequency_range[index_to_scan][int(selected_sat_pos)]
+			l = limit_list[0]
+			limits = ( l[0]/1000, l[1]/1000 )
 			self.scan_sat.bs_freq_start = ConfigInteger(default = limits[0], limits = (limits[0], limits[1]))
 			self.scan_sat.bs_freq_stop = ConfigInteger(default = limits[1], limits = (limits[0], limits[1]))
 			self.satelliteEntry = getConfigListEntry(_("Satellite"), self.scan_satselection[index_to_scan])
@@ -647,12 +645,12 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 				if slot.isCompatible("DVB-S"):
 					satlist_for_slot = self.satList[slot_id]
 					self.scan_satselection.append(getConfigSatlist(defaultSat["orbpos"], satlist_for_slot))
-					sat_freq_range = {(10700000, 12750000) }
-					sat_band_cutoff = {11700000 }
+					sat_freq_range = {}
+					sat_band_cutoff = {}
 					for sat in satlist_for_slot:
 						orbpos = sat[0]
-#						sat_freq_range[orbpos] = sec.getFrequencyRangeList(slot_id, orbpos)
-#						sat_band_cutoff[orbpos] = sec.getBandCutOffFrequency(slot_id, orbpos)
+						sat_freq_range[orbpos] = sec.getFrequencyRangeList(slot_id, orbpos)
+						sat_band_cutoff[orbpos] = sec.getBandCutOffFrequency(slot_id, orbpos)
 					self.nim_sat_frequency_range.append(sat_freq_range)
 					self.nim_sat_band_cutoff_frequency.append(sat_band_cutoff)
 				else:
