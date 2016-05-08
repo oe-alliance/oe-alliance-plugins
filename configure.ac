@@ -157,6 +157,7 @@ Makefile
 3GModemManager/Makefile
 3GModemManager/src/Makefile
 3GModemManager/src/script/Makefile
+3GModemManager/po/Makefile
 3GModemManager/meta/Makefile
 
 AudioEffect/Makefile
@@ -166,6 +167,7 @@ AudioEffect/po/Makefile
 
 AnimationSetup/Makefile
 AnimationSetup/src/Makefile
+AnimationSetup/po/Makefile
 AnimationSetup/meta/Makefile
 
 Blindscan/Makefile
@@ -181,10 +183,12 @@ BTDevicesManager/po/Makefile
 DLNABrowser/Makefile
 DLNABrowser/src/Makefile
 DLNABrowser/icons/Makefile
+DLNABrowser/po/Makefile
 DLNABrowser/meta/Makefile
 
 DLNAServer/Makefile
 DLNAServer/src/Makefile
+DLNAServer/po/Makefile
 DLNAServer/meta/Makefile
 
 DMBlindscan/Makefile
@@ -200,6 +204,7 @@ FirmwareUpgrade/po/Makefile
 Fempa/Makefile
 Fempa/meta/Makefile
 Fempa/src/Makefile
+Fempa/po/Makefile
 
 FPGAUpgrade/Makefile
 FPGAUpgrade/src/Makefile
@@ -331,6 +336,7 @@ SF8VFDControl/po/Makefile
 StreamTV/Makefile
 StreamTV/src/Makefile
 StreamTV/meta/Makefile
+StreamTV/po/Makefile
 StreamTV/icons/Makefile
 
 VentonFancontrol/Makefile
@@ -377,6 +383,7 @@ SparkVFDControl/po/Makefile
 
 SparkUnionTunerType/Makefile
 SparkUnionTunerType/src/Makefile
+SparkUnionTunerType/po/Makefile
 SparkUnionTunerType/meta/Makefile
 
 ])
