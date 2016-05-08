@@ -1,0 +1,49 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SparkUnionTunerType\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: openATV\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: src/plugin.py:20
+msgid "Spark7162 select tuner mode"
+msgstr ""
+
+#: src/plugin.py:43
+msgid "terrestrial"
+msgstr ""
+
+#: src/plugin.py:43
+msgid "cable"
+msgstr ""
+
+#: src/plugin.py:45
+msgid "UnionTunerType"
+msgstr ""
+
+#: src/plugin.py:47
+msgid "Cancel"
+msgstr ""
+
+#: src/plugin.py:48
+msgid "OK"
+msgstr ""
+
+#: src/plugin.py:63
+msgid ""
+"Are you sure to save the current configuration and reboot your receiver?\n"
+"\n"
+msgstr ""
+
+#: src/plugin.py:77 src/plugin.py:86
+msgid "UnionTunerType config"
+msgstr ""

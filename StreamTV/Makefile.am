@@ -1,1 +1,1 @@
-SUBDIRS = icons meta src
+SUBDIRS = icons meta src po
