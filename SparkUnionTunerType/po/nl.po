@@ -17,34 +17,36 @@ msgstr ""
 
 #: src/plugin.py:20
 msgid "Spark7162 select tuner mode"
-msgstr ""
+msgstr "Spark7162 tuner modus selecteren"
 
 #: src/plugin.py:43
 msgid "terrestrial"
-msgstr ""
+msgstr "Terrestrisch"
 
 #: src/plugin.py:43
 msgid "cable"
-msgstr ""
+msgstr "Kabel"
 
 #: src/plugin.py:45
 msgid "UnionTunerType"
-msgstr ""
+msgstr "UnionTunerType"
 
 #: src/plugin.py:47
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: src/plugin.py:48
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: src/plugin.py:63
 msgid ""
 "Are you sure to save the current configuration and reboot your receiver?\n"
 "\n"
 msgstr ""
+"Bent u zeker de huidige configuratie op te slaan en uw ontvanger te herstarten?\n"
+"\n"
 
 #: src/plugin.py:77 src/plugin.py:86
 msgid "UnionTunerType config"
-msgstr ""
+msgstr "UnionTunerType instellingen"

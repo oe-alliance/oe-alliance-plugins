@@ -17,88 +17,88 @@ msgstr ""
 
 #: src/plugin.py:206 src/plugin.py:375
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: src/plugin.py:207
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 #: src/plugin.py:208
 msgid " "
-msgstr ""
+msgstr " "
 
 #: src/plugin.py:224
 msgid "Region :"
-msgstr ""
+msgstr "Regio:"
 
 #: src/plugin.py:225
 msgid "Name :"
-msgstr ""
+msgstr "Naam :"
 
 #: src/plugin.py:226
 msgid "User :"
-msgstr ""
+msgstr "Gebruiker:"
 
 #: src/plugin.py:227
 msgid "Password :"
-msgstr ""
+msgstr "Wachtwoord:"
 
 #: src/plugin.py:228
 msgid "APN :"
-msgstr ""
+msgstr "APN:"
 
 #: src/plugin.py:229
 msgid "PIN :"
-msgstr ""
+msgstr "PIN :"
 
 #: src/plugin.py:230
 msgid "Phone :"
-msgstr ""
+msgstr "Telefoonnummer :"
 
 #: src/plugin.py:376
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: src/plugin.py:377
 msgid "Edit"
-msgstr ""
+msgstr "Wijzig"
 
 #: src/plugin.py:378
 msgid "Add"
-msgstr ""
+msgstr "Toevoegen"
 
 #: src/plugin.py:617
 msgid "Auto connect:"
-msgstr ""
+msgstr "Verbinden:"
 
 #: src/plugin.py:618
 msgid "Disable"
-msgstr ""
+msgstr "Uitschakelen"
 
 #: src/plugin.py:619
 msgid "Enable"
-msgstr ""
+msgstr "Inschakelen"
 
 #: src/plugin.py:621
 msgid "Exit"
-msgstr ""
+msgstr "Afsluiten"
 
 #: src/plugin.py:629
 msgid "Manual"
-msgstr ""
+msgstr "Handmatig"
 
 #: src/plugin.py:630
 msgid "Auto connect"
-msgstr ""
+msgstr "Verbinden"
 
 #: src/plugin.py:659
 msgid "IP : "
-msgstr ""
+msgstr "IP:"
 
 #: src/plugin.py:661 src/plugin.py:835
 msgid "IP : 0.0.0.0"
-msgstr ""
+msgstr "IP : 0.0.0.0"
 
 #: src/plugin.py:1161
 msgid "3G / 4G Modem Manager"
-msgstr ""
+msgstr "3G / 4G Modem Manager"

@@ -17,72 +17,72 @@ msgstr ""
 
 #: src/plugin.py:59
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: src/plugin.py:60
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: src/plugin.py:134
 msgid "Exit"
-msgstr ""
+msgstr "Afsluiten"
 
 #: src/plugin.py:135
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: src/plugin.py:136
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 #: src/plugin.py:137
 msgid "Reset"
-msgstr ""
+msgstr "Herstel"
 
 #: src/plugin.py:261
 msgid "off"
-msgstr ""
+msgstr "uit"
 
 #: src/plugin.py:261
 msgid "error"
-msgstr ""
+msgstr "Fout"
 
 #: src/plugin.py:261
 msgid "warn"
-msgstr ""
+msgstr "Waarschuwing"
 
 #: src/plugin.py:261
 msgid "debug"
-msgstr ""
+msgstr "Debug"
 
 #: src/plugin.py:264
 msgid "Server Name"
-msgstr ""
+msgstr "Server Naam"
 
 #: src/plugin.py:265
 msgid "Video Directory"
-msgstr ""
+msgstr "Video Map"
 
 #: src/plugin.py:266
 msgid "Music Directory"
-msgstr ""
+msgstr "Muziek Map"
 
 #: src/plugin.py:267
 msgid "Picture Directory"
-msgstr ""
+msgstr "Foto Map"
 
 #: src/plugin.py:268
 msgid "Enable Logging"
-msgstr ""
+msgstr "Log bestand inschakelen"
 
 #: src/plugin.py:269
 msgid "    - Log Level"
-msgstr ""
+msgstr "    - Log niveau"
 
 #: src/plugin.py:270
 msgid "    - Log Directory"
-msgstr ""
+msgstr "    - Log Map"
 
 #: src/plugin.py:271
 msgid "Enable Autostart for DLNA Server"
-msgstr ""
+msgstr "Autostart voor DLNA Browser inschakelen"

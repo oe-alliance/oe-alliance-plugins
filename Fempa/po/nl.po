@@ -17,8 +17,8 @@ msgstr ""
 
 #: src/plugin.py:39
 msgid "Simple Search"
-msgstr ""
+msgstr "Eenvoudig Zoeken"
 
 #: src/plugin.py:40
 msgid "VirtualKb Search"
-msgstr ""
+msgstr "VirtualKb Zoeken"
