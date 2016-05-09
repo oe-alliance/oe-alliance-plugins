@@ -17,22 +17,24 @@ msgstr ""
 
 #: src/plugin.py:129
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: src/plugin.py:129
 msgid "No"
-msgstr ""
+msgstr "Nee"
 
 #: src/plugin.py:130
 msgid "Stop playing this stream?"
-msgstr ""
+msgstr "Stop met afspelen van deze stream?"
 
 #: src/plugin.py:413
 msgid ""
 "This plugin need internet connection. Please plug in ethernet cable and try "
 "again!"
 msgstr ""
+"Deze plugin heeft een internetverbinding nodig. Sluit aub de ethernetkabel "
+"aan en probeer het opnieuw!"
 
 #: src/plugin.py:416
 msgid "StreamTVPlayer"
-msgstr ""
+msgstr "StreamTVPlayer"

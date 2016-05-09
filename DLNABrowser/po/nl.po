@@ -17,92 +17,92 @@ msgstr ""
 
 #: src/plugin.py:150
 msgid "Show Device"
-msgstr ""
+msgstr "Toon Apparaat"
 
 #: src/plugin.py:151
 msgid "Add all"
-msgstr ""
+msgstr "Alles toevoegen"
 
 #: src/plugin.py:152
 msgid "Up"
-msgstr ""
+msgstr "Omhoog"
 
 #: src/plugin.py:153
 msgid "Top"
-msgstr ""
+msgstr "Bovenin"
 
 #: src/plugin.py:350
 msgid "/"
-msgstr ""
+msgstr "/"
 
 #: src/plugin.py:389
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: src/plugin.py:389
 msgid "No"
-msgstr ""
+msgstr "Nee"
 
 #: src/plugin.py:390
 msgid "Stop playing this movie?"
-msgstr ""
+msgstr "Stop afspelen van Film?"
 
 #: src/plugin.py:468
 msgid "Please wait, Loading image."
-msgstr ""
+msgstr "Een moment geduld a.u.b., laden afbeelding."
 
 #: src/plugin.py:702 src/plugin.py:813
 msgid "Exit"
-msgstr ""
+msgstr "Afsluiten"
 
 #: src/plugin.py:703
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 #: src/plugin.py:704 src/plugin.py:705
 msgid " "
-msgstr ""
+msgstr " "
 
 #: src/plugin.py:722 src/plugin.py:723
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: src/plugin.py:722 src/plugin.py:723
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #: src/plugin.py:722 src/plugin.py:723
 msgid "15"
-msgstr ""
+msgstr "15"
 
 #: src/plugin.py:723
 msgid "20"
-msgstr ""
+msgstr "20"
 
 #: src/plugin.py:726
 msgid "DeviceList Refresh Interval"
-msgstr ""
+msgstr "Apparaat lijst ververs tussentijd"
 
 #: src/plugin.py:727
 msgid "Slideshow Interval"
-msgstr ""
+msgstr "Diashow tussentijd"
 
 #: src/plugin.py:728
 msgid "Enable Autostart for DLNA Browser"
-msgstr ""
+msgstr "Autostart voor DLNA Browser inschakelen"
 
 #: src/plugin.py:814
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: src/plugin.py:815
 msgid "Setting"
-msgstr ""
+msgstr "Instelling"
 
 #: src/plugin.py:816
 msgid "Reload Device"
-msgstr ""
+msgstr "Herlaad Apparaat"
 
 #: src/plugin.py:992
 msgid "DLNA/uPnP Browser"
-msgstr ""
+msgstr "DLNA/uPnP Browser"
