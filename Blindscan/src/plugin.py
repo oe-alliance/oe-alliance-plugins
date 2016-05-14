@@ -74,12 +74,20 @@ class Blindscan(ConfigListScreen, Screen):
 		# update sat list
 		self.satList = []
 		for slot in nimmanager.nim_slots:
-			if slot.isCompatible("DVB-S"):
+			if slot.canBeCompatible("DVB-S"):
 				self.satList.append(nimmanager.getSatListForNim(slot.slot))
 			else:
 				self.satList.append(None)
 
 		# make config
+		for slot in nimmanager.nim_slots:
+			if slot.canBeCompatible("DVB-S"):
+				try:
+					slot.config.dvbs
+					self.legacy = False
+				except:
+					self.legacy = True
+				break
 		self.createConfig()
 
 		self.list = []
@@ -95,6 +103,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.offset = 0
 		self.start_time = time()
 		self.orb_pos = 0
+		self.tunerEntry = None
 
 		# run command
 		self.cmd = ""
@@ -178,7 +187,7 @@ class Blindscan(ConfigListScreen, Screen):
 					_nimSocket[sNo] = [sName, sI2C]
 				else:	_nimSocket[sNo] = [sName]
 		fp.close()
-		print "parsed nimsocket :", _nimSocket
+		print "[Blindscan] parsed nimsocket :", _nimSocket
 		return _nimSocket
 
 	def makeNimSocket(self, nimname=""):
@@ -191,7 +200,7 @@ class Blindscan(ConfigListScreen, Screen):
 					try:	self.i2c_mapping_table[int(XX)] = int(nimsocket[1])
 					except: continue
 					is_exist_i2c = True
-		print "i2c_mapping_table :", self.i2c_mapping_table, ", is_exist_i2c :", is_exist_i2c
+		print "[Blindscan] i2c_mapping_table :", self.i2c_mapping_table, ", is_exist_i2c :", is_exist_i2c
 		if is_exist_i2c: return
 
 		if nimname == "AVL6222":
@@ -227,11 +236,11 @@ class Blindscan(ConfigListScreen, Screen):
 				if self.frontend:
 					return True
 				else:
-					print "getFrontend failed"
+					print "[Blindscan] getFrontend failed"
 			else:
-				print "getRawChannel failed"
+				print "[Blindscan] getRawChannel failed"
 		else:
-			print "getResourceManager instance failed"
+			print "[Blindscan] getResourceManager instance failed"
 		return False
 		
 	def prepareFrontend(self):
@@ -244,7 +253,7 @@ class Blindscan(ConfigListScreen, Screen):
 					self.session.pipshown = False
 					del self.session.pip
 					self.openFrontend()
-		print 'self.frontend:',self.frontend
+		print '[Blindscan] self.frontend:',self.frontend
 		if self.frontend == None:
 			self.session.open(MessageBox, _("Sorry, this tuner is in use."), MessageBox.TYPE_ERROR)
 			return False
@@ -315,17 +324,23 @@ class Blindscan(ConfigListScreen, Screen):
 		# collect all nims which are *not* set to "nothing"
 		nim_list = []
 		for n in nimmanager.nim_slots:
-			if n.config_mode == "nothing":
+			if not self.legacy:
+				config = n.config.dvbs
+			else:
+				config = n.config
+			config_mode = config.configMode.value
+
+			if config_mode == "nothing":
 				continue
-			if n.isCompatible("DVB-S") and len(nimmanager.getSatListForNim(n.slot)) < 1: # empty setup
+			if n.canBeCompatible("DVB-S") and len(nimmanager.getSatListForNim(n.slot)) < 1: # empty setup
 				continue
-			if n.isCompatible("DVB-S") and n.description in _unsupportedNims: # DVB-S NIMs without blindscan hardware or software
+			if n.canBeCompatible("DVB-S") and n.description in _unsupportedNims: # DVB-S NIMs without blindscan hardware or software
 				continue
-			if n.config_mode in ("loopthrough", "satposdepends"):
-				root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
+			if config_mode in ("loopthrough", "satposdepends"):
+				root_id = nimmanager.sec.getRoot(n.slot_id, int(config.connectedTo.value))
 				if n.type == nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
 					continue
-			if n.isCompatible("DVB-S"):
+			if n.canBeCompatible("DVB-S"):
 				nim_list.append((str(n.slot), n.friendly_full_description))
 		self.scan_nims = ConfigSelection(choices = nim_list)
 
@@ -344,7 +359,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self.scan_satselection = []
 		for slot in nimmanager.nim_slots:
-			if slot.isCompatible("DVB-S"):
+			if slot.canBeCompatible("DVB-S"):
 				self.scan_satselection.append(getConfigSatlist(defaultSat["orbpos"], self.satList[slot.slot]))
 		self.frontend = None # set for later use
 		return True
@@ -387,7 +402,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.satelliteEntry = None
 
 		self.scan_networkScan.value = False
-		if nim.isCompatible("DVB-S") : 
+		if nim.canBeCompatible("DVB-S") :
 			self.satelliteEntry = getConfigListEntry(_('Satellite'), self.scan_satselection[self.getSelectedSatIndex(index_to_scan)],_('Select the satellite you wish to search'))
 			self.list.append(self.satelliteEntry)
 			self.SatBandCheck()
@@ -411,9 +426,8 @@ class Blindscan(ConfigListScreen, Screen):
 
 	def newConfig(self):
 		cur = self["config"].getCurrent()
-		print "cur is", cur
-		if cur == self.tunerEntry or \
-			cur == self.satelliteEntry:
+		print "[Blindscan] cur is", cur
+		if cur and (cur == self.tunerEntry or cur == self.satelliteEntry):
 			self.createSetup()
 
 	def keyLeft(self):
@@ -515,7 +529,7 @@ class Blindscan(ConfigListScreen, Screen):
 			for y in tmp_pol:
 				for z in tmp_band:
 					self.total_list.append([x,y,z])
-					print "add scan item : ", x, ", ", y, ", ", z
+					print "[Blindscan] add scan item : ", x, ", ", y, ", ", z
 
 		self.max_count = len(self.total_list)
 		self.is_runable = True
@@ -541,7 +555,7 @@ class Blindscan(ConfigListScreen, Screen):
 				self.clockTimer.stop()
 				del self.clockTimer
 				self.clockTimer = None
-				print "Done"
+				print "[Blindscan] Done"
 				return
 			orb = self.total_list[self.running_count][0]
 			pol = self.total_list[self.running_count][1]
@@ -592,7 +606,7 @@ class Blindscan(ConfigListScreen, Screen):
 		nim = nimmanager.nim_slots[self.feid]
 		tunername = nim.description
 		if not self.SundtekScan and tunername not in _blindscans2Nims and self.getNimSocket(self.feid) < 0:
-			print "can't find i2c number!!"
+			print "[Blindscan] can't find i2c number!!"
 			return
 
 		c_band_loc_osc = 5150
@@ -676,7 +690,7 @@ class Blindscan(ConfigListScreen, Screen):
 				cmd += " --cband"
 			elif tab_hilow[band]:
 				cmd += " --high"
-		print "prepared command : [%s]" % (cmd)
+		print "[Blindscan] prepared command : [%s]" % (cmd)
 
 		self.thisRun = [] # used to check result corresponds with values used above
 		self.thisRun.append(int(temp_start_int_freq))
@@ -758,7 +772,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.full_data = "" # Clear this string so we don't get duplicates on subsequent runs
 		for line in lines:
 			data = line.split()
-			print "[Blind scan] cnt :", len(data), ", data :", data
+			print "[Blindscan] cnt :", len(data), ", data :", data
 			if self.SundtekScan:
 				if len(data) == 3 and data[0] == 'Scanning':
 					if data[1] == '13V':
@@ -850,7 +864,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.blindscan_session = None
 
 	def blindscanContainerAvail(self, str):
-		print str
+		print "[Blindscan]", str
 		self.full_data = self.full_data + str
 		if self.blindscan_session:
 			tmpstr = ""
@@ -908,7 +922,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.bsTimer.stop()
 		if not self.frontend:
 			return
-		print "[Blind scan] closing frontend and starting blindscan"
+		print "[Blindscan] closing frontend and starting blindscan"
 		self.frontend.closeFrontend() # close because blindscan-s2 does not like to be open
 		self.blindscan_container = eConsoleAppContainer()
 		self.blindscan_container.appClosed.append(self.blindscanContainerClose)
@@ -939,7 +953,7 @@ class Blindscan(ConfigListScreen, Screen):
 			# Process transponders still in list
 			if self.tmp_tplist != [] :
 				for p in self.tmp_tplist:
-					print "data : [%d][%d][%d][%d][%d][%d][%d][%d][%d][%d]" % (p.orbital_position, p.polarisation, p.frequency, p.symbol_rate, p.system, p.inversion, p.pilot, p.fec, p.modulation, p.modulation)
+					print "[Blindscan] data : [%d][%d][%d][%d][%d][%d][%d][%d][%d][%d]" % (p.orbital_position, p.polarisation, p.frequency, p.symbol_rate, p.system, p.inversion, p.pilot, p.fec, p.modulation, p.modulation)
 
 				self.tmp_tplist = sorted(self.tmp_tplist, key=lambda transponder: transponder.frequency)
 				xml_location = self.createSatellitesXMLfile(self.tmp_tplist, XML_BLINDSCAN_DIR)
@@ -1097,7 +1111,7 @@ class Blindscan(ConfigListScreen, Screen):
 			good = False
 
 		if good == False :
-			print "Data returned by the binary is not good...\n	Data: Frequency [%d], Symbol rate [%d]" % (int(data[2]), int(data[3]))
+			print "[Blindscan] Data returned by the binary is not good...\n	Data: Frequency [%d], Symbol rate [%d]" % (int(data[2]), int(data[3]))
 
 		return good
 
@@ -1169,14 +1183,18 @@ class Blindscan(ConfigListScreen, Screen):
 		if pos == 360 or pos == 560:
 			self.suggestedPolarisation = _("circular right & circular left")
 			self.is_circular_band_scan = True
-		print "SatBandCheck band = %s" % (band)
+		print "[Blindscan] SatBandCheck band = %s" % (band)
 
 	def isCbandLNB(self, cur_orb_pos):
 		nim = nimmanager.nim_slots[int(self.scan_nims.value)]
-		if nim.config.configMode.getValue() == "advanced":
-			currSat = nim.config.advanced.sat[cur_orb_pos]
+		if not self.legacy:
+			nimconfig = nim.config.dvbs
+		else:
+			nimconfig = nim.config
+		if nimconfig.configMode.getValue() == "advanced":
+			currSat = nimconfig.advanced.sat[cur_orb_pos]
 			lnbnum = int(currSat.lnb.getValue())
-			currLnb = nim.config.advanced.lnb[lnbnum]
+			currLnb = nimconfig.advanced.lnb[lnbnum]
 			lof = currLnb.lof.getValue()
 			print "LNB type: ", lof
 			if lof == "c_band":
@@ -1187,7 +1205,7 @@ class Blindscan(ConfigListScreen, Screen):
 		idx_selected_sat = int(self.getSelectedSatIndex(self.scan_nims.value))
 		tmp_list=[self.satList[int(self.scan_nims.value)][self.scan_satselection[idx_selected_sat].index]]
 		orb = tmp_list[0][0]
-		print "orb = ", orb
+		print "[Blindscan] orb = ", orb
 		return orb
 
 	def startScanCallback(self, answer=True):
@@ -1240,6 +1258,6 @@ def BlindscanSetup(menuid, **kwargs):
 def Plugins(**kwargs):
 	if nimmanager.hasNimType("DVB-S"):
 		for n in nimmanager.nim_slots:
-			if n.isCompatible("DVB-S") and n.description not in _unsupportedNims: # DVB-S NIMs without blindscan hardware or software
+			if n.canBeCompatible("DVB-S") and n.description not in _unsupportedNims: # DVB-S NIMs without blindscan hardware or software
 				return PluginDescriptor(name=_("Blind scan"), description=_("Scan satellites for new transponders"), where = PluginDescriptor.WHERE_MENU, fnc=BlindscanSetup)
 	return []
