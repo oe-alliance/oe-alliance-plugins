@@ -324,6 +324,8 @@ class Blindscan(ConfigListScreen, Screen):
 		# collect all nims which are *not* set to "nothing"
 		nim_list = []
 		for n in nimmanager.nim_slots:
+			if not n.isCompatible("DVB-S"):
+				continue
 			if not self.legacy:
 				config = n.config.dvbs
 			else:
