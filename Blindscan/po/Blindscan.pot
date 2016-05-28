@@ -291,3 +291,7 @@ msgstr ""
 #: ../src/plugin.py:1244
 msgid "Scan satellites for new transponders"
 msgstr ""
+
+msgid "Step %d %d:%02d min"
+msgstr ""
+

@@ -322,3 +322,7 @@ msgstr "Слепой поиск"
 #: ../src/plugin.py:1244
 msgid "Scan satellites for new transponders"
 msgstr "Сканирование спутников для новых транспондеров"
+
+msgid "Step %d %d:%02d min"
+msgstr "Шаг %d %d:%02d мин"
+

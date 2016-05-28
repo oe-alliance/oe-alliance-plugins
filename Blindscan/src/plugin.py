@@ -747,8 +747,8 @@ class Blindscan(ConfigListScreen, Screen):
 		elif self.Sundtek_pol in (0, 2) and (pol == eDVBFrontendParametersSatellite.Polarisation_Horizontal or pol == eDVBFrontendParametersSatellite.Polarisation_CircularLeft):
 			add_tp = True
 		if add_tp:
-			freq = (int(data[1]) + self.offset) / 1000
-			symbolrate = int(data[2])
+			freq = (int(data[2]) + self.offset) / 1000
+			symbolrate = int(data[3])
 			if freq >= self.blindscan_start_frequency.value and freq <= self.blindscan_stop_frequency.value and symbolrate >= self.blindscan_start_symbol.value * 1000 and symbolrate <= self.blindscan_stop_symbol.value * 1000:
 				add_tp = True
 			else:
@@ -801,17 +801,23 @@ class Blindscan(ConfigListScreen, Screen):
 							self.offset = 9750000
 				if len(data) >= 6 and data[0] == 'OK' and self.Sundtek_pol != "" and self.offset and self.dataSundtekIsGood(data):
 					parm = eDVBFrontendParametersSatellite()
+					sys = { "DVB-S" : parm.System_DVB_S,
+						"DVB-S2" : parm.System_DVB_S2}
+					qam = { "QPSK" : parm.Modulation_QPSK,
+						"8PSK" : parm.Modulation_8PSK,
+						"16APSK" : parm.Modulation_16APSK,
+						"32APSK" : parm.Modulation_32APSK}
 					parm.orbital_position = self.orb_position
 					parm.polarisation = self.Sundtek_pol
-					frequency = ((int(data[1]) + self.offset) / 1000) * 1000
+					frequency = ((int(data[2]) + self.offset) / 1000) * 1000
 					parm.frequency = frequency
-					symbol_rate = int(data[2]) * 1000
+					symbol_rate = int(data[3]) * 1000
 					parm.symbol_rate = symbol_rate
-					parm.system = parm.System_DVB_S
+					parm.system = sys[data[1]]
 					parm.inversion = parm.Inversion_Off
 					parm.pilot = parm.Pilot_Off
 					parm.fec = parm.FEC_Auto
-					parm.modulation = parm.Modulation_QPSK
+					parm.modulation = qam[data[4]]
 					parm.rolloff = parm.RollOff_alpha_0_35
 					self.tmp_tplist.append(parm)
 			elif len(data) >= 10 and self.dataIsGood(data):
@@ -895,15 +901,11 @@ class Blindscan(ConfigListScreen, Screen):
 							self.offset = 10600000
 						elif self.Sundtek_band == "low":
 							self.offset = 9750000
-				if len(data) >= 6 and data[0] == 'OK' and self.Sundtek_pol and self.offset:
-					tmpstr = '\n'
-					tmpstr += data[1].isdigit() and "%s" % ((int(data[1]) + self.offset) / 1000) or data[1]
-					tmpstr += "%s SR: %s" % (self.Sundtek_pol, data[2])
 					self.tp_found.append(str)
-				seconds_done = int(time() - self.start_time)
-				tmpstr += '\n'
-				tmpstr += _("%d transponders found at %d:%02d min") %(len(self.tp_found),seconds_done / 60, seconds_done % 60)
-				self.blindscan_session["text"].setText(self.tmpstr + tmpstr)
+					seconds_done = int(time() - self.start_time)
+					tmpstr += '\n'
+					tmpstr += _("Step %d %d:%02d min") %(len(self.tp_found),seconds_done / 60, seconds_done % 60)
+					self.blindscan_session["text"].setText(self.tmpstr + tmpstr)
 
 	def blindscanSessionNone(self, *val):
 		import time
