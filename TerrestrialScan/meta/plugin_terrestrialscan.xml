@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Huevos</author>
+                    <name>Terrestrial Scan</name>
+                    <packagename>enigma2-plugin-systemplugins-terrestrialscan</packagename>
+                    <shortdescription>Does terrestrial scans</shortdescription>
+                    <description>Terrestrial Scan selects the strongest transponders where there are duplicates and allows filtering by network id.</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-terrestrialscan" />
+	</files>
+</default>
