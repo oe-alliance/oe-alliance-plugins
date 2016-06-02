@@ -1,0 +1,130 @@
+# Czech translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2016 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-02 19:21+0200\n"
+"PO-Revision-Date: 2016-06-02 19:21+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+msgid "Automatic"
+msgstr ""
+
+msgid "Band"
+msgstr ""
+
+msgid "Cannot free NIM because a recording is in progress"
+msgstr ""
+
+msgid "Cannot get frontend"
+msgstr ""
+
+msgid "Cannot get the NIM"
+msgstr ""
+
+msgid "Cannot retrieve Resource Manager instance"
+msgstr ""
+
+msgid "Clear before scan"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+#, python-format
+msgid "Found %d unique transponder"
+msgid_plural "Found %d unique transponders"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid ""
+"If you select \"yes\" all stored terrestrial channels will be deleted before "
+"starting the current search."
+msgstr ""
+
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not "
+"encrypted; \"no\" will find encrypted and non-encrypted channels."
+msgstr ""
+
+msgid ""
+"Most transmitters in European countries only have TV channels in the UHF "
+"band."
+msgstr ""
+
+msgid "Network ID"
+msgstr ""
+
+msgid "No frequencies to search"
+msgstr ""
+
+msgid "No terrestrial tuner found"
+msgstr ""
+
+msgid "No valid NIM found for terrestrial"
+msgstr ""
+
+msgid "Only free scan"
+msgstr ""
+
+#, python-format
+msgid "Reading channel %s"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
+msgid "Scan"
+msgstr ""
+
+#, python-format
+msgid "Scanning channel %s"
+msgstr ""
+
+msgid "Scanning for active transponders"
+msgstr ""
+
+msgid ""
+"Select \"0\" to search all networks, or enter the network ID of the provider "
+"you wish to search."
+msgstr ""
+
+msgid ""
+"Select a tuner that is configured for terrestrial scans. \"Automatic\" will "
+"pick the highest spec available tuner."
+msgstr ""
+
+msgid "Selected tuner is not cofigured"
+msgstr ""
+
+msgid "Starting scanner"
+msgstr ""
+
+msgid "Starting search..."
+msgstr ""
+
+msgid "Terrestrial Scan"
+msgstr ""
+
+msgid "TerrestrialScan"
+msgstr ""
+
+msgid "Tuner"
+msgstr ""
+
+msgid "UHF Europe"
+msgstr ""
+
+msgid "UHF/VHF Europe"
+msgstr ""
