@@ -305,6 +305,12 @@ TempFanControl/src/Makefile
 TempFanControl/meta/Makefile
 TempFanControl/po/Makefile
 
+TerrestrialScan/Makefile
+TerrestrialScan/images/Makefile
+TerrestrialScan/meta/Makefile
+TerrestrialScan/po/Makefile
+TerrestrialScan/src/Makefile
+
 TransCodingSetup/Makefile
 TransCodingSetup/src/Makefile
 TransCodingSetup/meta/Makefile
