@@ -8,122 +8,131 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-02 19:21+0200\n"
-"PO-Revision-Date: 2016-06-02 19:21+0200\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2016-06-03 06:15+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: none\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.6\n"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automatisch"
 
 msgid "Band"
-msgstr ""
+msgstr "Band"
 
 msgid "Cannot free NIM because a recording is in progress"
-msgstr ""
+msgstr "Kan geen vrije NIM vinden omdat er een opname loopt"
 
 msgid "Cannot get frontend"
-msgstr ""
+msgstr "Kan het frontend niet bereiken"
 
 msgid "Cannot get the NIM"
-msgstr ""
+msgstr "Kan de NIM niet bereiken"
 
 msgid "Cannot retrieve Resource Manager instance"
 msgstr ""
 
 msgid "Clear before scan"
-msgstr ""
+msgstr "Verwijder voor het scannen"
 
 msgid "Exit"
-msgstr ""
+msgstr "Sluit af"
 
 #, python-format
 msgid "Found %d unique transponder"
 msgid_plural "Found %d unique transponders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d unieke transponders gevonden"
+msgstr[1] "Found %d unique transponders"
 
 msgid ""
 "If you select \"yes\" all stored terrestrial channels will be deleted before "
 "starting the current search."
 msgstr ""
+"Als u dit kiest, worden alle opgeslagen terristische kanalen verwijderd "
+"voordat het zoeken begint."
 
 msgid ""
 "If you select \"yes\" the scan will only save channels that are not "
 "encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr ""
+"Als u \"'ja\" kiest, zullen alleen kanalen worden opgeslagen die niet "
+"gecodeerd zijn; bij \"nee\" worden alle kanalen opgeslagen. "
 
 msgid ""
 "Most transmitters in European countries only have TV channels in the UHF "
 "band."
-msgstr ""
+msgstr "De meeste uitzendingen in Europa vinden plaats in de UHF-band."
 
 msgid "Network ID"
-msgstr ""
+msgstr "Netwerk-ID"
 
 msgid "No frequencies to search"
-msgstr ""
+msgstr "Geen frequenties om te zoeken"
 
 msgid "No terrestrial tuner found"
-msgstr ""
+msgstr "Geen terrestrische tuner gevonden"
 
 msgid "No valid NIM found for terrestrial"
-msgstr ""
+msgstr "Geen geldige NIM gevonden voor terrestrisch"
 
 msgid "Only free scan"
-msgstr ""
+msgstr "Alleen vrije kanalen"
 
 #, python-format
 msgid "Reading channel %s"
-msgstr ""
+msgstr "Leest kanaal %s"
 
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Echt afsluiten zonder op te slaan?"
 
 msgid "Scan"
-msgstr ""
+msgstr "Scan"
 
 #, python-format
 msgid "Scanning channel %s"
-msgstr ""
+msgstr "Scant kanaal %s"
 
 msgid "Scanning for active transponders"
-msgstr ""
+msgstr "Scant actieve transponders"
 
 msgid ""
 "Select \"0\" to search all networks, or enter the network ID of the provider "
 "you wish to search."
 msgstr ""
+"Kies \"0\" om alle netwerken te doorzoeken, of geef het netwerk-ID in van de "
+"provider die u wilt scannen."
 
 msgid ""
 "Select a tuner that is configured for terrestrial scans. \"Automatic\" will "
 "pick the highest spec available tuner."
 msgstr ""
+"Kies een tuner die is geconfigureerd voor terrestrische scans. \"Automatisch"
+"\" zal de tuner met de beste specificaties gebruiken. "
 
 msgid "Selected tuner is not cofigured"
-msgstr ""
+msgstr "De gekozen tuner is niet geconfigureerd"
 
 msgid "Starting scanner"
-msgstr ""
+msgstr "Start scanner"
 
 msgid "Starting search..."
-msgstr ""
+msgstr "Start zoeken..."
 
 msgid "Terrestrial Scan"
-msgstr ""
+msgstr "Terrestrial Scan"
 
 msgid "TerrestrialScan"
-msgstr ""
+msgstr "TerrestrialScan"
 
 msgid "Tuner"
-msgstr ""
+msgstr "Tuner"
 
 msgid "UHF Europe"
-msgstr ""
+msgstr "UHF Europa"
 
 msgid "UHF/VHF Europe"
-msgstr ""
+msgstr "UHF/VHF Europa"
