@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
-"PO-Revision-Date: 2016-05-07 13:07+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2016-06-03 06:45+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.6\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
@@ -42,7 +42,7 @@ msgid "- Analog Clock"
 msgstr "- Analoge klok"
 
 msgid "- Background Color"
-msgstr "- Achtergrond kleur"
+msgstr "- Achtergrondkleur"
 
 msgid "- Background/Transparency"
 msgstr "- Achtergrond/Tranparantie"
@@ -60,10 +60,10 @@ msgid "- Backlight Weekend On"
 msgstr "- Achtergrondverlichting  Weekeinde Aan"
 
 msgid "- Bar Range Max"
-msgstr "- Balk bereik max"
+msgstr "- Balkbereik max"
 
 msgid "- Bar Range Min"
-msgstr "- Balk bereik min"
+msgstr "- Balkbereik min"
 
 msgid "- Base"
 msgstr "- Basis"
@@ -141,7 +141,7 @@ msgid "- HTTP Width"
 msgstr "- HTTP Breedte"
 
 msgid "- LCD 1 Background Color"
-msgstr "- LCD 1 Achtergrond kleur"
+msgstr "- LCD 1 Achtergrondkleur"
 
 msgid "- LCD 1 Background-Picture [ok]>"
 msgstr "- LCD 1 Achtergrond-Foto [ok]>"
@@ -159,7 +159,7 @@ msgid "- LCD 1 Rotate"
 msgstr "- LCD 1 Roteer"
 
 msgid "- LCD 2 Background Color"
-msgstr "- LCD 2 Achtergrond kleur"
+msgstr "- LCD 2 Achtergrondkleur"
 
 msgid "- LCD 2 Background-Picture [ok]>"
 msgstr "- LCD 2 Achtergrond-Foto [ok]>"
@@ -177,7 +177,7 @@ msgid "- LCD 2 Rotate"
 msgstr "- LCD 2 Roteer"
 
 msgid "- LCD 3 Background Color"
-msgstr "- LCD 3 Achtergrond kleur"
+msgstr "- LCD 3 Achtergrondkleur"
 
 msgid "- LCD 3 Background-Picture [ok]>"
 msgstr "- LCD 3 Achtergrond-Foto [ok]>"
@@ -207,7 +207,7 @@ msgid "- Lines"
 msgstr "- Lijnen"
 
 msgid "- Mail Konto"
-msgstr "- Mail Konto"
+msgstr "- Mail account"
 
 msgid "- Module"
 msgstr "- Module"
@@ -216,7 +216,7 @@ msgid "- Name"
 msgstr "- Naam"
 
 msgid "- OSD Size"
-msgstr "- OSD Maat"
+msgstr "- OSD-maat"
 
 msgid "- Online Name:Address"
 msgstr "- Online Naam:Adres"
@@ -240,7 +240,7 @@ msgid "- Picture Alignment"
 msgstr "- Foto uitlijning"
 
 msgid "- Picture Position"
-msgstr "- Picture Positie"
+msgstr "- Foto positie"
 
 msgid "- Picture Size"
 msgstr "- Foto grootte"
@@ -273,7 +273,7 @@ msgid "- Rain Color 2"
 msgstr "- Kleur regen 2"
 
 msgid "- Rain Zoom"
-msgstr "- Regen Zoom"
+msgstr "- Regen zoom"
 
 msgid "- Rain use Color 2 from"
 msgstr "- Regen gebruik kleur 2 van"
@@ -633,7 +633,7 @@ msgid "85%"
 msgstr "85%"
 
 msgid "8bit - grayscale/color"
-msgstr "8bit - grijsschaal/kleu"
+msgstr "8bit - grijsschaal/kleur"
 
 msgid "90"
 msgstr "90"
@@ -648,7 +648,7 @@ msgid "96x64"
 msgstr "96x64"
 
 msgid "Active Screen"
-msgstr "Actieve scherm"
+msgstr "Actief scherm"
 
 msgid "All"
 msgstr "Alle"
@@ -672,13 +672,13 @@ msgid "Analog+Date+Weekday 2"
 msgstr "Analoog+datum+dag 2"
 
 msgid "April"
-msgstr ""
+msgstr "april"
 
 msgid "Audio/Video"
 msgstr "Audio/Video"
 
 msgid "August"
-msgstr ""
+msgstr "augustus"
 
 msgid "Background"
 msgstr "Achtergrond"
@@ -840,22 +840,22 @@ msgid "Dates 9 Lines"
 msgstr "Data 9 regels"
 
 msgid "Dates List"
-msgstr "Datums lijst"
+msgstr "Datumlijst"
 
 msgid "Dates compact"
-msgstr "Datums compact"
+msgstr "Datum compact"
 
 msgid "Dates compact 2 Lines"
-msgstr "Datums compact 2 regels"
+msgstr "Datum compact 2 regels"
 
 msgid "Dates compact 3 Lines"
-msgstr "Datums compact 3 regels"
+msgstr "Datum compact 3 regels"
 
 msgid "Dates compact no Icon"
-msgstr "Datums compact geen ikoon"
+msgstr "Datum compact geen icoon"
 
 msgid "Dates no Icon"
-msgstr "Datums geen ikoon"
+msgstr "Datum geen icoon"
 
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr "Debuglogs > /tmp/L4log.txt"
@@ -912,7 +912,7 @@ msgid "Fastmode (2s)"
 msgstr "Snelle modus (2s)"
 
 msgid "February"
-msgstr ""
+msgstr "februari"
 
 msgid "First Quarter"
 msgstr "Eerste kwartier"
@@ -948,7 +948,7 @@ msgid "Fri"
 msgstr "vr"
 
 msgid "Friday"
-msgstr ""
+msgstr "vrijdag"
 
 msgid "FritzCall"
 msgstr "FritzCall"
@@ -1045,19 +1045,19 @@ msgid "JPG"
 msgstr "JPG"
 
 msgid "January"
-msgstr ""
+msgstr "januari"
 
 msgid "Javascript"
 msgstr "Javascript"
 
 msgid "July"
-msgstr ""
+msgstr "juli"
 
 msgid "June"
-msgstr ""
+msgstr "juni"
 
 msgid "Key for Screen Change"
-msgstr "Sleutel for scherm verandern"
+msgstr "Sleutel voor scherm veranderen"
 
 msgid "Key for Screen On/Off"
 msgstr "Sleutel voor scherm aan/uit"
@@ -1111,7 +1111,7 @@ msgid "LCD Display"
 msgstr "LCD Display"
 
 msgid "LCD4linux Screen Switch"
-msgstr ""
+msgstr "LCD4linux schermschakelaar"
 
 msgid "LCD4linux enabled"
 msgstr "LCD4linux ingeschakeld"
@@ -1156,10 +1156,10 @@ msgid "Long InfoKey"
 msgstr "Info toets-lang"
 
 msgid "MJPEG Boundary Mode"
-msgstr ""
+msgstr "MJPEG grensmode Mode"
 
 msgid "MJPEG Header Mode"
-msgstr ""
+msgstr "MJPEG headermode"
 
 msgid "MJPEG Stream"
 msgstr "MJPEG Stream"
@@ -1264,10 +1264,10 @@ msgid "Mail Show Empty Mailboxes"
 msgstr "Mail toon lege mailboxen"
 
 msgid "March"
-msgstr ""
+msgstr "maart"
 
 msgid "May"
-msgstr ""
+msgstr "mei"
 
 msgid "Media"
 msgstr "Media"
@@ -1342,7 +1342,7 @@ msgid "Mon"
 msgstr "ma"
 
 msgid "Monday"
-msgstr ""
+msgstr "maandag"
 
 msgid "Month"
 msgstr "Maand"
@@ -1381,7 +1381,7 @@ msgid "Netatmo 2"
 msgstr "Netatmo 2"
 
 msgid "Netatmo CO2 Indicator"
-msgstr "Netatmo CO2 indicator"
+msgstr "Netatmo CO2-indicator"
 
 msgid "Netatmo CO2 Max Range"
 msgstr "Netatmo CO2 max bereik"
@@ -1411,7 +1411,7 @@ msgid "Normal (5s)"
 msgstr "Normaal (5s)"
 
 msgid "November"
-msgstr ""
+msgstr "november"
 
 msgid "Now/Next"
 msgstr "Nu/Straks"
@@ -1426,7 +1426,7 @@ msgid "OSD [display time]"
 msgstr "OSD [vertoon tijd]"
 
 msgid "October"
-msgstr ""
+msgstr "oktober"
 
 msgid "Offline"
 msgstr "Offline"
@@ -1450,7 +1450,7 @@ msgid "Only New"
 msgstr "Alleen nieuw"
 
 msgid "OpenWeatherMap"
-msgstr ""
+msgstr "OpenWeather kaart"
 
 msgid "PNG"
 msgstr "PNG"
@@ -1561,25 +1561,25 @@ msgid "Reload"
 msgstr "Herlaad"
 
 msgid "Remote Box"
-msgstr ""
+msgstr "Klant box"
 
 msgid "Remote Box 1 [Displayname:]IP/Name"
-msgstr ""
+msgstr "klantbox 1 [Displayname:]IP/Name"
 
 msgid "Remote Box 2 [Displayname:]IP/Name"
-msgstr ""
+msgstr "Klantbox 2 [Displayname:]IP/Name"
 
 msgid "Remote Box 3 [Displayname:]IP/Name"
-msgstr ""
+msgstr "Klantbox 3 [Displayname:]IP/Name"
 
 msgid "Remote Box 4 [Displayname:]IP/Name"
-msgstr ""
+msgstr "Klantbox 4 [Displayname:]IP/Name"
 
 msgid "Remote Box 5 [Displayname:]IP/Name"
-msgstr ""
+msgstr "Klantbox 5 [Displayname:]IP/Name"
 
 msgid "Remote Box Poll every Minutes"
-msgstr ""
+msgstr "Klantbox elke minuut pollen"
 
 msgid "Restart Displays"
 msgstr "Herstart displays"
@@ -1645,7 +1645,7 @@ msgid "Satellite"
 msgstr "Satelliet"
 
 msgid "Saturday"
-msgstr ""
+msgstr "zaterdag"
 
 msgid "Save"
 msgstr "Opslaan"
@@ -1759,19 +1759,19 @@ msgid "Screen 9"
 msgstr "Scherm9"
 
 msgid "Screen Switch Select - LCD"
-msgstr ""
+msgstr "Schermschakelkeuze - LCD"
 
 msgid "Screen Switch Select - Screen"
-msgstr ""
+msgstr "Schermschakelkeuze - scherm"
 
 msgid "Screens used for Changing"
 msgstr "Schermen gebruikt voor veranderen"
 
 msgid "September"
-msgstr ""
+msgstr "september"
 
 msgid "Service search first"
-msgstr ""
+msgstr "Eerst kanaalzoeken"
 
 msgid "Shadow Edges"
 msgstr "Schaduw hoeken"
@@ -1834,13 +1834,13 @@ msgid "Signal Quality Bar"
 msgstr "Signaalkwaliteit balk"
 
 msgid "Standby"
-msgstr "Standby"
+msgstr "Stand-by"
 
 msgid "Storage-Devices"
-msgstr "Opslag media"
+msgstr "Opslagmedia"
 
 msgid "Storage-Devices: Force Read"
-msgstr "Opslag media: force read"
+msgstr "Opslagmedia: force read"
 
 msgid "Stutter TV"
 msgstr "Stotter-TV"
@@ -1849,13 +1849,13 @@ msgid "Sun"
 msgstr "zo "
 
 msgid "Sunday"
-msgstr ""
+msgstr "zondag"
 
 msgid "Sunrise"
 msgstr "Zonsopkomst"
 
 msgid "Switch FrameBuffer [if possible]"
-msgstr "Schakel FrameBuffer [indien mogelijk)"
+msgstr "Schakel framebuffer [indien mogelijk)"
 
 msgid "TV"
 msgstr "TV"
@@ -1888,7 +1888,7 @@ msgid "Thur"
 msgstr "do"
 
 msgid "Thursday"
-msgstr ""
+msgstr "donderdag"
 
 msgid "Time"
 msgstr "Tijd"
@@ -1915,7 +1915,7 @@ msgid "Tue"
 msgstr "di"
 
 msgid "Tuesday"
-msgstr ""
+msgstr "dinsdag"
 
 msgid "Tuner Color"
 msgstr "Tuner kleur"
@@ -1990,7 +1990,7 @@ msgid "Weather API"
 msgstr "Weer-API"
 
 msgid "Weather API-Key OpenWeatherMap"
-msgstr ""
+msgstr "Weer API-Key OpenWeatherMap"
 
 msgid "Weather City"
 msgstr "Weer stad"
@@ -2017,7 +2017,7 @@ msgid "Weather Transparency"
 msgstr "Weer transparantie"
 
 msgid "Weather Wind speed unit"
-msgstr ""
+msgstr "Weer windsnelheid eenheid"
 
 msgid "Weather-Icon Zoom"
 msgstr "Weer-ikoon zoom"
@@ -2026,10 +2026,10 @@ msgid "Weather-Icon-Path [ok]>"
 msgstr "Weer-ikoon-Pad [ok]>"
 
 msgid "WebIF"
-msgstr "WebIF"
+msgstr "Web-IF"
 
 msgid "WebIF Design"
-msgstr "WebIF-design"
+msgstr "Web-IF ontwerp"
 
 msgid "WebIF IP Allow"
 msgstr "WEB-IF IP toegestaan"
@@ -2050,7 +2050,7 @@ msgid "Wed"
 msgstr "wo"
 
 msgid "Wednesday"
-msgstr ""
+msgstr "woensdag"
 
 msgid "Week"
 msgstr "Week"
@@ -2068,7 +2068,7 @@ msgid "alphabetic"
 msgstr "alfabetisch"
 
 msgid "alternative Copy-Mode/DM800hd (24bit)"
-msgstr ""
+msgstr "alternatieve kopieermode/DM800hd (24bit)"
 
 msgid "always"
 msgstr "altijd"
@@ -2092,10 +2092,10 @@ msgid "brown"
 msgstr "bruin"
 
 msgid "cache + adjustment (high quality, slow)"
-msgstr ""
+msgstr "cache + aanpassing (hoge kwaliteit, langzaam)"
 
 msgid "cache + adjustment (low quality, fast)"
-msgstr ""
+msgstr "cache + aanpassing (lage kwaliteit, snel)"
 
 msgid "cadetblue"
 msgstr ""
@@ -2191,7 +2191,7 @@ msgid "indianred"
 msgstr ""
 
 msgid "indigo"
-msgstr ""
+msgstr "indigo"
 
 msgid "km/h"
 msgstr "km/h"
@@ -2341,13 +2341,13 @@ msgid "set Settings"
 msgstr "maak instellingen"
 
 msgid "show run"
-msgstr ""
+msgstr "toon actief"
 
 msgid "show run+sleep"
-msgstr ""
+msgstr "toon actief + slaap"
 
 msgid "show total Timer"
-msgstr ""
+msgstr "toon totale timer"
 
 msgid "silver"
 msgstr "zilver"
@@ -2356,7 +2356,7 @@ msgid "slategray"
 msgstr "leigrijs"
 
 msgid "stop Screencycle"
-msgstr ""
+msgstr "stop schermcyclus"
 
 msgid "tomato"
 msgstr "tomaat"

@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-07 13:28+0200\n"
-"PO-Revision-Date: 2016-05-07 13:28+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2016-06-03 06:22+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -15,20 +15,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../src/plugin.py:28
 msgid "Channelnumber in Standby off"
-msgstr "Kanaalnummer in Standby uit"
+msgstr "Kanaalnummer in stand-by uit"
 
 #: ../src/plugin.py:28
 msgid "Channelnumber in Standby Clock"
-msgstr "Kanaalnummer in Standby Klok"
+msgstr "Kanaalnummer in stand-by klok"
 
 #: ../src/plugin.py:28
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanaalnummer/Klok in Standby Klok"
+msgstr "Kanaalnummer/Klok in stand-by klok"
 
 #: ../src/plugin.py:28
 msgid "Clock always"
@@ -112,7 +112,7 @@ msgstr "Helderheid"
 
 #: ../src/plugin.py:403 ../src/plugin.py:431
 msgid "Brightness Standby"
-msgstr "Helderheid (standby)"
+msgstr "Helderheid (stand-by)"
 
 #: ../src/plugin.py:405 ../src/plugin.py:425
 msgid "Show on VFD"
@@ -120,7 +120,7 @@ msgstr "Toon op VFD"
 
 #: ../src/plugin.py:406 ../src/plugin.py:427
 msgid "Show clock in Deep Standby"
-msgstr "Toon klok in deep standby"
+msgstr "Toon klok in deep stand-by"
 
 #: ../src/plugin.py:408
 msgid "Time mode"
@@ -128,7 +128,7 @@ msgstr "Tijd modus"
 
 #: ../src/plugin.py:409
 msgid "Channel number with leading zeros"
-msgstr "Kanaal nummers met nullen beginnen"
+msgstr "Kanaalnummers met nullen beginnen"
 
 #: ../src/plugin.py:489 ../src/plugin.py:491 ../src/plugin.py:504
 msgid "Display/LED"

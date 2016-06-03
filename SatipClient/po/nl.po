@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-07 13:50+0200\n"
-"PO-Revision-Date: 2016-05-07 13:50+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2016-06-03 06:51+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../src/plugin.py:319
@@ -99,7 +99,7 @@ msgstr "Schakel uit"
 
 #: ../src/plugin.py:599
 msgid "Select tuner and press setup key (Yellow)"
-msgstr "Kies tuner en druk op de gele toets (instellingen)"
+msgstr "Kies tuner en druk op de instellingentoets (geel)"
 
 #: ../src/plugin.py:657
 msgid "Really close without saving settings?"

@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-07 14:18+0200\n"
-"PO-Revision-Date: 2016-05-07 14:18+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2016-06-03 07:03+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../src/plugin.py:17
@@ -49,19 +49,19 @@ msgstr "Opslaan"
 
 #: ../src/plugin.py:93
 msgid "Fan basic action"
-msgstr "Fan basis actie"
+msgstr "Ventilator basisactie"
 
 #: ../src/plugin.py:94
 msgid "Use Fan timer"
-msgstr "Gebruik fan- timer"
+msgstr "Gebruik ventilatortimer"
 
 #: ../src/plugin.py:95
 msgid "Fan on duration time"
-msgstr "Fan aan gedurende"
+msgstr "Ventilator aan gedurende"
 
 #: ../src/plugin.py:96
 msgid "Fan off duration time"
-msgstr "Fan uit gedurende"
+msgstr "Ventilator uit gedurende"
 
 #: ../src/plugin.py:129
 msgid "Really close without saving settings?"
