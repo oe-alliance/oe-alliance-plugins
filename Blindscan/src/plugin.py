@@ -747,8 +747,11 @@ class Blindscan(ConfigListScreen, Screen):
 		elif self.Sundtek_pol in (0, 2) and (pol == eDVBFrontendParametersSatellite.Polarisation_Horizontal or pol == eDVBFrontendParametersSatellite.Polarisation_CircularLeft):
 			add_tp = True
 		if add_tp:
-			freq = (int(data[2]) + self.offset) / 1000
-			symbolrate = int(data[3])
+			if data[2].isdigit() and data[3].isdigit():
+				freq = (int(data[2]) + self.offset) / 1000
+				symbolrate = int(data[3])
+			else:
+				return False
 			if freq >= self.blindscan_start_frequency.value and freq <= self.blindscan_stop_frequency.value and symbolrate >= self.blindscan_start_symbol.value * 1000 and symbolrate <= self.blindscan_stop_symbol.value * 1000:
 				add_tp = True
 			else:
