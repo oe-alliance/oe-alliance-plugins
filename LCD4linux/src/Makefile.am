@@ -15,14 +15,14 @@ if MIPSEL
 SUBDIRS += mips
 endif
 
-if CUBE
-SUBDIRS += cube
+if HAVE_ARMV7A
+SUBDIRS += armv7a
 endif
 
-if WETEKPLAY
-SUBDIRS += wetek
+if HAVE_CORTEXA9HF
+SUBDIRS += cortexa9hf
 endif
 
-if VUSOLO4K
-SUBDIRS += solo4k
+if HAVE_ARMV7AHF
+SUBDIRS += armv7ahf
 endif
