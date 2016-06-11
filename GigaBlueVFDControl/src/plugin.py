@@ -485,7 +485,7 @@ class LED_Giga:
 
 def main(menuid, **kwargs):
 	if getImageDistro() == "openvix":
-		if BOX in ('gb800se', 'gb800solo') and menuid == "leddisplay":
+		if BOX in ('gb800se', 'gb800solo', 'gbx1', 'gbx3') and menuid == "leddisplay":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
 		elif BOX in ('gb800seplus', 'gbultra', 'gbultrase') and menuid == "display":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
