@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-15 17:34+0200\n"
-"PO-Revision-Date: 2016-06-15 18:14+0100\n"
+"PO-Revision-Date: 2016-06-15 21:27+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: none\n"
 "Language: de\n"
@@ -20,11 +20,11 @@ msgstr ""
 
 #: plugin.py:21
 msgid "UHF Europe"
-msgstr ""
+msgstr "UHF Europa"
 
 #: plugin.py:22
 msgid "UHF/VHF Europe"
-msgstr ""
+msgstr "UHF/VHF Europa"
 
 #: plugin.py:27 plugin.py:145 plugin.py:154
 msgid "Terrestrial Scan"
@@ -49,8 +49,8 @@ msgstr ""
 #: plugin.py:66
 msgid "Select a tuner that is configured for terrestrial scans. \"Automatic\" will pick the highest spec available tuner."
 msgstr ""
-"Wählen Sie einen Tuner, der für terrestrische Suchlauf konfiguriert ist.\n"
-"\"Automatisch\" den Tuner mit dem besten Empfang wählen."
+"Wählen Sie einen Tuner, der für den terrestrischen Suchlauf konfiguriert ist.\n"
+"\"Automatisch\", den Tuner mit dem besten Empfangssignal wählen."
 
 #: plugin.py:67
 msgid "Band"
@@ -66,23 +66,25 @@ msgstr "Netzwerk ID"
 
 #: plugin.py:68
 msgid "Select \"0\" to search all networks, or enter the network ID of the provider you wish to search."
-msgstr "Wählen Sie \"0\" um alle Netze zu suchen, oder geben Sie die Netzwerk-ID des Anbieters den Sie suchen möchten ein."
+msgstr "Wählen Sie \"0\" um alle Netze zu durchsuchen, oder geben Sie die Netzwerk-ID des Anbieters den Sie suchen möchten ein."
 
 #: plugin.py:69
 msgid "Clear before scan"
-msgstr "Löschen vor dem Scan"
+msgstr "Löschen vor dem Suchlauf"
 
 #: plugin.py:69
 msgid "If you select \"yes\" all stored terrestrial channels will be deleted before starting the current search."
-msgstr "Wenn Sie \"Ja\" auswählen werden alle gespeicherten terrestrische Kanäle vor dem Suchlauf gelöscht."
+msgstr "Wenn Sie \"Ja\" auswählen werden alle gespeicherten terrestrischen Kanäle vor dem Suchlauf gelöscht."
 
 #: plugin.py:70
 msgid "Only free scan"
-msgstr "Nur freie Scannen"
+msgstr "Nur freie Kanäle Suchen"
 
 #: plugin.py:70
 msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
-msgstr "Wenn Sie \"Ja\" auswählen werden nur unverschlüsselte Kanäle gesucht, bei \"Nein\" werden verschlüsselte und unverschlüsselte Kanäle gesucht."
+msgstr ""
+"Wenn Sie \"Ja\" auswählen werden nur unverschlüsselte Kanäle gesucht,\n"
+"bei \"Nein\" werden verschlüsselte und unverschlüsselte Kanäle gesucht."
 
 #: plugin.py:102
 msgid "Really close without saving settings?"
