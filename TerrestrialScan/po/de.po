@@ -7,123 +7,148 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-02 19:21+0200\n"
-"PO-Revision-Date: 2016-06-02 19:21+0200\n"
-"Last-Translator: Automatically generated\n"
+"POT-Creation-Date: 2016-06-15 17:34+0200\n"
+"PO-Revision-Date: 2016-06-15 18:14+0100\n"
+"Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: none\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.7.4\n"
 
-msgid "Automatic"
+#: plugin.py:21
+msgid "UHF Europe"
 msgstr ""
 
-msgid "Band"
+#: plugin.py:22
+msgid "UHF/VHF Europe"
 msgstr ""
 
-msgid "Cannot free NIM because a recording is in progress"
-msgstr ""
+#: plugin.py:27 plugin.py:145 plugin.py:154
+msgid "Terrestrial Scan"
+msgstr "Terrestrischer Suchlauf"
 
-msgid "Cannot get frontend"
-msgstr ""
-
-msgid "Cannot get the NIM"
-msgstr ""
-
-msgid "Cannot retrieve Resource Manager instance"
-msgstr ""
-
-msgid "Clear before scan"
-msgstr ""
-
+#: plugin.py:43
 msgid "Exit"
 msgstr ""
 
+#: plugin.py:44
+msgid "Scan"
+msgstr ""
+
+#: plugin.py:53
+msgid "Automatic"
+msgstr "Automatisch"
+
+#: plugin.py:66
+msgid "Tuner"
+msgstr ""
+
+#: plugin.py:66
+msgid "Select a tuner that is configured for terrestrial scans. \"Automatic\" will pick the highest spec available tuner."
+msgstr ""
+"Wählen Sie einen Tuner, der für terrestrische Suchlauf konfiguriert ist.\n"
+"\"Automatisch\" den Tuner mit dem besten Empfang wählen."
+
+#: plugin.py:67
+msgid "Band"
+msgstr ""
+
+#: plugin.py:67
+msgid "Most transmitters in European countries only have TV channels in the UHF band."
+msgstr "Die meisten Sender in den europäischen Ländern haben nur TV-Kanäle im UHF-Band."
+
+#: plugin.py:68
+msgid "Network ID"
+msgstr "Netzwerk ID"
+
+#: plugin.py:68
+msgid "Select \"0\" to search all networks, or enter the network ID of the provider you wish to search."
+msgstr "Wählen Sie \"0\" um alle Netze zu suchen, oder geben Sie die Netzwerk-ID des Anbieters den Sie suchen möchten ein."
+
+#: plugin.py:69
+msgid "Clear before scan"
+msgstr "Löschen vor dem Scan"
+
+#: plugin.py:69
+msgid "If you select \"yes\" all stored terrestrial channels will be deleted before starting the current search."
+msgstr "Wenn Sie \"Ja\" auswählen werden alle gespeicherten terrestrische Kanäle vor dem Suchlauf gelöscht."
+
+#: plugin.py:70
+msgid "Only free scan"
+msgstr "Nur freie Scannen"
+
+#: plugin.py:70
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
+msgstr "Wenn Sie \"Ja\" auswählen werden nur unverschlüsselte Kanäle gesucht, bei \"Nein\" werden verschlüsselte und unverschlüsselte Kanäle gesucht."
+
+#: plugin.py:102
+msgid "Really close without saving settings?"
+msgstr ""
+
+#: TerrestrialScan.py:62 TerrestrialScan.py:111
+msgid "TerrestrialScan"
+msgstr "Terrestrischer Suchlauf"
+
+#: TerrestrialScan.py:65
+msgid "Starting scanner"
+msgstr ""
+
+#: TerrestrialScan.py:127
+msgid "Starting search..."
+msgstr "Suche starten..."
+
+#: TerrestrialScan.py:128
+msgid "Scanning for active transponders"
+msgstr "Scannen für aktive Transponder"
+
+#: TerrestrialScan.py:137
+msgid "No frequencies to search"
+msgstr ""
+
+#: TerrestrialScan.py:150
+#, python-format
+msgid "Scanning channel %s"
+msgstr ""
+
+#: TerrestrialScan.py:151
 #, python-format
 msgid "Found %d unique transponder"
 msgid_plural "Found %d unique transponders"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid ""
-"If you select \"yes\" all stored terrestrial channels will be deleted before "
-"starting the current search."
-msgstr ""
-
-msgid ""
-"If you select \"yes\" the scan will only save channels that are not "
-"encrypted; \"no\" will find encrypted and non-encrypted channels."
-msgstr ""
-
-msgid ""
-"Most transmitters in European countries only have TV channels in the UHF "
-"band."
-msgstr ""
-
-msgid "Network ID"
-msgstr ""
-
-msgid "No frequencies to search"
-msgstr ""
-
+#: TerrestrialScan.py:182 TerrestrialScan.py:200
 msgid "No terrestrial tuner found"
+msgstr "Kein terrestrischen Tuner gefunden"
+
+#: TerrestrialScan.py:195
+msgid "Selected tuner is not cofigured"
+msgstr "Ausgewählter Tuner ist nicht konfiguriert"
+
+#: TerrestrialScan.py:206
+msgid "Cannot retrieve Resource Manager instance"
 msgstr ""
 
+#: TerrestrialScan.py:248
 msgid "No valid NIM found for terrestrial"
+msgstr "Keine gültige NIM gefunden für terrestrische"
+
+#: TerrestrialScan.py:266
+msgid "Cannot free NIM because a recording is in progress"
+msgstr "Kein freier NIM, weil eine Aufnahme läuft."
+
+#: TerrestrialScan.py:270
+msgid "Cannot get the NIM"
 msgstr ""
 
-msgid "Only free scan"
+#: TerrestrialScan.py:282
+msgid "Cannot get frontend"
 msgstr ""
 
+#: TerrestrialScan.py:304
 #, python-format
 msgid "Reading channel %s"
-msgstr ""
-
-msgid "Really close without saving settings?"
-msgstr ""
-
-msgid "Scan"
-msgstr ""
-
-#, python-format
-msgid "Scanning channel %s"
-msgstr ""
-
-msgid "Scanning for active transponders"
-msgstr ""
-
-msgid ""
-"Select \"0\" to search all networks, or enter the network ID of the provider "
-"you wish to search."
-msgstr ""
-
-msgid ""
-"Select a tuner that is configured for terrestrial scans. \"Automatic\" will "
-"pick the highest spec available tuner."
-msgstr ""
-
-msgid "Selected tuner is not cofigured"
-msgstr ""
-
-msgid "Starting scanner"
-msgstr ""
-
-msgid "Starting search..."
-msgstr ""
-
-msgid "Terrestrial Scan"
-msgstr ""
-
-msgid "TerrestrialScan"
-msgstr ""
-
-msgid "Tuner"
-msgstr ""
-
-msgid "UHF Europe"
-msgstr ""
-
-msgid "UHF/VHF Europe"
 msgstr ""
