@@ -62,7 +62,7 @@ msgstr "Die meisten Sender in den europäischen Ländern haben nur TV-Kanäle im
 
 #: plugin.py:68
 msgid "Network ID"
-msgstr "Netzwerk ID"
+msgstr "Netzwerk-ID"
 
 #: plugin.py:68
 msgid "Select \"0\" to search all networks, or enter the network ID of the provider you wish to search."
