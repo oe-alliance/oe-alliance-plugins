@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-15 17:34+0200\n"
-"PO-Revision-Date: 2016-06-15 21:27+0100\n"
+"PO-Revision-Date: 2016-06-15 23:08+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: none\n"
 "Language: de\n"
@@ -36,7 +36,7 @@ msgstr ""
 
 #: plugin.py:44
 msgid "Scan"
-msgstr ""
+msgstr "Suchlauf"
 
 #: plugin.py:53
 msgid "Automatic"
