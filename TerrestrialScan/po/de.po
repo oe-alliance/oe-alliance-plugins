@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-16 17:33+0200\n"
-"PO-Revision-Date: 2016-06-16 17:34+0100\n"
+"PO-Revision-Date: 2016-06-16 21:33+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: none\n"
 "Language: de\n"
@@ -144,7 +144,7 @@ msgstr "Ausgewählter Tuner ist nicht konfiguriert"
 
 #: TerrestrialScan.py:209
 msgid "Cannot retrieve Resource Manager instance"
-msgstr ""
+msgstr "Kann nicht die Resource-Manager-Instanz abrufen"
 
 #: TerrestrialScan.py:251
 msgid "No valid NIM found for terrestrial"
@@ -152,15 +152,15 @@ msgstr "Kein gültiger Tuner für DVB-T"
 
 #: TerrestrialScan.py:269
 msgid "Cannot free NIM because a recording is in progress"
-msgstr "Kein freier NIM, weil eine Aufnahme läuft."
+msgstr "Kein freier Tuner, weil eine Aufnahme läuft."
 
 #: TerrestrialScan.py:273
 msgid "Cannot get the NIM"
-msgstr ""
+msgstr "Konnte den Tuner nicht erreichen"
 
 #: TerrestrialScan.py:285
 msgid "Cannot get frontend"
-msgstr ""
+msgstr "Konnte Fronted nicht erreichen"
 
 #: TerrestrialScan.py:307
 #, python-format
