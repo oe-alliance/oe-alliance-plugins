@@ -78,7 +78,7 @@ msgstr "Wenn Sie \"Ja\" ausw채hlen werden alle gespeicherten terrestrischen Kan�
 
 #: plugin.py:70
 msgid "Only free scan"
-msgstr "Nur freie Kan채le Suchen"
+msgstr "Nur freie Kan채le suchen"
 
 #: plugin.py:70
 msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
@@ -88,7 +88,7 @@ msgstr ""
 
 #: plugin.py:102
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Wirklich beenden ohne zu speichern?"
 
 #: TerrestrialScan.py:62 TerrestrialScan.py:111
 msgid "TerrestrialScan"
@@ -96,7 +96,7 @@ msgstr "Terrestrischer Suchlauf"
 
 #: TerrestrialScan.py:65
 msgid "Starting scanner"
-msgstr ""
+msgstr "Starte Suchlauf"
 
 #: TerrestrialScan.py:127
 msgid "Starting search..."
@@ -104,16 +104,16 @@ msgstr "Suche starten..."
 
 #: TerrestrialScan.py:128
 msgid "Scanning for active transponders"
-msgstr "Scannen f체r aktive Transponder"
+msgstr "Aktive Transponder suchen"
 
 #: TerrestrialScan.py:137
 msgid "No frequencies to search"
-msgstr "Keine Frequenzen zum suchen"
+msgstr "Keine Frequenzen zum Suchen"
 
 #: TerrestrialScan.py:150
 #, python-format
 msgid "Scanning channel %s"
-msgstr "Suche Kanal %s"
+msgstr "Durchsuche Kanal %s"
 
 #: TerrestrialScan.py:151
 #, python-format
@@ -136,7 +136,7 @@ msgstr ""
 
 #: TerrestrialScan.py:248
 msgid "No valid NIM found for terrestrial"
-msgstr "Keine g체ltige NIM gefunden f체r terrestrische"
+msgstr "Kein g체ltiger Tuner f체r DVB-T"
 
 #: TerrestrialScan.py:266
 msgid "Cannot free NIM because a recording is in progress"
