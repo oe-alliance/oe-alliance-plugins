@@ -32,7 +32,7 @@ msgstr "Terrestrischer Suchlauf"
 
 #: plugin.py:46
 msgid "Exit"
-msgstr ""
+msgstr "Abbrechen"
 
 #: plugin.py:47
 msgid "Scan"
