@@ -57,7 +57,7 @@ PLUGIN_VERSION = _(" ver. 3.2")
 # 3.2. Switch ON mode on HDD max.temperature (0 - off): 0-80
 # 3.2. Switch ON mode on System max.temperature: 15-80
 
-modelist = {"off": _("Fan - Off"), "on": _("Fan - On"), "auto": _("Fan - Auto")}
+modelist = {"off": _("Fan - Off"), "on": _("Fan - On"), "standby": _("Fan - Off in standby"), "auto": _("Fan - Auto")}
 hddwatchlist = {"none": _("None"), "sleep": _("HDD Sleeping"), "temp": _("HDD Temperature")}
 timsetlist = {"none": _("None"), "off": _("Fan - Off"), "on": _("Fan - On"), "auto": _("Fan - Auto")}
 syswatchlist = {"off": _("Off"), "on": _("On")}
@@ -410,7 +410,14 @@ class FanManager:
 					# - increase speed til max. Max is reached when current sys temp = 2 * user specified value
 					speed = min(FanConf.fanspeed.value + (255 - FanConf.fanspeed.value) * ((temp / FanConf.systemtemp.value) - 1), 255)
 
-		self.applySettings(mode, speed)
+		if mode == "standby":
+			from Screens.Standby import inStandby
+			if inStandby:
+				self.applySettings("off", 0)
+			else:
+				self.applySettings("on", speed)
+		else:
+			self.applySettings(mode, speed)
 		self.timer.start(timeout * 1000, True)
 
 	def applySettings(self, mode, speed):
