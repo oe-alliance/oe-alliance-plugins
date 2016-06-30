@@ -157,9 +157,14 @@ class FanSetupScreen(Screen, ConfigListScreen):
 
 	def hasSystemTempSensor(self):
 		try:
-			fd = open('/proc/stb/fp/temp_sensor', 'r')
-			temp = fd.read().strip()
-			fd.close()
+			if os.path.exists("/proc/stb/sensors/temp/value"):
+				fd = open('/proc/stb/sensors/temp/value', 'r')
+				temp = int(fd.read().strip(), 0)
+				fd.close()
+			else:
+				fd = open('/proc/stb/fp/temp_sensor', 'r')
+				temp = fd.read().strip()
+				fd.close()
 			return True
 		except:
 			return False
@@ -436,9 +441,14 @@ class FanManager:
 
 def getSysTemp():
 	try:
-		fd = open('/proc/stb/fp/temp_sensor', 'r')
-		temp = int(fd.read().strip(), 0)
-		fd.close()
+		if os.path.exists("/proc/stb/sensors/temp/value"):
+			fd = open('/proc/stb/sensors/temp/value', 'r')
+			temp = int(fd.read().strip(), 0)
+			fd.close()
+		else:
+			fd = open('/proc/stb/fp/temp_sensor', 'r')
+			temp = int(fd.read().strip(), 0)
+			fd.close()
 		return temp
 	except:
 		return None
