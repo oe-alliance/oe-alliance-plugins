@@ -4,78 +4,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:09+0200\n"
-"PO-Revision-Date: 2016-05-07 14:09+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"POT-Creation-Date: 2016-06-30 23:50+0100\n"
+"PO-Revision-Date: 2016-07-07 11:58+0200\n"
+"Last-Translator: Samzam <http://www.world-of-satellite.com>\n"
 "Language-Team: none\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.5.7\n"
 
-#: ../src/plugin.py:6
-msgid "Off"
-msgstr ""
-
-#: ../src/plugin.py:6
-msgid "On"
-msgstr ""
-
-#: ../src/plugin.py:6
 msgid "Auto"
-msgstr ""
+msgstr "Automaattinen"
 
-#: ../src/plugin.py:25
-msgid "Fan setup"
-msgstr ""
-
-#: ../src/plugin.py:30
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
+
+msgid "FAN Control"
+msgstr "Puhaltimen ohjaus"
+
+msgid "Fan Control"
+msgstr "Puhaltimen ohjaus"
+
+msgid "Fan mode"
+msgstr "Ohjaus"
+
+msgid "Fan setup"
+msgstr "Puhallin asetukset"
+
+msgid "Off"
+msgstr "Pois"
+
+msgid "On"
+msgstr "Päällä"
 
 #
-#: ../src/plugin.py:31
 msgid "Save"
 msgstr "Tallenna"
 
-#: ../src/plugin.py:48
-msgid "Fan mode"
-msgstr ""
-
-#: ../src/plugin.py:105
-msgid "FAN Control"
-msgstr ""
-
-#: ../src/plugin.py:113
-msgid "Fan Control"
-msgstr ""
-
-#: ../src/plugin.py:113
 msgid "switch Fan On/Off"
-msgstr ""
-
-#
-#~ msgid "Close"
-#~ msgstr "Sulje"
-
-#
-#~ msgid "Really close without saving settings?"
-#~ msgstr "Haluatko poistua tallentamatta asetuksia?"
-
-#
-#~ msgid "no"
-#~ msgstr "Ei"
-
-#
-#~ msgid "off"
-#~ msgstr "Pois"
-
-#
-#~ msgid "on"
-#~ msgstr "Päällä"
-
-#
-#~ msgid "yes"
-#~ msgstr "Kyllä"
+msgstr "Kytke puhallin Päälle/Pois"
