@@ -1259,7 +1259,7 @@ def main(session, close=None, **kwargs):
 
 def BlindscanSetup(menuid, **kwargs):
 	if menuid == "scan":
-		return [(_("Blind scan"), main, "blindscan", 25, True)]
+		return [(_("Blind scan"), main, "blindscan", 25, False)]
 	else:
 		return []
 
