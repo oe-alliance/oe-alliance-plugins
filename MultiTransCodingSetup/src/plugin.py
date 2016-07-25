@@ -70,24 +70,27 @@ class TranscodingSetup(Screen,ConfigListScreen):
 
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText()
+		self["key_blue"] = Button()
 
 		self["description"] = Label()
-		
+		self["text"] = Label("")
+
 		text =  (_("To use transcoding You can build URL for VLC by Yourself\n\n"))
 		self["HelpTextHeader1"] = Label(text)
-		
+
 		text2 = "http://STB_IP:PORT/CH_REF:?bitrate=BITRATE?width=WIDTH?height=HEIGHT?aspectration=ASPECT?interlaced=0\n\ne.x:\n\n"
 		text2 += "http://192.168.1.5:8001/1:0:1:C25:1E78:71:820000:0:0:0:?bitrate=300000?width=320?height=240?aspectratio=2?interlaced=0\n\n"
 		self["HelpText1"] = Label(_(text2))
-		
+
 		text3 = (_("Transcoding from HDMI-IN e.x:\n\n"))
 		self["HelpTextHeader2"] = Label(_(text3))
-		
+
 		text4 = "http://192.168.1.5:8001/8192:0:1:0:0:0:0:0:0:0:?bitrate=300000?width=720?height=480?aspectratio=2?interlaced=1"
 		self["HelpText2"] = Label(_(text4))
 
 		self.onLayoutFinish.append(self.checkEncoder)
-		
+
 		self.invaliedModelTimer = eTimer()
 		self.invaliedModelTimer.callback.append(self.invalidmodel)
 
