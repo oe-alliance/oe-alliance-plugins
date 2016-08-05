@@ -130,6 +130,10 @@ if S7220S
 SUBDIRS += F3LEDControl
 endif
 
+if S7225S
+SUBDIRS += F3LEDControl
+endif
+
 if S7300S
 SUBDIRS += F3LEDControl
 endif
