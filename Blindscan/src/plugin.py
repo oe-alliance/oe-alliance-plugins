@@ -478,10 +478,7 @@ class Blindscan(ConfigListScreen, Screen):
 		if self.is_circular_band_scan:
 			self.blindscan_start_frequency = self.blindscan_circular_band_start_frequency
 			self.blindscan_stop_frequency = self.blindscan_circular_band_stop_frequency
-		if self.is_Ku_band_scan:
-			self.blindscan_start_frequency = self.blindscan_Ku_band_start_frequency
-			self.blindscan_stop_frequency = self.blindscan_Ku_band_stop_frequency
-		if self.is_user_defined_scan:
+		else:
 			self.blindscan_start_frequency = self.blindscan_Ku_band_start_frequency
 			self.blindscan_stop_frequency = self.blindscan_Ku_band_stop_frequency
 
@@ -1232,10 +1229,14 @@ class Blindscan(ConfigListScreen, Screen):
 
 	def isCircularLNB(self, cur_orb_pos):  #added for 10750 LNB
 		nim = nimmanager.nim_slots[int(self.scan_nims.value)]
-		if nim.config.configMode.getValue() == "advanced":
-			currSat = nim.config.advanced.sat[cur_orb_pos]
+		if not self.legacy:
+			nimconfig = nim.config.dvbs
+		else:
+			nimconfig = nim.config
+		if nimconfig.configMode.getValue() == "advanced":
+			currSat = nimconfig.advanced.sat[cur_orb_pos]
 			lnbnum = int(currSat.lnb.getValue())
-			currLnb = nim.config.advanced.lnb[lnbnum]
+			currLnb = nimconfig.advanced.lnb[lnbnum]
 			lof = currLnb.lof.getValue()
 			print "[Blind scan] LNB type: ", lof
 			if lof == "circular_lnb":
@@ -1244,10 +1245,14 @@ class Blindscan(ConfigListScreen, Screen):
 
 	def isKuLNB(self, cur_orb_pos):  #added for 10750 LNB
 		nim = nimmanager.nim_slots[int(self.scan_nims.value)]
-		if nim.config.configMode.getValue() == "advanced":
-			currSat = nim.config.advanced.sat[cur_orb_pos]
+		if not self.legacy:
+			nimconfig = nim.config.dvbs
+		else:
+			nimconfig = nim.config
+		if nimconfig.configMode.getValue() == "advanced":
+			currSat = nimconfig.advanced.sat[cur_orb_pos]
 			lnbnum = int(currSat.lnb.getValue())
-			currLnb = nim.config.advanced.lnb[lnbnum]
+			currLnb = nimconfig.advanced.lnb[lnbnum]
 			lof = currLnb.lof.getValue()
 			print "[Blind scan] LNB type: ", lof
 			if lof == "universal_lnb":
@@ -1256,10 +1261,14 @@ class Blindscan(ConfigListScreen, Screen):
 
 	def isUserDefinedLNB(self, cur_orb_pos):  #added for 10750 LNB
 		nim = nimmanager.nim_slots[int(self.scan_nims.value)]
-		if nim.config.configMode.getValue() == "advanced":
-			currSat = nim.config.advanced.sat[cur_orb_pos]
+		if not self.legacy:
+			nimconfig = nim.config.dvbs
+		else:
+			nimconfig = nim.config
+		if nimconfig.configMode.getValue() == "advanced":
+			currSat = nimconfig.advanced.sat[cur_orb_pos]
 			lnbnum = int(currSat.lnb.getValue())
-			currLnb = nim.config.advanced.lnb[lnbnum]
+			currLnb = nimconfig.advanced.lnb[lnbnum]
 			lof = currLnb.lof.getValue()
 			print "[Blind scan] LNB type: ", lof
 			if lof == "user_defined":
