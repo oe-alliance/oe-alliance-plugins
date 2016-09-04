@@ -51,10 +51,15 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		self.transponders_unique = {}
 		self.session.postScanService = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 
-		nimlist = nimmanager.getNimListOfType("DVB-T")
+		dvbt_capable_nims = []
+		for nim in nimmanager.nim_slots:
+			if nim.config_mode != "nothing":
+				if nim.isCompatible("DVB-T") or (nim.isCompatible("DVB-S") and nim.canBeCompatible("DVB-T")):
+					dvbt_capable_nims.append(nim.slot)
+		
 		nim_list = []
 		nim_list.append((-1, _("Automatic")))
-		for x in nimlist:
+		for x in dvbt_capable_nims:
 			nim_list.append((nimmanager.nim_slots[x].slot, nimmanager.nim_slots[x].friendly_full_description))
 		self.scan_nims = ConfigSelection(choices = nim_list)
 
