@@ -58,6 +58,10 @@ if HD500C
 SUBDIRS += F3LEDControl XtrendRemote
 endif
 
+if HD530C
+SUBDIRS += F3LEDControl XtrendRemote
+endif
+
 if ODIN
 SUBDIRS += XtrendFancontrol
 endif
