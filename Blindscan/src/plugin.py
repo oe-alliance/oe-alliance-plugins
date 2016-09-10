@@ -219,8 +219,8 @@ class Blindscan(ConfigListScreen, Screen):
 
 	def getNimSocket(self, slot_number):
 		print "[Blindscan][getNimSocket] slot_number", slot_number
-		if slot_number < 0 or slot_number > 3:
-			print "[Blindscan][getNimSocket] slot_number out of range 0-3"
+		if slot_number not in self.i2c_mapping_table:
+			print "[Blindscan][getNimSocket] slot_number not in i2c_mapping_table"
 			return -1
 		return self.i2c_mapping_table[slot_number]
 
