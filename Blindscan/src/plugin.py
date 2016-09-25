@@ -478,7 +478,7 @@ class Blindscan(ConfigListScreen, Screen):
 		if self.is_c_band_scan:
 			self.blindscan_start_frequency = self.blindscan_C_band_start_frequency
 			self.blindscan_stop_frequency = self.blindscan_C_band_stop_frequency
-		if self.is_circular_band_scan:
+		elif self.is_circular_band_scan:
 			self.blindscan_start_frequency = self.blindscan_circular_band_start_frequency
 			self.blindscan_stop_frequency = self.blindscan_circular_band_stop_frequency
 		else:
