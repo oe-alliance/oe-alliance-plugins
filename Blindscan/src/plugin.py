@@ -313,6 +313,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.blindscan_C_band_stop_frequency = ConfigInteger(default = 4200, limits = (3001, 4200))
 		self.blindscan_start_symbol = ConfigInteger(default = 2, limits = (1, 44))
 		self.blindscan_stop_symbol = ConfigInteger(default = 45, limits = (2, 45))
+		self.blindscan_step_mhz_tbs5925 = ConfigInteger(default = 10, limits = (1, 20))
 		self.scan_clearallservices = ConfigYesNo(default = False)
 		self.scan_onlyfree = ConfigYesNo(default = False)
 		self.dont_scan_known_tps = ConfigYesNo(default = False)
@@ -422,6 +423,8 @@ class Blindscan(ConfigListScreen, Screen):
 			elif self.is_Ku_band_scan:
 				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_Ku_band_start_frequency,_('Frequency values must be between 10700 MHz and 12749 MHz')))
 				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_Ku_band_stop_frequency,_('Frequency values must be between 10701 MHz and 12750 MHz')))
+			if nim.description == 'TBS-5925':
+				self.list.append(getConfigListEntry(_("Scan Step in MHz(TBS5925)"), self.blindscan_step_mhz_tbs5925,_('Smaller steps takes longer but scan is more thorough')))
 			self.list.append(getConfigListEntry(_("Polarisation"), self.scan_sat.polarization,_('The suggested polarisation for this satellite is "%s"') % (self.suggestedPolarisation)))
 			self.list.append(getConfigListEntry(_('Scan start symbolrate'), self.blindscan_start_symbol,_('Symbol rate values are in megasymbols; enter a value between 1 and 44')))
 			self.list.append(getConfigListEntry(_('Scan stop symbolrate'), self.blindscan_stop_symbol,_('Symbol rate values are in megasymbols; enter a value between 2 and 45')))
@@ -666,14 +669,17 @@ class Blindscan(ConfigListScreen, Screen):
 		self.tmpstr = ""
 
 		if tunername in _blindscans2Nims:
-			cmd = "blindscan-s2 -b -s %d -e %d" % (temp_start_int_freq, temp_end_int_freq)
+			if tunername == "TBS-5925":
+				cmd = "blindscan-s2 -b -s %d -e %d -t %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_step_mhz_tbs5925.value)
+			else:
+				cmd = "blindscan-s2 -b -s %d -e %d" % (temp_start_int_freq, temp_end_int_freq)
 			cmd += getAdapterFrontend(self.feid, tunername)
 			if pol == "horizontal":
 				cmd += " -H"
 			elif pol == "vertical":
 				cmd += " -V"
 			if self.is_c_band_scan:
-				cmd += " -l 5150" # needs testing
+				cmd += " -l 5150" # tested by el bandito with TBS-5925 and working
 			elif tab_hilow[band]:
 				cmd += " -l 10600 -2" # on high band enable 22KHz tone
 			else:
