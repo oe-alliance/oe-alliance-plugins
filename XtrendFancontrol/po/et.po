@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:24+0200\n"
+"POT-Creation-Date: 2016-05-07 14:25+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: rimas\n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/plugin.py:37
@@ -80,7 +80,7 @@ msgstr "kättesaamatu"
 
 #: ../src/plugin.py:222
 msgid "Fan mode"
-msgstr "Ventilaatori seisund"
+msgstr "Ventilaatori olek"
 
 #: ../src/plugin.py:223
 msgid "Switch Fan mode on time setting"
@@ -182,157 +182,38 @@ msgstr "Jahutus"
 msgid "Show Temp"
 msgstr "Kuva temp."
 
+msgid " ver. 3.1"
+msgstr " ver. 3.1"
+
+msgid "Drive is sleeping\n"
+msgstr "Ketas on puhkeseisundis\n"
+
+msgid "ERROR\n"
+msgstr "Viga\n"
+
+msgid "Found internal HDD !\n"
+msgstr "Leiti sisene HDD!\n"
+
+msgid "HddTempWatcher not running!"
+msgstr "HDD temperatuuri seire ei ole sees!"
+
+msgid "Not found an internal HDD !"
+msgstr "Sisemist ketast ei leitud!"
+
+msgid "Show HDDTemp"
+msgstr "Kuva ketta temperatuur"
+
+msgid "Show temp.HDD"
+msgstr "Kuva ketta temperatuur"
+
+msgid "hddtemp not installed!"
+msgstr "hddtemp ei ole paigaldatud!"
+
+msgid "temp : "
+msgstr "temp : "
+
 msgid "Auto"
-msgstr "Automaatne"
-
-msgid "OK"
-msgstr "OK"
-
-#~ msgid "Fan - Off in standby"
-#~ msgstr "Vent - ooteseisundis väljas"
-
-
-#: ../src/plugin.py:61
-msgid "HDD Temperature"
-msgstr ""
-
-#: ../src/plugin.py:63
-msgid "Off"
-msgstr "Väljas"
-
-#: ../src/plugin.py:63
-msgid "On"
-msgstr "Sees"
-
-#: ../src/plugin.py:107
-msgid "Fan setup:"
-msgstr ""
-
-#: ../src/plugin.py:117
-msgid "Power status"
-msgstr ""
-
-#: ../src/plugin.py:118 ../src/plugin.py:169 ../src/plugin.py:171
-#: ../src/plugin.py:499
-msgid "System temperature"
-msgstr ""
-
-#: ../src/plugin.py:119 ../src/plugin.py:175 ../src/plugin.py:177
-msgid "Harddisk temperature"
-msgstr ""
-
-#: ../src/plugin.py:120
-msgid "Save"
-msgstr ""
-
-#: ../src/plugin.py:121
-msgid "Cancel"
-msgstr "Tühista"
-
-#: ../src/plugin.py:171 ../src/plugin.py:175
-msgid "n.a."
-msgstr ""
-
-#: ../src/plugin.py:222
-msgid "Fan mode"
-msgstr "Ventilaatori olek"
-
-#: ../src/plugin.py:223
-msgid "Switch Fan mode on time setting"
-msgstr ""
-
-#: ../src/plugin.py:224
-msgid "Watch HDD state"
-msgstr ""
-
-#: ../src/plugin.py:225
-msgid "Watch system temp"
-msgstr ""
-
-#: ../src/plugin.py:229
-msgid "All"
-msgstr ""
-
-#: ../src/plugin.py:232
-msgid "Select internal HDD device"
-msgstr ""
-
-#: ../src/plugin.py:240
-msgid "Start time"
-msgstr ""
-
-#: ../src/plugin.py:241
-msgid "End time"
-msgstr ""
-
-#: ../src/plugin.py:247
-msgid "Switch ON mode on HDD max.temp. (0 - disable)"
-msgstr ""
-
-#: ../src/plugin.py:249
-msgid "Switch OFF mode on HDD sleep"
-msgstr ""
-
-#: ../src/plugin.py:250
-msgid "Show temp. HDD to extensions menu"
-msgstr ""
-
-#: ../src/plugin.py:252
-msgid "Initial fan speed"
-msgstr ""
-
-#: ../src/plugin.py:256
-msgid "Switch ON on system temp"
-msgstr ""
-
-#: ../src/plugin.py:306
-msgid ""
-"You may not use this mode!\n"
-"Not found an internal hard drive!"
-msgstr ""
-
-#: ../src/plugin.py:311
-msgid ""
-"Start time OFF mode equal End time OFF mode\n"
-"You may not use this time settings!"
-msgstr ""
-
-#: ../src/plugin.py:317
-msgid ""
-"Harddisk standby after - no standby\n"
-"You may not use this mode!"
-msgstr ""
-
-#: ../src/plugin.py:485 ../src/plugin.py:513 ../src/plugin.py:517
-msgid "Fan Control"
-msgstr "Ventilaatori juhtimine"
-
-#: ../src/plugin.py:490
-msgid "Harddisks:"
-msgstr ""
-
-#: ../src/plugin.py:492
-msgid "No harddisk with temperature sensor found!"
-msgstr ""
-
-#: ../src/plugin.py:497
-msgid "No system temperature sensor found!"
-msgstr ""
-
-#: ../src/plugin.py:513 ../src/plugin.py:517
-msgid "switch Fan On/Off"
-msgstr "lülita ventilaator sisse/välja"
-
-#: ../src/plugin.py:514 ../src/plugin.py:518
-msgid "Fan Setup"
-msgstr ""
-
-#: ../src/plugin.py:515
-msgid "Show Temp"
-msgstr ""
-
-#~ msgid "Auto"
-#~ msgstr "Automaatne"
+msgstr "Autom."
 
 #~ msgid "OK"
 #~ msgstr "OK"
