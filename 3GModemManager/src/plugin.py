@@ -6,6 +6,7 @@ from Screens.Standby import TryQuitMainloop
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 from Components.Label import Label
+from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.Network import iNetwork
@@ -166,7 +167,9 @@ class EditModemManual(ConfigListScreen, Screen):
 			<widget source="key_green" render="Label" position="155,320" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_blue" render="Label" position="455,320" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#18188b"  foregroundColor="#ffffff" transparent="1" />
 
-			<widget name="VKeyIcon" pixmap="skin_default/buttons/key_text.png" position="50,200" zPosition="10" size="35,25" transparent="1" alphatest="on" />
+			<widget source="VKeyIcon" render="Pixmap" pixmap="skin_default/buttons/key_text.png" position="50,200" zPosition="10" size="35,25" transparent="1" alphatest="on">
+				<convert type="ConditionalShowHide" />
+			</widget>
 			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,300" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 		</screen>
 		""" 
@@ -206,7 +209,7 @@ class EditModemManual(ConfigListScreen, Screen):
 		self["key_red"]    = StaticText(_("Cancel"))
 		self["key_green"]  = StaticText(_("Save"))
 		self["key_blue"]   = StaticText(_(self.isAdd and " " or "Remove"))
-		self["VKeyIcon"]   = Pixmap()
+		self["VKeyIcon"]   = Boolean(False)
 		self["HelpWindow"] = Pixmap()
 		self["VirtualKB"].setEnabled(False)
 		if self.isAdd:
@@ -285,14 +288,14 @@ class EditModemManual(ConfigListScreen, Screen):
 		self.close()
 
 	def showKeyboard(self, ret=None):
-		self["VKeyIcon"].show()
+		self["VKeyIcon"].boolean = True
 		current = self["config"].getCurrent()
 		if hasattr(current[1], 'help_window'):
 			if current[1].help_window.instance is not None:
 				current[1].help_window.instance.show()
 
 	def hideKeyboard(self):
-		self["VKeyIcon"].hide()
+		self["VKeyIcon"].boolean = False
 		current = self["config"].getCurrent()
 		if hasattr(current[1], 'help_window'):
 			if current[1].help_window.instance is not None:

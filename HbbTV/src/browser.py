@@ -9,6 +9,7 @@ from Components.Label import Label, MultiColorLabel
 from Components.Language import language
 from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap
+from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.config import ConfigText, ConfigSelection, ConfigSlider, getConfigListEntry
 
@@ -373,7 +374,9 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 			<widget source="key_red" render="Label" position="310,100" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="150,100" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
 
-			<widget name="VKeyIcon" pixmap="skin_default/buttons/key_text.png" position="0,100" zPosition="10" size="35,25" transparent="1" alphatest="on" />
+			<widget source="VKeyIcon" render="Pixmap" pixmap="skin_default/buttons/key_text.png" position="0,100" zPosition="10" size="35,25" transparent="1" alphatest="on">
+				<convert type="ConditionalShowHide" />
+			</widget>
 
 		</screen>
 		"""
@@ -399,7 +402,7 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 			"cancel" : self.keyRed,
 		}, -2)
 
-		self["VKeyIcon"] = Pixmap()
+		self["VKeyIcon"] = Boolean(False)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 
