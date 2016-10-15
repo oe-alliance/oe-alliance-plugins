@@ -81,6 +81,7 @@ class Blindscan(ConfigListScreen, Screen):
 				self.satList.append(None)
 
 		# make config
+		self.legacy = True
 		for slot in nimmanager.nim_slots:
 			if slot.canBeCompatible("DVB-S"):
 				try:
