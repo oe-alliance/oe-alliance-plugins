@@ -4,20 +4,20 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-07 14:21+0200\n"
-"PO-Revision-Date: 2016-05-07 14:21+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: Muaitai <muaitai@gmail.com>\n"
+"PO-Revision-Date: 2016-10-23 01:50+0100\n"
+"Last-Translator: shimano\n"
+"Language-Team: BH Team\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
 msgid "Remote Control Code"
-msgstr ""
+msgstr "Código do Telecomando"
 
 #
 #: ../src/plugin.py:68
@@ -32,37 +32,39 @@ msgstr "Guardar"
 #: ../src/plugin.py:80
 #, python-format
 msgid "Sorry, but %s is not supported."
-msgstr ""
+msgstr "Desculpe, mas %s não é suportado."
 
 #: ../src/plugin.py:84
 msgid "Remote Control System Code"
-msgstr ""
+msgstr "Código de sistema do telecomando"
 
 #: ../src/plugin.py:87
 msgid "Text support"
-msgstr ""
+msgstr "Suporte de Texto"
 
 #: ../src/plugin.py:99
 msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr ""
+msgstr "Arquivo não existe: /proc/stb/fp/remote_code"
 
 #: ../src/plugin.py:101
 msgid "Please change your remote mode"
-msgstr ""
+msgstr "Por favor modifique o modo do seu telecomando"
 
 #: ../src/plugin.py:101
 msgid ""
 "Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
 "press '000"
 msgstr ""
+"Prima simultaneamente '2' e '7' até que o Led se ilumine, prima depois a "
+"tecla 'HELP', depois prima '000'."
 
 #: ../src/plugin.py:101
 msgid "Then choose 'Keep' within seconds"
-msgstr ""
+msgstr "Então escolha 'manter' em segundos"
 
 #: ../src/plugin.py:122
 msgid "Keep"
-msgstr ""
+msgstr "Manter"
 
 #
 #: ../src/plugin.py:122
@@ -72,4 +74,4 @@ msgstr "Restaurar"
 #: ../src/plugin.py:128
 #, python-format
 msgid " in %d seconds."
-msgstr ""
+msgstr "em %d segundos."
