@@ -49,7 +49,8 @@ class RCUSelect(Screen):
 		title = _("RCU Select")
 		self.setTitle(title)
 		self["pixmap"] = Pixmap()
-		self.rcuval = [_("WeTek Play (Classic) RCU"),
+		self.rcuval = [_("WeTek Play2 RCU"),
+		_('WeTek Play (Classic) RCU'),
 		_("WeTek Play Enigma2 RCU"),
 		_("WeTek Play OpenElec RCU"),
 		_("AB IPBox 9900/99/55 HD RCU"),
@@ -72,7 +73,9 @@ class RCUSelect(Screen):
 			os.system(cmd)
 
 	def SetOSDList(self):
-		choice = "WeTek Play Enigma2 RCU"
+		boxime = HardwareInfo().get_device_name()
+		if boxime == 'wetekplay2': choice = 'WeTek Play2 RCU'
+		if boxime == 'wetekplay': choice = 'WeTek Play Enigma2 RCU'
 		try:
 			choice = open("/etc/amremote/.choice", "r").read()
 		except IOError:
@@ -98,7 +101,9 @@ class RCUSelect(Screen):
 			self.rcuv = self.rcuval[var]
 			#if self.rcuv != self.rcuold: copy keymap
 			try:
-				if self.rcuv == 'WeTek Play (Classic) RCU':
+				if self.rcuv == 'WeTek Play2 RCU':
+					os.system("cp -f /etc/amremote/wetek_play2.conf /etc/amremote/wetek.conf &")
+				elif self.rcuv == 'WeTek Play (Classic) RCU':
 					os.system("cp -f /etc/amremote/wetek1.conf /etc/amremote/wetek.conf &")
 				elif self.rcuv == 'WeTek Play OpenElec RCU':
 					os.system("cp -f /etc/amremote/wetek3.conf /etc/amremote/wetek.conf &")
@@ -128,6 +133,15 @@ class RCUSelect(Screen):
 				f.write(self.rcuv)
 				f.close()
 				os.system("killall -9 remotecfg &")
+				boxime = HardwareInfo().get_device_name()
+				if boxime == 'wetekplay2':
+					fin = file('/etc/amremote/wetek.conf')
+					fout = open('/etc/amremote/wetek_tmp.conf', 'w')
+					for line in fin :
+						if 'work_mode' in line: line = 'work_mode  	= 0\n'
+						fout.write(line)
+					fout.close()
+					os.system('mv -f /etc/amremote/wetek_tmp.conf /etc/amremote/wetek.conf &')
 				os.system("/usr/bin/remotecfg /etc/amremote/wetek.conf &")
 				if self.rcuold == "WeTek Play OpenElec RCU" or self.rcuv == "WeTek Play OpenElec RCU":
 					if self.rcuold != self.rcuv:
