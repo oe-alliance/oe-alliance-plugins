@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:07+0200\n"
-"PO-Revision-Date: 2016-05-07 13:07+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"POT-Creation-Date: 2016-10-28 13:00+0200\n"
+"PO-Revision-Date: 2016-10-30 16:18+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -15,82 +15,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:61
-msgid "Blindscan"
-msgstr "Blindscan"
-
-#: ../src/plugin.py:113 ../src/plugin.py:125
-msgid "Exit"
-msgstr "Afsluiten"
-
-#: ../src/plugin.py:114
-msgid "Scan"
-msgstr "Scan"
-
-#: ../src/plugin.py:115
-msgid "Press Green/OK to start the scan"
-msgstr "Druk op Groen/OK om de scan te beginnen"
-
-#: ../src/plugin.py:127
-msgid "Please setup your tuner configuration."
-msgstr "U moet de tunerconfiguratie vastleggen."
-
-#: ../src/plugin.py:249
-msgid "Sorry, this tuner is in use."
-msgstr "Sorry, de tuner is in gebruik."
-
-#: ../src/plugin.py:306
-msgid "no"
-msgstr "nee"
-
-#: ../src/plugin.py:307
-msgid "up to 1 degree"
-msgstr "tot 1 graad"
-
-#: ../src/plugin.py:308
-msgid "up to 2 degrees"
-msgstr "tot 2 graden"
-
-#: ../src/plugin.py:309
-msgid "up to 3 degrees"
-msgstr "tot 3 graden"
-
-#: ../src/plugin.py:311
-msgid "scan for channels"
-msgstr "Zoek kanalen"
-
-#: ../src/plugin.py:312
-msgid "save to XML file"
-msgstr "sla op in XML-bestand"
-
-#: ../src/plugin.py:335 ../src/plugin.py:1150
-msgid "vertical and horizontal"
-msgstr "vertikaal en horizontaal"
-
-#: ../src/plugin.py:336 ../src/plugin.py:707
-msgid "vertical"
-msgstr "vertikaal"
-
-#: ../src/plugin.py:337 ../src/plugin.py:705
-msgid "horizontal"
-msgstr "horizontaal"
-
-#: ../src/plugin.py:338 ../src/plugin.py:1157
-msgid "circular right and circular left"
-msgstr "circulair rechts en links"
-
-#: ../src/plugin.py:339 ../src/plugin.py:696 ../src/plugin.py:703
-msgid "circular right"
-msgstr "circular rechts"
-
-#: ../src/plugin.py:340 ../src/plugin.py:698 ../src/plugin.py:701
-msgid "circular left"
-msgstr "circular links"
-
-#: ../src/plugin.py:378
 msgid ""
 "\n"
 "Second slot dual tuner may not be supported blind scan."
@@ -98,7 +25,6 @@ msgstr ""
 "\n"
 "Tweede slot dual tuner wordt mogelijk niet ondersteund door blind scan."
 
-#: ../src/plugin.py:380
 msgid ""
 "\n"
 "You must use the power adapter."
@@ -106,146 +32,21 @@ msgstr ""
 "\n"
 "U moet de stroom adapter gebruiken."
 
-#: ../src/plugin.py:382
-msgid "Tuner"
-msgstr "Tuner"
-
-#: ../src/plugin.py:382
-msgid "Select a tuner that is configured for the satellite you wish to search"
-msgstr ""
-"Kies een tuner die is geconfigureerd voor de satelliet die u wilt zoeken"
-
-#: ../src/plugin.py:391
-msgid "Satellite"
-msgstr "Satelliet"
-
-#: ../src/plugin.py:391
-msgid "Select the satellite you wish to search"
-msgstr "Kies de satelliet die u wilt zoeken"
-
-#: ../src/plugin.py:395 ../src/plugin.py:398
-msgid "Scan start frequency"
-msgstr "Scan start frequentie"
-
-#: ../src/plugin.py:395
-msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
-msgstr "Frequenties moeten liggen tussen 3000 MHz en 4199 MHz (C-band)"
-
-#: ../src/plugin.py:396 ../src/plugin.py:399
-msgid "Scan stop frequency"
-msgstr "Scan stop frequentie"
-
-#: ../src/plugin.py:396
-msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
-msgstr "Frequenties moeten liggen tussen 3001 MHz en 4200 MHz (C-band)"
-
-#: ../src/plugin.py:398
-msgid "Frequency values must be between 10700 MHz and 12749 MHz"
-msgstr "Frequenties moeten liggen tussen 10700 MHz en 12749 MHz"
-
-#: ../src/plugin.py:399
-msgid "Frequency values must be between 10701 MHz and 12750 MHz"
-msgstr "Frequenties moeten liggen tussen 10701 MHz en 12750 MHz"
-
-#: ../src/plugin.py:400
-msgid "Polarisation"
-msgstr "Polarisatie"
-
-#: ../src/plugin.py:400
-#, python-format
-msgid "The suggested polarisation for this satellite is \"%s\""
-msgstr "De voorgestelde polarisatie voor dezze satelliet is \"%s\""
-
-#: ../src/plugin.py:401
-msgid "Scan start symbolrate"
-msgstr "Scan start symbolrate"
-
-#: ../src/plugin.py:401
-msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
-msgstr "Symbol rate waardes in megasymbols; geef een waarde tussen 1 and 44 in"
-
-#: ../src/plugin.py:402
-msgid "Scan stop symbolrate"
-msgstr "Scan stop symbolrate"
-
-#: ../src/plugin.py:402
-msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
-msgstr "Symbol rate waardes in megasymbols; geef een waarde tussen 2 and 45 in"
-
-#: ../src/plugin.py:403
-msgid "Clear before scan"
-msgstr "Vóór zoeken alle zenders wissen?"
-
-#: ../src/plugin.py:403
-msgid ""
-"If you select \"yes\" all channels on the satellite being search will be "
-"deleted before starting the current search"
-msgstr ""
-"Als u \"Ja\" kiest, zullen alle kanalen van de huidige satelliet worden "
-"gewist voor de zoekslag begint. Dit voorkomt veelal dat kanalen dubbel "
-"bestaan in uw STB_BOX."
-
-#: ../src/plugin.py:404
-msgid "Only free scan"
-msgstr "Alleen FTA"
-
-#: ../src/plugin.py:404
-msgid ""
-"If you select \"yes\" the scan will only save channels that are not "
-"encrypted; \"no\" will find encrypted and non-encrypted channels"
-msgstr ""
-"Als u \"Ja\" kiest, zullen alleen kanalen worden gezocht die niet gecodeerd "
-"zijn; met \"no\" zullen alle kanalen gezocht worden."
-
-#: ../src/plugin.py:405
-msgid "Only scan unknown transponders"
-msgstr "Scan alleen onbekende transponders"
-
-#: ../src/plugin.py:405
-msgid ""
-"If you select \"yes\" the scan will only search transponders not listed in "
-"satellites.xml"
-msgstr ""
-"Als u \"Ja\" kiest, zullen alleen kanalen worden gezocht die niet in us "
-"satellites.xml staan (het bestand waar alle transponders in staan)."
-
-#: ../src/plugin.py:406
-msgid "Filter out adjacent satellites"
-msgstr "Filter nabije satellieten uit"
-
-#: ../src/plugin.py:406
-msgid ""
-"When a neighbouring satellite is very strong this avoids searching "
-"transponders known to be coming from the neighbouring satellite"
-msgstr ""
-"Als een naburige satelliet erg sterk is, kunt u met deze instelling "
-"voorkomen dat transponders waarvan bekend is dat die van die satelliet "
-"afkomstig zijn, toegekend worden aan de gescande satelliet."
-
-#: ../src/plugin.py:407
-msgid "Search type"
-msgstr "Zoek type"
-
-#: ../src/plugin.py:407
-msgid ""
-"\"channel scan\" searches for channels and saves them to your receiver; both "
-"options do a transponder search and save the result in /tmp in an XML file "
-"in satellites.xml format"
-msgstr ""
-"\"kanalen zoeken\" zoekt naar kanalen en slaat deze op in uw ontvanger; "
-"beide opties doen een transponder scan en slaan de resultaten daarvan op in /"
-"tmp in een XML bestand in satellites.xml formaat"
-
-#: ../src/plugin.py:651
-#, python-format
-msgid "Not found blind scan utility '%s'!"
-msgstr "Niet gevonden blind scan utility '%s'!"
-
-#: ../src/plugin.py:710
 msgid "   Starting Sundtek hardware blind scan."
 msgstr "  Starten Sundtek hardware blind scan."
 
-#: ../src/plugin.py:712
+msgid "\"channel scan\" searches for channels and saves them to your receiver; both options do a transponder search and save the result in /tmp in an XML file in satellites.xml format"
+msgstr "\"kanalen zoeken\" zoekt naar kanalen en slaat deze op in uw ontvanger; beide opties doen een transponder scan en slaan de resultaten daarvan op in /tmp in een XML bestand in satellites.xml formaat"
+
+msgid "Blind scan"
+msgstr "Blindscan"
+
+msgid "Blindscan"
+msgstr "Blindscan"
+
+msgid "Clear before scan"
+msgstr "Vóór zoeken alle zenders wissen?"
+
 #, python-format
 msgid ""
 "Current Status : %d/%d\n"
@@ -260,7 +61,39 @@ msgstr ""
 "   Frequentieband: %d - %d MHz\n"
 "   Symbolrates: %d - %d MHz"
 
-#: ../src/plugin.py:714
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "Filter out adjacent satellites"
+msgstr "Filter nabije satellieten uit"
+
+msgid "Frequency values must be between 10700 MHz and 12749 MHz"
+msgstr "Frequenties moeten liggen tussen 10700 MHz en 12749 MHz"
+
+msgid "Frequency values must be between 10701 MHz and 12750 MHz"
+msgstr "Frequenties moeten liggen tussen 10701 MHz en 12750 MHz"
+
+msgid "Frequency values must be between 117000 MHz and 12749 MHz (Circular-band)"
+msgstr "Frequentiewaardes moeten tussen 117000 MHz en 12749 MHz liggen (Circulaire-band)"
+
+msgid "Frequency values must be between 11701 MHz and 12750 MHz (Circular-band)"
+msgstr "Frequentiewaardes moeten tussen 11701 MHz en 12750 MHz (Circulaire-band)"
+
+msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
+msgstr "Frequenties moeten liggen tussen 3000 MHz en 4199 MHz (C-band)"
+
+msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
+msgstr "Frequenties moeten liggen tussen 3001 MHz en 4200 MHz (C-band)"
+
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgstr "Als u \"Ja\" kiest, zullen alle kanalen van de huidige satelliet worden gewist voor de zoekslag begint. Dit voorkomt veelal dat kanalen dubbel bestaan in uw STB_BOX."
+
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgstr "Als u \"Ja\" kiest, zullen alleen kanalen worden gezocht die niet gecodeerd zijn; met \"no\" zullen alle kanalen gezocht worden."
+
+msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
+msgstr "Als u \"Ja\" kiest, zullen alleen kanalen worden gezocht die niet in us satellites.xml staan (het bestand waar alle transponders in staan)."
+
 msgid ""
 "Looking for available transponders.\n"
 "This will take a long time, please be patient."
@@ -268,7 +101,6 @@ msgstr ""
 "Zoekt beschikbare transponders.\n"
 "Dit zal een tijdje duren, wees geduldig."
 
-#: ../src/plugin.py:716
 msgid ""
 "Looking for available transponders.\n"
 "This will take a short while."
@@ -276,12 +108,63 @@ msgstr ""
 "Zoekt beschikbare transponders.\n"
 "Dit zal even duren."
 
-#: ../src/plugin.py:889
-#, python-format
-msgid "%d transponders found at %d:%02d min"
-msgstr "%d transponders gevonden op %d:%02d min"
+msgid ""
+"No new transponders found! \n"
+"\n"
+"Only transponders already listed in satellites.xml \n"
+"have been found for those search parameters!"
+msgstr ""
+"Geen nieuwe transponders gevonden! \n"
+"\n"
+"Er zijn alleen transponders gevonden \n"
+"die al in de satellites.xml aanwezig waren!"
 
-#: ../src/plugin.py:949
+msgid "No transponders were found for those search parameters!"
+msgstr "Met deze zoek parameters zijn geen transponders gevonden!"
+
+#, python-format
+msgid "Not found blind scan utility '%s'!"
+msgstr "Niet gevonden blind scan utility '%s'!"
+
+msgid "Only free scan"
+msgstr "Alleen FTA"
+
+msgid "Only scan unknown transponders"
+msgstr "Scan alleen onbekende transponders"
+
+msgid "Please setup your tuner configuration."
+msgstr "U moet de tunerconfiguratie vastleggen."
+
+msgid "Polarisation"
+msgstr "Polarisatie"
+
+msgid "Press Green/OK to start the scan"
+msgstr "Druk op Groen/OK om de scan te beginnen"
+
+msgid "Satellite"
+msgstr "Satelliet"
+
+msgid "Scan"
+msgstr "Scan"
+
+msgid "Scan Step in MHz(TBS5925)"
+msgstr "Scanstap in MHz(TBS5925)"
+
+msgid "Scan satellites for new transponders"
+msgstr "Scan satelieten op nieuwe transponders"
+
+msgid "Scan start frequency"
+msgstr "Scan start frequentie"
+
+msgid "Scan start symbolrate"
+msgstr "Scan start symbolrate"
+
+msgid "Scan stop frequency"
+msgstr "Scan stop frequentie"
+
+msgid "Scan stop symbolrate"
+msgstr "Scan stop symbolrate"
+
 #, python-format
 msgid ""
 "Search completed. %d transponders found.\n"
@@ -294,71 +177,101 @@ msgstr ""
 "Details opgeslagen in:\n"
 "%s"
 
-#: ../src/plugin.py:952
-msgid ""
-"No new transponders found! \n"
-"\n"
-"Only transponders already listed in satellites.xml \n"
-"have been found for those search parameters!"
-msgstr ""
-"Geen nieuwe transponders gevonden! \n"
-"\n"
-"Er zijn alleen transponders gevonden \n"
-"die al in de satellites.xml aanwezig waren!"
+msgid "Search type"
+msgstr "Zoek type"
 
-#: ../src/plugin.py:956
-msgid "No transponders were found for those search parameters!"
-msgstr "Met deze zoek parameters zijn geen transponders gevonden!"
+msgid "Select a tuner that is configured for the satellite you wish to search"
+msgstr "Kies een tuner die is geconfigureerd voor de satelliet die u wilt zoeken"
 
-#: ../src/plugin.py:958
+msgid "Select the satellite you wish to search"
+msgstr "Kies de satelliet die u wilt zoeken"
+
+msgid "Smaller steps takes longer but scan is more thorough"
+msgstr "Kleinere stappen duren langer maar geven een beter resultaat"
+
+msgid "Sorry, this tuner is in use."
+msgstr "Sorry, de tuner is in gebruik."
+
+#, python-format
+msgid "Step %d %d:%02d min"
+msgstr "Stap %d %d:%02d min"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+msgstr "Symbol rate waardes in megasymbols; geef een waarde tussen 1 and 44 in"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
+msgstr "Symbol rate waardes in megasymbols; geef een waarde tussen 2 and 45 in"
+
 msgid "The blindscan run was cancelled by the user."
 msgstr "De blindscan is door d egebruiker geannuleerd"
 
-#: ../src/plugin.py:1170
-msgid "circular right & circular left"
-msgstr "circulaire rechts & circulaire links"
+#, python-format
+msgid "The suggested polarisation for this satellite is \"%s\""
+msgstr "De voorgestelde polarisatie voor dezze satelliet is \"%s\""
 
-#: ../src/plugin.py:1236 ../src/plugin.py:1244
-msgid "Blind scan"
-msgstr "Blindscan"
+msgid "Tuner"
+msgstr "Tuner"
 
-#: ../src/plugin.py:1244
-msgid "Scan satellites for new transponders"
-msgstr "Scan satelieten op nieuwe transponders"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgstr "Als een naburige satelliet erg sterk is, kunt u met deze instelling voorkomen dat transponders waarvan bekend is dat die van die satelliet afkomstig zijn, toegekend worden aan de gescande satelliet."
 
-#~ msgid ""
-#~ "\"channel scan\" searches for channels and saves them to your receiver; "
-#~ "\"save to XML file\" does a transponder search and saves found "
-#~ "transponders to an XML file in satellites.xml format"
-#~ msgstr ""
-#~ "\"channel scan\" zoekt kanalen en slaat die op in uw ontvanger; \"sla op "
-#~ "in XML file\" voert een transponder scan uit en slaat de gevonden "
-#~ "transpondrs op in een XML file in satellites.xml formaat."
+msgid "circular left"
+msgstr "circular links"
+
+msgid "circular right"
+msgstr "circular rechts"
+
+msgid "circular right and circular left"
+msgstr "circulair rechts en links"
+
+msgid "horizontal"
+msgstr "horizontaal"
+
+msgid "no"
+msgstr "nee"
+
+msgid "save to XML file"
+msgstr "sla op in XML-bestand"
+
+msgid "scan for channels"
+msgstr "Zoek kanalen"
+
+msgid "up to 1 degree"
+msgstr "tot 1 graad"
+
+msgid "up to 2 degrees"
+msgstr "tot 2 graden"
+
+msgid "up to 3 degrees"
+msgstr "tot 3 graden"
+
+msgid "vertical"
+msgstr "vertikaal"
+
+msgid "vertical and horizontal"
+msgstr "vertikaal en horizontaal"
+
+#~ msgid "\"channel scan\" searches for channels and saves them to your receiver; \"save to XML file\" does a transponder search and saves found transponders to an XML file in satellites.xml format"
+#~ msgstr "\"channel scan\" zoekt kanalen en slaat die op in uw ontvanger; \"sla op in XML file\" voert een transponder scan uit en slaat de gevonden transpondrs op in een XML file in satellites.xml formaat."
+
+#~ msgid "%d transponders found at %d:%02d min"
+#~ msgstr "%d transponders gevonden op %d:%02d min"
 
 #~ msgid "Blind Scan"
 #~ msgstr "Blind Scan"
 
-#~ msgid ""
-#~ "Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the "
-#~ "case of C-band satellites)"
-#~ msgstr ""
-#~ "Frequentie waardes moeten tussen 10700MHz en 12750MHz liggen (of tussen "
-#~ "3000MHz en 4200MHz in geval van C-band satellieten)."
+#~ msgid "Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the case of C-band satellites)"
+#~ msgstr "Frequentie waardes moeten tussen 10700MHz en 12750MHz liggen (of tussen 3000MHz en 4200MHz in geval van C-band satellieten)."
 
-#~ msgid ""
-#~ "If you are not sure what polarisations the satellite you wish to search "
-#~ "transmits, select \"vertical and horizontal\""
-#~ msgstr ""
-#~ "Als u niet zeker bent van de polarisatie van de gewenste transponder, "
-#~ "kiest u voor \"vertikaal en horizontaal\" "
+#~ msgid "If you are not sure what polarisations the satellite you wish to search transmits, select \"vertical and horizontal\""
+#~ msgstr "Als u niet zeker bent van de polarisatie van de gewenste transponder, kiest u voor \"vertikaal en horizontaal\" "
 
 #~ msgid ""
 #~ "Invalid parameters entered. Please correct and try again.\n"
 #~ "For C-band searches stop frequency must be between 3000MHz and 4200MHz."
 #~ msgstr ""
 #~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "Voor C-band zoeken moet de eind frequentie liggen tussen 3000MHz en "
-#~ "4200MHz."
+#~ "Voor C-band zoeken moet de eind frequentie liggen tussen 3000MHz en 4200MHz."
 
 #~ msgid ""
 #~ "Invalid parameters entered. Please correct and try again.\n"
@@ -373,8 +286,7 @@ msgstr "Scan satelieten op nieuwe transponders"
 #~ "(Or 3000MHz and 4200MHz in the case of c-band)."
 #~ msgstr ""
 #~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "De beginwaarde voor de frequentie moet liggen tussen de 10700MHz en "
-#~ "12750MHz.\n"
+#~ "De beginwaarde voor de frequentie moet liggen tussen de 10700MHz en 12750MHz.\n"
 #~ "(of tussen de 3000MHz en 4200MHz voor de C-band)."
 
 #~ msgid ""
@@ -390,8 +302,7 @@ msgstr "Scan satelieten op nieuwe transponders"
 #~ "(Or 3000MHz and 4200MHz in the case of c-band)."
 #~ msgstr ""
 #~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "De eindwaarde voor de frequentie moet liggen tussen de 10700MHz en "
-#~ "12750MHz.\n"
+#~ "De eindwaarde voor de frequentie moet liggen tussen de 10700MHz en 12750MHz.\n"
 #~ "(of tussen de 3000MHz en 4200MHz voor de C-band)."
 
 #~ msgid ""
@@ -447,3 +358,6 @@ msgstr "Scan satelieten op nieuwe transponders"
 
 #~ msgid "The suggested polarisation for this satellite is \""
 #~ msgstr "De aanbevolen polarisatie voor deze satelliet is \""
+
+#~ msgid "circular right & circular left"
+#~ msgstr "circulaire rechts & circulaire links"
