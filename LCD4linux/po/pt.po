@@ -1489,7 +1489,7 @@ msgid "Picture"
 msgstr "Imagem"
 
 msgid "Picture Changing Time"
-msgstr "Teempo de Mudar Imagem"
+msgstr "Tempo para Mudar Imagem"
 
 msgid "Picture Directory Recursive"
 msgstr "Diretório Recursivo de Imagens"
