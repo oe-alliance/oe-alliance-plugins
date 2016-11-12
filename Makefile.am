@@ -198,6 +198,14 @@ if VUSOLO4K
 SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
 endif
 
+if VUUNO4K
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+endif
+
+if VUULTIMO4K
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+endif
+
 if GIGABLUE
 SUBDIRS += GigaBlueVFDControl AudioEffect
 endif
