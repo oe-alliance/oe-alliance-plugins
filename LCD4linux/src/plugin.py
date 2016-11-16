@@ -47,7 +47,11 @@ import email
 from email.header import decode_header
 import urlparse
 import urllib
-import simplejson
+#import simplejson
+try:
+    import json
+except ImportError,e:
+    import simplejson as json
 import calendar
 import math
 import gc
