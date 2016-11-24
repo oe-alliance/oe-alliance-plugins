@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-05-07 13:31+0200\n"
+"PO-Revision-Date: \n"
 "Last-Translator: litvcom\n"
 "Language-Team: none\n"
 "Language: ru\n"
@@ -133,7 +133,7 @@ msgstr "Название закладки"
 
 #: ../src/browser.py:475 ../src/browser.py:483
 msgid "Bookmark URL"
-msgstr "URL закладка"
+msgstr "URL закладки"
 
 #: ../src/browser.py:561 ../src/browser.py:718 ../src/browser.py:907
 #: ../src/browser.py:915
