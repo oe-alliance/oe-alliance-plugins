@@ -4,10 +4,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:20+0200\n"
-"PO-Revision-Date: 2016-05-07 13:20+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: Russian / enigma(c) Ukraine, Kiev>\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: litvcom\n"
+"Language-Team: \n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,28 +20,28 @@ msgstr ""
 #: ../src/plugin.py:34 ../src/plugin.py:43 ../src/plugin.py:50
 #: ../src/plugin.py:59 ../src/plugin.py:70
 msgid "FPGA"
-msgstr ""
+msgstr "ППВМ"
 
 #: ../src/plugin.py:35 ../src/plugin.py:51 ../src/plugin.py:60
 #: ../src/plugin.py:71
 msgid "Front Processor"
-msgstr ""
+msgstr "Фронтпроцессор"
 
 #: ../src/plugin.py:61
 msgid "VFD Controller"
-msgstr ""
+msgstr "ЧУП контроллер"
 
 #: ../src/plugin.py:348
 msgid "Can't cancel during upgrade!!"
-msgstr ""
+msgstr "Нельзя отменить в процессе обновления!!"
 
 #: ../src/plugin.py:350
 msgid "Status : 0%"
-msgstr ""
+msgstr "Статус : 0%"
 
 #: ../src/plugin.py:383
 msgid "Fail to upgrade!! Retry!!"
-msgstr ""
+msgstr "Не удалось обновить!! Повторите попытку!!"
 
 #: ../src/plugin.py:385
 #, python-format
@@ -50,31 +50,31 @@ msgstr ""
 
 #: ../src/plugin.py:388
 msgid "Success. Press OK to exit."
-msgstr ""
+msgstr "Выполнено. Нажмите кнопку OK, чтобы выйти."
 
 #: ../src/plugin.py:417
 msgid "Do you want to remove binary data?"
-msgstr ""
+msgstr "Вы хотите удалить бинарные данные?"
 
 #: ../src/plugin.py:435
 msgid "Download"
-msgstr ""
+msgstr "Скачать"
 
 #: ../src/plugin.py:476
 msgid "Can't found binary file."
-msgstr ""
+msgstr "Не удается найти бинарный файл"
 
 #: ../src/plugin.py:479
 msgid "Can't found MD5 file."
-msgstr ""
+msgstr "Не удается найти файл MD5"
 
 #: ../src/plugin.py:490 ../src/plugin.py:494
 msgid "You choose the incorrect file. "
-msgstr ""
+msgstr "Выбран некорректный файл"
 
 #: ../src/plugin.py:498
 msgid "Can't find /usr/bin/md5sum"
-msgstr ""
+msgstr "Не удается найти /usr/bin/md5sum"
 
 #: ../src/plugin.py:505
 #, python-format
@@ -83,14 +83,17 @@ msgid ""
 "file[%s]\n"
 "md5[%s]"
 msgstr ""
+"Ошибка при проверки файла. \n"
+"файл[%s]\n"
+"md5[%s]"
 
 #: ../src/plugin.py:578
 msgid "Firmware does not exist."
-msgstr ""
+msgstr "Нет прошивки."
 
 #: ../src/plugin.py:617
 msgid "Can't found model name."
-msgstr ""
+msgstr "Не удается найти название модели"
 
 #
 #: ../src/plugin.py:689
@@ -99,28 +102,28 @@ msgstr "Закрыть"
 
 #: ../src/plugin.py:700
 msgid "Duo/Solo was not support."
-msgstr ""
+msgstr "Duo/Solo не поддерживаются"
 
 #: ../src/plugin.py:702
 msgid "Upgrade"
-msgstr ""
+msgstr "Обновить"
 
 #: ../src/plugin.py:710
 msgid "Firmware"
-msgstr ""
+msgstr "Прошивка"
 
 #: ../src/plugin.py:761
 msgid "No selected binary data!!"
-msgstr ""
+msgstr "Бинарные данные не выбраны!!"
 
 #: ../src/plugin.py:768
 msgid "Can't found device file!!"
-msgstr ""
+msgstr "Файл устройства не найден!!"
 
 #: ../src/plugin.py:855
 msgid "Firmware Upgrade"
-msgstr ""
+msgstr "Обновление прошивки"
 
 #: ../src/plugin.py:855
 msgid "Upgrade Firmware.."
-msgstr ""
+msgstr "Обновление встроенного ПО"
