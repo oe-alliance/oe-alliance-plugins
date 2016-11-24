@@ -8,6 +8,7 @@ from Screens.MessageBox import MessageBox
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
+from Components.Sources.Progress import Progress
 from Components.NimManager import nimmanager
 from enigma import eDVBFrontendParameters, eDVBFrontendParametersTerrestrial, eDVBResourceManager, eTimer, iFrontendInformation
 
@@ -68,6 +69,7 @@ class TerrestrialScan(Screen, ConfigListScreen):
 		self["action"] = Label(_("Starting scanner"))
 		self["status"] = Label("")
 		self["progress"] = ProgressBar()
+		self["progress_text"] = Progress()
 
 		self["actions"] = ActionMap(["SetupActions"],
 		{
@@ -131,6 +133,8 @@ class TerrestrialScan(Screen, ConfigListScreen):
 			self["status"].setText(_("Scanning for active transponders"))
 			self.progresscount = len(self.scanTransponders)
 			self.progresscurrent = 1
+			self["progress_text"].range = self.progresscount
+			self["progress_text"].value = self.progresscurrent
 			self["progress"].setRange((0, self.progresscount))
 			self["progress"].setValue(self.progresscurrent)
 			self.timer = eTimer()
@@ -149,6 +153,7 @@ class TerrestrialScan(Screen, ConfigListScreen):
 			print "[TerrestrialScan][Search] Scan system %d" % self.system
 			print "[TerrestrialScan][Search] Scan bandwidth %d" % self.bandwidth
 			self.progresscurrent = self.index
+			self["progress_text"].value = self.progresscurrent
 			self["progress"].setValue(self.progresscurrent)
 			self["action"].setText(_("Scanning channel %s") % str(self.channel))
 			self["status"].setText(ngettext("Found %d unique transponder", "Found %d unique transponders", len(self.transponders_unique)) % len(self.transponders_unique))
