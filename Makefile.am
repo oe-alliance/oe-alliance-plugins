@@ -31,7 +31,7 @@ SUBDIRS += MultiTransCodingSetup
 endif
 
 if G100
-SUBDIRS += VPLEDControl
+SUBDIRS += F3LEDControl
 endif
 
 if HD2400
