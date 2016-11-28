@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-07 13:08+0200\n"
-"PO-Revision-Date: 2016-05-07 13:08+0200\n"
-"Last-Translator: litvcom\n"
+"PO-Revision-Date: 2016-11-29 00:40+0100\n"
+"Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: \n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -14,11 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Generator: Poedit 1.8.7\n"
-
-#: ../src/plugin.py:61
-msgid "Blindscan"
-msgstr "Сліпий пошук"
+"X-Generator: Poedit 1.8.8\n"
 
 #
 #: ../src/plugin.py:113 ../src/plugin.py:125
@@ -94,18 +90,6 @@ msgstr "кругова права"
 msgid "circular left"
 msgstr "кругова ліва"
 
-#: ../src/plugin.py:378
-msgid ""
-"\n"
-"Second slot dual tuner may not be supported blind scan."
-msgstr "Другий слот подвійного тюнера можливо не підтримує сліпий пошук."
-
-#: ../src/plugin.py:380
-msgid ""
-"\n"
-"You must use the power adapter."
-msgstr "Ви повинні використовувати блок живлення."
-
 #
 #: ../src/plugin.py:382
 msgid "Tuner"
@@ -113,8 +97,9 @@ msgstr "Тюнер"
 
 #: ../src/plugin.py:382
 msgid "Select a tuner that is configured for the satellite you wish to search"
-msgstr "Оберіть тюнер, який налаштований для супутника, на якому Ви бажаєте "
-"здійснювати пошук."
+msgstr ""
+"Оберіть тюнер, який налаштований для супутника, на якому Ви бажаєте здійснювати "
+"пошук."
 
 #
 #: ../src/plugin.py:391
@@ -181,11 +166,11 @@ msgstr "Очистити перед скануванням"
 
 #: ../src/plugin.py:403
 msgid ""
-"If you select \"yes\" all channels on the satellite being search will be "
-"deleted before starting the current search"
+"If you select \"yes\" all channels on the satellite being search will be deleted "
+"before starting the current search"
 msgstr ""
-"Якщо оберете \"так\", всі канали з знайдених транспондерів супутника"
-"будуть видалені перед початком сканування."
+"Якщо оберете \"так\", всі канали з знайдених транспондерів супутникабудуть видалені "
+"перед початком сканування."
 
 #: ../src/plugin.py:404
 msgid "Only free scan"
@@ -193,11 +178,11 @@ msgstr "Пошук лише некодованих каналі"
 
 #: ../src/plugin.py:404
 msgid ""
-"If you select \"yes\" the scan will only save channels that are not "
-"encrypted; \"no\" will find encrypted and non-encrypted channels"
+"If you select \"yes\" the scan will only save channels that are not encrypted; \"no"
+"\" will find encrypted and non-encrypted channels"
 msgstr ""
-"Якщо оберете \"так\", то буде збережено лише знайдені канали без"
-"кодування; \"ні\" враховуватимуться кодовані й некодовані канали."
+"Якщо оберете \"так\", то буде збережено лише знайдені канали безкодування; \"ні\" "
+"враховуватимуться кодовані й некодовані канали."
 
 #: ../src/plugin.py:405
 msgid "Only scan unknown transponders"
@@ -208,8 +193,8 @@ msgid ""
 "If you select \"yes\" the scan will only search transponders not listed in "
 "satellites.xml"
 msgstr ""
-"Якщо оберете \"так\", то при скануванні враховуватимуться лише транспондери, "
-"які не зазначено у файлі satellites.xml."
+"Якщо оберете \"так\", то при скануванні враховуватимуться лише транспондери, які не "
+"зазначено у файлі satellites.xml."
 
 #: ../src/plugin.py:406
 msgid "Filter out adjacent satellites"
@@ -217,49 +202,20 @@ msgstr "Фільтр від сусідніх супутників"
 
 #: ../src/plugin.py:406
 msgid ""
-"When a neighbouring satellite is very strong this avoids searching "
-"transponders known to be coming from the neighbouring satellite"
+"When a neighbouring satellite is very strong this avoids searching transponders "
+"known to be coming from the neighbouring satellite"
 msgstr ""
-"Якщо рівень сигналу сусіднього супутника дуже сильний, це дозволить"
-"уникнути сканування транспондерів з цього супутника."
+"Якщо рівень сигналу сусіднього супутника дуже сильний, це дозволитьуникнути "
+"сканування транспондерів з цього супутника."
 
 #: ../src/plugin.py:407
 msgid "Search type"
 msgstr "Тип пошуку"
 
-#: ../src/plugin.py:407
-msgid ""
-"\"channel scan\" searches for channels and saves them to your receiver; both "
-"options do a transponder search and save the result in /tmp in an XML file "
-"in satellites.xml format"
-msgstr ""
-"\"Сканування каналів\" пошук каналів та їх збереження в ресивер та в XML-файл; "
-"\"зберегти в XML файлі\" тільки збереження в XML-файлі, в форматі"
-"satellites.xml."
-
 #: ../src/plugin.py:651
 #, python-format
 msgid "Not found blind scan utility '%s'!"
 msgstr "Не виявлено утиліти для сліпого пошуку '%s'!"
-
-#: ../src/plugin.py:710
-msgid "   Starting Sundtek hardware blind scan."
-msgstr "   Початок сліпого пошуку від виробника Sundtek"
-
-#: ../src/plugin.py:712
-#, python-format
-msgid ""
-"Current Status : %d/%d\n"
-"   Satellite : %s\n"
-"   Polarization : %s\n"
-"   Frequency range : %d - %d MHz\n"
-"   Symbol rates : %d - %d MHz"
-msgstr ""
-"   Поточне значення : %d/%d\n"
-"   Супутник : %s\n"
-"   Поляризація : %s\n"
-"   Частотний діапазон : %d - %d MHz\n"
-"   Швидкість потоку : %d - %d MHz"
 
 #: ../src/plugin.py:714
 msgid ""
@@ -276,11 +232,6 @@ msgid ""
 msgstr ""
 "Пошук доступних транспондерів.\n"
 "Це займе деякий час."
-
-#: ../src/plugin.py:889
-#, python-format
-msgid "%d transponders found at %d:%02d min"
-msgstr "%d транспондерів знайдено за %d:%02d хв"
 
 #: ../src/plugin.py:949
 #, python-format
@@ -331,4 +282,4 @@ msgid "Step %d %d:%02d min"
 msgstr "Крок %d %d:%02d хв"
 
 msgid "Scan Step in MHz(TBS5925)"
-msgstr Крок сканування в МГц(TBS5925)"
+msgstr "Крок сканування в МГц(TBS5925)"
