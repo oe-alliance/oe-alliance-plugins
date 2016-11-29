@@ -1,0 +1,126 @@
+# Estonian translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2016 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-29 08:01+0200\n"
+"PO-Revision-Date: 2016-11-29 12:08+0200\n"
+"Last-Translator: rimas\n"
+"Language-Team: none\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.11\n"
+
+msgid "Adress:"
+msgstr "Aadress:"
+
+msgid "Checking for alternatives"
+msgstr "Asenduskanalite otsing"
+
+msgid "Close"
+msgstr "Sulge"
+
+msgid "Connection to remote IP ok"
+msgstr "Ühendus kaugvastuvõtjaga toimib"
+
+msgid "Convert remote channel list for streaming"
+msgstr "Teisenda lemmiknimekiri voogesituseks"
+
+msgid "Could not connect to remote IP"
+msgstr "Kaugvastuvõtjaga ei saadud ühendust"
+
+msgid "Download"
+msgstr "Allalaadimine"
+
+msgid "Download from remote failed"
+msgstr "Allalaadimine kaugvastuvõtjast nurjus"
+
+msgid "Downloading remote services"
+msgstr "Kaugkanalite allalaadimine"
+
+msgid "Enter address"
+msgstr "Sisesta aadress"
+
+msgid "Enter password"
+msgstr "Sisesta parool"
+
+msgid "Enter username"
+msgstr "Sisesta kasutajanimi"
+
+msgid "Exit"
+msgstr "Välju"
+
+msgid "FTP Server Editor"
+msgstr "FTP serveri seadistamine"
+
+#, python-format
+msgid "FTP reading alternatives %d of %d"
+msgstr "FTP kaugkanalite lugemine %d / %d"
+
+#, python-format
+msgid "FTP reading bouquets %d of %d"
+msgstr "FTP lemmiknimekirjade lugemine %d / %d"
+
+msgid "FTPport:"
+msgstr "FTP port:"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Invert"
+msgstr "Vaheta valik"
+
+msgid "Keyboard"
+msgstr "Klaviatuur"
+
+msgid "Make your selection"
+msgstr "Tee valik"
+
+msgid "No bouquets selected"
+msgstr "Lemmiknimekirju ei ole valitud"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Passive:"
+msgstr "Passiivne:"
+
+msgid "Password:"
+msgstr "Parool:"
+
+msgid "Remote channel stream converter"
+msgstr "Kaugkanali voo teisendus"
+
+msgid "Select a remote server IP first"
+msgstr "Vali esmalt kaugvastuvõtja IP"
+
+msgid "Select bouquets to convert"
+msgstr "Vali teisendatavad lemmiknimekirjad"
+
+msgid "Set server IP"
+msgstr "Määra serveri IP"
+
+msgid "Telnetport:"
+msgstr "Telneti port:"
+
+msgid "Testing remote connection"
+msgstr "Kaugühenduse test"
+
+msgid "Use IP"
+msgstr "Kasutatav IP"
+
+msgid "Use address"
+msgstr "Kasutatav aadress"
+
+msgid "Username:"
+msgstr "Kasutajanimi:"
+
+msgid "remote of"
+msgstr "kaugvastuvõtja"
