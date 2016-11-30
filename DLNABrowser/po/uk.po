@@ -53,7 +53,7 @@ msgstr "Зачекайте, триває завантаження зображе
 
 #: src/plugin.py:702 src/plugin.py:813
 msgid "Exit"
-msgstr "Вихід
+msgstr "Вихід"
 
 #: src/plugin.py:703
 msgid "Save"
