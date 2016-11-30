@@ -1,0 +1,104 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 3GModemManager\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
+"X-Poedit-Basepath: ..\n"
+"Last-Translator: litvcom\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: uk\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: src/plugin.py:206 src/plugin.py:375
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: src/plugin.py:207
+msgid "Save"
+msgstr "Зберегти"
+
+#: src/plugin.py:208
+msgid " "
+msgstr " "
+
+#: src/plugin.py:224
+msgid "Region :"
+msgstr "Регіон:"
+
+#: src/plugin.py:225
+msgid "Name :"
+msgstr "Ім'я:"
+
+#: src/plugin.py:226
+msgid "User :"
+msgstr "Користувач:"
+
+#: src/plugin.py:227
+msgid "Password :"
+msgstr "Пароль:"
+
+#: src/plugin.py:228
+msgid "APN :"
+msgstr "APN:"
+
+#: src/plugin.py:229
+msgid "PIN :"
+msgstr "PIN-код:"
+
+#: src/plugin.py:230
+msgid "Phone :"
+msgstr "Номер телефону:"
+
+#: src/plugin.py:376
+msgid "OK"
+msgstr "OK"
+
+#: src/plugin.py:377
+msgid "Edit"
+msgstr "Редагувати"
+
+#: src/plugin.py:378
+msgid "Add"
+msgstr "Додати"
+
+#: src/plugin.py:617
+msgid "Auto connect:"
+msgstr "Автоз'єднання:"
+
+#: src/plugin.py:618
+msgid "Disable"
+msgstr "Відключити"
+
+#: src/plugin.py:619
+msgid "Enable"
+msgstr "Увімкнути"
+
+#: src/plugin.py:621
+msgid "Exit"
+msgstr "Вихід"
+
+#: src/plugin.py:629
+msgid "Manual"
+msgstr "Вручну"
+
+#: src/plugin.py:630
+msgid "Auto connect"
+msgstr "Автоз'єднання"
+
+#: src/plugin.py:659
+msgid "IP : "
+msgstr "IP:"
+
+#: src/plugin.py:661 src/plugin.py:835
+msgid "IP : 0.0.0.0"
+msgstr "IP : 0.0.0.0"
+
+#: src/plugin.py:1161
+msgid "3G / 4G Modem Manager"
+msgstr "Диспетчер 3G/4G модему"
