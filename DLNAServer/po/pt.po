@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DLNAServer\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: BH Team\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
+"X-Poedit-Basepath: ..\n"
+"Last-Translator: nunigaia\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_PT\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: src/plugin.py:59
+msgid "OK"
+msgstr "OK"
+
+#: src/plugin.py:60
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/plugin.py:134
+msgid "Exit"
+msgstr "Sair"
+
+#: src/plugin.py:135
+msgid "Start"
+msgstr "Pasta de Filmes"
+
+#: src/plugin.py:136
+msgid "Save"
+msgstr "Salvar"
+
+#: src/plugin.py:137
+msgid "Reset"
+msgstr "Redefinir"
+
+#: src/plugin.py:261
+msgid "off"
+msgstr "off"
+
+#: src/plugin.py:261
+msgid "error"
+msgstr "erro"
+
+#: src/plugin.py:261
+msgid "warn"
+msgstr "Avisar se o espaço livre é menor do que (KB):"
+
+#: src/plugin.py:261
+msgid "debug"
+msgstr "depuração"
+
+#: src/plugin.py:264
+msgid "Server Name"
+msgstr "Nome do Servidor"
+
+#: src/plugin.py:265
+msgid "Video Directory"
+msgstr "Pasta"
+
+#: src/plugin.py:266
+msgid "Music Directory"
+msgstr "Pasta de Música"
+
+#: src/plugin.py:267
+msgid "Picture Directory"
+msgstr "Pasta de Imagens"
+
+#: src/plugin.py:268
+msgid "Enable Logging"
+msgstr "Ativar depuração"
+
+#: src/plugin.py:269
+msgid "    - Log Level"
+msgstr "    - Nível de Logs"
+
+#: src/plugin.py:270
+msgid "    - Log Directory"
+msgstr "    - Pasta de Logs"
+
+#: src/plugin.py:271
+msgid "Enable Autostart for DLNA Server"
+msgstr "Ativar início automático do servidor DLNA"
