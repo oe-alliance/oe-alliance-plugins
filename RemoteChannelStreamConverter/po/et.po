@@ -96,7 +96,7 @@ msgid "Password:"
 msgstr "Parool:"
 
 msgid "Remote channel stream converter"
-msgstr "Kaugkanali voo teisendus"
+msgstr "Kanalid kaugvastuvõtjast"
 
 msgid "Select a remote server IP first"
 msgstr "Vali esmalt kaugvastuvõtja IP"
