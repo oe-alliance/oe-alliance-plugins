@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DLNAServer\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
+"X-Poedit-Basepath: ..\n"
+"Last-Translator: litvcom\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: uk\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: src/plugin.py:59
+msgid "OK"
+msgstr "OK"
+
+#: src/plugin.py:60
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: src/plugin.py:134
+msgid "Exit"
+msgstr "Вихід"
+
+#: src/plugin.py:135
+msgid "Start"
+msgstr "Старт"
+
+#: src/plugin.py:136
+msgid "Save"
+msgstr "Зберегти"
+
+#: src/plugin.py:137
+msgid "Reset"
+msgstr "Скидання"
+
+#: src/plugin.py:261
+msgid "off"
+msgstr "вимк"
+
+#: src/plugin.py:261
+msgid "error"
+msgstr "Помилка"
+
+#: src/plugin.py:261
+msgid "warn"
+msgstr "Попередження"
+
+#: src/plugin.py:261
+msgid "debug"
+msgstr "Відладка"
+
+#: src/plugin.py:264
+msgid "Server Name"
+msgstr "Ім'я сервера"
+
+#: src/plugin.py:265
+msgid "Video Directory"
+msgstr "Каталог Відео"
+
+#: src/plugin.py:266
+msgid "Music Directory"
+msgstr "Каталог Музика"
+
+#: src/plugin.py:267
+msgid "Picture Directory"
+msgstr "Каталог Фото"
+
+#: src/plugin.py:268
+msgid "Enable Logging"
+msgstr "Включити ведення журналу"
+
+#: src/plugin.py:269
+msgid "    - Log Level"
+msgstr "    - Рівень журналу"
+
+#: src/plugin.py:270
+msgid "    - Log Directory"
+msgstr "    - Каталог журналу"
+
+#: src/plugin.py:271
+msgid "Enable Autostart for DLNA Server"
+msgstr "Включити автозапуск для DLNA-сервера"
