@@ -1,0 +1,76 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: litvcom\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../src/plugin.py:66
+msgid "none"
+msgstr "Нет"
+
+#: ../src/plugin.py:68
+msgid "3D Surround"
+msgstr "Объёмный звук 3D"
+
+#: ../src/plugin.py:70
+msgid "AVL (Automatic Volume Leveler)"
+msgstr "Автоматическая регулировка громкости"
+
+#: ../src/plugin.py:99
+msgid "On"
+msgstr "Вкл."
+
+#: ../src/plugin.py:99
+msgid "Off"
+msgstr "Выкл."
+
+#: ../src/plugin.py:153
+msgid "Audio Effect Setup"
+msgstr "Настройка звукового эффекта"
+
+#: ../src/plugin.py:158
+msgid "Cancel"
+msgstr "Отменить"
+
+#: ../src/plugin.py:159
+msgid "Save"
+msgstr "Сохранить"
+
+#: ../src/plugin.py:160
+msgid "Default"
+msgstr "По умолчанию"
+
+#: ../src/plugin.py:161
+msgid "Audio Effect Setup is not supported."
+msgstr "Настройка звукового эффекта не поддерживается."
+
+#: ../src/plugin.py:181
+msgid "Effect"
+msgstr "Эффект"
+
+#: ../src/plugin.py:188
+msgid "3D Surround Speaker Position"
+msgstr "Положение динамиков объёмного звука 3D"
+
+#: ../src/plugin.py:219
+msgid "Really close without saving settings?"
+msgstr "Действительно закрыть без сохранения настроек?"
+
+#: ../src/plugin.py:255
+msgid "AudioEffect"
+msgstr "Звуковой эффект"
+
+#: ../src/plugin.py:255
+msgid "sets the audio effetcs"
+msgstr "Установить звуковой эффект"
