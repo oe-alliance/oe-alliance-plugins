@@ -2,371 +2,114 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:07+0200\n"
-"PO-Revision-Date: 2016-05-07 13:07+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"POT-Creation-Date: 2016-03-14 04:59+0100\n"
+"PO-Revision-Date: 2016-12-02 00:16+0200\n"
+"Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: none\n"
 "Language: lt_LT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.7\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.8.11\n"
 
-#: ../src/plugin.py:61
-msgid "Blindscan"
-msgstr ""
+msgid "%d transponder(s) found"
+msgstr "surasti %d transponderiai"
 
-#: ../src/plugin.py:113 ../src/plugin.py:125
-msgid "Exit"
-msgstr ""
+msgid "%d transponders found at %d:%02dmin"
+msgstr "Surasti %d transponderiai %d:%02dmin"
 
-#: ../src/plugin.py:114
-msgid "Scan"
-msgstr ""
+msgid "%d:%02d/%d:%02dmin"
+msgstr "%d:%02d/%d:%02dmin"
 
-#: ../src/plugin.py:115
-msgid "Press Green/OK to start the scan"
-msgstr ""
+msgid "%dMhz scanned"
+msgstr "%dMHz nuskenuota"
 
-#: ../src/plugin.py:127
-msgid "Please setup your tuner configuration."
-msgstr ""
+msgid "AUTOMATICALLY start service searching, press green to change"
+msgstr "Kanalų paieška prasidės AUTOMATIŠKAI, norėdami keisti spauskite žalią mygtuką"
 
-#: ../src/plugin.py:249
-msgid "Sorry, this tuner is in use."
-msgstr ""
+msgid "Accuracy (higher is better)"
+msgstr "Tikslumas (didesnis yra geriau)"
 
-#: ../src/plugin.py:306
-msgid "no"
-msgstr "ne"
-
-#: ../src/plugin.py:307
-msgid "up to 1 degree"
-msgstr ""
-
-#: ../src/plugin.py:308
-msgid "up to 2 degrees"
-msgstr ""
-
-#: ../src/plugin.py:309
-msgid "up to 3 degrees"
-msgstr ""
-
-#: ../src/plugin.py:311
-msgid "scan for channels"
-msgstr ""
-
-#: ../src/plugin.py:312
-msgid "save to XML file"
-msgstr ""
-
-#: ../src/plugin.py:335 ../src/plugin.py:1150
-msgid "vertical and horizontal"
-msgstr ""
-
-#: ../src/plugin.py:336 ../src/plugin.py:707
-msgid "vertical"
-msgstr ""
-
-#: ../src/plugin.py:337 ../src/plugin.py:705
-msgid "horizontal"
-msgstr ""
-
-#: ../src/plugin.py:338 ../src/plugin.py:1157
-msgid "circular right and circular left"
-msgstr ""
-
-#: ../src/plugin.py:339 ../src/plugin.py:696 ../src/plugin.py:703
-msgid "circular right"
-msgstr ""
-
-#: ../src/plugin.py:340 ../src/plugin.py:698 ../src/plugin.py:701
-msgid "circular left"
-msgstr ""
-
-#: ../src/plugin.py:378
-msgid ""
-"\n"
-"Second slot dual tuner may not be supported blind scan."
-msgstr ""
-
-#: ../src/plugin.py:380
-msgid ""
-"\n"
-"You must use the power adapter."
-msgstr ""
-
-#: ../src/plugin.py:382
-msgid "Tuner"
-msgstr "Imtuvas"
-
-#: ../src/plugin.py:382
-msgid "Select a tuner that is configured for the satellite you wish to search"
-msgstr ""
-
-#: ../src/plugin.py:391
-msgid "Satellite"
-msgstr "Palydovas"
-
-#: ../src/plugin.py:391
-msgid "Select the satellite you wish to search"
-msgstr ""
-
-#: ../src/plugin.py:395 ../src/plugin.py:398
-msgid "Scan start frequency"
-msgstr ""
-
-#: ../src/plugin.py:395
-msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
-msgstr ""
-
-#: ../src/plugin.py:396 ../src/plugin.py:399
-msgid "Scan stop frequency"
-msgstr ""
-
-#: ../src/plugin.py:396
-msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
-msgstr ""
-
-#: ../src/plugin.py:398
-msgid "Frequency values must be between 10700 MHz and 12749 MHz"
-msgstr ""
-
-#: ../src/plugin.py:399
-msgid "Frequency values must be between 10701 MHz and 12750 MHz"
-msgstr ""
-
-#: ../src/plugin.py:400
-msgid "Polarisation"
-msgstr ""
-
-#: ../src/plugin.py:400
-#, python-format
-msgid "The suggested polarisation for this satellite is \"%s\""
-msgstr ""
-
-#: ../src/plugin.py:401
-msgid "Scan start symbolrate"
-msgstr ""
-
-#: ../src/plugin.py:401
-msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
-msgstr ""
-
-#: ../src/plugin.py:402
-msgid "Scan stop symbolrate"
-msgstr ""
-
-#: ../src/plugin.py:402
-msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
-msgstr ""
-
-#: ../src/plugin.py:403
-msgid "Clear before scan"
-msgstr "Išvalyti prieš skenavimą"
-
-#: ../src/plugin.py:403
-msgid ""
-"If you select \"yes\" all channels on the satellite being search will be "
-"deleted before starting the current search"
-msgstr ""
-
-#: ../src/plugin.py:404
-msgid "Only free scan"
-msgstr "Skenuoti tik nekoduotus"
-
-#: ../src/plugin.py:404
-msgid ""
-"If you select \"yes\" the scan will only save channels that are not "
-"encrypted; \"no\" will find encrypted and non-encrypted channels"
-msgstr ""
-
-#: ../src/plugin.py:405
-msgid "Only scan unknown transponders"
-msgstr ""
-
-#: ../src/plugin.py:405
-msgid ""
-"If you select \"yes\" the scan will only search transponders not listed in "
-"satellites.xml"
-msgstr ""
-
-#: ../src/plugin.py:406
-msgid "Filter out adjacent satellites"
-msgstr ""
-
-#: ../src/plugin.py:406
-msgid ""
-"When a neighbouring satellite is very strong this avoids searching "
-"transponders known to be coming from the neighbouring satellite"
-msgstr ""
-
-#: ../src/plugin.py:407
-msgid "Search type"
-msgstr ""
-
-#: ../src/plugin.py:407
-msgid ""
-"\"channel scan\" searches for channels and saves them to your receiver; both "
-"options do a transponder search and save the result in /tmp in an XML file "
-"in satellites.xml format"
-msgstr ""
-
-#: ../src/plugin.py:651
-#, python-format
-msgid "Not found blind scan utility '%s'!"
-msgstr ""
-
-#: ../src/plugin.py:710
-msgid "   Starting Sundtek hardware blind scan."
-msgstr ""
-
-#: ../src/plugin.py:712
-#, python-format
-msgid ""
-"Current Status : %d/%d\n"
-"   Satellite : %s\n"
-"   Polarization : %s\n"
-"   Frequency range : %d - %d MHz\n"
-"   Symbol rates : %d - %d MHz"
-msgstr ""
-
-#: ../src/plugin.py:714
-msgid ""
-"Looking for available transponders.\n"
-"This will take a long time, please be patient."
-msgstr ""
-
-#: ../src/plugin.py:716
-msgid ""
-"Looking for available transponders.\n"
-"This will take a short while."
-msgstr ""
-
-#: ../src/plugin.py:889
-#, python-format
-msgid "%d transponders found at %d:%02d min"
-msgstr ""
-
-#: ../src/plugin.py:949
-#, python-format
-msgid ""
-"Search completed. %d transponders found.\n"
-"\n"
-"Details saved in:\n"
-"%s"
-msgstr ""
-
-#: ../src/plugin.py:952
-msgid ""
-"No new transponders found! \n"
-"\n"
-"Only transponders already listed in satellites.xml \n"
-"have been found for those search parameters!"
-msgstr ""
-
-#: ../src/plugin.py:956
-msgid "No transponders were found for those search parameters!"
-msgstr ""
-
-#: ../src/plugin.py:958
-msgid "The blindscan run was cancelled by the user."
-msgstr ""
-
-#: ../src/plugin.py:1170
-msgid "circular right & circular left"
-msgstr ""
-
-#: ../src/plugin.py:1236 ../src/plugin.py:1244
 msgid "Blind scan"
 msgstr "Aklasis skenavimas"
 
-#: ../src/plugin.py:1244
+msgid "Blindscan is not supported by this tuner (%s)"
+msgstr "Šis imtuvas (%s) nepalaiko aklojo skenavimo!"
+
+msgid "Clear before scan"
+msgstr "Prieš skenavimą išvalyti"
+
+msgid "DVB-S + DVB-S2"
+msgstr "DVB-S + DVB-S2"
+
+msgid "DVB-S only"
+msgstr "DVB-S tik"
+
+msgid "Frequency start"
+msgstr "Dažnio pradžia"
+
+msgid "Frequency stop"
+msgstr "Dažnio pabaiga"
+
+msgid "Horizontal"
+msgstr "Horizontali"
+
+msgid "MANUALLY start service searching, press green to change"
+msgstr "Kanalų paieška prasidės RANKINIU BŪDU, norėdami keisti spauskite žalią mygtuką"
+
+msgid "Network scan"
+msgstr "Tinklo skenavimas"
+
+msgid ""
+"No tuner is enabled!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Imtuvas neįjungtas!\n"
+"Prašome sureguliuoti savo imtuvą, prieš pradedant kanalų skenavimą."
+
+msgid ""
+"Nothing to scan!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Nėra ko skenuoti!\n"
+"Prašome sureguliuoti savo imtuvą, prieš pradedant kanalų skenavimą."
+
+msgid "Nothing to scan! Press Exit!"
+msgstr "Nėra ko skenuoti! Spauskite Exit!"
+
+msgid "Only free scan"
+msgstr "Skenuoti tik nekoduotus"
+
+msgid "Press OK to start the scan"
+msgstr "Spauskite OK, norėdami pradėti skenavimą."
+
+msgid "Press green to start service searching!"
+msgstr "Kad pradėti kanalų paiešką, spauskite 'ŽALIĄ' mygtuką!"
+
+msgid "Satellite"
+msgstr "Palydovas"
+
 msgid "Scan satellites for new transponders"
-msgstr "Palydovų skenavimas dėl naujų transponderių"
+msgstr "Palydovuose ieškoti naujų transponderių"
 
-#~ msgid "%d transponder(s) found"
-#~ msgstr "%d transponderis(iai) rasta"
+msgid "Transponder searching finished!"
+msgstr "Transponderio paieška baigta!"
 
-#~ msgid "%d transponders found at %d:%02dmin"
-#~ msgstr "%d transponderiai rasti %d:%02dmin"
+msgid "Try to find used satellite transponders..."
+msgstr "Bandoma rasti veikiančius palydovinius transponderius..."
 
-#~ msgid "%d:%02d/%d:%02dmin"
-#~ msgstr "%d:%02d/%d:%02dmin"
+msgid "Tuner"
+msgstr "Imtuvas"
 
-#~ msgid "%dMhz scanned"
-#~ msgstr "%dMHz nuskenuota"
+msgid "Vertical"
+msgstr "Vertikali"
 
-#~ msgid "AUTOMATICALLY start service searching, press green to change"
-#~ msgstr ""
-#~ "Kanalų paieška prasidės AUTOMATIŠKAI, norėdami keisti spauskite žalią "
-#~ "mygtuką"
+msgid "no"
+msgstr "ne"
 
-#~ msgid "Accuracy (higher is better)"
-#~ msgstr "Tikslumas (aukščiau yra geriau)"
+msgid "yes"
+msgstr "taip"
 
-#~ msgid "Blindscan is not supported by this tuner (%s)"
-#~ msgstr "Akloji paieška nepalaiko šio imtuvo (%s)"
-
-#~ msgid "DVB-S + DVB-S2"
-#~ msgstr "DVB-S + DVB-S2"
-
-#~ msgid "DVB-S only"
-#~ msgstr "DVB-S tik"
-
-#~ msgid "Frequency start"
-#~ msgstr "Dažnio pradžia"
-
-#~ msgid "Frequency stop"
-#~ msgstr "Dažnio pabaiga"
-
-#~ msgid "Horizontal"
-#~ msgstr "Horizontali"
-
-#~ msgid "MANUALLY start service searching, press green to change"
-#~ msgstr ""
-#~ "Pradėti kanalų paiešką RANKINIU BŪDU, norėdami keisti spauskite žalią "
-#~ "mygtuką"
-
-#~ msgid "Network scan"
-#~ msgstr "Tinklo skenavimas"
-
-#~ msgid ""
-#~ "No tuner is enabled!\n"
-#~ "Please setup your tuner settings before you start a service scan."
-#~ msgstr ""
-#~ "Imtuvas neįjungtas!\n"
-#~ "Prašome sureguliuoti savo imtuvą, prieš pradedant kanalų skenavimą."
-
-#~ msgid ""
-#~ "Nothing to scan!\n"
-#~ "Please setup your tuner settings before you start a service scan."
-#~ msgstr ""
-#~ "Nėra ko skenuoti!\n"
-#~ "Prašome sureguliuoti savo imtuvą, prieš pradedant kanalų skenavimą."
-
-#~ msgid "Nothing to scan! Press Exit!"
-#~ msgstr "Nėra ko skenuoti! Spauskite Exit!"
-
-#~ msgid "Press OK to start the scan"
-#~ msgstr "Spauskite OK, norėdami pradėti skenavimą."
-
-#~ msgid "Press green to start service searching!"
-#~ msgstr "Spauskite žalią mygtuką, kad pradėti kanalų paiešką!"
-
-#~ msgid "Transponder searching finished!"
-#~ msgstr "Transponderio paieška baigta!"
-
-#~ msgid "Try to find used satellite transponders..."
-#~ msgstr "Bandoma rasti veikiančius palydovinius transponderius..."
-
-#~ msgid "Vertical"
-#~ msgstr "Vertikali"
-
-#~ msgid "yes"
-#~ msgstr "taip"
-
-#~ msgid "yes (keep feeds)"
-#~ msgstr "taip (saugoti šaltinius)"
+msgid "yes (keep feeds)"
+msgstr "taip (saugoti šaltinius)"
