@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AnimationSetup\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
+"X-Poedit-Basepath: ..\n"
+"Last-Translator: litvcom\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pl\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: src/plugin.py:51 src/plugin.py:126
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: src/plugin.py:52 src/plugin.py:127
+msgid "Save"
+msgstr "Zapisz"
+
+#: src/plugin.py:53
+msgid "Default"
+msgstr "Domyślny"
+
+#: src/plugin.py:59
+msgid "Animation Setup"
+msgstr "Ustawienia Animacji"
+
+#: src/plugin.py:83
+msgid "Animation Speed"
+msgstr "Szybkość Animacji"
+
+#: src/plugin.py:91
+msgid "Disable Animations"
+msgstr "Wyłącz Animacje"
+
+#: src/plugin.py:92
+msgid "Simple fade"
+msgstr "Proste Wygaszanie Animacji"
+
+#: src/plugin.py:93
+msgid "Grow drop"
+msgstr "Rosnące Animacje"
+
+#: src/plugin.py:94
+msgid "Grow from left"
+msgstr "Rosnące od lewej"
+
+#: src/plugin.py:95
+msgid "Popup"
+msgstr "Wyskakujące Animacje"
+
+#: src/plugin.py:96
+msgid "Slide drop"
+msgstr "Przesuwane Animacje"
+
+#: src/plugin.py:97
+msgid "Slide left to right"
+msgstr "Przesuwane od lewej do prawej"
+
+#: src/plugin.py:98
+msgid "Slide top to bottom"
+msgstr "Przesuwane od góry do dołu"
+
+#: src/plugin.py:99
+msgid "Stripes"
+msgstr "Paski"
+
+#: src/plugin.py:125
+msgid "* current animation"
+msgstr "* Obecna Animacja"
+
+#: src/plugin.py:128
+msgid "Setting"
+msgstr "Ustawienie"
+
+#: src/plugin.py:129
+msgid "Preview"
+msgstr "Podgląd"
+
+#: src/plugin.py:185
+msgid "Animations"
+msgstr "Animacje"
