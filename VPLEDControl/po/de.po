@@ -2,94 +2,94 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:14+0200\n"
-"PO-Revision-Date: 2016-05-07 14:14+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"POT-Creation-Date: 2016-11-26 19:55+0100\n"
+"PO-Revision-Date: 2016-11-26 19:57+0100\n"
+"Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.8\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:25
+#: plugin.py:25
 msgid "Channelnumber in Standby off"
 msgstr "Kanalnummer / im Standby aus"
 
-#: ../src/plugin.py:25
+#: plugin.py:25
 msgid "Channelnumber in Standby Clock"
 msgstr "Kanalnummer / Uhr im Standby"
 
-#: ../src/plugin.py:25
+#: plugin.py:25
 msgid "Channelnumber/Clock in Standby Clock"
 msgstr "Kanalnummer/Uhr / Uhr im Standby"
 
-#: ../src/plugin.py:25
+#: plugin.py:25
 msgid "Clock always"
 msgstr "Immer Uhr"
 
-#: ../src/plugin.py:25
+#: plugin.py:25
 msgid "Always off"
 msgstr "Immer aus"
 
-#: ../src/plugin.py:27
+#: plugin.py:27
 msgid "yes"
-msgstr ""
+msgstr "Ja"
 
-#: ../src/plugin.py:27
+#: plugin.py:27
 msgid "no"
-msgstr ""
+msgstr "Nein"
 
-#: ../src/plugin.py:28
+#: plugin.py:28
 msgid "Off"
-msgstr ""
+msgstr "Aus"
 
-#: ../src/plugin.py:28
+#: plugin.py:28
 msgid "On/Off"
 msgstr "An/Aus"
 
-#: ../src/plugin.py:28
+#: plugin.py:28
 msgid "Brightness level"
 msgstr "Helligkeitsstufe"
 
-#: ../src/plugin.py:225 ../src/plugin.py:324 ../src/plugin.py:331
+#: plugin.py:225 plugin.py:324 plugin.py:331
 msgid "LED Display Setup"
 msgstr "LED Display Einstellungen"
 
-#: ../src/plugin.py:236
+#: plugin.py:236
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../src/plugin.py:237
+#: plugin.py:237
 msgid "Save"
 msgstr "Speichern"
 
-#: ../src/plugin.py:238
+#: plugin.py:238
 msgid "Update Date/Time"
 msgstr "Datum/Uhrzeit aktuallisieren"
 
-#: ../src/plugin.py:251 ../src/plugin.py:271
+#: plugin.py:251 plugin.py:271
 msgid "Show on LED"
 msgstr "Displayanzeige"
 
-#: ../src/plugin.py:253
+#: plugin.py:253
 msgid "Time mode"
 msgstr "Zeit Modus"
 
-#: ../src/plugin.py:254 ../src/plugin.py:273
+#: plugin.py:254 plugin.py:273
 msgid "Show REC-Symbol in Display"
 msgstr "Zeige REC-Symbol im Display"
 
-#: ../src/plugin.py:256 ../src/plugin.py:275
+#: plugin.py:256 plugin.py:275
 msgid "Show blinking Clock on Display during recording"
 msgstr "Blinkende Uhr im Display während Aufnahmen"
 
-#: ../src/plugin.py:258
+#: plugin.py:258
 msgid "Brightness Level 1"
 msgstr "Helligkeitsstufe 1"
 
-#: ../src/plugin.py:259
+#: plugin.py:259
 msgid "Brightness Level 2"
 msgstr "Helligkeitsstufe 2"
