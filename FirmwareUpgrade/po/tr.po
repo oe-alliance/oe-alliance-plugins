@@ -37,7 +37,7 @@ msgstr "Yükseltme sırasında iptal edilemez!!"
 
 #: ../src/plugin.py:350
 msgid "Status : 0%"
-msgstr "Durum : 0%"
+msgstr "Durum : %0"
 
 #: ../src/plugin.py:383
 msgid "Fail to upgrade!! Retry!!"
@@ -58,7 +58,7 @@ msgstr "Binary bilgisini kaldırmak istiyor musunuz?"
 
 #: ../src/plugin.py:435
 msgid "Download"
-msgstr ""
+msgstr "İndir"
 
 #: ../src/plugin.py:476
 msgid "Can't found binary file."
