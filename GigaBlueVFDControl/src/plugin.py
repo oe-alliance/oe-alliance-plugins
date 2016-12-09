@@ -449,9 +449,10 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		self.close()
 
 	def Update(self):
-		if BOX != "gbquad":
-			self.createSetup()
-			initLED()
+		# still needed? I doubt it, as i can't see a difference for gbquad and other models with LCD
+		#if BOX != "gbquad":
+		self.createSetup()
+		initLED()
 
 class LED_Giga:
 	def __init__(self, session):
