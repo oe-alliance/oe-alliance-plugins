@@ -57,15 +57,15 @@ msgstr "Всплывание"
 
 #: src/plugin.py:96
 msgid "Slide drop"
-msgstr "Слайд-шоу вниз"
+msgstr "Слайд вниз"
 
 #: src/plugin.py:97
 msgid "Slide left to right"
-msgstr "Слайд-шоу слева направо"
+msgstr "Слайд слева направо"
 
 #: src/plugin.py:98
 msgid "Slide top to bottom"
-msgstr "Слайд-шоу сверху вниз"
+msgstr "Слайд сверху вниз"
 
 #: src/plugin.py:99
 msgid "Stripes"
