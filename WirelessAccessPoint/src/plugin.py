@@ -173,6 +173,8 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 		for x in iNetwork.getInstalledAdapters():
 			if x.startswith('eth') or x.startswith('br') or x.startswith('mon'):
 				continue
+			elif os_path.exists("/tmp/bcm/%s"%x):
+				continue
 			wlanIfaces.append(x)
 			description=self.getAdapterDescription(x)
 			if description == "Unknown network adapter":
@@ -181,7 +183,7 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 				self.wlanDeviceList.append(( x, description + " (%s)"%x ))
 
 		if len(self.wlanDeviceList) == 0:
-			self.msg = "Wireless Lan Device is not detected."
+			self.msg = "Can not find wireless lan devices that support AP mode."
 			return -1
 
 		apModeConfig.wirelessdevice = ConfigSelection( choices = self.wlanDeviceList )
