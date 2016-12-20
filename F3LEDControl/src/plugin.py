@@ -13,6 +13,7 @@ from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ServiceList import ServiceList
 from Screens.InfoBar import InfoBar
+import Screens.Standby
 from time import localtime, time
 from Tools.Directories import fileExists
 
@@ -20,11 +21,12 @@ from boxbranding import getImageDistro, getBoxType
 
 import Screens.Standby
 
-config.plugins.VFD_ini = ConfigSubsection()
-config.plugins.VFD_ini.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_ini.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.SEG = ConfigSubsection()
+config.plugins.SEG.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
+config.plugins.SEG.showCHnumber = ConfigSelection(default = "15", choices = [("15",_("15 sec")),("30",_("30 sec")),("45",_("45 sec")),("60",_("60 sec"))])
+config.plugins.SEG.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
 
-def vfd_write(text):
+def display_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
 
 class Channelnumber:
@@ -32,73 +34,85 @@ class Channelnumber:
 	def __init__(self, session):
 		self.session = session
 		self.sign = 0
-		self.updatetime = 10000
+		self.updatetime = 15000
 		self.blink = False
-		self.channelnrdelay = 15
+		self.channelnrdelay = config.plugins.SEG.showCHnumber.value
+		self.dvb_service = ""
 		self.begin = int(time())
 		self.endkeypress = True
 		eActionMap.getInstance().bindAction('', -0x7FFFFFFF, self.keyPressed)
-		self.zaPrik = eTimer()
-		self.zaPrik.timeout.get().append(self.vrime)
-		self.zaPrik.start(1000, 1)
+		self.TimerText = eTimer()
+		self.TimerText.timeout.get().append(self.showclock)
+		self.TimerText.start(1000, True)
 		self.onClose = [ ]
 
-		#self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
-		#	{
-		#		iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
-		#	})
+		self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
+			{
+				iPlayableService.evStart: self.__evStart,
+			})
 
-		self.__event_tracker = False
+	def __evStart(self):
+		self.getCurrentlyPlayingService()
 
-	def __eventInfoChanged(self):
-		if config.plugins.VFD_ini.showClock.value == 'Off' or config.plugins.VFD_ini.showClock.value == 'True_All':
+	def getCurrentlyPlayingService(self):
+		playref = self.session.nav.getCurrentlyPlayingServiceReference()
+		if not playref:
+			self.dvb_service = ""
+		else:
+			str_service = playref.toString()
+			if not '%3a//' in str_service and str_service.rsplit(":", 1)[1].startswith("/"):
+				self.dvb_service = "video"
+			else:
+				self.dvb_service = ""
+
+	def __eventInfoChanged(self, manual=False):
+		if config.plugins.SEG.showClock.value == 'Off' or config.plugins.SEG.showClock.value == 'True_All':
 			return
-		service = self.session.nav.getCurrentService()
-		info = service and service.info()
-		if info is None:
-			chnr = "----"
+		if self.dvb_service == "":
+			self.text = "----"
+			service = self.session.nav.getCurrentService()
+			info = service and service.info()
+			if info is None:
+				self.text = "----"
+			else:
+				self.text = self.getchannelnr()
+			info = None
+			service = None
+			if self.text == "----":
+				display_write(self.text)
+			else:
+				Channelnr = "%04d" % (int(self.text))
+				display_write(Channelnr)
 		else:
-			chnr = self.getchannelnr()
-		info = None
-		service = None
-		if chnr == "----":
-			vfd_write(chnr)
-		else:
-			Channelnr = "%04d" % (int(chnr))
-			vfd_write(Channelnr)
+			self.text = "----"
+			return self.text
 
 	def getchannelnr(self):
-		if InfoBar.instance is None:
-			chnr = "----"
-			return chnr
 		MYCHANSEL = InfoBar.instance.servicelist
+		serviceHandler = eServiceCenter.getInstance()
+		myRoot = MYCHANSEL.servicelist.getRoot()
+		mySSS = serviceHandler.list(myRoot)
+		SRVList = mySSS and mySSS.getContent("SN", True)
 		markersOffset = 0
-		myRoot = MYCHANSEL.getRoot()
 		mySrv = MYCHANSEL.servicelist.getCurrent()
 		chx = MYCHANSEL.servicelist.l.lookupService(mySrv)
-		if not MYCHANSEL.inBouquet():
-			pass
-		else:
-			serviceHandler = eServiceCenter.getInstance()
-			mySSS = serviceHandler.list(myRoot)
-			SRVList = mySSS and mySSS.getContent("SN", True)
-			for i in range(len(SRVList)):
-				if chx == i:
-					break
-				testlinet = SRVList[i]
-				testline = testlinet[0].split(":")
-				if testline[1] == "64":
-					markersOffset = markersOffset + 1
+		for i in range(len(SRVList)):
+			if chx == i:
+				break
+			testlinet = SRVList[i]
+			testline = testlinet[0].split(":")
+			if testline[1] == "64":
+				markersOffset = markersOffset + 1
 		chx = (chx - markersOffset) + 1
 		rx = MYCHANSEL.getBouquetNumOffset(myRoot)
-		chnr = str(chx + rx)
-		return chnr
+		self.text = str(chx + rx)
+		return self.text
 
-	def prikaz(self):
-		if config.plugins.VFD_ini.showClock.value == 'True' or config.plugins.VFD_ini.showClock.value == 'True_All' or config.plugins.VFD_ini.showClock.value == 'True_Switch':
+	def show(self):
+		if config.plugins.SEG.showClock.value == 'True' or config.plugins.SEG.showClock.value == 'True_All' or config.plugins.SEG.showClock.value == 'True_Switch':
 			clock = str(localtime()[3])
 			clock1 = str(localtime()[4])
-			if config.plugins.VFD_ini.timeMode.value != '24h':
+			if config.plugins.SEG.timeMode.value != '24h':
 				if int(clock) > 12:
 					clock = str(int(clock) - 12)
 
@@ -108,31 +122,35 @@ class Channelnumber:
 			else:
 				clock2 = "%02d%02d" % (int(clock), int(clock1))
 				self.sign = 0
-			vfd_write(clock2)
+			display_write(clock2)
 		else:
-			vfd_write("....")
+			display_write("....")
 
-	def vrime(self):
-		if (config.plugins.VFD_ini.showClock.value == 'True' or config.plugins.VFD_ini.showClock.value == 'False' or config.plugins.VFD_ini.showClock.value == 'True_Switch') and not Screens.Standby.inStandby:
-			if config.plugins.VFD_ini.showClock.value == 'True_Switch':
+	def showclock(self):
+		standby_mode = Screens.Standby.inStandby
+		if (config.plugins.SEG.showClock.value == 'True' or config.plugins.SEG.showClock.value == 'False' or config.plugins.SEG.showClock.value == 'True_Switch') and not Screens.Standby.inStandby:
+			if config.plugins.SEG.showClock.value == 'True_Switch':
 				if time() >= self.begin:
 					self.endkeypress = False
 				if self.endkeypress:
-					self.__eventInfoChanged()
+					self.__eventInfoChanged(True)
 				else:
-					self.prikaz()
+					self.show()
 			else:
-				self.__eventInfoChanged()
+				self.__eventInfoChanged(True)
 					
-		if config.plugins.VFD_ini.showClock.value == 'Off':
-			vfd_write("....")
-			self.zaPrik.start(self.updatetime, 1)
+		if config.plugins.SEG.showClock.value == 'Off':
+			display_write("....")
+			self.TimerText.start(self.updatetime, True)
 			return
 		else:
-			self.zaPrik.start(1000, 1)
+			update_time = 1000
+			if not standby_mode and self.dvb_service == "video":
+				update_time = 15000
+			self.TimerText.start(update_time, True)
 
-		if Screens.Standby.inStandby or config.plugins.VFD_ini.showClock.value == 'True_All':
-			self.prikaz()
+		if standby_mode:
+			self.show()
 
 	def keyPressed(self, key, tag):
 		self.begin = time() + int(self.channelnrdelay)
@@ -141,25 +159,18 @@ class Channelnumber:
 ChannelnumberInstance = None
 
 def leaveStandby():
-	print "[F3 LED] Leave Standby"
-
-	if config.plugins.VFD_ini.showClock.value == 'Off':
-		vfd_write("....")
+	if config.plugins.SEG.showClock.value == 'Off':
+		display_write("....")
 
 def standbyCounterChanged(configElement):
-	print "[F3 LED] In Standby"
-
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
+	if config.plugins.SEG.showClock.value == 'Off':
+		display_write("....")
 
-	if config.plugins.VFD_ini.showClock.value == 'Off':
-		vfd_write("....")
-
-def initVFD():
-	print "[F3 LED] initVFD"
-
-	if config.plugins.VFD_ini.showClock.value == 'Off':
-		vfd_write("....")
+def initSEG():
+	if config.plugins.SEG.showClock.value == 'Off':
+		display_write("....")
 
 class VFD_INISetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
@@ -190,18 +201,19 @@ class VFD_INISetup(ConfigListScreen, Screen):
 
 		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
 		{
-			"save": self.save,
-			"cancel": self.cancel,
-			"ok": self.save,
+			"save": self.Save,
+			"cancel": self.Cancel,
+			"ok": self.Save,
 			"yellow": self.Update,
 		}, -2)
 
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show on LED"), config.plugins.VFD_ini.showClock))
-		if config.plugins.VFD_ini.showClock.value != "Off":
-			self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_ini.timeMode))
+		self.list.append(getConfigListEntry(_("Show on LED"), config.plugins.SEG.showClock))
+		self.list.append(getConfigListEntry(_("Time to show Clock in Display"), config.plugins.SEG.showCHnumber))
+		if config.plugins.SEG.showClock.value != "Off":
+			self.list.append(getConfigListEntry(_("Time mode"), config.plugins.SEG.timeMode))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -212,41 +224,37 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self.newConfig()
 
 	def newConfig(self):
-		print self["config"].getCurrent()[0]
 		if self["config"].getCurrent()[0] == _('Show on LED'):
 			self.createSetup()
 
 	def abort(self):
-		print "aborting"
+		pass
 
-	def save(self):
+	def saveAll(self):
 		for x in self["config"].list:
 			x[1].save()
-
 		configfile.save()
-		initVFD()
+		initSEG()
+
+	def Save(self):
+		self.saveAll()
 		self.close()
 
-	def cancel(self):
-		initVFD()
-		for x in self["config"].list:
-			x[1].cancel()
+	def Cancel(self):
+		self.saveAll()
 		self.close()
 
 	def Update(self):
 		self.createSetup()
-		initVFD()
+		initSEG()
 
-class VFD_INI:
+class SEG:
 	def __init__(self, session):
-		print "[F3 LED] initializing"
 		self.session = session
 		self.service = None
 		self.onClose = [ ]
-
 		self.Console = Console()
-
-		initVFD()
+		initSEG()
 
 		global ChannelnumberInstance
 		if ChannelnumberInstance is None:
@@ -256,44 +264,39 @@ class VFD_INI:
 		self.abort()
 
 	def abort(self):
-		print "[F3 LED] aborting"
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
 		if getImageDistro() in ("openatv"):
 			if menuid == "display":
-				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
+				return [(_("LED Display Setup"), startSEG, "VFD_INI", None)]
 			else:
 				return[ ]
 		else:
 			if menuid != "system":
 				return [ ]
 			else:
-				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
+				return [(_("LED Display Setup"), startSEG, "VFD_INI", None)]
 
-def startVFD(session, **kwargs):
+def startSEG(session, **kwargs):
 	session.open(VFD_INISetup)
 
-iniVfd = None
+Seg = None
 gReason = -1
 mySession = None
 
-def controliniVfd():
-	global iniVfd
+def controlSeg():
+	global Seg
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and iniVfd == None:
-		print "[F3 LED] Starting !!"
-		iniVfd = VFD_INI(mySession)
-	elif gReason == 1 and iniVfd != None:
-		print "[F3 LED] Stopping !!"
-
-		iniVfd = None
+	if gReason == 0 and mySession != None and Seg == None:
+		Seg = SEG(mySession)
+	elif gReason == 1 and Seg != None:
+		Seg = None
 
 def sessionstart(reason, **kwargs):
-	print "[F3 LED] sessionstart"
-	global iniVfd
+	global Seg
 	global gReason
 	global mySession
 
@@ -301,7 +304,7 @@ def sessionstart(reason, **kwargs):
 		mySession = kwargs["session"]
 	else:
 		gReason = reason
-	controliniVfd()
+	controlSeg()
 
 def Plugins(**kwargs):
 	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
