@@ -468,7 +468,18 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 		if self.service is not None:
 			self.feinfo = self.service.frontendInfo()
 			frontendData = self.feinfo and self.feinfo.getAll(True)
-		
+
+		# make config
+		self.legacy = True
+		for slot in nimmanager.nim_slots:
+			if slot.canBeCompatible("DVB-S"):
+				try:
+					slot.config.dvbs
+					self.legacy = False
+				except:
+					self.legacy = True
+				break
+
 		self.createConfig(frontendData)
 
 		del self.feinfo
@@ -607,13 +618,19 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 			nim_list = []
 			# collect all nims which are *not* set to "nothing"
 			for n in nimmanager.nim_slots:
-                            if n.isCompatible("DVB-S"):
-				if n.config_mode == "nothing":
+				if not n.isCompatible("DVB-S"):
 					continue
-				if n.config_mode == "advanced" and len(nimmanager.getSatListForNim(n.slot)) < 1:
+				if not self.legacy:
+					config = n.config.dvbs
+				else:
+					config = n.config
+				config_mode = config.configMode.value
+				if config_mode == "nothing":
 					continue
-				if n.config_mode in ("loopthrough", "satposdepends"):
-					root_id = nimmanager.sec.getRoot(n.slot_id, int(n.config.connectedTo.value))
+				if config_mode == "advanced" and len(nimmanager.getSatListForNim(n.slot)) < 1:
+					continue
+				if config_mode in ("loopthrough", "satposdepends"):
+					root_id = nimmanager.sec.getRoot(n.slot_id, int(config.connectedTo.value))
 					if n.type == nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
 						continue
 				nim_list.append((str(n.slot), n.friendly_full_description))
