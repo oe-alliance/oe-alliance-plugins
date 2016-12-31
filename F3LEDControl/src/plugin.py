@@ -149,7 +149,7 @@ class Channelnumber:
 				update_time = 15000
 			self.TimerText.start(update_time, True)
 
-		if standby_mode or config.plugins.SEG.showClock.value == 'True_All'::
+		if standby_mode or config.plugins.SEG.showClock.value == 'True_All':
 			self.show()
 
 	def keyPressed(self, key, tag):
