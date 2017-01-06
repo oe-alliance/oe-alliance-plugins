@@ -255,6 +255,10 @@ if WETEK
 SUBDIRS += RCUSelect ReZap
 endif
 
+if HARDKERNEL
+SUBDIRS += RCUSelect ReZap
+endif
+
 if XC7362
 SUBDIRS += VPLEDControl
 endif
