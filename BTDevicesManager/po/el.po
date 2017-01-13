@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-12 13:26+0200\n"
+"PO-Revision-Date: 2017-01-12 13:44+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.8\n"
+"Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: el_GR\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../src/plugin.py:108
+msgid "Bluetooth Devices Manager Setup"
+msgstr "Ρυθμίσεις Διαχείρισης Συσκευών Bluetooth"
+
+#: ../src/plugin.py:112
+msgid "Autostart"
+msgstr "Αυτόματη εκκίνηση"
+
+#: ../src/plugin.py:114 ../src/plugin.py:183
+msgid "Exit"
+msgstr "Έξοδος"
+
+#: ../src/plugin.py:115
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#: ../src/plugin.py:164 ../src/plugin.py:332 ../src/plugin.py:353
+#: ../src/plugin.py:355
+msgid "Bluetooth Devices Manager"
+msgstr "Διαχείριση Συσκευών Bluetooth"
+
+#: ../src/plugin.py:168 ../src/plugin.py:219
+msgid "Please load BT driver by pressing BLUE button."
+msgstr "Παρακαλώ φορτώστε τον οδηγό BT πιέζοντας το ΜΠΛΕ πλήκτρο."
+
+#: ../src/plugin.py:172 ../src/plugin.py:215 ../src/plugin.py:273
+msgid "No connected to any device"
+msgstr "Δεν έχει συνδεθεί συσκευή"
+
+#: ../src/plugin.py:184
+msgid "(Re)Scan"
+msgstr "(Επαν)ανίχνευση"
+
+#: ../src/plugin.py:185 ../src/plugin.py:274
+msgid "Connect"
+msgstr "Σύνδεση"
+
+#: ../src/plugin.py:189
+msgid "Config"
+msgstr "Παραμετροποίηση"
+
+#: ../src/plugin.py:207
+msgid "No BT devices found!"
+msgstr "Δεν βρέθηκαν συσκευές BT!"
+
+#: ../src/plugin.py:225
+msgid "Scanning for devices..."
+msgstr "Ανίχνευση για συσκευές..."
+
+#: ../src/plugin.py:225
+msgid "Scanning..."
+msgstr "Ανίχνευση..."
+
+#: ../src/plugin.py:237 ../src/plugin.py:249
+msgid "MAC:\t\tDevice name:"
+msgstr "MAC:\t\tΌνομα συσκευής:"
+
+#: ../src/plugin.py:237 ../src/plugin.py:249
+msgid "entry"
+msgstr "στοιχείο"
+
+#: ../src/plugin.py:250
+msgid "Not detected devices around STB"
+msgstr "Δεν εντοπίστηκαν κοντινές συσκευές στο δέκτη"
+
+#: ../src/plugin.py:263
+msgid "Connection with:\n"
+msgstr "Σύνδεση με:\n"
+
+#: ../src/plugin.py:265 ../src/plugin.py:268
+msgid "Disconnect"
+msgstr "Αποσύνδεση"
+
+#: ../src/plugin.py:283
+msgid "Trying to pair with:"
+msgstr "Προσπάθεια σύζευξης με:"
+
+#: ../src/plugin.py:292 ../src/plugin.py:301
+msgid "Can't not pair with selected device!"
+msgstr "Αδυναμία σύζευξης με την επιλεγμένη συσκευή!"
+
+#: ../src/plugin.py:355
+msgid "This is bt devices manager"
+msgstr "Διαχειριστής συσκευών bt"
