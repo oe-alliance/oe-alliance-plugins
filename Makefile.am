@@ -247,6 +247,10 @@ if GB7356
 SUBDIRS += TransCodingSetup
 endif
 
+if VS1000
+SUBDIRS += F3LEDControl XtrendRemote
+endif
+
 if VUPLUS
 SUBDIRS += HbbTV AudioEffect
 endif
