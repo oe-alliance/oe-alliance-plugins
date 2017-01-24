@@ -134,6 +134,10 @@ if FORMULER4TURBO
 SUBDIRS += F3LEDControl
 endif
 
+if TRIVIARMINI
+SUBDIRS += F3LEDControl
+endif
+
 if VG2000
 SUBDIRS += F3LEDControl
 endif
