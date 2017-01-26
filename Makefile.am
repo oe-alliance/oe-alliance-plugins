@@ -134,7 +134,7 @@ if FORMULER4TURBO
 SUBDIRS += F3LEDControl
 endif
 
-if TRIVIARMINI
+if TIVIARMIN
 SUBDIRS += F3LEDControl
 endif
 
