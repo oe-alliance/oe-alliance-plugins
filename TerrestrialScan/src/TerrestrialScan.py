@@ -2,7 +2,6 @@
 from . import _
 
 from Screens.Screen import Screen
-from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
@@ -49,7 +48,7 @@ def channel2freq(channel, bandwidth = 8): # Europe channels
 	elif 20 < channel < 70: # Bands IV,V
 		return ((474 + (bandwidth * (channel - 21))) * 1000000) # returns nine digits
 
-class TerrestrialScan(Screen, ConfigListScreen):
+class TerrestrialScan(Screen):
 	skin = """
 	<screen position="c-300,e-80" size="600,70" flags="wfNoBorder" >
 		<widget name="background" position="0,0" size="600,70" zPosition="-1" />
