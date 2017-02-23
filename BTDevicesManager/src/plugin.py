@@ -17,7 +17,7 @@
 #====================================================
 
 from . import _
-from boxbranding import getImageDistro, getBrandOEM, getMachineBuild
+from boxbranding import getImageDistro, getBrandOEM, getMachineBuild, getBoxType
 
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer, eConsoleAppContainer
@@ -194,7 +194,9 @@ class BluetoothDevicesManager(Screen):
 	def initDevice(self):
 		print "[BluetoothManager] initDevice"
 		cmd = "hciconfig hci0 up"
-		if getMachineBuild() in ("xc7346"):
+		if getBoxType() in ("spycat4k"):
+			cmd = "hciattach ttyS1 qca | hciconfig hci0 up"
+		if getMachineBuild() in ("xc7346") or getBoxType() in ("spycat4kmini"):
 			cmd = "hciattach ttyS1 rtk_h5 | hciconfig hci0 up"
 		if getMachineBuild() in ("xc7362"):
 			cmd = "hciattach ttyS2 rtk_h5 | hciconfig hci0 up"
