@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Huevos</author>
+                    <name>Channels Importer</name>
+                    <packagename>enigma2-plugin-systemplugins-channelsimporter</packagename>
+                    <shortdescription>Imports channel lists</shortdescription>
+                    <description>Makes an exact copy of the channel list loaded on another receiver</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-channelsimporter" />
+	</files>
+</default>

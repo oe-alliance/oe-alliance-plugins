@@ -1,0 +1,10 @@
+<!--suppress XmlUnboundNsPrefix -->
+<setupxml>
+     <setup key="channelsimporter" title="Channels importer">
+        <item level="2" text="Remote receiver IP" description="IP address of the remote receiver the channel list is  being imported from.">config.plugins.ChannelsImporter.ip</item>
+        <item level="2" text="FTP Username" description="FTP username of the remote receiver the channel list is being imported from.">config.plugins.ChannelsImporter.username</item>
+        <item level="2" text="FTP Password" description="FTP password of the remote receiver the channel list is being imported from.">config.plugins.ChannelsImporter.password</item>
+        <item level="2" text="FTP Port" description="FTP port of the remote receiver the channel list is being imported from.">config.plugins.ChannelsImporter.port</item>
+        <item level="2" text="Passive mode" description="Should the FTP connection to the remote receiver be established in passive mode?">config.plugins.ChannelsImporter.passive</item>
+    </setup>
+</setupxml>

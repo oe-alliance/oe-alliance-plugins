@@ -207,6 +207,11 @@ BTDevicesManager/src/Makefile
 BTDevicesManager/meta/Makefile
 BTDevicesManager/po/Makefile
 
+ChannelsImporter/Makefile
+ChannelsImporter/meta/Makefile
+ChannelsImporter/po/Makefile
+ChannelsImporter/src/Makefile
+
 DLNABrowser/Makefile
 DLNABrowser/src/Makefile
 DLNABrowser/icons/Makefile

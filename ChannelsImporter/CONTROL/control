@@ -1,0 +1,5 @@
+Package: enigma2-plugin-systemplugins-channelsimporter
+Version: 1.0-r0
+Description: channelsimporter...
+Maintainer: Huevos
+Depends: enigma2
