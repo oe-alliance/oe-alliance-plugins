@@ -20,12 +20,12 @@ class ChannelsImporterScreen(Setup):
 		Setup.__init__(self, session, setup, plugin, menu_path, PluginLanguageDomain)
 		self.skinName = ["ChannelsImporterScreen", "Setup"]
 
-		self["actions2"] = ActionMap(["SetupActions","ColorActions"],
+		self["actions2"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.keyGo,
 			"menu": self.keyCancel,
-			"red": self.keyCancel,
-			"green": self.keyGo,
+			"cancel": self.keyCancel,
+			"save": self.keyGo,
 		}, -2)
 
 		self["key_red"] = StaticText(_("Exit"))
