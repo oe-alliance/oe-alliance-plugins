@@ -7,7 +7,7 @@ from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.NimManager import nimmanager
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry
+from Components.config import config, configfile, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Screens.ServiceScan import ServiceScan
@@ -100,6 +100,7 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 
 	def keyGo(self):
 		config.plugins.TerrestrialScan.save()
+		configfile.save()
 		self.startScan()
 
 	def startScan(self):
