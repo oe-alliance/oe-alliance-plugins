@@ -34,13 +34,12 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		self.session = session
 		ConfigListScreen.__init__(self, [], session = session, on_change = self.changedEntry)
 
-		self["actions"] = ActionMap(["SetupActions","ColorActions"],
+		self["actions2"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.keyGo,
-			"cancel": self.keyCancel,
 			"menu": self.keyCancel,
-			"red": self.keyCancel,
-			"green": self.keyGo,
+			"cancel": self.keyCancel,
+			"save": self.keyGo,
 		}, -2)
 
 		self["key_red"] = StaticText(_("Exit"))
