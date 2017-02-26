@@ -1,0 +1,163 @@
+# Translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2017-02-26 18:51+0100\n"
+"Language-Team: OpenPlus\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: VillaK <soporte@openplus.es>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_ES\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../src/plugin.py:53
+msgid "FTP Server Editor"
+msgstr "FTP Editor de Server "
+
+#: ../src/plugin.py:54
+msgid "Exit"
+msgstr "Salir"
+
+#: ../src/plugin.py:55
+msgid "OK"
+msgstr "OK"
+
+#: ../src/plugin.py:98
+msgid "Keyboard"
+msgstr "Teclado"
+
+#: ../src/plugin.py:104
+msgid "Use address"
+msgstr "Usar dirección"
+
+#: ../src/plugin.py:106
+msgid "Use IP"
+msgstr "Usar IP"
+
+#: ../src/plugin.py:112
+msgid "IP:"
+msgstr "IP:"
+
+#: ../src/plugin.py:113 ../src/plugin.py:126
+msgid "Username:"
+msgstr "Usuario:"
+
+#: ../src/plugin.py:114 ../src/plugin.py:127
+msgid "Password:"
+msgstr "Contraseña"
+
+#: ../src/plugin.py:115 ../src/plugin.py:128
+msgid "FTPport:"
+msgstr "FTP puerto:"
+
+#: ../src/plugin.py:116 ../src/plugin.py:129
+msgid "Passive:"
+msgstr "Passivo:"
+
+#: ../src/plugin.py:117 ../src/plugin.py:130
+msgid "Telnetport:"
+msgstr "Telnet puerto:"
+
+#: ../src/plugin.py:125
+msgid "Adress:"
+msgstr "Dirección:"
+
+#: ../src/plugin.py:145
+msgid "Enter address"
+msgstr "Ingresa la direccion"
+
+#: ../src/plugin.py:148
+msgid "Enter username"
+msgstr "Ingresa Usuario"
+
+#: ../src/plugin.py:151
+msgid "Enter password"
+msgstr "Ingresa Contraseña"
+
+#: ../src/plugin.py:191
+msgid "Select bouquets to convert"
+msgstr "Seleccione Favoritos para convertir"
+
+#: ../src/plugin.py:199
+msgid "Close"
+msgstr "Cerrar"
+
+#: ../src/plugin.py:201
+msgid "Set server IP"
+msgstr "Establecer IP del servidor"
+
+#: ../src/plugin.py:203
+msgid "Select a remote server IP first"
+msgstr "Seleccione primero una IP de servidor remoto"
+
+#: ../src/plugin.py:235
+msgid "Testing remote connection"
+msgstr "Prueba de conexión remota"
+
+#: ../src/plugin.py:244
+msgid "Connection to remote IP ok"
+msgstr "Conexión a la IP remota ok"
+
+#: ../src/plugin.py:250
+msgid "Could not connect to remote IP"
+msgstr "No se pudo conectar al IP remoto"
+
+#: ../src/plugin.py:253
+msgid "Downloading remote services"
+msgstr "Descarga de servicios remotos"
+
+#: ../src/plugin.py:262 ../src/plugin.py:307
+msgid "Download from remote failed"
+msgstr "Error de descarga desde remoto"
+
+#: ../src/plugin.py:312
+#, python-format
+msgid "FTP reading bouquets %d of %d"
+msgstr "FTP Leyendo Listas Favoritos %d of %d"
+
+#: ../src/plugin.py:322 ../src/plugin.py:628
+msgid "Make your selection"
+msgstr "Haga su selección"
+
+#: ../src/plugin.py:336
+msgid "Download"
+msgstr "Descarga"
+
+#: ../src/plugin.py:337
+msgid "Invert"
+msgstr "Invertir"
+
+#: ../src/plugin.py:369
+msgid "remote of"
+msgstr "remoto de"
+
+#: ../src/plugin.py:472
+msgid "No bouquets selected"
+msgstr "No hay listas seleccionadas"
+
+#: ../src/plugin.py:604
+msgid "Checking for alternatives"
+msgstr "Comprobación de alternativas"
+
+#: ../src/plugin.py:625
+#, python-format
+msgid "FTP reading alternatives %d of %d"
+msgstr "FTP leyendo alternativas %d of %d"
+
+#: ../src/plugin.py:657 ../src/plugin.py:662 ../src/plugin.py:667
+msgid "Remote channel stream converter"
+msgstr "Convertidor de stream canales remotos"
+
+#: ../src/plugin.py:667
+msgid "Convert remote channel list for streaming"
+msgstr "Convertir la lista de canales remotos para streaming"
