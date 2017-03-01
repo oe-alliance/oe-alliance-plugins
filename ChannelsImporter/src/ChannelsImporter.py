@@ -10,6 +10,7 @@ from Components.config import config
 from Components.Label import Label
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+from Screens.Standby import inStandby
 
 from twisted.internet import reactor
 from twisted.internet.protocol import ClientCreator
@@ -32,10 +33,8 @@ class ChannelsImporter(Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Channels importer"))
-
 		self["action"] = Label(_("Starting importer"))
 		self["status"] = Label("")
-
 		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"cancel": self.keyCancel,
@@ -47,8 +46,9 @@ class ChannelsImporter(Screen):
 
 	def checkConnection(self):
 		print "[ChannelsImporter] Checking FTP connection to remote receiver"
-		self["action"].setText(_('Starting importer...'))
-		self["status"].setText(_("Checking FTP connection to remote receiver"))
+		if not inStandby:
+			self["action"].setText(_('Starting importer...'))
+			self["status"].setText(_("Checking FTP connection to remote receiver"))
 		timeout = 5
 		self.currentLength = 0
 		self.total = 0
@@ -63,9 +63,10 @@ class ChannelsImporter(Screen):
 
 	def checkConnectionCallback(self, ftpclient):
 		print "[ChannelsImporter] Connection to remote IP ok"
-		self["action"].setText(_('Connection to remote IP ok'))
-		self["status"].setText(_(""))
-		ftpclient.quit()
+		if not inStandby:
+			self["action"].setText(_('Connection to remote IP ok'))
+			self["status"].setText(_(""))
+			ftpclient.quit()
 		self.fetchRemoteBouquets()
 
 	def fetchRemoteBouquets(self):
@@ -74,8 +75,9 @@ class ChannelsImporter(Screen):
 		self.workList = []
 		self.workList.append('bouquets.tv')
 		self.workList.append('bouquets.radio')
-		self["action"].setText(_('Downloading channel indexes...'))
-		self["status"].setText(_("%d/%d") % (self.readIndex + 1, len(self.workList)))
+		if not inStandby:
+			self["action"].setText(_('Downloading channel indexes...'))
+			self["status"].setText(_("%d/%d") % (self.readIndex + 1, len(self.workList)))
 		self.download(self.workList[0]).addCallback(self.fetchRemoteBouquetsCallback).addErrback(self.fetchRemoteBouquetsErrback)
 
 	def fetchRemoteBouquetsErrback(self, msg):
@@ -85,7 +87,8 @@ class ChannelsImporter(Screen):
 	def fetchRemoteBouquetsCallback(self, msg):
 		self.readIndex += 1
 		if self.readIndex < len(self.workList):
-			self["status"].setText(_("%d/%d") % (self.readIndex + 1, len(self.workList)))
+			if not inStandby:
+				self["status"].setText(_("%d/%d") % (self.readIndex + 1, len(self.workList)))
 			self.download(self.workList[self.readIndex]).addCallback(self.fetchRemoteBouquetsCallback).addErrback(self.fetchRemoteBouquetsErrback)
 		else:
 			self.readBouquets()
@@ -110,8 +113,9 @@ class ChannelsImporter(Screen):
 		for listindex in range(len(bouquetFilenameList)):
 			self.workList.append(bouquetFilenameList[listindex])
 		self.workList.append('lamedb')
-		self["action"].setText(_('Downloading bouquets...'))
-		self["status"].setText(_("%d/%d") % (self.readIndex + 1, len(self.workList)))
+		if not inStandby:
+			self["action"].setText(_('Downloading bouquets...'))
+			self["status"].setText(_("%d/%d") % (self.readIndex + 1, len(self.workList)))
 		self.download(self.workList[0]).addCallback(self.readBouquetsCallback).addErrback(self.readBouquetsErrback)
 
 	def readBouquetsErrback(self, msg):
@@ -121,7 +125,8 @@ class ChannelsImporter(Screen):
 	def readBouquetsCallback(self, msg):
 		self.readIndex += 1
 		if self.readIndex < len(self.workList):
-			self["status"].setText(_("%d/%d") % (self.readIndex + 1, len(self.workList)))
+			if not inStandby:
+				self["status"].setText(_("%d/%d") % (self.readIndex + 1, len(self.workList)))
 			self.download(self.workList[self.readIndex]).addCallback(self.readBouquetsCallback).addErrback(self.readBouquetsErrback)
 		elif len(self.workList) > 0:
 			# Download alternatives files where services have alternatives
@@ -130,8 +135,9 @@ class ChannelsImporter(Screen):
 			self.findAlternatives()
 			self.alternativesCounter = 0
 			if len(self.alternatives) > 0:
-				self["action"].setText(_('Downloading alternatives...'))
-				self["status"].setText(_("%d/%d") % (self.alternativesCounter + 1, len(self.alternatives)))
+				if not inStandby:
+					self["action"].setText(_('Downloading alternatives...'))
+					self["status"].setText(_("%d/%d") % (self.alternativesCounter + 1, len(self.alternatives)))
 				self.download(self.alternatives[self.alternativesCounter]).addCallback(self.downloadAlternativesCallback).addErrback(self.downloadAlternativesErrback)
 			self.processFiles()
 		else:
@@ -145,22 +151,28 @@ class ChannelsImporter(Screen):
 	def downloadAlternativesCallback(self, string):
 		self.alternativesCounter += 1
 		if self.alternativesCounter < len(self.alternatives):
-			self["status"].setText(_("%d/%d") % (self.alternativesCounter + 1, len(self.alternatives)))
+			if not inStandby:
+				self["status"].setText(_("%d/%d") % (self.alternativesCounter + 1, len(self.alternatives)))
 			self.download(self.alternatives[self.alternativesCounter]).addCallback(self.downloadAlternativesCallback).addErrback(self.downloadAlternativesErrback)
 
 	def processFiles(self):
 		allFiles = self.workList + self.alternatives + ["bouquets.tv", "bouquets.radio"]
-		self["action"].setText(_('Removing current channel list...'))
-		self["status"].setText("")
+		if not inStandby:
+			self["action"].setText(_('Removing current channel list...'))
+			self["status"].setText("")
+		print "[ChannelsImporter] Removing current channel list..."
 		for target in ["lamedb", "bouquets.", "userbouquet."]:
 			self.removeFiles(DIR_ENIGMA2, target)
-		self["action"].setText(_('Loading new channel list...'))
+		print "[ChannelsImporter] Loading new channel list..."
+		if not inStandby:
+			self["action"].setText(_('Loading new channel list...'))
 		for filename in allFiles:
 			self.copyFile(DIR_TMP + filename, DIR_ENIGMA2 + filename)
 			self.removeFiles(DIR_TMP, filename)
 		db = eDVBDB.getInstance()
 		db.reloadServicelist()
 		db.reloadBouquets()
+		print "[ChannelsImporter] New channel list loaded. Closing importer."
 		self.close(True)
 
 	def findAlternatives(self):
@@ -182,8 +194,9 @@ class ChannelsImporter(Screen):
 					pass
 
 	def showError(self, message):
-		mbox = self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
-		mbox.setTitle(_("Channels importer"))
+		if not inStandby:
+			mbox = self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
+			mbox.setTitle(_("Channels importer"))
 		self.close()
 
 	def keyCancel(self):
