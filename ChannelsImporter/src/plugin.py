@@ -29,20 +29,17 @@ config.plugins.ChannelsImporter.setupFallback = ConfigYesNo(default = False)
 config.plugins.ChannelsImporter.scheduleRepeatInterval = ConfigSelection(default = "daily", choices = [("2", _("Every 2 minutes (for testing)")), ("5", _("Every 5 minutes (for testing)")), ("60", _("Every hour")), ("120", _("Every 2 hours")), ("180", _("Every 3 hours")), ("360", _("Every 6 hours")), ("720", _("Every 12 hours")), ("daily", _("Daily"))])
 config.plugins.ChannelsImporter.scheduletime = ConfigClock(default = 0) # 1:00
 def scheduleRepeatIntervalChanged(configElement):
-	print "config.plugins.ChannelsImporter.enableSchedule.value", config.plugins.ChannelsImporter.enableSchedule.value
-	print "config.plugins.ChannelsImporter.scheduleRepeatInterval.value", config.plugins.ChannelsImporter.scheduleRepeatInterval.value
 	if config.plugins.ChannelsImporter.enableSchedule.value and config.plugins.ChannelsImporter.scheduleRepeatInterval.value == "daily":
 		SystemInfo["ChannelsImporterRepeatDaily"] = True
 	else:
 		SystemInfo["ChannelsImporterRepeatDaily"] = False
-	print 'SystemInfo["ChannelsImporterRepeatDaily"]', SystemInfo["ChannelsImporterRepeatDaily"]
 config.plugins.ChannelsImporter.enableSchedule.addNotifier(scheduleRepeatIntervalChanged, immediate_feedback = True, initial_call = True)
 config.plugins.ChannelsImporter.scheduleRepeatInterval.addNotifier(scheduleRepeatIntervalChanged, immediate_feedback = True, initial_call = True)
 
 class ChannelsImporterScreen(Setup):
 	def __init__(self, session, setup, plugin=None, menu_path=None, PluginLanguageDomain=None):
 		Setup.__init__(self, session, setup, plugin, menu_path, PluginLanguageDomain)
-		self.skinName = ["ChannelsImporterScreen", "Setup"]
+		self.skinName = ["ChannelsImporterScreen"]
 
 		self["actions2"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
