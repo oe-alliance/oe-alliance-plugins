@@ -44,18 +44,29 @@ class ChannelsImporterScreen(Setup):
 		Setup.__init__(self, session, setup, plugin, menu_path, PluginLanguageDomain)
 		self.skinName = ["ChannelsImporterScreen", "Setup"]
 
-		self["actions2"] = ActionMap(["SetupActions"],
+		self["actions2"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
-			"ok": self.keyGo,
+			"ok": self.keySave,
+			"red": self.keyCancel,
 			"menu": self.keyCancel,
-			"cancel": self.keyCancel,
-			"save": self.keyGo,
+			"red": self.keyCancel,
+			"green": self.keySave,
+			"yellow": self.keyGo,
 		}, -2)
 
 		self["key_red"] = StaticText(_("Exit"))
-		self["key_green"] = StaticText(_("Import"))
+		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText(_("Import"))
 
+	def keySave(self):
+		self.saveConfig()
+		self.close()
+	
 	def keyGo(self):
+		self.saveConfig()
+		self.startImporter()
+
+	def saveConfig(self):
 		config.plugins.ChannelsImporter.save()
 		if config.plugins.ChannelsImporter.setupFallback.value:
 			config.usage.remote_fallback_enabled.value = True
@@ -63,8 +74,7 @@ class ChannelsImporterScreen(Setup):
 			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:8001" % (config.plugins.ChannelsImporter.ip.value[0], config.plugins.ChannelsImporter.ip.value[1], config.plugins.ChannelsImporter.ip.value[2], config.plugins.ChannelsImporter.ip.value[3])
 			config.usage.remote_fallback.save()
 		configfile.save()
-		self.startImporter()
-
+	
 	def keyCancel(self):
 		if self["config"].isChanged():
 			self.session.openWithCallback(self.cancelCallback, MessageBox, _("Really close without saving settings?"))
