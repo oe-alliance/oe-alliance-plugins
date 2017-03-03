@@ -9,7 +9,7 @@
         <item level="2" text="Import EPG" description="If 'yes' the importer will automatically import and load EPG data from the remote receiver">config.plugins.ChannelsImporter.importEPG</item>
         <item level="2" text="Run at restart" description="If 'yes' the importer will automatically run at startup or reboot.">config.plugins.ChannelsImporter.importOnRestart</item>
         <item level="2" text="Show in extensions" description="When enabled, allows you start an import from the extensions list.">config.plugins.ChannelsImporter.extensions</item>
-        <item level="2" text="Auto configure remote fallback tuner" description="'yes' and remote fallback tuner will be automatically configured to stream from the server receiver. 'no' and fallback will not be edited.">config.plugins.ChannelsImporter.setupFallback</item>
+        <item level="2" text="Auto configure remote fallback tuner" description="'yes' and remote fallback tuner will be automatically configured to stream from the remote receiver. 'no' and fallback will not be edited.">config.plugins.ChannelsImporter.setupFallback</item>
         <item level="2" text="Schedule import" description="Allows you to set a schedule to perform an import.">config.plugins.ChannelsImporter.enableSchedule</item>
         <item level="2" text="Repeat how often"  requires="config.plugins.ChannelsImporter.enableSchedule" description="Set the repeat interval of the schedule.">config.plugins.ChannelsImporter.scheduleRepeatInterval</item>
         <item level="2" text="Time import should start"  requires="ChannelsImporterRepeatDaily" description="Set the time of day to perform the scan.">config.plugins.ChannelsImporter.scheduletime</item>
