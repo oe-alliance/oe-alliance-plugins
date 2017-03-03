@@ -148,7 +148,7 @@ class ChannelsImporter(Screen):
 		print "[ChannelsImporter] Download from remote failed. %s" % msg
 		self.showError(_('Download from remote failed %s') % msg)
 
-	def downloadAlternativesCallback(self, string):
+	def downloadAlternativesCallback(self, msg):
 		self.alternativesCounter += 1
 		if self.alternativesCounter < len(self.alternatives):
 			if not inStandby:
@@ -172,7 +172,57 @@ class ChannelsImporter(Screen):
 		db = eDVBDB.getInstance()
 		db.reloadServicelist()
 		db.reloadBouquets()
-		print "[ChannelsImporter] New channel list loaded. Closing importer."
+		print "[ChannelsImporter] New channel list loaded."
+		self.checkEPG()
+
+	def checkEPG(self):
+		if config.plugins.ChannelsImporter.importEPG.value:
+			print "[ChannelsImporter] Searching for epg.dat..."
+			if not inStandby:
+				self["action"].setText(_('Searching for epg.dat'))
+				self["status"].setText("")
+			self.download("settings").addCallback(self.checkEPGCallback).addErrback(self.checkEPGErrback)
+		else:
+			self.close(True)
+
+	def checkEPGErrback(self, msg):
+		print "[ChannelsImporter] Download settings from remote failed. %s" % msg
+		self.showError(_('Download settings from remote failed %s') % msg)
+
+	def checkEPGCallback(self, msg):
+		file = open(DIR_TMP + "settings")
+		lines = file.readlines()
+		file.close()
+		self.remoteEPGpath = DIR_ENIGMA2
+		self.remoteEPGfile = "epg"
+		for line in lines:
+			if "config.misc.epgcachepath" in line:
+				self.remoteEPGpath = line.strip().split("=")[1]
+			if "config.misc.epgcachefilename" in line:
+				self.remoteEPGfile = line.strip().split("=")[1]
+		self.remoteEPGfilename = "%s%s.dat" % (self.remoteEPGpath , self.remoteEPGfile.replace('.dat',''))
+		print "[ChannelsImporter] Remote EPG filename. '%s'" % self.remoteEPGfilename
+		self.removeFiles(DIR_TMP, "settings")
+		self.download2(self.remoteEPGfilename, "epg.dat").addCallback(self.importEPGCallback).addErrback(self.importEPGErrback)
+
+	def importEPGErrback(self, msg):
+		print "[ChannelsImporter] Download epg.dat from remote failed. %s" % msg
+		self.showError(_('Download epg.dat from remote failed %s') % msg)
+
+	def importEPGCallback(self, msg):
+		print "[ChannelsImporter] '%s' downloaded successfully. " % self.remoteEPGfilename
+		print "[ChannelsImporter] Removing current EPG data..."
+		try:
+			os.remove(config.misc.epgcache_filename.value)
+		except OSError:
+			pass
+		self.copyFile(DIR_TMP + "epg.dat", config.misc.epgcache_filename.value)
+		self.removeFiles(DIR_TMP, "epg.dat")
+		from enigma import eEPGCache
+		epgcache = eEPGCache.getInstance()
+		epgcache.load()
+		print "[ChannelsImporter] New EPG data loaded..."
+		print "[ChannelsImporter] Closing importer."
 		self.close(True)
 
 	def findAlternatives(self):
@@ -223,6 +273,20 @@ class ChannelsImporter(Screen):
 			config.plugins.ChannelsImporter.port.value,
 			DIR_ENIGMA2 + file,
 			DIR_TMP + file,
+			config.plugins.ChannelsImporter.username.value,
+			config.plugins.ChannelsImporter.password.value,
+			*args,
+			**kwargs
+		)
+		return client.deferred
+
+	def download2(self, sourcefile, destfile, contextFactory = None, *args, **kwargs):
+		print "[ChannelsImporter] Downloading remote file %s" % sourcefile
+		client = FTPDownloader(
+			self.getRemoteAddress(),
+			config.plugins.ChannelsImporter.port.value,
+			sourcefile,
+			DIR_TMP + destfile,
 			config.plugins.ChannelsImporter.username.value,
 			config.plugins.ChannelsImporter.password.value,
 			*args,
