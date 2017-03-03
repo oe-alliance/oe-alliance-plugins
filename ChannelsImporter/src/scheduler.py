@@ -35,7 +35,7 @@ class AutoChannelsImporterTimer:
 		if config.plugins.ChannelsImporter.importOnRestart.value:
 			self.boottimer = eTimer()
 			self.boottimer.callback.append(self.doautostartscan)
-			print "[ChannelsImporterScheduler][autostart] Run importer on boot"
+			print "[ChannelsImporterScheduler][AutoChannelsImporterTimer] Run plugin on boot"
 			self.boottimer.start(100, 1)
 	
 		global ChannelsImporterTime
