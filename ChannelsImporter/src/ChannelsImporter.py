@@ -206,12 +206,14 @@ class ChannelsImporter(Screen):
 		self.download2(self.remoteEPGfilename, "epg.dat").addCallback(self.importEPGCallback).addErrback(self.importEPGErrback)
 
 	def importEPGErrback(self, msg):
-		print "[ChannelsImporter] Download epg.dat from remote failed. %s" % msg
-		self.showError(_('Download epg.dat from remote failed %s') % msg)
+		print "[ChannelsImporter] Download epg.dat from remote receiver failed. Check file exists on remote receiver.\n%s" % msg
+		self["action"].setText(_('epg.dat not found'))
+		self.showError(_('Download epg.dat from remote receiver failed. Check file exists on remote receiver.\n%s') % msg)
 
 	def importEPGCallback(self, msg):
 		print "[ChannelsImporter] '%s' downloaded successfully. " % self.remoteEPGfilename
 		print "[ChannelsImporter] Removing current EPG data..."
+		self["action"].setText(_('Loading epg.dat...'))
 		try:
 			os.remove(config.misc.epgcache_filename.value)
 		except OSError:
