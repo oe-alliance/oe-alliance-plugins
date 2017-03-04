@@ -53,7 +53,7 @@ class ChannelsImporterScreen(Setup):
 
 	def __init__(self, session, setup, plugin=None, menu_path=None, PluginLanguageDomain=None):
 		Setup.__init__(self, session, setup, plugin, menu_path, PluginLanguageDomain)
-		self.skinName = ["ChannelsImporterScreen"]
+		self.skinName = ["ChannelsImporterScreen", "Setup3buttons"]
 
 		self["actions2"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
