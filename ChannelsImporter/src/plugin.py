@@ -37,6 +37,19 @@ config.plugins.ChannelsImporter.enableSchedule.addNotifier(scheduleRepeatInterva
 config.plugins.ChannelsImporter.scheduleRepeatInterval.addNotifier(scheduleRepeatIntervalChanged, immediate_feedback = True, initial_call = True)
 
 class ChannelsImporterScreen(Setup):
+	skin = """
+		<screen position="340,70" size="600,620">
+			<widget source="key_red" render="Label" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#9f1313" font="Regular;18" transparent="1"/>
+			<widget source="key_green" render="Label" position="150,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#1f771f" font="Regular;18" transparent="1"/>
+			<widget source="key_yellow" render="Label" position="300,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#a08500" font="Regular;18" transparent="1"/>
+			<widget name="HelpWindow" pixmap="skin_default/buttons/vkey_icon.png" position="450,550" zPosition="1" size="541,720" transparent="1" alphatest="on"/>
+			<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
+			<ePixmap name="green" position="150,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
+			<ePixmap name="yellow" position="300,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on"/>
+			<widget name="config" position="10,50" size="580,350" scrollbarMode="showOnDemand"/>
+			<widget name="description" position="50,385" size="500,80" font="Regular;18" halign="center" valign="top" transparent="0" zPosition="1"/>
+		</screen>"""
+
 	def __init__(self, session, setup, plugin=None, menu_path=None, PluginLanguageDomain=None):
 		Setup.__init__(self, session, setup, plugin, menu_path, PluginLanguageDomain)
 		self.skinName = ["ChannelsImporterScreen"]
@@ -44,7 +57,7 @@ class ChannelsImporterScreen(Setup):
 		self["actions2"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
 			"ok": self.keySave,
-			"red": self.keyCancel,
+			"cancel": self.keyCancel,
 			"menu": self.keyCancel,
 			"red": self.keyCancel,
 			"green": self.keySave,
