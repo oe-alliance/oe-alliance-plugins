@@ -28,6 +28,7 @@ config.plugins.ChannelsImporter.extensions = ConfigYesNo(default = False)
 config.plugins.ChannelsImporter.setupFallback = ConfigYesNo(default = False)
 config.plugins.ChannelsImporter.scheduleRepeatInterval = ConfigSelection(default = "daily", choices = [("2", _("Every 2 minutes (for testing)")), ("5", _("Every 5 minutes (for testing)")), ("60", _("Every hour")), ("120", _("Every 2 hours")), ("180", _("Every 3 hours")), ("360", _("Every 6 hours")), ("720", _("Every 12 hours")), ("daily", _("Daily"))])
 config.plugins.ChannelsImporter.scheduletime = ConfigClock(default = 0) # 1:00
+config.plugins.ChannelsImporter.errorMessages = ConfigYesNo(False)
 def scheduleRepeatIntervalChanged(configElement):
 	if config.plugins.ChannelsImporter.enableSchedule.value and config.plugins.ChannelsImporter.scheduleRepeatInterval.value == "daily":
 		SystemInfo["ChannelsImporterRepeatDaily"] = True

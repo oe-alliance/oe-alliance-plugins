@@ -244,7 +244,7 @@ class ChannelsImporter(Screen):
 					pass
 
 	def showError(self, message):
-		if not inStandby:
+		if not inStandby and config.plugins.ChannelsImporter.errorMessages.value:
 			mbox = self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
 			mbox.setTitle(_("Channels importer"))
 		self.close()
