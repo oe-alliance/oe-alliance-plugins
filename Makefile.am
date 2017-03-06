@@ -42,6 +42,10 @@ if HD51
 SUBDIRS += F3LEDControl
 endif
 
+if ET1x000
+SUBDIRS += F3LEDControl
+endif
+
 if HD2400
 SUBDIRS += XtrendFancontrol XtrendRemote MultiTransCodingSetup
 endif
