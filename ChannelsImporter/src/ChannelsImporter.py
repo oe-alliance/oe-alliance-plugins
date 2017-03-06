@@ -1,7 +1,7 @@
 # for localized messages
 from . import _
 
-import os, re
+import os, re, urllib2
 
 from enigma import eServiceReference, eDVBDB
 
@@ -42,12 +42,13 @@ class ChannelsImporter(Screen):
 		self.onFirstExecBegin.append(self.firstExec)
 
 	def firstExec(self):
-		self.checkConnection()
-
-	def checkConnection(self):
-		print "[ChannelsImporter] Checking FTP connection to remote receiver"
 		if not inStandby:
 			self["action"].setText(_('Starting importer...'))
+		self.checkFTPConnection()
+
+	def checkFTPConnection(self):
+		print "[ChannelsImporter] Checking FTP connection to remote receiver"
+		if not inStandby:
 			self["status"].setText(_("Checking FTP connection to remote receiver"))
 		timeout = 5
 		self.currentLength = 0
@@ -70,7 +71,7 @@ class ChannelsImporter(Screen):
 		self.fetchRemoteBouquets()
 
 	def fetchRemoteBouquets(self):
-		print "[ChannelsImporter] Downloading bouquets.tv and bouquets.radio"
+		print "[ChannelsImporter] Fetch bouquets.tv and bouquets.radio"
 		self.readIndex = 0
 		self.workList = []
 		self.workList.append('bouquets.tv')
@@ -177,6 +178,7 @@ class ChannelsImporter(Screen):
 
 	def checkEPG(self):
 		if config.plugins.ChannelsImporter.importEPG.value:
+			self.forceSaveEPGonRemoteReceiver()
 			print "[ChannelsImporter] Searching for epg.dat..."
 			if not inStandby:
 				self["action"].setText(_('Searching for epg.dat'))
@@ -269,7 +271,7 @@ class ChannelsImporter(Screen):
 		return '%d.%d.%d.%d' % (config.plugins.ChannelsImporter.ip.value[0], config.plugins.ChannelsImporter.ip.value[1], config.plugins.ChannelsImporter.ip.value[2], config.plugins.ChannelsImporter.ip.value[3])
 
 	def download(self, file, contextFactory = None, *args, **kwargs):
-		print "[ChannelsImporter] Downloading remote file %s" % file
+		print "[ChannelsImporter] Downloading remote file '%s'" % file
 		client = FTPDownloader(
 			self.getRemoteAddress(),
 			config.plugins.ChannelsImporter.port.value,
@@ -283,7 +285,7 @@ class ChannelsImporter(Screen):
 		return client.deferred
 
 	def download2(self, sourcefile, destfile, contextFactory = None, *args, **kwargs):
-		print "[ChannelsImporter] Downloading remote file %s" % sourcefile
+		print "[ChannelsImporter] Downloading remote file '%s'" % sourcefile
 		client = FTPDownloader(
 			self.getRemoteAddress(),
 			config.plugins.ChannelsImporter.port.value,
@@ -295,3 +297,23 @@ class ChannelsImporter(Screen):
 			**kwargs
 		)
 		return client.deferred
+
+	def forceSaveEPGonRemoteReceiver(self):
+		if config.plugins.ChannelsImporter.importEPG.value:
+			if not inStandby:
+				self["action"].setText(_('Force EPG save on remote receiver'))
+				self["status"].setText("")
+			url = "http://%s/api/saveepg" % self.getRemoteAddress()
+			print '[ChannelsImporter][saveEPGonRemoteReceiver] URL: %s' % url
+			try:
+				req = urllib2.Request(url)
+				response = urllib2.urlopen(req)
+				print '[ChannelsImporter][saveEPGonRemoteReceiver] Response: %d, %s' % (response.getcode(), response.read().strip().replace("\r","").replace("\n",""))
+			except urllib2.HTTPError, err:
+				print '[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:',err
+			except urllib2.URLError, err:
+				print '[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:',err.reason[0]
+			except urllib2, err:
+				print '[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:',err
+			except:
+				print '[ChannelsImporter][saveEPGonRemoteReceiver] undefined error'
