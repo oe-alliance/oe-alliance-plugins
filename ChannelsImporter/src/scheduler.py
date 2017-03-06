@@ -67,7 +67,8 @@ class AutoChannelsImporterTimer:
 		nowt = time()
 		now = localtime(nowt)
 		if config.plugins.ChannelsImporter.scheduleRepeatInterval.value.isdigit(): # contains wait time in minutes
-			return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, 0, now.tm_wday, now.tm_yday, now.tm_isdst))) + int(config.plugins.ChannelsImporter.scheduleRepeatInterval.value)
+			repeatIntervalMinutes = int(config.plugins.ChannelsImporter.scheduleRepeatInterval.value)
+			return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min + repeatIntervalMinutes, 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 		return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, backupclock[0], backupclock[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 
 	def channelsimporterdate(self, atLeast = 0):
