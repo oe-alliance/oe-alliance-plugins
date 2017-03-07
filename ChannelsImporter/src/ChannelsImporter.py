@@ -32,6 +32,7 @@ class ChannelsImporter(Screen):
 		print "[ChannelsImporter][__init__] Starting..."
 		self.session = session
 		Screen.__init__(self, session)
+		self.skinName = ["ChannelsImporter", "AutoBouquetsMaker"]
 		Screen.setTitle(self, _("Channels importer"))
 		self["action"] = Label(_("Starting importer"))
 		self["status"] = Label("")
