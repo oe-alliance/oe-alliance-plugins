@@ -178,6 +178,10 @@ class ChannelsImporter(Screen):
 
 	def checkEPG(self):
 		if config.plugins.ChannelsImporter.importEPG.value:
+			if not inStandby:
+				self["action"].setText(_('Force EPG save on remote receiver'))
+				self["status"].setText("")
+			
 			self.forceSaveEPGonRemoteReceiver()
 			print "[ChannelsImporter] Searching for epg.dat..."
 			if not inStandby:
@@ -299,21 +303,17 @@ class ChannelsImporter(Screen):
 		return client.deferred
 
 	def forceSaveEPGonRemoteReceiver(self):
-		if config.plugins.ChannelsImporter.importEPG.value:
-			if not inStandby:
-				self["action"].setText(_('Force EPG save on remote receiver'))
-				self["status"].setText("")
-			url = "http://%s/api/saveepg" % self.getRemoteAddress()
-			print '[ChannelsImporter][saveEPGonRemoteReceiver] URL: %s' % url
-			try:
-				req = urllib2.Request(url)
-				response = urllib2.urlopen(req)
-				print '[ChannelsImporter][saveEPGonRemoteReceiver] Response: %d, %s' % (response.getcode(), response.read().strip().replace("\r","").replace("\n",""))
-			except urllib2.HTTPError, err:
-				print '[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:',err
-			except urllib2.URLError, err:
-				print '[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:',err.reason[0]
-			except urllib2, err:
-				print '[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:',err
-			except:
-				print '[ChannelsImporter][saveEPGonRemoteReceiver] undefined error'
+		url = "http://%s/api/saveepg" % self.getRemoteAddress()
+		print '[ChannelsImporter][saveEPGonRemoteReceiver] URL: %s' % url
+		try:
+			req = urllib2.Request(url)
+			response = urllib2.urlopen(req)
+			print '[ChannelsImporter][saveEPGonRemoteReceiver] Response: %d, %s' % (response.getcode(), response.read().strip().replace("\r","").replace("\n",""))
+		except urllib2.HTTPError, err:
+			print '[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:',err
+		except urllib2.URLError, err:
+			print '[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:',err.reason[0]
+		except urllib2, err:
+			print '[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:',err
+		except:
+			print '[ChannelsImporter][saveEPGonRemoteReceiver] undefined error'
