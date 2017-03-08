@@ -36,7 +36,8 @@ class LCD4linuxweb(resource.Resource):
 			JavaRefresh = ""
 			html += "<meta http-equiv=\"refresh\" content=\"%s\">\n" % LCD4linux.WebIfRefresh.value
 		else:
-			html += "<meta http-equiv=\"refresh\" content=\"300\">\n"
+			if LCD4linux.WebIfType.value == "0":
+				html += "<meta http-equiv=\"refresh\" content=\"300\">\n"
 			JavaRefresh = " id=\"reloader%%d\" onload=\"setTimeout('document.getElementById(\\'reloader%%d\\').src=\\'/lcd4linux/%%s?\\'+new Date().getTime()', %d)\"" % (int(LCD4linux.WebIfRefresh.value)*1000)
 		html += "<title>LCD4linux</title>\n"
 		html += "</head>"

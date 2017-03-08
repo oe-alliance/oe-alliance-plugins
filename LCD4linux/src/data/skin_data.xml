@@ -11,6 +11,10 @@
 	<screen name="MenuSummary" position="0,0" size="$w$,$h$">
 		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
 	</screen>
+<!--SetupSummary-->
+	<screen name="SetupSummary" position="0,0" size="$w$,$h$">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
 <!--SimpleSummary-->
 	<screen name="SimpleSummary" position="0,0" size="$w$,$h$">
 		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
@@ -19,12 +23,40 @@
 	<screen name="ChannelSelectionRadio_summary" position="0,0" size="$w$,$h$">
 		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
 	</screen>
+<!--InfoBarSummary-->
+	<screen name="InfoBarSummary" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--ChannelSelection_summary-->
+	<screen name="ChannelSelection_summary" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--MenuSummary-->
+	<screen name="MenuSummary" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--SetupSummary-->
+	<screen name="SetupSummary" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--SimpleSummary-->
+	<screen name="SimpleSummary" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--ChannelSelectionRadio_summary-->
+	<screen name="ChannelSelectionRadio_summary" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
 
 <!--L4L01-->
 
 <!--L4L02 Mediaplayer-->
 <!--InfoBarMoviePlayerSummary-->
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="$w$,$h$">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--MovieSelection_summary-->
+	<screen name="MovieSelection_summary" position="0,0" size="$w$,$h$">
 		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
 	</screen>
 <!--MediaPlayerLCDScreen-->
@@ -47,11 +79,51 @@
 	<screen name="webradioFSdisplay" position="0,0" size="$w$,$h$">
 		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
 	</screen>
+<!--webradio YANP-->
+	<screen name="YampLCDScreen" position="0,0" size="$w$,$h$">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--InfoBarMoviePlayerSummary-->
+	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--MovieSelection_summary-->
+	<screen name="MovieSelection_summary" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--MediaPlayerLCDScreen-->
+	<screen name="MediaPlayerLCDScreen" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--MediaPlayer-->
+	<screen name="MediaPlayer_summary" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--EMCMoviePlayerSummary-->
+	<screen name="EMCMoviePlayerSummary" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!-- EMC screen -->
+	<screen name="EMCMoviePlayerSummaryGBHDQ" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--webradio FSdisplay-->
+	<screen name="webradioFSdisplay" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--webradio YANP-->
+	<screen name="YampLCDScreen" position="0,0" size="$w$,$h$" id="3">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
 <!--L4L02-->
 
 <!--L4L03 Idle-->
 <!--StandbySummary-->
 	<screen name="StandbySummary" position="0,0" size="$w$,$h$">
+		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
+	</screen>
+<!--StandbySummary-->
+	<screen name="StandbySummary" position="0,0" size="$w$,$h$" id="3">
 		<widget source="global.CurrentTime" render="PixmapLcd4linux" position="0,0" size="$w$,$h$" alphatest="blend" />
 	</screen>
 <!--L4L03-->
