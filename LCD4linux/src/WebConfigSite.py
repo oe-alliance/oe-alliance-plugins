@@ -26,8 +26,8 @@ L1 = []
 L2 = []
 L3 = []
 L4 = []
-M1 = ["LCD4linux.OSD","LCD4linux.Scr","LCD4linux.Bil","LCD4linux.Wet","LCD4linux.Net","LCD4linux.Pop","LCD4linux.Fri","LCD4linux.Fon","LCD4linux.Mai","LCD4linux.Cal","LCD4linux.RBo","LCD4linux.Www","LCD4linux.Web","LCD4linux.MJP","LCD4linux.xml","LCD4linux.Tun","LCD4linux.Key","LCD4linux.Son"]
-M2 = [_("OSD"),_("Screen"),_("Picture"),_("Weather"),_("Netatmo"),_("Popup-Text"),_("FritzCall"),_("Font"),_("Mail"),_("Calendar"),_("Remote Box"),_("WWW Converter"),_("WebIF"),_("MJPEG Stream"),_("Box-Skin-LCD"),_("Tuner"),_("Key"),_("Sonos")]
+M1 = ["LCD4linux.OSD","LCD4linux.Scr","LCD4linux.Bil","LCD4linux.Wet","LCD4linux.Net","LCD4linux.Pop","LCD4linux.Fri","LCD4linux.Fon","LCD4linux.Mai","LCD4linux.Cal","LCD4linux.RBo","LCD4linux.Www","LCD4linux.Web","LCD4linux.MJP","LCD4linux.xml","LCD4linux.Tun","LCD4linux.Key","LCD4linux.Son","LCD4linux.YMC"]
+M2 = [_("OSD"),_("Screen"),_("Picture"),_("Weather"),_("Netatmo"),_("Popup-Text"),_("FritzCall"),_("Font"),_("Mail"),_("Calendar"),_("Remote Box"),_("WWW Converter"),_("WebIF"),_("MJPEG Stream"),_("Box-Skin-LCD"),_("Tuner"),_("Key"),_("Sonos"),_("MusicCast")]
 
 Mode = "1"
 ModeOld = ""
@@ -152,7 +152,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			L4logE("IP2:",req.client.host)
 			if IP.find(".") == -1:
 				IP = None
-		if IP is None:	
+		if IP is None:
 			Block = False
 		else:
 			Block = True
@@ -178,7 +178,8 @@ class LCD4linuxConfigweb(resource.Resource):
 			html += "<meta http-equiv=\"expires\" content=\"0\">\n"
 			html += "</head>"
 			html += "Config-WebIF Access Deny ( IP: %s )<br>\n" % IP
-			html += "(Global Setup > %s)\n" % _l(_("WebIF IP Allow"))
+			html += "Please check Setting in Global > %s\n" % _l(_("WebIF IP Allow"))
+			html += "Default is: 127. 192.168. 172. 10.\n"
 			html += "</body>\n"
 			html += "</html>\n"
 			return html
@@ -324,6 +325,10 @@ class LCD4linuxConfigweb(resource.Resource):
 				return "0"
 			else:
 				return str(getMJPEGreader(ex[0]))
+		elif command[0] == "getexec" and ex is not None:
+			L4logE("getexec",ex[0])
+			exec("getexec = " + ex[0])
+			return str(getexec)
 		elif command[0] == "copyMP":
 			for a in req.args.keys():
 				if ".Standby" in a:
