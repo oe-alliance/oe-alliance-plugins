@@ -67,7 +67,7 @@ class ChannelsImporter(Screen):
 		print "[ChannelsImporter] Connection to remote IP ok"
 		if not inStandby:
 			self["action"].setText(_('Connection to remote IP ok'))
-			self["status"].setText(_(""))
+			self["status"].setText("")
 			ftpclient.quit()
 		self.fetchRemoteBouquets()
 
