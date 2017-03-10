@@ -1,0 +1,5 @@
+config.LCDType1=50
+config.xmlLCDType=800x480
+config.xmlType01=true
+config.xmlType02=true
+config.xmlType03=true

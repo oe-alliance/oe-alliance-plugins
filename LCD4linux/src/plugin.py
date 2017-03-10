@@ -157,6 +157,8 @@ elif getBoxType() == 'et8500':
 	LCD4default = Data+"default.et8500"
 elif getBoxType() == 'vusolo4k':
 	LCD4default = Data+"default.solo4k"
+elif getBoxType() == 'vuultimo4k':
+	LCD4default = Data+"default.ultimo4k"
 elif getBoxType() == ('mutant2400','quadbox2400'):
 	LCD4default = Data+"default.hd2400"
 else:
