@@ -117,7 +117,7 @@ msgstr "Herunterladen der Kanallisten fehlgeschlagen"
 #: ../src/plugin.py:312
 #, python-format
 msgid "FTP reading bouquets %d of %d"
-msgstr ""
+msgstr "FTP lese Bouquet %d von %d"
 
 #: ../src/plugin.py:322 ../src/plugin.py:628
 msgid "Make your selection"
