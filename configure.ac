@@ -230,6 +230,11 @@ DMBlindscan/src/Makefile
 DMBlindscan/meta/Makefile
 DMBlindscan/po/Makefile
 
+DsayersCustomMixImporter/Makefile
+DsayersCustomMixImporter/meta/Makefile
+DsayersCustomMixImporter/po/Makefile
+DsayersCustomMixImporter/src/Makefile
+
 FirmwareUpgrade/Makefile
 FirmwareUpgrade/src/Makefile
 FirmwareUpgrade/meta/Makefile

@@ -1,0 +1,5 @@
+Package: enigma2-plugin-systemplugins-dsayerscustommiximporter
+Version: 1.0-r0
+Description: Dsayers CustomMix Importer
+Maintainer: www.world-of-satellite.com
+Depends: enigma2, autobouquetsmaker
