@@ -58,7 +58,7 @@ class DsayersCustomMixImporterScreen(Setup):
 		except TypeError:
 			Setup.__init__(self, session, setup, plugin)
 
-		self.skinName = ["Setup4buttons"]
+		self.skinName = ["DsayersCustomMixImporterScreen", "Setup4buttons"]
 
 		self["actions2"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
