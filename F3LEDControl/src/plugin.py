@@ -267,7 +267,7 @@ class SEG:
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
-		if getImageDistro() in ("openatv"):
+		if getImageDistro() in ("openatv" , "openhdf"):
 			if menuid == "display":
 				return [(_("LED Display Setup"), startSEG, "VFD_INI", None)]
 			else:
