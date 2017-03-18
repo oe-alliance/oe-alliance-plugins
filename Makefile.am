@@ -186,6 +186,10 @@ if H5
 SUBDIRS += F3LEDControl
 endif
 
+if H7
+SUBDIRS += F3LEDControl
+endif
+
 if LC
 SUBDIRS += F3LEDControl
 endif
