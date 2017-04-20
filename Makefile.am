@@ -126,7 +126,7 @@ if INIHDP
 SUBDIRS += MultiTransCodingSetup
 endif
 
-if FORMULER1
+if FORMULER1TC
 SUBDIRS += MultiTransCodingSetup
 endif
 
@@ -135,6 +135,14 @@ SUBDIRS += F3LEDControl
 endif
 
 if FORMULER4
+SUBDIRS += F3LEDControl
+endif
+
+if FORMULER3IP
+SUBDIRS += F3LEDControl
+endif
+
+if FORMULER4IP
 SUBDIRS += F3LEDControl
 endif
 
