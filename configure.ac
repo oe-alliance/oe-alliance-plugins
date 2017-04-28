@@ -256,6 +256,11 @@ FPGAUpgrade/src/Makefile
 FPGAUpgrade/meta/Makefile
 FPGAUpgrade/po/Makefile
 
+GigaBlueRemote/Makefile
+GigaBlueRemote/src/Makefile
+GigaBlueRemote/meta/Makefile
+GigaBlueRemote/po/Makefile
+
 GigaBlueVFDControl/Makefile
 GigaBlueVFDControl/src/Makefile
 GigaBlueVFDControl/meta/Makefile
