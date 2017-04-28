@@ -9,7 +9,7 @@ from Screens.MessageBox import MessageBox
 from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists
 from enigma import eTimer
-from boxbranding import getBoxType
+from boxbranding import getBoxType, getImageDistro
 
 config.plugins.remotecontrolcode = ConfigSubsection()
 config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "50af", choices = [ ("50af", _("Code 1")), ("51ae", _("Code 2")) ] )
@@ -28,7 +28,7 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if getBoxType() in ("gbquadplus", "gbquad4k"):
+		if getBoxType() in ("gbquad4k"):
 			return True
 		else:
 			return False
@@ -88,7 +88,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 				self.restoreCode()
 				self.session.openWithCallback(self.close, MessageBox, _("FILE DOES NOT EXIST : /proc/stb/ir/rc/customcode"), MessageBox.TYPE_ERROR)
 			else:
-				self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change now the mode on your RCU.") + '\n\n' + _("Press and hold 'GIGA' & '5' for 5 seconds.") + "\n" + _("Then choose 'Keep' "), MessageBox.TYPE_YESNO, timeout = 60, default = False)
+				self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change now the mode on your RCU.") + '\n\n' + _("Press and hold 'GIGA' & '5' for 5 seconds.") + "\n" + _("Then choose 'Confirm' "), MessageBox.TYPE_YESNO, timeout = 60, default = False)
 		else:
 			self.close()
 
@@ -109,7 +109,7 @@ class MessageBoxConfirmCode(MessageBox):
 		MessageBox.__init__(self,session,text,type,timeout,close_on_any_key,default,enable_input,msgBoxID)
 		self.skinName = "MessageBox"
 		if type == MessageBox.TYPE_YESNO:
-			self.list = [ (_("Keep"), True), (_("Cancel"), False) ]
+			self.list = [ (_("Confirm"), True), (_("Cancel"), False) ]
 			self["list"].setList(self.list)
 
 	def timerTick(self):
@@ -138,10 +138,13 @@ def main(session, **kwargs):
 	session.open(RemoteControlCode)
 
 def RemoteControlSetup(menuid, **kwargs):
-	if menuid == "system":
-		return [(_("Remote Control Code"), main, "remotecontrolcode", 50)]
+	if getImageDistro() in ("openmips"):
+		if menuid != "devices_menu":
+			return []
 	else:
-		return []
+		if menuid != "system":
+			return []
+	return [(_("Remote Control Code"), main, "remotecontrolcode", 50)]
 
 def Plugins(**kwargs):
 	if fileExists("/proc/stb/ir/rc/customcode"):

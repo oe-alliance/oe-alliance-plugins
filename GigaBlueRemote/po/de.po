@@ -56,12 +56,12 @@ msgid "Press and hold 'GIGA' & '5' for 5 seconds."
 msgstr "Drücken und halten Sie 'GIGA' & '5' für 5 Sekunden."
 
 #: plugin.py:91
-msgid "Then choose 'Keep' "
-msgstr "Dann wählen Sie 'Behalten' "
+msgid "Then choose 'Confirm' "
+msgstr "Dann wählen Sie 'Bestätigen' "
 
 #: plugin.py:112
-msgid "Keep"
-msgstr "Behalten"
+msgid "Confirm"
+msgstr "Bestätigen"
 
 #: plugin.py:118
 #, python-format
