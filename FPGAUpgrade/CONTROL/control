@@ -2,4 +2,4 @@ Package: enigma2-plugin-systemplugins-fpgaupgrade
 Version: 1.0-r0
 Description: Upgrade your system FPGA
 Maintainer: oskwon
-Depends: enigma2
+Depends: 

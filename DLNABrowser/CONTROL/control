@@ -2,4 +2,4 @@ Package: enigma2-plugin-extensions-dlnabrowser
 Version: 1.0-r0
 Description: this is dlna/upnp browser using djmount
 Maintainer: kos
-Depends: enigma2 , djmount , fuse-utils , libfuse2 , libupnp3 , gst-plugin-neonhttpsrc
+Depends: djmount , fuse-utils , libfuse2 , libupnp3 , gst-plugin-neonhttpsrc

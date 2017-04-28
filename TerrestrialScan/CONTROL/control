@@ -2,4 +2,4 @@ Package: enigma2-plugin-systemplugins-terrestrialscan
 Version: 1.0-r0
 Description: terrestrialscan...
 Maintainer: Huevos
-Depends: enigma2
+Depends: 

@@ -2,4 +2,4 @@ Package: enigma2-plugin-systemplugins-remotecontrolcode
 Version: 1.0-r0
 Description: Change Remote Control Code
 Maintainer: GigaBlue
-Depends: enigma2
+Depends: 

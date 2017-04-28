@@ -2,4 +2,4 @@ Package: enigma2-plugin-systemplugins-fancontrol
 Version: 1.0-r0
 Description: Fancontrol Settings inStandby Mode
 Maintainer: ikseong
-Depends: enigma2
+Depends: 

@@ -2,4 +2,4 @@ Package: enigma2-plugin-systemplugins-vfdcontrol
 Version: 1.0-r0
 Description: vfd controller
 Maintainer: skl
-Depends: enigma2
+Depends: 

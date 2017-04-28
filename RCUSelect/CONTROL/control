@@ -2,4 +2,4 @@ Package: enigma2-plugin-extensions-rcuselect
 Version: 0.1-r0
 Description: Change Remote Control Code, Switch Wetek , Full E2 remote
 Maintainer: WeTek
-Depends: enigma2
+Depends: 

@@ -2,4 +2,4 @@ Package: enigma2-plugin-systemplugins-fancontrol
 Version: 1.0-r0
 Description: Control your internal system fan.
 Maintainer: mikey
-Depends: enigma2
+Depends: 

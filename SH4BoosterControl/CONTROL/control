@@ -2,4 +2,4 @@ Package: enigma2-plugin-systemplugins-sh4boostercontrol
 Version: 1.0-r0
 Description: SH4BoosterControl
 Maintainer: captain
-Depends: enigma2
+Depends: 

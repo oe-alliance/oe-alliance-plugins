@@ -2,4 +2,4 @@ Package: enigma2-plugin-extensions-streamtv
 Version: 1.0-r0
 Description: iptv player
 Maintainer: kos
-Depends: enigma2 , librtmp
+Depends: librtmp

@@ -2,4 +2,4 @@ Package: enigma2-plugin-extension-OpenUitzendingGemist
 Version: 1.0-r0
 Description: Watch NL-IP TV
 Maintainer: Xtrend
-Depends: enigma2
+Depends: 
