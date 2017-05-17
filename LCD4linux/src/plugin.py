@@ -14402,11 +14402,15 @@ def Plugins(**kwargs):
 	where = [PluginDescriptor.WHERE_SESSIONSTART, 
 	PluginDescriptor.WHERE_AUTOSTART], 
 	fnc = autostart)]
-	list.append(PluginDescriptor(name="LCD4linux", 
-	description=_("LCD4linux"), 
+	list.append(PluginDescriptor(name="LCD4Linux", 
+	description="LCD4Linux", 
+	where = PluginDescriptor.WHERE_MENU,
+	fnc = setup))
+	list.append(PluginDescriptor(name = _("LCD4Linux"),
+	description = _("LCD4Linux"),
 	where = PluginDescriptor.WHERE_PLUGINMENU,
-	icon = "plugin.png",
-	fnc = main))
+	fnc = main,
+	icon = "plugin.png"))
 	list.append(PluginDescriptor(name=_("LCD4linux Screen Switch"), 
 	description=_("LCD4linux Screen Switch"), 
 	where = PluginDescriptor.WHERE_EXTENSIONSMENU,
