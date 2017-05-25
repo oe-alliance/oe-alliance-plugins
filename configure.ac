@@ -183,7 +183,7 @@ fi
 AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm800sev2 -o "$BOXTYPE" == dm500hd -o "$BOXTYPE" == vuuno -o "$BOXTYPE" == vuultimo -o "$BOXTYPE" == vusolo2 -o "$BOXTYPE" == vuduo2 -o "$BOXTYPE" == dags1 -o "$BOXTYPE" == dags2 -o "$BOXTYPE" == dags3 -o "$BOXTYPE" == dags4 -o "$BOXTYPE" == dags5 -o "$BOXTYPE" == dags7335 -o "$BOXTYPE" == dags7362 -o "$BOXTYPE" == dags73625 -o "$BOXTYPE" == dags7356 -o "$BOXTYPE" == triplex)
 
 AM_CONDITIONAL(HAVE_ARMV7A, test "$BOXTYPE" == cube)
-AM_CONDITIONAL(HAVE_ARMV7AHF, test "$BOXTYPE" == hd51  -o "$BOXTYPE" == hd52 -o "$BOXTYPE" == vusolo4k -o "$BOXTYPE" == vuuno4k -o "$BOXTYPE" == vuultimo4k -o "$BOXTYPE" == dm900 -o "$BOXTYPE" == sf4008 -o "$BOXTYPE" == dags7252 -o "$BOXTYPE" == gb7252 -o "$BOXTYPE" == xc7439)
+AM_CONDITIONAL(HAVE_ARMV7AHF, test "$BOXTYPE" == hd51  -o "$BOXTYPE" == hd52 -o "$BOXTYPE" == vs1500 -o "$BOXTYPE" == vusolo4k -o "$BOXTYPE" == vuuno4k -o "$BOXTYPE" == vuultimo4k -o "$BOXTYPE" == dm900 -o "$BOXTYPE" == sf4008 -o "$BOXTYPE" == dags7252 -o "$BOXTYPE" == gb7252 -o "$BOXTYPE" == xc7439)
 AM_CONDITIONAL(HAVE_CORTEXA9HF, test "$BOXTYPE" == wetekplay)
 
 AC_CONFIG_FILES([
