@@ -243,7 +243,7 @@ SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
 endif
 
 if GIGABLUE
-SUBDIRS += GigaBlueVFDControl AudioEffect
+SUBDIRS += GigaBlueVFDControl AudioEffect GigaBlueRemote
 endif
 
 if XP1000
@@ -269,10 +269,6 @@ endif
 
 if GB7356
 SUBDIRS += TransCodingSetup
-endif
-
-if GB7252
-SUBDIRS += GigaBlueRemote
 endif
 
 if VS1000
