@@ -147,9 +147,9 @@ L4LdoThread = True
 LCD4config = "/etc/enigma2/lcd4config"
 LCD4plugin ="/usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/"
 Data = LCD4plugin+"data/"
-if getBoxType() in ('gbquad','gb800ue','gb800ueplus'):
+if getBoxType() in ('gbquad','gb800ue','gb800ueplus','gbue4k'):
 	LCD4default = Data+"default.gigablue"
-elif getBoxType() == 'gbquadplus':
+elif getBoxType() in ('gbquadplus','gbquad4k'):
 	LCD4default = Data+"default.quadplus"
 elif getBoxType() == 'vuduo2':
 	LCD4default = Data+"default.vuduo2"
@@ -159,7 +159,7 @@ elif getBoxType() == 'vusolo4k':
 	LCD4default = Data+"default.solo4k"
 elif getBoxType() == 'vuultimo4k':
 	LCD4default = Data+"default.ultimo4k"
-elif getBoxType() == ('mutant2400','quadbox2400'):
+elif getBoxType() in ('mutant2400','quadbox2400'):
 	LCD4default = Data+"default.hd2400"
 else:
 	LCD4default = Data+"default.lcd"
