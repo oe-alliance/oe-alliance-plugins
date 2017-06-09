@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-import json
+try:
+	import simplejson
+except:
+	import json as simplejson
 try:
 	import urllib2
 	url2 = True
@@ -24,7 +27,7 @@ class YMC:
 		try:
 			content,resp=self.Urlget("http://%s/YamahaExtendedControl/v1/netusb/getPlayInfo" % self.IP)
 			if resp == 200:
-				r=json.loads(content)
+				r=simplejson.loads(content)
 				return r
 			else:
 				return {}
@@ -36,7 +39,7 @@ class YMC:
 		try:
 			content,resp=self.Urlget("http://%s/YamahaExtendedControl/v1/main/getStatus" % self.IP)
 			if resp == 200:
-				r=json.loads(content)
+				r=simplejson.loads(content)
 				return r
 			else:
 				return {}

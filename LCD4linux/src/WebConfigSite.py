@@ -439,8 +439,8 @@ class LCD4linuxConfigweb(resource.Resource):
 								LCD4linuxConfigweb.RestartGUI = True
 							xmlClear()
 						elif a.find(".MJPEG") >0:
-							MJPEG_start()
 							MJPEG_stop("")
+							MJPEG_start()
 						elif a.find(".Font") >0:
 							setFONT(LCD4linux.Font.value)
 						if a.find("WetterCity") >0:
