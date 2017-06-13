@@ -194,7 +194,7 @@ class BluetoothDevicesManager(Screen):
 	def initDevice(self):
 		print "[BluetoothManager] initDevice"
 		cmd = "hciconfig hci0 up"
-		if getBoxType() in ("spycat4k"):
+		if getBoxType() in ("spycat4k","spycat4kcombo"):
 			cmd = "hciattach ttyS1 qca | hciconfig hci0 up"
 		if getMachineBuild() in ("xc7346") or getBoxType() in ("spycat4kmini"):
 			cmd = "hciattach ttyS1 rtk_h5 | hciconfig hci0 up"
