@@ -215,7 +215,7 @@ class BluetoothDevicesManager(Screen):
 			
 	def keyGreen(self):
 		print "[BluetoothManager] keyGreen"  
-		if config.btdevicesmanager.autostart.getValue() or  brandoem == 'xcore':
+		if config.btdevicesmanager.autostart.getValue() or  brandoem in ("xcore","edision"):
 			self["ConnStatus"].setText(_("No connected to any device"))
 			self.initDevice()
 		else:
@@ -341,7 +341,7 @@ def main(session, **kwargs):
 	session.open(BluetoothDevicesManager)
 
 def autostart(reason, **kwargs):
-	if brandoem != 'xcore':
+	if brandoem not in ("xcore","edision"):
 		if reason == 0:
 			if config.btdevicesmanager.autostart.getValue():
 				print "[BluetoothManager] Autostart: Loading driver" ## We have it on a blacklist because We want to have faster system loading, so We load driver while we enable it.
