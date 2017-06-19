@@ -198,7 +198,7 @@ class BluetoothDevicesManager(Screen):
 			cmd = "hciattach ttyS1 qca | hciconfig hci0 up"
 		if getMachineBuild() in ("xc7346") or getBoxType() in ("spycat4kmini"):
 			cmd = "hciattach ttyS1 rtk_h5 | hciconfig hci0 up"
-		if getMachineBuild() in ("xc7362"):
+		if getMachineBuild() in ("xc7362") or getBoxType() in ("osnino"):
 			cmd = "hciattach ttyS2 rtk_h5 | hciconfig hci0 up"
 		self.taskManager.append(cmd, self.cbPrintAvailBTDev, self.cbRunNextTask)
 		cmd = "hcitool dev" ## check if hci0 is on the dev list, then make scan
