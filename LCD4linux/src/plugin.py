@@ -14479,7 +14479,7 @@ def autostart(reason, **kwargs):
 		MJPEG_stop(9)
 
 def setup(menuid, **kwargs):
-	if getImageDistro() in ("openvix", "openatv", "ventonsupport", "egami", "openhdf"):
+	if getImageDistro() in ("openvix", "openatv", "ventonsupport", "egami", "openhdf", "openbh"):
 		if menuid == "display" and SystemInfo["Display"]:
 			return [("LCD4Linux", main, "lcd4linux", None)]
 		elif menuid == "system" and not SystemInfo["Display"]:
