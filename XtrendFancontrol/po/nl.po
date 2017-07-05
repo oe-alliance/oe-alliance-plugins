@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:25+0200\n"
-"PO-Revision-Date: 2016-06-03 07:15+0200\n"
-"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
+"POT-Creation-Date: 2017-07-05 16:01+0200\n"
+"PO-Revision-Date: 2017-07-05 16:01+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../src/plugin.py:37
@@ -29,6 +29,10 @@ msgstr "ventilator uit"
 #: ../src/plugin.py:60 ../src/plugin.py:62
 msgid "Fan - On"
 msgstr "ventilator aan"
+
+#: ../src/plugin.py:60
+msgid "Fan - Off in standby"
+msgstr "ventilator uit in stand-by"
 
 #: ../src/plugin.py:60 ../src/plugin.py:62
 msgid "Fan - Auto"
@@ -62,12 +66,12 @@ msgstr "ventilatorinstellingen:"
 msgid "Power status"
 msgstr "Netstroomstatus"
 
-#: ../src/plugin.py:118 ../src/plugin.py:169 ../src/plugin.py:171
-#: ../src/plugin.py:499
+#: ../src/plugin.py:118 ../src/plugin.py:174 ../src/plugin.py:176
+#: ../src/plugin.py:516
 msgid "System temperature"
 msgstr "Systeemtemperatuur"
 
-#: ../src/plugin.py:119 ../src/plugin.py:175 ../src/plugin.py:177
+#: ../src/plugin.py:119 ../src/plugin.py:180 ../src/plugin.py:182
 msgid "Harddisk temperature"
 msgstr "Harde schijf temperatuur"
 
@@ -79,63 +83,63 @@ msgstr "Opslaan"
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../src/plugin.py:171 ../src/plugin.py:175
+#: ../src/plugin.py:176 ../src/plugin.py:180
 msgid "n.a."
 msgstr "n.v.t."
 
-#: ../src/plugin.py:222
+#: ../src/plugin.py:227
 msgid "Fan mode"
 msgstr "ventilatormode"
 
-#: ../src/plugin.py:223
+#: ../src/plugin.py:228
 msgid "Switch Fan mode on time setting"
 msgstr "Wissel ventilator-mode per tijdsinstelling"
 
-#: ../src/plugin.py:224
+#: ../src/plugin.py:229
 msgid "Watch HDD state"
 msgstr "Controleer HDD status"
 
-#: ../src/plugin.py:225
+#: ../src/plugin.py:230
 msgid "Watch system temp"
 msgstr "Bewaak systeemtemperatuur"
 
-#: ../src/plugin.py:229
+#: ../src/plugin.py:234
 msgid "All"
 msgstr "Alle"
 
-#: ../src/plugin.py:232
+#: ../src/plugin.py:237
 msgid "Select internal HDD device"
 msgstr "Kies interne HDD"
 
-#: ../src/plugin.py:240
+#: ../src/plugin.py:245
 msgid "Start time"
 msgstr "Starttijd"
 
-#: ../src/plugin.py:241
+#: ../src/plugin.py:246
 msgid "End time"
 msgstr "Eindtijd"
 
-#: ../src/plugin.py:247
+#: ../src/plugin.py:252
 msgid "Switch ON mode on HDD max.temp. (0 - disable)"
 msgstr "Activeer HDD max.temp. (0 - disable)"
 
-#: ../src/plugin.py:249
+#: ../src/plugin.py:254
 msgid "Switch OFF mode on HDD sleep"
 msgstr "Deactiveer mode als HDD slaapt"
 
-#: ../src/plugin.py:250
+#: ../src/plugin.py:255
 msgid "Show temp. HDD to extensions menu"
 msgstr "Toon HDD temperatuur in extensies"
 
-#: ../src/plugin.py:252
+#: ../src/plugin.py:257
 msgid "Initial fan speed"
 msgstr "Initiële ventilatorsnelheid"
 
-#: ../src/plugin.py:256
+#: ../src/plugin.py:261
 msgid "Switch ON on system temp"
 msgstr "Inschakel systeemtemperatuur"
 
-#: ../src/plugin.py:306
+#: ../src/plugin.py:311
 msgid ""
 "You may not use this mode!\n"
 "Not found an internal hard drive!"
@@ -143,7 +147,7 @@ msgstr ""
 "U kunt deze modus niet gebruiken!\n"
 "Geen interne schijf gevonden!"
 
-#: ../src/plugin.py:311
+#: ../src/plugin.py:316
 msgid ""
 "Start time OFF mode equal End time OFF mode\n"
 "You may not use this time settings!"
@@ -151,7 +155,7 @@ msgstr ""
 "Starttijd UIT is gelijk aan eindtijd UIT\n"
 "U kunt deze tijdinstelling niet gebruiken!"
 
-#: ../src/plugin.py:317
+#: ../src/plugin.py:322
 msgid ""
 "Harddisk standby after - no standby\n"
 "You may not use this mode!"
@@ -159,31 +163,31 @@ msgstr ""
 "HDD standby na - geen standby\n"
 "U kunt deze mode niet gebruiken!"
 
-#: ../src/plugin.py:485 ../src/plugin.py:513 ../src/plugin.py:517
+#: ../src/plugin.py:502 ../src/plugin.py:530 ../src/plugin.py:534
 msgid "Fan Control"
 msgstr "Fan Control"
 
-#: ../src/plugin.py:490
+#: ../src/plugin.py:507
 msgid "Harddisks:"
 msgstr "HDD's:"
 
-#: ../src/plugin.py:492
+#: ../src/plugin.py:509
 msgid "No harddisk with temperature sensor found!"
 msgstr "Geen HDD met temperatuursensor gevonden!"
 
-#: ../src/plugin.py:497
+#: ../src/plugin.py:514
 msgid "No system temperature sensor found!"
 msgstr "Geen systeemtemperatuursensor gevonden!"
 
-#: ../src/plugin.py:513 ../src/plugin.py:517
+#: ../src/plugin.py:530 ../src/plugin.py:534
 msgid "switch Fan On/Off"
 msgstr "schakel ventilator Aan/Uit"
 
-#: ../src/plugin.py:514 ../src/plugin.py:518
+#: ../src/plugin.py:531 ../src/plugin.py:535
 msgid "Fan Setup"
 msgstr "ventilatorinstellingen"
 
-#: ../src/plugin.py:515
+#: ../src/plugin.py:532
 msgid "Show Temp"
 msgstr "Toon temperatuur"
 

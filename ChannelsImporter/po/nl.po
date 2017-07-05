@@ -1,0 +1,188 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-05 14:49+0200\n"
+"PO-Revision-Date: 2017-07-05 14:59+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../src/ChannelsImporter.py:36 ../src/ChannelsImporter.py:258
+#: ../src/plugin.py:116 ../src/plugin.py:126
+msgid "Channels importer"
+msgstr "Zenders importeren"
+
+#: ../src/ChannelsImporter.py:37
+msgid "Starting importer"
+msgstr "Start importeren"
+
+#: ../src/ChannelsImporter.py:47
+msgid "Starting importer..."
+msgstr "Start importeren..."
+
+#: ../src/ChannelsImporter.py:53
+msgid "Checking FTP connection to remote receiver"
+msgstr "Controleren FTP verbinding met externe ontvanger"
+
+#: ../src/ChannelsImporter.py:64
+msgid "Could not connect to the remote IP"
+msgstr "Kon niet verbinden met extern IP"
+
+#: ../src/ChannelsImporter.py:69
+msgid "Connection to remote IP ok"
+msgstr "Verbinding met extern IP ok"
+
+#: ../src/ChannelsImporter.py:81
+msgid "Downloading channel indexes..."
+msgstr "Downloaden zender inhoudsregister..."
+
+#: ../src/ChannelsImporter.py:82 ../src/ChannelsImporter.py:93
+#: ../src/ChannelsImporter.py:120 ../src/ChannelsImporter.py:131
+#: ../src/ChannelsImporter.py:142 ../src/ChannelsImporter.py:157
+#, python-format
+msgid "%d/%d"
+msgstr "%d/%d"
+
+#: ../src/ChannelsImporter.py:87 ../src/ChannelsImporter.py:125
+#: ../src/ChannelsImporter.py:147 ../src/ChannelsImporter.py:151
+#, python-format
+msgid "Download from remote failed %s"
+msgstr "Downloaden externe inhoud mislukt %s"
+
+#: ../src/ChannelsImporter.py:119
+msgid "Downloading bouquets..."
+msgstr "Downloaden favorietenlijst..."
+
+#: ../src/ChannelsImporter.py:135
+msgid "Checking for alternatives..."
+msgstr "Zoekt naar alternatieven..."
+
+#: ../src/ChannelsImporter.py:141
+msgid "Downloading alternatives..."
+msgstr "Downloaden alternatieven..."
+
+#: ../src/ChannelsImporter.py:163
+msgid "Removing current channel list..."
+msgstr "Verwijderen van huidige zenderlijst..."
+
+#: ../src/ChannelsImporter.py:170
+msgid "Loading new channel list..."
+msgstr "Laden nieuwe zenderlijst..."
+
+#: ../src/ChannelsImporter.py:183
+msgid "Force EPG save on remote receiver"
+msgstr "Forceer EPG opslaan op externe ontvanger"
+
+#: ../src/ChannelsImporter.py:189
+msgid "Searching for epg.dat"
+msgstr "Zoeken naar epg.dat"
+
+#: ../src/ChannelsImporter.py:197
+#, python-format
+msgid "Download settings from remote failed %s"
+msgstr "Downloaden externe zenderlijst mislukt %s"
+
+#: ../src/ChannelsImporter.py:217
+msgid "epg.dat not found"
+msgstr "epg.dat niet gevonden"
+
+#: ../src/ChannelsImporter.py:218
+#, python-format
+msgid ""
+"Download epg.dat from remote receiver failed. Check file exists on remote "
+"receiver.\n"
+"%s"
+msgstr ""
+"Downloaden van epg.dat op externe ontvanger mislukt. Controleer of "
+"bestand bestaat op externe ontvanger.\n"
+"%s"
+
+#: ../src/ChannelsImporter.py:223
+msgid "Loading epg.dat..."
+msgstr "Laden epg.dat..."
+
+#: ../src/plugin.py:29
+msgid "Every 2 minutes (for testing)"
+msgstr "Elke 2 minuten (voor testen)"
+
+#: ../src/plugin.py:29
+msgid "Every 5 minutes (for testing)"
+msgstr "Elke 5 minuten (voor testen)"
+
+#: ../src/plugin.py:29
+msgid "Every hour"
+msgstr "Elk uur"
+
+#: ../src/plugin.py:29
+msgid "Every 2 hours"
+msgstr "Elke 2 uur"
+
+#: ../src/plugin.py:29
+msgid "Every 3 hours"
+msgstr "Elke 3 uur"
+
+#: ../src/plugin.py:29
+msgid "Every 6 hours"
+msgstr "Elke 6 uur"
+
+#: ../src/plugin.py:29
+msgid "Every 12 hours"
+msgstr "Elke 12 uur"
+
+#: ../src/plugin.py:29
+msgid "Daily"
+msgstr "Dagelijks"
+
+#: ../src/plugin.py:71
+msgid "Exit"
+msgstr "Afsluiten"
+
+#: ../src/plugin.py:72
+msgid "Save"
+msgstr "Bevestigen"
+
+#: ../src/plugin.py:73
+msgid "Import"
+msgstr "Importeer"
+
+#: ../src/plugin.py:94
+msgid "Really close without saving settings?"
+msgstr "Echt afsluiten zonder opslaan?"
+
+#: ../src/plugin.py:120
+msgid "Main menu"
+msgstr "Hoofdmenu"
+
+#: ../src/plugin.py:120
+msgid "Setup"
+msgstr "Instellingen"
+
+#: ../src/plugin.py:120
+msgid "Service searching"
+msgstr "Zenders zoeken"
+
+# Originele Engelse benaming om misverstanden bij gebruikers te voorkomen.
+#: ../src/plugin.py:128
+msgid "ChannelsImporter"
+msgstr "ChannelsImporter"
+
+#: ../src/scheduler.py:140
+msgid "Enough Retries, delaying till next schedule."
+msgstr "Vaak genoeg geprobeerd, stel uit tot de volgende keer."
+
+#: ../src/scheduler.py:166
+msgid "%a %e %b  %-H:%M"
+msgstr "%a %e %b  %-H:%M"
