@@ -123,7 +123,7 @@ def ChannelsImporterMain(session, **kwargs):
 def Plugins(**kwargs):
 	pList = []
 	if config.plugins.ChannelsImporter.extensions.getValue():
-		pList.append(PluginDescriptor(name=_("Channels importer"), description="Fetch channels from the server.", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=startimport, needsRestart=True))
+		pList.append(PluginDescriptor(name=_("Channels importer"), description=_("Fetch channels from the server."), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=startimport, needsRestart=True))
 	pList.append( PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
-	pList.append( PluginDescriptor(name=_("ChannelsImporter"), description="For importing bouquets from another receiver", where = PluginDescriptor.WHERE_MENU, fnc=ChannelsImporterStart, needsRestart=True) )
+	pList.append( PluginDescriptor(name=_("ChannelsImporter"), description=_("For importing bouquets from another receiver"), where = PluginDescriptor.WHERE_MENU, fnc=ChannelsImporterStart, needsRestart=True) )
 	return pList
