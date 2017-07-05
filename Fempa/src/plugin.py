@@ -121,7 +121,7 @@ def main(session, **kwargs):
 def Plugins(**kwargs):
 	return PluginDescriptor(
 		name="Fem Pa",
-		description="...",
+		description=_("Norwegian P4 FEM PAA radio show player"),
 		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
 		icon="./icon.png",
 		fnc=main)
