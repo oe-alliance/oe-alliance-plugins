@@ -105,3 +105,6 @@ msgstr ""
 #: src/plugin.py:992
 msgid "DLNA/uPnP Browser"
 msgstr ""
+
+msgid "This is dlna/upnp client using djmount."
+msgstr ""
