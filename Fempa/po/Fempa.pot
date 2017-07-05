@@ -21,3 +21,6 @@ msgstr ""
 #: src/plugin.py:40
 msgid "VirtualKb Search"
 msgstr ""
+
+msgid "Norwegian P4 FEM PAA radio show player"
+msgstr "
