@@ -1,0 +1,112 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DLNABrowser\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: openATV\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: src/plugin.py:150
+msgid "Show Device"
+msgstr "Rodyti įrenginį"
+
+#: src/plugin.py:151
+msgid "Add all"
+msgstr "Įkelti viską"
+
+#: src/plugin.py:152
+msgid "Up"
+msgstr "Aukštyn"
+
+#: src/plugin.py:153
+msgid "Top"
+msgstr "Viršus"
+
+#: src/plugin.py:350
+msgid "/"
+msgstr "/"
+
+#: src/plugin.py:389
+msgid "Yes"
+msgstr "Taip"
+
+#: src/plugin.py:389
+msgid "No"
+msgstr "Ne"
+
+#: src/plugin.py:390
+msgid "Stop playing this movie?"
+msgstr "Nutraukti šį filmą ?"
+
+#: src/plugin.py:468
+msgid "Please wait, Loading image."
+msgstr "Palaukite, diegiamas atvaizdas."
+
+#: src/plugin.py:702 src/plugin.py:813
+msgid "Exit"
+msgstr "Užverti"
+
+#: src/plugin.py:703
+msgid "Save"
+msgstr "Išsaugoti"
+
+#: src/plugin.py:704 src/plugin.py:705
+msgid " "
+msgstr " "
+
+#: src/plugin.py:722 src/plugin.py:723
+msgid "5"
+msgstr "5"
+
+#: src/plugin.py:722 src/plugin.py:723
+msgid "10"
+msgstr "10"
+
+#: src/plugin.py:722 src/plugin.py:723
+msgid "15"
+msgstr "15"
+
+#: src/plugin.py:723
+msgid "20"
+msgstr "20"
+
+#: src/plugin.py:726
+msgid "DeviceList Refresh Interval"
+msgstr "Įrenginių sąrašo atnaujinimo intervalas"
+
+#: src/plugin.py:727
+msgid "Slideshow Interval"
+msgstr "Intervalas tarp skaidrių"
+
+#: src/plugin.py:728
+msgid "Enable Autostart for DLNA Browser"
+msgstr "Įjungti DLNA naršyklės autopaleidimą"
+
+#: src/plugin.py:814
+msgid "Start"
+msgstr "Pradėti"
+
+#: src/plugin.py:815
+msgid "Setting"
+msgstr "Nustatymas"
+
+#: src/plugin.py:816
+msgid "Reload Device"
+msgstr "Paleisti iš naujo"
+
+#: src/plugin.py:992
+msgid "DLNA/uPnP Browser"
+msgstr "DLNA/uPnP naršyklė"
+
+msgid "This is dlna/upnp client using djmount."
+msgstr "tai DLNA/UPnP klientas, naudojantis Djmount."
