@@ -1,997 +1,4041 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
-"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
-"PO-Revision-Date: 2016-05-07 13:07+0200\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2017-07-05 15:35+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
-
-msgid "%"
-msgstr "%"
-
-msgid "% + BER"
-msgstr "% + BER"
-
-msgid "% + Load@1min"
-msgstr "% + Load@1min"
-
-msgid "% + Load@5min"
-msgstr "% + Load@5min"
-
-msgid "%d Mails  %d New  %s"
-msgstr "%d Správ  %d Nové  %s"
-
-msgid "%s - Current value: %s"
-msgstr "%s - Aktuálna hodnota: %s"
-
-msgid "-  Type"
-msgstr "-  Typ"
-
-msgid "- Alignment"
-msgstr "- Zarovnanie"
-
-msgid "- Analog Clock"
-msgstr "- Analogové Hodiny"
-
-msgid "- Background Color"
-msgstr "- Farba pozadia"
-
-msgid "- Background/Transparency"
-msgstr "- Pozadie/Priehľadnosť"
-
-msgid "- Backlight Off [disable set Off=On]"
-msgstr "- Podsvietenie vyp. [ Zap.=Vyp.]"
-
-msgid "- Backlight On"
-msgstr "- Podsvietenie zap."
-
-msgid "- Backlight Weekend Off [disable set Off=On]"
-msgstr "- Podsvietenie cez víkend vyp. [ Zap.=Vyp.]"
-
-msgid "- Backlight Weekend On"
-msgstr "- Podsvietenie cez víkend zap."
-
-msgid "- Bar Range Max"
-msgstr "- Bar rozsah Max"
-
-msgid "- Bar Range Min"
-msgstr "- Bar rozsah Min"
-
-msgid "- Base"
-msgstr "- Základ"
-
-msgid "- Border"
-msgstr "- Okraj"
-
-msgid "- CPU"
-msgstr "- CPU"
-
-msgid "- Caption Color"
-msgstr "- farba titulku"
-
-msgid "- Color"
-msgstr "- Farba"
-
-msgid "- Current Day Background Color"
-msgstr "- Farba pozadia aktuálneho dňa"
-
-msgid "- Cut Height [disable = 0]"
-msgstr "- výška orezania [vyp. = 0]"
-
-msgid "- Cut Width [disable = 0]"
-msgstr "- šírka orezania [vyp. = 0]"
-
-msgid "- Cut from X"
-msgstr "- orezanie z X"
-
-msgid "- Cut from Y"
-msgstr "- orezanie z Y"
-
-msgid "- Default Cover [ok]>"
-msgstr "- predvolená obálka [ok]>"
-
-msgid "- Device Name"
-msgstr "- meno zariadenia"
-
-msgid "- Download Cover from Google"
-msgstr "- stiahnuť obálku z Googla"
-
-msgid "- Extra Color Chill"
-msgstr "- Extra farba ochladenia"
-
-msgid "- Extra Color City"
-msgstr "- Extra farba mesta"
-
-msgid "- Extra Zoom"
-msgstr "- Extra zväčšenie"
-
-msgid "- Fast Grab lower quality"
-msgstr "- rýchly snímok nízkej kvality"
-
-msgid "- File [ok]>"
-msgstr "- súbor [ok]>"
-
-msgid "- File or Path [ok]>"
-msgstr "- súbor alebo cesta [ok]>"
-
-msgid "- Font"
-msgstr "- písmo"
-
-msgid "- Font Size"
-msgstr "- veľkosť písma"
-
-msgid "- Full Screen"
-msgstr "- celá obrazovka"
-
-msgid "- Gradient"
-msgstr "- spád"
-
-msgid "- HTTP Height"
-msgstr "- HTTP výška"
-
-msgid "- HTTP Width"
-msgstr "- HTTP šírka"
-
-msgid "- LCD 1 Background Color"
-msgstr "- LCD 1 farba pozadia"
-
-msgid "- LCD 1 Background-Picture [ok]>"
-msgstr "- LCD 1 obrázok pozadia [ok]>"
-
-msgid "- LCD 1 Brightness"
-msgstr "- LCD 1 Jas"
-
-msgid "- LCD 1 Night Reduction"
-msgstr "- LCD 1 Nočná redukcia"
-
-msgid "- LCD 1 Refresh"
-msgstr "- LCD 1 obnova"
-
-msgid "- LCD 1 Rotate"
-msgstr "- LCD 1 otočiť"
-
-msgid "- LCD 2 Background Color"
-msgstr "- LCD 2 farba pozadia"
-
-msgid "- LCD 2 Background-Picture [ok]>"
-msgstr "- LCD 2 obrázok pozadia [ok]>"
-
-msgid "- LCD 2 Brightness"
-msgstr "- LCD 2 Jas"
-
-msgid "- LCD 2 Night Reduction"
-msgstr "- LCD 2 Nočná redukcia"
-
-msgid "- LCD 2 Refresh"
-msgstr "- LCD 2 obnova"
-
-msgid "- LCD 2 Rotate"
-msgstr "- LCD 2 otočiť"
-
-msgid "- LCD 3 Background Color"
-msgstr "- LCD 3 farba pozadia"
-
-msgid "- LCD 3 Background-Picture [ok]>"
-msgstr "- LCD 3 obrázok pozadia [ok]>"
-
-msgid "- LCD 3 Brightness"
-msgstr "- LCD 3 Jas"
-
-msgid "- LCD 3 Night Reduction"
-msgstr "- LCD 3 Nočná redukcia"
-
-msgid "- LCD 3 Refresh"
-msgstr "- LCD 3 obnova"
-
-msgid "- LCD 3 Rotate"
-msgstr "- LCD 3 otočiť"
-
-msgid "- Layout"
-msgstr "- rozmiestnenie"
-
-msgid "- Length"
-msgstr "- dĺžka"
-
-msgid "- Length [Bar]"
-msgstr "- dĺžka [Bar]"
-
-msgid "- Lines"
-msgstr "- riadky"
-
-msgid "- Mail Konto"
-msgstr "- e-mailové konto"
-
-msgid "- Module"
-msgstr "- Modul"
-
-msgid "- Name"
-msgstr "- Meno"
-
-msgid "- OSD Size"
-msgstr "- veľkosť OSD"
-
-msgid "- Online Name:Address"
-msgstr "- sieťové meno :Adresa"
-
-msgid "- Picon Cache Path [ok]>"
-msgstr "- Picon Cache cesta [ok]>"
-
-msgid "- Picon First"
-msgstr "- najprv Picon"
-
-msgid "- Picon Path 2 [ok]>"
-msgstr "- Picon cesta 2 [ok]>"
-
-msgid "- Picon Path [ok]>"
-msgstr "- Picon cesta [ok]>"
-
-msgid "- Picon Size"
-msgstr "- Picon veľkosť"
-
-msgid "- Picture Alignment"
-msgstr "- zarovnanie obrázka"
-
-msgid "- Picture Position"
-msgstr "- umiestnenie obrázka"
-
-msgid "- Picture Size"
-msgstr "- veľkosť obrázka"
-
-msgid "- Picture [ok]>"
-msgstr "- Obrázok [ok]>"
-
-msgid "- Popup LCD"
-msgstr "- vyskakovacie LCD"
-
-msgid "- Popup Screen"
-msgstr "- vyskakovacia obrazovka"
-
-msgid "- Position"
-msgstr "- umiestnenie"
-
-msgid "- Position x"
-msgstr "- pozícia x"
-
-msgid "- Position y"
-msgstr "- pozícia y"
-
-msgid "- Quick Update"
-msgstr "- rýchla aktualizácia"
-
-msgid "- Rain Color"
-msgstr "- farba dažďa"
-
-msgid "- Rain Color 2"
-msgstr "- farba dažďa 2"
-
-msgid "- Rain Zoom"
-msgstr "- zväčšenie dažďa"
-
-msgid "- Rain use Color 2 from"
-msgstr "- dážď používa farbu 2 z"
-
-msgid "- Screen 2 Changing Time"
-msgstr "- čas zmeny obrazovky 2"
-
-msgid "- Screen 3 Changing Time"
-msgstr "- čas zmeny obrazovky 3"
-
-msgid "- Screen 4 Changing Time"
-msgstr "- čas zmeny obrazovky 4"
-
-msgid "- Screen 5 Changing Time"
-msgstr "- čas zmeny obrazovky 5"
-
-msgid "- Screen 6 Changing Time"
-msgstr "- čas zmeny obrazovky 6"
-
-msgid "- Screen 7 Changing Time"
-msgstr "- čas zmeny obrazovky 7"
-
-msgid "- Screen 8 Changing Time"
-msgstr "- čas zmeny obrazovky 8"
-
-msgid "- Screen 9 Changing Time"
-msgstr "- čas zmeny obrazovky 9"
-
-msgid "- Screens used for Changing"
-msgstr "- použité obrazovky na výmenu"
-
-msgid "- Search Path [ok]>"
-msgstr "- prehľadávaná cesta [ok]>"
-
-msgid "- Sensors"
-msgstr "- snímače"
-
-msgid "- Shaded"
-msgstr "- tieňované"
-
-msgid "- Shadow Edges"
-msgstr "- hrany tieňa"
-
-msgid "- Show State"
-msgstr "- zobraz stav"
-
-msgid "- Show chill temperature from difference"
-msgstr "- zobraz teplotu ochladenia ak je rozdiel"
-
-msgid "- Show in Mode"
-msgstr "- zobraz v móde"
-
-msgid "- Size"
-msgstr "- veľkosť"
-
-msgid "- Size max Height"
-msgstr "- max výška"
-
-msgid "- Size x"
-msgstr "- veľkosť x"
-
-msgid "- Size y"
-msgstr "- veľkosť y"
-
-msgid "- Spacing"
-msgstr "- rozstup"
-
-msgid "- Split Screen"
-msgstr "- rozdelená obrazovka"
-
-msgid "- Station"
-msgstr "- Stanica"
-
-msgid "- Text Size"
-msgstr "- veľkosť textu"
-
-msgid "- Timeout [ms]"
-msgstr "- čas vypršania [ms]"
-
-msgid "- Transparency"
-msgstr "- priehľadnosť"
-
-msgid "- Tunerinfo"
-msgstr "- Tuner nfo"
-
-msgid "- Type"
-msgstr "- Typ"
-
-msgid "- URL"
-msgstr "- URL"
-
-msgid "- Unit min"
-msgstr "- Jednotka min"
-
-msgid "- Weather Type"
-msgstr "- typ počasia"
-
-msgid "- Zoom"
-msgstr "- zväčšenie"
-
-msgid "- extra Info"
-msgstr "- extra Info"
-
-msgid "- free Warning"
-msgstr "- bez varovania"
-
-msgid "- max Width"
-msgstr "- max šírka"
-
-msgid "- maximum Lines"
-msgstr "- maximum riadkov"
-
-msgid "- only active Tuner"
-msgstr "- len aktívny tuner"
-
-msgid "- which LCD"
-msgstr "- ktoré LCD"
-
-msgid "0"
-msgstr "0"
-
-msgid "0.5"
-msgstr "0.5"
-
-msgid "1"
-msgstr ""
-
-msgid "1 - normal"
-msgstr "1 - normalne"
-
-msgid "1 / min"
-msgstr "1 / min"
-
-msgid "1-2"
-msgstr "1-2"
-
-msgid "1-3"
-msgstr "1-3"
-
-msgid "1-4"
-msgstr "1-4"
-
-msgid "1-5"
-msgstr "1-5"
-
-msgid "10"
-msgstr ""
-
-msgid "10%"
-msgstr "10%"
-
-msgid "100%"
-msgstr "100%"
-
-msgid "10min"
-msgstr "10min"
-
-msgid "10s"
-msgstr "10s"
-
-msgid "128x32"
-msgstr "128x32"
-
-msgid "128x64"
-msgstr "128x64"
-
-msgid "132x64"
-msgstr "132x64"
-
-msgid "14"
-msgstr "14"
-
-msgid "15%"
-msgstr "15%"
-
-msgid "15min"
-msgstr "15min"
-
-msgid "15s"
-msgstr "15s"
-
-msgid "180"
-msgstr "180"
-
-msgid "1min"
-msgstr "1min"
-
-msgid "2"
-msgstr ""
-
-msgid "2 - side by side"
-msgstr "2 - bok po boku"
-
-msgid "2 Days 1 Line"
-msgstr "2 dni 1 riadok"
-
-msgid "2 Days 2 Line"
-msgstr "2 dni 2 riadky"
-
-msgid "2 x FastBackwardKey"
-msgstr "2 x rýchlospäť tlačidlo"
-
-msgid "2 x FastBackwardKey Type 2"
-msgstr "2 x Rýchlo späť tlačítko Typ 2"
-
-msgid "2 x FastForwardKey"
-msgstr "2 x rýchlo vred tlačidlo"
-
-msgid "2 x FastForwardKey Type 2"
-msgstr "2 x rýchlo vred tlačidlo typ 2"
-
-msgid "2 x InfoKey"
-msgstr "2 x Info tlačidlo"
-
-msgid "2 x Mute"
-msgstr "2 x stlmiť zvuk"
-
-msgid "2%"
-msgstr "2%"
-
-msgid "20"
-msgstr ""
-
-msgid "20%"
-msgstr "20%"
-
-msgid "20min"
-msgstr "20min"
-
-msgid "20s"
-msgstr "20s"
-
-msgid "220x176"
-msgstr "220x176"
-
-msgid "25%"
-msgstr "25%"
-
-msgid "255x64"
-msgstr "255x64"
-
-msgid "270"
-msgstr "270"
-
-msgid "2min"
-msgstr "2min"
-
-msgid "3"
-msgstr ""
-
-msgid "3%"
-msgstr "3%"
-
-msgid "30"
-msgstr ""
-
-msgid "30%"
-msgstr "30%"
-
-msgid "30min"
-msgstr "30min"
-
-msgid "30s"
-msgstr "30s"
-
-msgid "32bit - color"
-msgstr "32bit - farba"
-
-msgid "35%"
-msgstr "35%"
-
-msgid "3min"
-msgstr "3min"
-
-msgid "4"
-msgstr ""
-
-msgid "4 Days 1 Line"
-msgstr "4 dni 1 riadok"
-
-msgid "4 Days 2 Lines"
-msgstr "4 dni 2 riadky"
-
-msgid "4 Days Vertical View"
-msgstr "4 dni zvislý pohľad"
-
-msgid "40%"
-msgstr "40%"
-
-msgid "400x240"
-msgstr "400x240"
-
-msgid "40s"
-msgstr "40s"
-
-msgid "45%"
-msgstr "45%"
-
-msgid "4min"
-msgstr "4min"
-
-msgid "5"
-msgstr ""
-
-msgid "5 Days 1 Line"
-msgstr "5 dní 1 riadok"
-
-msgid "5 Days 2 Lines"
-msgstr "5 dní 2 riadky"
-
-msgid "5 Days Vertical View"
-msgstr "5 dní zvislý pohľad"
-
-msgid "5%"
-msgstr "5%"
-
-msgid "50%"
-msgstr "50%"
-
-msgid "50s"
-msgstr "50s"
-
-msgid "55%"
-msgstr "55%"
-
-msgid "5min"
-msgstr "5min"
-
-msgid "5s"
-msgstr "5s"
-
-msgid "60%"
-msgstr "60%"
-
-msgid "60min"
-msgstr "60min"
-
-msgid "65%"
-msgstr "65%"
-
-msgid "7"
-msgstr "7"
-
-msgid "70%"
-msgstr "70%"
-
-msgid "720x405"
-msgstr ""
-
-msgid "75%"
-msgstr "75%"
-
-msgid "80%"
-msgstr "80%"
-
-msgid "85%"
-msgstr "85%"
-
-msgid "8bit - grayscale/color"
-msgstr "8bit - čb/farba"
-
-msgid "90"
-msgstr ""
-
-msgid "90%"
-msgstr "90%"
-
-msgid "95%"
-msgstr "95%"
-
-msgid "96x64"
-msgstr "96x64"
-
-msgid "Active Screen"
-msgstr "aktívna obrazovka"
-
-msgid "All"
-msgstr "všetko"
-
-msgid "Always All"
-msgstr "vždy všetko"
-
-msgid "Always New"
-msgstr "vždy nové"
-
-msgid "Analog"
-msgstr "analógové"
-
-msgid "Analog+Date"
-msgstr "analógové+dátum"
-
-msgid "Analog+Date+Weekday"
-msgstr "analógové+dátum+deň týždňa"
-
-msgid "Analog+Date+Weekday 2"
-msgstr "analógové+dátum+deň týždňa 2"
-
-msgid "April"
-msgstr "Apríl"
-
-msgid "Audio/Video"
-msgstr "Audio/Video"
-
-msgid "August"
-msgstr "August"
-
-msgid "Background"
-msgstr "Pozadie"
-
-msgid "Background-Picture Type"
-msgstr "Typ obrázka pozadia"
-
-msgid "Backup Config"
-msgstr "Záloha cfg"
-
-msgid "Bar"
-msgstr "Stĺpec"
-
-msgid "Bar+Value"
-msgstr "Stĺpec+hodnota"
-
-msgid "Bitrate"
-msgstr "Bitrate"
-
-msgid "Box-Skin-LCD"
-msgstr "Box-Skin-LCD"
-
-msgid "Box-Skin-LCD Color"
-msgstr "Box-Skin-LCD Farba"
-
-msgid "Box-Skin-LCD Dimension"
-msgstr "Box-Skin-LCD rozmery"
-
-msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "Box-Skin-LCD povoliť čakací mód"
-
-msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "Box-Skin-LCD povoliť média mód"
-
-msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "Box-Skin-LCD povoliť zap. mód"
-
-msgid "C"
-msgstr "C"
-
-msgid "C + rpm"
-msgstr "C + otáčky"
-
-msgid "C + rpm/2"
-msgstr "C + otáčky/2"
-
-msgid "Calendar"
-msgstr "Kalendár"
-
-msgid "Calendar Day Event Preview"
-msgstr "Kalendár denny prehľad"
-
-msgid "Calendar Line Thickness"
-msgstr "Kalendár hrúbka čiary"
-
-msgid "Calendar Poll Interval"
-msgstr "Kalendár čas obnovy"
-
-msgid "Calendar Saturday Color"
-msgstr "Kalendár farba soboty"
-
-msgid "Calendar Sunday Color"
-msgstr "Kalendár farba nedele"
-
-msgid "Calendar Timezone Correction"
-msgstr "Kalendár korekcia časovej zóny"
-
-msgid "Calendar Transparency"
-msgstr "Kalendár priehľadnosť"
-
-msgid "Calendar ics-Path [ok]>"
-msgstr "Kalendár ics-cesta [ok]>"
-
-msgid "Calendar ics-URL"
-msgstr "Kalendár ics-URL"
-
-msgid "Calendar planerFS"
-msgstr "Kalendár plánovač"
-
-msgid "Cancel"
-msgstr "Zrušiť"
-
-msgid "Channel"
-msgstr "Kanál"
-
-msgid "Channel+Title"
-msgstr "Kanál+titulok"
-
-msgid "Choose dir"
-msgstr "Zvoľ priečinok"
-
-msgid "Choose file"
-msgstr "Zvoľ súbor"
-
-msgid "Choose font"
-msgstr "Zvoľ písmo"
-
-msgid "Clock"
-msgstr "Hodiny"
-
-msgid "Clock 2"
-msgstr "Hodiny 2"
-
-msgid "Config Backup Path [ok]>"
-msgstr "cesta zálohy konfig. [ok]>"
-
-msgid "Config Restore All Settings"
-msgstr "Konfigurácia obnova všetkých nastavení"
-
-msgid "Console normal"
-msgstr "bežná konzola"
-
-msgid "Corby@Pearl 128x128"
-msgstr "Corby@Pearl 128x128"
-
-msgid "Corner"
-msgstr "roh"
-
-msgid "Crashlog"
-msgstr "chybový výpis"
-
-msgid "Current"
-msgstr "aktuálny"
-
-msgid "Current Temperature"
-msgstr "aktuálna teplota"
-
-msgid "Current Temperature (+C)"
-msgstr "aktuálna teplota (+C)"
-
-msgid "Current Temperature (-C)"
-msgstr "aktuálna teplota (-C)"
-
-msgid "DVB-T Signal-Quality Correction"
-msgstr "DVB-T korekcia kvality signálu"
-
-msgid "Date"
-msgstr "Dátum"
-
-msgid "Date+Time"
-msgstr "Dátum+čas"
-
-msgid "Date+Time+Weekday"
-msgstr "Dátum+čas+deň týždňa"
-
-msgid "Dates"
-msgstr "Dátumy"
-
-msgid "Dates 1 Line"
-msgstr "Dátumy 1 riadok"
-
-msgid "Dates 3 Lines"
-msgstr "Dátumy 3 riadky"
-
-msgid "Dates 5 Lines"
-msgstr "Dátumy 5 riadkov"
-
-msgid "Dates 9 Lines"
-msgstr "Dátumy 9 riadkov"
-
-msgid "Dates List"
-msgstr "Zoznam dátumov"
-
-msgid "Dates compact"
-msgstr "Kompaktné dátumy"
-
-msgid "Dates compact 2 Lines"
-msgstr "Kompaktné dátumy 2 riadky"
-
-msgid "Dates compact 3 Lines"
-msgstr "Kompaktné dátumy 3 riadky"
-
-msgid "Dates compact no Icon"
-msgstr "Kompaktné dátumy bez ikon"
-
-msgid "Dates no Icon"
-msgstr "Dátumy bez ikon"
-
-msgid "Debug-Logging > /tmp/L4log.txt"
-msgstr "Logovanie > /tmp/L4log.txt"
-
-msgid "December"
-msgstr "December"
-
-msgid "Delete"
-msgstr "Zmazať"
-
-msgid "Delete File?"
-msgstr "Zmazať súbor?"
-
-msgid "Delete Logfile"
-msgstr "Zmazanie log súboru"
-
-msgid "Display Delay [ms]"
-msgstr "Oneskorenie zobrazovača [ms]"
-
-msgid "Double-button switches"
-msgstr "Zmena dvoj-stlačením tlačidla"
-
-msgid "Download Logfile"
-msgstr "stiahnuť log súbor"
-
-msgid "E"
-msgstr "V"
-
-msgid "ENE"
-msgstr "VSV"
-
-msgid "EPG"
-msgstr "EPG"
-
-msgid "ESE"
-msgstr "VJV"
-
-msgid "Event Icon Bar"
-msgstr "Stĺpec ikon udalosti"
-
-msgid "Exec"
-msgstr "Vykonať"
-
-msgid "Extended"
-msgstr "Rozšírený"
-
-msgid "Extended (Short)"
-msgstr "Rozšírený (menej info)"
-
-msgid "Extended Description"
-msgstr "Rozšírený popis"
-
-msgid "Fastmode (2s)"
-msgstr "Rýchly mód (2s)"
-
-msgid "February"
-msgstr "Február"
-
-msgid "First Quarter"
-msgstr "Prvá štvrtina"
-
-msgid "Flaps Design"
-msgstr "Vzhľad klapiek"
-
-msgid "Font"
-msgstr "Písmo"
-
-msgid "Font 1 [ok]>"
-msgstr "Písmo1 [ok]>"
-
-msgid "Font 2 [ok]>"
-msgstr "Písmo 2 [ok]>"
-
-msgid "Font 3 [ok]>"
-msgstr "Písmo 3 [ok]>"
-
-msgid "Font 4 [ok]>"
-msgstr "Font 4 [ok]>"
-
-msgid "Font 5 [ok]>"
-msgstr "Font 5 [ok]>"
-
-msgid "Font global [ok]>"
-msgstr "Písmo celkovo [ok]>"
-
-msgid "Frame"
-msgstr "Rámček"
-
-msgid "Fri"
-msgstr "Pi"
-
-msgid "Friday"
-msgstr "Piatok"
-
+"X-Generator: Poedit 2.0.2\n"
+
+#: src/WebConfigSite.py:30
+msgid "OSD"
+msgstr "OSD"
+
+#: src/WebConfigSite.py:30 src/WebConfigSite.py:542
+msgid "Screen"
+msgstr "Obrazovka"
+
+#: src/WebConfigSite.py:30
+msgid "Picture"
+msgstr "Obrázok"
+
+#: src/WebConfigSite.py:30 src/plugin.py:5862 src/plugin.py:6488
+#: src/plugin.py:6979
+msgid "Weather"
+msgstr "Počasie"
+
+#: src/WebConfigSite.py:30 src/plugin.py:5893 src/plugin.py:6519
+#: src/plugin.py:7010
+msgid "Netatmo"
+msgstr "Netatmo"
+
+#: src/WebConfigSite.py:30
+msgid "Popup-Text"
+msgstr "vyskakovací-text"
+
+#: src/WebConfigSite.py:30 src/plugin.py:6139 src/plugin.py:6715
+#: src/plugin.py:7246
 msgid "FritzCall"
 msgstr "FritzCall"
 
-msgid "FritzCall Frame Picture [ok]>"
-msgstr "FritzCall obrázok rámčeka [ok]>"
+#: src/WebConfigSite.py:30
+msgid "Font"
+msgstr "Písmo"
 
-msgid "FritzCall Number of Lines per Entry"
-msgstr "FritzCall počet riadkov na vstupny údaj"
+#: src/WebConfigSite.py:30 src/plugin.py:6096 src/plugin.py:6672
+#: src/plugin.py:7203
+msgid "Mail"
+msgstr "Pošta"
 
-msgid "FritzCall Number of List Entries"
-msgstr "FritzCall počet položiek zoznamu"
+#: src/WebConfigSite.py:30 src/plugin.py:6153 src/plugin.py:6729
+#: src/plugin.py:7260
+msgid "Calendar"
+msgstr "Kalendár"
 
-msgid "FritzCall Number of Pictures"
-msgstr "FritzCall počet obrázkov"
+#: src/WebConfigSite.py:30 src/plugin.py:6111 src/plugin.py:6687
+#: src/plugin.py:7218
+msgid "Remote Box"
+msgstr "Vzdialený Box"
 
-msgid "FritzCall Picture Orientation"
-msgstr "FritzCall orientácia obrázka"
+#: src/WebConfigSite.py:30
+msgid "WWW Converter"
+msgstr "WWW konvertor"
 
-msgid "FritzCall Picture Path [ok]>"
-msgstr "FritzCall cesta k obrázkom [ok]>"
+#: src/WebConfigSite.py:30
+msgid "WebIF"
+msgstr "WebIF"
 
-msgid "FritzCall Picture Transparency"
-msgstr "FritzCall priehľadnosť obrázka"
+#: src/WebConfigSite.py:30
+msgid "MJPEG Stream"
+msgstr "MJPEG Stream"
 
-msgid "FritzCall Pictures Search"
-msgstr "FritzCall vyhľadávanie obrázkov"
+#: src/WebConfigSite.py:30
+msgid "Box-Skin-LCD"
+msgstr "Box-Skin-LCD"
 
-msgid "FritzCall Popup Color"
-msgstr "FritzCall farba vyskakovacieho okna"
+#: src/WebConfigSite.py:30
+#, fuzzy
+#| msgid "USB Tuner"
+msgid "Tuner"
+msgstr "USB Tuner"
 
-msgid "FritzCall Popup LCD"
-msgstr "FritzCall vyskakovací LCD"
+#: src/WebConfigSite.py:30
+msgid "Key"
+msgstr ""
 
-msgid "FritzCall Popup-Time"
-msgstr "FritzCall čas vyskakovaieho okna"
+#: src/WebConfigSite.py:30
+msgid "Sonos"
+msgstr ""
 
-msgid "FritzCall remove Calls after hours"
-msgstr "FritzCall odobrať volania po hodinách"
+#: src/WebConfigSite.py:30 src/plugin.py:461
+msgid "MusicCast"
+msgstr ""
 
-msgid "Full Moon"
-msgstr "Spln mesiaca"
+#: src/WebConfigSite.py:181 src/plugin.py:5495
+msgid "WebIF IP Allow"
+msgstr "WebIF IP povoľ"
 
+#: src/WebConfigSite.py:250
+msgid "No or wrong File selected, try a correct File first !"
+msgstr "Žiadny alebo nesprávny zvolený súbor, skús najprv správny súbor !"
+
+#: src/WebConfigSite.py:512
+msgid "IP seurity not supported by Box"
+msgstr "IP zabezpečenie nie je podporované v box-e"
+
+#: src/WebConfigSite.py:527
+msgid "Crashlog"
+msgstr "chybový výpis"
+
+#: src/WebConfigSite.py:529
+msgid "Show"
+msgstr "Zobraziť"
+
+#: src/WebConfigSite.py:530
+msgid "Delete"
+msgstr "Zmazať"
+
+#: src/WebConfigSite.py:535
+msgid "Restore Config"
+msgstr "Obnova cfg"
+
+#: src/WebConfigSite.py:536
+msgid "Backup Config"
+msgstr "Záloha cfg"
+
+#: src/WebConfigSite.py:538
+msgid "Delete Logfile"
+msgstr "Zmazanie log súboru"
+
+#: src/WebConfigSite.py:539
+msgid "Download Logfile"
+msgstr "stiahnuť log súbor"
+
+#: src/WebConfigSite.py:540
+msgid "Save Config"
+msgstr "Ulož cfg"
+
+#: src/WebConfigSite.py:550
+msgid "stop Screencycle"
+msgstr "Zastav výmenu obrazoviek"
+
+#: src/WebConfigSite.py:558 src/plugin.py:336 src/plugin.py:5166
+#: src/plugin.py:5309 src/plugin.py:7358 src/plugin.py:7374
+msgid "Global"
+msgstr "Celkovo"
+
+#: src/WebConfigSite.py:559 src/plugin.py:480 src/plugin.py:5157
+#: src/plugin.py:5542 src/plugin.py:7359 src/plugin.py:7363
+msgid "On"
+msgstr "Zapnuté"
+
+#: src/WebConfigSite.py:560 src/plugin.py:480 src/plugin.py:605
+#: src/plugin.py:5160 src/plugin.py:6247 src/plugin.py:7364 src/plugin.py:7368
+#: src/plugin.py:7568
+msgid "Media"
+msgstr "Média"
+
+#: src/WebConfigSite.py:561 src/plugin.py:5163 src/plugin.py:5184
+#: src/plugin.py:6819 src/plugin.py:7369 src/plugin.py:7373 src/plugin.py:7566
+msgid "Idle"
+msgstr ""
+
+#: src/WebConfigSite.py:615 src/WebConfigSite.py:616
+msgid "other"
+msgstr "iné"
+
+#: src/WebConfigSite.py:718 src/WebConfigSite.py:734
+msgid "set Settings"
+msgstr "aktivuj nastavenia"
+
+#: src/WebConfigSite.py:721
+msgid "copy to On"
+msgstr "kopírovať do aktívných"
+
+#: src/WebConfigSite.py:723
+msgid "copy to Media"
+msgstr "kopírovať do Média"
+
+#: src/WebConfigSite.py:725
+msgid "copy to Idle"
+msgstr "kopírovať do pohotovostných"
+
+#: src/WebConfigSite.py:738
 msgid "GUI Restart is required"
 msgstr "vyžaduje sa reštart GUI"
 
+#: src/WebConfigSite.py:744
+msgid "Exec"
+msgstr "Vykonať"
+
+#: src/WebConfigSite.py:764
+msgid "Show Externals"
+msgstr "Zobraz vonkajšie"
+
+#: src/myFileList.py:178
+#, fuzzy
+#| msgid "Storage-Devices"
+msgid "List of Storage Devices"
+msgstr "Pamäťové-zariadenia"
+
+#: src/myFileList.py:180
+#, fuzzy
+#| msgid "Picture Directory Recursive"
+msgid "Parent Directory"
+msgstr "Obrázok rekurzívny priečinok"
+
+#: src/plugin.py:266
+msgid "Mon"
+msgstr "Po"
+
+#: src/plugin.py:266
+msgid "Tue"
+msgstr "Ut"
+
+#: src/plugin.py:266
+msgid "Wed"
+msgstr "St"
+
+#: src/plugin.py:266
+msgid "Thur"
+msgstr "Št"
+
+#: src/plugin.py:266
+msgid "Fri"
+msgstr "Pi"
+
+#: src/plugin.py:266
+msgid "Sat"
+msgstr "So"
+
+#: src/plugin.py:266
+msgid "Sun"
+msgstr "Ne"
+
+#: src/plugin.py:282
+msgid "black"
+msgstr "čierna"
+
+#: src/plugin.py:282
+msgid "white"
+msgstr "biela"
+
+#: src/plugin.py:283
+msgid "gray"
+msgstr "šedá"
+
+#: src/plugin.py:283
+msgid "silver"
+msgstr "strieborná"
+
+#: src/plugin.py:283
+msgid "slategray"
+msgstr "bridlicovo sivá"
+
+#: src/plugin.py:284
+msgid "aquamarine"
+msgstr "akvamarín"
+
+#: src/plugin.py:285
+msgid "yellow"
+msgstr "žltá"
+
+#: src/plugin.py:285
+msgid "greenyellow"
+msgstr "zelenožltá"
+
+#: src/plugin.py:285
+msgid "gold"
+msgstr "zlatá"
+
+#: src/plugin.py:286
+msgid "red"
+msgstr "červená"
+
+#: src/plugin.py:286
+msgid "tomato"
+msgstr "paradajková"
+
+#: src/plugin.py:286
+msgid "darkred"
+msgstr "tmavočervená"
+
+#: src/plugin.py:286
+msgid "indianred"
+msgstr "indiánska červená"
+
+#: src/plugin.py:286
+msgid "orange"
+msgstr "oranžová"
+
+#: src/plugin.py:286
+msgid "darkorange"
+msgstr "tmavooranžová"
+
+#: src/plugin.py:286
+msgid "orangered"
+msgstr "oranžovočervená"
+
+#: src/plugin.py:287
+msgid "green"
+msgstr "zelená"
+
+#: src/plugin.py:287
+msgid "lawngreen"
+msgstr "zelený trávnik"
+
+#: src/plugin.py:287
+msgid "darkgreen"
+msgstr "tmavozelená"
+
+#: src/plugin.py:287
+msgid "lime"
+msgstr "limetka"
+
+#: src/plugin.py:287
+msgid "lightgreen"
+msgstr "svetlosvetlozelená"
+
+#: src/plugin.py:288
+msgid "blue"
+msgstr "modrá"
+
+#: src/plugin.py:288
+msgid "blueviolet"
+msgstr "modrofialová"
+
+#: src/plugin.py:288
+msgid "indigo"
+msgstr "indigo"
+
+#: src/plugin.py:288
+msgid "darkblue"
+msgstr "tmavomodrá"
+
+#: src/plugin.py:288
+msgid "cadetblue"
+msgstr "kadet modrá"
+
+#: src/plugin.py:288
+msgid "cornflowerblue"
+msgstr "nevädza modrá"
+
+#: src/plugin.py:288
+msgid "lightblue"
+msgstr "svetlosvetlomodrá"
+
+#: src/plugin.py:289
+msgid "magenta"
+msgstr "purpurová"
+
+#: src/plugin.py:289
+msgid "violet"
+msgstr "fialová"
+
+#: src/plugin.py:289
+msgid "darkorchid"
+msgstr "tmavá orchidea"
+
+#: src/plugin.py:289
+msgid "deeppink"
+msgstr "tmavoružová"
+
+#: src/plugin.py:289
+msgid "cyan"
+msgstr "svetlomodrá"
+
+#: src/plugin.py:290
+msgid "brown"
+msgstr "hnedá"
+
+#: src/plugin.py:290
+msgid "sandybrown"
+msgstr "pieskovohnedá"
+
+#: src/plugin.py:290
+msgid "moccasin"
+msgstr "mokasín"
+
+#: src/plugin.py:290
+msgid "rosybrown"
+msgstr "ružovohnedá"
+
+#: src/plugin.py:290
+msgid "olive"
+msgstr "olivová"
+
+#: src/plugin.py:292 src/plugin.py:295 src/plugin.py:329 src/plugin.py:368
+#: src/plugin.py:377 src/plugin.py:378 src/plugin.py:392 src/plugin.py:466
+#: src/plugin.py:467 src/plugin.py:492 src/plugin.py:493 src/plugin.py:598
+#: src/plugin.py:615 src/plugin.py:624 src/plugin.py:638 src/plugin.py:647
+#: src/plugin.py:657 src/plugin.py:729 src/plugin.py:1013 src/plugin.py:1087
+#: src/plugin.py:1095 src/plugin.py:1106 src/plugin.py:1117 src/plugin.py:1127
+#: src/plugin.py:1137 src/plugin.py:1147 src/plugin.py:1155 src/plugin.py:1220
+#: src/plugin.py:1228 src/plugin.py:1239 src/plugin.py:1507 src/plugin.py:1599
+#: src/plugin.py:1610 src/plugin.py:1620 src/plugin.py:1630 src/plugin.py:1652
+#: src/plugin.py:1660 src/plugin.py:1674 src/plugin.py:1683 src/plugin.py:1693
+#: src/plugin.py:1733 src/plugin.py:1741 src/plugin.py:1753 src/plugin.py:1761
+#: src/plugin.py:1772 src/plugin.py:1953 src/plugin.py:2024 src/plugin.py:2035
+#: src/plugin.py:2046 src/plugin.py:2056 src/plugin.py:2066 src/plugin.py:2076
+#: src/plugin.py:2084 src/plugin.py:2142 src/plugin.py:2156 src/plugin.py:2165
+#: src/plugin.py:2175 src/plugin.py:2215 src/plugin.py:2223
+msgid "off"
+msgstr "vypnuté"
+
+#: src/plugin.py:292 src/plugin.py:293 src/plugin.py:294
+msgid "Screen 1"
+msgstr "Obrazovka 1"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 2"
+msgstr "Obrazovka 2"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 3"
+msgstr "Obrazovka 3"
+
+#: src/plugin.py:292
+msgid "Screen 1+2"
+msgstr "Obrazovka 1+2"
+
+#: src/plugin.py:292
+msgid "Screen 1+3"
+msgstr "Obrazovka 1+3"
+
+#: src/plugin.py:292
+msgid "Screen 2+3"
+msgstr "Obrazovka 2+3"
+
+#: src/plugin.py:292
+msgid "Screen 1+2+3"
+msgstr "Obrazovka 1+2+3"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 4"
+msgstr "Obrazovka 4"
+
+#: src/plugin.py:292
+msgid "Screen 1+4"
+msgstr "Obrazovka 1+4"
+
+#: src/plugin.py:292
+msgid "Screen 2+4"
+msgstr "Obrazovka 2+4"
+
+#: src/plugin.py:292
+msgid "Screen 3+4"
+msgstr "Obrazovka 3+4"
+
+#: src/plugin.py:292
+msgid "Screen 1+2+4"
+msgstr "Obrazovka 1+2+4"
+
+#: src/plugin.py:292
+msgid "Screen 1+3+4"
+msgstr "Obrazovka 1+3+4"
+
+#: src/plugin.py:292
+msgid "Screen 2+3+4"
+msgstr "Obrazovka 2+3+4"
+
+#: src/plugin.py:292
+msgid "Screen 1+2+3+4"
+msgstr "Obrazovka 1+2+3+4"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 5"
+msgstr "Obrazovka 5"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 6"
+msgstr "Obrazovka 6"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 7"
+msgstr "Obrazovka 7"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 8"
+msgstr "Obrazovka 8"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 9"
+msgstr "Obrazovka 9"
+
+#: src/plugin.py:292 src/plugin.py:293
+msgid "Screen 1-5"
+msgstr "Obrazovka 1-5"
+
+#: src/plugin.py:292 src/plugin.py:293
+msgid "Screen 1-6"
+msgstr "Obrazovka 1-6"
+
+#: src/plugin.py:292 src/plugin.py:293
+msgid "Screen 1-7"
+msgstr "Obrazovka 1-7"
+
+#: src/plugin.py:292 src/plugin.py:293
+msgid "Screen 1-8"
+msgstr "Obrazovka 1-8"
+
+#: src/plugin.py:292 src/plugin.py:293
+msgid "Screen 1-9"
+msgstr "Obrazovka 1-9"
+
+#: src/plugin.py:292
+#, fuzzy
+#| msgid "Screen 5-9"
+msgid "Screen 5-8"
+msgstr "Obrazovka 5-9"
+
+#: src/plugin.py:292
+msgid "Screen 5-9"
+msgstr "Obrazovka 5-9"
+
+#: src/plugin.py:292
+msgid "Screen 1+3+5+7+9"
+msgstr "Obrazovka 1+3+5+7+9"
+
+#: src/plugin.py:292
+msgid "Screen 2+4+6+8"
+msgstr "Obrazovka 2+4+6+8"
+
+#: src/plugin.py:293
+msgid "Screen 1-2"
+msgstr "Obrazovka 1-2"
+
+#: src/plugin.py:293
+msgid "Screen 1-3"
+msgstr "Obrazovka 1-3"
+
+#: src/plugin.py:293
+msgid "Screen 1-4"
+msgstr "Obrazovka 1-4"
+
+#: src/plugin.py:295 src/plugin.py:1753
+msgid "on"
+msgstr "zapnuté"
+
+#: src/plugin.py:296
+msgid "5s"
+msgstr "5s"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "10s"
+msgstr "10s"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "15s"
+msgstr "15s"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "20s"
+msgstr "20s"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "30s"
+msgstr "30s"
+
+#: src/plugin.py:296
+msgid "40s"
+msgstr "40s"
+
+#: src/plugin.py:296
+msgid "50s"
+msgstr "50s"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "1min"
+msgstr "1min"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "2min"
+msgstr "2min"
+
+#: src/plugin.py:296
+msgid "3min"
+msgstr "3min"
+
+#: src/plugin.py:296
+msgid "4min"
+msgstr "4min"
+
+#: src/plugin.py:296 src/plugin.py:514
+msgid "5min"
+msgstr "5min"
+
+#: src/plugin.py:296 src/plugin.py:514
+msgid "10min"
+msgstr "10min"
+
+#: src/plugin.py:296 src/plugin.py:514 src/plugin.py:563
+msgid "20min"
+msgstr "20min"
+
+#: src/plugin.py:296 src/plugin.py:514 src/plugin.py:563 src/plugin.py:1158
+msgid "30min"
+msgstr "30min"
+
+#: src/plugin.py:296 src/plugin.py:514 src/plugin.py:563 src/plugin.py:1158
+msgid "60min"
+msgstr "60min"
+
+#: src/plugin.py:296
+msgid "2h"
+msgstr ""
+
+#: src/plugin.py:296
+msgid "3h"
+msgstr ""
+
+#: src/plugin.py:296
+msgid "5h"
+msgstr ""
+
+#: src/plugin.py:297 src/plugin.py:298
+msgid "LCD 1"
+msgstr "LCD 1"
+
+#: src/plugin.py:297 src/plugin.py:298
+msgid "LCD 2"
+msgstr "LCD 2"
+
+#: src/plugin.py:297
+msgid "LCD 1+2"
+msgstr "LCD 1+2"
+
+#: src/plugin.py:297 src/plugin.py:298
+msgid "LCD 3"
+msgstr "LCD 3"
+
+#: src/plugin.py:297
+msgid "LCD 1+3"
+msgstr "LCD 1+3"
+
+#: src/plugin.py:297
+msgid "LCD 2+3"
+msgstr "LCD 2+3"
+
+#: src/plugin.py:297
+msgid "LCD 1+2+3"
+msgstr "LCD 1+2+3"
+
+#: src/plugin.py:298
+msgid "LCD 1-3"
+msgstr "LCD 1-3"
+
+#: src/plugin.py:299
+msgid "Pearl (or compatible LCD) 320x240"
+msgstr "Pearl (alebo kompatibilné LCD) 320x240"
+
+#: src/plugin.py:299
+msgid "Pearl (or compatible LCD) 240x320"
+msgstr "Pearl (alebo kompatibilné LCD) 240x320"
+
+#: src/plugin.py:299
+msgid "Corby@Pearl 128x128"
+msgstr "Corby@Pearl 128x128"
+
+#: src/plugin.py:300
+msgid "Samsung SPF-72H 800x480"
+msgstr "Samsung SPF-72H 800x480"
+
+#: src/plugin.py:300
+msgid "Samsung SPF-75H/76H 800x480"
+msgstr "Samsung SPF-75H/76H 800x480"
+
+#: src/plugin.py:300
+msgid "Samsung SPF-87H 800x480"
+msgstr "Samsung SPF-87H 800x480"
+
+#: src/plugin.py:300
+msgid "Samsung SPF-87H old 800x480"
+msgstr "Samsung SPF-87H alt 800x480"
+
+#: src/plugin.py:300
+msgid "Samsung SPF-83H 800x600"
+msgstr "Samsung SPF-83H 800x600"
+
+#: src/plugin.py:301
+msgid "Samsung SPF-85H/86H 800x600"
+msgstr "Samsung SPF-85H/86H 800x600"
+
+#: src/plugin.py:301
+msgid "Samsung SPF-85P/86P 800x600"
+msgstr "Samsung SPF-85P/86P 800x600"
+
+#: src/plugin.py:301
+msgid "Samsung SPF-105P 1024x600"
+msgstr "Samsung SPF-105P 1024x600"
+
+#: src/plugin.py:301
+msgid "Samsung SPF-107H 1024x600"
+msgstr "Samsung SPF-107H 1024x600"
+
+#: src/plugin.py:301
+msgid "Samsung SPF-107H old 1024x600"
+msgstr "Samsung SPF-107H alt 1024x600"
+
+#: src/plugin.py:302
+msgid "Samsung SPF-700T 800x600"
+msgstr "Samsung SPF-700T 800x600"
+
+#: src/plugin.py:303
+msgid "Internal TFT-LCD 400x240"
+msgstr "Zabudovaný TFT-LCD 400x240"
+
+#: src/plugin.py:304
+msgid "Internal Box-Skin-LCD"
+msgstr "Zabudovaný Box-Skin-LCD"
+
+#: src/plugin.py:305
+msgid "only Picture 320x240"
+msgstr "len obrázok 320x240"
+
+#: src/plugin.py:305
+msgid "only Picture 800x480"
+msgstr "len obrázok 800x480"
+
+#: src/plugin.py:305
+msgid "only Picture 800x600"
+msgstr "len obrázok 800x600"
+
+#: src/plugin.py:305
+msgid "only Picture 1024x600"
+msgstr "len obrázok 1024x600"
+
+#: src/plugin.py:305
+msgid "only Picture Custom Size"
+msgstr "len obrázok vlastná veľkosť"
+
+#: src/plugin.py:305
+#, fuzzy
+#| msgid "only Picture Custom Size"
+msgid "only Picture Custom Size 2"
+msgstr "len obrázok vlastná veľkosť"
+
+#: src/plugin.py:307
+msgid "Internal Vu+ Duo2 LCD 400x240"
+msgstr "Zabudovaný Vu+ Duo2 LCD 400x240"
+
+#: src/plugin.py:308
+msgid "96x64"
+msgstr "96x64"
+
+#: src/plugin.py:308
+msgid "128x32"
+msgstr "128x32"
+
+#: src/plugin.py:308
+msgid "128x64"
+msgstr "128x64"
+
+#: src/plugin.py:308
+msgid "132x64"
+msgstr "132x64"
+
+#: src/plugin.py:308
+msgid "220x176"
+msgstr "220x176"
+
+#: src/plugin.py:308
+msgid "255x64"
+msgstr "255x64"
+
+#: src/plugin.py:308
+msgid "400x240"
+msgstr "400x240"
+
+#: src/plugin.py:308
+msgid "480x320"
+msgstr ""
+
+#: src/plugin.py:308
+msgid "720x405"
+msgstr ""
+
+#: src/plugin.py:308
+msgid "800x480"
+msgstr ""
+
+#: src/plugin.py:309
+msgid "2 Days 1 Line"
+msgstr "2 dni 1 riadok"
+
+#: src/plugin.py:309
+msgid "2 Days 2 Line"
+msgstr "2 dni 2 riadky"
+
+#: src/plugin.py:309
+msgid "4 Days 1 Line"
+msgstr "4 dni 1 riadok"
+
+#: src/plugin.py:309
+msgid "4 Days 2 Lines"
+msgstr "4 dni 2 riadky"
+
+#: src/plugin.py:309
+msgid "5 Days 1 Line"
+msgstr "5 dní 1 riadok"
+
+#: src/plugin.py:309
+msgid "5 Days 2 Lines"
+msgstr "5 dní 2 riadky"
+
+#: src/plugin.py:309 src/plugin.py:310
+msgid "Current"
+msgstr "aktuálny"
+
+#: src/plugin.py:309
+msgid "Current Temperature (+C)"
+msgstr "aktuálna teplota (+C)"
+
+#: src/plugin.py:309
+msgid "Current Temperature (-C)"
+msgstr "aktuálna teplota (-C)"
+
+#: src/plugin.py:309
+msgid "4 Days Vertical View"
+msgstr "4 dni zvislý pohľad"
+
+#: src/plugin.py:309
+msgid "5 Days Vertical View"
+msgstr "5 dní zvislý pohľad"
+
+#: src/plugin.py:310
+msgid "Current Temperature"
+msgstr "aktuálna teplota"
+
+#: src/plugin.py:311
+msgid "All"
+msgstr "všetko"
+
+#: src/plugin.py:311
+msgid "Temperature"
+msgstr "Teplota"
+
+#: src/plugin.py:311
+msgid "Temperature+Humidity"
+msgstr "Teplota+Vlhkosť"
+
+#: src/plugin.py:311
+msgid "Temperature+Co2"
+msgstr "Teplota+Co2"
+
+#: src/plugin.py:311
+msgid "Temperature+Co2+Pressure"
+msgstr "Teplota+Co2+Tlak"
+
+#: src/plugin.py:312
+msgid "userdefined"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 1"
+msgstr "Modul 1"
+
+#: src/plugin.py:312
+msgid "Module 2"
+msgstr "Modul 2"
+
+#: src/plugin.py:312
+msgid "Module 3"
+msgstr "Modul 3"
+
+#: src/plugin.py:312
+msgid "Module 1+2"
+msgstr "Modul 1+2"
+
+#: src/plugin.py:312
+msgid "Module 1+3"
+msgstr "Modul 1+3"
+
+#: src/plugin.py:312
+msgid "Module 2+3"
+msgstr "Modul 2+3"
+
+#: src/plugin.py:312
+msgid "Module 1+2+3"
+msgstr "Modul 1+2+3"
+
+#: src/plugin.py:312
+msgid "Module 4"
+msgstr "Modul 4"
+
+#: src/plugin.py:312
+msgid "Module 1+4"
+msgstr "Modul 1+4"
+
+#: src/plugin.py:312
+msgid "Module 2+4"
+msgstr "Modul 2+4"
+
+#: src/plugin.py:312
+msgid "Module 3+4"
+msgstr "Modul 3+4"
+
+#: src/plugin.py:312
+msgid "Module 1+2+4"
+msgstr "Modul 1+2+4"
+
+#: src/plugin.py:312
+msgid "Module 1+3+4"
+msgstr "Modul 1+3+4"
+
+#: src/plugin.py:312
+msgid "Module 2+3+4"
+msgstr "Modul 2+3+4"
+
+#: src/plugin.py:312
+msgid "Module 1-4"
+msgstr "Modul 1-4"
+
+#: src/plugin.py:312
+msgid "Module 5"
+msgstr "Modul 5"
+
+#: src/plugin.py:312
+msgid "Module 1-5"
+msgstr "Modul 1-5"
+
+#: src/plugin.py:312
+#, fuzzy
+#| msgid "Module 1"
+msgid "Module 6"
+msgstr "Modul 1"
+
+#: src/plugin.py:312
+#, fuzzy
+#| msgid "Module 5"
+msgid "Module 5-6"
+msgstr "Modul 5"
+
+#: src/plugin.py:312
+#, fuzzy
+#| msgid "Module 4"
+msgid "Module 4-6"
+msgstr "Modul 4"
+
+#: src/plugin.py:312
+#, fuzzy
+#| msgid "Module 3"
+msgid "Module 3-6"
+msgstr "Modul 3"
+
+#: src/plugin.py:312
+#, fuzzy
+#| msgid "Module 2"
+msgid "Module 2-6"
+msgstr "Modul 2"
+
+#: src/plugin.py:312
+#, fuzzy
+#| msgid "Module 1-4"
+msgid "Module 1-6"
+msgstr "Modul 1-4"
+
+#: src/plugin.py:314
+msgid "Bar"
+msgstr "Stĺpec"
+
+#: src/plugin.py:314
+msgid "Bar+Value"
+msgstr "Stĺpec+hodnota"
+
+#: src/plugin.py:314
+msgid "Knob"
+msgstr "Tlačidlo"
+
+#: src/plugin.py:314
+msgid "Knob+Value"
+msgstr "Tlačidlo+hodnota"
+
+#: src/plugin.py:315
+msgid "Time"
+msgstr "Čas"
+
+#: src/plugin.py:315
+msgid "Date+Time"
+msgstr "Dátum+čas"
+
+#: src/plugin.py:315
+msgid "Date+Time+Weekday"
+msgstr "Dátum+čas+deň týždňa"
+
+#: src/plugin.py:315
+msgid "Date"
+msgstr "Dátum"
+
+#: src/plugin.py:315
+msgid "Time+Weekday"
+msgstr "Čas+Deň týždňa"
+
+#: src/plugin.py:315
+msgid "Weekday"
+msgstr "Deň týždňa"
+
+#: src/plugin.py:315
+#, fuzzy
+#| msgid "Flaps Design"
+msgid "Flaps Design Date"
+msgstr "Vzhľad klapiek"
+
+#: src/plugin.py:315
+#, fuzzy
+#| msgid "Flaps Design"
+msgid "Flaps Design Weekday"
+msgstr "Vzhľad klapiek"
+
+#: src/plugin.py:315
+msgid "Analog"
+msgstr "analógové"
+
+#: src/plugin.py:315
+msgid "Analog+Date"
+msgstr "analógové+dátum"
+
+#: src/plugin.py:315
+msgid "Analog+Date+Weekday"
+msgstr "analógové+dátum+deň týždňa"
+
+#: src/plugin.py:315
+msgid "Analog+Date+Weekday 2"
+msgstr "analógové+dátum+deň týždňa 2"
+
+#: src/plugin.py:316 src/plugin.py:613 src/plugin.py:1084 src/plugin.py:1092
+#: src/plugin.py:1649 src/plugin.py:2021
+msgid "left"
+msgstr "ľavý"
+
+#: src/plugin.py:316 src/plugin.py:613
+msgid "center"
+msgstr "vycentrovať"
+
+#: src/plugin.py:316 src/plugin.py:613 src/plugin.py:1084 src/plugin.py:1092
+#: src/plugin.py:1649 src/plugin.py:2021
+msgid "right"
+msgstr "vpravo"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "2%"
+msgstr "2%"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "3%"
+msgstr "3%"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "5%"
+msgstr "5%"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "10%"
+msgstr "10%"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "15%"
+msgstr "15%"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "20%"
+msgstr "20%"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "25%"
+msgstr "25%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "30%"
+msgstr "30%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "35%"
+msgstr "35%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "40%"
+msgstr "40%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "45%"
+msgstr "45%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "50%"
+msgstr "50%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "55%"
+msgstr "55%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "60%"
+msgstr "60%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "65%"
+msgstr "65%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "70%"
+msgstr "70%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "75%"
+msgstr "75%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "80%"
+msgstr "80%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "85%"
+msgstr "85%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "90%"
+msgstr "90%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "95%"
+msgstr "95%"
+
+#: src/plugin.py:316 src/plugin.py:328
+#, fuzzy
+#| msgid "70%"
+msgid "97%"
+msgstr "70%"
+
+#: src/plugin.py:316 src/plugin.py:328
+#, fuzzy
+#| msgid "80%"
+msgid "98%"
+msgstr "80%"
+
+#: src/plugin.py:317
+msgid "Short"
+msgstr "Krátky"
+
+#: src/plugin.py:317
+msgid "Short (Extended)"
+msgstr "Krátky(rozširený)"
+
+#: src/plugin.py:317
+msgid "Extended"
+msgstr "Rozšírený"
+
+#: src/plugin.py:317
+msgid "Extended (Short)"
+msgstr "Rozšírený (menej info)"
+
+#: src/plugin.py:317
+msgid "Short+Extended"
+msgstr "Krátky+rozšírený"
+
+#: src/plugin.py:318
+msgid "no Calendar"
+msgstr "žiaden kalendár"
+
+#: src/plugin.py:318
+msgid "Month"
+msgstr "Mesiac"
+
+#: src/plugin.py:318
+msgid "Month+Header"
+msgstr "Mesiac+hlavička"
+
+#: src/plugin.py:318
+msgid "Week"
+msgstr "Týždeň"
+
+#: src/plugin.py:318
+msgid "Week+Header"
+msgstr "Týždeň+Hlavička"
+
+#: src/plugin.py:319 src/plugin.py:13299
+msgid "no Dates"
+msgstr "žiadne termíny"
+
+#: src/plugin.py:319
+msgid "Dates compact 2 Lines"
+msgstr "Kompaktné dátumy 2 riadky"
+
+#: src/plugin.py:319
+msgid "Dates compact 3 Lines"
+msgstr "Kompaktné dátumy 3 riadky"
+
+#: src/plugin.py:319
+msgid "Dates 1 Line"
+msgstr "Dátumy 1 riadok"
+
+#: src/plugin.py:319
+msgid "Dates 3 Lines"
+msgstr "Dátumy 3 riadky"
+
+#: src/plugin.py:319
+msgid "Dates 5 Lines"
+msgstr "Dátumy 5 riadkov"
+
+#: src/plugin.py:319
+msgid "Dates 9 Lines"
+msgstr "Dátumy 9 riadkov"
+
+#: src/plugin.py:320 src/plugin.py:790 src/plugin.py:1303
+msgid "Frame"
+msgstr "Rámček"
+
+#: src/plugin.py:320
+msgid "Underline"
+msgstr "Podčiarknutie"
+
+#: src/plugin.py:320
+msgid "Underline 2"
+msgstr "Podčiarknutie 2"
+
+#: src/plugin.py:321
+msgid "Dates compact"
+msgstr "Kompaktné dátumy"
+
+#: src/plugin.py:321
+msgid "Dates compact no Icon"
+msgstr "Kompaktné dátumy bez ikon"
+
+#: src/plugin.py:321
+msgid "Dates"
+msgstr "Dátumy"
+
+#: src/plugin.py:321
+msgid "Dates no Icon"
+msgstr "Dátumy bez ikon"
+
+#: src/plugin.py:322
+msgid "with Icon"
+msgstr "s ikonou"
+
+#: src/plugin.py:322
+msgid "no Icon"
+msgstr "žiadna ikona"
+
+#: src/plugin.py:322
+msgid "with Icon & Targetnumber"
+msgstr "s ikonou & cieľové číslo"
+
+#: src/plugin.py:322
+msgid "no Icon, with Targetnumber"
+msgstr "žiadna ikona, s cieľovým počtom"
+
+#: src/plugin.py:323 src/plugin.py:324 src/plugin.py:325 src/plugin.py:334
+#: src/plugin.py:404 src/plugin.py:407 src/plugin.py:435 src/plugin.py:437
+#: src/plugin.py:442 src/plugin.py:542 src/plugin.py:544 src/plugin.py:547
+#: src/plugin.py:564 src/plugin.py:674 src/plugin.py:953 src/plugin.py:1447
+#: src/plugin.py:1642 src/plugin.py:1906
+msgid "no"
+msgstr "nie"
+
+#: src/plugin.py:323
+msgid "rpm/2"
+msgstr "otáčky/2"
+
+#: src/plugin.py:323
+msgid "rpm"
+msgstr "otáčky"
+
+#: src/plugin.py:323
+msgid "C"
+msgstr "C"
+
+#: src/plugin.py:323
+msgid "C + rpm/2"
+msgstr "C + otáčky/2"
+
+#: src/plugin.py:323
+msgid "C + rpm"
+msgstr "C + otáčky"
+
+#: src/plugin.py:324
+msgid "db"
+msgstr "db"
+
+#: src/plugin.py:324 src/plugin.py:325
+msgid "%"
+msgstr "%"
+
+#: src/plugin.py:324
+msgid "db + %"
+msgstr "db + %"
+
+#: src/plugin.py:324
+msgid "db + % + BER"
+msgstr "db + % + BER"
+
+#: src/plugin.py:324
+msgid "db + BER"
+msgstr "db + BER"
+
+#: src/plugin.py:324
+msgid "% + BER"
+msgstr "% + BER"
+
+#: src/plugin.py:325
+msgid "Load@1min"
+msgstr "Load@1min"
+
+#: src/plugin.py:325
+msgid "Load@5min"
+msgstr "Load@5min"
+
+#: src/plugin.py:325
+#, python-format
+msgid "% + Load@1min"
+msgstr "% + Load@1min"
+
+#: src/plugin.py:325
+#, python-format
+msgid "% + Load@5min"
+msgstr "% + Load@5min"
+
+#: src/plugin.py:326
+msgid "show run+sleep"
+msgstr "zobraz aktívne+čakajúce"
+
+#: src/plugin.py:326
+msgid "show run"
+msgstr "zobraz aktívne"
+
+#: src/plugin.py:327
+msgid "Always All"
+msgstr "vždy všetko"
+
+#: src/plugin.py:327
+msgid "Always New"
+msgstr "vždy nové"
+
+#: src/plugin.py:327
+msgid "Only New"
+msgstr "len nové"
+
+#: src/plugin.py:328
+msgid "100%"
+msgstr "100%"
+
+#: src/plugin.py:330 src/plugin.py:336 src/plugin.py:337 src/plugin.py:381
+#: src/plugin.py:454 src/plugin.py:459
+msgid "1"
+msgstr ""
+
+#: src/plugin.py:330
+msgid "1-2"
+msgstr "1-2"
+
+#: src/plugin.py:330
+msgid "1-3"
+msgstr "1-3"
+
+#: src/plugin.py:330
+msgid "1-4"
+msgstr "1-4"
+
+#: src/plugin.py:330
+msgid "1-5"
+msgstr "1-5"
+
+#: src/plugin.py:331
+msgid "Pop3-SSL"
+msgstr "Pop3-SSL"
+
+#: src/plugin.py:331
+msgid "Pop3"
+msgstr "Pop3"
+
+#: src/plugin.py:331
+msgid "IMAP-SSL"
+msgstr "IMAP-SSL"
+
+#: src/plugin.py:331
+msgid "IMAP"
+msgstr "IMAP"
+
+#: src/plugin.py:332
+msgid "Picon+Channel+Title"
+msgstr "Picon+kanál+titulok"
+
+#: src/plugin.py:332
+msgid "Picon+Channel"
+msgstr "Picon+kanál"
+
+#: src/plugin.py:332 src/plugin.py:338 src/plugin.py:801 src/plugin.py:812
+#: src/plugin.py:5554
+msgid "Picon"
+msgstr "Picon"
+
+#: src/plugin.py:332
+msgid "Channel+Title"
+msgstr "Kanál+titulok"
+
+#: src/plugin.py:332
+msgid "Channel"
+msgstr "Kanál"
+
+#: src/plugin.py:333
+msgid "same color"
+msgstr ""
+
+#: src/plugin.py:334 src/plugin.py:437 src/plugin.py:542 src/plugin.py:544
+#: src/plugin.py:1642
+msgid "yes"
+msgstr "áno"
+
+#: src/plugin.py:334
+msgid "yes +25%"
+msgstr "áno +25%"
+
+#: src/plugin.py:335
+msgid "horizontally"
+msgstr "vodorovne"
+
+#: src/plugin.py:335
+msgid "vertically"
+msgstr "zvislo"
+
+#: src/plugin.py:336 src/plugin.py:337 src/plugin.py:381 src/plugin.py:454
+#: src/plugin.py:459
+msgid "2"
+msgstr ""
+
+#: src/plugin.py:336 src/plugin.py:337 src/plugin.py:381 src/plugin.py:454
+#: src/plugin.py:459
+msgid "3"
+msgstr ""
+
+#: src/plugin.py:336
+msgid "4"
+msgstr ""
+
+#: src/plugin.py:336 src/plugin.py:381 src/plugin.py:454 src/plugin.py:459
+msgid "5"
+msgstr ""
+
+#: src/plugin.py:337
+msgid "all"
+msgstr "všetko"
+
+#: src/plugin.py:337
+msgid "7"
+msgstr "7"
+
+#: src/plugin.py:337
+msgid "14"
+msgstr "14"
+
+#: src/plugin.py:337 src/plugin.py:381 src/plugin.py:454 src/plugin.py:459
+msgid "30"
+msgstr ""
+
+#: src/plugin.py:338
+msgid "Corner"
+msgstr "roh"
+
+#: src/plugin.py:338
+msgid "Corner+Timeshift"
+msgstr ""
+
+#: src/plugin.py:338
+msgid "Picon+Timeshift"
+msgstr ""
+
+#: src/plugin.py:339
+msgid "only Progress Bar"
+msgstr "len stĺpec priebehu"
+
+#: src/plugin.py:340
+msgid "with Remaining Minutes"
+msgstr "a zostávajúce minúty"
+
+#: src/plugin.py:340
+msgid "with Remaining Minutes (Size 1.5)"
+msgstr "a zostávajúce minúty (veľkosť 1.5)"
+
+#: src/plugin.py:340
+msgid "with Remaining Minutes (Size 2)"
+msgstr "a zostávajúce minúty (veľkosť 2)"
+
+#: src/plugin.py:341
+msgid "with Percent"
+msgstr "a percenta"
+
+#: src/plugin.py:341
+msgid "with Percent (Size 1.5)"
+msgstr "a percenta (veľkosť 1.5)"
+
+#: src/plugin.py:341
+msgid "with Percent (Size 2)"
+msgstr "a percenta (veľkosť 2)"
+
+#: src/plugin.py:342
+msgid "with Remaining Minutes (above)"
+msgstr "a zostávajúce minúty (nad)"
+
+#: src/plugin.py:342
+msgid "with Remaining Minutes (above/Size 1.5)"
+msgstr "a zostávajúce minúty (nad/veľkosť 1.5)"
+
+#: src/plugin.py:342
+msgid "with Remaining Minutes (above/Size 2)"
+msgstr "a zostávajúce minúty (nad/veľkosť 2)"
+
+#: src/plugin.py:343
+msgid "with Percent (above)"
+msgstr "s percentami (nad)"
+
+#: src/plugin.py:343
+msgid "with Percent (above/Size 1.5)"
+msgstr "s percentami (nad/veľkosť 1.5)"
+
+#: src/plugin.py:343
+msgid "with Percent (above/Size 2)"
+msgstr "s percentami (nad/veľkosť 2)"
+
+#: src/plugin.py:344
+msgid "with Remaining Minutes (below)"
+msgstr "a zostávajúce minúty (pod)"
+
+#: src/plugin.py:344
+msgid "with Remaining Minutes (below/Size 1.5)"
+msgstr "a zostávajúce minúty (pod/veľkosť 1.5)"
+
+#: src/plugin.py:344
+msgid "with Remaining Minutes (below/Size 2)"
+msgstr "a zostávajúce minúty (pod/veľkosť 2)"
+
+#: src/plugin.py:345
+msgid "with Percent (below)"
+msgstr "s percentami (pod)"
+
+#: src/plugin.py:345
+msgid "with Percent (below/Size 1.5)"
+msgstr "s percentami (pod/veľkosť 1.5)"
+
+#: src/plugin.py:345
+msgid "with Percent (below/Size 2)"
+msgstr "s percentami (nad/veľkosť 2)"
+
+#: src/plugin.py:346
+msgid "with Current 00:00"
+msgstr "s aktuálnym 00:00"
+
+#: src/plugin.py:346
+msgid "with Current 00:00 (Size 1.5)"
+msgstr "s aktuálnym 00:00 (veľkosť 1.5)"
+
+#: src/plugin.py:346
+msgid "with Current 00:00 (Size 2)"
+msgstr "s aktuálnym 00:00 (veľkosť 2)"
+
+#: src/plugin.py:347
+msgid "with Current 00:00 (above)"
+msgstr "s aktuálnym 00:00 (nad)"
+
+#: src/plugin.py:347
+msgid "with Current 00:00 (above/Size 1.5)"
+msgstr "s aktuálnym 00:00 (nad/veľkosť 1.5)"
+
+#: src/plugin.py:347
+msgid "with Current 00:00 (above/Size 2)"
+msgstr "s aktuálnym 00:00 (nad/veľkosť 2)"
+
+#: src/plugin.py:348
+msgid "with Current 00:00 (below)"
+msgstr "s aktuálnym 00:00 (pod)"
+
+#: src/plugin.py:348
+msgid "with Current 00:00 (below/Size 1.5)"
+msgstr "s aktuálnym 00:00 (pod/veľkosť 1.5)"
+
+#: src/plugin.py:348
+msgid "with Current 00:00 (below/Size 2)"
+msgstr "s aktuálnym 00:00 (pod/veľkosť 2)"
+
+#: src/plugin.py:349
+msgid "with Percent Minutes / Total (above)"
+msgstr "s percentami minút / Celkovo (nad)"
+
+#: src/plugin.py:349
+msgid "with Percent Minutes / Total (above/Size 1.5)"
+msgstr "s percentami minút / Celkovo (nad/veľkosť 1.5)"
+
+#: src/plugin.py:349
+msgid "with Percent Minutes / Total (above/Size 2)"
+msgstr "s percentami minút / Celkovo (nad/veľkosť 2)"
+
+#: src/plugin.py:350
+msgid "with absolute Endtime"
+msgstr ""
+
+#: src/plugin.py:350
+#, fuzzy
+#| msgid "with Percent (Size 1.5)"
+msgid "with absolute Endtime (Size 1.5)"
+msgstr "a percenta (veľkosť 1.5)"
+
+#: src/plugin.py:350
+#, fuzzy
+#| msgid "with Percent (Size 2)"
+msgid "with absolute Endtime (Size 2)"
+msgstr "a percenta (veľkosť 2)"
+
+#: src/plugin.py:351
+#, fuzzy
+#| msgid "with Percent Minutes / Total (above)"
+msgid "with Minutes Total / Endtime (above)"
+msgstr "s percentami minút / Celkovo (nad)"
+
+#: src/plugin.py:351
+#, fuzzy
+#| msgid "with Percent Minutes / Total (above/Size 1.5)"
+msgid "with Minutes Total / Endtime (above/Size 1.5)"
+msgstr "s percentami minút / Celkovo (nad/veľkosť 1.5)"
+
+#: src/plugin.py:351
+#, fuzzy
+#| msgid "with Percent Minutes / Total (above/Size 2)"
+msgid "with Minutes Total / Endtime (above/Size 2)"
+msgstr "s percentami minút / Celkovo (nad/veľkosť 2)"
+
+#: src/plugin.py:362
+msgid "Normal (5s)"
+msgstr "Normalne (5s)"
+
+#: src/plugin.py:362
+msgid "Fastmode (2s)"
+msgstr "Rýchly mód (2s)"
+
+#: src/plugin.py:378
+msgid "alphabetic"
+msgstr "abecedne"
+
+#: src/plugin.py:378
+msgid "random"
+msgstr "náhodne"
+
+#: src/plugin.py:379
+msgid "low/fast (all)"
+msgstr "pomaly/rýchlo (všetko)"
+
+#: src/plugin.py:379
+msgid "low/fast (Picture only)"
+msgstr "pomaly/rýchlo (len obrázok)"
+
+#: src/plugin.py:379
+msgid "better/slow"
+msgstr "lepší/pomalší"
+
+#: src/plugin.py:381
+msgid "0.5"
+msgstr "0.5"
+
+#: src/plugin.py:381 src/plugin.py:454 src/plugin.py:459
+msgid "10"
+msgstr ""
+
+#: src/plugin.py:381 src/plugin.py:454 src/plugin.py:459
+msgid "20"
+msgstr ""
+
+#: src/plugin.py:384
+msgid "PNG"
+msgstr "PNG"
+
+#: src/plugin.py:384
+msgid "JPG"
+msgstr "JPG"
+
+#: src/plugin.py:385
+msgid "no cache + no adjustment"
+msgstr "bez cache + bez nastavovania"
+
+#: src/plugin.py:385
+msgid "cache + adjustment (high quality, slow)"
+msgstr "cache + prispôsobenie(vysoká kvalita, pomalšie) "
+
+#: src/plugin.py:385
+msgid "cache + adjustment (low quality, fast)"
+msgstr "cache + prispôsobenie(nízka kvalita, rýchlejšie) "
+
+#: src/plugin.py:404
+msgid "Plug Tuner"
+msgstr "Zabudovaný tuner"
+
+#: src/plugin.py:404
+msgid "USB Tuner"
+msgstr "USB Tuner"
+
+#: src/plugin.py:405
+msgid "Now/Next"
+msgstr "Teraz/Ďalší"
+
+#: src/plugin.py:405
+msgid "EPG"
+msgstr "EPG"
+
+#: src/plugin.py:419
+msgid "normal"
+msgstr "normálne"
+
+#: src/plugin.py:419
+msgid "reduced"
+msgstr "redukované"
+
+#: src/plugin.py:423
+msgid "Javascript"
+msgstr "Javascript"
+
+#: src/plugin.py:423
+#, fuzzy
+#| msgid "Javascript"
+msgid "Javascript no Refresh"
+msgstr "Javascript"
+
+#: src/plugin.py:423
+msgid "Reload"
+msgstr "Znovu nahratie"
+
+#: src/plugin.py:427
+msgid "1 - normal"
+msgstr "1 - normalne"
+
+#: src/plugin.py:427
+msgid "2 - side by side"
+msgstr "2 - bok po boku"
+
+#: src/plugin.py:428
+msgid "MSN"
+msgstr "MSN"
+
+#: src/plugin.py:428
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
+#: src/plugin.py:435 src/plugin.py:564
+msgid "alternative Copy-Mode/DM800hd (24bit)"
+msgstr "alternatívny Mód kopírovania/DM800hd (24bit)"
+
+#: src/plugin.py:435 src/plugin.py:564 src/plugin.py:674
+msgid "yes (32bit)"
+msgstr "áno (32bit)"
+
+#: src/plugin.py:437
+msgid "yes + %"
+msgstr "áno + %"
+
+#: src/plugin.py:442
+msgid "yes, short"
+msgstr "áno, krátke"
+
+#: src/plugin.py:442
+msgid "yes, long"
+msgstr "áno, dlhé"
+
+#: src/plugin.py:448
+msgid "km/h"
+msgstr "km/h"
+
+#: src/plugin.py:448
+msgid "m/s"
+msgstr "m/s"
+
+#: src/plugin.py:454 src/plugin.py:459
+#, fuzzy
+#| msgid "60%"
+msgid "60"
+msgstr "60%"
+
+#: src/plugin.py:461
+msgid "Coversearch"
+msgstr ""
+
+#: src/plugin.py:468 src/plugin.py:469 src/plugin.py:470
+msgid "0"
+msgstr "0"
+
+#: src/plugin.py:468 src/plugin.py:469 src/plugin.py:470
+msgid "90"
+msgstr ""
+
+#: src/plugin.py:468 src/plugin.py:469 src/plugin.py:470
+msgid "180"
+msgstr "180"
+
+#: src/plugin.py:468 src/plugin.py:469 src/plugin.py:470
+msgid "270"
+msgstr "270"
+
+#: src/plugin.py:477 src/plugin.py:478 src/plugin.py:479 src/plugin.py:602
+msgid "always"
+msgstr "vždy"
+
+#: src/plugin.py:477 src/plugin.py:478 src/plugin.py:479
+msgid "1 / min"
+msgstr "1 / min"
+
+#: src/plugin.py:480
+msgid "On+Media+Standby"
+msgstr "Zapnuté+Média+Pohotovostný režim"
+
+#: src/plugin.py:480
+msgid "Standby"
+msgstr "Pohotovostný režim"
+
+#: src/plugin.py:482
+msgid "8bit - grayscale/color"
+msgstr "8bit - čb/farba"
+
+#: src/plugin.py:482
+msgid "32bit - color"
+msgstr "32bit - farba"
+
+#: src/plugin.py:492
+msgid "2 x FastForwardKey"
+msgstr "2 x rýchlo vred tlačidlo"
+
+#: src/plugin.py:492
+msgid "2 x FastForwardKey Type 2"
+msgstr "2 x rýchlo vred tlačidlo typ 2"
+
+#: src/plugin.py:492
+msgid "Long FastForwardKey"
+msgstr "Dlhé tlačidlo rýchlovpred"
+
+#: src/plugin.py:492
+msgid "Long FastForwardKey Type 2"
+msgstr "Dlhé tlačidlo rýchlovpred typ 2"
+
+#: src/plugin.py:492 src/plugin.py:493
+msgid "2 x InfoKey"
+msgstr "2 x Info tlačidlo"
+
+#: src/plugin.py:492 src/plugin.py:493
+msgid "Long InfoKey"
+msgstr "Dlhé tlačidlo info"
+
+#: src/plugin.py:492 src/plugin.py:493
+msgid "2 x Mute"
+msgstr "2 x stlmiť zvuk"
+
+#: src/plugin.py:493
+msgid "2 x FastBackwardKey"
+msgstr "2 x rýchlospäť tlačidlo"
+
+#: src/plugin.py:493
+msgid "2 x FastBackwardKey Type 2"
+msgstr "2 x Rýchlo späť tlačítko Typ 2"
+
+#: src/plugin.py:493
+msgid "Long FastBackwardKey"
+msgstr "Dlhé tlačidlo rýchlospäť"
+
+#: src/plugin.py:493
+msgid "Long FastBackwardKey Type 2"
+msgstr "dlhé Rýchlo späť tlačítko Typ 2"
+
+#: src/plugin.py:514 src/plugin.py:563
+msgid "15min"
+msgstr "15min"
+
+#: src/plugin.py:542
+msgid "yes, extended"
+msgstr "áno, rozšírené"
+
+#: src/plugin.py:598
+msgid "Logfile normal"
+msgstr "Normálny log súbor"
+
+#: src/plugin.py:598
+msgid "Logfile extensive"
+msgstr "Rozsiahly log súbor"
+
+#: src/plugin.py:598
+msgid "Console normal"
+msgstr "bežná konzola"
+
+#: src/plugin.py:602
+msgid "disabled"
+msgstr "zakázané"
+
+#: src/plugin.py:605
+msgid "TV+Radio+Media"
+msgstr "TV+Rádio+Média"
+
+#: src/plugin.py:605
+msgid "TV+Radio"
+msgstr "TV+Rádio"
+
+#: src/plugin.py:605
+msgid "Radio+Media"
+msgstr "Rádio+Média"
+
+#: src/plugin.py:605 src/plugin.py:1212
+msgid "TV"
+msgstr "TV"
+
+#: src/plugin.py:605
+msgid "Radio"
+msgstr "Rádio"
+
+#: src/plugin.py:606
+msgid "normal (full)"
+msgstr "normálne (plné)"
+
+#: src/plugin.py:606
+msgid "trimmed (transparent)"
+msgstr "zdobené (priehľadné)"
+
+#: src/plugin.py:606
+msgid "trimmed (black)"
+msgstr "zdobené (čierna)"
+
+#: src/plugin.py:609
+msgid "MUTE or defined Keys"
+msgstr ""
+
+#: src/plugin.py:609
+msgid "any Key"
+msgstr ""
+
+#: src/plugin.py:746 src/plugin.py:758 src/plugin.py:770
+msgid "Time+Info"
+msgstr "Čas+Info"
+
+#: src/plugin.py:746 src/plugin.py:758 src/plugin.py:770
+msgid "Info"
+msgstr "Info"
+
+#: src/plugin.py:746 src/plugin.py:758
+msgid "Time+Duration+Info"
+msgstr "Čas+Trvanie+Info"
+
+#: src/plugin.py:770
+msgid "Time+Length+Info"
+msgstr "Čas+Dĺžka+Info"
+
+#: src/plugin.py:770
+msgid "Mini-EPG"
+msgstr "Mini-EPG"
+
+#: src/plugin.py:785 src/plugin.py:1299
+msgid "half left"
+msgstr "polovica vľavo"
+
+#: src/plugin.py:785 src/plugin.py:1299
+msgid "half right"
+msgstr "polovica vpravo"
+
+#: src/plugin.py:790 src/plugin.py:1303
+#, fuzzy
+#| msgid "Event Icon Bar"
+msgid "no Bar"
+msgstr "Stĺpec ikon udalosti"
+
+#: src/plugin.py:790 src/plugin.py:1303
+#, fuzzy
+#| msgid "Frame"
+msgid "Frame x2"
+msgstr "Rámček"
+
+#: src/plugin.py:790 src/plugin.py:1303
+#, fuzzy
+#| msgid "Frame"
+msgid "no Frame"
+msgstr "Rámček"
+
+#: src/plugin.py:790 src/plugin.py:1303
+#, fuzzy
+#| msgid "- Lines"
+msgid "Line"
+msgstr "- riadky"
+
+#: src/plugin.py:792 src/plugin.py:1305 src/plugin.py:1643
+msgid "Normal"
+msgstr "Normalne"
+
+#: src/plugin.py:792 src/plugin.py:1305
+msgid "Shadow Edges"
+msgstr "Hrany tieňa"
+
+#: src/plugin.py:792 src/plugin.py:1305
+msgid "Gradient"
+msgstr "Spád"
+
+#: src/plugin.py:801
+msgid "Position"
+msgstr "Umiestnenie"
+
+#: src/plugin.py:801 src/plugin.py:812
+msgid "Name"
+msgstr "Meno"
+
+#: src/plugin.py:801
+msgid "Picon+Position left"
+msgstr "Picon+Pozícia vľavo"
+
+#: src/plugin.py:801
+msgid "Picon+Position below"
+msgstr "Picon+Pozícia pod "
+
+#: src/plugin.py:801
+msgid "Picon+Position right"
+msgstr "Picon+Pozícia vpravo"
+
+#: src/plugin.py:880 src/plugin.py:1325 src/plugin.py:1860
+msgid "Online+Offline"
+msgstr "Aktívný+Neaktívny"
+
+#: src/plugin.py:880 src/plugin.py:1325 src/plugin.py:1860
+msgid "Online"
+msgstr "Aktívný"
+
+#: src/plugin.py:880 src/plugin.py:1325 src/plugin.py:1860
+msgid "Offline"
+msgstr "Vypnuté"
+
+#: src/plugin.py:912 src/plugin.py:970 src/plugin.py:1351 src/plugin.py:1464
+#: src/plugin.py:1809 src/plugin.py:1886
+msgid "use lead-time"
+msgstr "použiť čas dodania"
+
+#: src/plugin.py:912 src/plugin.py:970 src/plugin.py:1351 src/plugin.py:1464
+#: src/plugin.py:1809 src/plugin.py:1886
+msgid "only use Timer"
+msgstr "len použitý časovač"
+
+#: src/plugin.py:913 src/plugin.py:971 src/plugin.py:1352 src/plugin.py:1465
+#: src/plugin.py:1810 src/plugin.py:1887
+msgid "no total Timer"
+msgstr "žiaden celkový časovač"
+
+#: src/plugin.py:913 src/plugin.py:971 src/plugin.py:1352 src/plugin.py:1465
+#: src/plugin.py:1810 src/plugin.py:1887
+msgid "show total Timer"
+msgstr "Zobraz celkový časovač"
+
+#: src/plugin.py:931 src/plugin.py:1425
+msgid "one line"
+msgstr "jeden riadok"
+
+#: src/plugin.py:931 src/plugin.py:1425
+msgid "two lines"
+msgstr "dva riadky"
+
+#: src/plugin.py:953 src/plugin.py:1447 src/plugin.py:1906
+msgid "Memory free"
+msgstr "Voľná pamäť"
+
+#: src/plugin.py:953 src/plugin.py:1447 src/plugin.py:1906
+msgid "Memory available"
+msgstr "Dostupná pamäť"
+
+#: src/plugin.py:1159
+msgid "cloudconvert.org"
+msgstr "cloudconvert.org"
+
+#: src/plugin.py:1159
+msgid "convertapi.com"
+msgstr "convertapi.com"
+
+#: src/plugin.py:1180 src/plugin.py:1189 src/plugin.py:1198 src/plugin.py:1207
+#: src/plugin.py:1577 src/plugin.py:1586 src/plugin.py:2105 src/plugin.py:2114
+#: src/plugin.py:2123 src/plugin.py:2132
+msgid "full Screen"
+msgstr "na celú obrazovku"
+
+#: src/plugin.py:1212
+msgid "TV+OSD"
+msgstr "TV+OSD"
+
+#: src/plugin.py:1642
+msgid "yes except records"
+msgstr "áno okrem nahrávok"
+
+#: src/plugin.py:1643
+msgid "Google API"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "N"
+msgstr "S"
+
+#: src/plugin.py:2456
+msgid "NNE"
+msgstr "SSV"
+
+#: src/plugin.py:2456
+msgid "NE"
+msgstr "SV"
+
+#: src/plugin.py:2456
+msgid "ENE"
+msgstr "VSV"
+
+#: src/plugin.py:2456
+msgid "E"
+msgstr "V"
+
+#: src/plugin.py:2456
+msgid "ESE"
+msgstr "VJV"
+
+#: src/plugin.py:2456
+msgid "SE"
+msgstr "JV"
+
+#: src/plugin.py:2456
+msgid "SSE"
+msgstr "JJV"
+
+#: src/plugin.py:2456
+msgid "S"
+msgstr "J"
+
+#: src/plugin.py:2456
+msgid "SSW"
+msgstr "JJZ"
+
+#: src/plugin.py:2456
+msgid "SW"
+msgstr "JZ"
+
+#: src/plugin.py:2456
+msgid "WSW"
+msgstr "ZJZ"
+
+#: src/plugin.py:2456
+msgid "W"
+msgstr "Z"
+
+#: src/plugin.py:2456
+msgid "WNW"
+msgstr "ZSZ"
+
+#: src/plugin.py:2456
+msgid "NW"
+msgstr "SZ"
+
+#: src/plugin.py:2456
+msgid "NNW"
+msgstr "SSZ"
+
+#: src/plugin.py:4881
+msgid "Load Active Config-File"
+msgstr "Nahraj aktívny konfig. súbor"
+
+#: src/plugin.py:4882
+#, fuzzy
+#| msgid "Load Defaults"
+msgid "Load Defaults / Empty Config"
+msgstr "Nahraj predvolené nastavenia"
+
+#: src/plugin.py:4883
+#, python-format
+msgid "Save Config to File... (%s)"
+msgstr "Uložiť konfig do súboru... (%s)"
+
+#: src/plugin.py:4888 src/plugin.py:4925
+#, python-format
+msgid "Load File : %s"
+msgstr "Nahraj súbor : %s"
+
+#: src/plugin.py:4897
+msgid "Delete File?"
+msgstr "Zmazať súbor?"
+
+#: src/plugin.py:4935
+msgid "deleted"
+msgstr "zmazané"
+
+#: src/plugin.py:4959
+#, python-format
+msgid "currently set : %s"
+msgstr "aktuálne nastavené : %s"
+
+#: src/plugin.py:5137
+msgid "Cancel"
+msgstr "Zrušiť"
+
+#: src/plugin.py:5138
+msgid "Save"
+msgstr "Uložiť"
+
+#: src/plugin.py:5139
+msgid "Restart Displays"
+msgstr "Reštart zobrazovačov"
+
+#: src/plugin.py:5223
+msgid "no LCD1 Picture-File"
+msgstr "žiadne LCD1 Obrazkové data"
+
+#: src/plugin.py:5248
+msgid "no LCD2 Picture-File"
+msgstr "žiadne LCD2 Obrazkové data"
+
+#: src/plugin.py:5274
+msgid "no LCD3 Picture-File"
+msgstr "žiadne LCD3 Obrazkové data"
+
+#: src/plugin.py:5311
+msgid "LCD4linux enabled"
+msgstr "LCD4linux povolený"
+
+#: src/plugin.py:5312
+msgid "LCD 1 Type"
+msgstr "LCD 1 Typ"
+
+#: src/plugin.py:5313
+msgid "- LCD 1 Rotate"
+msgstr "- LCD 1 otočiť"
+
+#: src/plugin.py:5314 src/plugin.py:6249 src/plugin.py:6827
+msgid "- LCD 1 Background Color"
+msgstr "- LCD 1 farba pozadia"
+
+#: src/plugin.py:5315 src/plugin.py:6250 src/plugin.py:6828
+msgid "- LCD 1 Background-Picture [ok]>"
+msgstr "- LCD 1 obrázok pozadia [ok]>"
+
+#: src/plugin.py:5316 src/plugin.py:6251 src/plugin.py:6829
+msgid "- LCD 1 Brightness"
+msgstr "- LCD 1 Jas"
+
+#: src/plugin.py:5317 src/plugin.py:6252 src/plugin.py:6830
+msgid "- LCD 1 Night Reduction"
+msgstr "- LCD 1 Nočná redukcia"
+
+#: src/plugin.py:5318
+msgid "- LCD 1 Refresh"
+msgstr "- LCD 1 obnova"
+
+#: src/plugin.py:5319
+msgid "LCD 2 Type"
+msgstr "LCD 2 Typ"
+
+#: src/plugin.py:5321
+msgid "- LCD 2 Rotate"
+msgstr "- LCD 2 otočiť"
+
+#: src/plugin.py:5322 src/plugin.py:6253 src/plugin.py:6831
+msgid "- LCD 2 Background Color"
+msgstr "- LCD 2 farba pozadia"
+
+#: src/plugin.py:5323 src/plugin.py:6254 src/plugin.py:6832
+msgid "- LCD 2 Background-Picture [ok]>"
+msgstr "- LCD 2 obrázok pozadia [ok]>"
+
+#: src/plugin.py:5324 src/plugin.py:6255 src/plugin.py:6833
+msgid "- LCD 2 Brightness"
+msgstr "- LCD 2 Jas"
+
+#: src/plugin.py:5325 src/plugin.py:6256 src/plugin.py:6834
+msgid "- LCD 2 Night Reduction"
+msgstr "- LCD 2 Nočná redukcia"
+
+#: src/plugin.py:5326
+msgid "- LCD 2 Refresh"
+msgstr "- LCD 2 obnova"
+
+#: src/plugin.py:5327
+msgid "LCD 3 Type"
+msgstr "LCD 3 Typ"
+
+#: src/plugin.py:5329
+msgid "- LCD 3 Rotate"
+msgstr "- LCD 3 otočiť"
+
+#: src/plugin.py:5330 src/plugin.py:6257 src/plugin.py:6835
+msgid "- LCD 3 Background Color"
+msgstr "- LCD 3 farba pozadia"
+
+#: src/plugin.py:5331 src/plugin.py:6258 src/plugin.py:6836
+msgid "- LCD 3 Background-Picture [ok]>"
+msgstr "- LCD 3 obrázok pozadia [ok]>"
+
+#: src/plugin.py:5332 src/plugin.py:6259 src/plugin.py:6837
+msgid "- LCD 3 Brightness"
+msgstr "- LCD 3 Jas"
+
+#: src/plugin.py:5333 src/plugin.py:6260 src/plugin.py:6838
+msgid "- LCD 3 Night Reduction"
+msgstr "- LCD 3 Nočná redukcia"
+
+#: src/plugin.py:5334
+msgid "- LCD 3 Refresh"
+msgstr "- LCD 3 obnova"
+
+#: src/plugin.py:5336
+msgid "Box-Skin-LCD Dimension"
+msgstr "Box-Skin-LCD rozmery"
+
+#: src/plugin.py:5337
+#, fuzzy
+#| msgid "Box-Skin-LCD"
+msgid "Box-Skin-LCD Offset"
+msgstr "Box-Skin-LCD"
+
+#: src/plugin.py:5338
+msgid "Box-Skin-LCD Color"
+msgstr "Box-Skin-LCD Farba"
+
+#: src/plugin.py:5339
+msgid "Box-Skin-LCD Enable On-Mode"
+msgstr "Box-Skin-LCD povoliť zap. mód"
+
+#: src/plugin.py:5340
+msgid "Box-Skin-LCD Enable Media-Mode"
+msgstr "Box-Skin-LCD povoliť média mód"
+
+#: src/plugin.py:5341
+msgid "Box-Skin-LCD Enable Idle-Mode"
+msgstr "Box-Skin-LCD povoliť čakací mód"
+
+#: src/plugin.py:5342
+msgid "OSD [display time]"
+msgstr "OSD [čas zobrazenia]"
+
+#: src/plugin.py:5344 src/plugin.py:5351 src/plugin.py:5551 src/plugin.py:5556
+#: src/plugin.py:5569 src/plugin.py:5581 src/plugin.py:5596 src/plugin.py:5611
+#: src/plugin.py:5623 src/plugin.py:5633 src/plugin.py:5646 src/plugin.py:5659
+#: src/plugin.py:5672 src/plugin.py:5686 src/plugin.py:5701 src/plugin.py:5715
+#: src/plugin.py:5729 src/plugin.py:5741 src/plugin.py:5753 src/plugin.py:5765
+#: src/plugin.py:5775 src/plugin.py:5789 src/plugin.py:5799 src/plugin.py:5810
+#: src/plugin.py:5820 src/plugin.py:5838 src/plugin.py:5856 src/plugin.py:5864
+#: src/plugin.py:5875 src/plugin.py:5886 src/plugin.py:5895 src/plugin.py:5918
+#: src/plugin.py:5940 src/plugin.py:5950 src/plugin.py:5960 src/plugin.py:5970
+#: src/plugin.py:5982 src/plugin.py:5992 src/plugin.py:6001 src/plugin.py:6012
+#: src/plugin.py:6023 src/plugin.py:6034 src/plugin.py:6045 src/plugin.py:6058
+#: src/plugin.py:6068 src/plugin.py:6078 src/plugin.py:6088 src/plugin.py:6098
+#: src/plugin.py:6113 src/plugin.py:6128 src/plugin.py:6141 src/plugin.py:6155
+#: src/plugin.py:6170 src/plugin.py:6183 src/plugin.py:6193 src/plugin.py:6205
+#: src/plugin.py:6217 src/plugin.py:6226 src/plugin.py:6235 src/plugin.py:6244
+#: src/plugin.py:6265 src/plugin.py:6270 src/plugin.py:6282 src/plugin.py:6294
+#: src/plugin.py:6308 src/plugin.py:6320 src/plugin.py:6335 src/plugin.py:6345
+#: src/plugin.py:6360 src/plugin.py:6375 src/plugin.py:6388 src/plugin.py:6401
+#: src/plugin.py:6411 src/plugin.py:6425 src/plugin.py:6436 src/plugin.py:6446
+#: src/plugin.py:6464 src/plugin.py:6482 src/plugin.py:6490 src/plugin.py:6501
+#: src/plugin.py:6512 src/plugin.py:6521 src/plugin.py:6544 src/plugin.py:6566
+#: src/plugin.py:6576 src/plugin.py:6586 src/plugin.py:6596 src/plugin.py:6608
+#: src/plugin.py:6619 src/plugin.py:6630 src/plugin.py:6640 src/plugin.py:6650
+#: src/plugin.py:6665 src/plugin.py:6674 src/plugin.py:6689 src/plugin.py:6704
+#: src/plugin.py:6717 src/plugin.py:6731 src/plugin.py:6746 src/plugin.py:6759
+#: src/plugin.py:6769 src/plugin.py:6781 src/plugin.py:6793 src/plugin.py:6802
+#: src/plugin.py:6811 src/plugin.py:6842 src/plugin.py:6857 src/plugin.py:6872
+#: src/plugin.py:6887 src/plugin.py:6901 src/plugin.py:6914 src/plugin.py:6927
+#: src/plugin.py:6937 src/plugin.py:6955 src/plugin.py:6973 src/plugin.py:6981
+#: src/plugin.py:6992 src/plugin.py:7003 src/plugin.py:7012 src/plugin.py:7035
+#: src/plugin.py:7057 src/plugin.py:7067 src/plugin.py:7077 src/plugin.py:7087
+#: src/plugin.py:7099 src/plugin.py:7108 src/plugin.py:7119 src/plugin.py:7130
+#: src/plugin.py:7141 src/plugin.py:7152 src/plugin.py:7165 src/plugin.py:7175
+#: src/plugin.py:7185 src/plugin.py:7195 src/plugin.py:7205 src/plugin.py:7220
+#: src/plugin.py:7235 src/plugin.py:7248 src/plugin.py:7262 src/plugin.py:7277
+#: src/plugin.py:7290 src/plugin.py:7300 src/plugin.py:7312 src/plugin.py:7324
+#: src/plugin.py:7333 src/plugin.py:7342
+msgid "- which LCD"
+msgstr "- ktoré LCD"
+
+#: src/plugin.py:5345
+msgid "- Show in Mode"
+msgstr "- zobraz v móde"
+
+#: src/plugin.py:5346
+msgid "- OSD Size"
+msgstr "- veľkosť OSD"
+
+#: src/plugin.py:5347
+msgid "- Background/Transparency"
+msgstr "- Pozadie/Priehľadnosť"
+
+#: src/plugin.py:5348
+msgid "- Fast Grab lower quality"
+msgstr "- rýchly snímok nízkej kvality"
+
+#: src/plugin.py:5349
+msgid "Popup Text"
+msgstr "vyskakovací text"
+
+#: src/plugin.py:5352
+msgid "- Clear Key"
+msgstr ""
+
+#: src/plugin.py:5353 src/plugin.py:5612 src/plugin.py:5624 src/plugin.py:5635
+#: src/plugin.py:5648 src/plugin.py:5661 src/plugin.py:5674 src/plugin.py:5742
+#: src/plugin.py:5754 src/plugin.py:5766 src/plugin.py:5776 src/plugin.py:5800
+#: src/plugin.py:5811 src/plugin.py:5821 src/plugin.py:5839 src/plugin.py:5857
+#: src/plugin.py:5897 src/plugin.py:5920 src/plugin.py:5971 src/plugin.py:5984
+#: src/plugin.py:5993 src/plugin.py:6003 src/plugin.py:6014 src/plugin.py:6025
+#: src/plugin.py:6036 src/plugin.py:6099 src/plugin.py:6114 src/plugin.py:6129
+#: src/plugin.py:6142 src/plugin.py:6195 src/plugin.py:6207 src/plugin.py:6271
+#: src/plugin.py:6283 src/plugin.py:6296 src/plugin.py:6309 src/plugin.py:6402
+#: src/plugin.py:6412 src/plugin.py:6426 src/plugin.py:6437 src/plugin.py:6447
+#: src/plugin.py:6465 src/plugin.py:6483 src/plugin.py:6523 src/plugin.py:6546
+#: src/plugin.py:6597 src/plugin.py:6610 src/plugin.py:6621 src/plugin.py:6666
+#: src/plugin.py:6675 src/plugin.py:6690 src/plugin.py:6705 src/plugin.py:6718
+#: src/plugin.py:6771 src/plugin.py:6783 src/plugin.py:6888 src/plugin.py:6928
+#: src/plugin.py:6938 src/plugin.py:6956 src/plugin.py:6974 src/plugin.py:7014
+#: src/plugin.py:7037 src/plugin.py:7088 src/plugin.py:7100 src/plugin.py:7110
+#: src/plugin.py:7121 src/plugin.py:7132 src/plugin.py:7143 src/plugin.py:7206
+#: src/plugin.py:7221 src/plugin.py:7236 src/plugin.py:7249 src/plugin.py:7302
+#: src/plugin.py:7314
+msgid "- Font Size"
+msgstr "- veľkosť písma"
+
+#: src/plugin.py:5354 src/plugin.py:5558 src/plugin.py:5571 src/plugin.py:5588
+#: src/plugin.py:5603 src/plugin.py:5614 src/plugin.py:5625 src/plugin.py:5637
+#: src/plugin.py:5650 src/plugin.py:5663 src/plugin.py:5676 src/plugin.py:5690
+#: src/plugin.py:5706 src/plugin.py:5720 src/plugin.py:5731 src/plugin.py:5743
+#: src/plugin.py:5755 src/plugin.py:5767 src/plugin.py:5780 src/plugin.py:5791
+#: src/plugin.py:5801 src/plugin.py:5812 src/plugin.py:5822 src/plugin.py:5840
+#: src/plugin.py:5858 src/plugin.py:5865 src/plugin.py:5876 src/plugin.py:5887
+#: src/plugin.py:5896 src/plugin.py:5919 src/plugin.py:5941 src/plugin.py:5951
+#: src/plugin.py:5962 src/plugin.py:5972 src/plugin.py:5985 src/plugin.py:5994
+#: src/plugin.py:6004 src/plugin.py:6015 src/plugin.py:6026 src/plugin.py:6037
+#: src/plugin.py:6047 src/plugin.py:6062 src/plugin.py:6072 src/plugin.py:6082
+#: src/plugin.py:6092 src/plugin.py:6100 src/plugin.py:6115 src/plugin.py:6133
+#: src/plugin.py:6143 src/plugin.py:6156 src/plugin.py:6172 src/plugin.py:6185
+#: src/plugin.py:6196 src/plugin.py:6208 src/plugin.py:6239 src/plugin.py:6273
+#: src/plugin.py:6285 src/plugin.py:6298 src/plugin.py:6311 src/plugin.py:6324
+#: src/plugin.py:6337 src/plugin.py:6352 src/plugin.py:6367 src/plugin.py:6379
+#: src/plugin.py:6392 src/plugin.py:6403 src/plugin.py:6416 src/plugin.py:6427
+#: src/plugin.py:6438 src/plugin.py:6448 src/plugin.py:6466 src/plugin.py:6484
+#: src/plugin.py:6491 src/plugin.py:6502 src/plugin.py:6513 src/plugin.py:6522
+#: src/plugin.py:6545 src/plugin.py:6567 src/plugin.py:6577 src/plugin.py:6588
+#: src/plugin.py:6598 src/plugin.py:6611 src/plugin.py:6622 src/plugin.py:6634
+#: src/plugin.py:6644 src/plugin.py:6653 src/plugin.py:6667 src/plugin.py:6676
+#: src/plugin.py:6691 src/plugin.py:6709 src/plugin.py:6719 src/plugin.py:6732
+#: src/plugin.py:6748 src/plugin.py:6761 src/plugin.py:6772 src/plugin.py:6784
+#: src/plugin.py:6815 src/plugin.py:6864 src/plugin.py:6879 src/plugin.py:6892
+#: src/plugin.py:6905 src/plugin.py:6918 src/plugin.py:6929 src/plugin.py:6939
+#: src/plugin.py:6957 src/plugin.py:6975 src/plugin.py:6982 src/plugin.py:6993
+#: src/plugin.py:7004 src/plugin.py:7013 src/plugin.py:7036 src/plugin.py:7058
+#: src/plugin.py:7068 src/plugin.py:7079 src/plugin.py:7089 src/plugin.py:7101
+#: src/plugin.py:7111 src/plugin.py:7122 src/plugin.py:7133 src/plugin.py:7144
+#: src/plugin.py:7154 src/plugin.py:7169 src/plugin.py:7179 src/plugin.py:7189
+#: src/plugin.py:7199 src/plugin.py:7207 src/plugin.py:7222 src/plugin.py:7240
+#: src/plugin.py:7250 src/plugin.py:7263 src/plugin.py:7279 src/plugin.py:7292
+#: src/plugin.py:7303 src/plugin.py:7315 src/plugin.py:7346
+msgid "- Position"
+msgstr "- umiestnenie"
+
+#: src/plugin.py:5355 src/plugin.py:5559 src/plugin.py:5572 src/plugin.py:5589
+#: src/plugin.py:5604 src/plugin.py:5615 src/plugin.py:5626 src/plugin.py:5638
+#: src/plugin.py:5651 src/plugin.py:5664 src/plugin.py:5677 src/plugin.py:5691
+#: src/plugin.py:5707 src/plugin.py:5721 src/plugin.py:5732 src/plugin.py:5744
+#: src/plugin.py:5756 src/plugin.py:5768 src/plugin.py:5781 src/plugin.py:5792
+#: src/plugin.py:5803 src/plugin.py:5813 src/plugin.py:5823 src/plugin.py:5841
+#: src/plugin.py:5859 src/plugin.py:5867 src/plugin.py:5878 src/plugin.py:5889
+#: src/plugin.py:5898 src/plugin.py:5921 src/plugin.py:5943 src/plugin.py:5953
+#: src/plugin.py:5963 src/plugin.py:5973 src/plugin.py:5986 src/plugin.py:5995
+#: src/plugin.py:6005 src/plugin.py:6016 src/plugin.py:6027 src/plugin.py:6038
+#: src/plugin.py:6048 src/plugin.py:6063 src/plugin.py:6073 src/plugin.py:6083
+#: src/plugin.py:6093 src/plugin.py:6101 src/plugin.py:6116 src/plugin.py:6134
+#: src/plugin.py:6144 src/plugin.py:6158 src/plugin.py:6173 src/plugin.py:6186
+#: src/plugin.py:6197 src/plugin.py:6209 src/plugin.py:6240 src/plugin.py:6274
+#: src/plugin.py:6286 src/plugin.py:6299 src/plugin.py:6312 src/plugin.py:6325
+#: src/plugin.py:6338 src/plugin.py:6353 src/plugin.py:6368 src/plugin.py:6380
+#: src/plugin.py:6393 src/plugin.py:6404 src/plugin.py:6417 src/plugin.py:6429
+#: src/plugin.py:6439 src/plugin.py:6449 src/plugin.py:6467 src/plugin.py:6485
+#: src/plugin.py:6493 src/plugin.py:6504 src/plugin.py:6515 src/plugin.py:6524
+#: src/plugin.py:6547 src/plugin.py:6569 src/plugin.py:6579 src/plugin.py:6589
+#: src/plugin.py:6599 src/plugin.py:6612 src/plugin.py:6623 src/plugin.py:6635
+#: src/plugin.py:6645 src/plugin.py:6654 src/plugin.py:6668 src/plugin.py:6677
+#: src/plugin.py:6692 src/plugin.py:6710 src/plugin.py:6720 src/plugin.py:6734
+#: src/plugin.py:6749 src/plugin.py:6762 src/plugin.py:6773 src/plugin.py:6785
+#: src/plugin.py:6816 src/plugin.py:6865 src/plugin.py:6880 src/plugin.py:6893
+#: src/plugin.py:6906 src/plugin.py:6919 src/plugin.py:6930 src/plugin.py:6940
+#: src/plugin.py:6958 src/plugin.py:6976 src/plugin.py:6984 src/plugin.py:6995
+#: src/plugin.py:7006 src/plugin.py:7015 src/plugin.py:7038 src/plugin.py:7060
+#: src/plugin.py:7070 src/plugin.py:7080 src/plugin.py:7090 src/plugin.py:7102
+#: src/plugin.py:7112 src/plugin.py:7123 src/plugin.py:7134 src/plugin.py:7145
+#: src/plugin.py:7155 src/plugin.py:7170 src/plugin.py:7180 src/plugin.py:7190
+#: src/plugin.py:7200 src/plugin.py:7208 src/plugin.py:7223 src/plugin.py:7241
+#: src/plugin.py:7251 src/plugin.py:7265 src/plugin.py:7280 src/plugin.py:7293
+#: src/plugin.py:7304 src/plugin.py:7316 src/plugin.py:7347
+msgid "- Alignment"
+msgstr "- Zarovnanie"
+
+#: src/plugin.py:5356 src/plugin.py:5428 src/plugin.py:5430 src/plugin.py:5432
+#: src/plugin.py:5434 src/plugin.py:5436 src/plugin.py:5552 src/plugin.py:5591
+#: src/plugin.py:5606 src/plugin.py:5618 src/plugin.py:5627 src/plugin.py:5641
+#: src/plugin.py:5654 src/plugin.py:5667 src/plugin.py:5680 src/plugin.py:5693
+#: src/plugin.py:5710 src/plugin.py:5724 src/plugin.py:5735 src/plugin.py:5746
+#: src/plugin.py:5758 src/plugin.py:5784 src/plugin.py:5795 src/plugin.py:5805
+#: src/plugin.py:5815 src/plugin.py:5825 src/plugin.py:5843 src/plugin.py:5870
+#: src/plugin.py:5881 src/plugin.py:5892 src/plugin.py:5907 src/plugin.py:5930
+#: src/plugin.py:5965 src/plugin.py:5975 src/plugin.py:5988 src/plugin.py:5997
+#: src/plugin.py:6006 src/plugin.py:6017 src/plugin.py:6028 src/plugin.py:6039
+#: src/plugin.py:6103 src/plugin.py:6145 src/plugin.py:6163 src/plugin.py:6178
+#: src/plugin.py:6199 src/plugin.py:6211 src/plugin.py:6222 src/plugin.py:6231
+#: src/plugin.py:6266 src/plugin.py:6277 src/plugin.py:6289 src/plugin.py:6302
+#: src/plugin.py:6315 src/plugin.py:6327 src/plugin.py:6341 src/plugin.py:6355
+#: src/plugin.py:6370 src/plugin.py:6383 src/plugin.py:6396 src/plugin.py:6420
+#: src/plugin.py:6431 src/plugin.py:6441 src/plugin.py:6451 src/plugin.py:6469
+#: src/plugin.py:6496 src/plugin.py:6507 src/plugin.py:6518 src/plugin.py:6533
+#: src/plugin.py:6556 src/plugin.py:6591 src/plugin.py:6601 src/plugin.py:6613
+#: src/plugin.py:6624 src/plugin.py:6670 src/plugin.py:6679 src/plugin.py:6721
+#: src/plugin.py:6739 src/plugin.py:6754 src/plugin.py:6775 src/plugin.py:6787
+#: src/plugin.py:6798 src/plugin.py:6807 src/plugin.py:6843 src/plugin.py:6867
+#: src/plugin.py:6882 src/plugin.py:6896 src/plugin.py:6909 src/plugin.py:6922
+#: src/plugin.py:6942 src/plugin.py:6960 src/plugin.py:6987 src/plugin.py:6998
+#: src/plugin.py:7009 src/plugin.py:7024 src/plugin.py:7047 src/plugin.py:7082
+#: src/plugin.py:7092 src/plugin.py:7104 src/plugin.py:7113 src/plugin.py:7124
+#: src/plugin.py:7135 src/plugin.py:7146 src/plugin.py:7210 src/plugin.py:7252
+#: src/plugin.py:7270 src/plugin.py:7285 src/plugin.py:7306 src/plugin.py:7318
+#: src/plugin.py:7329 src/plugin.py:7338
+msgid "- Color"
+msgstr "- Farba"
+
+#: src/plugin.py:5357 src/plugin.py:5628 src/plugin.py:5976 src/plugin.py:5989
+#: src/plugin.py:5998 src/plugin.py:6007 src/plugin.py:6018 src/plugin.py:6029
+#: src/plugin.py:6040 src/plugin.py:6104 src/plugin.py:6146 src/plugin.py:6200
+#: src/plugin.py:6212 src/plugin.py:6223 src/plugin.py:6232 src/plugin.py:6602
+#: src/plugin.py:6614 src/plugin.py:6625 src/plugin.py:6671 src/plugin.py:6680
+#: src/plugin.py:6722 src/plugin.py:6776 src/plugin.py:6788 src/plugin.py:6799
+#: src/plugin.py:6808 src/plugin.py:7093 src/plugin.py:7105 src/plugin.py:7114
+#: src/plugin.py:7125 src/plugin.py:7136 src/plugin.py:7147 src/plugin.py:7211
+#: src/plugin.py:7253 src/plugin.py:7307 src/plugin.py:7319 src/plugin.py:7330
+#: src/plugin.py:7339
+msgid "- Background Color"
+msgstr "- Farba pozadia"
+
+#: src/plugin.py:5358 src/plugin.py:5593 src/plugin.py:5608 src/plugin.py:5620
+#: src/plugin.py:5630 src/plugin.py:5643 src/plugin.py:5656 src/plugin.py:5669
+#: src/plugin.py:5682 src/plugin.py:5698 src/plugin.py:5712 src/plugin.py:5726
+#: src/plugin.py:5750 src/plugin.py:5762 src/plugin.py:5772 src/plugin.py:5786
+#: src/plugin.py:5807 src/plugin.py:5817 src/plugin.py:5827 src/plugin.py:5845
+#: src/plugin.py:5872 src/plugin.py:5883 src/plugin.py:5915 src/plugin.py:5937
+#: src/plugin.py:5967 src/plugin.py:5979 src/plugin.py:6009 src/plugin.py:6020
+#: src/plugin.py:6031 src/plugin.py:6042 src/plugin.py:6110 src/plugin.py:6125
+#: src/plugin.py:6138 src/plugin.py:6152 src/plugin.py:6167 src/plugin.py:6180
+#: src/plugin.py:6202 src/plugin.py:6214 src/plugin.py:6279 src/plugin.py:6291
+#: src/plugin.py:6304 src/plugin.py:6317 src/plugin.py:6332 src/plugin.py:6357
+#: src/plugin.py:6372 src/plugin.py:6385 src/plugin.py:6398 src/plugin.py:6408
+#: src/plugin.py:6422 src/plugin.py:6433 src/plugin.py:6443 src/plugin.py:6453
+#: src/plugin.py:6471 src/plugin.py:6498 src/plugin.py:6509 src/plugin.py:6541
+#: src/plugin.py:6563 src/plugin.py:6593 src/plugin.py:6605 src/plugin.py:6616
+#: src/plugin.py:6627 src/plugin.py:6686 src/plugin.py:6701 src/plugin.py:6714
+#: src/plugin.py:6728 src/plugin.py:6743 src/plugin.py:6756 src/plugin.py:6778
+#: src/plugin.py:6790 src/plugin.py:6869 src/plugin.py:6884 src/plugin.py:6898
+#: src/plugin.py:6911 src/plugin.py:6924 src/plugin.py:6934 src/plugin.py:6944
+#: src/plugin.py:6962 src/plugin.py:6989 src/plugin.py:7000 src/plugin.py:7032
+#: src/plugin.py:7054 src/plugin.py:7084 src/plugin.py:7096 src/plugin.py:7116
+#: src/plugin.py:7127 src/plugin.py:7138 src/plugin.py:7149 src/plugin.py:7217
+#: src/plugin.py:7232 src/plugin.py:7245 src/plugin.py:7259 src/plugin.py:7274
+#: src/plugin.py:7287 src/plugin.py:7309 src/plugin.py:7321
+msgid "- Font"
+msgstr "- písmo"
+
+#: src/plugin.py:5361
+msgid "Active Screen"
+msgstr "aktívna obrazovka"
+
+#: src/plugin.py:5362
+msgid "Screen Switch Select - Screen"
+msgstr "Výber prepínača obrazovky - Obrazovka"
+
+#: src/plugin.py:5363
+msgid "Screen Switch Select - LCD"
+msgstr "Výber prepínača obrazovky - LCD"
+
+#: src/plugin.py:5364
+msgid "Screens used for Changing"
+msgstr "Obrazovky použité na výmenu"
+
+#: src/plugin.py:5365 src/plugin.py:6845
+msgid "Screen 1 Changing Time"
+msgstr "Obrazovka 1 čas zmeny"
+
+#: src/plugin.py:5367 src/plugin.py:6847
+msgid "- Screen 2 Changing Time"
+msgstr "- čas zmeny obrazovky 2"
+
+#: src/plugin.py:5368 src/plugin.py:6848
+msgid "- Screen 3 Changing Time"
+msgstr "- čas zmeny obrazovky 3"
+
+#: src/plugin.py:5369 src/plugin.py:6849
+msgid "- Screen 4 Changing Time"
+msgstr "- čas zmeny obrazovky 4"
+
+#: src/plugin.py:5370 src/plugin.py:6850
+msgid "- Screen 5 Changing Time"
+msgstr "- čas zmeny obrazovky 5"
+
+#: src/plugin.py:5371 src/plugin.py:6851
+msgid "- Screen 6 Changing Time"
+msgstr "- čas zmeny obrazovky 6"
+
+#: src/plugin.py:5372 src/plugin.py:6852
+msgid "- Screen 7 Changing Time"
+msgstr "- čas zmeny obrazovky 7"
+
+#: src/plugin.py:5373 src/plugin.py:6853
+msgid "- Screen 8 Changing Time"
+msgstr "- čas zmeny obrazovky 8"
+
+#: src/plugin.py:5374 src/plugin.py:6854
+msgid "- Screen 9 Changing Time"
+msgstr "- čas zmeny obrazovky 9"
+
+#: src/plugin.py:5375
+msgid "Picture Changing Time"
+msgstr "Obrázok čas zmeny"
+
+#: src/plugin.py:5376
+msgid "Picture Sort"
+msgstr "Zotriedenie obrázkov"
+
+#: src/plugin.py:5377
+msgid "Picture Directory Recursive"
+msgstr "Obrázok rekurzívny priečinok"
+
+#: src/plugin.py:5378
+msgid "Picture Quality for Resizing"
+msgstr "Obrázok kvalita pri zmenu veľkosti"
+
+#: src/plugin.py:5380
+msgid "Picture Quick Update Time [s]"
+msgstr "Obrázok čas rychlej aktualizácie [s]"
+
+#: src/plugin.py:5382
+msgid "Picture Type [only Picture]"
+msgstr "Typ obrázka [len obrázok]"
+
+#: src/plugin.py:5383
+msgid "Background-Picture Type"
+msgstr "Typ obrázka pozadia"
+
+#: src/plugin.py:5384
+msgid "Weather API"
+msgstr "API počasia"
+
+#: src/plugin.py:5385
+msgid "Weather API-Key OpenWeatherMap"
+msgstr "Počasie API-key OpenWeatherMap"
+
+#: src/plugin.py:5386
+msgid "Weather City"
+msgstr "Počasie pre mesto"
+
+#: src/plugin.py:5387
+msgid "Weather City 2"
+msgstr "Počasie pre mesto 2"
+
+#: src/plugin.py:5388
+msgid "Weather-Icon-Path [ok]>"
+msgstr "Počasie-Ikona-Cesta [ok]>"
+
+#: src/plugin.py:5389
+msgid "Weather-Icon Zoom"
+msgstr "Počasie-Ikona zväčšenie"
+
+#: src/plugin.py:5390
+msgid "Weather Low Temperature Color"
+msgstr "Počasie farba nízkej teploty"
+
+#: src/plugin.py:5391
+msgid "Weather High Temperature Color"
+msgstr "Počasie farba vysokej teploty"
+
+#: src/plugin.py:5392
+msgid "Weather Transparency"
+msgstr "Počasie priehľadnosť"
+
+#: src/plugin.py:5393
+msgid "Weather Wind speed unit"
+msgstr "Počasie jednotky rýchlosti vetra"
+
+#: src/plugin.py:5394
+msgid "Weather Rain Chance"
+msgstr "Počasie pravdepodobnosť dažďa"
+
+#: src/plugin.py:5396
+msgid "- Rain Zoom"
+msgstr "- zväčšenie dažďa"
+
+#: src/plugin.py:5397
+msgid "- Rain Color"
+msgstr "- farba dažďa"
+
+#: src/plugin.py:5398
+msgid "- Rain use Color 2 from"
+msgstr "- dážď používa farbu 2 z"
+
+#: src/plugin.py:5399
+msgid "- Rain Color 2"
+msgstr "- farba dažďa 2"
+
+#: src/plugin.py:5400
+msgid "Weather Lines"
+msgstr "Počasie riadky"
+
+#: src/plugin.py:5401
+msgid "Weather Extra Infos"
+msgstr "Počasie rozšírené info"
+
+#: src/plugin.py:5403
+msgid "- Extra Zoom"
+msgstr "- Extra zväčšenie"
+
+#: src/plugin.py:5404
+msgid "- Show chill temperature from difference"
+msgstr "- zobraz teplotu ochladenia ak je rozdiel"
+
+#: src/plugin.py:5405
+msgid "- Extra Color City"
+msgstr "- Extra farba mesta"
+
+#: src/plugin.py:5406
+msgid "- Extra Color Chill"
+msgstr "- Extra farba ochladenia"
+
+#: src/plugin.py:5407
+msgid "Netatmo CO2 Min Range"
+msgstr "Netatmo CO2 Min rozsah"
+
+#: src/plugin.py:5408
+msgid "Netatmo CO2 Max Range"
+msgstr "Netatmo CO2 Max rozsah"
+
+#: src/plugin.py:5409
+msgid "Meteo URL"
+msgstr "URL počasia"
+
+#: src/plugin.py:5410
+msgid "Moon-Icon-Path [ok]>"
+msgstr "Cesta k ikone mesiaca [ok]>"
+
+#: src/plugin.py:5411
+msgid "Recording Picture [ok]>"
+msgstr "Obrázok záznamu [ok]>"
+
+#: src/plugin.py:5412
+msgid "Double-button switches"
+msgstr "Zmena dvoj-stlačením tlačidla"
+
+#: src/plugin.py:5413
+msgid "Key for Screen Change"
+msgstr "tlačidlo pre zmenu obrazovky"
+
+#: src/plugin.py:5414
+msgid "Key for Screen On/Off"
+msgstr "tlačidlo pre zap./vyp. obrazovky"
+
+#: src/plugin.py:5415
+msgid "FritzCall Picture Path [ok]>"
+msgstr "FritzCall cesta k obrázkom [ok]>"
+
+#: src/plugin.py:5416
+msgid "FritzCall Number of Lines per Entry"
+msgstr "FritzCall počet riadkov na vstupny údaj"
+
+#: src/plugin.py:5417
+msgid "FritzCall Number of List Entries"
+msgstr "FritzCall počet položiek zoznamu"
+
+#: src/plugin.py:5418
+msgid "FritzCall Number of Pictures"
+msgstr "FritzCall počet obrázkov"
+
+#: src/plugin.py:5419
+msgid "FritzCall Picture Orientation"
+msgstr "FritzCall orientácia obrázka"
+
+#: src/plugin.py:5420
+msgid "FritzCall Picture Transparency"
+msgstr "FritzCall priehľadnosť obrázka"
+
+#: src/plugin.py:5421
+msgid "FritzCall Pictures Search"
+msgstr "FritzCall vyhľadávanie obrázkov"
+
+#: src/plugin.py:5422
+msgid "FritzCall remove Calls after hours"
+msgstr "FritzCall odobrať volania po hodinách"
+
+#: src/plugin.py:5423
+msgid "FritzCall Popup-Time"
+msgstr "FritzCall čas vyskakovaieho okna"
+
+#: src/plugin.py:5424
+msgid "FritzCall Popup LCD"
+msgstr "FritzCall vyskakovací LCD"
+
+#: src/plugin.py:5425
+msgid "FritzCall Popup Color"
+msgstr "FritzCall farba vyskakovacieho okna"
+
+#: src/plugin.py:5426
+msgid "FritzCall Frame Picture [ok]>"
+msgstr "FritzCall obrázok rámčeka [ok]>"
+
+#: src/plugin.py:5427
+msgid "Calendar ics-Path [ok]>"
+msgstr "Kalendár ics-cesta [ok]>"
+
+#: src/plugin.py:5429 src/plugin.py:5431 src/plugin.py:5433
+msgid "Calendar ics-URL"
+msgstr "Kalendár ics-URL"
+
+#: src/plugin.py:5435
+msgid "Calendar planerFS"
+msgstr "Kalendár plánovač"
+
+#: src/plugin.py:5437
+msgid "Calendar Saturday Color"
+msgstr "Kalendár farba soboty"
+
+#: src/plugin.py:5438
+msgid "Calendar Sunday Color"
+msgstr "Kalendár farba nedele"
+
+#: src/plugin.py:5439
+msgid "Calendar Line Thickness"
+msgstr "Kalendár hrúbka čiary"
+
+#: src/plugin.py:5440
+msgid "Calendar Day Event Preview"
+msgstr "Kalendár denny prehľad"
+
+#: src/plugin.py:5441
+msgid "Calendar Timezone Correction"
+msgstr "Kalendár korekcia časovej zóny"
+
+#: src/plugin.py:5442
+msgid "Calendar Transparency"
+msgstr "Kalendár priehľadnosť"
+
+#: src/plugin.py:5443
+msgid "Calendar Poll Interval"
+msgstr "Kalendár čas obnovy"
+
+#: src/plugin.py:5444
+msgid "Tuner Color"
+msgstr "Farba tunera"
+
+#: src/plugin.py:5445
+msgid "Tuner Color Active"
+msgstr "Farba tunera aktívny"
+
+#: src/plugin.py:5446
+msgid "Tuner Color On"
+msgstr "Farba tunera zapnutý"
+
+#: src/plugin.py:5447
+msgid "Service search first"
+msgstr "Najprv prehľadať kanál"
+
+#: src/plugin.py:5448
+msgid "DVB-T Signal-Quality Correction"
+msgstr "DVB-T korekcia kvality signálu"
+
+#: src/plugin.py:5449
+msgid "Font global [ok]>"
+msgstr "Písmo celkovo [ok]>"
+
+#: src/plugin.py:5450
+msgid "Font 1 [ok]>"
+msgstr "Písmo1 [ok]>"
+
+#: src/plugin.py:5451
+msgid "Font 2 [ok]>"
+msgstr "Písmo 2 [ok]>"
+
+#: src/plugin.py:5452
+msgid "Font 3 [ok]>"
+msgstr "Písmo 3 [ok]>"
+
+#: src/plugin.py:5453
+msgid "Font 4 [ok]>"
+msgstr "Font 4 [ok]>"
+
+#: src/plugin.py:5454
+msgid "Font 5 [ok]>"
+msgstr "Font 5 [ok]>"
+
+#: src/plugin.py:5455
+msgid "Mail 1 Connect"
+msgstr "Pošta 1 pripojenie"
+
+#: src/plugin.py:5456
+msgid "Mail 1 Server"
+msgstr "Pošta 1 server"
+
+#: src/plugin.py:5457
+msgid "Mail 1 [Displayname:]Username"
+msgstr "Pošta 1 [Zobrazované meno:]Meno používateľa"
+
+#: src/plugin.py:5458
+msgid "Mail 1 Password"
+msgstr "Pošta 1 heslo"
+
+#: src/plugin.py:5459
+msgid "Mail 2 Connect"
+msgstr "Pošta 2 pripojenie"
+
+#: src/plugin.py:5460
+msgid "Mail 2 Server"
+msgstr "Pošta 2 server"
+
+#: src/plugin.py:5461
+msgid "Mail 2 [Displayname:]Username"
+msgstr "Pošta 2 [Zobrazované meno:]Meno používateľa"
+
+#: src/plugin.py:5462
+msgid "Mail 2 Password"
+msgstr "Pošta 2 heslo"
+
+#: src/plugin.py:5463
+msgid "Mail 3 Connect"
+msgstr "Pošta 3 pripojenie"
+
+#: src/plugin.py:5464
+msgid "Mail 3 Server"
+msgstr "Pošta 3 server"
+
+#: src/plugin.py:5465
+msgid "Mail 3 [Displayname:]Username"
+msgstr "Pošta 3 [Zobrazované meno:]Meno používateľa"
+
+#: src/plugin.py:5466
+msgid "Mail 3 Password"
+msgstr "Pošta 3 heslo"
+
+#: src/plugin.py:5467
+msgid "Mail 4 Connect"
+msgstr "Pošta 4 pripojenie"
+
+#: src/plugin.py:5468
+msgid "Mail 4 Server"
+msgstr "Pošta 4 server"
+
+#: src/plugin.py:5469
+msgid "Mail 4 [Displayname:]Username"
+msgstr "Pošta 4 [Zobrazované meno:]Meno používateľa"
+
+#: src/plugin.py:5470
+msgid "Mail 4 Password"
+msgstr "Pošta 4 heslo"
+
+#: src/plugin.py:5471
+msgid "Mail 5 Connect"
+msgstr "Pošta 5 pripojenie"
+
+#: src/plugin.py:5472
+msgid "Mail 5 Server"
+msgstr "Pošta 5 server"
+
+#: src/plugin.py:5473
+msgid "Mail 5 [Displayname:]Username"
+msgstr "Pošta 5 [Zobrazované meno:]Meno používateľa"
+
+#: src/plugin.py:5474
+msgid "Mail 5 Password"
+msgstr "Pošta 5 heslo"
+
+#: src/plugin.py:5475
+msgid "Mail Poll Interval"
+msgstr "Pošta obnovovací interval"
+
+#: src/plugin.py:5476
+msgid "Mail IMAP limit to last days"
+msgstr "Pošta IMAP limit na posledné dni"
+
+#: src/plugin.py:5477
+msgid "Mail Show Empty Mailboxes"
+msgstr "Pošta zobraz prázdne kontá"
+
+#: src/plugin.py:5478
+msgid "Mail Show Date"
+msgstr "Pošta zobraz dátum"
+
+#: src/plugin.py:5479
+msgid "Mail Hide Mailadress"
+msgstr "pošta skryť adresy"
+
+#: src/plugin.py:5480
+msgid "Remote Box 1 [Displayname:]IP/Name"
+msgstr "Vzdialený Box 1 [zobrazované meno:]IP/Meno"
+
+#: src/plugin.py:5481
+msgid "Remote Box 2 [Displayname:]IP/Name"
+msgstr "Vzdialený Box 2 [zobrazované meno:]IP/Meno"
+
+#: src/plugin.py:5482
+msgid "Remote Box 3 [Displayname:]IP/Name"
+msgstr "Vzdialený Box 3 [zobrazované meno:]IP/Meno"
+
+#: src/plugin.py:5483
+msgid "Remote Box 4 [Displayname:]IP/Name"
+msgstr "Vzdialený Box 4 [zobrazované meno:]IP/Meno"
+
+#: src/plugin.py:5484
+msgid "Remote Box 5 [Displayname:]IP/Name"
+msgstr "Vzdialený Box 5 [zobrazované meno:]IP/Meno"
+
+#: src/plugin.py:5485
+msgid "Remote Box Poll every Minutes"
+msgstr "Vzdialený Box obnova v minútach"
+
+#: src/plugin.py:5486
+#, fuzzy
+#| msgid "Remote Box 1 [Displayname:]IP/Name"
+msgid "Remote Box Timer [Displayname:]IP/Name"
+msgstr "Vzdialený Box 1 [zobrazované meno:]IP/Meno"
+
+#: src/plugin.py:5487
+#, fuzzy
+#| msgid "Remote Box Poll every Minutes"
+msgid "Remote Box Timer Poll every Minutes"
+msgstr "Vzdialený Box obnova v minútach"
+
+#: src/plugin.py:5488
+msgid "WWW Converter Poll Interval"
+msgstr "WWW Konvertor čas obnovy"
+
+#: src/plugin.py:5489
+msgid "WWW Converter Usage"
+msgstr "použiť WWW konvertor"
+
+#: src/plugin.py:5490
+msgid "WWW ApiKey from cloudconvert.org"
+msgstr "WWW ApiKey z cloudconvert.org"
+
+#: src/plugin.py:5491
+msgid "WWW ApiKey from convertapi.com"
+msgstr "WWW ApiKey z convertapi.com"
+
+#: src/plugin.py:5492
+msgid "WebIF Refresh [s]"
+msgstr "WebIF aktualizácia [s]"
+
+#: src/plugin.py:5493
+msgid "WebIF Refresh Type"
+msgstr "WebIF typ aktualizácie"
+
+#: src/plugin.py:5494
+msgid "WebIF Init Delay"
+msgstr "WebIF Inicializácia oneskorenie"
+
+#: src/plugin.py:5496
+msgid "WebIF IP Deny"
+msgstr "WebIF IP zakáž"
+
+#: src/plugin.py:5497
+msgid "WebIF Design"
+msgstr "WebIF vzhľad"
+
+#: src/plugin.py:5498
+msgid "Save as Picture for WebIF"
+msgstr "Uložiť ako obrázok pre WebIF"
+
+#: src/plugin.py:5499
+msgid "MJPEG Stream LCD 1 enable"
+msgstr "povoliť MJPEG stream pre LCD 1"
+
+#: src/plugin.py:5500
+msgid "MJPEG Stream LCD 1 Port"
+msgstr "port MJPEG stream-u pre LCD 1"
+
+#: src/plugin.py:5501
+#, fuzzy
+#| msgid "MJPEG Stream LCD 1 enable"
+msgid "MJPEG Stream LCD 1 Virtual Brightness"
+msgstr "povoliť MJPEG stream pre LCD 1"
+
+#: src/plugin.py:5502
+msgid "MJPEG Stream LCD 2 enable"
+msgstr "povoliť MJPEG stream pre LCD 2"
+
+#: src/plugin.py:5503
+msgid "MJPEG Stream LCD 2 Port"
+msgstr "port MJPEG stream-u pre LCD 2"
+
+#: src/plugin.py:5504
+#, fuzzy
+#| msgid "MJPEG Stream LCD 2 enable"
+msgid "MJPEG Stream LCD 2 Virtual Brightness"
+msgstr "povoliť MJPEG stream pre LCD 2"
+
+#: src/plugin.py:5505
+msgid "MJPEG Stream LCD 3 enable"
+msgstr "povoliť MJPEG stream pre LCD 3"
+
+#: src/plugin.py:5506
+msgid "MJPEG Stream LCD 3 Port"
+msgstr "port MJPEG stream-u pre LCD 3"
+
+#: src/plugin.py:5507
+#, fuzzy
+#| msgid "MJPEG Stream LCD 3 enable"
+msgid "MJPEG Stream LCD 3 Virtual Brightness"
+msgstr "povoliť MJPEG stream pre LCD 3"
+
+#: src/plugin.py:5509
+#, fuzzy
+#| msgid "MJPEG Stream"
+msgid "MJPEG Cycle"
+msgstr "MJPEG Stream"
+
+#: src/plugin.py:5510
+msgid "MJPEG Restart on Error"
+msgstr ""
+
+#: src/plugin.py:5511
+msgid "MJPEG Header Mode"
+msgstr "MJPEG režim hlavičky"
+
+#: src/plugin.py:5512
+msgid "Sonos IP"
+msgstr ""
+
+#: src/plugin.py:5513
+#, fuzzy
+#| msgid "- Timeout [ms]"
+msgid "Sonos Ping Timeout [ms]"
+msgstr "- čas vypršania [ms]"
+
+#: src/plugin.py:5514
+msgid "Sonos Play Check"
+msgstr ""
+
+#: src/plugin.py:5515
+#, fuzzy
+#| msgid "WebIF Refresh [s]"
+msgid "Sonos Refresh [s]"
+msgstr "WebIF aktualizácia [s]"
+
+#: src/plugin.py:5516
+msgid "MusicCast IP"
+msgstr ""
+
+#: src/plugin.py:5517
+msgid "MusicCast Server IP [optional]"
+msgstr ""
+
+#: src/plugin.py:5518
+#, fuzzy
+#| msgid "- Timeout [ms]"
+msgid "MusicCast Ping Timeout [ms]"
+msgstr "- čas vypršania [ms]"
+
+#: src/plugin.py:5519
+msgid "MusicCast Play Check"
+msgstr ""
+
+#: src/plugin.py:5520
+#, fuzzy
+#| msgid "WebIF Refresh [s]"
+msgid "MusicCast Refresh [s]"
+msgstr "WebIF aktualizácia [s]"
+
+#: src/plugin.py:5521
+msgid "MusicCast Cover"
+msgstr ""
+
+#: src/plugin.py:5522
+msgid "LCD Custom Width"
+msgstr "LCD voliteľná šírka"
+
+#: src/plugin.py:5523
+msgid "LCD Custom Height"
+msgstr "LCD voliteľná výška"
+
+#: src/plugin.py:5524
+#, fuzzy
+#| msgid "LCD Custom Width"
+msgid "LCD Custom Width 2"
+msgstr "LCD voliteľná šírka"
+
+#: src/plugin.py:5525
+#, fuzzy
+#| msgid "LCD Custom Height"
+msgid "LCD Custom Height 2"
+msgstr "LCD voliteľná výška"
+
+#: src/plugin.py:5526
+msgid "LCD Off when shutdown"
+msgstr ""
+
+#: src/plugin.py:5527
+msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
+msgstr "Časovanie ! vypočet všetkých časov na Čas/5*2 v rýchlom móde"
+
+#: src/plugin.py:5528
+msgid "Display Delay [ms]"
+msgstr "Oneskorenie zobrazovača [ms]"
+
+#: src/plugin.py:5529
+msgid "Threads per LCD"
+msgstr "Témy pre LCD"
+
+#: src/plugin.py:5530
+msgid "Show Crash Corner"
+msgstr "Zobraz chybové hlásenia"
+
+#: src/plugin.py:5531
+msgid "Show 'no ....' Messages"
+msgstr "Zobraz 'žiadne ....' hlásenia"
+
+#: src/plugin.py:5532
+msgid "Storage-Devices: Force Read"
+msgstr "Pamäťové-zariadenia: vynútené čítanie"
+
+#: src/plugin.py:5533
+#, fuzzy
+#| msgid "Storage-Devices: Force Read"
+msgid "Storage-Devices: Color Back"
+msgstr "Pamäťové-zariadenia: vynútené čítanie"
+
+#: src/plugin.py:5534
+#, fuzzy
+#| msgid "Storage-Devices: Force Read"
+msgid "Storage-Devices: Color Bar"
+msgstr "Pamäťové-zariadenia: vynútené čítanie"
+
+#: src/plugin.py:5535
+#, fuzzy
+#| msgid "Storage-Devices: Force Read"
+msgid "Storage-Devices: Color Full"
+msgstr "Pamäťové-zariadenia: vynútené čítanie"
+
+#: src/plugin.py:5536
+msgid "Network Check active"
+msgstr ""
+
+#: src/plugin.py:5537
+msgid "Switch FrameBuffer [if possible]"
+msgstr ""
+
+#: src/plugin.py:5538
+msgid "Config Backup Path [ok]>"
+msgstr "cesta zálohy konfig. [ok]>"
+
+#: src/plugin.py:5539
+msgid "Config Restore All Settings"
+msgstr "Konfigurácia obnova všetkých nastavení"
+
+#: src/plugin.py:5540
+msgid "Debug-Logging > /tmp/L4log.txt"
+msgstr "Logovanie > /tmp/L4log.txt"
+
+#: src/plugin.py:5544 src/plugin.py:6822
+msgid "- Backlight Off [disable set Off=On]"
+msgstr "- Podsvietenie vyp. [ Zap.=Vyp.]"
+
+#: src/plugin.py:5545 src/plugin.py:6823
+msgid "- Backlight On"
+msgstr "- Podsvietenie zap."
+
+#: src/plugin.py:5546 src/plugin.py:6824
+msgid "- Backlight Weekend Off [disable set Off=On]"
+msgstr "- Podsvietenie cez víkend vyp. [ Zap.=Vyp.]"
+
+#: src/plugin.py:5547 src/plugin.py:6825
+msgid "- Backlight Weekend On"
+msgstr "- Podsvietenie cez víkend zap."
+
+#: src/plugin.py:5548 src/plugin.py:6261 src/plugin.py:6826
+msgid "- LCD Auto-OFF"
+msgstr ""
+
+#: src/plugin.py:5549 src/plugin.py:6263 src/plugin.py:6840
+msgid "Background"
+msgstr "Pozadie"
+
+#: src/plugin.py:5553 src/plugin.py:6267 src/plugin.py:6844
+msgid "- Picture [ok]>"
+msgstr "- Obrázok [ok]>"
+
+#: src/plugin.py:5557 src/plugin.py:5570
+msgid "- Picon Size"
+msgstr "- Picon veľkosť"
+
+#: src/plugin.py:5560 src/plugin.py:5573 src/plugin.py:5590 src/plugin.py:5605
+#: src/plugin.py:5617 src/plugin.py:5640 src/plugin.py:5653 src/plugin.py:5666
+#: src/plugin.py:5679 src/plugin.py:5708 src/plugin.py:5722 src/plugin.py:5734
+#: src/plugin.py:5745 src/plugin.py:5757 src/plugin.py:5769 src/plugin.py:5783
+#: src/plugin.py:5794 src/plugin.py:5804 src/plugin.py:5814 src/plugin.py:5824
+#: src/plugin.py:5842 src/plugin.py:5860 src/plugin.py:5868 src/plugin.py:5879
+#: src/plugin.py:5890 src/plugin.py:5899 src/plugin.py:5922 src/plugin.py:5945
+#: src/plugin.py:5955 src/plugin.py:5964 src/plugin.py:5974 src/plugin.py:5987
+#: src/plugin.py:5996 src/plugin.py:6102 src/plugin.py:6136 src/plugin.py:6159
+#: src/plugin.py:6174 src/plugin.py:6187 src/plugin.py:6198 src/plugin.py:6210
+#: src/plugin.py:6241 src/plugin.py:6276 src/plugin.py:6288 src/plugin.py:6301
+#: src/plugin.py:6314 src/plugin.py:6340 src/plugin.py:6354 src/plugin.py:6369
+#: src/plugin.py:6381 src/plugin.py:6394 src/plugin.py:6405 src/plugin.py:6419
+#: src/plugin.py:6430 src/plugin.py:6440 src/plugin.py:6450 src/plugin.py:6468
+#: src/plugin.py:6486 src/plugin.py:6494 src/plugin.py:6505 src/plugin.py:6516
+#: src/plugin.py:6525 src/plugin.py:6548 src/plugin.py:6571 src/plugin.py:6581
+#: src/plugin.py:6590 src/plugin.py:6600 src/plugin.py:6669 src/plugin.py:6678
+#: src/plugin.py:6712 src/plugin.py:6735 src/plugin.py:6750 src/plugin.py:6763
+#: src/plugin.py:6774 src/plugin.py:6786 src/plugin.py:6817 src/plugin.py:6866
+#: src/plugin.py:6881 src/plugin.py:6895 src/plugin.py:6907 src/plugin.py:6920
+#: src/plugin.py:6931 src/plugin.py:6941 src/plugin.py:6959 src/plugin.py:6977
+#: src/plugin.py:6985 src/plugin.py:6996 src/plugin.py:7007 src/plugin.py:7016
+#: src/plugin.py:7039 src/plugin.py:7062 src/plugin.py:7072 src/plugin.py:7081
+#: src/plugin.py:7091 src/plugin.py:7103 src/plugin.py:7209 src/plugin.py:7243
+#: src/plugin.py:7266 src/plugin.py:7281 src/plugin.py:7294 src/plugin.py:7305
+#: src/plugin.py:7317 src/plugin.py:7348
+msgid "- Split Screen"
+msgstr "- rozdelená obrazovka"
+
+#: src/plugin.py:5561 src/plugin.py:5574
+msgid "- Full Screen"
+msgstr "- celá obrazovka"
+
+#: src/plugin.py:5562 src/plugin.py:5575
+msgid "- Text Size"
+msgstr "- veľkosť textu"
+
+#: src/plugin.py:5563 src/plugin.py:6065 src/plugin.py:6075 src/plugin.py:6085
+#: src/plugin.py:6095 src/plugin.py:6637 src/plugin.py:6647 src/plugin.py:6659
+#: src/plugin.py:7172 src/plugin.py:7182 src/plugin.py:7192 src/plugin.py:7202
+msgid "- Transparency"
+msgstr "- priehľadnosť"
+
+#: src/plugin.py:5564 src/plugin.py:5576 src/plugin.py:5748 src/plugin.py:5760
+msgid "- Picon Path [ok]>"
+msgstr "- Picon cesta [ok]>"
+
+#: src/plugin.py:5565 src/plugin.py:5577
+msgid "- Picon Path 2 [ok]>"
+msgstr "- Picon cesta 2 [ok]>"
+
+#: src/plugin.py:5566 src/plugin.py:5578
+msgid "- Picon Cache Path [ok]>"
+msgstr "- Picon Cache cesta [ok]>"
+
+#: src/plugin.py:5567
+msgid "Picon 2"
+msgstr "Picon 2"
+
+#: src/plugin.py:5579 src/plugin.py:6343 src/plugin.py:6855
+msgid "Clock"
+msgstr "Hodiny"
+
+#: src/plugin.py:5582 src/plugin.py:5597 src/plugin.py:6236 src/plugin.py:6812
+#: src/plugin.py:7343
+msgid "-  Type"
+msgstr "-  Typ"
+
+#: src/plugin.py:5584 src/plugin.py:5599 src/plugin.py:6348 src/plugin.py:6363
+#: src/plugin.py:6860 src/plugin.py:6875
+msgid "- Analog Clock"
+msgstr "- Analogové Hodiny"
+
+#: src/plugin.py:5586 src/plugin.py:5601 src/plugin.py:6350 src/plugin.py:6365
+#: src/plugin.py:6862 src/plugin.py:6877
+msgid "- Spacing"
+msgstr "- rozstup"
+
+#: src/plugin.py:5587 src/plugin.py:5602 src/plugin.py:5689 src/plugin.py:5705
+#: src/plugin.py:5719 src/plugin.py:5730 src/plugin.py:5790 src/plugin.py:5942
+#: src/plugin.py:5952 src/plugin.py:5961 src/plugin.py:6046 src/plugin.py:6060
+#: src/plugin.py:6070 src/plugin.py:6080 src/plugin.py:6090 src/plugin.py:6171
+#: src/plugin.py:6184 src/plugin.py:6237 src/plugin.py:6323 src/plugin.py:6336
+#: src/plugin.py:6351 src/plugin.py:6366 src/plugin.py:6378 src/plugin.py:6391
+#: src/plugin.py:6568 src/plugin.py:6578 src/plugin.py:6587 src/plugin.py:6632
+#: src/plugin.py:6642 src/plugin.py:6651 src/plugin.py:6747 src/plugin.py:6760
+#: src/plugin.py:6813 src/plugin.py:6863 src/plugin.py:6878 src/plugin.py:6904
+#: src/plugin.py:6917 src/plugin.py:7059 src/plugin.py:7069 src/plugin.py:7078
+#: src/plugin.py:7153 src/plugin.py:7167 src/plugin.py:7177 src/plugin.py:7187
+#: src/plugin.py:7197 src/plugin.py:7278 src/plugin.py:7291 src/plugin.py:7344
+msgid "- Size"
+msgstr "- veľkosť"
+
+#: src/plugin.py:5592 src/plugin.py:5607 src/plugin.py:5619 src/plugin.py:5629
+#: src/plugin.py:5642 src/plugin.py:5655 src/plugin.py:5668 src/plugin.py:5681
+#: src/plugin.py:5711 src/plugin.py:5725 src/plugin.py:5749 src/plugin.py:5761
+#: src/plugin.py:5785 src/plugin.py:5806 src/plugin.py:5816 src/plugin.py:5826
+#: src/plugin.py:5844 src/plugin.py:5871 src/plugin.py:5882 src/plugin.py:5914
+#: src/plugin.py:5936 src/plugin.py:5966 src/plugin.py:5978 src/plugin.py:6008
+#: src/plugin.py:6019 src/plugin.py:6030 src/plugin.py:6041 src/plugin.py:6109
+#: src/plugin.py:6124 src/plugin.py:6137 src/plugin.py:6151 src/plugin.py:6166
+#: src/plugin.py:6179 src/plugin.py:6201 src/plugin.py:6213 src/plugin.py:6278
+#: src/plugin.py:6290 src/plugin.py:6303 src/plugin.py:6316 src/plugin.py:6356
+#: src/plugin.py:6371 src/plugin.py:6384 src/plugin.py:6397 src/plugin.py:6421
+#: src/plugin.py:6432 src/plugin.py:6442 src/plugin.py:6452 src/plugin.py:6470
+#: src/plugin.py:6497 src/plugin.py:6508 src/plugin.py:6540 src/plugin.py:6562
+#: src/plugin.py:6592 src/plugin.py:6604 src/plugin.py:6615 src/plugin.py:6626
+#: src/plugin.py:6685 src/plugin.py:6700 src/plugin.py:6713 src/plugin.py:6727
+#: src/plugin.py:6742 src/plugin.py:6755 src/plugin.py:6777 src/plugin.py:6789
+#: src/plugin.py:6868 src/plugin.py:6883 src/plugin.py:6897 src/plugin.py:6910
+#: src/plugin.py:6923 src/plugin.py:6943 src/plugin.py:6961 src/plugin.py:6988
+#: src/plugin.py:6999 src/plugin.py:7031 src/plugin.py:7053 src/plugin.py:7083
+#: src/plugin.py:7095 src/plugin.py:7115 src/plugin.py:7126 src/plugin.py:7137
+#: src/plugin.py:7148 src/plugin.py:7216 src/plugin.py:7231 src/plugin.py:7244
+#: src/plugin.py:7258 src/plugin.py:7273 src/plugin.py:7286 src/plugin.py:7308
+#: src/plugin.py:7320
+msgid "- Shadow Edges"
+msgstr "- hrany tieňa"
+
+#: src/plugin.py:5594 src/plugin.py:6358 src/plugin.py:6870
+msgid "Clock 2"
+msgstr "Hodiny 2"
+
+#: src/plugin.py:5609 src/plugin.py:6306
+msgid "Program Name"
+msgstr "Názov kanálu"
+
+#: src/plugin.py:5613 src/plugin.py:5636 src/plugin.py:5649 src/plugin.py:5662
+#: src/plugin.py:5675 src/plugin.py:5709 src/plugin.py:5723 src/plugin.py:5777
+#: src/plugin.py:6130 src/plugin.py:6175 src/plugin.py:6272 src/plugin.py:6284
+#: src/plugin.py:6297 src/plugin.py:6310 src/plugin.py:6382 src/plugin.py:6395
+#: src/plugin.py:6413 src/plugin.py:6706 src/plugin.py:6751 src/plugin.py:6889
+#: src/plugin.py:6908 src/plugin.py:6921 src/plugin.py:7237 src/plugin.py:7282
+msgid "- maximum Lines"
+msgstr "- maximum riadkov"
+
+#: src/plugin.py:5616 src/plugin.py:5639 src/plugin.py:5652 src/plugin.py:5665
+#: src/plugin.py:5678 src/plugin.py:5692 src/plugin.py:5733 src/plugin.py:5782
+#: src/plugin.py:5793 src/plugin.py:6135 src/plugin.py:6275 src/plugin.py:6287
+#: src/plugin.py:6300 src/plugin.py:6313 src/plugin.py:6326 src/plugin.py:6339
+#: src/plugin.py:6418 src/plugin.py:6711 src/plugin.py:6894 src/plugin.py:7242
+msgid "- Length"
+msgstr "- dĺžka"
+
+#: src/plugin.py:5621
+msgid "Program Number"
+msgstr "Číslo kanálu"
+
+#: src/plugin.py:5631
+msgid "Program Info"
+msgstr "Info o programe"
+
+#: src/plugin.py:5634 src/plugin.py:5647 src/plugin.py:5660 src/plugin.py:5673
+#: src/plugin.py:5687 src/plugin.py:5688 src/plugin.py:5747 src/plugin.py:5759
+#: src/plugin.py:5770 src/plugin.py:5778 src/plugin.py:5779 src/plugin.py:5802
+#: src/plugin.py:5828 src/plugin.py:5846 src/plugin.py:5861 src/plugin.py:5905
+#: src/plugin.py:5906 src/plugin.py:5928 src/plugin.py:5929 src/plugin.py:5947
+#: src/plugin.py:5957 src/plugin.py:5977 src/plugin.py:6107 src/plugin.py:6123
+#: src/plugin.py:6131 src/plugin.py:6132 src/plugin.py:6147 src/plugin.py:6160
+#: src/plugin.py:6161 src/plugin.py:6177 src/plugin.py:6188 src/plugin.py:6245
+#: src/plugin.py:6295 src/plugin.py:6321 src/plugin.py:6322 src/plugin.py:6346
+#: src/plugin.py:6361 src/plugin.py:6406 src/plugin.py:6414 src/plugin.py:6415
+#: src/plugin.py:6428 src/plugin.py:6454 src/plugin.py:6472 src/plugin.py:6487
+#: src/plugin.py:6531 src/plugin.py:6532 src/plugin.py:6554 src/plugin.py:6555
+#: src/plugin.py:6573 src/plugin.py:6583 src/plugin.py:6603 src/plugin.py:6683
+#: src/plugin.py:6699 src/plugin.py:6707 src/plugin.py:6708 src/plugin.py:6723
+#: src/plugin.py:6736 src/plugin.py:6737 src/plugin.py:6753 src/plugin.py:6764
+#: src/plugin.py:6858 src/plugin.py:6873 src/plugin.py:6890 src/plugin.py:6891
+#: src/plugin.py:6932 src/plugin.py:6945 src/plugin.py:6963 src/plugin.py:6978
+#: src/plugin.py:7022 src/plugin.py:7023 src/plugin.py:7045 src/plugin.py:7046
+#: src/plugin.py:7064 src/plugin.py:7074 src/plugin.py:7094 src/plugin.py:7214
+#: src/plugin.py:7230 src/plugin.py:7238 src/plugin.py:7239 src/plugin.py:7254
+#: src/plugin.py:7267 src/plugin.py:7268 src/plugin.py:7284 src/plugin.py:7295
+msgid "- Type"
+msgstr "- Typ"
+
+#: src/plugin.py:5644
+msgid "Program Info 2"
+msgstr "Program Info 2"
+
+#: src/plugin.py:5657
+msgid "Next Program Info"
+msgstr "Info o ďalšom programe"
+
+#: src/plugin.py:5670 src/plugin.py:6292
+msgid "Extended Description"
+msgstr "Rozšírený popis"
+
+#: src/plugin.py:5683 src/plugin.py:6305
+msgid "- use Info when empty"
+msgstr ""
+
+#: src/plugin.py:5684 src/plugin.py:6318
+msgid "Progress Bar"
+msgstr "priebeh"
+
+#: src/plugin.py:5694 src/plugin.py:6328
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color Text"
+msgstr "- Farba"
+
+#: src/plugin.py:5695 src/plugin.py:6329
+msgid "- Border"
+msgstr "- Okraj"
+
+#: src/plugin.py:5696 src/plugin.py:5796 src/plugin.py:6330 src/plugin.py:6342
+msgid "- Shaded"
+msgstr "- tieňované"
+
+#: src/plugin.py:5697 src/plugin.py:6331
+msgid "- Unit min"
+msgstr "- Jednotka min"
+
+#: src/plugin.py:5699 src/plugin.py:6373 src/plugin.py:6899
+msgid "Informations"
+msgstr "Informácie"
+
+#: src/plugin.py:5702 src/plugin.py:5716
+msgid "- Tunerinfo"
+msgstr "- Tuner nfo"
+
+#: src/plugin.py:5703 src/plugin.py:5717 src/plugin.py:6376 src/plugin.py:6389
+#: src/plugin.py:6902 src/plugin.py:6915
+msgid "- Sensors"
+msgstr "- snímače"
+
+#: src/plugin.py:5704 src/plugin.py:5718 src/plugin.py:6377 src/plugin.py:6390
+#: src/plugin.py:6903 src/plugin.py:6916
+msgid "- CPU"
+msgstr "- CPU"
+
+#: src/plugin.py:5713 src/plugin.py:6386 src/plugin.py:6912
+msgid "Informations 2"
+msgstr "Informácie 2"
+
+#: src/plugin.py:5727
+msgid "Signal Quality Bar"
+msgstr "Stĺpec kvality signálu"
+
+#: src/plugin.py:5736
+msgid "- Gradient"
+msgstr "- spád"
+
+#: src/plugin.py:5737
+msgid "- Bar Range Min"
+msgstr "- Bar rozsah Min"
+
+#: src/plugin.py:5738
+msgid "- Bar Range Max"
+msgstr "- Bar rozsah Max"
+
+#: src/plugin.py:5739
+msgid "Satellite"
+msgstr "Satelit"
+
+#: src/plugin.py:5751
+msgid "Provider"
+msgstr "Poskytovateľ"
+
+#: src/plugin.py:5763 src/plugin.py:6399 src/plugin.py:6925
+msgid "Used Tuner"
+msgstr "Použitý tuner"
+
+#: src/plugin.py:5771 src/plugin.py:6407 src/plugin.py:6933
+msgid "- only active Tuner"
+msgstr "- len aktívny tuner"
+
+#: src/plugin.py:5773 src/plugin.py:6409 src/plugin.py:6885
+msgid "Next Timer Event"
+msgstr "Ďalší časovač udalostí"
+
+#: src/plugin.py:5787 src/plugin.py:6333
+msgid "Volume"
+msgstr "Hlasitosť"
+
+#: src/plugin.py:5797 src/plugin.py:6423
+msgid "Audio/Video"
+msgstr "Audio/Video"
+
+#: src/plugin.py:5808 src/plugin.py:6434
+msgid "Bitrate"
+msgstr "Bitrate"
+
+#: src/plugin.py:5818 src/plugin.py:6444 src/plugin.py:6935
+msgid "Online [Ping]"
+msgstr "Stav siete [Ping]"
+
+#: src/plugin.py:5829 src/plugin.py:6455 src/plugin.py:6946
+msgid "- Show State"
+msgstr "- zobraz stav"
+
+#: src/plugin.py:5830 src/plugin.py:6456 src/plugin.py:6947
+msgid "- Timeout [ms]"
+msgstr "- čas vypršania [ms]"
+
+#: src/plugin.py:5831 src/plugin.py:5832 src/plugin.py:5833 src/plugin.py:5834
+#: src/plugin.py:5835 src/plugin.py:6457 src/plugin.py:6458 src/plugin.py:6459
+#: src/plugin.py:6460 src/plugin.py:6461 src/plugin.py:6948 src/plugin.py:6949
+#: src/plugin.py:6950 src/plugin.py:6951 src/plugin.py:6952
+msgid "- Online Name:Address"
+msgstr "- sieťové meno :Adresa"
+
+#: src/plugin.py:5836 src/plugin.py:6462 src/plugin.py:6953
+msgid "Storage-Devices"
+msgstr "Pamäťové-zariadenia"
+
+#: src/plugin.py:5847 src/plugin.py:6473 src/plugin.py:6964
+msgid "- free Warning"
+msgstr "- bez varovania"
+
+#: src/plugin.py:5848 src/plugin.py:6474 src/plugin.py:6965
+msgid "- extra Info"
+msgstr "- extra Info"
+
+#: src/plugin.py:5849 src/plugin.py:5850 src/plugin.py:5851 src/plugin.py:5852
+#: src/plugin.py:5853 src/plugin.py:6475 src/plugin.py:6476 src/plugin.py:6477
+#: src/plugin.py:6478 src/plugin.py:6479 src/plugin.py:6966 src/plugin.py:6967
+#: src/plugin.py:6968 src/plugin.py:6969 src/plugin.py:6970
+msgid "- Device Name"
+msgstr "- meno zariadenia"
+
+#: src/plugin.py:5854 src/plugin.py:6480 src/plugin.py:6971
+msgid "HDD"
+msgstr "HDD"
+
+#: src/plugin.py:5866 src/plugin.py:5877 src/plugin.py:5888 src/plugin.py:6157
+#: src/plugin.py:6492 src/plugin.py:6503 src/plugin.py:6514 src/plugin.py:6733
+#: src/plugin.py:6983 src/plugin.py:6994 src/plugin.py:7005 src/plugin.py:7264
+msgid "- Zoom"
+msgstr "- zväčšenie"
+
+#: src/plugin.py:5869 src/plugin.py:5880 src/plugin.py:5891 src/plugin.py:6495
+#: src/plugin.py:6506 src/plugin.py:6517 src/plugin.py:6986 src/plugin.py:6997
+#: src/plugin.py:7008
+msgid "- Weather Type"
+msgstr "- typ počasia"
+
+#: src/plugin.py:5873 src/plugin.py:6499 src/plugin.py:6990
+msgid "Weather 2"
+msgstr "Počasie 2"
+
+#: src/plugin.py:5884 src/plugin.py:6510 src/plugin.py:7001
+msgid "Meteo-Weather Station"
+msgstr "Meteo stanica"
+
+#: src/plugin.py:5900 src/plugin.py:5923 src/plugin.py:5946 src/plugin.py:5956
+#: src/plugin.py:6526 src/plugin.py:6549 src/plugin.py:6572 src/plugin.py:6582
+#: src/plugin.py:7017 src/plugin.py:7040 src/plugin.py:7063 src/plugin.py:7073
+msgid "- Station"
+msgstr "- Stanica"
+
+#: src/plugin.py:5901 src/plugin.py:5924 src/plugin.py:6527 src/plugin.py:6550
+#: src/plugin.py:7018 src/plugin.py:7041
+msgid "- Module"
+msgstr "- Modul"
+
+#: src/plugin.py:5902 src/plugin.py:5925 src/plugin.py:6528 src/plugin.py:6551
+#: src/plugin.py:7019 src/plugin.py:7042
+msgid "- Module userdefined"
+msgstr ""
+
+#: src/plugin.py:5903 src/plugin.py:5926 src/plugin.py:6529 src/plugin.py:6552
+#: src/plugin.py:7020 src/plugin.py:7043
+msgid "- Base"
+msgstr "- Základ"
+
+#: src/plugin.py:5904 src/plugin.py:5927 src/plugin.py:6530 src/plugin.py:6553
+#: src/plugin.py:7021 src/plugin.py:7044
+msgid "- Name"
+msgstr "- Meno"
+
+#: src/plugin.py:5908 src/plugin.py:5931 src/plugin.py:6118 src/plugin.py:6534
+#: src/plugin.py:6557 src/plugin.py:6694 src/plugin.py:7025 src/plugin.py:7048
+#: src/plugin.py:7225
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 1"
+msgstr "- Farba"
+
+#: src/plugin.py:5909 src/plugin.py:5932 src/plugin.py:6119 src/plugin.py:6535
+#: src/plugin.py:6558 src/plugin.py:6695 src/plugin.py:7026 src/plugin.py:7049
+#: src/plugin.py:7226
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 2"
+msgstr "- Farba"
+
+#: src/plugin.py:5910 src/plugin.py:5933 src/plugin.py:6120 src/plugin.py:6536
+#: src/plugin.py:6559 src/plugin.py:6696 src/plugin.py:7027 src/plugin.py:7050
+#: src/plugin.py:7227
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 3"
+msgstr "- Farba"
+
+#: src/plugin.py:5911 src/plugin.py:5934 src/plugin.py:6121 src/plugin.py:6537
+#: src/plugin.py:6560 src/plugin.py:6697 src/plugin.py:7028 src/plugin.py:7051
+#: src/plugin.py:7228
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 4"
+msgstr "- Farba"
+
+#: src/plugin.py:5912 src/plugin.py:5935 src/plugin.py:6122 src/plugin.py:6538
+#: src/plugin.py:6561 src/plugin.py:6698 src/plugin.py:7029 src/plugin.py:7052
+#: src/plugin.py:7229
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 5"
+msgstr "- Farba"
+
+#: src/plugin.py:5913 src/plugin.py:6539 src/plugin.py:7030
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 6"
+msgstr "- Farba"
+
+#: src/plugin.py:5916 src/plugin.py:6542 src/plugin.py:7033
+msgid "Netatmo 2"
+msgstr "Netatmo 2"
+
+#: src/plugin.py:5938 src/plugin.py:6564 src/plugin.py:7055
+msgid "Netatmo CO2 Indicator"
+msgstr "Netatmo CO2 Indikátor"
+
+#: src/plugin.py:5944 src/plugin.py:5954 src/plugin.py:6570 src/plugin.py:6580
+#: src/plugin.py:7061 src/plugin.py:7071
+msgid "- Length [Bar]"
+msgstr "- dĺžka [Bar]"
+
+#: src/plugin.py:5948 src/plugin.py:6574 src/plugin.py:7065
+msgid "Netatmo Comfort Indicator"
+msgstr "Netatmo Komfortný Indikátor"
+
+#: src/plugin.py:5958 src/plugin.py:6584 src/plugin.py:7075
+msgid "Moonphase"
+msgstr "Fáza mesiaca"
+
+#: src/plugin.py:5968 src/plugin.py:6594 src/plugin.py:7085
+msgid "Sunrise"
+msgstr "Východ slnka"
+
+#: src/plugin.py:5980 src/plugin.py:6663 src/plugin.py:7097
+msgid "Show oscam.lcd"
+msgstr "Zobraz oscam.lcd"
+
+#: src/plugin.py:5983 src/plugin.py:6002 src/plugin.py:6013 src/plugin.py:6024
+#: src/plugin.py:6089 src/plugin.py:6609 src/plugin.py:6620 src/plugin.py:7109
+#: src/plugin.py:7120 src/plugin.py:7131 src/plugin.py:7196
+msgid "- File [ok]>"
+msgstr "- súbor [ok]>"
+
+#: src/plugin.py:5990
+msgid "Show ecm.info"
+msgstr "Zobraz ecm.info"
+
+#: src/plugin.py:5999 src/plugin.py:6606 src/plugin.py:7106
+msgid "Show Textfile"
+msgstr "Zobraz textový súbor"
+
+#: src/plugin.py:6010 src/plugin.py:6617 src/plugin.py:7117
+msgid "Show Textfile 2"
+msgstr "Zobraz textový súbor 2"
+
+#: src/plugin.py:6021 src/plugin.py:7128
+msgid "Show Textfile 3"
+msgstr "Zobraz textový súbor 3"
+
+#: src/plugin.py:6032 src/plugin.py:7139
+msgid "Show HTTP Text"
+msgstr "Zobraz HTTP Text"
+
+#: src/plugin.py:6035 src/plugin.py:6049 src/plugin.py:7142 src/plugin.py:7156
+msgid "- URL"
+msgstr "- URL"
+
+#: src/plugin.py:6043 src/plugin.py:7150
+msgid "WWW-Internet Converter"
+msgstr "Konvertor web stránok"
+
+#: src/plugin.py:6050 src/plugin.py:7157
+msgid "- HTTP Width"
+msgstr "- HTTP šírka"
+
+#: src/plugin.py:6051 src/plugin.py:7158
+msgid "- HTTP Height"
+msgstr "- HTTP výška"
+
+#: src/plugin.py:6052 src/plugin.py:7159
+msgid "- Cut from X"
+msgstr "- orezanie z X"
+
+#: src/plugin.py:6053 src/plugin.py:7160
+msgid "- Cut from Y"
+msgstr "- orezanie z Y"
+
+#: src/plugin.py:6054 src/plugin.py:7161
+msgid "- Cut Width [disable = 0]"
+msgstr "- šírka orezania [vyp. = 0]"
+
+#: src/plugin.py:6055 src/plugin.py:7162
+msgid "- Cut Height [disable = 0]"
+msgstr "- výška orezania [vyp. = 0]"
+
+#: src/plugin.py:6056 src/plugin.py:6628 src/plugin.py:7163
+msgid "Show Picture"
+msgstr "Zobraz obrázok"
+
+#: src/plugin.py:6059 src/plugin.py:6069 src/plugin.py:6079 src/plugin.py:6631
+#: src/plugin.py:6641 src/plugin.py:7166 src/plugin.py:7176 src/plugin.py:7186
+msgid "- File or Path [ok]>"
+msgstr "- súbor alebo cesta [ok]>"
+
+#: src/plugin.py:6061 src/plugin.py:6071 src/plugin.py:6081 src/plugin.py:6091
+#: src/plugin.py:6633 src/plugin.py:6643 src/plugin.py:6652 src/plugin.py:7168
+#: src/plugin.py:7178 src/plugin.py:7188 src/plugin.py:7198
+msgid "- Size max Height"
+msgstr "- max výška"
+
+#: src/plugin.py:6064 src/plugin.py:6074 src/plugin.py:6084 src/plugin.py:6094
+#: src/plugin.py:6636 src/plugin.py:6646 src/plugin.py:7171 src/plugin.py:7181
+#: src/plugin.py:7191 src/plugin.py:7201
+msgid "- Quick Update"
+msgstr "- rýchla aktualizácia"
+
+#: src/plugin.py:6066 src/plugin.py:6638 src/plugin.py:7173
+msgid "Show Picture 2"
+msgstr "Zobraz obrázok 2"
+
+#: src/plugin.py:6076 src/plugin.py:7183
+msgid "Show Picture 3"
+msgstr "Zobraz obrázok 3"
+
+#: src/plugin.py:6086 src/plugin.py:7193
+msgid "Show Picture 4"
+msgstr "Zobraz obrázok 4"
+
+#: src/plugin.py:6105 src/plugin.py:6681 src/plugin.py:7212
+msgid "- Lines"
+msgstr "- riadky"
+
+#: src/plugin.py:6106 src/plugin.py:6682 src/plugin.py:7213
+msgid "- Mail Konto"
+msgstr "- e-mailové konto"
+
+#: src/plugin.py:6108 src/plugin.py:6117 src/plugin.py:6176 src/plugin.py:6684
+#: src/plugin.py:6693 src/plugin.py:6752 src/plugin.py:7215 src/plugin.py:7224
+#: src/plugin.py:7283
+msgid "- max Width"
+msgstr "- max šírka"
+
+#: src/plugin.py:6126 src/plugin.py:6702 src/plugin.py:7233
+#, fuzzy
+#| msgid "Remote Box"
+msgid "Remote Box Timer"
+msgstr "Vzdialený Box"
+
+#: src/plugin.py:6148 src/plugin.py:6724 src/plugin.py:7255
+msgid "- Picture Size"
+msgstr "- veľkosť obrázka"
+
+#: src/plugin.py:6149 src/plugin.py:6725 src/plugin.py:7256
+msgid "- Picture Position"
+msgstr "- umiestnenie obrázka"
+
+#: src/plugin.py:6150 src/plugin.py:6726 src/plugin.py:7257
+msgid "- Picture Alignment"
+msgstr "- zarovnanie obrázka"
+
+#: src/plugin.py:6162 src/plugin.py:6738 src/plugin.py:7269
+msgid "- Layout"
+msgstr "- rozmiestnenie"
+
+#: src/plugin.py:6164 src/plugin.py:6740 src/plugin.py:7271
+msgid "- Current Day Background Color"
+msgstr "- Farba pozadia aktuálneho dňa"
+
+#: src/plugin.py:6165 src/plugin.py:6741 src/plugin.py:7272
+msgid "- Caption Color"
+msgstr "- farba titulku"
+
+#: src/plugin.py:6168 src/plugin.py:6744 src/plugin.py:7275
+msgid "Dates List"
+msgstr "Zoznam dátumov"
+
+#: src/plugin.py:6181 src/plugin.py:6757 src/plugin.py:7288
+msgid "Event Icon Bar"
+msgstr "Stĺpec ikon udalosti"
+
+#: src/plugin.py:6189 src/plugin.py:6765 src/plugin.py:7296
+msgid "- Popup Screen"
+msgstr "- vyskakovacia obrazovka"
+
+#: src/plugin.py:6190 src/plugin.py:6766 src/plugin.py:7297
+msgid "- Popup LCD"
+msgstr "- vyskakovacie LCD"
+
+#: src/plugin.py:6191 src/plugin.py:6767 src/plugin.py:7298
+#, fuzzy
+#| msgid "Show Textfile 2"
+msgid "Show Text 1"
+msgstr "Zobraz textový súbor 2"
+
+#: src/plugin.py:6194 src/plugin.py:6206 src/plugin.py:6770 src/plugin.py:6782
+#: src/plugin.py:7301 src/plugin.py:7313
+#, fuzzy
+#| msgid "- Text Size"
+msgid "- Text"
+msgstr "- veľkosť textu"
+
+#: src/plugin.py:6203 src/plugin.py:6779 src/plugin.py:7310
+#, fuzzy
+#| msgid "Show Textfile 2"
+msgid "Show Text 2"
+msgstr "Zobraz textový súbor 2"
+
+#: src/plugin.py:6215 src/plugin.py:6791 src/plugin.py:7322
+msgid "Rectangle 1"
+msgstr "Obdĺžnik 1"
+
+#: src/plugin.py:6218 src/plugin.py:6227 src/plugin.py:6794 src/plugin.py:6803
+#: src/plugin.py:7325 src/plugin.py:7334
+msgid "- Position x"
+msgstr "- pozícia x"
+
+#: src/plugin.py:6219 src/plugin.py:6228 src/plugin.py:6795 src/plugin.py:6804
+#: src/plugin.py:7326 src/plugin.py:7335
+msgid "- Position y"
+msgstr "- pozícia y"
+
+#: src/plugin.py:6220 src/plugin.py:6229 src/plugin.py:6796 src/plugin.py:6805
+#: src/plugin.py:7327 src/plugin.py:7336
+msgid "- Size x"
+msgstr "- veľkosť x"
+
+#: src/plugin.py:6221 src/plugin.py:6230 src/plugin.py:6797 src/plugin.py:6806
+#: src/plugin.py:7328 src/plugin.py:7337
+msgid "- Size y"
+msgstr "- veľkosť y"
+
+#: src/plugin.py:6224 src/plugin.py:6800 src/plugin.py:7331
+msgid "Rectangle 2"
+msgstr "Obdĺžnik 2"
+
+#: src/plugin.py:6233 src/plugin.py:6809 src/plugin.py:7340
+msgid "Recording"
+msgstr "Záznam"
+
+#: src/plugin.py:6242
+msgid "Stutter TV"
+msgstr "Koktavá TV"
+
+#: src/plugin.py:6262 src/plugin.py:6839
+msgid "- Screens used for Changing"
+msgstr "- použité obrazovky na výmenu"
+
+#: src/plugin.py:6268
+msgid "Title"
+msgstr "Titulok"
+
+#: src/plugin.py:6280
+msgid "Infos"
+msgstr "Informácie"
+
+#: src/plugin.py:6648
+msgid "Show Cover"
+msgstr "Zobraz obálku"
+
+#: src/plugin.py:6655 src/plugin.py:6656
+msgid "- Search Path [ok]>"
+msgstr "- prehľadávaná cesta [ok]>"
+
+#: src/plugin.py:6657
+msgid "- Default Cover [ok]>"
+msgstr "- predvolená obálka [ok]>"
+
+#: src/plugin.py:6658
+msgid "- Picon First"
+msgstr "- najprv Picon"
+
+#: src/plugin.py:6660
+#, fuzzy
+#| msgid "- Download Cover from Google"
+msgid "- Download Cover"
+msgstr "- stiahnuť obálku z Googla"
+
+#: src/plugin.py:6661
+#, fuzzy
+#| msgid "Download Logfile"
+msgid "- Download Type"
+msgstr "stiahnuť log súbor"
+
+#: src/plugin.py:6662
+msgid "- Google API-Key console.developers.google.com/apis"
+msgstr ""
+
+#: src/plugin.py:6821
+msgid "LCD Display"
+msgstr "LCD zobrazovač"
+
+#: src/plugin.py:7360
+#, fuzzy
+#| msgid "LCD Display"
+msgid "LCD4linux Display-Mode On"
+msgstr "LCD zobrazovač"
+
+#: src/plugin.py:7361
+msgid "Set Media >>"
+msgstr ""
+
+#: src/plugin.py:7365
+msgid "LCD4linux Display-Mode MediaPlayer"
+msgstr ""
+
+#: src/plugin.py:7366
+msgid "Set Idle >>"
+msgstr ""
+
+#: src/plugin.py:7370
+msgid "LCD4linux Display-Mode Idle"
+msgstr ""
+
+#: src/plugin.py:7371
+#, fuzzy
+#| msgid "Global"
+msgid "Set Global >>"
+msgstr "Celkovo"
+
+#: src/plugin.py:7375
+#, fuzzy
+#| msgid "LCD4linux enabled"
+msgid "LCD4linux Settings"
+msgstr "LCD4linux povolený"
+
+#: src/plugin.py:7376
+msgid "Set On >>"
+msgstr ""
+
+#: src/plugin.py:7389
+msgid "Choose dir"
+msgstr "Zvoľ priečinok"
+
+#: src/plugin.py:7392 src/plugin.py:7395 src/plugin.py:7401 src/plugin.py:7404
+msgid "Choose file"
+msgstr "Zvoľ súbor"
+
+#: src/plugin.py:7398
+msgid "Choose font"
+msgstr "Zvoľ písmo"
+
+#: src/plugin.py:7560
+#, python-format
+msgid "%s - Current value: %s"
+msgstr "%s - Aktuálna hodnota: %s"
+
+#: src/plugin.py:7692
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
@@ -999,1505 +4043,157 @@ msgstr ""
 "Je potrebné reštartovať GUI aby sa aplikovali zmeny.\n"
 "Chceš restartovať GUI teraz?"
 
-msgid "Global"
-msgstr "Celkovo"
-
-msgid "Gradient"
-msgstr "Spád"
-
-msgid "HDD"
-msgstr "HDD"
-
-msgid "IMAP"
-msgstr "IMAP"
-
-msgid "IMAP-SSL"
-msgstr "IMAP-SSL"
-
-msgid "IP seurity not supported by Box"
-msgstr "IP zabezpečenie nie je podporované v box-e"
-
-msgid "Info"
-msgstr "Info"
-
-msgid "Informations"
-msgstr "Informácie"
-
-msgid "Informations 2"
-msgstr "Informácie 2"
-
-msgid "Infos"
-msgstr "Informácie"
-
-msgid "Internal Box-Skin-LCD"
-msgstr "Zabudovaný Box-Skin-LCD"
-
-msgid "Internal TFT-LCD 400x240"
-msgstr "Zabudovaný TFT-LCD 400x240"
-
-msgid "Internal Vu+ Duo2 LCD 400x240"
-msgstr "Zabudovaný Vu+ Duo2 LCD 400x240"
-
-msgid "JPG"
-msgstr "JPG"
-
-msgid "January"
-msgstr "Január"
-
-msgid "Javascript"
-msgstr "Javascript"
-
-msgid "July"
-msgstr "Júl"
-
-msgid "June"
-msgstr "Jún"
-
-msgid "Key for Screen Change"
-msgstr "tlačidlo pre zmenu obrazovky"
-
-msgid "Key for Screen On/Off"
-msgstr "tlačidlo pre zap./vyp. obrazovky"
-
-msgid "Knob"
-msgstr "Tlačidlo"
-
-msgid "Knob+Value"
-msgstr "Tlačidlo+hodnota"
-
-msgid "LCD 1"
-msgstr "LCD 1"
-
-msgid "LCD 1 Type"
-msgstr "LCD 1 Typ"
-
-msgid "LCD 1+2"
-msgstr "LCD 1+2"
-
-msgid "LCD 1+2+3"
-msgstr "LCD 1+2+3"
-
-msgid "LCD 1+3"
-msgstr "LCD 1+3"
-
-msgid "LCD 1-3"
-msgstr "LCD 1-3"
-
-msgid "LCD 2"
-msgstr "LCD 2"
-
-msgid "LCD 2 Type"
-msgstr "LCD 2 Typ"
-
-msgid "LCD 2+3"
-msgstr "LCD 2+3"
-
-msgid "LCD 3"
-msgstr "LCD 3"
-
-msgid "LCD 3 Type"
-msgstr "LCD 3 Typ"
-
-msgid "LCD Custom Height"
-msgstr "LCD voliteľná výška"
-
-msgid "LCD Custom Width"
-msgstr "LCD voliteľná šírka"
-
-msgid "LCD Display"
-msgstr "LCD zobrazovač"
-
-msgid "LCD4linux Screen Switch"
-msgstr "Prepínač obrazovky LCD4linux"
-
-msgid "LCD4linux enabled"
-msgstr "LCD4linux povolený"
-
-msgid "Last Quarter"
-msgstr "Posledná štvrtina"
-
-msgid "Load Active Config-File"
-msgstr "Nahraj aktívny konfig. súbor"
-
-msgid "Load Defaults"
-msgstr "Nahraj predvolené nastavenia"
-
-msgid "Load File : %s"
-msgstr "Nahraj súbor : %s"
-
-msgid "Load@1min"
-msgstr "Load@1min"
-
-msgid "Load@5min"
-msgstr "Load@5min"
-
-msgid "Logfile extensive"
-msgstr "Rozsiahly log súbor"
-
-msgid "Logfile normal"
-msgstr "Normálny log súbor"
-
-msgid "Long FastBackwardKey"
-msgstr "Dlhé tlačidlo rýchlospäť"
-
-msgid "Long FastBackwardKey Type 2"
-msgstr "dlhé Rýchlo späť tlačítko Typ 2"
-
-msgid "Long FastForwardKey"
-msgstr "Dlhé tlačidlo rýchlovpred"
-
-msgid "Long FastForwardKey Type 2"
-msgstr "Dlhé tlačidlo rýchlovpred typ 2"
-
-msgid "Long InfoKey"
-msgstr "Dlhé tlačidlo info"
-
-msgid "MJPEG Boundary Mode"
-msgstr "MJPEG hraničný mód"
-
-msgid "MJPEG Header Mode"
-msgstr "MJPEG režim hlavičky"
-
-msgid "MJPEG Stream"
-msgstr "MJPEG Stream"
-
-msgid "MJPEG Stream LCD 1 Port"
-msgstr "port MJPEG stream-u pre LCD 1"
-
-msgid "MJPEG Stream LCD 1 enable"
-msgstr "povoliť MJPEG stream pre LCD 1"
-
-msgid "MJPEG Stream LCD 2 Port"
-msgstr "port MJPEG stream-u pre LCD 2"
-
-msgid "MJPEG Stream LCD 2 enable"
-msgstr "povoliť MJPEG stream pre LCD 2"
-
-msgid "MJPEG Stream LCD 3 Port"
-msgstr "port MJPEG stream-u pre LCD 3"
-
-msgid "MJPEG Stream LCD 3 enable"
-msgstr "povoliť MJPEG stream pre LCD 3"
-
-msgid "MSN"
-msgstr "MSN"
-
-msgid "Mail"
-msgstr "Pošta"
-
-msgid "Mail 1 Connect"
-msgstr "Pošta 1 pripojenie"
-
-msgid "Mail 1 Password"
-msgstr "Pošta 1 heslo"
-
-msgid "Mail 1 Server"
-msgstr "Pošta 1 server"
-
-msgid "Mail 1 [Displayname:]Username"
-msgstr "Pošta 1 [Zobrazované meno:]Meno používateľa"
-
-msgid "Mail 2 Connect"
-msgstr "Pošta 2 pripojenie"
-
-msgid "Mail 2 Password"
-msgstr "Pošta 2 heslo"
-
-msgid "Mail 2 Server"
-msgstr "Pošta 2 server"
-
-msgid "Mail 2 [Displayname:]Username"
-msgstr "Pošta 2 [Zobrazované meno:]Meno používateľa"
-
-msgid "Mail 3 Connect"
-msgstr "Pošta 3 pripojenie"
-
-msgid "Mail 3 Password"
-msgstr "Pošta 3 heslo"
-
-msgid "Mail 3 Server"
-msgstr "Pošta 3 server"
-
-msgid "Mail 3 [Displayname:]Username"
-msgstr "Pošta 3 [Zobrazované meno:]Meno používateľa"
-
-msgid "Mail 4 Connect"
-msgstr "Pošta 4 pripojenie"
-
-msgid "Mail 4 Password"
-msgstr "Pošta 4 heslo"
-
-msgid "Mail 4 Server"
-msgstr "Pošta 4 server"
-
-msgid "Mail 4 [Displayname:]Username"
-msgstr "Pošta 4 [Zobrazované meno:]Meno používateľa"
-
-msgid "Mail 5 Connect"
-msgstr "Pošta 5 pripojenie"
-
-msgid "Mail 5 Password"
-msgstr "Pošta 5 heslo"
-
-msgid "Mail 5 Server"
-msgstr "Pošta 5 server"
-
-msgid "Mail 5 [Displayname:]Username"
-msgstr "Pošta 5 [Zobrazované meno:]Meno používateľa"
-
-msgid "Mail Hide Mailadress"
-msgstr "pošta skryť adresy"
-
-msgid "Mail IMAP limit to last days"
-msgstr "Pošta IMAP limit na posledné dni"
-
-msgid "Mail Poll Interval"
-msgstr "Pošta obnovovací interval"
-
-msgid "Mail Show Date"
-msgstr "Pošta zobraz dátum"
-
-msgid "Mail Show Empty Mailboxes"
-msgstr "Pošta zobraz prázdne kontá"
-
-msgid "March"
-msgstr "Marec"
-
-msgid "May"
-msgstr "Máj"
-
-msgid "Media"
-msgstr "Média"
-
-msgid "Memory available"
-msgstr "Dostupná pamäť"
-
-msgid "Memory free"
-msgstr "Voľná pamäť"
-
-msgid "Meteo URL"
-msgstr "URL počasia"
-
-msgid "Meteo-Weather Station"
-msgstr "Meteo stanica"
-
-msgid "Mini-EPG"
-msgstr "Mini-EPG"
-
-msgid "Module 1"
-msgstr "Modul 1"
-
-msgid "Module 1+2"
-msgstr "Modul 1+2"
-
-msgid "Module 1+2+3"
-msgstr "Modul 1+2+3"
-
-msgid "Module 1+2+4"
-msgstr "Modul 1+2+4"
-
-msgid "Module 1+3"
-msgstr "Modul 1+3"
-
-msgid "Module 1+3+4"
-msgstr "Modul 1+3+4"
-
-msgid "Module 1+4"
-msgstr "Modul 1+4"
-
-msgid "Module 1-4"
-msgstr "Modul 1-4"
-
-msgid "Module 1-5"
-msgstr "Modul 1-5"
-
-msgid "Module 2"
-msgstr "Modul 2"
-
-msgid "Module 2+3"
-msgstr "Modul 2+3"
-
-msgid "Module 2+3+4"
-msgstr "Modul 2+3+4"
-
-msgid "Module 2+4"
-msgstr "Modul 2+4"
-
-msgid "Module 3"
-msgstr "Modul 3"
-
-msgid "Module 3+4"
-msgstr "Modul 3+4"
-
-msgid "Module 4"
-msgstr "Modul 4"
-
-msgid "Module 5"
-msgstr "Modul 5"
-
-msgid "Mon"
-msgstr "Po"
-
-msgid "Monday"
-msgstr "Pondelok"
-
-msgid "Month"
-msgstr "Mesiac"
-
-msgid "Month+Header"
-msgstr "Mesiac+hlavička"
-
-msgid "Moon-Icon-Path [ok]>"
-msgstr "Cesta k ikone mesiaca [ok]>"
-
-msgid "Moonphase"
-msgstr "Fáza mesiaca"
-
-msgid "N"
-msgstr "S"
-
-msgid "NE"
-msgstr "SV"
-
-msgid "NNE"
-msgstr "SSV"
-
-msgid "NNW"
-msgstr "SSZ"
-
-msgid "NW"
-msgstr "SZ"
-
-msgid "Name"
-msgstr "Meno"
-
-msgid "Netatmo"
-msgstr "Netatmo"
-
-msgid "Netatmo 2"
-msgstr "Netatmo 2"
-
-msgid "Netatmo CO2 Indicator"
-msgstr "Netatmo CO2 Indikátor"
-
-msgid "Netatmo CO2 Max Range"
-msgstr "Netatmo CO2 Max rozsah"
-
-msgid "Netatmo CO2 Min Range"
-msgstr "Netatmo CO2 Min rozsah"
-
-msgid "Netatmo Comfort Indicator"
-msgstr "Netatmo Komfortný Indikátor"
-
-msgid "New Moon"
-msgstr "Nový mesiac"
-
-msgid "Next Program Info"
-msgstr "Info o ďalšom programe"
-
-msgid "Next Timer Event"
-msgstr "Ďalší časovač udalostí"
-
-msgid "No or wrong File selected, try a correct File first !"
-msgstr "Žiadny alebo nesprávny zvolený súbor, skús najprv správny súbor !"
-
-msgid "Normal"
-msgstr "Normalne"
-
-msgid "Normal (5s)"
-msgstr "Normalne (5s)"
-
-msgid "November"
-msgstr "November"
-
-msgid "Now/Next"
-msgstr "Teraz/Ďalší"
-
-msgid "OSCAM not running"
-msgstr "OSCAM nebeží"
-
-msgid "OSD"
-msgstr "OSD"
-
-msgid "OSD [display time]"
-msgstr "OSD [čas zobrazenia]"
-
-msgid "October"
-msgstr "Október"
-
-msgid "Offline"
-msgstr "Vypnuté"
-
-msgid "On"
-msgstr "Zapnuté"
-
-msgid "On+Media+Standby"
-msgstr "Zapnuté+Média+Pohotovostný režim"
-
-msgid "Online"
-msgstr "Aktívný"
-
-msgid "Online [Ping]"
-msgstr "Stav siete [Ping]"
-
-msgid "Online+Offline"
-msgstr "Aktívný+Neaktívny"
-
-msgid "Only New"
-msgstr "len nové"
-
-msgid "OpenWeatherMap"
-msgstr "OpenWeatherMap"
-
-msgid "PNG"
-msgstr "PNG"
-
-msgid "Pearl (or compatible LCD) 240x320"
-msgstr "Pearl (alebo kompatibilné LCD) 240x320"
-
-msgid "Pearl (or compatible LCD) 320x240"
-msgstr "Pearl (alebo kompatibilné LCD) 320x240"
-
-msgid "Picon"
-msgstr "Picon"
-
-msgid "Picon 2"
-msgstr "Picon 2"
-
-msgid "Picon+Channel"
-msgstr "Picon+kanál"
-
-msgid "Picon+Channel+Title"
-msgstr "Picon+kanál+titulok"
-
-msgid "Picon+Position below"
-msgstr "Picon+Pozícia pod "
-
-msgid "Picon+Position left"
-msgstr "Picon+Pozícia vľavo"
-
-msgid "Picon+Position right"
-msgstr "Picon+Pozícia vpravo"
-
-msgid "Picture"
-msgstr "Obrázok"
-
-msgid "Picture Changing Time"
-msgstr "Obrázok čas zmeny"
-
-msgid "Picture Directory Recursive"
-msgstr "Obrázok rekurzívny priečinok"
-
-msgid "Picture Quality for Resizing"
-msgstr "Obrázok kvalita pri zmenu veľkosti"
-
-msgid "Picture Quick Update Time [s]"
-msgstr "Obrázok čas rychlej aktualizácie [s]"
-
-msgid "Picture Sort"
-msgstr "Zotriedenie obrázkov"
-
-msgid "Picture Type [only Picture]"
-msgstr "Typ obrázka [len obrázok]"
-
-msgid "Plug Tuner"
-msgstr "Zabudovaný tuner"
-
-msgid "Pop3"
-msgstr "Pop3"
-
-msgid "Pop3-SSL"
-msgstr "Pop3-SSL"
-
-msgid "Popup Text"
-msgstr "vyskakovací text"
-
-msgid "Popup-Text"
-msgstr "vyskakovací-text"
-
-msgid "Position"
-msgstr "Umiestnenie"
-
-msgid "Program Info"
-msgstr "Info o programe"
-
-msgid "Program Info 2"
-msgstr "Program Info 2"
-
-msgid "Program Name"
-msgstr "Názov kanálu"
-
-msgid "Program Number"
-msgstr "Číslo kanálu"
-
-msgid "Progress Bar"
-msgstr "priebeh"
-
-msgid "Provider"
-msgstr "Poskytovateľ"
-
-msgid "Radio"
-msgstr "Rádio"
-
-msgid "Radio+Media"
-msgstr "Rádio+Média"
-
-msgid "Recording"
-msgstr "Záznam"
-
-msgid "Recording Picture [ok]>"
-msgstr "Obrázok záznamu [ok]>"
-
-msgid "Rectangle 1"
-msgstr "Obdĺžnik 1"
-
-msgid "Rectangle 2"
-msgstr "Obdĺžnik 2"
-
-msgid "Reload"
-msgstr "Znovu nahratie"
-
-msgid "Remote Box"
-msgstr "Vzdialený Box"
-
-msgid "Remote Box 1 [Displayname:]IP/Name"
-msgstr "Vzdialený Box 1 [zobrazované meno:]IP/Meno"
-
-msgid "Remote Box 2 [Displayname:]IP/Name"
-msgstr "Vzdialený Box 2 [zobrazované meno:]IP/Meno"
-
-msgid "Remote Box 3 [Displayname:]IP/Name"
-msgstr "Vzdialený Box 3 [zobrazované meno:]IP/Meno"
-
-msgid "Remote Box 4 [Displayname:]IP/Name"
-msgstr "Vzdialený Box 4 [zobrazované meno:]IP/Meno"
-
-msgid "Remote Box 5 [Displayname:]IP/Name"
-msgstr "Vzdialený Box 5 [zobrazované meno:]IP/Meno"
-
-msgid "Remote Box Poll every Minutes"
-msgstr "Vzdialený Box obnova v minútach"
-
-msgid "Restart Displays"
-msgstr "Reštart zobrazovačov"
-
+#: src/plugin.py:7693
 msgid "Restart GUI now?"
 msgstr "Reštartovať GUI teraz?"
 
-msgid "Restore Config"
-msgstr "Obnova cfg"
-
-msgid "S"
-msgstr "J"
-
-msgid "SE"
-msgstr "JV"
-
-msgid "SSE"
-msgstr "JJV"
-
-msgid "SSW"
-msgstr "JJZ"
-
-msgid "SW"
-msgstr "JZ"
-
-msgid "Samsung SPF-105P 1024x600"
-msgstr "Samsung SPF-105P 1024x600"
-
-msgid "Samsung SPF-107H 1024x600"
-msgstr "Samsung SPF-107H 1024x600"
-
-msgid "Samsung SPF-107H old 1024x600"
-msgstr "Samsung SPF-107H alt 1024x600"
-
-msgid "Samsung SPF-700T 800x600"
-msgstr "Samsung SPF-700T 800x600"
-
-msgid "Samsung SPF-72H 800x480"
-msgstr "Samsung SPF-72H 800x480"
-
-msgid "Samsung SPF-75H/76H 800x480"
-msgstr "Samsung SPF-75H/76H 800x480"
-
-msgid "Samsung SPF-83H 800x600"
-msgstr "Samsung SPF-83H 800x600"
-
-msgid "Samsung SPF-85H/86H 800x600"
-msgstr "Samsung SPF-85H/86H 800x600"
-
-msgid "Samsung SPF-85P/86P 800x600"
-msgstr "Samsung SPF-85P/86P 800x600"
-
-msgid "Samsung SPF-87H 800x480"
-msgstr "Samsung SPF-87H 800x480"
-
-msgid "Samsung SPF-87H old 800x480"
-msgstr "Samsung SPF-87H alt 800x480"
-
-msgid "Sat"
-msgstr "So"
-
-msgid "Satellite"
-msgstr "Satelit"
-
-msgid "Saturday"
-msgstr "Sobota"
-
-msgid "Save"
-msgstr "Uložiť"
-
-msgid "Save Config"
-msgstr "Ulož cfg"
-
-msgid "Save Config to File... (%s)"
-msgstr "Uložiť konfig do súboru... (%s)"
-
-msgid "Save as Picture for WebIF"
-msgstr "Uložiť ako obrázok pre WebIF"
-
-msgid "Screen"
-msgstr "Obrazovka"
-
-msgid "Screen 1"
-msgstr "Obrazovka 1"
-
-msgid "Screen 1 Changing Time"
-msgstr "Obrazovka 1 čas zmeny"
-
-msgid "Screen 1+2"
-msgstr "Obrazovka 1+2"
-
-msgid "Screen 1+2+3"
-msgstr "Obrazovka 1+2+3"
-
-msgid "Screen 1+2+3+4"
-msgstr "Obrazovka 1+2+3+4"
-
-msgid "Screen 1+2+4"
-msgstr "Obrazovka 1+2+4"
-
-msgid "Screen 1+3"
-msgstr "Obrazovka 1+3"
-
-msgid "Screen 1+3+4"
-msgstr "Obrazovka 1+3+4"
-
-msgid "Screen 1+3+5+7+9"
-msgstr "Obrazovka 1+3+5+7+9"
-
-msgid "Screen 1+4"
-msgstr "Obrazovka 1+4"
-
-msgid "Screen 1-2"
-msgstr "Obrazovka 1-2"
-
-msgid "Screen 1-3"
-msgstr "Obrazovka 1-3"
-
-msgid "Screen 1-4"
-msgstr "Obrazovka 1-4"
-
-msgid "Screen 1-5"
-msgstr "Obrazovka 1-5"
-
-msgid "Screen 1-6"
-msgstr "Obrazovka 1-6"
-
-msgid "Screen 1-7"
-msgstr "Obrazovka 1-7"
-
-msgid "Screen 1-8"
-msgstr "Obrazovka 1-8"
-
-msgid "Screen 1-9"
-msgstr "Obrazovka 1-9"
-
-msgid "Screen 2"
-msgstr "Obrazovka 2"
-
-msgid "Screen 2+3"
-msgstr "Obrazovka 2+3"
-
-msgid "Screen 2+3+4"
-msgstr "Obrazovka 2+3+4"
-
-msgid "Screen 2+4"
-msgstr "Obrazovka 2+4"
-
-msgid "Screen 2+4+6+8"
-msgstr "Obrazovka 2+4+6+8"
-
-msgid "Screen 3"
-msgstr "Obrazovka 3"
-
-msgid "Screen 3+4"
-msgstr "Obrazovka 3+4"
-
-msgid "Screen 4"
-msgstr "Obrazovka 4"
-
-msgid "Screen 5"
-msgstr "Obrazovka 5"
-
-msgid "Screen 5-9"
-msgstr "Obrazovka 5-9"
-
-msgid "Screen 6"
-msgstr "Obrazovka 6"
-
-msgid "Screen 7"
-msgstr "Obrazovka 7"
-
-msgid "Screen 8"
-msgstr "Obrazovka 8"
-
-msgid "Screen 9"
-msgstr "Obrazovka 9"
-
-msgid "Screen Switch Select - LCD"
-msgstr "Výber prepínača obrazovky - LCD"
-
-msgid "Screen Switch Select - Screen"
-msgstr "Výber prepínača obrazovky - Obrazovka"
-
-msgid "Screens used for Changing"
-msgstr "Obrazovky použité na výmenu"
-
-msgid "September"
-msgstr "September"
-
-msgid "Service search first"
-msgstr "Najprv prehľadať kanál"
-
-msgid "Shadow Edges"
-msgstr "Hrany tieňa"
-
-msgid "Short"
-msgstr "Krátky"
-
-msgid "Short (Extended)"
-msgstr "Krátky(rozširený)"
-
-msgid "Short+Extended"
-msgstr "Krátky+rozšírený"
-
-msgid "Show"
-msgstr "Zobraziť"
-
-msgid "Show 'no ....' Messages"
-msgstr "Zobraz 'žiadne ....' hlásenia"
-
-msgid "Show Cover"
-msgstr "Zobraz obálku"
-
-msgid "Show Crash Corner"
-msgstr "Zobraz chybové hlásenia"
-
-msgid "Show Externals"
-msgstr "Zobraz vonkajšie"
-
-msgid "Show HTTP Text"
-msgstr "Zobraz HTTP Text"
-
-msgid "Show Picture"
-msgstr "Zobraz obrázok"
-
-msgid "Show Picture 2"
-msgstr "Zobraz obrázok 2"
-
-msgid "Show Picture 3"
-msgstr "Zobraz obrázok 3"
-
-msgid "Show Picture 4"
-msgstr "Zobraz obrázok 4"
-
-msgid "Show Textfile"
-msgstr "Zobraz textový súbor"
-
-msgid "Show Textfile 2"
-msgstr "Zobraz textový súbor 2"
-
-msgid "Show Textfile 3"
-msgstr "Zobraz textový súbor 3"
-
-msgid "Show ecm.info"
-msgstr "Zobraz ecm.info"
-
-msgid "Show oscam.lcd"
-msgstr "Zobraz oscam.lcd"
-
-msgid "Signal Quality Bar"
-msgstr "Stĺpec kvality signálu"
-
-msgid "Standby"
-msgstr "Pohotovostný režim"
-
-msgid "Storage-Devices"
-msgstr "Pamäťové-zariadenia"
-
-msgid "Storage-Devices: Force Read"
-msgstr "Pamäťové-zariadenia: vynútené čítanie"
-
-msgid "Stutter TV"
-msgstr "Koktavá TV"
-
-msgid "Sun"
-msgstr "Ne"
-
-msgid "Sunday"
-msgstr "Nedeľa"
-
-msgid "Sunrise"
-msgstr "Východ slnka"
-
-msgid "Switch FrameBuffer [if possible]"
+#: src/plugin.py:8199
+msgid "Outdoor"
 msgstr ""
 
-msgid "TV"
-msgstr "TV"
+#: src/plugin.py:8199
+msgid "Wind"
+msgstr ""
 
-msgid "TV+OSD"
-msgstr "TV+OSD"
+#: src/plugin.py:8199
+msgid "Rain"
+msgstr ""
 
-msgid "TV+Radio"
-msgstr "TV+Rádio"
+#: src/plugin.py:8199
+msgid "Indoor"
+msgstr ""
 
-msgid "TV+Radio+Media"
-msgstr "TV+Rádio+Média"
+#: src/plugin.py:9777
+msgid "New Moon"
+msgstr "Nový mesiac"
 
-msgid "Temperature"
-msgstr "Teplota"
+#: src/plugin.py:9778
+msgid "First Quarter"
+msgstr "Prvá štvrtina"
 
-msgid "Temperature+Co2"
-msgstr "Teplota+Co2"
-
-msgid "Temperature+Co2+Pressure"
-msgstr "Teplota+Co2+Tlak"
-
-msgid "Temperature+Humidity"
-msgstr "Teplota+Vlhkosť"
-
-msgid "Threads per LCD"
-msgstr "Témy pre LCD"
-
-msgid "Thur"
-msgstr "Št"
-
-msgid "Thursday"
-msgstr "Štvrtok"
-
-msgid "Time"
-msgstr "Čas"
-
-msgid "Time+Duration+Info"
-msgstr "Čas+Trvanie+Info"
-
-msgid "Time+Info"
-msgstr "Čas+Info"
-
-msgid "Time+Length+Info"
-msgstr "Čas+Dĺžka+Info"
-
-msgid "Time+Weekday"
-msgstr "Čas+Deň týždňa"
-
-msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
-msgstr "Časovanie ! vypočet všetkých časov na Čas/5*2 v rýchlom móde"
-
-msgid "Title"
-msgstr "Titulok"
-
-msgid "Tue"
-msgstr "Ut"
-
-msgid "Tuesday"
-msgstr "Utorok"
-
-msgid "Tuner Color"
-msgstr "Farba tunera"
-
-msgid "Tuner Color Active"
-msgstr "Farba tunera aktívny"
-
-msgid "Tuner Color On"
-msgstr "Farba tunera zapnutý"
-
-msgid "USB Tuner"
-msgstr "USB Tuner"
-
-msgid "Underline"
-msgstr "Podčiarknutie"
-
-msgid "Underline 2"
-msgstr "Podčiarknutie 2"
-
-msgid "Used Tuner"
-msgstr "Použitý tuner"
-
-msgid "Volume"
-msgstr "Hlasitosť"
-
-msgid "W"
-msgstr "Z"
-
-msgid "WNW"
-msgstr "ZSZ"
-
-msgid "WSW"
-msgstr "ZJZ"
-
-msgid "WWW ApiKey from cloudconvert.org"
-msgstr "WWW ApiKey z cloudconvert.org"
-
-msgid "WWW ApiKey from convertapi.com"
-msgstr "WWW ApiKey z convertapi.com"
-
-msgid "WWW Converter"
-msgstr "WWW konvertor"
-
-msgid "WWW Converter Poll Interval"
-msgstr "WWW Konvertor čas obnovy"
-
-msgid "WWW Converter Usage"
-msgstr "použiť WWW konvertor"
-
-msgid "WWW-Internet Converter"
-msgstr "Konvertor web stránok"
-
-msgid "Waning Crescent"
-msgstr "Ubúdajúci kosáčik"
-
-msgid "Waning Gibbous"
-msgstr "Ubúdajúci mesiac"
-
+#: src/plugin.py:9779
 msgid "Waxing Crescent"
 msgstr "Dorastajúci kosáčik"
 
+#: src/plugin.py:9780
 msgid "Waxing Gibbous"
 msgstr "Dorastajúci mesiac"
 
-msgid "Weather"
-msgstr "Počasie"
-
-msgid "Weather 2"
-msgstr "Počasie 2"
-
-msgid "Weather API"
-msgstr "API počasia"
-
-msgid "Weather API-Key OpenWeatherMap"
-msgstr "Počasie API-key OpenWeatherMap"
-
-msgid "Weather City"
-msgstr "Počasie pre mesto"
-
-msgid "Weather City 2"
-msgstr "Počasie pre mesto 2"
-
-msgid "Weather Extra Infos"
-msgstr "Počasie rozšírené info"
-
-msgid "Weather High Temperature Color"
-msgstr "Počasie farba vysokej teploty"
-
-msgid "Weather Lines"
-msgstr "Počasie riadky"
-
-msgid "Weather Low Temperature Color"
-msgstr "Počasie farba nízkej teploty"
-
-msgid "Weather Rain Chance"
-msgstr "Počasie pravdepodobnosť dažďa"
-
-msgid "Weather Transparency"
-msgstr "Počasie priehľadnosť"
-
-msgid "Weather Wind speed unit"
-msgstr "Počasie jednotky rýchlosti vetra"
-
-msgid "Weather-Icon Zoom"
-msgstr "Počasie-Ikona zväčšenie"
-
-msgid "Weather-Icon-Path [ok]>"
-msgstr "Počasie-Ikona-Cesta [ok]>"
-
-msgid "WebIF"
-msgstr "WebIF"
-
-msgid "WebIF Design"
-msgstr "WebIF vzhľad"
-
-msgid "WebIF IP Allow"
-msgstr "WebIF IP povoľ"
-
-msgid "WebIF IP Deny"
-msgstr "WebIF IP zakáž"
-
-msgid "WebIF Init Delay"
-msgstr "WebIF Inicializácia oneskorenie"
-
-msgid "WebIF Refresh Type"
-msgstr "WebIF typ aktualizácie"
-
-msgid "WebIF Refresh [s]"
-msgstr "WebIF aktualizácia [s]"
-
-msgid "Wed"
-msgstr "St"
-
-msgid "Wednesday"
-msgstr "Streda"
-
-msgid "Week"
-msgstr "Týždeň"
-
-msgid "Week+Header"
-msgstr "Týždeň+Hlavička"
-
-msgid "Weekday"
-msgstr "Deň týždňa"
-
-msgid "all"
-msgstr "všetko"
-
-msgid "alphabetic"
-msgstr "abecedne"
-
-msgid "alternative Copy-Mode/DM800hd (24bit)"
-msgstr "alternatívny Mód kopírovania/DM800hd (24bit)"
-
-msgid "always"
-msgstr "vždy"
-
-msgid "aquamarine"
-msgstr "akvamarín"
-
-msgid "better/slow"
-msgstr "lepší/pomalší"
-
-msgid "black"
-msgstr "čierna"
-
-msgid "blue"
-msgstr "modrá"
-
-msgid "blueviolet"
-msgstr "modrofialová"
-
-msgid "brown"
-msgstr "hnedá"
-
-msgid "cache + adjustment (high quality, slow)"
-msgstr "cache + prispôsobenie(vysoká kvalita, pomalšie) "
-
-msgid "cache + adjustment (low quality, fast)"
-msgstr "cache + prispôsobenie(nízka kvalita, rýchlejšie) "
-
-msgid "cadetblue"
-msgstr "kadet modrá"
-
-msgid "center"
-msgstr "vycentrovať"
-
-msgid "cloudconvert.org"
-msgstr "cloudconvert.org"
-
-msgid "convertapi.com"
-msgstr "convertapi.com"
-
-msgid "copy to Idle"
-msgstr "kopírovať do pohotovostných"
-
-msgid "copy to Media"
-msgstr "kopírovať do Média"
-
-msgid "copy to On"
-msgstr "kopírovať do aktívných"
-
-msgid "cornflowerblue"
-msgstr "nevädza modrá"
-
-msgid "currently set : %s"
-msgstr "aktuálne nastavené : %s"
-
-msgid "cyan"
-msgstr "svetlomodrá"
-
-msgid "darkblue"
-msgstr "tmavomodrá"
-
-msgid "darkgreen"
-msgstr "tmavozelená"
-
-msgid "darkorange"
-msgstr "tmavooranžová"
-
-msgid "darkorchid"
-msgstr "tmavá orchidea"
-
-msgid "darkred"
-msgstr "tmavočervená"
-
-msgid "db"
-msgstr "db"
-
-msgid "db + %"
-msgstr "db + %"
-
-msgid "db + % + BER"
-msgstr "db + % + BER"
-
-msgid "db + BER"
-msgstr "db + BER"
-
-msgid "deeppink"
-msgstr "tmavoružová"
-
-msgid "deleted"
-msgstr "zmazané"
-
-msgid "disabled"
-msgstr "zakázané"
-
-msgid "full Screen"
-msgstr "na celú obrazovku"
-
-msgid "gold"
-msgstr "zlatá"
-
-msgid "gray"
-msgstr "šedá"
-
-msgid "green"
-msgstr "zelená"
-
-msgid "greenyellow"
-msgstr "zelenožltá"
-
-msgid "half left"
-msgstr "polovica vľavo"
-
-msgid "half right"
-msgstr "polovica vpravo"
-
-msgid "horizontally"
-msgstr "vodorovne"
-
-msgid "indianred"
-msgstr "indiánska červená"
-
-msgid "indigo"
-msgstr "indigo"
-
-msgid "km/h"
-msgstr "km/h"
-
-msgid "lawngreen"
-msgstr "zelený trávnik"
-
-msgid "left"
-msgstr "ľavý"
-
-msgid "lightblue"
-msgstr "svetlosvetlomodrá"
-
-msgid "lightgreen"
-msgstr "svetlosvetlozelená"
-
-msgid "lime"
-msgstr "limetka"
-
-msgid "low/fast (Picture only)"
-msgstr "pomaly/rýchlo (len obrázok)"
-
-msgid "low/fast (all)"
-msgstr "pomaly/rýchlo (všetko)"
-
-msgid "m/s"
-msgstr "m/s"
-
-msgid "magenta"
-msgstr "purpurová"
-
-msgid "moccasin"
-msgstr "mokasín"
-
-msgid "no"
-msgstr "nie"
-
-msgid "no Calendar"
-msgstr "žiaden kalendár"
-
-msgid "no Calls"
-msgstr "žiadne volania"
-
-msgid "no Dates"
-msgstr "žiadne termíny"
-
-msgid "no Icon"
-msgstr "žiadna ikona"
-
-msgid "no Icon, with Targetnumber"
-msgstr "žiadna ikona, s cieľovým počtom"
-
-msgid "no LCD1 Picture-File"
-msgstr "žiadne LCD1 Obrazkové data"
-
-msgid "no LCD2 Picture-File"
-msgstr "žiadne LCD2 Obrazkové data"
-
-msgid "no LCD3 Picture-File"
-msgstr "žiadne LCD3 Obrazkové data"
-
-msgid "no Netatmo-Plugin installed"
-msgstr "nenainštalovaný Netatmo-Plugin"
-
+#: src/plugin.py:9781
+msgid "Full Moon"
+msgstr "Spln mesiaca"
+
+#: src/plugin.py:9782
+msgid "Waning Gibbous"
+msgstr "Ubúdajúci mesiac"
+
+#: src/plugin.py:9783
+msgid "Waning Crescent"
+msgstr "Ubúdajúci kosáčik"
+
+#: src/plugin.py:9784
+msgid "Last Quarter"
+msgstr "Posledná štvrtina"
+
+#: src/plugin.py:10988
+#, fuzzy
+#| msgid "Memory available"
+msgid "Picture not available"
+msgstr "Dostupná pamäť"
+
+#: src/plugin.py:11133 src/plugin.py:11134
 msgid "no Timer"
 msgstr "žiaden časovač"
 
-msgid "no cache + no adjustment"
-msgstr "bez cache + bez nastavovania"
+#: src/plugin.py:12332 src/plugin.py:12334
+msgid "OSCAM not running"
+msgstr "OSCAM nebeží"
 
-msgid "no total Timer"
-msgstr "žiaden celkový časovač"
+#: src/plugin.py:12663
+msgid "no Calls"
+msgstr "žiadne volania"
 
-msgid "normal"
-msgstr "normálne"
+#: src/plugin.py:12695
+#, python-format
+msgid "%d Mails  %d New  %s"
+msgstr "%d Správ  %d Nové  %s"
 
-msgid "normal (full)"
-msgstr "normálne (plné)"
+#: src/plugin.py:12893
+msgid "no Netatmo-Plugin installed"
+msgstr "nenainštalovaný Netatmo-Plugin"
 
-msgid "off"
-msgstr "vypnuté"
+#: src/plugin.py:14497
+#, fuzzy
+#| msgid "LCD4linux enabled"
+msgid "LCD4linux"
+msgstr "LCD4linux povolený"
 
-msgid "olive"
-msgstr "olivová"
+#: src/plugin.py:14505 src/plugin.py:14506
+#, fuzzy
+#| msgid "LCD4linux enabled"
+msgid "LCD4Linux"
+msgstr "LCD4linux povolený"
 
-msgid "on"
-msgstr "zapnuté"
+#: src/plugin.py:14510 src/plugin.py:14511
+msgid "LCD4linux Screen Switch"
+msgstr "Prepínač obrazovky LCD4linux"
 
-msgid "one line"
-msgstr "jeden riadok"
+#~ msgid "April"
+#~ msgstr "Apríl"
 
-msgid "only Picture 1024x600"
-msgstr "len obrázok 1024x600"
+#~ msgid "August"
+#~ msgstr "August"
 
-msgid "only Picture 320x240"
-msgstr "len obrázok 320x240"
+#~ msgid "December"
+#~ msgstr "December"
 
-msgid "only Picture 800x480"
-msgstr "len obrázok 800x480"
+#~ msgid "February"
+#~ msgstr "Február"
 
-msgid "only Picture 800x600"
-msgstr "len obrázok 800x600"
+#~ msgid "Friday"
+#~ msgstr "Piatok"
 
-msgid "only Picture Custom Size"
-msgstr "len obrázok vlastná veľkosť"
+#~ msgid "January"
+#~ msgstr "Január"
 
-msgid "only Progress Bar"
-msgstr "len stĺpec priebehu"
+#~ msgid "July"
+#~ msgstr "Júl"
 
-msgid "only use Timer"
-msgstr "len použitý časovač"
+#~ msgid "June"
+#~ msgstr "Jún"
 
-msgid "orange"
-msgstr "oranžová"
+#~ msgid "MJPEG Boundary Mode"
+#~ msgstr "MJPEG hraničný mód"
 
-msgid "orangered"
-msgstr "oranžovočervená"
+#~ msgid "March"
+#~ msgstr "Marec"
 
-msgid "other"
-msgstr "iné"
+#~ msgid "May"
+#~ msgstr "Máj"
 
-msgid "random"
-msgstr "náhodne"
+#~ msgid "Monday"
+#~ msgstr "Pondelok"
 
-msgid "red"
-msgstr "červená"
+#~ msgid "November"
+#~ msgstr "November"
 
-msgid "reduced"
-msgstr "redukované"
+#~ msgid "October"
+#~ msgstr "Október"
 
-msgid "right"
-msgstr "vpravo"
+#~ msgid "Saturday"
+#~ msgstr "Sobota"
 
-msgid "rosybrown"
-msgstr "ružovohnedá"
+#~ msgid "September"
+#~ msgstr "September"
 
-msgid "rpm"
-msgstr "otáčky"
+#~ msgid "Sunday"
+#~ msgstr "Nedeľa"
 
-msgid "rpm/2"
-msgstr "otáčky/2"
+#~ msgid "Thursday"
+#~ msgstr "Štvrtok"
 
-msgid "sandybrown"
-msgstr "pieskovohnedá"
+#~ msgid "Tuesday"
+#~ msgstr "Utorok"
 
-msgid "set Settings"
-msgstr "aktivuj nastavenia"
-
-msgid "show run"
-msgstr "zobraz aktívne"
-
-msgid "show run+sleep"
-msgstr "zobraz aktívne+čakajúce"
-
-msgid "show total Timer"
-msgstr "Zobraz celkový časovač"
-
-msgid "silver"
-msgstr "strieborná"
-
-msgid "slategray"
-msgstr "bridlicovo sivá"
-
-msgid "stop Screencycle"
-msgstr "Zastav výmenu obrazoviek"
-
-msgid "tomato"
-msgstr "paradajková"
-
-msgid "trimmed (black)"
-msgstr "zdobené (čierna)"
-
-msgid "trimmed (transparent)"
-msgstr "zdobené (priehľadné)"
-
-msgid "two lines"
-msgstr "dva riadky"
-
-msgid "use lead-time"
-msgstr "použiť čas dodania"
-
-msgid "vertically"
-msgstr "zvislo"
-
-msgid "violet"
-msgstr "fialová"
-
-msgid "white"
-msgstr "biela"
-
-msgid "with Current 00:00"
-msgstr "s aktuálnym 00:00"
-
-msgid "with Current 00:00 (Size 1.5)"
-msgstr "s aktuálnym 00:00 (veľkosť 1.5)"
-
-msgid "with Current 00:00 (Size 2)"
-msgstr "s aktuálnym 00:00 (veľkosť 2)"
-
-msgid "with Current 00:00 (above)"
-msgstr "s aktuálnym 00:00 (nad)"
-
-msgid "with Current 00:00 (above/Size 1.5)"
-msgstr "s aktuálnym 00:00 (nad/veľkosť 1.5)"
-
-msgid "with Current 00:00 (above/Size 2)"
-msgstr "s aktuálnym 00:00 (nad/veľkosť 2)"
-
-msgid "with Current 00:00 (below)"
-msgstr "s aktuálnym 00:00 (pod)"
-
-msgid "with Current 00:00 (below/Size 1.5)"
-msgstr "s aktuálnym 00:00 (pod/veľkosť 1.5)"
-
-msgid "with Current 00:00 (below/Size 2)"
-msgstr "s aktuálnym 00:00 (pod/veľkosť 2)"
-
-msgid "with Icon"
-msgstr "s ikonou"
-
-msgid "with Icon & Targetnumber"
-msgstr "s ikonou & cieľové číslo"
-
-msgid "with Percent"
-msgstr "a percenta"
-
-msgid "with Percent (Size 1.5)"
-msgstr "a percenta (veľkosť 1.5)"
-
-msgid "with Percent (Size 2)"
-msgstr "a percenta (veľkosť 2)"
-
-msgid "with Percent (above)"
-msgstr "s percentami (nad)"
-
-msgid "with Percent (above/Size 1.5)"
-msgstr "s percentami (nad/veľkosť 1.5)"
-
-msgid "with Percent (above/Size 2)"
-msgstr "s percentami (nad/veľkosť 2)"
-
-msgid "with Percent (below)"
-msgstr "s percentami (pod)"
-
-msgid "with Percent (below/Size 1.5)"
-msgstr "s percentami (pod/veľkosť 1.5)"
-
-msgid "with Percent (below/Size 2)"
-msgstr "s percentami (nad/veľkosť 2)"
-
-msgid "with Percent Minutes / Total (above)"
-msgstr "s percentami minút / Celkovo (nad)"
-
-msgid "with Percent Minutes / Total (above/Size 1.5)"
-msgstr "s percentami minút / Celkovo (nad/veľkosť 1.5)"
-
-msgid "with Percent Minutes / Total (above/Size 2)"
-msgstr "s percentami minút / Celkovo (nad/veľkosť 2)"
-
-msgid "with Remaining Minutes"
-msgstr "a zostávajúce minúty"
-
-msgid "with Remaining Minutes (Size 1.5)"
-msgstr "a zostávajúce minúty (veľkosť 1.5)"
-
-msgid "with Remaining Minutes (Size 2)"
-msgstr "a zostávajúce minúty (veľkosť 2)"
-
-msgid "with Remaining Minutes (above)"
-msgstr "a zostávajúce minúty (nad)"
-
-msgid "with Remaining Minutes (above/Size 1.5)"
-msgstr "a zostávajúce minúty (nad/veľkosť 1.5)"
-
-msgid "with Remaining Minutes (above/Size 2)"
-msgstr "a zostávajúce minúty (nad/veľkosť 2)"
-
-msgid "with Remaining Minutes (below)"
-msgstr "a zostávajúce minúty (pod)"
-
-msgid "with Remaining Minutes (below/Size 1.5)"
-msgstr "a zostávajúce minúty (pod/veľkosť 1.5)"
-
-msgid "with Remaining Minutes (below/Size 2)"
-msgstr "a zostávajúce minúty (pod/veľkosť 2)"
-
-msgid "yellow"
-msgstr "žltá"
-
-msgid "yes"
-msgstr "áno"
-
-msgid "yes (32bit)"
-msgstr "áno (32bit)"
-
-msgid "yes + %"
-msgstr "áno + %"
-
-msgid "yes +25%"
-msgstr "áno +25%"
-
-msgid "yes except records"
-msgstr "áno okrem nahrávok"
-
-msgid "yes, extended"
-msgstr "áno, rozšírené"
-
-msgid "yes, long"
-msgstr "áno, dlhé"
-
-msgid "yes, short"
-msgstr "áno, krátke"
+#~ msgid "Wednesday"
+#~ msgstr "Streda"

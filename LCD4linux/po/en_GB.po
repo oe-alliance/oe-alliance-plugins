@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD 4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
-"PO-Revision-Date: 2016-05-07 13:38+0200\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2017-07-05 15:34+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -16,989 +16,4005 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
-
-msgid "%"
-msgstr "%"
-
-msgid "% + BER"
-msgstr "% + BER"
-
-msgid "% + Load@1min"
-msgstr "% + Load@1min"
-
-msgid "% + Load@5min"
-msgstr "% + Load@5min"
-
-msgid "%d Mails  %d New  %s"
-msgstr "%d Mails  %d New  %s"
-
-msgid "%s - Current value: %s"
-msgstr ""
-
-msgid "-  Type"
-msgstr "-  Type"
-
-msgid "- Alignment"
-msgstr "- Alignment"
-
-msgid "- Analog Clock"
-msgstr "- Analog Clock"
-
-msgid "- Background Color"
-msgstr "- Background Color"
-
-msgid "- Background/Transparency"
-msgstr "- Background/Transparency"
-
-msgid "- Backlight Off [disable set Off=On]"
-msgstr "- Backlight Off [disable set Off=On]"
-
-msgid "- Backlight On"
-msgstr "- Backlight On"
-
-msgid "- Backlight Weekend Off [disable set Off=On]"
-msgstr "- Backlight Weekend Off [disable set Off=On]"
-
-msgid "- Backlight Weekend On"
-msgstr "- Backlight Weekend On"
-
-msgid "- Bar Range Max"
-msgstr "- Bar Range Max"
-
-msgid "- Bar Range Min"
-msgstr "- Bar Range Min"
-
-msgid "- Base"
-msgstr ""
-
-msgid "- Border"
-msgstr ""
-
-msgid "- CPU"
-msgstr "- CPU"
-
-msgid "- Caption Color"
-msgstr "- Caption Color"
-
-msgid "- Color"
-msgstr "- Color"
-
-msgid "- Current Day Background Color"
-msgstr ""
-
-msgid "- Cut Height [disable = 0]"
-msgstr "- Cut Height [disable = 0]"
-
-msgid "- Cut Width [disable = 0]"
-msgstr "- Cut Width [disable = 0]"
-
-msgid "- Cut from X"
-msgstr "- Cut from X"
-
-msgid "- Cut from Y"
-msgstr "- Cut from Y"
-
-msgid "- Default Cover [ok]>"
-msgstr "- Default Cover [ok]>"
-
-msgid "- Device Name"
-msgstr "- Device Name"
-
-msgid "- Download Cover from Google"
-msgstr "- Download Cover from Google"
-
-msgid "- Extra Color Chill"
-msgstr "- Extra Color Chill"
-
-msgid "- Extra Color City"
-msgstr "- Extra Color City"
-
-msgid "- Extra Zoom"
-msgstr "- Extra Zoom"
-
-msgid "- Fast Grab lower quality"
-msgstr "- Fast Grab lower quality"
-
-msgid "- File [ok]>"
-msgstr "- File [ok]>"
-
-msgid "- File or Path [ok]>"
-msgstr "- File or Path [ok]>"
-
-msgid "- Font"
-msgstr "- Font"
-
-msgid "- Font Size"
-msgstr "- Font Size"
-
-msgid "- Full Screen"
-msgstr "- Full Screen"
-
-msgid "- Gradient"
-msgstr "- Gradient"
-
-msgid "- HTTP Height"
-msgstr "- HTTP Height"
-
-msgid "- HTTP Width"
-msgstr "- HTTP Width"
-
-msgid "- LCD 1 Background Color"
-msgstr "- LCD 1 Background Color"
-
-msgid "- LCD 1 Background-Picture [ok]>"
-msgstr "- LCD 1 Background-Picture [ok]>"
-
-msgid "- LCD 1 Brightness"
-msgstr ""
-
-msgid "- LCD 1 Night Reduction"
-msgstr ""
-
-msgid "- LCD 1 Refresh"
-msgstr ""
-
-msgid "- LCD 1 Rotate"
-msgstr "- LCD 1 Rotate"
-
-msgid "- LCD 2 Background Color"
-msgstr "- LCD 2 Background Color"
-
-msgid "- LCD 2 Background-Picture [ok]>"
-msgstr "- LCD 2 Background-Picture [ok]>"
-
-msgid "- LCD 2 Brightness"
-msgstr ""
-
-msgid "- LCD 2 Night Reduction"
-msgstr ""
-
-msgid "- LCD 2 Refresh"
-msgstr ""
-
-msgid "- LCD 2 Rotate"
-msgstr "- LCD 2 Rotate"
-
-msgid "- LCD 3 Background Color"
-msgstr "- LCD 3 Background Color"
-
-msgid "- LCD 3 Background-Picture [ok]>"
-msgstr "- LCD 3 Background-Picture [ok]>"
-
-msgid "- LCD 3 Brightness"
-msgstr ""
-
-msgid "- LCD 3 Night Reduction"
-msgstr ""
-
-msgid "- LCD 3 Refresh"
-msgstr ""
-
-msgid "- LCD 3 Rotate"
-msgstr "- LCD 3 Rotate"
-
-msgid "- Layout"
-msgstr "- Layout"
-
-msgid "- Length"
-msgstr ""
-
-msgid "- Length [Bar]"
-msgstr "- Length [Bar]"
-
-msgid "- Lines"
-msgstr "- Lines"
-
-msgid "- Mail Konto"
-msgstr "- Mail Konto"
-
-msgid "- Module"
-msgstr ""
-
-msgid "- Name"
-msgstr ""
-
-msgid "- OSD Size"
-msgstr "- OSD Size"
-
-msgid "- Online Name:Address"
-msgstr "- Online Name:Address"
-
-msgid "- Picon Cache Path [ok]>"
-msgstr "- Picon Cache Path [ok]>"
-
-msgid "- Picon First"
-msgstr ""
-
-msgid "- Picon Path 2 [ok]>"
-msgstr "- Picon Path 2 [ok]>"
-
-msgid "- Picon Path [ok]>"
-msgstr "- Picon Path [ok]>"
-
-msgid "- Picon Size"
-msgstr "- Picon Size"
-
-msgid "- Picture Alignment"
-msgstr "- Picture Alignment"
-
-msgid "- Picture Position"
-msgstr "- Picture Position"
-
-msgid "- Picture Size"
-msgstr "- Picture Size"
-
-msgid "- Picture [ok]>"
-msgstr "- Picture [ok]>"
-
-msgid "- Popup LCD"
-msgstr ""
-
-msgid "- Popup Screen"
-msgstr ""
-
-msgid "- Position"
-msgstr "- Position"
-
-msgid "- Position x"
-msgstr "- Position x"
-
-msgid "- Position y"
-msgstr "- Position y"
-
-msgid "- Quick Update"
-msgstr "- Quick Update"
-
-msgid "- Rain Color"
-msgstr "- Rain Color"
-
-msgid "- Rain Color 2"
-msgstr "- Rain Color 2"
-
-msgid "- Rain Zoom"
-msgstr "- Rain Zoom"
-
-msgid "- Rain use Color 2 from"
-msgstr "- Rain use Color 2 from"
-
-msgid "- Screen 2 Changing Time"
-msgstr "- Screen 2 Changing Time"
-
-msgid "- Screen 3 Changing Time"
-msgstr "- Screen 3 Changing Time"
-
-msgid "- Screen 4 Changing Time"
-msgstr "- Screen 4 Changing Time"
-
-msgid "- Screen 5 Changing Time"
-msgstr "- Screen 5 Changing Time"
-
-msgid "- Screen 6 Changing Time"
-msgstr "- Screen 6 Changing Time"
-
-msgid "- Screen 7 Changing Time"
-msgstr "- Screen 7 Changing Time"
-
-msgid "- Screen 8 Changing Time"
-msgstr "- Screen 8 Changing Time"
-
-msgid "- Screen 9 Changing Time"
-msgstr "- Screen 9 Changing Time"
-
-msgid "- Screens used for Changing"
-msgstr "- Screens used for Changing"
-
-msgid "- Search Path [ok]>"
-msgstr "- Search Path [ok]>"
-
-msgid "- Sensors"
-msgstr "- Sensors"
-
-msgid "- Shaded"
-msgstr "- Shaded"
-
-msgid "- Shadow Edges"
-msgstr "- Shadow Edges"
-
-msgid "- Show State"
-msgstr "- Show State"
-
-msgid "- Show chill temperature from difference"
-msgstr "- Show chill temperature from difference"
-
-msgid "- Show in Mode"
-msgstr "- Show in Mode"
-
-msgid "- Size"
-msgstr "- Size"
-
-msgid "- Size max Height"
-msgstr "- Size max Height"
-
-msgid "- Size x"
-msgstr "- Size x"
-
-msgid "- Size y"
-msgstr "- Size y"
-
-msgid "- Spacing"
-msgstr "- Spacing"
-
-msgid "- Split Screen"
-msgstr "- Split Screen"
-
-msgid "- Station"
-msgstr ""
-
-msgid "- Text Size"
-msgstr "- Text Size"
-
-msgid "- Timeout [ms]"
-msgstr ""
-
-msgid "- Transparency"
-msgstr "- Transparency"
-
-msgid "- Tunerinfo"
-msgstr "- Tunerinfo"
-
-msgid "- Type"
-msgstr "- Type"
-
-msgid "- URL"
-msgstr "- URL"
-
-msgid "- Unit min"
-msgstr ""
-
-msgid "- Weather Type"
-msgstr "- Weather Type"
-
-msgid "- Zoom"
-msgstr "- Zoom"
-
-msgid "- extra Info"
-msgstr "- extra Info"
-
-msgid "- free Warning"
-msgstr ""
-
-msgid "- max Width"
-msgstr "- max Width"
-
-msgid "- maximum Lines"
-msgstr "- maximum Lines"
-
-msgid "- only active Tuner"
-msgstr "- only active Tuner"
-
-msgid "- which LCD"
-msgstr "- which LCD"
-
-msgid "0"
-msgstr "0"
-
-msgid "0.5"
-msgstr "0.5"
-
-msgid "1"
-msgstr "1"
-
-msgid "1 - normal"
-msgstr ""
-
-msgid "1 / min"
-msgstr ""
-
-msgid "1-2"
-msgstr "1-2"
-
-msgid "1-3"
-msgstr "1-3"
-
-msgid "1-4"
-msgstr "1-4"
-
-msgid "1-5"
-msgstr "1-5"
-
-msgid "10"
-msgstr "10"
-
-msgid "10%"
-msgstr "10%"
-
-msgid "100%"
-msgstr "100%"
-
-msgid "10min"
-msgstr "10min"
-
-msgid "10s"
-msgstr "10s"
-
-msgid "128x32"
-msgstr ""
-
-msgid "128x64"
-msgstr ""
-
-msgid "132x64"
-msgstr "132x64"
-
-msgid "14"
-msgstr ""
-
-msgid "15%"
-msgstr "15%"
-
-msgid "15min"
-msgstr "15min"
-
-msgid "15s"
-msgstr "15s"
-
-msgid "180"
-msgstr "180"
-
-msgid "1min"
-msgstr "1min"
-
-msgid "2"
-msgstr "2"
-
-msgid "2 - side by side"
-msgstr ""
-
-msgid "2 Days 1 Line"
-msgstr "2 Days 1 Line"
-
-msgid "2 Days 2 Line"
-msgstr "2 Days 2 Line"
-
-msgid "2 x FastBackwardKey"
-msgstr ""
-
-msgid "2 x FastBackwardKey Type 2"
-msgstr ""
-
-msgid "2 x FastForwardKey"
-msgstr "2 x FastForwardKey"
-
-msgid "2 x FastForwardKey Type 2"
-msgstr "2 x FastForwardKey Type 2"
-
-msgid "2 x InfoKey"
-msgstr "2 x InfoKey"
-
-msgid "2 x Mute"
-msgstr ""
-
-msgid "2%"
-msgstr ""
-
-msgid "20"
-msgstr "20"
-
-msgid "20%"
-msgstr "20%"
-
-msgid "20min"
-msgstr "20min"
-
-msgid "20s"
-msgstr "20s"
-
-msgid "220x176"
-msgstr "220x176"
-
-msgid "25%"
-msgstr "25%"
-
-msgid "255x64"
-msgstr "255x64"
-
-msgid "270"
-msgstr "270"
-
-msgid "2min"
-msgstr "2min"
-
-msgid "3"
-msgstr "3"
-
-msgid "3%"
-msgstr ""
-
-msgid "30"
-msgstr "30"
-
-msgid "30%"
-msgstr "30%"
-
-msgid "30min"
-msgstr "30min"
-
-msgid "30s"
-msgstr "30s"
-
-msgid "32bit - color"
-msgstr "32bit - color"
-
-msgid "35%"
-msgstr "35%"
-
-msgid "3min"
-msgstr "3min"
-
-msgid "4"
-msgstr ""
-
-msgid "4 Days 1 Line"
-msgstr "4 Days 1 Line"
-
-msgid "4 Days 2 Lines"
-msgstr "4 Days 2 Lines"
-
-msgid "4 Days Vertical View"
-msgstr "4 Days Vertical View"
-
-msgid "40%"
-msgstr "40%"
-
-msgid "400x240"
-msgstr "400x240"
-
-msgid "40s"
-msgstr "40s"
-
-msgid "45%"
-msgstr "45%"
-
-msgid "4min"
-msgstr "4min"
-
-msgid "5"
-msgstr "5"
-
-msgid "5 Days 1 Line"
-msgstr "5 Days 1 Line"
-
-msgid "5 Days 2 Lines"
-msgstr "5 Days 2 Lines"
-
-msgid "5 Days Vertical View"
-msgstr "5 Days Vertical View"
-
-msgid "5%"
-msgstr "5%"
-
-msgid "50%"
-msgstr "50%"
-
-msgid "50s"
-msgstr "50s"
-
-msgid "55%"
-msgstr "55%"
-
-msgid "5min"
-msgstr "5min"
-
-msgid "5s"
-msgstr "5s"
-
-msgid "60%"
-msgstr "60%"
-
-msgid "60min"
-msgstr "60min"
-
-msgid "65%"
-msgstr "65%"
-
-msgid "7"
-msgstr ""
-
-msgid "70%"
-msgstr "70%"
-
-msgid "720x405"
-msgstr ""
-
-msgid "75%"
-msgstr "75%"
-
-msgid "80%"
-msgstr "80%"
-
-msgid "85%"
-msgstr "85%"
-
-msgid "8bit - grayscale/color"
-msgstr "8bit - grayscale/color"
-
-msgid "90"
-msgstr "90"
-
-msgid "90%"
-msgstr "90%"
-
-msgid "95%"
-msgstr "95%"
-
-msgid "96x64"
-msgstr "96x64"
-
-msgid "Active Screen"
-msgstr "Active Screen"
-
-msgid "All"
-msgstr "All"
-
-msgid "Always All"
-msgstr "Always All"
-
-msgid "Always New"
-msgstr "Always New"
-
-msgid "Analog"
-msgstr "Analog"
-
-msgid "Analog+Date"
-msgstr "Analog+Date"
-
-msgid "Analog+Date+Weekday"
-msgstr "Analog+Date+Weekday"
-
-msgid "Analog+Date+Weekday 2"
-msgstr ""
-
-msgid "April"
-msgstr ""
-
-msgid "Audio/Video"
-msgstr "Audio/Video"
-
-msgid "August"
-msgstr ""
-
-msgid "Background"
-msgstr ""
-
-msgid "Background-Picture Type"
-msgstr ""
-
-msgid "Backup Config"
-msgstr ""
-
-msgid "Bar"
-msgstr "Bar"
-
-msgid "Bar+Value"
-msgstr "Bar+Value"
-
-msgid "Bitrate"
-msgstr "Bitrate"
-
-msgid "Box-Skin-LCD"
-msgstr "Box-Skin-LCD"
-
-msgid "Box-Skin-LCD Color"
-msgstr "Box-Skin-LCD Color"
-
-msgid "Box-Skin-LCD Dimension"
-msgstr "Box-Skin-LCD Dimension"
-
-msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "Box-Skin-LCD Enable Idle-Mode"
-
-msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "Box-Skin-LCD Enable Media-Mode"
-
-msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "Box-Skin-LCD Enable On-Mode"
-
-msgid "C"
-msgstr "C"
-
-msgid "C + rpm"
-msgstr ""
-
-msgid "C + rpm/2"
-msgstr ""
-
-msgid "Calendar"
-msgstr "Calendar"
-
-msgid "Calendar Day Event Preview"
-msgstr "Calendar Day Event Preview"
-
-msgid "Calendar Line Thickness"
-msgstr "Calendar Line Thickness"
-
-msgid "Calendar Poll Interval"
-msgstr ""
-
-msgid "Calendar Saturday Color"
-msgstr ""
-
-msgid "Calendar Sunday Color"
-msgstr ""
-
-msgid "Calendar Timezone Correction"
-msgstr ""
-
-msgid "Calendar Transparency"
-msgstr "Calendar Transparency"
-
-msgid "Calendar ics-Path [ok]>"
-msgstr "Calendar ics-Path [ok]>"
-
-msgid "Calendar ics-URL"
-msgstr "Calendar ics-URL"
-
-msgid "Calendar planerFS"
-msgstr ""
-
-msgid "Cancel"
-msgstr "Cancel"
-
-msgid "Channel"
-msgstr ""
-
-msgid "Channel+Title"
-msgstr ""
-
-msgid "Choose dir"
-msgstr "Choose dir"
-
-msgid "Choose file"
-msgstr "Choose file"
-
-msgid "Choose font"
-msgstr "Choose font"
-
-msgid "Clock"
-msgstr "Clock"
-
-msgid "Clock 2"
-msgstr "Clock 2"
-
-msgid "Config Backup Path [ok]>"
-msgstr "Config Backup Path [ok]>"
-
-msgid "Config Restore All Settings"
-msgstr ""
-
-msgid "Console normal"
-msgstr "Console normal"
-
-msgid "Corby@Pearl 128x128"
-msgstr ""
-
-msgid "Corner"
-msgstr "Corner"
-
-msgid "Crashlog"
-msgstr "Crashlog"
-
-msgid "Current"
-msgstr "Current"
-
-msgid "Current Temperature"
-msgstr "Current Temperature"
-
-msgid "Current Temperature (+C)"
-msgstr "Current Temperature (+C)"
-
-msgid "Current Temperature (-C)"
-msgstr "Current Temperature (-C)"
-
-msgid "DVB-T Signal-Quality Correction"
-msgstr ""
-
-msgid "Date"
-msgstr "Date"
-
-msgid "Date+Time"
-msgstr "Date+Time"
-
-msgid "Date+Time+Weekday"
-msgstr "Date+Time+Weekday"
-
-msgid "Dates"
-msgstr "Dates"
-
-msgid "Dates 1 Line"
-msgstr "Dates 1 Line"
-
-msgid "Dates 3 Lines"
-msgstr "Dates 3 Lines"
-
-msgid "Dates 5 Lines"
-msgstr "Dates 5 Lines"
-
-msgid "Dates 9 Lines"
-msgstr "Dates 9 Lines"
-
-msgid "Dates List"
-msgstr "Dates List"
-
-msgid "Dates compact"
-msgstr "Dates compact"
-
-msgid "Dates compact 2 Lines"
-msgstr "Dates compact 2 Lines"
-
-msgid "Dates compact 3 Lines"
-msgstr "Dates compact 3 Lines"
-
-msgid "Dates compact no Icon"
-msgstr "Dates compact no Icon"
-
-msgid "Dates no Icon"
-msgstr "Dates no Icon"
-
-msgid "Debug-Logging > /tmp/L4log.txt"
-msgstr "Debug-Logging > /tmp/L4log.txt"
-
-msgid "December"
-msgstr ""
-
-msgid "Delete"
-msgstr "Delete"
-
-msgid "Delete File?"
-msgstr "Delete File?"
-
-msgid "Delete Logfile"
-msgstr ""
-
-msgid "Display Delay [ms]"
-msgstr "Display Delay [ms]"
-
-msgid "Double-button switches"
-msgstr "Double-button switches"
-
-msgid "Download Logfile"
-msgstr ""
-
-msgid "E"
-msgstr ""
-
-msgid "ENE"
-msgstr ""
-
-msgid "EPG"
-msgstr ""
-
-msgid "ESE"
-msgstr ""
-
-msgid "Event Icon Bar"
-msgstr "Event Icon Bar"
-
-msgid "Exec"
-msgstr "Exec"
-
-msgid "Extended"
-msgstr "Extended"
-
-msgid "Extended (Short)"
-msgstr "Extended (Short)"
-
-msgid "Extended Description"
-msgstr "Extended Description"
-
-msgid "Fastmode (2s)"
-msgstr "Fastmode (2s)"
-
-msgid "February"
-msgstr ""
-
-msgid "First Quarter"
-msgstr "First Quarter"
-
-msgid "Flaps Design"
-msgstr "Flaps Design"
-
-msgid "Font"
-msgstr "Font"
-
-msgid "Font 1 [ok]>"
-msgstr "Font 1 [ok]>"
-
-msgid "Font 2 [ok]>"
-msgstr "Font 2 [ok]>"
-
-msgid "Font 3 [ok]>"
-msgstr "Font 3 [ok]>"
-
-msgid "Font 4 [ok]>"
-msgstr ""
-
-msgid "Font 5 [ok]>"
-msgstr ""
-
-msgid "Font global [ok]>"
-msgstr "Font global [ok]>"
-
-msgid "Frame"
-msgstr "Frame"
-
-msgid "Fri"
-msgstr ""
-
-msgid "Friday"
-msgstr ""
-
+"X-Generator: Poedit 2.0.2\n"
+
+#: src/WebConfigSite.py:30
+msgid "OSD"
+msgstr "OSD"
+
+#: src/WebConfigSite.py:30 src/WebConfigSite.py:542
+msgid "Screen"
+msgstr "Screen"
+
+#: src/WebConfigSite.py:30
+msgid "Picture"
+msgstr "Picture"
+
+#: src/WebConfigSite.py:30 src/plugin.py:5862 src/plugin.py:6488
+#: src/plugin.py:6979
+msgid "Weather"
+msgstr "Weather"
+
+#: src/WebConfigSite.py:30 src/plugin.py:5893 src/plugin.py:6519
+#: src/plugin.py:7010
+msgid "Netatmo"
+msgstr "Netatmo"
+
+#: src/WebConfigSite.py:30
+msgid "Popup-Text"
+msgstr "Popup-Text"
+
+#: src/WebConfigSite.py:30 src/plugin.py:6139 src/plugin.py:6715
+#: src/plugin.py:7246
 msgid "FritzCall"
 msgstr "FritzCall"
 
-msgid "FritzCall Frame Picture [ok]>"
-msgstr "FritzCall Frame Picture [ok]>"
+#: src/WebConfigSite.py:30
+msgid "Font"
+msgstr "Font"
 
-msgid "FritzCall Number of Lines per Entry"
+#: src/WebConfigSite.py:30 src/plugin.py:6096 src/plugin.py:6672
+#: src/plugin.py:7203
+msgid "Mail"
+msgstr "Mail"
+
+#: src/WebConfigSite.py:30 src/plugin.py:6153 src/plugin.py:6729
+#: src/plugin.py:7260
+msgid "Calendar"
+msgstr "Calendar"
+
+#: src/WebConfigSite.py:30 src/plugin.py:6111 src/plugin.py:6687
+#: src/plugin.py:7218
+msgid "Remote Box"
 msgstr ""
 
-msgid "FritzCall Number of List Entries"
-msgstr "FritzCall Number of List Entries"
-
-msgid "FritzCall Number of Pictures"
-msgstr "FritzCall Number of Pictures"
-
-msgid "FritzCall Picture Orientation"
-msgstr "FritzCall Picture Orientation"
-
-msgid "FritzCall Picture Path [ok]>"
-msgstr "FritzCall Picture Path [ok]>"
-
-msgid "FritzCall Picture Transparency"
+#: src/WebConfigSite.py:30
+msgid "WWW Converter"
 msgstr ""
 
-msgid "FritzCall Pictures Search"
-msgstr "FritzCall Pictures Search"
+#: src/WebConfigSite.py:30
+msgid "WebIF"
+msgstr ""
 
-msgid "FritzCall Popup Color"
-msgstr "FritzCall Popup Color"
+#: src/WebConfigSite.py:30
+msgid "MJPEG Stream"
+msgstr ""
 
-msgid "FritzCall Popup LCD"
-msgstr "FritzCall Popup LCD"
+#: src/WebConfigSite.py:30
+msgid "Box-Skin-LCD"
+msgstr "Box-Skin-LCD"
 
-msgid "FritzCall Popup-Time"
-msgstr "FritzCall Popup-Time"
+#: src/WebConfigSite.py:30
+#, fuzzy
+#| msgid "Used Tuner"
+msgid "Tuner"
+msgstr "Used Tuner"
 
-msgid "FritzCall remove Calls after hours"
-msgstr "FritzCall remove Calls after hours"
+#: src/WebConfigSite.py:30
+msgid "Key"
+msgstr ""
 
-msgid "Full Moon"
-msgstr "Full Moon"
+#: src/WebConfigSite.py:30
+msgid "Sonos"
+msgstr ""
 
+#: src/WebConfigSite.py:30 src/plugin.py:461
+msgid "MusicCast"
+msgstr ""
+
+#: src/WebConfigSite.py:181 src/plugin.py:5495
+msgid "WebIF IP Allow"
+msgstr ""
+
+#: src/WebConfigSite.py:250
+msgid "No or wrong File selected, try a correct File first !"
+msgstr ""
+
+#: src/WebConfigSite.py:512
+msgid "IP seurity not supported by Box"
+msgstr ""
+
+#: src/WebConfigSite.py:527
+msgid "Crashlog"
+msgstr "Crashlog"
+
+#: src/WebConfigSite.py:529
+msgid "Show"
+msgstr "Show"
+
+#: src/WebConfigSite.py:530
+msgid "Delete"
+msgstr "Delete"
+
+#: src/WebConfigSite.py:535
+msgid "Restore Config"
+msgstr ""
+
+#: src/WebConfigSite.py:536
+msgid "Backup Config"
+msgstr ""
+
+#: src/WebConfigSite.py:538
+msgid "Delete Logfile"
+msgstr ""
+
+#: src/WebConfigSite.py:539
+msgid "Download Logfile"
+msgstr ""
+
+#: src/WebConfigSite.py:540
+msgid "Save Config"
+msgstr ""
+
+#: src/WebConfigSite.py:550
+msgid "stop Screencycle"
+msgstr ""
+
+#: src/WebConfigSite.py:558 src/plugin.py:336 src/plugin.py:5166
+#: src/plugin.py:5309 src/plugin.py:7358 src/plugin.py:7374
+msgid "Global"
+msgstr "Global"
+
+#: src/WebConfigSite.py:559 src/plugin.py:480 src/plugin.py:5157
+#: src/plugin.py:5542 src/plugin.py:7359 src/plugin.py:7363
+msgid "On"
+msgstr "On"
+
+#: src/WebConfigSite.py:560 src/plugin.py:480 src/plugin.py:605
+#: src/plugin.py:5160 src/plugin.py:6247 src/plugin.py:7364 src/plugin.py:7368
+#: src/plugin.py:7568
+msgid "Media"
+msgstr "Media"
+
+#: src/WebConfigSite.py:561 src/plugin.py:5163 src/plugin.py:5184
+#: src/plugin.py:6819 src/plugin.py:7369 src/plugin.py:7373 src/plugin.py:7566
+msgid "Idle"
+msgstr ""
+
+#: src/WebConfigSite.py:615 src/WebConfigSite.py:616
+msgid "other"
+msgstr "other"
+
+#: src/WebConfigSite.py:718 src/WebConfigSite.py:734
+msgid "set Settings"
+msgstr "set Settings"
+
+#: src/WebConfigSite.py:721
+msgid "copy to On"
+msgstr "copy to On"
+
+#: src/WebConfigSite.py:723
+msgid "copy to Media"
+msgstr "copy to Media"
+
+#: src/WebConfigSite.py:725
+msgid "copy to Idle"
+msgstr "copy to Idle"
+
+#: src/WebConfigSite.py:738
 msgid "GUI Restart is required"
 msgstr "GUI Restart is required"
 
+#: src/WebConfigSite.py:744
+msgid "Exec"
+msgstr "Exec"
+
+#: src/WebConfigSite.py:764
+msgid "Show Externals"
+msgstr ""
+
+#: src/myFileList.py:178
+msgid "List of Storage Devices"
+msgstr "List of Storage Devices"
+
+#: src/myFileList.py:180
+msgid "Parent Directory"
+msgstr "Parent Directory"
+
+#: src/plugin.py:266
+msgid "Mon"
+msgstr ""
+
+#: src/plugin.py:266
+msgid "Tue"
+msgstr ""
+
+#: src/plugin.py:266
+msgid "Wed"
+msgstr ""
+
+#: src/plugin.py:266
+msgid "Thur"
+msgstr ""
+
+#: src/plugin.py:266
+msgid "Fri"
+msgstr ""
+
+#: src/plugin.py:266
+msgid "Sat"
+msgstr ""
+
+#: src/plugin.py:266
+msgid "Sun"
+msgstr ""
+
+#: src/plugin.py:282
+msgid "black"
+msgstr "black"
+
+#: src/plugin.py:282
+msgid "white"
+msgstr "white"
+
+#: src/plugin.py:283
+msgid "gray"
+msgstr "gray"
+
+#: src/plugin.py:283
+msgid "silver"
+msgstr "silver"
+
+#: src/plugin.py:283
+msgid "slategray"
+msgstr "slategray"
+
+#: src/plugin.py:284
+msgid "aquamarine"
+msgstr "aquamarine"
+
+#: src/plugin.py:285
+msgid "yellow"
+msgstr "yellow"
+
+#: src/plugin.py:285
+msgid "greenyellow"
+msgstr "greenyellow"
+
+#: src/plugin.py:285
+msgid "gold"
+msgstr "gold"
+
+#: src/plugin.py:286
+msgid "red"
+msgstr "red"
+
+#: src/plugin.py:286
+msgid "tomato"
+msgstr "tomato"
+
+#: src/plugin.py:286
+msgid "darkred"
+msgstr "darkred"
+
+#: src/plugin.py:286
+msgid "indianred"
+msgstr "indianred"
+
+#: src/plugin.py:286
+msgid "orange"
+msgstr "orange"
+
+#: src/plugin.py:286
+msgid "darkorange"
+msgstr "darkorange"
+
+#: src/plugin.py:286
+msgid "orangered"
+msgstr "orangered"
+
+#: src/plugin.py:287
+msgid "green"
+msgstr "green"
+
+#: src/plugin.py:287
+msgid "lawngreen"
+msgstr "lawngreen"
+
+#: src/plugin.py:287
+msgid "darkgreen"
+msgstr "darkgreen"
+
+#: src/plugin.py:287
+msgid "lime"
+msgstr "lime"
+
+#: src/plugin.py:287
+msgid "lightgreen"
+msgstr "lightgreen"
+
+#: src/plugin.py:288
+msgid "blue"
+msgstr "blue"
+
+#: src/plugin.py:288
+msgid "blueviolet"
+msgstr "blueviolet"
+
+#: src/plugin.py:288
+msgid "indigo"
+msgstr "indigo"
+
+#: src/plugin.py:288
+msgid "darkblue"
+msgstr "darkblue"
+
+#: src/plugin.py:288
+msgid "cadetblue"
+msgstr "cadetblue"
+
+#: src/plugin.py:288
+msgid "cornflowerblue"
+msgstr "cornflowerblue"
+
+#: src/plugin.py:288
+msgid "lightblue"
+msgstr "lightblue"
+
+#: src/plugin.py:289
+msgid "magenta"
+msgstr "magenta"
+
+#: src/plugin.py:289
+msgid "violet"
+msgstr "violet"
+
+#: src/plugin.py:289
+msgid "darkorchid"
+msgstr "darkorchid"
+
+#: src/plugin.py:289
+msgid "deeppink"
+msgstr "deeppink"
+
+#: src/plugin.py:289
+msgid "cyan"
+msgstr "cyan"
+
+#: src/plugin.py:290
+msgid "brown"
+msgstr "brown"
+
+#: src/plugin.py:290
+msgid "sandybrown"
+msgstr "sandybrown"
+
+#: src/plugin.py:290
+msgid "moccasin"
+msgstr "moccasin"
+
+#: src/plugin.py:290
+msgid "rosybrown"
+msgstr "rosybrown"
+
+#: src/plugin.py:290
+msgid "olive"
+msgstr "olive"
+
+#: src/plugin.py:292 src/plugin.py:295 src/plugin.py:329 src/plugin.py:368
+#: src/plugin.py:377 src/plugin.py:378 src/plugin.py:392 src/plugin.py:466
+#: src/plugin.py:467 src/plugin.py:492 src/plugin.py:493 src/plugin.py:598
+#: src/plugin.py:615 src/plugin.py:624 src/plugin.py:638 src/plugin.py:647
+#: src/plugin.py:657 src/plugin.py:729 src/plugin.py:1013 src/plugin.py:1087
+#: src/plugin.py:1095 src/plugin.py:1106 src/plugin.py:1117 src/plugin.py:1127
+#: src/plugin.py:1137 src/plugin.py:1147 src/plugin.py:1155 src/plugin.py:1220
+#: src/plugin.py:1228 src/plugin.py:1239 src/plugin.py:1507 src/plugin.py:1599
+#: src/plugin.py:1610 src/plugin.py:1620 src/plugin.py:1630 src/plugin.py:1652
+#: src/plugin.py:1660 src/plugin.py:1674 src/plugin.py:1683 src/plugin.py:1693
+#: src/plugin.py:1733 src/plugin.py:1741 src/plugin.py:1753 src/plugin.py:1761
+#: src/plugin.py:1772 src/plugin.py:1953 src/plugin.py:2024 src/plugin.py:2035
+#: src/plugin.py:2046 src/plugin.py:2056 src/plugin.py:2066 src/plugin.py:2076
+#: src/plugin.py:2084 src/plugin.py:2142 src/plugin.py:2156 src/plugin.py:2165
+#: src/plugin.py:2175 src/plugin.py:2215 src/plugin.py:2223
+msgid "off"
+msgstr "off"
+
+#: src/plugin.py:292 src/plugin.py:293 src/plugin.py:294
+msgid "Screen 1"
+msgstr "Screen 1"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 2"
+msgstr "Screen 2"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 3"
+msgstr "Screen 3"
+
+#: src/plugin.py:292
+msgid "Screen 1+2"
+msgstr "Screen 1+2"
+
+#: src/plugin.py:292
+msgid "Screen 1+3"
+msgstr "Screen 1+3"
+
+#: src/plugin.py:292
+msgid "Screen 2+3"
+msgstr "Screen 2+3"
+
+#: src/plugin.py:292
+msgid "Screen 1+2+3"
+msgstr "Screen 1+2+3"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 4"
+msgstr "Screen 4"
+
+#: src/plugin.py:292
+msgid "Screen 1+4"
+msgstr "Screen 1+4"
+
+#: src/plugin.py:292
+msgid "Screen 2+4"
+msgstr "Screen 2+4"
+
+#: src/plugin.py:292
+msgid "Screen 3+4"
+msgstr "Screen 3+4"
+
+#: src/plugin.py:292
+msgid "Screen 1+2+4"
+msgstr "Screen 1+2+4"
+
+#: src/plugin.py:292
+msgid "Screen 1+3+4"
+msgstr "Screen 1+3+4"
+
+#: src/plugin.py:292
+msgid "Screen 2+3+4"
+msgstr "Screen 2+3+4"
+
+#: src/plugin.py:292
+msgid "Screen 1+2+3+4"
+msgstr "Screen 1+2+3+4"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 5"
+msgstr "Screen 5"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 6"
+msgstr "Screen 6"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 7"
+msgstr "Screen 7"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 8"
+msgstr "Screen 8"
+
+#: src/plugin.py:292 src/plugin.py:294
+msgid "Screen 9"
+msgstr "Screen 9"
+
+#: src/plugin.py:292 src/plugin.py:293
+msgid "Screen 1-5"
+msgstr "Screen 1-5"
+
+#: src/plugin.py:292 src/plugin.py:293
+msgid "Screen 1-6"
+msgstr "Screen 1-6"
+
+#: src/plugin.py:292 src/plugin.py:293
+msgid "Screen 1-7"
+msgstr "Screen 1-7"
+
+#: src/plugin.py:292 src/plugin.py:293
+msgid "Screen 1-8"
+msgstr "Screen 1-8"
+
+#: src/plugin.py:292 src/plugin.py:293
+msgid "Screen 1-9"
+msgstr "Screen 1-9"
+
+#: src/plugin.py:292
+#, fuzzy
+#| msgid "Screen 5-9"
+msgid "Screen 5-8"
+msgstr "Screen 5-9"
+
+#: src/plugin.py:292
+msgid "Screen 5-9"
+msgstr "Screen 5-9"
+
+#: src/plugin.py:292
+msgid "Screen 1+3+5+7+9"
+msgstr "Screen 1+3+5+7+9"
+
+#: src/plugin.py:292
+msgid "Screen 2+4+6+8"
+msgstr "Screen 2+4+6+8"
+
+#: src/plugin.py:293
+msgid "Screen 1-2"
+msgstr "Screen 1-2"
+
+#: src/plugin.py:293
+msgid "Screen 1-3"
+msgstr "Screen 1-3"
+
+#: src/plugin.py:293
+msgid "Screen 1-4"
+msgstr "Screen 1-4"
+
+#: src/plugin.py:295 src/plugin.py:1753
+msgid "on"
+msgstr "on"
+
+#: src/plugin.py:296
+msgid "5s"
+msgstr "5s"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "10s"
+msgstr "10s"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "15s"
+msgstr "15s"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "20s"
+msgstr "20s"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "30s"
+msgstr "30s"
+
+#: src/plugin.py:296
+msgid "40s"
+msgstr "40s"
+
+#: src/plugin.py:296
+msgid "50s"
+msgstr "50s"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "1min"
+msgstr "1min"
+
+#: src/plugin.py:296 src/plugin.py:455 src/plugin.py:460
+msgid "2min"
+msgstr "2min"
+
+#: src/plugin.py:296
+msgid "3min"
+msgstr "3min"
+
+#: src/plugin.py:296
+msgid "4min"
+msgstr "4min"
+
+#: src/plugin.py:296 src/plugin.py:514
+msgid "5min"
+msgstr "5min"
+
+#: src/plugin.py:296 src/plugin.py:514
+msgid "10min"
+msgstr "10min"
+
+#: src/plugin.py:296 src/plugin.py:514 src/plugin.py:563
+msgid "20min"
+msgstr "20min"
+
+#: src/plugin.py:296 src/plugin.py:514 src/plugin.py:563 src/plugin.py:1158
+msgid "30min"
+msgstr "30min"
+
+#: src/plugin.py:296 src/plugin.py:514 src/plugin.py:563 src/plugin.py:1158
+msgid "60min"
+msgstr "60min"
+
+#: src/plugin.py:296
+#, fuzzy
+#| msgid "2"
+msgid "2h"
+msgstr "2"
+
+#: src/plugin.py:296
+#, fuzzy
+#| msgid "3"
+msgid "3h"
+msgstr "3"
+
+#: src/plugin.py:296
+#, fuzzy
+#| msgid "5"
+msgid "5h"
+msgstr "5"
+
+#: src/plugin.py:297 src/plugin.py:298
+msgid "LCD 1"
+msgstr "LCD 1"
+
+#: src/plugin.py:297 src/plugin.py:298
+msgid "LCD 2"
+msgstr "LCD 2"
+
+#: src/plugin.py:297
+msgid "LCD 1+2"
+msgstr "LCD 1+2"
+
+#: src/plugin.py:297 src/plugin.py:298
+msgid "LCD 3"
+msgstr "LCD 3"
+
+#: src/plugin.py:297
+msgid "LCD 1+3"
+msgstr "LCD 1+3"
+
+#: src/plugin.py:297
+msgid "LCD 2+3"
+msgstr "LCD 2+3"
+
+#: src/plugin.py:297
+msgid "LCD 1+2+3"
+msgstr "LCD 1+2+3"
+
+#: src/plugin.py:298
+msgid "LCD 1-3"
+msgstr ""
+
+#: src/plugin.py:299
+msgid "Pearl (or compatible LCD) 320x240"
+msgstr "Pearl (or compatible LCD) 320x240"
+
+#: src/plugin.py:299
+msgid "Pearl (or compatible LCD) 240x320"
+msgstr "Pearl (or compatible LCD) 240x320"
+
+#: src/plugin.py:299
+msgid "Corby@Pearl 128x128"
+msgstr ""
+
+#: src/plugin.py:300
+msgid "Samsung SPF-72H 800x480"
+msgstr "Samsung SPF-72H 800x480"
+
+#: src/plugin.py:300
+msgid "Samsung SPF-75H/76H 800x480"
+msgstr "Samsung SPF-75H/76H 800x480"
+
+#: src/plugin.py:300
+msgid "Samsung SPF-87H 800x480"
+msgstr "Samsung SPF-87H 800x480"
+
+#: src/plugin.py:300
+msgid "Samsung SPF-87H old 800x480"
+msgstr "Samsung SPF-87H old 800x480"
+
+#: src/plugin.py:300
+msgid "Samsung SPF-83H 800x600"
+msgstr "Samsung SPF-83H 800x600"
+
+#: src/plugin.py:301
+msgid "Samsung SPF-85H/86H 800x600"
+msgstr "Samsung SPF-85H/86H 800x600"
+
+#: src/plugin.py:301
+msgid "Samsung SPF-85P/86P 800x600"
+msgstr "Samsung SPF-85P/86P 800x600"
+
+#: src/plugin.py:301
+msgid "Samsung SPF-105P 1024x600"
+msgstr "Samsung SPF-105P 1024x600"
+
+#: src/plugin.py:301
+msgid "Samsung SPF-107H 1024x600"
+msgstr "Samsung SPF-107H 1024x600"
+
+#: src/plugin.py:301
+msgid "Samsung SPF-107H old 1024x600"
+msgstr "Samsung SPF-107H old 1024x600"
+
+#: src/plugin.py:302
+msgid "Samsung SPF-700T 800x600"
+msgstr "Samsung SPF-700T 800x600"
+
+#: src/plugin.py:303
+msgid "Internal TFT-LCD 400x240"
+msgstr "Internal TFT-LCD 400x240"
+
+#: src/plugin.py:304
+msgid "Internal Box-Skin-LCD"
+msgstr "Internal Box-Skin-LCD"
+
+#: src/plugin.py:305
+msgid "only Picture 320x240"
+msgstr "only Picture 320x240"
+
+#: src/plugin.py:305
+msgid "only Picture 800x480"
+msgstr "only Picture 800x480"
+
+#: src/plugin.py:305
+msgid "only Picture 800x600"
+msgstr "only Picture 800x600"
+
+#: src/plugin.py:305
+msgid "only Picture 1024x600"
+msgstr "only Picture 1024x600"
+
+#: src/plugin.py:305
+msgid "only Picture Custom Size"
+msgstr "only Picture Custom Size"
+
+#: src/plugin.py:305
+#, fuzzy
+#| msgid "only Picture Custom Size"
+msgid "only Picture Custom Size 2"
+msgstr "only Picture Custom Size"
+
+#: src/plugin.py:307
+msgid "Internal Vu+ Duo2 LCD 400x240"
+msgstr "Internal Vu+ Duo2 LCD 400x240"
+
+#: src/plugin.py:308
+msgid "96x64"
+msgstr "96x64"
+
+#: src/plugin.py:308
+msgid "128x32"
+msgstr ""
+
+#: src/plugin.py:308
+msgid "128x64"
+msgstr ""
+
+#: src/plugin.py:308
+msgid "132x64"
+msgstr "132x64"
+
+#: src/plugin.py:308
+msgid "220x176"
+msgstr "220x176"
+
+#: src/plugin.py:308
+msgid "255x64"
+msgstr "255x64"
+
+#: src/plugin.py:308
+msgid "400x240"
+msgstr "400x240"
+
+#: src/plugin.py:308
+msgid "480x320"
+msgstr ""
+
+#: src/plugin.py:308
+msgid "720x405"
+msgstr ""
+
+#: src/plugin.py:308
+msgid "800x480"
+msgstr ""
+
+#: src/plugin.py:309
+msgid "2 Days 1 Line"
+msgstr "2 Days 1 Line"
+
+#: src/plugin.py:309
+msgid "2 Days 2 Line"
+msgstr "2 Days 2 Line"
+
+#: src/plugin.py:309
+msgid "4 Days 1 Line"
+msgstr "4 Days 1 Line"
+
+#: src/plugin.py:309
+msgid "4 Days 2 Lines"
+msgstr "4 Days 2 Lines"
+
+#: src/plugin.py:309
+msgid "5 Days 1 Line"
+msgstr "5 Days 1 Line"
+
+#: src/plugin.py:309
+msgid "5 Days 2 Lines"
+msgstr "5 Days 2 Lines"
+
+#: src/plugin.py:309 src/plugin.py:310
+msgid "Current"
+msgstr "Current"
+
+#: src/plugin.py:309
+msgid "Current Temperature (+C)"
+msgstr "Current Temperature (+C)"
+
+#: src/plugin.py:309
+msgid "Current Temperature (-C)"
+msgstr "Current Temperature (-C)"
+
+#: src/plugin.py:309
+msgid "4 Days Vertical View"
+msgstr "4 Days Vertical View"
+
+#: src/plugin.py:309
+msgid "5 Days Vertical View"
+msgstr "5 Days Vertical View"
+
+#: src/plugin.py:310
+msgid "Current Temperature"
+msgstr "Current Temperature"
+
+#: src/plugin.py:311
+msgid "All"
+msgstr "All"
+
+#: src/plugin.py:311
+msgid "Temperature"
+msgstr "Temperature"
+
+#: src/plugin.py:311
+msgid "Temperature+Humidity"
+msgstr ""
+
+#: src/plugin.py:311
+msgid "Temperature+Co2"
+msgstr "Temperature+Co2"
+
+#: src/plugin.py:311
+msgid "Temperature+Co2+Pressure"
+msgstr "Temperature+Co2+Pressure"
+
+#: src/plugin.py:312
+msgid "userdefined"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 1"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 2"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 3"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 1+2"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 1+3"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 2+3"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 1+2+3"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 4"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 1+4"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 2+4"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 3+4"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 1+2+4"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 1+3+4"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 2+3+4"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 1-4"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 5"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 1-5"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 6"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 5-6"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 4-6"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 3-6"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 2-6"
+msgstr ""
+
+#: src/plugin.py:312
+msgid "Module 1-6"
+msgstr ""
+
+#: src/plugin.py:314
+msgid "Bar"
+msgstr "Bar"
+
+#: src/plugin.py:314
+msgid "Bar+Value"
+msgstr "Bar+Value"
+
+#: src/plugin.py:314
+msgid "Knob"
+msgstr "Knob"
+
+#: src/plugin.py:314
+msgid "Knob+Value"
+msgstr "Knob+Value"
+
+#: src/plugin.py:315
+msgid "Time"
+msgstr "Time"
+
+#: src/plugin.py:315
+msgid "Date+Time"
+msgstr "Date+Time"
+
+#: src/plugin.py:315
+msgid "Date+Time+Weekday"
+msgstr "Date+Time+Weekday"
+
+#: src/plugin.py:315
+msgid "Date"
+msgstr "Date"
+
+#: src/plugin.py:315
+msgid "Time+Weekday"
+msgstr "Time+Weekday"
+
+#: src/plugin.py:315
+msgid "Weekday"
+msgstr ""
+
+#: src/plugin.py:315
+#, fuzzy
+#| msgid "Flaps Design"
+msgid "Flaps Design Date"
+msgstr "Flaps Design"
+
+#: src/plugin.py:315
+#, fuzzy
+#| msgid "Flaps Design"
+msgid "Flaps Design Weekday"
+msgstr "Flaps Design"
+
+#: src/plugin.py:315
+msgid "Analog"
+msgstr "Analog"
+
+#: src/plugin.py:315
+msgid "Analog+Date"
+msgstr "Analog+Date"
+
+#: src/plugin.py:315
+msgid "Analog+Date+Weekday"
+msgstr "Analog+Date+Weekday"
+
+#: src/plugin.py:315
+msgid "Analog+Date+Weekday 2"
+msgstr ""
+
+#: src/plugin.py:316 src/plugin.py:613 src/plugin.py:1084 src/plugin.py:1092
+#: src/plugin.py:1649 src/plugin.py:2021
+msgid "left"
+msgstr "left"
+
+#: src/plugin.py:316 src/plugin.py:613
+msgid "center"
+msgstr "center"
+
+#: src/plugin.py:316 src/plugin.py:613 src/plugin.py:1084 src/plugin.py:1092
+#: src/plugin.py:1649 src/plugin.py:2021
+msgid "right"
+msgstr "right"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "2%"
+msgstr ""
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "3%"
+msgstr ""
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "5%"
+msgstr "5%"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "10%"
+msgstr "10%"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "15%"
+msgstr "15%"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "20%"
+msgstr "20%"
+
+#: src/plugin.py:316 src/plugin.py:329
+msgid "25%"
+msgstr "25%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "30%"
+msgstr "30%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "35%"
+msgstr "35%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "40%"
+msgstr "40%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "45%"
+msgstr "45%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "50%"
+msgstr "50%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "55%"
+msgstr "55%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "60%"
+msgstr "60%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "65%"
+msgstr "65%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "70%"
+msgstr "70%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "75%"
+msgstr "75%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "80%"
+msgstr "80%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "85%"
+msgstr "85%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "90%"
+msgstr "90%"
+
+#: src/plugin.py:316 src/plugin.py:328
+msgid "95%"
+msgstr "95%"
+
+#: src/plugin.py:316 src/plugin.py:328
+#, fuzzy
+#| msgid "70%"
+msgid "97%"
+msgstr "70%"
+
+#: src/plugin.py:316 src/plugin.py:328
+#, fuzzy
+#| msgid "80%"
+msgid "98%"
+msgstr "80%"
+
+#: src/plugin.py:317
+msgid "Short"
+msgstr "Short"
+
+#: src/plugin.py:317
+msgid "Short (Extended)"
+msgstr "Short (Extended)"
+
+#: src/plugin.py:317
+msgid "Extended"
+msgstr "Extended"
+
+#: src/plugin.py:317
+msgid "Extended (Short)"
+msgstr "Extended (Short)"
+
+#: src/plugin.py:317
+msgid "Short+Extended"
+msgstr "Short+Extended"
+
+#: src/plugin.py:318
+msgid "no Calendar"
+msgstr "no Calendar"
+
+#: src/plugin.py:318
+msgid "Month"
+msgstr "Month"
+
+#: src/plugin.py:318
+msgid "Month+Header"
+msgstr "Month+Header"
+
+#: src/plugin.py:318
+msgid "Week"
+msgstr "Week"
+
+#: src/plugin.py:318
+msgid "Week+Header"
+msgstr "Week+Header"
+
+#: src/plugin.py:319 src/plugin.py:13299
+msgid "no Dates"
+msgstr "no Dates"
+
+#: src/plugin.py:319
+msgid "Dates compact 2 Lines"
+msgstr "Dates compact 2 Lines"
+
+#: src/plugin.py:319
+msgid "Dates compact 3 Lines"
+msgstr "Dates compact 3 Lines"
+
+#: src/plugin.py:319
+msgid "Dates 1 Line"
+msgstr "Dates 1 Line"
+
+#: src/plugin.py:319
+msgid "Dates 3 Lines"
+msgstr "Dates 3 Lines"
+
+#: src/plugin.py:319
+msgid "Dates 5 Lines"
+msgstr "Dates 5 Lines"
+
+#: src/plugin.py:319
+msgid "Dates 9 Lines"
+msgstr "Dates 9 Lines"
+
+#: src/plugin.py:320 src/plugin.py:790 src/plugin.py:1303
+msgid "Frame"
+msgstr "Frame"
+
+#: src/plugin.py:320
+msgid "Underline"
+msgstr "Underline"
+
+#: src/plugin.py:320
+msgid "Underline 2"
+msgstr "Underline 2"
+
+#: src/plugin.py:321
+msgid "Dates compact"
+msgstr "Dates compact"
+
+#: src/plugin.py:321
+msgid "Dates compact no Icon"
+msgstr "Dates compact no Icon"
+
+#: src/plugin.py:321
+msgid "Dates"
+msgstr "Dates"
+
+#: src/plugin.py:321
+msgid "Dates no Icon"
+msgstr "Dates no Icon"
+
+#: src/plugin.py:322
+msgid "with Icon"
+msgstr ""
+
+#: src/plugin.py:322
+msgid "no Icon"
+msgstr ""
+
+#: src/plugin.py:322
+msgid "with Icon & Targetnumber"
+msgstr ""
+
+#: src/plugin.py:322
+msgid "no Icon, with Targetnumber"
+msgstr ""
+
+#: src/plugin.py:323 src/plugin.py:324 src/plugin.py:325 src/plugin.py:334
+#: src/plugin.py:404 src/plugin.py:407 src/plugin.py:435 src/plugin.py:437
+#: src/plugin.py:442 src/plugin.py:542 src/plugin.py:544 src/plugin.py:547
+#: src/plugin.py:564 src/plugin.py:674 src/plugin.py:953 src/plugin.py:1447
+#: src/plugin.py:1642 src/plugin.py:1906
+msgid "no"
+msgstr "no"
+
+#: src/plugin.py:323
+msgid "rpm/2"
+msgstr ""
+
+#: src/plugin.py:323
+msgid "rpm"
+msgstr "rpm"
+
+#: src/plugin.py:323
+msgid "C"
+msgstr "C"
+
+#: src/plugin.py:323
+msgid "C + rpm/2"
+msgstr ""
+
+#: src/plugin.py:323
+msgid "C + rpm"
+msgstr ""
+
+#: src/plugin.py:324
+msgid "db"
+msgstr "db"
+
+#: src/plugin.py:324 src/plugin.py:325
+msgid "%"
+msgstr "%"
+
+#: src/plugin.py:324
+msgid "db + %"
+msgstr "db + %"
+
+#: src/plugin.py:324
+msgid "db + % + BER"
+msgstr "db + % + BER"
+
+#: src/plugin.py:324
+msgid "db + BER"
+msgstr "db + BER"
+
+#: src/plugin.py:324
+msgid "% + BER"
+msgstr "% + BER"
+
+#: src/plugin.py:325
+msgid "Load@1min"
+msgstr "Load@1min"
+
+#: src/plugin.py:325
+msgid "Load@5min"
+msgstr "Load@5min"
+
+#: src/plugin.py:325
+#, python-format
+msgid "% + Load@1min"
+msgstr "% + Load@1min"
+
+#: src/plugin.py:325
+#, python-format
+msgid "% + Load@5min"
+msgstr "% + Load@5min"
+
+#: src/plugin.py:326
+msgid "show run+sleep"
+msgstr "show run+sleep"
+
+#: src/plugin.py:326
+msgid "show run"
+msgstr "show run"
+
+#: src/plugin.py:327
+msgid "Always All"
+msgstr "Always All"
+
+#: src/plugin.py:327
+msgid "Always New"
+msgstr "Always New"
+
+#: src/plugin.py:327
+msgid "Only New"
+msgstr "Only New"
+
+#: src/plugin.py:328
+msgid "100%"
+msgstr "100%"
+
+#: src/plugin.py:330 src/plugin.py:336 src/plugin.py:337 src/plugin.py:381
+#: src/plugin.py:454 src/plugin.py:459
+msgid "1"
+msgstr "1"
+
+#: src/plugin.py:330
+msgid "1-2"
+msgstr "1-2"
+
+#: src/plugin.py:330
+msgid "1-3"
+msgstr "1-3"
+
+#: src/plugin.py:330
+msgid "1-4"
+msgstr "1-4"
+
+#: src/plugin.py:330
+msgid "1-5"
+msgstr "1-5"
+
+#: src/plugin.py:331
+msgid "Pop3-SSL"
+msgstr "Pop3-SSL"
+
+#: src/plugin.py:331
+msgid "Pop3"
+msgstr "Pop3"
+
+#: src/plugin.py:331
+msgid "IMAP-SSL"
+msgstr "IMAP-SSL"
+
+#: src/plugin.py:331
+msgid "IMAP"
+msgstr "IMAP"
+
+#: src/plugin.py:332
+msgid "Picon+Channel+Title"
+msgstr ""
+
+#: src/plugin.py:332
+msgid "Picon+Channel"
+msgstr ""
+
+#: src/plugin.py:332 src/plugin.py:338 src/plugin.py:801 src/plugin.py:812
+#: src/plugin.py:5554
+msgid "Picon"
+msgstr "Picon"
+
+#: src/plugin.py:332
+msgid "Channel+Title"
+msgstr ""
+
+#: src/plugin.py:332
+msgid "Channel"
+msgstr ""
+
+#: src/plugin.py:333
+msgid "same color"
+msgstr ""
+
+#: src/plugin.py:334 src/plugin.py:437 src/plugin.py:542 src/plugin.py:544
+#: src/plugin.py:1642
+msgid "yes"
+msgstr "yes"
+
+#: src/plugin.py:334
+msgid "yes +25%"
+msgstr "yes +25%"
+
+#: src/plugin.py:335
+msgid "horizontally"
+msgstr "horizontally"
+
+#: src/plugin.py:335
+msgid "vertically"
+msgstr "vertically"
+
+#: src/plugin.py:336 src/plugin.py:337 src/plugin.py:381 src/plugin.py:454
+#: src/plugin.py:459
+msgid "2"
+msgstr "2"
+
+#: src/plugin.py:336 src/plugin.py:337 src/plugin.py:381 src/plugin.py:454
+#: src/plugin.py:459
+msgid "3"
+msgstr "3"
+
+#: src/plugin.py:336
+msgid "4"
+msgstr ""
+
+#: src/plugin.py:336 src/plugin.py:381 src/plugin.py:454 src/plugin.py:459
+msgid "5"
+msgstr "5"
+
+#: src/plugin.py:337
+msgid "all"
+msgstr ""
+
+#: src/plugin.py:337
+msgid "7"
+msgstr ""
+
+#: src/plugin.py:337
+msgid "14"
+msgstr ""
+
+#: src/plugin.py:337 src/plugin.py:381 src/plugin.py:454 src/plugin.py:459
+msgid "30"
+msgstr "30"
+
+#: src/plugin.py:338
+msgid "Corner"
+msgstr "Corner"
+
+#: src/plugin.py:338
+msgid "Corner+Timeshift"
+msgstr ""
+
+#: src/plugin.py:338
+msgid "Picon+Timeshift"
+msgstr ""
+
+#: src/plugin.py:339
+msgid "only Progress Bar"
+msgstr "only Progress Bar"
+
+#: src/plugin.py:340
+msgid "with Remaining Minutes"
+msgstr "with Remaining Minutes"
+
+#: src/plugin.py:340
+msgid "with Remaining Minutes (Size 1.5)"
+msgstr "with Remaining Minutes (Size 1.5)"
+
+#: src/plugin.py:340
+msgid "with Remaining Minutes (Size 2)"
+msgstr "with Remaining Minutes (Size 2)"
+
+#: src/plugin.py:341
+msgid "with Percent"
+msgstr "with Percent"
+
+#: src/plugin.py:341
+msgid "with Percent (Size 1.5)"
+msgstr "with Percent (Size 1.5)"
+
+#: src/plugin.py:341
+msgid "with Percent (Size 2)"
+msgstr "with Percent (Size 2)"
+
+#: src/plugin.py:342
+msgid "with Remaining Minutes (above)"
+msgstr "with Remaining Minutes (above)"
+
+#: src/plugin.py:342
+msgid "with Remaining Minutes (above/Size 1.5)"
+msgstr "with Remaining Minutes (above/Size 1.5)"
+
+#: src/plugin.py:342
+msgid "with Remaining Minutes (above/Size 2)"
+msgstr "with Remaining Minutes (above/Size 2)"
+
+#: src/plugin.py:343
+msgid "with Percent (above)"
+msgstr "with Percent (above)"
+
+#: src/plugin.py:343
+msgid "with Percent (above/Size 1.5)"
+msgstr "with Percent (above/Size 1.5)"
+
+#: src/plugin.py:343
+msgid "with Percent (above/Size 2)"
+msgstr "with Percent (above/Size 2)"
+
+#: src/plugin.py:344
+msgid "with Remaining Minutes (below)"
+msgstr "with Remaining Minutes (below)"
+
+#: src/plugin.py:344
+msgid "with Remaining Minutes (below/Size 1.5)"
+msgstr "with Remaining Minutes (below/Size 1.5)"
+
+#: src/plugin.py:344
+msgid "with Remaining Minutes (below/Size 2)"
+msgstr "with Remaining Minutes (below/Size 2)"
+
+#: src/plugin.py:345
+msgid "with Percent (below)"
+msgstr "with Percent (below)"
+
+#: src/plugin.py:345
+msgid "with Percent (below/Size 1.5)"
+msgstr "with Percent (below/Size 1.5)"
+
+#: src/plugin.py:345
+msgid "with Percent (below/Size 2)"
+msgstr "with Percent (below/Size 2)"
+
+#: src/plugin.py:346
+msgid "with Current 00:00"
+msgstr "with Current 00:00"
+
+#: src/plugin.py:346
+msgid "with Current 00:00 (Size 1.5)"
+msgstr "with Current 00:00 (Size 1.5)"
+
+#: src/plugin.py:346
+msgid "with Current 00:00 (Size 2)"
+msgstr "with Current 00:00 (Size 2)"
+
+#: src/plugin.py:347
+msgid "with Current 00:00 (above)"
+msgstr "with Current 00:00 (above)"
+
+#: src/plugin.py:347
+msgid "with Current 00:00 (above/Size 1.5)"
+msgstr "with Current 00:00 (above/Size 1.5)"
+
+#: src/plugin.py:347
+msgid "with Current 00:00 (above/Size 2)"
+msgstr "with Current 00:00 (above/Size 2)"
+
+#: src/plugin.py:348
+msgid "with Current 00:00 (below)"
+msgstr "with Current 00:00 (below)"
+
+#: src/plugin.py:348
+msgid "with Current 00:00 (below/Size 1.5)"
+msgstr "with Current 00:00 (below/Size 1.5)"
+
+#: src/plugin.py:348
+msgid "with Current 00:00 (below/Size 2)"
+msgstr "with Current 00:00 (below/Size 2)"
+
+#: src/plugin.py:349
+msgid "with Percent Minutes / Total (above)"
+msgstr ""
+
+#: src/plugin.py:349
+msgid "with Percent Minutes / Total (above/Size 1.5)"
+msgstr ""
+
+#: src/plugin.py:349
+msgid "with Percent Minutes / Total (above/Size 2)"
+msgstr ""
+
+#: src/plugin.py:350
+msgid "with absolute Endtime"
+msgstr ""
+
+#: src/plugin.py:350
+#, fuzzy
+#| msgid "with Percent (Size 1.5)"
+msgid "with absolute Endtime (Size 1.5)"
+msgstr "with Percent (Size 1.5)"
+
+#: src/plugin.py:350
+#, fuzzy
+#| msgid "with Percent (Size 2)"
+msgid "with absolute Endtime (Size 2)"
+msgstr "with Percent (Size 2)"
+
+#: src/plugin.py:351
+#, fuzzy
+#| msgid "with Remaining Minutes (above)"
+msgid "with Minutes Total / Endtime (above)"
+msgstr "with Remaining Minutes (above)"
+
+#: src/plugin.py:351
+#, fuzzy
+#| msgid "with Remaining Minutes (above/Size 1.5)"
+msgid "with Minutes Total / Endtime (above/Size 1.5)"
+msgstr "with Remaining Minutes (above/Size 1.5)"
+
+#: src/plugin.py:351
+#, fuzzy
+#| msgid "with Remaining Minutes (above/Size 2)"
+msgid "with Minutes Total / Endtime (above/Size 2)"
+msgstr "with Remaining Minutes (above/Size 2)"
+
+#: src/plugin.py:362
+msgid "Normal (5s)"
+msgstr "Normal (5s)"
+
+#: src/plugin.py:362
+msgid "Fastmode (2s)"
+msgstr "Fastmode (2s)"
+
+#: src/plugin.py:378
+msgid "alphabetic"
+msgstr "alphabetic"
+
+#: src/plugin.py:378
+msgid "random"
+msgstr "random"
+
+#: src/plugin.py:379
+msgid "low/fast (all)"
+msgstr "low/fast (all)"
+
+#: src/plugin.py:379
+msgid "low/fast (Picture only)"
+msgstr "low/fast (Picture only)"
+
+#: src/plugin.py:379
+msgid "better/slow"
+msgstr "better/slow"
+
+#: src/plugin.py:381
+msgid "0.5"
+msgstr "0.5"
+
+#: src/plugin.py:381 src/plugin.py:454 src/plugin.py:459
+msgid "10"
+msgstr "10"
+
+#: src/plugin.py:381 src/plugin.py:454 src/plugin.py:459
+msgid "20"
+msgstr "20"
+
+#: src/plugin.py:384
+msgid "PNG"
+msgstr ""
+
+#: src/plugin.py:384
+msgid "JPG"
+msgstr ""
+
+#: src/plugin.py:385
+msgid "no cache + no adjustment"
+msgstr ""
+
+#: src/plugin.py:385
+msgid "cache + adjustment (high quality, slow)"
+msgstr ""
+
+#: src/plugin.py:385
+msgid "cache + adjustment (low quality, fast)"
+msgstr ""
+
+#: src/plugin.py:404
+msgid "Plug Tuner"
+msgstr ""
+
+#: src/plugin.py:404
+msgid "USB Tuner"
+msgstr ""
+
+#: src/plugin.py:405
+msgid "Now/Next"
+msgstr ""
+
+#: src/plugin.py:405
+msgid "EPG"
+msgstr ""
+
+#: src/plugin.py:419
+msgid "normal"
+msgstr ""
+
+#: src/plugin.py:419
+msgid "reduced"
+msgstr ""
+
+#: src/plugin.py:423
+msgid "Javascript"
+msgstr "Javascript"
+
+#: src/plugin.py:423
+#, fuzzy
+#| msgid "Javascript"
+msgid "Javascript no Refresh"
+msgstr "Javascript"
+
+#: src/plugin.py:423
+msgid "Reload"
+msgstr "Reload"
+
+#: src/plugin.py:427
+msgid "1 - normal"
+msgstr ""
+
+#: src/plugin.py:427
+msgid "2 - side by side"
+msgstr ""
+
+#: src/plugin.py:428
+msgid "MSN"
+msgstr ""
+
+#: src/plugin.py:428
+msgid "OpenWeatherMap"
+msgstr ""
+
+#: src/plugin.py:435 src/plugin.py:564
+msgid "alternative Copy-Mode/DM800hd (24bit)"
+msgstr "alternative Copy-Mode/DM800hd (24bit)"
+
+#: src/plugin.py:435 src/plugin.py:564 src/plugin.py:674
+msgid "yes (32bit)"
+msgstr "yes (32bit)"
+
+#: src/plugin.py:437
+msgid "yes + %"
+msgstr "yes + %"
+
+#: src/plugin.py:442
+msgid "yes, short"
+msgstr "yes, short"
+
+#: src/plugin.py:442
+msgid "yes, long"
+msgstr "yes, long"
+
+#: src/plugin.py:448
+msgid "km/h"
+msgstr ""
+
+#: src/plugin.py:448
+msgid "m/s"
+msgstr ""
+
+#: src/plugin.py:454 src/plugin.py:459
+#, fuzzy
+#| msgid "60%"
+msgid "60"
+msgstr "60%"
+
+#: src/plugin.py:461
+msgid "Coversearch"
+msgstr ""
+
+#: src/plugin.py:468 src/plugin.py:469 src/plugin.py:470
+msgid "0"
+msgstr "0"
+
+#: src/plugin.py:468 src/plugin.py:469 src/plugin.py:470
+msgid "90"
+msgstr "90"
+
+#: src/plugin.py:468 src/plugin.py:469 src/plugin.py:470
+msgid "180"
+msgstr "180"
+
+#: src/plugin.py:468 src/plugin.py:469 src/plugin.py:470
+msgid "270"
+msgstr "270"
+
+#: src/plugin.py:477 src/plugin.py:478 src/plugin.py:479 src/plugin.py:602
+msgid "always"
+msgstr "always"
+
+#: src/plugin.py:477 src/plugin.py:478 src/plugin.py:479
+msgid "1 / min"
+msgstr ""
+
+#: src/plugin.py:480
+msgid "On+Media+Standby"
+msgstr "On+Media+Standby"
+
+#: src/plugin.py:480
+msgid "Standby"
+msgstr "Standby"
+
+#: src/plugin.py:482
+msgid "8bit - grayscale/color"
+msgstr "8bit - grayscale/color"
+
+#: src/plugin.py:482
+msgid "32bit - color"
+msgstr "32bit - color"
+
+#: src/plugin.py:492
+msgid "2 x FastForwardKey"
+msgstr "2 x FastForwardKey"
+
+#: src/plugin.py:492
+msgid "2 x FastForwardKey Type 2"
+msgstr "2 x FastForwardKey Type 2"
+
+#: src/plugin.py:492
+msgid "Long FastForwardKey"
+msgstr "Long FastForwardKey"
+
+#: src/plugin.py:492
+msgid "Long FastForwardKey Type 2"
+msgstr "Long FastForwardKey Type 2"
+
+#: src/plugin.py:492 src/plugin.py:493
+msgid "2 x InfoKey"
+msgstr "2 x InfoKey"
+
+#: src/plugin.py:492 src/plugin.py:493
+msgid "Long InfoKey"
+msgstr ""
+
+#: src/plugin.py:492 src/plugin.py:493
+msgid "2 x Mute"
+msgstr ""
+
+#: src/plugin.py:493
+msgid "2 x FastBackwardKey"
+msgstr ""
+
+#: src/plugin.py:493
+msgid "2 x FastBackwardKey Type 2"
+msgstr ""
+
+#: src/plugin.py:493
+msgid "Long FastBackwardKey"
+msgstr ""
+
+#: src/plugin.py:493
+msgid "Long FastBackwardKey Type 2"
+msgstr ""
+
+#: src/plugin.py:514 src/plugin.py:563
+msgid "15min"
+msgstr "15min"
+
+#: src/plugin.py:542
+msgid "yes, extended"
+msgstr "yes, extended"
+
+#: src/plugin.py:598
+msgid "Logfile normal"
+msgstr "Logfile normal"
+
+#: src/plugin.py:598
+msgid "Logfile extensive"
+msgstr "Logfile extensive"
+
+#: src/plugin.py:598
+msgid "Console normal"
+msgstr "Console normal"
+
+#: src/plugin.py:602
+msgid "disabled"
+msgstr "disabled"
+
+#: src/plugin.py:605
+msgid "TV+Radio+Media"
+msgstr "TV+Radio+Media"
+
+#: src/plugin.py:605
+msgid "TV+Radio"
+msgstr "TV+Radio"
+
+#: src/plugin.py:605
+msgid "Radio+Media"
+msgstr "Radio+Media"
+
+#: src/plugin.py:605 src/plugin.py:1212
+msgid "TV"
+msgstr "TV"
+
+#: src/plugin.py:605
+msgid "Radio"
+msgstr "Radio"
+
+#: src/plugin.py:606
+msgid "normal (full)"
+msgstr "normal (full)"
+
+#: src/plugin.py:606
+msgid "trimmed (transparent)"
+msgstr "trimmed (transparent)"
+
+#: src/plugin.py:606
+msgid "trimmed (black)"
+msgstr "trimmed (black)"
+
+#: src/plugin.py:609
+msgid "MUTE or defined Keys"
+msgstr ""
+
+#: src/plugin.py:609
+msgid "any Key"
+msgstr ""
+
+#: src/plugin.py:746 src/plugin.py:758 src/plugin.py:770
+msgid "Time+Info"
+msgstr "Time+Info"
+
+#: src/plugin.py:746 src/plugin.py:758 src/plugin.py:770
+msgid "Info"
+msgstr "Info"
+
+#: src/plugin.py:746 src/plugin.py:758
+msgid "Time+Duration+Info"
+msgstr "Time+Duration+Info"
+
+#: src/plugin.py:770
+msgid "Time+Length+Info"
+msgstr "Time+Length+Info"
+
+#: src/plugin.py:770
+msgid "Mini-EPG"
+msgstr "Mini-EPG"
+
+#: src/plugin.py:785 src/plugin.py:1299
+msgid "half left"
+msgstr "half left"
+
+#: src/plugin.py:785 src/plugin.py:1299
+msgid "half right"
+msgstr "half right"
+
+#: src/plugin.py:790 src/plugin.py:1303
+#, fuzzy
+#| msgid "Event Icon Bar"
+msgid "no Bar"
+msgstr "Event Icon Bar"
+
+#: src/plugin.py:790 src/plugin.py:1303
+#, fuzzy
+#| msgid "Frame"
+msgid "Frame x2"
+msgstr "Frame"
+
+#: src/plugin.py:790 src/plugin.py:1303
+#, fuzzy
+#| msgid "Frame"
+msgid "no Frame"
+msgstr "Frame"
+
+#: src/plugin.py:790 src/plugin.py:1303
+#, fuzzy
+#| msgid "- Lines"
+msgid "Line"
+msgstr "- Lines"
+
+#: src/plugin.py:792 src/plugin.py:1305 src/plugin.py:1643
+msgid "Normal"
+msgstr ""
+
+#: src/plugin.py:792 src/plugin.py:1305
+msgid "Shadow Edges"
+msgstr ""
+
+#: src/plugin.py:792 src/plugin.py:1305
+msgid "Gradient"
+msgstr ""
+
+#: src/plugin.py:801
+msgid "Position"
+msgstr "Position"
+
+#: src/plugin.py:801 src/plugin.py:812
+msgid "Name"
+msgstr "Name"
+
+#: src/plugin.py:801
+msgid "Picon+Position left"
+msgstr "Picon+Position left"
+
+#: src/plugin.py:801
+msgid "Picon+Position below"
+msgstr "Picon+Position below"
+
+#: src/plugin.py:801
+msgid "Picon+Position right"
+msgstr "Picon+Position right"
+
+#: src/plugin.py:880 src/plugin.py:1325 src/plugin.py:1860
+msgid "Online+Offline"
+msgstr "Online+Offline"
+
+#: src/plugin.py:880 src/plugin.py:1325 src/plugin.py:1860
+msgid "Online"
+msgstr "Online"
+
+#: src/plugin.py:880 src/plugin.py:1325 src/plugin.py:1860
+msgid "Offline"
+msgstr "Offline"
+
+#: src/plugin.py:912 src/plugin.py:970 src/plugin.py:1351 src/plugin.py:1464
+#: src/plugin.py:1809 src/plugin.py:1886
+msgid "use lead-time"
+msgstr "use lead-time"
+
+#: src/plugin.py:912 src/plugin.py:970 src/plugin.py:1351 src/plugin.py:1464
+#: src/plugin.py:1809 src/plugin.py:1886
+msgid "only use Timer"
+msgstr "only use Timer"
+
+#: src/plugin.py:913 src/plugin.py:971 src/plugin.py:1352 src/plugin.py:1465
+#: src/plugin.py:1810 src/plugin.py:1887
+msgid "no total Timer"
+msgstr ""
+
+#: src/plugin.py:913 src/plugin.py:971 src/plugin.py:1352 src/plugin.py:1465
+#: src/plugin.py:1810 src/plugin.py:1887
+msgid "show total Timer"
+msgstr ""
+
+#: src/plugin.py:931 src/plugin.py:1425
+msgid "one line"
+msgstr ""
+
+#: src/plugin.py:931 src/plugin.py:1425
+msgid "two lines"
+msgstr ""
+
+#: src/plugin.py:953 src/plugin.py:1447 src/plugin.py:1906
+msgid "Memory free"
+msgstr ""
+
+#: src/plugin.py:953 src/plugin.py:1447 src/plugin.py:1906
+msgid "Memory available"
+msgstr ""
+
+#: src/plugin.py:1159
+msgid "cloudconvert.org"
+msgstr ""
+
+#: src/plugin.py:1159
+msgid "convertapi.com"
+msgstr ""
+
+#: src/plugin.py:1180 src/plugin.py:1189 src/plugin.py:1198 src/plugin.py:1207
+#: src/plugin.py:1577 src/plugin.py:1586 src/plugin.py:2105 src/plugin.py:2114
+#: src/plugin.py:2123 src/plugin.py:2132
+msgid "full Screen"
+msgstr "full Screen"
+
+#: src/plugin.py:1212
+msgid "TV+OSD"
+msgstr "TV+OSD"
+
+#: src/plugin.py:1642
+msgid "yes except records"
+msgstr "yes except records"
+
+#: src/plugin.py:1643
+msgid "Google API"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "N"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "NNE"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "NE"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "ENE"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "E"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "ESE"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "SE"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "SSE"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "S"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "SSW"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "SW"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "WSW"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "W"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "WNW"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "NW"
+msgstr ""
+
+#: src/plugin.py:2456
+msgid "NNW"
+msgstr ""
+
+#: src/plugin.py:4881
+msgid "Load Active Config-File"
+msgstr "Load Active Config-File"
+
+#: src/plugin.py:4882
+#, fuzzy
+#| msgid "Load Defaults"
+msgid "Load Defaults / Empty Config"
+msgstr "Load Defaults"
+
+#: src/plugin.py:4883
+#, python-format
+msgid "Save Config to File... (%s)"
+msgstr "Save Config to File... (%s)"
+
+#: src/plugin.py:4888 src/plugin.py:4925
+#, python-format
+msgid "Load File : %s"
+msgstr "Load File : %s"
+
+#: src/plugin.py:4897
+msgid "Delete File?"
+msgstr "Delete File?"
+
+#: src/plugin.py:4935
+msgid "deleted"
+msgstr "deleted"
+
+#: src/plugin.py:4959
+#, python-format
+msgid "currently set : %s"
+msgstr "currently set : %s"
+
+#: src/plugin.py:5137
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/plugin.py:5138
+msgid "Save"
+msgstr "Save"
+
+#: src/plugin.py:5139
+msgid "Restart Displays"
+msgstr "Restart Displays"
+
+#: src/plugin.py:5223
+msgid "no LCD1 Picture-File"
+msgstr "no LCD1 Picture-File"
+
+#: src/plugin.py:5248
+msgid "no LCD2 Picture-File"
+msgstr "no LCD2 Picture-File"
+
+#: src/plugin.py:5274
+msgid "no LCD3 Picture-File"
+msgstr "no LCD3 Picture-File"
+
+#: src/plugin.py:5311
+msgid "LCD4linux enabled"
+msgstr "LCD4linux enabled"
+
+#: src/plugin.py:5312
+msgid "LCD 1 Type"
+msgstr "LCD 1 Type"
+
+#: src/plugin.py:5313
+msgid "- LCD 1 Rotate"
+msgstr "- LCD 1 Rotate"
+
+#: src/plugin.py:5314 src/plugin.py:6249 src/plugin.py:6827
+msgid "- LCD 1 Background Color"
+msgstr "- LCD 1 Background Color"
+
+#: src/plugin.py:5315 src/plugin.py:6250 src/plugin.py:6828
+msgid "- LCD 1 Background-Picture [ok]>"
+msgstr "- LCD 1 Background-Picture [ok]>"
+
+#: src/plugin.py:5316 src/plugin.py:6251 src/plugin.py:6829
+msgid "- LCD 1 Brightness"
+msgstr ""
+
+#: src/plugin.py:5317 src/plugin.py:6252 src/plugin.py:6830
+msgid "- LCD 1 Night Reduction"
+msgstr ""
+
+#: src/plugin.py:5318
+msgid "- LCD 1 Refresh"
+msgstr ""
+
+#: src/plugin.py:5319
+msgid "LCD 2 Type"
+msgstr "LCD 2 Type"
+
+#: src/plugin.py:5321
+msgid "- LCD 2 Rotate"
+msgstr "- LCD 2 Rotate"
+
+#: src/plugin.py:5322 src/plugin.py:6253 src/plugin.py:6831
+msgid "- LCD 2 Background Color"
+msgstr "- LCD 2 Background Color"
+
+#: src/plugin.py:5323 src/plugin.py:6254 src/plugin.py:6832
+msgid "- LCD 2 Background-Picture [ok]>"
+msgstr "- LCD 2 Background-Picture [ok]>"
+
+#: src/plugin.py:5324 src/plugin.py:6255 src/plugin.py:6833
+msgid "- LCD 2 Brightness"
+msgstr ""
+
+#: src/plugin.py:5325 src/plugin.py:6256 src/plugin.py:6834
+msgid "- LCD 2 Night Reduction"
+msgstr ""
+
+#: src/plugin.py:5326
+msgid "- LCD 2 Refresh"
+msgstr ""
+
+#: src/plugin.py:5327
+msgid "LCD 3 Type"
+msgstr "LCD 3 Type"
+
+#: src/plugin.py:5329
+msgid "- LCD 3 Rotate"
+msgstr "- LCD 3 Rotate"
+
+#: src/plugin.py:5330 src/plugin.py:6257 src/plugin.py:6835
+msgid "- LCD 3 Background Color"
+msgstr "- LCD 3 Background Color"
+
+#: src/plugin.py:5331 src/plugin.py:6258 src/plugin.py:6836
+msgid "- LCD 3 Background-Picture [ok]>"
+msgstr "- LCD 3 Background-Picture [ok]>"
+
+#: src/plugin.py:5332 src/plugin.py:6259 src/plugin.py:6837
+msgid "- LCD 3 Brightness"
+msgstr ""
+
+#: src/plugin.py:5333 src/plugin.py:6260 src/plugin.py:6838
+msgid "- LCD 3 Night Reduction"
+msgstr ""
+
+#: src/plugin.py:5334
+msgid "- LCD 3 Refresh"
+msgstr ""
+
+#: src/plugin.py:5336
+msgid "Box-Skin-LCD Dimension"
+msgstr "Box-Skin-LCD Dimension"
+
+#: src/plugin.py:5337
+#, fuzzy
+#| msgid "Box-Skin-LCD"
+msgid "Box-Skin-LCD Offset"
+msgstr "Box-Skin-LCD"
+
+#: src/plugin.py:5338
+msgid "Box-Skin-LCD Color"
+msgstr "Box-Skin-LCD Color"
+
+#: src/plugin.py:5339
+msgid "Box-Skin-LCD Enable On-Mode"
+msgstr "Box-Skin-LCD Enable On-Mode"
+
+#: src/plugin.py:5340
+msgid "Box-Skin-LCD Enable Media-Mode"
+msgstr "Box-Skin-LCD Enable Media-Mode"
+
+#: src/plugin.py:5341
+msgid "Box-Skin-LCD Enable Idle-Mode"
+msgstr "Box-Skin-LCD Enable Idle-Mode"
+
+#: src/plugin.py:5342
+msgid "OSD [display time]"
+msgstr "OSD [display time]"
+
+#: src/plugin.py:5344 src/plugin.py:5351 src/plugin.py:5551 src/plugin.py:5556
+#: src/plugin.py:5569 src/plugin.py:5581 src/plugin.py:5596 src/plugin.py:5611
+#: src/plugin.py:5623 src/plugin.py:5633 src/plugin.py:5646 src/plugin.py:5659
+#: src/plugin.py:5672 src/plugin.py:5686 src/plugin.py:5701 src/plugin.py:5715
+#: src/plugin.py:5729 src/plugin.py:5741 src/plugin.py:5753 src/plugin.py:5765
+#: src/plugin.py:5775 src/plugin.py:5789 src/plugin.py:5799 src/plugin.py:5810
+#: src/plugin.py:5820 src/plugin.py:5838 src/plugin.py:5856 src/plugin.py:5864
+#: src/plugin.py:5875 src/plugin.py:5886 src/plugin.py:5895 src/plugin.py:5918
+#: src/plugin.py:5940 src/plugin.py:5950 src/plugin.py:5960 src/plugin.py:5970
+#: src/plugin.py:5982 src/plugin.py:5992 src/plugin.py:6001 src/plugin.py:6012
+#: src/plugin.py:6023 src/plugin.py:6034 src/plugin.py:6045 src/plugin.py:6058
+#: src/plugin.py:6068 src/plugin.py:6078 src/plugin.py:6088 src/plugin.py:6098
+#: src/plugin.py:6113 src/plugin.py:6128 src/plugin.py:6141 src/plugin.py:6155
+#: src/plugin.py:6170 src/plugin.py:6183 src/plugin.py:6193 src/plugin.py:6205
+#: src/plugin.py:6217 src/plugin.py:6226 src/plugin.py:6235 src/plugin.py:6244
+#: src/plugin.py:6265 src/plugin.py:6270 src/plugin.py:6282 src/plugin.py:6294
+#: src/plugin.py:6308 src/plugin.py:6320 src/plugin.py:6335 src/plugin.py:6345
+#: src/plugin.py:6360 src/plugin.py:6375 src/plugin.py:6388 src/plugin.py:6401
+#: src/plugin.py:6411 src/plugin.py:6425 src/plugin.py:6436 src/plugin.py:6446
+#: src/plugin.py:6464 src/plugin.py:6482 src/plugin.py:6490 src/plugin.py:6501
+#: src/plugin.py:6512 src/plugin.py:6521 src/plugin.py:6544 src/plugin.py:6566
+#: src/plugin.py:6576 src/plugin.py:6586 src/plugin.py:6596 src/plugin.py:6608
+#: src/plugin.py:6619 src/plugin.py:6630 src/plugin.py:6640 src/plugin.py:6650
+#: src/plugin.py:6665 src/plugin.py:6674 src/plugin.py:6689 src/plugin.py:6704
+#: src/plugin.py:6717 src/plugin.py:6731 src/plugin.py:6746 src/plugin.py:6759
+#: src/plugin.py:6769 src/plugin.py:6781 src/plugin.py:6793 src/plugin.py:6802
+#: src/plugin.py:6811 src/plugin.py:6842 src/plugin.py:6857 src/plugin.py:6872
+#: src/plugin.py:6887 src/plugin.py:6901 src/plugin.py:6914 src/plugin.py:6927
+#: src/plugin.py:6937 src/plugin.py:6955 src/plugin.py:6973 src/plugin.py:6981
+#: src/plugin.py:6992 src/plugin.py:7003 src/plugin.py:7012 src/plugin.py:7035
+#: src/plugin.py:7057 src/plugin.py:7067 src/plugin.py:7077 src/plugin.py:7087
+#: src/plugin.py:7099 src/plugin.py:7108 src/plugin.py:7119 src/plugin.py:7130
+#: src/plugin.py:7141 src/plugin.py:7152 src/plugin.py:7165 src/plugin.py:7175
+#: src/plugin.py:7185 src/plugin.py:7195 src/plugin.py:7205 src/plugin.py:7220
+#: src/plugin.py:7235 src/plugin.py:7248 src/plugin.py:7262 src/plugin.py:7277
+#: src/plugin.py:7290 src/plugin.py:7300 src/plugin.py:7312 src/plugin.py:7324
+#: src/plugin.py:7333 src/plugin.py:7342
+msgid "- which LCD"
+msgstr "- which LCD"
+
+#: src/plugin.py:5345
+msgid "- Show in Mode"
+msgstr "- Show in Mode"
+
+#: src/plugin.py:5346
+msgid "- OSD Size"
+msgstr "- OSD Size"
+
+#: src/plugin.py:5347
+msgid "- Background/Transparency"
+msgstr "- Background/Transparency"
+
+#: src/plugin.py:5348
+msgid "- Fast Grab lower quality"
+msgstr "- Fast Grab lower quality"
+
+#: src/plugin.py:5349
+msgid "Popup Text"
+msgstr "Popup Text"
+
+#: src/plugin.py:5352
+msgid "- Clear Key"
+msgstr ""
+
+#: src/plugin.py:5353 src/plugin.py:5612 src/plugin.py:5624 src/plugin.py:5635
+#: src/plugin.py:5648 src/plugin.py:5661 src/plugin.py:5674 src/plugin.py:5742
+#: src/plugin.py:5754 src/plugin.py:5766 src/plugin.py:5776 src/plugin.py:5800
+#: src/plugin.py:5811 src/plugin.py:5821 src/plugin.py:5839 src/plugin.py:5857
+#: src/plugin.py:5897 src/plugin.py:5920 src/plugin.py:5971 src/plugin.py:5984
+#: src/plugin.py:5993 src/plugin.py:6003 src/plugin.py:6014 src/plugin.py:6025
+#: src/plugin.py:6036 src/plugin.py:6099 src/plugin.py:6114 src/plugin.py:6129
+#: src/plugin.py:6142 src/plugin.py:6195 src/plugin.py:6207 src/plugin.py:6271
+#: src/plugin.py:6283 src/plugin.py:6296 src/plugin.py:6309 src/plugin.py:6402
+#: src/plugin.py:6412 src/plugin.py:6426 src/plugin.py:6437 src/plugin.py:6447
+#: src/plugin.py:6465 src/plugin.py:6483 src/plugin.py:6523 src/plugin.py:6546
+#: src/plugin.py:6597 src/plugin.py:6610 src/plugin.py:6621 src/plugin.py:6666
+#: src/plugin.py:6675 src/plugin.py:6690 src/plugin.py:6705 src/plugin.py:6718
+#: src/plugin.py:6771 src/plugin.py:6783 src/plugin.py:6888 src/plugin.py:6928
+#: src/plugin.py:6938 src/plugin.py:6956 src/plugin.py:6974 src/plugin.py:7014
+#: src/plugin.py:7037 src/plugin.py:7088 src/plugin.py:7100 src/plugin.py:7110
+#: src/plugin.py:7121 src/plugin.py:7132 src/plugin.py:7143 src/plugin.py:7206
+#: src/plugin.py:7221 src/plugin.py:7236 src/plugin.py:7249 src/plugin.py:7302
+#: src/plugin.py:7314
+msgid "- Font Size"
+msgstr "- Font Size"
+
+#: src/plugin.py:5354 src/plugin.py:5558 src/plugin.py:5571 src/plugin.py:5588
+#: src/plugin.py:5603 src/plugin.py:5614 src/plugin.py:5625 src/plugin.py:5637
+#: src/plugin.py:5650 src/plugin.py:5663 src/plugin.py:5676 src/plugin.py:5690
+#: src/plugin.py:5706 src/plugin.py:5720 src/plugin.py:5731 src/plugin.py:5743
+#: src/plugin.py:5755 src/plugin.py:5767 src/plugin.py:5780 src/plugin.py:5791
+#: src/plugin.py:5801 src/plugin.py:5812 src/plugin.py:5822 src/plugin.py:5840
+#: src/plugin.py:5858 src/plugin.py:5865 src/plugin.py:5876 src/plugin.py:5887
+#: src/plugin.py:5896 src/plugin.py:5919 src/plugin.py:5941 src/plugin.py:5951
+#: src/plugin.py:5962 src/plugin.py:5972 src/plugin.py:5985 src/plugin.py:5994
+#: src/plugin.py:6004 src/plugin.py:6015 src/plugin.py:6026 src/plugin.py:6037
+#: src/plugin.py:6047 src/plugin.py:6062 src/plugin.py:6072 src/plugin.py:6082
+#: src/plugin.py:6092 src/plugin.py:6100 src/plugin.py:6115 src/plugin.py:6133
+#: src/plugin.py:6143 src/plugin.py:6156 src/plugin.py:6172 src/plugin.py:6185
+#: src/plugin.py:6196 src/plugin.py:6208 src/plugin.py:6239 src/plugin.py:6273
+#: src/plugin.py:6285 src/plugin.py:6298 src/plugin.py:6311 src/plugin.py:6324
+#: src/plugin.py:6337 src/plugin.py:6352 src/plugin.py:6367 src/plugin.py:6379
+#: src/plugin.py:6392 src/plugin.py:6403 src/plugin.py:6416 src/plugin.py:6427
+#: src/plugin.py:6438 src/plugin.py:6448 src/plugin.py:6466 src/plugin.py:6484
+#: src/plugin.py:6491 src/plugin.py:6502 src/plugin.py:6513 src/plugin.py:6522
+#: src/plugin.py:6545 src/plugin.py:6567 src/plugin.py:6577 src/plugin.py:6588
+#: src/plugin.py:6598 src/plugin.py:6611 src/plugin.py:6622 src/plugin.py:6634
+#: src/plugin.py:6644 src/plugin.py:6653 src/plugin.py:6667 src/plugin.py:6676
+#: src/plugin.py:6691 src/plugin.py:6709 src/plugin.py:6719 src/plugin.py:6732
+#: src/plugin.py:6748 src/plugin.py:6761 src/plugin.py:6772 src/plugin.py:6784
+#: src/plugin.py:6815 src/plugin.py:6864 src/plugin.py:6879 src/plugin.py:6892
+#: src/plugin.py:6905 src/plugin.py:6918 src/plugin.py:6929 src/plugin.py:6939
+#: src/plugin.py:6957 src/plugin.py:6975 src/plugin.py:6982 src/plugin.py:6993
+#: src/plugin.py:7004 src/plugin.py:7013 src/plugin.py:7036 src/plugin.py:7058
+#: src/plugin.py:7068 src/plugin.py:7079 src/plugin.py:7089 src/plugin.py:7101
+#: src/plugin.py:7111 src/plugin.py:7122 src/plugin.py:7133 src/plugin.py:7144
+#: src/plugin.py:7154 src/plugin.py:7169 src/plugin.py:7179 src/plugin.py:7189
+#: src/plugin.py:7199 src/plugin.py:7207 src/plugin.py:7222 src/plugin.py:7240
+#: src/plugin.py:7250 src/plugin.py:7263 src/plugin.py:7279 src/plugin.py:7292
+#: src/plugin.py:7303 src/plugin.py:7315 src/plugin.py:7346
+msgid "- Position"
+msgstr "- Position"
+
+#: src/plugin.py:5355 src/plugin.py:5559 src/plugin.py:5572 src/plugin.py:5589
+#: src/plugin.py:5604 src/plugin.py:5615 src/plugin.py:5626 src/plugin.py:5638
+#: src/plugin.py:5651 src/plugin.py:5664 src/plugin.py:5677 src/plugin.py:5691
+#: src/plugin.py:5707 src/plugin.py:5721 src/plugin.py:5732 src/plugin.py:5744
+#: src/plugin.py:5756 src/plugin.py:5768 src/plugin.py:5781 src/plugin.py:5792
+#: src/plugin.py:5803 src/plugin.py:5813 src/plugin.py:5823 src/plugin.py:5841
+#: src/plugin.py:5859 src/plugin.py:5867 src/plugin.py:5878 src/plugin.py:5889
+#: src/plugin.py:5898 src/plugin.py:5921 src/plugin.py:5943 src/plugin.py:5953
+#: src/plugin.py:5963 src/plugin.py:5973 src/plugin.py:5986 src/plugin.py:5995
+#: src/plugin.py:6005 src/plugin.py:6016 src/plugin.py:6027 src/plugin.py:6038
+#: src/plugin.py:6048 src/plugin.py:6063 src/plugin.py:6073 src/plugin.py:6083
+#: src/plugin.py:6093 src/plugin.py:6101 src/plugin.py:6116 src/plugin.py:6134
+#: src/plugin.py:6144 src/plugin.py:6158 src/plugin.py:6173 src/plugin.py:6186
+#: src/plugin.py:6197 src/plugin.py:6209 src/plugin.py:6240 src/plugin.py:6274
+#: src/plugin.py:6286 src/plugin.py:6299 src/plugin.py:6312 src/plugin.py:6325
+#: src/plugin.py:6338 src/plugin.py:6353 src/plugin.py:6368 src/plugin.py:6380
+#: src/plugin.py:6393 src/plugin.py:6404 src/plugin.py:6417 src/plugin.py:6429
+#: src/plugin.py:6439 src/plugin.py:6449 src/plugin.py:6467 src/plugin.py:6485
+#: src/plugin.py:6493 src/plugin.py:6504 src/plugin.py:6515 src/plugin.py:6524
+#: src/plugin.py:6547 src/plugin.py:6569 src/plugin.py:6579 src/plugin.py:6589
+#: src/plugin.py:6599 src/plugin.py:6612 src/plugin.py:6623 src/plugin.py:6635
+#: src/plugin.py:6645 src/plugin.py:6654 src/plugin.py:6668 src/plugin.py:6677
+#: src/plugin.py:6692 src/plugin.py:6710 src/plugin.py:6720 src/plugin.py:6734
+#: src/plugin.py:6749 src/plugin.py:6762 src/plugin.py:6773 src/plugin.py:6785
+#: src/plugin.py:6816 src/plugin.py:6865 src/plugin.py:6880 src/plugin.py:6893
+#: src/plugin.py:6906 src/plugin.py:6919 src/plugin.py:6930 src/plugin.py:6940
+#: src/plugin.py:6958 src/plugin.py:6976 src/plugin.py:6984 src/plugin.py:6995
+#: src/plugin.py:7006 src/plugin.py:7015 src/plugin.py:7038 src/plugin.py:7060
+#: src/plugin.py:7070 src/plugin.py:7080 src/plugin.py:7090 src/plugin.py:7102
+#: src/plugin.py:7112 src/plugin.py:7123 src/plugin.py:7134 src/plugin.py:7145
+#: src/plugin.py:7155 src/plugin.py:7170 src/plugin.py:7180 src/plugin.py:7190
+#: src/plugin.py:7200 src/plugin.py:7208 src/plugin.py:7223 src/plugin.py:7241
+#: src/plugin.py:7251 src/plugin.py:7265 src/plugin.py:7280 src/plugin.py:7293
+#: src/plugin.py:7304 src/plugin.py:7316 src/plugin.py:7347
+msgid "- Alignment"
+msgstr "- Alignment"
+
+#: src/plugin.py:5356 src/plugin.py:5428 src/plugin.py:5430 src/plugin.py:5432
+#: src/plugin.py:5434 src/plugin.py:5436 src/plugin.py:5552 src/plugin.py:5591
+#: src/plugin.py:5606 src/plugin.py:5618 src/plugin.py:5627 src/plugin.py:5641
+#: src/plugin.py:5654 src/plugin.py:5667 src/plugin.py:5680 src/plugin.py:5693
+#: src/plugin.py:5710 src/plugin.py:5724 src/plugin.py:5735 src/plugin.py:5746
+#: src/plugin.py:5758 src/plugin.py:5784 src/plugin.py:5795 src/plugin.py:5805
+#: src/plugin.py:5815 src/plugin.py:5825 src/plugin.py:5843 src/plugin.py:5870
+#: src/plugin.py:5881 src/plugin.py:5892 src/plugin.py:5907 src/plugin.py:5930
+#: src/plugin.py:5965 src/plugin.py:5975 src/plugin.py:5988 src/plugin.py:5997
+#: src/plugin.py:6006 src/plugin.py:6017 src/plugin.py:6028 src/plugin.py:6039
+#: src/plugin.py:6103 src/plugin.py:6145 src/plugin.py:6163 src/plugin.py:6178
+#: src/plugin.py:6199 src/plugin.py:6211 src/plugin.py:6222 src/plugin.py:6231
+#: src/plugin.py:6266 src/plugin.py:6277 src/plugin.py:6289 src/plugin.py:6302
+#: src/plugin.py:6315 src/plugin.py:6327 src/plugin.py:6341 src/plugin.py:6355
+#: src/plugin.py:6370 src/plugin.py:6383 src/plugin.py:6396 src/plugin.py:6420
+#: src/plugin.py:6431 src/plugin.py:6441 src/plugin.py:6451 src/plugin.py:6469
+#: src/plugin.py:6496 src/plugin.py:6507 src/plugin.py:6518 src/plugin.py:6533
+#: src/plugin.py:6556 src/plugin.py:6591 src/plugin.py:6601 src/plugin.py:6613
+#: src/plugin.py:6624 src/plugin.py:6670 src/plugin.py:6679 src/plugin.py:6721
+#: src/plugin.py:6739 src/plugin.py:6754 src/plugin.py:6775 src/plugin.py:6787
+#: src/plugin.py:6798 src/plugin.py:6807 src/plugin.py:6843 src/plugin.py:6867
+#: src/plugin.py:6882 src/plugin.py:6896 src/plugin.py:6909 src/plugin.py:6922
+#: src/plugin.py:6942 src/plugin.py:6960 src/plugin.py:6987 src/plugin.py:6998
+#: src/plugin.py:7009 src/plugin.py:7024 src/plugin.py:7047 src/plugin.py:7082
+#: src/plugin.py:7092 src/plugin.py:7104 src/plugin.py:7113 src/plugin.py:7124
+#: src/plugin.py:7135 src/plugin.py:7146 src/plugin.py:7210 src/plugin.py:7252
+#: src/plugin.py:7270 src/plugin.py:7285 src/plugin.py:7306 src/plugin.py:7318
+#: src/plugin.py:7329 src/plugin.py:7338
+msgid "- Color"
+msgstr "- Color"
+
+#: src/plugin.py:5357 src/plugin.py:5628 src/plugin.py:5976 src/plugin.py:5989
+#: src/plugin.py:5998 src/plugin.py:6007 src/plugin.py:6018 src/plugin.py:6029
+#: src/plugin.py:6040 src/plugin.py:6104 src/plugin.py:6146 src/plugin.py:6200
+#: src/plugin.py:6212 src/plugin.py:6223 src/plugin.py:6232 src/plugin.py:6602
+#: src/plugin.py:6614 src/plugin.py:6625 src/plugin.py:6671 src/plugin.py:6680
+#: src/plugin.py:6722 src/plugin.py:6776 src/plugin.py:6788 src/plugin.py:6799
+#: src/plugin.py:6808 src/plugin.py:7093 src/plugin.py:7105 src/plugin.py:7114
+#: src/plugin.py:7125 src/plugin.py:7136 src/plugin.py:7147 src/plugin.py:7211
+#: src/plugin.py:7253 src/plugin.py:7307 src/plugin.py:7319 src/plugin.py:7330
+#: src/plugin.py:7339
+msgid "- Background Color"
+msgstr "- Background Color"
+
+#: src/plugin.py:5358 src/plugin.py:5593 src/plugin.py:5608 src/plugin.py:5620
+#: src/plugin.py:5630 src/plugin.py:5643 src/plugin.py:5656 src/plugin.py:5669
+#: src/plugin.py:5682 src/plugin.py:5698 src/plugin.py:5712 src/plugin.py:5726
+#: src/plugin.py:5750 src/plugin.py:5762 src/plugin.py:5772 src/plugin.py:5786
+#: src/plugin.py:5807 src/plugin.py:5817 src/plugin.py:5827 src/plugin.py:5845
+#: src/plugin.py:5872 src/plugin.py:5883 src/plugin.py:5915 src/plugin.py:5937
+#: src/plugin.py:5967 src/plugin.py:5979 src/plugin.py:6009 src/plugin.py:6020
+#: src/plugin.py:6031 src/plugin.py:6042 src/plugin.py:6110 src/plugin.py:6125
+#: src/plugin.py:6138 src/plugin.py:6152 src/plugin.py:6167 src/plugin.py:6180
+#: src/plugin.py:6202 src/plugin.py:6214 src/plugin.py:6279 src/plugin.py:6291
+#: src/plugin.py:6304 src/plugin.py:6317 src/plugin.py:6332 src/plugin.py:6357
+#: src/plugin.py:6372 src/plugin.py:6385 src/plugin.py:6398 src/plugin.py:6408
+#: src/plugin.py:6422 src/plugin.py:6433 src/plugin.py:6443 src/plugin.py:6453
+#: src/plugin.py:6471 src/plugin.py:6498 src/plugin.py:6509 src/plugin.py:6541
+#: src/plugin.py:6563 src/plugin.py:6593 src/plugin.py:6605 src/plugin.py:6616
+#: src/plugin.py:6627 src/plugin.py:6686 src/plugin.py:6701 src/plugin.py:6714
+#: src/plugin.py:6728 src/plugin.py:6743 src/plugin.py:6756 src/plugin.py:6778
+#: src/plugin.py:6790 src/plugin.py:6869 src/plugin.py:6884 src/plugin.py:6898
+#: src/plugin.py:6911 src/plugin.py:6924 src/plugin.py:6934 src/plugin.py:6944
+#: src/plugin.py:6962 src/plugin.py:6989 src/plugin.py:7000 src/plugin.py:7032
+#: src/plugin.py:7054 src/plugin.py:7084 src/plugin.py:7096 src/plugin.py:7116
+#: src/plugin.py:7127 src/plugin.py:7138 src/plugin.py:7149 src/plugin.py:7217
+#: src/plugin.py:7232 src/plugin.py:7245 src/plugin.py:7259 src/plugin.py:7274
+#: src/plugin.py:7287 src/plugin.py:7309 src/plugin.py:7321
+msgid "- Font"
+msgstr "- Font"
+
+#: src/plugin.py:5361
+msgid "Active Screen"
+msgstr "Active Screen"
+
+#: src/plugin.py:5362
+msgid "Screen Switch Select - Screen"
+msgstr ""
+
+#: src/plugin.py:5363
+msgid "Screen Switch Select - LCD"
+msgstr ""
+
+#: src/plugin.py:5364
+msgid "Screens used for Changing"
+msgstr "Screens used for Changing"
+
+#: src/plugin.py:5365 src/plugin.py:6845
+msgid "Screen 1 Changing Time"
+msgstr "Screen 1 Changing Time"
+
+#: src/plugin.py:5367 src/plugin.py:6847
+msgid "- Screen 2 Changing Time"
+msgstr "- Screen 2 Changing Time"
+
+#: src/plugin.py:5368 src/plugin.py:6848
+msgid "- Screen 3 Changing Time"
+msgstr "- Screen 3 Changing Time"
+
+#: src/plugin.py:5369 src/plugin.py:6849
+msgid "- Screen 4 Changing Time"
+msgstr "- Screen 4 Changing Time"
+
+#: src/plugin.py:5370 src/plugin.py:6850
+msgid "- Screen 5 Changing Time"
+msgstr "- Screen 5 Changing Time"
+
+#: src/plugin.py:5371 src/plugin.py:6851
+msgid "- Screen 6 Changing Time"
+msgstr "- Screen 6 Changing Time"
+
+#: src/plugin.py:5372 src/plugin.py:6852
+msgid "- Screen 7 Changing Time"
+msgstr "- Screen 7 Changing Time"
+
+#: src/plugin.py:5373 src/plugin.py:6853
+msgid "- Screen 8 Changing Time"
+msgstr "- Screen 8 Changing Time"
+
+#: src/plugin.py:5374 src/plugin.py:6854
+msgid "- Screen 9 Changing Time"
+msgstr "- Screen 9 Changing Time"
+
+#: src/plugin.py:5375
+msgid "Picture Changing Time"
+msgstr "Picture Changing Time"
+
+#: src/plugin.py:5376
+msgid "Picture Sort"
+msgstr "Picture Sort"
+
+#: src/plugin.py:5377
+msgid "Picture Directory Recursive"
+msgstr "Picture Directory Recursive"
+
+#: src/plugin.py:5378
+msgid "Picture Quality for Resizing"
+msgstr "Picture Quality for Resizing"
+
+#: src/plugin.py:5380
+msgid "Picture Quick Update Time [s]"
+msgstr "Picture Quick Update Time [s]"
+
+#: src/plugin.py:5382
+msgid "Picture Type [only Picture]"
+msgstr ""
+
+#: src/plugin.py:5383
+msgid "Background-Picture Type"
+msgstr ""
+
+#: src/plugin.py:5384
+msgid "Weather API"
+msgstr ""
+
+#: src/plugin.py:5385
+msgid "Weather API-Key OpenWeatherMap"
+msgstr ""
+
+#: src/plugin.py:5386
+msgid "Weather City"
+msgstr "Weather City"
+
+#: src/plugin.py:5387
+msgid "Weather City 2"
+msgstr "Weather City 2"
+
+#: src/plugin.py:5388
+msgid "Weather-Icon-Path [ok]>"
+msgstr "Weather-Icon-Path [ok]>"
+
+#: src/plugin.py:5389
+msgid "Weather-Icon Zoom"
+msgstr "Weather-Icon Zoom"
+
+#: src/plugin.py:5390
+msgid "Weather Low Temperature Color"
+msgstr "Weather Low Temperature Color"
+
+#: src/plugin.py:5391
+msgid "Weather High Temperature Color"
+msgstr "Weather High Temperature Color"
+
+#: src/plugin.py:5392
+msgid "Weather Transparency"
+msgstr "Weather Transparency"
+
+#: src/plugin.py:5393
+msgid "Weather Wind speed unit"
+msgstr ""
+
+#: src/plugin.py:5394
+msgid "Weather Rain Chance"
+msgstr "Weather Rain Chance"
+
+#: src/plugin.py:5396
+msgid "- Rain Zoom"
+msgstr "- Rain Zoom"
+
+#: src/plugin.py:5397
+msgid "- Rain Color"
+msgstr "- Rain Color"
+
+#: src/plugin.py:5398
+msgid "- Rain use Color 2 from"
+msgstr "- Rain use Color 2 from"
+
+#: src/plugin.py:5399
+msgid "- Rain Color 2"
+msgstr "- Rain Color 2"
+
+#: src/plugin.py:5400
+msgid "Weather Lines"
+msgstr "Weather Lines"
+
+#: src/plugin.py:5401
+msgid "Weather Extra Infos"
+msgstr "Weather Extra Infos"
+
+#: src/plugin.py:5403
+msgid "- Extra Zoom"
+msgstr "- Extra Zoom"
+
+#: src/plugin.py:5404
+msgid "- Show chill temperature from difference"
+msgstr "- Show chill temperature from difference"
+
+#: src/plugin.py:5405
+msgid "- Extra Color City"
+msgstr "- Extra Color City"
+
+#: src/plugin.py:5406
+msgid "- Extra Color Chill"
+msgstr "- Extra Color Chill"
+
+#: src/plugin.py:5407
+msgid "Netatmo CO2 Min Range"
+msgstr "Netatmo CO2 Min Range"
+
+#: src/plugin.py:5408
+msgid "Netatmo CO2 Max Range"
+msgstr "Netatmo CO2 Max Range"
+
+#: src/plugin.py:5409
+msgid "Meteo URL"
+msgstr "Meteo URL"
+
+#: src/plugin.py:5410
+msgid "Moon-Icon-Path [ok]>"
+msgstr "Moon-Icon-Path [ok]>"
+
+#: src/plugin.py:5411
+msgid "Recording Picture [ok]>"
+msgstr ""
+
+#: src/plugin.py:5412
+msgid "Double-button switches"
+msgstr "Double-button switches"
+
+#: src/plugin.py:5413
+msgid "Key for Screen Change"
+msgstr "Key for Screen Change"
+
+#: src/plugin.py:5414
+msgid "Key for Screen On/Off"
+msgstr ""
+
+#: src/plugin.py:5415
+msgid "FritzCall Picture Path [ok]>"
+msgstr "FritzCall Picture Path [ok]>"
+
+#: src/plugin.py:5416
+msgid "FritzCall Number of Lines per Entry"
+msgstr ""
+
+#: src/plugin.py:5417
+msgid "FritzCall Number of List Entries"
+msgstr "FritzCall Number of List Entries"
+
+#: src/plugin.py:5418
+msgid "FritzCall Number of Pictures"
+msgstr "FritzCall Number of Pictures"
+
+#: src/plugin.py:5419
+msgid "FritzCall Picture Orientation"
+msgstr "FritzCall Picture Orientation"
+
+#: src/plugin.py:5420
+msgid "FritzCall Picture Transparency"
+msgstr ""
+
+#: src/plugin.py:5421
+msgid "FritzCall Pictures Search"
+msgstr "FritzCall Pictures Search"
+
+#: src/plugin.py:5422
+msgid "FritzCall remove Calls after hours"
+msgstr "FritzCall remove Calls after hours"
+
+#: src/plugin.py:5423
+msgid "FritzCall Popup-Time"
+msgstr "FritzCall Popup-Time"
+
+#: src/plugin.py:5424
+msgid "FritzCall Popup LCD"
+msgstr "FritzCall Popup LCD"
+
+#: src/plugin.py:5425
+msgid "FritzCall Popup Color"
+msgstr "FritzCall Popup Color"
+
+#: src/plugin.py:5426
+msgid "FritzCall Frame Picture [ok]>"
+msgstr "FritzCall Frame Picture [ok]>"
+
+#: src/plugin.py:5427
+msgid "Calendar ics-Path [ok]>"
+msgstr "Calendar ics-Path [ok]>"
+
+#: src/plugin.py:5429 src/plugin.py:5431 src/plugin.py:5433
+msgid "Calendar ics-URL"
+msgstr "Calendar ics-URL"
+
+#: src/plugin.py:5435
+msgid "Calendar planerFS"
+msgstr ""
+
+#: src/plugin.py:5437
+msgid "Calendar Saturday Color"
+msgstr ""
+
+#: src/plugin.py:5438
+msgid "Calendar Sunday Color"
+msgstr ""
+
+#: src/plugin.py:5439
+msgid "Calendar Line Thickness"
+msgstr "Calendar Line Thickness"
+
+#: src/plugin.py:5440
+msgid "Calendar Day Event Preview"
+msgstr "Calendar Day Event Preview"
+
+#: src/plugin.py:5441
+msgid "Calendar Timezone Correction"
+msgstr ""
+
+#: src/plugin.py:5442
+msgid "Calendar Transparency"
+msgstr "Calendar Transparency"
+
+#: src/plugin.py:5443
+msgid "Calendar Poll Interval"
+msgstr ""
+
+#: src/plugin.py:5444
+msgid "Tuner Color"
+msgstr "Tuner Color"
+
+#: src/plugin.py:5445
+msgid "Tuner Color Active"
+msgstr "Tuner Color Active"
+
+#: src/plugin.py:5446
+msgid "Tuner Color On"
+msgstr "Tuner Color On"
+
+#: src/plugin.py:5447
+msgid "Service search first"
+msgstr ""
+
+#: src/plugin.py:5448
+msgid "DVB-T Signal-Quality Correction"
+msgstr ""
+
+#: src/plugin.py:5449
+msgid "Font global [ok]>"
+msgstr "Font global [ok]>"
+
+#: src/plugin.py:5450
+msgid "Font 1 [ok]>"
+msgstr "Font 1 [ok]>"
+
+#: src/plugin.py:5451
+msgid "Font 2 [ok]>"
+msgstr "Font 2 [ok]>"
+
+#: src/plugin.py:5452
+msgid "Font 3 [ok]>"
+msgstr "Font 3 [ok]>"
+
+#: src/plugin.py:5453
+msgid "Font 4 [ok]>"
+msgstr ""
+
+#: src/plugin.py:5454
+msgid "Font 5 [ok]>"
+msgstr ""
+
+#: src/plugin.py:5455
+msgid "Mail 1 Connect"
+msgstr "Mail 1 Connect"
+
+#: src/plugin.py:5456
+msgid "Mail 1 Server"
+msgstr "Mail 1 Server"
+
+#: src/plugin.py:5457
+msgid "Mail 1 [Displayname:]Username"
+msgstr "Mail 1 [Displayname:]Username"
+
+#: src/plugin.py:5458
+msgid "Mail 1 Password"
+msgstr "Mail 1 Password"
+
+#: src/plugin.py:5459
+msgid "Mail 2 Connect"
+msgstr "Mail 2 Connect"
+
+#: src/plugin.py:5460
+msgid "Mail 2 Server"
+msgstr "Mail 2 Server"
+
+#: src/plugin.py:5461
+msgid "Mail 2 [Displayname:]Username"
+msgstr "Mail 2 [Displayname:]Username"
+
+#: src/plugin.py:5462
+msgid "Mail 2 Password"
+msgstr "Mail 2 Password"
+
+#: src/plugin.py:5463
+msgid "Mail 3 Connect"
+msgstr "Mail 3 Connect"
+
+#: src/plugin.py:5464
+msgid "Mail 3 Server"
+msgstr "Mail 3 Server"
+
+#: src/plugin.py:5465
+msgid "Mail 3 [Displayname:]Username"
+msgstr "Mail 3 [Displayname:]Username"
+
+#: src/plugin.py:5466
+msgid "Mail 3 Password"
+msgstr "Mail 3 Password"
+
+#: src/plugin.py:5467
+msgid "Mail 4 Connect"
+msgstr "Mail 4 Connect"
+
+#: src/plugin.py:5468
+msgid "Mail 4 Server"
+msgstr "Mail 4 Server"
+
+#: src/plugin.py:5469
+msgid "Mail 4 [Displayname:]Username"
+msgstr "Mail 4 [Displayname:]Username"
+
+#: src/plugin.py:5470
+msgid "Mail 4 Password"
+msgstr "Mail 4 Password"
+
+#: src/plugin.py:5471
+msgid "Mail 5 Connect"
+msgstr "Mail 5 Connect"
+
+#: src/plugin.py:5472
+msgid "Mail 5 Server"
+msgstr "Mail 5 Server"
+
+#: src/plugin.py:5473
+msgid "Mail 5 [Displayname:]Username"
+msgstr "Mail 5 [Displayname:]Username"
+
+#: src/plugin.py:5474
+msgid "Mail 5 Password"
+msgstr "Mail 5 Password"
+
+#: src/plugin.py:5475
+msgid "Mail Poll Interval"
+msgstr "Mail Poll Interval"
+
+#: src/plugin.py:5476
+msgid "Mail IMAP limit to last days"
+msgstr ""
+
+#: src/plugin.py:5477
+msgid "Mail Show Empty Mailboxes"
+msgstr "Mail Show Empty Mailboxes"
+
+#: src/plugin.py:5478
+msgid "Mail Show Date"
+msgstr ""
+
+#: src/plugin.py:5479
+msgid "Mail Hide Mailadress"
+msgstr ""
+
+#: src/plugin.py:5480
+msgid "Remote Box 1 [Displayname:]IP/Name"
+msgstr ""
+
+#: src/plugin.py:5481
+msgid "Remote Box 2 [Displayname:]IP/Name"
+msgstr ""
+
+#: src/plugin.py:5482
+msgid "Remote Box 3 [Displayname:]IP/Name"
+msgstr ""
+
+#: src/plugin.py:5483
+msgid "Remote Box 4 [Displayname:]IP/Name"
+msgstr ""
+
+#: src/plugin.py:5484
+msgid "Remote Box 5 [Displayname:]IP/Name"
+msgstr ""
+
+#: src/plugin.py:5485
+msgid "Remote Box Poll every Minutes"
+msgstr ""
+
+#: src/plugin.py:5486
+msgid "Remote Box Timer [Displayname:]IP/Name"
+msgstr ""
+
+#: src/plugin.py:5487
+msgid "Remote Box Timer Poll every Minutes"
+msgstr ""
+
+#: src/plugin.py:5488
+msgid "WWW Converter Poll Interval"
+msgstr "WWW Converter Poll Interval"
+
+#: src/plugin.py:5489
+msgid "WWW Converter Usage"
+msgstr ""
+
+#: src/plugin.py:5490
+msgid "WWW ApiKey from cloudconvert.org"
+msgstr ""
+
+#: src/plugin.py:5491
+msgid "WWW ApiKey from convertapi.com"
+msgstr ""
+
+#: src/plugin.py:5492
+msgid "WebIF Refresh [s]"
+msgstr "WebIF Refresh [s]"
+
+#: src/plugin.py:5493
+msgid "WebIF Refresh Type"
+msgstr "WebIF Refresh Type"
+
+#: src/plugin.py:5494
+msgid "WebIF Init Delay"
+msgstr "WebIF Init Delay"
+
+#: src/plugin.py:5496
+msgid "WebIF IP Deny"
+msgstr ""
+
+#: src/plugin.py:5497
+msgid "WebIF Design"
+msgstr ""
+
+#: src/plugin.py:5498
+msgid "Save as Picture for WebIF"
+msgstr "Save as Picture for WebIF"
+
+#: src/plugin.py:5499
+msgid "MJPEG Stream LCD 1 enable"
+msgstr ""
+
+#: src/plugin.py:5500
+msgid "MJPEG Stream LCD 1 Port"
+msgstr ""
+
+#: src/plugin.py:5501
+msgid "MJPEG Stream LCD 1 Virtual Brightness"
+msgstr ""
+
+#: src/plugin.py:5502
+msgid "MJPEG Stream LCD 2 enable"
+msgstr ""
+
+#: src/plugin.py:5503
+msgid "MJPEG Stream LCD 2 Port"
+msgstr ""
+
+#: src/plugin.py:5504
+msgid "MJPEG Stream LCD 2 Virtual Brightness"
+msgstr ""
+
+#: src/plugin.py:5505
+msgid "MJPEG Stream LCD 3 enable"
+msgstr ""
+
+#: src/plugin.py:5506
+msgid "MJPEG Stream LCD 3 Port"
+msgstr ""
+
+#: src/plugin.py:5507
+msgid "MJPEG Stream LCD 3 Virtual Brightness"
+msgstr ""
+
+#: src/plugin.py:5509
+msgid "MJPEG Cycle"
+msgstr ""
+
+#: src/plugin.py:5510
+msgid "MJPEG Restart on Error"
+msgstr ""
+
+#: src/plugin.py:5511
+msgid "MJPEG Header Mode"
+msgstr ""
+
+#: src/plugin.py:5512
+msgid "Sonos IP"
+msgstr ""
+
+#: src/plugin.py:5513
+msgid "Sonos Ping Timeout [ms]"
+msgstr ""
+
+#: src/plugin.py:5514
+msgid "Sonos Play Check"
+msgstr ""
+
+#: src/plugin.py:5515
+#, fuzzy
+#| msgid "WebIF Refresh [s]"
+msgid "Sonos Refresh [s]"
+msgstr "WebIF Refresh [s]"
+
+#: src/plugin.py:5516
+msgid "MusicCast IP"
+msgstr ""
+
+#: src/plugin.py:5517
+msgid "MusicCast Server IP [optional]"
+msgstr ""
+
+#: src/plugin.py:5518
+msgid "MusicCast Ping Timeout [ms]"
+msgstr ""
+
+#: src/plugin.py:5519
+msgid "MusicCast Play Check"
+msgstr ""
+
+#: src/plugin.py:5520
+#, fuzzy
+#| msgid "WebIF Refresh [s]"
+msgid "MusicCast Refresh [s]"
+msgstr "WebIF Refresh [s]"
+
+#: src/plugin.py:5521
+msgid "MusicCast Cover"
+msgstr ""
+
+#: src/plugin.py:5522
+msgid "LCD Custom Width"
+msgstr "LCD Custom Width"
+
+#: src/plugin.py:5523
+msgid "LCD Custom Height"
+msgstr "LCD Custom Height"
+
+#: src/plugin.py:5524
+#, fuzzy
+#| msgid "LCD Custom Width"
+msgid "LCD Custom Width 2"
+msgstr "LCD Custom Width"
+
+#: src/plugin.py:5525
+#, fuzzy
+#| msgid "LCD Custom Height"
+msgid "LCD Custom Height 2"
+msgstr "LCD Custom Height"
+
+#: src/plugin.py:5526
+msgid "LCD Off when shutdown"
+msgstr ""
+
+#: src/plugin.py:5527
+msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
+msgstr "Timing ! calc all Times to Time/5*2 in Fastmode"
+
+#: src/plugin.py:5528
+msgid "Display Delay [ms]"
+msgstr "Display Delay [ms]"
+
+#: src/plugin.py:5529
+msgid "Threads per LCD"
+msgstr "Threads per LCD"
+
+#: src/plugin.py:5530
+msgid "Show Crash Corner"
+msgstr "Show Crash Corner"
+
+#: src/plugin.py:5531
+msgid "Show 'no ....' Messages"
+msgstr ""
+
+#: src/plugin.py:5532
+msgid "Storage-Devices: Force Read"
+msgstr "Storage-Devices: Force Read"
+
+#: src/plugin.py:5533
+#, fuzzy
+#| msgid "Storage-Devices: Force Read"
+msgid "Storage-Devices: Color Back"
+msgstr "Storage-Devices: Force Read"
+
+#: src/plugin.py:5534
+#, fuzzy
+#| msgid "Storage-Devices: Force Read"
+msgid "Storage-Devices: Color Bar"
+msgstr "Storage-Devices: Force Read"
+
+#: src/plugin.py:5535
+#, fuzzy
+#| msgid "Storage-Devices: Force Read"
+msgid "Storage-Devices: Color Full"
+msgstr "Storage-Devices: Force Read"
+
+#: src/plugin.py:5536
+msgid "Network Check active"
+msgstr ""
+
+#: src/plugin.py:5537
+msgid "Switch FrameBuffer [if possible]"
+msgstr ""
+
+#: src/plugin.py:5538
+msgid "Config Backup Path [ok]>"
+msgstr "Config Backup Path [ok]>"
+
+#: src/plugin.py:5539
+msgid "Config Restore All Settings"
+msgstr ""
+
+#: src/plugin.py:5540
+msgid "Debug-Logging > /tmp/L4log.txt"
+msgstr "Debug-Logging > /tmp/L4log.txt"
+
+#: src/plugin.py:5544 src/plugin.py:6822
+msgid "- Backlight Off [disable set Off=On]"
+msgstr "- Backlight Off [disable set Off=On]"
+
+#: src/plugin.py:5545 src/plugin.py:6823
+msgid "- Backlight On"
+msgstr "- Backlight On"
+
+#: src/plugin.py:5546 src/plugin.py:6824
+msgid "- Backlight Weekend Off [disable set Off=On]"
+msgstr "- Backlight Weekend Off [disable set Off=On]"
+
+#: src/plugin.py:5547 src/plugin.py:6825
+msgid "- Backlight Weekend On"
+msgstr "- Backlight Weekend On"
+
+#: src/plugin.py:5548 src/plugin.py:6261 src/plugin.py:6826
+msgid "- LCD Auto-OFF"
+msgstr ""
+
+#: src/plugin.py:5549 src/plugin.py:6263 src/plugin.py:6840
+msgid "Background"
+msgstr ""
+
+#: src/plugin.py:5553 src/plugin.py:6267 src/plugin.py:6844
+msgid "- Picture [ok]>"
+msgstr "- Picture [ok]>"
+
+#: src/plugin.py:5557 src/plugin.py:5570
+msgid "- Picon Size"
+msgstr "- Picon Size"
+
+#: src/plugin.py:5560 src/plugin.py:5573 src/plugin.py:5590 src/plugin.py:5605
+#: src/plugin.py:5617 src/plugin.py:5640 src/plugin.py:5653 src/plugin.py:5666
+#: src/plugin.py:5679 src/plugin.py:5708 src/plugin.py:5722 src/plugin.py:5734
+#: src/plugin.py:5745 src/plugin.py:5757 src/plugin.py:5769 src/plugin.py:5783
+#: src/plugin.py:5794 src/plugin.py:5804 src/plugin.py:5814 src/plugin.py:5824
+#: src/plugin.py:5842 src/plugin.py:5860 src/plugin.py:5868 src/plugin.py:5879
+#: src/plugin.py:5890 src/plugin.py:5899 src/plugin.py:5922 src/plugin.py:5945
+#: src/plugin.py:5955 src/plugin.py:5964 src/plugin.py:5974 src/plugin.py:5987
+#: src/plugin.py:5996 src/plugin.py:6102 src/plugin.py:6136 src/plugin.py:6159
+#: src/plugin.py:6174 src/plugin.py:6187 src/plugin.py:6198 src/plugin.py:6210
+#: src/plugin.py:6241 src/plugin.py:6276 src/plugin.py:6288 src/plugin.py:6301
+#: src/plugin.py:6314 src/plugin.py:6340 src/plugin.py:6354 src/plugin.py:6369
+#: src/plugin.py:6381 src/plugin.py:6394 src/plugin.py:6405 src/plugin.py:6419
+#: src/plugin.py:6430 src/plugin.py:6440 src/plugin.py:6450 src/plugin.py:6468
+#: src/plugin.py:6486 src/plugin.py:6494 src/plugin.py:6505 src/plugin.py:6516
+#: src/plugin.py:6525 src/plugin.py:6548 src/plugin.py:6571 src/plugin.py:6581
+#: src/plugin.py:6590 src/plugin.py:6600 src/plugin.py:6669 src/plugin.py:6678
+#: src/plugin.py:6712 src/plugin.py:6735 src/plugin.py:6750 src/plugin.py:6763
+#: src/plugin.py:6774 src/plugin.py:6786 src/plugin.py:6817 src/plugin.py:6866
+#: src/plugin.py:6881 src/plugin.py:6895 src/plugin.py:6907 src/plugin.py:6920
+#: src/plugin.py:6931 src/plugin.py:6941 src/plugin.py:6959 src/plugin.py:6977
+#: src/plugin.py:6985 src/plugin.py:6996 src/plugin.py:7007 src/plugin.py:7016
+#: src/plugin.py:7039 src/plugin.py:7062 src/plugin.py:7072 src/plugin.py:7081
+#: src/plugin.py:7091 src/plugin.py:7103 src/plugin.py:7209 src/plugin.py:7243
+#: src/plugin.py:7266 src/plugin.py:7281 src/plugin.py:7294 src/plugin.py:7305
+#: src/plugin.py:7317 src/plugin.py:7348
+msgid "- Split Screen"
+msgstr "- Split Screen"
+
+#: src/plugin.py:5561 src/plugin.py:5574
+msgid "- Full Screen"
+msgstr "- Full Screen"
+
+#: src/plugin.py:5562 src/plugin.py:5575
+msgid "- Text Size"
+msgstr "- Text Size"
+
+#: src/plugin.py:5563 src/plugin.py:6065 src/plugin.py:6075 src/plugin.py:6085
+#: src/plugin.py:6095 src/plugin.py:6637 src/plugin.py:6647 src/plugin.py:6659
+#: src/plugin.py:7172 src/plugin.py:7182 src/plugin.py:7192 src/plugin.py:7202
+msgid "- Transparency"
+msgstr "- Transparency"
+
+#: src/plugin.py:5564 src/plugin.py:5576 src/plugin.py:5748 src/plugin.py:5760
+msgid "- Picon Path [ok]>"
+msgstr "- Picon Path [ok]>"
+
+#: src/plugin.py:5565 src/plugin.py:5577
+msgid "- Picon Path 2 [ok]>"
+msgstr "- Picon Path 2 [ok]>"
+
+#: src/plugin.py:5566 src/plugin.py:5578
+msgid "- Picon Cache Path [ok]>"
+msgstr "- Picon Cache Path [ok]>"
+
+#: src/plugin.py:5567
+msgid "Picon 2"
+msgstr "Picon 2"
+
+#: src/plugin.py:5579 src/plugin.py:6343 src/plugin.py:6855
+msgid "Clock"
+msgstr "Clock"
+
+#: src/plugin.py:5582 src/plugin.py:5597 src/plugin.py:6236 src/plugin.py:6812
+#: src/plugin.py:7343
+msgid "-  Type"
+msgstr "-  Type"
+
+#: src/plugin.py:5584 src/plugin.py:5599 src/plugin.py:6348 src/plugin.py:6363
+#: src/plugin.py:6860 src/plugin.py:6875
+msgid "- Analog Clock"
+msgstr "- Analog Clock"
+
+#: src/plugin.py:5586 src/plugin.py:5601 src/plugin.py:6350 src/plugin.py:6365
+#: src/plugin.py:6862 src/plugin.py:6877
+msgid "- Spacing"
+msgstr "- Spacing"
+
+#: src/plugin.py:5587 src/plugin.py:5602 src/plugin.py:5689 src/plugin.py:5705
+#: src/plugin.py:5719 src/plugin.py:5730 src/plugin.py:5790 src/plugin.py:5942
+#: src/plugin.py:5952 src/plugin.py:5961 src/plugin.py:6046 src/plugin.py:6060
+#: src/plugin.py:6070 src/plugin.py:6080 src/plugin.py:6090 src/plugin.py:6171
+#: src/plugin.py:6184 src/plugin.py:6237 src/plugin.py:6323 src/plugin.py:6336
+#: src/plugin.py:6351 src/plugin.py:6366 src/plugin.py:6378 src/plugin.py:6391
+#: src/plugin.py:6568 src/plugin.py:6578 src/plugin.py:6587 src/plugin.py:6632
+#: src/plugin.py:6642 src/plugin.py:6651 src/plugin.py:6747 src/plugin.py:6760
+#: src/plugin.py:6813 src/plugin.py:6863 src/plugin.py:6878 src/plugin.py:6904
+#: src/plugin.py:6917 src/plugin.py:7059 src/plugin.py:7069 src/plugin.py:7078
+#: src/plugin.py:7153 src/plugin.py:7167 src/plugin.py:7177 src/plugin.py:7187
+#: src/plugin.py:7197 src/plugin.py:7278 src/plugin.py:7291 src/plugin.py:7344
+msgid "- Size"
+msgstr "- Size"
+
+#: src/plugin.py:5592 src/plugin.py:5607 src/plugin.py:5619 src/plugin.py:5629
+#: src/plugin.py:5642 src/plugin.py:5655 src/plugin.py:5668 src/plugin.py:5681
+#: src/plugin.py:5711 src/plugin.py:5725 src/plugin.py:5749 src/plugin.py:5761
+#: src/plugin.py:5785 src/plugin.py:5806 src/plugin.py:5816 src/plugin.py:5826
+#: src/plugin.py:5844 src/plugin.py:5871 src/plugin.py:5882 src/plugin.py:5914
+#: src/plugin.py:5936 src/plugin.py:5966 src/plugin.py:5978 src/plugin.py:6008
+#: src/plugin.py:6019 src/plugin.py:6030 src/plugin.py:6041 src/plugin.py:6109
+#: src/plugin.py:6124 src/plugin.py:6137 src/plugin.py:6151 src/plugin.py:6166
+#: src/plugin.py:6179 src/plugin.py:6201 src/plugin.py:6213 src/plugin.py:6278
+#: src/plugin.py:6290 src/plugin.py:6303 src/plugin.py:6316 src/plugin.py:6356
+#: src/plugin.py:6371 src/plugin.py:6384 src/plugin.py:6397 src/plugin.py:6421
+#: src/plugin.py:6432 src/plugin.py:6442 src/plugin.py:6452 src/plugin.py:6470
+#: src/plugin.py:6497 src/plugin.py:6508 src/plugin.py:6540 src/plugin.py:6562
+#: src/plugin.py:6592 src/plugin.py:6604 src/plugin.py:6615 src/plugin.py:6626
+#: src/plugin.py:6685 src/plugin.py:6700 src/plugin.py:6713 src/plugin.py:6727
+#: src/plugin.py:6742 src/plugin.py:6755 src/plugin.py:6777 src/plugin.py:6789
+#: src/plugin.py:6868 src/plugin.py:6883 src/plugin.py:6897 src/plugin.py:6910
+#: src/plugin.py:6923 src/plugin.py:6943 src/plugin.py:6961 src/plugin.py:6988
+#: src/plugin.py:6999 src/plugin.py:7031 src/plugin.py:7053 src/plugin.py:7083
+#: src/plugin.py:7095 src/plugin.py:7115 src/plugin.py:7126 src/plugin.py:7137
+#: src/plugin.py:7148 src/plugin.py:7216 src/plugin.py:7231 src/plugin.py:7244
+#: src/plugin.py:7258 src/plugin.py:7273 src/plugin.py:7286 src/plugin.py:7308
+#: src/plugin.py:7320
+msgid "- Shadow Edges"
+msgstr "- Shadow Edges"
+
+#: src/plugin.py:5594 src/plugin.py:6358 src/plugin.py:6870
+msgid "Clock 2"
+msgstr "Clock 2"
+
+#: src/plugin.py:5609 src/plugin.py:6306
+msgid "Program Name"
+msgstr "Program Name"
+
+#: src/plugin.py:5613 src/plugin.py:5636 src/plugin.py:5649 src/plugin.py:5662
+#: src/plugin.py:5675 src/plugin.py:5709 src/plugin.py:5723 src/plugin.py:5777
+#: src/plugin.py:6130 src/plugin.py:6175 src/plugin.py:6272 src/plugin.py:6284
+#: src/plugin.py:6297 src/plugin.py:6310 src/plugin.py:6382 src/plugin.py:6395
+#: src/plugin.py:6413 src/plugin.py:6706 src/plugin.py:6751 src/plugin.py:6889
+#: src/plugin.py:6908 src/plugin.py:6921 src/plugin.py:7237 src/plugin.py:7282
+msgid "- maximum Lines"
+msgstr "- maximum Lines"
+
+#: src/plugin.py:5616 src/plugin.py:5639 src/plugin.py:5652 src/plugin.py:5665
+#: src/plugin.py:5678 src/plugin.py:5692 src/plugin.py:5733 src/plugin.py:5782
+#: src/plugin.py:5793 src/plugin.py:6135 src/plugin.py:6275 src/plugin.py:6287
+#: src/plugin.py:6300 src/plugin.py:6313 src/plugin.py:6326 src/plugin.py:6339
+#: src/plugin.py:6418 src/plugin.py:6711 src/plugin.py:6894 src/plugin.py:7242
+msgid "- Length"
+msgstr ""
+
+#: src/plugin.py:5621
+msgid "Program Number"
+msgstr "Program Number"
+
+#: src/plugin.py:5631
+msgid "Program Info"
+msgstr "Program Info"
+
+#: src/plugin.py:5634 src/plugin.py:5647 src/plugin.py:5660 src/plugin.py:5673
+#: src/plugin.py:5687 src/plugin.py:5688 src/plugin.py:5747 src/plugin.py:5759
+#: src/plugin.py:5770 src/plugin.py:5778 src/plugin.py:5779 src/plugin.py:5802
+#: src/plugin.py:5828 src/plugin.py:5846 src/plugin.py:5861 src/plugin.py:5905
+#: src/plugin.py:5906 src/plugin.py:5928 src/plugin.py:5929 src/plugin.py:5947
+#: src/plugin.py:5957 src/plugin.py:5977 src/plugin.py:6107 src/plugin.py:6123
+#: src/plugin.py:6131 src/plugin.py:6132 src/plugin.py:6147 src/plugin.py:6160
+#: src/plugin.py:6161 src/plugin.py:6177 src/plugin.py:6188 src/plugin.py:6245
+#: src/plugin.py:6295 src/plugin.py:6321 src/plugin.py:6322 src/plugin.py:6346
+#: src/plugin.py:6361 src/plugin.py:6406 src/plugin.py:6414 src/plugin.py:6415
+#: src/plugin.py:6428 src/plugin.py:6454 src/plugin.py:6472 src/plugin.py:6487
+#: src/plugin.py:6531 src/plugin.py:6532 src/plugin.py:6554 src/plugin.py:6555
+#: src/plugin.py:6573 src/plugin.py:6583 src/plugin.py:6603 src/plugin.py:6683
+#: src/plugin.py:6699 src/plugin.py:6707 src/plugin.py:6708 src/plugin.py:6723
+#: src/plugin.py:6736 src/plugin.py:6737 src/plugin.py:6753 src/plugin.py:6764
+#: src/plugin.py:6858 src/plugin.py:6873 src/plugin.py:6890 src/plugin.py:6891
+#: src/plugin.py:6932 src/plugin.py:6945 src/plugin.py:6963 src/plugin.py:6978
+#: src/plugin.py:7022 src/plugin.py:7023 src/plugin.py:7045 src/plugin.py:7046
+#: src/plugin.py:7064 src/plugin.py:7074 src/plugin.py:7094 src/plugin.py:7214
+#: src/plugin.py:7230 src/plugin.py:7238 src/plugin.py:7239 src/plugin.py:7254
+#: src/plugin.py:7267 src/plugin.py:7268 src/plugin.py:7284 src/plugin.py:7295
+msgid "- Type"
+msgstr "- Type"
+
+#: src/plugin.py:5644
+msgid "Program Info 2"
+msgstr ""
+
+#: src/plugin.py:5657
+msgid "Next Program Info"
+msgstr "Next Program Info"
+
+#: src/plugin.py:5670 src/plugin.py:6292
+msgid "Extended Description"
+msgstr "Extended Description"
+
+#: src/plugin.py:5683 src/plugin.py:6305
+msgid "- use Info when empty"
+msgstr ""
+
+#: src/plugin.py:5684 src/plugin.py:6318
+msgid "Progress Bar"
+msgstr "Progress Bar"
+
+#: src/plugin.py:5694 src/plugin.py:6328
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color Text"
+msgstr "- Color"
+
+#: src/plugin.py:5695 src/plugin.py:6329
+msgid "- Border"
+msgstr ""
+
+#: src/plugin.py:5696 src/plugin.py:5796 src/plugin.py:6330 src/plugin.py:6342
+msgid "- Shaded"
+msgstr "- Shaded"
+
+#: src/plugin.py:5697 src/plugin.py:6331
+msgid "- Unit min"
+msgstr ""
+
+#: src/plugin.py:5699 src/plugin.py:6373 src/plugin.py:6899
+msgid "Informations"
+msgstr "Informations"
+
+#: src/plugin.py:5702 src/plugin.py:5716
+msgid "- Tunerinfo"
+msgstr "- Tunerinfo"
+
+#: src/plugin.py:5703 src/plugin.py:5717 src/plugin.py:6376 src/plugin.py:6389
+#: src/plugin.py:6902 src/plugin.py:6915
+msgid "- Sensors"
+msgstr "- Sensors"
+
+#: src/plugin.py:5704 src/plugin.py:5718 src/plugin.py:6377 src/plugin.py:6390
+#: src/plugin.py:6903 src/plugin.py:6916
+msgid "- CPU"
+msgstr "- CPU"
+
+#: src/plugin.py:5713 src/plugin.py:6386 src/plugin.py:6912
+msgid "Informations 2"
+msgstr ""
+
+#: src/plugin.py:5727
+msgid "Signal Quality Bar"
+msgstr "Signal Quality Bar"
+
+#: src/plugin.py:5736
+msgid "- Gradient"
+msgstr "- Gradient"
+
+#: src/plugin.py:5737
+msgid "- Bar Range Min"
+msgstr "- Bar Range Min"
+
+#: src/plugin.py:5738
+msgid "- Bar Range Max"
+msgstr "- Bar Range Max"
+
+#: src/plugin.py:5739
+msgid "Satellite"
+msgstr "Satellite"
+
+#: src/plugin.py:5751
+msgid "Provider"
+msgstr "Provider"
+
+#: src/plugin.py:5763 src/plugin.py:6399 src/plugin.py:6925
+msgid "Used Tuner"
+msgstr "Used Tuner"
+
+#: src/plugin.py:5771 src/plugin.py:6407 src/plugin.py:6933
+msgid "- only active Tuner"
+msgstr "- only active Tuner"
+
+#: src/plugin.py:5773 src/plugin.py:6409 src/plugin.py:6885
+msgid "Next Timer Event"
+msgstr "Next Timer Event"
+
+#: src/plugin.py:5787 src/plugin.py:6333
+msgid "Volume"
+msgstr "Volume"
+
+#: src/plugin.py:5797 src/plugin.py:6423
+msgid "Audio/Video"
+msgstr "Audio/Video"
+
+#: src/plugin.py:5808 src/plugin.py:6434
+msgid "Bitrate"
+msgstr "Bitrate"
+
+#: src/plugin.py:5818 src/plugin.py:6444 src/plugin.py:6935
+msgid "Online [Ping]"
+msgstr "Online [Ping]"
+
+#: src/plugin.py:5829 src/plugin.py:6455 src/plugin.py:6946
+msgid "- Show State"
+msgstr "- Show State"
+
+#: src/plugin.py:5830 src/plugin.py:6456 src/plugin.py:6947
+msgid "- Timeout [ms]"
+msgstr ""
+
+#: src/plugin.py:5831 src/plugin.py:5832 src/plugin.py:5833 src/plugin.py:5834
+#: src/plugin.py:5835 src/plugin.py:6457 src/plugin.py:6458 src/plugin.py:6459
+#: src/plugin.py:6460 src/plugin.py:6461 src/plugin.py:6948 src/plugin.py:6949
+#: src/plugin.py:6950 src/plugin.py:6951 src/plugin.py:6952
+msgid "- Online Name:Address"
+msgstr "- Online Name:Address"
+
+#: src/plugin.py:5836 src/plugin.py:6462 src/plugin.py:6953
+msgid "Storage-Devices"
+msgstr "Storage-Devices"
+
+#: src/plugin.py:5847 src/plugin.py:6473 src/plugin.py:6964
+msgid "- free Warning"
+msgstr ""
+
+#: src/plugin.py:5848 src/plugin.py:6474 src/plugin.py:6965
+msgid "- extra Info"
+msgstr "- extra Info"
+
+#: src/plugin.py:5849 src/plugin.py:5850 src/plugin.py:5851 src/plugin.py:5852
+#: src/plugin.py:5853 src/plugin.py:6475 src/plugin.py:6476 src/plugin.py:6477
+#: src/plugin.py:6478 src/plugin.py:6479 src/plugin.py:6966 src/plugin.py:6967
+#: src/plugin.py:6968 src/plugin.py:6969 src/plugin.py:6970
+msgid "- Device Name"
+msgstr "- Device Name"
+
+#: src/plugin.py:5854 src/plugin.py:6480 src/plugin.py:6971
+msgid "HDD"
+msgstr "HDD"
+
+#: src/plugin.py:5866 src/plugin.py:5877 src/plugin.py:5888 src/plugin.py:6157
+#: src/plugin.py:6492 src/plugin.py:6503 src/plugin.py:6514 src/plugin.py:6733
+#: src/plugin.py:6983 src/plugin.py:6994 src/plugin.py:7005 src/plugin.py:7264
+msgid "- Zoom"
+msgstr "- Zoom"
+
+#: src/plugin.py:5869 src/plugin.py:5880 src/plugin.py:5891 src/plugin.py:6495
+#: src/plugin.py:6506 src/plugin.py:6517 src/plugin.py:6986 src/plugin.py:6997
+#: src/plugin.py:7008
+msgid "- Weather Type"
+msgstr "- Weather Type"
+
+#: src/plugin.py:5873 src/plugin.py:6499 src/plugin.py:6990
+msgid "Weather 2"
+msgstr "Weather 2"
+
+#: src/plugin.py:5884 src/plugin.py:6510 src/plugin.py:7001
+msgid "Meteo-Weather Station"
+msgstr "Meteo-Weather Station"
+
+#: src/plugin.py:5900 src/plugin.py:5923 src/plugin.py:5946 src/plugin.py:5956
+#: src/plugin.py:6526 src/plugin.py:6549 src/plugin.py:6572 src/plugin.py:6582
+#: src/plugin.py:7017 src/plugin.py:7040 src/plugin.py:7063 src/plugin.py:7073
+msgid "- Station"
+msgstr ""
+
+#: src/plugin.py:5901 src/plugin.py:5924 src/plugin.py:6527 src/plugin.py:6550
+#: src/plugin.py:7018 src/plugin.py:7041
+msgid "- Module"
+msgstr ""
+
+#: src/plugin.py:5902 src/plugin.py:5925 src/plugin.py:6528 src/plugin.py:6551
+#: src/plugin.py:7019 src/plugin.py:7042
+msgid "- Module userdefined"
+msgstr ""
+
+#: src/plugin.py:5903 src/plugin.py:5926 src/plugin.py:6529 src/plugin.py:6552
+#: src/plugin.py:7020 src/plugin.py:7043
+msgid "- Base"
+msgstr ""
+
+#: src/plugin.py:5904 src/plugin.py:5927 src/plugin.py:6530 src/plugin.py:6553
+#: src/plugin.py:7021 src/plugin.py:7044
+msgid "- Name"
+msgstr ""
+
+#: src/plugin.py:5908 src/plugin.py:5931 src/plugin.py:6118 src/plugin.py:6534
+#: src/plugin.py:6557 src/plugin.py:6694 src/plugin.py:7025 src/plugin.py:7048
+#: src/plugin.py:7225
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 1"
+msgstr "- Color"
+
+#: src/plugin.py:5909 src/plugin.py:5932 src/plugin.py:6119 src/plugin.py:6535
+#: src/plugin.py:6558 src/plugin.py:6695 src/plugin.py:7026 src/plugin.py:7049
+#: src/plugin.py:7226
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 2"
+msgstr "- Color"
+
+#: src/plugin.py:5910 src/plugin.py:5933 src/plugin.py:6120 src/plugin.py:6536
+#: src/plugin.py:6559 src/plugin.py:6696 src/plugin.py:7027 src/plugin.py:7050
+#: src/plugin.py:7227
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 3"
+msgstr "- Color"
+
+#: src/plugin.py:5911 src/plugin.py:5934 src/plugin.py:6121 src/plugin.py:6537
+#: src/plugin.py:6560 src/plugin.py:6697 src/plugin.py:7028 src/plugin.py:7051
+#: src/plugin.py:7228
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 4"
+msgstr "- Color"
+
+#: src/plugin.py:5912 src/plugin.py:5935 src/plugin.py:6122 src/plugin.py:6538
+#: src/plugin.py:6561 src/plugin.py:6698 src/plugin.py:7029 src/plugin.py:7052
+#: src/plugin.py:7229
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 5"
+msgstr "- Color"
+
+#: src/plugin.py:5913 src/plugin.py:6539 src/plugin.py:7030
+#, fuzzy
+#| msgid "- Color"
+msgid "- Color 6"
+msgstr "- Color"
+
+#: src/plugin.py:5916 src/plugin.py:6542 src/plugin.py:7033
+msgid "Netatmo 2"
+msgstr ""
+
+#: src/plugin.py:5938 src/plugin.py:6564 src/plugin.py:7055
+msgid "Netatmo CO2 Indicator"
+msgstr "Netatmo CO2 Indicator"
+
+#: src/plugin.py:5944 src/plugin.py:5954 src/plugin.py:6570 src/plugin.py:6580
+#: src/plugin.py:7061 src/plugin.py:7071
+msgid "- Length [Bar]"
+msgstr "- Length [Bar]"
+
+#: src/plugin.py:5948 src/plugin.py:6574 src/plugin.py:7065
+msgid "Netatmo Comfort Indicator"
+msgstr ""
+
+#: src/plugin.py:5958 src/plugin.py:6584 src/plugin.py:7075
+msgid "Moonphase"
+msgstr "Moonphase"
+
+#: src/plugin.py:5968 src/plugin.py:6594 src/plugin.py:7085
+msgid "Sunrise"
+msgstr "Sunrise"
+
+#: src/plugin.py:5980 src/plugin.py:6663 src/plugin.py:7097
+msgid "Show oscam.lcd"
+msgstr "Show oscam.lcd"
+
+#: src/plugin.py:5983 src/plugin.py:6002 src/plugin.py:6013 src/plugin.py:6024
+#: src/plugin.py:6089 src/plugin.py:6609 src/plugin.py:6620 src/plugin.py:7109
+#: src/plugin.py:7120 src/plugin.py:7131 src/plugin.py:7196
+msgid "- File [ok]>"
+msgstr "- File [ok]>"
+
+#: src/plugin.py:5990
+msgid "Show ecm.info"
+msgstr "Show ecm.info"
+
+#: src/plugin.py:5999 src/plugin.py:6606 src/plugin.py:7106
+msgid "Show Textfile"
+msgstr "Show Textfile"
+
+#: src/plugin.py:6010 src/plugin.py:6617 src/plugin.py:7117
+msgid "Show Textfile 2"
+msgstr "Show Textfile 2"
+
+#: src/plugin.py:6021 src/plugin.py:7128
+msgid "Show Textfile 3"
+msgstr "Show Textfile 3"
+
+#: src/plugin.py:6032 src/plugin.py:7139
+msgid "Show HTTP Text"
+msgstr "Show HTTP Text"
+
+#: src/plugin.py:6035 src/plugin.py:6049 src/plugin.py:7142 src/plugin.py:7156
+msgid "- URL"
+msgstr "- URL"
+
+#: src/plugin.py:6043 src/plugin.py:7150
+msgid "WWW-Internet Converter"
+msgstr "WWW-Internet Converter"
+
+#: src/plugin.py:6050 src/plugin.py:7157
+msgid "- HTTP Width"
+msgstr "- HTTP Width"
+
+#: src/plugin.py:6051 src/plugin.py:7158
+msgid "- HTTP Height"
+msgstr "- HTTP Height"
+
+#: src/plugin.py:6052 src/plugin.py:7159
+msgid "- Cut from X"
+msgstr "- Cut from X"
+
+#: src/plugin.py:6053 src/plugin.py:7160
+msgid "- Cut from Y"
+msgstr "- Cut from Y"
+
+#: src/plugin.py:6054 src/plugin.py:7161
+msgid "- Cut Width [disable = 0]"
+msgstr "- Cut Width [disable = 0]"
+
+#: src/plugin.py:6055 src/plugin.py:7162
+msgid "- Cut Height [disable = 0]"
+msgstr "- Cut Height [disable = 0]"
+
+#: src/plugin.py:6056 src/plugin.py:6628 src/plugin.py:7163
+msgid "Show Picture"
+msgstr "Show Picture"
+
+#: src/plugin.py:6059 src/plugin.py:6069 src/plugin.py:6079 src/plugin.py:6631
+#: src/plugin.py:6641 src/plugin.py:7166 src/plugin.py:7176 src/plugin.py:7186
+msgid "- File or Path [ok]>"
+msgstr "- File or Path [ok]>"
+
+#: src/plugin.py:6061 src/plugin.py:6071 src/plugin.py:6081 src/plugin.py:6091
+#: src/plugin.py:6633 src/plugin.py:6643 src/plugin.py:6652 src/plugin.py:7168
+#: src/plugin.py:7178 src/plugin.py:7188 src/plugin.py:7198
+msgid "- Size max Height"
+msgstr "- Size max Height"
+
+#: src/plugin.py:6064 src/plugin.py:6074 src/plugin.py:6084 src/plugin.py:6094
+#: src/plugin.py:6636 src/plugin.py:6646 src/plugin.py:7171 src/plugin.py:7181
+#: src/plugin.py:7191 src/plugin.py:7201
+msgid "- Quick Update"
+msgstr "- Quick Update"
+
+#: src/plugin.py:6066 src/plugin.py:6638 src/plugin.py:7173
+msgid "Show Picture 2"
+msgstr "Show Picture 2"
+
+#: src/plugin.py:6076 src/plugin.py:7183
+msgid "Show Picture 3"
+msgstr "Show Picture 3"
+
+#: src/plugin.py:6086 src/plugin.py:7193
+msgid "Show Picture 4"
+msgstr "Show Picture 4"
+
+#: src/plugin.py:6105 src/plugin.py:6681 src/plugin.py:7212
+msgid "- Lines"
+msgstr "- Lines"
+
+#: src/plugin.py:6106 src/plugin.py:6682 src/plugin.py:7213
+msgid "- Mail Konto"
+msgstr "- Mail Konto"
+
+#: src/plugin.py:6108 src/plugin.py:6117 src/plugin.py:6176 src/plugin.py:6684
+#: src/plugin.py:6693 src/plugin.py:6752 src/plugin.py:7215 src/plugin.py:7224
+#: src/plugin.py:7283
+msgid "- max Width"
+msgstr "- max Width"
+
+#: src/plugin.py:6126 src/plugin.py:6702 src/plugin.py:7233
+msgid "Remote Box Timer"
+msgstr ""
+
+#: src/plugin.py:6148 src/plugin.py:6724 src/plugin.py:7255
+msgid "- Picture Size"
+msgstr "- Picture Size"
+
+#: src/plugin.py:6149 src/plugin.py:6725 src/plugin.py:7256
+msgid "- Picture Position"
+msgstr "- Picture Position"
+
+#: src/plugin.py:6150 src/plugin.py:6726 src/plugin.py:7257
+msgid "- Picture Alignment"
+msgstr "- Picture Alignment"
+
+#: src/plugin.py:6162 src/plugin.py:6738 src/plugin.py:7269
+msgid "- Layout"
+msgstr "- Layout"
+
+#: src/plugin.py:6164 src/plugin.py:6740 src/plugin.py:7271
+msgid "- Current Day Background Color"
+msgstr ""
+
+#: src/plugin.py:6165 src/plugin.py:6741 src/plugin.py:7272
+msgid "- Caption Color"
+msgstr "- Caption Color"
+
+#: src/plugin.py:6168 src/plugin.py:6744 src/plugin.py:7275
+msgid "Dates List"
+msgstr "Dates List"
+
+#: src/plugin.py:6181 src/plugin.py:6757 src/plugin.py:7288
+msgid "Event Icon Bar"
+msgstr "Event Icon Bar"
+
+#: src/plugin.py:6189 src/plugin.py:6765 src/plugin.py:7296
+msgid "- Popup Screen"
+msgstr ""
+
+#: src/plugin.py:6190 src/plugin.py:6766 src/plugin.py:7297
+msgid "- Popup LCD"
+msgstr ""
+
+#: src/plugin.py:6191 src/plugin.py:6767 src/plugin.py:7298
+#, fuzzy
+#| msgid "Show Textfile 2"
+msgid "Show Text 1"
+msgstr "Show Textfile 2"
+
+#: src/plugin.py:6194 src/plugin.py:6206 src/plugin.py:6770 src/plugin.py:6782
+#: src/plugin.py:7301 src/plugin.py:7313
+#, fuzzy
+#| msgid "- Text Size"
+msgid "- Text"
+msgstr "- Text Size"
+
+#: src/plugin.py:6203 src/plugin.py:6779 src/plugin.py:7310
+#, fuzzy
+#| msgid "Show Textfile 2"
+msgid "Show Text 2"
+msgstr "Show Textfile 2"
+
+#: src/plugin.py:6215 src/plugin.py:6791 src/plugin.py:7322
+msgid "Rectangle 1"
+msgstr "Rectangle 1"
+
+#: src/plugin.py:6218 src/plugin.py:6227 src/plugin.py:6794 src/plugin.py:6803
+#: src/plugin.py:7325 src/plugin.py:7334
+msgid "- Position x"
+msgstr "- Position x"
+
+#: src/plugin.py:6219 src/plugin.py:6228 src/plugin.py:6795 src/plugin.py:6804
+#: src/plugin.py:7326 src/plugin.py:7335
+msgid "- Position y"
+msgstr "- Position y"
+
+#: src/plugin.py:6220 src/plugin.py:6229 src/plugin.py:6796 src/plugin.py:6805
+#: src/plugin.py:7327 src/plugin.py:7336
+msgid "- Size x"
+msgstr "- Size x"
+
+#: src/plugin.py:6221 src/plugin.py:6230 src/plugin.py:6797 src/plugin.py:6806
+#: src/plugin.py:7328 src/plugin.py:7337
+msgid "- Size y"
+msgstr "- Size y"
+
+#: src/plugin.py:6224 src/plugin.py:6800 src/plugin.py:7331
+msgid "Rectangle 2"
+msgstr "Rectangle 2"
+
+#: src/plugin.py:6233 src/plugin.py:6809 src/plugin.py:7340
+msgid "Recording"
+msgstr "Recording"
+
+#: src/plugin.py:6242
+msgid "Stutter TV"
+msgstr "Stutter TV"
+
+#: src/plugin.py:6262 src/plugin.py:6839
+msgid "- Screens used for Changing"
+msgstr "- Screens used for Changing"
+
+#: src/plugin.py:6268
+msgid "Title"
+msgstr "Title"
+
+#: src/plugin.py:6280
+msgid "Infos"
+msgstr "Infos"
+
+#: src/plugin.py:6648
+msgid "Show Cover"
+msgstr "Show Cover"
+
+#: src/plugin.py:6655 src/plugin.py:6656
+msgid "- Search Path [ok]>"
+msgstr "- Search Path [ok]>"
+
+#: src/plugin.py:6657
+msgid "- Default Cover [ok]>"
+msgstr "- Default Cover [ok]>"
+
+#: src/plugin.py:6658
+msgid "- Picon First"
+msgstr ""
+
+#: src/plugin.py:6660
+#, fuzzy
+#| msgid "- Download Cover from Google"
+msgid "- Download Cover"
+msgstr "- Download Cover from Google"
+
+#: src/plugin.py:6661
+#, fuzzy
+#| msgid "-  Type"
+msgid "- Download Type"
+msgstr "-  Type"
+
+#: src/plugin.py:6662
+msgid "- Google API-Key console.developers.google.com/apis"
+msgstr ""
+
+#: src/plugin.py:6821
+msgid "LCD Display"
+msgstr "LCD Display"
+
+#: src/plugin.py:7360
+#, fuzzy
+#| msgid "LCD Display"
+msgid "LCD4linux Display-Mode On"
+msgstr "LCD Display"
+
+#: src/plugin.py:7361
+msgid "Set Media >>"
+msgstr ""
+
+#: src/plugin.py:7365
+msgid "LCD4linux Display-Mode MediaPlayer"
+msgstr ""
+
+#: src/plugin.py:7366
+msgid "Set Idle >>"
+msgstr ""
+
+#: src/plugin.py:7370
+msgid "LCD4linux Display-Mode Idle"
+msgstr ""
+
+#: src/plugin.py:7371
+#, fuzzy
+#| msgid "Global"
+msgid "Set Global >>"
+msgstr "Global"
+
+#: src/plugin.py:7375
+#, fuzzy
+#| msgid "LCD4linux enabled"
+msgid "LCD4linux Settings"
+msgstr "LCD4linux enabled"
+
+#: src/plugin.py:7376
+msgid "Set On >>"
+msgstr ""
+
+#: src/plugin.py:7389
+msgid "Choose dir"
+msgstr "Choose dir"
+
+#: src/plugin.py:7392 src/plugin.py:7395 src/plugin.py:7401 src/plugin.py:7404
+msgid "Choose file"
+msgstr "Choose file"
+
+#: src/plugin.py:7398
+msgid "Choose font"
+msgstr "Choose font"
+
+#: src/plugin.py:7560
+#, python-format
+msgid "%s - Current value: %s"
+msgstr ""
+
+#: src/plugin.py:7692
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
@@ -1006,1508 +4022,100 @@ msgstr ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
 
-msgid "Global"
-msgstr "Global"
-
-msgid "Gradient"
-msgstr ""
-
-msgid "HDD"
-msgstr "HDD"
-
-msgid "IMAP"
-msgstr "IMAP"
-
-msgid "IMAP-SSL"
-msgstr "IMAP-SSL"
-
-msgid "IP seurity not supported by Box"
-msgstr ""
-
-msgid "Info"
-msgstr "Info"
-
-msgid "Informations"
-msgstr "Informations"
-
-msgid "Informations 2"
-msgstr ""
-
-msgid "Infos"
-msgstr "Infos"
-
-msgid "Internal Box-Skin-LCD"
-msgstr "Internal Box-Skin-LCD"
-
-msgid "Internal TFT-LCD 400x240"
-msgstr "Internal TFT-LCD 400x240"
-
-msgid "Internal Vu+ Duo2 LCD 400x240"
-msgstr "Internal Vu+ Duo2 LCD 400x240"
-
-msgid "JPG"
-msgstr ""
-
-msgid "January"
-msgstr ""
-
-msgid "Javascript"
-msgstr "Javascript"
-
-msgid "July"
-msgstr ""
-
-msgid "June"
-msgstr ""
-
-msgid "Key for Screen Change"
-msgstr "Key for Screen Change"
-
-msgid "Key for Screen On/Off"
-msgstr ""
-
-msgid "Knob"
-msgstr "Knob"
-
-msgid "Knob+Value"
-msgstr "Knob+Value"
-
-msgid "LCD 1"
-msgstr "LCD 1"
-
-msgid "LCD 1 Type"
-msgstr "LCD 1 Type"
-
-msgid "LCD 1+2"
-msgstr "LCD 1+2"
-
-msgid "LCD 1+2+3"
-msgstr "LCD 1+2+3"
-
-msgid "LCD 1+3"
-msgstr "LCD 1+3"
-
-msgid "LCD 1-3"
-msgstr ""
-
-msgid "LCD 2"
-msgstr "LCD 2"
-
-msgid "LCD 2 Type"
-msgstr "LCD 2 Type"
-
-msgid "LCD 2+3"
-msgstr "LCD 2+3"
-
-msgid "LCD 3"
-msgstr "LCD 3"
-
-msgid "LCD 3 Type"
-msgstr "LCD 3 Type"
-
-msgid "LCD Custom Height"
-msgstr "LCD Custom Height"
-
-msgid "LCD Custom Width"
-msgstr "LCD Custom Width"
-
-msgid "LCD Display"
-msgstr "LCD Display"
-
-msgid "LCD4linux Screen Switch"
-msgstr ""
-
-msgid "LCD4linux enabled"
-msgstr "LCD4linux enabled"
-
-msgid "Last Quarter"
-msgstr "Last Quarter"
-
-msgid "Load Active Config-File"
-msgstr "Load Active Config-File"
-
-msgid "Load Defaults"
-msgstr "Load Defaults"
-
-msgid "Load File : %s"
-msgstr "Load File : %s"
-
-msgid "Load@1min"
-msgstr "Load@1min"
-
-msgid "Load@5min"
-msgstr "Load@5min"
-
-msgid "Logfile extensive"
-msgstr "Logfile extensive"
-
-msgid "Logfile normal"
-msgstr "Logfile normal"
-
-msgid "Long FastBackwardKey"
-msgstr ""
-
-msgid "Long FastBackwardKey Type 2"
-msgstr ""
-
-msgid "Long FastForwardKey"
-msgstr "Long FastForwardKey"
-
-msgid "Long FastForwardKey Type 2"
-msgstr "Long FastForwardKey Type 2"
-
-msgid "Long InfoKey"
-msgstr ""
-
-msgid "MJPEG Boundary Mode"
-msgstr ""
-
-msgid "MJPEG Header Mode"
-msgstr ""
-
-msgid "MJPEG Stream"
-msgstr ""
-
-msgid "MJPEG Stream LCD 1 Port"
-msgstr ""
-
-msgid "MJPEG Stream LCD 1 enable"
-msgstr ""
-
-msgid "MJPEG Stream LCD 2 Port"
-msgstr ""
-
-msgid "MJPEG Stream LCD 2 enable"
-msgstr ""
-
-msgid "MJPEG Stream LCD 3 Port"
-msgstr ""
-
-msgid "MJPEG Stream LCD 3 enable"
-msgstr ""
-
-msgid "MSN"
-msgstr ""
-
-msgid "Mail"
-msgstr "Mail"
-
-msgid "Mail 1 Connect"
-msgstr "Mail 1 Connect"
-
-msgid "Mail 1 Password"
-msgstr "Mail 1 Password"
-
-msgid "Mail 1 Server"
-msgstr "Mail 1 Server"
-
-msgid "Mail 1 [Displayname:]Username"
-msgstr "Mail 1 [Displayname:]Username"
-
-msgid "Mail 2 Connect"
-msgstr "Mail 2 Connect"
-
-msgid "Mail 2 Password"
-msgstr "Mail 2 Password"
-
-msgid "Mail 2 Server"
-msgstr "Mail 2 Server"
-
-msgid "Mail 2 [Displayname:]Username"
-msgstr "Mail 2 [Displayname:]Username"
-
-msgid "Mail 3 Connect"
-msgstr "Mail 3 Connect"
-
-msgid "Mail 3 Password"
-msgstr "Mail 3 Password"
-
-msgid "Mail 3 Server"
-msgstr "Mail 3 Server"
-
-msgid "Mail 3 [Displayname:]Username"
-msgstr "Mail 3 [Displayname:]Username"
-
-msgid "Mail 4 Connect"
-msgstr "Mail 4 Connect"
-
-msgid "Mail 4 Password"
-msgstr "Mail 4 Password"
-
-msgid "Mail 4 Server"
-msgstr "Mail 4 Server"
-
-msgid "Mail 4 [Displayname:]Username"
-msgstr "Mail 4 [Displayname:]Username"
-
-msgid "Mail 5 Connect"
-msgstr "Mail 5 Connect"
-
-msgid "Mail 5 Password"
-msgstr "Mail 5 Password"
-
-msgid "Mail 5 Server"
-msgstr "Mail 5 Server"
-
-msgid "Mail 5 [Displayname:]Username"
-msgstr "Mail 5 [Displayname:]Username"
-
-msgid "Mail Hide Mailadress"
-msgstr ""
-
-msgid "Mail IMAP limit to last days"
-msgstr ""
-
-msgid "Mail Poll Interval"
-msgstr "Mail Poll Interval"
-
-msgid "Mail Show Date"
-msgstr ""
-
-msgid "Mail Show Empty Mailboxes"
-msgstr "Mail Show Empty Mailboxes"
-
-msgid "March"
-msgstr ""
-
-msgid "May"
-msgstr ""
-
-msgid "Media"
-msgstr "Media"
-
-msgid "Memory available"
-msgstr ""
-
-msgid "Memory free"
-msgstr ""
-
-msgid "Meteo URL"
-msgstr "Meteo URL"
-
-msgid "Meteo-Weather Station"
-msgstr "Meteo-Weather Station"
-
-msgid "Mini-EPG"
-msgstr "Mini-EPG"
-
-msgid "Module 1"
-msgstr ""
-
-msgid "Module 1+2"
-msgstr ""
-
-msgid "Module 1+2+3"
-msgstr ""
-
-msgid "Module 1+2+4"
-msgstr ""
-
-msgid "Module 1+3"
-msgstr ""
-
-msgid "Module 1+3+4"
-msgstr ""
-
-msgid "Module 1+4"
-msgstr ""
-
-msgid "Module 1-4"
-msgstr ""
-
-msgid "Module 1-5"
-msgstr ""
-
-msgid "Module 2"
-msgstr ""
-
-msgid "Module 2+3"
-msgstr ""
-
-msgid "Module 2+3+4"
-msgstr ""
-
-msgid "Module 2+4"
-msgstr ""
-
-msgid "Module 3"
-msgstr ""
-
-msgid "Module 3+4"
-msgstr ""
-
-msgid "Module 4"
-msgstr ""
-
-msgid "Module 5"
-msgstr ""
-
-msgid "Mon"
-msgstr ""
-
-msgid "Monday"
-msgstr ""
-
-msgid "Month"
-msgstr "Month"
-
-msgid "Month+Header"
-msgstr "Month+Header"
-
-msgid "Moon-Icon-Path [ok]>"
-msgstr "Moon-Icon-Path [ok]>"
-
-msgid "Moonphase"
-msgstr "Moonphase"
-
-msgid "N"
-msgstr ""
-
-msgid "NE"
-msgstr ""
-
-msgid "NNE"
-msgstr ""
-
-msgid "NNW"
-msgstr ""
-
-msgid "NW"
-msgstr ""
-
-msgid "Name"
-msgstr "Name"
-
-msgid "Netatmo"
-msgstr "Netatmo"
-
-msgid "Netatmo 2"
-msgstr ""
-
-msgid "Netatmo CO2 Indicator"
-msgstr "Netatmo CO2 Indicator"
-
-msgid "Netatmo CO2 Max Range"
-msgstr "Netatmo CO2 Max Range"
-
-msgid "Netatmo CO2 Min Range"
-msgstr "Netatmo CO2 Min Range"
-
-msgid "Netatmo Comfort Indicator"
-msgstr ""
-
-msgid "New Moon"
-msgstr "New Moon"
-
-msgid "Next Program Info"
-msgstr "Next Program Info"
-
-msgid "Next Timer Event"
-msgstr "Next Timer Event"
-
-msgid "No or wrong File selected, try a correct File first !"
-msgstr ""
-
-msgid "Normal"
-msgstr ""
-
-msgid "Normal (5s)"
-msgstr "Normal (5s)"
-
-msgid "November"
-msgstr ""
-
-msgid "Now/Next"
-msgstr ""
-
-msgid "OSCAM not running"
-msgstr "OSCAM not running"
-
-msgid "OSD"
-msgstr "OSD"
-
-msgid "OSD [display time]"
-msgstr "OSD [display time]"
-
-msgid "October"
-msgstr ""
-
-msgid "Offline"
-msgstr "Offline"
-
-msgid "On"
-msgstr "On"
-
-msgid "On+Media+Standby"
-msgstr "On+Media+Standby"
-
-msgid "Online"
-msgstr "Online"
-
-msgid "Online [Ping]"
-msgstr "Online [Ping]"
-
-msgid "Online+Offline"
-msgstr "Online+Offline"
-
-msgid "Only New"
-msgstr "Only New"
-
-msgid "OpenWeatherMap"
-msgstr ""
-
-msgid "PNG"
-msgstr ""
-
-msgid "Pearl (or compatible LCD) 240x320"
-msgstr "Pearl (or compatible LCD) 240x320"
-
-msgid "Pearl (or compatible LCD) 320x240"
-msgstr "Pearl (or compatible LCD) 320x240"
-
-msgid "Picon"
-msgstr "Picon"
-
-msgid "Picon 2"
-msgstr "Picon 2"
-
-msgid "Picon+Channel"
-msgstr ""
-
-msgid "Picon+Channel+Title"
-msgstr ""
-
-msgid "Picon+Position below"
-msgstr "Picon+Position below"
-
-msgid "Picon+Position left"
-msgstr "Picon+Position left"
-
-msgid "Picon+Position right"
-msgstr "Picon+Position right"
-
-msgid "Picture"
-msgstr "Picture"
-
-msgid "Picture Changing Time"
-msgstr "Picture Changing Time"
-
-msgid "Picture Directory Recursive"
-msgstr "Picture Directory Recursive"
-
-msgid "Picture Quality for Resizing"
-msgstr "Picture Quality for Resizing"
-
-msgid "Picture Quick Update Time [s]"
-msgstr "Picture Quick Update Time [s]"
-
-msgid "Picture Sort"
-msgstr "Picture Sort"
-
-msgid "Picture Type [only Picture]"
-msgstr ""
-
-msgid "Plug Tuner"
-msgstr ""
-
-msgid "Pop3"
-msgstr "Pop3"
-
-msgid "Pop3-SSL"
-msgstr "Pop3-SSL"
-
-msgid "Popup Text"
-msgstr "Popup Text"
-
-msgid "Popup-Text"
-msgstr "Popup-Text"
-
-msgid "Position"
-msgstr "Position"
-
-msgid "Program Info"
-msgstr "Program Info"
-
-msgid "Program Info 2"
-msgstr ""
-
-msgid "Program Name"
-msgstr "Program Name"
-
-msgid "Program Number"
-msgstr "Program Number"
-
-msgid "Progress Bar"
-msgstr "Progress Bar"
-
-msgid "Provider"
-msgstr "Provider"
-
-msgid "Radio"
-msgstr "Radio"
-
-msgid "Radio+Media"
-msgstr "Radio+Media"
-
-msgid "Recording"
-msgstr "Recording"
-
-msgid "Recording Picture [ok]>"
-msgstr ""
-
-msgid "Rectangle 1"
-msgstr "Rectangle 1"
-
-msgid "Rectangle 2"
-msgstr "Rectangle 2"
-
-msgid "Reload"
-msgstr "Reload"
-
-msgid "Remote Box"
-msgstr ""
-
-msgid "Remote Box 1 [Displayname:]IP/Name"
-msgstr ""
-
-msgid "Remote Box 2 [Displayname:]IP/Name"
-msgstr ""
-
-msgid "Remote Box 3 [Displayname:]IP/Name"
-msgstr ""
-
-msgid "Remote Box 4 [Displayname:]IP/Name"
-msgstr ""
-
-msgid "Remote Box 5 [Displayname:]IP/Name"
-msgstr ""
-
-msgid "Remote Box Poll every Minutes"
-msgstr ""
-
-msgid "Restart Displays"
-msgstr "Restart Displays"
-
+#: src/plugin.py:7693
 msgid "Restart GUI now?"
 msgstr "Restart GUI now?"
 
-msgid "Restore Config"
+#: src/plugin.py:8199
+msgid "Outdoor"
 msgstr ""
 
-msgid "S"
+#: src/plugin.py:8199
+msgid "Wind"
 msgstr ""
 
-msgid "SE"
+#: src/plugin.py:8199
+msgid "Rain"
 msgstr ""
 
-msgid "SSE"
+#: src/plugin.py:8199
+msgid "Indoor"
 msgstr ""
 
-msgid "SSW"
-msgstr ""
-
-msgid "SW"
-msgstr ""
-
-msgid "Samsung SPF-105P 1024x600"
-msgstr "Samsung SPF-105P 1024x600"
-
-msgid "Samsung SPF-107H 1024x600"
-msgstr "Samsung SPF-107H 1024x600"
-
-msgid "Samsung SPF-107H old 1024x600"
-msgstr "Samsung SPF-107H old 1024x600"
-
-msgid "Samsung SPF-700T 800x600"
-msgstr "Samsung SPF-700T 800x600"
-
-msgid "Samsung SPF-72H 800x480"
-msgstr "Samsung SPF-72H 800x480"
-
-msgid "Samsung SPF-75H/76H 800x480"
-msgstr "Samsung SPF-75H/76H 800x480"
-
-msgid "Samsung SPF-83H 800x600"
-msgstr "Samsung SPF-83H 800x600"
-
-msgid "Samsung SPF-85H/86H 800x600"
-msgstr "Samsung SPF-85H/86H 800x600"
-
-msgid "Samsung SPF-85P/86P 800x600"
-msgstr "Samsung SPF-85P/86P 800x600"
-
-msgid "Samsung SPF-87H 800x480"
-msgstr "Samsung SPF-87H 800x480"
-
-msgid "Samsung SPF-87H old 800x480"
-msgstr "Samsung SPF-87H old 800x480"
-
-msgid "Sat"
-msgstr ""
-
-msgid "Satellite"
-msgstr "Satellite"
-
-msgid "Saturday"
-msgstr ""
-
-msgid "Save"
-msgstr "Save"
-
-msgid "Save Config"
-msgstr ""
-
-msgid "Save Config to File... (%s)"
-msgstr "Save Config to File... (%s)"
-
-msgid "Save as Picture for WebIF"
-msgstr "Save as Picture for WebIF"
-
-msgid "Screen"
-msgstr "Screen"
-
-msgid "Screen 1"
-msgstr "Screen 1"
-
-msgid "Screen 1 Changing Time"
-msgstr "Screen 1 Changing Time"
-
-msgid "Screen 1+2"
-msgstr "Screen 1+2"
-
-msgid "Screen 1+2+3"
-msgstr "Screen 1+2+3"
-
-msgid "Screen 1+2+3+4"
-msgstr "Screen 1+2+3+4"
-
-msgid "Screen 1+2+4"
-msgstr "Screen 1+2+4"
-
-msgid "Screen 1+3"
-msgstr "Screen 1+3"
-
-msgid "Screen 1+3+4"
-msgstr "Screen 1+3+4"
-
-msgid "Screen 1+3+5+7+9"
-msgstr "Screen 1+3+5+7+9"
-
-msgid "Screen 1+4"
-msgstr "Screen 1+4"
-
-msgid "Screen 1-2"
-msgstr "Screen 1-2"
-
-msgid "Screen 1-3"
-msgstr "Screen 1-3"
-
-msgid "Screen 1-4"
-msgstr "Screen 1-4"
-
-msgid "Screen 1-5"
-msgstr "Screen 1-5"
-
-msgid "Screen 1-6"
-msgstr "Screen 1-6"
-
-msgid "Screen 1-7"
-msgstr "Screen 1-7"
-
-msgid "Screen 1-8"
-msgstr "Screen 1-8"
-
-msgid "Screen 1-9"
-msgstr "Screen 1-9"
-
-msgid "Screen 2"
-msgstr "Screen 2"
-
-msgid "Screen 2+3"
-msgstr "Screen 2+3"
-
-msgid "Screen 2+3+4"
-msgstr "Screen 2+3+4"
-
-msgid "Screen 2+4"
-msgstr "Screen 2+4"
-
-msgid "Screen 2+4+6+8"
-msgstr "Screen 2+4+6+8"
-
-msgid "Screen 3"
-msgstr "Screen 3"
-
-msgid "Screen 3+4"
-msgstr "Screen 3+4"
-
-msgid "Screen 4"
-msgstr "Screen 4"
-
-msgid "Screen 5"
-msgstr "Screen 5"
-
-msgid "Screen 5-9"
-msgstr "Screen 5-9"
-
-msgid "Screen 6"
-msgstr "Screen 6"
-
-msgid "Screen 7"
-msgstr "Screen 7"
-
-msgid "Screen 8"
-msgstr "Screen 8"
-
-msgid "Screen 9"
-msgstr "Screen 9"
-
-msgid "Screen Switch Select - LCD"
-msgstr ""
-
-msgid "Screen Switch Select - Screen"
-msgstr ""
-
-msgid "Screens used for Changing"
-msgstr "Screens used for Changing"
-
-msgid "September"
-msgstr ""
-
-msgid "Service search first"
-msgstr ""
-
-msgid "Shadow Edges"
-msgstr ""
-
-msgid "Short"
-msgstr "Short"
-
-msgid "Short (Extended)"
-msgstr "Short (Extended)"
-
-msgid "Short+Extended"
-msgstr "Short+Extended"
-
-msgid "Show"
-msgstr "Show"
-
-msgid "Show 'no ....' Messages"
-msgstr ""
-
-msgid "Show Cover"
-msgstr "Show Cover"
-
-msgid "Show Crash Corner"
-msgstr "Show Crash Corner"
-
-msgid "Show Externals"
-msgstr ""
-
-msgid "Show HTTP Text"
-msgstr "Show HTTP Text"
-
-msgid "Show Picture"
-msgstr "Show Picture"
-
-msgid "Show Picture 2"
-msgstr "Show Picture 2"
-
-msgid "Show Picture 3"
-msgstr "Show Picture 3"
-
-msgid "Show Picture 4"
-msgstr "Show Picture 4"
-
-msgid "Show Textfile"
-msgstr "Show Textfile"
-
-msgid "Show Textfile 2"
-msgstr "Show Textfile 2"
-
-msgid "Show Textfile 3"
-msgstr "Show Textfile 3"
-
-msgid "Show ecm.info"
-msgstr "Show ecm.info"
-
-msgid "Show oscam.lcd"
-msgstr "Show oscam.lcd"
-
-msgid "Signal Quality Bar"
-msgstr "Signal Quality Bar"
-
-msgid "Standby"
-msgstr "Standby"
-
-msgid "Storage-Devices"
-msgstr "Storage-Devices"
-
-msgid "Storage-Devices: Force Read"
-msgstr "Storage-Devices: Force Read"
-
-msgid "Stutter TV"
-msgstr "Stutter TV"
-
-msgid "Sun"
-msgstr ""
-
-msgid "Sunday"
-msgstr ""
-
-msgid "Sunrise"
-msgstr "Sunrise"
-
-msgid "Switch FrameBuffer [if possible]"
-msgstr ""
-
-msgid "TV"
-msgstr "TV"
-
-msgid "TV+OSD"
-msgstr "TV+OSD"
-
-msgid "TV+Radio"
-msgstr "TV+Radio"
-
-msgid "TV+Radio+Media"
-msgstr "TV+Radio+Media"
-
-msgid "Temperature"
-msgstr "Temperature"
-
-msgid "Temperature+Co2"
-msgstr "Temperature+Co2"
-
-msgid "Temperature+Co2+Pressure"
-msgstr "Temperature+Co2+Pressure"
-
-msgid "Temperature+Humidity"
-msgstr ""
-
-msgid "Threads per LCD"
-msgstr "Threads per LCD"
-
-msgid "Thur"
-msgstr ""
-
-msgid "Thursday"
-msgstr ""
-
-msgid "Time"
-msgstr "Time"
-
-msgid "Time+Duration+Info"
-msgstr "Time+Duration+Info"
-
-msgid "Time+Info"
-msgstr "Time+Info"
-
-msgid "Time+Length+Info"
-msgstr "Time+Length+Info"
-
-msgid "Time+Weekday"
-msgstr "Time+Weekday"
-
-msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
-msgstr "Timing ! calc all Times to Time/5*2 in Fastmode"
-
-msgid "Title"
-msgstr "Title"
-
-msgid "Tue"
-msgstr ""
-
-msgid "Tuesday"
-msgstr ""
-
-msgid "Tuner Color"
-msgstr "Tuner Color"
-
-msgid "Tuner Color Active"
-msgstr "Tuner Color Active"
-
-msgid "Tuner Color On"
-msgstr "Tuner Color On"
-
-msgid "USB Tuner"
-msgstr ""
-
-msgid "Underline"
-msgstr "Underline"
-
-msgid "Underline 2"
-msgstr "Underline 2"
-
-msgid "Used Tuner"
-msgstr "Used Tuner"
-
-msgid "Volume"
-msgstr "Volume"
-
-msgid "W"
-msgstr ""
-
-msgid "WNW"
-msgstr ""
-
-msgid "WSW"
-msgstr ""
-
-msgid "WWW ApiKey from cloudconvert.org"
-msgstr ""
-
-msgid "WWW ApiKey from convertapi.com"
-msgstr ""
-
-msgid "WWW Converter"
-msgstr ""
-
-msgid "WWW Converter Poll Interval"
-msgstr "WWW Converter Poll Interval"
-
-msgid "WWW Converter Usage"
-msgstr ""
-
-msgid "WWW-Internet Converter"
-msgstr "WWW-Internet Converter"
-
-msgid "Waning Crescent"
-msgstr "Waning Crescent"
-
-msgid "Waning Gibbous"
-msgstr "Waning Gibbous"
-
+#: src/plugin.py:9777
+msgid "New Moon"
+msgstr "New Moon"
+
+#: src/plugin.py:9778
+msgid "First Quarter"
+msgstr "First Quarter"
+
+#: src/plugin.py:9779
 msgid "Waxing Crescent"
 msgstr "Waxing Crescent"
 
+#: src/plugin.py:9780
 msgid "Waxing Gibbous"
 msgstr "Waxing Gibbous"
 
-msgid "Weather"
-msgstr "Weather"
-
-msgid "Weather 2"
-msgstr "Weather 2"
-
-msgid "Weather API"
-msgstr ""
-
-msgid "Weather API-Key OpenWeatherMap"
-msgstr ""
-
-msgid "Weather City"
-msgstr "Weather City"
-
-msgid "Weather City 2"
-msgstr "Weather City 2"
-
-msgid "Weather Extra Infos"
-msgstr "Weather Extra Infos"
-
-msgid "Weather High Temperature Color"
-msgstr "Weather High Temperature Color"
-
-msgid "Weather Lines"
-msgstr "Weather Lines"
-
-msgid "Weather Low Temperature Color"
-msgstr "Weather Low Temperature Color"
-
-msgid "Weather Rain Chance"
-msgstr "Weather Rain Chance"
-
-msgid "Weather Transparency"
-msgstr "Weather Transparency"
-
-msgid "Weather Wind speed unit"
-msgstr ""
-
-msgid "Weather-Icon Zoom"
-msgstr "Weather-Icon Zoom"
-
-msgid "Weather-Icon-Path [ok]>"
-msgstr "Weather-Icon-Path [ok]>"
-
-msgid "WebIF"
-msgstr ""
-
-msgid "WebIF Design"
-msgstr ""
-
-msgid "WebIF IP Allow"
-msgstr ""
-
-msgid "WebIF IP Deny"
-msgstr ""
-
-msgid "WebIF Init Delay"
-msgstr "WebIF Init Delay"
-
-msgid "WebIF Refresh Type"
-msgstr "WebIF Refresh Type"
-
-msgid "WebIF Refresh [s]"
-msgstr "WebIF Refresh [s]"
-
-msgid "Wed"
-msgstr ""
-
-msgid "Wednesday"
-msgstr ""
-
-msgid "Week"
-msgstr "Week"
-
-msgid "Week+Header"
-msgstr "Week+Header"
-
-msgid "Weekday"
-msgstr ""
-
-msgid "all"
-msgstr ""
-
-msgid "alphabetic"
-msgstr "alphabetic"
-
-msgid "alternative Copy-Mode/DM800hd (24bit)"
-msgstr "alternative Copy-Mode/DM800hd (24bit)"
-
-msgid "always"
-msgstr "always"
-
-msgid "aquamarine"
-msgstr "aquamarine"
-
-msgid "better/slow"
-msgstr "better/slow"
-
-msgid "black"
-msgstr "black"
-
-msgid "blue"
-msgstr "blue"
-
-msgid "blueviolet"
-msgstr "blueviolet"
-
-msgid "brown"
-msgstr "brown"
-
-msgid "cache + adjustment (high quality, slow)"
-msgstr ""
-
-msgid "cache + adjustment (low quality, fast)"
-msgstr ""
-
-msgid "cadetblue"
-msgstr "cadetblue"
-
-msgid "center"
-msgstr "center"
-
-msgid "cloudconvert.org"
-msgstr ""
-
-msgid "convertapi.com"
-msgstr ""
-
-msgid "copy to Idle"
-msgstr "copy to Idle"
-
-msgid "copy to Media"
-msgstr "copy to Media"
-
-msgid "copy to On"
-msgstr "copy to On"
-
-msgid "cornflowerblue"
-msgstr "cornflowerblue"
-
-msgid "currently set : %s"
-msgstr "currently set : %s"
-
-msgid "cyan"
-msgstr "cyan"
-
-msgid "darkblue"
-msgstr "darkblue"
-
-msgid "darkgreen"
-msgstr "darkgreen"
-
-msgid "darkorange"
-msgstr "darkorange"
-
-msgid "darkorchid"
-msgstr "darkorchid"
-
-msgid "darkred"
-msgstr "darkred"
-
-msgid "db"
-msgstr "db"
-
-msgid "db + %"
-msgstr "db + %"
-
-msgid "db + % + BER"
-msgstr "db + % + BER"
-
-msgid "db + BER"
-msgstr "db + BER"
-
-msgid "deeppink"
-msgstr "deeppink"
-
-msgid "deleted"
-msgstr "deleted"
-
-msgid "disabled"
-msgstr "disabled"
-
-msgid "full Screen"
-msgstr "full Screen"
-
-msgid "gold"
-msgstr "gold"
-
-msgid "gray"
-msgstr "gray"
-
-msgid "green"
-msgstr "green"
-
-msgid "greenyellow"
-msgstr "greenyellow"
-
-msgid "half left"
-msgstr "half left"
-
-msgid "half right"
-msgstr "half right"
-
-msgid "horizontally"
-msgstr "horizontally"
-
-msgid "indianred"
-msgstr "indianred"
-
-msgid "indigo"
-msgstr "indigo"
-
-msgid "km/h"
-msgstr ""
-
-msgid "lawngreen"
-msgstr "lawngreen"
-
-msgid "left"
-msgstr "left"
-
-msgid "lightblue"
-msgstr "lightblue"
-
-msgid "lightgreen"
-msgstr "lightgreen"
-
-msgid "lime"
-msgstr "lime"
-
-msgid "low/fast (Picture only)"
-msgstr "low/fast (Picture only)"
-
-msgid "low/fast (all)"
-msgstr "low/fast (all)"
-
-msgid "m/s"
-msgstr ""
-
-msgid "magenta"
-msgstr "magenta"
-
-msgid "moccasin"
-msgstr "moccasin"
-
-msgid "no"
-msgstr "no"
-
-msgid "no Calendar"
-msgstr "no Calendar"
-
-msgid "no Calls"
-msgstr ""
-
-msgid "no Dates"
-msgstr "no Dates"
-
-msgid "no Icon"
-msgstr ""
-
-msgid "no Icon, with Targetnumber"
-msgstr ""
-
-msgid "no LCD1 Picture-File"
-msgstr "no LCD1 Picture-File"
-
-msgid "no LCD2 Picture-File"
-msgstr "no LCD2 Picture-File"
-
-msgid "no LCD3 Picture-File"
-msgstr "no LCD3 Picture-File"
-
-msgid "no Netatmo-Plugin installed"
-msgstr "no Netatmo-Plugin installed"
-
+#: src/plugin.py:9781
+msgid "Full Moon"
+msgstr "Full Moon"
+
+#: src/plugin.py:9782
+msgid "Waning Gibbous"
+msgstr "Waning Gibbous"
+
+#: src/plugin.py:9783
+msgid "Waning Crescent"
+msgstr "Waning Crescent"
+
+#: src/plugin.py:9784
+msgid "Last Quarter"
+msgstr "Last Quarter"
+
+#: src/plugin.py:10988
+#, fuzzy
+#| msgid "Picture Sort"
+msgid "Picture not available"
+msgstr "Picture Sort"
+
+#: src/plugin.py:11133 src/plugin.py:11134
 msgid "no Timer"
 msgstr "no Timer"
 
-msgid "no cache + no adjustment"
+#: src/plugin.py:12332 src/plugin.py:12334
+msgid "OSCAM not running"
+msgstr "OSCAM not running"
+
+#: src/plugin.py:12663
+msgid "no Calls"
 msgstr ""
 
-msgid "no total Timer"
+#: src/plugin.py:12695
+#, python-format
+msgid "%d Mails  %d New  %s"
+msgstr "%d Mails  %d New  %s"
+
+#: src/plugin.py:12893
+msgid "no Netatmo-Plugin installed"
+msgstr "no Netatmo-Plugin installed"
+
+#: src/plugin.py:14497
+#, fuzzy
+#| msgid "LCD4linux enabled"
+msgid "LCD4linux"
+msgstr "LCD4linux enabled"
+
+#: src/plugin.py:14505 src/plugin.py:14506
+#, fuzzy
+#| msgid "LCD4linux enabled"
+msgid "LCD4Linux"
+msgstr "LCD4linux enabled"
+
+#: src/plugin.py:14510 src/plugin.py:14511
+msgid "LCD4linux Screen Switch"
 msgstr ""
-
-msgid "normal"
-msgstr ""
-
-msgid "normal (full)"
-msgstr "normal (full)"
-
-msgid "off"
-msgstr "off"
-
-msgid "olive"
-msgstr "olive"
-
-msgid "on"
-msgstr "on"
-
-msgid "one line"
-msgstr ""
-
-msgid "only Picture 1024x600"
-msgstr "only Picture 1024x600"
-
-msgid "only Picture 320x240"
-msgstr "only Picture 320x240"
-
-msgid "only Picture 800x480"
-msgstr "only Picture 800x480"
-
-msgid "only Picture 800x600"
-msgstr "only Picture 800x600"
-
-msgid "only Picture Custom Size"
-msgstr "only Picture Custom Size"
-
-msgid "only Progress Bar"
-msgstr "only Progress Bar"
-
-msgid "only use Timer"
-msgstr "only use Timer"
-
-msgid "orange"
-msgstr "orange"
-
-msgid "orangered"
-msgstr "orangered"
-
-msgid "other"
-msgstr "other"
-
-msgid "random"
-msgstr "random"
-
-msgid "red"
-msgstr "red"
-
-msgid "reduced"
-msgstr ""
-
-msgid "right"
-msgstr "right"
-
-msgid "rosybrown"
-msgstr "rosybrown"
-
-msgid "rpm"
-msgstr "rpm"
-
-msgid "rpm/2"
-msgstr ""
-
-msgid "sandybrown"
-msgstr "sandybrown"
-
-msgid "set Settings"
-msgstr "set Settings"
-
-msgid "show run"
-msgstr "show run"
-
-msgid "show run+sleep"
-msgstr "show run+sleep"
-
-msgid "show total Timer"
-msgstr ""
-
-msgid "silver"
-msgstr "silver"
-
-msgid "slategray"
-msgstr "slategray"
-
-msgid "stop Screencycle"
-msgstr ""
-
-msgid "tomato"
-msgstr "tomato"
-
-msgid "trimmed (black)"
-msgstr "trimmed (black)"
-
-msgid "trimmed (transparent)"
-msgstr "trimmed (transparent)"
-
-msgid "two lines"
-msgstr ""
-
-msgid "use lead-time"
-msgstr "use lead-time"
-
-msgid "vertically"
-msgstr "vertically"
-
-msgid "violet"
-msgstr "violet"
-
-msgid "white"
-msgstr "white"
-
-msgid "with Current 00:00"
-msgstr "with Current 00:00"
-
-msgid "with Current 00:00 (Size 1.5)"
-msgstr "with Current 00:00 (Size 1.5)"
-
-msgid "with Current 00:00 (Size 2)"
-msgstr "with Current 00:00 (Size 2)"
-
-msgid "with Current 00:00 (above)"
-msgstr "with Current 00:00 (above)"
-
-msgid "with Current 00:00 (above/Size 1.5)"
-msgstr "with Current 00:00 (above/Size 1.5)"
-
-msgid "with Current 00:00 (above/Size 2)"
-msgstr "with Current 00:00 (above/Size 2)"
-
-msgid "with Current 00:00 (below)"
-msgstr "with Current 00:00 (below)"
-
-msgid "with Current 00:00 (below/Size 1.5)"
-msgstr "with Current 00:00 (below/Size 1.5)"
-
-msgid "with Current 00:00 (below/Size 2)"
-msgstr "with Current 00:00 (below/Size 2)"
-
-msgid "with Icon"
-msgstr ""
-
-msgid "with Icon & Targetnumber"
-msgstr ""
-
-msgid "with Percent"
-msgstr "with Percent"
-
-msgid "with Percent (Size 1.5)"
-msgstr "with Percent (Size 1.5)"
-
-msgid "with Percent (Size 2)"
-msgstr "with Percent (Size 2)"
-
-msgid "with Percent (above)"
-msgstr "with Percent (above)"
-
-msgid "with Percent (above/Size 1.5)"
-msgstr "with Percent (above/Size 1.5)"
-
-msgid "with Percent (above/Size 2)"
-msgstr "with Percent (above/Size 2)"
-
-msgid "with Percent (below)"
-msgstr "with Percent (below)"
-
-msgid "with Percent (below/Size 1.5)"
-msgstr "with Percent (below/Size 1.5)"
-
-msgid "with Percent (below/Size 2)"
-msgstr "with Percent (below/Size 2)"
-
-msgid "with Percent Minutes / Total (above)"
-msgstr ""
-
-msgid "with Percent Minutes / Total (above/Size 1.5)"
-msgstr ""
-
-msgid "with Percent Minutes / Total (above/Size 2)"
-msgstr ""
-
-msgid "with Remaining Minutes"
-msgstr "with Remaining Minutes"
-
-msgid "with Remaining Minutes (Size 1.5)"
-msgstr "with Remaining Minutes (Size 1.5)"
-
-msgid "with Remaining Minutes (Size 2)"
-msgstr "with Remaining Minutes (Size 2)"
-
-msgid "with Remaining Minutes (above)"
-msgstr "with Remaining Minutes (above)"
-
-msgid "with Remaining Minutes (above/Size 1.5)"
-msgstr "with Remaining Minutes (above/Size 1.5)"
-
-msgid "with Remaining Minutes (above/Size 2)"
-msgstr "with Remaining Minutes (above/Size 2)"
-
-msgid "with Remaining Minutes (below)"
-msgstr "with Remaining Minutes (below)"
-
-msgid "with Remaining Minutes (below/Size 1.5)"
-msgstr "with Remaining Minutes (below/Size 1.5)"
-
-msgid "with Remaining Minutes (below/Size 2)"
-msgstr "with Remaining Minutes (below/Size 2)"
-
-msgid "yellow"
-msgstr "yellow"
-
-msgid "yes"
-msgstr "yes"
-
-msgid "yes (32bit)"
-msgstr "yes (32bit)"
-
-msgid "yes + %"
-msgstr "yes + %"
-
-msgid "yes +25%"
-msgstr "yes +25%"
-
-msgid "yes except records"
-msgstr "yes except records"
-
-msgid "yes, extended"
-msgstr "yes, extended"
-
-msgid "yes, long"
-msgstr "yes, long"
-
-msgid "yes, short"
-msgstr "yes, short"
 
 #~ msgid "- Current Day Color"
 #~ msgstr "- Current Day Color"
@@ -2533,14 +4141,8 @@ msgstr "yes, short"
 #~ msgid "Current value: %s"
 #~ msgstr "Current value: %s"
 
-#~ msgid "List of Storage Devices"
-#~ msgstr "List of Storage Devices"
-
 #~ msgid "Memory"
 #~ msgstr "Memory"
-
-#~ msgid "Parent Directory"
-#~ msgstr "Parent Directory"
 
 #~ msgid "Show Recording"
 #~ msgstr "Show Recording"
