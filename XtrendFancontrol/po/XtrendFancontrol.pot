@@ -6,179 +6,181 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-01 19:56+0200\n"
+"POT-Creation-Date: 2017-07-05 16:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: plugin.py:37
+#: src/plugin.py:37
 msgid " ver. 3.2"
 msgstr ""
 
-#: plugin.py:60 plugin.py:62
+#: src/plugin.py:60 src/plugin.py:62
 msgid "Fan - Off"
 msgstr ""
 
-#: plugin.py:60 plugin.py:62
+#: src/plugin.py:60 src/plugin.py:62
 msgid "Fan - On"
 msgstr ""
 
-#: plugin.py:60
+#: src/plugin.py:60
 msgid "Fan - Off in standby"
 msgstr ""
 
-#: plugin.py:60 plugin.py:62
+#: src/plugin.py:60 src/plugin.py:62
 msgid "Fan - Auto"
 msgstr ""
 
-#: plugin.py:61 plugin.py:62
+#: src/plugin.py:61 src/plugin.py:62
 msgid "None"
 msgstr ""
 
-#: plugin.py:61
+#: src/plugin.py:61
 msgid "HDD Sleeping"
 msgstr ""
 
-#: plugin.py:61
+#: src/plugin.py:61
 msgid "HDD Temperature"
 msgstr ""
 
-#: plugin.py:63
+#: src/plugin.py:63
 msgid "Off"
 msgstr ""
 
-#: plugin.py:63
+#: src/plugin.py:63
 msgid "On"
 msgstr ""
 
-#: plugin.py:107
+#: src/plugin.py:107
 msgid "Fan setup:"
 msgstr ""
 
-#: plugin.py:117
+#: src/plugin.py:117
 msgid "Power status"
 msgstr ""
 
-#: plugin.py:118 plugin.py:174 plugin.py:176 plugin.py:516
+#: src/plugin.py:118 src/plugin.py:174 src/plugin.py:176 src/plugin.py:516
 msgid "System temperature"
 msgstr ""
 
-#: plugin.py:119 plugin.py:180
+#: src/plugin.py:119 src/plugin.py:180 src/plugin.py:182
 msgid "Harddisk temperature"
 msgstr ""
 
-#: plugin.py:120
+#: src/plugin.py:120
 msgid "Save"
 msgstr ""
 
-#: plugin.py:121
+#: src/plugin.py:121
 msgid "Cancel"
 msgstr ""
 
-#: plugin.py:176 plugin.py:180
+#: src/plugin.py:176 src/plugin.py:180
 msgid "n.a."
 msgstr ""
 
-#: plugin.py:227
+#: src/plugin.py:227
 msgid "Fan mode"
 msgstr ""
 
-#: plugin.py:228
+#: src/plugin.py:228
 msgid "Switch Fan mode on time setting"
 msgstr ""
 
-#: plugin.py:229
+#: src/plugin.py:229
 msgid "Watch HDD state"
 msgstr ""
 
-#: plugin.py:230
+#: src/plugin.py:230
 msgid "Watch system temp"
 msgstr ""
 
-#: plugin.py:234
+#: src/plugin.py:234
 msgid "All"
 msgstr ""
 
-#: plugin.py:237
+#: src/plugin.py:237
 msgid "Select internal HDD device"
 msgstr ""
 
-#: plugin.py:245
+#: src/plugin.py:245
 msgid "Start time"
 msgstr ""
 
-#: plugin.py:246
+#: src/plugin.py:246
 msgid "End time"
 msgstr ""
 
-#: plugin.py:252
+#: src/plugin.py:252
 msgid "Switch ON mode on HDD max.temp. (0 - disable)"
 msgstr ""
 
-#: plugin.py:254
+#: src/plugin.py:254
 msgid "Switch OFF mode on HDD sleep"
 msgstr ""
 
-#: plugin.py:255
+#: src/plugin.py:255
 msgid "Show temp. HDD to extensions menu"
 msgstr ""
 
-#: plugin.py:257
+#: src/plugin.py:257
 msgid "Initial fan speed"
 msgstr ""
 
-#: plugin.py:261
+#: src/plugin.py:261
 msgid "Switch ON on system temp"
 msgstr ""
 
-#: plugin.py:311
+#: src/plugin.py:311
 msgid ""
 "You may not use this mode!\n"
 "Not found an internal hard drive!"
 msgstr ""
 
-#: plugin.py:316
+#: src/plugin.py:316
 msgid ""
 "Start time OFF mode equal End time OFF mode\n"
 "You may not use this time settings!"
 msgstr ""
 
-#: plugin.py:322
+#: src/plugin.py:322
 msgid ""
 "Harddisk standby after - no standby\n"
 "You may not use this mode!"
 msgstr ""
 
-#: plugin.py:502 plugin.py:530 plugin.py:534
+#: src/plugin.py:502 src/plugin.py:530 src/plugin.py:534
 msgid "Fan Control"
 msgstr ""
 
-#: plugin.py:507
+#: src/plugin.py:507
 msgid "Harddisks:"
 msgstr ""
 
-#: plugin.py:509
+#: src/plugin.py:509
 msgid "No harddisk with temperature sensor found!"
 msgstr ""
 
-#: plugin.py:514
+#: src/plugin.py:514
 msgid "No system temperature sensor found!"
 msgstr ""
 
-#: plugin.py:530 plugin.py:534
+#: src/plugin.py:530 src/plugin.py:534
 msgid "switch Fan On/Off"
 msgstr ""
 
-#: plugin.py:531 plugin.py:535
+#: src/plugin.py:531 src/plugin.py:535
 msgid "Fan Setup"
 msgstr ""
 
-#: plugin.py:532
+#: src/plugin.py:532
 msgid "Show Temp"
 msgstr ""
