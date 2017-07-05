@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:16+0200\n"
-"PO-Revision-Date: 2016-05-07 13:16+0200\n"
+"POT-Creation-Date: 2017-07-05 15:20+0200\n"
+"PO-Revision-Date: 2017-07-05 15:20+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: gerrit <fy@li.org>\n"
 "Language: fy\n"
@@ -16,50 +16,70 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.0.2\n"
 
-#: ../src/plugin.py:24
+#: ../src/plugin.py:25
 msgid "Channelnumber in Standby off"
 msgstr ""
 
-#: ../src/plugin.py:24
+#: ../src/plugin.py:25
 msgid "Channelnumber in Standby Clock"
 msgstr ""
 
-#: ../src/plugin.py:24
+#: ../src/plugin.py:25
 msgid "Channelnumber/Clock in Standby Clock"
 msgstr ""
 
-#: ../src/plugin.py:24
+#: ../src/plugin.py:25
 msgid "Clock always"
 msgstr ""
 
-#: ../src/plugin.py:24
+#: ../src/plugin.py:25
 msgid "Always off"
 msgstr ""
 
-#: ../src/plugin.py:175 ../src/plugin.py:263 ../src/plugin.py:270
+#: ../src/plugin.py:26
+msgid "15 sec"
+msgstr ""
+
+#: ../src/plugin.py:26
+msgid "30 sec"
+msgstr ""
+
+#: ../src/plugin.py:26
+msgid "45 sec"
+msgstr ""
+
+#: ../src/plugin.py:26
+msgid "60 sec"
+msgstr ""
+
+#: ../src/plugin.py:188 ../src/plugin.py:272 ../src/plugin.py:279
 msgid "LED Display Setup"
 msgstr ""
 
 #
-#: ../src/plugin.py:185
+#: ../src/plugin.py:198
 msgid "Cancel"
 msgstr "Ôfbrekke"
 
 #
-#: ../src/plugin.py:186
+#: ../src/plugin.py:199
 msgid "Save"
 msgstr "Opslaan"
 
-#: ../src/plugin.py:187
+#: ../src/plugin.py:200
 msgid "Update Date/Time"
 msgstr ""
 
-#: ../src/plugin.py:200 ../src/plugin.py:214
+#: ../src/plugin.py:213 ../src/plugin.py:227
 msgid "Show on LED"
 msgstr ""
 
-#: ../src/plugin.py:202
+#: ../src/plugin.py:214
+msgid "Time to show Clock in Display"
+msgstr ""
+
+#: ../src/plugin.py:216
 msgid "Time mode"
 msgstr ""

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Blindscan\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:05+0200\n"
-"PO-Revision-Date: 2016-05-07 13:05+0200\n"
+"POT-Creation-Date: 2017-07-05 14:13+0200\n"
+"PO-Revision-Date: 2017-07-05 14:13+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: OpenSPA <openspa.info>\n"
 "Language: es\n"
@@ -12,168 +12,192 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.0.2\n"
 
-#: ../src/plugin.py:61
+#: ../src/plugin.py:62
 msgid "Blindscan"
 msgstr "Búsqueda ciega"
 
-#: ../src/plugin.py:113 ../src/plugin.py:125
+#: ../src/plugin.py:124 ../src/plugin.py:136
 msgid "Exit"
 msgstr "Salir"
 
-#: ../src/plugin.py:114
+#: ../src/plugin.py:125
 msgid "Scan"
 msgstr "Buscar"
 
-#: ../src/plugin.py:115
+#: ../src/plugin.py:126
 msgid "Press Green/OK to start the scan"
 msgstr "Pulse Verde/OK para iniciar la búsqueda"
 
-#: ../src/plugin.py:127
+#: ../src/plugin.py:138
 msgid "Please setup your tuner configuration."
 msgstr "Por favor configure las opciones del sintonizador"
 
-#: ../src/plugin.py:249
+#: ../src/plugin.py:262
 msgid "Sorry, this tuner is in use."
 msgstr "Este sintonizador está en uso"
 
-#: ../src/plugin.py:306
+#: ../src/plugin.py:322
 msgid "no"
 msgstr "No"
 
-#: ../src/plugin.py:307
+#: ../src/plugin.py:323
 msgid "up to 1 degree"
 msgstr "Hasta 1º"
 
-#: ../src/plugin.py:308
+#: ../src/plugin.py:324
 msgid "up to 2 degrees"
 msgstr "Hasta 2º"
 
-#: ../src/plugin.py:309
+#: ../src/plugin.py:325
 msgid "up to 3 degrees"
 msgstr "Hasta 3º"
 
-#: ../src/plugin.py:311
+#: ../src/plugin.py:327
 msgid "scan for channels"
 msgstr "Buscar canales"
 
-#: ../src/plugin.py:312
+#: ../src/plugin.py:328
 msgid "save to XML file"
 msgstr "Guardar en archivo XML"
 
-#: ../src/plugin.py:335 ../src/plugin.py:1150
+#: ../src/plugin.py:359 ../src/plugin.py:1228
 msgid "vertical and horizontal"
 msgstr "Vertical y Horizontal"
 
-#: ../src/plugin.py:336 ../src/plugin.py:707
+#: ../src/plugin.py:360 ../src/plugin.py:755
 msgid "vertical"
 msgstr "Vertical"
 
-#: ../src/plugin.py:337 ../src/plugin.py:705
+#: ../src/plugin.py:361 ../src/plugin.py:753
 msgid "horizontal"
 msgstr "Horizontal"
 
-#: ../src/plugin.py:338 ../src/plugin.py:1157
+#: ../src/plugin.py:362
 msgid "circular right and circular left"
 msgstr "Circular derecha y circular izquierda"
 
-#: ../src/plugin.py:339 ../src/plugin.py:696 ../src/plugin.py:703
+#: ../src/plugin.py:363 ../src/plugin.py:744 ../src/plugin.py:751
 msgid "circular right"
 msgstr "Circular dcha."
 
-#: ../src/plugin.py:340 ../src/plugin.py:698 ../src/plugin.py:701
+#: ../src/plugin.py:364 ../src/plugin.py:746 ../src/plugin.py:749
 msgid "circular left"
 msgstr "Circular izda."
 
-#: ../src/plugin.py:378
+#: ../src/plugin.py:402
 msgid ""
 "\n"
 "Second slot dual tuner may not be supported blind scan."
 msgstr ""
 
-#: ../src/plugin.py:380
+#: ../src/plugin.py:404
 msgid ""
 "\n"
 "You must use the power adapter."
 msgstr ""
 
-#: ../src/plugin.py:382
+#: ../src/plugin.py:406
 msgid "Tuner"
 msgstr "Sintonizador"
 
-#: ../src/plugin.py:382
+#: ../src/plugin.py:406
 msgid "Select a tuner that is configured for the satellite you wish to search"
 msgstr "Elija un sintonizador configurado para el satélite que quiera escanear"
 
-#: ../src/plugin.py:391
+#: ../src/plugin.py:415
 msgid "Satellite"
 msgstr "Satélite"
 
-#: ../src/plugin.py:391
+#: ../src/plugin.py:415
 msgid "Select the satellite you wish to search"
 msgstr "Seleccione el satélite que quiera escanear"
 
-#: ../src/plugin.py:395 ../src/plugin.py:398
+#: ../src/plugin.py:419 ../src/plugin.py:422 ../src/plugin.py:425
 msgid "Scan start frequency"
 msgstr "Frecuencia inicial de la búsqueda"
 
-#: ../src/plugin.py:395
+#: ../src/plugin.py:419
 msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
 msgstr ""
 "Las frecuencias deben estar comprendidas entre 3000 MHz y 4199 MHz (banda-C)"
 
-#: ../src/plugin.py:396 ../src/plugin.py:399
+#: ../src/plugin.py:420 ../src/plugin.py:423 ../src/plugin.py:426
 msgid "Scan stop frequency"
 msgstr "Frecuencia final de la búsqueda"
 
-#: ../src/plugin.py:396
+#: ../src/plugin.py:420
 msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
 msgstr ""
 "Las frecuencias deben estar comprendidas entre 3001 MHz y 4200 MHz (banda-C)"
 
-#: ../src/plugin.py:398
+#: ../src/plugin.py:422
+#, fuzzy
+#| msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
+msgid ""
+"Frequency values must be between 117000 MHz and 12749 MHz (Circular-band)"
+msgstr ""
+"Las frecuencias deben estar comprendidas entre 3000 MHz y 4199 MHz (banda-C)"
+
+#: ../src/plugin.py:423
+#, fuzzy
+#| msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
+msgid ""
+"Frequency values must be between 11701 MHz and 12750 MHz (Circular-band)"
+msgstr ""
+"Las frecuencias deben estar comprendidas entre 3001 MHz y 4200 MHz (banda-C)"
+
+#: ../src/plugin.py:425
 msgid "Frequency values must be between 10700 MHz and 12749 MHz"
 msgstr "Las frecuencias deben estar comprendidas entre 10700 MHz y 12749 MHz"
 
-#: ../src/plugin.py:399
+#: ../src/plugin.py:426
 msgid "Frequency values must be between 10701 MHz and 12750 MHz"
 msgstr "Las frecuencias deben estar comprendidas entre 10701 MHz y 12750 MHz"
 
-#: ../src/plugin.py:400
+#: ../src/plugin.py:428
+msgid "Scan Step in MHz(TBS5925)"
+msgstr ""
+
+#: ../src/plugin.py:428
+msgid "Smaller steps takes longer but scan is more thorough"
+msgstr ""
+
+#: ../src/plugin.py:429
 msgid "Polarisation"
 msgstr "Polarización"
 
-#: ../src/plugin.py:400
+#: ../src/plugin.py:429
 #, python-format
 msgid "The suggested polarisation for this satellite is \"%s\""
 msgstr "La polarización sugerida para este satélite es \"%s\""
 
-#: ../src/plugin.py:401
+#: ../src/plugin.py:430
 msgid "Scan start symbolrate"
 msgstr "Velocidad de símbolo inicial"
 
-#: ../src/plugin.py:401
+#: ../src/plugin.py:430
 msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
 msgstr ""
 "Los valores de velocidad de símbolo están en megasímbolos. Introduzca una "
 "cifra entre 1 y 44"
 
-#: ../src/plugin.py:402
+#: ../src/plugin.py:431
 msgid "Scan stop symbolrate"
 msgstr "Velocidad de símbolo final"
 
-#: ../src/plugin.py:402
+#: ../src/plugin.py:431
 msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
 msgstr ""
 "Los valores de velocidad de símbolo están en megasímbolos. Introduzca una "
 "cifra entre 2 y 45"
 
-#: ../src/plugin.py:403
+#: ../src/plugin.py:432
 msgid "Clear before scan"
 msgstr "Limpiar antes de buscar"
 
-#: ../src/plugin.py:403
+#: ../src/plugin.py:432
 msgid ""
 "If you select \"yes\" all channels on the satellite being search will be "
 "deleted before starting the current search"
@@ -181,11 +205,11 @@ msgstr ""
 "Si selecciona \"Si\", todos los canales del satélite a escanear serán "
 "borrados antes de empezar la búsqueda ciega"
 
-#: ../src/plugin.py:404
+#: ../src/plugin.py:433
 msgid "Only free scan"
 msgstr "Buscar sólo libres"
 
-#: ../src/plugin.py:404
+#: ../src/plugin.py:433
 msgid ""
 "If you select \"yes\" the scan will only save channels that are not "
 "encrypted; \"no\" will find encrypted and non-encrypted channels"
@@ -193,11 +217,11 @@ msgstr ""
 "Si selecciona \"Si\", la búsqueda sólo guardará los canales no encriptados; "
 "elegir \"No\" buscará canales encriptados y no encriptados"
 
-#: ../src/plugin.py:405
+#: ../src/plugin.py:434
 msgid "Only scan unknown transponders"
 msgstr "Buscar sólo transpondedores desconocidos"
 
-#: ../src/plugin.py:405
+#: ../src/plugin.py:434
 msgid ""
 "If you select \"yes\" the scan will only search transponders not listed in "
 "satellites.xml"
@@ -205,11 +229,11 @@ msgstr ""
 "Si selecciona \"Si\", sólo se buscarán transpondedores no incluidos en "
 "satellites.xml"
 
-#: ../src/plugin.py:406
+#: ../src/plugin.py:435
 msgid "Filter out adjacent satellites"
 msgstr "Filtrar satélites adyacentes"
 
-#: ../src/plugin.py:406
+#: ../src/plugin.py:435
 msgid ""
 "When a neighbouring satellite is very strong this avoids searching "
 "transponders known to be coming from the neighbouring satellite"
@@ -217,11 +241,11 @@ msgstr ""
 "Cuando un satélite cercano es muy potente, se evita buscar transpondedores "
 "procedentes de ese satélite"
 
-#: ../src/plugin.py:407
+#: ../src/plugin.py:436
 msgid "Search type"
 msgstr "Tipo de búsqueda"
 
-#: ../src/plugin.py:407
+#: ../src/plugin.py:436
 msgid ""
 "\"channel scan\" searches for channels and saves them to your receiver; both "
 "options do a transponder search and save the result in /tmp in an XML file "
@@ -231,16 +255,16 @@ msgstr ""
 "opciones buscan transpondedores y guardan el resultado en un archivo .XML "
 "en /tmp, con el mismo formato que satellites.xml"
 
-#: ../src/plugin.py:651
+#: ../src/plugin.py:699
 #, python-format
 msgid "Not found blind scan utility '%s'!"
 msgstr ""
 
-#: ../src/plugin.py:710
+#: ../src/plugin.py:760
 msgid "   Starting Sundtek hardware blind scan."
 msgstr ""
 
-#: ../src/plugin.py:712
+#: ../src/plugin.py:762
 #, python-format
 msgid ""
 "Current Status : %d/%d\n"
@@ -255,7 +279,7 @@ msgstr ""
 "   Rango de frecuencias: %d - %d MHz\n"
 "   Veloc. de símbolo: %d - %d MHz"
 
-#: ../src/plugin.py:714
+#: ../src/plugin.py:764
 msgid ""
 "Looking for available transponders.\n"
 "This will take a long time, please be patient."
@@ -263,7 +287,7 @@ msgstr ""
 "Buscando transpondedore disponibles.\n"
 "Esta búsqueda tardará en finalizar. Por favor, tenga paciencia."
 
-#: ../src/plugin.py:716
+#: ../src/plugin.py:766
 msgid ""
 "Looking for available transponders.\n"
 "This will take a short while."
@@ -271,12 +295,12 @@ msgstr ""
 "Buscando transpondedore disponibles.\n"
 "Esta búsqueda no tardará en finalizar"
 
-#: ../src/plugin.py:889
+#: ../src/plugin.py:956
 #, python-format
-msgid "%d transponders found at %d:%02d min"
+msgid "Step %d %d:%02d min"
 msgstr ""
 
-#: ../src/plugin.py:949
+#: ../src/plugin.py:1016
 #, python-format
 msgid ""
 "Search completed. %d transponders found.\n"
@@ -289,7 +313,7 @@ msgstr ""
 "Datos guardados en:\n"
 "%s"
 
-#: ../src/plugin.py:952
+#: ../src/plugin.py:1019
 msgid ""
 "No new transponders found! \n"
 "\n"
@@ -301,22 +325,18 @@ msgstr ""
 "Sólo se han encontrado los transpondedores \n"
 "listados en satellites.xml para esos parámetros."
 
-#: ../src/plugin.py:956
+#: ../src/plugin.py:1023
 msgid "No transponders were found for those search parameters!"
 msgstr "No se han encontrado transpondedores con esos parámetros de búsqueda."
 
-#: ../src/plugin.py:958
+#: ../src/plugin.py:1025
 msgid "The blindscan run was cancelled by the user."
 msgstr "La búsqueda ciega ha sido cancelada por el usuario"
 
-#: ../src/plugin.py:1170
-msgid "circular right & circular left"
-msgstr ""
-
-#: ../src/plugin.py:1236 ../src/plugin.py:1244
+#: ../src/plugin.py:1368 ../src/plugin.py:1376
 msgid "Blind scan"
 msgstr "Búsqueda ciega"
 
-#: ../src/plugin.py:1244
+#: ../src/plugin.py:1376
 msgid "Scan satellites for new transponders"
 msgstr "Buscando transpondedores nuevos"

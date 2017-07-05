@@ -2,91 +2,91 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Blindscan\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:07+0200\n"
-"PO-Revision-Date: 2016-05-07 13:07+0200\n"
+"POT-Creation-Date: 2017-07-05 14:15+0200\n"
+"PO-Revision-Date: 2017-07-05 14:15+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../src/plugin.py:61
+#: ../src/plugin.py:62
 msgid "Blindscan"
 msgstr "Слепой поиск"
 
-#: ../src/plugin.py:113 ../src/plugin.py:125
+#: ../src/plugin.py:124 ../src/plugin.py:136
 msgid "Exit"
 msgstr "Выход"
 
-#: ../src/plugin.py:114
+#: ../src/plugin.py:125
 msgid "Scan"
 msgstr "Сканирование"
 
-#: ../src/plugin.py:115
+#: ../src/plugin.py:126
 msgid "Press Green/OK to start the scan"
 msgstr "Нажмите ОК/Зеленую для начала сканирования"
 
-#: ../src/plugin.py:127
+#: ../src/plugin.py:138
 msgid "Please setup your tuner configuration."
 msgstr "Пожалуйста, настройте конфигурацию Вашего тюнера(ов)."
 
-#: ../src/plugin.py:249
+#: ../src/plugin.py:262
 msgid "Sorry, this tuner is in use."
 msgstr "Извините, этот тюнер занят."
 
-#: ../src/plugin.py:306
+#: ../src/plugin.py:322
 msgid "no"
 msgstr "нет"
 
-#: ../src/plugin.py:307
+#: ../src/plugin.py:323
 msgid "up to 1 degree"
 msgstr "до 1 градуса"
 
-#: ../src/plugin.py:308
+#: ../src/plugin.py:324
 msgid "up to 2 degrees"
 msgstr "до 2 градусов"
 
-#: ../src/plugin.py:309
+#: ../src/plugin.py:325
 msgid "up to 3 degrees"
 msgstr "до 3 градусов"
 
-#: ../src/plugin.py:311
+#: ../src/plugin.py:327
 msgid "scan for channels"
 msgstr "сканирование для каналов"
 
-#: ../src/plugin.py:312
+#: ../src/plugin.py:328
 msgid "save to XML file"
 msgstr "сохранить в XML файл"
 
-#: ../src/plugin.py:335 ../src/plugin.py:1150
+#: ../src/plugin.py:359 ../src/plugin.py:1228
 msgid "vertical and horizontal"
 msgstr "вертикальная и горизонтальная"
 
-#: ../src/plugin.py:336 ../src/plugin.py:707
+#: ../src/plugin.py:360 ../src/plugin.py:755
 msgid "vertical"
 msgstr "вертикальная"
 
-#: ../src/plugin.py:337 ../src/plugin.py:705
+#: ../src/plugin.py:361 ../src/plugin.py:753
 msgid "horizontal"
 msgstr "горизонтальная"
 
-#: ../src/plugin.py:338 ../src/plugin.py:1157
+#: ../src/plugin.py:362
 msgid "circular right and circular left"
 msgstr "круговая правая и круговая левая"
 
-#: ../src/plugin.py:339 ../src/plugin.py:696 ../src/plugin.py:703
+#: ../src/plugin.py:363 ../src/plugin.py:744 ../src/plugin.py:751
 msgid "circular right"
 msgstr "круговая правая"
 
-#: ../src/plugin.py:340 ../src/plugin.py:698 ../src/plugin.py:701
+#: ../src/plugin.py:364 ../src/plugin.py:746 ../src/plugin.py:749
 msgid "circular left"
 msgstr "круговая левая"
 
-#: ../src/plugin.py:378
+#: ../src/plugin.py:402
 msgid ""
 "\n"
 "Second slot dual tuner may not be supported blind scan."
@@ -94,7 +94,7 @@ msgstr ""
 "\n"
 "Второй слот двойного тюнера может быть не поддерживает слепой поиск."
 
-#: ../src/plugin.py:380
+#: ../src/plugin.py:404
 msgid ""
 "\n"
 "You must use the power adapter."
@@ -102,80 +102,102 @@ msgstr ""
 "\n"
 "Возможно надо использовать адаптер питания."
 
-#: ../src/plugin.py:382
+#: ../src/plugin.py:406
 msgid "Tuner"
 msgstr "Тюнер"
 
-#: ../src/plugin.py:382
+#: ../src/plugin.py:406
 msgid "Select a tuner that is configured for the satellite you wish to search"
 msgstr ""
 "Выберите тюнер, который настроен для спутника, на котором Вы хотите "
 "произвести поиск."
 
-#: ../src/plugin.py:391
+#: ../src/plugin.py:415
 msgid "Satellite"
 msgstr "Спутник"
 
-#: ../src/plugin.py:391
+#: ../src/plugin.py:415
 msgid "Select the satellite you wish to search"
 msgstr "Выбор необходимого спутника для поиска."
 
-#: ../src/plugin.py:395 ../src/plugin.py:398
+#: ../src/plugin.py:419 ../src/plugin.py:422 ../src/plugin.py:425
 msgid "Scan start frequency"
 msgstr "Начальная частота сканирования"
 
-#: ../src/plugin.py:395
+#: ../src/plugin.py:419
 msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
 msgstr "Значение частот должны быть между 3000 MHz and 4199 MHz (C-band)."
 
-#: ../src/plugin.py:396 ../src/plugin.py:399
+#: ../src/plugin.py:420 ../src/plugin.py:423 ../src/plugin.py:426
 msgid "Scan stop frequency"
 msgstr "Конечная частота сканирования"
 
-#: ../src/plugin.py:396
+#: ../src/plugin.py:420
 msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
 msgstr "Значение частот должны быть между 3001 MHz / 4200 MHz (C-band)."
 
-#: ../src/plugin.py:398
+#: ../src/plugin.py:422
+#, fuzzy
+#| msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
+msgid ""
+"Frequency values must be between 117000 MHz and 12749 MHz (Circular-band)"
+msgstr "Значение частот должны быть между 3000 MHz and 4199 MHz (C-band)."
+
+#: ../src/plugin.py:423
+#, fuzzy
+#| msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
+msgid ""
+"Frequency values must be between 11701 MHz and 12750 MHz (Circular-band)"
+msgstr "Значение частот должны быть между 3001 MHz / 4200 MHz (C-band)."
+
+#: ../src/plugin.py:425
 msgid "Frequency values must be between 10700 MHz and 12749 MHz"
 msgstr "Значение частот должны быть между 10700 MHz / 12749 MHz."
 
-#: ../src/plugin.py:399
+#: ../src/plugin.py:426
 msgid "Frequency values must be between 10701 MHz and 12750 MHz"
 msgstr "Значение частот должны быть между 10701 MHz / 12750 MHz."
 
-#: ../src/plugin.py:400
+#: ../src/plugin.py:428
+msgid "Scan Step in MHz(TBS5925)"
+msgstr ""
+
+#: ../src/plugin.py:428
+msgid "Smaller steps takes longer but scan is more thorough"
+msgstr ""
+
+#: ../src/plugin.py:429
 msgid "Polarisation"
 msgstr "Поляризация"
 
-#: ../src/plugin.py:400
+#: ../src/plugin.py:429
 #, python-format
 msgid "The suggested polarisation for this satellite is \"%s\""
 msgstr "Предлагаемая поляризация для этого спутника \"%s\""
 
-#: ../src/plugin.py:401
+#: ../src/plugin.py:430
 msgid "Scan start symbolrate"
 msgstr "Начальная символьная скорость"
 
-#: ../src/plugin.py:401
+#: ../src/plugin.py:430
 msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
 msgstr ""
 "Значения символьных скоростей в мега символах; введите значение от 1 до 44."
 
-#: ../src/plugin.py:402
+#: ../src/plugin.py:431
 msgid "Scan stop symbolrate"
 msgstr "Конечная символьная скорость"
 
-#: ../src/plugin.py:402
+#: ../src/plugin.py:431
 msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
 msgstr ""
 "Значения символьных скоростей в мега символах; введите значение от 2 до 45."
 
-#: ../src/plugin.py:403
+#: ../src/plugin.py:432
 msgid "Clear before scan"
 msgstr "Очистка перед сканированием"
 
-#: ../src/plugin.py:403
+#: ../src/plugin.py:432
 msgid ""
 "If you select \"yes\" all channels on the satellite being search will be "
 "deleted before starting the current search"
@@ -183,11 +205,11 @@ msgstr ""
 "Если Вы выберите \"да\", все каналы с найденных транспондеров спутника, "
 "будут удалены перед началом текущего сканирования."
 
-#: ../src/plugin.py:404
+#: ../src/plugin.py:433
 msgid "Only free scan"
 msgstr "Поиск только каналов без кодировки"
 
-#: ../src/plugin.py:404
+#: ../src/plugin.py:433
 msgid ""
 "If you select \"yes\" the scan will only save channels that are not "
 "encrypted; \"no\" will find encrypted and non-encrypted channels"
@@ -195,11 +217,11 @@ msgstr ""
 "Если Вы выберите \"да\", то будут сохранены только найденные каналы без "
 "кодировки; \"нет\" будет учитываться кодированные и некодированные каналы."
 
-#: ../src/plugin.py:405
+#: ../src/plugin.py:434
 msgid "Only scan unknown transponders"
 msgstr "Поиск только неизвестных транспондеров"
 
-#: ../src/plugin.py:405
+#: ../src/plugin.py:434
 msgid ""
 "If you select \"yes\" the scan will only search transponders not listed in "
 "satellites.xml"
@@ -207,11 +229,11 @@ msgstr ""
 "Если Вы выберите \"да\", то при сканировании будет учитыватся только "
 "транспондеры не указанные в файле satellites.xml."
 
-#: ../src/plugin.py:406
+#: ../src/plugin.py:435
 msgid "Filter out adjacent satellites"
 msgstr "Фильтр от соседних спутников"
 
-#: ../src/plugin.py:406
+#: ../src/plugin.py:435
 msgid ""
 "When a neighbouring satellite is very strong this avoids searching "
 "transponders known to be coming from the neighbouring satellite"
@@ -219,11 +241,11 @@ msgstr ""
 "Если уровень сигнала с соседнего спутника очень сильный, это позволяет "
 "избежать сканирования транспондеров с этого спутника."
 
-#: ../src/plugin.py:407
+#: ../src/plugin.py:436
 msgid "Search type"
 msgstr "Тип поиска"
 
-#: ../src/plugin.py:407
+#: ../src/plugin.py:436
 msgid ""
 "\"channel scan\" searches for channels and saves them to your receiver; both "
 "options do a transponder search and save the result in /tmp in an XML file "
@@ -233,16 +255,16 @@ msgstr ""
 "файлe; \"сохранить в XML файле\" только сохранение в XML файлe, в формате "
 "satellites.xml."
 
-#: ../src/plugin.py:651
+#: ../src/plugin.py:699
 #, python-format
 msgid "Not found blind scan utility '%s'!"
 msgstr "Не найдена утилита для слепого поиска '%s'!"
 
-#: ../src/plugin.py:710
+#: ../src/plugin.py:760
 msgid "   Starting Sundtek hardware blind scan."
 msgstr "   Sundtek: старт слепого поиска от производителя."
 
-#: ../src/plugin.py:712
+#: ../src/plugin.py:762
 #, python-format
 msgid ""
 "Current Status : %d/%d\n"
@@ -257,7 +279,7 @@ msgstr ""
 "   Частотный диапазон : %d - %d MHz\n"
 "   Скорость потока : %d - %d MHz"
 
-#: ../src/plugin.py:714
+#: ../src/plugin.py:764
 msgid ""
 "Looking for available transponders.\n"
 "This will take a long time, please be patient."
@@ -265,7 +287,7 @@ msgstr ""
 "Поиск доступных транспондеров.\n"
 "Это может занять довольно много времени, пожалуйста, будьте терпеливы."
 
-#: ../src/plugin.py:716
+#: ../src/plugin.py:766
 msgid ""
 "Looking for available transponders.\n"
 "This will take a short while."
@@ -273,12 +295,12 @@ msgstr ""
 "Поиск доступных транспондеров.\n"
 "Это займет немного времени, пожалуйста, будьте терпеливы."
 
-#: ../src/plugin.py:889
+#: ../src/plugin.py:956
 #, python-format
-msgid "%d transponders found at %d:%02d min"
-msgstr "%d транспондеров найдено за %d:%02d мин"
+msgid "Step %d %d:%02d min"
+msgstr "Шаг %d %d:%02d мин"
 
-#: ../src/plugin.py:949
+#: ../src/plugin.py:1016
 #, python-format
 msgid ""
 "Search completed. %d transponders found.\n"
@@ -291,7 +313,7 @@ msgstr ""
 "Подробности сохранены в:\n"
 "%s"
 
-#: ../src/plugin.py:952
+#: ../src/plugin.py:1019
 msgid ""
 "No new transponders found! \n"
 "\n"
@@ -303,26 +325,24 @@ msgstr ""
 "Только транспондеры, перечисленные в файле satellites.xml,\n"
 "были найдены для этих параметров поиска!"
 
-#: ../src/plugin.py:956
+#: ../src/plugin.py:1023
 msgid "No transponders were found for those search parameters!"
 msgstr "Нет найденных транспондеров, по этим параметрам поиска!"
 
-#: ../src/plugin.py:958
+#: ../src/plugin.py:1025
 msgid "The blindscan run was cancelled by the user."
 msgstr "Слепой поиск был отменен пользователем."
 
-#: ../src/plugin.py:1170
-msgid "circular right & circular left"
-msgstr "круговая правая & круговая левая"
-
-#: ../src/plugin.py:1236 ../src/plugin.py:1244
+#: ../src/plugin.py:1368 ../src/plugin.py:1376
 msgid "Blind scan"
 msgstr "Слепой поиск"
 
-#: ../src/plugin.py:1244
+#: ../src/plugin.py:1376
 msgid "Scan satellites for new transponders"
 msgstr "Сканирование спутников для новых транспондеров"
 
-msgid "Step %d %d:%02d min"
-msgstr "Шаг %d %d:%02d мин"
+#~ msgid "%d transponders found at %d:%02d min"
+#~ msgstr "%d транспондеров найдено за %d:%02d мин"
 
+#~ msgid "circular right & circular left"
+#~ msgstr "круговая правая & круговая левая"
