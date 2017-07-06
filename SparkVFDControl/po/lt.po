@@ -1,20 +1,19 @@
-# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the tuxbox-enigma package.
-# Automatically generated, 2005.
 msgid ""
 msgstr ""
-"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Project-Id-Version: vfdcontrol\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:02+0200\n"
-"PO-Revision-Date: 2016-05-07 14:02+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: \n"
-"Language: lt\n"
+"POT-Creation-Date: 2017-07-06 07:46+0300\n"
+"PO-Revision-Date: 2017-07-06 07:47+0300\n"
+"Language-Team: Vytenis P.\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.2\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: lt\n"
+"X-Poedit-SearchPath-0: ..\n"
 
 #: ../src/plugin.py:118
 msgid "Cancel"
@@ -22,36 +21,36 @@ msgstr "Atšaukti"
 
 #: ../src/plugin.py:131
 msgid "Enable led"
-msgstr ""
+msgstr "Įjungti LED"
 
 #: ../src/plugin.py:134
 msgid "Led state RUN"
-msgstr ""
+msgstr "LED būklė darbiniame režime"
 
 #: ../src/plugin.py:136
 msgid "Led state Record"
-msgstr ""
+msgstr "LED būklė įrašinėjant"
 
 #: ../src/plugin.py:135
 msgid "Led state Standby"
-msgstr ""
+msgstr "LED būklė budinčiame režime"
 
 #: ../src/plugin.py:119
 msgid "Save"
-msgstr "Saugoti"
+msgstr "Išsaugoti"
 
 #: ../src/plugin.py:140
 msgid "Show clock"
-msgstr ""
+msgstr "Rodyti laikrodį"
 
 #: ../src/plugin.py:142
 msgid "Time mode"
-msgstr ""
+msgstr "Laiko režimas"
 
 #: ../src/plugin.py:120
 msgid "Update Date/Time"
-msgstr ""
+msgstr "Atnaujinti datą ir laiką"
 
 #: ../src/plugin.py:218
 msgid "VFD_Giga"
-msgstr ""
+msgstr "VFD_Giga"
