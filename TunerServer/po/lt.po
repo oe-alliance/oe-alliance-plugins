@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TunerServer - oe-alliance\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2017-07-06 08:18+0300\n"
+"Language-Team: Vytenis P.\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.2\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: lt\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../src/plugin.py:47 ../src/plugin.py:176 ../src/plugin.py:184
+msgid "Tuner Server setup"
+msgstr "Nuotolinio imtuvo serverio sąranka"
+
+#: ../src/plugin.py:59
+msgid "Current Status:"
+msgstr "Būsena:"
+
+#: ../src/plugin.py:60
+msgid "Server Disabled"
+msgstr "Serveris išjungtas"
+
+#: ../src/plugin.py:61
+msgid "Server Enabled"
+msgstr "Serveris įjungtas"
+
+#: ../src/plugin.py:62
+msgid "Build Server"
+msgstr "Sukurti serverį"
+
+#: ../src/plugin.py:63
+msgid "Disable Server"
+msgstr "Išjungti serverį"
+
+#: ../src/plugin.py:64
+msgid "Close"
+msgstr "Uždaryti"
+
+#: ../src/plugin.py:83
+msgid ""
+"Your server is now building\n"
+"Please wait ..."
+msgstr ""
+"Vyksta serverio kūrimas\n"
+"Palaukite..."
+
+#: ../src/plugin.py:86
+msgid "Sorry, but you need to have a device mounted at '/media/hd'"
+msgstr "Atleiskite, į '/media/hd' turi būti pajungra laikmena"
+
+#: ../src/plugin.py:111
+msgid "Build Complete!"
+msgstr "Kūrimas baigtas."
+
+#: ../src/plugin.py:149
+msgid ""
+"Your server is now being deleted\n"
+"Please Wait ..."
+msgstr ""
+"Vyksta serverio šalinimas\n"
+"Palaukite..."
+
+#: ../src/plugin.py:152
+msgid "Tuner Server Disabled."
+msgstr "Imtuvo serveris išjungtas."
+
+#: ../src/plugin.py:153
+msgid "Info"
+msgstr "Informacija"
+
+#: ../src/plugin.py:155
+msgid "Server now disabled!"
+msgstr "Serveris išjungtas!"
+
+#: ../src/plugin.py:184 ../src/plugin.py:186
+msgid "Allow Streaming From Box Tuners"
+msgstr "Vaizdo transliacija iš nuotolinių imtuvų"
+
+#: ../src/plugin.py:186
+msgid "Tuner Server"
+msgstr "Imtuvo serveris"
