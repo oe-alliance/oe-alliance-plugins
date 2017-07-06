@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SparkUnionTunerType\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: Vytenis P.\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
+"X-Poedit-Basepath: ..\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: lt\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: src/plugin.py:20
+msgid "Spark7162 select tuner mode"
+msgstr "Pasirinkite Spark7162 imtuvo režimą"
+
+#: src/plugin.py:43
+msgid "terrestrial"
+msgstr "antžeminė"
+
+#: src/plugin.py:43
+msgid "cable"
+msgstr "kabelinė"
+
+#: src/plugin.py:45
+msgid "UnionTunerType"
+msgstr "Union imtuvo tipas"
+
+#: src/plugin.py:47
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#: src/plugin.py:48
+msgid "OK"
+msgstr "Gerai"
+
+#: src/plugin.py:63
+msgid ""
+"Are you sure to save the current configuration and reboot your receiver?\n"
+"\n"
+msgstr ""
+"Ar tikrai norite išsaugoti šią konfigūraciją ir paleisti aparatą iš naujo?\n"
+"\n"
+
+#: src/plugin.py:77 src/plugin.py:86
+msgid "UnionTunerType config"
+msgstr "Union imtuvo tipo konfigūravimas"
