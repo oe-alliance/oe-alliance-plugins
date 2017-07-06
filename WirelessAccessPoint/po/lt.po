@@ -1,0 +1,249 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WirelessAccessPoint - oe-alliance\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2017-07-06 08:47+0300\n"
+"Language-Team: Vytenis P.\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.2\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: lt\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../src/plugin.py:46
+msgid "disabled"
+msgstr "išjungta"
+
+#: ../src/plugin.py:46
+msgid "enabled"
+msgstr "įjungta"
+
+#: ../src/plugin.py:50
+msgid "WEP"
+msgstr "WEP"
+
+#: ../src/plugin.py:50 ../src/plugin.py:58
+msgid "WPA"
+msgstr "WPA"
+
+#: ../src/plugin.py:50 ../src/plugin.py:58
+msgid "WPA2"
+msgstr "WPA2"
+
+#: ../src/plugin.py:50 ../src/plugin.py:58
+msgid "WPA/WPA2"
+msgstr "WPA/WPA2"
+
+#: ../src/plugin.py:55
+msgid "Enable 64 bit (Input 10 hex keys)"
+msgstr "Įjungti 64 bitus (įvestis 10 Hex raktų)"
+
+#: ../src/plugin.py:55
+msgid "Enable 128 bit (Input 26 hex keys)"
+msgstr "Įjungti 128 bitus (įvestis 26 Hex raktai)"
+
+#: ../src/plugin.py:58
+msgid "not set"
+msgstr "nenustatyta"
+
+#: ../src/plugin.py:106
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#: ../src/plugin.py:107
+msgid "Ok"
+msgstr "Gerai"
+
+#: ../src/plugin.py:108 ../src/plugin.py:109
+msgid " "
+msgstr " "
+
+#: ../src/plugin.py:110
+msgid "Current settings (interface : br0)"
+msgstr "Dabartiniai parametrai (sąsaja: br0)"
+
+#: ../src/plugin.py:111 ../src/plugin.py:290
+msgid "IP Address"
+msgstr "IP adresas"
+
+#: ../src/plugin.py:112
+msgid "Netmask"
+msgstr "Potinklio kaukė"
+
+#: ../src/plugin.py:113 ../src/plugin.py:292
+msgid "Gateway"
+msgstr "Šliuzas"
+
+#: ../src/plugin.py:114 ../src/plugin.py:115 ../src/plugin.py:116
+msgid "N/A"
+msgstr "N/D"
+
+#: ../src/plugin.py:270
+msgid "Use AP Mode"
+msgstr "Naudoti prieigos taško režimu"
+
+#: ../src/plugin.py:271
+msgid "Setup Mode"
+msgstr "Sąrankos būdas"
+
+#: ../src/plugin.py:272
+msgid "AP Device"
+msgstr "Prieigos taškas"
+
+#: ../src/plugin.py:273
+msgid "AP Mode"
+msgstr "Prieigos taško režimas"
+
+#: ../src/plugin.py:274
+msgid "Channel (1~13)"
+msgstr "Kanalas (1~13)"
+
+#: ../src/plugin.py:275
+msgid "SSID (1~32 Characters)"
+msgstr "SSID (1~32 simbolių)"
+
+#: ../src/plugin.py:276
+msgid "Beacon (15~65535)"
+msgstr "Beacon (15~65535)"
+
+#: ../src/plugin.py:277
+msgid "RTS Threshold (0~2347)"
+msgstr "RTS riba (0 ~ 2347)"
+
+#: ../src/plugin.py:278
+msgid "FRAGM Threshold (256~2346)"
+msgstr "FRAGM riba (256~2346)"
+
+#: ../src/plugin.py:279
+msgid "Preamble"
+msgstr "Įžanga"
+
+#: ../src/plugin.py:280
+msgid "Ignore Broadcast SSID"
+msgstr "Ignoruoti transliacijos SSID"
+
+#: ../src/plugin.py:282
+msgid "Encrypt"
+msgstr "Šifruoti"
+
+#: ../src/plugin.py:283
+msgid "Method"
+msgstr "Metodas"
+
+#: ../src/plugin.py:284
+msgid "KeyType"
+msgstr "Rakto tipas"
+
+#: ../src/plugin.py:285
+msgid "WEP Key (HEX)"
+msgstr "WEP raktas (HEX)"
+
+#: ../src/plugin.py:286
+msgid "KEY (8~63 Characters)"
+msgstr "RAKTAS (8~63 simbolių)"
+
+#: ../src/plugin.py:287
+msgid "Group Rekey Interval"
+msgstr "Grupės rakto keitimo intervalas"
+
+#: ../src/plugin.py:289
+msgid "Use DHCP"
+msgstr "Naudoti DHCP"
+
+#: ../src/plugin.py:291
+msgid "NetMask"
+msgstr "Potinklio kaukė"
+
+#: ../src/plugin.py:293
+msgid "Nameserver"
+msgstr "Vardų serveris"
+
+#: ../src/plugin.py:420
+msgid "Please wait for AP Configuration....\n"
+msgstr "Palaukite, kol konfigūruojamas prieigos taškas...\n"
+
+#: ../src/plugin.py:431
+msgid ""
+"Invalid WEP key\n"
+"\n"
+msgstr ""
+"Neteisingas WEP raktas\n"
+"\n"
+
+#: ../src/plugin.py:436
+msgid ""
+"Invalid WPA key\n"
+"\n"
+msgstr ""
+"Neteisingas WPA raktas\n"
+"\n"
+
+#: ../src/plugin.py:457
+msgid "Invalid SSID\n"
+msgstr "Neteisingas SSID\n"
+
+#: ../src/plugin.py:460
+msgid "Invalid channel\n"
+msgstr "Neteisingas kanalas\n"
+
+#: ../src/plugin.py:463
+msgid "Invalid beacon\n"
+msgstr "Neteisingas beacon\n"
+
+#: ../src/plugin.py:466
+msgid "Invalid RTS Threshold\n"
+msgstr "Neteisinga RTS riba\n"
+
+#: ../src/plugin.py:469
+msgid "Invalid Fragm Threshold\n"
+msgstr "Neteisinga fragmentacijos riba\n"
+
+#: ../src/plugin.py:472
+msgid "Invalid wpagrouprekey\n"
+msgstr "Neteisingas WPA grupės raktas\n"
+
+#: ../src/plugin.py:552
+msgid "Configuration your AP is finished"
+msgstr "Prieigos taško konfigūravimas baigtas"
+
+#: ../src/plugin.py:692
+msgid "Realtek"
+msgstr "Realtek"
+
+#: ../src/plugin.py:692 ../src/plugin.py:694 ../src/plugin.py:696
+#: ../src/plugin.py:698 ../src/plugin.py:700
+msgid "WLAN adapter."
+msgstr "Belaidžio tinklo modulis."
+
+#: ../src/plugin.py:694
+msgid "Atheros"
+msgstr "Atheros"
+
+#: ../src/plugin.py:696
+msgid "Zydas"
+msgstr "ZyDAS"
+
+#: ../src/plugin.py:698 ../src/plugin.py:700
+msgid "Ralink"
+msgstr "Ralink"
+
+#: ../src/plugin.py:702
+msgid "WLAN adapter"
+msgstr "Belaidžio tinklo modulis"
+
+#: ../src/plugin.py:704 ../src/plugin.py:706
+msgid "Unknown network adapter"
+msgstr "Nežinomas tinklo modulis"
+
+#: ../src/plugin.py:854
+msgid "Wireless Access Point"
+msgstr "Belaidžių tinklų prieigos taškas"
+
+#: ../src/plugin.py:854
+msgid "Using a Wireless module as access point."
+msgstr "belaidžio tinklo modulio panaudojimas, kaip prieigos taško."
