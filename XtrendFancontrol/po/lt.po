@@ -1,186 +1,186 @@
-# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the tuxbox-enigma package.
-# Automatically generated, 2005.
 msgid ""
 msgstr ""
-"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Project-Id-Version: XtrendFancontrol - oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:25+0200\n"
-"PO-Revision-Date: 2016-05-07 14:25+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: \n"
-"Language: lt\n"
+"POT-Creation-Date: 2017-07-06 08:49+0300\n"
+"PO-Revision-Date: 2017-07-06 09:10+0300\n"
+"Language-Team: Vytenis P.\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.0.2\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: lt\n"
 
-#: ../src/plugin.py:37
+#: plugin.py:37
 msgid " ver. 3.2"
-msgstr ""
+msgstr " vers. 3.2"
 
-#: ../src/plugin.py:60 ../src/plugin.py:62
+#: plugin.py:60 plugin.py:62
 msgid "Fan - Off"
-msgstr ""
+msgstr "Aušintuvas išjungtas"
 
-#: ../src/plugin.py:60 ../src/plugin.py:62
+#: plugin.py:60 plugin.py:62
 msgid "Fan - On"
-msgstr ""
+msgstr "Aušintuvas įjungtas"
 
-#: ../src/plugin.py:60 ../src/plugin.py:62
+#: plugin.py:60
+msgid "Fan - Off in standby"
+msgstr "Budėjime aušintuvas išjungtas"
+
+#: plugin.py:60 plugin.py:62
 msgid "Fan - Auto"
-msgstr ""
+msgstr "Aušintuvas automatiškai"
 
-#: ../src/plugin.py:61 ../src/plugin.py:62
+#: plugin.py:61 plugin.py:62
 msgid "None"
-msgstr ""
+msgstr "Joks"
 
-#: ../src/plugin.py:61
+#: plugin.py:61
 msgid "HDD Sleeping"
-msgstr ""
+msgstr "HDD išjungimas"
 
-#: ../src/plugin.py:61
+#: plugin.py:61
 msgid "HDD Temperature"
-msgstr ""
+msgstr "HDD temperatūra"
 
-#: ../src/plugin.py:63
+#: plugin.py:63
 msgid "Off"
 msgstr "Išjungta"
 
-#: ../src/plugin.py:63
+#: plugin.py:63
 msgid "On"
 msgstr "Įjungta"
 
-#: ../src/plugin.py:107
+#: plugin.py:107
 msgid "Fan setup:"
-msgstr ""
+msgstr "Aušintuvo sąranka:"
 
-#: ../src/plugin.py:117
+#: plugin.py:117
 msgid "Power status"
-msgstr ""
+msgstr "Įtampa"
 
-#: ../src/plugin.py:118 ../src/plugin.py:169 ../src/plugin.py:171
-#: ../src/plugin.py:499
+#: plugin.py:118 plugin.py:174 plugin.py:176 plugin.py:516
 msgid "System temperature"
-msgstr ""
+msgstr "Sistemos temperatūra"
 
-#: ../src/plugin.py:119 ../src/plugin.py:175 ../src/plugin.py:177
+#: plugin.py:119 plugin.py:180
 msgid "Harddisk temperature"
-msgstr ""
+msgstr "HDD temperatūra"
 
-#: ../src/plugin.py:120
+#: plugin.py:120
 msgid "Save"
-msgstr ""
+msgstr "Išsaugoti"
 
-#: ../src/plugin.py:121
+#: plugin.py:121
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: ../src/plugin.py:171 ../src/plugin.py:175
+#: plugin.py:176 plugin.py:180
 msgid "n.a."
-msgstr ""
+msgstr "N/D"
 
-#: ../src/plugin.py:222
+#: plugin.py:227
 msgid "Fan mode"
-msgstr ""
+msgstr "Aušintuvo režimas"
 
-#: ../src/plugin.py:223
+#: plugin.py:228
 msgid "Switch Fan mode on time setting"
-msgstr ""
+msgstr "Aušintuvo režimas, priklausomai nuo laiko"
 
-#: ../src/plugin.py:224
+#: plugin.py:229
 msgid "Watch HDD state"
-msgstr ""
+msgstr "HDD būklė"
 
-#: ../src/plugin.py:225
+#: plugin.py:230
 msgid "Watch system temp"
-msgstr ""
+msgstr "Sistemos temperatūra"
 
-#: ../src/plugin.py:229
+#: plugin.py:234
 msgid "All"
-msgstr ""
+msgstr "Visi"
 
-#: ../src/plugin.py:232
+#: plugin.py:237
 msgid "Select internal HDD device"
-msgstr ""
+msgstr "Pasirinkite vidinį HDD"
 
-#: ../src/plugin.py:240
+#: plugin.py:245
 msgid "Start time"
-msgstr ""
+msgstr "Pradžios laikas"
 
-#: ../src/plugin.py:241
+#: plugin.py:246
 msgid "End time"
-msgstr ""
+msgstr "Pabaigos laikas"
 
-#: ../src/plugin.py:247
+#: plugin.py:252
 msgid "Switch ON mode on HDD max.temp. (0 - disable)"
-msgstr ""
+msgstr "Įjungti, esant HDD temperatūrai (0 - išjungti)"
 
-#: ../src/plugin.py:249
+#: plugin.py:254
 msgid "Switch OFF mode on HDD sleep"
-msgstr ""
+msgstr "Išjungti, HDD miegant"
 
-#: ../src/plugin.py:250
+#: plugin.py:255
 msgid "Show temp. HDD to extensions menu"
-msgstr ""
+msgstr "Rodyti HDD temp. plėtinių naršyklėje"
 
-#: ../src/plugin.py:252
+#: plugin.py:257
 msgid "Initial fan speed"
-msgstr ""
+msgstr "Pradinis aušintuvo greitis"
 
-#: ../src/plugin.py:256
+#: plugin.py:261
 msgid "Switch ON on system temp"
-msgstr ""
+msgstr "Įjungti, esant sistemos temp."
 
-#: ../src/plugin.py:306
+#: plugin.py:311
 msgid ""
 "You may not use this mode!\n"
 "Not found an internal hard drive!"
 msgstr ""
+"Negalite naudoti šio režimo!\n"
+"Nerasta vidinio HDD!"
 
-#: ../src/plugin.py:311
+#: plugin.py:316
 msgid ""
 "Start time OFF mode equal End time OFF mode\n"
 "You may not use this time settings!"
 msgstr ""
+"Pradinis ir galutinis išjungto režimo laikai sutampa\n"
+"Jūs negalite naudoti šių laiko nustatymų!"
 
-#: ../src/plugin.py:317
+#: plugin.py:322
 msgid ""
 "Harddisk standby after - no standby\n"
 "You may not use this mode!"
 msgstr ""
+"HDD išjungimas - 'neišjungti'\n"
+"Jūs negalite naudoti šio režimo!"
 
-#: ../src/plugin.py:485 ../src/plugin.py:513 ../src/plugin.py:517
+#: plugin.py:502 plugin.py:530 plugin.py:534
 msgid "Fan Control"
-msgstr ""
+msgstr "Aušintuvo valdymas"
 
-#: ../src/plugin.py:490
+#: plugin.py:507
 msgid "Harddisks:"
-msgstr ""
+msgstr "HDD:"
 
-#: ../src/plugin.py:492
+#: plugin.py:509
 msgid "No harddisk with temperature sensor found!"
-msgstr ""
+msgstr "HDD su temperatūros davikliais nėra!"
 
-#: ../src/plugin.py:497
+#: plugin.py:514
 msgid "No system temperature sensor found!"
-msgstr ""
+msgstr "Sistemos temperatūros daviklių nėra!"
 
-#: ../src/plugin.py:513 ../src/plugin.py:517
+#: plugin.py:530 plugin.py:534
 msgid "switch Fan On/Off"
-msgstr ""
+msgstr "įjungti/išjungti aušintuvą"
 
-#: ../src/plugin.py:514 ../src/plugin.py:518
+#: plugin.py:531 plugin.py:535
 msgid "Fan Setup"
-msgstr ""
+msgstr "Aušintuvo sąranka"
 
-#: ../src/plugin.py:515
+#: plugin.py:532
 msgid "Show Temp"
-msgstr ""
-
-#~ msgid "Auto"
-#~ msgstr "Automatinis"
-
-#~ msgid "OK"
-#~ msgstr "Gerai"
+msgstr "Temperatūra"
