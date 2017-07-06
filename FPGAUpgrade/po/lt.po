@@ -1,32 +1,32 @@
-# Copyright (C) 2005 THE tuxbox-enigma'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the tuxbox-enigma package.
 # Automatically generated, 2005.
 msgid ""
 msgstr ""
-"Project-Id-Version: tuxbox-enigma 0.0.1\n"
+"Project-Id-Version: FPGAUpgrade\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:23+0200\n"
-"PO-Revision-Date: 2016-05-07 13:23+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2017-07-05 18:19+0300\n"
+"PO-Revision-Date: 2017-07-05 18:23+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P.\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.0.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../src/plugin.py:152
 msgid "Can't cancel during upgrade!!"
-msgstr ""
+msgstr "Atnaujinimo metu nutraukti negalima!"
 
 #: ../src/plugin.py:154
 msgid "Status : 0%"
-msgstr ""
+msgstr "Stovis: 0%"
 
 #: ../src/plugin.py:175
 msgid "Succeed"
-msgstr ""
+msgstr "Pavyko"
 
 #: ../src/plugin.py:189
 #, python-format
@@ -34,15 +34,17 @@ msgid ""
 "Error[%d] : %s.\n"
 "Press OK to exit."
 msgstr ""
+"Klaida [%d] : %s.\n"
+"Kad užverti, spauskite 'OK'."
 
 #: ../src/plugin.py:195
 #, python-format
 msgid "%d / 100"
-msgstr ""
+msgstr "%d / 100"
 
 #: ../src/plugin.py:232 ../src/plugin.py:401
 msgid "FPGA Upgrade"
-msgstr ""
+msgstr "FPGA atnaujinimas"
 
 #: ../src/plugin.py:234
 msgid "Close"
@@ -50,20 +52,20 @@ msgstr "Uždaryti"
 
 #: ../src/plugin.py:235
 msgid "Upgrade"
-msgstr ""
+msgstr "Atnaujinti"
 
 #: ../src/plugin.py:237
 msgid "Download"
-msgstr "Parsisiuntimas"
+msgstr "Parsiųsti"
 
 #: ../src/plugin.py:293
 msgid "Downloaded "
-msgstr ""
+msgstr "Parsiųsta "
 
 #: ../src/plugin.py:295
 msgid "Downloading..."
-msgstr ""
+msgstr "Parsiunčiama..."
 
 #: ../src/plugin.py:353
 msgid "File not found"
-msgstr ""
+msgstr "Failo nerasta"
