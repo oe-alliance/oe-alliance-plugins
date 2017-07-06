@@ -1,131 +1,135 @@
-# Lithuanian translations for enigma2-oe-alliance-plugins package.
-# Copyright (C) 2016 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
-# Automatically generated, 2016.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Project-Id-Version: TerrestrialScan oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-02 19:21+0200\n"
-"PO-Revision-Date: 2016-06-02 19:21+0200\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2017-07-06 08:05+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P.\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.0.2\n"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automatiškai"
 
 msgid "Band"
-msgstr ""
+msgstr "Diapazonas"
 
 msgid "Cannot free NIM because a recording is in progress"
-msgstr ""
+msgstr "Imtuvas užimtas, nes dabar vyksta įrašymas"
 
 msgid "Cannot get frontend"
-msgstr ""
+msgstr "Pirminė sąsaja neprieinama"
 
 msgid "Cannot get the NIM"
-msgstr ""
+msgstr "Imtuvas neprieinamas"
 
 msgid "Cannot retrieve Resource Manager instance"
-msgstr ""
+msgstr "Išteklių valdymas neprieinamas"
 
 msgid "Clear before scan"
-msgstr ""
+msgstr "Prieš paiešką išvalyti"
 
 msgid "Exit"
-msgstr ""
+msgstr "Uždaryti"
 
 #, python-format
 msgid "Found %d unique transponder"
 msgid_plural "Found %d unique transponders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Surastas %d naujas transponderis"
+msgstr[1] "Surasti %d nauji transponderiai"
+msgstr[2] "Surasta %d naujų transponderių"
 
 msgid ""
 "If you select \"yes\" all stored terrestrial channels will be deleted before "
 "starting the current search."
 msgstr ""
+"Jei pasirinksite 'taip', prieš pradedant šią paiešką, visi ankstesni "
+"išsaugoti antžeminiai kanalai bus panaikinti."
 
 msgid ""
 "If you select \"yes\" the scan will only save channels that are not "
 "encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr ""
+"Jei pasirinksite 'taip', bus išsaugoti tik atviri, nekoduoti kanalai; 'ne' "
+"išsaugos ir koduotus, ir nekoduotus kanalus."
 
 msgid ""
 "Most transmitters in European countries only have TV channels in the UHF "
 "band."
-msgstr ""
+msgstr "Dauguma Europos šalių siųstuvų turi tik UHF diapazono TV kanalus."
 
 msgid "Network ID"
-msgstr ""
+msgstr "Tinklo ID"
 
 msgid "No frequencies to search"
-msgstr ""
+msgstr "Nėra paieškos dažnių"
 
 msgid "No terrestrial tuner found"
-msgstr ""
+msgstr "Antžeminės TV imtuvų nerasta"
 
 msgid "No valid NIM found for terrestrial"
-msgstr ""
+msgstr "Nerasta tinkamų antžeminių imtuvų"
 
 msgid "Only free scan"
-msgstr ""
+msgstr "Ieškoti tik nekoduotų kanalų"
 
 #, python-format
 msgid "Reading channel %s"
-msgstr ""
+msgstr "Skaitomas kanalas %s"
 
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Ar tikrai uždaryti langą neišsaugant nuostatų?"
 
 msgid "Scan"
-msgstr ""
+msgstr "Paieška"
 
 #, python-format
 msgid "Scanning channel %s"
-msgstr ""
+msgstr "Ieškomas kanalas %s"
 
 msgid "Scanning for active transponders"
-msgstr ""
+msgstr "Ieškoma veikiančių transponderių"
 
 msgid ""
 "Select \"0\" to search all networks, or enter the network ID of the provider "
 "you wish to search."
 msgstr ""
+"Pasirinkite \"0\", kad ieškoti visuose tinkluose, arba įveskite teikėjo, "
+"kurio ieškosite, tinklo ID."
 
 msgid ""
 "Select a tuner that is configured for terrestrial scans. \"Automatic\" will "
 "pick the highest spec available tuner."
 msgstr ""
+"Pasirinkite imtuvą, sukonfigūruotą antžeminei paieškai. \"Automatiškai\" "
+"parinks aukščiausios reikšmės imtuvą."
 
 msgid "Selected tuner is not cofigured"
-msgstr ""
+msgstr "Pasirinktas imtuvas nesukonfigūruotas"
 
 msgid "Starting scanner"
-msgstr ""
+msgstr "Pradedama paieška"
 
 msgid "Starting search..."
-msgstr ""
+msgstr "Prasideda paieška..."
 
 msgid "Terrestrial Scan"
-msgstr ""
+msgstr "Antžeminės TV paieška"
 
 msgid "TerrestrialScan"
-msgstr ""
+msgstr "Antžeminės TV paieška"
 
 msgid "Tuner"
-msgstr ""
+msgstr "Imtuvas"
 
 msgid "UHF Europe"
-msgstr ""
+msgstr "UHF Europa"
 
 msgid "UHF/VHF Europe"
-msgstr ""
+msgstr "UHF/VHF Europa"
