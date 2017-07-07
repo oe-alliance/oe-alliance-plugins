@@ -5,7 +5,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 "Project-Id-Version: LCD4linux\n"
-"Language: lt\n"
+"Language: \n"
 
 #: MO.txt:265
 msgid "black"
