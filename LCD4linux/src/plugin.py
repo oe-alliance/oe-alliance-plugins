@@ -14,7 +14,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V4.8-r3"
+Version = "V4.9-r0"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -45,6 +45,13 @@ from PIL import ImageEnhance
 import colorsys
 import email
 from email.header import decode_header
+import ssl
+try:
+	_create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+	pass
+else:
+	ssl._create_default_https_context = _create_unverified_https_context
 import urlparse
 import urllib
 try:
@@ -118,7 +125,17 @@ try:
 except:
 	DPKG = False
 	from Components.Network import iNetwork
-
+try:
+	from enigma import iDVBFrontend
+	feCable = iDVBFrontend.feCable
+	feSatellite = iDVBFrontend.feSatellite
+	feTerrestrial = iDVBFrontend.feTerrestrial
+	feok = True
+except:
+	feCable = 2
+	feSatellite = 1
+	feTerrestrial = 4
+	feok = False
 try:
 	if os.path.exists("/dev/lcd2"):
 		from fcntl import ioctl
@@ -1056,6 +1073,7 @@ LCD4linux.NetAtmo2Color3 = ConfigSelection(choices = OffFarbe, default="0")
 LCD4linux.NetAtmo2Color4 = ConfigSelection(choices = OffFarbe, default="0")
 LCD4linux.NetAtmo2Color5 = ConfigSelection(choices = OffFarbe, default="0")
 LCD4linux.NetAtmo2Color6 = ConfigSelection(choices = OffFarbe, default="0")
+LCD4linux.NetAtmo2Color7 = ConfigSelection(choices = OffFarbe, default="0")
 LCD4linux.NetAtmo2Shadow = ConfigYesNo(default = False)
 LCD4linux.NetAtmo2Font = ConfigSelection(choices = FontType, default="0")
 LCD4linux.NetAtmoCO2 = ConfigSelection(choices = ScreenSelect, default="0")
@@ -1548,6 +1566,7 @@ LCD4linux.MPNetAtmo2Color3 = ConfigSelection(choices = OffFarbe, default="0")
 LCD4linux.MPNetAtmo2Color4 = ConfigSelection(choices = OffFarbe, default="0")
 LCD4linux.MPNetAtmo2Color5 = ConfigSelection(choices = OffFarbe, default="0")
 LCD4linux.MPNetAtmo2Color6 = ConfigSelection(choices = OffFarbe, default="0")
+LCD4linux.MPNetAtmo2Color7 = ConfigSelection(choices = OffFarbe, default="0")
 LCD4linux.MPNetAtmo2Shadow = ConfigYesNo(default = False)
 LCD4linux.MPNetAtmo2Font = ConfigSelection(choices = FontType, default="0")
 LCD4linux.MPNetAtmoCO2 = ConfigSelection(choices = ScreenSelect, default="0")
@@ -1994,6 +2013,7 @@ LCD4linux.StandbyNetAtmo2Color3 = ConfigSelection(choices = OffFarbe, default="0
 LCD4linux.StandbyNetAtmo2Color4 = ConfigSelection(choices = OffFarbe, default="0")
 LCD4linux.StandbyNetAtmo2Color5 = ConfigSelection(choices = OffFarbe, default="0")
 LCD4linux.StandbyNetAtmo2Color6 = ConfigSelection(choices = OffFarbe, default="0")
+LCD4linux.StandbyNetAtmo2Color7 = ConfigSelection(choices = OffFarbe, default="0")
 LCD4linux.StandbyNetAtmo2Shadow = ConfigYesNo(default = False)
 LCD4linux.StandbyNetAtmo2Font = ConfigSelection(choices = FontType, default="0")
 LCD4linux.StandbyNetAtmoCO2 = ConfigSelection(choices = ScreenSelect, default="0")
@@ -2717,7 +2737,6 @@ def find_dev(Anzahl, idVendor, idProduct):
 				gefunden = True
 	elif USBok == True:
 		try:
-#			if len([d for d in usb.core.find(idVendor=idVendor, idProduct=idProduct, find_all=True)]) >= Anzahl: # pyusb
 			if usb.core.find(idVendor=idVendor, idProduct=idProduct, find_all=1) is not None:
 				L4logE("usb.core find")
 				gefunden = True
@@ -2728,7 +2747,7 @@ def find_dev(Anzahl, idVendor, idProduct):
 	
 def find_dev2(idVendor, idProduct, idVendor2, idProduct2):
 	gefunden = False
-	if find_dev(2,idVendor, idProduct) or find_dev(2,idVendor2, idProduct2) or (find_dev(1,idVendor, idProduct) and find_dev(1,idVendor2, idProduct2)):
+	if len(list(usb.core.find(idVendor=idVendor, idProduct=idProduct, find_all=True))+list(usb.core.find(idVendor=idVendor2, idProduct=idProduct2, find_all=True))) >= 2:
 		gefunden = True
 	L4log("Vendor=%04x ProdID=%04x or Vendor=%04x ProdID=%04x" % (idVendor,idProduct,idVendor2,idProduct2), gefunden)
 	return gefunden
@@ -4589,7 +4608,9 @@ class L4LWorker(Thread):
 					L4log("Error: no ICS found",name)
 					return
 			except:
+				from traceback import format_exc
 				L4log("Error: ICS Open",name)
+				L4log("Error:",format_exc() )
 				return
 			if r is not None:
 				L4log("Read ICS",name)
@@ -5933,6 +5954,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list2.append(getConfigListEntry(_("- Color 3"), LCD4linux.NetAtmo2Color4))
 				self.list2.append(getConfigListEntry(_("- Color 4"), LCD4linux.NetAtmo2Color5))
 				self.list2.append(getConfigListEntry(_("- Color 5"), LCD4linux.NetAtmo2Color6))
+				self.list2.append(getConfigListEntry(_("- Color 6"), LCD4linux.NetAtmo2Color7))
 				self.list2.append(getConfigListEntry(_("- Shadow Edges"), LCD4linux.NetAtmo2Shadow))
 				self.list2.append(getConfigListEntry(_("- Font"), LCD4linux.NetAtmo2Font))
 			self.list2.append(getConfigListEntry(_("Netatmo CO2 Indicator"), LCD4linux.NetAtmoCO2))
@@ -6559,6 +6581,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list3.append(getConfigListEntry(_("- Color 3"), LCD4linux.MPNetAtmo2Color4))
 				self.list3.append(getConfigListEntry(_("- Color 4"), LCD4linux.MPNetAtmo2Color5))
 				self.list3.append(getConfigListEntry(_("- Color 5"), LCD4linux.MPNetAtmo2Color6))
+				self.list3.append(getConfigListEntry(_("- Color 6"), LCD4linux.MPNetAtmo2Color7))
 				self.list3.append(getConfigListEntry(_("- Shadow Edges"), LCD4linux.MPNetAtmo2Shadow))
 				self.list3.append(getConfigListEntry(_("- Font"), LCD4linux.MPNetAtmo2Font))
 			self.list3.append(getConfigListEntry(_("Netatmo CO2 Indicator"), LCD4linux.MPNetAtmoCO2))
@@ -7050,6 +7073,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list4.append(getConfigListEntry(_("- Color 3"), LCD4linux.StandbyNetAtmo2Color4))
 				self.list4.append(getConfigListEntry(_("- Color 4"), LCD4linux.StandbyNetAtmo2Color5))
 				self.list4.append(getConfigListEntry(_("- Color 5"), LCD4linux.StandbyNetAtmo2Color6))
+				self.list4.append(getConfigListEntry(_("- Color 6"), LCD4linux.StandbyNetAtmo2Color7))
 				self.list4.append(getConfigListEntry(_("- Shadow Edges"), LCD4linux.StandbyNetAtmo2Shadow))
 				self.list4.append(getConfigListEntry(_("- Font"), LCD4linux.StandbyNetAtmo2Font))
 			self.list4.append(getConfigListEntry(_("Netatmo CO2 Indicator"), LCD4linux.StandbyNetAtmoCO2))
@@ -8293,6 +8317,9 @@ class UpdateStatus(Screen):
 		global ScreenTime
 		global ThreadRunning
 		global FritzTime
+		global SamsungDevice
+		global SamsungDevice2
+		global SamsungDevice3
 		self.StatusTimer.stop()
 		if not LCD4linux.Enable.value or ThreadRunning > 0:
 			if ThreadRunning > 0:
@@ -8498,6 +8525,11 @@ class UpdateStatus(Screen):
 						DpfCheckSerial()
 				if LCD4linux.LCDType1.value[0] == "2" or LCD4linux.LCDType2.value[0] == "2" or LCD4linux.LCDType3.value[0] == "2":
 					if SamsungCheck():
+						SamsungDevice = None
+						SamsungDevice2 = None
+						SamsungDevice3 = None
+						rmFiles(PIC + "*.*")
+						L4log("reset all Samsung LCD!")
 						self.SamsungStart()
 				if strftime("%M") in LCD4linux.WwwTime.value:
 					getWWW()
@@ -8632,6 +8664,7 @@ class UpdateStatus(Screen):
 					if self.LsreftoString.startswith("1:"):
 						self.Lprovider = info.getInfoString(iServiceInformation.sProvider)
 						self.LtransponderData = info.getInfoObject(iServiceInformation.sTransponderData)
+					L4logE("self.Transponderdata2",self.LtransponderData)
 					self.LsVideoWidth = info.getInfo(iServiceInformation.sVideoWidth)
 					self.LsVideoHeight = info.getInfo(iServiceInformation.sVideoHeight)
 					self.LsIsCrypted = info.getInfo(iServiceInformation.sIsCrypted) 
@@ -11351,7 +11384,7 @@ def LCD4linuxPIC(self,session):
 			else:
 				ms = 1
 			font = ImageFont.truetype(ConfigFont, int(ConfigSize*ms)+8, encoding='unic') #5
-			if self.Lpath and ":0:" not in self.Lpath: # Movie
+			if self.Lpath and ":0:" not in self.Lpath and "//" not in self.Lpath: # Movie
 				isVideoPlaying = 1
 				if self.Llength is not None:
 					length = self.Llength
@@ -11667,7 +11700,7 @@ def LCD4linuxPIC(self,session):
 				return
 			if transponderData.has_key("tuner_type"):
 				orbital=""
-				if (transponderData["tuner_type"] == "DVB-S") or (transponderData["tuner_type"] == "DVB-S2") or (transponderData["tuner_type"] == 0):
+				if (transponderData["tuner_type"] == "DVB-S") or (transponderData["tuner_type"] == "DVB-S2") or (transponderData["tuner_type"] == feSatellite ):
 					orbital = transponderData["orbital_position"]
 					L4logE("Orbital",orbital)
 					orbital = int(orbital)
@@ -11694,9 +11727,10 @@ def LCD4linuxPIC(self,session):
 										SAT[position]=name
 										L4logE(position,name)
 						orbital = SAT.get(orbital,orbital)
+						L4logE("Orbital",orbital)
 				else:
 					if isinstance(transponderData["tuner_type"],int):
-						orbital = { 0 : 'DVB-S', 1 : 'DVB-C', 2 : 'DVB-T' }.get(transponderData["tuner_type"], "-")
+						orbital = { feCable : 'DVB-C', feSatellite : 'DVB-S', feTerrestrial : 'DVB-T' }.get(transponderData["tuner_type"], "-")
 					else:
 						orbital = transponderData["tuner_type"]
 					L4logE("Orbital2",orbital)
@@ -13811,7 +13845,7 @@ def LCD4linuxPIC(self,session):
 # Netatmo
 				Para = LCD4linux.StandbyNetAtmoPos.value,LCD4linux.StandbyNetAtmoSize.value,LCD4linux.StandbyNetAtmoAlign.value,LCD4linux.StandbyNetAtmoSplit.value,LCD4linux.StandbyNetAtmoStation.value,LCD4linux.StandbyNetAtmoModule.value,LCD4linux.StandbyNetAtmoModuleUser.value,LCD4linux.StandbyNetAtmoBasis.value,LCD4linux.StandbyNetAtmoName.value,LCD4linux.StandbyNetAtmoType.value,LCD4linux.StandbyNetAtmoType2.value,[LCD4linux.StandbyNetAtmoColor.value,LCD4linux.StandbyNetAtmoColor2.value,LCD4linux.StandbyNetAtmoColor3.value,LCD4linux.StandbyNetAtmoColor4.value,LCD4linux.StandbyNetAtmoColor5.value,LCD4linux.StandbyNetAtmoColor6.value,LCD4linux.StandbyNetAtmoColor7.value],LCD4linux.StandbyNetAtmoShadow.value,getFont(LCD4linux.StandbyNetAtmoFont.value)
 				Lput(LCD4linux.StandbyNetAtmoLCD.value,LCD4linux.StandbyNetAtmo.value,putNetatmo,Para)
-				Para = LCD4linux.StandbyNetAtmo2Pos.value,LCD4linux.StandbyNetAtmo2Size.value,LCD4linux.StandbyNetAtmo2Align.value,LCD4linux.StandbyNetAtmo2Split.value,LCD4linux.StandbyNetAtmo2Station.value,LCD4linux.StandbyNetAtmo2Module.value,LCD4linux.StandbyNetAtmo2ModuleUser.value,LCD4linux.StandbyNetAtmo2Basis.value,LCD4linux.StandbyNetAtmo2Name.value,LCD4linux.StandbyNetAtmo2Type.value,LCD4linux.StandbyNetAtmo2Type2.value,[LCD4linux.StandbyNetAtmo2Color.value,LCD4linux.StandbyNetAtmo2Color2.value,LCD4linux.StandbyNetAtmo2Color3.value,LCD4linux.StandbyNetAtmo2Color4.value,LCD4linux.StandbyNetAtmo2Color6.value],LCD4linux.StandbyNetAtmo2Shadow.value,getFont(LCD4linux.StandbyNetAtmo2Font.value)
+				Para = LCD4linux.StandbyNetAtmo2Pos.value,LCD4linux.StandbyNetAtmo2Size.value,LCD4linux.StandbyNetAtmo2Align.value,LCD4linux.StandbyNetAtmo2Split.value,LCD4linux.StandbyNetAtmo2Station.value,LCD4linux.StandbyNetAtmo2Module.value,LCD4linux.StandbyNetAtmo2ModuleUser.value,LCD4linux.StandbyNetAtmo2Basis.value,LCD4linux.StandbyNetAtmo2Name.value,LCD4linux.StandbyNetAtmo2Type.value,LCD4linux.StandbyNetAtmo2Type2.value,[LCD4linux.StandbyNetAtmo2Color.value,LCD4linux.StandbyNetAtmo2Color2.value,LCD4linux.StandbyNetAtmo2Color3.value,LCD4linux.StandbyNetAtmo2Color4.value,LCD4linux.StandbyNetAtmo2Color6.value,LCD4linux.StandbyNetAtmo2Color7.value],LCD4linux.StandbyNetAtmo2Shadow.value,getFont(LCD4linux.StandbyNetAtmo2Font.value)
 				Lput(LCD4linux.StandbyNetAtmo2LCD.value,LCD4linux.StandbyNetAtmo2.value,putNetatmo,Para)
 # Box 1
 				Para = LCD4linux.StandbyBox1x1.value,LCD4linux.StandbyBox1y1.value,LCD4linux.StandbyBox1x2.value,LCD4linux.StandbyBox1y2.value,LCD4linux.StandbyBox1Color.value,LCD4linux.StandbyBox1BackColor.value
@@ -13962,7 +13996,7 @@ def LCD4linuxPIC(self,session):
 # Netatmo
 			Para = LCD4linux.MPNetAtmoPos.value,LCD4linux.MPNetAtmoSize.value,LCD4linux.MPNetAtmoAlign.value,LCD4linux.MPNetAtmoSplit.value,LCD4linux.MPNetAtmoStation.value,LCD4linux.MPNetAtmoModule.value,LCD4linux.MPNetAtmoModuleUser.value,LCD4linux.MPNetAtmoBasis.value,LCD4linux.MPNetAtmoName.value,LCD4linux.MPNetAtmoType.value,LCD4linux.MPNetAtmoType2.value,[LCD4linux.MPNetAtmoColor.value,LCD4linux.MPNetAtmoColor2.value,LCD4linux.MPNetAtmoColor3.value,LCD4linux.MPNetAtmoColor4.value,LCD4linux.MPNetAtmoColor5.value,LCD4linux.MPNetAtmoColor6.value,LCD4linux.MPNetAtmoColor7.value],LCD4linux.MPNetAtmoShadow.value,getFont(LCD4linux.MPNetAtmoFont.value)
 			Lput(LCD4linux.MPNetAtmoLCD.value,LCD4linux.MPNetAtmo.value,putNetatmo,Para)
-			Para = LCD4linux.MPNetAtmo2Pos.value,LCD4linux.MPNetAtmo2Size.value,LCD4linux.MPNetAtmo2Align.value,LCD4linux.MPNetAtmo2Split.value,LCD4linux.MPNetAtmo2Station.value,LCD4linux.MPNetAtmo2Module.value,LCD4linux.MPNetAtmo2ModuleUser.value,LCD4linux.MPNetAtmo2Basis.value,LCD4linux.MPNetAtmo2Name.value,LCD4linux.MPNetAtmo2Type.value,LCD4linux.MPNetAtmo2Type2.value,[LCD4linux.MPNetAtmo2Color.value,LCD4linux.MPNetAtmo2Color2.value,LCD4linux.MPNetAtmo2Color3.value,LCD4linux.MPNetAtmo2Color4.value,LCD4linux.MPNetAtmo2Color5.value,LCD4linux.MPNetAtmo2Color6.value],LCD4linux.MPNetAtmo2Shadow.value,getFont(LCD4linux.MPNetAtmo2Font.value)
+			Para = LCD4linux.MPNetAtmo2Pos.value,LCD4linux.MPNetAtmo2Size.value,LCD4linux.MPNetAtmo2Align.value,LCD4linux.MPNetAtmo2Split.value,LCD4linux.MPNetAtmo2Station.value,LCD4linux.MPNetAtmo2Module.value,LCD4linux.MPNetAtmo2ModuleUser.value,LCD4linux.MPNetAtmo2Basis.value,LCD4linux.MPNetAtmo2Name.value,LCD4linux.MPNetAtmo2Type.value,LCD4linux.MPNetAtmo2Type2.value,[LCD4linux.MPNetAtmo2Color.value,LCD4linux.MPNetAtmo2Color2.value,LCD4linux.MPNetAtmo2Color3.value,LCD4linux.MPNetAtmo2Color4.value,LCD4linux.MPNetAtmo2Color5.value,LCD4linux.MPNetAtmo2Color6.value,LCD4linux.MPNetAtmo2Color7.value],LCD4linux.MPNetAtmo2Shadow.value,getFont(LCD4linux.MPNetAtmo2Font.value)
 			Lput(LCD4linux.MPNetAtmo2LCD.value,LCD4linux.MPNetAtmo2.value,putNetatmo,Para)
 # Meteo station
 			if wwwMeteo.find("current_conditions") > 1:
@@ -14164,7 +14198,7 @@ def LCD4linuxPIC(self,session):
 # Netatmo
 			Para = LCD4linux.NetAtmoPos.value,LCD4linux.NetAtmoSize.value,LCD4linux.NetAtmoAlign.value,LCD4linux.NetAtmoSplit.value,LCD4linux.NetAtmoStation.value,LCD4linux.NetAtmoModule.value,LCD4linux.NetAtmoModuleUser.value,LCD4linux.NetAtmoBasis.value,LCD4linux.NetAtmoName.value,LCD4linux.NetAtmoType.value,LCD4linux.NetAtmoType2.value,[LCD4linux.NetAtmoColor.value,LCD4linux.NetAtmoColor2.value,LCD4linux.NetAtmoColor3.value,LCD4linux.NetAtmoColor4.value,LCD4linux.NetAtmoColor5.value,LCD4linux.NetAtmoColor6.value,LCD4linux.NetAtmoColor7.value],LCD4linux.NetAtmoShadow.value,getFont(LCD4linux.NetAtmoFont.value)
 			Lput(LCD4linux.NetAtmoLCD.value,LCD4linux.NetAtmo.value,putNetatmo,Para)
-			Para = LCD4linux.NetAtmo2Pos.value,LCD4linux.NetAtmo2Size.value,LCD4linux.NetAtmo2Align.value,LCD4linux.NetAtmo2Split.value,LCD4linux.NetAtmo2Station.value,LCD4linux.NetAtmo2Module.value,LCD4linux.NetAtmo2ModuleUser.value,LCD4linux.NetAtmo2Basis.value,LCD4linux.NetAtmo2Name.value,LCD4linux.NetAtmo2Type.value,LCD4linux.NetAtmo2Type2.value,[LCD4linux.NetAtmo2Color.value,LCD4linux.NetAtmo2Color2.value,LCD4linux.NetAtmo2Color3.value,LCD4linux.NetAtmo2Color4.value,LCD4linux.NetAtmo2Color5.value,LCD4linux.NetAtmo2Color6.value],LCD4linux.NetAtmo2Shadow.value,getFont(LCD4linux.NetAtmo2Font.value)
+			Para = LCD4linux.NetAtmo2Pos.value,LCD4linux.NetAtmo2Size.value,LCD4linux.NetAtmo2Align.value,LCD4linux.NetAtmo2Split.value,LCD4linux.NetAtmo2Station.value,LCD4linux.NetAtmo2Module.value,LCD4linux.NetAtmo2ModuleUser.value,LCD4linux.NetAtmo2Basis.value,LCD4linux.NetAtmo2Name.value,LCD4linux.NetAtmo2Type.value,LCD4linux.NetAtmo2Type2.value,[LCD4linux.NetAtmo2Color.value,LCD4linux.NetAtmo2Color2.value,LCD4linux.NetAtmo2Color3.value,LCD4linux.NetAtmo2Color4.value,LCD4linux.NetAtmo2Color5.value,LCD4linux.NetAtmo2Color6.value,LCD4linux.NetAtmo2Color7.value],LCD4linux.NetAtmo2Shadow.value,getFont(LCD4linux.NetAtmo2Font.value)
 			Lput(LCD4linux.NetAtmo2LCD.value,LCD4linux.NetAtmo2.value,putNetatmo,Para)
 # Meteo station
 			if wwwMeteo.find("current_conditions") > 1:

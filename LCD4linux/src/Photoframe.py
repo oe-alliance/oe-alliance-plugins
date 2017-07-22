@@ -80,50 +80,46 @@ def get_known_devices():
 	return dList
      
 
-def find_device(Anzahl,device):
+def find_device(Anzahl,device,device2):
 	"""Try to find device on USB bus."""
 	try:
-		print "[LCD4linux] looking for frame",Anzahl, device['name'], device['idVendor'], device['idProduct']
+		print "[LCD4linux] looking for frame",Anzahl, device['name'], device['idVendor'], device['idProduct'], device2['idProduct']
 		if Anzahl == 2:
-			d = usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True)
+			d = list(usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True))+list(usb.core.find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True))
 			if isinstance(d,list):
-				if len(d) == 2:
+				if len(d) >= 2:
 					d = d[1]
 				else:
 					d = None
 			else:
 				d = None
 		else:
-			d = usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct']) 
+			d = list(list(usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True))+list(usb.core.find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True)))[0]
 	except:
+		from traceback import format_exc
 		print "[LCD4linux] find exception"
+		print "Error:",format_exc()
 		d = None
 	return d  
 
 def init_device(Anzahl,device0, device1):
 	"""First try Mini Monitor mode, then Mass storage mode"""
-	dev = find_device(Anzahl,device0)
+	dev = find_device(Anzahl,device0,device1)
 
 	if dev is not None:
 		## found it, trying to init it
-		print "[LCD4linux] Find frame device"
-		frame_init(dev)
-	else:
-		# not found device in Mini Monitor mode, trying to find it in Mass Storage mode
-		dev = find_device(Anzahl,device1)
-		if Anzahl == 2 and dev is None:
-			if find_device(1,device0) is not None:
-				print "[LCD4linux] Find 1 device in MiniMode, get 2. in MassMode"
-				dev = find_device(1,device1)
-		if dev is not None:
-			#found it in Mass Storage, trying to switch to Mini Monitor
+		print "[LCD4linux] Find frame device",dev
+		if dev.idProduct == device0["idProduct"]:
+			print "[LCD4linux] init Device"
+			frame_init(dev)
+		else:
 			print "[LCD4linux] Find frame device in Mass Storage Mode"
 			frame_switch(dev)
 			ts = time.time()
 			while True:
 				# may need to burn some time
-				dev = find_device(Anzahl,device0)
-				if dev is not None:
+				dev = find_device(Anzahl,device0,device1)
+				if dev is not None and dev.idProduct == device0["idProduct"]:
 					#switching successful
 					break
 				elif time.time() - ts > 3:
@@ -131,9 +127,9 @@ def init_device(Anzahl,device0, device1):
 					return None
 			frame_init(dev)
 			print "[LCD4linux] frame device switched to Mini Monitor"
-		else:
-			print "[LCD4linux] Could not find frame in either mode"
-			return None
+	else:
+		print "[LCD4linux] Could not find frame in either mode"
+		return None
 	return dev
 
 def frame_init(dev):
@@ -171,9 +167,12 @@ def frame_switch(dev):
 
 def name(dev):
 	try:
-		return usb.util.get_string(dev,256,2) 
+		return usb.util.get_string(dev,1) 
 	except:
-		return None
+		try:
+			return usb.util.get_string(dev,256,2) 
+		except:
+			return None
 
 def main():
 	global dev, known_devices_list
