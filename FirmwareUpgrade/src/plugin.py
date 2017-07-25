@@ -219,13 +219,6 @@ class VFDCtrlUpgradeCore() :
 
 	def doUpgrade(self):
 		firmware,device,firmwarename = None,None,None
-		print '[VFDCtrlUpgradeCore] checkvfd..'
-		cmd_t = "/usr/lib/enigma2/python/Plugins/SystemPlugins/FirmwareUpgrade/checkvfd %s"
-		ret_d = os.popen(cmd_t % (self.firmwarefile)).read()
-
-		if ret_d is not None and len(ret_d) > 0:
-			print '[VFDCtrlUpgradeCore] fail to checkvfd.. [' + ret_d + ']'
-			return STATUS_ERROR
 
 		def closevfd(fp, fd, filename):
 			if fd is not None: os.close(fd)
@@ -240,7 +233,7 @@ class VFDCtrlUpgradeCore() :
 			for xx in range(3):
 				self.callcount = 0
 				self.status = STATUS_READY
-				firmwarename = os.path.splitext(self.firmwarefile)[0]
+				firmwarename = self.firmwarefile
 				firmware = open(firmwarename, 'rb')
 				device = os.open(self.devicefile, os.O_RDWR)
 				#print '[VFDCtrlUpgradeCore] open >> [ok]'
