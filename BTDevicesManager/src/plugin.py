@@ -32,6 +32,7 @@ from Components.Sources.StaticText import StaticText
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigSubsection, ConfigYesNo, ConfigSelection
 from Components.MenuList import MenuList
+from Tools.Directories import fileExists
 
 import os
 
@@ -351,10 +352,23 @@ def autostart(reason, **kwargs):
 				os.system("rmmod rtk_btusb")
 
 def Plugins(**kwargs):
-	l = []
-	l.append(PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart))
-	if getImageDistro() in ("miracleboxhd", "miraclebox"):
-		l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), icon="plugin.png", where=PluginDescriptor.WHERE_MENU, fnc=start_menu_main))
+	ShowPlugin = True
+	if getBoxType() in ("osnino"):
+		if fileExists("/proc/stb/info/subtype"):
+			file = open("/proc/stb/info/subtype")
+			version = file.read().strip().lower()
+			file.close()
+			if version in ('10'):
+				ShowPlugin = False
+
+	if ShowPlugin :
+		l = []
+		l.append(PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart))
+		if getImageDistro() in ("miracleboxhd", "miraclebox"):
+			l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), icon="plugin.png", where=PluginDescriptor.WHERE_MENU, fnc=start_menu_main))
+		else:
+			l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), description = _("This is bt devices manager"), icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main))
+		return l
 	else:
-		l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), description = _("This is bt devices manager"), icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main))
-	return l  
+		return []
+
