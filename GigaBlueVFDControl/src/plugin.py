@@ -495,7 +495,7 @@ def main(menuid, **kwargs):
 		else:
 			return []
 	else:
-		if getImageDistro() in ('openmips'):
+		if getImageDistro() in ('teamblue'):
 			if menuid != "frontpanel_menu":
 				return [ ]
 		else:

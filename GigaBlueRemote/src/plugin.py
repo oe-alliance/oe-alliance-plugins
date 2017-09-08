@@ -138,7 +138,7 @@ def main(session, **kwargs):
 	session.open(RemoteControlCode)
 
 def RemoteControlSetup(menuid, **kwargs):
-	if getImageDistro() in ("openmips"):
+	if getImageDistro() in ("teamblue"):
 		if menuid != "devices_menu":
 			return []
 	else:
