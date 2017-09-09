@@ -128,7 +128,7 @@ class DsayersCustomMixImporter(Screen):
 	</screen>"""
 
 	def __init__(self, session):
-		print "[ChannelsImporter][__init__] Starting..."
+		print "[DsayersCustomMixImporter][__init__] Starting..."
 		self.session = session
 		Screen.__init__(self, session)
 		self.skinName = ["AutoBouquetsMaker"]
