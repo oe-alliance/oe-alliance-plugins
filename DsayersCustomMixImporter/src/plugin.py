@@ -10,7 +10,7 @@ from enigma import eTimer
 
 # Components
 from Components.ActionMap import ActionMap
-from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo, ConfigSelection, configfile
+from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigSelection, configfile
 from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 from Components.Button import Button
