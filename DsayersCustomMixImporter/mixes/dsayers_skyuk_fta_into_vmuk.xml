@@ -1,0 +1,5 @@
+<custommiximport>
+	<name>Dsayers: Sky UK free to air channels into Virgin Media UK</name>
+	<provider>cable_uk_virgin</provider>
+	<url>https://raw.githubusercontent.com/davesayers2014/AutoBouquetsMaker/master/AutoBouquetsMaker/custom/cable_uk_virgin_CustomMix.xml</url>
+</custommiximport>

@@ -26,13 +26,16 @@ from Tools.Directories import pathExists, fileExists
 
 #Plugins
 from Plugins.Plugin import PluginDescriptor
+from mixes import Mixes
 
-defaultFileLocation = "https://raw.githubusercontent.com/davesayers2014/AutoBouquetsMaker/master/AutoBouquetsMaker/custom/sat_282_sky_uk_CustomMix.xml"
+mixes = Mixes().read()
+choices = sorted([(mixes[x]["key"], mixes[x]["name"]) for x in mixes], key=lambda listItem: listItem[1])
+
+default_mix = "dsayers_vmuk_into_skyuk"
 ABMpath = "/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/custom/"
-ABMfile = "sat_282_sky_uk_CustomMix.xml"
 
 config.plugins.dsayersImporter = ConfigSubsection()
-config.plugins.dsayersImporter.fileLocation = ConfigText(default = defaultFileLocation, fixed_size = False)
+config.plugins.dsayersImporter.mix = ConfigSelection(default = default_mix, choices = choices)
 config.plugins.dsayersImporter.enableImporter = ConfigYesNo(default = True)
 config.plugins.dsayersImporter.leadTime = ConfigSelection(default = "5", choices = [("1", _("1 minute")), ("2", _("2 minutes")), ("3", _("3 minutes")), ("5", _("5 minutes")), ("10", _("10 minutes")), ("20", _("20 minutes")), ("30", _("30 minutes"))])
 
@@ -79,14 +82,14 @@ class DsayersCustomMixImporterScreen(Setup):
 		self.onLayoutFinish.append(self.updatebuttontext)
 
 	def updatebuttontext(self):
-		if fileExists(ABMpath + ABMfile, "w"):
+		if fileExists(ABMpath + mixes[config.plugins.dsayersImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
 			self["key_blue"].setText(_("Delete file"))
 		else:
 			self["key_blue"].setText("")
 
 	def keyDelete(self):
-		if fileExists(ABMpath + ABMfile, "w"):
-			os.remove(ABMpath + ABMfile)
+		if fileExists(ABMpath + mixes[config.plugins.dsayersImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
+			os.remove(ABMpath + mixes[config.plugins.dsayersImporter.mix.value]["provider"] + "_CustomMix.xml")
 		self.updatebuttontext()
 
 	def keySave(self):
@@ -151,7 +154,7 @@ class DsayersCustomMixImporter(Screen):
 				if not inStandby:
 					self["action"].setText(_('Saving CustomMix file'))
 					self["status"] = Label("")
-				with open(ABMpath + ABMfile,"w") as f:
+				with open(ABMpath + mixes[config.plugins.dsayersImporter.mix.value]["provider"] + "_CustomMix.xml", "w") as f:
 					f.write(CustomMix)
 					f.close()
 				if not inStandby:
@@ -165,7 +168,7 @@ class DsayersCustomMixImporter(Screen):
 
 	def fetchURL(self):
 		try:
-			req = urllib2.Request(config.plugins.dsayersImporter.fileLocation.value)
+			req = urllib2.Request(mixes[config.plugins.dsayersImporter.mix.value]["url"])
 			response = urllib2.urlopen(req)
 			print '[DsayersCustomMixImporter][fetchURL] Response: %d' % response.getcode()
 			if int(response.getcode()) == 200:
@@ -201,7 +204,7 @@ class schedule:
 		self.justBootedOrConfigChanged = True
 		self.enableImporter = config.plugins.dsayersImporter.enableImporter.value
 		self.leadTime = config.plugins.dsayersImporter.leadTime.value
-		self.fileLocation = config.plugins.dsayersImporter.fileLocation.value
+		self.mix = config.plugins.dsayersImporter.mix.value
 		try:
 			self.enableSchedule = config.autobouquetsmaker.schedule.value
 			self.clock = [config.autobouquetsmaker.scheduletime.value[0], config.autobouquetsmaker.scheduletime.value[1]]
@@ -229,7 +232,7 @@ class schedule:
 	def configChecker(self):
 		if self.enableImporter != config.plugins.dsayersImporter.enableImporter.value or \
 			self.leadTime != config.plugins.dsayersImporter.leadTime.value or \
-			self.fileLocation != config.plugins.dsayersImporter.fileLocation.value or \
+			self.mix != config.plugins.dsayersImporter.mix.value or \
 			self.enableSchedule != config.autobouquetsmaker.schedule.value or \
 			self.clock[0] != config.autobouquetsmaker.scheduletime.value[0] or \
 			self.clock[1] != config.autobouquetsmaker.scheduletime.value[1] or \
@@ -238,7 +241,7 @@ class schedule:
 			print "[DsayersCustomMixImporter][configChecker] config has changed"
 			self.enableImporter = config.plugins.dsayersImporter.enableImporter.value
 			self.leadTime = config.plugins.dsayersImporter.leadTime.value
-			self.fileLocation = config.plugins.dsayersImporter.fileLocation.value
+			self.mix = config.plugins.dsayersImporter.mix.value
 			self.enableSchedule = config.autobouquetsmaker.schedule.value
 			self.clock[0] = config.autobouquetsmaker.scheduletime.value[0]
 			self.clock[1] = config.autobouquetsmaker.scheduletime.value[1]
@@ -299,7 +302,7 @@ def taskToSchedule(session, **kwargs):
 
 def pluginManualStart(menuid, **kwargs):
 	if menuid == "scan":
-		return [(_("Dsayers CustomMix"), DsayersCustomMixImporterMain, "DsayersCustomMixImporterScreen", 11)]
+		return [(_("Dsayers CustomMix Importer"), DsayersCustomMixImporterMain, "DsayersCustomMixImporterScreen", 11)]
 	return []
 
 def DsayersCustomMixImporterMain(session, **kwargs):
@@ -310,5 +313,5 @@ def Plugins(**kwargs):
 	pList = []
 	if ABMisLoaded():
 		pList.append( PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=pluginAutoStart))
-		pList.append( PluginDescriptor(name=_("Dsayers CustomMix Importer"), description="Imports Dsayers CustomMix for ABM", where = PluginDescriptor.WHERE_MENU, fnc=pluginManualStart, needsRestart=True) )
+		pList.append( PluginDescriptor(name=_("Dsayers CustomMix Importer"), description="Imports CustomMix files for ABM", where = PluginDescriptor.WHERE_MENU, fnc=pluginManualStart, needsRestart=True) )
 	return pList
