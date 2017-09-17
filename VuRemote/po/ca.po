@@ -1,13 +1,11 @@
 # Catalan translations for Enigma2.
-#
-# Oriol Pellicer i Sabrià <oriol@elsud.org>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-07 14:20+0200\n"
 "PO-Revision-Date: 2016-05-07 14:20+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Last-Translator: JR (openspateam@gmail.com)\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +17,7 @@ msgstr ""
 
 #: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
 msgid "Remote Control Code"
-msgstr ""
+msgstr "Codi Control Comandament"
 
 #
 #: ../src/plugin.py:68
@@ -29,42 +27,44 @@ msgstr "Cancel·lar"
 #
 #: ../src/plugin.py:69
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #: ../src/plugin.py:80
 #, python-format
 msgid "Sorry, but %s is not supported."
-msgstr ""
+msgstr "Perdó, però %s no està suportat"
 
 #: ../src/plugin.py:84
 msgid "Remote Control System Code"
-msgstr ""
+msgstr "Codi Sistema Control del comandament"
 
 #: ../src/plugin.py:87
 msgid "Text support"
-msgstr ""
+msgstr "Suport text"
 
 #: ../src/plugin.py:99
 msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr ""
+msgstr "ARXIU NO EXISTEIX : /proc/stb/fp/remote_code"
 
 #: ../src/plugin.py:101
 msgid "Please change your remote mode"
-msgstr ""
+msgstr "Si us plau, canvia el mode del teu comandament"
 
 #: ../src/plugin.py:101
 msgid ""
 "Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
 "press '000"
 msgstr ""
+"Prem i mantingues premut '2' i '7' fins que el LED vermell estigui fixe, llavors prem 'Ajuda', llavors "
+"prem '000'"
 
 #: ../src/plugin.py:101
 msgid "Then choose 'Keep' within seconds"
-msgstr ""
+msgstr "Llavors tria 'Mantenir' durant segons"
 
 #: ../src/plugin.py:122
 msgid "Keep"
-msgstr ""
+msgstr "Mantenir"
 
 #
 #: ../src/plugin.py:122
@@ -74,4 +74,4 @@ msgstr "Restaurar"
 #: ../src/plugin.py:128
 #, python-format
 msgid " in %d seconds."
-msgstr ""
+msgstr " en %d segons."
