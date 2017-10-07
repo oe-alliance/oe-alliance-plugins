@@ -38,6 +38,10 @@ if ET13000
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if SF5008
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if G100
 SUBDIRS += F3LEDControl
 endif
