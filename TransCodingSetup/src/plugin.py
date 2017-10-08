@@ -404,7 +404,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 			self.invaliedModelTimer.start(100,True)
 
 	def invalidmodel(self):
-		self.session.openWithCallback(self.close, MessageBox, _("This model is not support transcoding."), MessageBox.TYPE_ERROR)
+		self.session.openWithCallback(self.close, MessageBox, _("This model does not support transcoding."), MessageBox.TYPE_ERROR)
 
 	def createSetup(self):
 		self.list = []
