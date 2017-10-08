@@ -202,7 +202,7 @@ msgid "Advanced"
 msgstr "Išsamiai"
 
 #: ../src/plugin.py:407
-msgid "This model is not support transcoding."
+msgid "This model does not support transcoding."
 msgstr "Šis modelis nepalaiko perkodavimo."
 
 #: ../src/plugin.py:411
