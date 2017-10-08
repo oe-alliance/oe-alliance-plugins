@@ -200,7 +200,7 @@ msgid "Advanced"
 msgstr ""
 
 #: ../src/plugin.py:407
-msgid "This model is not support transcoding."
+msgid "This model does not support transcoding."
 msgstr "Этот ресивер не поддерживает транскодирование."
 
 #: ../src/plugin.py:411
