@@ -199,7 +199,7 @@ msgid "Advanced"
 msgstr "Rozšířený"
 
 #: ../src/plugin.py:407
-msgid "This model is not support transcoding."
+msgid "This model does not support transcoding."
 msgstr "Tento model je nepodporuje překódování."
 
 #: ../src/plugin.py:411
