@@ -206,7 +206,7 @@ msgid "Advanced"
 msgstr "Geavanceerd"
 
 #: ../src/plugin.py:407
-msgid "This model is not support transcoding."
+msgid "This model does not support transcoding."
 msgstr "Dit model ondersteunt transcoderen niet."
 
 #: ../src/plugin.py:411
