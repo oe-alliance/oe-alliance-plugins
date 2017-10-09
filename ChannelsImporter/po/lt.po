@@ -142,7 +142,7 @@ msgstr "Kad importuoti bukietus iš kito aparato,"
 
 # scheduler.py
 msgid ""
-"Your channels list is about to be updated,\n"
+"Your channels list is about to be updated.\n"
 "Do you want to allow this?"
 msgstr ""
 "Jūsų kanalų sąrašas bus atnaujintas.\n"
