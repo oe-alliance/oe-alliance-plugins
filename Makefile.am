@@ -134,6 +134,10 @@ if INIHDP
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if TIVIARAPLUS
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if FORMULER1TC
 SUBDIRS += MultiTransCodingSetup
 endif
