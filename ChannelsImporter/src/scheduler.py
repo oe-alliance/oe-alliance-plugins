@@ -115,7 +115,7 @@ class AutoChannelsImporterTimer:
 			print "[ChannelsImporterScheduler][ChannelsImporteronTimer] onTimer occured at", strftime("%c", localtime(now))
 			from Screens.Standby import inStandby
 			if not inStandby:
-				#message = _("Your channels list is about to be updated,\nDo you want to allow this?")
+				#message = _("Your channels list is about to be updated.\nDo you want to allow this?")
 				#ybox = self.session.openWithCallback(self.doChannelsImporter, MessageBox, message, MessageBox.TYPE_YESNO, timeout = 30)
 				#ybox.setTitle('Scheduled ChannelsImporter.')
 				self.doChannelsImporter(True)
