@@ -143,7 +143,7 @@ msgstr ""
 
 # scheduler.py
 msgid ""
-"Your channels list is about to be updated,\n"
+"Your channels list is about to be updated.\n"
 "Do you want to allow this?"
 msgstr ""
 
