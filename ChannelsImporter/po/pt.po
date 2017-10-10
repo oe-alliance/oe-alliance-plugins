@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ChannelsImporter -  oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-02 20:50+0100\n"
+"PO-Revision-Date: 2017-10-09 20:55+0100\n"
 "Language-Team: BH Team\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,7 +16,6 @@ msgstr ""
 "Language: pt_PT\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-# ChannelsImporter.py
 msgid "Channels importer"
 msgstr "Importador de Canais"
 
@@ -27,7 +26,7 @@ msgid "Starting importer..."
 msgstr "A iniciar importação..."
 
 msgid "Checking FTP connection to remote receiver"
-msgstr "Verificar ligação ao receptor remoto"
+msgstr "Verificar ligação ao recetor remoto"
 
 msgid "Could not connect to the remote IP"
 msgstr "Não foi possível conectar ao IP remoto"
@@ -38,56 +37,50 @@ msgstr "Conexão ao IP remoto ok"
 msgid "Downloading channel indexes..."
 msgstr "A descarregar indexação de canais..."
 
-#, python-format
 msgid "%d/%d"
 msgstr "%d/%d"
 
-#, python-format
 msgid "Download from remote failed %s"
-msgstr "Descarga remota falhou %s"
+msgstr "Descarga do recetor remoto falhou %s"
 
 msgid "Downloading bouquets..."
 msgstr "A descarregar bouquets..."
 
 msgid "Checking for alternatives..."
-msgstr "À procura de alternativas..."
+msgstr "À procura de alternativos..."
 
 msgid "Downloading alternatives..."
-msgstr "A transferir alternativas..."
+msgstr "A transferir alternativos..."
 
 msgid "Removing current channel list..."
-msgstr "A remover a lista de canais corrente..."
+msgstr "A remover a lista de canais atual..."
 
 msgid "Loading new channel list..."
 msgstr "A carregar a nova lista de canais..."
 
 msgid "Force EPG save on remote receiver"
-msgstr "Forçar salvaguarda do EPG no receptor remoto"
+msgstr "Forçar salvar EPG no recetor remoto"
 
 msgid "Searching for epg.dat"
 msgstr "À procura de epg.dat"
 
-#, python-format
 msgid "Download settings from remote failed %s"
 msgstr "Descarga de definições do servidor remoto fallhou %s"
 
 msgid "epg.dat not found"
 msgstr "epg.dat não encontrado"
 
-#, python-format
 msgid ""
-"Download epg.dat from remote receiver failed. Check file exists on remote "
-"receiver.\n"
+"Download epg.dat from remote receiver failed. Check file exists on remote receiver.\n"
 "%s"
 msgstr ""
-"Descarga de epg.dat do receptor remoto falhou. Verifique se o ficheiro "
-"existe no receptor remoto.\n"
+"Descarga de epg.dat do recetor remoto falhou. Verifique se o ficheiro existe no recetor "
+"remoto.\n"
 "%s"
 
 msgid "Loading epg.dat..."
 msgstr "A carregar epg.dat..."
 
-# plugin.py
 msgid "Daily"
 msgstr "Diáriamente"
 
@@ -107,10 +100,10 @@ msgid "Every hour"
 msgstr "Hora a hora"
 
 msgid "Every 5 minutes (for testing)"
-msgstr "Cada 5 minutos (para testes)"
+msgstr "Cada 5 minutos (para testar)"
 
 msgid "Every 2 minutes (for testing)"
-msgstr "Cada 2 minutos (para testes)"
+msgstr "Cada 2 minutos (para testar)"
 
 msgid "Exit"
 msgstr "Sair"
@@ -122,7 +115,7 @@ msgid "Import"
 msgstr "Importar"
 
 msgid "Really close without saving settings?"
-msgstr "Deseja sair mesmo sem gravar as definições?"
+msgstr "Deseja sair sem gravar as definições?"
 
 msgid "Main menu"
 msgstr "Menu Principal"
@@ -134,103 +127,87 @@ msgid "Service searching"
 msgstr "Procura de Serviços"
 
 msgid "Fetch channels from the server."
-msgstr "Buscar canais do servidor."
+msgstr "Ir buscar canais ao servidor."
 
 msgid "For importing bouquets from another receiver"
-msgstr "Para a importar bouquets de outro receptor"
+msgstr "Para importar bouquets de outro receptor"
 
-# scheduler.py
 msgid ""
-"Your channels list is about to be updated,\n"
+"Your channels list is about to be updated.\n"
 "Do you want to allow this?"
 msgstr ""
-"A sua lista de canais vai ser atualizada,\n"
-"Quer permitir isto?"
+"A sua lista de canais vai ser atualizada.\n"
+"Deseja permitir isto?"
 
 msgid "Enough Retries, delaying till next schedule."
-msgstr "Tentativas suficientes, adiar até ao próximo agendamento."
+msgstr "Tentativas suficientes, adiar até novo agendamento."
 
 msgid "%a %e %b  %-H:%M"
 msgstr "%a %e %b  %-H:%M"
 
-# setup.xml
 msgid "Remote receiver IP"
-msgstr "IP do receptor remoto"
+msgstr "IP do recetor remoto"
 
-msgid ""
-"IP address of the remote receiver the channel list is  being imported from."
-msgstr ""
-"Endereço IP do receptor remoto da lista de canais está sendo importado."
+msgid "IP address of the remote receiver the channel list is  being imported from."
+msgstr "Endereço IP do recetor remoto da lista de canais está sendo importado."
 
 msgid "FTP Username"
 msgstr "Nome de Utilizador FTP"
 
-msgid ""
-"FTP username of the remote receiver the channel list is being imported from."
+msgid "FTP username of the remote receiver the channel list is being imported from."
 msgstr ""
-"Nome de utilizador FTP do receptor remoto de onde a lista de canais está a "
-"ser importada."
+"Nome de utilizador FTP do recetor remoto de onde a lista de canais está a ser importada."
 
 msgid "FTP Password"
 msgstr "Palavra-passe FTP"
 
-msgid ""
-"FTP password of the remote receiver the channel list is being imported from."
-msgstr ""
-"Senha FTP do receptor remoto de onde a lista de canais está a ser importada."
+msgid "FTP password of the remote receiver the channel list is being imported from."
+msgstr "Senha FTP do recetor remoto de onde a lista de canais está a ser importada."
 
 msgid "FTP Port"
 msgstr "Porta FTP"
 
-msgid ""
-"FTP port of the remote receiver the channel list is being imported from."
-msgstr ""
-"Porta FTP do receptor remoto de onde a lista de canais está a ser importada."
+msgid "FTP port of the remote receiver the channel list is being imported from."
+msgstr "Porta FTP do recetor remoto de onde a lista de canais está a ser importada."
 
 msgid "Passive mode"
 msgstr "Modo Passivo"
 
-msgid ""
-"Should the FTP connection to the remote receiver be established in passive "
-"mode?"
+msgid "Should the FTP connection to the remote receiver be established in passive mode?"
 msgstr ""
-"A conexão de FTP para o receptor remoto pode ser estabelecida em modo "
-"passivo?"
+"Poderá a conexão de FTP para o recetor remoto pode ser estabelecida em modo passivo?"
 
 msgid "Import EPG"
-msgstr "Importar de EPG"
+msgstr "Importar o EPG"
 
 msgid ""
-"If 'yes' the importer will automatically import and load EPG data from the "
-"remote receiver if the file exists."
+"If 'yes' the importer will automatically import and load EPG data from the remote "
+"receiver if the file exists."
 msgstr ""
-"Se 'sim' o importador importará automaticamente e carregará o EPG do "
-"receptor remoto se o ficheiro existir."
+"Se 'sim' o importador importará automaticamente e carregará o EPG do recetor remoto se "
+"o ficheiro existir."
 
 msgid "Run at restart"
 msgstr "Executar ao reiniciar"
 
 msgid "If 'yes' the importer will automatically run at startup or reboot."
-msgstr ""
-"Se 'Sim' o importador irá executar na inicialização ou reiniciar "
-"automaticamente."
+msgstr "Se 'Sim' o importador irá executar na inicialização ou reiniciar automaticamente."
 
 msgid "Show in extensions"
 msgstr "Mostrar em extensões"
 
 msgid "When enabled, allows you start an import from the extensions list."
-msgstr ""
-"Quando ativado, pemite-lhe iniciar a importação da lista de extensões."
+msgstr "Quando ativado, pemite-lhe iniciar a importação da lista de extensões."
 
 msgid "Auto configure remote fallback tuner"
 msgstr "Auto configurar o tuner fallback remoto"
 
 msgid ""
-"'yes' and remote fallback tuner will be automatically configured to stream "
-"from the remote receiver. 'no' and fallback will not be edited."
+"'yes' and remote fallback tuner will be automatically configured to stream from the "
+"remote receiver. 'no' and fallback will not be edited."
 msgstr ""
-"'sim' e o tuner fallback remoto será automaticamente configurado para "
-"transmitir do receptor remoto. 'não' e o fallback não será editado."
+"'sim' e o tuner fallback remoto será automaticamente configurado para transmitir do "
+"recetor remoto. 'não' e o fallback não será editado."
 
 msgid "Schedule import"
 msgstr "Importar agendamento"
@@ -239,7 +216,7 @@ msgid "Allows you to set a schedule to perform an import."
 msgstr "Permite-lhe definir um agendamento para iniciar a importação."
 
 msgid "Repeat how often"
-msgstr "Repita quantas vezes"
+msgstr "Repetir quantas vezes"
 
 msgid "Set the repeat interval of the schedule."
 msgstr "Defina o intervalo de repetição do agendamento."
