@@ -14,7 +14,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V4.9-r0"
+Version = "V4.9-r2"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -502,9 +502,9 @@ LCD4linux.xmlType02 = ConfigYesNo(default = False)
 LCD4linux.xmlType03 = ConfigYesNo(default = False)
 LCD4linux.xmlOffset = ConfigSelectionNumber(0, 20, 1, default = 0)
 LCD4linux.SizeW = ConfigSlider(default = 800,  increment = 1, limits = (100, 2000))
-LCD4linux.SizeH = ConfigSlider(default = 600,  increment = 1, limits = (100, 1000))
+LCD4linux.SizeH = ConfigSlider(default = 600,  increment = 1, limits = (100, 1100))
 LCD4linux.SizeW2 = ConfigSlider(default = 800,  increment = 1, limits = (100, 2000))
-LCD4linux.SizeH2 = ConfigSlider(default = 600,  increment = 1, limits = (100, 1000))
+LCD4linux.SizeH2 = ConfigSlider(default = 600,  increment = 1, limits = (100, 1100))
 LCD4linux.KeySwitch = ConfigYesNo(default = True)
 LCD4linux.KeyScreen = ConfigSelection(choices =  [("999", _("off")),("163", _("2 x FastForwardKey")),("208", _("2 x FastForwardKey Type 2")),("163l", _("Long FastForwardKey")),("2081", _("Long FastForwardKey Type 2")),("358", _("2 x InfoKey")),("3581", _("Long InfoKey")),("113", _("2 x Mute"))], default="163")
 LCD4linux.KeyOff = ConfigSelection(choices =  [("999", _("off")),("165", _("2 x FastBackwardKey")),("168", _("2 x FastBackwardKey Type 2")),("165l", _("Long FastBackwardKey")),("1681", _("Long FastBackwardKey Type 2")),("358", _("2 x InfoKey")),("3581", _("Long InfoKey")),("113", _("2 x Mute"))], default="1651")
@@ -2747,9 +2747,12 @@ def find_dev(Anzahl, idVendor, idProduct):
 	
 def find_dev2(idVendor, idProduct, idVendor2, idProduct2):
 	gefunden = False
-	if len(list(usb.core.find(idVendor=idVendor, idProduct=idProduct, find_all=True))+list(usb.core.find(idVendor=idVendor2, idProduct=idProduct2, find_all=True))) >= 2:
-		gefunden = True
-	L4log("Vendor=%04x ProdID=%04x or Vendor=%04x ProdID=%04x" % (idVendor,idProduct,idVendor2,idProduct2), gefunden)
+	try:
+		if len(list(usb.core.find(idVendor=idVendor, idProduct=idProduct, find_all=True))+list(usb.core.find(idVendor=idVendor2, idProduct=idProduct2, find_all=True))) >= 2:
+			gefunden = True
+		L4log("Vendor=%04x ProdID=%04x or Vendor=%04x ProdID=%04x" % (idVendor,idProduct,idVendor2,idProduct2), gefunden)
+	except:
+		L4log("Error usb.core2 find")
 	return gefunden
 
 # get picon path
@@ -2977,7 +2980,8 @@ def writeLCD1(s,im,quality,SAVE=True):
 		return
 	s.imWrite[im] = True
 	if LCD4linux.LCDType1.value[0] in ["2","3"] and virtBRI(1) not in [0,10] and SAVE == True and LCD4linux.MJPEGvirtbri1.value == True:
-		s.im[im] = ImageEnhance.Brightness(s.im[im]).enhance(virtBRI(1))
+		s.tmp[im] = ImageEnhance.Brightness(s.im[im]).enhance(virtBRI(1))
+		s.im[im] = s.tmp[im]
 	if LCD4linux.LCDType1.value[0] == "1":
 		if SamsungDevice is not None:
 			L4log("writing to DPF Device")
@@ -3091,7 +3095,8 @@ def writeLCD2(s,im,quality,SAVE=True):
 		return
 	s.imWrite[im] = True
 	if LCD4linux.LCDType2.value[0] in ["2","3"] and virtBRI(2) not in [0,10] and SAVE == True and LCD4linux.MJPEGvirtbri2.value == True:
-		s.im[im] = ImageEnhance.Brightness(s.im[im]).enhance(virtBRI(2))
+		s.tmp[im] = ImageEnhance.Brightness(s.im[im]).enhance(virtBRI(2))
+		s.im[im] = s.tmp[im]
 	if LCD4linux.LCDType2.value[0] == "1":
 		if SamsungDevice2 is not None:
 			L4log("writing to DPF2 Device")
@@ -3205,7 +3210,8 @@ def writeLCD3(s,im,quality,SAVE=True):
 		return
 	s.imWrite[im] = True
 	if LCD4linux.LCDType3.value[0] in ["2","3"] and virtBRI(3) not in [0,10] and SAVE == True and LCD4linux.MJPEGvirtbri3.value == True:
-		s.im[im] = ImageEnhance.Brightness(s.im[im]).enhance(virtBRI(3))
+		s.tmp[im] = ImageEnhance.Brightness(s.im[im]).enhance(virtBRI(3))
+		s.im[im] = s.tmp[im]
 	if LCD4linux.LCDType3.value[0] == "1":
 		if SamsungDevice3 is not None:
 			L4log("writing to DPF3 Device")
@@ -4247,8 +4253,8 @@ def NcidLCD4Linux(Date,number,caller):
 	if (str(LCD4linux.Fritz.value) != "0" or str(LCD4linux.MPFritz.value) != "0" or str(LCD4linux.StandbyFritz.value) != "0"):
 		L4log("Ncid",[Date,number,caller])
 		rmFile(PICfritz)
-		dt = datetime.strptime(Date, "%d.%m.%Y - %H:%M")
-		Date = dt.strftime("%d.%m.%y %H:%M:%S")
+		dt = datetime.strptime(Date, _("%d.%m.%Y - %H:%M"))
+		Date = dt.strftime(_("%d.%m.%y %H:%M:%S"))
 		FritzList.append(["RING",Date,number,caller,""])
 		FritzTime = int(LCD4linux.FritzTime.value) + 2
 		while len(FritzList) > 20:
@@ -4768,7 +4774,7 @@ class L4LWorker(Thread):
 							import locale
 							l=locale.getlocale()
 							locale.setlocale(locale.LC_ALL,"C")
-							Date = (date.today() - timedelta(int(LCD4linux.MailIMAPDays.value))).strftime("%d-%b-%Y")
+							Date = (date.today() - timedelta(int(LCD4linux.MailIMAPDays.value))).strftime(_("%d-%b-%Y"))
 							typ, data = mailserver.search(None, '(SINCE {date})'.format(date=Date))
 							locale.setlocale(locale.LC_ALL,l)
 						ids = data[0]
@@ -5049,7 +5055,8 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 		conf_h = self.ConfLines*25
 		int_y = size_h-65
 		key_y = size_h-40
-		pic_w = size_w-600
+		key_x = int((conf_w-40)/4)
+		pic_w = size_w-conf_w
 		if str(LCD4linux.LCDType3.value) != "00":
 			pic_h = int(size_h/3)
 		else:
@@ -5058,22 +5065,22 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 		skin = """
 			<screen position="center,%d" size="%d,%d" title="LCD4linux Settings" >
 			<widget name="config" position="0,0" size="%d,%d" scrollbarMode="showOnDemand" enableWrapAround="1" />
-			<widget source="introduction" render="Label" position="5,%d" size="580,30" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
+			<widget source="introduction" render="Label" position="5,%d" size="%d,30" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
 			
-			<widget name="key_red" position="0,%d" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
-			<widget name="key_green" position="140,%d" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
-			<widget name="key_yellow" position="280,%d" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
-			<widget name="key_blue" position="420,%d" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
+			<widget name="key_red" position="%d,%d" size="%d,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
+			<widget name="key_green" position="%d,%d" size="%d,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
+			<widget name="key_yellow" position="%d,%d" size="%d,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
+			<widget name="key_blue" position="%d,%d" size="%d,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
 
-			<ePixmap name="red"    position="0,%d"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green"  position="140,%d" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,%d" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue"   position="420,%d" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="560,%d" zPosition="4" size="35,25"  transparent="1" alphatest="on" />
+			<ePixmap name="red"    position="%d,%d"   zPosition="2" size="%d,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green"  position="%d,%d" zPosition="2" size="%d,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="%d,%d" zPosition="2" size="%d,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue"   position="%d,%d" zPosition="2" size="%d,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="%d,%d" zPosition="4" size="35,25"  transparent="1" alphatest="on" />
 
-			<widget source="Version" render="Label" position="500,%d" size="100,20" zPosition="1" font="Regular;11" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
-			<widget source="LibUSB" render="Label" position="500,%d" size="100,20" zPosition="1" font="Regular;11" halign="right" valign="center" foregroundColor="red" backgroundColor="#25062748" transparent="1" />
-			<widget source="About" render="Label" position="500,%d" size="100,20" zPosition="1" font="Regular;10" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
+			<widget source="Version" render="Label" position="%d,%d" size="100,20" zPosition="1" font="Regular;11" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
+			<widget source="LibUSB" render="Label" position="%d,%d" size="100,20" zPosition="1" font="Regular;11" halign="right" valign="center" foregroundColor="red" backgroundColor="#25062748" transparent="1" />
+			<widget source="About" render="Label" position="%d,%d" size="100,20" zPosition="1" font="Regular;10" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
 
 			<widget name="LCD1" position="%d,%d" zPosition="1" size="%d,%d" transparent="1" alphatest="on" />
 			<widget name="LCD2" position="%d,%d" zPosition="1" size="%d,%d" transparent="1" alphatest="on" />
@@ -5082,8 +5089,8 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			<widget source="LCD2text" render="Label" position="%d,%d" size="200,20" zPosition="1" font="Regular;11" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
 			<widget source="LCD3text" render="Label" position="%d,%d" size="200,20" zPosition="1" font="Regular;11" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
 			
-			</screen>""" % (75, size_w,size_h, conf_w,conf_h, int_y, key_y,key_y,key_y,key_y, key_y,key_y,key_y,key_y,
-			key_y+15, key_y-10,key_y-30,key_y-30, conf_w,0, pic_w,pic_h, conf_w,pic_h, pic_w,pic_h, conf_w,pic_h2, pic_w,pic_h, conf_w,5, conf_w,pic_h+5, conf_w,pic_h2+5 )
+			</screen>""" % (75, size_w,size_h, conf_w,conf_h, int_y,conf_w-10, 0,key_y,key_x, key_x,key_y,key_x, 2*key_x,key_y,key_x, 3*key_x,key_y,key_x, 0,key_y,key_x, key_x,key_y,key_x, 2*key_x,key_y,key_x, 3*key_x,key_y,key_x,
+			4*key_x,key_y+15, conf_w-100,key_y-10, conf_w-100,key_y-30, conf_w-100,key_y-30, conf_w,0, pic_w,pic_h, conf_w,pic_h, pic_w,pic_h, conf_w,pic_h2, pic_w,pic_h, conf_w,5, conf_w,pic_h+5, conf_w,pic_h2+5 )
 		self.skin = skin
 		self.session = session
 		Screen.__init__(self, session)
@@ -7895,6 +7902,7 @@ class UpdateStatus(Screen):
 		self.LastwwwBoxTimer = ""
 		self.im = [None,None,None,None,None,None,None] # 0=Grab; 4=Cal; 5+6=Weather
 		self.draw = [None,None,None,None,None,None,None] # 0=Grab; 4=Cal; 5+6=Weather
+		self.tmp = [None,None,None,None]
 		self.BackIm = [None,None,None]
 		self.BackName = ["-","-","-"]
 		self.PiconIm = [None,None]
@@ -8238,12 +8246,12 @@ class UpdateStatus(Screen):
 							self.dis_reason=["","","","","",""]
 							L4log("please use newer Netatmo-Plugin")
 						self.oM.append([]) # Wert1,Wert2,Wert3,Wert4,Name,Type,Batt
+						# Outdoor , Wind , Rain , Indoor
+						Batterylist = {"NAModule1":4000,"NAModule2":4360,"NAModule3":4000,"NAModule4":4560}
 						for Mod in na.modules:
 							Battery = False
 							if Mod.module_type.startswith("NAModule"):
 								L4logE("Battery %s " % Mod.module_type,Mod.battery_vp)
-								# Outdoor , Wind , Rain , Indoor
-								Batterylist = {"NAModule1":4000,"NAModule2":4360,"NAModule3":4000,"NAModule4":4560}
 								if Mod.battery_vp > 0 and Mod.battery_vp <= Batterylist.get(Mod.module_type,4500):
 									L4log("Battery low",Mod.module_type)
 									Battery = True
@@ -8525,11 +8533,11 @@ class UpdateStatus(Screen):
 						DpfCheckSerial()
 				if LCD4linux.LCDType1.value[0] == "2" or LCD4linux.LCDType2.value[0] == "2" or LCD4linux.LCDType3.value[0] == "2":
 					if SamsungCheck():
-						SamsungDevice = None
-						SamsungDevice2 = None
-						SamsungDevice3 = None
-						rmFiles(PIC + "*.*")
-						L4log("reset all Samsung LCD!")
+#						SamsungDevice = None
+#						SamsungDevice2 = None
+#						SamsungDevice3 = None
+#						rmFiles(PIC + "*.*")
+#						L4log("reset all Samsung LCD!")
 						self.SamsungStart()
 				if strftime("%M") in LCD4linux.WwwTime.value:
 					getWWW()
@@ -8637,6 +8645,7 @@ class UpdateStatus(Screen):
 			self.LaudioCurrentTrack = None
 			self.Laudiodescription = None
 			self.LgetName = None
+			self.Llength = None
 			service = self.session.nav.getCurrentService()
 			self.Levent_begin0, self.Levent_end0, self.Lduration0, self.Levent_name0 = getServiceInfo(self,0)
 			self.Levent_begin1, self.Levent_end1, self.Lduration1, self.Levent_name1 = getServiceInfo(self,1)
@@ -9280,7 +9289,7 @@ class UpdateStatus(Screen):
 			for curr in r.get("list",[]):
 				High = Code_utf8("%d" % round(curr.get("temp",{}).get("max","")))
 				Low = Code_utf8("%d" % round(curr.get("temp",{}).get("min","")))
-				Day = WeekDays[datetime(*localtime(curr["dt"])[:6]).weekday()]
+				Day = Code_utf8(WeekDays[datetime(*localtime(curr["dt"])[:6]).weekday()])
 				Icon = curr.get("weather",[{}])[0].get("icon","") + ".png"
 				Cond = curr.get("weather",[{}])[0].get("description","")
 				Regen = "%.1f" % (curr.get("rain",0)+curr.get("snow",0))
@@ -9327,7 +9336,7 @@ class UpdateStatus(Screen):
 			L4log("Sunrise downloadstart:",self.feedurl)
 			getPage(self.feedurl).addCallback(self.downloadSunriseCallback).addErrback(self.downloadSunriseError)
 		else:
-			self.feedurl = str("http://api.sunrise-sunset.org/json?lat=%s&lng=%s&formatted=0" % (self.Lat,self.Long))
+			self.feedurl = str("http://api.sunrise-sunset.org/json?lat=%s&lng=%s&formatted=0" % (self.Lat,self.Long)).replace(",",".")
 			L4log("Sunrise2 downloadstart:",self.feedurl)
 			getPage(self.feedurl).addCallback(self.downloadSunriseCallback2).addErrback(self.downloadSunriseError)
 
@@ -10798,7 +10807,7 @@ def LCD4linuxPIC(self,session):
 					if ConfigType == "41":
 						now = Code_utf8(_(strftime("%A")))
 					else:
-						now = strftime("%d.%m.%Y")
+						now = strftime(_("%d.%m.%Y"))
 					font = ImageFont.truetype(ConfigFont, int(ConfigSize/3.0), encoding='unic')
 					w,h = self.draw[draw].textsize(now, font=font)
 					lx = (x-w)/2
@@ -10857,7 +10866,7 @@ def LCD4linuxPIC(self,session):
 					pil_image = pil_image.convert("RGBA")
 					self.im[im].paste(pil_image,(POSX,ConfigPos),pil_image)
 					if ConfigType[:2] == "52":
-						now = strftime("%d.%m.%Y")
+						now = strftime(_("%d.%m.%Y"))
 						font = ImageFont.truetype(ConfigFont, int(ConfigSize/3), encoding='unic')
 						w,h = self.draw[draw].textsize(now, font=font)
 						if "+" in ConfigType:
@@ -10874,7 +10883,7 @@ def LCD4linuxPIC(self,session):
 			font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 			ww,hh = self.draw[draw].textsize(strftime("%H:%M"), font=font)
 			font = ImageFont.truetype(ConfigFont, int(ConfigSize/2), encoding='unic')
-			ww2,hh = self.draw[draw].textsize(strftime("%d.%m.%Y"), font=font)
+			ww2,hh = self.draw[draw].textsize(strftime(_("%d.%m.%Y")), font=font)
 			if ww2 > ww:
 				ww = ww2
 			lx = getSplit(ConfigSplit,ConfigAlign,MAX_W,ww)
@@ -10883,7 +10892,7 @@ def LCD4linuxPIC(self,session):
 				font = ImageFont.truetype(ConfigFont, int(ConfigSize/2), encoding='unic')
 				w,h2 = self.draw[draw].textsize(now, font=font)
 				if tt == "1":
-					now = strftime("%d.%m.%Y")
+					now = strftime(_("%d.%m.%Y"))
 				elif tt == "2":
 					now = strftime("%H:%M")
 					font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
@@ -11384,7 +11393,8 @@ def LCD4linuxPIC(self,session):
 			else:
 				ms = 1
 			font = ImageFont.truetype(ConfigFont, int(ConfigSize*ms)+8, encoding='unic') #5
-			if self.Lpath and ":0:" not in self.Lpath and "//" not in self.Lpath: # Movie
+#			if self.Lpath and ":0:" not in self.Lpath and "//" not in self.Lpath: # Movie
+			if self.Llength is not None:
 				isVideoPlaying = 1
 				if self.Llength is not None:
 					length = self.Llength
@@ -12273,7 +12283,7 @@ def LCD4linuxPIC(self,session):
 						Fe /= 1024.0
 						Einh = "T"
 					ShadowText(draw,lx+20,ly,"%.1f" % Fe,font,ConfigColor,ConfigShadow)
-					ShadowText(draw,lx+20,ly+h,"%sByte" % Einh,font,ConfigColor,ConfigShadow)
+					ShadowText(draw,lx+20,ly+h,"%sB" % Einh,font,ConfigColor,ConfigShadow)
 					self.draw[draw].rectangle((lx+8,ly,lx+18,ly+(2*h)), outline=LCD4linux.DevBarColor.value, fill=LCD4linux.DevFullColor.value if (Fproz<int(ConfigWarning) and l[:3] != "RAM") else LCD4linux.DevBarColor.value)
 					if l[:3] == "RAM":
 						self.draw[draw].rectangle((lx+8,ly,lx+18,ly+B1pixel), outline=LCD4linux.DevBackColor.value, fill=LCD4linux.DevBackColor.value)
