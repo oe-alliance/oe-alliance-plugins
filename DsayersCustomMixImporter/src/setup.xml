@@ -1,8 +1,0 @@
-<!--suppress XmlUnboundNsPrefix -->
-<setupxml>
-     <setup key="dsayerscustommiximporter" title="Dsayers CustomMix Importer">
-        <item level="2" text="Import" description="Select the CustomMix you want to import">config.plugins.dsayersImporter.mix</item>
-        <item level="2" text="Enable autofetch" description="Allows you automatically fetch the CustomMix file.">config.plugins.dsayersImporter.enableImporter</item>
-        <item level="2" text="Lead time"  requires="config.plugins.dsayersImporter.enableImporter" description="Number of minutes prior to the ABM scan that the CustomMix file should be fetched">config.plugins.dsayersImporter.leadTime</item>
-    </setup>
-</setupxml>

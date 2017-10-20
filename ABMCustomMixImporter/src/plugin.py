@@ -34,12 +34,12 @@ choices = sorted([(mixes[x]["key"], mixes[x]["name"]) for x in mixes], key=lambd
 default_mix = "dsayers_vmuk_into_skyuk"
 ABMpath = "/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/custom/"
 
-config.plugins.dsayersImporter = ConfigSubsection()
-config.plugins.dsayersImporter.mix = ConfigSelection(default = default_mix, choices = choices)
-config.plugins.dsayersImporter.enableImporter = ConfigYesNo(default = True)
-config.plugins.dsayersImporter.leadTime = ConfigSelection(default = "5", choices = [("1", _("1 minute")), ("2", _("2 minutes")), ("3", _("3 minutes")), ("5", _("5 minutes")), ("10", _("10 minutes")), ("20", _("20 minutes")), ("30", _("30 minutes"))])
+config.plugins.ABMImporter = ConfigSubsection()
+config.plugins.ABMImporter.mix = ConfigSelection(default = default_mix, choices = choices)
+config.plugins.ABMImporter.enableImporter = ConfigYesNo(default = False)
+config.plugins.ABMImporter.leadTime = ConfigSelection(default = "5", choices = [("1", _("1 minute")), ("2", _("2 minutes")), ("3", _("3 minutes")), ("5", _("5 minutes")), ("10", _("10 minutes")), ("20", _("20 minutes")), ("30", _("30 minutes"))])
 
-class DsayersCustomMixImporterScreen(Setup):
+class ABMCustomMixImporterScreen(Setup):
 	skin = """
 		<screen position="340,70" size="600,620">
 			<widget source="key_red" render="Label" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" backgroundColor="#9f1313" font="Regular;18" transparent="1"/>
@@ -61,7 +61,7 @@ class DsayersCustomMixImporterScreen(Setup):
 		except TypeError:
 			Setup.__init__(self, session, setup, plugin)
 
-		self.skinName = ["DsayersCustomMixImporterScreen", "Setup4buttons"]
+		self.skinName = ["ABMCustomMixImporterScreen", "Setup4buttons"]
 
 		self["actions2"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
@@ -82,14 +82,14 @@ class DsayersCustomMixImporterScreen(Setup):
 		self.onLayoutFinish.append(self.updatebuttontext)
 
 	def updatebuttontext(self):
-		if fileExists(ABMpath + mixes[config.plugins.dsayersImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
+		if fileExists(ABMpath + mixes[config.plugins.ABMImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
 			self["key_blue"].setText(_("Delete file"))
 		else:
 			self["key_blue"].setText("")
 
 	def keyDelete(self):
-		if fileExists(ABMpath + mixes[config.plugins.dsayersImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
-			os.remove(ABMpath + mixes[config.plugins.dsayersImporter.mix.value]["provider"] + "_CustomMix.xml")
+		if fileExists(ABMpath + mixes[config.plugins.ABMImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
+			os.remove(ABMpath + mixes[config.plugins.ABMImporter.mix.value]["provider"] + "_CustomMix.xml")
 		self.updatebuttontext()
 
 	def keySave(self):
@@ -101,7 +101,7 @@ class DsayersCustomMixImporterScreen(Setup):
 		self.startImporter()
 
 	def saveConfig(self):
-		config.plugins.dsayersImporter.save()
+		config.plugins.ABMImporter.save()
 		configfile.save()
 
 	def keyCancel(self):
@@ -117,13 +117,13 @@ class DsayersCustomMixImporterScreen(Setup):
 			self.close(False)
 
 	def startImporter(self):
-		self.session.openWithCallback(self.startImporterCallback, DsayersCustomMixImporter)
+		self.session.openWithCallback(self.startImporterCallback, ABMCustomMixImporter)
 
 	def startImporterCallback(self, answer = None):
 		if answer:
 			self.close()
 
-class DsayersCustomMixImporter(Screen):
+class ABMCustomMixImporter(Screen):
 	skin = """
 	<screen position="0,0" size="1280,35" backgroundColor="transpBlack" flags="wfNoBorder" >
 		<widget name="action" position="5,3" size="435,25" font="Regular;22" backgroundColor="transpBlack" borderWidth="3" borderColor="black"/>
@@ -131,11 +131,11 @@ class DsayersCustomMixImporter(Screen):
 	</screen>"""
 
 	def __init__(self, session):
-		print "[DsayersCustomMixImporter][__init__] Starting..."
+		print "[ABMCustomMixImporter][__init__] Starting..."
 		self.session = session
 		Screen.__init__(self, session)
 		self.skinName = ["AutoBouquetsMaker"]
-		Screen.setTitle(self, _("Dsayers CustomMix"))
+		Screen.setTitle(self, _("ABM CustomMix"))
 		self["action"] = Label(_("Starting importer..."))
 		self["status"] = Label("")
 		self["actions"] = ActionMap(["SetupActions"],
@@ -154,7 +154,7 @@ class DsayersCustomMixImporter(Screen):
 				if not inStandby:
 					self["action"].setText(_('Saving CustomMix file'))
 					self["status"] = Label("")
-				with open(ABMpath + mixes[config.plugins.dsayersImporter.mix.value]["provider"] + "_CustomMix.xml", "w") as f:
+				with open(ABMpath + mixes[config.plugins.ABMImporter.mix.value]["provider"] + "_CustomMix.xml", "w") as f:
 					f.write(CustomMix)
 					f.close()
 				if not inStandby:
@@ -164,24 +164,24 @@ class DsayersCustomMixImporter(Screen):
 					self.donetimer.startLongTimer(3)
 			except:
 				self.showError("Saving the CustomMix file failed")
-				print "[DsayersCustomMixImporter]Saving file failed."
+				print "[ABMCustomMixImporter]Saving file failed."
 
 	def fetchURL(self):
 		try:
-			req = urllib2.Request(mixes[config.plugins.dsayersImporter.mix.value]["url"])
+			req = urllib2.Request(mixes[config.plugins.ABMImporter.mix.value]["url"])
 			response = urllib2.urlopen(req)
-			print '[DsayersCustomMixImporter][fetchURL] Response: %d' % response.getcode()
+			print '[ABMCustomMixImporter][fetchURL] Response: %d' % response.getcode()
 			if int(response.getcode()) == 200:
 				return response.read()
 		except urllib2.HTTPError, err:
-			print '[DsayersCustomMixImporter][fetchURL] ERROR:',err
+			print '[ABMCustomMixImporter][fetchURL] ERROR:',err
 		except urllib2.URLError, err:
-			print '[DsayersCustomMixImporter][fetchURL] ERROR:',err.reason[0]
+			print '[ABMCustomMixImporter][fetchURL] ERROR:',err.reason[0]
 		except urllib2, err:
-			print '[DsayersCustomMixImporter][fetchURL] ERROR:',err
+			print '[ABMCustomMixImporter][fetchURL] ERROR:',err
 		except:
 			import sys
-			print '[DsayersCustomMixImporter][fetchURL] undefined error', sys.exc_info()[0]
+			print '[ABMCustomMixImporter][fetchURL] undefined error', sys.exc_info()[0]
 		self.showError("The CustomMix file could not be fetched")
 
 	def showError(self, message):
@@ -199,22 +199,22 @@ class DsayersCustomMixImporter(Screen):
 class schedule:
 	instance = None
 	def __init__(self, session):
-		print "[DsayersCustomMixSchedule][__init__] Starting..."
+		print "[ABMCustomMixSchedule][__init__] Starting..."
 		self.session = session
 		self.justBootedOrConfigChanged = True
-		self.enableImporter = config.plugins.dsayersImporter.enableImporter.value
-		self.leadTime = config.plugins.dsayersImporter.leadTime.value
-		self.mix = config.plugins.dsayersImporter.mix.value
+		self.enableImporter = config.plugins.ABMImporter.enableImporter.value
+		self.leadTime = config.plugins.ABMImporter.leadTime.value
+		self.mix = config.plugins.ABMImporter.mix.value
 		try:
 			self.enableSchedule = config.autobouquetsmaker.schedule.value
 			self.clock = [config.autobouquetsmaker.scheduletime.value[0], config.autobouquetsmaker.scheduletime.value[1]]
 			self.repeattype = config.autobouquetsmaker.repeattype.value
-			print "[DsayersCustomMixSchedule][__init__] ABM config available"
+			print "[ABMCustomMixSchedule][__init__] ABM config available"
 		except:
 			self.enableSchedule = False
 			self.clock = [0,0]
 			self.repeattype = "daily"
-			print "[DsayersCustomMixSchedule][__init__] ABM config was not available"
+			print "[ABMCustomMixSchedule][__init__] ABM config was not available"
 		self.fetchtimer = eTimer()
 		self.fetchtimer.callback.append(self.doSchedule)
 		if self.enableSchedule:
@@ -223,25 +223,25 @@ class schedule:
 		self.configtimer.callback.append(self.configChecker)
 		self.configtimer.startLongTimer(60)
 
-		assert simpleSchedule.instance is None, "[DsayersCustomMixImporter] class simpleSchedule is a singleton class and just one instance of this class is allowed!"
+		assert simpleSchedule.instance is None, "[ABMCustomMixImporter] class simpleSchedule is a singleton class and just one instance of this class is allowed!"
 		schedule.instance = self
 
 	def __onClose(self):
 		schedule.instance = None
 
 	def configChecker(self):
-		if self.enableImporter != config.plugins.dsayersImporter.enableImporter.value or \
-			self.leadTime != config.plugins.dsayersImporter.leadTime.value or \
-			self.mix != config.plugins.dsayersImporter.mix.value or \
+		if self.enableImporter != config.plugins.ABMImporter.enableImporter.value or \
+			self.leadTime != config.plugins.ABMImporter.leadTime.value or \
+			self.mix != config.plugins.ABMImporter.mix.value or \
 			self.enableSchedule != config.autobouquetsmaker.schedule.value or \
 			self.clock[0] != config.autobouquetsmaker.scheduletime.value[0] or \
 			self.clock[1] != config.autobouquetsmaker.scheduletime.value[1] or \
 			self.repeattype != config.autobouquetsmaker.repeattype.value \
 		:
-			print "[DsayersCustomMixImporter][configChecker] config has changed"
-			self.enableImporter = config.plugins.dsayersImporter.enableImporter.value
-			self.leadTime = config.plugins.dsayersImporter.leadTime.value
-			self.mix = config.plugins.dsayersImporter.mix.value
+			print "[ABMCustomMixImporter][configChecker] config has changed"
+			self.enableImporter = config.plugins.ABMImporter.enableImporter.value
+			self.leadTime = config.plugins.ABMImporter.leadTime.value
+			self.mix = config.plugins.ABMImporter.mix.value
 			self.enableSchedule = config.autobouquetsmaker.schedule.value
 			self.clock[0] = config.autobouquetsmaker.scheduletime.value[0]
 			self.clock[1] = config.autobouquetsmaker.scheduletime.value[1]
@@ -258,7 +258,7 @@ class schedule:
 				taskToSchedule(self.session)
 			self.startNextCycle()
 		else:
-			print "[DsayersCustomMixImporter][doSchedule] Scheduler disabled."
+			print "[ABMCustomMixImporter][doSchedule] Scheduler disabled."
 		self.justBootedOrConfigChanged = False
 
 	def startNextCycle(self):
@@ -274,7 +274,7 @@ class schedule:
 			self.fetchtimer.startLongTimer(next - now)
 		else:
 			next = -1
-		print "[DsayersCustomMixImporter][startNextCycle] Time set to", strftime("%c", localtime(next)), strftime("(now=%c)", localtime(now))
+		print "[ABMCustomMixImporter][startNextCycle] Time set to", strftime("%c", localtime(next)), strftime("(now=%c)", localtime(now))
 
 
 scheduleTimer = None
@@ -284,13 +284,13 @@ def pluginAutoStart(reason, session=None, **kwargs):
 	global _session
 	now = int(time())
 	if reason == 0:
-		print "[DsayersCustomMixImporter][pluginAutoStart] AutoStart Enabled"
+		print "[ABMCustomMixImporter][pluginAutoStart] AutoStart Enabled"
 		if session is not None:
 			_session = session
 			if scheduleTimer is None:
 				scheduleTimer = schedule(session)
 	else:
-		print "[DsayersCustomMixImporter][schedule] Stop"
+		print "[ABMCustomMixImporter][schedule] Stop"
 		scheduleTimer.stop()
 
 def ABMisLoaded():
@@ -298,20 +298,20 @@ def ABMisLoaded():
 
 
 def taskToSchedule(session, **kwargs):
-	session.open(DsayersCustomMixImporter)
+	session.open(ABMCustomMixImporter)
 
 def pluginManualStart(menuid, **kwargs):
 	if menuid == "scan":
-		return [(_("Dsayers CustomMix Importer"), DsayersCustomMixImporterMain, "DsayersCustomMixImporterScreen", 11)]
+		return [(_("ABM CustomMix Importer"), ABMCustomMixImporterMain, "ABMCustomMixImporterScreen", 11)]
 	return []
 
-def DsayersCustomMixImporterMain(session, **kwargs):
+def ABMCustomMixImporterMain(session, **kwargs):
 	menu_path = "%s / %s / %s" % (_('Main menu'), _('Setup'), _('Service searching'))
-	session.open(DsayersCustomMixImporterScreen, 'dsayerscustommiximporter', 'SystemPlugins/DsayersCustomMixImporter', menu_path, PluginLanguageDomain)
+	session.open(ABMCustomMixImporterScreen, 'ABMcustommiximporter', 'SystemPlugins/ABMCustomMixImporter', menu_path, PluginLanguageDomain)
 
 def Plugins(**kwargs):
 	pList = []
 	if ABMisLoaded():
 		pList.append( PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=pluginAutoStart))
-		pList.append( PluginDescriptor(name=_("Dsayers CustomMix Importer"), description="Imports CustomMix files for ABM", where = PluginDescriptor.WHERE_MENU, fnc=pluginManualStart, needsRestart=True) )
+		pList.append( PluginDescriptor(name=_("ABM CustomMix Importer"), description="Imports CustomMix files for ABM", where = PluginDescriptor.WHERE_MENU, fnc=pluginManualStart, needsRestart=True) )
 	return pList

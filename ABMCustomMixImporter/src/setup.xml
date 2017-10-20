@@ -1,0 +1,8 @@
+<!--suppress XmlUnboundNsPrefix -->
+<setupxml>
+     <setup key="abmcustommiximporter" title="abm CustomMix Importer">
+        <item level="2" text="Import" description="Select the CustomMix you want to import">config.plugins.abmImporter.mix</item>
+        <item level="2" text="Enable autofetch" description="Allows you automatically fetch the CustomMix file.">config.plugins.abmImporter.enableImporter</item>
+        <item level="2" text="Lead time"  requires="config.plugins.abmImporter.enableImporter" description="Number of minutes prior to the ABM scan that the CustomMix file should be fetched">config.plugins.abmImporter.leadTime</item>
+    </setup>
+</setupxml>

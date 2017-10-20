@@ -8,13 +8,13 @@ class Mixes():
 		try:
 			mix = open(filename, "r")
 		except Exception, e:
-			print "[DsayersCustomMixImporter][Mixes] Cannot open %s: %s" % (filename, e)
+			print "[ABMCustomMixImporter][Mixes] Cannot open %s: %s" % (filename, e)
 			return None
 
 		try:
 			dom = xml.dom.minidom.parse(mix)
 		except Exception, e:
-			print "[DsayersCustomMixImporter][Mixes] XML parse error (%s): %s" % (filename, e)
+			print "[ABMCustomMixImporter][Mixes] XML parse error (%s): %s" % (filename, e)
 			mix.close()
 			return None
 
@@ -53,7 +53,7 @@ class Mixes():
 
 			if not ("name" in mix and "provider" in mix and "url" in mix):
 
-				print "[DsayersCustomMixImporter][Mixes] Incomplete XML %s" % filename
+				print "[ABMCustomMixImporter][Mixes] Incomplete XML %s" % filename
 				continue
 
 			mixes[mix["key"]] = mix

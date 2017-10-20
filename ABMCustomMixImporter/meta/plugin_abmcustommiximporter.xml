@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Huevos</author>
+                    <name>ABM CustomMix Importer</name>
+                    <packagename>enigma2-plugin-systemplugins-abmcustommiximporter</packagename>
+                    <shortdescription>Imports various ABM CustomMix Files</shortdescription>
+                    <description>Imports various ABM CustomMix files from Github</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-abmcustommiximporter" />
+	</files>
+</default>

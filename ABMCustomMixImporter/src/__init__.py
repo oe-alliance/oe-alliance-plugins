@@ -5,8 +5,8 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 
-PluginLanguageDomain = "dsayercustommiximporter"
-PluginLanguagePath = "SystemPlugins/DsayersCustomMixImporter/locale"
+PluginLanguageDomain = "abmcustommiximporter"
+PluginLanguagePath = "SystemPlugins/ABMCustomMixImporter/locale"
 
 def pluginlanguagedomain():
 	return PluginLanguageDomain

@@ -1,0 +1,5 @@
+Package: enigma2-plugin-systemplugins-abmcustommiximporter
+Version: 2.0-r0
+Description: ABM CustomMix Importer
+Maintainer: www.world-of-satellite.com
+Depends: autobouquetsmaker
