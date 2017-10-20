@@ -17,6 +17,8 @@ from Components.config import config, ConfigSubsection, ConfigSelection, ConfigY
 from Components.Sources.Boolean import Boolean
 from Components.Pixmap import Pixmap
 
+from Tools.BoundFunction import boundFunction
+
 from enigma import eTimer, eDVBFrontendParametersSatellite, eComponentScan, eConsoleAppContainer, eDVBResourceManager
 
 import os
@@ -447,7 +449,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.session.nav.playService(self.session.postScanService)
 		for x in self["config"].list:
 			x[1].cancel()
-		self.close()
+		self.close(False)
 
 	def keyGo(self):
 		print "[Blindscan][keyGo] started"
@@ -1305,12 +1307,16 @@ class Blindscan(ConfigListScreen, Screen):
 		if hasattr(self, 'raw_channel'):
 			del self.raw_channel
 
-def main(session, close=None, **kwargs):
-	session.openWithCallback(close, Blindscan)
+def BlindscanCallback(close, answer):
+	if close and answer:
+		close(True)
+
+def BlindscanMain(session, close=None, **kwargs):
+	session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)
 
 def BlindscanSetup(menuid, **kwargs):
 	if menuid == "scan":
-		return [(_("Blind scan"), main, "blindscan", 25, False)]
+		return [(_("Blind scan"), BlindscanMain, "blindscan", 25, True)]
 	else:
 		return []
 
