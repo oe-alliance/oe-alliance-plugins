@@ -34,10 +34,10 @@ choices = sorted([(mixes[x]["key"], mixes[x]["name"]) for x in mixes], key=lambd
 default_mix = "dsayers_vmuk_into_skyuk"
 ABMpath = "/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/custom/"
 
-config.plugins.ABMImporter = ConfigSubsection()
-config.plugins.ABMImporter.mix = ConfigSelection(default = default_mix, choices = choices)
-config.plugins.ABMImporter.enableImporter = ConfigYesNo(default = False)
-config.plugins.ABMImporter.leadTime = ConfigSelection(default = "5", choices = [("1", _("1 minute")), ("2", _("2 minutes")), ("3", _("3 minutes")), ("5", _("5 minutes")), ("10", _("10 minutes")), ("20", _("20 minutes")), ("30", _("30 minutes"))])
+config.plugins.abmImporter = ConfigSubsection()
+config.plugins.abmImporter.mix = ConfigSelection(default = default_mix, choices = choices)
+config.plugins.abmImporter.enableImporter = ConfigYesNo(default = False)
+config.plugins.abmImporter.leadTime = ConfigSelection(default = "5", choices = [("1", _("1 minute")), ("2", _("2 minutes")), ("3", _("3 minutes")), ("5", _("5 minutes")), ("10", _("10 minutes")), ("20", _("20 minutes")), ("30", _("30 minutes"))])
 
 class ABMCustomMixImporterScreen(Setup):
 	skin = """
@@ -82,14 +82,14 @@ class ABMCustomMixImporterScreen(Setup):
 		self.onLayoutFinish.append(self.updatebuttontext)
 
 	def updatebuttontext(self):
-		if fileExists(ABMpath + mixes[config.plugins.ABMImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
+		if fileExists(ABMpath + mixes[config.plugins.abmImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
 			self["key_blue"].setText(_("Delete file"))
 		else:
 			self["key_blue"].setText("")
 
 	def keyDelete(self):
-		if fileExists(ABMpath + mixes[config.plugins.ABMImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
-			os.remove(ABMpath + mixes[config.plugins.ABMImporter.mix.value]["provider"] + "_CustomMix.xml")
+		if fileExists(ABMpath + mixes[config.plugins.abmImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
+			os.remove(ABMpath + mixes[config.plugins.abmImporter.mix.value]["provider"] + "_CustomMix.xml")
 		self.updatebuttontext()
 
 	def keySave(self):
@@ -101,7 +101,7 @@ class ABMCustomMixImporterScreen(Setup):
 		self.startImporter()
 
 	def saveConfig(self):
-		config.plugins.ABMImporter.save()
+		config.plugins.abmImporter.save()
 		configfile.save()
 
 	def keyCancel(self):
@@ -168,7 +168,7 @@ class ABMCustomMixImporter(Screen):
 
 	def fetchURL(self):
 		try:
-			req = urllib2.Request(mixes[config.plugins.ABMImporter.mix.value]["url"])
+			req = urllib2.Request(mixes[config.plugins.abmImporter.mix.value]["url"])
 			response = urllib2.urlopen(req)
 			print '[ABMCustomMixImporter][fetchURL] Response: %d' % response.getcode()
 			if int(response.getcode()) == 200:
@@ -202,9 +202,9 @@ class schedule:
 		print "[ABMCustomMixSchedule][__init__] Starting..."
 		self.session = session
 		self.justBootedOrConfigChanged = True
-		self.enableImporter = config.plugins.ABMImporter.enableImporter.value
-		self.leadTime = config.plugins.ABMImporter.leadTime.value
-		self.mix = config.plugins.ABMImporter.mix.value
+		self.enableImporter = config.plugins.abmImporter.enableImporter.value
+		self.leadTime = config.plugins.abmImporter.leadTime.value
+		self.mix = config.plugins.abmImporter.mix.value
 		try:
 			self.enableSchedule = config.autobouquetsmaker.schedule.value
 			self.clock = [config.autobouquetsmaker.scheduletime.value[0], config.autobouquetsmaker.scheduletime.value[1]]
@@ -230,18 +230,18 @@ class schedule:
 		schedule.instance = None
 
 	def configChecker(self):
-		if self.enableImporter != config.plugins.ABMImporter.enableImporter.value or \
-			self.leadTime != config.plugins.ABMImporter.leadTime.value or \
-			self.mix != config.plugins.ABMImporter.mix.value or \
+		if self.enableImporter != config.plugins.abmImporter.enableImporter.value or \
+			self.leadTime != config.plugins.abmImporter.leadTime.value or \
+			self.mix != config.plugins.abmImporter.mix.value or \
 			self.enableSchedule != config.autobouquetsmaker.schedule.value or \
 			self.clock[0] != config.autobouquetsmaker.scheduletime.value[0] or \
 			self.clock[1] != config.autobouquetsmaker.scheduletime.value[1] or \
 			self.repeattype != config.autobouquetsmaker.repeattype.value \
 		:
 			print "[ABMCustomMixImporter][configChecker] config has changed"
-			self.enableImporter = config.plugins.ABMImporter.enableImporter.value
-			self.leadTime = config.plugins.ABMImporter.leadTime.value
-			self.mix = config.plugins.ABMImporter.mix.value
+			self.enableImporter = config.plugins.abmImporter.enableImporter.value
+			self.leadTime = config.plugins.abmImporter.leadTime.value
+			self.mix = config.plugins.abmImporter.mix.value
 			self.enableSchedule = config.autobouquetsmaker.schedule.value
 			self.clock[0] = config.autobouquetsmaker.scheduletime.value[0]
 			self.clock[1] = config.autobouquetsmaker.scheduletime.value[1]
@@ -307,7 +307,7 @@ def pluginManualStart(menuid, **kwargs):
 
 def ABMCustomMixImporterMain(session, **kwargs):
 	menu_path = "%s / %s / %s" % (_('Main menu'), _('Setup'), _('Service searching'))
-	session.open(ABMCustomMixImporterScreen, 'ABMcustommiximporter', 'SystemPlugins/ABMCustomMixImporter', menu_path, PluginLanguageDomain)
+	session.open(ABMCustomMixImporterScreen, 'abmcustommiximporter', 'SystemPlugins/ABMCustomMixImporter', menu_path, PluginLanguageDomain)
 
 def Plugins(**kwargs):
 	pList = []
