@@ -154,7 +154,7 @@ class ABMCustomMixImporter(Screen):
 				if not inStandby:
 					self["action"].setText(_('Saving CustomMix file'))
 					self["status"] = Label("")
-				with open(ABMpath + mixes[config.plugins.ABMImporter.mix.value]["provider"] + "_CustomMix.xml", "w") as f:
+				with open(ABMpath + mixes[config.plugins.abmImporter.mix.value]["provider"] + "_CustomMix.xml", "w") as f:
 					f.write(CustomMix)
 					f.close()
 				if not inStandby:
