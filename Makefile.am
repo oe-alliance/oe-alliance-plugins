@@ -254,6 +254,10 @@ if VUUNO4K
 SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
 endif
 
+if VUZERO4K
+SUBDIRS += FirmwareUpgrade VuRemote
+endif
+
 if VUUNO4KSE
 SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
 endif
