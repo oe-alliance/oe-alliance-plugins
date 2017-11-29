@@ -1,0 +1,197 @@
+# Italian translations for enigma2 package WirelessAccessPoint
+# Copyright (C) 2012 THE enigma2'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2 package.
+# Automatically generated, 2012.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: WirelessAccessPoint\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2017-11-29 13:46+0000\n"
+"Language-Team: insanity@ <www.vuplus-community.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: it\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+msgid "disabled"
+msgstr "disattivato"
+
+msgid "enabled"
+msgstr "abilitato"
+
+msgid "WEP"
+msgstr "WEP"
+
+msgid "WPA"
+msgstr "WPA"
+
+msgid "WPA2"
+msgstr "WPA2"
+
+msgid "WPA/WPA2"
+msgstr "WPA/WPA2"
+
+msgid "Enable 64 bit (Input 10 hex keys)"
+msgstr "Abilitare 64 bit (Inserisci 10 codici esadecimali)"
+
+msgid "Enable 128 bit (Input 26 hex keys)"
+msgstr "Abilitare 128 bit (Inserisci 26 codici esadecimali)"
+
+msgid "not set"
+msgstr "non impostato"
+
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid " "
+msgstr " "
+
+msgid "Current settings (interface : br0)"
+msgstr "Configurazione correnti (interfaccia : br0)"
+
+msgid "IP Address"
+msgstr "Indirizzo IP"
+
+msgid "Netmask"
+msgstr "Netmask"
+
+msgid "Gateway"
+msgstr "Gateway"
+
+msgid "N/A"
+msgstr "N/D"
+
+msgid "Use AP Mode"
+msgstr "Usa la modalità AP"
+
+msgid "Setup Mode"
+msgstr "Modalità Impostazione"
+
+msgid "AP Device"
+msgstr "Dispositivo AP"
+
+msgid "AP Mode"
+msgstr "Modalità AP"
+
+msgid "Channel (1~13)"
+msgstr "Canale (1 ~ 13)"
+
+msgid "SSID (1~32 Characters)"
+msgstr "SSID (1 ~ 32 caratteri)"
+
+msgid "Beacon (15~65535)"
+msgstr "Beacon (15~65535)"
+
+msgid "RTS Threshold (0~2347)"
+msgstr "Soglia RTS (0 ~ 2347)"
+
+msgid "FRAGM Threshold (256~2346)"
+msgstr "FRAGM soglia (256 ~ 2346)"
+
+msgid "Preamble"
+msgstr "Preamble"
+
+msgid "Ignore Broadcast SSID"
+msgstr "Ignora SSID Broadcast"
+
+msgid "Encrypt"
+msgstr "Crittografato"
+
+msgid "Method"
+msgstr "Metodo"
+
+msgid "KeyType"
+msgstr "Tipo di chiave crittografica"
+
+msgid "WEP Key (HEX)"
+msgstr "Chiave WEP (HEX)"
+
+msgid "KEY (8~63 Characters)"
+msgstr "CHIAVE (8 ~ 63 caratteri)"
+
+msgid "Group Rekey Interval"
+msgstr "Intervallo gruppo Rekey"
+
+msgid "Use DHCP"
+msgstr "Usa DHCP"
+
+msgid "NetMask"
+msgstr "NetMask"
+
+msgid "Nameserver"
+msgstr "Server DNS"
+
+msgid "Please wait for AP Configuration....\n"
+msgstr "Attendi configurazione AP ...\n"
+
+msgid ""
+"Invalid WEP key\n"
+"\n"
+msgstr ""
+"Chiave WEP non valida\n"
+"\n"
+
+msgid ""
+"Invalid WPA key\n"
+"\n"
+msgstr ""
+"Chiave WPA non valida\n"
+"\n"
+
+msgid "Invalid SSID\n"
+msgstr "SSID non valido\n"
+
+msgid "Invalid channel\n"
+msgstr "Canale non valido\n"
+
+msgid "Invalid beacon\n"
+msgstr "Beacon non valido\n"
+
+msgid "Invalid RTS Threshold\n"
+msgstr "Soglia RTS non valida\n"
+
+msgid "Invalid Fragm Threshold\n"
+msgstr "Soglia Fragm non valida\n"
+
+msgid "Invalid wpagrouprekey\n"
+msgstr "Wpa Group rekey non valida\n"
+
+msgid "Configuration your AP is finished"
+msgstr "Configurazione AP terminata"
+
+msgid "Realtek"
+msgstr "Realtek"
+
+msgid "WLAN adapter."
+msgstr "Adattatore WLAN."
+
+msgid "Atheros"
+msgstr "Atheros"
+
+msgid "Zydas"
+msgstr "ZyDAS"
+
+msgid "Ralink"
+msgstr "Ralink"
+
+msgid "WLAN adapter"
+msgstr "Adattatore WLAN"
+
+msgid "Unknown network adapter"
+msgstr "Scheda di rete sconosciuta"
+
+msgid "Wireless Access Point"
+msgstr "Punto di accesso wireless"
+
+msgid "Using a Wireless module as access point."
+msgstr "Utilizzo di un modulo wireless come punto di accesso."
