@@ -93,3 +93,6 @@ msgstr "Non trovo il file del dispositivo!!"
 
 msgid "Firmware Upgrade"
 msgstr "Aggiornamento firmware"
+
+msgid "Upgrade Firmware.."
+msgstr "Aggiornamento Firmware.."
