@@ -1,125 +1,95 @@
-# Italian translations for Enigma2.
+# FirmwareUpgrade Italian translations for Enigma2.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2\n"
+"Project-Id-Version: FirmwareUpgrade for Enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-07 13:20+0200\n"
-"PO-Revision-Date: 2016-05-07 13:20+0200\n"
+"PO-Revision-Date: 2017-11-29 13:41+0000\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
+"Language-Team: insanity <www.vuplus-community.net>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 2.0.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../src/plugin.py:34 ../src/plugin.py:43 ../src/plugin.py:50
-#: ../src/plugin.py:59 ../src/plugin.py:70
 msgid "FPGA"
-msgstr ""
+msgstr "FPGA"
 
-#: ../src/plugin.py:35 ../src/plugin.py:51 ../src/plugin.py:60
-#: ../src/plugin.py:71
 msgid "Front Processor"
-msgstr ""
+msgstr "Front Processor"
 
-#: ../src/plugin.py:61
 msgid "VFD Controller"
-msgstr ""
+msgstr "VFD Controller"
 
-#: ../src/plugin.py:348
 msgid "Can't cancel during upgrade!!"
-msgstr ""
+msgstr "Impossibile annullare durante l'aggiornamento !!"
 
-#: ../src/plugin.py:350
 msgid "Status : 0%"
-msgstr ""
+msgstr "Stato: 0%"
 
-#: ../src/plugin.py:383
 msgid "Fail to upgrade!! Retry!!"
-msgstr ""
+msgstr "Aggiornamento fallito!! Riprova!!"
 
-#: ../src/plugin.py:385
-#, python-format
 msgid "%d / 100"
-msgstr ""
+msgstr "%d / 100"
 
-#: ../src/plugin.py:388
 msgid "Success. Press OK to exit."
-msgstr ""
+msgstr "Concluso con successo. Premere OK per uscire."
 
-#: ../src/plugin.py:417
 msgid "Do you want to remove binary data?"
-msgstr ""
+msgstr "Si desidera rimuovere dati binari ?"
 
-#: ../src/plugin.py:435
 msgid "Download"
-msgstr ""
+msgstr "Download"
 
-#: ../src/plugin.py:476
 msgid "Can't found binary file."
-msgstr ""
+msgstr "Non trovo il file binario."
 
-#: ../src/plugin.py:479
 msgid "Can't found MD5 file."
-msgstr ""
+msgstr "Non trovo il file MD5."
 
-#: ../src/plugin.py:490 ../src/plugin.py:494
 msgid "You choose the incorrect file. "
-msgstr ""
+msgstr "Hai scelto il file errato. "
 
-#: ../src/plugin.py:498
 msgid "Can't find /usr/bin/md5sum"
-msgstr ""
+msgstr "Non trovo /usr/bin/md5sum"
 
-#: ../src/plugin.py:505
-#, python-format
 msgid ""
 "Fail to verify data file. \n"
 "file[%s]\n"
 "md5[%s]"
 msgstr ""
+"Impossibile verificare il file.\n"
+"file[%s]\n"
+"md5[%s]"
 
-#: ../src/plugin.py:578
 msgid "Firmware does not exist."
-msgstr ""
+msgstr "Firmware non esiste."
 
-#: ../src/plugin.py:617
 msgid "Can't found model name."
-msgstr ""
+msgstr "Non trovo il nome del modello."
 
-#
-#: ../src/plugin.py:689
 msgid "Close"
 msgstr "Chiudere"
 
-#: ../src/plugin.py:700
 msgid "Duo/Solo was not support."
-msgstr ""
+msgstr "Duo/Solo non supportati."
 
-#: ../src/plugin.py:702
 msgid "Upgrade"
-msgstr ""
+msgstr "Aggiornamento"
 
-#: ../src/plugin.py:710
 msgid "Firmware"
-msgstr ""
+msgstr "Firmware"
 
-#: ../src/plugin.py:761
 msgid "No selected binary data!!"
-msgstr ""
+msgstr "Non selezionato un dato binario!!"
 
-#: ../src/plugin.py:768
 msgid "Can't found device file!!"
-msgstr ""
+msgstr "Non trovo il file del dispositivo!!"
 
-#: ../src/plugin.py:855
 msgid "Firmware Upgrade"
-msgstr ""
-
-#: ../src/plugin.py:855
-msgid "Upgrade Firmware.."
-msgstr ""
+msgstr "Aggiornamento firmware"
