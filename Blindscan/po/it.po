@@ -1,241 +1,59 @@
-# Italian translations for Enigma2.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2\n"
+"Project-Id-Version: BlindScan italian translation for Enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:07+0200\n"
-"PO-Revision-Date: 2016-05-07 13:07+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
+"POT-Creation-Date: 2017-11-26 13:02+0200\n"
+"PO-Revision-Date: 2017-11-29 13:37+0000\n"
+"Last-Translator: insanity <Marco@ADDRESS>\n"
+"Language-Team: insanity@ <http://www.vuplus-community.net>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.4\n"
+"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:61
-msgid "Blindscan"
-msgstr ""
-
-#
-#: ../src/plugin.py:113 ../src/plugin.py:125
-msgid "Exit"
-msgstr "Uscire"
-
-#: ../src/plugin.py:114
-msgid "Scan"
-msgstr ""
-
-#: ../src/plugin.py:115
-msgid "Press Green/OK to start the scan"
-msgstr ""
-
-#: ../src/plugin.py:127
-msgid "Please setup your tuner configuration."
-msgstr ""
-
-#: ../src/plugin.py:249
-msgid "Sorry, this tuner is in use."
-msgstr ""
-
-#
-#: ../src/plugin.py:306
-msgid "no"
-msgstr "No"
-
-#: ../src/plugin.py:307
-msgid "up to 1 degree"
-msgstr ""
-
-#: ../src/plugin.py:308
-msgid "up to 2 degrees"
-msgstr ""
-
-#: ../src/plugin.py:309
-msgid "up to 3 degrees"
-msgstr ""
-
-#: ../src/plugin.py:311
-msgid "scan for channels"
-msgstr ""
-
-#: ../src/plugin.py:312
-msgid "save to XML file"
-msgstr ""
-
-#: ../src/plugin.py:335 ../src/plugin.py:1150
-msgid "vertical and horizontal"
-msgstr ""
-
-#
-#: ../src/plugin.py:336 ../src/plugin.py:707
-msgid "vertical"
-msgstr "Verticale"
-
-#
-#: ../src/plugin.py:337 ../src/plugin.py:705
-msgid "horizontal"
-msgstr "Orizzontale"
-
-#: ../src/plugin.py:338 ../src/plugin.py:1157
-msgid "circular right and circular left"
-msgstr ""
-
-#
-#: ../src/plugin.py:339 ../src/plugin.py:696 ../src/plugin.py:703
-msgid "circular right"
-msgstr "Circolare a destra"
-
-#
-#: ../src/plugin.py:340 ../src/plugin.py:698 ../src/plugin.py:701
-msgid "circular left"
-msgstr "Circolare a sinistra"
-
-#: ../src/plugin.py:378
 msgid ""
 "\n"
 "Second slot dual tuner may not be supported blind scan."
 msgstr ""
+"\n"
+"Il secondo slot dual tuner potrebbe non supportare il blind scan."
 
-#: ../src/plugin.py:380
 msgid ""
 "\n"
 "You must use the power adapter."
 msgstr ""
+"\n"
+"Necessario utilizzare l'adattatore di alimentazione."
 
-#
-#: ../src/plugin.py:382
-msgid "Tuner"
-msgstr "Tuner"
+msgid "   Starting Sundtek hardware blind scan."
+msgstr "   Avviare Sundtek BlindScan hardware ."
 
-#: ../src/plugin.py:382
-msgid "Select a tuner that is configured for the satellite you wish to search"
-msgstr ""
-
-#
-#: ../src/plugin.py:391
-msgid "Satellite"
-msgstr "Satellite"
-
-#: ../src/plugin.py:391
-msgid "Select the satellite you wish to search"
-msgstr ""
-
-#: ../src/plugin.py:395 ../src/plugin.py:398
-msgid "Scan start frequency"
-msgstr ""
-
-#: ../src/plugin.py:395
-msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
-msgstr ""
-
-#: ../src/plugin.py:396 ../src/plugin.py:399
-msgid "Scan stop frequency"
-msgstr ""
-
-#: ../src/plugin.py:396
-msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
-msgstr ""
-
-#: ../src/plugin.py:398
-msgid "Frequency values must be between 10700 MHz and 12749 MHz"
-msgstr ""
-
-#: ../src/plugin.py:399
-msgid "Frequency values must be between 10701 MHz and 12750 MHz"
-msgstr ""
-
-#: ../src/plugin.py:400
-msgid "Polarisation"
-msgstr ""
-
-#: ../src/plugin.py:400
-#, python-format
-msgid "The suggested polarisation for this satellite is \"%s\""
-msgstr ""
-
-#: ../src/plugin.py:401
-msgid "Scan start symbolrate"
-msgstr ""
-
-#: ../src/plugin.py:401
-msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
-msgstr ""
-
-#: ../src/plugin.py:402
-msgid "Scan stop symbolrate"
-msgstr ""
-
-#: ../src/plugin.py:402
-msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
-msgstr ""
-
-#
-#: ../src/plugin.py:403
-msgid "Clear before scan"
-msgstr "Cancellare prima di cercare"
-
-#: ../src/plugin.py:403
-msgid ""
-"If you select \"yes\" all channels on the satellite being search will be "
-"deleted before starting the current search"
-msgstr ""
-
-#: ../src/plugin.py:404
-msgid "Only free scan"
-msgstr ""
-
-#: ../src/plugin.py:404
-msgid ""
-"If you select \"yes\" the scan will only save channels that are not "
-"encrypted; \"no\" will find encrypted and non-encrypted channels"
-msgstr ""
-
-#: ../src/plugin.py:405
-msgid "Only scan unknown transponders"
-msgstr ""
-
-#: ../src/plugin.py:405
-msgid ""
-"If you select \"yes\" the scan will only search transponders not listed in "
-"satellites.xml"
-msgstr ""
-
-#: ../src/plugin.py:406
-msgid "Filter out adjacent satellites"
-msgstr ""
-
-#: ../src/plugin.py:406
-msgid ""
-"When a neighbouring satellite is very strong this avoids searching "
-"transponders known to be coming from the neighbouring satellite"
-msgstr ""
-
-#: ../src/plugin.py:407
-msgid "Search type"
-msgstr ""
-
-#: ../src/plugin.py:407
 msgid ""
 "\"channel scan\" searches for channels and saves them to your receiver; both "
-"options do a transponder search and save the result in /tmp in an XML file "
-"in satellites.xml format"
+"options do a transponder search and save the result in /tmp in an XML file in "
+"satellites.xml format"
 msgstr ""
+"\"scansione canali\" ricerca i canali e li salva sul tuo ricevitore; entrambe "
+"le opzioni fanno una ricerca di transponder e salvano il risultato in /tmp in "
+"un file XML in formato satellites.XML"
 
-#: ../src/plugin.py:651
-#, python-format
-msgid "Not found blind scan utility '%s'!"
-msgstr ""
+msgid "%d transponders found at %d:%02d min"
+msgstr "transponder %d trovato a % %d:%02d min"
 
-#: ../src/plugin.py:710
-msgid "   Starting Sundtek hardware blind scan."
-msgstr ""
+msgid "Blind scan"
+msgstr "BlindScan"
 
-#: ../src/plugin.py:712
-#, python-format
+msgid "Blindscan"
+msgstr "BlindScan"
+
+msgid "Clear before scan"
+msgstr "Cancella prima di cercare"
+
 msgid ""
 "Current Status : %d/%d\n"
 "   Satellite : %s\n"
@@ -243,57 +61,205 @@ msgid ""
 "   Frequency range : %d - %d MHz\n"
 "   Symbol rates : %d - %d MHz"
 msgstr ""
+"Stato corrente : %d/%d\n"
+"   Satellite : %s\n"
+"   Polarizzazione : %s\n"
+"   Frequenza banda : %d - %d MHz\n"
+"   Symbolrates : %d - %d MHz"
 
-#: ../src/plugin.py:714
+msgid "Exit"
+msgstr "Esci"
+
+msgid "Filter out adjacent satellites"
+msgstr "Filtrare i satelliti adiacenti"
+
+msgid "Frequency values must be between 10700 MHz and 12749 MHz"
+msgstr "I valori devono essere compresi tra 10700 e 12749 MHz"
+
+msgid "Frequency values must be between 10701 MHz and 12750 MHz"
+msgstr "I valori devono essere compresi tra 10701 MHz e 12750 MHz"
+
+msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
+msgstr "I valori devono essere compresi tra 3000 MHz e 4199 MHz (Banda C)"
+
+msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
+msgstr "I valori devono essere compresi tra 3001 MHz e 4200 MHz (Banda C)"
+
+msgid ""
+"If you select \"yes\" all channels on the satellite being search will be "
+"deleted before starting the current search"
+msgstr ""
+"Selezione \"Sì\": Tutti i canali cercati sul satellite verranno eliminati prima "
+"di iniziare la ricerca corrente"
+
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not encrypted; "
+"\"no\" will find encrypted and non-encrypted channels"
+msgstr ""
+"Selezione \"Sì\": la scansione salverà solo canali in chiaro. \"No\": Ricerca "
+"canali criptati e in chiaro"
+
+msgid ""
+"If you select \"yes\" the scan will only search transponders not listed in "
+"satellites.xml"
+msgstr ""
+"Selezione \"Sì\": la scansione cercherà solo transponder non elencati in "
+"satellites. XML"
+
 msgid ""
 "Looking for available transponders.\n"
 "This will take a long time, please be patient."
 msgstr ""
+"Cerca per transponder disponibili.\n"
+"Ci vorrà molto tempo: attendere ..."
 
-#: ../src/plugin.py:716
 msgid ""
 "Looking for available transponders.\n"
 "This will take a short while."
 msgstr ""
+"Alla ricerca di transponder disponibili.\n"
+"Questo richiederà un po' di tempo."
 
-#: ../src/plugin.py:889
-#, python-format
-msgid "%d transponders found at %d:%02d min"
-msgstr ""
-
-#: ../src/plugin.py:949
-#, python-format
-msgid ""
-"Search completed. %d transponders found.\n"
-"\n"
-"Details saved in:\n"
-"%s"
-msgstr ""
-
-#: ../src/plugin.py:952
 msgid ""
 "No new transponders found! \n"
 "\n"
 "Only transponders already listed in satellites.xml \n"
 "have been found for those search parameters!"
 msgstr ""
+"Nessun nuovo transponder trovato! \n"
+"\n"
+"Trovati solo transponder già elencati in satellites.xml\n"
+"corrispondenti ai parametri di ricerca!"
 
-#: ../src/plugin.py:956
 msgid "No transponders were found for those search parameters!"
 msgstr ""
+"Non sono stati trovati transponder corrispondenti ai parametri di ricerca!"
 
-#: ../src/plugin.py:958
-msgid "The blindscan run was cancelled by the user."
-msgstr ""
+msgid "Not found blind scan utility '%s'!"
+msgstr "Utilità '%s' blind scan non trovata!"
 
-#: ../src/plugin.py:1170
-msgid "circular right & circular left"
-msgstr ""
+msgid "Only free scan"
+msgstr "Scansione solo freeTV"
 
-#: ../src/plugin.py:1236 ../src/plugin.py:1244
-msgid "Blind scan"
-msgstr ""
+msgid "Only scan unknown transponders"
+msgstr "Scansionare solo i transponder sconosciuti"
 
-#: ../src/plugin.py:1244
+msgid "Please setup your tuner configuration."
+msgstr "Impostare la configurazione del tuner."
+
+msgid "Polarisation"
+msgstr "Polarizzazione"
+
+msgid "Press Green/OK to start the scan"
+msgstr "Premere Verde/OK per avviare la scansione"
+
+msgid "Satellite"
+msgstr "Satellite"
+
+msgid "Scan"
+msgstr "Scansiona"
+
 msgid "Scan satellites for new transponders"
+msgstr "Scansione di satelliti per trovare nuovi transponder"
+
+msgid "Scan start frequency"
+msgstr "Frequenza di inizio ricerca"
+
+msgid "Scan start symbolrate"
+msgstr "Symbolrate di inizio ricerca"
+
+msgid "Scan stop frequency"
+msgstr "Frequenza di fine ricerca"
+
+msgid "Scan stop symbolrate"
+msgstr "Symbolrate di fine ricerca"
+
+msgid ""
+"Search completed. %d transponders found.\n"
+"\n"
+"Details saved in:\n"
+"%s"
 msgstr ""
+"Ricerca completata. %d transponder trovati.\n"
+"\n"
+"Dettagli salvati in:\n"
+"%s"
+
+msgid "Search type"
+msgstr "Tipo di ricerca"
+
+msgid "Select a tuner that is configured for the satellite you wish to search"
+msgstr "Seleziona un tuner configurato per il satellite di ricerca"
+
+msgid "Select the satellite you wish to search"
+msgstr "Seleziona il satellite di ricerca"
+
+msgid "Sorry, this tuner is in use."
+msgstr "Questo tuner è in uso."
+
+msgid "Step %d %d:%02d min"
+msgstr "Passo %d %d:%02d min"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+msgstr ""
+"I valori Symbolrate sono in megasymbols; inserisci un valore compreso tra 1 e 44"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
+msgstr ""
+"I valori Symbolrate sono in megasymbols; inserisci un valore compreso tra 2 e 45"
+
+msgid "The blindscan run was cancelled by the user."
+msgstr "Ricerca blinscan interrotta dall'utente."
+
+msgid "The suggested polarisation for this satellite is \"%s\""
+msgstr "La polarizzazione suggerita per questo satellite è \"%s\""
+
+msgid "Tuner"
+msgstr "Tuner"
+
+msgid ""
+"When a neighbouring satellite is very strong this avoids searching transponders "
+"known to be coming from the neighbouring satellite"
+msgstr ""
+"Quando un satellite vicino ha un segnale molto forte, evita di cercare "
+"transponder noti provenienti da esso."
+
+msgid "circular left"
+msgstr "circolare sinistro"
+
+msgid "circular right"
+msgstr "circolare destro"
+
+msgid "circular right & circular left"
+msgstr "circolare destro & circolare sinistro"
+
+msgid "circular right and circular left"
+msgstr "circolare destro e circolare sinistro"
+
+msgid "horizontal"
+msgstr "orizzontale"
+
+msgid "no"
+msgstr "no"
+
+msgid "save to XML file"
+msgstr "salvare in file XML"
+
+msgid "scan for channels"
+msgstr "ricerca di canali"
+
+msgid "up to 1 degree"
+msgstr "fino a 1 grado"
+
+msgid "up to 2 degrees"
+msgstr "fino a 2 gradi"
+
+msgid "up to 3 degrees"
+msgstr "fino a 3 gradi"
+
+msgid "vertical"
+msgstr "verticale"
+
+msgid "vertical and horizontal"
+msgstr "verticale e orizzontale"
+
