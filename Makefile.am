@@ -326,3 +326,7 @@ endif
 if XC7358CI
 SUBDIRS += VPLEDControl
 endif
+
+if OSNINO
+SUBDIRS += VPLEDControl
+endif
