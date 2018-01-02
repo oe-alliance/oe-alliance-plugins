@@ -13,7 +13,9 @@ from boxbranding import getImageDistro, getBoxType
 
 def getRcuDefaultType():
 	if getBoxType() in ["vuultimo4k"]:
-		return "new"
+		return "type5"
+	elif getBoxType() in ["vuzero4k"]:
+		return "type6"
 	return "legacy"
 
 config.misc.remotecontrol_text_support = ConfigYesNo(default = True)
@@ -26,7 +28,7 @@ else:
 	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "2", choices =
 		[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
 config.plugins.remotecontrolcode.rcuType = ConfigSelection(default = getRcuDefaultType(), choices = 
-	[ ("legacy", "Legacy Vu+ Universal RCU"), ("new", "New Vu+ Bluetooth RCU") ] )
+	[ ("legacy", "Legacy Vu+ Universal RCU"), ("type5", "New Vu+ Bluetooth RCU"), ("type6", "New Vu+ Type 6 RCU") ] )
 
 class RemoteControlCodeInit:
 	def __init__(self):
@@ -107,10 +109,10 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 				self.restoreCode()
 				self.session.openWithCallback(self.close, MessageBox, _("FILE NOT EXIST : /proc/stb/fp/remote_code"), MessageBox.TYPE_ERROR)
 			else:
-				if config.plugins.remotecontrolcode.rcuType.value == "new":
-					self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold <OK> and <STB> until red LED is solid, then press '0000") + config.plugins.remotecontrolcode.systemcode.value + _("', then press <OK>\n") + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout = 60, default = False)
-				else:
+				if config.plugins.remotecontrolcode.rcuType.value == "legacy":
 					self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000") + config.plugins.remotecontrolcode.systemcode.value + "'\n" + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout = 60, default = False)
+				else:
+					self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold <OK> and <STB> until red LED is solid, then press '0000") + config.plugins.remotecontrolcode.systemcode.value + "', then press <OK>\n" + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout = 60, default = False)
 		else:
 			self.close()
 
