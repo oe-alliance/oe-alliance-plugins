@@ -330,3 +330,7 @@ endif
 if OSNINO
 SUBDIRS += VPLEDControl
 endif
+
+if OSNINOPLUS
+SUBDIRS += VPLEDControl
+endif
