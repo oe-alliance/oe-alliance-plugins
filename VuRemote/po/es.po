@@ -53,7 +53,7 @@ msgstr "Para cambiar el modo del mando a distancia"
 
 #: plugin.py:111
 msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
-msgstr "Pulsa y deja pulsados <OK> y <STB> hasta que que el LED rojo se quede fijo, entonce pulsa '0000"
+msgstr "Pulsa y deja pulsados <OK> y <STB> hasta que el LED rojo se quede fijo, entonces pulsa '0000"
 
 #: plugin.py:111
 msgid "', then press <OK>\n"
