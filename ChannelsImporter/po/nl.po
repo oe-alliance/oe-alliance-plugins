@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-07 09:52+0000\n"
-"PO-Revision-Date: 2017-11-10 15:13+0100\n"
+"POT-Creation-Date: 2018-01-16 22:00+0000\n"
+"PO-Revision-Date: 2018-01-17 06:32+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.5\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
@@ -27,8 +27,14 @@ msgstr "%a %e %b  %-H:%M"
 msgid "%d/%d"
 msgstr "%d/%d"
 
+msgid "'yes' and remote fallback tuner will be automatically configured to stream from the remote receiver. 'no' and fallback will not be edited."
+msgstr "Dit geeft de mogelijkheid om de fallbacktuner automatisch te configureren (om te kunnen streamen vanaf de server)."
+
+msgid "Allows you to set a schedule to perform an import."
+msgstr "Een optie om de import te plannen."
+
 msgid "Auto configure remote fallback tuner"
-msgstr "Auto-configureer gast-fallback tuner"
+msgstr "Auto-configureer de fallback tuner"
 
 msgid "Channels importer"
 msgstr "Zenders importeren"
@@ -113,6 +119,15 @@ msgstr "FTP poort"
 msgid "FTP Username"
 msgstr "FTP gebruikersnaam"
 
+msgid "FTP password of the remote receiver the channel list is being imported from."
+msgstr "FTP wachtwoord van de serverbox waarvan de kanaallijst wordt geïmporteerd."
+
+msgid "FTP port of the remote receiver the channel list is being imported from."
+msgstr "FTP poort van de serverbox waarvan de kanaallijst wordt geïmporteerd."
+
+msgid "FTP username of the remote receiver the channel list is being imported from."
+msgstr "FTP gebruikersnaam van de serverbox waarvan de kanaallijst wordt geïmporteerd."
+
 msgid "Fetch channels from the server."
 msgstr "Lees kanalen van gastontvanger."
 
@@ -121,6 +136,15 @@ msgstr "Voor het importeren van boeketten van een andere ontvanger."
 
 msgid "Force EPG save on remote receiver"
 msgstr "Forceer EPG opslaan op externe ontvanger"
+
+msgid "IP address of the remote receiver the channel list is  being imported from."
+msgstr "IP-adres van de serverbox waarvan de kanaallijst wordt geïmporteerd."
+
+msgid "If 'yes' the importer will automatically import and load EPG data from the remote receiver if the file exists."
+msgstr "Hier kunt u kiezen alle EPG van de serverbox te importeren (indien het bestand epg.dat bestaat)."
+
+msgid "If 'yes' the importer will automatically run at startup or reboot."
+msgstr "Hiermee kunt u de import automatisch laten plaatsvinden na elke boot."
 
 msgid "Import"
 msgstr "Importeer"
@@ -139,6 +163,9 @@ msgstr "Hoofdmenu"
 
 msgid "Passive mode"
 msgstr "Passieve modus"
+
+msgid "Push error messages to the screen. Switch on for debugging only."
+msgstr "Geeft foutmeldingen weer op het scherm. Alleen in te schakelen in geval van problemen."
 
 msgid "Really close without saving settings?"
 msgstr "Echt afsluiten zonder opslaan?"
@@ -168,8 +195,17 @@ msgstr "Zoeken naar epg.dat"
 msgid "Service searching"
 msgstr "Zenders zoeken"
 
+msgid "Set the repeat interval of the schedule."
+msgstr "Hier stelt u het herhalingsinterval in."
+
+msgid "Set the time of day to perform the scan."
+msgstr "Geef de tijd op waarop de import moet plaatsvinden."
+
 msgid "Setup"
 msgstr "Instellingen"
+
+msgid "Should the FTP connection to the remote receiver be established in passive mode?"
+msgstr "Moet de FTP-verbinding met de serverbox in de passieve mode worden uitgevoerd?"
 
 msgid "Show error messages"
 msgstr "Toon foutmeldingen"
@@ -185,6 +221,9 @@ msgstr "Start importeren..."
 
 msgid "Time import should start"
 msgstr "Tijd waarop de import moet plaatsvinden"
+
+msgid "When enabled, allows you start an import from the extensions list."
+msgstr "Indien ingeschakeld kunt u de import starten vanuit de extensielijst."
 
 msgid "epg.dat not found"
 msgstr "epg.dat niet gevonden"
