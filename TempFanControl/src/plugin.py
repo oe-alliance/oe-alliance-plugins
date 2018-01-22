@@ -22,8 +22,8 @@ class TempFanControl(Screen, ConfigListScreen):
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
-			<widget source="red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget source="green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 
 			<widget name="config" position="10,50" size="550,120" scrollbarMode="showOnDemand" />
 
@@ -103,8 +103,8 @@ class TempFanControl(Screen, ConfigListScreen):
 		fanlist = sensors.getSensorsList(sensors.TYPE_FAN_RPM)
 		fancount = len(fanlist)
 
-		self["red"] = StaticText(_("Cancel"))
-		self["green"] = StaticText(_("OK"))
+		self["key_red"] = self["red"] = StaticText(_("Cancel"))
+		self["key_green"] = self["green"] = StaticText(_("OK"))
 
 		for count in range(8):
 			if count < tempcount:
