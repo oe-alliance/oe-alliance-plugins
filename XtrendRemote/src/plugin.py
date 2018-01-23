@@ -63,8 +63,8 @@ class RCSetupScreen(Screen, ConfigListScreen):
 		from Components.ActionMap import ActionMap
 		from Components.Button import Button
 
-		self["ok"] = Button(_("OK"))
-		self["cancel"] = Button(_("Cancel"))
+		self["key_green"] = self["ok"] = Button(_("OK"))
+		self["key_red"] = self["cancel"] = Button(_("Cancel"))
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
