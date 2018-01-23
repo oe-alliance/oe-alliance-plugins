@@ -1,77 +1,91 @@
+# Portuguese translations for enigma2 package.
+# Copyright (C) 2012 THE enigma2'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2 package.
+# Automatically generated, 2012.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:21+0200\n"
-"PO-Revision-Date: 2016-10-23 01:50+0100\n"
-"Last-Translator: shimano\n"
-"Language-Team: BH Team\n"
-"Language: pt\n"
+"POT-Creation-Date: 2016-05-07 12:57+0200\n"
+"PO-Revision-Date: 2018-01-23 00:51+0000\n"
+"Language-Team: BlackHole Team\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: nunigaia\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.11\n"
+"Language: pt\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
+#: plugin.py:64 plugin.py:164 plugin.py:171
 msgid "Remote Control Code"
 msgstr "Código do Telecomando"
 
-#
-#: ../src/plugin.py:68
+#: plugin.py:75
 msgid "Cancel"
 msgstr "Cancelar"
 
-#
-#: ../src/plugin.py:69
+#: plugin.py:76
 msgid "Save"
-msgstr "Guardar"
+msgstr "Gravar"
 
-#: ../src/plugin.py:80
+#: plugin.py:87
 #, python-format
 msgid "Sorry, but %s is not supported."
 msgstr "Desculpe, mas %s não é suportado."
 
-#: ../src/plugin.py:84
-msgid "Remote Control System Code"
-msgstr "Código de sistema do telecomando"
+#: plugin.py:91
+msgid "Remote Control Type"
+msgstr "Tipo de Telecomando"
 
-#: ../src/plugin.py:87
+#: plugin.py:92
+msgid "Remote Control System Code"
+msgstr "Código de sistema do Telecomando"
+
+#: plugin.py:96
 msgid "Text support"
 msgstr "Suporte de Texto"
 
-#: ../src/plugin.py:99
+#: plugin.py:108
 msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr "Arquivo não existe: /proc/stb/fp/remote_code"
+msgstr "FICHEIRO não existe: /proc/stb/fp/remote_code"
 
-#: ../src/plugin.py:101
+#: plugin.py:111 plugin.py:113
 msgid "Please change your remote mode"
-msgstr "Por favor modifique o modo do seu telecomando"
+msgstr "Altere o modo do seu Telecomando:"
 
-#: ../src/plugin.py:101
+#: plugin.py:111
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
+msgstr ""
+"Prima e retenha <OK> e <STB> até que o LED vermelho acenda, depois prima '0000"
+
+#: plugin.py:111
+msgid "', then press <OK>\n"
+msgstr "', depois prima <OK>\n"
+
+#: plugin.py:111 plugin.py:113
+msgid "Then choose 'Keep' within seconds"
+msgstr "Depois escolha 'Manter' dentro"
+
+#: plugin.py:113
 msgid ""
 "Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
 "press '000"
 msgstr ""
-"Prima simultaneamente '2' e '7' até que o Led se ilumine, prima depois a "
-"tecla 'HELP', depois prima '000'."
+"Prima e retenha <2> e <7> até que o LED vermelho acenda, depois prima '000"
 
-#: ../src/plugin.py:101
-msgid "Then choose 'Keep' within seconds"
-msgstr "Então escolha 'manter' em segundos"
-
-#: ../src/plugin.py:122
+#: plugin.py:134
 msgid "Keep"
 msgstr "Manter"
 
-#
-#: ../src/plugin.py:122
+#: plugin.py:134
 msgid "Restore"
 msgstr "Restaurar"
 
-#: ../src/plugin.py:128
+#: plugin.py:140
 #, python-format
 msgid " in %d seconds."
-msgstr "em %d segundos."
+msgstr " de %d segundos."
