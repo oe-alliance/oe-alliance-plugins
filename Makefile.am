@@ -214,6 +214,10 @@ if H7
 SUBDIRS += F3LEDControl
 endif
 
+if H9
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if LC
 SUBDIRS += F3LEDControl
 endif
