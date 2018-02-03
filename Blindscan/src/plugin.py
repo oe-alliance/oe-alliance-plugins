@@ -36,7 +36,7 @@ _supportNimType = { 'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_', 'BCM7356
 _unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', ) # format = nim.description from nimmanager
 
 # blindscan-s2 supported tuners
-_blindscans2Nims = ('TBS-5925', 'DVBS2BOX')
+_blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
 
 #used for blindscan-s2
 def getAdapterFrontend(frontend, description):
