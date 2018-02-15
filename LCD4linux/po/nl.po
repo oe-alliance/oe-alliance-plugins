@@ -2,2948 +2,1080 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-07-07 18:08+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"POT-Creation-Date: 2018-02-08 23:50+0000\n"
+"PO-Revision-Date: 2018-02-15 07:13+0100\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: MO.txt:265
-msgid "black"
-msgstr "zwart"
-
-#: MO.txt:265
-msgid "white"
-msgstr "wit"
-
-#: MO.txt:266
-msgid "gray"
-msgstr "grijs"
-
-#: MO.txt:266
-msgid "silver"
-msgstr "zilver"
-
-#: MO.txt:266
-msgid "slategray"
-msgstr "leigrijs"
-
-#: MO.txt:267
-msgid "aquamarine"
-msgstr "zeegroen"
-
-#: MO.txt:268
-msgid "gold"
-msgstr "goud"
-
-#: MO.txt:268
-msgid "greenyellow"
-msgstr "groengeel"
-
-#: MO.txt:268
-msgid "yellow"
-msgstr "geel"
-
-#: MO.txt:269
-msgid "darkorange"
-msgstr "donker oranje"
-
-#: MO.txt:269
-msgid "darkred"
-msgstr "donker rood"
-
-#: MO.txt:269
-msgid "indianred"
-msgstr "indianred"
-
-#: MO.txt:269
-msgid "orange"
-msgstr "oranje"
-
-#: MO.txt:269
-msgid "orangered"
-msgstr "oranjerood"
-
-#: MO.txt:269
-msgid "red"
-msgstr "rood"
-
-#: MO.txt:269
-msgid "tomato"
-msgstr "tomaat"
-
-#: MO.txt:270
-msgid "darkgreen"
-msgstr "donker groen"
-
-#: MO.txt:270
-msgid "green"
-msgstr "groen"
-
-#: MO.txt:270
-msgid "lawngreen"
-msgstr "grasgroen"
-
-#: MO.txt:270
-msgid "lightgreen"
-msgstr "licht groen"
-
-#: MO.txt:270
-msgid "lime"
-msgstr "limoen"
-
-#: MO.txt:271
-msgid "blue"
-msgstr "blauw"
-
-#: MO.txt:271
-msgid "blueviolet"
-msgstr "blauw paars"
-
-#: MO.txt:271
-msgid "cadetblue"
-msgstr "blauw-grijs"
-
-#: MO.txt:271
-msgid "cornflowerblue"
-msgstr "korenbloem blauw"
-
-#: MO.txt:271
-msgid "darkblue"
-msgstr "donker blauw"
-
-#: MO.txt:271
-msgid "indigo"
-msgstr "indigo"
-
-#: MO.txt:271
-msgid "lightblue"
-msgstr "licht blauw"
-
-#: MO.txt:272
-msgid "cyan"
-msgstr "groenblauw"
-
-#: MO.txt:272
-msgid "darkorchid"
-msgstr "donker paars"
-
-#: MO.txt:272
-msgid "deeppink"
-msgstr "diep paars"
-
-#: MO.txt:272
-msgid "magenta"
-msgstr "magenta"
-
-#: MO.txt:272
-msgid "violet"
-msgstr "paars"
-
-#: MO.txt:273
-msgid "brown"
-msgstr "bruin"
-
-#: MO.txt:273
-msgid "moccasin"
-msgstr "moccasin"
-
-#: MO.txt:273
-msgid "olive"
-msgstr "olijf"
-
-#: MO.txt:273
-msgid "rosybrown"
-msgstr "roze bruin"
-
-#: MO.txt:273
-msgid "sandybrown"
-msgstr "zandbruin"
-
-#: MO.txt:275
-msgid "Screen 1+2"
-msgstr "Scherm 1+2"
-
-#: MO.txt:275
-msgid "Screen 1+2+3"
-msgstr "Scherm 1+2+3"
-
-#: MO.txt:275
-msgid "Screen 1+2+3+4"
-msgstr "Scherm 1+2+3+4"
-
-#: MO.txt:275
-msgid "Screen 1+2+4"
-msgstr "Scherm 1+2+4"
-
-#: MO.txt:275
-msgid "Screen 1+3"
-msgstr "Scherm 1+3"
-
-#: MO.txt:275
-msgid "Screen 1+3+4"
-msgstr "Scherm 1+3+4"
-
-#: MO.txt:275
-msgid "Screen 1+3+5+7+9"
-msgstr "Scherm 1+3+5+7+9"
-
-#: MO.txt:275
-msgid "Screen 1+4"
-msgstr "Scherm 1+4"
-
-#: MO.txt:275
-msgid "Screen 2+3"
-msgstr "Scherm 2+3"
-
-#: MO.txt:275
-msgid "Screen 2+3+4"
-msgstr "Scherm 2+3+4"
-
-#: MO.txt:275
-msgid "Screen 2+4"
-msgstr "Scherm 2+4"
-
-#: MO.txt:275
-msgid "Screen 2+4+6+8"
-msgstr "Scherm 2+4+6+8"
-
-#: MO.txt:275
-msgid "Screen 3+4"
-msgstr "Scherm 3+4"
-
-#: MO.txt:275
-msgid "Screen 5-9"
-msgstr "Scherm 5-9"
-
-#: MO.txt:275 MO.txt:276
-msgid "Screen 1-5"
-msgstr "Scherm 1-5"
-
-#: MO.txt:275 MO.txt:276
-msgid "Screen 1-6"
-msgstr "Scherm 1-6"
-
-#: MO.txt:275 MO.txt:276
-msgid "Screen 1-7"
-msgstr "Scherm 1-7"
-
-#: MO.txt:275 MO.txt:276
-msgid "Screen 1-8"
-msgstr "Scherm 1-8"
-
-#: MO.txt:275 MO.txt:276
-msgid "Screen 1-9"
-msgstr "Scherm 1-9"
-
-#: MO.txt:275 MO.txt:276 MO.txt:277
-msgid "Screen 1"
-msgstr "Scherm 1"
-
-#: MO.txt:275 MO.txt:277
-msgid "Screen 2"
-msgstr "Scherm 2"
-
-#: MO.txt:275 MO.txt:277
-msgid "Screen 3"
-msgstr "Scherm 3"
-
-#: MO.txt:275 MO.txt:277
-msgid "Screen 4"
-msgstr "Scherm 4"
-
-#: MO.txt:275 MO.txt:277
-msgid "Screen 5"
-msgstr "Scherm 5"
-
-#: MO.txt:275 MO.txt:277
-msgid "Screen 6"
-msgstr "Scherm 6"
-
-#: MO.txt:275 MO.txt:277
-msgid "Screen 7"
-msgstr "Scherm 7"
-
-#: MO.txt:275 MO.txt:277
-msgid "Screen 8"
-msgstr "Scherm 8"
-
-#: MO.txt:275 MO.txt:277
-msgid "Screen 9"
-msgstr "Scherm9"
-
-#: MO.txt:275 MO.txt:278 MO.txt:312 MO.txt:351 MO.txt:360 MO.txt:361 MO.txt:375
-#: MO.txt:449 MO.txt:450 MO.txt:475 MO.txt:476 MO.txt:581 MO.txt:598 MO.txt:607
-#: MO.txt:621 MO.txt:630 MO.txt:640 MO.txt:712 MO.txt:996 MO.txt:1070
-#: MO.txt:1078 MO.txt:1089 MO.txt:1100 MO.txt:1110 MO.txt:1120 MO.txt:1130
-#: MO.txt:1138 MO.txt:1203 MO.txt:1211 MO.txt:1222 MO.txt:1490 MO.txt:1582
-#: MO.txt:1593 MO.txt:1603 MO.txt:1613 MO.txt:1635 MO.txt:1643 MO.txt:1657
-#: MO.txt:1666 MO.txt:1676 MO.txt:1716 MO.txt:1724 MO.txt:1736 MO.txt:1744
-#: MO.txt:1755 MO.txt:1936 MO.txt:2007 MO.txt:2018 MO.txt:2029 MO.txt:2039
-#: MO.txt:2049 MO.txt:2059 MO.txt:2067 MO.txt:2125 MO.txt:2139 MO.txt:2148
-#: MO.txt:2158 MO.txt:2198 MO.txt:2206
-msgid "off"
-msgstr "uit"
-
-#: MO.txt:276
-msgid "Screen 1-2"
-msgstr "Scherm 1-2"
-
-#: MO.txt:276
-msgid "Screen 1-3"
-msgstr "Scherm1-3"
-
-#: MO.txt:276
-msgid "Screen 1-4"
-msgstr "Scherm 1-4"
-
-#: MO.txt:278 MO.txt:1736
-msgid "on"
-msgstr "aan"
-
-#: MO.txt:279 MO.txt:438 MO.txt:443
-msgid "10s"
-msgstr "10s"
-
-#: MO.txt:279 MO.txt:438 MO.txt:443
-msgid "15s"
-msgstr "15s"
-
-#: MO.txt:279 MO.txt:438 MO.txt:443
-msgid "1min"
-msgstr "1min"
-
-#: MO.txt:279 MO.txt:438 MO.txt:443
-msgid "20s"
-msgstr "20s"
-
-#: MO.txt:279 MO.txt:438 MO.txt:443
-msgid "2min"
-msgstr "2min"
-
-#: MO.txt:279 MO.txt:438 MO.txt:443
-msgid "30s"
-msgstr "30s"
-
-#: MO.txt:279
-msgid "3min"
-msgstr "3min"
-
-#: MO.txt:279
-msgid "40s"
-msgstr "40s"
-
-#: MO.txt:279
-msgid "4min"
-msgstr "4min"
-
-#: MO.txt:279
-msgid "50s"
-msgstr "50s"
-
-#: MO.txt:279 MO.txt:497
-msgid "5min"
-msgstr "5min"
-
-#: MO.txt:279
-msgid "5s"
-msgstr "5s"
-
-#: MO.txt:279 MO.txt:497
-msgid "10min"
-msgstr "10min"
-
-#: MO.txt:279 MO.txt:497 MO.txt:546
-msgid "20min"
-msgstr "20min"
-
-#: MO.txt:279 MO.txt:497 MO.txt:546 MO.txt:1141
-msgid "30min"
-msgstr "30min"
-
-#: MO.txt:279 MO.txt:497 MO.txt:546 MO.txt:1141
-msgid "60min"
-msgstr "60min"
-
-#: MO.txt:280 MO.txt:281
-msgid "LCD 1"
-msgstr "LCD 1"
-
-#: MO.txt:280
-msgid "LCD 1+2"
-msgstr "LCD 1+2"
-
-#: MO.txt:280
-msgid "LCD 1+2+3"
-msgstr "LCD 1+2+3"
-
-#: MO.txt:280
-msgid "LCD 1+3"
-msgstr "LCD 1+3"
-
-#: MO.txt:280 MO.txt:281
-msgid "LCD 2"
-msgstr "LCD 2"
-
-#: MO.txt:280
-msgid "LCD 2+3"
-msgstr "LCD 2+3"
-
-#: MO.txt:280 MO.txt:281
-msgid "LCD 3"
-msgstr "LCD 3"
-
-#: MO.txt:282
-msgid "Corby@Pearl 128x128"
-msgstr "Corby@Pearl 128x128"
-
-#: MO.txt:282
-msgid "Pearl (or compatible LCD) 240x320"
-msgstr "Pearl (of compatible LCD) 240x320"
-
-#: MO.txt:282
-msgid "Pearl (or compatible LCD) 320x240"
-msgstr "Pearl (of compatible LCD) 320x240"
-
-#: MO.txt:283
-msgid "Samsung SPF-72H 800x480"
-msgstr "Samsung SPF-72H 800x480"
-
-#: MO.txt:283
-msgid "Samsung SPF-75H/76H 800x480"
-msgstr "Samsung SPF-75H/76H 800x480"
-
-#: MO.txt:283
-msgid "Samsung SPF-83H 800x600"
-msgstr "Samsung SPF-83H 800x600"
-
-#: MO.txt:283
-msgid "Samsung SPF-87H 800x480"
-msgstr "Samsung SPF-87H 800x480"
-
-#: MO.txt:283
-msgid "Samsung SPF-87H old 800x480"
-msgstr "Samsung SPF-87H old 800x480"
-
-#: MO.txt:284
-msgid "Samsung SPF-105P 1024x600"
-msgstr "Samsung SPF-105P 1024x600"
-
-#: MO.txt:284
-msgid "Samsung SPF-107H 1024x600"
-msgstr "Samsung SPF-107H 1024x600"
-
-#: MO.txt:284
-msgid "Samsung SPF-107H old 1024x600"
-msgstr "Samsung SPF-107H old 1024x600"
-
-#: MO.txt:284
-msgid "Samsung SPF-85H/86H 800x600"
-msgstr "Samsung SPF-85H/86H 800x600"
-
-#: MO.txt:284
-msgid "Samsung SPF-85P/86P 800x600"
-msgstr "Samsung SPF-85P/86P 800x600"
-
-#: MO.txt:285
-msgid "Samsung SPF-700T 800x600"
-msgstr "Samsung SPF-700T 800x600"
-
-#: MO.txt:286
-msgid "Internal TFT-LCD 400x240"
-msgstr "Intern TFT-LCD 400x240"
-
-#: MO.txt:287
-msgid "Internal Box-Skin-LCD"
-msgstr "Intern Box-Skin-LCD"
-
-#: MO.txt:288
-msgid "only Picture 1024x600"
-msgstr "alleen foto1024x600"
-
-#: MO.txt:288
-msgid "only Picture 320x240"
-msgstr "alleen foto 320x240"
-
-#: MO.txt:288
-msgid "only Picture 800x480"
-msgstr "alleen foto 800x480"
-
-#: MO.txt:288
-msgid "only Picture 800x600"
-msgstr "alleen foto 800x600"
-
-#: MO.txt:288
-msgid "only Picture Custom Size"
-msgstr "alleen foto aangepaste grootte"
-
-#: MO.txt:290
-msgid "Internal Vu+ Duo2 LCD 400x240"
-msgstr "Intern Vu+ Duo2 LCD 400x240"
-
-#: MO.txt:291
-msgid "132x64"
-msgstr "132x64"
-
-#: MO.txt:291
-msgid "220x176"
-msgstr "220x176"
-
-#: MO.txt:291
-msgid "255x64"
-msgstr "255x64"
-
-#: MO.txt:291
-msgid "400x240"
-msgstr "400x240"
-
-#: MO.txt:291
-msgid "96x64"
-msgstr "96x64"
-
-#: MO.txt:292
-msgid "2 Days 1 Line"
-msgstr "2 dagen 1 regel"
-
-#: MO.txt:292
-msgid "2 Days 2 Line"
-msgstr "2 dagen 2 regels"
-
-#: MO.txt:292
-msgid "4 Days 1 Line"
-msgstr "4 dagen 1 regel"
-
-#: MO.txt:292
-msgid "4 Days 2 Lines"
-msgstr "4 dagen 2 regels"
-
-#: MO.txt:292
-msgid "4 Days Vertical View"
-msgstr "4 dagen verticaal aanzicht"
-
-#: MO.txt:292
-msgid "5 Days 1 Line"
-msgstr "5 dagen 1 regel"
-
-#: MO.txt:292
-msgid "5 Days 2 Lines"
-msgstr "5 dagen 2 regels"
-
-#: MO.txt:292
-msgid "5 Days Vertical View"
-msgstr "5 dagen verticaal aanzicht"
-
-#: MO.txt:292
-msgid "Current Temperature (+C)"
-msgstr "Huidige temperatuur (+C)"
-
-#: MO.txt:292
-msgid "Current Temperature (-C)"
-msgstr "Huidige temperatuur (-C)"
-
-#: MO.txt:292 MO.txt:293
-msgid "Current"
-msgstr "Huidige"
-
-#: MO.txt:293
-msgid "Current Temperature"
-msgstr "Huidige temperatuur"
-
-#: MO.txt:294
-msgid "All"
-msgstr "Alle"
-
-#: MO.txt:294
-msgid "Temperature"
-msgstr "Temperatuur"
-
-#: MO.txt:294
-msgid "Temperature+Co2"
-msgstr "Temperatuur+Co2"
-
-#: MO.txt:294
-msgid "Temperature+Co2+Pressure"
-msgstr "Temperatuur+Co2+Druk"
-
-#: MO.txt:294
-msgid "Temperature+Humidity"
-msgstr "Temperatuur+vochtigheid"
-
-#: MO.txt:295
-msgid "Module 1"
-msgstr "Module 1"
-
-#: MO.txt:295
-msgid "Module 1+2"
-msgstr "Module 1+2"
-
-#: MO.txt:295
-msgid "Module 1+2+3"
-msgstr "Module 1+2+3"
-
-#: MO.txt:295
-msgid "Module 1+2+4"
-msgstr "Module 1+2+4"
-
-#: MO.txt:295
-msgid "Module 1+3"
-msgstr "Module 1+3"
-
-#: MO.txt:295
-msgid "Module 1+3+4"
-msgstr "Module 1+3+4"
-
-#: MO.txt:295
-msgid "Module 1+4"
-msgstr "Module 1+4"
-
-#: MO.txt:295
-msgid "Module 1-4"
-msgstr "Module 1-4"
-
-#: MO.txt:295
-msgid "Module 1-5"
-msgstr "Module 1-5"
-
-#: MO.txt:295
-msgid "Module 2"
-msgstr "Module 2"
-
-#: MO.txt:295
-msgid "Module 2+3"
-msgstr "Module 2+3"
-
-#: MO.txt:295
-msgid "Module 2+3+4"
-msgstr "Module 2+3+4"
-
-#: MO.txt:295
-msgid "Module 2+4"
-msgstr "Module 2+4"
-
-#: MO.txt:295
-msgid "Module 3"
-msgstr "Module 3"
-
-#: MO.txt:295
-msgid "Module 3+4"
-msgstr "Module 3+4"
-
-#: MO.txt:295
-msgid "Module 4"
-msgstr "Module 4"
-
-#: MO.txt:295
-msgid "Module 5"
-msgstr "Module 5"
-
-#: MO.txt:297
-msgid "Bar"
-msgstr "Balk"
-
-#: MO.txt:297
-msgid "Bar+Value"
-msgstr "Balk+waarde"
-
-#: MO.txt:297
-msgid "Knob"
-msgstr "Schakelaar"
-
-#: MO.txt:297
-msgid "Knob+Value"
-msgstr "Schakelaar+waarde"
-
-#: MO.txt:298
-msgid "Analog"
-msgstr "Analoog"
-
-#: MO.txt:298
-msgid "Analog+Date"
-msgstr "Analoog+Datum"
-
-#: MO.txt:298
-msgid "Analog+Date+Weekday"
-msgstr "Analoog+Datum+Dag"
-
-#: MO.txt:298
-msgid "Analog+Date+Weekday 2"
-msgstr "Analoog+datum+dag 2"
-
-#: MO.txt:298
-msgid "Date"
-msgstr "Datum"
-
-#: MO.txt:298
-msgid "Date+Time"
-msgstr "Datum+Tijd"
-
-#: MO.txt:298
-msgid "Date+Time+Weekday"
-msgstr "Datum+Tijd+ Dag"
-
-#: MO.txt:298
-msgid "Time"
-msgstr "Tijd"
-
-#: MO.txt:298
-msgid "Time+Weekday"
-msgstr "Tijd+Dag"
-
-#: MO.txt:298
-msgid "Weekday"
-msgstr "Weekdag"
-
-#: MO.txt:299 MO.txt:311
-msgid "30%"
-msgstr "30%"
-
-#: MO.txt:299 MO.txt:311
-msgid "35%"
-msgstr "35%"
-
-#: MO.txt:299 MO.txt:311
-msgid "40%"
-msgstr "40%"
-
-#: MO.txt:299 MO.txt:311
-msgid "45%"
-msgstr "45%"
-
-#: MO.txt:299 MO.txt:311
-msgid "50%"
-msgstr "50%"
-
-#: MO.txt:299 MO.txt:311
-msgid "55%"
-msgstr "55%"
-
-#: MO.txt:299 MO.txt:311
-msgid "60%"
-msgstr "60%"
-
-#: MO.txt:299 MO.txt:311
-msgid "65%"
-msgstr "65%"
-
-#: MO.txt:299 MO.txt:311
-msgid "70%"
-msgstr "70%"
-
-#: MO.txt:299 MO.txt:311
-msgid "75%"
-msgstr "75%"
-
-#: MO.txt:299 MO.txt:311
-msgid "80%"
-msgstr "80%"
-
-#: MO.txt:299 MO.txt:311
-msgid "85%"
-msgstr "85%"
-
-#: MO.txt:299 MO.txt:311
-msgid "90%"
-msgstr "90%"
-
-#: MO.txt:299 MO.txt:311
-msgid "95%"
-msgstr "95%"
-
-#: MO.txt:299 MO.txt:312
-msgid "10%"
-msgstr "10%"
-
-#: MO.txt:299 MO.txt:312
-msgid "15%"
-msgstr "15%"
-
-#: MO.txt:299 MO.txt:312
-msgid "20%"
-msgstr "20%"
-
-#: MO.txt:299 MO.txt:312
-msgid "25%"
-msgstr "25%"
-
-#: MO.txt:299 MO.txt:312
-msgid "5%"
-msgstr "5%"
-
-#: MO.txt:299 MO.txt:596
-msgid "center"
-msgstr "midden"
-
-#: MO.txt:299 MO.txt:596 MO.txt:1067 MO.txt:1075 MO.txt:1632 MO.txt:2004
-msgid "left"
-msgstr "links"
-
-#: MO.txt:299 MO.txt:596 MO.txt:1067 MO.txt:1075 MO.txt:1632 MO.txt:2004
-msgid "right"
-msgstr "rechts"
-
-#: MO.txt:300
-msgid "Extended"
-msgstr "Uitgebreid"
-
-#: MO.txt:300
-msgid "Extended (Short)"
-msgstr "Uitgebreid (kort)"
-
-#: MO.txt:300
-msgid "Short"
-msgstr "Kort"
-
-#: MO.txt:300
-msgid "Short (Extended)"
-msgstr "Kort (verlengd)"
-
-#: MO.txt:300
-msgid "Short+Extended"
-msgstr "Kort+verlengd"
-
-#: MO.txt:301
-msgid "Month"
-msgstr "Maand"
-
-#: MO.txt:301
-msgid "Month+Header"
-msgstr "Maand+hoofd"
-
-#: MO.txt:301
-msgid "Week"
-msgstr "Week"
-
-#: MO.txt:301
-msgid "Week+Header"
-msgstr "Week+hoofd"
-
-#: MO.txt:301
-msgid "no Calendar"
-msgstr "Geen kalender"
-
-#: MO.txt:302
-msgid "Dates 1 Line"
-msgstr "Data 1 regel"
-
-#: MO.txt:302
-msgid "Dates 3 Lines"
-msgstr "Data 3 regels"
-
-#: MO.txt:302
-msgid "Dates 5 Lines"
-msgstr "Data 5 regels"
-
-#: MO.txt:302
-msgid "Dates 9 Lines"
-msgstr "Data 9 regels"
-
-#: MO.txt:302
-msgid "Dates compact 2 Lines"
-msgstr "Datum compact 2 regels"
-
-#: MO.txt:302
-msgid "Dates compact 3 Lines"
-msgstr "Datum compact 3 regels"
-
-#: MO.txt:302 MO.txt:13206
-msgid "no Dates"
-msgstr "Geen datums"
-
-#: MO.txt:303 MO.txt:773 MO.txt:1286
-msgid "Frame"
-msgstr "Frame"
-
-#: MO.txt:303
-msgid "Underline"
-msgstr "Onderlijnen"
-
-#: MO.txt:303
-msgid "Underline 2"
-msgstr "Onderlijnen 2"
-
-#: MO.txt:304
-msgid "Dates"
-msgstr "Data"
-
-#: MO.txt:304
-msgid "Dates compact"
-msgstr "Datum compact"
-
-#: MO.txt:304
-msgid "Dates compact no Icon"
-msgstr "Datum compact geen icoon"
-
-#: MO.txt:304
-msgid "Dates no Icon"
-msgstr "Datum geen icoon"
-
-#: MO.txt:305
-msgid "no Icon"
-msgstr "geen ikoon"
-
-#: MO.txt:305
-msgid "no Icon, with Targetnumber"
-msgstr "geen ikoon, met doelnummer"
-
-#: MO.txt:305
-msgid "with Icon"
-msgstr "met ikoon"
-
-#: MO.txt:305
-msgid "with Icon & Targetnumber"
-msgstr "met ikoon & doelnummer"
-
-#: MO.txt:306
-msgid "C"
-msgstr "C"
-
-#: MO.txt:306
-msgid "rpm"
-msgstr "omw/min"
-
-#: MO.txt:306
-msgid "rpm/2"
-msgstr "omw/min/2"
-
-#: MO.txt:306 MO.txt:307 MO.txt:308 MO.txt:317 MO.txt:387 MO.txt:390 MO.txt:418
-#: MO.txt:420 MO.txt:425 MO.txt:525 MO.txt:527 MO.txt:530 MO.txt:547 MO.txt:657
-#: MO.txt:936 MO.txt:1430 MO.txt:1625 MO.txt:1889
-msgid "no"
-msgstr "Nee"
-
-#: MO.txt:307
-msgid "% + BER"
-msgstr "% + BER"
-
-#: MO.txt:307
-msgid "db"
-msgstr "db"
-
-#: MO.txt:307
-msgid "db + %"
-msgstr "db + %"
-
-#: MO.txt:307
-msgid "db + % + BER"
-msgstr "db + % + BER"
-
-#: MO.txt:307
-msgid "db + BER"
-msgstr "db + BER"
-
-#: MO.txt:307 MO.txt:308
 msgid "%"
 msgstr "%"
 
-#: MO.txt:308
+msgid "% + BER"
+msgstr "% + BER"
+
+#, python-format
 msgid "% + Load@1min"
 msgstr "% + Load@1min"
 
-#: MO.txt:308
+#, python-format
 msgid "% + Load@5min"
 msgstr "% + Load@5min"
 
-#: MO.txt:308
-msgid "Load@1min"
-msgstr "Laad@1min"
+#, python-format
+msgid "%d Mails  %d New  %s"
+msgstr "%d Mail  %d Nieuw  %s"
 
-#: MO.txt:308
-msgid "Load@5min"
-msgstr "Laad@5min"
+msgid "%d-%b-%Y"
+msgstr "%d-%b-%Y"
 
-#: MO.txt:309
-msgid "show run"
-msgstr "toon actief"
+msgid "%d.%m.%Y"
+msgstr "%d.%m.%Y"
 
-#: MO.txt:309
-msgid "show run+sleep"
-msgstr "toon actief + slaap"
+msgid "%d.%m.%Y - %H:%M"
+msgstr "%d.%m.%Y - %H:%M"
 
-#: MO.txt:310
-msgid "Always All"
-msgstr "Altijd alle"
+msgid "%d.%m.%y %H:%M:%S"
+msgstr "%d.%m.%y %H:%M:%S"
 
-#: MO.txt:310
-msgid "Always New"
-msgstr "Altijd nieuw"
-
-#: MO.txt:310
-msgid "Only New"
-msgstr "Alleen nieuw"
-
-#: MO.txt:311
-msgid "100%"
-msgstr "100%"
-
-#: MO.txt:299 MO.txt:312
-msgid "2%"
-msgstr "2%"
-
-#: MO.txt:299 MO.txt:312
-msgid "3%"
-msgstr "3%"
-
-#: MO.txt:313
-msgid "1-2"
-msgstr "1-2"
-
-#: MO.txt:313
-msgid "1-3"
-msgstr "1-3"
-
-#: MO.txt:313
-msgid "1-4"
-msgstr "1-4"
-
-#: MO.txt:313
-msgid "1-5"
-msgstr "1-5"
-
-#: MO.txt:314
-msgid "IMAP"
-msgstr "IMAP"
-
-#: MO.txt:314
-msgid "IMAP-SSL"
-msgstr "IMAP-SSL"
-
-#: MO.txt:314
-msgid "Pop3"
-msgstr "Pop3"
-
-#: MO.txt:314
-msgid "Pop3-SSL"
-msgstr "Pop3-SSL"
-
-#: MO.txt:317
-msgid "yes +25%"
-msgstr "ja +25%"
-
-#: MO.txt:317 MO.txt:420 MO.txt:525 MO.txt:527 MO.txt:1625
-msgid "yes"
-msgstr "ja"
-
-#: MO.txt:318
-msgid "horizontally"
-msgstr "horizontaal"
-
-#: MO.txt:318
-msgid "vertically"
-msgstr "vertikaal"
-
-#: MO.txt:319 MO.txt:5079 MO.txt:5222 MO.txt:7271 MO.txt:7287 MO.txt:14962
-msgid "Global"
-msgstr "Globaal"
-
-#: MO.txt:322
-msgid "only Progress Bar"
-msgstr "alleen voortgangsbalk"
-
-#: MO.txt:323
-msgid "with Remaining Minutes"
-msgstr "met resterende minuten"
-
-#: MO.txt:323
-msgid "with Remaining Minutes (Size 1.5)"
-msgstr "met resterende minuten (maat 1.5)"
-
-#: MO.txt:323
-msgid "with Remaining Minutes (Size 2)"
-msgstr "met resterende minuten (maat 2)"
-
-#: MO.txt:324
-msgid "with Percent"
-msgstr "met percentage"
-
-#: MO.txt:324
-msgid "with Percent (Size 1.5)"
-msgstr "met percentage (maat 1.5)"
-
-#: MO.txt:324
-msgid "with Percent (Size 2)"
-msgstr "met percentage (maat 2)"
-
-#: MO.txt:325
-msgid "with Remaining Minutes (above)"
-msgstr "met resterende minuten (boven)"
-
-#: MO.txt:325
-msgid "with Remaining Minutes (above/Size 1.5)"
-msgstr "met resterende minuten (boven/maat 1.5)"
-
-#: MO.txt:325
-msgid "with Remaining Minutes (above/Size 2)"
-msgstr "met resterende minuten (boven/maat 2)"
-
-#: MO.txt:326
-msgid "with Percent (above)"
-msgstr "met percentage (boven)"
-
-#: MO.txt:326
-msgid "with Percent (above/Size 1.5)"
-msgstr "met percentage (boven/maat 1.5)"
-
-#: MO.txt:326
-msgid "with Percent (above/Size 2)"
-msgstr "met percentage (boven/maat 2)"
-
-#: MO.txt:327
-msgid "with Remaining Minutes (below)"
-msgstr "met resterende minuten (onder)"
-
-#: MO.txt:327
-msgid "with Remaining Minutes (below/Size 1.5)"
-msgstr "met resterende minuten (onder/maat 1.5)"
-
-#: MO.txt:327
-msgid "with Remaining Minutes (below/Size 2)"
-msgstr "met resterende minuten (onder/maat 2)"
-
-#: MO.txt:328
-msgid "with Percent (below)"
-msgstr "met percentage (onder)"
-
-#: MO.txt:328
-msgid "with Percent (below/Size 1.5)"
-msgstr "met percentage (onder/maat 1.5)"
-
-#: MO.txt:328
-msgid "with Percent (below/Size 2)"
-msgstr "met percentage (onder/maat 2)"
-
-#: MO.txt:329
-msgid "with Current 00:00"
-msgstr "met huidige 00:00"
-
-#: MO.txt:329
-msgid "with Current 00:00 (Size 1.5)"
-msgstr "met huidige 00:00 (maat 1.5)"
-
-#: MO.txt:329
-msgid "with Current 00:00 (Size 2)"
-msgstr "met huidige 00:00 (maat 2)"
-
-#: MO.txt:330
-msgid "with Current 00:00 (above)"
-msgstr "met huidige 00:00 (boven)"
-
-#: MO.txt:330
-msgid "with Current 00:00 (above/Size 1.5)"
-msgstr "met huidige 00:00 (boven/maat 1.5)"
-
-#: MO.txt:330
-msgid "with Current 00:00 (above/Size 2)"
-msgstr "met huidige 00:00 (boven/maat 2)"
-
-#: MO.txt:331
-msgid "with Current 00:00 (below)"
-msgstr "met huidige 00:00 (onder)"
-
-#: MO.txt:331
-msgid "with Current 00:00 (below/Size 1.5)"
-msgstr "met huidige 00:00 (onder/maat 1.5)"
-
-#: MO.txt:331
-msgid "with Current 00:00 (below/Size 2)"
-msgstr "met huidige 00:00 (onder/maat 2)"
-
-#: MO.txt:332
-msgid "with Percent Minutes / Total (above)"
-msgstr "met percentage minuten / totaal (boven)"
-
-#: MO.txt:332
-msgid "with Percent Minutes / Total (above/Size 1.5)"
-msgstr "met percentage minuten / totaal (boven/maat 1.5)"
-
-#: MO.txt:332
-msgid "with Percent Minutes / Total (above/Size 2)"
-msgstr "met percentage minuten / totaal (boven/maat 2)"
-
-#: MO.txt:345
-msgid "Fastmode (2s)"
-msgstr "Snelle modus (2s)"
-
-#: MO.txt:345
-msgid "Normal (5s)"
-msgstr "Normaal (5s)"
-
-#: MO.txt:361
-msgid "alphabetic"
-msgstr "alfabetisch"
-
-#: MO.txt:361
-msgid "random"
-msgstr "willekeurig"
-
-#: MO.txt:362
-msgid "better/slow"
-msgstr "beter/langzaam"
-
-#: MO.txt:362
-msgid "low/fast (Picture only)"
-msgstr "laag/langzaam (alleen foto)"
-
-#: MO.txt:362
-msgid "low/fast (all)"
-msgstr "laag/snel (alle)"
-
-#: MO.txt:364
-msgid "0.5"
-msgstr "0,5"
-
-#: MO.txt:367
-msgid "JPG"
-msgstr "JPG"
-
-#: MO.txt:367
-msgid "PNG"
-msgstr "PNG"
-
-#: MO.txt:368
-msgid "cache + adjustment (high quality, slow)"
-msgstr "cache + aanpassing (hoge kwaliteit, langzaam)"
-
-#: MO.txt:368
-msgid "cache + adjustment (low quality, fast)"
-msgstr "cache + aanpassing (lage kwaliteit, snel)"
-
-#: MO.txt:368
-msgid "no cache + no adjustment"
-msgstr "geen cache + geen aanpassing"
-
-#: MO.txt:387
-msgid "Plug Tuner"
-msgstr "Plug tuner"
-
-#: MO.txt:387
-msgid "USB Tuner"
-msgstr "USB Tuner"
-
-#: MO.txt:388
-msgid "EPG"
-msgstr "EPG"
-
-#: MO.txt:388
-msgid "Now/Next"
-msgstr "Nu/Straks"
-
-#: MO.txt:402
-msgid "normal"
-msgstr "normaal"
-
-#: MO.txt:402
-msgid "reduced"
-msgstr "beperkt"
-
-#: MO.txt:406
-msgid "Javascript"
-msgstr "Javascript"
-
-#: MO.txt:406
-msgid "Reload"
-msgstr "Herlaad"
-
-#: MO.txt:410
-msgid "1 - normal"
-msgstr "1 - normaal"
-
-#: MO.txt:410
-msgid "2 - side by side"
-msgstr "2 - Zij-aan-zij"
-
-#: MO.txt:418 MO.txt:547
-msgid "alternative Copy-Mode/DM800hd (24bit)"
-msgstr "alternatieve kopieermode/DM800hd (24bit)"
-
-#: MO.txt:418 MO.txt:547 MO.txt:657
-msgid "yes (32bit)"
-msgstr "ja (32bit)"
-
-#: MO.txt:420
-msgid "yes + %"
-msgstr "ja + %"
-
-#: MO.txt:425
-msgid "yes, long"
-msgstr "ja, lang"
-
-#: MO.txt:425
-msgid "yes, short"
-msgstr "ja, kort"
-
-#: MO.txt:431
-msgid "km/h"
-msgstr "km/h"
-
-#: MO.txt:431
-msgid "m/s"
-msgstr "m/s"
-
-#: MO.txt:451 MO.txt:452 MO.txt:453
-msgid "0"
-msgstr "0"
-
-#: MO.txt:451 MO.txt:452 MO.txt:453
-msgid "180"
-msgstr "180"
-
-#: MO.txt:451 MO.txt:452 MO.txt:453
-msgid "270"
-msgstr "270"
-
-#: MO.txt:460 MO.txt:461 MO.txt:462
-msgid "1 / min"
-msgstr "1 / min"
-
-#: MO.txt:460 MO.txt:461 MO.txt:462 MO.txt:585
-msgid "always"
-msgstr "altijd"
-
-#: MO.txt:463 MO.txt:5070 MO.txt:5455 MO.txt:7272 MO.txt:7276 MO.txt:14963
-msgid "On"
-msgstr "Aan"
-
-#: MO.txt:463
-msgid "On+Media+Standby"
-msgstr "Aan+media+stand-by"
-
-#: MO.txt:463
-msgid "Standby"
-msgstr "Stand-by"
-
-#: MO.txt:463 MO.txt:588 MO.txt:5073 MO.txt:6160 MO.txt:7277 MO.txt:7281
-#: MO.txt:7481 MO.txt:14964
-msgid "Media"
-msgstr "Media"
-
-#: MO.txt:465
-msgid "32bit - color"
-msgstr "32bit - kleur"
-
-#: MO.txt:465
-msgid "8bit - grayscale/color"
-msgstr "8bit - grijsschaal/kleur"
-
-#: MO.txt:475
-msgid "2 x FastForwardKey"
-msgstr "2 x snel vooruit toets"
-
-#: MO.txt:475
-msgid "2 x FastForwardKey Type 2"
-msgstr "2 x snel vooruit toets type 2"
-
-#: MO.txt:475
-msgid "Long FastForwardKey"
-msgstr "Snel voorwaards toets-lang"
-
-#: MO.txt:475
-msgid "Long FastForwardKey Type 2"
-msgstr "Snel voorwaards toets-lang type 2"
-
-#: MO.txt:475 MO.txt:476
-msgid "2 x InfoKey"
-msgstr "2 x Info-toets"
-
-#: MO.txt:475 MO.txt:476
-msgid "2 x Mute"
-msgstr "2 x Mute"
-
-#: MO.txt:475 MO.txt:476
-msgid "Long InfoKey"
-msgstr "Info toets-lang"
-
-#: MO.txt:476
-msgid "2 x FastBackwardKey"
-msgstr "2 x snel achteruit toets"
-
-#: MO.txt:476
-msgid "Long FastBackwardKey"
-msgstr "Snel achterwaards toets-lang"
-
-#: MO.txt:497 MO.txt:546
-msgid "15min"
-msgstr "15min"
-
-#: MO.txt:315 MO.txt:321 MO.txt:784 MO.txt:795 MO.txt:5467
-msgid "Picon"
-msgstr "Picon"
-
-#: MO.txt:321
-msgid "Corner"
-msgstr "Hoek"
-
-#: MO.txt:525
-msgid "yes, extended"
-msgstr "ja, verlengd"
-
-#: MO.txt:581
-msgid "Console normal"
-msgstr "Console normal"
-
-#: MO.txt:581
-msgid "Logfile extensive"
-msgstr "Logbestand uitgebreid"
-
-#: MO.txt:581
-msgid "Logfile normal"
-msgstr "Logbestand normaal"
-
-#: MO.txt:585
-msgid "disabled"
-msgstr "uitgeschakeld"
-
-#: MO.txt:588
-msgid "Radio"
-msgstr "Radio"
-
-#: MO.txt:588
-msgid "Radio+Media"
-msgstr "Radio+Media"
-
-#: MO.txt:588
-msgid "TV+Radio"
-msgstr "TV+Radio"
-
-#: MO.txt:588
-msgid "TV+Radio+Media"
-msgstr "TV+Radio+Media"
-
-#: MO.txt:588 MO.txt:1195
-msgid "TV"
-msgstr "TV"
-
-#: MO.txt:589
-msgid "normal (full)"
-msgstr "normaal (vol)"
-
-#: MO.txt:589
-msgid "trimmed (black)"
-msgstr "getrimd (zwart)"
-
-#: MO.txt:589
-msgid "trimmed (transparent)"
-msgstr "getrimd (doorzichtig)"
-
-#: MO.txt:729 MO.txt:741
-msgid "Time+Duration+Info"
-msgstr "Tijd+Duur+Info"
-
-#: MO.txt:729 MO.txt:741 MO.txt:753
-msgid "Info"
-msgstr "Info"
-
-#: MO.txt:729 MO.txt:741 MO.txt:753
-msgid "Time+Info"
-msgstr "Tijd+Info"
-
-#: MO.txt:753
-msgid "Mini-EPG"
-msgstr "Mini-EPG"
-
-#: MO.txt:753
-msgid "Time+Length+Info"
-msgstr "Tijd+Lengte+Info"
-
-#: MO.txt:768 MO.txt:1282
-msgid "half right"
-msgstr "half rechts"
-
-#: MO.txt:768 MO.txt:1282
-msgid "half left"
-msgstr "half links"
-
-#: MO.txt:775 MO.txt:1288
-msgid "Gradient"
-msgstr "Gradiënt"
-
-#: MO.txt:775 MO.txt:1288 MO.txt:1626
-msgid "Normal"
-msgstr "Normaal"
-
-#: MO.txt:775 MO.txt:1288
-msgid "Shadow Edges"
-msgstr "Schaduw hoeken"
-
-#: MO.txt:784
-msgid "Picon+Position below"
-msgstr "Picon+positie beneden "
-
-#: MO.txt:784
-msgid "Picon+Position left"
-msgstr "Picon+positie links"
-
-#: MO.txt:784
-msgid "Picon+Position right"
-msgstr "Picon+positie rechts"
-
-#: MO.txt:784
-msgid "Position"
-msgstr "Positie"
-
-#: MO.txt:784 MO.txt:795
-msgid "Name"
-msgstr "Naam"
-
-#: MO.txt:863 MO.txt:1308 MO.txt:1843
-msgid "Offline"
-msgstr "Offline"
-
-#: MO.txt:863 MO.txt:1308 MO.txt:1843
-msgid "Online"
-msgstr "Online"
-
-#: MO.txt:863 MO.txt:1308 MO.txt:1843
-msgid "Online+Offline"
-msgstr "Online+Offline"
-
-#: MO.txt:914 MO.txt:1408
-msgid "one line"
-msgstr "één regel"
-
-#: MO.txt:914 MO.txt:1408
-msgid "two lines"
-msgstr "twee regels"
-
-#: MO.txt:895 MO.txt:953 MO.txt:1334 MO.txt:1447 MO.txt:1792 MO.txt:1869
-msgid "only use Timer"
-msgstr "gebruik alleen timer"
-
-#: MO.txt:895 MO.txt:953 MO.txt:1334 MO.txt:1447 MO.txt:1792 MO.txt:1869
-msgid "use lead-time"
-msgstr "gebruik voorlooptijd"
-
-#: MO.txt:896 MO.txt:954 MO.txt:1335 MO.txt:1448 MO.txt:1793 MO.txt:1870
-msgid "no total Timer"
-msgstr "geen totaal timer"
-
-#: MO.txt:896 MO.txt:954 MO.txt:1335 MO.txt:1448 MO.txt:1793 MO.txt:1870
-msgid "show total Timer"
-msgstr "toon totale timer"
-
-#: MO.txt:1163 MO.txt:1172 MO.txt:1181 MO.txt:1190 MO.txt:1560 MO.txt:1569
-#: MO.txt:2088 MO.txt:2097 MO.txt:2106 MO.txt:2115
-msgid "full Screen"
-msgstr "vol scherm"
-
-#: MO.txt:1195
-msgid "TV+OSD"
-msgstr "TV+OSD"
-
-#: MO.txt:1625
-msgid "yes except records"
-msgstr "ja behalve opnames"
-
-#: MO.txt:4794
-msgid "Load Active Config-File"
-msgstr "Laad actieve configuratiebestand"
-
-#: MO.txt:4796
-msgid "Save Config to File... (%s)"
-msgstr "Sla configuratiebestand op ,,,(%s)"
-
-#: MO.txt:4801 MO.txt:4838
-msgid "Load File : %s"
-msgstr "Laad bestand: %s"
-
-#: MO.txt:4810
-msgid "Delete File?"
-msgstr "Verwijder bestand?"
-
-#: MO.txt:4848
-msgid "deleted"
-msgstr "verwijderd"
-
-#: MO.txt:4872
-msgid "currently set : %s"
-msgstr "momenteel ingesteld: %s"
-
-#: MO.txt:5050
-msgid "Cancel"
-msgstr "Annuleer"
-
-#: MO.txt:5051
-msgid "Save"
-msgstr "Opslaan"
-
-#: MO.txt:5052
-msgid "Restart Displays"
-msgstr "Herstart displays"
-
-#: MO.txt:5136
-msgid "no LCD1 Picture-File"
-msgstr "geen LCD1 foto bestand"
-
-#: MO.txt:5161
-msgid "no LCD2 Picture-File"
-msgstr "geen LCD2 foto bestand"
-
-#: MO.txt:5187
-msgid "no LCD3 Picture-File"
-msgstr "geen LCD3 foto bestand"
-
-#: MO.txt:5224
-msgid "LCD4linux enabled"
-msgstr "LCD4linux ingeschakeld"
-
-#: MO.txt:5225
-msgid "LCD 1 Type"
-msgstr "LCD 1 Type"
-
-#: MO.txt:5226
-msgid "- LCD 1 Rotate"
-msgstr "- LCD 1 Roteer"
-
-#: MO.txt:5227 MO.txt:6162 MO.txt:6740
-msgid "- LCD 1 Background Color"
-msgstr "- LCD 1 Achtergrondkleur"
-
-#: MO.txt:5228 MO.txt:6163 MO.txt:6741
-msgid "- LCD 1 Background-Picture [ok]>"
-msgstr "- LCD 1 Achtergrond-Foto [ok]>"
-
-#: MO.txt:5229 MO.txt:6164 MO.txt:6742
-msgid "- LCD 1 Brightness"
-msgstr "- LCD 1 helderheid"
-
-#: MO.txt:5230 MO.txt:6165 MO.txt:6743
-msgid "- LCD 1 Night Reduction"
-msgstr "- LCD 1 nachtreductie"
-
-#: MO.txt:5231
-msgid "- LCD 1 Refresh"
-msgstr "- LCD 1 ververs"
-
-#: MO.txt:5232
-msgid "LCD 2 Type"
-msgstr "LCD 2 Type"
-
-#: MO.txt:5234
-msgid "- LCD 2 Rotate"
-msgstr "- LCD 2 Roteer"
-
-#: MO.txt:5235 MO.txt:6166 MO.txt:6744
-msgid "- LCD 2 Background Color"
-msgstr "- LCD 2 Achtergrondkleur"
-
-#: MO.txt:5236 MO.txt:6167 MO.txt:6745
-msgid "- LCD 2 Background-Picture [ok]>"
-msgstr "- LCD 2 Achtergrond-Foto [ok]>"
-
-#: MO.txt:5237 MO.txt:6168 MO.txt:6746
-msgid "- LCD 2 Brightness"
-msgstr "- LCD 2 helderheid"
-
-#: MO.txt:5238 MO.txt:6169 MO.txt:6747
-msgid "- LCD 2 Night Reduction"
-msgstr "- LCD 2 nachtreductie"
-
-#: MO.txt:5239
-msgid "- LCD 2 Refresh"
-msgstr "- LCD 2 verversen"
-
-#: MO.txt:5240
-msgid "LCD 3 Type"
-msgstr "LCD 3 Type"
-
-#: MO.txt:5242
-msgid "- LCD 3 Rotate"
-msgstr "- LCD 3 Roteer"
-
-#: MO.txt:5243 MO.txt:6170 MO.txt:6748
-msgid "- LCD 3 Background Color"
-msgstr "- LCD 3 Achtergrondkleur"
-
-#: MO.txt:5244 MO.txt:6171 MO.txt:6749
-msgid "- LCD 3 Background-Picture [ok]>"
-msgstr "- LCD 3 Achtergrond-Foto [ok]>"
-
-#: MO.txt:5245 MO.txt:6172 MO.txt:6750
-msgid "- LCD 3 Brightness"
-msgstr "- LCD 3 helderheid"
-
-#: MO.txt:5246 MO.txt:6173 MO.txt:6751
-msgid "- LCD 3 Night Reduction"
-msgstr "- LCD 3 nachtreductie"
-
-#: MO.txt:5247
-msgid "- LCD 3 Refresh"
-msgstr "- LCD 3 verversen"
-
-#: MO.txt:5249
-msgid "Box-Skin-LCD Dimension"
-msgstr "Box-Skin-LCD afmetingen"
-
-#: MO.txt:5251
-msgid "Box-Skin-LCD Color"
-msgstr "Box-Skin-LCD kleur"
-
-#: MO.txt:5252
-msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "Box-Skin-LCD schakel aan-modus in"
-
-#: MO.txt:5253
-msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "Box-Skin-LCD schakel mediamode in"
-
-#: MO.txt:5254
-msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "Box-Skin-LCD schakel idle-modus in"
-
-#: MO.txt:5255
-msgid "OSD [display time]"
-msgstr "OSD [vertoon tijd]"
-
-#: MO.txt:5257 MO.txt:5264 MO.txt:5464 MO.txt:5469 MO.txt:5482 MO.txt:5494
-#: MO.txt:5509 MO.txt:5524 MO.txt:5536 MO.txt:5546 MO.txt:5559 MO.txt:5572
-#: MO.txt:5585 MO.txt:5599 MO.txt:5614 MO.txt:5628 MO.txt:5642 MO.txt:5654
-#: MO.txt:5666 MO.txt:5678 MO.txt:5688 MO.txt:5702 MO.txt:5712 MO.txt:5723
-#: MO.txt:5733 MO.txt:5751 MO.txt:5769 MO.txt:5777 MO.txt:5788 MO.txt:5799
-#: MO.txt:5808 MO.txt:5831 MO.txt:5853 MO.txt:5863 MO.txt:5873 MO.txt:5883
-#: MO.txt:5895 MO.txt:5905 MO.txt:5914 MO.txt:5925 MO.txt:5936 MO.txt:5947
-#: MO.txt:5958 MO.txt:5971 MO.txt:5981 MO.txt:5991 MO.txt:6001 MO.txt:6011
-#: MO.txt:6026 MO.txt:6041 MO.txt:6054 MO.txt:6068 MO.txt:6083 MO.txt:6096
-#: MO.txt:6106 MO.txt:6118 MO.txt:6130 MO.txt:6139 MO.txt:6148 MO.txt:6157
-#: MO.txt:6178 MO.txt:6183 MO.txt:6195 MO.txt:6207 MO.txt:6221 MO.txt:6233
-#: MO.txt:6248 MO.txt:6258 MO.txt:6273 MO.txt:6288 MO.txt:6301 MO.txt:6314
-#: MO.txt:6324 MO.txt:6338 MO.txt:6349 MO.txt:6359 MO.txt:6377 MO.txt:6395
-#: MO.txt:6403 MO.txt:6414 MO.txt:6425 MO.txt:6434 MO.txt:6457 MO.txt:6479
-#: MO.txt:6489 MO.txt:6499 MO.txt:6509 MO.txt:6521 MO.txt:6532 MO.txt:6543
-#: MO.txt:6553 MO.txt:6563 MO.txt:6578 MO.txt:6587 MO.txt:6602 MO.txt:6617
-#: MO.txt:6630 MO.txt:6644 MO.txt:6659 MO.txt:6672 MO.txt:6682 MO.txt:6694
-#: MO.txt:6706 MO.txt:6715 MO.txt:6724 MO.txt:6755 MO.txt:6770 MO.txt:6785
-#: MO.txt:6800 MO.txt:6814 MO.txt:6827 MO.txt:6840 MO.txt:6850 MO.txt:6868
-#: MO.txt:6886 MO.txt:6894 MO.txt:6905 MO.txt:6916 MO.txt:6925 MO.txt:6948
-#: MO.txt:6970 MO.txt:6980 MO.txt:6990 MO.txt:7000 MO.txt:7012 MO.txt:7021
-#: MO.txt:7032 MO.txt:7043 MO.txt:7054 MO.txt:7065 MO.txt:7078 MO.txt:7088
-#: MO.txt:7098 MO.txt:7108 MO.txt:7118 MO.txt:7133 MO.txt:7148 MO.txt:7161
-#: MO.txt:7175 MO.txt:7190 MO.txt:7203 MO.txt:7213 MO.txt:7225 MO.txt:7237
-#: MO.txt:7246 MO.txt:7255
-msgid "- which LCD"
-msgstr "- Welk LCD"
-
-#: MO.txt:5258
-msgid "- Show in Mode"
-msgstr "- Toon in mode"
-
-#: MO.txt:5259
-msgid "- OSD Size"
-msgstr "- OSD-maat"
-
-#: MO.txt:5260
-msgid "- Background/Transparency"
-msgstr "- Achtergrond/Tranparantie"
-
-#: MO.txt:5261
-msgid "- Fast Grab lower quality"
-msgstr "- Snel binnenhalen lagere kwaliteit"
-
-#: MO.txt:5262
-msgid "Popup Text"
-msgstr "Popuptekst"
-
-#: MO.txt:5266 MO.txt:5525 MO.txt:5537 MO.txt:5548 MO.txt:5561 MO.txt:5574
-#: MO.txt:5587 MO.txt:5655 MO.txt:5667 MO.txt:5679 MO.txt:5689 MO.txt:5713
-#: MO.txt:5724 MO.txt:5734 MO.txt:5752 MO.txt:5770 MO.txt:5810 MO.txt:5833
-#: MO.txt:5884 MO.txt:5897 MO.txt:5906 MO.txt:5916 MO.txt:5927 MO.txt:5938
-#: MO.txt:5949 MO.txt:6012 MO.txt:6027 MO.txt:6042 MO.txt:6055 MO.txt:6108
-#: MO.txt:6120 MO.txt:6184 MO.txt:6196 MO.txt:6209 MO.txt:6222 MO.txt:6315
-#: MO.txt:6325 MO.txt:6339 MO.txt:6350 MO.txt:6360 MO.txt:6378 MO.txt:6396
-#: MO.txt:6436 MO.txt:6459 MO.txt:6510 MO.txt:6523 MO.txt:6534 MO.txt:6579
-#: MO.txt:6588 MO.txt:6603 MO.txt:6618 MO.txt:6631 MO.txt:6684 MO.txt:6696
-#: MO.txt:6801 MO.txt:6841 MO.txt:6851 MO.txt:6869 MO.txt:6887 MO.txt:6927
-#: MO.txt:6950 MO.txt:7001 MO.txt:7013 MO.txt:7023 MO.txt:7034 MO.txt:7045
-#: MO.txt:7056 MO.txt:7119 MO.txt:7134 MO.txt:7149 MO.txt:7162 MO.txt:7215
-#: MO.txt:7227
-msgid "- Font Size"
-msgstr "- Letter grootte"
-
-#: MO.txt:5267 MO.txt:5471 MO.txt:5484 MO.txt:5501 MO.txt:5516 MO.txt:5527
-#: MO.txt:5538 MO.txt:5550 MO.txt:5563 MO.txt:5576 MO.txt:5589 MO.txt:5603
-#: MO.txt:5619 MO.txt:5633 MO.txt:5644 MO.txt:5656 MO.txt:5668 MO.txt:5680
-#: MO.txt:5693 MO.txt:5704 MO.txt:5714 MO.txt:5725 MO.txt:5735 MO.txt:5753
-#: MO.txt:5771 MO.txt:5778 MO.txt:5789 MO.txt:5800 MO.txt:5809 MO.txt:5832
-#: MO.txt:5854 MO.txt:5864 MO.txt:5875 MO.txt:5885 MO.txt:5898 MO.txt:5907
-#: MO.txt:5917 MO.txt:5928 MO.txt:5939 MO.txt:5950 MO.txt:5960 MO.txt:5975
-#: MO.txt:5985 MO.txt:5995 MO.txt:6005 MO.txt:6013 MO.txt:6028 MO.txt:6046
-#: MO.txt:6056 MO.txt:6069 MO.txt:6085 MO.txt:6098 MO.txt:6109 MO.txt:6121
-#: MO.txt:6152 MO.txt:6186 MO.txt:6198 MO.txt:6211 MO.txt:6224 MO.txt:6237
-#: MO.txt:6250 MO.txt:6265 MO.txt:6280 MO.txt:6292 MO.txt:6305 MO.txt:6316
-#: MO.txt:6329 MO.txt:6340 MO.txt:6351 MO.txt:6361 MO.txt:6379 MO.txt:6397
-#: MO.txt:6404 MO.txt:6415 MO.txt:6426 MO.txt:6435 MO.txt:6458 MO.txt:6480
-#: MO.txt:6490 MO.txt:6501 MO.txt:6511 MO.txt:6524 MO.txt:6535 MO.txt:6547
-#: MO.txt:6557 MO.txt:6566 MO.txt:6580 MO.txt:6589 MO.txt:6604 MO.txt:6622
-#: MO.txt:6632 MO.txt:6645 MO.txt:6661 MO.txt:6674 MO.txt:6685 MO.txt:6697
-#: MO.txt:6728 MO.txt:6777 MO.txt:6792 MO.txt:6805 MO.txt:6818 MO.txt:6831
-#: MO.txt:6842 MO.txt:6852 MO.txt:6870 MO.txt:6888 MO.txt:6895 MO.txt:6906
-#: MO.txt:6917 MO.txt:6926 MO.txt:6949 MO.txt:6971 MO.txt:6981 MO.txt:6992
-#: MO.txt:7002 MO.txt:7014 MO.txt:7024 MO.txt:7035 MO.txt:7046 MO.txt:7057
-#: MO.txt:7067 MO.txt:7082 MO.txt:7092 MO.txt:7102 MO.txt:7112 MO.txt:7120
-#: MO.txt:7135 MO.txt:7153 MO.txt:7163 MO.txt:7176 MO.txt:7192 MO.txt:7205
-#: MO.txt:7216 MO.txt:7228 MO.txt:7259
-msgid "- Position"
-msgstr "- Positie"
-
-#: MO.txt:5268 MO.txt:5472 MO.txt:5485 MO.txt:5502 MO.txt:5517 MO.txt:5528
-#: MO.txt:5539 MO.txt:5551 MO.txt:5564 MO.txt:5577 MO.txt:5590 MO.txt:5604
-#: MO.txt:5620 MO.txt:5634 MO.txt:5645 MO.txt:5657 MO.txt:5669 MO.txt:5681
-#: MO.txt:5694 MO.txt:5705 MO.txt:5716 MO.txt:5726 MO.txt:5736 MO.txt:5754
-#: MO.txt:5772 MO.txt:5780 MO.txt:5791 MO.txt:5802 MO.txt:5811 MO.txt:5834
-#: MO.txt:5856 MO.txt:5866 MO.txt:5876 MO.txt:5886 MO.txt:5899 MO.txt:5908
-#: MO.txt:5918 MO.txt:5929 MO.txt:5940 MO.txt:5951 MO.txt:5961 MO.txt:5976
-#: MO.txt:5986 MO.txt:5996 MO.txt:6006 MO.txt:6014 MO.txt:6029 MO.txt:6047
-#: MO.txt:6057 MO.txt:6071 MO.txt:6086 MO.txt:6099 MO.txt:6110 MO.txt:6122
-#: MO.txt:6153 MO.txt:6187 MO.txt:6199 MO.txt:6212 MO.txt:6225 MO.txt:6238
-#: MO.txt:6251 MO.txt:6266 MO.txt:6281 MO.txt:6293 MO.txt:6306 MO.txt:6317
-#: MO.txt:6330 MO.txt:6342 MO.txt:6352 MO.txt:6362 MO.txt:6380 MO.txt:6398
-#: MO.txt:6406 MO.txt:6417 MO.txt:6428 MO.txt:6437 MO.txt:6460 MO.txt:6482
-#: MO.txt:6492 MO.txt:6502 MO.txt:6512 MO.txt:6525 MO.txt:6536 MO.txt:6548
-#: MO.txt:6558 MO.txt:6567 MO.txt:6581 MO.txt:6590 MO.txt:6605 MO.txt:6623
-#: MO.txt:6633 MO.txt:6647 MO.txt:6662 MO.txt:6675 MO.txt:6686 MO.txt:6698
-#: MO.txt:6729 MO.txt:6778 MO.txt:6793 MO.txt:6806 MO.txt:6819 MO.txt:6832
-#: MO.txt:6843 MO.txt:6853 MO.txt:6871 MO.txt:6889 MO.txt:6897 MO.txt:6908
-#: MO.txt:6919 MO.txt:6928 MO.txt:6951 MO.txt:6973 MO.txt:6983 MO.txt:6993
-#: MO.txt:7003 MO.txt:7015 MO.txt:7025 MO.txt:7036 MO.txt:7047 MO.txt:7058
-#: MO.txt:7068 MO.txt:7083 MO.txt:7093 MO.txt:7103 MO.txt:7113 MO.txt:7121
-#: MO.txt:7136 MO.txt:7154 MO.txt:7164 MO.txt:7178 MO.txt:7193 MO.txt:7206
-#: MO.txt:7217 MO.txt:7229 MO.txt:7260
-msgid "- Alignment"
-msgstr "- Uitlijning"
-
-#: MO.txt:5269 MO.txt:5341 MO.txt:5343 MO.txt:5345 MO.txt:5347 MO.txt:5349
-#: MO.txt:5465 MO.txt:5504 MO.txt:5519 MO.txt:5531 MO.txt:5540 MO.txt:5554
-#: MO.txt:5567 MO.txt:5580 MO.txt:5593 MO.txt:5606 MO.txt:5623 MO.txt:5637
-#: MO.txt:5648 MO.txt:5659 MO.txt:5671 MO.txt:5697 MO.txt:5708 MO.txt:5718
-#: MO.txt:5728 MO.txt:5738 MO.txt:5756 MO.txt:5783 MO.txt:5794 MO.txt:5805
-#: MO.txt:5820 MO.txt:5843 MO.txt:5878 MO.txt:5888 MO.txt:5901 MO.txt:5910
-#: MO.txt:5919 MO.txt:5930 MO.txt:5941 MO.txt:5952 MO.txt:6016 MO.txt:6058
-#: MO.txt:6076 MO.txt:6091 MO.txt:6112 MO.txt:6124 MO.txt:6135 MO.txt:6144
-#: MO.txt:6179 MO.txt:6190 MO.txt:6202 MO.txt:6215 MO.txt:6228 MO.txt:6240
-#: MO.txt:6254 MO.txt:6268 MO.txt:6283 MO.txt:6296 MO.txt:6309 MO.txt:6333
-#: MO.txt:6344 MO.txt:6354 MO.txt:6364 MO.txt:6382 MO.txt:6409 MO.txt:6420
-#: MO.txt:6431 MO.txt:6446 MO.txt:6469 MO.txt:6504 MO.txt:6514 MO.txt:6526
-#: MO.txt:6537 MO.txt:6583 MO.txt:6592 MO.txt:6634 MO.txt:6652 MO.txt:6667
-#: MO.txt:6688 MO.txt:6700 MO.txt:6711 MO.txt:6720 MO.txt:6756 MO.txt:6780
-#: MO.txt:6795 MO.txt:6809 MO.txt:6822 MO.txt:6835 MO.txt:6855 MO.txt:6873
-#: MO.txt:6900 MO.txt:6911 MO.txt:6922 MO.txt:6937 MO.txt:6960 MO.txt:6995
-#: MO.txt:7005 MO.txt:7017 MO.txt:7026 MO.txt:7037 MO.txt:7048 MO.txt:7059
-#: MO.txt:7123 MO.txt:7165 MO.txt:7183 MO.txt:7198 MO.txt:7219 MO.txt:7231
-#: MO.txt:7242 MO.txt:7251
-msgid "- Color"
-msgstr "- Kleur"
-
-#: MO.txt:5270 MO.txt:5541 MO.txt:5889 MO.txt:5902 MO.txt:5911 MO.txt:5920
-#: MO.txt:5931 MO.txt:5942 MO.txt:5953 MO.txt:6017 MO.txt:6059 MO.txt:6113
-#: MO.txt:6125 MO.txt:6136 MO.txt:6145 MO.txt:6515 MO.txt:6527 MO.txt:6538
-#: MO.txt:6584 MO.txt:6593 MO.txt:6635 MO.txt:6689 MO.txt:6701 MO.txt:6712
-#: MO.txt:6721 MO.txt:7006 MO.txt:7018 MO.txt:7027 MO.txt:7038 MO.txt:7049
-#: MO.txt:7060 MO.txt:7124 MO.txt:7166 MO.txt:7220 MO.txt:7232 MO.txt:7243
-#: MO.txt:7252
-msgid "- Background Color"
-msgstr "- Achtergrondkleur"
-
-#: MO.txt:5274
-msgid "Active Screen"
-msgstr "Actief scherm"
-
-#: MO.txt:5277
-msgid "Screens used for Changing"
-msgstr "Schermen gebruikt voor veranderen"
-
-#: MO.txt:5278 MO.txt:6758
-msgid "Screen 1 Changing Time"
-msgstr "Scherm 1 Verander tijd"
-
-#: MO.txt:5280 MO.txt:6760
-msgid "- Screen 2 Changing Time"
-msgstr "- Scherm 2 verandert tijd"
-
-#: MO.txt:5281 MO.txt:6761
-msgid "- Screen 3 Changing Time"
-msgstr "- Scherm 3 verandert tijd"
-
-#: MO.txt:5282 MO.txt:6762
-msgid "- Screen 4 Changing Time"
-msgstr "- Scherm 4 verandert tijd"
-
-#: MO.txt:5283 MO.txt:6763
-msgid "- Screen 5 Changing Time"
-msgstr "- Scherm 5 verandert tijd"
-
-#: MO.txt:5284 MO.txt:6764
-msgid "- Screen 6 Changing Time"
-msgstr "- Scherm 6 verandert tijd"
-
-#: MO.txt:5285 MO.txt:6765
-msgid "- Screen 7 Changing Time"
-msgstr "- Scherm 7 verandert tijd"
-
-#: MO.txt:5286 MO.txt:6766
-msgid "- Screen 8 Changing Time"
-msgstr "- Scherm 8 verandert tijd"
-
-#: MO.txt:5287 MO.txt:6767
-msgid "- Screen 9 Changing Time"
-msgstr "- Scherm 9 verandert tijd"
-
-#: MO.txt:5288
-msgid "Picture Changing Time"
-msgstr "Plaatje verandertijd"
-
-#: MO.txt:5289
-msgid "Picture Sort"
-msgstr "Plaatje volgorde"
-
-#: MO.txt:5290
-msgid "Picture Directory Recursive"
-msgstr "Plaatje map omgekeerd"
-
-#: MO.txt:5291
-msgid "Picture Quality for Resizing"
-msgstr "Plaatje kwaliteit voor herschalen"
-
-#: MO.txt:5293
-msgid "Picture Quick Update Time [s]"
-msgstr "Plaatje snelle update-tijd [s]"
-
-#: MO.txt:5295
-msgid "Picture Type [only Picture]"
-msgstr "Type plaatje [alleen plaatje] "
-
-#: MO.txt:5296
-msgid "Background-Picture Type"
-msgstr "Achtergrond-type plaatje"
-
-#: MO.txt:5299
-msgid "Weather City"
-msgstr "Weer stad"
-
-#: MO.txt:5300
-msgid "Weather City 2"
-msgstr "Weer stad 2"
-
-#: MO.txt:5301
-msgid "Weather-Icon-Path [ok]>"
-msgstr "Weer-ikoon-Pad [ok]>"
-
-#: MO.txt:5302
-msgid "Weather-Icon Zoom"
-msgstr "Weer-ikoon zoom"
-
-#: MO.txt:5303
-msgid "Weather Low Temperature Color"
-msgstr "Weer lage temperatuur kleur"
-
-#: MO.txt:5304
-msgid "Weather High Temperature Color"
-msgstr "Weer hoge temperatuur kleur"
-
-#: MO.txt:5305
-msgid "Weather Transparency"
-msgstr "Weer transparantie"
-
-#: MO.txt:5307
-msgid "Weather Rain Chance"
-msgstr "Weer regenkans"
-
-#: MO.txt:5306
-msgid "Weather Wind speed unit"
-msgstr "Weer windsnelheid eenheid"
-
-#: MO.txt:5309
-msgid "- Rain Zoom"
-msgstr "- Regen zoom"
-
-#: MO.txt:5310
-msgid "- Rain Color"
-msgstr "- Kleur regen"
-
-#: MO.txt:5311
-msgid "- Rain use Color 2 from"
-msgstr "- Regen gebruik kleur 2 van"
-
-#: MO.txt:5312
-msgid "- Rain Color 2"
-msgstr "- Kleur regen 2"
-
-#: MO.txt:5313
-msgid "Weather Lines"
-msgstr "Weer regels"
-
-#: MO.txt:5314
-msgid "Weather Extra Infos"
-msgstr "Weer Extra Info"
-
-#: MO.txt:5316
-msgid "- Extra Zoom"
-msgstr "- Extra Zoom"
-
-#: MO.txt:5317
-msgid "- Show chill temperature from difference"
-msgstr "- Toon gevoelstemperatuur van verschil"
-
-#: MO.txt:5318
-msgid "- Extra Color City"
-msgstr "- Extra kleur stad"
-
-#: MO.txt:5319
-msgid "- Extra Color Chill"
-msgstr "- Extra kleur gevoelstemperatuur"
-
-#: MO.txt:5320
-msgid "Netatmo CO2 Min Range"
-msgstr "Netatmo CO2 min bereik"
-
-#: MO.txt:5321
-msgid "Netatmo CO2 Max Range"
-msgstr "Netatmo CO2 max bereik"
-
-#: MO.txt:5322
-msgid "Meteo URL"
-msgstr "Meteo URL"
-
-#: MO.txt:5323
-msgid "Moon-Icon-Path [ok]>"
-msgstr "Maan-ikoonpad [ok]>"
-
-#: MO.txt:5324
-msgid "Recording Picture [ok]>"
-msgstr "Opnameplaatje [OK]"
-
-#: MO.txt:5325
-msgid "Double-button switches"
-msgstr "Dubbele toets schakelaars"
-
-#: MO.txt:5326
-msgid "Key for Screen Change"
-msgstr "Sleutel voor scherm veranderen"
-
-#: MO.txt:5327
-msgid "Key for Screen On/Off"
-msgstr "Sleutel voor scherm aan/uit"
-
-#: MO.txt:5328
-msgid "FritzCall Picture Path [ok]>"
-msgstr ""
-
-#: MO.txt:5329
-msgid "FritzCall Number of Lines per Entry"
-msgstr ""
-
-#: MO.txt:5330
-msgid "FritzCall Number of List Entries"
-msgstr ""
-
-#: MO.txt:5331
-msgid "FritzCall Number of Pictures"
-msgstr ""
-
-#: MO.txt:5332
-msgid "FritzCall Picture Orientation"
-msgstr ""
-
-#: MO.txt:5334
-msgid "FritzCall Pictures Search"
-msgstr ""
-
-#: MO.txt:5335
-msgid "FritzCall remove Calls after hours"
-msgstr ""
-
-#: MO.txt:5336
-msgid "FritzCall Popup-Time"
-msgstr ""
-
-#: MO.txt:5337
-msgid "FritzCall Popup LCD"
-msgstr ""
-
-#: MO.txt:5338
-msgid "FritzCall Popup Color"
-msgstr ""
-
-#: MO.txt:5339
-msgid "FritzCall Frame Picture [ok]>"
-msgstr ""
-
-#: MO.txt:5340
-msgid "Calendar ics-Path [ok]>"
-msgstr "Kalender ics-pad [ok]>"
-
-#: MO.txt:5342 MO.txt:5344 MO.txt:5346
-msgid "Calendar ics-URL"
-msgstr "Kalender ics-URL"
-
-#: MO.txt:5348
-msgid "Calendar planerFS"
-msgstr "Kalender planerFS"
-
-#: MO.txt:5350
-msgid "Calendar Saturday Color"
-msgstr "Kalender kleur zaterdag"
-
-#: MO.txt:5351
-msgid "Calendar Sunday Color"
-msgstr "Kalender kleur zondag"
-
-#: MO.txt:5352
-msgid "Calendar Line Thickness"
-msgstr "Kalenderlijn dikte"
-
-#: MO.txt:5353
-msgid "Calendar Day Event Preview"
-msgstr "Kalenderdag gebeurtenis preview"
-
-#: MO.txt:5354
-msgid "Calendar Timezone Correction"
-msgstr "Kalender tijdzonecorrectie"
-
-#: MO.txt:5355
-msgid "Calendar Transparency"
-msgstr "Kalender doorzichtigheid"
-
-#: MO.txt:5356
-msgid "Calendar Poll Interval"
-msgstr "Kalender Poll Interval"
-
-#: MO.txt:5357
-msgid "Tuner Color"
-msgstr "Tuner kleur"
-
-#: MO.txt:5358
-msgid "Tuner Color Active"
-msgstr "Tuner kleur actief"
-
-#: MO.txt:5359
-msgid "Tuner Color On"
-msgstr "Tuner kleur aan"
-
-#: MO.txt:5360
-msgid "Service search first"
-msgstr "Eerst kanaalzoeken"
-
-#: MO.txt:5361
-msgid "DVB-T Signal-Quality Correction"
-msgstr "DVB-T signaalkwaliteit correctie"
-
-#: MO.txt:5362
-msgid "Font global [ok]>"
-msgstr "Lettertype globaal [ok]>"
-
-#: MO.txt:5363
-msgid "Font 1 [ok]>"
-msgstr "Lettertype 1 [ok]>"
-
-#: MO.txt:5364
-msgid "Font 2 [ok]>"
-msgstr "Lettertype 2 [ok]>"
-
-#: MO.txt:5365
-msgid "Font 3 [ok]>"
-msgstr "Lettertype 3 [ok]>"
-
-#: MO.txt:5368
-msgid "Mail 1 Connect"
-msgstr "Mail 1 verbinden"
-
-#: MO.txt:5369
-msgid "Mail 1 Server"
-msgstr "Mail 1 Server"
-
-#: MO.txt:5370
-msgid "Mail 1 [Displayname:]Username"
-msgstr "Mail 1 [Displayname:]Gebruikersnaam"
-
-#: MO.txt:5371
-msgid "Mail 1 Password"
-msgstr "Mail 1 Wachtwoord"
-
-#: MO.txt:5372
-msgid "Mail 2 Connect"
-msgstr "Mail 2 verbinden"
-
-#: MO.txt:5373
-msgid "Mail 2 Server"
-msgstr "Mail 2 Server"
-
-#: MO.txt:5374
-msgid "Mail 2 [Displayname:]Username"
-msgstr "Mail 2 [Displayname:]Gebruikersnaam"
-
-#: MO.txt:5375
-msgid "Mail 2 Password"
-msgstr "Mail 2 wachtwoord"
-
-#: MO.txt:5376
-msgid "Mail 3 Connect"
-msgstr "Mail 3 verbinden"
-
-#: MO.txt:5377
-msgid "Mail 3 Server"
-msgstr "Mail 3 Server"
-
-#: MO.txt:5378
-msgid "Mail 3 [Displayname:]Username"
-msgstr "Mail 3 [Displayname:]Gebruikersnaam"
-
-#: MO.txt:5379
-msgid "Mail 3 Password"
-msgstr "Mail 3 wachtwoord"
-
-#: MO.txt:5380
-msgid "Mail 4 Connect"
-msgstr "Mail 4 verbinden"
-
-#: MO.txt:5381
-msgid "Mail 4 Server"
-msgstr "Mail 4 Server"
-
-#: MO.txt:5382
-msgid "Mail 4 [Displayname:]Username"
-msgstr "Mail 4 [Displayname:]Gebruikersnaam"
-
-#: MO.txt:5383
-msgid "Mail 4 Password"
-msgstr "Mail 4 wachtwoord"
-
-#: MO.txt:5384
-msgid "Mail 5 Connect"
-msgstr "Mail 5 verbinden"
-
-#: MO.txt:5385
-msgid "Mail 5 Server"
-msgstr "Mail 5 Server"
-
-#: MO.txt:5386
-msgid "Mail 5 [Displayname:]Username"
-msgstr "Mail 5 [Displayname:]Gebruikersnaam"
-
-#: MO.txt:5387
-msgid "Mail 5 Password"
-msgstr "Mail 5 wachtwoord"
-
-#: MO.txt:5388
-msgid "Mail Poll Interval"
-msgstr "Mail Poll Interval"
-
-#: MO.txt:5390
-msgid "Mail Show Empty Mailboxes"
-msgstr "Mail toon lege mailboxen"
-
-#: MO.txt:5401
-msgid "WWW Converter Poll Interval"
-msgstr "WWW Converter Poll Interval"
-
-#: MO.txt:5405
-msgid "WebIF Refresh [s]"
-msgstr "WEB-IF verversing [s]"
-
-#: MO.txt:5406
-msgid "WebIF Refresh Type"
-msgstr "WEB-IF verversings type"
-
-#: MO.txt:5407
-msgid "WebIF Init Delay"
-msgstr "WEB-IF Initiële vertraging"
-
-#: MO.txt:5408 MO.txt:14585
-msgid "WebIF IP Allow"
-msgstr "WEB-IF IP toegestaan"
-
-#: MO.txt:5409
-msgid "WebIF IP Deny"
-msgstr "WEB-IF IP verboden"
-
-#: MO.txt:5410
-msgid "WebIF Design"
-msgstr "Web-IF ontwerp"
-
-#: MO.txt:5411
-msgid "Save as Picture for WebIF"
-msgstr "Sla op als plaatje voor WEB-IF"
-
-#: MO.txt:5412
-msgid "MJPEG Stream LCD 1 enable"
-msgstr "MJPEG Stream LCD 1 inschakelen"
-
-#: MO.txt:5413
-msgid "MJPEG Stream LCD 1 Port"
-msgstr "MJPEG Stream LCD 1 poort"
-
-#: MO.txt:5415
-msgid "MJPEG Stream LCD 2 enable"
-msgstr "MJPEG Stream LCD 2 inschakelen"
-
-#: MO.txt:5416
-msgid "MJPEG Stream LCD 2 Port"
-msgstr "MJPEG Stream LCD 2 poort"
-
-#: MO.txt:5418
-msgid "MJPEG Stream LCD 3 enable"
-msgstr "MJPEG Stream LCD 3 inschakelen"
-
-#: MO.txt:5419
-msgid "MJPEG Stream LCD 3 Port"
-msgstr "MJPEG Stream LCD 3 poort"
-
-#: MO.txt:5424
-msgid "MJPEG Header Mode"
-msgstr "MJPEG headermode"
-
-#: MO.txt:5435
-msgid "LCD Custom Width"
-msgstr "LCD aangepaste breedte"
-
-#: MO.txt:5436
-msgid "LCD Custom Height"
-msgstr "LCD aangepaste hoogte"
-
-#: MO.txt:5440
-msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
-msgstr ""
-
-#: MO.txt:5441
-msgid "Display Delay [ms]"
-msgstr "Toon vertraging [ms]"
-
-#: MO.txt:5442
-msgid "Threads per LCD"
-msgstr "Draden per LCD"
-
-#: MO.txt:5443
-msgid "Show Crash Corner"
-msgstr "Toon Crash hoek"
-
-#: MO.txt:5444
-msgid "Show 'no ....' Messages"
-msgstr "Toon 'nee ...' berichten"
-
-#: MO.txt:5445
-msgid "Storage-Devices: Force Read"
-msgstr "Opslagmedia: force read"
-
-#: MO.txt:5451
-msgid "Config Backup Path [ok]>"
-msgstr "Config backuppad [ok]>"
-
-#: MO.txt:5453
-msgid "Debug-Logging > /tmp/L4log.txt"
-msgstr "Debuglogs > /tmp/L4log.txt"
-
-#: MO.txt:5457 MO.txt:6735
-msgid "- Backlight Off [disable set Off=On]"
-msgstr "- Achtergrondverlichting Uit"
-
-#: MO.txt:5458 MO.txt:6736
-msgid "- Backlight On"
-msgstr "- Achtergrondverlichting Aan"
-
-#: MO.txt:5459 MO.txt:6737
-msgid "- Backlight Weekend Off [disable set Off=On]"
-msgstr "- Achtergrondverlichting weekeinde uit"
-
-#: MO.txt:5460 MO.txt:6738
-msgid "- Backlight Weekend On"
-msgstr "- Achtergrondverlichting  Weekeinde Aan"
-
-#: MO.txt:5470 MO.txt:5483
-msgid "- Picon Size"
-msgstr "- Picon grootte"
-
-#: MO.txt:5473 MO.txt:5486 MO.txt:5503 MO.txt:5518 MO.txt:5530 MO.txt:5553
-#: MO.txt:5566 MO.txt:5579 MO.txt:5592 MO.txt:5621 MO.txt:5635 MO.txt:5647
-#: MO.txt:5658 MO.txt:5670 MO.txt:5682 MO.txt:5696 MO.txt:5707 MO.txt:5717
-#: MO.txt:5727 MO.txt:5737 MO.txt:5755 MO.txt:5773 MO.txt:5781 MO.txt:5792
-#: MO.txt:5803 MO.txt:5812 MO.txt:5835 MO.txt:5858 MO.txt:5868 MO.txt:5877
-#: MO.txt:5887 MO.txt:5900 MO.txt:5909 MO.txt:6015 MO.txt:6049 MO.txt:6072
-#: MO.txt:6087 MO.txt:6100 MO.txt:6111 MO.txt:6123 MO.txt:6154 MO.txt:6189
-#: MO.txt:6201 MO.txt:6214 MO.txt:6227 MO.txt:6253 MO.txt:6267 MO.txt:6282
-#: MO.txt:6294 MO.txt:6307 MO.txt:6318 MO.txt:6332 MO.txt:6343 MO.txt:6353
-#: MO.txt:6363 MO.txt:6381 MO.txt:6399 MO.txt:6407 MO.txt:6418 MO.txt:6429
-#: MO.txt:6438 MO.txt:6461 MO.txt:6484 MO.txt:6494 MO.txt:6503 MO.txt:6513
-#: MO.txt:6582 MO.txt:6591 MO.txt:6625 MO.txt:6648 MO.txt:6663 MO.txt:6676
-#: MO.txt:6687 MO.txt:6699 MO.txt:6730 MO.txt:6779 MO.txt:6794 MO.txt:6808
-#: MO.txt:6820 MO.txt:6833 MO.txt:6844 MO.txt:6854 MO.txt:6872 MO.txt:6890
-#: MO.txt:6898 MO.txt:6909 MO.txt:6920 MO.txt:6929 MO.txt:6952 MO.txt:6975
-#: MO.txt:6985 MO.txt:6994 MO.txt:7004 MO.txt:7016 MO.txt:7122 MO.txt:7156
-#: MO.txt:7179 MO.txt:7194 MO.txt:7207 MO.txt:7218 MO.txt:7230 MO.txt:7261
-msgid "- Split Screen"
-msgstr "- Gedeeld scherm"
-
-#: MO.txt:5474 MO.txt:5487
-msgid "- Full Screen"
-msgstr "- Vol scherm"
-
-#: MO.txt:5475 MO.txt:5488
-msgid "- Text Size"
-msgstr "- Tekst grootte"
-
-#: MO.txt:5476 MO.txt:5978 MO.txt:5988 MO.txt:5998 MO.txt:6008 MO.txt:6550
-#: MO.txt:6560 MO.txt:6572 MO.txt:7085 MO.txt:7095 MO.txt:7105 MO.txt:7115
-msgid "- Transparency"
-msgstr "- Transparantie"
-
-#: MO.txt:5477 MO.txt:5489 MO.txt:5661 MO.txt:5673
-msgid "- Picon Path [ok]>"
-msgstr "- Picon-pad [ok]>"
-
-#: MO.txt:5478 MO.txt:5490
-msgid "- Picon Path 2 [ok]>"
-msgstr "- Picon-pad 2 [ok]>"
-
-#: MO.txt:5479 MO.txt:5491
-msgid "- Picon Cache Path [ok]>"
-msgstr "- Picon cache-pad [ok]>"
-
-#: MO.txt:5480
-msgid "Picon 2"
-msgstr "Picon 2"
-
-#: MO.txt:5492 MO.txt:6256 MO.txt:6768
-msgid "Clock"
-msgstr "Klok"
-
-#: MO.txt:5495 MO.txt:5510 MO.txt:6149 MO.txt:6725 MO.txt:7256
-msgid "-  Type"
-msgstr "-  Type"
-
-#: MO.txt:5497 MO.txt:5512 MO.txt:6261 MO.txt:6276 MO.txt:6773 MO.txt:6788
-msgid "- Analog Clock"
-msgstr "- Analoge klok"
-
-#: MO.txt:5499 MO.txt:5514 MO.txt:6263 MO.txt:6278 MO.txt:6775 MO.txt:6790
-msgid "- Spacing"
-msgstr "- Spatie"
-
-#: MO.txt:5500 MO.txt:5515 MO.txt:5602 MO.txt:5618 MO.txt:5632 MO.txt:5643
-#: MO.txt:5703 MO.txt:5855 MO.txt:5865 MO.txt:5874 MO.txt:5959 MO.txt:5973
-#: MO.txt:5983 MO.txt:5993 MO.txt:6003 MO.txt:6084 MO.txt:6097 MO.txt:6150
-#: MO.txt:6236 MO.txt:6249 MO.txt:6264 MO.txt:6279 MO.txt:6291 MO.txt:6304
-#: MO.txt:6481 MO.txt:6491 MO.txt:6500 MO.txt:6545 MO.txt:6555 MO.txt:6564
-#: MO.txt:6660 MO.txt:6673 MO.txt:6726 MO.txt:6776 MO.txt:6791 MO.txt:6817
-#: MO.txt:6830 MO.txt:6972 MO.txt:6982 MO.txt:6991 MO.txt:7066 MO.txt:7080
-#: MO.txt:7090 MO.txt:7100 MO.txt:7110 MO.txt:7191 MO.txt:7204 MO.txt:7257
-msgid "- Size"
-msgstr "-Grootte"
-
-#: MO.txt:5505 MO.txt:5520 MO.txt:5532 MO.txt:5542 MO.txt:5555 MO.txt:5568
-#: MO.txt:5581 MO.txt:5594 MO.txt:5624 MO.txt:5638 MO.txt:5662 MO.txt:5674
-#: MO.txt:5698 MO.txt:5719 MO.txt:5729 MO.txt:5739 MO.txt:5757 MO.txt:5784
-#: MO.txt:5795 MO.txt:5827 MO.txt:5849 MO.txt:5879 MO.txt:5891 MO.txt:5921
-#: MO.txt:5932 MO.txt:5943 MO.txt:5954 MO.txt:6022 MO.txt:6037 MO.txt:6050
-#: MO.txt:6064 MO.txt:6079 MO.txt:6092 MO.txt:6114 MO.txt:6126 MO.txt:6191
-#: MO.txt:6203 MO.txt:6216 MO.txt:6229 MO.txt:6269 MO.txt:6284 MO.txt:6297
-#: MO.txt:6310 MO.txt:6334 MO.txt:6345 MO.txt:6355 MO.txt:6365 MO.txt:6383
-#: MO.txt:6410 MO.txt:6421 MO.txt:6453 MO.txt:6475 MO.txt:6505 MO.txt:6517
-#: MO.txt:6528 MO.txt:6539 MO.txt:6598 MO.txt:6613 MO.txt:6626 MO.txt:6640
-#: MO.txt:6655 MO.txt:6668 MO.txt:6690 MO.txt:6702 MO.txt:6781 MO.txt:6796
-#: MO.txt:6810 MO.txt:6823 MO.txt:6836 MO.txt:6856 MO.txt:6874 MO.txt:6901
-#: MO.txt:6912 MO.txt:6944 MO.txt:6966 MO.txt:6996 MO.txt:7008 MO.txt:7028
-#: MO.txt:7039 MO.txt:7050 MO.txt:7061 MO.txt:7129 MO.txt:7144 MO.txt:7157
-#: MO.txt:7171 MO.txt:7186 MO.txt:7199 MO.txt:7221 MO.txt:7233
-msgid "- Shadow Edges"
-msgstr "- Shaduwhoeken"
-
-#: MO.txt:5271 MO.txt:5506 MO.txt:5521 MO.txt:5533 MO.txt:5543 MO.txt:5556
-#: MO.txt:5569 MO.txt:5582 MO.txt:5595 MO.txt:5611 MO.txt:5625 MO.txt:5639
-#: MO.txt:5663 MO.txt:5675 MO.txt:5685 MO.txt:5699 MO.txt:5720 MO.txt:5730
-#: MO.txt:5740 MO.txt:5758 MO.txt:5785 MO.txt:5796 MO.txt:5828 MO.txt:5850
-#: MO.txt:5880 MO.txt:5892 MO.txt:5922 MO.txt:5933 MO.txt:5944 MO.txt:5955
-#: MO.txt:6023 MO.txt:6038 MO.txt:6051 MO.txt:6065 MO.txt:6080 MO.txt:6093
-#: MO.txt:6115 MO.txt:6127 MO.txt:6192 MO.txt:6204 MO.txt:6217 MO.txt:6230
-#: MO.txt:6245 MO.txt:6270 MO.txt:6285 MO.txt:6298 MO.txt:6311 MO.txt:6321
-#: MO.txt:6335 MO.txt:6346 MO.txt:6356 MO.txt:6366 MO.txt:6384 MO.txt:6411
-#: MO.txt:6422 MO.txt:6454 MO.txt:6476 MO.txt:6506 MO.txt:6518 MO.txt:6529
-#: MO.txt:6540 MO.txt:6599 MO.txt:6614 MO.txt:6627 MO.txt:6641 MO.txt:6656
-#: MO.txt:6669 MO.txt:6691 MO.txt:6703 MO.txt:6782 MO.txt:6797 MO.txt:6811
-#: MO.txt:6824 MO.txt:6837 MO.txt:6847 MO.txt:6857 MO.txt:6875 MO.txt:6902
-#: MO.txt:6913 MO.txt:6945 MO.txt:6967 MO.txt:6997 MO.txt:7009 MO.txt:7029
-#: MO.txt:7040 MO.txt:7051 MO.txt:7062 MO.txt:7130 MO.txt:7145 MO.txt:7158
-#: MO.txt:7172 MO.txt:7187 MO.txt:7200 MO.txt:7222 MO.txt:7234
-msgid "- Font"
-msgstr "- Lettertype"
-
-#: MO.txt:5507 MO.txt:6271 MO.txt:6783
-msgid "Clock 2"
-msgstr "Klok 2"
-
-#: MO.txt:5522 MO.txt:6219
-msgid "Program Name"
-msgstr "Programmanaam"
-
-#: MO.txt:5526 MO.txt:5549 MO.txt:5562 MO.txt:5575 MO.txt:5588 MO.txt:5622
-#: MO.txt:5636 MO.txt:5690 MO.txt:6043 MO.txt:6088 MO.txt:6185 MO.txt:6197
-#: MO.txt:6210 MO.txt:6223 MO.txt:6295 MO.txt:6308 MO.txt:6326 MO.txt:6619
-#: MO.txt:6664 MO.txt:6802 MO.txt:6821 MO.txt:6834 MO.txt:7150 MO.txt:7195
-msgid "- maximum Lines"
-msgstr "- Maximum aantal lijnen"
-
-#: MO.txt:5534
-msgid "Program Number"
-msgstr "Programmanummer"
-
-#: MO.txt:5544
-msgid "Program Info"
-msgstr "Programma-info"
-
-#: MO.txt:5547 MO.txt:5560 MO.txt:5573 MO.txt:5586 MO.txt:5600 MO.txt:5601
-#: MO.txt:5660 MO.txt:5672 MO.txt:5683 MO.txt:5691 MO.txt:5692 MO.txt:5715
-#: MO.txt:5741 MO.txt:5759 MO.txt:5774 MO.txt:5818 MO.txt:5819 MO.txt:5841
-#: MO.txt:5842 MO.txt:5860 MO.txt:5870 MO.txt:5890 MO.txt:6020 MO.txt:6036
-#: MO.txt:6044 MO.txt:6045 MO.txt:6060 MO.txt:6073 MO.txt:6074 MO.txt:6090
-#: MO.txt:6101 MO.txt:6158 MO.txt:6208 MO.txt:6234 MO.txt:6235 MO.txt:6259
-#: MO.txt:6274 MO.txt:6319 MO.txt:6327 MO.txt:6328 MO.txt:6341 MO.txt:6367
-#: MO.txt:6385 MO.txt:6400 MO.txt:6444 MO.txt:6445 MO.txt:6467 MO.txt:6468
-#: MO.txt:6486 MO.txt:6496 MO.txt:6516 MO.txt:6596 MO.txt:6612 MO.txt:6620
-#: MO.txt:6621 MO.txt:6636 MO.txt:6649 MO.txt:6650 MO.txt:6666 MO.txt:6677
-#: MO.txt:6771 MO.txt:6786 MO.txt:6803 MO.txt:6804 MO.txt:6845 MO.txt:6858
-#: MO.txt:6876 MO.txt:6891 MO.txt:6935 MO.txt:6936 MO.txt:6958 MO.txt:6959
-#: MO.txt:6977 MO.txt:6987 MO.txt:7007 MO.txt:7127 MO.txt:7143 MO.txt:7151
-#: MO.txt:7152 MO.txt:7167 MO.txt:7180 MO.txt:7181 MO.txt:7197 MO.txt:7208
-msgid "- Type"
-msgstr "- Type"
-
-#: MO.txt:5570
-msgid "Next Program Info"
-msgstr "Info volgende programma"
-
-#: MO.txt:5583 MO.txt:6205
-msgid "Extended Description"
-msgstr "Uitgebreide beschrijving"
-
-#: MO.txt:5597 MO.txt:6231
-msgid "Progress Bar"
-msgstr "Voortgangsbalk"
-
-#: MO.txt:5529 MO.txt:5552 MO.txt:5565 MO.txt:5578 MO.txt:5591 MO.txt:5605
-#: MO.txt:5646 MO.txt:5695 MO.txt:5706 MO.txt:6048 MO.txt:6188 MO.txt:6200
-#: MO.txt:6213 MO.txt:6226 MO.txt:6239 MO.txt:6252 MO.txt:6331 MO.txt:6624
-#: MO.txt:6807 MO.txt:7155
-msgid "- Length"
-msgstr "- Lengte"
-
-#: MO.txt:5609 MO.txt:5709 MO.txt:6243 MO.txt:6255
-msgid "- Shaded"
-msgstr "- Schaduw"
-
-#: MO.txt:5612 MO.txt:6286 MO.txt:6812
-msgid "Informations"
-msgstr "Informatie"
-
-#: MO.txt:5615 MO.txt:5629
-msgid "- Tunerinfo"
-msgstr "- Tunerinfo"
-
-#: MO.txt:5616 MO.txt:5630 MO.txt:6289 MO.txt:6302 MO.txt:6815 MO.txt:6828
-msgid "- Sensors"
-msgstr "- Sensors"
-
-#: MO.txt:5617 MO.txt:5631 MO.txt:6290 MO.txt:6303 MO.txt:6816 MO.txt:6829
-msgid "- CPU"
-msgstr "- CPU"
-
-#: MO.txt:5626 MO.txt:6299 MO.txt:6825
-msgid "Informations 2"
-msgstr "Informatie 2"
-
-#: MO.txt:5640
-msgid "Signal Quality Bar"
-msgstr "Signaalkwaliteit balk"
-
-#: MO.txt:5649
-msgid "- Gradient"
-msgstr "- Gradiënt"
-
-#: MO.txt:5650
-msgid "- Bar Range Min"
-msgstr "- Balkbereik min"
-
-#: MO.txt:5651
-msgid "- Bar Range Max"
-msgstr "- Balkbereik max"
-
-#: MO.txt:5652
-msgid "Satellite"
-msgstr "Satelliet"
-
-#: MO.txt:5664
-msgid "Provider"
-msgstr "Provider"
-
-#: MO.txt:5676 MO.txt:6312 MO.txt:6838
-msgid "Used Tuner"
-msgstr "Gebruikte tuner"
-
-#: MO.txt:5684 MO.txt:6320 MO.txt:6846
-msgid "- only active Tuner"
-msgstr "- Alleen actieve tuner"
-
-#: MO.txt:5686 MO.txt:6322 MO.txt:6798
-msgid "Next Timer Event"
-msgstr "Volgende timer"
-
-#: MO.txt:5700 MO.txt:6246
-msgid "Volume"
-msgstr "Volume"
-
-#: MO.txt:5710 MO.txt:6336
-msgid "Audio/Video"
-msgstr "Audio/Video"
-
-#: MO.txt:5721 MO.txt:6347
-msgid "Bitrate"
-msgstr "Bitrate"
-
-#: MO.txt:5731 MO.txt:6357 MO.txt:6848
-msgid "Online [Ping]"
-msgstr "Online [Ping]"
-
-#: MO.txt:5742 MO.txt:6368 MO.txt:6859
-msgid "- Show State"
-msgstr "- Toon status"
-
-#: MO.txt:5743 MO.txt:6369 MO.txt:6860
-msgid "- Timeout [ms]"
-msgstr "- Timeout [ms]"
-
-#: MO.txt:5744 MO.txt:5745 MO.txt:5746 MO.txt:5747 MO.txt:5748 MO.txt:6370
-#: MO.txt:6371 MO.txt:6372 MO.txt:6373 MO.txt:6374 MO.txt:6861 MO.txt:6862
-#: MO.txt:6863 MO.txt:6864 MO.txt:6865
-msgid "- Online Name:Address"
-msgstr "- Online Naam:Adres"
-
-#: MO.txt:5749 MO.txt:6375 MO.txt:6866
-msgid "Storage-Devices"
-msgstr "Opslagmedia"
-
-#: MO.txt:5760 MO.txt:6386 MO.txt:6877
-msgid "- free Warning"
-msgstr "- Vrij waarschuwing"
-
-#: MO.txt:5761 MO.txt:6387 MO.txt:6878
-msgid "- extra Info"
-msgstr "- extra info"
-
-#: MO.txt:5762 MO.txt:5763 MO.txt:5764 MO.txt:5765 MO.txt:5766 MO.txt:6388
-#: MO.txt:6389 MO.txt:6390 MO.txt:6391 MO.txt:6392 MO.txt:6879 MO.txt:6880
-#: MO.txt:6881 MO.txt:6882 MO.txt:6883
-msgid "- Device Name"
-msgstr "- Apparaatnaam"
-
-#: MO.txt:5767 MO.txt:6393 MO.txt:6884
-msgid "HDD"
-msgstr "HDD"
-
-#: MO.txt:5775 MO.txt:6401 MO.txt:6892 MO.txt:14434
-msgid "Weather"
-msgstr "Weer"
-
-#: MO.txt:5779 MO.txt:5790 MO.txt:5801 MO.txt:6070 MO.txt:6405 MO.txt:6416
-#: MO.txt:6427 MO.txt:6646 MO.txt:6896 MO.txt:6907 MO.txt:6918 MO.txt:7177
-msgid "- Zoom"
-msgstr "- Zoom"
-
-#: MO.txt:5782 MO.txt:5793 MO.txt:5804 MO.txt:6408 MO.txt:6419 MO.txt:6430
-#: MO.txt:6899 MO.txt:6910 MO.txt:6921
-msgid "- Weather Type"
-msgstr "- Weertype"
-
-#: MO.txt:5786 MO.txt:6412 MO.txt:6903
-msgid "Weather 2"
-msgstr "Weer 2"
-
-#: MO.txt:5797 MO.txt:6423 MO.txt:6914
-msgid "Meteo-Weather Station"
-msgstr "Meteo-weerstation"
-
-#: MO.txt:5806 MO.txt:6432 MO.txt:6923 MO.txt:14434
-msgid "Netatmo"
-msgstr "Netatmo"
-
-#: MO.txt:5813 MO.txt:5836 MO.txt:5859 MO.txt:5869 MO.txt:6439 MO.txt:6462
-#: MO.txt:6485 MO.txt:6495 MO.txt:6930 MO.txt:6953 MO.txt:6976 MO.txt:6986
-msgid "- Station"
-msgstr "- Station"
-
-#: MO.txt:5814 MO.txt:5837 MO.txt:6440 MO.txt:6463 MO.txt:6931 MO.txt:6954
-msgid "- Module"
-msgstr "- Module"
-
-#: MO.txt:5816 MO.txt:5839 MO.txt:6442 MO.txt:6465 MO.txt:6933 MO.txt:6956
-msgid "- Base"
-msgstr "- Basis"
-
-#: MO.txt:5817 MO.txt:5840 MO.txt:6443 MO.txt:6466 MO.txt:6934 MO.txt:6957
-msgid "- Name"
-msgstr "- Naam"
-
-#: MO.txt:5829 MO.txt:6455 MO.txt:6946
-msgid "Netatmo 2"
-msgstr "Netatmo 2"
-
-#: MO.txt:5851 MO.txt:6477 MO.txt:6968
-msgid "Netatmo CO2 Indicator"
-msgstr "Netatmo CO2-indicator"
-
-#: MO.txt:5857 MO.txt:5867 MO.txt:6483 MO.txt:6493 MO.txt:6974 MO.txt:6984
-msgid "- Length [Bar]"
-msgstr "- Lengte [Balk]"
-
-#: MO.txt:5861 MO.txt:6487 MO.txt:6978
-msgid "Netatmo Comfort Indicator"
-msgstr "Netatmo comfortindicator"
-
-#: MO.txt:5871 MO.txt:6497 MO.txt:6988
-msgid "Moonphase"
-msgstr "Maanfase"
-
-#: MO.txt:5881 MO.txt:6507 MO.txt:6998
-msgid "Sunrise"
-msgstr "Zonsopkomst"
-
-#: MO.txt:5893 MO.txt:6576 MO.txt:7010
-msgid "Show oscam.lcd"
-msgstr "Toon oscam.lcd"
-
-#: MO.txt:5896 MO.txt:5915 MO.txt:5926 MO.txt:5937 MO.txt:6002 MO.txt:6522
-#: MO.txt:6533 MO.txt:7022 MO.txt:7033 MO.txt:7044 MO.txt:7109
-msgid "- File [ok]>"
-msgstr "- Bestand [ok]>"
-
-#: MO.txt:5903
-msgid "Show ecm.info"
-msgstr "Toon  ecm.info"
-
-#: MO.txt:5912 MO.txt:6519 MO.txt:7019
-msgid "Show Textfile"
-msgstr "Toon tekstbestand"
-
-#: MO.txt:5923 MO.txt:6530 MO.txt:7030
-msgid "Show Textfile 2"
-msgstr "Toon tekstbestand 2"
-
-#: MO.txt:5934 MO.txt:7041
-msgid "Show Textfile 3"
-msgstr "Toon tekstbestand 3"
-
-#: MO.txt:5945 MO.txt:7052
-msgid "Show HTTP Text"
-msgstr "Toon HTTP tekst"
-
-#: MO.txt:5948 MO.txt:5962 MO.txt:7055 MO.txt:7069
-msgid "- URL"
-msgstr "- URL"
-
-#: MO.txt:5956 MO.txt:7063
-msgid "WWW-Internet Converter"
-msgstr "WWW-Internet Converter"
-
-#: MO.txt:5963 MO.txt:7070
-msgid "- HTTP Width"
-msgstr "- HTTP Breedte"
-
-#: MO.txt:5964 MO.txt:7071
-msgid "- HTTP Height"
-msgstr "- HTTP Hoogte"
-
-#: MO.txt:5965 MO.txt:7072
-msgid "- Cut from X"
-msgstr "- Knippen vanaf X"
-
-#: MO.txt:5966 MO.txt:7073
-msgid "- Cut from Y"
-msgstr "- Knippen vanaf Y"
-
-#: MO.txt:5967 MO.txt:7074
-msgid "- Cut Width [disable = 0]"
-msgstr "- Knip-breedte (uitschakelen = 0)"
-
-#: MO.txt:5968 MO.txt:7075
-msgid "- Cut Height [disable = 0]"
-msgstr "- Knip-hoogte (uitschakelen = 0)"
-
-#: MO.txt:5969 MO.txt:6541 MO.txt:7076
-msgid "Show Picture"
-msgstr "Toon foto"
-
-#: MO.txt:5972 MO.txt:5982 MO.txt:5992 MO.txt:6544 MO.txt:6554 MO.txt:7079
-#: MO.txt:7089 MO.txt:7099
-msgid "- File or Path [ok]>"
-msgstr "- Bestand of pad [ok]>"
-
-#: MO.txt:5977 MO.txt:5987 MO.txt:5997 MO.txt:6007 MO.txt:6549 MO.txt:6559
-#: MO.txt:7084 MO.txt:7094 MO.txt:7104 MO.txt:7114
-msgid "- Quick Update"
-msgstr "- Snell update"
-
-#: MO.txt:5979 MO.txt:6551 MO.txt:7086
-msgid "Show Picture 2"
-msgstr "Toon foto 2"
-
-#: MO.txt:5989 MO.txt:7096
-msgid "Show Picture 3"
-msgstr "Toon foto 3"
-
-#: MO.txt:5999 MO.txt:7106
-msgid "Show Picture 4"
-msgstr "Toon foto 4"
-
-#: MO.txt:6009 MO.txt:6585 MO.txt:7116 MO.txt:14434
-msgid "Mail"
-msgstr "Mail"
-
-#: MO.txt:6018 MO.txt:6594 MO.txt:7125
-msgid "- Lines"
-msgstr "- Lijnen"
-
-#: MO.txt:6019 MO.txt:6595 MO.txt:7126
-msgid "- Mail Konto"
-msgstr "- Mail account"
-
-#: MO.txt:6021 MO.txt:6030 MO.txt:6089 MO.txt:6597 MO.txt:6606 MO.txt:6665
-#: MO.txt:7128 MO.txt:7137 MO.txt:7196
-msgid "- max Width"
-msgstr "- Maximale breedte"
-
-#: MO.txt:6052 MO.txt:6628 MO.txt:7159 MO.txt:14434
-msgid "FritzCall"
-msgstr "FritzCall"
-
-#: MO.txt:6061 MO.txt:6637 MO.txt:7168
-msgid "- Picture Size"
-msgstr "- Foto grootte"
-
-#: MO.txt:6062 MO.txt:6638 MO.txt:7169
-msgid "- Picture Position"
-msgstr "- Foto positie"
-
-#: MO.txt:6063 MO.txt:6639 MO.txt:7170
-msgid "- Picture Alignment"
-msgstr "- Foto uitlijning"
-
-#: MO.txt:6066 MO.txt:6642 MO.txt:7173 MO.txt:14434
-msgid "Calendar"
-msgstr "Kalender"
-
-#: MO.txt:6075 MO.txt:6651 MO.txt:7182
-msgid "- Layout"
-msgstr "- Lay-out"
-
-#: MO.txt:6077 MO.txt:6653 MO.txt:7184
-msgid "- Current Day Background Color"
-msgstr "- Huidige achtergrondkleur overdag"
-
-#: MO.txt:6078 MO.txt:6654 MO.txt:7185
-msgid "- Caption Color"
-msgstr "- Hoofdletterkleur"
-
-#: MO.txt:6081 MO.txt:6657 MO.txt:7188
-msgid "Dates List"
-msgstr "Datumlijst"
-
-#: MO.txt:6094 MO.txt:6670 MO.txt:7201
-msgid "Event Icon Bar"
-msgstr "Gebeurtenissen ikoon balk"
-
-#: MO.txt:6102 MO.txt:6678 MO.txt:7209
-msgid "- Popup Screen"
-msgstr "- Popupscherm"
-
-#: MO.txt:6103 MO.txt:6679 MO.txt:7210
-msgid "- Popup LCD"
-msgstr "- Popup LCD"
-
-#: MO.txt:6128 MO.txt:6704 MO.txt:7235
-msgid "Rectangle 1"
-msgstr "Rechthoek 1"
-
-#: MO.txt:6131 MO.txt:6140 MO.txt:6707 MO.txt:6716 MO.txt:7238 MO.txt:7247
-msgid "- Position x"
-msgstr "- Positie x"
-
-#: MO.txt:6132 MO.txt:6141 MO.txt:6708 MO.txt:6717 MO.txt:7239 MO.txt:7248
-msgid "- Position y"
-msgstr "- Positie y"
-
-#: MO.txt:6133 MO.txt:6142 MO.txt:6709 MO.txt:6718 MO.txt:7240 MO.txt:7249
-msgid "- Size x"
-msgstr "- Waarde X"
-
-#: MO.txt:6134 MO.txt:6143 MO.txt:6710 MO.txt:6719 MO.txt:7241 MO.txt:7250
-msgid "- Size y"
-msgstr "- Waarde Y"
-
-#: MO.txt:6137 MO.txt:6713 MO.txt:7244
-msgid "Rectangle 2"
-msgstr "Rechthoek 2"
-
-#: MO.txt:6146 MO.txt:6722 MO.txt:7253
-msgid "Recording"
-msgstr "Neemt op"
-
-#: MO.txt:6155
-msgid "Stutter TV"
-msgstr "Stotter-TV"
-
-#: MO.txt:6175 MO.txt:6752
-msgid "- Screens used for Changing"
-msgstr "- Schermen gebruikt voor veranderen"
-
-#: MO.txt:6181
-msgid "Title"
-msgstr "Titel"
-
-#: MO.txt:6193
-msgid "Infos"
-msgstr "Infos"
-
-#: MO.txt:6561
-msgid "Show Cover"
-msgstr "Toon Cover"
-
-#: MO.txt:5974 MO.txt:5984 MO.txt:5994 MO.txt:6004 MO.txt:6546 MO.txt:6556
-#: MO.txt:6565 MO.txt:7081 MO.txt:7091 MO.txt:7101 MO.txt:7111
-msgid "- Size max Height"
-msgstr "- Maximale hoogte"
-
-#: MO.txt:6568 MO.txt:6569
-msgid "- Search Path [ok]>"
-msgstr "- Zoekpad [ok]>"
-
-#: MO.txt:6570
-msgid "- Default Cover [ok]>"
-msgstr "- Default cover [ok]>"
-
-#: MO.txt:6571
-msgid "- Picon First"
-msgstr "- Picon eerst"
-
-#: MO.txt:6734
-msgid "LCD Display"
-msgstr "LCD Display"
-
-#: MO.txt:7302
-msgid "Choose dir"
-msgstr "Kies map"
-
-#: MO.txt:7305 MO.txt:7308 MO.txt:7314 MO.txt:7317
-msgid "Choose file"
-msgstr "Kies bestand"
-
-#: MO.txt:7311
-msgid "Choose font"
-msgstr "Kies lettertype"
-
-#: MO.txt:7473
+#, python-format
 msgid "%s - Current value: %s"
 msgstr "%s - Huidige waarde: %s"
 
-#: MO.txt:7605
+msgid "-  Type"
+msgstr "-  Type"
+
+msgid "- Alignment"
+msgstr "- Uitlijning"
+
+msgid "- Analog Clock"
+msgstr "- Analoge klok"
+
+msgid "- Background Color"
+msgstr "- Achtergrondkleur"
+
+msgid "- Background/Transparency"
+msgstr "- Achtergrond/Tranparantie"
+
+msgid "- Backlight Off [disable set Off=On]"
+msgstr "- Achtergrondverlichting Uit"
+
+msgid "- Backlight On"
+msgstr "- Achtergrondverlichting Aan"
+
+msgid "- Backlight Weekend Off [disable set Off=On]"
+msgstr "- Achtergrondverlichting weekeinde uit"
+
+msgid "- Backlight Weekend On"
+msgstr "- Achtergrondverlichting  Weekeinde Aan"
+
+msgid "- Bar Range Max"
+msgstr "- Balkbereik max"
+
+msgid "- Bar Range Min"
+msgstr "- Balkbereik min"
+
+msgid "- Base"
+msgstr "- Basis"
+
+msgid "- Border"
+msgstr "- Rand"
+
+msgid "- CPU"
+msgstr "- CPU"
+
+msgid "- Caption Color"
+msgstr "- Hoofdletterkleur"
+
+msgid "- Clear Key"
+msgstr "- Verwijder toets"
+
+msgid "- Color"
+msgstr "- Kleur"
+
+msgid "- Color 1"
+msgstr "- Kleur 1"
+
+msgid "- Color 2"
+msgstr "- Kleur 2"
+
+msgid "- Color 3"
+msgstr "- Kleur 3"
+
+msgid "- Color 4"
+msgstr "- Kleur 4"
+
+msgid "- Color 5"
+msgstr "- Kleur 5"
+
+msgid "- Color 6"
+msgstr "- Kleur 6"
+
+msgid "- Color Text"
+msgstr "- Kleur tekst"
+
+msgid "- Current Day Background Color"
+msgstr "- Huidige achtergrondkleur overdag"
+
+msgid "- Cut Height [disable = 0]"
+msgstr "- Knip-hoogte (uitschakelen = 0)"
+
+msgid "- Cut Width [disable = 0]"
+msgstr "- Knip-breedte (uitschakelen = 0)"
+
+msgid "- Cut from X"
+msgstr "- Knippen vanaf X"
+
+msgid "- Cut from Y"
+msgstr "- Knippen vanaf Y"
+
+msgid "- Default Cover [ok]>"
+msgstr "- Default cover [ok]>"
+
+msgid "- Device Name"
+msgstr "- Apparaatnaam"
+
+msgid "- Download Cover"
+msgstr "- Download Cover"
+
+msgid "- Download Type"
+msgstr "- Download Type"
+
+msgid "- Extra Color Chill"
+msgstr "- Extra kleur gevoelstemperatuur"
+
+msgid "- Extra Color City"
+msgstr "- Extra kleur stad"
+
+msgid "- Extra Zoom"
+msgstr "- Extra Zoom"
+
+msgid "- Fast Grab lower quality"
+msgstr "- Snel binnenhalen lagere kwaliteit"
+
+msgid "- File [ok]>"
+msgstr "- Bestand [ok]>"
+
+msgid "- File or Path [ok]>"
+msgstr "- Bestand of pad [ok]>"
+
+msgid "- Font"
+msgstr "- Lettertype"
+
+msgid "- Font Size"
+msgstr "- Letter grootte"
+
+msgid "- Full Screen"
+msgstr "- Vol scherm"
+
+msgid "- Google API-Key console.developers.google.com/apis"
+msgstr "- Google API-Key console.developers.google.com/apis"
+
+msgid "- Gradient"
+msgstr "- Gradiënt"
+
+msgid "- HTTP Height"
+msgstr "- HTTP Hoogte"
+
+msgid "- HTTP Width"
+msgstr "- HTTP Breedte"
+
+msgid "- LCD 1 Background Color"
+msgstr "- LCD 1 Achtergrondkleur"
+
+msgid "- LCD 1 Background-Picture [ok]>"
+msgstr "- LCD 1 Achtergrond-Foto [ok]>"
+
+msgid "- LCD 1 Brightness"
+msgstr "- LCD 1 helderheid"
+
+msgid "- LCD 1 Night Reduction"
+msgstr "- LCD 1 nachtreductie"
+
+msgid "- LCD 1 Refresh"
+msgstr "- LCD 1 ververs"
+
+msgid "- LCD 1 Rotate"
+msgstr "- LCD 1 Roteer"
+
+msgid "- LCD 2 Background Color"
+msgstr "- LCD 2 Achtergrondkleur"
+
+msgid "- LCD 2 Background-Picture [ok]>"
+msgstr "- LCD 2 Achtergrond-Foto [ok]>"
+
+msgid "- LCD 2 Brightness"
+msgstr "- LCD 2 helderheid"
+
+msgid "- LCD 2 Night Reduction"
+msgstr "- LCD 2 nachtreductie"
+
+msgid "- LCD 2 Refresh"
+msgstr "- LCD 2 verversen"
+
+msgid "- LCD 2 Rotate"
+msgstr "- LCD 2 Roteer"
+
+msgid "- LCD 3 Background Color"
+msgstr "- LCD 3 Achtergrondkleur"
+
+msgid "- LCD 3 Background-Picture [ok]>"
+msgstr "- LCD 3 Achtergrond-Foto [ok]>"
+
+msgid "- LCD 3 Brightness"
+msgstr "- LCD 3 helderheid"
+
+msgid "- LCD 3 Night Reduction"
+msgstr "- LCD 3 nachtreductie"
+
+msgid "- LCD 3 Refresh"
+msgstr "- LCD 3 verversen"
+
+msgid "- LCD 3 Rotate"
+msgstr "- LCD 3 Roteer"
+
+msgid "- LCD Auto-OFF"
+msgstr "- LCD Auto-UIT"
+
+msgid "- Layout"
+msgstr "- Lay-out"
+
+msgid "- Length"
+msgstr "- Lengte"
+
+msgid "- Length [Bar]"
+msgstr "- Lengte [Balk]"
+
+msgid "- Lines"
+msgstr "- Lijnen"
+
+msgid "- Mail Konto"
+msgstr "- Mail account"
+
+msgid "- Module"
+msgstr "- Module"
+
+msgid "- Module userdefined"
+msgstr "- Module gebruiker gedefinieerd"
+
+msgid "- Name"
+msgstr "- Naam"
+
+msgid "- OSD Size"
+msgstr "- OSD-maat"
+
+msgid "- Online Name:Address"
+msgstr "- Online Naam:Adres"
+
+msgid "- Picon Cache Path [ok]>"
+msgstr "- Picon cache-pad [ok]>"
+
+msgid "- Picon First"
+msgstr "- Picon eerst"
+
+msgid "- Picon Path 2 [ok]>"
+msgstr "- Picon-pad 2 [ok]>"
+
+msgid "- Picon Path [ok]>"
+msgstr "- Picon-pad [ok]>"
+
+msgid "- Picon Size"
+msgstr "- Picon grootte"
+
+msgid "- Picture Alignment"
+msgstr "- Foto uitlijning"
+
+msgid "- Picture Position"
+msgstr "- Foto positie"
+
+msgid "- Picture Size"
+msgstr "- Foto grootte"
+
+msgid "- Picture [ok]>"
+msgstr "- Plaatje [ok]>"
+
+msgid "- Popup LCD"
+msgstr "- Popup LCD"
+
+msgid "- Popup Screen"
+msgstr "- Popupscherm"
+
+msgid "- Position"
+msgstr "- Positie"
+
+msgid "- Position x"
+msgstr "- Positie x"
+
+msgid "- Position y"
+msgstr "- Positie y"
+
+msgid "- Quick Update"
+msgstr "- Snell update"
+
+msgid "- Rain Color"
+msgstr "- Kleur regen"
+
+msgid "- Rain Color 2"
+msgstr "- Kleur regen 2"
+
+msgid "- Rain Zoom"
+msgstr "- Regen zoom"
+
+msgid "- Rain use Color 2 from"
+msgstr "- Regen gebruik kleur 2 van"
+
+msgid "- Screen 2 Changing Time"
+msgstr "- Scherm 2 verandert tijd"
+
+msgid "- Screen 3 Changing Time"
+msgstr "- Scherm 3 verandert tijd"
+
+msgid "- Screen 4 Changing Time"
+msgstr "- Scherm 4 verandert tijd"
+
+msgid "- Screen 5 Changing Time"
+msgstr "- Scherm 5 verandert tijd"
+
+msgid "- Screen 6 Changing Time"
+msgstr "- Scherm 6 verandert tijd"
+
+msgid "- Screen 7 Changing Time"
+msgstr "- Scherm 7 verandert tijd"
+
+msgid "- Screen 8 Changing Time"
+msgstr "- Scherm 8 verandert tijd"
+
+msgid "- Screen 9 Changing Time"
+msgstr "- Scherm 9 verandert tijd"
+
+msgid "- Screens used for Changing"
+msgstr "- Schermen gebruikt voor veranderen"
+
+msgid "- Search Path [ok]>"
+msgstr "- Zoekpad [ok]>"
+
+msgid "- Sensors"
+msgstr "- Sensors"
+
+msgid "- Shaded"
+msgstr "- Schaduw"
+
+msgid "- Shadow Edges"
+msgstr "- Shaduwhoeken"
+
+msgid "- Show State"
+msgstr "- Toon status"
+
+msgid "- Show chill temperature from difference"
+msgstr "- Toon gevoelstemperatuur van verschil"
+
+msgid "- Show in Mode"
+msgstr "- Toon in mode"
+
+msgid "- Size"
+msgstr "-Grootte"
+
+msgid "- Size max Height"
+msgstr "- Maximale hoogte"
+
+msgid "- Size x"
+msgstr "- Waarde X"
+
+msgid "- Size y"
+msgstr "- Waarde Y"
+
+msgid "- Spacing"
+msgstr "- Spatie"
+
+msgid "- Split Screen"
+msgstr "- Gedeeld scherm"
+
+msgid "- Station"
+msgstr "- Station"
+
+msgid "- Text"
+msgstr "- Tekst"
+
+msgid "- Text Size"
+msgstr "- Tekst grootte"
+
+msgid "- Timeout [ms]"
+msgstr "- Timeout [ms]"
+
+msgid "- Transparency"
+msgstr "- Transparantie"
+
+msgid "- Tunerinfo"
+msgstr "- Tunerinfo"
+
+msgid "- Type"
+msgstr "- Type"
+
+msgid "- URL"
+msgstr "- URL"
+
+msgid "- Unit min"
+msgstr "- Eenheid min"
+
+msgid "- Weather Type"
+msgstr "- Weertype"
+
+msgid "- Zoom"
+msgstr "- Zoom"
+
+msgid "- extra Info"
+msgstr "- extra info"
+
+msgid "- free Warning"
+msgstr "- Vrij waarschuwing"
+
+msgid "- max Width"
+msgstr "- Maximale breedte"
+
+msgid "- maximum Lines"
+msgstr "- Maximum aantal lijnen"
+
+msgid "- only active Tuner"
+msgstr "- Alleen actieve tuner"
+
+msgid "- use Info when empty"
+msgstr "- gebruik info indien leeg"
+
+msgid "- which LCD"
+msgstr "- Welk LCD"
+
+msgid "0"
+msgstr "0"
+
+msgid "0.5"
+msgstr "0,5"
+
+msgid "1"
+msgstr "1"
+
+msgid "1 - normal"
+msgstr "1 - normaal"
+
+msgid "1 / min"
+msgstr "1 / min"
+
+msgid "1-2"
+msgstr "1-2"
+
+msgid "1-3"
+msgstr "1-3"
+
+msgid "1-4"
+msgstr "1-4"
+
+msgid "1-5"
+msgstr "1-5"
+
+msgid "10"
+msgstr "10"
+
+msgid "10%"
+msgstr "10%"
+
+msgid "100%"
+msgstr "100%"
+
+msgid "10min"
+msgstr "10min"
+
+msgid "10s"
+msgstr "10s"
+
+msgid "128x32"
+msgstr "128x32"
+
+msgid "128x64"
+msgstr "128x64"
+
+msgid "132x64"
+msgstr "132x64"
+
+msgid "14"
+msgstr "14"
+
+msgid "15%"
+msgstr "15%"
+
+msgid "15min"
+msgstr "15min"
+
+msgid "15s"
+msgstr "15s"
+
+msgid "180"
+msgstr "180"
+
+msgid "1min"
+msgstr "1min"
+
+msgid "2"
+msgstr "2"
+
+msgid "2 - side by side"
+msgstr "2 - Zij-aan-zij"
+
+msgid "2 Days 1 Line"
+msgstr "2 dagen 1 regel"
+
+msgid "2 Days 2 Line"
+msgstr "2 dagen 2 regels"
+
+msgid "2 x FastBackwardKey"
+msgstr "2 x snel achteruit toets"
+
+msgid "2 x FastBackwardKey Type 2"
+msgstr "2 x snel achteruit toets type 2"
+
+msgid "2 x FastForwardKey"
+msgstr "2 x snel vooruit toets"
+
+msgid "2 x FastForwardKey Type 2"
+msgstr "2 x snel vooruit toets type 2"
+
+msgid "2 x InfoKey"
+msgstr "2 x Info-toets"
+
+msgid "2 x Mute"
+msgstr "2 x Mute"
+
+msgid "2%"
+msgstr "2%"
+
+msgid "20"
+msgstr "20"
+
+msgid "20%"
+msgstr "20%"
+
+msgid "20min"
+msgstr "20min"
+
+msgid "20s"
+msgstr "20s"
+
+msgid "220x176"
+msgstr "220x176"
+
+msgid "25%"
+msgstr "25%"
+
+msgid "255x64"
+msgstr "255x64"
+
+msgid "270"
+msgstr "270"
+
+msgid "2h"
+msgstr "2 uur"
+
+msgid "2min"
+msgstr "2min"
+
+msgid "3"
+msgstr "3"
+
+msgid "3%"
+msgstr "3%"
+
+msgid "30"
+msgstr "30"
+
+msgid "30%"
+msgstr "30%"
+
+msgid "30min"
+msgstr "30min"
+
+msgid "30s"
+msgstr "30s"
+
+msgid "32bit - color"
+msgstr "32bit - kleur"
+
+msgid "35%"
+msgstr "35%"
+
+msgid "3h"
+msgstr "3 uur"
+
+msgid "3min"
+msgstr "3min"
+
+msgid "4"
+msgstr "4"
+
+msgid "4 Days 1 Line"
+msgstr "4 dagen 1 regel"
+
+msgid "4 Days 2 Lines"
+msgstr "4 dagen 2 regels"
+
+msgid "4 Days Vertical View"
+msgstr "4 dagen verticaal aanzicht"
+
+msgid "40%"
+msgstr "40%"
+
+msgid "400x240"
+msgstr "400x240"
+
+msgid "40s"
+msgstr "40s"
+
+msgid "45%"
+msgstr "45%"
+
+msgid "480x320"
+msgstr "480x320"
+
+msgid "4min"
+msgstr "4min"
+
+msgid "5"
+msgstr "5"
+
+msgid "5 Days 1 Line"
+msgstr "5 dagen 1 regel"
+
+msgid "5 Days 2 Lines"
+msgstr "5 dagen 2 regels"
+
+msgid "5 Days Vertical View"
+msgstr "5 dagen verticaal aanzicht"
+
+msgid "5%"
+msgstr "5%"
+
+msgid "50%"
+msgstr "50%"
+
+msgid "50s"
+msgstr "50s"
+
+msgid "55%"
+msgstr "55%"
+
+msgid "5h"
+msgstr "5 uur"
+
+msgid "5min"
+msgstr "5min"
+
+msgid "5s"
+msgstr "5s"
+
+msgid "60"
+msgstr "60"
+
+msgid "60%"
+msgstr "60%"
+
+msgid "60min"
+msgstr "60min"
+
+msgid "65%"
+msgstr "65%"
+
+msgid "7"
+msgstr "7"
+
+msgid "70%"
+msgstr "70%"
+
+msgid "720x405"
+msgstr "720x405"
+
+msgid "75%"
+msgstr "75%"
+
+msgid "80%"
+msgstr "80%"
+
+msgid "800x480"
+msgstr "800x480"
+
+msgid "85%"
+msgstr "85%"
+
+msgid "8bit - grayscale/color"
+msgstr "8bit - grijsschaal/kleur"
+
+msgid "90"
+msgstr "90"
+
+msgid "90%"
+msgstr "90%"
+
+msgid "95%"
+msgstr "95%"
+
+msgid "96x64"
+msgstr "96x64"
+
+msgid "97%"
+msgstr "97%"
+
+msgid "98%"
+msgstr "98%"
+
+msgid "Active Screen"
+msgstr "Actief scherm"
+
+msgid "All"
+msgstr "Alle"
+
+msgid "Always All"
+msgstr "Altijd alle"
+
+msgid "Always New"
+msgstr "Altijd nieuw"
+
+msgid "Analog"
+msgstr "Analoog"
+
+msgid "Analog+Date"
+msgstr "Analoog+Datum"
+
+msgid "Analog+Date+Weekday"
+msgstr "Analoog+Datum+Dag"
+
+msgid "Analog+Date+Weekday 2"
+msgstr "Analoog+datum+dag 2"
+
+msgid "Audio/Video"
+msgstr "Audio/Video"
+
+msgid "Background"
+msgstr "Achtergrond"
+
+msgid "Background-Picture Type"
+msgstr "Achtergrond-type plaatje"
+
+msgid "Backup Config"
+msgstr "Sla configurtie op"
+
+msgid "Bar"
+msgstr "Balk"
+
+msgid "Bar+Value"
+msgstr "Balk+waarde"
+
+msgid "Bitrate"
+msgstr "Bitrate"
+
+msgid "Box-Skin-LCD"
+msgstr "Box-Skin-LCD"
+
+msgid "Box-Skin-LCD Color"
+msgstr "Box-Skin-LCD kleur"
+
+msgid "Box-Skin-LCD Dimension"
+msgstr "Box-Skin-LCD afmetingen"
+
+msgid "Box-Skin-LCD Enable Idle-Mode"
+msgstr "Box-Skin-LCD schakel idle-modus in"
+
+msgid "Box-Skin-LCD Enable Media-Mode"
+msgstr "Box-Skin-LCD schakel mediamode in"
+
+msgid "Box-Skin-LCD Enable On-Mode"
+msgstr "Box-Skin-LCD schakel aan-modus in"
+
+msgid "Box-Skin-LCD Offset"
+msgstr "Box-Skin-LCD afwijking"
+
+msgid "C"
+msgstr "C"
+
+msgid "C + rpm"
+msgstr "C + omw"
+
+msgid "C + rpm/2"
+msgstr "C + omw/2"
+
+msgid "Calendar"
+msgstr "Kalender"
+
+msgid "Calendar Day Event Preview"
+msgstr "Kalenderdag gebeurtenis preview"
+
+msgid "Calendar Line Thickness"
+msgstr "Kalenderlijn dikte"
+
+msgid "Calendar Poll Interval"
+msgstr "Kalender Poll Interval"
+
+msgid "Calendar Saturday Color"
+msgstr "Kalender kleur zaterdag"
+
+msgid "Calendar Sunday Color"
+msgstr "Kalender kleur zondag"
+
+msgid "Calendar Timezone Correction"
+msgstr "Kalender tijdzonecorrectie"
+
+msgid "Calendar Transparency"
+msgstr "Kalender doorzichtigheid"
+
+msgid "Calendar ics-Path [ok]>"
+msgstr "Kalender ics-pad [ok]>"
+
+msgid "Calendar ics-URL"
+msgstr "Kalender ics-URL"
+
+msgid "Calendar planerFS"
+msgstr "Kalender planerFS"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Channel"
+msgstr "Kanaal"
+
+msgid "Channel+Title"
+msgstr "Kanaal+titel"
+
+msgid "Choose dir"
+msgstr "Kies map"
+
+msgid "Choose file"
+msgstr "Kies bestand"
+
+msgid "Choose font"
+msgstr "Kies lettertype"
+
+msgid "Clock"
+msgstr "Klok"
+
+msgid "Clock 2"
+msgstr "Klok 2"
+
+msgid "Config Backup Path [ok]>"
+msgstr "Config backuppad [ok]>"
+
+msgid "Config Restore All Settings"
+msgstr "Config herstel alle instellingen"
+
+msgid "Console normal"
+msgstr "Console normal"
+
+msgid "Corby@Pearl 128x128"
+msgstr "Corby@Pearl 128x128"
+
+msgid "Corner"
+msgstr "Hoek"
+
+msgid "Corner+Timeshift"
+msgstr "Hoek + timeshift"
+
+msgid "Coversearch"
+msgstr "Cover zoeken"
+
+msgid "Crashlog"
+msgstr "Crashlog"
+
+msgid "Current"
+msgstr "Huidige"
+
+msgid "Current Temperature"
+msgstr "Huidige temperatuur"
+
+msgid "Current Temperature (+C)"
+msgstr "Huidige temperatuur (+C)"
+
+msgid "Current Temperature (-C)"
+msgstr "Huidige temperatuur (-C)"
+
+msgid "DVB-T Signal-Quality Correction"
+msgstr "DVB-T signaalkwaliteit correctie"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Date+Time"
+msgstr "Datum+Tijd"
+
+msgid "Date+Time+Weekday"
+msgstr "Datum+Tijd+ Dag"
+
+msgid "Dates"
+msgstr "Data"
+
+msgid "Dates 1 Line"
+msgstr "Data 1 regel"
+
+msgid "Dates 3 Lines"
+msgstr "Data 3 regels"
+
+msgid "Dates 5 Lines"
+msgstr "Data 5 regels"
+
+msgid "Dates 9 Lines"
+msgstr "Data 9 regels"
+
+msgid "Dates List"
+msgstr "Datumlijst"
+
+msgid "Dates compact"
+msgstr "Datum compact"
+
+msgid "Dates compact 2 Lines"
+msgstr "Datum compact 2 regels"
+
+msgid "Dates compact 3 Lines"
+msgstr "Datum compact 3 regels"
+
+msgid "Dates compact no Icon"
+msgstr "Datum compact geen icoon"
+
+msgid "Dates no Icon"
+msgstr "Datum geen icoon"
+
+msgid "Debug-Logging > /tmp/L4log.txt"
+msgstr "Debuglogs > /tmp/L4log.txt"
+
+msgid "Delete"
+msgstr "Verwijder"
+
+msgid "Delete File?"
+msgstr "Verwijder bestand?"
+
+msgid "Delete Logfile"
+msgstr "Verwijder logbestand"
+
+msgid "Display Delay [ms]"
+msgstr "Toon vertraging [ms]"
+
+msgid "Double-button switches"
+msgstr "Dubbele toets schakelaars"
+
+msgid "Download Logfile"
+msgstr "Download logbestand"
+
+msgid "E"
+msgstr "O"
+
+msgid "ENE"
+msgstr "ONO"
+
+msgid "EPG"
+msgstr "EPG"
+
+msgid "ESE"
+msgstr "EZE"
+
+msgid "Event Icon Bar"
+msgstr "Gebeurtenissen ikoon balk"
+
+msgid "Exec"
+msgstr "Exec"
+
+msgid "Extended"
+msgstr "Uitgebreid"
+
+msgid "Extended (Short)"
+msgstr "Uitgebreid (kort)"
+
+msgid "Extended Description"
+msgstr "Uitgebreide beschrijving"
+
+msgid "Fastmode (2s)"
+msgstr "Snelle modus (2s)"
+
+msgid "First Quarter"
+msgstr "Eerste kwartier"
+
+msgid "Flaps Design Date"
+msgstr "Flapsontwerp datum"
+
+msgid "Flaps Design Weekday"
+msgstr "Flapsontwerp weekdg"
+
+msgid "Font"
+msgstr "Lettertype"
+
+msgid "Font 1 [ok]>"
+msgstr "Lettertype 1 [ok]>"
+
+msgid "Font 2 [ok]>"
+msgstr "Lettertype 2 [ok]>"
+
+msgid "Font 3 [ok]>"
+msgstr "Lettertype 3 [ok]>"
+
+msgid "Font 4 [ok]>"
+msgstr "Lettertype 4 [ok]>"
+
+msgid "Font 5 [ok]>"
+msgstr "Lettertype 5 [ok]>"
+
+msgid "Font global [ok]>"
+msgstr "Lettertype globaal [ok]>"
+
+msgid "Frame"
+msgstr "Frame"
+
+msgid "Frame x2"
+msgstr "Frame x2"
+
+msgid "Fri"
+msgstr "vr"
+
+msgid "FritzCall"
+msgstr "FritzCall"
+
+msgid "FritzCall Frame Picture [ok]>"
+msgstr "FritzCall Frame Picture [ok]>"
+
+msgid "FritzCall Number of Lines per Entry"
+msgstr "FritzCall aantal lijnen per ingang"
+
+msgid "FritzCall Number of List Entries"
+msgstr "FritzCall aantal lijstingangen"
+
+msgid "FritzCall Number of Pictures"
+msgstr "FritzCall aantal plaatjes"
+
+msgid "FritzCall Picture Orientation"
+msgstr "FritzCall orientatie van plaatjes"
+
+msgid "FritzCall Picture Path [ok]>"
+msgstr "FritzCall pad voor plaatjes [ok]>"
+
+msgid "FritzCall Picture Transparency"
+msgstr "FritzCall transparantie van plaatjes"
+
+msgid "FritzCall Pictures Search"
+msgstr "FritzCall plaatjes zoeken"
+
+msgid "FritzCall Popup Color"
+msgstr "FritzCall Popup kleur"
+
+msgid "FritzCall Popup LCD"
+msgstr "FritzCall Popup LCD"
+
+msgid "FritzCall Popup-Time"
+msgstr "FritzCall Popup tijd"
+
+msgid "FritzCall remove Calls after hours"
+msgstr "FritzCall verwijder oproepen na uren"
+
+msgid "Full Moon"
+msgstr "Volle maan"
+
+msgid "GUI Restart is required"
+msgstr "GUI-herstart is noodzakelijk"
+
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
@@ -2951,966 +1083,1685 @@ msgstr ""
 "Er is een GUI-herstart nodig om de veranderingen toe te passen.\n"
 "Wilt u nu de GUI hertarten?"
 
-#: MO.txt:7606
-msgid "Restart GUI now?"
-msgstr "GUI nu herstarten?"
+msgid "Global"
+msgstr "Globaal"
 
-#: MO.txt:9690
-msgid "New Moon"
-msgstr "Nieuwe maan"
-
-#: MO.txt:9691
-msgid "First Quarter"
-msgstr "Eerste kwartier"
-
-#: MO.txt:9692
-msgid "Waxing Crescent"
-msgstr "Wassende halve maan"
-
-#: MO.txt:9693
-msgid "Waxing Gibbous"
-msgstr "Wassende volle maan"
-
-#: MO.txt:9694
-msgid "Full Moon"
-msgstr "Volle maan"
-
-#: MO.txt:9695
-msgid "Waning Gibbous"
-msgstr "Afnemende volle maan"
-
-#: MO.txt:9696
-msgid "Waning Crescent"
-msgstr "Afnemende halve maan"
-
-#: MO.txt:9697
-msgid "Last Quarter"
-msgstr "Laatste kwartier"
-
-#: MO.txt:11043 MO.txt:11044
-msgid "no Timer"
-msgstr "geen timer"
-
-#: MO.txt:12239 MO.txt:12241
-msgid "OSCAM not running"
-msgstr "OSCAM draait niet"
-
-#: MO.txt:12570
-msgid "no Calls"
-msgstr "geen oproepen"
-
-#: MO.txt:12602
-msgid "%d Mails  %d New  %s"
-msgstr "%d Mail  %d Nieuw  %s"
-
-#: MO.txt:12800
-msgid "no Netatmo-Plugin installed"
-msgstr "geen Netatmo-Plugin geïnstalleerd"
-
-#: MO.txt:14434
-msgid "Box-Skin-LCD"
-msgstr "Box-Skin-LCD"
-
-#: MO.txt:14434
-msgid "Font"
-msgstr "Lettertype"
-
-#: MO.txt:14434
-msgid "MJPEG Stream"
-msgstr "MJPEG Stream"
-
-#: MO.txt:14434
-msgid "OSD"
-msgstr "OSD"
-
-#: MO.txt:14434
-msgid "Picture"
-msgstr "Plaatje"
-
-#: MO.txt:14434
-msgid "Popup-Text"
-msgstr "Popuptekst"
-
-#: MO.txt:14434
-msgid "WebIF"
-msgstr "Web-IF"
-
-#: MO.txt:14434 MO.txt:14946
-msgid "Screen"
-msgstr "Scherm"
-
-#: MO.txt:14654
-msgid "No or wrong File selected, try a correct File first !"
-msgstr "Geen of verkeer bestand geselecteerd; probeer eerst een correct bestand!"
-
-#: MO.txt:14916
-msgid "IP seurity not supported by Box"
-msgstr "IP beveiliging is niet ondersteund door de box"
-
-#: MO.txt:14931
-msgid "Crashlog"
-msgstr "Crashlog"
-
-#: MO.txt:14933
-msgid "Show"
-msgstr "Toon"
-
-#: MO.txt:14934
-msgid "Delete"
-msgstr "Verwijder"
-
-#: MO.txt:14939
-msgid "Restore Config"
-msgstr "Configuratie herstellen"
-
-#: MO.txt:14940
-msgid "Backup Config"
-msgstr "Sla configurtie op"
-
-#: MO.txt:14942
-msgid "Delete Logfile"
-msgstr "Verwijder logbestand"
-
-#: MO.txt:14943
-msgid "Download Logfile"
-msgstr "Download logbestand"
-
-#: MO.txt:14944
-msgid "Save Config"
-msgstr "Sla configuratie op"
-
-#: MO.txt:14954
-msgid "stop Screencycle"
-msgstr "stop schermcyclus"
-
-#: MO.txt:15019 MO.txt:15020
-msgid "other"
-msgstr "anders"
-
-#: MO.txt:15122 MO.txt:15138
-msgid "set Settings"
-msgstr "maak instellingen"
-
-#: MO.txt:15125
-msgid "copy to On"
-msgstr "Kopieer naar Aan"
-
-#: MO.txt:15127
-msgid "copy to Media"
-msgstr "Kopieer naar Media"
-
-#: MO.txt:15129
-msgid "copy to Idle"
-msgstr "kopieer naar inactief "
-
-#: MO.txt:15142
-msgid "GUI Restart is required"
-msgstr "GUI-herstart is noodzakelijk"
-
-#: MO.txt:15148
-msgid "Exec"
-msgstr "Exec"
-
-#: MO.txt:15168
-msgid "Show Externals"
-msgstr "Toon externe"
-
-msgid "January"
-msgstr "januari"
-
-msgid "February"
-msgstr "februari"
-
-msgid "March"
-msgstr "maart"
-
-msgid "April"
-msgstr "april"
-
-msgid "May"
-msgstr "mei"
-
-msgid "June"
-msgstr "juni"
-
-msgid "July"
-msgstr "juli"
-
-msgid "August"
-msgstr "augustus"
-
-msgid "September"
-msgstr "september"
-
-msgid "October"
-msgstr "oktober"
-
-msgid "November"
-msgstr "november"
-
-msgid "December"
-msgstr "december"
-
-msgid "Monday"
-msgstr "maandag"
-
-msgid "Tuesday"
-msgstr "dinsdag"
-
-msgid "Wednesday"
-msgstr "woensdag"
-
-msgid "Thursday"
-msgstr "donderdag"
-
-msgid "Friday"
-msgstr "vrijdag"
-
-msgid "Saturday"
-msgstr "zaterdag"
-
-msgid "Sunday"
-msgstr "zondag"
-
-#: MO.txt:249
-msgid "Mon"
-msgstr "ma"
-
-#: MO.txt:249
-msgid "Tue"
-msgstr "di"
-
-#: MO.txt:249
-msgid "Wed"
-msgstr "wo"
-
-#: MO.txt:249
-msgid "Thur"
-msgstr "do"
-
-#: MO.txt:249
-msgid "Fri"
-msgstr "vr"
-
-#: MO.txt:249
-msgid "Sat"
-msgstr "za"
-
-#: MO.txt:249
-msgid "Sun"
-msgstr "zo "
-
-#: MO.txt:476
-msgid "2 x FastBackwardKey Type 2"
-msgstr "2 x snel achteruit toets type 2"
-
-#: MO.txt:476
-msgid "Long FastBackwardKey Type 2"
-msgstr "Snel achterwaards toets-lang type 2"
-
-#: MO.txt:5366
-msgid "Font 4 [ok]>"
-msgstr "Lettertype 4 [ok]>"
-
-#: MO.txt:5367
-msgid "Font 5 [ok]>"
-msgstr "Lettertype 5 [ok]>"
-
-#: MO.txt:306
-msgid "C + rpm"
-msgstr "C + omw"
-
-#: MO.txt:306
-msgid "C + rpm/2"
-msgstr "C + omw/2"
-
-#: MO.txt:281
-msgid "LCD 1-3"
-msgstr "LCD 1-3"
-
-#: MO.txt:5275
-msgid "Screen Switch Select - Screen"
-msgstr "Schermschakelkeuze - scherm"
-
-#: MO.txt:5276
-msgid "Screen Switch Select - LCD"
-msgstr "Schermschakelkeuze - LCD"
-
-#: MO.txt:14399 MO.txt:14400
-msgid "LCD4linux Screen Switch"
-msgstr "LCD4linux schermschakelaar"
-
-#: MO.txt:1142
-msgid "cloudconvert.org"
-msgstr "cloudconvert.org"
-
-#: MO.txt:1142
-msgid "convertapi.com"
-msgstr "convertapi.com"
-
-#: MO.txt:5392
-msgid "Mail Hide Mailadress"
-msgstr "Mail verberg mailadres"
-
-#: MO.txt:5402
-msgid "WWW Converter Usage"
-msgstr "WWW converter gebruik"
-
-#: MO.txt:5403
-msgid "WWW ApiKey from cloudconvert.org"
-msgstr "WWW ApiKey van cloudconvert.org"
-
-#: MO.txt:5404
-msgid "WWW ApiKey from convertapi.com"
-msgstr "WWW ApiKey van convertapi.com"
-
-#: MO.txt:14434
-msgid "WWW Converter"
-msgstr "WWW converter"
-
-#: MO.txt:291
-msgid "128x32"
-msgstr "128x32"
-
-#: MO.txt:5452
-msgid "Config Restore All Settings"
-msgstr "Config herstel alle instellingen"
-
-#: MO.txt:291
-msgid "128x64"
-msgstr "128x64"
-
-#: MO.txt:315
-msgid "Channel"
-msgstr "Kanaal"
-
-#: MO.txt:315
-msgid "Channel+Title"
-msgstr "Kanaal+titel"
-
-#: MO.txt:315
-msgid "Picon+Channel"
-msgstr "Picon+kanaal"
-
-#: MO.txt:315
-msgid "Picon+Channel+Title"
-msgstr "Picon+kanaal+titel"
-
-#: MO.txt:320
-msgid "14"
-msgstr "14"
-
-#: MO.txt:320
-msgid "7"
-msgstr "7"
-
-#: MO.txt:320
-msgid "all"
-msgstr "alle"
-
-#: MO.txt:936 MO.txt:1430 MO.txt:1889
-msgid "Memory available"
-msgstr "Beschikbaar geheugen"
-
-#: MO.txt:936 MO.txt:1430 MO.txt:1889
-msgid "Memory free"
-msgstr "Vrij geheugen"
-
-#: MO.txt:5389
-msgid "Mail IMAP limit to last days"
-msgstr "Mail IMAP beperk tot laatste dagen"
-
-#: MO.txt:5391
-msgid "Mail Show Date"
-msgstr "Mail toon datum"
-
-#: MO.txt:5393
-msgid "Remote Box 1 [Displayname:]IP/Name"
-msgstr "klantbox 1 [Displayname:]IP/Name"
-
-#: MO.txt:5394
-msgid "Remote Box 2 [Displayname:]IP/Name"
-msgstr "Klantbox 2 [Displayname:]IP/Name"
-
-#: MO.txt:5395
-msgid "Remote Box 3 [Displayname:]IP/Name"
-msgstr "Klantbox 3 [Displayname:]IP/Name"
-
-#: MO.txt:5396
-msgid "Remote Box 4 [Displayname:]IP/Name"
-msgstr "Klantbox 4 [Displayname:]IP/Name"
-
-#: MO.txt:5397
-msgid "Remote Box 5 [Displayname:]IP/Name"
-msgstr "Klantbox 5 [Displayname:]IP/Name"
-
-#: MO.txt:6024 MO.txt:6600 MO.txt:7131 MO.txt:14434
-msgid "Remote Box"
-msgstr "Klant box"
-
-#: MO.txt:5398
-msgid "Remote Box Poll every Minutes"
-msgstr "Klantbox elke minuut pollen"
-
-#: MO.txt:5333
-msgid "FritzCall Picture Transparency"
-msgstr ""
-
-#: MO.txt:411
-msgid "MSN"
-msgstr "MSN"
-
-#: MO.txt:411
-msgid "OpenWeatherMap"
-msgstr "OpenWeather kaart"
-
-#: MO.txt:2438
-msgid "E"
-msgstr "O"
-
-#: MO.txt:2438
-msgid "ENE"
-msgstr "ONO"
-
-#: MO.txt:2438
-msgid "ESE"
-msgstr "EZE"
-
-#: MO.txt:2438
-msgid "N"
-msgstr "N"
-
-#: MO.txt:2438
-msgid "NE"
-msgstr "NO"
-
-#: MO.txt:2438
-msgid "NNE"
-msgstr "NNO"
-
-#: MO.txt:2438
-msgid "NNW"
-msgstr "NNW"
-
-#: MO.txt:2438
-msgid "NW"
-msgstr "NW"
-
-#: MO.txt:2438
-msgid "S"
-msgstr "Z"
-
-#: MO.txt:2438
-msgid "SE"
-msgstr "ZO"
-
-#: MO.txt:2438
-msgid "SSE"
-msgstr "ZZO"
-
-#: MO.txt:2438
-msgid "SSW"
-msgstr "ZZW"
-
-#: MO.txt:2438
-msgid "SW"
-msgstr "ZW"
-
-#: MO.txt:2438
-msgid "W"
-msgstr "W"
-
-#: MO.txt:2438
-msgid "WNW"
-msgstr "WNW"
-
-#: MO.txt:2438
-msgid "WSW"
-msgstr "WZW"
-
-#: MO.txt:5297
-msgid "Weather API"
-msgstr "Weer-API"
-
-#: MO.txt:5298
-msgid "Weather API-Key OpenWeatherMap"
-msgstr "Weer API-Key OpenWeatherMap"
-
-#: MO.txt:5462 MO.txt:6176 MO.txt:6753
-msgid "Background"
-msgstr "Achtergrond"
-
-#: MO.txt:5466 MO.txt:6180 MO.txt:6757
-msgid "- Picture [ok]>"
-msgstr "- Plaatje [ok]>"
-
-#: MO.txt:5557
-msgid "Program Info 2"
-msgstr "Programma-info 2"
-
-#: MO.txt:5608 MO.txt:6242
-msgid "- Border"
-msgstr "- Rand"
-
-#: MO.txt:5610 MO.txt:6244
-msgid "- Unit min"
-msgstr "- Eenheid min"
-
-#: MO.txt:291
-msgid "720x405"
-msgstr "720x405"
-
-#: MO.txt:5450
-msgid "Switch FrameBuffer [if possible]"
-msgstr "Schakel framebuffer [indien mogelijk)"
-
-#: MO.txt:773 MO.txt:1286
-msgid "Line"
-msgstr "Regel"
-
-#: MO.txt:773 MO.txt:1286
-msgid "no Frame"
-msgstr "geen rand"
-
-#: MO.txt:298
-msgid "Flaps Design Date"
-msgstr ""
-
-#: MO.txt:298
-msgid "Flaps Design Weekday"
-msgstr ""
-
-#: MO.txt:7273
-msgid "LCD4linux Display-Mode On"
-msgstr "LCD4linux display-modus aan"
-
-#: MO.txt:7274
-msgid "Set Media >>"
-msgstr "Media instellingen >>"
-
-#: MO.txt:7278
-msgid "LCD4linux Display-Mode MediaPlayer"
-msgstr "LCD4linux display-modus mediaspeler"
-
-#: MO.txt:7279
-msgid "Set Idle >>"
-msgstr "Idle instellingen >>"
-
-#: MO.txt:7283
-msgid "LCD4linux Display-Mode Idle"
-msgstr "LCD4linux display-modus idle"
-
-#: MO.txt:7284
-msgid "Set Global >>"
-msgstr "Algemene instellingen >>"
-
-#: MO.txt:7288
-msgid "LCD4linux Settings"
-msgstr "LCD4linux instellingen"
-
-#: MO.txt:7289
-msgid "Set On >>"
-msgstr "Aan instellingen >>"
-
-#: MO.txt:773 MO.txt:1286
-msgid "no Bar"
-msgstr "geen balk"
-
-#: MO.txt:5076 MO.txt:5097 MO.txt:6732 MO.txt:7282 MO.txt:7286 MO.txt:7479
-#: MO.txt:14965
-msgid "Idle"
-msgstr "Idle"
-
-#: MO.txt:5449
-msgid "Network Check active"
-msgstr "Netwerkcontrole aktief"
-
-#: MO.txt:321
-msgid "Corner+Timeshift"
-msgstr "Hoek + timeshift"
-
-#: MO.txt:321
-msgid "Picon+Timeshift"
-msgstr "Picon+timeshift"
-
-#: MO.txt:279
-msgid "2h"
-msgstr "2 uur"
-
-#: MO.txt:279
-msgid "3h"
-msgstr "3 uur"
-
-#: MO.txt:279
-msgid "5h"
-msgstr "5 uur"
-
-#: MO.txt:313 MO.txt:319 MO.txt:320 MO.txt:364 MO.txt:437 MO.txt:442
-msgid "1"
-msgstr "1"
-
-#: MO.txt:319
-msgid "4"
-msgstr "4"
-
-#: MO.txt:319 MO.txt:320 MO.txt:364 MO.txt:437 MO.txt:442
-msgid "2"
-msgstr "2"
-
-#: MO.txt:319 MO.txt:320 MO.txt:364 MO.txt:437 MO.txt:442
-msgid "3"
-msgstr "3"
-
-#: MO.txt:319 MO.txt:364 MO.txt:437 MO.txt:442
-msgid "5"
-msgstr "5"
-
-#: MO.txt:320 MO.txt:364 MO.txt:437 MO.txt:442
-msgid "30"
-msgstr "30"
-
-#: MO.txt:333
-msgid "with absolute Endtime"
-msgstr "met absolute eindtijd"
-
-#: MO.txt:333
-msgid "with absolute Endtime (Size 1.5)"
-msgstr "met absolute eindtijd (maat 1,5)"
-
-#: MO.txt:333
-msgid "with absolute Endtime (Size 2)"
-msgstr "met absolute eindtijd (maat 2)"
-
-#: MO.txt:334
-msgid "with Minutes Total / Endtime (above)"
-msgstr ""
-
-#: MO.txt:334
-msgid "with Minutes Total / Endtime (above/Size 1.5)"
-msgstr "met minuten Totaal/Eindtijd (boven/maat 1,5)"
-
-#: MO.txt:334
-msgid "with Minutes Total / Endtime (above/Size 2)"
-msgstr "met minuten Totaal/Eindtijd (boven/maat 2)"
-
-#: MO.txt:364 MO.txt:437 MO.txt:442
-msgid "10"
-msgstr "10"
-
-#: MO.txt:364 MO.txt:437 MO.txt:442
-msgid "20"
-msgstr "20"
-
-#: MO.txt:451 MO.txt:452 MO.txt:453
-msgid "90"
-msgstr "90"
-
-#: MO.txt:5461 MO.txt:6174 MO.txt:6739
-msgid "- LCD Auto-OFF"
-msgstr "- LCD Auto-UIT"
-
-#: MO.txt:6104 MO.txt:6680 MO.txt:7211
-msgid "Show Text 1"
-msgstr "Toon tekst 1"
-
-#: MO.txt:6107 MO.txt:6119 MO.txt:6683 MO.txt:6695 MO.txt:7214 MO.txt:7226
-msgid "- Text"
-msgstr "- Tekst"
-
-#: MO.txt:6116 MO.txt:6692 MO.txt:7223
-msgid "Show Text 2"
-msgstr "Toon tekst 2"
-
-#: MO.txt:316
-msgid "same color"
-msgstr "zelfde kleur"
-
-#: MO.txt:5821 MO.txt:5844 MO.txt:6031 MO.txt:6447 MO.txt:6470 MO.txt:6607
-#: MO.txt:6938 MO.txt:6961 MO.txt:7138
-msgid "- Color 1"
-msgstr "- Kleur 1"
-
-#: MO.txt:5822 MO.txt:5845 MO.txt:6032 MO.txt:6448 MO.txt:6471 MO.txt:6608
-#: MO.txt:6939 MO.txt:6962 MO.txt:7139
-msgid "- Color 2"
-msgstr "- Kleur 2"
-
-#: MO.txt:5823 MO.txt:5846 MO.txt:6033 MO.txt:6449 MO.txt:6472 MO.txt:6609
-#: MO.txt:6940 MO.txt:6963 MO.txt:7140
-msgid "- Color 3"
-msgstr "- Kleur 3"
-
-#: MO.txt:5824 MO.txt:5847 MO.txt:6034 MO.txt:6450 MO.txt:6473 MO.txt:6610
-#: MO.txt:6941 MO.txt:6964 MO.txt:7141
-msgid "- Color 4"
-msgstr "- Kleur 4"
-
-#: MO.txt:5825 MO.txt:5848 MO.txt:6035 MO.txt:6451 MO.txt:6474 MO.txt:6611
-#: MO.txt:6942 MO.txt:6965 MO.txt:7142
-msgid "- Color 5"
-msgstr "- Kleur 5"
-
-#: MO.txt:10898
-msgid "Picture not available"
-msgstr "Afbeelding niet beschikbaar"
-
-#: MO.txt:5399
-msgid "Remote Box Timer [Displayname:]IP/Name"
-msgstr "Remote box timer [Displayname:]IP/Name"
-
-#: MO.txt:5400
-msgid "Remote Box Timer Poll every Minutes"
-msgstr "Remote box timer polt elke minuten"
-
-#: MO.txt:6039 MO.txt:6615 MO.txt:7146
-msgid "Remote Box Timer"
-msgstr "Remote box timer"
-
-#: MO.txt:291
-msgid "480x320"
-msgstr "480x320"
-
-#: MO.txt:437 MO.txt:442
-msgid "60"
-msgstr "60"
-
-#: MO.txt:5425
-msgid "Sonos IP"
-msgstr "Sonos IP"
-
-#: MO.txt:5426
-msgid "Sonos Ping Timeout [ms]"
-msgstr "Sonos Ping Timeout [ms]"
-
-#: MO.txt:5428
-msgid "Sonos Refresh [s]"
-msgstr "Sonos verversen [s]"
-
-#: MO.txt:14434
-msgid "Key"
-msgstr "Sleutel"
-
-#: MO.txt:14434
-msgid "Sonos"
-msgstr "Sonos"
-
-#: MO.txt:14434
-msgid "Tuner"
-msgstr "Tuner"
-
-#: MO.txt:295
-msgid "Module 1-6"
-msgstr "Module 1-6"
-
-#: MO.txt:5422
-msgid "MJPEG Cycle"
-msgstr "MJPEG cyclus"
-
-#: MO.txt:5596 MO.txt:6218
-msgid "- use Info when empty"
-msgstr "- gebruik info indien leeg"
-
-#: MO.txt:5826 MO.txt:6452 MO.txt:6943
-msgid "- Color 6"
-msgstr "- Kleur 6"
-
-#: MO.txt:295
-msgid "Module 2-6"
-msgstr "Module 2-6"
-
-#: MO.txt:295
-msgid "Module 3-6"
-msgstr "Module 3-6"
-
-#: MO.txt:295
-msgid "Module 4-6"
-msgstr "Module 4-6"
-
-#: MO.txt:295
-msgid "Module 5-6"
-msgstr "Module 5-6"
-
-#: MO.txt:295
-msgid "Module 6"
-msgstr "Module 6"
-
-#: MO.txt:6573
-msgid "- Download Cover"
-msgstr "- Download Cover"
-
-#: MO.txt:6575
-msgid "- Google API-Key console.developers.google.com/apis"
-msgstr "- Google API-Key console.developers.google.com/apis"
-
-#: MO.txt:1626
 msgid "Google API"
 msgstr "Google API"
 
-#: MO.txt:6574
-msgid "- Download Type"
-msgstr "- Download Type"
+msgid "Gradient"
+msgstr "Gradiënt"
 
-#: MO.txt:5414
-msgid "MJPEG Stream LCD 1 Virtual Brightness"
-msgstr "MJPEG-stream LCD 1 virtuele helderheid"
+msgid "HDD"
+msgstr "HDD"
 
-#: MO.txt:5417
-msgid "MJPEG Stream LCD 2 Virtual Brightness"
-msgstr "MJPEG-stream LCD 2 virtuele helderheid"
+msgid "IMAP"
+msgstr "IMAP"
 
-#: MO.txt:5420
-msgid "MJPEG Stream LCD 3 Virtual Brightness"
-msgstr "MJPEG-stream LCD 3 virtuele helderheid"
+msgid "IMAP-SSL"
+msgstr "IMAP-SSL"
 
-#: MO.txt:5427
-msgid "Sonos Play Check"
-msgstr "Sonos afspeelcontrole"
+msgid "IP seurity not supported by Box"
+msgstr "IP beveiliging is niet ondersteund door de box"
 
-#: MO.txt:8112
+msgid "Idle"
+msgstr "Idle"
+
 msgid "Indoor"
 msgstr "Binnenshuis"
 
-#: MO.txt:8112
-msgid "Outdoor"
-msgstr "Buitenshuis"
+msgid "Info"
+msgstr "Info"
 
-#: MO.txt:8112
-msgid "Rain"
-msgstr "Regen"
+msgid "Informations"
+msgstr "Informatie"
 
-#: MO.txt:8112
-msgid "Wind"
-msgstr "Wind"
+msgid "Informations 2"
+msgstr "Informatie 2"
 
-#: MO.txt:275
-msgid "Screen 5-8"
-msgstr "Scherm 5-8"
+msgid "Infos"
+msgstr "Infos"
 
-#: MO.txt:288
-msgid "only Picture Custom Size 2"
-msgstr "alleen foto aangepaste grootte 2"
+msgid "Internal Box-Skin-LCD"
+msgstr "Intern Box-Skin-LCD"
 
-#: MO.txt:4795
-msgid "Load Defaults / Empty Config"
-msgstr "Laad standaard waardes / lege configuratie"
+msgid "Internal TFT-LCD 400x240"
+msgstr "Intern TFT-LCD 400x240"
 
-#: MO.txt:5423
-msgid "MJPEG Restart on Error"
-msgstr "MJPEG herstarten bij fout"
+msgid "Internal Vu+ Duo2 LCD 400x240"
+msgstr "Intern Vu+ Duo2 LCD 400x240"
 
-#: MO.txt:5437
-msgid "LCD Custom Width 2"
-msgstr "LCD aangepaste breedte 2"
+msgid "JPG"
+msgstr "JPG"
 
-#: MO.txt:5438
-msgid "LCD Custom Height 2"
-msgstr "LCD aangepaste hoogte 2"
+msgid "Javascript"
+msgstr "Javascript"
 
-#: MO.txt:295
-msgid "userdefined"
-msgstr "gebruiker gedefinieerd"
-
-#: MO.txt:5607 MO.txt:6241
-msgid "- Color Text"
-msgstr "- Kleur tekst"
-
-#: MO.txt:5815 MO.txt:5838 MO.txt:6441 MO.txt:6464 MO.txt:6932 MO.txt:6955
-msgid "- Module userdefined"
-msgstr ""
-
-#: MO.txt:14390 MO.txt:14395
-msgid "LCD4linux"
-msgstr "LCD4Linux"
-
-#: MO.txt:291
-msgid "800x480"
-msgstr "800x480"
-
-#: MO.txt:299 MO.txt:311
-msgid "97%"
-msgstr "97%"
-
-#: MO.txt:299 MO.txt:311
-msgid "98%"
-msgstr "98%"
-
-#: MO.txt:406
 msgid "Javascript no Refresh"
 msgstr "Javascript niet verversen"
 
-#: MO.txt:444
-msgid "Coversearch"
-msgstr "Cover zoeken"
+msgid "Key"
+msgstr "Sleutel"
 
-#: MO.txt:444 MO.txt:14434
-msgid "MusicCast"
-msgstr "MusicCast"
+msgid "Key for Screen Change"
+msgstr "Sleutel voor scherm veranderen"
 
-#: MO.txt:5429
-msgid "MusicCast IP"
-msgstr "MusicCast IP"
+msgid "Key for Screen On/Off"
+msgstr "Sleutel voor scherm aan/uit"
 
-#: MO.txt:5431
-msgid "MusicCast Ping Timeout [ms]"
-msgstr "MusicCast Ping Timeout [ms]"
+msgid "Knob"
+msgstr "Schakelaar"
 
-#: MO.txt:5432
-msgid "MusicCast Play Check"
-msgstr "MusicCast afspeelcontrole"
+msgid "Knob+Value"
+msgstr "Schakelaar+waarde"
 
-#: MO.txt:5433
-msgid "MusicCast Refresh [s]"
-msgstr "MusicCast verversen [s]"
+msgid "LCD 1"
+msgstr "LCD 1"
 
-#: MO.txt:5434
-msgid "MusicCast Cover"
-msgstr "MusicCast Cover"
+msgid "LCD 1 Type"
+msgstr "LCD 1 Type"
 
-#: MO.txt:592
-msgid "MUTE or defined Keys"
-msgstr ""
+msgid "LCD 1+2"
+msgstr "LCD 1+2"
 
-#: MO.txt:592
-msgid "any Key"
-msgstr ""
+msgid "LCD 1+2+3"
+msgstr "LCD 1+2+3"
 
-#: MO.txt:5265
-msgid "- Clear Key"
-msgstr ""
+msgid "LCD 1+3"
+msgstr "LCD 1+3"
 
-#: MO.txt:773 MO.txt:1286
-msgid "Frame x2"
-msgstr "Frame x2"
+msgid "LCD 1-3"
+msgstr "LCD 1-3"
 
-#: MO.txt:5430
-msgid "MusicCast Server IP [optional]"
-msgstr "MusicCast Server IP [optioneel]"
+msgid "LCD 2"
+msgstr "LCD 2"
 
-#: MO.txt:5250
-msgid "Box-Skin-LCD Offset"
-msgstr "Box-Skin-LCD afwijking"
+msgid "LCD 2 Type"
+msgstr "LCD 2 Type"
 
-#: MO.txt:5439
+msgid "LCD 2+3"
+msgstr "LCD 2+3"
+
+msgid "LCD 3"
+msgstr "LCD 3"
+
+msgid "LCD 3 Type"
+msgstr "LCD 3 Type"
+
+msgid "LCD Custom Height"
+msgstr "LCD aangepaste hoogte"
+
+msgid "LCD Custom Height 2"
+msgstr "LCD aangepaste hoogte 2"
+
+msgid "LCD Custom Width"
+msgstr "LCD aangepaste breedte"
+
+msgid "LCD Custom Width 2"
+msgstr "LCD aangepaste breedte 2"
+
+msgid "LCD Display"
+msgstr "LCD Display"
+
 msgid "LCD Off when shutdown"
 msgstr "LCD uit wanneer uitgeschakeld"
 
-#: MO.txt:5446
+msgid "LCD4Linux"
+msgstr "LCD4Linux"
+
+msgid "LCD4linux"
+msgstr "LCD4Linux"
+
+msgid "LCD4linux Display-Mode Idle"
+msgstr "LCD4linux display-modus idle"
+
+msgid "LCD4linux Display-Mode MediaPlayer"
+msgstr "LCD4linux display-modus mediaspeler"
+
+msgid "LCD4linux Display-Mode On"
+msgstr "LCD4linux display-modus aan"
+
+msgid "LCD4linux Screen Switch"
+msgstr "LCD4linux schermschakelaar"
+
+msgid "LCD4linux Settings"
+msgstr "LCD4linux instellingen"
+
+msgid "LCD4linux enabled"
+msgstr "LCD4linux ingeschakeld"
+
+msgid "Last Quarter"
+msgstr "Laatste kwartier"
+
+msgid "Line"
+msgstr "Regel"
+
+msgid "List of Storage Devices"
+msgstr "Lijst van opslagmedia"
+
+msgid "Load Active Config-File"
+msgstr "Laad actieve configuratiebestand"
+
+msgid "Load Defaults / Empty Config"
+msgstr "Laad standaard waardes / lege configuratie"
+
+#, python-format
+msgid "Load File : %s"
+msgstr "Laad bestand: %s"
+
+msgid "Load@1min"
+msgstr "Laad@1min"
+
+msgid "Load@5min"
+msgstr "Laad@5min"
+
+msgid "Logfile extensive"
+msgstr "Logbestand uitgebreid"
+
+msgid "Logfile normal"
+msgstr "Logbestand normaal"
+
+msgid "Long FastBackwardKey"
+msgstr "Snel achterwaards toets-lang"
+
+msgid "Long FastBackwardKey Type 2"
+msgstr "Snel achterwaards toets-lang type 2"
+
+msgid "Long FastForwardKey"
+msgstr "Snel voorwaards toets-lang"
+
+msgid "Long FastForwardKey Type 2"
+msgstr "Snel voorwaards toets-lang type 2"
+
+msgid "Long InfoKey"
+msgstr "Info toets-lang"
+
+msgid "MJPEG Cycle"
+msgstr "MJPEG cyclus"
+
+msgid "MJPEG Header Mode"
+msgstr "MJPEG headermode"
+
+msgid "MJPEG Restart on Error"
+msgstr "MJPEG herstarten bij fout"
+
+msgid "MJPEG Stream"
+msgstr "MJPEG Stream"
+
+msgid "MJPEG Stream LCD 1 Port"
+msgstr "MJPEG Stream LCD 1 poort"
+
+msgid "MJPEG Stream LCD 1 Virtual Brightness"
+msgstr "MJPEG-stream LCD 1 virtuele helderheid"
+
+msgid "MJPEG Stream LCD 1 enable"
+msgstr "MJPEG Stream LCD 1 inschakelen"
+
+msgid "MJPEG Stream LCD 2 Port"
+msgstr "MJPEG Stream LCD 2 poort"
+
+msgid "MJPEG Stream LCD 2 Virtual Brightness"
+msgstr "MJPEG-stream LCD 2 virtuele helderheid"
+
+msgid "MJPEG Stream LCD 2 enable"
+msgstr "MJPEG Stream LCD 2 inschakelen"
+
+msgid "MJPEG Stream LCD 3 Port"
+msgstr "MJPEG Stream LCD 3 poort"
+
+msgid "MJPEG Stream LCD 3 Virtual Brightness"
+msgstr "MJPEG-stream LCD 3 virtuele helderheid"
+
+msgid "MJPEG Stream LCD 3 enable"
+msgstr "MJPEG Stream LCD 3 inschakelen"
+
+msgid "MSN"
+msgstr "MSN"
+
+msgid "MUTE or defined Keys"
+msgstr "MUTE of definieer toetsen"
+
+msgid "Mail"
+msgstr "Mail"
+
+msgid "Mail 1 Connect"
+msgstr "Mail 1 verbinden"
+
+msgid "Mail 1 Password"
+msgstr "Mail 1 Wachtwoord"
+
+msgid "Mail 1 Server"
+msgstr "Mail 1 Server"
+
+msgid "Mail 1 [Displayname:]Username"
+msgstr "Mail 1 [Displayname:]Gebruikersnaam"
+
+msgid "Mail 2 Connect"
+msgstr "Mail 2 verbinden"
+
+msgid "Mail 2 Password"
+msgstr "Mail 2 wachtwoord"
+
+msgid "Mail 2 Server"
+msgstr "Mail 2 Server"
+
+msgid "Mail 2 [Displayname:]Username"
+msgstr "Mail 2 [Displayname:]Gebruikersnaam"
+
+msgid "Mail 3 Connect"
+msgstr "Mail 3 verbinden"
+
+msgid "Mail 3 Password"
+msgstr "Mail 3 wachtwoord"
+
+msgid "Mail 3 Server"
+msgstr "Mail 3 Server"
+
+msgid "Mail 3 [Displayname:]Username"
+msgstr "Mail 3 [Displayname:]Gebruikersnaam"
+
+msgid "Mail 4 Connect"
+msgstr "Mail 4 verbinden"
+
+msgid "Mail 4 Password"
+msgstr "Mail 4 wachtwoord"
+
+msgid "Mail 4 Server"
+msgstr "Mail 4 Server"
+
+msgid "Mail 4 [Displayname:]Username"
+msgstr "Mail 4 [Displayname:]Gebruikersnaam"
+
+msgid "Mail 5 Connect"
+msgstr "Mail 5 verbinden"
+
+msgid "Mail 5 Password"
+msgstr "Mail 5 wachtwoord"
+
+msgid "Mail 5 Server"
+msgstr "Mail 5 Server"
+
+msgid "Mail 5 [Displayname:]Username"
+msgstr "Mail 5 [Displayname:]Gebruikersnaam"
+
+msgid "Mail Hide Mailadress"
+msgstr "Mail verberg mailadres"
+
+msgid "Mail IMAP limit to last days"
+msgstr "Mail IMAP beperk tot laatste dagen"
+
+msgid "Mail Poll Interval"
+msgstr "Mail Poll Interval"
+
+msgid "Mail Show Date"
+msgstr "Mail toon datum"
+
+msgid "Mail Show Empty Mailboxes"
+msgstr "Mail toon lege mailboxen"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "Memory available"
+msgstr "Beschikbaar geheugen"
+
+msgid "Memory free"
+msgstr "Vrij geheugen"
+
+msgid "Meteo URL"
+msgstr "Meteo URL"
+
+msgid "Meteo-Weather Station"
+msgstr "Meteo-weerstation"
+
+msgid "Mini-EPG"
+msgstr "Mini-EPG"
+
+msgid "Module 1"
+msgstr "Module 1"
+
+msgid "Module 1+2"
+msgstr "Module 1+2"
+
+msgid "Module 1+2+3"
+msgstr "Module 1+2+3"
+
+msgid "Module 1+2+4"
+msgstr "Module 1+2+4"
+
+msgid "Module 1+3"
+msgstr "Module 1+3"
+
+msgid "Module 1+3+4"
+msgstr "Module 1+3+4"
+
+msgid "Module 1+4"
+msgstr "Module 1+4"
+
+msgid "Module 1-4"
+msgstr "Module 1-4"
+
+msgid "Module 1-5"
+msgstr "Module 1-5"
+
+msgid "Module 1-6"
+msgstr "Module 1-6"
+
+msgid "Module 2"
+msgstr "Module 2"
+
+msgid "Module 2+3"
+msgstr "Module 2+3"
+
+msgid "Module 2+3+4"
+msgstr "Module 2+3+4"
+
+msgid "Module 2+4"
+msgstr "Module 2+4"
+
+msgid "Module 2-6"
+msgstr "Module 2-6"
+
+msgid "Module 3"
+msgstr "Module 3"
+
+msgid "Module 3+4"
+msgstr "Module 3+4"
+
+msgid "Module 3-6"
+msgstr "Module 3-6"
+
+msgid "Module 4"
+msgstr "Module 4"
+
+msgid "Module 4-6"
+msgstr "Module 4-6"
+
+msgid "Module 5"
+msgstr "Module 5"
+
+msgid "Module 5-6"
+msgstr "Module 5-6"
+
+msgid "Module 6"
+msgstr "Module 6"
+
+msgid "Mon"
+msgstr "ma"
+
+msgid "Month"
+msgstr "Maand"
+
+msgid "Month+Header"
+msgstr "Maand+hoofd"
+
+msgid "Moon-Icon-Path [ok]>"
+msgstr "Maan-ikoonpad [ok]>"
+
+msgid "Moonphase"
+msgstr "Maanfase"
+
+msgid "MusicCast"
+msgstr "MusicCast"
+
+msgid "MusicCast Cover"
+msgstr "MusicCast Cover"
+
+msgid "MusicCast IP"
+msgstr "MusicCast IP"
+
+msgid "MusicCast Ping Timeout [ms]"
+msgstr "MusicCast Ping Timeout [ms]"
+
+msgid "MusicCast Play Check"
+msgstr "MusicCast afspeelcontrole"
+
+msgid "MusicCast Refresh [s]"
+msgstr "MusicCast verversen [s]"
+
+msgid "MusicCast Server IP [optional]"
+msgstr "MusicCast Server IP [optioneel]"
+
+msgid "N"
+msgstr "N"
+
+msgid "NE"
+msgstr "NO"
+
+msgid "NNE"
+msgstr "NNO"
+
+msgid "NNW"
+msgstr "NNW"
+
+msgid "NW"
+msgstr "NW"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Netatmo"
+msgstr "Netatmo"
+
+msgid "Netatmo 2"
+msgstr "Netatmo 2"
+
+msgid "Netatmo CO2 Indicator"
+msgstr "Netatmo CO2-indicator"
+
+msgid "Netatmo CO2 Max Range"
+msgstr "Netatmo CO2 max bereik"
+
+msgid "Netatmo CO2 Min Range"
+msgstr "Netatmo CO2 min bereik"
+
+msgid "Netatmo Comfort Indicator"
+msgstr "Netatmo comfortindicator"
+
+msgid "Network Check active"
+msgstr "Netwerkcontrole aktief"
+
+msgid "New Moon"
+msgstr "Nieuwe maan"
+
+msgid "Next Program Info"
+msgstr "Info volgende programma"
+
+msgid "Next Timer Event"
+msgstr "Volgende timer"
+
+msgid "No or wrong File selected, try a correct File first !"
+msgstr "Geen of verkeer bestand geselecteerd; probeer eerst een correct bestand!"
+
+msgid "Normal"
+msgstr "Normaal"
+
+msgid "Normal (5s)"
+msgstr "Normaal (5s)"
+
+msgid "Now/Next"
+msgstr "Nu/Straks"
+
+msgid "OSCAM not running"
+msgstr "OSCAM draait niet"
+
+msgid "OSD"
+msgstr "OSD"
+
+msgid "OSD [display time]"
+msgstr "OSD [vertoon tijd]"
+
+msgid "Offline"
+msgstr "Offline"
+
+msgid "On"
+msgstr "Aan"
+
+msgid "On+Media+Standby"
+msgstr "Aan+media+stand-by"
+
+msgid "Online"
+msgstr "Online"
+
+msgid "Online [Ping]"
+msgstr "Online [Ping]"
+
+msgid "Online+Offline"
+msgstr "Online+Offline"
+
+msgid "Only New"
+msgstr "Alleen nieuw"
+
+msgid "OpenWeatherMap"
+msgstr "OpenWeather kaart"
+
+msgid "Outdoor"
+msgstr "Buitenshuis"
+
+msgid "PNG"
+msgstr "PNG"
+
+msgid "Parent Directory"
+msgstr "Bovengelegen map"
+
+msgid "Pearl (or compatible LCD) 240x320"
+msgstr "Pearl (of compatible LCD) 240x320"
+
+msgid "Pearl (or compatible LCD) 320x240"
+msgstr "Pearl (of compatible LCD) 320x240"
+
+msgid "Picon"
+msgstr "Picon"
+
+msgid "Picon 2"
+msgstr "Picon 2"
+
+msgid "Picon+Channel"
+msgstr "Picon+kanaal"
+
+msgid "Picon+Channel+Title"
+msgstr "Picon+kanaal+titel"
+
+msgid "Picon+Position below"
+msgstr "Picon+positie beneden "
+
+msgid "Picon+Position left"
+msgstr "Picon+positie links"
+
+msgid "Picon+Position right"
+msgstr "Picon+positie rechts"
+
+msgid "Picon+Timeshift"
+msgstr "Picon+timeshift"
+
+msgid "Picture"
+msgstr "Plaatje"
+
+msgid "Picture Changing Time"
+msgstr "Plaatje verandertijd"
+
+msgid "Picture Directory Recursive"
+msgstr "Plaatje map omgekeerd"
+
+msgid "Picture Quality for Resizing"
+msgstr "Plaatje kwaliteit voor herschalen"
+
+msgid "Picture Quick Update Time [s]"
+msgstr "Plaatje snelle update-tijd [s]"
+
+msgid "Picture Sort"
+msgstr "Plaatje volgorde"
+
+msgid "Picture Type [only Picture]"
+msgstr "Type plaatje [alleen plaatje] "
+
+msgid "Picture not available"
+msgstr "Afbeelding niet beschikbaar"
+
+msgid "Plug Tuner"
+msgstr "Plug tuner"
+
+msgid "Pop3"
+msgstr "Pop3"
+
+msgid "Pop3-SSL"
+msgstr "Pop3-SSL"
+
+msgid "Popup Text"
+msgstr "Popuptekst"
+
+msgid "Popup-Text"
+msgstr "Popuptekst"
+
+msgid "Position"
+msgstr "Positie"
+
+msgid "Program Info"
+msgstr "Programma-info"
+
+msgid "Program Info 2"
+msgstr "Programma-info 2"
+
+msgid "Program Name"
+msgstr "Programmanaam"
+
+msgid "Program Number"
+msgstr "Programmanummer"
+
+msgid "Progress Bar"
+msgstr "Voortgangsbalk"
+
+msgid "Provider"
+msgstr "Provider"
+
+msgid "Radio"
+msgstr "Radio"
+
+msgid "Radio+Media"
+msgstr "Radio+Media"
+
+msgid "Rain"
+msgstr "Regen"
+
+msgid "Recording"
+msgstr "Neemt op"
+
+msgid "Recording Picture [ok]>"
+msgstr "Opnameplaatje [OK]"
+
+msgid "Rectangle 1"
+msgstr "Rechthoek 1"
+
+msgid "Rectangle 2"
+msgstr "Rechthoek 2"
+
+msgid "Reload"
+msgstr "Herlaad"
+
+msgid "Remote Box"
+msgstr "Klant box"
+
+msgid "Remote Box 1 [Displayname:]IP/Name"
+msgstr "klantbox 1 [Displayname:]IP/Name"
+
+msgid "Remote Box 2 [Displayname:]IP/Name"
+msgstr "Klantbox 2 [Displayname:]IP/Name"
+
+msgid "Remote Box 3 [Displayname:]IP/Name"
+msgstr "Klantbox 3 [Displayname:]IP/Name"
+
+msgid "Remote Box 4 [Displayname:]IP/Name"
+msgstr "Klantbox 4 [Displayname:]IP/Name"
+
+msgid "Remote Box 5 [Displayname:]IP/Name"
+msgstr "Klantbox 5 [Displayname:]IP/Name"
+
+msgid "Remote Box Poll every Minutes"
+msgstr "Klantbox elke minuut pollen"
+
+msgid "Remote Box Timer"
+msgstr "Remote box timer"
+
+msgid "Remote Box Timer Poll every Minutes"
+msgstr "Remote box timer polt elke minuten"
+
+msgid "Remote Box Timer [Displayname:]IP/Name"
+msgstr "Remote box timer [Displayname:]IP/Name"
+
+msgid "Restart Displays"
+msgstr "Herstart displays"
+
+msgid "Restart GUI now?"
+msgstr "GUI nu herstarten?"
+
+msgid "Restore Config"
+msgstr "Configuratie herstellen"
+
+msgid "S"
+msgstr "Z"
+
+msgid "SE"
+msgstr "ZO"
+
+msgid "SSE"
+msgstr "ZZO"
+
+msgid "SSW"
+msgstr "ZZW"
+
+msgid "SW"
+msgstr "ZW"
+
+msgid "Samsung SPF-105P 1024x600"
+msgstr "Samsung SPF-105P 1024x600"
+
+msgid "Samsung SPF-107H 1024x600"
+msgstr "Samsung SPF-107H 1024x600"
+
+msgid "Samsung SPF-107H old 1024x600"
+msgstr "Samsung SPF-107H old 1024x600"
+
+msgid "Samsung SPF-700T 800x600"
+msgstr "Samsung SPF-700T 800x600"
+
+msgid "Samsung SPF-72H 800x480"
+msgstr "Samsung SPF-72H 800x480"
+
+msgid "Samsung SPF-75H/76H 800x480"
+msgstr "Samsung SPF-75H/76H 800x480"
+
+msgid "Samsung SPF-83H 800x600"
+msgstr "Samsung SPF-83H 800x600"
+
+msgid "Samsung SPF-85H/86H 800x600"
+msgstr "Samsung SPF-85H/86H 800x600"
+
+msgid "Samsung SPF-85P/86P 800x600"
+msgstr "Samsung SPF-85P/86P 800x600"
+
+msgid "Samsung SPF-87H 800x480"
+msgstr "Samsung SPF-87H 800x480"
+
+msgid "Samsung SPF-87H old 800x480"
+msgstr "Samsung SPF-87H old 800x480"
+
+msgid "Sat"
+msgstr "za"
+
+msgid "Satellite"
+msgstr "Satelliet"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Save Config"
+msgstr "Sla configuratie op"
+
+#, python-format
+msgid "Save Config to File... (%s)"
+msgstr "Sla configuratiebestand op ,,,(%s)"
+
+msgid "Save as Picture for WebIF"
+msgstr "Sla op als plaatje voor WEB-IF"
+
+msgid "Screen"
+msgstr "Scherm"
+
+msgid "Screen 1"
+msgstr "Scherm 1"
+
+msgid "Screen 1 Changing Time"
+msgstr "Scherm 1 Verander tijd"
+
+msgid "Screen 1+2"
+msgstr "Scherm 1+2"
+
+msgid "Screen 1+2+3"
+msgstr "Scherm 1+2+3"
+
+msgid "Screen 1+2+3+4"
+msgstr "Scherm 1+2+3+4"
+
+msgid "Screen 1+2+4"
+msgstr "Scherm 1+2+4"
+
+msgid "Screen 1+3"
+msgstr "Scherm 1+3"
+
+msgid "Screen 1+3+4"
+msgstr "Scherm 1+3+4"
+
+msgid "Screen 1+3+5+7+9"
+msgstr "Scherm 1+3+5+7+9"
+
+msgid "Screen 1+4"
+msgstr "Scherm 1+4"
+
+msgid "Screen 1-2"
+msgstr "Scherm 1-2"
+
+msgid "Screen 1-3"
+msgstr "Scherm1-3"
+
+msgid "Screen 1-4"
+msgstr "Scherm 1-4"
+
+msgid "Screen 1-5"
+msgstr "Scherm 1-5"
+
+msgid "Screen 1-6"
+msgstr "Scherm 1-6"
+
+msgid "Screen 1-7"
+msgstr "Scherm 1-7"
+
+msgid "Screen 1-8"
+msgstr "Scherm 1-8"
+
+msgid "Screen 1-9"
+msgstr "Scherm 1-9"
+
+msgid "Screen 2"
+msgstr "Scherm 2"
+
+msgid "Screen 2+3"
+msgstr "Scherm 2+3"
+
+msgid "Screen 2+3+4"
+msgstr "Scherm 2+3+4"
+
+msgid "Screen 2+4"
+msgstr "Scherm 2+4"
+
+msgid "Screen 2+4+6+8"
+msgstr "Scherm 2+4+6+8"
+
+msgid "Screen 3"
+msgstr "Scherm 3"
+
+msgid "Screen 3+4"
+msgstr "Scherm 3+4"
+
+msgid "Screen 4"
+msgstr "Scherm 4"
+
+msgid "Screen 5"
+msgstr "Scherm 5"
+
+msgid "Screen 5-8"
+msgstr "Scherm 5-8"
+
+msgid "Screen 5-9"
+msgstr "Scherm 5-9"
+
+msgid "Screen 6"
+msgstr "Scherm 6"
+
+msgid "Screen 7"
+msgstr "Scherm 7"
+
+msgid "Screen 8"
+msgstr "Scherm 8"
+
+msgid "Screen 9"
+msgstr "Scherm9"
+
+msgid "Screen Switch Select - LCD"
+msgstr "Schermschakelkeuze - LCD"
+
+msgid "Screen Switch Select - Screen"
+msgstr "Schermschakelkeuze - scherm"
+
+msgid "Screens used for Changing"
+msgstr "Schermen gebruikt voor veranderen"
+
+msgid "Service search first"
+msgstr "Eerst kanaalzoeken"
+
+msgid "Set Global >>"
+msgstr "Algemene instellingen >>"
+
+msgid "Set Idle >>"
+msgstr "Idle instellingen >>"
+
+msgid "Set Media >>"
+msgstr "Media instellingen >>"
+
+msgid "Set On >>"
+msgstr "Aan instellingen >>"
+
+msgid "Shadow Edges"
+msgstr "Schaduw hoeken"
+
+msgid "Short"
+msgstr "Kort"
+
+msgid "Short (Extended)"
+msgstr "Kort (verlengd)"
+
+msgid "Short+Extended"
+msgstr "Kort+verlengd"
+
+msgid "Show"
+msgstr "Toon"
+
+msgid "Show 'no ....' Messages"
+msgstr "Toon 'nee ...' berichten"
+
+msgid "Show Cover"
+msgstr "Toon Cover"
+
+msgid "Show Crash Corner"
+msgstr "Toon Crash hoek"
+
+msgid "Show Externals"
+msgstr "Toon externe"
+
+msgid "Show HTTP Text"
+msgstr "Toon HTTP tekst"
+
+msgid "Show Picture"
+msgstr "Toon foto"
+
+msgid "Show Picture 2"
+msgstr "Toon foto 2"
+
+msgid "Show Picture 3"
+msgstr "Toon foto 3"
+
+msgid "Show Picture 4"
+msgstr "Toon foto 4"
+
+msgid "Show Text 1"
+msgstr "Toon tekst 1"
+
+msgid "Show Text 2"
+msgstr "Toon tekst 2"
+
+msgid "Show Textfile"
+msgstr "Toon tekstbestand"
+
+msgid "Show Textfile 2"
+msgstr "Toon tekstbestand 2"
+
+msgid "Show Textfile 3"
+msgstr "Toon tekstbestand 3"
+
+msgid "Show ecm.info"
+msgstr "Toon  ecm.info"
+
+msgid "Show oscam.lcd"
+msgstr "Toon oscam.lcd"
+
+msgid "Signal Quality Bar"
+msgstr "Signaalkwaliteit balk"
+
+msgid "Sonos"
+msgstr "Sonos"
+
+msgid "Sonos IP"
+msgstr "Sonos IP"
+
+msgid "Sonos Ping Timeout [ms]"
+msgstr "Sonos Ping Timeout [ms]"
+
+msgid "Sonos Play Check"
+msgstr "Sonos afspeelcontrole"
+
+msgid "Sonos Refresh [s]"
+msgstr "Sonos verversen [s]"
+
+msgid "Standby"
+msgstr "Stand-by"
+
+msgid "Storage-Devices"
+msgstr "Opslagmedia"
+
 msgid "Storage-Devices: Color Back"
 msgstr "Opslagmedia:kleuk achter"
 
-#: MO.txt:5447
 msgid "Storage-Devices: Color Bar"
 msgstr "Opslagmedia: kleur balk"
 
-#: MO.txt:5448
 msgid "Storage-Devices: Color Full"
 msgstr "Opslagmedia: kleur volledig"
 
-#~ msgid "List of Storage Devices"
-#~ msgstr "Lijst van opslagmedia"
+msgid "Storage-Devices: Force Read"
+msgstr "Opslagmedia: force read"
 
-#~ msgid "Parent Directory"
-#~ msgstr "Bovengelegen map"
+msgid "Stutter TV"
+msgstr "Stotter-TV"
+
+msgid "Sun"
+msgstr "zo "
+
+msgid "Sunrise"
+msgstr "Zonsopkomst"
+
+msgid "Switch FrameBuffer [if possible]"
+msgstr "Schakel framebuffer [indien mogelijk)"
+
+msgid "TV"
+msgstr "TV"
+
+msgid "TV+OSD"
+msgstr "TV+OSD"
+
+msgid "TV+Radio"
+msgstr "TV+Radio"
+
+msgid "TV+Radio+Media"
+msgstr "TV+Radio+Media"
+
+msgid "Temperature"
+msgstr "Temperatuur"
+
+msgid "Temperature+Co2"
+msgstr "Temperatuur+Co2"
+
+msgid "Temperature+Co2+Pressure"
+msgstr "Temperatuur+Co2+Druk"
+
+msgid "Temperature+Humidity"
+msgstr "Temperatuur+vochtigheid"
+
+msgid "Threads per LCD"
+msgstr "Draden per LCD"
+
+msgid "Thur"
+msgstr "do"
+
+msgid "Time"
+msgstr "Tijd"
+
+msgid "Time+Duration+Info"
+msgstr "Tijd+Duur+Info"
+
+msgid "Time+Info"
+msgstr "Tijd+Info"
+
+msgid "Time+Length+Info"
+msgstr "Tijd+Lengte+Info"
+
+msgid "Time+Weekday"
+msgstr "Tijd+Dag"
+
+msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
+msgstr "Timing! Alle tijden naar tijd/5*2 in snelle mode omrekenen."
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Tue"
+msgstr "di"
+
+msgid "Tuner"
+msgstr "Tuner"
+
+msgid "Tuner Color"
+msgstr "Tuner kleur"
+
+msgid "Tuner Color Active"
+msgstr "Tuner kleur actief"
+
+msgid "Tuner Color On"
+msgstr "Tuner kleur aan"
+
+msgid "USB Tuner"
+msgstr "USB Tuner"
+
+msgid "Underline"
+msgstr "Onderlijnen"
+
+msgid "Underline 2"
+msgstr "Onderlijnen 2"
+
+msgid "Used Tuner"
+msgstr "Gebruikte tuner"
+
+msgid "Volume"
+msgstr "Volume"
+
+msgid "W"
+msgstr "W"
+
+msgid "WNW"
+msgstr "WNW"
+
+msgid "WSW"
+msgstr "WZW"
+
+msgid "WWW ApiKey from cloudconvert.org"
+msgstr "WWW ApiKey van cloudconvert.org"
+
+msgid "WWW ApiKey from convertapi.com"
+msgstr "WWW ApiKey van convertapi.com"
+
+msgid "WWW Converter"
+msgstr "WWW converter"
+
+msgid "WWW Converter Poll Interval"
+msgstr "WWW Converter Poll Interval"
+
+msgid "WWW Converter Usage"
+msgstr "WWW converter gebruik"
+
+msgid "WWW-Internet Converter"
+msgstr "WWW-Internet Converter"
+
+msgid "Waning Crescent"
+msgstr "Afnemende halve maan"
+
+msgid "Waning Gibbous"
+msgstr "Afnemende volle maan"
+
+msgid "Waxing Crescent"
+msgstr "Wassende halve maan"
+
+msgid "Waxing Gibbous"
+msgstr "Wassende volle maan"
+
+msgid "Weather"
+msgstr "Weer"
+
+msgid "Weather 2"
+msgstr "Weer 2"
+
+msgid "Weather API"
+msgstr "Weer-API"
+
+msgid "Weather API-Key OpenWeatherMap"
+msgstr "Weer API-Key OpenWeatherMap"
+
+msgid "Weather City"
+msgstr "Weer stad"
+
+msgid "Weather City 2"
+msgstr "Weer stad 2"
+
+msgid "Weather Extra Infos"
+msgstr "Weer Extra Info"
+
+msgid "Weather High Temperature Color"
+msgstr "Weer hoge temperatuur kleur"
+
+msgid "Weather Lines"
+msgstr "Weer regels"
+
+msgid "Weather Low Temperature Color"
+msgstr "Weer lage temperatuur kleur"
+
+msgid "Weather Rain Chance"
+msgstr "Weer regenkans"
+
+msgid "Weather Transparency"
+msgstr "Weer transparantie"
+
+msgid "Weather Wind speed unit"
+msgstr "Weer windsnelheid eenheid"
+
+msgid "Weather-Icon Zoom"
+msgstr "Weer-ikoon zoom"
+
+msgid "Weather-Icon-Path [ok]>"
+msgstr "Weer-ikoon-Pad [ok]>"
+
+msgid "WebIF"
+msgstr "Web-IF"
+
+msgid "WebIF Design"
+msgstr "Web-IF ontwerp"
+
+msgid "WebIF IP Allow"
+msgstr "WEB-IF IP toegestaan"
+
+msgid "WebIF IP Deny"
+msgstr "WEB-IF IP verboden"
+
+msgid "WebIF Init Delay"
+msgstr "WEB-IF Initiële vertraging"
+
+msgid "WebIF Refresh Type"
+msgstr "WEB-IF verversings type"
+
+msgid "WebIF Refresh [s]"
+msgstr "WEB-IF verversing [s]"
+
+msgid "Wed"
+msgstr "wo"
+
+msgid "Week"
+msgstr "Week"
+
+msgid "Week+Header"
+msgstr "Week+hoofd"
+
+msgid "Weekday"
+msgstr "Weekdag"
+
+msgid "Wind"
+msgstr "Wind"
+
+msgid "all"
+msgstr "alle"
+
+msgid "alphabetic"
+msgstr "alfabetisch"
+
+msgid "alternative Copy-Mode/DM800hd (24bit)"
+msgstr "alternatieve kopieermode/DM800hd (24bit)"
+
+msgid "always"
+msgstr "altijd"
+
+msgid "any Key"
+msgstr "elke toets"
+
+msgid "aquamarine"
+msgstr "zeegroen"
+
+msgid "better/slow"
+msgstr "beter/langzaam"
+
+msgid "black"
+msgstr "zwart"
+
+msgid "blue"
+msgstr "blauw"
+
+msgid "blueviolet"
+msgstr "blauw paars"
+
+msgid "brown"
+msgstr "bruin"
+
+msgid "cache + adjustment (high quality, slow)"
+msgstr "cache + aanpassing (hoge kwaliteit, langzaam)"
+
+msgid "cache + adjustment (low quality, fast)"
+msgstr "cache + aanpassing (lage kwaliteit, snel)"
+
+msgid "cadetblue"
+msgstr "blauw-grijs"
+
+msgid "center"
+msgstr "midden"
+
+msgid "cloudconvert.org"
+msgstr "cloudconvert.org"
+
+msgid "convertapi.com"
+msgstr "convertapi.com"
+
+msgid "copy to Idle"
+msgstr "kopieer naar inactief "
+
+msgid "copy to Media"
+msgstr "Kopieer naar Media"
+
+msgid "copy to On"
+msgstr "Kopieer naar Aan"
+
+msgid "cornflowerblue"
+msgstr "korenbloem blauw"
+
+#, python-format
+msgid "currently set : %s"
+msgstr "momenteel ingesteld: %s"
+
+msgid "cyan"
+msgstr "groenblauw"
+
+msgid "darkblue"
+msgstr "donker blauw"
+
+msgid "darkgreen"
+msgstr "donker groen"
+
+msgid "darkorange"
+msgstr "donker oranje"
+
+msgid "darkorchid"
+msgstr "donker paars"
+
+msgid "darkred"
+msgstr "donker rood"
+
+msgid "db"
+msgstr "db"
+
+msgid "db + %"
+msgstr "db + %"
+
+msgid "db + % + BER"
+msgstr "db + % + BER"
+
+msgid "db + BER"
+msgstr "db + BER"
+
+msgid "deeppink"
+msgstr "diep paars"
+
+msgid "deleted"
+msgstr "verwijderd"
+
+msgid "disabled"
+msgstr "uitgeschakeld"
+
+msgid "full Screen"
+msgstr "vol scherm"
+
+msgid "gold"
+msgstr "goud"
+
+msgid "gray"
+msgstr "grijs"
+
+msgid "green"
+msgstr "groen"
+
+msgid "greenyellow"
+msgstr "groengeel"
+
+msgid "half left"
+msgstr "half links"
+
+msgid "half right"
+msgstr "half rechts"
+
+msgid "horizontally"
+msgstr "horizontaal"
+
+msgid "indianred"
+msgstr "indianred"
+
+msgid "indigo"
+msgstr "indigo"
+
+msgid "km/h"
+msgstr "km/h"
+
+msgid "lawngreen"
+msgstr "grasgroen"
+
+msgid "left"
+msgstr "links"
+
+msgid "lightblue"
+msgstr "licht blauw"
+
+msgid "lightgreen"
+msgstr "licht groen"
+
+msgid "lime"
+msgstr "limoen"
+
+msgid "low/fast (Picture only)"
+msgstr "laag/langzaam (alleen foto)"
+
+msgid "low/fast (all)"
+msgstr "laag/snel (alle)"
+
+msgid "m/s"
+msgstr "m/s"
+
+msgid "magenta"
+msgstr "magenta"
+
+msgid "moccasin"
+msgstr "moccasin"
+
+msgid "no"
+msgstr "Nee"
+
+msgid "no Bar"
+msgstr "geen balk"
+
+msgid "no Calendar"
+msgstr "Geen kalender"
+
+msgid "no Calls"
+msgstr "geen oproepen"
+
+msgid "no Dates"
+msgstr "Geen datums"
+
+msgid "no Frame"
+msgstr "geen rand"
+
+msgid "no Icon"
+msgstr "geen ikoon"
+
+msgid "no Icon, with Targetnumber"
+msgstr "geen ikoon, met doelnummer"
+
+msgid "no LCD1 Picture-File"
+msgstr "geen LCD1 foto bestand"
+
+msgid "no LCD2 Picture-File"
+msgstr "geen LCD2 foto bestand"
+
+msgid "no LCD3 Picture-File"
+msgstr "geen LCD3 foto bestand"
+
+msgid "no Netatmo-Plugin installed"
+msgstr "geen Netatmo-Plugin geïnstalleerd"
+
+msgid "no Timer"
+msgstr "geen timer"
+
+msgid "no cache + no adjustment"
+msgstr "geen cache + geen aanpassing"
+
+msgid "no total Timer"
+msgstr "geen totaal timer"
+
+msgid "normal"
+msgstr "normaal"
+
+msgid "normal (full)"
+msgstr "normaal (vol)"
+
+msgid "off"
+msgstr "uit"
+
+msgid "olive"
+msgstr "olijf"
+
+msgid "on"
+msgstr "aan"
+
+msgid "one line"
+msgstr "één regel"
+
+msgid "only Picture 1024x600"
+msgstr "alleen foto1024x600"
+
+msgid "only Picture 320x240"
+msgstr "alleen foto 320x240"
+
+msgid "only Picture 800x480"
+msgstr "alleen foto 800x480"
+
+msgid "only Picture 800x600"
+msgstr "alleen foto 800x600"
+
+msgid "only Picture Custom Size"
+msgstr "alleen foto aangepaste grootte"
+
+msgid "only Picture Custom Size 2"
+msgstr "alleen foto aangepaste grootte 2"
+
+msgid "only Progress Bar"
+msgstr "alleen voortgangsbalk"
+
+msgid "only use Timer"
+msgstr "gebruik alleen timer"
+
+msgid "orange"
+msgstr "oranje"
+
+msgid "orangered"
+msgstr "oranjerood"
+
+msgid "other"
+msgstr "anders"
+
+msgid "random"
+msgstr "willekeurig"
+
+msgid "red"
+msgstr "rood"
+
+msgid "reduced"
+msgstr "beperkt"
+
+msgid "right"
+msgstr "rechts"
+
+msgid "rosybrown"
+msgstr "roze bruin"
+
+msgid "rpm"
+msgstr "omw/min"
+
+msgid "rpm/2"
+msgstr "omw/min/2"
+
+msgid "same color"
+msgstr "zelfde kleur"
+
+msgid "sandybrown"
+msgstr "zandbruin"
+
+msgid "set Settings"
+msgstr "maak instellingen"
+
+msgid "show run"
+msgstr "toon actief"
+
+msgid "show run+sleep"
+msgstr "toon actief + slaap"
+
+msgid "show total Timer"
+msgstr "toon totale timer"
+
+msgid "silver"
+msgstr "zilver"
+
+msgid "slategray"
+msgstr "leigrijs"
+
+msgid "stop Screencycle"
+msgstr "stop schermcyclus"
+
+msgid "tomato"
+msgstr "tomaat"
+
+msgid "trimmed (black)"
+msgstr "getrimd (zwart)"
+
+msgid "trimmed (transparent)"
+msgstr "getrimd (doorzichtig)"
+
+msgid "two lines"
+msgstr "twee regels"
+
+msgid "use lead-time"
+msgstr "gebruik voorlooptijd"
+
+msgid "userdefined"
+msgstr "gebruiker gedefinieerd"
+
+msgid "vertically"
+msgstr "vertikaal"
+
+msgid "violet"
+msgstr "paars"
+
+msgid "white"
+msgstr "wit"
+
+msgid "with Current 00:00"
+msgstr "met huidige 00:00"
+
+msgid "with Current 00:00 (Size 1.5)"
+msgstr "met huidige 00:00 (maat 1.5)"
+
+msgid "with Current 00:00 (Size 2)"
+msgstr "met huidige 00:00 (maat 2)"
+
+msgid "with Current 00:00 (above)"
+msgstr "met huidige 00:00 (boven)"
+
+msgid "with Current 00:00 (above/Size 1.5)"
+msgstr "met huidige 00:00 (boven/maat 1.5)"
+
+msgid "with Current 00:00 (above/Size 2)"
+msgstr "met huidige 00:00 (boven/maat 2)"
+
+msgid "with Current 00:00 (below)"
+msgstr "met huidige 00:00 (onder)"
+
+msgid "with Current 00:00 (below/Size 1.5)"
+msgstr "met huidige 00:00 (onder/maat 1.5)"
+
+msgid "with Current 00:00 (below/Size 2)"
+msgstr "met huidige 00:00 (onder/maat 2)"
+
+msgid "with Icon"
+msgstr "met ikoon"
+
+msgid "with Icon & Targetnumber"
+msgstr "met ikoon & doelnummer"
+
+msgid "with Minutes Total / Endtime (above)"
+msgstr "Met 'Totaal minuten' / Eindtijd (boven)"
+
+msgid "with Minutes Total / Endtime (above/Size 1.5)"
+msgstr "met minuten Totaal/Eindtijd (boven/maat 1,5)"
+
+msgid "with Minutes Total / Endtime (above/Size 2)"
+msgstr "met minuten Totaal/Eindtijd (boven/maat 2)"
+
+msgid "with Percent"
+msgstr "met percentage"
+
+msgid "with Percent (Size 1.5)"
+msgstr "met percentage (maat 1.5)"
+
+msgid "with Percent (Size 2)"
+msgstr "met percentage (maat 2)"
+
+msgid "with Percent (above)"
+msgstr "met percentage (boven)"
+
+msgid "with Percent (above/Size 1.5)"
+msgstr "met percentage (boven/maat 1.5)"
+
+msgid "with Percent (above/Size 2)"
+msgstr "met percentage (boven/maat 2)"
+
+msgid "with Percent (below)"
+msgstr "met percentage (onder)"
+
+msgid "with Percent (below/Size 1.5)"
+msgstr "met percentage (onder/maat 1.5)"
+
+msgid "with Percent (below/Size 2)"
+msgstr "met percentage (onder/maat 2)"
+
+msgid "with Percent Minutes / Total (above)"
+msgstr "met percentage minuten / totaal (boven)"
+
+msgid "with Percent Minutes / Total (above/Size 1.5)"
+msgstr "met percentage minuten / totaal (boven/maat 1.5)"
+
+msgid "with Percent Minutes / Total (above/Size 2)"
+msgstr "met percentage minuten / totaal (boven/maat 2)"
+
+msgid "with Remaining Minutes"
+msgstr "met resterende minuten"
+
+msgid "with Remaining Minutes (Size 1.5)"
+msgstr "met resterende minuten (maat 1.5)"
+
+msgid "with Remaining Minutes (Size 2)"
+msgstr "met resterende minuten (maat 2)"
+
+msgid "with Remaining Minutes (above)"
+msgstr "met resterende minuten (boven)"
+
+msgid "with Remaining Minutes (above/Size 1.5)"
+msgstr "met resterende minuten (boven/maat 1.5)"
+
+msgid "with Remaining Minutes (above/Size 2)"
+msgstr "met resterende minuten (boven/maat 2)"
+
+msgid "with Remaining Minutes (below)"
+msgstr "met resterende minuten (onder)"
+
+msgid "with Remaining Minutes (below/Size 1.5)"
+msgstr "met resterende minuten (onder/maat 1.5)"
+
+msgid "with Remaining Minutes (below/Size 2)"
+msgstr "met resterende minuten (onder/maat 2)"
+
+msgid "with absolute Endtime"
+msgstr "met absolute eindtijd"
+
+msgid "with absolute Endtime (Size 1.5)"
+msgstr "met absolute eindtijd (maat 1,5)"
+
+msgid "with absolute Endtime (Size 2)"
+msgstr "met absolute eindtijd (maat 2)"
+
+msgid "yellow"
+msgstr "geel"
+
+msgid "yes"
+msgstr "ja"
+
+msgid "yes (32bit)"
+msgstr "ja (32bit)"
+
+msgid "yes + %"
+msgstr "ja + %"
+
+msgid "yes +25%"
+msgstr "ja +25%"
+
+msgid "yes except records"
+msgstr "ja behalve opnames"
+
+msgid "yes, extended"
+msgstr "ja, verlengd"
+
+msgid "yes, long"
+msgstr "ja, lang"
+
+msgid "yes, short"
+msgstr "ja, kort"
 
 #~ msgid "- Current Day Color"
 #~ msgstr "- Current Day Color"
@@ -3930,6 +2781,12 @@ msgstr "Opslagmedia: kleur volledig"
 #~ msgid "- Timeout"
 #~ msgstr "- Timeout"
 
+#~ msgid "April"
+#~ msgstr "april"
+
+#~ msgid "August"
+#~ msgstr "augustus"
+
 #~ msgid "C + rmp"
 #~ msgstr "C + rmp"
 
@@ -3939,11 +2796,62 @@ msgstr "Opslagmedia: kleur volledig"
 #~ msgid "Current value: %s"
 #~ msgstr "Current value: %s"
 
+#~ msgid "December"
+#~ msgstr "december"
+
+#~ msgid "February"
+#~ msgstr "februari"
+
+#~ msgid "Friday"
+#~ msgstr "vrijdag"
+
+#~ msgid "January"
+#~ msgstr "januari"
+
+#~ msgid "July"
+#~ msgstr "juli"
+
+#~ msgid "June"
+#~ msgstr "juni"
+
 #~ msgid "MJPEG Boundary Mode"
 #~ msgstr "MJPEG grensmode Mode"
+
+#~ msgid "March"
+#~ msgstr "maart"
+
+#~ msgid "May"
+#~ msgstr "mei"
 
 #~ msgid "Memory"
 #~ msgstr "Memory"
 
+#~ msgid "Monday"
+#~ msgstr "maandag"
+
+#~ msgid "November"
+#~ msgstr "november"
+
+#~ msgid "October"
+#~ msgstr "oktober"
+
+#~ msgid "Saturday"
+#~ msgstr "zaterdag"
+
+#~ msgid "September"
+#~ msgstr "september"
+
 #~ msgid "Show Recording"
 #~ msgstr "Show Recording"
+
+#~ msgid "Sunday"
+#~ msgstr "zondag"
+
+#~ msgid "Thursday"
+#~ msgstr "donderdag"
+
+#~ msgid "Tuesday"
+#~ msgstr "dinsdag"
+
+#~ msgid "Wednesday"
+#~ msgstr "woensdag"
