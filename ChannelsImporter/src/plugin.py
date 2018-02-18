@@ -56,7 +56,6 @@ class ChannelsImporterScreen(Setup):
 			Setup.__init__(self, session, setup, plugin, menu_path, PluginLanguageDomain)
 		except TypeError:
 			Setup.__init__(self, session, setup, plugin)
-		self.skinName = ["ChannelsImporterScreen", "Setup3buttons"]
 
 		self["actions2"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 		{
