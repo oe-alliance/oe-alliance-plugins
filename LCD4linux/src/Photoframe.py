@@ -14,11 +14,10 @@ def write_jpg2frame(dev, pic):
 	"""Attach header to picture, pad with zeros if necessary, and send to frame"""
 	# create header and stack before picture
 	# middle 4 bytes have size of picture
-	rawdata = b"\xa5\x5a\x18\x04" + struct.pack('<I', len(pic)) + b"\x48\x00\x00\x00" + pic
-	# total transfers must be complete chunks of 16384  = 2 ^14. Complete by padding with zeros
-	pad = 16384 - (len(rawdata) % 16384) +1         
-	tdata = rawdata + pad * b'\x00'
-	ltdata = len(tdata)
+	rawdata = b"\xa5\x5a\x18\x04" + struct.pack('<I', len(pic) + 14) + b"\x48\x00\x00\x00" + pic
+	# total transfers must be complete chunks of = 2^16. Complete by padding with zeros
+	pad = (0x10000 - ((len(rawdata) + 2) % 0x10000)) % 0x10000
+	tdata = rawdata + b'\xff\x00' + pad * b'\x00'
 	# Syntax: write(self, endpoint, data, interface = None, timeout = None):
 	endpoint = 0x02               
 	dev.write(endpoint, tdata )
@@ -72,6 +71,10 @@ def get_known_devices():
 	#20,21 Samsung SPF-107Hold (213)
 	dList.append({'name':"SPF107Hold Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2028, 'width':1024, 'height':600 })
 	dList.append({'name':"SPF107Hold Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2027})      
+
+	#22,23 Samsung SPF-1000P (214)
+	dList.append({'name':"SPF1000P Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2040, 'width':1024, 'height':600 })
+	dList.append({'name':"SPF1000P Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2039})      
 
 	# Pearl DPF for Testing
 	dList.append({'name':"Pearl DPF", 'idVendor':0x1908, 'idProduct':0x0102, 'width':320, 'height':240 })

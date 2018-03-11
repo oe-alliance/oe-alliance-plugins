@@ -14,7 +14,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V4.9-r2"
+Version = "V5.0-r0"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -316,7 +316,7 @@ LCDSwitchSelect = [("0", _("LCD 1-3")), ("1", _("LCD 1")), ("2", _("LCD 2")), ("
 LCDType = [("11", _("Pearl (or compatible LCD) 320x240")), ("12", _("Pearl (or compatible LCD) 240x320")), ("121", _("Corby@Pearl 128x128")),
  ("210", _("Samsung SPF-72H 800x480")), ("23", _("Samsung SPF-75H/76H 800x480")), ("24", _("Samsung SPF-87H 800x480")), ("25", _("Samsung SPF-87H old 800x480")), ("26", _("Samsung SPF-83H 800x600")),
  ("29", _("Samsung SPF-85H/86H 800x600")), ("212", _("Samsung SPF-85P/86P 800x600")), ("28", _("Samsung SPF-105P 1024x600")), ("27", _("Samsung SPF-107H 1024x600")), ("213", _("Samsung SPF-107H old 1024x600")),
- ("211", _("Samsung SPF-700T 800x600")),
+ ("211", _("Samsung SPF-700T 800x600")), ("214", _("Samsung SPF-1000P 1024x600")),
  ("430", _("Internal TFT-LCD 400x240")),
  ("50", _("Internal Box-Skin-LCD")),
  ("31", _("only Picture 320x240")), ("33", _("only Picture 800x480")), ("36", _("only Picture 800x600")), ("37", _("only Picture 1024x600")), ("320", _("only Picture Custom Size")), ("420", _("only Picture Custom Size 2"))]
@@ -442,8 +442,9 @@ LCD4linux.WebIfInitDelay = ConfigYesNo(default = False)
 LCD4linux.WebIfAllow = ConfigText(default="127. 192.168. 172. 10.", fixed_size=False)
 LCD4linux.WebIfDeny = ConfigText(default="", fixed_size=False)
 LCD4linux.WebIfDesign = ConfigSelection(choices = [("1", _("1 - normal")), ("2", _("2 - side by side"))], default = "2")
-LCD4linux.WetterApi = ConfigSelection(choices = [("MSN", _("MSN")), ("OPENWEATHER", _("OpenWeatherMap"))], default = "MSN")
+LCD4linux.WetterApi = ConfigSelection(choices = [("MSN", _("MSN")), ("OPENWEATHER", _("OpenWeatherMap")), ("WEATHERUNLOCKED", _("WeatherUnlocked"))], default = "MSN")
 LCD4linux.WetterApiKeyOpenWeatherMap = ConfigText(default="", fixed_size=False, visible_width=50)
+LCD4linux.WetterApiKeyWeatherUnlocked = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.WetterCity = ConfigText(default="Berlin", fixed_size=False)
 LCD4linux.Wetter2City = ConfigText(default="Berlin", fixed_size=False)
 LCD4linux.WetterPath = ConfigText(default="", fixed_size=False, visible_width=50)
@@ -2649,7 +2650,7 @@ def getResolution(t,r):
 		MAX_W,MAX_H = 800,480
 	elif t[1:] in ["6","9","11","12"]:
 		MAX_W,MAX_H = 800,600
-	elif t[1:] in ["7","8","13"]:
+	elif t[1:] in ["7","8","13","14"]:
 		MAX_W,MAX_H = 1024,600
 	elif t[1:] == "17":
 		MAX_W,MAX_H = 220,176
@@ -5411,6 +5412,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			self.list1.append(getConfigListEntry(_("Background-Picture Type"), LCD4linux.BilderBackground))
 			self.list1.append(getConfigListEntry(_("Weather API"), LCD4linux.WetterApi))
 			self.list1.append(getConfigListEntry(_("Weather API-Key OpenWeatherMap"), LCD4linux.WetterApiKeyOpenWeatherMap))
+			self.list1.append(getConfigListEntry(_("Weather API-ID Key WeatherUnlocked"), LCD4linux.WetterApiKeyWeatherUnlocked))
 			self.list1.append(getConfigListEntry(_("Weather City"), LCD4linux.WetterCity))
 			self.list1.append(getConfigListEntry(_("Weather City 2"), LCD4linux.Wetter2City))
 			self.list1.append(getConfigListEntry(_("Weather-Icon-Path [ok]>"), LCD4linux.WetterPath))
@@ -9168,7 +9170,7 @@ class UpdateStatus(Screen):
 					city=quote(ort)
 					self.feedurl = "http://weather.service.msn.com/data.aspx?src=%s&weadegreetype=C&culture=%s&weasearchstr=%s" % (self.MSNsrc,la,city) 
 				getPage(self.feedurl).addCallback(boundFunction(self.downloadListCallback,wetter)).addErrback(self.downloadListError)
-			else:
+			elif LCD4linux.WetterApi.value == "OPENWEATHER":
 				apkey = ""
 				if len(LCD4linux.WetterApiKeyOpenWeatherMap.value) > 5:
 					apkey = "&appid=%s" % LCD4linux.WetterApiKeyOpenWeatherMap.value
@@ -9179,7 +9181,21 @@ class UpdateStatus(Screen):
 				getPage(self.feedurl).addCallback(boundFunction(self.downloadOpenListCallback,wetter)).addErrback(self.downloadListError)
 				self.feedurl = "http://api.openweathermap.org/data/2.5/forecast/daily?%s&lang=%s&units=metric&cnt=5%s" % (city,la[:2],apkey) 
 				getPage(self.feedurl).addCallback(boundFunction(self.downloadOpenListCallback,wetter)).addErrback(self.downloadListError)
-			L4log("Wetterdownloadstart:"+city,language.getLanguage()+" "+la)
+			elif LCD4linux.WetterApi.value == "WEATHERUNLOCKED":
+				apkey = ""
+				lang = ""
+				if "." in ort:
+					lang="&lang=%s" % ort.split(".")[0]
+				if len(LCD4linux.WetterApiKeyWeatherUnlocked.value.split()) == 2:
+					apkey = "?app_id=%s&app_key=%s" % (LCD4linux.WetterApiKeyWeatherUnlocked.value.split()[0],LCD4linux.WetterApiKeyWeatherUnlocked.value.split()[1])
+				city="%s" % quote(ort)
+				self.feedurl = "http://api.weatherunlocked.com/api/current/%s%s%s" % (city,apkey,lang) 
+				L4log(self.feedurl)
+				getPage(self.feedurl).addCallback(boundFunction(self.downloadUnlockedListCallback,wetter)).addErrback(self.downloadListError)
+				self.feedurl = "http://api.weatherunlocked.com/api/forecast/%s%s%s" % (city,apkey,lang) 
+				L4log(self.feedurl)
+				getPage(self.feedurl).addCallback(boundFunction(self.downloadUnlockedListCallback,wetter)).addErrback(self.downloadListError)
+			L4log("Wetterdownloadstart %s:%s %s %s" % (LCD4linux.WetterApi.value,city,language.getLanguage(),la))
 		else:
 			if self.NetworkConnectionAvailable is not None:
 				L4log("Wetter check Network...")
@@ -9320,6 +9336,66 @@ class UpdateStatus(Screen):
 				self.TimeZone = 0
 				self.Long = r.get("coord",{}).get("lon",0)
 				self.Lat = r.get("coord",{}).get("lat",0)
+				self.downloadSunrise()
+			PICwetter[ConfigWWW]=None
+		else:
+			wwwWetter[ConfigWWW] = ""
+			self.WetterOK=False
+			L4log("Wetter%sdownload Error" % ConfigWWW)
+
+	def downloadUnlockedListCallback(self, ConfigWWW, page=""):
+		global wwwWetter
+		ts = time()
+		try:
+			r=simplejson.loads(Code_utf8(page))
+		except:
+			wwwWetter[ConfigWWW] = ""
+			L4log("Wetter%sdownload JSON-Error" % ConfigWWW)
+		L4log("Wetter Ready:",r)
+		if r.get("Days",None) != None:
+			self.WetterOK=True
+			L4log("Wetter%sdownloadForcast OK" % ConfigWWW)
+			wwwWetter[ConfigWWW] = r
+
+			L4log("parse Wetter %s" % ConfigWWW)
+			self.WWeek[ConfigWWW]=[]
+			for curr in r.get("Days",[]):
+				L4logE(curr)
+				High = Code_utf8("%d" % round(curr.get("temp_max_c",0)))
+				Low = Code_utf8("%d" % round(curr.get("temp_min_c",0)))
+				d=curr.get("date")
+				dd=d.split("/")
+				Day = Code_utf8(WeekDays[calendar.weekday(int(dd[2]),int(dd[1]),int(dd[0]))])
+				Icon = curr["Timeframes"][4]["wx_icon"]
+				Cond = curr["Timeframes"][4]["wx_desc"]
+				Regen = "%.1f" % (curr["Timeframes"][4]["rain_mm"])
+				IconID = curr["Timeframes"][4]["wx_code"]
+				self.WWeek[ConfigWWW].append({"High":High,"Low":Low,"Day":Day,"Icon":Icon,"Cond":Cond,"Regen":Regen,"IconID":IconID})
+			PICwetter[ConfigWWW]=None
+			L4logE("Wetter:",self.WWeek[ConfigWWW])
+
+		elif r.get("lat",None) != None:
+			self.WetterOK=True
+			L4log("Wetter%sdownloadCurrent OK" % ConfigWWW)
+			self.WDay[ConfigWWW]={}
+			self.WDay[ConfigWWW]["Locname"] = ""
+			self.WDay[ConfigWWW]["Temp_c"] = Code_utf8(str(int(r.get("temp_c",0))))
+			self.WDay[ConfigWWW]["Hum"] = str(r.get("humid_pct",0)) + "%"
+			self.WDay[ConfigWWW]["Wind"] = "%.1f m/s" % r.get("windspd_ms",0)
+			if str(LCD4linux.WetterWind.value) == "0":
+				self.WDay[ConfigWWW]["Wind"] = "%.1f km/h" % r.get("windspd_kmh",0)
+			self.WDay[ConfigWWW]["Wind"] +=	" " + getDirection(r.get("winddir_deg",0))
+			self.WDay[ConfigWWW]["Cond"] = r.get("wx_desc","")
+			self.WDay[ConfigWWW]["Icon"] = r.get("wx_icon","")
+			self.WDay[ConfigWWW]["Feel"] = Code_utf8(str(int(round(r.get("feelslike_c",0)))))
+			self.WDay[ConfigWWW]["Rain"] = r.get("cloudtotal_pct",0)
+			self.WDay[ConfigWWW]["Wtime"] = strftime("%H:%M",localtime())
+			self.WDay[ConfigWWW]["IconID"] = r.get("wx_code","0")
+
+			if ConfigWWW == 0:
+				self.TimeZone = 0
+				self.Long = str(r.get("lon",0))
+				self.Lat = str(r.get("lat",0))
 				self.downloadSunrise()
 			PICwetter[ConfigWWW]=None
 		else:
@@ -9797,6 +9873,10 @@ def getShowPicture(BildFile,idx):
 						BilderIndex[idx] = 0
 		else:
 			ShowPicture = BildFile
+			if not os.path.isfile(ShowPicture):
+				BildFile = os.path.join(os.path.dirname(ShowPicture),"default.png")
+				if os.path.isfile(BildFile):
+					ShowPicture = BildFile
 			if ShowPicture.find("fritz") >= 0:
 				OSDon = 1
 	return ShowPicture
@@ -10295,6 +10375,9 @@ def LCD4linuxPIC(self,session):
 								font = ImageFont.truetype(ConfigFont,int(20*Wmulti), encoding='unic')
 						if UseExt == "gif":
 							Icon = Icon.replace(".png",".gif")
+						else:
+							Icon = Icon.replace(".gif",".png")
+						L4logE("Icon:",Icon)
 						if isOffTime(L4LMoon,L4LSun,L4LMoon,L4LSun):
 							if os.path.isfile(os.path.join(UseWetterPath,Icon.replace("."+UseExt,"_night."+UseExt))) and Icon.find(UseExt) > 1:
 								Icon = Icon.replace("."+UseExt,"_night."+UseExt)
@@ -10343,7 +10426,8 @@ def LCD4linuxPIC(self,session):
 								else:
 									if int(Regen.replace("%","")) >= int(LCD4linux.WetterRainColor2use.value):
 										RColor = LCD4linux.WetterRainColor2.value
-								ShadowText(Wim,MAX_W-w, POSY, Regen, font, RColor, ConfigShadow)
+								if float(Regen.replace("m","").replace("%","")) > 0:
+									ShadowText(Wim,MAX_W-w, POSY, Regen, font, RColor, ConfigShadow)
 						else:
 							Leer,h = self.draw[Wim].textsize(" ", font=font)
 							w,Dayh = self.draw[Wim].textsize(Day, font=fontD)
@@ -10370,7 +10454,8 @@ def LCD4linuxPIC(self,session):
 								else:
 									if int(Regen.replace("%","")) >= int(LCD4linux.WetterRainColor2use.value):
 										RColor = LCD4linux.WetterRainColor2.value
-								ShadowText(Wim,POSX+int(54*Wmulti)-w-2, POSY+Dayh-int(h/2), Regen, font, RColor, ConfigShadow)
+								if float(Regen.replace("m","").replace("%","")) > 0:
+									ShadowText(Wim,POSX+int(54*Wmulti)-w-2, POSY+Dayh-int(h/2), Regen, font, RColor, ConfigShadow)
 							if LCD4linux.WetterLine.value == "true":
 								self.draw[Wim].line((POSX,1,POSX,POSY+int(60*Wmulti)),fill=ConfigColor)
 							elif LCD4linux.WetterLine.value == "trueLong":
@@ -10457,6 +10542,9 @@ def LCD4linuxPIC(self,session):
 				else:
 					if UseExt == "gif":
 						Icon = Icon.replace(".png",".gif")
+					else:
+						Icon = Icon.replace(".gif",".png")
+					L4logE("Icon:",Icon)
 					if isOffTime(L4LMoon,L4LSun,L4LMoon,L4LSun):
 						if os.path.isfile(os.path.join(UseWetterPath,Icon.replace("."+UseExt,"_night."+UseExt))) and Icon.find(UseExt) > 1:
 							Icon = Icon.replace("."+UseExt,"_night."+UseExt)
@@ -11025,9 +11113,10 @@ def LCD4linuxPIC(self,session):
 			except:
 				pass
 		else:
-			POSX = getSplit(False,ConfigAlign,MAX_W,ConfigSize)
-			font = ImageFont.truetype(FONT, 15, encoding='unic')
-			ShadowText(draw,POSX,ConfigPos,Code_utf8(_("Picture not available")+ " " + os.path.basename(ConfigFile)),font,"red",True)
+			if LCD4linux.ShowNoMsg.value == True:
+				POSX = getSplit(False,ConfigAlign,MAX_W,ConfigSize)
+				font = ImageFont.truetype(FONT, 15, encoding='unic')
+				ShadowText(draw,POSX,ConfigPos,Code_utf8(_("Picture not available")+ " " + os.path.basename(ConfigFile)),font,"red",True)
 
 # Grab TV
 	def doGrabTV(x,y,lcd,vidosd):
@@ -11150,8 +11239,9 @@ def LCD4linuxPIC(self,session):
 		POSX = getSplit(ConfigSplit,ConfigAlign,MAX_W,Progess)
 		timercount = 0
 		TL = self.Ltimer_list if ConfigBox == 0 else self.wwwBoxTimer
+		TL = sorted(TL, key=lambda x: x.begin, reverse=False)
 		for timerlist in TL:
-			if timerlist.disabled == 0 and timerlist.justplay == 0:
+			if timerlist.disabled == 0 and timerlist.justplay == 0 and str(timerlist.service_ref)[:3] != "-1:":
 				if timercount < int(ConfigLines):
 					a = int(config.recording.margin_before.value)*60 if ConfigType == "0" else 0
 					b = int(config.recording.margin_after.value)*60 if ConfigType == "0" else 0
@@ -11167,7 +11257,10 @@ def LCD4linuxPIC(self,session):
 						ShadowText(draw,POSX+hk,POSY+h,tx2,font,ConfigColor,ConfigShadow)
 					else:
 						tx=cutText(begin + " " + timer_name,draw,font,Progess-h-5)
-						ShadowText(draw,POSX+hk,POSY,tx,font,ConfigColor,ConfigShadow)
+						if timerlist.state == 2:
+							ShadowText(draw,POSX+hk,POSY,tx,font,"red",ConfigShadow)
+						else:
+							ShadowText(draw,POSX+hk,POSY,tx,font,ConfigColor,ConfigShadow)
 					POSY += h
 				timercount += 1
 		if timercount == 0:
@@ -11396,7 +11489,7 @@ def LCD4linuxPIC(self,session):
 #			if self.Lpath and ":0:" not in self.Lpath and "//" not in self.Lpath: # Movie
 			if self.Llength is not None:
 				isVideoPlaying = 1
-				if self.Llength is not None:
+				try:
 					length = self.Llength
 					position = self.Lposition
 					if length and position:
@@ -11489,6 +11582,8 @@ def LCD4linuxPIC(self,session):
 								ShadowText(draw,POSX+10, ConfigPos+1-Minus-int((h-ConfigSize)/2),remaining1,font,ConfigColorText,ConfigShadow)
 							event_run=int(ProgressBar*position[1]/length[1])
 							isData = True
+				except:
+					L4log("Error put Progress")
 			else: # DVB 
 				event_begin, event_end, duration, event_name = self.Levent_begin0, self.Levent_end0, self.Lduration0, self.Levent_name0
 #				print "L4L DVB",event_begin, event_end, duration, event_name
@@ -12313,8 +12408,10 @@ def LCD4linuxPIC(self,session):
 		from Components.Harddisk import harddiskmanager
 		if harddiskmanager.HDDCount() > 0:
 			for hdd in harddiskmanager.HDDList():
-#				print hdd[0], hdd[1]
-				if hdd[1].model().startswith("ATA") or hdd[1].model().startswith("SATA"):
+				L4logE(hdd[0])
+				L4logE(hdd[1].model(),hdd[1].isSleeping())
+				hddbus=hdd[1].bus_description() if hasattr(hdd[1],"bus_description") else ""
+				if hdd[1].model().startswith("ATA") or hdd[1].model().startswith("SATA") or hddbus=="SATA":
 					if not hdd[1].isSleeping():
 						hddsleep = False
 			try:
@@ -12968,9 +13065,14 @@ def LCD4linuxPIC(self,session):
 				w123+=w4
 		POSX = getSplit(ConfigSplit,ConfigAlign,MAX_W,w123)
 		i=0
-		for Mod in self.oM[ConfigStation]:
-			i+=1
-			if str(i) in ConfigModule:
+		L4logE("Netatmo-Config",ConfigModule)
+		L4logE("Netatmo-Mod",self.oM[ConfigStation])
+		for IDX in list(ConfigModule):
+			L4logE("Netatmo",IDX)
+			i=int(IDX)
+			if i <= len(self.oM[ConfigStation]):
+				Mod=self.oM[ConfigStation][i-1]
+				L4logE("Netatmo",Mod)
 				if Mod[6]:
 					self.draw[draw].rectangle((POSX,POSY,POSX+w2,POSY+int(w2/2)),outline="red",fill="red")
 				if Mod[5] == "NAModule3":
@@ -14478,6 +14580,8 @@ def autostart(reason, **kwargs):
 			except:
 				L4log("Error save Fritzlist")
 		TFTCheck(False,SetMode="DREAM")
+		if os.path.isfile("/usr/bin/lcd4linux-stop.sh"):
+			RunShell("/usr/bin/lcd4linux-stop.sh")
 		if LCD4linux.LCDshutdown.value == True:
 			try:
 				Dunkel=writeHelligkeit([0,0,0],[0,0,0],True)
