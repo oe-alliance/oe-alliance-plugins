@@ -24,6 +24,8 @@ from enigma import eTimer, eDVBFrontendParametersSatellite, eComponentScan, eCon
 import os
 from boxbranding import getBoxType, getImageVersion, getImageBuild, getBrandOEM
 
+import dmmBlindScan
+
 #used for the XML file
 from time import strftime, time
 
@@ -1312,7 +1314,10 @@ def BlindscanCallback(close, answer):
 		close(True)
 
 def BlindscanMain(session, close=None, **kwargs):
-	session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)
+	if 'Supports_Blind_Scan: yes' in open('/proc/bus/nim_sockets').read():
+		session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
+	else:
+		session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)
 
 def BlindscanSetup(menuid, **kwargs):
 	if menuid == "scan":
