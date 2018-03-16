@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Blindscan\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-07 13:04+0200\n"
-"PO-Revision-Date: 2016-05-07 13:04+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2018-03-16 13:04+0200\n"
+"Last-Translator: JR <openspateam@gmail.com>\n"
 "Language-Team: OpenSPA <openspa.info>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -322,3 +322,87 @@ msgstr "Recerca cega"
 #: ../src/plugin.py:1244
 msgid "Scan satellites for new transponders"
 msgstr "S'estan cercant transponedors nous"
+
+#: ../src/dmmBlindScan.py:67
+msgid "Blind scan state"
+msgstr "Estat recerca cega"
+
+#: ../src/dmmBlindScan.py:99
+msgid "MANUALLY start service searching, press green to change"
+msgstr "Arranc servei de recerca MANUAL, prem verd per a canviar"
+
+#: ../src/dmmBlindScan.py:101
+msgid "AUTOMATICALLY start service searching, press green to change"
+msgstr "Arranc servei de recerca AUTOMÀTIC, prem verd per a canviar"
+
+#: ../src/dmmBlindScan.py:106
+msgid "Transponder searching finished!"
+msgstr "Recerca transpondedor finalitzada!"
+
+#: ../src/dmmBlindScan.py:107
+msgid "Press green to start service searching!"
+msgstr "Prem verd per arrancar el servei de recerca!"
+
+#: ../src/dmmBlindScan.py:295
+msgid "%dMHz scanned"
+msgstr "%dMhz escanejat"
+
+#: ../src/dmmBlindScan.py:322
+msgid "%d transponder(s) found"
+msgstr "%d transpondedors trobats"
+
+#: ../src/dmmBlindScan.py:429
+msgid "Maybe the reason that recording is currently running."
+msgstr "La raó pot ser una gravació en marxa"
+
+#: ../src/dmmBlindScan.py:474
+msgid "Try to find used satellite transponders..."
+msgstr "Intenta trobar transpondedors de satèl·lit utilitzats..."
+
+#: ../src/dmmBlindScan.py:476
+msgid "Nothing to scan! Press Exit!"
+msgstr "Res a escanejar! Prem Sortir (Exit)!"
+
+#: ../src/dmmBlindScan.py:482
+msgid "Use Sundtek full hardware blind scan!"
+msgstr "Utilitza hardware recerca cega de Sundtek!"
+
+#: ../src/dmmBlindScan.py:484
+msgid "Hardware blind scan is not supported by this tuner (%s)!"
+msgstr "El hardware de recerca cega no està suportat per aquest sintonitzador (%s)!"
+
+#: ../src/dmmBlindScan.py:505
+msgid "Blind scan for DVB-S2 tuners"
+msgstr "Recerca cega per a sintonitzadors DVB-S2"
+
+#: ../src/dmmBlindScan.py:545
+msgid "Press OK to start the scan"
+msgstr "Prem OK per a iniciar la recerca"
+
+#: ../src/dmmBlindScan.py:547
+msgid "Nothing to scan!\nPlease setup your tuner settings before you start a service scan."
+msgstr "Res a escanejar!\nSi us plau, configura els teus ajustos de sintonitzador abans d'iniciar la recerca"
+
+#: ../src/dmmBlindScan.py:601
+msgid "Accuracy (higher is better)"
+msgstr "Precisió (més alt és millor)"
+
+#: ../src/dmmBlindScan.py:606
+msgid "Network scan"
+msgstr "Recerca en red"
+
+#: ../src/dmmBlindScan.py:656
+msgid "yes"
+msgstr "si"
+
+#: ../src/dmmBlindScan.py:656
+msgid "yes (keep feeds)"
+msgstr "si (mantenir feeds)"
+
+#: ../src/dmmBlindScan.py:686
+msgid "DVB-S only"
+msgstr "Només DVB-S"
+
+#: ../src/dmmBlindScan.py:746
+msgid "No tuner is enabled!\nPlease setup your tuner settings before you start a service scan."
+msgstr "Cap sintonitzador activat!\nSi us plau, configura els teus ajustos de sintonitzador abans d'iniciar la recerca"
