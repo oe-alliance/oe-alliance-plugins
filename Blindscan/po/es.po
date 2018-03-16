@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-07 13:05+0200\n"
 "PO-Revision-Date: 2016-05-07 13:05+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Last-Translator: JR <openspateam@gmail.com>\n"
 "Language-Team: OpenSPA <openspa.info>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -320,3 +320,87 @@ msgstr "Búsqueda ciega"
 #: ../src/plugin.py:1244
 msgid "Scan satellites for new transponders"
 msgstr "Buscando transpondedores nuevos"
+
+#: ../src/dmmBlindScan.py:67
+msgid "Blind scan state"
+msgstr "Estado búsqueda ciega"
+
+#: ../src/dmmBlindScan.py:99
+msgid "MANUALLY start service searching, press green to change"
+msgstr "Arranque servicio de búsqueda MANUAL, pulsa verde para cambiar"
+
+#: ../src/dmmBlindScan.py:101
+msgid "AUTOMATICALLY start service searching, press green to change"
+msgstr "Arranque servicio de búsqueda AUTOMÁTICO, pulsa verde para cambiar"
+
+#: ../src/dmmBlindScan.py:106
+msgid "Transponder searching finished!"
+msgstr "Búsqueda transpondedor acabada!"
+
+#: ../src/dmmBlindScan.py:107
+msgid "Press green to start service searching!"
+msgstr "Pulsa verde para arrancar el servicio de búsqueda!"
+
+#: ../src/dmmBlindScan.py:295
+msgid "%dMHz scanned"
+msgstr "%dMhz escaneado"
+
+#: ../src/dmmBlindScan.py:322
+msgid "%d transponder(s) found"
+msgstr "%d transpondedores encontrados"
+
+#: ../src/dmmBlindScan.py:429
+msgid "Maybe the reason that recording is currently running."
+msgstr "Puede que la razón sea una grabación en marcha"
+
+#: ../src/dmmBlindScan.py:474
+msgid "Try to find used satellite transponders..."
+msgstr "Intenta encontrar transpondedores de satélite usados..."
+
+#: ../src/dmmBlindScan.py:476
+msgid "Nothing to scan! Press Exit!"
+msgstr "Nada a escanear! Pulsa Salir (Exit)!"
+
+#: ../src/dmmBlindScan.py:482
+msgid "Use Sundtek full hardware blind scan!"
+msgstr "Utiliza hardware búsqueda ciega de Sundtek!"
+
+#: ../src/dmmBlindScan.py:484
+msgid "Hardware blind scan is not supported by this tuner (%s)!"
+msgstr "El hardware de búsqueda ciega no está soportado por este sintonizador (%s)!"
+
+#: ../src/dmmBlindScan.py:505
+msgid "Blind scan for DVB-S2 tuners"
+msgstr "Búsqueda ciega para sintonizadores DVB-S2"
+
+#: ../src/dmmBlindScan.py:545
+msgid "Press OK to start the scan"
+msgstr "Pulsa OK para empezar la búsqueda"
+
+#: ../src/dmmBlindScan.py:547
+msgid "Nothing to scan!\nPlease setup your tuner settings before you start a service scan."
+msgstr "Nada a escanear!\nPor favor, configura tus ajustes de sintonizador antes de empezar la búsqueda"
+
+#: ../src/dmmBlindScan.py:601
+msgid "Accuracy (higher is better)"
+msgstr "Precisión (más alto es mejor)"
+
+#: ../src/dmmBlindScan.py:606
+msgid "Network scan"
+msgstr "Búsqueda en red"
+
+#: ../src/dmmBlindScan.py:656
+msgid "yes"
+msgstr "sí"
+
+#: ../src/dmmBlindScan.py:656
+msgid "yes (keep feeds)"
+msgstr "sí (mantener feeds)"
+
+#: ../src/dmmBlindScan.py:686
+msgid "DVB-S only"
+msgstr "Sólo DVB-S"
+
+#: ../src/dmmBlindScan.py:746
+msgid "No tuner is enabled!\nPlease setup your tuner settings before you start a service scan."
+msgstr "Ningún sintonizador habilitado!\nPor favor, configura tus ajustes de sintonizador antes de empezar la búsqueda"
