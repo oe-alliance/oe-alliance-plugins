@@ -1,0 +1,76 @@
+# Portuguese translations for PACKAGE package.
+# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-10 11:56+0200\n"
+"PO-Revision-Date: 2018-04-10 11:56+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "/etc/enigma2"
+msgstr ""
+
+msgid "/etc/tuxbox (default)"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "Fetch"
+msgstr ""
+
+#, python-format
+msgid "Fetching and saving %s.xml succeeded"
+msgstr ""
+
+msgid ""
+"File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
+msgstr ""
+
+msgid ""
+"Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the "
+"default location. Files stored in \"/etc/enigma2\" override the default file "
+"and are not updated on a software update."
+msgstr ""
+
+msgid "OE-Alliance"
+msgstr ""
+
+msgid "Online source where the transponder xml file is being retrieved from."
+msgstr ""
+
+msgid "Save to"
+msgstr ""
+
+#, python-format
+msgid "Saving the %s.xml file failed"
+msgstr ""
+
+msgid "Source"
+msgstr ""
+
+#, python-format
+msgid "The %s.xml file could not be fetched"
+msgstr ""
+
+msgid "XML update"
+msgstr ""
+
+msgid "cable"
+msgstr ""
+
+msgid "satellite"
+msgstr ""
+
+msgid "terrestrial"
+msgstr ""
