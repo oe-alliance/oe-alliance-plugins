@@ -1,1 +1,1 @@
-SUBDIRS = meta images po src
+SUBDIRS = meta po src
