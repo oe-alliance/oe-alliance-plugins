@@ -432,6 +432,12 @@ WirelessAccessPoint/src/Makefile
 WirelessAccessPoint/meta/Makefile
 WirelessAccessPoint/po/Makefile
 
+xmlUpdate/Makefile
+xmlUpdate/images/Makefile
+xmlUpdate/meta/Makefile
+xmlUpdate/po/Makefile
+xmlUpdate/src/Makefile
+
 XtrendFancontrol/Makefile
 XtrendFancontrol/src/Makefile
 XtrendFancontrol/meta/Makefile

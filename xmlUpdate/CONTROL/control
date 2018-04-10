@@ -1,0 +1,5 @@
+Package: enigma2-plugin-systemplugins-xmlupdate
+Version: 1.0-r0
+Description: xmlupdate...
+Maintainer: Huevos
+Depends: 

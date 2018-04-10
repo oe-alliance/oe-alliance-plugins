@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Huevos</author>
+                    <name>XML update</name>
+                    <packagename>enigma2-plugin-systemplugins-xmlupdate</packagename>
+                    <shortdescription>Updates transponder xml files.</shortdescription>
+                    <description>Fetches and updates transponder xml files.</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-xmlupdate" />
+	</files>
+</default>
