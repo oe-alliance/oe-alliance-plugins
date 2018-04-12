@@ -11,6 +11,7 @@ from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+from Screens.Standby import TryQuitMainloop
 
 class xmlUpdate(ConfigListScreen, Screen):
 	def __init__(self, session):
@@ -71,7 +72,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 					self.showError(_("Saving the %s.xml file failed") % self.DVBtype.value)
 				else:
 					print "[xmlUpdate][keyGo] Saving file succeeded."
-					self.showInfo(_("Fetching and saving %s.xml succeeded") % self.DVBtype.value)
+					self.showRestartMessage(_("Fetching and saving %s.xml succeeded.\nRestart now for changes to take immediate effect?") % self.DVBtype.value)
 			else: # XML did not validate
 				print "[xmlUpdate][validXML] Closing documentElement missing."
 				self.showError(_("The %s.xml download was corrupt.") % self.DVBtype.value)
@@ -105,9 +106,13 @@ class xmlUpdate(ConfigListScreen, Screen):
 		mbox = self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
 		mbox.setTitle(_("XML update"))
 
-	def showInfo(self, message):
-		mbox = self.session.open(MessageBox, message, MessageBox. TYPE_INFO)
+	def showRestartMessage(self, message):
+		mbox = self.session.openWithCallback(self.restartGUI, MessageBox, message, MessageBox.TYPE_YESNO)
 		mbox.setTitle(_("XML update"))
+
+	def restartGUI(self, answer=None):
+		if answer:
+			self.session.open(TryQuitMainloop, 3)
 
 def xmlUpdateStart(menuid, **kwargs):
 	if menuid == "scan":
