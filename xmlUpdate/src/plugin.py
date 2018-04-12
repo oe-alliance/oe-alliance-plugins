@@ -26,7 +26,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 		self.DVBtype = ConfigSelection(default="satellites", choices=[("satellites", _("satellite")), ("cables", _("cable")), ("terrestrial", _("terrestrial"))])
 		self.folder = ConfigSelection(default="/etc/tuxbox", choices=[("/etc/tuxbox", _("/etc/tuxbox (default)")), ("/etc/enigma2", _("/etc/enigma2"))])
 		
-		self["actions2"] = ActionMap(["SetupActions"],
+		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.keyGo,
 			"menu": self.keyCancel,
@@ -59,18 +59,22 @@ class xmlUpdate(ConfigListScreen, Screen):
 		self["config"].l.setList(self.list)
 
 	def keyGo(self):
-		fetchURL = self.fetchURL()
-		if fetchURL:
-			try:
-				with open(self.folder.value + "/" + self.DVBtype.value + ".xml", "w") as f:
-					f.write(fetchURL)
-					f.close()
-			except:
-				print "[xmlUpdate][keyGo] Saving file failed."
-				self.showError(_("Saving the %s.xml file failed") % self.DVBtype.value)
-			else:
-				print "[xmlUpdate][keyGo] Saving file succeeded."
-				self.showInfo(_("Fetching and saving %s.xml succeeded") % self.DVBtype.value)
+		XMLdata = self.fetchURL()
+		if XMLdata:
+			if self.validXML(XMLdata):
+				try:
+					with open(self.folder.value + "/" + self.DVBtype.value + ".xml", "w") as f:
+						f.write(XMLdata)
+						f.close()
+				except IOError, err:
+					print "[xmlUpdate][keyGo] Saving file failed.", err
+					self.showError(_("Saving the %s.xml file failed") % self.DVBtype.value)
+				else:
+					print "[xmlUpdate][keyGo] Saving file succeeded."
+					self.showInfo(_("Fetching and saving %s.xml succeeded") % self.DVBtype.value)
+			else: # XML did not validate
+				print "[xmlUpdate][validXML] Closing documentElement missing."
+				self.showError(_("The %s.xml download was corrupt.") % self.DVBtype.value)
 
 	def keyCancel(self):
 		self.close()
@@ -93,6 +97,9 @@ class xmlUpdate(ConfigListScreen, Screen):
 			import sys
 			print '[xmlUpdate][fetchURL] undefined error', sys.exc_info()[0]
 		self.showError(_("The %s.xml file could not be fetched") % self.DVBtype.value)
+
+	def validXML(self, XMLdata): # Looks for closing documentElement, i.e. </satellites>, </cables>, or </locations>
+		return self.DVBtype.value in ('satellites', 'cables') and ("</%s>" % self.DVBtype.value) in XMLdata or self.DVBtype.value == "terrestrial" and "</locations>" in XMLdata
 
 	def showError(self, message):
 		mbox = self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
