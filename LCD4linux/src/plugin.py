@@ -375,7 +375,7 @@ begin = mktime((
 )
 
 LCD4linux = Config()
-LCD4linux.Enable = ConfigYesNo(default = False)
+LCD4linux.Enable = ConfigYesNo(default = True)
 LCD4linux.L4LVersion = ConfigText(default="0.0r0", fixed_size=False)
 LCD4linux.FastMode = ConfigSelection(choices = [("5", _("Normal (5s)")), ("2", _("Fastmode (2s)"))], default="5")
 LCD4linux.SwitchToFB2 = ConfigYesNo(default = True)
