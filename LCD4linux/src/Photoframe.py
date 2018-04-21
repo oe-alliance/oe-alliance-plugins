@@ -76,6 +76,10 @@ def get_known_devices():
 	dList.append({'name':"SPF1000P Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2040, 'width':1024, 'height':600 })
 	dList.append({'name':"SPF1000P Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2039})      
 
+	#24,25 Samsung SPF-800P (215)
+	dList.append({'name':"SPF800P Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2038, 'width':800, 'height':480 })
+	dList.append({'name':"SPF800P Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2037})      
+
 	# Pearl DPF for Testing
 	dList.append({'name':"Pearl DPF", 'idVendor':0x1908, 'idProduct':0x0102, 'width':320, 'height':240 })
 	dList.append({'name':"Pearl DPF", 'idVendor':0x1908, 'idProduct':0x0102, 'width':320, 'height':240 })

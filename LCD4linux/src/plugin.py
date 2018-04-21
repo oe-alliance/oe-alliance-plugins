@@ -14,11 +14,12 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V5.0-r0"
+Version = "V5.0-r1"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
 from enigma import ePicLoad, ePixmap
+
 from boxbranding import getImageDistro, getBoxType
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
@@ -316,7 +317,7 @@ LCDSwitchSelect = [("0", _("LCD 1-3")), ("1", _("LCD 1")), ("2", _("LCD 2")), ("
 LCDType = [("11", _("Pearl (or compatible LCD) 320x240")), ("12", _("Pearl (or compatible LCD) 240x320")), ("121", _("Corby@Pearl 128x128")),
  ("210", _("Samsung SPF-72H 800x480")), ("23", _("Samsung SPF-75H/76H 800x480")), ("24", _("Samsung SPF-87H 800x480")), ("25", _("Samsung SPF-87H old 800x480")), ("26", _("Samsung SPF-83H 800x600")),
  ("29", _("Samsung SPF-85H/86H 800x600")), ("212", _("Samsung SPF-85P/86P 800x600")), ("28", _("Samsung SPF-105P 1024x600")), ("27", _("Samsung SPF-107H 1024x600")), ("213", _("Samsung SPF-107H old 1024x600")),
- ("211", _("Samsung SPF-700T 800x600")), ("214", _("Samsung SPF-1000P 1024x600")),
+ ("211", _("Samsung SPF-700T 800x600")), ("215", _("Samsung SPF-800P 800x480")), ("214", _("Samsung SPF-1000P 1024x600")),
  ("430", _("Internal TFT-LCD 400x240")),
  ("50", _("Internal Box-Skin-LCD")),
  ("31", _("only Picture 320x240")), ("33", _("only Picture 800x480")), ("36", _("only Picture 800x600")), ("37", _("only Picture 1024x600")), ("320", _("only Picture Custom Size")), ("420", _("only Picture Custom Size 2"))]
@@ -374,7 +375,7 @@ begin = mktime((
 )
 
 LCD4linux = Config()
-LCD4linux.Enable = ConfigYesNo(default = True)
+LCD4linux.Enable = ConfigYesNo(default = False)
 LCD4linux.L4LVersion = ConfigText(default="0.0r0", fixed_size=False)
 LCD4linux.FastMode = ConfigSelection(choices = [("5", _("Normal (5s)")), ("2", _("Fastmode (2s)"))], default="5")
 LCD4linux.SwitchToFB2 = ConfigYesNo(default = True)
@@ -981,6 +982,12 @@ LCD4linux.HddPos = ConfigSlider(default = 120,  increment = 2, limits = (0, 1024
 LCD4linux.HddAlign = ConfigSelection(choices = AlignType, default="1")
 LCD4linux.HddSplit = ConfigYesNo(default = False)
 LCD4linux.HddType = ConfigSelection(choices = HddType, default="0")
+LCD4linux.Mute = ConfigSelection(choices = ScreenSelect, default="0")
+LCD4linux.MuteLCD = ConfigSelection(choices = LCDSelect, default="1")
+LCD4linux.MuteSize = ConfigSlider(default = 32,  increment = 1, limits = (10, 150))
+LCD4linux.MutePos = ConfigSlider(default = 120,  increment = 2, limits = (0, 1024))
+LCD4linux.MuteAlign = ConfigSelection(choices = AlignType, default="1")
+LCD4linux.MuteSplit = ConfigYesNo(default = False)
 LCD4linux.Timer = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.TimerLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.TimerSize = ConfigSlider(default = 22,  increment = 1, limits = (10, 150))
@@ -1476,6 +1483,12 @@ LCD4linux.MPHddPos = ConfigSlider(default = 120,  increment = 2, limits = (0, 10
 LCD4linux.MPHddAlign = ConfigSelection(choices = AlignType, default="1")
 LCD4linux.MPHddSplit = ConfigYesNo(default = False)
 LCD4linux.MPHddType = ConfigSelection(choices = HddType, default="0")
+LCD4linux.MPMute = ConfigSelection(choices = ScreenSelect, default="0")
+LCD4linux.MPMuteLCD = ConfigSelection(choices = LCDSelect, default="1")
+LCD4linux.MPMuteSize = ConfigSlider(default = 32,  increment = 1, limits = (10, 150))
+LCD4linux.MPMutePos = ConfigSlider(default = 120,  increment = 2, limits = (0, 1024))
+LCD4linux.MPMuteAlign = ConfigSelection(choices = AlignType, default="1")
+LCD4linux.MPMuteSplit = ConfigYesNo(default = False)
 LCD4linux.MPTimer = ConfigSelection(choices = ScreenSelect, default="0")
 LCD4linux.MPTimerLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.MPTimerSize = ConfigSlider(default = 22,  increment = 1, limits = (10, 150))
@@ -2577,12 +2590,13 @@ def ICSdownloads():
 		try:
 			for Icomp in gcal.walk("VEVENT"):
 				if Icomp.name == "VEVENT":
-					L4logE(Icomp["dtstart"],Icomp.get('summary'))
 					rrule=str(Icomp.get("rrule",""))
+					L4logE("%s - %s - %s" % (str(Icomp["dtstart"]),str(Icomp.get('summary')),rrule))
 					if "UNTIL" in rrule or "INTERVAL" in rrule:
 						y={}
 						for b in rrule.split(";"):
-							y[b.split("=")[0]]=b.split("=")[1]
+							if len(b.split("=")) > 1:
+								y[b.split("=")[0]]=b.split("=")[1]
 						if y.get("UNTIL","") != "" and y.get("UNTIL","999999999") < "%4d%02d%02d" % (datetime.now().year,datetime.now().month,datetime.now().day):
 							L4logE("Until-Rule ignore",rrule)
 							continue
@@ -2646,7 +2660,7 @@ def getResolution(t,r):
 		MAX_W,MAX_H = 320,240
 	elif t[1:] == "2":
 		MAX_W,MAX_H = 240,320
-	elif t[1:] in ["3","4","5","10"]:
+	elif t[1:] in ["3","4","5","10","15"]:
 		MAX_W,MAX_H = 800,480
 	elif t[1:] in ["6","9","11","12"]:
 		MAX_W,MAX_H = 800,600
@@ -2738,7 +2752,8 @@ def find_dev(Anzahl, idVendor, idProduct):
 				gefunden = True
 	elif USBok == True:
 		try:
-			if usb.core.find(idVendor=idVendor, idProduct=idProduct, find_all=1) is not None:
+			L4logE("usb.core",list(usb.core.find(idVendor=idVendor, find_all=True)))
+			if len(list(usb.core.find(idVendor=idVendor, idProduct=idProduct, find_all=True))) >= Anzahl:
 				L4logE("usb.core find")
 				gefunden = True
 		except:
@@ -5824,6 +5839,13 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list2.append(getConfigListEntry(_("- Split Screen"), LCD4linux.VolSplit))
 				self.list2.append(getConfigListEntry(_("- Color"), LCD4linux.VolColor))
 				self.list2.append(getConfigListEntry(_("- Shaded"), LCD4linux.VolShadow))
+			self.list2.append(getConfigListEntry(_("Mute"), LCD4linux.Mute))
+			if LCD4linux.Mute.value != "0":
+				self.list2.append(getConfigListEntry(_("- which LCD"), LCD4linux.MuteLCD))
+				self.list2.append(getConfigListEntry(_("- Font Size"), LCD4linux.MuteSize))
+				self.list2.append(getConfigListEntry(_("- Position"), LCD4linux.MutePos))
+				self.list2.append(getConfigListEntry(_("- Alignment"), LCD4linux.MuteAlign))
+				self.list2.append(getConfigListEntry(_("- Split Screen"), LCD4linux.MuteSplit))
 			self.list2.append(getConfigListEntry(_("Audio/Video"), LCD4linux.AV))
 			if LCD4linux.AV.value != "0":
 				self.list2.append(getConfigListEntry(_("- which LCD"), LCD4linux.AVLCD))
@@ -6371,6 +6393,13 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list3.append(getConfigListEntry(_("- Split Screen"), LCD4linux.MPVolSplit))
 				self.list3.append(getConfigListEntry(_("- Color"), LCD4linux.MPVolColor))
 				self.list3.append(getConfigListEntry(_("- Shaded"), LCD4linux.MPVolShadow))
+			self.list3.append(getConfigListEntry(_("Mute"), LCD4linux.MPMute))
+			if LCD4linux.MPMute.value != "0":
+				self.list3.append(getConfigListEntry(_("- which LCD"), LCD4linux.MPMuteLCD))
+				self.list3.append(getConfigListEntry(_("- Font Size"), LCD4linux.MPMuteSize))
+				self.list3.append(getConfigListEntry(_("- Position"), LCD4linux.MPMutePos))
+				self.list3.append(getConfigListEntry(_("- Alignment"), LCD4linux.MPMuteAlign))
+				self.list3.append(getConfigListEntry(_("- Split Screen"), LCD4linux.MPMuteSplit))
 			self.list3.append(getConfigListEntry(_("Clock"), LCD4linux.MPClock))
 			if LCD4linux.MPClock.value != "0":
 				self.list3.append(getConfigListEntry(_("- which LCD"), LCD4linux.MPClockLCD))
@@ -7821,7 +7850,8 @@ class UpdateStatus(Screen):
 		self.LEventsNext = None
 		self.LEventsDesc = None
 		self.Ltuner_number = None
-		self.Lvol = None
+		self.LvolM = False
+		self.Lvol  = None
 		self.ref = None
 		self.LsreftoString = None
 		self.LsrefFile = ""
@@ -7860,6 +7890,7 @@ class UpdateStatus(Screen):
 		self.LaudioBitrate = ""
 		self.videoBitrate = None
 		self.audioBitrate = None
+		self.LisRefresh = False
 		self.Refresh = "0"
 		self.iName=""
 		self.iT="0.0"
@@ -8126,7 +8157,7 @@ class UpdateStatus(Screen):
 			try:
 				if int(LCD4linux.SonosPingTimeout.value) > 0:
 					r = ping.doOne(LCD4linux.SonosIP.value,int(LCD4linux.SonosPingTimeout.value)/1000.0)
-					if r == None or r > int(LCD4linux.SonosPingTimeout.value)/1000.0:
+					if r == None or r > int(LCD4linux.SonosPingTimeout.value)/1000.0 and self.SonosRunning:
 						self.SonosTrack = {}
 						self.SonosRunning = False
 						isMediaPlayer = ""
@@ -8140,13 +8171,13 @@ class UpdateStatus(Screen):
 #					cti = {u'current_transport_status': 'OK', u'current_transport_state': 'STOPPED', u'current_transport_speed': '1'}
 				self.SonosInfo = cti.get("current_transport_state","STOPPED")
 				if self.SonosInfo != "PLAYING":
-					self.SonosTrack = {}
-					if self.SonosRunning == True:
+					if self.SonosRunning:
+						self.SonosTrack = {}
 						self.SonosSoCo = None
-					self.SonosRunning = False
-					isMediaPlayer = ""
-					getBilder()
-					L4log("Sonos stopped")
+						self.SonosRunning = False
+						isMediaPlayer = ""
+						getBilder()
+						L4log("Sonos stopped")
 				else:
 					self.SonosTrack = self.SonosSoCo.get_current_track_info()
 					self.Lvol = self.SonosSoCo.volume
@@ -8182,7 +8213,7 @@ class UpdateStatus(Screen):
 					r = ping.doOne(LCD4linux.YMCastIP.value,int(LCD4linux.YMCastPingTimeout.value)/1000.0)
 					if r == None or r > int(LCD4linux.YMCastPingTimeout.value)/1000.0:
 						r = ping.doOne(LCD4linux.YMCastIP.value,int(LCD4linux.YMCastPingTimeout.value)/1000.0)
-					if r == None or r > int(LCD4linux.YMCastPingTimeout.value)/1000.0:
+					if (r == None or r > int(LCD4linux.YMCastPingTimeout.value)/1000.0) and self.YMCastRunning:
 						self.YMCastInfo = {}
 						self.YMCastRunning = False
 						isMediaPlayer = ""
@@ -8193,15 +8224,16 @@ class UpdateStatus(Screen):
 				if self.YMCastInfo == {}:
 					self.YMCastInfo = self.YMCastSoCo.getPlayInfo()
 				if self.YMCastInfo.get("playback","") != "play":
-					self.YMCastInfo = {}
-					if self.YMCastRunning == True:
+					if self.YMCastRunning:
+						self.YMCastInfo = {}
 						self.YMCastSoCo = None
-					self.YMCastRunning = False
-					isMediaPlayer = ""
-					getBilder()
-					L4log("YMC stopped")
+						self.YMCastRunning = False
+						isMediaPlayer = ""
+						getBilder()
+						L4log("YMC stopped")
 				else:
 					self.Lvol = self.YMCastSoCo.getStatus().get("volume",0)
+					self.LvolM = self.YMCastSoCo.getStatus().get("mute",False)
 					if self.YMCastRunning == False:
 						self.YMCastSoCo = None
 					self.YMCastRunning = True
@@ -8461,6 +8493,11 @@ class UpdateStatus(Screen):
 			self.YMCastCheckTimer += 1
 		if isVideoPlaying !=0:
 			isVideoPlaying+=1
+		if not self.SonosRunning and not self.YMCastRunning:
+			volctrl = eDVBVolumecontrol.getInstance()
+			if volctrl:
+				if self.LvolM != volctrl.isMuted():
+					self.LisRefresh = True
 #		print "----",LCD4linuxPIC.TimeZone, LCD4linuxPIC.Long, LCD4linuxPIC.Lat
 #		print "--------",isVideoPlaying, isMediaPlayer, ConfigMode, ScreenActive[0]
 #		print "[LCD4linux]",strftime("%M"),BilderTime,ConfigMode,"#",ScreenActive[0],SaveScreenActive,"#",isVideoPlaying,OSDon,FritzTime
@@ -8478,9 +8515,10 @@ class UpdateStatus(Screen):
 			if self.NetworkConnectionAvailable or self.NetworkConnectionAvailable == None:
 				if ((str(LCD4linux.RBoxTimer.value) != "0" or str(LCD4linux.MPRBoxTimer.value) != "0") and (not Standby.inStandby or self.SonosRunning or self.YMCastRunning)) or (str(LCD4linux.StandbyRBoxTimer.value) != "0" and Standby.inStandby):
 					self.downloadwwwBoxTimer([[LCD4linux.RBoxTimerName1.value,0]])
-		if strftime("%M")!=self.DataMinute or BilderTime == 1 or self.StandbyChanged != Standby.inStandby or ConfigMode or (ScreenActive[0] != SaveScreenActive) or isVideoPlaying > 2 or OSDon == 3 or FritzTime > 0 or self.LisRecording != self.session.nav.RecordTimer.isRecording():
+		if strftime("%M")!=self.DataMinute or BilderTime == 1 or self.StandbyChanged != Standby.inStandby or ConfigMode or (ScreenActive[0] != SaveScreenActive) or isVideoPlaying > 2 or OSDon == 3 or FritzTime > 0 or self.LisRecording != self.session.nav.RecordTimer.isRecording() or self.LisRefresh == True:
 			L4log("Data-Build")
 			self.Refresh = "1"
+			self.LisRefresh = False
 			isVideoPlaying = 0
 			self.LgetGoogleCover = None
 			if strftime("%M")!=self.DataMinute:
@@ -8583,9 +8621,11 @@ class UpdateStatus(Screen):
 		if not self.SonosRunning and not self.YMCastRunning:
 			volctrl = eDVBVolumecontrol.getInstance()
 			if volctrl:
-				self.Lvol = volctrl.getVolume()
+				self.LvolM = volctrl.isMuted()
+				self.Lvol  = volctrl.getVolume()
 			else:
-				self.Lvol = None
+				self.LvolM = False
+				self.Lvol  = None
 		self.Ltimer_list = self.recordtimer.timer_list
 		self.LisRecording = self.session.nav.RecordTimer.isRecording()
 		sref = self.session.nav.getCurrentlyPlayingServiceReference()
@@ -11066,7 +11106,7 @@ def LCD4linuxPIC(self,session):
 			ShadowText(draw,POSX,ConfigPos,self.CoverError,font,"red",True)
 
 # Bild
-	def putBild((ConfigPos, ConfigSize, ConfigSizeH, ConfigAlign, ConfigQuick, ConfigTransp, ConfigFile, ConfigFileOrg), ConfigLCD, draw, im):
+	def putBild((ConfigPos, ConfigSize, ConfigSizeH, ConfigAlign, ConfigQuick, ConfigTransp, ConfigRotate, ConfigFile, ConfigFileOrg), ConfigLCD, draw, im):
 		global QuickList
 		MAX_W,MAX_H = self.im[im].size
 		if ConfigMode == True:
@@ -12432,6 +12472,23 @@ def LCD4linuxPIC(self,session):
 			except:
 				pass
 
+# Mute
+	def putMute((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit), draw, im):
+		if self.LvolM == True:
+			MAX_W,MAX_H = self.im[im].size
+			if ConfigSplit == True:
+				MAX_W = int(MAX_W/2)
+			imW = Image.open(os.path.join(Data,"mute.png"))
+			xx,yy = imW.size
+			x=int(float(ConfigSize)/yy*xx)
+			imW = imW.resize((x,ConfigSize))
+			POSX = getSplit(ConfigSplit,ConfigAlign,MAX_W,x)
+			if str(LCD4linux.PiconTransparenz.value) == "2":
+				imW = imW.convert("RGBA")
+				self.im[im].paste(imW,(POSX,ConfigPos),imW)
+			else:
+				self.im[im].paste(imW,(POSX,ConfigPos))
+
 # show OSCAM
 	def putOSCAM((ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigSplit), draw, im):
 		MAX_W,MAX_H = self.im[im].size
@@ -13592,7 +13649,7 @@ def LCD4linuxPIC(self,session):
 						L4logE("Pic", CUR)
 						ShowPicture = getShowPicture(CUR.get("File",""),0)
 						if ShowPicture != "":
-							putBild((int(CUR.get("Pos",0)),int(CUR.get("Size",100)),int(CUR.get("Height",0)),str(CUR.get("Align","1")),CUR.get("Quick",False),CUR.get("Transp",False), ShowPicture, ShowPicture),0,DR,IM)
+							putBild((int(CUR.get("Pos",0)),int(CUR.get("Size",100)),int(CUR.get("Height",0)),str(CUR.get("Align","1")),CUR.get("Quick",False),CUR.get("Transp",False),0, ShowPicture, ShowPicture),0,DR,IM)
 						else:
 							if CUR.get("Text","") != "":
 								font = ImageFont.truetype(FONT, ConfigTextSize, encoding='unic')
@@ -13905,22 +13962,22 @@ def LCD4linuxPIC(self,session):
 # Bild
 				if LCD4linux.StandbyBild.value !="0" and (ScreenActive[0] in LCD4linux.StandbyBild.value or ScreenActive[-3:] != ["","",""]):
 					ShowPicture = getShowPicture(LCD4linux.StandbyBildFile.value,0)
-					Para = LCD4linux.StandbyBildPos.value, LCD4linux.StandbyBildSize.value, LCD4linux.StandbyBildSizeH.value, LCD4linux.StandbyBildAlign.value, LCD4linux.StandbyBildQuick.value, LCD4linux.StandbyBildTransp.value, ShowPicture, LCD4linux.StandbyBildFile.value
+					Para = LCD4linux.StandbyBildPos.value, LCD4linux.StandbyBildSize.value, LCD4linux.StandbyBildSizeH.value, LCD4linux.StandbyBildAlign.value, LCD4linux.StandbyBildQuick.value, LCD4linux.StandbyBildTransp.value,0, ShowPicture, LCD4linux.StandbyBildFile.value
 					Lput4(LCD4linux.StandbyBildLCD.value,LCD4linux.StandbyBild.value,putBild,Para)
 # Bild 2
 				if LCD4linux.StandbyBild2.value !="0" and (ScreenActive[0] in LCD4linux.StandbyBild2.value or ScreenActive[-3:] != ["","",""]):
 					ShowPicture = getShowPicture(LCD4linux.StandbyBild2File.value,1)
-					Para = LCD4linux.StandbyBild2Pos.value, LCD4linux.StandbyBild2Size.value, LCD4linux.StandbyBild2SizeH.value, LCD4linux.StandbyBild2Align.value, LCD4linux.StandbyBild2Quick.value, LCD4linux.StandbyBild2Transp.value, ShowPicture, LCD4linux.StandbyBild2File.value
+					Para = LCD4linux.StandbyBild2Pos.value, LCD4linux.StandbyBild2Size.value, LCD4linux.StandbyBild2SizeH.value, LCD4linux.StandbyBild2Align.value, LCD4linux.StandbyBild2Quick.value, LCD4linux.StandbyBild2Transp.value,0, ShowPicture, LCD4linux.StandbyBild2File.value
 					Lput4(LCD4linux.StandbyBild2LCD.value,LCD4linux.StandbyBild2.value,putBild,Para)
 # Bild 3
 				if LCD4linux.StandbyBild3.value !="0" and (ScreenActive[0] in LCD4linux.StandbyBild3.value or ScreenActive[-3:] != ["","",""]):
 					ShowPicture = getShowPicture(LCD4linux.StandbyBild3File.value,2)
-					Para = LCD4linux.StandbyBild3Pos.value, LCD4linux.StandbyBild3Size.value, LCD4linux.StandbyBild3SizeH.value, LCD4linux.StandbyBild3Align.value, LCD4linux.StandbyBild3Quick.value, LCD4linux.StandbyBild3Transp.value, ShowPicture, LCD4linux.StandbyBild3File.value
+					Para = LCD4linux.StandbyBild3Pos.value, LCD4linux.StandbyBild3Size.value, LCD4linux.StandbyBild3SizeH.value, LCD4linux.StandbyBild3Align.value, LCD4linux.StandbyBild3Quick.value, LCD4linux.StandbyBild3Transp.value,0, ShowPicture, LCD4linux.StandbyBild3File.value
 					Lput4(LCD4linux.StandbyBild3LCD.value,LCD4linux.StandbyBild3.value,putBild,Para)
 # Bild 4
 				if LCD4linux.StandbyBild4.value !="0" and (ScreenActive[0] in LCD4linux.StandbyBild4.value or ScreenActive[-3:] != ["","",""]):
 					ShowPicture = getShowPicture(LCD4linux.StandbyBild4File.value,0)
-					Para = LCD4linux.StandbyBild4Pos.value, LCD4linux.StandbyBild4Size.value, LCD4linux.StandbyBild4SizeH.value, LCD4linux.StandbyBild4Align.value, LCD4linux.StandbyBild4Quick.value, LCD4linux.StandbyBild4Transp.value, ShowPicture, LCD4linux.StandbyBild4File.value
+					Para = LCD4linux.StandbyBild4Pos.value, LCD4linux.StandbyBild4Size.value, LCD4linux.StandbyBild4SizeH.value, LCD4linux.StandbyBild4Align.value, LCD4linux.StandbyBild4Quick.value, LCD4linux.StandbyBild4Transp.value,0, ShowPicture, LCD4linux.StandbyBild4File.value
 					Lput4(LCD4linux.StandbyBild4LCD.value, LCD4linux.StandbyBild4.value,putBild,Para)
 				Brief1.join()
 				Brief2.join()
@@ -14068,12 +14125,12 @@ def LCD4linuxPIC(self,session):
 # Bild
 			if LCD4linux.MPBild.value !="0" and (ScreenActive[0] in LCD4linux.MPBild.value or ScreenActive[-3:] != ["","",""]):
 				ShowPicture = getShowPicture(LCD4linux.MPBildFile.value,0)
-				Para = LCD4linux.MPBildPos.value, LCD4linux.MPBildSize.value, LCD4linux.MPBildSizeH.value, LCD4linux.MPBildAlign.value, LCD4linux.MPBildQuick.value, LCD4linux.MPBildTransp.value, ShowPicture, LCD4linux.MPBildFile.value
+				Para = LCD4linux.MPBildPos.value, LCD4linux.MPBildSize.value, LCD4linux.MPBildSizeH.value, LCD4linux.MPBildAlign.value, LCD4linux.MPBildQuick.value, LCD4linux.MPBildTransp.value,0, ShowPicture, LCD4linux.MPBildFile.value
 				Lput4(LCD4linux.MPBildLCD.value,LCD4linux.MPBild.value,putBild,Para)
 # Bild 2
 			if LCD4linux.MPBild2.value !="0" and (ScreenActive[0] in LCD4linux.MPBild2.value or ScreenActive[-3:] != ["","",""]):
 				ShowPicture = getShowPicture(LCD4linux.MPBild2File.value,1)
-				Para = LCD4linux.MPBild2Pos.value, LCD4linux.MPBild2Size.value, LCD4linux.MPBild2SizeH.value, LCD4linux.MPBild2Align.value, LCD4linux.MPBild2Quick.value, LCD4linux.MPBild2Transp.value, ShowPicture, LCD4linux.MPBild2File.value
+				Para = LCD4linux.MPBild2Pos.value, LCD4linux.MPBild2Size.value, LCD4linux.MPBild2SizeH.value, LCD4linux.MPBild2Align.value, LCD4linux.MPBild2Quick.value, LCD4linux.MPBild2Transp.value,0, ShowPicture, LCD4linux.MPBild2File.value
 				Lput4(LCD4linux.MPBild2LCD.value,LCD4linux.MPBild2.value,putBild,Para)
 # Cover
 			if LCD4linux.MPCover.value !="0" and (ScreenActive[0] in LCD4linux.MPCover.value or ScreenActive[-3:] != ["","",""]):
@@ -14178,6 +14235,9 @@ def LCD4linuxPIC(self,session):
 # HDD
 			Para = LCD4linux.MPHddPos.value, LCD4linux.MPHddSize.value, LCD4linux.MPHddAlign.value, LCD4linux.MPHddSplit.value, LCD4linux.MPHddType.value
 			Lput(LCD4linux.MPHddLCD.value,LCD4linux.MPHdd.value,putHdd,Para)
+# Mute
+			Para = LCD4linux.MPMutePos.value, LCD4linux.MPMuteSize.value, LCD4linux.MPMuteAlign.value, LCD4linux.MPMuteSplit.value
+			Lput(LCD4linux.MPMuteLCD.value,LCD4linux.MPMute.value,putMute,Para)
 # show OSCAM
 			Para = LCD4linux.MPOSCAMPos.value, LCD4linux.MPOSCAMSize.value, LCD4linux.MPOSCAMColor.value, LCD4linux.MPOSCAMBackColor.value, LCD4linux.MPOSCAMAlign.value, LCD4linux.MPOSCAMSplit.value
 			Lput(LCD4linux.MPOSCAMLCD.value,LCD4linux.MPOSCAM.value,putOSCAM,Para)
@@ -14246,22 +14306,22 @@ def LCD4linuxPIC(self,session):
 # Bild
 			if LCD4linux.Bild.value !="0" and (ScreenActive[0] in LCD4linux.Bild.value or ScreenActive[-3:] != ["","",""]):
 				ShowPicture = getShowPicture(LCD4linux.BildFile.value,0)
-				Para = LCD4linux.BildPos.value, LCD4linux.BildSize.value, LCD4linux.BildSizeH.value, LCD4linux.BildAlign.value, LCD4linux.BildQuick.value, LCD4linux.BildTransp.value, ShowPicture, LCD4linux.BildFile.value
+				Para = LCD4linux.BildPos.value, LCD4linux.BildSize.value, LCD4linux.BildSizeH.value, LCD4linux.BildAlign.value, LCD4linux.BildQuick.value, LCD4linux.BildTransp.value,0, ShowPicture, LCD4linux.BildFile.value
 				Lput4(LCD4linux.BildLCD.value,LCD4linux.Bild.value,putBild,Para)
 # Bild 2
 			if LCD4linux.Bild2.value !="0" and (ScreenActive[0] in LCD4linux.Bild2.value or ScreenActive[-3:] != ["","",""]):
 				ShowPicture = getShowPicture(LCD4linux.Bild2File.value,1)
-				Para = LCD4linux.Bild2Pos.value, LCD4linux.Bild2Size.value, LCD4linux.Bild2SizeH.value, LCD4linux.Bild2Align.value, LCD4linux.Bild2Quick.value, LCD4linux.Bild2Transp.value, ShowPicture, LCD4linux.Bild2File.value
+				Para = LCD4linux.Bild2Pos.value, LCD4linux.Bild2Size.value, LCD4linux.Bild2SizeH.value, LCD4linux.Bild2Align.value, LCD4linux.Bild2Quick.value, LCD4linux.Bild2Transp.value,0, ShowPicture, LCD4linux.Bild2File.value
 				Lput4(LCD4linux.Bild2LCD.value,LCD4linux.Bild2.value,putBild,Para)
 # Bild 3
 			if LCD4linux.Bild3.value !="0" and (ScreenActive[0] in LCD4linux.Bild3.value or ScreenActive[-3:] != ["","",""]):
 				ShowPicture = getShowPicture(LCD4linux.Bild3File.value,2)
-				Para = LCD4linux.Bild3Pos.value, LCD4linux.Bild3Size.value, LCD4linux.Bild3SizeH.value, LCD4linux.Bild3Align.value, LCD4linux.Bild3Quick.value, LCD4linux.Bild3Transp.value, ShowPicture, LCD4linux.Bild3File.value
+				Para = LCD4linux.Bild3Pos.value, LCD4linux.Bild3Size.value, LCD4linux.Bild3SizeH.value, LCD4linux.Bild3Align.value, LCD4linux.Bild3Quick.value, LCD4linux.Bild3Transp.value,0, ShowPicture, LCD4linux.Bild3File.value
 				Lput4(LCD4linux.Bild3LCD.value,LCD4linux.Bild3.value,putBild,Para)
 # Bild 4
 			if LCD4linux.Bild4.value !="0" and (ScreenActive[0] in LCD4linux.Bild4.value or ScreenActive[-3:] != ["","",""]):
 				ShowPicture = getShowPicture(LCD4linux.Bild4File.value,0)
-				Para = LCD4linux.Bild4Pos.value, LCD4linux.Bild4Size.value, LCD4linux.Bild4SizeH.value, LCD4linux.Bild4Align.value, LCD4linux.Bild4Quick.value, LCD4linux.Bild4Transp.value, ShowPicture, LCD4linux.Bild4File.value
+				Para = LCD4linux.Bild4Pos.value, LCD4linux.Bild4Size.value, LCD4linux.Bild4SizeH.value, LCD4linux.Bild4Align.value, LCD4linux.Bild4Quick.value, LCD4linux.Bild4Transp.value,0, ShowPicture, LCD4linux.Bild4File.value
 				Lput4(LCD4linux.Bild4LCD.value,LCD4linux.Bild4.value,putBild,Para)
 # HTTP WWW Site
 			Para = 1,LCD4linux.WWW1Pos.value,LCD4linux.WWW1Size.value,LCD4linux.WWW1Align.value,LCD4linux.WWW1CutX.value,LCD4linux.WWW1CutY.value,LCD4linux.WWW1CutW.value,LCD4linux.WWW1CutH.value
@@ -14385,6 +14445,9 @@ def LCD4linuxPIC(self,session):
 # HDD
 			Para = LCD4linux.HddPos.value, LCD4linux.HddSize.value, LCD4linux.HddAlign.value, LCD4linux.HddSplit.value, LCD4linux.HddType.value
 			Lput(LCD4linux.HddLCD.value,LCD4linux.Hdd.value,putHdd,Para)
+# Mute
+			Para = LCD4linux.MutePos.value, LCD4linux.MuteSize.value, LCD4linux.MuteAlign.value, LCD4linux.MuteSplit.value
+			Lput(LCD4linux.MuteLCD.value,LCD4linux.Mute.value,putMute,Para)
 # show OSCAM
 			Para = LCD4linux.OSCAMPos.value, LCD4linux.OSCAMSize.value, LCD4linux.OSCAMColor.value, LCD4linux.OSCAMBackColor.value, LCD4linux.OSCAMAlign.value, LCD4linux.OSCAMSplit.value
 			Lput(LCD4linux.OSCAMLCD.value,LCD4linux.OSCAM.value,putOSCAM,Para)
@@ -14646,8 +14709,8 @@ def Plugins(**kwargs):
 	where = [PluginDescriptor.WHERE_SESSIONSTART, 
 	PluginDescriptor.WHERE_AUTOSTART], 
 	fnc = autostart)]
-	list.append(PluginDescriptor(name="LCD4Linux", 
-	description="LCD4Linux", 
+	list.append(PluginDescriptor(name="LCD4linux", 
+	description=_("LCD4linux"), 
 	where = PluginDescriptor.WHERE_MENU,
 	fnc = setup))
 	list.append(PluginDescriptor(name = _("LCD4Linux"),
