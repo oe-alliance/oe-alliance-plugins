@@ -26,6 +26,17 @@ AM_PATH_PYTHON
 AX_PYTHON_DEVEL
 AX_PTHREAD
 
+AC_ARG_WITH(amlplugins,
+	AC_HELP_STRING([--with-amlplugins], [have amlplugins]),
+	[[withamlplugins=$withval]],
+	[[withamlplugins=no]]
+)
+if test x"$withamlplugins" != xno ; then
+	AC_DEFINE(HAVE_AMLPLUGINS, 1,[Define when using a amlplugins])
+fi
+AM_CONDITIONAL(HAVE_AMLPLUGINS, test x"$withamlplugins" != xno)
+
+
 AC_ARG_WITH(arch,
 	[  --with-arch=NAME box arch [[none,ah4,mipsel...]]],
 	[ARCH="$withval"],[ARCH="mipsel"])
