@@ -14,7 +14,7 @@ from boxbranding import getImageDistro, getBoxType
 def getRcuDefaultType():
 	if getBoxType() in ["vuultimo4k"]:
 		return "type5"
-	elif getBoxType() in ["vuzero4k"]:
+	elif getBoxType() in ["vuuno4kse","vuzero4k"]:
 		return "type6"
 	return "legacy"
 
