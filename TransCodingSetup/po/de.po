@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-07 14:04+0200\n"
-"PO-Revision-Date: 2016-05-07 14:04+0200\n"
+"PO-Revision-Date: 2018-06-17 12:02+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: ViX <LL@li.org>\n"
 "Language: nl_DE\n"
@@ -16,23 +16,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.0.8\n"
 
 #: ../src/plugin.py:57
 msgid "enable"
-msgstr ""
+msgstr "aktivieren"
 
 #: ../src/plugin.py:57
 msgid "disable"
-msgstr ""
+msgstr "deaktivieren"
 
 #: ../src/plugin.py:80
 msgid "On"
-msgstr ""
+msgstr "An"
 
 #: ../src/plugin.py:80
 msgid "Off"
-msgstr ""
+msgstr "Aus"
 
 #: ../src/plugin.py:84
 msgid "480p"
@@ -180,7 +180,7 @@ msgstr ""
 
 #: ../src/plugin.py:357
 msgid "2nd transcoding and PIP are mutually exclusive."
-msgstr ""
+msgstr "2nd Transcoding und PIP schließen sich gegenseitig aus."
 
 #: ../src/plugin.py:358
 #, python-format
@@ -189,19 +189,19 @@ msgstr ""
 
 #: ../src/plugin.py:360
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: ../src/plugin.py:361
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: ../src/plugin.py:362
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: ../src/plugin.py:363 ../src/plugin.py:529
 msgid "Advanced"
-msgstr ""
+msgstr "Fortgeschritten"
 
 #: ../src/plugin.py:407
 msgid "This model does not support transcoding."
@@ -269,7 +269,7 @@ msgstr ""
 
 #: ../src/plugin.py:517
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Wirklich schließen ohne zu speichern?"
 
 #: ../src/plugin.py:526
 msgid "Normal"
