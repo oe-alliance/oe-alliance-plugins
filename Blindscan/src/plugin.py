@@ -708,7 +708,7 @@ class Blindscan(ConfigListScreen, Screen):
 		elif getBrandOEM() == 'azbox':
 			cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
 			self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
-		elif getBrandOEM() == 'xcore':
+		elif getBrandOEM() == 'xcore' or getBrandOEM() == 'edision':
 			cmd = "blindscan --start=%d --stop=%d --min=%d --max=%d --slot=%d --i2c=%d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, self.feid, self.getNimSocket(self.feid))
 			if tab_pol[pol]:
 				cmd += " --vertical"
