@@ -26,6 +26,10 @@ if DREAMBOX
 SUBDIRS +=  DMBlindscan
 endif
 
+if DINOBOT
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if XTREND
 SUBDIRS += XtrendFancontrol XtrendRemote
 endif
