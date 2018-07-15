@@ -78,6 +78,7 @@ class TerrestrialScan(Screen):
 		self.selectedNIM = -1
 		self.uhf_vhf = "uhf"
 		self.networkid = 0
+		self.restrict_to_networkid = False
 		if args:
 			if "feid" in args:
 				self.selectedNIM = args["feid"]
@@ -85,6 +86,8 @@ class TerrestrialScan(Screen):
 				self.uhf_vhf = args["uhf_vhf"]
 			if "networkid" in args:
 				self.networkid = args["networkid"]
+			if "restrict_to_networkid" in args:
+				self.restrict_to_networkid = args["restrict_to_networkid"]
 		self.isT2tuner = False
 		self.frontend = None
 		self.rawchannel = None
@@ -330,6 +333,10 @@ class TerrestrialScan(Screen):
 
 	def tsidOnidWait(self):
 		if self.tsid is not None and self.onid is not None:
+			if self.tsid < 0 or self.onid < 0:
+				print "[TerrestrialScan][tsidOnidWait] failed to properly read tsid & onid. Maybe the transponder is very weak."
+				self.search()
+				return
 			print "[TerrestrialScan][tsidOnidWait] tsid & onid found", self.tsid, self.onid
 			self.signalQualityCounter = 0
 			self.signalQualitytimer = eTimer()
@@ -358,7 +365,7 @@ class TerrestrialScan(Screen):
 				found = {"frequency": self.frequency, "tsid": self.tsid, "onid": self.onid, "system": self.system, "bandwidth": self.bandwidth,"signalQuality": signalQuality}
 				self.transponders_found.append(self.frequency)
 				tsidOnidKey = "%x:%x" % (self.tsid, self.onid)
-				if (tsidOnidKey not in self.transponders_unique or self.transponders_unique[tsidOnidKey]["signalQuality"] < signalQuality) and (self.networkid == 0 or self.networkid == self.onid):
+				if (tsidOnidKey not in self.transponders_unique or self.transponders_unique[tsidOnidKey]["signalQuality"] < signalQuality) and (not self.restrict_to_networkid or self.networkid == self.onid):
 					self.transponders_unique[tsidOnidKey] = found
 				print "[TerrestrialScan][signalQualityWait] transponder details", found
 				self.search()
