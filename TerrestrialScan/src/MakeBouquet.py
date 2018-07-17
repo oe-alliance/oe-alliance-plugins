@@ -392,7 +392,7 @@ class MakeBouquet(Screen):
 
 	def readBouquetIndex(self):
 		try:
-			bouquets = open(self.bouquetsIndexFilename, "r")
+			bouquets = open(self.path + "/" + self.bouquetsIndexFilename, "r")
 		except Exception, e:
 			return ""
 		content = bouquets.read()
