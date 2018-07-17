@@ -1335,7 +1335,7 @@ def BlindscanCallback(close, answer):
 
 def BlindscanMain(session, close=None, **kwargs):
 	have_Support_Blindscan = False
-	try;
+	try:
 		if 'Supports_Blind_Scan: yes' in open('/proc/bus/nim_sockets').read():
 			have_Support_Blindscan = True
 	except:
