@@ -1334,7 +1334,13 @@ def BlindscanCallback(close, answer):
 		close(True)
 
 def BlindscanMain(session, close=None, **kwargs):
-	if 'Supports_Blind_Scan: yes' in open('/proc/bus/nim_sockets').read():
+	have_Support_Blindscan = False
+	try;
+		if 'Supports_Blind_Scan: yes' in open('/proc/bus/nim_sockets').read():
+			have_Support_Blindscan = True
+	except:
+		pass
+	if have_Support_Blindscan:
 		import dmmBlindScan
 		session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
 	else:
