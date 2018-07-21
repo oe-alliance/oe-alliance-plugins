@@ -353,7 +353,7 @@ class MakeBouquet(Screen):
 				self.transponder["system"] = 1
 
 			if "frequency" in transponders[0] and abs((transponders[0]["frequency"]*10) - self.transponder["frequency"]) < 1000000:
-				"[MakeBouquet][readNIT] updating transponder frequency from %d MHz to %d MHz" % (self.transponder["frequency"]/1000000, transponders[0]["frequency"]/100000)
+				print "[MakeBouquet][readNIT] updating transponder frequency from %d MHz to %d MHz" % (self.transponder["frequency"]/1000000, transponders[0]["frequency"]/100000)
 				self.transponder["frequency"] = transponders[0]["frequency"]*10
 
 		LCNs = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] == 0x83 and t["original_network_id"] == self.transponder["onid"]]
