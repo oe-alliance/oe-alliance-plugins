@@ -350,7 +350,7 @@ def initLED():
 		else:
 			setvfdBrightness("255")
 
-	if BOX in ('gbquad4k', 'gbue4k'):
+	if BOX in ('gbquad4k', 'gbue4k', 'gbquadplus'):
 		if config.plugins.VFD_Giga.ledDSBY2.value:
 			setvfdDSBY2(config.plugins.VFD_Giga.ledDSBY2.getValue())
 
