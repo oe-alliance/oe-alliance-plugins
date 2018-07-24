@@ -396,7 +396,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Enable led"), config.plugins.VFD_Giga.setLed))
 		if config.plugins.VFD_Giga.setLed.value:
-			if BOX in ("gbquad4k", "gbue4k"):
+			if BOX in ("gbquad4k", "gbue4k", 'gbquadplus'):
 				self.list.append(getConfigListEntry(_("Led Deep Standby"), config.plugins.VFD_Giga.ledDSBY2))
 			self.list.append(getConfigListEntry(_("Led state RUN"), config.plugins.VFD_Giga.ledRUN))
 			self.list.append(getConfigListEntry(_("Led state Standby"), config.plugins.VFD_Giga.ledSBY))
