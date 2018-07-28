@@ -14,7 +14,6 @@ from enigma import eDVBFrontendParameters, eDVBFrontendParametersTerrestrial, eD
 import os
 import sys
 
-from datetime import datetime
 import time
 
 from Tools.Directories import resolveFilename, fileExists
