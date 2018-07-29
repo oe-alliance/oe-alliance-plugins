@@ -378,6 +378,7 @@ TempFanControl/po/Makefile
 
 TerrestrialScan/Makefile
 TerrestrialScan/images/Makefile
+TerrestrialScan/lib/Makefile
 TerrestrialScan/meta/Makefile
 TerrestrialScan/po/Makefile
 TerrestrialScan/src/Makefile
