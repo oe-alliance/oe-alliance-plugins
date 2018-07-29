@@ -30,6 +30,10 @@ if DINOBOT
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if CC1
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if XTREND
 SUBDIRS += XtrendFancontrol XtrendRemote
 endif
