@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:30+0200\n"
+"PO-Revision-Date: 2018-07-30 21:55+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 
 msgid " "
-msgstr ""
+msgstr " "
 
 msgid ""
 "!!(Empty)\n"
@@ -29,10 +29,10 @@ msgstr ""
 "S'il vous plait, introduire le"
 
 msgid "* RC Help"
-msgstr ""
+msgstr "* Aide RC"
 
 msgid "* Start YouTube TV"
-msgstr ""
+msgstr "* Démarrer YouTube TV"
 
 msgid "About"
 msgstr "À propos"
@@ -41,7 +41,7 @@ msgid "Add"
 msgstr "Ajouter"
 
 msgid "Back"
-msgstr ""
+msgstr "Arrière"
 
 msgid "Backspace Key"
 msgstr "Touche retour arrière"
@@ -99,7 +99,7 @@ msgid "Direct Input(Category)"
 msgstr "Encodage direct (Catégorie)"
 
 msgid "Do not show YouTube TV Starter again"
-msgstr ""
+msgstr "Ne montrez pas YouTube TV Starter à nouveau"
 
 msgid "Do you want to delete the bookmark?"
 msgstr "Voulez-vous effacer le favori?"
@@ -123,10 +123,10 @@ msgid "Exit"
 msgstr "Sortir"
 
 msgid "Exit the Browser."
-msgstr ""
+msgstr "Quittez le navigateur."
 
 msgid "Exit the YouTube TV"
-msgstr ""
+msgstr "Sortir de YouTube TV"
 
 msgid "File"
 msgstr "Fichier"
@@ -185,7 +185,7 @@ msgid "Keyboard"
 msgstr "Clavier"
 
 msgid "Keyboard Layout"
-msgstr ""
+msgstr "Agencements de claviers"
 
 msgid "Left Key"
 msgstr "Touche gauche"
@@ -197,16 +197,16 @@ msgid "Mouse"
 msgstr "Souris"
 
 msgid "Move down"
-msgstr ""
+msgstr "Déplacer vers le bas"
 
 msgid "Move left"
-msgstr ""
+msgstr "Déplacer à gauche"
 
 msgid "Move right"
-msgstr ""
+msgstr "Déplacer à droite"
 
 msgid "Move up"
-msgstr ""
+msgstr "Déplacer vers le haut"
 
 msgid "Name"
 msgstr "Nom"
@@ -240,13 +240,13 @@ msgid "PageUp Key"
 msgstr "Touche page du haut"
 
 msgid "Pause current video"
-msgstr ""
+msgstr "Pause de la vidéo actuelle"
 
 msgid "Play current video"
-msgstr ""
+msgstr "Lire la vidéo actuelle"
 
 msgid "Play ther selected the video"
-msgstr ""
+msgstr "Lecture de la vidéo sélectionnée"
 
 msgid "Please choose an HbbTV application."
 msgstr "Merci de choisir une application HbbTV."
@@ -261,13 +261,13 @@ msgid "Please enter URL here"
 msgstr "Entrer l'URL ici"
 
 msgid "Position Setup"
-msgstr ""
+msgstr "Paramètres positionneur"
 
 msgid "Preference"
 msgstr "Préférence"
 
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Vraiment fermer sans sauver les paramètres?"
 
 msgid "Return"
 msgstr "Retour"
@@ -282,7 +282,7 @@ msgid "Save"
 msgstr "Sauvegarder"
 
 msgid "Search a video"
-msgstr ""
+msgstr "Chercher une vidéo"
 
 msgid "Set as Startpage"
 msgstr "Définir une page d'accueil"
@@ -294,10 +294,10 @@ msgid "Show the Virtual keyboard window."
 msgstr "Afficher la fenêtre du clavier virtuel."
 
 msgid "Skip backward 10 sec"
-msgstr ""
+msgstr "Sauter en arrière 10 sec."
 
 msgid "Skip forward 10 sec"
-msgstr ""
+msgstr "Sauter en avant 10 sec."
 
 msgid "Start"
 msgstr "Démarrer"
@@ -306,7 +306,7 @@ msgid "Start Page"
 msgstr "Page d'accueil"
 
 msgid "Start YouTube TV"
-msgstr ""
+msgstr "Démarrer YouTube TV"
 
 msgid "Start/Stop"
 msgstr "Démarrer/Arrêter"
@@ -318,7 +318,7 @@ msgid "Stop"
 msgstr "Arrêter"
 
 msgid "Stop current video"
-msgstr ""
+msgstr "Arrêter la vidéo actuelle"
 
 msgid "Switch to keyboard/mouse mode."
 msgstr "Basculer entre le mode clavier/souris"
@@ -339,25 +339,25 @@ msgid "YouTube TV"
 msgstr ""
 
 msgid "YouTube TV Settings"
-msgstr ""
+msgstr "Réglages de YouTube TV"
 
 msgid "YouTube TV URL"
-msgstr ""
+msgstr "YouTube TV URL"
 
 msgid "YouTube TV is a new way to watch YouTube videos"
-msgstr ""
+msgstr "YouTube TV est une nouvelle façon de regarder les vidéos de YouTube"
 
 msgid "height"
-msgstr ""
+msgstr "hauteur"
 
 msgid "left"
-msgstr ""
+msgstr "gauche"
 
 msgid "start opera web browser"
 msgstr "Démarrer Opera web browser"
 
 msgid "top"
-msgstr ""
+msgstr "haut"
 
 msgid "width"
-msgstr ""
+msgstr "largeur"

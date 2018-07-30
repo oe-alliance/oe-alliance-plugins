@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:27+0200\n"
+"PO-Revision-Date: 2018-07-30 21:48+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,11 +11,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
 msgid "Always off"
-msgstr ""
+msgstr "Toujours éteinte"
 
 msgid "Blink Record Led"
 msgstr "LED d'enregistrement clignotante"
@@ -24,50 +24,49 @@ msgid "Blue"
 msgstr "Bleu"
 
 msgid "Brightness"
-msgstr ""
+msgstr "Luminosité"
 
 msgid "Brightness Standby"
-msgstr ""
+msgstr "Luminosité En veille"
 
 msgid "Cancel"
 msgstr "Annuler"
 
 msgid "Channel number with leading zeros"
-msgstr ""
+msgstr "Numéro de canal avec des zéros en tête"
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
+msgstr "Numéro de canal dans l'horloge de veille"
 
 msgid "Channelnumber in Standby off"
-msgstr ""
+msgstr "Numéro de canal en veille éteint"
 
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
+msgstr "Numéro de Canal/Horloge dans l’horloge de veille"
 
 msgid "Clock always"
-msgstr ""
+msgstr "Horloge toujours"
 
 msgid "Display/LED"
-msgstr ""
+msgstr "Afficheur/LED"
 
 msgid "Enable led"
 msgstr "Activer LED"
 
 msgid "LED"
-msgstr ""
+msgstr "LED"
 
-#, fuzzy
 msgid "Led Deep Standby"
-msgstr "État LED en veille profonde"
+msgstr "LED en veille profonde"
 
 msgid "Led state Deep Standby"
 msgstr "État LED en veille profonde"
 
 msgid "Led state HDD /dev/sda active"
-msgstr ""
+msgstr "Led état HDD /dev/sda actif"
 
 msgid "Led state HDD /dev/sdb active"
-msgstr ""
+msgstr "Led état HDD /dev/sdb actif"
 
 msgid "Led state RUN"
 msgstr "État LED en fonctionnement"
@@ -97,7 +96,7 @@ msgid "Show clock in Deep Standby"
 msgstr "Afficher l'horloge en veille profonde"
 
 msgid "Show on VFD"
-msgstr ""
+msgstr "Afficher sur VFD"
 
 msgid "Time mode"
 msgstr "Mode heure"

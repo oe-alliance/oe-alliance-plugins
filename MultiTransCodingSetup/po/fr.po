@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: INI\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:44+0200\n"
+"PO-Revision-Date: 2018-07-30 22:12+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: OEA\n"
 "Language: fr\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 msgid "1.0 Mbps"
@@ -95,27 +95,22 @@ msgid "Auto"
 msgstr ""
 
 msgid "Bitrate in bits"
-msgstr ""
+msgstr "Débit binaire en bits"
 
-#, fuzzy
 msgid "Encoder Aspect Ratio"
-msgstr "Aspect du ratio"
+msgstr "Rapport d'aspect de l'encodeur"
 
-#, fuzzy
 msgid "Encoder Bitrate"
-msgstr "débit (Bitrate)"
+msgstr "Encodeur débit binaire"
 
-#, fuzzy
 msgid "Encoder Framerate"
-msgstr "Fréquence d'image (framerate)"
+msgstr "Encodeur fréquence d'image"
 
-#, fuzzy
 msgid "Encoder Interlaced"
-msgstr "Interlacé"
+msgstr "Encodeur entrelacé"
 
-#, fuzzy
 msgid "Encoder Resolution"
-msgstr "Résolution"
+msgstr "Encodeur résolution"
 
 msgid "Exit"
 msgstr "Sortir"
@@ -157,7 +152,7 @@ msgid "Save"
 msgstr "Sauvegarder"
 
 msgid "Setup your timezone."
-msgstr ""
+msgstr "Définir votre fuseau horaire."
 
 msgid "This model does not support transcoding."
 msgstr "Ce modèle ne supporte pas le transcodage."
@@ -180,7 +175,7 @@ msgstr ""
 "\n"
 
 msgid "Video codec"
-msgstr ""
+msgstr "Codec vidéo"
 
 msgid "Yes"
 msgstr "Oui"
