@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-01 19:56+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-07-01 20:56+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -14,143 +14,48 @@ msgstr ""
 "X-Generator: Poedit 1.7.4\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: plugin.py:37
 msgid " ver. 3.2"
 msgstr " Version 3.2"
 
-#: plugin.py:60 plugin.py:62
-msgid "Fan - Off"
-msgstr "Lüfter - Aus"
-
-#: plugin.py:60 plugin.py:62
-msgid "Fan - On"
-msgstr "Lüfter - An"
-
-#: plugin.py:60
-msgid "Fan - Off in standby"
-msgstr "Lüfter - Aus im Stby"
-
-#: plugin.py:60 plugin.py:62
-msgid "Fan - Auto"
-msgstr "Lüfter - Auto"
-
-#: plugin.py:61 plugin.py:62
-msgid "None"
-msgstr "Nein"
-
-#: plugin.py:61
-msgid "HDD Sleeping"
-msgstr "HDD im Ruhezustand"
-
-#: plugin.py:61
-msgid "HDD Temperature"
-msgstr "HDD-Temperatur"
-
-#: plugin.py:63
-msgid "Off"
-msgstr "Aus"
-
-#: plugin.py:63
-msgid "On"
-msgstr "An"
-
-#: plugin.py:107
-msgid "Fan setup:"
-msgstr "Lüfter-Einstellungen:"
-
-#: plugin.py:117
-msgid "Power status"
-msgstr "Power-Status"
-
-#: plugin.py:118 plugin.py:174 plugin.py:176 plugin.py:516
-msgid "System temperature"
-msgstr "System-Temperatur:"
-
-#: plugin.py:119 plugin.py:180
-msgid "Harddisk temperature"
-msgstr "HDD-Temperatur:"
-
-#: plugin.py:120
-msgid "Save"
-msgstr "Speichern"
-
-#: plugin.py:121
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: plugin.py:176 plugin.py:180
-msgid "n.a."
-msgstr "n.v."
-
-#: plugin.py:227
-msgid "Fan mode"
-msgstr "Lüftermodus"
-
-#: plugin.py:228
-msgid "Switch Fan mode on time setting"
-msgstr "Lüftermodus nach Zeit-Vorgabe wechseln"
-
-#: plugin.py:229
-msgid "Watch HDD state"
-msgstr "HDD Status überwachen"
-
-#: plugin.py:230
-msgid "Watch system temp"
-msgstr "System-Temperatur überwachen"
-
-#: plugin.py:234
 msgid "All"
 msgstr "Alle"
 
-#: plugin.py:237
-msgid "Select internal HDD device"
-msgstr "Interne HDD wählen"
+msgid "Cancel"
+msgstr "Abbrechen"
 
-#: plugin.py:245
-msgid "Start time"
-msgstr "Start-Zeit"
-
-#: plugin.py:246
 msgid "End time"
 msgstr "End-Zeit"
 
-#: plugin.py:252
-msgid "Switch ON mode on HDD max.temp. (0 - disable)"
-msgstr "Lüfter anschalten bei HDD-Temp.max.(0 = deaktiv)"
+msgid "Fan - Auto"
+msgstr "Lüfter - Auto"
 
-#: plugin.py:254
-msgid "Switch OFF mode on HDD sleep"
-msgstr "Lüfter ausschalten wenn HDD schläft"
+msgid "Fan - Off"
+msgstr "Lüfter - Aus"
 
-#: plugin.py:255
-msgid "Show temp. HDD to extensions menu"
-msgstr "HDD-Temp. im Erweiterungs-Menü anzeigen"
+msgid "Fan - Off in standby"
+msgstr "Lüfter - Aus im Stby"
 
-#: plugin.py:257
-msgid "Initial fan speed"
-msgstr "Initiale Lüftergeschw."
+msgid "Fan - On"
+msgstr "Lüfter - An"
 
-#: plugin.py:261
-msgid "Switch ON on system temp"
-msgstr "Lüfter anschalten bei Systemtemperatur"
+msgid "Fan Control"
+msgstr "Lüfterkontrolle"
 
-#: plugin.py:311
-msgid ""
-"You may not use this mode!\n"
-"Not found an internal hard drive!"
-msgstr ""
-"Dieser Modus kann nicht verwendet werden.\n"
-"Keine Interne HDD gefunden !"
+msgid "Fan Setup"
+msgstr "Lüfter-Einstellungen"
 
-#: plugin.py:316
-msgid ""
-"Start time OFF mode equal End time OFF mode\n"
-"You may not use this time settings!"
-msgstr ""
-"Start-Zeit und End-Zeit für Lüfter - Aus gleich.\n"
-"Keine verwendbaren Zeit Einstellungen !"
+msgid "Fan mode"
+msgstr "Lüftermodus"
 
-#: plugin.py:322
+msgid "Fan setup:"
+msgstr "Lüfter-Einstellungen:"
+
+msgid "HDD Sleeping"
+msgstr "HDD im Ruhezustand"
+
+msgid "HDD Temperature"
+msgstr "HDD-Temperatur"
+
 msgid ""
 "Harddisk standby after - no standby\n"
 "You may not use this mode!"
@@ -158,30 +63,85 @@ msgstr ""
 "HDD Standby nach - kein Standby\n"
 "Dieser Modus kann nicht verwendet werden !"
 
-#: plugin.py:502 plugin.py:530 plugin.py:534
-msgid "Fan Control"
-msgstr "Lüfterkontrolle"
+msgid "Harddisk temperature"
+msgstr "HDD-Temperatur:"
 
-#: plugin.py:507
 msgid "Harddisks:"
 msgstr "Festplatten:"
 
-#: plugin.py:509
+msgid "Initial fan speed"
+msgstr "Initiale Lüftergeschw."
+
 msgid "No harddisk with temperature sensor found!"
 msgstr "Keine Festplatte mit Temperatur Sensor gefunden!"
 
-#: plugin.py:514
 msgid "No system temperature sensor found!"
 msgstr "Kein System Temperatursensor gefunden!"
 
-#: plugin.py:530 plugin.py:534
-msgid "switch Fan On/Off"
-msgstr "Lüfter Ein/Aus schalten"
+msgid "None"
+msgstr "Nein"
 
-#: plugin.py:531 plugin.py:535
-msgid "Fan Setup"
-msgstr "Lüfter-Einstellungen"
+msgid "Off"
+msgstr "Aus"
 
-#: plugin.py:532
+msgid "On"
+msgstr "An"
+
+msgid "Power status"
+msgstr "Power-Status"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Select internal HDD device"
+msgstr "Interne HDD wählen"
+
 msgid "Show Temp"
 msgstr "Temperaturen anzeigen"
+
+msgid "Show temp. HDD to extensions menu"
+msgstr "HDD-Temp. im Erweiterungs-Menü anzeigen"
+
+msgid "Start time"
+msgstr "Start-Zeit"
+
+msgid ""
+"Start time OFF mode equal End time OFF mode\n"
+"You may not use this time settings!"
+msgstr ""
+"Start-Zeit und End-Zeit für Lüfter - Aus gleich.\n"
+"Keine verwendbaren Zeit Einstellungen !"
+
+msgid "Switch Fan mode on time setting"
+msgstr "Lüftermodus nach Zeit-Vorgabe wechseln"
+
+msgid "Switch OFF mode on HDD sleep"
+msgstr "Lüfter ausschalten wenn HDD schläft"
+
+msgid "Switch ON mode on HDD max.temp. (0 - disable)"
+msgstr "Lüfter anschalten bei HDD-Temp.max.(0 = deaktiv)"
+
+msgid "Switch ON on system temp"
+msgstr "Lüfter anschalten bei Systemtemperatur"
+
+msgid "System temperature"
+msgstr "System-Temperatur:"
+
+msgid "Watch HDD state"
+msgstr "HDD Status überwachen"
+
+msgid "Watch system temp"
+msgstr "System-Temperatur überwachen"
+
+msgid ""
+"You may not use this mode!\n"
+"Not found an internal hard drive!"
+msgstr ""
+"Dieser Modus kann nicht verwendet werden.\n"
+"Keine Interne HDD gefunden !"
+
+msgid "n.a."
+msgstr "n.v."
+
+msgid "switch Fan On/Off"
+msgstr "Lüfter Ein/Aus schalten"

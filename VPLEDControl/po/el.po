@@ -7,93 +7,73 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-11 20:42+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-01-11 20:44+0200\n"
+"Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
 "Language-Team: \n"
+"Language: el_GR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.8\n"
-"Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: el_GR\n"
 
-#: plugin.py:25
-msgid "Channelnumber in Standby off"
-msgstr "Απενεργοποίηση αριθμού στην αναμονή"
-
-#: plugin.py:25
-msgid "Channelnumber in Standby Clock"
-msgstr "Αριθμός καναλιού στην Αναμονή Ρολόι "
-
-#: plugin.py:25
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Αριθμός καναλιού/Ρολόι στην Αναμονή Ρολόι"
-
-#: plugin.py:25
-msgid "Clock always"
-msgstr "Πάντα Ρολόι"
-
-#: plugin.py:25
 msgid "Always off"
 msgstr "Πάντα εκτός"
 
-#: plugin.py:27
-msgid "yes"
-msgstr "ναι"
-
-#: plugin.py:27
-msgid "no"
-msgstr "όχι"
-
-#: plugin.py:28
-msgid "Off"
-msgstr "Κλειστό"
-
-#: plugin.py:28
-msgid "On/Off"
-msgstr "Ανοικτό/Κλειστό"
-
-#: plugin.py:28
-msgid "Brightness level"
-msgstr "Επίπεδο φωτεινότητας"
-
-#: plugin.py:225 plugin.py:324 plugin.py:331
-msgid "LED Display Setup"
-msgstr "Ρυθμίσεις Οθόνης LED"
-
-#: plugin.py:236
-msgid "Cancel"
-msgstr "Ακύρωση"
-
-#: plugin.py:237
-msgid "Save"
-msgstr "Αποθήκευση"
-
-#: plugin.py:238
-msgid "Update Date/Time"
-msgstr "Ενημέρωση Ημερομηνίας/Ώρας"
-
-#: plugin.py:251 plugin.py:271
-msgid "Show on LED"
-msgstr "Εμφάνιση στη LED"
-
-#: plugin.py:253
-msgid "Time mode"
-msgstr "Λειτουργία ώρας"
-
-#: plugin.py:254 plugin.py:273
-msgid "Show REC-Symbol in Display"
-msgstr "Εμφάνιση συμβόλου REC στην Οθόνη"
-
-#: plugin.py:256 plugin.py:275
-msgid "Show blinking Clock on Display during recording"
-msgstr "Εμφάνιση αναβοσβηνόμενου Ρολογιού στην Οθόνη κατά την εγγραφή"
-
-#: plugin.py:258
 msgid "Brightness Level 1"
 msgstr "Επίπεδο φωτεινότητας 1"
 
-#: plugin.py:259
 msgid "Brightness Level 2"
 msgstr "Επίπεδο φωτεινότητας 2"
+
+msgid "Brightness level"
+msgstr "Επίπεδο φωτεινότητας"
+
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+msgid "Channelnumber in Standby Clock"
+msgstr "Αριθμός καναλιού στην Αναμονή Ρολόι "
+
+msgid "Channelnumber in Standby off"
+msgstr "Απενεργοποίηση αριθμού στην αναμονή"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Αριθμός καναλιού/Ρολόι στην Αναμονή Ρολόι"
+
+msgid "Clock always"
+msgstr "Πάντα Ρολόι"
+
+msgid "LED Display Setup"
+msgstr "Ρυθμίσεις Οθόνης LED"
+
+msgid "Off"
+msgstr "Κλειστό"
+
+msgid "On/Off"
+msgstr "Ανοικτό/Κλειστό"
+
+msgid "Save"
+msgstr "Αποθήκευση"
+
+msgid "Show REC-Symbol in Display"
+msgstr "Εμφάνιση συμβόλου REC στην Οθόνη"
+
+msgid "Show blinking Clock on Display during recording"
+msgstr "Εμφάνιση αναβοσβηνόμενου Ρολογιού στην Οθόνη κατά την εγγραφή"
+
+msgid "Show on LED"
+msgstr "Εμφάνιση στη LED"
+
+msgid "Time mode"
+msgstr "Λειτουργία ώρας"
+
+msgid "Update Date/Time"
+msgstr "Ενημέρωση Ημερομηνίας/Ώρας"
+
+msgid "no"
+msgstr "όχι"
+
+msgid "yes"
+msgstr "ναι"

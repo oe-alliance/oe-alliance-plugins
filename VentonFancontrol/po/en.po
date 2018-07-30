@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:09+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:09+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
@@ -15,72 +15,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:6
-msgid "Off"
-msgstr ""
-
-#: ../src/plugin.py:6
-msgid "On"
-msgstr ""
-
-#: ../src/plugin.py:6
 msgid "Auto"
 msgstr ""
 
-#: ../src/plugin.py:25
-msgid "Fan setup"
-msgstr ""
-
-#: ../src/plugin.py:30
 msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:31
-msgid "Save"
-msgstr "Save"
-
-#: ../src/plugin.py:48
-msgid "Fan mode"
-msgstr ""
-
-#: ../src/plugin.py:105
 msgid "FAN Control"
 msgstr ""
 
-#: ../src/plugin.py:113
 msgid "Fan Control"
 msgstr "Fan Control"
 
-#: ../src/plugin.py:113
-msgid "switch Fan On/Off"
+msgid "Fan mode"
 msgstr ""
 
-#~ msgid "Close"
-#~ msgstr "Close"
+msgid "Fan setup"
+msgstr ""
 
-#~ msgid "Fan basic action"
-#~ msgstr "Fan basic action"
+msgid "Off"
+msgstr ""
 
-#~ msgid "Fan off duration time"
-#~ msgstr "Fan off duration time"
+msgid "On"
+msgstr ""
 
-#~ msgid "Fan on duration time"
-#~ msgstr "Fan on duration time"
+msgid "Save"
+msgstr "Save"
 
-#~ msgid "Really close without saving settings?"
-#~ msgstr "Really close without saving settings?"
-
-#~ msgid "Use Fan timer"
-#~ msgstr "Use Fan timer"
-
-#~ msgid "no"
-#~ msgstr "no"
-
-#~ msgid "off"
-#~ msgstr "off"
-
-#~ msgid "on"
-#~ msgstr "on"
-
-#~ msgid "yes"
-#~ msgstr "yes"
+msgid "switch Fan On/Off"
+msgstr ""

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:10+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-06-03 07:05+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -18,72 +18,32 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:6
-msgid "Off"
-msgstr "Uit"
-
-#: ../src/plugin.py:6
-msgid "On"
-msgstr "Aan"
-
-#: ../src/plugin.py:6
 msgid "Auto"
 msgstr "Auto"
 
-#: ../src/plugin.py:25
-msgid "Fan setup"
-msgstr "Ventilatorinstellingen"
-
-#: ../src/plugin.py:30
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../src/plugin.py:31
-msgid "Save"
-msgstr "Opslaan"
-
-#: ../src/plugin.py:48
-msgid "Fan mode"
-msgstr "Ventilatormode"
-
-#: ../src/plugin.py:105
 msgid "FAN Control"
 msgstr "Ventilatorinstellingen"
 
-#: ../src/plugin.py:113
 msgid "Fan Control"
 msgstr "Ventilatorinstellingen"
 
-#: ../src/plugin.py:113
+msgid "Fan mode"
+msgstr "Ventilatormode"
+
+msgid "Fan setup"
+msgstr "Ventilatorinstellingen"
+
+msgid "Off"
+msgstr "Uit"
+
+msgid "On"
+msgstr "Aan"
+
+msgid "Save"
+msgstr "Opslaan"
+
 msgid "switch Fan On/Off"
 msgstr "schakel ventilator aan/uit"
-
-#~ msgid "Close"
-#~ msgstr "Sluiten"
-
-#~ msgid "Fan basic action"
-#~ msgstr "Fan basis actie"
-
-#~ msgid "Fan off duration time"
-#~ msgstr "Fan uit gedurende"
-
-#~ msgid "Fan on duration time"
-#~ msgstr "Fan aan gedurende"
-
-#~ msgid "Really close without saving settings?"
-#~ msgstr "Afsluiten zonder opslaan?"
-
-#~ msgid "Use Fan timer"
-#~ msgstr "Gebruik fan- timer"
-
-#~ msgid "no"
-#~ msgstr "nee"
-
-#~ msgid "off"
-#~ msgstr "uit"
-
-#~ msgid "on"
-#~ msgstr "aan"
-
-#~ msgid "yes"
-#~ msgstr "ja"

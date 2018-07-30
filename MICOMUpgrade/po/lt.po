@@ -7,53 +7,46 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MICOMUpgrade oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 19:48+0300\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-05 19:53+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:36 ../src/plugin.py:43 ../src/plugin.py:50
-#: ../src/plugin.py:57 ../src/plugin.py:64 ../src/plugin.py:71
-#: ../src/plugin.py:78 ../src/plugin.py:85 ../src/plugin.py:92
-#: ../src/plugin.py:99 ../src/plugin.py:106 ../src/plugin.py:113
-#: ../src/plugin.py:120 ../src/plugin.py:127 ../src/plugin.py:134
-#: ../src/plugin.py:141 ../src/plugin.py:148 ../src/plugin.py:155
-msgid "Front Panel"
-msgstr "Priekinis skydelis"
-
-#: ../src/plugin.py:177
-msgid "Download the firmware (latest)"
-msgstr "Parsisiųsti naujausią mikroprogramą"
-
-#: ../src/plugin.py:178
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: ../src/plugin.py:221
-msgid "Can't found binary file."
-msgstr "Nerasta dvejetainio failo."
-
-#: ../src/plugin.py:224
-msgid "Can't found MD5 file."
-msgstr "Nerasta MD5 failo."
-
-#: ../src/plugin.py:234 ../src/plugin.py:237
-msgid "You chose the incorrect file."
-msgstr "Pasirinkote neteisingą failą."
-
-#: ../src/plugin.py:241
 msgid "Can't find /usr/bin/md5sum"
 msgstr "Nerasta /usr/bin/md5sum"
 
-#: ../src/plugin.py:248
+msgid "Can't found MD5 file."
+msgstr "Nerasta MD5 failo."
+
+msgid "Can't found binary file."
+msgstr "Nerasta dvejetainio failo."
+
+msgid "Can't found device file!!"
+msgstr "Nerasta įrenginio failo!"
+
+msgid "Can't found model name."
+msgstr "Nerasta modelio pavadinimo."
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Close"
+msgstr "Uždaryti"
+
+msgid "Current version:"
+msgstr "Dabartinė versija:"
+
+msgid "Download the firmware (latest)"
+msgstr "Parsisiųsti naujausią mikroprogramą"
+
 #, python-format
 msgid ""
 "Fail to verify data file. \n"
@@ -64,42 +57,26 @@ msgstr ""
 "failas [%s]\n"
 "MD5[%s]"
 
-#: ../src/plugin.py:344
-msgid "Can't found model name."
-msgstr "Nerasta modelio pavadinimo."
+msgid "Front Panel"
+msgstr "Priekinis skydelis"
 
-#: ../src/plugin.py:419
-msgid "Current version:"
-msgstr "Dabartinė versija:"
+msgid "Front Panel Update"
+msgstr "Priekinio skydelio atnaujinimas"
 
-#: ../src/plugin.py:420
 msgid "New version:"
 msgstr "Nauja versija:"
 
-#: ../src/plugin.py:425
-msgid "Close"
-msgstr "Uždaryti"
-
-#: ../src/plugin.py:436
-msgid "This plugin is supported only the INI-Series."
-msgstr "Šis įskiepis palaikomas tik INI."
-
-#: ../src/plugin.py:438
-msgid "Upgrade"
-msgstr "Atnaujinti"
-
-#: ../src/plugin.py:485
 msgid "No selected binary data!!"
 msgstr "Nepasirinkta dvejetainių duomenų!"
 
-#: ../src/plugin.py:492
-msgid "Can't found device file!!"
-msgstr "Nerasta įrenginio failo!"
+msgid "This plugin is supported only the INI-Series."
+msgstr "Šis įskiepis palaikomas tik INI."
 
-#: ../src/plugin.py:517
+msgid "Upgrade"
+msgstr "Atnaujinti"
+
 msgid "You can not upgrade to the same or lower version !"
 msgstr "Negalite atnaujinti į tą pačią, ar žemesnę versiją!"
 
-#: ../src/plugin.py:539
-msgid "Front Panel Update"
-msgstr "Priekinio skydelio atnaujinimas"
+msgid "You chose the incorrect file."
+msgstr "Pasirinkote neteisingą failą."

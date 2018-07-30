@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-06-03 07:07+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: none\n"
@@ -20,31 +20,18 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:137
 msgid "/"
 msgstr "/"
 
-#: ../src/plugin.py:177
-msgid "Yes"
-msgstr "Ja"
+msgid "Alpha Value"
+msgstr "Alpha waarde"
 
-#: ../src/plugin.py:177
-msgid "No, but play video again"
-msgstr "Nee, maar speel video opnieuw"
-
-#: ../src/plugin.py:178
-msgid "Stop playing this movie?"
-msgstr "Stop afspelen?"
-
-#: ../src/plugin.py:318
-msgid "Sorry, video is not available!"
-msgstr "Sorry, video is niet beschikbaar!"
-
-#: ../src/plugin.py:402
 msgid "Enter your input data"
 msgstr "Geef uw data in"
 
-#: ../src/plugin.py:446
+msgid "Exit"
+msgstr "Stop"
+
 msgid ""
 "If you want to quit the Browser,\n"
 "Press RED -> EXIT."
@@ -52,30 +39,29 @@ msgstr ""
 "Als u de browser wilt afsluiten,\n"
 "druk op RED -> EXIT."
 
-#: ../src/plugin.py:448
-msgid "Exit"
-msgstr "Stop"
-
-#: ../src/plugin.py:449
-msgid "Start"
-msgstr "Start"
-
-#: ../src/plugin.py:559
-msgid "Mouse"
-msgstr "Muis"
-
-#: ../src/plugin.py:564
 msgid "Keyboard"
 msgstr "Toetsenbord"
 
-#: ../src/plugin.py:569
-msgid "Alpha Value"
-msgstr "Alpha waarde"
-
-#: ../src/plugin.py:575
 msgid "Language"
 msgstr "Taal"
 
-#: ../src/plugin.py:654
+msgid "Mouse"
+msgstr "Muis"
+
+msgid "No, but play video again"
+msgstr "Nee, maar speel video opnieuw"
+
+msgid "Sorry, video is not available!"
+msgstr "Sorry, video is niet beschikbaar!"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Stop playing this movie?"
+msgstr "Stop afspelen?"
+
 msgid "Web Browser"
 msgstr "Webbrowser"
+
+msgid "Yes"
+msgstr "Ja"

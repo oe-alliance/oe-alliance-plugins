@@ -6,59 +6,73 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 12:49+0200\n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:22
-msgid "Channelnumber in Standby off"
-msgstr ""
-
-#: ../src/plugin.py:22
-msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:22
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:22
-msgid "Clock always"
-msgstr ""
-
-#: ../src/plugin.py:22
 msgid "Always off"
 msgstr ""
 
-#: ../src/plugin.py:183
+msgid "Brightness Level 1"
+msgstr ""
+
+msgid "Brightness Level 2"
+msgstr ""
+
+msgid "Brightness level"
+msgstr ""
+
 msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:184
+msgid "Channelnumber in Standby Clock"
+msgstr ""
+
+msgid "Channelnumber in Standby off"
+msgstr ""
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+msgid "Clock always"
+msgstr ""
+
+msgid "LED Display Setup"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "On/Off"
+msgstr ""
+
 msgid "Save"
 msgstr ""
 
-#: ../src/plugin.py:185
-msgid "Update Date/Time"
+msgid "Show REC-Symbol in Display"
 msgstr ""
 
-#: ../src/plugin.py:198 ../src/plugin.py:212
+msgid "Show blinking Clock on Display during recording"
+msgstr ""
+
 msgid "Show on LED"
 msgstr ""
 
-#: ../src/plugin.py:200
 msgid "Time mode"
 msgstr ""
 
-#: ../src/plugin.py:261
-msgid "LED Display Setup"
+msgid "Update Date/Time"
+msgstr ""
+
+msgid "no"
+msgstr ""
+
+msgid "yes"
 msgstr ""

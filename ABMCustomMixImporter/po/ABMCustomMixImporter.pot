@@ -1,103 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 3GModemManager\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: openATV\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: .\n"
 
-#: src/plugin.py:37
 msgid "1 minute"
 msgstr ""
 
-#: src/plugin.py:37
-msgid "2 minutes"
-msgstr ""
-
-#: src/plugin.py:37
-msgid "3 minutes"
-msgstr ""
-
-#: src/plugin.py:37
-msgid "5 minutes"
-msgstr ""
-
-#: src/plugin.py:37
 msgid "10 minutes"
 msgstr ""
 
-#: src/plugin.py:37
+msgid "2 minutes"
+msgstr ""
+
 msgid "20 minutes"
 msgstr ""
 
-#: src/plugin.py:37
+msgid "3 minutes"
+msgstr ""
+
 msgid "30 minutes"
 msgstr ""
 
-#: src/plugin.py:74
-msgid "Exit"
+msgid "5 minutes"
 msgstr ""
 
-#: src/plugin.py:75
-msgid "Save setup"
+msgid "ABM CustomMix"
 msgstr ""
 
-#: src/plugin.py:76
-msgid "Fetch file"
+msgid "ABM CustomMix Importer"
 msgstr ""
 
-#: src/plugin.py:83
-msgid "Delete file"
-msgstr ""
-
-#: src/plugin.py:106
-msgid "Really close without saving settings?"
-msgstr ""
-
-#: src/plugin.py:135 src/plugin.py:302
-msgid "Dsayers CustomMix"
-msgstr ""
-
-#: src/plugin.py:136
-msgid "Starting importer..."
-msgstr ""
-
-#: src/plugin.py:146
-msgid "Fetching from github"
-msgstr ""
-
-#: src/plugin.py:152
-msgid "Saving CustomMix file"
-msgstr ""
-
-#: src/plugin.py:158
-msgid "File fetched and saved OK"
-msgstr ""
-
-#: src/plugin.py:187
 msgid "Channels importer"
 msgstr ""
 
-#: src/plugin.py:306
+msgid "Delete file"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "Fetch file"
+msgstr ""
+
+msgid "Fetching from github"
+msgstr ""
+
+msgid "File fetched and saved OK"
+msgstr ""
+
 msgid "Main menu"
 msgstr ""
 
-#: src/plugin.py:306
-msgid "Setup"
+msgid "Really close without saving settings?"
 msgstr ""
 
-#: src/plugin.py:306
+msgid "Save setup"
+msgstr ""
+
+msgid "Saving CustomMix file"
+msgstr ""
+
 msgid "Service searching"
 msgstr ""
 
-#: src/plugin.py:313
-msgid "Dsayers CustomMix Importer"
+msgid "Setup"
+msgstr ""
+
+msgid "Starting importer..."
+msgstr ""
+
+msgid "Allows you automatically fetch the CustomMix file."
+msgstr ""
+
+msgid "Enable autofetch"
+msgstr ""
+
+msgid "Import"
+msgstr ""
+
+msgid "Lead time"
+msgstr ""
+
+msgid "Number of minutes prior to the ABM scan that the CustomMix file should be fetched"
+msgstr ""
+
+msgid "Select the CustomMix you want to import"
 msgstr ""

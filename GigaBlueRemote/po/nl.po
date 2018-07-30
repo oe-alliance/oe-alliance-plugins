@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-07-05 15:27+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-05 15:27+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -14,56 +15,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:15
-msgid "Code 1"
-msgstr "Code 1"
+#, python-format
+msgid " within %d seconds."
+msgstr " in %d seconden."
 
-#: ../src/plugin.py:15
-msgid "Code 2"
-msgstr "Code 2"
-
-#: ../src/plugin.py:50 ../src/plugin.py:147 ../src/plugin.py:152
-msgid "Remote Control Code"
-msgstr "Afstandsbedieningscode"
-
-#: ../src/plugin.py:61 ../src/plugin.py:112
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../src/plugin.py:62
+msgid "Code 1"
+msgstr "Code 1"
+
+msgid "Code 2"
+msgstr "Code 2"
+
+msgid "Confirm"
+msgstr "Bevestig"
+
+msgid "FILE DOES NOT EXIST : /proc/stb/ir/rc/customcode"
+msgstr "BESTAND BESTAAT NIET : /proc/stb/ir/rc/customcode"
+
+msgid "Please change now the mode on your RCU."
+msgstr "Verander nu de mode van uw AB."
+
+msgid "Press and hold 'GIGA' & '5' for 5 seconds."
+msgstr "Ingedrukt houden van 'GIGA' & '5' voor 5 seconden."
+
+msgid "Remote Control Code"
+msgstr "Afstandsbedieningscode"
+
+msgid "Remote Control Code:"
+msgstr "Afstandsbedieningscode:"
+
 msgid "Save"
 msgstr "Bevestigen"
 
-#: ../src/plugin.py:73
 #, python-format
 msgid "Sorry, but %s is not supported."
 msgstr "Sorry, maar %s wordt niet ondersteund."
 
-#: ../src/plugin.py:77
-msgid "Remote Control Code:"
-msgstr "Afstandsbedieningscode:"
-
-#: ../src/plugin.py:89
-msgid "FILE DOES NOT EXIST : /proc/stb/ir/rc/customcode"
-msgstr "BESTAND BESTAAT NIET : /proc/stb/ir/rc/customcode"
-
-#: ../src/plugin.py:91
-msgid "Please change now the mode on your RCU."
-msgstr "Verander nu de mode van uw AB."
-
-#: ../src/plugin.py:91
-msgid "Press and hold 'GIGA' & '5' for 5 seconds."
-msgstr "Ingedrukt houden van 'GIGA' & '5' voor 5 seconden."
-
-#: ../src/plugin.py:91
 msgid "Then choose 'Confirm' "
 msgstr "Dan kies 'Bevestig' "
-
-#: ../src/plugin.py:112
-msgid "Confirm"
-msgstr "Bevestig"
-
-#: ../src/plugin.py:118
-#, python-format
-msgid " within %d seconds."
-msgstr " in %d seconden."

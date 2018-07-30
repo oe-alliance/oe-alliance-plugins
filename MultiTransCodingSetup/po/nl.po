@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:44+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-06-03 06:48+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -20,67 +20,152 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:19
-msgid "enable"
-msgstr "inschakelen"
+msgid "1.0 Mbps"
+msgstr ""
 
-#: ../src/plugin.py:19
-msgid "disable"
-msgstr "uitschakelen"
+msgid "1.2 Mbps"
+msgstr ""
 
-#: ../src/plugin.py:30
-msgid "480p"
-msgstr "480p"
+msgid "1.5 Mbps"
+msgstr ""
 
-#: ../src/plugin.py:30
-msgid "576p"
-msgstr "576p"
+msgid "100 kbps"
+msgstr ""
 
-#: ../src/plugin.py:30
-msgid "720p"
-msgstr "720p"
-
-#: ../src/plugin.py:30
-msgid "320x240"
-msgstr "320x240"
-
-#: ../src/plugin.py:30
 msgid "160x120"
 msgstr "160x120"
 
-#: ../src/plugin.py:32
-msgid "4x3"
-msgstr "4x3"
-
-#: ../src/plugin.py:32
 msgid "16x9"
 msgstr "16x9"
 
-#: ../src/plugin.py:32
+msgid "2.0 Mbps"
+msgstr ""
+
+msgid "2.5 Mbps"
+msgstr ""
+
+msgid "23.976 fps"
+msgstr ""
+
+msgid "24 fps"
+msgstr ""
+
+msgid "25 fps"
+msgstr ""
+
+msgid "3.0 Mbps"
+msgstr ""
+
+msgid "3.5 Mbps"
+msgstr ""
+
+msgid "30 fps"
+msgstr ""
+
+msgid "300 kbps"
+msgstr ""
+
+msgid "320x240"
+msgstr "320x240"
+
+msgid "4.0 Mbps"
+msgstr ""
+
+msgid "480p"
+msgstr "480p"
+
+msgid "4x3"
+msgstr "4x3"
+
+msgid "5.0 Mbps"
+msgstr ""
+
+msgid "500 kbps"
+msgstr ""
+
+msgid "576p"
+msgstr "576p"
+
+msgid "720p"
+msgstr "720p"
+
+msgid "800 kbps"
+msgstr ""
+
+msgid "Aspect Ratio"
+msgstr "Aspectratio"
+
 msgid "Auto"
 msgstr "Auto"
 
-#: ../src/plugin.py:33
-msgid "Yes"
-msgstr "la"
+msgid "Bitrate in bits"
+msgstr "Bitrate in bits"
 
-#: ../src/plugin.py:33
-msgid "No"
-msgstr "Nee"
+#, fuzzy
+msgid "Encoder Aspect Ratio"
+msgstr "Encoder 0: Aspectratio"
 
-#: ../src/plugin.py:56
-msgid "Transcoding Setup"
-msgstr "Transcodeerinstellingen"
+#, fuzzy
+msgid "Encoder Bitrate"
+msgstr "Encoder 0: Bitrate"
 
-#: ../src/plugin.py:71
+#, fuzzy
+msgid "Encoder Framerate"
+msgstr "Encoder 0: Framerate"
+
+#, fuzzy
+msgid "Encoder Interlaced"
+msgstr "Interlaced"
+
+#, fuzzy
+msgid "Encoder Resolution"
+msgstr "Encoder 0: Resolutie"
+
 msgid "Exit"
 msgstr "Afsluiten"
 
-#: ../src/plugin.py:72
+msgid "Framerate"
+msgstr "Framerate"
+
+msgid "H.264"
+msgstr ""
+
+msgid "H.265"
+msgstr ""
+
+msgid "Interlaced"
+msgstr "Interlaced"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Multi device transcoding setup"
+msgstr "Multi-apparaatinstellingen"
+
+msgid "Multi-Transcoding Setup"
+msgstr "Multi-transcodeerinstellingen"
+
+msgid "No"
+msgstr "Nee"
+
+msgid "Really close without saving settings?"
+msgstr "Echt afsluiten zonder op te slaan?"
+
+msgid "Resolution"
+msgstr "Resolutie"
+
 msgid "Save"
 msgstr "Opslaan"
 
-#: ../src/plugin.py:76
+msgid "Setup your timezone."
+msgstr ""
+
+msgid "This model does not support transcoding."
+msgstr "Dit model ondersteunt geen transcoding."
+
 msgid ""
 "To use transcoding You can build URL for VLC by Yourself\n"
 "\n"
@@ -88,7 +173,9 @@ msgstr ""
 "Om transcoding te gebruiken, kunt u een URL genereren voor VLC\n"
 "\n"
 
-#: ../src/plugin.py:83
+msgid "Transcoding Setup"
+msgstr "Transcodeerinstellingen"
+
 msgid ""
 "Transcoding from HDMI-IN e.x:\n"
 "\n"
@@ -96,335 +183,14 @@ msgstr ""
 "Transcoderen van HDMI-IN e.x:\n"
 "\n"
 
-#: ../src/plugin.py:101
-msgid "This model does not support transcoding."
-msgstr "Dit model ondersteunt geen transcoding."
+msgid "Video codec"
+msgstr "Videocodec"
 
-#: ../src/plugin.py:106 ../src/plugin.py:109
-msgid "Bitrate in bits"
-msgstr "Bitrate in bits"
+msgid "Yes"
+msgstr "la"
 
-#: ../src/plugin.py:107 ../src/plugin.py:110
-msgid "Framerate"
-msgstr "Framerate"
+msgid "disable"
+msgstr "uitschakelen"
 
-#: ../src/plugin.py:111
-msgid "Resolution"
-msgstr "Resolutie"
-
-#: ../src/plugin.py:112
-msgid "Aspect Ratio"
-msgstr "Aspectratio"
-
-#: ../src/plugin.py:113
-msgid "Interlaced"
-msgstr "Interlaced"
-
-#: ../src/plugin.py:132
-msgid "Min"
-msgstr "Min"
-
-#: ../src/plugin.py:132
-msgid "Max"
-msgstr "Max"
-
-#: ../src/plugin.py:158
-msgid "Really close without saving settings?"
-msgstr "Echt afsluiten zonder op te slaan?"
-
-#: ../src/plugin.py:167
-msgid "Multi-Transcoding Setup"
-msgstr "Multi-transcodeerinstellingen"
-
-#: ../src/plugin.py:168
-msgid "Multi device transcoding setup"
-msgstr "Multi-apparaatinstellingen"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "1.0"
-#~ msgstr "1.0"
-
-#~ msgid "2.0"
-#~ msgstr "2.0"
-
-#~ msgid "2.1"
-#~ msgstr "2.1"
-
-#~ msgid "2.2"
-#~ msgstr "2.2"
-
-#~ msgid "2nd transcoding and PIP are mutually exclusive."
-#~ msgstr "2e transcoding en PiP sluiten elkaar uit."
-
-#~ msgid "3.0"
-#~ msgstr "3.0"
-
-#~ msgid "3.1"
-#~ msgstr "3.1"
-
-#~ msgid "3.2"
-#~ msgstr "3.2"
-
-#~ msgid "4.0"
-#~ msgstr "4.0"
-
-#~ msgid "4.1"
-#~ msgstr "4.1"
-
-#~ msgid "4.2"
-#~ msgstr "4.2"
-
-#~ msgid "5.0"
-#~ msgstr "5.0"
-
-#~ msgid "Advanced"
-#~ msgstr "Geavanceerd"
-
-#~ msgid "Audio codec"
-#~ msgstr "Audiocodec"
-
-#~ msgid "Auto set Framerate / Bitrate"
-#~ msgstr "Stel Framerate/Bitrate automatisch in"
-
-#~ msgid "Bitrate"
-#~ msgstr "Bitrate"
-
-#~ msgid "Cancel"
-#~ msgstr "Annuleer"
-
-#~ msgid "Default"
-#~ msgstr "Default"
-
-#~ msgid "Encoder"
-#~ msgstr "Encoder"
-
-#~ msgid "Encoder 0: Aspect Ratio"
-#~ msgstr "Encoder 0: Aspectratio"
-
-#~ msgid "Encoder 0: Audio codec"
-#~ msgstr "Encoder 0: Audiocodec"
-
-#~ msgid "Encoder 0: Auto mode (Bitrate/Framerate)"
-#~ msgstr "Encoder 0: Auto mode (Bitrate/Framerate)"
-
-#~ msgid "Encoder 0: Bitrate"
-#~ msgstr "Encoder 0: Bitrate"
-
-#~ msgid "Encoder 0: Framerate"
-#~ msgstr "Encoder 0: Framerate"
-
-#~ msgid "Encoder 0: GOP Frame B"
-#~ msgstr "Encoder 0: GOP Frame B"
-
-#~ msgid "Encoder 0: GOP Frame P"
-#~ msgstr "Encoder 0: GOP Frame P"
-
-#~ msgid "Encoder 0: Level"
-#~ msgstr "Encoder 0: Level"
-
-#~ msgid "Encoder 0: Profile"
-#~ msgstr "Encoder 0: Profiel"
-
-#~ msgid "Encoder 0: Resolution"
-#~ msgstr "Encoder 0: Resolutie"
-
-#~ msgid "Encoder 0: Video codec"
-#~ msgstr "Encoder 0: Videocodec"
-
-#~ msgid "Encoder 1: Aspect Ratio"
-#~ msgstr "Encoder 1: Aspectratio"
-
-#~ msgid "Encoder 1: Audio codec"
-#~ msgstr "Encoder 1: Audiocodec"
-
-#~ msgid "Encoder 1: Auto mode (Bitrate/Framerate)"
-#~ msgstr "Encoder 1: Auto mode (Bitrate/Framerate)"
-
-#~ msgid "Encoder 1: Bitrate"
-#~ msgstr "Encoder 1: Bitrate"
-
-#~ msgid "Encoder 1: Framerate"
-#~ msgstr "Encoder 1: Framerate"
-
-#~ msgid "Encoder 1: GOP Frame B"
-#~ msgstr "Encoder 1: GOP Frame B"
-
-#~ msgid "Encoder 1: GOP Frame P"
-#~ msgstr "Encoder 1: GOP Frame P"
-
-#~ msgid "Encoder 1: Level"
-#~ msgstr "Encoder 1: Level"
-
-#~ msgid "Encoder 1: Profile"
-#~ msgstr "Encoder 1: Profiel"
-
-#~ msgid "Encoder 1: Resolution"
-#~ msgstr "Encoder 1: Resolutie"
-
-#~ msgid "Encoder 1: Video codec"
-#~ msgstr "Encoder 1: Videocodec"
-
-#~ msgid "GOP Frame B"
-#~ msgstr "GOP Frame B"
-
-#~ msgid "GOP Frame P"
-#~ msgstr "GOP Frame P"
-
-#~ msgid "Level"
-#~ msgstr "Level"
-
-#~ msgid "Normal"
-#~ msgstr "Normaal"
-
-#~ msgid "Off"
-#~ msgstr "Uit"
-
-#~ msgid "On"
-#~ msgstr "Aan"
-
-#~ msgid "Port"
-#~ msgstr "Poort"
-
-#~ msgid "Profile"
-#~ msgstr "Profiel"
-
-#~ msgid "This model is not support transcoding."
-#~ msgstr "Dit model ondersteunt transcoderen niet."
-
-#~ msgid "Transcoding and PIP are mutually exclusive."
-#~ msgstr "Transcoding en PiP sluiten elkaar uit."
-
-#~ msgid "TranscodingSetup"
-#~ msgstr "Transcoding instellingen"
-
-#~ msgid "Video codec"
-#~ msgstr "Videocodec"
-
-#~ msgid "aac"
-#~ msgstr "aac"
-
-#~ msgid "aac+"
-#~ msgstr "aac+"
-
-#~ msgid "aac+adts"
-#~ msgstr "aac+adts"
-
-#~ msgid "aac+loas"
-#~ msgstr "aac+loas"
-
-#~ msgid "ac3"
-#~ msgstr "ac3"
-
-#~ msgid "advancedsimple"
-#~ msgstr "advancedsimple"
-
-#~ msgid "auto"
-#~ msgstr "auto"
-
-#~ msgid "baseline"
-#~ msgstr "baseline"
-
-#~ msgid "h264"
-#~ msgstr "h264"
-
-#~ msgid "high"
-#~ msgstr "hoog"
-
-#~ msgid "low"
-#~ msgstr "laag"
-
-#~ msgid "main"
-#~ msgstr "hoofd"
-
-#~ msgid "mp3"
-#~ msgstr "mp3"
-
-#~ msgid "mpg"
-#~ msgstr "mpg"
-
-#~ msgid "simple"
-#~ msgstr "Eenvoudig"
-
-#~ msgid ""
-#~ "\n"
-#~ "When transcoding, PIP is disabled."
-#~ msgstr ""
-#~ "\n"
-#~ "Tijdens transcoderen is PIP uitgeschakeld."
-
-#~ msgid ""
-#~ "\n"
-#~ "When transcoding, both PIP and analog video outputs are disabled."
-#~ msgstr ""
-#~ "\n"
-#~ "Tijdens transcoderen zijn PIP en de analoge video-uitgangen uitgeschakeld."
-
-#~ msgid "23976"
-#~ msgstr "23976"
-
-#~ msgid "24000"
-#~ msgstr "24000"
-
-#~ msgid "29970"
-#~ msgstr "29970"
-
-#~ msgid "30000"
-#~ msgstr "30000"
-
-#~ msgid "59940"
-#~ msgstr "59940"
-
-#~ msgid "60000"
-#~ msgstr "60000"
-
-#~ msgid "Allows streams to be transcoded."
-#~ msgstr "Maakt het mogelijk streams te transcoderen."
-
-#~ msgid ""
-#~ "Failed, Encoder %s\n"
-#~ "(%s)."
-#~ msgstr ""
-#~ "Mislukt, encoder %s\n"
-#~ "(%s)."
-
-#~ msgid "OK. Encoder %s."
-#~ msgstr "OK. Encoder %s."
-
-#~ msgid ""
-#~ "OK. Encoder %s.\n"
-#~ "%s"
-#~ msgstr ""
-#~ "OK. Encoder %s.\n"
-#~ "%s"
-
-#~ msgid "Ok"
-#~ msgstr "OK"
-
-#~ msgid "Set the port for transcode."
-#~ msgstr "Stelt de poort voor transcoderen in."
-
-#~ msgid "Sets the bitrate (quality)."
-#~ msgstr "Stelt de bitrate (kwaliteit) in."
-
-#~ msgid "Sets the framerate (fps)."
-#~ msgstr "Stelt de framerate in (fps)."
-
-#~ msgid "This Plugin is available on SOLO2/DUO2"
-#~ msgstr "Deze plugin is beschikbaar voor de SOLO2/DUO2"
-
-#~ msgid "Transcode settings"
-#~ msgstr "Transcodeer instellingen"
-
-#~ msgid "Transcoding"
-#~ msgstr "Bezig met transcoderen"
-
-#~ msgid "Transcoding can be started when there is no corresponding channel recordings."
-#~ msgstr "Transcoderen kan worden ingeschakeld als het betreffende kanaal niet wordt opgenomen (ook geen time-shift)."
-
-#~ msgid "disabled"
-#~ msgstr "uitgeschakeld"
-
-#~ msgid "enabled"
-#~ msgstr "ingeschakeld"
+msgid "enable"
+msgstr "inschakelen"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:52+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:52+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Arabic <moustafagamal@hotmail.com>\n"
@@ -19,47 +19,36 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:56
-msgid "Channelnumber in Standby off"
-msgstr ""
-
-#: ../src/plugin.py:56
-msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:56
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:56
-msgid "Clock always"
-msgstr ""
-
-#: ../src/plugin.py:56
 msgid "Always off"
 msgstr ""
 
 #
-#: ../src/plugin.py:249
 msgid "Cancel"
 msgstr "בטל"
 
-#: ../src/plugin.py:250
+msgid "Channelnumber in Standby Clock"
+msgstr ""
+
+msgid "Channelnumber in Standby off"
+msgstr ""
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+msgid "Clock always"
+msgstr ""
+
 msgid "Save"
 msgstr "שמור"
 
-#: ../src/plugin.py:251
-msgid "Update Date/Time"
-msgstr ""
-
-#: ../src/plugin.py:264 ../src/plugin.py:278
 msgid "Show on VFD"
 msgstr ""
 
-#: ../src/plugin.py:266
 msgid "Time mode"
 msgstr ""
 
-#: ../src/plugin.py:327
+msgid "Update Date/Time"
+msgstr ""
+
 msgid "VFD_SF8"
 msgstr ""

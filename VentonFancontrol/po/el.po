@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2_v2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:09+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:09+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -15,73 +15,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:6
-msgid "Off"
-msgstr ""
-
-#: ../src/plugin.py:6
-msgid "On"
-msgstr ""
-
-#: ../src/plugin.py:6
 msgid "Auto"
 msgstr ""
 
-#: ../src/plugin.py:25
-msgid "Fan setup"
-msgstr ""
-
-#: ../src/plugin.py:30
 msgid "Cancel"
 msgstr ""
 
-#
-#
-#: ../src/plugin.py:31
-msgid "Save"
-msgstr "Αποθήκευση"
-
-#: ../src/plugin.py:48
-msgid "Fan mode"
-msgstr ""
-
-#: ../src/plugin.py:105
 msgid "FAN Control"
 msgstr ""
 
-#: ../src/plugin.py:113
 msgid "Fan Control"
 msgstr ""
 
-#: ../src/plugin.py:113
-msgid "switch Fan On/Off"
+msgid "Fan mode"
+msgstr ""
+
+msgid "Fan setup"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "On"
 msgstr ""
 
 #
 #
-#~ msgid "Close"
-#~ msgstr "Κλείσιμο"
+msgid "Save"
+msgstr "Αποθήκευση"
 
-#
-#
-#~ msgid "Really close without saving settings?"
-#~ msgstr "Κλείσιμο χωρίς αποθήκευση ρυθμίσεων;"
-
-#
-#
-#~ msgid "no"
-#~ msgstr "όχι"
-
-#
-#
-#~ msgid "off"
-#~ msgstr "εκτός"
-
-#
-#
-#~ msgid "on"
-#~ msgstr "εντός"
-
-#
-#~ msgid "yes"
-#~ msgstr "ναι"
+msgid "switch Fan On/Off"
+msgstr ""

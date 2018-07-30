@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:17+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:17+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
@@ -14,51 +14,38 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:17
-msgid "off"
-msgstr "arrêt"
-
-#: ../src/plugin.py:17
-msgid "on"
-msgstr "marche"
-
-#: ../src/plugin.py:19
-msgid "no"
-msgstr "non"
-
-#: ../src/plugin.py:19
-msgid "yes"
-msgstr "oui"
-
-#: ../src/plugin.py:34 ../src/plugin.py:156 ../src/plugin.py:176
-#: ../src/plugin.py:177
-msgid "Fan Control"
-msgstr ""
-
-#: ../src/plugin.py:54
 msgid "Close"
 msgstr "Fermer"
 
-#: ../src/plugin.py:55
-msgid "Save"
-msgstr "Sauver"
+msgid "Fan Control"
+msgstr ""
 
-#: ../src/plugin.py:93
 msgid "Fan basic action"
 msgstr ""
 
-#: ../src/plugin.py:94
-msgid "Use Fan timer"
-msgstr ""
-
-#: ../src/plugin.py:95
-msgid "Fan on duration time"
-msgstr ""
-
-#: ../src/plugin.py:96
 msgid "Fan off duration time"
 msgstr ""
 
-#: ../src/plugin.py:129
+msgid "Fan on duration time"
+msgstr ""
+
 msgid "Really close without saving settings?"
 msgstr "Vraiment fermer sans sauver les paramètres?"
+
+msgid "Save"
+msgstr "Sauver"
+
+msgid "Use Fan timer"
+msgstr ""
+
+msgid "no"
+msgstr "non"
+
+msgid "off"
+msgstr "arrêt"
+
+msgid "on"
+msgstr "marche"
+
+msgid "yes"
+msgstr "oui"

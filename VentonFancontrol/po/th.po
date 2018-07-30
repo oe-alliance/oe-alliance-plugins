@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1-En-Th\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:11+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:11+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Tony @ Thai Dreambox <tonyboyth@gmail.com>\n"
@@ -18,60 +18,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:6
-msgid "Off"
-msgstr ""
-
-#: ../src/plugin.py:6
-msgid "On"
-msgstr ""
-
-#: ../src/plugin.py:6
 msgid "Auto"
 msgstr ""
 
-#: ../src/plugin.py:25
-msgid "Fan setup"
-msgstr ""
-
-#: ../src/plugin.py:30
 msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:31
-msgid "Save"
-msgstr "บันทึก"
-
-#: ../src/plugin.py:48
-msgid "Fan mode"
-msgstr ""
-
-#: ../src/plugin.py:105
 msgid "FAN Control"
 msgstr ""
 
-#: ../src/plugin.py:113
 msgid "Fan Control"
 msgstr ""
 
-#: ../src/plugin.py:113
-msgid "switch Fan On/Off"
+msgid "Fan mode"
 msgstr ""
 
-#~ msgid "Close"
-#~ msgstr "ปิด"
+msgid "Fan setup"
+msgstr ""
 
-#~ msgid "Really close without saving settings?"
-#~ msgstr "ยกเลิกโดยไม่จัดเก็บข้อมูล?"
+msgid "Off"
+msgstr ""
 
-#~ msgid "no"
-#~ msgstr "ไม่"
+msgid "On"
+msgstr ""
 
-#~ msgid "off"
-#~ msgstr "ปิด"
+msgid "Save"
+msgstr "บันทึก"
 
-#~ msgid "on"
-#~ msgstr "เปิด"
-
-#~ msgid "yes"
-#~ msgstr "ใช่"
+msgid "switch Fan On/Off"
+msgstr ""

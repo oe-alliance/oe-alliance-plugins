@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-07 09:51+0000\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-11-10 15:08+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -41,7 +41,36 @@ msgstr " tuner."
 msgid "\"channel scan\" searches for channels and saves them to your receiver; both options do a transponder search and save the result in /tmp in an XML file in satellites.xml format"
 msgstr "\"zenders zoeken\" zoekt naar zenders en slaat deze op in uw ontvanger; beide opties doen een transponder scan en slaan de resultaten daarvan op in /tmp in een XML bestand in satellites.xml formaat"
 
+#, fuzzy, python-format
+msgid "%d transponder(s) found"
+msgstr "%d transponders gevonden op %d:%02d min"
+
+#, python-format
+msgid "%d transponders found at %d:%02d min"
+msgstr "%d transponders gevonden op %d:%02d min"
+
+#, fuzzy, python-format
+msgid "%d:%02d/%d:%02dmin"
+msgstr "Stap %d %d:%02d min"
+
+#, python-format
+msgid "%dMHz scanned"
+msgstr ""
+
+msgid "AUTOMATICALLY start service searching, press green to change"
+msgstr ""
+
+msgid "Accuracy (higher is better)"
+msgstr ""
+
 msgid "Blind scan"
+msgstr "Blindscan"
+
+msgid "Blind scan for DVB-S2 tuners"
+msgstr ""
+
+#, fuzzy
+msgid "Blind scan state"
 msgstr "Blindscan"
 
 msgid "Blindscan"
@@ -67,6 +96,12 @@ msgstr ""
 "   Frequentieband: %d - %d MHz\n"
 "   Symbol rates: %d - %d MHz"
 
+msgid "DVB-S + DVB-S2"
+msgstr ""
+
+msgid "DVB-S only"
+msgstr ""
+
 msgid "Exit"
 msgstr "Afsluiten"
 
@@ -91,6 +126,14 @@ msgstr "Frequenties moeten liggen tussen 3000 MHz en 4199 MHz (C-band)"
 msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
 msgstr "Frequenties moeten liggen tussen 3001 MHz en 4200 MHz (C-band)"
 
+#, fuzzy, python-format
+msgid "Hardware blind scan is not supported by this tuner (%s)!"
+msgstr "Blindscan wordt niet ondersteund in"
+
+#, fuzzy
+msgid "Horizontal"
+msgstr "horizontaal"
+
 msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
 msgstr "Als u \"Ja\" kiest, zullen alle zenders van de huidige satelliet worden gewist voordat het zoeken begint. Dit voorkomt dat zenders dubbel worden opgenomen."
 
@@ -114,6 +157,15 @@ msgstr ""
 "Zoekt beschikbare transponders.\n"
 "Dit zal even duren."
 
+msgid "MANUALLY start service searching, press green to change"
+msgstr ""
+
+msgid "Maybe the reason that recording is currently running."
+msgstr ""
+
+msgid "Network scan"
+msgstr ""
+
 msgid ""
 "No new transponders found! \n"
 "\n"
@@ -128,9 +180,22 @@ msgstr ""
 msgid "No transponders were found for those search parameters!"
 msgstr "Met deze zoek parameters zijn geen transponders gevonden!"
 
+msgid ""
+"No tuner is enabled!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+
 #, python-format
 msgid "Not found blind scan utility '%s'!"
 msgstr "Niet gevonden blind scan utility '%s'!"
+
+msgid ""
+"Nothing to scan!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+
+msgid "Nothing to scan! Press Exit!"
+msgstr ""
 
 msgid "Only free scan"
 msgstr "Alleen FTA"
@@ -145,6 +210,14 @@ msgid "Polarisation"
 msgstr "Polarisatie"
 
 msgid "Press Green/OK to start the scan"
+msgstr "Druk op Groen/OK om de scan te beginnen"
+
+#, fuzzy
+msgid "Press OK to start the scan"
+msgstr "Druk op Groen/OK om de scan te beginnen"
+
+#, fuzzy
+msgid "Press green to start service searching!"
 msgstr "Druk op Groen/OK om de scan te beginnen"
 
 msgid "Satellite"
@@ -215,8 +288,23 @@ msgstr "De blindscan is door de gebruiker geannuleerd"
 msgid "The suggested polarisation for this satellite is \"%s\""
 msgstr "De voorgestelde polarisatie voor deze satelliet is \"%s\""
 
+msgid "Transponder searching finished!"
+msgstr ""
+
+#, fuzzy
+msgid "Try to find used satellite transponders..."
+msgstr "Scan satelieten op nieuwe transponders"
+
 msgid "Tuner"
 msgstr "Tuner"
+
+#, fuzzy
+msgid "Use Sundtek full hardware blind scan!"
+msgstr "  Starten Sundtek hardware blind scan."
+
+#, fuzzy
+msgid "Vertical"
+msgstr "vertikaal"
 
 msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
 msgstr "Als een naburige satelliet erg sterk is, kunt u met deze instelling voorkomen dat transponders waarvan bekend is dat die van die satelliet afkomstig zijn, toegekend worden aan de gescande satelliet."
@@ -260,123 +348,8 @@ msgstr "vertikaal"
 msgid "vertical and horizontal"
 msgstr "vertikaal en horizontaal"
 
-#~ msgid "\"channel scan\" searches for channels and saves them to your receiver; \"save to XML file\" does a transponder search and saves found transponders to an XML file in satellites.xml format"
-#~ msgstr "\"channel scan\" zoekt kanalen en slaat die op in uw ontvanger; \"sla op in XML file\" voert een transponder scan uit en slaat de gevonden transpondrs op in een XML file in satellites.xml formaat."
+msgid "yes"
+msgstr ""
 
-#~ msgid "%d transponders found at %d:%02d min"
-#~ msgstr "%d transponders gevonden op %d:%02d min"
-
-#~ msgid "Blind Scan"
-#~ msgstr "Blind Scan"
-
-#~ msgid ""
-#~ "Current Status : %d/%d\n"
-#~ "   Satellite : %s\n"
-#~ "   Polarization : %s\n"
-#~ "   Frequency range : %d - %d MHz\n"
-#~ "   Symbol rates : %d - %d MHz"
-#~ msgstr ""
-#~ "Huidige status: %d/%d\n"
-#~ "   Satelliet: %s\n"
-#~ "   Polarisatie: %s\n"
-#~ "   Frequentieband: %d - %d MHz\n"
-#~ "   Symbolrates: %d - %d MHz"
-
-#~ msgid "Frequency values must be between 10700 and 12750 (or 3000 and 4200 in the case of C-band satellites)"
-#~ msgstr "Frequentie waardes moeten tussen 10700MHz en 12750MHz liggen (of tussen 3000MHz en 4200MHz in geval van C-band satellieten)."
-
-#~ msgid "If you are not sure what polarisations the satellite you wish to search transmits, select \"vertical and horizontal\""
-#~ msgstr "Als u niet zeker bent van de polarisatie van de gewenste transponder, kiest u voor \"vertikaal en horizontaal\" "
-
-#~ msgid ""
-#~ "Invalid parameters entered. Please correct and try again.\n"
-#~ "For C-band searches stop frequency must be between 3000MHz and 4200MHz."
-#~ msgstr ""
-#~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "Voor C-band zoeken moet de eind frequentie liggen tussen 3000MHz en 4200MHz."
-
-#~ msgid ""
-#~ "Invalid parameters entered. Please correct and try again.\n"
-#~ "Frequency start value is larger than stop value."
-#~ msgstr ""
-#~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "De frequentie beginwaarde is hoger dan de eindwaarde"
-
-#~ msgid ""
-#~ "Invalid parameters entered. Please correct and try again.\n"
-#~ "Start frequency must be between 10700MHz and 12750MHz.\n"
-#~ "(Or 3000MHz and 4200MHz in the case of c-band)."
-#~ msgstr ""
-#~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "De beginwaarde voor de frequentie moet liggen tussen de 10700MHz en 12750MHz.\n"
-#~ "(of tussen de 3000MHz en 4200MHz voor de C-band)."
-
-#~ msgid ""
-#~ "Invalid parameters entered. Please correct and try again.\n"
-#~ "Start symbol rate must be between 1MHz and 44MHz."
-#~ msgstr ""
-#~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "De aanvangs symbol rate moet liggen tussen de 1MHz en de 44MHz."
-
-#~ msgid ""
-#~ "Invalid parameters entered. Please correct and try again.\n"
-#~ "Stop frequency must be between 10700MHz and 12750MHz.\n"
-#~ "(Or 3000MHz and 4200MHz in the case of c-band)."
-#~ msgstr ""
-#~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "De eindwaarde voor de frequentie moet liggen tussen de 10700MHz en 12750MHz.\n"
-#~ "(of tussen de 3000MHz en 4200MHz voor de C-band)."
-
-#~ msgid ""
-#~ "Invalid parameters entered. Please correct and try again.\n"
-#~ "Stop symbol rate must be between 2MHz and 45MHz."
-#~ msgstr ""
-#~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "De eindwaarde voor de symbolrate moet tussen de 2MHz en de 45MHz liggen."
-
-#~ msgid ""
-#~ "Invalid parameters entered. Please correct and try again.\n"
-#~ "Symbol rate start value is larger than stop value."
-#~ msgstr ""
-#~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "De aanvangs symbolrate is groter dan de eindwaarde"
-
-#~ msgid ""
-#~ "Invalid parameters entered. Please correct and try again.\n"
-#~ "That is a C-band satellite so frequency values \n"
-#~ "need to be between 3000MHz and 4200MHz."
-#~ msgstr ""
-#~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "Dit is een C-band transponder dus de frequentie moet liggen tussen \n"
-#~ "de 3000MHz en 4200MHz."
-
-#~ msgid ""
-#~ "Invalid parameters entered. Please correct and try again.\n"
-#~ "That is a Ku-band satellite so frequency values \n"
-#~ "need to be between 10700MHz and 12750MHz."
-#~ msgstr ""
-#~ "Ongeldige waardes ingevoerd. Corrigeer en probeer opnieuw.\n"
-#~ "Dit is een Ku-band transponder dus de frequentie moet liggen tussen \n"
-#~ "de 10700MHz en 12750MHz."
-
-#~ msgid ""
-#~ "Looking for available transponders.\n"
-#~ "This will take a short while.\n"
-#~ "\n"
-#~ "   Current Status : %d/%d\n"
-#~ "   Satellite : %s\n"
-#~ "   Polarization : %s\n"
-#~ "   Frequency range : %d - %d MHz\n"
-#~ "   Symbol rates : %d - %d MHz"
-#~ msgstr ""
-#~ "Zoekt naar beschikbare transponders.\n"
-#~ "Dit duurt even.\n"
-#~ "\n"
-#~ "   Actuele status: %d/%d\n"
-#~ "   Satelliet: %s\n"
-#~ "   Polarisatie: %s\n"
-#~ "   Frequentie bereik: %d - %d MHz\n"
-#~ "   Symbol rates: %d - %d MHz"
-
-#~ msgid "The suggested polarisation for this satellite is \""
-#~ msgstr "De aanbevolen polarisatie voor deze satelliet is \""
+msgid "yes (keep feeds)"
+msgstr ""

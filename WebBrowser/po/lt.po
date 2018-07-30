@@ -2,44 +2,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WebBrowser - oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-06 08:38+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:137
 msgid "/"
 msgstr "/"
 
-#: ../src/plugin.py:177
-msgid "Yes"
-msgstr "Taip"
+msgid "Alpha Value"
+msgstr "Alfa reikšmė"
 
-#: ../src/plugin.py:177
-msgid "No, but play video again"
-msgstr "Ne. Bet rodyti įrašą iš naujo"
-
-#: ../src/plugin.py:178
-msgid "Stop playing this movie?"
-msgstr "Nutraukti šį filmą ?"
-
-#: ../src/plugin.py:318
-msgid "Sorry, video is not available!"
-msgstr "Vaizdo įrašas nepasiekiamas!"
-
-#: ../src/plugin.py:402
 msgid "Enter your input data"
 msgstr "Įrašykite savo pradinius duomenis"
 
-#: ../src/plugin.py:446
+msgid "Exit"
+msgstr "Uždaryti"
+
 msgid ""
 "If you want to quit the Browser,\n"
 "Press RED -> EXIT."
@@ -47,30 +34,29 @@ msgstr ""
 "Jei norite uždaryti naršyklę,\n"
 "spauskite 'RAUDONĄ\" -> 'EXIT'."
 
-#: ../src/plugin.py:448
-msgid "Exit"
-msgstr "Uždaryti"
-
-#: ../src/plugin.py:449
-msgid "Start"
-msgstr "Pradėti"
-
-#: ../src/plugin.py:559
-msgid "Mouse"
-msgstr "Pelė"
-
-#: ../src/plugin.py:564
 msgid "Keyboard"
 msgstr "Klaviatūra"
 
-#: ../src/plugin.py:569
-msgid "Alpha Value"
-msgstr "Alfa reikšmė"
-
-#: ../src/plugin.py:575
 msgid "Language"
 msgstr "Kalba"
 
-#: ../src/plugin.py:654
+msgid "Mouse"
+msgstr "Pelė"
+
+msgid "No, but play video again"
+msgstr "Ne. Bet rodyti įrašą iš naujo"
+
+msgid "Sorry, video is not available!"
+msgstr "Vaizdo įrašas nepasiekiamas!"
+
+msgid "Start"
+msgstr "Pradėti"
+
+msgid "Stop playing this movie?"
+msgstr "Nutraukti šį filmą ?"
+
 msgid "Web Browser"
 msgstr "Interneto naršyklė"
+
+msgid "Yes"
+msgstr "Taip"

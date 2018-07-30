@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:20+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:20+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -14,60 +14,51 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
-msgid "Remote Control Code"
-msgstr "Code contrôle télécommande"
+#, python-format
+msgid " in %d seconds."
+msgstr ""
 
-#: ../src/plugin.py:68
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../src/plugin.py:69
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr "Ce fichier n'existe pas: /proc/stb/fp/remote_code"
+
+msgid "Keep"
+msgstr "Garder"
+
+msgid "Please change your remote mode"
+msgstr "Veuillez changer le mode télécommande"
+
+msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+msgstr "Appuyer et tenir '2' & '7' jusq'à ce que la LED soit rouge fixe, puis appuyez 'Help', ensuite appuyez '000'"
+
+#, fuzzy
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
+msgstr "Appuyer et tenir '2' & '7' jusq'à ce que la LED soit rouge fixe, puis appuyez 'Help', ensuite appuyez '000'"
+
+msgid "Remote Control Code"
+msgstr "Code contrôle télécommande"
+
+msgid "Remote Control System Code"
+msgstr "Code contrôle système télécommande"
+
+#, fuzzy
+msgid "Remote Control Type"
+msgstr "Code contrôle télécommande"
+
+msgid "Restore"
+msgstr "Restaurer"
+
 msgid "Save"
 msgstr "Sauver"
 
-#: ../src/plugin.py:80
 #, python-format
 msgid "Sorry, but %s is not supported."
 msgstr ""
 
-#: ../src/plugin.py:84
-msgid "Remote Control System Code"
-msgstr "Code contrôle système télécommande"
-
-#: ../src/plugin.py:87
 msgid "Text support"
 msgstr "Support text"
 
-#: ../src/plugin.py:99
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr "Ce fichier n'existe pas: /proc/stb/fp/remote_code"
-
-#: ../src/plugin.py:101
-msgid "Please change your remote mode"
-msgstr "Veuillez changer le mode télécommande"
-
-#: ../src/plugin.py:101
-msgid ""
-"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
-"press '000"
-msgstr ""
-"Appuyer et tenir '2' & '7' jusq'à ce que la LED soit rouge fixe, puis "
-"appuyez 'Help', ensuite appuyez '000'"
-
-#: ../src/plugin.py:101
 msgid "Then choose 'Keep' within seconds"
 msgstr "Ensuite, choisissez 'Garder' en quelques secondes"
-
-#: ../src/plugin.py:122
-msgid "Keep"
-msgstr "Garder"
-
-#: ../src/plugin.py:122
-msgid "Restore"
-msgstr "Restaurer"
-
-#: ../src/plugin.py:128
-#, python-format
-msgid " in %d seconds."
-msgstr ""

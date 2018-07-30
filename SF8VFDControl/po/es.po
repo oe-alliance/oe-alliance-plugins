@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:51+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:51+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: openspa.info\n"
@@ -15,48 +15,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:56
-msgid "Channelnumber in Standby off"
-msgstr "Número Canal, en Reposo Apagado"
-
-#: ../src/plugin.py:56
-msgid "Channelnumber in Standby Clock"
-msgstr "Número Canal, en Reposo Reloj"
-
-#: ../src/plugin.py:56
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Número Canal/Reloj, en Reposo Reloj"
-
-#: ../src/plugin.py:56
-msgid "Clock always"
-msgstr "Reloj siempre"
-
-#: ../src/plugin.py:56
 msgid "Always off"
 msgstr "Siempre apagado"
 
 #
-#: ../src/plugin.py:249
 msgid "Cancel"
 msgstr "Cancelar"
 
+msgid "Channelnumber in Standby Clock"
+msgstr "Número Canal, en Reposo Reloj"
+
+msgid "Channelnumber in Standby off"
+msgstr "Número Canal, en Reposo Apagado"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Número Canal/Reloj, en Reposo Reloj"
+
+msgid "Clock always"
+msgstr "Reloj siempre"
+
 #
-#: ../src/plugin.py:250
 msgid "Save"
 msgstr "Guardar"
 
-#: ../src/plugin.py:251
-msgid "Update Date/Time"
-msgstr "Actualizar Fecha/Hora"
-
-#: ../src/plugin.py:264 ../src/plugin.py:278
 msgid "Show on VFD"
 msgstr "Mostrar en VFD"
 
-#: ../src/plugin.py:266
 msgid "Time mode"
 msgstr "Modo Hora"
 
-#: ../src/plugin.py:327
+msgid "Update Date/Time"
+msgstr "Actualizar Fecha/Hora"
+
 msgid "VFD_SF8"
 msgstr "VFD_SF8"

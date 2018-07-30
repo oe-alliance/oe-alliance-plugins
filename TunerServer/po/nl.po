@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
@@ -20,51 +20,48 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:47 ../src/plugin.py:176 ../src/plugin.py:184
-msgid "Tuner Server setup"
-msgstr "Tuner Server instellingen"
+msgid "Allow Streaming From Box Tuners"
+msgstr "Sta streamen vanaf de tuners van de box toe"
 
-#: ../src/plugin.py:59
-msgid "Current Status:"
-msgstr "Huidiges status:"
-
-#: ../src/plugin.py:60
-msgid "Server Disabled"
-msgstr "Server uitgeschakeld"
-
-#: ../src/plugin.py:61
-msgid "Server Enabled"
-msgstr "Server ingeschakeld"
-
-#: ../src/plugin.py:62
-msgid "Build Server"
-msgstr "Bouw server"
-
-#: ../src/plugin.py:63
-msgid "Disable Server"
-msgstr "Server uitschakelen"
-
-#: ../src/plugin.py:64
-msgid "Close"
-msgstr "Sluit"
-
-#: ../src/plugin.py:83
-msgid ""
-"Your server is now building\n"
-"Please wait ..."
-msgstr ""
-"Uw server wordt nu gebouwd\n"
-"Even wachten ..."
-
-#: ../src/plugin.py:86
-msgid "Sorry, but you need to have a device mounted at '/media/hd'"
-msgstr "Sorry, maar u moet een device gemount hebben op '/media/hd'"
-
-#: ../src/plugin.py:111
 msgid "Build Complete!"
 msgstr "Bouwen gereed!"
 
-#: ../src/plugin.py:149
+msgid "Build Server"
+msgstr "Bouw server"
+
+msgid "Close"
+msgstr "Sluit"
+
+msgid "Current Status:"
+msgstr "Huidiges status:"
+
+msgid "Disable Server"
+msgstr "Server uitschakelen"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Server Disabled"
+msgstr "Server uitgeschakeld"
+
+msgid "Server Enabled"
+msgstr "Server ingeschakeld"
+
+msgid "Server now disabled!"
+msgstr "Server is nu uitgeschakeld!"
+
+msgid "Sorry, but you need to have a device mounted at '/media/hd'"
+msgstr "Sorry, maar u moet een device gemount hebben op '/media/hd'"
+
+msgid "Tuner Server"
+msgstr "Tuner Server"
+
+msgid "Tuner Server Disabled."
+msgstr "Tuner Server uitgeschakeld."
+
+msgid "Tuner Server setup"
+msgstr "Tuner Server instellingen"
+
 msgid ""
 "Your server is now being deleted\n"
 "Please Wait ..."
@@ -72,22 +69,9 @@ msgstr ""
 "Uw server wordt nu verwijderd\n"
 "Even wachten ..."
 
-#: ../src/plugin.py:152
-msgid "Tuner Server Disabled."
-msgstr "Tuner Server uitgeschakeld."
-
-#: ../src/plugin.py:153
-msgid "Info"
-msgstr "Info"
-
-#: ../src/plugin.py:155
-msgid "Server now disabled!"
-msgstr "Server is nu uitgeschakeld!"
-
-#: ../src/plugin.py:184 ../src/plugin.py:186
-msgid "Allow Streaming From Box Tuners"
-msgstr "Sta streamen vanaf de tuners van de box toe"
-
-#: ../src/plugin.py:186
-msgid "Tuner Server"
-msgstr "Tuner Server"
+msgid ""
+"Your server is now building\n"
+"Please wait ..."
+msgstr ""
+"Uw server wordt nu gebouwd\n"
+"Even wachten ..."

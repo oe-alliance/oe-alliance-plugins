@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Roxy\n"
@@ -14,147 +14,109 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../src/plugin.py:53
-msgid "FTP Server Editor"
-msgstr "Konfigurace FTP serveru"
-
-#: ../src/plugin.py:54
-msgid "Exit"
-msgstr "Konec"
-
-#: ../src/plugin.py:55
-msgid "OK"
-msgstr "OK"
-
-#: ../src/plugin.py:98
-msgid "Keyboard"
-msgstr "Klávesnice"
-
-#: ../src/plugin.py:104
-msgid "Use address"
-msgstr "Adresa"
-
-#: ../src/plugin.py:106
-msgid "Use IP"
-msgstr "Použité IP"
-
-#: ../src/plugin.py:112
-msgid "IP:"
-msgstr "IP :"
-
-#: ../src/plugin.py:113 ../src/plugin.py:126
-msgid "Username:"
-msgstr "Uživatel :"
-
-#: ../src/plugin.py:114 ../src/plugin.py:127
-msgid "Password:"
-msgstr "Heslo :"
-
-#: ../src/plugin.py:115 ../src/plugin.py:128
-msgid "FTPport:"
-msgstr "FTP port :"
-
-#: ../src/plugin.py:116 ../src/plugin.py:129
-msgid "Passive:"
-msgstr "Pasivní :"
-
-#: ../src/plugin.py:117 ../src/plugin.py:130
-msgid "Telnetport:"
-msgstr "Telnet port :"
-
-#: ../src/plugin.py:125
 msgid "Adress:"
 msgstr "Adresa :"
 
-#: ../src/plugin.py:145
-msgid "Enter address"
-msgstr "Zadejte adresu"
-
-#: ../src/plugin.py:148
-msgid "Enter username"
-msgstr "Zadejte uživatele"
-
-#: ../src/plugin.py:151
-msgid "Enter password"
-msgstr "Zadejte heslo"
-
-#: ../src/plugin.py:191
-msgid "Select bouquets to convert"
-msgstr "Kanály pro převod..."
-
-#: ../src/plugin.py:199
-msgid "Close"
-msgstr "Zavřít"
-
-#: ../src/plugin.py:201
-msgid "Set server IP"
-msgstr "IP serveru"
-
-#: ../src/plugin.py:203
-msgid "Select a remote server IP first"
-msgstr "Nejprve vyberte vzdálený server"
-
-#: ../src/plugin.py:235
-msgid "Testing remote connection"
-msgstr "Test vzdáleného připojení"
-
-#: ../src/plugin.py:244
-msgid "Connection to remote IP ok"
-msgstr "Připojení na vzdálený přijímač je OK"
-
-#: ../src/plugin.py:250
-msgid "Could not connect to remote IP"
-msgstr "Na vzdálený sat.přijímač se nelze připojit !"
-
-#: ../src/plugin.py:253
-msgid "Downloading remote services"
-msgstr "Stahování seznamu kanálů"
-
-#: ../src/plugin.py:262 ../src/plugin.py:307
-msgid "Download from remote failed"
-msgstr "Stažení seznamu kanálů selhalo !"
-
-#: ../src/plugin.py:312
-#, python-format
-msgid "FTP reading bouquets %d of %d"
-msgstr ""
-
-#: ../src/plugin.py:322 ../src/plugin.py:628
-msgid "Make your selection"
-msgstr "Vyberte"
-
-#: ../src/plugin.py:336
-msgid "Download"
-msgstr "Stáhnout"
-
-#: ../src/plugin.py:337
-msgid "Invert"
-msgstr "Invertovat"
-
-#: ../src/plugin.py:369
-msgid "remote of"
-msgstr ""
-
-#: ../src/plugin.py:472
-msgid "No bouquets selected"
-msgstr "Není vybraný seznam oblíbených kanálů"
-
-#: ../src/plugin.py:604
 msgid "Checking for alternatives"
 msgstr ""
 
-#: ../src/plugin.py:625
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "Connection to remote IP ok"
+msgstr "Připojení na vzdálený přijímač je OK"
+
+msgid "Convert remote channel list for streaming"
+msgstr "Převod vzdál.seznamu kanálů pro sdílení"
+
+msgid "Could not connect to remote IP"
+msgstr "Na vzdálený sat.přijímač se nelze připojit !"
+
+msgid "Download"
+msgstr "Stáhnout"
+
+msgid "Download from remote failed"
+msgstr "Stažení seznamu kanálů selhalo !"
+
+msgid "Downloading remote services"
+msgstr "Stahování seznamu kanálů"
+
+msgid "Enter address"
+msgstr "Zadejte adresu"
+
+msgid "Enter password"
+msgstr "Zadejte heslo"
+
+msgid "Enter username"
+msgstr "Zadejte uživatele"
+
+msgid "Exit"
+msgstr "Konec"
+
+msgid "FTP Server Editor"
+msgstr "Konfigurace FTP serveru"
+
 #, python-format
 msgid "FTP reading alternatives %d of %d"
 msgstr ""
 
-#: ../src/plugin.py:657 ../src/plugin.py:662 ../src/plugin.py:667
+#, python-format
+msgid "FTP reading bouquets %d of %d"
+msgstr ""
+
+msgid "FTPport:"
+msgstr "FTP port :"
+
+msgid "IP:"
+msgstr "IP :"
+
+msgid "Invert"
+msgstr "Invertovat"
+
+msgid "Keyboard"
+msgstr "Klávesnice"
+
+msgid "Make your selection"
+msgstr "Vyberte"
+
+msgid "No bouquets selected"
+msgstr "Není vybraný seznam oblíbených kanálů"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Passive:"
+msgstr "Pasivní :"
+
+msgid "Password:"
+msgstr "Heslo :"
+
 msgid "Remote channel stream converter"
 msgstr "Kanály - přenos z jiného přijímače"
 
-#: ../src/plugin.py:667
-msgid "Convert remote channel list for streaming"
-msgstr "Převod vzdál.seznamu kanálů pro sdílení"
+msgid "Select a remote server IP first"
+msgstr "Nejprve vyberte vzdálený server"
 
-#~ msgid "FTP reading file %d of %d"
-#~ msgstr "Načtení FTP souboru  %d z  %d"
+msgid "Select bouquets to convert"
+msgstr "Kanály pro převod..."
+
+msgid "Set server IP"
+msgstr "IP serveru"
+
+msgid "Telnetport:"
+msgstr "Telnet port :"
+
+msgid "Testing remote connection"
+msgstr "Test vzdáleného připojení"
+
+msgid "Use IP"
+msgstr "Použité IP"
+
+msgid "Use address"
+msgstr "Adresa"
+
+msgid "Username:"
+msgstr "Uživatel :"
+
+msgid "remote of"
+msgstr ""

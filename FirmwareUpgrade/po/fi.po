@@ -98,4 +98,3 @@ msgstr "VDF ohjain"
 
 msgid "You choose the incorrect file. "
 msgstr "Valitsit väärän tiedoston."
-

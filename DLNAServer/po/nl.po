@@ -1,88 +1,71 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DLNAServer\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: \n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: openATV\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
 "X-Poedit-Basepath: ..\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: nl\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/plugin.py:59
-msgid "OK"
-msgstr "OK"
-
-#: src/plugin.py:60
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: src/plugin.py:134
-msgid "Exit"
-msgstr "Afsluiten"
-
-#: src/plugin.py:135
-msgid "Start"
-msgstr "Start"
-
-#: src/plugin.py:136
-msgid "Save"
-msgstr "Opslaan"
-
-#: src/plugin.py:137
-msgid "Reset"
-msgstr "Herstel"
-
-#: src/plugin.py:261
-msgid "off"
-msgstr "uit"
-
-#: src/plugin.py:261
-msgid "error"
-msgstr "Fout"
-
-#: src/plugin.py:261
-msgid "warn"
-msgstr "Waarschuwing"
-
-#: src/plugin.py:261
-msgid "debug"
-msgstr "Debug"
-
-#: src/plugin.py:264
-msgid "Server Name"
-msgstr "Server Naam"
-
-#: src/plugin.py:265
-msgid "Video Directory"
-msgstr "Video Map"
-
-#: src/plugin.py:266
-msgid "Music Directory"
-msgstr "Muziek Map"
-
-#: src/plugin.py:267
-msgid "Picture Directory"
-msgstr "Foto Map"
-
-#: src/plugin.py:268
-msgid "Enable Logging"
-msgstr "Log bestand inschakelen"
-
-#: src/plugin.py:269
-msgid "    - Log Level"
-msgstr "    - Log niveau"
-
-#: src/plugin.py:270
 msgid "    - Log Directory"
 msgstr "    - Log Map"
 
-#: src/plugin.py:271
+msgid "    - Log Level"
+msgstr "    - Log niveau"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
 msgid "Enable Autostart for DLNA Server"
 msgstr "Autostart voor DLNA Browser inschakelen"
+
+msgid "Enable Logging"
+msgstr "Log bestand inschakelen"
+
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "Music Directory"
+msgstr "Muziek Map"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Picture Directory"
+msgstr "Foto Map"
+
+msgid "Reset"
+msgstr "Herstel"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Server Name"
+msgstr "Server Naam"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Video Directory"
+msgstr "Video Map"
+
+msgid "debug"
+msgstr "Debug"
+
+msgid "error"
+msgstr "Fout"
+
+msgid "off"
+msgstr "uit"
+
+msgid "warn"
+msgstr "Waarschuwing"

@@ -1,10 +1,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AnimationSetup\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: vuplus-community.net <insanity@>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,18 +14,11 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-msgid "Cancel"
-msgstr "Annulla"
-
-msgid "Save"
-msgstr "Salva"
-
-msgid "Default"
-msgstr "Predefinita"
+msgid "* current animation"
+msgstr "* animazione corrente"
 
 msgid "Animation Setup"
 msgstr "Impostare animazioni"
@@ -31,11 +26,17 @@ msgstr "Impostare animazioni"
 msgid "Animation Speed"
 msgstr "Velocità animazione"
 
+msgid "Animations"
+msgstr "Animazioni"
+
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "Default"
+msgstr "Predefinita"
+
 msgid "Disable Animations"
 msgstr "Disabilitare animazioni"
-
-msgid "Simple fade"
-msgstr "Dissolvenza semplice"
 
 msgid "Grow drop"
 msgstr "Comparsa crescente"
@@ -45,6 +46,18 @@ msgstr "Comparsa da sinistra"
 
 msgid "Popup"
 msgstr "Popup"
+
+msgid "Preview"
+msgstr "Anteprima"
+
+msgid "Save"
+msgstr "Salva"
+
+msgid "Setting"
+msgstr "Configurazione"
+
+msgid "Simple fade"
+msgstr "Dissolvenza semplice"
 
 msgid "Slide drop"
 msgstr "Animazioni scorrevoli"
@@ -57,15 +70,3 @@ msgstr "Scorrimento da alto verso il basso"
 
 msgid "Stripes"
 msgstr "Strisce"
-
-msgid "* current animation"
-msgstr "* animazione corrente"
-
-msgid "Setting"
-msgstr "Configurazione"
-
-msgid "Preview"
-msgstr "Anteprima"
-
-msgid "Animations"
-msgstr "Animazioni"

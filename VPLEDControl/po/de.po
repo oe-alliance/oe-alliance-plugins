@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-26 19:55+0100\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-11-26 19:57+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -14,82 +14,62 @@ msgstr ""
 "X-Generator: Poedit 1.8.8\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: plugin.py:25
-msgid "Channelnumber in Standby off"
-msgstr "Kanalnummer / im Standby aus"
-
-#: plugin.py:25
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanalnummer / Uhr im Standby"
-
-#: plugin.py:25
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanalnummer/Uhr / Uhr im Standby"
-
-#: plugin.py:25
-msgid "Clock always"
-msgstr "Immer Uhr"
-
-#: plugin.py:25
 msgid "Always off"
 msgstr "Immer aus"
 
-#: plugin.py:27
-msgid "yes"
-msgstr "Ja"
-
-#: plugin.py:27
-msgid "no"
-msgstr "Nein"
-
-#: plugin.py:28
-msgid "Off"
-msgstr "Aus"
-
-#: plugin.py:28
-msgid "On/Off"
-msgstr "An/Aus"
-
-#: plugin.py:28
-msgid "Brightness level"
-msgstr "Helligkeitsstufe"
-
-#: plugin.py:225 plugin.py:324 plugin.py:331
-msgid "LED Display Setup"
-msgstr "LED Display Einstellungen"
-
-#: plugin.py:236
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: plugin.py:237
-msgid "Save"
-msgstr "Speichern"
-
-#: plugin.py:238
-msgid "Update Date/Time"
-msgstr "Datum/Uhrzeit aktuallisieren"
-
-#: plugin.py:251 plugin.py:271
-msgid "Show on LED"
-msgstr "Displayanzeige"
-
-#: plugin.py:253
-msgid "Time mode"
-msgstr "Zeit Modus"
-
-#: plugin.py:254 plugin.py:273
-msgid "Show REC-Symbol in Display"
-msgstr "Zeige REC-Symbol im Display"
-
-#: plugin.py:256 plugin.py:275
-msgid "Show blinking Clock on Display during recording"
-msgstr "Blinkende Uhr im Display während Aufnahmen"
-
-#: plugin.py:258
 msgid "Brightness Level 1"
 msgstr "Helligkeitsstufe 1"
 
-#: plugin.py:259
 msgid "Brightness Level 2"
 msgstr "Helligkeitsstufe 2"
+
+msgid "Brightness level"
+msgstr "Helligkeitsstufe"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalnummer / Uhr im Standby"
+
+msgid "Channelnumber in Standby off"
+msgstr "Kanalnummer / im Standby aus"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanalnummer/Uhr / Uhr im Standby"
+
+msgid "Clock always"
+msgstr "Immer Uhr"
+
+msgid "LED Display Setup"
+msgstr "LED Display Einstellungen"
+
+msgid "Off"
+msgstr "Aus"
+
+msgid "On/Off"
+msgstr "An/Aus"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Show REC-Symbol in Display"
+msgstr "Zeige REC-Symbol im Display"
+
+msgid "Show blinking Clock on Display during recording"
+msgstr "Blinkende Uhr im Display während Aufnahmen"
+
+msgid "Show on LED"
+msgstr "Displayanzeige"
+
+msgid "Time mode"
+msgstr "Zeit Modus"
+
+msgid "Update Date/Time"
+msgstr "Datum/Uhrzeit aktuallisieren"
+
+msgid "no"
+msgstr "Nein"
+
+msgid "yes"
+msgstr "Ja"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:43+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:43+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -16,40 +16,34 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/plugin.py:36 ../src/plugin.py:43 ../src/plugin.py:50
-#: ../src/plugin.py:57 ../src/plugin.py:64 ../src/plugin.py:71
-#: ../src/plugin.py:78 ../src/plugin.py:85 ../src/plugin.py:92
-#: ../src/plugin.py:99 ../src/plugin.py:106 ../src/plugin.py:113
-#: ../src/plugin.py:120 ../src/plugin.py:127 ../src/plugin.py:134
-#: ../src/plugin.py:141 ../src/plugin.py:148 ../src/plugin.py:155
-msgid "Front Panel"
-msgstr ""
-
-#: ../src/plugin.py:177
-msgid "Download the firmware (latest)"
-msgstr ""
-
-#: ../src/plugin.py:178
-msgid "Cancel"
-msgstr ""
-
-#: ../src/plugin.py:221
-msgid "Can't found binary file."
-msgstr ""
-
-#: ../src/plugin.py:224
-msgid "Can't found MD5 file."
-msgstr ""
-
-#: ../src/plugin.py:234 ../src/plugin.py:237
-msgid "You chose the incorrect file."
-msgstr ""
-
-#: ../src/plugin.py:241
 msgid "Can't find /usr/bin/md5sum"
 msgstr ""
 
-#: ../src/plugin.py:248
+msgid "Can't found MD5 file."
+msgstr ""
+
+msgid "Can't found binary file."
+msgstr ""
+
+msgid "Can't found device file!!"
+msgstr ""
+
+msgid "Can't found model name."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+#
+msgid "Close"
+msgstr "Stäng"
+
+msgid "Current version:"
+msgstr ""
+
+msgid "Download the firmware (latest)"
+msgstr ""
+
 #, python-format
 msgid ""
 "Fail to verify data file. \n"
@@ -57,43 +51,26 @@ msgid ""
 "md5[%s]"
 msgstr ""
 
-#: ../src/plugin.py:344
-msgid "Can't found model name."
+msgid "Front Panel"
 msgstr ""
 
-#: ../src/plugin.py:419
-msgid "Current version:"
+msgid "Front Panel Update"
 msgstr ""
 
-#: ../src/plugin.py:420
 msgid "New version:"
 msgstr ""
 
-#
-#: ../src/plugin.py:425
-msgid "Close"
-msgstr "Stäng"
-
-#: ../src/plugin.py:436
-msgid "This plugin is supported only the INI-Series."
-msgstr ""
-
-#: ../src/plugin.py:438
-msgid "Upgrade"
-msgstr ""
-
-#: ../src/plugin.py:485
 msgid "No selected binary data!!"
 msgstr ""
 
-#: ../src/plugin.py:492
-msgid "Can't found device file!!"
+msgid "This plugin is supported only the INI-Series."
 msgstr ""
 
-#: ../src/plugin.py:517
+msgid "Upgrade"
+msgstr ""
+
 msgid "You can not upgrade to the same or lower version !"
 msgstr ""
 
-#: ../src/plugin.py:539
-msgid "Front Panel Update"
+msgid "You chose the incorrect file."
 msgstr ""

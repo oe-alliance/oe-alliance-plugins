@@ -6,75 +6,67 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 12:54+0200\n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:43
-msgid "Apply"
+msgid "AB IPBox 9900/99/55 HD RCU"
 msgstr ""
 
-#: ../src/plugin.py:44
-msgid "Cancel"
-msgstr ""
-
-#: ../src/plugin.py:49 ../src/plugin.py:150 ../src/plugin.py:158
-msgid "RCU Select"
-msgstr ""
-
-#: ../src/plugin.py:52
-msgid "WeTek Play (Classic) RCU"
-msgstr ""
-
-#: ../src/plugin.py:53
-msgid "WeTek Play Enigma2 RCU"
-msgstr ""
-
-#: ../src/plugin.py:54
-msgid "WeTek Play OpenElec RCU"
-msgstr ""
-
-#: ../src/plugin.py:55
-msgid "Alien2/1 RCU"
-msgstr ""
-
-#: ../src/plugin.py:56
 msgid "Alien1 old RCU"
 msgstr ""
 
-#: ../src/plugin.py:57
+msgid "Alien2/1 RCU"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
 msgid "GI LX3 RCU"
 msgstr ""
 
-#: ../src/plugin.py:58
 msgid "Gigablue 800 UE Plus RCU"
 msgstr ""
 
-#: ../src/plugin.py:59
 msgid "Mutant HD2400 RCU"
 msgstr ""
 
-#: ../src/plugin.py:60
 msgid "Octagon SF8 RCU"
 msgstr ""
 
-#: ../src/plugin.py:61
+msgid "RCU Select"
+msgstr ""
+
 msgid "Technomate Nano RCU"
 msgstr ""
 
-#: ../src/plugin.py:62
-msgid "xtrend ET10000 RCU"
+msgid "WeTek Play (Classic) RCU"
 msgstr ""
 
-#: ../src/plugin.py:88
-msgid "Are you sure?"
+msgid "WeTek Play Enigma2 RCU"
+msgstr ""
+
+msgid "WeTek Play OpenElec RCU"
+msgstr ""
+
+msgid "WeTek Play2 RCU"
+msgstr ""
+
+msgid "Zgemma Star RCU"
+msgstr ""
+
+msgid "xtrend ET10000 RCU"
 msgstr ""

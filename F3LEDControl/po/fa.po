@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:16+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:16+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -15,46 +15,50 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:24
-msgid "Channelnumber in Standby off"
+msgid "15 sec"
 msgstr ""
 
-#: ../src/plugin.py:24
-msgid "Channelnumber in Standby Clock"
+msgid "30 sec"
 msgstr ""
 
-#: ../src/plugin.py:24
-msgid "Channelnumber/Clock in Standby Clock"
+msgid "45 sec"
 msgstr ""
 
-#: ../src/plugin.py:24
-msgid "Clock always"
+msgid "60 sec"
 msgstr ""
 
-#: ../src/plugin.py:24
 msgid "Always off"
 msgstr ""
 
-#: ../src/plugin.py:175 ../src/plugin.py:263 ../src/plugin.py:270
-msgid "LED Display Setup"
-msgstr ""
-
-#: ../src/plugin.py:185
 msgid "Cancel"
 msgstr "انصراف"
 
-#: ../src/plugin.py:186
+msgid "Channelnumber in Standby Clock"
+msgstr ""
+
+msgid "Channelnumber in Standby off"
+msgstr ""
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+msgid "Clock always"
+msgstr ""
+
+msgid "LED Display Setup"
+msgstr ""
+
 msgid "Save"
 msgstr "ذخیره"
 
-#: ../src/plugin.py:187
-msgid "Update Date/Time"
-msgstr ""
-
-#: ../src/plugin.py:200 ../src/plugin.py:214
 msgid "Show on LED"
 msgstr ""
 
-#: ../src/plugin.py:202
 msgid "Time mode"
+msgstr ""
+
+msgid "Time to show Clock in Display"
+msgstr ""
+
+msgid "Update Date/Time"
 msgstr ""

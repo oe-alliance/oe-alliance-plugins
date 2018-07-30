@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:43+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:43+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -18,40 +18,33 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:36 ../src/plugin.py:43 ../src/plugin.py:50
-#: ../src/plugin.py:57 ../src/plugin.py:64 ../src/plugin.py:71
-#: ../src/plugin.py:78 ../src/plugin.py:85 ../src/plugin.py:92
-#: ../src/plugin.py:99 ../src/plugin.py:106 ../src/plugin.py:113
-#: ../src/plugin.py:120 ../src/plugin.py:127 ../src/plugin.py:134
-#: ../src/plugin.py:141 ../src/plugin.py:148 ../src/plugin.py:155
-msgid "Front Panel"
-msgstr "Voorpaneel"
-
-#: ../src/plugin.py:177
-msgid "Download the firmware (latest)"
-msgstr "Download de laatste firmware"
-
-#: ../src/plugin.py:178
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: ../src/plugin.py:221
-msgid "Can't found binary file."
-msgstr "Kan binary bestand niet vinden."
-
-#: ../src/plugin.py:224
-msgid "Can't found MD5 file."
-msgstr "Kan MD5 bestand niet vinden."
-
-#: ../src/plugin.py:234 ../src/plugin.py:237
-msgid "You chose the incorrect file."
-msgstr "U heeft een verkeerd bestand gekozen."
-
-#: ../src/plugin.py:241
 msgid "Can't find /usr/bin/md5sum"
 msgstr "Kan  /usr/bin/md5sum  niet vinden"
 
-#: ../src/plugin.py:248
+msgid "Can't found MD5 file."
+msgstr "Kan MD5 bestand niet vinden."
+
+msgid "Can't found binary file."
+msgstr "Kan binary bestand niet vinden."
+
+msgid "Can't found device file!!"
+msgstr "Kan device bestand niet vinden!!"
+
+msgid "Can't found model name."
+msgstr "Kan model naam niet vinden."
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "Current version:"
+msgstr "Actuele versie:"
+
+msgid "Download the firmware (latest)"
+msgstr "Download de laatste firmware"
+
 #, python-format
 msgid ""
 "Fail to verify data file. \n"
@@ -62,78 +55,26 @@ msgstr ""
 "file[%s]\n"
 "md5[%s]"
 
-#: ../src/plugin.py:344
-msgid "Can't found model name."
-msgstr "Kan model naam niet vinden."
+msgid "Front Panel"
+msgstr "Voorpaneel"
 
-#: ../src/plugin.py:419
-msgid "Current version:"
-msgstr "Actuele versie:"
-
-#: ../src/plugin.py:420
-msgid "New version:"
-msgstr "Nieuwe versie:"
-
-#: ../src/plugin.py:425
-msgid "Close"
-msgstr "Sluiten"
-
-#: ../src/plugin.py:436
-msgid "This plugin is supported only the INI-Series."
-msgstr "Deze plugin wordt alleen ondersteund in de INI-serie."
-
-#: ../src/plugin.py:438
-msgid "Upgrade"
-msgstr "Upgrade"
-
-#: ../src/plugin.py:485
-msgid "No selected binary data!!"
-msgstr "Geen binary data geselecteerd!!"
-
-#: ../src/plugin.py:492
-msgid "Can't found device file!!"
-msgstr "Kan device bestand niet vinden!!"
-
-#: ../src/plugin.py:517
-msgid "You can not upgrade to the same or lower version !"
-msgstr "U kunt niet upgraden naar dezelfde of een lagere versie!"
-
-#: ../src/plugin.py:539
 msgid "Front Panel Update"
 msgstr "Voorpaneel Update"
 
-#~ msgid "%d / 100"
-#~ msgstr "%d / 100"
+msgid "New version:"
+msgstr "Nieuwe versie:"
 
-#~ msgid "Can't cancel during upgrade!!"
-#~ msgstr "Kan tijdens de upgrade niet annuleren!"
+msgid "No selected binary data!!"
+msgstr "Geen binary data geselecteerd!!"
 
-#~ msgid "Do you want to remove binary data?"
-#~ msgstr "Wilt u de binary gegevens verwijderen?"
+msgid "This plugin is supported only the INI-Series."
+msgstr "Deze plugin wordt alleen ondersteund in de INI-serie."
 
-#~ msgid "FPGA"
-#~ msgstr "FPGA"
+msgid "Upgrade"
+msgstr "Upgrade"
 
-#~ msgid "Fail to upgrade!! Retry!!"
-#~ msgstr "Upgrade mislukt!! Probeer het opnieuw!!"
+msgid "You can not upgrade to the same or lower version !"
+msgstr "U kunt niet upgraden naar dezelfde of een lagere versie!"
 
-#~ msgid "Firmware"
-#~ msgstr "Firmware"
-
-#~ msgid "Firmware Upgrade"
-#~ msgstr "Firmware Upgrade"
-
-#~ msgid "Firmware does not exist."
-#~ msgstr "Firmware bestaat niet."
-
-#~ msgid "Front Processor"
-#~ msgstr "Frontprocessor"
-
-#~ msgid "Status : 0%"
-#~ msgstr "Status : 0%"
-
-#~ msgid "Success. Press OK to exit."
-#~ msgstr "Geslaagd. Druk op OK om af te sluiten."
-
-#~ msgid "This plugin is supported only the Ultimo/Uno."
-#~ msgstr "Deze plugin is uitsluitend voor de Ultimo/Uno."
+msgid "You chose the incorrect file."
+msgstr "U heeft een verkeerd bestand gekozen."

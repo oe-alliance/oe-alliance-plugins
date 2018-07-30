@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:56+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-06-03 06:53+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -18,99 +18,32 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:19 ../src/plugin.py:20 ../src/plugin.py:21
 msgid "450 (default)"
 msgstr "450 (standaard)"
 
-#: ../src/plugin.py:23 ../src/plugin.py:24 ../src/plugin.py:25
 msgid "540 (default)"
 msgstr "540 (standaard)"
 
-#: ../src/plugin.py:71
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: ../src/plugin.py:72
-msgid "Save"
-msgstr "Opslaan"
-
-#: ../src/plugin.py:73
-msgid "Test"
-msgstr "Test"
-
-#: ../src/plugin.py:87
-msgid "Start boot frequency"
-msgstr "Start boot-frequentie"
-
-#: ../src/plugin.py:88
-msgid "Normal running frequency"
-msgstr "Normale frequentie"
-
-#: ../src/plugin.py:89
-msgid "Standby saver frequency"
-msgstr "Stand-by bespaarfrequentie"
-
-#: ../src/plugin.py:100
-msgid "Start Boot Frequency"
-msgstr "Start boot-frequentie"
-
-#: ../src/plugin.py:146
 msgid "Booster Control"
 msgstr "Booster controle"
 
-#~ msgid "Blink Record Led"
-#~ msgstr "Opname LED knippert"
+msgid "Cancel"
+msgstr "Annuleren"
 
-#~ msgid "Blue"
-#~ msgstr "Blauw"
+msgid "Normal running frequency"
+msgstr "Normale frequentie"
 
-#~ msgid "Enable led"
-#~ msgstr "LED ingeschakeld"
+msgid "Save"
+msgstr "Opslaan"
 
-#~ msgid "Led state Deep Standby"
-#~ msgstr "LED tijdens Deep Standby"
+msgid "Standby saver frequency"
+msgstr "Stand-by bespaarfrequentie"
 
-#~ msgid "Led state RUN"
-#~ msgstr "LED status RUN"
+msgid "Start Boot Frequency"
+msgstr "Start boot-frequentie"
 
-#~ msgid "Led state Record"
-#~ msgstr "LED status Opname"
+msgid "Start boot frequency"
+msgstr "Start boot-frequentie"
 
-#~ msgid "Led state Standby"
-#~ msgstr "LED status Stand-by"
-
-#~ msgid "No"
-#~ msgstr "Nee"
-
-#~ msgid "None"
-#~ msgstr "Geen"
-
-#~ msgid "Off"
-#~ msgstr "Uit"
-
-#~ msgid "Purple"
-#~ msgstr "Paars"
-
-#~ msgid "Red"
-#~ msgstr "Rood"
-
-#~ msgid "Show clock"
-#~ msgstr "Toon klok"
-
-#~ msgid "Show clock in Deep Standby"
-#~ msgstr "Toon klok in Deep Standby"
-
-#~ msgid "Time mode"
-#~ msgstr "Tijd modus"
-
-#~ msgid "Update Date/Time"
-#~ msgstr "Update Datum/Tjd"
-
-#~ msgid "VFD_Giga"
-#~ msgstr "VFD_Giga"
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "in standby: "
-#~ msgstr "in standby: "
+msgid "Test"
+msgstr "Test"

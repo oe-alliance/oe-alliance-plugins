@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:36+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-06-03 06:24+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -18,100 +18,35 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:24
-msgid "Channelnumber in Standby off"
-msgstr "Kanaalnummer in stand-by uit"
-
-#: ../src/plugin.py:24
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanaalnummer in stand-by klok"
-
-#: ../src/plugin.py:24
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanaalnummer/Klok in stand-by klok"
-
-#: ../src/plugin.py:24
-msgid "Clock always"
-msgstr "Klok altijd"
-
-#: ../src/plugin.py:24
-msgid "Always off"
-msgstr "Altijd uit"
-
-#: ../src/plugin.py:170
 msgid "7-LED Display Setup"
 msgstr "7-LED Display-Setup"
 
-#: ../src/plugin.py:182
+msgid "Always off"
+msgstr "Altijd uit"
+
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../src/plugin.py:183
-msgid "Save"
-msgstr "Opslaan"
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanaalnummer in stand-by klok"
 
-#: ../src/plugin.py:195 ../src/plugin.py:209
-msgid "Show on display"
-msgstr "Toon op Scherm"
+msgid "Channelnumber in Standby off"
+msgstr "Kanaalnummer in stand-by uit"
 
-#: ../src/plugin.py:197
-msgid "Time mode"
-msgstr "Tijd modus"
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanaalnummer/Klok in stand-by klok"
 
-#: ../src/plugin.py:254
+msgid "Clock always"
+msgstr "Klok altijd"
+
 msgid "LED Display Setup"
 msgstr "LED Scherm Instellen"
 
-#~ msgid "Blink Record Led"
-#~ msgstr "Opname LED knippert"
+msgid "Save"
+msgstr "Opslaan"
 
-#~ msgid "Blue"
-#~ msgstr "Blauw"
+msgid "Show on display"
+msgstr "Toon op Scherm"
 
-#~ msgid "Enable led"
-#~ msgstr "LED ingeschakeld"
-
-#~ msgid "Led state Deep Standby"
-#~ msgstr "LED tijdens Deep Standby"
-
-#~ msgid "Led state RUN"
-#~ msgstr "LED status RUN"
-
-#~ msgid "Led state Record"
-#~ msgstr "LED status Opname"
-
-#~ msgid "Led state Standby"
-#~ msgstr "LED status Stand-by"
-
-#~ msgid "No"
-#~ msgstr "Nee"
-
-#~ msgid "None"
-#~ msgstr "Geen"
-
-#~ msgid "Off"
-#~ msgstr "Uit"
-
-#~ msgid "Purple"
-#~ msgstr "Paars"
-
-#~ msgid "Red"
-#~ msgstr "Rood"
-
-#~ msgid "Show clock"
-#~ msgstr "Toon klok"
-
-#~ msgid "Show clock in Deep Standby"
-#~ msgstr "Toon klok in Deep Standby"
-
-#~ msgid "Update Date/Time"
-#~ msgstr "Update Datum/Tjd"
-
-#~ msgid "VFD_Giga"
-#~ msgstr "VFD_Giga"
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "in standby: "
-#~ msgstr "in standby: "
+msgid "Time mode"
+msgstr "Tijd modus"

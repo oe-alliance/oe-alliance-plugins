@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:59+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-06-03 06:55+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -18,113 +18,29 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:29
-msgid "cancel"
-msgstr "Annuleer"
+msgid "Here you can change the screen positions with the arrow buttons on your remote control!"
+msgstr "Hier kunt u de positie van het scherm wijzigen met de pijlknoppen op uw afstandsbediening!"
 
-#: ../src/plugin.py:30
-msgid "save"
-msgstr "Opslaan"
+msgid "Now you can change the position of the lower and right side. Press blue button to switch..."
+msgstr "Nu kunt u de positie van beneden en de rechterkant wijzigen. Druk op de blauwe knop om te wisselen..."
 
-#: ../src/plugin.py:31
-msgid "set default"
-msgstr "gebruik standaard"
+msgid "Now you can change the position of the upper and left side. Press blue button to switch..."
+msgstr "Nu kunt u de positie van de bovenkant en de linkerkant wijzigen. Druk op de blauwe knop om te wisselen..."
 
-#: ../src/plugin.py:32
-msgid "change sides"
-msgstr "wijzig zijden"
-
-#: ../src/plugin.py:33 ../src/plugin.py:336
 msgid "OSD Adjustment"
 msgstr "OSD aanpassen"
 
-#: ../src/plugin.py:34
-msgid ""
-"Here you can change the screen positions with the arrow buttons on your "
-"remote control!"
-msgstr ""
-"Hier kunt u de positie van het scherm wijzigen met de pijlknoppen op uw "
-"afstandsbediening!"
+msgid "cancel"
+msgstr "Annuleer"
 
-#: ../src/plugin.py:35 ../src/plugin.py:151
-msgid ""
-"Now you can change the position of the upper and left side. Press blue "
-"button to switch..."
-msgstr ""
-"Nu kunt u de positie van de bovenkant en de linkerkant wijzigen. Druk op de "
-"blauwe knop om te wisselen..."
+msgid "change sides"
+msgstr "wijzig zijden"
 
-#: ../src/plugin.py:148
-msgid ""
-"Now you can change the position of the lower and right side. Press blue "
-"button to switch..."
-msgstr ""
-"Nu kunt u de positie van beneden en de rechterkant wijzigen. Druk op de "
-"blauwe knop om te wisselen..."
-
-#: ../src/plugin.py:344
 msgid "change the OSD screen size"
 msgstr "wijzig de grootte van het OSD-scherm"
 
-#~ msgid "Blink Record Led"
-#~ msgstr "Opname LED knippert"
+msgid "save"
+msgstr "Opslaan"
 
-#~ msgid "Blue"
-#~ msgstr "Blauw"
-
-#~ msgid "Cancel"
-#~ msgstr "Annuleren"
-
-#~ msgid "Enable led"
-#~ msgstr "LED ingeschakeld"
-
-#~ msgid "Led state Deep Standby"
-#~ msgstr "LED tijdens Deep Standby"
-
-#~ msgid "Led state RUN"
-#~ msgstr "LED status RUN"
-
-#~ msgid "Led state Record"
-#~ msgstr "LED status Opname"
-
-#~ msgid "Led state Standby"
-#~ msgstr "LED status Stand-by"
-
-#~ msgid "No"
-#~ msgstr "Nee"
-
-#~ msgid "None"
-#~ msgstr "Geen"
-
-#~ msgid "Off"
-#~ msgstr "Uit"
-
-#~ msgid "Purple"
-#~ msgstr "Paars"
-
-#~ msgid "Red"
-#~ msgstr "Rood"
-
-#~ msgid "Save"
-#~ msgstr "Opslaan"
-
-#~ msgid "Show clock"
-#~ msgstr "Toon klok"
-
-#~ msgid "Show clock in Deep Standby"
-#~ msgstr "Toon klok in Deep Standby"
-
-#~ msgid "Time mode"
-#~ msgstr "Tijd modus"
-
-#~ msgid "Update Date/Time"
-#~ msgstr "Update Datum/Tjd"
-
-#~ msgid "VFD_Giga"
-#~ msgstr "VFD_Giga"
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "in standby: "
-#~ msgstr "in standby: "
+msgid "set default"
+msgstr "gebruik standaard"

@@ -6,82 +6,60 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 12:57+0200\n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-SearchPath-0: ..\n"
-#: plugin.py:64 plugin.py:164 plugin.py:171
-msgid "Remote Control Code"
+
+#, python-format
+msgid " in %d seconds."
 msgstr ""
 
-#: plugin.py:75
 msgid "Cancel"
 msgstr ""
 
-#: plugin.py:76
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr ""
+
+msgid "Keep"
+msgstr ""
+
+msgid "Please change your remote mode"
+msgstr ""
+
+msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+msgstr ""
+
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
+msgstr ""
+
+msgid "Remote Control Code"
+msgstr ""
+
+msgid "Remote Control System Code"
+msgstr ""
+
+msgid "Remote Control Type"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
 msgid "Save"
 msgstr ""
 
-#: plugin.py:87
 #, python-format
 msgid "Sorry, but %s is not supported."
 msgstr ""
 
-#: plugin.py:91
-msgid "Remote Control Type"
-msgstr ""
-
-#: plugin.py:92
-msgid "Remote Control System Code"
-msgstr ""
-
-#: plugin.py:96
 msgid "Text support"
 msgstr ""
 
-#: plugin.py:108
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr ""
-
-#: plugin.py:111 plugin.py:113
-msgid "Please change your remote mode"
-msgstr ""
-
-#: plugin.py:111
-msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
-msgstr ""
-
-#: plugin.py:111
-msgid "', then press <OK>\n"
-msgstr ""
-
-#: plugin.py:111 plugin.py:113
 msgid "Then choose 'Keep' within seconds"
-msgstr ""
-
-#: plugin.py:113
-msgid ""
-"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
-"press '000"
-msgstr ""
-
-#: plugin.py:134
-msgid "Keep"
-msgstr ""
-
-#: plugin.py:134
-msgid "Restore"
-msgstr ""
-
-#: plugin.py:140
-#, python-format
-msgid " in %d seconds."
 msgstr ""

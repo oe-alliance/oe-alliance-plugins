@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:22+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:22+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
@@ -14,19 +14,25 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:152
+#, python-format
+msgid "%d / 100"
+msgstr "%d / 100"
+
 msgid "Can't cancel during upgrade!!"
 msgstr "Impossible d'annuler pendant une mise-à-jour!"
 
-#: ../src/plugin.py:154
-msgid "Status : 0%"
-msgstr "Statut : 0%"
+msgid "Close"
+msgstr "Fermer"
 
-#: ../src/plugin.py:175
-msgid "Succeed"
-msgstr "Succès"
+msgid "Download"
+msgstr "Télécharge"
 
-#: ../src/plugin.py:189
+msgid "Downloaded "
+msgstr "Téléchargé"
+
+msgid "Downloading..."
+msgstr "Téléchargement en cours..."
+
 #, python-format
 msgid ""
 "Error[%d] : %s.\n"
@@ -35,35 +41,17 @@ msgstr ""
 "Erreur[%d] : %s.\n"
 "Appuyez sur OK pour sortir."
 
-#: ../src/plugin.py:195
-#, python-format
-msgid "%d / 100"
-msgstr "%d / 100"
-
-#: ../src/plugin.py:232 ../src/plugin.py:401
 msgid "FPGA Upgrade"
 msgstr "Mise-à-jour FPGA"
 
-#: ../src/plugin.py:234
-msgid "Close"
-msgstr "Fermer"
-
-#: ../src/plugin.py:235
-msgid "Upgrade"
-msgstr "Mise-à-jour"
-
-#: ../src/plugin.py:237
-msgid "Download"
-msgstr "Télécharge"
-
-#: ../src/plugin.py:293
-msgid "Downloaded "
-msgstr "Téléchargé"
-
-#: ../src/plugin.py:295
-msgid "Downloading..."
-msgstr "Téléchargement en cours..."
-
-#: ../src/plugin.py:353
 msgid "File not found"
 msgstr "Fichier non trouvé"
+
+msgid "Status : 0%"
+msgstr "Statut : 0%"
+
+msgid "Succeed"
+msgstr "Succès"
+
+msgid "Upgrade"
+msgstr "Mise-à-jour"

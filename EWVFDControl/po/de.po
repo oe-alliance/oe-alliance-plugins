@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:10+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:10+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -14,46 +14,35 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:22
-msgid "Channelnumber in Standby off"
-msgstr "Kanalnummer / im Standby aus"
-
-#: ../src/plugin.py:22
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanalnummer / Uhr im Standby"
-
-#: ../src/plugin.py:22
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanalnummer/Uhr / Uhr im Standby"
-
-#: ../src/plugin.py:22
-msgid "Clock always"
-msgstr "Immer Uhr"
-
-#: ../src/plugin.py:22
 msgid "Always off"
 msgstr "Immer aus"
 
-#: ../src/plugin.py:183
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../src/plugin.py:184
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalnummer / Uhr im Standby"
+
+msgid "Channelnumber in Standby off"
+msgstr "Kanalnummer / im Standby aus"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanalnummer/Uhr / Uhr im Standby"
+
+msgid "Clock always"
+msgstr "Immer Uhr"
+
+msgid "LED Display Setup"
+msgstr ""
+
 msgid "Save"
 msgstr "Speichern"
 
-#: ../src/plugin.py:185
-msgid "Update Date/Time"
-msgstr "Datum/Uhrzeit aktuallisieren"
-
-#: ../src/plugin.py:198 ../src/plugin.py:212
 msgid "Show on LED"
 msgstr "Displayanzeige"
 
-#: ../src/plugin.py:200
 msgid "Time mode"
 msgstr "Zeit Modus"
 
-#: ../src/plugin.py:261
-msgid "LED Display Setup"
-msgstr ""
+msgid "Update Date/Time"
+msgstr "Datum/Uhrzeit aktuallisieren"

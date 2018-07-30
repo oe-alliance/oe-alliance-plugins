@@ -1,40 +1,32 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: StreamTV\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: \n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: openATV\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
 "X-Poedit-Basepath: ..\n"
-"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: nl\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/plugin.py:129
-msgid "Yes"
-msgstr "Ja"
-
-#: src/plugin.py:129
 msgid "No"
 msgstr "Nee"
 
-#: src/plugin.py:130
 msgid "Stop playing this stream?"
 msgstr "Stoppen met afspelen van deze stream?"
 
-#: src/plugin.py:413
-msgid ""
-"This plugin need internet connection. Please plug in ethernet cable and try "
-"again!"
-msgstr ""
-"Deze plugin heeft een internetverbinding nodig. Sluit a.u.b. de "
-"ethernetkabel aan en probeer het opnieuw!"
-
-#: src/plugin.py:416
 msgid "StreamTVPlayer"
 msgstr "StreamTVPlayer"
+
+msgid "This plugin need internet connection. Please plug in ethernet cable and try again!"
+msgstr "Deze plugin heeft een internetverbinding nodig. Sluit a.u.b. de ethernetkabel aan en probeer het opnieuw!"
+
+msgid "Yes"
+msgstr "Ja"

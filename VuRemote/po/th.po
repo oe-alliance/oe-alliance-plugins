@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1-En-Th\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:22+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:22+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Tony @ Thai Dreambox <tonyboyth@gmail.com>\n"
@@ -18,58 +18,49 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
-msgid "Remote Control Code"
+#, python-format
+msgid " in %d seconds."
 msgstr ""
 
-#: ../src/plugin.py:68
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-#: ../src/plugin.py:69
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr ""
+
+msgid "Keep"
+msgstr ""
+
+msgid "Please change your remote mode"
+msgstr ""
+
+msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+msgstr ""
+
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
+msgstr ""
+
+msgid "Remote Control Code"
+msgstr ""
+
+msgid "Remote Control System Code"
+msgstr ""
+
+msgid "Remote Control Type"
+msgstr ""
+
+msgid "Restore"
+msgstr "นำกลับมาใช้"
+
 msgid "Save"
 msgstr "บันทึก"
 
-#: ../src/plugin.py:80
 #, python-format
 msgid "Sorry, but %s is not supported."
 msgstr ""
 
-#: ../src/plugin.py:84
-msgid "Remote Control System Code"
-msgstr ""
-
-#: ../src/plugin.py:87
 msgid "Text support"
 msgstr ""
 
-#: ../src/plugin.py:99
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr ""
-
-#: ../src/plugin.py:101
-msgid "Please change your remote mode"
-msgstr ""
-
-#: ../src/plugin.py:101
-msgid ""
-"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
-"press '000"
-msgstr ""
-
-#: ../src/plugin.py:101
 msgid "Then choose 'Keep' within seconds"
-msgstr ""
-
-#: ../src/plugin.py:122
-msgid "Keep"
-msgstr ""
-
-#: ../src/plugin.py:122
-msgid "Restore"
-msgstr "นำกลับมาใช้"
-
-#: ../src/plugin.py:128
-#, python-format
-msgid " in %d seconds."
 msgstr ""
