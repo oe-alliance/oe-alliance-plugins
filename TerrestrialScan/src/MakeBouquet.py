@@ -8,6 +8,7 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.Sources.Progress import Progress
+from Components.Sources.FrontendStatus import FrontendStatus
 from Components.config import config
 
 from enigma import eDVBResourceManager, eTimer, eDVBDB
@@ -26,7 +27,7 @@ except:
 
 from TerrestrialScan import setParams, setParamsFe
 
-from Plugins.SystemPlugins.AutoBouquetsMaker.scanner import dvbreader
+import dvbreader
 
 class MakeBouquet(Screen):
 	skin = """
@@ -58,12 +59,15 @@ class MakeBouquet(Screen):
 		self.bouquetFilename = self.BOUQUET_PREFIX + "tv"
 		self.bouquetName = _('Terrestrial')
 		self.namespace_complete_terrestrial = not (config.usage.subnetwork_terrestrial.value if hasattr(config.usage, "subnetwork_terrestrial") else True) # config.usage.subnetwork not available in all images
+		self.frontend = None
+		self.rawchannel = None
 
 		self["background"] = Pixmap()
 		self["action"] = Label(_("Starting scanner"))
 		self["status"] = Label("")
 		self["progress"] = ProgressBar()
 		self["progress_text"] = Progress()
+		self["Frontend"] = FrontendStatus(frontend_source = lambda : self.frontend, update_interval = 100)
 
 		self["actions"] = ActionMap(["SetupActions"],
 		{
@@ -84,9 +88,6 @@ class MakeBouquet(Screen):
 		self.tsidOnidKeys = self.transponders_unique.keys()
 		self.index = 0
 		self.lockTimeout = 50 	# 100ms for tick - 5 sec
-
-		self.frontend = None
-		self.rawchannel = None
 
 		self.onClose.append(self.__onClose)
 		self.onFirstExecBegin.append(self.firstExec)

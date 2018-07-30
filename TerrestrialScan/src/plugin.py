@@ -12,6 +12,8 @@ from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Screens.ServiceScan import ServiceScan
 
+from Tools.BoundFunction import boundFunction
+
 from enigma import eComponentScan
 
 from TerrestrialScan import TerrestrialScan, setParams
@@ -67,10 +69,6 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 			nim_list.append((nimmanager.nim_slots[x].slot, nimmanager.nim_slots[x].friendly_full_description))
 		self.scan_nims = ConfigSelection(choices = nim_list)
 
-		self.dvbreader_available = False
-		if os.path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/scanner/dvbreader.so"):
-			self.dvbreader_available = True
-
 		self.createSetup()
 
 		if not self.selectionChanged in self["config"].onSelectionChanged:
@@ -78,6 +76,7 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		self.selectionChanged()
 
 	def createSetup(self):
+		indent = "- "
 		setup_list = [
 			getConfigListEntry(_("Tuner"), self.scan_nims,_('Select a tuner that is configured for terrestrial scans. "Automatic" will pick the highest spec available tuner.')),
 			getConfigListEntry(_("Band"), config.plugins.TerrestrialScan.uhf_vhf,_('Most transmitters in European countries only have TV channels in the UHF band.')),
@@ -87,10 +86,9 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		]
 
 		if config.plugins.TerrestrialScan.networkid_bool.value:
-			setup_list.append(getConfigListEntry(_('- ONID to search'), config.plugins.TerrestrialScan.networkid,_('Enter the original network ID (ONID) of the multiplexes you wish to restrict the search to. UK terrestrial television normally ONID "9018".')))
+			setup_list.append(getConfigListEntry(indent + _('ONID to search'), config.plugins.TerrestrialScan.networkid,_('Enter the original network ID (ONID) of the multiplexes you wish to restrict the search to. UK terrestrial television normally ONID "9018".')))
 
-		if self.dvbreader_available:
-			setup_list.append(getConfigListEntry(_("Create terrestrial bouquet"), config.plugins.TerrestrialScan.makebouquet,_('If you select "yes" and LCNs are found in the NIT, the scan will create a bouquet of terrestrial channels in LCN order and add it to the bouquet list.')))
+		setup_list.append(getConfigListEntry(_("Create terrestrial bouquet"), config.plugins.TerrestrialScan.makebouquet,_('If you select "yes" and LCNs are found in the NIT, the scan will create a bouquet of terrestrial channels in LCN order and add it to the bouquet list.')))
 
 		self["config"].list = setup_list
 		self["config"].l.setList(setup_list)
@@ -152,7 +150,7 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		if answer:
 			self.feid = answer[0]
 			self.transponders_unique = answer[1]
-			if self.dvbreader_available and config.plugins.TerrestrialScan.makebouquet.value:
+			if config.plugins.TerrestrialScan.makebouquet.value:
 				self.session.openWithCallback(self.MakeBouquetCallback, MakeBouquet, {"feid": self.feid, "transponders_unique": self.transponders_unique, "FTA_only": config.plugins.TerrestrialScan.onlyfree.value})
 			else:
 				self.doServiceSearch()
@@ -192,14 +190,20 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 
 def TerrestrialScanStart(menuid, **kwargs):
 	if menuid == "scan":
-		return [(_("Terrestrial Scan"), TerrestrialScanMain, "TerrestrialScanScreen", 75)]
+		return [(_("Terrestrial Scan"), TerrestrialScanMain, "TerrestrialScanScreen", 75, True)]
 	return []
 
-def TerrestrialScanMain(session, **kwargs):
-	session.open(TerrestrialScanScreen)
+def TerrestrialScanMain(session, close=None, **kwargs):
+	session.openWithCallback(boundFunction(TerrestrialScanCallback, close), TerrestrialScanScreen)
+
+def TerrestrialScanCallback(close, answer):
+	if close and answer:
+		close(True)
 
 def Plugins(**kwargs):
 	pList = []
 	if nimmanager.hasNimType("DVB-T"):
 		pList.append( PluginDescriptor(name=_("Terrestrial Scan"), description="For scanning terrestrial tv", where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=TerrestrialScanStart) )
+	else:
+		print "[TerrestrialScan] No DVB-T tuner available so don't load"
 	return pList
