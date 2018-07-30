@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-10 11:56+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2018-04-10 11:56+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -15,8 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 
 msgid "/etc/enigma2"
 msgstr ""
@@ -31,17 +30,15 @@ msgid "Fetch"
 msgstr ""
 
 #, python-format
-msgid "Fetching and saving %s.xml succeeded"
+msgid ""
+"Fetching and saving %s.xml succeeded.\n"
+"Restart now for changes to take immediate effect?"
 msgstr ""
 
-msgid ""
-"File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
+msgid "File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
 msgstr ""
 
-msgid ""
-"Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the "
-"default location. Files stored in \"/etc/enigma2\" override the default file "
-"and are not updated on a software update."
+msgid "Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the default location. Files stored in \"/etc/enigma2\" override the default file and are not updated on a software update."
 msgstr ""
 
 msgid "OE-Alliance"
@@ -58,6 +55,10 @@ msgid "Saving the %s.xml file failed"
 msgstr ""
 
 msgid "Source"
+msgstr ""
+
+#, python-format
+msgid "The %s.xml download was corrupt."
 msgstr ""
 
 #, python-format

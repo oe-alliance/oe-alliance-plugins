@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:22+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:22+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas\n"
@@ -13,19 +13,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:152
+#, python-format
+msgid "%d / 100"
+msgstr "%d / 100"
+
 msgid "Can't cancel during upgrade!!"
 msgstr "Uuendamise ajal ei saa tühistada!!"
 
-#: ../src/plugin.py:154
-msgid "Status : 0%"
-msgstr "Olek : 0%"
+msgid "Close"
+msgstr "Sulge"
 
-#: ../src/plugin.py:175
-msgid "Succeed"
-msgstr "Õnnestunud"
+msgid "Download"
+msgstr "Allalaadimine"
 
-#: ../src/plugin.py:189
+msgid "Downloaded "
+msgstr "Alla laetud "
+
+msgid "Downloading..."
+msgstr "Allalaadimine..."
+
 #, python-format
 msgid ""
 "Error[%d] : %s.\n"
@@ -34,35 +40,17 @@ msgstr ""
 "Viga[%d] : %s.\n"
 "Väljumiseks vajuta OK."
 
-#: ../src/plugin.py:195
-#, python-format
-msgid "%d / 100"
-msgstr "%d / 100"
-
-#: ../src/plugin.py:232 ../src/plugin.py:401
 msgid "FPGA Upgrade"
 msgstr "FPGA uuendamine"
 
-#: ../src/plugin.py:234
-msgid "Close"
-msgstr "Sulge"
-
-#: ../src/plugin.py:235
-msgid "Upgrade"
-msgstr "Uuenda"
-
-#: ../src/plugin.py:237
-msgid "Download"
-msgstr "Allalaadimine"
-
-#: ../src/plugin.py:293
-msgid "Downloaded "
-msgstr "Alla laetud "
-
-#: ../src/plugin.py:295
-msgid "Downloading..."
-msgstr "Allalaadimine..."
-
-#: ../src/plugin.py:353
 msgid "File not found"
 msgstr "Faili ei leitud"
+
+msgid "Status : 0%"
+msgstr "Olek : 0%"
+
+msgid "Succeed"
+msgstr "Õnnestunud"
+
+msgid "Upgrade"
+msgstr "Uuenda"

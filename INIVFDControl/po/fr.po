@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:36+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:36+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
@@ -14,100 +14,35 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:24
-msgid "Channelnumber in Standby off"
-msgstr ""
-
-#: ../src/plugin.py:24
-msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:24
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:24
-msgid "Clock always"
-msgstr ""
-
-#: ../src/plugin.py:24
-msgid "Always off"
-msgstr ""
-
-#: ../src/plugin.py:170
 msgid "7-LED Display Setup"
 msgstr ""
 
-#: ../src/plugin.py:182
+msgid "Always off"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../src/plugin.py:183
-msgid "Save"
-msgstr "Sauver"
-
-#: ../src/plugin.py:195 ../src/plugin.py:209
-msgid "Show on display"
+msgid "Channelnumber in Standby Clock"
 msgstr ""
 
-#: ../src/plugin.py:197
-msgid "Time mode"
-msgstr "Mode heure"
+msgid "Channelnumber in Standby off"
+msgstr ""
 
-#: ../src/plugin.py:254
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+msgid "Clock always"
+msgstr ""
+
 msgid "LED Display Setup"
 msgstr ""
 
-#~ msgid "Blink Record Led"
-#~ msgstr "LED d'enregistrement clignotante"
+msgid "Save"
+msgstr "Sauver"
 
-#~ msgid "Blue"
-#~ msgstr "Bleu"
+msgid "Show on display"
+msgstr ""
 
-#~ msgid "Enable led"
-#~ msgstr "Activer LED"
-
-#~ msgid "Led state Deep Standby"
-#~ msgstr "État de la LED en Veille Profonde"
-
-#~ msgid "Led state RUN"
-#~ msgstr "État de la LED en Fonctionnement"
-
-#~ msgid "Led state Record"
-#~ msgstr "État de la LED en Enregistrement"
-
-#~ msgid "Led state Standby"
-#~ msgstr "État de la LED en Veille"
-
-#~ msgid "No"
-#~ msgstr "Non"
-
-#~ msgid "None"
-#~ msgstr "Aucun"
-
-#~ msgid "Off"
-#~ msgstr "Off"
-
-#~ msgid "Purple"
-#~ msgstr "Pourpre"
-
-#~ msgid "Red"
-#~ msgstr "Rouge"
-
-#~ msgid "Show clock"
-#~ msgstr "Afficher l'heure"
-
-#~ msgid "Show clock in Deep Standby"
-#~ msgstr "Afficher l'heure en Veille Profonde"
-
-#~ msgid "Update Date/Time"
-#~ msgstr "Mise-à-jour Date/Heure"
-
-#~ msgid "VFD_Giga"
-#~ msgstr "VFD_Giga"
-
-#~ msgid "Yes"
-#~ msgstr "Oui"
-
-#~ msgid "in standby: "
-#~ msgstr "en veille:"
+msgid "Time mode"
+msgstr "Mode heure"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:20+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:20+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas\n"
@@ -13,63 +13,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
-msgid "Remote Control Code"
-msgstr "Puldi kood"
-
-#: ../src/plugin.py:68
-msgid "Cancel"
-msgstr "Tühista"
-
-#: ../src/plugin.py:69
-msgid "Save"
-msgstr "Salvesta"
-
-#: ../src/plugin.py:80
-#, python-format
-msgid "Sorry, but %s is not supported."
-msgstr ""
-
-#: ../src/plugin.py:84
-msgid "Remote Control System Code"
-msgstr "Puldi süsteemi kood"
-
-#: ../src/plugin.py:87
-msgid "Text support"
-msgstr "Teksti toetus"
-
-#: ../src/plugin.py:99
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr "FAILI EI OLE : /proc/stb/fp/remote_code"
-
-#: ../src/plugin.py:101
-msgid "Please change your remote mode"
-msgstr "Muuda puldi režiimi"
-
-#: ../src/plugin.py:101
-msgid ""
-"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
-"press '000"
-msgstr ""
-"Vajuta ja hoia '2' & '7' kuni punane LED põleb ühtlaselt, siis vajuta "
-"'HELP', siis vajuta '000"
-
-#: ../src/plugin.py:101
-msgid "Then choose 'Keep' within seconds"
-msgstr ""
-
-#: ../src/plugin.py:122
-msgid "Keep"
-msgstr "Hoia alles"
-
-#: ../src/plugin.py:122
-msgid "Restore"
-msgstr "Taasta"
-
-#: ../src/plugin.py:128
 #, python-format
 msgid " in %d seconds."
 msgstr ""
 
-#~ msgid "This Plugin only support for UNO/ULTIMO"
-#~ msgstr "See laiendus toetab ainult UNO/ULTIMO vastuvõtjaid"
+msgid "Cancel"
+msgstr "Tühista"
+
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr "FAILI EI OLE : /proc/stb/fp/remote_code"
+
+msgid "Keep"
+msgstr "Hoia alles"
+
+msgid "Please change your remote mode"
+msgstr "Muuda puldi režiimi"
+
+msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+msgstr "Vajuta ja hoia '2' & '7' kuni punane LED põleb ühtlaselt, siis vajuta 'HELP', siis vajuta '000"
+
+#, fuzzy
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
+msgstr "Vajuta ja hoia '2' & '7' kuni punane LED põleb ühtlaselt, siis vajuta 'HELP', siis vajuta '000"
+
+msgid "Remote Control Code"
+msgstr "Puldi kood"
+
+msgid "Remote Control System Code"
+msgstr "Puldi süsteemi kood"
+
+#, fuzzy
+msgid "Remote Control Type"
+msgstr "Puldi kood"
+
+msgid "Restore"
+msgstr "Taasta"
+
+msgid "Save"
+msgstr "Salvesta"
+
+#, python-format
+msgid "Sorry, but %s is not supported."
+msgstr ""
+
+msgid "Text support"
+msgstr "Teksti toetus"
+
+msgid "Then choose 'Keep' within seconds"
+msgstr ""

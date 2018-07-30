@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Firmware Upgrade\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:19+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: OpenSPA <openspa.info>\n"
@@ -12,66 +12,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:34 ../src/plugin.py:43 ../src/plugin.py:50
-#: ../src/plugin.py:59 ../src/plugin.py:70
-msgid "FPGA"
-msgstr "FPGA"
-
-#: ../src/plugin.py:35 ../src/plugin.py:51 ../src/plugin.py:60
-#: ../src/plugin.py:71
-msgid "Front Processor"
-msgstr "Front Processor"
-
-#: ../src/plugin.py:61
-msgid "VFD Controller"
-msgstr ""
-
-#: ../src/plugin.py:348
-msgid "Can't cancel during upgrade!!"
-msgstr "No se puede cancelar durante la actualización"
-
-#: ../src/plugin.py:350
-msgid "Status : 0%"
-msgstr "Estado: 0%"
-
-#: ../src/plugin.py:383
-msgid "Fail to upgrade!! Retry!!"
-msgstr "Fallo al actualizar. Vuelva a intentarlo"
-
-#: ../src/plugin.py:385
 #, python-format
 msgid "%d / 100"
 msgstr "%d / 100"
 
-#: ../src/plugin.py:388
-msgid "Success. Press OK to exit."
-msgstr "Correcto. Pulse OK para salir"
+msgid "Can't cancel during upgrade!!"
+msgstr "No se puede cancelar durante la actualización"
 
-#: ../src/plugin.py:417
-msgid "Do you want to remove binary data?"
-msgstr "Desea eliminar los datos binarios?"
-
-#: ../src/plugin.py:435
-msgid "Download"
-msgstr ""
-
-#: ../src/plugin.py:476
-msgid "Can't found binary file."
-msgstr "No se ha encontrado el archivo binario"
-
-#: ../src/plugin.py:479
-msgid "Can't found MD5 file."
-msgstr "No se ha encontrado el archivo MD5"
-
-#: ../src/plugin.py:490 ../src/plugin.py:494
-msgid "You choose the incorrect file. "
-msgstr ""
-
-#: ../src/plugin.py:498
 msgid "Can't find /usr/bin/md5sum"
 msgstr "No se ha encontrado /usr/bin/md5sum"
 
-#: ../src/plugin.py:505
+msgid "Can't found MD5 file."
+msgstr "No se ha encontrado el archivo MD5"
+
+msgid "Can't found binary file."
+msgstr "No se ha encontrado el archivo binario"
+
+msgid "Can't found device file!!"
+msgstr "No se ha encontrado el archivo de dispositivo"
+
+msgid "Can't found model name."
+msgstr "No se ha encontrado el nombre del modelo"
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Do you want to remove binary data?"
+msgstr "Desea eliminar los datos binarios?"
+
+msgid "Download"
+msgstr ""
+
+msgid "Duo/Solo was not support."
+msgstr ""
+
+msgid "FPGA"
+msgstr "FPGA"
+
+msgid "Fail to upgrade!! Retry!!"
+msgstr "Fallo al actualizar. Vuelva a intentarlo"
+
 #, python-format
 msgid ""
 "Fail to verify data file. \n"
@@ -82,51 +62,35 @@ msgstr ""
 "archivo[%s]\n"
 "md5[%s]"
 
-#: ../src/plugin.py:578
-msgid "Firmware does not exist."
-msgstr "No se encuentra el firmware"
-
-#: ../src/plugin.py:617
-msgid "Can't found model name."
-msgstr "No se ha encontrado el nombre del modelo"
-
-#: ../src/plugin.py:689
-msgid "Close"
-msgstr "Cerrar"
-
-#: ../src/plugin.py:700
-msgid "Duo/Solo was not support."
-msgstr ""
-
-#: ../src/plugin.py:702
-msgid "Upgrade"
-msgstr "Actualizar"
-
-#: ../src/plugin.py:710
 msgid "Firmware"
 msgstr "Firmware"
 
-#: ../src/plugin.py:761
-msgid "No selected binary data!!"
-msgstr "No se han seleccionado datos binarios"
-
-#: ../src/plugin.py:768
-msgid "Can't found device file!!"
-msgstr "No se ha encontrado el archivo de dispositivo"
-
-#: ../src/plugin.py:855
 msgid "Firmware Upgrade"
 msgstr "Actualizar Firmware"
 
-#: ../src/plugin.py:855
+msgid "Firmware does not exist."
+msgstr "No se encuentra el firmware"
+
+msgid "Front Processor"
+msgstr "Front Processor"
+
+msgid "No selected binary data!!"
+msgstr "No se han seleccionado datos binarios"
+
+msgid "Status : 0%"
+msgstr "Estado: 0%"
+
+msgid "Success. Press OK to exit."
+msgstr "Correcto. Pulse OK para salir"
+
+msgid "Upgrade"
+msgstr "Actualizar"
+
 msgid "Upgrade Firmware.."
 msgstr "Actualizar el firmware"
 
-#~ msgid "Download the firmware (latest)"
-#~ msgstr "Descargar el firmware (el último)"
+msgid "VFD Controller"
+msgstr ""
 
-#~ msgid "This plugin is supported only the Ultimo/Uno."
-#~ msgstr "Este plugin es sólo para Ultimo/Uno."
-
-#~ msgid "You chose the incorrect file."
-#~ msgstr "Ha elegido el archivo equivocado."
+msgid "You choose the incorrect file. "
+msgstr ""

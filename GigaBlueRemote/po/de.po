@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-04-28 08:30+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-04-28 08:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,56 +15,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
-#: plugin.py:15
-msgid "Code 1"
-msgstr "Kode 1"
+#, python-format
+msgid " within %d seconds."
+msgstr " innerhalb %d Sekunden."
 
-#: plugin.py:15
-msgid "Code 2"
-msgstr "Kode 2"
-
-#: plugin.py:50 plugin.py:142 plugin.py:149
-msgid "Remote Control Code"
-msgstr "Kodierung Fernbedienung"
-
-#: plugin.py:61 plugin.py:112
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: plugin.py:62
+msgid "Code 1"
+msgstr "Kode 1"
+
+msgid "Code 2"
+msgstr "Kode 2"
+
+msgid "Confirm"
+msgstr "Bestätigen"
+
+msgid "FILE DOES NOT EXIST : /proc/stb/ir/rc/customcode"
+msgstr "DATEI EXISTIERT NICHT : /proc/stb/ir/rc/customcode"
+
+msgid "Please change now the mode on your RCU."
+msgstr "Bitte ändern Sie jetzt die Kodierung auf Ihrer Fernbedienung."
+
+msgid "Press and hold 'GIGA' & '5' for 5 seconds."
+msgstr "Drücken und halten Sie 'GIGA' & '5' für 5 Sekunden."
+
+msgid "Remote Control Code"
+msgstr "Kodierung Fernbedienung"
+
+msgid "Remote Control Code:"
+msgstr "Kodierung Fernbedienung:"
+
 msgid "Save"
 msgstr "Speichern"
 
-#: plugin.py:73
 #, python-format
 msgid "Sorry, but %s is not supported."
 msgstr "Entschuldigung, aber %s wird nicht unterstützt."
 
-#: plugin.py:77
-msgid "Remote Control Code:"
-msgstr "Kodierung Fernbedienung:"
-
-#: plugin.py:89
-msgid "FILE DOES NOT EXIST : /proc/stb/ir/rc/customcode"
-msgstr "DATEI EXISTIERT NICHT : /proc/stb/ir/rc/customcode"
-
-#: plugin.py:91
-msgid "Please change now the mode on your RCU."
-msgstr "Bitte ändern Sie jetzt die Kodierung auf Ihrer Fernbedienung."
-
-#: plugin.py:91
-msgid "Press and hold 'GIGA' & '5' for 5 seconds."
-msgstr "Drücken und halten Sie 'GIGA' & '5' für 5 Sekunden."
-
-#: plugin.py:91
 msgid "Then choose 'Confirm' "
 msgstr "Dann wählen Sie 'Bestätigen' "
-
-#: plugin.py:112
-msgid "Confirm"
-msgstr "Bestätigen"
-
-#: plugin.py:118
-#, python-format
-msgid " within %d seconds."
-msgstr " innerhalb %d Sekunden."

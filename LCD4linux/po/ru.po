@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
-"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -17,15 +18,31 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
+#, fuzzy, python-format
 msgid "% + Load@1min"
 msgstr "% + Загрузка@1мин"
 
+#, fuzzy, python-format
 msgid "% + Load@5min"
 msgstr "% + Загрузка@5мин"
 
+#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr "%d Почта  %d Новая  %s"
 
+msgid "%d-%b-%Y"
+msgstr ""
+
+msgid "%d.%m.%Y"
+msgstr ""
+
+msgid "%d.%m.%Y - %H:%M"
+msgstr ""
+
+msgid "%d.%m.%y %H:%M:%S"
+msgstr ""
+
+#, python-format
 msgid "%s - Current value: %s"
 msgstr "%s - Текущее значение: %s"
 
@@ -74,7 +91,38 @@ msgstr "- CPU"
 msgid "- Caption Color"
 msgstr "- Название цвета"
 
+msgid "- Clear Key"
+msgstr ""
+
 msgid "- Color"
+msgstr "- Цвет"
+
+#, fuzzy
+msgid "- Color 1"
+msgstr "- Цвет"
+
+#, fuzzy
+msgid "- Color 2"
+msgstr "- Цвет"
+
+#, fuzzy
+msgid "- Color 3"
+msgstr "- Цвет"
+
+#, fuzzy
+msgid "- Color 4"
+msgstr "- Цвет"
+
+#, fuzzy
+msgid "- Color 5"
+msgstr "- Цвет"
+
+#, fuzzy
+msgid "- Color 6"
+msgstr "- Цвет"
+
+#, fuzzy
+msgid "- Color Text"
 msgstr "- Цвет"
 
 msgid "- Current Day Background Color"
@@ -98,8 +146,13 @@ msgstr "- По умолчанию обложка [ok]>"
 msgid "- Device Name"
 msgstr "- Имя устройства"
 
-msgid "- Download Cover from Google"
+#, fuzzy
+msgid "- Download Cover"
 msgstr "- Загрузить обложку из Google"
+
+#, fuzzy
+msgid "- Download Type"
+msgstr "-  Тип"
 
 msgid "- Extra Color Chill"
 msgstr "- Дополнительные цвета"
@@ -127,6 +180,9 @@ msgstr "- Размер шрифта"
 
 msgid "- Full Screen"
 msgstr "- На весь экран"
+
+msgid "- Google API-Key console.developers.google.com/apis"
+msgstr ""
 
 msgid "- Gradient"
 msgstr "- Градиент"
@@ -191,6 +247,9 @@ msgstr ""
 msgid "- LCD 3 Rotate"
 msgstr "- LCD 3 Чередовать"
 
+msgid "- LCD Auto-OFF"
+msgstr ""
+
 msgid "- Layout"
 msgstr "- Макет"
 
@@ -207,6 +266,9 @@ msgid "- Mail Konto"
 msgstr "- Учетная запись почты"
 
 msgid "- Module"
+msgstr ""
+
+msgid "- Module userdefined"
 msgstr ""
 
 msgid "- Name"
@@ -344,6 +406,10 @@ msgstr "- Разделение экрана"
 msgid "- Station"
 msgstr ""
 
+#, fuzzy
+msgid "- Text"
+msgstr "- Размер текста"
+
 msgid "- Text Size"
 msgstr "- Размер текста"
 
@@ -385,6 +451,9 @@ msgstr "- маскимум линий"
 
 msgid "- only active Tuner"
 msgstr "- только активный тюнер"
+
+msgid "- use Info when empty"
+msgstr ""
 
 msgid "- which LCD"
 msgstr "- какой LCD"
@@ -515,6 +584,9 @@ msgstr "255x64"
 msgid "270"
 msgstr "270"
 
+msgid "2h"
+msgstr ""
+
 msgid "2min"
 msgstr "2мин."
 
@@ -541,6 +613,9 @@ msgstr "32bit -Цвет"
 
 msgid "35%"
 msgstr "35%"
+
+msgid "3h"
+msgstr ""
 
 msgid "3min"
 msgstr "3мин."
@@ -569,6 +644,9 @@ msgstr "40с"
 msgid "45%"
 msgstr "45%"
 
+msgid "480x320"
+msgstr ""
+
 msgid "4min"
 msgstr "4мин"
 
@@ -596,11 +674,18 @@ msgstr "50с"
 msgid "55%"
 msgstr "55%"
 
+msgid "5h"
+msgstr ""
+
 msgid "5min"
 msgstr "5мин."
 
 msgid "5s"
 msgstr "5с"
+
+#, fuzzy
+msgid "60"
+msgstr "60%"
 
 msgid "60%"
 msgstr "60%"
@@ -626,6 +711,9 @@ msgstr "75%"
 msgid "80%"
 msgstr "80%"
 
+msgid "800x480"
+msgstr ""
+
 msgid "85%"
 msgstr "85%"
 
@@ -643,6 +731,14 @@ msgstr "95%"
 
 msgid "96x64"
 msgstr "96x64"
+
+#, fuzzy
+msgid "97%"
+msgstr "70%"
+
+#, fuzzy
+msgid "98%"
+msgstr "80%"
 
 msgid "Active Screen"
 msgstr "Активный экран"
@@ -668,14 +764,8 @@ msgstr "Аналоговые+дата+будни"
 msgid "Analog+Date+Weekday 2"
 msgstr ""
 
-msgid "April"
-msgstr "Апреля"
-
 msgid "Audio/Video"
 msgstr "Аудио/Видео"
-
-msgid "August"
-msgstr "Августа"
 
 msgid "Background"
 msgstr ""
@@ -712,6 +802,10 @@ msgstr "Box-Skin-LCD включить медиа режим"
 
 msgid "Box-Skin-LCD Enable On-Mode"
 msgstr "Box-Skin-LCD Enable On-Mode"
+
+#, fuzzy
+msgid "Box-Skin-LCD Offset"
+msgstr "Box-Skin-LCD"
 
 msgid "C"
 msgstr "C"
@@ -794,6 +888,12 @@ msgstr ""
 msgid "Corner"
 msgstr "Угол"
 
+msgid "Corner+Timeshift"
+msgstr ""
+
+msgid "Coversearch"
+msgstr ""
+
 msgid "Crashlog"
 msgstr "Креш лог"
 
@@ -857,9 +957,6 @@ msgstr "Даты без иконок"
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr "Debug-Logging > /tmp/L4log.txt"
 
-msgid "December"
-msgstr "Декабря"
-
 msgid "Delete"
 msgstr "Удалить"
 
@@ -908,13 +1005,15 @@ msgstr "Расширенное описание"
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
 
-msgid "February"
-msgstr "Февраля"
-
 msgid "First Quarter"
 msgstr "Первая четверть"
 
-msgid "Flaps Design"
+#, fuzzy
+msgid "Flaps Design Date"
+msgstr "Дизайн Flaps"
+
+#, fuzzy
+msgid "Flaps Design Weekday"
 msgstr "Дизайн Flaps"
 
 msgid "Font"
@@ -941,11 +1040,12 @@ msgstr "Zeichensatz Global [ok]>"
 msgid "Frame"
 msgstr "Фрейм"
 
+#, fuzzy
+msgid "Frame x2"
+msgstr "Фрейм"
+
 msgid "Fri"
 msgstr "Пятн."
-
-msgid "Friday"
-msgstr "Пятница"
 
 msgid "FritzCall"
 msgstr "FritzCall"
@@ -1002,6 +1102,9 @@ msgstr ""
 msgid "Global"
 msgstr "Глобально"
 
+msgid "Google API"
+msgstr ""
+
 msgid "Gradient"
 msgstr ""
 
@@ -1015,6 +1118,12 @@ msgid "IMAP-SSL"
 msgstr "IMAP-SSL"
 
 msgid "IP seurity not supported by Box"
+msgstr ""
+
+msgid "Idle"
+msgstr ""
+
+msgid "Indoor"
 msgstr ""
 
 msgid "Info"
@@ -1041,17 +1150,15 @@ msgstr "Internes Vu+ Duo2 LCD 400x240"
 msgid "JPG"
 msgstr ""
 
-msgid "January"
-msgstr "Января"
-
 msgid "Javascript"
 msgstr "JavaScript"
 
-msgid "July"
-msgstr "Июля"
+#, fuzzy
+msgid "Javascript no Refresh"
+msgstr "JavaScript"
 
-msgid "June"
-msgstr "Июня"
+msgid "Key"
+msgstr ""
 
 msgid "Key for Screen Change"
 msgstr "Клавиша изменения экрана"
@@ -1101,14 +1208,47 @@ msgstr "LCD 3 Тип"
 msgid "LCD Custom Height"
 msgstr "Своя высота LCD"
 
+#, fuzzy
+msgid "LCD Custom Height 2"
+msgstr "Своя высота LCD"
+
 msgid "LCD Custom Width"
+msgstr "Своя высота LCD"
+
+#, fuzzy
+msgid "LCD Custom Width 2"
 msgstr "Своя высота LCD"
 
 msgid "LCD Display"
 msgstr "LCD Дисплей"
 
+msgid "LCD Off when shutdown"
+msgstr ""
+
+#, fuzzy
+msgid "LCD4Linux"
+msgstr "LCD4linux включен"
+
+#, fuzzy
+msgid "LCD4linux"
+msgstr "LCD4linux включен"
+
+msgid "LCD4linux Display-Mode Idle"
+msgstr ""
+
+msgid "LCD4linux Display-Mode MediaPlayer"
+msgstr ""
+
+#, fuzzy
+msgid "LCD4linux Display-Mode On"
+msgstr "LCD Дисплей"
+
 msgid "LCD4linux Screen Switch"
 msgstr ""
+
+#, fuzzy
+msgid "LCD4linux Settings"
+msgstr "LCD4linux включен"
 
 msgid "LCD4linux enabled"
 msgstr "LCD4linux включен"
@@ -1116,12 +1256,22 @@ msgstr "LCD4linux включен"
 msgid "Last Quarter"
 msgstr "Последняя четверть"
 
+#, fuzzy
+msgid "Line"
+msgstr "- Линий"
+
+#, fuzzy
+msgid "List of Storage Devices"
+msgstr "Хранение-Устройство"
+
 msgid "Load Active Config-File"
 msgstr "Загрузить активный конфиг"
 
-msgid "Load Defaults"
+#, fuzzy
+msgid "Load Defaults / Empty Config"
 msgstr "Загрузить по умолчанию"
 
+#, python-format
 msgid "Load File : %s"
 msgstr "Загрузить Файл : %s"
 
@@ -1152,10 +1302,13 @@ msgstr "Долгое нажатие >> Тип 2"
 msgid "Long InfoKey"
 msgstr "Долгое нажатие EPG"
 
-msgid "MJPEG Boundary Mode"
+msgid "MJPEG Cycle"
 msgstr ""
 
 msgid "MJPEG Header Mode"
+msgstr ""
+
+msgid "MJPEG Restart on Error"
 msgstr ""
 
 msgid "MJPEG Stream"
@@ -1164,10 +1317,16 @@ msgstr ""
 msgid "MJPEG Stream LCD 1 Port"
 msgstr ""
 
+msgid "MJPEG Stream LCD 1 Virtual Brightness"
+msgstr ""
+
 msgid "MJPEG Stream LCD 1 enable"
 msgstr ""
 
 msgid "MJPEG Stream LCD 2 Port"
+msgstr ""
+
+msgid "MJPEG Stream LCD 2 Virtual Brightness"
 msgstr ""
 
 msgid "MJPEG Stream LCD 2 enable"
@@ -1176,10 +1335,16 @@ msgstr ""
 msgid "MJPEG Stream LCD 3 Port"
 msgstr ""
 
+msgid "MJPEG Stream LCD 3 Virtual Brightness"
+msgstr ""
+
 msgid "MJPEG Stream LCD 3 enable"
 msgstr ""
 
 msgid "MSN"
+msgstr ""
+
+msgid "MUTE or defined Keys"
 msgstr ""
 
 msgid "Mail"
@@ -1260,12 +1425,6 @@ msgstr ""
 msgid "Mail Show Empty Mailboxes"
 msgstr "Почта-Показывать пустые почтовые ящики"
 
-msgid "March"
-msgstr "Марта"
-
-msgid "May"
-msgstr "Мая"
-
 msgid "Media"
 msgstr "Медиа"
 
@@ -1311,6 +1470,9 @@ msgstr ""
 msgid "Module 1-5"
 msgstr ""
 
+msgid "Module 1-6"
+msgstr ""
+
 msgid "Module 2"
 msgstr ""
 
@@ -1323,23 +1485,35 @@ msgstr ""
 msgid "Module 2+4"
 msgstr ""
 
+msgid "Module 2-6"
+msgstr ""
+
 msgid "Module 3"
 msgstr ""
 
 msgid "Module 3+4"
 msgstr ""
 
+msgid "Module 3-6"
+msgstr ""
+
 msgid "Module 4"
+msgstr ""
+
+msgid "Module 4-6"
 msgstr ""
 
 msgid "Module 5"
 msgstr ""
 
+msgid "Module 5-6"
+msgstr ""
+
+msgid "Module 6"
+msgstr ""
+
 msgid "Mon"
 msgstr "Пон"
-
-msgid "Monday"
-msgstr "Понедельник"
 
 msgid "Month"
 msgstr "Месяц"
@@ -1352,6 +1526,31 @@ msgstr "Месяц-путь к иконкам[ok]>"
 
 msgid "Moonphase"
 msgstr "Фазы Луны"
+
+msgid "MusicCast"
+msgstr ""
+
+msgid "MusicCast Cover"
+msgstr ""
+
+msgid "MusicCast IP"
+msgstr ""
+
+msgid "MusicCast Ping Timeout [ms]"
+msgstr ""
+
+msgid "MusicCast Play Check"
+msgstr ""
+
+#, fuzzy
+msgid "MusicCast Refresh [s]"
+msgstr "WebIF обновление [s]"
+
+msgid "MusicCast Server IP [optional]"
+msgstr ""
+
+msgid "Mute"
+msgstr ""
 
 msgid "N"
 msgstr ""
@@ -1389,6 +1588,9 @@ msgstr "Netatmo CO2 Min Range"
 msgid "Netatmo Comfort Indicator"
 msgstr ""
 
+msgid "Network Check active"
+msgstr ""
+
 msgid "New Moon"
 msgstr "Новолуние"
 
@@ -1407,9 +1609,6 @@ msgstr ""
 msgid "Normal (5s)"
 msgstr "Нормальный (5с)"
 
-msgid "November"
-msgstr "Ноября"
-
 msgid "Now/Next"
 msgstr ""
 
@@ -1421,9 +1620,6 @@ msgstr "OSD"
 
 msgid "OSD [display time]"
 msgstr "OSD [Отображение времени]"
-
-msgid "October"
-msgstr "Октября"
 
 msgid "Offline"
 msgstr "Оффлайн"
@@ -1449,8 +1645,15 @@ msgstr "Только новости"
 msgid "OpenWeatherMap"
 msgstr ""
 
+msgid "Outdoor"
+msgstr ""
+
 msgid "PNG"
 msgstr ""
+
+#, fuzzy
+msgid "Parent Directory"
+msgstr "Фото Каталог рекурсивно"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (or compatible LCD) 240x320"
@@ -1479,6 +1682,9 @@ msgstr "Пикон+позиция слева"
 msgid "Picon+Position right"
 msgstr "Пикон+позиция справа"
 
+msgid "Picon+Timeshift"
+msgstr ""
+
 msgid "Picture"
 msgstr "Картинка"
 
@@ -1499,6 +1705,10 @@ msgstr "Сортировка картинок"
 
 msgid "Picture Type [only Picture]"
 msgstr ""
+
+#, fuzzy
+msgid "Picture not available"
+msgstr "Сортировка картинок"
 
 msgid "Plug Tuner"
 msgstr ""
@@ -1542,6 +1752,9 @@ msgstr "Радио"
 msgid "Radio+Media"
 msgstr "Радио+Медиа"
 
+msgid "Rain"
+msgstr ""
+
 msgid "Recording"
 msgstr "Запись"
 
@@ -1578,6 +1791,15 @@ msgstr ""
 msgid "Remote Box Poll every Minutes"
 msgstr ""
 
+msgid "Remote Box Timer"
+msgstr ""
+
+msgid "Remote Box Timer Poll every Minutes"
+msgstr ""
+
+msgid "Remote Box Timer [Displayname:]IP/Name"
+msgstr ""
+
 msgid "Restart Displays"
 msgstr "Рестарт дисплея"
 
@@ -1602,6 +1824,10 @@ msgstr ""
 msgid "SW"
 msgstr ""
 
+#, fuzzy
+msgid "Samsung SPF-1000P 1024x600"
+msgstr "Samsung SPF-105P 1024x600"
+
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
 
@@ -1619,6 +1845,10 @@ msgstr "Samsung SPF-72H 800x480"
 
 msgid "Samsung SPF-75H/76H 800x480"
 msgstr "Samsung SPF-75H/76H 800x480"
+
+#, fuzzy
+msgid "Samsung SPF-800P 800x480"
+msgstr "Samsung SPF-87H 800x480"
 
 msgid "Samsung SPF-83H 800x600"
 msgstr "Samsung SPF-83H 800x600"
@@ -1641,15 +1871,13 @@ msgstr "Субб."
 msgid "Satellite"
 msgstr "Спутник"
 
-msgid "Saturday"
-msgstr "Суббота"
-
 msgid "Save"
 msgstr "Сохранить"
 
 msgid "Save Config"
 msgstr ""
 
+#, python-format
 msgid "Save Config to File... (%s)"
 msgstr "Сохранить конфиг в файл... (%s)"
 
@@ -1740,6 +1968,10 @@ msgstr "Экран 4"
 msgid "Screen 5"
 msgstr "Экран 5"
 
+#, fuzzy
+msgid "Screen 5-8"
+msgstr "Экран 5-9"
+
 msgid "Screen 5-9"
 msgstr "Экран 5-9"
 
@@ -1764,10 +1996,20 @@ msgstr ""
 msgid "Screens used for Changing"
 msgstr "Функция используется для изменения экрана"
 
-msgid "September"
-msgstr "Сентября"
-
 msgid "Service search first"
+msgstr ""
+
+#, fuzzy
+msgid "Set Global >>"
+msgstr "Глобально"
+
+msgid "Set Idle >>"
+msgstr ""
+
+msgid "Set Media >>"
+msgstr ""
+
+msgid "Set On >>"
 msgstr ""
 
 msgid "Shadow Edges"
@@ -1812,6 +2054,14 @@ msgstr "Показать картинку 3"
 msgid "Show Picture 4"
 msgstr "Показать картинку 4"
 
+#, fuzzy
+msgid "Show Text 1"
+msgstr "Показать текст. файл 2"
+
+#, fuzzy
+msgid "Show Text 2"
+msgstr "Показать текст. файл 2"
+
 msgid "Show Textfile"
 msgstr "Показать текст. файл"
 
@@ -1830,11 +2080,39 @@ msgstr "Показать oscam.lcd"
 msgid "Signal Quality Bar"
 msgstr "Уровень сигнала"
 
+msgid "Sonos"
+msgstr ""
+
+msgid "Sonos IP"
+msgstr ""
+
+msgid "Sonos Ping Timeout [ms]"
+msgstr ""
+
+msgid "Sonos Play Check"
+msgstr ""
+
+#, fuzzy
+msgid "Sonos Refresh [s]"
+msgstr "WebIF обновление [s]"
+
 msgid "Standby"
 msgstr "Standby"
 
 msgid "Storage-Devices"
 msgstr "Хранение-Устройство"
+
+#, fuzzy
+msgid "Storage-Devices: Color Back"
+msgstr "Хранение-Устройство: Принудит Чтение"
+
+#, fuzzy
+msgid "Storage-Devices: Color Bar"
+msgstr "Хранение-Устройство: Принудит Чтение"
+
+#, fuzzy
+msgid "Storage-Devices: Color Full"
+msgstr "Хранение-Устройство: Принудит Чтение"
 
 msgid "Storage-Devices: Force Read"
 msgstr "Хранение-Устройство: Принудит Чтение"
@@ -1844,9 +2122,6 @@ msgstr "Stutter TV"
 
 msgid "Sun"
 msgstr "Воскр."
-
-msgid "Sunday"
-msgstr "Воскресенье"
 
 msgid "Sunrise"
 msgstr "Восход солнца"
@@ -1884,9 +2159,6 @@ msgstr "Threads pro LCD"
 msgid "Thur"
 msgstr "Чет"
 
-msgid "Thursday"
-msgstr "Четверг"
-
 msgid "Time"
 msgstr "Время"
 
@@ -1911,8 +2183,9 @@ msgstr "Заголовок"
 msgid "Tue"
 msgstr "Вт"
 
-msgid "Tuesday"
-msgstr "Вторник"
+#, fuzzy
+msgid "Tuner"
+msgstr "Используемый тюнер"
 
 msgid "Tuner Color"
 msgstr "Цвет тюнера"
@@ -1986,6 +2259,9 @@ msgstr "Погода 2"
 msgid "Weather API"
 msgstr ""
 
+msgid "Weather API-ID Key WeatherUnlocked"
+msgstr ""
+
 msgid "Weather API-Key OpenWeatherMap"
 msgstr ""
 
@@ -2022,6 +2298,10 @@ msgstr "Погода-Увеличение иконок"
 msgid "Weather-Icon-Path [ok]>"
 msgstr "Погода-путь к иконкам [ok]>"
 
+#, fuzzy
+msgid "WeatherUnlocked"
+msgstr "Погода-Линии"
+
 msgid "WebIF"
 msgstr ""
 
@@ -2046,9 +2326,6 @@ msgstr "WebIF обновление [s]"
 msgid "Wed"
 msgstr "Ср."
 
-msgid "Wednesday"
-msgstr "Среда"
-
 msgid "Week"
 msgstr "Неделя"
 
@@ -2056,6 +2333,9 @@ msgid "Week+Header"
 msgstr "Неделя+Заголовок"
 
 msgid "Weekday"
+msgstr ""
+
+msgid "Wind"
 msgstr ""
 
 msgid "all"
@@ -2069,6 +2349,9 @@ msgstr "alternative Copy-Mode/DM800hd (24bit)"
 
 msgid "always"
 msgstr "всегда"
+
+msgid "any Key"
+msgstr ""
 
 msgid "aquamarine"
 msgstr "aquamarine"
@@ -2118,6 +2401,7 @@ msgstr "copy to On"
 msgid "cornflowerblue"
 msgstr "cornflowerblue"
 
+#, python-format
 msgid "currently set : %s"
 msgstr "настоящее время установлен : %s"
 
@@ -2226,6 +2510,10 @@ msgstr "moccasin"
 msgid "no"
 msgstr "нет"
 
+#, fuzzy
+msgid "no Bar"
+msgstr "Event Icon Bar"
+
 msgid "no Calendar"
 msgstr "нет календаря"
 
@@ -2234,6 +2522,10 @@ msgstr ""
 
 msgid "no Dates"
 msgstr "нет даты"
+
+#, fuzzy
+msgid "no Frame"
+msgstr "Фрейм"
 
 msgid "no Icon"
 msgstr "kein Icon"
@@ -2295,6 +2587,10 @@ msgstr "только фото 800x600"
 msgid "only Picture Custom Size"
 msgstr "только фото своего размера"
 
+#, fuzzy
+msgid "only Picture Custom Size 2"
+msgstr "только фото своего размера"
+
 msgid "only Progress Bar"
 msgstr "только прогресс-бар"
 
@@ -2330,6 +2626,9 @@ msgstr "rpm"
 
 msgid "rpm/2"
 msgstr "rpm/2"
+
+msgid "same color"
+msgstr ""
 
 msgid "sandybrown"
 msgstr "sandbraun"
@@ -2369,6 +2668,9 @@ msgstr ""
 
 msgid "use lead-time"
 msgstr "Использовать время"
+
+msgid "userdefined"
+msgstr ""
 
 msgid "vertically"
 msgstr "вертикально"
@@ -2411,6 +2713,18 @@ msgstr "mit Icon"
 
 msgid "with Icon & Targetnumber"
 msgstr ""
+
+#, fuzzy
+msgid "with Minutes Total / Endtime (above)"
+msgstr "вместе с оставшиеся минуты (см.выше)"
+
+#, fuzzy
+msgid "with Minutes Total / Endtime (above/Size 1.5)"
+msgstr "with Remaining Minutes (above/Size 1.5)"
+
+#, fuzzy
+msgid "with Minutes Total / Endtime (above/Size 2)"
+msgstr "with Remaining Minutes (above/Size 2)"
 
 msgid "with Percent"
 msgstr "вместе с процентами"
@@ -2474,6 +2788,17 @@ msgstr "with Remaining Minutes (below/Size 1.5)"
 
 msgid "with Remaining Minutes (below/Size 2)"
 msgstr "with Remaining Minutes (below/Size 2)"
+
+msgid "with absolute Endtime"
+msgstr ""
+
+#, fuzzy
+msgid "with absolute Endtime (Size 1.5)"
+msgstr "вместе с процентами (Размер 1.5)"
+
+#, fuzzy
+msgid "with absolute Endtime (Size 2)"
+msgstr "вместе с процентами (Размер 2)"
 
 msgid "yellow"
 msgstr "желтый"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 14:23+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-05 14:27+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -20,87 +20,65 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:108
-msgid "Bluetooth Devices Manager Setup"
-msgstr "Bluetooth Apparaatbeheer instellingen"
-
-#: ../src/plugin.py:112
-msgid "Autostart"
-msgstr "Autostart"
-
-#: ../src/plugin.py:114 ../src/plugin.py:183
-msgid "Exit"
-msgstr "Afsluiten"
-
-#: ../src/plugin.py:115
-msgid "Save"
-msgstr "Opslaan"
-
-#: ../src/plugin.py:164 ../src/plugin.py:336 ../src/plugin.py:357
-#: ../src/plugin.py:359
-msgid "Bluetooth Devices Manager"
-msgstr "Bluetooth Apparaatbeheer"
-
-#: ../src/plugin.py:168 ../src/plugin.py:223
-msgid "Please load BT driver by pressing BLUE button."
-msgstr "Gelieve BT stuurprogramma te laden door te drukken op de blauwe knop."
-
-#: ../src/plugin.py:172 ../src/plugin.py:219 ../src/plugin.py:277
-msgid "No connected to any device"
-msgstr "Niet verbonden met een apparaat"
-
-#: ../src/plugin.py:184
 msgid "(Re)Scan"
 msgstr "(Re)Scan"
 
-#: ../src/plugin.py:185 ../src/plugin.py:278
-msgid "Connect"
-msgstr "Verbinden"
+msgid "Autostart"
+msgstr "Autostart"
 
-#: ../src/plugin.py:189
-msgid "Config"
-msgstr "Configuratie"
+msgid "Bluetooth Devices Manager"
+msgstr "Bluetooth Apparaatbeheer"
 
-#: ../src/plugin.py:211
-msgid "No BT devices found!"
-msgstr "Geen BT apparaten gevonden !!"
+msgid "Bluetooth Devices Manager Setup"
+msgstr "Bluetooth Apparaatbeheer instellingen"
 
-#: ../src/plugin.py:229
-msgid "Scanning for devices..."
-msgstr "Apparaten zoeken..."
-
-#: ../src/plugin.py:229
-msgid "Scanning..."
-msgstr "Zoeken..."
-
-#: ../src/plugin.py:241 ../src/plugin.py:253
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC:\t\tApparaat naam:"
-
-#: ../src/plugin.py:241 ../src/plugin.py:253
-msgid "entry"
-msgstr "invoer"
-
-#: ../src/plugin.py:254
-msgid "Not detected devices around STB"
-msgstr "Geen aangesloten apparaten gevonden op STB"
-
-#: ../src/plugin.py:267
-msgid "Connection with:\n"
-msgstr "Verbonden met:\n"
-
-#: ../src/plugin.py:269 ../src/plugin.py:272
-msgid "Disconnect"
-msgstr "Verbinding verbroken"
-
-#: ../src/plugin.py:287
-msgid "Trying to pair with:"
-msgstr "Probeer te verbinden met:"
-
-#: ../src/plugin.py:296 ../src/plugin.py:305
 msgid "Can't not pair with selected device!"
 msgstr "Kon niet verbinden met geselecteerd apparaat!"
 
-#: ../src/plugin.py:359
+msgid "Config"
+msgstr "Configuratie"
+
+msgid "Connect"
+msgstr "Verbinden"
+
+msgid "Connection with:\n"
+msgstr "Verbonden met:\n"
+
+msgid "Disconnect"
+msgstr "Verbinding verbroken"
+
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "MAC:\t\tDevice name:"
+msgstr "MAC:\t\tApparaat naam:"
+
+msgid "No BT devices found!"
+msgstr "Geen BT apparaten gevonden !!"
+
+msgid "No connected to any device"
+msgstr "Niet verbonden met een apparaat"
+
+msgid "Not detected devices around STB"
+msgstr "Geen aangesloten apparaten gevonden op STB"
+
+msgid "Please load BT driver by pressing BLUE button."
+msgstr "Gelieve BT stuurprogramma te laden door te drukken op de blauwe knop."
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Scanning for devices..."
+msgstr "Apparaten zoeken..."
+
+msgid "Scanning..."
+msgstr "Zoeken..."
+
 msgid "This is bt devices manager"
 msgstr "Dit is bt apparaatbeheer"
+
+msgid "Trying to pair with:"
+msgstr "Probeer te verbinden met:"
+
+msgid "entry"
+msgstr "invoer"

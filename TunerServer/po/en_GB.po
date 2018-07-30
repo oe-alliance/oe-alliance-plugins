@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
@@ -18,74 +18,58 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:47 ../src/plugin.py:176 ../src/plugin.py:184
-msgid "Tuner Server setup"
-msgstr "Tuner Server setup"
-
-#: ../src/plugin.py:59
-msgid "Current Status:"
-msgstr "Current Status:"
-
-#: ../src/plugin.py:60
-msgid "Server Disabled"
-msgstr "Server Disabled"
-
-#: ../src/plugin.py:61
-msgid "Server Enabled"
-msgstr "Server Enabled"
-
-#: ../src/plugin.py:62
-msgid "Build Server"
-msgstr "Build Server"
-
-#: ../src/plugin.py:63
-msgid "Disable Server"
-msgstr "Disable Server"
-
-#: ../src/plugin.py:64
-msgid "Close"
-msgstr "Close"
-
-#: ../src/plugin.py:83
-msgid ""
-"Your server is now building\n"
-"Please wait ..."
-msgstr ""
-"Your server is now building\n"
-"Please wait ..."
-
-#: ../src/plugin.py:86
-msgid "Sorry, but you need to have a device mounted at '/media/hd'"
-msgstr "Sorry, but you need to have a device mounted at '/media/hd'"
-
-#: ../src/plugin.py:111
-msgid "Build Complete!"
-msgstr "Build Complete!"
-
-#: ../src/plugin.py:149
-msgid ""
-"Your server is now being deleted\n"
-"Please Wait ..."
-msgstr ""
-"Your server is now being deleted\n"
-"Please Wait ..."
-
-#: ../src/plugin.py:152
-msgid "Tuner Server Disabled."
-msgstr "Tuner Server Disabled."
-
-#: ../src/plugin.py:153
-msgid "Info"
-msgstr "Info"
-
-#: ../src/plugin.py:155
-msgid "Server now disabled!"
-msgstr "Server now disabled!"
-
-#: ../src/plugin.py:184 ../src/plugin.py:186
 msgid "Allow Streaming From Box Tuners"
 msgstr "Allow Streaming From Box Tuners"
 
-#: ../src/plugin.py:186
+msgid "Build Complete!"
+msgstr "Build Complete!"
+
+msgid "Build Server"
+msgstr "Build Server"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Current Status:"
+msgstr "Current Status:"
+
+msgid "Disable Server"
+msgstr "Disable Server"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Server Disabled"
+msgstr "Server Disabled"
+
+msgid "Server Enabled"
+msgstr "Server Enabled"
+
+msgid "Server now disabled!"
+msgstr "Server now disabled!"
+
+msgid "Sorry, but you need to have a device mounted at '/media/hd'"
+msgstr "Sorry, but you need to have a device mounted at '/media/hd'"
+
 msgid "Tuner Server"
 msgstr "Tuner Server"
+
+msgid "Tuner Server Disabled."
+msgstr "Tuner Server Disabled."
+
+msgid "Tuner Server setup"
+msgstr "Tuner Server setup"
+
+msgid ""
+"Your server is now being deleted\n"
+"Please Wait ..."
+msgstr ""
+"Your server is now being deleted\n"
+"Please Wait ..."
+
+msgid ""
+"Your server is now building\n"
+"Please wait ..."
+msgstr ""
+"Your server is now building\n"
+"Please wait ..."

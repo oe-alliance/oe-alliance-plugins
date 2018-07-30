@@ -1,104 +1,83 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 3GModemManager\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: \n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: openATV\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
 "X-Poedit-Basepath: ..\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: nl\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/plugin.py:206 src/plugin.py:375
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: src/plugin.py:207
-msgid "Save"
-msgstr "Opslaan"
-
-#: src/plugin.py:208
 msgid " "
 msgstr " "
 
-#: src/plugin.py:224
-msgid "Region :"
-msgstr "Regio:"
+msgid "3G / 4G Modem Manager"
+msgstr "3G / 4G Modem Manager"
 
-#: src/plugin.py:225
-msgid "Name :"
-msgstr "Naam :"
-
-#: src/plugin.py:226
-msgid "User :"
-msgstr "Gebruiker:"
-
-#: src/plugin.py:227
-msgid "Password :"
-msgstr "Wachtwoord:"
-
-#: src/plugin.py:228
 msgid "APN :"
 msgstr "APN:"
 
-#: src/plugin.py:229
-msgid "PIN :"
-msgstr "PIN :"
-
-#: src/plugin.py:230
-msgid "Phone :"
-msgstr "Telefoonnummer :"
-
-#: src/plugin.py:376
-msgid "OK"
-msgstr "OK"
-
-#: src/plugin.py:377
-msgid "Edit"
-msgstr "Wijzig"
-
-#: src/plugin.py:378
 msgid "Add"
 msgstr "Toevoegen"
 
-#: src/plugin.py:617
-msgid "Auto connect:"
-msgstr "Verbinden:"
-
-#: src/plugin.py:618
-msgid "Disable"
-msgstr "Uitschakelen"
-
-#: src/plugin.py:619
-msgid "Enable"
-msgstr "Inschakelen"
-
-#: src/plugin.py:621
-msgid "Exit"
-msgstr "Afsluiten"
-
-#: src/plugin.py:629
-msgid "Manual"
-msgstr "Handmatig"
-
-#: src/plugin.py:630
 msgid "Auto connect"
 msgstr "Verbinden"
 
-#: src/plugin.py:659
+msgid "Auto connect:"
+msgstr "Verbinden:"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Disable"
+msgstr "Uitschakelen"
+
+msgid "Edit"
+msgstr "Wijzig"
+
+msgid "Enable"
+msgstr "Inschakelen"
+
+msgid "Exit"
+msgstr "Afsluiten"
+
 msgid "IP : "
 msgstr "IP:"
 
-#: src/plugin.py:661 src/plugin.py:835
 msgid "IP : 0.0.0.0"
 msgstr "IP : 0.0.0.0"
 
-#: src/plugin.py:1161
-msgid "3G / 4G Modem Manager"
-msgstr "3G / 4G Modem Manager"
+msgid "Manual"
+msgstr "Handmatig"
+
+msgid "Name :"
+msgstr "Naam :"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "PIN :"
+msgstr "PIN :"
+
+msgid "Password :"
+msgstr "Wachtwoord:"
+
+msgid "Phone :"
+msgstr "Telefoonnummer :"
+
+msgid "Region :"
+msgstr "Regio:"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "User :"
+msgstr "Gebruiker:"

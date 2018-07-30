@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:59+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:59+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Russian / enigma(c) Ukraine, Kiev>\n"
@@ -12,57 +12,33 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:29
-msgid "cancel"
+msgid "Here you can change the screen positions with the arrow buttons on your remote control!"
 msgstr ""
 
-#: ../src/plugin.py:30
-msgid "save"
+msgid "Now you can change the position of the lower and right side. Press blue button to switch..."
 msgstr ""
 
-#: ../src/plugin.py:31
-msgid "set default"
+msgid "Now you can change the position of the upper and left side. Press blue button to switch..."
 msgstr ""
 
-#: ../src/plugin.py:32
-msgid "change sides"
-msgstr ""
-
-#: ../src/plugin.py:33 ../src/plugin.py:336
 msgid "OSD Adjustment"
 msgstr ""
 
-#: ../src/plugin.py:34
-msgid ""
-"Here you can change the screen positions with the arrow buttons on your "
-"remote control!"
+msgid "cancel"
 msgstr ""
 
-#: ../src/plugin.py:35 ../src/plugin.py:151
-msgid ""
-"Now you can change the position of the upper and left side. Press blue "
-"button to switch..."
+msgid "change sides"
 msgstr ""
 
-#: ../src/plugin.py:148
-msgid ""
-"Now you can change the position of the lower and right side. Press blue "
-"button to switch..."
-msgstr ""
-
-#: ../src/plugin.py:344
 msgid "change the OSD screen size"
 msgstr ""
 
-#
-#~ msgid "Cancel"
-#~ msgstr "Отменить"
+msgid "save"
+msgstr ""
 
-#
-#~ msgid "Save"
-#~ msgstr "Сохранить"
+msgid "set default"
+msgstr ""

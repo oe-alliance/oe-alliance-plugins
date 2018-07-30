@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:22+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:22+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: CÜNEYT OCAKLILAR <ocaklilar@gmail.com>\n"
@@ -17,68 +17,56 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Bookmarks: 2450,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
-#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
-msgid "Remote Control Code"
-msgstr "Uzaktan Kumanda Kodu"
-
-#
-#: ../src/plugin.py:68
-msgid "Cancel"
-msgstr "İptal"
-
-#
-#: ../src/plugin.py:69
-msgid "Save"
-msgstr "Kaydet"
-
-#: ../src/plugin.py:80
-#, python-format
-msgid "Sorry, but %s is not supported."
-msgstr ""
-
-#: ../src/plugin.py:84
-msgid "Remote Control System Code"
-msgstr "Uzaktan Kumanda Sistem Kodu"
-
-#: ../src/plugin.py:87
-msgid "Text support"
-msgstr "Metin desteği"
-
-#: ../src/plugin.py:99
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr "DOSYA YOK : /proc/stb/fp/remote_code"
-
-#: ../src/plugin.py:101
-msgid "Please change your remote mode"
-msgstr "Lütfen uzak kipinizi değiştirin"
-
-#: ../src/plugin.py:101
-#, fuzzy
-msgid ""
-"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
-"press '000"
-msgstr ""
-"Led sabit yanana kadar '2' ve '7' tuşlarını basılı tutun, sonra 'Help', "
-"sonra da '000"
-
-#: ../src/plugin.py:101
-#, fuzzy
-msgid "Then choose 'Keep' within seconds"
-msgstr "Sonra 'Sakla' seçin"
-
-#: ../src/plugin.py:122
-msgid "Keep"
-msgstr "Sakla"
-
-#
-#: ../src/plugin.py:122
-msgid "Restore"
-msgstr "Geri yükle"
-
-#: ../src/plugin.py:128
 #, python-format
 msgid " in %d seconds."
 msgstr ""
 
-#~ msgid "This Plugin only support for UNO/ULTIMO"
-#~ msgstr "Bu eklenti sadece UNO/ULTIMO içindir."
+#
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr "DOSYA YOK : /proc/stb/fp/remote_code"
+
+msgid "Keep"
+msgstr "Sakla"
+
+msgid "Please change your remote mode"
+msgstr "Lütfen uzak kipinizi değiştirin"
+
+#, fuzzy
+msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+msgstr "Led sabit yanana kadar '2' ve '7' tuşlarını basılı tutun, sonra 'Help', sonra da '000"
+
+#, fuzzy
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
+msgstr "Led sabit yanana kadar '2' ve '7' tuşlarını basılı tutun, sonra 'Help', sonra da '000"
+
+msgid "Remote Control Code"
+msgstr "Uzaktan Kumanda Kodu"
+
+msgid "Remote Control System Code"
+msgstr "Uzaktan Kumanda Sistem Kodu"
+
+#, fuzzy
+msgid "Remote Control Type"
+msgstr "Uzaktan Kumanda Kodu"
+
+#
+msgid "Restore"
+msgstr "Geri yükle"
+
+#
+msgid "Save"
+msgstr "Kaydet"
+
+#, python-format
+msgid "Sorry, but %s is not supported."
+msgstr ""
+
+msgid "Text support"
+msgstr "Metin desteği"
+
+#, fuzzy
+msgid "Then choose 'Keep' within seconds"
+msgstr "Sonra 'Sakla' seçin"

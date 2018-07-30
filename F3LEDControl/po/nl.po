@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 15:12+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-05 15:17+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -18,117 +18,50 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:25
-msgid "Channelnumber in Standby off"
-msgstr "Zendernummer in Stand-by uit"
-
-#: ../src/plugin.py:25
-msgid "Channelnumber in Standby Clock"
-msgstr "Zendernummer in Stand-by Klok"
-
-#: ../src/plugin.py:25
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Zendernummer/Klok in Stand-by Klok"
-
-#: ../src/plugin.py:25
-msgid "Clock always"
-msgstr "Klok altijd"
-
-#: ../src/plugin.py:25
-msgid "Always off"
-msgstr "Altijd uit"
-
-#: ../src/plugin.py:26
 msgid "15 sec"
 msgstr "15 sec"
 
-#: ../src/plugin.py:26
 msgid "30 sec"
 msgstr "30 sec"
 
-#: ../src/plugin.py:26
 msgid "45 sec"
 msgstr "45 sec"
 
-#: ../src/plugin.py:26
 msgid "60 sec"
 msgstr "60 sec"
 
-#: ../src/plugin.py:188 ../src/plugin.py:272 ../src/plugin.py:279
-msgid "LED Display Setup"
-msgstr "LED Scherm Instellen"
+msgid "Always off"
+msgstr "Altijd uit"
 
-#: ../src/plugin.py:198
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../src/plugin.py:199
+msgid "Channelnumber in Standby Clock"
+msgstr "Zendernummer in Stand-by Klok"
+
+msgid "Channelnumber in Standby off"
+msgstr "Zendernummer in Stand-by uit"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Zendernummer/Klok in Stand-by Klok"
+
+msgid "Clock always"
+msgstr "Klok altijd"
+
+msgid "LED Display Setup"
+msgstr "LED Scherm Instellen"
+
 msgid "Save"
 msgstr "Opslaan"
 
-#: ../src/plugin.py:200
-msgid "Update Date/Time"
-msgstr "Update Datum/Tijd"
-
-#: ../src/plugin.py:213 ../src/plugin.py:227
 msgid "Show on LED"
 msgstr "Toon op LED"
 
-#: ../src/plugin.py:214
-msgid "Time to show Clock in Display"
-msgstr "Tijdsduur voor tonen klok in scherm"
-
-#: ../src/plugin.py:216
 msgid "Time mode"
 msgstr "Tijd modus"
 
-#~ msgid "Blink Record Led"
-#~ msgstr "Opname LED knippert"
+msgid "Time to show Clock in Display"
+msgstr "Tijdsduur voor tonen klok in scherm"
 
-#~ msgid "Blue"
-#~ msgstr "Blauw"
-
-#~ msgid "Enable led"
-#~ msgstr "LED ingeschakeld"
-
-#~ msgid "Led state Deep Standby"
-#~ msgstr "LED tijdens Deep Standby"
-
-#~ msgid "Led state RUN"
-#~ msgstr "LED status RUN"
-
-#~ msgid "Led state Record"
-#~ msgstr "LED status Opname"
-
-#~ msgid "Led state Standby"
-#~ msgstr "LED status Stand-by"
-
-#~ msgid "No"
-#~ msgstr "Nee"
-
-#~ msgid "None"
-#~ msgstr "Geen"
-
-#~ msgid "Off"
-#~ msgstr "Uit"
-
-#~ msgid "Purple"
-#~ msgstr "Paars"
-
-#~ msgid "Red"
-#~ msgstr "Rood"
-
-#~ msgid "Show clock"
-#~ msgstr "Toon klok"
-
-#~ msgid "Show clock in Deep Standby"
-#~ msgstr "Toon klok in Deep Standby"
-
-#~ msgid "VFD_Giga"
-#~ msgstr "VFD_Giga"
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "in standby: "
-#~ msgstr "in standby: "
+msgid "Update Date/Time"
+msgstr "Update Datum/Tijd"

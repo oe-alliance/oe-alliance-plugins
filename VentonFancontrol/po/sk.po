@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:10+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:10+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
@@ -15,60 +15,32 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:6
-msgid "Off"
-msgstr ""
-
-#: ../src/plugin.py:6
-msgid "On"
-msgstr ""
-
-#: ../src/plugin.py:6
 msgid "Auto"
 msgstr ""
 
-#: ../src/plugin.py:25
-msgid "Fan setup"
-msgstr ""
-
-#: ../src/plugin.py:30
 msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:31
-msgid "Save"
-msgstr "Uložiť"
-
-#: ../src/plugin.py:48
-msgid "Fan mode"
-msgstr ""
-
-#: ../src/plugin.py:105
 msgid "FAN Control"
 msgstr ""
 
-#: ../src/plugin.py:113
 msgid "Fan Control"
 msgstr ""
 
-#: ../src/plugin.py:113
-msgid "switch Fan On/Off"
+msgid "Fan mode"
 msgstr ""
 
-#~ msgid "Close"
-#~ msgstr "Zatvoriť"
+msgid "Fan setup"
+msgstr ""
 
-#~ msgid "Really close without saving settings?"
-#~ msgstr "Naozaj zatvoriť bez uloženia nastavení?"
+msgid "Off"
+msgstr ""
 
-#~ msgid "no"
-#~ msgstr "nie"
+msgid "On"
+msgstr ""
 
-#~ msgid "off"
-#~ msgstr "vyp."
+msgid "Save"
+msgstr "Uložiť"
 
-#~ msgid "on"
-#~ msgstr "zap."
-
-#~ msgid "yes"
-#~ msgstr "áno"
+msgid "switch Fan On/Off"
+msgstr ""

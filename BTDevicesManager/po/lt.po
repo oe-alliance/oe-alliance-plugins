@@ -7,100 +7,78 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BTDevicesManager - oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 14:04+0300\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-05 14:19+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. vyteniui@gmail.com\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:108
-msgid "Bluetooth Devices Manager Setup"
-msgstr "Bluetooth įrangos valdymo sąranka"
-
-#: ../src/plugin.py:112
-msgid "Autostart"
-msgstr "Autopaleidimas"
-
-#: ../src/plugin.py:114 ../src/plugin.py:183
-msgid "Exit"
-msgstr "Uždaryti"
-
-#: ../src/plugin.py:115
-msgid "Save"
-msgstr "Išsaugoti"
-
-#: ../src/plugin.py:164 ../src/plugin.py:332 ../src/plugin.py:353
-#: ../src/plugin.py:355
-msgid "Bluetooth Devices Manager"
-msgstr "Bluetooth įrangos valdymas"
-
-#: ../src/plugin.py:168 ../src/plugin.py:219
-msgid "Please load BT driver by pressing BLUE button."
-msgstr "Įkelkite BT tvarkyklę, paspaudę 'MĖLYNĄ' mygtuką."
-
-#: ../src/plugin.py:172 ../src/plugin.py:215 ../src/plugin.py:273
-msgid "No connected to any device"
-msgstr "Neprisijungta prie jokio įrenginio"
-
-#: ../src/plugin.py:184
 msgid "(Re)Scan"
 msgstr "Paieška"
 
-#: ../src/plugin.py:185 ../src/plugin.py:274
-msgid "Connect"
-msgstr "Prisijungti"
+msgid "Autostart"
+msgstr "Autopaleidimas"
 
-#: ../src/plugin.py:189
-msgid "Config"
-msgstr "Nustatymas"
+msgid "Bluetooth Devices Manager"
+msgstr "Bluetooth įrangos valdymas"
 
-#: ../src/plugin.py:207
-msgid "No BT devices found!"
-msgstr "BT įrenginių nerasta!"
+msgid "Bluetooth Devices Manager Setup"
+msgstr "Bluetooth įrangos valdymo sąranka"
 
-#: ../src/plugin.py:225
-msgid "Scanning for devices..."
-msgstr "Ieškoma Bluetooth įrangos..."
-
-#: ../src/plugin.py:225
-msgid "Scanning..."
-msgstr "Vyksta paieška..."
-
-#: ../src/plugin.py:237 ../src/plugin.py:249
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC:\t\tĮrenginys:"
-
-#: ../src/plugin.py:237 ../src/plugin.py:249
-msgid "entry"
-msgstr "įrašas"
-
-#: ../src/plugin.py:250
-msgid "Not detected devices around STB"
-msgstr "Šioje aplinkoje nerasta įranga"
-
-#: ../src/plugin.py:263
-msgid "Connection with:\n"
-msgstr "Ryšys su:\n"
-
-#: ../src/plugin.py:265 ../src/plugin.py:268
-msgid "Disconnect"
-msgstr "Atjungti"
-
-#: ../src/plugin.py:283
-msgid "Trying to pair with:"
-msgstr "Bandoma susieti su:"
-
-#: ../src/plugin.py:292 ../src/plugin.py:301
 msgid "Can't not pair with selected device!"
 msgstr "Su pasirinktu įrenginiu susieti nepavyko!"
 
-#: ../src/plugin.py:355
+msgid "Config"
+msgstr "Nustatymas"
+
+msgid "Connect"
+msgstr "Prisijungti"
+
+msgid "Connection with:\n"
+msgstr "Ryšys su:\n"
+
+msgid "Disconnect"
+msgstr "Atjungti"
+
+msgid "Exit"
+msgstr "Uždaryti"
+
+msgid "MAC:\t\tDevice name:"
+msgstr "MAC:\t\tĮrenginys:"
+
+msgid "No BT devices found!"
+msgstr "BT įrenginių nerasta!"
+
+msgid "No connected to any device"
+msgstr "Neprisijungta prie jokio įrenginio"
+
+msgid "Not detected devices around STB"
+msgstr "Šioje aplinkoje nerasta įranga"
+
+msgid "Please load BT driver by pressing BLUE button."
+msgstr "Įkelkite BT tvarkyklę, paspaudę 'MĖLYNĄ' mygtuką."
+
+msgid "Save"
+msgstr "Išsaugoti"
+
+msgid "Scanning for devices..."
+msgstr "Ieškoma Bluetooth įrangos..."
+
+msgid "Scanning..."
+msgstr "Vyksta paieška..."
+
 msgid "This is bt devices manager"
 msgstr "Tai BT įrenginių valdymas"
+
+msgid "Trying to pair with:"
+msgstr "Bandoma susieti su:"
+
+msgid "entry"
+msgstr "įrašas"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EWVFDControl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 17:55+0300\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-05 18:00+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -16,46 +16,35 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../src/plugin.py:22
-msgid "Channelnumber in Standby off"
-msgstr "Kanalo numeris išjungus budėjimą"
-
-#: ../src/plugin.py:22
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanalo numeris budėjimo metu"
-
-#: ../src/plugin.py:22
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanalo numeris/Laikrodis budėjimo metu"
-
-#: ../src/plugin.py:22
-msgid "Clock always"
-msgstr "Laikrodis pastoviai"
-
-#: ../src/plugin.py:22
 msgid "Always off"
 msgstr "Visada išjungtas"
 
-#: ../src/plugin.py:183
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: ../src/plugin.py:184
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalo numeris budėjimo metu"
+
+msgid "Channelnumber in Standby off"
+msgstr "Kanalo numeris išjungus budėjimą"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanalo numeris/Laikrodis budėjimo metu"
+
+msgid "Clock always"
+msgstr "Laikrodis pastoviai"
+
+msgid "LED Display Setup"
+msgstr "LED ekrano sąranka"
+
 msgid "Save"
 msgstr "Išsaugoti"
 
-#: ../src/plugin.py:185
-msgid "Update Date/Time"
-msgstr "Atnaujinti datą ir laiką"
-
-#: ../src/plugin.py:198 ../src/plugin.py:212
 msgid "Show on LED"
 msgstr "Rodyti LED ekrane"
 
-#: ../src/plugin.py:200
 msgid "Time mode"
 msgstr "Laiko režimas"
 
-#: ../src/plugin.py:261
-msgid "LED Display Setup"
-msgstr "LED ekrano sąranka"
+msgid "Update Date/Time"
+msgstr "Atnaujinti datą ir laiką"

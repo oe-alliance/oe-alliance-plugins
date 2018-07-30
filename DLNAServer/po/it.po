@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:04+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-11-30 13:13+0100\n"
 "Last-Translator: insanity\n"
 "Language-Team: www.vuplus-community.net <insanity@>\n"
@@ -14,74 +14,56 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.7.3\n"
 
-#: src/plugin.py:59
-msgid "OK"
-msgstr "OK"
-
-#: src/plugin.py:60
-msgid "Cancel"
-msgstr "Annulla"
-
-#: src/plugin.py:134
-msgid "Exit"
-msgstr "Esci"
-
-#: src/plugin.py:135
-msgid "Start"
-msgstr "Avvia"
-
-#: src/plugin.py:136
-msgid "Save"
-msgstr "Salva"
-
-#: src/plugin.py:137
-msgid "Reset"
-msgstr "Reset"
-
-#: src/plugin.py:261
-msgid "off"
-msgstr "off"
-
-#: src/plugin.py:261
-msgid "error"
-msgstr "errore"
-
-#: src/plugin.py:261
-msgid "warn"
-msgstr "avviso"
-
-#: src/plugin.py:261
-msgid "debug"
-msgstr "debug"
-
-#: src/plugin.py:264
-msgid "Server Name"
-msgstr "Nome Server"
-
-#: src/plugin.py:265
-msgid "Video Directory"
-msgstr "Directory Video"
-
-#: src/plugin.py:266
-msgid "Music Directory"
-msgstr "Directory Musica"
-
-#: src/plugin.py:267
-msgid "Picture Directory"
-msgstr "Directory Immagini"
-
-#: src/plugin.py:268
-msgid "Enable Logging"
-msgstr "Loggin abilitato"
-
-#: src/plugin.py:269
-msgid "    - Log Level"
-msgstr "    - Livello Log"
-
-#: src/plugin.py:270
 msgid "    - Log Directory"
 msgstr "    - Directory Log"
 
-#: src/plugin.py:271
+msgid "    - Log Level"
+msgstr "    - Livello Log"
+
+msgid "Cancel"
+msgstr "Annulla"
+
 msgid "Enable Autostart for DLNA Server"
 msgstr "Abilitare avvio automatico Server DLNA"
+
+msgid "Enable Logging"
+msgstr "Loggin abilitato"
+
+msgid "Exit"
+msgstr "Esci"
+
+msgid "Music Directory"
+msgstr "Directory Musica"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Picture Directory"
+msgstr "Directory Immagini"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Save"
+msgstr "Salva"
+
+msgid "Server Name"
+msgstr "Nome Server"
+
+msgid "Start"
+msgstr "Avvia"
+
+msgid "Video Directory"
+msgstr "Directory Video"
+
+msgid "debug"
+msgstr "debug"
+
+msgid "error"
+msgstr "errore"
+
+msgid "off"
+msgstr "off"
+
+msgid "warn"
+msgstr "avviso"

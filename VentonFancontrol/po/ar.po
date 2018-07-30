@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:08+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:08+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Arabic <moustafagamal@hotmail.com>\n"
@@ -12,69 +12,36 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:6
-msgid "Off"
-msgstr ""
-
-#: ../src/plugin.py:6
-msgid "On"
-msgstr ""
-
-#: ../src/plugin.py:6
 msgid "Auto"
 msgstr ""
 
-#: ../src/plugin.py:25
-msgid "Fan setup"
-msgstr ""
-
-#: ../src/plugin.py:30
 msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:31
-msgid "Save"
-msgstr "حفظ"
-
-#: ../src/plugin.py:48
-msgid "Fan mode"
-msgstr ""
-
-#: ../src/plugin.py:105
 msgid "FAN Control"
 msgstr ""
 
-#: ../src/plugin.py:113
 msgid "Fan Control"
 msgstr ""
 
-#: ../src/plugin.py:113
-msgid "switch Fan On/Off"
+msgid "Fan mode"
 msgstr ""
 
-#~ msgid "Close"
-#~ msgstr "أغلاق"
+msgid "Fan setup"
+msgstr ""
 
-#~ msgid "Really close without saving settings?"
-#~ msgstr "هل تريد فعلا الغلق بدون حفظ الاعدادات ؟"
+msgid "Off"
+msgstr ""
 
-#
-#~ msgid "no"
-#~ msgstr "لا."
+msgid "On"
+msgstr ""
 
-#
-#~ msgid "off"
-#~ msgstr "لا يعمـل!"
+msgid "Save"
+msgstr "حفظ"
 
-#
-#~ msgid "on"
-#~ msgstr "يعمل!"
-
-#
-#~ msgid "yes"
-#~ msgstr "نعـم"
+msgid "switch Fan On/Off"
+msgstr ""

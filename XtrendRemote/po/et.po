@@ -7,87 +7,69 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-08 10:36+0300\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-10-08 10:37+0300\n"
+"Last-Translator: rimas\n"
 "Language-Team: \n"
+"Language: et_EE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 1.8.9\n"
-"Last-Translator: rimas\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: et_EE\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:12
-msgid "OdinM9"
-msgstr "OdinM9"
-
-#: ../src/plugin.py:12
-msgid "ET9000/ET9100"
-msgstr "ET9000/ET9100"
-
-#: ../src/plugin.py:12
-msgid "DMM/DMM ADV"
-msgstr "DMM/DMM ADV"
-
-#: ../src/plugin.py:12
-msgid "ET5000/ET6000"
-msgstr "ET5000/ET6000"
-
-#: ../src/plugin.py:12
-msgid "Vu"
-msgstr "Vu"
-
-#: ../src/plugin.py:12
-msgid "ET6500/ET9500"
-msgstr "ET6500/ET9500"
-
-#: ../src/plugin.py:12
-msgid "ET9200/ET9500"
-msgstr "ET9200/ET9500"
-
-#: ../src/plugin.py:12
-msgid "ET4000"
-msgstr "ET4000"
-
-#: ../src/plugin.py:12
-msgid "XP1000"
-msgstr "XP1000"
-
-#: ../src/plugin.py:12
-msgid "HD1100"
-msgstr "HD1100"
-
-#: ../src/plugin.py:12
-msgid "XP3000"
-msgstr "XP3000"
-
-#: ../src/plugin.py:12
-msgid "F1/F3"
-msgstr "F1/F3"
-
-#: ../src/plugin.py:12
-msgid "HD2400"
-msgstr "HD2400"
-
-#: ../src/plugin.py:66
-msgid "OK"
-msgstr "OK"
-
-#: ../src/plugin.py:67
 msgid "Cancel"
 msgstr "Tühista"
 
-#: ../src/plugin.py:90
-msgid "Remote"
-msgstr "Pult"
+msgid "DMM/DMM ADV"
+msgstr "DMM/DMM ADV"
 
-#: ../src/plugin.py:101
+msgid "ET4000"
+msgstr "ET4000"
+
+msgid "ET5000/ET6000"
+msgstr "ET5000/ET6000"
+
+msgid "ET6500/ET9500"
+msgstr "ET6500/ET9500"
+
+msgid "ET9000/ET9100"
+msgstr "ET9000/ET9100"
+
+msgid "ET9200/ET9500"
+msgstr "ET9200/ET9500"
+
+msgid "F1/F3"
+msgstr "F1/F3"
+
+msgid "HD1100"
+msgstr "HD1100"
+
+msgid "HD2400"
+msgstr "HD2400"
+
 msgid "Is this remote ok?"
 msgstr "Kas see pult sobib?"
 
-#: ../src/plugin.py:187 ../src/plugin.py:194
+msgid "OK"
+msgstr "OK"
+
+msgid "OdinM9"
+msgstr "OdinM9"
+
+msgid "Remote"
+msgstr "Pult"
+
 msgid "Remote Control Code"
 msgstr "Puldi kood"
+
+msgid "Vu"
+msgstr "Vu"
+
+msgid "XP1000"
+msgstr "XP1000"
+
+msgid "XP3000"
+msgstr "XP3000"

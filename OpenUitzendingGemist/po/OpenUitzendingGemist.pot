@@ -1,317 +1,242 @@
-# Translations for enigma2-oe-alliance-plugins package.
-# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
-# Automatically generated, 2016.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:271
-msgid "Exit movie player?"
-msgstr ""
-
-#: ../src/plugin.py:326
 msgid ""
 " Media Info\n"
 "Name = "
 msgstr ""
 
-#: ../src/plugin.py:344
-msgid "Show pictures"
+msgid "101 TV"
 msgstr ""
 
-#: ../src/plugin.py:345
-msgid "Show NPO livestreams"
+msgid "3FM Alternative"
 msgstr ""
 
-#: ../src/plugin.py:346
-msgid "Modern layout"
+msgid "538 Hitzone"
 msgstr ""
 
-#: ../src/plugin.py:347
-msgid "Show NPO"
+msgid "538 NonStop40"
 msgstr ""
 
-#: ../src/plugin.py:348
-msgid "Show RTL"
+msgid "538 Party"
 msgstr ""
 
-#: ../src/plugin.py:349
-msgid "Show SBS"
+msgid "Best 24"
 msgstr ""
 
-#: ../src/plugin.py:350
-msgid "Show RADIO"
-msgstr ""
-
-#: ../src/plugin.py:351
-msgid "Show INTERNETTV"
-msgstr ""
-
-#: ../src/plugin.py:352
-msgid "Font Size in List"
-msgstr ""
-
-#: ../src/plugin.py:357
-msgid "Open Uitzending Gemist options"
-msgstr ""
-
-#: ../src/plugin.py:366
-msgid "Save settings?"
-msgstr ""
-
-#: ../src/plugin.py:398 ../src/plugin.py:548
 msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:399 ../src/plugin.py:549
+msgid "Cultura 24"
+msgstr ""
+
+msgid "Decibel"
+msgstr ""
+
+msgid "Dumpert.nl"
+msgstr ""
+
+msgid "Error..."
+msgstr ""
+
+msgid "Exit movie player?"
+msgstr ""
+
+msgid "Font Size in List"
+msgstr ""
+
+msgid "Holland Doc 24"
+msgstr ""
+
+msgid "Humor TV 24"
+msgstr ""
+
+msgid "Internet radio"
+msgstr ""
+
+msgid "InternetTV"
+msgstr ""
+
+msgid "Journaal 24"
+msgstr ""
+
+msgid "Livestreams"
+msgstr ""
+
+msgid "Modern layout"
+msgstr ""
+
+msgid "NERadio Hardstyle"
+msgstr ""
+
+msgid "NERadio Sweden - Best of Techno & Trance"
+msgstr ""
+
+msgid "NET5 Gemist"
+msgstr ""
+
+msgid "NPO Gemist"
+msgstr ""
+
+msgid "NPO Popular"
+msgstr ""
+
+msgid "NPO Uitgelicht"
+msgstr ""
+
+msgid "Nederland 1"
+msgstr ""
+
+msgid "Nederland 2"
+msgstr ""
+
+msgid "Nederland 3"
+msgstr ""
+
+msgid "Nieuw"
+msgstr ""
+
+msgid "No items matching your search criteria were found"
+msgstr ""
+
+msgid "No streams avaible"
+msgstr ""
+
 msgid "OK"
 msgstr ""
 
-#: ../src/plugin.py:418
 msgid ""
 "Open Uitzending Gemist\n"
 "\n"
 "Based on Xtrend code"
 msgstr ""
 
-#: ../src/plugin.py:421
-msgid "NPO Uitgelicht"
+msgid "Open Uitzending Gemist options"
 msgstr ""
 
-#: ../src/plugin.py:422
-msgid "NPO Popular"
-msgstr ""
-
-#: ../src/plugin.py:423
-msgid "NPO Gemist"
-msgstr ""
-
-#: ../src/plugin.py:425
-msgid "RTL XL A-Z"
-msgstr ""
-
-#: ../src/plugin.py:426
-msgid "RTL XL Gemist"
-msgstr ""
-
-#: ../src/plugin.py:427
-msgid "RTL XL Zoeken"
-msgstr ""
-
-#: ../src/plugin.py:429
-msgid "SBS6 Gemist"
-msgstr ""
-
-#: ../src/plugin.py:430
-msgid "Veronica Gemist"
-msgstr ""
-
-#: ../src/plugin.py:431
-msgid "NET5 Gemist"
-msgstr ""
-
-#: ../src/plugin.py:432
-msgid "SBS Zoeken"
-msgstr ""
-
-#: ../src/plugin.py:434
-msgid "Radio Gemist"
-msgstr ""
-
-#: ../src/plugin.py:436
-msgid "InternetTV"
-msgstr ""
-
-#: ../src/plugin.py:437
-msgid "Setup"
-msgstr ""
-
-#: ../src/plugin.py:471 ../src/plugin.py:1202
-msgid "Search term"
-msgstr ""
-
-#: ../src/plugin.py:576 ../src/plugin.py:585
-msgid "Today"
-msgstr ""
-
-#: ../src/plugin.py:593
-msgid "Decibel"
-msgstr ""
-
-#: ../src/plugin.py:594
-msgid "Internet radio"
-msgstr ""
-
-#: ../src/plugin.py:597
-msgid "Dumpert.nl"
-msgstr ""
-
-#: ../src/plugin.py:598
-msgid "VKMag.com"
-msgstr ""
-
-#: ../src/plugin.py:599
-msgid "luckytv.nl"
-msgstr ""
-
-#: ../src/plugin.py:600
-msgid "Livestreams"
-msgstr ""
-
-#: ../src/plugin.py:603
-msgid "Nieuw"
-msgstr ""
-
-#: ../src/plugin.py:604
-msgid "Toppers"
-msgstr ""
-
-#: ../src/plugin.py:607 ../src/plugin.py:610
-msgid "Video's"
-msgstr ""
-
-#: ../src/plugin.py:613
-msgid "highlights"
-msgstr ""
-
-#: ../src/plugin.py:616
 msgid "Podcasts"
 msgstr ""
 
-#: ../src/plugin.py:619
-msgid "538 Party"
-msgstr ""
-
-#: ../src/plugin.py:620
-msgid "538 Hitzone"
-msgstr ""
-
-#: ../src/plugin.py:621
-msgid "538 NonStop40"
-msgstr ""
-
-#: ../src/plugin.py:622
-msgid "Radio 53L8"
-msgstr ""
-
-#: ../src/plugin.py:623
-msgid "Radio 2 Top 2000"
-msgstr ""
-
-#: ../src/plugin.py:624
-msgid "Radio 2 In Concert"
-msgstr ""
-
-#: ../src/plugin.py:625
-msgid "3FM Alternative"
-msgstr ""
-
-#: ../src/plugin.py:626
-msgid "Slam! Hardstyle"
-msgstr ""
-
-#: ../src/plugin.py:627
-msgid "NERadio Hardstyle"
-msgstr ""
-
-#: ../src/plugin.py:628
-msgid "NERadio Sweden - Best of Techno & Trance"
-msgstr ""
-
-#: ../src/plugin.py:629
-msgid "Q-Music Het Foute Non Stop"
-msgstr ""
-
-#: ../src/plugin.py:633
-msgid "Nederland 1"
-msgstr ""
-
-#: ../src/plugin.py:634
-msgid "Nederland 2"
-msgstr ""
-
-#: ../src/plugin.py:635
-msgid "Nederland 3"
-msgstr ""
-
-#: ../src/plugin.py:636
 msgid "Politiek 24"
 msgstr ""
 
-#: ../src/plugin.py:637
-msgid "Journaal 24"
+msgid "Q-Music Het Foute Non Stop"
 msgstr ""
 
-#: ../src/plugin.py:638
-msgid "Humor TV 24"
+msgid "RTL XL A-Z"
 msgstr ""
 
-#: ../src/plugin.py:639
-msgid "Holland Doc 24"
+msgid "RTL XL Gemist"
 msgstr ""
 
-#: ../src/plugin.py:640
-msgid "Z@ppelin/ Zapp"
+msgid "RTL XL Zoeken"
 msgstr ""
 
-#: ../src/plugin.py:641
-msgid "Cultura 24"
-msgstr ""
-
-#: ../src/plugin.py:642
-msgid "Best 24"
-msgstr ""
-
-#: ../src/plugin.py:643
-msgid "101 TV"
-msgstr ""
-
-#: ../src/plugin.py:644
 msgid "Radio 1 Webcam"
 msgstr ""
 
-#: ../src/plugin.py:645
+msgid "Radio 2 In Concert"
+msgstr ""
+
+msgid "Radio 2 Top 2000"
+msgstr ""
+
 msgid "Radio 2 Webcam"
 msgstr ""
 
-#: ../src/plugin.py:646
 msgid "Radio 3 Webcam"
 msgstr ""
 
-#: ../src/plugin.py:648
-msgid "No streams avaible"
+msgid "Radio 53L8"
 msgstr ""
 
-#: ../src/plugin.py:650
-msgid "Error..."
+msgid "Radio Gemist"
 msgstr ""
 
-#: ../src/plugin.py:1212
-msgid "No items matching your search criteria were found"
+msgid "SBS Zoeken"
 msgstr ""
 
-#: ../src/plugin.py:1217
+msgid "SBS6 Gemist"
+msgstr ""
+
+msgid "Save settings?"
+msgstr ""
+
+msgid "Search term"
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Show INTERNETTV"
+msgstr ""
+
+msgid "Show NPO"
+msgstr ""
+
+msgid "Show NPO livestreams"
+msgstr ""
+
+msgid "Show RADIO"
+msgstr ""
+
+msgid "Show RTL"
+msgstr ""
+
+msgid "Show SBS"
+msgstr ""
+
+msgid "Show pictures"
+msgstr ""
+
+msgid "Slam! Hardstyle"
+msgstr ""
+
 msgid "There was a problem retrieving the media list"
 msgstr ""
 
-#: ../src/plugin.py:1293 ../src/plugin.py:1347
+msgid "Today"
+msgstr ""
+
+msgid "Toppers"
+msgstr ""
+
+msgid "VKMag.com"
+msgstr ""
+
+msgid "Veronica Gemist"
+msgstr ""
+
+msgid "Video's"
+msgstr ""
+
 msgid "Voor deze aflevering moet waarschijnlijk betaald worden."
 msgstr ""
 
-#: ../src/plugin.py:2057 ../src/plugin.py:2058
 msgid "Watch uitzending gemist"
+msgstr ""
+
+msgid "Z@ppelin/ Zapp"
+msgstr ""
+
+msgid "highlights"
+msgstr ""
+
+msgid "luckytv.nl"
 msgstr ""

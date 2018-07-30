@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:22+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:22+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -12,66 +12,56 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
-msgid "Remote Control Code"
+#, python-format
+msgid " in %d seconds."
 msgstr ""
 
 #
-#: ../src/plugin.py:68
 msgid "Cancel"
 msgstr "Odustani"
 
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr ""
+
+msgid "Keep"
+msgstr ""
+
+msgid "Please change your remote mode"
+msgstr ""
+
+msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+msgstr ""
+
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
+msgstr ""
+
+msgid "Remote Control Code"
+msgstr ""
+
+msgid "Remote Control System Code"
+msgstr ""
+
+msgid "Remote Control Type"
+msgstr ""
+
 #
-#: ../src/plugin.py:69
+msgid "Restore"
+msgstr "Vrati "
+
+#
 msgid "Save"
 msgstr "Sačuvajte"
 
-#: ../src/plugin.py:80
 #, python-format
 msgid "Sorry, but %s is not supported."
 msgstr ""
 
-#: ../src/plugin.py:84
-msgid "Remote Control System Code"
-msgstr ""
-
-#: ../src/plugin.py:87
 msgid "Text support"
 msgstr ""
 
-#: ../src/plugin.py:99
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr ""
-
-#: ../src/plugin.py:101
-msgid "Please change your remote mode"
-msgstr ""
-
-#: ../src/plugin.py:101
-msgid ""
-"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
-"press '000"
-msgstr ""
-
-#: ../src/plugin.py:101
 msgid "Then choose 'Keep' within seconds"
-msgstr ""
-
-#: ../src/plugin.py:122
-msgid "Keep"
-msgstr ""
-
-#
-#: ../src/plugin.py:122
-msgid "Restore"
-msgstr "Vrati "
-
-#: ../src/plugin.py:128
-#, python-format
-msgid " in %d seconds."
 msgstr ""

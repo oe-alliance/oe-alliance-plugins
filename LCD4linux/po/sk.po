@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
-"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -17,15 +18,31 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
+#, python-format
 msgid "% + Load@1min"
 msgstr "% + Load@1min"
 
+#, python-format
 msgid "% + Load@5min"
 msgstr "% + Load@5min"
 
+#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr "%d Správ  %d Nové  %s"
 
+msgid "%d-%b-%Y"
+msgstr ""
+
+msgid "%d.%m.%Y"
+msgstr ""
+
+msgid "%d.%m.%Y - %H:%M"
+msgstr ""
+
+msgid "%d.%m.%y %H:%M:%S"
+msgstr ""
+
+#, python-format
 msgid "%s - Current value: %s"
 msgstr "%s - Aktuálna hodnota: %s"
 
@@ -74,7 +91,38 @@ msgstr "- CPU"
 msgid "- Caption Color"
 msgstr "- farba titulku"
 
+msgid "- Clear Key"
+msgstr ""
+
 msgid "- Color"
+msgstr "- Farba"
+
+#, fuzzy
+msgid "- Color 1"
+msgstr "- Farba"
+
+#, fuzzy
+msgid "- Color 2"
+msgstr "- Farba"
+
+#, fuzzy
+msgid "- Color 3"
+msgstr "- Farba"
+
+#, fuzzy
+msgid "- Color 4"
+msgstr "- Farba"
+
+#, fuzzy
+msgid "- Color 5"
+msgstr "- Farba"
+
+#, fuzzy
+msgid "- Color 6"
+msgstr "- Farba"
+
+#, fuzzy
+msgid "- Color Text"
 msgstr "- Farba"
 
 msgid "- Current Day Background Color"
@@ -98,8 +146,13 @@ msgstr "- predvolená obálka [ok]>"
 msgid "- Device Name"
 msgstr "- meno zariadenia"
 
-msgid "- Download Cover from Google"
+#, fuzzy
+msgid "- Download Cover"
 msgstr "- stiahnuť obálku z Googla"
+
+#, fuzzy
+msgid "- Download Type"
+msgstr "stiahnuť log súbor"
 
 msgid "- Extra Color Chill"
 msgstr "- Extra farba ochladenia"
@@ -127,6 +180,9 @@ msgstr "- veľkosť písma"
 
 msgid "- Full Screen"
 msgstr "- celá obrazovka"
+
+msgid "- Google API-Key console.developers.google.com/apis"
+msgstr ""
 
 msgid "- Gradient"
 msgstr "- spád"
@@ -191,6 +247,9 @@ msgstr "- LCD 3 obnova"
 msgid "- LCD 3 Rotate"
 msgstr "- LCD 3 otočiť"
 
+msgid "- LCD Auto-OFF"
+msgstr ""
+
 msgid "- Layout"
 msgstr "- rozmiestnenie"
 
@@ -208,6 +267,9 @@ msgstr "- e-mailové konto"
 
 msgid "- Module"
 msgstr "- Modul"
+
+msgid "- Module userdefined"
+msgstr ""
 
 msgid "- Name"
 msgstr "- Meno"
@@ -344,6 +406,10 @@ msgstr "- rozdelená obrazovka"
 msgid "- Station"
 msgstr "- Stanica"
 
+#, fuzzy
+msgid "- Text"
+msgstr "- veľkosť textu"
+
 msgid "- Text Size"
 msgstr "- veľkosť textu"
 
@@ -385,6 +451,9 @@ msgstr "- maximum riadkov"
 
 msgid "- only active Tuner"
 msgstr "- len aktívny tuner"
+
+msgid "- use Info when empty"
+msgstr ""
 
 msgid "- which LCD"
 msgstr "- ktoré LCD"
@@ -515,6 +584,9 @@ msgstr "255x64"
 msgid "270"
 msgstr "270"
 
+msgid "2h"
+msgstr ""
+
 msgid "2min"
 msgstr "2min"
 
@@ -541,6 +613,9 @@ msgstr "32bit - farba"
 
 msgid "35%"
 msgstr "35%"
+
+msgid "3h"
+msgstr ""
 
 msgid "3min"
 msgstr "3min"
@@ -569,6 +644,9 @@ msgstr "40s"
 msgid "45%"
 msgstr "45%"
 
+msgid "480x320"
+msgstr ""
+
 msgid "4min"
 msgstr "4min"
 
@@ -596,11 +674,18 @@ msgstr "50s"
 msgid "55%"
 msgstr "55%"
 
+msgid "5h"
+msgstr ""
+
 msgid "5min"
 msgstr "5min"
 
 msgid "5s"
 msgstr "5s"
+
+#, fuzzy
+msgid "60"
+msgstr "60%"
 
 msgid "60%"
 msgstr "60%"
@@ -626,6 +711,9 @@ msgstr "75%"
 msgid "80%"
 msgstr "80%"
 
+msgid "800x480"
+msgstr ""
+
 msgid "85%"
 msgstr "85%"
 
@@ -643,6 +731,14 @@ msgstr "95%"
 
 msgid "96x64"
 msgstr "96x64"
+
+#, fuzzy
+msgid "97%"
+msgstr "70%"
+
+#, fuzzy
+msgid "98%"
+msgstr "80%"
 
 msgid "Active Screen"
 msgstr "aktívna obrazovka"
@@ -668,14 +764,8 @@ msgstr "analógové+dátum+deň týždňa"
 msgid "Analog+Date+Weekday 2"
 msgstr "analógové+dátum+deň týždňa 2"
 
-msgid "April"
-msgstr "Apríl"
-
 msgid "Audio/Video"
 msgstr "Audio/Video"
-
-msgid "August"
-msgstr "August"
 
 msgid "Background"
 msgstr "Pozadie"
@@ -712,6 +802,10 @@ msgstr "Box-Skin-LCD povoliť média mód"
 
 msgid "Box-Skin-LCD Enable On-Mode"
 msgstr "Box-Skin-LCD povoliť zap. mód"
+
+#, fuzzy
+msgid "Box-Skin-LCD Offset"
+msgstr "Box-Skin-LCD"
 
 msgid "C"
 msgstr "C"
@@ -794,6 +888,12 @@ msgstr "Corby@Pearl 128x128"
 msgid "Corner"
 msgstr "roh"
 
+msgid "Corner+Timeshift"
+msgstr ""
+
+msgid "Coversearch"
+msgstr ""
+
 msgid "Crashlog"
 msgstr "chybový výpis"
 
@@ -857,9 +957,6 @@ msgstr "Dátumy bez ikon"
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr "Logovanie > /tmp/L4log.txt"
 
-msgid "December"
-msgstr "December"
-
 msgid "Delete"
 msgstr "Zmazať"
 
@@ -908,13 +1005,15 @@ msgstr "Rozšírený popis"
 msgid "Fastmode (2s)"
 msgstr "Rýchly mód (2s)"
 
-msgid "February"
-msgstr "Február"
-
 msgid "First Quarter"
 msgstr "Prvá štvrtina"
 
-msgid "Flaps Design"
+#, fuzzy
+msgid "Flaps Design Date"
+msgstr "Vzhľad klapiek"
+
+#, fuzzy
+msgid "Flaps Design Weekday"
 msgstr "Vzhľad klapiek"
 
 msgid "Font"
@@ -941,11 +1040,12 @@ msgstr "Písmo celkovo [ok]>"
 msgid "Frame"
 msgstr "Rámček"
 
+#, fuzzy
+msgid "Frame x2"
+msgstr "Rámček"
+
 msgid "Fri"
 msgstr "Pi"
-
-msgid "Friday"
-msgstr "Piatok"
 
 msgid "FritzCall"
 msgstr "FritzCall"
@@ -1002,6 +1102,9 @@ msgstr ""
 msgid "Global"
 msgstr "Celkovo"
 
+msgid "Google API"
+msgstr ""
+
 msgid "Gradient"
 msgstr "Spád"
 
@@ -1016,6 +1119,12 @@ msgstr "IMAP-SSL"
 
 msgid "IP seurity not supported by Box"
 msgstr "IP zabezpečenie nie je podporované v box-e"
+
+msgid "Idle"
+msgstr ""
+
+msgid "Indoor"
+msgstr ""
 
 msgid "Info"
 msgstr "Info"
@@ -1041,17 +1150,15 @@ msgstr "Zabudovaný Vu+ Duo2 LCD 400x240"
 msgid "JPG"
 msgstr "JPG"
 
-msgid "January"
-msgstr "Január"
-
 msgid "Javascript"
 msgstr "Javascript"
 
-msgid "July"
-msgstr "Júl"
+#, fuzzy
+msgid "Javascript no Refresh"
+msgstr "Javascript"
 
-msgid "June"
-msgstr "Jún"
+msgid "Key"
+msgstr ""
 
 msgid "Key for Screen Change"
 msgstr "tlačidlo pre zmenu obrazovky"
@@ -1101,14 +1208,47 @@ msgstr "LCD 3 Typ"
 msgid "LCD Custom Height"
 msgstr "LCD voliteľná výška"
 
+#, fuzzy
+msgid "LCD Custom Height 2"
+msgstr "LCD voliteľná výška"
+
 msgid "LCD Custom Width"
+msgstr "LCD voliteľná šírka"
+
+#, fuzzy
+msgid "LCD Custom Width 2"
 msgstr "LCD voliteľná šírka"
 
 msgid "LCD Display"
 msgstr "LCD zobrazovač"
 
+msgid "LCD Off when shutdown"
+msgstr ""
+
+#, fuzzy
+msgid "LCD4Linux"
+msgstr "LCD4linux povolený"
+
+#, fuzzy
+msgid "LCD4linux"
+msgstr "LCD4linux povolený"
+
+msgid "LCD4linux Display-Mode Idle"
+msgstr ""
+
+msgid "LCD4linux Display-Mode MediaPlayer"
+msgstr ""
+
+#, fuzzy
+msgid "LCD4linux Display-Mode On"
+msgstr "LCD zobrazovač"
+
 msgid "LCD4linux Screen Switch"
 msgstr "Prepínač obrazovky LCD4linux"
+
+#, fuzzy
+msgid "LCD4linux Settings"
+msgstr "LCD4linux povolený"
 
 msgid "LCD4linux enabled"
 msgstr "LCD4linux povolený"
@@ -1116,12 +1256,22 @@ msgstr "LCD4linux povolený"
 msgid "Last Quarter"
 msgstr "Posledná štvrtina"
 
+#, fuzzy
+msgid "Line"
+msgstr "- riadky"
+
+#, fuzzy
+msgid "List of Storage Devices"
+msgstr "Pamäťové-zariadenia"
+
 msgid "Load Active Config-File"
 msgstr "Nahraj aktívny konfig. súbor"
 
-msgid "Load Defaults"
+#, fuzzy
+msgid "Load Defaults / Empty Config"
 msgstr "Nahraj predvolené nastavenia"
 
+#, python-format
 msgid "Load File : %s"
 msgstr "Nahraj súbor : %s"
 
@@ -1152,11 +1302,15 @@ msgstr "Dlhé tlačidlo rýchlovpred typ 2"
 msgid "Long InfoKey"
 msgstr "Dlhé tlačidlo info"
 
-msgid "MJPEG Boundary Mode"
-msgstr "MJPEG hraničný mód"
+#, fuzzy
+msgid "MJPEG Cycle"
+msgstr "MJPEG Stream"
 
 msgid "MJPEG Header Mode"
 msgstr "MJPEG režim hlavičky"
+
+msgid "MJPEG Restart on Error"
+msgstr ""
 
 msgid "MJPEG Stream"
 msgstr "MJPEG Stream"
@@ -1164,11 +1318,19 @@ msgstr "MJPEG Stream"
 msgid "MJPEG Stream LCD 1 Port"
 msgstr "port MJPEG stream-u pre LCD 1"
 
+#, fuzzy
+msgid "MJPEG Stream LCD 1 Virtual Brightness"
+msgstr "povoliť MJPEG stream pre LCD 1"
+
 msgid "MJPEG Stream LCD 1 enable"
 msgstr "povoliť MJPEG stream pre LCD 1"
 
 msgid "MJPEG Stream LCD 2 Port"
 msgstr "port MJPEG stream-u pre LCD 2"
+
+#, fuzzy
+msgid "MJPEG Stream LCD 2 Virtual Brightness"
+msgstr "povoliť MJPEG stream pre LCD 2"
 
 msgid "MJPEG Stream LCD 2 enable"
 msgstr "povoliť MJPEG stream pre LCD 2"
@@ -1176,11 +1338,18 @@ msgstr "povoliť MJPEG stream pre LCD 2"
 msgid "MJPEG Stream LCD 3 Port"
 msgstr "port MJPEG stream-u pre LCD 3"
 
+#, fuzzy
+msgid "MJPEG Stream LCD 3 Virtual Brightness"
+msgstr "povoliť MJPEG stream pre LCD 3"
+
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "povoliť MJPEG stream pre LCD 3"
 
 msgid "MSN"
 msgstr "MSN"
+
+msgid "MUTE or defined Keys"
+msgstr ""
 
 msgid "Mail"
 msgstr "Pošta"
@@ -1260,12 +1429,6 @@ msgstr "Pošta zobraz dátum"
 msgid "Mail Show Empty Mailboxes"
 msgstr "Pošta zobraz prázdne kontá"
 
-msgid "March"
-msgstr "Marec"
-
-msgid "May"
-msgstr "Máj"
-
 msgid "Media"
 msgstr "Média"
 
@@ -1311,6 +1474,10 @@ msgstr "Modul 1-4"
 msgid "Module 1-5"
 msgstr "Modul 1-5"
 
+#, fuzzy
+msgid "Module 1-6"
+msgstr "Modul 1-4"
+
 msgid "Module 2"
 msgstr "Modul 2"
 
@@ -1323,23 +1490,40 @@ msgstr "Modul 2+3+4"
 msgid "Module 2+4"
 msgstr "Modul 2+4"
 
+#, fuzzy
+msgid "Module 2-6"
+msgstr "Modul 2"
+
 msgid "Module 3"
 msgstr "Modul 3"
 
 msgid "Module 3+4"
 msgstr "Modul 3+4"
 
+#, fuzzy
+msgid "Module 3-6"
+msgstr "Modul 3"
+
 msgid "Module 4"
+msgstr "Modul 4"
+
+#, fuzzy
+msgid "Module 4-6"
 msgstr "Modul 4"
 
 msgid "Module 5"
 msgstr "Modul 5"
 
+#, fuzzy
+msgid "Module 5-6"
+msgstr "Modul 5"
+
+#, fuzzy
+msgid "Module 6"
+msgstr "Modul 1"
+
 msgid "Mon"
 msgstr "Po"
-
-msgid "Monday"
-msgstr "Pondelok"
 
 msgid "Month"
 msgstr "Mesiac"
@@ -1352,6 +1536,33 @@ msgstr "Cesta k ikone mesiaca [ok]>"
 
 msgid "Moonphase"
 msgstr "Fáza mesiaca"
+
+msgid "MusicCast"
+msgstr ""
+
+msgid "MusicCast Cover"
+msgstr ""
+
+msgid "MusicCast IP"
+msgstr ""
+
+#, fuzzy
+msgid "MusicCast Ping Timeout [ms]"
+msgstr "- čas vypršania [ms]"
+
+msgid "MusicCast Play Check"
+msgstr ""
+
+#, fuzzy
+msgid "MusicCast Refresh [s]"
+msgstr "WebIF aktualizácia [s]"
+
+msgid "MusicCast Server IP [optional]"
+msgstr ""
+
+#, fuzzy
+msgid "Mute"
+msgstr "2 x stlmiť zvuk"
 
 msgid "N"
 msgstr "S"
@@ -1389,6 +1600,9 @@ msgstr "Netatmo CO2 Min rozsah"
 msgid "Netatmo Comfort Indicator"
 msgstr "Netatmo Komfortný Indikátor"
 
+msgid "Network Check active"
+msgstr ""
+
 msgid "New Moon"
 msgstr "Nový mesiac"
 
@@ -1407,9 +1621,6 @@ msgstr "Normalne"
 msgid "Normal (5s)"
 msgstr "Normalne (5s)"
 
-msgid "November"
-msgstr "November"
-
 msgid "Now/Next"
 msgstr "Teraz/Ďalší"
 
@@ -1421,9 +1632,6 @@ msgstr "OSD"
 
 msgid "OSD [display time]"
 msgstr "OSD [čas zobrazenia]"
-
-msgid "October"
-msgstr "Október"
 
 msgid "Offline"
 msgstr "Vypnuté"
@@ -1449,8 +1657,15 @@ msgstr "len nové"
 msgid "OpenWeatherMap"
 msgstr "OpenWeatherMap"
 
+msgid "Outdoor"
+msgstr ""
+
 msgid "PNG"
 msgstr "PNG"
+
+#, fuzzy
+msgid "Parent Directory"
+msgstr "Obrázok rekurzívny priečinok"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (alebo kompatibilné LCD) 240x320"
@@ -1479,6 +1694,9 @@ msgstr "Picon+Pozícia vľavo"
 msgid "Picon+Position right"
 msgstr "Picon+Pozícia vpravo"
 
+msgid "Picon+Timeshift"
+msgstr ""
+
 msgid "Picture"
 msgstr "Obrázok"
 
@@ -1499,6 +1717,10 @@ msgstr "Zotriedenie obrázkov"
 
 msgid "Picture Type [only Picture]"
 msgstr "Typ obrázka [len obrázok]"
+
+#, fuzzy
+msgid "Picture not available"
+msgstr "Dostupná pamäť"
 
 msgid "Plug Tuner"
 msgstr "Zabudovaný tuner"
@@ -1542,6 +1764,9 @@ msgstr "Rádio"
 msgid "Radio+Media"
 msgstr "Rádio+Média"
 
+msgid "Rain"
+msgstr ""
+
 msgid "Recording"
 msgstr "Záznam"
 
@@ -1578,6 +1803,18 @@ msgstr "Vzdialený Box 5 [zobrazované meno:]IP/Meno"
 msgid "Remote Box Poll every Minutes"
 msgstr "Vzdialený Box obnova v minútach"
 
+#, fuzzy
+msgid "Remote Box Timer"
+msgstr "Vzdialený Box"
+
+#, fuzzy
+msgid "Remote Box Timer Poll every Minutes"
+msgstr "Vzdialený Box obnova v minútach"
+
+#, fuzzy
+msgid "Remote Box Timer [Displayname:]IP/Name"
+msgstr "Vzdialený Box 1 [zobrazované meno:]IP/Meno"
+
 msgid "Restart Displays"
 msgstr "Reštart zobrazovačov"
 
@@ -1602,6 +1839,10 @@ msgstr "JJZ"
 msgid "SW"
 msgstr "JZ"
 
+#, fuzzy
+msgid "Samsung SPF-1000P 1024x600"
+msgstr "Samsung SPF-105P 1024x600"
+
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
 
@@ -1619,6 +1860,10 @@ msgstr "Samsung SPF-72H 800x480"
 
 msgid "Samsung SPF-75H/76H 800x480"
 msgstr "Samsung SPF-75H/76H 800x480"
+
+#, fuzzy
+msgid "Samsung SPF-800P 800x480"
+msgstr "Samsung SPF-87H 800x480"
 
 msgid "Samsung SPF-83H 800x600"
 msgstr "Samsung SPF-83H 800x600"
@@ -1641,15 +1886,13 @@ msgstr "So"
 msgid "Satellite"
 msgstr "Satelit"
 
-msgid "Saturday"
-msgstr "Sobota"
-
 msgid "Save"
 msgstr "Uložiť"
 
 msgid "Save Config"
 msgstr "Ulož cfg"
 
+#, python-format
 msgid "Save Config to File... (%s)"
 msgstr "Uložiť konfig do súboru... (%s)"
 
@@ -1740,6 +1983,10 @@ msgstr "Obrazovka 4"
 msgid "Screen 5"
 msgstr "Obrazovka 5"
 
+#, fuzzy
+msgid "Screen 5-8"
+msgstr "Obrazovka 5-9"
+
 msgid "Screen 5-9"
 msgstr "Obrazovka 5-9"
 
@@ -1764,11 +2011,21 @@ msgstr "Výber prepínača obrazovky - Obrazovka"
 msgid "Screens used for Changing"
 msgstr "Obrazovky použité na výmenu"
 
-msgid "September"
-msgstr "September"
-
 msgid "Service search first"
 msgstr "Najprv prehľadať kanál"
+
+#, fuzzy
+msgid "Set Global >>"
+msgstr "Celkovo"
+
+msgid "Set Idle >>"
+msgstr ""
+
+msgid "Set Media >>"
+msgstr ""
+
+msgid "Set On >>"
+msgstr ""
 
 msgid "Shadow Edges"
 msgstr "Hrany tieňa"
@@ -1812,6 +2069,14 @@ msgstr "Zobraz obrázok 3"
 msgid "Show Picture 4"
 msgstr "Zobraz obrázok 4"
 
+#, fuzzy
+msgid "Show Text 1"
+msgstr "Zobraz textový súbor 2"
+
+#, fuzzy
+msgid "Show Text 2"
+msgstr "Zobraz textový súbor 2"
+
 msgid "Show Textfile"
 msgstr "Zobraz textový súbor"
 
@@ -1830,11 +2095,40 @@ msgstr "Zobraz oscam.lcd"
 msgid "Signal Quality Bar"
 msgstr "Stĺpec kvality signálu"
 
+msgid "Sonos"
+msgstr ""
+
+msgid "Sonos IP"
+msgstr ""
+
+#, fuzzy
+msgid "Sonos Ping Timeout [ms]"
+msgstr "- čas vypršania [ms]"
+
+msgid "Sonos Play Check"
+msgstr ""
+
+#, fuzzy
+msgid "Sonos Refresh [s]"
+msgstr "WebIF aktualizácia [s]"
+
 msgid "Standby"
 msgstr "Pohotovostný režim"
 
 msgid "Storage-Devices"
 msgstr "Pamäťové-zariadenia"
+
+#, fuzzy
+msgid "Storage-Devices: Color Back"
+msgstr "Pamäťové-zariadenia: vynútené čítanie"
+
+#, fuzzy
+msgid "Storage-Devices: Color Bar"
+msgstr "Pamäťové-zariadenia: vynútené čítanie"
+
+#, fuzzy
+msgid "Storage-Devices: Color Full"
+msgstr "Pamäťové-zariadenia: vynútené čítanie"
 
 msgid "Storage-Devices: Force Read"
 msgstr "Pamäťové-zariadenia: vynútené čítanie"
@@ -1844,9 +2138,6 @@ msgstr "Koktavá TV"
 
 msgid "Sun"
 msgstr "Ne"
-
-msgid "Sunday"
-msgstr "Nedeľa"
 
 msgid "Sunrise"
 msgstr "Východ slnka"
@@ -1884,9 +2175,6 @@ msgstr "Témy pre LCD"
 msgid "Thur"
 msgstr "Št"
 
-msgid "Thursday"
-msgstr "Štvrtok"
-
 msgid "Time"
 msgstr "Čas"
 
@@ -1911,8 +2199,9 @@ msgstr "Titulok"
 msgid "Tue"
 msgstr "Ut"
 
-msgid "Tuesday"
-msgstr "Utorok"
+#, fuzzy
+msgid "Tuner"
+msgstr "USB Tuner"
 
 msgid "Tuner Color"
 msgstr "Farba tunera"
@@ -1986,6 +2275,10 @@ msgstr "Počasie 2"
 msgid "Weather API"
 msgstr "API počasia"
 
+#, fuzzy
+msgid "Weather API-ID Key WeatherUnlocked"
+msgstr "Počasie API-key OpenWeatherMap"
+
 msgid "Weather API-Key OpenWeatherMap"
 msgstr "Počasie API-key OpenWeatherMap"
 
@@ -2022,6 +2315,10 @@ msgstr "Počasie-Ikona zväčšenie"
 msgid "Weather-Icon-Path [ok]>"
 msgstr "Počasie-Ikona-Cesta [ok]>"
 
+#, fuzzy
+msgid "WeatherUnlocked"
+msgstr "Počasie riadky"
+
 msgid "WebIF"
 msgstr "WebIF"
 
@@ -2046,9 +2343,6 @@ msgstr "WebIF aktualizácia [s]"
 msgid "Wed"
 msgstr "St"
 
-msgid "Wednesday"
-msgstr "Streda"
-
 msgid "Week"
 msgstr "Týždeň"
 
@@ -2057,6 +2351,9 @@ msgstr "Týždeň+Hlavička"
 
 msgid "Weekday"
 msgstr "Deň týždňa"
+
+msgid "Wind"
+msgstr ""
 
 msgid "all"
 msgstr "všetko"
@@ -2069,6 +2366,9 @@ msgstr "alternatívny Mód kopírovania/DM800hd (24bit)"
 
 msgid "always"
 msgstr "vždy"
+
+msgid "any Key"
+msgstr ""
 
 msgid "aquamarine"
 msgstr "akvamarín"
@@ -2118,6 +2418,7 @@ msgstr "kopírovať do aktívných"
 msgid "cornflowerblue"
 msgstr "nevädza modrá"
 
+#, python-format
 msgid "currently set : %s"
 msgstr "aktuálne nastavené : %s"
 
@@ -2226,6 +2527,10 @@ msgstr "mokasín"
 msgid "no"
 msgstr "nie"
 
+#, fuzzy
+msgid "no Bar"
+msgstr "Stĺpec ikon udalosti"
+
 msgid "no Calendar"
 msgstr "žiaden kalendár"
 
@@ -2234,6 +2539,10 @@ msgstr "žiadne volania"
 
 msgid "no Dates"
 msgstr "žiadne termíny"
+
+#, fuzzy
+msgid "no Frame"
+msgstr "Rámček"
 
 msgid "no Icon"
 msgstr "žiadna ikona"
@@ -2295,6 +2604,10 @@ msgstr "len obrázok 800x600"
 msgid "only Picture Custom Size"
 msgstr "len obrázok vlastná veľkosť"
 
+#, fuzzy
+msgid "only Picture Custom Size 2"
+msgstr "len obrázok vlastná veľkosť"
+
 msgid "only Progress Bar"
 msgstr "len stĺpec priebehu"
 
@@ -2330,6 +2643,9 @@ msgstr "otáčky"
 
 msgid "rpm/2"
 msgstr "otáčky/2"
+
+msgid "same color"
+msgstr ""
 
 msgid "sandybrown"
 msgstr "pieskovohnedá"
@@ -2369,6 +2685,9 @@ msgstr "dva riadky"
 
 msgid "use lead-time"
 msgstr "použiť čas dodania"
+
+msgid "userdefined"
+msgstr ""
 
 msgid "vertically"
 msgstr "zvislo"
@@ -2411,6 +2730,18 @@ msgstr "s ikonou"
 
 msgid "with Icon & Targetnumber"
 msgstr "s ikonou & cieľové číslo"
+
+#, fuzzy
+msgid "with Minutes Total / Endtime (above)"
+msgstr "s percentami minút / Celkovo (nad)"
+
+#, fuzzy
+msgid "with Minutes Total / Endtime (above/Size 1.5)"
+msgstr "s percentami minút / Celkovo (nad/veľkosť 1.5)"
+
+#, fuzzy
+msgid "with Minutes Total / Endtime (above/Size 2)"
+msgstr "s percentami minút / Celkovo (nad/veľkosť 2)"
 
 msgid "with Percent"
 msgstr "a percenta"
@@ -2474,6 +2805,17 @@ msgstr "a zostávajúce minúty (pod/veľkosť 1.5)"
 
 msgid "with Remaining Minutes (below/Size 2)"
 msgstr "a zostávajúce minúty (pod/veľkosť 2)"
+
+msgid "with absolute Endtime"
+msgstr ""
+
+#, fuzzy
+msgid "with absolute Endtime (Size 1.5)"
+msgstr "a percenta (veľkosť 1.5)"
+
+#, fuzzy
+msgid "with absolute Endtime (Size 2)"
+msgstr "a percenta (veľkosť 2)"
 
 msgid "yellow"
 msgstr "žltá"

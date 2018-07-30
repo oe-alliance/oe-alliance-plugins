@@ -1,686 +1,507 @@
-# Translations for enigma2-oe-alliance-plugins package.
-# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
-# Automatically generated, 2016.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/CommonModules.py:339
-msgid "Wait please while gathering data..."
-msgstr ""
-
-#: ../src/CommonModules.py:410
-msgid "Search term"
-msgstr ""
-
-#: ../src/OUG.py:73 ../src/OUG.py:153 ../src/ui.py:81
-msgid "Cancel"
-msgstr ""
-
-#: ../src/OUG.py:74 ../src/OUG.py:154 ../src/ui.py:82
-msgid "OK"
-msgstr ""
-
-#: ../src/OUG.py:86
-msgid ""
-"Open Uitzending Gemist\n"
-"\n"
-"Based on Xtrend code"
-msgstr ""
-
-#: ../src/OUG.py:89
-msgid "UG Recently added"
-msgstr ""
-
-#: ../src/OUG.py:90
-msgid "UG Popular"
-msgstr ""
-
-#: ../src/OUG.py:91
-msgid "UG A-Z"
-msgstr ""
-
-#: ../src/OUG.py:92
-msgid "UG Search"
-msgstr ""
-
-#: ../src/OUG.py:93
-msgid "RTL XL A-Z"
-msgstr ""
-
-#: ../src/OUG.py:94
-msgid "RTL XL Gemist"
-msgstr ""
-
-#: ../src/OUG.py:167
-msgid "Today"
-msgstr ""
-
-#: ../src/OUG.py:177
-msgid "RTL Number of days back"
-msgstr ""
-
-#: ../src/OUG.py:299 ../src/fourOD.py:306 ../src/iRadio.py:615
-#: ../src/iRadio.py:1023 ../src/iView.py:264 ../src/itvplayer.py:137
-#: ../src/rteplayer.py:278 ../src/threeplayer.py:184
-msgid "No items matching your search criteria were found"
-msgstr ""
-
-#: ../src/OUG.py:420 ../src/OUG.py:572 ../src/OUG.py:651
-#: ../src/itvplayer.py:244 ../src/itvplayer.py:301 ../src/rteplayer.py:375
-#: ../src/rteplayer.py:379 ../src/rteplayer.py:456 ../src/rteplayer.py:460
-#: ../src/rteplayer.py:523 ../src/rteplayer.py:598 ../src/threeplayer.py:247
-#: ../src/threeplayer.py:352
-msgid "Added: "
-msgstr ""
-
-#: ../src/OUG.py:524
-msgid "Time: "
-msgstr ""
-
-#: ../src/OUG.py:702
-msgid "Watch uitzending gemist"
-msgstr ""
-
-#: ../src/bbciplayer.py:87 ../src/fourOD.py:182 ../src/iRadio.py:163
-#: ../src/iRadio.py:306 ../src/iView.py:87 ../src/itvplayer.py:62
-#: ../src/rteplayer.py:86 ../src/threeplayer.py:84
-msgid "Search"
-msgstr ""
-
-#: ../src/bbciplayer.py:88
-msgid "TV Highlights"
-msgstr ""
-
-#: ../src/bbciplayer.py:89
-msgid "Most Popular TV"
-msgstr ""
-
-#: ../src/bbciplayer.py:90
-msgid "Drama"
-msgstr ""
-
-#: ../src/bbciplayer.py:91
-msgid "Entertainment"
-msgstr ""
-
-#: ../src/bbciplayer.py:92
-msgid "Movies"
-msgstr ""
-
-#: ../src/bbciplayer.py:93
-msgid "Factual"
-msgstr ""
-
-#: ../src/bbciplayer.py:94
-msgid "Comedy"
-msgstr ""
-
-#: ../src/bbciplayer.py:95
-msgid "Soaps"
-msgstr ""
-
-#: ../src/bbciplayer.py:96
-msgid "Childrens"
-msgstr ""
-
-#: ../src/bbciplayer.py:97
-msgid "News"
-msgstr ""
-
-#: ../src/bbciplayer.py:98 ../src/iView.py:106
-msgid "Sport"
-msgstr ""
-
-#: ../src/bbciplayer.py:99
-msgid "Music"
-msgstr ""
-
-#: ../src/bbciplayer.py:100
-msgid "Health And Wellbeing"
-msgstr ""
-
-#: ../src/bbciplayer.py:101
-msgid "Religion"
-msgstr ""
-
-#: ../src/bbciplayer.py:102
-msgid "Signed"
-msgstr ""
-
-#: ../src/bbciplayer.py:103
-msgid "BBC Northern Ireland"
-msgstr ""
-
-#: ../src/bbciplayer.py:104
-msgid "BBC Wales"
-msgstr ""
-
-#: ../src/bbciplayer.py:105
-msgid "BBC Scotland"
-msgstr ""
-
-#: ../src/bbciplayer.py:106
-msgid "BBC One"
-msgstr ""
-
-#: ../src/bbciplayer.py:107
-msgid "BBC Two"
-msgstr ""
-
-#: ../src/bbciplayer.py:108
-msgid "BBC Three"
-msgstr ""
-
-#: ../src/bbciplayer.py:109
-msgid "BBC Four"
-msgstr ""
-
-#: ../src/bbciplayer.py:110
-msgid "CBBC"
-msgstr ""
-
-#: ../src/bbciplayer.py:111
-msgid "Cbeebies"
-msgstr ""
-
-#: ../src/bbciplayer.py:112
-msgid "BBC Parliamanent"
-msgstr ""
-
-#: ../src/bbciplayer.py:113
-msgid "BBC News"
-msgstr ""
-
-#: ../src/bbciplayer.py:114
-msgid "BBC Alba"
-msgstr ""
-
-#: ../src/bbciplayer.py:115
-msgid "BBC HD"
-msgstr ""
-
-#: ../src/bbciplayer.py:117 ../src/fourOD.py:232 ../src/iRadio.py:109
-#: ../src/iView.py:124 ../src/itvplayer.py:64 ../src/rteplayer.py:92
-#: ../src/threeplayer.py:89
-msgid "Back"
-msgstr ""
-
-#: ../src/bbciplayer.py:235
-msgid "No matching search items were found for "
-msgstr ""
-
-#: ../src/bbciplayer.py:295 ../src/bbciplayer.py:356 ../src/fourOD.py:608
-#: ../src/iView.py:499 ../src/iView.py:503 ../src/rteplayer.py:519
-msgid "Added:"
-msgstr ""
-
-#: ../src/fourOD.py:630
-msgid "Duration:"
-msgstr ""
-
-#: ../src/iRadio.py:98
-msgid "iRadio Player - Main Menu"
-msgstr ""
-
-#: ../src/iRadio.py:106
-msgid "Favorites"
-msgstr ""
-
-#: ../src/iRadio.py:107
-msgid "SHOUTcast Radio"
-msgstr ""
-
-#: ../src/iRadio.py:108
-msgid "Tunein Radio"
-msgstr ""
-
-#: ../src/iRadio.py:156
-msgid "iRadio Player - SHOUTcast Genres"
-msgstr ""
-
-#: ../src/iRadio.py:186 ../src/iRadio.py:260 ../src/iRadio.py:328
-#: ../src/iView.py:184 ../src/rteplayer.py:173
-msgid "Exit"
-msgstr ""
-
-#: ../src/iRadio.py:225
-msgid "iRadio Player - SHOUTcast Sub Genres for "
-msgstr ""
-
-#: ../src/iRadio.py:299
-msgid "iRadio Player - Tunein Main Menu"
-msgstr ""
-
-#: ../src/iRadio.py:487 ../src/iRadio.py:909
-msgid "Add to Favorites"
-msgstr ""
-
-#: ../src/iRadio.py:524 ../src/iRadio.py:946
-msgid "Station saved to Favorites!"
-msgstr ""
-
-#: ../src/iRadio.py:526 ../src/iRadio.py:948
-msgid "Station save failed, please check the Debug logs!"
-msgstr ""
-
-#: ../src/iRadio.py:528 ../src/iRadio.py:950
-msgid "Station Already Saved in Favorites!"
-msgstr ""
-
-#: ../src/iRadio.py:531 ../src/iRadio.py:953
-msgid "Selection does not contain a stream!"
-msgstr ""
-
-#: ../src/iRadio.py:632 ../src/iRadio.py:830 ../src/iRadio.py:1048
-msgid "Sorry, unable to find playable stream!"
-msgstr ""
-
-#: ../src/iRadio.py:669 ../src/iRadio.py:671 ../src/iRadio.py:1097
-#: ../src/iRadio.py:1099
-msgid "Recently Played: "
-msgstr ""
-
-#: ../src/iRadio.py:669 ../src/iRadio.py:1097
 msgid ""
 "\n"
 "\n"
 "Genre: "
 msgstr ""
 
-#: ../src/iRadio.py:674 ../src/iRadio.py:1093
-msgid "Bitrate: "
-msgstr ""
-
-#: ../src/iRadio.py:676 ../src/iRadio.py:1091
-msgid "Bitrate: Unknown"
-msgstr ""
-
-#: ../src/iRadio.py:679 ../src/iRadio.py:1104
-msgid "Audio: "
-msgstr ""
-
-#: ../src/iRadio.py:681 ../src/iRadio.py:1102
-msgid "Audio: Unknown"
-msgstr ""
-
-#: ../src/iRadio.py:722
-msgid "Delete from Favorites"
-msgstr ""
-
-#: ../src/iRadio.py:748
-msgid "Station deleted from Favorites!"
-msgstr ""
-
-#: ../src/iRadio.py:750
-msgid "Station delete failed, please check the Debug logs!"
-msgstr ""
-
-#: ../src/iRadio.py:1012
-msgid "Sorry, No Stations Found!"
-msgstr ""
-
-#: ../src/iView.py:88
-msgid "Recently Added"
-msgstr ""
-
-#: ../src/iView.py:89
-msgid "Comedy - Cult"
-msgstr ""
-
-#: ../src/iView.py:90
-msgid "Comedy - Satire"
-msgstr ""
-
-#: ../src/iView.py:91
-msgid "Comedy - Sitcom"
-msgstr ""
-
-#: ../src/iView.py:92
-msgid "Comedy - Sketch"
-msgstr ""
-
-#: ../src/iView.py:93
-msgid "Drama - Crime"
-msgstr ""
-
-#: ../src/iView.py:94
-msgid "Drama - Historical"
-msgstr ""
-
-#: ../src/iView.py:95
-msgid "Drama - Period"
-msgstr ""
-
-#: ../src/iView.py:96
-msgid "Drama - Romance"
-msgstr ""
-
-#: ../src/iView.py:97
-msgid "Drama - Sci-fi"
-msgstr ""
-
-#: ../src/iView.py:98
-msgid "Documentary - Biography"
-msgstr ""
-
-#: ../src/iView.py:99
-msgid "Documentary - History"
-msgstr ""
-
-#: ../src/iView.py:100
-msgid "Documentary - Nature"
-msgstr ""
-
-#: ../src/iView.py:101
-msgid "Documentary - Science"
-msgstr ""
-
-#: ../src/iView.py:102
-msgid "Documentary - Real Life"
-msgstr ""
-
-#: ../src/iView.py:103
-msgid "Lifestyle - Games"
-msgstr ""
-
-#: ../src/iView.py:104
-msgid "Lifestyle - Reality"
-msgstr ""
-
-#: ../src/iView.py:105
-msgid "News & Current Affairs"
-msgstr ""
-
-#: ../src/iView.py:107
-msgid "Arts & Culture - Music"
-msgstr ""
-
-#: ../src/iView.py:108
-msgid "Arts & Culture - People"
-msgstr ""
-
-#: ../src/iView.py:109
-msgid "Arts & Culture - Performance"
-msgstr ""
-
-#: ../src/iView.py:110
-msgid "Arts & Culture - Reviews"
-msgstr ""
-
-#: ../src/iView.py:111
-msgid "iView Exclusives"
-msgstr ""
-
-#: ../src/iView.py:112
-msgid "Featured Programs"
-msgstr ""
-
-#: ../src/iView.py:113
-msgid "Panel & Discussion"
-msgstr ""
-
-#: ../src/iView.py:114
-msgid "Last Chance"
-msgstr ""
-
-#: ../src/iView.py:115
-msgid "ABC4Kids"
-msgstr ""
-
-#: ../src/iView.py:116
-msgid "Education"
-msgstr ""
-
-#: ../src/iView.py:117
-msgid "Indigenous"
-msgstr ""
-
-#: ../src/iView.py:118
-msgid "Trailers"
-msgstr ""
-
-#: ../src/iView.py:119
-msgid "ABC1"
-msgstr ""
-
-#: ../src/iView.py:120
-msgid "ABC2"
-msgstr ""
-
-#: ../src/iView.py:121
-msgid "ABC3"
-msgstr ""
-
-#: ../src/iView.py:122
-msgid "ABC News 24"
-msgstr ""
-
-#: ../src/iView.py:123
-msgid "A to Z"
-msgstr ""
-
-#: ../src/iView.py:169
-msgid "ABC iView - A to Z"
-msgstr ""
-
-#: ../src/iView.py:175 ../src/itvplayer.py:63 ../src/threeplayer.py:88
-msgid "All Shows"
-msgstr ""
-
-#: ../src/iView.py:176
-msgid "A - C"
-msgstr ""
-
-#: ../src/iView.py:177
-msgid "D - F"
-msgstr ""
-
-#: ../src/iView.py:178
-msgid "G - J"
-msgstr ""
-
-#: ../src/iView.py:179
-msgid "K - M"
-msgstr ""
-
-#: ../src/iView.py:180
-msgid "N - P"
-msgstr ""
-
-#: ../src/iView.py:181
-msgid "Q - T"
-msgstr ""
-
-#: ../src/iView.py:182
-msgid "U - Z"
-msgstr ""
-
-#: ../src/iView.py:183
 msgid "0 - 9"
 msgstr ""
 
-#: ../src/iView.py:492 ../src/rteplayer.py:386 ../src/rteplayer.py:479
-#: ../src/threeplayer.py:253 ../src/threeplayer.py:255
-#: ../src/threeplayer.py:354
-msgid "Duration: "
-msgstr ""
-
-#: ../src/iView.py:567 ../src/iView.py:631
-msgid "Episodes: "
-msgstr ""
-
-#: ../src/itvplayer.py:198
-msgid "Last Updated:"
-msgstr ""
-
-#: ../src/plugin.py:40
-msgid "Very Low"
-msgstr ""
-
-#: ../src/plugin.py:40
-msgid "Low"
-msgstr ""
-
-#: ../src/plugin.py:40
-msgid "Normal"
-msgstr ""
-
-#: ../src/plugin.py:40
-msgid "High"
-msgstr ""
-
-#: ../src/plugin.py:40
-msgid "HD"
-msgstr ""
-
-#: ../src/plugin.py:54 ../src/plugin.py:63 ../src/plugin.py:65 ../src/ui.py:121
-#: ../src/ui.py:196
-msgid "OnDemand"
-msgstr ""
-
-#: ../src/rteplayer.py:87
-msgid "Latest Episodes"
-msgstr ""
-
-#: ../src/rteplayer.py:88
-msgid "Most Popular Episodes"
-msgstr ""
-
-#: ../src/rteplayer.py:89
-msgid "Episodes by Date"
-msgstr ""
-
-#: ../src/rteplayer.py:90
-msgid "Show Categories"
-msgstr ""
-
-#: ../src/rteplayer.py:91
-msgid "Shows A to Z"
-msgstr ""
-
-#: ../src/rteplayer.py:143
-msgid "RTE Player - Choose Date"
-msgstr ""
-
-#: ../src/rteplayer.py:145
-msgid "RTE Player - Categories"
-msgstr ""
-
-#: ../src/rteplayer.py:147
-msgid "RTE Player - A to Z"
-msgstr ""
-
-#: ../src/threeplayer.py:85
-msgid "Most Talked About"
-msgstr ""
-
-#: ../src/threeplayer.py:86
-msgid "Straight Off The Telly"
-msgstr ""
-
-#: ../src/threeplayer.py:87
-msgid "Going, Going..."
-msgstr ""
-
-#: ../src/ui.py:48
-msgid "OnDemand Configuration"
-msgstr ""
-
-#: ../src/ui.py:53
-msgid "Show in main menu"
-msgstr ""
-
-#: ../src/ui.py:54
-msgid "Show in plugin browser"
-msgstr ""
-
-#: ../src/ui.py:55
-msgid "Show in extensions"
-msgstr ""
-
-#: ../src/ui.py:56
-msgid "Show Thumbnails"
-msgstr ""
-
-#: ../src/ui.py:58
-msgid "Preferred Stream Quality"
-msgstr ""
-
-#: ../src/ui.py:61
-msgid "ITV Player"
-msgstr ""
-
-#: ../src/ui.py:63
 msgid "3 Player"
 msgstr ""
 
-#: ../src/ui.py:64
+msgid "A - C"
+msgstr ""
+
+msgid "A to Z"
+msgstr ""
+
+msgid "ABC News 24"
+msgstr ""
+
 msgid "ABC iView"
 msgstr ""
 
-#: ../src/ui.py:65
-msgid "RTE Player"
+msgid "ABC iView - A to Z"
 msgstr ""
 
-#: ../src/ui.py:67
-msgid "iRadio Player"
+msgid "ABC1"
 msgstr ""
 
-#: ../src/ui.py:68
-msgid "iRadio: Display WMA Streams"
+msgid "ABC2"
 msgstr ""
 
-#: ../src/ui.py:69
-msgid "iRadio: Display Favorite Thumbnails"
+msgid "ABC3"
 msgstr ""
 
-#: ../src/ui.py:70
-msgid "iRadio: Display Favorite Default Thumbnails"
+msgid "ABC4Kids"
 msgstr ""
 
-#: ../src/ui.py:71
-msgid "iRadio: Display SHOUTcast Thumbnails"
-msgstr ""
-
-#: ../src/ui.py:72
-msgid "iRadio: Display SHOUTcast Default Thumbnails"
-msgstr ""
-
-#: ../src/ui.py:73
-msgid "iRadio: Display Tunein Thumbnails"
-msgstr ""
-
-#: ../src/ui.py:74
-msgid "iRadio: Display Tunein Default Thumbnails"
-msgstr ""
-
-#: ../src/ui.py:76
-msgid "Primary DNS: To watch UK Streams outside the UK"
-msgstr ""
-
-#: ../src/ui.py:77
-msgid "Secondary DNS: A backup DNS if the primary is down"
-msgstr ""
-
-#: ../src/ui.py:196
 msgid "About"
 msgstr ""
 
-#: ../src/ui.py:208
+msgid "Add to Favorites"
+msgstr ""
+
+msgid "Added:"
+msgstr ""
+
+msgid "Added: "
+msgstr ""
+
+msgid "All Shows"
+msgstr ""
+
+msgid "Arts & Culture - Music"
+msgstr ""
+
+msgid "Arts & Culture - People"
+msgstr ""
+
+msgid "Arts & Culture - Performance"
+msgstr ""
+
+msgid "Arts & Culture - Reviews"
+msgstr ""
+
+msgid "Audio: "
+msgstr ""
+
+msgid "Audio: Unknown"
+msgstr ""
+
+msgid "BBC Alba"
+msgstr ""
+
+msgid "BBC Four"
+msgstr ""
+
+msgid "BBC HD"
+msgstr ""
+
+msgid "BBC News"
+msgstr ""
+
+msgid "BBC Northern Ireland"
+msgstr ""
+
+msgid "BBC One"
+msgstr ""
+
+msgid "BBC Parliamanent"
+msgstr ""
+
+msgid "BBC Scotland"
+msgstr ""
+
+msgid "BBC Three"
+msgstr ""
+
+msgid "BBC Two"
+msgstr ""
+
+msgid "BBC Wales"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Bitrate: "
+msgstr ""
+
+msgid "Bitrate: Unknown"
+msgstr ""
+
+msgid "CBBC"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cbeebies"
+msgstr ""
+
+msgid "Childrens"
+msgstr ""
+
 msgid "Close"
+msgstr ""
+
+msgid "Comedy"
+msgstr ""
+
+msgid "Comedy - Cult"
+msgstr ""
+
+msgid "Comedy - Satire"
+msgstr ""
+
+msgid "Comedy - Sitcom"
+msgstr ""
+
+msgid "Comedy - Sketch"
+msgstr ""
+
+msgid "D - F"
+msgstr ""
+
+msgid "Delete from Favorites"
+msgstr ""
+
+msgid "Documentary - Biography"
+msgstr ""
+
+msgid "Documentary - History"
+msgstr ""
+
+msgid "Documentary - Nature"
+msgstr ""
+
+msgid "Documentary - Real Life"
+msgstr ""
+
+msgid "Documentary - Science"
+msgstr ""
+
+msgid "Drama"
+msgstr ""
+
+msgid "Drama - Crime"
+msgstr ""
+
+msgid "Drama - Historical"
+msgstr ""
+
+msgid "Drama - Period"
+msgstr ""
+
+msgid "Drama - Romance"
+msgstr ""
+
+msgid "Drama - Sci-fi"
+msgstr ""
+
+msgid "Duration:"
+msgstr ""
+
+msgid "Duration: "
+msgstr ""
+
+msgid "Education"
+msgstr ""
+
+msgid "Entertainment"
+msgstr ""
+
+msgid "Episodes by Date"
+msgstr ""
+
+msgid "Episodes: "
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "Factual"
+msgstr ""
+
+msgid "Favorites"
+msgstr ""
+
+msgid "Featured Programs"
+msgstr ""
+
+msgid "G - J"
+msgstr ""
+
+msgid "Going, Going..."
+msgstr ""
+
+msgid "HD"
+msgstr ""
+
+msgid "Health And Wellbeing"
+msgstr ""
+
+msgid "High"
+msgstr ""
+
+msgid "ITV Player"
+msgstr ""
+
+msgid "Indigenous"
+msgstr ""
+
+msgid "K - M"
+msgstr ""
+
+msgid "Last Chance"
+msgstr ""
+
+msgid "Last Updated:"
+msgstr ""
+
+msgid "Latest Episodes"
+msgstr ""
+
+msgid "Lifestyle - Games"
+msgstr ""
+
+msgid "Lifestyle - Reality"
+msgstr ""
+
+msgid "Low"
+msgstr ""
+
+msgid "Most Popular Episodes"
+msgstr ""
+
+msgid "Most Popular TV"
+msgstr ""
+
+msgid "Most Talked About"
+msgstr ""
+
+msgid "Movies"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
+msgid "N - P"
+msgstr ""
+
+msgid "News"
+msgstr ""
+
+msgid "News & Current Affairs"
+msgstr ""
+
+msgid "No items matching your search criteria were found"
+msgstr ""
+
+msgid "No matching search items were found for "
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "OnDemand"
+msgstr ""
+
+msgid "OnDemand Configuration"
+msgstr ""
+
+msgid ""
+"Open Uitzending Gemist\n"
+"\n"
+"Based on Xtrend code"
+msgstr ""
+
+msgid "Panel & Discussion"
+msgstr ""
+
+msgid "Preferred Stream Quality"
+msgstr ""
+
+msgid "Primary DNS: To watch UK Streams outside the UK"
+msgstr ""
+
+msgid "Q - T"
+msgstr ""
+
+msgid "RTE Player"
+msgstr ""
+
+msgid "RTE Player - A to Z"
+msgstr ""
+
+msgid "RTE Player - Categories"
+msgstr ""
+
+msgid "RTE Player - Choose Date"
+msgstr ""
+
+msgid "RTL Number of days back"
+msgstr ""
+
+msgid "RTL XL A-Z"
+msgstr ""
+
+msgid "RTL XL Gemist"
+msgstr ""
+
+msgid "Recently Added"
+msgstr ""
+
+msgid "Recently Played: "
+msgstr ""
+
+msgid "Religion"
+msgstr ""
+
+msgid "SHOUTcast Radio"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search term"
+msgstr ""
+
+msgid "Secondary DNS: A backup DNS if the primary is down"
+msgstr ""
+
+msgid "Selection does not contain a stream!"
+msgstr ""
+
+msgid "Show Categories"
+msgstr ""
+
+msgid "Show Thumbnails"
+msgstr ""
+
+msgid "Show in extensions"
+msgstr ""
+
+msgid "Show in main menu"
+msgstr ""
+
+msgid "Show in plugin browser"
+msgstr ""
+
+msgid "Shows A to Z"
+msgstr ""
+
+msgid "Signed"
+msgstr ""
+
+msgid "Soaps"
+msgstr ""
+
+msgid "Sorry, No Stations Found!"
+msgstr ""
+
+msgid "Sorry, unable to find playable stream!"
+msgstr ""
+
+msgid "Sport"
+msgstr ""
+
+msgid "Station Already Saved in Favorites!"
+msgstr ""
+
+msgid "Station delete failed, please check the Debug logs!"
+msgstr ""
+
+msgid "Station deleted from Favorites!"
+msgstr ""
+
+msgid "Station save failed, please check the Debug logs!"
+msgstr ""
+
+msgid "Station saved to Favorites!"
+msgstr ""
+
+msgid "Straight Off The Telly"
+msgstr ""
+
+msgid "TV Highlights"
+msgstr ""
+
+msgid "Time: "
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Trailers"
+msgstr ""
+
+msgid "Tunein Radio"
+msgstr ""
+
+msgid "U - Z"
+msgstr ""
+
+msgid "UG A-Z"
+msgstr ""
+
+msgid "UG Popular"
+msgstr ""
+
+msgid "UG Recently added"
+msgstr ""
+
+msgid "UG Search"
+msgstr ""
+
+msgid "Very Low"
+msgstr ""
+
+msgid "Wait please while gathering data..."
+msgstr ""
+
+msgid "Watch uitzending gemist"
+msgstr ""
+
+msgid "iRadio Player"
+msgstr ""
+
+msgid "iRadio Player - Main Menu"
+msgstr ""
+
+msgid "iRadio Player - SHOUTcast Genres"
+msgstr ""
+
+msgid "iRadio Player - SHOUTcast Sub Genres for "
+msgstr ""
+
+msgid "iRadio Player - Tunein Main Menu"
+msgstr ""
+
+msgid "iRadio: Display Favorite Default Thumbnails"
+msgstr ""
+
+msgid "iRadio: Display Favorite Thumbnails"
+msgstr ""
+
+msgid "iRadio: Display SHOUTcast Default Thumbnails"
+msgstr ""
+
+msgid "iRadio: Display SHOUTcast Thumbnails"
+msgstr ""
+
+msgid "iRadio: Display Tunein Default Thumbnails"
+msgstr ""
+
+msgid "iRadio: Display Tunein Thumbnails"
+msgstr ""
+
+msgid "iRadio: Display WMA Streams"
+msgstr ""
+
+msgid "iView Exclusives"
 msgstr ""

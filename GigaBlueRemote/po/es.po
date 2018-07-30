@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-04-28 08:30+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-09-23 11:56+0200\n"
 "Last-Translator: JR\n"
 "Language-Team: OpenSPA\n"
@@ -14,56 +15,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
-#: plugin.py:15
-msgid "Code 1"
-msgstr "Código 1"
+#, python-format
+msgid " within %d seconds."
+msgstr " durante %d segundos."
 
-#: plugin.py:15
-msgid "Code 2"
-msgstr "Código 2"
-
-#: plugin.py:50 plugin.py:142 plugin.py:149
-msgid "Remote Control Code"
-msgstr "Código mando a distancia"
-
-#: plugin.py:61 plugin.py:112
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: plugin.py:62
+msgid "Code 1"
+msgstr "Código 1"
+
+msgid "Code 2"
+msgstr "Código 2"
+
+msgid "Confirm"
+msgstr "Confirmar"
+
+msgid "FILE DOES NOT EXIST : /proc/stb/ir/rc/customcode"
+msgstr "ARCHIVO NO EXISTE : /proc/stb/ir/rc/customcode"
+
+msgid "Please change now the mode on your RCU."
+msgstr "Por favor, cambia el modo en tu mando."
+
+msgid "Press and hold 'GIGA' & '5' for 5 seconds."
+msgstr "Pulsa y aguanta pulsado el botón 'GIGA' y '5' durante 5 seg."
+
+msgid "Remote Control Code"
+msgstr "Código mando a distancia"
+
+msgid "Remote Control Code:"
+msgstr "Código mando a distancia:"
+
 msgid "Save"
 msgstr "Guardar"
 
-#: plugin.py:73
 #, python-format
 msgid "Sorry, but %s is not supported."
 msgstr "Perdón, pero %s no está soportado."
 
-#: plugin.py:77
-msgid "Remote Control Code:"
-msgstr "Código mando a distancia:"
-
-#: plugin.py:89
-msgid "FILE DOES NOT EXIST : /proc/stb/ir/rc/customcode"
-msgstr "ARCHIVO NO EXISTE : /proc/stb/ir/rc/customcode"
-
-#: plugin.py:91
-msgid "Please change now the mode on your RCU."
-msgstr "Por favor, cambia el modo en tu mando."
-
-#: plugin.py:91
-msgid "Press and hold 'GIGA' & '5' for 5 seconds."
-msgstr "Pulsa y aguanta pulsado el botón 'GIGA' y '5' durante 5 seg."
-
-#: plugin.py:91
 msgid "Then choose 'Confirm' "
 msgstr "Entonces escoge 'Confirmar' "
-
-#: plugin.py:112
-msgid "Confirm"
-msgstr "Confirmar"
-
-#: plugin.py:118
-#, python-format
-msgid " within %d seconds."
-msgstr " durante %d segundos."

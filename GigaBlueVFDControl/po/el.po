@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2_v2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:26+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:26+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -15,126 +15,99 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:28
-msgid "Channelnumber in Standby off"
-msgstr ""
-
-#: ../src/plugin.py:28
-msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:28
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:28
-msgid "Clock always"
-msgstr ""
-
-#: ../src/plugin.py:28
 msgid "Always off"
 msgstr ""
 
-#: ../src/plugin.py:29 ../src/plugin.py:30
-msgid "No"
-msgstr ""
-
-#: ../src/plugin.py:29 ../src/plugin.py:30
-msgid "Yes"
-msgstr ""
-
-#: ../src/plugin.py:33
-msgid "None"
-msgstr ""
-
-#: ../src/plugin.py:33
-msgid "Blue"
-msgstr ""
-
-#: ../src/plugin.py:33
-msgid "Red"
-msgstr ""
-
-#: ../src/plugin.py:33
-msgid "Purple"
-msgstr ""
-
-#
-#
-#: ../src/plugin.py:369
-msgid "Cancel"
-msgstr "Άκυρο "
-
-#
-#
-#: ../src/plugin.py:370
-msgid "Save"
-msgstr "Αποθήκευση"
-
-#: ../src/plugin.py:374
-msgid "Update Date/Time"
-msgstr ""
-
-#: ../src/plugin.py:387 ../src/plugin.py:421
-msgid "Enable led"
-msgstr ""
-
-#: ../src/plugin.py:389
-msgid "Led state RUN"
-msgstr ""
-
-#: ../src/plugin.py:390
-msgid "Led state Standby"
-msgstr ""
-
-#: ../src/plugin.py:392
-msgid "Led state Deep Standby"
-msgstr ""
-
-#: ../src/plugin.py:393
-msgid "Led state Record"
-msgstr ""
-
-#: ../src/plugin.py:394
 msgid "Blink Record Led"
 msgstr ""
 
-#: ../src/plugin.py:395
-msgid "Led state HDD /dev/sda active"
+msgid "Blue"
 msgstr ""
 
-#: ../src/plugin.py:396
-msgid "Led state HDD /dev/sdb active"
-msgstr ""
-
-#: ../src/plugin.py:402 ../src/plugin.py:429
 msgid "Brightness"
 msgstr ""
 
-#: ../src/plugin.py:403 ../src/plugin.py:431
 msgid "Brightness Standby"
 msgstr ""
 
-#: ../src/plugin.py:405 ../src/plugin.py:425
-msgid "Show on VFD"
-msgstr ""
+#
+#
+msgid "Cancel"
+msgstr "Άκυρο "
 
-#: ../src/plugin.py:406 ../src/plugin.py:427
-msgid "Show clock in Deep Standby"
-msgstr ""
-
-#: ../src/plugin.py:408
-msgid "Time mode"
-msgstr ""
-
-#: ../src/plugin.py:409
 msgid "Channel number with leading zeros"
 msgstr ""
 
-#: ../src/plugin.py:489 ../src/plugin.py:491 ../src/plugin.py:504
+msgid "Channelnumber in Standby Clock"
+msgstr ""
+
+msgid "Channelnumber in Standby off"
+msgstr ""
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+msgid "Clock always"
+msgstr ""
+
 msgid "Display/LED"
 msgstr ""
 
-#: ../src/plugin.py:493 ../src/plugin.py:506
+msgid "Enable led"
+msgstr ""
+
 msgid "LED"
+msgstr ""
+
+msgid "Led Deep Standby"
+msgstr ""
+
+msgid "Led state Deep Standby"
+msgstr ""
+
+msgid "Led state HDD /dev/sda active"
+msgstr ""
+
+msgid "Led state HDD /dev/sdb active"
+msgstr ""
+
+msgid "Led state RUN"
+msgstr ""
+
+msgid "Led state Record"
+msgstr ""
+
+msgid "Led state Standby"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Purple"
+msgstr ""
+
+msgid "Red"
+msgstr ""
+
+#
+#
+msgid "Save"
+msgstr "Αποθήκευση"
+
+msgid "Show clock in Deep Standby"
+msgstr ""
+
+msgid "Show on VFD"
+msgstr ""
+
+msgid "Time mode"
+msgstr ""
+
+msgid "Update Date/Time"
+msgstr ""
+
+msgid "Yes"
 msgstr ""

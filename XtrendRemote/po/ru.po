@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:23+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:23+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Russian / enigma(c) Ukraine, Kiev>\n"
@@ -10,110 +10,60 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-5\n"
 
-#: ../src/plugin.py:12
-msgid "OdinM9"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "ET9000/ET9100"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "DMM/DMM ADV"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "ET5000/ET6000"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "Vu"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "ET6500/ET9500"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "ET9200/ET9500"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "ET4000"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "XP1000"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "HD1100"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "XP3000"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "F1/F3"
-msgstr ""
-
-#: ../src/plugin.py:12
-msgid "HD2400"
-msgstr ""
-
-#: ../src/plugin.py:66
-msgid "OK"
-msgstr ""
-
-#: ../src/plugin.py:67
 msgid "Cancel"
 msgstr "Отменить"
 
-#: ../src/plugin.py:90
-msgid "Remote"
+msgid "DMM/DMM ADV"
 msgstr ""
 
-#: ../src/plugin.py:101
+msgid "ET4000"
+msgstr ""
+
+msgid "ET5000/ET6000"
+msgstr ""
+
+msgid "ET6500/ET9500"
+msgstr ""
+
+msgid "ET9000/ET9100"
+msgstr ""
+
+msgid "ET9200/ET9500"
+msgstr ""
+
+msgid "F1/F3"
+msgstr ""
+
+msgid "HD1100"
+msgstr ""
+
+msgid "HD2400"
+msgstr ""
+
 msgid "Is this remote ok?"
 msgstr ""
 
-#: ../src/plugin.py:187 ../src/plugin.py:194
+msgid "OK"
+msgstr ""
+
+msgid "OdinM9"
+msgstr ""
+
+msgid "Remote"
+msgstr ""
+
 msgid "Remote Control Code"
 msgstr "Код дистанционного управления"
 
-#~ msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-#~ msgstr "Файл не существует: : /proc/stb/fp/remote_code"
+msgid "Vu"
+msgstr ""
 
-#~ msgid "Keep"
-#~ msgstr "Сохранять"
+msgid "XP1000"
+msgstr ""
 
-#~ msgid "Please change your remote mode"
-#~ msgstr "Пожалуйста измените режим удаленного управления"
-
-#~ msgid ""
-#~ "Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
-#~ "press '000"
-#~ msgstr ""
-#~ "Нажмите и удерживайте кнопки '2' и'7' пока не загорится индикатор, затем "
-#~ "нажмите 'Help', а затем кнопку '000"
-
-#~ msgid "Remote Control System Code"
-#~ msgstr "Код дистанционного управления"
-
-#~ msgid "Restore"
-#~ msgstr "Восстановить"
-
-#~ msgid "Save"
-#~ msgstr "Сохранить"
-
-#~ msgid "Text support"
-#~ msgstr "Поддержка текста"
-
-#~ msgid "Then choose 'Keep' within seconds"
-#~ msgstr "Затем выберите 'Сохранить' в течение X секунд"
+msgid "XP3000"
+msgstr ""

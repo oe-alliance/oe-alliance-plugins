@@ -1,249 +1,190 @@
-# Translations for enigma2-oe-alliance-plugins package.
-# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
-# Automatically generated, 2016.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:46
-msgid "disabled"
-msgstr ""
-
-#: ../src/plugin.py:46
-msgid "enabled"
-msgstr ""
-
-#: ../src/plugin.py:50
-msgid "WEP"
-msgstr ""
-
-#: ../src/plugin.py:50 ../src/plugin.py:58
-msgid "WPA"
-msgstr ""
-
-#: ../src/plugin.py:50 ../src/plugin.py:58
-msgid "WPA2"
-msgstr ""
-
-#: ../src/plugin.py:50 ../src/plugin.py:58
-msgid "WPA/WPA2"
-msgstr ""
-
-#: ../src/plugin.py:55
-msgid "Enable 64 bit (Input 10 hex keys)"
-msgstr ""
-
-#: ../src/plugin.py:55
-msgid "Enable 128 bit (Input 26 hex keys)"
-msgstr ""
-
-#: ../src/plugin.py:58
-msgid "not set"
-msgstr ""
-
-#: ../src/plugin.py:106
-msgid "Cancel"
-msgstr ""
-
-#: ../src/plugin.py:107
-msgid "Ok"
-msgstr ""
-
-#: ../src/plugin.py:108 ../src/plugin.py:109
 msgid " "
 msgstr ""
 
-#: ../src/plugin.py:110
-msgid "Current settings (interface : br0)"
-msgstr ""
-
-#: ../src/plugin.py:111 ../src/plugin.py:290
-msgid "IP Address"
-msgstr ""
-
-#: ../src/plugin.py:112
-msgid "Netmask"
-msgstr ""
-
-#: ../src/plugin.py:113 ../src/plugin.py:292
-msgid "Gateway"
-msgstr ""
-
-#: ../src/plugin.py:114 ../src/plugin.py:115 ../src/plugin.py:116
-msgid "N/A"
-msgstr ""
-
-#: ../src/plugin.py:270
-msgid "Use AP Mode"
-msgstr ""
-
-#: ../src/plugin.py:271
-msgid "Setup Mode"
-msgstr ""
-
-#: ../src/plugin.py:272
 msgid "AP Device"
 msgstr ""
 
-#: ../src/plugin.py:273
 msgid "AP Mode"
 msgstr ""
 
-#: ../src/plugin.py:274
-msgid "Channel (1~13)"
+msgid "Atheros"
 msgstr ""
 
-#: ../src/plugin.py:275
-msgid "SSID (1~32 Characters)"
-msgstr ""
-
-#: ../src/plugin.py:276
 msgid "Beacon (15~65535)"
 msgstr ""
 
-#: ../src/plugin.py:277
-msgid "RTS Threshold (0~2347)"
+msgid "Cancel"
 msgstr ""
 
-#: ../src/plugin.py:278
-msgid "FRAGM Threshold (256~2346)"
+msgid "Channel (1~13)"
 msgstr ""
 
-#: ../src/plugin.py:279
-msgid "Preamble"
+msgid "Configuration your AP is finished"
 msgstr ""
 
-#: ../src/plugin.py:280
-msgid "Ignore Broadcast SSID"
+msgid "Current settings (interface : br0)"
 msgstr ""
 
-#: ../src/plugin.py:282
+msgid "Enable 128 bit (Input 26 hex keys)"
+msgstr ""
+
+msgid "Enable 64 bit (Input 10 hex keys)"
+msgstr ""
+
 msgid "Encrypt"
 msgstr ""
 
-#: ../src/plugin.py:283
-msgid "Method"
+msgid "FRAGM Threshold (256~2346)"
 msgstr ""
 
-#: ../src/plugin.py:284
-msgid "KeyType"
+msgid "Gateway"
 msgstr ""
 
-#: ../src/plugin.py:285
-msgid "WEP Key (HEX)"
-msgstr ""
-
-#: ../src/plugin.py:286
-msgid "KEY (8~63 Characters)"
-msgstr ""
-
-#: ../src/plugin.py:287
 msgid "Group Rekey Interval"
 msgstr ""
 
-#: ../src/plugin.py:289
-msgid "Use DHCP"
+msgid "IP Address"
 msgstr ""
 
-#: ../src/plugin.py:291
-msgid "NetMask"
+msgid "Ignore Broadcast SSID"
 msgstr ""
 
-#: ../src/plugin.py:293
-msgid "Nameserver"
+msgid "Invalid Fragm Threshold\n"
 msgstr ""
 
-#: ../src/plugin.py:420
-msgid "Please wait for AP Configuration....\n"
+msgid "Invalid RTS Threshold\n"
 msgstr ""
 
-#: ../src/plugin.py:431
+msgid "Invalid SSID\n"
+msgstr ""
+
 msgid ""
 "Invalid WEP key\n"
 "\n"
 msgstr ""
 
-#: ../src/plugin.py:436
 msgid ""
 "Invalid WPA key\n"
 "\n"
 msgstr ""
 
-#: ../src/plugin.py:457
-msgid "Invalid SSID\n"
-msgstr ""
-
-#: ../src/plugin.py:460
-msgid "Invalid channel\n"
-msgstr ""
-
-#: ../src/plugin.py:463
 msgid "Invalid beacon\n"
 msgstr ""
 
-#: ../src/plugin.py:466
-msgid "Invalid RTS Threshold\n"
+msgid "Invalid channel\n"
 msgstr ""
 
-#: ../src/plugin.py:469
-msgid "Invalid Fragm Threshold\n"
-msgstr ""
-
-#: ../src/plugin.py:472
 msgid "Invalid wpagrouprekey\n"
 msgstr ""
 
-#: ../src/plugin.py:552
-msgid "Configuration your AP is finished"
+msgid "KEY (8~63 Characters)"
 msgstr ""
 
-#: ../src/plugin.py:692
-msgid "Realtek"
+msgid "KeyType"
 msgstr ""
 
-#: ../src/plugin.py:692 ../src/plugin.py:694 ../src/plugin.py:696
-#: ../src/plugin.py:698 ../src/plugin.py:700
-msgid "WLAN adapter."
+msgid "Method"
 msgstr ""
 
-#: ../src/plugin.py:694
-msgid "Atheros"
+msgid "N/A"
 msgstr ""
 
-#: ../src/plugin.py:696
-msgid "Zydas"
+msgid "Nameserver"
 msgstr ""
 
-#: ../src/plugin.py:698 ../src/plugin.py:700
+msgid "NetMask"
+msgstr ""
+
+msgid "Netmask"
+msgstr ""
+
+msgid "Ok"
+msgstr ""
+
+msgid "Please wait for AP Configuration....\n"
+msgstr ""
+
+msgid "Preamble"
+msgstr ""
+
+msgid "RTS Threshold (0~2347)"
+msgstr ""
+
 msgid "Ralink"
 msgstr ""
 
-#: ../src/plugin.py:702
-msgid "WLAN adapter"
+msgid "Realtek"
 msgstr ""
 
-#: ../src/plugin.py:704 ../src/plugin.py:706
+msgid "SSID (1~32 Characters)"
+msgstr ""
+
+msgid "Setup Mode"
+msgstr ""
+
 msgid "Unknown network adapter"
 msgstr ""
 
-#: ../src/plugin.py:854
+msgid "Use AP Mode"
+msgstr ""
+
+msgid "Use DHCP"
+msgstr ""
+
+msgid "Using a Wireless module as access point."
+msgstr ""
+
+msgid "WEP"
+msgstr ""
+
+msgid "WEP Key (HEX)"
+msgstr ""
+
+msgid "WLAN adapter"
+msgstr ""
+
+msgid "WLAN adapter."
+msgstr ""
+
+msgid "WPA"
+msgstr ""
+
+msgid "WPA/WPA2"
+msgstr ""
+
+msgid "WPA2"
+msgstr ""
+
 msgid "Wireless Access Point"
 msgstr ""
 
-#: ../src/plugin.py:854
-msgid "Using a Wireless module as access point."
+msgid "Zydas"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+msgid "enabled"
+msgstr ""
+
+msgid "not set"
 msgstr ""

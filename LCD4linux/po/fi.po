@@ -2783,4 +2783,3 @@ msgstr "kyllä, pitkä"
 
 msgid "yes, short"
 msgstr "kyllä, lyhyt"
-

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:19+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:19+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: ViX\n"
@@ -18,66 +18,46 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:34 ../src/plugin.py:43 ../src/plugin.py:50
-#: ../src/plugin.py:59 ../src/plugin.py:70
-msgid "FPGA"
-msgstr "FPGA"
-
-#: ../src/plugin.py:35 ../src/plugin.py:51 ../src/plugin.py:60
-#: ../src/plugin.py:71
-msgid "Front Processor"
-msgstr "Front Processor"
-
-#: ../src/plugin.py:61
-msgid "VFD Controller"
-msgstr ""
-
-#: ../src/plugin.py:348
-msgid "Can't cancel during upgrade!!"
-msgstr "Can't cancel during upgrade!!"
-
-#: ../src/plugin.py:350
-msgid "Status : 0%"
-msgstr "Status : 0%"
-
-#: ../src/plugin.py:383
-msgid "Fail to upgrade!! Retry!!"
-msgstr "Fail to upgrade!! Retry!!"
-
-#: ../src/plugin.py:385
 #, python-format
 msgid "%d / 100"
 msgstr "%d / 100"
 
-#: ../src/plugin.py:388
-msgid "Success. Press OK to exit."
-msgstr "Success. Press OK to exit."
+msgid "Can't cancel during upgrade!!"
+msgstr "Can't cancel during upgrade!!"
 
-#: ../src/plugin.py:417
-msgid "Do you want to remove binary data?"
-msgstr "Do you want to remove binary data?"
-
-#: ../src/plugin.py:435
-msgid "Download"
-msgstr ""
-
-#: ../src/plugin.py:476
-msgid "Can't found binary file."
-msgstr "Can't found binary file."
-
-#: ../src/plugin.py:479
-msgid "Can't found MD5 file."
-msgstr "Can't found MD5 file."
-
-#: ../src/plugin.py:490 ../src/plugin.py:494
-msgid "You choose the incorrect file. "
-msgstr ""
-
-#: ../src/plugin.py:498
 msgid "Can't find /usr/bin/md5sum"
 msgstr "Can't find /usr/bin/md5sum"
 
-#: ../src/plugin.py:505
+msgid "Can't found MD5 file."
+msgstr "Can't found MD5 file."
+
+msgid "Can't found binary file."
+msgstr "Can't found binary file."
+
+msgid "Can't found device file!!"
+msgstr "Can't found device file!!"
+
+msgid "Can't found model name."
+msgstr "Can't found model name."
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Do you want to remove binary data?"
+msgstr "Do you want to remove binary data?"
+
+msgid "Download"
+msgstr ""
+
+msgid "Duo/Solo was not support."
+msgstr ""
+
+msgid "FPGA"
+msgstr "FPGA"
+
+msgid "Fail to upgrade!! Retry!!"
+msgstr "Fail to upgrade!! Retry!!"
+
 #, python-format
 msgid ""
 "Fail to verify data file. \n"
@@ -88,51 +68,35 @@ msgstr ""
 "file[%s]\n"
 "md5[%s]"
 
-#: ../src/plugin.py:578
-msgid "Firmware does not exist."
-msgstr "Firmware does not exist."
-
-#: ../src/plugin.py:617
-msgid "Can't found model name."
-msgstr "Can't found model name."
-
-#: ../src/plugin.py:689
-msgid "Close"
-msgstr "Close"
-
-#: ../src/plugin.py:700
-msgid "Duo/Solo was not support."
-msgstr ""
-
-#: ../src/plugin.py:702
-msgid "Upgrade"
-msgstr "Upgrade"
-
-#: ../src/plugin.py:710
 msgid "Firmware"
 msgstr "Firmware"
 
-#: ../src/plugin.py:761
-msgid "No selected binary data!!"
-msgstr "No selected binary data!!"
-
-#: ../src/plugin.py:768
-msgid "Can't found device file!!"
-msgstr "Can't found device file!!"
-
-#: ../src/plugin.py:855
 msgid "Firmware Upgrade"
 msgstr "Firmware Upgrade"
 
-#: ../src/plugin.py:855
+msgid "Firmware does not exist."
+msgstr "Firmware does not exist."
+
+msgid "Front Processor"
+msgstr "Front Processor"
+
+msgid "No selected binary data!!"
+msgstr "No selected binary data!!"
+
+msgid "Status : 0%"
+msgstr "Status : 0%"
+
+msgid "Success. Press OK to exit."
+msgstr "Success. Press OK to exit."
+
+msgid "Upgrade"
+msgstr "Upgrade"
+
 msgid "Upgrade Firmware.."
 msgstr ""
 
-#~ msgid "Download the firmware (latest)"
-#~ msgstr "Download the firmware (latest)"
+msgid "VFD Controller"
+msgstr ""
 
-#~ msgid "This plugin is supported only the Ultimo/Uno."
-#~ msgstr "This plugin is supported only the Ultimo/Uno."
-
-#~ msgid "You chose the incorrect file."
-#~ msgstr "You chose the incorrect file."
+msgid "You choose the incorrect file. "
+msgstr ""

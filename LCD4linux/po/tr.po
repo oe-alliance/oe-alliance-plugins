@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
-"POT-Creation-Date: 2015-01-25 13:03+Mitteleuropäische Zeit\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -17,15 +18,31 @@ msgstr "%"
 msgid "% + BER"
 msgstr ""
 
+#, python-format
 msgid "% + Load@1min"
 msgstr ""
 
+#, python-format
 msgid "% + Load@5min"
 msgstr ""
 
+#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr ""
 
+msgid "%d-%b-%Y"
+msgstr ""
+
+msgid "%d.%m.%Y"
+msgstr ""
+
+msgid "%d.%m.%Y - %H:%M"
+msgstr ""
+
+msgid "%d.%m.%y %H:%M:%S"
+msgstr ""
+
+#, python-format
 msgid "%s - Current value: %s"
 msgstr ""
 
@@ -74,7 +91,38 @@ msgstr ""
 msgid "- Caption Color"
 msgstr ""
 
+msgid "- Clear Key"
+msgstr ""
+
 msgid "- Color"
+msgstr "- renk"
+
+#, fuzzy
+msgid "- Color 1"
+msgstr "- renk"
+
+#, fuzzy
+msgid "- Color 2"
+msgstr "- renk"
+
+#, fuzzy
+msgid "- Color 3"
+msgstr "- renk"
+
+#, fuzzy
+msgid "- Color 4"
+msgstr "- renk"
+
+#, fuzzy
+msgid "- Color 5"
+msgstr "- renk"
+
+#, fuzzy
+msgid "- Color 6"
+msgstr "- renk"
+
+#, fuzzy
+msgid "- Color Text"
 msgstr "- renk"
 
 msgid "- Current Day Background Color"
@@ -98,8 +146,12 @@ msgstr ""
 msgid "- Device Name"
 msgstr "- aygıt adı"
 
-msgid "- Download Cover from Google"
+msgid "- Download Cover"
 msgstr ""
+
+#, fuzzy
+msgid "- Download Type"
+msgstr "- tipi"
 
 msgid "- Extra Color Chill"
 msgstr ""
@@ -127,6 +179,9 @@ msgstr "- yazı tipi boyutu"
 
 msgid "- Full Screen"
 msgstr "- tam ekran"
+
+msgid "- Google API-Key console.developers.google.com/apis"
+msgstr ""
 
 msgid "- Gradient"
 msgstr ""
@@ -191,6 +246,9 @@ msgstr ""
 msgid "- LCD 3 Rotate"
 msgstr ""
 
+msgid "- LCD Auto-OFF"
+msgstr ""
+
 msgid "- Layout"
 msgstr ""
 
@@ -207,6 +265,9 @@ msgid "- Mail Konto"
 msgstr ""
 
 msgid "- Module"
+msgstr ""
+
+msgid "- Module userdefined"
 msgstr ""
 
 msgid "- Name"
@@ -344,6 +405,9 @@ msgstr ""
 msgid "- Station"
 msgstr ""
 
+msgid "- Text"
+msgstr ""
+
 msgid "- Text Size"
 msgstr ""
 
@@ -384,6 +448,9 @@ msgid "- maximum Lines"
 msgstr ""
 
 msgid "- only active Tuner"
+msgstr ""
+
+msgid "- use Info when empty"
 msgstr ""
 
 msgid "- which LCD"
@@ -515,6 +582,9 @@ msgstr "255x64"
 msgid "270"
 msgstr "270"
 
+msgid "2h"
+msgstr ""
+
 msgid "2min"
 msgstr "2 dk"
 
@@ -541,6 +611,9 @@ msgstr "32bit - renk"
 
 msgid "35%"
 msgstr "%35"
+
+msgid "3h"
+msgstr ""
 
 msgid "3min"
 msgstr "3 dk"
@@ -569,6 +642,9 @@ msgstr "40 sn"
 msgid "45%"
 msgstr "%45"
 
+msgid "480x320"
+msgstr ""
+
 msgid "4min"
 msgstr "4 dk"
 
@@ -596,11 +672,18 @@ msgstr "50 sn"
 msgid "55%"
 msgstr "%55"
 
+msgid "5h"
+msgstr ""
+
 msgid "5min"
 msgstr "5 dk"
 
 msgid "5s"
 msgstr "5 sn"
+
+#, fuzzy
+msgid "60"
+msgstr "%60"
 
 msgid "60%"
 msgstr "%60"
@@ -626,6 +709,9 @@ msgstr "%75"
 msgid "80%"
 msgstr "%80"
 
+msgid "800x480"
+msgstr ""
+
 msgid "85%"
 msgstr "%85"
 
@@ -643,6 +729,14 @@ msgstr "%95"
 
 msgid "96x64"
 msgstr "96x64"
+
+#, fuzzy
+msgid "97%"
+msgstr "%70"
+
+#, fuzzy
+msgid "98%"
+msgstr "%80"
 
 msgid "Active Screen"
 msgstr ""
@@ -668,14 +762,8 @@ msgstr ""
 msgid "Analog+Date+Weekday 2"
 msgstr ""
 
-msgid "April"
-msgstr "nisan"
-
 msgid "Audio/Video"
 msgstr ""
-
-msgid "August"
-msgstr "ağustos"
 
 msgid "Background"
 msgstr ""
@@ -712,6 +800,10 @@ msgstr ""
 
 msgid "Box-Skin-LCD Enable On-Mode"
 msgstr ""
+
+#, fuzzy
+msgid "Box-Skin-LCD Offset"
+msgstr "Internal Box-Skin-LCD "
 
 msgid "C"
 msgstr "C"
@@ -794,6 +886,12 @@ msgstr "Corby@Pearl 128x128"
 msgid "Corner"
 msgstr ""
 
+msgid "Corner+Timeshift"
+msgstr ""
+
+msgid "Coversearch"
+msgstr ""
+
 msgid "Crashlog"
 msgstr ""
 
@@ -857,9 +955,6 @@ msgstr ""
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr ""
 
-msgid "December"
-msgstr "aralık"
-
 msgid "Delete"
 msgstr "sil"
 
@@ -908,13 +1003,13 @@ msgstr ""
 msgid "Fastmode (2s)"
 msgstr "hızlı (2sn)"
 
-msgid "February"
-msgstr "şubat"
-
 msgid "First Quarter"
 msgstr "ilk çeyrek"
 
-msgid "Flaps Design"
+msgid "Flaps Design Date"
+msgstr ""
+
+msgid "Flaps Design Weekday"
 msgstr ""
 
 msgid "Font"
@@ -941,11 +1036,11 @@ msgstr "yazı tipi genel [ok]>"
 msgid "Frame"
 msgstr ""
 
-msgid "Fri"
+msgid "Frame x2"
 msgstr ""
 
-msgid "Friday"
-msgstr "cuma"
+msgid "Fri"
+msgstr ""
 
 msgid "FritzCall"
 msgstr ""
@@ -1002,6 +1097,9 @@ msgstr ""
 msgid "Global"
 msgstr ""
 
+msgid "Google API"
+msgstr ""
+
 msgid "Gradient"
 msgstr ""
 
@@ -1015,6 +1113,12 @@ msgid "IMAP-SSL"
 msgstr "IMAP-SSL"
 
 msgid "IP seurity not supported by Box"
+msgstr ""
+
+msgid "Idle"
+msgstr ""
+
+msgid "Indoor"
 msgstr ""
 
 msgid "Info"
@@ -1041,17 +1145,14 @@ msgstr ""
 msgid "JPG"
 msgstr "JPG"
 
-msgid "January"
-msgstr "ocak"
-
 msgid "Javascript"
 msgstr ""
 
-msgid "July"
-msgstr "temmuz"
+msgid "Javascript no Refresh"
+msgstr ""
 
-msgid "June"
-msgstr "haziran"
+msgid "Key"
+msgstr ""
 
 msgid "Key for Screen Change"
 msgstr ""
@@ -1101,13 +1202,40 @@ msgstr ""
 msgid "LCD Custom Height"
 msgstr ""
 
+msgid "LCD Custom Height 2"
+msgstr ""
+
 msgid "LCD Custom Width"
+msgstr ""
+
+msgid "LCD Custom Width 2"
 msgstr ""
 
 msgid "LCD Display"
 msgstr ""
 
+msgid "LCD Off when shutdown"
+msgstr ""
+
+msgid "LCD4Linux"
+msgstr ""
+
+msgid "LCD4linux"
+msgstr ""
+
+msgid "LCD4linux Display-Mode Idle"
+msgstr ""
+
+msgid "LCD4linux Display-Mode MediaPlayer"
+msgstr ""
+
+msgid "LCD4linux Display-Mode On"
+msgstr ""
+
 msgid "LCD4linux Screen Switch"
+msgstr ""
+
+msgid "LCD4linux Settings"
 msgstr ""
 
 msgid "LCD4linux enabled"
@@ -1116,12 +1244,21 @@ msgstr ""
 msgid "Last Quarter"
 msgstr "son çeyrek"
 
+msgid "Line"
+msgstr ""
+
+#, fuzzy
+msgid "List of Storage Devices"
+msgstr "depolama aygıtları"
+
 msgid "Load Active Config-File"
 msgstr ""
 
-msgid "Load Defaults"
+#, fuzzy
+msgid "Load Defaults / Empty Config"
 msgstr "varsayılanları tükle"
 
+#, python-format
 msgid "Load File : %s"
 msgstr "dosya yükle : %s"
 
@@ -1152,10 +1289,13 @@ msgstr ""
 msgid "Long InfoKey"
 msgstr ""
 
-msgid "MJPEG Boundary Mode"
+msgid "MJPEG Cycle"
 msgstr ""
 
 msgid "MJPEG Header Mode"
+msgstr ""
+
+msgid "MJPEG Restart on Error"
 msgstr ""
 
 msgid "MJPEG Stream"
@@ -1164,11 +1304,19 @@ msgstr ""
 msgid "MJPEG Stream LCD 1 Port"
 msgstr ""
 
+#, fuzzy
+msgid "MJPEG Stream LCD 1 Virtual Brightness"
+msgstr "- LCD 1 parlaklık"
+
 msgid "MJPEG Stream LCD 1 enable"
 msgstr ""
 
 msgid "MJPEG Stream LCD 2 Port"
 msgstr ""
+
+#, fuzzy
+msgid "MJPEG Stream LCD 2 Virtual Brightness"
+msgstr "- LCD 2 parlaklık"
 
 msgid "MJPEG Stream LCD 2 enable"
 msgstr ""
@@ -1176,10 +1324,17 @@ msgstr ""
 msgid "MJPEG Stream LCD 3 Port"
 msgstr ""
 
+#, fuzzy
+msgid "MJPEG Stream LCD 3 Virtual Brightness"
+msgstr "- LCD 3 parlaklık"
+
 msgid "MJPEG Stream LCD 3 enable"
 msgstr ""
 
 msgid "MSN"
+msgstr ""
+
+msgid "MUTE or defined Keys"
 msgstr ""
 
 msgid "Mail"
@@ -1260,12 +1415,6 @@ msgstr ""
 msgid "Mail Show Empty Mailboxes"
 msgstr ""
 
-msgid "March"
-msgstr "mart"
-
-msgid "May"
-msgstr "mayıs"
-
 msgid "Media"
 msgstr ""
 
@@ -1311,6 +1460,10 @@ msgstr ""
 msgid "Module 1-5"
 msgstr ""
 
+#, fuzzy
+msgid "Module 1-6"
+msgstr "Module 1"
+
 msgid "Module 2"
 msgstr ""
 
@@ -1323,23 +1476,40 @@ msgstr ""
 msgid "Module 2+4"
 msgstr ""
 
+#, fuzzy
+msgid "Module 2-6"
+msgstr "Module 1+2"
+
 msgid "Module 3"
 msgstr ""
 
 msgid "Module 3+4"
 msgstr "Module 3+4"
 
+#, fuzzy
+msgid "Module 3-6"
+msgstr "Module 3+4"
+
 msgid "Module 4"
+msgstr "Module 4"
+
+#, fuzzy
+msgid "Module 4-6"
 msgstr "Module 4"
 
 msgid "Module 5"
 msgstr "Module 5"
 
+#, fuzzy
+msgid "Module 5-6"
+msgstr "Module 5"
+
+#, fuzzy
+msgid "Module 6"
+msgstr "Module 1"
+
 msgid "Mon"
 msgstr ""
-
-msgid "Monday"
-msgstr "pazartesi"
 
 msgid "Month"
 msgstr "ay"
@@ -1351,6 +1521,30 @@ msgid "Moon-Icon-Path [ok]>"
 msgstr ""
 
 msgid "Moonphase"
+msgstr ""
+
+msgid "MusicCast"
+msgstr ""
+
+msgid "MusicCast Cover"
+msgstr ""
+
+msgid "MusicCast IP"
+msgstr ""
+
+msgid "MusicCast Ping Timeout [ms]"
+msgstr ""
+
+msgid "MusicCast Play Check"
+msgstr ""
+
+msgid "MusicCast Refresh [s]"
+msgstr ""
+
+msgid "MusicCast Server IP [optional]"
+msgstr ""
+
+msgid "Mute"
 msgstr ""
 
 msgid "N"
@@ -1389,6 +1583,9 @@ msgstr ""
 msgid "Netatmo Comfort Indicator"
 msgstr ""
 
+msgid "Network Check active"
+msgstr ""
+
 msgid "New Moon"
 msgstr "yeni ay"
 
@@ -1407,9 +1604,6 @@ msgstr "normal"
 msgid "Normal (5s)"
 msgstr "normal (5sn)"
 
-msgid "November"
-msgstr "kasım"
-
 msgid "Now/Next"
 msgstr "şimdiki/sonraki"
 
@@ -1421,9 +1615,6 @@ msgstr ""
 
 msgid "OSD [display time]"
 msgstr ""
-
-msgid "October"
-msgstr "ekim"
 
 msgid "Offline"
 msgstr "çevrimdışı"
@@ -1449,8 +1640,14 @@ msgstr ""
 msgid "OpenWeatherMap"
 msgstr ""
 
+msgid "Outdoor"
+msgstr ""
+
 msgid "PNG"
 msgstr "PNG"
+
+msgid "Parent Directory"
+msgstr ""
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (or compatible LCD) 240x320"
@@ -1479,6 +1676,9 @@ msgstr ""
 msgid "Picon+Position right"
 msgstr ""
 
+msgid "Picon+Timeshift"
+msgstr ""
+
 msgid "Picture"
 msgstr ""
 
@@ -1499,6 +1699,10 @@ msgstr ""
 
 msgid "Picture Type [only Picture]"
 msgstr ""
+
+#, fuzzy
+msgid "Picture not available"
+msgstr "kullanılabilir hafıza"
 
 msgid "Plug Tuner"
 msgstr ""
@@ -1542,6 +1746,9 @@ msgstr "radyo"
 msgid "Radio+Media"
 msgstr "radyo+medya"
 
+msgid "Rain"
+msgstr ""
+
 msgid "Recording"
 msgstr ""
 
@@ -1578,6 +1785,15 @@ msgstr ""
 msgid "Remote Box Poll every Minutes"
 msgstr ""
 
+msgid "Remote Box Timer"
+msgstr ""
+
+msgid "Remote Box Timer Poll every Minutes"
+msgstr ""
+
+msgid "Remote Box Timer [Displayname:]IP/Name"
+msgstr ""
+
 msgid "Restart Displays"
 msgstr ""
 
@@ -1602,6 +1818,10 @@ msgstr ""
 msgid "SW"
 msgstr ""
 
+#, fuzzy
+msgid "Samsung SPF-1000P 1024x600"
+msgstr "Samsung SPF-105P 1024x600 "
+
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600 "
 
@@ -1619,6 +1839,10 @@ msgstr "Samsung SPF-72H 800x480"
 
 msgid "Samsung SPF-75H/76H 800x480"
 msgstr "Samsung SPF-75H/76H 800x480"
+
+#, fuzzy
+msgid "Samsung SPF-800P 800x480"
+msgstr "Samsung SPF-87H 800x480"
 
 msgid "Samsung SPF-83H 800x600"
 msgstr "Samsung SPF-83H 800x600 "
@@ -1641,15 +1865,13 @@ msgstr ""
 msgid "Satellite"
 msgstr "uydu"
 
-msgid "Saturday"
-msgstr "cumartesi"
-
 msgid "Save"
 msgstr "kaydet"
 
 msgid "Save Config"
 msgstr ""
 
+#, python-format
 msgid "Save Config to File... (%s)"
 msgstr ""
 
@@ -1740,6 +1962,10 @@ msgstr "ekran 4"
 msgid "Screen 5"
 msgstr "ekran 5"
 
+#, fuzzy
+msgid "Screen 5-8"
+msgstr "ekran 5-9"
+
 msgid "Screen 5-9"
 msgstr "ekran 5-9"
 
@@ -1764,10 +1990,20 @@ msgstr ""
 msgid "Screens used for Changing"
 msgstr ""
 
-msgid "September"
-msgstr "eylül"
-
 msgid "Service search first"
+msgstr ""
+
+#, fuzzy
+msgid "Set Global >>"
+msgstr "yazı tipi genel [ok]>"
+
+msgid "Set Idle >>"
+msgstr ""
+
+msgid "Set Media >>"
+msgstr ""
+
+msgid "Set On >>"
 msgstr ""
 
 msgid "Shadow Edges"
@@ -1812,6 +2048,12 @@ msgstr ""
 msgid "Show Picture 4"
 msgstr ""
 
+msgid "Show Text 1"
+msgstr ""
+
+msgid "Show Text 2"
+msgstr ""
+
 msgid "Show Textfile"
 msgstr ""
 
@@ -1830,10 +2072,37 @@ msgstr "oscam.lcd 'yi göster"
 msgid "Signal Quality Bar"
 msgstr ""
 
+msgid "Sonos"
+msgstr ""
+
+msgid "Sonos IP"
+msgstr ""
+
+msgid "Sonos Ping Timeout [ms]"
+msgstr ""
+
+msgid "Sonos Play Check"
+msgstr ""
+
+msgid "Sonos Refresh [s]"
+msgstr ""
+
 msgid "Standby"
 msgstr ""
 
 msgid "Storage-Devices"
+msgstr "depolama aygıtları"
+
+#, fuzzy
+msgid "Storage-Devices: Color Back"
+msgstr "depolama aygıtları"
+
+#, fuzzy
+msgid "Storage-Devices: Color Bar"
+msgstr "depolama aygıtları"
+
+#, fuzzy
+msgid "Storage-Devices: Color Full"
 msgstr "depolama aygıtları"
 
 msgid "Storage-Devices: Force Read"
@@ -1844,9 +2113,6 @@ msgstr ""
 
 msgid "Sun"
 msgstr ""
-
-msgid "Sunday"
-msgstr "pazar"
 
 msgid "Sunrise"
 msgstr ""
@@ -1884,9 +2150,6 @@ msgstr ""
 msgid "Thur"
 msgstr ""
 
-msgid "Thursday"
-msgstr "perşembe"
-
 msgid "Time"
 msgstr "saat"
 
@@ -1911,8 +2174,8 @@ msgstr ""
 msgid "Tue"
 msgstr ""
 
-msgid "Tuesday"
-msgstr "salı"
+msgid "Tuner"
+msgstr ""
 
 msgid "Tuner Color"
 msgstr ""
@@ -1986,6 +2249,9 @@ msgstr "hava durumu 2"
 msgid "Weather API"
 msgstr ""
 
+msgid "Weather API-ID Key WeatherUnlocked"
+msgstr ""
+
 msgid "Weather API-Key OpenWeatherMap"
 msgstr ""
 
@@ -2022,6 +2288,10 @@ msgstr ""
 msgid "Weather-Icon-Path [ok]>"
 msgstr ""
 
+#, fuzzy
+msgid "WeatherUnlocked"
+msgstr "hava durumu"
+
 msgid "WebIF"
 msgstr ""
 
@@ -2046,9 +2316,6 @@ msgstr ""
 msgid "Wed"
 msgstr ""
 
-msgid "Wednesday"
-msgstr "çarşamba"
-
 msgid "Week"
 msgstr "hafta"
 
@@ -2057,6 +2324,9 @@ msgstr ""
 
 msgid "Weekday"
 msgstr "gün"
+
+msgid "Wind"
+msgstr ""
 
 msgid "all"
 msgstr "tümü"
@@ -2068,6 +2338,9 @@ msgid "alternative Copy-Mode/DM800hd (24bit)"
 msgstr ""
 
 msgid "always"
+msgstr ""
+
+msgid "any Key"
 msgstr ""
 
 msgid "aquamarine"
@@ -2118,6 +2391,7 @@ msgstr ""
 msgid "cornflowerblue"
 msgstr ""
 
+#, python-format
 msgid "currently set : %s"
 msgstr ""
 
@@ -2226,6 +2500,9 @@ msgstr ""
 msgid "no"
 msgstr ""
 
+msgid "no Bar"
+msgstr ""
+
 msgid "no Calendar"
 msgstr ""
 
@@ -2233,6 +2510,9 @@ msgid "no Calls"
 msgstr ""
 
 msgid "no Dates"
+msgstr ""
+
+msgid "no Frame"
 msgstr ""
 
 msgid "no Icon"
@@ -2295,6 +2575,9 @@ msgstr ""
 msgid "only Picture Custom Size"
 msgstr ""
 
+msgid "only Picture Custom Size 2"
+msgstr ""
+
 msgid "only Progress Bar"
 msgstr ""
 
@@ -2329,6 +2612,9 @@ msgid "rpm"
 msgstr ""
 
 msgid "rpm/2"
+msgstr ""
+
+msgid "same color"
 msgstr ""
 
 msgid "sandybrown"
@@ -2368,6 +2654,9 @@ msgid "two lines"
 msgstr ""
 
 msgid "use lead-time"
+msgstr ""
+
+msgid "userdefined"
 msgstr ""
 
 msgid "vertically"
@@ -2410,6 +2699,15 @@ msgid "with Icon"
 msgstr ""
 
 msgid "with Icon & Targetnumber"
+msgstr ""
+
+msgid "with Minutes Total / Endtime (above)"
+msgstr ""
+
+msgid "with Minutes Total / Endtime (above/Size 1.5)"
+msgstr ""
+
+msgid "with Minutes Total / Endtime (above/Size 2)"
 msgstr ""
 
 msgid "with Percent"
@@ -2473,6 +2771,15 @@ msgid "with Remaining Minutes (below/Size 1.5)"
 msgstr ""
 
 msgid "with Remaining Minutes (below/Size 2)"
+msgstr ""
+
+msgid "with absolute Endtime"
+msgstr ""
+
+msgid "with absolute Endtime (Size 1.5)"
+msgstr ""
+
+msgid "with absolute Endtime (Size 2)"
 msgstr ""
 
 msgid "yellow"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:23+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-06-03 07:16+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -16,104 +16,56 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:12
-msgid "OdinM9"
-msgstr "OdinM9"
-
-#: ../src/plugin.py:12
-msgid "ET9000/ET9100"
-msgstr "ET9000/ET9100"
-
-#: ../src/plugin.py:12
-msgid "DMM/DMM ADV"
-msgstr "DMM/DMM ADV"
-
-#: ../src/plugin.py:12
-msgid "ET5000/ET6000"
-msgstr "ET5000/ET6000"
-
-#: ../src/plugin.py:12
-msgid "Vu"
-msgstr "VU"
-
-#: ../src/plugin.py:12
-msgid "ET6500/ET9500"
-msgstr "ET6500/ET9500"
-
-#: ../src/plugin.py:12
-msgid "ET9200/ET9500"
-msgstr "ET9200/ET9500"
-
-#: ../src/plugin.py:12
-msgid "ET4000"
-msgstr "ET4000"
-
-#: ../src/plugin.py:12
-msgid "XP1000"
-msgstr "XP1000"
-
-#: ../src/plugin.py:12
-msgid "HD1100"
-msgstr "HD1100"
-
-#: ../src/plugin.py:12
-msgid "XP3000"
-msgstr "XP3000"
-
-#: ../src/plugin.py:12
-msgid "F1/F3"
-msgstr "F1/F3"
-
-#: ../src/plugin.py:12
-msgid "HD2400"
-msgstr "HD2400"
-
-#: ../src/plugin.py:66
-msgid "OK"
-msgstr "OK"
-
-#: ../src/plugin.py:67
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../src/plugin.py:90
-msgid "Remote"
-msgstr "Afstandsbediening"
+msgid "DMM/DMM ADV"
+msgstr "DMM/DMM ADV"
 
-#: ../src/plugin.py:101
+msgid "ET4000"
+msgstr "ET4000"
+
+msgid "ET5000/ET6000"
+msgstr "ET5000/ET6000"
+
+msgid "ET6500/ET9500"
+msgstr "ET6500/ET9500"
+
+msgid "ET9000/ET9100"
+msgstr "ET9000/ET9100"
+
+msgid "ET9200/ET9500"
+msgstr "ET9200/ET9500"
+
+msgid "F1/F3"
+msgstr "F1/F3"
+
+msgid "HD1100"
+msgstr "HD1100"
+
+msgid "HD2400"
+msgstr "HD2400"
+
 msgid "Is this remote ok?"
 msgstr "Is deze afstandsbediening OK?"
 
-#: ../src/plugin.py:187 ../src/plugin.py:194
+msgid "OK"
+msgstr "OK"
+
+msgid "OdinM9"
+msgstr "OdinM9"
+
+msgid "Remote"
+msgstr "Afstandsbediening"
+
 msgid "Remote Control Code"
 msgstr "Afstandsbedieningscode"
 
-#~ msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-#~ msgstr "BESTAND BESTAAT NIET: /proc/stb/fp/remote_code"
+msgid "Vu"
+msgstr "VU"
 
-#~ msgid "Keep"
-#~ msgstr "Behoud"
+msgid "XP1000"
+msgstr "XP1000"
 
-#~ msgid "Please change your remote mode"
-#~ msgstr "Verander nu de mode van uw AB"
-
-#~ msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
-#~ msgstr "Druk tegelijkertijd op '2' & '7' tot de rode LED constant brandt, druk dan op 'Help' en vervolgens op '000X'"
-
-#~ msgid "Remote Control System Code"
-#~ msgstr "Afstandsbedienings systeem code"
-
-#~ msgid "Restore"
-#~ msgstr "Herstellen"
-
-#~ msgid "Save"
-#~ msgstr "Opslaan"
-
-#~ msgid "Text support"
-#~ msgstr "Tekst ondersteuning"
-
-#~ msgid "Then choose 'Keep' within seconds"
-#~ msgstr "Druk op 'Behouden' binnen secondes"
-
-#~ msgid "This Plugin only support for UNO/ULTIMO"
-#~ msgstr "Deze plugin is uitsluitend bestemd voor de UNO/ULTIMO/Solo2/DUO2"
+msgid "XP3000"
+msgstr "XP3000"

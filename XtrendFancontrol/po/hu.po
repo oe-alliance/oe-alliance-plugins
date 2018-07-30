@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fancontrol v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-16 22:16+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2018-04-19 13:39+0200\n"
 "Last-Translator: Alec <alex1vagyok@gmail.com>\n"
 "Language-Team: alec <alex1vagyok@gmail.com>\n"
@@ -144,9 +144,3 @@ msgstr "-"
 
 msgid "switch Fan On/Off"
 msgstr "ventilátor Ki/Be kapcsolása"
-
-msgid "false"
-msgstr "nem"
-
-msgid "true"
-msgstr "igen"

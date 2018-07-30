@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 3GModemManager\n"
-"POT-Creation-Date: 2017-07-05 15:09+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: openATV\n"
@@ -15,90 +16,88 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/plugin.py:37
 msgid "1 minute"
 msgstr "1 minuut"
 
-#: src/plugin.py:37
-msgid "2 minutes"
-msgstr "2 minuten"
-
-#: src/plugin.py:37
-msgid "3 minutes"
-msgstr "3 minuten"
-
-#: src/plugin.py:37
-msgid "5 minutes"
-msgstr "5 minuten"
-
-#: src/plugin.py:37
 msgid "10 minutes"
 msgstr "10 minuten"
 
-#: src/plugin.py:37
+msgid "2 minutes"
+msgstr "2 minuten"
+
 msgid "20 minutes"
 msgstr "20 minuten"
 
-#: src/plugin.py:37
+msgid "3 minutes"
+msgstr "3 minuten"
+
 msgid "30 minutes"
 msgstr "30 minuten"
 
-#: src/plugin.py:74
-msgid "Exit"
-msgstr "Afsluiten"
+msgid "5 minutes"
+msgstr "5 minuten"
 
-#: src/plugin.py:75
-msgid "Save setup"
-msgstr "Bevestigen"
-
-#: src/plugin.py:76
-msgid "Fetch file"
-msgstr "Bestand ophalen"
-
-#: src/plugin.py:83
-msgid "Delete file"
-msgstr "Verwijder bestand"
-
-#: src/plugin.py:106
-msgid "Really close without saving settings?"
-msgstr "Echt afsluiten zonder opslaan?"
-
-#: src/plugin.py:135 src/plugin.py:302
-msgid "Dsayers CustomMix"
+#, fuzzy
+msgid "ABM CustomMix"
 msgstr "Dsayers CustomMix"
 
-#: src/plugin.py:136
-msgid "Starting importer..."
-msgstr "Start importeren..."
+#, fuzzy
+msgid "ABM CustomMix Importer"
+msgstr "Dsayers CustomMix Importeren"
 
-#: src/plugin.py:146
-msgid "Fetching from github"
-msgstr "Ophalen van github"
+msgid "Allows you automatically fetch the CustomMix file."
+msgstr ""
 
-#: src/plugin.py:152
-msgid "Saving CustomMix file"
-msgstr "Opslaan CustomMix bestand"
-
-#: src/plugin.py:158
-msgid "File fetched and saved OK"
-msgstr "Bestand opgehaald en correct opgeslagen"
-
-#: src/plugin.py:187
 msgid "Channels importer"
 msgstr "Zenders importeren"
 
-#: src/plugin.py:306
+msgid "Delete file"
+msgstr "Verwijder bestand"
+
+msgid "Enable autofetch"
+msgstr ""
+
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "Fetch file"
+msgstr "Bestand ophalen"
+
+msgid "Fetching from github"
+msgstr "Ophalen van github"
+
+msgid "File fetched and saved OK"
+msgstr "Bestand opgehaald en correct opgeslagen"
+
+msgid "Import"
+msgstr ""
+
+msgid "Lead time"
+msgstr ""
+
 msgid "Main menu"
 msgstr "Hoofdmenu"
 
-#: src/plugin.py:306
-msgid "Setup"
-msgstr "Instellingen"
+msgid "Number of minutes prior to the ABM scan that the CustomMix file should be fetched"
+msgstr ""
 
-#: src/plugin.py:306
+msgid "Really close without saving settings?"
+msgstr "Echt afsluiten zonder opslaan?"
+
+msgid "Save setup"
+msgstr "Bevestigen"
+
+msgid "Saving CustomMix file"
+msgstr "Opslaan CustomMix bestand"
+
+msgid "Select the CustomMix you want to import"
+msgstr ""
+
 msgid "Service searching"
 msgstr "Zenders zoeken"
 
-#: src/plugin.py:313
-msgid "Dsayers CustomMix Importer"
-msgstr "Dsayers CustomMix Importeren"
+msgid "Setup"
+msgstr "Instellingen"
+
+msgid "Starting importer..."
+msgstr "Start importeren..."

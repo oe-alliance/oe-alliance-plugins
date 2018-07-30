@@ -2,55 +2,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VuDuoFanControl - oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 08:20+0300\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-06 08:23+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:6
-msgid "Off"
-msgstr "Išj."
-
-#: ../src/plugin.py:6
-msgid "On"
-msgstr "Įj."
-
-#: ../src/plugin.py:6
 msgid "Auto"
 msgstr "Auto"
 
-#: ../src/plugin.py:25
-msgid "Fan setup"
-msgstr "Aušintuvo sąranka"
-
-#: ../src/plugin.py:30
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: ../src/plugin.py:31
-msgid "Save"
-msgstr "Išsaugoti"
-
-#: ../src/plugin.py:48
-msgid "Fan mode"
-msgstr "Aušintuvo režimas"
-
-#: ../src/plugin.py:105
 msgid "FAN Control"
 msgstr "Aušintuvo valdymas"
 
-#: ../src/plugin.py:113
 msgid "Fan Control"
 msgstr "Aušintuvo valdymas"
 
-#: ../src/plugin.py:113
+msgid "Fan mode"
+msgstr "Aušintuvo režimas"
+
+msgid "Fan setup"
+msgstr "Aušintuvo sąranka"
+
+msgid "Off"
+msgstr "Išj."
+
+msgid "On"
+msgstr "Įj."
+
+msgid "Save"
+msgstr "Išsaugoti"
+
 msgid "switch Fan On/Off"
 msgstr "įjungti/išjungti aušintuvą"

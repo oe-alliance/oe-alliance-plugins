@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:22+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
@@ -18,31 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:137
 msgid "/"
 msgstr "/"
 
-#: ../src/plugin.py:177
-msgid "Yes"
-msgstr "Oui"
+msgid "Alpha Value"
+msgstr "Valeur Alpha"
 
-#: ../src/plugin.py:177
-msgid "No, but play video again"
-msgstr "Non, mais jouer à nouveau la vidéo"
-
-#: ../src/plugin.py:178
-msgid "Stop playing this movie?"
-msgstr "Arrêter la lecture de ce film?"
-
-#: ../src/plugin.py:318
-msgid "Sorry, video is not available!"
-msgstr "Désolé, la vidéo n'est pas disponible!"
-
-#: ../src/plugin.py:402
 msgid "Enter your input data"
 msgstr "Entrer vos données"
 
-#: ../src/plugin.py:446
+msgid "Exit"
+msgstr "Sortir"
+
 msgid ""
 "If you want to quit the Browser,\n"
 "Press RED -> EXIT."
@@ -50,30 +37,29 @@ msgstr ""
 "Si vous voulez quitter le Browser,\n"
 "Appuyez sur ROUGE -> EXIT."
 
-#: ../src/plugin.py:448
-msgid "Exit"
-msgstr "Sortir"
-
-#: ../src/plugin.py:449
-msgid "Start"
-msgstr "Démarrer"
-
-#: ../src/plugin.py:559
-msgid "Mouse"
-msgstr "Souris"
-
-#: ../src/plugin.py:564
 msgid "Keyboard"
 msgstr "Clavier"
 
-#: ../src/plugin.py:569
-msgid "Alpha Value"
-msgstr "Valeur Alpha"
-
-#: ../src/plugin.py:575
 msgid "Language"
 msgstr "Langue"
 
-#: ../src/plugin.py:654
+msgid "Mouse"
+msgstr "Souris"
+
+msgid "No, but play video again"
+msgstr "Non, mais jouer à nouveau la vidéo"
+
+msgid "Sorry, video is not available!"
+msgstr "Désolé, la vidéo n'est pas disponible!"
+
+msgid "Start"
+msgstr "Démarrer"
+
+msgid "Stop playing this movie?"
+msgstr "Arrêter la lecture de ce film?"
+
 msgid "Web Browser"
 msgstr "Web Browser"
+
+msgid "Yes"
+msgstr "Oui"
