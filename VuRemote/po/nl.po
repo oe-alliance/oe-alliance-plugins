@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-06-03 07:06+0200\n"
+"PO-Revision-Date: 2018-07-31 10:46+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #, python-format
@@ -23,7 +23,7 @@ msgid " in %d seconds."
 msgstr " in %d seconde."
 
 msgid "Cancel"
-msgstr "Annuleren"
+msgstr "Annuleer"
 
 msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
 msgstr "BESTAND BESTAAT NIET: /proc/stb/fp/remote_code"
@@ -35,11 +35,10 @@ msgid "Please change your remote mode"
 msgstr "Verander nu de mode van uw AB"
 
 msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
-msgstr "Druk tegelijkertijd op '2' & '7' tot de rode LED constant brandt, druk dan op 'Help' en vervolgens op '000X'"
+msgstr "Druk tegelijkertijd op '2' & '7' tot de rode LED constant brandt, druk dan op 'Help' en vervolgens op '000"
 
-#, fuzzy
 msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
-msgstr "Druk tegelijkertijd op '2' & '7' tot de rode LED constant brandt, druk dan op 'Help' en vervolgens op '000X'"
+msgstr "Druk tegelijkertijd op 'OK' & 'STB' tot de rode LED constant brandt, druk vervolgens op '0000"
 
 msgid "Remote Control Code"
 msgstr "Afstandsbedieningscode"
@@ -47,15 +46,14 @@ msgstr "Afstandsbedieningscode"
 msgid "Remote Control System Code"
 msgstr "Afstandsbediening systeemcode"
 
-#, fuzzy
 msgid "Remote Control Type"
-msgstr "Afstandsbedieningscode"
+msgstr "Afstandsbedieningstype"
 
 msgid "Restore"
-msgstr "Herstellen"
+msgstr "Herstel"
 
 msgid "Save"
-msgstr "Opslaan"
+msgstr "Sla op"
 
 #, python-format
 msgid "Sorry, but %s is not supported."

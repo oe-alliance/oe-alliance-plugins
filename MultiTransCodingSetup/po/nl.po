@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-06-03 06:48+0200\n"
+"PO-Revision-Date: 2018-07-31 09:21+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
@@ -17,20 +17,20 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 msgid "1.0 Mbps"
-msgstr ""
+msgstr "1.0 Mbps"
 
 msgid "1.2 Mbps"
-msgstr ""
+msgstr "1.2 Mbps"
 
 msgid "1.5 Mbps"
-msgstr ""
+msgstr "1.5 Mbps"
 
 msgid "100 kbps"
-msgstr ""
+msgstr "100 kbps"
 
 msgid "160x120"
 msgstr "160x120"
@@ -39,37 +39,37 @@ msgid "16x9"
 msgstr "16x9"
 
 msgid "2.0 Mbps"
-msgstr ""
+msgstr "2.0 Mbps"
 
 msgid "2.5 Mbps"
-msgstr ""
+msgstr "2.5 Mbps"
 
 msgid "23.976 fps"
-msgstr ""
+msgstr "23.976 fps"
 
 msgid "24 fps"
-msgstr ""
+msgstr "24 fps"
 
 msgid "25 fps"
-msgstr ""
+msgstr "25 fps"
 
 msgid "3.0 Mbps"
-msgstr ""
+msgstr "3.0 Mbps"
 
 msgid "3.5 Mbps"
-msgstr ""
+msgstr "3.5 Mbps"
 
 msgid "30 fps"
-msgstr ""
+msgstr "30 fps"
 
 msgid "300 kbps"
-msgstr ""
+msgstr "300 kbps"
 
 msgid "320x240"
 msgstr "320x240"
 
 msgid "4.0 Mbps"
-msgstr ""
+msgstr "4.0 Mbps"
 
 msgid "480p"
 msgstr "480p"
@@ -78,10 +78,10 @@ msgid "4x3"
 msgstr "4x3"
 
 msgid "5.0 Mbps"
-msgstr ""
+msgstr "5.0 Mbps"
 
 msgid "500 kbps"
-msgstr ""
+msgstr "500 kbps"
 
 msgid "576p"
 msgstr "576p"
@@ -90,7 +90,7 @@ msgid "720p"
 msgstr "720p"
 
 msgid "800 kbps"
-msgstr ""
+msgstr "800 kbps"
 
 msgid "Aspect Ratio"
 msgstr "Aspectratio"
@@ -101,37 +101,32 @@ msgstr "Auto"
 msgid "Bitrate in bits"
 msgstr "Bitrate in bits"
 
-#, fuzzy
 msgid "Encoder Aspect Ratio"
-msgstr "Encoder 0: Aspectratio"
+msgstr "Encoder Aspect Ratio"
 
-#, fuzzy
 msgid "Encoder Bitrate"
-msgstr "Encoder 0: Bitrate"
+msgstr "Encoder Bitrate"
 
-#, fuzzy
 msgid "Encoder Framerate"
-msgstr "Encoder 0: Framerate"
+msgstr "Encoder Framerate"
 
-#, fuzzy
 msgid "Encoder Interlaced"
-msgstr "Interlaced"
+msgstr "Encoder Interlaced"
 
-#, fuzzy
 msgid "Encoder Resolution"
-msgstr "Encoder 0: Resolutie"
+msgstr "Encoder Resolution"
 
 msgid "Exit"
-msgstr "Afsluiten"
+msgstr "Sluit af"
 
 msgid "Framerate"
 msgstr "Framerate"
 
 msgid "H.264"
-msgstr ""
+msgstr "H.264"
 
 msgid "H.265"
-msgstr ""
+msgstr "H.265"
 
 msgid "Interlaced"
 msgstr "Interlaced"
@@ -158,10 +153,10 @@ msgid "Resolution"
 msgstr "Resolutie"
 
 msgid "Save"
-msgstr "Opslaan"
+msgstr "Sla op"
 
 msgid "Setup your timezone."
-msgstr ""
+msgstr "Stel uw tijdzone in."
 
 msgid "This model does not support transcoding."
 msgstr "Dit model ondersteunt geen transcoding."
@@ -190,7 +185,7 @@ msgid "Yes"
 msgstr "la"
 
 msgid "disable"
-msgstr "uitschakelen"
+msgstr "schakel uit"
 
 msgid "enable"
-msgstr "inschakelen"
+msgstr "schakel in"
