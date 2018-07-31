@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2018-04-10 11:56+0200\n"
+"PO-Revision-Date: 2018-07-31 11:36+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -16,63 +16,66 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.1.1\n"
 
 msgid "/etc/enigma2"
-msgstr ""
+msgstr "/etc/enigma2"
 
 msgid "/etc/tuxbox (default)"
-msgstr ""
+msgstr "/etc/tuxbox (par défaut)"
 
 msgid "Exit"
-msgstr ""
+msgstr "Sortir"
 
 msgid "Fetch"
-msgstr ""
+msgstr "Importer"
 
 #, python-format
 msgid ""
 "Fetching and saving %s.xml succeeded.\n"
 "Restart now for changes to take immediate effect?"
 msgstr ""
+"Récupérer et sauvegarder %s.xml a réussi.\n"
+"Redémarrer maintenant pour que les changements prennent effet immédiatement ?"
 
 msgid "File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
-msgstr ""
+msgstr "Fichier en cours de mise à jour, c'est-à-dire satellites.xml, cables.xml, ou terrestrial.xml."
 
 msgid "Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the default location. Files stored in \"/etc/enigma2\" override the default file and are not updated on a software update."
-msgstr ""
+msgstr "Dossier dans lequel le fichier téléchargé sera sauvegardé. \"/etc/tuxbox\" est l'emplacement par défaut. Les fichiers stockés dans \"/etc/enigma2\" remplacent le fichier par défaut et ne sont pas mis à jour lors d'une mise à jour logicielle."
 
 msgid "OE-Alliance"
-msgstr ""
+msgstr "OE-Alliance"
 
 msgid "Online source where the transponder xml file is being retrieved from."
-msgstr ""
+msgstr "Source en ligne où le fichier xml du transpondeur est récupéré."
 
 msgid "Save to"
-msgstr ""
+msgstr "Enregistrer sous"
 
 #, python-format
 msgid "Saving the %s.xml file failed"
-msgstr ""
+msgstr "L'enregistrement du fichier %s.xml a échoué"
 
 msgid "Source"
-msgstr ""
+msgstr "Source"
 
 #, python-format
 msgid "The %s.xml download was corrupt."
-msgstr ""
+msgstr "Le téléchargement de %s.xml était corrompu."
 
 #, python-format
 msgid "The %s.xml file could not be fetched"
-msgstr ""
+msgstr "Le fichier %s.xml n'a pas pu être récupéré"
 
 msgid "XML update"
-msgstr ""
+msgstr "Mise à jour XML"
 
 msgid "cable"
-msgstr ""
+msgstr "câble"
 
 msgid "satellite"
-msgstr ""
+msgstr "satellite"
 
 msgid "terrestrial"
-msgstr ""
+msgstr "terrestre"

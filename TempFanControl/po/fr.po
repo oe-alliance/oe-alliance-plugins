@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 14:05+0200\n"
+"PO-Revision-Date: 2018-07-31 10:55+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
 msgid "Cancel"
@@ -23,7 +23,7 @@ msgstr "Ventilateur %d PWM"
 
 #, python-format
 msgid "Fan %d voltage"
-msgstr ""
+msgstr "%d tension ventilateur"
 
 msgid "Fan Control"
 msgstr "Contrôle Ventilateur"
@@ -33,14 +33,14 @@ msgstr "OK"
 
 #, python-format
 msgid "Standby fan %d PWM"
-msgstr ""
+msgstr "Ventilateur PWM en veille %d"
 
 #, python-format
 msgid "Standby fan %d voltage"
-msgstr ""
+msgstr "Tension ventilateur en veille %d"
 
 msgid "Temperature and Fan control"
-msgstr ""
+msgstr "Contrôle du ventilateur et de température"
 
 msgid "Temperature and fan control"
-msgstr ""
+msgstr "Contrôle ventilateur et température"

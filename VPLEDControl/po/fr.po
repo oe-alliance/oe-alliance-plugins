@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 14:15+0200\n"
+"PO-Revision-Date: 2018-07-31 11:20+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,65 +11,65 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
 msgid "Always off"
-msgstr ""
+msgstr "Toujours éteinte"
 
 msgid "Brightness Level 1"
-msgstr ""
+msgstr "Niveau de luminosité 1"
 
 msgid "Brightness Level 2"
-msgstr ""
+msgstr "Niveau de luminosité 2"
 
 msgid "Brightness level"
-msgstr ""
+msgstr "Niveau de luminosité"
 
 msgid "Cancel"
 msgstr "Annuler"
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
+msgstr "Numéro de canal dans l'horloge de veille"
 
 msgid "Channelnumber in Standby off"
-msgstr ""
+msgstr "Numéro de canal en veille éteint"
 
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
+msgstr "Numéro de Canal/Horloge dans l’horloge de veille"
 
 msgid "Clock always"
-msgstr ""
+msgstr "Horloge toujours"
 
 msgid "LED Display Setup"
-msgstr ""
+msgstr "Configuration de l'affichage LED"
 
 msgid "Off"
-msgstr ""
+msgstr "Hors"
 
 msgid "On/Off"
-msgstr ""
+msgstr "Marche/Arrêt"
 
 msgid "Save"
 msgstr "Sauver"
 
 msgid "Show REC-Symbol in Display"
-msgstr ""
+msgstr "Afficher le symbole REC à l'écran"
 
 msgid "Show blinking Clock on Display during recording"
-msgstr ""
+msgstr "Afficher l'horloge clignotante sur l'affichage pendant l'enregistrement"
 
 msgid "Show on LED"
-msgstr ""
+msgstr "Afficher sur LED"
 
 msgid "Time mode"
-msgstr ""
+msgstr "Mode heure"
 
 msgid "Update Date/Time"
-msgstr ""
+msgstr "Mise-à-jour Date/Heure"
 
 msgid "no"
-msgstr ""
+msgstr "non"
 
 msgid "yes"
-msgstr ""
+msgstr "oui"

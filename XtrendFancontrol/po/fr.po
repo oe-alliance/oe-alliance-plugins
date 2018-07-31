@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 14:25+0200\n"
+"PO-Revision-Date: 2018-07-31 11:38+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
 msgid " ver. 3.2"
@@ -32,9 +32,8 @@ msgstr "Ventilateur - Auto"
 msgid "Fan - Off"
 msgstr "Ventilateur - Arrêt"
 
-#, fuzzy
 msgid "Fan - Off in standby"
-msgstr "Ventilateur - Arrêt"
+msgstr "Ventilateur - Arrêt en veille"
 
 msgid "Fan - On"
 msgstr "Ventilateur - Marche"
@@ -65,19 +64,19 @@ msgstr ""
 "Vous ne pouvez pas utiliser ce mode!"
 
 msgid "Harddisk temperature"
-msgstr ""
+msgstr "Température du disque dur"
 
 msgid "Harddisks:"
-msgstr ""
+msgstr "Disques durs :"
 
 msgid "Initial fan speed"
-msgstr ""
+msgstr "Vitesse initiale du ventilateur"
 
 msgid "No harddisk with temperature sensor found!"
-msgstr ""
+msgstr "Aucun disque dur avec sonde de température n'a été trouvé !"
 
 msgid "No system temperature sensor found!"
-msgstr ""
+msgstr "Aucune sonde de température du système n'a été trouvée !"
 
 msgid "None"
 msgstr "Aucun"
@@ -98,7 +97,7 @@ msgid "Select internal HDD device"
 msgstr "Sélectionner un disque dur interne"
 
 msgid "Show Temp"
-msgstr ""
+msgstr "Afficher la température"
 
 msgid "Show temp. HDD to extensions menu"
 msgstr "Afficher la température du HDD dans le menu extensions"
@@ -123,16 +122,16 @@ msgid "Switch ON mode on HDD max.temp. (0 - disable)"
 msgstr "Activer le mode ON quand la temp. max. du HDD (0 - désactivé)"
 
 msgid "Switch ON on system temp"
-msgstr ""
+msgstr "Activé la température du système"
 
 msgid "System temperature"
-msgstr ""
+msgstr "Température du Système"
 
 msgid "Watch HDD state"
 msgstr "Surveiller l'état du HDD"
 
 msgid "Watch system temp"
-msgstr ""
+msgstr "Afficher la température du système"
 
 msgid ""
 "You may not use this mode!\n"
@@ -142,7 +141,7 @@ msgstr ""
 "Aucun disque dur interne détecté!"
 
 msgid "n.a."
-msgstr ""
+msgstr "n.d."
 
 msgid "switch Fan On/Off"
 msgstr "basculer le ventilateur On/Off"

@@ -1,22 +1,22 @@
-# English translations for enigma2-oe-alliance-plugins package.
-# Copyright (C) 2012 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
-# Automatically generated, 2012.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 14:22+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: french\n"
-"Language: fr\n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2018-07-31 11:26+0200\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"Language: fr\n"
 
 msgid "/"
 msgstr "/"
@@ -25,7 +25,7 @@ msgid "Alpha Value"
 msgstr "Valeur Alpha"
 
 msgid "Enter your input data"
-msgstr "Entrer vos données"
+msgstr "Entrez vos données d'entrée"
 
 msgid "Exit"
 msgstr "Sortir"
@@ -34,7 +34,7 @@ msgid ""
 "If you want to quit the Browser,\n"
 "Press RED -> EXIT."
 msgstr ""
-"Si vous voulez quitter le Browser,\n"
+"Si vous voulez quitter le navigateur,\n"
 "Appuyez sur ROUGE -> EXIT."
 
 msgid "Keyboard"
@@ -50,16 +50,16 @@ msgid "No, but play video again"
 msgstr "Non, mais jouer à nouveau la vidéo"
 
 msgid "Sorry, video is not available!"
-msgstr "Désolé, la vidéo n'est pas disponible!"
+msgstr "Désolé, la vidéo n'est pas disponible !"
 
 msgid "Start"
 msgstr "Démarrer"
 
 msgid "Stop playing this movie?"
-msgstr "Arrêter la lecture de ce film?"
+msgstr "Arrêter la lecture du film?"
 
 msgid "Web Browser"
-msgstr "Web Browser"
+msgstr "Logiciel de navigation"
 
 msgid "Yes"
 msgstr "Oui"
