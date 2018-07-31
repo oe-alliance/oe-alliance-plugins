@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-06-02 19:21+0200\n"
+"PO-Revision-Date: 2018-07-31 11:11+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -16,146 +16,147 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.1.1\n"
 
 msgid "- ONID to search"
-msgstr ""
+msgstr "- ONID pour la recherche"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automatique"
 
 msgid "Band"
-msgstr ""
+msgstr "Bande"
 
 msgid "Cannot allocate the demuxer"
-msgstr ""
+msgstr "Impossible d'allouer le demuxer"
 
 msgid "Cannot free NIM because a recording is in progress"
-msgstr ""
+msgstr "Impossible de libérer NIM car un enregistrement est en cours."
 
 msgid "Cannot get frontend"
-msgstr ""
+msgstr "Impossible d'obtenir le frontend"
 
 msgid "Cannot get the NIM"
-msgstr ""
+msgstr "Impossible d'obtenir le NIM"
 
 msgid "Cannot retrieve Resource Manager instance"
-msgstr ""
+msgstr "Impossible de récupérer l'instance Resource Manager"
 
 msgid "Clear before scan"
-msgstr ""
+msgstr "Effacer avant d'analyser"
 
 msgid "Create terrestrial bouquet"
-msgstr ""
+msgstr "Créer un bouquet terrestre"
 
 msgid "Enter the original network ID (ONID) of the multiplexes you wish to restrict the search to. UK terrestrial television normally ONID \"9018\"."
-msgstr ""
+msgstr "Entrez l'ID réseau d'origine (ONID) des multiplexes auxquels vous souhaitez limiter la recherche. Télévision terrestre française normalement ONID \"8442\"."
 
 msgid "Exit"
-msgstr ""
+msgstr "Sortir"
 
 #, python-format
 msgid "Found %d unique transponder"
 msgid_plural "Found %d unique transponders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Trouvé %d transpondeur unique"
+msgstr[1] "Trouvé %d transpondeurs uniques"
 
 msgid "If you select \"yes\" all stored terrestrial channels will be deleted before starting the current search."
-msgstr ""
+msgstr "Si vous sélectionnez \"oui\", toutes les chaînes terrestres mémorisées seront effacées avant de lancer la nouvelle recherche."
 
 msgid "If you select \"yes\" and LCNs are found in the NIT, the scan will create a bouquet of terrestrial channels in LCN order and add it to the bouquet list."
-msgstr ""
+msgstr "Si vous sélectionnez \"oui\" et que les LCN se trouvent dans le NIT, le scan créera un bouquet de chaînes terrestres dans l'ordre LCN et l'ajoutera à la liste des bouquets."
 
 msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
-msgstr ""
+msgstr "Si vous sélectionnez \"oui\", l'analyse n'enregistrera que les chaînes qui ne sont pas cryptées; \"non\" trouvera les chaînes cryptées et non cryptées."
 
 msgid "MakeBouquet"
-msgstr ""
+msgstr "CréerBouquet"
 
 msgid "Making bouquet..."
-msgstr ""
+msgstr "Création du bouquet…"
 
 msgid "Most transmitters in European countries only have TV channels in the UHF band."
-msgstr ""
+msgstr "La plupart des émetteurs dans les pays européens n'ont que des canaux de télévision dans la bande UHF."
 
 msgid "No frequencies to search"
-msgstr ""
+msgstr "Pas de fréquences à rechercher"
 
 msgid "No terrestrial tuner found"
-msgstr ""
+msgstr "Aucun tuner terrestre trouvé"
 
 msgid "No transponders to read"
-msgstr ""
+msgstr "Pas de transpondeur à lire"
 
 msgid "No valid NIM found for terrestrial"
-msgstr ""
+msgstr "Aucun MNI valide n'a été trouvé pour le système terrestre."
 
 msgid "Only free scan"
-msgstr ""
+msgstr "Analyser uniquement les chaînes en clair"
 
 #, python-format
 msgid "Reading SI tables on %s MHz"
-msgstr ""
+msgstr "Lecture des tableaux SI en %s MHz"
 
 #, python-format
 msgid "Reading channel %s"
-msgstr ""
+msgstr "Canal de lecture %s"
 
 msgid "Reading streams"
-msgstr ""
+msgstr "Flux de lecture"
 
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Voulez-vous vraiment fermer sans sauvegarder?"
 
 msgid "Restrict search to single ONID"
-msgstr ""
+msgstr "Restreindre la recherche à un seul ONID"
 
 msgid "Scan"
-msgstr ""
+msgstr "Analyser"
 
 #, python-format
 msgid "Scanning channel %s"
-msgstr ""
+msgstr "Canal de balayage %s"
 
 msgid "Scanning for active transponders"
-msgstr ""
+msgstr "Recherche de transpondeurs actifs"
 
 msgid "Select \"Yes\" to restrict the search to multiplexes that belong to a single original network ID (ONID). Select \"No\" to search all ONIDs."
-msgstr ""
+msgstr "Sélectionnez \"Oui\" pour restreindre la recherche aux multiplexes qui appartiennent à un seul ID réseau d'origine (ONID). Sélectionnez \"Non\" pour rechercher tous les ONID."
 
 msgid "Select a tuner that is configured for terrestrial scans. \"Automatic\" will pick the highest spec available tuner."
-msgstr ""
+msgstr "Sélectionnez un tuner configuré pour les balayages terrestres. \"Automatique\" choisira l'accordeur le plus haut de gamme disponible."
 
 msgid "Selected tuner is not cofigured"
-msgstr ""
+msgstr "Le tuner sélectionné n'est pas configuré."
 
 msgid "Starting scanner"
-msgstr ""
+msgstr "Démarrage du scanner"
 
 msgid "Starting search..."
-msgstr ""
+msgstr "Lancer la recherche....."
 
 #, python-format
 msgid "TSID: %d, ONID: %d"
-msgstr ""
+msgstr "TSID: %d, ONID: %d"
 
 msgid "Terrestrial"
-msgstr ""
+msgstr "Terrestre"
 
 msgid "Terrestrial Scan"
-msgstr ""
+msgstr "Scan Terrestre"
 
 msgid "TerrestrialScan"
-msgstr ""
+msgstr "ScanTerrestre"
 
 msgid "Tuner"
-msgstr ""
+msgstr "Tuner"
 
 #, python-format
 msgid "Tuning %s MHz"
-msgstr ""
+msgstr "Syntonisation %s MHz"
 
 msgid "UHF Europe"
-msgstr ""
+msgstr "UHF Europe"
 
 msgid "UHF/VHF Europe"
-msgstr ""
+msgstr "UHF/VHF Europe"

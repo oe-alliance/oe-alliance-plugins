@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 14:04+0200\n"
+"PO-Revision-Date: 2018-07-31 11:13+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french-EGAMI\n"
 "Language: fr\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
 #, python-format
@@ -22,7 +22,7 @@ msgid "1.0"
 msgstr "1.0"
 
 msgid "1080p"
-msgstr ""
+msgstr "1080p"
 
 msgid "160x120"
 msgstr "160x120"
@@ -40,7 +40,7 @@ msgid "2.2"
 msgstr "2.2"
 
 msgid "2nd transcoding and PIP are mutually exclusive."
-msgstr "2nd transcodage et PIP sont mutuellement exclusif."
+msgstr "2ème transcodage et PIP sont mutuellement exclusif."
 
 msgid "3.0"
 msgstr "3.0"
@@ -229,49 +229,49 @@ msgid "aac"
 msgstr "aac"
 
 msgid "aac+"
-msgstr ""
+msgstr "aac+"
 
 msgid "aac+adts"
-msgstr ""
+msgstr "aac+adts"
 
 msgid "aac+loas"
-msgstr ""
+msgstr "aac+loas"
 
 msgid "ac3"
-msgstr ""
+msgstr "ac3"
 
 msgid "advancedsimple"
-msgstr ""
+msgstr "avancésimple"
 
 msgid "auto"
-msgstr ""
+msgstr "auto"
 
 msgid "baseline"
-msgstr ""
+msgstr "base de référence"
 
 msgid "disable"
-msgstr ""
+msgstr "désactiver"
 
 msgid "enable"
-msgstr ""
+msgstr "activer"
 
 msgid "h264"
-msgstr ""
+msgstr "h264"
 
 msgid "high"
-msgstr ""
+msgstr "haut"
 
 msgid "low"
-msgstr ""
+msgstr "bas"
 
 msgid "main"
-msgstr ""
+msgstr "principal"
 
 msgid "mp3"
-msgstr ""
+msgstr "mp3"
 
 msgid "mpg"
-msgstr ""
+msgstr "mpg"
 
 msgid "simple"
-msgstr ""
+msgstr "simple"

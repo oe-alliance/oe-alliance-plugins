@@ -1,0 +1,195 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2018-07-31 11:33+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+msgid " "
+msgstr ""
+
+msgid "AP Device"
+msgstr "Dispositif AP"
+
+msgid "AP Mode"
+msgstr "Mode AP"
+
+msgid "Atheros"
+msgstr "Atheros"
+
+msgid "Beacon (15~65535)"
+msgstr "Beacon (15~65535)"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Channel (1~13)"
+msgstr "Canal (1~13)"
+
+msgid "Configuration your AP is finished"
+msgstr "La configuration de votre AP est terminée"
+
+msgid "Current settings (interface : br0)"
+msgstr "Réglages actuels (interface : br0)"
+
+msgid "Enable 128 bit (Input 26 hex keys)"
+msgstr "Activer 128 bits (entrée 26 clés hexa)"
+
+msgid "Enable 64 bit (Input 10 hex keys)"
+msgstr "Activer 64 bits (Entrée 10 clés hexa)"
+
+msgid "Encrypt"
+msgstr "Crypter"
+
+msgid "FRAGM Threshold (256~2346)"
+msgstr "Seuil FRAGM (256~2346)"
+
+msgid "Gateway"
+msgstr "Passerelle"
+
+msgid "Group Rekey Interval"
+msgstr "Groupe Rekey Intervalle"
+
+msgid "IP Address"
+msgstr "Adresse IP"
+
+msgid "Ignore Broadcast SSID"
+msgstr "Ignorer la diffusion SSID"
+
+msgid "Invalid Fragm Threshold\n"
+msgstr "Seuil de Fragm invalide\n"
+
+msgid "Invalid RTS Threshold\n"
+msgstr "Seuil RTS non valide\n"
+
+msgid "Invalid SSID\n"
+msgstr "SSID non valide\n"
+
+msgid ""
+"Invalid WEP key\n"
+"\n"
+msgstr ""
+"Clé WEP non valide\n"
+"\n"
+
+msgid ""
+"Invalid WPA key\n"
+"\n"
+msgstr ""
+"Clé WPA non valide\n"
+"\n"
+
+msgid "Invalid beacon\n"
+msgstr "Beacon non valide\n"
+
+msgid "Invalid channel\n"
+msgstr "Canal non valide\n"
+
+msgid "Invalid wpagrouprekey\n"
+msgstr "wpagrouprekey non valide\n"
+
+msgid "KEY (8~63 Characters)"
+msgstr "CLÉ (8~63 caractères)"
+
+msgid "KeyType"
+msgstr "TypeDeClé"
+
+msgid "Method"
+msgstr "Méthode"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Nameserver"
+msgstr "Nom Serveur"
+
+msgid "NetMask"
+msgstr "Masque de réseau"
+
+msgid "Netmask"
+msgstr "Masque sous-réseau"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Please wait for AP Configuration....\n"
+msgstr "Veuillez patienter pour la configuration de AP…\n"
+
+msgid "Preamble"
+msgstr "Préambule"
+
+msgid "RTS Threshold (0~2347)"
+msgstr "Seuil RTS (0~2347)"
+
+msgid "Ralink"
+msgstr "Ralink"
+
+msgid "Realtek"
+msgstr "Realtek"
+
+msgid "SSID (1~32 Characters)"
+msgstr "SSID (1~32 caractères)"
+
+msgid "Setup Mode"
+msgstr "Mode de configuration"
+
+msgid "Unknown network adapter"
+msgstr "Adaptateur réseau inconnu"
+
+msgid "Use AP Mode"
+msgstr "Utiliser le mode AP"
+
+msgid "Use DHCP"
+msgstr "Utiliser DHCP"
+
+msgid "Using a Wireless module as access point."
+msgstr "Utiliser un module sans fil comme point d'accès."
+
+msgid "WEP"
+msgstr "WEP"
+
+msgid "WEP Key (HEX)"
+msgstr "Clé WEP (HEX)"
+
+msgid "WLAN adapter"
+msgstr "Adaptateur WLAN"
+
+msgid "WLAN adapter."
+msgstr "Adaptateur WLAN."
+
+msgid "WPA"
+msgstr "WPA"
+
+msgid "WPA/WPA2"
+msgstr "WPA/WPA2"
+
+msgid "WPA2"
+msgstr "WPA2"
+
+msgid "Wireless Access Point"
+msgstr "Point d'accès Sans Fil"
+
+msgid "Zydas"
+msgstr "Zydas"
+
+msgid "disabled"
+msgstr "désactivé"
+
+msgid "enabled"
+msgstr "activé"
+
+msgid "not set"
+msgstr "non défini"
