@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2018-07-30 21:33+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+msgid " "
+msgstr "  "
+
+msgid "/"
+msgstr "/"
+
+msgid "10"
+msgstr "10"
+
+msgid "15"
+msgstr "15"
+
+msgid "20"
+msgstr "20"
+
+msgid "5"
+msgstr "5"
+
+msgid "Add all"
+msgstr "Ajouter tous"
+
+msgid "DLNA/uPnP Browser"
+msgstr "Navigateur DLNA/uPnP"
+
+msgid "DeviceList Refresh Interval"
+msgstr "Intervalle de rafraîchissement de la liste des périphériques"
+
+msgid "Enable Autostart for DLNA Browser"
+msgstr "Activer le démarrage automatique du navigateur DLNA"
+
+msgid "Exit"
+msgstr "Quitter"
+
+msgid "No"
+msgstr "Non"
+
+msgid "Please wait, Loading image."
+msgstr "Veuillez patienter, Chargement de l'image."
+
+msgid "Reload Device"
+msgstr "Recharger le périphérique"
+
+msgid "Save"
+msgstr "Sauver"
+
+msgid "Setting"
+msgstr "Paramètre"
+
+msgid "Show Device"
+msgstr "Afficher le périphérique"
+
+msgid "Slideshow Interval"
+msgstr "Intervalle de diaporama"
+
+msgid "Start"
+msgstr "Démarrer"
+
+msgid "Stop playing this movie?"
+msgstr "Arrêter la lecture du film?"
+
+msgid "This is dlna/upnp client using djmount."
+msgstr "C'est un client dlna/upnp utilisant djmount."
+
+msgid "Top"
+msgstr "Top"
+
+msgid "Up"
+msgstr "Haut"
+
+msgid "Yes"
+msgstr "Oui"

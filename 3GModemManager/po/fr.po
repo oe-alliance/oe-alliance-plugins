@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2018-07-30 21:07+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+msgid " "
+msgstr ""
+
+msgid "3G / 4G Modem Manager"
+msgstr "Gestionnaire de Modem 3G / 4G"
+
+msgid "APN :"
+msgstr "APN :"
+
+msgid "Add"
+msgstr "Ajouter"
+
+msgid "Auto connect"
+msgstr "Connexion automatique"
+
+msgid "Auto connect:"
+msgstr "Connexion automatique :"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Disable"
+msgstr "Supprimer"
+
+msgid "Edit"
+msgstr "Editer"
+
+msgid "Enable"
+msgstr "Activé"
+
+msgid "Exit"
+msgstr "Quitter"
+
+msgid "IP : "
+msgstr "IP :"
+
+msgid "IP : 0.0.0.0"
+msgstr "IP : 0.0.0.0.0.0.0"
+
+msgid "Manual"
+msgstr "Manuel"
+
+msgid "Name :"
+msgstr "Nom :"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "PIN :"
+msgstr "PIN :"
+
+msgid "Password :"
+msgstr "Mot de passe :"
+
+msgid "Phone :"
+msgstr "Téléphone :"
+
+msgid "Region :"
+msgstr "Région :"
+
+msgid "Save"
+msgstr "Sauver"
+
+msgid "User :"
+msgstr "Utilisateur :"

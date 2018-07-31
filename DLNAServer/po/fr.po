@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2018-07-30 21:36+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+msgid "    - Log Directory"
+msgstr "    - Répertoire de Log"
+
+msgid "    - Log Level"
+msgstr "    - Niveau de Log"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Enable Autostart for DLNA Server"
+msgstr "Activer le démarrage automatique pour le serveur DLNA"
+
+msgid "Enable Logging"
+msgstr "Activer le journal"
+
+msgid "Exit"
+msgstr "Quitter"
+
+msgid "Music Directory"
+msgstr "Répertoire Musiques"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Picture Directory"
+msgstr "Répertoire Image"
+
+msgid "Reset"
+msgstr "Réinitialiser"
+
+msgid "Save"
+msgstr "Sauver"
+
+msgid "Server Name"
+msgstr "Nom du serveur"
+
+msgid "Start"
+msgstr "Démarrer"
+
+msgid "Video Directory"
+msgstr "Répertoire Vidéo"
+
+msgid "debug"
+msgstr "debug"
+
+msgid "error"
+msgstr "erreur"
+
+msgid "off"
+msgstr "arrêt"
+
+msgid "warn"
+msgstr "avertissement"

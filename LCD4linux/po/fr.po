@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:39+0200\n"
+"PO-Revision-Date: 2018-07-30 22:09+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 
 msgid "%"
 msgstr "%"
@@ -95,38 +95,31 @@ msgid "- Caption Color"
 msgstr "- Couleur sous titre"
 
 msgid "- Clear Key"
-msgstr ""
+msgstr "- Effacer la clé"
 
 msgid "- Color"
 msgstr "- Couleur"
 
-#, fuzzy
 msgid "- Color 1"
-msgstr "- Couleur"
+msgstr "- Couleur 1"
 
-#, fuzzy
 msgid "- Color 2"
-msgstr "- Couleur"
+msgstr "- Couleur 2"
 
-#, fuzzy
 msgid "- Color 3"
-msgstr "- Couleur"
+msgstr "- Couleur 3"
 
-#, fuzzy
 msgid "- Color 4"
-msgstr "- Couleur"
+msgstr "- Couleur 4"
 
-#, fuzzy
 msgid "- Color 5"
-msgstr "- Couleur"
+msgstr "- Couleur 5"
 
-#, fuzzy
 msgid "- Color 6"
-msgstr "- Couleur"
+msgstr "- Couleur 6"
 
-#, fuzzy
 msgid "- Color Text"
-msgstr "- Couleur"
+msgstr "- Couleur Texte"
 
 msgid "- Current Day Background Color"
 msgstr "- Couleur arrière plan jour actuel"
@@ -149,13 +142,11 @@ msgstr "- Couverture par défaut [ok]>"
 msgid "- Device Name"
 msgstr "- Nom du périphérique"
 
-#, fuzzy
 msgid "- Download Cover"
-msgstr "- Télécharger des couvertures par Google"
+msgstr "- Télécharger la couverture"
 
-#, fuzzy
 msgid "- Download Type"
-msgstr "Télécharger fichier log"
+msgstr "- Type de téléchargement"
 
 msgid "- Extra Color Chill"
 msgstr "- Couleur froide extra"
@@ -185,7 +176,7 @@ msgid "- Full Screen"
 msgstr "- Plein écran"
 
 msgid "- Google API-Key console.developers.google.com/apis"
-msgstr ""
+msgstr "- Google API-Key console.developers.google.google.com/apis"
 
 msgid "- Gradient"
 msgstr "- Dégradé"
@@ -251,7 +242,7 @@ msgid "- LCD 3 Rotate"
 msgstr "- LCD 3 Rotation"
 
 msgid "- LCD Auto-OFF"
-msgstr ""
+msgstr "- LCD Auto-OFF"
 
 msgid "- Layout"
 msgstr "- Disposition"
@@ -272,7 +263,7 @@ msgid "- Module"
 msgstr "- Module"
 
 msgid "- Module userdefined"
-msgstr ""
+msgstr "- Module défini par l'utilisateur"
 
 msgid "- Name"
 msgstr "- Nom"
@@ -409,9 +400,8 @@ msgstr "- Ecran partagé"
 msgid "- Station"
 msgstr "- Station"
 
-#, fuzzy
 msgid "- Text"
-msgstr "- Taille du texte"
+msgstr "- Texte"
 
 msgid "- Text Size"
 msgstr "- Taille du texte"
@@ -456,7 +446,7 @@ msgid "- only active Tuner"
 msgstr "- Seulement le tuner actif"
 
 msgid "- use Info when empty"
-msgstr ""
+msgstr "- utiliser Info lorsqu'il est vide"
 
 msgid "- which LCD"
 msgstr "- Quel LCD"
@@ -587,9 +577,8 @@ msgstr "255x64"
 msgid "270"
 msgstr "270"
 
-#, fuzzy
 msgid "2h"
-msgstr "2"
+msgstr "2 h"
 
 msgid "2min"
 msgstr "2min"
@@ -618,9 +607,8 @@ msgstr "32bit - couleur"
 msgid "35%"
 msgstr "35%"
 
-#, fuzzy
 msgid "3h"
-msgstr "3"
+msgstr "3 h"
 
 msgid "3min"
 msgstr "3min"
@@ -679,9 +667,8 @@ msgstr "50s"
 msgid "55%"
 msgstr "55%"
 
-#, fuzzy
 msgid "5h"
-msgstr "5"
+msgstr "5 h"
 
 msgid "5min"
 msgstr "5min"
@@ -689,9 +676,8 @@ msgstr "5min"
 msgid "5s"
 msgstr "5s"
 
-#, fuzzy
 msgid "60"
-msgstr "60%"
+msgstr "60"
 
 msgid "60%"
 msgstr "60%"
@@ -738,13 +724,11 @@ msgstr "95%"
 msgid "96x64"
 msgstr "96x64"
 
-#, fuzzy
 msgid "97%"
-msgstr "70%"
+msgstr "97%"
 
-#, fuzzy
 msgid "98%"
-msgstr "80%"
+msgstr "98%"
 
 msgid "Active Screen"
 msgstr "Ecran actif"
@@ -809,9 +793,8 @@ msgstr "Box-Skin-LCD Activer le mode-Média"
 msgid "Box-Skin-LCD Enable On-Mode"
 msgstr "Box-Skin-LCD Activer le mode-En"
 
-#, fuzzy
 msgid "Box-Skin-LCD Offset"
-msgstr "Box-Skin-LCD"
+msgstr "Box-Skin-LCD Décalage"
 
 msgid "C"
 msgstr "C"
@@ -895,10 +878,10 @@ msgid "Corner"
 msgstr "Coin"
 
 msgid "Corner+Timeshift"
-msgstr ""
+msgstr "Corner+Timeshift"
 
 msgid "Coversearch"
-msgstr ""
+msgstr "Recherche couverture"
 
 msgid "Crashlog"
 msgstr "Crashlog"
@@ -1014,13 +997,11 @@ msgstr "mode rapide (2s)"
 msgid "First Quarter"
 msgstr "Premier quart"
 
-#, fuzzy
 msgid "Flaps Design Date"
-msgstr "Volets de conception"
+msgstr "Date de conception des volets"
 
-#, fuzzy
 msgid "Flaps Design Weekday"
-msgstr "Volets de conception"
+msgstr "Flaps Design Jour de semaine"
 
 msgid "Font"
 msgstr "Police"
@@ -1046,9 +1027,8 @@ msgstr "Police global [ok]>"
 msgid "Frame"
 msgstr "Cadre"
 
-#, fuzzy
 msgid "Frame x2"
-msgstr "Cadre"
+msgstr "Cadre x2"
 
 msgid "Fri"
 msgstr "Ven"
@@ -1130,7 +1110,7 @@ msgid "Idle"
 msgstr "Veille"
 
 msgid "Indoor"
-msgstr ""
+msgstr "Intérieur"
 
 msgid "Info"
 msgstr "Info"
@@ -1159,12 +1139,11 @@ msgstr "JPG"
 msgid "Javascript"
 msgstr "Javascript"
 
-#, fuzzy
 msgid "Javascript no Refresh"
-msgstr "Javascript"
+msgstr "Javascript pas de Rafraîchissement"
 
 msgid "Key"
-msgstr ""
+msgstr "Clé"
 
 msgid "Key for Screen Change"
 msgstr "Touche pour changer d'écran"
@@ -1214,30 +1193,26 @@ msgstr "LCD 3 Type"
 msgid "LCD Custom Height"
 msgstr "LCD hauteur personnalisée"
 
-#, fuzzy
 msgid "LCD Custom Height 2"
-msgstr "LCD hauteur personnalisée"
+msgstr "LCD Hauteur personnalisée 2"
 
 msgid "LCD Custom Width"
 msgstr "LCD largeur personnalisée"
 
-#, fuzzy
 msgid "LCD Custom Width 2"
-msgstr "LCD largeur personnalisée"
+msgstr "LCD Largeur personnalisée 2"
 
 msgid "LCD Display"
 msgstr "LCD affichage"
 
 msgid "LCD Off when shutdown"
-msgstr ""
+msgstr "Écran LCD éteint lors de l'arrêt"
 
-#, fuzzy
 msgid "LCD4Linux"
-msgstr "LCD4linux activé"
+msgstr "LCD4Linux"
 
-#, fuzzy
 msgid "LCD4linux"
-msgstr "LCD4linux activé"
+msgstr "LCD4linux"
 
 msgid "LCD4linux Display-Mode Idle"
 msgstr "LCD4linux - Affichage 'Veille'"
@@ -1249,7 +1224,7 @@ msgid "LCD4linux Display-Mode On"
 msgstr "LCD4linux - Affichage 'En'"
 
 msgid "LCD4linux Screen Switch"
-msgstr ""
+msgstr "Commutateur d'écran LCD4linux"
 
 msgid "LCD4linux Settings"
 msgstr "Paramètres LCD4linux"
@@ -1260,20 +1235,17 @@ msgstr "LCD4linux activé"
 msgid "Last Quarter"
 msgstr "Dernier Quart"
 
-#, fuzzy
 msgid "Line"
-msgstr "- Lignes"
+msgstr "Ligne"
 
-#, fuzzy
 msgid "List of Storage Devices"
-msgstr "Périphériques-Stockages"
+msgstr "Liste des périphériques de stockage"
 
 msgid "Load Active Config-File"
 msgstr "Charger fichier configuration actif"
 
-#, fuzzy
 msgid "Load Defaults / Empty Config"
-msgstr "Charger les valeurs par défaut"
+msgstr "Charger les valeurs par défaut / Config vide"
 
 #, python-format
 msgid "Load File : %s"
@@ -1306,15 +1278,14 @@ msgstr "Long touche avance rapide Type 2"
 msgid "Long InfoKey"
 msgstr "Long touche info"
 
-#, fuzzy
 msgid "MJPEG Cycle"
-msgstr "MJPEG Stream"
+msgstr "Cycle MJPEG"
 
 msgid "MJPEG Header Mode"
 msgstr "MJPEG mode Header"
 
 msgid "MJPEG Restart on Error"
-msgstr ""
+msgstr "Redémarrage de MJPEG en cas d'erreur"
 
 msgid "MJPEG Stream"
 msgstr "MJPEG Stream"
@@ -1322,9 +1293,8 @@ msgstr "MJPEG Stream"
 msgid "MJPEG Stream LCD 1 Port"
 msgstr "MJPEG Stream LCD 1 Port"
 
-#, fuzzy
 msgid "MJPEG Stream LCD 1 Virtual Brightness"
-msgstr "MJPEG Stream LCD 1 activé"
+msgstr "MJPEG Stream LCD 1 Luminosité virtuelle"
 
 msgid "MJPEG Stream LCD 1 enable"
 msgstr "MJPEG Stream LCD 1 activé"
@@ -1332,9 +1302,8 @@ msgstr "MJPEG Stream LCD 1 activé"
 msgid "MJPEG Stream LCD 2 Port"
 msgstr "MJPEG Stream LCD 2 Port"
 
-#, fuzzy
 msgid "MJPEG Stream LCD 2 Virtual Brightness"
-msgstr "MJPEG Stream LCD 2 activé"
+msgstr "MJPEG Stream LCD 2 Luminosité virtuelle"
 
 msgid "MJPEG Stream LCD 2 enable"
 msgstr "MJPEG Stream LCD 2 activé"
@@ -1342,9 +1311,8 @@ msgstr "MJPEG Stream LCD 2 activé"
 msgid "MJPEG Stream LCD 3 Port"
 msgstr "MJPEG Stream LCD 3 Port"
 
-#, fuzzy
 msgid "MJPEG Stream LCD 3 Virtual Brightness"
-msgstr "MJPEG Stream LCD 3 activé"
+msgstr "MJPEG Stream LCD 3 Luminosité virtuelle"
 
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 activé"
@@ -1353,7 +1321,7 @@ msgid "MSN"
 msgstr "MSN"
 
 msgid "MUTE or defined Keys"
-msgstr ""
+msgstr "MUTE ou touches définies"
 
 msgid "Mail"
 msgstr "Mail"
@@ -1478,9 +1446,8 @@ msgstr "Modul 1-4"
 msgid "Module 1-5"
 msgstr "Modul 1-5"
 
-#, fuzzy
 msgid "Module 1-6"
-msgstr "Modul 1-4"
+msgstr "Module 1-6"
 
 msgid "Module 2"
 msgstr "Modul 2"
@@ -1494,9 +1461,8 @@ msgstr "Modul 2+3+4"
 msgid "Module 2+4"
 msgstr "Modul 2+4"
 
-#, fuzzy
 msgid "Module 2-6"
-msgstr "Modul 2"
+msgstr "Module 2-6"
 
 msgid "Module 3"
 msgstr "Modul 3"
@@ -1504,27 +1470,23 @@ msgstr "Modul 3"
 msgid "Module 3+4"
 msgstr "Modul 3+4"
 
-#, fuzzy
 msgid "Module 3-6"
-msgstr "Modul 3"
+msgstr "Module 3-6"
 
 msgid "Module 4"
 msgstr "Modul 4"
 
-#, fuzzy
 msgid "Module 4-6"
-msgstr "Modul 4"
+msgstr "Module 4-6"
 
 msgid "Module 5"
 msgstr "Modul 5"
 
-#, fuzzy
 msgid "Module 5-6"
-msgstr "Modul 5"
+msgstr "Module 5-6"
 
-#, fuzzy
 msgid "Module 6"
-msgstr "Modul 1"
+msgstr "Module 6"
 
 msgid "Mon"
 msgstr "Lun"
@@ -1545,28 +1507,25 @@ msgid "MusicCast"
 msgstr ""
 
 msgid "MusicCast Cover"
-msgstr ""
+msgstr "MusicCast Pochette"
 
 msgid "MusicCast IP"
 msgstr ""
 
-#, fuzzy
 msgid "MusicCast Ping Timeout [ms]"
-msgstr "- Temps dépassé [ms]"
+msgstr "MusicCast Ping Timeout[ms]"
 
 msgid "MusicCast Play Check"
 msgstr ""
 
-#, fuzzy
 msgid "MusicCast Refresh [s]"
-msgstr "WebIF rafraîchissement [s]"
+msgstr "MusicCast Rafraîchissement[s]"
 
 msgid "MusicCast Server IP [optional]"
-msgstr ""
+msgstr "MusicCast Serveur IP [optionnel]"
 
-#, fuzzy
 msgid "Mute"
-msgstr "2 x mute"
+msgstr "Mute"
 
 msgid "N"
 msgstr "N"
@@ -1605,7 +1564,7 @@ msgid "Netatmo Comfort Indicator"
 msgstr "Netatmo Indicateur confort"
 
 msgid "Network Check active"
-msgstr ""
+msgstr "Contrôle réseau actif"
 
 msgid "New Moon"
 msgstr "Nouvelle lune"
@@ -1662,14 +1621,13 @@ msgid "OpenWeatherMap"
 msgstr "OuvrirMapMétéo"
 
 msgid "Outdoor"
-msgstr ""
+msgstr "Extérieure"
 
 msgid "PNG"
 msgstr "PNG"
 
-#, fuzzy
 msgid "Parent Directory"
-msgstr "Répertoire image récursive"
+msgstr "Dossier parent"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (ou compatible LCD) 240x320"
@@ -1722,9 +1680,8 @@ msgstr "Trier image"
 msgid "Picture Type [only Picture]"
 msgstr "Type photo [seulement photo]"
 
-#, fuzzy
 msgid "Picture not available"
-msgstr "Mémoire disponible"
+msgstr "Photo non disponible"
 
 msgid "Plug Tuner"
 msgstr "Insérer Tuner"
@@ -1769,7 +1726,7 @@ msgid "Radio+Media"
 msgstr "Radio+Média"
 
 msgid "Rain"
-msgstr ""
+msgstr "Pluie"
 
 msgid "Recording"
 msgstr "Enregistrement"
@@ -1807,17 +1764,14 @@ msgstr "Boite 5 distante [AfficherNom:]IP/Nom"
 msgid "Remote Box Poll every Minutes"
 msgstr "Boite distante requête toutes les minutes"
 
-#, fuzzy
 msgid "Remote Box Timer"
-msgstr "Boite distante"
+msgstr "Minuterie de boîte à distance"
 
-#, fuzzy
 msgid "Remote Box Timer Poll every Minutes"
-msgstr "Boite distante requête toutes les minutes"
+msgstr "Remote Box Timer Sondage toutes les minutes"
 
-#, fuzzy
 msgid "Remote Box Timer [Displayname:]IP/Name"
-msgstr "Boite 1 distante [AfficherNom:]IP/Nom"
+msgstr "Remote Box Timer [NomAffiché:]IP/Nom"
 
 msgid "Restart Displays"
 msgstr "Relancer affichages"
@@ -1843,9 +1797,8 @@ msgstr "SSW"
 msgid "SW"
 msgstr "SW"
 
-#, fuzzy
 msgid "Samsung SPF-1000P 1024x600"
-msgstr "Samsung SPF-105P 1024x600"
+msgstr "Samsung SPF-1000P 1024x600"
 
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
@@ -1865,9 +1818,8 @@ msgstr "Samsung SPF-72H 800x480"
 msgid "Samsung SPF-75H/76H 800x480"
 msgstr "Samsung SPF-75H/76H 800x480"
 
-#, fuzzy
 msgid "Samsung SPF-800P 800x480"
-msgstr "Samsung SPF-87H 800x480"
+msgstr "Samsung SPF-800P 800x480"
 
 msgid "Samsung SPF-83H 800x600"
 msgstr "Samsung SPF-83H 800x600"
@@ -1987,9 +1939,8 @@ msgstr "écran 4"
 msgid "Screen 5"
 msgstr "écran 5"
 
-#, fuzzy
 msgid "Screen 5-8"
-msgstr "écran 5-9"
+msgstr "Écran 5-8"
 
 msgid "Screen 5-9"
 msgstr "écran 5-9"
@@ -2072,13 +2023,11 @@ msgstr "Afficher image 3"
 msgid "Show Picture 4"
 msgstr "Afficher image 4"
 
-#, fuzzy
 msgid "Show Text 1"
-msgstr "Afficher fichier texte 2"
+msgstr "Afficher le texte 1"
 
-#, fuzzy
 msgid "Show Text 2"
-msgstr "Afficher fichier texte 2"
+msgstr "Afficher le texte 2"
 
 msgid "Show Textfile"
 msgstr "Afficher fichier texte"
@@ -2104,16 +2053,14 @@ msgstr ""
 msgid "Sonos IP"
 msgstr ""
 
-#, fuzzy
 msgid "Sonos Ping Timeout [ms]"
-msgstr "- Temps dépassé [ms]"
+msgstr "Sonos Ping Timeout[ms]"
 
 msgid "Sonos Play Check"
 msgstr ""
 
-#, fuzzy
 msgid "Sonos Refresh [s]"
-msgstr "WebIF rafraîchissement [s]"
+msgstr "Sonos Rafraîchissement[s]"
 
 msgid "Standby"
 msgstr "Veille"
@@ -2121,17 +2068,14 @@ msgstr "Veille"
 msgid "Storage-Devices"
 msgstr "Périphériques-Stockages"
 
-#, fuzzy
 msgid "Storage-Devices: Color Back"
-msgstr "Périphérique-Stockage: Forcer la lecture"
+msgstr "Dispositifs de stockage : Couleur arrière"
 
-#, fuzzy
 msgid "Storage-Devices: Color Bar"
-msgstr "Périphérique-Stockage: Forcer la lecture"
+msgstr "Dispositifs de stockage : Barre de couleurs"
 
-#, fuzzy
 msgid "Storage-Devices: Color Full"
-msgstr "Périphérique-Stockage: Forcer la lecture"
+msgstr "Dispositifs de stockage : Couleur Pleine"
 
 msgid "Storage-Devices: Force Read"
 msgstr "Périphérique-Stockage: Forcer la lecture"
@@ -2202,9 +2146,8 @@ msgstr "Titre"
 msgid "Tue"
 msgstr "Mar"
 
-#, fuzzy
 msgid "Tuner"
-msgstr "USB Tuner"
+msgstr "Tuner"
 
 msgid "Tuner Color"
 msgstr "Couleur tuner"
@@ -2278,9 +2221,8 @@ msgstr "Météo 2"
 msgid "Weather API"
 msgstr "Météo API"
 
-#, fuzzy
 msgid "Weather API-ID Key WeatherUnlocked"
-msgstr "Météo API-Touche OpenWeatherMap"
+msgstr "Weather API-ID Key MétéoDévérouillée"
 
 msgid "Weather API-Key OpenWeatherMap"
 msgstr "Météo API-Touche OpenWeatherMap"
@@ -2318,9 +2260,8 @@ msgstr "Zoom icône météo"
 msgid "Weather-Icon-Path [ok]>"
 msgstr "Chemin vers les icônes météo [ok]>"
 
-#, fuzzy
 msgid "WeatherUnlocked"
-msgstr "Météo lignes"
+msgstr "MétéoDévérouillée"
 
 msgid "WebIF"
 msgstr "WebIF"
@@ -2356,7 +2297,7 @@ msgid "Weekday"
 msgstr "Jour semaine"
 
 msgid "Wind"
-msgstr ""
+msgstr "Vent"
 
 msgid "all"
 msgstr "Tous"
@@ -2371,7 +2312,7 @@ msgid "always"
 msgstr "toujours"
 
 msgid "any Key"
-msgstr ""
+msgstr "n'importe quelle Clé"
 
 msgid "aquamarine"
 msgstr "bleu-vert"
@@ -2530,9 +2471,8 @@ msgstr "moccasin"
 msgid "no"
 msgstr "non"
 
-#, fuzzy
 msgid "no Bar"
-msgstr "Evénement icône barre"
+msgstr "pas de Bar"
 
 msgid "no Calendar"
 msgstr "pas de Calendrier"
@@ -2543,9 +2483,8 @@ msgstr "pas d'appel"
 msgid "no Dates"
 msgstr "pas de Dates"
 
-#, fuzzy
 msgid "no Frame"
-msgstr "Cadre"
+msgstr "Pas de cadre"
 
 msgid "no Icon"
 msgstr "pas d'icône"
@@ -2607,9 +2546,8 @@ msgstr "seulement image 800x600"
 msgid "only Picture Custom Size"
 msgstr "seulement image taille personnalisée"
 
-#, fuzzy
 msgid "only Picture Custom Size 2"
-msgstr "seulement image taille personnalisée"
+msgstr "seulement image de taille personnalisée 2"
 
 msgid "only Progress Bar"
 msgstr "seulement barre de progression"
@@ -2648,7 +2586,7 @@ msgid "rpm/2"
 msgstr "rpm/2"
 
 msgid "same color"
-msgstr ""
+msgstr "même couleur"
 
 msgid "sandybrown"
 msgstr "brun sable"
@@ -2690,7 +2628,7 @@ msgid "use lead-time"
 msgstr "utiliser délai"
 
 msgid "userdefined"
-msgstr ""
+msgstr "défini par l'utilisateur"
 
 msgid "vertically"
 msgstr "verticalement"
@@ -2734,17 +2672,14 @@ msgstr "avec Icône"
 msgid "with Icon & Targetnumber"
 msgstr "avec Icône & Numméro cible"
 
-#, fuzzy
 msgid "with Minutes Total / Endtime (above)"
-msgstr "avec pourcentage minutes / Total (dessus)"
+msgstr "avec Minutes Total / Heure de fin (ci-dessus)"
 
-#, fuzzy
 msgid "with Minutes Total / Endtime (above/Size 1.5)"
-msgstr "avec poucentage minutes / Total (dessus/Taille 1.5)"
+msgstr "avec Minutes Total / Heure de fin (ci-dessus / Taille 1.5)"
 
-#, fuzzy
 msgid "with Minutes Total / Endtime (above/Size 2)"
-msgstr "avec pourcentage minutes / Total (dessus/Taille 2)"
+msgstr "avec Minutes Total / Heure de fin (ci-dessus/Taille 2)"
 
 msgid "with Percent"
 msgstr "avec pourcentage"
@@ -2810,15 +2745,13 @@ msgid "with Remaining Minutes (below/Size 2)"
 msgstr "avec les minutes restantes (en-dessous/taille 2)"
 
 msgid "with absolute Endtime"
-msgstr ""
+msgstr "avec heure de fin absolue"
 
-#, fuzzy
 msgid "with absolute Endtime (Size 1.5)"
-msgstr "avec pourcentage (taille 1.5)"
+msgstr "avec heure de fin absolue (taille 1,5)"
 
-#, fuzzy
 msgid "with absolute Endtime (Size 2)"
-msgstr "avec pourcentage (taille 2)"
+msgstr "avec heure de fin absolue (taille 2)"
 
 msgid "yellow"
 msgstr "jaune"
