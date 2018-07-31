@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2017-11-10 15:08+0100\n"
+"PO-Revision-Date: 2018-07-31 07:26+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 msgid ""
@@ -33,7 +33,7 @@ msgstr ""
 "U moet de stroom adapter gebruiken."
 
 msgid "   Starting Sundtek hardware blind scan."
-msgstr "  Starten Sundtek hardware blind scan."
+msgstr "   Starten Sundtek hardware blind scan."
 
 msgid " tuner."
 msgstr " tuner."
@@ -41,37 +41,36 @@ msgstr " tuner."
 msgid "\"channel scan\" searches for channels and saves them to your receiver; both options do a transponder search and save the result in /tmp in an XML file in satellites.xml format"
 msgstr "\"zenders zoeken\" zoekt naar zenders en slaat deze op in uw ontvanger; beide opties doen een transponder scan en slaan de resultaten daarvan op in /tmp in een XML bestand in satellites.xml formaat"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%d transponder(s) found"
-msgstr "%d transponders gevonden op %d:%02d min"
+msgstr "%d transponders gevonden"
 
 #, python-format
 msgid "%d transponders found at %d:%02d min"
 msgstr "%d transponders gevonden op %d:%02d min"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%d:%02d/%d:%02dmin"
-msgstr "Stap %d %d:%02d min"
+msgstr "%d:%02d/%d:%02dmin"
 
 #, python-format
 msgid "%dMHz scanned"
-msgstr ""
+msgstr "%dMHz gescanned"
 
 msgid "AUTOMATICALLY start service searching, press green to change"
-msgstr ""
+msgstr "Kanalen zoeken automatisch starten, druk op de groene knop om te veranderen."
 
 msgid "Accuracy (higher is better)"
-msgstr ""
+msgstr "Nauwkeurigheid (hoger is beter)"
 
 msgid "Blind scan"
 msgstr "Blindscan"
 
 msgid "Blind scan for DVB-S2 tuners"
-msgstr ""
+msgstr "Blindscan voor DVB-S2 tuners"
 
-#, fuzzy
 msgid "Blind scan state"
-msgstr "Blindscan"
+msgstr "Blindscan status"
 
 msgid "Blindscan"
 msgstr "Blindscan"
@@ -97,13 +96,13 @@ msgstr ""
 "   Symbol rates: %d - %d MHz"
 
 msgid "DVB-S + DVB-S2"
-msgstr ""
+msgstr "DVB-S + DVB-S2"
 
 msgid "DVB-S only"
-msgstr ""
+msgstr "Alleen DVB-S"
 
 msgid "Exit"
-msgstr "Afsluiten"
+msgstr "Sluit af"
 
 msgid "Filter out adjacent satellites"
 msgstr "Filter nabije satellieten uit"
@@ -126,13 +125,12 @@ msgstr "Frequenties moeten liggen tussen 3000 MHz en 4199 MHz (C-band)"
 msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
 msgstr "Frequenties moeten liggen tussen 3001 MHz en 4200 MHz (C-band)"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Hardware blind scan is not supported by this tuner (%s)!"
-msgstr "Blindscan wordt niet ondersteund in"
+msgstr "Hardware blindscan wordt niet ondersteund door deze tuner (%S)!"
 
-#, fuzzy
 msgid "Horizontal"
-msgstr "horizontaal"
+msgstr "Horizontaal"
 
 msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
 msgstr "Als u \"Ja\" kiest, zullen alle zenders van de huidige satelliet worden gewist voordat het zoeken begint. Dit voorkomt dat zenders dubbel worden opgenomen."
@@ -158,13 +156,13 @@ msgstr ""
 "Dit zal even duren."
 
 msgid "MANUALLY start service searching, press green to change"
-msgstr ""
+msgstr "Kanalen zoeken handmatig starten, druk op de groene knop om te veranderen."
 
 msgid "Maybe the reason that recording is currently running."
-msgstr ""
+msgstr "De oorzaak kan zijn dat er een opname loopt."
 
 msgid "Network scan"
-msgstr ""
+msgstr "Netwerkscan"
 
 msgid ""
 "No new transponders found! \n"
@@ -184,6 +182,8 @@ msgid ""
 "No tuner is enabled!\n"
 "Please setup your tuner settings before you start a service scan."
 msgstr ""
+"Geen tuner ingeschakeld!\n"
+"Stel uw tuners in alvorens kanalen te zoeken."
 
 #, python-format
 msgid "Not found blind scan utility '%s'!"
@@ -193,9 +193,11 @@ msgid ""
 "Nothing to scan!\n"
 "Please setup your tuner settings before you start a service scan."
 msgstr ""
+"Niets te scnannen!\n"
+"Stel uw tuners in alvorens kanalen te zoeken."
 
 msgid "Nothing to scan! Press Exit!"
-msgstr ""
+msgstr "Niets te scannen. Druk op Exit!"
 
 msgid "Only free scan"
 msgstr "Alleen FTA"
@@ -212,13 +214,11 @@ msgstr "Polarisatie"
 msgid "Press Green/OK to start the scan"
 msgstr "Druk op Groen/OK om de scan te beginnen"
 
-#, fuzzy
 msgid "Press OK to start the scan"
-msgstr "Druk op Groen/OK om de scan te beginnen"
+msgstr "Druk op OK om de scan te beginnen."
 
-#, fuzzy
 msgid "Press green to start service searching!"
-msgstr "Druk op Groen/OK om de scan te beginnen"
+msgstr "Druk op Groen om de scan te beginnen."
 
 msgid "Satellite"
 msgstr "Satelliet"
@@ -289,22 +289,19 @@ msgid "The suggested polarisation for this satellite is \"%s\""
 msgstr "De voorgestelde polarisatie voor deze satelliet is \"%s\""
 
 msgid "Transponder searching finished!"
-msgstr ""
+msgstr "Transponders zoeken gereed!"
 
-#, fuzzy
 msgid "Try to find used satellite transponders..."
-msgstr "Scan satelieten op nieuwe transponders"
+msgstr "Probeer in gebruik zijnde transponders te vinden..."
 
 msgid "Tuner"
 msgstr "Tuner"
 
-#, fuzzy
 msgid "Use Sundtek full hardware blind scan!"
-msgstr "  Starten Sundtek hardware blind scan."
+msgstr "Gebruik de volledige Sundtek hardware blindscan."
 
-#, fuzzy
 msgid "Vertical"
-msgstr "vertikaal"
+msgstr "Vertikaal"
 
 msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
 msgstr "Als een naburige satelliet erg sterk is, kunt u met deze instelling voorkomen dat transponders waarvan bekend is dat die van die satelliet afkomstig zijn, toegekend worden aan de gescande satelliet."
@@ -349,7 +346,7 @@ msgid "vertical and horizontal"
 msgstr "vertikaal en horizontaal"
 
 msgid "yes"
-msgstr ""
+msgstr "ja"
 
 msgid "yes (keep feeds)"
-msgstr ""
+msgstr "ja (bewaar feeds)"

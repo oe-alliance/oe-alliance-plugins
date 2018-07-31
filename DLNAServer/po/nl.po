@@ -4,13 +4,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: \n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: openATV\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -23,7 +23,7 @@ msgid "    - Log Level"
 msgstr "    - Log niveau"
 
 msgid "Cancel"
-msgstr "Annuleren"
+msgstr "Annuleer"
 
 msgid "Enable Autostart for DLNA Server"
 msgstr "Autostart voor DLNA Browser inschakelen"
@@ -32,40 +32,40 @@ msgid "Enable Logging"
 msgstr "Log bestand inschakelen"
 
 msgid "Exit"
-msgstr "Afsluiten"
+msgstr "Sluit af"
 
 msgid "Music Directory"
-msgstr "Muziek Map"
+msgstr "Muziek map"
 
 msgid "OK"
 msgstr "OK"
 
 msgid "Picture Directory"
-msgstr "Foto Map"
+msgstr "Foto map"
 
 msgid "Reset"
 msgstr "Herstel"
 
 msgid "Save"
-msgstr "Opslaan"
+msgstr "Sla op"
 
 msgid "Server Name"
-msgstr "Server Naam"
+msgstr "Server naam"
 
 msgid "Start"
 msgstr "Start"
 
 msgid "Video Directory"
-msgstr "Video Map"
+msgstr "Video map"
 
 msgid "debug"
-msgstr "Debug"
+msgstr "debug"
 
 msgid "error"
-msgstr "Fout"
+msgstr "error"
 
 msgid "off"
 msgstr "uit"
 
 msgid "warn"
-msgstr "Waarschuwing"
+msgstr "waarschuwing"

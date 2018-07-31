@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:10+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2018-07-31 07:32+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
@@ -32,9 +32,9 @@ msgstr "%d transponders vinden op %d:%02dmin"
 msgid "%d:%02d/%d:%02dmin"
 msgstr "%d:%02d/%d:%02dmin"
 
-#, fuzzy, python-format
+#, python-format
 msgid "%dMHz scanned"
-msgstr "%dMhz gescand"
+msgstr "%dMHz gescanned"
 
 msgid "AUTOMATICALLY start service searching, press green to change"
 msgstr "AUTOMATISCH kanalen zoeken starten, wijzig met de groene toets"
@@ -43,7 +43,7 @@ msgid "Accuracy (higher is better)"
 msgstr "Nauwkeurigheid (hoger is beter)"
 
 msgid "Blind scan"
-msgstr "Blind zoeken"
+msgstr "Blindscan"
 
 #, python-format
 msgid "Blindscan is not supported by this tuner (%s)"
@@ -71,7 +71,7 @@ msgid "MANUALLY start service searching, press green to change"
 msgstr "HANDMATIG kanalen zoeken starten, wijzig met de groene toets"
 
 msgid "Network scan"
-msgstr "Netwerk zoeken"
+msgstr "Netwerk scan"
 
 msgid ""
 "No tuner is enabled!\n"
