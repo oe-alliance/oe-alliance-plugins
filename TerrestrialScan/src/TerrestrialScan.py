@@ -333,7 +333,8 @@ class TerrestrialScan(Screen):
 		self.dict = {}
 		self.frontend.getFrontendStatus(self.dict)
 		if self.dict["tuner_state"] == "TUNING":
-			print "[TerrestrialScan][checkTunerLock] TUNING"
+			if self.lockcounter < 1: # only show this once in the log per retune event
+				print "[TerrestrialScan][checkTunerLock] TUNING"
 		elif self.dict["tuner_state"] == "LOCKED":
 			print "[TerrestrialScan][checkTunerLock] LOCKED"
 			self["action"].setText(_("Reading %s MHz (ch %s)") % (str(self.frequency/1000000), getChannelNumber(self.frequency, self.uhf_vhf)))

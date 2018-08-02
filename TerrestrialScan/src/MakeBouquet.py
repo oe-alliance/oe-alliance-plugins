@@ -182,7 +182,8 @@ class MakeBouquet(Screen):
 		self.dict = {}
 		self.frontend.getFrontendStatus(self.dict)
 		if self.dict["tuner_state"] == "TUNING":
-			print "[MakeBouquet][checkTunerLock] TUNING"
+			if self.lockcounter < 1: # only show this once in the log per retune event
+				print "[MakeBouquet][checkTunerLock] TUNING"
 		elif self.dict["tuner_state"] == "LOCKED":
 			print "[MakeBouquet][checkTunerLock] TUNER LOCKED"
 			self["action"].setText(_("Reading SI tables on %s MHz") % str(self.transponder["frequency"]/1000000))
@@ -353,8 +354,8 @@ class MakeBouquet(Screen):
 			else: # must be DVB-T2
 				self.transponder["system"] = 1
 
-			if "frequency" in transponders[0] and abs((transponders[0]["frequency"]*10) - self.transponder["frequency"]) < 1000000:
-				print "[MakeBouquet][readNIT] updating transponder frequency from %d MHz to %d MHz" % (self.transponder["frequency"]/1000000, transponders[0]["frequency"]/100000)
+			if "frequency" in transponders[0] and abs((transponders[0]["frequency"]*10) - self.transponder["frequency"]) < 1000000 and self.transponder["frequency"] != transponders[0]["frequency"]*10:
+				print "[MakeBouquet][readNIT] updating transponder frequency from %.03f MHz to %.03f MHz" % (self.transponder["frequency"]/1000000, transponders[0]["frequency"]/100000)
 				self.transponder["frequency"] = transponders[0]["frequency"]*10
 
 		LCNs = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] == 0x83 and t["original_network_id"] == self.transponder["onid"]]
