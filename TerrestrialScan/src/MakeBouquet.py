@@ -11,7 +11,7 @@ from Components.Sources.Progress import Progress
 from Components.Sources.FrontendStatus import FrontendStatus
 from Components.config import config
 
-from enigma import eDVBResourceManager, eTimer, eDVBDB
+from enigma import eDVBResourceManager, eTimer, eDVBDB, eDVBFrontendParametersTerrestrial
 
 import os
 import sys
@@ -361,9 +361,9 @@ class MakeBouquet(Screen):
 		if transponders:
 
 			if transponders[0]["descriptor_tag"] == 0x5A: # DVB-T
-				self.transponder["system"] = 0
+				self.transponder["system"] = eDVBFrontendParametersTerrestrial.System_DVB_T
 			else: # must be DVB-T2
-				self.transponder["system"] = 1
+				self.transponder["system"] = eDVBFrontendParametersTerrestrial.System_DVB_T2
 
 			if "frequency" in transponders[0] and abs((transponders[0]["frequency"]*10) - self.transponder["frequency"]) < 1000000 and self.transponder["frequency"] != transponders[0]["frequency"]*10:
 				print "[MakeBouquet][readNIT] updating transponder frequency from %.03f MHz to %.03f MHz" % (self.transponder["frequency"]/1000000, transponders[0]["frequency"]/100000)
