@@ -38,6 +38,26 @@ _unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', ) # format = nim.description 
 # blindscan-s2 supported tuners
 _blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
 
+# root2gold based on https://github.com/DigitalDevices/dddvb/blob/master/apps/pls.c
+def root2gold(root):
+	if root < 0 or root > 0x3ffff:
+		return 0
+	g = 0
+	x = 1
+	while g < 0x3ffff:
+		if root == x:
+			return g
+		x = (((x ^ (x >> 7)) & 1) << 17) | (x >> 1)
+		g += 1
+	return 0
+
+# helper function for initializing mis/pls properties
+def getMisPlsValue(d, idx, defaultValue):
+	try:
+		return int(d[idx])
+	except:
+		return defaultValue
+
 #used for blindscan-s2
 def getAdapterFrontend(frontend, description):
 	for adapter in range(1,5):
@@ -854,9 +874,9 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.modulation = qam[data[4]]
 					parm.rolloff = parm.RollOff_alpha_0_35
 					try:
-						parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Root
-						parm.is_id = -1
-						parm.pls_code = 1
+						parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
+						parm.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
+						parm.pls_code = 0
 					except:
 						pass
 					self.tmp_tplist.append(parm)
@@ -926,9 +946,17 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.modulation = qam[data[8]]
 					parm.rolloff = roll[data[9]]
 					try:
-						parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Root
-						parm.is_id = -1
-						parm.pls_code = 1
+						parm.pls_mode = getMisPlsValue(data, 10, eDVBFrontendParametersSatellite.PLS_Gold)
+						parm.is_id = getMisPlsValue(data, 11, eDVBFrontendParametersSatellite.No_Stream_Id_Filter)
+						parm.pls_code = getMisPlsValue(data, 12, 0)
+						# when blindscan returns 0,0,0 then use defaults...
+						if parm.pls_mode == parm.is_id == parm.pls_code == 0:
+							parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
+							parm.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
+						# when blidnscan returns root then switch to gold
+						if parm.pls_mode == eDVBFrontendParametersSatellite.PLS_Root:
+							parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
+							parm.pls_code = root2gold(parm.pls_code)
 					except:
 						pass
 					self.tmp_tplist.append(parm)
@@ -1023,7 +1051,7 @@ class Blindscan(ConfigListScreen, Screen):
 				for p in self.tmp_tplist:
 					print "[Blindscan][blindscanSessionClose] data: [%d][%d][%d][%d][%d][%d][%d][%d][%d][%d]" % (p.orbital_position, p.polarisation, p.frequency, p.symbol_rate, p.system, p.inversion, p.pilot, p.fec, p.modulation, p.modulation)
 
-				self.tmp_tplist = sorted(self.tmp_tplist, key=lambda transponder: transponder.frequency)
+				self.tmp_tplist = sorted(self.tmp_tplist, key=lambda tp: (tp.frequency, tp.is_id, tp.pls_mode, tp.pls_code))
 				xml_location = self.createSatellitesXMLfile(self.tmp_tplist, XML_BLINDSCAN_DIR)
 				if self.search_type.value == 0: # Do a service scan
 					self.startScan(self.tmp_tplist, self.feid)
@@ -1084,7 +1112,8 @@ class Blindscan(ConfigListScreen, Screen):
 			for k in knowntp:
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
 					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
-					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier):
+					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier) and \
+					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode:
 					tplist[x] = k
 					#break
 			x += 1
@@ -1226,9 +1255,12 @@ class Blindscan(ConfigListScreen, Screen):
 		xml.append('<satellites>\n')
 		xml.append('	<sat name="%s" flags="0" position="%s">\n' % (self.sat_name.replace('&', '&amp;'), self.orb_position))
 		for tp in tp_list:
-			xml.append('		<transponder frequency="%d" symbol_rate="%d" polarization="%d" fec_inner="%d" system="%d" modulation="%d"/>\n' % (tp.frequency, tp.symbol_rate, tp.polarisation, tp.fec, tp.system, tp.modulation))
+			if tp.is_id != eDVBFrontendParametersSatellite.No_Stream_Id_Filter or tp.pls_code != 0 or tp.pls_mode != eDVBFrontendParametersSatellite.PLS_Gold:
+				xml.append('		<transponder frequency="%d" symbol_rate="%d" polarization="%d" fec_inner="%d" system="%d" modulation="%d" is_id="%d" pls_code="%d" pls_mode="%d" />\n' % (tp.frequency, tp.symbol_rate, tp.polarisation, tp.fec, tp.system, tp.modulation, tp.is_id, tp.pls_code, tp.pls_mode))
+			else:
+				xml.append('		<transponder frequency="%d" symbol_rate="%d" polarization="%d" fec_inner="%d" system="%d" modulation="%d" />\n' % (tp.frequency, tp.symbol_rate, tp.polarisation, tp.fec, tp.system, tp.modulation))
 		xml.append('	</sat>\n')
-		xml.append('</satellites>')
+		xml.append('</satellites>\n')
 		open(location, "w").writelines(xml)
 		return location
 
