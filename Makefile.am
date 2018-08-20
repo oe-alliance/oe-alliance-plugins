@@ -202,6 +202,10 @@ if S7400S
 SUBDIRS += F3LEDControl
 endif
 
+if SF8008
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if S8100S
 SUBDIRS += MultiTransCodingSetup
 endif
