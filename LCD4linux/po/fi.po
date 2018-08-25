@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-19 07:49+0100\n"
-"PO-Revision-Date: 2018-07-18 21:42+0200\n"
+"PO-Revision-Date: 2018-08-25 11:04+0200\n"
 "Last-Translator: Kojo\n"
 "Language-Team: Kojo\n"
 "Language: fi\n"
@@ -69,16 +69,16 @@ msgid "- Background/Transparency"
 msgstr "- Tausta/Läpinäkyvyys"
 
 msgid "- Backlight Off [disable set Off=On]"
-msgstr "- Backlight Off [disable set Off=On]"
+msgstr "- Ei taustavaloa"
 
 msgid "- Backlight On"
 msgstr "- Taustavalo päällä"
 
 msgid "- Backlight Weekend Off [disable set Off=On]"
-msgstr "- Backlight Weekend Off [disable set Off=On]"
+msgstr "- Ei taustavaloa viikonloppuisin"
 
 msgid "- Backlight Weekend On"
-msgstr "Taustavalo Viikkonloppu päällä"
+msgstr "- Taustavalo Viikkonloppuisin päällä"
 
 msgid "- Bar Range Max"
 msgstr "- Palkin suurin vaihteluväli"
@@ -1331,7 +1331,7 @@ msgid "Mail"
 msgstr "S-posti"
 
 msgid "Mail 1 Connect"
-msgstr "Posti 1 Yhdistä"
+msgstr "Posti 1 Yhteystapa"
 
 msgid "Mail 1 Password"
 msgstr "Posti 1 Salasana"
@@ -1343,7 +1343,7 @@ msgid "Mail 1 [Displayname:]Username"
 msgstr "Posti 1 [Näyttönimi:] Käyttäjätunnus"
 
 msgid "Mail 2 Connect"
-msgstr "Posti 2 Yhdistä"
+msgstr "Posti 2 Yhteystapa"
 
 msgid "Mail 2 Password"
 msgstr "Posti 2 Salasana"
@@ -1355,7 +1355,7 @@ msgid "Mail 2 [Displayname:]Username"
 msgstr "Posti 2 [Näyttönimi:] Käyttäjätunnus"
 
 msgid "Mail 3 Connect"
-msgstr "Posti 3 Yhdistä"
+msgstr "Posti 3 Yhteystapa"
 
 msgid "Mail 3 Password"
 msgstr "Posti 3 Salasana"
@@ -1367,7 +1367,7 @@ msgid "Mail 3 [Displayname:]Username"
 msgstr "Posti 3 [Näyttönimi:] Käyttäjätunnus"
 
 msgid "Mail 4 Connect"
-msgstr "Posti 4 Yhdistä"
+msgstr "Posti 4 Yhteystapa"
 
 msgid "Mail 4 Password"
 msgstr "Posti 4 Salasana"
@@ -1379,7 +1379,7 @@ msgid "Mail 4 [Displayname:]Username"
 msgstr "Posti 4 [Näyttönimi:] Käyttäjätunnus"
 
 msgid "Mail 5 Connect"
-msgstr "Posti 5 Yhdistä"
+msgstr "Posti 5 Yhteystapa"
 
 msgid "Mail 5 Password"
 msgstr "Posti 5 Salasana"
