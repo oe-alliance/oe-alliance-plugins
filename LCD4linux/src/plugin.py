@@ -20,7 +20,7 @@ from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFront
 from enigma import getDesktop, getEnigmaVersionString
 from enigma import ePicLoad, ePixmap
 
-from boxbranding import getImageDistro, getBoxType
+from boxbranding import getImageDistro, getDisplayType
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
@@ -165,20 +165,20 @@ L4LdoThread = True
 LCD4config = "/etc/enigma2/lcd4config"
 LCD4plugin ="/usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/"
 Data = LCD4plugin+"data/"
-if getBoxType() in ('gbquad','gb800ue','gb800ueplus','gbultraue','gbultraueh','gbue4k'):
-	LCD4default = Data+"default.gigablue"
-elif getBoxType() in ('gbquadplus','gbquad4k'):
-	LCD4default = Data+"default.quadplus"
-elif getBoxType() == 'vuduo2':
-	LCD4default = Data+"default.vuduo2"
-elif getBoxType() == 'et8500':
-	LCD4default = Data+"default.et8500"
-elif getBoxType() == 'vusolo4k':
-	LCD4default = Data+"default.solo4k"
-elif getBoxType() == 'vuultimo4k':
-	LCD4default = Data+"default.ultimo4k"
-elif getBoxType() in ('mutant2400','quadbox2400'):
-	LCD4default = Data+"default.hd2400"
+if getDisplayType() in ('colorlcd220'):
+	LCD4default = Data+"default.colorlcd220"
+elif getDisplayType() in ('colorlcd400'):
+	LCD4default = Data+"default.colorlcd400"
+elif getDisplayType() in ('bwlcd140'):
+	LCD4default = Data+"default.bwlcd140"
+elif getDisplayType() in ('colorlcd720'):
+	LCD4default = Data+"default.colorlcd720"
+elif getDisplayType() in ('colorlcd480'):
+	LCD4default = Data+"default.colorlcd480"
+elif getDisplayType() in ('colorlcd800'):
+	LCD4default = Data+"default.colorlcd800"
+elif getDisplayType() in ('bwlcd255'):
+	LCD4default = Data+"default.bwlcd255"
 else:
 	LCD4default = Data+"default.lcd"
 WetterPath = LCD4plugin+"wetter/"
