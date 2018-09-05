@@ -410,6 +410,11 @@ SatipClient/src/Makefile
 SatipClient/po/Makefile
 SatipClient/meta/Makefile
 
+SimpleFancontrol/Makefile
+SimpleFancontrol/src/Makefile
+SimpleFancontrol/meta/Makefile
+SimpleFancontrol/po/Makefile
+
 SF8VFDControl/Makefile
 SF8VFDControl/src/Makefile
 SF8VFDControl/meta/Makefile

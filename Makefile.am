@@ -295,7 +295,7 @@ SUBDIRS += SparkVFDControl SparkUnionTunerType SH4BoosterControl SH4OSDAdjustmen
 endif
 
 if OSMIO4K
-SUBDIRS += VentonFancontrol
+SUBDIRS += SimpleFancontrol
 endif
 
 

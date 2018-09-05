@@ -1,0 +1,49 @@
+# Nederlands translations for Enigma2.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ViX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-07-31 10:41+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
+"Language-Team: Andy Blackburn, Rob van der Does\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.1.1\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "FAN Control"
+msgstr "Ventilatorinstellingen"
+
+msgid "Fan Control"
+msgstr "Ventilatorinstellingen"
+
+msgid "Fan mode"
+msgstr "Ventilatormode"
+
+msgid "Fan setup"
+msgstr "Ventilatorinstellingen"
+
+msgid "Off"
+msgstr "Uit"
+
+msgid "On"
+msgstr "Aan"
+
+msgid "Save"
+msgstr "Sla op"
+
+msgid "switch Fan On/Off"
+msgstr "schakel ventilator aan/uit"
