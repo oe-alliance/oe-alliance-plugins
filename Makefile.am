@@ -294,6 +294,10 @@ if SPARK
 SUBDIRS += SparkVFDControl SparkUnionTunerType SH4BoosterControl SH4OSDAdjustment
 endif
 
+if OSMIO4K
+SUBDIRS += VentonFancontrol
+endif
+
 
 if HAVE_TEMPFANCONTROL
 SUBDIRS += TempFanControl
