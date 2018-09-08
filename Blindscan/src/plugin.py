@@ -13,9 +13,10 @@ from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
 from Components.NimManager import nimmanager, getConfigSatlist
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry, ConfigNothing
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry, ConfigNothing, ConfigBoolean
 from Components.Sources.Boolean import Boolean
 from Components.Pixmap import Pixmap
+from Components.Sources.List import List
 
 from Tools.BoundFunction import boundFunction
 
@@ -70,6 +71,94 @@ def getAdapterFrontend(frontend, description):
 	return " -f %d" % frontend
 
 
+class BlindscanState(Screen, ConfigListScreen):
+	skin="""
+	<screen position="center,center" size="820,570" title="Satellite Blindscan">
+		<widget name="progress" position="10,10" size="800,80" font="Regular;20" />
+		<eLabel	position="10,95" size="800,1" backgroundColor="grey"/>
+		<widget name="config" position="10,102" size="524,425" />
+		<eLabel	position="544,95" size="1,440" backgroundColor="grey"/>
+		<widget name="post_action" position="554,102" size="256,140" font="Regular;19" halign="center"/>
+		<widget source="cancel" render="Label" position="10,530" size="100,30" font="Regular;19" halign="center"/>
+		<widget source="scan" render="Label" position="120,530" size="100,30" font="Regular;19" halign="center"/>
+		<widget source="selectAll" render="Label" position="230,530" size="100,30" font="Regular;19" halign="center"/>
+		<widget source="deSelectAll" render="Label" position="340,530" size="100,30" font="Regular;19" halign="center"/>
+	</screen>
+	"""
+
+	def __init__(self, session, progress, post_action, tp_list, finished = False):
+		Screen.__init__(self, session)
+		Screen.setTitle(self, _("Blind scan state"))
+		self.finished = finished
+		self["progress"] = Label()
+		self["progress"].setText(progress)
+		self["post_action"] = Label()
+		if finished:
+			self["post_action"].setText(_("Select transponders and press green to scan.\nPress yellow to select all transponders and blue to deselect all."))
+		else:
+			self["post_action"].setText(post_action)
+		self["cancel"] = StaticText(_("Cancel"))
+		self["scan"] = Label(_("Scan"))
+		self["selectAll"] = Label(_("Select all"))
+		self["deSelectAll"] = Label(_("Deselect all"))
+		if not finished:
+			self["scan"].hide()
+			self["selectAll"].hide()
+			self["deSelectAll"].hide()
+
+		self.configBooleanTpList = []
+		self.tp_list = []
+		ConfigListScreen.__init__(self, self.tp_list, session = self.session)
+		for t in tp_list:
+			cb = ConfigBoolean(default = False, descriptions = {False: _("don't scan"), True: _("scan")})
+			self.configBooleanTpList.append((cb, t[1]))
+			self.tp_list.append(getConfigListEntry(t[0], cb))
+		self["config"].list = self.tp_list
+		self["config"].l.setList(self.tp_list)
+
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+		{
+			"ok": self.keyOk,
+			"cancel": self.keyCancel,
+			"green": self.scan,
+			"red": self.keyCancel,
+			"yellow": self.selectAll,
+			"blue": self.deselectAll,
+		}, -2)
+
+	def keyOk(self):
+		if self.finished:
+			i = self["config"].getCurrent()
+			i[1].setValue(not i[1].getValue())
+			self["config"].setList(self["config"].getList())
+
+	def selectAll(self):
+		if self.finished:
+			for i in self.configBooleanTpList:
+				i[0].setValue(True)
+			self["config"].setList(self["config"].getList())
+
+	def deselectAll(self):
+		if self.finished:
+			for i in self.configBooleanTpList:
+				i[0].setValue(False)
+			self["config"].setList(self["config"].getList())
+
+	def scan(self):
+		if self.finished:
+			scan_list = []
+			for i in self.configBooleanTpList:
+				if i[0].getValue():
+					scan_list.append(i[1])
+			if len(scan_list) > 0:
+				self.close(True, scan_list)
+			else:
+				self.close(False)
+
+	def keyCancel(self):
+		self.close(False)
+
+
 class Blindscan(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -120,6 +209,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.start_time = time()
 		self.orb_pos = 0
 		self.tunerEntry = None
+		self.clockTimer = eTimer()
 
 		# run command
 		self.cmd = ""
@@ -335,9 +425,6 @@ class Blindscan(ConfigListScreen, Screen):
 			(1, _("up to 1 degree")),
 			(2, _("up to 2 degrees")),
 			(3, _("up to 3 degrees"))])
-		self.search_type = ConfigSelection(default = 0, choices = [
-			(0, _("scan for channels")),
-			(1, _("save to XML file"))])
 
 
 		# collect all nims which are *not* set to "nothing"
@@ -445,7 +532,6 @@ class Blindscan(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree,_('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels')))
 			self.list.append(getConfigListEntry(_("Only scan unknown transponders"), self.dont_scan_known_tps,_('If you select "yes" the scan will only search transponders not listed in satellites.xml')))
 			self.list.append(getConfigListEntry(_("Filter out adjacent satellites"), self.filter_off_adjacent_satellites,_('When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite')))
-			self.list.append(getConfigListEntry(_("Search type"), self.search_type,_('"channel scan" searches for channels and saves them to your receiver; both options do a transponder search and save the result in /tmp in an XML file in satellites.xml format')))
 			self["config"].list = self.list
 			self["config"].l.setList(self.list)
 			self.startDishMovingIfRotorSat()
@@ -465,6 +551,8 @@ class Blindscan(ConfigListScreen, Screen):
 		self.newConfig()
 
 	def keyCancel(self):
+		if self.clockTimer:
+			self.clockTimer.stop()
 		self.releaseFrontend()
 		self.session.nav.playService(self.session.postScanService)
 		for x in self["config"].list:
@@ -573,6 +661,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.running_count = 0
 		self.clockTimer = eTimer()
 		self.clockTimer.callback.append(self.doClock)
+		self.start_time = time()
 		if self.SundtekScan:
 			if self.clockTimer:
 				self.clockTimer.stop()
@@ -779,17 +868,16 @@ class Blindscan(ConfigListScreen, Screen):
 		if self.SundtekScan:
 			tmpmes = _("   Starting Sundtek hardware blind scan.")
 		else:
-			tmpmes = _("Current Status: %d/%d\n   Satellite: %s\n   Polarization: %s\n   Frequency range: %d - %d MHz\n   Symbol rates: %d - %d MHz") %(self.running_count, self.max_count, orb[1], display_pol, status_box_start_freq, status_box_end_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value)
+			tmpmes = _("Current Status: %d/%d\nSatellite: %s\nPolarization: %s  Frequency range: %d - %d MHz  Symbol rates: %d - %d MHz") %(self.running_count, self.max_count, orb[1], display_pol, status_box_start_freq, status_box_end_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value)
 		if getBoxType() == ('vusolo2'):
 			tmpmes2 = _("Looking for available transponders.\nThis will take a long time, please be patient.")
 		else:
 			tmpmes2 = _("Looking for available transponders.\nThis will take a short while.")
-		tmpstr = tmpmes + '\n\n' + tmpmes2 + '\n\n'
 		self.tmpstr = tmpmes
 		if is_scan:
-			self.blindscan_session = self.session.openWithCallback(self.blindscanSessionClose, MessageBox, tmpstr, MessageBox.TYPE_INFO)
+			self.blindscan_session = self.session.openWithCallback(self.blindscanSessionClose, BlindscanState, tmpmes, tmpmes2, [])
 		else:
-			self.blindscan_session = self.session.openWithCallback(self.blindscanSessionNone, MessageBox, tmpstr, MessageBox.TYPE_INFO)
+			self.blindscan_session = self.session.openWithCallback(self.blindscanSessionNone, BlindscanState, tmpmes, tmpmes2, [])
 
 	def dataSundtekIsGood(self, data):
 		add_tp = False
@@ -1051,16 +1139,38 @@ class Blindscan(ConfigListScreen, Screen):
 
 			# Process transponders still in list
 			if self.tmp_tplist != []:
+				blindscanStateList = []
 				for p in self.tmp_tplist:
 					print "[Blindscan][blindscanSessionClose] data: [%d][%d][%d][%d][%d][%d][%d][%d][%d][%d]" % (p.orbital_position, p.polarisation, p.frequency, p.symbol_rate, p.system, p.inversion, p.pilot, p.fec, p.modulation, p.modulation)
 
+					pol = { p.Polarisation_Horizontal : "H KHz",
+						p.Polarisation_CircularRight : "R KHz",
+						p.Polarisation_CircularLeft : "L KHz",
+						p.Polarisation_Vertical : "V KHz"}
+					fec = { p.FEC_Auto : "Auto",
+						p.FEC_1_2 : "1/2",
+						p.FEC_2_3 : "2/3",
+						p.FEC_3_4 : "3/4",
+						p.FEC_4_5 : "4/5",
+						p.FEC_5_6 : "5/6",
+						p.FEC_7_8 : "7/8",
+						p.FEC_8_9 : "8/9",
+						p.FEC_3_5 : "3/5",
+						p.FEC_9_10 : "9/10",
+						p.FEC_None : "None"}
+					sys = { p.System_DVB_S : "DVB-S",
+						p.System_DVB_S2 : "DVB-S2"}
+					qam = { p.Modulation_QPSK : "QPSK",
+						p.Modulation_8PSK : "8PSK",
+						p.Modulation_16APSK : "16APSK",
+						p.Modulation_32APSK : "32APSK"}
+					tp_str = "%d%s SR%d FEC %s %s %s" % (p.frequency, pol[p.polarisation], p.symbol_rate/1000, fec[p.fec], sys[p.system], qam[p.modulation])
+					blindscanStateList.append((tp_str, p))
+
 				self.tmp_tplist = sorted(self.tmp_tplist, key=lambda tp: (tp.frequency, tp.is_id, tp.pls_mode, tp.pls_code))
+				runtime = int(time() - self.start_time)
 				xml_location = self.createSatellitesXMLfile(self.tmp_tplist, XML_BLINDSCAN_DIR)
-				if self.search_type.value == 0: # Do a service scan
-					self.startScan(self.tmp_tplist, self.feid)
-				else: # Save transponder data to file. No service scan.
-					msg = _("Search completed. %d transponders found.\n\nDetails saved in:\n%s")%(len(self.tmp_tplist), xml_location)
-					self.session.openWithCallback(self.callbackNone, MessageBox, msg, MessageBox.TYPE_INFO, timeout=300)
+				self.session.openWithCallback(self.startScan, BlindscanState, _("Search completed\n%d transponders found in %d:%02d minutes.\nDetails saved in: %s") % (len(self.tmp_tplist), runtime / 60, runtime % 60, xml_location), "", blindscanStateList, True)
 			else:
 				msg = _("No new transponders found! \n\nOnly transponders already listed in satellites.xml \nhave been found for those search parameters!")
 				self.session.openWithCallback(self.callbackNone, MessageBox, msg, MessageBox.TYPE_INFO, timeout=60)
@@ -1072,7 +1182,12 @@ class Blindscan(ConfigListScreen, Screen):
 			self.session.openWithCallback(self.callbackNone, MessageBox, msg, MessageBox.TYPE_INFO, timeout=60)
 			self.tmp_tplist = []
 
-	def startScan(self, tlist, feid, networkid = 0):
+	def startScan(self, *retval):
+		if retval[0] == False:
+			return
+
+		tlist = retval[1]
+		networkid = 0
 		self.scan_session = None
 
 		flags = 0
@@ -1082,7 +1197,7 @@ class Blindscan(ConfigListScreen, Screen):
 			flags |= eComponentScan.scanDontRemoveUnscanned
 		if self.scan_onlyfree.value:
 			flags |= eComponentScan.scanOnlyFree
-		self.session.openWithCallback(self.startScanCallback, ServiceScan, [{"transponders": tlist, "feid": feid, "flags": flags, "networkid": networkid}])
+		self.session.openWithCallback(self.startScanCallback, ServiceScan, [{"transponders": tlist, "feid": self.feid, "flags": flags, "networkid": networkid}])
 
 	def getKnownTransponders(self, pos):
 		tlist = []
