@@ -24,7 +24,7 @@ msgid ""
 "You must use the power adapter."
 msgstr ""
 
-msgid "   Starting Sundtek hardware blind scan."
+msgid "Starting Sundtek hardware blind scan."
 msgstr ""
 
 #, fuzzy
@@ -61,10 +61,6 @@ msgstr ""
 
 msgid "Blind scan for DVB-S2 tuners"
 msgstr ""
-
-#, fuzzy
-msgid "Blind scan state"
-msgstr "Blindscan"
 
 msgid "Blindscan"
 msgstr "Blindscan"
@@ -132,16 +128,6 @@ msgstr "Wenn \"Ja\", werden nur unverschlüsselte Sender gespeichert;\"Nein\" sp
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
 msgstr "Wenn\"Ja\", werden nur Transponder gesucht, die nicht in satellites.xml stehen"
-
-msgid ""
-"Looking for available transponders.\n"
-"This will take a long time, please be patient."
-msgstr ""
-
-msgid ""
-"Looking for available transponders.\n"
-"This will take a short while."
-msgstr ""
 
 msgid "MANUALLY start service searching, press green to change"
 msgstr ""
