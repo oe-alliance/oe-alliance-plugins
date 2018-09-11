@@ -79,10 +79,10 @@ class BlindscanState(Screen, ConfigListScreen):
 		<widget name="config" position="10,102" size="524,425" />
 		<eLabel	position="544,95" size="1,440" backgroundColor="grey"/>
 		<widget name="post_action" position="554,102" size="256,140" font="Regular;19" halign="center"/>
-		<widget source="cancel" render="Label" position="10,530" size="100,30" font="Regular;19" halign="center"/>
-		<widget source="scan" render="Label" position="120,530" size="100,30" font="Regular;19" halign="center"/>
-		<widget source="selectAll" render="Label" position="230,530" size="100,30" font="Regular;19" halign="center"/>
-		<widget source="deSelectAll" render="Label" position="340,530" size="100,30" font="Regular;19" halign="center"/>
+		<widget source="key_red" render="Label" position="10,530" size="100,30" font="Regular;19" halign="center"/>
+		<widget source="key_green" render="Label" position="120,530" size="100,30" font="Regular;19" halign="center"/>
+		<widget source="key_yellow" render="Label" position="230,530" size="100,30" font="Regular;19" halign="center"/>
+		<widget source="key_blue" render="Label" position="340,530" size="100,30" font="Regular;19" halign="center"/>
 	</screen>
 	"""
 
@@ -97,14 +97,14 @@ class BlindscanState(Screen, ConfigListScreen):
 			self["post_action"].setText(_("Select transponders and press green to scan.\nPress yellow to select all transponders and blue to deselect all."))
 		else:
 			self["post_action"].setText(post_action)
-		self["cancel"] = StaticText(_("Cancel"))
-		self["scan"] = Label(_("Scan"))
-		self["selectAll"] = Label(_("Select all"))
-		self["deSelectAll"] = Label(_("Deselect all"))
-		if not finished:
-			self["scan"].hide()
-			self["selectAll"].hide()
-			self["deSelectAll"].hide()
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText("")
+		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText("")
+		if finished:
+			self["key_green"].setText(_("Scan"))
+			self["key_yellow"].setText(_("Select all"))
+			self["key_blue"].setText(_("Deselect all"))
 
 		self.configBooleanTpList = []
 		self.tp_list = []
@@ -238,7 +238,7 @@ class Blindscan(ConfigListScreen, Screen):
 				"cancel": self.keyCancel,
 			}, -2)
 			self["key_red"] = StaticText(_("Exit"))
-			self["key_green"] = StaticText(" ")
+			self["key_green"] = StaticText("")
 			self["footnote"] = Label(_("Please setup your tuner configuration."))
 
 		self.i2c_mapping_table = None
