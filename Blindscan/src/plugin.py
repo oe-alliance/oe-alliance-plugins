@@ -126,11 +126,6 @@ class BlindscanState(Screen, ConfigListScreen):
 			"blue": self.deselectAll,
 		}, -2)
 
-		self["key_red"] = Label(_("Cancel"))
-		self["key_green"] = Label(_("Scan"))
-		self["key_yellow"] = Label(_("Select All"))
-		self["key_blue"] = Label(_("Deselect All"))
-
 	def keyOk(self):
 		if self.finished:
 			i = self["config"].getCurrent()
