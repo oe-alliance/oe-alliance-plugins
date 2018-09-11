@@ -93,18 +93,34 @@ class BlindscanState(Screen, ConfigListScreen):
 		self["progress"] = Label()
 		self["progress"].setText(progress)
 		self["post_action"] = Label()
-		if finished:
-			self["post_action"].setText(_("Select transponders and press green to scan.\nPress yellow to select all transponders and blue to deselect all."))
-		else:
-			self["post_action"].setText(post_action)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText("")
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = StaticText("")
+		
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+		{
+			"cancel": self.keyCancel,
+			"red": self.keyCancel,
+		}, -2)
+
+		self["actions2"] = ActionMap(["OkCancelActions", "ColorActions"],
+		{
+			"ok": self.keyOk,
+			"green": self.scan,
+			"yellow": self.selectAll,
+			"blue": self.deselectAll,
+		}, -2)
+		
 		if finished:
+			self["post_action"].setText(_("Select transponders and press green to scan.\nPress yellow to select all transponders and blue to deselect all."))
 			self["key_green"].setText(_("Scan"))
 			self["key_yellow"].setText(_("Select all"))
 			self["key_blue"].setText(_("Deselect all"))
+			self["actions2"].setEnabled(True)
+		else:
+			self["post_action"].setText(post_action)
+			self["actions2"].setEnabled(False)
 
 		self.configBooleanTpList = []
 		self.tp_list = []
@@ -115,16 +131,6 @@ class BlindscanState(Screen, ConfigListScreen):
 			self.tp_list.append(getConfigListEntry(t[0], cb))
 		self["config"].list = self.tp_list
 		self["config"].l.setList(self.tp_list)
-
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
-		{
-			"ok": self.keyOk,
-			"cancel": self.keyCancel,
-			"green": self.scan,
-			"red": self.keyCancel,
-			"yellow": self.selectAll,
-			"blue": self.deselectAll,
-		}, -2)
 
 	def keyOk(self):
 		if self.finished:
