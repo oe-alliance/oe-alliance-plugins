@@ -28,7 +28,8 @@ config.plugins.TerrestrialScan.clearallservices = ConfigYesNo(default = True)
 config.plugins.TerrestrialScan.onlyfree = ConfigYesNo(default = True)
 config.plugins.TerrestrialScan.uhf_vhf = ConfigSelection(default = 'uhf', choices = [
 			('uhf', _("UHF Europe")),
-			('uhf_vhf', _("UHF/VHF Europe"))])
+			('uhf_vhf', _("UHF/VHF Europe")),
+			('australia', _("Australia"))])
 config.plugins.TerrestrialScan.makebouquet = ConfigYesNo(default = True)
 config.plugins.TerrestrialScan.makexmlfile = ConfigYesNo(default = False)
 
