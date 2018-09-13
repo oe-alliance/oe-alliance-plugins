@@ -60,7 +60,7 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 
 		dvbt_capable_nims = []
 		for nim in nimmanager.nim_slots:
-			if nim.config_mode != "nothing":
+			if self.config_mode(nim) != "nothing":
 				if nim.isCompatible("DVB-T") or (nim.isCompatible("DVB-S") and nim.canBeCompatible("DVB-T")):
 					dvbt_capable_nims.append(nim.slot)
 
@@ -189,6 +189,13 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		self.session.nav.playService(self.session.postScanService)
 		if answer:
 			self.close(True)
+
+	def config_mode(self, nim): # Workaround for OpenATV > 5.3
+		try:
+			return nim.config_mode
+		except AttributeError:
+			return nim.isCompatible("DVB-T") and nim.config_mode_dvbt or "nothing"
+
 
 def TerrestrialScanStart(menuid, **kwargs):
 	if menuid == "scan":
