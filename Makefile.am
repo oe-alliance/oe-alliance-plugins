@@ -230,6 +230,14 @@ if H9
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if HD60
+SUBDIRS += MultiTransCodingSetup
+endif
+
+if I55PLUS
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if LC
 SUBDIRS += F3LEDControl
 endif
