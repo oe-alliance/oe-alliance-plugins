@@ -206,6 +206,10 @@ if SF8008
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if USTYM4KPRO
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if S8100S
 SUBDIRS += MultiTransCodingSetup
 endif
