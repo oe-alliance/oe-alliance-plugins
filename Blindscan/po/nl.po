@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-11 14:04+0100\n"
-"PO-Revision-Date: 2018-09-12 04:12+0200\n"
+"PO-Revision-Date: 2018-09-28 15:32+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
@@ -79,7 +79,7 @@ msgid "Cancel"
 msgstr "Annuleer"
 
 msgid "Clear before scan"
-msgstr "Vóór zoeken alle zenders wissen?"
+msgstr "Vóór zoeken alle zenders wissen"
 
 #, python-format
 msgid ""
