@@ -96,15 +96,15 @@ class SatBlindscanState(Screen):
 		elif self.post_action != -1:
 			self.post_action ^= 1
 			if self.post_action:
-				self["post_action"].setText(_("MANUALLY start service searching, press green to change"))
+				self["post_action"].setText(_("MANUALLY start service searching, press green to change."))
 			else:
-				self["post_action"].setText(_("AUTOMATICALLY start service searching, press green to change"))
+				self["post_action"].setText(_("AUTOMATICALLY start service searching, press green to change."))
 
 	def setFinished(self):
 		if self.post_action:
 			self.finished=1
 			self["text"].setText(_("Transponder searching finished!"))
-			self["post_action"].setText(_("Press green to start service searching!"))
+			self["post_action"].setText(_("Press green to start service searching."))
 		else:
 			self.close(True)
 
@@ -546,7 +546,7 @@ class DmmBlindscan(ConfigListScreen, Screen, TransponderSearchSupport, Satellite
 		ConfigListScreen.__init__(self, self.list)
 		if not self.scan_nims.value == "":
 			self.createSetup()
-			self["introduction"] = Label(_("Press OK to start the scan"))
+			self["introduction"] = Label(_("Press OK to start the scan."))
 		else:
 			self["introduction"] = Label(_("Nothing to scan!\nPlease setup your tuner settings before you start a service scan."))
 
