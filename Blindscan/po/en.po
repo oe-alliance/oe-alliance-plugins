@@ -51,7 +51,7 @@ msgstr ""
 msgid "%dMHz scanned"
 msgstr ""
 
-msgid "AUTOMATICALLY start service searching, press green to change"
+msgid "AUTOMATICALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Accuracy (higher is better)"
@@ -133,11 +133,11 @@ msgstr ""
 msgid "Horizontal"
 msgstr "horizontal"
 
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
-msgstr "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
+msgstr "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
-msgstr "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
+msgstr "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
 msgstr "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
@@ -152,7 +152,7 @@ msgid ""
 "This will take a short while."
 msgstr ""
 
-msgid "MANUALLY start service searching, press green to change"
+msgid "MANUALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Maybe the reason that recording is currently running."
@@ -208,11 +208,11 @@ msgid "Press Green/OK to start the scan"
 msgstr "Press Green/OK to start the scan"
 
 #, fuzzy
-msgid "Press OK to start the scan"
+msgid "Press OK to start the scan."
 msgstr "Press Green/OK to start the scan"
 
 #, fuzzy
-msgid "Press green to start service searching!"
+msgid "Press green to start service searching."
 msgstr "Press Green/OK to start the scan"
 
 msgid "Satellite"
@@ -299,8 +299,8 @@ msgstr ""
 msgid "Vertical"
 msgstr "vertical"
 
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
-msgstr "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
+msgstr "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 
 msgid "circular left"
 msgstr "circular left"

@@ -49,7 +49,7 @@ msgstr ""
 msgid "%dMHz scanned"
 msgstr ""
 
-msgid "AUTOMATICALLY start service searching, press green to change"
+msgid "AUTOMATICALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Accuracy (higher is better)"
@@ -128,10 +128,10 @@ msgstr ""
 msgid "Horizontal"
 msgstr "horisontaalne"
 
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 msgstr "Määrates 'jah', kustutatakse kõik otsitava satelliidi kanalid enne kanaliotsingu alustamist"
 
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr "Määrates 'jah', salvestab otsing ainult koodivabad kanalid; 'ei' leiab kodeeritud ja koodivabad kanalid"
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
@@ -151,7 +151,7 @@ msgstr ""
 "Saadaolevate transponderite otsing.\n"
 "See läheb ruttu."
 
-msgid "MANUALLY start service searching, press green to change"
+msgid "MANUALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Maybe the reason that recording is currently running."
@@ -207,11 +207,11 @@ msgid "Press Green/OK to start the scan"
 msgstr "Otsingu alustamiseks vajuta OK või rohelist"
 
 #, fuzzy
-msgid "Press OK to start the scan"
+msgid "Press OK to start the scan."
 msgstr "Otsingu alustamiseks vajuta OK või rohelist"
 
 #, fuzzy
-msgid "Press green to start service searching!"
+msgid "Press green to start service searching."
 msgstr "Otsingu alustamiseks vajuta OK või rohelist"
 
 msgid "Satellite"
@@ -299,7 +299,7 @@ msgstr ""
 msgid "Vertical"
 msgstr "vertikaalne"
 
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr "Kui naabersatelliit on väga tugeva signaaliga, väldib see otsimist transponderitelt, mis tulevad naabersatelliidilt."
 
 msgid "circular left"

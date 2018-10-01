@@ -53,7 +53,7 @@ msgstr "Шаг %d %d:%02d мин"
 msgid "%dMHz scanned"
 msgstr ""
 
-msgid "AUTOMATICALLY start service searching, press green to change"
+msgid "AUTOMATICALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Accuracy (higher is better)"
@@ -132,10 +132,10 @@ msgstr ""
 msgid "Horizontal"
 msgstr "горизонтальная"
 
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 msgstr "Если Вы выберите \"да\", все каналы с найденных транспондеров спутника, будут удалены перед началом текущего сканирования."
 
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr "Если Вы выберите \"да\", то будут сохранены только найденные каналы без кодировки; \"нет\" будет учитываться кодированные и некодированные каналы."
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
@@ -155,7 +155,7 @@ msgstr ""
 "Поиск доступных транспондеров.\n"
 "Это займет немного времени, пожалуйста, будьте терпеливы."
 
-msgid "MANUALLY start service searching, press green to change"
+msgid "MANUALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Maybe the reason that recording is currently running."
@@ -211,11 +211,11 @@ msgid "Press Green/OK to start the scan"
 msgstr "Нажмите ОК/Зеленую для начала сканирования"
 
 #, fuzzy
-msgid "Press OK to start the scan"
+msgid "Press OK to start the scan."
 msgstr "Нажмите ОК/Зеленую для начала сканирования"
 
 #, fuzzy
-msgid "Press green to start service searching!"
+msgid "Press green to start service searching."
 msgstr "Нажмите ОК/Зеленую для начала сканирования"
 
 msgid "Satellite"
@@ -304,7 +304,7 @@ msgstr "   Sundtek: старт слепого поиска от производ
 msgid "Vertical"
 msgstr "вертикальная"
 
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr "Если уровень сигнала с соседнего спутника очень сильный, это позволяет избежать сканирования транспондеров с этого спутника."
 
 msgid "circular left"

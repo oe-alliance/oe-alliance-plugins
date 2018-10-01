@@ -60,7 +60,7 @@ msgstr ""
 msgid "%dMHz scanned"
 msgstr ""
 
-msgid "AUTOMATICALLY start service searching, press green to change"
+msgid "AUTOMATICALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Accuracy (higher is better)"
@@ -142,10 +142,10 @@ msgstr ""
 msgid "Horizontal"
 msgstr "horizontal"
 
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 msgstr "Se selecionar \"sim\" todos os canais do satélite a procurar serão apagados antes de iniciar a procura corrente"
 
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr "Se selecionar \"sim\" a procura irá salvar só os canais não codificados; \"não\" procurará por canais livres e canais codificados"
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
@@ -165,7 +165,7 @@ msgstr ""
 "Olhando para os transponders disponíveis.\n"
 "Isso vai levar algum tempo."
 
-msgid "MANUALLY start service searching, press green to change"
+msgid "MANUALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Maybe the reason that recording is currently running."
@@ -221,11 +221,11 @@ msgid "Press Green/OK to start the scan"
 msgstr "prima a tecla VERDE/OK para iniciar a procura"
 
 #, fuzzy
-msgid "Press OK to start the scan"
+msgid "Press OK to start the scan."
 msgstr "prima a tecla VERDE/OK para iniciar a procura"
 
 #, fuzzy
-msgid "Press green to start service searching!"
+msgid "Press green to start service searching."
 msgstr "prima a tecla VERDE/OK para iniciar a procura"
 
 #
@@ -317,7 +317,7 @@ msgstr "A iniciar hardware Sundtek blind scan."
 msgid "Vertical"
 msgstr "vertical"
 
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr "Quando um satélite vizinho é muito forte isso evita pesquisar por transponders conhecidos provenientes desse satélite"
 
 #

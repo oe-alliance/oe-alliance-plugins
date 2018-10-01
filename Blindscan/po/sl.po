@@ -50,7 +50,7 @@ msgstr ""
 msgid "%dMHz scanned"
 msgstr ""
 
-msgid "AUTOMATICALLY start service searching, press green to change"
+msgid "AUTOMATICALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Accuracy (higher is better)"
@@ -124,10 +124,10 @@ msgstr ""
 msgid "Horizontal"
 msgstr "Horizontalna"
 
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 msgstr ""
 
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr ""
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
@@ -143,7 +143,7 @@ msgid ""
 "This will take a short while."
 msgstr ""
 
-msgid "MANUALLY start service searching, press green to change"
+msgid "MANUALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Maybe the reason that recording is currently running."
@@ -194,10 +194,10 @@ msgstr ""
 msgid "Press Green/OK to start the scan"
 msgstr ""
 
-msgid "Press OK to start the scan"
+msgid "Press OK to start the scan."
 msgstr ""
 
-msgid "Press green to start service searching!"
+msgid "Press green to start service searching."
 msgstr ""
 
 #
@@ -284,7 +284,7 @@ msgstr ""
 msgid "Vertical"
 msgstr "Vertikalna"
 
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr ""
 
 #

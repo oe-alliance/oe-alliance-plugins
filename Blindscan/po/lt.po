@@ -56,7 +56,7 @@ msgstr "Žingsnis %d %d:%02d min."
 msgid "%dMHz scanned"
 msgstr ""
 
-msgid "AUTOMATICALLY start service searching, press green to change"
+msgid "AUTOMATICALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Accuracy (higher is better)"
@@ -135,10 +135,10 @@ msgstr ""
 msgid "Horizontal"
 msgstr "horizontali"
 
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 msgstr "Jeigu čia pasirinksite 'taip', prieš pradedant paiešką, visi ankstesni šio palydovo kanalai bus ištrinti"
 
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr "Jeigu čia pasirinksite 'taip', bus išsaugoti tik nekoduoti kanalai; pasirinkus 'ne', išsaugos ir koduotus, ir nekoduotus kanalus"
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
@@ -158,7 +158,7 @@ msgstr ""
 "Ieškoma matomų transponderių.\n"
 "Tai truputį užtruks."
 
-msgid "MANUALLY start service searching, press green to change"
+msgid "MANUALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Maybe the reason that recording is currently running."
@@ -214,11 +214,11 @@ msgid "Press Green/OK to start the scan"
 msgstr "Paieškai pradėti, spauskite 'ŽALIĄ'/'OK'"
 
 #, fuzzy
-msgid "Press OK to start the scan"
+msgid "Press OK to start the scan."
 msgstr "Paieškai pradėti, spauskite 'ŽALIĄ'/'OK'"
 
 #, fuzzy
-msgid "Press green to start service searching!"
+msgid "Press green to start service searching."
 msgstr "Paieškai pradėti, spauskite 'ŽALIĄ'/'OK'"
 
 msgid "Satellite"
@@ -307,7 +307,7 @@ msgstr "   Pradedama akloji paieška Sundtek įranga."
 msgid "Vertical"
 msgstr "vertikali"
 
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr "Kai kaimyninis palydovas labai stiprus, taip išvengiama paieškos tarp transponderių, žinomai esančių kaimyniniame palydove"
 
 msgid "circular left"

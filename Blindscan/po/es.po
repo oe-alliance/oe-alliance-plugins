@@ -50,7 +50,7 @@ msgstr ""
 msgid "%dMHz scanned"
 msgstr "%dMhz escaneado"
 
-msgid "AUTOMATICALLY start service searching, press green to change"
+msgid "AUTOMATICALLY start service searching, press green to change."
 msgstr "Arranque servicio de búsqueda AUTOMÁTICO, pulsa verde para cambiar"
 
 msgid "Accuracy (higher is better)"
@@ -129,10 +129,10 @@ msgstr "El hardware de búsqueda ciega no está soportado por este sintonizador 
 msgid "Horizontal"
 msgstr "Horizontal"
 
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 msgstr "Si selecciona \"Si\", todos los canales del satélite a escanear serán borrados antes de empezar la búsqueda ciega"
 
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr "Si selecciona \"Si\", la búsqueda sólo guardará los canales no encriptados; elegir \"No\" buscará canales encriptados y no encriptados"
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
@@ -152,7 +152,7 @@ msgstr ""
 "Buscando transpondedore disponibles.\n"
 "Esta búsqueda no tardará en finalizar"
 
-msgid "MANUALLY start service searching, press green to change"
+msgid "MANUALLY start service searching, press green to change."
 msgstr "Arranque servicio de búsqueda MANUAL, pulsa verde para cambiar"
 
 msgid "Maybe the reason that recording is currently running."
@@ -211,10 +211,10 @@ msgstr "Polarización"
 msgid "Press Green/OK to start the scan"
 msgstr "Pulse Verde/OK para iniciar la búsqueda"
 
-msgid "Press OK to start the scan"
+msgid "Press OK to start the scan."
 msgstr "Pulsa OK para empezar la búsqueda"
 
-msgid "Press green to start service searching!"
+msgid "Press green to start service searching."
 msgstr "Pulsa verde para arrancar el servicio de búsqueda!"
 
 msgid "Satellite"
@@ -301,7 +301,7 @@ msgstr "Utiliza hardware búsqueda ciega de Sundtek!"
 msgid "Vertical"
 msgstr "Vertical"
 
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr "Cuando un satélite cercano es muy potente, se evita buscar transpondedores procedentes de ese satélite"
 
 msgid "circular left"

@@ -51,7 +51,7 @@ msgstr ""
 msgid "%dMHz scanned"
 msgstr ""
 
-msgid "AUTOMATICALLY start service searching, press green to change"
+msgid "AUTOMATICALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Accuracy (higher is better)"
@@ -140,11 +140,11 @@ msgid "Horizontal"
 msgstr "horizontální"
 
 #
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 msgstr "Když vyberete \"ano\" všechny kanály na satelitu budou před zahájením hledání odstraněny "
 
 #
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr "Když vyberete \"ano\" vyhledají se pouze nekódované kanály;\"ne\" vyhledají se free i kódované kanály"
 
 #
@@ -161,7 +161,7 @@ msgid ""
 "This will take a short while."
 msgstr ""
 
-msgid "MANUALLY start service searching, press green to change"
+msgid "MANUALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Maybe the reason that recording is currently running."
@@ -224,12 +224,12 @@ msgstr "Zeleným/OK začne skenování"
 
 #
 #, fuzzy
-msgid "Press OK to start the scan"
+msgid "Press OK to start the scan."
 msgstr "Zeleným/OK začne skenování"
 
 #
 #, fuzzy
-msgid "Press green to start service searching!"
+msgid "Press green to start service searching."
 msgstr "Zeleným/OK začne skenování"
 
 #
@@ -331,7 +331,7 @@ msgid "Vertical"
 msgstr "vertikální"
 
 #
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr "Když je sousední satelit velmi silný ,zabrání se tím hledání transpondérů ze sousedního satelitu"
 
 #

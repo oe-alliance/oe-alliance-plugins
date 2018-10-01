@@ -53,7 +53,7 @@ msgstr "%d:%02d/%d:%02dmin"
 msgid "%dMHz scanned"
 msgstr "%dMHz scanné"
 
-msgid "AUTOMATICALLY start service searching, press green to change"
+msgid "AUTOMATICALLY start service searching, press green to change."
 msgstr "Démarre AUTOMATIQUEMENT la recherche des services, appuyer sur vert pour modifier"
 
 msgid "Accuracy (higher is better)"
@@ -128,10 +128,10 @@ msgstr "La recherche aveugle n'est pas supportée sur ce tuner (%s)!"
 msgid "Horizontal"
 msgstr "Horizontal"
 
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 msgstr "Si vous choisissez \"oui\" toutes les chaînes du satellite analysé seront effacées avant que l'analyse ne démarre."
 
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr "Si vous choisissez \"'oui\" l'analyse va uniquement sauvegarder les chaînes qui ne sont pas encryptées; \"non\" va trouver les chaînes encryptées et non-encryptées."
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
@@ -151,7 +151,7 @@ msgstr ""
 "Cherche les transpondeurs disponibles.\n"
 "Ceci va prendre un peu de temps."
 
-msgid "MANUALLY start service searching, press green to change"
+msgid "MANUALLY start service searching, press green to change."
 msgstr "Démarrer la recherche des services MANUELLEMENT, appuyez sur vert pour modifier"
 
 msgid "Maybe the reason that recording is currently running."
@@ -210,10 +210,10 @@ msgstr "Polarisation"
 msgid "Press Green/OK to start the scan"
 msgstr "Appuyez sur Vert/OK pour démarrer l'analyse"
 
-msgid "Press OK to start the scan"
+msgid "Press OK to start the scan."
 msgstr "Appuyez sur OK pour commencer l'analyse"
 
-msgid "Press green to start service searching!"
+msgid "Press green to start service searching."
 msgstr "Appuyez sur Vert pour démarrer la recherche!"
 
 msgid "Satellite"
@@ -299,7 +299,7 @@ msgstr "Utiliser toute les capacités de recherche aveugle du matériel Sundtek!
 msgid "Vertical"
 msgstr "Vertical"
 
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr "Lorsque le satellite voisin émet très fort, cela évite de rechercher les transpondeurs connus comme venant du satellite voisin."
 
 msgid "circular left"

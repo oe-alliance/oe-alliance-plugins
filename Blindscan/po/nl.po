@@ -54,7 +54,7 @@ msgstr "%d:%02d/%d:%02dmin"
 msgid "%dMHz scanned"
 msgstr "%dMHz gescanned"
 
-msgid "AUTOMATICALLY start service searching, press green to change"
+msgid "AUTOMATICALLY start service searching, press green to change."
 msgstr "Kanalen zoeken automatisch starten, druk op de groene knop om te veranderen."
 
 msgid "Accuracy (higher is better)"
@@ -134,10 +134,10 @@ msgstr "Hardware blindscan wordt niet ondersteund door deze tuner (%s)!"
 msgid "Horizontal"
 msgstr "Horizontaal"
 
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 msgstr "Als u \"Ja\" kiest, zullen alle zenders van de huidige satelliet worden gewist voordat het zoeken begint. Dit voorkomt dat zenders dubbel worden opgenomen."
 
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr "Als u \"Ja\" kiest, zullen alleen zenders worden gezocht die niet gecodeerd zijn; met \"nee\" zullen alle zenders gezocht worden."
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
@@ -157,7 +157,7 @@ msgstr ""
 "Zoekt beschikbare transponders.\n"
 "Dit zal even duren."
 
-msgid "MANUALLY start service searching, press green to change"
+msgid "MANUALLY start service searching, press green to change."
 msgstr "Kanalen zoeken handmatig starten, druk op de groene knop om te veranderen."
 
 msgid "Maybe the reason that recording is currently running."
@@ -216,10 +216,10 @@ msgstr "Polarisatie"
 msgid "Press Green/OK to start the scan"
 msgstr "Druk op Groen/OK om de scan te beginnen"
 
-msgid "Press OK to start the scan"
+msgid "Press OK to start the scan."
 msgstr "Druk op OK om de scan te beginnen."
 
-msgid "Press green to start service searching!"
+msgid "Press green to start service searching."
 msgstr "Druk op Groen om de scan te beginnen."
 
 msgid "Satellite"
@@ -328,7 +328,7 @@ msgstr "Gebruik de volledige Sundtek hardware blindscan!"
 msgid "Vertical"
 msgstr "Vertikaal"
 
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr "Als een naburige satelliet erg sterk is, kunt u met deze instelling voorkomen dat transponders waarvan bekend is dat die van die satelliet afkomstig zijn, toegekend worden aan de gescande satelliet."
 
 msgid "circular left"

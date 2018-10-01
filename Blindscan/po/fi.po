@@ -52,7 +52,7 @@ msgstr ""
 msgid "%dMHz scanned"
 msgstr ""
 
-msgid "AUTOMATICALLY start service searching, press green to change"
+msgid "AUTOMATICALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Accuracy (higher is better)"
@@ -138,10 +138,10 @@ msgstr ""
 msgid "Horizontal"
 msgstr "horisontaali"
 
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search"
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 msgstr "Jos valitset \"kyllä\" kaikki satelliitin kanavat poistetaan ennen hakua"
 
-msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels"
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
 msgstr "Jos valitset \"kyllä\" vain salaamattomat kanavat haetaan; \"ei\" kaikki kanavat haetaan"
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
@@ -161,7 +161,7 @@ msgstr ""
 "Etsitään transpondereita.\n"
 "Tämä vie vähän aikaa."
 
-msgid "MANUALLY start service searching, press green to change"
+msgid "MANUALLY start service searching, press green to change."
 msgstr ""
 
 msgid "Maybe the reason that recording is currently running."
@@ -217,11 +217,11 @@ msgid "Press Green/OK to start the scan"
 msgstr "Paina vihreä/OK aloittaaksesi haun"
 
 #, fuzzy
-msgid "Press OK to start the scan"
+msgid "Press OK to start the scan."
 msgstr "Paina vihreä/OK aloittaaksesi haun"
 
 #, fuzzy
-msgid "Press green to start service searching!"
+msgid "Press green to start service searching."
 msgstr "Paina vihreä/OK aloittaaksesi haun"
 
 #
@@ -312,7 +312,7 @@ msgstr ""
 msgid "Vertical"
 msgstr "vertikaali"
 
-msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite"
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr "Kun naapurisatelliitti on voimakas tämä auttaa välttämään naapurisatelliitin tunnetut transponderit"
 
 #
