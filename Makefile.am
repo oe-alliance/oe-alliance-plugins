@@ -203,7 +203,7 @@ SUBDIRS += F3LEDControl
 endif
 
 if SF8008
-SUBDIRS += MultiTransCodingSetup
+SUBDIRS += MultiTransCodingSetup VPLEDControl
 endif
 
 if USTYM4KPRO
