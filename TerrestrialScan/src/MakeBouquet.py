@@ -60,7 +60,7 @@ class MakeBouquet(Screen):
 		self.bouquetName = _('Terrestrial')
 		self.namespace_complete_terrestrial = not (config.usage.subnetwork_terrestrial.value if hasattr(config.usage, "subnetwork_terrestrial") else True) # config.usage.subnetwork not available in all images
 
-		self.terrestrailXmlFilename = "terrestrial.xml"
+		self.terrestrialXmlFilename = "terrestrial.xml"
 
 		self.frontend = None
 		self.rawchannel = None
@@ -469,7 +469,7 @@ class MakeBouquet(Screen):
 		xml.append('\t</terrestrial>\n')
 		xml.append('</locations>')
 
-		xmlFile = open(self.path + "/" + self.terrestrailXmlFilename, "w")
+		xmlFile = open(self.path + "/" + self.terrestrialXmlFilename, "w")
 		xmlFile.write(''.join(xml))
 		xmlFile.close()
 		del xml
