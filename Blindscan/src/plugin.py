@@ -958,7 +958,8 @@ class Blindscan(ConfigListScreen, Screen):
 				if len(data) >= 6 and data[0] == 'OK' and self.Sundtek_pol != "" and self.offset and self.dataSundtekIsGood(data):
 					parm = eDVBFrontendParametersSatellite()
 					sys = { "DVB-S" : parm.System_DVB_S,
-						"DVB-S2" : parm.System_DVB_S2}
+						"DVB-S2" : parm.System_DVB_S2},
+						"DVB-S2X" : parm.System_DVB_S2}
 					qam = { "QPSK" : parm.Modulation_QPSK,
 						"8PSK" : parm.Modulation_8PSK,
 						"16APSK" : parm.Modulation_16APSK,
