@@ -1,0 +1,250 @@
+# Dutch translations for enigma2-oe-alliance-plugins package.
+# Copyright (C) 2013 THE enigma2-oe-alliance-plugins'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the enigma2-oe-alliance-plugins package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-10-14 16:15+0200\n"
+"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
+"Language-Team: Andy Blackburn/Rob van der Does\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+msgid ""
+" Media Info\n"
+"Name = "
+msgstr ""
+" Media Info\n"
+"Name = "
+
+msgid "101 TV"
+msgstr "101 TV"
+
+msgid "3FM Alternative"
+msgstr "3FM Alternative"
+
+msgid "538 Hitzone"
+msgstr "538 Hitzone"
+
+msgid "538 NonStop40"
+msgstr "538 NonStop40"
+
+msgid "538 Party"
+msgstr "538 Party"
+
+msgid "Best 24"
+msgstr "Best 24"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Cultura 24"
+msgstr "Cultura 24"
+
+msgid "Decibel"
+msgstr "Decibel"
+
+msgid "Dumpert.nl"
+msgstr "Dumpert.nl"
+
+msgid "Error..."
+msgstr "Fehler..."
+
+msgid "Exit movie player?"
+msgstr "Movie Player beenden?"
+
+msgid "Font Size in List"
+msgstr "Schriftgröße in Liste"
+
+msgid "Holland Doc 24"
+msgstr "Holland Doc 24"
+
+msgid "Humor TV 24"
+msgstr "Humor TV 24"
+
+msgid "Internet radio"
+msgstr "Internet Radio"
+
+msgid "InternetTV"
+msgstr "InternetTV"
+
+msgid "Journaal 24"
+msgstr "Journaal 24"
+
+msgid "Livestreams"
+msgstr "Livestreams"
+
+msgid "Modern layout"
+msgstr "Modernes Layout"
+
+msgid "NERadio Hardstyle"
+msgstr "NERadio Hardstyle"
+
+msgid "NERadio Sweden - Best of Techno & Trance"
+msgstr "NERadio Sweden - Best of Techno & Trance"
+
+msgid "NET5 Gemist"
+msgstr "NET5 Gemist"
+
+msgid "NPO Gemist"
+msgstr "NPO Gemist"
+
+msgid "NPO Popular"
+msgstr "NPO Popular"
+
+msgid "NPO Uitgelicht"
+msgstr "NPO Uitgelicht"
+
+msgid "Nederland 1"
+msgstr "Nederland 1"
+
+msgid "Nederland 2"
+msgstr "Nederland 2"
+
+msgid "Nederland 3"
+msgstr "Nederland 3"
+
+msgid "Nieuw"
+msgstr "Nieuw"
+
+msgid "No items matching your search criteria were found"
+msgstr "Es wurden keine Artikel gefunden, die Ihren Suchkriterien entsprechen"
+
+msgid "No streams avaible"
+msgstr "Keine Streams verfügbar"
+
+msgid "OK"
+msgstr "OK"
+
+msgid ""
+"Open Uitzending Gemist\n"
+"\n"
+"Based on Xtrend code"
+msgstr ""
+"Offene Sendung verpasst\n"
+"\n"
+"Basierend auf Xtrend code"
+
+msgid "Open Uitzending Gemist options"
+msgstr "Offene Sendung verpasst Optionen"
+
+msgid "Podcasts"
+msgstr "Podcasts"
+
+msgid "Politiek 24"
+msgstr "Politiek 24"
+
+msgid "Q-Music Het Foute Non Stop"
+msgstr "Q-Music Het Foute Non Stop"
+
+msgid "RTL XL A-Z"
+msgstr "RTL XL A-Z"
+
+msgid "RTL XL Gemist"
+msgstr "RTL XL Gemist"
+
+msgid "RTL XL Zoeken"
+msgstr "RTL XL Zoeken"
+
+msgid "Radio 1 Webcam"
+msgstr "Radio 1 Webcam"
+
+msgid "Radio 2 In Concert"
+msgstr "Radio 2 In Concert"
+
+msgid "Radio 2 Top 2000"
+msgstr "Radio 2 Top 2000"
+
+msgid "Radio 2 Webcam"
+msgstr "Radio 2 Webcam"
+
+msgid "Radio 3 Webcam"
+msgstr "Radio 3 Webcam"
+
+msgid "Radio 53L8"
+msgstr "Radio 53L8"
+
+msgid "Radio Gemist"
+msgstr "Radio Gemist"
+
+msgid "SBS Zoeken"
+msgstr "SBS Zoeken"
+
+msgid "SBS6 Gemist"
+msgstr "SBS6 Gemist"
+
+msgid "Save settings?"
+msgstr "Einstellungen speichern?"
+
+msgid "Search term"
+msgstr "Suchbegriff"
+
+msgid "Setup"
+msgstr "Setup"
+
+msgid "Show INTERNETTV"
+msgstr "Show INTERNETTV"
+
+msgid "Show NPO"
+msgstr "Show NPO"
+
+msgid "Show NPO livestreams"
+msgstr "Show NPO livestreams"
+
+msgid "Show RADIO"
+msgstr "Show RADIO"
+
+msgid "Show RTL"
+msgstr "Show RTL"
+
+msgid "Show SBS"
+msgstr "Show SBS"
+
+msgid "Show pictures"
+msgstr "Zeige Bilder"
+
+msgid "Slam! Hardstyle"
+msgstr "Slam! Hardstyle"
+
+msgid "There was a problem retrieving the media list"
+msgstr "Es gab ein Problem beim Abrufen der Medien Liste"
+
+msgid "Today"
+msgstr "Heute"
+
+msgid "Toppers"
+msgstr "Toppers"
+
+msgid "VKMag.com"
+msgstr "VKMag.com"
+
+msgid "Veronica Gemist"
+msgstr "Veronica Gemist"
+
+msgid "Video's"
+msgstr "Video's"
+
+msgid "Voor deze aflevering moet waarschijnlijk betaald worden."
+msgstr "Für diese Episode muss wahrscheinlich bezahlt werden."
+
+msgid "Watch uitzending gemist"
+msgstr "Sie Sehen uitzending gemist"
+
+msgid "Z@ppelin/ Zapp"
+msgstr "Z@ppelin/ Zapp"
+
+msgid "highlights"
+msgstr "Glanzpunkte"
+
+msgid "luckytv.nl"
+msgstr "luckytv.nl"
