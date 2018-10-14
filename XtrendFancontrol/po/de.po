@@ -3,145 +3,67 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-07-01 20:56+0100\n"
-"Last-Translator: mike99 <mike99@mail.to>\n"
+"PO-Revision-Date: 2018-10-14 23:22+0200\n"
+"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
-"Language: de\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.7.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-
-msgid " ver. 3.2"
-msgstr " Version 3.2"
-
-msgid "All"
-msgstr "Alle"
 
 msgid "Cancel"
 msgstr "Abbrechen"
 
-msgid "End time"
-msgstr "End-Zeit"
+msgid "DMM/DMM ADV"
+msgstr "DMM/DMM ADV"
 
-msgid "Fan - Auto"
-msgstr "Lüfter - Auto"
+msgid "ET4000"
+msgstr "ET4000"
 
-msgid "Fan - Off"
-msgstr "Lüfter - Aus"
+msgid "ET5000/ET6000"
+msgstr "ET5000/ET6000"
 
-msgid "Fan - Off in standby"
-msgstr "Lüfter - Aus im Stby"
+msgid "ET6500/ET9500"
+msgstr "ET6500/ET9500"
 
-msgid "Fan - On"
-msgstr "Lüfter - An"
+msgid "ET9000/ET9100"
+msgstr "ET9000/ET9100"
 
-msgid "Fan Control"
-msgstr "Lüfterkontrolle"
+msgid "ET9200/ET9500"
+msgstr "ET9200/ET9500"
 
-msgid "Fan Setup"
-msgstr "Lüfter-Einstellungen"
+msgid "F1/F3"
+msgstr "F1/F3"
 
-msgid "Fan mode"
-msgstr "Lüftermodus"
+msgid "HD1100"
+msgstr "HD1100"
 
-msgid "Fan setup:"
-msgstr "Lüfter-Einstellungen:"
+msgid "HD2400"
+msgstr "HD2400"
 
-msgid "HDD Sleeping"
-msgstr "HDD im Ruhezustand"
+msgid "Is this remote ok?"
+msgstr "Ist das Fernbedienung OK?"
 
-msgid "HDD Temperature"
-msgstr "HDD-Temperatur"
+msgid "OK"
+msgstr "OK"
 
-msgid ""
-"Harddisk standby after - no standby\n"
-"You may not use this mode!"
-msgstr ""
-"HDD Standby nach - kein Standby\n"
-"Dieser Modus kann nicht verwendet werden !"
+msgid "OdinM9"
+msgstr "OdinM9"
 
-msgid "Harddisk temperature"
-msgstr "HDD-Temperatur:"
+msgid "Remote"
+msgstr "Fernbedienung"
 
-msgid "Harddisks:"
-msgstr "Festplatten:"
+msgid "Remote Control Code"
+msgstr "Fernbedienung Code"
 
-msgid "Initial fan speed"
-msgstr "Initiale Lüftergeschw."
+msgid "Vu"
+msgstr "Vu"
 
-msgid "No harddisk with temperature sensor found!"
-msgstr "Keine Festplatte mit Temperatur Sensor gefunden!"
+msgid "XP1000"
+msgstr "XP1000"
 
-msgid "No system temperature sensor found!"
-msgstr "Kein System Temperatursensor gefunden!"
-
-msgid "None"
-msgstr "Nein"
-
-msgid "Off"
-msgstr "Aus"
-
-msgid "On"
-msgstr "An"
-
-msgid "Power status"
-msgstr "Power-Status"
-
-msgid "Save"
-msgstr "Speichern"
-
-msgid "Select internal HDD device"
-msgstr "Interne HDD wählen"
-
-msgid "Show Temp"
-msgstr "Temperaturen anzeigen"
-
-msgid "Show temp. HDD to extensions menu"
-msgstr "HDD-Temp. im Erweiterungs-Menü anzeigen"
-
-msgid "Start time"
-msgstr "Start-Zeit"
-
-msgid ""
-"Start time OFF mode equal End time OFF mode\n"
-"You may not use this time settings!"
-msgstr ""
-"Start-Zeit und End-Zeit für Lüfter - Aus gleich.\n"
-"Keine verwendbaren Zeit Einstellungen !"
-
-msgid "Switch Fan mode on time setting"
-msgstr "Lüftermodus nach Zeit-Vorgabe wechseln"
-
-msgid "Switch OFF mode on HDD sleep"
-msgstr "Lüfter ausschalten wenn HDD schläft"
-
-msgid "Switch ON mode on HDD max.temp. (0 - disable)"
-msgstr "Lüfter anschalten bei HDD-Temp.max.(0 = deaktiv)"
-
-msgid "Switch ON on system temp"
-msgstr "Lüfter anschalten bei Systemtemperatur"
-
-msgid "System temperature"
-msgstr "System-Temperatur:"
-
-msgid "Watch HDD state"
-msgstr "HDD Status überwachen"
-
-msgid "Watch system temp"
-msgstr "System-Temperatur überwachen"
-
-msgid ""
-"You may not use this mode!\n"
-"Not found an internal hard drive!"
-msgstr ""
-"Dieser Modus kann nicht verwendet werden.\n"
-"Keine Interne HDD gefunden !"
-
-msgid "n.a."
-msgstr "n.v."
-
-msgid "switch Fan On/Off"
-msgstr "Lüfter Ein/Aus schalten"
+msgid "XP3000"
+msgstr "XP3000"
