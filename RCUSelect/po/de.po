@@ -3,67 +3,67 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:49+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2018-10-14 21:37+0200\n"
+"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
-"Language: de\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
 msgid "AB IPBox 9900/99/55 HD RCU"
-msgstr ""
+msgstr "AB IPBox 9900/99/55 HD RCU"
 
 msgid "Alien1 old RCU"
-msgstr ""
+msgstr "Alien1 old RCU"
 
 msgid "Alien2/1 RCU"
-msgstr ""
+msgstr "Alien2/1 RCU"
 
 msgid "Apply"
 msgstr "Anwenden"
 
 msgid "Are you sure?"
-msgstr ""
+msgstr "Bist du sicher?"
 
 msgid "Cancel"
 msgstr "Abbrechen"
 
 msgid "GI LX3 RCU"
-msgstr ""
+msgstr "GI LX3 RCU"
 
 msgid "Gigablue 800 UE Plus RCU"
-msgstr ""
+msgstr "Gigablue 800 UE Plus RCU"
 
 msgid "Mutant HD2400 RCU"
-msgstr ""
+msgstr "Mutant HD2400 RCU"
 
 msgid "Octagon SF8 RCU"
-msgstr ""
+msgstr "Octagon SF8 RCU"
 
 msgid "RCU Select"
 msgstr "RCU Auswahl"
 
 msgid "Technomate Nano RCU"
-msgstr ""
+msgstr "Technomate Nano RCU"
 
 msgid "WeTek Play (Classic) RCU"
-msgstr ""
+msgstr "WeTek Play (Classic) RCU"
 
 msgid "WeTek Play Enigma2 RCU"
-msgstr ""
+msgstr "WeTek Play Enigma2 RCU"
 
 msgid "WeTek Play OpenElec RCU"
-msgstr ""
+msgstr "WeTek Play OpenElec RCU"
 
 msgid "WeTek Play2 RCU"
-msgstr ""
+msgstr "WeTek Play2 RCU"
 
 msgid "Zgemma Star RCU"
-msgstr ""
+msgstr "Zgemma Star RCU"
 
 msgid "xtrend ET10000 RCU"
-msgstr ""
+msgstr "xtrend ET10000 RCU"
