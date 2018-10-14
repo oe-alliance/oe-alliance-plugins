@@ -57,7 +57,7 @@ msgid "Accuracy (higher is better)"
 msgstr ""
 
 msgid "Blind scan"
-msgstr ""
+msgstr "Blindscan"
 
 msgid "Blind scan for DVB-S2 tuners"
 msgstr ""
@@ -127,7 +127,7 @@ msgid "If you select \"yes\" the scan will only save channels that are not encry
 msgstr "Wenn \"Ja\", werden nur unverschlüsselte Sender gespeichert;\"Nein\" speichert verschlüsselte und nicht verschlüsselte"
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
-msgstr "Wenn\"Ja\", werden nur Transponder gesucht, die nicht in satellites.xml stehen"
+msgstr "Wenn \"Ja\", werden nur Transponder gesucht, die nicht in satellites.xml stehen"
 
 msgid "MANUALLY start service searching, press green to change."
 msgstr ""
