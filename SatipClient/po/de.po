@@ -3,25 +3,25 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:50+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2018-10-14 21:43+0200\n"
+"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid " "
-msgstr ""
+msgstr " "
 
 msgid "Cancel"
 msgstr "Abbrechen"
 
 msgid "DVB-S"
-msgstr ""
+msgstr "DVB-S"
 
 msgid "Description"
 msgstr "Beschreibung"
@@ -40,7 +40,7 @@ msgid "Manufacturer"
 msgstr "Hersteller"
 
 msgid "No vtuner found."
-msgstr ""
+msgstr "Kein vTuner gefunden."
 
 msgid "Ok"
 msgstr "OK"
@@ -58,7 +58,7 @@ msgid "SAT>IP Client Tuner Setup"
 msgstr "SAT>IP Client Tuner Konfiguration"
 
 msgid "SAT>IP Client attached to vtuner."
-msgstr "SAT>IP Client Anbindung über Vtuner"
+msgstr "SAT>IP Client Anbindung über Vtuner."
 
 #, python-format
 msgid "SAT>IP SERVER : %s"
@@ -87,7 +87,7 @@ msgid "Select tuner and press setup key (Yellow)"
 msgstr "Tuner Auswählen und Taste (Gelb) für Setup"
 
 msgid "Server capacity is fulled."
-msgstr "Server Kapazität erreicht"
+msgstr "Server Kapazität erreicht."
 
 msgid "Setup"
 msgstr "Einstellungen"
