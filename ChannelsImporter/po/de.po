@@ -1,0 +1,253 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2018-10-14 13:18+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: de_DE\n"
+
+msgid "%a %e %b  %-H:%M"
+msgstr "%a %e %b  %-H:%M"
+
+#, python-format
+msgid "%d/%d"
+msgstr "%d/%d"
+
+msgid "Channels importer"
+msgstr "Kanäle Importeur"
+
+msgid "ChannelsImporter"
+msgstr "Kanalimporter"
+
+msgid "Checking FTP connection to remote receiver"
+msgstr "FTP Verbindung zum entfernten Empfänger prüfen"
+
+msgid "Checking for alternatives..."
+msgstr "Alternativen prüfen..."
+
+msgid "Connection to remote IP ok"
+msgstr "Verbindung zu Remote IP OK"
+
+msgid "Could not connect to the remote IP"
+msgstr "Konnte sich nicht mit der entfernten IP verbinden"
+
+msgid "Daily"
+msgstr "Täglich"
+
+#, python-format
+msgid ""
+"Download epg.dat from remote receiver failed. Check file exists on remote "
+"receiver.\n"
+"%s"
+msgstr ""
+"Download EPG. dat von Remote Receiver fehlgeschlagen. Die Kontrolldatei "
+"existiert auf dem entfernten Empfänger.\n"
+" %s"
+
+#, python-format
+msgid "Download from remote failed %s"
+msgstr "Download von Remote Fehler %s"
+
+#, python-format
+msgid "Download settings from remote failed %s"
+msgstr "Download-Einstellungen von entfernten Fehler %s"
+
+msgid "Downloading alternatives..."
+msgstr "Alternativen Herunter Laden..."
+
+msgid "Downloading bouquets..."
+msgstr "Download Bouquets..."
+
+msgid "Downloading channel indexes..."
+msgstr "Download von Kanal Indizes..."
+
+msgid "Enough Retries, delaying till next schedule."
+msgstr "Genug Wiederholungen, die sich bis zum nächsten Zeitplan verzögern."
+
+msgid "Every 12 hours"
+msgstr "Alle 12 Stunden"
+
+msgid "Every 2 hours"
+msgstr "Alle 2 Stunden"
+
+msgid "Every 2 minutes (for testing)"
+msgstr "Alle 2 Minuten (zum Testen)"
+
+msgid "Every 3 hours"
+msgstr "Alle 3 Stunden"
+
+msgid "Every 5 minutes (for testing)"
+msgstr "Alle 5 Minuten (zum Testen)"
+
+msgid "Every 6 hours"
+msgstr "Alle 6 Stunden"
+
+msgid "Every hour"
+msgstr "Jede Stunde"
+
+msgid "Exit"
+msgstr "Beenden"
+
+msgid "Fetch channels from the server."
+msgstr "Kanäle vom Server abholen."
+
+msgid "For importing bouquets from another receiver"
+msgstr "Für den Import von Listen von einem anderen Empfänger"
+
+msgid "Force EPG save on remote receiver"
+msgstr "Force EPG speichern auf entfernten Empfänger"
+
+msgid "Import"
+msgstr "Importieren"
+
+msgid "Loading epg.dat..."
+msgstr "Laden EPG. dat..."
+
+msgid "Loading new channel list..."
+msgstr "Neue Kanalliste laden..."
+
+msgid "Main menu"
+msgstr "Hauptmenü"
+
+msgid "Really close without saving settings?"
+msgstr "Wirklich schließen, ohne Einstellungen zu speichern?"
+
+msgid "Removing current channel list..."
+msgstr "Entfernen der aktuellen Kanalliste..."
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Searching for epg.dat"
+msgstr "Suche nach EPG. dat"
+
+msgid "Service searching"
+msgstr "Service Suche"
+
+msgid "Setup"
+msgstr "Setup"
+
+msgid "Starting importer"
+msgstr "Start Importeur"
+
+msgid "Starting importer..."
+msgstr "Start Importeur..."
+
+msgid "epg.dat not found"
+msgstr "EPG. dat nicht gefunden"
+
+msgid ""
+"'yes' and remote fallback tuner will be automatically configured to stream "
+"from the remote receiver. 'no' and fallback will not be edited."
+msgstr ""
+"\"Ja\" und ein entfernter fallback Tuner werden automatisch konfiguriert, "
+"um vom entfernten Empfänger zu streamen. \"Nein\" und fallback werden nicht "
+"bearbeitet."
+
+msgid "Allows you to set a schedule to perform an import."
+msgstr ""
+"Ermöglicht es Ihnen, einen Zeitplan für die Durchführung eines Imports zu "
+"setzen."
+
+msgid "Auto configure remote fallback tuner"
+msgstr "Auto konfigurieren Remote fallback Tuner"
+
+msgid "FTP Password"
+msgstr "FTP-Passwort"
+
+msgid "FTP Port"
+msgstr "FTP Port"
+
+msgid "FTP Username"
+msgstr "FTP Benutzer"
+
+msgid ""
+"FTP password of the remote receiver the channel list is being imported from."
+msgstr ""
+"FTP-Passwort des entfernten Empfängers wird die Kanalliste importiert."
+
+msgid ""
+"FTP port of the remote receiver the channel list is being imported from."
+msgstr "FTP Port des entfernten Empfängers wird die Kanalliste importiert."
+
+msgid ""
+"FTP username of the remote receiver the channel list is being imported from."
+msgstr ""
+"FTP Benutzername des entfernten Empfängers wird die Kanalliste importiert."
+
+msgid ""
+"IP address of the remote receiver the channel list is  being imported from."
+msgstr "IP-Adresse des entfernten Empfängers die Kanalliste  wird importiert."
+
+msgid ""
+"If 'yes' the importer will automatically import and load EPG data from the "
+"remote receiver if the file exists."
+msgstr ""
+"Wenn \"Ja\" der Importeur EPG Daten automatisch aus dem entfernten "
+"Empfänger importiert und lädt, wenn die Datei existiert."
+
+msgid "If 'yes' the importer will automatically run at startup or reboot."
+msgstr ""
+"Wenn \"Ja\" wird, läuft der Importeur automatisch beim Start oder Neustart."
+
+msgid "Import EPG"
+msgstr "Import EPG"
+
+msgid "Passive mode"
+msgstr "Passiver Modus"
+
+msgid "Push error messages to the screen. Switch on for debugging only."
+msgstr ""
+"Drücken Sie Fehlermeldungen auf den Bildschirm. Schalten Sie nur für "
+"Debugging ein."
+
+msgid "Remote receiver IP"
+msgstr "Remote Receiver IP"
+
+msgid "Repeat how often"
+msgstr "Wiederholen, wie oft"
+
+msgid "Run at restart"
+msgstr "Start beim Neustart"
+
+msgid "Schedule import"
+msgstr "Arbeitsplan importieren"
+
+msgid "Set the repeat interval of the schedule."
+msgstr "Stellen Sie das Wiederholungsintervall des Zeitplans ein."
+
+msgid "Set the time of day to perform the scan."
+msgstr "Stellen Sie die Tageszeit ein, um den Scan durchzuführen."
+
+msgid ""
+"Should the FTP connection to the remote receiver be established in passive "
+"mode?"
+msgstr ""
+"Sollte die FTP Verbindung zum Remote Receiver im passiven Modus hergestellt "
+"werden?"
+
+msgid "Show error messages"
+msgstr "Fehlermeldungen anzeigen"
+
+msgid "Show in extensions"
+msgstr "Anzeige in Erweiterungen"
+
+msgid "Time import should start"
+msgstr "Zeit Import Start"
+
+msgid "When enabled, allows you start an import from the extensions list."
+msgstr ""
+"Wenn Sie aktiviert sind, können Sie einen Import aus der Erweiterungsliste "
+"starten."
