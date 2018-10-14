@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2018-10-10 23:31+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: de_DE\n"
+
+msgid "1 minute"
+msgstr "1 Minute"
+
+msgid "10 minutes"
+msgstr "10 Minuten"
+
+msgid "2 minutes"
+msgstr "2 Minuten"
+
+msgid "20 minutes"
+msgstr "20 Minuten"
+
+msgid "3 minutes"
+msgstr "3 Minuten"
+
+msgid "30 minutes"
+msgstr "30 Minuten"
+
+msgid "5 minutes"
+msgstr "5 Minuten"
+
+msgid "ABM CustomMix"
+msgstr "ABM CustomMix"
+
+msgid "ABM CustomMix Importer"
+msgstr "ABM CustomMix Importeur"
+
+msgid "Channels importer"
+msgstr "Kanäle Importeur"
+
+msgid "Delete file"
+msgstr "Datei löschen"
+
+msgid "Exit"
+msgstr "Beenden"
+
+msgid "Fetch file"
+msgstr "Datei abholen"
+
+msgid "Fetching from github"
+msgstr "Abholung von GitHub"
+
+msgid "File fetched and saved OK"
+msgstr "Datei abgeholt und gespeichert OK"
+
+msgid "Main menu"
+msgstr "Hauptmenü"
+
+msgid "Really close without saving settings?"
+msgstr "Wirklich schließen, ohne Einstellungen zu speichern?"
+
+msgid "Save setup"
+msgstr "Setup speichern"
+
+msgid "Saving CustomMix file"
+msgstr "CustomMix Datei speichern"
+
+msgid "Service searching"
+msgstr "Service Suche"
+
+msgid "Setup"
+msgstr "Setup"
+
+msgid "Starting importer..."
+msgstr "Start Importeur..."
+
+msgid "Allows you automatically fetch the CustomMix file."
+msgstr "Ermöglicht es Ihnen, automatisch die CustomMix-Datei zu holen."
+
+msgid "Enable autofetch"
+msgstr "Autofetch aktivieren"
+
+msgid "Import"
+msgstr "Importieren"
+
+msgid "Lead time"
+msgstr "Vorlaufzeit"
+
+msgid ""
+"Number of minutes prior to the ABM scan that the CustomMix file should be "
+"fetched"
+msgstr ""
+"Anzahl der Minuten vor dem ABM-Scan, dass die CustomMix-Datei abgeholt "
+"werden soll"
+
+msgid "Select the CustomMix you want to import"
+msgstr "Wählen Sie den CustomMix, den Sie importieren möchten"
