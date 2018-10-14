@@ -5,4 +5,4 @@ required oe-alliance plugins
 
 # TODO
 
-German translation
+German translation (in progress)
