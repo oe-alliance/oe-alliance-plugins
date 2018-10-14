@@ -7,115 +7,113 @@ msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:44+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2018-10-14 15:28+0200\n"
+"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: ViX <LL@li.org>\n"
-"Language: nl_DE\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "1.0 Mbps"
-msgstr ""
+msgstr "1.0 Mbps"
 
 msgid "1.2 Mbps"
-msgstr ""
+msgstr "1.2 Mbps"
 
 msgid "1.5 Mbps"
-msgstr ""
+msgstr "1.5 Mbps"
 
 msgid "100 kbps"
-msgstr ""
+msgstr "100 kbps"
 
 msgid "160x120"
-msgstr ""
+msgstr "160x120"
 
 msgid "16x9"
-msgstr ""
+msgstr "16x9"
 
 msgid "2.0 Mbps"
-msgstr ""
+msgstr "2.0 Mbps"
 
 msgid "2.5 Mbps"
-msgstr ""
+msgstr "2.5 Mbps"
 
 msgid "23.976 fps"
-msgstr ""
+msgstr "23.976 fps"
 
 msgid "24 fps"
-msgstr ""
+msgstr "24 fps"
 
 msgid "25 fps"
-msgstr ""
+msgstr "25 fps"
 
 msgid "3.0 Mbps"
-msgstr ""
+msgstr "3.0 Mbps"
 
 msgid "3.5 Mbps"
-msgstr ""
+msgstr "3.5 Mbps"
 
 msgid "30 fps"
-msgstr ""
+msgstr "30 fps"
 
 msgid "300 kbps"
-msgstr ""
+msgstr "300 kbps"
 
 msgid "320x240"
-msgstr ""
+msgstr "320x240"
 
 msgid "4.0 Mbps"
-msgstr ""
+msgstr "4.0 Mbps"
 
 msgid "480p"
-msgstr ""
+msgstr "480p"
 
 msgid "4x3"
-msgstr ""
+msgstr "4x3"
 
 msgid "5.0 Mbps"
-msgstr ""
+msgstr "5.0 Mbps"
 
 msgid "500 kbps"
-msgstr ""
+msgstr "500 kbps"
 
 msgid "576p"
-msgstr ""
+msgstr "576p"
 
 msgid "720p"
-msgstr ""
+msgstr "720p"
 
 msgid "800 kbps"
-msgstr ""
+msgstr "800 kbps"
 
 msgid "Aspect Ratio"
 msgstr "Seitenverhältnis"
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "Bitrate in bits"
-msgstr ""
+msgstr "Bitrate in bits"
 
-#, fuzzy
 msgid "Encoder Aspect Ratio"
-msgstr "Seitenverhältnis"
+msgstr "Encoder-SeitenVerhältnis"
 
 msgid "Encoder Bitrate"
-msgstr ""
+msgstr "Encoder Bitrate"
 
-#, fuzzy
 msgid "Encoder Framerate"
-msgstr "Wiederholrate"
+msgstr "Encoder Framerate"
 
 msgid "Encoder Interlaced"
-msgstr ""
+msgstr "Encoder Interlaced"
 
-#, fuzzy
 msgid "Encoder Resolution"
-msgstr "Auflösung"
+msgstr "Encoder Auflösung"
 
 msgid "Exit"
 msgstr "Abbrechen"
@@ -124,19 +122,19 @@ msgid "Framerate"
 msgstr "Wiederholrate"
 
 msgid "H.264"
-msgstr ""
+msgstr "H.264"
 
 msgid "H.265"
-msgstr ""
+msgstr "H.265"
 
 msgid "Interlaced"
-msgstr ""
+msgstr "Interlaced"
 
 msgid "Max"
-msgstr "Max."
+msgstr "Max"
 
 msgid "Min"
-msgstr "Min."
+msgstr "Min"
 
 msgid "Multi device transcoding setup"
 msgstr "Einstellungen Multi-Geräte-Transcoding"
@@ -157,7 +155,7 @@ msgid "Save"
 msgstr "Speichern"
 
 msgid "Setup your timezone."
-msgstr ""
+msgstr "Ihre Zeitzone einrichten."
 
 msgid "This model does not support transcoding."
 msgstr "Dieses Modell unterstützt kein Transcoding."
@@ -180,7 +178,7 @@ msgstr ""
 "\n"
 
 msgid "Video codec"
-msgstr ""
+msgstr "Video codec"
 
 msgid "Yes"
 msgstr "Ja"
