@@ -431,7 +431,9 @@ class Blindscan(ConfigListScreen, Screen):
 			(1, _("up to 1 degree")),
 			(2, _("up to 2 degrees")),
 			(3, _("up to 3 degrees"))])
-
+		self.search_type = ConfigSelection(default = 0, choices = [
+			(0, _("scan for channels")),
+			(1, _("scan for transponders"))])
 
 		# collect all nims which are *not* set to "nothing"
 		nim_list = []
@@ -519,6 +521,8 @@ class Blindscan(ConfigListScreen, Screen):
 		if nim.canBeCompatible("DVB-S"):
 			self.satelliteEntry = getConfigListEntry(_('Satellite'), self.scan_satselection[self.getSelectedSatIndex(index_to_scan)],_('Select the satellite you wish to search'))
 			self.list.append(self.satelliteEntry)
+			self.searchtypeEntry = getConfigListEntry(_("Search type"), self.search_type,_('"channel scan" searches for channels and saves them to your receiver; "transponder scan" does a transponder search and displays the results allowing user to select some or all transponder. Both options save the results in satellites.xml format under /tmp'))
+			self.list.append(self.searchtypeEntry)
 			self.SatBandCheck()
 			if self.is_c_band_scan:
 				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_C_band_start_frequency,_('Frequency values must be between 3000 MHz and 4199 MHz (C-band)')))
@@ -1156,10 +1160,10 @@ class Blindscan(ConfigListScreen, Screen):
 				for p in self.tmp_tplist:
 					print "[Blindscan][blindscanSessionClose] data: [%d][%d][%d][%d][%d][%d][%d][%d][%d][%d]" % (p.orbital_position, p.polarisation, p.frequency, p.symbol_rate, p.system, p.inversion, p.pilot, p.fec, p.modulation, p.modulation)
 
-					pol = { p.Polarisation_Horizontal : "H KHz",
-						p.Polarisation_CircularRight : "R KHz",
-						p.Polarisation_CircularLeft : "L KHz",
-						p.Polarisation_Vertical : "V KHz"}
+					pol = { p.Polarisation_Horizontal : "H",
+						p.Polarisation_CircularRight : "R",
+						p.Polarisation_CircularLeft : "L",
+						p.Polarisation_Vertical : "V"}
 					fec = { p.FEC_Auto : "Auto",
 						p.FEC_1_2 : "1/2",
 						p.FEC_2_3 : "2/3",
@@ -1177,12 +1181,19 @@ class Blindscan(ConfigListScreen, Screen):
 						p.Modulation_8PSK : "8PSK",
 						p.Modulation_16APSK : "16APSK",
 						p.Modulation_32APSK : "32APSK"}
-					tp_str = "%d%s SR%d FEC %s %s %s" % (p.frequency, pol[p.polarisation], p.symbol_rate/1000, fec[p.fec], sys[p.system], qam[p.modulation])
+					tp_str = "%g%s %d FEC %s %s %s" % (p.frequency/1000.0, pol[p.polarisation], p.symbol_rate/1000, fec[p.fec], sys[p.system], qam[p.modulation])
+					if p.is_id > eDVBFrontendParametersSatellite.No_Stream_Id_Filter:
+						tp_str += " MIS %d" % p.is_id
+					if p.pls_code > 0:
+						tp_str += " PLS Gold %d" % p.pls_code
 					blindscanStateList.append((tp_str, p))
 
 				runtime = int(time() - self.start_time)
 				xml_location = self.createSatellitesXMLfile(self.tmp_tplist, XML_BLINDSCAN_DIR)
-				self.session.openWithCallback(self.startScan, BlindscanState, _("Search completed\n%d transponders found in %d:%02d minutes.\nDetails saved in: %s") % (len(self.tmp_tplist), runtime / 60, runtime % 60, xml_location), "", blindscanStateList, True)
+				if self.search_type.value == 0: # Do a service scan
+					self.startScan(True, self.tmp_tplist)
+				else: # Display results
+					self.session.openWithCallback(self.startScan, BlindscanState, _("Search completed\n%d transponders found in %d:%02d minutes.\nDetails saved in: %s") % (len(self.tmp_tplist), runtime / 60, runtime % 60, xml_location), "", blindscanStateList, True)
 			else:
 				msg = _("No new transponders found! \n\nOnly transponders already listed in satellites.xml \nhave been found for those search parameters!")
 				self.session.openWithCallback(self.callbackNone, MessageBox, msg, MessageBox.TYPE_INFO, timeout=60)
@@ -1385,10 +1396,21 @@ class Blindscan(ConfigListScreen, Screen):
 		xml.append('<satellites>\n')
 		xml.append('	<sat name="%s" flags="0" position="%s">\n' % (self.sat_name.replace('&', '&amp;'), self.orb_position))
 		for tp in tp_list:
-			if tp.is_id != eDVBFrontendParametersSatellite.No_Stream_Id_Filter or tp.pls_code != 0 or tp.pls_mode != eDVBFrontendParametersSatellite.PLS_Gold:
-				xml.append('		<transponder frequency="%d" symbol_rate="%d" polarization="%d" fec_inner="%d" system="%d" modulation="%d" is_id="%d" pls_code="%d" pls_mode="%d" />\n' % (tp.frequency, tp.symbol_rate, tp.polarisation, tp.fec, tp.system, tp.modulation, tp.is_id, tp.pls_code, tp.pls_mode))
-			else:
-				xml.append('		<transponder frequency="%d" symbol_rate="%d" polarization="%d" fec_inner="%d" system="%d" modulation="%d" />\n' % (tp.frequency, tp.symbol_rate, tp.polarisation, tp.fec, tp.system, tp.modulation))
+			tmp_tp = []
+			tmp_tp.append('\t\t<transponder')
+			tmp_tp.append('frequency="%d"' % tp.frequency)
+			tmp_tp.append('symbol_rate="%d"' % tp.symbol_rate)
+			tmp_tp.append('polarization="%d"' % tp.polarisation)
+			tmp_tp.append('fec_inner="%d"' % tp.fec)
+			tmp_tp.append('system="%d"' % tp.system)
+			tmp_tp.append('modulation="%d"' % tp.modulation)
+			if tp.is_id > eDVBFrontendParametersSatellite.No_Stream_Id_Filter:
+				tmp_tp.append('is_id="%d"' % tp.is_id)
+			if tp.pls_code > 0:
+				tmp_tp.append('pls_mode="%d"' % tp.pls_mode)
+				tmp_tp.append('pls_code="%d"' % tp.pls_code)
+			tmp_tp.append('/>\n')
+			xml.append(' '.join(tmp_tp))
 		xml.append('	</sat>\n')
 		xml.append('</satellites>\n')
 		open(location, "w").writelines(xml)
