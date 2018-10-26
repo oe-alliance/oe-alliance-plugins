@@ -751,7 +751,7 @@ class SATIPClient(Screen):
 			for k in sorted(conf):
 				attr.append("%s:%s" % (k, conf[k]))
 
-			data += idx + '=' + ",".join(attr)+"\n"
+			data += str(idx) + '=' + ",".join(attr)+"\n"
 
 		if data:
 			fd = open(SATIP_CONFFILE, 'w')
