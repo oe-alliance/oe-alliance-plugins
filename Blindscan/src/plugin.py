@@ -714,8 +714,6 @@ class Blindscan(ConfigListScreen, Screen):
 			"circular right" : eDVBFrontendParametersSatellite.Polarisation_CircularRight
 		}
 
-		returnvalue = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-
 		if not self.prepareFrontend():
 			print "[Blindscan][prepareScanData] self.prepareFrontend() failed (in prepareScanData)"
 			return False
@@ -727,17 +725,19 @@ class Blindscan(ConfigListScreen, Screen):
 				self.scan_sat.frequency.value = 12515
 			else:
 				self.scan_sat.frequency.value = 11015
-		returnvalue = (self.scan_sat.frequency.value,
-					 0,
-					 tab_pol[pol],
-					 0,
-					 0,
-					 orb[0],
-					 eDVBFrontendParametersSatellite.System_DVB_S,
-					 0,
-					 0,
-					 0)
-		self.tuner.tune(returnvalue)
+
+		self.tuner.tune(
+			(self.scan_sat.frequency.value,
+			0,
+			tab_pol[pol],
+			0,
+			0,
+			orb[0],
+			eDVBFrontendParametersSatellite.System_DVB_S,
+			0,
+			0,
+			0)
+		)
 
 		nim = nimmanager.nim_slots[self.feid]
 		tunername = nim.description
