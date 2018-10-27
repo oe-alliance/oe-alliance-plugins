@@ -714,7 +714,7 @@ class Blindscan(ConfigListScreen, Screen):
 			"circular right" : eDVBFrontendParametersSatellite.Polarisation_CircularRight
 		}
 
-		returnvalue = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 1)
+		returnvalue = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 		if not self.prepareFrontend():
 			print "[Blindscan][prepareScanData] self.prepareFrontend() failed (in prepareScanData)"
@@ -736,7 +736,7 @@ class Blindscan(ConfigListScreen, Screen):
 					 eDVBFrontendParametersSatellite.System_DVB_S,
 					 0,
 					 0,
-					 0, -1, 0, 1)
+					 0)
 		self.tuner.tune(returnvalue)
 
 		nim = nimmanager.nim_slots[self.feid]
@@ -1477,7 +1477,7 @@ class Blindscan(ConfigListScreen, Screen):
 		if len(tps) < 1:
 			return False
 		# freq, sr, pol, fec, inv, orb, sys, mod, roll, pilot
-		transponder = (tps[0][1] / 1000, tps[0][2] / 1000, tps[0][3], tps[0][4], 2, orb_pos, tps[0][5], tps[0][6], tps[0][8], tps[0][9], -1, 0, 1)
+		transponder = (tps[0][1] / 1000, tps[0][2] / 1000, tps[0][3], tps[0][4], 2, orb_pos, tps[0][5], tps[0][6], tps[0][8], tps[0][9])
 		if not self.prepareFrontend():
 			print "[Blindscan][startDishMovingIfRotorSat] self.prepareFrontend() failed"
 			return False
