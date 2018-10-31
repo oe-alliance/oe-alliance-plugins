@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:52+0200\n"
-"PO-Revision-Date: 2017-07-05 15:50+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-07-31 10:20+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -15,100 +15,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:56
-msgid "Channelnumber in Standby off"
-msgstr "Zendernummer in Stand-by uit"
-
-#: ../src/plugin.py:56
-msgid "Channelnumber in Standby Clock"
-msgstr "Zendernummer in Stand-by Klok"
-
-#: ../src/plugin.py:56
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Zendernummer/Klok in Stand-by Klok"
-
-#: ../src/plugin.py:56
-msgid "Clock always"
-msgstr "Klok altijd"
-
-#: ../src/plugin.py:56
 msgid "Always off"
 msgstr "Altijd uit"
 
-#: ../src/plugin.py:249
 msgid "Cancel"
-msgstr "Annuleren"
+msgstr "Annuleer"
 
-#: ../src/plugin.py:250
+msgid "Channelnumber in Standby Clock"
+msgstr "Zendernummer in Stand-by Klok"
+
+msgid "Channelnumber in Standby off"
+msgstr "Zendernummer in Stand-by uit"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Zendernummer/Klok in Stand-by Klok"
+
+msgid "Clock always"
+msgstr "Klok altijd"
+
 msgid "Save"
-msgstr "Opslaan"
+msgstr "Sla op"
 
-#: ../src/plugin.py:251
-msgid "Update Date/Time"
-msgstr "Update Datum/Tjd"
-
-#: ../src/plugin.py:264 ../src/plugin.py:278
 msgid "Show on VFD"
 msgstr "Toon op VFD"
 
-#: ../src/plugin.py:266
 msgid "Time mode"
-msgstr "Tijd modus"
+msgstr "Tijdmodus"
 
-#: ../src/plugin.py:327
+msgid "Update Date/Time"
+msgstr "Update datum/tijd"
+
 msgid "VFD_SF8"
 msgstr "VFD_SF8"
-
-#~ msgid "Blink Record Led"
-#~ msgstr "Opname LED knippert"
-
-#~ msgid "Blue"
-#~ msgstr "Blauw"
-
-#~ msgid "Enable led"
-#~ msgstr "LED ingeschakeld"
-
-#~ msgid "Led state Deep Standby"
-#~ msgstr "LED tijdens Deep Standby"
-
-#~ msgid "Led state RUN"
-#~ msgstr "LED status RUN"
-
-#~ msgid "Led state Record"
-#~ msgstr "LED status Opname"
-
-#~ msgid "Led state Standby"
-#~ msgstr "LED status Stand-by"
-
-#~ msgid "No"
-#~ msgstr "Nee"
-
-#~ msgid "None"
-#~ msgstr "Geen"
-
-#~ msgid "Off"
-#~ msgstr "Uit"
-
-#~ msgid "Purple"
-#~ msgstr "Paars"
-
-#~ msgid "Red"
-#~ msgstr "Rood"
-
-#~ msgid "Show clock"
-#~ msgstr "Toon klok"
-
-#~ msgid "Show clock in Deep Standby"
-#~ msgstr "Toon klok in Deep Standby"
-
-#~ msgid "VFD_Giga"
-#~ msgstr "VFD_Giga"
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "in standby: "
-#~ msgstr "in standby: "

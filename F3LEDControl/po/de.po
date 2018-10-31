@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:15+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-03-18 19:04+0100\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -14,55 +14,50 @@ msgstr ""
 "X-Generator: Poedit 1.8.12\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:24
-msgid "Channelnumber in Standby off"
-msgstr "Kanalnummer / im Standby aus"
+msgid "15 sec"
+msgstr ""
 
-#: ../src/plugin.py:24
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanalnummer / Uhr im Standby"
+msgid "30 sec"
+msgstr ""
 
-#: ../src/plugin.py:24
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanalnummer/Uhr / Uhr im Standby"
+msgid "45 sec"
+msgstr ""
 
-#: ../src/plugin.py:24
-msgid "Clock always"
-msgstr "Immer Uhr"
+msgid "60 sec"
+msgstr ""
 
-#: ../src/plugin.py:24
 msgid "Always off"
 msgstr "Immer aus"
 
-#: ../src/plugin.py:175 ../src/plugin.py:263 ../src/plugin.py:270
-msgid "LED Display Setup"
-msgstr "LED Display Einstellungen"
-
-#: ../src/plugin.py:185
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../src/plugin.py:186
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalnummer / Uhr im Standby"
+
+msgid "Channelnumber in Standby off"
+msgstr "Kanalnummer / im Standby aus"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanalnummer/Uhr / Uhr im Standby"
+
+msgid "Clock always"
+msgstr "Immer Uhr"
+
+msgid "LED Display Setup"
+msgstr "LED Display Einstellungen"
+
 msgid "Save"
 msgstr "Speichern"
 
-#: ../src/plugin.py:187
-msgid "Update Date/Time"
-msgstr "Datum/Uhrzeit aktuallisieren"
-
-#: ../src/plugin.py:200 ../src/plugin.py:214
 msgid "Show on LED"
 msgstr "Displayanzeige"
+
+msgid "Time mode"
+msgstr "Zeit Modus"
 
 msgid "Time to show Clock in Display"
 msgstr "Zeit wie lange die Uhrzeit im Display angezeigt wird"
 
-#: ../src/plugin.py:202
-msgid "Time mode"
-msgstr "Zeit Modus"
-
-#~ msgid "On/Off"
-#~ msgstr "An/Aus"
-
-#~ msgid "Brightness level"
-#~ msgstr "Helligkeitsstufe"
+msgid "Update Date/Time"
+msgstr "Datum/Uhrzeit aktuallisieren"

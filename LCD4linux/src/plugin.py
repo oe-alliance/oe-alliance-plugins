@@ -14,13 +14,13 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V5.0-r1"
+Version = "V5.0-r3"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
 from enigma import ePicLoad, ePixmap
 
-from boxbranding import getImageDistro, getBoxType
+from boxbranding import getImageDistro, getDisplayType
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
@@ -165,20 +165,20 @@ L4LdoThread = True
 LCD4config = "/etc/enigma2/lcd4config"
 LCD4plugin ="/usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/"
 Data = LCD4plugin+"data/"
-if getBoxType() in ('gbquad','gb800ue','gb800ueplus','gbultraue','gbultraueh','gbue4k'):
-	LCD4default = Data+"default.gigablue"
-elif getBoxType() in ('gbquadplus','gbquad4k'):
-	LCD4default = Data+"default.quadplus"
-elif getBoxType() == 'vuduo2':
-	LCD4default = Data+"default.vuduo2"
-elif getBoxType() == 'et8500':
-	LCD4default = Data+"default.et8500"
-elif getBoxType() == 'vusolo4k':
-	LCD4default = Data+"default.solo4k"
-elif getBoxType() == 'vuultimo4k':
-	LCD4default = Data+"default.ultimo4k"
-elif getBoxType() in ('mutant2400','quadbox2400'):
-	LCD4default = Data+"default.hd2400"
+if getDisplayType() in ('colorlcd220'):
+	LCD4default = Data+"default.colorlcd220"
+elif getDisplayType() in ('colorlcd400'):
+	LCD4default = Data+"default.colorlcd400"
+elif getDisplayType() in ('bwlcd140'):
+	LCD4default = Data+"default.bwlcd140"
+elif getDisplayType() in ('colorlcd720'):
+	LCD4default = Data+"default.colorlcd720"
+elif getDisplayType() in ('colorlcd480'):
+	LCD4default = Data+"default.colorlcd480"
+elif getDisplayType() in ('colorlcd800'):
+	LCD4default = Data+"default.colorlcd800"
+elif getDisplayType() in ('bwlcd255'):
+	LCD4default = Data+"default.bwlcd255"
 else:
 	LCD4default = Data+"default.lcd"
 WetterPath = LCD4plugin+"wetter/"
@@ -1666,6 +1666,7 @@ LCD4linux.MPCoverLCD = ConfigSelection(choices = LCDSelect, default="1")
 LCD4linux.MPCoverPath1 = ConfigText(default="/tmp", fixed_size=False, visible_width=50)
 LCD4linux.MPCoverPath2 = ConfigText(default="/tmp", fixed_size=False, visible_width=50)
 LCD4linux.MPCoverFile = ConfigText(default="/tmp/lcd4linux.jpg", fixed_size=False, visible_width=50)
+LCD4linux.MPCoverFile2 = ConfigText(default="/tmp/lcd4linux.jpg", fixed_size=False, visible_width=50)
 LCD4linux.MPCoverSize = ConfigSlider(default = 240,  increment = 10, limits = (10, 1024))
 LCD4linux.MPCoverSizeH = ConfigSlider(default = 400,  increment = 10, limits = (10, 800))
 LCD4linux.MPCoverPos = ConfigSlider(default = 0,  increment = 2, limits = (0, 1024))
@@ -2524,6 +2525,8 @@ def ICSdownloads():
 	global ICSlist
 	global ICSdownrun
 	global PICcal
+	from icalendar import vDatetime
+
 	def dateiter(start, resolution):
 		date = start
 		while True:
@@ -2553,7 +2556,8 @@ def ICSdownloads():
 				if Icomp[4] == (0,0):
 					dateT = date(DT.year,DT.month,DT.day)
 				else:
-					dateT = DT
+					DT = DT - timedelta(hours=getTimeDiffUTC())
+					dateT = vDatetime.from_ical("%04d%02d%02dT%02d%02d00Z" % (DT.year,DT.month,DT.day,DT.hour,DT.minute))
 				if Icomp[6] == 0:
 					dateS = Code_utf8(Icomp[1])
 				else:
@@ -6715,6 +6719,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				self.list3.append(getConfigListEntry(_("- Alignment"), LCD4linux.MPCoverAlign))
 				self.list3.append(getConfigListEntry(_("- Search Path [ok]>"), LCD4linux.MPCoverPath1))
 				self.list3.append(getConfigListEntry(_("- Search Path [ok]>"), LCD4linux.MPCoverPath2))
+				self.list3.append(getConfigListEntry(_("- Find Cover File [ok]>"), LCD4linux.MPCoverFile2))
 				self.list3.append(getConfigListEntry(_("- Default Cover [ok]>"), LCD4linux.MPCoverFile))
 				self.list3.append(getConfigListEntry(_("- Picon First"), LCD4linux.MPCoverPiconFirst))
 				self.list3.append(getConfigListEntry(_("- Transparency"), LCD4linux.MPCoverTransp))
@@ -7452,7 +7457,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			elif sel in [LCD4linux.LCDBild1, LCD4linux.LCDBild2, LCD4linux.MPLCDBild1, LCD4linux.MPLCDBild2, LCD4linux.StandbyLCDBild1, LCD4linux.StandbyLCDBild2, LCD4linux.FritzFrame]:
 				L4log("select File 1")
 				self.session.openWithCallback(self.fileSelected, LCDdisplayFile, text = _("Choose file"), FileName = self["config"].getCurrent()[1].value, showFiles = True)
-			elif sel in [LCD4linux.OSCAMFile, LCD4linux.TextFile, LCD4linux.Text2File, LCD4linux.Text3File, LCD4linux.MPTextFile, LCD4linux.MPCoverFile, LCD4linux.BildFile, LCD4linux.Bild2File, LCD4linux.Bild3File, LCD4linux.Bild4File, LCD4linux.RecordingPath]:
+			elif sel in [LCD4linux.OSCAMFile, LCD4linux.TextFile, LCD4linux.Text2File, LCD4linux.Text3File, LCD4linux.MPTextFile, LCD4linux.MPCoverFile, LCD4linux.MPCoverFile2, LCD4linux.BildFile, LCD4linux.Bild2File, LCD4linux.Bild3File, LCD4linux.Bild4File, LCD4linux.RecordingPath]:
 				L4log("select File 2")
 				self.session.openWithCallback(self.fileSelected, LCDdisplayFile, text = _("Choose file"), FileName = self["config"].getCurrent()[1].value, showFiles = True)
 			elif sel in [LCD4linux.Font, LCD4linux.Font1, LCD4linux.Font2, LCD4linux.Font3, LCD4linux.Font4, LCD4linux.Font5]:
@@ -7535,6 +7540,8 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 				LCD4linux.MPTextFile.value = dirdir
 			elif sel == LCD4linux.MPCoverFile:
 				LCD4linux.MPCoverFile.value = dirdir
+			elif sel == LCD4linux.MPCoverFile2:
+				LCD4linux.MPCoverFile2.value = dirdir
 			elif sel == LCD4linux.BildFile:
 				LCD4linux.BildFile.value = dirdir
 			elif sel == LCD4linux.Bild2File:
@@ -8170,7 +8177,7 @@ class UpdateStatus(Screen):
 #				else:	
 #					cti = {u'current_transport_status': 'OK', u'current_transport_state': 'STOPPED', u'current_transport_speed': '1'}
 				self.SonosInfo = cti.get("current_transport_state","STOPPED")
-				if self.SonosInfo != "PLAYING":
+				if self.SonosInfo != "PLAYING" or self.SonosSoCo.is_playing_tv:
 					if self.SonosRunning:
 						self.SonosTrack = {}
 						self.SonosSoCo = None
@@ -8185,6 +8192,7 @@ class UpdateStatus(Screen):
 					if self.SonosRunning == False:
 						self.SonosSoCo = None
 					self.SonosRunning = True
+					isMediaPlayer = "sonos"
 					L4log("Sonos running",self.SonosTrack)
 					self.SonosTimer.startLongTimer(int(LCD4linux.SonosTimer.value))
 					self.restartTimer()
@@ -8194,7 +8202,7 @@ class UpdateStatus(Screen):
 				L4log("Sonos Communikation Error")
 				from traceback import format_exc
 				L4log("Error:",format_exc() )
-			L4log("Sonos RunTime: %.3f" % (time()-tt))
+			L4logE("Sonos RunTime: %.3f" % (time()-tt))
 
 	def getYMCast(self):
 		global isMediaPlayer
@@ -8237,7 +8245,8 @@ class UpdateStatus(Screen):
 					if self.YMCastRunning == False:
 						self.YMCastSoCo = None
 					self.YMCastRunning = True
-					L4log("YMC running",self.SonosTrack)
+					isMediaPlayer = "ymc"
+					L4log("YMC running",self.YMCastInfo)
 					self.YMCastTimer.startLongTimer(int(LCD4linux.YMCastTimer.value))
 					self.restartTimer()
 			except:
@@ -8246,7 +8255,7 @@ class UpdateStatus(Screen):
 				L4log("YMC Communikation Error")
 				from traceback import format_exc
 				L4log("Error:",format_exc() )
-			L4log("YMC RunTime: %.3f" % (time()-tt))
+			L4logE("YMC RunTime: %.3f" % (time()-tt))
 
 	def getNetatmo(self):
 		if self.NetatmoOK == True:
@@ -10172,6 +10181,8 @@ def LCD4linuxPIC(self,session):
 					L4log("Title Error",Title)
 			if cover=="" and os.path.isfile("/tmp/.cover"):
 				cover = "/tmp/.cover"
+			if cover=="" and os.path.isfile(LCD4linux.MPCoverFile2.value):
+				cover = LCD4linux.MPCoverFile2.value
 			if cover=="" and LCD4linux.MPCoverPiconFirst.value == True:
 				if WebRadioFSok == True and os.path.isfile(self.l4l_info.get("Logo","")):
 					cover = self.l4l_info.get("Logo","")
@@ -11721,7 +11732,7 @@ def LCD4linuxPIC(self,session):
 						MinusProgress = (w+10)
 						ShadowText(draw,ProgressBar-MinusProgress+15+POSX, ConfigPos+1-Minus-int((h-ConfigSize)/2),remaining,font,ConfigColorText,ConfigShadow)
 						ShadowText(draw,POSX+10, ConfigPos+1-Minus-int((h-ConfigSize)/2),remaining1,font,ConfigColorText,ConfigShadow)
-					event_run = int(ProgressBar*event_run/duration)
+					event_run = 0 if duration == 0 else int(ProgressBar*event_run/duration)
 					isData = True
 #					print event_begin, event_end, event.getDuration(), event.getPlayPosition()
 			if isData == True and ConfigBorder is not "off":
@@ -12134,15 +12145,22 @@ def LCD4linuxPIC(self,session):
 				i += " %d%s" % (self.LbitErrorRate,NL(ConfigLines))
 #			print "%d" % (feinfo.getFrontendInfo(iFrontendInformation.signalPower))
 		if "T" in ConfigInfo:
-			m1 = 0
 			if os.path.exists("/proc/stb/sensors"):
+				m1 = 0
 				for dirname in os.listdir("/proc/stb/sensors"):
 					if dirname.find("temp", 0, 4) == 0:
 						if os.path.isfile("/proc/stb/sensors/%s/value" % dirname) == True:
 							tt = SensorRead("/proc/stb/sensors/%s/value" % dirname)
 							if m1 < tt:
 								m1 = tt
-			i += " %d\xb0C%s" % (m1,NL(ConfigLines))
+				if m1 != 0:
+					i += " %d\xb0C%s" % (m1,NL(ConfigLines))
+			if os.path.isfile("/sys/class/thermal/thermal_zone0/temp"):
+				try:
+					line = open("/sys/class/thermal/thermal_zone0/temp").readline().strip()
+					i += " %.1f\xb0C%s" % (int(line)/1000.0,NL(ConfigLines))
+				except:
+					L4logE("Error read Temp")
 		if "R" in ConfigInfo:
 			if os.path.isfile("/proc/stb/fp/fan_speed"):
 				value = SensorRead("/proc/stb/fp/fan_speed")
@@ -14718,6 +14736,7 @@ def Plugins(**kwargs):
 	where = PluginDescriptor.WHERE_PLUGINMENU,
 	fnc = main,
 	icon = "plugin.png"))
+
 	list.append(PluginDescriptor(name=_("LCD4linux Screen Switch"), 
 	description=_("LCD4linux Screen Switch"), 
 	where = PluginDescriptor.WHERE_EXTENSIONSMENU,

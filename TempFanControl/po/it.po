@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:06+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:06+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
@@ -16,47 +16,35 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
-#: ../src/plugin.py:99 ../src/plugin.py:191
-msgid "Fan Control"
-msgstr ""
-
 #
-#: ../src/plugin.py:106
 msgid "Cancel"
 msgstr "Annull."
 
-#
-#: ../src/plugin.py:107
-msgid "OK"
-msgstr "Ok"
-
-#: ../src/plugin.py:136
-#, python-format
-msgid "Fan %d voltage"
-msgstr ""
-
-#: ../src/plugin.py:137
 #, python-format
 msgid "Fan %d PWM"
 msgstr "PWM ventola %d"
 
-#: ../src/plugin.py:139
 #, python-format
-msgid "Standby fan %d voltage"
+msgid "Fan %d voltage"
 msgstr ""
 
-#: ../src/plugin.py:140
+msgid "Fan Control"
+msgstr ""
+
+#
+msgid "OK"
+msgstr "Ok"
+
 #, python-format
 msgid "Standby fan %d PWM"
 msgstr ""
 
-#: ../src/plugin.py:186
-msgid "Temperature and fan control"
+#, python-format
+msgid "Standby fan %d voltage"
 msgstr ""
 
-#: ../src/plugin.py:191
 msgid "Temperature and Fan control"
 msgstr ""
 
-#~ msgid "Standby Fan %d PWM"
-#~ msgstr "PWM standby ventola %d"
+msgid "Temperature and fan control"
+msgstr ""

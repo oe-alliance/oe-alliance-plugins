@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ims\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:51+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:51+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: jerry00 <jerry00@quick.cz>\n"
@@ -11,52 +11,40 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:56
-msgid "Channelnumber in Standby off"
-msgstr ""
-
-#: ../src/plugin.py:56
-msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:56
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:56
-msgid "Clock always"
-msgstr ""
-
-#: ../src/plugin.py:56
 msgid "Always off"
 msgstr ""
 
 #
-#: ../src/plugin.py:249
 msgid "Cancel"
 msgstr "Zavřít"
 
+msgid "Channelnumber in Standby Clock"
+msgstr ""
+
+msgid "Channelnumber in Standby off"
+msgstr ""
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+msgid "Clock always"
+msgstr ""
+
 #
-#: ../src/plugin.py:250
 msgid "Save"
 msgstr "Uložit"
 
-#: ../src/plugin.py:251
-msgid "Update Date/Time"
-msgstr ""
-
-#: ../src/plugin.py:264 ../src/plugin.py:278
 msgid "Show on VFD"
 msgstr ""
 
-#: ../src/plugin.py:266
 msgid "Time mode"
 msgstr ""
 
-#: ../src/plugin.py:327
+msgid "Update Date/Time"
+msgstr ""
+
 msgid "VFD_SF8"
 msgstr ""

@@ -1,129 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ChannelsImporter -  oe-alliance\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 2.0.2\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: ..\n"
 
-# ChannelsImporter.py
-msgid "Channels importer"
-msgstr ""
-
-msgid "Starting importer"
-msgstr ""
-
-msgid "Starting importer..."
-msgstr ""
-
-msgid "Checking FTP connection to remote receiver"
-msgstr ""
-
-msgid "Could not connect to the remote IP"
-msgstr ""
-
-msgid "Connection to remote IP ok"
-msgstr ""
-
-msgid "Downloading channel indexes..."
+msgid "%a %e %b  %-H:%M"
 msgstr ""
 
 #, python-format
 msgid "%d/%d"
 msgstr ""
 
-#, python-format
-msgid "Download from remote failed %s"
+msgid "Channels importer"
 msgstr ""
 
-msgid "Downloading bouquets..."
+msgid "ChannelsImporter"
+msgstr ""
+
+msgid "Checking FTP connection to remote receiver"
 msgstr ""
 
 msgid "Checking for alternatives..."
 msgstr ""
 
-msgid "Downloading alternatives..."
+msgid "Connection to remote IP ok"
 msgstr ""
 
-msgid "Removing current channel list..."
+msgid "Could not connect to the remote IP"
 msgstr ""
 
-msgid "Loading new channel list..."
+msgid "Daily"
 msgstr ""
 
-msgid "Force EPG save on remote receiver"
+#, python-format
+msgid ""
+"Download epg.dat from remote receiver failed. Check file exists on remote receiver.\n"
+"%s"
 msgstr ""
 
-msgid "Searching for epg.dat"
+#, python-format
+msgid "Download from remote failed %s"
 msgstr ""
 
 #, python-format
 msgid "Download settings from remote failed %s"
 msgstr ""
 
-msgid "epg.dat not found"
+msgid "Downloading alternatives..."
 msgstr ""
 
-#, python-format
-msgid "Download epg.dat from remote receiver failed. Check file exists on remote receiver.\n"
-"%s"
+msgid "Downloading bouquets..."
 msgstr ""
 
-msgid "Loading epg.dat..."
+msgid "Downloading channel indexes..."
 msgstr ""
 
-# plugin.py
-msgid "Daily"
+msgid "Enough Retries, delaying till next schedule."
 msgstr ""
 
 msgid "Every 12 hours"
 msgstr ""
 
-msgid "Every 6 hours"
-msgstr ""
-
-msgid "Every 3 hours"
-msgstr ""
-
 msgid "Every 2 hours"
-msgstr ""
-
-msgid "Every hour"
-msgstr ""
-
-msgid "Every 5 minutes (for testing)"
 msgstr ""
 
 msgid "Every 2 minutes (for testing)"
 msgstr ""
 
+msgid "Every 3 hours"
+msgstr ""
+
+msgid "Every 5 minutes (for testing)"
+msgstr ""
+
+msgid "Every 6 hours"
+msgstr ""
+
+msgid "Every hour"
+msgstr ""
+
 msgid "Exit"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Import"
-msgstr ""
-
-msgid "Really close without saving settings?"
-msgstr ""
-
-msgid "Main menu"
-msgstr ""
-
-msgid "Setup"
-msgstr ""
-
-msgid "Service searching"
 msgstr ""
 
 msgid "Fetch channels from the server."
@@ -132,92 +101,122 @@ msgstr ""
 msgid "For importing bouquets from another receiver"
 msgstr ""
 
-# scheduler.py
-msgid "Your channels list is about to be updated,\n"
-"Do you want to allow this?"
+msgid "Force EPG save on remote receiver"
 msgstr ""
 
-msgid "Enough Retries, delaying till next schedule."
+msgid "Import"
 msgstr ""
 
-msgid "%a %e %b  %-H:%M"
+msgid "Loading epg.dat..."
 msgstr ""
 
-# setup.xml
-msgid "Remote receiver IP"
+msgid "Loading new channel list..."
 msgstr ""
 
-msgid "IP address of the remote receiver the channel list is  being imported from."
+msgid "Main menu"
 msgstr ""
 
-msgid "FTP Username"
+msgid "Really close without saving settings?"
 msgstr ""
 
-msgid "FTP username of the remote receiver the channel list is being imported from."
+msgid "Removing current channel list..."
 msgstr ""
 
-msgid "FTP Password"
+msgid "Save"
 msgstr ""
 
-msgid "FTP password of the remote receiver the channel list is being imported from."
+msgid "Searching for epg.dat"
 msgstr ""
 
-msgid "FTP Port"
+msgid "Service searching"
 msgstr ""
 
-msgid "FTP port of the remote receiver the channel list is being imported from."
+msgid "Setup"
 msgstr ""
 
-msgid "Passive mode"
+msgid "Starting importer"
 msgstr ""
 
-msgid "Should the FTP connection to the remote receiver be established in passive mode?"
+msgid "Starting importer..."
 msgstr ""
 
-msgid "Import EPG"
-msgstr ""
-
-msgid "If 'yes' the importer will automatically import and load EPG data from the remote receiver if the file exists."
-msgstr ""
-
-msgid "Run at restart"
-msgstr ""
-
-msgid "If 'yes' the importer will automatically run at startup or reboot."
-msgstr ""
-
-msgid "Show in extensions"
-msgstr ""
-
-msgid "When enabled, allows you start an import from the extensions list."
-msgstr ""
-
-msgid "Auto configure remote fallback tuner"
+msgid "epg.dat not found"
 msgstr ""
 
 msgid "'yes' and remote fallback tuner will be automatically configured to stream from the remote receiver. 'no' and fallback will not be edited."
 msgstr ""
 
-msgid "Schedule import"
+msgid "Allows you to set a schedule to perform an import."
 msgstr ""
 
-msgid "Allows you to set a schedule to perform an import."
+msgid "Auto configure remote fallback tuner"
+msgstr ""
+
+msgid "FTP Password"
+msgstr ""
+
+msgid "FTP Port"
+msgstr ""
+
+msgid "FTP Username"
+msgstr ""
+
+msgid "FTP password of the remote receiver the channel list is being imported from."
+msgstr ""
+
+msgid "FTP port of the remote receiver the channel list is being imported from."
+msgstr ""
+
+msgid "FTP username of the remote receiver the channel list is being imported from."
+msgstr ""
+
+msgid "IP address of the remote receiver the channel list is  being imported from."
+msgstr ""
+
+msgid "If 'yes' the importer will automatically import and load EPG data from the remote receiver if the file exists."
+msgstr ""
+
+msgid "If 'yes' the importer will automatically run at startup or reboot."
+msgstr ""
+
+msgid "Import EPG"
+msgstr ""
+
+msgid "Passive mode"
+msgstr ""
+
+msgid "Push error messages to the screen. Switch on for debugging only."
+msgstr ""
+
+msgid "Remote receiver IP"
 msgstr ""
 
 msgid "Repeat how often"
 msgstr ""
 
-msgid "Set the repeat interval of the schedule."
+msgid "Run at restart"
 msgstr ""
 
-msgid "Time import should start"
+msgid "Schedule import"
+msgstr ""
+
+msgid "Set the repeat interval of the schedule."
 msgstr ""
 
 msgid "Set the time of day to perform the scan."
 msgstr ""
 
+msgid "Should the FTP connection to the remote receiver be established in passive mode?"
+msgstr ""
+
 msgid "Show error messages"
 msgstr ""
 
-msgid "Push error messages to the screen. Switch on for debugging only."
+msgid "Show in extensions"
+msgstr ""
+
+msgid "Time import should start"
+msgstr ""
+
+msgid "When enabled, allows you start an import from the extensions list."
 msgstr ""

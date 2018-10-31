@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 18:07+0300\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-05 18:10+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -16,46 +16,50 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../src/plugin.py:24
-msgid "Channelnumber in Standby off"
-msgstr "Kanalo numeris išjungus budėjimą"
+msgid "15 sec"
+msgstr ""
 
-#: ../src/plugin.py:24
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanalo numeris budėjimo metu"
+msgid "30 sec"
+msgstr ""
 
-#: ../src/plugin.py:24
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanalo numeris/Laikrodis budėjimo metu"
+msgid "45 sec"
+msgstr ""
 
-#: ../src/plugin.py:24
-msgid "Clock always"
-msgstr "Laikrodis pastoviai"
+msgid "60 sec"
+msgstr ""
 
-#: ../src/plugin.py:24
 msgid "Always off"
 msgstr "Visada išjungtas"
 
-#: ../src/plugin.py:175 ../src/plugin.py:263 ../src/plugin.py:270
-msgid "LED Display Setup"
-msgstr "LED ekrano sąranka"
-
-#: ../src/plugin.py:185
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: ../src/plugin.py:186
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalo numeris budėjimo metu"
+
+msgid "Channelnumber in Standby off"
+msgstr "Kanalo numeris išjungus budėjimą"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanalo numeris/Laikrodis budėjimo metu"
+
+msgid "Clock always"
+msgstr "Laikrodis pastoviai"
+
+msgid "LED Display Setup"
+msgstr "LED ekrano sąranka"
+
 msgid "Save"
 msgstr "Išsaugoti"
 
-#: ../src/plugin.py:187
-msgid "Update Date/Time"
-msgstr "Atnaujinti datą ir laiką"
-
-#: ../src/plugin.py:200 ../src/plugin.py:214
 msgid "Show on LED"
 msgstr "Rodyti LED ekrane"
 
-#: ../src/plugin.py:202
 msgid "Time mode"
 msgstr "Laiko režimas"
+
+msgid "Time to show Clock in Display"
+msgstr ""
+
+msgid "Update Date/Time"
+msgstr "Atnaujinti datą ir laiką"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:53+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:53+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: CÜNEYT OCAKLILAR <ocaklilar@gmail.com>\n"
@@ -17,48 +17,37 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Bookmarks: 2450,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
-#: ../src/plugin.py:56
-msgid "Channelnumber in Standby off"
-msgstr ""
-
-#: ../src/plugin.py:56
-msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:56
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
-
-#: ../src/plugin.py:56
-msgid "Clock always"
-msgstr ""
-
-#: ../src/plugin.py:56
 msgid "Always off"
 msgstr ""
 
 #
-#: ../src/plugin.py:249
 msgid "Cancel"
 msgstr "İptal"
 
+msgid "Channelnumber in Standby Clock"
+msgstr ""
+
+msgid "Channelnumber in Standby off"
+msgstr ""
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+msgid "Clock always"
+msgstr ""
+
 #
-#: ../src/plugin.py:250
 msgid "Save"
 msgstr "Kaydet"
 
-#: ../src/plugin.py:251
-msgid "Update Date/Time"
-msgstr ""
-
-#: ../src/plugin.py:264 ../src/plugin.py:278
 msgid "Show on VFD"
 msgstr ""
 
-#: ../src/plugin.py:266
 msgid "Time mode"
 msgstr ""
 
-#: ../src/plugin.py:327
+msgid "Update Date/Time"
+msgstr ""
+
 msgid "VFD_SF8"
 msgstr ""

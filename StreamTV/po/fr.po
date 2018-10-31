@@ -1,0 +1,38 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2018-07-31 10:54+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+msgid "No"
+msgstr "Non"
+
+msgid "Stop playing this stream?"
+msgstr "Arrêter de jouer ce flux ?"
+
+msgid "StreamTVPlayer"
+msgstr ""
+
+msgid ""
+"This plugin need internet connection. Please plug in ethernet cable and try "
+"again!"
+msgstr ""
+"Ce plugin nécessite une connexion internet. Veuillez brancher le câble "
+"Ethernet et réessayer !"
+
+msgid "Yes"
+msgstr "Oui"

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:02+0200\n"
-"PO-Revision-Date: 2016-05-07 14:02+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-07-30 22:29+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,45 +11,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:118
+msgid "Always off"
+msgstr "Toujours éteinte"
+
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../src/plugin.py:131
-msgid "Enable led"
-msgstr ""
+msgid "Channelname in Standby Clock"
+msgstr "Nom du canal dans l'horloge de veille"
 
-#: ../src/plugin.py:134
-msgid "Led state RUN"
-msgstr ""
+msgid "Channelname in Standby off"
+msgstr "Nom du canal en veille désactivé"
 
-#: ../src/plugin.py:136
-msgid "Led state Record"
-msgstr ""
+msgid "Channelnumber in Standby Clock"
+msgstr "Numéro de canal dans l'horloge de veille"
 
-#: ../src/plugin.py:135
-msgid "Led state Standby"
-msgstr ""
+msgid "Channelnumber in Standby off"
+msgstr "Numéro de canal en veille éteint"
 
-#: ../src/plugin.py:119
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Numéro de Canal/Horloge dans l’horloge de veille"
+
+msgid "Clock always"
+msgstr "Horloge toujours"
+
+msgid "LED Display Setup"
+msgstr "Configuration de l'affichage LED"
+
+msgid "Off"
+msgstr "Désactivé"
+
+msgid "Record only"
+msgstr "Enregistrement seulement"
+
 msgid "Save"
 msgstr "Sauver"
 
-#: ../src/plugin.py:140
-msgid "Show clock"
-msgstr ""
+msgid "Show green LED on VFD"
+msgstr "Afficher la LED verte sur le VFD"
 
-#: ../src/plugin.py:142
+msgid "Show on VFD"
+msgstr "Afficher sur VFD"
+
+msgid "Show red LED on VFD"
+msgstr "Afficher la LED rouge sur le VFD"
+
+msgid "Standby only"
+msgstr "Seulement en veille"
+
 msgid "Time mode"
-msgstr ""
+msgstr "Mode heure"
 
-#: ../src/plugin.py:120
 msgid "Update Date/Time"
-msgstr ""
-
-#: ../src/plugin.py:218
-msgid "VFD_Giga"
-msgstr ""
+msgstr "Mise-à-jour Date/Heure"

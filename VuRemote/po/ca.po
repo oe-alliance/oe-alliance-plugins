@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:20+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:20+0200\n"
 "Last-Translator: JR (openspateam@gmail.com)\n"
 "Language-Team: \n"
@@ -15,70 +15,49 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: plugin.py:64 plugin.py:164 plugin.py:171
-msgid "Remote Control Code"
-msgstr "Codi comandament"
+#, python-format
+msgid " in %d seconds."
+msgstr " en %d segons."
 
-#: plugin.py:75
 msgid "Cancel"
 msgstr "Cancel·lar"
 
-#: plugin.py:76
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr "L'arxiu /proc/stb/fp/remote_code no existeix"
+
+msgid "Keep"
+msgstr "OK"
+
+msgid "Please change your remote mode"
+msgstr "Per a canviar el mode del comandament"
+
+msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+msgstr "Prem i deixa premuts '2' y '7' fins que el led roig es quedi fixe, llavors prem 'Help' i després prem '000"
+
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
+msgstr "Prem y i deixa premuts <OK> i <STB> fins que el LED roig es quedi fixe, llavors prem '0000"
+
+msgid "Remote Control Code"
+msgstr "Codi comandament"
+
+msgid "Remote Control System Code"
+msgstr "Sistema del comandament"
+
+msgid "Remote Control Type"
+msgstr "Tipus comandament"
+
+msgid "Restore"
+msgstr "Restaurar"
+
 msgid "Save"
 msgstr "Guardar"
 
-#: plugin.py:87
 #, python-format
 msgid "Sorry, but %s is not supported."
 msgstr "Ho sentim, però %s no està suportat."
 
-#: plugin.py:91
-msgid "Remote Control Type"
-msgstr "Tipus comandament"
-
-#: plugin.py:92
-msgid "Remote Control System Code"
-msgstr "Sistema del comandament"
-
-#: plugin.py:96
 msgid "Text support"
 msgstr "Text de suport"
 
-#: plugin.py:108
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr "L'arxiu /proc/stb/fp/remote_code no existeix"
-
-#: plugin.py:111 plugin.py:113
-msgid "Please change your remote mode"
-msgstr "Per a canviar el mode del comandament"
-
-#: plugin.py:111
-msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
-msgstr "Prem y i deixa premuts <OK> i <STB> fins que el LED roig es quedi fixe, llavors prem '0000"
-
-#: plugin.py:111
-msgid "', then press <OK>\n"
-msgstr "', llavor prem <OK>\n"
-
-#: plugin.py:111 plugin.py:113
 msgid "Then choose 'Keep' within seconds"
 msgstr "A continuació premi 'OK'"
-
-#: plugin.py:113
-msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
-msgstr ""
-"Prem i deixa premuts '2' y '7' fins que el led roig es quedi fixe, llavors prem 'Help' i després "
-"prem '000"
-
-#: plugin.py:134
-msgid "Keep"
-msgstr "OK"
-
-#: plugin.py:134
-msgid "Restore"
-msgstr "Restaurar"
-
-#: plugin.py:140
-#, python-format
-msgid " in %d seconds."
-msgstr " en %d segons."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:26+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:26+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -14,137 +14,96 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:28
-msgid "Channelnumber in Standby off"
-msgstr "Kanalnummer im Standby aus"
-
-#: ../src/plugin.py:28
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanalnummer im Standby Uhr"
-
-#: ../src/plugin.py:28
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanalnummer/Uhr im Standby Uhr"
-
-#: ../src/plugin.py:28
-msgid "Clock always"
-msgstr "Uhr immer anzeigen"
-
-#: ../src/plugin.py:28
 msgid "Always off"
 msgstr "Immer aus"
 
-#: ../src/plugin.py:29 ../src/plugin.py:30
-msgid "No"
-msgstr "Nein"
-
-#: ../src/plugin.py:29 ../src/plugin.py:30
-msgid "Yes"
-msgstr "Ja"
-
-#: ../src/plugin.py:33
-msgid "None"
-msgstr "Keine"
-
-#: ../src/plugin.py:33
-msgid "Blue"
-msgstr "Blau"
-
-#: ../src/plugin.py:33
-msgid "Red"
-msgstr "Rot"
-
-#: ../src/plugin.py:33
-msgid "Purple"
-msgstr "Violett"
-
-#: ../src/plugin.py:369
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: ../src/plugin.py:370
-msgid "Save"
-msgstr "Speichern"
-
-#: ../src/plugin.py:374
-msgid "Update Date/Time"
-msgstr "Datum/Uhrzeit aktuallisieren"
-
-#: ../src/plugin.py:387 ../src/plugin.py:421
-msgid "Enable led"
-msgstr "Led aktivieren"
-
-#: ../src/plugin.py:389
-msgid "Led state RUN"
-msgstr "Led-Farbe wenn Eingeschaltet"
-
-#: ../src/plugin.py:390
-msgid "Led state Standby"
-msgstr "Led-Farbe im Standby"
-
-#: ../src/plugin.py:392
-msgid "Led state Deep Standby"
-msgstr "Led-Farbe im Deepstandby"
-
-#: ../src/plugin.py:393
-msgid "Led state Record"
-msgstr "Led-Farbe bei Aufnahme"
-
-#: ../src/plugin.py:394
 msgid "Blink Record Led"
 msgstr "Blinkende Aufnahme-Led"
 
-#: ../src/plugin.py:395
-msgid "Led state HDD /dev/sda active"
-msgstr "Led-Farbe wenn HDD /dev/sda aktiv ist"
+msgid "Blue"
+msgstr "Blau"
 
-#: ../src/plugin.py:396
-msgid "Led state HDD /dev/sdb active"
-msgstr "Led-Farbe wenn HDD /dev/sdb aktiv ist"
-
-#: ../src/plugin.py:402 ../src/plugin.py:429
 msgid "Brightness"
 msgstr "Helligkeit"
 
-#: ../src/plugin.py:403 ../src/plugin.py:431
 msgid "Brightness Standby"
 msgstr "Helligkeit im Standby"
 
-#: ../src/plugin.py:405 ../src/plugin.py:425
-msgid "Show on VFD"
-msgstr "Im VFD anzeigen"
+msgid "Cancel"
+msgstr "Abbrechen"
 
-#: ../src/plugin.py:406 ../src/plugin.py:427
-msgid "Show clock in Deep Standby"
-msgstr "Zeige Uhr im Deep Standby"
-
-#: ../src/plugin.py:408
-msgid "Time mode"
-msgstr "Zeit Modus"
-
-#: ../src/plugin.py:409
 msgid "Channel number with leading zeros"
 msgstr "Kanalnummer mit führenden Nullen"
 
-#: ../src/plugin.py:489 ../src/plugin.py:491 ../src/plugin.py:504
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalnummer im Standby Uhr"
+
+msgid "Channelnumber in Standby off"
+msgstr "Kanalnummer im Standby aus"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanalnummer/Uhr im Standby Uhr"
+
+msgid "Clock always"
+msgstr "Uhr immer anzeigen"
+
 msgid "Display/LED"
 msgstr ""
 
-#: ../src/plugin.py:493 ../src/plugin.py:506
+msgid "Enable led"
+msgstr "Led aktivieren"
+
 msgid "LED"
 msgstr ""
 
-#~ msgid "Giga LED Setup"
-#~ msgstr "Giga LED-Einstellungen"
+#, fuzzy
+msgid "Led Deep Standby"
+msgstr "Led-Farbe im Deepstandby"
 
-#~ msgid "VFD_Giga"
-#~ msgstr "VFD-Giga"
+msgid "Led state Deep Standby"
+msgstr "Led-Farbe im Deepstandby"
 
-#~ msgid "Off"
-#~ msgstr "Aus"
+msgid "Led state HDD /dev/sda active"
+msgstr "Led-Farbe wenn HDD /dev/sda aktiv ist"
 
-#~ msgid "Show clock"
-#~ msgstr "Zeige Uhr"
+msgid "Led state HDD /dev/sdb active"
+msgstr "Led-Farbe wenn HDD /dev/sdb aktiv ist"
 
-#~ msgid "in standby: "
-#~ msgstr "in Standby: "
+msgid "Led state RUN"
+msgstr "Led-Farbe wenn Eingeschaltet"
+
+msgid "Led state Record"
+msgstr "Led-Farbe bei Aufnahme"
+
+msgid "Led state Standby"
+msgstr "Led-Farbe im Standby"
+
+msgid "No"
+msgstr "Nein"
+
+msgid "None"
+msgstr "Keine"
+
+msgid "Purple"
+msgstr "Violett"
+
+msgid "Red"
+msgstr "Rot"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Show clock in Deep Standby"
+msgstr "Zeige Uhr im Deep Standby"
+
+msgid "Show on VFD"
+msgstr "Im VFD anzeigen"
+
+msgid "Time mode"
+msgstr "Zeit Modus"
+
+msgid "Update Date/Time"
+msgstr "Datum/Uhrzeit aktuallisieren"
+
+msgid "Yes"
+msgstr "Ja"

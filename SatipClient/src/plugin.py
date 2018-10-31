@@ -38,6 +38,7 @@ def getVtunerList():
 	for x in glob.glob('/dev/misc/vtuner*'):
 		x = x.strip('/dev/misc/vtuner')
 		data.append(x)
+	data = [int(x) for x in data]
 	data.sort()
 	return data
 
@@ -569,7 +570,7 @@ class SATIPClient(Screen):
 				<convert type="TemplatedMultiContent">
 				{"templates":
 					{"default": (68,[
-							MultiContentEntryText(pos = (20, 0), size = (180, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0),
+							MultiContentEntryText(pos = (20, 0), size = (200, 28), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0),
 							MultiContentEntryText(pos = (50, 28), size = (140, 20), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 1),
 							MultiContentEntryText(pos = (210, 28), size = (140, 20), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 2),
 							MultiContentEntryText(pos = (370, 28), size = (140, 20), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 3),
@@ -750,7 +751,7 @@ class SATIPClient(Screen):
 			for k in sorted(conf):
 				attr.append("%s:%s" % (k, conf[k]))
 
-			data += idx + '=' + ",".join(attr)+"\n"
+			data += str(idx) + '=' + ",".join(attr)+"\n"
 
 		if data:
 			fd = open(SATIP_CONFFILE, 'w')

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openATV-TempFanControl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:06+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:06+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: rafalcool/Mariusz1970 <rafalcool@op.pl>\n"
@@ -10,53 +10,37 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../src/plugin.py:99 ../src/plugin.py:191
-msgid "Fan Control"
-msgstr "Kontrola Wentylatora"
-
-#: ../src/plugin.py:106
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: ../src/plugin.py:107
-msgid "OK"
-msgstr "OK"
-
-#: ../src/plugin.py:136
-#, python-format
-msgid "Fan %d voltage"
-msgstr ""
-
-#: ../src/plugin.py:137
 #, python-format
 msgid "Fan %d PWM"
 msgstr "Wentyl. %d PWM"
 
-#: ../src/plugin.py:139
 #, python-format
-msgid "Standby fan %d voltage"
+msgid "Fan %d voltage"
 msgstr ""
 
-#: ../src/plugin.py:140
+msgid "Fan Control"
+msgstr "Kontrola Wentylatora"
+
+msgid "OK"
+msgstr "OK"
+
 #, python-format
 msgid "Standby fan %d PWM"
 msgstr "Wentyl.w Czuwaniu %d PWM"
 
-#: ../src/plugin.py:186
-msgid "Temperature and fan control"
-msgstr "Temp.i Kontrola Wentylatora"
+#, python-format
+msgid "Standby fan %d voltage"
+msgstr ""
 
-#: ../src/plugin.py:191
 msgid "Temperature and Fan control"
 msgstr ""
 
-#~ msgid "Fan control"
-#~ msgstr "Kontrola wentylatora"
-
-#~ msgid "Standby Fan %d PWM"
-#~ msgstr "Wentyl.w Czuwaniu %d PWM"
+msgid "Temperature and fan control"
+msgstr "Temp.i Kontrola Wentylatora"

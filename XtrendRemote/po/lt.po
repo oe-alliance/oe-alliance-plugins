@@ -2,87 +2,69 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XtrendRemote - oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 09:12+0300\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-06 09:14+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:12
-msgid "OdinM9"
-msgstr "OdinM9"
-
-#: ../src/plugin.py:12
-msgid "ET9000/ET9100"
-msgstr "ET9000/ET9100"
-
-#: ../src/plugin.py:12
-msgid "DMM/DMM ADV"
-msgstr "DMM/DMM ADV"
-
-#: ../src/plugin.py:12
-msgid "ET5000/ET6000"
-msgstr "ET5000/ET6000"
-
-#: ../src/plugin.py:12
-msgid "Vu"
-msgstr "Vu+"
-
-#: ../src/plugin.py:12
-msgid "ET6500/ET9500"
-msgstr "ET6500/ET9500"
-
-#: ../src/plugin.py:12
-msgid "ET9200/ET9500"
-msgstr "ET9200/ET9500"
-
-#: ../src/plugin.py:12
-msgid "ET4000"
-msgstr "ET4000"
-
-#: ../src/plugin.py:12
-msgid "XP1000"
-msgstr "XP1000"
-
-#: ../src/plugin.py:12
-msgid "HD1100"
-msgstr "HD1100"
-
-#: ../src/plugin.py:12
-msgid "XP3000"
-msgstr "XP3000"
-
-#: ../src/plugin.py:12
-msgid "F1/F3"
-msgstr "F1/F3"
-
-#: ../src/plugin.py:12
-msgid "HD2400"
-msgstr "HD2400"
-
-#: ../src/plugin.py:66
-msgid "OK"
-msgstr "Gerai"
-
-#: ../src/plugin.py:67
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: ../src/plugin.py:90
-msgid "Remote"
-msgstr "Nuotolinis"
+msgid "DMM/DMM ADV"
+msgstr "DMM/DMM ADV"
 
-#: ../src/plugin.py:101
+msgid "ET4000"
+msgstr "ET4000"
+
+msgid "ET5000/ET6000"
+msgstr "ET5000/ET6000"
+
+msgid "ET6500/ET9500"
+msgstr "ET6500/ET9500"
+
+msgid "ET9000/ET9100"
+msgstr "ET9000/ET9100"
+
+msgid "ET9200/ET9500"
+msgstr "ET9200/ET9500"
+
+msgid "F1/F3"
+msgstr "F1/F3"
+
+msgid "HD1100"
+msgstr "HD1100"
+
+msgid "HD2400"
+msgstr "HD2400"
+
 msgid "Is this remote ok?"
 msgstr "Ar šis nuotolinis pultas tiks?"
 
-#: ../src/plugin.py:187 ../src/plugin.py:194
+msgid "OK"
+msgstr "Gerai"
+
+msgid "OdinM9"
+msgstr "OdinM9"
+
+msgid "Remote"
+msgstr "Nuotolinis"
+
 msgid "Remote Control Code"
 msgstr "Nuotolinio valdymo pulto kodas"
+
+msgid "Vu"
+msgstr "Vu+"
+
+msgid "XP1000"
+msgstr "XP1000"
+
+msgid "XP3000"
+msgstr "XP3000"

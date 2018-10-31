@@ -1,109 +1,90 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DLNABrowser\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: \n"
+"Last-Translator: nunigaia\n"
 "Language-Team: BH Team\n"
+"Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
 "X-Poedit-Basepath: ..\n"
-"Last-Translator: nunigaia\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: pt_PT\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/plugin.py:150
-msgid "Show Device"
-msgstr "Mostrar o dispositivo"
-
-#: src/plugin.py:151
-msgid "Add all"
-msgstr "Adicionar todos"
-
-#: src/plugin.py:152
-msgid "Up"
-msgstr "Cima"
-
-#: src/plugin.py:153
-msgid "Top"
-msgstr "Topo"
-
-#: src/plugin.py:350
-msgid "/"
-msgstr "/"
-
-#: src/plugin.py:389
-msgid "Yes"
-msgstr "Sim"
-
-#: src/plugin.py:389
-msgid "No"
-msgstr "Não"
-
-#: src/plugin.py:390
-msgid "Stop playing this movie?"
-msgstr "Parar a reprodução deste filme?"
-
-#: src/plugin.py:468
-msgid "Please wait, Loading image."
-msgstr "Por favor aguarde, a carregar imagem."
-
-#: src/plugin.py:702 src/plugin.py:813
-msgid "Exit"
-msgstr "Sair"
-
-#: src/plugin.py:703
-msgid "Save"
-msgstr "Salvar"
-
-#: src/plugin.py:704 src/plugin.py:705
 msgid " "
 msgstr " "
 
-#: src/plugin.py:722 src/plugin.py:723
-msgid "5"
-msgstr "5"
+msgid "/"
+msgstr "/"
 
-#: src/plugin.py:722 src/plugin.py:723
 msgid "10"
 msgstr "10"
 
-#: src/plugin.py:722 src/plugin.py:723
 msgid "15"
 msgstr "15"
 
-#: src/plugin.py:723
 msgid "20"
 msgstr "20"
 
-#: src/plugin.py:726
+msgid "5"
+msgstr "5"
+
+msgid "Add all"
+msgstr "Adicionar todos"
+
+msgid "DLNA/uPnP Browser"
+msgstr "Explorador DLNA/uPnP"
+
 msgid "DeviceList Refresh Interval"
 msgstr "Intervalo de atualização da Lista de Dispositivos"
 
-#: src/plugin.py:727
-msgid "Slideshow Interval"
-msgstr "Intervalo do slideshow"
-
-#: src/plugin.py:728
 msgid "Enable Autostart for DLNA Browser"
 msgstr "Ativar AutoIniciar para navegador DLNA"
 
-#: src/plugin.py:814
-msgid "Start"
-msgstr "Iniciar"
+msgid "Exit"
+msgstr "Sair"
 
-#: src/plugin.py:815
-msgid "Setting"
-msgstr "Definição"
+msgid "No"
+msgstr "Não"
 
-#: src/plugin.py:816
+msgid "Please wait, Loading image."
+msgstr "Por favor aguarde, a carregar imagem."
+
 msgid "Reload Device"
 msgstr "Recarregar"
 
-#: src/plugin.py:992
-msgid "DLNA/uPnP Browser"
-msgstr "Explorador DLNA/uPnP"
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Setting"
+msgstr "Definição"
+
+msgid "Show Device"
+msgstr "Mostrar o dispositivo"
+
+msgid "Slideshow Interval"
+msgstr "Intervalo do slideshow"
+
+msgid "Start"
+msgstr "Iniciar"
+
+msgid "Stop playing this movie?"
+msgstr "Parar a reprodução deste filme?"
+
+msgid "This is dlna/upnp client using djmount."
+msgstr ""
+
+msgid "Top"
+msgstr "Topo"
+
+msgid "Up"
+msgstr "Cima"
+
+msgid "Yes"
+msgstr "Sim"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: litvcom\n"
 "Language-Team: \n"
@@ -16,66 +16,47 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: ../src/plugin.py:34 ../src/plugin.py:43 ../src/plugin.py:50
-#: ../src/plugin.py:59 ../src/plugin.py:70
-msgid "FPGA"
-msgstr "ПКВМ"
-
-#: ../src/plugin.py:35 ../src/plugin.py:51 ../src/plugin.py:60
-#: ../src/plugin.py:71
-msgid "Front Processor"
-msgstr "Фронтпроцесор"
-
-#: ../src/plugin.py:61
-msgid "VFD Controller"
-msgstr "ЧРП контролер"
-
-#: ../src/plugin.py:348
-msgid "Can't cancel during upgrade!!"
-msgstr "Не можна скасувати в процесі оновлення!!"
-
-#: ../src/plugin.py:350
-msgid "Status : 0%"
-msgstr "Статус : 0%"
-
-#: ../src/plugin.py:383
-msgid "Fail to upgrade!! Retry!!"
-msgstr "Не вдалось оновити!! Повторіть спробу!!"
-
-#: ../src/plugin.py:385
 #, python-format
 msgid "%d / 100"
 msgstr ""
 
-#: ../src/plugin.py:388
-msgid "Success. Press OK to exit."
-msgstr "Готово. Натисніть кнопку OK, щоб вийти"
+msgid "Can't cancel during upgrade!!"
+msgstr "Не можна скасувати в процесі оновлення!!"
 
-#: ../src/plugin.py:417
-msgid "Do you want to remove binary data?"
-msgstr "Ви хочете видалити бінарні дані?"
-
-#: ../src/plugin.py:435
-msgid "Download"
-msgstr "Завантажити"
-
-#: ../src/plugin.py:476
-msgid "Can't found binary file."
-msgstr "Не вдається знайти бінарний файл"
-
-#: ../src/plugin.py:479
-msgid "Can't found MD5 file."
-msgstr "Не вдається знайти файл MD5"
-
-#: ../src/plugin.py:490 ../src/plugin.py:494
-msgid "You choose the incorrect file. "
-msgstr "Обрано некоректний файл"
-
-#: ../src/plugin.py:498
 msgid "Can't find /usr/bin/md5sum"
 msgstr "Не вдається знайти /usr/bin/md5sum"
 
-#: ../src/plugin.py:505
+msgid "Can't found MD5 file."
+msgstr "Не вдається знайти файл MD5"
+
+msgid "Can't found binary file."
+msgstr "Не вдається знайти бінарний файл"
+
+msgid "Can't found device file!!"
+msgstr "Файл пристрою не знайдено!!"
+
+msgid "Can't found model name."
+msgstr "Не вдається визначити назву моделі"
+
+#
+msgid "Close"
+msgstr "Закрити"
+
+msgid "Do you want to remove binary data?"
+msgstr "Ви хочете видалити бінарні дані?"
+
+msgid "Download"
+msgstr "Завантажити"
+
+msgid "Duo/Solo was not support."
+msgstr "Duo/Solo не підтримуються"
+
+msgid "FPGA"
+msgstr "ПКВМ"
+
+msgid "Fail to upgrade!! Retry!!"
+msgstr "Не вдалось оновити!! Повторіть спробу!!"
+
 #, python-format
 msgid ""
 "Fail to verify data file. \n"
@@ -86,43 +67,35 @@ msgstr ""
 "файл[%s]\n"
 "md5[%s]"
 
-#: ../src/plugin.py:578
-msgid "Firmware does not exist."
-msgstr "Немає прошивки"
-
-#: ../src/plugin.py:617
-msgid "Can't found model name."
-msgstr "Не вдається визначити назву моделі"
-
-#
-#: ../src/plugin.py:689
-msgid "Close"
-msgstr "Закрити"
-
-#: ../src/plugin.py:700
-msgid "Duo/Solo was not support."
-msgstr "Duo/Solo не підтримуються"
-
-#: ../src/plugin.py:702
-msgid "Upgrade"
-msgstr "Оновити"
-
-#: ../src/plugin.py:710
 msgid "Firmware"
 msgstr "Прошивка"
 
-#: ../src/plugin.py:761
-msgid "No selected binary data!!"
-msgstr "Бінарні дані не вибрані!!"
-
-#: ../src/plugin.py:768
-msgid "Can't found device file!!"
-msgstr "Файл пристрою не знайдено!!"
-
-#: ../src/plugin.py:855
 msgid "Firmware Upgrade"
 msgstr "Оновлення прошивки"
 
-#: ../src/plugin.py:855
+msgid "Firmware does not exist."
+msgstr "Немає прошивки"
+
+msgid "Front Processor"
+msgstr "Фронтпроцесор"
+
+msgid "No selected binary data!!"
+msgstr "Бінарні дані не вибрані!!"
+
+msgid "Status : 0%"
+msgstr "Статус : 0%"
+
+msgid "Success. Press OK to exit."
+msgstr "Готово. Натисніть кнопку OK, щоб вийти"
+
+msgid "Upgrade"
+msgstr "Оновити"
+
 msgid "Upgrade Firmware.."
 msgstr "Оновлення вбудованого ПЗ"
+
+msgid "VFD Controller"
+msgstr "ЧРП контролер"
+
+msgid "You choose the incorrect file. "
+msgstr "Обрано некоректний файл"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:20+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:20+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: AndyBlac/TimoJ\n"
@@ -15,66 +15,54 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
-msgid "Remote Control Code"
-msgstr "Kaukosäätimen koodi"
-
-#
-#: ../src/plugin.py:68
-msgid "Cancel"
-msgstr "Peruuta"
-
-#
-#: ../src/plugin.py:69
-msgid "Save"
-msgstr "Tallenna"
-
-#: ../src/plugin.py:80
-#, python-format
-msgid "Sorry, but %s is not supported."
-msgstr ""
-
-#: ../src/plugin.py:84
-msgid "Remote Control System Code"
-msgstr "Kaukosäätimen järjestelmäkoodi"
-
-#: ../src/plugin.py:87
-msgid "Text support"
-msgstr "Tekstin tuki"
-
-#: ../src/plugin.py:99
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr "TIEDOSTOA EI LÖYDY : /proc/stb/fp/remote_code"
-
-#: ../src/plugin.py:101
-msgid "Please change your remote mode"
-msgstr "Vaihda kaukosäätimen lähetyskoodi"
-
-#: ../src/plugin.py:101
-msgid ""
-"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
-"press '000"
-msgstr ""
-"Paina ja pidä '2' ja '7' näppäimiä pohjassa kunnes punainen valo palaa "
-"jatkuvasti, paina sitten 'Help' ja sitten '000"
-
-#: ../src/plugin.py:101
-msgid "Then choose 'Keep' within seconds"
-msgstr "Valitse sitten 'Käytä' ennen aikalaskurin loppumista"
-
-#: ../src/plugin.py:122
-msgid "Keep"
-msgstr "Käytä"
-
-#
-#: ../src/plugin.py:122
-msgid "Restore"
-msgstr "Palauta"
-
-#: ../src/plugin.py:128
 #, python-format
 msgid " in %d seconds."
 msgstr ""
 
-#~ msgid "This Plugin only supports"
-#~ msgstr "Tämä lisäosa tukee vain  UNO/ULTIMO/Solo2/DUO2"
+#
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr "TIEDOSTOA EI LÖYDY : /proc/stb/fp/remote_code"
+
+msgid "Keep"
+msgstr "Käytä"
+
+msgid "Please change your remote mode"
+msgstr "Vaihda kaukosäätimen lähetyskoodi"
+
+msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+msgstr "Paina ja pidä '2' ja '7' näppäimiä pohjassa kunnes punainen valo palaa jatkuvasti, paina sitten 'Help' ja sitten '000"
+
+#, fuzzy
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
+msgstr "Paina ja pidä '2' ja '7' näppäimiä pohjassa kunnes punainen valo palaa jatkuvasti, paina sitten 'Help' ja sitten '000"
+
+msgid "Remote Control Code"
+msgstr "Kaukosäätimen koodi"
+
+msgid "Remote Control System Code"
+msgstr "Kaukosäätimen järjestelmäkoodi"
+
+#, fuzzy
+msgid "Remote Control Type"
+msgstr "Kaukosäätimen koodi"
+
+#
+msgid "Restore"
+msgstr "Palauta"
+
+#
+msgid "Save"
+msgstr "Tallenna"
+
+#, python-format
+msgid "Sorry, but %s is not supported."
+msgstr ""
+
+msgid "Text support"
+msgstr "Tekstin tuki"
+
+msgid "Then choose 'Keep' within seconds"
+msgstr "Valitse sitten 'Käytä' ennen aikalaskurin loppumista"

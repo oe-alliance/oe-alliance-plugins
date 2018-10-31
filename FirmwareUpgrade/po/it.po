@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FirmwareUpgrade for Enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:20+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-11-29 13:41+0000\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: insanity <www.vuplus-community.net>\n"
@@ -16,29 +16,30 @@ msgstr ""
 "X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-msgid "FPGA"
-msgstr "FPGA"
-
-msgid "Front Processor"
-msgstr "Front Processor"
-
-msgid "VFD Controller"
-msgstr "VFD Controller"
+#, python-format
+msgid "%d / 100"
+msgstr "%d / 100"
 
 msgid "Can't cancel during upgrade!!"
 msgstr "Impossibile annullare durante l'aggiornamento !!"
 
-msgid "Status : 0%"
-msgstr "Stato: 0%"
+msgid "Can't find /usr/bin/md5sum"
+msgstr "Non trovo /usr/bin/md5sum"
 
-msgid "Fail to upgrade!! Retry!!"
-msgstr "Aggiornamento fallito!! Riprova!!"
+msgid "Can't found MD5 file."
+msgstr "Non trovo il file MD5."
 
-msgid "%d / 100"
-msgstr "%d / 100"
+msgid "Can't found binary file."
+msgstr "Non trovo il file binario."
 
-msgid "Success. Press OK to exit."
-msgstr "Concluso con successo. Premere OK per uscire."
+msgid "Can't found device file!!"
+msgstr "Non trovo il file del dispositivo!!"
+
+msgid "Can't found model name."
+msgstr "Non trovo il nome del modello."
+
+msgid "Close"
+msgstr "Chiudere"
 
 msgid "Do you want to remove binary data?"
 msgstr "Si desidera rimuovere dati binari ?"
@@ -46,18 +47,16 @@ msgstr "Si desidera rimuovere dati binari ?"
 msgid "Download"
 msgstr "Download"
 
-msgid "Can't found binary file."
-msgstr "Non trovo il file binario."
+msgid "Duo/Solo was not support."
+msgstr "Duo/Solo non supportati."
 
-msgid "Can't found MD5 file."
-msgstr "Non trovo il file MD5."
+msgid "FPGA"
+msgstr "FPGA"
 
-msgid "You choose the incorrect file. "
-msgstr "Hai scelto il file errato. "
+msgid "Fail to upgrade!! Retry!!"
+msgstr "Aggiornamento fallito!! Riprova!!"
 
-msgid "Can't find /usr/bin/md5sum"
-msgstr "Non trovo /usr/bin/md5sum"
-
+#, python-format
 msgid ""
 "Fail to verify data file. \n"
 "file[%s]\n"
@@ -67,32 +66,35 @@ msgstr ""
 "file[%s]\n"
 "md5[%s]"
 
-msgid "Firmware does not exist."
-msgstr "Firmware non esiste."
-
-msgid "Can't found model name."
-msgstr "Non trovo il nome del modello."
-
-msgid "Close"
-msgstr "Chiudere"
-
-msgid "Duo/Solo was not support."
-msgstr "Duo/Solo non supportati."
-
-msgid "Upgrade"
-msgstr "Aggiornamento"
-
 msgid "Firmware"
 msgstr "Firmware"
-
-msgid "No selected binary data!!"
-msgstr "Non selezionato un dato binario!!"
-
-msgid "Can't found device file!!"
-msgstr "Non trovo il file del dispositivo!!"
 
 msgid "Firmware Upgrade"
 msgstr "Aggiornamento firmware"
 
+msgid "Firmware does not exist."
+msgstr "Firmware non esiste."
+
+msgid "Front Processor"
+msgstr "Front Processor"
+
+msgid "No selected binary data!!"
+msgstr "Non selezionato un dato binario!!"
+
+msgid "Status : 0%"
+msgstr "Stato: 0%"
+
+msgid "Success. Press OK to exit."
+msgstr "Concluso con successo. Premere OK per uscire."
+
+msgid "Upgrade"
+msgstr "Aggiornamento"
+
 msgid "Upgrade Firmware.."
 msgstr "Aggiornamento Firmware.."
+
+msgid "VFD Controller"
+msgstr "VFD Controller"
+
+msgid "You choose the incorrect file. "
+msgstr "Hai scelto il file errato. "

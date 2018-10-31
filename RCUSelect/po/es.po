@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeTek play - RCU Select\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:49+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: OpenSPA <openspa.info>\n"
@@ -14,72 +14,58 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:43
+msgid "AB IPBox 9900/99/55 HD RCU"
+msgstr ""
+
+msgid "Alien1 old RCU"
+msgstr "Alien1 antiguo"
+
+msgid "Alien2/1 RCU"
+msgstr "Alien2/1"
+
 msgid "Apply"
 msgstr "Aplicar"
 
-#: ../src/plugin.py:44
+msgid "Are you sure?"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../src/plugin.py:49 ../src/plugin.py:150 ../src/plugin.py:158
+msgid "GI LX3 RCU"
+msgstr ""
+
+msgid "Gigablue 800 UE Plus RCU"
+msgstr ""
+
+msgid "Mutant HD2400 RCU"
+msgstr "Mutant HD2400"
+
+msgid "Octagon SF8 RCU"
+msgstr "Octagon SF8"
+
 msgid "RCU Select"
 msgstr "Seleccionar mando"
 
-#: ../src/plugin.py:52
+msgid "Technomate Nano RCU"
+msgstr ""
+
 msgid "WeTek Play (Classic) RCU"
 msgstr "WeTek Play Clásico"
 
-#: ../src/plugin.py:53
 msgid "WeTek Play Enigma2 RCU"
 msgstr "WeTek Play Enigma2"
 
 #
-#: ../src/plugin.py:54
 msgid "WeTek Play OpenElec RCU"
 msgstr "WeTek Play OpenElec"
 
-#: ../src/plugin.py:55
-msgid "Alien2/1 RCU"
-msgstr "Alien2/1"
+#, fuzzy
+msgid "WeTek Play2 RCU"
+msgstr "WeTek Play Enigma2"
 
-#: ../src/plugin.py:56
-msgid "Alien1 old RCU"
-msgstr "Alien1 antiguo"
-
-#: ../src/plugin.py:57
-msgid "GI LX3 RCU"
+msgid "Zgemma Star RCU"
 msgstr ""
 
-#: ../src/plugin.py:58
-msgid "Gigablue 800 UE Plus RCU"
-msgstr ""
-
-#: ../src/plugin.py:59
-msgid "Mutant HD2400 RCU"
-msgstr "Mutant HD2400"
-
-#: ../src/plugin.py:60
-msgid "Octagon SF8 RCU"
-msgstr "Octagon SF8"
-
-#: ../src/plugin.py:61
-msgid "Technomate Nano RCU"
-msgstr ""
-
-#: ../src/plugin.py:62
 msgid "xtrend ET10000 RCU"
 msgstr "Xtrend ET10000"
-
-#: ../src/plugin.py:88
-msgid "Are you sure?"
-msgstr ""
-
-#~ msgid "Are you sure !?"
-#~ msgstr "Está seguro/a?"
-
-#~ msgid "RCUSelect"
-#~ msgstr "Seleccionar mando"
-
-#~ msgid "  -  SET"
-#~ msgstr " - Sel."

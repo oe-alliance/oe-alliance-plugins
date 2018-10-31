@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2018-07-30 21:14+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+msgid "* current animation"
+msgstr "* animation courante"
+
+msgid "Animation Setup"
+msgstr "Paramètres animation"
+
+msgid "Animation Speed"
+msgstr "Vitesse de l’animation"
+
+msgid "Animations"
+msgstr "Animations"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Default"
+msgstr "Par défaut"
+
+msgid "Disable Animations"
+msgstr "Désactiver animations"
+
+msgid "Grow drop"
+msgstr "Apparaître du bas"
+
+msgid "Grow from left"
+msgstr "Apparaître de la gauche"
+
+msgid "Popup"
+msgstr "Apparaître"
+
+msgid "Preview"
+msgstr "Aperçu"
+
+msgid "Save"
+msgstr "Sauver"
+
+msgid "Setting"
+msgstr ""
+
+msgid "Simple fade"
+msgstr "Fondu simple"
+
+msgid "Slide drop"
+msgstr "Diapo tombe"
+
+msgid "Slide left to right"
+msgstr "Diapo de gauche à droite"
+
+msgid "Slide top to bottom"
+msgstr "Défiler de haut en bas"
+
+msgid "Stripes"
+msgstr "Bandes"

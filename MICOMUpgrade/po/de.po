@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:42+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:42+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -14,40 +14,33 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:36 ../src/plugin.py:43 ../src/plugin.py:50
-#: ../src/plugin.py:57 ../src/plugin.py:64 ../src/plugin.py:71
-#: ../src/plugin.py:78 ../src/plugin.py:85 ../src/plugin.py:92
-#: ../src/plugin.py:99 ../src/plugin.py:106 ../src/plugin.py:113
-#: ../src/plugin.py:120 ../src/plugin.py:127 ../src/plugin.py:134
-#: ../src/plugin.py:141 ../src/plugin.py:148 ../src/plugin.py:155
-msgid "Front Panel"
-msgstr ""
-
-#: ../src/plugin.py:177
-msgid "Download the firmware (latest)"
-msgstr "Neueste Firmware herunterladen"
-
-#: ../src/plugin.py:178
-msgid "Cancel"
-msgstr ""
-
-#: ../src/plugin.py:221
-msgid "Can't found binary file."
-msgstr "Binärdatei nicht vorhanden."
-
-#: ../src/plugin.py:224
-msgid "Can't found MD5 file."
-msgstr "Datei MD5 nicht vorhanden."
-
-#: ../src/plugin.py:234 ../src/plugin.py:237
-msgid "You chose the incorrect file."
-msgstr "Du hast die falsche Datei gewählt."
-
-#: ../src/plugin.py:241
 msgid "Can't find /usr/bin/md5sum"
 msgstr "Datei /usr/bin/md5sum nicht vorhanden"
 
-#: ../src/plugin.py:248
+msgid "Can't found MD5 file."
+msgstr "Datei MD5 nicht vorhanden."
+
+msgid "Can't found binary file."
+msgstr "Binärdatei nicht vorhanden."
+
+msgid "Can't found device file!!"
+msgstr "Gerätedatei nicht vorhanden!!"
+
+msgid "Can't found model name."
+msgstr "Modellname nicht gefunden."
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "Current version:"
+msgstr ""
+
+msgid "Download the firmware (latest)"
+msgstr "Neueste Firmware herunterladen"
+
 #, python-format
 msgid ""
 "Fail to verify data file. \n"
@@ -58,60 +51,26 @@ msgstr ""
 "Datei[%s]\n"
 "MD5[%s]"
 
-#: ../src/plugin.py:344
-msgid "Can't found model name."
-msgstr "Modellname nicht gefunden."
-
-#: ../src/plugin.py:419
-msgid "Current version:"
+msgid "Front Panel"
 msgstr ""
 
-#: ../src/plugin.py:420
-msgid "New version:"
-msgstr ""
-
-#: ../src/plugin.py:425
-msgid "Close"
-msgstr "Schließen"
-
-#: ../src/plugin.py:436
-msgid "This plugin is supported only the INI-Series."
-msgstr ""
-
-#: ../src/plugin.py:438
-msgid "Upgrade"
-msgstr ""
-
-#: ../src/plugin.py:485
-msgid "No selected binary data!!"
-msgstr "Keine ausgewählten binären Daten!"
-
-#: ../src/plugin.py:492
-msgid "Can't found device file!!"
-msgstr "Gerätedatei nicht vorhanden!!"
-
-#: ../src/plugin.py:517
-msgid "You can not upgrade to the same or lower version !"
-msgstr ""
-
-#: ../src/plugin.py:539
 msgid "Front Panel Update"
 msgstr ""
 
-#~ msgid "Can't cancel during upgrade!!"
-#~ msgstr "Upgrade kann nicht unterbrochen werden!!"
+msgid "New version:"
+msgstr ""
 
-#~ msgid "Do you want to remove binary data?"
-#~ msgstr "Willst Du die Binärdaten löschen?"
+msgid "No selected binary data!!"
+msgstr "Keine ausgewählten binären Daten!"
 
-#~ msgid "Fail to upgrade!! Retry!!"
-#~ msgstr "Upgrade fehlgeschlagen!! Wiederholen!!"
+msgid "This plugin is supported only the INI-Series."
+msgstr ""
 
-#~ msgid "Firmware does not exist."
-#~ msgstr "Firmware nicht vorhanden."
+msgid "Upgrade"
+msgstr ""
 
-#~ msgid "Success. Press OK to exit."
-#~ msgstr "Erfolgreich. Drücke OK zum Verlassen."
+msgid "You can not upgrade to the same or lower version !"
+msgstr ""
 
-#~ msgid "This plugin is supported only the Ultimo/Uno."
-#~ msgstr "Dieses Plugin unterstützt nur UNO/ULTIMO."
+msgid "You chose the incorrect file."
+msgstr "Du hast die falsche Datei gewählt."

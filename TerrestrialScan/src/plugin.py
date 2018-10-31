@@ -12,17 +12,26 @@ from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Screens.ServiceScan import ServiceScan
 
+from Tools.BoundFunction import boundFunction
+
 from enigma import eComponentScan
 
 from TerrestrialScan import TerrestrialScan, setParams
+from MakeBouquet import MakeBouquet
+
+import os
 
 config.plugins.TerrestrialScan = ConfigSubsection()
+config.plugins.TerrestrialScan.networkid_bool = ConfigYesNo(default = False)
 config.plugins.TerrestrialScan.networkid = ConfigInteger(default = 0, limits = (0, 65535))
 config.plugins.TerrestrialScan.clearallservices = ConfigYesNo(default = True)
 config.plugins.TerrestrialScan.onlyfree = ConfigYesNo(default = True)
 config.plugins.TerrestrialScan.uhf_vhf = ConfigSelection(default = 'uhf', choices = [
 			('uhf', _("UHF Europe")),
-			('uhf_vhf', _("UHF/VHF Europe"))])
+			('uhf_vhf', _("UHF/VHF Europe")),
+			('australia', _("Australia"))])
+config.plugins.TerrestrialScan.makebouquet = ConfigYesNo(default = True)
+config.plugins.TerrestrialScan.makexmlfile = ConfigYesNo(default = False)
 
 class TerrestrialScanScreen(ConfigListScreen, Screen):
 	def __init__(self, session):
@@ -52,10 +61,10 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 
 		dvbt_capable_nims = []
 		for nim in nimmanager.nim_slots:
-			if nim.config_mode != "nothing":
+			if self.config_mode(nim) != "nothing":
 				if nim.isCompatible("DVB-T") or (nim.isCompatible("DVB-S") and nim.canBeCompatible("DVB-T")):
 					dvbt_capable_nims.append(nim.slot)
-		
+
 		nim_list = []
 		nim_list.append((-1, _("Automatic")))
 		for x in dvbt_capable_nims:
@@ -69,13 +78,21 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		self.selectionChanged()
 
 	def createSetup(self):
+		indent = "- "
 		setup_list = [
 			getConfigListEntry(_("Tuner"), self.scan_nims,_('Select a tuner that is configured for terrestrial scans. "Automatic" will pick the highest spec available tuner.')),
 			getConfigListEntry(_("Band"), config.plugins.TerrestrialScan.uhf_vhf,_('Most transmitters in European countries only have TV channels in the UHF band.')),
-			getConfigListEntry(_('Network ID'), config.plugins.TerrestrialScan.networkid,_('Select "0" to search all networks, or enter the network ID of the provider you wish to search.')),
 			getConfigListEntry(_("Clear before scan"), config.plugins.TerrestrialScan.clearallservices,_('If you select "yes" all stored terrestrial channels will be deleted before starting the current search.')),
-			getConfigListEntry(_("Only free scan"), config.plugins.TerrestrialScan.onlyfree,_('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels.'))
+			getConfigListEntry(_("Only free scan"), config.plugins.TerrestrialScan.onlyfree,_('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels.')),
+			getConfigListEntry(_('Restrict search to single ONID'), config.plugins.TerrestrialScan.networkid_bool,_('Select "Yes" to restrict the search to multiplexes that belong to a single original network ID (ONID). Select "No" to search all ONIDs.')),
 		]
+
+		if config.plugins.TerrestrialScan.networkid_bool.value:
+			setup_list.append(getConfigListEntry(indent + _('ONID to search'), config.plugins.TerrestrialScan.networkid,_('Enter the original network ID (ONID) of the multiplexes you wish to restrict the search to. UK terrestrial television normally ONID "9018".')))
+
+		setup_list.append(getConfigListEntry(_("Create terrestrial bouquet"), config.plugins.TerrestrialScan.makebouquet,_('If you select "yes" and LCNs are found in the NIT, the scan will create a bouquet of terrestrial channels in LCN order and add it to the bouquet list.')))
+		setup_list.append(getConfigListEntry(_("Create terrestrial.xml file"), config.plugins.TerrestrialScan.makexmlfile,_('Select "yes" to create a custom terrestrial.xml file and install it in /etc/enigma2 for system scans to use.')))
+
 		self["config"].list = setup_list
 		self["config"].l.setList(setup_list)
 
@@ -103,13 +120,27 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		self.startScan()
 
 	def startScan(self):
-		self.session.openWithCallback(self.terrestrialScanCallback, TerrestrialScan, {"feid": int(self.scan_nims.value), "uhf_vhf": config.plugins.TerrestrialScan.uhf_vhf.value, "networkid": int(config.plugins.TerrestrialScan.networkid.value)})
+		self.session.openWithCallback(self.terrestrialScanCallback, TerrestrialScan, {"feid": int(self.scan_nims.value), "uhf_vhf": config.plugins.TerrestrialScan.uhf_vhf.value, "networkid": int(config.plugins.TerrestrialScan.networkid.value), "restrict_to_networkid": config.plugins.TerrestrialScan.networkid_bool.value})
 
 	def keyCancel(self):
 		if self["config"].isChanged():
 			self.session.openWithCallback(self.cancelCallback, MessageBox, _("Really close without saving settings?"))
 		else:
 			self.cancelCallback(True)
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.newConfig()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.newConfig()
+
+	def newConfig(self):
+		cur = self["config"].getCurrent()
+		if len(cur)>1:
+			if cur[1] == config.plugins.TerrestrialScan.networkid_bool:
+				self.createSetup()
 
 	def cancelCallback(self, answer):
 		if answer:
@@ -118,6 +149,18 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 			self.close(False)
 
 	def terrestrialScanCallback(self, answer=None):
+		print "answer", answer
+		if answer:
+			self.feid = answer[0]
+			self.transponders_unique = answer[1]
+			if config.plugins.TerrestrialScan.makebouquet.value or config.plugins.TerrestrialScan.makexmlfile.value:
+				self.session.openWithCallback(self.MakeBouquetCallback, MakeBouquet, {"feid": self.feid, "transponders_unique": self.transponders_unique, "FTA_only": config.plugins.TerrestrialScan.onlyfree.value, "makebouquet": config.plugins.TerrestrialScan.makebouquet.value, "makexmlfile": config.plugins.TerrestrialScan.makexmlfile.value})
+			else:
+				self.doServiceSearch()
+		else:
+			self.session.nav.playService(self.session.postScanService)
+
+	def MakeBouquetCallback(self, answer=None):
 		print "answer", answer
 		if answer:
 			self.feid = answer[0]
@@ -148,16 +191,29 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		if answer:
 			self.close(True)
 
+	def config_mode(self, nim): # Workaround for OpenATV > 5.3
+		try:
+			return nim.config_mode
+		except AttributeError:
+			return nim.isCompatible("DVB-T") and nim.config_mode_dvbt or "nothing"
+
+
 def TerrestrialScanStart(menuid, **kwargs):
 	if menuid == "scan":
-		return [(_("Terrestrial Scan"), TerrestrialScanMain, "TerrestrialScanScreen", 75)]
+		return [(_("Terrestrial Scan"), TerrestrialScanMain, "TerrestrialScanScreen", 75, True)]
 	return []
 
-def TerrestrialScanMain(session, **kwargs):
-	session.open(TerrestrialScanScreen)
+def TerrestrialScanMain(session, close=None, **kwargs):
+	session.openWithCallback(boundFunction(TerrestrialScanCallback, close), TerrestrialScanScreen)
+
+def TerrestrialScanCallback(close, answer):
+	if close and answer:
+		close(True)
 
 def Plugins(**kwargs):
 	pList = []
 	if nimmanager.hasNimType("DVB-T"):
 		pList.append( PluginDescriptor(name=_("Terrestrial Scan"), description="For scanning terrestrial tv", where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=TerrestrialScanStart) )
+	else:
+		print "[TerrestrialScan] No DVB-T tuner available so don't load"
 	return pList

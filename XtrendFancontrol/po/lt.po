@@ -2,154 +2,59 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XtrendFancontrol - oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 08:49+0300\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-06 09:10+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.2\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 
-#: plugin.py:37
 msgid " ver. 3.2"
 msgstr " vers. 3.2"
 
-#: plugin.py:60 plugin.py:62
-msgid "Fan - Off"
-msgstr "Aušintuvas išjungtas"
-
-#: plugin.py:60 plugin.py:62
-msgid "Fan - On"
-msgstr "Aušintuvas įjungtas"
-
-#: plugin.py:60
-msgid "Fan - Off in standby"
-msgstr "Budėjime aušintuvas išjungtas"
-
-#: plugin.py:60 plugin.py:62
-msgid "Fan - Auto"
-msgstr "Aušintuvas automatiškai"
-
-#: plugin.py:61 plugin.py:62
-msgid "None"
-msgstr "Joks"
-
-#: plugin.py:61
-msgid "HDD Sleeping"
-msgstr "HDD išjungimas"
-
-#: plugin.py:61
-msgid "HDD Temperature"
-msgstr "HDD temperatūra"
-
-#: plugin.py:63
-msgid "Off"
-msgstr "Išjungta"
-
-#: plugin.py:63
-msgid "On"
-msgstr "Įjungta"
-
-#: plugin.py:107
-msgid "Fan setup:"
-msgstr "Aušintuvo sąranka:"
-
-#: plugin.py:117
-msgid "Power status"
-msgstr "Įtampa"
-
-#: plugin.py:118 plugin.py:174 plugin.py:176 plugin.py:516
-msgid "System temperature"
-msgstr "Sistemos temperatūra"
-
-#: plugin.py:119 plugin.py:180
-msgid "Harddisk temperature"
-msgstr "HDD temperatūra"
-
-#: plugin.py:120
-msgid "Save"
-msgstr "Išsaugoti"
-
-#: plugin.py:121
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: plugin.py:176 plugin.py:180
-msgid "n.a."
-msgstr "N/D"
-
-#: plugin.py:227
-msgid "Fan mode"
-msgstr "Aušintuvo režimas"
-
-#: plugin.py:228
-msgid "Switch Fan mode on time setting"
-msgstr "Aušintuvo režimas, priklausomai nuo laiko"
-
-#: plugin.py:229
-msgid "Watch HDD state"
-msgstr "HDD būklė"
-
-#: plugin.py:230
-msgid "Watch system temp"
-msgstr "Sistemos temperatūra"
-
-#: plugin.py:234
 msgid "All"
 msgstr "Visi"
 
-#: plugin.py:237
-msgid "Select internal HDD device"
-msgstr "Pasirinkite vidinį HDD"
+msgid "Cancel"
+msgstr "Atšaukti"
 
-#: plugin.py:245
-msgid "Start time"
-msgstr "Pradžios laikas"
-
-#: plugin.py:246
 msgid "End time"
 msgstr "Pabaigos laikas"
 
-#: plugin.py:252
-msgid "Switch ON mode on HDD max.temp. (0 - disable)"
-msgstr "Įjungti, esant HDD temperatūrai (0 - išjungti)"
+msgid "Fan - Auto"
+msgstr "Aušintuvas automatiškai"
 
-#: plugin.py:254
-msgid "Switch OFF mode on HDD sleep"
-msgstr "Išjungti, HDD miegant"
+msgid "Fan - Off"
+msgstr "Aušintuvas išjungtas"
 
-#: plugin.py:255
-msgid "Show temp. HDD to extensions menu"
-msgstr "Rodyti HDD temp. plėtinių naršyklėje"
+msgid "Fan - Off in standby"
+msgstr "Budėjime aušintuvas išjungtas"
 
-#: plugin.py:257
-msgid "Initial fan speed"
-msgstr "Pradinis aušintuvo greitis"
+msgid "Fan - On"
+msgstr "Aušintuvas įjungtas"
 
-#: plugin.py:261
-msgid "Switch ON on system temp"
-msgstr "Įjungti, esant sistemos temp."
+msgid "Fan Control"
+msgstr "Aušintuvo valdymas"
 
-#: plugin.py:311
-msgid ""
-"You may not use this mode!\n"
-"Not found an internal hard drive!"
-msgstr ""
-"Negalite naudoti šio režimo!\n"
-"Nerasta vidinio HDD!"
+msgid "Fan Setup"
+msgstr "Aušintuvo sąranka"
 
-#: plugin.py:316
-msgid ""
-"Start time OFF mode equal End time OFF mode\n"
-"You may not use this time settings!"
-msgstr ""
-"Pradinis ir galutinis išjungto režimo laikai sutampa\n"
-"Jūs negalite naudoti šių laiko nustatymų!"
+msgid "Fan mode"
+msgstr "Aušintuvo režimas"
 
-#: plugin.py:322
+msgid "Fan setup:"
+msgstr "Aušintuvo sąranka:"
+
+msgid "HDD Sleeping"
+msgstr "HDD išjungimas"
+
+msgid "HDD Temperature"
+msgstr "HDD temperatūra"
+
 msgid ""
 "Harddisk standby after - no standby\n"
 "You may not use this mode!"
@@ -157,30 +62,85 @@ msgstr ""
 "HDD išjungimas - 'neišjungti'\n"
 "Jūs negalite naudoti šio režimo!"
 
-#: plugin.py:502 plugin.py:530 plugin.py:534
-msgid "Fan Control"
-msgstr "Aušintuvo valdymas"
+msgid "Harddisk temperature"
+msgstr "HDD temperatūra"
 
-#: plugin.py:507
 msgid "Harddisks:"
 msgstr "HDD:"
 
-#: plugin.py:509
+msgid "Initial fan speed"
+msgstr "Pradinis aušintuvo greitis"
+
 msgid "No harddisk with temperature sensor found!"
 msgstr "HDD su temperatūros davikliais nėra!"
 
-#: plugin.py:514
 msgid "No system temperature sensor found!"
 msgstr "Sistemos temperatūros daviklių nėra!"
 
-#: plugin.py:530 plugin.py:534
-msgid "switch Fan On/Off"
-msgstr "įjungti/išjungti aušintuvą"
+msgid "None"
+msgstr "Joks"
 
-#: plugin.py:531 plugin.py:535
-msgid "Fan Setup"
-msgstr "Aušintuvo sąranka"
+msgid "Off"
+msgstr "Išjungta"
 
-#: plugin.py:532
+msgid "On"
+msgstr "Įjungta"
+
+msgid "Power status"
+msgstr "Įtampa"
+
+msgid "Save"
+msgstr "Išsaugoti"
+
+msgid "Select internal HDD device"
+msgstr "Pasirinkite vidinį HDD"
+
 msgid "Show Temp"
 msgstr "Temperatūra"
+
+msgid "Show temp. HDD to extensions menu"
+msgstr "Rodyti HDD temp. plėtinių naršyklėje"
+
+msgid "Start time"
+msgstr "Pradžios laikas"
+
+msgid ""
+"Start time OFF mode equal End time OFF mode\n"
+"You may not use this time settings!"
+msgstr ""
+"Pradinis ir galutinis išjungto režimo laikai sutampa\n"
+"Jūs negalite naudoti šių laiko nustatymų!"
+
+msgid "Switch Fan mode on time setting"
+msgstr "Aušintuvo režimas, priklausomai nuo laiko"
+
+msgid "Switch OFF mode on HDD sleep"
+msgstr "Išjungti, HDD miegant"
+
+msgid "Switch ON mode on HDD max.temp. (0 - disable)"
+msgstr "Įjungti, esant HDD temperatūrai (0 - išjungti)"
+
+msgid "Switch ON on system temp"
+msgstr "Įjungti, esant sistemos temp."
+
+msgid "System temperature"
+msgstr "Sistemos temperatūra"
+
+msgid "Watch HDD state"
+msgstr "HDD būklė"
+
+msgid "Watch system temp"
+msgstr "Sistemos temperatūra"
+
+msgid ""
+"You may not use this mode!\n"
+"Not found an internal hard drive!"
+msgstr ""
+"Negalite naudoti šio režimo!\n"
+"Nerasta vidinio HDD!"
+
+msgid "n.a."
+msgstr "N/D"
+
+msgid "switch Fan On/Off"
+msgstr "įjungti/išjungti aušintuvą"

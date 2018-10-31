@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:05+0200\n"
-"PO-Revision-Date: 2016-05-07 14:05+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-07-31 10:55+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,51 +11,36 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:99 ../src/plugin.py:191
-msgid "Fan Control"
-msgstr "Contrôle Ventilateur"
-
-#: ../src/plugin.py:106
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../src/plugin.py:107
-msgid "OK"
-msgstr "OK"
-
-#: ../src/plugin.py:136
-#, python-format
-msgid "Fan %d voltage"
-msgstr ""
-
-#: ../src/plugin.py:137
 #, python-format
 msgid "Fan %d PWM"
 msgstr "Ventilateur %d PWM"
 
-#: ../src/plugin.py:139
 #, python-format
-msgid "Standby fan %d voltage"
-msgstr ""
+msgid "Fan %d voltage"
+msgstr "%d tension ventilateur"
 
-#: ../src/plugin.py:140
+msgid "Fan Control"
+msgstr "Contrôle Ventilateur"
+
+msgid "OK"
+msgstr "OK"
+
 #, python-format
 msgid "Standby fan %d PWM"
-msgstr ""
+msgstr "Ventilateur PWM en veille %d"
 
-#: ../src/plugin.py:186
-msgid "Temperature and fan control"
-msgstr ""
+#, python-format
+msgid "Standby fan %d voltage"
+msgstr "Tension ventilateur en veille %d"
 
-#: ../src/plugin.py:191
 msgid "Temperature and Fan control"
-msgstr ""
+msgstr "Contrôle du ventilateur et de température"
 
-#~ msgid "Fan control"
-#~ msgstr "Contrôle ventilateur"
-
-#~ msgid "Standby Fan %d PWM"
-#~ msgstr "En veille ventilateur %d PWM"
+msgid "Temperature and fan control"
+msgstr "Contrôle ventilateur et température"

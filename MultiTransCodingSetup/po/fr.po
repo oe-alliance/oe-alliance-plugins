@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:44+0200\n"
-"PO-Revision-Date: 2016-05-07 13:44+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-07-30 22:12+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: OEA\n"
 "Language: fr\n"
@@ -13,79 +13,160 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:19
-msgid "enable"
-msgstr "activer"
+msgid "1.0 Mbps"
+msgstr ""
 
-#: ../src/plugin.py:19
-msgid "disable"
-msgstr "désactiver"
+msgid "1.2 Mbps"
+msgstr ""
 
-#: ../src/plugin.py:30
-msgid "480p"
-msgstr "480p"
+msgid "1.5 Mbps"
+msgstr ""
 
-#: ../src/plugin.py:30
-msgid "576p"
-msgstr "576p"
+msgid "100 kbps"
+msgstr ""
 
-#: ../src/plugin.py:30
-msgid "720p"
-msgstr "720p"
-
-#: ../src/plugin.py:30
-msgid "320x240"
-msgstr "320x240"
-
-#: ../src/plugin.py:30
 msgid "160x120"
 msgstr "160x120"
 
-#: ../src/plugin.py:32
-msgid "4x3"
-msgstr "4x3"
-
-#: ../src/plugin.py:32
 msgid "16x9"
 msgstr "16x9"
 
-#: ../src/plugin.py:32
+msgid "2.0 Mbps"
+msgstr ""
+
+msgid "2.5 Mbps"
+msgstr ""
+
+msgid "23.976 fps"
+msgstr ""
+
+msgid "24 fps"
+msgstr ""
+
+msgid "25 fps"
+msgstr ""
+
+msgid "3.0 Mbps"
+msgstr ""
+
+msgid "3.5 Mbps"
+msgstr ""
+
+msgid "30 fps"
+msgstr ""
+
+msgid "300 kbps"
+msgstr ""
+
+msgid "320x240"
+msgstr "320x240"
+
+msgid "4.0 Mbps"
+msgstr ""
+
+msgid "480p"
+msgstr "480p"
+
+msgid "4x3"
+msgstr "4x3"
+
+msgid "5.0 Mbps"
+msgstr ""
+
+msgid "500 kbps"
+msgstr ""
+
+msgid "576p"
+msgstr "576p"
+
+msgid "720p"
+msgstr "720p"
+
+msgid "800 kbps"
+msgstr ""
+
+msgid "Aspect Ratio"
+msgstr "Aspect du ratio"
+
 msgid "Auto"
 msgstr ""
 
-#: ../src/plugin.py:33
-msgid "Yes"
-msgstr "Oui"
+msgid "Bitrate in bits"
+msgstr "Débit binaire en bits"
 
-#: ../src/plugin.py:33
-msgid "No"
-msgstr "Non"
+msgid "Encoder Aspect Ratio"
+msgstr "Rapport d'aspect de l'encodeur"
 
-#: ../src/plugin.py:56
-msgid "Transcoding Setup"
-msgstr "Configuration du transcodage"
+msgid "Encoder Bitrate"
+msgstr "Encodeur débit binaire"
 
-#: ../src/plugin.py:71
+msgid "Encoder Framerate"
+msgstr "Encodeur fréquence d'image"
+
+msgid "Encoder Interlaced"
+msgstr "Encodeur entrelacé"
+
+msgid "Encoder Resolution"
+msgstr "Encodeur résolution"
+
 msgid "Exit"
 msgstr "Sortir"
 
-#: ../src/plugin.py:72
+msgid "Framerate"
+msgstr "Fréquence d'image (framerate)"
+
+msgid "H.264"
+msgstr ""
+
+msgid "H.265"
+msgstr ""
+
+msgid "Interlaced"
+msgstr "Interlacé"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Multi device transcoding setup"
+msgstr "Configuration du transcodage multi périphérique"
+
+msgid "Multi-Transcoding Setup"
+msgstr "Configuration du Multi-Transcodage"
+
+msgid "No"
+msgstr "Non"
+
+msgid "Really close without saving settings?"
+msgstr "Voulez-vous vraiment fermer sans sauvegarder?"
+
+msgid "Resolution"
+msgstr "Résolution"
+
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: ../src/plugin.py:76
+msgid "Setup your timezone."
+msgstr "Définir votre fuseau horaire."
+
+msgid "This model does not support transcoding."
+msgstr "Ce modèle ne supporte pas le transcodage."
+
 msgid ""
 "To use transcoding You can build URL for VLC by Yourself\n"
 "\n"
 msgstr ""
-"Pour utiliser le transcodage, vous pouvez construire votre propre URL pour "
-"VLC.\n"
+"Pour utiliser le transcodage, vous pouvez construire votre propre URL pour VLC.\n"
 "\n"
 
-#: ../src/plugin.py:83
+msgid "Transcoding Setup"
+msgstr "Configuration du transcodage"
+
 msgid ""
 "Transcoding from HDMI-IN e.x:\n"
 "\n"
@@ -93,49 +174,14 @@ msgstr ""
 "Transcodage pour HDMI-IN ex:\n"
 "\n"
 
-#: ../src/plugin.py:101
-msgid "This model does not support transcoding."
-msgstr "Ce modèle ne supporte pas le transcodage."
+msgid "Video codec"
+msgstr "Codec vidéo"
 
-#: ../src/plugin.py:106 ../src/plugin.py:109
-msgid "Bitrate in bits"
-msgstr ""
+msgid "Yes"
+msgstr "Oui"
 
-#: ../src/plugin.py:107 ../src/plugin.py:110
-msgid "Framerate"
-msgstr "Fréquence d'image (framerate)"
+msgid "disable"
+msgstr "désactiver"
 
-#: ../src/plugin.py:111
-msgid "Resolution"
-msgstr "Résolution"
-
-#: ../src/plugin.py:112
-msgid "Aspect Ratio"
-msgstr "Aspect du ratio"
-
-#: ../src/plugin.py:113
-msgid "Interlaced"
-msgstr "Interlacé"
-
-#: ../src/plugin.py:132
-msgid "Min"
-msgstr "Min"
-
-#: ../src/plugin.py:132
-msgid "Max"
-msgstr "Max"
-
-#: ../src/plugin.py:158
-msgid "Really close without saving settings?"
-msgstr "Voulez-vous vraiment fermer sans sauvegarder?"
-
-#: ../src/plugin.py:167
-msgid "Multi-Transcoding Setup"
-msgstr "Configuration du Multi-Transcodage"
-
-#: ../src/plugin.py:168
-msgid "Multi device transcoding setup"
-msgstr "Configuration du transcodage multi périphérique"
-
-#~ msgid "Bitrate"
-#~ msgstr "débit (Bitrate)"
+msgid "enable"
+msgstr "activer"

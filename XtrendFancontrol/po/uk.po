@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:26+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:26+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: http://sat-ukraine.info/\n"
@@ -16,176 +16,131 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:37
 msgid " ver. 3.2"
 msgstr ""
 
-#: ../src/plugin.py:60 ../src/plugin.py:62
-msgid "Fan - Off"
-msgstr ""
-
-#: ../src/plugin.py:60 ../src/plugin.py:62
-msgid "Fan - On"
-msgstr ""
-
-#: ../src/plugin.py:60 ../src/plugin.py:62
-msgid "Fan - Auto"
-msgstr ""
-
-#: ../src/plugin.py:61 ../src/plugin.py:62
-msgid "None"
-msgstr ""
-
-#: ../src/plugin.py:61
-msgid "HDD Sleeping"
-msgstr ""
-
-#: ../src/plugin.py:61
-msgid "HDD Temperature"
-msgstr ""
-
-#
-#: ../src/plugin.py:63
-msgid "Off"
-msgstr "Вимкнено"
-
-#
-#: ../src/plugin.py:63
-msgid "On"
-msgstr "Ввімкнено"
-
-#: ../src/plugin.py:107
-msgid "Fan setup:"
-msgstr ""
-
-#: ../src/plugin.py:117
-msgid "Power status"
-msgstr ""
-
-#: ../src/plugin.py:118 ../src/plugin.py:169 ../src/plugin.py:171
-#: ../src/plugin.py:499
-msgid "System temperature"
-msgstr ""
-
-#: ../src/plugin.py:119 ../src/plugin.py:175 ../src/plugin.py:177
-msgid "Harddisk temperature"
-msgstr ""
-
-#: ../src/plugin.py:120
-msgid "Save"
-msgstr ""
-
-#
-#: ../src/plugin.py:121
-msgid "Cancel"
-msgstr "Відмінити"
-
-#: ../src/plugin.py:171 ../src/plugin.py:175
-msgid "n.a."
-msgstr ""
-
-#: ../src/plugin.py:222
-msgid "Fan mode"
-msgstr ""
-
-#: ../src/plugin.py:223
-msgid "Switch Fan mode on time setting"
-msgstr ""
-
-#: ../src/plugin.py:224
-msgid "Watch HDD state"
-msgstr ""
-
-#: ../src/plugin.py:225
-msgid "Watch system temp"
-msgstr ""
-
-#: ../src/plugin.py:229
 msgid "All"
 msgstr ""
 
-#: ../src/plugin.py:232
-msgid "Select internal HDD device"
-msgstr ""
+#
+msgid "Cancel"
+msgstr "Відмінити"
 
-#: ../src/plugin.py:240
-msgid "Start time"
-msgstr ""
-
-#: ../src/plugin.py:241
 msgid "End time"
 msgstr ""
 
-#: ../src/plugin.py:247
-msgid "Switch ON mode on HDD max.temp. (0 - disable)"
+msgid "Fan - Auto"
 msgstr ""
 
-#: ../src/plugin.py:249
-msgid "Switch OFF mode on HDD sleep"
+msgid "Fan - Off"
 msgstr ""
 
-#: ../src/plugin.py:250
-msgid "Show temp. HDD to extensions menu"
+msgid "Fan - Off in standby"
 msgstr ""
 
-#: ../src/plugin.py:252
-msgid "Initial fan speed"
+msgid "Fan - On"
 msgstr ""
 
-#: ../src/plugin.py:256
-msgid "Switch ON on system temp"
+msgid "Fan Control"
 msgstr ""
 
-#: ../src/plugin.py:306
-msgid ""
-"You may not use this mode!\n"
-"Not found an internal hard drive!"
+msgid "Fan Setup"
 msgstr ""
 
-#: ../src/plugin.py:311
-msgid ""
-"Start time OFF mode equal End time OFF mode\n"
-"You may not use this time settings!"
+msgid "Fan mode"
 msgstr ""
 
-#: ../src/plugin.py:317
+msgid "Fan setup:"
+msgstr ""
+
+msgid "HDD Sleeping"
+msgstr ""
+
+msgid "HDD Temperature"
+msgstr ""
+
 msgid ""
 "Harddisk standby after - no standby\n"
 "You may not use this mode!"
 msgstr ""
 
-#: ../src/plugin.py:485 ../src/plugin.py:513 ../src/plugin.py:517
-msgid "Fan Control"
+msgid "Harddisk temperature"
 msgstr ""
 
-#: ../src/plugin.py:490
 msgid "Harddisks:"
 msgstr ""
 
-#: ../src/plugin.py:492
+msgid "Initial fan speed"
+msgstr ""
+
 msgid "No harddisk with temperature sensor found!"
 msgstr ""
 
-#: ../src/plugin.py:497
 msgid "No system temperature sensor found!"
 msgstr ""
 
-#: ../src/plugin.py:513 ../src/plugin.py:517
-msgid "switch Fan On/Off"
+msgid "None"
 msgstr ""
 
-#: ../src/plugin.py:514 ../src/plugin.py:518
-msgid "Fan Setup"
+#
+msgid "Off"
+msgstr "Вимкнено"
+
+#
+msgid "On"
+msgstr "Ввімкнено"
+
+msgid "Power status"
 msgstr ""
 
-#: ../src/plugin.py:515
+msgid "Save"
+msgstr ""
+
+msgid "Select internal HDD device"
+msgstr ""
+
 msgid "Show Temp"
 msgstr ""
 
-#
-#~ msgid "Auto"
-#~ msgstr "Авто"
+msgid "Show temp. HDD to extensions menu"
+msgstr ""
 
-#
-#~ msgid "OK"
-#~ msgstr "OK"
+msgid "Start time"
+msgstr ""
+
+msgid ""
+"Start time OFF mode equal End time OFF mode\n"
+"You may not use this time settings!"
+msgstr ""
+
+msgid "Switch Fan mode on time setting"
+msgstr ""
+
+msgid "Switch OFF mode on HDD sleep"
+msgstr ""
+
+msgid "Switch ON mode on HDD max.temp. (0 - disable)"
+msgstr ""
+
+msgid "Switch ON on system temp"
+msgstr ""
+
+msgid "System temperature"
+msgstr ""
+
+msgid "Watch HDD state"
+msgstr ""
+
+msgid "Watch system temp"
+msgstr ""
+
+msgid ""
+"You may not use this mode!\n"
+"Not found an internal hard drive!"
+msgstr ""
+
+msgid "n.a."
+msgstr ""
+
+msgid "switch Fan On/Off"
+msgstr ""

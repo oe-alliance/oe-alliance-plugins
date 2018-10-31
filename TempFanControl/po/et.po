@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:05+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:05+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas\n"
@@ -13,45 +13,33 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:99 ../src/plugin.py:191
-msgid "Fan Control"
-msgstr "Ventilaatori juhtimine"
-
-#: ../src/plugin.py:106
 msgid "Cancel"
 msgstr "Tühista"
 
-#: ../src/plugin.py:107
-msgid "OK"
-msgstr "OK"
-
-#: ../src/plugin.py:136
-#, python-format
-msgid "Fan %d voltage"
-msgstr "Vent. %d pinge"
-
-#: ../src/plugin.py:137
 #, python-format
 msgid "Fan %d PWM"
 msgstr "Vent. %d PWM"
 
-#: ../src/plugin.py:139
 #, python-format
-msgid "Standby fan %d voltage"
-msgstr "Vent. %d pinge ooteseisundis"
+msgid "Fan %d voltage"
+msgstr "Vent. %d pinge"
 
-#: ../src/plugin.py:140
+msgid "Fan Control"
+msgstr "Ventilaatori juhtimine"
+
+msgid "OK"
+msgstr "OK"
+
 #, python-format
 msgid "Standby fan %d PWM"
 msgstr "Vent. %d PWM ooteseisundis"
 
-#: ../src/plugin.py:186
-msgid "Temperature and fan control"
-msgstr "Jahutus"
+#, python-format
+msgid "Standby fan %d voltage"
+msgstr "Vent. %d pinge ooteseisundis"
 
-#: ../src/plugin.py:191
 msgid "Temperature and Fan control"
 msgstr "Jahutus"
 
-#~ msgid "Standby Fan %d PWM"
-#~ msgstr "Ventilaatori %d PWM ooterežiimil"
+msgid "Temperature and fan control"
+msgstr "Jahutus"

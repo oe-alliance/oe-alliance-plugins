@@ -35,6 +35,7 @@ config.plugins.VFD_Giga.ledRUN = ConfigSelection(led, default = "1")
 config.plugins.VFD_Giga.ledSBY = ConfigSelection(led, default = "2")
 config.plugins.VFD_Giga.ledREC = ConfigSelection(led, default = "3")
 config.plugins.VFD_Giga.ledDSBY = ConfigSelection(led, default = "2")
+config.plugins.VFD_Giga.ledDSBY2 = ConfigSelection(default = "1", choices = [("0",_("No")),("1",_("Yes"))])
 config.plugins.VFD_Giga.ledSDA1 = ConfigSelection(led, default = "0")
 config.plugins.VFD_Giga.ledSDB1 = ConfigSelection(led, default = "0")
 config.plugins.VFD_Giga.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
@@ -48,6 +49,11 @@ def vfd_write(text):
 
 def setvfdBrightness(value):
 		f = open("/proc/stb/fp/oled_brightness", "w")
+		f.write(str(value))
+		f.close()
+
+def setvfdDSBY2(value):
+		f = open("/proc/stb/fp/enable_led", "w")
 		f.write(str(value))
 		f.close()
 
@@ -344,6 +350,10 @@ def initLED():
 		else:
 			setvfdBrightness("255")
 
+	if BOX in ('gbquad4k', 'gbue4k', 'gbquadplus'):
+		if config.plugins.VFD_Giga.ledDSBY2.value:
+			setvfdDSBY2(config.plugins.VFD_Giga.ledDSBY2.getValue())
+
 class LED_GigaSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
 
@@ -386,6 +396,8 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Enable led"), config.plugins.VFD_Giga.setLed))
 		if config.plugins.VFD_Giga.setLed.value:
+			if BOX in ("gbquad4k", "gbue4k", 'gbquadplus'):
+				self.list.append(getConfigListEntry(_("Led Deep Standby"), config.plugins.VFD_Giga.ledDSBY2))
 			self.list.append(getConfigListEntry(_("Led state RUN"), config.plugins.VFD_Giga.ledRUN))
 			self.list.append(getConfigListEntry(_("Led state Standby"), config.plugins.VFD_Giga.ledSBY))
 			if BOX not in ("gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gb800seplus", "gbquadplus", "gbipbox", "gbultra", "gbultraue", "gbultraueh", "gbultrase", "gbx1", "gbx2", "gbx3", "gbx3h"):

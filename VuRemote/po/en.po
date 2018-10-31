@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:20+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:20+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
@@ -15,63 +15,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
-msgid "Remote Control Code"
-msgstr "Remote Control Code"
-
-#: ../src/plugin.py:68
-msgid "Cancel"
-msgstr "Cancel"
-
-#: ../src/plugin.py:69
-msgid "Save"
-msgstr "Save"
-
-#: ../src/plugin.py:80
-#, python-format
-msgid "Sorry, but %s is not supported."
-msgstr ""
-
-#: ../src/plugin.py:84
-msgid "Remote Control System Code"
-msgstr "Remote Control System Code"
-
-#: ../src/plugin.py:87
-msgid "Text support"
-msgstr "Text support"
-
-#: ../src/plugin.py:99
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr "FILE NOT EXIST : /proc/stb/fp/remote_code"
-
-#: ../src/plugin.py:101
-msgid "Please change your remote mode"
-msgstr "Please change your remote mode"
-
-#: ../src/plugin.py:101
-msgid ""
-"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
-"press '000"
-msgstr ""
-"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
-"press '000"
-
-#: ../src/plugin.py:101
-msgid "Then choose 'Keep' within seconds"
-msgstr "Then choose 'Keep' within seconds"
-
-#: ../src/plugin.py:122
-msgid "Keep"
-msgstr "Keep"
-
-#: ../src/plugin.py:122
-msgid "Restore"
-msgstr "Restore"
-
-#: ../src/plugin.py:128
 #, python-format
 msgid " in %d seconds."
 msgstr ""
 
-#~ msgid "This Plugin only support for UNO/ULTIMO"
-#~ msgstr "This Plugin only support for UNO/ULTIMO/Solo2/DUO2"
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr "FILE NOT EXIST : /proc/stb/fp/remote_code"
+
+msgid "Keep"
+msgstr "Keep"
+
+msgid "Please change your remote mode"
+msgstr "Please change your remote mode"
+
+msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+msgstr "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+
+#, fuzzy
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
+msgstr "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+
+msgid "Remote Control Code"
+msgstr "Remote Control Code"
+
+msgid "Remote Control System Code"
+msgstr "Remote Control System Code"
+
+#, fuzzy
+msgid "Remote Control Type"
+msgstr "Remote Control Code"
+
+msgid "Restore"
+msgstr "Restore"
+
+msgid "Save"
+msgstr "Save"
+
+#, python-format
+msgid "Sorry, but %s is not supported."
+msgstr ""
+
+msgid "Text support"
+msgstr "Text support"
+
+msgid "Then choose 'Keep' within seconds"
+msgstr "Then choose 'Keep' within seconds"

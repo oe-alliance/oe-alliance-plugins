@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:04+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-11-29 18:42+0100\n"
 "Last-Translator: insanity\n"
 "Language-Team: www.vuplus-community <insanity@>\n"
@@ -14,263 +14,280 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.7.3\n"
 
-#: ../src/plugin.py:57
-msgid "enable"
-msgstr "abilitare"
-
-#: ../src/plugin.py:57
-msgid "disable"
-msgstr "disattivare"
-
-#: ../src/plugin.py:80
-msgid "On"
-msgstr "On"
-
-#: ../src/plugin.py:80
-msgid "Off"
-msgstr "Off"
-
-#: ../src/plugin.py:84
-msgid "480p"
-msgstr "480p"
-
-#: ../src/plugin.py:84
-msgid "576p"
-msgstr "576p"
-
-#: ../src/plugin.py:84
-msgid "720p"
-msgstr "720p"
-
-#: ../src/plugin.py:84
-msgid "320x240"
-msgstr "320x240"
-
-#: ../src/plugin.py:84
-msgid "160x120"
-msgstr "160x120"
-
-#: ../src/plugin.py:86
-msgid "1080p"
-msgstr "1080p"
-
-#: ../src/plugin.py:91
-msgid "auto"
-msgstr "auto"
-
-#: ../src/plugin.py:91
-msgid "4x3"
-msgstr "4x3"
-
-#: ../src/plugin.py:91
-msgid "16x9"
-msgstr "16x9"
-
-#: ../src/plugin.py:95
-msgid "mpg"
-msgstr "mpg"
-
-#: ../src/plugin.py:95
-msgid "mp3"
-msgstr "mp3"
-
-#: ../src/plugin.py:95
-msgid "aac"
-msgstr "aac"
-
-#: ../src/plugin.py:95
-msgid "aac+"
-msgstr "aac+"
-
-#: ../src/plugin.py:95
-msgid "aac+loas"
-msgstr "aac+loas"
-
-#: ../src/plugin.py:95
-msgid "aac+adts"
-msgstr "aac+adts"
-
-#: ../src/plugin.py:95
-msgid "ac3"
-msgstr "ac3"
-
-#: ../src/plugin.py:99
-msgid "h264"
-msgstr "h264"
-
-#: ../src/plugin.py:111
-msgid "1.0"
-msgstr "1.0"
-
-#: ../src/plugin.py:111
-msgid "2.0"
-msgstr "2.0"
-
-#: ../src/plugin.py:112
-msgid "2.1"
-msgstr "2.1"
-
-#: ../src/plugin.py:112
-msgid "2.2"
-msgstr "2.2"
-
-#: ../src/plugin.py:112
-msgid "3.0"
-msgstr "3.0"
-
-#: ../src/plugin.py:112
-msgid "3.1"
-msgstr "3.1"
-
-#: ../src/plugin.py:113
-msgid "3.2"
-msgstr "3.2"
-
-#: ../src/plugin.py:113
-msgid "4.0"
-msgstr "4.0"
-
-#: ../src/plugin.py:113
-msgid "4.1"
-msgstr "4.1"
-
-#: ../src/plugin.py:113
-msgid "4.2"
-msgstr "4.2"
-
-#: ../src/plugin.py:114
-msgid "5.0"
-msgstr "5.0"
-
-#: ../src/plugin.py:114
-msgid "low"
-msgstr "basso"
-
-#: ../src/plugin.py:114 ../src/plugin.py:118
-msgid "main"
-msgstr "principale"
-
-#: ../src/plugin.py:114 ../src/plugin.py:118
-msgid "high"
-msgstr "alto"
-
-#: ../src/plugin.py:118
-msgid "baseline"
-msgstr "linea base"
-
-#: ../src/plugin.py:118
-msgid "simple"
-msgstr "semplice"
-
-#: ../src/plugin.py:118
-msgid "advancedsimple"
-msgstr "semplice_avanzato"
-
-#: ../src/plugin.py:351 ../src/plugin.py:560
-msgid "Transcoding Setup"
-msgstr "Impostazioni Transcoding"
-
-#: ../src/plugin.py:355
-msgid "Transcoding and PIP are mutually exclusive."
-msgstr "Transcoding e PIP si escludono a vicenda."
-
-#: ../src/plugin.py:357
-msgid "2nd transcoding and PIP are mutually exclusive."
-msgstr "2da transcodifica e PIP si escludono a vicenda."
-
-#: ../src/plugin.py:358
 #, python-format
 msgid "%s"
 msgstr "%s"
 
-#: ../src/plugin.py:360
-msgid "Cancel"
-msgstr "Annulla"
+msgid "1.0"
+msgstr "1.0"
 
-#: ../src/plugin.py:361
-msgid "Save"
-msgstr "Salva"
+msgid "1080p"
+msgstr "1080p"
 
-#: ../src/plugin.py:362
-msgid "Default"
-msgstr "Predefinito"
+msgid "160x120"
+msgstr "160x120"
 
-#: ../src/plugin.py:363 ../src/plugin.py:529
+msgid "16x9"
+msgstr "16x9"
+
+msgid "2.0"
+msgstr "2.0"
+
+msgid "2.1"
+msgstr "2.1"
+
+msgid "2.2"
+msgstr "2.2"
+
+msgid "2nd transcoding and PIP are mutually exclusive."
+msgstr "2da transcodifica e PIP si escludono a vicenda."
+
+msgid "3.0"
+msgstr "3.0"
+
+msgid "3.1"
+msgstr "3.1"
+
+msgid "3.2"
+msgstr "3.2"
+
+msgid "320x240"
+msgstr "320x240"
+
+msgid "4.0"
+msgstr "4.0"
+
+msgid "4.1"
+msgstr "4.1"
+
+msgid "4.2"
+msgstr "4.2"
+
+msgid "480p"
+msgstr "480p"
+
+msgid "4x3"
+msgstr "4x3"
+
+msgid "5.0"
+msgstr "5.0"
+
+msgid "576p"
+msgstr "576p"
+
+msgid "720p"
+msgstr "720p"
+
 msgid "Advanced"
 msgstr "Avanzate"
 
-#: ../src/plugin.py:407
-msgid "This model does not support transcoding."
-msgstr "Questo modello non supporta transcoding."
-
-#: ../src/plugin.py:411
-msgid "Port"
-msgstr "Porta"
-
-#: ../src/plugin.py:417
-msgid "Encoder"
-msgstr "Codificatore"
-
-#: ../src/plugin.py:428
-msgid "Auto set Framerate / Bitrate"
-msgstr "Set automatico Framerate / Bitrate"
-
-#: ../src/plugin.py:435
-msgid "Bitrate"
-msgstr "Bitrate"
-
-#: ../src/plugin.py:437
-msgid "Framerate"
-msgstr "Framerate"
-
-#: ../src/plugin.py:441
-msgid "Resolution"
-msgstr "Risoluzione"
-
-#: ../src/plugin.py:444
 msgid "Aspect Ratio"
 msgstr "Rapporto di aspetto"
 
-#: ../src/plugin.py:447
 msgid "Audio codec"
 msgstr "Codec audio"
 
-#: ../src/plugin.py:450
-msgid "Video codec"
+msgid "Auto set Framerate / Bitrate"
+msgstr "Set automatico Framerate / Bitrate"
+
+msgid "Bitrate"
+msgstr "Bitrate"
+
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "Default"
+msgstr "Predefinito"
+
+msgid "Encoder"
+msgstr "Codificatore"
+
+#, fuzzy
+msgid "Encoder 0: Aspect Ratio"
+msgstr "Rapporto di aspetto"
+
+#, fuzzy
+msgid "Encoder 0: Audio codec"
+msgstr "Codec audio"
+
+msgid "Encoder 0: Auto mode (Bitrate/Framerate)"
+msgstr ""
+
+msgid "Encoder 0: Bitrate"
+msgstr ""
+
+#, fuzzy
+msgid "Encoder 0: Framerate"
+msgstr "Framerate"
+
+#, fuzzy
+msgid "Encoder 0: GOP Frame B"
+msgstr "GOP Frame B"
+
+#, fuzzy
+msgid "Encoder 0: GOP Frame P"
+msgstr "GOP Frame P"
+
+#, fuzzy
+msgid "Encoder 0: Level"
+msgstr "Codificatore"
+
+msgid "Encoder 0: Profile"
+msgstr ""
+
+#, fuzzy
+msgid "Encoder 0: Resolution"
+msgstr "Risoluzione"
+
+#, fuzzy
+msgid "Encoder 0: Video codec"
 msgstr "Codec video"
 
-#: ../src/plugin.py:453
+#, fuzzy
+msgid "Encoder 1: Aspect Ratio"
+msgstr "Rapporto di aspetto"
+
+#, fuzzy
+msgid "Encoder 1: Audio codec"
+msgstr "Codec audio"
+
+msgid "Encoder 1: Auto mode (Bitrate/Framerate)"
+msgstr ""
+
+msgid "Encoder 1: Bitrate"
+msgstr ""
+
+#, fuzzy
+msgid "Encoder 1: Framerate"
+msgstr "Framerate"
+
+#, fuzzy
+msgid "Encoder 1: GOP Frame B"
+msgstr "GOP Frame B"
+
+#, fuzzy
+msgid "Encoder 1: GOP Frame P"
+msgstr "GOP Frame P"
+
+#, fuzzy
+msgid "Encoder 1: Level"
+msgstr "Codificatore"
+
+msgid "Encoder 1: Profile"
+msgstr ""
+
+#, fuzzy
+msgid "Encoder 1: Resolution"
+msgstr "Risoluzione"
+
+#, fuzzy
+msgid "Encoder 1: Video codec"
+msgstr "Codec video"
+
+msgid "Framerate"
+msgstr "Framerate"
+
 msgid "GOP Frame B"
 msgstr "GOP Frame B"
 
-#: ../src/plugin.py:456
 msgid "GOP Frame P"
 msgstr "GOP Frame P"
 
-#: ../src/plugin.py:459
 msgid "Level"
 msgstr "Livello"
 
-#: ../src/plugin.py:462
-msgid "Profile"
-msgstr "Profilo"
-
-#: ../src/plugin.py:484
-msgid "Min"
-msgstr "Min"
-
-#: ../src/plugin.py:484
 msgid "Max"
 msgstr "Max"
 
-#: ../src/plugin.py:517
-msgid "Really close without saving settings?"
-msgstr "Chiudere senza salvare le impostazioni?"
+msgid "Min"
+msgstr "Min"
 
-#: ../src/plugin.py:526
 msgid "Normal"
 msgstr "Normale"
 
-#: ../src/plugin.py:559
+msgid "Off"
+msgstr "Off"
+
+msgid "On"
+msgstr "On"
+
+msgid "Port"
+msgstr "Porta"
+
+msgid "Profile"
+msgstr "Profilo"
+
+msgid "Really close without saving settings?"
+msgstr "Chiudere senza salvare le impostazioni?"
+
+msgid "Resolution"
+msgstr "Risoluzione"
+
+msgid "Save"
+msgstr "Salva"
+
+msgid "This model does not support transcoding."
+msgstr "Questo modello non supporta transcoding."
+
+msgid "Transcoding Setup"
+msgstr "Impostazioni Transcoding"
+
+msgid "Transcoding and PIP are mutually exclusive."
+msgstr "Transcoding e PIP si escludono a vicenda."
+
 msgid "TranscodingSetup"
 msgstr "Impostazioni Transcoding"
+
+msgid "Video codec"
+msgstr "Codec video"
+
+msgid "aac"
+msgstr "aac"
+
+msgid "aac+"
+msgstr "aac+"
+
+msgid "aac+adts"
+msgstr "aac+adts"
+
+msgid "aac+loas"
+msgstr "aac+loas"
+
+msgid "ac3"
+msgstr "ac3"
+
+msgid "advancedsimple"
+msgstr "semplice_avanzato"
+
+msgid "auto"
+msgstr "auto"
+
+msgid "baseline"
+msgstr "linea base"
+
+msgid "disable"
+msgstr "disattivare"
+
+msgid "enable"
+msgstr "abilitare"
+
+msgid "h264"
+msgstr "h264"
+
+msgid "high"
+msgstr "alto"
+
+msgid "low"
+msgstr "basso"
+
+msgid "main"
+msgstr "principale"
+
+msgid "mp3"
+msgstr "mp3"
+
+msgid "mpg"
+msgstr "mpg"
+
+msgid "simple"
+msgstr "semplice"

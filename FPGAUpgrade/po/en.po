@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:22+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:22+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
@@ -15,19 +15,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:152
+#, python-format
+msgid "%d / 100"
+msgstr "%d / 100"
+
 msgid "Can't cancel during upgrade!!"
 msgstr "Can't cancel during upgrade!!"
 
-#: ../src/plugin.py:154
-msgid "Status : 0%"
-msgstr "Status : 0%"
+msgid "Close"
+msgstr "Close"
 
-#: ../src/plugin.py:175
-msgid "Succeed"
-msgstr "Succeed"
+msgid "Download"
+msgstr "Download"
 
-#: ../src/plugin.py:189
+msgid "Downloaded "
+msgstr "Downloaded "
+
+msgid "Downloading..."
+msgstr "Downloading..."
+
 #, python-format
 msgid ""
 "Error[%d] : %s.\n"
@@ -36,35 +42,17 @@ msgstr ""
 "Error[%d] : %s.\n"
 "Press OK to exit."
 
-#: ../src/plugin.py:195
-#, python-format
-msgid "%d / 100"
-msgstr "%d / 100"
-
-#: ../src/plugin.py:232 ../src/plugin.py:401
 msgid "FPGA Upgrade"
 msgstr "FPGA Upgrade"
 
-#: ../src/plugin.py:234
-msgid "Close"
-msgstr "Close"
-
-#: ../src/plugin.py:235
-msgid "Upgrade"
-msgstr "Upgrade"
-
-#: ../src/plugin.py:237
-msgid "Download"
-msgstr "Download"
-
-#: ../src/plugin.py:293
-msgid "Downloaded "
-msgstr "Downloaded "
-
-#: ../src/plugin.py:295
-msgid "Downloading..."
-msgstr "Downloading..."
-
-#: ../src/plugin.py:353
 msgid "File not found"
 msgstr "File not found"
+
+msgid "Status : 0%"
+msgstr "Status : 0%"
+
+msgid "Succeed"
+msgstr "Succeed"
+
+msgid "Upgrade"
+msgstr "Upgrade"

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:55+0200\n"
-"PO-Revision-Date: 2016-05-07 13:55+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-07-30 22:24+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,45 +11,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:19 ../src/plugin.py:20 ../src/plugin.py:21
 msgid "450 (default)"
-msgstr ""
+msgstr "450 (par défaut)"
 
-#: ../src/plugin.py:23 ../src/plugin.py:24 ../src/plugin.py:25
 msgid "540 (default)"
-msgstr ""
+msgstr "540 (par défaut)"
 
-#: ../src/plugin.py:71
+msgid "Booster Control"
+msgstr "Contrôle du Booster"
+
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../src/plugin.py:72
+msgid "Normal running frequency"
+msgstr "Fréquence de fonctionnement normal"
+
 msgid "Save"
 msgstr "Sauver"
 
-#: ../src/plugin.py:73
-msgid "Test"
-msgstr ""
-
-#: ../src/plugin.py:87
-msgid "Start boot frequency"
-msgstr ""
-
-#: ../src/plugin.py:88
-msgid "Normal running frequency"
-msgstr ""
-
-#: ../src/plugin.py:89
 msgid "Standby saver frequency"
-msgstr ""
+msgstr "Fréquence de l'économiseur en mode veille"
 
-#: ../src/plugin.py:100
 msgid "Start Boot Frequency"
-msgstr ""
+msgstr "Fréquence de démarrage"
 
-#: ../src/plugin.py:146
-msgid "Booster Control"
-msgstr ""
+msgid "Start boot frequency"
+msgstr "Fréquence de démarrage"
+
+msgid "Test"
+msgstr "Test"

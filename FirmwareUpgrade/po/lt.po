@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FirmwareUpgrade\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 18:45+0300\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-05 18:50+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis Pulokas <vyteniui@gmail.com>\n"
@@ -13,70 +13,49 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-#: ../src/plugin.py:34 ../src/plugin.py:43 ../src/plugin.py:50
-#: ../src/plugin.py:59 ../src/plugin.py:70
-msgid "FPGA"
-msgstr "FPGA"
-
-#: ../src/plugin.py:35 ../src/plugin.py:51 ../src/plugin.py:60
-#: ../src/plugin.py:71
-msgid "Front Processor"
-msgstr "Sąsajos procesorius"
-
-#: ../src/plugin.py:61
-msgid "VFD Controller"
-msgstr "VFD valdiklis"
-
-#: ../src/plugin.py:348
-msgid "Can't cancel during upgrade!!"
-msgstr "Atnaujinimo metu nutraukti negalima!"
-
-#: ../src/plugin.py:350
-msgid "Status : 0%"
-msgstr "Stovis: 0%"
-
-#: ../src/plugin.py:383
-msgid "Fail to upgrade!! Retry!!"
-msgstr "Atnaujinti nepavyko! Bandykite dar kartą!"
-
-#: ../src/plugin.py:385
 #, python-format
 msgid "%d / 100"
 msgstr "%d / 100"
 
-#: ../src/plugin.py:388
-msgid "Success. Press OK to exit."
-msgstr "Pavyko. Kad užverti, spauskite 'OK'."
+msgid "Can't cancel during upgrade!!"
+msgstr "Atnaujinimo metu nutraukti negalima!"
 
-#: ../src/plugin.py:417
-msgid "Do you want to remove binary data?"
-msgstr "Ar norite pašalinti dvejetainius duomenis?"
-
-#: ../src/plugin.py:435
-msgid "Download"
-msgstr "Parsiųsti"
-
-#: ../src/plugin.py:476
-msgid "Can't found binary file."
-msgstr "Nerasta dvejetainio failo."
-
-#: ../src/plugin.py:479
-msgid "Can't found MD5 file."
-msgstr "Nerasta MD5 failo."
-
-#: ../src/plugin.py:490 ../src/plugin.py:494
-msgid "You choose the incorrect file. "
-msgstr "Pasirinkote neteisingą failą. "
-
-#: ../src/plugin.py:498
 msgid "Can't find /usr/bin/md5sum"
 msgstr "Nerasta /usr/bin/md5sum"
 
-#: ../src/plugin.py:505
+msgid "Can't found MD5 file."
+msgstr "Nerasta MD5 failo."
+
+msgid "Can't found binary file."
+msgstr "Nerasta dvejetainio failo."
+
+msgid "Can't found device file!!"
+msgstr "Nerasta įrenginio failo!"
+
+msgid "Can't found model name."
+msgstr "Nerasta modelio pavadinimo."
+
+msgid "Close"
+msgstr "Uždaryti"
+
+msgid "Do you want to remove binary data?"
+msgstr "Ar norite pašalinti dvejetainius duomenis?"
+
+msgid "Download"
+msgstr "Parsiųsti"
+
+msgid "Duo/Solo was not support."
+msgstr "SOLO/DUO neatnaujinami."
+
+msgid "FPGA"
+msgstr "FPGA"
+
+msgid "Fail to upgrade!! Retry!!"
+msgstr "Atnaujinti nepavyko! Bandykite dar kartą!"
+
 #, python-format
 msgid ""
 "Fail to verify data file. \n"
@@ -87,42 +66,35 @@ msgstr ""
 "failas [%s]\n"
 "MD5[%s]"
 
-#: ../src/plugin.py:578
-msgid "Firmware does not exist."
-msgstr "Mikroprogramos nėra."
-
-#: ../src/plugin.py:617
-msgid "Can't found model name."
-msgstr "Nerasta modelio pavadinimo."
-
-#: ../src/plugin.py:689
-msgid "Close"
-msgstr "Uždaryti"
-
-#: ../src/plugin.py:700
-msgid "Duo/Solo was not support."
-msgstr "SOLO/DUO neatnaujinami."
-
-#: ../src/plugin.py:702
-msgid "Upgrade"
-msgstr "Atnaujinti"
-
-#: ../src/plugin.py:710
 msgid "Firmware"
 msgstr "Mikroprograma"
 
-#: ../src/plugin.py:761
-msgid "No selected binary data!!"
-msgstr "Nepasirinkta dvejetainių duomenų!"
-
-#: ../src/plugin.py:768
-msgid "Can't found device file!!"
-msgstr "Nerasta įrenginio failo!"
-
-#: ../src/plugin.py:855
 msgid "Firmware Upgrade"
 msgstr "Mikroprogramos atnaujinimas"
 
-#: ../src/plugin.py:855
+msgid "Firmware does not exist."
+msgstr "Mikroprogramos nėra."
+
+msgid "Front Processor"
+msgstr "Sąsajos procesorius"
+
+msgid "No selected binary data!!"
+msgstr "Nepasirinkta dvejetainių duomenų!"
+
+msgid "Status : 0%"
+msgstr "Stovis: 0%"
+
+msgid "Success. Press OK to exit."
+msgstr "Pavyko. Kad užverti, spauskite 'OK'."
+
+msgid "Upgrade"
+msgstr "Atnaujinti"
+
 msgid "Upgrade Firmware.."
 msgstr "atnaujinkite aparato mikroprogramą..."
+
+msgid "VFD Controller"
+msgstr "VFD valdiklis"
+
+msgid "You choose the incorrect file. "
+msgstr "Pasirinkote neteisingą failą. "

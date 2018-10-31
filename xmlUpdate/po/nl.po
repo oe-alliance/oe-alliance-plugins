@@ -5,72 +5,77 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-10 11:56+0200\n"
-"PO-Revision-Date: 2018-04-10 11:56+0200\n"
-"Last-Translator: Automatically generated\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-07-31 11:01+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: none\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.1.1\n"
 
 msgid "/etc/enigma2"
-msgstr ""
+msgstr "/etc/enigma2"
 
 msgid "/etc/tuxbox (default)"
-msgstr ""
+msgstr "/etc/tuxbox (standaard)"
 
 msgid "Exit"
-msgstr ""
+msgstr "Sluit af"
 
 msgid "Fetch"
-msgstr ""
+msgstr "Haal"
 
 #, python-format
-msgid "Fetching and saving %s.xml succeeded"
-msgstr ""
-
 msgid ""
-"File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
+"Fetching and saving %s.xml succeeded.\n"
+"Restart now for changes to take immediate effect?"
 msgstr ""
+"Ophalen en opslaan van %s.xml gelukt.\n"
+"Nu herstarten om de wijzigingen toe te passen?"
 
-msgid ""
-"Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the "
-"default location. Files stored in \"/etc/enigma2\" override the default file "
-"and are not updated on a software update."
-msgstr ""
+msgid "File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
+msgstr "Bestand (satellites.xml, cables.xml, of terrestrial.xml) wordt geüpdatet."
+
+msgid "Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the default location. Files stored in \"/etc/enigma2\" override the default file and are not updated on a software update."
+msgstr "Map waar het bestand wordt opgeslagen. \"/etc/tuxbox\" is de standaard locatie. Bestanden opgeslagen in \"/etc/enigma2\" gaan boven de standaardbestanden en worden niet geupdatet bij een  software update."
 
 msgid "OE-Alliance"
-msgstr ""
+msgstr "OE-Alliance"
 
 msgid "Online source where the transponder xml file is being retrieved from."
-msgstr ""
+msgstr "Online bron waar het transponder xml-bestand gehaald wordt."
 
 msgid "Save to"
-msgstr ""
+msgstr "Sla op naar"
 
 #, python-format
 msgid "Saving the %s.xml file failed"
-msgstr ""
+msgstr "Opslaan van het %s.xml-bestand is mislukt"
 
 msgid "Source"
-msgstr ""
+msgstr "Bron"
+
+#, python-format
+msgid "The %s.xml download was corrupt."
+msgstr "De %s.xml download was corrupt."
 
 #, python-format
 msgid "The %s.xml file could not be fetched"
-msgstr ""
+msgstr "Het %s.xml-bestand kon niet worden gehaald"
 
 msgid "XML update"
-msgstr ""
+msgstr "XML update"
 
 msgid "cable"
-msgstr ""
+msgstr "kabel"
 
 msgid "satellite"
-msgstr ""
+msgstr "satelliet"
 
 msgid "terrestrial"
-msgstr ""
+msgstr "terrestrisch"

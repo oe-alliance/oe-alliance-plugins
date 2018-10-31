@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Blindscan Official Greek Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:02+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-06-16 15:55+0200\n"
 "Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
 "Language-Team: MCelliot_g <mcelliot_g@hotmail.com>\n"
@@ -19,79 +19,6 @@ msgstr ""
 "X-Generator: Poedit 1.7.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../src/plugin.py:61
-msgid "Blindscan"
-msgstr "Τυφλή ανίχνευση"
-
-#: ../src/plugin.py:113 ../src/plugin.py:125
-msgid "Exit"
-msgstr "Έξοδος"
-
-#: ../src/plugin.py:114
-msgid "Scan"
-msgstr "Ανίχνευση"
-
-#: ../src/plugin.py:115
-msgid "Press Green/OK to start the scan"
-msgstr "Πιέστε το Πράσινο/ΟΚ για να ξεκινήσει η αναζήτηση"
-
-#: ../src/plugin.py:127
-msgid "Please setup your tuner configuration."
-msgstr "Παρακαλώ ρυθμίστε το tuner σας."
-
-#: ../src/plugin.py:249
-msgid "Sorry, this tuner is in use."
-msgstr "Λυπούμαστε, το tuner χρησιμοποιείται"
-
-#: ../src/plugin.py:306
-msgid "no"
-msgstr "όχι"
-
-#: ../src/plugin.py:307
-msgid "up to 1 degree"
-msgstr "έως 1 μοίρα"
-
-#: ../src/plugin.py:308
-msgid "up to 2 degrees"
-msgstr "έως 2 μοίρες"
-
-#: ../src/plugin.py:309
-msgid "up to 3 degrees"
-msgstr "έως 3 μοίρες"
-
-#: ../src/plugin.py:311
-msgid "scan for channels"
-msgstr "ανίχνευση για κανάλια"
-
-#: ../src/plugin.py:312
-msgid "save to XML file"
-msgstr "αποθήκευση σε αρχείο XML"
-
-#: ../src/plugin.py:335 ../src/plugin.py:1150
-msgid "vertical and horizontal"
-msgstr "κάθετη και οριζόντια"
-
-#: ../src/plugin.py:336 ../src/plugin.py:707
-msgid "vertical"
-msgstr "κάθετη"
-
-#: ../src/plugin.py:337 ../src/plugin.py:705
-msgid "horizontal"
-msgstr "οριζόντια"
-
-#: ../src/plugin.py:338 ../src/plugin.py:1157
-msgid "circular right and circular left"
-msgstr "δεξιόστροφη και αριστερόστροφη"
-
-#: ../src/plugin.py:339 ../src/plugin.py:696 ../src/plugin.py:703
-msgid "circular right"
-msgstr "δεξιόστροφη"
-
-#: ../src/plugin.py:340 ../src/plugin.py:698 ../src/plugin.py:701
-msgid "circular left"
-msgstr "αριστερόστροφη"
-
-#: ../src/plugin.py:378
 msgid ""
 "\n"
 "Second slot dual tuner may not be supported blind scan."
@@ -99,7 +26,6 @@ msgstr ""
 "\n"
 "Η δεύτερη θύρα του διπλού tuner μπορεί να μην υποστηρίζει τυφλή ανίχνευση."
 
-#: ../src/plugin.py:380
 msgid ""
 "\n"
 "You must use the power adapter."
@@ -107,159 +33,64 @@ msgstr ""
 "\n"
 "Πρέπει να χρησιμοποιηθεί το τροδοφοδοτικό."
 
-#: ../src/plugin.py:382
-msgid "Tuner"
-msgstr "Tuner"
-
-#: ../src/plugin.py:382
-msgid "Select a tuner that is configured for the satellite you wish to search"
-msgstr ""
-"Επιλέξτε ένα tuner που έχει ρυθμιστεί για το δορυφόρο που θέλετε να "
-"ανιχνεύσετε"
-
-#: ../src/plugin.py:391
-msgid "Satellite"
-msgstr "Δορυφόρος"
-
-#: ../src/plugin.py:391
-msgid "Select the satellite you wish to search"
-msgstr "Επιλέξτε το δορυφόρο που θέλετε να ανιχνεύσετε"
-
-#: ../src/plugin.py:395 ../src/plugin.py:398
-msgid "Scan start frequency"
-msgstr "Συχνότητα εκκίνησης"
-
-#: ../src/plugin.py:395
-msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
-msgstr ""
-"Οι τιμές συχνοτήτων πρέπει να είναι μεταξύ 3000 MHz και 4199 MHz (μπάντα C)"
-
-#: ../src/plugin.py:396 ../src/plugin.py:399
-msgid "Scan stop frequency"
-msgstr "Τελική συχνότητα"
-
-#: ../src/plugin.py:396
-msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
-msgstr ""
-"Οι τιμές συχνοτήτων πρέπει να είναι μεταξύ 3001 MHz και 4200 MHz (μπάντα C)"
-
-#: ../src/plugin.py:398
-msgid "Frequency values must be between 10700 MHz and 12749 MHz"
-msgstr "Οι τιμές συχνοτήτων πρέπει να είναι μεταξύ 10700 MHz και 12479 MHz"
-
-#: ../src/plugin.py:399
-msgid "Frequency values must be between 10701 MHz and 12750 MHz"
-msgstr "Οι τιμές συχνοτήτων πρέπει να είναι μεταξύ 10701 MHz και 12750 MHz"
-
-#: ../src/plugin.py:400
-msgid "Polarisation"
-msgstr "Πόλωση"
-
-#: ../src/plugin.py:400
-#, python-format
-msgid "The suggested polarisation for this satellite is \"%s\""
-msgstr "Η προτεινόμενη πόλωση για αυτό το δορυφόρο είναι \"%s\""
-
-#: ../src/plugin.py:401
-msgid "Scan start symbolrate"
-msgstr "Ρυθμός συμβόλων εκκίνησης"
-
-#: ../src/plugin.py:401
-msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
-msgstr ""
-"Οι τιμές του ρυθμού συμβόλων είναι σε μεγασύμβολα: εισάγετε μία τιμή μεταξύ "
-"1 και 44"
-
-#: ../src/plugin.py:402
-msgid "Scan stop symbolrate"
-msgstr "Τελικός ρυθμός συμβόλων"
-
-#: ../src/plugin.py:402
-msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
-msgstr ""
-"Οι τιμές του ρυθμού συμβόλων είναι σε μεγασύμβολα: εισάγετε μία τιμή μεταξύ "
-"2 και 45"
-
-#: ../src/plugin.py:403
-msgid "Clear before scan"
-msgstr "Εκκαθάριση πριν την ανίχνευση"
-
-#: ../src/plugin.py:403
-msgid ""
-"If you select \"yes\" all channels on the satellite being search will be "
-"deleted before starting the current search"
-msgstr ""
-"Αν επιλέξετε \"ναι\" όλα τα κανάλια του δορυφόρου που ανιχνεύεται θα "
-"διαγραφούν πριν την εκκίνηση της ανίχνευσης"
-
-#: ../src/plugin.py:404
-msgid "Only free scan"
-msgstr "Μόνο τα ελευθέρα"
-
-#: ../src/plugin.py:404
-msgid ""
-"If you select \"yes\" the scan will only save channels that are not "
-"encrypted; \"no\" will find encrypted and non-encrypted channels"
-msgstr ""
-"Αν επιλέξετε \"ναι\" η ανίχνευση θα αποθηκεύσει μόνο τα κανάλια που δεν "
-"είναι κωδικοποιημένα:  \"όχι\" θα ανιχνευθούν κωδικοποιημένα και ελεύθερα "
-"κανάλια"
-
-#: ../src/plugin.py:405
-msgid "Only scan unknown transponders"
-msgstr "Ανίχνευση μόνο των αγνώστων αναμεταδοτών"
-
-#: ../src/plugin.py:405
-msgid ""
-"If you select \"yes\" the scan will only search transponders not listed in "
-"satellites.xml"
-msgstr ""
-"Αν επιλέξετε \"ναι\" η ανίχνευση θα ψάξει μόνο αναμεταδότες που δεν υπάρχουν "
-"στο satellites.xml"
-
-#: ../src/plugin.py:406
-msgid "Filter out adjacent satellites"
-msgstr "Φιλτράρισμα παρακείμενων δορυφόρων"
-
-#: ../src/plugin.py:406
-msgid ""
-"When a neighbouring satellite is very strong this avoids searching "
-"transponders known to be coming from the neighbouring satellite"
-msgstr ""
-"Όταν ένας γειτονικός δορυφόρος είναι πολύ δυνατός, αυτό αποτρέπει την "
-"ανίχνευση αναμεταδοτών που είναι γνωστό ότι ανήκουν σε αυτόν"
-
-#: ../src/plugin.py:407
-msgid "Search type"
-msgstr "Τύπος ανίχνευσης"
-
-#: ../src/plugin.py:407
-msgid ""
-"\"channel scan\" searches for channels and saves them to your receiver; both "
-"options do a transponder search and save the result in /tmp in an XML file "
-"in satellites.xml format"
-msgstr ""
-"Η \"ανίχνευση για κανάλια\" ψάχνει για κανάλια και τα αποθηκεύει στο δέκτη "
-"σας: και οι δύο επιλογές εκτελούν ανίχνευση αναμεταδοτών και αποθηκεύουν το "
-"αποτέλεσμα στο /tmp σε ένα αρχείο XML μορφής satellites.xml"
-
-#: ../src/plugin.py:651
-#, python-format
-msgid "Not found blind scan utility '%s'!"
-msgstr "Το εργαλείο τυφλής ανίχνευσης '%s' δεν βρέθηκε!"
-
-#: ../src/plugin.py:710
 msgid "   Starting Sundtek hardware blind scan."
 msgstr "   Εκκίνηση τυφλής ανίχνευσης Sundtek."
 
-#: ../src/plugin.py:712
+#, fuzzy
+msgid " tuner."
+msgstr "Tuner"
+
+msgid "\"channel scan\" searches for channels and saves them to your receiver; both options do a transponder search and save the result in /tmp in an XML file in satellites.xml format"
+msgstr "Η \"ανίχνευση για κανάλια\" ψάχνει για κανάλια και τα αποθηκεύει στο δέκτη σας: και οι δύο επιλογές εκτελούν ανίχνευση αναμεταδοτών και αποθηκεύουν το αποτέλεσμα στο /tmp σε ένα αρχείο XML μορφής satellites.xml"
+
+#, fuzzy, python-format
+msgid "%d transponder(s) found"
+msgstr "Βρέθηκαν %d αναμεταδότες σε %d:%02d λεπτά "
+
 #, python-format
+msgid "%d transponders found at %d:%02d min"
+msgstr "Βρέθηκαν %d αναμεταδότες σε %d:%02d λεπτά "
+
+#, fuzzy, python-format
+msgid "%d:%02d/%d:%02dmin"
+msgstr "Βήμα %d %d:%02d λεπτά"
+
+#, python-format
+msgid "%dMHz scanned"
+msgstr ""
+
+msgid "AUTOMATICALLY start service searching, press green to change."
+msgstr ""
+
+msgid "Accuracy (higher is better)"
+msgstr ""
+
+msgid "Blind scan"
+msgstr "Τυφλή ανίχνευση"
+
+msgid "Blind scan for DVB-S2 tuners"
+msgstr ""
+
+#, fuzzy
+msgid "Blind scan state"
+msgstr "Τυφλή ανίχνευση"
+
+msgid "Blindscan"
+msgstr "Τυφλή ανίχνευση"
+
+msgid "Blindscan is not supported in "
+msgstr ""
+
+msgid "Clear before scan"
+msgstr "Εκκαθάριση πριν την ανίχνευση"
+
+#, fuzzy, python-format
 msgid ""
-"Current Status : %d/%d\n"
-"   Satellite : %s\n"
-"   Polarization : %s\n"
-"   Frequency range : %d - %d MHz\n"
-"   Symbol rates : %d - %d MHz"
+"Current Status: %d/%d\n"
+"   Satellite: %s\n"
+"   Polarization: %s\n"
+"   Frequency range: %d - %d MHz\n"
+"   Symbol rates: %d - %d MHz"
 msgstr ""
 "   Τρέχουσα κατάσταση : %d/%d\n"
 "   Δορυφόρος  : %s\n"
@@ -267,7 +98,55 @@ msgstr ""
 "   Εύρος συχνοτήτων : %d - %d MHz\n"
 "   Ρυθμοί συμβόλων : %d - %d Ks/s"
 
-#: ../src/plugin.py:714
+msgid "DVB-S + DVB-S2"
+msgstr ""
+
+msgid "DVB-S only"
+msgstr ""
+
+msgid "Exit"
+msgstr "Έξοδος"
+
+msgid "Filter out adjacent satellites"
+msgstr "Φιλτράρισμα παρακείμενων δορυφόρων"
+
+msgid "Frequency values must be between 10700 MHz and 12749 MHz"
+msgstr "Οι τιμές συχνοτήτων πρέπει να είναι μεταξύ 10700 MHz και 12479 MHz"
+
+msgid "Frequency values must be between 10701 MHz and 12750 MHz"
+msgstr "Οι τιμές συχνοτήτων πρέπει να είναι μεταξύ 10701 MHz και 12750 MHz"
+
+#, fuzzy
+msgid "Frequency values must be between 117000 MHz and 12749 MHz (Circular-band)"
+msgstr "Οι τιμές συχνοτήτων πρέπει να είναι μεταξύ 3000 MHz και 4199 MHz (μπάντα C)"
+
+#, fuzzy
+msgid "Frequency values must be between 11701 MHz and 12750 MHz (Circular-band)"
+msgstr "Οι τιμές συχνοτήτων πρέπει να είναι μεταξύ 3001 MHz και 4200 MHz (μπάντα C)"
+
+msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
+msgstr "Οι τιμές συχνοτήτων πρέπει να είναι μεταξύ 3000 MHz και 4199 MHz (μπάντα C)"
+
+msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
+msgstr "Οι τιμές συχνοτήτων πρέπει να είναι μεταξύ 3001 MHz και 4200 MHz (μπάντα C)"
+
+#, python-format
+msgid "Hardware blind scan is not supported by this tuner (%s)!"
+msgstr ""
+
+#, fuzzy
+msgid "Horizontal"
+msgstr "οριζόντια"
+
+msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
+msgstr "Αν επιλέξετε \"ναι\" όλα τα κανάλια του δορυφόρου που ανιχνεύεται θα διαγραφούν πριν την εκκίνηση της ανίχνευσης"
+
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
+msgstr "Αν επιλέξετε \"ναι\" η ανίχνευση θα αποθηκεύσει μόνο τα κανάλια που δεν είναι κωδικοποιημένα:  \"όχι\" θα ανιχνευθούν κωδικοποιημένα και ελεύθερα κανάλια"
+
+msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
+msgstr "Αν επιλέξετε \"ναι\" η ανίχνευση θα ψάξει μόνο αναμεταδότες που δεν υπάρχουν στο satellites.xml"
+
 msgid ""
 "Looking for available transponders.\n"
 "This will take a long time, please be patient."
@@ -275,7 +154,6 @@ msgstr ""
 "Ανίχνευση διαθέσιμων αναμεταδοτών.\n"
 "Αυτό μπορεί να διαρκέσει αρκετά, παρακαλώ περιμένετε."
 
-#: ../src/plugin.py:716
 msgid ""
 "Looking for available transponders.\n"
 "This will take a short while."
@@ -283,12 +161,93 @@ msgstr ""
 "Ανίχνευση διαθέσιμων αναμεταδοτών.\n"
 "Αυτό μπορεί να διαρκέσει αρκετά."
 
-#: ../src/plugin.py:889
-#, python-format
-msgid "%d transponders found at %d:%02d min"
-msgstr "Βρέθηκαν %d αναμεταδότες σε %d:%02d λεπτά "
+msgid "MANUALLY start service searching, press green to change."
+msgstr ""
 
-#: ../src/plugin.py:949
+msgid "Maybe the reason that recording is currently running."
+msgstr ""
+
+msgid "Network scan"
+msgstr ""
+
+msgid ""
+"No new transponders found! \n"
+"\n"
+"Only transponders already listed in satellites.xml \n"
+"have been found for those search parameters!"
+msgstr ""
+"Δεν βρέθηκαν νέοι αναμεταδότες! \n"
+"\n"
+"Μόνο αναμεταδότες που υπάρχουν ήδη στο satellites.xml \n"
+"έχουν βρεθεί με αυτές τις παραμέτρους ανίχνευσης!"
+
+msgid "No transponders were found for those search parameters!"
+msgstr "Δεν βρέθηκαν αναμεταδότες με αυτές τις παραμέτρους ανίχνευσης!"
+
+msgid ""
+"No tuner is enabled!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+
+#, python-format
+msgid "Not found blind scan utility '%s'!"
+msgstr "Το εργαλείο τυφλής ανίχνευσης '%s' δεν βρέθηκε!"
+
+msgid ""
+"Nothing to scan!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+
+msgid "Nothing to scan! Press Exit!"
+msgstr ""
+
+msgid "Only free scan"
+msgstr "Μόνο τα ελευθέρα"
+
+msgid "Only scan unknown transponders"
+msgstr "Ανίχνευση μόνο των αγνώστων αναμεταδοτών"
+
+msgid "Please setup your tuner configuration."
+msgstr "Παρακαλώ ρυθμίστε το tuner σας."
+
+msgid "Polarisation"
+msgstr "Πόλωση"
+
+msgid "Press Green/OK to start the scan"
+msgstr "Πιέστε το Πράσινο/ΟΚ για να ξεκινήσει η αναζήτηση"
+
+#, fuzzy
+msgid "Press OK to start the scan."
+msgstr "Πιέστε το Πράσινο/ΟΚ για να ξεκινήσει η αναζήτηση"
+
+#, fuzzy
+msgid "Press green to start service searching."
+msgstr "Πιέστε το Πράσινο/ΟΚ για να ξεκινήσει η αναζήτηση"
+
+msgid "Satellite"
+msgstr "Δορυφόρος"
+
+msgid "Scan"
+msgstr "Ανίχνευση"
+
+msgid "Scan Step in MHz(TBS5925)"
+msgstr ""
+
+msgid "Scan satellites for new transponders"
+msgstr "Ανίχνευση δορυφόρων για νέους αναμεταδότες"
+
+msgid "Scan start frequency"
+msgstr "Συχνότητα εκκίνησης"
+
+msgid "Scan start symbolrate"
+msgstr "Ρυθμός συμβόλων εκκίνησης"
+
+msgid "Scan stop frequency"
+msgstr "Τελική συχνότητα"
+
+msgid "Scan stop symbolrate"
+msgstr "Τελικός ρυθμός συμβόλων"
+
 #, python-format
 msgid ""
 "Search completed. %d transponders found.\n"
@@ -301,37 +260,100 @@ msgstr ""
 "Οι λεπτομέρειες αποθηκεύτηκαν στο:\n"
 "%s"
 
-#: ../src/plugin.py:952
-msgid ""
-"No new transponders found! \n"
-"\n"
-"Only transponders already listed in satellites.xml \n"
-"have been found for those search parameters!"
+msgid "Search type"
+msgstr "Τύπος ανίχνευσης"
+
+msgid "Select a tuner that is configured for the satellite you wish to search"
+msgstr "Επιλέξτε ένα tuner που έχει ρυθμιστεί για το δορυφόρο που θέλετε να ανιχνεύσετε"
+
+msgid "Select the satellite you wish to search"
+msgstr "Επιλέξτε το δορυφόρο που θέλετε να ανιχνεύσετε"
+
+msgid "Smaller steps takes longer but scan is more thorough"
 msgstr ""
-"Δεν βρέθηκαν νέοι αναμεταδότες! \n"
-"\n"
-"Μόνο αναμεταδότες που υπάρχουν ήδη στο satellites.xml \n"
-"έχουν βρεθεί με αυτές τις παραμέτρους ανίχνευσης!"
 
-#: ../src/plugin.py:956
-msgid "No transponders were found for those search parameters!"
-msgstr "Δεν βρέθηκαν αναμεταδότες με αυτές τις παραμέτρους ανίχνευσης!"
+msgid "Sorry, this tuner is in use."
+msgstr "Λυπούμαστε, το tuner χρησιμοποιείται"
 
-#: ../src/plugin.py:958
+#, python-format
+msgid "Step %d %d:%02d min"
+msgstr "Βήμα %d %d:%02d λεπτά"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+msgstr "Οι τιμές του ρυθμού συμβόλων είναι σε μεγασύμβολα: εισάγετε μία τιμή μεταξύ 1 και 44"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
+msgstr "Οι τιμές του ρυθμού συμβόλων είναι σε μεγασύμβολα: εισάγετε μία τιμή μεταξύ 2 και 45"
+
 msgid "The blindscan run was cancelled by the user."
 msgstr "Η τυφλή ανίχνευση ακυρώθηκε από το χρήστη."
 
-#: ../src/plugin.py:1170
+#, python-format
+msgid "The suggested polarisation for this satellite is \"%s\""
+msgstr "Η προτεινόμενη πόλωση για αυτό το δορυφόρο είναι \"%s\""
+
+msgid "Transponder searching finished!"
+msgstr ""
+
+#, fuzzy
+msgid "Try to find used satellite transponders..."
+msgstr "Ανίχνευση δορυφόρων για νέους αναμεταδότες"
+
+msgid "Tuner"
+msgstr "Tuner"
+
+#, fuzzy
+msgid "Use Sundtek full hardware blind scan!"
+msgstr "   Εκκίνηση τυφλής ανίχνευσης Sundtek."
+
+#, fuzzy
+msgid "Vertical"
+msgstr "κάθετη"
+
+msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
+msgstr "Όταν ένας γειτονικός δορυφόρος είναι πολύ δυνατός, αυτό αποτρέπει την ανίχνευση αναμεταδοτών που είναι γνωστό ότι ανήκουν σε αυτόν"
+
+msgid "circular left"
+msgstr "αριστερόστροφη"
+
+msgid "circular right"
+msgstr "δεξιόστροφη"
+
 msgid "circular right & circular left"
 msgstr "δεξιόστροφη & αριστερόστροφη"
 
-#: ../src/plugin.py:1236 ../src/plugin.py:1244
-msgid "Blind scan"
-msgstr "Τυφλή ανίχνευση"
+msgid "circular right and circular left"
+msgstr "δεξιόστροφη και αριστερόστροφη"
 
-#: ../src/plugin.py:1244
-msgid "Scan satellites for new transponders"
-msgstr "Ανίχνευση δορυφόρων για νέους αναμεταδότες"
+msgid "horizontal"
+msgstr "οριζόντια"
 
-msgid "Step %d %d:%02d min"
-msgstr "Βήμα %d %d:%02d λεπτά"
+msgid "no"
+msgstr "όχι"
+
+msgid "save to XML file"
+msgstr "αποθήκευση σε αρχείο XML"
+
+msgid "scan for channels"
+msgstr "ανίχνευση για κανάλια"
+
+msgid "up to 1 degree"
+msgstr "έως 1 μοίρα"
+
+msgid "up to 2 degrees"
+msgstr "έως 2 μοίρες"
+
+msgid "up to 3 degrees"
+msgstr "έως 3 μοίρες"
+
+msgid "vertical"
+msgstr "κάθετη"
+
+msgid "vertical and horizontal"
+msgstr "κάθετη και οριζόντια"
+
+msgid "yes"
+msgstr ""
+
+msgid "yes (keep feeds)"
+msgstr ""

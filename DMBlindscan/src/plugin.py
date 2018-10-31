@@ -249,6 +249,8 @@ class SatelliteTransponderSearchSupport:
 					if parm.system == eDVBFrontendParametersSatellite.System_DVB_S2:
 						parm.rolloff = d["rolloff"]
 						parm.pilot = d["pilot"]
+						parm.is_id = d["is_id"]
+						parm.pls_mode = d["pls_mode"]
 					self.__tlist.append(parm)
 
 					print "LOCKED at", freq, "SEARCHED at", self.parm.frequency, "half bw", (135L*((sr+1000)/1000)/200), "half search range", (self.parm.symbol_rate/2)
@@ -337,6 +339,8 @@ class SatelliteTransponderSearchSupport:
 				parm.system = self.scan_sat.bs_system.value
 				parm.pilot = eDVBFrontendParametersSatellite.Pilot_Unknown
 				parm.rolloff = eDVBFrontendParametersSatellite.RollOff_alpha_0_35
+				parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
+				parm.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
 			else:
 				steps = 4000
 				parm.system = eDVBFrontendParametersSatellite.System_DVB_S

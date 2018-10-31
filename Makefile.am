@@ -26,6 +26,14 @@ if DREAMBOX
 SUBDIRS +=  DMBlindscan
 endif
 
+if DINOBOT
+SUBDIRS += MultiTransCodingSetup
+endif
+
+if CC1
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if XTREND
 SUBDIRS += XtrendFancontrol XtrendRemote
 endif
@@ -194,6 +202,14 @@ if S7400S
 SUBDIRS += F3LEDControl
 endif
 
+if SF8008
+SUBDIRS += MultiTransCodingSetup VPLEDControl
+endif
+
+if USTYM4KPRO
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if S8100S
 SUBDIRS += MultiTransCodingSetup
 endif
@@ -215,6 +231,14 @@ SUBDIRS += F3LEDControl
 endif
 
 if H9
+SUBDIRS += MultiTransCodingSetup
+endif
+
+if HD60
+SUBDIRS += MultiTransCodingSetup
+endif
+
+if I55PLUS
 SUBDIRS += MultiTransCodingSetup
 endif
 
@@ -280,6 +304,10 @@ endif
 
 if SPARK
 SUBDIRS += SparkVFDControl SparkUnionTunerType SH4BoosterControl SH4OSDAdjustment
+endif
+
+if OSMIO4K
+SUBDIRS += SimpleFancontrol
 endif
 
 

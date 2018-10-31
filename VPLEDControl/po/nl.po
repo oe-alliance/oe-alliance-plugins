@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:15+0200\n"
-"PO-Revision-Date: 2017-07-05 15:59+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-07-31 10:42+0200\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -15,133 +15,65 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:25
-msgid "Channelnumber in Standby off"
-msgstr "Zendernummer in stand-by uit"
-
-#: ../src/plugin.py:25
-msgid "Channelnumber in Standby Clock"
-msgstr "Zendernummer in stand-by klok"
-
-#: ../src/plugin.py:25
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Zendernummer/Klok in stand-by klok"
-
-#: ../src/plugin.py:25
-msgid "Clock always"
-msgstr "Klok altijd"
-
-#: ../src/plugin.py:25
 msgid "Always off"
 msgstr "Altijd uit"
 
-#: ../src/plugin.py:27
-msgid "yes"
-msgstr "ja"
-
-#: ../src/plugin.py:27
-msgid "no"
-msgstr "nee"
-
-#: ../src/plugin.py:28
-msgid "Off"
-msgstr "Uit"
-
-#: ../src/plugin.py:28
-msgid "On/Off"
-msgstr "Aan/Uit"
-
-#: ../src/plugin.py:28
-msgid "Brightness level"
-msgstr "Helderheidsniveau"
-
-#: ../src/plugin.py:225 ../src/plugin.py:324 ../src/plugin.py:331
-msgid "LED Display Setup"
-msgstr "LED Scherm instellen"
-
-#: ../src/plugin.py:236
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: ../src/plugin.py:237
-msgid "Save"
-msgstr "Opslaan"
-
-#: ../src/plugin.py:238
-msgid "Update Date/Time"
-msgstr "Update Datum/Tjd"
-
-#: ../src/plugin.py:251 ../src/plugin.py:271
-msgid "Show on LED"
-msgstr "Toon op LED"
-
-#: ../src/plugin.py:253
-msgid "Time mode"
-msgstr "Tijdmodus"
-
-#: ../src/plugin.py:254 ../src/plugin.py:273
-msgid "Show REC-Symbol in Display"
-msgstr "Toon REC-symbool in het LCD scherm"
-
-#: ../src/plugin.py:256 ../src/plugin.py:275
-msgid "Show blinking Clock on Display during recording"
-msgstr "Toon knipperende klok in het LCD scherm tijdens opnemen"
-
-#: ../src/plugin.py:258
 msgid "Brightness Level 1"
 msgstr "Helderheidsniveau 1"
 
-#: ../src/plugin.py:259
 msgid "Brightness Level 2"
 msgstr "Helderheidsniveau 2"
 
-#~ msgid "Blink Record Led"
-#~ msgstr "Opname LED knippert"
+msgid "Brightness level"
+msgstr "Helderheidsniveau"
 
-#~ msgid "Blue"
-#~ msgstr "Blauw"
+msgid "Cancel"
+msgstr "Annuleer"
 
-#~ msgid "Enable led"
-#~ msgstr "LED ingeschakeld"
+msgid "Channelnumber in Standby Clock"
+msgstr "Zendernummer in stand-by klok"
 
-#~ msgid "Led state Deep Standby"
-#~ msgstr "LED tijdens Deep Standby"
+msgid "Channelnumber in Standby off"
+msgstr "Zendernummer in stand-by uit"
 
-#~ msgid "Led state RUN"
-#~ msgstr "LED status RUN"
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Zendernummer/Klok in stand-by klok"
 
-#~ msgid "Led state Record"
-#~ msgstr "LED status Opname"
+msgid "Clock always"
+msgstr "Klok altijd"
 
-#~ msgid "Led state Standby"
-#~ msgstr "LED status Stand-by"
+msgid "LED Display Setup"
+msgstr "LED-scherm instellen"
 
-#~ msgid "No"
-#~ msgstr "Nee"
+msgid "Off"
+msgstr "Uit"
 
-#~ msgid "None"
-#~ msgstr "Geen"
+msgid "On/Off"
+msgstr "Aan/Uit"
 
-#~ msgid "Purple"
-#~ msgstr "Paars"
+msgid "Save"
+msgstr "Sla op"
 
-#~ msgid "Red"
-#~ msgstr "Rood"
+msgid "Show REC-Symbol in Display"
+msgstr "Toon REC-symbool in het LCD-scherm"
 
-#~ msgid "Show clock"
-#~ msgstr "Toon klok"
+msgid "Show blinking Clock on Display during recording"
+msgstr "Toon knipperende klok in het LCD-scherm tijdens opnemen"
 
-#~ msgid "Show clock in Deep Standby"
-#~ msgstr "Toon klok in Deep Standby"
+msgid "Show on LED"
+msgstr "Toon op LED"
 
-#~ msgid "VFD_Giga"
-#~ msgstr "VFD_Giga"
+msgid "Time mode"
+msgstr "Tijdmodus"
 
-#~ msgid "Yes"
-#~ msgstr "Ja"
+msgid "Update Date/Time"
+msgstr "Update datum/tijd"
 
-#~ msgid "in standby: "
-#~ msgstr "in standby: "
+msgid "no"
+msgstr "nee"
+
+msgid "yes"
+msgstr "ja"

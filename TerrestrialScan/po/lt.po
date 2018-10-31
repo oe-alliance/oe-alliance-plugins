@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrestrialScan oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-02 19:21+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-06 08:05+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -10,15 +10,20 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.2\n"
+
+msgid "- ONID to search"
+msgstr ""
 
 msgid "Automatic"
 msgstr "Automatiškai"
 
 msgid "Band"
 msgstr "Diapazonas"
+
+msgid "Cannot allocate the demuxer"
+msgstr ""
 
 msgid "Cannot free NIM because a recording is in progress"
 msgstr "Imtuvas užimtas, nes dabar vyksta įrašymas"
@@ -35,6 +40,12 @@ msgstr "Išteklių valdymas neprieinamas"
 msgid "Clear before scan"
 msgstr "Prieš paiešką išvalyti"
 
+msgid "Create terrestrial bouquet"
+msgstr ""
+
+msgid "Enter the original network ID (ONID) of the multiplexes you wish to restrict the search to. UK terrestrial television normally ONID \"9018\"."
+msgstr ""
+
 msgid "Exit"
 msgstr "Uždaryti"
 
@@ -45,33 +56,32 @@ msgstr[0] "Surastas %d naujas transponderis"
 msgstr[1] "Surasti %d nauji transponderiai"
 msgstr[2] "Surasta %d naujų transponderių"
 
-msgid ""
-"If you select \"yes\" all stored terrestrial channels will be deleted before "
-"starting the current search."
-msgstr ""
-"Jei pasirinksite 'taip', prieš pradedant šią paiešką, visi ankstesni "
-"išsaugoti antžeminiai kanalai bus panaikinti."
+msgid "If you select \"yes\" all stored terrestrial channels will be deleted before starting the current search."
+msgstr "Jei pasirinksite 'taip', prieš pradedant šią paiešką, visi ankstesni išsaugoti antžeminiai kanalai bus panaikinti."
 
-msgid ""
-"If you select \"yes\" the scan will only save channels that are not "
-"encrypted; \"no\" will find encrypted and non-encrypted channels."
+msgid "If you select \"yes\" and LCNs are found in the NIT, the scan will create a bouquet of terrestrial channels in LCN order and add it to the bouquet list."
 msgstr ""
-"Jei pasirinksite 'taip', bus išsaugoti tik atviri, nekoduoti kanalai; 'ne' "
-"išsaugos ir koduotus, ir nekoduotus kanalus."
 
-msgid ""
-"Most transmitters in European countries only have TV channels in the UHF "
-"band."
+msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
+msgstr "Jei pasirinksite 'taip', bus išsaugoti tik atviri, nekoduoti kanalai; 'ne' išsaugos ir koduotus, ir nekoduotus kanalus."
+
+msgid "MakeBouquet"
+msgstr ""
+
+msgid "Making bouquet..."
+msgstr ""
+
+msgid "Most transmitters in European countries only have TV channels in the UHF band."
 msgstr "Dauguma Europos šalių siųstuvų turi tik UHF diapazono TV kanalus."
-
-msgid "Network ID"
-msgstr "Tinklo ID"
 
 msgid "No frequencies to search"
 msgstr "Nėra paieškos dažnių"
 
 msgid "No terrestrial tuner found"
 msgstr "Antžeminės TV imtuvų nerasta"
+
+msgid "No transponders to read"
+msgstr ""
 
 msgid "No valid NIM found for terrestrial"
 msgstr "Nerasta tinkamų antžeminių imtuvų"
@@ -80,11 +90,22 @@ msgid "Only free scan"
 msgstr "Ieškoti tik nekoduotų kanalų"
 
 #, python-format
+msgid "Reading SI tables on %s MHz"
+msgstr ""
+
+#, python-format
 msgid "Reading channel %s"
+msgstr "Skaitomas kanalas %s"
+
+#, fuzzy
+msgid "Reading streams"
 msgstr "Skaitomas kanalas %s"
 
 msgid "Really close without saving settings?"
 msgstr "Ar tikrai uždaryti langą neišsaugant nuostatų?"
+
+msgid "Restrict search to single ONID"
+msgstr ""
 
 msgid "Scan"
 msgstr "Paieška"
@@ -96,19 +117,11 @@ msgstr "Ieškomas kanalas %s"
 msgid "Scanning for active transponders"
 msgstr "Ieškoma veikiančių transponderių"
 
-msgid ""
-"Select \"0\" to search all networks, or enter the network ID of the provider "
-"you wish to search."
+msgid "Select \"Yes\" to restrict the search to multiplexes that belong to a single original network ID (ONID). Select \"No\" to search all ONIDs."
 msgstr ""
-"Pasirinkite \"0\", kad ieškoti visuose tinkluose, arba įveskite teikėjo, "
-"kurio ieškosite, tinklo ID."
 
-msgid ""
-"Select a tuner that is configured for terrestrial scans. \"Automatic\" will "
-"pick the highest spec available tuner."
-msgstr ""
-"Pasirinkite imtuvą, sukonfigūruotą antžeminei paieškai. \"Automatiškai\" "
-"parinks aukščiausios reikšmės imtuvą."
+msgid "Select a tuner that is configured for terrestrial scans. \"Automatic\" will pick the highest spec available tuner."
+msgstr "Pasirinkite imtuvą, sukonfigūruotą antžeminei paieškai. \"Automatiškai\" parinks aukščiausios reikšmės imtuvą."
 
 msgid "Selected tuner is not cofigured"
 msgstr "Pasirinktas imtuvas nesukonfigūruotas"
@@ -119,6 +132,14 @@ msgstr "Pradedama paieška"
 msgid "Starting search..."
 msgstr "Prasideda paieška..."
 
+#, python-format
+msgid "TSID: %d, ONID: %d"
+msgstr ""
+
+#, fuzzy
+msgid "Terrestrial"
+msgstr "Antžeminės TV paieška"
+
 msgid "Terrestrial Scan"
 msgstr "Antžeminės TV paieška"
 
@@ -127,6 +148,10 @@ msgstr "Antžeminės TV paieška"
 
 msgid "Tuner"
 msgstr "Imtuvas"
+
+#, python-format
+msgid "Tuning %s MHz"
+msgstr ""
 
 msgid "UHF Europe"
 msgstr "UHF Europa"

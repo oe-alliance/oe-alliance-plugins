@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 13:50+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:50+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -14,127 +14,95 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/plugin.py:319
-msgid "SAT>IP Client Tuner Setup"
-msgstr "SAT>IP Client Tuner Konfiguration"
-
-#: ../src/plugin.py:327 ../src/plugin.py:595
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: ../src/plugin.py:328
-msgid "Ok"
-msgstr "OK"
-
-#: ../src/plugin.py:329
-msgid "Discover"
-msgstr "Suchen"
-
-#: ../src/plugin.py:330
-msgid "Starting..."
-msgstr "Startet..."
-
-#: ../src/plugin.py:331
 msgid " "
 msgstr ""
 
-#: ../src/plugin.py:367
-#, python-format
-msgid "SAT>IP server discovering for %d seconds..."
-msgstr "SAT>IP Server suche für %d sekunden..."
+msgid "Cancel"
+msgstr "Abbrechen"
 
-#: ../src/plugin.py:377
-msgid "SAT>IP server is not detected."
-msgstr "SAT>IP Server wurde nicht gefunden."
-
-#: ../src/plugin.py:402
-msgid "SAT>IP Server : "
-msgstr "SAT>IP Server : "
-
-#: ../src/plugin.py:406
-msgid "SAT>IP Tuner Type : "
-msgstr "SAT>IP Tuner Typ : "
-
-#: ../src/plugin.py:430
 msgid "DVB-S"
 msgstr ""
 
-#: ../src/plugin.py:458
 msgid "Description"
 msgstr "Beschreibung"
 
-#: ../src/plugin.py:459
-msgid "Manufacturer"
-msgstr "Hersteller"
-
-#: ../src/plugin.py:474
-msgid "Select"
-msgstr "Auswahl"
-
-#: ../src/plugin.py:539
-msgid "Server capacity is fulled."
-msgstr "Server Kapazität erreicht"
-
-#: ../src/plugin.py:591
-msgid "SAT>IP Client Setup"
-msgstr "SAT>IP Client"
-
-#: ../src/plugin.py:596
-msgid "Save"
-msgstr "Speichern"
-
-#: ../src/plugin.py:597
-msgid "Setup"
-msgstr "Einstellungen"
-
-#: ../src/plugin.py:598
 msgid "Disable"
 msgstr "Deaktivieren"
 
-#: ../src/plugin.py:599
-msgid "Select tuner and press setup key (Yellow)"
-msgstr "Tuner Auswählen und Taste (Gelb) für Setup"
+msgid "Discover"
+msgstr "Suchen"
 
-#: ../src/plugin.py:657
-msgid "Really close without saving settings?"
-msgstr "Wirklich ohne speichern der Konfiguration beenden?"
-
-#: ../src/plugin.py:670 ../src/plugin.py:682
-#, python-format
-msgid "VIRTUAL TUNER %s"
-msgstr "VIRTUAL TUNER %s"
-
-#: ../src/plugin.py:671 ../src/plugin.py:683
-#, python-format
-msgid "TYPE : %s"
-msgstr "TYP : %s"
-
-#: ../src/plugin.py:672
 #, python-format
 msgid "IP : %s"
 msgstr "IP : %s"
 
-#: ../src/plugin.py:673
-#, python-format
-msgid "TUNER TYPE : %s"
-msgstr "TUNER TYP : %s"
+msgid "Manufacturer"
+msgstr "Hersteller"
 
-#: ../src/plugin.py:674
+msgid "No vtuner found."
+msgstr ""
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Really close without saving settings?"
+msgstr "Wirklich ohne speichern der Konfiguration beenden?"
+
+msgid "SAT>IP Client"
+msgstr "SAT>IP Client"
+
+msgid "SAT>IP Client Setup"
+msgstr "SAT>IP Client"
+
+msgid "SAT>IP Client Tuner Setup"
+msgstr "SAT>IP Client Tuner Konfiguration"
+
+msgid "SAT>IP Client attached to vtuner."
+msgstr "SAT>IP Client Anbindung über Vtuner"
+
 #, python-format
 msgid "SAT>IP SERVER : %s"
 msgstr "SAT>IP SERVER : %s"
 
-#: ../src/plugin.py:801 ../src/plugin.py:806
-msgid "SAT>IP Client"
-msgstr "SAT>IP Client"
+msgid "SAT>IP Server : "
+msgstr "SAT>IP Server : "
 
-#: ../src/plugin.py:806
-msgid "SAT>IP Client attached to vtuner."
-msgstr "SAT>IP Client Anbindung über Vtuner"
+msgid "SAT>IP Tuner Type : "
+msgstr "SAT>IP Tuner Typ : "
 
-#~ msgid ""
-#~ "You should now reboot your STB to change SAT>IP Configuration.\n"
-#~ "\n"
-#~ "Reboot now ?\n"
-#~ "\n"
-#~ msgstr "Neustarten um die SAT>IP Konfiguration zu Aktivieren.\\n\\nNeustarten jetzt ?\\n\\n\n"
+#, python-format
+msgid "SAT>IP server discovering for %d seconds..."
+msgstr "SAT>IP Server suche für %d sekunden..."
+
+msgid "SAT>IP server is not detected."
+msgstr "SAT>IP Server wurde nicht gefunden."
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Select"
+msgstr "Auswahl"
+
+msgid "Select tuner and press setup key (Yellow)"
+msgstr "Tuner Auswählen und Taste (Gelb) für Setup"
+
+msgid "Server capacity is fulled."
+msgstr "Server Kapazität erreicht"
+
+msgid "Setup"
+msgstr "Einstellungen"
+
+msgid "Starting..."
+msgstr "Startet..."
+
+#, python-format
+msgid "TUNER TYPE : %s"
+msgstr "TUNER TYP : %s"
+
+#, python-format
+msgid "TYPE : %s"
+msgstr "TYP : %s"
+
+#, python-format
+msgid "VIRTUAL TUNER %s"
+msgstr "VIRTUAL TUNER %s"

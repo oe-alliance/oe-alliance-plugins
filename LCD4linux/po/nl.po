@@ -2,15 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-08 23:50+0000\n"
-"PO-Revision-Date: 2018-02-15 07:13+0100\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-07-31 07:47+0200\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-Basepath: .\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 msgid "%"
@@ -1522,6 +1523,9 @@ msgstr "MusicCast verversen [s]"
 msgid "MusicCast Server IP [optional]"
 msgstr "MusicCast Server IP [optioneel]"
 
+msgid "Mute"
+msgstr "Mute"
+
 msgid "N"
 msgstr "N"
 
@@ -1792,6 +1796,9 @@ msgstr "ZZW"
 msgid "SW"
 msgstr "ZW"
 
+msgid "Samsung SPF-1000P 1024x600"
+msgstr "Samsung SPF-1000P 1024x600"
+
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
 
@@ -1809,6 +1816,9 @@ msgstr "Samsung SPF-72H 800x480"
 
 msgid "Samsung SPF-75H/76H 800x480"
 msgstr "Samsung SPF-75H/76H 800x480"
+
+msgid "Samsung SPF-800P 800x480"
+msgstr "Samsung SPF-800P 800x480"
 
 msgid "Samsung SPF-83H 800x600"
 msgstr "Samsung SPF-83H 800x600"
@@ -1832,7 +1842,7 @@ msgid "Satellite"
 msgstr "Satelliet"
 
 msgid "Save"
-msgstr "Opslaan"
+msgstr "Sla op"
 
 msgid "Save Config"
 msgstr "Sla configuratie op"
@@ -2210,6 +2220,9 @@ msgstr "Weer 2"
 msgid "Weather API"
 msgstr "Weer-API"
 
+msgid "Weather API-ID Key WeatherUnlocked"
+msgstr "Weather API-ID Key WeatherUnlocked"
+
 msgid "Weather API-Key OpenWeatherMap"
 msgstr "Weer API-Key OpenWeatherMap"
 
@@ -2245,6 +2258,9 @@ msgstr "Weer-ikoon zoom"
 
 msgid "Weather-Icon-Path [ok]>"
 msgstr "Weer-ikoon-Pad [ok]>"
+
+msgid "WeatherUnlocked"
+msgstr "WeatherUnlocked"
 
 msgid "WebIF"
 msgstr "Web-IF"
@@ -2762,96 +2778,3 @@ msgstr "ja, lang"
 
 msgid "yes, short"
 msgstr "ja, kort"
-
-#~ msgid "- Current Day Color"
-#~ msgstr "- Current Day Color"
-
-#~ msgid "- Download Cover from Google"
-#~ msgstr "- Download cover van Google"
-
-#~ msgid "- LCD 1 Brightness [no SPF]"
-#~ msgstr "- LCD 1 Brightness [no SPF]"
-
-#~ msgid "- LCD 2 Brightness [no SPF]"
-#~ msgstr "- LCD 2 Brightness [no SPF]"
-
-#~ msgid "- LCD 3 Brightness [no SPF]"
-#~ msgstr "- LCD 3 Brightness [no SPF]"
-
-#~ msgid "- Timeout"
-#~ msgstr "- Timeout"
-
-#~ msgid "April"
-#~ msgstr "april"
-
-#~ msgid "August"
-#~ msgstr "augustus"
-
-#~ msgid "C + rmp"
-#~ msgstr "C + rmp"
-
-#~ msgid "Calendar Background Processing"
-#~ msgstr "Calendar Background Processing"
-
-#~ msgid "Current value: %s"
-#~ msgstr "Current value: %s"
-
-#~ msgid "December"
-#~ msgstr "december"
-
-#~ msgid "February"
-#~ msgstr "februari"
-
-#~ msgid "Friday"
-#~ msgstr "vrijdag"
-
-#~ msgid "January"
-#~ msgstr "januari"
-
-#~ msgid "July"
-#~ msgstr "juli"
-
-#~ msgid "June"
-#~ msgstr "juni"
-
-#~ msgid "MJPEG Boundary Mode"
-#~ msgstr "MJPEG grensmode Mode"
-
-#~ msgid "March"
-#~ msgstr "maart"
-
-#~ msgid "May"
-#~ msgstr "mei"
-
-#~ msgid "Memory"
-#~ msgstr "Memory"
-
-#~ msgid "Monday"
-#~ msgstr "maandag"
-
-#~ msgid "November"
-#~ msgstr "november"
-
-#~ msgid "October"
-#~ msgstr "oktober"
-
-#~ msgid "Saturday"
-#~ msgstr "zaterdag"
-
-#~ msgid "September"
-#~ msgstr "september"
-
-#~ msgid "Show Recording"
-#~ msgstr "Show Recording"
-
-#~ msgid "Sunday"
-#~ msgstr "zondag"
-
-#~ msgid "Thursday"
-#~ msgstr "donderdag"
-
-#~ msgid "Tuesday"
-#~ msgstr "dinsdag"
-
-#~ msgid "Wednesday"
-#~ msgstr "woensdag"

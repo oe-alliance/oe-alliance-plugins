@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RemoteChannelStreamConverter oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis Pulokas <vyteniui@gmail.com>\n"
@@ -11,149 +11,113 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../src/plugin.py:53
-msgid "FTP Server Editor"
-msgstr "FTP serverio redaktorius"
-
-#: ../src/plugin.py:54
-msgid "Exit"
-msgstr "Uždaryti"
-
-#: ../src/plugin.py:55
-msgid "OK"
-msgstr "Gerai"
-
-#: ../src/plugin.py:98
-msgid "Keyboard"
-msgstr "Klaviatūra"
-
-#: ../src/plugin.py:104
-msgid "Use address"
-msgstr "Naudoti adresą"
-
-#: ../src/plugin.py:106
-msgid "Use IP"
-msgstr "Naudoti IP"
-
-#: ../src/plugin.py:112
-msgid "IP:"
-msgstr "IP:"
-
-#: ../src/plugin.py:113 ../src/plugin.py:126
-msgid "Username:"
-msgstr "Vartotojas:"
-
-#: ../src/plugin.py:114 ../src/plugin.py:127
-msgid "Password:"
-msgstr "Slaptažodis:"
-
-#: ../src/plugin.py:115 ../src/plugin.py:128
-msgid "FTPport:"
-msgstr "FTP prievadas:"
-
-#: ../src/plugin.py:116 ../src/plugin.py:129
-msgid "Passive:"
-msgstr "Pasyvus:"
-
-#: ../src/plugin.py:117 ../src/plugin.py:130
-msgid "Telnetport:"
-msgstr "Telnet prievadas:"
-
-#: ../src/plugin.py:125
 msgid "Adress:"
 msgstr "Adresas:"
 
-#: ../src/plugin.py:145
-msgid "Enter address"
-msgstr "Įrašykite adresą"
-
-#: ../src/plugin.py:148
-msgid "Enter username"
-msgstr "Įrašykite vartotojo vardą"
-
-#: ../src/plugin.py:151
-msgid "Enter password"
-msgstr "Įrašykite slaptažodį"
-
-#: ../src/plugin.py:191
-msgid "Select bouquets to convert"
-msgstr "Pasirinkite bukietus konvertavimui"
-
-#: ../src/plugin.py:199
-msgid "Close"
-msgstr "Uždaryti"
-
-#: ../src/plugin.py:201
-msgid "Set server IP"
-msgstr "Serverio IP"
-
-#: ../src/plugin.py:203
-msgid "Select a remote server IP first"
-msgstr "Pirmiausiai pasirinkite nutolusio serverio IP"
-
-#: ../src/plugin.py:235
-msgid "Testing remote connection"
-msgstr "Tikrinamas nuotolinis ryšys"
-
-#: ../src/plugin.py:244
-msgid "Connection to remote IP ok"
-msgstr "Prie nutolusio IP prisijungta"
-
-#: ../src/plugin.py:250
-msgid "Could not connect to remote IP"
-msgstr "Nepavyko prisijungti prie nutolusio IP"
-
-#: ../src/plugin.py:253
-msgid "Downloading remote services"
-msgstr "Parsiunčiamas nuotolinių kanalų sąrašas"
-
-#: ../src/plugin.py:262 ../src/plugin.py:307
-msgid "Download from remote failed"
-msgstr "Atsiųsti nepavyko"
-
-#: ../src/plugin.py:312
-#, python-format
-msgid "FTP reading bouquets %d of %d"
-msgstr "FTP skaitomi bukietai %d iš %d"
-
-#: ../src/plugin.py:322 ../src/plugin.py:628
-msgid "Make your selection"
-msgstr "Pasirinkite"
-
-#: ../src/plugin.py:336
-msgid "Download"
-msgstr "Atsisiųsti"
-
-#: ../src/plugin.py:337
-msgid "Invert"
-msgstr "Invertuoti"
-
-#: ../src/plugin.py:369
-msgid "remote of"
-msgstr "nuotolinis"
-
-#: ../src/plugin.py:472
-msgid "No bouquets selected"
-msgstr "Bukietų nepasirinkta"
-
-#: ../src/plugin.py:604
 msgid "Checking for alternatives"
 msgstr "Ieškoma alternatyvų"
 
-#: ../src/plugin.py:625
+msgid "Close"
+msgstr "Uždaryti"
+
+msgid "Connection to remote IP ok"
+msgstr "Prie nutolusio IP prisijungta"
+
+msgid "Convert remote channel list for streaming"
+msgstr "konvertuokite nutolusių kanalų sąrašą transliacijai"
+
+msgid "Could not connect to remote IP"
+msgstr "Nepavyko prisijungti prie nutolusio IP"
+
+msgid "Download"
+msgstr "Atsisiųsti"
+
+msgid "Download from remote failed"
+msgstr "Atsiųsti nepavyko"
+
+msgid "Downloading remote services"
+msgstr "Parsiunčiamas nuotolinių kanalų sąrašas"
+
+msgid "Enter address"
+msgstr "Įrašykite adresą"
+
+msgid "Enter password"
+msgstr "Įrašykite slaptažodį"
+
+msgid "Enter username"
+msgstr "Įrašykite vartotojo vardą"
+
+msgid "Exit"
+msgstr "Uždaryti"
+
+msgid "FTP Server Editor"
+msgstr "FTP serverio redaktorius"
+
 #, python-format
 msgid "FTP reading alternatives %d of %d"
 msgstr "FTP skaitomos alternatyvos %d iš %d"
 
-#: ../src/plugin.py:657 ../src/plugin.py:662 ../src/plugin.py:667
+#, python-format
+msgid "FTP reading bouquets %d of %d"
+msgstr "FTP skaitomi bukietai %d iš %d"
+
+msgid "FTPport:"
+msgstr "FTP prievadas:"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Invert"
+msgstr "Invertuoti"
+
+msgid "Keyboard"
+msgstr "Klaviatūra"
+
+msgid "Make your selection"
+msgstr "Pasirinkite"
+
+msgid "No bouquets selected"
+msgstr "Bukietų nepasirinkta"
+
+msgid "OK"
+msgstr "Gerai"
+
+msgid "Passive:"
+msgstr "Pasyvus:"
+
+msgid "Password:"
+msgstr "Slaptažodis:"
+
 msgid "Remote channel stream converter"
 msgstr "Nutolusių kanalų transliacijų konverteris"
 
-#: ../src/plugin.py:667
-msgid "Convert remote channel list for streaming"
-msgstr "konvertuokite nutolusių kanalų sąrašą transliacijai"
+msgid "Select a remote server IP first"
+msgstr "Pirmiausiai pasirinkite nutolusio serverio IP"
+
+msgid "Select bouquets to convert"
+msgstr "Pasirinkite bukietus konvertavimui"
+
+msgid "Set server IP"
+msgstr "Serverio IP"
+
+msgid "Telnetport:"
+msgstr "Telnet prievadas:"
+
+msgid "Testing remote connection"
+msgstr "Tikrinamas nuotolinis ryšys"
+
+msgid "Use IP"
+msgstr "Naudoti IP"
+
+msgid "Use address"
+msgstr "Naudoti adresą"
+
+msgid "Username:"
+msgstr "Vartotojas:"
+
+msgid "remote of"
+msgstr "nuotolinis"

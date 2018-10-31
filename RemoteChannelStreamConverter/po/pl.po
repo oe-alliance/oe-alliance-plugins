@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -13,147 +13,109 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:53
-msgid "FTP Server Editor"
-msgstr "Edytor serwera FTP"
-
-#: ../src/plugin.py:54
-msgid "Exit"
-msgstr "Wyjdź"
-
-#: ../src/plugin.py:55
-msgid "OK"
-msgstr "OK"
-
-#: ../src/plugin.py:98
-msgid "Keyboard"
-msgstr "Klawiatura"
-
-#: ../src/plugin.py:104
-msgid "Use address"
-msgstr "Użyj adresu"
-
-#: ../src/plugin.py:106
-msgid "Use IP"
-msgstr "Użyj IP"
-
-#: ../src/plugin.py:112
-msgid "IP:"
-msgstr "IP :"
-
-#: ../src/plugin.py:113 ../src/plugin.py:126
-msgid "Username:"
-msgstr "Użytkownik :"
-
-#: ../src/plugin.py:114 ../src/plugin.py:127
-msgid "Password:"
-msgstr "Hasło:"
-
-#: ../src/plugin.py:115 ../src/plugin.py:128
-msgid "FTPport:"
-msgstr "Port FTP :"
-
-#: ../src/plugin.py:116 ../src/plugin.py:129
-msgid "Passive:"
-msgstr "Pasywny:"
-
-#: ../src/plugin.py:117 ../src/plugin.py:130
-msgid "Telnetport:"
-msgstr "Port telnet:"
-
-#: ../src/plugin.py:125
 msgid "Adress:"
 msgstr "Adres:"
 
-#: ../src/plugin.py:145
-msgid "Enter address"
-msgstr "Wpisz adres"
-
-#: ../src/plugin.py:148
-msgid "Enter username"
-msgstr "Wpisz nazwę użytkownika"
-
-#: ../src/plugin.py:151
-msgid "Enter password"
-msgstr "Wpisz hasło"
-
-#: ../src/plugin.py:191
-msgid "Select bouquets to convert"
-msgstr "Wybierz bukiety do skonwertowania"
-
-#: ../src/plugin.py:199
-msgid "Close"
-msgstr "Zamknij"
-
-#: ../src/plugin.py:201
-msgid "Set server IP"
-msgstr "IP serwera"
-
-#: ../src/plugin.py:203
-msgid "Select a remote server IP first"
-msgstr "Najpierw wybierz IP serwera"
-
-#: ../src/plugin.py:235
-msgid "Testing remote connection"
-msgstr "Test połączenia zdalnego"
-
-#: ../src/plugin.py:244
-msgid "Connection to remote IP ok"
-msgstr "Połączenie ze zdalnym IP poprawne"
-
-#: ../src/plugin.py:250
-msgid "Could not connect to remote IP"
-msgstr "Nie można połaczyć się ze zdalnym IP"
-
-#: ../src/plugin.py:253
-msgid "Downloading remote services"
-msgstr "Pobieranie zdalnych kanałów"
-
-#: ../src/plugin.py:262 ../src/plugin.py:307
-msgid "Download from remote failed"
-msgstr "Pobieranie ze zdalnego odbiornika nie powiodło się"
-
-#: ../src/plugin.py:312
-#, python-format
-msgid "FTP reading bouquets %d of %d"
-msgstr ""
-
-#: ../src/plugin.py:322 ../src/plugin.py:628
-msgid "Make your selection"
-msgstr "Wybierz"
-
-#: ../src/plugin.py:336
-msgid "Download"
-msgstr "Pobierz"
-
-#: ../src/plugin.py:337
-msgid "Invert"
-msgstr "Odwróć"
-
-#: ../src/plugin.py:369
-msgid "remote of"
-msgstr ""
-
-#: ../src/plugin.py:472
-msgid "No bouquets selected"
-msgstr "Nie wybrano bukietów"
-
-#: ../src/plugin.py:604
 msgid "Checking for alternatives"
 msgstr ""
 
-#: ../src/plugin.py:625
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Connection to remote IP ok"
+msgstr "Połączenie ze zdalnym IP poprawne"
+
+msgid "Convert remote channel list for streaming"
+msgstr "Skonwertuj zdalną listę kanałów do 'streamowania'"
+
+msgid "Could not connect to remote IP"
+msgstr "Nie można połaczyć się ze zdalnym IP"
+
+msgid "Download"
+msgstr "Pobierz"
+
+msgid "Download from remote failed"
+msgstr "Pobieranie ze zdalnego odbiornika nie powiodło się"
+
+msgid "Downloading remote services"
+msgstr "Pobieranie zdalnych kanałów"
+
+msgid "Enter address"
+msgstr "Wpisz adres"
+
+msgid "Enter password"
+msgstr "Wpisz hasło"
+
+msgid "Enter username"
+msgstr "Wpisz nazwę użytkownika"
+
+msgid "Exit"
+msgstr "Wyjdź"
+
+msgid "FTP Server Editor"
+msgstr "Edytor serwera FTP"
+
 #, python-format
 msgid "FTP reading alternatives %d of %d"
 msgstr ""
 
-#: ../src/plugin.py:657 ../src/plugin.py:662 ../src/plugin.py:667
+#, python-format
+msgid "FTP reading bouquets %d of %d"
+msgstr ""
+
+msgid "FTPport:"
+msgstr "Port FTP :"
+
+msgid "IP:"
+msgstr "IP :"
+
+msgid "Invert"
+msgstr "Odwróć"
+
+msgid "Keyboard"
+msgstr "Klawiatura"
+
+msgid "Make your selection"
+msgstr "Wybierz"
+
+msgid "No bouquets selected"
+msgstr "Nie wybrano bukietów"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Passive:"
+msgstr "Pasywny:"
+
+msgid "Password:"
+msgstr "Hasło:"
+
 msgid "Remote channel stream converter"
 msgstr "Dodaj zdalne kanały (streaming)"
 
-#: ../src/plugin.py:667
-msgid "Convert remote channel list for streaming"
-msgstr "Skonwertuj zdalną listę kanałów do 'streamowania'"
+msgid "Select a remote server IP first"
+msgstr "Najpierw wybierz IP serwera"
 
-#~ msgid "FTP reading file %d of %d"
-#~ msgstr "FTP odczyt pliku %d z  %d"
+msgid "Select bouquets to convert"
+msgstr "Wybierz bukiety do skonwertowania"
+
+msgid "Set server IP"
+msgstr "IP serwera"
+
+msgid "Telnetport:"
+msgstr "Port telnet:"
+
+msgid "Testing remote connection"
+msgstr "Test połączenia zdalnego"
+
+msgid "Use IP"
+msgstr "Użyj IP"
+
+msgid "Use address"
+msgstr "Użyj adresu"
+
+msgid "Username:"
+msgstr "Użytkownik :"
+
+msgid "remote of"
+msgstr ""

@@ -2,55 +2,46 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TempFanControl oe alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 07:51+0300\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-06 07:54+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:99 ../src/plugin.py:191
-msgid "Fan Control"
-msgstr "Aušintuvo valdymas"
-
-#: ../src/plugin.py:106
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: ../src/plugin.py:107
-msgid "OK"
-msgstr "Gerai"
-
-#: ../src/plugin.py:136
-#, python-format
-msgid "Fan %d voltage"
-msgstr "Aušintuvo %d įtampa"
-
-#: ../src/plugin.py:137
 #, python-format
 msgid "Fan %d PWM"
 msgstr "Aušintuvo %d PWM"
 
-#: ../src/plugin.py:139
 #, python-format
-msgid "Standby fan %d voltage"
-msgstr "Aušintuvo %d įtampa budėjimo režime"
+msgid "Fan %d voltage"
+msgstr "Aušintuvo %d įtampa"
 
-#: ../src/plugin.py:140
+msgid "Fan Control"
+msgstr "Aušintuvo valdymas"
+
+msgid "OK"
+msgstr "Gerai"
+
 #, python-format
 msgid "Standby fan %d PWM"
 msgstr "Aušintuvo %d PWM budėjimo režime"
 
-#: ../src/plugin.py:186
-msgid "Temperature and fan control"
-msgstr "Temperatūra ir aušintuvas"
+#, python-format
+msgid "Standby fan %d voltage"
+msgstr "Aušintuvo %d įtampa budėjimo režime"
 
-#: ../src/plugin.py:191
 msgid "Temperature and Fan control"
 msgstr "Temperatūros ir aušintuvo valdymas"
+
+msgid "Temperature and fan control"
+msgstr "Temperatūra ir aušintuvas"

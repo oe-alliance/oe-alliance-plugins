@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:25+0200\n"
-"PO-Revision-Date: 2016-05-07 14:25+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-07-31 11:38+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,143 +11,51 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-#: ../src/plugin.py:37
 msgid " ver. 3.2"
 msgstr ""
 
-#: ../src/plugin.py:60 ../src/plugin.py:62
-msgid "Fan - Off"
-msgstr "Ventilateur - Arrêt"
-
-#: ../src/plugin.py:60 ../src/plugin.py:62
-msgid "Fan - On"
-msgstr "Ventilateur - Marche"
-
-#: ../src/plugin.py:60 ../src/plugin.py:62
-msgid "Fan - Auto"
-msgstr "Ventilateur - Auto"
-
-#: ../src/plugin.py:61 ../src/plugin.py:62
-msgid "None"
-msgstr "Aucun"
-
-#: ../src/plugin.py:61
-msgid "HDD Sleeping"
-msgstr "Disque dur en veille"
-
-#: ../src/plugin.py:61
-msgid "HDD Temperature"
-msgstr "Disque dur température"
-
-#: ../src/plugin.py:63
-msgid "Off"
-msgstr "Arrêt"
-
-#: ../src/plugin.py:63
-msgid "On"
-msgstr "Marche"
-
-#: ../src/plugin.py:107
-msgid "Fan setup:"
-msgstr "Configuration ventilateur:"
-
-#: ../src/plugin.py:117
-msgid "Power status"
-msgstr "Statut de l'alimentation"
-
-#: ../src/plugin.py:118 ../src/plugin.py:169 ../src/plugin.py:171
-#: ../src/plugin.py:499
-msgid "System temperature"
-msgstr ""
-
-#: ../src/plugin.py:119 ../src/plugin.py:175 ../src/plugin.py:177
-msgid "Harddisk temperature"
-msgstr ""
-
-#: ../src/plugin.py:120
-msgid "Save"
-msgstr "Sauvegarder"
-
-#: ../src/plugin.py:121
-msgid "Cancel"
-msgstr "Annuler"
-
-#: ../src/plugin.py:171 ../src/plugin.py:175
-msgid "n.a."
-msgstr ""
-
-#: ../src/plugin.py:222
-msgid "Fan mode"
-msgstr "Mode ventilateur"
-
-#: ../src/plugin.py:223
-msgid "Switch Fan mode on time setting"
-msgstr "Activer le mode ventilateur sur base de l'heure"
-
-#: ../src/plugin.py:224
-msgid "Watch HDD state"
-msgstr "Surveiller l'état du HDD"
-
-#: ../src/plugin.py:225
-msgid "Watch system temp"
-msgstr ""
-
-#: ../src/plugin.py:229
 msgid "All"
 msgstr "Tout"
 
-#: ../src/plugin.py:232
-msgid "Select internal HDD device"
-msgstr "Sélectionner un disque dur interne"
+msgid "Cancel"
+msgstr "Annuler"
 
-#: ../src/plugin.py:240
-msgid "Start time"
-msgstr "Heure de début"
-
-#: ../src/plugin.py:241
 msgid "End time"
 msgstr "Heure de fin"
 
-#: ../src/plugin.py:247
-msgid "Switch ON mode on HDD max.temp. (0 - disable)"
-msgstr "Activer le mode ON quand la temp. max. du HDD (0 - désactivé)"
+msgid "Fan - Auto"
+msgstr "Ventilateur - Auto"
 
-#: ../src/plugin.py:249
-msgid "Switch OFF mode on HDD sleep"
-msgstr "Activer le mode OFF quand le HDD est en veille"
+msgid "Fan - Off"
+msgstr "Ventilateur - Arrêt"
 
-#: ../src/plugin.py:250
-msgid "Show temp. HDD to extensions menu"
-msgstr "Afficher la température du HDD dans le menu extensions"
+msgid "Fan - Off in standby"
+msgstr "Ventilateur - Arrêt en veille"
 
-#: ../src/plugin.py:252
-msgid "Initial fan speed"
-msgstr ""
+msgid "Fan - On"
+msgstr "Ventilateur - Marche"
 
-#: ../src/plugin.py:256
-msgid "Switch ON on system temp"
-msgstr ""
+msgid "Fan Control"
+msgstr "Contrôle Ventilateur"
 
-#: ../src/plugin.py:306
-msgid ""
-"You may not use this mode!\n"
-"Not found an internal hard drive!"
-msgstr ""
-"Vous ne pouvez pas utiliser ce mode!\n"
-"Aucun disque dur interne détecté!"
+msgid "Fan Setup"
+msgstr "Configuration ventilateur"
 
-#: ../src/plugin.py:311
-msgid ""
-"Start time OFF mode equal End time OFF mode\n"
-"You may not use this time settings!"
-msgstr ""
-"L'heure de début et égale à l'heure de fin\n"
-"Vous ne pouvez pas utiliser ces paramètres!"
+msgid "Fan mode"
+msgstr "Mode ventilateur"
 
-#: ../src/plugin.py:317
+msgid "Fan setup:"
+msgstr "Configuration ventilateur:"
+
+msgid "HDD Sleeping"
+msgstr "Disque dur en veille"
+
+msgid "HDD Temperature"
+msgstr "Disque dur température"
+
 msgid ""
 "Harddisk standby after - no standby\n"
 "You may not use this mode!"
@@ -155,66 +63,85 @@ msgstr ""
 "Disque dur en veille après - pas de veille\n"
 "Vous ne pouvez pas utiliser ce mode!"
 
-#: ../src/plugin.py:485 ../src/plugin.py:513 ../src/plugin.py:517
-msgid "Fan Control"
-msgstr "Contrôle Ventilateur"
+msgid "Harddisk temperature"
+msgstr "Température du disque dur"
 
-#: ../src/plugin.py:490
 msgid "Harddisks:"
-msgstr ""
+msgstr "Disques durs :"
 
-#: ../src/plugin.py:492
+msgid "Initial fan speed"
+msgstr "Vitesse initiale du ventilateur"
+
 msgid "No harddisk with temperature sensor found!"
-msgstr ""
+msgstr "Aucun disque dur avec sonde de température n'a été trouvé !"
 
-#: ../src/plugin.py:497
 msgid "No system temperature sensor found!"
-msgstr ""
+msgstr "Aucune sonde de température du système n'a été trouvée !"
 
-#: ../src/plugin.py:513 ../src/plugin.py:517
+msgid "None"
+msgstr "Aucun"
+
+msgid "Off"
+msgstr "Arrêt"
+
+msgid "On"
+msgstr "Marche"
+
+msgid "Power status"
+msgstr "Statut de l'alimentation"
+
+msgid "Save"
+msgstr "Sauvegarder"
+
+msgid "Select internal HDD device"
+msgstr "Sélectionner un disque dur interne"
+
+msgid "Show Temp"
+msgstr "Afficher la température"
+
+msgid "Show temp. HDD to extensions menu"
+msgstr "Afficher la température du HDD dans le menu extensions"
+
+msgid "Start time"
+msgstr "Heure de début"
+
+msgid ""
+"Start time OFF mode equal End time OFF mode\n"
+"You may not use this time settings!"
+msgstr ""
+"L'heure de début et égale à l'heure de fin\n"
+"Vous ne pouvez pas utiliser ces paramètres!"
+
+msgid "Switch Fan mode on time setting"
+msgstr "Activer le mode ventilateur sur base de l'heure"
+
+msgid "Switch OFF mode on HDD sleep"
+msgstr "Activer le mode OFF quand le HDD est en veille"
+
+msgid "Switch ON mode on HDD max.temp. (0 - disable)"
+msgstr "Activer le mode ON quand la temp. max. du HDD (0 - désactivé)"
+
+msgid "Switch ON on system temp"
+msgstr "Activé la température du système"
+
+msgid "System temperature"
+msgstr "Température du Système"
+
+msgid "Watch HDD state"
+msgstr "Surveiller l'état du HDD"
+
+msgid "Watch system temp"
+msgstr "Afficher la température du système"
+
+msgid ""
+"You may not use this mode!\n"
+"Not found an internal hard drive!"
+msgstr ""
+"Vous ne pouvez pas utiliser ce mode!\n"
+"Aucun disque dur interne détecté!"
+
+msgid "n.a."
+msgstr "n.d."
+
 msgid "switch Fan On/Off"
 msgstr "basculer le ventilateur On/Off"
-
-#: ../src/plugin.py:514 ../src/plugin.py:518
-msgid "Fan Setup"
-msgstr "Configuration ventilateur"
-
-#: ../src/plugin.py:515
-msgid "Show Temp"
-msgstr ""
-
-#~ msgid " ver. 3.1"
-#~ msgstr " ver. 3.1"
-
-#~ msgid "Drive is sleeping\n"
-#~ msgstr "Le disque est en veille\n"
-
-#~ msgid "ERROR\n"
-#~ msgstr "ERREUR\n"
-
-#~ msgid "Found internal HDD !\n"
-#~ msgstr "Trouvé un disque dur interne!\n"
-
-#~ msgid "HddTempWatcher not running!"
-#~ msgstr "Le contrôleur de température du disque dur (HddTempWatcher) n'est pas lancé!"
-
-#~ msgid "Not found an internal HDD !"
-#~ msgstr "Aucun disque dur interne trouvé!"
-
-#~ msgid "Show HDDTemp"
-#~ msgstr "Afficher la température du disque dur"
-
-#~ msgid "Show temp.HDD"
-#~ msgstr "Afficher temp.HDD"
-
-#~ msgid "hddtemp not installed!"
-#~ msgstr "hddtemp n'est  pas installé!"
-
-#~ msgid "temp : "
-#~ msgstr "temp:"
-
-#~ msgid "Auto"
-#~ msgstr "Auto"
-
-#~ msgid "OK"
-#~ msgstr "OK"

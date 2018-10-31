@@ -7,135 +7,109 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GigaBlueVFDControl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 19:06+0300\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2017-07-05 19:15+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.2\n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../src/plugin.py:28
-msgid "Channelnumber in Standby off"
-msgstr "Kanalo numeris išjungus budėjimą"
-
-#: ../src/plugin.py:28
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanalo numeris budėjimo metu"
-
-#: ../src/plugin.py:28
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanalo numeris/Laikrodis budėjimo metu"
-
-#: ../src/plugin.py:28
-msgid "Clock always"
-msgstr "Laikrodis pastoviai"
-
-#: ../src/plugin.py:28
 msgid "Always off"
 msgstr "Visada išjungtas"
 
-#: ../src/plugin.py:29 ../src/plugin.py:30
-msgid "No"
-msgstr "Ne"
-
-#: ../src/plugin.py:29 ../src/plugin.py:30
-msgid "Yes"
-msgstr "Taip"
-
-#: ../src/plugin.py:33
-msgid "None"
-msgstr "Nieko"
-
-#: ../src/plugin.py:33
-msgid "Blue"
-msgstr "Mėlyna"
-
-#: ../src/plugin.py:33
-msgid "Red"
-msgstr "Raudona"
-
-#: ../src/plugin.py:33
-msgid "Purple"
-msgstr "Purpurinė"
-
-#: ../src/plugin.py:369
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: ../src/plugin.py:370
-msgid "Save"
-msgstr "Išsaugoti"
-
-#: ../src/plugin.py:374
-msgid "Update Date/Time"
-msgstr "Atnaujinti datą ir laiką"
-
-#: ../src/plugin.py:387 ../src/plugin.py:421
-msgid "Enable led"
-msgstr "Įjungti LED"
-
-#: ../src/plugin.py:389
-msgid "Led state RUN"
-msgstr "LED būklė darbiniame režime"
-
-#: ../src/plugin.py:390
-msgid "Led state Standby"
-msgstr "LED būklė budinčiame režime"
-
-#: ../src/plugin.py:392
-msgid "Led state Deep Standby"
-msgstr "LED būklė giliame budėjime"
-
-#: ../src/plugin.py:393
-msgid "Led state Record"
-msgstr "LED būklė įrašinėjant"
-
-#: ../src/plugin.py:394
 msgid "Blink Record Led"
 msgstr "Mirksėjimas įrašo metu"
 
-#: ../src/plugin.py:395
-msgid "Led state HDD /dev/sda active"
-msgstr "LED būklė, kai HDD /dev/sda veikia"
+msgid "Blue"
+msgstr "Mėlyna"
 
-#: ../src/plugin.py:396
-msgid "Led state HDD /dev/sdb active"
-msgstr "LED būklė, kai HDD /dev/sdb veikia"
-
-#: ../src/plugin.py:402 ../src/plugin.py:429
 msgid "Brightness"
 msgstr "Šviesumas"
 
-#: ../src/plugin.py:403 ../src/plugin.py:431
 msgid "Brightness Standby"
 msgstr "Šviesumas budėjimo režime"
 
-#: ../src/plugin.py:405 ../src/plugin.py:425
-msgid "Show on VFD"
-msgstr "Rodyti VFD ekrane"
+msgid "Cancel"
+msgstr "Atšaukti"
 
-#: ../src/plugin.py:406 ../src/plugin.py:427
-msgid "Show clock in Deep Standby"
-msgstr "Giliame budėjime rodyti laikrodį"
-
-#: ../src/plugin.py:408
-msgid "Time mode"
-msgstr "Laiko režimas"
-
-#: ../src/plugin.py:409
 msgid "Channel number with leading zeros"
 msgstr "Kanalo numeris su nuliais pradzioje"
 
-#: ../src/plugin.py:489 ../src/plugin.py:491 ../src/plugin.py:504
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalo numeris budėjimo metu"
+
+msgid "Channelnumber in Standby off"
+msgstr "Kanalo numeris išjungus budėjimą"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanalo numeris/Laikrodis budėjimo metu"
+
+msgid "Clock always"
+msgstr "Laikrodis pastoviai"
+
 msgid "Display/LED"
 msgstr "LED ekranas"
 
-#: ../src/plugin.py:493 ../src/plugin.py:506
+msgid "Enable led"
+msgstr "Įjungti LED"
+
 msgid "LED"
 msgstr "LED"
+
+#, fuzzy
+msgid "Led Deep Standby"
+msgstr "LED būklė giliame budėjime"
+
+msgid "Led state Deep Standby"
+msgstr "LED būklė giliame budėjime"
+
+msgid "Led state HDD /dev/sda active"
+msgstr "LED būklė, kai HDD /dev/sda veikia"
+
+msgid "Led state HDD /dev/sdb active"
+msgstr "LED būklė, kai HDD /dev/sdb veikia"
+
+msgid "Led state RUN"
+msgstr "LED būklė darbiniame režime"
+
+msgid "Led state Record"
+msgstr "LED būklė įrašinėjant"
+
+msgid "Led state Standby"
+msgstr "LED būklė budinčiame režime"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "None"
+msgstr "Nieko"
+
+msgid "Purple"
+msgstr "Purpurinė"
+
+msgid "Red"
+msgstr "Raudona"
+
+msgid "Save"
+msgstr "Išsaugoti"
+
+msgid "Show clock in Deep Standby"
+msgstr "Giliame budėjime rodyti laikrodį"
+
+msgid "Show on VFD"
+msgstr "Rodyti VFD ekrane"
+
+msgid "Time mode"
+msgstr "Laiko režimas"
+
+msgid "Update Date/Time"
+msgstr "Atnaujinti datą ir laiką"
+
+msgid "Yes"
+msgstr "Taip"
