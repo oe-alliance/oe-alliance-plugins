@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 07:49+0100\n"
-"PO-Revision-Date: 2018-08-25 11:04+0200\n"
+"POT-Creation-Date: 2018-10-30 17:38+0000\n"
+"PO-Revision-Date: 2018-10-31 22:03+0200\n"
 "Last-Translator: Kojo\n"
 "Language-Team: Kojo\n"
 "Language: fi\n"
@@ -169,6 +169,9 @@ msgstr "- Tiedosto [ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- Tiedosto tai polku [ok]"
+
+msgid "- Find Cover File [ok]>"
+msgstr "- Etsi kansikuva [ok]>"
 
 msgid "- Font"
 msgstr "- Fontti"
@@ -780,25 +783,25 @@ msgid "Bitrate"
 msgstr "Bittinopeus"
 
 msgid "Box-Skin-LCD"
-msgstr "Laitteen LCD"
+msgstr "VDF-näyttö"
 
 msgid "Box-Skin-LCD Color"
-msgstr "Laitteen LCD Väri"
+msgstr "VDF-näytön väri"
 
 msgid "Box-Skin-LCD Dimension"
-msgstr "Laitteen LCD Mitat"
+msgstr "VDF-näytön mitat"
 
 msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "Laitteen LCD, aktivoi Valmiustila"
+msgstr "VDF-näyttö, aktivoi valmiustilassa"
 
 msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "Laitteen LCD, aktivoi Media -tila"
+msgstr "VDF-näyttö, aktivoi Media -tilassa"
 
 msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "Laitteen LCD, aktivoi Käynnissä -tila"
+msgstr "VDF-näyttö, aktivoi Käynnissä -tilassa"
 
 msgid "Box-Skin-LCD Offset"
-msgstr "LaitteenSkin-LCD poikkeama"
+msgstr "VDF-näyttön  poikkeama"
 
 msgid "C"
 msgstr "C"
@@ -1129,7 +1132,7 @@ msgid "Infos"
 msgstr "Infot"
 
 msgid "Internal Box-Skin-LCD"
-msgstr "Sisäinen laite-Skin-LCD"
+msgstr "Sisäinen VDF-näyttö"
 
 msgid "Internal TFT-LCD 400x240"
 msgstr "Sisäinen TFT-LCD 400x240"
@@ -1712,7 +1715,7 @@ msgid "Program Info 2"
 msgstr "Ohjelmainfo 2"
 
 msgid "Program Name"
-msgstr "Ohjelman nimi"
+msgstr "Kanavan nimi"
 
 msgid "Program Number"
 msgstr "Ohjelman numero"
