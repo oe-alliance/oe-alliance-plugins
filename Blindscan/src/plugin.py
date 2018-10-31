@@ -418,7 +418,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.blindscan_Ku_band_stop_frequency = ConfigInteger(default = 12750, limits = (10701, 12750))
 		self.blindscan_circular_band_start_frequency = ConfigInteger(default = 11700, limits = (11700, 12749))
 		self.blindscan_circular_band_stop_frequency = ConfigInteger(default = 12750, limits = (11701, 12750))
-		self.blindscan_C_band_start_frequency = ConfigInteger(default = 3600, limits = (3000, 4199))
+		self.blindscan_C_band_start_frequency = ConfigInteger(default = 3400, limits = (3000, 4199))
 		self.blindscan_C_band_stop_frequency = ConfigInteger(default = 4200, limits = (3001, 4200))
 		self.blindscan_start_symbol = ConfigInteger(default = 2, limits = (1, 44))
 		self.blindscan_stop_symbol = ConfigInteger(default = 45, limits = (2, 45))
@@ -727,7 +727,7 @@ class Blindscan(ConfigListScreen, Screen):
 			return False
 
 		if self.is_c_band_scan:
-			self.scan_sat.frequency.value = 3600
+			self.scan_sat.frequency.value = 3400
 		else:
 			if tab_hilow[band]:
 				self.scan_sat.frequency.value = 12515
