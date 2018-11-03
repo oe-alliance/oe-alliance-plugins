@@ -36,7 +36,6 @@ config.SavePicture=123
 config.WebIfRefresh=3
 config.WebIfType=0
 config.WebIfInitDelay=false
-config.WebIfAllow=127. 192.168. 172. 10.
 config.WebIfDeny=
 config.WebIfDesign=2
 config.WetterCity=London

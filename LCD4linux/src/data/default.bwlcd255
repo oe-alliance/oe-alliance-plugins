@@ -74,7 +74,6 @@ config.ClockAnalog=1
 config.MailLines=3
 config.Info2Lines=1
 config.BilderJPEG=75
-config.PiconPath=/usr/share/enigma2/piconlcd/
 config.ProgressPos=50
 config.MPProgressAlign=2
 config.MPClock2Analog=1

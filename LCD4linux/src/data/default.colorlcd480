@@ -88,7 +88,6 @@ config.MPTitleSize=65
 config.MPTitleAlign=1
 config.StandbyClock2Analog=1
 config.Night=0
-config.WebIfAllow=11.0.0.6
 config.CalListLines=3
 config.StandbyClockType=1123
 config.MPTuner=0
