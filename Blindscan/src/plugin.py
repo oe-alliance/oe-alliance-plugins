@@ -431,11 +431,7 @@ class Blindscan(ConfigListScreen, Screen):
 			(1, _("up to 1 degree")),
 			(2, _("up to 2 degrees")),
 			(3, _("up to 3 degrees"))])
-		if getBoxType() == "sf8008":
-			scan_default = 1
-		else:
-			scan_default = 0
-		self.search_type = ConfigSelection(default=scan_default, choices = [
+		self.search_type = ConfigSelection(default = 0, choices = [
 			(0, _("scan for channels")),
 			(1, _("scan for transponders"))])
 
