@@ -146,6 +146,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		global ExeMode
 		global StatusMode
 		IP = req.getClientIP()
+		IP = IP.split(":")[-1]
 		L4logE("IP1:",IP)
 		if IP is None:
 			IP = req.client.host.split(":")[-1]
