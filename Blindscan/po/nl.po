@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-11 14:04+0100\n"
-"PO-Revision-Date: 2018-09-28 15:32+0200\n"
+"POT-Creation-Date: 2018-11-05 15:00+0000\n"
+"PO-Revision-Date: 2018-11-06 11:46+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 msgid ""
@@ -37,6 +37,9 @@ msgstr "   Starten Sundtek hardware blind scan."
 
 msgid " tuner."
 msgstr " tuner."
+
+msgid "\"channel scan\" searches for channels and saves them to your receiver; \"transponder scan\" does a transponder search and displays the results allowing user to select some or all transponder. Both options save the results in satellites.xml format under /tmp"
+msgstr "'zoek zenders' zoekt naar kanalen en slaat deze op in uw ontvanger; 'zoek transponders' zoekt naar transponders en vertoont het resultaat, waarna u één of meerdere transponders kunt selecteren om kanalen te zoeken. Beide opties laten het resultaat opslaan in het satellites.xml-formaat in /tmp"
 
 #, python-format
 msgid "%d transponder(s) found"
@@ -96,9 +99,6 @@ msgstr "DVB-S + DVB-S2"
 
 msgid "DVB-S only"
 msgstr "Alleen DVB-S"
-
-msgid "Deselect All"
-msgstr "Deselecteer alle"
 
 msgid "Deselect all"
 msgstr "Deselecteer alle"
@@ -271,9 +271,6 @@ msgstr ""
 msgid "Search type"
 msgstr "Zoek type"
 
-msgid "Select All"
-msgstr "Selecteer alle"
-
 msgid "Select a tuner that is configured for the satellite you wish to search"
 msgstr "Kies een tuner die is geconfigureerd voor de satelliet die u wilt zoeken"
 
@@ -361,6 +358,9 @@ msgstr "scan"
 msgid "scan for channels"
 msgstr "zoek zenders"
 
+msgid "scan for transponders"
+msgstr "zoek transponders"
+
 msgid "up to 1 degree"
 msgstr "tot 1 graad"
 
@@ -397,3 +397,9 @@ msgstr "ja (bewaar feeds)"
 #~ "   Polarisatie: %s\n"
 #~ "   Frequentieband: %d - %d MHz\n"
 #~ "   Symbol rates: %d - %d MHz"
+
+#~ msgid "Deselect All"
+#~ msgstr "Deselecteer alle"
+
+#~ msgid "Select All"
+#~ msgstr "Selecteer alle"
