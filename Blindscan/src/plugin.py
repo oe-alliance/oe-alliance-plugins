@@ -1250,9 +1250,10 @@ class Blindscan(ConfigListScreen, Screen):
 		multiplier = 1000
 		x = 0
 		for t in tplist:
+			freqSyncTol = min(tolerance, max(1, int(t.symbol_rate/1000000))) # sets frequency tolerance between 1 and 5 for low symbol rate transponders. Transponders with SR above 5000 are not affected.
 			for k in knowntp:
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
-					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
+					abs(t.frequency - k.frequency) < (freqSyncTol*multiplier) and \
 					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier) and \
 					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode:
 					tplist[x] = k
@@ -1275,9 +1276,10 @@ class Blindscan(ConfigListScreen, Screen):
 		x = 0
 		isnt_known = True
 		for t in tplist:
+			freqSyncTol = min(tolerance, max(1, int(t.symbol_rate/1000000))) # sets frequency tolerance between 1 and 5 for low symbol rate transponders. Transponders with SR above 5000 are not affected.
 			for k in knowntp:
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
-					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
+					abs(t.frequency - k.frequency) < (freqSyncTol*multiplier) and \
 					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier):
 					isnt_known = False
 					#break
