@@ -946,7 +946,7 @@ class Blindscan(ConfigListScreen, Screen):
 						if self.is_circular_band_scan or self.is_c_band_scan:
 							self.Sundtek_pol = 2
 					if data[2] == 'Highband':
-						self.Sundtek_band = "nigh"
+						self.Sundtek_band = "high"
 					elif data[2] == 'Lowband':
 						self.Sundtek_band = "low"
 					self.offset = 0
@@ -955,7 +955,7 @@ class Blindscan(ConfigListScreen, Screen):
 					elif self.is_circular_band_scan:
 						self.offset = 10750000
 					else:
-						if self.Sundtek_band == "nigh":
+						if self.Sundtek_band == "high":
 							self.offset = 10600000
 						elif self.Sundtek_band == "low":
 							self.offset = 9750000
@@ -1087,7 +1087,7 @@ class Blindscan(ConfigListScreen, Screen):
 						if self.is_circular_band_scan:
 							self.Sundtek_pol = "L"
 					if data[2] == 'Highband':
-						self.Sundtek_band = "nigh"
+						self.Sundtek_band = "high"
 					elif data[2] == 'Lowband':
 						self.Sundtek_band = "low"
 					self.offset = 0
@@ -1096,7 +1096,7 @@ class Blindscan(ConfigListScreen, Screen):
 					elif self.is_circular_band_scan:
 						self.offset = 10750000
 					else:
-						if self.Sundtek_band == "nigh":
+						if self.Sundtek_band == "high":
 							self.offset = 10600000
 						elif self.Sundtek_band == "low":
 							self.offset = 9750000
