@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2018-11-08 06:25+0100\n"
+"PO-Revision-Date: 2018-11-08 17:01+0100\n"
 "Last-Translator: Koivo <koivo@hdfreaks.cc>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
@@ -305,6 +305,9 @@ msgstr "Suche nach Sendern"
 
 msgid "scan for transponders"
 msgstr "Suche nach Transpondern"
+
+msgid "\"channel scan\" searches for channels and saves them to your receiver; \"transponder scan\" does a transponder search and displays the results allowing user to select some or all transponder. Both options save the results in satellites.xml format under /tmp"
+msgstr "\"Sender Suche\" sucht nach Sendern und speichert sie auf dem Receiver; \"Transponder Suche\" sucht nach Transpondern und zeigt das Resultat zur Auswahl an. Bei beiden Optionen werden die Ergebnisse in der satellites.xml unter /tmp gespeichert."
 
 msgid "up to 1 degree"
 msgstr "Bis zu 1 Grad"
