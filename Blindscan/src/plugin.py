@@ -17,6 +17,7 @@ from Components.config import config, ConfigSubsection, ConfigSelection, ConfigY
 from Components.Sources.Boolean import Boolean
 from Components.Pixmap import Pixmap
 from Components.Sources.List import List
+from Components.Sources.FrontendStatus import FrontendStatus
 
 from Tools.BoundFunction import boundFunction
 
@@ -200,6 +201,9 @@ class Blindscan(ConfigListScreen, Screen):
 					self.legacy = True
 				break
 		self.createConfig()
+
+		self.frontend = None
+		self["Frontend"] = FrontendStatus(frontend_source = lambda : self.frontend, update_interval = 100)
 
 		self.list = []
 		self.status = ""
@@ -477,7 +481,6 @@ class Blindscan(ConfigListScreen, Screen):
 		for slot in nimmanager.nim_slots:
 			if slot.canBeCompatible("DVB-S"):
 				self.scan_satselection.append(getConfigSatlist(defaultSat["orbpos"], self.satList[slot.slot]))
-		self.frontend = None # set for later use
 		return True
 
 	def getSelectedSatIndex(self, v):
