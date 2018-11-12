@@ -20,7 +20,7 @@ from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFront
 from enigma import getDesktop, getEnigmaVersionString
 from enigma import ePicLoad, ePixmap
 
-from boxbranding import getImageDistro, getDisplayType
+from boxbranding import getImageDistro, getDisplayType, getBoxType
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
