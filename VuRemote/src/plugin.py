@@ -14,7 +14,7 @@ from boxbranding import getImageDistro, getBoxType
 def getRcuDefaultType():
 	if getBoxType() in ["vuultimo4k"]:
 		return "type5"
-	elif getBoxType() in ["vuuno4kse","vuzero4k"]:
+	elif getBoxType() in ["vuuno4kse","vuzero4k","vuduo4k"]:
 		return "type6"
 	return "legacy"
 
@@ -44,7 +44,7 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose", "vuzero", "vusolo4k", "vuuno4k", "vuuno4kse", "vuzero4k", "vuultimo4k"):
+		if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose", "vuzero", "vusolo4k", "vuuno4k", "vuuno4kse", "vuzero4k", "vuultimo4k", "vuduo4k"):
 			return True
 		else:
 			return False
