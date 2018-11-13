@@ -1441,33 +1441,13 @@ class Blindscan(ConfigListScreen, Screen):
 		return location
 
 	def SatBandCheck(self):
-		pos = self.getOrbPos()
+		cur_orb_pos = self.getOrbPos()
 		self.is_c_band_scan = False
 		self.is_circular_band_scan = False
 		self.is_Ku_band_scan = False
 		self.is_Ka_band_scan = False
 		self.Ka_band_lo_freq = 0
 		self.suggestedPolarisation = _("vertical and horizontal")
-		if self.isLNB(pos, "universal_lnb"):
-			self.is_Ku_band_scan = True
-		elif self.isLNB(pos, "c_band"):
-			self.is_c_band_scan = True
-		elif self.isLNB(pos, "ka_lnb"):
-			self.is_Ka_band_scan = True
-			print "[Blindscan][SatBandCheck] Ka local oscillator frequency: %d" % self.Ka_band_lo_freq
-			# These configs have to be here because they are dynamic based on local oscillator frequency. 
-			# The if clause makes these values sticky when changing satellite
-			if self.last_Ka_lo_freq != self.Ka_band_lo_freq:
-				self.last_Ka_lo_freq = self.Ka_band_lo_freq
-				self.blindscan_Ka_band_start_frequency = ConfigInteger(default = self.Ka_band_lo_freq + 950, limits = (self.Ka_band_lo_freq + 950, self.Ka_band_lo_freq + 1949))
-				self.blindscan_Ka_band_stop_frequency = ConfigInteger(default = self.Ka_band_lo_freq + 1950, limits = (self.Ka_band_lo_freq + 951, self.Ka_band_lo_freq + 1950))
-		elif self.isLNB(pos, "circular_lnb"):
-			self.is_circular_band_scan = True
-		else:
-			return False
-		return True
-
-	def isLNB(self, cur_orb_pos, lof_type):
 		nim = nimmanager.nim_slots[int(self.scan_nims.value)]
 		if not self.legacy:
 			nimconfig = nim.config.dvbs
@@ -1481,22 +1461,37 @@ class Blindscan(ConfigListScreen, Screen):
 				return False
 			lof = currLnb.lof.getValue()
 			print "[Blindscan][isLNB] LNB type: ", lof
-			if lof == lof_type == "universal_lnb":
+			if lof == "universal_lnb":
+				self.is_Ku_band_scan = True
+				return True
+			if lof == "c_band":
+				self.is_c_band_scan = True
 				return True
 			if lof == "user_defined": # marked as "user_defined" in nim config
 				# Ka-band. These are popular Ka-band, non-inverted, local oscillator frequencies. Do not add inverted local oscilators here.
 				# These Ka LNBs require intermediate frequencies of 950-1950 MHz to be searched.
-				if lof_type == "ka_lnb" and currLnb.lofl.value == currLnb.lofh.value and currLnb.lofl.value in (17250, 18250, 19250, 20250):
+				if currLnb.lofl.value == currLnb.lofh.value and currLnb.lofl.value in (17250, 18250, 19250, 20250):
 					self.Ka_band_lo_freq = currLnb.lofl.value
+					self.is_Ka_band_scan = True
+					print "[Blindscan][SatBandCheck] Ka local oscillator frequency: %d" % self.Ka_band_lo_freq
+					# These configs have to be here because they are dynamic based on local oscillator frequency. 
+					# The if clause makes these values sticky when changing satellite
+					if self.last_Ka_lo_freq != self.Ka_band_lo_freq:
+						self.last_Ka_lo_freq = self.Ka_band_lo_freq
+						self.blindscan_Ka_band_start_frequency = ConfigInteger(default = self.Ka_band_lo_freq + 950, limits = (self.Ka_band_lo_freq + 950, self.Ka_band_lo_freq + 1949))
+						self.blindscan_Ka_band_stop_frequency = ConfigInteger(default = self.Ka_band_lo_freq + 1950, limits = (self.Ka_band_lo_freq + 951, self.Ka_band_lo_freq + 1950))
 					return True
-				elif lof_type == "circular_lnb" and cur_orb_pos in (360, 560) and currLnb.lofl.value == 10750 and currLnb.lofh.value == 10750:
+				elif cur_orb_pos in (360, 560) and currLnb.lofl.value == 10750 and currLnb.lofh.value == 10750:
+						self.is_circular_band_scan = True
 						return True
-			return False
+			return False # not in advanced config
 		elif lof_type == "circular_lnb" and nimconfig.configMode.getValue() == "simple" and nimconfig.diseqcMode.value == "single" and cur_orb_pos in (360, 560) and nimconfig.simpleDiSEqCSetCircularLNB.value:
+			self.is_circular_band_scan = True
 			return True
-		elif lof_type == "universal_lnb" and nimconfig.configMode.getValue() == "simple":
+		elif nimconfig.configMode.getValue() == "simple":
+			self.is_Ku_band_scan = True
 			return True
-		return False
+		return False # LNB not universal, not Ka band, not C band, and not circular.
 
 	def getOrbPos(self):
 		idx_selected_sat = int(self.getSelectedSatIndex(self.scan_nims.value))
