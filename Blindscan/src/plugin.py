@@ -1445,6 +1445,7 @@ class Blindscan(ConfigListScreen, Screen):
 		return location
 
 	def SatBandCheck(self):
+		# search for LNB type in Universal, Ka band, C band, or Circular.
 		cur_orb_pos = self.getOrbPos()
 		self.is_c_band_scan = False
 		self.is_circular_band_scan = False
@@ -1489,7 +1490,7 @@ class Blindscan(ConfigListScreen, Screen):
 		elif nimconfig.configMode.getValue() == "simple":
 			self.is_Ku_band_scan = True
 			return True
-		return False # LNB not universal, not Ka band, not C band, and not circular.
+		return False
 
 	def getOrbPos(self):
 		idx_selected_sat = int(self.getSelectedSatIndex(self.scan_nims.value))
