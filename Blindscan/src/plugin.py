@@ -1481,7 +1481,7 @@ class Blindscan(ConfigListScreen, Screen):
 				return False
 			lof = currLnb.lof.getValue()
 			print "[Blindscan][isLNB] LNB type: ", lof
-			if lof == "universal_lnb":
+			if lof == lof_type == "universal_lnb":
 				return True
 			if lof == "user_defined": # marked as "user_defined" in nim config
 				# Ka-band. These are popular Ka-band, non-inverted, local oscillator frequencies. Do not add inverted local oscilators here.
