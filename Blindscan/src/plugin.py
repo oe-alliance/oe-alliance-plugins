@@ -521,6 +521,10 @@ class Blindscan(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_Ku_band_start_frequency,_('Frequency values must be between 10700 MHz and 12749 MHz')))
 				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_Ku_band_stop_frequency,_('Frequency values must be between 10701 MHz and 12750 MHz')))
 			elif self.is_Ka_band_scan:
+				if self.last_Ka_lo_freq != self.Ka_band_lo_freq: # only recreate Ka config if Ka local oscillator change frequency when moving to another Ka satellite (as there are 4 LO 4 frequencies)
+					self.last_Ka_lo_freq = self.Ka_band_lo_freq
+					self.blindscan_Ka_band_start_frequency = ConfigInteger(default = self.Ka_band_lo_freq + 950, limits = (self.Ka_band_lo_freq + 950, self.Ka_band_lo_freq + 1949))
+					self.blindscan_Ka_band_stop_frequency = ConfigInteger(default = self.Ka_band_lo_freq + 1950, limits = (self.Ka_band_lo_freq + 951, self.Ka_band_lo_freq + 1950))
 				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_Ka_band_start_frequency,_('Frequency values must be between %d MHz and %d MHz')% (self.Ka_band_lo_freq + 950, self.Ka_band_lo_freq + 1949)))
 				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_Ka_band_stop_frequency,_('Frequency values must be between %d MHz and %d MHz') % (self.Ka_band_lo_freq + 951, self.Ka_band_lo_freq + 1950)))
 
@@ -1474,12 +1478,6 @@ class Blindscan(ConfigListScreen, Screen):
 					self.Ka_band_lo_freq = currLnb.lofl.value
 					self.is_Ka_band_scan = True
 					print "[Blindscan][SatBandCheck] Ka local oscillator frequency: %d" % self.Ka_band_lo_freq
-					# These configs have to be here because they are dynamic based on local oscillator frequency. 
-					# The if clause makes these values sticky when changing satellite
-					if self.last_Ka_lo_freq != self.Ka_band_lo_freq:
-						self.last_Ka_lo_freq = self.Ka_band_lo_freq
-						self.blindscan_Ka_band_start_frequency = ConfigInteger(default = self.Ka_band_lo_freq + 950, limits = (self.Ka_band_lo_freq + 950, self.Ka_band_lo_freq + 1949))
-						self.blindscan_Ka_band_stop_frequency = ConfigInteger(default = self.Ka_band_lo_freq + 1950, limits = (self.Ka_band_lo_freq + 951, self.Ka_band_lo_freq + 1950))
 					return True
 				elif cur_orb_pos in (360, 560) and currLnb.lofl.value == 10750 and currLnb.lofh.value == 10750:
 						self.is_circular_band_scan = True
