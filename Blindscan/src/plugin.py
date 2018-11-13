@@ -1485,7 +1485,7 @@ class Blindscan(ConfigListScreen, Screen):
 						self.is_circular_band_scan = True
 						return True
 			return False # not in advanced config
-		elif lof_type == "circular_lnb" and nimconfig.configMode.getValue() == "simple" and nimconfig.diseqcMode.value == "single" and cur_orb_pos in (360, 560) and nimconfig.simpleDiSEqCSetCircularLNB.value:
+		elif nimconfig.configMode.getValue() == "simple" and nimconfig.diseqcMode.value == "single" and cur_orb_pos in (360, 560) and nimconfig.simpleDiSEqCSetCircularLNB.value:
 			self.is_circular_band_scan = True
 			return True
 		elif nimconfig.configMode.getValue() == "simple":
