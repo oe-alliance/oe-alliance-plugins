@@ -253,6 +253,10 @@ class Blindscan(ConfigListScreen, Screen):
 	def selectionChanged(self):
 		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
 
+	def createSummary(self):
+		from Screens.Setup import SetupSummary
+		return SetupSummary
+
 	def ScanNimsocket(self, filepath = '/proc/bus/nim_sockets'):
 		_nimSocket = {}
 		try:
