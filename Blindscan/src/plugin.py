@@ -255,7 +255,15 @@ class Blindscan(ConfigListScreen, Screen):
 
 	def createSummary(self):
 		from Screens.Setup import SetupSummary
-		return SetupSummary
+		class SetupSummary2(SetupSummary):
+			def __init__(self, session, parent):
+				SetupSummary.__init__(self, session, parent)
+			def selectionChanged(self):
+				self["SetupEntry"].text = self.parent.getCurrentEntry()
+				self["SetupValue"].text = self.parent.getCurrentValue()
+				if hasattr(self.parent,"getCurrentDescription") and "description" in self.parent:
+					self.parent["description"].text = self.parent.getCurrentDescription()
+		return SetupSummary2
 
 	def ScanNimsocket(self, filepath = '/proc/bus/nim_sockets'):
 		_nimSocket = {}
