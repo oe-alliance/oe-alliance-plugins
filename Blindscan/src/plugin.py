@@ -216,7 +216,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.bsTimer.callback.append(self.asyncBlindScan)
 
 		ConfigListScreen.__init__(self, self.list, session = session)
-		self["footnote"] = StaticText()
+		self["footnote"] = Label("")
 		if self.scan_nims.value is not None and self.scan_nims.value != "":
 			self["actions"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
 			{
