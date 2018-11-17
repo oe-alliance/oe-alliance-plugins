@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-05 15:00+0000\n"
-"PO-Revision-Date: 2018-11-06 11:46+0100\n"
+"POT-Creation-Date: 2018-11-17 08:53+0000\n"
+"PO-Revision-Date: 2018-11-17 11:39+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
@@ -20,10 +20,10 @@ msgstr ""
 
 msgid ""
 "\n"
-"Second slot dual tuner may not be supported blind scan."
+"The second slot of this dual tuner may not support blind scan."
 msgstr ""
 "\n"
-"Tweede slot dual tuner wordt mogelijk niet ondersteund door blind scan."
+"Het tweede slot van deze dual-tuner ondersteunt wellicht niet blindscan."
 
 msgid ""
 "\n"
@@ -78,6 +78,9 @@ msgstr "Blindscan"
 msgid "Blindscan is not supported in "
 msgstr "Blindscan wordt niet ondersteund in "
 
+msgid "CAUTION: If you select \"yes\" the scan will not sync with transponders listed in satellites.xml. Default is \"no\". Only change this if you understand why you are doing it."
+msgstr "PAS OP: Als u 'ja' kiest, zal de scan niet synchroniseren met transponders in de satellites.xml. Standaard is 'nee'. Verander dit alleen als u weet wat u doet."
+
 msgid "Cancel"
 msgstr "Annuleer"
 
@@ -103,23 +106,18 @@ msgstr "Alleen DVB-S"
 msgid "Deselect all"
 msgstr "Deselecteer alle"
 
+msgid "Disable sync with known transponders"
+msgstr "Schakel sync uit voor bekende transponders"
+
 msgid "Exit"
 msgstr "Sluit af"
 
 msgid "Filter out adjacent satellites"
 msgstr "Filter nabije satellieten uit"
 
-msgid "Frequency values must be between 10700 MHz and 12749 MHz"
-msgstr "Frequenties moeten liggen tussen 10700 MHz en 12749 MHz"
-
-msgid "Frequency values must be between 10701 MHz and 12750 MHz"
-msgstr "Frequenties moeten liggen tussen 10701 MHz en 12750 MHz"
-
-msgid "Frequency values must be between 117000 MHz and 12749 MHz (Circular-band)"
-msgstr "Frequentiewaardes moeten tussen 117000 MHz en 12749 MHz liggen (Circulaire-band)"
-
-msgid "Frequency values must be between 11701 MHz and 12750 MHz (Circular-band)"
-msgstr "Frequentiewaardes moeten tussen 11701 MHz en 12750 MHz (Circulaire-band)"
+#, python-format
+msgid "Frequency values must be between %d MHz and %d MHz"
+msgstr "Frequentiewaardes moeten tussen %d MHz en %d MHz liggen."
 
 msgid "Frequency values must be between 3000 MHz and 4199 MHz (C-band)"
 msgstr "Frequenties moeten liggen tussen 3000 MHz en 4199 MHz (C-band)"
@@ -142,6 +140,9 @@ msgstr "Als u \"Ja\" kiest, zullen alleen zenders worden gezocht die niet gecode
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
 msgstr "Als u \"Ja\" kiest, zullen alleen zenders worden gezocht die niet in de satellites.xml staan (het bestand waar alle transponders in staan)"
+
+msgid "LNB of current satellite not compatible with plugin"
+msgstr "LNB van huidige satelliet werkt niet met deze plugin."
 
 msgid ""
 "Looking for available transponders.\n"
@@ -331,11 +332,11 @@ msgstr "Als een naburige satelliet erg sterk is, kunt u met deze instelling voor
 msgid "circular left"
 msgstr "circular links"
 
+msgid "circular left/right"
+msgstr "circulair links/rechts"
+
 msgid "circular right"
 msgstr "circular rechts"
-
-msgid "circular right & circular left"
-msgstr "circulaire rechts & circulaire links"
 
 msgid "circular right and circular left"
 msgstr "circulair rechts en links"
@@ -382,6 +383,13 @@ msgstr "ja"
 msgid "yes (keep feeds)"
 msgstr "ja (bewaar feeds)"
 
+#~ msgid ""
+#~ "\n"
+#~ "Second slot dual tuner may not be supported blind scan."
+#~ msgstr ""
+#~ "\n"
+#~ "Tweede slot dual tuner wordt mogelijk niet ondersteund door blind scan."
+
 #~ msgid "\"channel scan\" searches for channels and saves them to your receiver; both options do a transponder search and save the result in /tmp in an XML file in satellites.xml format"
 #~ msgstr "\"zenders zoeken\" zoekt naar zenders en slaat deze op in uw ontvanger; beide opties doen een transponder scan en slaan de resultaten daarvan op in /tmp in een XML bestand in satellites.xml formaat"
 
@@ -401,5 +409,20 @@ msgstr "ja (bewaar feeds)"
 #~ msgid "Deselect All"
 #~ msgstr "Deselecteer alle"
 
+#~ msgid "Frequency values must be between 10700 MHz and 12749 MHz"
+#~ msgstr "Frequenties moeten liggen tussen 10700 MHz en 12749 MHz"
+
+#~ msgid "Frequency values must be between 10701 MHz and 12750 MHz"
+#~ msgstr "Frequenties moeten liggen tussen 10701 MHz en 12750 MHz"
+
+#~ msgid "Frequency values must be between 117000 MHz and 12749 MHz (Circular-band)"
+#~ msgstr "Frequentiewaardes moeten tussen 117000 MHz en 12749 MHz liggen (Circulaire-band)"
+
+#~ msgid "Frequency values must be between 11701 MHz and 12750 MHz (Circular-band)"
+#~ msgstr "Frequentiewaardes moeten tussen 11701 MHz en 12750 MHz (Circulaire-band)"
+
 #~ msgid "Select All"
 #~ msgstr "Selecteer alle"
+
+#~ msgid "circular right & circular left"
+#~ msgstr "circulaire rechts & circulaire links"
