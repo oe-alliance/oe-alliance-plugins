@@ -198,7 +198,6 @@ class Blindscan(ConfigListScreen, Screen):
 		self.status = ""
 
 		self.blindscan_session = None
-		self.is_circular_band_scan = False
 		self.is_c_band_scan = False
 		self.tmpstr = ""
 		self.Sundtek_pol = ""
@@ -419,11 +418,14 @@ class Blindscan(ConfigListScreen, Screen):
 		self.tunerIfLimits = {"low": 950, "high": 2150}
 		self.uni_lnb_cutoff = 11700
 		self.last_user_defined_lo_freq = 0 # # Makes values sticky when changing satellite
+		self.circular_lnb_lo_freq = 10750
+		self.linear_polarisations = (
+			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
+			eDVBFrontendParametersSatellite.Polarisation_Vertical,
+			eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1)
 
 		self.blindscan_Ku_band_start_frequency = ConfigInteger(default = self.Ku_band_freq_limits["low"], limits = (self.Ku_band_freq_limits["low"], self.Ku_band_freq_limits["high"]-1))
 		self.blindscan_Ku_band_stop_frequency = ConfigInteger(default = self.Ku_band_freq_limits["high"], limits = (self.Ku_band_freq_limits["low"]+1, self.Ku_band_freq_limits["high"]))
-		self.blindscan_circular_band_start_frequency = ConfigInteger(default = 11700, limits = (11700, 12749))
-		self.blindscan_circular_band_stop_frequency = ConfigInteger(default = 12750, limits = (11701, 12750))
 		self.blindscan_C_band_start_frequency = ConfigInteger(default = 3400, limits = (3000, 4199))
 		self.blindscan_C_band_stop_frequency = ConfigInteger(default = 4200, limits = (3001, 4200))
 		self.blindscan_start_symbol = ConfigInteger(default = 2, limits = (1, 59))
@@ -534,9 +536,6 @@ class Blindscan(ConfigListScreen, Screen):
 				if self.is_c_band_scan:
 					self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_C_band_start_frequency,_('Frequency values must be between 3000 MHz and 4199 MHz (C-band)')))
 					self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_C_band_stop_frequency,_('Frequency values must be between 3001 MHz and 4200 MHz (C-band)')))
-				elif self.is_circular_band_scan:
-					self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_circular_band_start_frequency,_('Frequency values must be between 11700 MHz and 12749 MHz (Circular-band)')))
-					self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_circular_band_stop_frequency,_('Frequency values must be between 11701 MHz and 12750 MHz (Circular-band)')))
 				elif self.is_Ku_band_scan:
 					self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_Ku_band_start_frequency,_('Frequency values must be between %d MHz and %d MHz') % (self.Ku_band_freq_limits["low"],self.Ku_band_freq_limits["high"]-1)))
 					self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_Ku_band_stop_frequency,_('Frequency values must be between %d MHz and %d MHz') % (self.Ku_band_freq_limits["low"]+1, self.Ku_band_freq_limits["high"])))
@@ -624,9 +623,6 @@ class Blindscan(ConfigListScreen, Screen):
 			fake_hi = self.blindscan_user_defined_lnb_stop_frequency.value - (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
 			self.blindscan_start_frequency = ConfigInteger(default = fake_lo, limits = (fake_lo, fake_lo)) # fake values
 			self.blindscan_stop_frequency = ConfigInteger(default = fake_hi, limits = (fake_hi, fake_hi)) # fake values
-		elif self.is_circular_band_scan:
-			self.blindscan_start_frequency = self.blindscan_circular_band_start_frequency
-			self.blindscan_stop_frequency = self.blindscan_circular_band_stop_frequency
 
 		# swap start and stop values if entered the wrong way round
 		if self.blindscan_start_frequency.value > self.blindscan_stop_frequency.value:
@@ -642,13 +638,8 @@ class Blindscan(ConfigListScreen, Screen):
 			self.blindscan_start_symbol.value = temp
 			del temp
 
-		if self.is_circular_band_scan and self.blindscan_circular_band_start_frequency.value > 11699:  #10750 l.o. Needs to start 150 MHz lower
-			self.blindscan_circular_band_start_frequency.value = self.blindscan_circular_band_start_frequency.value - 150
-
 		if self.user_defined_lnb_scan:
 			uni_lnb_cutoff = self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"]
-		elif self.is_circular_band_scan:
-			uni_lnb_cutoff = self.uni_lnb_cutoff - 150  #10750 l.o. Needs to start 150 MHz lower
 		else:
 			uni_lnb_cutoff = self.uni_lnb_cutoff
 
@@ -787,9 +778,6 @@ class Blindscan(ConfigListScreen, Screen):
 			print "[Blindscan][prepareScanData] can't find i2c number!!"
 			return
 
-		if self.is_circular_band_scan:
-			uni_lnb_cutoff = 11550
-
 		if self.is_c_band_scan:
 			temp_start_int_freq = self.c_band_lo_freq - self.blindscan_stop_frequency.value
 			temp_end_int_freq = self.c_band_lo_freq - self.blindscan_start_frequency.value
@@ -919,8 +907,6 @@ class Blindscan(ConfigListScreen, Screen):
 			display_pol = _("horizontal")
 		if display_pol == "vertical":
 			display_pol = _("vertical")
-		if self.is_circular_band_scan and status_box_start_freq < 11700:
-			status_box_start_freq = 11700
 
 		if self.SundtekScan:
 			tmpmes = _("   Starting Sundtek hardware blind scan.")
@@ -941,9 +927,9 @@ class Blindscan(ConfigListScreen, Screen):
 		pol = self.scan_sat.polarization.value
 		if pol == eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1 or pol == eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2:
 			add_tp = True
-		elif self.Sundtek_pol in (1, 3) and (pol == eDVBFrontendParametersSatellite.Polarisation_Vertical or pol == eDVBFrontendParametersSatellite.Polarisation_CircularRight):
+		elif self.Sundtek_pol in (eDVBFrontendParametersSatellite.Polarisation_Vertical, eDVBFrontendParametersSatellite.Polarisation_CircularRight) and pol in (eDVBFrontendParametersSatellite.Polarisation_Vertical, eDVBFrontendParametersSatellite.Polarisation_CircularRight):
 			add_tp = True
-		elif self.Sundtek_pol in (0, 2) and (pol == eDVBFrontendParametersSatellite.Polarisation_Horizontal or pol == eDVBFrontendParametersSatellite.Polarisation_CircularLeft):
+		elif self.Sundtek_pol in (eDVBFrontendParametersSatellite.Polarisation_Horizontal, eDVBFrontendParametersSatellite.Polarisation_CircularLeft) and pol in (eDVBFrontendParametersSatellite.Polarisation_Horizontal, eDVBFrontendParametersSatellite.Polarisation_CircularLeft):
 			add_tp = True
 		if add_tp:
 			if data[2].isdigit() and data[3].isdigit():
@@ -957,12 +943,12 @@ class Blindscan(ConfigListScreen, Screen):
 				add_tp = False
 		if add_tp:
 			if self.is_c_band_scan:
-				if freq > 2999 and freq < 4201:
+				if 2999 < freq < 4201:
 					add_tp = True
 				else:
 					add_tp = False
 			else:
-				if freq < self.Ku_band_freq_limits["high"]+1 and freq > self.Ku_band_freq_limits["low"]-1:
+				if self.Ku_band_freq_limits["low"]-1 < freq < self.Ku_band_freq_limits["high"]+1:
 					add_tp = True
 				else:
 					add_tp = False
@@ -980,13 +966,13 @@ class Blindscan(ConfigListScreen, Screen):
 			if self.SundtekScan:
 				if len(data) == 3 and data[0] == 'Scanning':
 					if data[1] == '13V':
-						self.Sundtek_pol = 1
-						if self.is_circular_band_scan or self.is_c_band_scan:
-							self.Sundtek_pol = 3
+						self.Sundtek_pol = eDVBFrontendParametersSatellite.Polarisation_Vertical
+						if self.scan_sat.polarization.value not in self.linear_polarisations:
+							self.Sundtek_pol = eDVBFrontendParametersSatellite.Polarisation_CircularRight
 					elif data[1] == '18V':
-						self.Sundtek_pol = 0
-						if self.is_circular_band_scan or self.is_c_band_scan:
-							self.Sundtek_pol = 2
+						self.Sundtek_pol = eDVBFrontendParametersSatellite.Polarisation_Horizontal
+						if self.scan_sat.polarization.value not in self.linear_polarisations:
+							self.Sundtek_pol = eDVBFrontendParametersSatellite.Polarisation_CircularLeft
 					if data[2] == 'Highband':
 						self.Sundtek_band = "high"
 					elif data[2] == 'Lowband':
@@ -994,8 +980,6 @@ class Blindscan(ConfigListScreen, Screen):
 					self.offset = 0
 					if self.is_c_band_scan:
 						self.offset = self.c_band_lo_freq * 1000
-					elif self.is_circular_band_scan:
-						self.offset = 10750000
 					else:
 						if self.Sundtek_band == "high":
 							self.offset = self.universal_lo_freq["high"] * 1000
@@ -1125,11 +1109,11 @@ class Blindscan(ConfigListScreen, Screen):
 				if len(data) == 3 and data[0] == 'Scanning':
 					if data[1] == '13V':
 						self.Sundtek_pol = "V"
-						if self.is_circular_band_scan:
+						if self.scan_sat.polarization.value not in self.linear_polarisations:
 							self.Sundtek_pol = "R"
 					elif data[1] == '18V':
 						self.Sundtek_pol = "H"
-						if self.is_circular_band_scan:
+						if self.scan_sat.polarization.value not in self.linear_polarisations:
 							self.Sundtek_pol = "L"
 					if data[2] == 'Highband':
 						self.Sundtek_band = "high"
@@ -1138,8 +1122,6 @@ class Blindscan(ConfigListScreen, Screen):
 					self.offset = 0
 					if self.is_c_band_scan:
 						self.offset = self.c_band_lo_freq * 1000
-					elif self.is_circular_band_scan:
-						self.offset = 10750000
 					else:
 						if self.Sundtek_band == "high":
 							self.offset = self.universal_lo_freq["high"] * 1000
@@ -1357,11 +1339,6 @@ class Blindscan(ConfigListScreen, Screen):
 			for transponders in tplist:
 				tplist[x].frequency = tplist[x].frequency + ((self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])*multiplier)
 				x += 1
-		elif self.is_circular_band_scan: # Add Standard 10750 L.O. LNB
-			x = 0
-			for transponders in tplist:
-				tplist[x].frequency = (150*multiplier) + tplist[x].frequency
-				x += 1
 
 		x = 0
 		for transponders in tplist:
@@ -1469,7 +1446,6 @@ class Blindscan(ConfigListScreen, Screen):
 		# search for LNB type in Universal, Ka band, C band, or Circular.
 		cur_orb_pos = self.getOrbPos()
 		self.is_c_band_scan = False
-		self.is_circular_band_scan = False
 		self.is_Ku_band_scan = False
 		self.user_defined_lnb_scan = False
 		self.user_defined_lnb_lo_freq = 0
@@ -1498,13 +1474,15 @@ class Blindscan(ConfigListScreen, Screen):
 				self.user_defined_lnb_scan = True
 				print "[Blindscan][SatBandCheck] user defined local oscillator frequency: %d" % self.user_defined_lnb_lo_freq
 				return True
-			elif lof == "circular_lnb":
-				self.is_circular_band_scan = True
+			elif lof == "circular_lnb": # lnb for use at positions 360 and 560
+				self.user_defined_lnb_lo_freq = self.circular_lnb_lo_freq
+				self.user_defined_lnb_scan = True
 				self.suggestedPolarisation = _("circular left/right")
 				return True
 			return False # LNB type not supported by this plugin
 		elif nimconfig.configMode.getValue() == "simple" and nimconfig.diseqcMode.value == "single" and cur_orb_pos in (360, 560) and nimconfig.simpleDiSEqCSetCircularLNB.value:
-			self.is_circular_band_scan = True
+			self.user_defined_lnb_lo_freq = self.circular_lnb_lo_freq
+			self.user_defined_lnb_scan = True
 			self.suggestedPolarisation = _("circular left/right")
 			return True
 		elif nimconfig.configMode.getValue() == "simple":
