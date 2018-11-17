@@ -231,7 +231,6 @@ class Blindscan(ConfigListScreen, Screen):
 			self["key_red"] = StaticText(_("Exit"))
 			self["key_green"] = StaticText("")
 			self.createSetup()
-			self["footnote"].setText(_("Press Green/OK to start the scan"))
 		else:
 			self["actions"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
 			{
@@ -564,7 +563,7 @@ class Blindscan(ConfigListScreen, Screen):
 			if compatible_lnb:
 				self["key_green"].setText(_("Scan"))
 				self["actions2"].setEnabled(True)
-				self["footnote"].setText(_("Press Green/OK to start the scan"))
+				self["footnote"].setText("")
 				self.startDishMovingIfRotorSat()
 			else: # if LNB is not compatible remove green button and display error message in footnote
 				self["key_green"].setText("")
