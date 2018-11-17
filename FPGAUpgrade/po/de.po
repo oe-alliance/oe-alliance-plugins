@@ -3,20 +3,20 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:22+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2018-10-14 14:04+0200\n"
+"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
 #, python-format
 msgid "%d / 100"
-msgstr ""
+msgstr "%d / 100"
 
 msgid "Can't cancel during upgrade!!"
 msgstr "Upgrade kann nciht unterbrochen werden!!"
@@ -28,7 +28,7 @@ msgid "Download"
 msgstr "Herunterladen"
 
 msgid "Downloaded "
-msgstr "Heruntergeladen"
+msgstr "Heruntergeladen "
 
 msgid "Downloading..."
 msgstr "Lade herunter..."
@@ -42,16 +42,16 @@ msgstr ""
 "Drücke OK zum Verlassen."
 
 msgid "FPGA Upgrade"
-msgstr ""
+msgstr "FPGA Upgrade"
 
 msgid "File not found"
 msgstr "Datei nicht gefunden"
 
 msgid "Status : 0%"
-msgstr ""
+msgstr "Status : 0%"
 
 msgid "Succeed"
 msgstr "Erfolgreich"
 
 msgid "Upgrade"
-msgstr ""
+msgstr "Upgrade"

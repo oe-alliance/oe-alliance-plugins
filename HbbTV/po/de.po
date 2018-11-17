@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:29+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2018-10-14 14:22+0200\n"
+"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: AndyBlacburn,Trial\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.2\n"
 
 msgid " "
-msgstr ""
+msgstr " "
 
 msgid ""
 "!!(Empty)\n"
@@ -29,10 +29,10 @@ msgstr ""
 "Bitte eingeben"
 
 msgid "* RC Help"
-msgstr ""
+msgstr "* RC Hilfe"
 
 msgid "* Start YouTube TV"
-msgstr ""
+msgstr "* Start YouTube TV"
 
 msgid "About"
 msgstr "Über"
@@ -41,7 +41,7 @@ msgid "Add"
 msgstr "Hinzufügen"
 
 msgid "Back"
-msgstr ""
+msgstr "Hinten"
 
 msgid "Backspace Key"
 msgstr "Löschen Taste"
@@ -59,10 +59,10 @@ msgid "Browser Help"
 msgstr "Browser Hilfe"
 
 msgid "Browser Start/Stop"
-msgstr ""
+msgstr "Browser Start/Stop"
 
 msgid "BrowserMain"
-msgstr ""
+msgstr "BrowserStartseite"
 
 msgid ""
 "Can't open selected bookmark.\n"
@@ -84,7 +84,7 @@ msgid "Current page is already exist."
 msgstr "Aktuelle Seite bereits vorhanden."
 
 msgid "Currentpage(Bookmark)"
-msgstr ""
+msgstr "Aktuelle Seite(Lesezeichen)"
 
 msgid "Delete"
 msgstr "Löschen"
@@ -123,16 +123,16 @@ msgid "Exit"
 msgstr "Ausgang"
 
 msgid "Exit the Browser."
-msgstr ""
+msgstr "Den Browser verlassen."
 
 msgid "Exit the YouTube TV"
-msgstr ""
+msgstr "YouTube TV beenden"
 
 msgid "File"
 msgstr "Datei"
 
 msgid "Global"
-msgstr ""
+msgstr "Global"
 
 msgid "Go to next page."
 msgstr "Gehe zur nächsten Seite."
@@ -157,7 +157,7 @@ msgid "Help"
 msgstr "Hilfe"
 
 msgid "Invalid "
-msgstr "Ungültig"
+msgstr "Ungültig "
 
 msgid ""
 "Invalid URL!!(Empty)\n"
@@ -185,7 +185,7 @@ msgid "Keyboard"
 msgstr "Tastatur"
 
 msgid "Keyboard Layout"
-msgstr ""
+msgstr "Tastaturlayout"
 
 msgid "Left Key"
 msgstr "Links Taste"
@@ -197,19 +197,19 @@ msgid "Mouse"
 msgstr "Maus"
 
 msgid "Move down"
-msgstr ""
+msgstr "Hinunter schieben"
 
 msgid "Move left"
-msgstr ""
+msgstr "Schritt links"
 
 msgid "Move right"
-msgstr ""
+msgstr "Schritt Rechts"
 
 msgid "Move up"
-msgstr ""
+msgstr "Herauf schieben"
 
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 msgid "No detected HbbTV applications."
 msgstr "Keine HbbTV Anwendungen gefunden."
@@ -231,7 +231,7 @@ msgid "Opera Web Browser"
 msgstr "Opera Web Browser"
 
 msgid "Opera Web Browser Plugin v2.0"
-msgstr ""
+msgstr "Opera Web Browser Plugin v 2.0"
 
 msgid "PageDown Key"
 msgstr "Seite Runter Taste"
@@ -240,13 +240,13 @@ msgid "PageUp Key"
 msgstr "Seite Hoch Taste"
 
 msgid "Pause current video"
-msgstr ""
+msgstr "Pause Aktuelles Video"
 
 msgid "Play current video"
-msgstr ""
+msgstr "Aktuelles Video abspielen"
 
 msgid "Play ther selected the video"
-msgstr ""
+msgstr "Play ther wählte das Video"
 
 msgid "Please choose an HbbTV application."
 msgstr "Bitte eine HbbTV Anwendung wählen."
@@ -261,13 +261,13 @@ msgid "Please enter URL here"
 msgstr "Bitte URL hier eingeben"
 
 msgid "Position Setup"
-msgstr ""
+msgstr "Positions Aufbau"
 
 msgid "Preference"
 msgstr "Voreinstellung"
 
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Wirklich schließen, ohne Einstellungen zu speichern?"
 
 msgid "Return"
 msgstr "Zurück"
@@ -282,7 +282,7 @@ msgid "Save"
 msgstr "Speichern"
 
 msgid "Search a video"
-msgstr ""
+msgstr "Video Suche"
 
 msgid "Set as Startpage"
 msgstr "Als Startseite benutzen"
@@ -294,34 +294,34 @@ msgid "Show the Virtual keyboard window."
 msgstr "Virtuelle Tastatur zeigen."
 
 msgid "Skip backward 10 sec"
-msgstr ""
+msgstr "Rückwärts 10 sec Springen"
 
 msgid "Skip forward 10 sec"
-msgstr ""
+msgstr "Springe 10 sec vorwärts"
 
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 msgid "Start Page"
 msgstr "Startseite"
 
 msgid "Start YouTube TV"
-msgstr ""
+msgstr "Start YouTube TV"
 
 msgid "Start/Stop"
-msgstr ""
+msgstr "Start/Stopp"
 
 msgid "Startpage"
 msgstr "Startseite"
 
 msgid "Stop"
-msgstr ""
+msgstr "Stopp"
 
 msgid "Stop current video"
-msgstr ""
+msgstr "Aktuelles Video stoppen"
 
 msgid "Switch to keyboard/mouse mode."
-msgstr "In den Tastatur/Maus Modus schalten"
+msgstr "In den Tastatur/Maus Modus schalten."
 
 msgid "Title"
 msgstr "Titel"
@@ -348,16 +348,16 @@ msgid "YouTube TV is a new way to watch YouTube videos"
 msgstr "YouTube TV ist eine neue Möglichkeit YouTube Videos anzuschauen"
 
 msgid "height"
-msgstr ""
+msgstr "Höhe"
 
 msgid "left"
-msgstr ""
+msgstr "links"
 
 msgid "start opera web browser"
 msgstr "Opera starten"
 
 msgid "top"
-msgstr ""
+msgstr "Oben"
 
 msgid "width"
-msgstr ""
+msgstr "Breite"

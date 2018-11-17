@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2018-10-14 22:58+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: de_DE\n"
+
+msgid "/"
+msgstr "/"
+
+msgid "Alpha Value"
+msgstr "Alpha Value"
+
+msgid "Enter your input data"
+msgstr "Bitte geben Sie Ihre Eingangsdaten ein"
+
+msgid "Exit"
+msgstr "Abbrechen"
+
+msgid ""
+"If you want to quit the Browser,\n"
+"Press RED -> EXIT."
+msgstr ""
+"Wenn Sie den Browser beenden wollen,\n"
+"drücken Sie Rot -> Ende."
+
+msgid "Keyboard"
+msgstr "Tastatur"
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid "Mouse"
+msgstr "Maus"
+
+msgid "No, but play video again"
+msgstr "Nein, aber Wiederholung"
+
+msgid "Sorry, video is not available!"
+msgstr "Es tut uns leid, Video ist nicht verfügbar!"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Stop playing this movie?"
+msgstr "Diesen Film stoppen?"
+
+msgid "Web Browser"
+msgstr "Web Browser"
+
+msgid "Yes"
+msgstr "Ja"

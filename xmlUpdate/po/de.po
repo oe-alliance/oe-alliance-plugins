@@ -5,74 +5,77 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2018-04-10 11:56+0200\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2018-10-14 23:19+0200\n"
+"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: none\n"
-"Language: de\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2\n"
 
 msgid "/etc/enigma2"
-msgstr ""
+msgstr "/etc/enigma2"
 
 msgid "/etc/tuxbox (default)"
-msgstr ""
+msgstr "/etc/tuxbox (Standard)"
 
 msgid "Exit"
-msgstr ""
+msgstr "Abbrechen"
 
 msgid "Fetch"
-msgstr ""
+msgstr "abrufen"
 
 #, python-format
 msgid ""
 "Fetching and saving %s.xml succeeded.\n"
 "Restart now for changes to take immediate effect?"
 msgstr ""
+"Das abholen und Speichern von %s.xml ist gelungen.\n"
+"Starten Sie jetzt neu, damit Änderungen sofort wirksam werden?"
 
 msgid "File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
-msgstr ""
+msgstr "Datei aktualisiert werden, d.h. satellites.xml, cables.xml, or terrestrial.xml."
 
 msgid "Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the default location. Files stored in \"/etc/enigma2\" override the default file and are not updated on a software update."
-msgstr ""
+msgstr "Ordner, in dem die heruntergeladene Datei gespeichert wird. \"/etc/tuxbox\" ist das Standardverzeichnis. Dateien, die in \"/etc/Enigma2\" gespeichert sind, überschreiben die Standarddatei und werden nicht auf einem Software-Update aktualisiert."
 
 msgid "OE-Alliance"
-msgstr ""
+msgstr "OE-Alliance"
 
 msgid "Online source where the transponder xml file is being retrieved from."
-msgstr ""
+msgstr "Online Quelle, von der die Transponder XML Datei abgerufen wird."
 
 msgid "Save to"
-msgstr ""
+msgstr "Speichern als"
 
 #, python-format
 msgid "Saving the %s.xml file failed"
-msgstr ""
+msgstr "Das Speichern der %s.xml Datei scheiterte"
 
 msgid "Source"
-msgstr ""
+msgstr "Quelle"
 
 #, python-format
 msgid "The %s.xml download was corrupt."
-msgstr ""
+msgstr "Die %s.xml Download war korrupt."
 
 #, python-format
 msgid "The %s.xml file could not be fetched"
-msgstr ""
+msgstr "Die %s.xml Datei konnte nicht abgeholt werden"
 
 msgid "XML update"
-msgstr ""
+msgstr "XML Update"
 
 msgid "cable"
-msgstr ""
+msgstr "Kabel"
 
 msgid "satellite"
-msgstr ""
+msgstr "Satellit"
 
 msgid "terrestrial"
-msgstr ""
+msgstr "Terrestrisch"
