@@ -1038,24 +1038,6 @@ class Blindscan(ConfigListScreen, Screen):
 						"FEC_8_9" : parm.FEC_8_9,
 						"FEC_3_5" : parm.FEC_3_5,
 						"FEC_9_10" : parm.FEC_9_10,
-						"FEC_13_45" : parm.FEC_Auto,
-						"FEC_9_20" : parm.FEC_Auto,
-						"FEC_11_20" : parm.FEC_Auto,
-						"FEC_23_36" : parm.FEC_Auto,
-						"FEC_25_36" : parm.FEC_Auto,
-						"FEC_13_18" : parm.FEC_Auto,
-						"FEC_26_45" : parm.FEC_Auto,
-						"FEC_28_45" : parm.FEC_Auto,
-						"FEC_7_9" : parm.FEC_Auto,
-						"FEC_77_90" : parm.FEC_Auto,
-						"FEC_32_45" : parm.FEC_Auto,
-						"FEC_11_15" : parm.FEC_Auto,
-						"FEC_1_2_L" : parm.FEC_Auto,
-						"FEC_8_15_L" : parm.FEC_Auto,
-						"FEC_3_5_L" : parm.FEC_Auto,
-						"FEC_2_3_L" : parm.FEC_Auto,
-						"FEC_5_9_L" : parm.FEC_Auto,
-						"FEC_26_45_L" : parm.FEC_Auto,
 						"FEC_NONE" : parm.FEC_None}
 					roll ={ "ROLLOFF_20" : parm.RollOff_alpha_0_20,
 						"ROLLOFF_25" : parm.RollOff_alpha_0_25,
@@ -1078,7 +1060,7 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.system = sys[data[4]]
 					parm.inversion = inv[data[5]]
 					parm.pilot = pilot[data[6]]
-					parm.fec = fec[data[7]]
+					parm.fec = fec.get(data[7], eDVBFrontendParametersSatellite.FEC_Auto)
 					parm.modulation = qam[data[8]]
 					parm.rolloff = roll[data[9]]
 					try:
