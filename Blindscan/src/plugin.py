@@ -985,10 +985,7 @@ class Blindscan(ConfigListScreen, Screen):
 						if self.Sundtek_band == "high":
 							self.offset = self.universal_lo_freq["high"] * 1000
 						elif self.Sundtek_band == "low":
-							if self.user_defined_lnb_scan:
-								self.offset = self.user_defined_lnb_lo_freq * 1000
-							else:
-								self.offset = self.universal_lo_freq["low"] * 1000
+							self.offset = (self.user_defined_lnb_lo_freq if self.user_defined_lnb_scan else self.universal_lo_freq["low"]) * 1000
 				if len(data) >= 6 and data[0] == 'OK' and self.Sundtek_pol != "" and self.offset and self.dataSundtekIsGood(data):
 					parm = eDVBFrontendParametersSatellite()
 					sys = { "DVB-S" : parm.System_DVB_S,
