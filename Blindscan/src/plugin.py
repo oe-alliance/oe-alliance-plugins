@@ -1430,7 +1430,9 @@ class Blindscan(ConfigListScreen, Screen):
 			xml.append(' '.join(tmp_tp))
 		xml.append('	</sat>\n')
 		xml.append('</satellites>\n')
-		open(location, "w").writelines(xml)
+		f = open(location, "w")
+		f.writelines(xml)
+		f.close()
 		return location
 
 	def SatBandCheck(self):
