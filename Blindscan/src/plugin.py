@@ -811,6 +811,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.cmd = ""
 		self.tmpstr = ""
 
+		not_support_text = _("It seems manufacturer does not support blind scan for this tuner.")
 		if tunername in _blindscans2Nims:
 			if tunername == "TBS-5925":
 				cmd = "blindscan-s2 -b -s %d -e %d -t %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_step_mhz_tbs5925.value)
@@ -877,7 +878,9 @@ class Blindscan(ConfigListScreen, Screen):
 			cmd = "octagon-blindscan %d %d %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
 		elif getBrandOEM() == 'dinobot':
 			cmd = "dinobot-blindscan %d %d %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
-
+		else:
+			self.session.open(MessageBox, not_support_text, MessageBox.TYPE_WARNING)
+			return
 		print "[Blindscan][prepareScanData] prepared command: [%s]" % (cmd)
 
 		self.thisRun = [] # used to check result corresponds with values used above
