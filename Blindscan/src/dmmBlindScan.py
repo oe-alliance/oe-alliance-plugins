@@ -66,6 +66,7 @@ class SatBlindscanState(Screen):
 		Screen.__init__(self, session)
 		self.setup_title = _("Blind scan state")
 		Screen.setTitle(self, _(self.setup_title))
+		self.skinName = ["SatBlindscanState2"]
 		self["list"]=List()
 		self["text"]=Label()
 		self["text"].setText(text)
@@ -665,19 +666,20 @@ class DmmBlindscan(ConfigListScreen, Screen, TransponderSearchSupport, Satellite
 		for n in nimmanager.nim_slots:
 			if hasattr(n, 'isFBCLink') and n.isFBCLink():
 				continue
-			if not self.legacy:
-				config = n.config.dvbs
-			else:
-				config = n.config
-			config_mode = config.configMode.value
-			if config_mode == "nothing":
-				continue
+			if n.isCompatible("DVB-S"):
+				if not self.legacy:
+					config = n.config.dvbs
+				else:
+					config = n.config
+				config_mode = config.configMode.value
+				if config_mode == "nothing":
+					continue
 			if n.isCompatible("DVB-S") and len(nimmanager.getSatListForNim(n.slot)) < 1:
 				if config_mode in ("advanced", "simple"):
 					config.Nims[n.slot].configMode.value = "nothing"
 					config.Nims[n.slot].configMode.save()
 				continue
-			if config_mode in ("loopthrough", "satposdepends"):
+			if n.isCompatible("DVB-S") and config_mode in ("loopthrough", "satposdepends"):
 				root_id = nimmanager.sec.getRoot(n.slot_id, int(config.connectedTo.value))
 				if n.type == nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
 					continue
@@ -809,7 +811,7 @@ class DmmBlindscan(ConfigListScreen, Screen, TransponderSearchSupport, Satellite
 		self.session.nav.playService(self.session.postScanService)
 		for x in self["config"].list:
 			x[1].cancel()
-		self.close()
+		self.close(True)
 
 	def startScanCallback(self, answer=True):
 		if answer:
