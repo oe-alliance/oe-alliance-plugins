@@ -1009,12 +1009,9 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.fec = parm.FEC_Auto
 					parm.modulation = qam[data[4]]
 					parm.rolloff = parm.RollOff_alpha_0_35
-					try:
-						parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
-						parm.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
-						parm.pls_code = 0
-					except:
-						pass
+					parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
+					parm.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
+					parm.pls_code = 0
 					self.tmp_tplist.append(parm)
 			elif len(data) >= 10 and self.dataIsGood(data):
 				if data[0] == 'OK':
@@ -1063,20 +1060,17 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.fec = fec.get(data[7], eDVBFrontendParametersSatellite.FEC_Auto)
 					parm.modulation = qam[data[8]]
 					parm.rolloff = roll[data[9]]
-					try:
-						parm.pls_mode = getMisPlsValue(data, 10, eDVBFrontendParametersSatellite.PLS_Gold)
-						parm.is_id = getMisPlsValue(data, 11, eDVBFrontendParametersSatellite.No_Stream_Id_Filter)
-						parm.pls_code = getMisPlsValue(data, 12, 0)
-						# when blindscan returns 0,0,0 then use defaults...
-						if parm.pls_mode == parm.is_id == parm.pls_code == 0:
-							parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
-							parm.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
-						# when blidnscan returns root then switch to gold
-						if parm.pls_mode == eDVBFrontendParametersSatellite.PLS_Root:
-							parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
-							parm.pls_code = root2gold(parm.pls_code)
-					except:
-						pass
+					parm.pls_mode = getMisPlsValue(data, 10, eDVBFrontendParametersSatellite.PLS_Gold)
+					parm.is_id = getMisPlsValue(data, 11, eDVBFrontendParametersSatellite.No_Stream_Id_Filter)
+					parm.pls_code = getMisPlsValue(data, 12, 0)
+					# when blindscan returns 0,0,0 then use defaults...
+					if parm.pls_mode == parm.is_id == parm.pls_code == 0:
+						parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
+						parm.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
+					# when blindscan returns root then switch to gold
+					if parm.pls_mode == eDVBFrontendParametersSatellite.PLS_Root:
+						parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
+						parm.pls_code = root2gold(parm.pls_code)
 					self.tmp_tplist.append(parm)
 		self.blindscan_session.close(True)
 		self.blindscan_session = None
@@ -1251,7 +1245,7 @@ class Blindscan(ConfigListScreen, Screen):
 				parm.modulation = x[6]
 				parm.rolloff = x[8]
 				parm.pilot = x[9]
-				if len(x) > 12:
+				if len(x) > 12: # no "else" clause required. Defaults are automatically provided by enigma
 					parm.is_id = x[10]
 					parm.pls_mode = x[11]
 					parm.pls_code = x[12]
