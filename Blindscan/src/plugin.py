@@ -198,7 +198,6 @@ class Blindscan(ConfigListScreen, Screen):
 		self.status = ""
 
 		self.blindscan_session = None
-		self.is_c_band_scan = False
 		self.tmpstr = ""
 		self.Sundtek_pol = ""
 		self.Sundtek_band = ""
