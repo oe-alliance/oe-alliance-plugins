@@ -913,10 +913,7 @@ class Blindscan(ConfigListScreen, Screen):
 			tmpmes = _("   Starting Sundtek hardware blind scan.")
 		else:
 			tmpmes = _("Current Status: %d/%d\nSatellite: %s\nPolarization: %s  Frequency range: %d - %d MHz  Symbol rates: %d - %d MHz") %(self.running_count, self.max_count, orb[1], display_pol, status_box_start_freq, status_box_end_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value)
-		if getBoxType() == ('vusolo2'):
-			tmpmes2 = _("Looking for available transponders.\nThis will take a long time, please be patient.")
-		else:
-			tmpmes2 = _("Looking for available transponders.\nThis will take a short while.")
+		tmpmes2 = _("Looking for available transponders.\nThis will take a long time, please be patient.")
 		self.tmpstr = tmpmes
 		if is_scan:
 			self.blindscan_session = self.session.openWithCallback(self.blindscanSessionClose, BlindscanState, tmpmes, tmpmes2, [])
