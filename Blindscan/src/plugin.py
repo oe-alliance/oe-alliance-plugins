@@ -429,7 +429,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.blindscan_start_symbol = ConfigInteger(default = 2, limits = (1, 59))
 		self.blindscan_stop_symbol = ConfigInteger(default = 45, limits = (2, 60))
 		self.blindscan_step_mhz_tbs5925 = ConfigInteger(default = 10, limits = (1, 20))
-		self.scan_clearallservices = ConfigYesNo(default = False)
+		self.scan_clearallservices = ConfigSelection(default = "no", choices = [("no", _("no")), ("yes", _("yes")), ("yes_hold_feeds", _("yes (keep feeds)"))])
 		self.scan_onlyfree = ConfigYesNo(default = False)
 		self.dont_scan_known_tps = ConfigYesNo(default = False)
 		self.disable_sync_with_known_tps = ConfigYesNo(default = False)
@@ -551,7 +551,8 @@ class Blindscan(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("Polarisation"), self.scan_sat.polarization,_('The suggested polarisation for this satellite is "%s"') % (self.suggestedPolarisation)))
 				self.list.append(getConfigListEntry(_('Scan start symbolrate'), self.blindscan_start_symbol,_('Symbol rate values are in megasymbols; enter a value between 1 and 44')))
 				self.list.append(getConfigListEntry(_('Scan stop symbolrate'), self.blindscan_stop_symbol,_('Symbol rate values are in megasymbols; enter a value between 2 and 45')))
-				self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices,_('If you select "yes" all channels on the satellite being search will be deleted before starting the current search.')))
+				self.list.append(getConfigListEntry(_("Network scan"), self.scan_networkScan, _('Select "yes" to additionally do a network search.')))
+				self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices,_('If you select "yes" all channels on the satellite being search will be deleted before starting the current search, yes (keep feeds) means the same but hold all feed services/transponders.')))
 				self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree,_('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels.')))
 				self.list.append(getConfigListEntry(_("Only scan unknown transponders"), self.dont_scan_known_tps,_('If you select "yes" the scan will only search transponders not listed in satellites.xml')))
 				self.list.append(getConfigListEntry(_("Disable sync with known transponders"), self.disable_sync_with_known_tps,_('CAUTION: If you select "yes" the scan will not sync with transponders listed in satellites.xml. Default is "no". Only change this if you understand why you are doing it.')))
@@ -1136,12 +1137,12 @@ class Blindscan(ConfigListScreen, Screen):
 		self.blindscan_container.execute(self.cmd)
 
 	def blindscanSessionClose(self, *val):
-		self.blindscanSessionNone(val[0])
-
 		if self.SundtekScan:
 			self.frontend and self.frontend.closeFrontend()
 
-		if self.tmp_tplist != None and self.tmp_tplist != []:
+		self.blindscanSessionNone(val[0])
+
+		if self.tmp_tplist is not None and self.tmp_tplist != []:
 			if not self.SundtekScan:
 				self.tmp_tplist = self.correctBugsCausedByDriver(self.tmp_tplist)
 
@@ -1220,11 +1221,15 @@ class Blindscan(ConfigListScreen, Screen):
 		networkid = 0
 		self.scan_session = None
 
-		flags = 0
-		if self.scan_clearallservices.value:
-			flags |= eComponentScan.scanRemoveServices
-		else:
+		flags = self.scan_networkScan.value and eComponentScan.scanNetworkSearch or 0
+		tmp = self.scan_clearallservices.value
+		if tmp == "no":
 			flags |= eComponentScan.scanDontRemoveUnscanned
+		elif tmp == "yes":
+			flags |= eComponentScan.scanRemoveServices
+		elif tmp == "yes_hold_feeds":
+			flags |= eComponentScan.scanRemoveServices
+			flags |= eComponentScan.scanDontRemoveFeeds
 		if self.scan_onlyfree.value:
 			flags |= eComponentScan.scanOnlyFree
 		self.session.openWithCallback(self.startScanCallback, ServiceScan, [{"transponders": tlist, "feid": self.feid, "flags": flags, "networkid": networkid}])
