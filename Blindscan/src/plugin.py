@@ -457,6 +457,9 @@ class Blindscan(ConfigListScreen, Screen):
 			if config_mode == "nothing":
 				continue
 			if n.canBeCompatible("DVB-S") and len(nimmanager.getSatListForNim(n.slot)) < 1: # empty setup
+				if n.config_mode in ("advanced", "simple"):
+					config.Nims[n.slot].configMode.value = "nothing"
+					config.Nims[n.slot].configMode.save()
 				continue
 			if n.canBeCompatible("DVB-S") and n.description in _unsupportedNims: # DVB-S NIMs without blindscan hardware or software
 				continue
