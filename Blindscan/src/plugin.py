@@ -1018,7 +1018,8 @@ class Blindscan(ConfigListScreen, Screen):
 				if data[0] == 'OK':
 					parm = eDVBFrontendParametersSatellite()
 					sys = { "DVB-S" : parm.System_DVB_S,
-						"DVB-S2" : parm.System_DVB_S2}
+						"DVB-S2" : parm.System_DVB_S2,
+						"DVB-S2X" : parm.System_DVB_S2}
 					qam = { "QPSK" : parm.Modulation_QPSK,
 						"8PSK" : parm.Modulation_8PSK,
 						"16APSK" : parm.Modulation_16APSK,
