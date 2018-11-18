@@ -518,8 +518,6 @@ class Blindscan(ConfigListScreen, Screen):
 		self.tunerEntry = getConfigListEntry(_("Tuner"), self.scan_nims,(_('Select a tuner that is configured for the satellite you wish to search') + warning_text))
 		self.list.append(self.tunerEntry)
 
-		self.systemEntry = None
-		self.modulationEntry = None
 		self.satelliteEntry = None
 
 		self.scan_networkScan.value = False
