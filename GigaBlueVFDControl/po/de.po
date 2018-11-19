@@ -57,10 +57,10 @@ msgid "LED"
 msgstr "LED"
 
 msgid "Led Deep Standby"
-msgstr "Led im tiefen Standby"
+msgstr "Led im Deep-Standby"
 
 msgid "Led state Deep Standby"
-msgstr "Led-Farbe im Deepstandby"
+msgstr "Led-Farbe im Deep-Standby"
 
 msgid "Led state HDD /dev/sda active"
 msgstr "Led-Farbe wenn HDD /dev/sda aktiv ist"
