@@ -6,7 +6,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.ServiceScan import ServiceScan
 from Screens.MessageBox import MessageBox
-
+from Screens.Console import Console
 from Components.Label import Label
 from Components.TuneTest import Tuner
 from Components.ConfigList import ConfigListScreen
@@ -27,6 +27,7 @@ from boxbranding import getBoxType, getImageVersion, getImageBuild, getBrandOEM
 from time import strftime, time
 
 XML_BLINDSCAN_DIR = "/tmp"
+XML_FILE = None
 
 # _supportNimType is only used by vuplus hardware
 _supportNimType = { 'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_', 'BCM7356':'bcm7346_', 'SI2166':'si2166_'}
@@ -227,8 +228,14 @@ class Blindscan(ConfigListScreen, Screen):
 				"ok": self.keyGo,
 			}, -2)
 			self["actions2"].setEnabled(False)
+			self["actions3"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
+			{
+				"yellow": self.keyYellow,
+			}, -2)
+			self["actions3"].setEnabled(False)
 			self["key_red"] = StaticText(_("Exit"))
 			self["key_green"] = StaticText("")
+			self["key_yellow"] = StaticText("")
 			self.createSetup()
 		else:
 			self["actions"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
@@ -246,10 +253,17 @@ class Blindscan(ConfigListScreen, Screen):
 		self.nimSockets = self.ScanNimsocket()
 		self.makeNimSocket()
 
+		if XML_FILE is not None and os.path.exists(XML_FILE):
+			self["yellow"].setText(_("Open xml file"))
+			self["actions3"].setEnabled(True)
+		else:
+			self["actions3"].setEnabled(False)
+
 		self["description"] = Label("")
 		if not self.selectionChanged in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.selectionChanged()
+		
 
 	def selectionChanged(self):
 		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
@@ -1136,6 +1150,11 @@ class Blindscan(ConfigListScreen, Screen):
 		self.blindscan_container.execute(self.cmd)
 
 	def blindscanSessionClose(self, *val):
+		global XML_FILE
+		self["key_yellow"].setText("")
+		XML_FILE = None
+		self["actions3"].setEnabled(False)
+
 		if self.SundtekScan:
 			self.frontend and self.frontend.closeFrontend()
 
@@ -1432,7 +1451,15 @@ class Blindscan(ConfigListScreen, Screen):
 		f = open(location, "w")
 		f.writelines(xml)
 		f.close()
+		global XML_FILE
+		self["key_yellow"].setText(_("Open xml file"))
+		XML_FILE = location
+		self["actions3"].setEnabled(True)
 		return location
+
+	def keyYellow(self):
+		if XML_FILE and os.path.exists(XML_FILE):
+			self.session.open(Console,_(XML_FILE),["cat %s" % XML_FILE])
 
 	def SatBandCheck(self):
 		# search for LNB type in Universal, C band, or user defined.
