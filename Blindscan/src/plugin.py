@@ -38,6 +38,11 @@ _unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', ) # format = nim.description 
 # blindscan-s2 supported tuners
 _blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
 
+config.blindscan = ConfigSubsection()
+config.blindscan.search_type = ConfigSelection(default = 0, choices = [
+			(0, _("scan for channels")),
+			(1, _("scan for transponders"))])
+
 # root2gold based on https://github.com/DigitalDevices/dddvb/blob/master/apps/pls.c
 def root2gold(root):
 	if root < 0 or root > 0x3ffff:
@@ -264,7 +269,6 @@ class Blindscan(ConfigListScreen, Screen):
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.selectionChanged()
 		
-
 	def selectionChanged(self):
 		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
 
@@ -453,9 +457,6 @@ class Blindscan(ConfigListScreen, Screen):
 			(1, _("up to 1 degree")),
 			(2, _("up to 2 degrees")),
 			(3, _("up to 3 degrees"))])
-		self.search_type = ConfigSelection(default = 0, choices = [
-			(0, _("scan for channels")),
-			(1, _("scan for transponders"))])
 
 		# collect all nims which are *not* set to "nothing"
 		nim_list = []
@@ -550,7 +551,7 @@ class Blindscan(ConfigListScreen, Screen):
 				self["actions2"].setEnabled(False)
 				return
 
-			self.searchtypeEntry = getConfigListEntry(_("Search type"), self.search_type,_('"channel scan" searches for channels and saves them to your receiver; "transponder scan" does a transponder search and displays the results allowing user to select some or all transponder. Both options save the results in satellites.xml format under /tmp'))
+			self.searchtypeEntry = getConfigListEntry(_("Search type"), config.blindscan.search_type,_('"channel scan" searches for channels and saves them to your receiver; "transponder scan" does a transponder search and displays the results allowing user to select some or all transponder. Both options save the results in satellites.xml format under /tmp'))
 			self.list.append(self.searchtypeEntry)
 
 			if self.is_c_band_scan:
@@ -604,8 +605,6 @@ class Blindscan(ConfigListScreen, Screen):
 			self.clockTimer.stop()
 		self.releaseFrontend()
 		self.session.nav.playService(self.session.postScanService)
-		for x in self["config"].list:
-			x[1].cancel()
 		self.close(False)
 
 	def keyGo(self):
@@ -1216,7 +1215,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 				runtime = int(time() - self.start_time)
 				xml_location = self.createSatellitesXMLfile(self.tmp_tplist, XML_BLINDSCAN_DIR)
-				if self.search_type.value == 0: # Do a service scan
+				if config.blindscan.search_type.value == 0: # Do a service scan
 					self.startScan(True, self.tmp_tplist)
 				else: # Display results
 					self.session.openWithCallback(self.startScan, BlindscanState, _("Search completed\n%d transponders found in %d:%02d minutes.\nDetails saved in: %s") % (len(self.tmp_tplist), runtime / 60, runtime % 60, xml_location), "", blindscanStateList, True)
