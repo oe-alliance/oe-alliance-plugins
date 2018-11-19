@@ -254,7 +254,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.makeNimSocket()
 
 		if XML_FILE is not None and os.path.exists(XML_FILE):
-			self["yellow"].setText(_("Open xml file"))
+			self["key_yellow"].setText(_("Open xml file"))
 			self["actions3"].setEnabled(True)
 		else:
 			self["actions3"].setEnabled(False)
