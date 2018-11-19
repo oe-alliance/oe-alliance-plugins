@@ -376,7 +376,7 @@ class Blindscan(ConfigListScreen, Screen):
 					del self.session.pip
 					self.openFrontend()
 		print '[Blindscan] self.frontend:',self.frontend
-		if self.frontend is not None:
+		if self.frontend == None:
 			self.session.open(MessageBox, _("Sorry, this tuner is in use."), MessageBox.TYPE_ERROR)
 			return False
 		self.tuner = Tuner(self.frontend)
@@ -507,7 +507,7 @@ class Blindscan(ConfigListScreen, Screen):
 		index    = 0
 		none_cnt = 0
 		for n in self.satList:
-			if self.satList[index] is not None:
+			if self.satList[index] == None:
 				none_cnt = none_cnt + 1
 			if index == int(v):
 				return (index-none_cnt)
