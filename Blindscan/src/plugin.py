@@ -448,12 +448,13 @@ class Blindscan(ConfigListScreen, Screen):
 		for n in nimmanager.nim_slots:
 			if not n.isCompatible("DVB-S"):
 				continue
+			if hasattr(n, 'isFBCLink') and n.isFBCLink():
+				continue
 			if not self.legacy:
 				config = n.config.dvbs
 			else:
 				config = n.config
 			config_mode = config.configMode.value
-
 			if config_mode == "nothing":
 				continue
 			if len(nimmanager.getSatListForNim(n.slot)) < 1: # empty setup
