@@ -239,7 +239,7 @@ class Blindscan(ConfigListScreen, Screen):
 			}, -2)
 			self["actions3"].setEnabled(False)
 			self["key_red"] = StaticText(_("Exit"))
-			self["key_green"] = StaticText("")
+			self["key_green"] = StaticText(_("Scan"))
 			self["key_yellow"] = StaticText("")
 			self.createSetup()
 		else:
