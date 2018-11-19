@@ -458,7 +458,7 @@ class Blindscan(ConfigListScreen, Screen):
 			if config_mode == "nothing":
 				continue
 			if len(nimmanager.getSatListForNim(n.slot)) < 1: # empty setup
-				if n.config_mode in ("advanced", "simple"):
+				if config_mode in ("advanced", "simple"):
 					config.Nims[n.slot].configMode.value = "nothing"
 					config.Nims[n.slot].configMode.save()
 				continue
