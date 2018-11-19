@@ -324,3 +324,12 @@ msgstr ""
 
 msgid "yes (keep feeds)"
 msgstr ""
+
+msgid "Open xml file"
+msgstr ""
+
+msgid "Disable sync with known transponders"
+msgstr ""
+
+msgid "Disable remove duplicates"
+msgstr ""

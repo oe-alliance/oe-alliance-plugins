@@ -395,3 +395,12 @@ msgstr ""
 "Suche abgeschlossen\n"
 "%d Transponder gefunden in %d:%02d Minuten.\n"
 "Details gespeichert in: %s"
+
+msgid "Open xml file"
+msgstr "Öffnen des XML-Files"
+
+msgid "Disable sync with known transponders"
+msgstr "Deaktivieren Sie die Synchronisierung mit bekannten Transpondern"
+
+msgid "Disable remove duplicates"
+msgstr "Deaktivieren Sie das Entfernen von Duplikaten"
