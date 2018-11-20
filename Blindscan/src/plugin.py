@@ -1488,7 +1488,11 @@ class Blindscan(ConfigListScreen, Screen):
 				self.is_c_band_scan = True
 				return True
 			elif lof == "user_defined" and currLnb.lofl.value == currLnb.lofh.value and currLnb.lofl.value > 5000 and currLnb.lofl.value < 30000:
-				self.user_defined_lnb_lo_freq = currLnb.lofl.value
+				if currLnb.lofl.value == self.circular_lnb_lo_freq and currLnb.lofh.value == self.circular_lnb_lo_freq and cur_orb_pos in (360, 560): # "circular_lnb" legacy support hack. For people using a "circular" LNB but that have their tuner set up as "user defined".
+					self.user_defined_lnb_lo_freq = self.circular_lnb_lo_freq
+					self.suggestedPolarisation = _("circular left/right")
+				else: # normal "user_defined"
+					self.user_defined_lnb_lo_freq = currLnb.lofl.value
 				self.user_defined_lnb_scan = True
 				print "[Blindscan][SatBandCheck] user defined local oscillator frequency: %d" % self.user_defined_lnb_lo_freq
 				return True
