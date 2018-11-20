@@ -430,6 +430,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self.Ku_band_freq_limits = {"low": 10700, "high": 12750}
 		self.universal_lo_freq  = {"low": 9750, "high": 10600}
+		self.c_band_freq_limits = {"low": 3000, "high": 4200, "default_low": 3400, "default_high": 4200}
 		self.c_band_lo_freq = 5150
 		self.tunerIfLimits = {"low": 950, "high": 2150}
 		self.uni_lnb_cutoff = 11700
@@ -442,8 +443,8 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self.blindscan_Ku_band_start_frequency = ConfigInteger(default = self.Ku_band_freq_limits["low"], limits = (self.Ku_band_freq_limits["low"], self.Ku_band_freq_limits["high"]-1))
 		self.blindscan_Ku_band_stop_frequency = ConfigInteger(default = self.Ku_band_freq_limits["high"], limits = (self.Ku_band_freq_limits["low"]+1, self.Ku_band_freq_limits["high"]))
-		self.blindscan_C_band_start_frequency = ConfigInteger(default = 3400, limits = (3000, 4199))
-		self.blindscan_C_band_stop_frequency = ConfigInteger(default = 4200, limits = (3001, 4200))
+		self.blindscan_C_band_start_frequency = ConfigInteger(default = self.c_band_freq_limits["default_low"], limits = (self.c_band_freq_limits["low"], self.c_band_freq_limits["high"]-1))
+		self.blindscan_C_band_stop_frequency = ConfigInteger(default = self.c_band_freq_limits["default_high"], limits = (self.c_band_freq_limits["low"]+1, self.c_band_freq_limits["high"]))
 		self.blindscan_start_symbol = ConfigInteger(default = 2, limits = (1, 59))
 		self.blindscan_stop_symbol = ConfigInteger(default = 45, limits = (2, 60))
 		self.blindscan_step_mhz_tbs5925 = ConfigInteger(default = 10, limits = (1, 20))
@@ -555,8 +556,8 @@ class Blindscan(ConfigListScreen, Screen):
 			self.list.append(self.searchtypeEntry)
 
 			if self.is_c_band_scan:
-				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_C_band_start_frequency,_('Frequency values must be between 3000 MHz and 4199 MHz (C-band)')))
-				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_C_band_stop_frequency,_('Frequency values must be between 3001 MHz and 4200 MHz (C-band)')))
+				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_C_band_start_frequency,_('Frequency values must be between %d MHz and %d MHz (C-band)') % (self.c_band_freq_limits["low"], self.c_band_freq_limits["high"]-1)))
+				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_C_band_stop_frequency,_('Frequency values must be between %d MHz and %d MHz (C-band)') % (self.c_band_freq_limits["low"]+1, self.c_band_freq_limits["high"])))
 			elif self.is_Ku_band_scan:
 				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_Ku_band_start_frequency,_('Frequency values must be between %d MHz and %d MHz') % (self.Ku_band_freq_limits["low"],self.Ku_band_freq_limits["high"]-1)))
 				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_Ku_band_stop_frequency,_('Frequency values must be between %d MHz and %d MHz') % (self.Ku_band_freq_limits["low"]+1, self.Ku_band_freq_limits["high"])))
@@ -958,7 +959,7 @@ class Blindscan(ConfigListScreen, Screen):
 				add_tp = False
 		if add_tp:
 			if self.is_c_band_scan:
-				if 2999 < freq < 4201:
+				if self.c_band_freq_limits["low"]-1 < freq < self.c_band_freq_limits["high"]+1:
 					add_tp = True
 				else:
 					add_tp = False
@@ -1339,7 +1340,7 @@ class Blindscan(ConfigListScreen, Screen):
 		if self.is_c_band_scan: # for some reason a c-band scan (with a Vu+) returns the transponder frequencies in Ku band format so they have to be converted back to c-band numbers before the subsequent service search
 			x = 0
 			for transponders in tplist:
-				if tplist[x].frequency > (4200*multiplier):
+				if tplist[x].frequency > (self.c_band_freq_limits["high"]*multiplier):
 					tplist[x].frequency = (self.c_band_lo_freq*multiplier) - (tplist[x].frequency - (self.universal_lo_freq["low"]*multiplier))
 				x += 1
 		elif self.user_defined_lnb_scan:
@@ -1380,7 +1381,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 		if high_band:
 			data_if_freq = data_freq - self.universal_lo_freq["high"]
-		elif self.is_c_band_scan and data_freq > 2999 and data_freq < 4201:
+		elif self.is_c_band_scan and data_freq > self.c_band_freq_limits["low"]-1 and data_freq < self.c_band_freq_limits["high"]+1:
 			data_if_freq = self.c_band_lo_freq - data_freq
 		else:
 			data_if_freq = data_freq - self.universal_lo_freq["low"]
