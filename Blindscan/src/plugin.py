@@ -13,7 +13,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
 from Components.NimManager import nimmanager, getConfigSatlist
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry, ConfigNothing, ConfigBoolean
+from Components.config import config, configfile, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry, ConfigNothing, ConfigBoolean
 from Components.Sources.FrontendStatus import FrontendStatus
 
 from Tools.BoundFunction import boundFunction
@@ -39,9 +39,9 @@ _unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', ) # format = nim.description 
 _blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
 
 config.blindscan = ConfigSubsection()
-config.blindscan.search_type = ConfigSelection(default = 0, choices = [
-			(0, _("scan for channels")),
-			(1, _("scan for transponders"))])
+config.blindscan.search_type = ConfigSelection(default = "services", choices = [
+			("services", _("scan for channels")),
+			("transponders", _("scan for transponders"))])
 
 # root2gold based on https://github.com/DigitalDevices/dddvb/blob/master/apps/pls.c
 def root2gold(root):
@@ -601,7 +601,12 @@ class Blindscan(ConfigListScreen, Screen):
 		ConfigListScreen.keyRight(self)
 		self.newConfig()
 
+	def saveConfig(self):
+		for x in self["config"].list:
+			x[1].save()
+
 	def keyCancel(self):
+		self.saveConfig()
 		if self.clockTimer:
 			self.clockTimer.stop()
 		self.releaseFrontend()
@@ -609,6 +614,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.close(False)
 
 	def keyGo(self):
+		self.saveConfig()
 		print "[Blindscan][keyGo] started"
 		self.start_time = time()
 		self.tp_found = []
@@ -1216,7 +1222,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 				runtime = int(time() - self.start_time)
 				xml_location = self.createSatellitesXMLfile(self.tmp_tplist, XML_BLINDSCAN_DIR)
-				if config.blindscan.search_type.value == 0: # Do a service scan
+				if config.blindscan.search_type.value == "services": # Do a service scan
 					self.startScan(True, self.tmp_tplist)
 				else: # Display results
 					self.session.openWithCallback(self.startScan, BlindscanState, _("Search completed\n%d transponders found in %d:%02d minutes.\nDetails saved in: %s") % (len(self.tmp_tplist), runtime / 60, runtime % 60, xml_location), "", blindscanStateList, True)
