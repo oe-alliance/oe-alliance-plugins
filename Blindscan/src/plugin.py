@@ -1,47 +1,32 @@
 # for localized messages
 from . import _
 
+from boxbranding import getBoxType, getImageVersion, getImageBuild, getBrandOEM
+
+from enigma import eComponentScan, eConsoleAppContainer, eDVBFrontendParametersSatellite, eDVBResourceManager, eTimer
+
+from Components.ActionMap import ActionMap
+from Components.config import config, ConfigBoolean, configfile, ConfigInteger, getConfigListEntry, ConfigNothing, ConfigSelection, ConfigSubsection, ConfigYesNo
+from Components.ConfigList import ConfigListScreen
+from Components.Label import Label
+from Components.NimManager import getConfigSatlist, nimmanager
+from Components.Sources.FrontendStatus import FrontendStatus
+from Components.Sources.StaticText import StaticText
+from Components.TuneTest import Tuner
+
 from Plugins.Plugin import PluginDescriptor
 
+from Screens.Console import Console
+from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.ServiceScan import ServiceScan
-from Screens.MessageBox import MessageBox
-from Screens.Console import Console
-from Components.Label import Label
-from Components.TuneTest import Tuner
-from Components.ConfigList import ConfigListScreen
-from Components.Sources.StaticText import StaticText
-from Components.ActionMap import ActionMap
-from Components.NimManager import nimmanager, getConfigSatlist
-from Components.config import config, configfile, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry, ConfigNothing, ConfigBoolean
-from Components.Sources.FrontendStatus import FrontendStatus
 
 from Tools.BoundFunction import boundFunction
 
-from enigma import eTimer, eDVBFrontendParametersSatellite, eComponentScan, eConsoleAppContainer, eDVBResourceManager
-
 import os
-from boxbranding import getBoxType, getImageVersion, getImageBuild, getBrandOEM
 
 #used for the XML file
 from time import strftime, time
-
-XML_BLINDSCAN_DIR = "/tmp"
-XML_FILE = None
-
-# _supportNimType is only used by vuplus hardware
-_supportNimType = { 'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_', 'BCM7356':'bcm7346_', 'SI2166':'si2166_'}
-
-# For STBs that support multiple DVB-S tuner models, e.g. Solo 4K.
-_unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', 'Vuplus DVB-S NIM(45308X FBC)') # format = nim.description from nimmanager
-
-# blindscan-s2 supported tuners
-_blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
-
-config.blindscan = ConfigSubsection()
-config.blindscan.search_type = ConfigSelection(default = "services", choices = [
-			("services", _("scan for channels")),
-			("transponders", _("scan for transponders"))])
 
 # root2gold based on https://github.com/DigitalDevices/dddvb/blob/master/apps/pls.c
 def root2gold(root):
@@ -74,6 +59,23 @@ def getAdapterFrontend(frontend, description):
 			break
 	return " -f %d" % frontend
 
+
+XML_BLINDSCAN_DIR = "/tmp"
+XML_FILE = None
+
+# _supportNimType is only used by vuplus hardware
+_supportNimType = { 'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_', 'BCM7356':'bcm7346_', 'SI2166':'si2166_'}
+
+# For STBs that support multiple DVB-S tuner models, e.g. Solo 4K.
+_unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', 'Vuplus DVB-S NIM(45308X FBC)') # format = nim.description from nimmanager
+
+# blindscan-s2 supported tuners
+_blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
+
+config.blindscan = ConfigSubsection()
+config.blindscan.search_type = ConfigSelection(default = "services", choices = [
+			("services", _("scan for channels")),
+			("transponders", _("scan for transponders"))])
 
 class BlindscanState(Screen, ConfigListScreen):
 	skin="""
