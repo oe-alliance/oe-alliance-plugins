@@ -1483,7 +1483,10 @@ class Blindscan(ConfigListScreen, Screen):
 		if nimconfig.configMode.getValue() == "equal":
 			slotid = int(nimconfig.connectedTo.value)
 			nim = nimmanager.nim_slots[slotid]
-			nimconfig = nim.config
+			if not self.legacy:
+				nimconfig = nim.config.dvbs
+			else:
+				nimconfig = nim.config
 		if nimconfig.configMode.getValue() == "advanced":
 			currSat = nimconfig.advanced.sat[cur_orb_pos]
 			lnbnum = int(currSat.lnb.getValue())
