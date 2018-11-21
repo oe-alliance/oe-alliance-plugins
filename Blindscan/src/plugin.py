@@ -467,10 +467,10 @@ class Blindscan(ConfigListScreen, Screen):
 			if hasattr(n, 'isFBCLink') and n.isFBCLink():
 				continue
 			if not self.legacy:
-				config = n.config.dvbs
+				nimconfig = n.config.dvbs
 			else:
-				config = n.config
-			config_mode = config.configMode.value
+				nimconfig = n.config
+			config_mode = nimconfig.configMode.value
 			if config_mode == "nothing":
 				continue
 			if len(nimmanager.getSatListForNim(n.slot)) < 1: # empty setup
