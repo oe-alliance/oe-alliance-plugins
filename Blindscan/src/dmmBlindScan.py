@@ -668,19 +668,19 @@ class DmmBlindscan(ConfigListScreen, Screen, TransponderSearchSupport, Satellite
 				continue
 			if n.isCompatible("DVB-S"):
 				if not self.legacy:
-					config = n.config.dvbs
+					nimconfig = n.config.dvbs
 				else:
-					config = n.config
-				config_mode = config.configMode.value
+					nimconfig = n.config
+				config_mode = nimconfig.configMode.value
 				if config_mode == "nothing":
 					continue
 			if n.isCompatible("DVB-S") and len(nimmanager.getSatListForNim(n.slot)) < 1:
 				if config_mode in ("advanced", "simple"):
-					config.Nims[n.slot].configMode.value = "nothing"
-					config.Nims[n.slot].configMode.save()
+					nimconfig.Nims[n.slot].configMode.value = "nothing"
+					nimconfig.Nims[n.slot].configMode.save()
 				continue
 			if n.isCompatible("DVB-S") and config_mode in ("loopthrough", "satposdepends"):
-				root_id = nimmanager.sec.getRoot(n.slot_id, int(config.connectedTo.value))
+				root_id = nimmanager.sec.getRoot(n.slot_id, int(nimconfig.connectedTo.value))
 				if n.type == nimmanager.nim_slots[root_id].type: # check if connected from a DVB-S to DVB-S2 Nim or vice versa
 					continue
 			if n.isCompatible("DVB-S"):
