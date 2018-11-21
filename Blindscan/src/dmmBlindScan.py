@@ -676,8 +676,8 @@ class DmmBlindscan(ConfigListScreen, Screen, TransponderSearchSupport, Satellite
 					continue
 			if n.isCompatible("DVB-S") and len(nimmanager.getSatListForNim(n.slot)) < 1:
 				if config_mode in ("advanced", "simple"):
-					nimconfig.Nims[n.slot].configMode.value = "nothing"
-					nimconfig.Nims[n.slot].configMode.save()
+					config.Nims[n.slot].configMode.value = "nothing"
+					config.Nims[n.slot].configMode.save()
 				continue
 			if n.isCompatible("DVB-S") and config_mode in ("loopthrough", "satposdepends"):
 				root_id = nimmanager.sec.getRoot(n.slot_id, int(nimconfig.connectedTo.value))
