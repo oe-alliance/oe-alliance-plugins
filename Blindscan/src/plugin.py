@@ -785,15 +785,15 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self.tuner.tune(
 			(self.scan_sat.frequency.value,
-			0,
+			0, # symbolrate
 			tab_pol[pol],
-			0,
-			0,
+			eDVBFrontendParametersSatellite.FEC_Auto,
+			eDVBFrontendParametersSatellite.Inversion_Off,
 			orb[0],
 			eDVBFrontendParametersSatellite.System_DVB_S,
-			0,
-			0,
-			0)
+			eDVBFrontendParametersSatellite.Modulation_Auto,
+			eDVBFrontendParametersSatellite.RollOff_alpha_0_35,
+			eDVBFrontendParametersSatellite.Pilot_Off)
 		)
 
 		nim = nimmanager.nim_slots[self.feid]
