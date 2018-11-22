@@ -245,6 +245,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_yellow"] = StaticText("")
+		self["description"] = Label("")
 		if self.scan_nims.value is not None and self.scan_nims.value != "":
 			self["key_green"] = StaticText(_("Scan"))
 			self.createSetup()
@@ -261,7 +262,6 @@ class Blindscan(ConfigListScreen, Screen):
 		else:
 			self["actions3"].setEnabled(False)
 
-		self["description"] = Label("")
 		if not self.selectionChanged in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.selectionChanged()
@@ -277,8 +277,6 @@ class Blindscan(ConfigListScreen, Screen):
 			def selectionChanged(self):
 				self["SetupEntry"].text = self.parent.getCurrentEntry()
 				self["SetupValue"].text = self.parent.getCurrentValue()
-				if hasattr(self.parent,"getCurrentDescription") and "description" in self.parent:
-					self.parent["description"].text = self.parent.getCurrentDescription()
 		return SetupSummary2
 
 	def ScanNimsocket(self, filepath = '/proc/bus/nim_sockets'):
