@@ -223,37 +223,32 @@ class Blindscan(ConfigListScreen, Screen):
 
 		ConfigListScreen.__init__(self, self.list, session = session)
 		self["footnote"] = Label("")
+		
+		self["actions"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
+		{
+			"red": self.keyCancel,
+			"cancel": self.keyCancel,
+		}, -2)
+
+		self["actions2"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
+		{
+			"green": self.keyGo,
+			"ok": self.keyGo,
+		}, -2)
+		self["actions2"].setEnabled(False)
+
+		self["actions3"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
+		{
+			"yellow": self.keyYellow,
+		}, -2)
+		self["actions3"].setEnabled(False)
+
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_yellow"] = StaticText("")
 		if self.scan_nims.value is not None and self.scan_nims.value != "":
-			self["actions"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
-			{
-				"red": self.keyCancel,
-				"cancel": self.keyCancel,
-			}, -2)
-			self["actions2"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
-			{
-				"green": self.keyGo,
-				"ok": self.keyGo,
-			}, -2)
-			self["actions2"].setEnabled(False)
-			self["actions3"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
-			{
-				"yellow": self.keyYellow,
-			}, -2)
-			self["actions3"].setEnabled(False)
-			self["key_red"] = StaticText(_("Exit"))
 			self["key_green"] = StaticText(_("Scan"))
-			self["key_yellow"] = StaticText("")
 			self.createSetup()
 		else:
-			self["actions"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
-			{
-				"red": self.keyCancel,
-				"green": self.keyNone,
-				"ok": self.keyNone,
-				"cancel": self.keyCancel,
-			}, -2)
-			self["key_red"] = StaticText(_("Exit"))
-			self["key_green"] = StaticText("")
 			self["footnote"].setText(_("Please setup your tuner configuration."))
 
 		self.i2c_mapping_table = None
@@ -348,9 +343,6 @@ class Blindscan(ConfigListScreen, Screen):
 
 	def getNimSocket(self, slot_number):
 		return self.i2c_mapping_table.get(slot_number, -1)
-
-	def keyNone(self):
-		None
 
 	def callbackNone(self, *retval):
 		None
