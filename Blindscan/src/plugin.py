@@ -744,6 +744,7 @@ class Blindscan(ConfigListScreen, Screen):
 	def prepareScanData(self, orb, pol, band, is_scan):
 		print "[Blindscan][prepareScanData] started"
 		self.is_runable = False
+		self.adjust_freq = True
 		self.orb_position = orb[0]
 		self.sat_name = orb[1]
 		self.feid = int(self.scan_nims.value)
@@ -888,6 +889,7 @@ class Blindscan(ConfigListScreen, Screen):
 			cmd = "uclan-blindscan %d %d %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
 		elif getBoxType() == 'sf8008':
 			self.frontend and self.frontend.closeFrontend()
+			self.adjust_freq = False
 			cmd = "octagon-blindscan %d %d %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
 		elif getBrandOEM() == 'dinobot':
 			cmd = "dinobot-blindscan %d %d %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, self.blindscan_start_symbol.value, self.blindscan_stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
@@ -1341,7 +1343,7 @@ class Blindscan(ConfigListScreen, Screen):
 				if tplist[x].frequency > (self.c_band_freq_limits["high"]*multiplier):
 					tplist[x].frequency = (self.c_band_lo_freq*multiplier) - (tplist[x].frequency - (self.universal_lo_freq["low"]*multiplier))
 				x += 1
-		elif self.user_defined_lnb_scan:
+		elif self.user_defined_lnb_scan and self.adjust_freq:
 			x = 0
 			for transponders in tplist:
 				tplist[x].frequency = tplist[x].frequency + ((self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])*multiplier)
@@ -1381,13 +1383,15 @@ class Blindscan(ConfigListScreen, Screen):
 			data_if_freq = data_freq - self.universal_lo_freq["high"]
 		elif self.is_c_band_scan and data_freq > self.c_band_freq_limits["low"]-1 and data_freq < self.c_band_freq_limits["high"]+1:
 			data_if_freq = self.c_band_lo_freq - data_freq
+		elif self.user_defined_lnb_scan and not self.adjust_freq:
+			data_if_freq = data_freq - self.user_defined_lnb_lo_freq
 		else:
 			data_if_freq = data_freq - self.universal_lo_freq["low"]
 
-		if data_if_freq >= lower_freq and data_if_freq <= upper_freq:
+		if lower_freq <= data_if_freq <= upper_freq:
 			good = True
 
-		if data_symbol < lower_symbol or data_symbol > upper_symbol:
+		if not lower_symbol <= data_symbol <= upper_symbol:
 			good = False
 
 		if good == False:
