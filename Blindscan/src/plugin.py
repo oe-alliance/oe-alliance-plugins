@@ -1370,7 +1370,6 @@ class Blindscan(ConfigListScreen, Screen):
 		return min(abs(diff % 3600), 3600 - abs(diff % 3600))
 
 	def dataIsGood(self, data): # check output of the binary for nonsense values
-		good = False
 		lower_freq = self.thisRun[0]
 		upper_freq = self.thisRun[1]
 		high_band = self.thisRun[2]
@@ -1388,13 +1387,9 @@ class Blindscan(ConfigListScreen, Screen):
 		else:
 			data_if_freq = data_freq - self.universal_lo_freq["low"]
 
-		if lower_freq <= data_if_freq <= upper_freq:
-			good = True
+		good = lower_freq <= data_if_freq <= upper_freq and lower_symbol <= data_symbol <= upper_symbol
 
-		if not lower_symbol <= data_symbol <= upper_symbol:
-			good = False
-
-		if good == False:
+		if not good:
 			print "[Blindscan][dataIsGood] Data returned by the binary is not good...\n	Data: Frequency [%d], Symbol rate [%d]" % (int(data[2]), int(data[3]))
 
 		return good
