@@ -1280,13 +1280,17 @@ class Blindscan(ConfigListScreen, Screen):
 		multiplier = 1000
 		x = 0
 		for t in tplist:
+			found = False
 			for k in knowntp:
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
 					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
 					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier) and \
 					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode:
 					tplist[x] = k
+					found = True
 					break
+			if not found:
+				self.tweakSR(t)
 			x += 1
 		return tplist
 
@@ -1322,8 +1326,17 @@ class Blindscan(ConfigListScreen, Screen):
 					isnt_known = False
 					break
 			if isnt_known:
+				self.tweakSR(t)
 				new_tplist.append(t)
 		return new_tplist
+
+	def tweakSR(self, t):
+		pull_sr_max = 4 
+		lowest_sr_to_adjust = 4996
+		multiplier = 1000
+		# Cosmetic: tweak symbol rates to nearest multiple of 100 if this is closer than "pull_sr_max" away and t.symbol_rate > lowest_sr_to_adjust
+		if t.symbol_rate > (lowest_sr_to_adjust*multiplier) and abs(t.symbol_rate - int(round(t.symbol_rate, -5))) <= (pull_sr_max*multiplier):
+			t.symbol_rate = int(round(t.symbol_rate, -5))
 
 	def filterOffAdjacentSatellites(self, tplist, pos, degrees):
 		neighbours = []
