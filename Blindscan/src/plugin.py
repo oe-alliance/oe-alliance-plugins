@@ -1214,12 +1214,12 @@ class Blindscan(ConfigListScreen, Screen):
 						tp_str += " PLS Gold %d" % p.pls_code
 					blindscanStateList.append((tp_str, p))
 
-				runtime = int(time() - self.start_time)
+				self.runtime = int(time() - self.start_time)
 				xml_location = self.createSatellitesXMLfile(self.tmp_tplist, XML_BLINDSCAN_DIR)
 				if config.blindscan.search_type.value == "services": # Do a service scan
 					self.startScan(True, self.tmp_tplist)
 				else: # Display results
-					self.session.openWithCallback(self.startScan, BlindscanState, _("Search completed\n%d transponders found in %d:%02d minutes.\nDetails saved in: %s") % (len(self.tmp_tplist), runtime / 60, runtime % 60, xml_location), "", blindscanStateList, True)
+					self.session.openWithCallback(self.startScan, BlindscanState, _("Search completed\n%d transponders found in %d:%02d minutes.\nDetails saved in: %s") % (len(self.tmp_tplist), self.runtime / 60, self.runtime % 60, xml_location), "", blindscanStateList, True)
 			else:
 				msg = _("No new transponders found! \n\nOnly transponders already listed in satellites.xml \nhave been found for those search parameters!")
 				self.session.openWithCallback(self.callbackNone, MessageBox, msg, MessageBox.TYPE_INFO, timeout=60)
@@ -1437,6 +1437,7 @@ class Blindscan(ConfigListScreen, Screen):
 		xml.append('		Upper symbol rate: %d\n' % (self.blindscan_stop_symbol.value * 1000))
 		xml.append('		Only save unknown tranponders: %s\n' % (known_txp))
 		xml.append('		Filter out adjacent satellites: %s\n' % (adjacent[self.filter_off_adjacent_satellites.value]))
+		xml.append('		Scan duration: %d seconds\n' % (self.runtime))
 		xml.append('-->\n\n')
 		xml.append('<satellites>\n')
 		xml.append('	<sat name="%s" flags="0" position="%s">\n' % (self.sat_name.replace('&', '&amp;'), self.orb_position))
