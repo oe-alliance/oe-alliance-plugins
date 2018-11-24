@@ -16,6 +16,7 @@ from Screens.InfoBar import InfoBar
 from time import localtime, time
 from Tools.Directories import fileExists
 import Components.RecordingConfig
+from Tools.HardwareInfo import HardwareInfo
 
 from boxbranding import getImageDistro, getBoxType
 
@@ -30,12 +31,21 @@ config.plugins.VFD_ini.ClockLevel1 = ConfigSlider(default=1, limits=(0, 10))
 config.plugins.VFD_ini.ClockLevel2 = ConfigSlider(default=4, limits=(1, 10))
 
 MyRecLed = False
-
+use_oled = False
+if HardwareInfo().get_device_model() in ("sf8008"):
+	use_oled = True
+	
 def vfd_write(text):
-	try:
-		open("/dev/dbox/lcd0", "w").write(text)
-	except:
-		pass
+	if use_oled:
+		try:
+			open("/dev/dbox/oled0", "w").write(text)
+		except:
+			pass
+	else:
+		try:
+			open("/dev/dbox/lcd0", "w").write(text)
+		except:
+			pass
 
 class Channelnumber:
 
@@ -319,7 +329,7 @@ class VFD_INI:
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
-		if getImageDistro() in ("openatv", "openvix"):
+		if getImageDistro() in ("openatv", "openvix", "openeight"):
 			if menuid == "display":
 				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
 			else:
@@ -365,4 +375,3 @@ def sessionstart(reason, **kwargs):
 def Plugins(**kwargs):
 	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
 		PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
-
