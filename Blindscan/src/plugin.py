@@ -480,7 +480,6 @@ class Blindscan(ConfigListScreen, Screen):
 		self.scan_nims = ConfigSelection(choices = nim_list)
 
 		# sat
-		self.scan_sat.frequency = ConfigInteger(default = defaultSat["frequency"], limits = (1, 99999))
 		self.scan_sat.polarization = ConfigSelection(default = eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1, choices = [
 			(eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1, _("vertical and horizontal")),
 			(eDVBFrontendParametersSatellite.Polarisation_Vertical, _("vertical")),
@@ -765,17 +764,17 @@ class Blindscan(ConfigListScreen, Screen):
 		random_c_band_tunable_freq = 3400 # used to activate the tuner
 
 		if self.is_c_band_scan:
-			self.scan_sat.frequency.value = random_c_band_tunable_freq
+			tuning_frequency = random_c_band_tunable_freq
 		elif self.user_defined_lnb_scan:
-			self.scan_sat.frequency.value = random_ku_band_low_tunable_freq + (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
+			tuning_frequency = random_ku_band_low_tunable_freq + (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
 		else:
 			if tab_hilow[band]: # high band
-				self.scan_sat.frequency.value = random_ku_band_low_tunable_freq + (self.universal_lo_freq["high"] - self.universal_lo_freq["low"]) #used to be 12515
+				tuning_frequency = random_ku_band_low_tunable_freq + (self.universal_lo_freq["high"] - self.universal_lo_freq["low"]) #used to be 12515
 			else: # low band
-				self.scan_sat.frequency.value = random_ku_band_low_tunable_freq
+				tuning_frequency = random_ku_band_low_tunable_freq
 
 		self.tuner.tune(
-			(self.scan_sat.frequency.value,
+			(tuning_frequency,
 			0, # symbolrate
 			tab_pol[pol],
 			eDVBFrontendParametersSatellite.FEC_Auto,
