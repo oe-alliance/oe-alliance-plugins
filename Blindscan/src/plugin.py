@@ -829,72 +829,147 @@ class Blindscan(ConfigListScreen, Screen):
 
 		not_support_text = _("It seems manufacturer does not support blind scan for this tuner.")
 		if tunername in _blindscans2Nims:
-			if tunername == "TBS-5925":
-				cmd = "blindscan-s2 -b -s %d -e %d -t %d" % (temp_start_int_freq, temp_end_int_freq, config.blindscan.step_mhz_tbs5925.value)
+			exe_filename = "blindscan-s2"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				if tunername == "TBS-5925":
+					cmd = "%s -b -s %d -e %d -t %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.step_mhz_tbs5925.value)
+				else:
+					cmd = "%s -b -s %d -e %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq)
+				cmd += getAdapterFrontend(self.feid, tunername)
+				if pol == "horizontal":
+					cmd += " -H"
+				elif pol == "vertical":
+					cmd += " -V"
+				if self.is_c_band_scan:
+					cmd += " -l %d" % self.c_band_lo_freq # tested by el bandito with TBS-5925 and working
+				elif tab_hilow[band]:
+					cmd += " -l %d -2" % self.universal_lo_freq["high"] # on high band enable 22KHz tone
+				else:
+					cmd += " -l %d" % self.universal_lo_freq["low"]
+				#self.frontend and self.frontend.closeFrontend() # close because blindscan-s2 does not like to be open
+				self.cmd = cmd
+				self.bsTimer.stop()
+				self.bsTimer.start(6000, True)
 			else:
-				cmd = "blindscan-s2 -b -s %d -e %d" % (temp_start_int_freq, temp_end_int_freq)
-			cmd += getAdapterFrontend(self.feid, tunername)
-			if pol == "horizontal":
-				cmd += " -H"
-			elif pol == "vertical":
-				cmd += " -V"
-			if self.is_c_band_scan:
-				cmd += " -l %d" % self.c_band_lo_freq # tested by el bandito with TBS-5925 and working
-			elif tab_hilow[band]:
-				cmd += " -l %d -2" % self.universal_lo_freq["high"] # on high band enable 22KHz tone
-			else:
-				cmd += " -l %d" % self.universal_lo_freq["low"]
-			#self.frontend and self.frontend.closeFrontend() # close because blindscan-s2 does not like to be open
-			self.cmd = cmd
-			self.bsTimer.stop()
-			self.bsTimer.start(6000, True)
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif self.SundtekScan:
-			tools = "/opt/bin/mediaclient"
-			if os.path.exists(tools):
-				cmd = "%s --blindscan %d" % (tools, self.feid)
+			exe_path = "/opt/bin/mediaclient"
+			if os.path.exists(exe_path):
+				cmd = "%s --blindscan %d" % (exe_path, self.feid)
 				if self.is_c_band_scan:
 					cmd += " --band c"
 			else:
-				self.session.open(MessageBox, _("Not found blind scan utility '%s'!") % tools, MessageBox.TYPE_ERROR)
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
 				return
 		elif getBrandOEM() == 'ini' or getBrandOEM() == 'home':
-			cmd = "ini_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
+			exe_filename = "ini_blindscan"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif getBrandOEM() == 'vuplus':
-			try:
-				cmd = "%s %d %d %d %d %d %d %d %d" % (self.binName, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
-			except: return
-
+			exe_filename = self.binName
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif getBrandOEM() == 'ceryon':
-			cmd = "ceryon_blindscan %d %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan)
+			exe_filename = "ceryon_blindscan"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				cmd = "%s %d %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan)
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif getBrandOEM() == 'xtrend':
-			cmd = "avl_xtrend_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "avl_xtrend_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
+			exe_filename = "avl_xtrend_blindscan"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "avl_xtrend_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif getBrandOEM() == 'odin':
-			cmd = "odin_blindscan %d %d %d %d %d %d %d" % (self.feid, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band]) # odin_blindscan tuner_idx min_frequency max_frequency min_symbolrate max_symbolrate polarization(Vertical & Horizontal) hilow_band
+			exe_filename = "odin_blindscan"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				cmd = "%s %d %d %d %d %d %d %d" % (exe_filename, self.feid, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band]) # odin_blindscan tuner_idx min_frequency max_frequency min_symbolrate max_symbolrate polarization(Vertical & Horizontal) hilow_band
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif getBrandOEM() == 'gigablue':
-			cmd = "gigablue_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "vuplus_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
+			exe_filename = "gigablue_blindscan"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "vuplus_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif getBrandOEM() == 'azbox':
-			cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
-			self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
+			exe_filename = "avl_azbox_blindscan"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) # commented out by Huevos cmd = "avl_azbox_blindscan %d %d %d %d %d %d %d %d" % (self.blindscan_start_frequency.value/1000000, self.blindscan_stop_frequency.value/1000000, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
+				self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif getBrandOEM() == 'xcore' or getBrandOEM() == 'edision':
-			cmd = "blindscan --start=%d --stop=%d --min=%d --max=%d --slot=%d --i2c=%d" % (temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, self.feid, self.getNimSocket(self.feid))
-			if tab_pol[pol]:
-				cmd += " --vertical"
-			if self.is_c_band_scan:
-				cmd += " --cband"
-			elif tab_hilow[band]:
-				cmd += " --high"
+			exe_filename = "blindscan"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				cmd = "%s --start=%d --stop=%d --min=%d --max=%d --slot=%d --i2c=%d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, self.feid, self.getNimSocket(self.feid))
+				if tab_pol[pol]:
+					cmd += " --vertical"
+				if self.is_c_band_scan:
+					cmd += " --cband"
+				elif tab_hilow[band]:
+					cmd += " --high"
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif getBrandOEM() == 'clap':
-			self.frontend and self.frontend.closeFrontend()
-			cmd = "clap-blindscan %d %d %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
+			exe_filename = "clap-blindscan"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				self.frontend and self.frontend.closeFrontend()
+				cmd = "%s %d %d %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif getBrandOEM() == 'uclan':
-			self.frontend and self.frontend.closeFrontend()
-			cmd = "uclan-blindscan %d %d %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
+			exe_filename = "uclan-blindscan"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				self.frontend and self.frontend.closeFrontend()
+				cmd = "%s %d %d %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif getBoxType() == 'sf8008':
-			self.frontend and self.frontend.closeFrontend()
-			self.adjust_freq = False
-			cmd = "octagon-blindscan %d %d %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
+			exe_filename = "octagon-blindscan"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				self.frontend and self.frontend.closeFrontend()
+				self.adjust_freq = False
+				cmd = "%s %d %d %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		elif getBrandOEM() == 'dinobot':
-			cmd = "dinobot-blindscan %d %d %d %d %d %d %d %d %d %d" % (temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
+			exe_filename = "dinobot-blindscan"
+			exe_path = "/usr/bin/%s" % exe_filename
+			if os.path.exists(exe_path):
+				cmd = "%s %d %d %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
+			else:
+				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
+				return
 		else:
 			self.session.open(MessageBox, not_support_text, MessageBox.TYPE_WARNING)
 			return
