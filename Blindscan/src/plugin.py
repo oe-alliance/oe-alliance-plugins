@@ -1093,7 +1093,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 	def blindscanContainerAvail(self, str):
 		print "[Blindscan][blindscanContainerAvail]", str
-		self.full_data = self.full_data + str
+		self.full_data = self.full_data + str # TODO: is this the cause of the duplicates in blindscanContainerClose?
 		if self.blindscan_session:
 			tmpstr = ""
 			data = str.split()
