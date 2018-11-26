@@ -863,35 +863,30 @@ class Blindscan(ConfigListScreen, Screen):
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
 				return
-		elif getBrandOEM() == 'ini' or getBrandOEM() == 'home':
-			exe_filename = "ini_blindscan"
+		elif getBrandOEM() in ('azbox', 'ceryon', 'clap', 'dinobot', 'gigablue', 'ini', 'home', 'uclan', 'vuplus', 'xtrend') or getBoxType() in ('sf8008',):
+			exe_filename = getBrandOEM() == 'azbox' and "avl_azbox_blindscan" or \
+			               getBrandOEM() == 'ceryon' and "ceryon_blindscan" or \
+			               getBrandOEM() == 'clap' and "clap_blindscan" or \
+			               getBrandOEM() == 'dinobot' and "dinobot-blindscan" or \
+			               getBrandOEM() == 'gigablue' and "gigablue_blindscan" or \
+			               getBrandOEM() in ('ini', 'home') and "ini_blindscan" or \
+			               getBoxType() == 'sf8008' and "octagon-blindscan" or \
+			               getBrandOEM() == 'uclan' and "uclan-blindscan" or \
+			               getBrandOEM() == 'vuplus' and self.binName or \
+			               getBrandOEM() == 'xtrend' and "avl_xtrend_blindscan"
 			exe_path = "/usr/bin/%s" % exe_filename
 			if os.path.exists(exe_path):
 				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
-			else:
-				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
-				return
-		elif getBrandOEM() == 'vuplus':
-			exe_filename = self.binName
-			exe_path = "/usr/bin/%s" % exe_filename
-			if os.path.exists(exe_path):
-				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
-			else:
-				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
-				return
-		elif getBrandOEM() == 'ceryon':
-			exe_filename = "ceryon_blindscan"
-			exe_path = "/usr/bin/%s" % exe_filename
-			if os.path.exists(exe_path):
-				cmd = "%s %d %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan)
-			else:
-				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
-				return
-		elif getBrandOEM() == 'xtrend':
-			exe_filename = "avl_xtrend_blindscan"
-			exe_path = "/usr/bin/%s" % exe_filename
-			if os.path.exists(exe_path):
-				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) 
+				if getBrandOEM() in ('ceryon', 'clap', 'dinobot', 'uclan') or getBoxType() in ('sf8008',):
+					cmd += " %d" % self.is_c_band_scan
+				if getBrandOEM() in ('clap', 'dinobot', 'uclan') or getBoxType() in ('sf8008',):
+					cmd += " %d" % orb[0]
+				if getBrandOEM() in ('azbox',):
+					self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
+				if getBrandOEM() in ('clap', 'uclan') or getBoxType() in ('sf8008',):
+					self.frontend and self.frontend.closeFrontend()
+				if getBoxType() in ('sf8008',):
+					self.adjust_freq = False
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
 				return
@@ -900,23 +895,6 @@ class Blindscan(ConfigListScreen, Screen):
 			exe_path = "/usr/bin/%s" % exe_filename
 			if os.path.exists(exe_path):
 				cmd = "%s %d %d %d %d %d %d %d" % (exe_filename, self.feid, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band]) # odin_blindscan tuner_idx min_frequency max_frequency min_symbolrate max_symbolrate polarization(Vertical & Horizontal) hilow_band
-			else:
-				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
-				return
-		elif getBrandOEM() == 'gigablue':
-			exe_filename = "gigablue_blindscan"
-			exe_path = "/usr/bin/%s" % exe_filename
-			if os.path.exists(exe_path):
-				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid)) 
-			else:
-				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
-				return
-		elif getBrandOEM() == 'azbox':
-			exe_filename = "avl_azbox_blindscan"
-			exe_path = "/usr/bin/%s" % exe_filename
-			if os.path.exists(exe_path):
-				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
-				self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
 				return
@@ -931,42 +909,6 @@ class Blindscan(ConfigListScreen, Screen):
 					cmd += " --cband"
 				elif tab_hilow[band]:
 					cmd += " --high"
-			else:
-				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
-				return
-		elif getBrandOEM() == 'clap':
-			exe_filename = "clap-blindscan"
-			exe_path = "/usr/bin/%s" % exe_filename
-			if os.path.exists(exe_path):
-				self.frontend and self.frontend.closeFrontend()
-				cmd = "%s %d %d %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
-			else:
-				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
-				return
-		elif getBrandOEM() == 'uclan':
-			exe_filename = "uclan-blindscan"
-			exe_path = "/usr/bin/%s" % exe_filename
-			if os.path.exists(exe_path):
-				self.frontend and self.frontend.closeFrontend()
-				cmd = "%s %d %d %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
-			else:
-				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
-				return
-		elif getBoxType() == 'sf8008':
-			exe_filename = "octagon-blindscan"
-			exe_path = "/usr/bin/%s" % exe_filename
-			if os.path.exists(exe_path):
-				self.frontend and self.frontend.closeFrontend()
-				self.adjust_freq = False
-				cmd = "%s %d %d %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
-			else:
-				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
-				return
-		elif getBrandOEM() == 'dinobot':
-			exe_filename = "dinobot-blindscan"
-			exe_path = "/usr/bin/%s" % exe_filename
-			if os.path.exists(exe_path):
-				cmd = "%s %d %d %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid), self.is_c_band_scan,orb[0])
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
 				return
