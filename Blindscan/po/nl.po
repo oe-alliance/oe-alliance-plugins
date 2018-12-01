@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-22 06:30+0000\n"
-"PO-Revision-Date: 2018-11-22 09:25+0100\n"
+"POT-Creation-Date: 2018-11-27 06:21+0000\n"
+"PO-Revision-Date: 2018-12-01 08:54+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
@@ -75,11 +75,12 @@ msgstr "Blindscan status"
 msgid "Blindscan"
 msgstr "Blindscan"
 
+#, python-format
+msgid "Blindscan executable not found '%s'!"
+msgstr "Blindscan uitvoeringsbestand niet gevonden '%s'!"
+
 msgid "Blindscan is not supported in "
 msgstr "Blindscan wordt niet ondersteund in "
-
-msgid "CAUTION: If you select \"yes\" the receiver will find channels outside your user defined frequency and symbol rate limits. Transponder data is harvested from the NIT. If you are trying to filter out services, do not use this feature. Only change this if you understand why you are doing it."
-msgstr "PAS OP: Als u 'Ja' kiest, zal de ontvanger kanalen vinden buiten de door u ingestelde frequentie en symbol rate limieten. Transponder data wordt geoogst van de NIT. Als u kanalen probeert uit te filteren moet u deze optie niet gebruiken. Gebruik deze optie alleen als u begrijpt wat u doet."
 
 msgid "CAUTION: If you select \"yes\" the scan will not remove \"duplicated\" transponders from the list. Default is \"no\". Only change this if you understand why you are doing it."
 msgstr "PAS OP: Als u 'Ja' kiest, zal de scan geen dubbele tranponders van de lijst verwijderen. Default is 'Nee'. Verander dit alleen als u weet wat u doet."
@@ -139,7 +140,7 @@ msgstr "Hardware blindscan wordt niet ondersteund door deze tuner (%s)!"
 msgid "Horizontal"
 msgstr "Horizontaal"
 
-msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search, yes (keep feeds) means the same but hold all feed services/transponders."
+msgid "If you select \"yes\" all channels on the satellite being searched will be deleted before starting the current search, yes (keep feeds) means the same but hold all feed services/transponders."
 msgstr "Als u 'Ja' kiest zullen alle kanalen van de satelliet worden verwijderd alvorens het zoeken begint. 'Ja (bewaar feeds)' betekent hetzelfde, maar alle feed transponders/kanalen worden bewaard."
 
 msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
@@ -190,10 +191,6 @@ msgid ""
 msgstr ""
 "Geen tuner ingeschakeld!\n"
 "Stel uw tuners in alvorens kanalen te zoeken."
-
-#, python-format
-msgid "Not found blind scan utility '%s'!"
-msgstr "Niet gevonden blind scan utility '%s'!"
 
 msgid ""
 "Nothing to scan!\n"
@@ -396,6 +393,9 @@ msgstr "ja (bewaar feeds)"
 #~ msgid "\"channel scan\" searches for channels and saves them to your receiver; both options do a transponder search and save the result in /tmp in an XML file in satellites.xml format"
 #~ msgstr "\"zenders zoeken\" zoekt naar zenders en slaat deze op in uw ontvanger; beide opties doen een transponder scan en slaan de resultaten daarvan op in /tmp in een XML bestand in satellites.xml formaat"
 
+#~ msgid "CAUTION: If you select \"yes\" the receiver will find channels outside your user defined frequency and symbol rate limits. Transponder data is harvested from the NIT. If you are trying to filter out services, do not use this feature. Only change this if you understand why you are doing it."
+#~ msgstr "PAS OP: Als u 'Ja' kiest, zal de ontvanger kanalen vinden buiten de door u ingestelde frequentie en symbol rate limieten. Transponder data wordt geoogst van de NIT. Als u kanalen probeert uit te filteren moet u deze optie niet gebruiken. Gebruik deze optie alleen als u begrijpt wat u doet."
+
 #~ msgid ""
 #~ "Current Status: %d/%d\n"
 #~ "   Satellite: %s\n"
@@ -430,6 +430,9 @@ msgstr "ja (bewaar feeds)"
 #~ msgid "Frequency values must be between 3001 MHz and 4200 MHz (C-band)"
 #~ msgstr "Frequenties moeten liggen tussen 3001 MHz en 4200 MHz (C-band)"
 
+#~ msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search, yes (keep feeds) means the same but hold all feed services/transponders."
+#~ msgstr "Als u 'Ja' kiest zullen alle kanalen van de satelliet worden verwijderd alvorens het zoeken begint. 'Ja (bewaar feeds)' betekent hetzelfde, maar alle feed transponders/kanalen worden bewaard."
+
 #~ msgid "If you select \"yes\" all channels on the satellite being search will be deleted before starting the current search."
 #~ msgstr "Als u \"Ja\" kiest, zullen alle zenders van de huidige satelliet worden gewist voordat het zoeken begint. Dit voorkomt dat zenders dubbel worden opgenomen."
 
@@ -439,6 +442,9 @@ msgstr "ja (bewaar feeds)"
 #~ msgstr ""
 #~ "Zoekt beschikbare transponders.\n"
 #~ "Dit zal even duren."
+
+#~ msgid "Not found blind scan utility '%s'!"
+#~ msgstr "Niet gevonden blind scan utility '%s'!"
 
 #~ msgid "Press Green/OK to start the scan"
 #~ msgstr "Druk op Groen/OK om de scan te beginnen"
