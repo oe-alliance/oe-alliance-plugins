@@ -969,7 +969,7 @@ class Blindscan(ConfigListScreen, Screen):
 				symbolrate = int(data[3])
 			else:
 				return False
-			if freq >= self.blindscan_start_frequency and freq <= self.blindscan_stop_frequency and symbolrate >= config.blindscan.start_symbol.value * 1000 and symbolrate <= config.blindscan.stop_symbol.value * 1000:
+			if self.blindscan_start_frequency <= freq <= self.blindscan_stop_frequency and config.blindscan.start_symbol.value*1000 <= symbolrate <= config.blindscan.stop_symbol.value*1000:
 				add_tp = True
 			else:
 				add_tp = False
