@@ -627,39 +627,28 @@ class Blindscan(ConfigListScreen, Screen):
 		tmp_list=[self.satList[int(self.scan_nims.value)][self.scan_satselection[idx_selected_sat].index]]
 
 		if self.is_Ku_band_scan:
-			self.blindscan_start_frequency = self.blindscan_Ku_band_start_frequency
-			self.blindscan_stop_frequency = self.blindscan_Ku_band_stop_frequency
+			self.checkStartStopValues(self.blindscan_Ku_band_start_frequency, self.blindscan_Ku_band_stop_frequency)
+			self.blindscan_start_frequency = self.blindscan_Ku_band_start_frequency.value
+			self.blindscan_stop_frequency = self.blindscan_Ku_band_stop_frequency.value
 		elif self.is_c_band_scan:
-			self.blindscan_start_frequency = self.blindscan_C_band_start_frequency
-			self.blindscan_stop_frequency = self.blindscan_C_band_stop_frequency
+			self.checkStartStopValues(self.blindscan_C_band_start_frequency, self.blindscan_C_band_stop_frequency)
+			self.blindscan_start_frequency = self.blindscan_C_band_start_frequency.value
+			self.blindscan_stop_frequency = self.blindscan_C_band_stop_frequency.value
 		elif self.user_defined_lnb_scan:
-			fake_lo = self.blindscan_user_defined_lnb_start_frequency.value - (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
-			fake_hi = self.blindscan_user_defined_lnb_stop_frequency.value - (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
-			self.blindscan_start_frequency = ConfigInteger(default = fake_lo, limits = (fake_lo, fake_lo)) # fake values
-			self.blindscan_stop_frequency = ConfigInteger(default = fake_hi, limits = (fake_hi, fake_hi)) # fake values
+			self.checkStartStopValues(self.blindscan_user_defined_lnb_start_frequency, self.blindscan_user_defined_lnb_stop_frequency)
+			self.blindscan_start_frequency = self.blindscan_user_defined_lnb_start_frequency.value - (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
+			self.blindscan_stop_frequency = self.blindscan_user_defined_lnb_stop_frequency.value - (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
 
-		# swap start and stop values if entered the wrong way round
-		if self.blindscan_start_frequency.value > self.blindscan_stop_frequency.value:
-			temp = self.blindscan_stop_frequency.value
-			self.blindscan_stop_frequency.value = self.blindscan_start_frequency.value
-			self.blindscan_start_frequency.value = temp
-			del temp
-
-		# swap start and stop values if entered the wrong way round
-		if config.blindscan.start_symbol.value > config.blindscan.stop_symbol.value:
-			temp = config.blindscan.stop_symbol.value
-			config.blindscan.stop_symbol.value = config.blindscan.start_symbol.value
-			config.blindscan.start_symbol.value = temp
-			del temp
+		self.checkStartStopValues(config.blindscan.start_symbol, config.blindscan.stop_symbol)
 
 		if self.user_defined_lnb_scan:
 			uni_lnb_cutoff = self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"]
 		else:
 			uni_lnb_cutoff = self.uni_lnb_cutoff
 
-		if self.blindscan_start_frequency.value < uni_lnb_cutoff and self.blindscan_stop_frequency.value > uni_lnb_cutoff:
+		if self.blindscan_start_frequency < uni_lnb_cutoff and self.blindscan_stop_frequency > uni_lnb_cutoff:
 			tmp_band=["low","high"]
-		elif self.blindscan_start_frequency.value < uni_lnb_cutoff:
+		elif self.blindscan_start_frequency < uni_lnb_cutoff:
 			tmp_band=["low"]
 		else:
 			tmp_band=["high"]
@@ -675,7 +664,11 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self.doRun(tmp_list, tmp_pol, tmp_band)
 
-
+	def checkStartStopValues(self, start, stop):
+		# swap start and stop values if entered the wrong way round
+		if start.value > stop.value:
+			start.value, stop.value = (stop.value, start.value)
+	
 	def doRun(self, tmp_list, tmp_pol, tmp_band):
 		print "[Blindscan][doRun] started"
 		def GetCommand(nimIdx):
@@ -800,30 +793,30 @@ class Blindscan(ConfigListScreen, Screen):
 			return
 
 		if self.is_c_band_scan:
-			temp_start_int_freq = self.c_band_lo_freq - self.blindscan_stop_frequency.value
-			temp_end_int_freq = self.c_band_lo_freq - self.blindscan_start_frequency.value
+			temp_start_int_freq = self.c_band_lo_freq - self.blindscan_stop_frequency
+			temp_end_int_freq = self.c_band_lo_freq - self.blindscan_start_frequency
 			status_box_start_freq = self.c_band_lo_freq - temp_end_int_freq
 			status_box_end_freq = self.c_band_lo_freq - temp_start_int_freq
 
 		elif self.user_defined_lnb_scan:
-			temp_start_int_freq = self.blindscan_start_frequency.value - self.universal_lo_freq["low"]
-			temp_end_int_freq = self.blindscan_stop_frequency.value - self.universal_lo_freq["low"]
-			status_box_start_freq = self.blindscan_start_frequency.value + (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
-			status_box_end_freq = self.blindscan_stop_frequency.value + (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
+			temp_start_int_freq = self.blindscan_start_frequency - self.universal_lo_freq["low"]
+			temp_end_int_freq = self.blindscan_stop_frequency - self.universal_lo_freq["low"]
+			status_box_start_freq = self.blindscan_start_frequency + (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
+			status_box_end_freq = self.blindscan_stop_frequency + (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
 
 		else:
 			if tab_hilow[band]:
-				if self.blindscan_start_frequency.value < uni_lnb_cutoff:
+				if self.blindscan_start_frequency < uni_lnb_cutoff:
 					temp_start_int_freq = uni_lnb_cutoff - self.universal_lo_freq[band]
 				else:
-					temp_start_int_freq = self.blindscan_start_frequency.value - self.universal_lo_freq[band]
-				temp_end_int_freq = self.blindscan_stop_frequency.value - self.universal_lo_freq[band]
+					temp_start_int_freq = self.blindscan_start_frequency - self.universal_lo_freq[band]
+				temp_end_int_freq = self.blindscan_stop_frequency - self.universal_lo_freq[band]
 			else:
-				if self.blindscan_stop_frequency.value > uni_lnb_cutoff:
+				if self.blindscan_stop_frequency > uni_lnb_cutoff:
 					temp_end_int_freq = uni_lnb_cutoff - self.universal_lo_freq[band]
 				else:
-					temp_end_int_freq = self.blindscan_stop_frequency.value - self.universal_lo_freq[band]
-				temp_start_int_freq = self.blindscan_start_frequency.value - self.universal_lo_freq[band]
+					temp_end_int_freq = self.blindscan_stop_frequency - self.universal_lo_freq[band]
+				temp_start_int_freq = self.blindscan_start_frequency - self.universal_lo_freq[band]
 			status_box_start_freq = temp_start_int_freq + self.universal_lo_freq[band]
 			status_box_end_freq = temp_end_int_freq + self.universal_lo_freq[band]
 
@@ -976,7 +969,7 @@ class Blindscan(ConfigListScreen, Screen):
 				symbolrate = int(data[3])
 			else:
 				return False
-			if freq >= self.blindscan_start_frequency.value and freq <= self.blindscan_stop_frequency.value and symbolrate >= config.blindscan.start_symbol.value * 1000 and symbolrate <= config.blindscan.stop_symbol.value * 1000:
+			if freq >= self.blindscan_start_frequency and freq <= self.blindscan_stop_frequency and symbolrate >= config.blindscan.start_symbol.value * 1000 and symbolrate <= config.blindscan.stop_symbol.value * 1000:
 				add_tp = True
 			else:
 				add_tp = False
@@ -1453,8 +1446,8 @@ class Blindscan(ConfigListScreen, Screen):
 		xml.append('	Search parameters:\n')
 		xml.append('		%s\n' % (tuner))
 		xml.append('		Satellite: %s\n' % (self.sat_name))
-		xml.append('		Start frequency: %dMHz\n' % (self.blindscan_start_frequency.value))
-		xml.append('		Stop frequency: %dMHz\n' % (self.blindscan_stop_frequency.value))
+		xml.append('		Start frequency: %dMHz\n' % (self.blindscan_start_frequency))
+		xml.append('		Stop frequency: %dMHz\n' % (self.blindscan_stop_frequency))
 		xml.append('		Polarization: %s\n' % (polarisation[config.blindscan.polarization.value]))
 		xml.append('		Lower symbol rate: %d\n' % (config.blindscan.start_symbol.value * 1000))
 		xml.append('		Upper symbol rate: %d\n' % (config.blindscan.stop_symbol.value * 1000))
