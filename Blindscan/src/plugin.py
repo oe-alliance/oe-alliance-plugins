@@ -86,8 +86,6 @@ config.blindscan.polarization = ConfigSelection(default = eDVBFrontendParameters
 	(eDVBFrontendParametersSatellite.Polarisation_CircularLeft, _("circular left"))])
 config.blindscan.start_symbol = ConfigInteger(default = 2, limits = (1, 59))
 config.blindscan.stop_symbol = ConfigInteger(default = 45, limits = (2, 60))
-config.blindscan.networkScan = ConfigYesNo(default = False)
-config.blindscan.networkScan.value = False # disable network search
 config.blindscan.clearallservices = ConfigSelection(default = "no", choices = [("no", _("no")), ("yes", _("yes")), ("yes_hold_feeds", _("yes (keep feeds)"))])
 config.blindscan.onlyFTA = ConfigYesNo(default = False)
 config.blindscan.dont_scan_known_tps = ConfigYesNo(default = False)
@@ -564,7 +562,6 @@ class Blindscan(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Polarisation"), config.blindscan.polarization,_('The suggested polarisation for this satellite is "%s"') % (self.suggestedPolarisation)))
 			self.list.append(getConfigListEntry(_('Scan start symbolrate'), config.blindscan.start_symbol,_('Symbol rate values are in megasymbols; enter a value between 1 and 44')))
 			self.list.append(getConfigListEntry(_('Scan stop symbolrate'), config.blindscan.stop_symbol,_('Symbol rate values are in megasymbols; enter a value between 2 and 45')))
-#			self.list.append(getConfigListEntry(_("Network scan"), config.blindscan.networkScan, _('CAUTION: If you select "yes" the receiver will find channels outside your user defined frequency and symbol rate limits. Transponder data is harvested from the NIT. If you are trying to filter out services, do not use this feature. Only change this if you understand why you are doing it.')))
 			self.list.append(getConfigListEntry(_("Clear before scan"), config.blindscan.clearallservices,_('If you select "yes" all channels on the satellite being searched will be deleted before starting the current search, yes (keep feeds) means the same but hold all feed services/transponders.')))
 			self.list.append(getConfigListEntry(_("Only free scan"), config.blindscan.onlyFTA,_('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels.')))
 			self.onlyUnknownTpsEntry = getConfigListEntry(_("Only scan unknown transponders"), config.blindscan.dont_scan_known_tps,_('If you select "yes" the scan will only search transponders not listed in satellites.xml'))
@@ -1255,7 +1252,7 @@ class Blindscan(ConfigListScreen, Screen):
 		networkid = 0
 		self.scan_session = None
 
-		flags = config.blindscan.networkScan.value and eComponentScan.scanNetworkSearch or 0
+		flags = 0
 		tmp = config.blindscan.clearallservices.value
 		if tmp == "no":
 			flags |= eComponentScan.scanDontRemoveUnscanned
