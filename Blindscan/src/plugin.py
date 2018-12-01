@@ -719,9 +719,9 @@ class Blindscan(ConfigListScreen, Screen):
 			self.clockTimer.start(1000)
 
 	def doClock(self):
-		print "[Blindscan][doClock] started"
+#		print "[Blindscan][doClock] started"
 		is_scan = False
-		print "[Blindscan][doClock] self.is_runable", self.is_runable
+#		print "[Blindscan][doClock] self.is_runable", self.is_runable
 		if self.is_runable:
 			if self.running_count >= self.max_count:
 				self.clockTimer.stop()
