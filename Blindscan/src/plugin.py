@@ -200,6 +200,8 @@ class Blindscan(ConfigListScreen, Screen):
 		self.skinName = ["BlindscanScreen", "Blindscan", "Setup"]
 		self.session.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
 
+		self["description"] = Label("")
+
 		# update sat list
 		self.satList = []
 		for slot in nimmanager.nim_slots:
@@ -266,8 +268,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_yellow"] = StaticText("")
-		self["description"] = Label("")
-		if self.scan_nims.value is not None and self.scan_nims.value != "":
+		if self.scan_nims.value is not None and self.scan_nims.value != "": # self.scan_nims set in createConfig()
 			self["key_green"] = StaticText(_("Scan"))
 			self.createSetup()
 		else:
@@ -508,9 +509,6 @@ class Blindscan(ConfigListScreen, Screen):
 		self.list = []
 		index_to_scan = int(self.scan_nims.value)
 		print "[Blindscan][createSetup] ID: ", index_to_scan
-
-		if self.scan_nims == [ ]:
-			return
 
 		warning_text = ""
 		nim = nimmanager.nim_slots[index_to_scan]
