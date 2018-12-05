@@ -145,7 +145,7 @@ class BlindscanState(Screen, ConfigListScreen):
 
 		self["actions2"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
-			"ok": self.keyOk,
+			"ok": self.scan,
 			"green": self.scan,
 			"yellow": self.selectAll,
 			"blue": self.deselectAll,
@@ -170,12 +170,6 @@ class BlindscanState(Screen, ConfigListScreen):
 			self.tp_list.append(getConfigListEntry(t[0], cb))
 		self["config"].list = self.tp_list
 		self["config"].l.setList(self.tp_list)
-
-	def keyOk(self):
-		if self.finished:
-			i = self["config"].getCurrent()
-			i[1].setValue(not i[1].getValue())
-			self["config"].setList(self["config"].getList())
 
 	def selectAll(self):
 		if self.finished:
