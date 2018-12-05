@@ -72,26 +72,38 @@ _unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', 'Vuplus DVB-S NIM(45308X FBC)
 # blindscan-s2 supported tuners
 _blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
 
+defaults = {"search_type": "transponders", 
+	"step_mhz_tbs5925": 10,
+	"polarization": eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1, # "vertical and horizontal"
+	"start_symbol": 2,
+	"stop_symbol": 45,
+	"clearallservices": "no",
+	"onlyFTA": False,
+	"dont_scan_known_tps": False,
+	"disable_sync_with_known_tps": False,
+	"disable_remove_duplicate_tps": False,
+	"filter_off_adjacent_satellites": 3}
+
 config.blindscan = ConfigSubsection()
-config.blindscan.search_type = ConfigSelection(default = "services", choices = [
+config.blindscan.search_type = ConfigSelection(default = defaults["search_type"], choices = [
 	("services", _("scan for channels")),
 	("transponders", _("scan for transponders"))])
-config.blindscan.step_mhz_tbs5925 = ConfigInteger(default = 10, limits = (1, 20))
-config.blindscan.polarization = ConfigSelection(default = eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1, choices = [
+config.blindscan.step_mhz_tbs5925 = ConfigInteger(default = defaults["step_mhz_tbs5925"], limits = (1, 20))
+config.blindscan.polarization = ConfigSelection(default = defaults["polarization"], choices = [
 	(eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1, _("vertical and horizontal")),
 	(eDVBFrontendParametersSatellite.Polarisation_Vertical, _("vertical")),
 	(eDVBFrontendParametersSatellite.Polarisation_Horizontal, _("horizontal")),
 	(eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2, _("circular right and circular left")),
 	(eDVBFrontendParametersSatellite.Polarisation_CircularRight, _("circular right")),
 	(eDVBFrontendParametersSatellite.Polarisation_CircularLeft, _("circular left"))])
-config.blindscan.start_symbol = ConfigInteger(default = 2, limits = (1, 59))
-config.blindscan.stop_symbol = ConfigInteger(default = 45, limits = (2, 60))
-config.blindscan.clearallservices = ConfigSelection(default = "no", choices = [("no", _("no")), ("yes", _("yes")), ("yes_hold_feeds", _("yes (keep feeds)"))])
-config.blindscan.onlyFTA = ConfigYesNo(default = False)
-config.blindscan.dont_scan_known_tps = ConfigYesNo(default = False)
-config.blindscan.disable_sync_with_known_tps = ConfigYesNo(default = False)
-config.blindscan.disable_remove_duplicate_tps = ConfigYesNo(default = False)
-config.blindscan.filter_off_adjacent_satellites = ConfigSelection(default = 0, choices = [
+config.blindscan.start_symbol = ConfigInteger(default = defaults["start_symbol"], limits = (1, 59))
+config.blindscan.stop_symbol = ConfigInteger(default = defaults["stop_symbol"], limits = (2, 60))
+config.blindscan.clearallservices = ConfigSelection(default = defaults["clearallservices"], choices = [("no", _("no")), ("yes", _("yes")), ("yes_hold_feeds", _("yes (keep feeds)"))])
+config.blindscan.onlyFTA = ConfigYesNo(default = defaults["onlyFTA"])
+config.blindscan.dont_scan_known_tps = ConfigYesNo(default = defaults["dont_scan_known_tps"])
+config.blindscan.disable_sync_with_known_tps = ConfigYesNo(default = defaults["disable_sync_with_known_tps"])
+config.blindscan.disable_remove_duplicate_tps = ConfigYesNo(default = defaults["disable_remove_duplicate_tps"])
+config.blindscan.filter_off_adjacent_satellites = ConfigSelection(default = defaults["filter_off_adjacent_satellites"], choices = [
 	(0, _("no")),
 	(1, _("up to 1 degree")),
 	(2, _("up to 2 degrees")),
@@ -236,6 +248,10 @@ class Blindscan(ConfigListScreen, Screen):
 		self.offset = 0
 		self.start_time = time()
 		self.orb_pos = 0
+		self.is_c_band_scan = False
+		self.is_Ku_band_scan = False
+		self.user_defined_lnb_scan = False
+		self.user_defined_lnb_lo_freq = 0
 		self.tunerEntry = None
 		self.clockTimer = eTimer()
 
@@ -257,6 +273,7 @@ class Blindscan(ConfigListScreen, Screen):
 		{
 			"green": self.keyGo,
 			"ok": self.keyGo,
+			"blue": self.resetDefaults,
 		}, -2)
 		self["actions2"].setEnabled(False)
 
@@ -268,9 +285,12 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_yellow"] = StaticText("")
+		
 		if self.scan_nims.value is not None and self.scan_nims.value != "": # self.scan_nims set in createConfig()
 			self["key_green"] = StaticText(_("Scan"))
+			self["key_blue"] = StaticText(_("Restore defaults"))
 			self.createSetup()
+			
 		else:
 			self["footnote"].setText(_("Please setup your tuner configuration."))
 
@@ -290,6 +310,7 @@ class Blindscan(ConfigListScreen, Screen):
 		
 	def selectionChanged(self):
 		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
+		self.setBlueText()
 
 	def createSummary(self):
 		from Screens.Setup import SetupSummary
@@ -535,6 +556,7 @@ class Blindscan(ConfigListScreen, Screen):
 				self["config"].l.setList(self.list)
 				self["description"].setText(_("LNB of current satellite not compatible with plugin"))
 				self["key_green"].setText("")
+				self["key_blue"].setText("")
 				self["actions2"].setEnabled(False)
 				return
 
@@ -579,6 +601,7 @@ class Blindscan(ConfigListScreen, Screen):
 		print "[Blindscan][newConfig] cur is", cur
 		if cur and (cur == self.tunerEntry or cur == self.satelliteEntry or cur == self.onlyUnknownTpsEntry):
 			self.createSetup()
+		self.setBlueText()
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -1482,6 +1505,43 @@ class Blindscan(ConfigListScreen, Screen):
 	def keyYellow(self):
 		if XML_FILE and os.path.exists(XML_FILE):
 			self.session.open(Console,_(XML_FILE),["cat %s" % XML_FILE])
+
+	def resetDefaults(self):
+		config.blindscan.search_type.value = defaults["search_type"]
+		config.blindscan.step_mhz_tbs5925.value = defaults["step_mhz_tbs5925"]
+		config.blindscan.polarization.value = defaults["polarization"]
+		config.blindscan.start_symbol.value = defaults["start_symbol"]
+		config.blindscan.stop_symbol.value = defaults["stop_symbol"]
+		config.blindscan.clearallservices.value = defaults["clearallservices"]
+		config.blindscan.onlyFTA.value = defaults["onlyFTA"]
+		config.blindscan.dont_scan_known_tps.value = defaults["dont_scan_known_tps"]
+		config.blindscan.disable_sync_with_known_tps.value = defaults["dont_scan_known_tps"]
+		config.blindscan.disable_remove_duplicate_tps.value = defaults["disable_remove_duplicate_tps"]
+		config.blindscan.filter_off_adjacent_satellites.value = defaults["filter_off_adjacent_satellites"]
+		self.blindscan_Ku_band_start_frequency.value = self.Ku_band_freq_limits["low"]
+		self.blindscan_Ku_band_stop_frequency.value = self.Ku_band_freq_limits["high"]
+		self.blindscan_C_band_start_frequency.value = self.c_band_freq_limits["default_low"]
+		self.blindscan_C_band_stop_frequency.value = self.c_band_freq_limits["default_high"]
+		if self.user_defined_lnb_scan:
+			self.blindscan_user_defined_lnb_start_frequency.value = self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"]
+			self.blindscan_user_defined_lnb_stop_frequency.value = self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"]
+		self.createSetup()
+		self.setBlueText()
+			
+	def setBlueText(self):
+		for key in defaults.keys():
+			if eval('config.blindscan.%s.value == defaults["%s"]' % (key, key)) == False:
+				self["key_blue"].setText("Restore defaults")
+				return
+		if self.blindscan_Ku_band_start_frequency.value != self.Ku_band_freq_limits["low"] or \
+			self.blindscan_Ku_band_stop_frequency.value != self.Ku_band_freq_limits["high"] or \
+			self.blindscan_C_band_start_frequency.value != self.c_band_freq_limits["default_low"] or \
+			self.blindscan_C_band_stop_frequency.value != self.c_band_freq_limits["default_high"] or \
+			self.user_defined_lnb_scan and self.blindscan_user_defined_lnb_start_frequency.value != self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"] or \
+			self.user_defined_lnb_scan and self.blindscan_user_defined_lnb_stop_frequency.value != self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"]:
+			self["key_blue"].setText("Restore defaults")
+		else:
+			self["key_blue"].setText("")
 
 	def SatBandCheck(self):
 		# search for LNB type in Universal, C band, or user defined.
