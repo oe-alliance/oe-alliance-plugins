@@ -279,10 +279,10 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText(_("Restore defaults"))
 		
 		if self.scan_nims.value is not None and self.scan_nims.value != "": # self.scan_nims set in createConfig()
 			self["key_green"] = StaticText(_("Scan"))
-			self["key_blue"] = StaticText(_("Restore defaults"))
 			self.createSetup()
 			
 		else:
