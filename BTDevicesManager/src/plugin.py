@@ -194,6 +194,11 @@ class BluetoothDevicesManager(Screen):
 		self.devicelist = []
 		self["devicelist"] = MenuList(self.devicelist)
 
+		self.refreshStatusTimer = eTimer()
+		self.refreshStatusTimer.callback.append(self.cbRefreshStatus)
+		self.cb_mac_address = None
+		self.cb_name = None
+
 	def initDevice(self):
 		print "[BluetoothManager] initDevice"
 		cmd = "hciconfig hci0 up"
@@ -276,6 +281,20 @@ class BluetoothDevicesManager(Screen):
 		self["ConnStatus"].setText(msg)
 		self["key_yellow"].setText(_("Disconnect"))
 		
+	def cbRefreshStatus(self):
+		self.refreshStatusTimer.stop()
+		mac_address = self.cb_mac_address
+		name = self.cb_name
+		ret = iBluetoothctl.connect(mac_address)
+		if ret is False:
+			msg = _("Can't not pair with selected device!")
+			self["ConnStatus"].setText(msg)
+		else:
+			iBluetoothctl.trust(mac_address)
+			msg = _("Connection with:\n") + name + " (" + mac_address + ")"
+			self["ConnStatus"].setText(msg)
+			self["key_yellow"].setText(_("Disconnect"))
+
 	def keyYellow(self):
 		if self["key_yellow"].getText() == _('Disconnect'):
 			print "[BluetoothManager] Disconnecting"
@@ -334,15 +353,22 @@ class BluetoothDevicesManager(Screen):
 						break
 
 				if mac_address is not None:
-					iBluetoothctl.disconnect(mac_address)
 					iBluetoothctl.agent_noinputnooutput()
 					iBluetoothctl.default_agent()
-					iBluetoothctl.pair(mac_address)
-					iBluetoothctl.trust(mac_address)
-					iBluetoothctl.connect(mac_address)
-					msg = _("Connection with:\n") + name + " (" + mac_address + ")"
-					self["ConnStatus"].setText(msg)
-					self["key_yellow"].setText(_("Disconnect"))
+					ret = iBluetoothctl.pair(mac_address)
+					if ret is False:
+						if iBluetoothctl.passkey is not None:
+							self.cb_mac_address = mac_address
+							self.cb_name = name
+							msg = _("Please Enter Passkey: \n") + iBluetoothctl.passkey
+							self["ConnStatus"].setText(msg)
+							self.refreshStatusTimer.start(10000, True)
+					else:
+						iBluetoothctl.trust(mac_address)
+						ret = iBluetoothctl.connect(mac_address)
+						msg = _("Connection with:\n") + name + " (" + mac_address + ")"
+						self["ConnStatus"].setText(msg)
+						self["key_yellow"].setText(_("Disconnect"))
 				else:
 					print "[BluetoothManager] can NOT connect with: ", selectedItem[1]
 					msg = _("Can't not pair with selected device!")

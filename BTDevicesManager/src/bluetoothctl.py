@@ -25,6 +25,7 @@ import time
 import pexpect
 import subprocess
 import sys
+import re
 
 class BluetoothctlError(Exception):
     """This exception is raised, when bluetoothctl fails to start."""
@@ -137,13 +138,17 @@ class Bluetoothctl:
 
     def pair(self, mac_address):
         """Try to pair with a device by mac address."""
+        self.passkey = None
         try:
             out = self.get_output("pair " + mac_address, 2)
         except BluetoothctlError, e:
             print(e)
             return None
         else:
-            res = self.child.expect(["Failed to pair", "Pairing successful", pexpect.EOF])
+            res = self.child.expect(["Failed to pair", "Pairing successful", "Passkey: ", "PIN code: ", pexpect.EOF])
+            if res == 2 or res == 3:
+                ansi_escape = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
+                self.passkey = ansi_escape.sub('', str(self.child.buffer))
             success = True if res == 1 else False
             return success
 
@@ -179,7 +184,7 @@ class Bluetoothctl:
             print(e)
             return None
         else:
-            res = 1 #self.child.expect(["Failed to disconnect", "Successful disconnected", pexpect.EOF])
+            res = self.child.expect(["Failed to disconnect", "Successful disconnected", pexpect.EOF])
             success = True if res == 1 else False
             return success
 
