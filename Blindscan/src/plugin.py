@@ -1501,17 +1501,8 @@ class Blindscan(ConfigListScreen, Screen):
 			self.session.open(Console,_(XML_FILE),["cat %s" % XML_FILE])
 
 	def resetDefaults(self):
-		config.blindscan.search_type.value = defaults["search_type"]
-		config.blindscan.step_mhz_tbs5925.value = defaults["step_mhz_tbs5925"]
-		config.blindscan.polarization.value = defaults["polarization"]
-		config.blindscan.start_symbol.value = defaults["start_symbol"]
-		config.blindscan.stop_symbol.value = defaults["stop_symbol"]
-		config.blindscan.clearallservices.value = defaults["clearallservices"]
-		config.blindscan.onlyFTA.value = defaults["onlyFTA"]
-		config.blindscan.dont_scan_known_tps.value = defaults["dont_scan_known_tps"]
-		config.blindscan.disable_sync_with_known_tps.value = defaults["dont_scan_known_tps"]
-		config.blindscan.disable_remove_duplicate_tps.value = defaults["disable_remove_duplicate_tps"]
-		config.blindscan.filter_off_adjacent_satellites.value = defaults["filter_off_adjacent_satellites"]
+		for key in defaults.keys():
+			getattr(config.blindscan, key).value = defaults[key]
 		self.blindscan_Ku_band_start_frequency.value = self.Ku_band_freq_limits["low"]
 		self.blindscan_Ku_band_stop_frequency.value = self.Ku_band_freq_limits["high"]
 		self.blindscan_C_band_start_frequency.value = self.c_band_freq_limits["default_low"]
@@ -1524,7 +1515,7 @@ class Blindscan(ConfigListScreen, Screen):
 			
 	def setBlueText(self):
 		for key in defaults.keys():
-			if eval('config.blindscan.%s.value == defaults["%s"]' % (key, key)) == False:
+			if getattr(config.blindscan, key).value != defaults[key]:
 				self["key_blue"].setText("Restore defaults")
 				return
 		if self.blindscan_Ku_band_start_frequency.value != self.Ku_band_freq_limits["low"] or \
