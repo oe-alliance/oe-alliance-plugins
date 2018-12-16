@@ -165,15 +165,9 @@ class BluetoothDevicesManager(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Bluetooth Devices Manager"))
-		
+
 		self.taskManager = TaskManager()
-		
-		self["ConnStatus"] = Label(_("Please load BT driver by pressing BLUE button."))
-		
-		if config.btdevicesmanager.autostart.getValue():
-			self.initDevice()
-			self["ConnStatus"] = Label(_("No connected to any device"))
-		
+
 		self["actions"]  = ActionMap(["OkCancelActions","WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
 			"ok"    : self.keyOK,
 			"cancel": self.keyCancel,
@@ -190,9 +184,17 @@ class BluetoothDevicesManager(Screen):
 			self["key_blue"]   = Label()
 		else:
 			self["key_blue"]   = Label(_("Config"))
+
+		self["ConnStatus"] = Label(_("No connected to any device"))
     
 		self.devicelist = []
 		self["devicelist"] = MenuList(self.devicelist)
+
+		if config.btdevicesmanager.autostart.getValue():
+			self.initDevice()
+		if brandoem in ("xcore","edision"):
+			self.initDevice()
+			self.showConnections()
 
 		self.refreshStatusTimer = eTimer()
 		self.refreshStatusTimer.callback.append(self.cbRefreshStatus)
@@ -235,7 +237,7 @@ class BluetoothDevicesManager(Screen):
 		cmd = 'hcitool scan'
 		self.taskManager.append(cmd, self.cbPrintAvailDevices, self.cbRunNextTask)
 		self.taskManager.next()
-		
+
 	def cbPrintAvailDevices(self, data):
 		print "[BluetoothManager] cbPrintAvailDevices"
 		
@@ -274,6 +276,8 @@ class BluetoothDevicesManager(Screen):
 						msg = _("Connection with:\n") + name + " (" + mac_address + ")"
 						self["ConnStatus"].setText(msg)
 						self["key_yellow"].setText(_("Disconnect"))
+			else:
+				self["ConnStatus"].setText(_("No connected to any device"))
 			
 	def cbPrintCurrentConnections(self, data):
 		print "[BluetoothManager] cbPrintCurrentConnections"
@@ -285,15 +289,19 @@ class BluetoothDevicesManager(Screen):
 		self.refreshStatusTimer.stop()
 		mac_address = self.cb_mac_address
 		name = self.cb_name
-		ret = iBluetoothctl.connect(mac_address)
-		if ret is False:
+		try:
+			ret = iBluetoothctl.connect(mac_address)
+			if ret is False:
+				msg = _("Can't not pair with selected device!")
+				self["ConnStatus"].setText(msg)
+			else:
+				iBluetoothctl.trust(mac_address)
+				msg = _("Connection with:\n") + name + " (" + mac_address + ")"
+				self["ConnStatus"].setText(msg)
+				self["key_yellow"].setText(_("Disconnect"))
+		except:
 			msg = _("Can't not pair with selected device!")
 			self["ConnStatus"].setText(msg)
-		else:
-			iBluetoothctl.trust(mac_address)
-			msg = _("Connection with:\n") + name + " (" + mac_address + ")"
-			self["ConnStatus"].setText(msg)
-			self["key_yellow"].setText(_("Disconnect"))
 
 	def keyYellow(self):
 		if self["key_yellow"].getText() == _('Disconnect'):
@@ -312,7 +320,14 @@ class BluetoothDevicesManager(Screen):
 						if d is not None:
 							mac_address = d['mac_address']
 							name = d['name']
-							iBluetoothctl.disconnect(mac_address)
+							try:
+								iBluetoothctl.remove(mac_address)
+							except:
+								pass
+							try:
+								iBluetoothctl.disconnect(mac_address)
+							except:
+								pass
 							msg = _("Disconnect with:\n") + name + " (" + mac_address + ")"
 							self["ConnStatus"].setText(msg)
 							self["key_yellow"].setText(_("Connect"))
@@ -340,6 +355,7 @@ class BluetoothDevicesManager(Screen):
 			else:
 				mac_address = None
 				name = None
+				iBluetoothctl.pairable_on()
 				iBluetoothctl.start_scan()
 				for i in range(0, 20):
 					time.sleep(0.5)

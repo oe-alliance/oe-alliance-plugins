@@ -216,4 +216,20 @@ class Bluetoothctl:
             print(e)
             return None
 
+    def pairable_on(self):
+        """Enable Pairable"""
+        try:
+            out = self.get_output("pairable on")
+        except BluetoothctlError, e:
+            print(e)
+            return None
+
+    def pairable_off(self):
+        """Disbale Pairable"""
+        try:
+            out = self.get_output("pairable off")
+        except BluetoothctlError, e:
+            print(e)
+            return None
+
 iBluetoothctl = Bluetoothctl()
