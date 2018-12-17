@@ -1053,6 +1053,8 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
 					parm.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
 					parm.pls_code = 0
+					if hasattr(parm, "t2mi_plp_id"):
+						parm.t2mi_plp_id = eDVBFrontendParametersSatellite.No_T2MI_PLP_Id
 					self.tmp_tplist.append(parm)
 			elif len(data) >= 10 and self.dataIsGood(data):
 				if data[0] == 'OK':
@@ -1105,7 +1107,9 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.pls_mode = getMisPlsValue(data, 10, eDVBFrontendParametersSatellite.PLS_Gold)
 					parm.is_id = getMisPlsValue(data, 11, eDVBFrontendParametersSatellite.No_Stream_Id_Filter)
 					parm.pls_code = getMisPlsValue(data, 12, 0)
-					# when blindscan returns 0,0,0 then use defaults...
+					if hasattr(parm, "t2mi_plp_id"):
+						parm.t2mi_plp_id = getMisPlsValue(data, 13, eDVBFrontendParametersSatellite.No_T2MI_PLP_Id)
+                    # when blindscan returns 0,0,0 then use defaults...
 					if parm.pls_mode == parm.is_id == parm.pls_code == 0:
 						parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
 						parm.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
@@ -1209,7 +1213,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 			# Process transponders still in list
 			if self.tmp_tplist != []:
-				self.tmp_tplist = sorted(self.tmp_tplist, key=lambda tp: (tp.frequency, tp.is_id, tp.pls_mode, tp.pls_code))
+				self.tmp_tplist = sorted(self.tmp_tplist, key=lambda tp: (tp.frequency, tp.is_id, tp.pls_mode, tp.pls_code)) # tp.t2mi_plp_id can be added here later
 				blindscanStateList = []
 				for p in self.tmp_tplist:
 					print "[Blindscan][blindscanSessionClose] data: [%d][%d][%d][%d][%d][%d][%d][%d][%d][%d]" % (p.orbital_position, p.polarisation, p.frequency, p.symbol_rate, p.system, p.inversion, p.pilot, p.fec, p.modulation, p.modulation)
@@ -1240,6 +1244,8 @@ class Blindscan(ConfigListScreen, Screen):
 						tp_str += " MIS %d" % p.is_id
 					if p.pls_code > 0:
 						tp_str += " PLS Gold %d" % p.pls_code
+					if hasattr(p, "t2mi_plp_id") and p.t2mi_plp_id > eDVBFrontendParametersSatellite.No_T2MI_PLP_Id:
+						tp_str += " T2MI %d" % p.t2mi_plp_id
 					blindscanStateList.append((tp_str, p))
 
 				self.runtime = int(time() - self.start_time)
@@ -1296,10 +1302,12 @@ class Blindscan(ConfigListScreen, Screen):
 				parm.modulation = x[6]
 				parm.rolloff = x[8]
 				parm.pilot = x[9]
-				if len(x) > 12: # no "else" clause required. Defaults are automatically provided by enigma
+				if len(x) > 12:
 					parm.is_id = x[10]
 					parm.pls_mode = x[11]
 					parm.pls_code = x[12]
+					if hasattr(parm, "t2mi_plp_id") and len(x) > 13:
+						parm.t2mi_plp_id = x[13]
 				tlist.append(parm)
 		return tlist
 
@@ -1310,10 +1318,15 @@ class Blindscan(ConfigListScreen, Screen):
 		for t in tplist:
 			found = False
 			for k in knowntp:
+				if hasattr(t, "t2mi_plp_id"):
+					t2mi_check = t.t2mi_plp_id == k.t2mi_plp_id
+				else:
+					t2mi_check = True # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
 					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
 					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier) and \
-					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode:
+					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode and \
+					t2mi_check:
 					tplist[x] = k
 					found = True
 					break
@@ -1330,10 +1343,15 @@ class Blindscan(ConfigListScreen, Screen):
 			t = tplist[i]
 			found = False
 			for k in tplist[i+1:]:
+				if hasattr(t, "t2mi_plp_id"):
+					t2mi_check = t.t2mi_plp_id == k.t2mi_plp_id
+				else:
+					t2mi_check = True # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
 					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
 					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier) and \
-					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode:
+					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode and \
+					t2mi_check:
 					found = True
 					break
 			if not found:
@@ -1347,10 +1365,15 @@ class Blindscan(ConfigListScreen, Screen):
 		for t in tplist:
 			isnt_known = True
 			for k in knowntp:
+				if hasattr(t, "t2mi_plp_id"):
+					t2mi_check = t.t2mi_plp_id == k.t2mi_plp_id
+				else:
+					t2mi_check = True # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
 					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
 					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier) and \
-					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode:
+					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode and \
+					t2mi_check:
 					isnt_known = False
 					break
 			if isnt_known:
@@ -1483,6 +1506,8 @@ class Blindscan(ConfigListScreen, Screen):
 			if tp.pls_code > 0:
 				tmp_tp.append('pls_mode="%d"' % tp.pls_mode)
 				tmp_tp.append('pls_code="%d"' % tp.pls_code)
+			if hasattr(tp, "t2mi_plp_id") and tp.t2mi_plp_id > eDVBFrontendParametersSatellite.No_T2MI_PLP_Id:
+				tmp_tp.append('t2mi_plp_id="%d"' % tp.t2mi_plp_id)
 			tmp_tp.append('/>\n')
 			xml.append(' '.join(tmp_tp))
 		xml.append('	</sat>\n')
@@ -1618,7 +1643,7 @@ class Blindscan(ConfigListScreen, Screen):
 		tps = nimmanager.getTransponders(orb_pos)
 		if len(tps) < 1:
 			return False
-		# freq, sr, pol, fec, inv, orb, sys, mod, roll, pilot
+		# freq, sr, pol, fec, inv, orb, sys, mod, roll, pilot [, MIS, pls_mode, pls_code, t2mi]
 		transponder = (tps[0][1] / 1000, tps[0][2] / 1000, tps[0][3], tps[0][4], 2, orb_pos, tps[0][5], tps[0][6], tps[0][8], tps[0][9])
 		if not self.prepareFrontend():
 			print "[Blindscan][startDishMovingIfRotorSat] self.prepareFrontend() failed"
