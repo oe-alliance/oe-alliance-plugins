@@ -1319,7 +1319,7 @@ class Blindscan(ConfigListScreen, Screen):
 			found = False
 			for k in knowntp:
 				if hasattr(t, "t2mi_plp_id"):
-					t2mi_check = t.t2mi_plp_id == k.t2mi_plp_id
+					t2mi_check = t.t2mi_plp_id == eDVBFrontendParametersSatellite.No_T2MI_PLP_Id or t.t2mi_plp_id == k.t2mi_plp_id
 				else:
 					t2mi_check = True # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
@@ -1344,7 +1344,7 @@ class Blindscan(ConfigListScreen, Screen):
 			found = False
 			for k in tplist[i+1:]:
 				if hasattr(t, "t2mi_plp_id"):
-					t2mi_check = t.t2mi_plp_id == k.t2mi_plp_id
+					t2mi_check = t.t2mi_plp_id == eDVBFrontendParametersSatellite.No_T2MI_PLP_Id or t.t2mi_plp_id == k.t2mi_plp_id
 				else:
 					t2mi_check = True # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
@@ -1366,7 +1366,7 @@ class Blindscan(ConfigListScreen, Screen):
 			isnt_known = True
 			for k in knowntp:
 				if hasattr(t, "t2mi_plp_id"):
-					t2mi_check = t.t2mi_plp_id == k.t2mi_plp_id
+					t2mi_check = t.t2mi_plp_id == eDVBFrontendParametersSatellite.No_T2MI_PLP_Id or t.t2mi_plp_id == k.t2mi_plp_id
 				else:
 					t2mi_check = True # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
