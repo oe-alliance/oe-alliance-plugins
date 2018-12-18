@@ -60,7 +60,7 @@ msgid "Accuracy (higher is better)"
 msgstr "Genauigkeit (höher ist besser)"
 
 msgid "Blind scan"
-msgstr "Blind Scan"
+msgstr "Blindscan"
 
 msgid "Blind scan for DVB-S2 tuners"
 msgstr "Blind Scan für DVB-S2 Tuner"
