@@ -30,3 +30,7 @@ endif
 if HAVE_AARCH64
 SUBDIRS += aarch64
 endif
+
+if DINOBOT
+SUBDIRS += dinobot
+endif
