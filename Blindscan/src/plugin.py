@@ -73,6 +73,7 @@ _unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', 'Vuplus DVB-S NIM(45308X FBC)
 _blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
 
 defaults = {"search_type": "transponders", 
+	"user_defined_lnb_inversion": False,
 	"step_mhz_tbs5925": 10,
 	"polarization": eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1, # "vertical and horizontal"
 	"start_symbol": 2,
@@ -88,6 +89,7 @@ config.blindscan = ConfigSubsection()
 config.blindscan.search_type = ConfigSelection(default = defaults["search_type"], choices = [
 	("services", _("scan for channels")),
 	("transponders", _("scan for transponders"))])
+config.blindscan.user_defined_lnb_inversion = ConfigBoolean(default = defaults["user_defined_lnb_inversion"], descriptions = {False: _("normal"), True: _("inverted")})
 config.blindscan.step_mhz_tbs5925 = ConfigInteger(default = defaults["step_mhz_tbs5925"], limits = (1, 20))
 config.blindscan.polarization = ConfigSelection(default = defaults["polarization"], choices = [
 	(eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1, _("vertical and horizontal")),
@@ -540,6 +542,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 		self.satelliteEntry = None
 		self.onlyUnknownTpsEntry = None
+		self.userDefinedLnbInversionEntry = None
 
 		if nim.canBeCompatible("DVB-S"):
 			self.satelliteEntry = getConfigListEntry(_('Satellite'), self.scan_satselection[self.getSelectedSatIndex(index_to_scan)],_('Select the satellite you wish to search'))
@@ -564,12 +567,20 @@ class Blindscan(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_Ku_band_start_frequency,_('Frequency values must be between %d MHz and %d MHz') % (self.Ku_band_freq_limits["low"],self.Ku_band_freq_limits["high"]-1)))
 				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_Ku_band_stop_frequency,_('Frequency values must be between %d MHz and %d MHz') % (self.Ku_band_freq_limits["low"]+1, self.Ku_band_freq_limits["high"])))
 			elif self.user_defined_lnb_scan:
+				self.userDefinedLnbInversionEntry = getConfigListEntry(_('LNB inversion'), config.blindscan.user_defined_lnb_inversion,_('CAUTION: Only select "inverted" if you are using an inverted LNB (i.e. an LNB where the local oscillator frequency is greater than the scan frequency). Default is "normal". Only change this if you understand why you are doing it.'))
+				self.list.append(self.userDefinedLnbInversionEntry)
 				if self.last_user_defined_lo_freq != self.user_defined_lnb_lo_freq: # only recreate user defined config if user defined local oscillator changed frequency when moving to another user defined LNB
 					self.last_user_defined_lo_freq = self.user_defined_lnb_lo_freq
+					self.blindscan_user_defined_lnb_inverted_start_frequency = ConfigInteger(default = self.user_defined_lnb_lo_freq - self.tunerIfLimits["high"], limits = (self.user_defined_lnb_lo_freq - self.tunerIfLimits["high"], self.user_defined_lnb_lo_freq - self.tunerIfLimits["low"]-1))
+					self.blindscan_user_defined_lnb_inverted_stop_frequency = ConfigInteger(default = self.user_defined_lnb_lo_freq - self.tunerIfLimits["low"], limits = (self.user_defined_lnb_lo_freq - self.tunerIfLimits["high"]+1, self.user_defined_lnb_lo_freq - self.tunerIfLimits["low"]))
 					self.blindscan_user_defined_lnb_start_frequency = ConfigInteger(default = self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"], limits = (self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"], self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"]-1))
 					self.blindscan_user_defined_lnb_stop_frequency = ConfigInteger(default = self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"], limits = (self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"]+1, self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"]))
-				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_user_defined_lnb_start_frequency,_('Frequency values must be between %d MHz and %d MHz')% (self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"], self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"]-1)))
-				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_user_defined_lnb_stop_frequency,_('Frequency values must be between %d MHz and %d MHz') % (self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"]+1, self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"])))
+				if config.blindscan.user_defined_lnb_inversion.value:
+					self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_user_defined_lnb_inverted_start_frequency,_('Frequency values must be between %d MHz and %d MHz')% (self.user_defined_lnb_lo_freq - self.tunerIfLimits["high"], self.user_defined_lnb_lo_freq - self.tunerIfLimits["low"]-1)))
+					self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_user_defined_lnb_inverted_stop_frequency,_('Frequency values must be between %d MHz and %d MHz') % (self.user_defined_lnb_lo_freq - self.tunerIfLimits["high"]+1, self.user_defined_lnb_lo_freq - self.tunerIfLimits["low"])))
+				else: # Normal LNB, not inverted
+					self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_user_defined_lnb_start_frequency,_('Frequency values must be between %d MHz and %d MHz')% (self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"], self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"]-1)))
+					self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_user_defined_lnb_stop_frequency,_('Frequency values must be between %d MHz and %d MHz') % (self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"]+1, self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"])))
 
 			if nim.description == 'TBS-5925':
 				self.list.append(getConfigListEntry(_("Scan Step in MHz(TBS5925)"), config.blindscan.step_mhz_tbs5925,_('Smaller steps takes longer but scan is more thorough')))
@@ -593,7 +604,7 @@ class Blindscan(ConfigListScreen, Screen):
 	def newConfig(self):
 		cur = self["config"].getCurrent()
 		print "[Blindscan][newConfig] cur is", cur
-		if cur and (cur == self.tunerEntry or cur == self.satelliteEntry or cur == self.onlyUnknownTpsEntry):
+		if cur and (cur == self.tunerEntry or cur == self.satelliteEntry or cur == self.onlyUnknownTpsEntry or cur == self.userDefinedLnbInversionEntry):
 			self.createSetup()
 		self.setBlueText()
 
@@ -647,9 +658,14 @@ class Blindscan(ConfigListScreen, Screen):
 			self.blindscan_start_frequency = self.blindscan_C_band_start_frequency.value
 			self.blindscan_stop_frequency = self.blindscan_C_band_stop_frequency.value
 		elif self.user_defined_lnb_scan:
-			self.checkStartStopValues(self.blindscan_user_defined_lnb_start_frequency, self.blindscan_user_defined_lnb_stop_frequency)
-			self.blindscan_start_frequency = self.blindscan_user_defined_lnb_start_frequency.value - (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
-			self.blindscan_stop_frequency = self.blindscan_user_defined_lnb_stop_frequency.value - (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
+			if config.blindscan.user_defined_lnb_inversion.value:
+				self.checkStartStopValues(self.blindscan_user_defined_lnb_inverted_start_frequency, self.blindscan_user_defined_lnb_inverted_stop_frequency)
+				self.blindscan_start_frequency = abs((self.blindscan_user_defined_lnb_inverted_stop_frequency.value - self.user_defined_lnb_lo_freq)*2) + self.blindscan_user_defined_lnb_inverted_stop_frequency.value - (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
+				self.blindscan_stop_frequency = abs((self.blindscan_user_defined_lnb_inverted_start_frequency.value - self.user_defined_lnb_lo_freq)*2) + self.blindscan_user_defined_lnb_inverted_start_frequency.value - (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
+			else:
+				self.checkStartStopValues(self.blindscan_user_defined_lnb_start_frequency, self.blindscan_user_defined_lnb_stop_frequency)
+				self.blindscan_start_frequency = self.blindscan_user_defined_lnb_start_frequency.value - (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
+				self.blindscan_stop_frequency = self.blindscan_user_defined_lnb_stop_frequency.value - (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
 
 		self.checkStartStopValues(config.blindscan.start_symbol, config.blindscan.stop_symbol)
 
@@ -813,8 +829,12 @@ class Blindscan(ConfigListScreen, Screen):
 		elif self.user_defined_lnb_scan:
 			temp_start_int_freq = self.blindscan_start_frequency - self.universal_lo_freq["low"]
 			temp_end_int_freq = self.blindscan_stop_frequency - self.universal_lo_freq["low"]
-			status_box_start_freq = self.blindscan_start_frequency + (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
-			status_box_end_freq = self.blindscan_stop_frequency + (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
+			if config.blindscan.user_defined_lnb_inversion.value:
+				status_box_start_freq = self.user_defined_lnb_lo_freq - temp_end_int_freq
+				status_box_end_freq = self.user_defined_lnb_lo_freq - temp_start_int_freq
+			else:
+				status_box_start_freq = self.blindscan_start_frequency + (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
+				status_box_end_freq = self.blindscan_stop_frequency + (self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])
 
 		else:
 			if tab_hilow[band]:
@@ -1410,7 +1430,10 @@ class Blindscan(ConfigListScreen, Screen):
 		elif self.user_defined_lnb_scan and self.adjust_freq:
 			x = 0
 			for transponders in tplist:
-				tplist[x].frequency = tplist[x].frequency + ((self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])*multiplier)
+				if config.blindscan.user_defined_lnb_inversion.value:
+					tplist[x].frequency = (self.user_defined_lnb_lo_freq*multiplier) - (tplist[x].frequency - (self.universal_lo_freq["low"]*multiplier)) # Flip it. Same as C-band
+				else:
+					tplist[x].frequency = tplist[x].frequency + ((self.user_defined_lnb_lo_freq - self.universal_lo_freq["low"])*multiplier)
 				x += 1
 
 		x = 0
@@ -1443,13 +1466,13 @@ class Blindscan(ConfigListScreen, Screen):
 		upper_symbol = (config.blindscan.stop_symbol.value * 1000000) + 200000
 
 		if high_band:
-			data_if_freq = data_freq - self.universal_lo_freq["high"]
+			data_if_freq = abs(data_freq - self.universal_lo_freq["high"])
 		elif self.is_c_band_scan and data_freq > self.c_band_freq_limits["low"]-1 and data_freq < self.c_band_freq_limits["high"]+1:
-			data_if_freq = self.c_band_lo_freq - data_freq
+			data_if_freq = abs(self.c_band_lo_freq - data_freq)
 		elif self.user_defined_lnb_scan and not self.adjust_freq:
-			data_if_freq = data_freq - self.user_defined_lnb_lo_freq
+			data_if_freq = abs(data_freq - self.user_defined_lnb_lo_freq)
 		else:
-			data_if_freq = data_freq - self.universal_lo_freq["low"]
+			data_if_freq = abs(data_freq - self.universal_lo_freq["low"])
 
 		good = lower_freq <= data_if_freq <= upper_freq and lower_symbol <= data_symbol <= upper_symbol
 
