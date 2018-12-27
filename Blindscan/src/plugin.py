@@ -654,7 +654,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.checkStartStopValues(config.blindscan.start_symbol, config.blindscan.stop_symbol)
 
 		if self.user_defined_lnb_scan:
-			uni_lnb_cutoff = self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"]
+			uni_lnb_cutoff = self.blindscan_stop_frequency
 		else:
 			uni_lnb_cutoff = self.uni_lnb_cutoff
 
