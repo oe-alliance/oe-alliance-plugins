@@ -1558,6 +1558,8 @@ class Blindscan(ConfigListScreen, Screen):
 		if self.user_defined_lnb_scan:
 			self.blindscan_user_defined_lnb_start_frequency.value = self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"]
 			self.blindscan_user_defined_lnb_stop_frequency.value = self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"]
+			self.blindscan_user_defined_lnb_inverted_start_frequency.value = self.user_defined_lnb_lo_freq - self.tunerIfLimits["high"]
+			self.blindscan_user_defined_lnb_inverted_stop_frequency.value = self.user_defined_lnb_lo_freq - self.tunerIfLimits["low"]
 		self.createSetup()
 		self.setBlueText()
 			
@@ -1571,7 +1573,9 @@ class Blindscan(ConfigListScreen, Screen):
 			self.blindscan_C_band_start_frequency.value != self.c_band_freq_limits["default_low"] or \
 			self.blindscan_C_band_stop_frequency.value != self.c_band_freq_limits["default_high"] or \
 			self.user_defined_lnb_scan and self.blindscan_user_defined_lnb_start_frequency.value != self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"] or \
-			self.user_defined_lnb_scan and self.blindscan_user_defined_lnb_stop_frequency.value != self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"]:
+			self.user_defined_lnb_scan and self.blindscan_user_defined_lnb_stop_frequency.value != self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"] or \
+			self.user_defined_lnb_scan and self.blindscan_user_defined_lnb_inverted_start_frequency.value != self.user_defined_lnb_lo_freq - self.tunerIfLimits["high"] or \
+			self.user_defined_lnb_scan and self.blindscan_user_defined_lnb_inverted_stop_frequency.value != self.user_defined_lnb_lo_freq - self.tunerIfLimits["low"]:
 			self["key_blue"].setText("Restore defaults")
 		else:
 			self["key_blue"].setText("")
