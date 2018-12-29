@@ -35,7 +35,7 @@ msgid " tuner."
 msgstr " Tuner."
 
 msgid "\"channel scan\" searches for channels and saves them to your receiver; both options do a transponder search and save the result in /tmp in an XML file in satellites.xml format"
-msgstr "\"Channel Scan\" sucht nach Kanälen und speichert Sie in Ihrem Empfänger; Beide Optionen führen eine Transponder Suche durch und speichern das Ergebnis im /tmp Verzeichnis als XML Datei"
+msgstr "\"Channel Scan\" sucht nach Kanälen und speichert Sie in Ihrem Empfänger; Beide Optionen führen eine Transponder-Suche durch und speichern das Ergebnis im /tmp Verzeichnis als XML Datei"
 
 #, python-format
 msgid "%d transponder(s) found"
@@ -54,7 +54,7 @@ msgid "%dMHz scanned"
 msgstr "%dMHz gescannt"
 
 msgid "AUTOMATICALLY start service searching, press green to change."
-msgstr "Automatische Service Suche, drücken Sie grün, zum ändern."
+msgstr "Automatische Service-Suche, drücken Sie grün, zum Ändern."
 
 msgid "Accuracy (higher is better)"
 msgstr "Genauigkeit (höher ist besser)"
@@ -63,7 +63,7 @@ msgid "Blind scan"
 msgstr "Blindscan"
 
 msgid "Blind scan for DVB-S2 tuners"
-msgstr "Blind Scan für DVB-S2 Tuner"
+msgstr "Blindscan für DVB-S2 Tuner"
 
 msgid "Blindscan"
 msgstr "Blindscan"
@@ -120,7 +120,7 @@ msgstr "Frequenzwerte müssen zwischen 3001 MHz und 4200 MHz liegen (C-Band)"
 
 #, python-format
 msgid "Hardware blind scan is not supported by this tuner (%s)!"
-msgstr "Hardware Blind Scan wird von diesem Tuner (%s) nicht unterstützt!"
+msgstr "Hardware Blindscan wird von diesem Tuner (%s) nicht unterstützt!"
 
 msgid "Horizontal"
 msgstr "Horizontal"
@@ -135,13 +135,13 @@ msgid "If you select \"yes\" the scan will only search transponders not listed i
 msgstr "Wenn \"Ja\", werden nur Transponder gesucht, die nicht in satellites.xml stehen"
 
 msgid "MANUALLY start service searching, press green to change."
-msgstr "MANUELL starten die Service Suche, drücken Sie grün zum ändern."
+msgstr "MANUELL die Service-Suche starten, drücken Sie grün zum Ändern."
 
 msgid "Maybe the reason that recording is currently running."
 msgstr "Vielleicht liegt der Grund dafür, dass die Aufzeichnung gerade läuft."
 
 msgid "Network scan"
-msgstr "Netzwerk suche"
+msgstr "Netzwerk-Suche"
 
 msgid ""
 "No new transponders found! \n"
@@ -151,8 +151,8 @@ msgid ""
 msgstr ""
 "Kein neuer Transponder gefunden!\n"
 "\n"
-"Nur Transponder gefunden, die schon in satellites.xml\n"
-"stehen wurden mit diesen Einstellungen gefunden!"
+"Nur Transponder, die schon in satellites.xml\n"
+"stehen, wurden mit diesen Einstellungen gefunden!"
 
 msgid "No transponders were found for those search parameters!"
 msgstr "Kein Transponder mit diesen Einstellungen gefunden!"
@@ -162,7 +162,7 @@ msgid ""
 "Please setup your tuner settings before you start a service scan."
 msgstr ""
 "Kein Tuner aktiviert!\n"
-"Bitte richten Sie Ihre Tuner Einstellungen ein, bevor Sie einen Service Scan starten."
+"Bitte richten Sie Ihre Tuner Einstellungen ein, bevor Sie einen Service-Scan starten."
 
 #, python-format
 msgid "Not found blind scan utility '%s'!"
@@ -173,7 +173,7 @@ msgid ""
 "Please setup your tuner settings before you start a service scan."
 msgstr ""
 "Nichts zu scannen!\n"
-"Bitte richten Sie Ihre Tuner Einstellungen ein, bevor Sie einen Service Scan starten."
+"Bitte richten Sie Ihre Tuner Einstellungen ein, bevor Sie einen Service-Scan starten."
 
 msgid "Nothing to scan! Press Exit!"
 msgstr "Nichts zu scannen! Presse Exit!"
@@ -404,3 +404,6 @@ msgstr "Deaktivieren Sie die Synchronisierung mit bekannten Transpondern"
 
 msgid "Disable remove duplicates"
 msgstr "Deaktivieren Sie das Entfernen von Duplikaten"
+
+msgid "LNB of current satellite not compatible with plugin"
+msgstr "LNB des aktuellen Satelliten ist nicht mit dem Plugin kompatibel"
