@@ -348,3 +348,64 @@ msgstr "si"
 
 msgid "yes (keep feeds)"
 msgstr "si (mantenir feeds)"
+
+msgid "scan for transponders"
+msgstr "Buscar transpondedors"
+
+msgid ""
+"Select transponders and press green to scan.\n"
+"Press yellow to select all transponders and blue to deselect all.\""
+msgstr ""
+"Sel·leccionar transpondedors i prèmer verd per a buscar.\n"
+"Prem groc per a sel·leccionar tots els transpondedors i blau per a desel·leccionar-los"
+
+msgid "don't scan"
+msgstr "No buscar"
+
+msgid "scan"
+msgstr "Buscar"
+
+msgid "Open xml file"
+msgstr "Obrir arxiu xml"
+
+msgid "LNB inversion"
+msgstr "Inversió LNB"
+
+msgid "CAUTION: Only select \"inverted\" if you are using an inverted LNB (i.e. an LNB where the local oscillator frequency is greater than the scan frequency). Default is \"normal\". Only change this if you understand why you are doing it."
+msgstr "ATENCIÓ: Només sel·leccionar \"invertit\" si estàs utilitzant un LNB invertit (per exemple un LNB on la freqüència d'oscilació local és superior a la freqüència de búsqueda). Per defecte \"normal\". Només canvia això si entens el que estàs fent."
+
+msgid "If you select \"yes\" all channels on the satellite being searched will be deleted before starting the current search, yes (keep feeds) means the same but hold all feed services/transponders."
+msgstr "Si sel·lecciones \"Si\" tots els canals buscats del satèl·lit s'eliminaran abans d'iniciar la búsqueda actual, Si (mantenir fonts) significa el mateix però manté totes les fonts de canals/transpondedors."
+
+msgid "Disable sync with known transponders"
+msgstr "Desactivar sincronització amb transpondedors coneguts"
+
+msgid "CAUTION: If you select \"yes\" the scan will not sync with transponders listed in satellites.xml. Default is \"no\". Only change this if you understand why you are doing it."
+msgstr "ATENCIÓ: Si sel·lecciones \"Si\" la búsqueda no sincronitzarà amb els transpondedors llistats a satellites.xml. Per defecte \"No\". Només canvia això si entens el que estàs fent."
+
+msgid "Disable remove duplicates"
+msgstr "Desactivar eliminació de duplicats"
+
+msgid "CAUTION: If you select \"yes\" the scan will not remove \"duplicated\" transponders from the list. Default is \"no\". Only change this if you understand why you are doing it."
+msgstr "ATENCIÓ: Si sel·lecciones \"Si\" la búsqueda no eliminarà els transpondedors \"duplicats\" de la llista. Per defecte \"No\". Només canvia això si entens el que estàs fent."
+
+msgid "Blindscan executable not found '%s'!"
+msgstr "Executable de búsqueda cega no trobat a '%s'!"
+
+msgid ""
+"Current Status: %d/%d\n"
+"Satellite: %s\n"
+"Polarization: %s  Frequency range: %d - %d MHz  Symbol rates: %d - %d MHz"
+msgstr ""
+"Estat actual: %d/%d\n"
+"Satèl·lit: %s\n"
+"Polarització: %s  Rang de freqüències: %d-%d MHz Symbol rates: %d-%d MHz"
+
+msgid ""
+"Search completed\n"
+"%d transponders found in %d:%02d minutes.\n"
+"Details saved in: %s"
+msgstr ""
+"Búqueda completa\n"
+"%d transpondedors trobats en %d:%02d minuts.\n"
+"Detalls guardats a: %s"
