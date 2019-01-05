@@ -906,13 +906,13 @@ class Blindscan(ConfigListScreen, Screen):
 			exe_path = "/usr/bin/%s" % exe_filename
 			if os.path.exists(exe_path):
 				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
-				if getBrandOEM() in ('ceryon', 'clap', 'dinobot', 'uclan') or getBoxType() in ('sf8008',):
+				if getBrandOEM() in ('ceryon', 'clap', 'dinobot', 'uclan') or getBoxType() in ('sf8008','sf8008s'):
 					cmd += " %d" % self.is_c_band_scan
-				if getBrandOEM() in ('clap', 'dinobot', 'uclan') or getBoxType() in ('sf8008',):
+				if getBrandOEM() in ('clap', 'dinobot', 'uclan') or getBoxType() in ('sf8008','sf8008s'):
 					cmd += " %d" % orb[0]
 				if getBrandOEM() in ('azbox',):
 					self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
-				if getBrandOEM() in ('clap', 'uclan') or getBoxType() in ('sf8008',):
+				if getBrandOEM() in ('clap', 'uclan') or getBoxType() in ('sf8008','sf8008s'):
 					self.frontend and self.frontend.closeFrontend()
 				if getBoxType() in ('sf8008',):
 					self.adjust_freq = False
