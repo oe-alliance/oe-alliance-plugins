@@ -892,7 +892,7 @@ class Blindscan(ConfigListScreen, Screen):
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
 				return
-		elif getBrandOEM() in ('azbox', 'ceryon', 'clap', 'dinobot', 'gigablue', 'ini', 'home', 'uclan', 'vuplus', 'xtrend') or getBoxType() in ('sf8008',):
+		elif getBrandOEM() in ('azbox', 'ceryon', 'clap', 'dinobot', 'gigablue', 'ini', 'home', 'uclan', 'vuplus', 'xtrend') or getBoxType() in ('sf8008','sf8008s'):
 			exe_filename = getBrandOEM() == 'azbox' and "avl_azbox_blindscan" or \
 			               getBrandOEM() == 'ceryon' and "ceryon_blindscan" or \
 			               getBrandOEM() == 'clap' and "clap_blindscan" or \
