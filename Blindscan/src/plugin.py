@@ -899,7 +899,7 @@ class Blindscan(ConfigListScreen, Screen):
 			               getBrandOEM() == 'dinobot' and "dinobot-blindscan" or \
 			               getBrandOEM() == 'gigablue' and "gigablue_blindscan" or \
 			               getBrandOEM() in ('ini', 'home') and "ini_blindscan" or \
-			               getBoxType() == 'sf8008' and "octagon-blindscan" or \
+			               getBoxType() in ('sf8008','sf8008s') and "octagon-blindscan" or \
 			               getBrandOEM() == 'uclan' and "uclan-blindscan" or \
 			               getBrandOEM() == 'vuplus' and self.binName or \
 			               getBrandOEM() == 'xtrend' and "avl_xtrend_blindscan"
