@@ -20,7 +20,7 @@ from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFront
 from enigma import getDesktop, getEnigmaVersionString
 from enigma import ePicLoad, ePixmap
 
-from boxbranding import getImageDistro, getDisplayType, getBoxType
+from boxbranding import getImageDistro, getDisplayType, getBoxType, getImageArch
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
@@ -296,6 +296,16 @@ if ctypes.util.find_library("usb-0.1") is not None or ctypes.util.find_library("
 	import usb.util
 	import dpf
 	USBok = True
+elif getImageArch() in ("aarch64"):
+	import usb.core
+	import usb.backend.libusb1
+	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
+	print "[LCD4linux] libusb found :-)",getEnigmaVersionString()
+	import Photoframe
+	import usb.util
+	import dpf
+	USBok = True
+
 
 Farbe = [("black", _("black")), ("white", _("white")), 
  ("gray", _("gray")), ("silver", _("silver")), ("slategray", _("slategray")),
