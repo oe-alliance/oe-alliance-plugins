@@ -242,6 +242,10 @@ if HD60
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if HD61
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if I55PLUS
 SUBDIRS += MultiTransCodingSetup
 endif
