@@ -310,6 +310,10 @@ if V8PLUS
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if MULTIBOX
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if GIGABLUE
 SUBDIRS += GigaBlueVFDControl AudioEffect GigaBlueRemote
 endif
