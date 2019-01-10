@@ -1494,7 +1494,7 @@ class Blindscan(ConfigListScreen, Screen):
 		polarisation = ['horizontal', 'vertical', 'circular left', 'circular right', 'vertical and horizontal', 'circular right and circular left']
 		adjacent = ['no', 'up to 1 degree', 'up to 2 degrees', 'up to 3 degrees']
 		known_txp = 'no'
-		if config.blindscan.filter_off_adjacent_satellites.value:
+		if config.blindscan.dont_scan_known_tps.value:
 			known_txp ='yes'
 		xml = ['<?xml version="1.0" encoding="iso-8859-1"?>\n\n']
 		xml.append('<!--\n')
