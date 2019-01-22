@@ -3,92 +3,92 @@ msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 14:04+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: ViX <LL@li.org>\n"
+"PO-Revision-Date: 2019-01-22 11:39+0200\n"
+"Last-Translator: Dima-73\n"
+"Language-Team: openPli\n"
 "Language: nl_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.7.5\n"
 
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "1.0"
-msgstr ""
+msgstr "1.0"
 
 msgid "1080p"
-msgstr ""
+msgstr "1080p"
 
 msgid "160x120"
-msgstr ""
+msgstr "160x120"
 
 msgid "16x9"
-msgstr ""
+msgstr "16x9"
 
 msgid "2.0"
-msgstr ""
+msgstr "2.0"
 
 msgid "2.1"
-msgstr ""
+msgstr "2.1"
 
 msgid "2.2"
-msgstr ""
+msgstr "2.2"
 
 msgid "2nd transcoding and PIP are mutually exclusive."
-msgstr ""
+msgstr "2-е транскодирование и PIP являются взаимоисключающими."
 
 msgid "3.0"
-msgstr ""
+msgstr "3.0"
 
 msgid "3.1"
-msgstr ""
+msgstr "3.1"
 
 msgid "3.2"
-msgstr ""
+msgstr "3.2"
 
 msgid "320x240"
-msgstr ""
+msgstr "320x240"
 
 msgid "4.0"
-msgstr ""
+msgstr "4.0"
 
 msgid "4.1"
-msgstr ""
+msgstr "4.1"
 
 msgid "4.2"
-msgstr ""
+msgstr "4.2"
 
 msgid "480p"
-msgstr ""
+msgstr "480p"
 
 msgid "4x3"
-msgstr ""
+msgstr "4x3"
 
 msgid "5.0"
-msgstr ""
+msgstr "5.0"
 
 msgid "576p"
-msgstr ""
+msgstr "576p"
 
 msgid "720p"
-msgstr ""
+msgstr "720p"
 
 msgid "Advanced"
-msgstr ""
+msgstr "Расширенный"
 
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "Соотношение сторон"
 
 msgid "Audio codec"
-msgstr ""
+msgstr "Аудиокодек"
 
 msgid "Auto set Framerate / Bitrate"
-msgstr ""
+msgstr "Авто настройка частоты кадров/битрейта"
 
 msgid "Bitrate"
 msgstr "Битрейт"
@@ -100,114 +100,112 @@ msgid "Default"
 msgstr "По умолчанию"
 
 msgid "Encoder"
-msgstr ""
+msgstr "Encoder"
 
 msgid "Encoder 0: Aspect Ratio"
-msgstr ""
+msgstr "Encoder 0: соотношение сторон"
 
 msgid "Encoder 0: Audio codec"
-msgstr ""
+msgstr "Encoder 0: аудиокодек"
 
 msgid "Encoder 0: Auto mode (Bitrate/Framerate)"
-msgstr ""
+msgstr "Encoder 0: авто режим (битрейт/частота кадров)"
 
 msgid "Encoder 0: Bitrate"
-msgstr ""
+msgstr "Encoder 0: битрейт"
 
-#, fuzzy
 msgid "Encoder 0: Framerate"
-msgstr "Частота кадров"
+msgstr "Encoder 0: частота кадров"
 
 msgid "Encoder 0: GOP Frame B"
-msgstr ""
+msgstr "Encoder 0: GOP Frame B"
 
 msgid "Encoder 0: GOP Frame P"
-msgstr ""
+msgstr "Encoder 0: GOP Frame P"
 
 msgid "Encoder 0: Level"
-msgstr ""
+msgstr "Encoder 0: уровень"
 
 msgid "Encoder 0: Profile"
-msgstr ""
+msgstr "Encoder 0: профиль"
 
 msgid "Encoder 0: Resolution"
-msgstr ""
+msgstr "Encoder 0: разрешение"
 
 msgid "Encoder 0: Video codec"
-msgstr ""
+msgstr "Encoder 0: видеокодек"
 
 msgid "Encoder 1: Aspect Ratio"
-msgstr ""
+msgstr "Encoder 1: соотношение сторон"
 
 msgid "Encoder 1: Audio codec"
-msgstr ""
+msgstr "Encoder 1: аудиокодек"
 
 msgid "Encoder 1: Auto mode (Bitrate/Framerate)"
-msgstr ""
+msgstr "Encoder 1: авто режим (битрейт/частота кадров)"
 
 msgid "Encoder 1: Bitrate"
-msgstr ""
+msgstr "Encoder 1: битрейт"
 
-#, fuzzy
 msgid "Encoder 1: Framerate"
-msgstr "Частота кадров"
+msgstr "Encoder 1: частота кадров"
 
 msgid "Encoder 1: GOP Frame B"
-msgstr ""
+msgstr "Encoder 1: GOP Frame B"
 
 msgid "Encoder 1: GOP Frame P"
-msgstr ""
+msgstr "Encoder 1: GOP Frame P"
 
 msgid "Encoder 1: Level"
-msgstr ""
+msgstr "Encoder 1: уровень"
 
 msgid "Encoder 1: Profile"
-msgstr ""
+msgstr "Encoder 1: профиль"
 
 msgid "Encoder 1: Resolution"
-msgstr ""
+msgstr "Encoder 1: разрешение"
 
 msgid "Encoder 1: Video codec"
-msgstr ""
+msgstr "Encoder 1: видеокодек"
 
 msgid "Framerate"
 msgstr "Частота кадров"
 
 msgid "GOP Frame B"
-msgstr ""
+msgstr "GOP Frame B"
 
 msgid "GOP Frame P"
-msgstr ""
+msgstr "GOP Frame P"
 
 msgid "Level"
-msgstr ""
+msgstr "Уровень"
 
 msgid "Max"
-msgstr ""
+msgstr "Макс."
 
 msgid "Min"
-msgstr ""
+msgstr "Мин."
 
 msgid "Normal"
-msgstr ""
+msgstr "Нормальный"
 
 msgid "Off"
-msgstr ""
+msgstr "Выкл."
 
 msgid "On"
-msgstr ""
+msgstr "Вкл."
 
 msgid "Port"
 msgstr "Порт"
 
 msgid "Profile"
-msgstr ""
+msgstr "Профиль"
 
 msgid "Really close without saving settings?"
-msgstr "Закрыть без сохранения?"
+msgstr "Действительно, закрыть без сохранения?"
 
 msgid "Resolution"
-msgstr ""
+msgstr "Разрешение"
 
 msgid "Save"
 msgstr "Сохранить"
@@ -216,64 +214,64 @@ msgid "This model does not support transcoding."
 msgstr "Этот ресивер не поддерживает транскодирование."
 
 msgid "Transcoding Setup"
-msgstr "Настройка транскодирования"
+msgstr "Настройки транскодирования"
 
 msgid "Transcoding and PIP are mutually exclusive."
-msgstr ""
+msgstr "Транскодирование и PIP являются взаимоисключающими."
 
 msgid "TranscodingSetup"
-msgstr "Настройки"
+msgstr "Настройки транскодирования"
 
 msgid "Video codec"
-msgstr ""
+msgstr "Видеокодек"
 
 msgid "aac"
-msgstr ""
+msgstr "aac"
 
 msgid "aac+"
-msgstr ""
+msgstr "aac+"
 
 msgid "aac+adts"
-msgstr ""
+msgstr "aac+adts"
 
 msgid "aac+loas"
-msgstr ""
+msgstr "aac+loas"
 
 msgid "ac3"
-msgstr ""
+msgstr "ac3"
 
 msgid "advancedsimple"
-msgstr ""
+msgstr "расширенно простой"
 
 msgid "auto"
-msgstr ""
+msgstr "auto"
 
 msgid "baseline"
-msgstr ""
+msgstr "baseline"
 
 msgid "disable"
-msgstr ""
+msgstr "выключить"
 
 msgid "enable"
-msgstr ""
+msgstr "включить"
 
 msgid "h264"
-msgstr ""
+msgstr "h264"
 
 msgid "high"
-msgstr ""
+msgstr "высокий"
 
 msgid "low"
-msgstr ""
+msgstr "низкий"
 
 msgid "main"
-msgstr ""
+msgstr "основной"
 
 msgid "mp3"
-msgstr ""
+msgstr "mp3"
 
 msgid "mpg"
-msgstr ""
+msgstr "mpg"
 
 msgid "simple"
-msgstr ""
+msgstr "простой"
