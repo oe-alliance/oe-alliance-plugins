@@ -894,27 +894,27 @@ class Blindscan(ConfigListScreen, Screen):
 				return
 		elif getBrandOEM() in ('azbox', 'ceryon', 'clap', 'dinobot', 'gigablue', 'ini', 'home', 'uclan', 'vuplus', 'xtrend') or getBoxType().startswith('sf8008'):
 			exe_filename = getBrandOEM() == 'azbox' and "avl_azbox_blindscan" or \
-			               getBrandOEM() == 'ceryon' and "ceryon_blindscan" or \
-			               getBrandOEM() == 'clap' and "clap_blindscan" or \
-			               getBrandOEM() == 'dinobot' and "dinobot-blindscan" or \
-			               getBrandOEM() == 'gigablue' and "gigablue_blindscan" or \
-			               getBrandOEM() in ('ini', 'home') and "ini_blindscan" or \
-			               getBoxType().startswith('sf8008') and "octagon-blindscan" or \
-			               getBrandOEM() == 'uclan' and "uclan-blindscan" or \
-			               getBrandOEM() == 'vuplus' and self.binName or \
-			               getBrandOEM() == 'xtrend' and "avl_xtrend_blindscan"
+							getBrandOEM() == 'ceryon' and "ceryon_blindscan" or \
+							getBrandOEM() == 'clap' and "clap_blindscan" or \
+							getBrandOEM() == 'dinobot' and "dinobot-blindscan" or \
+							getBrandOEM() == 'gigablue' and "gigablue_blindscan" or \
+							getBrandOEM() in ('ini', 'home') and "ini_blindscan" or \
+							getBoxType().startswith('sf8008') and "octagon-blindscan" or \
+							getBrandOEM() == 'uclan' and "uclan-blindscan" or \
+							getBrandOEM() == 'vuplus' and self.binName or \
+							getBrandOEM() == 'xtrend' and "avl_xtrend_blindscan"
 			exe_path = "/usr/bin/%s" % exe_filename
 			if os.path.exists(exe_path):
 				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
-				if getBrandOEM() in ('ceryon', 'clap', 'dinobot', 'uclan') or getBoxType().startswith('sf8008'):
+				if getBrandOEM() in ('ceryon', 'clap', 'dinobot', 'uclan') or getBoxType().startswith('sf8008','gbmv200'):
 					cmd += " %d" % self.is_c_band_scan
-				if getBrandOEM() in ('clap', 'dinobot', 'uclan') or getBoxType().startswith('sf8008'):
+				if getBrandOEM() in ('clap', 'dinobot', 'uclan') or getBoxType().startswith('sf8008','gbmv200'):
 					cmd += " %d" % orb[0]
 				if getBrandOEM() in ('azbox',):
 					self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
-				if getBrandOEM() in ('clap', 'uclan') or getBoxType().startswith('sf8008'):
+				if getBrandOEM() in ('clap', 'uclan') or getBoxType().startswith('sf8008','gbmv200'):
 					self.frontend and self.frontend.closeFrontend()
-				if getBoxType().startswith('sf8008'):
+				if getBoxType().startswith('sf8008','gbmv200'):
 					self.adjust_freq = False
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)

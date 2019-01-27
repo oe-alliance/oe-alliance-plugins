@@ -206,6 +206,10 @@ if SF8008
 SUBDIRS += MultiTransCodingSetup VPLEDControl
 endif
 
+if GBMV200
+SUBDIRS += MultiTransCodingSetup VPLEDControl
+endif
+
 if USTYM4KPRO
 SUBDIRS += MultiTransCodingSetup
 endif
