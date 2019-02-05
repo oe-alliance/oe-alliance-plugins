@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openATV-Blindscan\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: 2016-05-07 13:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: openATV <Mariusz1970@onet.eu>\n"
@@ -88,6 +88,13 @@ msgstr ""
 
 msgid "DVB-S only"
 msgstr ""
+
+msgid "Disable remove duplicates"
+msgstr ""
+
+#, fuzzy
+msgid "Disable sync with known transponders"
+msgstr "Skanować tylko nieznane transpondery"
 
 msgid "Exit"
 msgstr "Wyjście "
@@ -187,6 +194,9 @@ msgstr "Skanować tylko niekodowane"
 
 msgid "Only scan unknown transponders"
 msgstr "Skanować tylko nieznane transpondery"
+
+msgid "Open xml file"
+msgstr ""
 
 msgid "Please setup your tuner configuration."
 msgstr "Proszę skonfigurować tuner"

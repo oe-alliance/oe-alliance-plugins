@@ -18,15 +18,14 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
-#, fuzzy, python-format
+#, fuzzy
 msgid "% + Load@1min"
 msgstr "% + Загрузка@1мин"
 
-#, fuzzy, python-format
+#, fuzzy
 msgid "% + Load@5min"
 msgstr "% + Загрузка@5мин"
 
-#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr "%d Почта  %d Новая  %s"
 
@@ -42,7 +41,6 @@ msgstr ""
 msgid "%d.%m.%y %H:%M:%S"
 msgstr ""
 
-#, python-format
 msgid "%s - Current value: %s"
 msgstr "%s - Текущее значение: %s"
 
@@ -171,6 +169,10 @@ msgstr "- Файл [ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- Файл или путь [ok]>"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- Файл [ok]>"
 
 msgid "- Font"
 msgstr "- Шрифт"
@@ -764,8 +766,14 @@ msgstr "Аналоговые+дата+будни"
 msgid "Analog+Date+Weekday 2"
 msgstr ""
 
+msgid "April"
+msgstr ""
+
 msgid "Audio/Video"
 msgstr "Аудио/Видео"
+
+msgid "August"
+msgstr ""
 
 msgid "Background"
 msgstr ""
@@ -957,6 +965,9 @@ msgstr "Даты без иконок"
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr "Debug-Logging > /tmp/L4log.txt"
 
+msgid "December"
+msgstr ""
+
 msgid "Delete"
 msgstr "Удалить"
 
@@ -1005,6 +1016,9 @@ msgstr "Расширенное описание"
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
 
+msgid "February"
+msgstr ""
+
 msgid "First Quarter"
 msgstr "Первая четверть"
 
@@ -1046,6 +1060,9 @@ msgstr "Фрейм"
 
 msgid "Fri"
 msgstr "Пятн."
+
+msgid "Friday"
+msgstr ""
 
 msgid "FritzCall"
 msgstr "FritzCall"
@@ -1150,12 +1167,21 @@ msgstr "Internes Vu+ Duo2 LCD 400x240"
 msgid "JPG"
 msgstr ""
 
+msgid "January"
+msgstr ""
+
 msgid "Javascript"
 msgstr "JavaScript"
 
 #, fuzzy
 msgid "Javascript no Refresh"
 msgstr "JavaScript"
+
+msgid "July"
+msgstr ""
+
+msgid "June"
+msgstr ""
 
 msgid "Key"
 msgstr ""
@@ -1226,10 +1252,6 @@ msgid "LCD Off when shutdown"
 msgstr ""
 
 #, fuzzy
-msgid "LCD4Linux"
-msgstr "LCD4linux включен"
-
-#, fuzzy
 msgid "LCD4linux"
 msgstr "LCD4linux включен"
 
@@ -1260,10 +1282,6 @@ msgstr "Последняя четверть"
 msgid "Line"
 msgstr "- Линий"
 
-#, fuzzy
-msgid "List of Storage Devices"
-msgstr "Хранение-Устройство"
-
 msgid "Load Active Config-File"
 msgstr "Загрузить активный конфиг"
 
@@ -1271,7 +1289,6 @@ msgstr "Загрузить активный конфиг"
 msgid "Load Defaults / Empty Config"
 msgstr "Загрузить по умолчанию"
 
-#, python-format
 msgid "Load File : %s"
 msgstr "Загрузить Файл : %s"
 
@@ -1425,6 +1442,12 @@ msgstr ""
 msgid "Mail Show Empty Mailboxes"
 msgstr "Почта-Показывать пустые почтовые ящики"
 
+msgid "March"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
 msgid "Media"
 msgstr "Медиа"
 
@@ -1514,6 +1537,9 @@ msgstr ""
 
 msgid "Mon"
 msgstr "Пон"
+
+msgid "Monday"
+msgstr ""
 
 msgid "Month"
 msgstr "Месяц"
@@ -1609,6 +1635,9 @@ msgstr ""
 msgid "Normal (5s)"
 msgstr "Нормальный (5с)"
 
+msgid "November"
+msgstr ""
+
 msgid "Now/Next"
 msgstr ""
 
@@ -1620,6 +1649,9 @@ msgstr "OSD"
 
 msgid "OSD [display time]"
 msgstr "OSD [Отображение времени]"
+
+msgid "October"
+msgstr ""
 
 msgid "Offline"
 msgstr "Оффлайн"
@@ -1650,10 +1682,6 @@ msgstr ""
 
 msgid "PNG"
 msgstr ""
-
-#, fuzzy
-msgid "Parent Directory"
-msgstr "Фото Каталог рекурсивно"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (or compatible LCD) 240x320"
@@ -1871,13 +1899,15 @@ msgstr "Субб."
 msgid "Satellite"
 msgstr "Спутник"
 
+msgid "Saturday"
+msgstr ""
+
 msgid "Save"
 msgstr "Сохранить"
 
 msgid "Save Config"
 msgstr ""
 
-#, python-format
 msgid "Save Config to File... (%s)"
 msgstr "Сохранить конфиг в файл... (%s)"
 
@@ -1995,6 +2025,9 @@ msgstr ""
 
 msgid "Screens used for Changing"
 msgstr "Функция используется для изменения экрана"
+
+msgid "September"
+msgstr ""
 
 msgid "Service search first"
 msgstr ""
@@ -2123,6 +2156,9 @@ msgstr "Stutter TV"
 msgid "Sun"
 msgstr "Воскр."
 
+msgid "Sunday"
+msgstr ""
+
 msgid "Sunrise"
 msgstr "Восход солнца"
 
@@ -2159,6 +2195,10 @@ msgstr "Threads pro LCD"
 msgid "Thur"
 msgstr "Чет"
 
+#, fuzzy
+msgid "Thursday"
+msgstr "Чет"
+
 msgid "Time"
 msgstr "Время"
 
@@ -2182,6 +2222,9 @@ msgstr "Заголовок"
 
 msgid "Tue"
 msgstr "Вт"
+
+msgid "Tuesday"
+msgstr ""
 
 #, fuzzy
 msgid "Tuner"
@@ -2326,6 +2369,9 @@ msgstr "WebIF обновление [s]"
 msgid "Wed"
 msgstr "Ср."
 
+msgid "Wednesday"
+msgstr ""
+
 msgid "Week"
 msgstr "Неделя"
 
@@ -2401,7 +2447,6 @@ msgstr "copy to On"
 msgid "cornflowerblue"
 msgstr "cornflowerblue"
 
-#, python-format
 msgid "currently set : %s"
 msgstr "настоящее время установлен : %s"
 

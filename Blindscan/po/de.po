@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: 2018-11-08 17:01+0100\n"
 "Last-Translator: Koivo <koivo@hdfreaks.cc>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -28,8 +28,8 @@ msgstr ""
 "\n"
 "Sie müssen das Netzteil verwenden."
 
-msgid "Starting Sundtek hardware blind scan."
-msgstr "Startet Sundtek Hardware Blind Scan."
+msgid "   Starting Sundtek hardware blind scan."
+msgstr "   Starting Sundtek hardware blind scan."
 
 msgid " tuner."
 msgstr " Tuner."
@@ -65,6 +65,9 @@ msgstr "Blindscan"
 msgid "Blind scan for DVB-S2 tuners"
 msgstr "Blindscan für DVB-S2 Tuner"
 
+msgid "Blind scan state"
+msgstr "Blindscan Transpondersuche"
+
 msgid "Blindscan"
 msgstr "Blindscan"
 
@@ -93,6 +96,12 @@ msgstr "DVB-S + DVB-S2"
 
 msgid "DVB-S only"
 msgstr "Nur DVB-S"
+
+msgid "Disable remove duplicates"
+msgstr "Deaktivieren Sie das Entfernen von Duplikaten"
+
+msgid "Disable sync with known transponders"
+msgstr "Deaktivieren Sie die Synchronisierung mit bekannten Transpondern"
 
 msgid "Exit"
 msgstr "Beenden"
@@ -133,6 +142,20 @@ msgstr "Wenn Sie \"Ja\" wählen, speichert der Scan nur Kanäle, die nicht versc
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
 msgstr "Wenn \"Ja\", werden nur Transponder gesucht, die nicht in satellites.xml stehen"
+
+msgid ""
+"Looking for available transponders.\n"
+"This will take a long time, please be patient."
+msgstr ""
+"Suche nach verfügbaren Transpondern.\n"
+"Dies wird lange dauern. Bitte haben Sie etwas Geduld."
+
+msgid ""
+"Looking for available transponders.\n"
+"This will take a short while."
+msgstr ""
+"Suche nach verfügbaren Transpondern.\n"
+"Das wird eine Weile dauern."
 
 msgid "MANUALLY start service searching, press green to change."
 msgstr "MANUELL die Service-Suche starten, drücken Sie grün zum Ändern."
@@ -183,6 +206,9 @@ msgstr "Suche nur freie Sender"
 
 msgid "Only scan unknown transponders"
 msgstr "Nur unbekannte Transponder durchsuchen"
+
+msgid "Open xml file"
+msgstr "Öffnen des XML-Files"
 
 msgid "Please setup your tuner configuration."
 msgstr "Bitte richten Sie Ihre Tuner Konfiguration ein."
@@ -309,12 +335,6 @@ msgstr "Sichere in XML-Datei"
 msgid "scan for channels"
 msgstr "Suche nach Sendern"
 
-msgid "scan for transponders"
-msgstr "Suche nach Transpondern"
-
-msgid "\"channel scan\" searches for channels and saves them to your receiver; \"transponder scan\" does a transponder search and displays the results allowing user to select some or all transponder. Both options save the results in satellites.xml format under /tmp"
-msgstr "\"Sender Suche\" sucht nach Sendern und speichert sie auf dem Receiver; \"Transponder Suche\" sucht nach Transpondern und zeigt das Resultat zur Auswahl an. Bei beiden Optionen werden die Ergebnisse in der satellites.xml unter /tmp gespeichert."
-
 msgid "up to 1 degree"
 msgstr "Bis zu 1 Grad"
 
@@ -335,75 +355,3 @@ msgstr "ja"
 
 msgid "yes (keep feeds)"
 msgstr "Ja (Feeds aufbewahren)"
-
-msgid "Blind scan state"
-msgstr "Blindscan Transpondersuche"
-
-msgid ""
-"Select transponders and press green to scan.\n"
-"Press yellow to select all transponders and blue to deselect all."
-msgstr ""
-"Wählen einen Transponder und drücken Sie grün zum Scannen.\n"
-"Drücken Sie gelb, um alle Transponder auszuwählen, und blau, um alle abzuwählen."
-
-msgid "Select all"
-msgstr "Alle wählen"
-
-msgid "Deselect all"
-msgstr "Alle abwählen"
-
-msgid "don't scan"
-msgstr "nicht scannen"
-
-msgid "Cancel"
-msgstr "Abbrechen"
-
-msgid "scan"
-msgstr "scannen"
-
-msgid ""
-"Looking for available transponders.\n"
-"This will take a short while."
-msgstr ""
-"Suche nach verfügbaren Transpondern.\n"
-"Das wird eine Weile dauern."
-
-msgid ""
-"Looking for available transponders.\n"
-"This will take a long time, please be patient."
-msgstr ""
-"Suche nach verfügbaren Transpondern.\n"
-"Dies wird lange dauern. Bitte haben Sie etwas Geduld."
-
-msgid "   Starting Sundtek hardware blind scan."
-msgstr "   Starting Sundtek hardware blind scan."
-
-msgid ""
-"Current Status: %d/%d\n"
-"Satellite: %s\n"
-"Polarization: %s  Frequency range: %d - %d MHz  Symbol rates: %d - %d MHz"
-msgstr ""
-"Aktueller Status: %d/%d\n"
-"Satellit: %s\n"
-"Polarisation: %s  Frequenzbereich: %d - %d MHz  Symbolraten: %d - %d MHz"
-
-msgid ""
-"Search completed\n"
-"%d transponders found in %d:%02d minutes.\n"
-"Details saved in: %s"
-msgstr ""
-"Suche abgeschlossen\n"
-"%d Transponder gefunden in %d:%02d Minuten.\n"
-"Details gespeichert in: %s"
-
-msgid "Open xml file"
-msgstr "Öffnen des XML-Files"
-
-msgid "Disable sync with known transponders"
-msgstr "Deaktivieren Sie die Synchronisierung mit bekannten Transpondern"
-
-msgid "Disable remove duplicates"
-msgstr "Deaktivieren Sie das Entfernen von Duplikaten"
-
-msgid "LNB of current satellite not compatible with plugin"
-msgstr "LNB des aktuellen Satelliten ist nicht mit dem Plugin kompatibel"

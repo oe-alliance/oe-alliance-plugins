@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: 2016-05-07 13:06+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas\n"
@@ -93,6 +93,13 @@ msgstr ""
 
 msgid "DVB-S only"
 msgstr ""
+
+msgid "Disable remove duplicates"
+msgstr ""
+
+#, fuzzy
+msgid "Disable sync with known transponders"
+msgstr "Ainult tundmatud transponderid"
 
 msgid "Exit"
 msgstr "Välju"
@@ -196,6 +203,9 @@ msgstr "Ainult vabakanalid"
 
 msgid "Only scan unknown transponders"
 msgstr "Ainult tundmatud transponderid"
+
+msgid "Open xml file"
+msgstr ""
 
 msgid "Please setup your tuner configuration."
 msgstr "Häälesta tuuner."

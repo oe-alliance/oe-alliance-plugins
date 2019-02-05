@@ -21,15 +21,12 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
-#, python-format
 msgid "% + Load@1min"
 msgstr "% + Load@1min"
 
-#, python-format
 msgid "% + Load@5min"
 msgstr "% + Load@5min"
 
-#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr "%d Mails  %d Neu  %s"
 
@@ -45,7 +42,6 @@ msgstr "%d.%m.%Y - %H:%M"
 msgid "%d.%m.%y %H:%M:%S"
 msgstr "%d.%m.%y %H:%M:%S"
 
-#, python-format
 msgid "%s - Current value: %s"
 msgstr "%s - Aktueller Wert: %s"
 
@@ -165,6 +161,10 @@ msgstr "- Datei [ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- Datei oder Verzeichnis [ok]>"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- Datei [ok]>"
 
 msgid "- Font"
 msgstr "- Zeichensatz"
@@ -754,8 +754,14 @@ msgstr "Analog+Datum+Wochentag"
 msgid "Analog+Date+Weekday 2"
 msgstr "Analog+Datum+Wochentag 2"
 
+msgid "April"
+msgstr ""
+
 msgid "Audio/Video"
 msgstr "Audio/Video"
+
+msgid "August"
+msgstr ""
 
 msgid "Background"
 msgstr "Hintergrund"
@@ -946,6 +952,9 @@ msgstr "Termine kein Icon"
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr "Debug-Logging > /tmp/L4log.txt"
 
+msgid "December"
+msgstr ""
+
 msgid "Delete"
 msgstr "Löschen"
 
@@ -994,6 +1003,9 @@ msgstr "Erweiterte Beschreibung"
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
 
+msgid "February"
+msgstr ""
+
 msgid "First Quarter"
 msgstr "Erstes Viertel"
 
@@ -1032,6 +1044,9 @@ msgstr "Frame x2"
 
 msgid "Fri"
 msgstr "Fr"
+
+msgid "Friday"
+msgstr ""
 
 msgid "FritzCall"
 msgstr "FritzCall"
@@ -1136,11 +1151,20 @@ msgstr "Internes Vu+ Duo2 LCD 400x240"
 msgid "JPG"
 msgstr "JPG"
 
+msgid "January"
+msgstr ""
+
 msgid "Javascript"
 msgstr "Javascript"
 
 msgid "Javascript no Refresh"
 msgstr "Keine JavaScript Auffrischung"
+
+msgid "July"
+msgstr ""
+
+msgid "June"
+msgstr ""
 
 msgid "Key"
 msgstr "Schlüssel"
@@ -1208,9 +1232,6 @@ msgstr "LCD Anzeige"
 msgid "LCD Off when shutdown"
 msgstr "LCD aus, beim Abschalten"
 
-msgid "LCD4Linux"
-msgstr "LCD4Linux"
-
 msgid "LCD4linux"
 msgstr "LCD4linux"
 
@@ -1238,16 +1259,12 @@ msgstr "Letztes Viertel"
 msgid "Line"
 msgstr "Linie"
 
-msgid "List of Storage Devices"
-msgstr "Liste der Speichergeräte"
-
 msgid "Load Active Config-File"
 msgstr "Lade aktive Konfig-Datei"
 
 msgid "Load Defaults / Empty Config"
 msgstr "Lade Standart/Leere Konfiguration"
 
-#, python-format
 msgid "Load File : %s"
 msgstr "Lade Datei : %s"
 
@@ -1401,6 +1418,12 @@ msgstr "Mail zeige Datum"
 msgid "Mail Show Empty Mailboxes"
 msgstr "Mail Zeige Leere Mailboxen"
 
+msgid "March"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
 msgid "Media"
 msgstr "Media"
 
@@ -1490,6 +1513,9 @@ msgstr "Modul 6"
 
 msgid "Mon"
 msgstr "Mo"
+
+msgid "Monday"
+msgstr ""
 
 msgid "Month"
 msgstr "Monat"
@@ -1584,6 +1610,9 @@ msgstr "Normal"
 msgid "Normal (5s)"
 msgstr "Normal (5s)"
 
+msgid "November"
+msgstr ""
+
 msgid "Now/Next"
 msgstr "Now/Next"
 
@@ -1595,6 +1624,9 @@ msgstr "OSD"
 
 msgid "OSD [display time]"
 msgstr "OSD [Anzeigezeit]"
+
+msgid "October"
+msgstr ""
 
 msgid "Offline"
 msgstr "Offline"
@@ -1625,9 +1657,6 @@ msgstr "Outdoor"
 
 msgid "PNG"
 msgstr "PNG"
-
-msgid "Parent Directory"
-msgstr "Übergeordnetes Verzeichnis"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (oder kompatibles LCD) 240x320"
@@ -1842,13 +1871,15 @@ msgstr "Sa"
 msgid "Satellite"
 msgstr "Satellit"
 
+msgid "Saturday"
+msgstr ""
+
 msgid "Save"
 msgstr "Speichern"
 
 msgid "Save Config"
 msgstr "Speichern der Einstellungen"
 
-#, python-format
 msgid "Save Config to File... (%s)"
 msgstr "Speichere Konfig in Datei... (%s)"
 
@@ -1965,6 +1996,9 @@ msgstr "Schirm Schalter Auswahl - Schirm"
 
 msgid "Screens used for Changing"
 msgstr "Benutzte Schirme zum Wechsel"
+
+msgid "September"
+msgstr ""
 
 msgid "Service search first"
 msgstr "Service Suche zuerst"
@@ -2086,6 +2120,9 @@ msgstr "Stotter TV"
 msgid "Sun"
 msgstr "So"
 
+msgid "Sunday"
+msgstr ""
+
 msgid "Sunrise"
 msgstr "Sonnenaufgang"
 
@@ -2122,6 +2159,10 @@ msgstr "Threads pro LCD"
 msgid "Thur"
 msgstr "Do"
 
+#, fuzzy
+msgid "Thursday"
+msgstr "Do"
+
 msgid "Time"
 msgstr "Zeit"
 
@@ -2145,6 +2186,9 @@ msgstr "Titel"
 
 msgid "Tue"
 msgstr "Di"
+
+msgid "Tuesday"
+msgstr ""
 
 msgid "Tuner"
 msgstr "Tuner"
@@ -2287,6 +2331,9 @@ msgstr "WebIF Aktualisierung [s]"
 msgid "Wed"
 msgstr "Mi"
 
+msgid "Wednesday"
+msgstr ""
+
 msgid "Week"
 msgstr "Woche"
 
@@ -2362,7 +2409,6 @@ msgstr "kopiere nach On"
 msgid "cornflowerblue"
 msgstr "kornblumenblau"
 
-#, python-format
 msgid "currently set : %s"
 msgstr "aktuell eingestellt : %s"
 

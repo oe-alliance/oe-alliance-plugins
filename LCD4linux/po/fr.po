@@ -21,15 +21,12 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
-#, python-format
 msgid "% + Load@1min"
 msgstr "% + Load@1min"
 
-#, python-format
 msgid "% + Load@5min"
 msgstr "% + Load@5min"
 
-#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr "%d Mails  %d Neu  %s"
 
@@ -45,7 +42,6 @@ msgstr ""
 msgid "%d.%m.%y %H:%M:%S"
 msgstr ""
 
-#, python-format
 msgid "%s - Current value: %s"
 msgstr "%s - Valeur actuelle: %s"
 
@@ -165,6 +161,10 @@ msgstr "- Fichier [ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- Fichier ou Chemin [ok]>"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- Fichier [ok]>"
 
 msgid "- Font"
 msgstr "- Police"
@@ -754,8 +754,14 @@ msgstr "Analogique+Date+jour de la semaine"
 msgid "Analog+Date+Weekday 2"
 msgstr "Analogique+Date+Joursemaine 2"
 
+msgid "April"
+msgstr ""
+
 msgid "Audio/Video"
 msgstr "Audio/Vidéo"
+
+msgid "August"
+msgstr ""
 
 msgid "Background"
 msgstr "Arrière plan"
@@ -946,6 +952,9 @@ msgstr "Dates pas d'icône"
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr "Journal-Debug > /tmp/L4log.txt"
 
+msgid "December"
+msgstr ""
+
 msgid "Delete"
 msgstr "Effacer"
 
@@ -994,6 +1003,9 @@ msgstr "Description étendue"
 msgid "Fastmode (2s)"
 msgstr "mode rapide (2s)"
 
+msgid "February"
+msgstr ""
+
 msgid "First Quarter"
 msgstr "Premier quart"
 
@@ -1032,6 +1044,9 @@ msgstr "Cadre x2"
 
 msgid "Fri"
 msgstr "Ven"
+
+msgid "Friday"
+msgstr ""
 
 msgid "FritzCall"
 msgstr "FritzCall"
@@ -1136,11 +1151,20 @@ msgstr "InterneVu+ Duo2 LCD 400x240"
 msgid "JPG"
 msgstr "JPG"
 
+msgid "January"
+msgstr ""
+
 msgid "Javascript"
 msgstr "Javascript"
 
 msgid "Javascript no Refresh"
 msgstr "Javascript pas de Rafraîchissement"
+
+msgid "July"
+msgstr ""
+
+msgid "June"
+msgstr ""
 
 msgid "Key"
 msgstr "Clé"
@@ -1208,9 +1232,6 @@ msgstr "LCD affichage"
 msgid "LCD Off when shutdown"
 msgstr "Écran LCD éteint lors de l'arrêt"
 
-msgid "LCD4Linux"
-msgstr "LCD4Linux"
-
 msgid "LCD4linux"
 msgstr "LCD4linux"
 
@@ -1238,16 +1259,12 @@ msgstr "Dernier Quart"
 msgid "Line"
 msgstr "Ligne"
 
-msgid "List of Storage Devices"
-msgstr "Liste des périphériques de stockage"
-
 msgid "Load Active Config-File"
 msgstr "Charger fichier configuration actif"
 
 msgid "Load Defaults / Empty Config"
 msgstr "Charger les valeurs par défaut / Config vide"
 
-#, python-format
 msgid "Load File : %s"
 msgstr "Charger fichier : %s"
 
@@ -1401,6 +1418,12 @@ msgstr "Mail Afficher les dates"
 msgid "Mail Show Empty Mailboxes"
 msgstr "Mail Afficher les boîtes vides"
 
+msgid "March"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
 msgid "Media"
 msgstr "Média"
 
@@ -1490,6 +1513,9 @@ msgstr "Module 6"
 
 msgid "Mon"
 msgstr "Lun"
+
+msgid "Monday"
+msgstr ""
 
 msgid "Month"
 msgstr "Mois"
@@ -1584,6 +1610,9 @@ msgstr "Normal"
 msgid "Normal (5s)"
 msgstr "normal (5s)"
 
+msgid "November"
+msgstr ""
+
 msgid "Now/Next"
 msgstr "actuellement/suivant"
 
@@ -1595,6 +1624,9 @@ msgstr "OSD"
 
 msgid "OSD [display time]"
 msgstr "OSD [afficher l'heure]"
+
+msgid "October"
+msgstr ""
 
 msgid "Offline"
 msgstr "Hors-ligne"
@@ -1625,9 +1657,6 @@ msgstr "Extérieure"
 
 msgid "PNG"
 msgstr "PNG"
-
-msgid "Parent Directory"
-msgstr "Dossier parent"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (ou compatible LCD) 240x320"
@@ -1842,13 +1871,15 @@ msgstr "Sam"
 msgid "Satellite"
 msgstr "Satellite"
 
+msgid "Saturday"
+msgstr ""
+
 msgid "Save"
 msgstr "Sauver"
 
 msgid "Save Config"
 msgstr "Sauver configuration"
 
-#, python-format
 msgid "Save Config to File... (%s)"
 msgstr "Sauvegarder fichier de configuration... (%s)"
 
@@ -1965,6 +1996,9 @@ msgstr "Ecran sélection commutation  - Ecran"
 
 msgid "Screens used for Changing"
 msgstr "Ecran utilisé pour changer"
+
+msgid "September"
+msgstr ""
 
 msgid "Service search first"
 msgstr "Recherche service en premier"
@@ -2086,6 +2120,9 @@ msgstr "Sacades TV"
 msgid "Sun"
 msgstr "Dim"
 
+msgid "Sunday"
+msgstr ""
+
 msgid "Sunrise"
 msgstr "Levé du soleil"
 
@@ -2122,6 +2159,10 @@ msgstr "Processus par LCD"
 msgid "Thur"
 msgstr "Jeu"
 
+#, fuzzy
+msgid "Thursday"
+msgstr "Jeu"
+
 msgid "Time"
 msgstr "Heure"
 
@@ -2145,6 +2186,9 @@ msgstr "Titre"
 
 msgid "Tue"
 msgstr "Mar"
+
+msgid "Tuesday"
+msgstr ""
 
 msgid "Tuner"
 msgstr "Tuner"
@@ -2287,6 +2331,9 @@ msgstr "WebIF rafraîchissement [s]"
 msgid "Wed"
 msgstr "Mer"
 
+msgid "Wednesday"
+msgstr ""
+
 msgid "Week"
 msgstr "Semaine"
 
@@ -2362,7 +2409,6 @@ msgstr "Copier vers en"
 msgid "cornflowerblue"
 msgstr "bleu fleur de maïs"
 
-#, python-format
 msgid "currently set : %s"
 msgstr "actuellement défini : %s"
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: 2018-07-30 21:17+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french-EGAMI\n"
@@ -96,6 +96,13 @@ msgstr "DVB-S + DVB-S2"
 
 msgid "DVB-S only"
 msgstr "DVB-S uniquement"
+
+msgid "Disable remove duplicates"
+msgstr ""
+
+#, fuzzy
+msgid "Disable sync with known transponders"
+msgstr "Analyser uniquement les transpondeurs inconnus"
 
 msgid "Exit"
 msgstr "Quitter"
@@ -200,6 +207,9 @@ msgstr "Analyser uniquement les chaînes en clair"
 
 msgid "Only scan unknown transponders"
 msgstr "Analyser uniquement les transpondeurs inconnus"
+
+msgid "Open xml file"
+msgstr ""
 
 msgid "Please setup your tuner configuration."
 msgstr "Merci de configurer votre tuner"

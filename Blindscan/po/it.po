@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BlindScan italian translation for Enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: 2017-11-29 13:37+0000\n"
 "Last-Translator: insanity <Marco@ADDRESS>\n"
 "Language-Team: insanity@ <http://www.vuplus-community.net>\n"
@@ -99,6 +99,13 @@ msgstr ""
 
 msgid "DVB-S only"
 msgstr ""
+
+msgid "Disable remove duplicates"
+msgstr ""
+
+#, fuzzy
+msgid "Disable sync with known transponders"
+msgstr "Scansionare solo i transponder sconosciuti"
 
 msgid "Exit"
 msgstr "Esci"
@@ -202,6 +209,9 @@ msgstr "Scansione solo freeTV"
 
 msgid "Only scan unknown transponders"
 msgstr "Scansionare solo i transponder sconosciuti"
+
+msgid "Open xml file"
+msgstr ""
 
 msgid "Please setup your tuner configuration."
 msgstr "Impostare la configurazione del tuner."

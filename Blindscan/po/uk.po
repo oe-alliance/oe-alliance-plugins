@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: 2016-11-29 00:40+0100\n"
 "Last-Translator: litvcom\n"
 "Language-Team: \n"
@@ -94,6 +94,13 @@ msgstr ""
 
 msgid "DVB-S only"
 msgstr ""
+
+msgid "Disable remove duplicates"
+msgstr ""
+
+#, fuzzy
+msgid "Disable sync with known transponders"
+msgstr "Пошук лише невідомих транспондерів"
 
 #
 msgid "Exit"
@@ -199,6 +206,9 @@ msgstr "Пошук лише некодованих каналі"
 
 msgid "Only scan unknown transponders"
 msgstr "Пошук лише невідомих транспондерів"
+
+msgid "Open xml file"
+msgstr ""
 
 msgid "Please setup your tuner configuration."
 msgstr "Будь ласка, налаштуйте тюнер."

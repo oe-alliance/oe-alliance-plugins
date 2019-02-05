@@ -19,15 +19,14 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
-#, fuzzy, python-format
+#, fuzzy
 msgid "% + Load@1min"
 msgstr "% + apkrova@1min"
 
-#, fuzzy, python-format
+#, fuzzy
 msgid "% + Load@5min"
 msgstr "% + apkrova@5min"
 
-#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr "%d laiškų %d naujų %s"
 
@@ -44,7 +43,6 @@ msgstr "%Y.%m.%e - %H:%M"
 msgid "%d.%m.%y %H:%M:%S"
 msgstr "%y.%m.%d %H:%M:%S"
 
-#, python-format
 msgid "%s - Current value: %s"
 msgstr "%s - dabartinė reikšmė: %s"
 
@@ -164,6 +162,10 @@ msgstr "- Kelias į failą [Ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- Kelias iki failo [Ok]>"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- Kelias į failą [Ok]>"
 
 msgid "- Font"
 msgstr "- Šriftas"
@@ -755,8 +757,14 @@ msgstr "Analoginis +data+savaitės diena"
 msgid "Analog+Date+Weekday 2"
 msgstr "Analoginis+data+savaitės diena 2"
 
+msgid "April"
+msgstr ""
+
 msgid "Audio/Video"
 msgstr "Garsas / Vaizdas"
+
+msgid "August"
+msgstr ""
 
 msgid "Background"
 msgstr "Fonas"
@@ -947,6 +955,9 @@ msgstr "Datos be piktogramų"
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr "Klaidų žurnalas > /tmp/L4log.txt"
 
+msgid "December"
+msgstr ""
+
 msgid "Delete"
 msgstr "Pašalinti"
 
@@ -995,6 +1006,9 @@ msgstr "Išsamus aprašymas"
 msgid "Fastmode (2s)"
 msgstr "Greitasis režimas (2s)"
 
+msgid "February"
+msgstr ""
+
 msgid "First Quarter"
 msgstr "Pirmasis ketvirtis"
 
@@ -1033,6 +1047,9 @@ msgstr "rėmelis x2"
 
 msgid "Fri"
 msgstr "Pen"
+
+msgid "Friday"
+msgstr ""
 
 msgid "FritzCall"
 msgstr "FritzCall"
@@ -1137,11 +1154,20 @@ msgstr "Vidinis Vu+ Duo2 400x240 LCD"
 msgid "JPG"
 msgstr "JPG"
 
+msgid "January"
+msgstr ""
+
 msgid "Javascript"
 msgstr "Java skriptas"
 
 msgid "Javascript no Refresh"
 msgstr "Java scenarijus neatnaujinant"
+
+msgid "July"
+msgstr ""
+
+msgid "June"
+msgstr ""
 
 msgid "Key"
 msgstr "Mygtukai"
@@ -1209,10 +1235,6 @@ msgstr "LCD ekranas"
 msgid "LCD Off when shutdown"
 msgstr "Išjungti LCD, išjungus aparatą"
 
-#, fuzzy
-msgid "LCD4Linux"
-msgstr "atvaizduos pasirinktą informaciją imtuvo LCD ekrane."
-
 msgid "LCD4linux"
 msgstr "atvaizduos pasirinktą informaciją imtuvo LCD ekrane."
 
@@ -1240,17 +1262,12 @@ msgstr "Paskutinis ketvirtis"
 msgid "Line"
 msgstr "eilutė"
 
-#, fuzzy
-msgid "List of Storage Devices"
-msgstr "Laikmenos"
-
 msgid "Load Active Config-File"
 msgstr "Įkelti aktyvų konfigūracijos failą"
 
 msgid "Load Defaults / Empty Config"
 msgstr "Atkurti numatytas reikšmes / Valyti konfigūraciją"
 
-#, python-format
 msgid "Load File : %s"
 msgstr "Įkelti failą : %s"
 
@@ -1404,6 +1421,12 @@ msgstr "Paštas - rodyti datą"
 msgid "Mail Show Empty Mailboxes"
 msgstr "Paštas - rodyti ir tuščias dėžutes"
 
+msgid "March"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
 msgid "Media"
 msgstr "Multimedija"
 
@@ -1493,6 +1516,9 @@ msgstr "Modulis 6"
 
 msgid "Mon"
 msgstr "Pir"
+
+msgid "Monday"
+msgstr ""
 
 msgid "Month"
 msgstr "Mėnuo"
@@ -1588,6 +1614,9 @@ msgstr "Normalus"
 msgid "Normal (5s)"
 msgstr "Normalus (5s)"
 
+msgid "November"
+msgstr ""
+
 msgid "Now/Next"
 msgstr "dabar/sekantis"
 
@@ -1599,6 +1628,9 @@ msgstr "Ekrano meniu"
 
 msgid "OSD [display time]"
 msgstr "Ekrano meniu [kiek laiko rodyti]"
+
+msgid "October"
+msgstr ""
 
 msgid "Offline"
 msgstr "Atsijungus"
@@ -1629,10 +1661,6 @@ msgstr "Lauke"
 
 msgid "PNG"
 msgstr "PNG"
-
-#, fuzzy
-msgid "Parent Directory"
-msgstr "Vaizdų rekursinis katalogas"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (arba suderinamas LCD) 240x320"
@@ -1849,13 +1877,15 @@ msgstr "Šeš"
 msgid "Satellite"
 msgstr "Palydovas"
 
+msgid "Saturday"
+msgstr ""
+
 msgid "Save"
 msgstr "Išsaugoti"
 
 msgid "Save Config"
 msgstr "Išsaugoti nustatymus"
 
-#, python-format
 msgid "Save Config to File... (%s)"
 msgstr "Išsaugoti nustatymus į failą... (%s)"
 
@@ -1972,6 +2002,9 @@ msgstr "Ekranų perjungimas - Ekranas"
 
 msgid "Screens used for Changing"
 msgstr "Ekranai, naudojami keitimui"
+
+msgid "September"
+msgstr ""
 
 msgid "Service search first"
 msgstr "Kanalų paieška"
@@ -2093,6 +2126,9 @@ msgstr "Stutter TV"
 msgid "Sun"
 msgstr "Sek"
 
+msgid "Sunday"
+msgstr ""
+
 msgid "Sunrise"
 msgstr "Saulėtekis"
 
@@ -2129,6 +2165,10 @@ msgstr "Gijų viename LCD"
 msgid "Thur"
 msgstr "Ket"
 
+#, fuzzy
+msgid "Thursday"
+msgstr "Ket"
+
 msgid "Time"
 msgstr "Laikas"
 
@@ -2152,6 +2192,9 @@ msgstr "Antraštė"
 
 msgid "Tue"
 msgstr "Ant"
+
+msgid "Tuesday"
+msgstr ""
 
 msgid "Tuner"
 msgstr "Imtuvas"
@@ -2296,6 +2339,9 @@ msgstr "WebIF atnaujinti kas [sek.]"
 msgid "Wed"
 msgstr "Tre"
 
+msgid "Wednesday"
+msgstr ""
+
 msgid "Week"
 msgstr "Savaitė"
 
@@ -2371,7 +2417,6 @@ msgstr "kopijuoti į 'Įjungtas'"
 msgid "cornflowerblue"
 msgstr "rugiagėlių mėlyna"
 
-#, python-format
 msgid "currently set : %s"
 msgstr "dabar nustatyta: %s"
 

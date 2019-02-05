@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Blindscan - oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
 "PO-Revision-Date: 2017-07-05 15:24+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -100,6 +100,13 @@ msgstr ""
 
 msgid "DVB-S only"
 msgstr ""
+
+msgid "Disable remove duplicates"
+msgstr ""
+
+#, fuzzy
+msgid "Disable sync with known transponders"
+msgstr "Ieškoti tik nežinomus transponderius"
 
 msgid "Exit"
 msgstr "Užverti"
@@ -203,6 +210,9 @@ msgstr "Ieškoti tik nekoduotų kanalų"
 
 msgid "Only scan unknown transponders"
 msgstr "Ieškoti tik nežinomus transponderius"
+
+msgid "Open xml file"
+msgstr ""
 
 msgid "Please setup your tuner configuration."
 msgstr "Sukonfigūruokite savo imtuvus."

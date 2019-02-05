@@ -18,15 +18,12 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
-#, python-format
 msgid "% + Load@1min"
 msgstr "% + Load@1min"
 
-#, python-format
 msgid "% + Load@5min"
 msgstr "% + Load@5min"
 
-#, python-format
 msgid "%d Mails  %d New  %s"
 msgstr "%d Správ  %d Nové  %s"
 
@@ -42,7 +39,6 @@ msgstr ""
 msgid "%d.%m.%y %H:%M:%S"
 msgstr ""
 
-#, python-format
 msgid "%s - Current value: %s"
 msgstr "%s - Aktuálna hodnota: %s"
 
@@ -171,6 +167,10 @@ msgstr "- súbor [ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- súbor alebo cesta [ok]>"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- súbor [ok]>"
 
 msgid "- Font"
 msgstr "- písmo"
@@ -764,8 +764,14 @@ msgstr "analógové+dátum+deň týždňa"
 msgid "Analog+Date+Weekday 2"
 msgstr "analógové+dátum+deň týždňa 2"
 
+msgid "April"
+msgstr ""
+
 msgid "Audio/Video"
 msgstr "Audio/Video"
+
+msgid "August"
+msgstr ""
 
 msgid "Background"
 msgstr "Pozadie"
@@ -957,6 +963,9 @@ msgstr "Dátumy bez ikon"
 msgid "Debug-Logging > /tmp/L4log.txt"
 msgstr "Logovanie > /tmp/L4log.txt"
 
+msgid "December"
+msgstr ""
+
 msgid "Delete"
 msgstr "Zmazať"
 
@@ -1005,6 +1014,9 @@ msgstr "Rozšírený popis"
 msgid "Fastmode (2s)"
 msgstr "Rýchly mód (2s)"
 
+msgid "February"
+msgstr ""
+
 msgid "First Quarter"
 msgstr "Prvá štvrtina"
 
@@ -1046,6 +1058,9 @@ msgstr "Rámček"
 
 msgid "Fri"
 msgstr "Pi"
+
+msgid "Friday"
+msgstr ""
 
 msgid "FritzCall"
 msgstr "FritzCall"
@@ -1150,12 +1165,21 @@ msgstr "Zabudovaný Vu+ Duo2 LCD 400x240"
 msgid "JPG"
 msgstr "JPG"
 
+msgid "January"
+msgstr ""
+
 msgid "Javascript"
 msgstr "Javascript"
 
 #, fuzzy
 msgid "Javascript no Refresh"
 msgstr "Javascript"
+
+msgid "July"
+msgstr ""
+
+msgid "June"
+msgstr ""
 
 msgid "Key"
 msgstr ""
@@ -1226,10 +1250,6 @@ msgid "LCD Off when shutdown"
 msgstr ""
 
 #, fuzzy
-msgid "LCD4Linux"
-msgstr "LCD4linux povolený"
-
-#, fuzzy
 msgid "LCD4linux"
 msgstr "LCD4linux povolený"
 
@@ -1260,10 +1280,6 @@ msgstr "Posledná štvrtina"
 msgid "Line"
 msgstr "- riadky"
 
-#, fuzzy
-msgid "List of Storage Devices"
-msgstr "Pamäťové-zariadenia"
-
 msgid "Load Active Config-File"
 msgstr "Nahraj aktívny konfig. súbor"
 
@@ -1271,7 +1287,6 @@ msgstr "Nahraj aktívny konfig. súbor"
 msgid "Load Defaults / Empty Config"
 msgstr "Nahraj predvolené nastavenia"
 
-#, python-format
 msgid "Load File : %s"
 msgstr "Nahraj súbor : %s"
 
@@ -1429,6 +1444,12 @@ msgstr "Pošta zobraz dátum"
 msgid "Mail Show Empty Mailboxes"
 msgstr "Pošta zobraz prázdne kontá"
 
+msgid "March"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
 msgid "Media"
 msgstr "Média"
 
@@ -1524,6 +1545,9 @@ msgstr "Modul 1"
 
 msgid "Mon"
 msgstr "Po"
+
+msgid "Monday"
+msgstr ""
 
 msgid "Month"
 msgstr "Mesiac"
@@ -1621,6 +1645,9 @@ msgstr "Normalne"
 msgid "Normal (5s)"
 msgstr "Normalne (5s)"
 
+msgid "November"
+msgstr ""
+
 msgid "Now/Next"
 msgstr "Teraz/Ďalší"
 
@@ -1632,6 +1659,9 @@ msgstr "OSD"
 
 msgid "OSD [display time]"
 msgstr "OSD [čas zobrazenia]"
+
+msgid "October"
+msgstr ""
 
 msgid "Offline"
 msgstr "Vypnuté"
@@ -1662,10 +1692,6 @@ msgstr ""
 
 msgid "PNG"
 msgstr "PNG"
-
-#, fuzzy
-msgid "Parent Directory"
-msgstr "Obrázok rekurzívny priečinok"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (alebo kompatibilné LCD) 240x320"
@@ -1886,13 +1912,15 @@ msgstr "So"
 msgid "Satellite"
 msgstr "Satelit"
 
+msgid "Saturday"
+msgstr ""
+
 msgid "Save"
 msgstr "Uložiť"
 
 msgid "Save Config"
 msgstr "Ulož cfg"
 
-#, python-format
 msgid "Save Config to File... (%s)"
 msgstr "Uložiť konfig do súboru... (%s)"
 
@@ -2010,6 +2038,9 @@ msgstr "Výber prepínača obrazovky - Obrazovka"
 
 msgid "Screens used for Changing"
 msgstr "Obrazovky použité na výmenu"
+
+msgid "September"
+msgstr ""
 
 msgid "Service search first"
 msgstr "Najprv prehľadať kanál"
@@ -2139,6 +2170,9 @@ msgstr "Koktavá TV"
 msgid "Sun"
 msgstr "Ne"
 
+msgid "Sunday"
+msgstr ""
+
 msgid "Sunrise"
 msgstr "Východ slnka"
 
@@ -2175,6 +2209,10 @@ msgstr "Témy pre LCD"
 msgid "Thur"
 msgstr "Št"
 
+#, fuzzy
+msgid "Thursday"
+msgstr "Št"
+
 msgid "Time"
 msgstr "Čas"
 
@@ -2198,6 +2236,9 @@ msgstr "Titulok"
 
 msgid "Tue"
 msgstr "Ut"
+
+msgid "Tuesday"
+msgstr ""
 
 #, fuzzy
 msgid "Tuner"
@@ -2343,6 +2384,9 @@ msgstr "WebIF aktualizácia [s]"
 msgid "Wed"
 msgstr "St"
 
+msgid "Wednesday"
+msgstr ""
+
 msgid "Week"
 msgstr "Týždeň"
 
@@ -2418,7 +2462,6 @@ msgstr "kopírovať do aktívných"
 msgid "cornflowerblue"
 msgstr "nevädza modrá"
 
-#, python-format
 msgid "currently set : %s"
 msgstr "aktuálne nastavené : %s"
 
