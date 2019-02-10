@@ -207,7 +207,7 @@ SUBDIRS += MultiTransCodingSetup VPLEDControl
 endif
 
 if GBMV200
-SUBDIRS += MultiTransCodingSetup VPLEDControl
+SUBDIRS += MultiTransCodingSetup
 endif
 
 if USTYM4KPRO

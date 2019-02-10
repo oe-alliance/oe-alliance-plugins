@@ -28,7 +28,7 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if getMachineBuild() in ("gb7252","gb7356","gb73625","gb7362","gb7358"):
+		if getMachineBuild() in ("gb7252","gb7356","gb73625","gb7362","gb7358","gbmv200"):
 			return True
 		else:
 			return False

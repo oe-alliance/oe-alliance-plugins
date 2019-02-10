@@ -45,17 +45,26 @@ config.plugins.VFD_Giga.vfdBrightnessStandby = ConfigSlider(default=255, increme
 RecLed = None
 
 def vfd_write(text):
-	open("/dev/mcu", "w").write(text)
+	try:
+		open("/dev/mcu", "w").write(text)
+	except IOError:
+		print "[LED-GIGA] vfd_write failed!"
 
 def setvfdBrightness(value):
+	try:
 		f = open("/proc/stb/fp/oled_brightness", "w")
 		f.write(str(value))
 		f.close()
+	except IOError:
+		print "[LED-GIGA] vfdBrightness failed!"
 
 def setvfdDSBY2(value):
+	try:
 		f = open("/proc/stb/fp/enable_led", "w")
 		f.write(str(value))
 		f.close()
+	except IOError:
+		print "[LED-GIGA] vfdDSBY2 failed!"
 
 def setLed(color):
 	# 0 = off
@@ -98,12 +107,19 @@ def setLed(color):
 			value0 = 0
 			value1 = 0
 
-	f = open(led0,"w")
-	f.write(str(value0))
-	f.close()
-	f = open(led1,"w")
-	f.write(str(value1))
-	f.close()
+	try:
+		f = open(led0,"w")
+		f.write(str(value0))
+		f.close()
+	except IOError:
+		print "[LED-GIGA] set LED Pattern failed!"
+
+	try:
+		f = open(led1,"w")
+		f.write(str(value1))
+		f.close()
+	except IOError:
+		print "[LED-GIGA] set LED Pattern failed!"
 
 class Channelnumber:
 
@@ -335,7 +351,7 @@ def initLED():
 		forcmd = '1'
 	else:
 		forcmd = '0'
-	if BOX in ("gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h"):
+	if BOX in ("gbtrio4k","gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h"):
 		cmd = 'echo STB does not support to show clock in Deep Standby'
 	else:
 		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
@@ -350,7 +366,7 @@ def initLED():
 		else:
 			setvfdBrightness("255")
 
-	if BOX in ('gbquad4k', 'gbue4k', 'gbquadplus'):
+	if BOX in ('gbquad4k', 'gbue4k', 'gbquadplus', 'gbtrio4k'):
 		if config.plugins.VFD_Giga.ledDSBY2.value:
 			setvfdDSBY2(config.plugins.VFD_Giga.ledDSBY2.getValue())
 
@@ -378,7 +394,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		self.Console = Console()
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
-		if BOX in ("gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h"):
+		if BOX in ("gbtrio4k","gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h"):
 			self["key_yellow"] = Button("")
 		else:
 			self["key_yellow"] = Button(_("Update Date/Time"))
@@ -396,11 +412,11 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Enable led"), config.plugins.VFD_Giga.setLed))
 		if config.plugins.VFD_Giga.setLed.value:
-			if BOX in ("gbquad4k", "gbue4k", 'gbquadplus'):
+			if BOX in ("gbquad4k", "gbue4k", 'gbquadplus', 'gbtrio4k'):
 				self.list.append(getConfigListEntry(_("Led Deep Standby"), config.plugins.VFD_Giga.ledDSBY2))
 			self.list.append(getConfigListEntry(_("Led state RUN"), config.plugins.VFD_Giga.ledRUN))
 			self.list.append(getConfigListEntry(_("Led state Standby"), config.plugins.VFD_Giga.ledSBY))
-			if BOX not in ("gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gb800seplus", "gbquadplus", "gbipbox", "gbultra", "gbultraue", "gbultraueh", "gbultrase", "gbx1", "gbx2", "gbx3", "gbx3h"):
+			if BOX not in ("gbtrio4k", "gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gb800seplus", "gbquadplus", "gbipbox", "gbultra", "gbultraue", "gbultraueh", "gbultrase", "gbx1", "gbx2", "gbx3", "gbx3h"):
 				self.list.append(getConfigListEntry(_("Led state Deep Standby"), config.plugins.VFD_Giga.ledDSBY))
 			self.list.append(getConfigListEntry(_("Led state Record"), config.plugins.VFD_Giga.ledREC))
 			self.list.append(getConfigListEntry(_("Blink Record Led"), config.plugins.VFD_Giga.recLedBlink))
@@ -549,13 +565,13 @@ def SetTime():
 	print "set Gigabox RTC to %s (rtc_offset = %s sec.)" % (time.strftime("%Y/%m/%d %H:%M", t_local), forsleep)
 
 	# Set RTC OFFSET (diff. between UTC and Local Time)
-	try:		
+	try:
 		open("/proc/stb/fp/rtc_offset", "w").write(str(forsleep))
 	except IOError:
 		print "[LED-GIGA] set RTC Offset failed!"
 
 	# Set RTC
-	try:		
+	try:
 		open("/proc/stb/fp/rtc", "w").write(str(int(time.time())))
 	except IOError:
 		print "[LED-GIGA] set RTC time failed!"
