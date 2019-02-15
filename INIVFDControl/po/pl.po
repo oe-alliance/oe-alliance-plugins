@@ -3,9 +3,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:36+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"POT-Creation-Date: 2019-02-15 13:10+0200\n"
+"PO-Revision-Date: 2019-02-15 13:10+0200\n"
+"Last-Translator: zukon\n"
 "Language-Team: \n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -15,36 +15,36 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 
 msgid "7-LED Display Setup"
-msgstr ""
+msgstr "Ustawienia Wyświetlacza 7-LED"
 
 msgid "Always off"
-msgstr ""
+msgstr "Zawsze wyłaczony"
 
 #
 msgid "Cancel"
 msgstr "Anuluj"
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
+msgstr "Numer kanału w Czuwaniu Zegar"
 
 msgid "Channelnumber in Standby off"
-msgstr ""
+msgstr "Numer kanału w Czuwaniu wyłączony"
 
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
+msgstr "Numer kanału/Zegar w Czuwaniu Zegar"
 
 msgid "Clock always"
-msgstr ""
+msgstr "Zawsze Zegar"
 
 msgid "LED Display Setup"
-msgstr ""
+msgstr "Ustawienia Wyświetlacza LED"
 
 #
 msgid "Save"
 msgstr "Zapisz"
 
 msgid "Show on display"
-msgstr ""
+msgstr "Pokaż na wyświetlaczu"
 
 msgid "Time mode"
-msgstr ""
+msgstr "Format czasu"
