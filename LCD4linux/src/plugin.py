@@ -5178,6 +5178,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 		self.skin = skin
 		self.session = session
 		Screen.__init__(self, session)
+		self.setTitle(_("LCD4linux Settings"))
 		L4log("init Start")
 		ConfigMode = True
 		OSDon = 0
@@ -5249,7 +5250,7 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
 		self["key_yellow"] = Button(_("Restart Displays"))
-		self["key_blue"] = Button("")
+		self["key_blue"] = Button(_("Set On >>"))
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions", "EPGSelectActions", "HelpActions","InfobarSeekActions"],
 		{
 			"red": self.cancel,
@@ -14932,7 +14933,7 @@ def autostart(reason, **kwargs):
 		MJPEG_stop(9)
 
 def setup(menuid, **kwargs):
-	if getImageDistro() in ("openvix", "openatv", "ventonsupport", "egami", "openhdf", "openbh", "openspa", "opendroid"):
+	if getImageDistro() in ("openvix", "openatv", "egami", "openhdf", "openbh", "openspa", "opendroid"):
 		if menuid == "display" and SystemInfo["Display"]:
 			return [("LCD4Linux", main, "lcd4linux", None)]
 		elif menuid == "system" and not SystemInfo["Display"]:
