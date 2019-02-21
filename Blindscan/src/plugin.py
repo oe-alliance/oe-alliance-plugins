@@ -1075,6 +1075,8 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.pls_code = 0
 					if hasattr(parm, "t2mi_plp_id"):
 						parm.t2mi_plp_id = eDVBFrontendParametersSatellite.No_T2MI_PLP_Id
+					if hasattr(parm, "t2mi_pid"):
+						parm.t2mi_pid = eDVBFrontendParametersSatellite.T2MI_Default_Pid
 					self.tmp_tplist.append(parm)
 			elif len(data) >= 10 and self.dataIsGood(data):
 				if data[0] == 'OK':
@@ -1129,6 +1131,8 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.pls_code = getMisPlsValue(data, 12, 0)
 					if hasattr(parm, "t2mi_plp_id"):
 						parm.t2mi_plp_id = getMisPlsValue(data, 13, eDVBFrontendParametersSatellite.No_T2MI_PLP_Id)
+					if hasattr(parm, "t2mi_pid"):
+						parm.t2mi_pid = getMisPlsValue(data, 14, eDVBFrontendParametersSatellite.T2MI_Default_Pid)
                     # when blindscan returns 0,0,0 then use defaults...
 					if parm.pls_mode == parm.is_id == parm.pls_code == 0:
 						parm.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
@@ -1266,6 +1270,8 @@ class Blindscan(ConfigListScreen, Screen):
 						tp_str += " PLS Gold %d" % p.pls_code
 					if hasattr(p, "t2mi_plp_id") and p.t2mi_plp_id > eDVBFrontendParametersSatellite.No_T2MI_PLP_Id:
 						tp_str += " T2MI %d" % p.t2mi_plp_id
+					if hasattr(p, "t2mi_pid") and hasattr(p, "t2mi_plp_id") and p.t2mi_plp_id > eDVBFrontendParametersSatellite.No_T2MI_PLP_Id:
+						tp_str += " PID %d" % p.t2mi_pid
 					blindscanStateList.append((tp_str, p))
 
 				self.runtime = int(time() - self.start_time)
@@ -1328,6 +1334,8 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.pls_code = x[12]
 					if hasattr(parm, "t2mi_plp_id") and len(x) > 13:
 						parm.t2mi_plp_id = x[13]
+						if hasattr(parm, "t2mi_pid") and len(x) > 14:
+							parm.t2mi_pid = x[14]
 				tlist.append(parm)
 		return tlist
 
@@ -1531,6 +1539,8 @@ class Blindscan(ConfigListScreen, Screen):
 				tmp_tp.append('pls_code="%d"' % tp.pls_code)
 			if hasattr(tp, "t2mi_plp_id") and tp.t2mi_plp_id > eDVBFrontendParametersSatellite.No_T2MI_PLP_Id:
 				tmp_tp.append('t2mi_plp_id="%d"' % tp.t2mi_plp_id)
+				if hasattr(tp, "t2mi_pid") and tp.t2mi_plp_id < eDVBFrontendParametersSatellite.T2MI_Default_Pid:
+					tmp_tp.append('t2mi_pid="%d"' % tp.t2mi_pid)
 			tmp_tp.append('/>\n')
 			xml.append(' '.join(tmp_tp))
 		xml.append('	</sat>\n')
