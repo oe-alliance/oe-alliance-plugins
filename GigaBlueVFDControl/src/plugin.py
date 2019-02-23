@@ -144,7 +144,7 @@ class Channelnumber:
 
 	def __eventInfoChanged(self):
 		self.RecordingLed()
-		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase'):
+		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase','gbtrio4k'):
 			return
 		if config.plugins.VFD_Giga.showClock.value == 'Off' or config.plugins.VFD_Giga.showClock.value == 'True_All':
 			return
@@ -213,7 +213,7 @@ class Channelnumber:
 
 	def vrime(self):
 		self.RecordingLed()
-		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase'):
+		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k'):
 			self.zaPrik.start(self.updatetime, 1)
 			return
 
@@ -310,7 +310,7 @@ def leaveStandby():
 	else:
 		setLed(config.plugins.VFD_Giga.ledREC.getValue())
 
-	if BOX in ('gb800seplus', 'gbultra', 'gbultrase'):
+	if BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k'):
 		if config.plugins.VFD_Giga.vfdBrightness.value:
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightness.getValue())
 		else:
@@ -333,7 +333,7 @@ def standbyCounterChanged(configElement):
 	else:
 		setLed(config.plugins.VFD_Giga.ledREC.getValue())
 
-	if BOX in ('gb800seplus', 'gbultra', 'gbultrase'):
+	if BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k'):
 		if config.plugins.VFD_Giga.vfdBrightnessStandby.value:
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightnessStandby.getValue())
 		else:
@@ -360,13 +360,13 @@ def initLED():
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
 		vfd_write("    ")
 
-	if BOX in ('gb800seplus', 'gbultra', 'gbultrase'):
+	if BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k'):
 		if config.plugins.VFD_Giga.vfdBrightness.value:
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightness.getValue())
 		else:
 			setvfdBrightness("255")
 
-	if BOX in ('gbquad4k', 'gbue4k', 'gbquadplus', 'gbtrio4k'):
+	if BOX in ('gbquad4k', 'gbue4k', 'gbquadplus'):
 		if config.plugins.VFD_Giga.ledDSBY2.value:
 			setvfdDSBY2(config.plugins.VFD_Giga.ledDSBY2.getValue())
 
@@ -394,7 +394,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		self.Console = Console()
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
-		if BOX in ("gbtrio4k","gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h"):
+		if BOX in ("gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h"):
 			self["key_yellow"] = Button("")
 		else:
 			self["key_yellow"] = Button(_("Update Date/Time"))
@@ -426,10 +426,10 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		else:
 			setLed("0")
 
-		if BOX in ("gb800seplus", "gbultra", "gbultrase"):
+		if BOX in ("gb800seplus", "gbultra", "gbultrase", "gbtrio4k"):
 			self.list.append(getConfigListEntry(_("Brightness"), config.plugins.VFD_Giga.vfdBrightness))
 			self.list.append(getConfigListEntry(_("Brightness Standby"), config.plugins.VFD_Giga.vfdBrightnessStandby))
-		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase"):
+		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase", "gbtrio4k"):
 			self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_Giga.showClock))
 			self.list.append(getConfigListEntry(_("Show clock in Deep Standby"), config.plugins.VFD_Giga.showClockDeepStandby))
 			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
@@ -516,7 +516,7 @@ def main(menuid, **kwargs):
 	if getImageDistro() == "openvix":
 		if BOX in ('gb800se', 'gb800solo', 'gbx1', 'gbx2', 'gbx3', 'gbx3h') and menuid == "leddisplay":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
-		elif BOX in ('gb800seplus', 'gbultra', 'gbultrase') and menuid == "display":
+		elif BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k') and menuid == "display":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
 		elif menuid == "display":
 			return [(_("LED"), startLED, "LED_Giga", None)]
@@ -529,7 +529,7 @@ def main(menuid, **kwargs):
 		else:
 			if menuid != "system":
 				return [ ]
-		if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase'):
+		if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k'):
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
 		else:
 			return [(_("LED"), startLED, "LED_Giga", None)]
