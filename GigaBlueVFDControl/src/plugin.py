@@ -35,7 +35,7 @@ config.plugins.VFD_Giga.ledRUN = ConfigSelection(led, default = "1")
 config.plugins.VFD_Giga.ledSBY = ConfigSelection(led, default = "2")
 config.plugins.VFD_Giga.ledREC = ConfigSelection(led, default = "3")
 config.plugins.VFD_Giga.ledDSBY = ConfigSelection(led, default = "2")
-config.plugins.VFD_Giga.ledDSBY2 = ConfigSelection(default = "1", choices = [("0",_("No")),("1",_("Yes"))])
+config.plugins.VFD_Giga.ledDSBY2 = ConfigYesNo(default = True)
 config.plugins.VFD_Giga.ledSDA1 = ConfigSelection(led, default = "0")
 config.plugins.VFD_Giga.ledSDB1 = ConfigSelection(led, default = "0")
 config.plugins.VFD_Giga.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
@@ -368,7 +368,9 @@ def initLED():
 
 	if BOX in ('gbquad4k', 'gbue4k', 'gbquadplus'):
 		if config.plugins.VFD_Giga.ledDSBY2.value:
-			setvfdDSBY2(config.plugins.VFD_Giga.ledDSBY2.getValue())
+			setvfdDSBY2("1")
+		else:
+			setvfdDSBY2("0")
 
 class LED_GigaSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args = None):
