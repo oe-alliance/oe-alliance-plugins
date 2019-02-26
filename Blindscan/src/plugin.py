@@ -912,7 +912,7 @@ class Blindscan(ConfigListScreen, Screen):
 					cmd += " %d" % orb[0]
 				if getBrandOEM() in ('azbox',):
 					self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
-				if getBrandOEM() in ('clap', 'uclan') or getBoxType().startswith('sf8008') or getBoxType() in ('gbmv200'):
+				if getBrandOEM() in ('clap', 'uclan') or getBoxType() in ('gbmv200'):
 					self.frontend and self.frontend.closeFrontend()
 				if getBoxType().startswith('sf8008') or getBoxType() in ('gbmv200'):
 					self.adjust_freq = False
