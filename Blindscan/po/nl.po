@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-07 08:02+0000\n"
-"PO-Revision-Date: 2018-12-08 10:38+0100\n"
+"POT-Creation-Date: 2019-02-27 17:21+0000\n"
+"PO-Revision-Date: 2019-03-08 14:29+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 msgid ""
@@ -88,6 +88,9 @@ msgstr "PAS OP: Als u 'Ja' kiest, zal de scan geen dubbele tranponders van de li
 msgid "CAUTION: If you select \"yes\" the scan will not sync with transponders listed in satellites.xml. Default is \"no\". Only change this if you understand why you are doing it."
 msgstr "PAS OP: Als u 'ja' kiest, zal de scan niet synchroniseren met transponders in de satellites.xml. Standaard is 'nee'. Verander dit alleen als u weet wat u doet."
 
+msgid "CAUTION: Only select \"inverted\" if you are using an inverted LNB (i.e. an LNB where the local oscillator frequency is greater than the scan frequency). Default is \"normal\". Only change this if you understand why you are doing it."
+msgstr "PAS OP: Kies uitsluitend \"omgekeerd\" als u een omgekeerde LNB gebruikt (dat is een LNB waarvan de lokale oscillatorfrequentie hoger is dan de scanfrequentie). Standaard is \"normaal\". Veraander dit alleen als u weet wat u doet."
+
 msgid "Cancel"
 msgstr "Annuleer"
 
@@ -151,6 +154,9 @@ msgstr "Als u \"Ja\" kiest, zullen alleen zenders worden gezocht die niet in de 
 
 msgid "It seems manufacturer does not support blind scan for this tuner."
 msgstr "De fabrikant ondersteunt geen blindscan voor deze tuner."
+
+msgid "LNB inversion"
+msgstr "LNB-omkering"
 
 msgid "LNB of current satellite not compatible with plugin"
 msgstr "LNB van huidige satelliet werkt niet met deze plugin."
@@ -350,8 +356,14 @@ msgstr "scan niet"
 msgid "horizontal"
 msgstr "horizontaal"
 
+msgid "inverted"
+msgstr "omgekeerd"
+
 msgid "no"
 msgstr "nee"
+
+msgid "normal"
+msgstr "normaal"
 
 msgid "save to XML file"
 msgstr "sla op in XML-bestand"
