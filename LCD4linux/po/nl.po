@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2018-07-31 07:47+0200\n"
+"POT-Creation-Date: 2019-02-27 17:21+0000\n"
+"PO-Revision-Date: 2019-03-08 14:42+0100\n"
+"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Basepath: .\n"
-"Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 msgid "%"
@@ -164,6 +164,9 @@ msgstr "- Bestand [ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- Bestand of pad [ok]>"
+
+msgid "- Find Cover File [ok]>"
+msgstr "- Vind cover-bestand [ok]>"
 
 msgid "- Font"
 msgstr "- Lettertype"
@@ -428,6 +431,9 @@ msgstr "- Weertype"
 
 msgid "- Zoom"
 msgstr "- Zoom"
+
+msgid "- external IP URL"
+msgstr "- extern IP URL"
 
 msgid "- extra Info"
 msgstr "- extra info"
@@ -774,6 +780,21 @@ msgstr "Balk+waarde"
 msgid "Bitrate"
 msgstr "Bitrate"
 
+msgid "BlueSound"
+msgstr "BlueSound"
+
+msgid "BlueSound IP"
+msgstr "BlueSound IP"
+
+msgid "BlueSound Ping Timeout [ms]"
+msgstr "BlueSound ping timeout [ms]"
+
+msgid "BlueSound Play Check"
+msgstr "BlueSound play check"
+
+msgid "BlueSound Refresh [s]"
+msgstr "BlueSound ververs [s]"
+
 msgid "Box-Skin-LCD"
 msgstr "Box-Skin-LCD"
 
@@ -989,6 +1010,9 @@ msgstr "Uitgebreid (kort)"
 
 msgid "Extended Description"
 msgstr "Uitgebreide beschrijving"
+
+msgid "External IP Address"
+msgstr "Extern IP adres"
 
 msgid "Fastmode (2s)"
 msgstr "Snelle modus (2s)"
@@ -1647,7 +1671,7 @@ msgid "Picon+Channel+Title"
 msgstr "Picon+kanaal+titel"
 
 msgid "Picon+Position below"
-msgstr "Picon+positie beneden "
+msgstr "Picon+positie beneden"
 
 msgid "Picon+Position left"
 msgstr "Picon+positie links"
@@ -1677,7 +1701,7 @@ msgid "Picture Sort"
 msgstr "Plaatje volgorde"
 
 msgid "Picture Type [only Picture]"
-msgstr "Type plaatje [alleen plaatje] "
+msgstr "Type plaatje [alleen plaatje]"
 
 msgid "Picture not available"
 msgstr "Afbeelding niet beschikbaar"
@@ -1746,7 +1770,7 @@ msgid "Remote Box"
 msgstr "Klant box"
 
 msgid "Remote Box 1 [Displayname:]IP/Name"
-msgstr "klantbox 1 [Displayname:]IP/Name"
+msgstr "Klantbox 1 [Displayname:]IP/Name"
 
 msgid "Remote Box 2 [Displayname:]IP/Name"
 msgstr "Klantbox 2 [Displayname:]IP/Name"
@@ -2137,7 +2161,7 @@ msgid "Time+Weekday"
 msgstr "Tijd+Dag"
 
 msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
-msgstr "Timing! Alle tijden naar tijd/5*2 in snelle mode omrekenen."
+msgstr "Timing! Alle tijden naar tijd/5*2 in snelle mode omrekenen"
 
 msgid "Title"
 msgstr "Titel"
@@ -2350,10 +2374,10 @@ msgid "convertapi.com"
 msgstr "convertapi.com"
 
 msgid "copy to Idle"
-msgstr "kopieer naar inactief "
+msgstr "Kopieer naar inactief"
 
 msgid "copy to Media"
-msgstr "Kopieer naar Media"
+msgstr "Kopieer naar media"
 
 msgid "copy to On"
 msgstr "Kopieer naar Aan"
