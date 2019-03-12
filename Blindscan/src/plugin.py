@@ -912,9 +912,9 @@ class Blindscan(ConfigListScreen, Screen):
 					cmd += " %d" % orb[0]
 				if getBrandOEM() in ('azbox',):
 					self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
-				if getBrandOEM() in ('clap', 'uclan') or getBoxType() in ('gbmv200'):
+				if getBrandOEM() in ('clap'):
 					self.frontend and self.frontend.closeFrontend()
-				if getBoxType().startswith('sf8008') or getBoxType() in ('gbmv200'):
+				if getBrandOEM() in ('uclan') or getBoxType().startswith('sf8008') or getBoxType() in ('gbmv200'):
 					self.adjust_freq = False
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
