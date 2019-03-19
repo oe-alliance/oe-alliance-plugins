@@ -53,6 +53,9 @@ msgstr "Display/LED"
 msgid "Enable led"
 msgstr "Led aktivieren"
 
+msgid "GigaBlue Setup"
+msgstr "GigaBlue Einstellungen"
+
 msgid "LED"
 msgstr "LED"
 
