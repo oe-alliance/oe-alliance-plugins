@@ -385,6 +385,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 			</screen>"""
 
 		Screen.__init__(self, session)
+		self.setTitle(_("GigaBlue Setup"))
 		self.onClose.append(self.abort)
 
 		self.onChangedEntry = [ ]
