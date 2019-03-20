@@ -436,8 +436,6 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_Giga.showClock))
 		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase"):
 			self.list.append(getConfigListEntry(_("Show clock in Deep Standby"), config.plugins.VFD_Giga.showClockDeepStandby))
-			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
-				self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_Giga.timeMode))
 		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase", "gbtrio4k"):
 			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
 				self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_Giga.timeMode))
