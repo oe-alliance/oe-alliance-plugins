@@ -329,7 +329,7 @@ def leaveStandby():
 		if config.plugins.VFD_Giga.vfdBrightness.value:
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightness.getValue())
 		else:
-			setvfdBrightness("255")
+			setvfdBrightness(Brightness_default)
 
 def standbyCounterChanged(configElement):
 	print "[LED-GIGA] In Standby"
@@ -379,7 +379,7 @@ def initLED():
 		if config.plugins.VFD_Giga.vfdBrightness.value:
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightness.getValue())
 		else:
-			setvfdBrightness("255")
+			setvfdBrightness(Brightness_default)
 
 	if BOX in ('gbquad4k', 'gbue4k', 'gbquadplus'):
 		if config.plugins.VFD_Giga.ledDSBY2.value:
