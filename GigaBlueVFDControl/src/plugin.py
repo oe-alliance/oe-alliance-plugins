@@ -39,8 +39,18 @@ config.plugins.VFD_Giga.ledDSBY2 = ConfigYesNo(default = True)
 config.plugins.VFD_Giga.ledSDA1 = ConfigSelection(led, default = "0")
 config.plugins.VFD_Giga.ledSDB1 = ConfigSelection(led, default = "0")
 config.plugins.VFD_Giga.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
-config.plugins.VFD_Giga.vfdBrightness = ConfigSlider(default=255, increment = 5, limits=(0,255))
-config.plugins.VFD_Giga.vfdBrightnessStandby = ConfigSlider(default=255, increment = 5, limits=(0,255))
+if BOX in ('gbtrio4k'):
+	Brightness_default = 1
+	Brightness_increment = 1
+	Brightness_limits_min = 0
+	Brightness_limits_max = 8
+else:
+	Brightness_default = 255
+	Brightness_increment = 5
+	Brightness_limits_min = 0
+	Brightness_limits_max = 255
+config.plugins.VFD_Giga.vfdBrightness = ConfigSlider(default=Brightness_default, increment = Brightness_increment, limits=(Brightness_limits_min,Brightness_limits_max))
+config.plugins.VFD_Giga.vfdBrightnessStandby = ConfigSlider(default=Brightness_default, increment = Brightness_increment, limits=(0,Brightness_limits_max))
 
 RecLed = None
 
@@ -51,6 +61,11 @@ def vfd_write(text):
 		print "[LED-GIGA] vfd_write failed!"
 
 def setvfdBrightness(value):
+	if BOX in ('gbtrio4k'):
+		value *= 255
+		value /= 10
+		if value > 255:
+			value = 255
 	try:
 		f = open("/proc/stb/fp/oled_brightness", "w")
 		f.write(str(value))
