@@ -303,7 +303,8 @@ class Channelnumber:
 				led_rec = config.plugins.VFD_Giga.ledSBY.getValue()
 			else:
 				led_rec = config.plugins.VFD_Giga.ledRUN.getValue()
-		setLed(str(int(led_sda1) | int(led_sdb1) | int(led_rec)))
+		if config.plugins.VFD_Giga.setLed.value:
+			setLed(str(int(led_sda1) | int(led_sdb1) | int(led_rec)))
 					
 	def keyPressed(self, key, tag):
 		self.begin = time() + int(self.channelnrdelay)
