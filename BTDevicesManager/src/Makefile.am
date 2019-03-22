@@ -5,4 +5,7 @@ install_PYTHON = \
 	bluetoothctl.py \
 	plugin.py
 
-install_DATA = plugin.png
+install_DATA = plugin.png BTAudioConnect
+
+install-data-hook:
+	@chmod +x $(DESTDIR)$(installdir)/BTAudioConnect

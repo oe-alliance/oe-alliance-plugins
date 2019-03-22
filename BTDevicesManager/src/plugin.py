@@ -32,7 +32,7 @@ from Components.Sources.StaticText import StaticText
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigSubsection, ConfigYesNo, ConfigSelection
 from Components.MenuList import MenuList
-from Tools.Directories import fileExists
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, fileExists
 from bluetoothctl import iBluetoothctl, Bluetoothctl
 
 import os
@@ -106,6 +106,8 @@ config.btdevicesmanager.autostart = ConfigYesNo(default=False)
 config.btdevicesmanager.audioconnect = ConfigYesNo(default=False)
 config.btdevicesmanager.audioaddress = ConfigText(default = "", fixed_size = False)
 
+commandconnect = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/BTDevicesManager/BTAudioConnect")
+
 class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 	__module__ = __name__
 	def __init__(self, session, args = 0):
@@ -132,21 +134,20 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 	def saveAndExit(self):
 		for x in self['config'].list:
 			x[1].save()
-		if config.btdevicesmanager.autostart.getValue():
-			print "[BluetoothManager] Autostart: Loading driver"
-			os.system("modprobe rtk_btusb")
-		else:
-			print "[BluetoothManager] Autostart: Unloading driver"
-			os.system("rmmod rtk_btusb")
-		
-		if config.btdevicesmanager.audioconnect.getValue():
-			if config.btdevicesmanager.audioaddress.getValue() is not "":
-				print "[BluetoothManager] Audio Connect: " + config.btdevicesmanager.audioaddress.getValue()
-				os.system("bluetoothctl connect %s" % config.btdevicesmanager.audioaddress.getValue())
-				os.system("killall -9 arecord")
-				os.system("arecord -f dat | aplay -D bluealsa:HCI=hci0,DEV=%s,PROFILE=a2dp -f dat &" % config.btdevicesmanager.audioaddress.getValue())
-		else:
-			os.system("killall -9 arecord")
+
+		if brandoem not in ("xcore","edision"):
+			if config.btdevicesmanager.autostart.getValue():
+				print "[BluetoothManager] Autostart: Loading driver"
+				os.system("modprobe rtk_btusb")
+			else:
+				print "[BluetoothManager] Autostart: Unloading driver"
+				os.system("rmmod rtk_btusb")
+
+		if brandoem in ("xcore","edision"):
+			if config.btdevicesmanager.audioconnect.getValue():
+				os.system("%s %s" % (commandconnect, config.btdevicesmanager.audioaddress.getValue()))
+			else:
+				os.system("%s" % commandconnect)
 
 		config.btdevicesmanager.save()
 		
@@ -453,12 +454,9 @@ def autostart(reason, **kwargs):
 				print "[BluetoothManager] Autostart: Unloading driver" ## We know it is blacklisted, but try to remove it anyway.
 				os.system("rmmod rtk_btusb")
 
-		if config.btdevicesmanager.audioconnect.getValue():
-			if config.btdevicesmanager.audioaddress.getValue() is not "":
-				print "[BluetoothManager] Audio Connect: " + config.btdevicesmanager.audioaddress.getValue()
-				os.system("bluetoothctl connect %s" % config.btdevicesmanager.audioaddress.getValue())
-				os.system("killall -9 arecord")
-				os.system("arecord -f dat | aplay -D bluealsa:HCI=hci0,DEV=%s,PROFILE=a2dp -f dat &" % config.btdevicesmanager.audioaddress.getValue())
+		if brandoem in ("xcore","edision"):
+			if config.btdevicesmanager.audioconnect.getValue():
+				os.system("%s %s" % (commandconnect, config.btdevicesmanager.audioaddress.getValue()))
 
 def Plugins(**kwargs):
 	ShowPlugin = True

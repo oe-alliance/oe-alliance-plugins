@@ -1,0 +1,33 @@
+#!/bin/sh
+
+generate_asoundrc() {
+cat << EOF > $HOME/.asoundrc
+pcm.bluetoothaudio {
+    type plug
+    slave.pcm {
+        type bluealsa
+        interface "hci0"
+        device "$1"
+        profile "a2dp"
+    }
+    hint {
+        show on
+        description "Bluetooth $2"
+    }
+}
+EOF
+}
+
+rm -f $HOME/.asoundrc
+pkill alsaloop &> /dev/null
+
+if [ ! -z "$1" ]; then
+  bluetoothaddr=$@
+  bluetoothctl connect ${bluetoothaddr} || exit 0
+  bluetoothctl info ${bluetoothaddr}  | grep -q "Audio Sink" || exit 0
+  bluetoothname="$(bluetoothctl info ${bluetoothaddr} | grep "Name" | cut -d ':' -f 2)"
+  generate_asoundrc ${bluetoothaddr} ${bluetoothname}
+  alsaloop -d -P bluetoothaudio -f S16_LE -c 2 -r 48000 -t 400000 --period 6000
+fi
+
+exit 0
