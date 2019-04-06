@@ -54,8 +54,8 @@ class Channelnumber:
 		self.sign = 0
 		self.updatetime = 10000
 		self.blink = False
-		self.blinkCounter = 0
-		self.channelnrdelay = 15
+		self.blinkCounter = 5
+		self.channelnrdelay = 10000
 		self.begin = int(time())
 		self.endkeypress = True
 		eActionMap.getInstance().bindAction('', -0x7FFFFFFF, self.keyPressed)
