@@ -340,7 +340,7 @@ class SatelliteTransponderSearchSupport:
 		if self.parm is not None:
 			tparm = eDVBFrontendParameters()
 			tparm.setDVBS(self.parm, False)
-			self.frontend.tune(tparm)
+			self.frontend.tune(tparm, True)
 
 	def setNextRange(self):
 		if self.current_range is None:
@@ -474,7 +474,7 @@ class SatelliteTransponderSearchSupport:
 			if self.parm is not None:
 				tparm = eDVBFrontendParameters()
 				tparm.setDVBS(self.parm, False)
-				self.frontend.tune(tparm)
+				self.frontend.tune(tparm, True)
 				self.start_time = time()
 				tmpstr = _("Try to find used satellite transponders...")
 			else:
