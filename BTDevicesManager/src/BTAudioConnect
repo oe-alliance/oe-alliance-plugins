@@ -36,8 +36,11 @@ ctl.bluetooth {
 EOF
 }
 
-pkill aplay
-while pgrep aplay > /dev/null; do sleep 1; done
+if [ -f /var/run/aplay.pid ]; then
+  PID=$(cat /var/run/aplay.pid)
+  kill $PID
+  while ps -p $PID > /dev/null; do sleep 1; done
+fi
 default_asoundconf
 
 if [ ! -z "$1" ]; then
@@ -46,7 +49,7 @@ if [ ! -z "$1" ]; then
   bluetoothctl info ${bluetoothaddr}  | grep -q "Audio Sink" || exit 0
   bluetoothname="$(bluetoothctl info ${bluetoothaddr} | grep "Name" | cut -d ':' -f 2)"
   bluetooth_asoundconf ${bluetoothaddr} ${bluetoothname}
-  arecord -q -f dat | aplay -q -f dat -D bluetooth &
+  arecord -q -f dat -t raw | aplay -q -f dat -t raw -D bluetooth --process-id-file /var/run/aplay.pid &
 fi
 
 exit 0

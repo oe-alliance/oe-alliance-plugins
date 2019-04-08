@@ -20,7 +20,7 @@ from . import _
 from boxbranding import getImageDistro, getBrandOEM, getMachineBuild, getBoxType
 
 from Plugins.Plugin import PluginDescriptor
-from enigma import eTimer, eConsoleAppContainer
+from enigma import eTimer, eConsoleAppContainer, iPlayableService, eServiceCenter, eActionMap
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -32,11 +32,14 @@ from Components.Sources.StaticText import StaticText
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigSubsection, ConfigYesNo, ConfigSelection
 from Components.MenuList import MenuList
+from Components.ServiceEventTracker import ServiceEventTracker
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, fileExists
 from bluetoothctl import iBluetoothctl, Bluetoothctl
 
 import os
 import time
+import signal
+from datetime import datetime, timedelta
 
 brandoem = getBrandOEM()
 
@@ -458,6 +461,49 @@ def autostart(reason, **kwargs):
 			if config.btdevicesmanager.audioconnect.getValue():
 				os.system("%s %s" % (commandconnect, config.btdevicesmanager.audioaddress.getValue()))
 
+iBluetoothDevicesTask = None
+
+class BluetoothDevicesTask:
+	def __init__(self, session):
+		self.session = session
+		self.onClose = []
+		self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
+			{
+				iPlayableService.evStart: self.__evStart,
+			})
+		self.timestamp = datetime.now()
+		self.check_timer = eTimer()
+		self.check_timer.callback.append(self.poll)
+		self.check_timer.start(3600000)
+
+	def __evStart(self):
+		curr_time = datetime.now()
+		next_time = self.timestamp + timedelta(hours=3)
+		if curr_time > next_time :
+			self.flush()
+
+	def poll(self):
+		curr_time = datetime.now()
+		next_time = self.timestamp + timedelta(hours=6)
+		if curr_time > next_time :
+			self.flush()
+
+	def flush(self):
+		try:
+			pid = open("/var/run/aplay.pid").read().split()[0]
+			os.kill(int(pid), signal.SIGUSR2)
+		except:
+			pass
+		self.timestamp = datetime.now()
+
+def sessionstart(session, reason, **kwargs):
+	global iBluetoothDevicesTask
+
+	if reason == 0:
+		if brandoem in ("xcore","edision"):
+			if iBluetoothDevicesTask is None:
+				iBluetoothDevicesTask = BluetoothDevicesTask(session)
+
 def Plugins(**kwargs):
 	ShowPlugin = True
 	if getBoxType() in ("osnino"):
@@ -471,6 +517,7 @@ def Plugins(**kwargs):
 	if ShowPlugin :
 		l = []
 		l.append(PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart))
+		l.append(PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = sessionstart))
 		if getImageDistro() in ("miracleboxhd", "miraclebox"):
 			l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), icon="plugin.png", where=PluginDescriptor.WHERE_MENU, fnc=start_menu_main))
 		else:
