@@ -1239,7 +1239,10 @@ class Blindscan(ConfigListScreen, Screen):
 
 			# Process transponders still in list
 			if self.tmp_tplist != []:
-				self.tmp_tplist = sorted(self.tmp_tplist, key=lambda tp: (tp.frequency, tp.is_id, tp.pls_mode, tp.pls_code)) # tp.t2mi_plp_id can be added here later
+				if hasattr(eDVBFrontendParametersSatellite, "No_T2MI_PLP_Id"): # if image is T2MI capable
+					self.tmp_tplist = sorted(self.tmp_tplist, key=lambda tp: (tp.frequency, tp.is_id, tp.pls_mode, tp.pls_code, tp.t2mi_plp_id))
+				else: # if image is NOT T2MI capable
+					self.tmp_tplist = sorted(self.tmp_tplist, key=lambda tp: (tp.frequency, tp.is_id, tp.pls_mode, tp.pls_code))
 				blindscanStateList = []
 				for p in self.tmp_tplist:
 					print "[Blindscan][blindscanSessionClose] data: [%d][%d][%d][%d][%d][%d][%d][%d][%d][%d]" % (p.orbital_position, p.polarisation, p.frequency, p.symbol_rate, p.system, p.inversion, p.pilot, p.fec, p.modulation, p.modulation)
