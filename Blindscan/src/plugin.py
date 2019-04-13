@@ -1126,6 +1126,8 @@ class Blindscan(ConfigListScreen, Screen):
 					parm.fec = fec.get(data[7], eDVBFrontendParametersSatellite.FEC_Auto)
 					parm.modulation = qam[data[8]]
 					parm.rolloff = roll[data[9]]
+					if parm.system == parm.System_DVB_S:
+						data = data[:10] # "DVB-S" does not support MIS/PLS or T2MI so remove any values from the output of the binary file
 					parm.pls_mode = getMisPlsValue(data, 10, eDVBFrontendParametersSatellite.PLS_Gold)
 					parm.is_id = getMisPlsValue(data, 11, eDVBFrontendParametersSatellite.No_Stream_Id_Filter)
 					parm.pls_code = getMisPlsValue(data, 12, 0)
