@@ -490,9 +490,13 @@ class Blindscan(ConfigListScreen, Screen):
 				continue
 			if len(nimmanager.getSatListForNim(n.slot)) < 1: # empty setup
 				if config_mode in ("advanced", "simple"):
-					config.Nims[n.slot].configMode.value = "nothing"
-					config.Nims[n.slot].configMode.save()
-				continue
+					if not self.legacy:
+						config.Nims[n.slot].dvbs.configMode.value = "nothing"
+						config.Nims[n.slot].dvbs.configMode.save()
+					else:
+						config.Nims[n.slot].configMode.value = "nothing"
+						config.Nims[n.slot].configMode.save()
+					continue
 			if n.description in _unsupportedNims: # DVB-S NIMs without blindscan hardware or software
 				continue
 			if config_mode in ("loopthrough", "satposdepends"):
