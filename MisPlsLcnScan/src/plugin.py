@@ -59,7 +59,7 @@ class MisPlsLcnScanScreen(ConfigListScreen, Screen):
 	def createSetup(self):
 		setup_list = [
 			getConfigListEntry(_("Provider"), config.plugins.MisPlsLcnScan.provider,_('Select the provider you wish to scan.')),
-			getConfigListEntry(_("Clear before scan"), config.plugins.MisPlsLcnScan.clearallservices,_('If you select "yes" stored channels at the same orbital position will be deleted before starting the current search. Note: if you are scanning more than one provider this must be set to "no'.)),
+			getConfigListEntry(_("Clear before scan"), config.plugins.MisPlsLcnScan.clearallservices,_('If you select "yes" stored channels at the same orbital position will be deleted before starting the current search. Note: if you are scanning more than one provider this must be set to "no".')),
 			getConfigListEntry(_("Only free scan"), config.plugins.MisPlsLcnScan.onlyfree,_('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels.')),
 		]
 

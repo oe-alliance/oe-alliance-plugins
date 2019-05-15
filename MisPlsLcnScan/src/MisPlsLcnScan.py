@@ -12,7 +12,7 @@ from Components.Sources.FrontendStatus import FrontendStatus
 from Components.config import config
 from Components.NimManager import nimmanager
 
-from enigma import eDVBResourceManager, eTimer, eDVBDB, eDVBFrontendParameters, eDVBFrontendParametersSatellite # Terrestrial
+from enigma import eDVBResourceManager, eTimer, eDVBDB, eDVBFrontendParameters, eDVBFrontendParametersSatellite
 
 from providers import PROVIDERS
 
