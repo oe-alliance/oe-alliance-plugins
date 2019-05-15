@@ -45,7 +45,6 @@ class MisPlsLcnScan(Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("MIS/PLS LCN Scan"))
-		self.skinName = ["TerrestrialScan"]
 
 		self["background"] = Pixmap()
 		self["action"] = Label(_("Starting scanner"))
