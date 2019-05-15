@@ -1,0 +1,109 @@
+# Portuguese translations for PACKAGE package.
+# Copyright (C) 2019 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-15 10:29+0200\n"
+"PO-Revision-Date: 2019-05-15 10:29+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Cannot allocate the demuxer."
+msgstr ""
+
+msgid "Cannot free NIM because a recording is in progress"
+msgstr ""
+
+msgid "Cannot get frontend"
+msgstr ""
+
+msgid "Cannot get the NIM"
+msgstr ""
+
+msgid "Cannot retrieve Resource Manager instance"
+msgstr ""
+
+msgid "Clear before scan"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+#, python-format
+msgid "Found %d transponder"
+msgid_plural "Found %d transponders"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Fransat MIS 5W"
+msgstr ""
+
+msgid ""
+"If you select \"yes\" stored channels at the same orbital position will be "
+"deleted before starting the current search. Note: if you are scanning more "
+"than one provider this must be set to \"no"
+msgstr ""
+
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not "
+"encrypted; \"no\" will find encrypted and non-encrypted channels."
+msgstr ""
+
+msgid "Italia MIS 5W"
+msgstr ""
+
+msgid "MIS/PLS LCN Scan"
+msgstr ""
+
+msgid "No compatible tuner found"
+msgstr ""
+
+msgid "No frequencies to search"
+msgstr ""
+
+msgid "No valid NIM found for "
+msgstr ""
+
+msgid "Only free scan"
+msgstr ""
+
+msgid "Provider"
+msgstr ""
+
+#, python-format
+msgid "Reading SI tables on %s MHz, IS %s"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
+msgid "Scan"
+msgstr ""
+
+msgid "Scanning transponders"
+msgstr ""
+
+msgid "Select the provider you wish to scan."
+msgstr ""
+
+msgid "Starting scanner"
+msgstr ""
+
+msgid "Starting search..."
+msgstr ""
+
+msgid "TerrestrialScan"
+msgstr ""
+
+#, python-format
+msgid "Tuning %s MHz, IS %s"
+msgstr ""
