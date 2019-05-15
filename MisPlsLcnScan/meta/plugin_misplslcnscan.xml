@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Huevos</author>
+                    <name>MIS/PLS LCN Scan</name>
+                    <packagename>enigma2-plugin-systemplugins-misplslcnscan</packagename>
+                    <shortdescription>Scans multiple input streams</shortdescription>
+                    <description>Scans multiple input streams and creates a user bouquet, ordered by logical channel numbers.</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-misplslcnscan" />
+	</files>
+</default>
