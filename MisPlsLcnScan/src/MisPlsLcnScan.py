@@ -40,8 +40,8 @@ class MisPlsLcnScan(Screen):
 	</screen>"""
 
 	def __init__(self, session, args = 0):
-		print "[TerrestrialScan][__init__] Starting..."
-		print "[TerrestrialScan][__init__] args", args
+		print "[MisPlsLcnScan][__init__] Starting..."
+		print "[MisPlsLcnScan][__init__] args", args
 		self.session = session
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("MIS/PLS LCN Scan"))
@@ -93,7 +93,7 @@ class MisPlsLcnScan(Screen):
 
 	def showError(self, message):
 		question = self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
-		question.setTitle(_("TerrestrialScan"))
+		question.setTitle(_("MIS/PLS LCN Scan"))
 		self.close()
 
 	def keyCancel(self):
