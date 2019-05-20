@@ -2222,7 +2222,7 @@ msgid "Weather API"
 msgstr "Wetter API"
 
 msgid "Weather API-ID Key WeatherUnlocked"
-msgstr "Wetter-API-ID Taste Frei Geschaltet"
+msgstr "Wetter API-ID Key WeatherUnlocked"
 
 msgid "Weather API-Key OpenWeatherMap"
 msgstr "Wetter API-Key OpenWeatherMap"
@@ -2261,7 +2261,7 @@ msgid "Weather-Icon-Path [ok]>"
 msgstr "Wetter-Icon-Verz. [ok]>"
 
 msgid "WeatherUnlocked"
-msgstr "Wetter frei"
+msgstr "WeatherUnlocked"
 
 msgid "WebIF"
 msgstr "WebIF"
