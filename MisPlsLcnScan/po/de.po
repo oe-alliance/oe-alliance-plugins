@@ -52,7 +52,7 @@ msgid "If you select \"yes\" stored channels at the same orbital position will b
 msgstr "Wenn Sie \"Ja\" auswählen, werden gespeicherte Kanäle an derselben Orbitalposition gelöscht, bevor die aktuelle Suche gestartet wird. Hinweis: Wenn Sie mehr als einen Anbieter suchen, muss dieser auf \"Nein\" gesetzt werden."
 
 msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
-msgstr "Wenn Sie \"Ja\" wählen, werden nur Kanäle gespeichert, die nicht verschlüsselt sindNein\" findet verschlüsselte und unverschlüsselte Kanäle."
+msgstr "Wenn Sie \"Ja\" wählen, werden nur Kanäle gespeichert, die nicht verschlüsselt sind. Nein\" findet verschlüsselte und unverschlüsselte Kanäle."
 
 msgid "Italia MIS 5W"
 msgstr "Italia MIS 5W"
@@ -89,7 +89,7 @@ msgid "Scanning transponders"
 msgstr "Suche Transponder"
 
 msgid "Select the provider you wish to scan."
-msgstr "Wählen Sie den Anbieter aus, den Sie scannen möchten."
+msgstr "Wählen Sie den Anbieter aus, den Sie suchen möchten."
 
 msgid "Starting scanner"
 msgstr "Scanner starten"
