@@ -543,6 +543,11 @@ def main(menuid, **kwargs):
 			return [(_("LED"), startLED, "LED_Giga", None)]
 		else:
 			return []
+	elif getImageDistro() == "openhdf":
+		if menuid == "display":
+			return [(_("Display/LED"), startLED, "LED_Giga", None)]
+		else:
+			return[ ]
 	else:
 		if getImageDistro() in ('teamblue'):
 			if menuid != "frontpanel_menu":
