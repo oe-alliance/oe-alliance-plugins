@@ -66,8 +66,8 @@ msgstr "Δεν βρέθηκε συμβατό tuner"
 msgid "No frequencies to search"
 msgstr "Δεν υπάρχουν συχνότητες για ανίχνευση"
 
-msgid "No valid NIM found for "
-msgstr "Δεν βρέθηκε έγκυρο tuner για το "
+msgid "No valid NIM found for %s"
+msgstr "Δεν βρέθηκε έγκυρο tuner για το %s"
 
 msgid "Only free scan"
 msgstr "Μόνο τα ελεύθερα"
