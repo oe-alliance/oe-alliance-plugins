@@ -66,8 +66,8 @@ msgstr "Geen geschikte tuner gevonden"
 msgid "No frequencies to search"
 msgstr "Geen frequenties om te zoeken"
 
-msgid "No valid NIM found for "
-msgstr "Geen geldige NIM gevonden voor "
+msgid "No valid NIM found for %s"
+msgstr "Geen geldige NIM gevonden voor %s"
 
 msgid "Only free scan"
 msgstr "Alleen vrije scan"

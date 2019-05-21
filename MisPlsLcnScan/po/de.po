@@ -66,8 +66,8 @@ msgstr "Kein kompatibler Tuner gefunden"
 msgid "No frequencies to search"
 msgstr "Keine Frequenzen zu suchen"
 
-msgid "No valid NIM found for "
-msgstr "Kein gültiger Tuner gefunden"
+msgid "No valid NIM found for %s"
+msgstr "Kein gültiger Tuner gefunden %s"
 
 msgid "Only free scan"
 msgstr "Nur frei empfangbare"

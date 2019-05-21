@@ -230,7 +230,7 @@ class MisPlsLcnScan(Screen):
 
 		if current_slotid == -1:
 			print "[MisPlsLcnScan][getFrontend] No valid NIM found"
-			self.showError(_('No valid NIM found for ') + PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["name"])
+			self.showError(_('No valid NIM found for %s') % PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["name"])
 			return
 
 		if not self.rawchannel:
