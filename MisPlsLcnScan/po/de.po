@@ -22,10 +22,10 @@ msgid "Cannot allocate the demuxer."
 msgstr "Demuxer kann nicht zugeordnet werden."
 
 msgid "Cannot free NIM because a recording is in progress"
-msgstr "Tuner kann nicht freigegeben werden, da gerade eine Aufzeichnung läuft"
+msgstr "Tuner belegt, da gerade eine Aufzeichnung läuft"
 
 msgid "Cannot get frontend"
-msgstr "Keinen Tuner gefunden"
+msgstr "Kein Tuner gefunden"
 
 msgid "Cannot get the NIM"
 msgstr "Tuner kann nicht abgerufen werden"
@@ -52,7 +52,7 @@ msgid "If you select \"yes\" stored channels at the same orbital position will b
 msgstr "Wenn Sie \"Ja\" auswählen, werden gespeicherte Kanäle an derselben Orbitalposition gelöscht, bevor die aktuelle Suche gestartet wird. Hinweis: Wenn Sie mehr als einen Anbieter suchen, muss dieser auf \"Nein\" gesetzt werden."
 
 msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
-msgstr "Wenn Sie \"Ja\" wählen, werden nur Kanäle gespeichert, die nicht verschlüsselt sind. Nein\" findet verschlüsselte und unverschlüsselte Kanäle."
+msgstr "Wenn Sie \"Ja\" wählen, werden nur Kanäle gespeichert, die nicht verschlüsselt sind. \"Nein\" findet verschlüsselte und unverschlüsselte Kanäle."
 
 msgid "Italia MIS 5W"
 msgstr "Italia MIS 5W"
