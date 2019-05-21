@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-19 23:17+0200\n"
+"POT-Creation-Date: 2019-05-21 03:05+0200\n"
 "PO-Revision-Date: 2019-05-15 10:29+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -65,8 +65,9 @@ msgstr "No compatible tuner found"
 msgid "No frequencies to search"
 msgstr "No frequencies to search"
 
-msgid "No valid NIM found for "
-msgstr "No valid NIM found for "
+#, python-format
+msgid "No valid NIM found for %s"
+msgstr ""
 
 msgid "Only free scan"
 msgstr "Only free scan"
@@ -102,6 +103,9 @@ msgstr "Tuning %s MHz, IS %s"
 
 #~ msgid "If you select \"yes\" stored channels at the same orbital position will be deleted before starting the current search. Note: if you are scanning more than one provider this must be set to \"no"
 #~ msgstr "If you select \"yes\" stored channels at the same orbital position will be deleted before starting the current search. Note: if you are scanning more than one provider this must be set to \"no"
+
+#~ msgid "No valid NIM found for "
+#~ msgstr "No valid NIM found for "
 
 #~ msgid "TerrestrialScan"
 #~ msgstr "TerrestrialScan"
