@@ -5,7 +5,6 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
-from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.Sources.Progress import Progress
 from Components.Sources.FrontendStatus import FrontendStatus
@@ -16,28 +15,14 @@ from enigma import eDVBResourceManager, eTimer, eDVBDB, eDVBFrontendParameters, 
 
 from providers import PROVIDERS
 
-import os
-import sys
-
 import datetime
 import time
 
-from Tools.Directories import resolveFilename, fileExists
-try:
-	from Tools.Directories import SCOPE_ACTIVE_SKIN
-except:
-	pass
-
 import dvbreader
+from MisPlsLcnScanSkin import downloadBar
 
 class MisPlsLcnScan(Screen):
-	skin = """
-	<screen position="c-300,e-80" size="600,70" flags="wfNoBorder" >
-		<widget name="background" position="0,0" size="600,70" zPosition="-1" />
-		<widget name="action" halign="center" valign="center" position="65,10" size="520,20" font="Regular;18" backgroundColor="#11404040" transparent="1" />
-		<widget name="status" halign="center" valign="center" position="65,35" size="520,20" font="Regular;18" backgroundColor="#11000000" transparent="1" />
-		<widget name="progress" position="65,55" size="520,5" borderWidth="1" backgroundColor="#11000000"/>
-	</screen>"""
+	skin = downloadBar
 
 	def __init__(self, session, args = 0):
 		print "[MisPlsLcnScan][__init__] Starting..."
@@ -46,7 +31,6 @@ class MisPlsLcnScan(Screen):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("MIS/PLS LCN Scan"))
 
-		self["background"] = Pixmap()
 		self["action"] = Label(_("Starting scanner"))
 		self["status"] = Label("")
 		self["progress"] = ProgressBar()
@@ -100,14 +84,6 @@ class MisPlsLcnScan(Screen):
 		self.close()
 
 	def firstExec(self):
-		try:
-			png = resolveFilename(SCOPE_ACTIVE_SKIN, "MisPlsLcnScan/background.png")
-		except:
-			png = None
-		if not png or not fileExists(png):
-			png = "%s/images/background.png" % os.path.dirname(sys.modules[__name__].__file__)
-		self["background"].instance.setPixmapFromFile(png)
-
 		if len(self.scanTransponders) > 0:
 			self["action"].setText(_('Starting search...'))
 			self["status"].setText(_("Scanning transponders"))
