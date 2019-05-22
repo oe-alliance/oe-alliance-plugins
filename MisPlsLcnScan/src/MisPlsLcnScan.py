@@ -120,7 +120,9 @@ class MisPlsLcnScan(Screen):
 
 	def getMisTransponders(self, pos):
 		tlist = []
-		isMultistreamTP = lambda tp: tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2 and (tp[10] > eDVBFrontendParametersSatellite.No_Stream_Id_Filter or tp[12] > eDVBFrontendParametersSatellite.PLS_Default_Gold_Code)
+		def isMultistreamTP(tp):
+			# since we are using Gold sequences there is no need to check the PLS Mode
+			return tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2 and (tp[10] > eDVBFrontendParametersSatellite.No_Stream_Id_Filter or tp[12] > eDVBFrontendParametersSatellite.PLS_Default_Gold_Code)
 		for tp in [tp for tp in nimmanager.getTransponders(pos) if isMultistreamTP(tp)]:
 			if tp[0] == 0:
 				parm = eDVBFrontendParametersSatellite()
