@@ -43,8 +43,6 @@ class MisPlsLcnScan(Screen):
 
 		self.selectedNIM = -1
 		self.FTA_only = config.plugins.MisPlsLcnScan.onlyfree.value
-		self.networkid = 0
-		self.restrict_to_networkid = False
 		if args:
 			pass
 		self.frontend = None
