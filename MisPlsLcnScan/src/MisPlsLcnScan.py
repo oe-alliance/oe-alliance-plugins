@@ -120,30 +120,27 @@ class MisPlsLcnScan(Screen):
 
 	def getMisTransponders(self, pos):
 		tlist = []
-		def isMultistreamTP(tp):
-			# since we are using Gold sequences there is no need to check the PLS Mode
-			return tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2 and (tp[10] > eDVBFrontendParametersSatellite.No_Stream_Id_Filter or tp[12] > eDVBFrontendParametersSatellite.PLS_Default_Gold_Code)
-		list = [tp for tp in nimmanager.getTransponders(pos) if isMultistreamTP(tp)]
-		for x in list:
-			if x[0] == 0:
+		isMultistreamTP = lambda tp: tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2 and (tp[10] > eDVBFrontendParametersSatellite.No_Stream_Id_Filter or tp[12] > eDVBFrontendParametersSatellite.PLS_Default_Gold_Code)
+		for tp in [tp for tp in nimmanager.getTransponders(pos) if isMultistreamTP(tp)]:
+			if tp[0] == 0:
 				parm = eDVBFrontendParametersSatellite()
-				parm.frequency = x[1]
-				parm.symbol_rate = x[2]
-				parm.polarisation = x[3]
-				parm.fec = x[4]
-				parm.inversion = x[7]
+				parm.frequency = tp[1]
+				parm.symbol_rate = tp[2]
+				parm.polarisation = tp[3]
+				parm.fec = tp[4]
+				parm.inversion = tp[7]
 				parm.orbital_position = pos
-				parm.system = x[5]
-				parm.modulation = x[6]
-				parm.rolloff = x[8]
-				parm.pilot = x[9]
-				parm.is_id = x[10]
-				parm.pls_mode = x[11]
-				parm.pls_code = x[12]
-				if hasattr(parm, "t2mi_plp_id") and len(x) > 13:
-					parm.t2mi_plp_id = x[13]
-					if hasattr(parm, "t2mi_pid") and len(x) > 14:
-						parm.t2mi_pid = x[14]
+				parm.system = tp[5]
+				parm.modulation = tp[6]
+				parm.rolloff = tp[8]
+				parm.pilot = tp[9]
+				parm.is_id = tp[10]
+				parm.pls_mode = tp[11]
+				parm.pls_code = tp[12]
+				if hasattr(parm, "t2mi_plp_id") and len(tp) > 13:
+					parm.t2mi_plp_id = tp[13]
+					if hasattr(parm, "t2mi_pid") and len(tp) > 14:
+						parm.t2mi_pid = tp[14]
 				tlist.append(parm)
 		return tlist
 
