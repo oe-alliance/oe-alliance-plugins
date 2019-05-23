@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "DMM/DMM ADV"
+msgstr ""
+
+msgid "ET4000"
+msgstr ""
+
+msgid "ET5000/ET6000"
+msgstr ""
+
+msgid "ET6500/ET9500"
+msgstr ""
+
+msgid "ET9000/ET9100"
+msgstr ""
+
+msgid "ET9200/ET9500"
+msgstr ""
+
+msgid "F1/F3"
+msgstr ""
+
+msgid "HD1100"
+msgstr ""
+
+msgid "HD2400"
+msgstr ""
+
+msgid "Is this remote ok?"
+msgstr "Czy ten pilot jest w porządku?"
+
+msgid "OK"
+msgstr ""
+
+msgid "OdinM9"
+msgstr ""
+
+msgid "Remote"
+msgstr "Pilot"
+
+msgid "Remote Control Code"
+msgstr "Kod zdalnego sterowania"
+
+msgid "Vu"
+msgstr ""
+
+msgid "XP1000"
+msgstr ""
+
+msgid "XP3000"
+msgstr ""
