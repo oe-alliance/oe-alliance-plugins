@@ -161,7 +161,8 @@ class MisPlsLcnScan(Screen):
 			if not nim.isCompatible("DVB-S") or \
 				not nim.isMultistream() or \
 				nim.isFBCLink() or \
-				(hasattr(nim, 'config_mode_dvbs') and nim.config_mode_dvbs or nim.config_mode) in ("loopthrough", "satposdepends", "nothing"):
+				(hasattr(nim, 'config_mode_dvbs') and nim.config_mode_dvbs or nim.config_mode) in ("loopthrough", "satposdepends", "nothing") or \
+				self.transpondercurrent.orbital_position not in [sat[0] for sat in nimmanager.getSatListForNim(nim.slot)]:
 				continue
 			nimList.append(nim.slot)
 
@@ -175,8 +176,6 @@ class MisPlsLcnScan(Screen):
 			print "[MisPlsLcnScan][getFrontend] Cannot retrieve Resource Manager instance"
 			self.showError(_('Cannot retrieve Resource Manager instance'))
 			return
-
-		print "[MisPlsLcnScan][getFrontend] Search NIM for orbital position %d" % self.transpondercurrent.orbital_position
 
 		# stop pip if running
 		if self.session.pipshown:
@@ -208,19 +207,16 @@ class MisPlsLcnScan(Screen):
 		self.frontend = None
 		self.rawchannel = None
 
-		nimList.reverse() # start from the last
+		nimList = [slot for slot in nimList if not self.isRotorSat(slot, self.transpondercurrent.orbital_position)] + [slot for slot in nimList if self.isRotorSat(slot, self.transpondercurrent.orbital_position)] #If we have a choice of dishes try "fixed" before "motorised".
 		for slotid in nimList:
-			sats = nimmanager.getSatListForNim(slotid)
-			for sat in sats:
-				if sat[0] == self.transpondercurrent.orbital_position:
-					if current_slotid == -1:	# mark the first valid slotid in case of no other one is free
-						current_slotid = slotid
+			if current_slotid == -1:	# mark the first valid slotid in case of no other one is free
+				current_slotid = slotid
 
-					self.rawchannel = resmanager.allocateRawChannel(slotid)
-					if self.rawchannel:
-						print "[MisPlsLcnScan][getFrontend] Nim found on slot id %d with sat %s" % (slotid, sat[1])
-						current_slotid = slotid
-						break
+			self.rawchannel = resmanager.allocateRawChannel(slotid)
+			if self.rawchannel:
+				print "[MisPlsLcnScan][getFrontend] Nim found on slot id %d with sat %s" % (slotid, nimmanager.getSatName(self.transpondercurrent.orbital_position))
+				current_slotid = slotid
+				break
 
 			if self.rawchannel:
 				break
@@ -234,17 +230,13 @@ class MisPlsLcnScan(Screen):
 			# if we are here the only possible option is to close the active service
 			if currentlyPlayingNIM in nimList:
 				slotid = currentlyPlayingNIM
-				sats = nimmanager.getSatListForNim(slotid)
-				for sat in sats:
-					if sat[0] == self.transpondercurrent.orbital_position:
-						print "[MisPlsLcnScan][getFrontend] Nim found on slot id %d but it's busy. Stopping active service" % slotid
-						self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
-						self.session.nav.stopService()
-						self.rawchannel = resmanager.allocateRawChannel(slotid)
-						if self.rawchannel:
-							print "[MisPlsLcnScan][getFrontend] The active service was stopped, and the NIM is now free to use."
-							current_slotid = slotid
-						break
+				print "[MisPlsLcnScan][getFrontend] Nim found on slot id %d but it's busy. Stopping active service" % slotid
+				self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
+				self.session.nav.stopService()
+				self.rawchannel = resmanager.allocateRawChannel(slotid)
+				if self.rawchannel:
+					print "[MisPlsLcnScan][getFrontend] The active service was stopped, and the NIM is now free to use."
+					current_slotid = slotid
 
 			if not self.rawchannel:
 				if self.session.nav.RecordTimer.isRecording():
@@ -267,7 +259,7 @@ class MisPlsLcnScan(Screen):
 			print "[MisPlsLcnScan][getFrontend] Fixed dish. Will wait up to %i seconds for tuner lock." % (self.LOCK_TIMEOUT/10)
 
 		self.selectedNIM = current_slotid  # Remember for downloading SI tables
-
+		
 		self.frontend = self.rawchannel.getFrontend()
 		if not self.frontend:
 			print "[MisPlsLcnScan][getFrontend] Cannot get frontend"
