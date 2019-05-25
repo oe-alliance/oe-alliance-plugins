@@ -35,6 +35,7 @@ class MisPlsLcnScan(Screen):
 		self["status"] = Label("")
 		self["progress"] = ProgressBar()
 		self["progress_text"] = Progress()
+		self["tuner_text"] = Label("")
 
 		self["actions"] = ActionMap(["SetupActions"],
 		{
@@ -98,6 +99,7 @@ class MisPlsLcnScan(Screen):
 			self.showError(_('No frequencies to search'))
 
 	def readStreams(self):
+		self["tuner_text"].setText("")
 		if self.index < len(self.scanTransponders):
 			self.transpondercurrent = self.scanTransponders[self.index]
 			self.progresscurrent = self.index
@@ -259,6 +261,8 @@ class MisPlsLcnScan(Screen):
 			print "[MisPlsLcnScan][getFrontend] Fixed dish. Will wait up to %i seconds for tuner lock." % (self.LOCK_TIMEOUT/10)
 
 		self.selectedNIM = current_slotid  # Remember for downloading SI tables
+		
+		self["tuner_text"].setText(chr(ord('A') + current_slotid))
 		
 		self.frontend = self.rawchannel.getFrontend()
 		if not self.frontend:
