@@ -1,0 +1,108 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2019-05-25 11:43+0200\n"
+"Last-Translator: openspateam <openspateam@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca_CA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid " "
+msgstr " "
+
+msgid "Cancel"
+msgstr "Cancel·lar"
+
+msgid "DVB-S"
+msgstr "DVB-S"
+
+msgid "Description"
+msgstr "Descripció"
+
+msgid "Disable"
+msgstr "Desactivar"
+
+msgid "Discover"
+msgstr "Descobrir"
+
+#, python-format
+msgid "IP : %s"
+msgstr "IP : %s"
+
+msgid "Manufacturer"
+msgstr "Fabricant"
+
+msgid "No vtuner found."
+msgstr "Cap vtuner trobat."
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Really close without saving settings?"
+msgstr "Tancar sense guardar els canvis?"
+
+msgid "SAT>IP Client"
+msgstr "Client SAT>IP"
+
+msgid "SAT>IP Client Setup"
+msgstr "Configuració client SAT>IP"
+
+msgid "SAT>IP Client Tuner Setup"
+msgstr "Configuració sintonitzador client SAT>IP"
+
+msgid "SAT>IP Client attached to vtuner."
+msgstr "Client SAT>IP unit a vtuner."
+
+#, python-format
+msgid "SAT>IP SERVER : %s"
+msgstr "SERVIDOR SAT>IP : %s"
+
+msgid "SAT>IP Server : "
+msgstr "Servidor SAT>IP : "
+
+msgid "SAT>IP Tuner Type : "
+msgstr "Tipus sintonitzador SAT>IP : "
+
+#, python-format
+msgid "SAT>IP server discovering for %d seconds..."
+msgstr "Descobrint servidor SAT>IP durant %d segons..."
+
+msgid "SAT>IP server is not detected."
+msgstr "No s'ha detectat cap servidor SAT>IP "
+
+msgid "Save"
+msgstr "Guadar"
+
+msgid "Select"
+msgstr "Sel·leccionar"
+
+msgid "Select tuner and press setup key (Yellow)"
+msgstr "Sel·lecciona sintonitzador i prem botó Ajustos (groc)"
+
+msgid "Server capacity is fulled."
+msgstr "Capacitat del servidor plena."
+
+msgid "Setup"
+msgstr "Ajustos"
+
+msgid "Starting..."
+msgstr "Iniciant..."
+
+#, python-format
+msgid "TUNER TYPE : %s"
+msgstr "TIPUS SINTONITZADOR : %s"
+
+#, python-format
+msgid "TYPE : %s"
+msgstr "TIPUS : %s"
+
+#, python-format
+msgid "VIRTUAL TUNER %s"
+msgstr "SINTONITZADOR VIRTUAL %s"
