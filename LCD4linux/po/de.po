@@ -1107,7 +1107,7 @@ msgid "IP seurity not supported by Box"
 msgstr "IP Sicherheit durch Box nicht unterstützt"
 
 msgid "Idle"
-msgstr "Leerlauf"
+msgstr "Idle"
 
 msgid "Indoor"
 msgstr "Indoor"
