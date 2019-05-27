@@ -92,6 +92,7 @@ class TerrestrialScan(Screen):
 		self["status"] = Label("")
 		self["progress"] = ProgressBar()
 		self["progress_text"] = Progress()
+		self["tuner_text"] = Label("")
 
 		self["actions"] = ActionMap(["SetupActions"],
 		{
@@ -178,6 +179,7 @@ class TerrestrialScan(Screen):
 			self.showError(_('No frequencies to search'))
 
 	def search(self):
+		self["tuner_text"].setText("")
 		if self.index < len(self.scanTransponders):
 			self.system = self.scanTransponders[self.index]["system"]
 			self.bandwidth = self.scanTransponders[self.index]["bandwidth"]
@@ -319,6 +321,8 @@ class TerrestrialScan(Screen):
 		print "[TerrestrialScan][getFrontend] Will wait up to %i seconds for tuner lock." % (self.lockTimeout/10)
 
 		self.selectedNIM = current_slotid # Remember for next iteration
+
+		self["tuner_text"].setText(chr(ord('A') + current_slotid))
 
 		self.frontend = self.rawchannel.getFrontend()
 		if not self.frontend:

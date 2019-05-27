@@ -70,6 +70,7 @@ class MakeBouquet(Screen):
 		self["status"] = Label("")
 		self["progress"] = ProgressBar()
 		self["progress_text"] = Progress()
+		self["tuner_text"] = Label("")
 		self["Frontend"] = FrontendStatus(frontend_source = lambda : self.frontend, update_interval = 100)
 
 		self["actions"] = ActionMap(["SetupActions"],
@@ -126,6 +127,7 @@ class MakeBouquet(Screen):
 			self.showError(_('No transponders to read'))
 
 	def readStreams(self):
+		self["tuner_text"].setText("")
 		if self.index < len(self.transponders_unique):
 			self.transponder = self.transponders_unique[self.tsidOnidKeys[self.index]]
 			self.progresscurrent = self.index
@@ -169,6 +171,8 @@ class MakeBouquet(Screen):
 			return
 
 		print "[MakeBouquet][getFrontend] Will wait up to %i seconds for tuner lock." % (self.lockTimeout/10)
+
+		self["tuner_text"].setText(chr(ord('A') + self.selectedNIM))
 
 		self.frontend = self.rawchannel.getFrontend()
 		if not self.frontend:
