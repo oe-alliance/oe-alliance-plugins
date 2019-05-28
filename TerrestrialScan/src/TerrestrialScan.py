@@ -1,5 +1,5 @@
 # for localized messages
-from . import _
+from . import _, __
 
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -191,7 +191,7 @@ class TerrestrialScan(Screen):
 			self["progress_text"].value = self.progresscurrent
 			self["progress"].setValue(self.progresscurrent)
 			self["action"].setText(_("Tuning %s MHz (ch %s)") % (str(self.frequency/1000000), getChannelNumber(self.frequency, self.uhf_vhf)))
-			self["status"].setText(ngettext("Found %d unique transponder", "Found %d unique transponders", len(self.transponders_unique)) % len(self.transponders_unique))
+			self["status"].setText(__("Found %d unique transponder", "Found %d unique transponders", len(self.transponders_unique)) % len(self.transponders_unique))
 			self.index += 1
 			if self.frequency in self.transponders_found or self.system == eDVBFrontendParametersTerrestrial.System_DVB_T2 and self.isT2tuner == False:
 				print "[TerrestrialScan][Search] Skipping T2 search of %s MHz (ch %s)" % (str(self.frequency/1000000), getChannelNumber(self.frequency, self.uhf_vhf))
