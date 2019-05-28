@@ -1,3 +1,6 @@
+# for localized messages
+from . import _
+
 PROVIDERS = {
 	"fransat_5W": {
 		"name": _("Fransat MIS 5W"),
