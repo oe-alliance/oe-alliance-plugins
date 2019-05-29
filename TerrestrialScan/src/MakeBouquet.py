@@ -19,24 +19,13 @@ import sys
 import datetime
 import time
 
-from Tools.Directories import resolveFilename, fileExists
-try:
-	from Tools.Directories import SCOPE_ACTIVE_SKIN
-except:
-	pass
-
 from TerrestrialScan import setParams, setParamsFe
 
 import dvbreader
+from TerrestrialScanSkin import downloadBar
 
 class MakeBouquet(Screen):
-	skin = """
-	<screen position="c-300,e-80" size="600,70" flags="wfNoBorder" >
-		<widget name="background" position="0,0" size="600,70" zPosition="-1" />
-		<widget name="action" halign="center" valign="center" position="65,10" size="520,20" font="Regular;18" backgroundColor="#11404040" transparent="1" />
-		<widget name="status" halign="center" valign="center" position="65,35" size="520,20" font="Regular;18" backgroundColor="#11000000" transparent="1" />
-		<widget name="progress" position="65,55" size="520,5" borderWidth="1" backgroundColor="#11000000"/>
-	</screen>"""
+	skin = downloadBar
 
 	def __init__(self, session, args = 0):
 		print "[MakeBouquet][__init__] Starting..."
@@ -103,14 +92,6 @@ class MakeBouquet(Screen):
 		self.onFirstExecBegin.append(self.firstExec)
 
 	def firstExec(self):
-		try:
-			png = resolveFilename(SCOPE_ACTIVE_SKIN, "terrestrialscan/background.png")
-		except:
-			png = None
-		if not png or not fileExists(png):
-			png = "%s/images/background.png" % os.path.dirname(sys.modules[__name__].__file__)
-		self["background"].instance.setPixmapFromFile(png)
-
 		if len(self.transponders_unique) > 0:
 			self["action"].setText(_('Making bouquet...'))
 			self["status"].setText(_("Reading streams"))
