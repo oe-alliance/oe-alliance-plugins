@@ -358,6 +358,7 @@ class TerrestrialScan(Screen):
 		self.getCurrentTsidOnid()
 		if self.tsid is not None and self.onid is not None:
 			print "[TerrestrialScan][tsidOnidWaitABM] tsid & onid found", self.tsid, self.onid
+			self.signalQualityCounter = 0
 			self.signalQualityWait()
 			return
 
