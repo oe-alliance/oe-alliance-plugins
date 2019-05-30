@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-21 03:05+0200\n"
+"POT-Creation-Date: 2019-05-30 14:28+0200\n"
 "PO-Revision-Date: 2019-05-15 10:29+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -40,9 +40,11 @@ msgstr ""
 
 #, python-format
 msgid "Found %d transponder"
-msgid_plural "Found %d transponders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+
+#, python-format
+msgid "Found %d transponders"
+msgstr ""
 
 msgid "Fransat MIS 5W"
 msgstr ""
