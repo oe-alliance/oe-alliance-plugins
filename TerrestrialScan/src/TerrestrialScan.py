@@ -172,7 +172,7 @@ class TerrestrialScan(Screen):
 			self["progress_text"].value = self.progresscurrent
 			self["progress"].setValue(self.progresscurrent)
 			self["action"].setText(_("Tuning %s MHz (ch %s)") % (str(self.frequency/1000000), getChannelNumber(self.frequency, self.uhf_vhf)))
-			self["status"].setText(ngettext("Found %d unique transponder", "Found %d unique transponders", len(self.transponders_unique)) % len(self.transponders_unique))
+			self["status"].setText((len(self.transponders_unique) == 1 and _("Found %d unique transponder") or _("Found %d unique transponders")) % len(self.transponders_unique))
 			self.index += 1
 			if self.frequency in self.transponders_found or self.system == eDVBFrontendParametersTerrestrial.System_DVB_T2 and self.isT2tuner == False:
 				print "[TerrestrialScan][Search] Skipping T2 search of %s MHz (ch %s)" % (str(self.frequency/1000000), getChannelNumber(self.frequency, self.uhf_vhf))
