@@ -106,7 +106,8 @@ class MisPlsLcnScan(Screen):
 			self["progress_text"].value = self.progresscurrent
 			self["progress"].setValue(self.progresscurrent)
 			self["action"].setText(_("Tuning %s MHz, IS %s") % (str(self.transpondercurrent.frequency/1000), str(self.transpondercurrent.is_id)))
-			self["status"].setText(__("Found %d transponder", "Found %d transponders", len(self.transponders_correct_onid)) % len(self.transponders_correct_onid))
+#			self["status"].setText(__("Found %d transponder", "Found %d transponders", len(self.transponders_correct_onid)) % len(self.transponders_correct_onid))
+			self["status"].setText(len(self.transponders_correct_onid) == 1 and _("Found %d transponder") % len(self.transponders_correct_onid) or _("Found %d transponders") % len(self.transponders_correct_onid))
 			self.index += 1
 			self.searchtimer = eTimer()
 			self.searchtimer.callback.append(self.getFrontend)
