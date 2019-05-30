@@ -1,5 +1,5 @@
 # for localized messages
-from . import _, __
+from . import _
 
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -106,7 +106,7 @@ class MisPlsLcnScan(Screen):
 			self["progress_text"].value = self.progresscurrent
 			self["progress"].setValue(self.progresscurrent)
 			self["action"].setText(_("Tuning %s MHz, IS %s") % (str(self.transpondercurrent.frequency/1000), str(self.transpondercurrent.is_id)))
-			self["status"].setText(__("Found %d transponder", "Found %d transponders", len(self.transponders_correct_onid)) % len(self.transponders_correct_onid))
+			self["status"].setText(ngettext("Found %d transponder", "Found %d transponders", len(self.transponders_correct_onid)) % len(self.transponders_correct_onid))
 			self.index += 1
 			self.searchtimer = eTimer()
 			self.searchtimer.callback.append(self.getFrontend)
