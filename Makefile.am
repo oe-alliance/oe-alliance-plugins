@@ -250,6 +250,10 @@ if H9COMBO
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if H10
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if HD60
 SUBDIRS += MultiTransCodingSetup
 endif
