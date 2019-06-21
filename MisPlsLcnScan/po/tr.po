@@ -18,87 +18,87 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Cannot allocate the demuxer."
-msgstr ""
+msgstr "Demuxer bulunamadi"
 
 msgid "Cannot free NIM because a recording is in progress"
-msgstr ""
+msgstr "Kayit yapiliyor, bos Tuner mevcut degil"
 
 msgid "Cannot get frontend"
-msgstr ""
+msgstr "Frontend alinamadi"
 
 msgid "Cannot get the NIM"
-msgstr ""
+msgstr "Tuner alinamadi"
 
 msgid "Cannot retrieve Resource Manager instance"
-msgstr ""
+msgstr "Kaynak örnegi alinamadi"
 
 msgid "Clear before scan"
-msgstr ""
+msgstr "Taramadan önce temizle (sil)"
 
 msgid "Exit"
-msgstr ""
+msgstr "Kapat"
 
 #, python-format
 msgid "Found %d transponder"
-msgstr ""
+msgstr "%d transponder bulundu"
 
 #, python-format
 msgid "Found %d transponders"
-msgstr ""
+msgstr "%d transponder bulundu"
 
 msgid "Fransat MIS 5W"
-msgstr ""
+msgstr "Fransat MIS 5W"
 
 msgid "If you select \"yes\" stored channels at the same orbital position will be deleted before starting the current search. Note: if you are scanning more than one provider this must be set to \"no\"."
-msgstr ""
+msgstr "\"evet\" secerseniz mevcut aramaya başlamadan önce aynı yörünge pozisyonunda kayıtlı kanallar silinir. Not: Birden fazla sağlayıcı tarıyorsanız, bunun \"hayır\" olarak ayarlanması gerekir."
 
 msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
-msgstr ""
+msgstr "\"Evet\" seçerseniz, tarama yalnızca şifresiz kanalları kaydeder; \"hayir\" şifreli ve şifresiz kanalları bulur."
 
 msgid "Italia MIS 5W"
-msgstr ""
+msgstr "Italia MIS 5W"
 
 msgid "MIS/PLS LCN Scan"
-msgstr ""
+msgstr "MIS/PLS LCN arama"
 
 msgid "No compatible tuner found"
-msgstr ""
+msgstr "uyumlu Tuner bulunamadi"
 
 msgid "No frequencies to search"
-msgstr ""
+msgstr "Aranacak Frekans yok"
 
 #, python-format
 msgid "No valid NIM found for %s"
-msgstr ""
+msgstr "%s için geçerli bir Tuner bulunamadı"
 
 msgid "Only free scan"
-msgstr ""
+msgstr "Yalnizca sifresiz arama"
 
 msgid "Provider"
-msgstr ""
+msgstr "Sağlayici"
 
 #, python-format
 msgid "Reading SI tables on %s MHz, IS %s"
-msgstr ""
+msgstr "%s MHz'de SI tabloları okunuyor, %s IS"
 
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Kaydetmeden cikmak istediginize eminmisiniz?"
 
 msgid "Scan"
-msgstr ""
+msgstr "Arama"
 
 msgid "Scanning transponders"
-msgstr ""
+msgstr "Transponder araniyor"
 
 msgid "Select the provider you wish to scan."
-msgstr ""
+msgstr "Taramak istediğiniz sağlayıcıyı seçin"
 
 msgid "Starting scanner"
-msgstr ""
+msgstr "Tarayiciyi baslat"
 
 msgid "Starting search..."
-msgstr ""
+msgstr "Aramayi baslat..."
 
 #, python-format
 msgid "Tuning %s MHz, IS %s"
-msgstr ""
+msgstr "%s MHz ayarlama, IS %s"
