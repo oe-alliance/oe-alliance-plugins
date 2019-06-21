@@ -1,0 +1,187 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2019-06-21 21:10+0200\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Schimmelreiter\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.2.3\n"
+
+msgid "1.0 Mbps"
+msgstr "1.0 Mbps"
+
+msgid "1.2 Mbps"
+msgstr "1.2 Mbps"
+
+msgid "1.5 Mbps"
+msgstr "1.5 Mbps"
+
+msgid "100 kbps"
+msgstr "100 kbps"
+
+msgid "160x120"
+msgstr "160x120"
+
+msgid "16x9"
+msgstr "16x9"
+
+msgid "2.0 Mbps"
+msgstr "2.0 Mbps"
+
+msgid "2.5 Mbps"
+msgstr "2.5 Mbps"
+
+msgid "23.976 fps"
+msgstr "23.976 fps"
+
+msgid "24 fps"
+msgstr "24 fps"
+
+msgid "25 fps"
+msgstr "25 fps"
+
+msgid "3.0 Mbps"
+msgstr "3.0 Mbps"
+
+msgid "3.5 Mbps"
+msgstr "3.5 Mbps"
+
+msgid "30 fps"
+msgstr "30 fps"
+
+msgid "300 kbps"
+msgstr "300 kbps"
+
+msgid "320x240"
+msgstr "320x240"
+
+msgid "4.0 Mbps"
+msgstr "4.0 Mbps"
+
+msgid "480p"
+msgstr "480p"
+
+msgid "4x3"
+msgstr "4x3"
+
+msgid "5.0 Mbps"
+msgstr "5.0 Mbps"
+
+msgid "500 kbps"
+msgstr "500 kbps"
+
+msgid "576p"
+msgstr "576p"
+
+msgid "720p"
+msgstr "720p"
+
+msgid "800 kbps"
+msgstr "800 kbps"
+
+msgid "Aspect Ratio"
+msgstr "En boy orani"
+
+msgid "Auto"
+msgstr "Oto"
+
+msgid "Bitrate in bits"
+msgstr "Bit hizi bits olarak"
+
+msgid "Exit"
+msgstr "Cikis"
+
+msgid "Framerate"
+msgstr "Frame (kare) hizi"
+
+msgid "H.264"
+msgstr "H2.64"
+
+msgid "H.265"
+msgstr "H.265"
+
+msgid "Interlaced"
+msgstr "Interlaced"
+
+msgid "Max"
+msgstr "Maksimum"
+
+msgid "Min"
+msgstr "Asgari"
+
+msgid "Multi device transcoding setup"
+msgstr "Coklu Multi-Transcoding cihaz ayari"
+
+msgid "Multi-Transcoding Setup"
+msgstr "Coklu Multi-Transcoding ayari"
+
+msgid "No"
+msgstr "Hayir"
+
+msgid "Really close without saving settings?"
+msgstr "Ayarlari kaydetmeden kapatmaya eminmisiniz?"
+
+msgid "Resolution"
+msgstr "Cözünürlük"
+
+msgid "Save"
+msgstr "Kaydet"
+
+msgid "This model does not support transcoding."
+msgstr "Bu Model Transcoding desteklemiyor"
+
+msgid ""
+"To use transcoding You can build URL for VLC by Yourself\n"
+"\n"
+msgstr ""
+"Transcoding kullaniminda VLC icin URL olusturabilirsiniz\n"
+"\n"
+
+msgid "Transcoding Setup"
+msgstr "Transcoding ayarlari"
+
+msgid ""
+"Transcoding from HDMI-IN e.x:\n"
+"\n"
+msgstr "HDMI-IN `den e.x: Transcoding\n"
+
+msgid "Video codec"
+msgstr "Vidyo codec bileseni"
+
+msgid "Yes"
+msgstr "Evet"
+
+msgid "disable"
+msgstr "Devre disi"
+
+msgid "enable"
+msgstr "Etkinlestirme"
+
+msgid "Encoder Aspect Ratio"
+msgstr "Enkoder Boy Oranı"
+
+msgid "Encoder Bitrate"
+msgstr "Enkoder Bit hizi"
+
+msgid "Encoder Framerate"
+msgstr "Enkoder Frame (kare) hizi"
+
+msgid "Encoder Interlaced"
+msgstr "Enkoder Interlaced"
+
+msgid "Encoder Resolution"
+msgstr "Enkoder cözünürlük"
+
+msgid "Setup your timezone."
+msgstr "Saat diliminizi ayarlayin"
+
