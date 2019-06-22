@@ -1,0 +1,122 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2016-05-07 13:07+0200\n"
+"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+msgid "Adress:"
+msgstr "Adres:"
+
+msgid "Checking for alternatives"
+msgstr "Alternatiflerin kontrol edilmesi"
+
+msgid "Close"
+msgstr "Kapat"
+
+msgid "Connection to remote IP ok"
+msgstr "Uzaktaki STB'ye bağlantı OK"
+
+msgid "Convert remote channel list for streaming"
+msgstr "Dış buketleri içe aktar"
+
+msgid "Could not connect to remote IP"
+msgstr "Uzak STB'ye bağlantı başarısız"
+
+msgid "Download"
+msgstr "Indir"
+
+msgid "Download from remote failed"
+msgstr "Kanal listesi indirilemedi"
+
+msgid "Downloading remote services"
+msgstr "Kanal listesini indirin"
+
+msgid "Enter address"
+msgstr "Adresi girin"
+
+msgid "Enter password"
+msgstr "Şifrenizi girin"
+
+msgid "Enter username"
+msgstr "Kullanıcı adını girin"
+
+msgid "Exit"
+msgstr "Kapat"
+
+msgid "FTP Server Editor"
+msgstr "Uzaktaki STB'yi yapılandır"
+
+#, python-format
+msgid "FTP reading alternatives %d of %d"
+msgstr "FTP alternatifleri okuyor %d of %d"
+
+#, python-format
+msgid "FTP reading bouquets %d of %d"
+msgstr "FTP Buket okudu %d von %d"
+
+msgid "FTPport:"
+msgstr "FTP Port:"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Invert"
+msgstr "Evirmek"
+
+msgid "Keyboard"
+msgstr "Klavye"
+
+msgid "Make your selection"
+msgstr "Lütfen seçiniz"
+
+msgid "No bouquets selected"
+msgstr "Favori listesi seçilmedi"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Passive:"
+msgstr "Pasif:"
+
+msgid "Password:"
+msgstr "Sifre:"
+
+msgid "Remote channel stream converter"
+msgstr "Dış buketleri içe aktar"
+
+msgid "Select a remote server IP first"
+msgstr "İlk önce uzak STB'yi yapılandırın/seçin"
+
+msgid "Select bouquets to convert"
+msgstr "Dönüşüm için buketler seçin"
+
+msgid "Set server IP"
+msgstr "Sunucu IP'sini ayarla"
+
+msgid "Telnetport:"
+msgstr "Telnet Port:"
+
+msgid "Testing remote connection"
+msgstr "Bağlantıyı test et"
+
+msgid "Use IP"
+msgstr "IP"
+
+msgid "Use address"
+msgstr "Adres"
+
+msgid "Username:"
+msgstr "Kullanıcı adı:"
+
+msgid "remote of"
+msgstr ""
