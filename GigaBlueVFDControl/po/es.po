@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:27+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2019-06-24 13:27+0200\n"
+"Last-Translator: JR <openspateam@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgid "Brightness"
 msgstr "Brillo"
 
 msgid "Brightness Standby"
-msgstr "Brillo en modo de espera"
+msgstr "Brillo en reposo"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -38,19 +38,19 @@ msgid "Channel number with leading zeros"
 msgstr "Número de canal con ceros a la izquierda"
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
+msgstr "Número de canal - Reloj en reposo"
 
 msgid "Channelnumber in Standby off"
-msgstr ""
+msgstr "Número de canal - Apagado en reposo"
 
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
+msgstr "Número de canal/Reloj - Reloj en reposo"
 
 msgid "Clock always"
-msgstr "Mostrar hora siempre"
+msgstr "Mostrar reloj siempre"
 
 msgid "Display/LED"
-msgstr "LCD/LED"
+msgstr "Display/LED"
 
 msgid "Enable led"
 msgstr "Activar LED"
@@ -60,10 +60,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Led Deep Standby"
-msgstr "Colo del LED con deco apagado"
+msgstr "Color del LED en reposo profundo"
 
 msgid "Led state Deep Standby"
-msgstr "Colo del LED con deco apagado"
+msgstr "Color del LED en reposo profundo"
 
 msgid "Led state HDD /dev/sda active"
 msgstr "Color del LED con el HDD /dev/sda activo"
@@ -72,13 +72,13 @@ msgid "Led state HDD /dev/sdb active"
 msgstr "Color del LED con el HDD /dev/sdb activo"
 
 msgid "Led state RUN"
-msgstr "Color del LED con deco encendido"
+msgstr "Color del LED en funcionamiento"
 
 msgid "Led state Record"
 msgstr "Color del LED grabando"
 
 msgid "Led state Standby"
-msgstr "Color del LED en modo de espera"
+msgstr "Color del LED en reposo"
 
 msgid "No"
 msgstr "No"
@@ -96,10 +96,10 @@ msgid "Save"
 msgstr "Guardar"
 
 msgid "Show clock in Deep Standby"
-msgstr "Mostrar hora con el deco apagado"
+msgstr "Mostrar reloj en reposo profundo"
 
 msgid "Show on VFD"
-msgstr "Mostrar en LCD"
+msgstr "Mostrar en VFD"
 
 msgid "Time mode"
 msgstr "Formato horario"
