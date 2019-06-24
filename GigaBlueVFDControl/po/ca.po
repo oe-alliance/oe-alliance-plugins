@@ -18,96 +18,96 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 
 msgid "Always off"
-msgstr ""
+msgstr "Sempre apagat"
 
 msgid "Blink Record Led"
-msgstr ""
+msgstr "Led parpadejant durant gravació"
 
 msgid "Blue"
-msgstr ""
+msgstr "Blau"
 
 msgid "Brightness"
-msgstr ""
+msgstr "Brillantor"
 
 msgid "Brightness Standby"
-msgstr ""
+msgstr "Brillantor en repòs"
 
 #
 msgid "Cancel"
 msgstr "Cancel·lar"
 
 msgid "Channel number with leading zeros"
-msgstr ""
+msgstr "Número de canal amb zeros a l'esquerra"
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
+msgstr "Número de canal - Hora en repòs"
 
 msgid "Channelnumber in Standby off"
-msgstr ""
+msgstr "Número de canal - Apagat en repòs"
 
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
+msgstr "Número de canal/Hora - Hora en repòs"
 
 msgid "Clock always"
-msgstr ""
+msgstr "Sempre hora"
 
 msgid "Display/LED"
 msgstr ""
 
 msgid "Enable led"
-msgstr ""
+msgstr "Activar led"
 
 msgid "LED"
 msgstr ""
 
 msgid "Led Deep Standby"
-msgstr ""
+msgstr "Color led en repòs profund"
 
 msgid "Led state Deep Standby"
-msgstr ""
+msgstr "Color led en repòs profund"
 
 msgid "Led state HDD /dev/sda active"
-msgstr ""
+msgstr "Color led si està actiu el HDD /dev/sda"
 
 msgid "Led state HDD /dev/sdb active"
-msgstr ""
+msgstr "Color led si està actiu el HDD /dev/sdb"
 
 msgid "Led state RUN"
-msgstr ""
+msgstr "Color led en funcionament"
 
 msgid "Led state Record"
-msgstr ""
+msgstr "Color led gravant"
 
 msgid "Led state Standby"
-msgstr ""
+msgstr "Color led en repòs"
 
 msgid "No"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Cap"
 
 msgid "Purple"
-msgstr ""
+msgstr "Violeta"
 
 msgid "Red"
-msgstr ""
+msgstr "Vermell"
 
 #
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 msgid "Show clock in Deep Standby"
-msgstr ""
+msgstr "Mostrar hora en repòs profund"
 
 msgid "Show on VFD"
-msgstr ""
+msgstr "Mostrar en VFD"
 
 msgid "Time mode"
-msgstr ""
+msgstr "Format horari"
 
 msgid "Update Date/Time"
-msgstr ""
+msgstr "Actualitzar Data/Hora"
 
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
