@@ -41,7 +41,7 @@ msgstr "Model adı bulunamadı."
 
 #
 msgid "Close"
-msgstr "Kapa"
+msgstr "Kapat"
 
 msgid "Do you want to remove binary data?"
 msgstr "Binary bilgisini kaldırmak istiyor musunuz?"
@@ -56,7 +56,7 @@ msgid "FPGA"
 msgstr "FPGA"
 
 msgid "Fail to upgrade!! Retry!!"
-msgstr "Yükseltme hatası!! Tekrar dene!!"
+msgstr "Yükleme hatası!! Tekrar dene!!"
 
 #, python-format
 msgid ""
@@ -69,13 +69,13 @@ msgstr ""
 "md5[%s]"
 
 msgid "Firmware"
-msgstr "Bellenim"
+msgstr "Yazılım"
 
 msgid "Firmware Upgrade"
-msgstr "Bellenim Yükseltme"
+msgstr "Yazılım Yükseltme"
 
 msgid "Firmware does not exist."
-msgstr "Bellenim yok."
+msgstr "Yazılım mevcut değil."
 
 msgid "Front Processor"
 msgstr "Ön İşlemci"
@@ -93,10 +93,10 @@ msgid "Upgrade"
 msgstr "Yükselt"
 
 msgid "Upgrade Firmware.."
-msgstr ""
+msgstr "Yazılım güncelle"
 
 msgid "VFD Controller"
-msgstr ""
+msgstr "VFD Kontrol Cihazı"
 
 msgid "You choose the incorrect file. "
-msgstr ""
+msgstr "Yanlış dosyayı seçtiniz"
