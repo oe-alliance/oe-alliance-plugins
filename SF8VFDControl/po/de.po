@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2018-10-14 21:50+0200\n"
-"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
+"Last-Translator: Manfred Aabye <kucukogul@gmail.com>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgid "Always off"
 msgstr "Immer aus"
 
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Schließen"
 
 msgid "Channelnumber in Standby Clock"
 msgstr "Kanalnummer im Standby Uhr"
@@ -36,13 +36,13 @@ msgid "Save"
 msgstr "Speichern"
 
 msgid "Show on VFD"
-msgstr "Im VFD anzeigen"
+msgstr "Auf VFD anzeigen"
 
 msgid "Time mode"
 msgstr "Zeit Modus"
 
 msgid "Update Date/Time"
-msgstr "Datum/Uhrzeit aktuallisieren"
+msgstr "Datum/Uhrzeit aktualisieren"
 
 msgid "VFD_SF8"
 msgstr "VFD_SF8"
