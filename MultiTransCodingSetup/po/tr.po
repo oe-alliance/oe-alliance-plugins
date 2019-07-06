@@ -90,19 +90,19 @@ msgid "800 kbps"
 msgstr "800 kbps"
 
 msgid "Aspect Ratio"
-msgstr "En boy orani"
+msgstr "En ve boy orani"
 
 msgid "Auto"
 msgstr "Oto"
 
 msgid "Bitrate in bits"
-msgstr "Bit hizi bits olarak"
+msgstr "Bit Hızı bits olarak"
 
 msgid "Exit"
-msgstr "Cikis"
+msgstr "Çıkış"
 
 msgid "Framerate"
-msgstr "Frame (kare) hizi"
+msgstr "Frame (kare) Hızı"
 
 msgid "H.264"
 msgstr "H2.64"
@@ -111,7 +111,7 @@ msgid "H.265"
 msgstr "H.265"
 
 msgid "Interlaced"
-msgstr "Interlaced"
+msgstr "Üst üste bindirilmiş"
 
 msgid "Max"
 msgstr "Maksimum"
@@ -120,19 +120,19 @@ msgid "Min"
 msgstr "Asgari"
 
 msgid "Multi device transcoding setup"
-msgstr "Coklu Multi-Transcoding cihaz ayari"
+msgstr "Çoklu Multi-Transcoding cihaz ayarı"
 
 msgid "Multi-Transcoding Setup"
-msgstr "Coklu Multi-Transcoding ayari"
+msgstr "Coklu Multi-Transcoding ayarı"
 
 msgid "No"
-msgstr "Hayir"
+msgstr "Hayır"
 
 msgid "Really close without saving settings?"
 msgstr "Ayarlari kaydetmeden kapatmaya eminmisiniz?"
 
 msgid "Resolution"
-msgstr "Cözünürlük"
+msgstr "Çözünürlük"
 
 msgid "Save"
 msgstr "Kaydet"
@@ -148,7 +148,7 @@ msgstr ""
 "\n"
 
 msgid "Transcoding Setup"
-msgstr "Transcoding ayarlari"
+msgstr "Transcoding ayarları"
 
 msgid ""
 "Transcoding from HDMI-IN e.x:\n"
@@ -162,26 +162,26 @@ msgid "Yes"
 msgstr "Evet"
 
 msgid "disable"
-msgstr "Devre disi"
+msgstr "Devre dışı"
 
 msgid "enable"
-msgstr "Etkinlestirme"
+msgstr "Etkinleştirme"
 
 msgid "Encoder Aspect Ratio"
 msgstr "Enkoder Boy Oranı"
 
 msgid "Encoder Bitrate"
-msgstr "Enkoder Bit hizi"
+msgstr "Enkoder Bit Hızı"
 
 msgid "Encoder Framerate"
-msgstr "Enkoder Frame (kare) hizi"
+msgstr "Enkoder Frame (kare) Hızı"
 
 msgid "Encoder Interlaced"
-msgstr "Enkoder Interlaced"
+msgstr "Enkoder üst üste bindirilmiş"
 
 msgid "Encoder Resolution"
-msgstr "Enkoder cözünürlük"
+msgstr "Enkoder çözünürlük"
 
 msgid "Setup your timezone."
-msgstr "Saat diliminizi ayarlayin"
+msgstr "Saat diliminizi ayarlayın."
 
