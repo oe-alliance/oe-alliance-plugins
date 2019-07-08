@@ -56,31 +56,31 @@ msgid "- Alignment"
 msgstr "- Ausrichtung"
 
 msgid "- Analog Clock"
-msgstr "- Analog Uhr"
+msgstr "- Analoguhr"
 
 msgid "- Background Color"
-msgstr "- Hintergrund Farbe"
+msgstr "- Hintergrundfarbe"
 
 msgid "- Background/Transparency"
 msgstr "- Hintergrund/Transparenz"
 
 msgid "- Backlight Off [disable set Off=On]"
-msgstr "- Hintergrundbeleuchtung Aus [deaktiv bei Aus=Ein]"
+msgstr "- Hintergrundbeleuchtung aus [inaktiv bei aus=ein]"
 
 msgid "- Backlight On"
-msgstr "- Hintergrundbeleuchtung Ein"
+msgstr "- Hintergrundbeleuchtung ein"
 
 msgid "- Backlight Weekend Off [disable set Off=On]"
-msgstr "- Hintergrundbeleuchtung Wochenende Aus [deaktiv bei Aus=Ein]"
+msgstr "- Hintergrundbeleuchtung am Wochenende aus [inaktiv bei aus=ein]"
 
 msgid "- Backlight Weekend On"
-msgstr "- Hintergrundbeleuchtung Wochenende Ein"
+msgstr "- Hintergrundbeleuchtung am Wochenende ein"
 
 msgid "- Bar Range Max"
-msgstr "- Bar Bereich Max"
+msgstr "- Bar-Bereich Max"
 
 msgid "- Bar Range Min"
-msgstr "- Bar Bereich Min"
+msgstr "- Bar-Bereich Min"
 
 msgid "- Base"
 msgstr "- Basis"
@@ -89,10 +89,10 @@ msgid "- Border"
 msgstr "- Umrandung"
 
 msgid "- CPU"
-msgstr "- CPU"
+msgstr "- Prozessor"
 
 msgid "- Caption Color"
-msgstr "- Beschriftung Farbe"
+msgstr "- Beschriftungsfarbe"
 
 msgid "- Clear Key"
 msgstr "- Schlüssel löschen"
@@ -122,37 +122,37 @@ msgid "- Color Text"
 msgstr "- Textfarbe"
 
 msgid "- Current Day Background Color"
-msgstr "- Aktueller Tag Hintergrund Farbe"
+msgstr "- Hintergrundfarbe für aktuellen Tag"
 
 msgid "- Cut Height [disable = 0]"
-msgstr "- Ausschneiden Höhe [deaktiviert = 0]"
+msgstr "- Höhe beschneiden [deaktiviert = 0]"
 
 msgid "- Cut Width [disable = 0]"
-msgstr "- Ausschneiden Breite [deaktiviert = 0]"
+msgstr "- Breite beschneiden [deaktiviert = 0]"
 
 msgid "- Cut from X"
-msgstr "- Ausschneiden ab X"
+msgstr "- Beschneiden ab X"
 
 msgid "- Cut from Y"
-msgstr "- Ausschneiden ab Y"
+msgstr "- Beschneiden ab Y"
 
 msgid "- Default Cover [ok]>"
-msgstr "- Standard Cover [ok]>"
+msgstr "- Standardcover [ok]>"
 
 msgid "- Device Name"
-msgstr "- Geräte Name"
+msgstr "- Gerätename"
 
 msgid "- Download Cover"
-msgstr "- Download Cover"
+msgstr "- Cover herunterladen"
 
 msgid "- Download Type"
-msgstr "- Download Type"
+msgstr "- Downloadtyp"
 
 msgid "- Extra Color Chill"
-msgstr "- Extra Farbe Gefühlte"
+msgstr "- Extrafarbe Chill"
 
 msgid "- Extra Color City"
-msgstr "- Extra Farbe Stadt"
+msgstr "- Extrafarbe Stadt"
 
 msgid "- Extra Zoom"
 msgstr "- Extra Zoom"
@@ -167,31 +167,31 @@ msgid "- File or Path [ok]>"
 msgstr "- Datei oder Verzeichnis [ok]>"
 
 msgid "- Font"
-msgstr "- Zeichensatz"
+msgstr "- Schriftart"
 
 msgid "- Font Size"
-msgstr "- Zeichen Größe"
+msgstr "- Schriftgröße"
 
 msgid "- Full Screen"
 msgstr "- Vollbild"
 
 msgid "- Google API-Key console.developers.google.com/apis"
-msgstr "- Google API-Key console.developers.google.com/apis"
+msgstr "- Google-API-Key console.developers.google.com/apis"
 
 msgid "- Gradient"
 msgstr "- Verlauf"
 
 msgid "- HTTP Height"
-msgstr "- HTTP Höhe"
+msgstr "- HTTP-Höhe"
 
 msgid "- HTTP Width"
-msgstr "- HTTP Breite"
+msgstr "- HTTP-Breite"
 
 msgid "- LCD 1 Background Color"
-msgstr "- LCD 1 Hintergrund Farbe"
+msgstr "- LCD 1 Hintergrundfarbe"
 
 msgid "- LCD 1 Background-Picture [ok]>"
-msgstr "- LCD 1 Hintergrund-Bild [ok]>"
+msgstr "- LCD 1 Hintergrundbild [ok]>"
 
 msgid "- LCD 1 Brightness"
 msgstr "- LCD 1 Helligkeit"
@@ -206,10 +206,10 @@ msgid "- LCD 1 Rotate"
 msgstr "- LCD 1 Drehung"
 
 msgid "- LCD 2 Background Color"
-msgstr "- LCD 2 Hintergrund Farbe"
+msgstr "- LCD 2 Hintergrundfarbe"
 
 msgid "- LCD 2 Background-Picture [ok]>"
-msgstr "- LCD 2 Hintergrund-Bild [ok]>"
+msgstr "- LCD 2 Hintergrundbild [ok]>"
 
 msgid "- LCD 2 Brightness"
 msgstr "- LCD 2 Helligkeit"
@@ -224,10 +224,10 @@ msgid "- LCD 2 Rotate"
 msgstr "- LCD 2 Drehung"
 
 msgid "- LCD 3 Background Color"
-msgstr "- LCD 3 Hintergrund Farbe"
+msgstr "- LCD 3 Hintergrundfarbe"
 
 msgid "- LCD 3 Background-Picture [ok]>"
-msgstr "- LCD 3 Hintergrund-Bild [ok]>"
+msgstr "- LCD 3 Hintergrundbild [ok]>"
 
 msgid "- LCD 3 Brightness"
 msgstr "- LCD 3 Helligkeit"
@@ -257,7 +257,7 @@ msgid "- Lines"
 msgstr "- Zeilen"
 
 msgid "- Mail Konto"
-msgstr "- Mail Konto"
+msgstr "- Mail-Konto"
 
 msgid "- Module"
 msgstr "- Modul"
@@ -269,34 +269,34 @@ msgid "- Name"
 msgstr "- Name"
 
 msgid "- OSD Size"
-msgstr "- OSD Größe"
+msgstr "- OSD-Größe"
 
 msgid "- Online Name:Address"
 msgstr "- Online Name:Adresse"
 
 msgid "- Picon Cache Path [ok]>"
-msgstr "- Picon Cache Verz. [ok]>"
+msgstr "- Picon-Cache-Verz. [ok]>"
 
 msgid "- Picon First"
 msgstr "- Picon zuerst"
 
 msgid "- Picon Path 2 [ok]>"
-msgstr "- Picon Verzeichnis 2 [ok]>"
+msgstr "- Picon-Verzeichnis 2 [ok]>"
 
 msgid "- Picon Path [ok]>"
-msgstr "- Picon Verzeichnis [ok]>"
+msgstr "- Picon-Verzeichnis [ok]>"
 
 msgid "- Picon Size"
-msgstr "- Picon Größe"
+msgstr "- Picon-Größe"
 
 msgid "- Picture Alignment"
-msgstr "- Bild Ausrichtung"
+msgstr "- Bildausrichtung"
 
 msgid "- Picture Position"
-msgstr "- Bild Position"
+msgstr "- Bildposition"
 
 msgid "- Picture Size"
-msgstr "- Bild Größe"
+msgstr "- Bildgröße"
 
 msgid "- Picture [ok]>"
 msgstr "- Bild [ok]>"
@@ -317,43 +317,43 @@ msgid "- Position y"
 msgstr "- Position y"
 
 msgid "- Quick Update"
-msgstr "- Quick Aktualisierung"
+msgstr "- Schnellaktualisierung"
 
 msgid "- Rain Color"
-msgstr "- Regen Farbe"
+msgstr "- Regenfarbe"
 
 msgid "- Rain Color 2"
-msgstr "- Regen Farbe 2"
+msgstr "- Regenfarbe 2"
 
 msgid "- Rain Zoom"
-msgstr "- Regen Zoom"
+msgstr "- Regenzoom"
 
 msgid "- Rain use Color 2 from"
 msgstr "- Regen verwende Farbe 2 ab"
 
 msgid "- Screen 2 Changing Time"
-msgstr "- Schirm 2 Wechselzeit"
+msgstr "- Umschaltzeit Schirm 2"
 
 msgid "- Screen 3 Changing Time"
-msgstr "- Schirm 3 Wechselzeit"
+msgstr "- Umschaltzeit Schirm 3"
 
 msgid "- Screen 4 Changing Time"
-msgstr "- Schirm 4 Wechselzeit"
+msgstr "- Umschaltzeit Schirm 4"
 
 msgid "- Screen 5 Changing Time"
-msgstr "- Schirm 5 Wechselzeit"
+msgstr "- Umschaltzeit Schirm 5"
 
 msgid "- Screen 6 Changing Time"
-msgstr "- Schirm 6 Wechselzeit"
+msgstr "- Umschaltzeit Schirm 6"
 
 msgid "- Screen 7 Changing Time"
-msgstr "- Schirm 7 Wechselzeit"
+msgstr "- Umschaltzeit Schirm 7"
 
 msgid "- Screen 8 Changing Time"
-msgstr "- Schirm 8 Wechselzeit"
+msgstr "- Umschaltzeit Schirm 8"
 
 msgid "- Screen 9 Changing Time"
-msgstr "- Schirm 9 Wechselzeit"
+msgstr "- Umschaltzeit Schirm 9"
 
 msgid "- Screens used for Changing"
 msgstr "- Benutzte Schirme zum Wechsel"
@@ -383,7 +383,7 @@ msgid "- Size"
 msgstr "- Größe"
 
 msgid "- Size max Height"
-msgstr "- Größe max Höhe"
+msgstr "- Größe max. Höhe"
 
 msgid "- Size x"
 msgstr "- Größe x"
@@ -404,7 +404,7 @@ msgid "- Text"
 msgstr "- Text"
 
 msgid "- Text Size"
-msgstr "- Zeichen Größe"
+msgstr "- Zeichengröße"
 
 msgid "- Timeout [ms]"
 msgstr "- Timeout [ms]"
@@ -425,13 +425,13 @@ msgid "- Unit min"
 msgstr "- Einheit min"
 
 msgid "- Weather Type"
-msgstr "- Wetter Typ"
+msgstr "- Wettertyp"
 
 msgid "- Zoom"
 msgstr "- Zoom"
 
 msgid "- extra Info"
-msgstr "- extra Info"
+msgstr "- Zusatzinfo"
 
 msgid "- free Warning"
 msgstr "- frei Warnung"
@@ -533,22 +533,22 @@ msgid "2 Days 2 Line"
 msgstr "2 Tage 2 Zeilen"
 
 msgid "2 x FastBackwardKey"
-msgstr "2 x RückSpulTaste"
+msgstr "2 x Rückspultaste"
 
 msgid "2 x FastBackwardKey Type 2"
-msgstr "2 x RückSpulTaste Typ 2"
+msgstr "2 x Rückspultaste Typ 2"
 
 msgid "2 x FastForwardKey"
-msgstr "2 x VorSpulTaste"
+msgstr "2 x Vorspultaste"
 
 msgid "2 x FastForwardKey Type 2"
-msgstr "2 x VorSpulTaste Typ 2"
+msgstr "2 x Vorspultaste Typ 2"
 
 msgid "2 x InfoKey"
-msgstr "2 x InfoTaste"
+msgstr "2 x Info-Taste"
 
 msgid "2 x Mute"
-msgstr "2 x Mute"
+msgstr "2 x Stumm"
 
 msgid "2%"
 msgstr "2%"
@@ -602,7 +602,7 @@ msgid "30s"
 msgstr "30s"
 
 msgid "32bit - color"
-msgstr "32bit - Farbe"
+msgstr "32 Bit Farbtiefe"
 
 msgid "35%"
 msgstr "35%"
@@ -623,7 +623,7 @@ msgid "4 Days 2 Lines"
 msgstr "4 Tage 2 Zeilen"
 
 msgid "4 Days Vertical View"
-msgstr "4 Tage Vertikale Ansicht"
+msgstr "4 Tage vertikale Ansicht"
 
 msgid "40%"
 msgstr "40%"
@@ -653,7 +653,7 @@ msgid "5 Days 2 Lines"
 msgstr "5 Tage 2 Zeilen"
 
 msgid "5 Days Vertical View"
-msgstr "5 Tage Vertikale Ansicht"
+msgstr "5 Tage vertikale Ansicht"
 
 msgid "5%"
 msgstr "5%"
@@ -710,7 +710,7 @@ msgid "85%"
 msgstr "85%"
 
 msgid "8bit - grayscale/color"
-msgstr "8bit - Graustufen/Farbe"
+msgstr "8 Bit Graustufen/Farbe"
 
 msgid "90"
 msgstr "90"
@@ -737,10 +737,10 @@ msgid "All"
 msgstr "Alles"
 
 msgid "Always All"
-msgstr "Immer Alle"
+msgstr "Immer alle"
 
 msgid "Always New"
-msgstr "Immer Neue"
+msgstr "Immer neue"
 
 msgid "Analog"
 msgstr "Analog"
@@ -761,7 +761,7 @@ msgid "Background"
 msgstr "Hintergrund"
 
 msgid "Background-Picture Type"
-msgstr "Hintergrund Bild Typ"
+msgstr "Hintergrundbild-Typ"
 
 msgid "Backup Config"
 msgstr "Sicherung der Einstellungen"
@@ -776,25 +776,25 @@ msgid "Bitrate"
 msgstr "Bitrate"
 
 msgid "Box-Skin-LCD"
-msgstr "Box-Skin-LCD"
+msgstr "Boxskin-LCD"
 
 msgid "Box-Skin-LCD Color"
-msgstr "Box-Skin-LCD Farbe"
+msgstr "Boxskin-LCD Farbe"
 
 msgid "Box-Skin-LCD Dimension"
-msgstr "Box-Skin-LCD Größe"
+msgstr "Boxskin-LCD Größe"
 
 msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "Box-Skin-LCD Aktiviere Idle-Mode"
+msgstr "Boxskin-LCD Aktiviere Idle-Mode"
 
 msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "Box-Skin-LCD Aktiviere Media-Mode"
+msgstr "Boxskin-LCD Aktiviere Media-Mode"
 
 msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "Box-Skin-LCD Aktiviere On-Mode"
+msgstr "Boxskin-LCD Aktiviere On-Mode"
 
 msgid "Box-Skin-LCD Offset"
-msgstr "Box-Skin-LCD Offset"
+msgstr "Boxskin-LCD Offset"
 
 msgid "C"
 msgstr "C"
