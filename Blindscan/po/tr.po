@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 13:08+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"Last-Translator: esmos <kucukogul@gmail.com>\n"
 "Language-Team: CÜNEYT OCAKLILAR <ocaklilar@gmail.com>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 
 msgid "   Starting Sundtek hardware blind scan."
-msgstr ""
+msgstr "Sundtek donanım kör taraması başlatılıyor."
 
 #
 #, fuzzy
@@ -44,27 +44,27 @@ msgstr ""
 
 #, python-format
 msgid "%d transponders found at %d:%02d min"
-msgstr ""
+msgstr "%d transponder nulundu %d:%02d dak"
 
 #, python-format
 msgid "%d:%02d/%d:%02dmin"
-msgstr ""
+msgstr "%d:%02d/%d:%02ddak"
 
 #, python-format
 msgid "%dMHz scanned"
-msgstr ""
+msgstr "%dMHz taranan"
 
 msgid "AUTOMATICALLY start service searching, press green to change."
-msgstr ""
+msgstr "OTOMATİK olarak servis aramaya başlayın, değiştirmek için yeşil tuşa basın."
 
 msgid "Accuracy (higher is better)"
-msgstr ""
+msgstr "Doğruluk (daha yüksek daha iyidir)"
 
 msgid "Blind scan"
 msgstr "Kör tarama"
 
 msgid "Blind scan for DVB-S2 tuners"
-msgstr ""
+msgstr "DVB-S2 tunerler için kör tarama"
 
 #, fuzzy
 msgid "Blind scan state"
@@ -74,7 +74,7 @@ msgid "Blindscan"
 msgstr "Körtarama"
 
 msgid "Blindscan is not supported in "
-msgstr ""
+msgstr "Blindscan, içinde desteklenmiyor"
 
 #
 msgid "Clear before scan"
@@ -160,13 +160,13 @@ msgstr ""
 "Bu biraz zaman alacak."
 
 msgid "MANUALLY start service searching, press green to change."
-msgstr ""
+msgstr "Manuel olarak servis aramaya başlayın, değiştirmek için yeşil tuşa basın."
 
 msgid "Maybe the reason that recording is currently running."
-msgstr ""
+msgstr "Belki de kayıt şu anda çalışıyor nedeni."
 
 msgid "Network scan"
-msgstr ""
+msgstr "Ağ tarama"
 
 msgid ""
 "No new transponders found! \n"
@@ -189,7 +189,7 @@ msgstr ""
 
 #, python-format
 msgid "Not found blind scan utility '%s'!"
-msgstr ""
+msgstr "Kör tarama yardımcı programı bulunamadı '%s'!"
 
 msgid ""
 "Nothing to scan!\n"
@@ -276,7 +276,7 @@ msgstr "Üzgünüz, bu Tuner kullanımda."
 
 #, python-format
 msgid "Step %d %d:%02d min"
-msgstr ""
+msgstr "Adım %d %d:%02d dak"
 
 msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
 msgstr "Sembol değerleri, megasembol biçiminde; 1 - 44 arasında bir değer girin."
@@ -322,7 +322,7 @@ msgid "circular right"
 msgstr "dairesel sağ"
 
 msgid "circular right & circular left"
-msgstr ""
+msgstr "dairesel sağ & dairesel sol"
 
 msgid "circular right and circular left"
 msgstr "dairesel sağ ve dairesel sol"
