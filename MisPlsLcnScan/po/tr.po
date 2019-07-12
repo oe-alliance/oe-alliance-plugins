@@ -21,16 +21,16 @@ msgid "Cannot allocate the demuxer."
 msgstr "Demuxer bulunamadi"
 
 msgid "Cannot free NIM because a recording is in progress"
-msgstr "Kayit yapiliyor, bos Tuner mevcut degil"
+msgstr "Kayıt yapılıyor, boş Tuner mevcut değil"
 
 msgid "Cannot get frontend"
-msgstr "Frontend alinamadi"
+msgstr "Frontend alınamıyor"
 
 msgid "Cannot get the NIM"
-msgstr "Tuner alinamadi"
+msgstr "Tuner alınamıyor"
 
 msgid "Cannot retrieve Resource Manager instance"
-msgstr "Kaynak örnegi alinamadi"
+msgstr "Kaynak Yöneticisi örneği alınamıyor"
 
 msgid "Clear before scan"
 msgstr "Taramadan önce temizle (sil)"
@@ -50,10 +50,10 @@ msgid "Fransat MIS 5W"
 msgstr "Fransat MIS 5W"
 
 msgid "If you select \"yes\" stored channels at the same orbital position will be deleted before starting the current search. Note: if you are scanning more than one provider this must be set to \"no\"."
-msgstr "\"evet\" secerseniz mevcut aramaya başlamadan önce aynı yörünge pozisyonunda kayıtlı kanallar silinir. Not: Birden fazla sağlayıcı tarıyorsanız, bunun \"hayır\" olarak ayarlanması gerekir."
+msgstr "\"evet\" seçerseniz mevcut aramaya başlamadan önce aynı yörünge pozisyonunda kayıtlı kanallar silinir. Not: Birden fazla sağlayıcı tarıyorsanız, bunun \"hayır\" olarak ayarlanması gerekir."
 
 msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
-msgstr "\"Evet\" seçerseniz, tarama yalnızca şifresiz kanalları kaydeder; \"hayir\" şifreli ve şifresiz kanalları bulur."
+msgstr "\"Evet\" seçerseniz, tarama yalnızca şifresiz kanalları kaydeder; \"hayır\" şifreli ve şifresiz kanalları bulur."
 
 msgid "Italia MIS 5W"
 msgstr "Italia MIS 5W"
@@ -62,7 +62,7 @@ msgid "MIS/PLS LCN Scan"
 msgstr "MIS/PLS LCN arama"
 
 msgid "No compatible tuner found"
-msgstr "uyumlu Tuner bulunamadi"
+msgstr "Uyumlu Tuner bulunamadı"
 
 msgid "No frequencies to search"
 msgstr "Aranacak Frekans yok"
@@ -72,32 +72,32 @@ msgid "No valid NIM found for %s"
 msgstr "%s için geçerli bir Tuner bulunamadı"
 
 msgid "Only free scan"
-msgstr "Yalnizca sifresiz arama"
+msgstr "Yalnızca şifresiz arama"
 
 msgid "Provider"
-msgstr "Sağlayici"
+msgstr "Sağlayıcı"
 
 #, python-format
 msgid "Reading SI tables on %s MHz, IS %s"
 msgstr "%s MHz'de SI tabloları okunuyor, %s IS"
 
 msgid "Really close without saving settings?"
-msgstr "Kaydetmeden cikmak istediginize eminmisiniz?"
+msgstr "Kaydetmeden çıkmak istediğinize eminmisiniz?"
 
 msgid "Scan"
 msgstr "Arama"
 
 msgid "Scanning transponders"
-msgstr "Transponder araniyor"
+msgstr "Transponder aranıyor"
 
 msgid "Select the provider you wish to scan."
 msgstr "Taramak istediğiniz sağlayıcıyı seçin"
 
 msgid "Starting scanner"
-msgstr "Tarayiciyi baslat"
+msgstr "Tarayıcıyı başlat"
 
 msgid "Starting search..."
-msgstr "Aramayi baslat..."
+msgstr "Aramayı başlat..."
 
 #, python-format
 msgid "Tuning %s MHz, IS %s"
