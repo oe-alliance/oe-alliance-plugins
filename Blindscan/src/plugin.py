@@ -98,8 +98,8 @@ config.blindscan.polarization = ConfigSelection(default = defaults["polarization
 	(eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2, _("circular right and circular left")),
 	(eDVBFrontendParametersSatellite.Polarisation_CircularRight, _("circular right")),
 	(eDVBFrontendParametersSatellite.Polarisation_CircularLeft, _("circular left"))])
-config.blindscan.start_symbol = ConfigInteger(default = defaults["start_symbol"], limits = (1, 59))
-config.blindscan.stop_symbol = ConfigInteger(default = defaults["stop_symbol"], limits = (2, 60))
+config.blindscan.start_symbol = ConfigInteger(default = defaults["start_symbol"], limits = (0, 79))
+config.blindscan.stop_symbol = ConfigInteger(default = defaults["stop_symbol"], limits = (1, 80))
 config.blindscan.clearallservices = ConfigSelection(default = defaults["clearallservices"], choices = [("no", _("no")), ("yes", _("yes")), ("yes_hold_feeds", _("yes (keep feeds)"))])
 config.blindscan.onlyFTA = ConfigYesNo(default = defaults["onlyFTA"])
 config.blindscan.dont_scan_known_tps = ConfigYesNo(default = defaults["dont_scan_known_tps"])
