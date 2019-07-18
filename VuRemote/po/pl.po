@@ -16,35 +16,35 @@ msgstr ""
 
 #, python-format
 msgid " in %d seconds."
-msgstr ""
+msgstr " w %d sekundy."
 
 #
 msgid "Cancel"
 msgstr "Anuluj"
 
 msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr ""
+msgstr "PLIK NIE ISTNIEJE : /proc/stb/fp/remote_code"
 
 msgid "Keep"
-msgstr ""
+msgstr "Zachować"
 
 msgid "Please change your remote mode"
-msgstr ""
+msgstr "Zmień swój tryb pilota"
 
 msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
-msgstr ""
+msgstr "Nacisnij i przytrzymaj '2' & '7' aż czerwona dioda LED zacznie świecić, a następnie naciśnij 'Help', a następnie '000'"
 
-msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
-msgstr ""
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000'"
+msgstr "Nacisnij i przytrzymaj <OK> i <STB> aż czerwona dioda LED zacznie świecić, a następnie naciśnij '0000'"
 
 msgid "Remote Control Code"
-msgstr ""
+msgstr "Kod Pilota"
 
 msgid "Remote Control System Code"
-msgstr ""
+msgstr "Kod Systemu Pilota"
 
 msgid "Remote Control Type"
-msgstr ""
+msgstr "Typ Pilota"
 
 #
 msgid "Restore"
@@ -56,10 +56,10 @@ msgstr "Zapisz"
 
 #, python-format
 msgid "Sorry, but %s is not supported."
-msgstr ""
+msgstr "Przepraszamy, ale %s nie jest obsługiwany."
 
 msgid "Text support"
-msgstr ""
+msgstr "Obsługa tekstu"
 
 msgid "Then choose 'Keep' within seconds"
-msgstr ""
+msgstr "Następnie wybierz 'Zachowaj' w ciągu kilku sekund"
