@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"POT-Creation-Date: 2019-07-23 15:19+0200\n"
 "PO-Revision-Date: 2018-07-30 21:12+0200\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.1.1\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
 
 msgid "1 minute"
 msgstr "1 minute"
@@ -45,11 +45,17 @@ msgstr "ABM CustomMix"
 msgid "ABM CustomMix Importer"
 msgstr "ABM CustomMix Importateur"
 
+msgid "Allows you automatically fetch the CustomMix file."
+msgstr "Permet de récupérer automatiquement le fichier CustomMix."
+
 msgid "Channels importer"
 msgstr "Importateur de chaînes"
 
 msgid "Delete file"
 msgstr "Effacer fichier"
+
+msgid "Enable autofetch"
+msgstr "Activer l'autorécupération"
 
 msgid "Exit"
 msgstr "Quitter"
@@ -63,8 +69,17 @@ msgstr "Récupérer à partir de github"
 msgid "File fetched and saved OK"
 msgstr "Fichier récupéré et sauvegardé OK"
 
+msgid "Import"
+msgstr "Importer"
+
+msgid "Lead time"
+msgstr "Délai de mise en œuvre"
+
 msgid "Main menu"
 msgstr "Menu principal"
+
+msgid "Number of minutes prior to the ABM scan that the CustomMix file should be fetched"
+msgstr "Nombre de minutes avant que l'analyse ABM que le fichier CustomMix doit être récupéré."
 
 msgid "Really close without saving settings?"
 msgstr "Vraiment fermer sans sauver les paramètres?"
@@ -75,6 +90,9 @@ msgstr "Enregistrer la configuration"
 msgid "Saving CustomMix file"
 msgstr "Enregistrement du fichier CustomMix"
 
+msgid "Select the CustomMix you want to import"
+msgstr "Sélectionnez le CustomMix que vous voulez importer"
+
 msgid "Service searching"
 msgstr "Recherche des services"
 
@@ -83,25 +101,3 @@ msgstr "Paramétrer"
 
 msgid "Starting importer..."
 msgstr "Importateur démarre….."
-
-msgid "Allows you automatically fetch the CustomMix file."
-msgstr "Permet de récupérer automatiquement le fichier CustomMix."
-
-msgid "Enable autofetch"
-msgstr "Activer l'autorécupération"
-
-msgid "Import"
-msgstr "Importer"
-
-msgid "Lead time"
-msgstr "Délai de mise en œuvre"
-
-msgid ""
-"Number of minutes prior to the ABM scan that the CustomMix file should be "
-"fetched"
-msgstr ""
-"Nombre de minutes avant que l'analyse ABM que le fichier CustomMix doit "
-"être récupéré."
-
-msgid "Select the CustomMix you want to import"
-msgstr "Sélectionnez le CustomMix que vous voulez importer"
