@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2019-07-23 15:20+0200\n"
 "PO-Revision-Date: 2018-07-30 21:48+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: french\n"
@@ -52,6 +52,9 @@ msgstr "Afficheur/LED"
 
 msgid "Enable led"
 msgstr "Activer LED"
+
+msgid "GigaBlue Setup"
+msgstr ""
 
 msgid "LED"
 msgstr "LED"
