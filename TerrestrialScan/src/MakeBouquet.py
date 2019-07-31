@@ -72,6 +72,8 @@ class MakeBouquet(Screen):
 		self.FTA_only = False
 		self.makebouquet = True
 		self.makexmlfile = False
+		self.lcndescriptor = 0x83
+		self.channel_list_id = 0
 		if args:
 			if "feid" in args:
 				self.selectedNIM = args["feid"]
@@ -83,6 +85,10 @@ class MakeBouquet(Screen):
 				self.makebouquet = args["makebouquet"]
 			if "makexmlfile" in args:
 				self.makexmlfile = args["makexmlfile"]
+			if "lcndescriptor" in args:
+				self.lcndescriptor = args["lcndescriptor"]
+			if "channel_list_id" in args:
+				self.channel_list_id = args["channel_list_id"]
 
 		self.tsidOnidKeys = self.transponders_unique.keys()
 		self.index = 0
@@ -354,7 +360,9 @@ class MakeBouquet(Screen):
 				print "[MakeBouquet][readNIT] updating transponder frequency from %.03f MHz to %.03f MHz" % (self.transponder["frequency"]/1000000, transponders[0]["frequency"]/100000)
 				self.transponder["frequency"] = transponders[0]["frequency"]*10
 
-		LCNs = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] == 0x83 and t["original_network_id"] == self.transponder["onid"]]
+		# LCNs = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] == self.lcndescriptor and t["original_network_id"] == self.transponder["onid"]]
+		LCNs = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] == self.lcndescriptor and (self.lcndescriptor == 0x83 or (self.lcndescriptor == 0x87 and ("channel_list_id" in t and t["channel_list_id"] == self.channel_list_id or self.channel_list_id == 0))) and t["original_network_id"] == self.transponder["onid"]]
+
 		print "[MakeBouquet][readNIT] LCNs", LCNs
 		if LCNs:
 			for LCN in LCNs:

@@ -92,6 +92,7 @@ class TerrestrialScan(Screen):
 		self.uhf_vhf = "uhf"
 		self.networkid = 0
 		self.restrict_to_networkid = False
+		self.stabliseTime = 2 # time in seconds for tuner to stablise on tune before taking a signal quality reading
 		if args:
 			if "feid" in args:
 				self.selectedNIM = args["feid"]
@@ -101,6 +102,8 @@ class TerrestrialScan(Screen):
 				self.networkid = args["networkid"]
 			if "restrict_to_networkid" in args:
 				self.restrict_to_networkid = args["restrict_to_networkid"]
+			if "stabliseTime" in args:
+				self.stabliseTime = args["stabliseTime"]
 		self.isT2tuner = False
 		self.frontend = None
 		self["Frontend"] = FrontendStatus(frontend_source = lambda : self.frontend, update_interval = 100)
@@ -407,7 +410,7 @@ class TerrestrialScan(Screen):
 	def signalQualityWait(self):
 		signalQuality = self.frontend.readFrontendData(iFrontendInformation.signalQuality)
 		if signalQuality > 0:
-			time.sleep(2) # allow extra time to get a stable reading
+			time.sleep(self.stabliseTime) # allow extra time to get a stable reading
 			signalQuality = self.frontend.readFrontendData(iFrontendInformation.signalQuality)
 			if signalQuality > 0:
 				found = {"frequency": self.frequency, "tsid": self.tsid, "onid": self.onid, "system": self.system, "bandwidth": self.bandwidth,"signalQuality": signalQuality}
