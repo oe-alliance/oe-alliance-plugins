@@ -5058,7 +5058,7 @@ class LCDdisplayFile(Screen):
 			<widget source="File" render="Label" font="Regular;20" halign="center" position="5,0" size="610,100" transparent="1" valign="center" zPosition="4"/>
 			<widget name="LCDfile" position="5,100" scrollbarMode="showOnDemand" size="610,312" zPosition="4"/>
 			<eLabel backgroundColor="#555555" position="5,420" size="610,2" zPosition="5"/>
-			<ePixmap alphatest="on" pixmap="skin_default/buttons/green.png" position="0,425" size="140,40" zPosition="5"/>
+			<ePixmap alphatest="on" pixmap="buttons/green.png" position="0,425" size="140,40" zPosition="5"/>
 			<eLabel font="Regular;18" halign="center" position="0,425" size="140,40" text="Select" transparent="1" valign="center" zPosition="6"/>
 		</screen>"""
 
@@ -5156,11 +5156,11 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 			<widget name="key_yellow" position="%d,%d" size="%d,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
 			<widget name="key_blue" position="%d,%d" size="%d,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1"/> 
 
-			<ePixmap name="red"    position="%d,%d"   zPosition="2" size="%d,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-			<ePixmap name="green"  position="%d,%d" zPosition="2" size="%d,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="%d,%d" zPosition="2" size="%d,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-			<ePixmap name="blue"   position="%d,%d" zPosition="2" size="%d,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/key_menu.png" position="%d,%d" zPosition="4" size="35,25"  transparent="1" alphatest="on" />
+			<ePixmap name="red"    position="%d,%d"   zPosition="2" size="%d,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap name="green"  position="%d,%d" zPosition="2" size="%d,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+			<ePixmap name="yellow" position="%d,%d" zPosition="2" size="%d,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+			<ePixmap name="blue"   position="%d,%d" zPosition="2" size="%d,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+			<ePixmap pixmap="buttons/key_menu.png" position="%d,%d" zPosition="4" size="35,25"  transparent="1" alphatest="on" />
 
 			<widget source="Version" render="Label" position="%d,%d" size="100,20" zPosition="1" font="Regular;11" halign="right" valign="center" backgroundColor="#25062748" transparent="1" />
 			<widget source="LibUSB" render="Label" position="%d,%d" size="100,20" zPosition="1" font="Regular;11" halign="right" valign="center" foregroundColor="red" backgroundColor="#25062748" transparent="1" />
