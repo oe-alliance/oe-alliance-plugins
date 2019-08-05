@@ -329,10 +329,10 @@ class TranscodingSetupInit:
 class TranscodingSetup(Screen,ConfigListScreen):
 	skin =  """
 		<screen name="TranscodingSetup" position="center,center" size="600,450">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
-			<widget name="blue" pixmap="skin_default/buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="5,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="155,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
+			<widget name="blue" pixmap="buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="5,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="155,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_yellow" render="Label" position="305,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" foregroundColor="#ffffff" transparent="1" />

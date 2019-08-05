@@ -412,7 +412,7 @@ class UpgradeStatus(Screen):
 class FUFilebrowser(Screen):
 	skin = 	"""
 		<screen position="center,center" size="500,290" title="File Browser" >
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="5,10" size="140,40" alphatest="blend" />
+			<ePixmap pixmap="buttons/blue.png" position="5,10" size="140,40" alphatest="blend" />
 			<widget source="key_blue" render="Label" position="5,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" foregroundColor="#ffffff" transparent="1"/>
 
 			<widget name="file_list" position="0,70" size="495,160" scrollbarMode="showOnDemand" />
@@ -645,8 +645,8 @@ class FUFilebrowser(Screen):
 class FirmwareUpgrade(Screen, ConfigListScreen):
 	skin = 	"""
 		<screen position="center,center" size="560,175" title="Firmware Upgrade" >
-			<ePixmap pixmap="skin_default/buttons/red.png" position="110,10" size="140,40" alphatest="blend" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="310,10" size="140,40" alphatest="blend" />
+			<ePixmap pixmap="buttons/red.png" position="110,10" size="140,40" alphatest="blend" />
+			<ePixmap pixmap="buttons/green.png" position="310,10" size="140,40" alphatest="blend" />
 
 			<widget source="key_red" render="Label" position="110,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="310,10" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />

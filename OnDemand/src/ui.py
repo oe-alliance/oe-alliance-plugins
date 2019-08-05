@@ -112,8 +112,8 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 			<widget name="arrowup" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/top.png,/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/arrow-up.png" position="e-203,0" size="203,25" alphatest="on" />
 			<widget name="PlayerList" position="0,25" size="203,670" backgroundColor="#80000000" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/selectbar.png" transparent="0" scrollbarMode="showNever" />
 			<widget name="arrowdown" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/bottom.png,/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/arrow-down.png" position="e-203,e-37" size="203,37" alphatest="on" />
-			<ePixmap name="menu" position="e-203,e-30" zPosition="2" size="35,25" pixmap="skin_default/buttons/key_menu.png" transparent="1" alphatest="on" />
-			<ePixmap name="info" position="e-45,e-30" zPosition="2" size="35,25" pixmap="skin_default/buttons/key_info.png" transparent="1" alphatest="on" />
+			<ePixmap name="menu" position="e-203,e-30" zPosition="2" size="35,25" pixmap="buttons/key_menu.png" transparent="1" alphatest="on" />
+			<ePixmap name="info" position="e-45,e-30" zPosition="2" size="35,25" pixmap="buttons/key_info.png" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -187,7 +187,7 @@ class OnDemand_About(Screen):
 		<screen position="360,150" size="600,450" >
 			<widget name="about" position="10,10" size="580,430" font="Regular;15" />
 			<widget name="key_red" position="0,e-40" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
-			<ePixmap name="red" pixmap="skin_default/buttons/red.png" position="0,e-40" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
+			<ePixmap name="red" pixmap="buttons/red.png" position="0,e-40" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
 			<widget name="oealogo" position="e-200,e-135" size="200,135"  zPosition="4" transparent="1" alphatest="blend" />
 		</screen>"""
 

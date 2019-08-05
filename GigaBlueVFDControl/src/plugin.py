@@ -394,8 +394,8 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		self.skin = """
 			<screen position="center,center" size="700,540" title="GigaBlue Setup" >
 				<widget name="config" position="20,15" size="660,450" scrollbarMode="showOnDemand" />
-				<ePixmap position="40,470" size="140,40" pixmap="skin_default/buttons/green.png" alphatest="on" />
-				<ePixmap position="180,470" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
+				<ePixmap position="40,470" size="140,40" pixmap="buttons/green.png" alphatest="on" />
+				<ePixmap position="180,470" size="140,40" pixmap="buttons/red.png" alphatest="on" />
 				<widget name="key_green" position="40,470" size="140,40" font="Regular;20" backgroundColor="#1f771f" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_red" position="180,470" size="140,40" font="Regular;20" backgroundColor="#9f1313" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 			</screen>"""

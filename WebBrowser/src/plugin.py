@@ -103,7 +103,7 @@ class Player(Screen, InfoBarNotifications):
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WebBrowser/icons/mp_wb_background.png" position="0,0" zPosition="-1" size="455,53" />
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WebBrowser/icons/mp_wb_buttons.png" position="40,23" size="30,13" alphatest="on" />
 
-			<widget source="session.CurrentService" render="PositionGauge" position="80,25" size="220,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
+			<widget source="session.CurrentService" render="PositionGauge" position="80,25" size="220,10" zPosition="2" pointer="position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
 				<convert type="ServicePosition">Gauge</convert>
 			</widget>
 
@@ -416,8 +416,8 @@ class PlayerService:
 class BrowserLauncher(ConfigListScreen, Screen):
 	skin=   """
 		<screen name="BrowserLauncher" position="center,60" size="415,630" title="Web Browser">
-			<ePixmap pixmap="skin_default/buttons/red.png" position="75,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="225,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="75,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="225,0" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="75,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" transparent="1" />
 			<widget source="key_green" render="Label" position="225,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" transparent="1" />
 			<widget name="config" position="0,50" size="409,100" scrollbarMode="showOnDemand" />

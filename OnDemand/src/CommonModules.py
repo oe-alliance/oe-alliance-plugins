@@ -287,7 +287,7 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		try:
 			self.picload.startDecode(resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png"), 0, 0, False)
 		except:
-			self.picload.startDecode(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"), 0, 0, False)
+			self.picload.startDecode(resolveFilename(SCOPE_CURRENT_SKIN, "div-h.png"), 0, 0, False)
 		pngthumb = self.picload.getData()
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 0, self.l.getItemSize().height()-2, self.l.getItemSize().width(), 2, pngthumb))
 

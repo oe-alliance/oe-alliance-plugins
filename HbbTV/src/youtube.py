@@ -22,8 +22,8 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 			<widget name="infomation" position="5,0" size="540,80" valign="center" halign="center" font="Regular;20" />
 			<widget name="startdesc" position="10,80" size="395,40" valign="center" font="Regular;20" />
 			<widget name="helpdesc" position="10,120" size="395,40" valign="center" font="Regular;20" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="400,80" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="400,120" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="400,80" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="400,120" size="140,40" alphatest="on" />
 			<widget source="key_green" render="Label" position="400,80" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_yellow" render="Label" position="400,120" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" foregroundColor="#ffffff" transparent="1" />
 		</screen>
@@ -109,8 +109,8 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 		<screen position="center,center" size="600,140" title="YouTube TV Settings">
 			<widget name="config" position="0,0" size="600,100" scrollbarMode="showOnDemand" />
 
-			<ePixmap pixmap="skin_default/buttons/red.png" position="310,100" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="150,100" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/red.png" position="310,100" size="140,40" alphatest="on" />
+			<ePixmap pixmap="buttons/green.png" position="150,100" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="310,100" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="150,100" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
