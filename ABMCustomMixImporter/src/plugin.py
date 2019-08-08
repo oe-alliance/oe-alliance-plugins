@@ -208,7 +208,7 @@ class schedule:
 		try:
 			self.enableSchedule = config.autobouquetsmaker.schedule.value
 			self.clock = [config.autobouquetsmaker.scheduletime.value[0], config.autobouquetsmaker.scheduletime.value[1]]
-			self.repeattype = config.autobouquetsmaker.repeattype.value
+			self.repeattype = "daily" # config.autobouquetsmaker.repeattype.value
 			print "[ABMCustomMixSchedule][__init__] ABM config available"
 		except:
 			self.enableSchedule = False
@@ -235,8 +235,7 @@ class schedule:
 			self.mix != config.plugins.abmImporter.mix.value or \
 			self.enableSchedule != config.autobouquetsmaker.schedule.value or \
 			self.clock[0] != config.autobouquetsmaker.scheduletime.value[0] or \
-			self.clock[1] != config.autobouquetsmaker.scheduletime.value[1] or \
-			self.repeattype != config.autobouquetsmaker.repeattype.value \
+			self.clock[1] != config.autobouquetsmaker.scheduletime.value[1] \
 		:
 			print "[ABMCustomMixImporter][configChecker] config has changed"
 			self.enableImporter = config.plugins.abmImporter.enableImporter.value
@@ -245,7 +244,6 @@ class schedule:
 			self.enableSchedule = config.autobouquetsmaker.schedule.value
 			self.clock[0] = config.autobouquetsmaker.scheduletime.value[0]
 			self.clock[1] = config.autobouquetsmaker.scheduletime.value[1]
-			self.repeattype = config.autobouquetsmaker.repeattype.value
 			justBootedOrConfigChanged = True
 			self.doSchedule()
 		self.configtimer.startLongTimer(60)
