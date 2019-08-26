@@ -1,0 +1,86 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DLNABrowser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-07 14:06+0000\n"
+"PO-Revision-Date: 2019-04-12 10:52+0300\n"
+"Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
+"Language-Team: mosad\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid " "
+msgstr " "
+
+msgid "/"
+msgstr "/"
+
+msgid "10"
+msgstr "10"
+
+msgid "15"
+msgstr "١٥"
+
+msgid "20"
+msgstr "20"
+
+msgid "5"
+msgstr "5"
+
+msgid "Add all"
+msgstr "إضافة الكل"
+
+msgid "DLNA/uPnP Browser"
+msgstr "تصفح خادم مشاركة الاجهزة للوسائط عبر الشبكة"
+
+msgid "DeviceList Refresh Interval"
+msgstr "فترة تحديث قائمة الاجهزة"
+
+msgid "Enable Autostart for DLNA Browser"
+msgstr "تمكين التشغيل التلقائي لخادم مشاركة الاجهزة للوسائط عبر الشبكة"
+
+msgid "Exit"
+msgstr "تسجيل الخروج"
+
+msgid "No"
+msgstr "لا"
+
+msgid "Please wait, Loading image."
+msgstr "انتظر من فضلك, يتم تحميل الصورة."
+
+msgid "Reload Device"
+msgstr "إعادة تحميل الجهاز"
+
+msgid "Save"
+msgstr "                                            حفظ"
+
+msgid "Setting"
+msgstr "الإعداد"
+
+msgid "Show Device"
+msgstr "عرض الجهاز"
+
+msgid "Slideshow Interval"
+msgstr "فترة عرض الشرائح"
+
+msgid "Start"
+msgstr "تشغيل"
+
+msgid "Stop playing this movie?"
+msgstr "إيقاف عرض هذا الفيلم؟"
+
+msgid "This is dlna/upnp client using djmount."
+msgstr "مكتبة المستخدم لمشاركة الاجهزة للوسائط عبر الشبكة."
+
+msgid "Top"
+msgstr "الأفضل"
+
+msgid "Up"
+msgstr "أعلى"
+
+msgid "Yes"
+msgstr "نعم"

@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DLNAServer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-07 14:06+0000\n"
+"PO-Revision-Date: 2019-04-12 10:56+0300\n"
+"Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
+"Language-Team: mosad\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "    - Log Directory"
+msgstr "    - مسار السجلات"
+
+msgid "    - Log Level"
+msgstr "    - مستوى السجلات"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Enable Autostart for DLNA Server"
+msgstr "تمكين التشغيل التلقائي لخادم مشاركة الاجهزة للوسائط عبر الشبكة"
+
+msgid "Enable Logging"
+msgstr "تمكين تسجيل الدخول"
+
+msgid "Exit"
+msgstr "تسجيل الخروج"
+
+msgid "Music Directory"
+msgstr "دليل الموسيقى"
+
+msgid "OK"
+msgstr "موافق"
+
+msgid "Picture Directory"
+msgstr "دليل الصور"
+
+msgid "Reset"
+msgstr "إعاده الضبط"
+
+msgid "Save"
+msgstr "                                            حفظ"
+
+msgid "Server Name"
+msgstr "اسم الخادم"
+
+msgid "Start"
+msgstr "تشغيل"
+
+msgid "Video Directory"
+msgstr "دليل الفيديو"
+
+msgid "debug"
+msgstr "التصحيح"
+
+msgid "error"
+msgstr "خطاء"
+
+msgid "off"
+msgstr "لا يعمـل"
+
+msgid "warn"
+msgstr "تحذير"

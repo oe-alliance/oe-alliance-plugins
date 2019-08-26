@@ -1,0 +1,275 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-14 02:59+0100\n"
+"PO-Revision-Date: 2018-12-08 11:51+0300\n"
+"Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
+"Language-Team: mosad - مساعد الجعيد\n"
+"Language: ar_SA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2\n"
+
+msgid "%s"
+msgstr "%s"
+
+msgid "1.0"
+msgstr "1.0"
+
+msgid "1080p"
+msgstr "دقة 1080 بكسل"
+
+msgid "160x120"
+msgstr "160x120"
+
+msgid "16x9"
+msgstr "16x9"
+
+msgid "2.0"
+msgstr "2.0"
+
+msgid "2.1"
+msgstr "2.1"
+
+msgid "2.2"
+msgstr "2.2"
+
+msgid "2nd transcoding and PIP are mutually exclusive."
+msgstr "بث قناتين عبر الشبكة و بث صورة داخل صورة بتبادل الخصوصي."
+
+msgid "3.0"
+msgstr "3.0"
+
+msgid "3.1"
+msgstr "3.1"
+
+msgid "3.2"
+msgstr "3.2"
+
+msgid "320x240"
+msgstr "320x240"
+
+msgid "4.0"
+msgstr "4.0"
+
+msgid "4.1"
+msgstr "4.1"
+
+msgid "4.2"
+msgstr "4.2"
+
+msgid "480p"
+msgstr "دقة 480 بكسل"
+
+msgid "4x3"
+msgstr "4x3"
+
+msgid "5.0"
+msgstr "5.0"
+
+msgid "576p"
+msgstr "دقة 576 بكسل"
+
+msgid "720p"
+msgstr "دقة 720 بكسل"
+
+msgid "Advanced"
+msgstr "متقدم"
+
+msgid "Aspect Ratio"
+msgstr "أبعاد الشاشة"
+
+msgid "Audio codec"
+msgstr "ترميز الصوت"
+
+msgid "Auto set Framerate / Bitrate"
+msgstr "ضبط عرض معدل الإطار/معدل البث"
+
+msgid "Bitrate"
+msgstr "معدل البث"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Default"
+msgstr "الإفتراضي"
+
+msgid "Encoder"
+msgstr "مشفر"
+
+msgid "Encoder 0: Aspect Ratio"
+msgstr "التشفير 0: أبعاد الشاشة"
+
+msgid "Encoder 0: Audio codec"
+msgstr "التشفير 0: ترميز الصوت"
+
+msgid "Encoder 0: Auto mode (Bitrate/Framerate)"
+msgstr "التشفير 0: وضع تلقائي (معدل البت/معدل الإطارات)"
+
+msgid "Encoder 0: Bitrate"
+msgstr "التشفير 0: معدل البت"
+
+msgid "Encoder 0: Framerate"
+msgstr "التشفير 0: معدل الإطارات"
+
+msgid "Encoder 0: GOP Frame B"
+msgstr "التشفير 0: الإطار ب"
+
+msgid "Encoder 0: GOP Frame P"
+msgstr "التشفير 0: الإطار ب"
+
+msgid "Encoder 0: Level"
+msgstr "التشفير 0: مستوى"
+
+msgid "Encoder 0: Profile"
+msgstr "التشفير 0: ملف التعريف"
+
+msgid "Encoder 0: Resolution"
+msgstr "التشفير 0: دقة الفديو"
+
+msgid "Encoder 0: Video codec"
+msgstr "التشفير 0:ترميز الفيديو"
+
+msgid "Encoder 1: Aspect Ratio"
+msgstr "التشفير 1: أبعاد الشاشة"
+
+msgid "Encoder 1: Audio codec"
+msgstr "التشفير 1: ترميز الصوت"
+
+msgid "Encoder 1: Auto mode (Bitrate/Framerate)"
+msgstr "التشفير 1: وضع تلقائي (معدل البت/معدل الإطارات)"
+
+msgid "Encoder 1: Bitrate"
+msgstr "التشفير 1: معدل البت"
+
+msgid "Encoder 1: Framerate"
+msgstr "التشفير 1: معدل الإطارات"
+
+msgid "Encoder 1: GOP Frame B"
+msgstr "التشفير 1: الإطار ب"
+
+msgid "Encoder 1: GOP Frame P"
+msgstr "التشفير 1: الإطار ب"
+
+msgid "Encoder 1: Level"
+msgstr "التشفير 1:المستوى"
+
+msgid "Encoder 1: Profile"
+msgstr "التشفير 1: ملف التعريف"
+
+msgid "Encoder 1: Resolution"
+msgstr "التشفير 1: دقة الفديو"
+
+msgid "Encoder 1: Video codec"
+msgstr "التشفير 1: ترميز الفيديو"
+
+msgid "Framerate"
+msgstr "معدل الإطار"
+
+msgid "GOP Frame B"
+msgstr "إطار ب"
+
+msgid "GOP Frame P"
+msgstr "إطار ب"
+
+msgid "Level"
+msgstr "المستوى"
+
+msgid "Max"
+msgstr "بحد أقصى"
+
+msgid "Min"
+msgstr "بحد أدنى"
+
+msgid "Normal"
+msgstr "طبيعي"
+
+msgid "Off"
+msgstr "لا يعمل"
+
+msgid "On"
+msgstr "تشغيل"
+
+msgid "Port"
+msgstr "المنفذ"
+
+msgid "Profile"
+msgstr "الملف الشخصي"
+
+msgid "Really close without saving settings?"
+msgstr "هل تريد الإغلاق حقا بدون حفظ الإعدادات؟"
+
+msgid "Resolution"
+msgstr "الدقة"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "This model is not support transcoding."
+msgstr "هذا الموديل البث عبر الشبكة غير مدعوم."
+
+msgid "Transcoding Setup"
+msgstr "ضبط بث القنوات عبر الشبكة"
+
+msgid "Transcoding and PIP are mutually exclusive."
+msgstr "بث عبر الشبكة وبثها صورة داخل صورة يكون التبادل خاص."
+
+msgid "TranscodingSetup"
+msgstr "ضبط بث القنوات عبر الشبكة"
+
+msgid "Video codec"
+msgstr "ترميز الفيديو"
+
+msgid "aac"
+msgstr "ترميز الصوت الرقمي المزدوج"
+
+msgid "aac+"
+msgstr "ترميز الصوت الرقمي المزدوج البلس"
+
+msgid "aac+adts"
+msgstr "ترميز الصوت الرقمي المزدوج + ترميز الصوت المحيط"
+
+msgid "aac+loas"
+msgstr "ترميز الصوت الرقمي المزدوج"
+
+msgid "ac3"
+msgstr "ترميز الصوت الثلاثي الإفتراضي"
+
+msgid "advancedsimple"
+msgstr "متقدم بسيط"
+
+msgid "auto"
+msgstr "تلقائي"
+
+msgid "baseline"
+msgstr "الأساس"
+
+msgid "disable"
+msgstr "تعطيل"
+
+msgid "enable"
+msgstr "تفعيل"
+
+msgid "h264"
+msgstr "تميز 264"
+
+msgid "high"
+msgstr "مرتفع"
+
+msgid "low"
+msgstr "منخفض"
+
+msgid "main"
+msgstr "الرئيسي"
+
+msgid "mp3"
+msgstr "mp3"
+
+msgid "mpg"
+msgstr "mpg"
+
+msgid "simple"
+msgstr "بسيط"
