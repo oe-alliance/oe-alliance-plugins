@@ -150,7 +150,7 @@ msgstr ""
 "\n"
 
 msgid "Video codec"
-msgstr Códec de vídeo""
+msgstr "Códec de vídeo"
 
 msgid "Yes"
 msgstr "Si"
@@ -159,13 +159,13 @@ msgid "disable"
 msgstr "Desactivar"
 
 msgid "enable"
-msgstr Activar""
+msgstr "Activar"
 
 msgid "Encoder Aspect Ratio"
 msgstr "Relación de aspecto del codificador"
 
 msgid "Encoder Bitrate"
-msgstr Bitrate del codificador""
+msgstr "Bitrate del codificador"
 
 msgid "Encoder Framerate"
 msgstr "Framerate del codificador"
