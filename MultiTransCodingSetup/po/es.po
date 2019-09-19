@@ -1,0 +1,180 @@
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"PO-Revision-Date: 2010-09-19 21:07+0100\n"
+"Last-Translator: JR <openspateM@gmail.com>\n"
+"Language-Team: openspa <LL@li.org>\n"
+"Language: es-ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "1.0 Mbps"
+msgstr ""
+
+msgid "1.2 Mbps"
+msgstr ""
+
+msgid "1.5 Mbps"
+msgstr ""
+
+msgid "100 kbps"
+msgstr ""
+
+msgid "160x120"
+msgstr ""
+
+msgid "16x9"
+msgstr ""
+
+msgid "2.0 Mbps"
+msgstr ""
+
+msgid "2.5 Mbps"
+msgstr ""
+
+msgid "23.976 fps"
+msgstr ""
+
+msgid "24 fps"
+msgstr ""
+
+msgid "25 fps"
+msgstr ""
+
+msgid "3.0 Mbps"
+msgstr ""
+
+msgid "3.5 Mbps"
+msgstr ""
+
+msgid "30 fps"
+msgstr ""
+
+msgid "300 kbps"
+msgstr ""
+
+msgid "320x240"
+msgstr ""
+
+msgid "4.0 Mbps"
+msgstr ""
+
+msgid "480p"
+msgstr ""
+
+msgid "4x3"
+msgstr ""
+
+msgid "5.0 Mbps"
+msgstr ""
+
+msgid "500 kbps"
+msgstr ""
+
+msgid "576p"
+msgstr ""
+
+msgid "720p"
+msgstr ""
+
+msgid "800 kbps"
+msgstr ""
+
+msgid "Aspect Ratio"
+msgstr "Relación de aspecto"
+
+msgid "Auto"
+msgstr ""
+
+msgid "Bitrate in bits"
+msgstr "Bitrate en bits"
+
+msgid "Exit"
+msgstr "Salir"
+
+msgid "Framerate"
+msgstr "Framerate"
+
+msgid "H.264"
+msgstr ""
+
+msgid "H.265"
+msgstr ""
+
+msgid "Interlaced"
+msgstr "Entrelazado"
+
+msgid "Max"
+msgstr ""
+
+msgid "Min"
+msgstr ""
+
+msgid "Multi device transcoding setup"
+msgstr "Configuración transcodinf multi-dispositivo"
+
+msgid "Multi-Transcoding Setup"
+msgstr "Configuración multi-transcoding"
+
+msgid "No"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr "Quieres cerrar sin guardar ajustes?"
+
+msgid "Resolution"
+msgstr "Resolución"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "This model does not support transcoding."
+msgstr "Este modelo no soporta transcoding."
+
+msgid ""
+"To use transcoding You can build URL for VLC by Yourself\n"
+"\n"
+msgstr ""
+"Para usar transcoding puedes generar tú mismo una URL para VLC\n"
+"\n"
+
+msgid "Transcoding Setup"
+msgstr "Configuración Transcoding"
+
+msgid ""
+"Transcoding from HDMI-IN e.x:\n"
+"\n"
+msgstr ""
+"Transcoding desde HDMI-IN e.x:\n"
+"\n"
+
+msgid "Video codec"
+msgstr Códec de vídeo""
+
+msgid "Yes"
+msgstr "Si"
+
+msgid "disable"
+msgstr "Desactivar"
+
+msgid "enable"
+msgstr Activar""
+
+msgid "Encoder Aspect Ratio"
+msgstr "Relación de aspecto del codificador"
+
+msgid "Encoder Bitrate"
+msgstr Bitrate del codificador""
+
+msgid "Encoder Framerate"
+msgstr "Framerate del codificador"
+
+msgid "Encoder Interlaced"
+msgstr "Entrelazado codificador"
+
+msgid "Encoder Resolution"
+msgstr "Resolución codificador"
+
+msgid "Setup your timezone."
+msgstr "Configurar zona horaria"
