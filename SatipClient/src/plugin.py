@@ -304,9 +304,9 @@ SATIP_CONF_CHANGED = False
 class SATIPTuner(Screen, ConfigListScreen):
 	skin =  """
 		<screen position="center,center" size="590,370">
-			<ePixmap pixmap="buttons/red.png" position="40,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="230,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="420,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="40,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="230,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="420,0" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="40,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="230,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_yellow" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" foregroundColor="#ffffff" transparent="1" />
@@ -556,10 +556,10 @@ SATIP_CONFFILE = "/etc/vtuner.conf"
 class SATIPClient(Screen):
 	skin = """
 		<screen position="center,center" size="590,370">
-			<ePixmap pixmap="buttons/red.png" position="20,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="160,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="300,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="440,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="20,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="160,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="300,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="440,0" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="20,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#9f1313" transparent="1" />
 			<widget source="key_green" render="Label" position="160,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ffffff" backgroundColor="#1f771f" transparent="1" />

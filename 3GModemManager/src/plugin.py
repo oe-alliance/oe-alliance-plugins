@@ -158,19 +158,19 @@ class EditModemManual(ConfigListScreen, Screen):
 		<screen position="center,center" size="600,360" title="3G Modem Manager Config Edit">
 			<widget name="config" zPosition="2" position="0,0" size="600,300" scrollbarMode="showOnDemand" transparent="1" />
 
-			<ePixmap pixmap="buttons/red.png" position="5,320" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="155,320" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="305,320" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="455,320" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="5,320" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="155,320" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,320" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,320" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="5,320" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="155,320" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_blue" render="Label" position="455,320" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#18188b"  foregroundColor="#ffffff" transparent="1" />
 
-			<widget source="VKeyIcon" render="Pixmap" pixmap="buttons/key_text.png" position="50,200" zPosition="10" size="35,25" transparent="1" alphatest="on">
+			<widget source="VKeyIcon" render="Pixmap" pixmap="skin_default/buttons/key_text.png" position="50,200" zPosition="10" size="35,25" transparent="1" alphatest="on">
 				<convert type="ConditionalShowHide" />
 			</widget>
-			<widget name="HelpWindow" pixmap="vkey_icon.png" position="160,300" zPosition="1" size="1,1" transparent="1" alphatest="on" />
+			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,300" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 		</screen>
 		""" 
 		
@@ -344,10 +344,10 @@ class ModemManual(Screen):
 			<widget name="menulist" position="0,0" size="300,300" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 			<widget name="apnInfo" position="310,0" size="290,300" font="Regular;20" halign="left" backgroundColor="#a08500" transparent="1" />
 
-			<ePixmap pixmap="buttons/red.png" position="5,320" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="155,320" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="305,320" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="455,320" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="5,320" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="155,320" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,320" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,320" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="5,320" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="155,320" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
@@ -575,10 +575,10 @@ class ModemManager(Screen):
 			<widget name="statusTitle" position="0,160" size="600,120" font="Regular;20" halign="center" backgroundColor="#a08500" transparent="1" />
 			<widget name="statusInfo" position="0,185" size="600,120" font="Regular;20" halign="left" backgroundColor="#a08500" transparent="1" />
 
-			<ePixmap pixmap="buttons/red.png" position="5,420" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="155,420" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="305,420" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="455,420" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="5,420" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="155,420" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,420" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,420" size="140,40" alphatest="on" />
 
 			<widget name="myip" position="50,320" size="600,120" font="Regular;20" halign="left" backgroundColor="#a08500" transparent="1" />
 			

@@ -34,9 +34,9 @@ class TunerServer(Screen):
 		<widget name="lab2" position="10,400" size="300,30" font="Regular;20" valign="center" halign="right" transparent="0"/>
 		<widget name="labstop" position="320,400" size="260,30" font="Regular;20" valign="center" halign="center" backgroundColor="red"/>
 		<widget name="labrun" position="320,400" size="260,30" zPosition="1" font="Regular;20" valign="center" halign="center" backgroundColor="green"/>
-		<ePixmap pixmap="buttons/red.png" position="95,450" size="140,40" alphatest="on"/>
-		<ePixmap pixmap="buttons/green.png" position="330,450" size="140,40" alphatest="on"/>
-		<ePixmap pixmap="buttons/yellow.png" position="565,450" size="140,40" alphatest="on" />
+		<ePixmap pixmap="skin_default/buttons/red.png" position="95,450" size="140,40" alphatest="on"/>
+		<ePixmap pixmap="skin_default/buttons/green.png" position="330,450" size="140,40" alphatest="on"/>
+		<ePixmap pixmap="skin_default/buttons/yellow.png" position="565,450" size="140,40" alphatest="on" />
 		<widget name="key_red" position="95,450" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#9f1313" transparent="1"/>
 		<widget name="key_green" position="330,450" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#1f771f" transparent="1"/>
 		<widget name="key_yellow" position="565,450" zPosition="1" size="140,40" font="Regular;18" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />

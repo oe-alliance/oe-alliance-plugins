@@ -99,10 +99,10 @@ class DLNAFileList(FileList):
 class DLNAFileBrowser(Screen):
 	skin = 	"""
 		<screen name="DLNAFileBrowser" position="center,center" size="600,350" title="File Browser">
-			<ePixmap pixmap="buttons/red.png" position="5,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="155,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="5,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="155,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
@@ -114,10 +114,10 @@ class DLNAFileBrowser(Screen):
 		</screen>
 		<!--
 		<screen name="DLNAFileBrowser" position="center,90" size="1000,580" title="File Browser">
-			<ePixmap pixmap="buttons/red.png" position="55,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="305,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="555,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="805,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="55,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="305,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="555,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="805,0" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="55,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="305,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
@@ -317,7 +317,7 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/DLNABrowser/icons/mp_wb_background.png" position="0,0" zPosition="-1" size="455,53" />
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/DLNABrowser/icons/mp_wb_buttons.png" position="40,23" size="30,13" alphatest="on" />
 
-			<widget source="session.CurrentService" render="PositionGauge" position="80,25" size="220,10" zPosition="2" pointer="position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
+			<widget source="session.CurrentService" render="PositionGauge" position="80,25" size="220,10" zPosition="2" pointer="skin_default/position_pointer.png:540,0" transparent="1" foregroundColor="#20224f">
 				<convert type="ServicePosition">Gauge</convert>
 			</widget>
 
@@ -446,8 +446,8 @@ class DLNAImageViewer(Screen):
 		<screen position="0,0" size="%d,%d" flags="wfNoBorder">
 			<eLabel position="0,0" zPosition="0" size="%d,%d" backgroundColor="#00000000" />
 			<widget name="image" position="%d,%d" size="%d,%d" zPosition="1" alphatest="on" />
-			<widget name="status" position="%d,%d" size="20,20" zPosition="2" pixmap="icons/record.png" alphatest="on" />
-			<widget name="icon" position="%d,%d" size="20,20" zPosition="2" pixmap="icons/ico_mp_play.png"  alphatest="on" />
+			<widget name="status" position="%d,%d" size="20,20" zPosition="2" pixmap="skin_default/icons/record.png" alphatest="on" />
+			<widget name="icon" position="%d,%d" size="20,20" zPosition="2" pixmap="skin_default/icons/ico_mp_play.png"  alphatest="on" />
 			<widget source="message" render="Label" position="%d,%d" size="%d,25" font="Regular;20" halign="left" foregroundColor="#0038FF48" zPosition="2" noWrap="1" transparent="1" />
 		</screen>
 		""" % (w, h, w, h, s, s, w-(s*2), h-(s*2), s+5, s+2, s+25, s+2, s+45, s, w-(s*2)-50)
@@ -670,10 +670,10 @@ def isRunning():
 class DLNAClientConfig(ConfigListScreen, Screen):
 	skin=   """
 		<screen position="center,center" size="600,350" title="Mini DLNA Runcher">
-			<ePixmap pixmap="buttons/red.png" position="5,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="155,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="5,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="155,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
@@ -784,10 +784,10 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 class DLNADeviceBrowser(Screen):
 	skin = 	"""
 		<screen name="DLNADeviceBrowser" position="center,center" size="600,350" title="Device Browser">
-			<ePixmap pixmap="buttons/red.png" position="5,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="155,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,0" size="140,40" alphatest="on" />
 
 			<widget source="key_red" render="Label" position="5,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="155,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
