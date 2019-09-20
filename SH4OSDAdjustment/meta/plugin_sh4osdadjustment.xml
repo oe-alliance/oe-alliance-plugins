@@ -11,6 +11,6 @@
           </info>
 
 	  <files type="package"> <!-- without version, without .ipk -->
-		<file type="package" name="enigma2-plugin-systemplugins-ah4osdadjustment" />
+		<file type="package" name="enigma2-plugin-systemplugins-sh4osdadjustment" />
 	</files>
 </default>
