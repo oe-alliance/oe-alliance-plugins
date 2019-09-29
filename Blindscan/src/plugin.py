@@ -114,16 +114,16 @@ config.blindscan.filter_off_adjacent_satellites = ConfigSelection(default = defa
 
 class BlindscanState(Screen, ConfigListScreen):
 	skin="""
-	<screen position="center,center" size="820,570" title="Satellite Blindscan">
+	<screen position="center,center" size="820,576" title="Satellite Blindscan">
 		<widget name="progress" position="10,10" size="800,80" font="Regular;20"/>
 		<eLabel position="10,95" size="800,1" backgroundColor="grey"/>
 		<widget name="config" position="10,102" size="524,425" />
-		<eLabel position="544,95" size="1,440" backgroundColor="grey"/>
+		<eLabel position="544,95" size="1,435" backgroundColor="grey"/>
 		<widget name="post_action" position="554,102" size="256,140" font="Regular;19" halign="center"/>
-		<widget source="key_red" render="Label" position="10,530" size="100,30" font="Regular;19" halign="center" backgroundColor="red" foregroundColor="white"/>
-		<widget source="key_green" render="Label" position="120,530" size="100,30" font="Regular;19" halign="center" backgroundColor="green" foregroundColor="white"/>
-		<widget source="key_yellow" render="Label" position="230,530" size="100,30" font="Regular;19" halign="center" backgroundColor="yellow" foregroundColor="white"/>
-		<widget source="key_blue" render="Label" position="340,530" size="100,30" font="Regular;19" halign="center" foregroundColor="white" backgroundColor="blue"/>
+		<widget source="key_red" render="Label" position="10,536" size="140,30" font="Regular;19" valign="center" halign="center" backgroundColor="red" foregroundColor="white"/>
+		<widget source="key_green" render="Label" position="160,536" size="140,30" font="Regular;19" valign="center" halign="center" backgroundColor="green" foregroundColor="white"/>
+		<widget source="key_yellow" render="Label" position="310,536" size="140,30" font="Regular;19" valign="center" halign="center" backgroundColor="yellow" foregroundColor="white"/>
+		<widget source="key_blue" render="Label" position="460,536" size="140,30" font="Regular;19" valign="center" halign="center" foregroundColor="white" backgroundColor="blue"/>
 	</screen>
 	"""
 
