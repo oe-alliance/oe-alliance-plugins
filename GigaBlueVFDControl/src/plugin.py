@@ -367,7 +367,7 @@ def initLED():
 		forcmd = '1'
 	else:
 		forcmd = '0'
-	if BOX in ("gbtrio4k","gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h"):
+	if BOX in ("gbtrio4k","gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h", "gbx34k"):
 		cmd = 'echo STB does not support to show clock in Deep Standby'
 	else:
 		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
@@ -413,7 +413,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		self.Console = Console()
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
-		if BOX in ("gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h"):
+		if BOX in ("gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h", "gbx34k"):
 			self["key_yellow"] = Button("")
 		else:
 			self["key_yellow"] = Button(_("Update Date/Time"))
@@ -435,7 +435,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("Led Deep Standby"), config.plugins.VFD_Giga.ledDSBY2))
 			self.list.append(getConfigListEntry(_("Led state RUN"), config.plugins.VFD_Giga.ledRUN))
 			self.list.append(getConfigListEntry(_("Led state Standby"), config.plugins.VFD_Giga.ledSBY))
-			if BOX not in ("gbtrio4k", "gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gb800seplus", "gbquadplus", "gbipbox", "gbultra", "gbultraue", "gbultraueh", "gbultrase", "gbx1", "gbx2", "gbx3", "gbx3h"):
+			if BOX not in ("gbtrio4k", "gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gb800seplus", "gbquadplus", "gbipbox", "gbultra", "gbultraue", "gbultraueh", "gbultrase", "gbx1", "gbx2", "gbx3", "gbx3h", "gbx34k"):
 				self.list.append(getConfigListEntry(_("Led state Deep Standby"), config.plugins.VFD_Giga.ledDSBY))
 			self.list.append(getConfigListEntry(_("Led state Record"), config.plugins.VFD_Giga.ledREC))
 			self.list.append(getConfigListEntry(_("Blink Record Led"), config.plugins.VFD_Giga.recLedBlink))
@@ -535,7 +535,7 @@ class LED_Giga:
 
 def main(menuid, **kwargs):
 	if getImageDistro() == "openvix":
-		if BOX in ('gb800se', 'gb800solo', 'gbx1', 'gbx2', 'gbx3', 'gbx3h') and menuid == "leddisplay":
+		if BOX in ('gb800se', 'gb800solo', 'gbx1', 'gbx2', 'gbx3', 'gbx3h', 'gbx34k') and menuid == "leddisplay":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
 		elif BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k') and menuid == "display":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
