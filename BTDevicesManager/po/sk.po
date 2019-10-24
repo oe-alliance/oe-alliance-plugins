@@ -1,0 +1,78 @@
+#
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"PO-Revision-Date: 2018-10-14 12:58+0200\n"
+"Last-Translator: Ladislav Zilzi, zilizila@gmail.sk\n"
+"Language: sk_SK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: \n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "(Re)Scan"
+msgstr "Prehľadať"
+
+msgid "Autostart"
+msgstr "Autoštart"
+
+msgid "Bluetooth Devices Manager"
+msgstr "Bluetooth Devices Manager"
+
+msgid "Bluetooth Devices Manager Setup"
+msgstr "Bluetooth Devices Manager - Nastavenie"
+
+msgid "Can't not pair with selected device!"
+msgstr "Nie je možné spárovať s vybraným zariadením!"
+
+msgid "Config"
+msgstr "Konfigurácia"
+
+#
+msgid "Connect"
+msgstr "Pripojiť"
+
+msgid "Connection with:\n"
+msgstr "Pripojenie s:\n"
+
+#
+msgid "Disconnect"
+msgstr "Odpojiť"
+
+msgid "Exit"
+msgstr "Skončiť"
+
+msgid "MAC:\t\tDevice name:"
+msgstr "MAC:\t\tDevice name:"
+
+msgid "No BT devices found!"
+msgstr "Žiadne BT zariadenie nebolo nájdené!"
+
+msgid "No connected to any device"
+msgstr "Žiadne zariadenie nie je pripojené"
+
+msgid "Not detected devices around STB"
+msgstr "Neboli nájdené zariadenia v okolí STB"
+
+msgid "Please load BT driver by pressing BLUE button."
+msgstr "Stlačte MODRÉ tlačítko pre načítanie BT driveru."
+
+msgid "Save"
+msgstr "Uložiť"
+
+msgid "Scanning for devices..."
+msgstr "Hľadanie zariadení..."
+
+msgid "Scanning..."
+msgstr "Hľadanie..."
+
+msgid "This is bt devices manager"
+msgstr "Správca pre BT zariadenia"
+
+msgid "Trying to pair with:"
+msgstr "Pokus o párovanie s:"
+
+msgid "entry"
+msgstr "vstup"
