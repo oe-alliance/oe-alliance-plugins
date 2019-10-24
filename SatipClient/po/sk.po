@@ -84,7 +84,7 @@ msgid "Select"
 msgstr "Vybrať"
 
 msgid "Select tuner and press setup key (Yellow)"
-msgstr "Vyberte tuner a stlačte (Źlté) pre Nastavenie"
+msgstr "Vyberte tuner a stlačte (Žlté) pre Nastavenie"
 
 msgid "Server capacity is fulled."
 msgstr "Kapacita servera je naplnená."
