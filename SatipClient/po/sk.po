@@ -106,3 +106,13 @@ msgstr "TYP : %s"
 #, python-format
 msgid "VIRTUAL TUNER %s"
 msgstr "VIRTUAL TUNER %s"
+
+
+msgid "You should now reboot your STB to change SAT>IP Configuration.\n"
+"\n"
+"Reboot now ?\n"
+"\n"
+msgstr "Teraz by ste mali reštartovať váš STB pre zmeny v nastaveniach SAT>IP.\n"
+"\n"
+"Reštartovať teraz ?\n"
+"\n"
