@@ -109,3 +109,10 @@ msgstr ""
 #, python-format
 msgid "VIRTUAL TUNER %s"
 msgstr ""
+
+msgid ""
+"You should now reboot your STB to change SAT>IP Configuration.\n"
+"\n"
+"Reboot now ?\n"
+"\n"
+msgstr ""
