@@ -438,8 +438,8 @@ def Plugins(**kwargs):
 	l = []
 	l.append(PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=auto_start_main))
 	l.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, needsRestart=True, fnc=session_start_main, weight=-10))
-	l.append(PluginDescriptor(name=_("YouTube TV"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=start_youtubetv_main, needsRestart=True))
-	l.append(PluginDescriptor(name=_("YouTube TV Settings"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=plugin_setting_youtube))
+	#l.append(PluginDescriptor(name=_("YouTube TV"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=start_youtubetv_main, needsRestart=True))
+	#l.append(PluginDescriptor(name=_("YouTube TV Settings"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=plugin_setting_youtube))
 	l.append(PluginDescriptor(name=_("Browser Start/Stop"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=True, fnc=extension_toggle_browser))
 	l.append(PluginDescriptor(name=_("HbbTV Applications"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=True, fnc=extension_start_application))
 	l.append(PluginDescriptor(name=_("Opera Web Browser"), description=_("start opera web browser"), where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=True, fnc=plugin_start_browser))
