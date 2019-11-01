@@ -221,7 +221,7 @@ AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == d
 AM_CONDITIONAL(HAVE_ARMV7A, test "$BOXTYPE" == cube)
 AM_CONDITIONAL(HAVE_ARMV7AHF, test "$BOXTYPE" == hd51 -o "$BOXTYPE" == 8100s -o "$BOXTYPE" == vs1500 -o "$BOXTYPE" == vusolo4k -o "$BOXTYPE" == vuuno4k -o "$BOXTYPE" == vuuno4kse -o "$BOXTYPE" == vuzero4k -o "$BOXTYPE" == vuultimo4k -o "$BOXTYPE" == vuduo4k -o "$BOXTYPE" == dm900 -o "$BOXTYPE" == dm920 -o "$BOXTYPE" == sf4008 -o "$BOXTYPE" == dags7252 -o "$BOXTYPE" == dags72604 -o "$BOXTYPE" == gb7252 -o "$BOXTYPE" == xc7439 -o "$BOXTYPE" == h7 -o "$BOXTYPE" == h9 -o "$BOXTYPE" == h9combo -o "$BOXTYPE" == h10 -o "$BOXTYPE" == sf5008 -o "$BOXTYPE" == et1x000 -o "$BOXTYPE" == et13000 -o "$BOXTYPE" == cc1 -o "$BOXTYPE" == sf8008 -o "$BOXTYPE" == viper4k -o "$BOXTYPE" == hd60 -o "$BOXTYPE" == hd61 -o "$BOXTYPE" == i55plus -o "$BOXTYPE" == ustym4kpro -o "$BOXTYPE" == v8plus -o "$BOXTYPE" == multibox)
 AM_CONDITIONAL(HAVE_CORTEXA9HF, test "$BOXTYPE" == wetekplay)
-AM_CONDITIONAL(HAVE_AARCH64, test "$BOXTYPE" == wetekplay2 -o "$BOXTYPE" == alien5 -o "$BOXTYPE" == osmio4k)
+AM_CONDITIONAL(HAVE_AARCH64, test "$BOXTYPE" == wetekplay2 -o "$BOXTYPE" == alien5 -o "$BOXTYPE" == osmio4k -o "$BOXTYPE" == osmio4kplus -o "$BOXTYPE" == osmini4k)
 
 AC_CONFIG_FILES([
 Makefile
