@@ -206,6 +206,10 @@ if SF8008
 SUBDIRS += MultiTransCodingSetup VPLEDControl
 endif
 
+if SF8008M
+SUBDIRS += MultiTransCodingSetup VPLEDControl
+endif
+
 if VIPER4K
 SUBDIRS += MultiTransCodingSetup VPLEDControl
 endif
