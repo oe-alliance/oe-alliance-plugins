@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from enigma import fbClass, eRCInput
 import os, threading, time, socket, select, struct
 import vbcfg

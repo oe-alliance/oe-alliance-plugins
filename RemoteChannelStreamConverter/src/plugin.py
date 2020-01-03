@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 # for localized messages
 import os, re
 from . import _

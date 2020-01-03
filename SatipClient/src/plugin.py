@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from . import _
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
