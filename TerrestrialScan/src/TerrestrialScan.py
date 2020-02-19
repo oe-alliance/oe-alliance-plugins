@@ -321,7 +321,7 @@ class TerrestrialScan(Screen):
 
 		self.demuxer_id = self.rawchannel.reserveDemux()
 		if self.demuxer_id < 0:
-			print>>log, "[TerrestrialScan][getFrontend] Cannot allocate the demuxer"
+			print "[TerrestrialScan][getFrontend] Cannot allocate the demuxer"
 			self.showError(_('Cannot allocate the demuxer'))
 			return
 
