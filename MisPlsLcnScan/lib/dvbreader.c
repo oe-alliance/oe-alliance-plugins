@@ -601,8 +601,8 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 				int west_east_flag = (data[offset2 + 8] >> 7) & 0x01;
 				int polarization = (data[offset2 + 8] >> 5) & 0x03;
 				int roll_off = (data[offset2 + 8] >> 3) & 0x03;
-				int modulation_system = (data[offset2 + 8] >> 2) & 0x01;
-				int modulation_type = data[offset2 + 8] & 0x03;
+				int system = (data[offset2 + 8] >> 2) & 0x01;
+				int modulation = data[offset2 + 8] & 0x03;
 
 				int symbol_rate = (data[offset2 + 9] >> 4) * 1000000;
 				symbol_rate += (data[offset2 + 9] & 0xf) * 100000;
@@ -622,8 +622,8 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 						"west_east_flag", west_east_flag,
 						"polarization", polarization,
 						"roll_off", roll_off,
-						"modulation_system", modulation_system,
-						"modulation_type", modulation_type,
+						"system", system,
+						"modulation", modulation,
 						"symbol_rate", symbol_rate,
 						"fec_inner", fec_inner,
 						"descriptor_tag", descriptor_tag);
@@ -643,7 +643,7 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 				frequency += data[offset2 + 5] & 0x0f;
 
 				int fec_outer = data[offset2 + 7] & 0xf;
-				int modulation_type = data[offset2 + 8];
+				int modulation = data[offset2 + 8];
 
 				int symbol_rate = (data[offset2 + 9] >> 4) * 1000000;
 				symbol_rate += (data[offset2 + 9] & 0xf) * 100000;
@@ -660,7 +660,7 @@ PyObject *ss_parse_nit(unsigned char *data, int length) {
 						"original_network_id", original_network_id,
 						"frequency", frequency,
 						"fec_outer", fec_outer,
-						"modulation_type", modulation_type,
+						"modulation", modulation,
 						"symbol_rate", symbol_rate,
 						"fec_inner", fec_inner,
 						"descriptor_tag", descriptor_tag);
