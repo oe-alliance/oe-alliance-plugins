@@ -919,7 +919,7 @@ class Blindscan(ConfigListScreen, Screen):
 					self.polsave=tab_pol[pol] # Data returned by the binary is not good we must save polarisation
 				if getBrandOEM() in ('clap'):
 					self.frontend and self.frontend.closeFrontend()
-				if getBrandOEM() in ('uclan', 'amiko') or getBoxType().startswith('sf8008') or getMachineBuild() in ('gbmv200'):
+				if getBrandOEM() in ('uclan', 'amiko') or getMachineBuild() in ('gbmv200'): # or getBoxType().startswith('sf8008')
 					self.adjust_freq = False
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
