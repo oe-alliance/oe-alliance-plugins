@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2018-04-10 11:56+0200\n"
+"PO-Revision-Date: 2020-03-31 19:10+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: tr\n"
@@ -21,58 +21,60 @@ msgid "/etc/enigma2"
 msgstr ""
 
 msgid "/etc/tuxbox (default)"
-msgstr ""
+msgstr "/etc/tuxbox (varsayılan)"
 
 msgid "Exit"
-msgstr ""
+msgstr "Çıkış"
 
 msgid "Fetch"
-msgstr ""
+msgstr "Getirmek"
 
 #, python-format
 msgid ""
 "Fetching and saving %s.xml succeeded.\n"
 "Restart now for changes to take immediate effect?"
 msgstr ""
+"%s.xml getirilip kaydedildi.\n"
+"Değişikliklerin hemen etkili olması için şimdi yeniden başlatılsın mı?"
 
 msgid "File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
-msgstr ""
+msgstr "Dosya güncelleniyor, i.e. satellites.xml, cables.xml, veya terrestrial.xml"
 
 msgid "Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the default location. Files stored in \"/etc/enigma2\" override the default file and are not updated on a software update."
-msgstr ""
+msgstr "İndirilen dosyanın kaydedileceği klasör. \"/etc/tuxbox\" varsayılan konumdur. İçinde saklanan dosyalar \"/etc/enigma2\" varsayılan dosyayı geçersiz kılar ve yazılım güncellemesinde güncellenmez."
 
 msgid "OE-Alliance"
-msgstr ""
+msgstr "OE-Alliance"
 
 msgid "Online source where the transponder xml file is being retrieved from."
-msgstr ""
+msgstr "Transponder xml dosyasının alındığı çevrimiçi kaynak."
 
 msgid "Save to"
-msgstr ""
+msgstr "Şuraya kaydet"
 
 #, python-format
 msgid "Saving the %s.xml file failed"
-msgstr ""
+msgstr "%s.xml dosyası kaydedilemedi"
 
 msgid "Source"
-msgstr ""
+msgstr "Kaynak"
 
 #, python-format
 msgid "The %s.xml download was corrupt."
-msgstr ""
+msgstr "%s.xml indirmesi bozuk."
 
 #, python-format
 msgid "The %s.xml file could not be fetched"
-msgstr ""
+msgstr "%s.xml dosyası getirilemedi"
 
 msgid "XML update"
-msgstr ""
+msgstr "XML güncellemesi"
 
 msgid "cable"
-msgstr ""
+msgstr "Kablo TV"
 
 msgid "satellite"
-msgstr ""
+msgstr "Uydu"
 
 msgid "terrestrial"
-msgstr ""
+msgstr "Karasal"
