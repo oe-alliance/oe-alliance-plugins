@@ -286,7 +286,7 @@ msgstr "Kör tarama kullanıcı tarafından iptal edildi."
 
 #, python-format
 msgid "The suggested polarisation for this satellite is \"%s\"
-msgstr "Buy uydu icin önerilen polarizasyon \"%s\"
+msgstr "Bu uydu icin önerilen polarizasyon \"%s\"
 
 msgid "Transponder searching finished!"
 msgstr "Transponder aramasi bitti!"
