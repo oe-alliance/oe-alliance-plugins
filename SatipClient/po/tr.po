@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2018-10-14 21:43+0200\n"
+"PO-Revision-Date: 2020-04-06 22:30+0200\n"
 "Last-Translator: esmos <kucukogul@gmail.com>\n"
 "Language-Team: \n"
 "Language: tr_TR\n"
@@ -27,10 +27,10 @@ msgid "Description"
 msgstr "Açıklama"
 
 msgid "Disable"
-msgstr "Devre dışı"
+msgstr "Devre Dışı"
 
 msgid "Discover"
-msgstr "Arama"
+msgstr "Arama (keşfet)"
 
 #, python-format
 msgid "IP : %s"
@@ -40,7 +40,7 @@ msgid "Manufacturer"
 msgstr "Üretici"
 
 msgid "No vtuner found."
-msgstr "Vtuner bulunamadı."
+msgstr "Sanal Vtuner bulunamadı."
 
 msgid "Ok"
 msgstr "OK"
@@ -72,10 +72,10 @@ msgstr "SAT>IP Tuner Tipi : "
 
 #, python-format
 msgid "SAT>IP server discovering for %d seconds..."
-msgstr "SAT>IP Server-aranıyor %d Saniye..."
+msgstr "SAT>IP Server aranıyor %d Saniye..."
 
 msgid "SAT>IP server is not detected."
-msgstr "SAT>IP Server algılanmadı."
+msgstr "SAT>IP Server algılanmadı (bulunamadı)."
 
 msgid "Save"
 msgstr "Kaydet"
