@@ -39,7 +39,7 @@ msgid "Channelnumber in Standby off"
 msgstr "Kanal Numarası Bekleme modunda kapalı"
 
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr Bekleme Saatindeki Kanal Numarası/Saati""
+msgstr "Bekleme Saatindeki Kanal Numarası/Saati"
 
 msgid "Clock always"
 msgstr "Daima saat"
