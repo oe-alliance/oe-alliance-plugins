@@ -116,7 +116,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		</screen>
 		"""
 	def __init__(self, session): 
-                self.session = session
+		self.session = session
 		Screen.__init__(self, session)
 
 		self.oldConfig = {}
@@ -231,7 +231,7 @@ class DLNAServer(ConfigListScreen, Screen):
 			return self.menuItemLogDir
 		return None
 
-        def cbChangeDirectory(self, pathStr):
+	def cbChangeDirectory(self, pathStr):
 		if pathStr is None or pathStr.strip() == '':
 			return
 

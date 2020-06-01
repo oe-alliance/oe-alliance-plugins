@@ -84,7 +84,7 @@ class BBCiMenu(Screen):
 		self.value = value
 		osdList = []
 		
-		if self.action is "start":
+		if self.action == "start":
 			osdList.append((_("Search"), "search"))
 			osdList.append((_("TV Highlights"), "bbchighlights"))
 			osdList.append((_("Most Popular TV"), "bbcpopular"))
@@ -129,69 +129,69 @@ class BBCiMenu(Screen):
 		returnValue = self["BBCiMenu"].l.getCurrentSelection()[1]
 		returnValue2 = self["BBCiMenu"].l.getCurrentSelection()[1] + "," + self["BBCiMenu"].l.getCurrentSelection()[0] 
 		
-		if returnValue is "exit":
+		if returnValue == "exit":
 				self.removeFiles(self.imagedir)
 				self.close(None)
-		elif self.action is "start":
-			if returnValue is "bbc1":
+		elif self.action == "start":
+			if returnValue == "bbc1":
 				self.session.open(StreamsThumb, "bbc1", "BBC One", "http://feeds.bbc.co.uk/iplayer/bbc_one/list")
-			elif returnValue is "bbc2":
+			elif returnValue == "bbc2":
 				self.session.open(StreamsThumb, "bbc2", "BBC Two", "http://feeds.bbc.co.uk/iplayer/bbc_two/list")
-			elif returnValue is "bbc3":
+			elif returnValue == "bbc3":
 				self.session.open(StreamsThumb, "bbc3", "BBC Three", "http://feeds.bbc.co.uk/iplayer/bbc_three/list")
-			elif returnValue is "bbc4":
+			elif returnValue == "bbc4":
 				self.session.open(StreamsThumb, "bbc4", "BBC Four", "http://feeds.bbc.co.uk/iplayer/bbc_four/list")
-			elif returnValue is "cbbc":
+			elif returnValue == "cbbc":
 				self.session.open(StreamsThumb, "cbbc", "CBBC", "http://feeds.bbc.co.uk/iplayer/cbbc/list")
-			elif returnValue is "cbeeb":
+			elif returnValue == "cbeeb":
 				self.session.open(StreamsThumb, "cbeeb", "Cbeebies", "http://feeds.bbc.co.uk/iplayer/cbeebies/list")
-			elif returnValue is "bbcp":
+			elif returnValue == "bbcp":
 				self.session.open(StreamsThumb, "bbcp", "BBC Parliamanent", "http://feeds.bbc.co.uk/iplayer/bbc_parliament/list")
-			elif returnValue is "bbcn":
+			elif returnValue == "bbcn":
 				self.session.open(StreamsThumb, "bbcn", "BBC News", "http://feeds.bbc.co.uk/iplayer/bbc_news24/list")
-			elif returnValue is "bbca":
+			elif returnValue == "bbca":
 				self.session.open(StreamsThumb, "bbca", "BBC Alba", "http://feeds.bbc.co.uk/iplayer/bbc_alba/list")
-			elif returnValue is "bbchd":
+			elif returnValue == "bbchd":
 				self.session.open(StreamsThumb, "bbchd", "BBC HD", "http://feeds.bbc.co.uk/iplayer/bbc_hd/list")
-			elif returnValue is "bbchighlights":
+			elif returnValue == "bbchighlights":
 				self.session.open(StreamsThumb, "bbchighlights", "TV Highlights", "http://feeds.bbc.co.uk/iplayer/highlights/tv")
-			elif returnValue is "bbcpopular":
+			elif returnValue == "bbcpopular":
 				self.session.open(StreamsThumb, "bbcpopular", "Most Popular TV", "http://feeds.bbc.co.uk/iplayer/popular/tv")
-			elif returnValue is "bbcdrama":
+			elif returnValue == "bbcdrama":
 				self.session.open(StreamsThumb, "bbcdrama", "Drama", "http://feeds.bbc.co.uk/iplayer/categories/drama/tv/list")
-			elif returnValue is "bbcentertainment":
+			elif returnValue == "bbcentertainment":
 				self.session.open(StreamsThumb, "bbcentertainment", "Entertainment", "http://feeds.bbc.co.uk/iplayer/categories/entertainment/tv/list")
-			elif returnValue is "bbcfactual":
+			elif returnValue == "bbcfactual":
 				self.session.open(StreamsThumb, "bbcfactual", "Factual", "http://feeds.bbc.co.uk/iplayer/categories/factual/tv/list")
-			elif returnValue is "bbcsigned":
+			elif returnValue == "bbcsigned":
 				self.session.open(StreamsThumb, "bbcsigned", "Signed", "http://feeds.bbc.co.uk/iplayer/categories/signed/tv/list")
-			elif returnValue is "bbconedrama":
+			elif returnValue == "bbconedrama":
 				self.session.open(StreamsThumb, "bbconedrama", "BBC One Drama", "http://feeds.bbc.co.uk/iplayer/bbc_one/drama/tv/list")
-			elif returnValue is "bbccomedy":
+			elif returnValue == "bbccomedy":
 				self.session.open(StreamsThumb, "bbccomedy", "Comedy", "http://feeds.bbc.co.uk/iplayer/comedy/tv/list")
-			elif returnValue is "bbchealth":
+			elif returnValue == "bbchealth":
 				self.session.open(StreamsThumb, "bbchealth", "Health And Wellbeing", "http://feeds.bbc.co.uk/iplayer/bbc_three/factual/health_and_wellbeing/tv/list")
-			elif returnValue is "bbcwales":
+			elif returnValue == "bbcwales":
 				self.session.open(StreamsThumb, "bbcwales", "BBC Wales", "http://feeds.bbc.co.uk/iplayer/wales/tv/list")
-			elif returnValue is "bbcscotland":
+			elif returnValue == "bbcscotland":
 				self.session.open(StreamsThumb, "bbcscotland", "BBC Scotland", "http://feeds.bbc.co.uk/iplayer/scotland/tv/list")
-			elif returnValue is "bbcni":
+			elif returnValue == "bbcni":
 				self.session.open(StreamsThumb, "bbcni", "BBC Northern Ireland", "http://feeds.bbc.co.uk/iplayer/northern_ireland/tv/list")
-			elif returnValue is "film":
+			elif returnValue == "film":
 				self.session.open(StreamsThumb, "film", "Movies", "http://feeds.bbc.co.uk/iplayer/films/tv/list")
-			elif returnValue is "bbckids":
+			elif returnValue == "bbckids":
 				self.session.open(StreamsThumb, "bbckids", "Kids", "http://feeds.bbc.co.uk/iplayer/childrens/tv/list")
-			elif returnValue is "bbcnews":
+			elif returnValue == "bbcnews":
 				self.session.open(StreamsThumb, "bbcnews", "BBC News", "http://feeds.bbc.co.uk/iplayer/news/tv/list/")
-			elif returnValue is "bbcmusic":
+			elif returnValue == "bbcmusic":
 				self.session.open(StreamsThumb, "bbcmusic", "Music", "http://feeds.bbc.co.uk/iplayer/music/tv/list")
-			elif returnValue is "bbcsoaps":
+			elif returnValue == "bbcsoaps":
 				self.session.open(StreamsThumb, "bbcsoaps", "Soaps", "http://feeds.bbc.co.uk/iplayer/soaps/tv/list")
-			elif returnValue is "bbcsport":
+			elif returnValue == "bbcsport":
 				self.session.open(StreamsThumb, "bbcsport", "Sport", "http://feeds.bbc.co.uk/iplayer/categories/sport/tv/list")
-			elif returnValue is "bbcreligous":
+			elif returnValue == "bbcreligous":
 				self.session.open(StreamsThumb, "bbcreligous", "Religion", "http://feeds.bbc.co.uk/iplayer/religion_and_ethics/tv/list")
-			elif returnValue is "search":
+			elif returnValue == "search":
 				self.session.open(StreamsThumb, "search", "Search", "http://feeds.bbc.co.uk/iplayer/search/tv/?q=")
 
 	def cancel(self):

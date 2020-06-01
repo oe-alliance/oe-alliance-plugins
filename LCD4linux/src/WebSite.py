@@ -5,9 +5,9 @@ import os
 import time
 ########################################################
 class LCD4linuxweb(resource.Resource):
-    
+
 	title = "LCD4Linux Webinterface"
- 	isLeaf = False
+	isLeaf = False
 
 	def __init__(self):
 		self.HREF = "href=\"/lcd4linux/config\""

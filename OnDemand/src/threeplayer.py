@@ -80,7 +80,7 @@ class threeMainMenu(Screen):
 		self.value = value
 		osdList = []
 
-		if self.action is "start":
+		if self.action == "start":
 
 			osdList.append((_("Search"), "search"))
 			osdList.append((_("Most Talked About"), "talked"))
@@ -101,19 +101,19 @@ class threeMainMenu(Screen):
 	def go(self):
 		returnValue = self["threeMainMenu"].l.getCurrentSelection()[1]
 
-		if returnValue is "exit":
+		if returnValue == "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
-		elif self.action is "start":
-			if returnValue is "talked":
+		elif self.action == "start":
+			if returnValue == "talked":
 				self.session.open(StreamsThumb, "talked", "Most Talked About", "http://www.tv3.ie/3player")
-			elif returnValue is "straight":
+			elif returnValue == "straight":
 				self.session.open(StreamsThumb, "straight", "Straight Off The Telly", "http://www.tv3.ie/3player")
-			elif returnValue is "going":
+			elif returnValue == "going":
 				self.session.open(StreamsThumb, "going", "Going Going...", "http://www.tv3.ie/3player")
-			elif returnValue is "all_shows":
+			elif returnValue == "all_shows":
 				self.session.open(StreamsThumb, "all_shows", "All Shows", "http://www.tv3.ie/3player/allshows")
-			elif returnValue is "search":
+			elif returnValue == "search":
 				self.session.open(StreamsThumb, "search", "Search", "http://www.tv3.ie/player/assets/php/search.php")
 
 

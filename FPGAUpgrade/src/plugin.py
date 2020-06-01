@@ -242,8 +242,8 @@ class FPGAUpgrade(Screen):
 		self["file_list"] = FileList("/", matchingPattern = "^.*")
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", ],
-                {
-                        "red": self.onClickRed,
+			{
+			"red": self.onClickRed,
 			"green": self.onClickGreen,
 			"blue": self.onClickBlue,
 			"back": self.onClickRed,
@@ -252,14 +252,14 @@ class FPGAUpgrade(Screen):
 			"down": self.onClickDown,
 			"left": self.onClickLeft,
 			"right": self.onClickRight,
-                }, -1)
+			}, -1)
 		self.onLayoutFinish.append(self.doLayoutFinish)
 
-                self.ERROR_MSG = ''
-                self.ERROR_CODE = 0
-                self.SOURCELIST = self["file_list"]
-                self.STATUS_BAR = self["status"]
-                self.STATUS_BAR.setText(_(self.SOURCELIST.getCurrentDirectory()))
+		self.ERROR_MSG = ''
+		self.ERROR_CODE = 0
+		self.SOURCELIST = self["file_list"]
+		self.STATUS_BAR = self["status"]
+		self.STATUS_BAR.setText(_(self.SOURCELIST.getCurrentDirectory()))
 
 		self.DEVICE_LIST = '/dev/fpga_dp;/dev/dp;/dev/misc/dp;'
 		self.DOWNLOAD_TAR_PATH = '/tmp/'
@@ -373,12 +373,12 @@ class FPGAUpgrade(Screen):
 			before_name = self.SOURCELIST.getFilename()
 
 	def onClickOk(self):
-	        if self.SOURCELIST.canDescent() : # isDir
-	        	self.SOURCELIST.descent()
+		if self.SOURCELIST.canDescent() : # isDir
+			self.SOURCELIST.descent()
 			if self.SOURCELIST.getCurrentDirectory():
 				self.STATUS_BAR.setText(_(self.SOURCELIST.getCurrentDirectory()))
-        	else:
-			self.onClickGreen()
+			else:
+				self.onClickGreen()
 
 	def onClickUp(self):
 		self.SOURCELIST.up()

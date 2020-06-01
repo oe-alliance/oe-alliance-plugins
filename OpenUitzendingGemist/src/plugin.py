@@ -1341,7 +1341,7 @@ class OpenUg(Screen):
 		elif 'google' in self.choice:
 			if 'rtl' in self.choice:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				if len(tmp) == 2 and tmp[1] is not '':
+				if len(tmp) == 2 and tmp[1] != '':
 					tmp = self.getRTLStream(tmp[1])
 					if tmp != '':
 						myreference = eServiceReference(4097, 0, tmp)
@@ -2021,7 +2021,7 @@ class OpenUg(Screen):
 			name = k.encode("utf8")
 			url = v.encode("utf8")
 			if 'site:rtlxl.nl/#!' in search:
-				if 'http://www.rtlxl.nl/#!/a-z/' in url or url is 'http://www.rtlxl.nl/#!/gemist' or 'http://www.rtlxl.nl/#!/films/' in url:
+				if 'http://www.rtlxl.nl/#!/a-z/' in url or url == 'http://www.rtlxl.nl/#!/gemist' or 'http://www.rtlxl.nl/#!/films/' in url:
 					print('Not in list')
 				else:
 					mediaList.append((date, name, short, channel, url, icon, '', True))

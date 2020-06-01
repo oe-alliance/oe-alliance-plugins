@@ -184,7 +184,7 @@ class fourODMainMenu(Screen):
 		osdList = []
 
 		osdList.append((_("Search"), "search"))
-		if self.action is "start":
+		if self.action == "start":
 			# Read the URL for the selected category on the Main Menu.
 			try:
 				(data, isUK) = wgetUrl(self.url)
@@ -248,10 +248,10 @@ class fourODMainMenu(Screen):
 		title = self["fourODMainMenu"].l.getCurrentSelection()[0]
 		category = self["fourODMainMenu"].l.getCurrentSelection()[1]
 		
-		if category is "exit":
+		if category == "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
-		elif category is "search":
+		elif category == "search":
 			self.session.open(StreamsThumb, category, title, category)
 		else:
 			self.session.open(StreamsThumb, self.action, title, category)

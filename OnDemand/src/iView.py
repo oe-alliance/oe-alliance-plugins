@@ -87,7 +87,7 @@ class iViewMenu(Screen):
 		self.action = action
 		self.value = value
 		osdList = []
-		if self.action is "start":
+		if self.action == "start":
 			osdList.append((_("Search"), "search"))
 			osdList.append((_("Recently Added"), "recent"))
 			osdList.append((_("Comedy - Cult"), "cult"))
@@ -138,12 +138,12 @@ class iViewMenu(Screen):
 		name = self["iViewMenu"].l.getCurrentSelection()[0]
 		selection = self["iViewMenu"].l.getCurrentSelection()[1]
 		
-		if selection is "exit":
+		if selection == "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
 			
-		elif self.action is "start":
-			if selection is "atoz":
+		elif self.action == "start":
+			if selection == "atoz":
 				self.session.open(StreamsMenu, selection, name, selection)
 			else:
 				self.session.open(StreamsThumb, selection, name, selection)
@@ -169,7 +169,7 @@ class StreamsMenu(Screen):
 
 	def __init__(self, session, action, value, url):
 		Screen.__init__(self, session)
-		if action is 'atoz':
+		if action == 'atoz':
 			Screen.setTitle(self, _("ABC iView - A to Z"))
 
 		self.action = action
@@ -199,7 +199,7 @@ class StreamsMenu(Screen):
 		selection = self["latestMenu"].l.getCurrentSelection()[1]
 		
 		if selection is not None:
-			if selection is "exit":
+			if selection == "exit":
 				self.close(None)
 			else:
 				self.session.open(StreamsThumb, selection, title, selection)

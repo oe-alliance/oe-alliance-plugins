@@ -103,7 +103,7 @@ class iRadioMenu(Screen):
 		self.action = action
 		self.value = value
 		osdList = []
-		if self.action is "start":
+		if self.action == "start":
 			osdList.append((_("Favorites"), "favourites", "none"))
 			osdList.append((_("SHOUTcast Radio"), "shoutcast", "http://api.shoutcast.com/genre/primary?k=%s&f=xml"))
 			osdList.append((_("Tunein Radio"), "tunein", "http://opml.radiotime.com/"))

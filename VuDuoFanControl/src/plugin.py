@@ -66,12 +66,12 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 	def getFaninfo(self):
 		try:
 			value=int(open('/proc/stb/system/standby_fan_off', 'r').read())
-			if value is 0:
+			if value == 0:
 				config.plugins.fansetups.standbymode.value="on"
 			else:
 				config.plugins.fansetups.standbymode.value="off"
 			value=int(open('/proc/stb/system/use_fan_timer', 'r').read())
-			if value is 0:
+			if value == 0:
 				config.plugins.fansetups.usetimer.value = "off"
 			else:
 				config.plugins.fansetups.usetimer.value = "on"
@@ -97,9 +97,9 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		self.fanofftimeEntry = getConfigListEntry(_("Fan off duration time"), config.plugins.fansetups.fanofftime)
 
 		self.list.append( self.standbyEntry )
-		if config.plugins.fansetups.standbymode.value is "off":
+		if config.plugins.fansetups.standbymode.value == "off":
 			self.list.append( self.usetimerEntry )
-			if config.plugins.fansetups.usetimer.value is not "off":
+			if config.plugins.fansetups.usetimer.value != "off":
 				self.list.append( self.fanontimeEntry )
 				self.list.append( self.fanofftimeEntry )
 
@@ -134,11 +134,11 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 	def keySave(self):
 		ConfigListScreen.keySave(self)
 		try:
-			if config.plugins.fansetups.standbymode.value is "on":
+			if config.plugins.fansetups.standbymode.value == "on":
 				open('/proc/stb/system/standby_fan_off', 'w').write('0')
 			else:
 				open('/proc/stb/system/standby_fan_off', 'w').write('1')
-				if config.plugins.fansetups.usetimer.value is "off":
+				if config.plugins.fansetups.usetimer.value == "off":
 					open('/proc/stb/system/use_fan_timer', 'w').write('0')
 				else:
 					open('/proc/stb/system/use_fan_timer', 'w').write('1')
@@ -158,11 +158,11 @@ def selSetup(menuid, **kwargs):
 
 def setfansetup(reason, **kwargs):
 	try:
-		if config.plugins.fansetups.standbymode.value is "on":
+		if config.plugins.fansetups.standbymode.value == "on":
 			open('/proc/stb/system/standby_fan_off', 'w').write('0')
 		else:
 			open('/proc/stb/system/standby_fan_off', 'w').write('1')
-			if config.plugins.fansetups.usetimer.value is "off":
+			if config.plugins.fansetups.usetimer.value == "off":
 				open('/proc/stb/system/use_fan_timer', 'w').write('0')
 			else:
 				open('/proc/stb/system/use_fan_timer', 'w').write('1')

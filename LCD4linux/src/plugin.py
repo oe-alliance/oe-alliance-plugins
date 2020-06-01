@@ -11968,7 +11968,7 @@ def LCD4linuxPIC(self, session):
 					event_run = 0 if duration == 0 else int(ProgressBar*event_run/duration)
 					isData = True
 #					print event_begin, event_end, event.getDuration(), event.getPlayPosition()
-			if isData == True and ConfigBorder is not "off":
+			if isData == True and ConfigBorder != "off":
 				event_run=min(max(event_run, 0), ProgressBar)
 				if ConfigBorder[:4] == "true":
 					self.draw[draw].rectangle((POSX+9, ConfigPos, POSX+ProgressBar+11, ConfigPos+ConfigSize), outline=ConfigColor)

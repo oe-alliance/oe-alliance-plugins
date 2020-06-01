@@ -419,12 +419,12 @@ class FUFilebrowser(Screen):
 
 			<widget name="file_list" position="0,70" size="495,160" scrollbarMode="showOnDemand" />
 			<widget source="status" render="Label" position="0,230" zPosition="1" size="495,70" font="Regular;18" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-                </screen>
+		</screen>
 		"""
 
 	def __init__(self, session, parent, firmware):
 		Screen.__init__(self, session)
-                self.session = session
+		self.session = session
 
 
 		self["key_blue"] = StaticText(_("Download"))
@@ -432,7 +432,7 @@ class FUFilebrowser(Screen):
 		self["file_list"] = FileList("/", matchingPattern = "^.*")
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", ],
-                {
+			{
 			"ok":     self.onClickOk,
 			"cancel": self.onClickCancel,
 			"blue":   self.onClickBlue,
@@ -440,7 +440,7 @@ class FUFilebrowser(Screen):
 			"down":   self.onClickDown,
 			"left":   self.onClickLeft,
 			"right":  self.onClickRight,
-                }, -1)
+			}, -1)
 
 		self.resetGUI()
 		self.firmware = firmware
@@ -461,9 +461,9 @@ class FUFilebrowser(Screen):
 		if self.downloadLock:
 			return
 
-	        if self["file_list"].canDescent() : # isDir
-	        	self["file_list"].descent()
-        		return
+		if self["file_list"].canDescent() : # isDir
+			self["file_list"].descent()
+			return
 
 		# verify data
 		self.gbin = self["file_list"].getCurrentDirectory() + self["file_list"].getFilename()
@@ -655,12 +655,12 @@ class FirmwareUpgrade(Screen, ConfigListScreen):
 
 			<widget name="config" zPosition="2" position="0,70" itemHeight="36" size="540,40" scrollbarMode="showOnDemand" transparent="1" />
 			<widget source="status" render="Label" position="0,100" zPosition="1" size="540,75" font="Regular;20" halign="center" valign="center" />
-                </screen>
+		</screen>
 		"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-                self.session = session
+		self.session = session
 
 		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
 		{

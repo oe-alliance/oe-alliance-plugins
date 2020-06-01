@@ -118,7 +118,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Bluetooth Devices Manager Setup"))
 		self.skinName = ["Setup"]
-			
+
 		list = []
 		list.append(getConfigListEntry(_('Autostart'), config.btdevicesmanager.autostart))
 		list.append(getConfigListEntry(_('Audio Connect'), config.btdevicesmanager.audioconnect))
@@ -126,7 +126,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 
 		self["key_red"] = Label(_("Exit"))
 		self["key_green"] = Label(_("Save"))
-			
+
 		ConfigListScreen.__init__(self, list)
 		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], 
 		{
@@ -154,7 +154,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 				os.system("%s" % commandconnect)
 
 		config.btdevicesmanager.save()
-		
+
 		self.close()
 
 	def dontSaveAndExit(self):
@@ -162,7 +162,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 		    x[1].cancel()
 
 		self.close()
-		
+
 class BluetoothDevicesManager(Screen):
 	skin = 	"""
 		<screen name="BluetoothDevicesManager" position="center,center" size="600,450" >
@@ -223,7 +223,7 @@ class BluetoothDevicesManager(Screen):
 		cmd = "hcitool dev" ## check if hci0 is on the dev list, then make scan
 		self.taskManager.append(cmd, self.cbPrintAvailBTDev, self.cbStopDone)
 		self.taskManager.next()
-		
+
 	def cbPrintAvailBTDev(self, data):
 		print("[BluetoothManager] cbPrintAvailBTDev")
 		if data in ("Device is not available: No such device\n", "Devices:\n"): ## This message hidd return while it can not find bt dev
@@ -231,7 +231,7 @@ class BluetoothDevicesManager(Screen):
 			self["ConnStatus"].setText(_(msg))
 		else:
 			self.scanForDevices()
-			
+
 	def keyGreen(self):
 		print("[BluetoothManager] keyGreen")  
 		if config.btdevicesmanager.autostart.getValue() or brandoem in ("xcore", "edision"):
@@ -240,14 +240,14 @@ class BluetoothDevicesManager(Screen):
 		else:
 			self["devicelist"].setList([])
 			self["ConnStatus"].setText(_("Please load BT driver by pressing BLUE button."))
-	  
+
 	def scanForDevices(self):  
 		print("[BluetoothManager] scanForDevices")
 		# lets clear the list before Rescanning
 		self.devicelist = []
 		self.devicelist.append((_("Scanning for devices..."), _("Scanning...")))
 		self["devicelist"].setList(self.devicelist)
-		
+
 		# add background task for scanning
 		cmd = 'hcitool scan'
 		self.taskManager.append(cmd, self.cbPrintAvailDevices, self.cbRunNextTask)
@@ -255,26 +255,26 @@ class BluetoothDevicesManager(Screen):
 
 	def cbPrintAvailDevices(self, data):
 		print("[BluetoothManager] cbPrintAvailDevices")
-		
+
 		self.devicelist = []
 		self.devicelist.append((_("MAC:\t\tDevice name:"), _("entry")))
-		
+
 		data = data.splitlines()
 		i = 1
 		for x in data:
 			y = x.split("\t")
 			if not y[0] == "Scanning ...": ## We do not need to put this to the list
-			        i += 1
+				i += 1
 				self.devicelist.append((y[1] + "\t" + y[2], y[1]))
-		
+
 		if i == 1: ## Not sure if it is good idea, but worth to inform user that BT can not detect any other devices
 			self.devicelist = []
 			self.devicelist.append((_("MAC:\t\tDevice name:"), _("entry")))
 			self["ConnStatus"].setText(_("Not detected devices around STB"))
-			
+
 		self["devicelist"].setList(self.devicelist)
 		self.showConnections()
-		
+
 	def showConnections(self):
 		print("[BluetoothManager] showConnections")
 		if brandoem not in ("xcore", "edision"):
@@ -293,13 +293,13 @@ class BluetoothDevicesManager(Screen):
 						self["key_yellow"].setText(_("Disconnect"))
 			else:
 				self["ConnStatus"].setText(_("No connected to any device"))
-			
+
 	def cbPrintCurrentConnections(self, data):
 		print("[BluetoothManager] cbPrintCurrentConnections")
 		msg = _("Connection with:\n") + data[:-12]
 		self["ConnStatus"].setText(msg)
 		self["key_yellow"].setText(_("Disconnect"))
-		
+
 	def cbRefreshStatus(self):
 		self.refreshStatusTimer.stop()
 		mac_address = self.cb_mac_address
@@ -351,11 +351,11 @@ class BluetoothDevicesManager(Screen):
 			selectedItem = self["devicelist"].getCurrent()
 			if selectedItem is None or selectedItem[0] == "Scanning for devices...": ## If list is empty somehow or somebody pressed button while scanning
 				return
-			      
+
 			print("[BluetoothManager] trying to pair with: ", selectedItem[1])
 			msg = _("Trying to pair with:") + " " + selectedItem[1]
 			self["ConnStatus"].setText(msg)
-			
+
 			if brandoem not in ("xcore", "edision"):
 				cmd = "hidd --connect " + selectedItem[1]
 				self.taskManager.append(cmd, self.cbPrintAvailConnections, self.cbRunNextTask)
@@ -387,7 +387,7 @@ class BluetoothDevicesManager(Screen):
 					iBluetoothctl.agent_noinputnooutput()
 					iBluetoothctl.default_agent()
 					ret = iBluetoothctl.pair(mac_address)
-					if config.btdevicesmanager.audioaddress.getValue() is "":
+					if config.btdevicesmanager.audioaddress.getValue() == "":
 						config.btdevicesmanager.audioaddress.setValue(mac_address)
 					if ret is False:
 						if iBluetoothctl.passkey is not None:
@@ -431,7 +431,7 @@ class BluetoothDevicesManager(Screen):
 
 	def cbRunNextTask(self, ret):
 		self.taskManager.next()
-		
+
 	def cbStopDone(self, ret):
 		print("[BluetoothManager] cbStopDone")
 		self.taskManager.clean()
@@ -444,7 +444,7 @@ def start_menu_main(menuid, **kwargs):
 		return [(_("Bluetooth Devices Manager"), main, "bt_control", None)]
 	else:
 		return []
-		      
+
 def main(session, **kwargs):
 	session.open(BluetoothDevicesManager)
 

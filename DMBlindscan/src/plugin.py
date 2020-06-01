@@ -187,20 +187,20 @@ class SatelliteTransponderSearchSupport:
 				self.setTransponderSearchResult(None)
 		self.satellite_search_session = None
 		self.__tlist = None
-                self.timer.stop()
+		self.timer.stop()
 		self.TransponderSearchFinished()
 
 	def updateStateSat(self):
 		self.frontendStateChanged()
 
 	def frontendStateChanged(self):
-	    state = []
-	    state = self.frontend.getState()
-#	    print "State=", state[1]
-	    if state[1] > 1:
-		x = { }
-		self.frontend.getFrontendStatus(x)
-		assert x, "getFrontendStatus failed!"
+		state = []
+		state = self.frontend.getState()
+#		print "State=", state[1]
+		if state[1] > 1:
+			x = { }
+			self.frontend.getFrontendStatus(x)
+			assert x, "getFrontendStatus failed!"
 		if x["tuner_state"] in ("LOCKED", "FAILED", "LOSTLOCK"):
 			state = self.satellite_search_session
 
@@ -319,7 +319,7 @@ class SatelliteTransponderSearchSupport:
 			self.tuneNext()
 		else:
 			print("unhandled tuner state", x["tuner_state"])
-	    self.timer.start(500, True)
+		self.timer.start(500, True)
 
 	def tuneNext(self):
 		tparm = eDVBFrontendParameters()
@@ -392,7 +392,7 @@ class SatelliteTransponderSearchSupport:
 				if not self.frontend:
 					if self.session.pipshown: # try to disable pip
 						self.session.pipshown = False
-	                                        self.session.deleteDialog(self.session.pip)
+						self.session.deleteDialog(self.session.pip)
 						del self.session.pip
 					(self.channel, self.frontend) = self.tryGetRawFrontend(nim_idx, False, False)
 					if not self.frontend:

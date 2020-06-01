@@ -258,7 +258,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 		if len(apModeConfig.wep_key0.value) > 10:
 			apModeConfig.wepType.value = "128"
 
-		if apModeConfig.wpa.value is not "0" and apModeConfig.wpa_passphrase.value: # (1,WPA), (2,WPA2), (3,WPA/WPA2)
+		if apModeConfig.wpa.value != "0" and apModeConfig.wpa_passphrase.value: # (1,WPA), (2,WPA2), (3,WPA/WPA2)
 			apModeConfig.encrypt.value = True
 			apModeConfig.method.value = apModeConfig.wpa.value
 		elif apModeConfig.wep.value and apModeConfig.wep_key0.value:
@@ -309,7 +309,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 			self.configList.append( self.wirelessModeEntry )
 			self.configList.append( self.channelEntry )
 			self.configList.append( self.ssidEntry )
-			if apModeConfig.setupmode.value  is "advanced":
+			if apModeConfig.setupmode.value  == "advanced":
 				self.configList.append( self.beaconEntry )
 				self.configList.append( self.rtsThresholdEntry )
 				self.configList.append( self.fragmThresholdEntry )
@@ -318,12 +318,12 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 			self.configList.append( self.encryptEntry )
 			if apModeConfig.encrypt.value is True:
 				self.configList.append( self.methodEntry )
-				if apModeConfig.method.value is "0": # wep
+				if apModeConfig.method.value == "0": # wep
 					self.configList.append( self.wepKeyTypeEntry )
 					self.configList.append( self.wepKey0Entry )
 				else:
 					self.configList.append( self.wpaKeyEntry )
-					if apModeConfig.setupmode.value  is "advanced":
+					if apModeConfig.setupmode.value == "advanced":
 						self.configList.append( self.groupRekeyEntry )
 ## 		set network interfaces
 			self.configList.append( self.usedhcpEntry )

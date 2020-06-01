@@ -29,8 +29,8 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 		</screen>
 		"""
 
-        def __init__(self, session):
-                Screen.__init__(self, session)
+	def __init__(self, session):
+		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "OkCancelActions", "ColorActions", "EPGSelectActions",], {

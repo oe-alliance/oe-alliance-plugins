@@ -59,7 +59,7 @@ class ITVplayer(Screen):
 		self.action = action
 		self.value = value
 		osdList = []
-		if self.action is "start":
+		if self.action == "start":
 			osdList.append((_("Search"), "search"))
 			osdList.append((_("All Shows"), "all_shows"))
 			osdList.append((_("Back"), "exit"))
@@ -73,13 +73,13 @@ class ITVplayer(Screen):
 
 	def go(self):
 		returnValue = self["ITVMenu"].l.getCurrentSelection()[1]
-		if returnValue is "exit":
+		if returnValue == "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
-		elif self.action is "start":
-			if returnValue is "all_shows":
+		elif self.action == "start":
+			if returnValue == "all_shows":
 				self.session.open(StreamsThumb, "all_shows", "All Shows", "http://www.itv.com/_data/xml/CatchUpData/CatchUp360/CatchUpMenu.xml")
-			elif returnValue is "search":
+			elif returnValue == "search":
 				self.session.open(StreamsThumb, "search", "Search", "http://www.itv.com/_data/xml/CatchUpData/CatchUp360/CatchUpMenu.xml")
 
 	def cancel(self):

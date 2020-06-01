@@ -168,12 +168,12 @@ class Filebrowser(Screen):
 			<widget source="key_blue" render="Label" position="150,7" zPosition="1" size="340,40" font="Regular;20" halign="center" valign="center" transparent="1"/>
 			<widget name="file_list" position="0,60" size="500,360" scrollbarMode="showOnDemand" />
 			<widget source="status" render="Label" position="0,430" zPosition="1" size="500,75" font="Regular;18" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-                </screen>
+	</screen>
 		"""
 
 	def __init__(self, session, parent, firmware):
 		Screen.__init__(self, session)
-                self.session = session
+		self.session = session
 
 		self["key_blue"] = StaticText(_("Download the firmware (latest)"))
 		self["key_yellow"] = StaticText(_("Cancel"))
@@ -182,7 +182,7 @@ class Filebrowser(Screen):
 		self["file_list"] = FileList("/", matchingPattern = "^.*")
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", ],
-                {
+		{
 			"ok":     self.onClickOk,
 			"cancel": self.onClickCancel,
 			"blue":   self.onClickBlue,
@@ -191,7 +191,7 @@ class Filebrowser(Screen):
 			"down":   self.onClickDown,
 			"left":   self.onClickLeft,
 			"right":  self.onClickRight,
-                }, -1)
+		}, -1)
 
 		self.resetGUI()
 		self.firmware = firmware
@@ -212,9 +212,9 @@ class Filebrowser(Screen):
 		if self.downloadLock:
 			return
 
-	        if self["file_list"].canDescent() : # isDir
-	        	self["file_list"].descent()
-        		return
+		if self["file_list"].canDescent() : # isDir
+			self["file_list"].descent()
+			return
 
 		# verify data
 		self.gbin = self["file_list"].getCurrentDirectory() + self["file_list"].getFilename()
@@ -389,12 +389,11 @@ class FirmwareUpgrade(Screen):
 			<widget name="oldversion" position="320,100" size="100,25" font="Regular;20" />
 			<widget name="newversion" position="320,125" size="100,25" font="Regular;20" />
 			<widget source="status" render="Label" position="0,180" zPosition="1" size="510,75" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-                </screen>
-		"""
+		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-                self.session = session
+		self.session = session
 
 		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
 		{

@@ -685,7 +685,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 		</screen>
 		"""
 	def __init__(self, session):
-                self.session = session
+		self.session = session
 		Screen.__init__(self, session)
 
 		self.menulist  = []
