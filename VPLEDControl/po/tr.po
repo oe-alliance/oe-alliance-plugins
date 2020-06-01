@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 14:16+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"PO-Revision-Date: 2020-04-07 21:30+0200\n"
+"Last-Translator: esmos\n"
 "Language-Team: CÜNEYT OCAKLILAR <ocaklilar@gmail.com>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -18,63 +18,61 @@ msgstr ""
 "X-Poedit-Bookmarks: 2450,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 msgid "Always off"
-msgstr ""
+msgstr "Herzaman kapalı"
 
 msgid "Brightness Level 1"
-msgstr ""
+msgstr "Parlaklık Seviye 1"
 
 msgid "Brightness Level 2"
-msgstr ""
+msgstr "Parlaklık Seviye 2"
 
 msgid "Brightness level"
-msgstr ""
+msgstr "Parlaklık Seviyesi"
 
-#
 msgid "Cancel"
 msgstr "İptal"
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
+msgstr "Bekleme Saatindeki Kanal Numarası"
 
 msgid "Channelnumber in Standby off"
-msgstr ""
+msgstr "Kanal Numarası Bekleme modunda kapalı"
 
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
+msgstr "Bekleme Saatindeki Kanal Numarası/Saati"
 
 msgid "Clock always"
-msgstr ""
+msgstr "Daima saat"
 
 msgid "LED Display Setup"
-msgstr ""
+msgstr "LED Ekran Kurulumu"
 
 msgid "Off"
-msgstr ""
+msgstr "Kapalı"
 
 msgid "On/Off"
-msgstr ""
+msgstr "Açık/Kapalı"
 
-#
 msgid "Save"
 msgstr "Kaydet"
 
 msgid "Show REC-Symbol in Display"
-msgstr ""
+msgstr "Ekranda REC-Sembolünü Göster"
 
 msgid "Show blinking Clock on Display during recording"
-msgstr ""
+msgstr "Kayıt sırasında yanıp sönen Saati Ekranda Göster"
 
 msgid "Show on LED"
-msgstr ""
+msgstr "LED'de göster"
 
 msgid "Time mode"
-msgstr ""
+msgstr "Zaman modu"
 
 msgid "Update Date/Time"
-msgstr ""
+msgstr "Güncelleme Tarihi/Saati"
 
 msgid "no"
-msgstr ""
+msgstr "Hayır"
 
 msgid "yes"
-msgstr ""
+msgstr "Evet"
