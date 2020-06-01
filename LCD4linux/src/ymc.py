@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 try:
 	import simplejson
 except:
@@ -11,7 +12,7 @@ except:
 	import urllib
 
 class YMC:
-	def __init__(self,ip):
+	def __init__(self, ip):
 		self.IP = ip
 	def Urlget(self, url):
 		if url2:
@@ -25,24 +26,24 @@ class YMC:
 
 	def getPlayInfo(self):
 		try:
-			content,resp=self.Urlget("http://%s/YamahaExtendedControl/v1/netusb/getPlayInfo" % self.IP)
+			content, resp=self.Urlget("http://%s/YamahaExtendedControl/v1/netusb/getPlayInfo" % self.IP)
 			if resp == 200:
 				r=simplejson.loads(content)
 				return r
 			else:
 				return {}
 		except:
-			print "YMC Error"
+			print("YMC Error")
 			return {}
 
 	def getStatus(self):
 		try:
-			content,resp=self.Urlget("http://%s/YamahaExtendedControl/v1/main/getStatus" % self.IP)
+			content, resp=self.Urlget("http://%s/YamahaExtendedControl/v1/main/getStatus" % self.IP)
 			if resp == 200:
 				r=simplejson.loads(content)
 				return r
 			else:
 				return {}
 		except:
-			print "YMC Error"
+			print("YMC Error")
 			return {}

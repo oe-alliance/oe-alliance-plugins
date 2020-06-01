@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.MenuList import MenuList
@@ -62,7 +63,7 @@ def wgetUrl(target, refer='', cookie=''):
 def resolve_http_redirect(url, depth=0):
 	if depth > 10:
 		raise Exception("Redirected "+depth+" times, giving up.")
-	o = urlparse.urlparse(url,allow_fragments=True)
+	o = urlparse.urlparse(url, allow_fragments=True)
 	conn = httplib.HTTPConnection(o.netloc)
 	path = o.path
 	if o.query:
@@ -70,7 +71,7 @@ def resolve_http_redirect(url, depth=0):
 	conn.request("HEAD", path)
 	res = conn.getresponse()
 	headers = dict(res.getheaders())
-	if headers.has_key('location') and headers['location'] != url:
+	if 'location' in headers and headers['location'] != url:
 		return resolve_http_redirect(headers['location'], depth+1)
 	else:
 		return url
@@ -288,30 +289,30 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		return
 
 	def setSeekState(self, wantstate, onlyGUI = False):
-		print "setSeekState"
+		print("setSeekState")
 		if wantstate == self.STATE_PAUSED:
-			print "trying to switch to Pause- state:",self.STATE_PAUSED
+			print("trying to switch to Pause- state:", self.STATE_PAUSED)
 		elif wantstate == self.STATE_PLAYING:
-			print "trying to switch to playing- state:",self.STATE_PLAYING
+			print("trying to switch to playing- state:", self.STATE_PLAYING)
 		service = self.session.nav.getCurrentService()
 		if service is None:
-			print "No Service found"
+			print("No Service found")
 			return False
 		pauseable = service.pause()
 		if pauseable is None:
-			print "not pauseable."
+			print("not pauseable.")
 			self.state = self.STATE_PLAYING
 		if pauseable is not None:
-			print "service is pausable"
+			print("service is pausable")
 			if wantstate == self.STATE_PAUSED:
-				print "WANT TO PAUSE"
+				print("WANT TO PAUSE")
 				pauseable.pause()
 				self.state = self.STATE_PAUSED
 				if not self.shown:
 					self.hidetimer.stop()
 					self.show()
 			elif wantstate == self.STATE_PLAYING:
-				print "WANT TO PLAY"
+				print("WANT TO PLAY")
 				pauseable.unpause()
 				self.state = self.STATE_PLAYING
 				if self.shown:
@@ -399,7 +400,7 @@ class OpenUgSetupScreen(Screen):
 		self["key_green"] = StaticText(_("OK"))
 		self.lastservice = session.nav.getCurrentlyPlayingServiceReference()
 		if config.plugins.OpenUitzendingGemist.Modern.value:
-			self["actions"] = ActionMap(["SetupActions","DirectionActions"],
+			self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 			{
 			"ok": self.keyGo,
 			"cancel": self.keyCancel,
@@ -409,7 +410,7 @@ class OpenUgSetupScreen(Screen):
 			"right": self.right
 			}, -2)
 		else:
-			self["actions"] = ActionMap(["SetupActions","DirectionActions"],
+			self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 			{
 			"ok": self.keyGo,
 			"cancel": self.keyCancel
@@ -482,8 +483,8 @@ class OpenUgSetupScreen(Screen):
 
 	def down(self):
 		sel = self.CurSel
-		print 'len menu'
-		print len(self.mmenu)-1
+		print('len menu')
+		print(len(self.mmenu)-1)
 		if sel == len(self.mmenu)-1:
 			self.CurSel = 0
 		else:
@@ -548,7 +549,7 @@ class SmallScreen(Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		if config.plugins.OpenUitzendingGemist.Modern.value:
-			self["actions"] = ActionMap(["SetupActions","DirectionActions"],
+			self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 			{
 			"ok": self.keyGo,
 			"cancel": self.keyCancel,
@@ -558,7 +559,7 @@ class SmallScreen(Screen):
 			"right": self.right
 			}, -2)
 		else:
-			self["actions"] = ActionMap(["SetupActions","DirectionActions"],
+			self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 			{
 			"ok": self.keyGo,
 			"cancel": self.keyCancel
@@ -938,7 +939,7 @@ class OpenUg(Screen):
 				tmp_icon = self.getThumbnailName(x)
 				thumbnailFile = self.imagedir + tmp_icon
 				self.pixmaps_to_load.append(tmp_icon)
-				if not self.Details.has_key(tmp_icon):
+				if tmp_icon not in self.Details:
 					self.Details[tmp_icon] = { 'thumbnail': None}
 				if x[self.UG_ICON] != '':
 					if (os_path.exists(thumbnailFile) == True):
@@ -964,7 +965,7 @@ class OpenUg(Screen):
 		if retval == 'cancel' or retval is None:
 			return
 
-		if type(retval) == list:
+		if isinstance(retval, list):
 			if retval[0] == 'search':
 				self.title = 'Zoeken'
 				tmp = retval[1]
@@ -974,7 +975,7 @@ class OpenUg(Screen):
 					tmp = 'site:rtlxl.nl/#! ' + tmp
 				elif retval[2] == 'kijk':
 					tmp = 'site:kijk.nl/video/ ' + tmp
-					print tmp
+					print(tmp)
 				self.googleMediaList(self.mediaList, tmp)
 				if len(self.mediaList) == 0:
 					self.mediaProblemPopup()
@@ -1054,7 +1055,7 @@ class OpenUg(Screen):
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
 			offset = 0
-			while 1:
+			while True:
 				self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "must_see/offset/%d/numrows/24?XHRUrlAddOn=1" % (offset))
 				if len(self.mediaList) == 0:
 					self.mediaProblemPopup()
@@ -1068,7 +1069,7 @@ class OpenUg(Screen):
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
 			offset = 0
-			while 1:
+			while True:
 				self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "popular/offset/%d/numrows/24?XHRUrlAddOn=1" % (offset))
 				if len(self.mediaList) == 0:
 					self.mediaProblemPopup()
@@ -1183,7 +1184,7 @@ class OpenUg(Screen):
 				self.clearList()
 				self.level = self.UG_LEVEL_SERIE
 				offset = 0
-				while 1:
+				while True:
 					self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "epg/timeStart/%d/timeEnd/%d/day/%d/offset/%d/numrows/24?XHRUrlAddOn=1" % (startime, now, retval, offset))
 					if len(self.mediaList) == 0:
 						self.mediaProblemPopup()
@@ -1251,7 +1252,7 @@ class OpenUg(Screen):
 		ptr = self.picloads[picture_id].getData()
 		thumbnailFile = self.imagedir + str(picture_id)
 		if ptr != None:
-			if self.Details.has_key(picture_id):
+			if picture_id in self.Details:
 				self.Details[picture_id]["thumbnail"] = ptr
 		self.tmplist = []
 		pos = 0
@@ -1269,7 +1270,7 @@ class OpenUg(Screen):
 		if self.choice == 'sbs':
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.session.open(OpenUg, ['sbs' , tmp , self.channel])
+				self.session.open(OpenUg, ['sbs', tmp, self.channel])
 			elif self.level == self.UG_LEVEL_SERIE:
 				tmp = self.sbsGetMediaUrl(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
 				if tmp != '':
@@ -1279,10 +1280,10 @@ class OpenUg(Screen):
 		elif self.choice == 'rtl':
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.session.open(OpenUg, ['rtlseason' , tmp])
+				self.session.open(OpenUg, ['rtlseason', tmp])
 			elif self.level == self.UG_LEVEL_SEASON:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.session.open(OpenUg, ['rtlepisode' , tmp[0], tmp[1]])
+				self.session.open(OpenUg, ['rtlepisode', tmp[0], tmp[1]])
 			elif self.level == self.UG_LEVEL_SERIE:
 				tmp = self.getRTLStream(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
 				if tmp != '':
@@ -1294,11 +1295,11 @@ class OpenUg(Screen):
 		elif self.choice == 'dumpert':
 			if self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME] == ' ---> Volgende Pagina':
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.session.open(OpenUg, ['dumpert' , tmp])
+				self.session.open(OpenUg, ['dumpert', tmp])
 				self.close()
 			elif self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME] == ' <--- Vorige Pagina':
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.session.open(OpenUg, ['dumpert' , tmp])
+				self.session.open(OpenUg, ['dumpert', tmp])
 				self.close()
 			else:
 				tmp = self.getDumpertStream(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
@@ -1361,7 +1362,7 @@ class OpenUg(Screen):
 
 	def doUGPlay(self):
 		out = wgetUrl(self.UG_BASE_URL + "/nu/bekijk/context/bekijk_gemist/trm_id/%s?XHRUrlAddOn=1" % (self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]))
-		print out
+		print(out)
 		if out !='':
 			url = ''
 			tmp = out.split('\n')
@@ -1521,7 +1522,7 @@ class OpenUg(Screen):
 				if "\"name\"" in line:
 					state = 1
 			if state == 1:
-				url = line.split('\"')[1].replace(' ','')
+				url = line.split('\"')[1].replace(' ', '')
 				tmp = ".png"
 				icon_type = ''
 				if tmp in line:
@@ -1535,7 +1536,7 @@ class OpenUg(Screen):
 					channel = line.split(tmp)[1].split('\"')[0]
 				tmp = '\"abstract_key\":\"'
 				if tmp in line:
-					url = [(line.split(tmp)[1].split('\"')[0]) , url]
+					url = [(line.split(tmp)[1].split('\"')[0]), url]
 				tmp = "\"name\":\""
 				if tmp in line:
 					name = line.split(tmp)[1].split('"')[0]
@@ -1557,7 +1558,7 @@ class OpenUg(Screen):
 				if "\"name\"" in line:
 					state = 1
 			if state == 1:
-				url = line.split('\"')[1].replace(' ','')
+				url = line.split('\"')[1].replace(' ', '')
 				tmp = ".png"
 				if tmp in line:
 					tmp = "\"proglogo\":\""
@@ -1778,9 +1779,9 @@ class OpenUg(Screen):
 
 	def dumpert(self, mediaList, url):
 		data = wgetUrl(self.DUMPERT_BASE_URL + url, 'http://www.dumpert.nl/', 'playersize=large; nsfw=1')
-		data = Csplit(data, '<section id="content">',1)
-		data = Csplit(data, '<section class="dump-cnt">',1)
-		data = Csplit(data, '<div class="pagecontainer">',1)
+		data = Csplit(data, '<section id="content">', 1)
+		data = Csplit(data, '<section class="dump-cnt">', 1)
+		data = Csplit(data, '<div class="pagecontainer">', 1)
 		data = Csplit(data, '<div id="footcontainer">', 0)
 		data = Csplit(data, '<footer class="dump-ftr">', 0)
 		nexturl = ''
@@ -1841,14 +1842,14 @@ class OpenUg(Screen):
 			if tmp in data:
 				url = data.split(tmp)[1].split('"')[0]
 				url = base64.b64decode(url)
-				url = url.replace("{","").replace("}","").split(",")
+				url = url.replace("{", "").replace("}", "").split(",")
 				for line in url:
 					if '"720p"' in line:
-						vidurl = line.split('":"')[1].replace("\/","/").replace('"','')
+						vidurl = line.split('":"')[1].replace("\/", "/").replace('"', '')
 						if 'dumpert' in vidurl:
 							return vidurl
 					if '"tablet"' in line:
-						vidurl = line.split('":"')[1].replace("\/","/").replace('"','')
+						vidurl = line.split('":"')[1].replace("\/", "/").replace('"', '')
 				if 'dumpert' in vidurl:
 					return vidurl
 		return ''
@@ -2012,13 +2013,13 @@ class OpenUg(Screen):
 		g = pygoogle(search)
 		g.pages = 2
 		result = g.search()
-		print result
-		for k,v in result.items():
+		print(result)
+		for k, v in result.items():
 			name = k.encode("utf8")
 			url = v.encode("utf8")
 			if 'site:rtlxl.nl/#!' in search:
 				if 'http://www.rtlxl.nl/#!/a-z/' in url or url is 'http://www.rtlxl.nl/#!/gemist' or 'http://www.rtlxl.nl/#!/films/' in url:
-					print 'Not in list'
+					print('Not in list')
 				else:
 					mediaList.append((date, name, short, channel, url, icon, '', True))
 			elif 'site:kijk.nl/video/' in search:

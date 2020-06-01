@@ -5,12 +5,13 @@ Google AJAX Search Module
 http://code.google.com/apis/ajaxsearch/documentation/reference.html
 Needs Python 2.6 or later
 """
+from __future__ import print_function
 try:
     import json
-except ImportError,e:
+except ImportError as e:
     import simplejson as json
-except ImportError,e:
-    print e
+except ImportError as e:
+    print(e)
     exit()
 
 import sys
@@ -89,7 +90,7 @@ class pygoogle:
         returns list of results if successful or False otherwise
         '''
         results = []
-        for page in range(0,self.pages):
+        for page in range(0, self.pages):
             rsz = 8
             if self.rsz == RSZ_SMALL:
                 rsz = 4
@@ -105,7 +106,7 @@ class pygoogle:
             q = urllib.urlencode(args)
             search_results = urllib.urlopen(URL+q)
             data = json.loads(search_results.read())
-            if not data.has_key('responseStatus'):
+            if 'responseStatus' not in data:
                 self.logger.error('response does not have a responseStatus key')
                 continue
             if data.get('responseStatus') != 200:
@@ -113,12 +114,12 @@ class pygoogle:
                 self.logger.error('responseDetails : %s'%(data.get('responseDetails', None)))
                 continue
             if print_results:
-                if data.has_key('responseData') and data['responseData'].has_key('results'):
+                if 'responseData' in data and 'results' in data['responseData']:
                     for result in  data['responseData']['results']:
                         if result:
-                            print '[%s]'%(urllib.unquote(result['titleNoFormatting']))
-                            print result['content'].strip("<b>...</b>").replace("<b>",'').replace("</b>",'').replace("&#39;","'").strip()
-                            print urllib.unquote(result['unescapedUrl'])+'\n'                
+                            print('[%s]'%(urllib.unquote(result['titleNoFormatting'])))
+                            print(result['content'].strip("<b>...</b>").replace("<b>", '').replace("</b>", '').replace("&#39;", "'").strip())
+                            print(urllib.unquote(result['unescapedUrl'])+'\n')                
                 else:
                     # no responseData key was found in 'data' 
                     self.logger.error('no responseData key found in response. very unusal')
@@ -133,9 +134,9 @@ class pygoogle:
             self.logger.info('No results returned')
             return results
         for data in search_results:
-            if data.has_key('responseData') and data['responseData'].has_key('results'):
+            if 'responseData' in data and 'results' in data['responseData']:
                 for result in data['responseData']['results']:
-                    if result and result.has_key('titleNoFormatting'):
+                    if result and 'titleNoFormatting' in result:
                         title = urllib.unquote(result['titleNoFormatting'])
                         results[title] = urllib.unquote(result['unescapedUrl'])
             else:
@@ -146,21 +147,21 @@ class pygoogle:
     def search_page_wise(self):
         """Returns a dict of page-wise urls"""
         results = {}
-        for page in range(0,self.pages):
-            args = {'q' : self.query,
-                    'v' : '1.0',
-                    'start' : page,
+        for page in range(0, self.pages):
+            args = {'q': self.query,
+                    'v': '1.0',
+                    'start': page,
                     'rsz': RSZ_LARGE,
-                    'safe' : SAFE_OFF, 
-                    'filter' : FILTER_ON,    
+                    'safe': SAFE_OFF, 
+                    'filter': FILTER_ON,    
                     }
             q = urllib.urlencode(args)
             search_results = urllib.urlopen(URL+q)
             data = json.loads(search_results.read())
             urls = []
-            if data.has_key('responseData') and data['responseData'].has_key('results'):
+            if 'responseData' in data and 'results' in data['responseData']:
                 for result in  data['responseData']['results']:
-                    if result and result.has_key('unescapedUrl'):
+                    if result and 'unescapedUrl' in result:
                         url = urllib.unquote(result['unescapedUrl'])
                         urls.append(url)            
             else:
@@ -176,7 +177,7 @@ class pygoogle:
             self.logger.info('No results returned')
             return results
         for data in search_results:
-            if data and data.has_key('responseData') and data['responseData']['results']:
+            if data and 'responseData' in data and data['responseData']['results']:
                 for result in  data['responseData']['results']:
                     if result:
                         results.append(urllib.unquote(result['unescapedUrl']))
@@ -196,10 +197,10 @@ class pygoogle:
                 return 0
             result_count = result_count.get('responseData', None)
             if result_count:
-                if result_count.has_key('cursor') and result_count['cursor'].has_key('estimatedResultCount'):
+                if 'cursor' in result_count and 'estimatedResultCount' in result_count['cursor']:
                     return result_count['cursor']['estimatedResultCount']
             return 0
-        except Exception,e:
+        except Exception as e:
             self.logger.error(e)
         finally:
             self.pages = temp

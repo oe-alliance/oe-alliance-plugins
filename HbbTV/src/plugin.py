@@ -181,7 +181,7 @@ class VBHandler(VBHandlers):
 		if (vbcfg.g_channel_info):
 			try:
 				data = struct.pack('iiii', vbcfg.g_channel_info[0], vbcfg.g_channel_info[1], vbcfg.g_channel_info[2], len(vbcfg.g_channel_info[3])) + vbcfg.g_channel_info[3]
-			except Exception, err:
+			except Exception as err:
 				vbcfg.ERR(err)
 				return (False, None)
 		else:
@@ -292,7 +292,7 @@ class VBMain(Screen):
 				elif mode == 'Stop':
 					self.stop_browser()
 
-			except Exception, ErrMsg:
+			except Exception as ErrMsg:
 				vbcfg.ERR("toggle browser: %s" % ErrMsg)
 
 	def menu_hbbtv_applications(self):
@@ -309,7 +309,7 @@ class VBMain(Screen):
 		try:
 			if selected[1] is not None:
 				self._cb_hbbtv_activated(selected[1]["url"], selected[1])
-		except Exception, ErrMsg:
+		except Exception as ErrMsg:
 			vbcfg.ERR(ErrMsg)
 
 	def get_autostart_application(self):
@@ -364,7 +364,7 @@ class VBMain(Screen):
 		try:
 			ret = os.popen('%s/%s check'%(vbcfg.APPROOT, vbcfg.APP_RUN)).read()
 			return ret.strip() != "0"
-		except Exception, ErrMsg:
+		except Exception as ErrMsg:
 			vbcfg.ERR("check browser running: %s" % ErrMsg)
 		return False
 
@@ -380,8 +380,8 @@ def HelpableScreen__init__(self):
 		HelpableScreen.showManual = showManual
 
 		self["helpActions"] = ActionMap(["HelpbuttonActions"], {
-			"help_b" : self.showHelp,
-			"help_l" : self.showManual,
+			"help_b": self.showHelp,
+			"help_l": self.showManual,
 		}, -2)
 
 def showManual(self):

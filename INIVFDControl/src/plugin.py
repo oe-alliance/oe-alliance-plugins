@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -21,8 +22,8 @@ from boxbranding import getBoxType
 import Screens.Standby
 
 config.plugins.VFD_ini = ConfigSubsection()
-config.plugins.VFD_ini.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_ini.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.VFD_ini.showClock = ConfigSelection(default = "True_Switch", choices = [("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.VFD_ini.timeMode = ConfigSelection(default = "24h", choices = [("12h"), ("24h")])
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
@@ -141,12 +142,12 @@ class Channelnumber:
 ChannelnumberInstance = None
 
 def leaveStandby():
-	print "[VFD-INI] Leave Standby"
+	print("[VFD-INI] Leave Standby")
 	if config.plugins.VFD_ini.showClock.value == 'Off':
 		vfd_write("....")
 
 def standbyCounterChanged(configElement):
-	print "[VFD-INI] In Standby"
+	print("[VFD-INI] In Standby")
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
 
@@ -154,7 +155,7 @@ def standbyCounterChanged(configElement):
 		vfd_write("....")
 
 def initVFD():
-	print "[VFD-INI] initVFD"
+	print("[VFD-INI] initVFD")
 	if config.plugins.VFD_ini.showClock.value == 'Off':
 		vfd_write("....")
 
@@ -184,7 +185,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -207,12 +208,12 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self.newConfig()
 
 	def newConfig(self):
-		print self["config"].getCurrent()[0]
+		print(self["config"].getCurrent()[0])
 		if self["config"].getCurrent()[0] == _('Show on display'):
 			self.createSetup()
 
 	def abort(self):
-		print "aborting"
+		print("aborting")
 
 	def save(self):
 		for x in self["config"].list:
@@ -230,7 +231,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 
 class VFD_INI:
 	def __init__(self, session):
-		print "[VFD-INI] initializing"
+		print("[VFD-INI] initializing")
 		self.session = session
 		self.service = None
 		self.onClose = [ ]
@@ -247,7 +248,7 @@ class VFD_INI:
 		self.abort()
 
 	def abort(self):
-		print "[VFD-INI] aborting"
+		print("[VFD-INI] aborting")
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
@@ -268,20 +269,20 @@ def controliniVfd():
 	global mySession
 
 	if gReason == 0 and mySession != None and iniVfd == None:
-		print "[VFD-INI] Starting !!"
+		print("[VFD-INI] Starting !!")
 		iniVfd = VFD_INI(mySession)
 	elif gReason == 1 and iniVfd != None:
-		print "[VFD-INI] Stopping !!"
+		print("[VFD-INI] Stopping !!")
 
 		iniVfd = None
 
 def sessionstart(reason, **kwargs):
-	print "[VFD-INI] sessionstart"
+	print("[VFD-INI] sessionstart")
 	global iniVfd
 	global gReason
 	global mySession
 
-	if kwargs.has_key("session"):
+	if "session" in kwargs:
 		mySession = kwargs["session"]
 	else:
 		gReason = reason
@@ -290,6 +291,6 @@ def sessionstart(reason, **kwargs):
 def Plugins(**kwargs):
 		if getBoxType() in ('xpeedlx1', 'atemio6000', 'atemio6100', 'bwidowx', 'bwidowx2', 'mbhybrid', 'opticumtt'):
 			return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings", where = PluginDescriptor.WHERE_MENU, fnc = main) ]
 		else:
 			return []

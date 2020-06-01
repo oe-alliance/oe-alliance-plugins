@@ -22,9 +22,9 @@ from boxbranding import getImageDistro, getBoxType
 import Screens.Standby
 
 config.plugins.SEG = ConfigSubsection()
-config.plugins.SEG.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.SEG.showCHnumber = ConfigSelection(default = "15", choices = [("15",_("15 sec")),("30",_("30 sec")),("45",_("45 sec")),("60",_("60 sec"))])
-config.plugins.SEG.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.SEG.showClock = ConfigSelection(default = "True_Switch", choices = [("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.SEG.showCHnumber = ConfigSelection(default = "15", choices = [("15", _("15 sec")), ("30", _("30 sec")), ("45", _("45 sec")), ("60", _("60 sec"))])
+config.plugins.SEG.timeMode = ConfigSelection(default = "24h", choices = [("12h"), ("24h")])
 
 def display_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
@@ -46,7 +46,7 @@ class Channelnumber:
 		self.TimerText.start(1000, True)
 		self.onClose = [ ]
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 			{
 				iPlayableService.evStart: self.__evStart,
 			})
@@ -199,7 +199,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("Save"))
 		self["key_yellow"] = Button(_("Update Date/Time"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.Save,
 			"cancel": self.Cancel,
@@ -267,7 +267,7 @@ class SEG:
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
-		if getImageDistro() in ("openatv" , "openhdf", "openvix"):
+		if getImageDistro() in ("openatv", "openhdf", "openvix"):
 			if menuid == "display":
 				return [(_("LED Display Setup"), startSEG, "VFD_INI", None)]
 			else:
@@ -300,7 +300,7 @@ def sessionstart(reason, **kwargs):
 	global gReason
 	global mySession
 
-	if kwargs.has_key("session"):
+	if "session" in kwargs:
 		mySession = kwargs["session"]
 	else:
 		gReason = reason
@@ -308,5 +308,5 @@ def sessionstart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-		PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+		PluginDescriptor(name="LED Display Setup", description="Change LED display settings", where = PluginDescriptor.WHERE_MENU, fnc = main) ]
 

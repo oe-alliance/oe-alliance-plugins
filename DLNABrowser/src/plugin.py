@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Plugins.Extensions.PicturePlayer.ui import *
 import os
@@ -24,28 +25,28 @@ from Components.MultiContent import MultiContentEntryText
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 EXTENSIONS = {
-	".m4a" : "music",
-	".mp2" : "music",
-	".mp3" : "music",
-	".wav" : "music",
-	".ogg" : "music",
+	".m4a": "music",
+	".mp2": "music",
+	".mp3": "music",
+	".wav": "music",
+	".ogg": "music",
 	".flac": "music",
-	".ts"  : "movie",
-	".avi" : "movie",
+	".ts": "movie",
+	".avi": "movie",
 	".divx": "movie",
-	".m4v" : "movie",
-	".mpg" : "movie",
+	".m4v": "movie",
+	".mpg": "movie",
 	".mpeg": "movie",
-	".mkv" : "movie",
-	".mp4" : "movie",
-	".mov" : "movie",
+	".mkv": "movie",
+	".mp4": "movie",
+	".mov": "movie",
 	".m2ts": "movie",
-	".wmv" : "movie",
-	".jpg" : "picture",
+	".wmv": "movie",
+	".jpg": "picture",
 	".jpeg": "picture",
-	".png" : "picture",
-	".bmp" : "picture",
-	".m3u" : "stream",
+	".png": "picture",
+	".bmp": "picture",
+	".m3u": "stream",
 	".m3u8": "stream",
 }
 
@@ -156,11 +157,11 @@ class DLNAFileBrowser(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 		self.showCB = {
-			'movie'   : self.showMovie,
-			'music'   : self.showMusic,
-			'picture' : self.showPicture,
-			'stream'  : self.showStream,
-			'unknown' : self.showUnknown,
+			'movie': self.showMovie,
+			'music': self.showMusic,
+			'picture': self.showPicture,
+			'stream': self.showStream,
+			'unknown': self.showUnknown,
 		}
 
 	def layoutFinished(self):
@@ -397,7 +398,7 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 	def setSeekState(self, wantstate):
 		service = self.session.nav.getCurrentService()
 		if service is None:
-			print "No Service found"
+			print("No Service found")
 			return
 
 		pauseable = service.pause()
@@ -456,9 +457,9 @@ class DLNAImageViewer(Screen):
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MovieSelectionActions"], {
 			"cancel": self.keyCancel,
-			"left"  : self.keyLeft,
-			"right" : self.keyRight,
-			"blue"  : self.keyBlue,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"blue": self.keyBlue,
 			"yellow": self.keyYellow,
 		}, -1)
 
@@ -575,7 +576,7 @@ class DLNAImageViewer(Screen):
 		if ptr != None:
 			text = ""
 			try:
-				text = picInfo.split('\n',1)
+				text = picInfo.split('\n', 1)
 				text = "(" + str(self.currentIndex+1) + "/" + str(self.fileListLen+1) + ") " + text[0].split('/')[-1]
 			except:
 				pass
@@ -590,7 +591,7 @@ class DLNAImageViewer(Screen):
 		self["status"].show()
 
 	def cbSlideShow(self):
-		print "slide to next Picture index=" + str(self.lsatIndex)
+		print("slide to next Picture index=" + str(self.lsatIndex))
 		if config.pic.loop.value==False and self.lsatIndex == self.fileListLen:
 			self.PlayPause()
 		self.displayNow = True
@@ -608,15 +609,15 @@ class TaskManager:
 		self.taskList.append([command+'\n', cbDataFunc, cbCloseFunc])
 
 	def dump(self):
-		print "############### TASK ###############"
-		print "Current Task Index :", self.taskIdx
-		print "Current Task Instance :", self.gTaskInstance
-		print "Occur Error :", self.occurError
-		print "Task List:\n", self.taskList
-		print "####################################"
+		print("############### TASK ###############")
+		print("Current Task Index :", self.taskIdx)
+		print("Current Task Instance :", self.gTaskInstance)
+		print("Occur Error :", self.occurError)
+		print("Task List:\n", self.taskList)
+		print("####################################")
 
 	def error(self):
-		print "[DLNAClient Plugin] Info >> set task error!!"
+		print("[DLNAClient Plugin] Info >> set task error!!")
 		self.occurError = True
 
 	def reset(self):
@@ -628,7 +629,7 @@ class TaskManager:
 		self.reset()
 		self.taskList = []
 		self.cbSetStatusCB = None
-		print "clear task!!"
+		print("clear task!!")
 
 	def index(self):
 		self.taskIdx
@@ -638,7 +639,7 @@ class TaskManager:
 
 	def next(self):
 		if self.taskIdx >= len(self.taskList) or self.occurError:
-			print "[DLNAClient Plugin] Info >> can't run task!!"
+			print("[DLNAClient Plugin] Info >> can't run task!!")
 			return False
 		command     = self.taskList[self.taskIdx][0]
 		cbDataFunc  = self.taskList[self.taskIdx][1]
@@ -652,7 +653,7 @@ class TaskManager:
 		if self.cbSetStatusCB is not None:
 			self.cbSetStatusCB(self.taskIdx)
 
-		print "[DLNAClient Plugin] Info >> prepared command : %s"%(command)
+		print("[DLNAClient Plugin] Info >> prepared command : %s"%(command))
 		self.gTaskInstance.execute(command)
 		self.taskIdx += 1
 		return True
@@ -694,10 +695,10 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 		global DLNA_CONFIG_CLIENT_CONFNAME
 		self.configFileName = DLNA_CONFIG_CLIENT_CONFNAME
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", ], {
-			"red"    : self.keyExit,
-			"green"  : self.keyOK,
-			"cancel" : self.keyExit,
-			"ok"     : self.keyOK,
+			"red": self.keyExit,
+			"green": self.keyOK,
+			"cancel": self.keyExit,
+			"ok": self.keyOK,
                 }, -2)
 		self["key_red"]     = StaticText(_("Exit"))
 		self["key_green"]   = StaticText(_("Save"))
@@ -740,13 +741,13 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 	def writeConfigFile(self):
 		def configDataAppend(origin, key, value):
 			if key.strip() != '' and value.strip() != '':
-				origin += "%s=%s\n" % (key,value)
+				origin += "%s=%s\n" % (key, value)
 			return origin
 		configString = ""
 		#configString = configDataAppend(configString, "rootdir", self.menuItemRootDir.value)
 		configString = configDataAppend(configString, "refresh", self.menuItemRefresh.value)
 		configString = configDataAppend(configString, "slideshow", self.menuItemSlideshow.value)
-		print configString
+		print(configString)
 		confFile = file(self.configFileName, 'w')
 		confFile.write(configString)
 		confFile.close()
@@ -771,14 +772,14 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 				continue
 			try:
 				i   = line.find('=')
-				k,v = line[:i],line[i+1:]
+				k, v = line[:i], line[i+1:]
 				self.oldConfig[k] = v
 			except : pass
 
 		#setDefault('rootdir', '/media/upnp/')
 		setDefault('refresh', '10')
 		setDefault('slideshow', '10')
-		print "Current Config : ", self.oldConfig
+		print("Current Config : ", self.oldConfig)
 
 
 class DLNADeviceBrowser(Screen):
@@ -800,12 +801,12 @@ class DLNADeviceBrowser(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self["actions"]  = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
-			"ok"    : self.keyOK,
+			"ok": self.keyOK,
 			"cancel": self.keyCancel,
-			"red"   : self.keyCancel,
-			"green" : self.keyGreen,
+			"red": self.keyCancel,
+			"green": self.keyGreen,
 			"yellow": self.keyYellow,
-			"blue"  : self.keyBlue,
+			"blue": self.keyBlue,
 		}, -1)
 
 		global DLNA_CONFIG_CLIENT_CONFNAME
@@ -872,7 +873,7 @@ class DLNADeviceBrowser(Screen):
 		self.deviceListRefreshTimer.stop()
 
 	def keyBlue(self):
-		print "updated device list!!"
+		print("updated device list!!")
 		self["devicelist"].setList(self.setListOnView())
 
 	def initConfig(self):
@@ -883,7 +884,7 @@ class DLNADeviceBrowser(Screen):
 			DLNA_CONFIG_ROOT_DIR = '/media/upnp/'
 			DLNA_CONFIG_DEVICE_REFRESH = 10000
 			DLNA_CONFIG_SLIDESHOW = 10000
-			print "config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH)
+			print("config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH))
 			return
 		for line in file(self.configFileName).readlines():
 			line = line.strip()
@@ -891,12 +892,12 @@ class DLNADeviceBrowser(Screen):
 				continue
 			try:
 				i   = line.find('=')
-				k,v = line[:i],line[i+1:]
+				k, v = line[:i], line[i+1:]
 				if k == 'rootdir':	DLNA_CONFIG_ROOT_DIR = v
 				elif k == 'refresh':	DLNA_CONFIG_DEVICE_REFRESH = int(v)*1000
 				elif k == 'slideshow':	DLNA_CONFIG_SLIDESHOW = int(v)*1000
 			except : pass
-		print "config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH)
+		print("config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH))
 
 	def updateGUI(self):
 		green_btm_str = 'Start'
@@ -919,7 +920,7 @@ class DLNADeviceBrowser(Screen):
 			if rootdir is not None:
 				if DLNA_CONFIG_ROOT_DIR != rootdir:
 					DLNA_CONFIG_ROOT_DIR = rootdir
-					print "need restart!!!"
+					print("need restart!!!")
 		except: pass
 		try:
 			if slideshow is not None:
@@ -928,10 +929,10 @@ class DLNADeviceBrowser(Screen):
 					DLNA_CONFIG_SLIDESHOW = newSlideshow
 		except: pass
 		self.deviceListRefreshTimer.start(DLNA_CONFIG_DEVICE_REFRESH)
-		print "config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH)
+		print("config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH))
 
 	def cbPrintAvail(self, data):
-		print data
+		print(data)
 
 	def cbPrintClose(self, ret):
 		self.taskManager.next()
@@ -958,12 +959,12 @@ class DLNADeviceBrowser(Screen):
 
 	def setListOnView(slelf):
 		global DLNA_CONFIG_ROOT_DIR
-		items,rootdir = [],DLNA_CONFIG_ROOT_DIR
+		items, rootdir = [], DLNA_CONFIG_ROOT_DIR
 		deviceList = [ name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name)) ]
 		deviceList.sort()
 		for d in deviceList:
 			if d[0] in ('.', '_'): continue
-			items.append((d,d))
+			items.append((d, d))
 		return items
 
 def autostart(reason, **kwargs):
@@ -978,12 +979,12 @@ def autostart(reason, **kwargs):
 
 		if config.plugins.dlnabrowser.autostart.value:
 			if is_running:
-				print "[DLNABrowser] already started"
+				print("[DLNABrowser] already started")
 			else:
-				print "[DLNABrowser] starting ..."
+				print("[DLNABrowser] starting ...")
 				os.system(cmd)
 		elif config.plugins.dlnabrowser.autostart.value == False and is_running == True:
-				print "[DLNABrowser] stopping ..."
+				print("[DLNABrowser] stopping ...")
 				os.system(cmd)
 def main(session, **kwargs):
 	session.open(DLNADeviceBrowser)

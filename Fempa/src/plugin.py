@@ -2,6 +2,7 @@
 ###########################################################################
 ##################### By:subixonfire  www.satforum.me #####################
 ###########################################################################
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.InfoBar import MoviePlayer as MP_parent
@@ -55,17 +56,17 @@ class fempa(Screen):
 				response.close()
 				return htmldoc 
 			except :
-				print "jebiga gethtml"
+				print("jebiga gethtml")
 		
 		html = gethtml("http://www.p4.no/section.aspx?id=443")
 	
 		files = re.compile('''"Id":([0-9]*?),"Path":"openP4PlayerModal\('clip', ([0-9]*?)\); return false;","Title":"(.*?)","MediaLinkText":"(.+?)"''', re.DOTALL).findall(html)
 		
-		self.osdList = [(x[2],x[1]) for x in files]
+		self.osdList = [(x[2], x[1]) for x in files]
 		
 		Screen.__init__(self, session)
 		self["myMenu"] = MenuList(self.osdList)
-		self["myActionMap"] = ActionMap(["SetupActions","ColorActions"],
+		self["myActionMap"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 		"ok": self.go,
 		"cancel": self.cancel
@@ -77,15 +78,15 @@ class fempa(Screen):
 		returnTitle = self["myMenu"].l.getCurrentSelection()[0]
 		returnValue = self["myMenu"].l.getCurrentSelection()[1]
 		
-		print returnTitle
-		print returnValue
+		print(returnTitle)
+		print(returnValue)
 		
 		html = self.gethtml("http://www.p4.no/player/player.aspx?type=clip&id=" + returnValue)
 		x = re.compile("var omp3='(.+?)'", re.DOTALL).findall(html)
 		if not x == []:
 			x = "http://www.p4.no" + x[0]	
 		
-			fileRef = eServiceReference(4097,0,x)
+			fileRef = eServiceReference(4097, 0, x)
 			fileRef.setName (returnTitle)
 			self.session.nav.playService(fileRef)
 			 
@@ -103,7 +104,7 @@ class fempa(Screen):
 			response.close()
 			return htmldoc
 		except :
-			print "jebiga gethtml"				  
+			print("jebiga gethtml")				  
    
 	def cancel(self):
 		self.session.nav.playService(self.currentService)	 

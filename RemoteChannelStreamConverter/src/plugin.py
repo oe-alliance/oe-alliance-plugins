@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # for localized messages
+from __future__ import print_function
 import os, re
 from . import _
 from boxbranding import getBoxType, getImageDistro
@@ -27,7 +28,7 @@ RCSC_PREFIX = 'userbouquet.rcsc.'
 
 config.plugins.RemoteStreamConverter = ConfigSubsection()
 config.plugins.RemoteStreamConverter.address = ConfigText(default = "", fixed_size = False)
-config.plugins.RemoteStreamConverter.ip = ConfigIP(default = [0,0,0,0])
+config.plugins.RemoteStreamConverter.ip = ConfigIP(default = [0, 0, 0, 0])
 config.plugins.RemoteStreamConverter.username = ConfigText(default = "root", fixed_size = False)
 config.plugins.RemoteStreamConverter.password = ConfigText(default = "", fixed_size = False)
 config.plugins.RemoteStreamConverter.port = ConfigInteger(21, (0, 65535))
@@ -299,7 +300,7 @@ class StreamingChannelFromServerScreen(Screen):
 		self.download(self.workList[0]).addCallback(self.fetchUserBouquetsFinished).addErrback(self.fetchUserBouquetsFailed)
 
 	def fetchUserBouquetsFailed(self, string):
-		print "string", string
+		print("string", string)
 		if self.readIndex < len(self.workList) and self.readIndex > 0:
 			self.workList.remove(self.workList[self.readIndex])
 			self.readIndex -= 1
@@ -566,7 +567,7 @@ class StreamingChannelFromServerScreen(Screen):
 							break
 						tmp = service.toString()
 						if len(tmp) > 1 and len(tmp[1]) > 0:
-							tmp2 = tmp.split()[2].replace('"','')
+							tmp2 = tmp.split()[2].replace('"', '')
 							name = self.readBouquetName(DIR_ENIGMA2 + tmp2)
 							list.append((name, tmp2))
 
@@ -629,7 +630,7 @@ class StreamingChannelFromServerScreen(Screen):
 			self["statusbar"].setText(_("Make your selection"))
 
 	def downloadAlternativesErrback(self, string):
-		print "[RCSC] error downloading alternative: '%s', error: %s" % (self.alternatives[self.alternativesCounter], string)
+		print("[RCSC] error downloading alternative: '%s', error: %s" % (self.alternatives[self.alternativesCounter], string))
 		self.downloadAlternativesCallback(string)
 
 	def getAlternativeLine(self, line):

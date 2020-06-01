@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -25,8 +26,8 @@ class MisPlsLcnScan(Screen):
 	skin = downloadBar
 
 	def __init__(self, session, args = 0):
-		print "[MisPlsLcnScan][__init__] Starting..."
-		print "[MisPlsLcnScan][__init__] args", args
+		print("[MisPlsLcnScan][__init__] Starting...")
+		print("[MisPlsLcnScan][__init__] args", args)
 		self.session = session
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("MIS/PLS LCN Scan"))
@@ -157,7 +158,7 @@ class MisPlsLcnScan(Screen):
 		return False
 
 	def getFrontend(self):
-		print "[MisPlsLcnScan][getFrontend] searching for available tuner"
+		print("[MisPlsLcnScan][getFrontend] searching for available tuner")
 		nimList = []
 		for nim in nimmanager.nim_slots:
 			if not nim.isCompatible("DVB-S") or \
@@ -169,13 +170,13 @@ class MisPlsLcnScan(Screen):
 			nimList.append(nim.slot)
 
 		if len(nimList) == 0:
-			print "[MisPlsLcnScan][getFrontend] No compatible tuner found"
+			print("[MisPlsLcnScan][getFrontend] No compatible tuner found")
 			self.showError(_('No compatible tuner found'))
 			return
 
 		resmanager = eDVBResourceManager.getInstance()
 		if not resmanager:
-			print "[MisPlsLcnScan][getFrontend] Cannot retrieve Resource Manager instance"
+			print("[MisPlsLcnScan][getFrontend] Cannot retrieve Resource Manager instance")
 			self.showError(_('Cannot retrieve Resource Manager instance'))
 			return
 
@@ -183,7 +184,7 @@ class MisPlsLcnScan(Screen):
 		if self.session.pipshown:
 			self.session.pipshown = False
 			del self.session.pip
-			print "[MisPlsLcnScan][getFrontend] Stopping PIP."
+			print("[MisPlsLcnScan][getFrontend] Stopping PIP.")
 
 		# stop currently playing service if it is using a tuner in ("loopthrough", "satposdepends")
 		currentlyPlayingNIM = None
@@ -198,7 +199,7 @@ class MisPlsLcnScan(Screen):
 					self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
 					self.session.nav.stopService()
 					currentlyPlayingNIM = None
-					print "[MisPlsLcnScan][getFrontend] The active service was using a %s tuner, so had to be stopped (slot id %s)." % (nimConfigMode, currentlyPlayingNIM)
+					print("[MisPlsLcnScan][getFrontend] The active service was using a %s tuner, so had to be stopped (slot id %s)." % (nimConfigMode, currentlyPlayingNIM))
 		del frontendInfo
 		del currentService
 
@@ -216,7 +217,7 @@ class MisPlsLcnScan(Screen):
 
 			self.rawchannel = resmanager.allocateRawChannel(slotid)
 			if self.rawchannel:
-				print "[MisPlsLcnScan][getFrontend] Nim found on slot id %d with sat %s" % (slotid, nimmanager.getSatName(self.transpondercurrent.orbital_position))
+				print("[MisPlsLcnScan][getFrontend] Nim found on slot id %d with sat %s" % (slotid, nimmanager.getSatName(self.transpondercurrent.orbital_position)))
 				current_slotid = slotid
 				break
 
@@ -224,7 +225,7 @@ class MisPlsLcnScan(Screen):
 				break
 
 		if current_slotid == -1:
-			print "[MisPlsLcnScan][getFrontend] No valid NIM found"
+			print("[MisPlsLcnScan][getFrontend] No valid NIM found")
 			self.showError(_('No valid NIM found for %s') % PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["name"])
 			return
 
@@ -232,21 +233,21 @@ class MisPlsLcnScan(Screen):
 			# if we are here the only possible option is to close the active service
 			if currentlyPlayingNIM in nimList:
 				slotid = currentlyPlayingNIM
-				print "[MisPlsLcnScan][getFrontend] Nim found on slot id %d but it's busy. Stopping active service" % slotid
+				print("[MisPlsLcnScan][getFrontend] Nim found on slot id %d but it's busy. Stopping active service" % slotid)
 				self.postScanService = self.session.nav.getCurrentlyPlayingServiceReference()
 				self.session.nav.stopService()
 				self.rawchannel = resmanager.allocateRawChannel(slotid)
 				if self.rawchannel:
-					print "[MisPlsLcnScan][getFrontend] The active service was stopped, and the NIM is now free to use."
+					print("[MisPlsLcnScan][getFrontend] The active service was stopped, and the NIM is now free to use.")
 					current_slotid = slotid
 
 			if not self.rawchannel:
 				if self.session.nav.RecordTimer.isRecording():
-					print "[MisPlsLcnScan][getFrontend] Cannot free NIM because a recording is in progress"
+					print("[MisPlsLcnScan][getFrontend] Cannot free NIM because a recording is in progress")
 					self.showError(_('Cannot free NIM because a recording is in progress'))
 					return
 				else:
-					print "[MisPlsLcnScan][getFrontend] Cannot get the NIM"
+					print("[MisPlsLcnScan][getFrontend] Cannot get the NIM")
 					self.showError(_('Cannot get the NIM'))
 					return
 
@@ -255,10 +256,10 @@ class MisPlsLcnScan(Screen):
 		if self.isRotorSat(current_slotid, self.transpondercurrent.orbital_position):
 			self.motorised = True
 			self.LOCK_TIMEOUT = self.LOCK_TIMEOUT_ROTOR
-			print "[MisPlsLcnScan][getFrontend] Motorised dish. Will wait up to %i seconds for tuner lock." % (self.LOCK_TIMEOUT/10)
+			print("[MisPlsLcnScan][getFrontend] Motorised dish. Will wait up to %i seconds for tuner lock." % (self.LOCK_TIMEOUT/10))
 		else:
 			self.LOCK_TIMEOUT = self.LOCK_TIMEOUT_FIXED
-			print "[MisPlsLcnScan][getFrontend] Fixed dish. Will wait up to %i seconds for tuner lock." % (self.LOCK_TIMEOUT/10)
+			print("[MisPlsLcnScan][getFrontend] Fixed dish. Will wait up to %i seconds for tuner lock." % (self.LOCK_TIMEOUT/10))
 
 		self.selectedNIM = current_slotid  # Remember for downloading SI tables
 		
@@ -266,13 +267,13 @@ class MisPlsLcnScan(Screen):
 		
 		self.frontend = self.rawchannel.getFrontend()
 		if not self.frontend:
-			print "[MisPlsLcnScan][getFrontend] Cannot get frontend"
+			print("[MisPlsLcnScan][getFrontend] Cannot get frontend")
 			self.showError(_('Cannot get frontend'))
 			return
 
 		self.demuxer_id = self.rawchannel.reserveDemux()
 		if self.demuxer_id < 0:
-			print "[ABM-main][doTune] Cannot allocate the demuxer."
+			print("[ABM-main][doTune] Cannot allocate the demuxer.")
 			self.showError(_('Cannot allocate the demuxer.'))
 			return
 
@@ -297,9 +298,9 @@ class MisPlsLcnScan(Screen):
 		self.frontend.getFrontendStatus(self.dict)
 		if self.dict["tuner_state"] == "TUNING":
 			if self.lockcounter < 1: # only show this once in the log per retune event
-				print "[MakeBouquet][checkTunerLock] TUNING"
+				print("[MakeBouquet][checkTunerLock] TUNING")
 		elif self.dict["tuner_state"] == "LOCKED":
-			print "[MakeBouquet][checkTunerLock] TUNER LOCKED"
+			print("[MakeBouquet][checkTunerLock] TUNER LOCKED")
 			self["action"].setText(_("Reading SI tables on %s MHz, IS %s") % (str(self.transpondercurrent.frequency/1000), str(self.transpondercurrent.is_id)))
 			#self["status"].setText(_("???"))
 
@@ -309,13 +310,13 @@ class MisPlsLcnScan(Screen):
 			self.readTranspondertimer.start(100, 1)
 			return
 		elif self.dict["tuner_state"] in ("LOSTLOCK", "FAILED"):
-			print "[MakeBouquet][checkTunerLock] TUNING FAILED"
+			print("[MakeBouquet][checkTunerLock] TUNING FAILED")
 			self.readStreams()
 			return
 
 		self.lockcounter += 1
 		if self.lockcounter > self.LOCK_TIMEOUT:
-			print "[MakeBouquet][checkTunerLock] Timeout for tuner lock"
+			print("[MakeBouquet][checkTunerLock] Timeout for tuner lock")
 			self.readStreams()
 			return
 		self.locktimer.start(100, 1)
@@ -346,7 +347,7 @@ class MisPlsLcnScan(Screen):
 
 		fd = dvbreader.open(demuxer_device, sdt_pid, sdt_current_table_id, mask, self.selectedNIM)
 		if fd < 0:
-			print "[MisPlsLcnScan][readSDT] Cannot open the demuxer"
+			print("[MisPlsLcnScan][readSDT] Cannot open the demuxer")
 			return None
 
 		timeout = datetime.datetime.now()
@@ -354,7 +355,7 @@ class MisPlsLcnScan(Screen):
 
 		while True:
 			if datetime.datetime.now() > timeout:
-				print "[MisPlsLcnScan][readSDT] Timed out"
+				print("[MisPlsLcnScan][readSDT] Timed out")
 				break
 
 			section = dvbreader.read_sdt(fd, sdt_current_table_id, 0x00)
@@ -388,7 +389,7 @@ class MisPlsLcnScan(Screen):
 		dvbreader.close(fd)
 
 		if not sdt_current_content:
-			print "[MisPlsLcnScan][readSDT] no services found on transponder"
+			print("[MisPlsLcnScan][readSDT] no services found on transponder")
 			return
 
 		for i in range(len(sdt_current_content)):
@@ -424,7 +425,7 @@ class MisPlsLcnScan(Screen):
 
 		fd = dvbreader.open(demuxer_device, nit_current_pid, nit_current_table_id, mask, self.selectedNIM)
 		if fd < 0:
-			print "[MakeBouquet][readNIT] Cannot open the demuxer"
+			print("[MakeBouquet][readNIT] Cannot open the demuxer")
 			return
 
 		timeout = datetime.datetime.now()
@@ -432,7 +433,7 @@ class MisPlsLcnScan(Screen):
 
 		while True:
 			if datetime.datetime.now() > timeout:
-				print "[MakeBouquet][readNIT] Timed out reading NIT"
+				print("[MakeBouquet][readNIT] Timed out reading NIT")
 				break
 
 			section = dvbreader.read_nit(fd, nit_current_table_id, nit_other_table_id)
@@ -460,11 +461,11 @@ class MisPlsLcnScan(Screen):
 		dvbreader.close(fd)
 
 		if not nit_current_content:
-			print "[MakeBouquet][readNIT] current transponder not found"
+			print("[MakeBouquet][readNIT] current transponder not found")
 			return
 
 		LCNs = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] == 0x83 and t["original_network_id"] in PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["onids"]]
-		print "[MakeBouquet][readNIT] LCNs", LCNs
+		print("[MakeBouquet][readNIT] LCNs", LCNs)
 		if LCNs:
 			for LCN in LCNs:
 				LCNkey = "%x:%x:%x" % (LCN["transport_stream_id"], LCN["original_network_id"], LCN["service_id"])
@@ -498,7 +499,7 @@ class MisPlsLcnScan(Screen):
 					
 		# for debug only
 		for key in self.dict_sorter(self.tmp_services_dict, "service_name"):
-			print "[service]", key, self.tmp_services_dict[key]
+			print("[service]", key, self.tmp_services_dict[key])
 
 	def dict_sorter(self, in_dict, sort_by):
 		sort_list = [(x[0], x[1][sort_by]) for x in in_dict.items()]
@@ -507,7 +508,7 @@ class MisPlsLcnScan(Screen):
 	def readBouquetIndex(self):
 		try:
 			bouquets = open(self.path + "/" + self.bouquetsIndexFilename, "r")
-		except Exception, e:
+		except Exception as e:
 			return ""
 		content = bouquets.read()
 		bouquets.close()

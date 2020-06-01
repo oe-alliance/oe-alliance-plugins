@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -85,24 +86,24 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 	def createSetup(self):
 		indent = "- "
 		setup_list = [
-			getConfigListEntry(_("Tuner"), self.scan_nims,_('Select a tuner that is configured for terrestrial scans. "Automatic" will pick the highest spec available tuner.')),
-			getConfigListEntry(_("Band"), config.plugins.TerrestrialScan.uhf_vhf,_('Most transmitters in European countries only have TV channels in the UHF band.')),
-			getConfigListEntry(_("Clear before scan"), config.plugins.TerrestrialScan.clearallservices,_('If you select "yes" all stored terrestrial channels will be deleted before starting the current search.')),
-			getConfigListEntry(_("Only free scan"), config.plugins.TerrestrialScan.onlyfree,_('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels.')),
-			getConfigListEntry(_('Restrict search to single ONID'), config.plugins.TerrestrialScan.networkid_bool,_('Select "Yes" to restrict the search to multiplexes that belong to a single original network ID (ONID). Select "No" to search all ONIDs.')),
+			getConfigListEntry(_("Tuner"), self.scan_nims, _('Select a tuner that is configured for terrestrial scans. "Automatic" will pick the highest spec available tuner.')),
+			getConfigListEntry(_("Band"), config.plugins.TerrestrialScan.uhf_vhf, _('Most transmitters in European countries only have TV channels in the UHF band.')),
+			getConfigListEntry(_("Clear before scan"), config.plugins.TerrestrialScan.clearallservices, _('If you select "yes" all stored terrestrial channels will be deleted before starting the current search.')),
+			getConfigListEntry(_("Only free scan"), config.plugins.TerrestrialScan.onlyfree, _('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels.')),
+			getConfigListEntry(_('Restrict search to single ONID'), config.plugins.TerrestrialScan.networkid_bool, _('Select "Yes" to restrict the search to multiplexes that belong to a single original network ID (ONID). Select "No" to search all ONIDs.')),
 		]
 
 		if config.plugins.TerrestrialScan.networkid_bool.value:
-			setup_list.append(getConfigListEntry(indent + _('ONID to search'), config.plugins.TerrestrialScan.networkid,_('Enter the original network ID (ONID) of the multiplexes you wish to restrict the search to. UK terrestrial television normally ONID "9018".')))
+			setup_list.append(getConfigListEntry(indent + _('ONID to search'), config.plugins.TerrestrialScan.networkid, _('Enter the original network ID (ONID) of the multiplexes you wish to restrict the search to. UK terrestrial television normally ONID "9018".')))
 
-		setup_list.append(getConfigListEntry(_("Create terrestrial bouquet"), config.plugins.TerrestrialScan.makebouquet,_('If you select "yes" and LCNs are found in the NIT, the scan will create a bouquet of terrestrial channels in LCN order and add it to the bouquet list.')))
+		setup_list.append(getConfigListEntry(_("Create terrestrial bouquet"), config.plugins.TerrestrialScan.makebouquet, _('If you select "yes" and LCNs are found in the NIT, the scan will create a bouquet of terrestrial channels in LCN order and add it to the bouquet list.')))
 		if config.plugins.TerrestrialScan.makebouquet.value:
-			setup_list.append(getConfigListEntry(_("LCN Descriptor"), config.plugins.TerrestrialScan.lcndescriptor,_('Select the LCN descriptor used in your area. 0x83 is the default DVB standard descriptor. 0x87 is used in some Scandinavian countries.')))
+			setup_list.append(getConfigListEntry(_("LCN Descriptor"), config.plugins.TerrestrialScan.lcndescriptor, _('Select the LCN descriptor used in your area. 0x83 is the default DVB standard descriptor. 0x87 is used in some Scandinavian countries.')))
 			if config.plugins.TerrestrialScan.lcndescriptor.value == 0x87:
-				setup_list.append(getConfigListEntry(_("Channel list ID"), config.plugins.TerrestrialScan.channel_list_id,_('Enter channel list ID used in your area. If you are not sure enter zero.')))
+				setup_list.append(getConfigListEntry(_("Channel list ID"), config.plugins.TerrestrialScan.channel_list_id, _('Enter channel list ID used in your area. If you are not sure enter zero.')))
 		
-		setup_list.append(getConfigListEntry(_("Create terrestrial.xml file"), config.plugins.TerrestrialScan.makexmlfile,_('Select "yes" to create a custom terrestrial.xml file and install it in /etc/enigma2 for system scans to use.')))
-		setup_list.append(getConfigListEntry(_("Signal quality stabisation time (secs)"), config.plugins.TerrestrialScan.stabliseTime,_('Period of time to wait for the tuner to stabalise before taking a signal quality reading. 2 seconds is good for most hardware but some may require longer.')))
+		setup_list.append(getConfigListEntry(_("Create terrestrial.xml file"), config.plugins.TerrestrialScan.makexmlfile, _('Select "yes" to create a custom terrestrial.xml file and install it in /etc/enigma2 for system scans to use.')))
+		setup_list.append(getConfigListEntry(_("Signal quality stabisation time (secs)"), config.plugins.TerrestrialScan.stabliseTime, _('Period of time to wait for the tuner to stabalise before taking a signal quality reading. 2 seconds is good for most hardware but some may require longer.')))
 
 		self["config"].list = setup_list
 		self["config"].l.setList(setup_list)
@@ -160,7 +161,7 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 			self.close(False)
 
 	def terrestrialScanCallback(self, answer=None):
-		print "answer", answer
+		print("answer", answer)
 		if answer:
 			self.feid = answer[0]
 			self.transponders_unique = answer[1]
@@ -172,7 +173,7 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 			self.session.nav.playService(self.session.postScanService)
 
 	def MakeBouquetCallback(self, answer=None):
-		print "answer", answer
+		print("answer", answer)
 		if answer:
 			self.feid = answer[0]
 			self.transponders_unique = answer[1]
@@ -226,5 +227,5 @@ def Plugins(**kwargs):
 	if nimmanager.hasNimType("DVB-T"):
 		pList.append( PluginDescriptor(name=_("Terrestrial Scan"), description="For scanning terrestrial tv", where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=TerrestrialScanStart) )
 	else:
-		print "[TerrestrialScan] No DVB-T tuner available so don't load"
+		print("[TerrestrialScan] No DVB-T tuner available so don't load")
 	return pList

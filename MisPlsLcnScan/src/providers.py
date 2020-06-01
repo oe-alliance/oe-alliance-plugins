@@ -11,4 +11,4 @@ PROVIDERS = {
 		"name": _("Italia MIS 5W"), 
 		"orb_pos": 3550, 
 		"onids": (0x013E, 0xC8, 0x1D, 0x217C, 0x0110), 
-		"priority": ("4000:13e:d49","4000:13e:d4a","4000:13e:d53")},}
+		"priority": ("4000:13e:d49", "4000:13e:d4a", "4000:13e:d53")},}

@@ -15,6 +15,7 @@
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from __future__ import print_function
 
 # for localized messages
 from . import _
@@ -91,10 +92,10 @@ class MainMenuList(HTMLComponent, GUIComponent):
 	def showArrows(self):
 		rowsshown = self.listHeight / self.itemHeight
 		if self.totalitems > rowsshown:
-			print 'TRUE'
+			print('TRUE')
 			return 1
 		else:
-			print 'FALSE'
+			print('FALSE')
 			return 0
 
 	def setItemsPerPage(self):
@@ -164,19 +165,19 @@ class EpisodeList(HTMLComponent, GUIComponent):
 			attribs = [ ]
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "TileFont":
-					font = parseFont(value, ((1,1),(1,1)) )
+					font = parseFont(value, ((1, 1), (1, 1)) )
 					self.tileFontName = font.family
 					self.tileFontSize = font.pointSize
 				elif attrib == "DateFont":
-					font = parseFont(value, ((1,1),(1,1)) )
+					font = parseFont(value, ((1, 1), (1, 1)) )
 					self.dateFontName = font.family
 					self.dateFontSize = font.pointSize
 				elif attrib == "DescriptionFont":
-					font = parseFont(value, ((1,1),(1,1)) )
+					font = parseFont(value, ((1, 1), (1, 1)) )
 					self.descriptionFontName = font.family
 					self.descriptionFontSize = font.pointSize
 				else:
-					attribs.append((attrib,value))
+					attribs.append((attrib, value))
 			self.skinAttributes = attribs
 		rc = GUIComponent.applySkin(self, desktop, screen)
 		self.listHeight = self.instance.size().height()
@@ -307,16 +308,16 @@ class EpisodeList(HTMLComponent, GUIComponent):
 	def getThumbnailName(self, x):
 		try:
 			temp_icon = str(x)
-			icon_name = temp_icon.rsplit('/',1)
+			icon_name = temp_icon.rsplit('/', 1)
 			
 			# OUG streams doesn't handle thumbnals well
 			if icon_name[1][:5] == "nicam":
-				icon_name = temp_icon.rsplit('/',2)
+				icon_name = temp_icon.rsplit('/', 2)
 				return str(icon_name[1])+".jpg"
 			else:				
 				return str(icon_name[1])
 		except (Exception) as exception:
-			print "getThumbnailName: No image found: ", exception, " for: ", x
+			print("getThumbnailName: No image found: ", exception, " for: ", x)
 			return ''
 
 ###########################################################################
@@ -421,11 +422,11 @@ class MyHTTPConnection(HTTPConnection):
 			myDNS.append(primaryDNS)
 			resolver = Resolver()
 			resolver.nameservers = myDNS  #DNS Now coming from OnDemand Settings
-			answer = resolver.query(self.host,'A')
+			answer = resolver.query(self.host, 'A')
 			self.host = answer.rrset.items[0].address
 			self.sock = socket.create_connection ((self.host, self.port))
 		except (Exception) as exception:
-			print "MyHTTPConnection: Failed to Connect to: ", primaryDNS, " , error: ", exception
+			print("MyHTTPConnection: Failed to Connect to: ", primaryDNS, " , error: ", exception)
 
 			try:
 				secondaryDNS = str(config.ondemand.SecondaryDNS.value)
@@ -436,12 +437,12 @@ class MyHTTPConnection(HTTPConnection):
 					myDNS.append(secondaryDNS)
 					resolver = Resolver()
 					resolver.nameservers = myDNS  #DNS Now coming from OnDemand Settings
-					answer = resolver.query(self.host,'A')
+					answer = resolver.query(self.host, 'A')
 					self.host = answer.rrset.items[0].address
 					self.sock = socket.create_connection ((self.host, self.port))
 
 			except (Exception) as exception:
-				print "MyHTTPConnection: Failed to Connect to: ", secondaryDNS, " , error: ", exception
+				print("MyHTTPConnection: Failed to Connect to: ", secondaryDNS, " , error: ", exception)
 
 class MyHTTPHandler(urllib2.HTTPHandler):
 	def http_open(self, req):

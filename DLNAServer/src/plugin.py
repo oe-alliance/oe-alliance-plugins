@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 
 import os
@@ -215,7 +216,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		logDir     = self.menuItemLogDir.value
 		logLevel   = self.menuItemLogLevel.value
 		if not self.menuItemEnableLog.value:
-			logDir,logLevel = None, None
+			logDir, logLevel = None, None
 		self.writeConfigFile(serverName=serverName, videoDir=videoDir, auditDir=auditDir, pictureDir=pictureDir, logDir=logDir, logLevel=logLevel)
 
 	def getCurrentItem(self):
@@ -289,7 +290,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		configString = ""
 		def configDataAppend(origin, key, value):
 			if key.strip() != '' and value.strip() != '':
-				origin += "%s=%s\n" % (key,value)
+				origin += "%s=%s\n" % (key, value)
 			return origin
 		configString = configDataAppend(configString, "friendly_name", serverName)
 		if videoDir is not None and videoDir.strip() != '':
@@ -310,7 +311,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		configString = configDataAppend(configString, "notify_interval", self.oldConfig.get('notify_interval'))
 		configString = configDataAppend(configString, "serial", self.oldConfig.get('serial'))
 		configString = configDataAppend(configString, "model_number", self.oldConfig.get('model_number'))
-		print configString
+		print(configString)
 		confFile = file(self.configFileName, 'w')
 		confFile.write(configString)
 		confFile.close()
@@ -325,7 +326,7 @@ class DLNAServer(ConfigListScreen, Screen):
 				continue
 			try:
 				i   = line.find('=')
-				k,v = line[:i],line[i+1:]
+				k, v = line[:i], line[i+1:]
 				if k == 'media_dir':
 					k += v[0]
 					v  = v[2:]
@@ -356,7 +357,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		setDefault('notify_interval', '900')
 		setDefault('serial', '12345678')
 		setDefault('model_number', '1')
-		print "Current Config : ", self.oldConfig
+		print("Current Config : ", self.oldConfig)
 
 def main(session, **kwargs):
 	session.open(DLNAServer)
@@ -373,12 +374,12 @@ def autostart(reason, **kwargs):
 
 		if config.plugins.dlnaserver.autostart.value:
 			if is_running:
-				print "[DLNAServer] already started"
+				print("[DLNAServer] already started")
 			else:
-				print "[DLNAServer] starting ..."
+				print("[DLNAServer] starting ...")
 				os.system(cmd)
 		elif config.plugins.dlnaserver.autostart.value == False and is_running == True:
-				print "[DLNAServer] stopping ..."
+				print("[DLNAServer] stopping ...")
 				os.system(cmd)
 
 def Plugins(**kwargs):

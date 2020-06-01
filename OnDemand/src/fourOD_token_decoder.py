@@ -118,7 +118,7 @@ def Hex_fromArray( a ):
 
 def StringToByteArray( s ):
     arr = []
-    for i,c in enumerate(s):
+    for i, c in enumerate(s):
         arr.append( ord(c) )
     return arr
 
@@ -407,16 +407,16 @@ class MyBlowfish:
         keyLength = len(keyByteArray)
         keyIndex = 0
 
-        for i in range(0,self.P_SZ):
+        for i in range(0, self.P_SZ):
             data = 0
-            for j in range(0,4):
+            for j in range(0, 4):
                 data = (data << 8) | (keyByteArray[keyIndex] & 0xff);
                 keyIndex = keyIndex + 1
                 if ( keyIndex >= keyLength):
                     keyIndex = 0
             self.P[i] = self.P[i] ^ data
 
-        self.processTable(0,0,self.P)
+        self.processTable(0, 0, self.P)
         self.processTable(self.P[self.P_SZ-2], self.P[self.P_SZ-1], self.S0)
         self.processTable(self.S0[self.SBOX_SK-2], self.S0[self.SBOX_SK-1], self.S1)
         self.processTable(self.S1[self.SBOX_SK-2], self.S1[self.SBOX_SK-1], self.S2)
@@ -430,9 +430,9 @@ class MyBlowfish:
     
     def processTable (self, xl, xr, table):
         size = len(table)
-        for s in range(0,size,2):
+        for s in range(0, size, 2):
             xl = xl ^ self.P[0]
-            for i in range(1,self.ROUNDS,2):
+            for i in range(1, self.ROUNDS, 2):
                 xr = xr ^ (self.F(xl) ^ self.P[i])
                 xl = xl ^ (self.F(xr) ^ self.P[i+1])
 
@@ -455,7 +455,7 @@ class MyBlowfish:
 
     def unpad( self, a ):
         c = a[len(a)-1]
-        for i in range(c,0,-1):
+        for i in range(c, 0, -1):
             a.pop()
     
     def decryptBlock( self, src ):
@@ -464,7 +464,7 @@ class MyBlowfish:
 
         xl = xl ^ self.P[self.ROUNDS + 1]
 
-        for i in range(self.ROUNDS,0,-2):
+        for i in range(self.ROUNDS, 0, -2):
             xr = xr ^ (self.F(xl) ^ self.P[i])
             xl = xl ^ (self.F(xr) ^ self.P[i-1])
 
@@ -475,9 +475,9 @@ class MyBlowfish:
 
     def decrypt (self, byteArray):
         decrypted = []
-        for i in range(0,len(byteArray),8):
+        for i in range(0, len(byteArray), 8):
             blockBytes = []
-            for j in range(0,8):
+            for j in range(0, 8):
                 blockBytes.append( byteArray[i+j] )
             self.decryptBlock( blockBytes )
             decrypted.extend( blockBytes )

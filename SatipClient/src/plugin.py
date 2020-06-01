@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
 from . import _
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
@@ -63,7 +64,7 @@ class SSDPServerDiscovery(DatagramProtocol):
 
 		self.port = reactor.listenUDP(0, self, interface=iface)
 		if self.port is not None:
-			print "Sending M-SEARCH..."
+			print("Sending M-SEARCH...")
 			self.port.write(MS, (SSDP_ADDR, SSDP_PORT))
 
 	def stop_msearch(self):
@@ -109,7 +110,7 @@ class SATIPDiscovery:
 		if not address:
 			return None
 
-		return "%d.%d.%d.%d"%(address[0],address[1],address[2],address[3])
+		return "%d.%d.%d.%d"%(address[0], address[1], address[2], address[3])
 
 	def getEthernetAddr(self):
 		return self.formatAddr(iNetwork.getAdapterAttribute("eth0", "ip") )
@@ -136,7 +137,7 @@ class SATIPDiscovery:
 #		print "dataReceive:\n", data
 #		print "\n"
 		serverData = self.dataParse(data)
-		if serverData.has_key('LOCATION'):
+		if 'LOCATION' in serverData:
 			self.xmlParse(serverData['LOCATION'])
 
 	def dataParse(self, data):
@@ -146,7 +147,7 @@ class SATIPDiscovery:
 			if line.find(':') != -1:
 				(attr, value) = line.split(':', 1)
 				attr = attr.strip().upper()
-				if not serverData.has_key(attr):
+				if attr not in serverData:
 					serverData[attr] = value.strip()
 
 #		for (key, value) in serverData.items():
@@ -170,7 +171,7 @@ class SATIPDiscovery:
 
 			return None
 
-		def getAttrN2(root, parent, tag, namespace_1 , namespace_2):
+		def getAttrN2(root, parent, tag, namespace_1, namespace_2):
 			try:
 				pElem = findChild(root, parent, namespace_1)
 				if pElem is not None:
@@ -183,21 +184,21 @@ class SATIPDiscovery:
 			return None
 
 		def dumpData():
-			print "\n######## SATIPSERVERDATA ########"
+			print("\n######## SATIPSERVERDATA ########")
 			for (k, v) in SATIPSERVERDATA.items():
 #				prestr = "[%s]" % k
 				prestr = ""
 				for (k2, v2) in v.items():
 					prestr2 = prestr + "[%s]" % k2
 					if not isinstance(v2, dict):
-						print "%s %s" % (prestr2, v2)
+						print("%s %s" % (prestr2, v2))
 						continue
 					for (k3, v3) in v2.items():
 						prestr3 = prestr2 + "[%s]" % k3
-						print "%s %s" % (prestr3, v3)
-			print ""
+						print("%s %s" % (prestr3, v3))
+			print("")
 
-		print "[SATIPClient] Parsing %s" % location
+		print("[SATIPClient] Parsing %s" % location)
 
 		address = ""
 		port = "80"
@@ -223,12 +224,12 @@ class SATIPDiscovery:
 			conn = httplib.HTTPConnection(address, int(port))
 			conn.request("GET", request)
 			res = conn.getresponse()
-		except Exception, ErrMsg:
-			print "http request error %s" % ErrMsg
+		except Exception as ErrMsg:
+			print("http request error %s" % ErrMsg)
 			return -1
 
 		if res.status != 200 or res.reason !="OK":
-			print "response error"
+			print("response error")
 			return -1
 
 		data = res.read()
@@ -338,7 +339,7 @@ class SATIPTuner(Screen, ConfigListScreen):
 			"cancel": self.keyCancel,
 			"red": self.keyCancel,
 			"green": self.keySave,
-			"yellow" : self.DiscoveryStart,
+			"yellow": self.DiscoveryStart,
 		}, -2)
 
 		self.list = []
@@ -676,7 +677,7 @@ class SATIPClient(Screen):
 			if vtuner['vtuner_type'] == "satip_client":
 				entry = (
 				_("VIRTUAL TUNER %s") % vtuner_idx,
-				_("TYPE : %s") % vtuner['vtuner_type'].replace('_',' ').upper(),
+				_("TYPE : %s") % vtuner['vtuner_type'].replace('_', ' ').upper(),
 				_("IP : %s") % vtuner['ipaddr'],
 				_("TUNER TYPE : %s") % vtuner['tuner_type'],
 				_("SAT>IP SERVER : %s") % vtuner['desc'],
@@ -688,7 +689,7 @@ class SATIPClient(Screen):
 			else:
 				entry = (
 				_("VIRTUAL TUNER %s") % vtuner_idx,
-				_("TYPE : %s") % vtuner['vtuner_type'].replace('_',' ').upper(),
+				_("TYPE : %s") % vtuner['vtuner_type'].replace('_', ' ').upper(),
 				"",
 				"",
 				"",

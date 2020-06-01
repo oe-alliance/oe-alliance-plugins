@@ -34,7 +34,7 @@ class PixmapLcd4linux(Renderer):
 					if sel.instance:
 						if sel.swap:
 							if not os.path.isfile("/tmp/l4ldisplaycp.png"):
-								os.symlink("/tmp/l4ldisplay.png","/tmp/l4ldisplaycp.png")
+								os.symlink("/tmp/l4ldisplay.png", "/tmp/l4ldisplaycp.png")
 							sel.instance.setPixmapFromFile("/tmp/l4ldisplaycp.png")
 						else:
 							sel.instance.setPixmapFromFile("/tmp/l4ldisplay.png")
@@ -44,4 +44,4 @@ class PixmapLcd4linux(Renderer):
 						sel.mTime = 0
 			except:
 				pass
-			sel.L4Ltimer.start(200,True)
+			sel.L4Ltimer.start(200, True)

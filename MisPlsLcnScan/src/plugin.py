@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -58,9 +59,9 @@ class MisPlsLcnScanScreen(ConfigListScreen, Screen):
 
 	def createSetup(self):
 		setup_list = [
-			getConfigListEntry(_("Provider"), config.plugins.MisPlsLcnScan.provider,_('Select the provider you wish to scan.')),
-			getConfigListEntry(_("Clear before scan"), config.plugins.MisPlsLcnScan.clearallservices,_('If you select "yes" stored channels at the same orbital position will be deleted before starting the current search. Note: if you are scanning more than one provider this must be set to "no".')),
-			getConfigListEntry(_("Only free scan"), config.plugins.MisPlsLcnScan.onlyfree,_('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels.')),
+			getConfigListEntry(_("Provider"), config.plugins.MisPlsLcnScan.provider, _('Select the provider you wish to scan.')),
+			getConfigListEntry(_("Clear before scan"), config.plugins.MisPlsLcnScan.clearallservices, _('If you select "yes" stored channels at the same orbital position will be deleted before starting the current search. Note: if you are scanning more than one provider this must be set to "no".')),
+			getConfigListEntry(_("Only free scan"), config.plugins.MisPlsLcnScan.onlyfree, _('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels.')),
 		]
 
 		self["config"].list = setup_list
@@ -119,7 +120,7 @@ class MisPlsLcnScanScreen(ConfigListScreen, Screen):
 			self.close(False)
 
 	def MisPlsLcnScanCallback(self, answer=None):
-		print "answer", answer
+		print("answer", answer)
 		if answer:
 			self.feid = answer[0]
 			self.transponders = answer[1]
@@ -167,5 +168,5 @@ def Plugins(**kwargs):
 	if hasMultistream():
 		pList.append( PluginDescriptor(name=_("MIS/PLS LCN Scan"), description="For scanning multiple input stream tv", where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=MisPlsLcnScanStart) )
 	else:
-		print "[MisPlsLcnScan] No MIS/PLS capable tuner available so don't load"
+		print("[MisPlsLcnScan] No MIS/PLS capable tuner available so don't load")
 	return pList

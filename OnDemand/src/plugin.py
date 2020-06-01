@@ -46,8 +46,8 @@ config.ondemand.ShowShoutcastLogos = ConfigYesNo(default = True)
 config.ondemand.ShowShoutcastDefault = ConfigYesNo(default = True)
 config.ondemand.ShowTuneinLogos = ConfigYesNo(default = True)
 config.ondemand.ShowTuneinDefault = ConfigYesNo(default = True)
-config.ondemand.PrimaryDNS = ConfigIP(default = [0,0,0,0])
-config.ondemand.SecondaryDNS = ConfigIP(default = [0,0,0,0])
+config.ondemand.PrimaryDNS = ConfigIP(default = [0, 0, 0, 0])
+config.ondemand.SecondaryDNS = ConfigIP(default = [0, 0, 0, 0])
 		
 def OnDemanMenu(menuid):
 	if menuid == "mainmenu":
@@ -60,9 +60,9 @@ def main(session, **kwargs):
 def Plugins(**kwargs):
 	plist = []
 	if config.ondemand.ShowPluginBrowser.getValue():
-		plist.append(PluginDescriptor(name=_("OnDemand"),description="OnDemand Player",where=PluginDescriptor.WHERE_PLUGINMENU,icon="ondemand.png", fnc=main))
+		plist.append(PluginDescriptor(name=_("OnDemand"), description="OnDemand Player", where=PluginDescriptor.WHERE_PLUGINMENU, icon="ondemand.png", fnc=main))
 	if config.ondemand.ShowExtensions.getValue():
-		plist.append(PluginDescriptor(name=_("OnDemand"),description="OnDemand Player",where=PluginDescriptor.WHERE_EXTENSIONSMENU,icon="ondemand.png", fnc=main))
+		plist.append(PluginDescriptor(name=_("OnDemand"), description="OnDemand Player", where=PluginDescriptor.WHERE_EXTENSIONSMENU, icon="ondemand.png", fnc=main))
 	if config.ondemand.ShowMainMenu.getValue():
 		plist.append(PluginDescriptor(where=PluginDescriptor.WHERE_MENU, fnc=OnDemanMenu))
 

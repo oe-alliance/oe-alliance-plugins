@@ -16,6 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -66,7 +67,7 @@ def wgetUrl(target):
 		isUK = 0
 		outtxt = ""
 		primaryDNS = str(config.ondemand.PrimaryDNS.value)
-		print __plugin__, __version__,"DNS Set: ", primaryDNS
+		print(__plugin__, __version__, "DNS Set: ", primaryDNS)
 		
 		req = urllib2.Request(target)
 		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
@@ -92,11 +93,11 @@ def wgetUrl(target):
 		# If the returned data contains ERROR then geo restriction has applied.
 		# Now attempt to use your proxy DNS to bypass the Geo restriction.
 		if outtxt.find('ERROR') > 0:
-			print __plugin__, __version__,"Non UK Address"
+			print(__plugin__, __version__, "Non UK Address")
 			isUK = 1
 							
 			if  primaryDNS == str(config.ondemand.PrimaryDNS.default):
-				print __plugin__, __version__,"Non UK Address: NO DNS Set!! ", primaryDNS
+				print(__plugin__, __version__, "Non UK Address: NO DNS Set!! ", primaryDNS)
 				return ("NODNS", isUK)
 			else:
 				try:
@@ -124,20 +125,20 @@ def wgetUrl(target):
 					urllib2.install_opener (old_opener)
 
 				except (Exception) as exception:
-					print __plugin__, __version__,"wgetUrl: Unable to connect to DNS: ", exception
+					print(__plugin__, __version__, "wgetUrl: Unable to connect to DNS: ", exception)
 					return ("NOCONNECT", isUK)
 
 		# Now return the decoded webpage
 		return (outtxt, isUK)
 
 	except (Exception) as exception:
-		print __plugin__, __version__,"wgetUrl: Exception: ", exception
+		print(__plugin__, __version__, "wgetUrl: Exception: ", exception)
 		outtxt = str(response.read())
 		response.close()
 		
 		# If we managed to read the URL then return data, might have failed on decode.
 		if outtxt:
-			print __plugin__, __version__,"wgetUrl: Exception: outtxt: ", outtxt
+			print(__plugin__, __version__, "wgetUrl: Exception: outtxt: ", outtxt)
 			return (outtxt, isUK)
 		else:
 			return ("", isUK)
@@ -227,7 +228,7 @@ class fourODMainMenu(Screen):
 						osdList.append((_(str(label)), str(categoryName)))
 
 			except (Exception) as exception:
-				print __plugin__, __version__,'StreamsMenu: Error parsing feed: ', exception
+				print(__plugin__, __version__, 'StreamsMenu: Error parsing feed: ', exception)
 
 			osdList.append((_("Back"), "exit"))
 
@@ -320,7 +321,7 @@ class StreamsThumb(StreamsThumbCommon):
 				(fileUrl, rtmpvar, returnMessage) = self.getRTMPUrl(showID)
 				
 				if fileUrl:
-					fileRef = eServiceReference(4097,0,str(fileUrl))
+					fileRef = eServiceReference(4097, 0, str(fileUrl))
 					fileRef.setName (showName)
 					lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 					self.session.open(MoviePlayer, fileRef, None, lastservice)
@@ -331,7 +332,7 @@ class StreamsThumb(StreamsThumbCommon):
 						self.mediaProblemPopup("Problem retreiving the stream URL!")
 					
 			except (Exception) as exception:
-				print __plugin__, __version__,'go: Error getting fileUrl: ', exception
+				print(__plugin__, __version__, 'go: Error getting fileUrl: ', exception)
 
 #==============================================================================
 	def getRTMPUrl(self, showID):
@@ -349,7 +350,7 @@ class StreamsThumb(StreamsThumbCommon):
 				return ("", "", returnMessage)
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getRTMPUrl: Error getting playUrl: ', exception
+			print(__plugin__, __version__, 'getRTMPUrl: Error getting playUrl: ', exception)
 			return ("", "", "")
 
 #==============================================================================			
@@ -382,7 +383,7 @@ class StreamsThumb(StreamsThumbCommon):
 			else:
 				return ("", returnMessage)
 		except (Exception) as exception:
-			print __plugin__, __version__,'InitialiseRTMP: Error getting mp4: ', exception
+			print(__plugin__, __version__, 'InitialiseRTMP: Error getting mp4: ', exception)
 			return ("", "InitialiseRTMP: Error getting mp4")
 
 #==============================================================================
@@ -416,8 +417,8 @@ class StreamsThumb(StreamsThumbCommon):
 
 				# If call is from Outside UK then stream URL might need to be altered.
 				if isUK == 1:
-					print __plugin__, __version__,"GetStreamInfo: notUK user: streamURI: ", streamURI, " streamURI[:10]: ", streamURI[:10]
-					if streamURI[:10] <> "rtmpe://ll":
+					print(__plugin__, __version__, "GetStreamInfo: notUK user: streamURI: ", streamURI, " streamURI[:10]: ", streamURI[:10])
+					if streamURI[:10] != "rtmpe://ll":
 						streamURI = ""
 						continue
 
@@ -453,7 +454,7 @@ class StreamsThumb(StreamsThumbCommon):
 		try:
 			decodedToken = fourOD_token_decoder.Decode4odToken(token)
 		except (Exception) as exception:
-			print __plugin__, __version__,'GetAuthentication: Error getting decodedToken: ', exception
+			print(__plugin__, __version__, 'GetAuthentication: Error getting decodedToken: ', exception)
 			return ("")
 
 		if ( cdn ==  u"ll" ):
@@ -494,10 +495,10 @@ class StreamsThumb(StreamsThumbCommon):
 		except (Exception) as exception:
 			if jsHtml is not None:
 				msg = "jsHtml:\n\n%s\n\n" % jsHtml
-				print __plugin__, __version__,"GetSwfPlayer: Error getting player: ", msg
+				print(__plugin__, __version__, "GetSwfPlayer: Error getting player: ", msg)
 
 			# Unable to determine swfPlayer URL. Using default:
-			print __plugin__, __version__,"GetSwfPlayer: Unable to determine swfPlayer URL. Using default: ", exception
+			print(__plugin__, __version__, "GetSwfPlayer: Unable to determine swfPlayer URL. Using default: ", exception)
 			swfPlayer = self.swfDefault
 
 		return swfPlayer
@@ -602,7 +603,7 @@ class StreamsThumb(StreamsThumbCommon):
 							try:
 								timeString = p.text.replace('\r\n', '').replace('Sept', 'Sep').replace('July', 'Jul').replace('June', 'Jun')
 								timeString = re.sub(' +', ' ', timeString)
-								time_split = timeString.rsplit('m ',1)
+								time_split = timeString.rsplit('m ', 1)
 								lastDate = date.fromtimestamp(mktime(strptime(time_split[1].strip(), u"%a %d %b %Y")))
 								premieredDate = lastDate.strftime(u"%a %b %d %Y")
 								date1 = _("Added:")+" "+str(premieredDate)
@@ -610,7 +611,7 @@ class StreamsThumb(StreamsThumbCommon):
 							except (Exception) as exception:
 								date1 = ""
 					except (Exception) as exception:
-						print __plugin__, __version__,'getShowMediaData: name error: ', exception
+						print(__plugin__, __version__, 'getShowMediaData: name error: ', exception)
 						date1 = ""
 
 					try:
@@ -619,7 +620,7 @@ class StreamsThumb(StreamsThumbCommon):
 						name_tmp1 = checkUnicode(str(name_tmp1))
 						name = name_tmp1.strip()
 					except (Exception) as exception:
-						print __plugin__, __version__,'getShowMediaData: name error: ', exception
+						print(__plugin__, __version__, 'getShowMediaData: name error: ', exception)
 						name = ""
 					
 					try:
@@ -633,13 +634,13 @@ class StreamsThumb(StreamsThumbCommon):
 								duration = ""
 					                    
 					except (Exception) as exception:
-						print __plugin__, __version__,'getShowMediaData: name error: ', exception
+						print(__plugin__, __version__, 'getShowMediaData: name error: ', exception)
 						duration = ""
 
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getShowMediaData: Error parsing feed: ', exception
+			print(__plugin__, __version__, 'getShowMediaData: Error parsing feed: ', exception)
 
 #==============================================================================
 	def getCatsMediaData(self, weekList, category):
@@ -725,7 +726,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))				
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getCatsMediaData: Error parsing feed: ', exception
+			print(__plugin__, __version__, 'getCatsMediaData: Error parsing feed: ', exception)
 
 #==============================================================================
 	def getSearchMediaData(self, weekList, searchUrl):
@@ -765,7 +766,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 					try:
 						stream_tmp = str(unicode(entry[u'siteUrl']))
-						stream_split = stream_tmp.rsplit('/',2)
+						stream_split = stream_tmp.rsplit('/', 2)
 						stream = str(stream_split[1])
 					except (Exception) as exception:
 						stream = ""
@@ -794,7 +795,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))		
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getSearchMediaData: Error parsing feed: ', exception
+			print(__plugin__, __version__, 'getSearchMediaData: Error parsing feed: ', exception)
 			
 #==============================================================================
 def checkUnicode(value, **kwargs):

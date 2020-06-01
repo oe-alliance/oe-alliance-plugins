@@ -61,7 +61,7 @@ class FTPDownloader(Protocol):
 		if self.file is None:
 			try:
 				self.file, offset = self.openFile()
-			except IOError, ie:
+			except IOError as ie:
 				self.connectionFailed()
 				return
 		offset = self.resume and offset or 0
@@ -75,7 +75,7 @@ class FTPDownloader(Protocol):
 			self.file.seek(0, SEEK_END)
 
 			self.file.write(data)
-		except IOError, ie:
+		except IOError as ie:
 			self.connectionFailed()
 
 	def ftpFinish(self, code = 0, message = None):

@@ -69,9 +69,9 @@ class BrowserSetting:
 
 	def getData(self):
 		return {
-			'start':self._start,
-			'type':self._type,
-			'keymap':self._keymap,
+			'start': self._start,
+			'type': self._type,
+			'keymap': self._keymap,
 		}
 
 class BrowserPositionSetting:
@@ -133,12 +133,12 @@ class BrowserPositionWindow(Screen, ConfigListScreen):
 		</screen>
 		"""
 	def __init__(self, session):
-		w,h   = session.desktop.size().width(), session.desktop.size().height()
-		cw,ch = w/2, h/2
+		w, h   = session.desktop.size().width(), session.desktop.size().height()
+		cw, ch = w/2, h/2
 		#                             btn_red        btn_green     lb_red         lb_green      config
-		self.skin = self.skin % (w,h, cw-190,ch-110, cw+50,ch-110, cw-190,ch-110, cw+50,ch-110, cw-250,ch-50)
+		self.skin = self.skin % (w, h, cw-190, ch-110, cw+50, ch-110, cw-190, ch-110, cw+50, ch-110, cw-250, ch-50)
 
-		Screen.__init__(self,session)
+		Screen.__init__(self, session)
 		self.session = session
 		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
 		{
@@ -232,7 +232,7 @@ class BrowserPositionWindow(Screen, ConfigListScreen):
 			vbcfg.setPosition(vbcfg.g_position)
 			self.close()
 
-	def cancelConfirm(self,ret):
+	def cancelConfirm(self, ret):
 		if ret:
 			vbcfg.setPosition(vbcfg.g_position)
 			self.close()
@@ -363,7 +363,7 @@ class BrowserPreferenceWindow(ConfigListScreen, Screen):
 		self["config"].l.setList(self.menulist)
 
 class BookmarkEditWindow(ConfigListScreen, Screen):
-	CATEGORY,BOOKMARK = 0,1
+	CATEGORY, BOOKMARK = 0, 1
 	skin = """
 		<screen position="center,center" size="600,140" title="Bookmark Edit">
 			<widget name="config" position="0,0" size="600,100" scrollbarMode="showOnDemand" />
@@ -396,10 +396,10 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.menulist)
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
-			"ok"	 : self.keyGreen,
-			"green"	 : self.keyGreen,
-			"red"	 : self.keyRed,
-			"cancel" : self.keyRed,
+			"ok": self.keyGreen,
+			"green": self.keyGreen,
+			"red": self.keyRed,
+			"cancel": self.keyRed,
 		}, -2)
 
 		self["VKeyIcon"] = Boolean(False)
@@ -551,15 +551,15 @@ class BrowserBookmarkWindow(Screen):
 		self.mBookmarkManager = BookmarkManager.getInstance()
 		self.mSession = _session
 		Screen.__init__(self, _session)
-		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions","ColorActions", "NumberActions"], {
-				"ok"	: self.keyOK,
+		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions", "ColorActions", "NumberActions"], {
+				"ok": self.keyOK,
 				"cancel": self.keyCancel,
-				"red"	: self.keyRed,
-				"green" : self.keyGreen,
+				"red": self.keyRed,
+				"green": self.keyGreen,
 				"yellow": self.keyYellow,
-				"blue"	: self.keyBlue,
-				"0" : self.keyNumber,
-			},-2)
+				"blue": self.keyBlue,
+				"0": self.keyNumber,
+			}, -2)
 
 		self["key_red"]    = StaticText(_("Exit"))
 		self["key_green"]  = StaticText(_("Add"))
@@ -655,8 +655,8 @@ class BrowserBookmarkWindow(Screen):
 				c = CategoryData(0, '')
 				self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, _('Add'), BookmarkEditWindow.CATEGORY, c, self.mBookmarkManager)
 		if strIsEmpty(self.mUrl):
-			l = [(_('Direct Input(Bookmark)'),2,), (_('Direct Input(Category)'),3,)]
-		else:	l = [(_('Currentpage(Bookmark)'),1,), (_('Direct Input(Bookmark)'),2,), (_('Direct Input(Category)'),3,)]
+			l = [(_('Direct Input(Bookmark)'), 2,), (_('Direct Input(Category)'), 3,)]
+		else:	l = [(_('Currentpage(Bookmark)'), 1,), (_('Direct Input(Bookmark)'), 2,), (_('Direct Input(Category)'), 3,)]
 		self.mSession.openWithCallback(cbGreen, ChoiceBox, title=_("Please choose."), list=l)
 
 	def keyYellow(self):
@@ -700,7 +700,7 @@ class BrowserBookmarkWindow(Screen):
 		self.close()
 
 class BrowserHelpWindow(Screen, HelpableScreen):
-	MODE_GLOBAL,MODE_KEYBOARD,MODE_MOUSE = 1,2,3
+	MODE_GLOBAL, MODE_KEYBOARD, MODE_MOUSE = 1, 2, 3
 	skin = """
 		<screen name="BrowserHelpWindow" position="center,center" size="600,40" title="Browser Help" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
@@ -723,14 +723,14 @@ class BrowserHelpWindow(Screen, HelpableScreen):
 		self["key_yellow"] = StaticText(_("Mouse"))
 		self["key_blue"]   = StaticText(_("Keyboard"))
 
-		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions","ColorActions"], {
-				"ok"    : self.keyRed,
+		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions", "ColorActions"], {
+				"ok": self.keyRed,
 				"cancel": self.keyRed,
-				"red"	: self.keyRed,
-				"green" : self.keyGreen,
+				"red": self.keyRed,
+				"green": self.keyGreen,
 				"yellow": self.keyYellow,
-				"blue"	: self.keyBlue,
-			},-2)
+				"blue": self.keyBlue,
+			}, -2)
 
 		self.showHelpTimer = eTimer()
 		self.showHelpTimer.callback.append(self.cbShowHelpTimerClosed)
@@ -749,50 +749,50 @@ class BrowserHelpWindow(Screen, HelpableScreen):
 		self.helpList = []
 		if _mode == self.MODE_GLOBAL:
 			self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions", {
-				"cancel" : (self.keyPass, _("Exit the Browser.")),
+				"cancel": (self.keyPass, _("Exit the Browser.")),
 			})
 			self["MenuActions"] = HelpableActionMap(self, "MenuActions", {
-				"menu" : (self.keyPass, _("Show the Menu window.")),
+				"menu": (self.keyPass, _("Show the Menu window.")),
 			})
 			self["ColorActions"] = HelpableActionMap(self, "ColorActions", {
-				"green"  : (self.keyPass, _("Enter Key")),
-				"yellow" : (self.keyPass, _("Show the Virtual keyboard window.")),
-				"blue"   : (self.keyPass, _("Backspace Key")),
+				"green": (self.keyPass, _("Enter Key")),
+				"yellow": (self.keyPass, _("Show the Virtual keyboard window.")),
+				"blue": (self.keyPass, _("Backspace Key")),
 			})
 			self["EPGSelectActions"] = HelpableActionMap(self, "EPGSelectActions", {
-				"info" : (self.keyPass, _("Switch to keyboard/mouse mode.")),
+				"info": (self.keyPass, _("Switch to keyboard/mouse mode.")),
 			})
 
 		elif _mode == self.MODE_MOUSE:
 			self["DirectionActions"] = HelpableActionMap(self, "DirectionActions", {
-				"up"    : (self.keyPass, _("It will move the mouse pointer up.")),
-				"down"  : (self.keyPass, _("It will move the mouse pointer down.")),
-				"left"  : (self.keyPass, _("It will move the mouse pointer left.")),
-				"right" : (self.keyPass, _("It will move the mouse pointer right.")),
+				"up": (self.keyPass, _("It will move the mouse pointer up.")),
+				"down": (self.keyPass, _("It will move the mouse pointer down.")),
+				"left": (self.keyPass, _("It will move the mouse pointer left.")),
+				"right": (self.keyPass, _("It will move the mouse pointer right.")),
 			})
 			self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions", {
-				"ok" : (self.keyPass, _("Left Mouse Button")),
+				"ok": (self.keyPass, _("Left Mouse Button")),
 			})
 			self["EPGSelectActions"] = HelpableActionMap(self, "EPGSelectActions", {
-				"nextBouquet" : (self.keyPass, _("Right Mouse Button")),
-				"nextService" : (self.keyPass, _("Left Key")),
-				"prevService" : (self.keyPass, _("Right Key")),
+				"nextBouquet": (self.keyPass, _("Right Mouse Button")),
+				"nextService": (self.keyPass, _("Left Key")),
+				"prevService": (self.keyPass, _("Right Key")),
 			})
 		elif _mode == self.MODE_KEYBOARD:
 			self["DirectionActions"] = HelpableActionMap(self, "DirectionActions", {
-				"up"    : (self.keyPass, _("Up Key")),
-				"down"  : (self.keyPass, _("Down Key")),
-				"left"  : (self.keyPass, _("Left Key")),
-				"right" : (self.keyPass, _("Right Key")),
+				"up": (self.keyPass, _("Up Key")),
+				"down": (self.keyPass, _("Down Key")),
+				"left": (self.keyPass, _("Left Key")),
+				"right": (self.keyPass, _("Right Key")),
 			})
 			self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions", {
-				"ok" : (self.keyPass, _("Enter Key")),
+				"ok": (self.keyPass, _("Enter Key")),
 			})
 			self["EPGSelectActions"] = HelpableActionMap(self, "EPGSelectActions", {
-				"nextBouquet" : (self.keyPass, _("PageUp Key")),
-				"prevBouquet" : (self.keyPass, _("PageDown Key")),
-				"nextService" : (self.keyPass, _("Go to previous page.")),
-				"prevService" : (self.keyPass, _("Go to next page.")),
+				"nextBouquet": (self.keyPass, _("PageUp Key")),
+				"prevBouquet": (self.keyPass, _("PageDown Key")),
+				"nextService": (self.keyPass, _("Go to previous page.")),
+				"prevService": (self.keyPass, _("Go to next page.")),
 			})
 
 		if _mode > 0:
@@ -907,7 +907,7 @@ class Browser(Screen):
 
 	def _cb_update_language(self):
 		self.MENULIST_ITEMS = [
-			[(_('Open Startpage'), None), (_('Open URL'), None), (_('Start/Stop'),None), (_('Exit'), None)],
+			[(_('Open Startpage'), None), (_('Open URL'), None), (_('Start/Stop'), None), (_('Exit'), None)],
 			[(_('Bookmark'), None), (_('Preference'), None), (_('Position Setup'), None)],
 			[(_('About'), None), (_('Help'), None)]
 		]
@@ -1075,7 +1075,7 @@ class Browser(Screen):
 	def do_command(self, command):
 		try:
 			self.COMMAND_MAP[command]()
-		except Exception, ErrMsg:
+		except Exception as ErrMsg:
 			vbcfg.ERR(ErrMsg)
 
 	def get_menulist_items(self, idx=0):
@@ -1177,7 +1177,7 @@ class Browser(Screen):
 		if not self.is_show_menu:
 			self["menulist"].setList(self.get_menulist_items(self.idx_menu))
 			self["menulist"].resize(self.MENULIST_WIDTH, self.MENULIST_HEIGHT*len(self.get_menulist_items(self.idx_menu))+5)
-			self["menulist"].move(self.MENU_ITEM_WIDTH*self.idx_menu+50,self.MENU_ITEM_HEIGHT+30)
+			self["menulist"].move(self.MENU_ITEM_WIDTH*self.idx_menu+50, self.MENU_ITEM_HEIGHT+30)
 			self.toggle_menulist()
 			return
 		self["menulist"].down()

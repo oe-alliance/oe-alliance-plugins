@@ -72,7 +72,7 @@ class FileList(MenuList):
 			se = os_path.basename(directory)
 			direct = directory+"/"
 #		print "direct,se",direct,se
-		self.changeDir(direct,se)
+		self.changeDir(direct, se)
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setItemHeight(26)
 		self.serviceHandler = eServiceCenter.getInstance()
@@ -150,7 +150,7 @@ class FileList(MenuList):
 				root.setName(self.additional_extensions)
 			serviceHandler = eServiceCenter.getInstance()
 			list = serviceHandler.list(root)
-			while 1:
+			while True:
 				s = list.getNext()
 				if not s.valid():
 					del list
@@ -203,7 +203,7 @@ class FileList(MenuList):
 					EXext = "nothing"
 				if (self.matchingPattern is None) or (EXext in self.matchingPattern):
 					if nx is None:
-						self.list.append(FileEntryComponent(name = name, absolute = x , isDir = False))
+						self.list.append(FileEntryComponent(name = name, absolute = x, isDir = False))
 					else:
 						res = [ (x, False) ]
 						res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, name + " [" + self.getTSLength(path) + "]"))

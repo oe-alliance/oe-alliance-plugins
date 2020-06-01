@@ -1,10 +1,11 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
-from Components.ActionMap import ActionMap,NumberActionMap
+from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config
 from Components.config import config, getConfigListEntry, ConfigInteger, ConfigSubsection, ConfigSelection
 from Components.ConfigList import ConfigListScreen
@@ -47,7 +48,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session = self.session)
+		ConfigListScreen.__init__(self, self.list, session = self.session)
 #		self.getFaninfo()
 		self.createSetup()
 
@@ -64,28 +65,28 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 
 	def getFaninfo(self):
 		try:
-			value=int(open('/proc/stb/system/standby_fan_off','r').read())
+			value=int(open('/proc/stb/system/standby_fan_off', 'r').read())
 			if value is 0:
 				config.plugins.fansetups.standbymode.value="on"
 			else:
 				config.plugins.fansetups.standbymode.value="off"
-			value=int(open('/proc/stb/system/use_fan_timer','r').read())
+			value=int(open('/proc/stb/system/use_fan_timer', 'r').read())
 			if value is 0:
 				config.plugins.fansetups.usetimer.value = "off"
 			else:
 				config.plugins.fansetups.usetimer.value = "on"
-			time=int(open('/proc/stb/system/fan_on_time','r').read())
+			time=int(open('/proc/stb/system/fan_on_time', 'r').read())
 			if time > 0 and time < 101:
 				config.plugins.fansetups.fanontime.value = time
 			else:
 				config.plugins.fansetups.fanontime.value = 1
-			time=int(open('/proc/stb/system/fan_off_time','r').read())
+			time=int(open('/proc/stb/system/fan_off_time', 'r').read())
 			if time > 0 and time < 101:
 				config.plugins.fansetups.fanofftime.value = time
 			else:
 				config.plugins.fansetups.fanofftime.value = 1
 		except:
-			print 'Error read proc of fan'
+			print('Error read proc of fan')
 
 
 	def createSetup(self):
@@ -113,7 +114,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 
 	def selectionChanged(self):
 		current = self["config"].getCurrent()
-		print current
+		print(current)
 
 	def cancelConfirm(self, result):
 		if not result:
@@ -124,7 +125,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 
 
 	def keyCancel(self):
-		print "cancel"
+		print("cancel")
 		if self["config"].isChanged():
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
 		else:
@@ -134,17 +135,17 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		ConfigListScreen.keySave(self)
 		try:
 			if config.plugins.fansetups.standbymode.value is "on":
-				open('/proc/stb/system/standby_fan_off','w').write('0')
+				open('/proc/stb/system/standby_fan_off', 'w').write('0')
 			else:
-				open('/proc/stb/system/standby_fan_off','w').write('1')
+				open('/proc/stb/system/standby_fan_off', 'w').write('1')
 				if config.plugins.fansetups.usetimer.value is "off":
-					open('/proc/stb/system/use_fan_timer','w').write('0')
+					open('/proc/stb/system/use_fan_timer', 'w').write('0')
 				else:
-					open('/proc/stb/system/use_fan_timer','w').write('1')
-					open('/proc/stb/system/fan_on_time','w').write('%s'%config.plugins.fansetups.fanontime.value)
-					open('/proc/stb/system/fan_off_time','w').write('%s'%config.plugins.fansetups.fanofftime.value)
+					open('/proc/stb/system/use_fan_timer', 'w').write('1')
+					open('/proc/stb/system/fan_on_time', 'w').write('%s'%config.plugins.fansetups.fanontime.value)
+					open('/proc/stb/system/fan_off_time', 'w').write('%s'%config.plugins.fansetups.fanofftime.value)
 		except:
-			print 'Error write proc of fan'
+			print('Error write proc of fan')
 
 
 def openconfig(session, **kwargs):
@@ -158,17 +159,17 @@ def selSetup(menuid, **kwargs):
 def setfansetup(reason, **kwargs):
 	try:
 		if config.plugins.fansetups.standbymode.value is "on":
-			open('/proc/stb/system/standby_fan_off','w').write('0')
+			open('/proc/stb/system/standby_fan_off', 'w').write('0')
 		else:
-			open('/proc/stb/system/standby_fan_off','w').write('1')
+			open('/proc/stb/system/standby_fan_off', 'w').write('1')
 			if config.plugins.fansetups.usetimer.value is "off":
-				open('/proc/stb/system/use_fan_timer','w').write('0')
+				open('/proc/stb/system/use_fan_timer', 'w').write('0')
 			else:
-				open('/proc/stb/system/use_fan_timer','w').write('1')
-				open('/proc/stb/system/fan_on_time','w').write('%s'%config.plugins.fansetups.fanontime.value)
-				open('/proc/stb/system/fan_off_time','w').write('%s'%config.plugins.fansetups.fanofftime.value)
+				open('/proc/stb/system/use_fan_timer', 'w').write('1')
+				open('/proc/stb/system/fan_on_time', 'w').write('%s'%config.plugins.fansetups.fanontime.value)
+				open('/proc/stb/system/fan_off_time', 'w').write('%s'%config.plugins.fansetups.fanofftime.value)
 	except:
-		print 'Error to set fan control'
+		print('Error to set fan control')
 
 def Plugins(**kwargs):
 	from os import path

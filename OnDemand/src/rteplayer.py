@@ -15,6 +15,7 @@
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from __future__ import print_function
 
 # for localized messages
 from . import _
@@ -51,7 +52,7 @@ def wgetUrl(target):
 		response.close()
 		return outtxt
 	except (Exception) as exception:
-		print 'wgetUrl: Error retrieving URL ', exception
+		print('wgetUrl: Error retrieving URL ', exception)
 		return ''
 
 ##########################################################################
@@ -62,7 +63,7 @@ def calcDuration(miliseconds):
 		duration = str(mins)
 		return str(duration)
 	except (Exception) as exception:
-		print 'calcDuration: Error calculating minutes: ', exception
+		print('calcDuration: Error calculating minutes: ', exception)
 		return ''
 
 ##########################################################################
@@ -168,7 +169,7 @@ class StreamsMenu(Screen):
 					osdList.append((_(name), url))
 
 		except (Exception) as exception:
-			print 'StreamsMenu: Error parsing feed: ', exception											
+			print('StreamsMenu: Error parsing feed: ', exception)											
 
 		osdList.append((_("Exit"), "exit"))
 
@@ -212,7 +213,7 @@ def findPlayUrl(showID, **kwargs):
 		else:
 			return ""
 	except (Exception) as exception:
-		print 'findPlayUrl: Problem rerieving URL: ', exception
+		print('findPlayUrl: Problem rerieving URL: ', exception)
 		return ""
 
 ###########################################################################
@@ -289,7 +290,7 @@ class StreamsThumb(StreamsThumbCommon):
 			fileUrl = findPlayUrl(showID)
 			
 			if fileUrl:
-				fileRef = eServiceReference(4097,0,fileUrl)
+				fileRef = eServiceReference(4097, 0, fileUrl)
 				fileRef.setName (showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
@@ -308,12 +309,12 @@ class StreamsThumb(StreamsThumbCommon):
 			tree   = etree.parse(url, parser)
 
 			for shows in tree.xpath('//div[@class="more-videos-pane"]//article[@class="thumbnail-module"]//a[@class="thumbnail-programme-link"]/@href'):
-				show_split = shows.rsplit('/',2)
+				show_split = shows.rsplit('/', 2)
 				show = str(show_split[1])
 				showIDs.append(show)
 
 		except (Exception) as exception:
-			print 'canBeMultiple: getShows: Error getting show numbers: ', exception
+			print('canBeMultiple: getShows: Error getting show numbers: ', exception)
 			showIDs.append(showID)
 
 
@@ -342,31 +343,31 @@ class StreamsThumb(StreamsThumbCommon):
 					try:
 						stream = str(elem[0].text)
 					except (Exception) as exception:
-						print "canBeMultiple: stream parse error: ", exception
+						print("canBeMultiple: stream parse error: ", exception)
 						stream = ''
 
 					try:
 						name_tmp = str(elem[3].text)
 					except (Exception) as exception:
-						print "canBeMultiple: name_tmp parse error: ", exception
+						print("canBeMultiple: name_tmp parse error: ", exception)
 						name_tmp = ''
 
 					try:
 						short_tmp = str(elem[4].text)
 					except (Exception) as exception:
-						print "canBeMultiple: short_tmp parse error: ", exception
+						print("canBeMultiple: short_tmp parse error: ", exception)
 						short_tmp = ''
 
 					try:
 						channel = str(elem[5].attrib.get('term'))
 					except (Exception) as exception:
-						print "canBeMultiple: channel parse error: ", exception
+						print("canBeMultiple: channel parse error: ", exception)
 						channel = ''
 
 					try:
 						millisecs = int(elem[15].attrib.get('ms'))
 					except (Exception) as exception:
-						print "canBeMultiple: millisecs parse error: ", exception
+						print("canBeMultiple: millisecs parse error: ", exception)
 						millisecs = 0
 
 					try:
@@ -377,7 +378,7 @@ class StreamsThumb(StreamsThumbCommon):
 						lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[1].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 						date1 = _("Added: ")+str(date_tmp)
-						print "canBeMultiple: date1 parse error: ", exception
+						print("canBeMultiple: date1 parse error: ", exception)
 
 					name = checkUnicode(name_tmp)
 					short = checkUnicode(short_tmp)
@@ -391,7 +392,7 @@ class StreamsThumb(StreamsThumbCommon):
 							icon_url = str(elem[22].attrib.get('url'))
 							icon = icon_url[0:-7]+"-261.jpg"
 						except (Exception) as exception:
-							print "canBeMultiple: icon parse error: ", exception
+							print("canBeMultiple: icon parse error: ", exception)
 							icon = ''
 					else:
 						icon=''
@@ -399,7 +400,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 			except (Exception) as exception:
-				print "canBeMultiple: Problem parsing data: ", exception
+				print("canBeMultiple: Problem parsing data: ", exception)
 
 #################################################################
 
@@ -423,31 +424,31 @@ class StreamsThumb(StreamsThumbCommon):
 				try:
 					stream = str(elem[1].text)
 				except (Exception) as exception:
-					print "getMediaData: date1 parse error: ", exception
+					print("getMediaData: date1 parse error: ", exception)
 					stream = ''
 
 				try:
 					name_tmp = str(elem[5].text)
 				except (Exception) as exception:
-					print "getMediaData: stream parse error: ", exception
+					print("getMediaData: stream parse error: ", exception)
 					name_tmp = ''
 
 				try:
 					short_tmp = str(elem[6].text)
 				except (Exception) as exception:
-					print "getMediaData: short_tmp parse error: ", exception
+					print("getMediaData: short_tmp parse error: ", exception)
 					short_tmp = ''
 
 				try:
 					channel = str(elem[7].attrib.get('term'))
 				except (Exception) as exception:
-					print "getMediaData: channel parse error: ", exception
+					print("getMediaData: channel parse error: ", exception)
 					channel = ''
 
 				try:
 					millisecs = int(elem[18].attrib.get('ms'))
 				except (Exception) as exception:
-					print "getMediaData: millisecs parse error: ", exception
+					print("getMediaData: millisecs parse error: ", exception)
 					millisecs = 0
 
 				try:
@@ -458,7 +459,7 @@ class StreamsThumb(StreamsThumbCommon):
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[3].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 					date1 = _("Added: ")+" "+str(date_tmp)
-					print "getMediaData: date1 parse error: ", exception
+					print("getMediaData: date1 parse error: ", exception)
 
 				name = checkUnicode(name_tmp)
 				short = checkUnicode(short_tmp)
@@ -470,7 +471,7 @@ class StreamsThumb(StreamsThumbCommon):
 						icon = icon_url[0:-4]+"-261.jpg" # higher quality image 261x147
 						#icon = line[5] lower quality image 150x84
 					except (Exception) as exception:
-						print "getMediaData: icon parse error: ", exception
+						print("getMediaData: icon parse error: ", exception)
 						icon = ''
 				else:
 					icon=''
@@ -481,7 +482,7 @@ class StreamsThumb(StreamsThumbCommon):
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print 'getMediaData: Error getting Media info: ', exception
+			print('getMediaData: Error getting Media info: ', exception)
 
 #################################################################
 
@@ -504,13 +505,13 @@ class StreamsThumb(StreamsThumbCommon):
 				try:
 					stream_tmp = str(elem[1].text)
 				except (Exception) as exception:
-					print "getCatsMediaData: stream_tmp parse error: ", exception
+					print("getCatsMediaData: stream_tmp parse error: ", exception)
 					stream_tmp = ''
 					
 				try:
 					name_tmp = str(elem[5].text)
 				except (Exception) as exception:
-					print "getCatsMediaData: name_tmp parse error: ", exception
+					print("getCatsMediaData: name_tmp parse error: ", exception)
 					name_tmp = ''
 
 				try:
@@ -521,7 +522,7 @@ class StreamsThumb(StreamsThumbCommon):
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[4].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 					date1 = _("Added: ")+str(date_tmp)
-					print "getCatsMediaData: date1 parse error: ", exception
+					print("getCatsMediaData: date1 parse error: ", exception)
 
 				stream = checkUnicode(stream_tmp)
 				name = checkUnicode(name_tmp)
@@ -534,7 +535,7 @@ class StreamsThumb(StreamsThumbCommon):
 						icon_url = str(elem[23].attrib.get('url'))
 						icon = icon_url[0:-4]+"-261.jpg" # higher quality image 261x147
 					except (Exception) as exception:
-						print "getCatsMediaData: icon parse error: ", exception
+						print("getCatsMediaData: icon parse error: ", exception)
 						icon = ''
 				else:
 					icon=''
@@ -542,7 +543,7 @@ class StreamsThumb(StreamsThumbCommon):
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print 'getCatsMediaData: Error getting Media info: ', exception
+			print('getCatsMediaData: Error getting Media info: ', exception)
 
 #################################################################
 
@@ -568,14 +569,14 @@ class StreamsThumb(StreamsThumbCommon):
 				try:
 					title = select(".search-programme-title")
 				except (Exception) as exception:
-					print "getSearchMediaData: title parse error: ", exception
+					print("getSearchMediaData: title parse error: ", exception)
 
 				# Only set the Icon if they are enabled
 				if self.showIcon == 'True':
 					try:
 						icon = str(select("img.thumbnail").get('src'))
 					except (Exception) as exception:
-						print "getSearchMediaData: icon parse error: ", exception
+						print("getSearchMediaData: icon parse error: ", exception)
 						icon = ''
 				else:
 					icon=''
@@ -583,33 +584,33 @@ class StreamsThumb(StreamsThumbCommon):
 				try:
 					name_tmp = str(title.text_content())
 				except (Exception) as exception:
-					print "getSearchMediaData: name_tmp parse error: ", exception
+					print("getSearchMediaData: name_tmp parse error: ", exception)
 					name_tmp = ''
 				
 				try:
 					stream_tmp = str(title.find('a').get('href'))
-					stream_split = stream_tmp.rsplit('/',2)
+					stream_split = stream_tmp.rsplit('/', 2)
 					stream = stream_split[1]
 				except (Exception) as exception:
-					print "getSearchMediaData: stream parse error: ", exception
+					print("getSearchMediaData: stream parse error: ", exception)
 					stream = ''
 				
 				try:
 					date1 = _("Added: ")+str(select(".search-programme-episodes").text_content())
 				except (Exception) as exception:
-					print "getSearchMediaData: date1 parse error: ", exception
+					print("getSearchMediaData: date1 parse error: ", exception)
 					date1 = ''
 
 				try:
 					short_tmp = str(select(".search-programme-description").text_content())
 				except (Exception) as exception:
-					print "getSearchMediaData: short_tmp parse error: ", exception
+					print("getSearchMediaData: short_tmp parse error: ", exception)
 					short_tmp = ''
 
 				try:
 					channel = str(select(".search-channel-icon").text_content())
 				except (Exception) as exception:
-					print "getSearchMediaData: channel parse error: ", exception
+					print("getSearchMediaData: channel parse error: ", exception)
 					channel = ''
 
 				name = checkUnicode(name_tmp)
@@ -618,4 +619,4 @@ class StreamsThumb(StreamsThumbCommon):
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print 'getSearchMediaData: Error getting Media info: ', exception
+			print('getSearchMediaData: Error getting Media info: ', exception)

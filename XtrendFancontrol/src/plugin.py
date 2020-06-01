@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 # Fan Setup Plugin for et9x00, et8000 and et10000
 # Coded by Dima73 (c) 2011
@@ -70,10 +71,10 @@ config.plugins.FanSetup.timeendoff = ConfigClock(default = ((7 * 60 + 0) * 60) )
 config.plugins.FanSetup.hddwatch = ConfigSelection(choices = hddwatchlist, default = "none")
 config.plugins.FanSetup.hdddevice = ConfigText(default = "all")
 config.plugins.FanSetup.hddsleep = ConfigBoolean(default = False)
-config.plugins.FanSetup.hddtemp = ConfigInteger(0, limits = (0,80))
+config.plugins.FanSetup.hddtemp = ConfigInteger(0, limits = (0, 80))
 config.plugins.FanSetup.menuhdd = ConfigYesNo(default = False)
 config.plugins.FanSetup.fanspeed = ConfigSlider(default=127, increment=8, limits=(0, 255))
-config.plugins.FanSetup.systemtemp = ConfigInteger(40, limits = (15,80))
+config.plugins.FanSetup.systemtemp = ConfigInteger(40, limits = (15, 80))
 config.plugins.FanSetup.systempwatch = ConfigSelection(choices = syswatchlist, default = "off")
 
 
@@ -215,7 +216,7 @@ class FanSetupScreen(Screen, ConfigListScreen):
 	def initConfig(self):
 		def getPrevValues(section):
 			res = { }
-			for (key,val) in section.content.items.items():
+			for (key, val) in section.content.items.items():
 				if isinstance(val, ConfigSubsection):
 					res[key] = getPrevValues(val)
 				else:
@@ -232,7 +233,7 @@ class FanSetupScreen(Screen, ConfigListScreen):
 		# select internal hdd-drive
 		hddlist = self.getHddList()
 		hddlist["all"] = _("All")
-		default = not hddlist.has_key(self.FAN.hdddevice.value) and "all" or self.FAN.hdddevice.value
+		default = self.FAN.hdddevice.value not in hddlist and "all" or self.FAN.hdddevice.value
 		self.hddlistsel = ConfigSelection(choices = hddlist, default = default)
 		self.cfg_hdddevice= getConfigListEntry(_("Select internal HDD device"), self.hddlistsel)
 		self.prev_hdddevice = self.FAN.hdddevice.value
@@ -274,7 +275,7 @@ class FanSetupScreen(Screen, ConfigListScreen):
 
 	def keyRed(self):
 		def setPrevValues(section, values):
-			for (key,val) in section.content.items.items():
+			for (key, val) in section.content.items.items():
 				value = values.get(key, None)
 				if value is not None:
 					if isinstance(val, ConfigSubsection):
@@ -306,7 +307,7 @@ class FanSetupScreen(Screen, ConfigListScreen):
 				fd.close()
 				removable = removable.strip()
 			if removable == '0':
-				print "removable state for device HDD"
+				print("removable state for device HDD")
 			else:
 				self.session.open(MessageBox, _("You may not use this mode!\nNot found an internal hard drive!"), MessageBox.TYPE_INFO, timeout = 5)
 				self.FAN.hddwatch.value = "none"
@@ -465,7 +466,7 @@ def getTempForDevice(device):
 		pos2 = temperature.rfind('C')
 		if pos1 != -1 and pos2 != -1 and pos1 < pos2:
 			temp = int(temperature[pos1+1:pos2])
-			disk = temperature[1:pos1].replace('\x10\x80','').strip()
+			disk = temperature[1:pos1].replace('\x10\x80', '').strip()
 			return disk, temp
 	except:
 		pass

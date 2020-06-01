@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -25,10 +26,10 @@ import NavigationInstance
 from Screens.SessionGlobals import SessionGlobals
 
 config.plugins.VFD_spark = ConfigSubsection()
-config.plugins.VFD_spark.showClock = ConfigSelection(default = "True_Switch", choices = [("NameOff",_("Channelname in Standby off")), ("NameOn",_("Channelname in Standby Clock")), ("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_spark.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
-config.plugins.VFD_spark.redLed = ConfigSelection(default = "0", choices = [("0",_("Off")),("1",_("Standby only")), ("2",_("Record only"))])
-config.plugins.VFD_spark.greenLed = ConfigSelection(default = "0", choices = [("0",_("Off")),("1",_("Standby only"))])
+config.plugins.VFD_spark.showClock = ConfigSelection(default = "True_Switch", choices = [("NameOff", _("Channelname in Standby off")), ("NameOn", _("Channelname in Standby Clock")), ("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.VFD_spark.timeMode = ConfigSelection(default = "24h", choices = [("12h"), ("24h")])
+config.plugins.VFD_spark.redLed = ConfigSelection(default = "0", choices = [("0", _("Off")), ("1", _("Standby only")), ("2", _("Record only"))])
+config.plugins.VFD_spark.greenLed = ConfigSelection(default = "0", choices = [("0", _("Off")), ("1", _("Standby only"))])
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
@@ -49,7 +50,7 @@ class Channelnumber:
 		self.zaPrik.start(1000, 1)
 		self.onClose = [ ]
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 			{
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
@@ -167,7 +168,7 @@ class Channelnumber:
 	def showRec(self):
 		try:
 			#not all images support recording type indicators
-			recordings = len(NavigationInstance.instance.getRecordings(False,Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue())))
+			recordings = len(NavigationInstance.instance.getRecordings(False, Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue())))
 		except:
 			recordings = len(NavigationInstance.instance.getRecordings())
 		
@@ -185,13 +186,13 @@ class Channelnumber:
 ChannelnumberInstance = None
 
 def leaveStandby():
-	print "[VFD-SPARK] Leave Standby"
+	print("[VFD-SPARK] Leave Standby")
 
 	if config.plugins.VFD_spark.showClock.value == 'Off':
 		vfd_write("....")
 
 def standbyCounterChanged(configElement):
-	print "[VFD-SPARK] In Standby"
+	print("[VFD-SPARK] In Standby")
 
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
@@ -200,7 +201,7 @@ def standbyCounterChanged(configElement):
 		vfd_write("....")
 
 def initVFD():
-	print "[VFD-SPARK] initVFD"
+	print("[VFD-SPARK] initVFD")
 
 	if config.plugins.VFD_spark.showClock.value == 'Off':
 		vfd_write("....")
@@ -231,7 +232,7 @@ class VFD_SPARKSetup(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("Save"))
 		self["key_yellow"] = Button(_("Update Date/Time"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -257,12 +258,12 @@ class VFD_SPARKSetup(ConfigListScreen, Screen):
 		self.newConfig()
 
 	def newConfig(self):
-		print self["config"].getCurrent()[0]
+		print(self["config"].getCurrent()[0])
 		if self["config"].getCurrent()[0] == _('Show on VFD'):
 			self.createSetup()
 
 	def abort(self):
-		print "aborting"
+		print("aborting")
 
 	def save(self):
 		for x in self["config"].list:
@@ -284,7 +285,7 @@ class VFD_SPARKSetup(ConfigListScreen, Screen):
 
 class VFD_SPARK:
 	def __init__(self, session):
-		print "[VFD-SPARK] initializing"
+		print("[VFD-SPARK] initializing")
 		self.session = session
 		self.service = None
 		self.onClose = [ ]
@@ -301,7 +302,7 @@ class VFD_SPARK:
 		self.abort()
 
 	def abort(self):
-		print "[VFD-SPARK] aborting"
+		print("[VFD-SPARK] aborting")
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 baseSessionGlobals__init__ = None
@@ -380,20 +381,20 @@ def controlsparkVfd():
 	global mySession
 
 	if gReason == 0 and mySession != None and sparkVfd == None:
-		print "[VFD-SPARK] Starting !!"
+		print("[VFD-SPARK] Starting !!")
 		sparkVfd = VFD_SPARK(mySession)
 	elif gReason == 1 and sparkVfd != None:
-		print "[VFD-SPARK] Stopping !!"
+		print("[VFD-SPARK] Stopping !!")
 
 		sparkVfd = None
 
 def sessionstart(reason, **kwargs):
-	print "[VFD-SPARK] sessionstart"
+	print("[VFD-SPARK] sessionstart")
 	global sparkVfd
 	global gReason
 	global mySession
 
-	if kwargs.has_key("session"):
+	if "session" in kwargs:
 		mySession = kwargs["session"]
 	else:
 		gReason = reason
@@ -406,6 +407,6 @@ def sessionstart(reason, **kwargs):
 def Plugins(**kwargs):
 		if getBoxType() in ('amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'amikomini'):
 			return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings", where = PluginDescriptor.WHERE_MENU, fnc = main) ]
 		else:
 			return []

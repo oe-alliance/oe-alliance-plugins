@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 
 import os
@@ -51,7 +52,7 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 		if isEmpty(chName): chName = 'Unknown'
 		if isEmpty(chURL):  chURL  = 'Unknown'
 		if isEmpty(chIcon): chIcon = 'default.png'
-		chIcon = '%s/icons/%s'%(PLUGIN_PATH,chIcon)
+		chIcon = '%s/icons/%s'%(PLUGIN_PATH, chIcon)
 		self.session = session
 		self.service = service
 		self.cbServiceCommand = cbServiceCommand
@@ -85,13 +86,13 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 		self.picload = ePicLoad()
 		self.scale   = AVSwitch().getFramebufferScale()
 		self.picload.PictureData.get().append(self.cbDrawChannelIcon)
-		print self.scale[0]
-		print self.scale[1]
+		print(self.scale[0])
+		print(self.scale[1])
 		self.picload.setPara((35, 35, self.scale[0], self.scale[1], False, 0, "#00000000"))
 		self.picload.startDecode(chIcon)
 
 		self.bypassExit = False
-		self.cbServiceCommand(('docommand',self.doCommand))
+		self.cbServiceCommand(('docommand', self.doCommand))
 
 	def doCommand(self, cmd):
 		if cmd == 'bypass_exit':
@@ -138,7 +139,7 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 	def setSeekState(self, wantstate):
 		service = self.session.nav.getCurrentService()
 		if service is None:
-			print "No Service found"
+			print("No Service found")
 			return
 
 		pauseable = service.pause()
@@ -212,8 +213,8 @@ def streamListEntry(entry):
 	uriInfo = entry[1].get('uri')
 	return [entry,
 		(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 1, 35, 35, loadPNG('%s/icons/%s' % (PLUGIN_PATH, str(entry[1].get('icon'))) )),
-		(eListboxPythonMultiContent.TYPE_TEXT,45,7,200,37,0,RT_HALIGN_LEFT,entry[0]),
-		(eListboxPythonMultiContent.TYPE_TEXT,250,7,310,37,1,RT_HALIGN_LEFT,str(uriInfo.get('URL')))
+		(eListboxPythonMultiContent.TYPE_TEXT, 45, 7, 200, 37, 0, RT_HALIGN_LEFT, entry[0]),
+		(eListboxPythonMultiContent.TYPE_TEXT, 250, 7, 310, 37, 1, RT_HALIGN_LEFT, str(uriInfo.get('URL')))
 	] 
 
 class StreamTVList(Screen):
@@ -226,12 +227,12 @@ class StreamTVList(Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		self["actions"]  = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
-			"ok"    : self.keyOK,
+			"ok": self.keyOK,
 			"cancel": self.keyCancel,
-			"up"    : self.keyUp,
-			"down"  : self.keyDown,
-			"left"  : self.keyLeft,
-			"right" : self.keyRight,
+			"up": self.keyUp,
+			"down": self.keyDown,
+			"left": self.keyLeft,
+			"right": self.keyRight,
 		}, -1)
 
 		self.streamBin  = resolveFilename(SCOPE_PLUGINS, "Extensions/StreamTV/rtmpdump")
@@ -259,7 +260,7 @@ class StreamTVList(Screen):
 
 	def layoutFinished(self):
 		rc = os.popen('ps -ef | grep rtmpdump | grep -v grep').read()
-		print "a process already running :", rc
+		print("a process already running :", rc)
 		if rc is not None:
 			if rc.strip() != '':
 				os.system('killall -INT rtmpdump')
@@ -350,7 +351,7 @@ class StreamTVList(Screen):
 			self.serviceDoCommand = params[1]
 
 	def cbAppClosed(self, ret):
-		print ret
+		print(ret)
 		self.doConsoleStop()
 		if self.currentService is not None and not self.playerStoped:
 			self.serviceDoCommand('bypass_exit')
@@ -361,7 +362,7 @@ class StreamTVList(Screen):
 			self.serviceDoCommand = None
 
 	def cbDataAvail(self, data):
-		print data
+		print(data)
 		if str(data) == 'Connected...':
 			self.streamPlayerTimer = eTimer()
 			self.streamPlayerTimer.timeout.get().append(self.doStreamAction)
@@ -370,7 +371,7 @@ class StreamTVList(Screen):
 	def cbFinishedStream(self):
 		self.doConsoleStop()
 		self.session.nav.playService(self.beforeService)
-		print 'player done!!'
+		print('player done!!')
 
 	def doConsoleStop(self):
 		self.keyLocked = False
@@ -404,7 +405,7 @@ def main(session, **kwargs):
 	for line in f.readlines():
 		line = line.strip()
 		if line.find('Link detected:') >= 0:
-			x = line.split(':',1)
+			x = line.split(':', 1)
 			active = x[1].strip()
 	if (active=="yes"):
 		system("rm /tmp/.eth0_test")

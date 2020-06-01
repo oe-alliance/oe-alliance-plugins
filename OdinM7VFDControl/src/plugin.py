@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Odin
 # for localized messages
 from . import _
@@ -19,8 +20,8 @@ from time import localtime, time
 import Screens.Standby
 
 config.plugins.VFD_odin = ConfigSubsection()
-config.plugins.VFD_odin.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_odin.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.VFD_odin.showClock = ConfigSelection(default = "True_Switch", choices = [("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.VFD_odin.timeMode = ConfigSelection(default = "24h", choices = [("12h"), ("24h")])
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
@@ -41,7 +42,7 @@ class Channelnumber:
 		self.zaPrik.start(1000, 1)
 		self.onClose = [ ]
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 			{
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
@@ -138,13 +139,13 @@ class Channelnumber:
 ChannelnumberInstance = None
 
 def leaveStandby():
-	print "[VFD-ODINM7] Leave Standby"
+	print("[VFD-ODINM7] Leave Standby")
 
 	if config.plugins.VFD_odin.showClock.value == 'Off':
 		vfd_write("....")
 
 def standbyCounterChanged(configElement):
-	print "[VFD-ODINM7] In Standby"
+	print("[VFD-ODINM7] In Standby")
 
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
@@ -153,7 +154,7 @@ def standbyCounterChanged(configElement):
 		vfd_write("....")
 
 def initVFD():
-	print "[VFD-ODINM7] initVFD"
+	print("[VFD-ODINM7] initVFD")
 
 	if config.plugins.VFD_odin.showClock.value == 'Off':
 		vfd_write("....")
@@ -184,7 +185,7 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -207,12 +208,12 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 		self.newConfig()
 
 	def newConfig(self):
-		print self["config"].getCurrent()[0]
+		print(self["config"].getCurrent()[0])
 		if self["config"].getCurrent()[0] == _('Show on display'):
 			self.createSetup()
 
 	def abort(self):
-		print "aborting"
+		print("aborting")
 
 	def save(self):
 		for x in self["config"].list:
@@ -230,7 +231,7 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 
 class VFD_Odin:
 	def __init__(self, session):
-		print "[VFD-ODINM7] initializing"
+		print("[VFD-ODINM7] initializing")
 		self.session = session
 		self.service = None
 		self.onClose = [ ]
@@ -247,7 +248,7 @@ class VFD_Odin:
 		self.abort()
 
 	def abort(self):
-		print "[VFD-ODINM7] aborting"
+		print("[VFD-ODINM7] aborting")
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
 
 def main(menuid):
@@ -268,20 +269,20 @@ def controlodinm7Vfd():
 	global mySession
 
 	if gReason == 0 and mySession != None and odinm7Vfd == None:
-		print "[VFD-ODINM7] Starting !!"
+		print("[VFD-ODINM7] Starting !!")
 		odinm7Vfd = VFD_Odin(mySession)
 	elif gReason == 1 and odinm7Vfd != None:
-		print "[VFD-ODINM7] Stopping !!"
+		print("[VFD-ODINM7] Stopping !!")
 
 		odinm7Vfd = None
 
 def sessionstart(reason, **kwargs):
-	print "[VFD-ODINM7] sessionstart"
+	print("[VFD-ODINM7] sessionstart")
 	global odinm7Vfd
 	global gReason
 	global mySession
 
-	if kwargs.has_key("session"):
+	if "session" in kwargs:
 		mySession = kwargs["session"]
 	else:
 		gReason = reason
@@ -289,4 +290,4 @@ def sessionstart(reason, **kwargs):
 
 def Plugins(**kwargs):
  	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
- 		PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+ 		PluginDescriptor(name="LED Display Setup", description="Change VFD display settings", where = PluginDescriptor.WHERE_MENU, fnc = main) ]

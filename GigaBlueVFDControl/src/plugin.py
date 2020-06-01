@@ -1,3 +1,4 @@
+from __future__ import print_function
 #Giga
 # for localized messages
 from . import _
@@ -25,12 +26,12 @@ from Components.Harddisk import harddiskmanager
 BOX = getBoxType()
 
 config.plugins.VFD_Giga = ConfigSubsection()
-config.plugins.VFD_Giga.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")),("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_Giga.showClockDeepStandby = ConfigSelection(default = "False", choices = [("False",_("No")),("True",_("Yes"))])
-config.plugins.VFD_Giga.channelnrformat = ConfigSelection(default = "True", choices = [("False",_("No")),("True",_("Yes"))])
+config.plugins.VFD_Giga.showClock = ConfigSelection(default = "True_Switch", choices = [("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.VFD_Giga.showClockDeepStandby = ConfigSelection(default = "False", choices = [("False", _("No")), ("True", _("Yes"))])
+config.plugins.VFD_Giga.channelnrformat = ConfigSelection(default = "True", choices = [("False", _("No")), ("True", _("Yes"))])
 config.plugins.VFD_Giga.setLed = ConfigYesNo(default = True)
 config.plugins.VFD_Giga.recLedBlink = ConfigYesNo(default = True)
-led = [("0",_("None")),("1",_("Blue")),("2",_("Red")),("3",_("Purple"))]
+led = [("0", _("None")), ("1", _("Blue")), ("2", _("Red")), ("3", _("Purple"))]
 config.plugins.VFD_Giga.ledRUN = ConfigSelection(led, default = "1")
 config.plugins.VFD_Giga.ledSBY = ConfigSelection(led, default = "2")
 config.plugins.VFD_Giga.ledREC = ConfigSelection(led, default = "3")
@@ -38,7 +39,7 @@ config.plugins.VFD_Giga.ledDSBY = ConfigSelection(led, default = "2")
 config.plugins.VFD_Giga.ledDSBY2 = ConfigYesNo(default = True)
 config.plugins.VFD_Giga.ledSDA1 = ConfigSelection(led, default = "0")
 config.plugins.VFD_Giga.ledSDB1 = ConfigSelection(led, default = "0")
-config.plugins.VFD_Giga.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.VFD_Giga.timeMode = ConfigSelection(default = "24h", choices = [("12h"), ("24h")])
 if BOX in ('gbtrio4k'):
 	Brightness_default = 1
 	Brightness_increment = 1
@@ -49,8 +50,8 @@ else:
 	Brightness_increment = 5
 	Brightness_limits_min = 0
 	Brightness_limits_max = 255
-config.plugins.VFD_Giga.vfdBrightness = ConfigSlider(default=Brightness_default, increment = Brightness_increment, limits=(Brightness_limits_min,Brightness_limits_max))
-config.plugins.VFD_Giga.vfdBrightnessStandby = ConfigSlider(default=Brightness_default, increment = Brightness_increment, limits=(0,Brightness_limits_max))
+config.plugins.VFD_Giga.vfdBrightness = ConfigSlider(default=Brightness_default, increment = Brightness_increment, limits=(Brightness_limits_min, Brightness_limits_max))
+config.plugins.VFD_Giga.vfdBrightnessStandby = ConfigSlider(default=Brightness_default, increment = Brightness_increment, limits=(0, Brightness_limits_max))
 
 RecLed = None
 
@@ -58,7 +59,7 @@ def vfd_write(text):
 	try:
 		open("/dev/mcu", "w").write(text)
 	except IOError:
-		print "[LED-GIGA] vfd_write failed!"
+		print("[LED-GIGA] vfd_write failed!")
 
 def setvfdBrightness(value):
 	if BOX in ('gbtrio4k'):
@@ -71,7 +72,7 @@ def setvfdBrightness(value):
 		f.write(str(value))
 		f.close()
 	except IOError:
-		print "[LED-GIGA] vfdBrightness failed!"
+		print("[LED-GIGA] vfdBrightness failed!")
 
 def setvfdDSBY2(value):
 	try:
@@ -79,7 +80,7 @@ def setvfdDSBY2(value):
 		f.write(str(value))
 		f.close()
 	except IOError:
-		print "[LED-GIGA] vfdDSBY2 failed!"
+		print("[LED-GIGA] vfdDSBY2 failed!")
 
 def setLed(color):
 	# 0 = off
@@ -123,18 +124,18 @@ def setLed(color):
 			value1 = 0
 
 	try:
-		f = open(led0,"w")
+		f = open(led0, "w")
 		f.write(str(value0))
 		f.close()
 	except IOError:
-		print "[LED-GIGA] set LED Pattern failed!"
+		print("[LED-GIGA] set LED Pattern failed!")
 
 	try:
-		f = open(led1,"w")
+		f = open(led1, "w")
 		f.write(str(value1))
 		f.close()
 	except IOError:
-		print "[LED-GIGA] set LED Pattern failed!"
+		print("[LED-GIGA] set LED Pattern failed!")
 
 class Channelnumber:
 
@@ -152,14 +153,14 @@ class Channelnumber:
 		self.zaPrik.start(1000, 1)
 		self.onClose = [ ]
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
 			{
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 
 	def __eventInfoChanged(self):
 		self.RecordingLed()
-		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase','gbtrio4k'):
+		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k'):
 			return
 		if config.plugins.VFD_Giga.showClock.value == 'Off' or config.plugins.VFD_Giga.showClock.value == 'True_All':
 			return
@@ -275,7 +276,7 @@ class Channelnumber:
 				pass
 		try:
 			#not all images support recording type indicators
-			recordings = self.session.nav.getRecordings(False,Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue()))
+			recordings = self.session.nav.getRecordings(False, Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue()))
 		except:
 			recordings = self.session.nav.getRecordings()
 		led_rec = "0"
@@ -313,7 +314,7 @@ class Channelnumber:
 ChannelnumberInstance = None
 
 def leaveStandby():
-	print "[LED-GIGA] Leave Standby"
+	print("[LED-GIGA] Leave Standby")
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
 		vfd_write("    ")
@@ -333,7 +334,7 @@ def leaveStandby():
 			setvfdBrightness(Brightness_default)
 
 def standbyCounterChanged(configElement):
-	print "[LED-GIGA] In Standby"
+	print("[LED-GIGA] In Standby")
 
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
@@ -356,7 +357,7 @@ def standbyCounterChanged(configElement):
 			setvfdBrightness("0")
 
 def initLED():
-	print "[LED-GIGA] initVFD box = %s" % BOX
+	print("[LED-GIGA] initVFD box = %s" % BOX)
 
 	if config.plugins.VFD_Giga.setLed.value:
 		setLed(config.plugins.VFD_Giga.ledRUN.getValue())
@@ -367,7 +368,7 @@ def initLED():
 		forcmd = '1'
 	else:
 		forcmd = '0'
-	if BOX in ("gbtrio4k","gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h", "gbx34k"):
+	if BOX in ("gbtrio4k", "gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h", "gbx34k"):
 		cmd = 'echo STB does not support to show clock in Deep Standby'
 	else:
 		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
@@ -418,7 +419,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		else:
 			self["key_yellow"] = Button(_("Update Date/Time"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -481,7 +482,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightnessStandby.getValue())
 
 	def abort(self):
-		print "aborting"
+		print("aborting")
 
 	def save(self):
 		for x in self["config"].list:
@@ -505,7 +506,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 
 class LED_Giga:
 	def __init__(self, session):
-		print "[LED-GIGA] initializing"
+		print("[LED-GIGA] initializing")
 		self.session = session
 		self.service = None
 		self.onClose = [ ]
@@ -525,10 +526,10 @@ class LED_Giga:
 		self.abort()
 
 	def abort(self):
-		print "[LED-GIGA] aborting"
+		print("[LED-GIGA] aborting")
 
 	def delay_init(self):
-		print "[LED-GIGA] delay init on boot"
+		print("[LED-GIGA] delay init on boot")
 		initLED()
 
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
@@ -573,14 +574,14 @@ def controlgigaLED():
 	global mySession
 
 	if gReason == 0 and mySession != None and gigaLED == None:
-		print "[LED-GIGA] Starting !!"
+		print("[LED-GIGA] Starting !!")
 		gigaLED = LED_Giga(mySession)
 	elif gReason == 1 and gigaLED != None:
-		print "[LED-GIGA] Stopping !!"
+		print("[LED-GIGA] Stopping !!")
 		gigaLED = None
 
 def SetTime():
-	print "[LED-GIGA] Set RTC time"
+	print("[LED-GIGA] Set RTC time")
 	import time
 	if time.localtime().tm_isdst == 0:
 		forsleep = 7200+time.timezone
@@ -588,27 +589,27 @@ def SetTime():
 		forsleep = 3600-time.timezone
 
 	t_local = time.localtime(int(time.time()))
-	print "set Gigabox RTC to %s (rtc_offset = %s sec.)" % (time.strftime("%Y/%m/%d %H:%M", t_local), forsleep)
+	print("set Gigabox RTC to %s (rtc_offset = %s sec.)" % (time.strftime("%Y/%m/%d %H:%M", t_local), forsleep))
 
 	# Set RTC OFFSET (diff. between UTC and Local Time)
 	try:
 		open("/proc/stb/fp/rtc_offset", "w").write(str(forsleep))
 	except IOError:
-		print "[LED-GIGA] set RTC Offset failed!"
+		print("[LED-GIGA] set RTC Offset failed!")
 
 	# Set RTC
 	try:
 		open("/proc/stb/fp/rtc", "w").write(str(int(time.time())))
 	except IOError:
-		print "[LED-GIGA] set RTC time failed!"
+		print("[LED-GIGA] set RTC time failed!")
 
 def sessionstart(reason, **kwargs):
-	print "[LED-GIGA] sessionstart"
+	print("[LED-GIGA] sessionstart")
 	global gigaLED
 	global gReason
 	global mySession
 
-	if kwargs.has_key("session"):
+	if "session" in kwargs:
 		mySession = kwargs["session"]
 	else:
 		gReason = reason
@@ -616,4 +617,4 @@ def sessionstart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-		PluginDescriptor(name="LED_Giga", description="Change LED display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+		PluginDescriptor(name="LED_Giga", description="Change LED display settings", where = PluginDescriptor.WHERE_MENU, fnc = main) ]

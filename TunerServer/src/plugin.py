@@ -96,7 +96,7 @@ NOTE: The server is built, based on your current ip and the current channel list
 			if ipm != "0.0.0.0":
 				self.ip = ipm
 
-		os.mkdir("/media/hdd/tuner", 0755)
+		os.mkdir("/media/hdd/tuner", 0o755)
 		s_type = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
 		serviceHandler = eServiceCenter.getInstance()
 		services = serviceHandler.list(eServiceReference('%s FROM BOUQUET "bouquets.tv" ORDER BY bouquet'%(s_type)))
@@ -116,7 +116,7 @@ NOTE: The server is built, based on your current ip and the current channel list
 		n = "%03d_" % (count)
 		name = n + self.cleanName(bouquet[1])
 		path = "/media/hdd/tuner/" + name
-		os.mkdir(path, 0755)
+		os.mkdir(path, 0o755)
 		serviceHandler = eServiceCenter.getInstance()
 		services = serviceHandler.list(eServiceReference(bouquet[0]))
 		channels = services and services.getContent("SN", True)

@@ -18,10 +18,10 @@ class LCD4linuxweb(resource.Resource):
 
 		""" rendering server response """
 		w=""
-		command = req.args.get("width",None)
+		command = req.args.get("width", None)
 		if command is not None:
 			w += " width=\"%s\"" % command[0]
-		command = req.args.get("hight",None)
+		command = req.args.get("hight", None)
 		if command is not None:
 			w += " height=\"%s\"" % command[0]
 		html = "<html>"
@@ -43,36 +43,36 @@ class LCD4linuxweb(resource.Resource):
 		html += "</head>"
 		html += "<body bgcolor=\"%s\" text=\"#FFFFFF\">\n" % ("#666666" if getConfigMode() == True else "#000000")
 		html += "<form method=\"POST\" action=\"--WEBBOT-SELF--\">\n"
-		datei = req.args.get("file",None)
+		datei = req.args.get("file", None)
 		if datei is not None:
-			if os.path.isfile("%s%s" % (getTMPL(),datei[0])):
-				t=os.path.getmtime("%s%s" % (getTMPL(),datei[0]))
-				JR = "" if JavaRefresh == "" else JavaRefresh % (1,1,datei[0])
-				html += "<a %s><img border=\"0\" src=\"/lcd4linux/%s?%d\" %s %s></a> \n" % (self.HREF,datei[0],t,JR,w)
+			if os.path.isfile("%s%s" % (getTMPL(), datei[0])):
+				t=os.path.getmtime("%s%s" % (getTMPL(), datei[0]))
+				JR = "" if JavaRefresh == "" else JavaRefresh % (1, 1, datei[0])
+				html += "<a %s><img border=\"0\" src=\"/lcd4linux/%s?%d\" %s %s></a> \n" % (self.HREF, datei[0], t, JR, w)
 		elif os.path.isfile("%sdpf.jpg" % getTMPL()):
 			t=os.path.getmtime("%sdpf.jpg" % getTMPL())
-			JR = "" if JavaRefresh == "" else JavaRefresh % (2,2,"dpf.jpg")
-			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf.jpg?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
+			JR = "" if JavaRefresh == "" else JavaRefresh % (2, 2, "dpf.jpg")
+			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf.jpg?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
 		elif os.path.isfile("%sdpf.png" % getTMPL()):
 			t=os.path.getmtime("%sdpf.png" % getTMPL())
-			JR = "" if JavaRefresh == "" else JavaRefresh % (3,3,"dpf.png")
-			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf.png?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
+			JR = "" if JavaRefresh == "" else JavaRefresh % (3, 3, "dpf.png")
+			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf.png?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
 		elif os.path.isfile("%sdpf2.jpg" % getTMPL()):
 			t=os.path.getmtime("%sdpf2.jpg" % getTMPL())
-			JR = "" if JavaRefresh == "" else JavaRefresh % (4,4,"dpf2.jpg")
-			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf2.jpg?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
+			JR = "" if JavaRefresh == "" else JavaRefresh % (4, 4, "dpf2.jpg")
+			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf2.jpg?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
 		elif os.path.isfile("%sdpf2.png" % getTMPL()):
 			t=os.path.getmtime("%sdpf2.png" % getTMPL())
-			JR = "" if JavaRefresh == "" else JavaRefresh % (5,5,"dpf2.png")
-			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf2.png?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
+			JR = "" if JavaRefresh == "" else JavaRefresh % (5, 5, "dpf2.png")
+			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf2.png?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
 		elif os.path.isfile("%sdpf3.jpg" % getTMPL()):
 			t=os.path.getmtime("%sdpf3.jpg" % getTMPL())
-			JR = "" if JavaRefresh == "" else JavaRefresh % (6,6,"dpf3.jpg")
-			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf3.jpg?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
+			JR = "" if JavaRefresh == "" else JavaRefresh % (6, 6, "dpf3.jpg")
+			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf3.jpg?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
 		elif os.path.isfile("%sdpf3.png" % getTMPL()):
 			t=os.path.getmtime("%sdpf3.png" % getTMPL())
-			JR = "" if JavaRefresh == "" else JavaRefresh % (7,7,"dpf3.png")
-			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf3.png?%d\" %s %s></a> \n" % (self.HREF,t,JR,w)
+			JR = "" if JavaRefresh == "" else JavaRefresh % (7, 7, "dpf3.png")
+			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf3.png?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
 		else:
 			html += "<a style=\"color:#FFCC00\" %s>no Picture .... Config-WebIF</a>" % self.HREF
 		html += "</body>\n"

@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import os, xml.dom.minidom, re
 from enigma import iServiceInformation
 
 RE_XML_ILLEGAL = u'([\u0000-\u0008\u000b-\u000c\u000e-\u001f\ufffe-\uffff])' + \
                  u'|' + \
                  u'([%s-%s][^%s-%s])|([^%s-%s][%s-%s])|([%s-%s]$)|(^[%s-%s])' % \
-                  (unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff),
-                   unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff),
-                   unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff))
+                  (unichr(0xd800), unichr(0xdbff), unichr(0xdc00), unichr(0xdfff),
+                   unichr(0xd800), unichr(0xdbff), unichr(0xdc00), unichr(0xdfff),
+                   unichr(0xd800), unichr(0xdbff), unichr(0xdc00), unichr(0xdfff))
 import vbcfg
 DUMPBIN = vbcfg.PLUGINROOT + "/dumpait"
 class eAITSectionReader:
@@ -74,7 +75,7 @@ class eAITSectionReader:
 
 		document = ""
 		try:	document = os.popen(self.mCommand).read()
-		except Exception, ErrMsg:
+		except Exception as ErrMsg:
 			vbcfg.ERR(ErrMsg)
 			return False
 		if len(document) == 0:
@@ -87,20 +88,20 @@ class eAITSectionReader:
 		#print document
 		try:
 			self.mDocument = xml.dom.minidom.parseString(document)
-		except Exception, ErrMsg:
+		except Exception as ErrMsg:
 			vbcfg.ERR("XML parse: %s" % ErrMsg)
 			return False
 		return True
 
 	def doDump(self):
 		for x in self.getApplicationList():
-			print "Name  :", x["name"]
-			print "URL   :", x["url"]
-			print "OrgID :", x["orgid"]
-			print "AppID :", x["appid"]
-			print "Control Code :", x["control"]
-			print "Profile Code :", x["profile"]
-			print ""
+			print("Name  :", x["name"])
+			print("URL   :", x["url"])
+			print("OrgID :", x["orgid"])
+			print("AppID :", x["appid"])
+			print("Control Code :", x["control"])
+			print("Profile Code :", x["profile"])
+			print("")
 
 def unit_test(demux, pmtid, sid):
 	reader = eAITSectionReader(demux, pmtid, sid)
