@@ -1,6 +1,9 @@
 from __future__ import print_function
 import vbcfg
 
+from six.moves import configparser
+
+
 class BookmarkData:
 	def __init__(self, _id, _title, _url, _parent, _type):
 		self.mId 	= _id
@@ -25,10 +28,9 @@ class CategoryData:
 
 	def dump(self):
 		print("  -> %d, %s" % (self.mId, self.mName))
-		for key in self.mBookmarks.iterkeys():
+		for key in self.mBookmarks:
 			self.mBookmarks[key].dump('      ')
 
-import ConfigParser
 class SimpleConfigParser:
 	def __init__(self):
 		self.mFileName = None
@@ -102,7 +104,7 @@ class SimpleConfigParser:
 
 	def init(self, _fileName):
 		self.mFileName = _fileName
-		self.mConfig = ConfigParser.RawConfigParser()
+		self.mConfig = configparser.RawConfigParser()
 		if self.mConfig is None:
 			return False
 		self._read()
@@ -161,8 +163,8 @@ class BookmarkManager(SimpleConfigParser):
 
 	def getBookmark(self, _title):
 		self.populate()
-		for key in self.mBookmarkRoot.iterkeys():
-			for key2 in self.mBookmarkRoot[key].mBookmarks.iterkeys():
+		for key in self.mBookmarkRoot:
+			for key2 in self.mBookmarkRoot[key].mBookmarks:
 				if self.mBookmarkRoot[key].mBookmarks[key2].mTitle == _title:
 					return 'b-%d' % (self.mBookmarkRoot[key].mBookmarks[key2].mId)
 		return None
@@ -203,7 +205,7 @@ class BookmarkManager(SimpleConfigParser):
 
 	def getCategory(self, _name):
 		self.populate()
-		for key in self.mBookmarkRoot.iterkeys():
+		for key in self.mBookmarkRoot:
 			if self.mBookmarkRoot[key].mName == _name:
 				return 'c-%d' % (self.mBookmarkRoot[key].mId)
 		return None
@@ -227,7 +229,7 @@ class BookmarkManager(SimpleConfigParser):
 		self.populate()
 		self.message("delete category : %d", (_id,))
 		try:
-			for key in self.mBookmarkRoot[_id].mBookmarks.iterkeys():
+			for key in self.mBookmarkRoot[_id].mBookmarks:
 				self.delSection('b-%d' % (key,))
 		except: pass
 		self.delSection('c-%d' % (_id,))
@@ -269,7 +271,7 @@ class BookmarkManager(SimpleConfigParser):
 					categoryList[p].appendBookmark(BookmarkData(i, t, u, p, e))
 				except Exception as e: self._del(s)
 			bx += 1
-		for key in categoryList.iterkeys():
+		for key in categoryList:
 			sorted(categoryList[key].mBookmarks)
 		self.mBookmarkRoot = categoryList
 		self.mPopulateValid = True
@@ -284,7 +286,7 @@ class BookmarkManager(SimpleConfigParser):
 			return
 		self.populate()
 		print("-- snapshot --")
-		for key in self.mBookmarkRoot.iterkeys():
+		for key in self.mBookmarkRoot:
 			self.mBookmarkRoot[key].dump()
 		print("--------------")
 

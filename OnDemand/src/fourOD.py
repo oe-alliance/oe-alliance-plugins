@@ -43,6 +43,9 @@ import fourOD_token_decoder
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon, RTMP
 
+import six
+
+
 __plugin__  = "4OD: "
 __version__ = "Version 1.0.2: "
 
@@ -222,7 +225,7 @@ class fourODMainMenu(Screen):
 						match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
 
 						categoryName = match.group(1)
-						label = unicode(entry.text).replace('\r\n', '')
+						label = six.text_type(entry.text).replace('\r\n', '')
 						label = re.sub(' +', ' ', label)
 
 						osdList.append((_(str(label)), str(categoryName)))
@@ -701,7 +704,7 @@ class StreamsThumb(StreamsThumbCommon):
 						icon = ''
 
 					try:
-						name_tmp = str(unicode(entry['title']))
+						name_tmp = str(six.text_type(entry['title']))
 						name_tmp1 = checkUnicode(name_tmp)
 						name = remove_extra_spaces(name_tmp1)
 					except (Exception) as exception:
@@ -765,7 +768,7 @@ class StreamsThumb(StreamsThumbCommon):
 						continue
 
 					try:
-						stream_tmp = str(unicode(entry[u'siteUrl']))
+						stream_tmp = str(six.text_type(entry[u'siteUrl']))
 						stream_split = stream_tmp.rsplit('/', 2)
 						stream = str(stream_split[1])
 					except (Exception) as exception:
@@ -774,14 +777,14 @@ class StreamsThumb(StreamsThumbCommon):
 					# Only set the Icon if they are enabled
 					if self.showIcon == 'True':
 						try:
-							icon = str(unicode(entry[u'imgUrl']))
+							icon = str(six.text_type(entry[u'imgUrl']))
 						except (Exception) as exception:
 							icon = ""
 					else:
 						icon = ''
 
 					try:
-						name_tmp = str(unicode(entry[u'value']))
+						name_tmp = str(six.text_type(entry[u'value']))
 						name_tmp1 = checkUnicode(name_tmp)
 						name = remove_extra_spaces(name_tmp1)
 					except (Exception) as exception:

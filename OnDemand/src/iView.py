@@ -41,6 +41,9 @@ from bs4 import BeautifulSoup
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
+import six
+
+
 __plugin__  = "ABC iView"
 __version__ = "1.0.1"
 
@@ -474,7 +477,7 @@ class StreamsThumb(StreamsThumbCommon):
 						icon = ''
 
 					try:
-						name_tmp = str(unicode(entry[u'b']))
+						name_tmp = str(six.text_type(entry[u'b']))
 						name_tmp1 = checkUnicode(name_tmp)
 						name = remove_extra_spaces(name_tmp1)
 					except (Exception) as exception:

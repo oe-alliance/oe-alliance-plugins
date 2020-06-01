@@ -579,10 +579,10 @@ class BrowserBookmarkWindow(Screen):
 		l = []
 		#self.mBookmarkManager.dump()
 		cd = self.mBookmarkManager.getBookmarkRoot()
-		for ck in cd.iterkeys():
+		for ck in cd:
 			l.append(('# ' + cd[ck].mName, cd[ck]))
 			bd = cd[ck].mBookmarks
-			for bk in bd.iterkeys():
+			for bk in bd:
 				l.append(('    - ' + bd[bk].mTitle, bd[bk]))
 		return l
 

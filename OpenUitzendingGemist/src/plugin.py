@@ -20,18 +20,21 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from urllib2 import Request, URLError, HTTPError, urlopen as urlopen2
-from httplib import HTTPException
 from twisted.web import client
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir
 import socket
 from datetime import date, timedelta
 import time
 import urlparse
-import httplib
 import base64
 from pygoogle import pygoogle
 import json
 import re
+
+import six
+from six.moves import http_client
+from six.moves.http_client import HTTPException
+
 
 config.plugins.OpenUitzendingGemist = ConfigSubsection()
 config.plugins.OpenUitzendingGemist.showpictures = ConfigBoolean(default = True)
@@ -64,7 +67,7 @@ def resolve_http_redirect(url, depth=0):
 	if depth > 10:
 		raise Exception("Redirected "+depth+" times, giving up.")
 	o = urlparse.urlparse(url, allow_fragments=True)
-	conn = httplib.HTTPConnection(o.netloc)
+	conn = http_client.HTTPConnection(o.netloc)
 	path = o.path
 	if o.query:
 		path +='?'+o.query
@@ -837,7 +840,7 @@ class OpenUg(Screen):
 			self.moveToChar(charstr[0], self["chosenletter"])
 
 	def keyAsciiCode(self):
-		unichar = unichr(getPrevAsciiCode())
+		unichar = six.unichr(getPrevAsciiCode())
 		charstr = unichar.encode("utf-8")
 		if len(charstr) == 1:
 			self.moveToString(charstr[0], self["chosenletter"])

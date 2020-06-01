@@ -15,9 +15,12 @@ from Components.MenuList import MenuList
 from Components.Input import Input
 from Screens.InputBox import InputBox
 from Components.ActionMap import ActionMap
-from cookielib import CookieJar
 import urllib, urllib2, re, time, os
 import socket
+
+from six.moves.http_cookiejar import CookieJar
+
+
 socket.setdefaulttimeout(300) #in seconds
 
 

@@ -92,7 +92,6 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from enigma import eTimer, eEPGCache, eServiceReference, eServiceCenter, iPlayableService
 from RecordTimer import RecordTimer, RecordTimerEntry, parseEvent
 from threading import Thread, Lock
-import Queue
 import ping
 
 from Components.config import configfile, getConfigListEntry, ConfigPassword, \
@@ -104,7 +103,6 @@ from Components.MenuList import MenuList
 from Components.NimManager import nimmanager
  
 from Tools.BoundFunction import boundFunction
-from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 from SocketServer import ThreadingMixIn
 from twisted.internet import reactor
 from twisted.web.client import getPage, HTTPClientFactory, downloadPage
@@ -267,13 +265,13 @@ isMediaPlayer = ""
 GrabRunning = False
 GrabTVRunning = False
 TVrunning = False
-BriefLCD = Queue.Queue()
-Briefkasten = Queue.Queue()
-BriefRes = Queue.Queue()
-Brief1 = Queue.Queue()
-Brief2 = Queue.Queue()
-Brief3 = Queue.Queue()
-MJPEG = ["0123", Queue.Queue(), Queue.Queue(), Queue.Queue()]
+BriefLCD = queue.Queue()
+Briefkasten = queue.Queue()
+BriefRes = queue.Queue()
+Brief1 = queue.Queue()
+Brief2 = queue.Queue()
+Brief3 = queue.Queue()
+MJPEG = ["0123", queue.Queue(), queue.Queue(), queue.Queue()]
 MJPEGserver = [None, None, None, None]
 MJPEGreader = [0, 0, 0, 0]
 MJPEGrun = [0, 0, 0, 0]
@@ -2850,7 +2848,7 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 			PIC.append(os.path.join(P2, picon))
 			name2=channelname.decode("utf-8").encode("latin-1", "ignore") + ".png"
 			name4=channelname.decode("utf-8").encode("utf-8", "ignore") + ".png"
-			name = unicodedata.normalize('NFKD', unicode(str(""+channelname), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
+			name = unicodedata.normalize('NFKD', six.text_type(str(""+channelname), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
 			name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
 			name3=channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
 			PIC.append(os.path.join(P2, name3))
@@ -4416,6 +4414,11 @@ except:
 	L4log("Sonos not registered")
 from ymc import YMC
 from bluesound import BlueSound
+
+import six
+from six.moves.BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
+from six.moves import queue
+
 
 class GrabOSD:
 	def __init__(self, cmd):
@@ -7824,11 +7827,11 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 		if Briefkasten.qsize()<=3:
 			Briefkasten.put(4) 
 		else:
-			L4log("Queue full, Thread hanging?")
+			L4log("queue full, Thread hanging?")
 		if Briefkasten.qsize()<=3:
 			Briefkasten.put(6) 
 		else:
-			L4log("Queue full, Thread hanging?")
+			L4log("queue full, Thread hanging?")
 
 	def save(self):
 		global ConfigMode
@@ -8233,7 +8236,7 @@ class UpdateStatus(Screen):
 		if Briefkasten.qsize()<=3:
 			Briefkasten.put(7) 
 		else:
-			L4log("Queue full, Thread hanging?")
+			L4log("queue full, Thread hanging?")
 		self.QuickTimer.start(int(LCD4linux.BilderQuick.value), True)
 
 	def CallLater6(self):
@@ -8643,12 +8646,12 @@ class UpdateStatus(Screen):
 				if Briefkasten.qsize()<=3:
 					Briefkasten.put(6) 
 				else:
-					L4log("Queue full, Thread hanging?")
+					L4log("queue full, Thread hanging?")
 				if str(LCD4linux.Cal.value) != "0" or str(LCD4linux.StandbyCal.value) != "0" or str(LCD4linux.MPCal.value) != "0" or str(LCD4linux.CalList.value) != "0" or str(LCD4linux.MPCalList.value) != "0" or str(LCD4linux.StandbyCalList.value) != "0":
 					if Briefkasten.qsize()<=3:
 						Briefkasten.put(4) 
 					else:
-						L4log("Queue full, Thread hanging?")
+						L4log("queue full, Thread hanging?")
 				self.getNetatmo()
 				getWWW()
 		if str(LCD4linux.OSD.value) != "0":
@@ -8722,13 +8725,13 @@ class UpdateStatus(Screen):
 					if Briefkasten.qsize()<=3:
 						self.Later6Timer.startLongTimer(15)
 					else:
-						L4log("Queue full, Thread hanging?")
+						L4log("queue full, Thread hanging?")
 				if strftime("%M") in LCD4linux.CalTime.value:
 					if str(LCD4linux.Cal.value) != "0" or str(LCD4linux.StandbyCal.value) != "0" or str(LCD4linux.MPCal.value) != "0" or str(LCD4linux.CalList.value) != "0" or str(LCD4linux.MPCalList.value) != "0" or str(LCD4linux.StandbyCalList.value) != "0":
 						if Briefkasten.qsize()<=3:
 							Briefkasten.put(4) 
 						else:
-							L4log("Queue full, Thread hanging?")
+							L4log("queue full, Thread hanging?")
 				if strftime("%M") == "30":
 					if str(LCD4linux.ExternalIp.value) != "0" or str(LCD4linux.MPExternalIp.value) != "0" or str(LCD4linux.StandbyExternalIp.value) != "0":
 						self.ExternalIP = getExternalIP()
@@ -9063,7 +9066,7 @@ class UpdateStatus(Screen):
 			if BriefLCD.qsize()<=2:
 				BriefLCD.put(1) 
 			else:
-				L4log("LCD-Queue full, Thread hanging?")
+				L4log("LCD-queue full, Thread hanging?")
 		else:
 			LCD4linuxPIC(self, session)
 
@@ -10419,7 +10422,7 @@ def LCD4linuxPIC(self, session):
 					ret=""
 					PIC = []
 					PIC.append(os.path.join(P2, picon))
-					name = unicodedata.normalize('NFKD', unicode(str(""+self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
+					name = unicodedata.normalize('NFKD', six.text_type(str(""+self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
 					name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
 					name2=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
 					name4=self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore") + ".png"
@@ -11593,7 +11596,7 @@ def LCD4linuxPIC(self, session):
 				useCache = False
 				PIC = []
 				PIC.append(os.path.join(P2, picon))
-				name = unicodedata.normalize('NFKD', unicode(str(""+self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
+				name = unicodedata.normalize('NFKD', six.text_type(str(""+self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
 				name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
 				name2=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
 				name4=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
@@ -13999,7 +14002,7 @@ def LCD4linuxPIC(self, session):
 		if Briefkasten.qsize()<=3:
 			Briefkasten.put(2)
 		else:
-			L4log("Queue full, Thread hanging?")
+			L4log("queue full, Thread hanging?")
 
 	if self.LsreftoString is not None:
 		sref = self.LsreftoString

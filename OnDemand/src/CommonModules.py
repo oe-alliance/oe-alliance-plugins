@@ -39,8 +39,10 @@ from twisted.web import client
 from dns.resolver import Resolver
 from os import path as os_path, mkdir as os_mkdir
 
-from httplib import HTTPConnection
 import socket, urllib, urllib2, sys
+
+from six.moves.http_client import HTTPConnection
+
 
 socket.setdefaulttimeout(300) #in seconds
 

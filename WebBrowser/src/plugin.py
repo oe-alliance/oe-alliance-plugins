@@ -19,7 +19,6 @@ from twisted.internet import reactor
 from urlparse import parse_qs
 from urllib import quote, unquote_plus, unquote
 from urllib2 import Request, URLError, urlopen as urlopen2
-from httplib import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
 
 from Components.Button import Button
 from Components.Label import Label
@@ -40,6 +39,10 @@ from Screens.InfoBarGenerics import InfoBarNotifications
 
 from enigma import eTimer, eServiceReference, iPlayableService, fbClass, eRCInput, eConsoleAppContainer
 from boxbranding import getBrandOEM
+
+import six
+from six.moves.http_client import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
+
 
 HTTPConnection.debuglevel = 1
 
@@ -305,10 +308,10 @@ class PlayerLauncher:
 			if fmtid in VIDEO_FMT_PRIORITY_MAP:
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
 			fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
-		print("got", sorted(fmt_infomap.iterkeys()))
+		print("got", sorted(six.iterkeys(fmt_infomap)))
 		if video_fmt_map and len(video_fmt_map):
-			video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
-			#print "found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+			video_url = video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]['fmturl'].split(';')[0]
+			#print "found best available video format:",video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]['fmtid']
 			#print "found best available video url:",video_url
 		return video_url
 

@@ -36,8 +36,8 @@ from Screens.MessageBox import MessageBox
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from six.moves.http_client import HTTPException
 from urllib2 import Request, URLError, HTTPError, urlopen as urlopen2
-from httplib import HTTPException
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir
 import socket
 from datetime import date, timedelta

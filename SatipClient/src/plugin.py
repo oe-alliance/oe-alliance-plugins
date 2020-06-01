@@ -26,11 +26,13 @@ from twisted.internet.protocol import DatagramProtocol
 
 import glob
 import os
-import httplib
 
 import copy
 
 from Components.config import config, ConfigSubList, ConfigSelection, ConfigElement
+
+from six.moves import http_client
+
 
 def isEmpty(x):
 		return len(x) == 0
@@ -221,7 +223,7 @@ class SATIPDiscovery:
 			#print "port2: " , port
 			#print "request : ", request
 
-			conn = httplib.HTTPConnection(address, int(port))
+			conn = http_client.HTTPConnection(address, int(port))
 			conn.request("GET", request)
 			res = conn.getresponse()
 		except Exception as ErrMsg:
