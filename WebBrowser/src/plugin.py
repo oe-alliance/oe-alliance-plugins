@@ -5,9 +5,10 @@ from . import _
 
 from Plugins.Plugin import PluginDescriptor
 
-import time, os, socket, thread, socket, copy
+import time, os, socket, copy
 from socket import gaierror, error
 from os import path as os_path, remove as os_remove
+from six.moves import _thread
 
 import gdata.youtube
 import gdata.youtube.service
@@ -342,7 +343,7 @@ class PlayerService:
 
 	def start(self, timeout = 1):
 		self.socket_timeout = timeout
-		thread.start_new_thread(self.run, (True,))
+		_thread.start_new_thread(self.run, (True,))
 
 	def stop(self):
 		self.enable = False

@@ -3,7 +3,8 @@ from __future__ import print_function
 from future.utils import raise_
 from . import _
 
-import os, fcntl, thread
+import os, fcntl
+from six.moves import _thread
 
 from enigma import eTimer
 
@@ -99,7 +100,7 @@ class FPGAUpgradeManager:
 
 	def fpga_upgrade(self, datafile, device):
 		self.fu = FPGAUpgradeCore(firmwarefile=datafile, devicefile=device)
-		thread.start_new_thread(self.fu.upgradeMain, ())
+		_thread.start_new_thread(self.fu.upgradeMain, ())
 
 	def checkError(self):
 		if self.fu.status == STATUS_ERROR:

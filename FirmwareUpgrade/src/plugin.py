@@ -78,7 +78,9 @@ if os.path.exists("/proc/stb/info/vumodel"):
 			,"fp"   : ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
 			}
 
-import os, fcntl, thread
+import os, fcntl
+from six.moves import _thread
+
 STATUS_READY 		= 0
 STATUS_DONE 		= 1
 STATUS_ERROR		= 2
@@ -292,7 +294,7 @@ class FirmwareUpgradeManager:
 			self.fu = FPUpgradeCore(firmwarefile=datafile, devicefile=device)
 		elif firmware == 'vfd':
 			self.fu = VFDCtrlUpgradeCore(firmwarefile=datafile, devicefile=device)
-		thread.start_new_thread(self.fu.upgradeMain, ())
+		_thread.start_new_thread(self.fu.upgradeMain, ())
 
 	def checkError(self):
 		if self.fu.status == STATUS_ERROR:
