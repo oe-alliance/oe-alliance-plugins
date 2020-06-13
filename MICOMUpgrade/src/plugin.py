@@ -2,8 +2,9 @@ from __future__ import print_function
 # for localized messages
 from . import _
 
-import os, urllib
-from urllib import urlretrieve
+import os
+from six.moves.urllib.request import urlretrieve
+from six.moves import urllib 
 
 from Plugins.Plugin import PluginDescriptor
 

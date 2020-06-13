@@ -7,8 +7,8 @@ import os, fcntl, thread
 
 from enigma import eTimer
 
-from urllib import urlretrieve
-import urllib
+from six.moves.urllib.request import urlretrieve
+from six.moves import urllib 
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
