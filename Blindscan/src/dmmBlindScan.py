@@ -1,4 +1,6 @@
 from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import division
 # for localized messages
 from . import _
 from Components.ActionMap import NumberActionMap, ActionMap
@@ -216,7 +218,7 @@ class SatelliteTransponderSearchSupport:
 				freq = d["frequency"]
 				parm = eDVBFrontendParametersSatellite()
 				parm.frequency = int(round(float(freq*2) / 1000)) * 1000
-				parm.frequency /= 2
+				parm.frequency //= 2
 				fstr = str(parm.frequency)
 				if self.parm.polarisation == eDVBFrontendParametersSatellite.Polarisation_Horizontal:
 					fstr += "H KHz SR"
@@ -364,7 +366,7 @@ class SatelliteTransponderSearchSupport:
 				steps = 4000
 				parm.system = eDVBFrontendParametersSatellite.System_DVB_S
 			if self.auto_scan:
-				parm.symbol_rate = (bs_range[1] - bs_range[0]) / 1000
+				parm.symbol_rate = (bs_range[1] - bs_range[0]) // 1000
 			else:
 				parm.symbol_rate = steps
 			parm.fec = eDVBFrontendParametersSatellite.FEC_Auto
@@ -445,7 +447,7 @@ class SatelliteTransponderSearchSupport:
 			stop = self.max_freq = max(s1, s2)
 
 			if self.auto_scan: # hack for driver based blindscan... extend search range +/- 50Mhz
-				limits = self.scan_sat.bs_freq_limits
+				limits = self.bs_freq_limits
 				start -= 50000
 				stop += 50000
 				if start < limits[0]:
@@ -614,7 +616,7 @@ class DmmBlindscan(ConfigListScreen, Screen, TransponderSearchSupport, Satellite
 				self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
-		self.scan_sat.bs_freq_limits = ( limits[0]*1000, limits[1]*1000 )
+		self.bs_freq_limits = ( limits[0]*1000, limits[1]*1000 )
 
 	def Satexists(self, tlist, pos):
 		for x in tlist:

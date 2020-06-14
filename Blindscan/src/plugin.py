@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -1727,7 +1728,7 @@ def BlindscanMain(session, close=None, **kwargs):
 	except:
 		pass
 	if have_Support_Blindscan:
-		import dmmBlindScan
+		from . import dmmBlindScan
 		session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
 	else:
 		session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)
