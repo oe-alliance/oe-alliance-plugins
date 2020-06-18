@@ -386,7 +386,7 @@ class FanManager:
 				if FanConf.hddwatch.value == "sleep" and FanConf.hddsleep.value is True:
 					sleepcount = 0
 					hddlist = harddiskmanager.HDDList()
-					for x in range (hddcount):
+					for x in list(range(hddcount)):
 						if hddlist[x][1].isSleeping():
 							sleepcount += 1
 						else:
