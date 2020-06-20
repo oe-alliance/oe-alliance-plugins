@@ -32,7 +32,7 @@ import copy
 from Components.config import config, ConfigSubList, ConfigSelection, ConfigElement
 
 from six.moves import http_client
-
+import six
 
 def isEmpty(x):
 		return len(x) == 0
@@ -739,7 +739,9 @@ class SATIPClient(Screen):
 #			self.keyDisable()
 
 	def sortVtunerConfig(self):
-		self.vtunerConfig.sort(reverse=True)
+		# FIXME What should be sorted here ???
+		if six.PY2:
+			self.vtunerConfig.sort(reverse=True)
 
 	def saveConfig(self):
 		data = ""
