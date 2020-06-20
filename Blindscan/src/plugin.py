@@ -26,6 +26,7 @@ from Screens.ServiceScan import ServiceScan
 from Tools.BoundFunction import boundFunction
 
 import os
+import six
 
 #used for the XML file
 from time import strftime, time
@@ -1156,6 +1157,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 	def blindscanContainerAvail(self, str):
 		print("[Blindscan][blindscanContainerAvail]", str)
+		str = six.ensure_str(str)
 		self.full_data = self.full_data + str # TODO: is this the cause of the duplicates in blindscanContainerClose?
 		if self.blindscan_session:
 			tmpstr = ""

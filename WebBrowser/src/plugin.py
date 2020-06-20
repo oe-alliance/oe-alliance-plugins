@@ -640,7 +640,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 
 	def callbackLauncherDataAvail(self, ret_data):
 		print(ret_data)
-		if ret_data.startswith("--done--"):
+		if ret_data.startswith(b"--done--"):
 			self.lock = False
 			self.doExit()
 
