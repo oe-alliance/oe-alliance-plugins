@@ -115,6 +115,9 @@ from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
 from mutagen.flac import FLAC
 from module import L4Lelement
+import six
+
+SIGN = '°' if six.PY3 else str('\xc2\xb0')
 
 L4LElist = L4Lelement()
 CrashFile="/tmp/L4Lcrash.txt"
@@ -10664,12 +10667,12 @@ def LCD4linuxPIC(self, session):
 								self.draw[Wim].line((10, POSY, MAX_W-10, POSY), fill=ConfigColor)
 							PX = int(POSX-Dayw-(3*Wmulti))
 							ShadowText(Wim, PX, POSY, Day, fontD, ConfigColor, ConfigShadow)
-							w, h = self.draw[Wim].textsize(High + "\xc2\xb0", font=font)
+							w, h = self.draw[Wim].textsize(High + SIGN, font=font)
 							PX = int(POSX-w-(3*Wmulti))
-							ShadowText(Wim, PX, POSY+h, High + "\xc2\xb0", font, LCD4linux.WetterHighColor.value, ConfigShadow)
-							w, h = self.draw[Wim].textsize(Low + "\xc2\xb0  "+High + "\xc2\xb0", font=font)
+							ShadowText(Wim, PX, POSY+h, High + SIGN, font, LCD4linux.WetterHighColor.value, ConfigShadow)
+							w, h = self.draw[Wim].textsize(Low + SIGN + "  "+High + SIGN, font=font)
 							PX = int(POSX-w-(3*Wmulti))
-							ShadowText(Wim, PX, POSY+h, Low + "\xc2\xb0", font, LCD4linux.WetterLowColor.value, ConfigShadow)
+							ShadowText(Wim, PX, POSY+h, Low + SIGN, font, LCD4linux.WetterLowColor.value, ConfigShadow)
 							w, h = self.draw[Wim].textsize(Cond, font=font)
 							PX = max(int(POSX-w-(3*Wmulti)), 0)
 							ShadowText(Wim, PX, POSY+2*h, Cond, font, ConfigColor, ConfigShadow)
@@ -10783,8 +10786,8 @@ def LCD4linuxPIC(self, session):
 				if Feel=="" or abs(int(Feel or "0")-int(Temp_c or "0")) < int(LCD4linux.WetterExtraFeel.value) or LCD4linux.WetterExtra.value == False:
 					Feel = ""
 				else:
-					Feel += "\xc2\xb0"
-				Temp_c += "\xc2\xb0"
+					Feel += SIGN
+				Temp_c += SIGN
 				if ConfigType[0] == "4":
 					if ConfigType == "4":
 						Temp_c += "C"
@@ -12397,11 +12400,11 @@ def LCD4linuxPIC(self, session):
 							if m1 < tt:
 								m1 = tt
 				if m1 != 0:
-					i += " %d\xb0C%s" % (m1, NL(ConfigLines))
+					i += " %d" + SIGN + "C%s" % (m1, NL(ConfigLines))
 			if os.path.isfile("/sys/class/thermal/thermal_zone0/temp"):
 				try:
 					line = open("/sys/class/thermal/thermal_zone0/temp").readline().strip()
-					i += " %.1f\xb0C%s" % (int(line)/1000.0, NL(ConfigLines))
+					i += " %.1f" + SIGN + "C%s" % (int(line)/1000.0, NL(ConfigLines))
 				except:
 					L4logE("Error read Temp")
 		if "R" in ConfigInfo:
