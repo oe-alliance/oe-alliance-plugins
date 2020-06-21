@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #====================================================
 # Bluetooth Devices Manager - basic version
 # Version date - 20.11.2014
@@ -35,8 +36,9 @@ from Components.config import config, ConfigSelection, getConfigListEntry, Confi
 from Components.MenuList import MenuList
 from Components.ServiceEventTracker import ServiceEventTracker
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, fileExists
-from bluetoothctl import iBluetoothctl, Bluetoothctl
+from .bluetoothctl import iBluetoothctl, Bluetoothctl
 
+import six
 import os
 import time
 import signal
@@ -258,7 +260,7 @@ class BluetoothDevicesManager(Screen):
 
 		self.devicelist = []
 		self.devicelist.append((_("MAC:\t\tDevice name:"), _("entry")))
-
+		data= six.ensure_str(data)
 		data = data.splitlines()
 		i = 1
 		for x in data:
