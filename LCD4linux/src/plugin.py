@@ -12400,11 +12400,11 @@ def LCD4linuxPIC(self, session):
 							if m1 < tt:
 								m1 = tt
 				if m1 != 0:
-					i += " %d" + SIGN + "C%s" % (m1, NL(ConfigLines))
+					i += " %d%sC%s" % (m1, SIGN, NL(ConfigLines))
 			if os.path.isfile("/sys/class/thermal/thermal_zone0/temp"):
 				try:
 					line = open("/sys/class/thermal/thermal_zone0/temp").readline().strip()
-					i += " %.1f" + SIGN + "C%s" % (int(line)/1000.0, NL(ConfigLines))
+					i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
 				except:
 					L4logE("Error read Temp")
 		if "R" in ConfigInfo:
