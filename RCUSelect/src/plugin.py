@@ -136,7 +136,7 @@ class RCUSelect(Screen):
 				os.system("killall -9 remotecfg &")
 				boxime = HardwareInfo().get_device_name()
 				if boxime == 'wetekplay2':
-					fin = file('/etc/amremote/wetek.conf')
+					fin = open('/etc/amremote/wetek.conf')
 					fout = open('/etc/amremote/wetek_tmp.conf', 'w')
 					for line in fin :
 						if 'work_mode' in line: line = 'work_mode  	= 0\n'

@@ -287,7 +287,7 @@ class TranscodingSetupInit:
 
 		print("[TranscodingSetup] set port", port)
 		try:
-			fp = file('/etc/inetd.conf', 'r')
+			fp = open('/etc/inetd.conf', 'r')
 			datas = fp.read()
 			fp.close()
 
@@ -308,7 +308,7 @@ class TranscodingSetupInit:
 
 			if newConfigData.find("transtreamproxy") == -1:
 				newConfigData += port + "\tstream\ttcp\tnowait\troot\t/usr/bin/transtreamproxy\ttranstreamproxy\n"
-			fd = file("/etc/inetd.conf", 'w')
+			fd = open("/etc/inetd.conf", 'w')
 			fd.write(newConfigData)
 			fd.close()
 		except:

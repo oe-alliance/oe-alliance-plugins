@@ -312,7 +312,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		configString = configDataAppend(configString, "serial", self.oldConfig.get('serial'))
 		configString = configDataAppend(configString, "model_number", self.oldConfig.get('model_number'))
 		print(configString)
-		confFile = file(self.configFileName, 'w')
+		confFile = open(self.configFileName, 'w')
 		confFile.write(configString)
 		confFile.close()
 
@@ -320,7 +320,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		if not os.path.exists(self.configFileName):
 			return
 		self.oldConfig = {}
-		for line in file(self.configFileName).readlines():
+		for line in open(self.configFileName).readlines():
 			line = line.strip()
 			if line == '' or line[0] == '#':
 				continue
