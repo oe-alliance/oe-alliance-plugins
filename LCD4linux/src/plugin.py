@@ -3843,6 +3843,7 @@ def getHTMLwwwConvertapi(fn, www, pw, ph):
 	filename=WWWpic % str(fn)
 	url="http://do.convertapi.com/web2image?curl=%s&PageWidth=%d&PageHight=%d&outputformat=jpg&ApiKex=%s" % (www, pw, ph, LCD4linux.WwwApiKeyConvertapi.value)
 	L4log("downloading HTMLwww from", url)
+	url = six.ensure_binary(url)
 	downloadPage(url, filename).addCallback(boundFunction(HTMLwwwConvertapiDownloadFinished, filename)).addErrback(HTMLwwwConvertapiDownloadFailed)
 
 def HTMLwwwDownloadFailed(result):
@@ -3858,6 +3859,7 @@ def HTMLwwwDownloadFinished(filename, result):
 def getHTMLwww(fn, url):
 	filename=WWWpic % str(fn)
 	L4log("downloading HTMLwww from", url)
+	url = six.ensure_binary(url)
 	downloadPage(url, filename).addCallback(boundFunction(HTMLwwwDownloadFinished, filename)).addErrback(HTMLwwwDownloadFailed)
 
 def Urlget(url, params, method):
@@ -9306,6 +9308,7 @@ class UpdateStatus(Screen):
 						feedurl= "http://%s/web/subservices" % URL
 					else:
 						feedurl= "http://%s/web/getcurrent" % URL
+					feedurl = six.ensure_binary(feedurl)
 					getPage(feedurl, headers=Header, timeout=10).addCallback(boundFunction(self.downloadwwwBoxCallback, i)).addErrback(boundFunction(self.downloadwwwBoxError, i))
 					L4log("wwwBox %d" % i, URL)
 			except:
@@ -9358,6 +9361,7 @@ class UpdateStatus(Screen):
 						Header = {"Authorization": authHeader}
 					feedurl= "http://%s/web/timerlist" % URL
 					L4log("wwwBoxTimer %d" % i, feedurl)
+					feedurl = six.ensure_binary(feedurl)
 					getPage(feedurl, headers=Header, timeout=10).addCallback(boundFunction(self.downloadwwwBoxTimerCallback, i)).addErrback(boundFunction(self.downloadwwwBoxTimerError, i))
 					L4log("wwwBoxTimer %d" % i, URL)
 			except:
@@ -9417,7 +9421,7 @@ class UpdateStatus(Screen):
 				else:
 					city=quote(ort)
 					self.feedurl = "http://weather.service.msn.com/data.aspx?src=%s&weadegreetype=C&culture=%s&weasearchstr=%s" % (self.MSNsrc, la, city) 
-				getPage(self.feedurl).addCallback(boundFunction(self.downloadListCallback, wetter)).addErrback(self.downloadListError)
+				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadListCallback, wetter)).addErrback(self.downloadListError)
 			elif LCD4linux.WetterApi.value == "OPENWEATHER":
 				apkey = ""
 				if len(LCD4linux.WetterApiKeyOpenWeatherMap.value) > 5:
@@ -9426,9 +9430,9 @@ class UpdateStatus(Screen):
 				if ort.startswith("wc:"):
 					city="id=%s" % ort[3:]
 				self.feedurl = "http://api.openweathermap.org/data/2.5/weather?%s&lang=%s&units=metric%s" % (city, la[:2], apkey) 
-				getPage(self.feedurl).addCallback(boundFunction(self.downloadOpenListCallback, wetter)).addErrback(self.downloadListError)
+				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadOpenListCallback, wetter)).addErrback(self.downloadListError)
 				self.feedurl = "http://api.openweathermap.org/data/2.5/forecast/daily?%s&lang=%s&units=metric&cnt=5%s" % (city, la[:2], apkey) 
-				getPage(self.feedurl).addCallback(boundFunction(self.downloadOpenListCallback, wetter)).addErrback(self.downloadListError)
+				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadOpenListCallback, wetter)).addErrback(self.downloadListError)
 			elif LCD4linux.WetterApi.value == "WEATHERUNLOCKED":
 				apkey = ""
 				lang = ""
@@ -9439,10 +9443,10 @@ class UpdateStatus(Screen):
 				city="%s" % quote(ort)
 				self.feedurl = "http://api.weatherunlocked.com/api/current/%s%s%s" % (city, apkey, lang) 
 				L4log(self.feedurl)
-				getPage(self.feedurl).addCallback(boundFunction(self.downloadUnlockedListCallback, wetter)).addErrback(self.downloadListError)
+				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadUnlockedListCallback, wetter)).addErrback(self.downloadListError)
 				self.feedurl = "http://api.weatherunlocked.com/api/forecast/%s%s%s" % (city, apkey, lang) 
 				L4log(self.feedurl)
-				getPage(self.feedurl).addCallback(boundFunction(self.downloadUnlockedListCallback, wetter)).addErrback(self.downloadListError)
+				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadUnlockedListCallback, wetter)).addErrback(self.downloadListError)
 			L4log("Wetterdownloadstart %s:%s %s %s" % (LCD4linux.WetterApi.value, city, language.getLanguage(), la))
 		else:
 			if self.NetworkConnectionAvailable is not None:
@@ -9658,11 +9662,11 @@ class UpdateStatus(Screen):
 			apkey = "&appid=%s" % LCD4linux.WetterApiKeyOpenWeatherMap.value
 			self.feedurl = str("http://api.openweathermap.org/data/2.5/weather?lat=%.2f&lon=%.2f&mode=xml&cnt=1%s" % (float(self.Lat.replace(",", ".")), float(self.Long.replace(",", ".")), apkey))
 			L4log("Sunrise downloadstart:", self.feedurl)
-			getPage(self.feedurl).addCallback(self.downloadSunriseCallback).addErrback(self.downloadSunriseError)
+			getPage(six.ensure_binary(self.feedurl)).addCallback(self.downloadSunriseCallback).addErrback(self.downloadSunriseError)
 		else:
 			self.feedurl = str("http://api.sunrise-sunset.org/json?lat=%s&lng=%s&formatted=0" % (self.Lat, self.Long)).replace(",", ".")
 			L4log("Sunrise2 downloadstart:", self.feedurl)
-			getPage(self.feedurl).addCallback(self.downloadSunriseCallback2).addErrback(self.downloadSunriseError)
+			getPage(six.ensure_binary(self.feedurl)).addCallback(self.downloadSunriseCallback2).addErrback(self.downloadSunriseError)
 
 	def downloadSunriseError(self, error=""):
 		if error=="":
@@ -9781,7 +9785,8 @@ class UpdateStatus(Screen):
 					url = "https://itunes.apple.com/search?term=%s&limit=2&media=%s" % (quote(Code_utf8(aUmlaute(artist)).encode("latin", "ignore")), hq)
 					url = url.replace("%26", "&")
 					L4log("Cover Search", url)
-					getPage(str(url)).addCallback(self.appleImageCallback).addErrback(self.coverDownloadFailed)
+					url = six.ensure_binary(str(url))
+					getPage(url).addCallback(self.appleImageCallback).addErrback(self.coverDownloadFailed)
 				except:
 					self.LgetGoogleCover = None
 					L4log("Apple Cover Error")
@@ -9799,6 +9804,7 @@ class UpdateStatus(Screen):
 					try:
 						url = "https://www.googleapis.com/customsearch/v1?q=%s&hq=%s&num=10&searchType=image&fileType=png,jpg&safe=medium&imgSize=large&key=%s&cx=001378528959810143413:qx3tznt9mfa" % (quote(Code_utf8(artist).encode("latin", "ignore")), hq, LCD4linux.MPCoverApiGoogle.value)
 						L4log("Cover Search", url)
+						url = six.ensure_binary(url)
 						getPage(url).addCallback(self.googleImageCallback).addErrback(self.coverDownloadFailed)
 					except:
 						self.LgetGoogleCover = None
@@ -9830,7 +9836,8 @@ class UpdateStatus(Screen):
 				self.restartTimer()
 			else:
 				L4log("downloading %d. cover from" % count, url)
-				downloadPage(str(url), filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(self.coverDownloadFailed)
+				url = six.ensure_binary(str(url))
+				downloadPage(url, filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(self.coverDownloadFailed)
 		else:
 			self.LgetGoogleCover = None
 			self.CoverError = "E"
@@ -9864,7 +9871,8 @@ class UpdateStatus(Screen):
 				self.restartTimer()
 			else:
 				L4log("downloading %d. cover from" % count, url)
-				downloadPage(str(url), filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(self.coverDownloadFailed)
+				url = six.ensure_binary(str(url))
+				downloadPage(url, filename).addCallback(boundFunction(self.coverDownloadFinished, filename)).addErrback(self.coverDownloadFailed)
 		else:
 			self.LgetGoogleCover = None
 			self.CoverError = error
@@ -9882,6 +9890,7 @@ class UpdateStatus(Screen):
 	def getSonosPic(self, fn, url):
 		filename=fn
 		L4log("downloading Sonos/YMC/Blue from", url)
+		url = six.ensure_binary(url)
 		downloadPage(url, filename).addCallback(boundFunction(self.SonosDownloadFinished, filename)).addErrback(self.SonosDownloadFailed)
 
 def LCD4linuxPICThread(self, session):
