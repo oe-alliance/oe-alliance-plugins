@@ -18,8 +18,8 @@ from twisted.web import client
 from twisted.internet import reactor
 
 from urlparse import parse_qs
-from urllib import quote, unquote_plus, unquote
-from urllib2 import Request, URLError, urlopen as urlopen2
+from six.moves.urllib.parse import quote, unquote_plus, unquote
+from six.moves.urllib.request import Request, URLError, urlopen as urlopen2
 
 from Components.Button import Button
 from Components.Label import Label

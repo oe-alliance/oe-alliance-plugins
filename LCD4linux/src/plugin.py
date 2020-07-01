@@ -108,7 +108,7 @@ from twisted.internet import reactor
 from twisted.web.client import getPage, HTTPClientFactory, downloadPage
 from xml.dom.minidom import parseString
 from xml.etree.cElementTree import parse as parseE
-from urllib import urlencode, quote, quote_plus
+from six.moves.urllib.parse import urlencode, quote, quote_plus
 from myFileList import FileList as myFileList
 from mutagen.id3 import ID3
 from mutagen.mp3 import MP3
