@@ -1,5 +1,6 @@
-#Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/PiconsUpdater/BouquetParser.py
+# -*- coding: utf-8 -*-
 import re, unicodedata
+import six
 from enigma import eServiceCenter, eServiceReference
 from ServiceReference import ServiceReference
 SKIP_BOUQUET_NAMES = 'userbouquet.lastscanned.tv'
@@ -8,7 +9,7 @@ def getChannelKey(service):
     channelKeyMatch = re.match('([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):', str(service))
     channelKey = '_'.join(map(str, channelKeyMatch.groups()))
     try:
-        return unicodedata.normalize('NFKD', channelKey).encode('ascii', 'ignore')
+        return six.ensure_str(unicodedata.normalize('NFKD', channelKey).encode('ascii', 'ignore'))
     except:
         return channelKey
 

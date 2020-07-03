@@ -1,4 +1,5 @@
-#Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/PiconsUpdater/PiconsUpdaterView.py
+# -*- coding: utf-8 -*-
+from __future__ import print_function, absolute_import
 import os
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
@@ -7,16 +8,33 @@ from Components.config import config, configfile, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Pixmap import Pixmap
 from . import _, printToConsole, getPiconsPath, getPiconsTypeValue, getCurrentPicon, getConfigSizeList, getConfigBackgroundList, getBackgroundList, getPiconUrls, BOUQUET_PATH, TMP_PICON_PATH, TMP_BG_PATH, TMP_FG_PATH, TMP_PREVIEW_IMAGE_PATH, PREVIEW_IMAGE_PATH
-from DiskUtils import pathIsWriteable
-from JobProgressView import JobProgressView
-from DownloadPicons import DownloadPicons, DOWNLOAD_ALL_FINISHED, DOWNLOAD_FINISHED
-from DownloadJob import DownloadJob
-from EventDispatcher import addEventListener, removeEventListener
-from Picon import MergePiconJob, OptimizePiconsFileSize, OPTIMIZE_PICONS_FINISHED, MERGE_PICONS_FINISHED
-from BouquetParser import BouquetParser
+from .DiskUtils import pathIsWriteable
+from .JobProgressView import JobProgressView
+from .DownloadPicons import DownloadPicons, DOWNLOAD_ALL_FINISHED, DOWNLOAD_FINISHED
+from .DownloadJob import DownloadJob
+from .EventDispatcher import addEventListener, removeEventListener
+from .Picon import MergePiconJob, OptimizePiconsFileSize, OPTIMIZE_PICONS_FINISHED, MERGE_PICONS_FINISHED
+from .BouquetParser import BouquetParser
 
 class PiconsUpdaterView(ConfigListScreen, Screen):
-    skin = '\n          <screen name="PiconsUpdater-Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="#90000000">\n            <eLabel name="new eLabel" position="40,40" zPosition="-2" size="1200,640" backgroundColor="#20000000" transparent="0" />\n            <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="77,645" size="250,33" text="Cancel" transparent="1" />\n            <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="375,645" size="250,33" text="Save" transparent="1" />\n            <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="682,645" size="250,33" text="Download Picons" transparent="1" />\n            <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="682,645" size="250,33" text="Download Picons" transparent="1" />\n            <widget name="config" position="61,114" size="590,500" scrollbarMode="showOnDemand" transparent="1" />\n            <eLabel position="60,55" size="348,50" text="PiconsUpdater" font="Regular; 40" valign="center" transparent="1" backgroundColor="#20000000" />\n            <eLabel position="400,58" size="349,50" text="Setup" foregroundColor="unffffff" font="Regular; 30" valign="center" backgroundColor="#20000000" transparent="1" halign="left" />\n            <eLabel position="60,640" size="5,40" backgroundColor="#e61700" />\n            <eLabel position="360,640" size="5,40" backgroundColor="#61e500" />\n            <eLabel position="665,640" size="5,40" backgroundColor="#e5dd00" />\n            <widget name="backgroundImage" position="719,210" size="500,300" zPosition="1" alphatest="blend" transparent="1" backgroundColor="transparent"/>\n            <widget name="previewImage" position="744,225" size="450,270" zPosition="1" alphatest="blend" transparent="1" backgroundColor="transparent"/>\n            <widget name="foregroundImage" position="719,210" size="500,300" zPosition="1" alphatest="blend" transparent="1" backgroundColor="transparent"/>\n            <eLabel text="coded by svox, idea by arn354" position="692,70" size="540,25" zPosition="1" font="Regular; 15" halign="right" valign="top" backgroundColor="#20000000" transparent="1" />\n          </screen>\n        '
+    skin = """
+    <screen name="PiconsUpdater-Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="#90000000">
+    <eLabel name="new eLabel" position="40,40" zPosition="-2" size="1200,640" backgroundColor="#20000000" transparent="0" />
+    <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="77,645" size="250,33" text="Cancel" transparent="1" />
+    <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="375,645" size="250,33" text="Save" transparent="1" />
+    <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="682,645" size="250,33" text="Download Picons" transparent="1" />
+    <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="682,645" size="250,33" text="Download Picons" transparent="1" />
+    <widget name="config" position="61,114" size="590,500" scrollbarMode="showOnDemand" transparent="1" />
+    <eLabel position="60,55" size="348,50" text="PiconsUpdater" font="Regular; 40" valign="center" transparent="1" backgroundColor="#20000000" />
+    <eLabel position="400,58" size="349,50" text="Setup" foregroundColor="unffffff" font="Regular; 30" valign="center" backgroundColor="#20000000" transparent="1" halign="left" />
+    <eLabel position="60,640" size="5,40" backgroundColor="#e61700" />
+    <eLabel position="360,640" size="5,40" backgroundColor="#61e500" />
+    <eLabel position="665,640" size="5,40" backgroundColor="#e5dd00" />
+    <widget name="backgroundImage" position="719,210" size="500,300" zPosition="1" alphatest="blend" transparent="1" backgroundColor="transparent"/>
+    <widget name="previewImage" position="744,225" size="450,270" zPosition="1" alphatest="blend" transparent="1" backgroundColor="transparent"/>
+    <widget name="foregroundImage" position="719,210" size="500,300" zPosition="1" alphatest="blend" transparent="1" backgroundColor="transparent"/>
+    <eLabel text="coded by svox, idea by arn354" position="692,70" size="540,25" zPosition="1" font="Regular; 15" halign="right" valign="top" backgroundColor="#20000000" transparent="1" />
+    </screen>"""
 
     def __init__(self, session):
         Screen.__init__(self, session)
@@ -43,14 +61,14 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
         self.onLayoutFinish.append(self.layoutFinished)
 
     def __del__(self):
-        print '######## DESTRUCTOR: PiconsUpdaterView'
+        print('######## DESTRUCTOR: PiconsUpdaterView')
 
     def getMenuItemList(self):
         menuList = []
         try:
             piconsUrls = getCurrentPicon()
         except Exception as e:
-            print e
+            print(e)
 
         try:
             if piconsUrls['size'] is not None:
@@ -58,7 +76,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
                 config.plugins.PiconsUpdater.size.setChoices(sizeChoices, sizeChoices[0][0])
                 menuList.append(getConfigListEntry(_('Size'), config.plugins.PiconsUpdater.size, _('Picons size')))
         except Exception as e:
-            print e
+            print(e)
 
         try:
             if piconsUrls['backgrounds'] is not None:
@@ -69,7 +87,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
             else:
                 self['backgroundImage'].visible = False
         except Exception as e:
-            print e
+            print(e)
 
         menuList.append(getConfigListEntry(_('Mirror Effect'), config.plugins.PiconsUpdater.mirror_effect, _('Mirror Effect')))
         menuList.append(getConfigListEntry(_('Picons Folder'), getPiconsPath(), _("Picons folder\n\nPress 'Ok' to open path selection view")))
@@ -372,6 +390,6 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 
     def showFinishedMessage(self, *args):
         self.session.open(MessageBox, self.finishedMessage, type=MessageBox.TYPE_INFO, timeout=5)
-        print ' '
+        print(' ')
         printToConsole('Finished!')
-        print ' '
+        print(' ')

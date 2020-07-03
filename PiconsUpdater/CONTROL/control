@@ -1,9 +1,9 @@
 Package: enigma2-plugin-extensions-piconsupdater
-Version: 0.3.7
+Version: 0.4.0
 Section: extra
 Priority: optional
-Maintainer: svox, mike99
+Maintainer: svox, mike99, jbleyel
 Architecture: mips32el
 Depends: python-imaging, python-io, python-textutils, python-compression, pngquant
 OE: enigma2-plugin-extensions-piconsupdater
-Description: Download and install new Picons for your current bouquet channels. PiconsUpdater coded by svox, idea by arn354 and picons by mike99
+Description: Download and install new Picons for your current bouquet channels. PiconsUpdater coded by svox and jbleyel, idea by arn354 and picons by mike99

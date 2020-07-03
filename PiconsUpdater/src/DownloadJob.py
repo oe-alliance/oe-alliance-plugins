@@ -1,22 +1,24 @@
-#Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/PiconsUpdater/DownloadJob.py
+# -*- coding: utf-8 -*-
 import os
+import six
+from six.moves.urllib.parse import urlparse
 from threading import Thread
 from twisted.web import client
+from twisted.web.client import HTTPDownloader
 from twisted.internet import reactor, ssl
-from urlparse import urlparse
 from . import _, printToConsole
 
-class download:
 
-    def __init__(self, url):
-        # ERROR 
+class download:
+    def __init__(self, url, outputfile):
+        self.url = six.ensure_binary(url)
+        self.file = outputfile
 
     def start(self):
-        return self.factory.deferred
+        return client.downloadPage(self.url, self.file)
 
     def stop(self):
-        self.factory.doStop()
-        self.connection.disconnect()
+        return
 
 
 class DownloadJob:
@@ -37,8 +39,11 @@ class DownloadJob:
         self.clean()
 
     def clean(self):
-        del self.callbackFinished
-        del self.callbackFailed
+        try:
+            del self.callbackFailed
+            del self.callbackFinished
+        except:
+            pass
 
     def run(self):
         self.download = download(self.downloadUrl, self.targetFileName)

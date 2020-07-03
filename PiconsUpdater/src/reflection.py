@@ -1,4 +1,3 @@
-#Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/PiconsUpdater/reflection.py
 """
 Main source from: https://github.com/jdriscoll/django-photologue/blob/master/photologue/utils/reflection.py
 

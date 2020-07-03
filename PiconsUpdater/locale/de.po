@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OscamUpdater\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-14 22:22+0100\n"
+"PO-Revision-Date: 2014-03-14 22:23+0100\n"
+"Last-Translator: unknown\n"
+"Language-Team: unknown <unknown>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _\n"
+
+msgid "Background Image"
+msgstr "Hintergrundbild"
+
+msgid ""
+"Background Image not downloaded yet, please wait some seconds and try again."
+msgstr ""
+"Hintergrundbilder werden gerade heruntergeladen, bitte in ein paar Sekunden "
+"noch einmal probieren."
+
+msgid "Choose Picons"
+msgstr "Picons auswählen"
+
+msgid "Choose folder"
+msgstr "Verzeichnis auswählen"
+
+msgid "Convert Picons from channel-name.png to channel-key.png"
+msgstr "Konvertiert Picons von Sendername.png zu SenderChannelKey.png"
+
+msgid "Download Picons for your channellist (favourites)"
+msgstr "Picons downloaden für die Senderlisten (Favoriten)"
+
+msgid "Downloading %d of %d Picons"
+msgstr "Downloading %d von %d Picons"
+
+msgid "Merge %d of %d Picons"
+msgstr "Installiert %d von %d Picons"
+
+msgid "Merge Picons"
+msgstr "Picons installieren in Bearbeitung"
+
+msgid "Optimize %d of %d Picons"
+msgstr "Optimiert %d von %d Picons"
+
+msgid "Optimize Picons Progress"
+msgstr "Picons Optimieren in Bearbeitung"
+
+msgid ""
+"Optimize Picons file size?\n"
+"\n"
+"Be aware, this function is maybe very slow!!"
+msgstr ""
+"Soll die Picons Dateigröße optimiert werden?\n"
+"\n"
+"Achtung! Die Optimierung ist unter umständen sehr langsam!!"
+
+msgid "Picons Folder"
+msgstr "Picons Verzeichnis"
+
+msgid "Picons background image"
+msgstr "Picons Hintergrundbild"
+
+msgid ""
+"Picons folder\n"
+"\n"
+"Press 'Ok' to open path selection view"
+msgstr ""
+"Picons Verzeichnis\n"
+"\n"
+"'Ok' drücken um Dateibrowser zu öffnen"
+
+msgid "Picons size"
+msgstr "Picons Größe"
+
+msgid ""
+"Process Finished.\n"
+"%s Picons downloaded\n"
+"%s Picons not found"
+msgstr ""
+"Prozess abgeschlosse.\n"
+"%s Picons heruntergeladen\n"
+"%s Picons nicht gefunden"
+
+msgid "Size"
+msgstr "Größe"
+
+msgid ""
+"The directory %s is not writable.\n"
+"Make sure you select a writable directory instead."
+msgstr ""
+"Das Verzeichnis %s ist nicht beschreibbar\n"
+"Bitte sicherstellen dass das Verzeichnis beschreibbar ist."

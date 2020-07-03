@@ -1,8 +1,9 @@
-#Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/PiconsUpdater/plugin.py
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
-from PiconsUpdaterView import PiconsUpdaterView
-from . import _, getConfigSizeList, getConfigBackgroundList, DEFAULT_PICON_PATH
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText, ConfigYesNo
+from .PiconsUpdaterView import PiconsUpdaterView
+from . import _, getConfigSizeList, getConfigBackgroundList, DEFAULT_PICON_PATH
 
 def main(session, **kwargs):
     config.plugins.PiconsUpdater = ConfigSubsection()

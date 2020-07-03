@@ -1,10 +1,11 @@
-#Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/PiconsUpdater/DownloadPicons.py
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from _collections import deque
 from . import _, printToConsole, PICON_TYPE_NAME, PICON_TYPE_KEY
-from DownloadJob import DownloadJob
-from EventDispatcher import dispatchEvent
-from DiskUtils import getCleanFileName
-from BouquetParser import getChannelKey
+from .DownloadJob import DownloadJob
+from .EventDispatcher import dispatchEvent
+from .DiskUtils import getCleanFileName
+from .BouquetParser import getChannelKey
 DOWNLOAD_ALL_FINISHED = 'downloadAllFinished'
 DOWNLOAD_FINISHED = 'downloadFinished'
 CONCURRENT_DOWNLOADS = 5
@@ -49,6 +50,7 @@ class DownloadPicons:
             self.executeDownloadQueue()
 
     def executeDownloadQueue(self):
+        # print('executeDownloadQueue:' + str(len(self.queueDownloadList)) + 'FIN:' + str(self.downloadsFinished) + ' FAILED:' + str(self.downloadsFailed) + 'Total :' + str(self.totalDownloads))
         if len(self.queueDownloadList) == 0 and self.downloadsFinished + self.downloadsFailed == self.totalDownloads:
             printToConsole('downloadsFinished: ' + str(self.downloadsFinished))
             printToConsole('downloadsFailed: ' + str(self.downloadsFailed))

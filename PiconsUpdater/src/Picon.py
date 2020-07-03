@@ -1,15 +1,16 @@
-#Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/PiconsUpdater/Picon.py
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division
 import os
 from _collections import deque
 from subprocess import call
 from threading import Thread
 from PIL import Image
-from reflection import add_reflection
+from .reflection import add_reflection
 from Components.config import config
-from BouquetParser import getChannelKey
-from DiskUtils import getFiles
-from EventDispatcher import dispatchEvent
-from JobProgressView import JobProgressView
+from .BouquetParser import getChannelKey
+from .DiskUtils import getFiles
+from .EventDispatcher import dispatchEvent
+from .JobProgressView import JobProgressView
 from . import _, printToConsole, getPiconsPath, getTmpLocalPicon
 MERGE_PICONS_FINISHED = 'mergePiconsFinished'
 OPTIMIZE_PICONS_FINISHED = 'optimizePiconsFinished'
@@ -92,7 +93,7 @@ class MergePiconJob:
         scaleWidth = int(piconWidth * self.factor)
         scaleHeight = int(piconHeight * self.factor)
         picon = picon.resize((scaleWidth, scaleHeight), Image.ANTIALIAS)
-        centerPoint = ((backgroundWidth - scaleWidth) / 2, (backgroundHeight - scaleHeight) / 2)
+        centerPoint = ((backgroundWidth - scaleWidth) // 2, (backgroundHeight - scaleHeight) // 2)
         if config.plugins.PiconsUpdater.mirror_effect.getValue():
             picon = add_reflection(picon)
         try:

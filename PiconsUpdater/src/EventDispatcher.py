@@ -1,4 +1,4 @@
-#Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/PiconsUpdater/EventDispatcher.py
+# -*- coding: utf-8 -*-
 handler = []
 
 def hasEventListener(eventType, function):

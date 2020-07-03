@@ -1,5 +1,5 @@
-#Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/PiconsUpdater/DiskUtils.py
-import os, unicodedata, re
+# -*- coding: utf-8 -*-
+import os, unicodedata, re, six
 
 def getCleanFileName(value):
     """
@@ -11,13 +11,14 @@ def getCleanFileName(value):
     
     https://github.com/django/django/blob/9108696a7553123f57c5d42f9c4a90cad44532f4/django/utils/text.py#L417
     """
-    value = unicode(value, errors='replace')
+    if six.PY2:
+        value = six.text_type(value, errors='replace')
     value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
     value = re.sub('[+]', '___plus___', value)
     value = re.sub('[&]', '___and___', value)
     value = re.sub('[^\\w\\s-]', '', value).strip().lower()
     value = re.sub('[-\\s]+', '-', value)
-    return value
+    return six.ensure_str(value)
 
 
 def getOldestFile(path, fileExtensions = None):
@@ -142,5 +143,5 @@ def __filterFileListByFileExtension(files, fileExtensions):
     fileExtensions as tuple. example: ('.txt', '.png')
     """
     if fileExtensions is not None:
-        files = filter(lambda s: s.lower().endswith(fileExtensions), files)
+        files = list(filter(lambda s: s.lower().endswith(fileExtensions), files))
     return files

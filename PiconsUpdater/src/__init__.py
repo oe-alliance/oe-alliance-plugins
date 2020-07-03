@@ -1,9 +1,10 @@
-#Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/PiconsUpdater/__init__.py
+# -*- coding: utf-8 -*-
 import gettext
 import json
 import ssl
-import urllib
+import six
 import logging
+from six.moves.urllib.request import urlopen
 from Components.Language import language
 from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -42,10 +43,10 @@ DEFAULT_PICON_PATH = '/usr/share/enigma2/picon'
 
 def byteify(input):
     if isinstance(input, dict):
-        return {byteify(key):byteify(value) for key, value in input.iteritems()}
+        return {byteify(key):byteify(value) for key, value in six.iteritems(input)}
     elif isinstance(input, list):
         return [ byteify(element) for element in input ]
-    elif isinstance(input, unicode):
+    elif six.PY2 and isinstance(input, six.text_type):
         return input.encode('utf-8')
     else:
         return input
@@ -55,14 +56,17 @@ def getBackgroundList():
     if not hasattr(getBackgroundList, 'config'):
         if hasattr(ssl, '_create_unverified_context'):
             context = ssl._create_unverified_context()
-            configFile = urllib.urlopen(CONFIG_FILE, context=context)
+            configFile = urlopen(CONFIG_FILE, context=context)
         elif hasattr(ssl, '_create_stdlib_context'):
             context = ssl._create_stdlib_context()
-            configFile = urllib.urlopen(CONFIG_FILE, context=context)
+            configFile = urlopen(CONFIG_FILE, context=context)
         else:
-            configFile = urllib.urlopen(CONFIG_FILE)
+            configFile = urlopen(CONFIG_FILE)
         encoding = configFile.headers['content-type'].split('charset=')[-1]
-        ucontent = unicode(configFile.read(), encoding)
+        if six.PY2:
+            ucontent = six.text_type(configFile.read(), encoding)
+        else:
+            ucontent = configFile.read() # FIXME non utf-8
         getBackgroundList.config = byteify(json.loads(ucontent))
         configFile.close()
     return getBackgroundList.config
