@@ -1,0 +1,10 @@
+#!/bin/sh
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/PiconsUpdater
+echo "**************************************************"
+echo "                                                  "
+echo " PiconsUpdater successful removed.                "
+echo "                                                  "
+echo " Please restart enigma2 now.	                    "
+echo "                                                  "
+echo "**************************************************"
+exit 0
