@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+					<tag type="extra" />
+	  </prerequisites>
+		  <info>
+					<author>svox, mike99, jbleyel</author>
+					<name>PiconsUpdater</name>
+					<packagename>enigma2-plugin-extensions-PiconsUpdater</packagename>
+					<shortdescription>Download and install new Picons</shortdescription>
+					<description>Download and install new Picons for your current bouquet channels.</description>
+		  </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-PiconsUpdater" />
+	  </files>
+</default>
