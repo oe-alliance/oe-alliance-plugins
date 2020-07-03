@@ -1,0 +1,12 @@
+#!/bin/sh
+echo "**************************************************"
+echo "                                                  "
+echo " PiconsUpdater by svox                             "
+echo "                                                  "
+echo "**************************************************"
+echo "                                                  "
+echo " Plugin successfully installed!                   "
+echo " Please restart enigma2 now.		                "
+echo "                                                  "
+echo "**************************************************"
+exit 0
