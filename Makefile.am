@@ -368,11 +368,11 @@ SUBDIRS += TransCodingSetup
 endif
 
 if GB7252
-SUBDIRS += TransCodingSetup GigaBlueChromium
+SUBDIRS += TransCodingSetup GigaBlueChromium GigaBlueBluetoothSetup
 endif
 
 if GB72604
-SUBDIRS += GigaBlueChromium
+SUBDIRS += GigaBlueChromium GigaBlueBluetoothSetup
 endif
 
 if VS1000
