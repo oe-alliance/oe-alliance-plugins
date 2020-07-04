@@ -1,4 +1,4 @@
-# Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/TVSpielfilm.py
+from __future__ import print_function
 from base64 import b64encode, b64decode
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.ConditionalWidget import BlinkingWidget
@@ -28,18 +28,23 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from ServiceReference import ServiceReference
-from string import find, strip
 from time import mktime
 from Tools.Directories import fileExists
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web import client, error
 from twisted.web.client import getPage, downloadPage
-from httplib import HTTPException
-from urllib import unquote_plus, urlencode
-from urllib2 import Request, urlopen, URLError, HTTPError
-from urlparse import parse_qs
-import cookielib, datetime, os, re, socket, sys, time, urllib2
+from six.moves.http_client import HTTPException
+from six.moves.urllib.parse import unquote_plus, urlencode, parse_qs
+from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirectHandler, HTTPHandler, HTTPCookieProcessor
+from six.moves.urllib.error import URLError, HTTPError
+import datetime, os, re, socket, sys, time, six
 from os import path
+	
+try:
+    from cookielib import MozillaCookieJar
+except Exception:
+    from http.cookiejar import MozillaCookieJar
+
 config.plugins.tvspielfilm = ConfigSubsection()
 deskWidth = getDesktop(0).size().width()
 if deskWidth >= 1920:
@@ -104,7 +109,7 @@ def applySkinVars(skin, dict):
         try:
             skin = skin.replace('{' + key + '}', dict[key])
         except Exception as e:
-            print e, '@key=', key
+            print(e, '@key=', key)
 
     return skin
 
@@ -174,7 +179,7 @@ class TVTippsView(Screen):
              'fontsize': fontsize}
             self.skin = applySkinVars(TVTippsView.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.pic1 = '/tmp/tvspielfilm1.jpg'
         self.pic2 = '/tmp/tvspielfilm2.jpg'
@@ -347,6 +352,7 @@ class TVTippsView(Screen):
 
     def makeTVTipps(self, string):
         output = open(self.localhtml, 'r').read()
+        output = six.ensure_str(output)
         self.sref = []
         self['pic1'].hide()
         self['pic2'].hide()
@@ -355,23 +361,23 @@ class TVTippsView(Screen):
         self['pic5'].hide()
         self['pic6'].hide()
         if self.sparte == 'Spielfilm':
-            startpos = find(output, 'id="c-sp-opener"><span>Spielfilm</span></a>')
-            endpos = find(output, 'id="c-se-opener"><span>Serie</span></a>')
+            startpos = output.find('id="c-sp-opener"><span>Spielfilm</span></a>')
+            endpos = output.find('id="c-se-opener"><span>Serie</span></a>')
         elif self.sparte == 'Serie':
-            startpos = find(output, 'id="c-se-opener"><span>Serie</span></a>')
-            endpos = find(output, 'id="c-re-opener"><span>Report</span></a>')
+            startpos = output.find('id="c-se-opener"><span>Serie</span></a>')
+            endpos = output.find('id="c-re-opener"><span>Report</span></a>')
         elif self.sparte == 'Report':
-            startpos = find(output, 'id="c-re-opener"><span>Report</span></a>')
-            endpos = find(output, 'id="c-u-opener"><span>Unterhaltung</span></a>')
+            startpos = output.find('id="c-re-opener"><span>Report</span></a>')
+            endpos = output.find('id="c-u-opener"><span>Unterhaltung</span></a>')
         elif self.sparte == 'Unterhaltung':
-            startpos = find(output, 'id="c-u-opener"><span>Unterhaltung</span></a>')
-            endpos = find(output, 'id="c-kin-opener"><span>Kinder</span></a>')
+            startpos = output.find('id="c-u-opener"><span>Unterhaltung</span></a>')
+            endpos = output.find('id="c-kin-opener"><span>Kinder</span></a>')
         elif self.sparte == 'Kinder':
-            startpos = find(output, 'id="c-kin-opener"><span>Kinder</span></a>')
-            endpos = find(output, 'id="c-spo-opener"><span>Sport</span></a>')
+            startpos = output.find('id="c-kin-opener"><span>Kinder</span></a>')
+            endpos = output.find('id="c-spo-opener"><span>Sport</span></a>')
         elif self.sparte == 'Sport':
-            startpos = find(output, 'id="c-spo-opener"><span>Sport</span></a>')
-            endpos = find(output, '<p class="h3 headline headline--section">')
+            startpos = output.find('id="c-spo-opener"><span>Sport</span></a>')
+            endpos = output.find('<p class="h3 headline headline--section">')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         date = str(self.date.strftime('%d.%m.%Y'))
@@ -609,6 +615,7 @@ class TVTippsView(Screen):
 
     def makePostviewPage(self, string):
         output = open(self.localhtml2, 'r').read()
+        output = six.ensure_str(output)
         self['label2'].setText('= Timer')
         self['label3'].setText('= YouTube')
         self['label4'].setText('= Wikipedia')
@@ -901,6 +908,7 @@ class TVTippsView(Screen):
         return
 
     def makePostTimer(self, output):
+        output = six.ensure_str(output)
         startpos = output.find('<div class="content-area">')
         endpos = output.find('>Weitere Bildergalerien<')
         if endpos == -1:
@@ -975,6 +983,7 @@ class TVTippsView(Screen):
         searchrequest = Request(url, None, header)
         try:
             output = urlopen(searchrequest).read()
+            output = six.ensure_str(output)
         except (HTTPError,
          URLError,
          HTTPException,
@@ -988,8 +997,8 @@ class TVTippsView(Screen):
             self['searchtext'].show()
             self.setTitle('')
             self.setTitle(title.group(1))
-        startpos = find(output, '<table class="primetime-table">')
-        endpos = find(output, '</table>')
+        startpos = output.find('<table class="primetime-table">')
+        endpos = output.find('</table>')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
@@ -1805,7 +1814,7 @@ class TVTippsView(Screen):
             self.datum = False
             self.filter = True
             search = search.replace(' ', '+')
-            searchlink = 'http://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&q=' + search + '&page=1'
+            searchlink = 'https://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&q=' + search + '&page=1'
             self.maxsearchcount = config.plugins.tvspielfilm.maxsearch.value
             self.searchcount = 0
             self.makeSearchView(searchlink)
@@ -2420,16 +2429,16 @@ class TVTippsView(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
 
     def downloadPostPage(self, link, name):
-        downloadPage(link, self.localhtml2).addCallback(name).addErrback(self.downloadError)
+        downloadPage(six.ensure_binary(link), self.localhtml2).addCallback(name).addErrback(self.downloadError)
 
     def downloadFullPage(self, link, name):
-        downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadPageError)
+        downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
         self['label'].setText('Info = Filter: NEU, Bouquet = +- Tag, <> = +- Woche')
@@ -3192,7 +3201,7 @@ class TVNeuView(Screen):
              'fontsize': fontsize}
             self.skin = applySkinVars(TVNeuView.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.pic1 = '/tmp/tvspielfilm1.jpg'
         self.pic2 = '/tmp/tvspielfilm2.jpg'
@@ -3363,6 +3372,7 @@ class TVNeuView(Screen):
 
     def makeTVTipps(self, string):
         output = open(self.localhtml, 'r').read()
+        output = six.ensure_str(output)
         self.sref = []
         self['pic1'].hide()
         self['pic2'].hide()
@@ -3370,8 +3380,8 @@ class TVNeuView(Screen):
         self['pic4'].hide()
         self['pic5'].hide()
         self['pic6'].hide()
-        startpos = find(output, 'id="c-sp-opener"><span>Spielfilm</span></a>')
-        endpos = find(output, 'id="c-spo-opener"><span>Sport</span></a>')
+        startpos = output.find('id="c-sp-opener"><span>Spielfilm</span></a>')
+        endpos = output.find('id="c-spo-opener"><span>Sport</span></a>')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         date = str(self.date.strftime('%d.%m.%Y'))
@@ -3599,6 +3609,7 @@ class TVNeuView(Screen):
         return
 
     def makePostviewPage(self, string):
+        output = six.ensure_str(output)
         output = open(self.localhtml2, 'r').read()
         self['label2'].setText('= Timer')
         self['label3'].setText('= YouTube')
@@ -3892,6 +3903,7 @@ class TVNeuView(Screen):
         return
 
     def makePostTimer(self, output):
+        output = six.ensure_str(output)
         startpos = output.find('<div class="content-area">')
         endpos = output.find('>Weitere Bildergalerien<')
         if endpos == -1:
@@ -3966,6 +3978,7 @@ class TVNeuView(Screen):
         searchrequest = Request(url, None, header)
         try:
             output = urlopen(searchrequest).read()
+            output = six.ensure_str(output)
         except (HTTPError,
          URLError,
          HTTPException,
@@ -3979,8 +3992,8 @@ class TVNeuView(Screen):
             self['searchtext'].show()
             self.setTitle('')
             self.setTitle(title.group(1))
-        startpos = find(output, '<table class="primetime-table">')
-        endpos = find(output, '</table>')
+        startpos = output.find('<table class="primetime-table">')
+        endpos = output.find('</table>')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
@@ -4790,7 +4803,7 @@ class TVNeuView(Screen):
             self.datum = False
             self.filter = True
             search = search.replace(' ', '+')
-            searchlink = 'http://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&q=' + search + '&page=1'
+            searchlink = 'https://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&q=' + search + '&page=1'
             self.maxsearchcount = config.plugins.tvspielfilm.maxsearch.value
             self.searchcount = 0
             self.makeSearchView(searchlink)
@@ -5407,16 +5420,16 @@ class TVNeuView(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
 
     def downloadPostPage(self, link, name):
-        downloadPage(link, self.localhtml2).addCallback(name).addErrback(self.downloadError)
+        downloadPage(six.ensure_binary(link), self.localhtml2).addCallback(name).addErrback(self.downloadError)
 
     def downloadFullPage(self, link, name):
-        downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadPageError)
+        downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
         self['label'].setText('Bouquet = +- Tag, <> = +- Woche')
@@ -6195,7 +6208,7 @@ class TVGenreView(Screen):
              'fontsize': fontsize}
             self.skin = applySkinVars(TVGenreView.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.localhtml = '/tmp/tvspielfilm.html'
         self.localhtml2 = '/tmp/tvspielfilm2.html'
@@ -6342,10 +6355,11 @@ class TVGenreView(Screen):
         return
 
     def makeTVView(self, output):
+        output = six.ensure_str(output)
         self.titel = '%s - Sendungen der n\xc3\xa4chsten 14 Tage' % self.genre
         self.setTitle(self.titel)
-        startpos = find(output, '<table class="primetime-table">')
-        endpos = find(output, '</table>')
+        startpos = output.find('<table class="primetime-table">')
+        endpos = output.find('</table>')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
@@ -6671,6 +6685,7 @@ class TVGenreView(Screen):
 
     def makePostviewPage(self, string):
         output = open(self.localhtml2, 'r').read()
+        output = six.ensure_str(output)
         self['label2'].setText('= Timer')
         self['label3'].setText('= YouTube')
         self['label4'].setText('= Wikipedia')
@@ -6957,6 +6972,7 @@ class TVGenreView(Screen):
         return
 
     def makePostTimer(self, output):
+        output = six.ensure_str(output)
         startpos = output.find('<div class="content-area">')
         endpos = output.find('>Weitere Bildergalerien<')
         if endpos == -1:
@@ -7031,6 +7047,7 @@ class TVGenreView(Screen):
         searchrequest = Request(url, None, header)
         try:
             output = urlopen(searchrequest).read()
+            output = six.ensure_str(output)
         except (HTTPError,
          URLError,
          HTTPException,
@@ -7040,8 +7057,8 @@ class TVGenreView(Screen):
 
         title = 'Genre: ' + self.genre.replace(':', ' -') + ', Filter: ' + self.searchstring
         self.setTitle(title)
-        startpos = find(output, '<table class="primetime-table">')
-        endpos = find(output, '</table>')
+        startpos = output.find('<table class="primetime-table">')
+        endpos = output.find('</table>')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
@@ -8121,13 +8138,13 @@ class TVGenreView(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
 
     def downloadFull(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadFullError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadFullError)
 
     def downloadFullError(self, output):
         self['label'].setText('OK = Sendung, Stop = YouTube Trailer')
@@ -8137,10 +8154,10 @@ class TVGenreView(Screen):
         self.ready = True
 
     def downloadPostPage(self, link, name):
-        downloadPage(link, self.localhtml2).addCallback(name).addErrback(self.downloadError)
+        downloadPage(six.ensure_binary(link), self.localhtml2).addCallback(name).addErrback(self.downloadError)
 
     def downloadFullPage(self, link, name):
-        downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadPageError)
+        downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
         self['label'].setText('OK = Sendung, Stop = YouTube Trailer')
@@ -8376,7 +8393,7 @@ class TVJetztView(Screen):
              'fontsize': fontsize}
             self.skin = applySkinVars(TVJetztView.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.localhtml = '/tmp/tvspielfilm.html'
         self.localhtml2 = '/tmp/tvspielfilm2.html'
@@ -8566,10 +8583,10 @@ class TVJetztView(Screen):
         else:
             self.titel = '22:00 im TV - Heute, ' + str(self.weekday) + ', ' + date
         self.setTitle(self.titel)
-        startpos = find(output, '<table class="info-table"')
-        endpos = find(output, '<div class="block-in">')
+        startpos = output.find('<table class="info-table"')
+        endpos = output.find('<div class="block-in">')
         if endpos == -1:
-            endpos = find(output, '<div class="two-blocks">')
+            endpos = output.find('<div class="two-blocks">')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         bereich = sub('class="chl_bg_. c-', '<td>LOGO', bereich)
@@ -8831,6 +8848,7 @@ class TVJetztView(Screen):
 
     def makePostviewPage(self, string):
         output = open(self.localhtml2, 'r').read()
+        output = six.ensure_str(output)
         self['label2'].setText('= Timer')
         self['label3'].setText('= YouTube')
         self['label4'].setText('= Wikipedia')
@@ -9117,6 +9135,7 @@ class TVJetztView(Screen):
         return
 
     def makePostTimer(self, output):
+        output = six.ensure_str(output)
         startpos = output.find('<div class="content-area">')
         endpos = output.find('>Weitere Bildergalerien<')
         if endpos == -1:
@@ -9191,6 +9210,7 @@ class TVJetztView(Screen):
         searchrequest = Request(url, None, header)
         try:
             output = urlopen(searchrequest).read()
+            output = six.ensure_str(output)
         except (HTTPError,
          URLError,
          HTTPException,
@@ -9204,8 +9224,8 @@ class TVJetztView(Screen):
             self['searchtext'].show()
             self.setTitle('')
             self.setTitle(title.group(1))
-        startpos = find(output, '<table class="primetime-table">')
-        endpos = find(output, '</table>')
+        startpos = output.find('<table class="primetime-table">')
+        endpos = output.find('</table>')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
@@ -9648,7 +9668,7 @@ class TVJetztView(Screen):
                 self.gleich = True
                 self['label'].setText('Bitte warten...')
                 self['label'].startBlinking()
-                link = 'http://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&time=shortly'
+                link = 'https://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&time=shortly'
                 self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
             else:
                 self.jetzt = True
@@ -9657,7 +9677,7 @@ class TVJetztView(Screen):
                 self.nachts = False
                 self['label'].setText('Bitte warten...')
                 self['label'].startBlinking()
-                link = 'http://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
+                link = 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
                 self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
         else:
             self.session.open(infoScreenTVSpielfilm, None, True)
@@ -10016,6 +10036,7 @@ class TVJetztView(Screen):
                     titel = self.tvtitel[c][1]
                 except IndexError:
                     pass
+                    titel=''
 
                 self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='TV Spielfilm Suche:', text=titel)
             except IndexError:
@@ -10038,7 +10059,7 @@ class TVJetztView(Screen):
             self.datum = False
             self.filter = True
             search = search.replace(' ', '+')
-            searchlink = 'http://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&q=' + search + '&page=1'
+            searchlink = 'https://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&q=' + search + '&page=1'
             self.maxsearchcount = config.plugins.tvspielfilm.maxsearch.value
             self.searchcount = 0
             self.makeSearchView(searchlink)
@@ -10084,7 +10105,7 @@ class TVJetztView(Screen):
             try:
                 c = self['menu'].getSelectedIndex()
                 channel = self.sref[c][0]
-                link = 'http://www.tvspielfilm.de/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
+                link = 'https://www.tvspielfilm.de/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
                 self.session.open(TVProgrammView, link, True, False)
             except IndexError:
                 pass
@@ -10310,13 +10331,13 @@ class TVJetztView(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
 
     def downloadFull(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadFullError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadFullError)
 
     def downloadFullError(self, output):
         self['label'].setText('Text = Sender,        Info = Jetzt im TV/Gleich im TV')
@@ -10325,10 +10346,10 @@ class TVJetztView(Screen):
         self.ready = True
 
     def downloadPostPage(self, link, name):
-        downloadPage(link, self.localhtml2).addCallback(name).addErrback(self.downloadError)
+        downloadPage(six.ensure_binary(link), self.localhtml2).addCallback(name).addErrback(self.downloadError)
 
     def downloadFullPage(self, link, name):
-        downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadPageError)
+        downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
         self['label'].setText('Text = Sender,        Info = Jetzt im TV/Gleich im TV')
@@ -10347,16 +10368,16 @@ class TVJetztView(Screen):
         self.tvtitel = []
         self.sref = []
         if self.jetzt == True:
-            link = 'http://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
+            link = 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
             self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
         elif self.gleich == True:
-            link = 'http://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&time=shortly'
+            link = 'https://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&time=shortly'
             self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
         elif self.abends == True:
-            link = 'http://www.tvspielfilm.de/tv-programm/sendungen/abends.html'
+            link = 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html'
             self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
         else:
-            link = 'http://www.tvspielfilm.de/tv-programm/sendungen/fernsehprogramm-nachts.html'
+            link = 'https://www.tvspielfilm.de/tv-programm/sendungen/fernsehprogramm-nachts.html'
             self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
 
     def showProgrammPage(self):
@@ -10589,7 +10610,7 @@ class TVProgrammView(Screen):
              'fontsize': fontsize}
             self.skin = applySkinVars(TVProgrammView.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.localhtml = '/tmp/tvspielfilm.html'
         self.localhtml2 = '/tmp/tvspielfilm2.html'
@@ -10766,10 +10787,10 @@ class TVProgrammView(Screen):
         date = str(self.date.strftime('%d.%m.%Y'))
         self.titel = str(titel.group(1)) + ' - ' + str(self.weekday) + ', ' + date
         self.setTitle(self.titel)
-        startpos = find(output, '<table class="info-table"')
-        endpos = find(output, '<div class="block-in">')
+        startpos = output.find('<table class="info-table"')
+        endpos = output.find('<div class="block-in">')
         if endpos == -1:
-            endpos = find(output, '<div class="two-blocks">')
+            endpos = output.find('<div class="two-blocks">')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         bereich = sub('class="chl_bg_. c-', '<td>LOGO', bereich)
@@ -11043,6 +11064,7 @@ class TVProgrammView(Screen):
 
     def makePostviewPage(self, string):
         output = open(self.localhtml2, 'r').read()
+        output = six.ensure_str(output)
         self['label2'].setText('= Timer')
         self['label3'].setText('= YouTube')
         self['label4'].setText('= Wikipedia')
@@ -11338,6 +11360,7 @@ class TVProgrammView(Screen):
         return
 
     def makePostTimer(self, output):
+        output = six.ensure_str(output)
         startpos = output.find('<div class="content-area">')
         endpos = output.find('>Weitere Bildergalerien<')
         if endpos == -1:
@@ -11412,6 +11435,7 @@ class TVProgrammView(Screen):
         searchrequest = Request(url, None, header)
         try:
             output = urlopen(searchrequest).read()
+            output = six.ensure_str(output)
         except (HTTPError,
          URLError,
          HTTPException,
@@ -11425,8 +11449,8 @@ class TVProgrammView(Screen):
             self['searchtext'].show()
             self.setTitle('')
             self.setTitle(title.group(1))
-        startpos = find(output, '<table class="primetime-table">')
-        endpos = find(output, '</table>')
+        startpos = output.find('<table class="primetime-table">')
+        endpos = output.find('</table>')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
@@ -12211,7 +12235,7 @@ class TVProgrammView(Screen):
                     self.piconname = self.findPicon(sref)
                     if self.piconname is None:
                         self.piconname = 'none.png'
-                self.link = 'http://www.tvspielfilm.de/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
+                self.link = 'https://www.tvspielfilm.de/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
                 self.refresh()
         elif self.current == 'postview':
             self.wiki()
@@ -12246,7 +12270,7 @@ class TVProgrammView(Screen):
             self.datum = False
             self.filter = True
             search = search.replace(' ', '+')
-            searchlink = 'http://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&q=' + search + '&page=1'
+            searchlink = 'https://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&q=' + search + '&page=1'
             self.maxsearchcount = config.plugins.tvspielfilm.maxsearch.value
             self.searchcount = 0
             self.makeSearchView(searchlink)
@@ -12702,16 +12726,16 @@ class TVProgrammView(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
 
     def downloadPostPage(self, link, name):
-        downloadPage(link, self.localhtml2).addCallback(name).addErrback(self.downloadError)
+        downloadPage(six.ensure_binary(link), self.localhtml2).addCallback(name).addErrback(self.downloadError)
 
     def downloadFullPage(self, link, name):
-        downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadPageError)
+        downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
         if self.eventview == False:
@@ -12839,7 +12863,7 @@ class TVProgrammView(Screen):
                     self.piconname = self.findPicon(sref)
                     if self.piconname is None:
                         self.piconname = 'none.png'
-                self.link = 'http://www.tvspielfilm.de/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
+                self.link = 'https://www.tvspielfilm.de/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
                 self.refresh()
         return
 
@@ -12936,7 +12960,7 @@ class TVTrailer(Screen):
              'font': font}
             self.skin = applySkinVars(TVTrailer.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.pic1 = '/tmp/tvspielfilm1.jpg'
         self.pic2 = '/tmp/tvspielfilm2.jpg'
@@ -13024,22 +13048,22 @@ class TVTrailer(Screen):
         self['play5'].hide()
         self['play6'].hide()
         if self.sparte == 'Kino Neustarts':
-            startpos = find(output, '<p class="headline headline--section">Kino Neustarts</p>')
-            endpos = find(output, '<div class="OUTBRAIN"')
+            startpos = output.find('<p class="headline headline--section">Kino Neustarts</p>')
+            endpos = output.find('<div class="OUTBRAIN"')
         elif self.sparte == 'Kino Vorschau':
-            startpos = find(output, '<h2 class="headline headline--section">Neustarts')
-            endpos = find(output, '<div id="gtm-livetv-footer"></div>')
+            startpos = output.find('<h2 class="headline headline--section">Neustarts')
+            endpos = output.find('<div id="gtm-livetv-footer"></div>')
         elif self.sparte == 'Neueste Trailer':
-            startpos = find(output, '<p class="headline headline--section">Neueste Trailer</p>')
-            endpos = find(output, '<p class="headline headline--section">Kino Neustarts</p>')
+            startpos = output.find('<p class="headline headline--section">Neueste Trailer</p>')
+            endpos = output.find('<p class="headline headline--section">Kino Neustarts</p>')
         elif self.sparte == 'Kino Charts':
             self.charts = True
-            startpos = find(output, '<ul class="chart-content charts-list-content">')
-            endpos = find(output, '<div id="gtm-livetv-footer"></div>')
+            startpos = output.find('<ul class="chart-content charts-list-content">')
+            endpos = output.find('<div id="gtm-livetv-footer"></div>')
         elif self.sparte == 'DVD Charts':
             self.charts = True
-            startpos = find(output, '<ul class="chart-content charts-list-content">')
-            endpos = find(output, '<div id="gtm-livetv-footer"></div>')
+            startpos = output.find('<ul class="chart-content charts-list-content">')
+            endpos = output.find('<div id="gtm-livetv-footer"></div>')
         bereich = output[startpos:endpos]
         bereich = re.sub('<ul class="btns">.*?</ul>', '', bereich, flags=re.S)
         bereich = transHTML(bereich)
@@ -13462,10 +13486,10 @@ class TVTrailer(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadFullPage(self, link, name):
-        downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadError)
+        downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
@@ -14162,7 +14186,7 @@ class TVBilder(Screen):
              'font': font}
             self.skin = applySkinVars(TVBilder.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.pic1 = '/tmp/tvspielfilm1.jpg'
         self.pic2 = '/tmp/tvspielfilm2.jpg'
@@ -14246,8 +14270,8 @@ class TVBilder(Screen):
         self['play4'].hide()
         self['play5'].hide()
         self['play6'].hide()
-        startpos = find(output, '<p class="headline headline--section">')
-        endpos = find(output, '<div id="gtm-livetv-footer"></div>')
+        startpos = output.find('<p class="headline headline--section">')
+        endpos = output.find('<div id="gtm-livetv-footer"></div>')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         date = str(self.date.strftime('%d.%m.%Y'))
@@ -14511,10 +14535,10 @@ class TVBilder(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadFullPage(self, link, name):
-        downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadError)
+        downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
@@ -15239,7 +15263,7 @@ class TVNews(Screen):
              'fontsize2': fontsize2}
             self.skin = applySkinVars(TVNews.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.localhtml = '/tmp/tvspielfilm.html'
         self.localhtml2 = '/tmp/tvspielfilm2.html'
@@ -15308,7 +15332,7 @@ class TVNews(Screen):
         bereich = re.sub('<script.*?</script>', '', bereich, flags=re.S)
         bereich = re.sub('<section id="content">.*?</section>', '', bereich, flags=re.S)
         bereich = sub('<a href="https://tvspielfilm-abo.de.*?\n', '', bereich)
-        bereich = sub('<a href="http://www.tvspielfilm.de/news".*?\n', '', bereich)
+        bereich = sub('<a href="https://www.tvspielfilm.de/news".*?\n', '', bereich)
         bereich = transHTML(bereich)
         link = re.findall('<a href="(.*?)" target="_self"', bereich)
         picurl = re.findall('<img src="(.*?)"', bereich)
@@ -15362,6 +15386,7 @@ class TVNews(Screen):
 
     def makePostviewPage(self, string):
         output = open(self.localhtml2, 'r').read()
+        output = six.ensure_str(output)
         self['picture'].hide()
         self['picturetext'].hide()
         self['statuslabel'].hide()
@@ -15554,13 +15579,13 @@ class TVNews(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadPostPage(self, link, name):
-        downloadPage(link, self.localhtml2).addCallback(name).addErrback(self.downloadError)
+        downloadPage(six.ensure_binary(link), self.localhtml2).addCallback(name).addErrback(self.downloadError)
 
     def downloadFullPage(self, link, name):
-        downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadError)
+        downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         try:
@@ -15745,7 +15770,7 @@ class TVBlog(Screen):
              'fontsize2': fontsize2}
             self.skin = applySkinVars(TVBlog.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://blog.tvspielfilm.de'
+        self.baseurl = 'https://blog.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.localhtml = '/tmp/tvspielfilm.html'
         self.localhtml2 = '/tmp/tvspielfilm2.html'
@@ -15813,7 +15838,7 @@ class TVBlog(Screen):
         startpos = output.find('<div id="content">')
         endpos = output.find('<!-- end #content-->')
         bereich = output[startpos:endpos]
-        bereich = sub('<iframe width="[0-9]+" height="[0-9]+" src="//www.youtube.com/embed/', '<img width="785" height="510" src="http://img.youtube.com/vi/', bereich)
+        bereich = sub('<iframe width="[0-9]+" height="[0-9]+" src="//www.youtube.com/embed/', '<img width="785" height="510" src="https://img.youtube.com/vi/', bereich)
         bereich = sub('" frameborder="0"', '/0.jpg"', bereich)
         bereich = sub('<img class="replacement" src="">', '<img width="630" height="404" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/TV-Spielfilm-Logo.svg/630px-TV-Spielfilm-Logo.svg.png">', bereich)
         bereich = sub('<i class="fa fa-heart-o">', 'Likes: ', bereich)
@@ -15839,7 +15864,7 @@ class TVBlog(Screen):
         bereich = sub('</p></blockquote>\n<p>', '', bereich)
         bereich = transHTML(bereich)
         picurl = re.findall('<img width="[0-9]+" height="[0-9]+" src="(.*?)"', bereich)
-        picurlblog = 'http://blog.tvspielfilm.de/wp-content/themes/tvspielfilm/images/header.png'
+        picurlblog = 'https://blog.tvspielfilm.de/wp-content/themes/tvspielfilm/images/header.png'
         metatext = re.findall('<p class="meta">(.*?)</p>', bereich, flags=re.S)
         toptext = re.findall('<h2 class="upperfont">(.*?)</h2>', bereich)
         text = re.findall('<div class="entry">.*?<p>(.*?)</p>', bereich, flags=re.S)
@@ -15912,6 +15937,7 @@ class TVBlog(Screen):
 
     def makePostviewPage(self, string):
         output = open(self.localhtml2, 'r').read()
+        output = six.ensure_str(output)
         self['item'].hide()
         self['picture'].hide()
         self['topictext'].hide()
@@ -15937,14 +15963,14 @@ class TVBlog(Screen):
         else:
             self['label'].setText('OK = Vollbild')
             self.trailer = False
-        bereich = sub('<iframe width="[0-9]+" height="[0-9]+" src="//www.youtube.com/embed/', '<img width="785" height="510" src="http://img.youtube.com/vi/', bereich)
+        bereich = sub('<iframe width="[0-9]+" height="[0-9]+" src="//www.youtube.com/embed/', '<img width="785" height="510" src="https://img.youtube.com/vi/', bereich)
         bereich = sub('" frameborder="0"', '/0.jpg"', bereich)
         picurl = search('<img width="[0-9]+" height="[0-9]+" src="(.*?)"', bereich)
         if picurl is not None:
             self.download(picurl.group(1), self.getPicPost)
             self['picpost'].show()
         else:
-            picurl = 'http://blog.tvspielfilm.de/wp-content/themes/tvspielfilm/images/header.png'
+            picurl = 'https://blog.tvspielfilm.de/wp-content/themes/tvspielfilm/images/header.png'
             self.download(picurl, self.getPicPost)
             self['picpost'].show()
         meta = search('<p class="meta">(.*?)</p>', bereich, flags=re.S)
@@ -16099,13 +16125,13 @@ class TVBlog(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadPostPage(self, link, name):
-        downloadPage(link, self.localhtml2).addCallback(name).addErrback(self.downloadError)
+        downloadPage(six.ensure_binary(link), self.localhtml2).addCallback(name).addErrback(self.downloadError)
 
     def downloadFullPage(self, link, name):
-        downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadError)
+        downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         self['statuslabel'].setText('Download Fehler')
@@ -16221,7 +16247,7 @@ class TVBlog(Screen):
          '18': 4,
          '34': 6}
         trailer_url = None
-        watch_url = 'http://www.youtube.com/watch?v=%s&gl=US&hl=en' % trailer_id
+        watch_url = 'https://www.youtube.com/watch?v=%s&gl=US&hl=en' % trailer_id
         watchrequest = Request(watch_url, None, header)
         try:
             watchvideopage = urlopen(watchrequest).read()
@@ -16236,7 +16262,7 @@ class TVBlog(Screen):
          '&el=detailpage',
          '&el=vevo',
          '']:
-            info_url = 'http://www.youtube.com/get_video_info?&video_id=%s%s&ps=default&eurl=&gl=US&hl=en' % (trailer_id, el)
+            info_url = 'https://www.youtube.com/get_video_info?&video_id=%s%s&ps=default&eurl=&gl=US&hl=en' % (trailer_id, el)
             request = Request(info_url, None, header)
             try:
                 infopage = urlopen(request).read()
@@ -16255,13 +16281,13 @@ class TVBlog(Screen):
         else:
             video_fmt_map = {}
             fmt_infomap = {}
-            if videoinfo.has_key('url_encoded_fmt_stream_map'):
+            if 'url_encoded_fmt_stream_map' in videoinfo:
                 tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',')
             else:
                 tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
             for fmtstring in tmp_fmtUrlDATA:
                 fmturl = fmtid = ''
-                if videoinfo.has_key('url_encoded_fmt_stream_map'):
+                if 'url_encoded_fmt_stream_map' in videoinfo:
                     try:
                         for arg in fmtstring.split('&'):
                             if arg.find('=') >= 0:
@@ -16273,7 +16299,7 @@ class TVBlog(Screen):
                                 elif key == 'url':
                                     fmturl = value
 
-                        if fmtid != '' and fmturl != '' and VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+                        if fmtid != '' and fmturl != '' and fmtid in VIDEO_FMT_PRIORITY_MAP:
                             video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid,
                              'fmturl': unquote_plus(fmturl)}
                             fmt_infomap[int(fmtid)] = '%s' % unquote_plus(fmturl)
@@ -16283,7 +16309,7 @@ class TVBlog(Screen):
 
                 else:
                     fmtid, fmturl = fmtstring.split('|')
-                if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid) and fmtid != '':
+                if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != '':
                     video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid,
                      'fmturl': unquote_plus(fmturl)}
                     fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
@@ -16374,7 +16400,7 @@ class TVNewsPicShow(Screen):
              'fontsize': fontsize}
             self.skin = applySkinVars(TVNewsPicShow.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.hideflag = True
         self.link = link
@@ -16582,7 +16608,7 @@ class TVNewsPicShow(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
@@ -16670,7 +16696,7 @@ class PlayboyPicShow(Screen):
              'fontsize2': fontsize2}
             self.skin = applySkinVars(PlayboyPicShow.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.hideflag = True
         self.link = link
@@ -16715,8 +16741,8 @@ class PlayboyPicShow(Screen):
         title = search('<title>(.*?)</title>', output)
         title = sub(' - TV Spielfilm', '', title.group(1))
         self.setTitle(title)
-        startpos = find(output, '<div class="content-area">')
-        endpos = find(output, 'Mehr Girls bei Playboy</a>')
+        startpos = output.find('<div class="content-area">')
+        endpos = output.find('Mehr Girls bei Playboy</a>')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         self.pixlist = re.findall('<img src="(.*?)" alt=""', bereich)
@@ -16857,7 +16883,7 @@ class PlayboyPicShow(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         self['pictext'].setText('Download Fehler')
@@ -16945,7 +16971,7 @@ class TVPicShow(Screen):
              'fontsize2': fontsize2}
             self.skin = applySkinVars(TVPicShow.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.hideflag = True
         self.link = link
@@ -17181,7 +17207,7 @@ class TVPicShow(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
@@ -17253,7 +17279,7 @@ class PicShowFull(Screen):
              'fontsize': fontsize}
             self.skin = applySkinVars(PicShowFull.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.hideflag = True
         self.playboy = playboy
@@ -17302,8 +17328,8 @@ class PicShowFull(Screen):
             bereich = output[startpos:endpos]
             self.pixlist = re.findall('<img src="(.*?)"', bereich)
         else:
-            startpos = find(output, '<div class="content-area">')
-            endpos = find(output, 'Mehr Girls bei Playboy</a>')
+            startpos = output.find('<div class="content-area">')
+            endpos = output.find('Mehr Girls bei Playboy</a>')
             bereich = output[startpos:endpos]
             bereich = transHTML(bereich)
             self.pixlist = re.findall('<img src="(.*?)" alt=""', bereich)
@@ -17417,7 +17443,7 @@ class PicShowFull(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
@@ -17578,7 +17604,7 @@ class searchYouTube(Screen):
         else:
             self.name = name
         name = self.name.replace(' ', '+').replace(':', '+').replace('_', '+').replace('\xc3\x84', 'Ae').replace('\xc3\x96', 'Oe').replace('\xc3\x9c', 'Ue').replace('\xc3\x9f', 'ss').replace('\xc3\xa4', 'ae').replace('\xc3\xb6', 'oe').replace('\xc3\xbc', 'ue').replace('\xc4', 'Ae').replace('\xd6', 'Oe').replace('\xdc', 'Ue').replace('\xe4', 'ae').replace('\xf6', 'oe').replace('\xfc', 'ue')
-        self.link = 'http://www.youtube.com/results?filters=video&search_query=' + name
+        self.link = 'https://www.youtube.com/results?filters=video&search_query=' + name
         self.titel = 'YouTube Trailer Suche | Seite '
         self.poster = []
         self.trailer_id = []
@@ -17678,28 +17704,28 @@ class searchYouTube(Screen):
         self['list'].moveToIndex(0)
         self.ready = True
         try:
-            poster1 = 'http://i.ytimg.com/' + self.poster[0] + 'default.jpg'
+            poster1 = 'https://i.ytimg.com/' + self.poster[0] + 'default.jpg'
             self.download(poster1, self.getPoster1)
             self['poster1'].show()
         except IndexError:
             self['poster1'].hide()
 
         try:
-            poster2 = 'http://i.ytimg.com/' + self.poster[1] + 'default.jpg'
+            poster2 = 'https://i.ytimg.com/' + self.poster[1] + 'default.jpg'
             self.download(poster2, self.getPoster2)
             self['poster2'].show()
         except IndexError:
             self['poster2'].hide()
 
         try:
-            poster3 = 'http://i.ytimg.com/' + self.poster[2] + 'default.jpg'
+            poster3 = 'https://i.ytimg.com/' + self.poster[2] + 'default.jpg'
             self.download(poster3, self.getPoster3)
             self['poster3'].show()
         except IndexError:
             self['poster3'].hide()
 
         try:
-            poster4 = 'http://i.ytimg.com/' + self.poster[3] + 'default.jpg'
+            poster4 = 'https://i.ytimg.com/' + self.poster[3] + 'default.jpg'
             self.download(poster4, self.getPoster4)
             self['poster4'].show()
         except IndexError:
@@ -17735,7 +17761,7 @@ class searchYouTube(Screen):
          '18': 4,
          '34': 6}
         trailer_url = None
-        watch_url = 'http://www.youtube.com/watch?v=%s&gl=US&hl=en' % trailer_id
+        watch_url = 'https://www.youtube.com/watch?v=%s&gl=US&hl=en' % trailer_id
         watchrequest = Request(watch_url, None, header)
         try:
             watchvideopage = urlopen(watchrequest).read()
@@ -17750,7 +17776,7 @@ class searchYouTube(Screen):
          '&el=detailpage',
          '&el=vevo',
          '']:
-            info_url = 'http://www.youtube.com/get_video_info?&video_id=%s%s&ps=default&eurl=&gl=US&hl=en' % (trailer_id, el)
+            info_url = 'https://www.youtube.com/get_video_info?&video_id=%s%s&ps=default&eurl=&gl=US&hl=en' % (trailer_id, el)
             request = Request(info_url, None, header)
             try:
                 infopage = urlopen(request).read()
@@ -17769,13 +17795,13 @@ class searchYouTube(Screen):
         else:
             video_fmt_map = {}
             fmt_infomap = {}
-            if videoinfo.has_key('url_encoded_fmt_stream_map'):
+            if 'url_encoded_fmt_stream_map' in videoinfo:
                 tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',')
             else:
                 tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
             for fmtstring in tmp_fmtUrlDATA:
                 fmturl = fmtid = ''
-                if videoinfo.has_key('url_encoded_fmt_stream_map'):
+                if 'url_encoded_fmt_stream_map' in videoinfo:
                     try:
                         for arg in fmtstring.split('&'):
                             if arg.find('=') >= 0:
@@ -17787,7 +17813,7 @@ class searchYouTube(Screen):
                                 elif key == 'url':
                                     fmturl = value
 
-                        if fmtid != '' and fmturl != '' and VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+                        if fmtid != '' and fmturl != '' and fmtid in VIDEO_FMT_PRIORITY_MAP:
                             video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid,
                              'fmturl': unquote_plus(fmturl)}
                             fmt_infomap[int(fmtid)] = '%s' % unquote_plus(fmturl)
@@ -17797,7 +17823,7 @@ class searchYouTube(Screen):
 
                 else:
                     fmtid, fmturl = fmtstring.split('|')
-                if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid) and fmtid != '':
+                if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != '':
                     video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid,
                      'fmturl': unquote_plus(fmturl)}
                     fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
@@ -17815,7 +17841,7 @@ class searchYouTube(Screen):
         if name and name != '':
             self.name = name
             name = name.replace(' ', '+').replace(':', '+').replace('_', '+').replace('\xc4', 'Ae').replace('\xd6', 'Oe').replace('\xdc', 'Ue').replace('\xe4', 'ae').replace('\xf6', 'oe').replace('\xfc', 'ue')
-            self.link = 'http://www.youtube.com/results?filters=video&search_query=' + name
+            self.link = 'https://www.youtube.com/results?filters=video&search_query=' + name
             self.count = 1
             self.poster = []
             self.trailer_id = []
@@ -17854,28 +17880,28 @@ class searchYouTube(Screen):
             self['list'].down()
             if c + 1 == len(self.trailer_id):
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[0] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[0] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
                     self['poster1'].show()
                 except IndexError:
                     self['poster1'].hide()
 
                 try:
-                    poster2 = 'http://i.ytimg.com/' + self.poster[1] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[1] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
                     self['poster2'].show()
                 except IndexError:
                     self['poster2'].hide()
 
                 try:
-                    poster3 = 'http://i.ytimg.com/' + self.poster[2] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[2] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
                     self['poster3'].show()
                 except IndexError:
                     self['poster3'].hide()
 
                 try:
-                    poster4 = 'http://i.ytimg.com/' + self.poster[3] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[3] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                     self['poster4'].show()
                 except IndexError:
@@ -17883,28 +17909,28 @@ class searchYouTube(Screen):
 
             elif c % 4 == 3:
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[c + 1] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[c + 1] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
                     self['poster1'].show()
                 except IndexError:
                     self['poster1'].hide()
 
                 try:
-                    poster2 = 'http://i.ytimg.com/' + self.poster[c + 2] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[c + 2] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
                     self['poster2'].show()
                 except IndexError:
                     self['poster2'].hide()
 
                 try:
-                    poster3 = 'http://i.ytimg.com/' + self.poster[c + 3] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[c + 3] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
                     self['poster3'].show()
                 except IndexError:
                     self['poster3'].hide()
 
                 try:
-                    poster4 = 'http://i.ytimg.com/' + self.poster[c + 4] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[c + 4] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                     self['poster4'].show()
                 except IndexError:
@@ -17924,28 +17950,28 @@ class searchYouTube(Screen):
                 if d == 0:
                     d = 4
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[l - d] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[l - d] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
                     self['poster1'].show()
                 except IndexError:
                     self['poster1'].hide()
 
                 try:
-                    poster2 = 'http://i.ytimg.com/' + self.poster[l - d + 1] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[l - d + 1] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
                     self['poster2'].show()
                 except IndexError:
                     self['poster2'].hide()
 
                 try:
-                    poster3 = 'http://i.ytimg.com/' + self.poster[l - d + 2] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[l - d + 2] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
                     self['poster3'].show()
                 except IndexError:
                     self['poster3'].hide()
 
                 try:
-                    poster4 = 'http://i.ytimg.com/' + self.poster[l - d + 3] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[l - d + 3] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                     self['poster4'].show()
                 except IndexError:
@@ -17953,28 +17979,28 @@ class searchYouTube(Screen):
 
             elif c % 4 == 0:
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[c - 4] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[c - 4] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
                     self['poster1'].show()
                 except IndexError:
                     self['poster1'].hide()
 
                 try:
-                    poster2 = 'http://i.ytimg.com/' + self.poster[c - 3] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[c - 3] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
                     self['poster2'].show()
                 except IndexError:
                     self['poster2'].hide()
 
                 try:
-                    poster3 = 'http://i.ytimg.com/' + self.poster[c - 2] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[c - 2] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
                     self['poster3'].show()
                 except IndexError:
                     self['poster3'].hide()
 
                 try:
-                    poster4 = 'http://i.ytimg.com/' + self.poster[c - 1] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[c - 1] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                     self['poster4'].show()
                 except IndexError:
@@ -17997,100 +18023,100 @@ class searchYouTube(Screen):
                 pass
             elif d == 0:
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[c + 4] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[c + 4] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
                 except IndexError:
                     self['poster1'].hide()
 
                 try:
-                    poster2 = 'http://i.ytimg.com/' + self.poster[c + 5] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[c + 5] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
                 except IndexError:
                     self['poster2'].hide()
 
                 try:
-                    poster3 = 'http://i.ytimg.com/' + self.poster[c + 6] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[c + 6] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
                 except IndexError:
                     self['poster3'].hide()
 
                 try:
-                    poster4 = 'http://i.ytimg.com/' + self.poster[c + 7] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[c + 7] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                 except IndexError:
                     self['poster4'].hide()
 
             elif d == 1:
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[c + 3] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[c + 3] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
                 except IndexError:
                     self['poster1'].hide()
 
                 try:
-                    poster2 = 'http://i.ytimg.com/' + self.poster[c + 4] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[c + 4] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
                 except IndexError:
                     self['poster2'].hide()
 
                 try:
-                    poster3 = 'http://i.ytimg.com/' + self.poster[c + 5] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[c + 5] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
                 except IndexError:
                     self['poster3'].hide()
 
                 try:
-                    poster4 = 'http://i.ytimg.com/' + self.poster[c + 6] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[c + 6] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                 except IndexError:
                     self['poster4'].hide()
 
             elif d == 2:
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[c + 2] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[c + 2] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
                 except IndexError:
                     self['poster1'].hide()
 
                 try:
-                    poster2 = 'http://i.ytimg.com/' + self.poster[c + 3] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[c + 3] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
                 except IndexError:
                     self['poster2'].hide()
 
                 try:
-                    poster3 = 'http://i.ytimg.com/' + self.poster[c + 4] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[c + 4] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
                 except IndexError:
                     self['poster3'].hide()
 
                 try:
-                    poster4 = 'http://i.ytimg.com/' + self.poster[c + 5] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[c + 5] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                 except IndexError:
                     self['poster4'].hide()
 
             elif d == 3:
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[c + 1] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[c + 1] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
                 except IndexError:
                     self['poster1'].hide()
 
                 try:
-                    poster2 = 'http://i.ytimg.com/' + self.poster[c + 2] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[c + 2] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
                 except IndexError:
                     self['poster2'].hide()
 
                 try:
-                    poster3 = 'http://i.ytimg.com/' + self.poster[c + 3] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[c + 3] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
                 except IndexError:
                     self['poster3'].hide()
 
                 try:
-                    poster4 = 'http://i.ytimg.com/' + self.poster[c + 4] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[c + 4] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                 except IndexError:
                     self['poster4'].hide()
@@ -18108,52 +18134,52 @@ class searchYouTube(Screen):
                 pass
             elif d == 0:
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[c - 4] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[c - 4] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
-                    poster2 = 'http://i.ytimg.com/' + self.poster[c - 3] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[c - 3] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
-                    poster3 = 'http://i.ytimg.com/' + self.poster[c - 2] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[c - 2] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
-                    poster4 = 'http://i.ytimg.com/' + self.poster[c - 1] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[c - 1] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                 except IndexError:
                     pass
 
             elif d == 1:
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[c - 5] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[c - 5] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
-                    poster2 = 'http://i.ytimg.com/' + self.poster[c - 4] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[c - 4] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
-                    poster3 = 'http://i.ytimg.com/' + self.poster[c - 3] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[c - 3] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
-                    poster4 = 'http://i.ytimg.com/' + self.poster[c - 2] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[c - 2] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                 except IndexError:
                     pass
 
             elif d == 2:
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[c - 6] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[c - 6] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
-                    poster2 = 'http://i.ytimg.com/' + self.poster[c - 5] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[c - 5] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
-                    poster3 = 'http://i.ytimg.com/' + self.poster[c - 4] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[c - 4] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
-                    poster4 = 'http://i.ytimg.com/' + self.poster[c - 3] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[c - 3] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                 except IndexError:
                     pass
 
             elif d == 3:
                 try:
-                    poster1 = 'http://i.ytimg.com/' + self.poster[c - 7] + 'default.jpg'
+                    poster1 = 'https://i.ytimg.com/' + self.poster[c - 7] + 'default.jpg'
                     self.download(poster1, self.getPoster1)
-                    poster2 = 'http://i.ytimg.com/' + self.poster[c - 6] + 'default.jpg'
+                    poster2 = 'https://i.ytimg.com/' + self.poster[c - 6] + 'default.jpg'
                     self.download(poster2, self.getPoster2)
-                    poster3 = 'http://i.ytimg.com/' + self.poster[c - 5] + 'default.jpg'
+                    poster3 = 'https://i.ytimg.com/' + self.poster[c - 5] + 'default.jpg'
                     self.download(poster3, self.getPoster3)
-                    poster4 = 'http://i.ytimg.com/' + self.poster[c - 4] + 'default.jpg'
+                    poster4 = 'https://i.ytimg.com/' + self.poster[c - 4] + 'default.jpg'
                     self.download(poster4, self.getPoster4)
                 except IndexError:
                     pass
@@ -18220,13 +18246,13 @@ class searchYouTube(Screen):
         return
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
 
     def downloadFullPage(self, link, name):
-        downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadPageError)
+        downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
         try:
@@ -18301,17 +18327,17 @@ class infoScreenTVSpielfilm(Screen):
         if self.check == True:
             self.setTitle('TV Spielfilm %s' % self.version)
             if self.plugin is None:
-                self.link = 'http://sites.google.com/site/kashmirplugins/home/tv-spielfilm'
+                self.link = 'https://sites.google.com/site/kashmirplugins/home/tv-spielfilm'
                 self.makeVersionTimer = eTimer()
                 self.makeVersionTimer.callback.append(self.download(self.link, self.checkVersion))
                 self.makeVersionTimer.start(500, True)
             elif self.plugin == 'wiki':
-                self.link = 'http://sites.google.com/site/kashmirplugins/home/wikipedia'
+                self.link = 'https://sites.google.com/site/kashmirplugins/home/wikipedia'
                 self.getPluginTimer = eTimer()
                 self.getPluginTimer.callback.append(self.download(self.link, self.getPlugin))
                 self.getPluginTimer.start(500, True)
             elif self.plugin == 'translator':
-                self.link = 'http://sites.google.com/site/kashmirplugins/home/translator'
+                self.link = 'https://sites.google.com/site/kashmirplugins/home/translator'
                 self.getPluginTimer = eTimer()
                 self.getPluginTimer.callback.append(self.download(self.link, self.getPlugin))
                 self.getPluginTimer.start(500, True)
@@ -18368,7 +18394,7 @@ class infoScreenTVSpielfilm(Screen):
             self.session.openWithCallback(self.close, DownloadUpdate, self.pluginsource, self.pluginfile, self.pluginname)
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         pass
@@ -18413,7 +18439,7 @@ class DownloadUpdate(Screen):
 
     def onLayoutFinished(self):
         self.getFileSize()
-        downloadPage(self.url, self.file).addCallback(self.installPlugin)
+        downloadPage(six.ensure_binary(self.url), self.file).addCallback(self.installPlugin)
 
     def installPlugin(self, string):
         self.install = True
@@ -18655,7 +18681,7 @@ class tvMain(Screen):
                 self.TagesTipps.show()
         if config.plugins.tvspielfilm.autoupdate.value == 'yes':
             self.version = '6.6rc4'
-            self.link = 'http://sites.google.com/site/kashmirplugins/home/tv-spielfilm'
+            self.link = 'https://sites.google.com/site/kashmirplugins/home/tv-spielfilm'
             self.makeVersionTimer = eTimer()
             self.makeVersionTimer.callback.append(self.downloadVersion(self.link, self.checkVersion))
             self.makeVersionTimer.start(2500, True)
@@ -18663,7 +18689,7 @@ class tvMain(Screen):
             self.MeinTVS = True
             self.error = False
             self.loginerror = False
-            self.baseurl = 'http://my.tvspielfilm.de'
+            self.baseurl = 'https://my.tvspielfilm.de'
             self.login = config.plugins.tvspielfilm.login.value
             self.password = config.plugins.tvspielfilm.password.value
             if config.plugins.tvspielfilm.encrypt.value == 'yes':
@@ -18675,10 +18701,10 @@ class tvMain(Screen):
                     configfile.save()
 
             self.cookiefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/cookie'
-            self.cookie = cookielib.MozillaCookieJar(self.cookiefile)
+            self.cookie = MozillaCookieJar(self.cookiefile)
             if fileExists(self.cookiefile):
                 self.cookie.load()
-            self.opener = urllib2.build_opener(urllib2.HTTPRedirectHandler(), urllib2.HTTPHandler(debuglevel=0), urllib2.HTTPCookieProcessor(self.cookie))
+            self.opener = build_opener(HTTPRedirectHandler(), HTTPHandler(debuglevel=0), HTTPCookieProcessor(self.cookie))
             self.opener.addheaders = [('Host', 'member.tvspielfilm.de'),
              ('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0'),
              ('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'),
@@ -18688,7 +18714,7 @@ class tvMain(Screen):
         else:
             self.MeinTVS = False
             self.opener = False
-            self.baseurl = 'http://www.tvspielfilm.de'
+            self.baseurl = 'https://www.tvspielfilm.de'
             self.AnzTimer = eTimer()
             self.AnzTimer.callback.append(self.makeTimerDB)
             self.AnzTimer.callback.append(self.checkMainMenu)
@@ -18896,19 +18922,19 @@ class tvMain(Screen):
             res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
         res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-Tipps'))
         self.mainmenulist.append(res)
-        self.mainmenulink.append('http://www.tvspielfilm.de/tv-tipps/')
+        self.mainmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
         res = ['']
         if self.backcolor == True:
             res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
         res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Neu im TV'))
         self.mainmenulist.append(res)
-        self.mainmenulink.append('http://www.tvspielfilm.de/tv-tipps//')
+        self.mainmenulink.append('https://www.tvspielfilm.de/tv-tipps//')
         res = ['']
         if self.backcolor == True:
             res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
         res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-Genre'))
         self.mainmenulist.append(res)
-        self.mainmenulink.append('http://www.tvspielfilm.de/tv-genre/')
+        self.mainmenulink.append('https://www.tvspielfilm.de/tv-genre/')
         res = ['']
         if self.backcolor == True:
             res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
@@ -18938,25 +18964,25 @@ class tvMain(Screen):
             res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
         res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-Trailer'))
         self.mainmenulist.append(res)
-        self.mainmenulink.append('http://www.tvspielfilm.de/kino/trailer-und-clips/')
+        self.mainmenulink.append('https://www.tvspielfilm.de/kino/trailer-und-clips/')
         res = ['']
         if self.backcolor == True:
             res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
         res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-Bilder'))
         self.mainmenulist.append(res)
-        self.mainmenulink.append('http://www.tvspielfilm.de/bilder/')
+        self.mainmenulink.append('https://www.tvspielfilm.de/bilder/')
         res = ['']
         if self.backcolor == True:
             res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
         res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-News'))
         self.mainmenulist.append(res)
-        self.mainmenulink.append('http://www.tvspielfilm.de/news-und-specials/')
+        self.mainmenulink.append('https://www.tvspielfilm.de/news-und-specials/')
         res = ['']
         if self.backcolor == True:
             res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
         res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-Blog'))
         self.mainmenulist.append(res)
-        self.mainmenulink.append('http://blog.tvspielfilm.de/page/1/')
+        self.mainmenulink.append('https://blog.tvspielfilm.de/page/1/')
         self['mainmenu'].l.setList(self.mainmenulist)
         self['mainmenu'].l.setItemHeight(30)
         self.selectMainMenu()
@@ -19137,42 +19163,42 @@ class tvMain(Screen):
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Spielfilm'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-tipps/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
             self.sparte.append('Spielfilm')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Serie'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-tipps/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
             self.sparte.append('Serie')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Report'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-tipps/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
             self.sparte.append('Report')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Unterhaltung'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-tipps/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
             self.sparte.append('Unterhaltung')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kinder'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-tipps/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
             self.sparte.append('Kinder')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Sport'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-tipps/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
             self.sparte.append('Sport')
             self['secondmenu'].l.setList(self.secondmenulist)
             self['secondmenu'].l.setItemHeight(30)
@@ -19184,42 +19210,42 @@ class tvMain(Screen):
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Spielfilm'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-genre/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
             self.sparte.append('Spielfilm')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Serie'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-genre/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
             self.sparte.append('Serie')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Report'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-genre/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
             self.sparte.append('Report')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Unterhaltung'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-genre/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
             self.sparte.append('Unterhaltung')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kinder'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-genre/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
             self.sparte.append('Kinder')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Sport'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tv-genre/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
             self.sparte.append('Sport')
             self['secondmenu'].l.setList(self.secondmenulist)
             self['secondmenu'].l.setItemHeight(30)
@@ -19231,35 +19257,35 @@ class tvMain(Screen):
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kino Neustarts'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/kino/trailer-und-clips/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/kino/trailer-und-clips/')
             self.sparte.append('Kino Neustarts')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kino Vorschau'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/kino/kino-vorschau/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/kino/kino-vorschau/')
             self.sparte.append('Kino Vorschau')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Neueste Trailer'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/kino/trailer-und-clips/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/kino/trailer-und-clips/')
             self.sparte.append('Neueste Trailer')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kino Charts'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/kino/charts/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/kino/charts/')
             self.sparte.append('Kino Charts')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='DVD Charts'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/kino/dvd/charts/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/kino/dvd/charts/')
             self.sparte.append('DVD Charts')
             self['secondmenu'].l.setList(self.secondmenulist)
             self['secondmenu'].l.setItemHeight(30)
@@ -19271,25 +19297,25 @@ class tvMain(Screen):
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Interviews & Stories'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/news-und-specials/interviewsundstories/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/news-und-specials/interviewsundstories/')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Tatort'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/tatort/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/tatort/')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kids TV'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/kids-tv/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/kids-tv/')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Playboy Girl'))
             self.secondmenulist.append(res)
-            self.secondmenulink.append('http://www.tvspielfilm.de/news-und-specials/playboy/')
+            self.secondmenulink.append('https://www.tvspielfilm.de/news-und-specials/playboy/')
             self['secondmenu'].l.setList(self.secondmenulist)
             self['secondmenu'].l.setItemHeight(30)
             self['secondmenu'].moveToIndex(0)
@@ -19750,196 +19776,196 @@ class tvMain(Screen):
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=&time=day&date=&channel=')
             self.genre.append('Spielfilm: Alle Genres')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Abenteuer'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Abenteuer&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Abenteuer&time=day&date=&channel=')
             self.genre.append('Spielfilm: Abenteuer')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Action'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Action&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Action&time=day&date=&channel=')
             self.genre.append('Spielfilm: Action')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Dokumentation'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Dokumentation&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Dokumentation&time=day&date=&channel=')
             self.genre.append('Spielfilm: Dokumentation')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Drama'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Drama&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Drama&time=day&date=&channel=')
             self.genre.append('Spielfilm: Drama')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Episodenfilm'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Episodenfilm&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Episodenfilm&time=day&date=&channel=')
             self.genre.append('Spielfilm: Episodenfilm')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Erotik'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Erotik&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Erotik&time=day&date=&channel=')
             self.genre.append('Spielfilm: Erotik')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Familie/Kinder'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Familie%2FKinder&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Familie%2FKinder&time=day&date=&channel=')
             self.genre.append('Spielfilm: Familie/Kinder')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Fantasy'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Fantasy&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Fantasy&time=day&date=&channel=')
             self.genre.append('Spielfilm: Fantasy')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Filmkunst'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Filmkunst&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Filmkunst&time=day&date=&channel=')
             self.genre.append('Spielfilm: Filmkunst')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Heimat'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Heimat&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Heimat&time=day&date=&channel=')
             self.genre.append('Spielfilm: Heimat')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Historie'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Historie&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Historie&time=day&date=&channel=')
             self.genre.append('Spielfilm: Historie')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Horror'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Horror&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Horror&time=day&date=&channel=')
             self.genre.append('Spielfilm: Horror')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Katastrophenfilm'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Katastrophenfilm&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Katastrophenfilm&time=day&date=&channel=')
             self.genre.append('Spielfilm: Katastrophenfilm')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Klassiker'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Klassiker&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Klassiker&time=day&date=&channel=')
             self.genre.append('Spielfilm: Klassiker')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kom\xc3\xb6die'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Kom%C3%B6die&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Kom%C3%B6die&time=day&date=&channel=')
             self.genre.append('Spielfilm: Kom\xc3\xb6die')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kriegsfilm'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Kriegsfilm&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Kriegsfilm&time=day&date=&channel=')
             self.genre.append('Spielfilm: Kriegsfilm')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Krimi'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Krimi&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Krimi&time=day&date=&channel=')
             self.genre.append('Spielfilm: Krimi')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Literatur/Theater'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Literatur%2FTheater&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Literatur%2FTheater&time=day&date=&channel=')
             self.genre.append('Spielfilm: Literatur/Theater')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Love Story'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Love+Story&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Love+Story&time=day&date=&channel=')
             self.genre.append('Spielfilm: Love Story')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='M\xc3\xa4rchen'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=M%C3%A4rchen&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=M%C3%A4rchen&time=day&date=&channel=')
             self.genre.append('Spielfilm: M\xc3\xa4rchen')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Musikfilm'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Musikfilm&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Musikfilm&time=day&date=&channel=')
             self.genre.append('Spielfilm: Musikfilm')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Portr\xc3\xa4t'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Portr%C3%A4t&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Portr%C3%A4t&time=day&date=&channel=')
             self.genre.append('Spielfilm: Portr\xc3\xa4t')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Road Movie'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Road+Movie&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Road+Movie&time=day&date=&channel=')
             self.genre.append('Spielfilm: Road Movie')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='SciFi'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=SciFi&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=SciFi&time=day&date=&channel=')
             self.genre.append('Spielfilm: SciFi')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Thriller'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Thriller&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Thriller&time=day&date=&channel=')
             self.genre.append('Spielfilm: Thriller')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Trickfilm'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Trickfilm&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Trickfilm&time=day&date=&channel=')
             self.genre.append('Spielfilm: Trickfilm')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Western'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Western&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Western&time=day&date=&channel=')
             self.genre.append('Spielfilm: Western')
             self['thirdmenu'].l.setList(self.thirdmenulist)
             self['thirdmenu'].l.setItemHeight(30)
@@ -19951,91 +19977,91 @@ class tvMain(Screen):
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=&time=day&date=&channel=')
             self.genre.append('Serie: Alle Genres')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Action'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Action&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Action&time=day&date=&channel=')
             self.genre.append('Serie: Action')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Arzt'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Arzt&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Arzt&time=day&date=&channel=')
             self.genre.append('Serie: Arzt')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Comedy'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Comedy&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Comedy&time=day&date=&channel=')
             self.genre.append('Serie: Comedy')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Daily Soap'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Daily+Soap&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Daily+Soap&time=day&date=&channel=')
             self.genre.append('Serie: Daily Soap')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Dokuserie'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Dokuserie&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Dokuserie&time=day&date=&channel=')
             self.genre.append('Serie: Dokuserie')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Familienserie'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Familienserie&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Familienserie&time=day&date=&channel=')
             self.genre.append('Serie: Familienserie')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Horror'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Horror&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Horror&time=day&date=&channel=')
             self.genre.append('Serie: Horror')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kinder-/Jugend'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Kinder-%2FJugend&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Kinder-%2FJugend&time=day&date=&channel=')
             self.genre.append('Serie: Kinder-/Jugend')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Krimi'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Krimi&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Krimi&time=day&date=&channel=')
             self.genre.append('Serie: Krimi')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Science Fiction'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Science+Fiction&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Science+Fiction&time=day&date=&channel=')
             self.genre.append('Serie: Science Fiction')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Soap'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Soap&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Soap&time=day&date=&channel=')
             self.genre.append('Serie: Soap')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Western'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Western&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Western&time=day&date=&channel=')
             self.genre.append('Serie: Western')
             self['thirdmenu'].l.setList(self.thirdmenulist)
             self['thirdmenu'].l.setItemHeight(30)
@@ -20047,70 +20073,70 @@ class tvMain(Screen):
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=&time=day&date=&channel=')
             self.genre.append('Report: Alle Genres')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Dokumentation'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Dokumentation&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Dokumentation&time=day&date=&channel=')
             self.genre.append('Report: Dokumentation')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Gesellschaft'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Gesellschaft&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Gesellschaft&time=day&date=&channel=')
             self.genre.append('Report: Gesellschaft')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Justiz'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Justiz&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Justiz&time=day&date=&channel=')
             self.genre.append('Report: Justiz')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Magazin'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Magazin&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Magazin&time=day&date=&channel=')
             self.genre.append('Report: Magazin')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Natur'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Natur&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Natur&time=day&date=&channel=')
             self.genre.append('Report: Natur')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Politik'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Politik&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Politik&time=day&date=&channel=')
             self.genre.append('Report: Politik')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Ratgeber'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Ratgeber&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Ratgeber&time=day&date=&channel=')
             self.genre.append('Report: Ratgeber')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Technik'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Technik&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Technik&time=day&date=&channel=')
             self.genre.append('Report: Technik')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Wissenschaft'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Wissenschaft&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Wissenschaft&time=day&date=&channel=')
             self.genre.append('Report: Wissenschaft')
             self['thirdmenu'].l.setList(self.thirdmenulist)
             self['thirdmenu'].l.setItemHeight(30)
@@ -20122,63 +20148,63 @@ class tvMain(Screen):
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=&time=day&date=&channel=')
             self.genre.append('Unterhaltung: Alle Genres')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Comedy'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Comedy&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Comedy&time=day&date=&channel=')
             self.genre.append('Unterhaltung: Comedy')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Familie'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Familie&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Familie&time=day&date=&channel=')
             self.genre.append('Unterhaltung: Familie')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kultur'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Kultur&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Kultur&time=day&date=&channel=')
             self.genre.append('Unterhaltung: Kultur')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Late Night'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Late+Night&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Late+Night&time=day&date=&channel=')
             self.genre.append('Unterhaltung: Late Night')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Musik'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Musik&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Musik&time=day&date=&channel=')
             self.genre.append('Unterhaltung: Musik')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Quiz'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Quiz&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Quiz&time=day&date=&channel=')
             self.genre.append('Unterhaltung: Quiz')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Show'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Show&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Show&time=day&date=&channel=')
             self.genre.append('Unterhaltung: Show')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Talk'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Talk&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Talk&time=day&date=&channel=')
             self.genre.append('Unterhaltung: Talk')
             self['thirdmenu'].l.setList(self.thirdmenulist)
             self['thirdmenu'].l.setItemHeight(30)
@@ -20190,42 +20216,42 @@ class tvMain(Screen):
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=&time=day&date=&channel=')
             self.genre.append('Kinder: Alle Genres')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Bildung'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Bildung&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Bildung&time=day&date=&channel=')
             self.genre.append('Kinder: Bildung')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Magazin'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Magazin&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Magazin&time=day&date=&channel=')
             self.genre.append('Kinder: Magazin')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Reportage'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Reportage&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Reportage&time=day&date=&channel=')
             self.genre.append('Kinder: Reportage')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Serie'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Serie&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Serie&time=day&date=&channel=')
             self.genre.append('Kinder: Serie')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Show'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Show&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Show&time=day&date=&channel=')
             self.genre.append('Kinder: Show')
             self['thirdmenu'].l.setList(self.thirdmenulist)
             self['thirdmenu'].l.setItemHeight(30)
@@ -20237,126 +20263,126 @@ class tvMain(Screen):
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=&time=day&date=&channel=')
             self.genre.append('Sport: Alle Genres')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Basketball'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Basketball&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Basketball&time=day&date=&channel=')
             self.genre.append('Sport: Basketball')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Billard'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Billard&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Billard&time=day&date=&channel=')
             self.genre.append('Sport: Billard')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Boxen'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Boxen&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Boxen&time=day&date=&channel=')
             self.genre.append('Sport: Boxen')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Formel 1'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Formel+1&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Formel+1&time=day&date=&channel=')
             self.genre.append('Sport: Formel 1')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Funsport'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Funsport&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Funsport&time=day&date=&channel=')
             self.genre.append('Sport: Funsport')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Fu\xc3\x9fball'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Fu%C3%9Fball&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Fu%C3%9Fball&time=day&date=&channel=')
             self.genre.append('Sport: Fu\xc3\x9fball')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Golf'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Golf&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Golf&time=day&date=&channel=')
             self.genre.append('Sport: Golf')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Handball'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Handball&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Handball&time=day&date=&channel=')
             self.genre.append('Sport: Handball')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kampfsport'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Kampfsport&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Kampfsport&time=day&date=&channel=')
             self.genre.append('Sport: Kampfsport')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Leichtathletik'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Leichtathletik&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Leichtathletik&time=day&date=&channel=')
             self.genre.append('Sport: Leichtathletik')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Motorsport'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Motorsport&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Motorsport&time=day&date=&channel=')
             self.genre.append('Sport: Motorsport')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Poker'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Poker&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Poker&time=day&date=&channel=')
             self.genre.append('Sport: Poker')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Radsport'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Radsport&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Radsport&time=day&date=&channel=')
             self.genre.append('Sport: Radsport')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Tennis'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Tennis&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Tennis&time=day&date=&channel=')
             self.genre.append('Sport: Tennis')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='US Sport'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=US+Sport&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=US+Sport&time=day&date=&channel=')
             self.genre.append('Sport: US Sport')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Wassersport'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Wassersport&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Wassersport&time=day&date=&channel=')
             self.genre.append('Sport: Wassersport')
             res = ['']
             if self.backcolor == True:
                 res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
             res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Wintersport'))
             self.thirdmenulist.append(res)
-            self.thirdmenulink.append('http://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Wintersport&time=day&date=&channel=')
+            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Wintersport&time=day&date=&channel=')
             self.genre.append('Sport: Wintersport')
             self['thirdmenu'].l.setList(self.thirdmenulist)
             self['thirdmenu'].l.setItemHeight(30)
@@ -20493,7 +20519,7 @@ class tvMain(Screen):
             self.session.openWithCallback(self.close, DownloadUpdate, self.pluginsource, self.pluginfile, self.pluginname)
 
     def downloadVersion(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadVersionError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadVersionError)
 
     def downloadVersionError(self, output):
         self.ready = True
@@ -20539,7 +20565,7 @@ class tvMain(Screen):
                 self.makeErrorTimer.callback.append(self.displayError)
                 self.makeErrorTimer.start(500, True)
         else:
-            downloadPage(link, self.senderhtml).addCallback(self.makeSecondMenu, link).addErrback(self.downloadError)
+            downloadPage(six.ensure_binary(link), self.senderhtml).addCallback(self.makeSecondMenu, link).addErrback(self.downloadError)
 
     def getIndex(self, list):
         return list.getSelectedIndex()
@@ -20809,7 +20835,8 @@ class makeServiceFile(Screen):
                     eventlist.append((eventinfo[8], eventinfo[7]))
 
             data = str(eventlist)
-            data = data.decode('latin1').encode('utf-8')
+            if six.PY2:
+                data = data.decode('latin1').encode('utf-8')
             data = sub('[[]', '', data)
             data = sub('[)][]]', '', data)
             data = sub('[(]', '', data)
@@ -20914,7 +20941,7 @@ class tvTipps(Screen):
          'color': color}
         self.skin = applySkinVars(tvTipps.skin, self.dict)
         Screen.__init__(self, session)
-        self.baseurl = 'http://www.tvspielfilm.de'
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.pic1 = '/tmp/tvspielfilm1.jpg'
         self.pic2 = '/tmp/tvspielfilm2.jpg'
         self.pic3 = '/tmp/tvspielfilm3.jpg'
@@ -20970,15 +20997,16 @@ class tvTipps(Screen):
 
     def getTagesTipps(self, output):
         self.ready = False
-        startpos = find(output, 'teaser-top">')
-        endpos = find(output, '<div class="block-rotation">')
+        output = six.ensure_str(output)
+        startpos = output.find('teaser-top">')
+        endpos = output.find('<div class="block-rotation">')
         bereich = output[startpos:endpos]
         bereich = re.sub('<ul.*?</ul>', '', bereich, flags=re.S)
         if search('/news-und-specials/', bereich) is not None:
-            bereich = re.sub('<a href="http://my.tvspielfilm.de/news-und-specials/.*?</a>', '', bereich, flags=re.S)
-            bereich = re.sub('<a href="http://www.tvspielfilm.de/news-und-specials/.*?</a>', '', bereich, flags=re.S)
+            bereich = re.sub('<a href="https://my.tvspielfilm.de/news-und-specials/.*?</a>', '', bereich, flags=re.S)
+            bereich = re.sub('<a href="https://www.tvspielfilm.de/news-und-specials/.*?</a>', '', bereich, flags=re.S)
         if search('pdf.tvspielfilm.de', bereich) is not None:
-            bereich = re.sub('<a href="http://pdf.tvspielfilm.de/.*?</a>', '', bereich, flags=re.S)
+            bereich = re.sub('<a href="https://pdf.tvspielfilm.de/.*?</a>', '', bereich, flags=re.S)
         self.tippspicture = re.findall('<img src="(.*?)"', bereich, flags=re.S)
         try:
             self.download(self.tippspicture[0], self.getPic)
@@ -21141,20 +21169,20 @@ class tvTipps(Screen):
         f.close()
 
     def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
         self.ready = True
 
     def downloadFirst(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadFirstError)
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadFirstError)
 
     def downloadFirstError(self, output):
         try:
             error = output.getErrorMessage()
             self.session.open(MessageBox, 'Der TV Spielfilm Server ist zurzeit nicht erreichbar:\n%s' % error, MessageBox.TYPE_ERROR)
         except AttributeError:
-            self.session.open(MessageBox, 'Der TV Spielfilm Server ist zurzeit nicht erreichbar.' % error, MessageBox.TYPE_ERROR)
+            self.session.open(MessageBox, 'Der TV Spielfilm Server ist zurzeit nicht erreichbar.', MessageBox.TYPE_ERROR)
 
         self.ready = True
 
@@ -21464,14 +21492,14 @@ class tvJetzt(Screen):
 
     def makeCheck(self):
         if fileExists(self.servicefile):
-            link = 'http://www.tvspielfilm.de/tv-programm/sendungen/abends.html'
+            link = 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html'
             self.session.openWithCallback(self.exit, TVJetztView, link, True)
         else:
             self.session.openWithCallback(self.returnServiceFile, makeServiceFile)
 
     def returnServiceFile(self, result):
         if result == True:
-            link = 'http://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
+            link = 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
             self.session.openWithCallback(self.exit, TVJetztView, link, True)
         else:
             if self.fhd == True:
@@ -21567,7 +21595,7 @@ class tvEvent(Screen):
 
                 self.close()
             else:
-                link = 'http://www.tvspielfilm.de/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
+                link = 'https://www.tvspielfilm.de/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
                 self.session.openWithCallback(self.exit, TVProgrammView, link, True, False)
         else:
             self.session.openWithCallback(self.returnServiceFile, makeServiceFile)
