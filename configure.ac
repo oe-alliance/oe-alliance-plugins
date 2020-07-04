@@ -137,12 +137,14 @@ AM_CONDITIONAL(GBX1, test "$BOXTYPE" == "gbx1")
 AM_CONDITIONAL(GBX2, test "$BOXTYPE" == "gbx2")
 AM_CONDITIONAL(GBX3, test "$BOXTYPE" == "gbx3")
 AM_CONDITIONAL(GBX3H, test "$BOXTYPE" == "gbx3h")
+AM_CONDITIONAL(GBX34K, test "$BOXTYPE" == "gbx34k")
 AM_CONDITIONAL(GB7356, test "$BOXTYPE" == "gb7356")
 AM_CONDITIONAL(GB7362, test "$BOXTYPE" == "gb7362")
 AM_CONDITIONAL(GB73625, test "$BOXTYPE" == "gb73625")
 AM_CONDITIONAL(GB7358, test "$BOXTYPE" == "gb7358")
 AM_CONDITIONAL(GB7325, test "$BOXTYPE" == "gb7325")
 AM_CONDITIONAL(GB7252, test "$BOXTYPE" == "gb7252")
+AM_CONDITIONAL(GB72604, test "$BOXTYPE" == "gb72604")
 AM_CONDITIONAL(INIHDE, test "$BOXTYPE" == "inihde")
 AM_CONDITIONAL(INIHDE2, test `echo "$BOXTYPE" | cut -b 1-7` == inihde2)
 AM_CONDITIONAL(INIHDP, test "$BOXTYPE" == "inihdp")
@@ -294,6 +296,16 @@ FPGAUpgrade/Makefile
 FPGAUpgrade/src/Makefile
 FPGAUpgrade/meta/Makefile
 FPGAUpgrade/po/Makefile
+
+GigaBlueBluetoothSetup/Makefile
+GigaBlueBluetoothSetup/src/Makefile
+GigaBlueBluetoothSetup/meta/Makefile
+GigaBlueBluetoothSetup/po/Makefile
+
+GigaBlueChromium/Makefile
+GigaBlueChromium/src/Makefile
+GigaBlueChromium/meta/Makefile
+GigaBlueChromium/po/Makefile
 
 GigaBlueRemote/Makefile
 GigaBlueRemote/src/Makefile
