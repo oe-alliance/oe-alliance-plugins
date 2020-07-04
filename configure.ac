@@ -382,6 +382,11 @@ OnDemand/src/icons/Makefile
 OnDemand/meta/Makefile
 OnDemand/po/Makefile
 
+PiconsUpdater/Makefile
+PiconsUpdater/src/Makefile
+PiconsUpdater/meta/Makefile
+PiconsUpdater/po/Makefile
+
 RemoteChannelStreamConverter/Makefile
 RemoteChannelStreamConverter/src/Makefile
 RemoteChannelStreamConverter/po/Makefile
