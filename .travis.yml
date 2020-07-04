@@ -1,26 +1,54 @@
 language: python
 
 sudo: required
-dist: trusty
+dist: bionic
 
-addons:
-  apt:
-    packages:
-    - git
-    - build-essential
-    - automake
-    - libtool
-    - python-dev
-    - gettext
-    - swig
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+            - build-essential
+            - automake
+            - git
+            - libtool
+            - python-dev
+            - gettext
+            - swig
+      env:
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 
-python:
-  - "2.7"
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+            - build-essential
+            - automake
+            - git
+            - libtool
+            - python3.8-dev
+            - gettext
+            - swig
+      env:
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8 && PYTHON=3.8"
+      before_install:
+        - pyenv global 3.8
+        - pip3 install --upgrade pip tox six
 
 git:
   depth: 1
 
+before_install:
+  - pip install --upgrade pip tox six
+  - eval "${MATRIX_EVAL}"
+
 script:
-- echo compiling oe-alliance plugins
 - python -m compileall .
-- echo done!
+
