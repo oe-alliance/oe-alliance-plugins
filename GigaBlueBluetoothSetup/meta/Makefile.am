@@ -1,3 +1,3 @@
 installdir = $(datadir)/meta
 
-dist_install_DATA = plugin_gigabluebluetoothsetup.xml
+dist_install_DATA = plugin_bluetoothsetup.xml

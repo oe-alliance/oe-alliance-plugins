@@ -1,4 +1,4 @@
-installdir = $(libdir)/enigma2/python/Plugins/SystemPlugins/BluetoothSetup
+installdir = $(libdir)/enigma2/python/Plugins/SystemPlugins/gigabluebluetoothsetup
 
 install_PYTHON = *.py
 
