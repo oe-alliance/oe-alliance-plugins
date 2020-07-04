@@ -1,0 +1,11 @@
+#!/bin/sh
+FILE=/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/TV_Spielfilm.png
+FILE2=/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/TV_Spielfilm_Jetzt.png
+FILE3=/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/TV_Spielfilm_EventView.png
+DIR=/usr/lib/enigma2/python/Plugins/Extensions/navibar/icons
+if [ -d "$DIR" ]; then
+		mv -n "$FILE" "$DIR"
+		mv -n "$FILE2" "$DIR"
+		mv -n "$FILE3" "$DIR"
+fi
+echo "TV Spielfilm successfully installed!"
