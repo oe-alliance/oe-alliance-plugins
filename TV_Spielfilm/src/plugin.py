@@ -54,11 +54,11 @@ except Exception:
 
 config.plugins.tvspielfilm = ConfigSubsection()
 deskWidth = getDesktop(0).size().width()
-if deskWidth >= 1920:
-    config.plugins.tvspielfilm.plugin_size = ConfigSelection(default='full', choices=[('full', '1920x1080'), ('normal', '1024x576')])
+if deskWidth >= 1280:
+    config.plugins.tvspielfilm.plugin_size = ConfigSelection(default='full', choices=[('full', '1280x720'), ('normal', '1024x576')])
     config.plugins.tvspielfilm.position = ConfigInteger(60, (0, 80))
 else:
-    config.plugins.tvspielfilm.plugin_size = ConfigSelection(default='normal', choices=[('full', '1920x1080'), ('normal', '1024x576')])
+    config.plugins.tvspielfilm.plugin_size = ConfigSelection(default='normal', choices=[('full', '1280x720'), ('normal', '1024x576')])
     config.plugins.tvspielfilm.position = ConfigInteger(40, (0, 160))
 config.plugins.tvspielfilm.font_size = ConfigSelection(default='large', choices=[('verylarge', 'Sehr gro\xc3\x9f'), ('large', 'Gro\xc3\x9f'), ('normal', 'Normal')])
 config.plugins.tvspielfilm.font = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
@@ -129,10 +129,9 @@ class tvBase():
         else:
             return 'Regular'
 
-
 class TVTippsView(tvBase, Screen):
-    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV-Tipps - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="' + TVSPNG +  '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="880,450" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="890,60" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="890,135" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="890,210" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="890,285" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="890,360" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="890,435" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1200,620" title="TV-Tipps - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="1100,620" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV-Tipps - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilm.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="880,450" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="890,60" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="890,135" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="890,210" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="890,285" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="890,360" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="890,435" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV-Tipps - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="1085,540" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
 
     def __init__(self, session, link, sparte):
         tvBase.__init__(self)
@@ -156,7 +155,7 @@ class TVTippsView(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
@@ -418,7 +417,7 @@ class TVTippsView(tvBase, Screen):
                 start = x
                 if self.picon == True:
                     if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(120, 30), size=(75, 30), font=-1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))#Zeit
+                        res.append(MultiContentEntryText(pos=(115, 18), size=(75, 25), font=-1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                     else:
                         res.append(MultiContentEntryText(pos=(112, 13), size=(63, 23), font=0, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                 elif self.xd == False:
@@ -460,7 +459,7 @@ class TVTippsView(tvBase, Screen):
                 titelfilter = x
                 if self.picon == True:
                     if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(220, 17), size=(732, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))#Name Spielfilm
+                        res.append(MultiContentEntryText(pos=(203, 17), size=(732, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                     else:
                         res.append(MultiContentEntryText(pos=(186, 12), size=(572, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                 elif self.xd == False:
@@ -471,7 +470,7 @@ class TVTippsView(tvBase, Screen):
                 x = sub('GENRE', '', x)
                 if self.picon == True:
                     if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(220, 48), size=(732, 30), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))#Beschreibung und Jahr
+                        res.append(MultiContentEntryText(pos=(203, 48), size=(732, 30), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                     else:
                         res.append(MultiContentEntryText(pos=(186, 39), size=(572, 30), font=0, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                 elif self.xd == False:
@@ -494,7 +493,7 @@ class TVTippsView(tvBase, Screen):
                 if self.picon == True:
                     picon = self.findPicon(sref)
                     if picon is not None:
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 18), size=(100, 60), png=LoadPixmap(picon)))###picon
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
                     else:
                         res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
                 elif self.xd == False:
@@ -3069,8 +3068,8 @@ class TVTippsView(tvBase, Screen):
 
 
 class TVNeuView(tvBase, Screen):
-    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV Neuerscheinungen - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="880,450" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="890,60" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="890,135" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="890,210" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="890,285" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="890,360" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="890,435" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV Neuerscheinungen - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="1085,540" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV Neuerscheinungen - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilm.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="880,450" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="890,60" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="890,135" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="890,210" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="890,285" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="890,360" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="890,435" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV Neuerscheinungen - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="1085,540" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
 
     def __init__(self, session, link):
         tvBase.__init__(self)
@@ -3094,7 +3093,7 @@ class TVNeuView(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
@@ -3325,9 +3324,9 @@ class TVNeuView(tvBase, Screen):
                 self.new = False
                 if self.backcolor == True:
                     if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1885, 90), font=-1, backcolor_sel=self.back_color, text=''))
+                        res.append(MultiContentEntryText(pos=(0, 0), size=(1085, 90), font=-1, backcolor_sel=self.back_color, text=''))
                     else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1880, 75), font=0, backcolor_sel=self.back_color, text=''))
+                        res.append(MultiContentEntryText(pos=(0, 0), size=(880, 75), font=0, backcolor_sel=self.back_color, text=''))
                 x = sub('LINK', '', x)
                 linkfilter = x
             if y == 2:
@@ -3338,9 +3337,9 @@ class TVNeuView(tvBase, Screen):
                 start = x
                 if self.picon == True:
                     if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(115, 25), size=(75, 30), font=-1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                        res.append(MultiContentEntryText(pos=(115, 18), size=(75, 25), font=-1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                     else:
-                        res.append(MultiContentEntryText(pos=(112, 13), size=(63, 30), font=0, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                        res.append(MultiContentEntryText(pos=(112, 13), size=(63, 23), font=0, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                 elif self.xd == False:
                     res.append(MultiContentEntryText(pos=(74, 18), size=(75, 25), font=-1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                 else:
@@ -5976,8 +5975,8 @@ class TVNeuView(tvBase, Screen):
 
 
 class TVGenreView(tvBase, Screen):
-    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV Genre - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="125,5" size="762,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title=" ">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="' + TVSHDPNG +  '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="170,10" size="900,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV Genre - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilm.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="125,5" size="762,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title=" ">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="170,10" size="900,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
 
     def __init__(self, session, link, genre):
         tvBase.__init__(self)
@@ -6009,7 +6008,7 @@ class TVGenreView(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
@@ -8083,8 +8082,8 @@ class TVGenreView(tvBase, Screen):
 
 
 class TVJetztView(tvBase, Screen):
-    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title=" ">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title=" ">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title=" ">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilm.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title=" ">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
 
     def __init__(self, session, link, standalone):
         tvBase.__init__(self)
@@ -8101,13 +8100,13 @@ class TVJetztView(tvBase, Screen):
                 self.picon = False
             if config.plugins.tvspielfilm.font_size.value == 'verylarge':
                 self.fontlarge = True
-                fontsize = '74'
+                fontsize = '24'
             elif config.plugins.tvspielfilm.font_size.value == 'large':
                 self.fontlarge = True
-                fontsize = '72'
+                fontsize = '22'
             else:
                 self.fontlarge = False
-                fontsize = '70'
+                fontsize = '20'
             self.dict = {'position': position,
              'font': font,
              'size': size,
@@ -8116,26 +8115,26 @@ class TVJetztView(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
             if config.plugins.tvspielfilm.picon.value == 'yes':
-                size = '1400,434'
+                size = '992,434'
                 self.picon = True
                 self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
             else:
-                size = '1400,450'
+                size = '992,450'
                 self.picon = False
             if config.plugins.tvspielfilm.font_size.value == 'verylarge':
                 self.fontlarge = True
-                fontsize = '72'
+                fontsize = '22'
             elif config.plugins.tvspielfilm.font_size.value == 'large':
                 self.fontlarge = True
-                fontsize = '70'
+                fontsize = '20'
             else:
                 self.fontlarge = False
-                fontsize = '78'
+                fontsize = '18'
             self.dict = {'position': position,
              'font': font,
              'size': size,
@@ -8445,7 +8444,7 @@ class TVJetztView(tvBase, Screen):
                             percent = passed * 100 / length
                     if self.picon == True:
                         if self.xd == False:
-                            res.append(MultiContentEntryText(pos=(100, 18), size=(175, 40), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                            res.append(MultiContentEntryText(pos=(100, 18), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                         else:
                             res.append(MultiContentEntryText(pos=(100, 19), size=(154, 30), font=0, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                     elif self.xd == False:
@@ -8502,10 +8501,26 @@ class TVJetztView(tvBase, Screen):
                         if self.picon == True:
                             if self.xd == False:
                                 if self.progress == False:
-                                    res.append(MultiContentEntryText(pos=(280, 18), size=(1245, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))#Sendung 20:15 ohne progress
+                                    res.append(MultiContentEntryText(pos=(275, 18), size=(780, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                                 else:
                                     res.append(MultiContentEntryProgress(pos=(275, 24), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
-                                    res.append(MultiContentEntryText(pos=(365, 18), size=(1250, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))#Sendung 20:15 mit progress
+                                    res.append(MultiContentEntryText(pos=(365, 18), size=(690, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                            elif self.progress == False:
+                                res.append(MultiContentEntryText(pos=(255, 19), size=(590, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                            else:
+                                res.append(MultiContentEntryProgress(pos=(255, 26), size=(50, 10), percent=percent, borderWidth=1, foreColor=16777215))
+                                res.append(MultiContentEntryText(pos=(325, 19), size=(520, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                        elif self.xd == False:
+                            if self.progress == False:
+                                res.append(MultiContentEntryText(pos=(235, 7), size=(820, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                            else:
+                                res.append(MultiContentEntryProgress(pos=(235, 13), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
+                                res.append(MultiContentEntryText(pos=(325, 7), size=(730, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                        elif self.progress == False:
+                            res.append(MultiContentEntryText(pos=(200, 3), size=(645, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                        else:
+                            res.append(MultiContentEntryProgress(pos=(200, 10), size=(50, 10), percent=percent, borderWidth=1, foreColor=16777215))
+                            res.append(MultiContentEntryText(pos=(270, 3), size=(575, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                     else:
                         y = 4
                 elif search('TITEL', x) is None:
@@ -8516,9 +8531,13 @@ class TVJetztView(tvBase, Screen):
                         x = sub('SPARTE', '', x)
                         if self.picon == True:
                             if self.xd == False:
-                                res.append(MultiContentEntryText(pos=(1640, 18), size=(152, 40), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                                res.append(MultiContentEntryText(pos=(1065, 18), size=(152, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                             else:
                                 res.append(MultiContentEntryText(pos=(855, 19), size=(135, 30), font=0, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        elif self.xd == False:
+                            res.append(MultiContentEntryText(pos=(1065, 7), size=(152, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        else:
+                            res.append(MultiContentEntryText(pos=(855, 3), size=(135, 30), font=0, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                 else:
                     y = 5
             if y == 5:
@@ -8531,7 +8550,7 @@ class TVJetztView(tvBase, Screen):
                             if self.xd == False:
                                 png = '%s%sHD.png' % (ICONPATH, x)
                                 if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1655, 11), size=(40, 40), png=loadPNG(png)))
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1054, 11), size=(40, 40), png=loadPNG(png)))
                             else:
                                 png = '%s%s.png' % (ICONPATH, x)
                                 if fileExists(png):
@@ -8539,7 +8558,7 @@ class TVJetztView(tvBase, Screen):
                         elif self.xd == False:
                             png = '%s%sHD.png' % (ICONPATH, x)
                             if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1254, 0), size=(40, 40), png=loadPNG(png)))
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1054, 0), size=(40, 40), png=loadPNG(png)))
                         else:
                             png = '%s%s.png' % (ICONPATH, x)
                             if fileExists(png):
@@ -8568,7 +8587,7 @@ class TVJetztView(tvBase, Screen):
             else:
                 self['menu'].moveToIndex(self.index)
                 self.ready = True
-                self['label'].setText('Text = Sender,        Info = Jetzt im TV/Gleich im TV')
+                self['label'].setText('Text = Sender, Info = Jetzt im TV/Gleich im TV')
                 self['label'].stopBlinking()
                 self['label'].show()
         elif self.gleich == True:
@@ -8579,7 +8598,7 @@ class TVJetztView(tvBase, Screen):
             else:
                 self['menu'].moveToIndex(self.index)
                 self.ready = True
-                self['label'].setText('Text = Sender,        Info = Jetzt im TV/Gleich im TV')
+                self['label'].setText('Text = Sender, Info = Jetzt im TV/Gleich im TV')
                 self['label'].stopBlinking()
                 self['label'].show()
         elif search('<a href=".*?tvspielfilm.de/tv-programm/sendungen/.*?page=[2-9]', bereich) is not None:
@@ -8589,7 +8608,7 @@ class TVJetztView(tvBase, Screen):
         else:
             self['menu'].moveToIndex(self.index)
             self.ready = True
-            self['label'].setText('Text = Sender,        Info = Jetzt im TV/Gleich im TV')
+            self['label'].setText('Text = Sender, Info = Jetzt im TV/Gleich im TV')
             self['label'].stopBlinking()
             self['label'].show()
         return
@@ -10026,7 +10045,7 @@ class TVJetztView(tvBase, Screen):
         downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
-        self['label'].setText('Text = Sender,        Info = Jetzt im TV/Gleich im TV')
+        self['label'].setText('Text = Sender, Info = Jetzt im TV/Gleich im TV')
         self['label'].stopBlinking()
         self['label'].show()
         self.ready = True
@@ -10055,7 +10074,7 @@ class TVJetztView(tvBase, Screen):
             self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
 
     def showProgrammPage(self):
-        self['label'].setText('Text = Sender,        Info = Jetzt im TV/Gleich im TV')
+        self['label'].setText('Text = Sender, Info = Jetzt im TV/Gleich im TV')
         self['label2'].setText('= Timer')
         self['label3'].setText('= Suche')
         self['label4'].setText('= Zappen')
@@ -10207,8 +10226,8 @@ class TVJetztView(tvBase, Screen):
 
 
 class TVProgrammView(tvBase, Screen):
-    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV Programm - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV Programm - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV Programm - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilm.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV Programm - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="{size}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
 
     def __init__(self, session, link, eventview, tagestipp):
         self.eventview = eventview
@@ -10244,7 +10263,7 @@ class TVProgrammView(tvBase, Screen):
                 size = '1220,560'
             if config.plugins.tvspielfilm.font_size.value == 'verylarge':
                 self.fontlarge = True
-                fontsize = '30'
+                fontsize = '24'
             elif config.plugins.tvspielfilm.font_size.value == 'large':
                 self.fontlarge = True
                 fontsize = '22'
@@ -10259,7 +10278,7 @@ class TVProgrammView(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
@@ -10626,7 +10645,7 @@ class TVProgrammView(tvBase, Screen):
                                 res.append(MultiContentEntryProgress(pos=(275, 24), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
                                 res.append(MultiContentEntryText(pos=(365, 18), size=(690, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                             else:
-                                res.append(MultiContentEntryText(pos=(275, 18), size=(1300, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))#=Sendung
+                                res.append(MultiContentEntryText(pos=(275, 18), size=(780, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                         elif self.progress == True and self.percent == True:
                             res.append(MultiContentEntryProgress(pos=(255, 26), size=(50, 10), percent=percent, borderWidth=1, foreColor=16777215))
                             res.append(MultiContentEntryText(pos=(325, 19), size=(520, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
@@ -10651,11 +10670,11 @@ class TVProgrammView(tvBase, Screen):
                     if self.picon == True:
                         if self.primetime == False:
                             if self.xd == False:
-                                res.append(MultiContentEntryText(pos=(1640, 18), size=(152, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))#Sparte
+                                res.append(MultiContentEntryText(pos=(1065, 18), size=(152, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                             else:
                                 res.append(MultiContentEntryText(pos=(855, 19), size=(135, 30), font=0, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                         elif self.xd == False:
-                            res.append(MultiContentEntryText(pos=(1640, 18), size=(152, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                            res.append(MultiContentEntryText(pos=(1065, 18), size=(152, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                         else:
                             res.append(MultiContentEntryText(pos=(855, 19), size=(135, 30), font=0, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                     elif self.primetime == False:
@@ -10679,7 +10698,7 @@ class TVProgrammView(tvBase, Screen):
                             if self.xd == False:
                                 png = '%s%sHD.png' % (ICONPATH, x)
                                 if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1640, 11), size=(40, 40), png=loadPNG(png)))
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1054, 11), size=(40, 40), png=loadPNG(png)))
                             else:
                                 png = '%s%s.png' % (ICONPATH, x)
                                 if fileExists(png):
@@ -12531,8 +12550,8 @@ class TVProgrammView(tvBase, Screen):
 
 
 class TVTrailer(tvBase, Screen):
-    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="Trailer - Video - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="140,60" size="750,450" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="890,60" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="890,135" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="890,210" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="890,285" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="890,360" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="890,435" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play1" position="20,68" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play2" position="20,143" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play3" position="20,218" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play4" position="20,293" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play5" position="20,368" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play6" position="20,443" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="250,16" size="512,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="Trailer - Video - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="172,75" size="923,540" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play1" position="36,91" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play2" position="36,181" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play3" position="36,271" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play4" position="36,361" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play5" position="36,451" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play6" position="36,541" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="250,20" size="740,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="Trailer - Video - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilm.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="140,60" size="750,450" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="890,60" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="890,135" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="890,210" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="890,285" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="890,360" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="890,435" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play1" position="20,68" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play2" position="20,143" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play3" position="20,218" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play4" position="20,293" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play5" position="20,368" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play6" position="20,443" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="250,16" size="512,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="Trailer - Video - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="172,75" size="923,540" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play1" position="36,91" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play2" position="36,181" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play3" position="36,271" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play4" position="36,361" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play5" position="36,451" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play6" position="36,541" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="250,20" size="740,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
 
     def __init__(self, session, link, sparte):
         tvBase.__init__(self)
@@ -12546,7 +12565,7 @@ class TVTrailer(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
@@ -13762,7 +13781,7 @@ class TVBilder(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
@@ -14815,7 +14834,7 @@ class TVNews(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
@@ -15318,7 +15337,7 @@ class TVBlog(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
@@ -15952,7 +15971,7 @@ class TVNewsPicShow(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
@@ -16240,7 +16259,7 @@ class PlayboyPicShow(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
@@ -16511,7 +16530,7 @@ class TVPicShow(tvBase, Screen):
         else:
             self.xd = True
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
@@ -16806,7 +16825,7 @@ class TVPicShow(tvBase, Screen):
 
 class PicShowFull(tvBase, Screen):
     skin = '\n\t\t\t<screen position="center,center" size="1024,576" flags="wfNoBorder" title="  " >\n\t\t\t\t<eLabel position="0,0" size="1024,576" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="picture" position="0,0" size="1024,576" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="picindex" position="5,5" size="100,20" font="{font};{fontsize}" foregroundColor="#A5ACAE" halign="left" transparent="1" zPosition="3" />\n\t\t\t</screen>'
-    skinHD = '\n\t\t\t<screen position="center,center" size="1920,720" flags="wfNoBorder" title="  " >\n\t\t\t\t<eLabel position="0,0" size="1920,720" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="picture" position="0,0" size="1920,720" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="picindex" position="10,10" size="120,22" font="{font};{fontsize}" foregroundColor="#A5ACAE" halign="left" transparent="1" zPosition="3" />\n\t\t\t</screen>'
+    skinHD = '\n\t\t\t<screen position="center,center" size="1280,720" flags="wfNoBorder" title="  " >\n\t\t\t\t<eLabel position="0,0" size="1280,720" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="picture" position="0,0" size="1280,720" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="picindex" position="10,10" size="120,22" font="{font};{fontsize}" foregroundColor="#A5ACAE" halign="left" transparent="1" zPosition="3" />\n\t\t\t</screen>'
 
     def __init__(self, session, link, count, playboy):
         tvBase.__init__(self)
@@ -16988,7 +17007,7 @@ class PicShowFull(tvBase, Screen):
 
     def showPic(self, picture):
         if self.xd == False:
-            currPic = loadPic(picture, 1920, 720, 3, 0, 0, 0)
+            currPic = loadPic(picture, 1280, 720, 3, 0, 0, 0)
         else:
             currPic = loadPic(picture, 1024, 576, 3, 0, 0, 0)
         if currPic != None:
@@ -17038,12 +17057,12 @@ class PicShowFull(tvBase, Screen):
 
 class FullScreen(tvBase, Screen):
     skin = '\n\t\t\t<screen position="center,center" size="1024,576" flags="wfNoBorder" title="  " >\n\t\t\t\t<eLabel position="0,0" size="1024,576" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="picture" position="128,0" size="768,576" alphatest="blend" zPosition="2" />\n\t\t\t</screen>'
-    skinHD = '\n\t\t\t<screen position="center,center" size="1920,720" flags="wfNoBorder" title="  " >\n\t\t\t\t<eLabel position="0,0" size="1920,720" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="picture" position="160,0" size="960,720" alphatest="blend" zPosition="2" />\n\t\t\t</screen>'
+    skinHD = '\n\t\t\t<screen position="center,center" size="1280,720" flags="wfNoBorder" title="  " >\n\t\t\t\t<eLabel position="0,0" size="1280,720" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="picture" position="160,0" size="960,720" alphatest="blend" zPosition="2" />\n\t\t\t</screen>'
 
     def __init__(self, session):
         tvBase.__init__(self)
         deskWidth = getDesktop(0).size().width()
-        if deskWidth >= 1920:
+        if deskWidth >= 1280:
             self.skin = FullScreen.skinHD
             self.xd = False
         else:
@@ -18126,7 +18145,7 @@ class tvMain(tvBase, Screen):
             self.skin = applySkinVars(tvMain.skinHD, self.dict)
         else:
             deskWidth = getDesktop(0).size().width()
-            if deskWidth >= 1920:
+            if deskWidth >= 1280:
                 position = '60'
             else:
                 position = 'center'
@@ -18141,9 +18160,9 @@ class tvMain(tvBase, Screen):
             if getDesktop(0).size().width() == 1920:
                 self.fhd = True
                 try:
-                    gMainDC.getInstance().setResolution(1920, 720)
+                    gMainDC.getInstance().setResolution(1280, 720)
                     desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 720))
+                    desktop.resize(eSize(1280, 720))
                 except:
                     import traceback
                     traceback.print_exc()
@@ -18452,9 +18471,9 @@ class tvMain(tvBase, Screen):
         res = ['']
         if self.backcolor == True:
             res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='20:15 im TV'))
+        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Heute im TV'))
         self.mainmenulist.append(res)
-        self.mainmenulink.append(self.baseurl + '/tv-programm/sendungen/abends.html')
+        self.mainmenulink.append(self.baseurl + '/tv-programm/tv-sender/?page=1')
         res = ['']
         if self.backcolor == True:
             res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
@@ -18485,6 +18504,12 @@ class tvMain(tvBase, Screen):
         res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Gleich im TV'))
         self.mainmenulist.append(res)
         self.mainmenulink.append(self.baseurl + '/tv-programm/sendungen/?page=1&order=time&time=shortly')
+        res = ['']
+        if self.backcolor == True:
+            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
+        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='20:15 im TV'))
+        self.mainmenulist.append(res)
+        self.mainmenulink.append(self.baseurl + '/tv-programm/sendungen/abends.html')
         res = ['']
         if self.backcolor == True:
             res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
@@ -20447,6 +20472,230 @@ class makeServiceFile(Screen):
             self.close(False)
 
 
+class getNumber(Screen):
+    skin = '\n\t\t\t<screen position="center,center" size="175,70" backgroundColor="#000000" flags="wfNoBorder" title=" ">\n\t\t\t\t<widget name="number" position="0,0" size="175,70" font="{font};40" halign="center" valign="center" transparent="1" zPosition="1"/>\n\t\t\t</screen>'
+
+    def __init__(self, session, number):
+        if config.plugins.tvspielfilm.font.value == 'yes':
+            font = 'Sans'
+        else:
+            font = 'Regular'
+        self.dict = {'font': font}
+        self.skin = applySkinVars(getNumber.skin, self.dict)
+        Screen.__init__(self, session)
+        self.field = str(number)
+        self['number'] = Label(self.field)
+        self['actions'] = NumberActionMap(['SetupActions'], {'cancel': self.quit,
+         'ok': self.keyOK,
+         '1': self.keyNumber,
+         '2': self.keyNumber,
+         '3': self.keyNumber,
+         '4': self.keyNumber,
+         '5': self.keyNumber,
+         '6': self.keyNumber,
+         '7': self.keyNumber,
+         '8': self.keyNumber,
+         '9': self.keyNumber,
+         '0': self.keyNumber})
+        self.Timer = eTimer()
+        self.Timer.callback.append(self.keyOK)
+        self.Timer.start(2500, True)
+
+    def keyNumber(self, number):
+        self.Timer.start(2000, True)
+        self.field = self.field + str(number)
+        self['number'].setText(self.field)
+        if len(self.field) >= 2:
+            self.keyOK()
+
+    def keyOK(self):
+        self.Timer.stop()
+        self.close(int(self['number'].getText()))
+
+    def quit(self):
+        self.Timer.stop()
+        self.close(0)
+
+
+class gotoPageMenu(Screen):
+    skin = '\n\t\t\t<screen position="center,center" size="436,560" title=" ">\n\t\t\t\t<widget name="pagemenu" position="10,10" size="416,540" scrollbarMode="showNever" zPosition="1" />\n\t\t\t</screen>'
+
+    def __init__(self, session, count, maxpages):
+        self.skin = gotoPageMenu.skin
+        self.session = session
+        Screen.__init__(self, session)
+        self.localhtml = '/tmp/tvspielfilm.html'
+        self.hideflag = True
+        self.index = count - 1
+        self.maxpages = maxpages
+        self.pagenumber = []
+        self.pagemenulist = []
+        self['pagemenu'] = ItemList([])
+        self['NumberActions'] = NumberActionMap(['NumberActions',
+         'OkCancelActions',
+         'DirectionActions',
+         'ColorActions'], {'ok': self.ok,
+         'cancel': self.exit,
+         'down': self.down,
+         'up': self.up,
+         'blue': self.hideScreen,
+         '0': self.gotoPage,
+         '1': self.gotoPage,
+         '2': self.gotoPage,
+         '3': self.gotoPage,
+         '4': self.gotoPage,
+         '5': self.gotoPage,
+         '6': self.gotoPage,
+         '7': self.gotoPage,
+         '8': self.gotoPage,
+         '9': self.gotoPage}, -1)
+        if config.plugins.tvspielfilm.color.value == '0x00000000':
+            self.backcolor = False
+        else:
+            self.backcolor = True
+            self.back_color = int(config.plugins.tvspielfilm.color.value, 16)
+        self.makeMenuTimer = eTimer()
+        self.makeMenuTimer.callback.append(self.makePageMenu)
+        self.makeMenuTimer.start(500, True)
+
+    def makePageMenu(self):
+        self.setTitle('Senderliste')
+        output = open(self.localhtml, 'r').read()
+        startpos = output.find('label="Alle Sender">Alle Sender</option>')
+        if config.plugins.tvspielfilm.meintvs.value == 'yes':
+            endpos = output.find('<optgroup label="Hauptsender">')
+        else:
+            endpos = output.find('<optgroup label="alle Sender alphabetisch">')
+        bereich = output[startpos:endpos]
+        bereich = bereich.lower()
+        sender = re.findall(' value=".*?,(.*?).html">', bereich)
+        count = 0
+        page = 1
+        while page <= self.maxpages:
+            res = ['']
+            if self.backcolor == True:
+                res.append(MultiContentEntryText(pos=(0, 0), size=(416, 36), font=-1, backcolor_sel=self.back_color, text=''))
+            res.append(MultiContentEntryText(pos=(0, 5), size=(28, 36), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=str(page)))
+            try:
+                png1 = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % sender[count]
+                if fileExists(png1):
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(34, 0), size=(59, 36), png=loadPNG(png1)))
+            except IndexError:
+                pass
+
+            count += 1
+            try:
+                png2 = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % sender[count]
+                if fileExists(png2):
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(93, 0), size=(59, 36), png=loadPNG(png2)))
+            except IndexError:
+                pass
+
+            count += 1
+            try:
+                png3 = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % sender[count]
+                if fileExists(png3):
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(152, 0), size=(59, 36), png=loadPNG(png3)))
+            except IndexError:
+                pass
+
+            count += 1
+            try:
+                png4 = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % sender[count]
+                if fileExists(png4):
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(211, 0), size=(59, 36), png=loadPNG(png4)))
+            except IndexError:
+                pass
+
+            count += 1
+            try:
+                png5 = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % sender[count]
+                if fileExists(png5):
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(270, 0), size=(59, 36), png=loadPNG(png5)))
+            except IndexError:
+                pass
+
+            count += 1
+            try:
+                png6 = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % sender[count]
+                if fileExists(png6):
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(329, 0), size=(59, 36), png=loadPNG(png6)))
+            except IndexError:
+                pass
+
+            count += 1
+            self.pagemenulist.append(res)
+            self.pagenumber.append(str(page))
+            page += 1
+
+        self['pagemenu'].l.setItemHeight(36)
+        self['pagemenu'].l.setList(self.pagemenulist)
+        self['pagemenu'].moveToIndex(self.index)
+
+    def ok(self):
+        try:
+            c = self.getIndex(self['pagemenu'])
+            number = int(self.pagenumber[c])
+            self.close(number)
+        except IndexError:
+            pass
+
+    def gotoPage(self, number):
+        self.session.openWithCallback(self.numberEntered, getNumber, number)
+
+    def numberEntered(self, number):
+        if number is None or number == 0:
+            pass
+        elif number >= 29:
+            number = 29
+        self.close(number)
+        return
+
+    def getIndex(self, list):
+        return list.getSelectedIndex()
+
+    def down(self):
+        self['pagemenu'].down()
+
+    def up(self):
+        self['pagemenu'].up()
+
+    def download(self, link, name):
+        getPage(link).addCallback(name).addErrback(self.downloadError)
+
+    def downloadError(self, output):
+        pass
+
+    def infoScreen(self):
+        self.session.open(infoScreenTVSpielfilm, None, True)
+        return
+
+    def hideScreen(self):
+        if self.hideflag == True:
+            self.hideflag = False
+            count = 40
+            while count > 0:
+                count -= 1
+                f = open('/proc/stb/video/alpha', 'w')
+                f.write('%i' % (config.av.osd_alpha.value * count / 40))
+                f.close()
+
+        else:
+            self.hideflag = True
+            count = 0
+            while count < 40:
+                count += 1
+                f = open('/proc/stb/video/alpha', 'w')
+                f.write('%i' % (config.av.osd_alpha.value * count / 40))
+                f.close()
+
+    def exit(self):
+        if self.hideflag == False:
+            f = open('/proc/stb/video/alpha', 'w')
+            f.write('%i' % config.av.osd_alpha.value)
+            f.close()
+        self.close(0)
+
 class tvTipps(tvBase, Screen):
     skin = '\n\t\t\t<screen position="{position}" size="740,270" flags="wfNoBorder" title=" ">\n\t\t\t\t<widget name="picture" position="0,0" size="387,270" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="elabel" position="387,0" size="{size},150" font="{font};18" backgroundColor="#FF000000" zPosition="1" />\n\t\t\t\t<widget name="elabel2" position="{position2},0" size="{size2}" font="{font};18" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="elabel3" position="387,150" size="353,125" font="{font};18" backgroundColor="#FFFFFF" zPosition="1" />\n\t\t\t\t<widget name="label" position="402,151" size="288,24" font="{font};20" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2" />\n\t\t\t\t<widget name="label2" position="402,176" size="288,48" font="{font};22" foregroundColor="#{color}" backgroundColor="#FFFFFF" halign="left" zPosition="2" />\n\t\t\t\t<widget name="label3" position="402,225" size="328,42" font="{font};18" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" zPosition="2" />\n\t\t\t\t<widget name="thumb" position="695,160" size="40,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/rating small1HD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="label4" position="40,220" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="label5" position="40,245" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t</screen>'
 
@@ -20459,7 +20708,7 @@ class tvTipps(tvBase, Screen):
             color = str(config.plugins.tvspielfilm.color.value)
             color = sub('0x00', '', color)
         deskWidth = getDesktop(0).size().width()
-        if deskWidth >= 1920:
+        if deskWidth >= 1280:
             position = '0,450'
             size = '98'
             position2 = '485'
@@ -21007,9 +21256,9 @@ class tvJetzt(Screen):
             if getDesktop(0).size().width() == 1920:
                 self.fhd = True
                 try:
-                    gMainDC.getInstance().setResolution(1920, 720)
+                    gMainDC.getInstance().setResolution(1280, 720)
                     desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 720))
+                    desktop.resize(eSize(1280, 720))
                 except:
                     import traceback
                     traceback.print_exc()
@@ -21023,7 +21272,7 @@ class tvJetzt(Screen):
 
     def makeCheck(self):
         if fileExists(self.servicefile):
-            link = 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html'
+            link = 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
             self.session.openWithCallback(self.exit, TVJetztView, link, True)
         else:
             self.session.openWithCallback(self.returnServiceFile, makeServiceFile)
@@ -21093,9 +21342,9 @@ class tvEvent(Screen):
             if getDesktop(0).size().width() == 1920:
                 self.fhd = True
                 try:
-                    gMainDC.getInstance().setResolution(1920, 720)
+                    gMainDC.getInstance().setResolution(1280, 720)
                     desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 720))
+                    desktop.resize(eSize(1280, 720))
                 except:
                     import traceback
                     traceback.print_exc()
@@ -21183,6 +21432,4172 @@ class tvEvent(Screen):
         self.close()
 
 
+class TVHeuteView(tvBase, Screen):
+    skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV Programm - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilm.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="sender1" position="11,53" size="111,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender2" position="177,53" size="111,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender3" position="343,53" size="111,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender4" position="509,53" size="111,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender5" position="675,53" size="111,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender6" position="841,53" size="111,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="logo1" position="126,50" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo2" position="292,50" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo3" position="458,50" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo4" position="624,50" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo5" position="790,50" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo6" position="956,50" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="11,77" size="160,106" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic2" position="177,77" size="160,106" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic3" position="343,77" size="160,106" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic4" position="509,77" size="160,106" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic5" position="675,77" size="160,106" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic6" position="841,77" size="160,106" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pictime1" position="11,188" size="55,22" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime2" position="177,188" size="55,22" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime3" position="343,188" size="55,22" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime4" position="509,188" size="55,22" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime5" position="675,188" size="55,22" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime6" position="841,188" size="55,22" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictext1" position="71,190" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext2" position="237,190" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext3" position="403,190" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext4" position="569,190" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext5" position="735,190" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext6" position="901,190" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="menu1" position="11,238" size="160,275" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu2" position="177,238" size="160,275" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu3" position="343,238" size="160,275" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu4" position="509,238" size="160,275" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu5" position="675,238" size="160,275" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu6" position="841,238" size="160,275" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV Programm - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="sender1" position="7,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender2" position="212,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender3" position="417,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender4" position="622,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender5" position="827,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender6" position="1032,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="logo1" position="163,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo2" position="368,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo3" position="573,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo4" position="778,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo5" position="983,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo6" position="1188,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="7,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic2" position="212,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic3" position="417,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic4" position="622,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic5" position="827,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic6" position="1032,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pictime1" position="7,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime2" position="212,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime3" position="417,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime4" position="622,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime5" position="827,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime6" position="1032,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictext1" position="72,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext2" position="277,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext3" position="482,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext4" position="687,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext5" position="892,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext6" position="1097,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="menu1" position="7,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu2" position="212,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu3" position="417,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu4" position="622,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu5" position="827,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu6" position="1032,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+
+    def __init__(self, session, link, opener):
+        tvBase.__init__(self)
+        font = self.getfont()
+        if config.plugins.tvspielfilm.plugin_size.value == 'full':
+            self.xd = False
+            position = str(config.plugins.tvspielfilm.position.value)
+            if config.plugins.tvspielfilm.font_size.value == 'verylarge':
+                self.fontlarge = True
+                fontsize = '24'
+                fontsize2 = '22'
+                size = '135,50'
+            elif config.plugins.tvspielfilm.font_size.value == 'large':
+                self.fontlarge = True
+                fontsize = '22'
+                fontsize2 = '20'
+                size = '135,48'
+            else:
+                self.fontlarge = False
+                fontsize = '20'
+                fontsize2 = '18'
+                size = '135,42'
+            self.dict = {'position': position,
+             'font': font,
+             'fontsize': fontsize,
+             'fontsize2': fontsize2,
+             'size': size}
+            self.skin = applySkinVars(TVHeuteView.skinHD, self.dict)
+        else:
+            self.xd = True
+            deskWidth = getDesktop(0).size().width()
+            if deskWidth >= 1280:
+                position = 'center'
+            else:
+                position = str(config.plugins.tvspielfilm.position.value)
+            if config.plugins.tvspielfilm.font_size.value == 'verylarge':
+                self.fontlarge = True
+                fontsize = '22'
+                fontsize2 = '22'
+                size = '100,50'
+            elif config.plugins.tvspielfilm.font_size.value == 'large':
+                self.fontlarge = True
+                fontsize = '20'
+                fontsize2 = '20'
+                size = '100,48'
+            else:
+                self.fontlarge = False
+                fontsize = '18'
+                fontsize2 = '18'
+                size = '100,42'
+            self.dict = {'position': position,
+             'font': font,
+             'fontsize': fontsize,
+             'fontsize2': fontsize2,
+             'size': size}
+            self.skin = applySkinVars(TVHeuteView.skin, self.dict)
+        Screen.__init__(self, session)
+        if config.plugins.tvspielfilm.meintvs.value == 'yes':
+            self.MeinTVS = True
+            self.error = False
+            self.opener = opener
+            page = sub('http://my.tvspielfilm.de/tv-programm/tv-sender/.page=', '', link)
+            self.count = int(page)
+        else:
+            self.MeinTVS = False
+            page = sub('http://www.tvspielfilm.de/tv-programm/tv-sender/.page=', '', link)
+            self.count = int(page)
+        if config.plugins.tvspielfilm.picon.value == 'yes':
+            self.picon = True
+            self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
+        else:
+            self.picon = False
+        self.localhtml = '/tmp/tvspielfilm.html'
+        self.localhtml2 = '/tmp/tvspielfilm2.html'
+        self.tventries1 = []
+        self.tventries2 = []
+        self.tventries3 = []
+        self.tventries4 = []
+        self.tventries5 = []
+        self.tventries6 = []
+        self.tvlink1 = []
+        self.tvlink2 = []
+        self.tvlink3 = []
+        self.tvlink4 = []
+        self.tvlink5 = []
+        self.tvlink6 = []
+        self.tvtitel1 = []
+        self.tvtitel2 = []
+        self.tvtitel3 = []
+        self.tvtitel4 = []
+        self.tvtitel5 = []
+        self.tvtitel6 = []
+        self.sref1 = []
+        self.sref2 = []
+        self.sref3 = []
+        self.sref4 = []
+        self.sref5 = []
+        self.sref6 = []
+        self.searchlink = []
+        self.searchref = []
+        self.searchentries = []
+        self.start = ''
+        self.end = ''
+        self.day = ''
+        self.name = ''
+        self.shortdesc = ''
+        self.link = link
+        self.postlink = link
+        self.trailerurl = ''
+        self.titel = ''
+        self.POSTtext = ''
+        self.EPGtext = ''
+        self.hideflag = True
+        self.search = False
+        self.zap1 = True
+        self.zap2 = True
+        self.zap3 = True
+        self.zap4 = True
+        self.zap5 = True
+        self.zap6 = True
+        self.rec = False
+        self.first = True
+        self.ready = False
+        self.postviewready = False
+        self.mehrbilder = False
+        self.trailer = False
+        self.movie = False
+        self.datum = False
+        self.filter = True
+        self.oldindex = 0
+        self.oldsearchindex = 1
+        self['logo1'] = Pixmap()
+        self['logo2'] = Pixmap()
+        self['logo3'] = Pixmap()
+        self['logo4'] = Pixmap()
+        self['logo5'] = Pixmap()
+        self['logo6'] = Pixmap()
+        self['pic1'] = Pixmap()
+        self['pic2'] = Pixmap()
+        self['pic3'] = Pixmap()
+        self['pic4'] = Pixmap()
+        self['pic5'] = Pixmap()
+        self['pic6'] = Pixmap()
+        self['picpost'] = Pixmap()
+        self['tvinfo1'] = Pixmap()
+        self['tvinfo2'] = Pixmap()
+        self['tvinfo3'] = Pixmap()
+        self['tvinfo4'] = Pixmap()
+        self['tvinfo5'] = Pixmap()
+        self['cinlogo'] = Pixmap()
+        self['cinlogo'].hide()
+        self['playlogo'] = Pixmap()
+        self['playlogo'].hide()
+        self['searchlogo'] = Pixmap()
+        self['searchlogo'].hide()
+        self['searchtimer'] = Pixmap()
+        self['searchtimer'].hide()
+        self['searchtext'] = Label('')
+        self['searchtext'].hide()
+        self['sender1'] = Label('')
+        self['sender2'] = Label('')
+        self['sender3'] = Label('')
+        self['sender4'] = Label('')
+        self['sender5'] = Label('')
+        self['sender6'] = Label('')
+        self['pictime1'] = Label('')
+        self['pictime2'] = Label('')
+        self['pictime3'] = Label('')
+        self['pictime4'] = Label('')
+        self['pictime5'] = Label('')
+        self['pictime6'] = Label('')
+        self['pictext1'] = Label('')
+        self['pictext2'] = Label('')
+        self['pictext3'] = Label('')
+        self['pictext4'] = Label('')
+        self['pictext5'] = Label('')
+        self['pictext6'] = Label('')
+        self['textpage'] = ScrollLabel('')
+        self['infotext'] = Label('')
+        self['infotext'].hide()
+        self['infotext2'] = Label('')
+        self['infotext2'].hide()
+        self['infotext3'] = Label('')
+        self['infotext3'].hide()
+        self['infotext4'] = Label('')
+        self['infotext4'].hide()
+        self['infotext5'] = Label('')
+        self['infotext5'].hide()
+        self['infotext6'] = Label('')
+        self['infotext6'].hide()
+        self['infotext7'] = Label('')
+        self['infotext7'].hide()
+        self['infotext8'] = Label('')
+        self['infotext8'].hide()
+        self['piclabel'] = Label('')
+        self['piclabel'].hide()
+        self['piclabel2'] = Label('')
+        self['piclabel2'].hide()
+        self['slider_textpage'] = Pixmap()
+        self['slider_textpage'].hide()
+        self['searchmenu'] = ItemList([])
+        self['searchmenu'].hide()
+        self['menu1'] = ItemList([])
+        self['menu2'] = ItemList([])
+        self['menu3'] = ItemList([])
+        self['menu4'] = ItemList([])
+        self['menu5'] = ItemList([])
+        self['menu6'] = ItemList([])
+        self.oldcurrent = 'menu1'
+        self.currentsearch = 'menu1'
+        self.current = 'menu1'
+        self.menu = 'menu1'
+        self['label'] = BlinkingLabel('Bitte warten...')
+        self['label'].startBlinking()
+        self['label2'] = Label('= Timer')
+        self['label3'] = Label('= Suche')
+        self['label4'] = Label('= Zappen')
+        self['NumberActions'] = NumberActionMap(['NumberActions',
+         'OkCancelActions',
+         'ChannelSelectBaseActions',
+         'DirectionActions',
+         'EPGSelectActions',
+         'InfobarTeletextActions',
+         'MoviePlayerActions',
+         'MovieSelectionActions',
+         'HelpActions'], {'ok': self.ok,
+         'cancel': self.exit,
+         'right': self.rightDown,
+         'left': self.leftUp,
+         'down': self.down,
+         'up': self.up,
+         'nextBouquet': self.nextDay,
+         'prevBouquet': self.prevDay,
+         'nextMarker': self.nextWeek,
+         'prevMarker': self.prevWeek,
+         '0': self.gotoPage,
+         '1': self.gotoPage,
+         '2': self.gotoPage,
+         '3': self.gotoPage,
+         '4': self.gotoPage,
+         '5': self.gotoPage,
+         '6': self.gotoPage,
+         '7': self.gotoPage,
+         '8': self.gotoPage,
+         '9': self.gotoPage,
+         'contextMenu': self.gotoPageMenu,
+         'info': self.getEPG,
+         'epg': self.getEPG,
+         'leavePlayer': self.youTube,
+         'startTeletext': self.pressText,
+         'displayHelp': self.infoScreen}, -1)
+        self['ColorActions'] = ActionMap(['ColorActions'], {'green': self.green,
+         'yellow': self.yellow,
+         'red': self.makeTimer,
+         'blue': self.hideScreen}, -1)
+        self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
+        self.service_db = serviceDB(self.servicefile)
+        self.timer = open('/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db').read()
+        self.date = datetime.date.today()
+        one_day = datetime.timedelta(days=1)
+        self.nextdate = self.date + one_day
+        weekday = self.date.weekday()
+        if weekday == 0:
+            self.weekday = 'Montag'
+        elif weekday == 1:
+            self.weekday = 'Dienstag'
+        elif weekday == 2:
+            self.weekday = 'Mittwoch'
+        elif weekday == 3:
+            self.weekday = 'Donnerstag'
+        elif weekday == 4:
+            self.weekday = 'Freitag'
+        elif weekday == 5:
+            self.weekday = 'Samstag'
+        elif weekday == 6:
+            self.weekday = 'Sonntag'
+        self.morgens = False
+        self.mittags = False
+        self.vorabend = False
+        self.abends = True
+        self.nachts = False
+        if config.plugins.tvspielfilm.primetime.value == 'now':
+            self.abends = False
+            hour = datetime.datetime.now().hour
+            if hour >= 5 and hour < 14:
+                self.morgens = True
+            elif hour >= 14 and hour < 18:
+                self.mittags = True
+            elif hour >= 18 and hour < 20:
+                self.vorabend = True
+            elif hour >= 20 and hour <= 23:
+                self.abends = True
+            else:
+                self.nachts = True
+        if config.plugins.tvspielfilm.color.value == '0x00000000':
+            self.backcolor = False
+        else:
+            self.backcolor = True
+            self.back_color = int(config.plugins.tvspielfilm.color.value, 16)
+        if config.plugins.tvspielfilm.genreinfo.value == 'no':
+            self.showgenre = False
+        else:
+            self.showgenre = True
+        self.onLayoutFinish.append(self.onLayoutFinished)
+
+    def onLayoutFinished(self):
+        self.makeTVTimer = eTimer()
+        self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+        self.makeTVTimer.start(500, True)
+
+    def makeTVView(self, string):
+        output = open(self.localhtml, 'r').read()
+        output = six.ensure_str(output)
+        if self.first == True:
+            self.first = False
+            startpos = output.find('label="Alle Sender">Alle Sender</option>')
+            if self.MeinTVS == True:
+                endpos = output.find('<optgroup label="Hauptsender">')
+            else:
+                endpos = output.find('<optgroup label="alle Sender alphabetisch">')
+            bereich = output[startpos:endpos]
+            sender = re.findall('<option label="(.*?)"', bereich)
+            self.maxpages = len(sender) // 6
+            if len(sender) % 6 != 0:
+                self.maxpages += 1
+        self.zap1 = True
+        self.zap2 = True
+        self.zap3 = True
+        self.zap4 = True
+        self.zap5 = True
+        self.zap6 = True
+        self.sref1 = []
+        self.sref2 = []
+        self.sref3 = []
+        self.sref4 = []
+        self.sref5 = []
+        self.sref6 = []
+        date = str(self.date.strftime('%d.%m.%Y'))
+        self.titel = 'Heute im TV  - ' + str(self.weekday) + ', ' + date
+        self.setTitle(self.titel)
+        startpostop = find(output, '<div class="gallery-area">')
+        endpostop = find(output, '<div class="info-block">')
+        bereichtop = output[startpostop:endpostop]
+        bereichtop = transHTML(bereichtop)
+        bereichtop = sub('<wbr/>', '', bereichtop)
+        bereichtop = sub('<div class="first-program block-1">\n.*?</div>', '<div class="first-program block-1"><img src="http://a2.tvspielfilm.de/imedia/8461/5218461,qfQElNSTpxAGvxxuSsPkPjQRIrO6vJjPQCu3KaA_RQPfIknB77GUEYh_MB053lNvumg7bMd+vkJk3F+_CzBZSQ==.jpg" width="149" height="99" border="0" /><span class="time"> </span><strong class="title"> </strong></div>', bereichtop)
+        logos = re.findall('<span class="logotype chl_bg_. c-(.*?)">', bereichtop)
+        if logos is not None:
+            try:
+                service = logos[0]
+                sref = self.service_db.lookup(service)
+                if sref == 'nope':
+                    self.sref1.append('')
+                    self.zap1 = False
+                else:
+                    self.sref1.append(sref)
+                logo = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/' + service + '.png'
+                self.showLogo1(logo)
+                self['logo1'].show()
+            except IndexError:
+                pass
+
+            try:
+                service = logos[1]
+                sref = self.service_db.lookup(service)
+                if sref == 'nope':
+                    self.sref2.append('')
+                    self.zap2 = False
+                else:
+                    self.sref2.append(sref)
+                logo = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/' + service + '.png'
+                self.showLogo2(logo)
+                self['logo2'].show()
+            except IndexError:
+                pass
+
+            try:
+                service = logos[2]
+                sref = self.service_db.lookup(service)
+                if sref == 'nope':
+                    self.sref3.append('')
+                    self.zap3 = False
+                else:
+                    self.sref3.append(sref)
+                logo = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/' + service + '.png'
+                self.showLogo3(logo)
+                self['logo3'].show()
+            except IndexError:
+                pass
+
+            try:
+                service = logos[3]
+                sref = self.service_db.lookup(service)
+                if sref == 'nope':
+                    self.sref4.append('')
+                    self.zap4 = False
+                else:
+                    self.sref4.append(sref)
+                logo = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/' + service + '.png'
+                self.showLogo4(logo)
+                self['logo4'].show()
+            except IndexError:
+                pass
+
+            try:
+                service = logos[4]
+                sref = self.service_db.lookup(service)
+                if sref == 'nope':
+                    self.sref5.append('')
+                    self.zap5 = False
+                else:
+                    self.sref5.append(sref)
+                logo = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/' + service + '.png'
+                self.showLogo5(logo)
+                self['logo5'].show()
+            except IndexError:
+                pass
+
+            try:
+                service = logos[5]
+                sref = self.service_db.lookup(service)
+                if sref == 'nope':
+                    self.sref6.append('')
+                    self.zap6 = False
+                else:
+                    self.sref6.append(sref)
+                logo = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/' + service + '.png'
+                self.showLogo6(logo)
+                self['logo6'].show()
+            except IndexError:
+                pass
+
+        sender = re.findall('<h3>(.*?)</h3>', bereichtop)
+        if sender is not None:
+            self['sender1'].setText(sender[0])
+            self['sender2'].setText(sender[1])
+            self['sender3'].setText(sender[2])
+            self['sender4'].setText(sender[3])
+            self['sender5'].setText(sender[4])
+            self['sender6'].setText(sender[5])
+            self['sender1'].show()
+            self['sender2'].show()
+            self['sender3'].show()
+            self['sender4'].show()
+            self['sender5'].show()
+            self['sender6'].show()
+        else:
+            self['sender1'].setText('')
+            self['sender2'].setText('')
+            self['sender3'].setText('')
+            self['sender4'].setText('')
+            self['sender5'].setText('')
+            self['sender6'].setText('')
+        pic = re.findall('<img src="(.*?)" width="', bereichtop)
+        if pic is not None:
+            try:
+                self.download(pic[0], self.getPic1)
+                self['pic1'].show()
+            except IndexError:
+                pass
+
+            try:
+                self.download(pic[1], self.getPic2)
+                self['pic2'].show()
+            except IndexError:
+                pass
+
+            try:
+                self.download(pic[2], self.getPic3)
+                self['pic3'].show()
+            except IndexError:
+                pass
+
+            try:
+                self.download(pic[3], self.getPic4)
+                self['pic4'].show()
+            except IndexError:
+                pass
+
+            try:
+                self.download(pic[4], self.getPic5)
+                self['pic5'].show()
+            except IndexError:
+                pass
+
+            try:
+                self.download(pic[5], self.getPic6)
+                self['pic6'].show()
+            except IndexError:
+                pass
+
+        pictime = re.findall('<span class="time">(.*?)</span>', bereichtop)
+        if pictime is not None:
+            self['pictime1'].setText(pictime[0])
+            self['pictime2'].setText(pictime[1])
+            self['pictime3'].setText(pictime[2])
+            self['pictime4'].setText(pictime[3])
+            self['pictime5'].setText(pictime[4])
+            self['pictime6'].setText(pictime[5])
+            self['pictime1'].show()
+            self['pictime2'].show()
+            self['pictime3'].show()
+            self['pictime4'].show()
+            self['pictime5'].show()
+            self['pictime6'].show()
+        else:
+            self['pictime1'].setText('')
+            self['pictime2'].setText('')
+            self['pictime3'].setText('')
+            self['pictime4'].setText('')
+            self['pictime5'].setText('')
+            self['pictime6'].setText('')
+        pictext = re.findall('<strong class="title">(.*?)</strong>', bereichtop)
+        if pictext is not None:
+            self['pictext1'].setText(pictext[0])
+            self['pictext2'].setText(pictext[1])
+            self['pictext3'].setText(pictext[2])
+            self['pictext4'].setText(pictext[3])
+            self['pictext5'].setText(pictext[4])
+            self['pictext6'].setText(pictext[5])
+            self['pictext1'].show()
+            self['pictext2'].show()
+            self['pictext3'].show()
+            self['pictext4'].show()
+            self['pictext5'].show()
+            self['pictext6'].show()
+        else:
+            self['pictext1'].setText('')
+            self['pictext2'].setText('')
+            self['pictext3'].setText('')
+            self['pictext4'].setText('')
+            self['pictext5'].setText('')
+            self['pictext6'].setText('')
+        if self.abends == True:
+            startpos = find(output, '<div id="toggleslot-20-p"')
+            endpos = find(output, '<div id="toggleslot-0-p"')
+        elif self.nachts == True:
+            startpos = find(output, '<div id="toggleslot-0-p"')
+            endpos = find(output, '<div class="block-now-stations">')
+        elif self.morgens == True:
+            startpos = find(output, '<div id="toggleslot-5-p"')
+            endpos = find(output, '<div id="toggleslot-14-p"')
+        elif self.mittags == True:
+            startpos = find(output, '<div id="toggleslot-14-p"')
+            endpos = find(output, '<div id="toggleslot-18-p"')
+        elif self.vorabend == True:
+            startpos = find(output, '<div id="toggleslot-18-p"')
+            endpos = find(output, '<div id="toggleslot-20-p"')
+        bereich = output[startpos:endpos]
+        bereich = transHTML(bereich)
+        bereich = sub('<a href="javascript://".*?\n', '', bereich)
+        bereich = sub('<a title="Sendung jetzt.*?\n', '', bereich)
+        bereich = sub('<span class="add-info icon-livetv"></span>', '', bereich)
+        bereich = sub('<span class="time"></span>', '<td>TIME00:00</span>', bereich)
+        bereich = sub('<span class="time">', '<td>TIME', bereich)
+        bereich = sub('<span class="add-info editorial-rating small"></span>', '', bereich)
+        bereich = sub('<span class="add-info editorial-', '<td>RATING', bereich)
+        bereich = sub('<span class="add-info ', '<td>LOGO', bereich)
+        bereich = sub('<a href="http://my', '<td>LINKhttp://www', bereich)
+        bereich = sub('<a href="http://www', '<td>LINKhttp://www', bereich)
+        bereich = sub('<a href="https://my', '<td>LINKhttp://www', bereich)
+        bereich = sub('<a href="https://www', '<td>LINKhttp://www', bereich)
+        bereich = sub('" target="_self"', '</td>', bereich)
+        bereich = sub('<strong class="title">', '<td>TITEL', bereich)
+        bereich = sub('<span class="subtitle">', '<td>SUBTITEL', bereich)
+        bereich = sub('</strong>', '</td>', bereich)
+        bereich = sub('">TIPP</span>', '</td>', bereich)
+        bereich = sub('">LIVE</span>', '</td>', bereich)
+        bereich = sub('">HDTV</span>', '</td>', bereich)
+        bereich = sub('">NEU</span>', '</td>', bereich)
+        bereich = sub('">OMU</span>', '</td>', bereich)
+        bereich = sub('"></span>', '</td>', bereich)
+        bereich = sub('</span>', '</td>', bereich)
+        bereich = sub('<wbr/>', '', bereich)
+        bereich = sub('<div class="program-block">', '<td>BLOCK</td>', bereich)
+        self.tventries1 = []
+        self.tvlink1 = []
+        self.tvtitel1 = []
+        self.tventries2 = []
+        self.tvlink2 = []
+        self.tvtitel2 = []
+        self.tventries3 = []
+        self.tvlink3 = []
+        self.tvtitel3 = []
+        self.tventries4 = []
+        self.tvlink4 = []
+        self.tvtitel4 = []
+        self.tventries5 = []
+        self.tvlink5 = []
+        self.tvtitel5 = []
+        self.tventries6 = []
+        self.tvlink6 = []
+        self.tvtitel6 = []
+        self.menu = 'menu6'
+        a = findall('<td>(.*?)</td>', bereich)
+        y = 0
+        offset = 9
+        for x in a:
+            if y == 0:
+                logo3 = False
+                if search('BLOCK', x) is not None:
+                    if self.menu == 'menu1':
+                        self.menu = 'menu2'
+                    elif self.menu == 'menu2':
+                        self.menu = 'menu3'
+                    elif self.menu == 'menu3':
+                        self.menu = 'menu4'
+                    elif self.menu == 'menu4':
+                        self.menu = 'menu5'
+                    elif self.menu == 'menu5':
+                        self.menu = 'menu6'
+                    elif self.menu == 'menu6':
+                        self.menu = 'menu1'
+                else:
+                    y = 1
+            if y == 1:
+                if search('BLOCK', x) is not None:
+                    res1 = ''
+                    res2 = ''
+                    res3 = ''
+                    res4 = ''
+                    res5 = ''
+                    res6 = ''
+                    y = 7
+                elif search('TIME', x) is not None:
+                    x = sub('TIME', '', x)
+                    if self.menu == 'menu1':
+                        res1 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res1.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res1.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                        res1.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                        hour = sub(':..', '', x)
+                        if int(hour) < 5:
+                            one_day = datetime.timedelta(days=1)
+                            date = self.date + one_day
+                        else:
+                            date = self.date
+                        timer = str(date) + ':::' + x + ':::' + str(self.sref1[0])
+                        if timer in self.timer:
+                            self.rec = True
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
+                            if fileExists(png):
+                                if self.xd == False:
+                                    res1.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
+                                else:
+                                    res1.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                    elif self.menu == 'menu2':
+                        res2 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res2.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res2.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                        res2.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                        hour = sub(':..', '', x)
+                        if int(hour) < 5:
+                            one_day = datetime.timedelta(days=1)
+                            date = self.date + one_day
+                        else:
+                            date = self.date
+                        timer = str(date) + ':::' + x + ':::' + str(self.sref2[0])
+                        if timer in self.timer:
+                            self.rec = True
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
+                            if fileExists(png):
+                                if self.xd == False:
+                                    res2.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
+                                else:
+                                    res2.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                    elif self.menu == 'menu3':
+                        res3 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res3.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res3.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                        res3.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                        hour = sub(':..', '', x)
+                        if int(hour) < 5:
+                            one_day = datetime.timedelta(days=1)
+                            date = self.date + one_day
+                        else:
+                            date = self.date
+                        timer = str(date) + ':::' + x + ':::' + str(self.sref3[0])
+                        if timer in self.timer:
+                            self.rec = True
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
+                            if fileExists(png):
+                                if self.xd == False:
+                                    res3.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
+                                else:
+                                    res3.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                    elif self.menu == 'menu4':
+                        res4 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res4.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res4.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                        res4.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                        hour = sub(':..', '', x)
+                        if int(hour) < 5:
+                            one_day = datetime.timedelta(days=1)
+                            date = self.date + one_day
+                        else:
+                            date = self.date
+                        timer = str(date) + ':::' + x + ':::' + str(self.sref4[0])
+                        if timer in self.timer:
+                            self.rec = True
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
+                            if fileExists(png):
+                                if self.xd == False:
+                                    res4.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
+                                else:
+                                    res4.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                    elif self.menu == 'menu5':
+                        res5 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res5.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res5.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                        res5.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                        hour = sub(':..', '', x)
+                        if int(hour) < 5:
+                            one_day = datetime.timedelta(days=1)
+                            date = self.date + one_day
+                        else:
+                            date = self.date
+                        timer = str(date) + ':::' + x + ':::' + str(self.sref5[0])
+                        if timer in self.timer:
+                            self.rec = True
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
+                            if fileExists(png):
+                                if self.xd == False:
+                                    res5.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
+                                else:
+                                    res5.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                    elif self.menu == 'menu6':
+                        res6 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res6.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res6.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                        res6.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                        hour = sub(':..', '', x)
+                        if int(hour) < 5:
+                            one_day = datetime.timedelta(days=1)
+                            date = self.date + one_day
+                        else:
+                            date = self.date
+                        timer = str(date) + ':::' + x + ':::' + str(self.sref6[0])
+                        if timer in self.timer:
+                            self.rec = True
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
+                            if fileExists(png):
+                                if self.xd == False:
+                                    res6.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
+                                else:
+                                    res6.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                else:
+                    if self.menu == 'menu1':
+                        res1 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res1.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res1.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                    elif self.menu == 'menu2':
+                        res2 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res2.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res2.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                    elif self.menu == 'menu3':
+                        res3 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res3.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res3.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                    elif self.menu == 'menu4':
+                        res4 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res4.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res4.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                    elif self.menu == 'menu5':
+                        res5 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res5.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res5.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                    elif self.menu == 'menu6':
+                        res6 = [x]
+                        if self.backcolor == True:
+                            if self.xd == False:
+                                res6.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res6.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                    y = 2
+            if y == 2:
+                if search('LOGO', x) is not None:
+                    x = sub('LOGO', '', x)
+                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                    if fileExists(png):
+                        if self.menu == 'menu1':
+                            res1.append(MultiContentEntryPixmapAlphaTest(pos=(0, 25), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu2':
+                            res2.append(MultiContentEntryPixmapAlphaTest(pos=(0, 25), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu3':
+                            res3.append(MultiContentEntryPixmapAlphaTest(pos=(0, 25), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu4':
+                            res4.append(MultiContentEntryPixmapAlphaTest(pos=(0, 25), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu5':
+                            res5.append(MultiContentEntryPixmapAlphaTest(pos=(0, 25), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu6':
+                            res6.append(MultiContentEntryPixmapAlphaTest(pos=(0, 25), size=(45, 15), png=loadPNG(png)))
+                else:
+                    y = 3
+            if y == 3:
+                if search('LOGO', x) is not None:
+                    x = sub('LOGO', '', x)
+                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                    if fileExists(png):
+                        if self.menu == 'menu1':
+                            res1.append(MultiContentEntryPixmapAlphaTest(pos=(0, 45), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu2':
+                            res2.append(MultiContentEntryPixmapAlphaTest(pos=(0, 45), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu3':
+                            res3.append(MultiContentEntryPixmapAlphaTest(pos=(0, 45), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu4':
+                            res4.append(MultiContentEntryPixmapAlphaTest(pos=(0, 45), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu5':
+                            res5.append(MultiContentEntryPixmapAlphaTest(pos=(0, 45), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu6':
+                            res6.append(MultiContentEntryPixmapAlphaTest(pos=(0, 45), size=(45, 15), png=loadPNG(png)))
+                else:
+                    y = 4
+            if y == 4:
+                if search('LOGO', x) is not None:
+                    x = sub('LOGO', '', x)
+                    logo3 = True
+                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                    if fileExists(png):
+                        if self.menu == 'menu1':
+                            res1.append(MultiContentEntryPixmapAlphaTest(pos=(0, 65), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu2':
+                            res2.append(MultiContentEntryPixmapAlphaTest(pos=(0, 65), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu3':
+                            res3.append(MultiContentEntryPixmapAlphaTest(pos=(0, 65), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu4':
+                            res4.append(MultiContentEntryPixmapAlphaTest(pos=(0, 65), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu5':
+                            res5.append(MultiContentEntryPixmapAlphaTest(pos=(0, 65), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu6':
+                            res6.append(MultiContentEntryPixmapAlphaTest(pos=(0, 65), size=(45, 15), png=loadPNG(png)))
+                else:
+                    y = 5
+            if y == 5:
+                if search('RATING', x) is not None:
+                    x = sub('RATING', '', x)
+                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                    if fileExists(png):
+                        if self.menu == 'menu1':
+                            if logo3 == False:
+                                res1.append(MultiContentEntryPixmapAlphaTest(pos=(5, 65), size=(29, 29), png=loadPNG(png)))
+                            else:
+                                res1.append(MultiContentEntryPixmapAlphaTest(pos=(5, 80), size=(29, 29), png=loadPNG(png)))
+                        elif self.menu == 'menu2':
+                            if logo3 == False:
+                                res2.append(MultiContentEntryPixmapAlphaTest(pos=(5, 65), size=(29, 29), png=loadPNG(png)))
+                            else:
+                                res2.append(MultiContentEntryPixmapAlphaTest(pos=(5, 80), size=(29, 29), png=loadPNG(png)))
+                        elif self.menu == 'menu3':
+                            if logo3 == False:
+                                res3.append(MultiContentEntryPixmapAlphaTest(pos=(5, 65), size=(29, 29), png=loadPNG(png)))
+                            else:
+                                res3.append(MultiContentEntryPixmapAlphaTest(pos=(5, 80), size=(29, 29), png=loadPNG(png)))
+                        elif self.menu == 'menu4':
+                            if logo3 == False:
+                                res4.append(MultiContentEntryPixmapAlphaTest(pos=(5, 65), size=(29, 29), png=loadPNG(png)))
+                            else:
+                                res4.append(MultiContentEntryPixmapAlphaTest(pos=(5, 80), size=(29, 29), png=loadPNG(png)))
+                        elif self.menu == 'menu5':
+                            if logo3 == False:
+                                res5.append(MultiContentEntryPixmapAlphaTest(pos=(5, 65), size=(29, 29), png=loadPNG(png)))
+                            else:
+                                res5.append(MultiContentEntryPixmapAlphaTest(pos=(5, 80), size=(29, 29), png=loadPNG(png)))
+                        elif self.menu == 'menu6':
+                            if logo3 == False:
+                                res6.append(MultiContentEntryPixmapAlphaTest(pos=(5, 65), size=(29, 29), png=loadPNG(png)))
+                            else:
+                                res6.append(MultiContentEntryPixmapAlphaTest(pos=(5, 80), size=(29, 29), png=loadPNG(png)))
+                elif search('LOGO', x) is not None:
+                    x = sub('LOGO', '', x)
+                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                    if fileExists(png):
+                        if self.menu == 'menu1':
+                            res1.append(MultiContentEntryPixmapAlphaTest(pos=(0, 85), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu2':
+                            res2.append(MultiContentEntryPixmapAlphaTest(pos=(0, 85), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu3':
+                            res3.append(MultiContentEntryPixmapAlphaTest(pos=(0, 85), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu4':
+                            res4.append(MultiContentEntryPixmapAlphaTest(pos=(0, 85), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu5':
+                            res5.append(MultiContentEntryPixmapAlphaTest(pos=(0, 85), size=(45, 15), png=loadPNG(png)))
+                        elif self.menu == 'menu6':
+                            res6.append(MultiContentEntryPixmapAlphaTest(pos=(0, 85), size=(45, 15), png=loadPNG(png)))
+                    y = 4
+                else:
+                    y = 6
+            if y == 6:
+                if search('LINK', x) is not None:
+                    x = sub('LINK', '', x)
+                    if self.menu == 'menu1':
+                        self.tvlink1.append(x)
+                    elif self.menu == 'menu2':
+                        self.tvlink2.append(x)
+                    elif self.menu == 'menu3':
+                        self.tvlink3.append(x)
+                    elif self.menu == 'menu4':
+                        self.tvlink4.append(x)
+                    elif self.menu == 'menu5':
+                        self.tvlink5.append(x)
+                    elif self.menu == 'menu6':
+                        self.tvlink6.append(x)
+                else:
+                    if self.menu == 'menu1':
+                        self.tvlink1.append('na')
+                    elif self.menu == 'menu2':
+                        self.tvlink2.append('na')
+                    elif self.menu == 'menu3':
+                        self.tvlink3.append('na')
+                    elif self.menu == 'menu4':
+                        self.tvlink4.append('na')
+                    elif self.menu == 'menu5':
+                        self.tvlink5.append('na')
+                    elif self.menu == 'menu6':
+                        self.tvlink6.append('na')
+                    y = 7
+            if y == 7:
+                if search('TITEL', x) is not None:
+                    x = sub('TITEL', '', x)
+                    titel = x
+                else:
+                    titel = ''
+                    y = 8
+            if y == 8:
+                if search('SUBTITEL', x) is not None:
+                    x = sub('SUBTITEL', '', x)
+                    if x != '':
+                        x = titel + ', ' + x
+                    else:
+                        x = titel
+                    if self.menu == 'menu1':
+                        self.tvtitel1.append(titel)
+                        if self.xd == False:
+                            if self.rec == True:
+                                self.rec = False
+                                if self.fontlarge == True:
+                                    res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                else:
+                                    res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            elif self.fontlarge == True:
+                                res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.rec == True:
+                            self.rec = False
+                            if self.fontlarge == True:
+                                res1.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res1.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.fontlarge == True:
+                            res1.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        else:
+                            res1.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        self.tventries1.append(res1)
+                    elif self.menu == 'menu2':
+                        self.tvtitel2.append(titel)
+                        if self.xd == False:
+                            if self.rec == True:
+                                self.rec = False
+                                if self.fontlarge == True:
+                                    res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                else:
+                                    res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            elif self.fontlarge == True:
+                                res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.rec == True:
+                            self.rec = False
+                            if self.fontlarge == True:
+                                res2.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res2.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.fontlarge == True:
+                            res2.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        else:
+                            res2.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        self.tventries2.append(res2)
+                    elif self.menu == 'menu3':
+                        self.tvtitel3.append(titel)
+                        if self.xd == False:
+                            if self.rec == True:
+                                self.rec = False
+                                if self.fontlarge == True:
+                                    res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                else:
+                                    res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            elif self.fontlarge == True:
+                                res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.rec == True:
+                            self.rec = False
+                            if self.fontlarge == True:
+                                res3.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res3.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.fontlarge == True:
+                            res3.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        else:
+                            res3.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        self.tventries3.append(res3)
+                    elif self.menu == 'menu4':
+                        self.tvtitel4.append(titel)
+                        if self.xd == False:
+                            if self.rec == True:
+                                self.rec = False
+                                if self.fontlarge == True:
+                                    res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                else:
+                                    res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            elif self.fontlarge == True:
+                                res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.rec == True:
+                            self.rec = False
+                            if self.fontlarge == True:
+                                res4.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res4.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.fontlarge == True:
+                            res4.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        else:
+                            res4.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        self.tventries4.append(res4)
+                    elif self.menu == 'menu5':
+                        self.tvtitel5.append(titel)
+                        if self.xd == False:
+                            if self.rec == True:
+                                self.rec = False
+                                if self.fontlarge == True:
+                                    res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                else:
+                                    res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            elif self.fontlarge == True:
+                                res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.rec == True:
+                            self.rec = False
+                            if self.fontlarge == True:
+                                res5.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res5.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.fontlarge == True:
+                            res5.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        else:
+                            res5.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        self.tventries5.append(res5)
+                    elif self.menu == 'menu6':
+                        self.tvtitel6.append(titel)
+                        if self.xd == False:
+                            if self.rec == True:
+                                self.rec = False
+                                if self.fontlarge == True:
+                                    res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                else:
+                                    res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            elif self.fontlarge == True:
+                                res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.rec == True:
+                            self.rec = False
+                            if self.fontlarge == True:
+                                res6.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            else:
+                                res6.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        elif self.fontlarge == True:
+                            res6.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        else:
+                            res6.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                        self.tventries6.append(res6)
+                elif search('BLOCK', x) is not None:
+                    if self.menu == 'menu1':
+                        self.menu = 'menu2'
+                    elif self.menu == 'menu2':
+                        self.menu = 'menu3'
+                    elif self.menu == 'menu3':
+                        self.menu = 'menu4'
+                    elif self.menu == 'menu4':
+                        self.menu = 'menu5'
+                    elif self.menu == 'menu5':
+                        self.menu = 'menu6'
+                    elif self.menu == 'menu6':
+                        self.menu = 'menu1'
+            y += 1
+            if y == offset:
+                y = 0
+
+        self['menu1'].l.setItemHeight(115)
+        self['menu1'].l.setList(self.tventries1)
+        self['menu2'].l.setItemHeight(115)
+        self['menu2'].l.setList(self.tventries2)
+        self['menu3'].l.setItemHeight(115)
+        self['menu3'].l.setList(self.tventries3)
+        self['menu4'].l.setItemHeight(115)
+        self['menu4'].l.setList(self.tventries4)
+        self['menu5'].l.setItemHeight(115)
+        self['menu5'].l.setList(self.tventries5)
+        self['menu6'].l.setItemHeight(115)
+        self['menu6'].l.setList(self.tventries6)
+        self['menu1'].moveToIndex(self.oldindex)
+        self['menu2'].moveToIndex(self.oldindex)
+        self['menu3'].moveToIndex(self.oldindex)
+        self['menu4'].moveToIndex(self.oldindex)
+        self['menu5'].moveToIndex(self.oldindex)
+        self['menu6'].moveToIndex(self.oldindex)
+        if self.current == 'menu1':
+            self['menu1'].selectionEnabled(1)
+            self['menu2'].selectionEnabled(0)
+            self['menu3'].selectionEnabled(0)
+            self['menu4'].selectionEnabled(0)
+            self['menu5'].selectionEnabled(0)
+            self['menu6'].selectionEnabled(0)
+        elif self.current == 'menu2':
+            self['menu1'].selectionEnabled(0)
+            self['menu2'].selectionEnabled(1)
+            self['menu3'].selectionEnabled(0)
+            self['menu4'].selectionEnabled(0)
+            self['menu5'].selectionEnabled(0)
+            self['menu6'].selectionEnabled(0)
+        elif self.current == 'menu3':
+            self['menu1'].selectionEnabled(0)
+            self['menu2'].selectionEnabled(0)
+            self['menu3'].selectionEnabled(1)
+            self['menu4'].selectionEnabled(0)
+            self['menu5'].selectionEnabled(0)
+            self['menu6'].selectionEnabled(0)
+        elif self.current == 'menu4':
+            self['menu1'].selectionEnabled(0)
+            self['menu2'].selectionEnabled(0)
+            self['menu3'].selectionEnabled(0)
+            self['menu4'].selectionEnabled(1)
+            self['menu5'].selectionEnabled(0)
+            self['menu6'].selectionEnabled(0)
+        elif self.current == 'menu5':
+            self['menu1'].selectionEnabled(0)
+            self['menu2'].selectionEnabled(0)
+            self['menu3'].selectionEnabled(0)
+            self['menu4'].selectionEnabled(0)
+            self['menu5'].selectionEnabled(1)
+            self['menu6'].selectionEnabled(0)
+        elif self.current == 'menu6':
+            self['menu1'].selectionEnabled(0)
+            self['menu2'].selectionEnabled(0)
+            self['menu3'].selectionEnabled(0)
+            self['menu4'].selectionEnabled(0)
+            self['menu5'].selectionEnabled(0)
+            self['menu6'].selectionEnabled(1)
+        self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Men\xc3\xbc = Senderliste')
+        self['label'].stopBlinking()
+        self['label'].show()
+        self.ready = True
+        return
+
+    def makePostviewPage(self, string):
+        output = open(self.localhtml2, 'r').read()
+        output = six.ensure_str(output)
+        self['label2'].setText('= Timer')
+        self['label3'].setText('= YouTube')
+        self['label4'].setText('= Wikipedia')
+        self['sender1'].hide()
+        self['sender2'].hide()
+        self['sender3'].hide()
+        self['sender4'].hide()
+        self['sender5'].hide()
+        self['sender6'].hide()
+        self['logo1'].hide()
+        self['logo2'].hide()
+        self['logo3'].hide()
+        self['logo4'].hide()
+        self['logo5'].hide()
+        self['logo6'].hide()
+        self['pic1'].hide()
+        self['pic2'].hide()
+        self['pic3'].hide()
+        self['pic4'].hide()
+        self['pic5'].hide()
+        self['pic6'].hide()
+        self['pictime1'].hide()
+        self['pictime2'].hide()
+        self['pictime3'].hide()
+        self['pictime4'].hide()
+        self['pictime5'].hide()
+        self['pictime6'].hide()
+        self['pictext1'].hide()
+        self['pictext2'].hide()
+        self['pictext3'].hide()
+        self['pictext4'].hide()
+        self['pictext5'].hide()
+        self['pictext6'].hide()
+        self['menu1'].hide()
+        self['menu2'].hide()
+        self['menu3'].hide()
+        self['menu4'].hide()
+        self['menu5'].hide()
+        self['menu6'].hide()
+        self['searchmenu'].hide()
+        self['searchlogo'].hide()
+        self['searchtimer'].hide()
+        self['searchtext'].hide()
+        output = sub('</dl>.\n\\s+</div>.\n\\s+</section>', '</cast>', output)
+        startpos = output.find('<div class="content-area">')
+        endpos = output.find('>Weitere Bildergalerien<')
+        if endpos == -1:
+            endpos = output.find('</cast>')
+            if endpos == -1:
+                endpos = output.find('<h2 class="broadcast-info">')
+                if endpos == -1:
+                    endpos = output.find('<div class="OUTBRAIN"')
+                    if endpos == -1:
+                        endpos = output.find('</footer>')
+        bereich = output[startpos:endpos]
+        bereich = transHTML(bereich)
+        bereich = sub('\r', '', bereich)
+        bereich = re.sub('<ul class="slidelist">.*?</ul>', '', bereich, flags=re.S)
+        bereich = re.sub('<script.*?</script>', '', bereich, flags=re.S)
+        bereich = re.sub('<style.*?</style>', '', bereich, flags=re.S)
+        bereich = re.sub('<div class="text" id=".*?</div>', '', bereich, flags=re.S)
+        if search('rl: .https://video.tvspielfilm.de/.*?mp4', output) is not None:
+            trailerurl = search('rl: .https://video.tvspielfilm.de/(.*?).mp4', output)
+            self.trailerurl = 'https://video.tvspielfilm.de/' + trailerurl.group(1) + '.mp4'
+            self.trailer = True
+        else:
+            self.trailer = False
+        bereich = sub('" alt=".*?" width="', '" width="', bereich)
+        picurl = search('<img src="(.*?)" width="', bereich)
+        if picurl is not None:
+            self.download(picurl.group(1), self.getPicPost)
+            self['picpost'].show()
+        else:
+            picurl = search('<meta property="og:image" content="(.*?)"', output)
+            if picurl is not None:
+                self.download(picurl.group(1), self.getPicPost)
+                self['picpost'].show()
+            else:
+                picurl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/TV-Spielfilm-Logo.svg/500px-TV-Spielfilm-Logo.svg.png'
+                self.download(picurl, self.getPicPost)
+                self['picpost'].show()
+        if self.search == False:
+            title = search('<title>(.*?)</title>', output)
+            self.title = transHTML(title.group(1))
+            self.setTitle(self.title)
+        if search('<ul class="rating-dots">', bereich) is not None:
+            self.movie = True
+        else:
+            self.movie = False
+        if search('<div class="film-gallery">', output) is not None:
+            self.mehrbilder = True
+            if self.trailer == True:
+                self['label'].setText('OK = Zum Video, Text = Fotostrecke, 7/8/9 = IMDb/TMDb/TVDb, Info = EPG')
+            else:
+                self['label'].setText('OK = Fotostrecke, 7/8/9 = IMDb/TMDb/TVDb, Info = EPG')
+        else:
+            self.mehrbilder = False
+            if self.trailer == True:
+                self['label'].setText('OK = Zum Video, Text = Vollbild, 7/8/9 = IMDb/TMDb/TVDb, Info = EPG')
+            else:
+                self['label'].setText('OK = Vollbild, 7/8/9 = IMDb/TMDb/TVDb, Info = EPG')
+        infotext = re.findall('<span class="text-row">(.*?)<', bereich)
+        try:
+            parts = infotext[0].split(', ')
+            x = parts[0]
+            if x == 'Heute':
+                d = sub('....-', '', str(self.date))
+                d2 = sub('-..', '', d)
+                d3 = sub('..-', '', d)
+                x = 'he ' + d3 + '.' + d2 + '.'
+            day = sub('.. ', '', x)
+            self.day = sub('[.]..[.]', '', day)
+            month = sub('.. ..[.]', '', x)
+            month = sub('[.]', '', month)
+            date = str(self.date) + 'FIN'
+            year = sub('......FIN', '', date)
+            self.postdate = year + '-' + month + '-' + self.day
+            today = datetime.date(int(year), int(month), int(self.day))
+            one_day = datetime.timedelta(days=1)
+            self.nextdate = today + one_day
+        except:
+            pass
+
+        try:
+            parts = infotext[0].split(', ')
+            x = parts[1]
+            start = sub(' - ..:..', '', x)
+            start = start + ':00'
+            end = sub('..:.. - ', '', x)
+            end = end + ':00'
+            self.start = start
+            self.end = end
+        except IndexError:
+            pass
+
+        try:
+            parts = infotext[0].split(', ')
+            self['infotext'].setText(parts[0])
+            self['infotext'].show()
+        except IndexError:
+            self['infotext'].setText('')
+
+        try:
+            parts = infotext[0].split(', ')
+            self['infotext2'].setText(parts[1])
+            self['infotext2'].show()
+        except IndexError:
+            self['infotext2'].setText('')
+
+        try:
+            parts = infotext[0].split(', ')
+            self['infotext3'].setText(parts[2])
+            self['infotext3'].show()
+        except IndexError:
+            self['infotext3'].setText('')
+
+        try:
+            parts = infotext[1].split(', ')
+            self['infotext4'].setText(parts[0])
+            self['infotext4'].show()
+        except IndexError:
+            self['infotext4'].setText('')
+
+        try:
+            parts = infotext[1].split(', ')
+            self['infotext5'].setText(parts[1])
+            self['infotext5'].show()
+        except IndexError:
+            self['infotext5'].setText('')
+
+        try:
+            parts = infotext[1].split(', ')
+            self['infotext6'].setText(parts[2])
+            self['infotext6'].show()
+        except IndexError:
+            self['infotext6'].setText('')
+
+        try:
+            parts = infotext[2].split(', ')
+            self['infotext7'].setText(parts[0] + ', ' + parts[1])
+            self['infotext7'].show()
+        except IndexError:
+            self['infotext7'].setText('')
+
+        try:
+            self['infotext8'].setText(infotext[3])
+            self['infotext8'].show()
+        except IndexError:
+            self['infotext8'].setText('')
+
+        tvinfo = re.findall('<span class="add-info (.*?)">', bereich)
+        for pos in list(range(4)):
+            try:
+                if self.xd == False:
+                    tvi = ICONPATH + tvinfo[pos] + 'HD.png'
+                else:
+                    tvi = ICONPATH + tvinfo[pos] + '.png'
+                tvis = 'tvinfo' + str(pos+1)
+                self.showPicTVinfoX(tvi, tvis)
+                self[tvis].show()
+            except IndexError:
+                pass
+
+        self['piclabel'].setText(self.start[0:5])
+        try:
+            parts = infotext[0].split(', ')
+            text = shortenChannel(parts[2])
+            self['piclabel2'].setText(text[0:10])
+        except IndexError:
+            self['piclabel2'].setText('')
+
+        shortdesc = search('<section class="serial-info">\\n\\s+(.*?)</section>', bereich)
+        if shortdesc is not None:
+            self.shortdesc = sub('<span class="info">', '', shortdesc.group(1))
+            self.shortdesc = sub('</span>\\s+', ', ', self.shortdesc)
+            self.shortdesc = sub('  ', '', self.shortdesc)
+        else:
+            self.shortdesc = ''
+        name = re.findall('<h1 class="headline headline--article">(.*?)</h1>', bereich)
+        try:
+            self.name = name[0]
+        except IndexError:
+            name = re.findall('<span itemprop="name"><strong>(.*?)</strong></span>', bereich)
+            try:
+                self.name = name[0]
+            except IndexError:
+                self.name = ''
+
+        bereich = sub('<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
+        bereich = sub('</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
+        bereich = sub('<section class="serial-info">\n\\s+', '<p>', bereich)
+        bereich = sub('</section>', '</p>', bereich)
+        bereich = sub('</span>\\s+', '</span>, ', bereich)
+        bereich = sub('<li class="titleName">', '</p><p> \xc2\xb7 ', bereich)
+        bereich = sub('<li class="subtitleName">', '#sub#', bereich)
+        bereich = sub('ShowView [0-9-]+', '', bereich)
+        bereich = sub('<a href=".*?">', '', bereich)
+        bereich = sub('<h1.*?>', '<p>', bereich)
+        bereich = sub('</h1>', '</p>', bereich)
+        bereich = sub('<h3.*?>', '<p>', bereich)
+        bereich = sub('</h3>', '</p>', bereich)
+        bereich = sub('<br/>', '</p><p>', bereich)
+        bereich = sub('<p>\n', '<p>', bereich)
+        bereich = sub('<dt>', '<p>', bereich)
+        bereich = sub('<dt class="role">', '<p>', bereich)
+        bereich = sub('</dt>\n\\s+<dd>\n\\s+', ' ', bereich)
+        bereich = sub('</dt>\n\\s+<dd>', ' ', bereich)
+        bereich = sub('</dt>\n\\s+<dd class="name">', ': ', bereich)
+        bereich = sub('\n[ ]+,', ',', bereich)
+        bereich = sub(', [ ]+', ', ', bereich)
+        bereich = sub('</a>', '</p>', bereich)
+        bereich = sub('\n\\s+</dd>', '</p>', bereich)
+        bereich = sub('</a></dd>', '</p>', bereich)
+        bereich = sub('</dd>', '</p>', bereich)
+        bereich = sub('</dt>', '</p>', bereich)
+        text = ''
+        a = findall('<p.*?>(.*?)</p>', bereich)
+        for x in a:
+            if x != '':
+                text = text + x + '\n\n'
+
+        text = sub('<[^>]*>', '', text)
+        text = sub('</p<<p<', '\n\n', text)
+        text = sub('\n\\s+\n*', '\n\n', text)
+        text = sub('#sub#', '\n  ', text)
+        if self.fontlarge == True:
+            if self.xd == False:
+                fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
+            else:
+                fill = '________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
+        elif self.xd == False:
+            fill = '____________________________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
+        else:
+            fill = '_________________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
+        self.POSTtext = text + fill
+        self['textpage'].setText(self.POSTtext)
+        self['textpage'].show()
+        self['slider_textpage'].show()
+        self.showEPG = False
+        self.postviewready = True
+        return
+
+    def makePostTimer(self, output):
+        output = six.ensure_str(output)
+        startpos = output.find('<div class="content-area">')
+        endpos = output.find('>Weitere Bildergalerien<')
+        if endpos == -1:
+            endpos = output.find('<h2 class="broadcast-info">')
+            if endpos == -1:
+                endpos = output.find('<div class="OUTBRAIN"')
+                if endpos == -1:
+                    endpos = output.find('</footer>')
+        bereich = output[startpos:endpos]
+        bereich = transHTML(bereich)
+        infotext = re.findall('<span class="text-row">(.*?)<', bereich)
+        try:
+            parts = infotext[0].split(', ')
+            x = parts[0]
+            if x == 'Heute':
+                d = sub('....-', '', str(self.date))
+                d2 = sub('-..', '', d)
+                d3 = sub('..-', '', d)
+                x = 'he ' + d3 + '.' + d2 + '.'
+            day = sub('.. ', '', x)
+            self.day = sub('[.]..[.]', '', day)
+            month = sub('.. ..[.]', '', x)
+            month = sub('[.]', '', month)
+            date = str(self.date) + 'FIN'
+            year = sub('......FIN', '', date)
+            self.postdate = year + '-' + month + '-' + self.day
+            today = datetime.date(int(year), int(month), int(self.day))
+            one_day = datetime.timedelta(days=1)
+            self.nextdate = today + one_day
+        except:
+            pass
+
+        try:
+            parts = infotext[0].split(', ')
+            x = parts[1]
+            start = sub(' - ..:..', '', x)
+            start = start + ':00'
+            end = sub('..:.. - ', '', x)
+            end = end + ':00'
+            self.start = start
+            self.end = end
+        except IndexError:
+            pass
+
+        shortdesc = search('<section class="serial-info">\\n\\s+(.*?)</section>', bereich)
+        if shortdesc is not None:
+            self.shortdesc = sub('<span class="info">', '', shortdesc.group(1))
+            self.shortdesc = sub('</span>\\s+', ', ', self.shortdesc)
+            self.shortdesc = sub('  ', '', self.shortdesc)
+        else:
+            self.shortdesc = ''
+        name = re.findall('<h1 class="headline headline--article">(.*?)</h1>', bereich)
+        try:
+            self.name = name[0]
+        except IndexError:
+            name = re.findall('<span itemprop="name"><strong>(.*?)</strong></span>', bereich)
+            try:
+                self.name = name[0]
+            except IndexError:
+                self.name = ''
+
+        self.current = 'postview'
+        self.postviewready = True
+        self.red()
+        return
+
+    def makeSearchView(self, url):
+        header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
+         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+         'Accept-Language': 'en-us,en;q=0.5'}
+        searchrequest = Request(url, None, header)
+        try:
+            output = urlopen(searchrequest).read()
+        except (HTTPError,
+         URLError,
+         HTTPException,
+         socket.error,
+         AttributeError):
+            output = ' '
+
+        title = search('<title>(.*?)</title>', output)
+        if title is not None:
+            self['searchtext'].setText(title.group(1))
+            self['searchtext'].show()
+            self.setTitle('')
+            self.setTitle(title.group(1))
+        startpos = find(output, '<table class="primetime-table">')
+        endpos = find(output, '</table>')
+        bereich = output[startpos:endpos]
+        bereich = transHTML(bereich)
+        bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
+        bereich = sub('class="search-starttimes">\n\\s+<span>', '<td>TIME', bereich)
+        bereich = sub('<h3><a href="', '<td>LINK', bereich)
+        if self.showgenre == False:
+            bereich = sub('" target="_self" onclick="saveRef[(][)];" title=".*?">', '</td><td>TITEL', bereich)
+            bereich = sub('</a></h3>', '</td>', bereich)
+        else:
+            bereich = sub('" target="_self" onclick="saveRef[(][)];" title="', '</td><td>TITEL', bereich)
+            bereich = sub('">.*?</a></h3>', '</td>', bereich)
+        bereich = sub('<span class="logotype chl_bg_. c-', '<td>LOGO', bereich)
+        bereich = sub('<p>', '<td>GENRE', bereich)
+        bereich = sub('<li class="', '<td>INFO', bereich)
+        bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
+        bereich = sub('<span class="editorial-', '<td>RATING', bereich)
+        bereich = sub('"></span>', '', bereich)
+        bereich = sub('</span>\n', '</td>', bereich)
+        bereich = sub('</span>', '', bereich)
+        bereich = sub('\n\\s+</div>\n', '</td>', bereich)
+        bereich = sub('\n.*?</p>', '</td>', bereich)
+        bereich = sub('"></li>', '</td>', bereich)
+        bereich = sub('\n.*?<br/><em class=".*?</em>', '', bereich)
+        a = findall('<td>(.*?)</td>', bereich)
+        y = 0
+        offset = 10
+        for x in a:
+            if y == 0:
+                res = [x]
+                if self.backcolor == True:
+                    if self.picon == True:
+                        if self.xd == False:
+                            res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
+                        else:
+                            res.append(MultiContentEntryText(pos=(0, 0), size=(992, 60), font=0, backcolor_sel=self.back_color, text=''))
+                    elif self.xd == False:
+                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
+                    else:
+                        res.append(MultiContentEntryText(pos=(0, 0), size=(992, 30), font=0, backcolor_sel=self.back_color, text=''))
+                if search('DATUM', x) is not None:
+                    if self.datum == True:
+                        try:
+                            del self.searchref[-1]
+                            del self.searchlink[-1]
+                            del self.searchentries[-1]
+                        except IndexError:
+                            pass
+
+                    else:
+                        self.datum = True
+                    x = sub('DATUM', '', x)
+                    self.datum_string = x
+                    res_datum = [x]
+                    if self.backcolor == True:
+                        if self.picon == True:
+                            if self.xd == False:
+                                res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
+                            else:
+                                res_datum.append(MultiContentEntryText(pos=(0, 0), size=(992, 60), font=0, backcolor_sel=self.back_color, text=''))
+                        elif self.xd == False:
+                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
+                        else:
+                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(992, 30), font=0, backcolor_sel=self.back_color, text=''))
+                    if self.picon == True:
+                        if self.xd == False:
+                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                        else:
+                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(992, 60), font=0, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                    elif self.xd == False:
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                    else:
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(992, 30), font=0, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                    self.searchref.append('na')
+                    self.searchlink.append('na')
+                    self.searchentries.append(res_datum)
+                    self.filter = True
+                    y = 9
+                else:
+                    y = 1
+            if y == 1:
+                x = sub('TIME', '', x)
+                start = x
+                if self.picon == True:
+                    if self.xd == False:
+                        res.append(MultiContentEntryText(pos=(100, 17), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                    else:
+                        res.append(MultiContentEntryText(pos=(100, 18), size=(154, 30), font=0, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                elif self.xd == False:
+                    res.append(MultiContentEntryText(pos=(60, 7), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                else:
+                    res.append(MultiContentEntryText(pos=(45, 3), size=(154, 30), font=0, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+            if y == 2:
+                if search('LOGO', x) is not None:
+                    logo = search('LOGO(.*?)">', x)
+                    if logo is not None:
+                        x = logo.group(1)
+                    service = x
+                    sref = self.service_db.lookup(service)
+                    if sref == 'nope':
+                        self.filter = True
+                    else:
+                        self.filter = False
+                        self.searchref.append(sref)
+                        if self.picon == True:
+                            picon = self.findPicon(sref)
+                            if picon is not None:
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
+                            else:
+                                res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+                        elif self.xd == False:
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % x
+                            if fileExists(png):
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
+                        else:
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%s.png' % x
+                            if fileExists(png):
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(44, 27), png=loadPNG(png)))
+                        start = sub(' - ..:..', '', start)
+                        daynow = sub('....-..-', '', str(self.date))
+                        day = search(', ([0-9]+). ', self.datum_string)
+                        if day is not None:
+                            day = day.group(1)
+                        else:
+                            day = daynow
+                        if int(day) >= int(daynow) - 1:
+                            date = str(self.date) + 'FIN'
+                        else:
+                            four_weeks = datetime.timedelta(weeks=4)
+                            date = str(self.date + four_weeks) + 'FIN'
+                        date = sub('[0-9][0-9]FIN', day, date)
+                        timer = date + ':::' + start + ':::' + str(sref)
+                        if timer in self.timer:
+                            self.rec = True
+                            if self.picon == True:
+                                if self.xd == False:
+                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-recHD.png'
+                                    if fileExists(png):
+                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
+                                else:
+                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-rec.png'
+                                    if fileExists(png):
+                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(898, 23), size=(45, 15), png=loadPNG(png)))
+                            elif self.xd == False:
+                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-recHD.png'
+                                if fileExists(png):
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            else:
+                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-rec.png'
+                                if fileExists(png):
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(898, 8), size=(45, 15), png=loadPNG(png)))
+            if y == 3:
+                if self.filter == False:
+                    x = sub('LINK', '', x)
+                    self.searchlink.append(x)
+            if y == 4:
+                if self.filter == False:
+                    x = sub('TITEL', '', x)
+                    titelfilter = x
+            if y == 5:
+                if self.filter == False:
+                    if search('GENRE', x) is None:
+                        if self.picon == True:
+                            if self.xd == False:
+                                res.append(MultiContentEntryText(pos=(275, 17), size=(675, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                            else:
+                                res.append(MultiContentEntryText(pos=(255, 18), size=(523, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                        elif self.xd == False:
+                            res.append(MultiContentEntryText(pos=(235, 7), size=(715, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                        else:
+                            res.append(MultiContentEntryText(pos=(200, 3), size=(578, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                        y = 6
+            if y == 6:
+                if search('INFO', x) is not None:
+                    if self.filter == False:
+                        if self.rec == True:
+                            self.rec = False
+                        else:
+                            x = sub('INFO', '', x)
+                            if self.picon == True:
+                                if self.xd == False:
+                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
+                                    if fileExists(png):
+                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
+                                else:
+                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                                    if fileExists(png):
+                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(898, 23), size=(45, 15), png=loadPNG(png)))
+                            elif self.xd == False:
+                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
+                                if fileExists(png):
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            else:
+                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                                if fileExists(png):
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(898, 8), size=(45, 15), png=loadPNG(png)))
+                else:
+                    y = 9
+            if y == 7:
+                if search('INFO', x) is not None:
+                    if self.filter == False:
+                        x = sub('INFO', '', x)
+                        if self.picon == True:
+                            if self.xd == False:
+                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
+                                if fileExists(png):
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 20), size=(60, 20), png=loadPNG(png)))
+                            else:
+                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                                if fileExists(png):
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 23), size=(45, 15), png=loadPNG(png)))
+                        elif self.xd == False:
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
+                            if fileExists(png):
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 10), size=(60, 20), png=loadPNG(png)))
+                        else:
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                            if fileExists(png):
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 8), size=(45, 15), png=loadPNG(png)))
+                else:
+                    y = 9
+            if y == 8:
+                if search('INFO', x) is not None:
+                    if self.filter == False:
+                        x = sub('INFO', '', x)
+                        if self.picon == True:
+                            if self.xd == False:
+                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
+                                if fileExists(png):
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 20), size=(60, 20), png=loadPNG(png)))
+                            else:
+                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                                if fileExists(png):
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(788, 23), size=(45, 15), png=loadPNG(png)))
+                        elif self.xd == False:
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
+                            if fileExists(png):
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 10), size=(60, 20), png=loadPNG(png)))
+                        else:
+                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                            if fileExists(png):
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(788, 8), size=(45, 15), png=loadPNG(png)))
+                else:
+                    y = 9
+            if y == 9:
+                if search('INFO', x) is not None:
+                    y = 7
+                elif self.filter == False:
+                    self.datum = False
+                    if search('RATING', x) is not None:
+                        x = sub('RATING', '', x)
+                        if x != 'rating small':
+                            if self.picon == True:
+                                if self.xd == False:
+                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
+                                    if fileExists(png):
+                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, 10), size=(40, 40), png=loadPNG(png)))
+                                else:
+                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                                    if fileExists(png):
+                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(958, 16), size=(29, 29), png=loadPNG(png)))
+                            elif self.xd == False:
+                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
+                                if fileExists(png):
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, 0), size=(40, 40), png=loadPNG(png)))
+                            else:
+                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                                if fileExists(png):
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(958, 1), size=(29, 29), png=loadPNG(png)))
+                    if self.picon == True:
+                        if self.xd == False:
+                            res.append(MultiContentEntryText(pos=(275, 17), size=(675, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                        else:
+                            res.append(MultiContentEntryText(pos=(255, 18), size=(523, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                    elif self.xd == False:
+                        res.append(MultiContentEntryText(pos=(235, 7), size=(715, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                    else:
+                        res.append(MultiContentEntryText(pos=(200, 3), size=(578, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                    self.searchentries.append(res)
+            y += 1
+            if y == offset:
+                y = 0
+
+        if self.picon == True:
+            self['searchmenu'].l.setItemHeight(60)
+        elif self.xd == False:
+            self['searchmenu'].l.setItemHeight(40)
+        else:
+            self['searchmenu'].l.setItemHeight(30)
+        self['searchmenu'].l.setList(self.searchentries)
+        self['searchmenu'].show()
+        self.searchcount += 1
+        if self.searchcount <= self.maxsearchcount and search('class="pagination__link pagination__link--next" >', bereich) is not None:
+            nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
+            if nextpage is not None:
+                self.makeSearchView(nextpage.group(1))
+            else:
+                self.ready = True
+        else:
+            try:
+                if self.searchref[-1] == 'na':
+                    del self.searchref[-1]
+                    del self.searchlink[-1]
+                    del self.searchentries[-1]
+                    self['searchmenu'].l.setList(self.searchentries)
+            except IndexError:
+                pass
+
+            self['searchmenu'].moveToIndex(self.oldsearchindex)
+            self.current = 'searchmenu'
+            self.ready = True
+        return
+
+    def ok(self):
+        if self.hideflag == False:
+            return
+        if self.current == 'postview' and self.postviewready == True:
+            if self.trailer == True:
+                sref = eServiceReference(4097, 0, self.trailerurl)
+                sref.setName(self.name)
+                self.session.open(MoviePlayer, sref)
+            elif self.mehrbilder == True:
+                self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink)
+            else:
+                self.session.openWithCallback(self.showPicPost(self.picfile), FullScreen)
+        elif self.current == 'postview' and self.postviewready == False:
+            pass
+        else:
+            self.selectPage('ok')
+
+    def selectPage(self, action):
+        self.oldcurrent = self.current
+        if self.current == 'menu1' and self.ready == True:
+            c = self['menu1'].getSelectedIndex()
+            try:
+                self.postlink = self.tvlink1[c]
+                if action == 'ok':
+                    if search('www.tvspielfilm.de', self.postlink) is not None:
+                        self.current = 'postview'
+                        self.downloadPostPage(self.postlink, self.makePostviewPage)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu2' and self.ready == True:
+            c = self['menu2'].getSelectedIndex()
+            try:
+                self.postlink = self.tvlink2[c]
+                if action == 'ok':
+                    if search('www.tvspielfilm.de', self.postlink) is not None:
+                        self.current = 'postview'
+                        self.downloadPostPage(self.postlink, self.makePostviewPage)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu3' and self.ready == True:
+            c = self['menu3'].getSelectedIndex()
+            try:
+                self.postlink = self.tvlink3[c]
+                if action == 'ok':
+                    if search('www.tvspielfilm.de', self.postlink) is not None:
+                        self.current = 'postview'
+                        self.downloadPostPage(self.postlink, self.makePostviewPage)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu4' and self.ready == True:
+            c = self['menu4'].getSelectedIndex()
+            try:
+                self.postlink = self.tvlink4[c]
+                if action == 'ok':
+                    if search('www.tvspielfilm.de', self.postlink) is not None:
+                        self.current = 'postview'
+                        self.downloadPostPage(self.postlink, self.makePostviewPage)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu5' and self.ready == True:
+            c = self['menu5'].getSelectedIndex()
+            try:
+                self.postlink = self.tvlink5[c]
+                if action == 'ok':
+                    if search('www.tvspielfilm.de', self.postlink) is not None:
+                        self.current = 'postview'
+                        self.downloadPostPage(self.postlink, self.makePostviewPage)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu6' and self.ready == True:
+            c = self['menu6'].getSelectedIndex()
+            try:
+                self.postlink = self.tvlink6[c]
+                if action == 'ok':
+                    if search('www.tvspielfilm.de', self.postlink) is not None:
+                        self.current = 'postview'
+                        self.downloadPostPage(self.postlink, self.makePostviewPage)
+            except IndexError:
+                pass
+
+        elif self.current == 'searchmenu':
+            c = self['searchmenu'].getSelectedIndex()
+            try:
+                self.postlink = self.searchlink[c]
+                if action == 'ok':
+                    if search('www.tvspielfilm.de', self.postlink) is not None:
+                        self.current = 'postview'
+                        self.downloadPostPage(self.postlink, self.makePostviewPage)
+            except IndexError:
+                pass
+
+        return
+
+    def getEPG(self):
+        if self.current == 'postview' and self.postviewready == True:
+            if self.showEPG == False:
+                self.showEPG = True
+                if self.search == False:
+                    if self.oldcurrent == 'menu1' and self.zap1 == True:
+                        try:
+                            c = self['menu1'].getSelectedIndex()
+                            sref = self.sref1[0]
+                            channel = ServiceReference(eServiceReference(sref)).getServiceName()
+                        except IndexError:
+                            sref = None
+                            channel = ''
+
+                    elif self.oldcurrent == 'menu2' and self.zap2 == True:
+                        try:
+                            c = self['menu2'].getSelectedIndex()
+                            sref = self.sref2[0]
+                            channel = ServiceReference(eServiceReference(sref)).getServiceName()
+                        except IndexError:
+                            sref = None
+                            channel = ''
+
+                    elif self.oldcurrent == 'menu3' and self.zap3 == True:
+                        try:
+                            c = self['menu3'].getSelectedIndex()
+                            sref = self.sref3[0]
+                            channel = ServiceReference(eServiceReference(sref)).getServiceName()
+                        except IndexError:
+                            sref = None
+                            channel = ''
+
+                    elif self.oldcurrent == 'menu4' and self.zap4 == True:
+                        try:
+                            c = self['menu4'].getSelectedIndex()
+                            sref = self.sref4[0]
+                            channel = ServiceReference(eServiceReference(sref)).getServiceName()
+                        except IndexError:
+                            sref = None
+                            channel = ''
+
+                    elif self.oldcurrent == 'menu5' and self.zap5 == True:
+                        try:
+                            c = self['menu5'].getSelectedIndex()
+                            sref = self.sref5[0]
+                            channel = ServiceReference(eServiceReference(sref)).getServiceName()
+                        except IndexError:
+                            sref = None
+                            channel = ''
+
+                    elif self.oldcurrent == 'menu6' and self.zap6 == True:
+                        try:
+                            c = self['menu6'].getSelectedIndex()
+                            sref = self.sref6[0]
+                            channel = ServiceReference(eServiceReference(sref)).getServiceName()
+                        except IndexError:
+                            sref = None
+                            channel = ''
+
+                    else:
+                        sref = None
+                        channel = ''
+                else:
+                    try:
+                        c = self['searchmenu'].getSelectedIndex()
+                        sref = self.searchref[c]
+                        channel = ServiceReference(eServiceReference(sref)).getServiceName()
+                    except IndexError:
+                        sref = None
+                        channel = ''
+
+                if sref is not None:
+                    try:
+                        start = self.start
+                        s1 = sub(':..', '', start)
+                        date = str(self.postdate) + 'FIN'
+                        date = sub('..FIN', '', date)
+                        date = date + self.day
+                        parts = start.split(':')
+                        seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                        start = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                        s2 = sub(':..:..', '', start)
+                        if int(s2) > int(s1):
+                            start = str(self.date) + ' ' + start
+                        else:
+                            start = date + ' ' + start
+                        start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+                        start = int(mktime(start.timetuple()))
+                        epgcache = eEPGCache.getInstance()
+                        event = epgcache.startTimeQuery(eServiceReference(sref), start)
+                        if event == -1:
+                            try:
+                                self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
+                            except (KeyError, NameError):
+                                self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+
+                        else:
+                            event = epgcache.getNextTimeEntry()
+                            self.EPGtext = event.getEventName()
+                            short = event.getShortDescription()
+                            ext = event.getExtendedDescription()
+                            dur = '%d Minuten' % (event.getDuration() / 60)
+                            if short and short != self.EPGtext:
+                                self.EPGtext += '\n\n' + short
+                            if ext:
+                                self.EPGtext += '\n\n' + ext
+                            if dur:
+                                self.EPGtext += '\n\n' + dur
+                    except:
+                        try:
+                            self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
+                        except (KeyError, NameError):
+                            self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+
+                else:
+                    self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                if self.fontlarge == True:
+                    if self.xd == False:
+                        fill = '____________________________________________________________________________________________________________________________________\n%s' % channel
+                    else:
+                        fill = '________________________________________________________________________________________________________________________\n%s' % channel
+                elif self.xd == False:
+                    fill = '____________________________________________________________________________________________________________________________________________________\n%s' % channel
+                else:
+                    fill = '_________________________________________________________________________________________________________________________________________\n%s' % channel
+                self.EPGtext += '\n\n' + fill
+                self['textpage'].setText(self.EPGtext)
+                self['textpage'].show()
+            else:
+                self.showEPG = False
+                self['textpage'].setText(self.POSTtext)
+                self['textpage'].show()
+        elif self.current != 'postview' and self.ready == True and self.search == False:
+            self.oldindex = 0
+            if self.abends == True:
+                self.morgens = False
+                self.mittags = False
+                self.vorabend = False
+                self.abends = False
+                self.nachts = True
+                self.makeTVView('')
+            elif self.nachts == True:
+                self.morgens = True
+                self.mittags = False
+                self.vorabend = False
+                self.abends = False
+                self.nachts = False
+                self.makeTVView('')
+            elif self.morgens == True:
+                self.morgens = False
+                self.mittags = True
+                self.vorabend = False
+                self.abends = False
+                self.nachts = False
+                self.makeTVView('')
+            elif self.mittags == True:
+                self.morgens = False
+                self.mittags = False
+                self.vorabend = True
+                self.abends = False
+                self.nachts = False
+                self.makeTVView('')
+            elif self.vorabend == True:
+                self.morgens = False
+                self.mittags = False
+                self.vorabend = False
+                self.abends = True
+                self.nachts = False
+                self.makeTVView('')
+        elif self.ready == True:
+            self.session.open(infoScreenTVSpielfilm, None, True)
+        return
+
+    def makeTimer(self):
+        if config.plugins.tvspielfilm.autotimer.value == 'yes' and fileExists('/usr/lib/enigma2/python/Plugins/Extensions/AutoTimer/plugin.pyo'):
+            self.autotimer = True
+            self.session.openWithCallback(self.choiceTimer, ChoiceBox, title='Timer Auswahl', list=[('Timer', 'timer'), ('AutoTimer', 'autotimer')])
+        else:
+            self.autotimer = False
+            self.red()
+
+    def choiceTimer(self, choice):
+        choice = choice and choice[1]
+        if choice == 'autotimer':
+            self.autotimer = True
+            self.red()
+        else:
+            self.autotimer = False
+            self.red()
+
+    def red(self):
+        if self.current == 'postview' and self.postviewready == True:
+            if self.oldcurrent == 'menu1' and self.zap1 == True:
+                c = self['menu1'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    sref = self.sref1[0]
+                    serviceref = ServiceReference(sref)
+                except IndexError:
+                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
+
+                start = self.start
+                s1 = sub(':..', '', start)
+                date = str(self.postdate) + 'FIN'
+                date = sub('..FIN', '', date)
+                date = date + self.day
+                parts = start.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds -= int(config.recording.margin_before.value) * 60
+                start = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                s2 = sub(':..:..', '', start)
+                if int(s2) > int(s1):
+                    start = str(self.date) + ' ' + start
+                else:
+                    start = date + ' ' + start
+                start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+                end = self.end
+                parts = end.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds += int(config.recording.margin_after.value) * 60
+                end = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                e2 = sub(':..:..', '', end)
+                if int(s2) > int(e2):
+                    end = str(self.nextdate) + ' ' + end
+                else:
+                    end = date + ' ' + end
+                end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
+                name = self.name
+                shortdesc = self.shortdesc
+                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
+                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
+                    episode = sub('Staffel ', 'S', episode.group(1))
+                    episode = sub(', Folge ', 'E', episode)
+                    name = name + ' ' + episode
+                data = (int(mktime(start.timetuple())),
+                 int(mktime(end.timetuple())),
+                 name,
+                 shortdesc,
+                 None)
+                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
+                if self.autotimer == False:
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
+                else:
+                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
+                    from Plugins.Extensions.AutoTimer.plugin import autotimer
+                    if autotimer is None:
+                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+                        autotimer = AutoTimer()
+                    autotimer.readXml()
+                    newTimer = autotimer.defaultTimer.clone()
+                    newTimer.id = autotimer.getUniqueId()
+                    newTimer.name = self.name
+                    newTimer.match = ''
+                    newTimer.enabled = True
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+            elif self.oldcurrent == 'menu2' and self.zap2 == True:
+                c = self['menu2'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    sref = self.sref2[0]
+                    serviceref = ServiceReference(sref)
+                except IndexError:
+                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
+
+                start = self.start
+                s1 = sub(':..', '', start)
+                date = str(self.postdate) + 'FIN'
+                date = sub('..FIN', '', date)
+                date = date + self.day
+                parts = start.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds -= int(config.recording.margin_before.value) * 60
+                start = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                s2 = sub(':..:..', '', start)
+                if int(s2) > int(s1):
+                    start = str(self.date) + ' ' + start
+                else:
+                    start = date + ' ' + start
+                start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+                end = self.end
+                parts = end.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds += int(config.recording.margin_after.value) * 60
+                end = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                e2 = sub(':..:..', '', end)
+                if int(s2) > int(e2):
+                    end = str(self.nextdate) + ' ' + end
+                else:
+                    end = date + ' ' + end
+                end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
+                name = self.name
+                shortdesc = self.shortdesc
+                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
+                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
+                    episode = sub('Staffel ', 'S', episode.group(1))
+                    episode = sub(', Folge ', 'E', episode)
+                    name = name + ' ' + episode
+                data = (int(mktime(start.timetuple())),
+                 int(mktime(end.timetuple())),
+                 name,
+                 shortdesc,
+                 None)
+                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
+                if self.autotimer == False:
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
+                else:
+                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
+                    from Plugins.Extensions.AutoTimer.plugin import autotimer
+                    if autotimer is None:
+                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+                        autotimer = AutoTimer()
+                    autotimer.readXml()
+                    newTimer = autotimer.defaultTimer.clone()
+                    newTimer.id = autotimer.getUniqueId()
+                    newTimer.name = self.name
+                    newTimer.match = ''
+                    newTimer.enabled = True
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+            elif self.oldcurrent == 'menu3' and self.zap3 == True:
+                c = self['menu3'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    sref = self.sref3[0]
+                    serviceref = ServiceReference(sref)
+                except IndexError:
+                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
+
+                start = self.start
+                s1 = sub(':..', '', start)
+                date = str(self.postdate) + 'FIN'
+                date = sub('..FIN', '', date)
+                date = date + self.day
+                parts = start.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds -= int(config.recording.margin_before.value) * 60
+                start = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                s2 = sub(':..:..', '', start)
+                if int(s2) > int(s1):
+                    start = str(self.date) + ' ' + start
+                else:
+                    start = date + ' ' + start
+                start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+                end = self.end
+                parts = end.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds += int(config.recording.margin_after.value) * 60
+                end = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                e2 = sub(':..:..', '', end)
+                if int(s2) > int(e2):
+                    end = str(self.nextdate) + ' ' + end
+                else:
+                    end = date + ' ' + end
+                end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
+                name = self.name
+                shortdesc = self.shortdesc
+                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
+                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
+                    episode = sub('Staffel ', 'S', episode.group(1))
+                    episode = sub(', Folge ', 'E', episode)
+                    name = name + ' ' + episode
+                data = (int(mktime(start.timetuple())),
+                 int(mktime(end.timetuple())),
+                 name,
+                 shortdesc,
+                 None)
+                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
+                if self.autotimer == False:
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
+                else:
+                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
+                    from Plugins.Extensions.AutoTimer.plugin import autotimer
+                    if autotimer is None:
+                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+                        autotimer = AutoTimer()
+                    autotimer.readXml()
+                    newTimer = autotimer.defaultTimer.clone()
+                    newTimer.id = autotimer.getUniqueId()
+                    newTimer.name = self.name
+                    newTimer.match = ''
+                    newTimer.enabled = True
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+            elif self.oldcurrent == 'menu4' and self.zap4 == True:
+                c = self['menu4'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    sref = self.sref4[0]
+                    serviceref = ServiceReference(sref)
+                except IndexError:
+                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
+
+                start = self.start
+                s1 = sub(':..', '', start)
+                date = str(self.postdate) + 'FIN'
+                date = sub('..FIN', '', date)
+                date = date + self.day
+                parts = start.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds -= int(config.recording.margin_before.value) * 60
+                start = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                s2 = sub(':..:..', '', start)
+                if int(s2) > int(s1):
+                    start = str(self.date) + ' ' + start
+                else:
+                    start = date + ' ' + start
+                start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+                end = self.end
+                parts = end.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds += int(config.recording.margin_after.value) * 60
+                end = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                e2 = sub(':..:..', '', end)
+                if int(s2) > int(e2):
+                    end = str(self.nextdate) + ' ' + end
+                else:
+                    end = date + ' ' + end
+                end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
+                name = self.name
+                shortdesc = self.shortdesc
+                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
+                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
+                    episode = sub('Staffel ', 'S', episode.group(1))
+                    episode = sub(', Folge ', 'E', episode)
+                    name = name + ' ' + episode
+                data = (int(mktime(start.timetuple())),
+                 int(mktime(end.timetuple())),
+                 name,
+                 shortdesc,
+                 None)
+                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
+                if self.autotimer == False:
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
+                else:
+                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
+                    from Plugins.Extensions.AutoTimer.plugin import autotimer
+                    if autotimer is None:
+                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+                        autotimer = AutoTimer()
+                    autotimer.readXml()
+                    newTimer = autotimer.defaultTimer.clone()
+                    newTimer.id = autotimer.getUniqueId()
+                    newTimer.name = self.name
+                    newTimer.match = ''
+                    newTimer.enabled = True
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+            elif self.oldcurrent == 'menu5' and self.zap5 == True:
+                c = self['menu5'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    sref = self.sref5[0]
+                    serviceref = ServiceReference(sref)
+                except IndexError:
+                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
+
+                start = self.start
+                s1 = sub(':..', '', start)
+                date = str(self.postdate) + 'FIN'
+                date = sub('..FIN', '', date)
+                date = date + self.day
+                parts = start.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds -= int(config.recording.margin_before.value) * 60
+                start = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                s2 = sub(':..:..', '', start)
+                if int(s2) > int(s1):
+                    start = str(self.date) + ' ' + start
+                else:
+                    start = date + ' ' + start
+                start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+                end = self.end
+                parts = end.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds += int(config.recording.margin_after.value) * 60
+                end = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                e2 = sub(':..:..', '', end)
+                if int(s2) > int(e2):
+                    end = str(self.nextdate) + ' ' + end
+                else:
+                    end = date + ' ' + end
+                end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
+                name = self.name
+                shortdesc = self.shortdesc
+                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
+                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
+                    episode = sub('Staffel ', 'S', episode.group(1))
+                    episode = sub(', Folge ', 'E', episode)
+                    name = name + ' ' + episode
+                data = (int(mktime(start.timetuple())),
+                 int(mktime(end.timetuple())),
+                 name,
+                 shortdesc,
+                 None)
+                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
+                if self.autotimer == False:
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
+                else:
+                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
+                    from Plugins.Extensions.AutoTimer.plugin import autotimer
+                    if autotimer is None:
+                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+                        autotimer = AutoTimer()
+                    autotimer.readXml()
+                    newTimer = autotimer.defaultTimer.clone()
+                    newTimer.id = autotimer.getUniqueId()
+                    newTimer.name = self.name
+                    newTimer.match = ''
+                    newTimer.enabled = True
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+            elif self.oldcurrent == 'menu6' and self.zap6 == True:
+                c = self['menu6'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    sref = self.sref6[0]
+                    serviceref = ServiceReference(sref)
+                except IndexError:
+                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
+
+                start = self.start
+                s1 = sub(':..', '', start)
+                date = str(self.postdate) + 'FIN'
+                date = sub('..FIN', '', date)
+                date = date + self.day
+                parts = start.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds -= int(config.recording.margin_before.value) * 60
+                start = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                s2 = sub(':..:..', '', start)
+                if int(s2) > int(s1):
+                    start = str(self.date) + ' ' + start
+                else:
+                    start = date + ' ' + start
+                start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+                end = self.end
+                parts = end.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds += int(config.recording.margin_after.value) * 60
+                end = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                e2 = sub(':..:..', '', end)
+                if int(s2) > int(e2):
+                    end = str(self.nextdate) + ' ' + end
+                else:
+                    end = date + ' ' + end
+                end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
+                name = self.name
+                shortdesc = self.shortdesc
+                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
+                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
+                    episode = sub('Staffel ', 'S', episode.group(1))
+                    episode = sub(', Folge ', 'E', episode)
+                    name = name + ' ' + episode
+                data = (int(mktime(start.timetuple())),
+                 int(mktime(end.timetuple())),
+                 name,
+                 shortdesc,
+                 None)
+                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
+                if self.autotimer == False:
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
+                else:
+                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
+                    from Plugins.Extensions.AutoTimer.plugin import autotimer
+                    if autotimer is None:
+                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+                        autotimer = AutoTimer()
+                    autotimer.readXml()
+                    newTimer = autotimer.defaultTimer.clone()
+                    newTimer.id = autotimer.getUniqueId()
+                    newTimer.name = self.name
+                    newTimer.match = ''
+                    newTimer.enabled = True
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+            elif self.oldcurrent == 'searchmenu':
+                c = self['searchmenu'].getSelectedIndex()
+                self.oldsearchindex = c
+                try:
+                    c = self['searchmenu'].getSelectedIndex()
+                    sref = self.searchref[c]
+                    serviceref = ServiceReference(sref)
+                except IndexError:
+                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
+
+                start = self.start
+                s1 = sub(':..', '', start)
+                date = str(self.postdate) + 'FIN'
+                date = sub('..FIN', '', date)
+                date = date + self.day
+                parts = start.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds -= int(config.recording.margin_before.value) * 60
+                start = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                s2 = sub(':..:..', '', start)
+                if int(s2) > int(s1):
+                    start = str(self.date) + ' ' + start
+                else:
+                    start = date + ' ' + start
+                start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+                end = self.end
+                parts = end.split(':')
+                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+                seconds += int(config.recording.margin_after.value) * 60
+                end = time.strftime('%H:%M:%S', time.gmtime(seconds))
+                e2 = sub(':..:..', '', end)
+                if int(s2) > int(e2):
+                    end = str(self.nextdate) + ' ' + end
+                else:
+                    end = date + ' ' + end
+                end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
+                name = self.name
+                shortdesc = self.shortdesc
+                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
+                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
+                    episode = sub('Staffel ', 'S', episode.group(1))
+                    episode = sub(', Folge ', 'E', episode)
+                    name = name + ' ' + episode
+                data = (int(mktime(start.timetuple())),
+                 int(mktime(end.timetuple())),
+                 name,
+                 shortdesc,
+                 None)
+                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
+                if self.autotimer == False:
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
+                else:
+                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
+                    from Plugins.Extensions.AutoTimer.plugin import autotimer
+                    if autotimer is None:
+                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+                        autotimer = AutoTimer()
+                    autotimer.readXml()
+                    newTimer = autotimer.defaultTimer.clone()
+                    newTimer.id = autotimer.getUniqueId()
+                    newTimer.name = self.name
+                    newTimer.match = ''
+                    newTimer.enabled = True
+                    if config.plugins.tvspielfilm.fhd.value == 'yes':
+                        try:
+                            gMainDC.getInstance().setResolution(1920, 1080)
+                            desktop = getDesktop(0)
+                            desktop.resize(eSize(1920, 1080))
+                        except:
+                            import traceback
+                            traceback.print_exc()
+
+                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+            else:
+                self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
+        elif self.current == 'menu1' and self.ready == True:
+            c = self['menu1'].getSelectedIndex()
+            self.oldindex = c
+            try:
+                self.postlink = self.tvlink1[c]
+                if search('www.tvspielfilm.de', self.postlink) is not None:
+                    self.oldcurrent = self.current
+                    self.download(self.postlink, self.makePostTimer)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu2' and self.ready == True:
+            c = self['menu2'].getSelectedIndex()
+            self.oldindex = c
+            try:
+                self.postlink = self.tvlink2[c]
+                if search('www.tvspielfilm.de', self.postlink) is not None:
+                    self.oldcurrent = self.current
+                    self.download(self.postlink, self.makePostTimer)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu3' and self.ready == True:
+            c = self['menu3'].getSelectedIndex()
+            self.oldindex = c
+            try:
+                self.postlink = self.tvlink3[c]
+                if search('www.tvspielfilm.de', self.postlink) is not None:
+                    self.oldcurrent = self.current
+                    self.download(self.postlink, self.makePostTimer)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu4' and self.ready == True:
+            c = self['menu4'].getSelectedIndex()
+            self.oldindex = c
+            try:
+                self.postlink = self.tvlink4[c]
+                if search('www.tvspielfilm.de', self.postlink) is not None:
+                    self.oldcurrent = self.current
+                    self.download(self.postlink, self.makePostTimer)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu5' and self.ready == True:
+            c = self['menu5'].getSelectedIndex()
+            self.oldindex = c
+            try:
+                self.postlink = self.tvlink5[c]
+                if search('www.tvspielfilm.de', self.postlink) is not None:
+                    self.oldcurrent = self.current
+                    self.download(self.postlink, self.makePostTimer)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu6' and self.ready == True:
+            c = self['menu6'].getSelectedIndex()
+            self.oldindex = c
+            try:
+                self.postlink = self.tvlink6[c]
+                if search('www.tvspielfilm.de', self.postlink) is not None:
+                    self.oldcurrent = self.current
+                    self.download(self.postlink, self.makePostTimer)
+            except IndexError:
+                pass
+
+        elif self.current == 'searchmenu':
+            c = self['searchmenu'].getSelectedIndex()
+            self.oldsearchindex = c
+            try:
+                self.postlink = self.searchlink[c]
+                if search('www.tvspielfilm.de', self.postlink) is not None:
+                    self.oldcurrent = self.current
+                    self.download(self.postlink, self.makePostTimer)
+            except IndexError:
+                pass
+
+        return
+
+    def finishedTimer(self, answer):
+        if config.plugins.tvspielfilm.fhd.value == 'yes':
+            try:
+                gMainDC.getInstance().setResolution(1240, 720)
+                desktop = getDesktop(0)
+                desktop.resize(eSize(1240, 720))
+            except:
+                import traceback
+                traceback.print_exc()
+
+        if answer[0]:
+            entry = answer[1]
+            simulTimerList = self.session.nav.RecordTimer.record(entry)
+            if simulTimerList is not None:
+                for x in simulTimerList:
+                    if x.setAutoincreaseEnd(entry):
+                        self.session.nav.RecordTimer.timeChanged(x)
+
+                simulTimerList = self.session.nav.RecordTimer.record(entry)
+                if simulTimerList is not None:
+                    self.session.openWithCallback(self.finishSanityCorrection, TimerSanityConflict, simulTimerList)
+            self.makeTimerDB()
+            self.ready = True
+            self.postviewready = False
+            self.current = self.oldcurrent
+            if self.search == False:
+                self.showProgrammPage()
+                self.makeTVView('')
+            else:
+                self.showsearch()
+        else:
+            self.ready = True
+            self.postviewready = False
+            self.current = self.oldcurrent
+            if self.search == False:
+                self.showProgrammPage()
+            else:
+                self.showsearch()
+        return
+
+    def finishSanityCorrection(self, answer):
+        self.finishedTimer(answer)
+
+    def finishedAutoTimer(self, answer):
+        if config.plugins.tvspielfilm.fhd.value == 'yes':
+            try:
+                gMainDC.getInstance().setResolution(1240, 720)
+                desktop = getDesktop(0)
+                desktop.resize(eSize(1240, 720))
+            except:
+                import traceback
+                traceback.print_exc()
+
+        if answer:
+            from Plugins.Extensions.AutoTimer.AutoTimerEditor import AutoTimerEditor
+            answer, session = answer
+            if config.plugins.tvspielfilm.fhd.value == 'yes':
+                try:
+                    gMainDC.getInstance().setResolution(1920, 1080)
+                    desktop = getDesktop(0)
+                    desktop.resize(eSize(1920, 1080))
+                except:
+                    import traceback
+                    traceback.print_exc()
+
+            session.openWithCallback(self.finishedAutoTimerEdit, AutoTimerEditor, answer)
+
+    def finishedAutoTimerEdit(self, answer):
+        if config.plugins.tvspielfilm.fhd.value == 'yes':
+            try:
+                gMainDC.getInstance().setResolution(1240, 720)
+                desktop = getDesktop(0)
+                desktop.resize(eSize(1240, 720))
+            except:
+                import traceback
+                traceback.print_exc()
+
+        if answer:
+            from Plugins.Extensions.AutoTimer.plugin import autotimer
+            if autotimer is None:
+                from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+                autotimer = AutoTimer()
+            autotimer.add(answer)
+            autotimer.writeXml()
+        return
+
+    def makeTimerDB(self):
+        timerxml = open('/etc/enigma2/timers.xml').read()
+        timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
+        timerfile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db'
+        f = open(timerfile, 'w')
+        data = ''
+        idx = 0
+        for x in timer:
+            idx += 1
+
+        for i in range(idx):
+            try:
+                timerstart = timer[i - 1][0]
+                timerstart = int(timerstart) + int(config.recording.margin_before.value) * 60
+                timerday = time.strftime('%Y-%m-%d', time.localtime(timerstart))
+                timerhour = time.strftime('%H:%M', time.localtime(timerstart))
+                timersref = timer[i - 1][1]
+                data = data + timerday + ':::' + timerhour + ':::' + timersref + '\n'
+            except IndexError:
+                pass
+
+        f.write(data)
+        f.close()
+        self.timer = data
+
+    def green(self):
+        if self.current == 'menu1' and self.zap1 == True and self.search == False:
+            try:
+                sref = self.sref1[0]
+                self.session.nav.playService(eServiceReference(sref))
+            except IndexError:
+                pass
+
+        elif self.current == 'menu2' and self.zap2 == True and self.search == False:
+            try:
+                sref = self.sref2[0]
+                self.session.nav.playService(eServiceReference(sref))
+            except IndexError:
+                pass
+
+        elif self.current == 'menu3' and self.zap3 == True and self.search == False:
+            try:
+                sref = self.sref3[0]
+                self.session.nav.playService(eServiceReference(sref))
+            except IndexError:
+                pass
+
+        elif self.current == 'menu4' and self.zap4 == True and self.search == False:
+            try:
+                sref = self.sref4[0]
+                self.session.nav.playService(eServiceReference(sref))
+            except IndexError:
+                pass
+
+        elif self.current == 'menu5' and self.zap5 == True and self.search == False:
+            try:
+                sref = self.sref5[0]
+                self.session.nav.playService(eServiceReference(sref))
+            except IndexError:
+                pass
+
+        elif self.current == 'menu6' and self.zap6 == True and self.search == False:
+            try:
+                sref = self.sref6[0]
+                self.session.nav.playService(eServiceReference(sref))
+            except IndexError:
+                pass
+
+        elif self.current == 'postview':
+            self.wiki()
+
+    def yellow(self):
+        if self.current == 'postview':
+            self.youTube()
+        elif self.search == False and self.ready == True:
+            self.currentsearch = self.current
+            if self.current == 'menu1':
+                c = self['menu1'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    titel = self.tvtitel1[c]
+                except IndexError:
+                    self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='TV Spielfilm Suche:', text='')
+
+            elif self.current == 'menu2':
+                c = self['menu2'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    titel = self.tvtitel2[c]
+                except IndexError:
+                    self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='TV Spielfilm Suche:', text='')
+
+            elif self.current == 'menu3':
+                c = self['menu3'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    titel = self.tvtitel3[c]
+                except IndexError:
+                    self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='TV Spielfilm Suche:', text='')
+
+            elif self.current == 'menu4':
+                c = self['menu4'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    titel = self.tvtitel4[c]
+                except IndexError:
+                    self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='TV Spielfilm Suche:', text='')
+
+            elif self.current == 'menu5':
+                c = self['menu5'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    titel = self.tvtitel5[c]
+                except IndexError:
+                    self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='TV Spielfilm Suche:', text='')
+
+            elif self.current == 'menu6':
+                c = self['menu6'].getSelectedIndex()
+                self.oldindex = c
+                try:
+                    titel = self.tvtitel6[c]
+                except IndexError:
+                    self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='TV Spielfilm Suche:', text='')
+
+            self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='TV Spielfilm Suche:', text=titel)
+
+    def searchReturn(self, search):
+        if search and search != '':
+            self.searchstring = search
+            self['sender1'].hide()
+            self['sender2'].hide()
+            self['sender3'].hide()
+            self['sender4'].hide()
+            self['sender5'].hide()
+            self['sender6'].hide()
+            self['logo1'].hide()
+            self['logo2'].hide()
+            self['logo3'].hide()
+            self['logo4'].hide()
+            self['logo5'].hide()
+            self['logo6'].hide()
+            self['pic1'].hide()
+            self['pic2'].hide()
+            self['pic3'].hide()
+            self['pic4'].hide()
+            self['pic5'].hide()
+            self['pic6'].hide()
+            self['pictime1'].hide()
+            self['pictime2'].hide()
+            self['pictime3'].hide()
+            self['pictime4'].hide()
+            self['pictime5'].hide()
+            self['pictime6'].hide()
+            self['pictext1'].hide()
+            self['pictext2'].hide()
+            self['pictext3'].hide()
+            self['pictext4'].hide()
+            self['pictext5'].hide()
+            self['pictext6'].hide()
+            self['menu1'].hide()
+            self['menu2'].hide()
+            self['menu3'].hide()
+            self['menu4'].hide()
+            self['menu5'].hide()
+            self['menu6'].hide()
+            self['label'].setText('')
+            self['label2'].setText('')
+            self['label3'].setText('')
+            self['label4'].setText('')
+            self['searchlogo'].show()
+            self['searchtimer'].show()
+            self.searchlink = []
+            self.searchref = []
+            self.searchentries = []
+            self.search = True
+            self.datum = False
+            self.filter = True
+            search = search.replace(' ', '+')
+            searchlink = 'http://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&q=' + search + '&page=1'
+            self.maxsearchcount = config.plugins.tvspielfilm.maxsearch.value
+            self.searchcount = 0
+            self.makeSearchView(searchlink)
+
+    def showsearch(self):
+        self.postviewready = False
+        self['infotext'].hide()
+        self['infotext2'].hide()
+        self['infotext3'].hide()
+        self['infotext4'].hide()
+        self['infotext5'].hide()
+        self['infotext6'].hide()
+        self['infotext7'].hide()
+        self['infotext8'].hide()
+        self['cinlogo'].hide()
+        self['playlogo'].hide()
+        self['textpage'].hide()
+        self['slider_textpage'].hide()
+        self['picpost'].hide()
+        self['piclabel'].hide()
+        self['piclabel2'].hide()
+        self['tvinfo1'].hide()
+        self['tvinfo2'].hide()
+        self['tvinfo3'].hide()
+        self['tvinfo4'].hide()
+        self['tvinfo5'].hide()
+        self['label'].setText('')
+        self['label2'].setText('')
+        self['label3'].setText('')
+        self['label4'].setText('')
+        self['searchmenu'].show()
+        self['searchlogo'].show()
+        self['searchtimer'].show()
+        self['searchtext'].show()
+
+    def pressText(self):
+        if self.current == 'postview' and self.postviewready == True:
+            if self.mehrbilder == True:
+                self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink)
+            else:
+                self.session.openWithCallback(self.showPicPost(self.picfile), FullScreen)
+
+    def playTrailer(self):
+        if self.current == 'postview' and self.postviewready == True and self.trailer == True:
+            sref = eServiceReference(4097, 0, self.trailerurl)
+            sref.setName(self.name)
+            self.session.open(MoviePlayer, sref)
+
+    def youTube(self):
+        if self.current == 'postview' and self.postviewready == True:
+            self.session.open(searchYouTube, self.name, self.movie)
+        elif self.current == 'menu1' and self.search == False and self.ready == True:
+            c = self['menu1'].getSelectedIndex()
+            try:
+                titel = self.tvtitel1[c]
+                self.session.open(searchYouTube, titel, self.movie)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu2' and self.search == False and self.ready == True:
+            c = self['menu1'].getSelectedIndex()
+            try:
+                titel = self.tvtitel2[c]
+                self.session.open(searchYouTube, titel, self.movie)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu3' and self.search == False and self.ready == True:
+            c = self['menu1'].getSelectedIndex()
+            try:
+                titel = self.tvtitel3[c]
+                self.session.open(searchYouTube, titel, self.movie)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu4' and self.search == False and self.ready == True:
+            c = self['menu1'].getSelectedIndex()
+            try:
+                titel = self.tvtitel4[c]
+                self.session.open(searchYouTube, titel, self.movie)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu5' and self.search == False and self.ready == True:
+            c = self['menu1'].getSelectedIndex()
+            try:
+                titel = self.tvtitel5[c]
+                self.session.open(searchYouTube, titel, self.movie)
+            except IndexError:
+                pass
+
+        elif self.current == 'menu6' and self.search == False and self.ready == True:
+            c = self['menu1'].getSelectedIndex()
+            try:
+                titel = self.tvtitel6[c]
+                self.session.open(searchYouTube, titel, self.movie)
+            except IndexError:
+                pass
+
+    def wiki(self):
+        if self.current == 'postview':
+            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/Wikipedia.pyo'):
+                from Plugins.Extensions.Wikipedia.Wikipedia import wikiSearch
+                name = transWIKI(self.name)
+                self.session.open(wikiSearch, name)
+            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/plugin.pyo'):
+                from Plugins.Extensions.Wikipedia.plugin import wikiSearch
+                name = transWIKI(self.name)
+                self.session.open(wikiSearch, name)
+            else:
+                self.session.openWithCallback(self.wikiInstall, MessageBox, '\nDas Wikipedia Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
+                return
+
+    def wikiInstall(self, answer):
+        if answer is True:
+            self.session.open(infoScreenTVSpielfilm, 'wiki', True)
+
+    def translator(self):
+        if self.current == 'postview':
+            if self.showEPG == False:
+                text = self.POSTtext + 'FIN'
+                text = re.sub('>>.*?FIN', '', text, flags=re.S)
+                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
+                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
+            else:
+                text = self.EPGtext + 'FIN'
+                text = re.sub('>>.*?FIN', '', text, flags=re.S)
+                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
+                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
+            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/EPGTranslator.pyo'):
+                from Plugins.Extensions.EPGTranslator.EPGTranslator import translatorMain
+                self.session.open(translatorMain, text)
+            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/plugin.pyo'):
+                from Plugins.Extensions.EPGTranslator.plugin import translatorMain
+                self.session.open(translatorMain, text)
+            else:
+                self.session.openWithCallback(self.translatorInstall, MessageBox, '\nDas EPG Translator Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
+                return
+
+    def translatorInstall(self, answer):
+        if answer is True:
+            self.session.open(infoScreenTVSpielfilm, 'translator', True)
+
+    def IMDb(self):
+        if self.current == 'postview':
+            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/IMDb/plugin.pyo'):
+                from Plugins.Extensions.IMDb.plugin import IMDB
+                self.session.open(IMDB, self.name)
+            else:
+                self.session.openWithCallback(self.IMDbInstall, MessageBox, '\nDas IMDb Plugin ist nicht installiert.\n\nDas Plugin kann automatisch installiert werden, wenn es auf dem Feed ihres Images vorhanden ist.\n\nSoll das Plugin jetzt auf dem Feed gesucht und wenn vorhanden automatisch installiert werden?', MessageBox.TYPE_YESNO)
+                return
+
+    def TMDb(self):
+        if self.current == 'postview':
+            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/TMDb/plugin.pyo'):
+                from Plugins.Extensions.TMDb.plugin import TMDbMain
+                self.session.open(TMDbMain, self.name)
+            else:
+                self.session.openWithCallback(self.TMDbInstall, MessageBox, '\nDas TMDb Plugin ist nicht installiert.\n\nDas Plugin kann automatisch installiert werden, wenn es auf dem Feed ihres Images vorhanden ist.\n\nSoll das Plugin jetzt auf dem Feed gesucht und wenn vorhanden automatisch installiert werden?', MessageBox.TYPE_YESNO)
+                return
+
+    def TVDb(self):
+        if self.current == 'postview':
+            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/TheTVDB/plugin.pyo'):
+                from Plugins.Extensions.TheTVDB.plugin import TheTVDBMain
+                self.name = sub('Die ', '', self.name)
+                self.session.open(TheTVDBMain, self.name)
+            else:
+                self.session.openWithCallback(self.TVDbInstall, MessageBox, '\nDas TheTVDb Plugin ist nicht installiert.\n\nDas Plugin kann automatisch installiert werden, wenn es auf dem Feed ihres Images vorhanden ist.\n\nSoll das Plugin jetzt auf dem Feed gesucht und wenn vorhanden automatisch installiert werden?', MessageBox.TYPE_YESNO)
+                return
+
+    def IMDbInstall(self, answer):
+        if answer is True:
+            self.container = eConsoleAppContainer()
+            self.container.appClosed.append(self.finishedIMDbInstall)
+            self.container.execute('opkg update && opkg install enigma2-plugin-extensions-imdb')
+
+    def finishedIMDbInstall(self, retval):
+        del self.container.appClosed[:]
+        del self.container
+        if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/IMDb/plugin.pyo'):
+            self.session.openWithCallback(self.restartGUI, MessageBox, '\nDas IMDb Plugin wurde installiert.\nBitte starten Sie Enigma neu.', MessageBox.TYPE_YESNO)
+        else:
+            self.session.open(MessageBox, '\nDas IMDb Plugin ist nicht auf dem Feed ihres Images vorhanden.\n\nBitte installieren Sie das IMDb Plugin manuell.', MessageBox.TYPE_ERROR)
+
+    def TMDbInstall(self, answer):
+        if answer is True:
+            self.container = eConsoleAppContainer()
+            self.container.appClosed.append(self.finishedTMDbInstall)
+            self.container.execute('opkg update && opkg install enigma2-plugin-extensions-tmdbinfo')
+
+    def finishedTMDbInstall(self, retval):
+        del self.container.appClosed[:]
+        del self.container
+        if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/TMDb/plugin.pyo'):
+            self.session.openWithCallback(self.restartGUI, MessageBox, '\nDas TMDb Plugin wurde installiert.\nBitte starten Sie Enigma neu.', MessageBox.TYPE_YESNO)
+        else:
+            self.session.open(MessageBox, '\nDas TMDb Plugin ist nicht auf dem Feed ihres Images vorhanden.\n\nBitte installieren Sie das TMDb Plugin manuell.', MessageBox.TYPE_ERROR)
+
+    def TVDbInstall(self, answer):
+        if answer is True:
+            self.container = eConsoleAppContainer()
+            self.container.appClosed.append(self.finishedTVDbInstall)
+            self.container.execute('opkg update && opkg install enigma2-plugin-extensions-thetvdb')
+
+    def finishedTVDbInstall(self, retval):
+        del self.container.appClosed[:]
+        del self.container
+        if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/TheTVDB/plugin.pyo'):
+            self.session.openWithCallback(self.restartGUI, MessageBox, '\nDas TheTVDb Plugin wurde installiert.\nBitte starten Sie Enigma neu.', MessageBox.TYPE_YESNO)
+        else:
+            self.session.open(MessageBox, '\nDas TheTVDb Plugin ist nicht auf dem Feed ihres Images vorhanden.\n\nBitte installieren Sie das TheTVDb Plugin manuell.', MessageBox.TYPE_ERROR)
+
+    def restartGUI(self, answer):
+        if answer is True:
+            try:
+                self.session.open(TryQuitMainloop, 3)
+            except RuntimeError:
+                self.close()
+
+    def gotoPageMenu(self):
+        if self.current != 'postview' and self.ready == True and self.search == False:
+            self.session.openWithCallback(self.numberEntered, gotoPageMenu, self.count, self.maxpages)
+
+    def gotoPage(self, number):
+        if self.current != 'postview' and self.ready == True and self.search == False:
+            self.session.openWithCallback(self.numberEntered, getNumber, number)
+        elif self.current == 'searchmenu' and self.search == True and self.ready == True and number == 0:
+            end = len(self.searchentries) - 1
+            self['searchmenu'].moveToIndex(end)
+        elif self.current == 'postview' and number == 1:
+            self.zapDown()
+        elif self.current == 'postview' and number == 2:
+            self.zapUp()
+        elif self.current == 'postview' and number == 7:
+            self.IMDb()
+        elif self.current == 'postview' and number == 8:
+            self.TMDb()
+        elif self.current == 'postview' and number == 9:
+            self.TVDb()
+
+    def numberEntered(self, number):
+        if self.current != 'postview' and self.ready == True and self.search == False:
+            if number is None or number == 0:
+                pass
+            else:
+                if number >= self.maxpages:
+                    number = self.maxpages
+                self.count = number
+                if search('date', self.link) is not None:
+                    self.link = self.link + 'FIN'
+                    date = re.findall('date=(.*?)FIN', self.link)
+                    self.link = sub('page=.*?FIN', '', self.link)
+                    self.link = self.link + 'page=' + str(self.count) + '&date=' + date[0]
+                else:
+                    self.link = self.link + 'FIN'
+                    self.link = sub('page=.*?FIN', '', self.link)
+                    self.link = self.link + 'page=' + str(self.count)
+                self['label'].setText('Bitte warten...')
+                self['label'].startBlinking()
+                self.ready = False
+                self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+        return
+
+    def nextDay(self):
+        if self.current != 'postview' and self.ready == True and self.search == False:
+            self.ready = False
+            if search('date', self.link) is not None:
+                self.link = self.link + 'FIN'
+                date1 = re.findall('date=(.*?)-..-..FIN', self.link)
+                date2 = re.findall('date=....-(.*?)-..FIN', self.link)
+                date3 = re.findall('date=....-..-(.*?)FIN', self.link)
+                try:
+                    today = datetime.date(int(date1[0]), int(date2[0]), int(date3[0]))
+                except IndexError:
+                    today = datetime.date.today()
+
+                one_day = datetime.timedelta(days=1)
+                tomorrow = today + one_day
+                weekday = tomorrow.weekday()
+                if weekday == 0:
+                    self.weekday = 'Montag'
+                elif weekday == 1:
+                    self.weekday = 'Dienstag'
+                elif weekday == 2:
+                    self.weekday = 'Mittwoch'
+                elif weekday == 3:
+                    self.weekday = 'Donnerstag'
+                elif weekday == 4:
+                    self.weekday = 'Freitag'
+                elif weekday == 5:
+                    self.weekday = 'Samstag'
+                elif weekday == 6:
+                    self.weekday = 'Sonntag'
+                nextday = sub('date=(.*?FIN)', 'date=', self.link)
+                nextday = nextday + str(tomorrow)
+                self.date = tomorrow
+                one_day = datetime.timedelta(days=1)
+                self.nextdate = self.date + one_day
+            else:
+                today = datetime.date.today()
+                one_day = datetime.timedelta(days=1)
+                tomorrow = today + one_day
+                weekday = tomorrow.weekday()
+                if weekday == 0:
+                    self.weekday = 'Montag'
+                elif weekday == 1:
+                    self.weekday = 'Dienstag'
+                elif weekday == 2:
+                    self.weekday = 'Mittwoch'
+                elif weekday == 3:
+                    self.weekday = 'Donnerstag'
+                elif weekday == 4:
+                    self.weekday = 'Freitag'
+                elif weekday == 5:
+                    self.weekday = 'Samstag'
+                elif weekday == 6:
+                    self.weekday = 'Sonntag'
+                nextday = self.link + '&date=' + str(tomorrow)
+                self.date = tomorrow
+                one_day = datetime.timedelta(days=1)
+                self.nextdate = self.date + one_day
+            self.link = nextday
+            self.oldindex = 0
+            self['label'].setText('Bitte warten...')
+            self['label'].startBlinking()
+            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+        elif self.current == 'postview' or self.search == True:
+            servicelist = self.session.instantiateDialog(ChannelSelection)
+            self.session.execDialog(servicelist)
+        return
+
+    def prevDay(self):
+        if self.current != 'postview' and self.ready == True and self.search == False:
+            self.ready = False
+            if search('date', self.link) is not None:
+                self.link = self.link + 'FIN'
+                date1 = re.findall('date=(.*?)-..-..FIN', self.link)
+                date2 = re.findall('date=....-(.*?)-..FIN', self.link)
+                date3 = re.findall('date=....-..-(.*?)FIN', self.link)
+                try:
+                    today = datetime.date(int(date1[0]), int(date2[0]), int(date3[0]))
+                except IndexError:
+                    today = datetime.date.today()
+
+                one_day = datetime.timedelta(days=1)
+                yesterday = today - one_day
+                weekday = yesterday.weekday()
+                if weekday == 0:
+                    self.weekday = 'Montag'
+                elif weekday == 1:
+                    self.weekday = 'Dienstag'
+                elif weekday == 2:
+                    self.weekday = 'Mittwoch'
+                elif weekday == 3:
+                    self.weekday = 'Donnerstag'
+                elif weekday == 4:
+                    self.weekday = 'Freitag'
+                elif weekday == 5:
+                    self.weekday = 'Samstag'
+                elif weekday == 6:
+                    self.weekday = 'Sonntag'
+                prevday = sub('date=(.*?FIN)', 'date=', self.link)
+                prevday = prevday + str(yesterday)
+                self.date = yesterday
+                one_day = datetime.timedelta(days=1)
+                self.nextdate = self.date + one_day
+            else:
+                today = datetime.date.today()
+                one_day = datetime.timedelta(days=1)
+                yesterday = today - one_day
+                weekday = yesterday.weekday()
+                if weekday == 0:
+                    self.weekday = 'Montag'
+                elif weekday == 1:
+                    self.weekday = 'Dienstag'
+                elif weekday == 2:
+                    self.weekday = 'Mittwoch'
+                elif weekday == 3:
+                    self.weekday = 'Donnerstag'
+                elif weekday == 4:
+                    self.weekday = 'Freitag'
+                elif weekday == 5:
+                    self.weekday = 'Samstag'
+                elif weekday == 6:
+                    self.weekday = 'Sonntag'
+                prevday = self.link + '&date=' + str(yesterday)
+                self.date = yesterday
+                one_day = datetime.timedelta(days=1)
+                self.nextdate = self.date + one_day
+            self.link = prevday
+            self.oldindex = 0
+            self['label'].setText('Bitte warten...')
+            self['label'].startBlinking()
+            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+        elif self.current == 'postview' or self.search == True:
+            servicelist = self.session.instantiateDialog(ChannelSelection)
+            self.session.execDialog(servicelist)
+        return
+
+    def nextWeek(self):
+        if self.current != 'postview' and self.ready == True and self.search == False:
+            self.ready = False
+            if search('date', self.link) is not None:
+                self.link = self.link + 'FIN'
+                date1 = re.findall('date=(.*?)-..-..FIN', self.link)
+                date2 = re.findall('date=....-(.*?)-..FIN', self.link)
+                date3 = re.findall('date=....-..-(.*?)FIN', self.link)
+                try:
+                    today = datetime.date(int(date1[0]), int(date2[0]), int(date3[0]))
+                except IndexError:
+                    today = datetime.date.today()
+
+                one_week = datetime.timedelta(days=7)
+                tomorrow = today + one_week
+                weekday = tomorrow.weekday()
+                if weekday == 0:
+                    self.weekday = 'Montag'
+                elif weekday == 1:
+                    self.weekday = 'Dienstag'
+                elif weekday == 2:
+                    self.weekday = 'Mittwoch'
+                elif weekday == 3:
+                    self.weekday = 'Donnerstag'
+                elif weekday == 4:
+                    self.weekday = 'Freitag'
+                elif weekday == 5:
+                    self.weekday = 'Samstag'
+                elif weekday == 6:
+                    self.weekday = 'Sonntag'
+                nextweek = sub('date=(.*?FIN)', 'date=', self.link)
+                nextweek = nextweek + str(tomorrow)
+                self.date = tomorrow
+                one_week = datetime.timedelta(days=7)
+                self.nextdate = self.date + one_week
+            else:
+                today = datetime.date.today()
+                one_week = datetime.timedelta(days=7)
+                tomorrow = today + one_week
+                weekday = tomorrow.weekday()
+                if weekday == 0:
+                    self.weekday = 'Montag'
+                elif weekday == 1:
+                    self.weekday = 'Dienstag'
+                elif weekday == 2:
+                    self.weekday = 'Mittwoch'
+                elif weekday == 3:
+                    self.weekday = 'Donnerstag'
+                elif weekday == 4:
+                    self.weekday = 'Freitag'
+                elif weekday == 5:
+                    self.weekday = 'Samstag'
+                elif weekday == 6:
+                    self.weekday = 'Sonntag'
+                nextweek = self.link + '&date=' + str(tomorrow)
+                self.date = tomorrow
+                one_week = datetime.timedelta(days=7)
+                self.nextdate = self.date + one_week
+            self.link = nextweek
+            self.oldindex = 0
+            self['label'].setText('Bitte warten...')
+            self['label'].startBlinking()
+            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+        elif self.current == 'postview':
+            self.translator()
+        return
+
+    def prevWeek(self):
+        if self.current != 'postview' and self.ready == True and self.search == False:
+            self.ready = False
+            if search('date', self.link) is not None:
+                self.link = self.link + 'FIN'
+                date1 = re.findall('date=(.*?)-..-..FIN', self.link)
+                date2 = re.findall('date=....-(.*?)-..FIN', self.link)
+                date3 = re.findall('date=....-..-(.*?)FIN', self.link)
+                try:
+                    today = datetime.date(int(date1[0]), int(date2[0]), int(date3[0]))
+                except IndexError:
+                    today = datetime.date.today()
+
+                one_week = datetime.timedelta(days=7)
+                yesterday = today - one_week
+                weekday = yesterday.weekday()
+                if weekday == 0:
+                    self.weekday = 'Montag'
+                elif weekday == 1:
+                    self.weekday = 'Dienstag'
+                elif weekday == 2:
+                    self.weekday = 'Mittwoch'
+                elif weekday == 3:
+                    self.weekday = 'Donnerstag'
+                elif weekday == 4:
+                    self.weekday = 'Freitag'
+                elif weekday == 5:
+                    self.weekday = 'Samstag'
+                elif weekday == 6:
+                    self.weekday = 'Sonntag'
+                prevweek = sub('date=(.*?FIN)', 'date=', self.link)
+                prevweek = prevweek + str(yesterday)
+                self.date = yesterday
+                one_week = datetime.timedelta(days=7)
+                self.nextdate = self.date + one_week
+            else:
+                today = datetime.date.today()
+                one_week = datetime.timedelta(days=7)
+                yesterday = today - one_week
+                weekday = yesterday.weekday()
+                if weekday == 0:
+                    self.weekday = 'Montag'
+                elif weekday == 1:
+                    self.weekday = 'Dienstag'
+                elif weekday == 2:
+                    self.weekday = 'Mittwoch'
+                elif weekday == 3:
+                    self.weekday = 'Donnerstag'
+                elif weekday == 4:
+                    self.weekday = 'Freitag'
+                elif weekday == 5:
+                    self.weekday = 'Samstag'
+                elif weekday == 6:
+                    self.weekday = 'Sonntag'
+                prevweek = self.link + '&date=' + str(yesterday)
+                self.date = yesterday
+                one_week = datetime.timedelta(days=7)
+                self.nextdate = self.date + one_week
+            self.link = prevweek
+            self.oldindex = 0
+            self['label'].setText('Bitte warten...')
+            self['label'].startBlinking()
+            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+        return
+
+    def rightDown(self):
+        try:
+            if self.current == 'menu1':
+                self['menu1'].selectionEnabled(0)
+                self['menu2'].selectionEnabled(1)
+                self.current = 'menu2'
+            elif self.current == 'menu2':
+                self['menu2'].selectionEnabled(0)
+                self['menu3'].selectionEnabled(1)
+                self.current = 'menu3'
+            elif self.current == 'menu3':
+                self['menu3'].selectionEnabled(0)
+                self['menu4'].selectionEnabled(1)
+                self.current = 'menu4'
+            elif self.current == 'menu4':
+                self['menu4'].selectionEnabled(0)
+                self['menu5'].selectionEnabled(1)
+                self.current = 'menu5'
+            elif self.current == 'menu5':
+                self['menu5'].selectionEnabled(0)
+                self['menu6'].selectionEnabled(1)
+                self.current = 'menu6'
+            elif self.current == 'menu6':
+                self['menu6'].selectionEnabled(0)
+                self['menu1'].selectionEnabled(1)
+                self.current = 'menu1'
+                self.count += 1
+                if self.count > self.maxpages:
+                    self.count = 1
+                if search('date', self.link) is not None:
+                    self.link = self.link + 'FIN'
+                    date = re.findall('date=(.*?)FIN', self.link)
+                    self.link = sub('page=.*?FIN', '', self.link)
+                    self.link = self.link + 'page=' + str(self.count) + '&date=' + date[0]
+                else:
+                    self.link = self.link + 'FIN'
+                    self.link = sub('page=.*?FIN', '', self.link)
+                    self.link = self.link + 'page=' + str(self.count)
+                self['label'].setText('Bitte warten...')
+                self['label'].startBlinking()
+                self.ready = False
+                self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+            elif self.current == 'searchmenu':
+                self['searchmenu'].pageDown()
+            else:
+                self['textpage'].pageDown()
+        except IndexError:
+            pass
+
+        return
+
+    def leftUp(self):
+        try:
+            if self.current == 'menu6':
+                self['menu6'].selectionEnabled(0)
+                self['menu5'].selectionEnabled(1)
+                self.current = 'menu5'
+            elif self.current == 'menu5':
+                self['menu5'].selectionEnabled(0)
+                self['menu4'].selectionEnabled(1)
+                self.current = 'menu4'
+            elif self.current == 'menu4':
+                self['menu4'].selectionEnabled(0)
+                self['menu3'].selectionEnabled(1)
+                self.current = 'menu3'
+            elif self.current == 'menu3':
+                self['menu3'].selectionEnabled(0)
+                self['menu2'].selectionEnabled(1)
+                self.current = 'menu2'
+            elif self.current == 'menu2':
+                self['menu2'].selectionEnabled(0)
+                self['menu1'].selectionEnabled(1)
+                self.current = 'menu1'
+            elif self.current == 'menu1':
+                self['menu1'].selectionEnabled(0)
+                self['menu6'].selectionEnabled(1)
+                self.current = 'menu6'
+                self.count -= 1
+                if self.count == 0:
+                    self.count = self.maxpages
+                if search('date', self.link) is not None:
+                    self.link = self.link + 'FIN'
+                    date = re.findall('date=(.*?)FIN', self.link)
+                    self.link = sub('page=.*?FIN', '', self.link)
+                    self.link = self.link + 'page=' + str(self.count) + '&date=' + date[0]
+                else:
+                    self.link = self.link + 'FIN'
+                    self.link = sub('page=.*?FIN', '', self.link)
+                    self.link = self.link + 'page=' + str(self.count)
+                self['label'].setText('Bitte warten...')
+                self['label'].startBlinking()
+                self.ready = False
+                self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+            elif self.current == 'searchmenu':
+                self['searchmenu'].pageUp()
+            else:
+                self['textpage'].pageUp()
+        except IndexError:
+            pass
+
+        return
+
+    def down(self):
+        try:
+            if self.current == 'menu1':
+                self['menu1'].down()
+                self['menu2'].down()
+                self['menu3'].down()
+                self['menu4'].down()
+                self['menu5'].down()
+                self['menu6'].down()
+            elif self.current == 'menu2':
+                self['menu2'].down()
+                self['menu3'].down()
+                self['menu4'].down()
+                self['menu5'].down()
+                self['menu6'].down()
+                self['menu1'].down()
+            elif self.current == 'menu3':
+                self['menu3'].down()
+                self['menu4'].down()
+                self['menu5'].down()
+                self['menu6'].down()
+                self['menu1'].down()
+                self['menu2'].down()
+            elif self.current == 'menu4':
+                self['menu4'].down()
+                self['menu5'].down()
+                self['menu6'].down()
+                self['menu1'].down()
+                self['menu2'].down()
+                self['menu3'].down()
+            elif self.current == 'menu5':
+                self['menu5'].down()
+                self['menu6'].down()
+                self['menu1'].down()
+                self['menu2'].down()
+                self['menu3'].down()
+                self['menu4'].down()
+            elif self.current == 'menu6':
+                self['menu6'].down()
+                self['menu1'].down()
+                self['menu2'].down()
+                self['menu3'].down()
+                self['menu4'].down()
+                self['menu5'].down()
+            elif self.current == 'searchmenu':
+                self['searchmenu'].down()
+            else:
+                self['textpage'].pageDown()
+        except IndexError:
+            pass
+
+    def up(self):
+        try:
+            if self.current == 'menu1':
+                self['menu1'].up()
+                self['menu2'].up()
+                self['menu3'].up()
+                self['menu4'].up()
+                self['menu5'].up()
+                self['menu6'].up()
+            elif self.current == 'menu2':
+                self['menu2'].up()
+                self['menu3'].up()
+                self['menu4'].up()
+                self['menu5'].up()
+                self['menu6'].up()
+                self['menu1'].up()
+            elif self.current == 'menu3':
+                self['menu3'].up()
+                self['menu4'].up()
+                self['menu5'].up()
+                self['menu6'].up()
+                self['menu1'].up()
+                self['menu2'].up()
+            elif self.current == 'menu4':
+                self['menu4'].up()
+                self['menu5'].up()
+                self['menu6'].up()
+                self['menu1'].up()
+                self['menu2'].up()
+                self['menu3'].up()
+            elif self.current == 'menu5':
+                self['menu5'].up()
+                self['menu6'].up()
+                self['menu1'].up()
+                self['menu2'].up()
+                self['menu3'].up()
+                self['menu4'].up()
+            elif self.current == 'menu6':
+                self['menu6'].up()
+                self['menu5'].up()
+                self['menu1'].up()
+                self['menu2'].up()
+                self['menu3'].up()
+                self['menu4'].up()
+            elif self.current == 'searchmenu':
+                self['searchmenu'].up()
+            else:
+                self['textpage'].pageUp()
+        except IndexError:
+            pass
+
+    def findPicon(self, sref):
+        sref = sref + 'FIN'
+        sref = sref.replace(':', '_')
+        sref = sref.replace('_FIN', '')
+        sref = sref.replace('FIN', '')
+        pngname = self.piconfolder + sref + '.png'
+        if fileExists(pngname):
+            return pngname
+
+    def showLogo1(self, logo):
+        currPic = loadPic(logo, 44, 27, 3, 0, 0, 0)
+        if currPic != None:
+            self['logo1'].instance.setPixmap(currPic)
+        return
+
+    def showLogo2(self, logo):
+        currPic = loadPic(logo, 44, 27, 3, 0, 0, 0)
+        if currPic != None:
+            self['logo2'].instance.setPixmap(currPic)
+        return
+
+    def showLogo3(self, logo):
+        currPic = loadPic(logo, 44, 27, 3, 0, 0, 0)
+        if currPic != None:
+            self['logo3'].instance.setPixmap(currPic)
+        return
+
+    def showLogo4(self, logo):
+        currPic = loadPic(logo, 44, 27, 3, 0, 0, 0)
+        if currPic != None:
+            self['logo4'].instance.setPixmap(currPic)
+        return
+
+    def showLogo5(self, logo):
+        currPic = loadPic(logo, 44, 27, 3, 0, 0, 0)
+        if currPic != None:
+            self['logo5'].instance.setPixmap(currPic)
+        return
+
+    def showLogo6(self, logo):
+        currPic = loadPic(logo, 44, 27, 3, 0, 0, 0)
+        if currPic != None:
+            self['logo6'].instance.setPixmap(currPic)
+        return
+
+    def getPic1(self, output):
+        f = open(self.pic1, 'wb')
+        f.write(output)
+        f.close()
+        self.showPic1(self.pic1)
+
+    def showPic1(self, tvpic):
+        if self.xd == False:
+            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
+        else:
+            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        if currPic != None:
+            self['pic1'].instance.setPixmap(currPic)
+        return
+
+    def getPic2(self, output):
+        f = open(self.pic2, 'wb')
+        f.write(output)
+        f.close()
+        self.showPic2(self.pic2)
+
+    def showPic2(self, tvpic):
+        if self.xd == False:
+            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
+        else:
+            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        if currPic != None:
+            self['pic2'].instance.setPixmap(currPic)
+        return
+
+    def getPic3(self, output):
+        f = open(self.pic3, 'wb')
+        f.write(output)
+        f.close()
+        self.showPic3(self.pic3)
+
+    def showPic3(self, tvpic):
+        if self.xd == False:
+            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
+        else:
+            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        if currPic != None:
+            self['pic3'].instance.setPixmap(currPic)
+        return
+
+    def getPic4(self, output):
+        f = open(self.pic4, 'wb')
+        f.write(output)
+        f.close()
+        self.showPic4(self.pic4)
+
+    def showPic4(self, tvpic):
+        if self.xd == False:
+            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
+        else:
+            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        if currPic != None:
+            self['pic4'].instance.setPixmap(currPic)
+        return
+
+    def getPic5(self, output):
+        f = open(self.pic5, 'wb')
+        f.write(output)
+        f.close()
+        self.showPic5(self.pic5)
+
+    def showPic5(self, tvpic):
+        if self.xd == False:
+            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
+        else:
+            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        if currPic != None:
+            self['pic5'].instance.setPixmap(currPic)
+        return
+
+    def getPic6(self, output):
+        f = open(self.pic6, 'wb')
+        f.write(output)
+        f.close()
+        self.showPic6(self.pic6)
+
+    def showPic6(self, tvpic):
+        if self.xd == False:
+            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
+        else:
+            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        if currPic != None:
+            self['pic6'].instance.setPixmap(currPic)
+        return
+
+    def getPicPost(self, output):
+        f = open(self.picfile, 'wb')
+        f.write(output)
+        f.close()
+        self.showPicPost(self.picfile)
+
+    def showPicPost(self, picpost):
+        if self.xd == False:
+            currPic = loadPic(picpost, 490, 245, 3, 0, 0, 0)
+        else:
+            currPic = loadPic(picpost, 400, 200, 3, 0, 0, 0)
+        if currPic != None:
+            self['picpost'].instance.setPixmap(currPic)
+            self['piclabel'].show()
+            self['piclabel2'].show()
+            if self.trailer == True:
+                self['cinlogo'].show()
+                self['playlogo'].show()
+        return
+
+    def showPicTVinfoX(self, picinfo, X):
+        if self.xd == False:
+            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
+        else:
+            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
+        if currPic != None:
+            self[X].instance.setPixmap(currPic)
+        return
+
+    def download(self, link, name):
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
+
+    def downloadError(self, output):
+        pass
+
+    def downloadPostPage(self, link, name):
+        downloadPage(six.ensure_binary(link), self.localhtml2).addCallback(name).addErrback(self.downloadError)
+
+    def downloadFullPage(self, link, name):
+        if self.MeinTVS == True:
+            try:
+                response = self.opener.open(link, timeout=60)
+                data = response.read()
+                f = open(self.localhtml, 'wb')
+                f.write(data)
+                f.close()
+                response.close()
+            except HTTPException as e:
+                self.error = 'HTTP Exception Error ' + str(e)
+            except HTTPError as e:
+                self.error = 'HTTP Error: ' + str(e.code)
+            except URLError as e:
+                self.error = 'URL Error: ' + str(e.reason)
+            except socket.error as e:
+                self.error = 'Socket Error: ' + str(e)
+            except AttributeError as e:
+                self.error = 'Attribute Error: ' + str(e.message)
+
+            if self.error == False:
+                self.makeTVView('')
+            else:
+                self.makeErrorTimer = eTimer()
+                self.makeErrorTimer.callback.append(self.displayError)
+                self.makeErrorTimer.start(500, True)
+        else:
+            downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadPageError)
+
+    def displayError(self):
+        self.session.openWithCallback(self.closeError, MessageBox, '%s' % self.error, MessageBox.TYPE_ERROR)
+
+    def closeError(self, retval):
+        self.close()
+
+    def downloadPageError(self, output):
+        self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Men\xc3\xbc = Senderliste')
+        self['label'].stopBlinking()
+        self['label'].show()
+        self.ready = True
+
+    def zapUp(self):
+        if InfoBar and InfoBar.instance:
+            InfoBar.zapUp(InfoBar.instance)
+
+    def zapDown(self):
+        if InfoBar and InfoBar.instance:
+            InfoBar.zapDown(InfoBar.instance)
+
+    def infoScreen(self):
+        self.session.open(infoScreenTVSpielfilm, None, True)
+        return
+
+    def picReturn(self):
+        pass
+
+    def hideScreen(self):
+        if self.hideflag == True:
+            self.hideflag = False
+            count = 40
+            while count > 0:
+                count -= 1
+                f = open('/proc/stb/video/alpha', 'w')
+                f.write('%i' % (config.av.osd_alpha.value * count / 40))
+                f.close()
+
+        else:
+            self.hideflag = True
+            count = 0
+            while count < 40:
+                count += 1
+                f = open('/proc/stb/video/alpha', 'w')
+                f.write('%i' % (config.av.osd_alpha.value * count / 40))
+                f.close()
+
+    def showProgrammPage(self):
+        self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Men\xc3\xbc = Senderliste')
+        self['label2'].setText('= Timer')
+        self['label3'].setText('= Suche')
+        self['label4'].setText('= Zappen')
+        self['infotext'].hide()
+        self['infotext2'].hide()
+        self['infotext3'].hide()
+        self['infotext4'].hide()
+        self['infotext5'].hide()
+        self['infotext6'].hide()
+        self['infotext7'].hide()
+        self['infotext8'].hide()
+        self['cinlogo'].hide()
+        self['playlogo'].hide()
+        self['textpage'].hide()
+        self['slider_textpage'].hide()
+        self['picpost'].hide()
+        self['piclabel'].hide()
+        self['piclabel2'].hide()
+        self['tvinfo1'].hide()
+        self['tvinfo2'].hide()
+        self['tvinfo3'].hide()
+        self['tvinfo4'].hide()
+        self['tvinfo5'].hide()
+        self['searchmenu'].hide()
+        self['searchlogo'].hide()
+        self['searchtimer'].hide()
+        self['searchtext'].hide()
+        self['sender1'].show()
+        self['sender2'].show()
+        self['sender3'].show()
+        self['sender4'].show()
+        self['sender5'].show()
+        self['sender6'].show()
+        self['logo1'].show()
+        self['logo2'].show()
+        self['logo3'].show()
+        self['logo4'].show()
+        self['logo5'].show()
+        self['logo6'].show()
+        self['pic1'].show()
+        self['pic2'].show()
+        self['pic3'].show()
+        self['pic4'].show()
+        self['pic5'].show()
+        self['pic6'].show()
+        self['pictime1'].show()
+        self['pictime2'].show()
+        self['pictime3'].show()
+        self['pictime4'].show()
+        self['pictime5'].show()
+        self['pictime6'].show()
+        self['pictext1'].show()
+        self['pictext2'].show()
+        self['pictext3'].show()
+        self['pictext4'].show()
+        self['pictext5'].show()
+        self['pictext6'].show()
+        self['menu1'].show()
+        self['menu2'].show()
+        self['menu3'].show()
+        self['menu4'].show()
+        self['menu5'].show()
+        self['menu6'].show()
+
+    def exit(self):
+        if self.hideflag == False:
+            self.hideflag = True
+            f = open('/proc/stb/video/alpha', 'w')
+            f.write('%i' % config.av.osd_alpha.value)
+            f.close()
+        if self.current == 'menu1' or self.current == 'menu2' or self.current == 'menu3' or self.current == 'menu4' or self.current == 'menu5' or self.current == 'menu6':
+            self.close()
+        elif self.current == 'searchmenu':
+            self.search = False
+            self.oldsearchindex = 1
+            self['searchmenu'].hide()
+            self['searchlogo'].hide()
+            self['searchtimer'].hide()
+            self['searchtext'].hide()
+            self.setTitle('')
+            self.setTitle(self.titel)
+            self.current = self.currentsearch
+            self.showProgrammPage()
+        elif self.current == 'postview' and self.search == False:
+            self.postviewready = False
+            self.setTitle('')
+            self.setTitle(self.titel)
+            self.current = self.oldcurrent
+            self.showProgrammPage()
+        elif self.current == 'postview' and self.search == True:
+            self.postviewready = False
+            self.showsearch()
+            self.current = 'searchmenu'
+
+
 def main(session, **kwargs):
     session.open(tvMain)
 
@@ -21199,3 +25614,4 @@ def Plugins(**kwargs):
     return [PluginDescriptor(name='TV Spielfilm', description='TV Spielfilm', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=main),
      PluginDescriptor(name='TV Spielfilm Jetzt', description='TV Spielfilm Jetzt im TV', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='jetzt.png', fnc=mainjetzt),
      PluginDescriptor(name='TV Spielfilm EventView', description='TV Spielfilm EventView', where=[PluginDescriptor.WHERE_EVENTINFO], fnc=mainevent)]
+    
