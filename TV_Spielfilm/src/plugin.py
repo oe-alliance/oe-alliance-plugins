@@ -765,55 +765,17 @@ class TVTippsView(tvBase, Screen):
             self['infotext8'].setText('')
 
         tvinfo = re.findall('<span class="add-info (.*?)">', bereich)
-        try:
-            if self.xd == False:
-                tvinfo1 = ICONPATH + tvinfo[0] + 'HD.png'
-            else:
-                tvinfo1 = ICONPATH + tvinfo[0] + '.png'
-            self.showPicTVinfo1(tvinfo1)
-            self['tvinfo1'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo2 = ICONPATH + tvinfo[1] + 'HD.png'
-            else:
-                tvinfo2 = ICONPATH + tvinfo[1] + '.png'
-            self.showPicTVinfo2(tvinfo2)
-            self['tvinfo2'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo3 = ICONPATH + tvinfo[2] + 'HD.png'
-            else:
-                tvinfo3 = ICONPATH + tvinfo[2] + '.png'
-            self.showPicTVinfo3(tvinfo3)
-            self['tvinfo3'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo4 = ICONPATH + tvinfo[3] + 'HD.png'
-            else:
-                tvinfo4 = ICONPATH + tvinfo[3] + '.png'
-            self.showPicTVinfo4(tvinfo4)
-            self['tvinfo4'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo5 = ICONPATH + tvinfo[4] + 'HD.png'
-            else:
-                tvinfo5 = ICONPATH + tvinfo[4] + '.png'
-            self.showPicTVinfo5(tvinfo5)
-            self['tvinfo5'].show()
-        except IndexError:
-            pass
+        for pos in list(range(4)):
+            try:
+                if self.xd == False:
+                    tvi = ICONPATH + tvinfo[pos] + 'HD.png'
+                else:
+                    tvi = ICONPATH + tvinfo[pos] + '.png'
+                tvis = 'tvinfo' + str(pos+1)
+                self.showPicTVinfoX(tvi, tvis)
+                self[tvis].show()
+            except IndexError:
+                pass
 
         self['piclabel'].setText(self.start[0:5])
         try:
@@ -2370,49 +2332,13 @@ class TVTippsView(tvBase, Screen):
                 self['playlogo'].show()
         return
 
-    def showPicTVinfo1(self, picinfo):
+    def showPicTVinfoX(self, picinfo, X):
         if self.xd == False:
             currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
         else:
             currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
         if currPic != None:
-            self['tvinfo1'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo2(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo2'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo3(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo3'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo4(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo4'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo5(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo5'].instance.setPixmap(currPic)
+            self[X].instance.setPixmap(currPic)
         return
 
     def download(self, link, name):
@@ -3750,55 +3676,17 @@ class TVNeuView(tvBase, Screen):
             self['infotext8'].setText('')
 
         tvinfo = re.findall('<span class="add-info (.*?)">', bereich)
-        try:
-            if self.xd == False:
-                tvinfo1 = ICONPATH + tvinfo[0] + 'HD.png'
-            else:
-                tvinfo1 = ICONPATH + tvinfo[0] + '.png'
-            self.showPicTVinfo1(tvinfo1)
-            self['tvinfo1'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo2 = ICONPATH + tvinfo[1] + 'HD.png'
-            else:
-                tvinfo2 = ICONPATH + tvinfo[1] + '.png'
-            self.showPicTVinfo2(tvinfo2)
-            self['tvinfo2'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo3 = ICONPATH + tvinfo[2] + 'HD.png'
-            else:
-                tvinfo3 = ICONPATH + tvinfo[2] + '.png'
-            self.showPicTVinfo3(tvinfo3)
-            self['tvinfo3'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo4 = ICONPATH + tvinfo[3] + 'HD.png'
-            else:
-                tvinfo4 = ICONPATH + tvinfo[3] + '.png'
-            self.showPicTVinfo4(tvinfo4)
-            self['tvinfo4'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo5 = ICONPATH + tvinfo[4] + 'HD.png'
-            else:
-                tvinfo5 = ICONPATH + tvinfo[4] + '.png'
-            self.showPicTVinfo5(tvinfo5)
-            self['tvinfo5'].show()
-        except IndexError:
-            pass
+        for pos in list(range(4)):
+            try:
+                if self.xd == False:
+                    tvi = ICONPATH + tvinfo[pos] + 'HD.png'
+                else:
+                    tvi = ICONPATH + tvinfo[pos] + '.png'
+                tvis = 'tvinfo' + str(pos+1)
+                self.showPicTVinfoX(tvi, tvis)
+                self[tvis].show()
+            except IndexError:
+                pass
 
         self['piclabel'].setText(self.start[0:5])
         try:
@@ -5351,49 +5239,13 @@ class TVNeuView(tvBase, Screen):
                 self['playlogo'].show()
         return
 
-    def showPicTVinfo1(self, picinfo):
+    def showPicTVinfoX(self, picinfo, X):
         if self.xd == False:
             currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
         else:
             currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
         if currPic != None:
-            self['tvinfo1'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo2(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo2'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo3(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo3'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo4(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo4'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo5(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo5'].instance.setPixmap(currPic)
+            self[X].instance.setPixmap(currPic)
         return
 
     def download(self, link, name):
@@ -6815,55 +6667,17 @@ class TVGenreView(tvBase, Screen):
             self['infotext8'].setText('')
 
         tvinfo = re.findall('<span class="add-info (.*?)">', bereich)
-        try:
-            if self.xd == False:
-                tvinfo1 = ICONPATH + tvinfo[0] + 'HD.png'
-            else:
-                tvinfo1 = ICONPATH + tvinfo[0] + '.png'
-            self.showPicTVinfo1(tvinfo1)
-            self['tvinfo1'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo2 = ICONPATH + tvinfo[1] + 'HD.png'
-            else:
-                tvinfo2 = ICONPATH + tvinfo[1] + '.png'
-            self.showPicTVinfo2(tvinfo2)
-            self['tvinfo2'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo3 = ICONPATH + tvinfo[2] + 'HD.png'
-            else:
-                tvinfo3 = ICONPATH + tvinfo[2] + '.png'
-            self.showPicTVinfo3(tvinfo3)
-            self['tvinfo3'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo4 = ICONPATH + tvinfo[3] + 'HD.png'
-            else:
-                tvinfo4 = ICONPATH + tvinfo[3] + '.png'
-            self.showPicTVinfo4(tvinfo4)
-            self['tvinfo4'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo5 = ICONPATH + tvinfo[4] + 'HD.png'
-            else:
-                tvinfo5 = ICONPATH + tvinfo[4] + '.png'
-            self.showPicTVinfo5(tvinfo5)
-            self['tvinfo5'].show()
-        except IndexError:
-            pass
+        for pos in list(range(4)):
+            try:
+                if self.xd == False:
+                    tvi = ICONPATH + tvinfo[pos] + 'HD.png'
+                else:
+                    tvi = ICONPATH + tvinfo[pos] + '.png'
+                tvis = 'tvinfo' + str(pos+1)
+                self.showPicTVinfoX(tvi, tvis)
+                self[tvis].show()
+            except IndexError:
+                pass
 
         self['piclabel'].setText(self.start[0:5])
         try:
@@ -8065,49 +7879,13 @@ class TVGenreView(tvBase, Screen):
                 self['playlogo'].show()
         return
 
-    def showPicTVinfo1(self, picinfo):
+    def showPicTVinfoX(self, picinfo, X):
         if self.xd == False:
             currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
         else:
             currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
         if currPic != None:
-            self['tvinfo1'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo2(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo2'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo3(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo3'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo4(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo4'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo5(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo5'].instance.setPixmap(currPic)
+            self[X].instance.setPixmap(currPic)
         return
 
     def download(self, link, name):
@@ -8542,6 +8320,7 @@ class TVJetztView(tvBase, Screen):
         return
 
     def makeTVView(self, output):
+        output = six.ensure_str(output)
         date = str(self.date.strftime('%d.%m.%Y'))
         if self.jetzt == True:
             self.titel = 'Jetzt im TV - Heute, ' + str(self.weekday) + ', ' + date
@@ -8974,55 +8753,17 @@ class TVJetztView(tvBase, Screen):
             self['infotext8'].setText('')
 
         tvinfo = re.findall('<span class="add-info (.*?)">', bereich)
-        try:
-            if self.xd == False:
-                tvinfo1 = ICONPATH + tvinfo[0] + 'HD.png'
-            else:
-                tvinfo1 = ICONPATH + tvinfo[0] + '.png'
-            self.showPicTVinfo1(tvinfo1)
-            self['tvinfo1'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo2 = ICONPATH + tvinfo[1] + 'HD.png'
-            else:
-                tvinfo2 = ICONPATH + tvinfo[1] + '.png'
-            self.showPicTVinfo2(tvinfo2)
-            self['tvinfo2'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo3 = ICONPATH + tvinfo[2] + 'HD.png'
-            else:
-                tvinfo3 = ICONPATH + tvinfo[2] + '.png'
-            self.showPicTVinfo3(tvinfo3)
-            self['tvinfo3'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo4 = ICONPATH + tvinfo[3] + 'HD.png'
-            else:
-                tvinfo4 = ICONPATH + tvinfo[3] + '.png'
-            self.showPicTVinfo4(tvinfo4)
-            self['tvinfo4'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo5 = ICONPATH + tvinfo[4] + 'HD.png'
-            else:
-                tvinfo5 = ICONPATH + tvinfo[4] + '.png'
-            self.showPicTVinfo5(tvinfo5)
-            self['tvinfo5'].show()
-        except IndexError:
-            pass
+        for pos in list(range(4)):
+            try:
+                if self.xd == False:
+                    tvi = ICONPATH + tvinfo[pos] + 'HD.png'
+                else:
+                    tvi = ICONPATH + tvinfo[pos] + '.png'
+                tvis = 'tvinfo' + str(pos+1)
+                self.showPicTVinfoX(tvi, tvis)
+                self[tvis].show()
+            except IndexError:
+                pass
 
         self['piclabel'].setText(self.start[0:5])
         try:
@@ -10254,49 +9995,13 @@ class TVJetztView(tvBase, Screen):
                 self['playlogo'].show()
         return
 
-    def showPicTVinfo1(self, picinfo):
+    def showPicTVinfoX(self, picinfo, X):
         if self.xd == False:
             currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
         else:
             currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
         if currPic != None:
-            self['tvinfo1'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo2(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo2'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo3(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo3'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo4(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo4'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo5(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo5'].instance.setPixmap(currPic)
+            self[X].instance.setPixmap(currPic)
         return
 
     def download(self, link, name):
@@ -11186,55 +10891,17 @@ class TVProgrammView(tvBase, Screen):
             self['infotext8'].setText('')
 
         tvinfo = re.findall('<span class="add-info (.*?)">', bereich)
-        try:
-            if self.xd == False:
-                tvinfo1 = ICONPATH + tvinfo[0] + 'HD.png'
-            else:
-                tvinfo1 = ICONPATH + tvinfo[0] + '.png'
-            self.showPicTVinfo1(tvinfo1)
-            self['tvinfo1'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo2 = ICONPATH + tvinfo[1] + 'HD.png'
-            else:
-                tvinfo2 = ICONPATH + tvinfo[1] + '.png'
-            self.showPicTVinfo2(tvinfo2)
-            self['tvinfo2'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo3 = ICONPATH + tvinfo[2] + 'HD.png'
-            else:
-                tvinfo3 = ICONPATH + tvinfo[2] + '.png'
-            self.showPicTVinfo3(tvinfo3)
-            self['tvinfo3'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo4 = ICONPATH + tvinfo[3] + 'HD.png'
-            else:
-                tvinfo4 = ICONPATH + tvinfo[3] + '.png'
-            self.showPicTVinfo4(tvinfo4)
-            self['tvinfo4'].show()
-        except IndexError:
-            pass
-
-        try:
-            if self.xd == False:
-                tvinfo5 = ICONPATH + tvinfo[4] + 'HD.png'
-            else:
-                tvinfo5 = ICONPATH + tvinfo[4] + '.png'
-            self.showPicTVinfo5(tvinfo5)
-            self['tvinfo5'].show()
-        except IndexError:
-            pass
+        for pos in list(range(4)):
+            try:
+                if self.xd == False:
+                    tvi = ICONPATH + tvinfo[pos] + 'HD.png'
+                else:
+                    tvi = ICONPATH + tvinfo[pos] + '.png'
+                tvis = 'tvinfo' + str(pos+1)
+                self.showPicTVinfoX(tvi, tvis)
+                self[tvis].show()
+            except IndexError:
+                pass
 
         self['piclabel'].setText(self.start[0:5])
         try:
@@ -12645,49 +12312,13 @@ class TVProgrammView(tvBase, Screen):
                 self['playlogo'].show()
         return
 
-    def showPicTVinfo1(self, picinfo):
+    def showPicTVinfoX(self, picinfo, X):
         if self.xd == False:
             currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
         else:
             currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
         if currPic != None:
-            self['tvinfo1'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo2(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo2'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo3(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo3'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo4(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo4'].instance.setPixmap(currPic)
-        return
-
-    def showPicTVinfo5(self, picinfo):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
-        if currPic != None:
-            self['tvinfo5'].instance.setPixmap(currPic)
+            self[X].instance.setPixmap(currPic)
         return
 
     def download(self, link, name):
