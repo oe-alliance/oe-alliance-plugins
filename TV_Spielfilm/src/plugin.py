@@ -38,10 +38,10 @@ from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirec
 from six.moves.urllib.error import URLError, HTTPError
 import datetime, os, re, socket, sys, time, six
 from os import path
-from .util import transCHANNEL, applySkinVars, shortenChannel, transWIKI, transHTML, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, TVSHDPNG, serviceDB, channelDB, BlinkingLabel, ItemList
+from .util import transCHANNEL, applySkinVars, shortenChannel, transWIKI, transHTML, cleanHTML, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, TVSHDPNG, serviceDB, channelDB, BlinkingLabel, ItemList, parsedetail, fiximgLink
 
 try:
-        from cookielib import MozillaCookieJar
+    from cookielib import MozillaCookieJar
 except Exception:
     from http.cookiejar import MozillaCookieJar
 
@@ -590,6 +590,7 @@ class TVTippsView(tvBaseScreen):
         return
 
     def makePostviewPage(self, string):
+        print("DEBUG makePostviewPage 593")
         output = open(self.localhtml2, 'r').read()
         output = six.ensure_str(output)
         self['label2'].setText('= Timer')
@@ -618,12 +619,7 @@ class TVTippsView(tvBaseScreen):
                     if endpos == -1:
                         endpos = output.find('</footer>')
         bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('\r', '', bereich)
-        bereich = re.sub('<ul class="slidelist">.*?</ul>', '', bereich, flags=re.S)
-        bereich = re.sub('<script.*?</script>', '', bereich, flags=re.S)
-        bereich = re.sub('<style.*?</style>', '', bereich, flags=re.S)
-        bereich = re.sub('<div class="text" id=".*?</div>', '', bereich, flags=re.S)
+        bereich = cleanHTML(bereich)
         if search('rl: .https://video.tvspielfilm.de/.*?mp4', output) is not None:
             trailerurl = search('rl: .https://video.tvspielfilm.de/(.*?).mp4', output)
             self.trailerurl = 'https://video.tvspielfilm.de/' + trailerurl.group(1) + '.mp4'
@@ -791,43 +787,8 @@ class TVTippsView(tvBaseScreen):
             except IndexError:
                 self.name = ''
 
-        bereich = sub('<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
-        bereich = sub('</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
-        bereich = sub('<section class="serial-info">\n\\s+', '<p>', bereich)
-        bereich = sub('</section>', '</p>', bereich)
-        bereich = sub('</span>\\s+', '</span>, ', bereich)
-        bereich = sub('<li class="titleName">', '</p><p> \xc2\xb7 ', bereich)
-        bereich = sub('<li class="subtitleName">', '#sub#', bereich)
-        bereich = sub('ShowView [0-9-]+', '', bereich)
-        bereich = sub('<a href=".*?">', '', bereich)
-        bereich = sub('<h1.*?>', '<p>', bereich)
-        bereich = sub('</h1>', '</p>', bereich)
-        bereich = sub('<h3.*?>', '<p>', bereich)
-        bereich = sub('</h3>', '</p>', bereich)
-        bereich = sub('<br/>', '</p><p>', bereich)
-        bereich = sub('<p>\n', '<p>', bereich)
-        bereich = sub('<dt>', '<p>', bereich)
-        bereich = sub('<dt class="role">', '<p>', bereich)
-        bereich = sub('</dt>\n\\s+<dd>\n\\s+', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd>', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd class="name">', ': ', bereich)
-        bereich = sub('\n[ ]+,', ',', bereich)
-        bereich = sub(', [ ]+', ', ', bereich)
-        bereich = sub('</a>', '</p>', bereich)
-        bereich = sub('\n\\s+</dd>', '</p>', bereich)
-        bereich = sub('</a></dd>', '</p>', bereich)
-        bereich = sub('</dd>', '</p>', bereich)
-        bereich = sub('</dt>', '</p>', bereich)
-        text = ''
-        a = findall('<p.*?>(.*?)</p>', bereich)
-        for x in a:
-            if x != '':
-                text = text + x + '\n\n'
+        text = parsedetail(bereich)
 
-        text = sub('<[^>]*>', '', text)
-        text = sub('</p<<p<', '\n\n', text)
-        text = sub('\n\\s+\n*', '\n\n', text)
-        text = sub('#sub#', '\n  ', text)
         if self.fontlarge == True:
             if self.xd == False:
                 fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
@@ -2343,6 +2304,7 @@ class TVTippsView(tvBaseScreen):
         downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
+        print(output)
         self['label'].setText('Info = Filter: NEU, Bouquet = +- Tag, <> = +- Woche')
         self['label'].stopBlinking()
         self['label'].show()
@@ -3461,6 +3423,7 @@ class TVNeuView(tvBaseScreen):
         return
 
     def makePostviewPage(self, string):
+        print("DEBUG makePostviewPage 3429")
         output = six.ensure_str(output)
         output = open(self.localhtml2, 'r').read()
         self['label2'].setText('= Timer')
@@ -3489,12 +3452,7 @@ class TVNeuView(tvBaseScreen):
                     if endpos == -1:
                         endpos = output.find('</footer>')
         bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('\r', '', bereich)
-        bereich = re.sub('<ul class="slidelist">.*?</ul>', '', bereich, flags=re.S)
-        bereich = re.sub('<script.*?</script>', '', bereich, flags=re.S)
-        bereich = re.sub('<style.*?</style>', '', bereich, flags=re.S)
-        bereich = re.sub('<div class="text" id=".*?</div>', '', bereich, flags=re.S)
+        bereich = cleanHTML(bereich)
         if search('rl: .https://video.tvspielfilm.de/.*?mp4', output) is not None:
             trailerurl = search('rl: .https://video.tvspielfilm.de/(.*?).mp4', output)
             self.trailerurl = 'https://video.tvspielfilm.de/' + trailerurl.group(1) + '.mp4'
@@ -3662,43 +3620,8 @@ class TVNeuView(tvBaseScreen):
             except IndexError:
                 self.name = ''
 
-        bereich = sub('<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
-        bereich = sub('</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
-        bereich = sub('<section class="serial-info">\n\\s+', '<p>', bereich)
-        bereich = sub('</section>', '</p>', bereich)
-        bereich = sub('</span>\\s+', '</span>, ', bereich)
-        bereich = sub('<li class="titleName">', '</p><p> \xc2\xb7 ', bereich)
-        bereich = sub('<li class="subtitleName">', '#sub#', bereich)
-        bereich = sub('ShowView [0-9-]+', '', bereich)
-        bereich = sub('<a href=".*?">', '', bereich)
-        bereich = sub('<h1.*?>', '<p>', bereich)
-        bereich = sub('</h1>', '</p>', bereich)
-        bereich = sub('<h3.*?>', '<p>', bereich)
-        bereich = sub('</h3>', '</p>', bereich)
-        bereich = sub('<br/>', '</p><p>', bereich)
-        bereich = sub('<p>\n', '<p>', bereich)
-        bereich = sub('<dt>', '<p>', bereich)
-        bereich = sub('<dt class="role">', '<p>', bereich)
-        bereich = sub('</dt>\n\\s+<dd>\n\\s+', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd>', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd class="name">', ': ', bereich)
-        bereich = sub('\n[ ]+,', ',', bereich)
-        bereich = sub(', [ ]+', ', ', bereich)
-        bereich = sub('</a>', '</p>', bereich)
-        bereich = sub('\n\\s+</dd>', '</p>', bereich)
-        bereich = sub('</a></dd>', '</p>', bereich)
-        bereich = sub('</dd>', '</p>', bereich)
-        bereich = sub('</dt>', '</p>', bereich)
-        text = ''
-        a = findall('<p.*?>(.*?)</p>', bereich)
-        for x in a:
-            if x != '':
-                text = text + x + '\n\n'
+        text = parsedetail(bereich)
 
-        text = sub('<[^>]*>', '', text)
-        text = sub('</p<<p<', '\n\n', text)
-        text = sub('\n\\s+\n*', '\n\n', text)
-        text = sub('#sub#', '\n  ', text)
         if self.fontlarge == True:
             if self.xd == False:
                 fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
@@ -5210,6 +5133,7 @@ class TVNeuView(tvBaseScreen):
         downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
+        print(output)
         self['label'].setText('Bouquet = +- Tag, <> = +- Woche')
         self['label'].stopBlinking()
         self['label'].show()
@@ -6418,6 +6342,7 @@ class TVGenreView(tvBaseScreen):
         return
 
     def makePostviewPage(self, string):
+        print("DEBUG makePostviewPage 6351")
         output = open(self.localhtml2, 'r').read()
         output = six.ensure_str(output)
         self['label2'].setText('= Timer')
@@ -6440,12 +6365,7 @@ class TVGenreView(tvBaseScreen):
                     if endpos == -1:
                         endpos = output.find('</footer>')
         bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('\r', '', bereich)
-        bereich = re.sub('<ul class="slidelist">.*?</ul>', '', bereich, flags=re.S)
-        bereich = re.sub('<script.*?</script>', '', bereich, flags=re.S)
-        bereich = re.sub('<style.*?</style>', '', bereich, flags=re.S)
-        bereich = re.sub('<div class="text" id=".*?</div>', '', bereich, flags=re.S)
+        bereich = cleanHTML(bereich)
         if search('rl: .https://video.tvspielfilm.de/.*?mp4', output) is not None:
             trailerurl = search('rl: .https://video.tvspielfilm.de/(.*?).mp4', output)
             self.trailerurl = 'https://video.tvspielfilm.de/' + trailerurl.group(1) + '.mp4'
@@ -6613,43 +6533,8 @@ class TVGenreView(tvBaseScreen):
             except IndexError:
                 self.name = ''
 
-        bereich = sub('<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
-        bereich = sub('</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
-        bereich = sub('<section class="serial-info">\n\\s+', '<p>', bereich)
-        bereich = sub('</section>', '</p>', bereich)
-        bereich = sub('</span>\\s+', '</span>, ', bereich)
-        bereich = sub('<li class="titleName">', '</p><p> \xc2\xb7 ', bereich)
-        bereich = sub('<li class="subtitleName">', '#sub#', bereich)
-        bereich = sub('ShowView [0-9-]+', '', bereich)
-        bereich = sub('<a href=".*?">', '', bereich)
-        bereich = sub('<h1.*?>', '<p>', bereich)
-        bereich = sub('</h1>', '</p>', bereich)
-        bereich = sub('<h3.*?>', '<p>', bereich)
-        bereich = sub('</h3>', '</p>', bereich)
-        bereich = sub('<br/>', '</p><p>', bereich)
-        bereich = sub('<p>\n', '<p>', bereich)
-        bereich = sub('<dt>', '<p>', bereich)
-        bereich = sub('<dt class="role">', '<p>', bereich)
-        bereich = sub('</dt>\n\\s+<dd>\n\\s+', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd>', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd class="name">', ': ', bereich)
-        bereich = sub('\n[ ]+,', ',', bereich)
-        bereich = sub(', [ ]+', ', ', bereich)
-        bereich = sub('</a>', '</p>', bereich)
-        bereich = sub('\n\\s+</dd>', '</p>', bereich)
-        bereich = sub('</a></dd>', '</p>', bereich)
-        bereich = sub('</dd>', '</p>', bereich)
-        bereich = sub('</dt>', '</p>', bereich)
-        text = ''
-        a = findall('<p.*?>(.*?)</p>', bereich)
-        for x in a:
-            if x != '':
-                text = text + x + '\n\n'
+        text = parsedetail(bereich)
 
-        text = sub('<[^>]*>', '', text)
-        text = sub('</p<<p<', '\n\n', text)
-        text = sub('\n\\s+\n*', '\n\n', text)
-        text = sub('#sub#', '\n  ', text)
         if self.fontlarge == True:
             if self.xd == False:
                 fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
@@ -7820,6 +7705,7 @@ class TVGenreView(tvBaseScreen):
         downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
+        print(output)
         self['label'].setText('OK = Sendung, Stop = YouTube Trailer')
         self['label'].stopBlinking()
         self['label'].show()
@@ -8484,6 +8370,7 @@ class TVJetztView(tvBaseScreen):
         return
 
     def makePostviewPage(self, string):
+        print("DEBUG makePostviewPage 8382")
         output = open(self.localhtml2, 'r').read()
         output = six.ensure_str(output)
         self['label2'].setText('= Timer')
@@ -8506,12 +8393,7 @@ class TVJetztView(tvBaseScreen):
                     if endpos == -1:
                         endpos = output.find('</footer>')
         bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('\r', '', bereich)
-        bereich = re.sub('<ul class="slidelist">.*?</ul>', '', bereich, flags=re.S)
-        bereich = re.sub('<script.*?</script>', '', bereich, flags=re.S)
-        bereich = re.sub('<style.*?</style>', '', bereich, flags=re.S)
-        bereich = re.sub('<div class="text" id=".*?</div>', '', bereich, flags=re.S)
+        bereich = cleanHTML(bereich)
         if search('rl: .https://video.tvspielfilm.de/.*?mp4', output) is not None:
             trailerurl = search('rl: .https://video.tvspielfilm.de/(.*?).mp4', output)
             self.trailerurl = 'https://video.tvspielfilm.de/' + trailerurl.group(1) + '.mp4'
@@ -8678,44 +8560,9 @@ class TVJetztView(tvBaseScreen):
                 self.name = name[0]
             except IndexError:
                 self.name = ''
+                
+        text = parsedetail(bereich)
 
-        bereich = sub('<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
-        bereich = sub('</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
-        bereich = sub('<section class="serial-info">\n\\s+', '<p>', bereich)
-        bereich = sub('</section>', '</p>', bereich)
-        bereich = sub('</span>\\s+', '</span>, ', bereich)
-        bereich = sub('<li class="titleName">', '</p><p> \xc2\xb7 ', bereich)
-        bereich = sub('<li class="subtitleName">', '#sub#', bereich)
-        bereich = sub('ShowView [0-9-]+', '', bereich)
-        bereich = sub('<a href=".*?">', '', bereich)
-        bereich = sub('<h1.*?>', '<p>', bereich)
-        bereich = sub('</h1>', '</p>', bereich)
-        bereich = sub('<h3.*?>', '<p>', bereich)
-        bereich = sub('</h3>', '</p>', bereich)
-        bereich = sub('<br/>', '</p><p>', bereich)
-        bereich = sub('<p>\n', '<p>', bereich)
-        bereich = sub('<dt>', '<p>', bereich)
-        bereich = sub('<dt class="role">', '<p>', bereich)
-        bereich = sub('</dt>\n\\s+<dd>\n\\s+', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd>', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd class="name">', ': ', bereich)
-        bereich = sub('\n[ ]+,', ',', bereich)
-        bereich = sub(', [ ]+', ', ', bereich)
-        bereich = sub('</a>', '</p>', bereich)
-        bereich = sub('\n\\s+</dd>', '</p>', bereich)
-        bereich = sub('</a></dd>', '</p>', bereich)
-        bereich = sub('</dd>', '</p>', bereich)
-        bereich = sub('</dt>', '</p>', bereich)
-        text = ''
-        a = findall('<p.*?>(.*?)</p>', bereich)
-        for x in a:
-            if x != '':
-                text = text + x + '\n\n'
-
-        text = sub('<[^>]*>', '', text)
-        text = sub('</p<<p<', '\n\n', text)
-        text = sub('\n\\s+\n*', '\n\n', text)
-        text = sub('#sub#', '\n  ', text)
         if self.fontlarge == True:
             if self.xd == False:
                 fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
@@ -9915,6 +9762,7 @@ class TVJetztView(tvBaseScreen):
         downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
+        print(output)
         self['label'].setText('Text = Sender, Info = Jetzt im TV/Gleich im TV')
         self['label'].stopBlinking()
         self['label'].show()
@@ -10584,6 +10432,7 @@ class TVProgrammView(tvBaseScreen):
         return
 
     def makePostviewPage(self, string):
+        print("DEBUG makePostviewPage 10447")
         output = open(self.localhtml2, 'r').read()
         output = six.ensure_str(output)
         self['label2'].setText('= Timer')
@@ -10606,12 +10455,7 @@ class TVProgrammView(tvBaseScreen):
                     if endpos == -1:
                         endpos = output.find('</footer>')
         bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('\r', '', bereich)
-        bereich = re.sub('<ul class="slidelist">.*?</ul>', '', bereich, flags=re.S)
-        bereich = re.sub('<script.*?</script>', '', bereich, flags=re.S)
-        bereich = re.sub('<style.*?</style>', '', bereich, flags=re.S)
-        bereich = re.sub('<div class="text" id=".*?</div>', '', bereich, flags=re.S)
+        bereich = cleanHTML(bereich)
         if search('rl: .https://video.tvspielfilm.de/.*?mp4', output) is not None:
             trailerurl = search('rl: .https://video.tvspielfilm.de/(.*?).mp4', output)
             self.trailerurl = 'https://video.tvspielfilm.de/' + trailerurl.group(1) + '.mp4'
@@ -10788,43 +10632,8 @@ class TVProgrammView(tvBaseScreen):
             except IndexError:
                 pass
 
-        bereich = sub('<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
-        bereich = sub('</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
-        bereich = sub('<section class="serial-info">\n\\s+', '<p>', bereich)
-        bereich = sub('</section>', '</p>', bereich)
-        bereich = sub('</span>\\s+', '</span>, ', bereich)
-        bereich = sub('<li class="titleName">', '</p><p> \xc2\xb7 ', bereich)
-        bereich = sub('<li class="subtitleName">', '#sub#', bereich)
-        bereich = sub('ShowView [0-9-]+', '', bereich)
-        bereich = sub('<a href=".*?">', '', bereich)
-        bereich = sub('<h1.*?>', '<p>', bereich)
-        bereich = sub('</h1>', '</p>', bereich)
-        bereich = sub('<h3.*?>', '<p>', bereich)
-        bereich = sub('</h3>', '</p>', bereich)
-        bereich = sub('<br/>', '</p><p>', bereich)
-        bereich = sub('<p>\n', '<p>', bereich)
-        bereich = sub('<dt>', '<p>', bereich)
-        bereich = sub('<dt class="role">', '<p>', bereich)
-        bereich = sub('</dt>\n\\s+<dd>\n\\s+', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd>', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd class="name">', ': ', bereich)
-        bereich = sub('\n[ ]+,', ',', bereich)
-        bereich = sub(', [ ]+', ', ', bereich)
-        bereich = sub('</a>', '</p>', bereich)
-        bereich = sub('\n\\s+</dd>', '</p>', bereich)
-        bereich = sub('</a></dd>', '</p>', bereich)
-        bereich = sub('</dd>', '</p>', bereich)
-        bereich = sub('</dt>', '</p>', bereich)
-        text = ''
-        a = findall('<p.*?>(.*?)</p>', bereich)
-        for x in a:
-            if x != '':
-                text = text + x + '\n\n'
+        text = parsedetail(bereich)
 
-        text = sub('<[^>]*>', '', text)
-        text = sub('</p<<p<', '\n\n', text)
-        text = sub('\n\\s+\n*', '\n\n', text)
-        text = sub('#sub#', '\n  ', text)
         if self.fontlarge == True:
             if self.xd == False:
                 fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
@@ -12185,6 +11994,7 @@ class TVProgrammView(tvBaseScreen):
         downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
+        print(output)
         if self.eventview == False:
             self['label'].setText('Bouquet = +- Tag, <> = +- Woche')
             self['label'].stopBlinking()
@@ -14722,6 +14532,7 @@ class TVNews(tvBaseScreen):
         self.ready = True
 
     def makePostviewPage(self, string):
+        print("DEBUG makePostviewPage 14550")
         output = open(self.localhtml2, 'r').read()
         output = six.ensure_str(output)
         self['picture'].hide()
@@ -14746,12 +14557,7 @@ class TVNews(tvBaseScreen):
                     if endpos == -1:
                         endpos = output.find('</footer>')
         bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('\r', '', bereich)
-        bereich = re.sub('<ul class="slidelist">.*?</ul>', '', bereich, flags=re.S)
-        bereich = re.sub('<script.*?</script>', '', bereich, flags=re.S)
-        bereich = re.sub('<style.*?</style>', '', bereich, flags=re.S)
-        bereich = re.sub('<div class="text" id=".*?</div>', '', bereich, flags=re.S)
+        bereich = cleanHTML(bereich)
         if search('rl: .https://video.tvspielfilm.de/.*?mp4', output) is not None:
             trailerurl = search('rl: .https://video.tvspielfilm.de/(.*?).mp4', output)
             self.trailerurl = 'https://video.tvspielfilm.de/' + trailerurl.group(1) + '.mp4'
@@ -14784,43 +14590,9 @@ class TVNews(tvBaseScreen):
                 self['label'].setText('OK = Zum Video')
             else:
                 self['label'].setText('OK = Vollbild')
-        bereich = sub('<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
-        bereich = sub('</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
-        bereich = sub('<section class="serial-info">\n\\s+', '<p>', bereich)
-        bereich = sub('</section>', '</p>', bereich)
-        bereich = sub('</span>\\s+', '</span>, ', bereich)
-        bereich = sub('<li class="titleName">', '</p><p> \xc2\xb7 ', bereich)
-        bereich = sub('<li class="subtitleName">', '#sub#', bereich)
-        bereich = sub('ShowView [0-9-]+', '', bereich)
-        bereich = sub('<a href=".*?">', '', bereich)
-        bereich = sub('<h1.*?>', '<p>', bereich)
-        bereich = sub('</h1>', '</p>', bereich)
-        bereich = sub('<h3.*?>', '<p>', bereich)
-        bereich = sub('</h3>', '</p>', bereich)
-        bereich = sub('<br/>', '</p><p>', bereich)
-        bereich = sub('<p>\n', '<p>', bereich)
-        bereich = sub('<dt>', '<p>', bereich)
-        bereich = sub('<dt class="role">', '<p>', bereich)
-        bereich = sub('</dt>\n\\s+<dd>\n\\s+', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd>', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd class="name">', ': ', bereich)
-        bereich = sub('\n[ ]+,', ',', bereich)
-        bereich = sub(', [ ]+', ', ', bereich)
-        bereich = sub('</a>', '</p>', bereich)
-        bereich = sub('\n\\s+</dd>', '</p>', bereich)
-        bereich = sub('</a></dd>', '</p>', bereich)
-        bereich = sub('</dd>', '</p>', bereich)
-        bereich = sub('</dt>', '</p>', bereich)
-        text = ''
-        a = findall('<p.*?>(.*?)</p>', bereich)
-        for x in a:
-            if x != '':
-                text = text + x + '\n\n'
+                
+        text = parsedetail(bereich)
 
-        text = sub('<[^>]*>', '', text)
-        text = sub('</p<<p<', '\n\n', text)
-        text = sub('\n\\s+\n*', '\n\n', text)
-        text = sub('#sub#', '\n  ', text)
         if self.fontlarge == True:
             if self.xd == False:
                 fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online'
@@ -15222,6 +14994,7 @@ class TVBlog(tvBaseScreen):
         return
 
     def makePostviewPage(self, string):
+        print("DEBUG makePostviewPage 15016")
         output = open(self.localhtml2, 'r').read()
         output = six.ensure_str(output)
         self['item'].hide()
@@ -17680,6 +17453,7 @@ class tvMain(Screen):
             self.skin = applySkinVars(tvMain.skin, self.dict)
         self.session = session
         Screen.__init__(self, session)
+        self.baseurl = 'https://www.tvspielfilm.de'
         self.fhd = False
         if config.plugins.tvspielfilm.fhd.value == 'yes':
             if getDesktop(0).size().width() == 1920:
@@ -20949,11 +20723,11 @@ class TVHeuteView(tvBaseScreen):
             self.MeinTVS = True
             self.error = False
             self.opener = opener
-            page = sub('http://my.tvspielfilm.de/tv-programm/tv-sender/.page=', '', link)
+            page = sub('https://my.tvspielfilm.de/tv-programm/tv-sender/.page=', '', link)
             self.count = int(page)
         else:
             self.MeinTVS = False
-            page = sub('http://www.tvspielfilm.de/tv-programm/tv-sender/.page=', '', link)
+            page = sub('https://www.tvspielfilm.de/tv-programm/tv-sender/.page=', '', link)
             self.count = int(page)
         if config.plugins.tvspielfilm.picon.value == 'yes':
             self.picon = True
@@ -21226,8 +21000,8 @@ class TVHeuteView(tvBaseScreen):
         date = str(self.date.strftime('%d.%m.%Y'))
         self.titel = 'Heute im TV  - ' + str(self.weekday) + ', ' + date
         self.setTitle(self.titel)
-        startpostop = find(output, '<div class="gallery-area">')
-        endpostop = find(output, '<div class="info-block">')
+        startpostop = output.find('<div class="gallery-area">')
+        endpostop = output.find('<div class="info-block">')
         bereichtop = output[startpostop:endpostop]
         bereichtop = transHTML(bereichtop)
         bereichtop = sub('<wbr/>', '', bereichtop)
@@ -21342,37 +21116,37 @@ class TVHeuteView(tvBaseScreen):
         pic = re.findall('<img src="(.*?)" width="', bereichtop)
         if pic is not None:
             try:
-                self.download(pic[0], self.getPic1)
+                self.download(fiximgLink(pic[0]), self.getPic1)
                 self['pic1'].show()
             except IndexError:
                 pass
 
             try:
-                self.download(pic[1], self.getPic2)
+                self.download(fiximgLink(pic[1]), self.getPic2)
                 self['pic2'].show()
             except IndexError:
                 pass
 
             try:
-                self.download(pic[2], self.getPic3)
+                self.download(fiximgLink(pic[2]), self.getPic3)
                 self['pic3'].show()
             except IndexError:
                 pass
 
             try:
-                self.download(pic[3], self.getPic4)
+                self.download(fiximgLink(pic[3]), self.getPic4)
                 self['pic4'].show()
             except IndexError:
                 pass
 
             try:
-                self.download(pic[4], self.getPic5)
+                self.download(fiximgLink(pic[4]), self.getPic5)
                 self['pic5'].show()
             except IndexError:
                 pass
 
             try:
-                self.download(pic[5], self.getPic6)
+                self.download(fiximgLink(pic[5]), self.getPic6)
                 self['pic6'].show()
             except IndexError:
                 pass
@@ -21420,20 +21194,20 @@ class TVHeuteView(tvBaseScreen):
             self['pictext5'].setText('')
             self['pictext6'].setText('')
         if self.abends == True:
-            startpos = find(output, '<div id="toggleslot-20-p"')
-            endpos = find(output, '<div id="toggleslot-0-p"')
+            startpos = output.find('<div id="toggleslot-20-p"')
+            endpos = output.find('<div id="toggleslot-0-p"')
         elif self.nachts == True:
-            startpos = find(output, '<div id="toggleslot-0-p"')
-            endpos = find(output, '<div class="block-now-stations">')
+            startpos = output.find('<div id="toggleslot-0-p"')
+            endpos = output.find('<div class="block-now-stations">')
         elif self.morgens == True:
-            startpos = find(output, '<div id="toggleslot-5-p"')
-            endpos = find(output, '<div id="toggleslot-14-p"')
+            startpos = output.find('<div id="toggleslot-5-p"')
+            endpos = output.find('<div id="toggleslot-14-p"')
         elif self.mittags == True:
-            startpos = find(output, '<div id="toggleslot-14-p"')
-            endpos = find(output, '<div id="toggleslot-18-p"')
+            startpos = output.find('<div id="toggleslot-14-p"')
+            endpos = output.find('<div id="toggleslot-18-p"')
         elif self.vorabend == True:
-            startpos = find(output, '<div id="toggleslot-18-p"')
-            endpos = find(output, '<div id="toggleslot-20-p"')
+            startpos = output.find('<div id="toggleslot-18-p"')
+            endpos = output.find('<div id="toggleslot-20-p"')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         bereich = sub('<a href="javascript://".*?\n', '', bereich)
@@ -22077,6 +21851,7 @@ class TVHeuteView(tvBaseScreen):
         return
 
     def makePostviewPage(self, string):
+        print("DEBUG makePostviewPage 21873")
         output = open(self.localhtml2, 'r').read()
         output = six.ensure_str(output)
         self['label2'].setText('= Timer')
@@ -22134,12 +21909,7 @@ class TVHeuteView(tvBaseScreen):
                     if endpos == -1:
                         endpos = output.find('</footer>')
         bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('\r', '', bereich)
-        bereich = re.sub('<ul class="slidelist">.*?</ul>', '', bereich, flags=re.S)
-        bereich = re.sub('<script.*?</script>', '', bereich, flags=re.S)
-        bereich = re.sub('<style.*?</style>', '', bereich, flags=re.S)
-        bereich = re.sub('<div class="text" id=".*?</div>', '', bereich, flags=re.S)
+        bereich = cleanHTML(bereich)
         if search('rl: .https://video.tvspielfilm.de/.*?mp4', output) is not None:
             trailerurl = search('rl: .https://video.tvspielfilm.de/(.*?).mp4', output)
             self.trailerurl = 'https://video.tvspielfilm.de/' + trailerurl.group(1) + '.mp4'
@@ -22307,43 +22077,8 @@ class TVHeuteView(tvBaseScreen):
             except IndexError:
                 self.name = ''
 
-        bereich = sub('<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
-        bereich = sub('</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
-        bereich = sub('<section class="serial-info">\n\\s+', '<p>', bereich)
-        bereich = sub('</section>', '</p>', bereich)
-        bereich = sub('</span>\\s+', '</span>, ', bereich)
-        bereich = sub('<li class="titleName">', '</p><p> \xc2\xb7 ', bereich)
-        bereich = sub('<li class="subtitleName">', '#sub#', bereich)
-        bereich = sub('ShowView [0-9-]+', '', bereich)
-        bereich = sub('<a href=".*?">', '', bereich)
-        bereich = sub('<h1.*?>', '<p>', bereich)
-        bereich = sub('</h1>', '</p>', bereich)
-        bereich = sub('<h3.*?>', '<p>', bereich)
-        bereich = sub('</h3>', '</p>', bereich)
-        bereich = sub('<br/>', '</p><p>', bereich)
-        bereich = sub('<p>\n', '<p>', bereich)
-        bereich = sub('<dt>', '<p>', bereich)
-        bereich = sub('<dt class="role">', '<p>', bereich)
-        bereich = sub('</dt>\n\\s+<dd>\n\\s+', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd>', ' ', bereich)
-        bereich = sub('</dt>\n\\s+<dd class="name">', ': ', bereich)
-        bereich = sub('\n[ ]+,', ',', bereich)
-        bereich = sub(', [ ]+', ', ', bereich)
-        bereich = sub('</a>', '</p>', bereich)
-        bereich = sub('\n\\s+</dd>', '</p>', bereich)
-        bereich = sub('</a></dd>', '</p>', bereich)
-        bereich = sub('</dd>', '</p>', bereich)
-        bereich = sub('</dt>', '</p>', bereich)
-        text = ''
-        a = findall('<p.*?>(.*?)</p>', bereich)
-        for x in a:
-            if x != '':
-                text = text + x + '\n\n'
+        text = parsedetail(bereich)
 
-        text = sub('<[^>]*>', '', text)
-        text = sub('</p<<p<', '\n\n', text)
-        text = sub('\n\\s+\n*', '\n\n', text)
-        text = sub('#sub#', '\n  ', text)
         if self.fontlarge == True:
             if self.xd == False:
                 fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
@@ -22450,8 +22185,8 @@ class TVHeuteView(tvBaseScreen):
             self['searchtext'].show()
             self.setTitle('')
             self.setTitle(title.group(1))
-        startpos = find(output, '<table class="primetime-table">')
-        endpos = find(output, '</table>')
+        startpos = output.find('<table class="primetime-table">')
+        endpos = output.find('</table>')
         bereich = output[startpos:endpos]
         bereich = transHTML(bereich)
         bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
@@ -24904,7 +24639,7 @@ class TVHeuteView(tvBaseScreen):
                 self.makeErrorTimer.callback.append(self.displayError)
                 self.makeErrorTimer.start(500, True)
         else:
-            downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadPageError)
+            downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def displayError(self):
         self.session.openWithCallback(self.closeError, MessageBox, '%s' % self.error, MessageBox.TYPE_ERROR)
@@ -24913,6 +24648,7 @@ class TVHeuteView(tvBaseScreen):
         self.close()
 
     def downloadPageError(self, output):
+        print(output)
         self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Men\xc3\xbc = Senderliste')
         self['label'].stopBlinking()
         self['label'].show()

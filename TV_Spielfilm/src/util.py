@@ -1,4 +1,4 @@
-from re import sub
+from re import sub, findall, S as RES
 from Components.config import config
 from Components.ConditionalWidget import BlinkingWidget
 from Components.Label import Label
@@ -554,3 +554,67 @@ def transCHANNEL(data):
     data = sub('SWR.*?,', 'swr', data)
     data = sub('BR.*?,', 'swr', data)
     return data
+
+def parsedetail(bereich, debug=None):
+    bereich = sub('<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
+    bereich = sub('</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
+    bereich = sub('<section class="serial-info">\n\\s+', '<p>', bereich)
+    bereich = sub('</section>', '</p>', bereich)
+    bereich = sub('</span>\\s+', '</span>, ', bereich)
+    bereich = sub('<li class="titleName">', '</p><p> \xc2\xb7 ', bereich)
+    bereich = sub('<li class="subtitleName">', '#sub#', bereich)
+    bereich = sub('ShowView [0-9-]+', '', bereich)
+    bereich = sub('<a href=".*?">', '', bereich)
+    bereich = sub('<h1.*?>', '<p>', bereich)
+    bereich = sub('</h1>', '</p>', bereich)
+    bereich = sub('<h3.*?>', '<p>', bereich)
+    bereich = sub('</h3>', '</p>', bereich)
+    bereich = sub('<br/>', '</p><p>', bereich)
+    bereich = sub('<p>\n', '<p>', bereich)
+    bereich = sub('<dt>', '<p>', bereich)
+    bereich = sub('<dt class="role">', '<p>', bereich)
+    bereich = sub('</dt>\n\\s+<dd>\n\\s+', ' ', bereich)
+    bereich = sub('</dt>\n\\s+<dd>', ' ', bereich)
+    bereich = sub('</dt>\n\\s+<dd class="name">', ': ', bereich)
+    bereich = sub('\n[ ]+,', ',', bereich)
+    bereich = sub(', [ ]+', ', ', bereich)
+    bereich = sub('</a>', '</p>', bereich)
+    bereich = sub('\n\\s+</dd>', '</p>', bereich)
+    bereich = sub('</a></dd>', '</p>', bereich)
+    bereich = sub('</dd>', '</p>', bereich)
+    bereich = sub('</dt>', '</p>', bereich)
+    text = ''
+    a = findall('<p.*?>(.*?)</p>', bereich)
+    for x in a:
+        if x != '':
+            text = text + x + '\n\n'
+    if debug != None:
+        print("[DEBUG] parsedetail %s\n" % debug)
+        print(text)
+
+    text = sub('<[^>]*>', '', text)
+    text = sub('</p<<p<', '\n\n', text)
+    text = sub('\n\\s+\n*', '\n\n', text)
+    text = sub('#sub#', '\n  ', text)
+
+    if debug != None:
+        print("[DEBUG] parsedetail %s\n" % debug)
+        print(text)
+    
+    return text
+
+def cleanHTML(bereich):
+    bereich = transHTML(bereich)
+    bereich = sub('\r', '', bereich)
+    bereich = sub('<ul class="slidelist">.*?</ul>', '', bereich, flags=RES)
+    bereich = sub('<div class="vod".*?<script>', '<script>', bereich, flags=RES)
+    bereich = sub('<script.*?</script>', '', bereich, flags=RES)
+    bereich = sub('<style.*?</style>', '', bereich, flags=RES)
+    bereich = sub('<div class="text" id=".*?</div>', '', bereich, flags=RES)
+    bereich = sub('<div class="vod".*?</div>', '', bereich, flags=RES)
+    return bereich
+
+def fiximgLink(link):
+    link = sub('" alt.*','',link)
+    return sub('.*data-src="','',link)
+    
