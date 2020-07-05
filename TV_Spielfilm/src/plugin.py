@@ -1,7 +1,6 @@
 from __future__ import print_function, absolute_import
 from base64 import b64encode, b64decode
 from Components.ActionMap import ActionMap, NumberActionMap
-from Components.ConditionalWidget import BlinkingWidget
 from Components.config import config, configfile, ConfigDirectory, ConfigInteger, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.FileList import FileList
@@ -39,16 +38,10 @@ from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirec
 from six.moves.urllib.error import URLError, HTTPError
 import datetime, os, re, socket, sys, time, six
 from os import path
-from .util import transCHANNEL, applySkinVars, shortenChannel, transWIKI, transHTML
-
-MEDIAROOT = "/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/"
-PICPATH = MEDIAROOT + "pic/"
-ICONPATH = PICPATH + "icons/"
-TVSPNG = PICPATH + "tvspielfilm.png"
-TVSHDPNG = PICPATH + "tvspielfilmHD.png"
+from .util import transCHANNEL, applySkinVars, shortenChannel, transWIKI, transHTML, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, TVSHDPNG, serviceDB, channelDB, BlinkingLabel, ItemList
 
 try:
-    from cookielib import MozillaCookieJar
+        from cookielib import MozillaCookieJar
 except Exception:
     from http.cookiejar import MozillaCookieJar
 
@@ -17116,50 +17109,6 @@ class FullScreen(tvBase, Screen):
         self.close()
 
 
-class serviceDB():
-
-    def __init__(self, servicefile):
-        self.servicefile = servicefile
-        self.d = dict()
-        try:
-            for x in open(self.servicefile):
-                key, val = x.split()
-                self.d[key] = val
-
-        except:
-            pass
-
-    def lookup(self, key):
-        if key in self.d:
-            return self.d[key]
-        return 'nope'
-
-    def close(self):
-        pass
-
-
-class channelDB():
-
-    def __init__(self, servicefile):
-        self.servicefile = servicefile
-        self.d = dict()
-        try:
-            for x in open(self.servicefile):
-                val, key = x.split()
-                self.d[key] = val
-
-        except:
-            pass
-
-    def lookup(self, key):
-        if key in self.d:
-            return self.d[key]
-        return 'nope'
-
-    def close(self):
-        pass
-
-
 class searchYouTube(tvBase, Screen):
     skin = '\n\t\t\t<screen position="center,center" size="1000,560" title=" ">\n\t\t\t\t<ePixmap position="0,0" size="1000,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/youtube.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="10,6" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/blue.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="10,26" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="label" position="34,6" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="34,26" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="740,0" size="240,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t\t<widget name="poster1" position="10,55" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster2" position="10,180" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster3" position="10,305" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster4" position="10,430" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="list" position="235,55" size="755,500" scrollbarMode="showOnDemand" zPosition="1" />\n\t\t\t</screen>'
 
@@ -21195,53 +21144,6 @@ class FolderSelection(tvBase, Screen):
     def cancel(self):
         self.close(None)
         return
-
-
-class ItemList(MenuList):
-
-    def __init__(self, items, enableWrapAround = True):
-        MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            self.l.setFont(-2, gFont('Sans', 24))
-            if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-                self.l.setFont(-1, gFont('Sans', 26))
-                self.l.setFont(0, gFont('Sans', 24))
-                self.l.setFont(1, gFont('Sans', 22))
-                self.l.setFont(2, gFont('Sans', 20))
-            elif config.plugins.tvspielfilm.font_size.value == 'large':
-                self.l.setFont(-1, gFont('Sans', 24))
-                self.l.setFont(0, gFont('Sans', 22))
-                self.l.setFont(1, gFont('Sans', 20))
-                self.l.setFont(2, gFont('Sans', 18))
-            else:
-                self.l.setFont(-1, gFont('Sans', 22))
-                self.l.setFont(0, gFont('Sans', 20))
-                self.l.setFont(1, gFont('Sans', 18))
-                self.l.setFont(2, gFont('Sans', 16))
-        else:
-            self.l.setFont(-2, gFont('Regular', 24))
-            if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-                self.l.setFont(-1, gFont('Regular', 26))
-                self.l.setFont(0, gFont('Regular', 24))
-                self.l.setFont(1, gFont('Regular', 22))
-                self.l.setFont(2, gFont('Regular', 20))
-            elif config.plugins.tvspielfilm.font_size.value == 'large':
-                self.l.setFont(-1, gFont('Regular', 24))
-                self.l.setFont(0, gFont('Regular', 22))
-                self.l.setFont(1, gFont('Regular', 20))
-                self.l.setFont(2, gFont('Regular', 18))
-            else:
-                self.l.setFont(-1, gFont('Regular', 22))
-                self.l.setFont(0, gFont('Regular', 20))
-                self.l.setFont(1, gFont('Regular', 18))
-                self.l.setFont(2, gFont('Regular', 16))
-
-
-class BlinkingLabel(Label, BlinkingWidget):
-
-    def __init__(self, text = ''):
-        Label.__init__(self, text=text)
-        BlinkingWidget.__init__(self)
 
 
 class tvJetzt(Screen):
