@@ -29,8 +29,6 @@ import os
 
 import copy
 
-from Components.config import config, ConfigSubList, ConfigSelection, ConfigElement
-
 from six.moves import http_client
 import six
 
@@ -67,7 +65,7 @@ class SSDPServerDiscovery(DatagramProtocol):
 		self.port = reactor.listenUDP(0, self, interface=iface)
 		if self.port is not None:
 			print("Sending M-SEARCH...")
-			self.port.write(MS, (SSDP_ADDR, SSDP_PORT))
+			self.port.write(bytes(MS, 'utf-8'), (SSDP_ADDR, SSDP_PORT))
 
 	def stop_msearch(self):
 		if self.port is not None:
@@ -138,14 +136,14 @@ class SATIPDiscovery:
 	def dataReceive(self, data):
 #		print "dataReceive:\n", data
 #		print "\n"
-		serverData = self.dataParse(data)
+		serverData = self.dataParse(six.ensure_str(data))
 		if 'LOCATION' in serverData:
 			self.xmlParse(serverData['LOCATION'])
 
 	def dataParse(self, data):
 		serverData = {}
 		for line in data.splitlines():
-#			print "[*] line : ", line
+			#print("[*] line : ", line)
 			if line.find(':') != -1:
 				(attr, value) = line.split(':', 1)
 				attr = attr.strip().upper()
@@ -219,9 +217,9 @@ class SATIPDiscovery:
 				port = location[AAA+1 : BBB]
 				request = location[BBB:]
 
-			#print "address2 : ", address
-			#print "port2: " , port
-			#print "request : ", request
+			#print("address2 : ", address)
+			#print("port2: " , port)
+			#print("request : ", request)
 
 			conn = http_client.HTTPConnection(address, int(port))
 			conn.request("GET", request)
@@ -347,7 +345,6 @@ class SATIPTuner(Screen, ConfigListScreen):
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session = self.session)
 		self.satipconfig = ConfigSubsection()
-		self.satipconfig.server = None
 
 		if not self.discoveryEnd in satipdiscovery.updateCallback:
 			satipdiscovery.updateCallback.append(self.discoveryEnd)
