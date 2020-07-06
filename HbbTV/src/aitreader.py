@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __future__ import absolute_import
 import os, xml.dom.minidom, re
 from enigma import iServiceInformation
 
@@ -9,7 +10,7 @@ RE_XML_ILLEGAL = u'([\u0000-\u0008\u000b-\u000c\u000e-\u001f\ufffe-\uffff])' + \
                   (six.unichr(0xd800), six.unichr(0xdbff), six.unichr(0xdc00), six.unichr(0xdfff),
                    six.unichr(0xd800), six.unichr(0xdbff), six.unichr(0xdc00), six.unichr(0xdfff),
                    six.unichr(0xd800), six.unichr(0xdbff), six.unichr(0xdc00), six.unichr(0xdfff))
-import vbcfg
+from . import vbcfg
 
 import six
 

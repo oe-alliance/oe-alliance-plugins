@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -17,8 +18,8 @@ from Tools.BoundFunction import boundFunction
 
 from enigma import eComponentScan
 
-from TerrestrialScan import TerrestrialScan, setParams
-from MakeBouquet import MakeBouquet
+from .TerrestrialScan import TerrestrialScan, setParams
+from .MakeBouquet import MakeBouquet
 
 import os
 

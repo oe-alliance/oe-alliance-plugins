@@ -1,5 +1,6 @@
 from __future__ import print_function
-import vbcfg
+from __future__ import absolute_import
+from . import vbcfg
 
 from six.moves import configparser
 

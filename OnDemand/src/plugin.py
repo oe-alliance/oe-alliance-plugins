@@ -16,13 +16,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from __future__ import absolute_import
 
 # for localized messages
 from . import _
 
 from Components.config import config, ConfigYesNo, ConfigSubsection, ConfigSelection, ConfigIP
 from Plugins.Plugin import PluginDescriptor
-from ui import OnDemand_Screen
+from .ui import OnDemand_Screen
 
 config.ondemand = ConfigSubsection()
 config.ondemand.ShowMainMenu = ConfigYesNo(default = False)

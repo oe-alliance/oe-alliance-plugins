@@ -16,6 +16,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from __future__ import print_function
+from __future__ import absolute_import
 
 # for localized messages
 from . import _
@@ -46,7 +47,7 @@ from six.moves.urllib.request import Request, urlopen
 
 import xml.etree.cElementTree as ET
 
-from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
+from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
 # The Dev ID for calling the API

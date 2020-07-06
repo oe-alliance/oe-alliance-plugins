@@ -16,6 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from __future__ import absolute_import
 
 # for localized messages
 from . import _
@@ -37,8 +38,8 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 from enigma import gFont, ePicLoad, eListboxPythonMultiContent, RT_HALIGN_RIGHT
 
-import itvplayer, rteplayer, threeplayer, iView, iRadio
-from CommonModules import MainMenuList
+from . import itvplayer, rteplayer, threeplayer, iView, iRadio
+from .CommonModules import MainMenuList
 
 ##########################################################################
 

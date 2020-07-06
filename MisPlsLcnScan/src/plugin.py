@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -17,8 +18,8 @@ from Tools.BoundFunction import boundFunction
 
 from enigma import eComponentScan
 
-from MisPlsLcnScan import MisPlsLcnScan
-from providers import PROVIDERS
+from .MisPlsLcnScan import MisPlsLcnScan
+from .providers import PROVIDERS
 
 config.plugins.MisPlsLcnScan = ConfigSubsection()
 config.plugins.MisPlsLcnScan.provider = ConfigSelection(default = "fransat_5W", choices = [(x, PROVIDERS[x]["name"]) for x in sorted(PROVIDERS.keys())])

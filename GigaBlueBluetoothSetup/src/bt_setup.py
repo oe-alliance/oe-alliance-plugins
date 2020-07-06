@@ -318,8 +318,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 
 		pairedDevices = self.gbbt.getPairedDevice()
 		if pairedDevices:
-			device_keys = pairedDevices.keys()
-			device_keys.sort()
+			device_keys = sorted(pairedDevices.keys())
 
 			for k in device_keys:
 				v = pairedDevices[k]

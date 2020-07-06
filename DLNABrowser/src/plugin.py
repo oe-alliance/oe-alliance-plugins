@@ -858,7 +858,7 @@ class DLNADeviceBrowser(Screen):
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbPrintClose)
 			cmd = 'djmount -o allow_other -o iocharset=utf8 %s'%(DLNA_CONFIG_ROOT_DIR)
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbStartDone)
-		self.taskManager.next()
+		next(self.taskManager)
 
 	def keyCancel(self):
 		self.close()
@@ -935,7 +935,7 @@ class DLNADeviceBrowser(Screen):
 		print(data)
 
 	def cbPrintClose(self, ret):
-		self.taskManager.next()
+		next(self.taskManager)
 
 	def cbStopDone(self, ret):
 		self.taskManager.clean()

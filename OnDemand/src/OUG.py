@@ -17,6 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -42,7 +43,7 @@ from os import path as os_path, remove as os_remove, mkdir as os_mkdir
 import socket
 from datetime import date, timedelta
 
-from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
+from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 #=========================================================================================
 def wgetUrl(target):

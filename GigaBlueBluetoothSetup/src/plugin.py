@@ -15,7 +15,7 @@ def main(session, **kwargs):
 def bt_keyPressed(key, flag):
 	if flag != 0: # if not release
 		global g_BTVolumeControlHandle
-		if key in (114,115):
+		if key in (114, 115):
 			if g_BTVolumeControlHandle:
 				v = g_BTVolumeControlHandle.getVolume()
 				pybluetooth_instance.setVolume(int(v))

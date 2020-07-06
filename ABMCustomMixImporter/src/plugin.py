@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _, PluginLanguageDomain
 
@@ -27,7 +28,7 @@ from Tools.Directories import pathExists, fileExists
 
 #Plugins
 from Plugins.Plugin import PluginDescriptor
-from mixes import Mixes
+from .mixes import Mixes
 
 mixes = Mixes().read()
 choices = sorted([(mixes[x]["key"], mixes[x]["name"]) for x in mixes], key=lambda listItem: listItem[1])

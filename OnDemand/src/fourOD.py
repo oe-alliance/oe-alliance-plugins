@@ -17,6 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -39,9 +40,9 @@ import urllib2, re
 from bs4 import BeautifulSoup
 import simplejson
 
-import fourOD_token_decoder
+from . import fourOD_token_decoder
 
-from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon, RTMP
+from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon, RTMP
 
 import six
 

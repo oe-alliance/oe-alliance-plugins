@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -20,7 +21,7 @@ import datetime
 import time
 
 import dvbreader
-from TerrestrialScanSkin import downloadBar
+from .TerrestrialScanSkin import downloadBar
 
 def setParams(frequency, system, bandwidth = 8): # freq is nine digits (474000000)
 	params = eDVBFrontendParametersTerrestrial()

@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.MenuList import MenuList
@@ -27,7 +28,7 @@ from datetime import date, timedelta
 import time
 import urlparse
 import base64
-from pygoogle import pygoogle
+from .pygoogle import pygoogle
 import json
 import re
 

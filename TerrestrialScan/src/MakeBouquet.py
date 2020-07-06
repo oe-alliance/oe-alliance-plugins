@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -20,10 +21,10 @@ import sys
 import datetime
 import time
 
-from TerrestrialScan import setParams, setParamsFe
+from .TerrestrialScan import setParams, setParamsFe
 
 import dvbreader
-from TerrestrialScanSkin import downloadBar
+from .TerrestrialScanSkin import downloadBar
 
 class MakeBouquet(Screen):
 	skin = downloadBar

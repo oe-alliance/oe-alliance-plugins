@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.ChoiceBox import ChoiceBox
@@ -17,9 +18,9 @@ import os, vbcfg
 
 from enigma import fbClass, eRCInput, eTimer, getDesktop
 
-from __init__ import _
-from bookmark import BookmarkManager, BookmarkData, CategoryData
-from vbipc import VBController
+from .__init__ import _
+from .bookmark import BookmarkManager, BookmarkData, CategoryData
+from .vbipc import VBController
 
 strIsEmpty = lambda x: x is None or len(x) == 0
 

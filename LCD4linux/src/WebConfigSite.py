@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # print " LCD4linux.StandbyBildLCD" in zip(*L4)[2]
 from __future__ import print_function
+from __future__ import absolute_import
 from twisted.web import resource, http
-from plugin import *
-from __init__ import _
+from .plugin import *
+from .__init__ import _
 from Components.config import configfile, config
 from enigma import eTimer
-from module import L4Lelement
+from .module import L4Lelement
 from boxbranding import getOEVersion
 
 L4LElement = L4Lelement()

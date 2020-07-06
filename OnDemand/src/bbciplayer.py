@@ -16,6 +16,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from __future__ import print_function
+from __future__ import absolute_import
 
 # for localized messages
 from . import _
@@ -40,7 +41,7 @@ import urllib2, re
 import xml.dom.minidom as dom
 from lxml import html
 
-from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
+from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 __plugin__  = "BBC iPlayer: "
 __version__ = "Version 1.0.2: "

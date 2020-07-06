@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -14,13 +15,13 @@ from Components.NimManager import nimmanager
 
 from enigma import eDVBResourceManager, eTimer, eDVBDB, eDVBFrontendParameters, eDVBFrontendParametersSatellite
 
-from providers import PROVIDERS
+from .providers import PROVIDERS
 
 import datetime
 import time
 
 import dvbreader
-from MisPlsLcnScanSkin import downloadBar
+from .MisPlsLcnScanSkin import downloadBar
 
 class MisPlsLcnScan(Screen):
 	skin = downloadBar

@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -6,7 +7,7 @@ from time import mktime, strftime, time, localtime
 from Components.config import config
 from enigma import eTimer
 
-from ChannelsImporter import ChannelsImporter
+from .ChannelsImporter import ChannelsImporter
 
 autoChannelsImporterTimer = None
 def autostart(reason, session=None, **kwargs):

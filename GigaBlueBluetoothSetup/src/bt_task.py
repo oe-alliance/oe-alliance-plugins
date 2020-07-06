@@ -167,7 +167,7 @@ class BluetoothTask(BluetoothState):
 		return None
 
 	def removeTask1(self, taskType):
-		while 1:
+		while True:
 			task = self.findTask1(taskType)
 			if task:
 				self.tasks1.remove(task)
@@ -282,7 +282,7 @@ class BluetoothTask(BluetoothState):
 		return None
 
 	def removeTask(self, taskType):
-		while 1:
+		while True:
 			task = self.findTask(taskType)
 			if task:
 				self.tasks.remove(task)

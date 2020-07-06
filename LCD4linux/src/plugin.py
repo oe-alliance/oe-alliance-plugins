@@ -15,8 +15,9 @@
 #  For other uses, permission from the author is necessary.
 #
 from __future__ import print_function
+from __future__ import absolute_import
 Version = "V5.0-r4"
-from __init__ import _
+from .__init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
 from enigma import ePicLoad, ePixmap
@@ -92,7 +93,7 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from enigma import eTimer, eEPGCache, eServiceReference, eServiceCenter, iPlayableService
 from RecordTimer import RecordTimer, RecordTimerEntry, parseEvent
 from threading import Thread, Lock
-import ping
+from . import ping
 
 from Components.config import configfile, getConfigListEntry, ConfigPassword, \
 	ConfigYesNo, ConfigText, ConfigClock, ConfigNumber, ConfigSelectionNumber, ConfigSelection, \
@@ -109,12 +110,12 @@ from twisted.web.client import getPage, HTTPClientFactory, downloadPage
 from xml.dom.minidom import parseString
 from xml.etree.cElementTree import parse as parseE
 from six.moves.urllib.parse import urlencode, quote, quote_plus
-from myFileList import FileList as myFileList
+from .myFileList import FileList as myFileList
 from mutagen.id3 import ID3
 from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
 from mutagen.flac import FLAC
-from module import L4Lelement
+from .module import L4Lelement
 import six
 
 SIGN = '°' if six.PY3 else str('\xc2\xb0')
@@ -294,18 +295,18 @@ USBok = False
 if ctypes.util.find_library("usb-0.1") is not None or ctypes.util.find_library("usb-1.0") is not None:
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 #	getEnigmaVersionString().split("-")[-1] > "3.2" # /model=dm800
-	import Photoframe
+	from . import Photoframe
 	import usb.util
-	import dpf
+	from . import dpf
 	USBok = True
 elif getImageArch() in ("aarch64"):
 	import usb.core
 	import usb.backend.libusb1
 	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
-	import Photoframe
+	from . import Photoframe
 	import usb.util
-	import dpf
+	from . import dpf
 	USBok = True
 
 
@@ -4417,8 +4418,8 @@ try:
 except:
 	SonosOK = False
 	L4log("Sonos not registered")
-from ymc import YMC
-from bluesound import BlueSound
+from .ymc import YMC
+from .bluesound import BlueSound
 
 import six
 from six.moves.BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
@@ -4464,8 +4465,8 @@ def InitWebIF():
 			sleep(5)
 		from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
 		from twisted.web import static
-		from WebSite import LCD4linuxweb, LCD4linuxwebView
-		from WebConfigSite import LCD4linuxConfigweb
+		from .WebSite import LCD4linuxweb, LCD4linuxwebView
+		from .WebConfigSite import LCD4linuxConfigweb
 		L4log("Child to WebIf...")
 		root = static.File("%slcd4linux" % TMP)
 		root.putChild("", LCD4linuxweb())

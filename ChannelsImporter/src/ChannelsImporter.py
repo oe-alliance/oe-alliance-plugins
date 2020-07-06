@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 # for localized messages
 from __future__ import print_function
+from __future__ import absolute_import
 from . import _
 
 import os, re, urllib2
@@ -18,7 +19,7 @@ from twisted.internet import reactor
 from twisted.internet.protocol import ClientCreator
 from twisted.protocols.ftp import FTPClient
 
-from FTPDownloader import FTPDownloader
+from .FTPDownloader import FTPDownloader
 
 DIR_ENIGMA2 = '/etc/enigma2/'
 DIR_TMP = '/tmp/'
