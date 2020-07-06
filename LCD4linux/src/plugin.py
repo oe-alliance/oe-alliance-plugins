@@ -14,10 +14,9 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import
 Version = "V5.0-r4"
-from .__init__ import _
+from . import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
 from enigma import ePicLoad, ePixmap
@@ -55,8 +54,6 @@ except AttributeError:
 	pass
 else:
 	ssl._create_default_https_context = _create_unverified_https_context
-import urlparse
-import urllib
 try:
 	import simplejson
 except:
@@ -65,25 +62,15 @@ import calendar
 import math
 import gc
 
-url2 = False
-try:
-	import urllib2
-	url2 = True
-except:
-	pass
 import os
 import textwrap
 import codecs
 import unicodedata
-try:
-	import cStringIO
-except:
-	import StringIO as cStringIO
+from six.moves import cStringIO as StringIO
 import ctypes.util
 import glob
 import random
 import struct
-import string
 import re
 from time import gmtime, strftime, localtime, mktime, time, sleep, timezone, altzone, daylight
 from datetime import datetime, timedelta, date
@@ -104,12 +91,11 @@ from Components.MenuList import MenuList
 from Components.NimManager import nimmanager
  
 from Tools.BoundFunction import boundFunction
-from SocketServer import ThreadingMixIn
+from six.moves.socketserver import ThreadingMixIn
 from twisted.internet import reactor
 from twisted.web.client import getPage, HTTPClientFactory, downloadPage
 from xml.dom.minidom import parseString
 from xml.etree.cElementTree import parse as parseE
-from six.moves.urllib.parse import urlencode, quote, quote_plus
 from .myFileList import FileList as myFileList
 from mutagen.id3 import ID3
 from mutagen.mp3 import MP3
@@ -117,6 +103,10 @@ from mutagen.easyid3 import EasyID3
 from mutagen.flac import FLAC
 from .module import L4Lelement
 import six
+from six.moves.urllib.parse import urlencode, quote, quote_plus, urlparse, urlunparse
+from six.moves.urllib.request import urlopen, Request, urlretrieve, FancyURLopener
+from six.moves.BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
+from six.moves import queue
 
 SIGN = '°' if six.PY3 else str('\xc2\xb0')
 
@@ -2350,8 +2340,11 @@ class MyTimer: # only for debug
 def Code_utf8(wert):
 	if wert is None:
 		wert = ""
-	wert = wert.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8") or ""
-	return codecs.decode(wert, 'UTF-8')
+	if six.PY2:
+		wert = wert.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8") or ""
+		return codecs.decode(wert, 'UTF-8')
+	else:
+		return wert.replace('\x86', '').replace('\x87', '')
 
 def L4log(nfo,wert=""):
 	if str(LCD4linux.EnableEventLog.value) != "0":
@@ -2552,9 +2545,8 @@ def getFeel(T, W):
 
 def getExternalIP():
 	try:
-		import urllib2
-		req = urllib2.Request(LCD4linux.ExternalIpUrl.value, data=None)
-		response = urllib2.urlopen(req, timeout=5)
+		req = Request(LCD4linux.ExternalIpUrl.value, data=None)
+		response = urlopen(req, timeout=5)
 		return response.read()
 	except:
 		from traceback import format_exc
@@ -2852,9 +2844,14 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 			PIC.append(os.path.join(P2, picon))
 			name2=channelname.decode("utf-8").encode("latin-1", "ignore") + ".png"
 			name4=channelname.decode("utf-8").encode("utf-8", "ignore") + ".png"
-			name = unicodedata.normalize('NFKD', six.text_type(str(""+channelname), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
+			name = unicodedata.normalize('NFKD', six.text_type(str(""+channelname), 'utf-8', errors='ignore'))
+			if six.PY2:
+				name = name.encode('ASCII', 'ignore')
 			name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
-			name3=channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
+			if six.PY2:
+				name3=channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
+			else:
+				name3=channelname2.replace('\x87', '').replace('\x86', '') + ".png"
 			PIC.append(os.path.join(P2, name3))
 			PIC.append(os.path.join(P2, name2))
 			PIC.append(os.path.join(P2, name))
@@ -3864,11 +3861,11 @@ def getHTMLwww(fn, url):
 	downloadPage(url, filename).addCallback(boundFunction(HTMLwwwDownloadFinished, filename)).addErrback(HTMLwwwDownloadFailed)
 
 def Urlget(url, params, method):
-	params = urllib.urlencode(params)
+	params = urlencode(params)
 	if method=='POST':
-		f = urllib.urlopen(url, params)
+		f = urlopen(url, params)
 	else:
-		f = urllib.urlopen(url+'?'+params)
+		f = urlopen(url+'?'+params)
 	fr = f.read()
 	fc = f.code
 	f.close()
@@ -4421,11 +4418,6 @@ except:
 from .ymc import YMC
 from .bluesound import BlueSound
 
-import six
-from six.moves.BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
-from six.moves import queue
-
-
 class GrabOSD:
 	def __init__(self, cmd):
 		global GrabRunning
@@ -4470,9 +4462,9 @@ def InitWebIF():
 		L4log("Child to WebIf...")
 		root = static.File("%slcd4linux" % TMP)
 		root.putChild("", LCD4linuxweb())
-		root.putChild("view", LCD4linuxwebView())
-		root.putChild("config", LCD4linuxConfigweb())
-		root.putChild("data", static.File(Data[:-1]))
+		root.putChild(b"view", LCD4linuxwebView())
+		root.putChild(b"config", LCD4linuxConfigweb())
+		root.putChild(b"data", static.File(six.ensure_binary(Data[:-1])))
 		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web/external.xml"):
 			try:
 				addExternalChild( ("lcd4linux", root, "LCD4linux", Version, True) )
@@ -4701,7 +4693,7 @@ class L4LWorker(Thread):
 			rs=""
 			try:
 				if name.startswith("http") and len(name) > 10:
-					r=urllib2.urlopen(name, timeout = 10)
+					r=urlopen(name, timeout = 10)
 				elif os.path.isfile(name):
 					r=open(name, "rb")
 				else:
@@ -9462,7 +9454,7 @@ class UpdateStatus(Screen):
 		L4log("Meteodownloadstart")
 		self.feedurl = LCD4linux.MeteoURL.value
 		try:
-			opener = urllib.FancyURLopener({})
+			opener = FancyURLopener({})
 			f = opener.open(self.feedurl)
 			wwwMeteo = f.read()
 		except Exception as e:
@@ -10056,9 +10048,9 @@ class myHTTPClientFactory(HTTPClientFactory):
 		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
 
 def url_parse(url, defaultPort=None):
-	parsed = urlparse.urlparse(url)
+	parsed = urlparse(url)
 	scheme = parsed[0]
-	path = urlparse.urlunparse(('', '') + parsed[2:])
+	path = urlunparse(('', '') + parsed[2:])
 	if defaultPort is None:
 		if scheme == 'https':
 			defaultPort = 443
@@ -10088,7 +10080,7 @@ def getShowPicture(BildFile, idx):
 			if "@" in BildFile:
 				import socket
 				socket.setdefaulttimeout(30)
-				r = urllib.urlretrieve(BildFile, HTTPpictmp % idx)
+				r = urlretrieve(BildFile, HTTPpictmp % idx)
 				L4logE("Content-Type", r[1]["content-type"])
 				if r[1]["content-type"].find("image/") >=0:
 					if os.path.isfile(HTTPpictmp % idx):
@@ -10099,10 +10091,7 @@ def getShowPicture(BildFile, idx):
 				else:
 					L4logE("Content-Type not image", BildFile)
 			else:
-				if url2 == True:
-					r = urllib2.urlopen(BildFile, timeout = 5)
-				else:
-					r = urllib.urlopen(BildFile)
+				r = urlopen(BildFile, timeout = 5)
 				L4logE("Content-Type", r.info().get("content-type"))
 				if r.info().get("content-type").find("image/") >=0:
 					f = open(HTTPpictmp % idx, 'wb') 
@@ -10435,11 +10424,18 @@ def LCD4linuxPIC(self, session):
 					ret=""
 					PIC = []
 					PIC.append(os.path.join(P2, picon))
-					name = unicodedata.normalize('NFKD', six.text_type(str(""+self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
+					name = unicodedata.normalize('NFKD', six.text_type(str(""+self.Lchannel_name), 'utf-8', errors='ignore'))
+					if six.PY2:
+						name = name.encode('ASCII', 'ignore')
 					name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
-					name2=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
-					name4=self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore") + ".png"
-					name3=self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
+					if six.PY2:
+						name2=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
+						name4=self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore") + ".png"
+						name3=self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
+					else:
+						name2=self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8") + ".png"
+						name4=self.Lchannel_name + ".png"
+						name3=self.Lchannel_name2.replace('\x87', '').replace('\x86', '') + ".png"
 					PIC.append(os.path.join(P2, name3))
 					PIC.append(os.path.join(P2, name2))
 					PIC.append(os.path.join(P2, name))
@@ -11097,7 +11093,7 @@ def LCD4linuxPIC(self, session):
 		(ConfigPos, ConfigSize, ConfigAlign, ConfigColor, ConfigBackColor, HTTPurl, ConfigShadow, ConfigFont) = xxx_todo_changeme6
 		t = ["not found"]
 		try:
-			r = urllib.urlopen(HTTPurl)
+			r = urlopen(HTTPurl)
 			t = r.read().split("\n")
 			r.close()
 		except:
@@ -11609,11 +11605,18 @@ def LCD4linuxPIC(self, session):
 				useCache = False
 				PIC = []
 				PIC.append(os.path.join(P2, picon))
-				name = unicodedata.normalize('NFKD', six.text_type(str(""+self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
+				name = unicodedata.normalize('NFKD', six.text_type(str(""+self.Lchannel_name), 'utf-8', errors='ignore'))
+				if six.PY2:
+					name = name.encode('ASCII', 'ignore')
 				name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
-				name2=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
-				name4=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
-				name3=self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
+				if six.PY2:
+					name2=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
+					name4=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
+					name3=self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
+				else:
+					name2=self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8") + ".png"
+					name4=self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8") + ".png"
+					name3=self.Lchannel_name2.replace('\x87', '').replace('\x86', '') + ".png"
 				PIC.append(os.path.join(P2, name3))
 				PIC.append(os.path.join(P2, name2))
 				PIC.append(os.path.join(P2, name))

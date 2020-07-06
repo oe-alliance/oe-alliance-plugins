@@ -7,9 +7,10 @@ import sys
 import time
 import usb.core
 import usb.util
-import StringIO
-import Image
+#import Image
+from PIL import Image
 import struct
+from six.moves import cStringIO as StringIO
 
 def write_jpg2frame(dev, pic):
 	"""Attach header to picture, pad with zeros if necessary, and send to frame"""

@@ -4,21 +4,15 @@ try:
 	import simplejson
 except:
 	import json as simplejson
-try:
-	import urllib2
-	url2 = True
-except:
-	url2 = False
-	import urllib
+
+from six.moves.urllib.request import urlopen
 
 class YMC:
 	def __init__(self, ip):
 		self.IP = ip
+
 	def Urlget(self, url):
-		if url2:
-			f = urllib2.urlopen(url, timeout = 1)
-		else:
-			f = urllib.urlopen(url)
+		f = urlopen(url, timeout = 1)
 		fr = f.read()
 		fc = f.code
 		f.close()

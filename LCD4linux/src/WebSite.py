@@ -4,6 +4,7 @@ from twisted.web import resource, http
 from .plugin import *
 import os
 import time
+import six
 ########################################################
 class LCD4linuxweb(resource.Resource):
 
@@ -19,12 +20,14 @@ class LCD4linuxweb(resource.Resource):
 
 		""" rendering server response """
 		w=""
-		command = req.args.get("width", None)
+		command = req.args.get(b"width", None)
 		if command is not None:
-			w += " width=\"%s\"" % command[0]
-		command = req.args.get("hight", None)
+			cmd = six.ensure_str(command[0])
+			w += " width=\"%s\"" % cmd
+		command = req.args.get(b"hight", None)
 		if command is not None:
-			w += " height=\"%s\"" % command[0]
+			cmd = six.ensure_str(command[0])
+			w += " height=\"%s\"" % cmd
 		html = "<html>"
 		html += "<head>\n"
 		html += "<meta http-equiv=\"Content-Language\" content=\"de\">\n"
@@ -81,7 +84,7 @@ class LCD4linuxweb(resource.Resource):
 
 		html += "</form>\n"
 
-		return html
+		return six.ensure_binary(html)
 
 class LCD4linuxwebView(LCD4linuxweb):
     

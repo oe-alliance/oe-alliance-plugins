@@ -1,5 +1,6 @@
 from __future__ import print_function
-import Image
+#import Image
+from PIL import Image
 try:
 	import dpflib
 except:
