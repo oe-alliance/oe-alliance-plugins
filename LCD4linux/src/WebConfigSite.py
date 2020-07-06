@@ -90,7 +90,8 @@ def ParseCode():
 				L4.append(Z)
 
 def _l(st):
-	st = st.ensure_str("utf-8", "ignore").replace(" [ok]>", "").encode('ascii', 'xmlcharrefreplace')
+	st = six.ensure_str(st,"utf-8", "ignore")
+	st = st.replace(" [ok]>", "").encode('ascii', 'xmlcharrefreplace')
 	return six.ensure_str(st)
 
 def AktiveMode(Test, R):
@@ -290,7 +291,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			L4logE("no command")
 		elif _command == "exec" and ex is not None:
 			L4logE("exec", _ex)
-			exec(_ex)
+			exec(_ex) # FIXME PY3
 		elif _command == "enable":
 			ExeMode = True
 		elif _command == "status":
@@ -345,7 +346,7 @@ class LCD4linuxConfigweb(resource.Resource):
 				return str(getMJPEGreader(_ex))
 		elif _command == "getexec" and ex is not None:
 			L4logE("getexec", _ex)
-			_exec("getexec = " + _ex)
+			_exec("getexec = " + _ex) # FIXME PY3
 			return str(getexec)
 		elif _command == "copyMP":
 			for a in req.args.keys():
@@ -354,12 +355,12 @@ class LCD4linuxConfigweb(resource.Resource):
 					b = _a.replace(".Standby", ".MP")
 					if (" "+b) in list(zip(*L3))[2]:
 						print(a, b)
-						_exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
 				elif "." in _a:
 					b = _a.replace(".", ".MP")
 					if (" "+b) in list(zip(*L3))[2]:
 						print(a, b)
-						_exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
 		elif _command == "copyIdle":
 			for a in req.args.keys():
 				_a = six.ensure_str(a)
@@ -367,12 +368,12 @@ class LCD4linuxConfigweb(resource.Resource):
 					b = _a.replace(".MP", ".Standby")
 					if (" "+b) in list(zip(*L4))[2]:
 						print(a, b)
-						_exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
 				elif "." in _a:
 					b = _a.replace(".", ".Standby")
 					if (" "+b) in list(zip(*L4))[2]:
 						print(a, b)
-						_exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
 		elif _command == "copyOn":
 			for a in req.args.keys():
 				_a = six.ensure_str(a)
@@ -380,12 +381,12 @@ class LCD4linuxConfigweb(resource.Resource):
 					b = _a.replace(".MP", ".")
 					if (" "+b) in list(zip(*L2))[2]:
 						print(a, b)
-						_exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
 				elif ".Standby" in _a:
 					b = _a.replace(".Standby", ".")
 					if (" "+b) in list(zip(*L2))[2]:
 						print(a, b)
-						_exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
 
 #####################
 # Konfig schreiben
@@ -402,33 +403,34 @@ class LCD4linuxConfigweb(resource.Resource):
 					val = req.args.get(a, "")[0]
 					val = six.ensure_str(val)
 #ConfigSelection
+					changed = False
 					_exec("Typ = isinstance(%s,ConfigSelection)" % _a)
 					if Typ == True:
-						_exec("%s.value = '%s'" % (_a, val)) # FIXME PY3
+						exec("%s.value = '%s'" % (_a, val)) # FIXME PY3
 					else:
 #ConfigYesNo
 						_exec("Typ = isinstance(%s,ConfigYesNo)" % _a)
 						if Typ == True:
 							if len(val) == 2:
-								_exec("%s.value = True" % _a)
+								exec("%s.value = True" % _a) # FIXME PY3
 							else:
-								_exec("%s.value = False" % _a)
+								exec("%s.value = False" % _a) # FIXME PY3
 						else:
 #ConfigText
-							exec("Typ = isinstance(%s,ConfigText)" % _a)
+							_exec("Typ = isinstance(%s,ConfigText)" % _a)
 							if Typ == True:
 								V = _l(val)
 								try:
 									V = HTMLParser.unescape(V)
 								except:
 									L4log("WebIF Error: Parse Text")
-								exec("%s.value = '%s'" % (_a, V))
+								exec("%s.value = '%s'" % (_a, V)) # FIXME PY3
 							else:
 #ConfigSlider
-								exec("Typ = isinstance(%s,ConfigSlider)" % _a)
+								_exec("Typ = isinstance(%s,ConfigSlider)" % _a)
 								if Typ == True:
 									if val.isdigit():
-										_exec("%s.value = %s" % (_a, val))
+										exec("%s.value = %s" % (_a, val)) # FIXME PY3
 								else:
 #ConfigClock
 									_exec("Typ = isinstance(%s,ConfigClock)" % _a)
@@ -437,8 +439,8 @@ class LCD4linuxConfigweb(resource.Resource):
 										if len(t)==2:
 											if t[0].isdigit() and t[1].isdigit():
 												w1 = "[%s,%s]" % (int(t[0]), int(t[1]))
-												_exec("%s.value = %s" % (_a, w1))
-					_exec("C = %s.isChanged()" % _a)
+												exec("%s.value = %s" % (_a, w1)) # FIXME PY3
+					exec("C = %s.isChanged()" % _a) # FIXME PY3
 					if C:
 						exec("C = %s.save()" % _a) # FIXME PY3
 						L4log("Changed", a)
