@@ -262,8 +262,8 @@ class SatelliteTransponderSearchSupport:
 					else:
 						print("LOCKED at", freq, "SEARCHED at", self.parm.frequency, "half bw", (135*((sr+1000)/1000)/200), "half search range", (self.parm.symbol_rate/2))
 						self.parm.frequency = freq
-						self.parm.frequency += (135*((sr+999)/1000)/200)
-						self.parm.frequency += self.parm.symbol_rate/2
+						self.parm.frequency += (135*((sr+999)//1000)//200)
+						self.parm.frequency += self.parm.symbol_rate//2
 
 					bm = state.getConstellationBitmap(5)
 					self.tp_found.append((fstr, bm))
@@ -282,8 +282,8 @@ class SatelliteTransponderSearchSupport:
 
 			if self.auto_scan:
 				freq = d["frequency"]
-				freq = int(round(float(freq*2) / 1000)) * 1000
-				freq /= 2
+				freq = int(round(float(freq*2) // 1000)) * 1000
+				freq //= 2
 				mhz_complete, mhz_done = self.stats(freq)
 				print("CURRENT freq", freq, "%d/%d" %(mhz_done, mhz_complete))
 				check_finished = self.parm is None
@@ -308,9 +308,9 @@ class SatelliteTransponderSearchSupport:
 					return
 
 			if self.auto_scan:
-				tmpstr = str((freq+500)/1000)
+				tmpstr = str((freq+500)//1000)
 			else:
-				tmpstr = str((self.parm.frequency+500)/1000)
+				tmpstr = str((self.parm.frequency+500)//1000)
 
 			if self.parm.polarisation == eDVBFrontendParametersSatellite.Polarisation_Horizontal:
 				tmpstr += "H"
@@ -384,10 +384,10 @@ class SatelliteTransponderSearchSupport:
 		mhz_done = 0
 		cnt = 0
 		for range in self.range_list:
-			mhz = (range[1] - range[0]) / 1000
+			mhz = (range[1] - range[0]) // 1000
 			mhz_complete += mhz
 			if cnt == self.current_range:
-				mhz_done += (freq - range[0]) / 1000
+				mhz_done += (freq - range[0]) // 1000
 			elif cnt < self.current_range:
 				mhz_done += mhz
 			cnt += 1

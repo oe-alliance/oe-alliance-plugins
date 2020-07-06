@@ -1,11 +1,12 @@
 from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import division
 # for localized messages
 from . import _
 
 from boxbranding import getBoxType
 from Components.ActionMap import NumberActionMap, ActionMap
-from Components.config import config, ConfigSubsection, ConfigSelection, \
-	ConfigYesNo, ConfigInteger, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.NimManager import nimmanager, getConfigSatlist
@@ -213,7 +214,7 @@ class SatelliteTransponderSearchSupport:
 				freq = d["frequency"]
 				parm = eDVBFrontendParametersSatellite()
 				parm.frequency = int(round(float(freq*2) / 1000)) * 1000
-				parm.frequency /= 2
+				parm.frequency //= 2
 				fstr = str(parm.frequency)
 				if self.parm.polarisation == eDVBFrontendParametersSatellite.Polarisation_Horizontal:
 					fstr += "H KHz SR"
@@ -256,8 +257,8 @@ class SatelliteTransponderSearchSupport:
 
 					print("LOCKED at", freq, "SEARCHED at", self.parm.frequency, "half bw", (135*((sr+1000)/1000)/200), "half search range", (self.parm.symbol_rate/2))
 					self.parm.frequency = freq
-					self.parm.frequency += (135*((sr+999)/1000)/200)
-					self.parm.frequency += self.parm.symbol_rate/2
+					self.parm.frequency += (135*((sr+999)//1000)//200)
+					self.parm.frequency += self.parm.symbol_rate//2
 
 					bm = state.getConstellationBitmap(5)
 					self.tp_found.append((fstr, bm))
@@ -293,7 +294,7 @@ class SatelliteTransponderSearchSupport:
 					self.channel = None
 					return
 
-			tmpstr = str((self.parm.frequency+500)/1000)
+			tmpstr = str((self.parm.frequency+500)//1000)
 			if self.parm.polarisation == eDVBFrontendParametersSatellite.Polarisation_Horizontal:
 				tmpstr += "H"
 			elif self.parm.polarisation == eDVBFrontendParametersSatellite.Polarisation_Vertical:
@@ -359,10 +360,10 @@ class SatelliteTransponderSearchSupport:
 		mhz_done = 0
 		cnt = 0
 		for range in self.range_list:
-			mhz = (range[1] - range[0]) / 1000
+			mhz = (range[1] - range[0]) // 1000
 			mhz_complete += mhz
 			if cnt == self.current_range:
-				mhz_done += (self.parm.frequency - range[0]) / 1000
+				mhz_done += (self.parm.frequency - range[0]) // 1000
 			elif cnt < self.current_range:
 				mhz_done += mhz
 			cnt += 1
@@ -543,7 +544,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 			selected_sat_pos = self.scan_satselection[index_to_scan].value
 			limit_list = self.nim_sat_frequency_range[index_to_scan][int(selected_sat_pos)]
 			l = limit_list[0]
-			limits = ( l[0]/1000, l[1]/1000 )
+			limits = ( l[0]//1000, l[1]//1000 )
 			self.scan_sat.bs_freq_start = ConfigInteger(default = limits[0], limits = (limits[0], limits[1]))
 			self.scan_sat.bs_freq_stop = ConfigInteger(default = limits[1], limits = (limits[0], limits[1]))
 			self.satelliteEntry = getConfigListEntry(_("Satellite"), self.scan_satselection[index_to_scan])
