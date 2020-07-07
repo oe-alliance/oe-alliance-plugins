@@ -2842,11 +2842,14 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 			PD = ""
 			PIC = []
 			PIC.append(os.path.join(P2, picon))
-			name2=channelname.decode("utf-8").encode("latin-1", "ignore") + ".png"
-			name4=channelname.decode("utf-8").encode("utf-8", "ignore") + ".png"
-			name = unicodedata.normalize('NFKD', six.text_type(str(""+channelname), 'utf-8', errors='ignore'))
 			if six.PY2:
-				name = name.encode('ASCII', 'ignore')
+				name2=channelname.decode("utf-8").encode("latin-1", "ignore") + ".png"
+				name4=channelname.decode("utf-8").encode("utf-8", "ignore") + ".png"
+				name = unicodedata.normalize('NFKD', six.text_type(str(""+channelname), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
+			else:
+				name2=channelname.encode("latin-1", "ignore").decode("utf-8") + ".png"
+				name4=channelname + ".png"
+				name = unicodedata.normalize('NFKD', channelname)
 			name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
 			if six.PY2:
 				name3=channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
@@ -10424,9 +10427,10 @@ def LCD4linuxPIC(self, session):
 					ret=""
 					PIC = []
 					PIC.append(os.path.join(P2, picon))
-					name = unicodedata.normalize('NFKD', six.text_type(str(""+self.Lchannel_name), 'utf-8', errors='ignore'))
 					if six.PY2:
-						name = name.encode('ASCII', 'ignore')
+						name = unicodedata.normalize('NFKD', six.text_type(str(""+self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
+					else:
+						name = unicodedata.normalize('NFKD', self.Lchannel_name)
 					name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
 					if six.PY2:
 						name2=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
@@ -11605,9 +11609,10 @@ def LCD4linuxPIC(self, session):
 				useCache = False
 				PIC = []
 				PIC.append(os.path.join(P2, picon))
-				name = unicodedata.normalize('NFKD', six.text_type(str(""+self.Lchannel_name), 'utf-8', errors='ignore'))
 				if six.PY2:
-					name = name.encode('ASCII', 'ignore')
+					name = unicodedata.normalize('NFKD', six.text_type(str(""+self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
+				else:
+					name = unicodedata.normalize('NFKD', self.Lchannel_name)
 				name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
 				if six.PY2:
 					name2=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
