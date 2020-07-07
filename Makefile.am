@@ -287,15 +287,15 @@ SUBDIRS += VuDuoFanControl
 endif
 
 if VUSOLO2
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup libvupldemo
 endif
 
 if VUSOLOSE
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup libvupldemo
 endif
 
 if VUDUO2
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup libvupldemo
 endif
 
 if VUZERO
@@ -303,27 +303,27 @@ SUBDIRS += FirmwareUpgrade VuRemote
 endif
 
 if VUSOLO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo
 endif
 
 if VUUNO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo
 endif
 
 if VUZERO4K
-SUBDIRS += FirmwareUpgrade VuRemote VuChromium
+SUBDIRS += FirmwareUpgrade VuRemote VuChromium libvupldemo
 endif
 
 if VUUNO4KSE
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo
 endif
 
 if VUULTIMO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo
 endif
 
 if VUDUO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo
 endif
 
 if V8PLUS

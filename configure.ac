@@ -471,6 +471,9 @@ VentonFancontrol/src/Makefile
 VentonFancontrol/meta/Makefile
 VentonFancontrol/po/Makefile
 
+libvupldemo/Makefile
+libvupldemo/src/Makefile
+
 VuChromium/Makefile
 VuChromium/src/Makefile
 VuChromium/meta/Makefile
