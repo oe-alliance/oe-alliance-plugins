@@ -315,7 +315,7 @@ SUBDIRS += FirmwareUpgrade VuRemote VuChromium libvupldemo witaispeechtotext Web
 endif
 
 if VUUNO4KSE
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo WebkitHbbTV VuBluetoothSetup VuStalker
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext WebkitHbbTV VuBluetoothSetup VuStalker
 endif
 
 if VUULTIMO4K
