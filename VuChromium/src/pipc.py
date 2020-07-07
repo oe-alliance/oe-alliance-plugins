@@ -1,4 +1,6 @@
-import os, threading, time, socket, select, struct, cbcfg
+from __future__ import absolute_import
+import os, threading, time, socket, select, struct
+from . import cbcfg
 
 _OPCODE  = {}
 _BUFSIZE = 4096

@@ -6,7 +6,9 @@ from Components.config import config
 from Components.ActionMap import ActionMap
 from Components.VolumeControl import VolumeControl
 
-import os, cbcfg, pipc, time, subprocess
+import os, time, subprocess
+from . import cbcfg
+from . import pipc
 
 from enigma import eTimer, fbClass, eRCInput, eDVBResourceManager
 
