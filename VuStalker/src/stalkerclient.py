@@ -6,11 +6,11 @@ import collections, json, os, threading
 
 from ctypes import cdll, cast, c_char_p, c_void_p
 from time import localtime, strftime, time
-from urllib import quote as urlencode
 from uuid import getnode
 
 import six
 from six.moves import reload_module
+from six.moves.urllib.parse import quote
 
 
 def get_mac_address():
@@ -164,8 +164,8 @@ class SCAPI(object):
 	def EPG_GetDataTable(self, from_ts, to_ts, fav, ch_id, page):
 		self.ResetString()
 
-		t_from = urlencode(strftime('%Y-%m-%d %H:%M:%S', localtime(float(from_ts))))
-		t_to = urlencode(strftime('%Y-%m-%d %H:%M:%S', localtime(float(to_ts))))
+		t_from = quote(strftime('%Y-%m-%d %H:%M:%S', localtime(float(from_ts))))
+		t_to = quote(strftime('%Y-%m-%d %H:%M:%S', localtime(float(to_ts))))
 
 		self.m_str = self.m_clib.EPG_GetDataTable(self.m_obj, "", "", str(t_from), str(t_to), str(fav), str(ch_id), str(page))
 		return cast(self.m_str, c_char_p).value
