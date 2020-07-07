@@ -303,15 +303,15 @@ SUBDIRS += FirmwareUpgrade VuRemote
 endif
 
 if VUSOLO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext
 endif
 
 if VUUNO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext
 endif
 
 if VUZERO4K
-SUBDIRS += FirmwareUpgrade VuRemote VuChromium libvupldemo
+SUBDIRS += FirmwareUpgrade VuRemote VuChromium libvupldemo witaispeechtotext
 endif
 
 if VUUNO4KSE
@@ -319,11 +319,11 @@ SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo
 endif
 
 if VUULTIMO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext
 endif
 
 if VUDUO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext
 endif
 
 if V8PLUS
