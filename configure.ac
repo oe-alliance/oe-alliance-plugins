@@ -482,6 +482,17 @@ libvupldemo/src/Makefile
 witaispeechtotext/Makefile
 witaispeechtotext/src/Makefile
 
+VuBluetoothSetup/Makefile
+VuBluetoothSetup/src/Makefile
+VuBluetoothSetup/src/vuduo4k/Makefile
+VuBluetoothSetup/src/vusolo4k/Makefile
+VuBluetoothSetup/src/vuultimo4k/Makefile
+VuBluetoothSetup/src/vuuno4k/Makefile
+VuBluetoothSetup/src/vuuno4kse/Makefile
+VuBluetoothSetup/src/vuzero4k/Makefile
+VuBluetoothSetup/meta/Makefile
+VuBluetoothSetup/po/Makefile
+
 VuChromium/Makefile
 VuChromium/src/Makefile
 VuChromium/meta/Makefile

@@ -1,0 +1,16 @@
+<default>
+  <prerequisites>
+                    <tag type="System" />
+  </prerequisites>
+          <info>
+                    <author>VuPLus</author>
+                    <name>BluetoothSetup</name>
+                    <packagename>enigma2-plugin-systemplugins-bluetoothsetup</packagename>
+                    <shortdescription>VuPlus bluetooth plugin</shortdescription>
+                    <description>VuPlus bluetooth plugin</description>
+          </info>
+
+  <files type="package"> <!-- without version, without .ipk -->
+     <file type="package" name="enigma2-plugin-systemplugins-bluetoothsetup" />
+   </files>
+</default>

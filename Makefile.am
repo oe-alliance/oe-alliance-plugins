@@ -303,27 +303,27 @@ SUBDIRS += FirmwareUpgrade VuRemote
 endif
 
 if VUSOLO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext WebkitHbbTV
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext WebkitHbbTV VuBluetoothSetup
 endif
 
 if VUUNO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext WebkitHbbTV
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext WebkitHbbTV VuBluetoothSetup
 endif
 
 if VUZERO4K
-SUBDIRS += FirmwareUpgrade VuRemote VuChromium libvupldemo witaispeechtotext WebkitHbbTV
+SUBDIRS += FirmwareUpgrade VuRemote VuChromium libvupldemo witaispeechtotext WebkitHbbTV VuBluetoothSetup
 endif
 
 if VUUNO4KSE
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo WebkitHbbTV VuBluetoothSetup
 endif
 
 if VUULTIMO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext WebkitHbbTV
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext WebkitHbbTV VuBluetoothSetup
 endif
 
 if VUDUO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext WebkitHbbTV
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium libvupldemo witaispeechtotext WebkitHbbTV VuBluetoothSetup
 endif
 
 if V8PLUS
