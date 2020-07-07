@@ -1,0 +1,459 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2014-07-14 18:04+KST\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: browser.py:152 browser.py:266 browser.py:405 youtube.py:134
+msgid "Cancel"
+msgstr ""
+
+#: browser.py:153 browser.py:267 browser.py:406 youtube.py:135
+msgid "Save"
+msgstr ""
+
+#: browser.py:154
+msgid " "
+msgstr ""
+
+#: browser.py:174
+msgid "left"
+msgstr ""
+
+#: browser.py:175
+msgid "width"
+msgstr ""
+
+#: browser.py:176
+msgid "top"
+msgstr ""
+
+#: browser.py:177
+msgid "height"
+msgstr ""
+
+#: browser.py:229
+msgid "Really close without saving settings?"
+msgstr ""
+
+#: browser.py:279 browser.py:910 browser.py:919
+msgid "Preference"
+msgstr ""
+
+#: browser.py:292
+msgid ""
+"Invalid URL!!(Empty)\n"
+"Please, Input to the URL."
+msgstr ""
+
+#: browser.py:313 browser.py:1037
+msgid "Please enter URL here"
+msgstr ""
+
+#: browser.py:335
+msgid "Start Page"
+msgstr ""
+
+#: browser.py:337
+msgid "Current Page"
+msgstr ""
+
+#: browser.py:338
+msgid "Direct Input"
+msgstr ""
+
+#: browser.py:340
+msgid "Startpage"
+msgstr ""
+
+#: browser.py:355
+msgid "Keyboard Layout"
+msgstr ""
+
+#: browser.py:420 browser.py:575 browser.py:910 browser.py:918
+msgid "Bookmark"
+msgstr ""
+
+#: browser.py:425 browser.py:511
+msgid "Name"
+msgstr ""
+
+#: browser.py:428 browser.py:518
+msgid "Title"
+msgstr ""
+
+#: browser.py:430 browser.py:519
+msgid "Url"
+msgstr ""
+
+#: browser.py:434
+msgid ""
+"!!(Empty)\n"
+"Please, Input to the"
+msgstr ""
+
+#: browser.py:434
+msgid "Invalid "
+msgstr ""
+
+#: browser.py:458 browser.py:469 browser.py:564 browser.py:652 browser.py:655
+msgid "Add"
+msgstr ""
+
+#: browser.py:461 browser.py:465
+msgid "Category Name"
+msgstr ""
+
+#: browser.py:474 browser.py:482
+msgid "Bookmark Title"
+msgstr ""
+
+#: browser.py:477 browser.py:485
+msgid "Bookmark URL"
+msgstr ""
+
+#: browser.py:563 browser.py:720 browser.py:909 browser.py:917
+msgid "Exit"
+msgstr ""
+
+#: browser.py:565 browser.py:664 browser.py:665
+msgid "Edit"
+msgstr ""
+
+#: browser.py:566
+msgid "Delete"
+msgstr ""
+
+#: browser.py:567
+msgid "Set as Startpage"
+msgstr ""
+
+#: browser.py:621
+msgid "Invalid URL. Please check again!!"
+msgstr ""
+
+#: browser.py:629
+msgid "Do you want to set selected url to the Startpage?"
+msgstr ""
+
+#: browser.py:644
+msgid "Current page is already exist."
+msgstr ""
+
+#: browser.py:657 browser.py:658
+msgid "Direct Input(Bookmark)"
+msgstr ""
+
+#: browser.py:657 browser.py:658
+msgid "Direct Input(Category)"
+msgstr ""
+
+#: browser.py:658
+msgid "Currentpage(Bookmark)"
+msgstr ""
+
+#: browser.py:659
+msgid "Please choose."
+msgstr ""
+
+#: browser.py:676
+msgid "Do you want to delete the category and the bookmarks?"
+msgstr ""
+
+#: browser.py:677
+msgid "Do you want to delete the bookmark?"
+msgstr ""
+
+#: browser.py:686
+msgid ""
+"Can't open selected bookmark.\n"
+"   - URL data is empty!!"
+msgstr ""
+
+#: browser.py:721
+msgid "Global"
+msgstr ""
+
+#: browser.py:722
+msgid "Mouse"
+msgstr ""
+
+#: browser.py:723
+msgid "Keyboard"
+msgstr ""
+
+#: browser.py:741
+msgid "Browser Help"
+msgstr ""
+
+#: browser.py:751
+msgid "Exit the Browser."
+msgstr ""
+
+#: browser.py:754
+msgid "Show the Menu window."
+msgstr ""
+
+#: browser.py:757 browser.py:788
+msgid "Enter Key"
+msgstr ""
+
+#: browser.py:758
+msgid "Show the Virtual keyboard window."
+msgstr ""
+
+#: browser.py:759
+msgid "Backspace Key"
+msgstr ""
+
+#: browser.py:762
+msgid "Switch to keyboard/mouse mode."
+msgstr ""
+
+#: browser.py:767
+msgid "It will move the mouse pointer up."
+msgstr ""
+
+#: browser.py:768
+msgid "It will move the mouse pointer down."
+msgstr ""
+
+#: browser.py:769
+msgid "It will move the mouse pointer left."
+msgstr ""
+
+#: browser.py:770
+msgid "It will move the mouse pointer right."
+msgstr ""
+
+#: browser.py:773
+msgid "Left Mouse Button"
+msgstr ""
+
+#: browser.py:776
+msgid "Right Mouse Button"
+msgstr ""
+
+#: browser.py:777 browser.py:784
+msgid "Left Key"
+msgstr ""
+
+#: browser.py:778 browser.py:785
+msgid "Right Key"
+msgstr ""
+
+#: browser.py:782
+msgid "Up Key"
+msgstr ""
+
+#: browser.py:783
+msgid "Down Key"
+msgstr ""
+
+#: browser.py:791
+msgid "PageUp Key"
+msgstr ""
+
+#: browser.py:792
+msgid "PageDown Key"
+msgstr ""
+
+#: browser.py:793
+msgid "Go to previous page."
+msgstr ""
+
+#: browser.py:794
+msgid "Go to next page."
+msgstr ""
+
+#: browser.py:888
+msgid "File"
+msgstr ""
+
+#: browser.py:889
+msgid "Tools"
+msgstr ""
+
+#: browser.py:890 browser.py:911 browser.py:922 youtube.py:45
+msgid "Help"
+msgstr ""
+
+#: browser.py:895 browser.py:1066
+msgid "Opera Web Browser Plugin v2.0"
+msgstr ""
+
+#: browser.py:896 browser.py:998
+msgid "BrowserMain"
+msgstr ""
+
+#: browser.py:909 browser.py:914
+msgid "Open Startpage"
+msgstr ""
+
+#: browser.py:909 browser.py:915
+msgid "Open URL"
+msgstr ""
+
+#: browser.py:909 browser.py:916
+msgid "Start/Stop"
+msgstr ""
+
+#: browser.py:910 browser.py:920
+msgid "Position Setup"
+msgstr ""
+
+#: browser.py:911 browser.py:921
+msgid "About"
+msgstr ""
+
+#: browser.py:923 browser.py:1083
+msgid "Return"
+msgstr ""
+
+#: browser.py:1011 browser.py:1019 browser.py:1034
+msgid ""
+"Opera Browser was not running.\n"
+"Please running browser using [File]>[Start/Stop] menu."
+msgstr ""
+
+#: hbbtv.py:52
+msgid "HbbTV Plugin"
+msgstr ""
+
+#: plugin.py:234
+msgid ""
+"HbbTV Browser was not running.\n"
+"Please running browser before start HbbTV Application."
+msgstr ""
+
+#: plugin.py:263
+msgid "Stop"
+msgstr ""
+
+#: plugin.py:265 youtube.py:44
+msgid "Start"
+msgstr ""
+
+#: plugin.py:266
+msgid "Please choose one."
+msgstr ""
+
+#: plugin.py:289
+msgid "No detected HbbTV applications."
+msgstr ""
+
+#: plugin.py:290
+msgid "Please choose an HbbTV application."
+msgstr ""
+
+#: plugin.py:411 plugin.py:432
+msgid "YouTube TV"
+msgstr ""
+
+#: plugin.py:433 youtube.py:141
+msgid "YouTube TV Settings"
+msgstr ""
+
+#: plugin.py:434
+msgid "Browser Start/Stop"
+msgstr ""
+
+#: plugin.py:435
+msgid "HbbTV Applications"
+msgstr ""
+
+#: plugin.py:436
+msgid "Opera Web Browser"
+msgstr ""
+
+#: plugin.py:436
+msgid "start opera web browser"
+msgstr ""
+
+#: youtube.py:54
+msgid "Start YouTube TV"
+msgstr ""
+
+#: youtube.py:55
+msgid "YouTube TV is a new way to watch YouTube videos on Vu+"
+msgstr ""
+
+#: youtube.py:56
+msgid "* Start YouTube TV"
+msgstr ""
+
+#: youtube.py:57
+msgid "* RC Help"
+msgstr ""
+
+#: youtube.py:62
+msgid "Play ther selected the video"
+msgstr ""
+
+#: youtube.py:63
+msgid "Exit the YouTube TV"
+msgstr ""
+
+#: youtube.py:66
+msgid "Move up"
+msgstr ""
+
+#: youtube.py:67
+msgid "Move down"
+msgstr ""
+
+#: youtube.py:68
+msgid "Move left"
+msgstr ""
+
+#: youtube.py:69
+msgid "Move right"
+msgstr ""
+
+#: youtube.py:72
+msgid "Search a video"
+msgstr ""
+
+#: youtube.py:73
+msgid "Skip forward 10 sec"
+msgstr ""
+
+#: youtube.py:74
+msgid "Skip backward 10 sec"
+msgstr ""
+
+#: youtube.py:77
+msgid "Play current video"
+msgstr ""
+
+#: youtube.py:78
+msgid "Pause current video"
+msgstr ""
+
+#: youtube.py:79
+msgid "Stop current video"
+msgstr ""
+
+#: youtube.py:82
+msgid "Back"
+msgstr ""
+
+#: youtube.py:166
+msgid "YouTube TV URL"
+msgstr ""
+
+#: youtube.py:167
+msgid "Do not show YouTube TV Starter again"
+msgstr ""
+

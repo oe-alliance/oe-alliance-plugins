@@ -322,6 +322,11 @@ HbbTV/src/Makefile
 HbbTV/meta/Makefile
 HbbTV/po/Makefile
 
+WebkitHbbTV/Makefile
+WebkitHbbTV/src/Makefile
+WebkitHbbTV/bin/Makefile
+WebkitHbbTV/po/Makefile
+
 INIVFDControl/Makefile
 INIVFDControl/src/Makefile
 INIVFDControl/meta/Makefile
