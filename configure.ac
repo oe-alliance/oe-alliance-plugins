@@ -493,6 +493,17 @@ VuBluetoothSetup/src/vuzero4k/Makefile
 VuBluetoothSetup/meta/Makefile
 VuBluetoothSetup/po/Makefile
 
+VuStalker/Makefile
+VuStalker/src/Makefile
+VuStalker/src/vuduo4k/Makefile
+VuStalker/src/vusolo4k/Makefile
+VuStalker/src/vuultimo4k/Makefile
+VuStalker/src/vuuno4k/Makefile
+VuStalker/src/vuuno4kse/Makefile
+VuStalker/src/vuzero4k/Makefile
+VuStalker/meta/Makefile
+VuStalker/po/Makefile
+
 VuChromium/Makefile
 VuChromium/src/Makefile
 VuChromium/meta/Makefile

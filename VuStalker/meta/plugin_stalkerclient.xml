@@ -1,0 +1,16 @@
+<default>
+  <prerequisites>
+                    <tag type="System" />
+  </prerequisites>
+          <info>
+                    <author>VuPLus</author>
+                    <name>StalkerClient</name>
+                    <packagename>enigma2-plugin-extensions-stalkerclient</packagename>
+                    <shortdescription>VuPlus StalkerClient</shortdescription>
+                    <description>VuPlus StalkerClient</description>
+          </info>
+
+  <files type="package"> <!-- without version, without .ipk -->
+     <file type="package" name="enigma2-plugin-extensions-stalkerclient" />
+   </files>
+</default>
