@@ -303,27 +303,27 @@ SUBDIRS += FirmwareUpgrade VuRemote
 endif
 
 if VUSOLO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium
 endif
 
 if VUUNO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium
 endif
 
 if VUZERO4K
-SUBDIRS += FirmwareUpgrade VuRemote
+SUBDIRS += FirmwareUpgrade VuRemote VuChromium
 endif
 
 if VUUNO4KSE
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium
 endif
 
 if VUULTIMO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium
 endif
 
 if VUDUO4K
-SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup VuChromium
 endif
 
 if V8PLUS

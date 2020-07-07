@@ -471,6 +471,11 @@ VentonFancontrol/src/Makefile
 VentonFancontrol/meta/Makefile
 VentonFancontrol/po/Makefile
 
+VuChromium/Makefile
+VuChromium/src/Makefile
+VuChromium/meta/Makefile
+VuChromium/po/Makefile
+
 VuRemote/Makefile
 VuRemote/src/Makefile
 VuRemote/meta/Makefile

@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-chromium
+Version: 1.0-r0
+Description: E2 Chromium Plugin
+Maintainer: VuPlus
+Depends: chromium-browser
