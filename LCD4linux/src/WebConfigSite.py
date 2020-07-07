@@ -355,12 +355,16 @@ class LCD4linuxConfigweb(resource.Resource):
 					b = _a.replace(".Standby", ".MP")
 					if (" "+b) in list(zip(*L3))[2]:
 						print(a, b)
-						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						obja = eval(a)
+						obja = eval(b)
+						objb.value = obja.value
 				elif "." in _a:
 					b = _a.replace(".", ".MP")
 					if (" "+b) in list(zip(*L3))[2]:
 						print(a, b)
-						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						obja = eval(a)
+						obja = eval(b)
+						objb.value = obja.value
 		elif _command == "copyIdle":
 			for a in req.args.keys():
 				_a = six.ensure_str(a)
@@ -368,12 +372,16 @@ class LCD4linuxConfigweb(resource.Resource):
 					b = _a.replace(".MP", ".Standby")
 					if (" "+b) in list(zip(*L4))[2]:
 						print(a, b)
-						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						obja = eval(a)
+						obja = eval(b)
+						objb.value = obja.value
 				elif "." in _a:
 					b = _a.replace(".", ".Standby")
 					if (" "+b) in list(zip(*L4))[2]:
 						print(a, b)
-						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						obja = eval(a)
+						obja = eval(b)
+						objb.value = obja.value
 		elif _command == "copyOn":
 			for a in req.args.keys():
 				_a = six.ensure_str(a)
@@ -381,12 +389,16 @@ class LCD4linuxConfigweb(resource.Resource):
 					b = _a.replace(".MP", ".")
 					if (" "+b) in list(zip(*L2))[2]:
 						print(a, b)
-						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						obja = eval(a)
+						obja = eval(b)
+						objb.value = obja.value
 				elif ".Standby" in _a:
 					b = _a.replace(".Standby", ".")
 					if (" "+b) in list(zip(*L2))[2]:
 						print(a, b)
-						exec("%s.value = %s.value" % (b, a)) # FIXME PY3
+						obja = eval(a)
+						obja = eval(b)
+						objb.value = obja.value
 
 #####################
 # Konfig schreiben
@@ -404,45 +416,42 @@ class LCD4linuxConfigweb(resource.Resource):
 					val = six.ensure_str(val)
 #ConfigSelection
 					changed = False
-					_exec("Typ = isinstance(%s,ConfigSelection)" % _a)
-					if Typ == True:
-						exec("%s.value = '%s'" % (_a, val)) # FIXME PY3
+					ConfObj = eval(_a)
+					if isinstance(ConfObj, ConfigSelection):
+						ConfObj.value = "'" + val + "'" # FIXME do we need quotes ?
+						# exec("%s.value = '%s'" % (_a, val)) # FIXME PY3
 					else:
 #ConfigYesNo
-						_exec("Typ = isinstance(%s,ConfigYesNo)" % _a)
-						if Typ == True:
+						if isinstance(ConfObj, ConfigYesNo):
 							if len(val) == 2:
-								exec("%s.value = True" % _a) # FIXME PY3
+								ConfObj.value = True
 							else:
-								exec("%s.value = False" % _a) # FIXME PY3
+								ConfObj.value = False
 						else:
 #ConfigText
-							_exec("Typ = isinstance(%s,ConfigText)" % _a)
-							if Typ == True:
+							if isinstance(ConfObj, ConfigText):
 								V = _l(val)
 								try:
 									V = HTMLParser.unescape(V)
 								except:
 									L4log("WebIF Error: Parse Text")
-								exec("%s.value = '%s'" % (_a, V)) # FIXME PY3
+								ConfObj.value = "'" + V + "'" # FIXME do we need quotes ?
+								# exec("%s.value = '%s'" % (_a, V)) # FIXME PY3
 							else:
 #ConfigSlider
-								_exec("Typ = isinstance(%s,ConfigSlider)" % _a)
-								if Typ == True:
+								if isinstance(ConfObj, ConfigSlider):
 									if val.isdigit():
-										exec("%s.value = %s" % (_a, val)) # FIXME PY3
+										ConfObj.value = val
 								else:
 #ConfigClock
-									_exec("Typ = isinstance(%s,ConfigClock)" % _a)
-									if Typ == True:
+									if isinstance(ConfObj, ConfigClock):
 										t=val.split(":")
 										if len(t)==2:
 											if t[0].isdigit() and t[1].isdigit():
-												w1 = "[%s,%s]" % (int(t[0]), int(t[1]))
-												exec("%s.value = %s" % (_a, w1)) # FIXME PY3
-					exec("C = %s.isChanged()" % _a) # FIXME PY3
-					if C:
-						exec("C = %s.save()" % _a) # FIXME PY3
+												ConfObj.value = [int(t[0]),int(t[1])]
+					if ConfObj.isChanged():
+						ConfObj.save()
+						# exec("C = %s.save()" % _a) # FIXME PY3
 						L4log("Changed", a)
 						if _a.find("Fritz") >0:
 							Cfritz = True
@@ -622,7 +631,8 @@ class LCD4linuxConfigweb(resource.Resource):
 					Ea, Ec = AktiveElement(Conf)
 #					html += Conf
 					if Mode != "1":
-						_exec("Curr = %s.value" % Conf)
+						ConfObj = eval(Conf)
+						Curr = ConfObj.value
 						L4log("Curr = %s.value" % Conf, Curr)
 						if Curr != "0":
 							if Ec == "":
@@ -652,6 +662,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			isSb = False
 			for LL in L:
 				Conf = LL[2].strip()
+				ConfObj = eval(Conf)
 
 				if (Conf.startswith(Element) and (LL[3] == AktCode or AktCode == 0)) or (Element=="other" and LL[3] == 0):
 				
@@ -682,17 +693,16 @@ class LCD4linuxConfigweb(resource.Resource):
 		
 					if AktCode == 0:
 						AktCode = LL[3]
-					_exec("Curr = %s.value" % Conf)
+					Curr = ConfObj.value
 #ConfigSelection
-					_exec("Typ = isinstance(%s,ConfigSelection)" % Conf)
 					html += "<tr>\n"
-					if Typ == True:
+					if isinstance(ConfObj, ConfigSelection):
 						html += "<td width=\"300\">%s</td><td>\n" % _l(_(LL[1]))
 						html += "<select name=\"%s\" size=\"1\">\n" % Conf
-						_exec("Len = len(%s.description)" % Conf)
-						for i in range(Len):
-							_exec("Choice = %s.choices[%d]" % (Conf, i))
-							_exec("Wert = %s.description[\"%s\"]" % (Conf, Choice))
+						Len = len(ConfObj.description)
+						for i in list(range(Len)):
+							Choice = ConfObj.choices[i]
+							Wert = ConfObj.description[Choice]
 							if str(Choice) == str(Curr):
 								Aktiv = " selected"
 							else:
@@ -702,8 +712,7 @@ class LCD4linuxConfigweb(resource.Resource):
 						html += "</td>\n"
 					else:
 #ConfigYesNo
-						_exec("Typ = isinstance(%s,ConfigYesNo)" % Conf)
-						if Typ == True:
+						if isinstance(ConfObj, ConfigYesNo):
 							html += "<td width=\"300\">%s</td><td>\n" % _l(_(LL[1]))
 							Aktiv = "checked" if Curr else ""
 							html += "<input type=\"hidden\" name=\"%s\" value=\"%s\">" % (Conf, "unchecked")
@@ -711,28 +720,24 @@ class LCD4linuxConfigweb(resource.Resource):
 							html += "</td>\n"
 						else:
 #ConfigText	
-							_exec("Typ = isinstance(%s,ConfigText)" % Conf)
-							if Typ == True:
+							if isinstance(ConfObj, ConfigText):
 								html += "<td width=\"300\">%s</td><td>\n" % _l(_(LL[1]))
-								_exec("Typ = isinstance(%s,ConfigPassword)" % Conf)
-								if Typ == True:
+								if isinstance(ConfObj, ConfigPassword):
 									html += "<input type=\"password\" name=\"%s\" size=\"60\" value=\"%s\">" % (Conf, _l(Curr))
 								else:
 									html += "<input type=\"text\" name=\"%s\" size=\"60\" value=\"%s\">" % (Conf, _l(Curr))
 								html += "</td>\n"
 							else:
 #ConfigSlider
-								_exec("Typ = isinstance(%s,ConfigSlider)" % Conf)
-								if Typ == True:
-									_exec("Min = %s.min" % Conf)
-									_exec("Max = %s.max" % Conf)
+								if isinstance(ConfObj, ConfigSlider):
+									Min = ConfObj.min
+									Max = ConfObj.max
 									html += "<td width=\"300\">%s (%d - %d)</td><td>\n" % (_l(_(LL[1])), Min, Max)
 									html += "<input type=\"text\" name=\"%s\" size=\"5\" value=\"%s\">" % (Conf, Curr)
 									html += "</td>\n"
 								else:
 #ConfigClock
-									_exec("Typ = isinstance(%s,ConfigClock)" % Conf)
-									if Typ == True:
+									if isinstance(ConfObj, ConfigClock):
 										html += "<td width=\"300\">%s</td><td>\n" % _l(_(LL[1]))
 										html += "<input type=\"text\" name=\"%s\" size=\"6\" value=\"%02d:%02d\">" % (Conf, Curr[0], Curr[1])
 										html += "</td>\n"
