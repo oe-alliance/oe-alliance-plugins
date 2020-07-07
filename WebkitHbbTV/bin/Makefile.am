@@ -1,4 +1,4 @@
-installdir = $(pkgbindir)
+installdir = $(bindir)
 
 install_DATA = run-webkit.sh
 
