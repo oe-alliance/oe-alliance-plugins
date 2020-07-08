@@ -43,7 +43,7 @@ import socket, sys
 
 from six.moves.http_client import HTTPConnection
 from six.moves.urllib.request import HTTPHandler
-
+import six
 
 socket.setdefaulttimeout(300) #in seconds
 
@@ -303,7 +303,8 @@ class EpisodeList(HTMLComponent, GUIComponent):
 				tmp_icon = self.getThumbnailName(x[5])
 				thumbnailFile = self.imagedir + tmp_icon
 				if not os_path.exists(thumbnailFile):
-					client.downloadPage(x[5], thumbnailFile)
+					u = six.ensure_binary(x[5])
+					client.downloadPage(u, thumbnailFile)
 			
 		self.l.setList(mediaList)
 		self.selectionChanged()

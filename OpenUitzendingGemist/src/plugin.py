@@ -951,7 +951,8 @@ class OpenUg(Screen):
 						self.fetchFinished(True, picture_id = tmp_icon, failed = False)
 					else:
 						if config.plugins.OpenUitzendingGemist.showpictures.value:
-							client.downloadPage(x[self.UG_ICON], thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
+							u = six.ensure_binary(x[self.UG_ICON])
+							client.downloadPage(u, thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
 				pos += 1
 			self["list"].setList(self.tmplist)
 
