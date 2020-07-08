@@ -33,7 +33,9 @@ from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as 
 from datetime import date
 from time import strftime
 
-import urllib, urllib2, re
+import re
+from six.moves.urllib.request import Request, urlopen
+from six.moves.urllib.parse import urlencode
 
 from lxml import etree
 from lxml import html
@@ -51,9 +53,9 @@ def wgetUrl(query):
 		headers['Referer'] = 'http://www.tv3.ie/3player/'  
 		headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 		
-		data = urllib.urlencode(values)
-		req = urllib2.Request(target, data, headers)
-		response = urllib2.urlopen(req)
+		data = urlencode(values)
+		req = Request(target, data, headers)
+		response = urlopen(req)
 		html = str(response.read())
 		response.close()
 		return html
@@ -376,9 +378,9 @@ class StreamsThumb(StreamsThumbCommon):
 		try:
 			url1 = 'http://www.tv3.ie'+url
 			
-			req = urllib2.Request(url1)
+			req = Request(url1)
 			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-			response = urllib2.urlopen(req)
+			response = urlopen(req)
 			html = str(response.read())
 			response.close()
 
@@ -386,9 +388,9 @@ class StreamsThumb(StreamsThumbCommon):
 				try:
 					headers = { 'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}
 					values = {'age_ok':'1'}
-					data = urllib.urlencode(values)
-					req = urllib2.Request(url1, data, headers)
-					response = urllib2.urlopen(req)
+					data = urlencode(values)
+					req = Request(url1, data, headers)
+					response = urlopen(req)
 					html = str(response.read())
 					response.close()
 

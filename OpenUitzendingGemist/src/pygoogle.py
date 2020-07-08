@@ -18,6 +18,8 @@ import sys
 import urllib
 import logging
 import argparse
+from six.moves.urllib.parse import urlencode, unquote
+from six.moves.urllib.request import urlopen
 
 __author__ = "Kiran Bandla"
 __version__ = "0.2"

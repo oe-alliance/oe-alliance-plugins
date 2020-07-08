@@ -20,7 +20,8 @@ from Tools import NumericalTextInput
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from urllib2 import Request, URLError, HTTPError, urlopen as urlopen2
+from six.moves.urllib.request import Request, urlopen as urlopen2
+from six.moves.urllib.error import URLError, HTTPError
 from twisted.web import client
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir
 import socket

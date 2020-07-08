@@ -39,9 +39,10 @@ from twisted.web import client
 from dns.resolver import Resolver
 from os import path as os_path, mkdir as os_mkdir
 
-import socket, urllib, urllib2, sys
+import socket, sys
 
 from six.moves.http_client import HTTPConnection
+from six.moves.urllib.request import HTTPHandler
 
 
 socket.setdefaulttimeout(300) #in seconds
@@ -446,7 +447,7 @@ class MyHTTPConnection(HTTPConnection):
 			except (Exception) as exception:
 				print("MyHTTPConnection: Failed to Connect to: ", secondaryDNS, " , error: ", exception)
 
-class MyHTTPHandler(urllib2.HTTPHandler):
+class MyHTTPHandler(HTTPHandler):
 	def http_open(self, req):
 		return self.do_open (MyHTTPConnection, req)
 

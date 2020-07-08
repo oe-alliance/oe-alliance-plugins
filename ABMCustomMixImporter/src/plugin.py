@@ -5,7 +5,9 @@ from . import _, PluginLanguageDomain
 
 # Python
 from time import mktime, strftime, time, localtime
-import urllib2, os
+import os
+from six.moves.urllib.request import Request, urlopen
+from six.moves.urllib.error import URLError, HTTPError
 
 # enigma
 from enigma import eTimer
@@ -170,17 +172,17 @@ class ABMCustomMixImporter(Screen):
 
 	def fetchURL(self):
 		try:
-			req = urllib2.Request(mixes[config.plugins.abmImporter.mix.value]["url"])
-			response = urllib2.urlopen(req)
+			req = Request(mixes[config.plugins.abmImporter.mix.value]["url"])
+			response = urlopen(req)
 			print('[ABMCustomMixImporter][fetchURL] Response: %d' % response.getcode())
 			if int(response.getcode()) == 200:
 				return response.read()
-		except urllib2.HTTPError as err:
+		except HTTPError as err:
 			print('[ABMCustomMixImporter][fetchURL] ERROR:', err)
-		except urllib2.URLError as err:
+		except URLError as err:
 			print('[ABMCustomMixImporter][fetchURL] ERROR:', err.reason[0])
-		except urllib2 as err:
-			print('[ABMCustomMixImporter][fetchURL] ERROR:', err)
+		#except urllib2 as err:
+		#	print('[ABMCustomMixImporter][fetchURL] ERROR:', err)
 		except:
 			import sys
 			print('[ABMCustomMixImporter][fetchURL] undefined error', sys.exc_info()[0])

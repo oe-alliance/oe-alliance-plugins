@@ -35,7 +35,8 @@ import time, random
 from time import strftime, strptime, mktime
 from datetime import timedelta, date, datetime
 
-import urllib2, re
+import re
+from six.moves.urllib.request import Request, urlopen
 
 import simplejson
 from bs4 import BeautifulSoup
@@ -51,9 +52,9 @@ __version__ = "1.0.1"
 #==============================================================================
 def wgetUrl(target):
 	try:
-		req = urllib2.Request(target)
+		req = Request(target)
 		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-		response = urllib2.urlopen(req)
+		response = urlopen(req)
 		outtxt = str(response.read())
 		response.close()
 		return outtxt

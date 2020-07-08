@@ -15,10 +15,11 @@ from Components.MenuList import MenuList
 from Components.Input import Input
 from Screens.InputBox import InputBox
 from Components.ActionMap import ActionMap
-import urllib, urllib2, re, time, os
+import re, time, os
 import socket
 
 from six.moves.http_cookiejar import CookieJar
+from six.moves.urllib.request import Request, urlopen
 
 
 socket.setdefaulttimeout(300) #in seconds
@@ -49,12 +50,12 @@ class fempa(Screen):
 		
 		def gethtml(url, data =''):
 			try:
-				req = urllib2.Request(url)
+				req = Request(url)
 				req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 				if data == '':
-					response = urllib2.urlopen(req)
+					response = urlopen(req)
 				else:
-					response = urllib2.urlopen(req, data)	  
+					response = urlopen(req, data)	  
 				htmldoc = str(response.read())
 				response.close()
 				return htmldoc 
@@ -97,12 +98,12 @@ class fempa(Screen):
 				
 	def gethtml(self, url, data = ''):
 		try:
-			req = urllib2.Request(url)
+			req = Request(url)
 			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 			if data == '':
-				response = urllib2.urlopen(req)
+				response = urlopen(req)
 			else:
-				response = urllib2.urlopen(req, data)	  
+				response = urlopen(req, data)	  
 			htmldoc = str(response.read())
 			response.close()
 			return htmldoc

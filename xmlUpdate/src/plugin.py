@@ -2,7 +2,8 @@ from __future__ import print_function
 # for localized messages
 from . import _
 
-import urllib2
+from six.moves.urllib.request import Request, urlopen
+from six.moves.urllib.error import URLError, HTTPError
 
 from Components.ActionMap import ActionMap
 from Components.config import ConfigSelection, getConfigListEntry
@@ -84,17 +85,17 @@ class xmlUpdate(ConfigListScreen, Screen):
 	def fetchURL(self):
 		try:
 			print('[xmlUpdate][fetchURL] URL', self.url % self.DVBtype.value)
-			req = urllib2.Request(self.url % self.DVBtype.value)
-			response = urllib2.urlopen(req)
+			req = Request(self.url % self.DVBtype.value)
+			response = urlopen(req)
 			print('[xmlUpdate][fetchURL] Response: %d' % response.getcode())
 			if int(response.getcode()) == 200:
 				return response.read()
-		except urllib2.HTTPError as err:
+		except HTTPError as err:
 			print('[xmlUpdate][fetchURL] ERROR:', err)
-		except urllib2.URLError as err:
+		except URLError as err:
 			print('[xmlUpdate][fetchURL] ERROR:', err.reason[0])
-		except urllib2 as err:
-			print('[xmlUpdate][fetchURL] ERROR:', err)
+		#except urllib2 as err:
+		#	print('[xmlUpdate][fetchURL] ERROR:', err)
 		except:
 			import sys
 			print('[xmlUpdate][fetchURL] undefined error', sys.exc_info()[0])
