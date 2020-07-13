@@ -908,7 +908,7 @@ class Blindscan(ConfigListScreen, Screen):
 							getBrandOEM() == 'uclan' and "uclan-blindscan" or \
 							getBrandOEM() == 'vuplus' and self.binName or \
 							getBrandOEM() == 'xtrend' and "avl_xtrend_blindscan" or \
-							getMachineBuild() == 'dags72604' and "dags72604_blindscan"
+							getMachineBuild() == 'dags72604' and "dags_blindscan"
 			exe_path = "/usr/bin/%s" % exe_filename
 			if os.path.exists(exe_path):
 				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
