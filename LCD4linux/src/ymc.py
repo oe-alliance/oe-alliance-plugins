@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
+from __future__ import print_function, absolute_import
 try:
 	import simplejson
 except:
 	import json as simplejson
 
 from six.moves.urllib.request import urlopen
+from .plugin import L4logE
 
 class YMC:
 	def __init__(self, ip):
@@ -27,7 +28,7 @@ class YMC:
 			else:
 				return {}
 		except:
-			print("YMC Error")
+			L4logE("YMC Error")
 			return {}
 
 	def getStatus(self):
@@ -39,5 +40,5 @@ class YMC:
 			else:
 				return {}
 		except:
-			print("YMC Error")
+			L4logE("YMC Error")
 			return {}
