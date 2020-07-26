@@ -90,7 +90,7 @@ def ParseCode():
 				L4.append(Z)
 
 def _l(st):
-	st = six.ensure_str(st,"utf-8", "ignore")
+	st = six.ensure_str(st, "utf-8", "ignore")
 	st = st.replace(" [ok]>", "").encode('ascii', 'xmlcharrefreplace')
 	return six.ensure_str(st)
 
@@ -448,7 +448,7 @@ class LCD4linuxConfigweb(resource.Resource):
 										t=val.split(":")
 										if len(t)==2:
 											if t[0].isdigit() and t[1].isdigit():
-												ConfObj.value = [int(t[0]),int(t[1])]
+												ConfObj.value = [int(t[0]), int(t[1])]
 					if ConfObj.isChanged():
 						ConfObj.save()
 						# exec("C = %s.save()" % _a) # FIXME PY3

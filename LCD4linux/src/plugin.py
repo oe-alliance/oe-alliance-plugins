@@ -10598,7 +10598,8 @@ def LCD4linuxPIC(self, session):
 		return cover
 
 # MSN Wetter
-	def putWetter((ConfigPos, ConfigZoom, ConfigAlign, ConfigSplit, ConfigType, ConfigColor, ConfigShadow, ConfigWWW, ConfigFont), draw, im):
+	def putWetter(xxx_todo_changeme, draw, im):
+		(ConfigPos, ConfigZoom, ConfigAlign, ConfigSplit, ConfigType, ConfigColor, ConfigShadow, ConfigWWW, ConfigFont) = xxx_todo_changeme
 		global WetterType
 		global WetterZoom
 		MAX_Wi, MAX_Hi = self.im[im].size
@@ -10979,7 +10980,8 @@ def LCD4linuxPIC(self, session):
 		return
 
 # Meteo station
-	def putMeteo((ConfigPos, ConfigZoom, ConfigAlign, ConfigSplit, ConfigType, ConfigColor), draw, im):
+	def putMeteo(xxx_todo_changeme1, draw, im):
+		(ConfigPos, ConfigZoom, ConfigAlign, ConfigSplit, ConfigType, ConfigColor) = xxx_todo_changeme1
 		global MeteoType
 		global MeteoZoom
 		MAX_W, MAX_H = self.im[im].size
@@ -11073,8 +11075,9 @@ def LCD4linuxPIC(self, session):
 		return
 
 # Mondphase
-	def putMoon((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont),draw,im):
-		MAX_W,MAX_H = self.im[im].size
+	def putMoon(xxx_todo_changeme2, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont) = xxx_todo_changeme2
+		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
 		POS = MoonPosition()
@@ -11106,7 +11109,8 @@ def LCD4linuxPIC(self, session):
 				ConfigPos += h
 
 # Text File
-	def putTextFile((ConfigPos, ConfigSize, ConfigFont, ConfigAlign, ConfigColor, ConfigBackColor, ConfigShadow, TextFile), draw, im):
+	def putTextFile(xxx_todo_changeme3, draw, im):
+		(ConfigPos, ConfigSize, ConfigFont, ConfigAlign, ConfigColor, ConfigBackColor, ConfigShadow, TextFile) = xxx_todo_changeme3
 		if ConfigMode==True and os.path.isfile(TextFile) == False:
 			if os.path.isfile(TXTdemo) == False:
 				f = open(TXTdemo, "w")
@@ -11130,7 +11134,8 @@ def LCD4linuxPIC(self, session):
 				L4log("Error reading", TextFile)
 
 # String-Text
-	def putString((ConfigPos, ConfigSize, ConfigFont, ConfigAlign, ConfigSplit, ConfigColor, ConfigBackColor, ConfigShadow, ConfigText), draw, im):
+	def putString(xxx_todo_changeme4, draw, im):
+		(ConfigPos, ConfigSize, ConfigFont, ConfigAlign, ConfigSplit, ConfigColor, ConfigBackColor, ConfigShadow, ConfigText) = xxx_todo_changeme4
 		MAX_W, MAX_H = self.im[im].size
 		current_h=ConfigPos
 		font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
@@ -11142,7 +11147,8 @@ def LCD4linuxPIC(self, session):
 		ShadowText(draw, POSX, current_h, line, font, ConfigColor, ConfigShadow)
 
 # external IP Address
-	def putExternalIP((ConfigPos, ConfigSize, ConfigFont, ConfigAlign, ConfigSplit, ConfigColor, ConfigBackColor, ConfigShadow, ConfigText), draw, im):
+	def putExternalIP(xxx_todo_changeme5, draw, im):
+		(ConfigPos, ConfigSize, ConfigFont, ConfigAlign, ConfigSplit, ConfigColor, ConfigBackColor, ConfigShadow, ConfigText) = xxx_todo_changeme5
 		MAX_W, MAX_H = self.im[im].size
 		current_h=ConfigPos
 		font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
@@ -11154,7 +11160,8 @@ def LCD4linuxPIC(self, session):
 		ShadowText(draw, POSX, current_h, line, font, ConfigColor, ConfigShadow)
 
 # HTTP Text
-	def putHTTP((ConfigPos, ConfigSize, ConfigAlign, ConfigColor, ConfigBackColor, HTTPurl, ConfigShadow, ConfigFont), draw, im):
+	def putHTTP(xxx_todo_changeme6, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigColor, ConfigBackColor, HTTPurl, ConfigShadow, ConfigFont) = xxx_todo_changeme6
 		t = ["not found"]
 		try:
 			r = urlopen(HTTPurl)
@@ -11176,7 +11183,8 @@ def LCD4linuxPIC(self, session):
 				current_h+=h
 
 # HTTP WWW Site
-	def putWWW((PIC, ConfigPos, ConfigSize, ConfigAlign, ConfigCutX, ConfigCutY, ConfigCutW, ConfigCutH), draw, im):
+	def putWWW(xxx_todo_changeme7, draw, im):
+		(PIC, ConfigPos, ConfigSize, ConfigAlign, ConfigCutX, ConfigCutY, ConfigCutW, ConfigCutH) = xxx_todo_changeme7
 		MAX_W, MAX_H = self.im[im].size
 		if os.path.isfile(WWWpic % PIC):
 			if os.path.isfile(WWWpic % (str(PIC)+"p")):
@@ -11204,7 +11212,8 @@ def LCD4linuxPIC(self, session):
 					L4log("Error resize WWW")
 
 # Clock
-	def putClock((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType, ConfigSpacing, ConfigAnalog, ConfigColor, ConfigShadow, ConfigNum, ConfigFont), draw, im):
+	def putClock(xxx_todo_changeme8, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType, ConfigSpacing, ConfigAnalog, ConfigColor, ConfigShadow, ConfigNum, ConfigFont) = xxx_todo_changeme8
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -11347,7 +11356,8 @@ def LCD4linuxPIC(self, session):
 				else:
 					pp+=h-int(h2/(5-int(ConfigSpacing)))
 # Cover
-	def putCover((ConfigPos, ConfigSize, ConfigSizeH, ConfigAlign, ConfigTransp, ConfigTrim), ConfigLCD, draw, im):
+	def putCover(xxx_todo_changeme9, ConfigLCD, draw, im):
+		(ConfigPos, ConfigSize, ConfigSizeH, ConfigAlign, ConfigTransp, ConfigTrim) = xxx_todo_changeme9
 		MAX_W, MAX_H = self.im[im].size
 		small = ""
 		x = ConfigSize
@@ -11449,7 +11459,8 @@ def LCD4linuxPIC(self, session):
 			ShadowText(draw, POSX, ConfigPos, self.CoverError, font, "red", True)
 
 # Bild
-	def putBild((ConfigPos, ConfigSize, ConfigSizeH, ConfigAlign, ConfigQuick, ConfigTransp, ConfigRotate, ConfigFile, ConfigFileOrg), ConfigLCD, draw, im):
+	def putBild(xxx_todo_changeme10, ConfigLCD, draw, im):
+		(ConfigPos, ConfigSize, ConfigSizeH, ConfigAlign, ConfigQuick, ConfigTransp, ConfigRotate, ConfigFile, ConfigFileOrg) = xxx_todo_changeme10
 		global QuickList
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigMode == True:
@@ -11612,7 +11623,8 @@ def LCD4linuxPIC(self, session):
 				L4log("put Grab Error:", format_exc() )
 
 # Timer Record
-	def putTimer((ConfigBox, ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigType, ConfigType2, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont), draw, im):
+	def putTimer(xxx_todo_changeme11, draw, im):
+		(ConfigBox, ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigType, ConfigType2, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont) = xxx_todo_changeme11
 		font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
@@ -11665,8 +11677,9 @@ def LCD4linuxPIC(self, session):
 			self.draw[draw].text((POSX, POSY), str(timercount), font=font, fill="white")
 
 # Picon
-	def putPicon((ConfigSize, ConfigPos, ConfigAlign, ConfigFullScreen, ConfigSplit, ConfigTextSize, Picon2), draw, im):
-		MAXi_W,MAXi_H = self.im[im].size
+	def putPicon(xxx_todo_changeme12, draw, im):
+		(ConfigSize, ConfigPos, ConfigAlign, ConfigFullScreen, ConfigSplit, ConfigTextSize, Picon2) = xxx_todo_changeme12
+		MAXi_W, MAXi_H = self.im[im].size
 		if ConfigSplit == True:
 			MAXi_W = int(MAXi_W/2)
 		if self.LsreftoString is not None:
@@ -11802,7 +11815,8 @@ def LCD4linuxPIC(self, session):
 					L4log("Error put Picon")
 
 # aktive Sendernummer
-	def putChannelNum((ConfigPos, ConfigSize, ConfigAlign, ConfigBackColor, ConfigColor, ConfigShadow, ConfigFont), draw, im):
+	def putChannelNum(xxx_todo_changeme13, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigBackColor, ConfigColor, ConfigShadow, ConfigFont) = xxx_todo_changeme13
 		MAX_W, MAX_H = self.im[im].size
 		num=self.Lchannel_num
 		if num == "None":
@@ -11818,7 +11832,8 @@ def LCD4linuxPIC(self, session):
 			ShadowText(draw, lx, ConfigPos, num, font, ConfigColor, ConfigShadow)
 
 # aktive Sendername
-	def putChannel((ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont), draw, im):
+	def putChannel(xxx_todo_changeme14, draw, im):
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont) = xxx_todo_changeme14
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -11844,7 +11859,8 @@ def LCD4linuxPIC(self, session):
 			writeMultiline(channel_name, ConfigSize, ConfigPos, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, draw, im, ConfigFont=ConfigFont, Shadow=ConfigShadow, Width=Progress)
 
 # Progress Bar
-	def putProgress((ConfigPos, ConfigSize, ConfigProzent, ConfigType, ConfigColor, ConfigColorText, ConfigAlign, ConfigMinutes, ConfigBorder, ConfigShadow, ConfigShadowBar, ConfigFont), draw, im):
+	def putProgress(xxx_todo_changeme15, draw, im):
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigType, ConfigColor, ConfigColorText, ConfigAlign, ConfigMinutes, ConfigBorder, ConfigShadow, ConfigShadowBar, ConfigFont) = xxx_todo_changeme15
 		global isVideoPlaying
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigAlign in ["5", "6"]:
@@ -12109,11 +12125,13 @@ def LCD4linuxPIC(self, session):
 						self.draw[draw].rectangle((POSX+9, ConfigPos, POSX+ProgressBar+11, ConfigPos+ConfigSize), outline="yellow")
 
 # Popup Text
-	def putPopup((ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigFont), draw, im):
+	def putPopup(xxx_todo_changeme16, draw, im):
+		(ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigFont) = xxx_todo_changeme16
 		writeMultiline(PopText[1].replace("\r", ""), ConfigSize, ConfigPos, 10, ConfigColor, ConfigAlign, False, draw, im, ConfigFont=ConfigFont, ConfigBackColor=ConfigBackColor)
 		writeMultiline(PopText[0], int(ConfigSize/2.5), ConfigPos-int(ConfigSize/2.5), 1, ConfigColor, ConfigAlign, False, draw, im, ConfigFont=ConfigFont, ConfigBackColor=ConfigBackColor)
 # Volume
-	def putVol((ConfigPos, ConfigSize, ConfigProzent, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow), draw, im):
+	def putVol(xxx_todo_changeme17, draw, im):
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow) = xxx_todo_changeme17
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -12148,7 +12166,8 @@ def LCD4linuxPIC(self, session):
 				self.im[im].paste(pil_image, (POSX+5, ConfigPos))
 
 # Provider
-	def putProv((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigType, ConfigShadow, ConfigFont), draw, im):
+	def putProv(xxx_todo_changeme18, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigType, ConfigShadow, ConfigFont) = xxx_todo_changeme18
 		MAX_W, MAX_H = self.im[im].size
 		POSX = 0
 		if ConfigSplit == True:
@@ -12185,7 +12204,8 @@ def LCD4linuxPIC(self, session):
 				ShadowText(draw, lx, ConfigPos, provider, font, ConfigColor, ConfigShadow)
 
 # Satellit
-	def putSat((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigType, ConfigShadow, ConfigFont), draw, im):
+	def putSat(xxx_todo_changeme19, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigType, ConfigShadow, ConfigFont) = xxx_todo_changeme19
 		MAX_W, MAX_H = self.im[im].size
 		POSX = 0
 		if ConfigSplit == True:
@@ -12265,7 +12285,8 @@ def LCD4linuxPIC(self, session):
 					ShadowText(draw, lx, ConfigPos, Code_utf8(orbital), font, ConfigColor, ConfigShadow)
 
 # Signalstaerke Balken
-	def putSignal((ConfigPos, ConfigSize, ConfigProzent, ConfigAlign, ConfigSplit, ConfigColor, ConfigGradient), draw, im):
+	def putSignal(xxx_todo_changeme20, draw, im):
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigAlign, ConfigSplit, ConfigColor, ConfigGradient) = xxx_todo_changeme20
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -12304,7 +12325,8 @@ def LCD4linuxPIC(self, session):
 				self.draw[draw].rectangle((POSX+10, ConfigPos, POSX+int(ProgressBar*staerke/100)+10, ConfigPos+ConfigSize), fill=ConfigColor)
 
 # aktive Event
-	def putProg((ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigType, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont), draw, im):
+	def putProg(xxx_todo_changeme21, draw, im):
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigType, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont) = xxx_todo_changeme21
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -12323,7 +12345,8 @@ def LCD4linuxPIC(self, session):
 			writeMultiline(sts, ConfigSize, ConfigPos, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, draw, im, ConfigFont=ConfigFont, Shadow=ConfigShadow, Width=getProgess(MAX_W, ConfigProzent))
 
 # next Event
-	def putProgNext((ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigType, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont), draw, im):
+	def putProgNext(xxx_todo_changeme22, draw, im):
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigType, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont) = xxx_todo_changeme22
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -12372,7 +12395,8 @@ def LCD4linuxPIC(self, session):
 				writeMultiline(sts, ConfigSize, ConfigPos, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, draw, im, ConfigFont=ConfigFont, Shadow=ConfigShadow, Width=getProgess(MAX_W, ConfigProzent))
 
 # show extended Description
-	def putDescription((ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, ConfigType, ConfigShadow, ConfigInfo, ConfigFont), draw, im):
+	def putDescription(xxx_todo_changeme23, draw, im):
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, ConfigType, ConfigShadow, ConfigInfo, ConfigFont) = xxx_todo_changeme23
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -12405,7 +12429,8 @@ def LCD4linuxPIC(self, session):
 			writeMultiline(event_name.replace("\x8A", "\n"), ConfigSize, ConfigPos, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, draw, im, ConfigFont=ConfigFont, Shadow=ConfigShadow, Width=getProgess(MAX_W, ConfigProzent))
 
 # Tuner
-	def putTuner((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType, ConfigActive, ConfigFont), draw, im):
+	def putTuner(xxx_todo_changeme24, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType, ConfigActive, ConfigFont) = xxx_todo_changeme24
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -12464,7 +12489,8 @@ def LCD4linuxPIC(self, session):
 					lx += w
 
 # TunerInfo + Sensors
-	def putInfo((ConfigPos, ConfigSize, ConfigAlign, ConfigLines, ConfigSplit, ConfigColor, ConfigInfo, ConfigShadow, ConfigFont), draw, im):
+	def putInfo(xxx_todo_changeme25, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigLines, ConfigSplit, ConfigColor, ConfigInfo, ConfigShadow, ConfigFont) = xxx_todo_changeme25
 		def NL(count):
 			return "\n" if int(count)>2 else ""
 		def SensorRead(dat):
@@ -12541,7 +12567,8 @@ def LCD4linuxPIC(self, session):
 		writeMultiline(i, ConfigSize, ConfigPos, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, draw, im, False, ConfigFont=ConfigFont, Shadow=ConfigShadow)
 
 # Audio/Video
-	def putAV((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigType, ConfigFont), draw, im):
+	def putAV(xxx_todo_changeme26, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigType, ConfigFont) = xxx_todo_changeme26
 		def getAudio(description):
 			if description in ["AC3", "AC-3", "Dolby Digital", "AC-3 audio"]:
 				return "dolby.png"
@@ -12604,7 +12631,8 @@ def LCD4linuxPIC(self, session):
 			ShadowText(draw, lx+Posx, Posy, Video, font, ConfigColor, ConfigShadow)
 
 # Bitrate
-	def putBitrate((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont), draw, im):
+	def putBitrate(xxx_todo_changeme27, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont) = xxx_todo_changeme27
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -12618,7 +12646,8 @@ def LCD4linuxPIC(self, session):
 			ShadowText(draw, 0, ConfigPos, "no Bitrate-Plugin", font, ConfigColor, ConfigShadow)
 
 # Online-Ping
-	def putOnline((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigType, ConfigShow, ConfigTimeout, ConfigList, ConfigShadow, ConfigFont), draw, im):
+	def putOnline(xxx_todo_changeme28, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigType, ConfigShow, ConfigTimeout, ConfigList, ConfigShadow, ConfigFont) = xxx_todo_changeme28
 		if self.NetworkConnectionAvailable or self.NetworkConnectionAvailable == None:
 			if OSDtimer < 0:
 				return
@@ -12665,7 +12694,8 @@ def LCD4linuxPIC(self, session):
 						L4log("Ping-Error", TT)
 
 # www Remote Box
-	def putRemoteBox((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigProzent, ConfigShow, ConfigShadow, ConfigFont), draw, im):
+	def putRemoteBox(xxx_todo_changeme29, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigProzent, ConfigShow, ConfigShadow, ConfigFont) = xxx_todo_changeme29
 		def getColor(c):
 			return ConfigColor[0] if ConfigColor[c]=="0" else ConfigColor[c]
 		MAX_W, MAX_H = self.im[im].size
@@ -12728,7 +12758,8 @@ def LCD4linuxPIC(self, session):
 			wwwBcount+=1
 
 # Data-Devices
-	def putDev((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigList, ConfigShadow, ConfigType, ConfigWarning, ConfigFont), draw, im):
+	def putDev(xxx_todo_changeme30, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigList, ConfigShadow, ConfigType, ConfigWarning, ConfigFont) = xxx_todo_changeme30
 		global DeviceRemove
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
@@ -12809,7 +12840,8 @@ def LCD4linuxPIC(self, session):
 					DeviceRemove.append(l)
 
 # HDD
-	def putHdd((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType), draw, im):
+	def putHdd(xxx_todo_changeme31, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType) = xxx_todo_changeme31
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -12842,7 +12874,8 @@ def LCD4linuxPIC(self, session):
 				pass
 
 # Mute
-	def putMute((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit), draw, im):
+	def putMute(xxx_todo_changeme32, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit) = xxx_todo_changeme32
 		if self.LvolM == True:
 			MAX_W, MAX_H = self.im[im].size
 			if ConfigSplit == True:
@@ -12859,7 +12892,8 @@ def LCD4linuxPIC(self, session):
 				self.im[im].paste(imW, (POSX, ConfigPos))
 
 # show OSCAM
-	def putOSCAM((ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigSplit), draw, im):
+	def putOSCAM(xxx_todo_changeme33, draw, im):
+		(ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigSplit) = xxx_todo_changeme33
 		MAX_W, MAX_H = self.im[im].size
 		OSCAMrunning = False
 		if ConfigSplit == True:
@@ -12902,7 +12936,8 @@ def LCD4linuxPIC(self, session):
 			self.draw[draw].text((POSX+(MAX_W-w)/2, ConfigPos), Code_utf8(_("OSCAM not running")), font=font, fill=ConfigColor)
 
 # show ecm.info
-	def putECM((ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigSplit), draw, im):
+	def putECM(xxx_todo_changeme34, draw, im):
+		(ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigSplit) = xxx_todo_changeme34
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -12932,7 +12967,8 @@ def LCD4linuxPIC(self, session):
 				self.draw[draw].text((POSX+int(MAX_W/p[x]), ConfigPos), info.get(tl[x].lower(), ""), font=font, fill=ConfigColor)
 
 # show Title
-	def putTitle((ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont), draw, im):
+	def putTitle(xxx_todo_changeme35, draw, im):
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont) = xxx_todo_changeme35
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -12971,7 +13007,8 @@ def LCD4linuxPIC(self, session):
 			writeMultiline(Title, ConfigSize, ConfigPos, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, draw, im, ConfigFont=ConfigFont, Shadow=ConfigShadow, Width=getProgess(MAX_W, ConfigProzent))
 
 # show Comments
-	def putComm((ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont), draw, im):
+	def putComm(xxx_todo_changeme36, draw, im):
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont) = xxx_todo_changeme36
 		def addNL(w, d):
 			r = " " if " " in d else ""
 			if "(" in d:
@@ -13025,7 +13062,8 @@ def LCD4linuxPIC(self, session):
 			writeMultiline(Info, ConfigSize, ConfigPos, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, draw, im, ConfigFont=ConfigFont, Shadow=ConfigShadow, Width=getProgess(MAX_W, ConfigProzent))
 
 # show Fritz Pictures
-	def putFritzPic((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit), draw, im):
+	def putFritzPic(xxx_todo_changeme37, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit) = xxx_todo_changeme37
 		if (len(FritzList) == 0 and ConfigMode == False) or int(LCD4linux.FritzPictures.value) == 0:
 			return
 		MAX_Wi, MAX_Hi = self.im[im].size
@@ -13119,7 +13157,8 @@ def LCD4linuxPIC(self, session):
 		return
 
 # show FritzCall
-	def putFritz((ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigType, ConfigPicPos, ConfigPicSize, ConfigPicAlign, ConfigShadow, ConfigFont), draw, im):
+	def putFritz(xxx_todo_changeme38, draw, im):
+		(ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigType, ConfigPicPos, ConfigPicSize, ConfigPicAlign, ConfigShadow, ConfigFont) = xxx_todo_changeme38
 		MAX_W, MAX_H = self.im[im].size
 		if FritzTime > 1:
 			if len(FritzList) == 0:
@@ -13233,7 +13272,8 @@ def LCD4linuxPIC(self, session):
 			putFritzPic(Para, draw, im)
 
 # show Mail
-	def putMail((ConfigPos, ConfigSize, ConfigProzent, ConfigColor, ConfigBackColor, ConfigAlign, ConfigSplit, ConfigLines, ConfigType, ConfigProfil, ConfigShadow, ConfigFont), draw, im):
+	def putMail(xxx_todo_changeme39, draw, im):
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigColor, ConfigBackColor, ConfigAlign, ConfigSplit, ConfigLines, ConfigType, ConfigProfil, ConfigShadow, ConfigFont) = xxx_todo_changeme39
 		if PopMail[5]!="":
 			L4log("get Mail running")
 			return
@@ -13304,7 +13344,8 @@ def LCD4linuxPIC(self, session):
 					POSY += ConfigSize
 
 # show Ereignis Icon Bar
-	def putIconBar((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType, ConfigPopup, ConfigPopupLCD), draw, im):
+	def putIconBar(xxx_todo_changeme40, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType, ConfigPopup, ConfigPopupLCD) = xxx_todo_changeme40
 		global SaveEventList
 		global SaveEventListChanged
 		MAX_W, MAX_H = self.im[im].size
@@ -13396,7 +13437,8 @@ def LCD4linuxPIC(self, session):
 					pass
 	
 # show Sonnenaufgang
-	def putSun((ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigSplit, ConfigType, ConfigShadow, ConfigFont), draw, im):
+	def putSun(xxx_todo_changeme41, draw, im):
+		(ConfigPos, ConfigSize, ConfigColor, ConfigBackColor, ConfigAlign, ConfigSplit, ConfigType, ConfigShadow, ConfigFont) = xxx_todo_changeme41
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -13446,7 +13488,8 @@ def LCD4linuxPIC(self, session):
 			ShadowText(draw, POSXi, POSY, "%02d:%02d" % L4LMoon, font, ConfigColor, ConfigShadow)
 
 # Netatmo
-	def putNetatmo((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigStation, ConfigModule, ConfigModuleUser, ConfigBasis, ConfigName, ConfigType, ConfigType2, ConfigColor, ConfigShadow, ConfigFont), draw, im):
+	def putNetatmo(xxx_todo_changeme42, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigStation, ConfigModule, ConfigModuleUser, ConfigBasis, ConfigName, ConfigType, ConfigType2, ConfigColor, ConfigShadow, ConfigFont) = xxx_todo_changeme42
 		def getColor(c):
 			return ConfigColor[0] if ConfigColor[c]=="0" else ConfigColor[c]
 		MAX_W, MAX_H = self.im[im].size
@@ -13619,7 +13662,8 @@ def LCD4linuxPIC(self, session):
 				ShadowText(draw, POSX+w, POSY+h+h, self.NOISE, font3, ConfigColor[0], ConfigShadow)
 
 # Netstmo CO2
-	def putNetatmoIllu((CW, ConfigPos, ConfigSize, ConfigLen, ConfigAlign, ConfigSplit, ConfigStation, ConfigType), draw, im):
+	def putNetatmoIllu(xxx_todo_changeme43, draw, im):
+		(CW, ConfigPos, ConfigSize, ConfigLen, ConfigAlign, ConfigSplit, ConfigStation, ConfigType) = xxx_todo_changeme43
 		ConfigStation=int(ConfigStation)-1
 		if len(self.oM)<=ConfigStation:
 			L4log("Netatmo: no Station", ConfigStation)
@@ -13686,7 +13730,8 @@ def LCD4linuxPIC(self, session):
 
 
 # Kalender
-	def putCalendar((ConfigPos, ConfigZoom, ConfigAlign, ConfigSplit, ConfigType, ConfigTypeE, ConfigLayout, ConfigColor, ConfigBackColor, ConfigCaptionColor, ConfigShadow, ConfigFont), draw, im):
+	def putCalendar(xxx_todo_changeme44, draw, im):
+		(ConfigPos, ConfigZoom, ConfigAlign, ConfigSplit, ConfigType, ConfigTypeE, ConfigLayout, ConfigColor, ConfigBackColor, ConfigCaptionColor, ConfigShadow, ConfigFont) = xxx_todo_changeme44
 		global CalType
 		global CalZoom
 		global CalColor
@@ -13852,7 +13897,8 @@ def LCD4linuxPIC(self, session):
 				pass
 
 # Kalender-Liste
-	def putCalendarList((ConfigPos, ConfigSize, ConfigProzent, ConfigAlign, ConfigSplit, ConfigType, ConfigLines, ConfigColor, ConfigShadow, ConfigFont), draw, im):
+	def putCalendarList(xxx_todo_changeme45, draw, im):
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigAlign, ConfigSplit, ConfigType, ConfigLines, ConfigColor, ConfigShadow, ConfigFont) = xxx_todo_changeme45
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
@@ -13935,7 +13981,8 @@ def LCD4linuxPIC(self, session):
 			writeMultiline(aa[:-2], int(ConfigSize), POSY, int(ConfigLines), ConfigColor, ConfigAlign, ConfigSplit, draw, im, ConfigFont=ConfigFont, Shadow=ConfigShadow, Width=CW, PosX=POSX)
 
 # show isRecording
-	def putRecording((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType), draw, im):
+	def putRecording(xxx_todo_changeme46, draw, im):
+		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigType) = xxx_todo_changeme46
 		MAX_W, MAX_H = self.im[im].size
 		POSX = None
 		if self.LisRecording or ConfigMode == True:
@@ -13968,7 +14015,8 @@ def LCD4linuxPIC(self, session):
 					self.draw[draw].ellipse((POSX-i, ConfigPos-i, POSX+ConfigSize+i, ConfigPos+ConfigSize+i), outline="yellow")
 
 # show Box
-	def putBox((x1, y1, x2, y2, ConfigColor, ConfigBackColor), draw, im):
+	def putBox(xxx_todo_changeme47, draw, im):
+		(x1, y1, x2, y2, ConfigColor, ConfigBackColor) = xxx_todo_changeme47
 		if ConfigBackColor == "0":
 			self.draw[draw].rectangle((x1, y1, x1+x2, y1+y2), outline=ConfigColor)
 		else:
