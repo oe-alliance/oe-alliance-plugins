@@ -4425,8 +4425,8 @@ try:
 except:
 	NetatmoOK = False
 	L4log("Netatmo not registered")
-	from traceback import format_exc
-	L4log("Error:", format_exc() )
+#	from traceback import format_exc
+#	L4log("Error:", format_exc() )
 
 try:
 	from Plugins.Bp.geminimain.Cjukeboxevent import cjukeboxevent, CjukeboxEventNotifier

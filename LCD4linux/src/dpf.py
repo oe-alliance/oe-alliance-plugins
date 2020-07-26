@@ -2,7 +2,7 @@ from __future__ import print_function
 #import Image
 from PIL import Image
 try:
-	import dpflib
+	from . import dpflib
 except:
 	print("[LCD4linux] dpflib-Error")
 
