@@ -78,7 +78,7 @@ def receiveOnePing(mySocket, ID, timeout):
     whatReady=select.select([mySocket], [], [], timeLeft)
     howLongInSelect=(time.time()-startedSelect)
     if whatReady[0]==[]: # Timeout
-#      print "Ping whatReady"
+#      print("Ping whatReady")
       return None
     timeReceived=time.time()
     recPacket, addr=mySocket.recvfrom(1024)
@@ -90,7 +90,7 @@ def receiveOnePing(mySocket, ID, timeout):
       return timeReceived-timeSent
     timeLeft=timeLeft-howLongInSelect
     if timeLeft<=0:
-#      print "Ping timeLeft"
+#      print("Ping timeLeft")
       return None
 
 def sendOnePing(mySocket, destAddr, ID):

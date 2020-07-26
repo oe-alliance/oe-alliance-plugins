@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# print " LCD4linux.StandbyBildLCD" in zip(*L4)[2]
+# print(" LCD4linux.StandbyBildLCD" in zip(*L4)[2])
 from __future__ import print_function, absolute_import
 from twisted.web import resource, http
 from .plugin import *
@@ -63,7 +63,7 @@ def ParseCode():
 	i4 = 0
 	L4log("WebIF: parsing Code....")
 	for line in open(Py, "r").readlines():
-#		print line
+#		print(line)
 		if line.find("self.list1.append") >= 0 or line.find("self.list2.append") >= 0 or line.find("self.list3.append") >= 0 or line.find("self.list4.append") >= 0:
 			Z = line.replace("getConfigListEntry(_", ",").replace(")", "").replace("(", "").replace(".append", "").replace("\t", "").replace("\n", "").replace("\"", "").split(",")
 			if Z[0]=="self.list1":
@@ -217,7 +217,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		el = req.args.get(b"Element", None)
 		self.restartTimer()
 		L4log("Command received %s" % (command), ex)
-#		print "[L4L EX]-", ex,"-"
+#		print("[L4L EX]-", ex,"-")
 		if self.CurrentMode == ("-", "-"):
 			self.CurrentMode = (getConfigStandby(), getisMediaPlayer())
 		if mo is not None:

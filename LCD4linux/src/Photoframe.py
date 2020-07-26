@@ -170,7 +170,7 @@ def frame_switch(dev):
 	except:
 		print("[LCD4linux] switching ERROR")
 #		from traceback import format_exc
-#		print format_exc()
+#		print(format_exc())
 	finally:
 		time.sleep(2)
 
