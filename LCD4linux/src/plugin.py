@@ -9521,11 +9521,11 @@ class UpdateStatus(Screen):
 	def downloadMeteo(self):
 		global wwwMeteo
 		L4log("Meteodownloadstart")
-		self.feedurl = LCD4linux.MeteoURL.value
+		self.feedurl = six.ensure_binary(LCD4linux.MeteoURL.value)
 		try:
 			opener = FancyURLopener({})
 			f = opener.open(self.feedurl)
-			wwwMeteo = f.read()
+			wwwMeteo = six.ensure_str(f.read())
 		except Exception as e:
 			L4log("Error download Meteo!")
 		rmFile(PICmeteo)
@@ -9604,6 +9604,7 @@ class UpdateStatus(Screen):
 		global wwwWetter
 		ts = time()
 		try:
+			page = six.ensure_str(page)
 			r=simplejson.loads(Code_utf8(page))
 		except:
 			wwwWetter[ConfigWWW] = ""
@@ -9661,6 +9662,7 @@ class UpdateStatus(Screen):
 		global wwwWetter
 		ts = time()
 		try:
+			page = six.ensure_str(page)
 			r=simplejson.loads(Code_utf8(page))
 		except:
 			wwwWetter[ConfigWWW] = ""
@@ -9741,6 +9743,7 @@ class UpdateStatus(Screen):
 		global L4LMoon
 		L4log("Sunrise download ok")
 		try:
+			page = six.ensure_str(page)
 			dom = parseString(page)
 			DIFF = getTimeDiffUTC()
 			s = dom.getElementsByTagName("sun")
@@ -9780,6 +9783,7 @@ class UpdateStatus(Screen):
 		global L4LMoon
 		L4log("Sunrise2 download ok")
 		try:
+			page = six.ensure_str(page)
 			DIFF = getTimeDiffUTC()
 			s = simplejson.loads(page)
 			if len(s)>0:
