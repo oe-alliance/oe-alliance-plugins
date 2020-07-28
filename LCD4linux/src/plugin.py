@@ -3166,7 +3166,7 @@ def writeLCD1(s,im,quality,SAVE=True):
 	else:
 		if SamsungDevice is not None:
 			L4log("writing to Samsung Device")
-			output = StringIO.StringIO()
+			output = StringIO()
 			s.im[im].save(output, "JPEG") # ,quality=int(quality)
 			pic = output.getvalue()
 			output.close()
@@ -3281,7 +3281,7 @@ def writeLCD2(s,im,quality,SAVE=True):
 	else:
 		if SamsungDevice2 is not None:
 			L4log("writing to Samsung2 Device")
-			output = StringIO.StringIO()
+			output = StringIO()
 			s.im[im].save(output, "JPEG") # ,quality=int(quality)
 			pic = output.getvalue()
 			output.close()
@@ -3396,7 +3396,7 @@ def writeLCD3(s,im,quality,SAVE=True):
 	else:
 		if SamsungDevice3 is not None:
 			L4log("writing to Samsung3 Device")
-			output = StringIO.StringIO()
+			output = StringIO()
 			s.im[im].save(output, "JPEG") # ,quality=int(quality)
 			pic = output.getvalue()
 			output.close()
@@ -3614,7 +3614,7 @@ class MJPEGHandler1(BaseHTTPRequestHandler):
 				if para == [9, 9]:
 					return
 				MJPEGreader[LCD] = 0
-				output = StringIO.StringIO()
+				output = StringIO()
 				if para[0] == 9:
 					para[1].save(output, "JPEG")
 				else:
@@ -3672,7 +3672,7 @@ class MJPEGHandler2(BaseHTTPRequestHandler):
 				if para == [9, 9]:
 					return
 				MJPEGreader[LCD] = 0
-				output = StringIO.StringIO()
+				output = StringIO()
 				if para[0] == 9:
 					para[1].save(output, "JPEG")
 				else:
@@ -3730,7 +3730,7 @@ class MJPEGHandler3(BaseHTTPRequestHandler):
 				if para == [9, 9]:
 					return
 				MJPEGreader[LCD] = 0
-				output = StringIO.StringIO()
+				output = StringIO()
 				if para[0] == 9:
 					para[1].save(output, "JPEG")
 				else:
@@ -15091,7 +15091,7 @@ def autostart(reason, **kwargs):
 				try:
 					MAX_W, MAX_H = getResolution(LCD4linux.LCDType1.value, LCD4linux.LCDRotate1.value)
 					im = Image.new('RGB', (MAX_W, MAX_H), (0, 0, 0, 0))
-					output = StringIO.StringIO()
+					output = StringIO()
 					im.save(output, "JPEG")
 					pic = output.getvalue()
 					output.close()
@@ -15103,7 +15103,7 @@ def autostart(reason, **kwargs):
 				try:
 					MAX_W, MAX_H = getResolution(LCD4linux.LCDType2.value, LCD4linux.LCDRotate2.value)
 					im = Image.new('RGB', (MAX_W, MAX_H), (0, 0, 0, 0))
-					output = StringIO.StringIO()
+					output = StringIO()
 					im.save(output, "JPEG")
 					pic = output.getvalue()
 					output.close()
@@ -15115,7 +15115,7 @@ def autostart(reason, **kwargs):
 				try:
 					MAX_W, MAX_H = getResolution(LCD4linux.LCDType3.value, LCD4linux.LCDRotate3.value)
 					im = Image.new('RGB', (MAX_W, MAX_H), (0, 0, 0, 0))
-					output = StringIO.StringIO()
+					output = StringIO()
 					im.save(output, "JPEG")
 					pic = output.getvalue()
 					output.close()
