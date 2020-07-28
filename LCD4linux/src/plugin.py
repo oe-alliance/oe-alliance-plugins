@@ -10264,7 +10264,7 @@ def LCD4linuxPIC(self, session):
 				if (COL[0] == '#'):
 					COL = COL[1:]
 				RGB = (int(COL[:2], 16), int(COL[2:4], 16), int(COL[4:6], 16))
-			ColO = self.draw[draw].draw.draw_ink(RGB, "RGB")
+			ColO = self.draw[draw].draw.draw_ink(RGB)
 			HLS = list(colorsys.rgb_to_hls(RGB[0]/255., RGB[1]/255., RGB[2]/255.))
 			if HLS[1]<0.5:
 				HLS[1] += 0.5
@@ -10273,7 +10273,7 @@ def LCD4linuxPIC(self, session):
 				if HLS[1]<0.1:
 					HLS[1]=0.1
 			RGB = tuple(map(lambda x: int(x*255), colorsys.hls_to_rgb(HLS[0], HLS[1], HLS[2])))
-			Col = self.draw[draw].draw.draw_ink(RGB, "RGB")
+			Col = self.draw[draw].draw.draw_ink(RGB)
 			mask = font.getmask(TXT+"  ", "1")
 			self.draw[draw].draw.draw_bitmap((tx0, ty0), mask, Col)
 			self.draw[draw].draw.draw_bitmap((tx1, ty1), mask, Col)
