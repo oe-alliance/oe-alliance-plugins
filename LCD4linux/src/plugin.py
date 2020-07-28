@@ -15,6 +15,7 @@
 #  For other uses, permission from the author is necessary.
 #
 from __future__ import print_function, absolute_import
+from __future__ import division
 Version = "V5.0-r7"
 from . import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
@@ -11617,7 +11618,7 @@ def LCD4linuxPIC(self, session):
 							self.draw[draw].rectangle((0, 0, MAX_W, MAX_H), fill="black")
 						pix_image = pil_image.crop((l, o, r, u))
 						xx, yy = pix_image.size
-						self.im[im].paste(pix_image, ((MAX_W-xx)/2, (MAX_H-yy)/2))
+						self.im[im].paste(pix_image, ((MAX_W-xx)//2, (MAX_H-yy)//2))
 			except:
 				from traceback import format_exc
 				L4log("put Grab Error:", format_exc() )
