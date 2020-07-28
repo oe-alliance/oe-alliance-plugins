@@ -359,13 +359,6 @@ LCD4linux/src/data/Clock6/Makefile
 LCD4linux/src/meteo/Makefile
 LCD4linux/src/renderer/Makefile
 LCD4linux/src/wetter/Makefile
-LCD4linux/src/dinobot/Makefile
-LCD4linux/src/aarch64/Makefile
-LCD4linux/src/armv7a/Makefile
-LCD4linux/src/armv7ahf/Makefile
-LCD4linux/src/cortexa9hf/Makefile
-LCD4linux/src/mips/Makefile
-LCD4linux/src/sh4/Makefile
 LCD4linux/meta/Makefile
 LCD4linux/po/Makefile
 

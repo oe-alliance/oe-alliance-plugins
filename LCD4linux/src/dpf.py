@@ -24,7 +24,7 @@ def showImage(dev, image):
 	try:
 		ir = image.convert("RGBA")
 		x, y = image.size
-		dev.showRGBAImage(0, 0, x, y, ir.tostring())
+		dev.showRGBAImage(0, 0, x, y, ir.tobytes())
 		return True
 	except:
 		print("[LCD4linux] Error writing DPF Device") 
