@@ -1,14 +1,35 @@
-# Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/IPTVImporter/plugin.py
-from __future__ import absolute_import
-from base64 import b64encode, b64decode
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+##########################################################################
+# IPTVImporter
+##########################################################################
+# Copyright (C) 2018 - 2020 madie, jbleyel
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software Foundation,
+# Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
+##########################################################################
+
+from __future__ import absolute_import, print_function
+import re, os, json, six
+from . import _
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.MessageBox import MessageBox
 from Tools.Notifications import AddPopup
-import re, os, json
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
-import urllib.request, urllib.error, urllib.parse
+from six.moves.urllib.request import Request, urlopen
 from Screens.ChannelSelection import service_types_tv
 from enigma import eServiceCenter, eServiceReference, eDVBDB, getDesktop
 from Components.ConfigList import ConfigListScreen
@@ -16,6 +37,7 @@ from Components.config import config, ConfigSubsection, ConfigPassword, ConfigYe
 from boxbranding import getImageDistro
 from Components.Sources.StaticText import StaticText
 from Components.PluginComponent import plugins
+
 config.plugins.iptvimport = ConfigSubsection()
 config.plugins.iptvimport.portal = ConfigText(default='http://XXX', fixed_size=False)
 config.plugins.iptvimport.username = ConfigText(default='', fixed_size=False)
@@ -46,12 +68,33 @@ config.plugins.iptvimport.spain = ConfigSelection(default='none', choices=[('non
 config.plugins.iptvimport.showinplugins = ConfigYesNo(default=False)
 config.plugins.iptvimport.showinextensions = ConfigYesNo(default=False)
 config.plugins.iptvimport.showinmenu = ConfigYesNo(default=True)
+#TODO : add debug setting for print output
 
 class IPTVImporter(Screen, ConfigListScreen):
+
+    #TODO : update Metrix skin
     if getDesktop(0).size().width() >= 1280:
-        skin = '\n\t\t\t<screen name="IPTVImporter" position="center,center" size="1280,720" title="IPTVImporter v 0.9.9">\n\t\t\t\t<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />\n\t\t\t\t<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;24" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />\n\t\t\t\t<ePixmap pixmap="skin_default/buttons/green.png" position="150,0" size="140,40" alphatest="on" />\n\t\t\t\t<widget source="key_green" render="Label" position="150,0" zPosition="1" size="140,40" font="Regular;24" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />\n\t\t\t\t<widget name="config" position="5,50" size="1260,680" zPosition="1" scrollbarMode="showOnDemand" />\n\t\t\t</screen>\n\t\t\t'
+        skin = """
+        <screen name="IPTVImporter" position="center,center" size="1280,720" title="IPTVImporter v 1.0">
+            <ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+            <widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;24" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+            <ePixmap pixmap="skin_default/buttons/green.png" position="150,0" size="140,40" alphatest="on" />
+            <widget source="key_green" render="Label" position="150,0" zPosition="1" size="140,40" font="Regular;24" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+            <ePixmap pixmap="skin_default/buttons/yellow.png" position="300,0" size="140,40" alphatest="on" />
+            <widget source="key_yellow" render="Label" position="300,0" zPosition="1" size="140,40" font="Regular;24" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+            <widget name="config" position="5,50" size="1260,680" zPosition="1" scrollbarMode="showOnDemand" />
+        </screen>"""
     else:
-        skin = '\n\t\t\t<screen name="IPTVImporter" position="center,center" size="710,450" title="IPTVImporter v 0.9.9">\n\t\t\t\t<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />\n\t\t\t\t<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;24" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />\n\t\t\t\t<ePixmap pixmap="skin_default/buttons/green.png" position="150,0" size="140,40" alphatest="on" />\n\t\t\t\t<widget source="key_green" render="Label" position="150,0" zPosition="1" size="140,40" font="Regular;24" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />\n\t\t\t\t<widget name="config" position="5,50" size="700,250" zPosition="1" scrollbarMode="showOnDemand" />\n\t\t\t</screen>'
+        skin = """
+        <screen name="IPTVImporter" position="center,center" size="710,450" title="IPTVImporter v 1.0">
+            <ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+            <widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;24" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+            <ePixmap pixmap="skin_default/buttons/green.png" position="150,0" size="140,40" alphatest="on" />
+            <widget source="key_green" render="Label" position="150,0" zPosition="1" size="140,40" font="Regular;24" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+            <ePixmap pixmap="skin_default/buttons/yellow.png" position="300,0" size="140,40" alphatest="on" />
+            <widget source="key_yellow" render="Label" position="300,0" zPosition="1" size="140,40" font="Regular;24" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+            <widget name="config" position="5,50" size="700,250" zPosition="1" scrollbarMode="showOnDemand" />
+        </screen>"""
 
     def __init__(self, session):
         self.session = session
@@ -91,10 +134,12 @@ class IPTVImporter(Screen, ConfigListScreen):
         self['config'].l.setList(self.list)
         self['key_red'] = StaticText(_('Cancel'))
         self['key_green'] = StaticText(_('Save'))
+        self['key_yellow'] = StaticText(_('Start Import'))
         self['actions'] = NumberActionMap(['SetupActions', 'ColorActions'], {'ok': self.ok,
          'back': self.cancel,
          'cancel': self.cancel,
          'red': self.cancel,
+         'yellow': self.start,
          'green': self.ok}, -2)
 
     def ok(self):
@@ -107,6 +152,9 @@ class IPTVImporter(Screen, ConfigListScreen):
 
         self.close()
 
+    def start(self):
+        # TODO: start as thread
+        main(self.session)
 
 def setup(session, **kwargs):
     session.open(IPTVImporter)
@@ -115,7 +163,7 @@ def setup(session, **kwargs):
 def main(session, **kwargs):
     if config.plugins.iptvimport.delbouquets.value:
         os.system('rm /etc/enigma2/userbouquet.iptv_*.tv')
-        print ('delete old IPTV Bouquets')
+        print('delete old IPTV Bouquets')
         f = file('/etc/enigma2/bouquets.tv', 'r+')
         lines = f.readlines()
         f.seek(0)
@@ -131,10 +179,11 @@ def main(session, **kwargs):
     portal = config.plugins.iptvimport.portal.value
     url = 'portal=%s/get.php?username=%s&password=%s&type=dreambox&output=mpegts' % (portal, username, password)
     url = url.replace('portal=', '')
-    print (url)
-    req = urllib2.Request(url, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.30 (KHTML, like Gecko) Ubuntu/11.04 Chromium/12.0.742.112 Chrome/12.0.742.112 Safari/534.30'})
+    print(url)
+    req = Request(url, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.30 (KHTML, like Gecko) Ubuntu/11.04 Chromium/12.0.742.112 Chrome/12.0.742.112 Safari/534.30'})
     try:
-        channellist = urllib2.urlopen(req).read().split('\n')
+        l = urlopen(req).read()
+        channellist = six.ensure_str(l).split('\n')
         bouquets = {}
         ref = ''
         channelname = ''
@@ -145,6 +194,7 @@ def main(session, **kwargs):
         AddPopup(_('Connection failed! Aborted!'), type=MessageBox.TYPE_ERROR, timeout=10)
         return []
 
+#TODO : show progressbar
     for line in channellist:
         if line.startswith('#SERVICE'):
             if line.replace('#SERVICE ', '').startswith('4097'):
@@ -172,8 +222,8 @@ def main(session, **kwargs):
                 bouquets[bouquet].append((channelname.strip(), ref.strip(), link.strip()))
 
     tvbouquets = getTVBouquets()
-    for b in bouquets.iterkeys():
-        print (b)
+    for b in six.iterkeys(bouquets):
+        print(b)
         bname = ''
         bref = ''
         bouqname = b.replace(' ', '_').lower() + '__tv'
@@ -195,7 +245,7 @@ def main(session, **kwargs):
                     mutableBouquet.flushChanges()
             eDVBDB.getInstance().reloadBouquets()
 
-    for b in bouquets.iterkeys():
+    for b in six.iterkeys(bouquets):
         tvbouquets = getTVBouquets()
         bname = ''
         bref = ''
@@ -210,10 +260,11 @@ def main(session, **kwargs):
         for serviceref, servicename in bouquetlist:
             mutableBouquet.removeService(eServiceReference(serviceref))
 
+#TODO : improve bouquet import speed
         mutableBouquet.flushChanges()
         for ch in bouquets[b]:
             try:
-                print ('Adding %s with Ref: %s and Link: %s') % ch
+                print(('Adding %s with Ref: %s and Link: %s') % ch)
                 channelref = str(ch[1]) + str(ch[2])
                 newchannel = eServiceReference(channelref)
                 newchannel.setName(str(ch[0]))
@@ -227,8 +278,8 @@ def main(session, **kwargs):
 
 
 def getref(mapping, channelname, ref):
-    print (channelname)
-    print (ref)
+    print(channelname)
+    print(ref)
     if str(channelname) in mapping:
         return mapping[str(channelname)]
     else:
