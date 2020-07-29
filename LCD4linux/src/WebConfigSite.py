@@ -40,6 +40,13 @@ ExeMode = False
 StatusMode = False
 
 
+def _unescape(string):
+	index = string.find("%")
+	if index == -1:
+		return string
+	else:
+		return HTMLParser().unescape(string)
+
 def _exec(command):
 	if six.PY2:
 		exec(command)
@@ -299,8 +306,8 @@ class LCD4linuxConfigweb(resource.Resource):
 		elif _command == "pop":
 			V = _l(req.args.get(b"PopText", "")[0])
 			try:
-				V = HTMLParser.unescape(V)
-			except:
+				V = _unescape(V)
+			except Exception as e:
 				L4log("WebIF Error: Parse Text")
 			setPopText(V)
 			L4LElement.setRefresh()
@@ -418,11 +425,12 @@ class LCD4linuxConfigweb(resource.Resource):
 					changed = False
 					ConfObj = eval(_a)
 					if isinstance(ConfObj, ConfigSelection):
-						ConfObj.value = "'" + val + "'" # FIXME do we need quotes ?
+						ConfObj.value = val
 						# exec("%s.value = '%s'" % (_a, val)) # FIXME PY3
 					else:
 #ConfigYesNo
 						if isinstance(ConfObj, ConfigYesNo):
+							val = req.args.get(a, "")
 							if len(val) == 2:
 								ConfObj.value = True
 							else:
@@ -432,10 +440,10 @@ class LCD4linuxConfigweb(resource.Resource):
 							if isinstance(ConfObj, ConfigText):
 								V = _l(val)
 								try:
-									V = HTMLParser.unescape(V)
-								except:
+									V = _unescape(V)
+								except Exception as e:
 									L4log("WebIF Error: Parse Text")
-								ConfObj.value = "'" + V + "'" # FIXME do we need quotes ?
+								ConfObj.value = V
 								# exec("%s.value = '%s'" % (_a, V)) # FIXME PY3
 							else:
 #ConfigSlider
