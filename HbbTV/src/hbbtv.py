@@ -1,12 +1,10 @@
 from __future__ import absolute_import
+import struct
 from Screens.Screen import Screen
-
 from enigma import eTimer, fbClass, eRCInput
-
-import struct, vbcfg
-
 from .__init__ import _
 from .vbipc import VBController
+from . import vbcfg
 
 class HbbTVWindow(Screen):
 	skin = """

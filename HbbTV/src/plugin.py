@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+import os, struct
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.InfoBar import InfoBar
@@ -11,12 +12,8 @@ from Components.ActionMap import ActionMap
 from Components.Language import language
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.VolumeControl import VolumeControl
-
 from enigma import eTimer, fbClass, eRCInput, iServiceInformation, iPlayableService
-
-import os, struct
-import . from vbcfg
-
+from . import vbcfg
 from .__init__ import _
 from .hbbtv import HbbTVWindow
 from .browser import Browser

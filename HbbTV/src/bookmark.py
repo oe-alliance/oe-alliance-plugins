@@ -1,9 +1,6 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from . import vbcfg
-
+from __future__ import print_function, absolute_import
 from six.moves import configparser
-
+from . import vbcfg
 
 class BookmarkData:
 	def __init__(self, _id, _title, _url, _parent, _type):
