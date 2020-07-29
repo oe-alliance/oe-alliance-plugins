@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+			<tag type="Network" />
+	  </prerequisites>
+		  <info>
+					<author>madie</author>
+					<name>IPTVImporter</name>
+					<packagename>enigma2-plugin-extensions-IPTVImporter</packagename>
+					<shortdescription>IPTVImporter for Enigma-2</shortdescription>
+					<description>IPTVImporter</description>
+		  </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-IPTVImporter" />
+	  </files>
+</default>
