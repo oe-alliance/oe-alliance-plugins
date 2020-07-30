@@ -4491,8 +4491,8 @@ def InitWebIF():
 		from .WebSite import LCD4linuxweb, LCD4linuxwebView
 		from .WebConfigSite import LCD4linuxConfigweb
 		L4log("Child to WebIf...")
-		root = static.File("%slcd4linux" % TMP)
-		root.putChild("", LCD4linuxweb())
+		root = static.File(six.ensure_binary("%slcd4linux" % TMP))
+		root.putChild(b"", LCD4linuxweb())
 		root.putChild(b"view", LCD4linuxwebView())
 		root.putChild(b"config", LCD4linuxConfigweb())
 		root.putChild(b"data", static.File(six.ensure_binary(Data[:-1])))
