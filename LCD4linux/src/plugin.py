@@ -9375,6 +9375,7 @@ class UpdateStatus(Screen):
 				
 	def downloadwwwBoxCallback(self,element, page=""):
 		sR=sN=sS=""
+		page = six.ensure_str(page)
 		dom=parseString(page)
 		serv=dom.getElementsByTagName("e2servicename")
 		if len(serv) > 0 and len(serv[0].childNodes) > 0:
@@ -9429,6 +9430,7 @@ class UpdateStatus(Screen):
 	def downloadwwwBoxTimerCallback(self, element, page=""):
 		L4logE("download BoxTimer", element)
 		self.wwwBoxTimer = []
+		page = six.ensure_str(page)
 		dom=parseString(page)
 		serv=dom.getElementsByTagName("e2timer")
 		L4logE("download BoxTimer Count", len(serv))
@@ -9541,6 +9543,7 @@ class UpdateStatus(Screen):
 
 	def downloadListCallback(self, ConfigWWW, page=""):
 		global wwwWetter
+		page = six.ensure_str(page)
 		if page.find("forecast") > 1 and (page.find("skycode=\"44\"") == -1 or page.find("skycode=\"44\"") > 900 or wwwWetter[ConfigWWW] == ""):
 			self.WetterOK=True
 			L4log("Wetter%sdownload OK" % ConfigWWW)
