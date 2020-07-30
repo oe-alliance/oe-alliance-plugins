@@ -2869,18 +2869,20 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 			PIC = []
 			PIC.append(os.path.join(P2, picon))
 			if six.PY2:
-				name2=channelname.decode("utf-8").encode("latin-1", "ignore") + ".png"
-				name4=channelname.decode("utf-8").encode("utf-8", "ignore") + ".png"
+				name2 = channelname.decode("utf-8").encode("latin-1", "ignore") + ".png"
+				name4 = channelname.decode("utf-8").encode("utf-8", "ignore") + ".png"
 				name = unicodedata.normalize('NFKD', six.text_type(str(""+channelname), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
 			else:
-				name2=channelname.encode("latin-1", "ignore").decode("utf-8") + ".png"
-				name4=channelname + ".png"
+				# TODO: fixme if needed
+				#name2 = channelname.encode("latin-1", "ignore").decode("utf-8") + ".png"
+				name2 = channelname + ".png"
+				name4 = channelname + ".png"
 				name = unicodedata.normalize('NFKD', channelname)
 			name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
 			if six.PY2:
-				name3=channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
+				name3 = channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
 			else:
-				name3=channelname2.replace('\x87', '').replace('\x86', '') + ".png"
+				name3 = channelname2.replace('\x87', '').replace('\x86', '') + ".png"
 			PIC.append(os.path.join(P2, name3))
 			PIC.append(os.path.join(P2, name2))
 			PIC.append(os.path.join(P2, name))
@@ -10505,13 +10507,15 @@ def LCD4linuxPIC(self, session):
 						name = unicodedata.normalize('NFKD', self.Lchannel_name)
 					name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
 					if six.PY2:
-						name2=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
-						name4=self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore") + ".png"
-						name3=self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
+						name2 = self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
+						name4 = self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore") + ".png"
+						name3 = self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
 					else:
-						name2=self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8") + ".png"
-						name4=self.Lchannel_name + ".png"
-						name3=self.Lchannel_name2.replace('\x87', '').replace('\x86', '') + ".png"
+						# TODO : fixme if needed
+						# name2=self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8") + ".png"
+						name2 = self.Lchannel_name + ".png"
+						name4 = self.Lchannel_name + ".png"
+						name3 = self.Lchannel_name2.replace('\x87', '').replace('\x86', '') + ".png"
 					PIC.append(os.path.join(P2, name3))
 					PIC.append(os.path.join(P2, name2))
 					PIC.append(os.path.join(P2, name))
@@ -11722,13 +11726,16 @@ def LCD4linuxPIC(self, session):
 					name = unicodedata.normalize('NFKD', self.Lchannel_name)
 				name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
 				if six.PY2:
-					name2=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
-					name4=self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
-					name3=self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
+					name2 = self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
+					name4 = self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
+					name3 = self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
 				else:
-					name2=self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8") + ".png"
-					name4=self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8") + ".png"
-					name3=self.Lchannel_name2.replace('\x87', '').replace('\x86', '') + ".png"
+					# TODO: fixme if needed
+					#name2 = self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8") + ".png"
+					#name4 = self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8") + ".png"
+					name2 = self.Lchannel_name + ".png"
+					name4 = self.Lchannel_name + ".png"
+					name3 = self.Lchannel_name2.replace('\x87', '').replace('\x86', '') + ".png"
 				PIC.append(os.path.join(P2, name3))
 				PIC.append(os.path.join(P2, name2))
 				PIC.append(os.path.join(P2, name))
