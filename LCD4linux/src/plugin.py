@@ -3610,7 +3610,7 @@ class MJPEGHandler1(BaseHTTPRequestHandler):
 				self.send_header(k, v) 
 			self.end_headers()
 			for x in range(int(LCD4linux.MJPEGMode.value[0])):
-				self.wfile.write(boundary)
+				self.wfile.write(boundary.encode('utf-8'))
 				self.end_headers()
 			while True:
 				para = MJPEG[LCD].get()
@@ -3629,7 +3629,7 @@ class MJPEGHandler1(BaseHTTPRequestHandler):
 						self.send_header(k, v) 
 					self.end_headers()
 					for x in range(int(LCD4linux.MJPEGMode.value[1])):
-						self.wfile.write(boundary)
+						self.wfile.write(boundary.encode('utf-8'))
 						self.end_headers()
 					self.wfile.write(pic)
 					self.end_headers()
@@ -3668,7 +3668,7 @@ class MJPEGHandler2(BaseHTTPRequestHandler):
 				self.send_header(k, v) 
 			self.end_headers()
 			for x in range(int(LCD4linux.MJPEGMode.value[0])):
-				self.wfile.write(boundary)
+				self.wfile.write(boundary.encode('utf-8'))
 				self.end_headers()
 			while True:
 				para = MJPEG[LCD].get()
@@ -3687,12 +3687,12 @@ class MJPEGHandler2(BaseHTTPRequestHandler):
 						self.send_header(k, v) 
 					self.end_headers()
 					for x in range(int(LCD4linux.MJPEGMode.value[1])):
-						self.wfile.write(boundary)
+						self.wfile.write(boundary.encode('utf-8'))
 						self.end_headers()
 					self.wfile.write(pic)
 					self.end_headers()
 					for x in range(int(LCD4linux.MJPEGMode.value[2])):
-						self.wfile.write(boundary)
+						self.wfile.write(boundary.encode('utf-8'))
 						self.end_headers()
 		except:
 			from traceback import format_exc
@@ -3726,7 +3726,7 @@ class MJPEGHandler3(BaseHTTPRequestHandler):
 				self.send_header(k, v) 
 			self.end_headers()
 			for x in range(int(LCD4linux.MJPEGMode.value[0])):
-				self.wfile.write(boundary)
+				self.wfile.write(boundary.encode('utf-8'))
 				self.end_headers()
 			while True:
 				para = MJPEG[LCD].get()
@@ -3745,12 +3745,12 @@ class MJPEGHandler3(BaseHTTPRequestHandler):
 						self.send_header(k, v) 
 					self.end_headers()
 					for x in range(int(LCD4linux.MJPEGMode.value[1])):
-						self.wfile.write(boundary)
+						self.wfile.write(boundary.encode('utf-8'))
 						self.end_headers()
 					self.wfile.write(pic)
 					self.end_headers()
 					for x in range(int(LCD4linux.MJPEGMode.value[2])):
-						self.wfile.write(boundary)
+						self.wfile.write(boundary.encode('utf-8'))
 						self.end_headers()
 		except:
 			from traceback import format_exc
