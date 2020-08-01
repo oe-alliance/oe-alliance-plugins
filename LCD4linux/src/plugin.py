@@ -3634,7 +3634,7 @@ class MJPEGHandler1(BaseHTTPRequestHandler):
 					self.wfile.write(pic)
 					self.end_headers()
 					for x in range(int(LCD4linux.MJPEGMode.value[2])):
-						self.wfile.write(boundary)
+						self.wfile.write(boundary.encode('utf-8'))
 						self.end_headers()
 		except:
 			from traceback import format_exc
