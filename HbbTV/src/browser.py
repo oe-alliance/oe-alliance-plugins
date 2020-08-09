@@ -940,6 +940,8 @@ class Browser(Screen):
 		vbcfg.LOG("open url: %s %d" % (data, mode))
 		if strIsEmpty(data):
 			return
+		else:
+			data = bytes(data, 'utf-8')
 
 		try:
 			if self._cb_set_title not in vbcfg.g_main.vbhandler.onSetTitleCB:
@@ -1126,7 +1128,7 @@ class Browser(Screen):
 			eRCInput.getInstance().lock()
 			self.toggle_top()
 
-			VBController.command("BROWSER_MENU_CLOSE")
+			VBController.command("BROWSER_MENU_CLOSE", b"")
 			return
 		self._cmd_Exit()
 

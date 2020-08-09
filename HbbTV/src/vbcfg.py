@@ -68,6 +68,7 @@ def setPosition(params):
 			return
 
 # for debug True
+#g_debug = True
 g_debug = False
 
 def LogEntry(mode, string):

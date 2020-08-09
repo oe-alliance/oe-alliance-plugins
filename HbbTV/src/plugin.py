@@ -105,7 +105,7 @@ class VBHandler(VBHandlers):
 		return (True, None)
 
 	def _CB_CONTROL_TITLE(self, result, packet):
-		if packet.startswith('file://') or packet.startswith('http://'):
+		if packet.startswith(b'file://') or packet.startswith(b'http://'):
 			return (True, None)
 		for x in self.onSetTitleCB:
 			try:
@@ -117,7 +117,7 @@ class VBHandler(VBHandlers):
 		return (True, None)
 
 	def _CB_CONTROL_OK(self, result, packet):
-		if vbcfg.g_browser and packet.startswith('stop'):
+		if vbcfg.g_browser and packet.startswith(b'stop'):
 			vbcfg.g_browser.keyOK()
 		return (True, None)
 

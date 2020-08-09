@@ -109,7 +109,7 @@ def unit_test(demux, pmtid, sid):
 	reader = eAITSectionReader(demux, pmtid, sid)
 	if reader.doOpen():
 		reader.doParseApplications()
-		reader.doDump()
+		#reader.doDump()
 	else:
 		vbcfg.ERR("no data!!")
 
