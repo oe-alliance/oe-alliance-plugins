@@ -259,13 +259,13 @@ class Blindscan(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.list, session = session)
 		self["footnote"] = Label("")
 		
-		self["actions"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
+		self["actions"] = ActionMap(["ColorActions", "SetupActions"],
 		{
 			"red": self.keyCancel,
 			"cancel": self.keyCancel,
 		}, -2)
 
-		self["actions2"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
+		self["actions2"] = ActionMap(["ColorActions", "SetupActions"],
 		{
 			"green": self.keyGo,
 			"ok": self.keyGo,
@@ -273,7 +273,7 @@ class Blindscan(ConfigListScreen, Screen):
 		}, -2)
 		self["actions2"].setEnabled(False)
 
-		self["actions3"] = ActionMap(["ColorActions", "SetupActions", 'DirectionActions'],
+		self["actions3"] = ActionMap(["ColorActions", "SetupActions"],
 		{
 			"yellow": self.keyYellow,
 		}, -2)
