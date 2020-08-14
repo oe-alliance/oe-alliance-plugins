@@ -75,7 +75,7 @@ _blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
 defaults = {"search_type": "transponders", 
 	"user_defined_lnb_inversion": False,
 	"step_mhz_tbs5925": 10,
-	"polarization": eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1, # "vertical and horizontal"
+	"polarization": str(eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1), # "vertical and horizontal"
 	"start_symbol": 2,
 	"stop_symbol": 45,
 	"clearallservices": "no",
@@ -83,7 +83,7 @@ defaults = {"search_type": "transponders",
 	"dont_scan_known_tps": False,
 	"disable_sync_with_known_tps": False,
 	"disable_remove_duplicate_tps": False,
-	"filter_off_adjacent_satellites": 3}
+	"filter_off_adjacent_satellites": "3"}
 
 config.blindscan = ConfigSubsection()
 config.blindscan.search_type = ConfigSelection(default = defaults["search_type"], choices = [
@@ -92,12 +92,12 @@ config.blindscan.search_type = ConfigSelection(default = defaults["search_type"]
 config.blindscan.user_defined_lnb_inversion = ConfigBoolean(default = defaults["user_defined_lnb_inversion"], descriptions = {False: _("normal"), True: _("inverted")})
 config.blindscan.step_mhz_tbs5925 = ConfigInteger(default = defaults["step_mhz_tbs5925"], limits = (1, 20))
 config.blindscan.polarization = ConfigSelection(default = defaults["polarization"], choices = [
-	(eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1, _("vertical and horizontal")),
-	(eDVBFrontendParametersSatellite.Polarisation_Vertical, _("vertical")),
-	(eDVBFrontendParametersSatellite.Polarisation_Horizontal, _("horizontal")),
-	(eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2, _("circular right and circular left")),
-	(eDVBFrontendParametersSatellite.Polarisation_CircularRight, _("circular right")),
-	(eDVBFrontendParametersSatellite.Polarisation_CircularLeft, _("circular left"))])
+	(str(eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1), _("vertical and horizontal")),
+	(str(eDVBFrontendParametersSatellite.Polarisation_Vertical), _("vertical")),
+	(str(eDVBFrontendParametersSatellite.Polarisation_Horizontal), _("horizontal")),
+	(str(eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2), _("circular right and circular left")),
+	(str(eDVBFrontendParametersSatellite.Polarisation_CircularRight), _("circular right")),
+	(str(eDVBFrontendParametersSatellite.Polarisation_CircularLeft), _("circular left"))])
 config.blindscan.start_symbol = ConfigInteger(default = defaults["start_symbol"], limits = (1, 59))
 config.blindscan.stop_symbol = ConfigInteger(default = defaults["stop_symbol"], limits = (2, 60))
 config.blindscan.clearallservices = ConfigSelection(default = defaults["clearallservices"], choices = [("no", _("no")), ("yes", _("yes")), ("yes_hold_feeds", _("yes (keep feeds)"))])
@@ -106,10 +106,10 @@ config.blindscan.dont_scan_known_tps = ConfigYesNo(default = defaults["dont_scan
 config.blindscan.disable_sync_with_known_tps = ConfigYesNo(default = defaults["disable_sync_with_known_tps"])
 config.blindscan.disable_remove_duplicate_tps = ConfigYesNo(default = defaults["disable_remove_duplicate_tps"])
 config.blindscan.filter_off_adjacent_satellites = ConfigSelection(default = defaults["filter_off_adjacent_satellites"], choices = [
-	(0, _("no")),
-	(1, _("up to 1 degree")),
-	(2, _("up to 2 degrees")),
-	(3, _("up to 3 degrees"))])
+	("0", _("no")),
+	("1", _("up to 1 degree")),
+	("2", _("up to 2 degrees")),
+	("3", _("up to 3 degrees"))])
 			
 
 class BlindscanState(Screen, ConfigListScreen):
@@ -685,14 +685,14 @@ class Blindscan(ConfigListScreen, Screen):
 		else:
 			tmp_band=["high"]
 
-		if config.blindscan.polarization.value >  eDVBFrontendParametersSatellite.Polarisation_CircularRight: # must be searching both polarisations, either V and H, or R and L
+		if int(config.blindscan.polarization.value) >  eDVBFrontendParametersSatellite.Polarisation_CircularRight: # must be searching both polarisations, either V and H, or R and L
 			tmp_pol=["vertical", "horizontal"]
-		elif config.blindscan.polarization.value ==  eDVBFrontendParametersSatellite.Polarisation_CircularRight:
+		elif int(config.blindscan.polarization.value) ==  eDVBFrontendParametersSatellite.Polarisation_CircularRight:
 			tmp_pol=["vertical"]
-		elif config.blindscan.polarization.value ==  eDVBFrontendParametersSatellite.Polarisation_CircularLeft:
+		elif int(config.blindscan.polarization.value) ==  eDVBFrontendParametersSatellite.Polarisation_CircularLeft:
 			tmp_pol=["horizontal"]
 		else:
-			tmp_pol=[tab_pol[config.blindscan.polarization.value]]
+			tmp_pol=[tab_pol[int(config.blindscan.polarization.value)]]
 
 		self.doRun(tmp_list, tmp_pol, tmp_band)
 
@@ -967,11 +967,11 @@ class Blindscan(ConfigListScreen, Screen):
 			self.blindscan_container.execute(cmd)
 
 		display_pol = pol # Display the correct polarisation in the MessageBox below
-		if config.blindscan.polarization.value == eDVBFrontendParametersSatellite.Polarisation_CircularRight:
+		if int(config.blindscan.polarization.value) == eDVBFrontendParametersSatellite.Polarisation_CircularRight:
 			display_pol = _("circular right")
-		elif config.blindscan.polarization.value == eDVBFrontendParametersSatellite.Polarisation_CircularLeft:
+		elif int(config.blindscan.polarization.value) == eDVBFrontendParametersSatellite.Polarisation_CircularLeft:
 			display_pol = _("circular left")
-		elif  config.blindscan.polarization.value == eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2:
+		elif  int(config.blindscan.polarization.value) == eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2:
 			if pol == "horizontal":
 				display_pol = _("circular left")
 			else:
@@ -994,7 +994,7 @@ class Blindscan(ConfigListScreen, Screen):
 
 	def dataSundtekIsGood(self, data):
 		add_tp = False
-		pol = config.blindscan.polarization.value
+		pol = int(config.blindscan.polarization.value)
 		if pol == eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1 or pol == eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2:
 			add_tp = True
 		elif self.Sundtek_pol in (eDVBFrontendParametersSatellite.Polarisation_Vertical, eDVBFrontendParametersSatellite.Polarisation_CircularRight) and pol in (eDVBFrontendParametersSatellite.Polarisation_Vertical, eDVBFrontendParametersSatellite.Polarisation_CircularRight):
@@ -1037,11 +1037,11 @@ class Blindscan(ConfigListScreen, Screen):
 				if len(data) == 3 and data[0] == 'Scanning':
 					if data[1] == '13V':
 						self.Sundtek_pol = eDVBFrontendParametersSatellite.Polarisation_Vertical
-						if config.blindscan.polarization.value not in self.linear_polarisations:
+						if int(config.blindscan.polarization.value) not in self.linear_polarisations:
 							self.Sundtek_pol = eDVBFrontendParametersSatellite.Polarisation_CircularRight
 					elif data[1] == '18V':
 						self.Sundtek_pol = eDVBFrontendParametersSatellite.Polarisation_Horizontal
-						if config.blindscan.polarization.value not in self.linear_polarisations:
+						if int(config.blindscan.polarization.value) not in self.linear_polarisations:
 							self.Sundtek_pol = eDVBFrontendParametersSatellite.Polarisation_CircularLeft
 					if data[2] == 'Highband':
 						self.Sundtek_band = "high"
@@ -1163,11 +1163,11 @@ class Blindscan(ConfigListScreen, Screen):
 				if len(data) == 3 and data[0] == 'Scanning':
 					if data[1] == '13V':
 						self.Sundtek_pol = "V"
-						if config.blindscan.polarization.value not in self.linear_polarisations:
+						if int(config.blindscan.polarization.value) not in self.linear_polarisations:
 							self.Sundtek_pol = "R"
 					elif data[1] == '18V':
 						self.Sundtek_pol = "H"
-						if config.blindscan.polarization.value not in self.linear_polarisations:
+						if int(config.blindscan.polarization.value) not in self.linear_polarisations:
 							self.Sundtek_pol = "L"
 					if data[2] == 'Highband':
 						self.Sundtek_band = "high"
@@ -1240,8 +1240,8 @@ class Blindscan(ConfigListScreen, Screen):
 				self.tmp_tplist = self.removeDuplicateTransponders(self.tmp_tplist)
 
 			# Filter off transponders on neighbouring satellites
-			if config.blindscan.filter_off_adjacent_satellites.value:
-				 self.tmp_tplist = self.filterOffAdjacentSatellites(self.tmp_tplist, self.orb_position, config.blindscan.filter_off_adjacent_satellites.value)
+			if int(config.blindscan.filter_off_adjacent_satellites.value):
+				 self.tmp_tplist = self.filterOffAdjacentSatellites(self.tmp_tplist, self.orb_position, int(config.blindscan.filter_off_adjacent_satellites.value))
 
 			# Process transponders still in list
 			if self.tmp_tplist != []:
@@ -1459,11 +1459,11 @@ class Blindscan(ConfigListScreen, Screen):
 		for transponders in tplist:
 			if tplist[x].system == 0: # convert DVB-S transponders to auto fec as for some reason the tuner incorrectly returns 3/4 FEC for all transmissions
 				tplist[x].fec = 0
-			if config.blindscan.polarization.value == eDVBFrontendParametersSatellite.Polarisation_CircularRight: # Return circular transponders to correct polarisation
+			if int(config.blindscan.polarization.value) == eDVBFrontendParametersSatellite.Polarisation_CircularRight: # Return circular transponders to correct polarisation
 				tplist[x].polarisation = eDVBFrontendParametersSatellite.Polarisation_CircularRight
-			elif config.blindscan.polarization.value == eDVBFrontendParametersSatellite.Polarisation_CircularLeft: # Return circular transponders to correct polarisation
+			elif int(config.blindscan.polarization.value) == eDVBFrontendParametersSatellite.Polarisation_CircularLeft: # Return circular transponders to correct polarisation
 				tplist[x].polarisation = eDVBFrontendParametersSatellite.Polarisation_CircularLeft
-			elif config.blindscan.polarization.value == eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2: # Return circular transponders to correct polarisation
+			elif int(config.blindscan.polarization.value) == eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2: # Return circular transponders to correct polarisation
 				if tplist[x].polarisation == eDVBFrontendParametersSatellite.Polarisation_Horizontal: # Return circular transponders to correct polarisation
 					tplist[x].polarisation = eDVBFrontendParametersSatellite.Polarisation_CircularLeft
 				else:
@@ -1525,11 +1525,11 @@ class Blindscan(ConfigListScreen, Screen):
 		xml.append('		Satellite: %s\n' % (self.sat_name))
 		xml.append('		Start frequency: %dMHz\n' % (self.blindscan_start_frequency))
 		xml.append('		Stop frequency: %dMHz\n' % (self.blindscan_stop_frequency))
-		xml.append('		Polarization: %s\n' % (polarisation[config.blindscan.polarization.value]))
+		xml.append('		Polarization: %s\n' % (polarisation[int(config.blindscan.polarization.value)]))
 		xml.append('		Lower symbol rate: %d\n' % (config.blindscan.start_symbol.value * 1000))
 		xml.append('		Upper symbol rate: %d\n' % (config.blindscan.stop_symbol.value * 1000))
 		xml.append('		Only save unknown tranponders: %s\n' % (known_txp))
-		xml.append('		Filter out adjacent satellites: %s\n' % (adjacent[config.blindscan.filter_off_adjacent_satellites.value]))
+		xml.append('		Filter out adjacent satellites: %s\n' % (adjacent[int(config.blindscan.filter_off_adjacent_satellites.value)]))
 		xml.append('		Scan duration: %d seconds\n' % (self.runtime))
 		xml.append('-->\n\n')
 		xml.append('<satellites>\n')
