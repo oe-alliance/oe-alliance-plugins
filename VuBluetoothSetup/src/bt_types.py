@@ -40,7 +40,7 @@ g_event_description[BT_EVENT_BT_CONNECTED] = "BT dongle is inserted!"
 g_event_description[BT_EVENT_BT_DISCONNECTED] = "BT dongle is removed!"
 
 def getEventDesc(event):
-	if event in g_event_description.keys():
+	if event in list(g_event_description.keys()):
 		return g_event_description[event]
 	return "Unknown event"
 

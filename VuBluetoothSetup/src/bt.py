@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 
 from Screens.MessageBox import MessageBox
@@ -267,7 +265,7 @@ class BTAutoAudioConnect:
 		if isEnable and bd_addr:
 			pairedDevices = self.getPairedDevice()
 			if pairedDevices:
-				for (k, v) in pairedDevices.items():
+				for (k, v) in list(pairedDevices.items()):
 					if v['bd_addr'] == bd_addr:
 						self.doStartAudioConnectTimer(bd_addr)
 						return
@@ -345,7 +343,7 @@ class BTAutoAudioConnect:
 
 		try:
 			global BT_AUDIO_ONOFF_PROC
-			fd = open(BT_AUDIO_ONOFF_PROC, 'w')
+			fd = open(BT_AUDIO_ONOFF_PROC,'w')
 			data = enable and "on" or "off"
 			fd.write(data)
 			fd.close()
@@ -357,7 +355,7 @@ class BTAutoAudioConnect:
 		if self.btaudioActivated:
 			data = int(config.plugins.bluetoothsetup.audiodelay.value)*90
 			if data < 0:
-				data = hex(int('0xffffffff', 16)+data-1).strip('0x')
+				data = hex(int('0xffffffff',16)+data-1).strip('0x')
 			elif data > 0:
 				data = hex(data).strip('0x')
 			else:
@@ -368,7 +366,7 @@ class BTAutoAudioConnect:
 		if self.btaudioActivated or updateNow:
 			try:
 				global BT_AUDIO_DELAY_PROC
-				fd = open(BT_AUDIO_DELAY_PROC, 'w')
+				fd = open(BT_AUDIO_DELAY_PROC,'w')
 				fd.write(data)
 				fd.close()
 			except:
@@ -381,7 +379,7 @@ class BTAutoAudioConnect:
 		audio_connected = None
 		paired_devices = self.getPairedDevice()
 		if paired_devices:
-			for (k, v) in paired_devices.items():
+			for (k, v) in list(paired_devices.items()):
 				if (isAudioProfile(v['profile'])) and v['isConnected']:
 					audio_connected = {}
 					audio_connected['name'] = v['name']
@@ -557,7 +555,7 @@ class BTOTAProcess:
 		connected = False
 		paired_devices = self.getPairedDevice()
 		if paired_devices:
-			for (k, v) in paired_devices.items():
+			for (k, v) in list(paired_devices.items()):
 				if v['name'] == bt_types.BT_VUPLUS_RCU_NAME:
 					if v['isConnected']:
 						connected = True
@@ -664,7 +662,7 @@ class PyBluetoothInterface(VoiceEventHandler, BTVolumeControl, BTAutoAudioConnec
 		pairedDevices = self.vubt.getPairedDevice()
 
 		if pairedDevices:
-			for (k, v) in pairedDevices.items():
+			for (k, v) in list(pairedDevices.items()):
 				if v['isConnected']:
 					self.vubt.requestDisconnect(v['bd_addr'])
 

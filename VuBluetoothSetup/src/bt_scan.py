@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
 from Screens.Screen import Screen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
@@ -85,7 +83,7 @@ class BluetoothDiscovery(BluetoothTask):
 		pairedDeviceBdaddr = []
 		pairedDevices = self.vubt.getPairedDevice()
 		if pairedDevices:
-			for (k, v) in pairedDevices.items():
+			for (k, v) in list(pairedDevices.items()):
 				pairedDeviceBdaddr.append(v['bd_addr'])
 
 		return pairedDeviceBdaddr
@@ -317,7 +315,7 @@ class BluetoothDiscoveryScreen(Screen, BluetoothDiscovery):
 		</screen>
 		"""
 
-	def __init__(self, session):
+	def __init__(self,session):
 		Screen.__init__(self, session)
 		BluetoothDiscovery.__init__(self)
 		self.session = session	
@@ -356,7 +354,8 @@ class BluetoothDiscoveryScreen(Screen, BluetoothDiscovery):
 		self.deviceList = []
 		discoverd_devices = self.getDiscDevice()
 		if discoverd_devices:
-			device_keys = sorted(discoverd_devices.keys())
+			device_keys = list(discoverd_devices.keys())
+			device_keys.sort()
 			for k in device_keys:
 				v = discoverd_devices[k]
 				if v["bd_addr"] in self.pairedDevices:
@@ -538,14 +537,14 @@ class BluetoothRCUSetup(BluetoothDiscoveryScreen):
 		self.deviceList = []
 		discoverd_devices = self.getDiscDevice()
 		if discoverd_devices:
-			for (k, v) in discoverd_devices.items():
+			for (k, v) in list(discoverd_devices.items()):
 				if v["name"] != bt_types.BT_VUPLUS_RCU_NAME:
 					continue
 
 				device_info = v.copy()
 				bd_addr = device_info['bd_addr']
 				name = device_info["name"]
-				desc = "%s (%s)" % (name, bd_addr)
+				desc = "%s (%s)" % (name , bd_addr)
 
 				icon = getIcon(bt_types.BT_PROFILE_VU_RC)
 				deviceEntry = (desc, icon, device_info)

@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
 # GUI (Screens)
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -222,7 +220,7 @@ class VuRcuOtaUpdate(Screen, HelpableScreen, BluetoothTask):
 		print("pairedDevices : ", pairedDevices)
 
 		if pairedDevices:
-			for (k, v) in pairedDevices.items():
+			for (k, v) in list(pairedDevices.items()):
 				mac = v['bd_addr']
 				name = v['name']
 				profile = v["profile"]

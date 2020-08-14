@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
@@ -315,7 +313,8 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 
 		pairedDevices = self.vubt.getPairedDevice()
 		if pairedDevices:
-			device_keys = sorted(pairedDevices.keys())
+			device_keys = list(pairedDevices.keys())
+			device_keys.sort()
 
 			for k in device_keys:
 				v = pairedDevices[k]
