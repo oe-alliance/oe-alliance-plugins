@@ -1,5 +1,6 @@
 from __future__ import print_function
 from __future__ import absolute_import
+from __future__ import division
 # for localized messages
 from . import _
 
@@ -1705,7 +1706,7 @@ class Blindscan(ConfigListScreen, Screen):
 		if len(tps) < 1:
 			return False
 		# freq, sr, pol, fec, inv, orb, sys, mod, roll, pilot [, MIS, pls_mode, pls_code, t2mi]
-		transponder = (tps[0][1] / 1000, tps[0][2] / 1000, tps[0][3], tps[0][4], 2, orb_pos, tps[0][5], tps[0][6], tps[0][8], tps[0][9])
+		transponder = (tps[0][1] // 1000, tps[0][2] // 1000, tps[0][3], tps[0][4], 2, orb_pos, tps[0][5], tps[0][6], tps[0][8], tps[0][9])
 		if not self.prepareFrontend():
 			print("[Blindscan][startDishMovingIfRotorSat] self.prepareFrontend() failed")
 			return False
