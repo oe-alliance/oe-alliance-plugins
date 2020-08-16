@@ -391,9 +391,9 @@ class SatelliteTransponderSearchSupport:
 		return mhz_complete, mhz_done
 
 	def startSatelliteTransponderSearch(self, nim_idx, orb_pos):
-		if hasattr(self, 'self.frontend'):
+		if hasattr(self, 'frontend'):
 			del self.frontend
-		if hasattr(self, 'self.channel'):
+		if hasattr(self, 'channel'):
 			del self.channel
 		self.frontend = self.channel = None
 		self.orb_pos = orb_pos
@@ -808,9 +808,9 @@ class DmmBlindscan(ConfigListScreen, Screen, TransponderSearchSupport, Satellite
 			self.session.openWithCallback(self.startScanCallback, ServiceScan, [{"transponders": tlist, "feid": feid, "flags": flags, "networkid": networkid}])
 
 	def keyCancel(self):
-		if hasattr(self, 'self.frontend'):
+		if hasattr(self, 'frontend'):
 			del self.frontend
-		if hasattr(self, 'self.channel'):
+		if hasattr(self, 'channel'):
 			del self.channel
 		self.session.nav.playService(self.session.postScanService)
 		for x in self["config"].list:
@@ -819,9 +819,9 @@ class DmmBlindscan(ConfigListScreen, Screen, TransponderSearchSupport, Satellite
 
 	def startScanCallback(self, answer=True):
 		if answer:
-			if hasattr(self, 'self.frontend'):
+			if hasattr(self, 'frontend'):
 				del self.frontend
-			if hasattr(self, 'self.channel'):
+			if hasattr(self, 'channel'):
 				del self.channel
 			self.session.nav.playService(self.session.postScanService)
 			self.close(True)
