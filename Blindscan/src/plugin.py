@@ -139,16 +139,19 @@ class BlindscanState(Screen, ConfigListScreen):
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = StaticText("")
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+		self.configBooleanTpList = []
+		self.tp_list = []
+		ConfigListScreen.__init__(self, self.tp_list, session = self.session)
+
+		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"cancel": self.keyCancel,
-			"red": self.keyCancel,
 		}, -2)
 
-		self["actions2"] = ActionMap(["OkCancelActions", "ColorActions"],
+		self["actions2"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"ok": self.scan,
-			"green": self.scan,
+			"save": self.scan,
 			"yellow": self.selectAll,
 			"blue": self.deselectAll,
 		}, -2)
@@ -163,9 +166,6 @@ class BlindscanState(Screen, ConfigListScreen):
 			self["post_action"].setText(post_action)
 			self["actions2"].setEnabled(False)
 
-		self.configBooleanTpList = []
-		self.tp_list = []
-		ConfigListScreen.__init__(self, self.tp_list, session = self.session)
 		for t in tp_list:
 			cb = ConfigBoolean(default = False, descriptions = {False: _("don't scan"), True: _("scan")})
 			self.configBooleanTpList.append((cb, t[1]))
@@ -259,21 +259,20 @@ class Blindscan(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.list, session = session)
 		self["footnote"] = Label("")
 		
-		self["actions"] = ActionMap(["ColorActions", "SetupActions"],
+		self["actions"] = ActionMap(["SetupActions"],
 		{
-			"red": self.keyCancel,
 			"cancel": self.keyCancel,
 		}, -2)
 
 		self["actions2"] = ActionMap(["ColorActions", "SetupActions"],
 		{
-			"green": self.keyGo,
 			"ok": self.keyGo,
+			"save": self.keyGo,
 			"blue": self.resetDefaults,
 		}, -2)
 		self["actions2"].setEnabled(False)
 
-		self["actions3"] = ActionMap(["ColorActions", "SetupActions"],
+		self["actions3"] = ActionMap(["ColorActions"],
 		{
 			"yellow": self.keyYellow,
 		}, -2)
