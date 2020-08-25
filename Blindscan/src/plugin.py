@@ -307,16 +307,6 @@ class Blindscan(ConfigListScreen, Screen):
 		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
 		self.setBlueText()
 
-	def createSummary(self):
-		from Screens.Setup import SetupSummary
-		class SetupSummary2(SetupSummary):
-			def __init__(self, session, parent):
-				SetupSummary.__init__(self, session, parent)
-			def selectionChanged(self):
-				self["SetupEntry"].text = self.parent.getCurrentEntry()
-				self["SetupValue"].text = self.parent.getCurrentValue()
-		return SetupSummary2
-
 	def ScanNimsocket(self, filepath = '/proc/bus/nim_sockets'):
 		_nimSocket = {}
 		try:
