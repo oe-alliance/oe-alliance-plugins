@@ -1297,8 +1297,6 @@ class Blindscan(ConfigListScreen, Screen):
 
 		tlist = retval[1]
 		networkid = 0
-		self.scan_session = None
-
 		flags = 0
 		tmp = config.blindscan.clearallservices.value
 		if tmp == "no":
