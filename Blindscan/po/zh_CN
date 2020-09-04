@@ -1,0 +1,424 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Blindscan\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-19 12:55+0000\n"
+"PO-Revision-Date: 2020-08-27 17:18+0800\n"
+"Last-Translator: 孤独之剑 <haotzyy1970@163.com>\n"
+"Language-Team: MCelliot_g <mcelliot_g@hotmail.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid ""
+"\n"
+"The second slot of this dual tuner may not support blind scan."
+msgstr ""
+"\n"
+"此双调谐器的第二个插槽可能不支持盲扫描."
+
+msgid ""
+"\n"
+"You must use the power adapter."
+msgstr ""
+"\n"
+"你必须使用电源适配器."
+
+msgid "   Starting Sundtek hardware blind scan."
+msgstr "   启动正常硬件盲扫描."
+
+msgid " tuner."
+msgstr " 调谐器."
+
+msgid ""
+"\"channel scan\" searches for channels and saves them to your receiver; "
+"\"transponder scan\" does a transponder search and displays the results "
+"allowing user to select some or all transponder. Both options save the "
+"results in satellites.xml format under /tmp"
+msgstr ""
+"\"频道扫描\" 搜索频道并将其保存到接收器; \"转发器扫描\" 收发器是否搜索并显示"
+"结果 并将结果保存到satellites.xml文件中的/tmp下"
+
+msgid "%d transponder(s) found"
+msgstr "找到%d个转发器"
+
+msgid "%d transponders found at %d:%02d min"
+msgstr "在%d：%02d分钟找到%d个转发器"
+
+msgid "%d:%02d/%d:%02dmin"
+msgstr "用时%d:%02d/%d:%02d分钟"
+
+msgid "%dMHz scanned"
+msgstr "已扫描 %dMHz"
+
+msgid "AUTOMATICALLY start service searching, press green to change"
+msgstr "自动开始频道搜索,按绿色键进行更改"
+
+msgid "AUTOMATICALLY start service searching, press green to change."
+msgstr "自动开始频道搜索,按绿色键进行更改."
+
+msgid "Accuracy (higher is better)"
+msgstr "精度(越高越好)"
+
+msgid "Blind scan"
+msgstr "盲扫"
+
+msgid "Blind scan for DVB-S2 tuners"
+msgstr "DVB-S2调谐器盲扫描"
+
+msgid "Blind scan state"
+msgstr "盲扫描状态"
+
+msgid "Blindscan"
+msgstr "盲扫"
+
+msgid "Blindscan is not supported in "
+msgstr "不支持盲扫 "
+
+msgid ""
+"CAUTION: If you select \"yes\" the scan will not remove \"duplicated\" "
+"transponders from the list. Default is \"no\". Only change this if you "
+"understand why you are doing it."
+msgstr ""
+"注意:如果选择\"是\"扫描将不会删除\"重复\" 列表中的转发器.默认为\"否\".只有当"
+"你明白为什么要这么做的时候, 才能改变这个."
+
+msgid ""
+"CAUTION: If you select \"yes\" the scan will not sync with transponders "
+"listed in satellites.xml. Default is \"no\". Only change this if you "
+"understand why you are doing it."
+msgstr ""
+"注意:如果选择\"是\"扫描将不会与satellites.xml中列出的转发器同步. 默认为\"否"
+"\".只有当你明白为什么要这么做的时候,才能改变这个."
+
+msgid ""
+"CAUTION: Only select \"inverted\" if you are using an inverted LNB (i.e. an "
+"LNB where the local oscillator frequency is greater than the scan "
+"frequency). Default is \"normal\". Only change this if you understand why "
+"you are doing it."
+msgstr ""
+"注意:如果使用反向高频头(即本地振荡器频率大于扫描频率的高频头),则仅选择\"倒置"
+"\", 默认为\"标准\".只有当你明白为什么要这么做的时候,才能改变这个."
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Change"
+msgstr "更换"
+
+msgid "Clear before scan"
+msgstr "扫描前清除"
+
+msgid ""
+"Current Status: %d/%d\n"
+"Satellite: %s\n"
+"Polarization: %s  Frequency range: %d - %d MHz  Symbol rates: %d - %d MHz"
+msgstr ""
+"当前状态: %d/%d\n"
+"卫星: %s \n"
+"极化: %s  频率范围: %d - %d MHz  符号率: %d - %d MHz"
+
+msgid "DVB-S + DVB-S2"
+msgstr "DVB-S + DVB-S2"
+
+msgid "DVB-S only"
+msgstr "仅限DVB-S"
+
+msgid "Deselect all"
+msgstr "取消全选"
+
+msgid "Disable remove duplicates"
+msgstr "禁用重复删除项"
+
+msgid "Disable sync with known transponders"
+msgstr "禁用与已知转发器的同步"
+
+msgid "Exit"
+msgstr "退出"
+
+msgid "Filter out adjacent satellites"
+msgstr "滤除相邻卫星"
+
+msgid "Frequency values must be between %d MHz and %d MHz"
+msgstr "频率值必须介于 %d MHz 和 %d MHz之间"
+
+msgid "Frequency values must be between %d MHz and %d MHz (C-band)"
+msgstr "频率值必须介于 %d MHz 和 %d MHz (C波段)之间"
+
+msgid "Hardware blind scan is not supported by this tuner (%s)!"
+msgstr "此调谐器 (%s) 不支持硬件盲扫描!"
+
+msgid "Horizontal"
+msgstr "水平"
+
+msgid ""
+"If you select \"yes\" all channels on the satellite being searched will be "
+"deleted before starting the current search, yes (keep feeds) means the same "
+"but hold all feed services/transponders."
+msgstr ""
+"如果选择\"是\"则在开始当前搜索之前将删除正在搜索的卫星上的所有频道, 是(保留"
+"源)表示相同,但保留所有源服务/转发器."
+
+msgid ""
+"If you select \"yes\" the scan will only save channels that are not "
+"encrypted; \"no\" will find encrypted and non-encrypted channels."
+msgstr ""
+"如果选择\"是\"则扫描将只保存未加密的 频道;\"否\"将查找已加密和未加密的频道."
+
+msgid ""
+"If you select \"yes\" the scan will only search transponders not listed in "
+"satellites.xml"
+msgstr "如果选择\"是\"则扫描将只搜索satellites.xml中未列出的转发器"
+
+msgid "It seems manufacturer does not support blind scan for this tuner."
+msgstr "制造商似乎不支持对此调谐器进行盲扫描."
+
+msgid "LNB inversion"
+msgstr "LNB转换"
+
+msgid "LNB of current satellite not compatible with plugin"
+msgstr "当前卫星的LNB与插件不兼容"
+
+msgid ""
+"Looking for available transponders.\n"
+"This will take a long time, please be patient."
+msgstr ""
+"正在寻找可用的转发器.\n"
+"这需要很长时间,请耐心等待."
+
+msgid "MANUALLY start service searching, press green to change."
+msgstr "手动开始频道搜索,按绿色键进行更改."
+
+msgid "Maybe the reason that recording is currently running."
+msgstr "可能是当前正在运行记录的原因."
+
+msgid "Network scan"
+msgstr "网络扫描"
+
+msgid ""
+"No new transponders found! \n"
+"\n"
+"Only transponders already listed in satellites.xml \n"
+"have been found for those search parameters!"
+msgstr ""
+"没有发现新的转发器! \n"
+"\n"
+"仅satellites.xml中已列出的转发器 \n"
+"已经找到这些搜索参数!"
+
+msgid "No transponders were found for those search parameters!"
+msgstr "没有找到这些搜索参数的转发器!"
+
+msgid ""
+"No tuner is enabled!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+"没有启用调谐器!\n"
+"开始频道扫描之前,请先设置您的调谐器设置."
+
+msgid "Nothing to scan! Press Exit!"
+msgstr "无需扫描!按‘Exit’键退出!"
+
+msgid "Only free scan"
+msgstr "仅扫描免费频道"
+
+msgid "Only scan unknown transponders"
+msgstr "仅扫描未知转发器"
+
+msgid "Open xml file"
+msgstr "打开xml文件"
+
+msgid "Please setup your tuner configuration."
+msgstr "请设置调谐器配置."
+
+msgid "Polarisation"
+msgstr "极化"
+
+msgid "Press OK to start the scan"
+msgstr "按'OK'键开始扫描"
+
+msgid "Press OK to start the scan."
+msgstr "按'OK'键开始扫描."
+
+msgid "Press green to start service searching."
+msgstr "按绿色键开始频道搜索."
+
+msgid "Rotor: "
+msgstr "极轴: "
+
+msgid "Satellite"
+msgstr "卫星"
+
+msgid "Satellite blind scan"
+msgstr "盲扫"
+
+msgid "Scan"
+msgstr "扫描"
+
+msgid "Scan Step in MHz(TBS5925)"
+msgstr "以MHz为单位扫描步进(TBS5925)"
+
+msgid "Scan satellites for new transponders"
+msgstr "扫描卫星寻找新的转发器"
+
+msgid "Scan start frequency"
+msgstr "扫描起始频率"
+
+msgid "Scan start symbolrate"
+msgstr "扫描起始符号率"
+
+msgid "Scan stop frequency"
+msgstr "扫描停止频率"
+
+msgid "Scan stop symbolrate"
+msgstr "扫描停止符号率"
+
+msgid ""
+"Search completed\n"
+"%d transponders found in %d:%02d minutes.\n"
+"Details saved in: %s"
+msgstr ""
+"搜索完成\n"
+"在 %d 中找到 %d个转发器:%02d分钟.\n"
+"详细信息保存在: %s"
+
+msgid ""
+"Search completed. %d transponders found.\n"
+"\n"
+"Details saved in:\n"
+"%s"
+msgstr ""
+"搜索完成.找到%d个转发器\n"
+"\n"
+"详细信息保存在:\n"
+"%s"
+
+msgid "Search type"
+msgstr "搜索类型"
+
+msgid "Select a tuner that is configured for the satellite you wish to search"
+msgstr "为您希望搜索的卫星选择一个调谐器"
+
+msgid "Select all"
+msgstr "选择全部"
+
+msgid "Select the satellite you wish to search"
+msgstr "选择要搜索的卫星"
+
+msgid ""
+"Select transponders and press green to scan.\n"
+"Press yellow to select all transponders and blue to deselect all."
+msgstr ""
+"选择转发器并按绿色键扫描.\n"
+"按黄色键选择所有转发器,按蓝色键取消选择所有."
+
+msgid "Smaller steps takes longer but scan is more thorough"
+msgstr "较小的步骤需要更长的时间,但扫描更彻底"
+
+msgid "Sorry, this tuner is in use."
+msgstr "抱歉,此调谐器正在使用中."
+
+msgid "Step %d %d:%02d min"
+msgstr "步骤 %d %d:%02d 分钟"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
+msgstr "符号速率值以兆符号为单位;请输入介于1和44之间的值"
+
+msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
+msgstr "符号速率值以兆符号为单位;请输入介于2和45之间的值"
+
+msgid "The blindscan run was cancelled by the user."
+msgstr "用户取消了盲扫描运行."
+
+msgid "The suggested polarisation for this satellite is \"%s\""
+msgstr "这颗卫星的建议极化是 \"%s\""
+
+msgid "Transponder searching finished!"
+msgstr "转发器搜索完成!"
+
+msgid "Try to find used satellite transponders..."
+msgstr "正在搜索卫星转发器,请稍候..."
+
+msgid "Tuner"
+msgstr "调谐器"
+
+msgid "Use Sundtek full hardware blind scan!"
+msgstr "使用全硬件盲扫描!"
+
+msgid "Vertical"
+msgstr "垂直"
+
+msgid "Vertical and Horizontal"
+msgstr "垂直和水平"
+
+msgid ""
+"When a neighbouring satellite is very strong this avoids searching "
+"transponders known to be coming from the neighbouring satellite."
+msgstr "当相邻卫星非常强大时,这将避免搜索已知来自相邻卫星的转发器."
+
+msgid "circular left"
+msgstr "左旋L"
+
+msgid "circular left/right"
+msgstr "圆极化L/R"
+
+msgid "circular right"
+msgstr "右旋R"
+
+msgid "circular right and circular left"
+msgstr "圆极化R和圆极化L"
+
+msgid "couldn't allocate tuner %d for blindscan!!!"
+msgstr "无法分配调谐 %d 的盲扫！!!!"
+
+msgid "don't scan"
+msgstr "不扫描"
+
+msgid "horizontal"
+msgstr "水平"
+
+msgid "inverted"
+msgstr "倒置"
+
+msgid "no"
+msgstr "否"
+
+msgid "normal"
+msgstr "标准"
+
+msgid "save to XML file"
+msgstr "保存到XML文件"
+
+msgid "scan"
+msgstr "扫描"
+
+msgid "scan for channels"
+msgstr "频道扫描"
+
+msgid "scan for transponders"
+msgstr "转发器扫描"
+
+msgid "up to 1 degree"
+msgstr "至1度"
+
+msgid "up to 2 degrees"
+msgstr "至2度"
+
+msgid "up to 3 degrees"
+msgstr "至3度"
+
+msgid "vertical"
+msgstr "垂直"
+
+msgid "vertical and horizontal"
+msgstr "垂直和水平"
+
+msgid "yes"
+msgstr "是"
+
+msgid "yes (keep feeds)"
+msgstr "是(保留数据)"
