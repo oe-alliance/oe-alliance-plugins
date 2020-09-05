@@ -38,7 +38,8 @@ from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirec
 from six.moves.urllib.error import URLError, HTTPError
 import datetime, os, re, socket, sys, time, six
 from os import path
-from .util import transCHANNEL, applySkinVars, shortenChannel, transWIKI, transHTML, cleanHTML, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, TVSHDPNG, serviceDB, channelDB, BlinkingLabel, ItemList, parsedetail, fiximgLink
+from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, TVSHDPNG, serviceDB, channelDB, BlinkingLabel, ItemList, makeWeekDay
+from .parser import transCHANNEL, shortenChannel, transWIKI, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable
 
 try:
     from cookielib import MozillaCookieJar
@@ -298,21 +299,7 @@ class TVTippsView(tvBaseScreen):
         self.date = datetime.date.today()
         one_day = datetime.timedelta(days=1)
         self.nextdate = self.date + one_day
-        weekday = self.date.weekday()
-        if weekday == 0:
-            self.weekday = 'Montag'
-        elif weekday == 1:
-            self.weekday = 'Dienstag'
-        elif weekday == 2:
-            self.weekday = 'Mittwoch'
-        elif weekday == 3:
-            self.weekday = 'Donnerstag'
-        elif weekday == 4:
-            self.weekday = 'Freitag'
-        elif weekday == 5:
-            self.weekday = 'Samstag'
-        elif weekday == 6:
-            self.weekday = 'Sonntag'
+        self.weekday = makeWeekDay(self.date.weekday())
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             self.backcolor = False
         else:
@@ -896,31 +883,7 @@ class TVTippsView(tvBaseScreen):
             self['searchtext'].show()
             self.setTitle('')
             self.setTitle(title.group(1))
-        startpos = output.find('<table class="primetime-table">')
-        endpos = output.find('</table>')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
-        bereich = sub('class="search-starttimes">\n\\s+<span>', '<td>TIME', bereich)
-        bereich = sub('<h3><a href="', '<td>LINK', bereich)
-        if self.showgenre == False:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title=".*?">', '</td><td>TITEL', bereich)
-            bereich = sub('</a></h3>', '</td>', bereich)
-        else:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title="', '</td><td>TITEL', bereich)
-            bereich = sub('">.*?</a></h3>', '</td>', bereich)
-        bereich = sub('<span class="logotype chl_bg_. c-', '<td>LOGO', bereich)
-        bereich = sub('<p>', '<td>GENRE', bereich)
-        bereich = sub('<li class="', '<td>INFO', bereich)
-        bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
-        bereich = sub('<span class="editorial-', '<td>RATING', bereich)
-        bereich = sub('"></span>', '', bereich)
-        bereich = sub('</span>\n', '</td>', bereich)
-        bereich = sub('</span>', '', bereich)
-        bereich = sub('\n\\s+</div>\n', '</td>', bereich)
-        bereich = sub('\n.*?</p>', '</td>', bereich)
-        bereich = sub('"></li>', '</td>', bereich)
-        bereich = sub('\n.*?<br/><em class=".*?</em>', '', bereich)
+        bereich = parsePrimeTimeTable(output, self.showgenre)
         a = findall('<td>(.*?)</td>', bereich)
         y = 0
         offset = 10
@@ -1907,21 +1870,7 @@ class TVTippsView(tvBaseScreen):
 
                 one_day = datetime.timedelta(days=1)
                 tomorrow = today + one_day
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextday = sub('date=(.*?FIN)', 'date=', self.link)
                 nextday = nextday + str(tomorrow)
                 self.date = tomorrow
@@ -1931,21 +1880,7 @@ class TVTippsView(tvBaseScreen):
                 today = datetime.date.today()
                 one_day = datetime.timedelta(days=1)
                 tomorrow = today + one_day
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextday = self.link + '?date=' + str(tomorrow)
                 self.date = tomorrow
                 one_day = datetime.timedelta(days=1)
@@ -1973,21 +1908,7 @@ class TVTippsView(tvBaseScreen):
 
                 one_day = datetime.timedelta(days=1)
                 yesterday = today - one_day
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevday = sub('date=(.*?FIN)', 'date=', self.link)
                 prevday = prevday + str(yesterday)
                 self.date = yesterday
@@ -1997,21 +1918,7 @@ class TVTippsView(tvBaseScreen):
                 today = datetime.date.today()
                 one_day = datetime.timedelta(days=1)
                 yesterday = today - one_day
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevday = self.link + '?date=' + str(yesterday)
                 self.date = yesterday
                 one_day = datetime.timedelta(days=1)
@@ -2039,21 +1946,7 @@ class TVTippsView(tvBaseScreen):
 
                 one_week = datetime.timedelta(days=7)
                 tomorrow = today + one_week
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextweek = sub('date=(.*?FIN)', 'date=', self.link)
                 nextweek = nextweek + str(tomorrow)
                 self.date = tomorrow
@@ -2063,21 +1956,7 @@ class TVTippsView(tvBaseScreen):
                 today = datetime.date.today()
                 one_week = datetime.timedelta(days=7)
                 tomorrow = today + one_week
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextweek = self.link + '?date=' + str(tomorrow)
                 self.date = tomorrow
                 one_week = datetime.timedelta(days=7)
@@ -2104,21 +1983,7 @@ class TVTippsView(tvBaseScreen):
 
                 one_week = datetime.timedelta(days=7)
                 yesterday = today - one_week
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevweek = sub('date=(.*?FIN)', 'date=', self.link)
                 prevweek = prevweek + str(yesterday)
                 self.date = yesterday
@@ -2128,21 +1993,7 @@ class TVTippsView(tvBaseScreen):
                 today = datetime.date.today()
                 one_week = datetime.timedelta(days=7)
                 yesterday = today - one_week
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevweek = self.link + '?date=' + str(yesterday)
                 self.date = yesterday
                 one_week = datetime.timedelta(days=7)
@@ -3156,21 +3007,7 @@ class TVNeuView(tvBaseScreen):
         self.date = datetime.date.today()
         one_day = datetime.timedelta(days=1)
         self.nextdate = self.date + one_day
-        weekday = self.date.weekday()
-        if weekday == 0:
-            self.weekday = 'Montag'
-        elif weekday == 1:
-            self.weekday = 'Dienstag'
-        elif weekday == 2:
-            self.weekday = 'Mittwoch'
-        elif weekday == 3:
-            self.weekday = 'Donnerstag'
-        elif weekday == 4:
-            self.weekday = 'Freitag'
-        elif weekday == 5:
-            self.weekday = 'Samstag'
-        elif weekday == 6:
-            self.weekday = 'Sonntag'
+        self.weekday = makeWeekDay(self.date.weekday())
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             self.backcolor = False
         else:
@@ -3729,31 +3566,7 @@ class TVNeuView(tvBaseScreen):
             self['searchtext'].show()
             self.setTitle('')
             self.setTitle(title.group(1))
-        startpos = output.find('<table class="primetime-table">')
-        endpos = output.find('</table>')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
-        bereich = sub('class="search-starttimes">\n\\s+<span>', '<td>TIME', bereich)
-        bereich = sub('<h3><a href="', '<td>LINK', bereich)
-        if self.showgenre == False:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title=".*?">', '</td><td>TITEL', bereich)
-            bereich = sub('</a></h3>', '</td>', bereich)
-        else:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title="', '</td><td>TITEL', bereich)
-            bereich = sub('">.*?</a></h3>', '</td>', bereich)
-        bereich = sub('<span class="logotype chl_bg_. c-', '<td>LOGO', bereich)
-        bereich = sub('<p>', '<td>GENRE', bereich)
-        bereich = sub('<li class="', '<td>INFO', bereich)
-        bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
-        bereich = sub('<span class="editorial-', '<td>RATING', bereich)
-        bereich = sub('"></span>', '', bereich)
-        bereich = sub('</span>\n', '</td>', bereich)
-        bereich = sub('</span>', '', bereich)
-        bereich = sub('\n\\s+</div>\n', '</td>', bereich)
-        bereich = sub('\n.*?</p>', '</td>', bereich)
-        bereich = sub('"></li>', '</td>', bereich)
-        bereich = sub('\n.*?<br/><em class=".*?</em>', '', bereich)
+        bereich = parsePrimeTimeTable(output, self.showgenre)
         a = findall('<td>(.*?)</td>', bereich)
         y = 0
         offset = 10
@@ -4736,21 +4549,7 @@ class TVNeuView(tvBaseScreen):
 
                 one_day = datetime.timedelta(days=1)
                 tomorrow = today + one_day
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextday = sub('date=(.*?FIN)', 'date=', self.link)
                 nextday = nextday + str(tomorrow)
                 self.date = tomorrow
@@ -4760,21 +4559,7 @@ class TVNeuView(tvBaseScreen):
                 today = datetime.date.today()
                 one_day = datetime.timedelta(days=1)
                 tomorrow = today + one_day
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextday = self.link + '?date=' + str(tomorrow)
                 self.date = tomorrow
                 one_day = datetime.timedelta(days=1)
@@ -4802,21 +4587,7 @@ class TVNeuView(tvBaseScreen):
 
                 one_day = datetime.timedelta(days=1)
                 yesterday = today - one_day
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevday = sub('date=(.*?FIN)', 'date=', self.link)
                 prevday = prevday + str(yesterday)
                 self.date = yesterday
@@ -4826,21 +4597,7 @@ class TVNeuView(tvBaseScreen):
                 today = datetime.date.today()
                 one_day = datetime.timedelta(days=1)
                 yesterday = today - one_day
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevday = self.link + '?date=' + str(yesterday)
                 self.date = yesterday
                 one_day = datetime.timedelta(days=1)
@@ -4868,21 +4625,7 @@ class TVNeuView(tvBaseScreen):
 
                 one_week = datetime.timedelta(days=7)
                 tomorrow = today + one_week
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextweek = sub('date=(.*?FIN)', 'date=', self.link)
                 nextweek = nextweek + str(tomorrow)
                 self.date = tomorrow
@@ -4892,21 +4635,7 @@ class TVNeuView(tvBaseScreen):
                 today = datetime.date.today()
                 one_week = datetime.timedelta(days=7)
                 tomorrow = today + one_week
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextweek = self.link + '?date=' + str(tomorrow)
                 self.date = tomorrow
                 one_week = datetime.timedelta(days=7)
@@ -4933,21 +4662,7 @@ class TVNeuView(tvBaseScreen):
 
                 one_week = datetime.timedelta(days=7)
                 yesterday = today - one_week
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevweek = sub('date=(.*?FIN)', 'date=', self.link)
                 prevweek = prevweek + str(yesterday)
                 self.date = yesterday
@@ -4957,21 +4672,7 @@ class TVNeuView(tvBaseScreen):
                 today = datetime.date.today()
                 one_week = datetime.timedelta(days=7)
                 yesterday = today - one_week
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevweek = self.link + '?date=' + str(yesterday)
                 self.date = yesterday
                 one_week = datetime.timedelta(days=7)
@@ -6016,31 +5717,7 @@ class TVGenreView(tvBaseScreen):
         output = six.ensure_str(output)
         self.titel = '%s - Sendungen der n\xc3\xa4chsten 14 Tage' % self.genre
         self.setTitle(self.titel)
-        startpos = output.find('<table class="primetime-table">')
-        endpos = output.find('</table>')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
-        bereich = sub('class="search-starttimes">\n\\s+<span>', '<td>TIME', bereich)
-        bereich = sub('<h3><a href="', '<td>LINK', bereich)
-        if self.showgenre == False:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title=".*?">', '</td><td>TITEL', bereich)
-            bereich = sub('</a></h3>', '</td>', bereich)
-        else:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title="', '</td><td>TITEL', bereich)
-            bereich = sub('">.*?</a></h3>', '</td>', bereich)
-        bereich = sub('<span class="logotype chl_bg_. c-', '<td>LOGO', bereich)
-        bereich = sub('<p>', '<td>GENRE', bereich)
-        bereich = sub('<li class="', '<td>INFO', bereich)
-        bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
-        bereich = sub('<span class="editorial-', '<td>RATING', bereich)
-        bereich = sub('"></span>', '', bereich)
-        bereich = sub('</span>\n', '</td>', bereich)
-        bereich = sub('</span>', '', bereich)
-        bereich = sub('\n\\s+</div>\n', '</td>', bereich)
-        bereich = sub('\n.*?</p>', '</td>', bereich)
-        bereich = sub('"></li>', '</td>', bereich)
-        bereich = sub('\n.*?<br/><em class=".*?</em>', '', bereich)
+        bereich = parsePrimeTimeTable(output, self.showgenre)
         a = findall('<td>(.*?)</td>', bereich)
         y = 0
         offset = 10
@@ -6638,31 +6315,7 @@ class TVGenreView(tvBaseScreen):
 
         title = 'Genre: ' + self.genre.replace(':', ' -') + ', Filter: ' + self.searchstring
         self.setTitle(title)
-        startpos = output.find('<table class="primetime-table">')
-        endpos = output.find('</table>')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
-        bereich = sub('class="search-starttimes">\n\\s+<span>', '<td>TIME', bereich)
-        bereich = sub('<h3><a href="', '<td>LINK', bereich)
-        if self.showgenre == False:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title=".*?">', '</td><td>TITEL', bereich)
-            bereich = sub('</a></h3>', '</td>', bereich)
-        else:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title="', '</td><td>TITEL', bereich)
-            bereich = sub('">.*?</a></h3>', '</td>', bereich)
-        bereich = sub('<span class="logotype chl_bg_. c-', '<td>LOGO', bereich)
-        bereich = sub('<p>', '<td>GENRE', bereich)
-        bereich = sub('<li class="', '<td>INFO', bereich)
-        bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
-        bereich = sub('<span class="editorial-', '<td>RATING', bereich)
-        bereich = sub('"></span>', '', bereich)
-        bereich = sub('</span>\n', '</td>', bereich)
-        bereich = sub('</span>', '', bereich)
-        bereich = sub('\n\\s+</div>\n', '</td>', bereich)
-        bereich = sub('\n.*?</p>', '</td>', bereich)
-        bereich = sub('"></li>', '</td>', bereich)
-        bereich = sub('\n.*?<br/><em class=".*?</em>', '', bereich)
+        bereich = parsePrimeTimeTable(output, self.showgenre)
         a = findall('<td>(.*?)</td>', bereich)
         y = 0
         offset = 10
@@ -8034,21 +7687,7 @@ class TVJetztView(tvBaseScreen):
         self.date = datetime.date.today()
         one_day = datetime.timedelta(days=1)
         self.nextdate = self.date + one_day
-        weekday = self.date.weekday()
-        if weekday == 0:
-            self.weekday = 'Montag'
-        elif weekday == 1:
-            self.weekday = 'Dienstag'
-        elif weekday == 2:
-            self.weekday = 'Mittwoch'
-        elif weekday == 3:
-            self.weekday = 'Donnerstag'
-        elif weekday == 4:
-            self.weekday = 'Freitag'
-        elif weekday == 5:
-            self.weekday = 'Samstag'
-        elif weekday == 6:
-            self.weekday = 'Sonntag'
+        self.weekday = makeWeekDay(self.date.weekday())
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             self.backcolor = False
         else:
@@ -8086,34 +7725,7 @@ class TVJetztView(tvBaseScreen):
         else:
             self.titel = '22:00 im TV - Heute, ' + str(self.weekday) + ', ' + date
         self.setTitle(self.titel)
-        startpos = output.find('<table class="info-table"')
-        endpos = output.find('<div class="block-in">')
-        if endpos == -1:
-            endpos = output.find('<div class="two-blocks">')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('class="chl_bg_. c-', '<td>LOGO', bereich)
-        bereich = sub('<strong><a href="https://my', '<td>LINKhttps://www', bereich)
-        bereich = sub('<strong><a href="https://www', '<td>LINKhttps://www', bereich)
-        bereich = sub('standard">\n\\s+<a href="https://my', '<td>LINKhttps://www', bereich)
-        bereich = sub('standard">\n\\s+<a href="https://www', '<td>LINKhttps://www', bereich)
-        bereich = sub('" target="_self" onclick', '</td>', bereich)
-        bereich = sub('<li><strong>[0-9]+</strong></li>', '', bereich)
-        bereich = sub('<strong>', '<td>TIME', bereich)
-        bereich = sub('</a></strong>', '</td>', bereich)
-        bereich = sub('</strong>', '</td>', bereich)
-        bereich = sub('"saveRef..;" title="', '<td>TITEL', bereich)
-        bereich = sub('" title="', '</td>', bereich)
-        bereich = sub('"></span></td>', '</td>', bereich)
-        bereich = sub('</span>', '</td>', bereich)
-        bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
-        bereich = sub('<span class="editorial-', '<td>RATING', bereich)
-        bereich = sub('<span>Spielfilm\n', '<td>SPARTESpielfilm</td>', bereich)
-        bereich = sub('<span>Serie\n', '<td>SPARTESerie</td>', bereich)
-        bereich = sub('<span>Report\n', '<td>SPARTEReport</td>', bereich)
-        bereich = sub('<span>Unterhaltung\n', '<td>SPARTEUnterhaltung</td>', bereich)
-        bereich = sub('<span>Kinder\n', '<td>SPARTEKinder</td>', bereich)
-        bereich = sub('<span>Sport\n', '<td>SPARTESport</td>', bereich)
+        bereich = parseInfoTable2(output)
         nowhour = datetime.datetime.now().hour
         if self.jetzt == True or self.gleich == True or self.abends == True and nowhour == 20 or self.abends == True and nowhour == 21 or self.nachts == True and nowhour == 22:
             self.progress = True
@@ -8670,31 +8282,7 @@ class TVJetztView(tvBaseScreen):
             self['searchtext'].show()
             self.setTitle('')
             self.setTitle(title.group(1))
-        startpos = output.find('<table class="primetime-table">')
-        endpos = output.find('</table>')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
-        bereich = sub('class="search-starttimes">\n\\s+<span>', '<td>TIME', bereich)
-        bereich = sub('<h3><a href="', '<td>LINK', bereich)
-        if self.showgenre == False:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title=".*?">', '</td><td>TITEL', bereich)
-            bereich = sub('</a></h3>', '</td>', bereich)
-        else:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title="', '</td><td>TITEL', bereich)
-            bereich = sub('">.*?</a></h3>', '</td>', bereich)
-        bereich = sub('<span class="logotype chl_bg_. c-', '<td>LOGO', bereich)
-        bereich = sub('<p>', '<td>GENRE', bereich)
-        bereich = sub('<li class="', '<td>INFO', bereich)
-        bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
-        bereich = sub('<span class="editorial-', '<td>RATING', bereich)
-        bereich = sub('"></span>', '', bereich)
-        bereich = sub('</span>\n', '</td>', bereich)
-        bereich = sub('</span>', '', bereich)
-        bereich = sub('\n\\s+</div>\n', '</td>', bereich)
-        bereich = sub('\n.*?</p>', '</td>', bereich)
-        bereich = sub('"></li>', '</td>', bereich)
-        bereich = sub('\n.*?<br/><em class=".*?</em>', '', bereich)
+        bereich = parsePrimeTimeTable(output, self.showgenre)
         a = findall('<td>(.*?)</td>', bereich)
         y = 0
         offset = 10
@@ -10101,21 +9689,7 @@ class TVProgrammView(tvBaseScreen):
         self.date = datetime.date.today()
         one_day = datetime.timedelta(days=1)
         self.nextdate = self.date + one_day
-        weekday = self.date.weekday()
-        if weekday == 0:
-            self.weekday = 'Montag'
-        elif weekday == 1:
-            self.weekday = 'Dienstag'
-        elif weekday == 2:
-            self.weekday = 'Mittwoch'
-        elif weekday == 3:
-            self.weekday = 'Donnerstag'
-        elif weekday == 4:
-            self.weekday = 'Freitag'
-        elif weekday == 5:
-            self.weekday = 'Samstag'
-        elif weekday == 6:
-            self.weekday = 'Sonntag'
+        self.weekday = makeWeekDay(self.date.weekday())
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             self.backcolor = False
         else:
@@ -10156,31 +9730,7 @@ class TVProgrammView(tvBaseScreen):
         date = str(self.date.strftime('%d.%m.%Y'))
         self.titel = str(titel.group(1)) + ' - ' + str(self.weekday) + ', ' + date
         self.setTitle(self.titel)
-        startpos = output.find('<table class="info-table"')
-        endpos = output.find('<div class="block-in">')
-        if endpos == -1:
-            endpos = output.find('<div class="two-blocks">')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('class="chl_bg_. c-', '<td>LOGO', bereich)
-        bereich = sub('<strong><a href="', '<td>LINK', bereich)
-        bereich = sub('" target="_self" onclick', '</td>', bereich)
-        bereich = sub('<li><strong>[0-9]+</strong></li>', '', bereich)
-        bereich = sub('<strong>', '<td>TIME', bereich)
-        bereich = sub('</a></strong>', '</td>', bereich)
-        bereich = sub('</strong>', '</td>', bereich)
-        bereich = sub('"saveRef..;" title="', '<td>TITEL', bereich)
-        bereich = sub('" title="', '</td>', bereich)
-        bereich = sub('"></span></td>', '</td>', bereich)
-        bereich = sub('</span>', '</td>', bereich)
-        bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
-        bereich = sub('<span class="editorial-', '<td>RATING', bereich)
-        bereich = sub('<span>Spielfilm\n', '<td>SPARTESpielfilm</td>', bereich)
-        bereich = sub('<span>Serie\n', '<td>SPARTESerie</td>', bereich)
-        bereich = sub('<span>Report\n', '<td>SPARTEReport</td>', bereich)
-        bereich = sub('<span>Unterhaltung\n', '<td>SPARTEUnterhaltung</td>', bereich)
-        bereich = sub('<span>Kinder\n', '<td>SPARTEKinder</td>', bereich)
-        bereich = sub('<span>Sport\n', '<td>SPARTESport</td>', bereich)
+        bereich = parseInfoTable(output)
         today = datetime.date.today()
         one_day = datetime.timedelta(days=1)
         yesterday = today - one_day
@@ -10741,31 +10291,7 @@ class TVProgrammView(tvBaseScreen):
             self['searchtext'].show()
             self.setTitle('')
             self.setTitle(title.group(1))
-        startpos = output.find('<table class="primetime-table">')
-        endpos = output.find('</table>')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
-        bereich = sub('class="search-starttimes">\n\\s+<span>', '<td>TIME', bereich)
-        bereich = sub('<h3><a href="', '<td>LINK', bereich)
-        if self.showgenre == False:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title=".*?">', '</td><td>TITEL', bereich)
-            bereich = sub('</a></h3>', '</td>', bereich)
-        else:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title="', '</td><td>TITEL', bereich)
-            bereich = sub('">.*?</a></h3>', '</td>', bereich)
-        bereich = sub('<span class="logotype chl_bg_. c-', '<td>LOGO', bereich)
-        bereich = sub('<p>', '<td>GENRE', bereich)
-        bereich = sub('<li class="', '<td>INFO', bereich)
-        bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
-        bereich = sub('<span class="editorial-', '<td>RATING', bereich)
-        bereich = sub('"></span>', '', bereich)
-        bereich = sub('</span>\n', '</td>', bereich)
-        bereich = sub('</span>', '', bereich)
-        bereich = sub('\n\\s+</div>\n', '</td>', bereich)
-        bereich = sub('\n.*?</p>', '</td>', bereich)
-        bereich = sub('"></li>', '</td>', bereich)
-        bereich = sub('\n.*?<br/><em class=".*?</em>', '', bereich)
+        bereich = parsePrimeTimeTable(output, self.showgenre)
         a = findall('<td>(.*?)</td>', bereich)
         y = 0
         offset = 10
@@ -11761,21 +11287,7 @@ class TVProgrammView(tvBaseScreen):
                 today = datetime.date.today()
             one_day = datetime.timedelta(days=1)
             tomorrow = today + one_day
-            weekday = tomorrow.weekday()
-            if weekday == 0:
-                self.weekday = 'Montag'
-            elif weekday == 1:
-                self.weekday = 'Dienstag'
-            elif weekday == 2:
-                self.weekday = 'Mittwoch'
-            elif weekday == 3:
-                self.weekday = 'Donnerstag'
-            elif weekday == 4:
-                self.weekday = 'Freitag'
-            elif weekday == 5:
-                self.weekday = 'Samstag'
-            elif weekday == 6:
-                self.weekday = 'Sonntag'
+            self.weekday = makeWeekDay(tomorrow.weekday())
             self.link = self.link + 'FIN'
             channel = re.findall('channel=(.*?)FIN', self.link)
             nextday = sub('[?]page=.&order=time&date=(.*?FIN)', '?page=1&order=time&date=', self.link)
@@ -11810,21 +11322,7 @@ class TVProgrammView(tvBaseScreen):
                 today = datetime.date.today()
             one_day = datetime.timedelta(days=1)
             yesterday = today - one_day
-            weekday = yesterday.weekday()
-            if weekday == 0:
-                self.weekday = 'Montag'
-            elif weekday == 1:
-                self.weekday = 'Dienstag'
-            elif weekday == 2:
-                self.weekday = 'Mittwoch'
-            elif weekday == 3:
-                self.weekday = 'Donnerstag'
-            elif weekday == 4:
-                self.weekday = 'Freitag'
-            elif weekday == 5:
-                self.weekday = 'Samstag'
-            elif weekday == 6:
-                self.weekday = 'Sonntag'
+            self.weekday = makeWeekDay(yesterday.weekday())
             self.link = self.link + 'FIN'
             channel = re.findall('channel=(.*?)FIN', self.link)
             prevday = sub('[?]page=.&order=time&date=(.*?FIN)', '?page=1&order=time&date=', self.link)
@@ -11859,21 +11357,7 @@ class TVProgrammView(tvBaseScreen):
                 today = datetime.date.today()
             one_week = datetime.timedelta(days=7)
             tomorrow = today + one_week
-            weekday = tomorrow.weekday()
-            if weekday == 0:
-                self.weekday = 'Montag'
-            elif weekday == 1:
-                self.weekday = 'Dienstag'
-            elif weekday == 2:
-                self.weekday = 'Mittwoch'
-            elif weekday == 3:
-                self.weekday = 'Donnerstag'
-            elif weekday == 4:
-                self.weekday = 'Freitag'
-            elif weekday == 5:
-                self.weekday = 'Samstag'
-            elif weekday == 6:
-                self.weekday = 'Sonntag'
+            self.weekday = makeWeekDay(tomorrow.weekday())
             self.link = self.link + 'FIN'
             channel = re.findall('channel=(.*?)FIN', self.link)
             nextweek = sub('[?]page=.&order=time&date=(.*?FIN)', '?page=1&order=time&date=', self.link)
@@ -11907,21 +11391,7 @@ class TVProgrammView(tvBaseScreen):
                 today = datetime.date.today()
             one_week = datetime.timedelta(days=7)
             yesterday = today - one_week
-            weekday = yesterday.weekday()
-            if weekday == 0:
-                self.weekday = 'Montag'
-            elif weekday == 1:
-                self.weekday = 'Dienstag'
-            elif weekday == 2:
-                self.weekday = 'Mittwoch'
-            elif weekday == 3:
-                self.weekday = 'Donnerstag'
-            elif weekday == 4:
-                self.weekday = 'Freitag'
-            elif weekday == 5:
-                self.weekday = 'Samstag'
-            elif weekday == 6:
-                self.weekday = 'Sonntag'
+            self.weekday = makeWeekDay(yesterday.weekday())
             self.link = self.link + 'FIN'
             channel = re.findall('channel=(.*?)FIN', self.link)
             prevweek = sub('[?]page=.&order=time&date=(.*?FIN)', '?page=1&order=time&date=', self.link)
@@ -12237,21 +11707,7 @@ class TVTrailer(tvBaseScreen):
         self.date = datetime.date.today()
         one_day = datetime.timedelta(days=1)
         self.nextdate = self.date + one_day
-        weekday = self.date.weekday()
-        if weekday == 0:
-            self.weekday = 'Montag'
-        elif weekday == 1:
-            self.weekday = 'Dienstag'
-        elif weekday == 2:
-            self.weekday = 'Mittwoch'
-        elif weekday == 3:
-            self.weekday = 'Donnerstag'
-        elif weekday == 4:
-            self.weekday = 'Freitag'
-        elif weekday == 5:
-            self.weekday = 'Samstag'
-        elif weekday == 6:
-            self.weekday = 'Sonntag'
+        self.weekday = makeWeekDay(self.date.weekday())
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             self.backcolor = False
         else:
@@ -13431,21 +12887,7 @@ class TVBilder(tvBaseScreen):
         self.date = datetime.date.today()
         one_day = datetime.timedelta(days=1)
         self.nextdate = self.date + one_day
-        weekday = self.date.weekday()
-        if weekday == 0:
-            self.weekday = 'Montag'
-        elif weekday == 1:
-            self.weekday = 'Dienstag'
-        elif weekday == 2:
-            self.weekday = 'Mittwoch'
-        elif weekday == 3:
-            self.weekday = 'Donnerstag'
-        elif weekday == 4:
-            self.weekday = 'Freitag'
-        elif weekday == 5:
-            self.weekday = 'Samstag'
-        elif weekday == 6:
-            self.weekday = 'Sonntag'
+        self.weekday = makeWeekDay(self.date.weekday())
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             self.backcolor = False
         else:
@@ -20921,21 +20363,7 @@ class TVHeuteView(tvBaseScreen):
         self.date = datetime.date.today()
         one_day = datetime.timedelta(days=1)
         self.nextdate = self.date + one_day
-        weekday = self.date.weekday()
-        if weekday == 0:
-            self.weekday = 'Montag'
-        elif weekday == 1:
-            self.weekday = 'Dienstag'
-        elif weekday == 2:
-            self.weekday = 'Mittwoch'
-        elif weekday == 3:
-            self.weekday = 'Donnerstag'
-        elif weekday == 4:
-            self.weekday = 'Freitag'
-        elif weekday == 5:
-            self.weekday = 'Samstag'
-        elif weekday == 6:
-            self.weekday = 'Sonntag'
+        self.weekday = makeWeekDay(self.date.weekday())
         self.morgens = False
         self.mittags = False
         self.vorabend = False
@@ -22185,31 +21613,7 @@ class TVHeuteView(tvBaseScreen):
             self['searchtext'].show()
             self.setTitle('')
             self.setTitle(title.group(1))
-        startpos = output.find('<table class="primetime-table">')
-        endpos = output.find('</table>')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        bereich = sub('<span>TV-Sendungen am', '<td>DATUMTV-Sendungen am', bereich)
-        bereich = sub('class="search-starttimes">\n\\s+<span>', '<td>TIME', bereich)
-        bereich = sub('<h3><a href="', '<td>LINK', bereich)
-        if self.showgenre == False:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title=".*?">', '</td><td>TITEL', bereich)
-            bereich = sub('</a></h3>', '</td>', bereich)
-        else:
-            bereich = sub('" target="_self" onclick="saveRef[(][)];" title="', '</td><td>TITEL', bereich)
-            bereich = sub('">.*?</a></h3>', '</td>', bereich)
-        bereich = sub('<span class="logotype chl_bg_. c-', '<td>LOGO', bereich)
-        bereich = sub('<p>', '<td>GENRE', bereich)
-        bereich = sub('<li class="', '<td>INFO', bereich)
-        bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
-        bereich = sub('<span class="editorial-', '<td>RATING', bereich)
-        bereich = sub('"></span>', '', bereich)
-        bereich = sub('</span>\n', '</td>', bereich)
-        bereich = sub('</span>', '', bereich)
-        bereich = sub('\n\\s+</div>\n', '</td>', bereich)
-        bereich = sub('\n.*?</p>', '</td>', bereich)
-        bereich = sub('"></li>', '</td>', bereich)
-        bereich = sub('\n.*?<br/><em class=".*?</em>', '', bereich)
+        bereich = parsePrimeTimeTable(output, self.showgenre)
         a = findall('<td>(.*?)</td>', bereich)
         y = 0
         offset = 10
@@ -23982,21 +23386,7 @@ class TVHeuteView(tvBaseScreen):
 
                 one_day = datetime.timedelta(days=1)
                 tomorrow = today + one_day
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextday = sub('date=(.*?FIN)', 'date=', self.link)
                 nextday = nextday + str(tomorrow)
                 self.date = tomorrow
@@ -24006,21 +23396,7 @@ class TVHeuteView(tvBaseScreen):
                 today = datetime.date.today()
                 one_day = datetime.timedelta(days=1)
                 tomorrow = today + one_day
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextday = self.link + '&date=' + str(tomorrow)
                 self.date = tomorrow
                 one_day = datetime.timedelta(days=1)
@@ -24050,21 +23426,7 @@ class TVHeuteView(tvBaseScreen):
 
                 one_day = datetime.timedelta(days=1)
                 yesterday = today - one_day
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevday = sub('date=(.*?FIN)', 'date=', self.link)
                 prevday = prevday + str(yesterday)
                 self.date = yesterday
@@ -24074,21 +23436,7 @@ class TVHeuteView(tvBaseScreen):
                 today = datetime.date.today()
                 one_day = datetime.timedelta(days=1)
                 yesterday = today - one_day
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevday = self.link + '&date=' + str(yesterday)
                 self.date = yesterday
                 one_day = datetime.timedelta(days=1)
@@ -24118,21 +23466,7 @@ class TVHeuteView(tvBaseScreen):
 
                 one_week = datetime.timedelta(days=7)
                 tomorrow = today + one_week
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextweek = sub('date=(.*?FIN)', 'date=', self.link)
                 nextweek = nextweek + str(tomorrow)
                 self.date = tomorrow
@@ -24142,21 +23476,7 @@ class TVHeuteView(tvBaseScreen):
                 today = datetime.date.today()
                 one_week = datetime.timedelta(days=7)
                 tomorrow = today + one_week
-                weekday = tomorrow.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(tomorrow.weekday())
                 nextweek = self.link + '&date=' + str(tomorrow)
                 self.date = tomorrow
                 one_week = datetime.timedelta(days=7)
@@ -24185,21 +23505,7 @@ class TVHeuteView(tvBaseScreen):
 
                 one_week = datetime.timedelta(days=7)
                 yesterday = today - one_week
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevweek = sub('date=(.*?FIN)', 'date=', self.link)
                 prevweek = prevweek + str(yesterday)
                 self.date = yesterday
@@ -24209,21 +23515,7 @@ class TVHeuteView(tvBaseScreen):
                 today = datetime.date.today()
                 one_week = datetime.timedelta(days=7)
                 yesterday = today - one_week
-                weekday = yesterday.weekday()
-                if weekday == 0:
-                    self.weekday = 'Montag'
-                elif weekday == 1:
-                    self.weekday = 'Dienstag'
-                elif weekday == 2:
-                    self.weekday = 'Mittwoch'
-                elif weekday == 3:
-                    self.weekday = 'Donnerstag'
-                elif weekday == 4:
-                    self.weekday = 'Freitag'
-                elif weekday == 5:
-                    self.weekday = 'Samstag'
-                elif weekday == 6:
-                    self.weekday = 'Sonntag'
+                self.weekday = makeWeekDay(yesterday.weekday())
                 prevweek = self.link + '&date=' + str(yesterday)
                 self.date = yesterday
                 one_week = datetime.timedelta(days=7)
