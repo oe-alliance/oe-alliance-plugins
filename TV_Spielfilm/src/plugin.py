@@ -39,7 +39,7 @@ from six.moves.urllib.error import URLError, HTTPError
 import datetime, os, re, socket, sys, time, six
 from os import path
 from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, TVSHDPNG, serviceDB, channelDB, BlinkingLabel, ItemList, makeWeekDay
-from .parser import transCHANNEL, shortenChannel, transWIKI, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable
+from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable
 
 try:
     from cookielib import MozillaCookieJar
@@ -102,8 +102,6 @@ config.plugins.tvspielfilm.zapexit = ConfigSelection(default='yes', choices=[('y
 config.plugins.tvspielfilm.maxsearch = ConfigInteger(50, (10, 999))
 config.plugins.tvspielfilm.maxgenre = ConfigInteger(250, (10, 999))
 config.plugins.tvspielfilm.autotimer = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
-#config.plugins.tvspielfilm.autoupdate = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
-#config.plugins.tvspielfilm.paypal = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 
 class tvBaseScreen(Screen):
 
@@ -287,8 +285,7 @@ class TVTippsView(tvBaseScreen):
          'info': self.getEPG,
          'epg': self.getEPG,
          'leavePlayer': self.youTube,
-         'startTeletext': self.pressText,
-         'displayHelp': self.infoScreen}, -1)
+         'startTeletext': self.pressText}, -1)
         self['ColorActions'] = ActionMap(['ColorActions'], {'green': self.green,
          'yellow': self.yellow,
          'red': self.makeTimer,
@@ -1298,8 +1295,6 @@ class TVTippsView(tvBaseScreen):
             else:
                 self.newfilter = False
             self.refresh()
-        else:
-            self.session.open(infoScreenTVSpielfilm, None, True)
         return
 
     def makeTimer(self):
@@ -1638,9 +1633,6 @@ class TVTippsView(tvBaseScreen):
             except IndexError:
                 pass
 
-        elif self.current == 'postview':
-            self.wiki()
-
     def yellow(self):
         if self.current == 'postview':
             self.youTube()
@@ -1735,48 +1727,6 @@ class TVTippsView(tvBaseScreen):
                 self.session.open(searchYouTube, titel, self.movie)
             except IndexError:
                 pass
-
-    def wiki(self):
-        if self.current == 'postview':
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/Wikipedia.pyo'):
-                from Plugins.Extensions.Wikipedia.Wikipedia import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/plugin.pyo'):
-                from Plugins.Extensions.Wikipedia.plugin import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            else:
-                self.session.openWithCallback(self.wikiInstall, MessageBox, '\nDas Wikipedia Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-
-    def wikiInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'wiki', True)
-
-    def translator(self):
-        if self.current == 'postview':
-            if self.showEPG == False:
-                text = self.POSTtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            else:
-                text = self.EPGtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/EPGTranslator.pyo'):
-                from Plugins.Extensions.EPGTranslator.EPGTranslator import translatorMain
-                self.session.open(translatorMain, text)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/plugin.pyo'):
-                from Plugins.Extensions.EPGTranslator.plugin import translatorMain
-                self.session.open(translatorMain, text)
-            else:
-                self.session.openWithCallback(self.translatorInstall, MessageBox, '\nDas EPG Translator Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-
-    def translatorInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'translator', True)
 
     def IMDb(self):
         if self.current == 'postview':
@@ -1964,8 +1914,6 @@ class TVTippsView(tvBaseScreen):
             self.link = nextweek
             self.oldindex = 0
             self.refresh()
-        elif self.current == 'postview':
-            self.translator()
         return
 
     def prevWeek(self):
@@ -2815,10 +2763,6 @@ class TVTippsView(tvBaseScreen):
         if InfoBar and InfoBar.instance:
             InfoBar.zapDown(InfoBar.instance)
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def picReturn(self):
         pass
 
@@ -2995,8 +2939,7 @@ class TVNeuView(tvBaseScreen):
          'info': self.getEPG,
          'epg': self.getEPG,
          'leavePlayer': self.youTube,
-         'startTeletext': self.pressText,
-         'displayHelp': self.infoScreen}, -1)
+         'startTeletext': self.pressText}, -1)
         self['ColorActions'] = ActionMap(['ColorActions'], {'green': self.green,
          'yellow': self.yellow,
          'red': self.makeTimer,
@@ -3975,8 +3918,6 @@ class TVNeuView(tvBaseScreen):
                 self.showEPG = False
                 self['textpage'].setText(self.POSTtext)
                 self['textpage'].show()
-        else:
-            self.session.open(infoScreenTVSpielfilm, None, True)
         return
 
     def makeTimer(self):
@@ -4315,9 +4256,6 @@ class TVNeuView(tvBaseScreen):
             except IndexError:
                 pass
 
-        elif self.current == 'postview':
-            self.wiki()
-
     def yellow(self):
         if self.current == 'postview':
             self.youTube()
@@ -4412,50 +4350,6 @@ class TVNeuView(tvBaseScreen):
                 self.session.open(searchYouTube, titel, self.movie)
             except IndexError:
                 pass
-
-    def wiki(self):
-        if self.current == 'postview':
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/Wikipedia.pyo'):
-                from Plugins.Extensions.Wikipedia.Wikipedia import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/plugin.pyo'):
-                from Plugins.Extensions.Wikipedia.plugin import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            else:
-                self.session.openWithCallback(self.wikiInstall, MessageBox, '\nDas Wikipedia Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-                return
-
-    def wikiInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'wiki', True)
-
-    def translator(self):
-        if self.current == 'postview':
-            if self.showEPG == False:
-                text = self.POSTtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            else:
-                text = self.EPGtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/EPGTranslator.pyo'):
-                from Plugins.Extensions.EPGTranslator.EPGTranslator import translatorMain
-                self.session.open(translatorMain, text)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/plugin.pyo'):
-                from Plugins.Extensions.EPGTranslator.plugin import translatorMain
-                self.session.open(translatorMain, text)
-            else:
-                self.session.openWithCallback(self.translatorInstall, MessageBox, '\nDas EPG Translator Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-                return
-
-    def translatorInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'translator', True)
 
     def IMDb(self):
         if self.current == 'postview':
@@ -4643,8 +4537,6 @@ class TVNeuView(tvBaseScreen):
             self.link = nextweek
             self.oldindex = 0
             self.refresh()
-        elif self.current == 'postview':
-            self.translator()
         return
 
     def prevWeek(self):
@@ -5494,10 +5386,6 @@ class TVNeuView(tvBaseScreen):
         if InfoBar and InfoBar.instance:
             InfoBar.zapDown(InfoBar.instance)
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def picReturn(self):
         pass
 
@@ -5673,8 +5561,6 @@ class TVGenreView(tvBaseScreen):
          'up': self.up,
          'nextBouquet': self.zap,
          'prevBouquet': self.zap,
-         'nextMarker': self.translator,
-         'prevMarker': self.wiki,
          '0': self.gotoEnd,
          '1': self.zapUp,
          '2': self.zapDown,
@@ -5684,8 +5570,7 @@ class TVGenreView(tvBaseScreen):
          'info': self.getEPG,
          'epg': self.getEPG,
          'leavePlayer': self.youTube,
-         'startTeletext': self.pressText,
-         'displayHelp': self.infoScreen}, -1)
+         'startTeletext': self.pressText}, -1)
         self['ColorActions'] = ActionMap(['ColorActions'], {'green': self.green,
          'yellow': self.yellow,
          'red': self.makeTimer,
@@ -6729,8 +6614,6 @@ class TVGenreView(tvBaseScreen):
                 self.showEPG = False
                 self['textpage'].setText(self.POSTtext)
                 self['textpage'].show()
-        else:
-            self.session.open(infoScreenTVSpielfilm, None, True)
         return
 
     def makeTimer(self):
@@ -7068,9 +6951,6 @@ class TVGenreView(tvBaseScreen):
             except IndexError:
                 pass
 
-        elif self.current == 'postview':
-            self.wiki()
-
     def yellow(self):
         if self.current == 'postview':
             self.youTube()
@@ -7167,50 +7047,6 @@ class TVGenreView(tvBaseScreen):
                     self.session.open(searchYouTube, titel, self.movie)
             except IndexError:
                 pass
-
-    def wiki(self):
-        if self.current == 'postview':
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/Wikipedia.pyo'):
-                from Plugins.Extensions.Wikipedia.Wikipedia import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/plugin.pyo'):
-                from Plugins.Extensions.Wikipedia.plugin import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            else:
-                self.session.openWithCallback(self.wikiInstall, MessageBox, '\nDas Wikipedia Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-                return
-
-    def wikiInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'wiki', True)
-
-    def translator(self):
-        if self.current == 'postview':
-            if self.showEPG == False:
-                text = self.POSTtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            else:
-                text = self.EPGtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/EPGTranslator.pyo'):
-                from Plugins.Extensions.EPGTranslator.EPGTranslator import translatorMain
-                self.session.open(translatorMain, text)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/plugin.pyo'):
-                from Plugins.Extensions.EPGTranslator.plugin import translatorMain
-                self.session.open(translatorMain, text)
-            else:
-                self.session.openWithCallback(self.translatorInstall, MessageBox, '\nDas EPG Translator Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-                return
-
-    def translatorInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'translator', True)
 
     def IMDb(self):
         if self.current == 'postview':
@@ -7467,10 +7303,6 @@ class TVGenreView(tvBaseScreen):
         if InfoBar and InfoBar.instance:
             InfoBar.zapDown(InfoBar.instance)
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def picReturn(self):
         pass
 
@@ -7656,15 +7488,13 @@ class TVJetztView(tvBaseScreen):
          '0': self.gotoEnd,
          '1': self.zapUp,
          '2': self.zapDown,
-         '6': self.translator,
          '7': self.IMDb,
          '8': self.TMDb,
          '9': self.TVDb,
          'info': self.getEPG,
          'epg': self.getEPG,
          'leavePlayer': self.youTube,
-         'startTeletext': self.pressText,
-         'displayHelp': self.infoScreen}, -1)
+         'startTeletext': self.pressText}, -1)
         self['ColorActions'] = ActionMap(['ColorActions'], {'green': self.green,
          'yellow': self.yellow,
          'red': self.makeTimer,
@@ -8712,8 +8542,6 @@ class TVJetztView(tvBaseScreen):
                 self['label'].startBlinking()
                 link = 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
                 self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
-        else:
-            self.session.open(infoScreenTVSpielfilm, None, True)
         return
 
     def makeTimer(self):
@@ -9055,9 +8883,6 @@ class TVJetztView(tvBaseScreen):
             except IndexError:
                 pass
 
-        elif self.current == 'postview':
-            self.wiki()
-
     def yellow(self):
         if self.current == 'postview':
             self.youTube()
@@ -9159,50 +8984,6 @@ class TVJetztView(tvBaseScreen):
                 self.session.open(searchYouTube, titel, self.movie)
             except IndexError:
                 pass
-
-    def wiki(self):
-        if self.current == 'postview':
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/Wikipedia.pyo'):
-                from Plugins.Extensions.Wikipedia.Wikipedia import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/plugin.pyo'):
-                from Plugins.Extensions.Wikipedia.plugin import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            else:
-                self.session.openWithCallback(self.wikiInstall, MessageBox, '\nDas Wikipedia Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-                return
-
-    def wikiInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'wiki', True)
-
-    def translator(self):
-        if self.current == 'postview':
-            if self.showEPG == False:
-                text = self.POSTtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            else:
-                text = self.EPGtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/EPGTranslator.pyo'):
-                from Plugins.Extensions.EPGTranslator.EPGTranslator import translatorMain
-                self.session.open(translatorMain, text)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/plugin.pyo'):
-                from Plugins.Extensions.EPGTranslator.plugin import translatorMain
-                self.session.open(translatorMain, text)
-            else:
-                self.session.openWithCallback(self.translatorInstall, MessageBox, '\nDas EPG Translator Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-                return
-
-    def translatorInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'translator', True)
 
     def IMDb(self):
         if self.current == 'postview':
@@ -9466,10 +9247,6 @@ class TVJetztView(tvBaseScreen):
         if InfoBar and InfoBar.instance:
             InfoBar.zapDown(InfoBar.instance)
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def picReturn(self):
         pass
 
@@ -9678,8 +9455,7 @@ class TVProgrammView(tvBaseScreen):
          'info': self.getEPG,
          'epg': self.getEPG,
          'leavePlayer': self.youTube,
-         'startTeletext': self.pressText,
-         'displayHelp': self.infoScreen}, -1)
+         'startTeletext': self.pressText}, -1)
         self['ColorActions'] = ActionMap(['ColorActions'], {'green': self.green,
          'yellow': self.yellow,
          'red': self.makeTimer,
@@ -10695,8 +10471,6 @@ class TVProgrammView(tvBaseScreen):
                 self.showEPG = False
                 self['textpage'].setText(self.POSTtext)
                 self['textpage'].show()
-        else:
-            self.session.open(infoScreenTVSpielfilm, None, True)
         return
 
     def makeTimer(self):
@@ -11053,8 +10827,6 @@ class TVProgrammView(tvBaseScreen):
                         self.piconname = 'none.png'
                 self.link = 'https://www.tvspielfilm.de/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
                 self.refresh()
-        elif self.current == 'postview':
-            self.wiki()
         return
 
     def yellow(self):
@@ -11145,50 +10917,6 @@ class TVProgrammView(tvBaseScreen):
                 self.session.open(searchYouTube, titel, self.movie)
             except IndexError:
                 pass
-
-    def wiki(self):
-        if self.current == 'postview':
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/Wikipedia.pyo'):
-                from Plugins.Extensions.Wikipedia.Wikipedia import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/plugin.pyo'):
-                from Plugins.Extensions.Wikipedia.plugin import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            else:
-                self.session.openWithCallback(self.wikiInstall, MessageBox, '\nDas Wikipedia Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-                return
-
-    def wikiInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'wiki', True)
-
-    def translator(self):
-        if self.current == 'postview':
-            if self.showEPG == False:
-                text = self.POSTtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            else:
-                text = self.EPGtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/EPGTranslator.pyo'):
-                from Plugins.Extensions.EPGTranslator.EPGTranslator import translatorMain
-                self.session.open(translatorMain, text)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/plugin.pyo'):
-                from Plugins.Extensions.EPGTranslator.plugin import translatorMain
-                self.session.open(translatorMain, text)
-            else:
-                self.session.openWithCallback(self.translatorInstall, MessageBox, '\nDas EPG Translator Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-                return
-
-    def translatorInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'translator', True)
 
     def IMDb(self):
         if self.current == 'postview':
@@ -11367,8 +11095,6 @@ class TVProgrammView(tvBaseScreen):
             self.link = nextweek
             self.oldindex = 0
             self.refresh()
-        elif self.current == 'postview':
-            self.translator()
         return
 
     def prevWeek(self):
@@ -11592,10 +11318,6 @@ class TVProgrammView(tvBaseScreen):
                 self.refresh()
         return
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def picReturn(self):
         pass
 
@@ -11700,8 +11422,7 @@ class TVTrailer(tvBaseScreen):
          'down': self.down,
          'up': self.up,
          'blue': self.hideScreen,
-         '0': self.gotoEnd,
-         'displayHelp': self.infoScreen}, -1)
+         '0': self.gotoEnd}, -1)
         self.date = datetime.date.today()
         one_day = datetime.timedelta(days=1)
         self.nextdate = self.date + one_day
@@ -12811,10 +12532,6 @@ class TVTrailer(tvBaseScreen):
         self['play5'].show()
         self['play6'].show()
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def hideScreen(self):
         if self.hideflag == True:
             self.hideflag = False
@@ -12880,8 +12597,7 @@ class TVBilder(tvBaseScreen):
          'down': self.down,
          'up': self.up,
          'blue': self.hideScreen,
-         '0': self.gotoEnd,
-         'displayHelp': self.infoScreen}, -1)
+         '0': self.gotoEnd}, -1)
         self.date = datetime.date.today()
         one_day = datetime.timedelta(days=1)
         self.nextdate = self.date + one_day
@@ -13817,10 +13533,6 @@ class TVBilder(tvBaseScreen):
         self['play5'].show()
         self['play6'].show()
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def hideScreen(self):
         if self.hideflag == True:
             self.hideflag = False
@@ -13896,8 +13608,7 @@ class TVNews(tvBaseScreen):
          'up': self.up,
          'nextBouquet': self.zap,
          'prevBouquet': self.zap,
-         'blue': self.hideScreen,
-         'displayHelp': self.infoScreen}, -1)
+         'blue': self.hideScreen}, -1)
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             self.backcolor = False
         else:
@@ -14224,10 +13935,6 @@ class TVNews(tvBaseScreen):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def picReturn(self):
         pass
 
@@ -14318,8 +14025,7 @@ class TVBlog(tvBaseScreen):
          'up': self.up,
          'nextBouquet': self.nextPage,
          'prevBouquet': self.prevPage,
-         'blue': self.hideScreen,
-         'displayHelp': self.infoScreen}, -1)
+         'blue': self.hideScreen}, -1)
         self.getInfoTimer = eTimer()
         if self.post == False:
             self.getInfoTimer.callback.append(self.downloadFullPage(link, self.makeTVBlog))
@@ -14818,10 +14524,6 @@ class TVBlog(tvBaseScreen):
                 trailer_url = '%s' % best_video['fmturl'].split(';')[0]
             return trailer_url
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def picReturn(self):
         pass
 
@@ -14899,8 +14601,7 @@ class TVNewsPicShow(tvBaseScreen):
          '6': self.gotoPic,
          '7': self.gotoPic,
          '8': self.gotoPic,
-         '9': self.gotoPic,
-         'displayHelp': self.infoScreen}, -1)
+         '9': self.gotoPic}, -1)
         self.getInfoTimer = eTimer()
         self.getInfoTimer.callback.append(self.download(link, self.getPixPage))
         self.getInfoTimer.start(500, True)
@@ -15080,10 +14781,6 @@ class TVNewsPicShow(tvBaseScreen):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def hideScreen(self):
         if self.hideflag == True:
             self.hideflag = False
@@ -15150,8 +14847,7 @@ class PlayboyPicShow(tvBaseScreen):
          '6': self.gotoPic,
          '7': self.gotoPic,
          '8': self.gotoPic,
-         '9': self.gotoPic,
-         'displayHelp': self.infoScreen}, -1)
+         '9': self.gotoPic}, -1)
         self.getInfoTimer = eTimer()
         self.getInfoTimer.callback.append(self.download(link, self.getPicPage))
         self.getInfoTimer.start(500, True)
@@ -15311,10 +15007,6 @@ class PlayboyPicShow(tvBaseScreen):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def hideScreen(self):
         if self.hideflag == True:
             self.hideflag = False
@@ -15389,8 +15081,7 @@ class TVPicShow(tvBaseScreen):
          '6': self.gotoPic,
          '7': self.gotoPic,
          '8': self.gotoPic,
-         '9': self.gotoPic,
-         'displayHelp': self.infoScreen}, -1)
+         '9': self.gotoPic}, -1)
         self.getPicTimer = eTimer()
         self.getPicTimer.callback.append(self.download(link, self.getPicPage))
         self.getPicTimer.start(500, True)
@@ -15591,10 +15282,6 @@ class TVPicShow(tvBaseScreen):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def hideScreen(self):
         if self.hideflag == True:
             self.hideflag = False
@@ -15658,8 +15345,7 @@ class PicShowFull(tvBaseScreen):
          '6': self.gotoPic,
          '7': self.gotoPic,
          '8': self.gotoPic,
-         '9': self.gotoPic,
-         'displayHelp': self.infoScreen}, -1)
+         '9': self.gotoPic}, -1)
         self.getPicTimer = eTimer()
         self.getPicTimer.callback.append(self.download(link, self.getPicPage))
         self.getPicTimer.start(500, True)
@@ -15799,10 +15485,6 @@ class PicShowFull(tvBaseScreen):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def hideScreen(self):
         if self.hideflag == True:
             self.hideflag = False
@@ -15858,10 +15540,6 @@ class FullScreen(Screen):
             currPic = loadPic(self.picfile, 768, 576, 3, 0, 0, 0)
         if currPic != None:
             self['picture'].instance.setPixmap(currPic)
-        return
-
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
         return
 
     def hideScreen(self):
@@ -15945,8 +15623,7 @@ class searchYouTube(Screen):
          'blue': self.hideScreen,
          '0': self.gotoEnd,
          'bluelong': self.showHelp,
-         'showEventInfo': self.showHelp,
-         'displayHelp': self.infoScreen}, -1)
+         'showEventInfo': self.showHelp}, -1)
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             self.backcolor = False
         else:
@@ -16569,10 +16246,6 @@ class searchYouTube(Screen):
     def showHelp(self):
         self.session.open(MessageBox, '\n%s' % 'Bouquet = +- Seite\nGelb = Neue YouTube Suche', MessageBox.TYPE_INFO, close_on_any_key=True)
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def hideScreen(self):
         if self.hideflag == True:
             self.hideflag = False
@@ -16607,262 +16280,6 @@ class searchYouTube(Screen):
             os.remove(self.poster3)
         if fileExists(self.poster4):
             os.remove(self.poster4)
-        self.close()
-
-
-class infoScreenTVSpielfilm(Screen):
-    skin = '\n\t\t\t\t<screen position="center,center" size="425,425" title=" " >\n\t\t\t\t\t<ePixmap position="0,0" size="425,425" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/info.png" zPosition="1"/>\n\t\t\t\t\t<widget name="label" position="0,72" size="425,350" font="{font};18" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="center" valign="center" transparent="1" zPosition="2" />\n\t\t\t\t</screen>'
-
-    def __init__(self, session, plugin, check):
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
-        self.dict = {'font': font}
-        self.skin = applySkinVars(infoScreenTVSpielfilm.skin, self.dict)
-        Screen.__init__(self, session)
-        self.check = check
-        self['label'] = Label('www.kashmir-plugins.de\n\nGef\xc3\xa4llt Ihnen das Plugin?\nM\xc3\xb6chten Sie etwas spenden?\nGehen Sie dazu bitte wie folgt vor:\n\n\n\n1. Melden Sie sich bei PayPal an\n2. Klicken Sie auf: Geld senden\n3. Geld an Freunde und Familie senden\n4. Adresse: paypal@kashmir-plugins.de\n5. Betrag: 5 Euro\n6. Geld senden\nDanke!')
-        self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.close,
-         'cancel': self.close}, -1)
-        self.version = '6.6rc4'
-        self.plugin = plugin
-        if self.check == True:
-            self.setTitle('TV Spielfilm %s' % self.version)
-            if self.plugin is None:
-                self.link = 'https://sites.google.com/site/kashmirplugins/home/tv-spielfilm'
-                self.makeVersionTimer = eTimer()
-                self.makeVersionTimer.callback.append(self.download(self.link, self.checkVersion))
-                self.makeVersionTimer.start(500, True)
-            elif self.plugin == 'wiki':
-                self.link = 'https://sites.google.com/site/kashmirplugins/home/wikipedia'
-                self.getPluginTimer = eTimer()
-                self.getPluginTimer.callback.append(self.download(self.link, self.getPlugin))
-                self.getPluginTimer.start(500, True)
-            elif self.plugin == 'translator':
-                self.link = 'https://sites.google.com/site/kashmirplugins/home/translator'
-                self.getPluginTimer = eTimer()
-                self.getPluginTimer.callback.append(self.download(self.link, self.getPlugin))
-                self.getPluginTimer.start(500, True)
-        else:
-            self.setTitle('PayPal Info')
-        return
-
-    def getPlugin(self, output):
-        if self.plugin == 'wiki':
-            self.pluginname = 'Wikipedia'
-        elif self.plugin == 'translator':
-            self.pluginname = 'EPG Translator'
-        pluginsource = search('<a href="(.*?).attredirects=0".*?<img alt="Version ', output)
-        if pluginsource is not None:
-            self.pluginsource = pluginsource.group(1)
-            self.pluginfile = self.pluginsource.replace('https://sites.google.com/site/kashmirplugins/', '').replace('%5f', '_')
-            self.downloadfile = '/tmp/' + str(self.pluginfile)
-            self.session.openWithCallback(self.close, DownloadUpdate, self.pluginsource, self.pluginfile, self.pluginname)
-        return
-
-    def checkVersion(self, output):
-        self.pluginname = 'TV Spielfilm'
-        version = search('<img alt="Version (.*?)"', output)
-        if version is not None:
-            version = version.group(1)
-            if version != self.version:
-                pluginsource = search('<a href="(.*?).attredirects=0".*?<img alt="Version ', output)
-                if pluginsource is not None:
-                    self.pluginsource = pluginsource.group(1)
-                    self.pluginfile = self.pluginsource.replace('https://sites.google.com/site/kashmirplugins/', '').replace('%5f', '_')
-                    versioninfo = re.findall('<li><span style="color:rgb\\(100,118,135\\)">(.*?)</span></li>', output)
-                    if len(versioninfo) > 0:
-                        info = ''
-                        idx = 0
-                        for x in versioninfo:
-                            idx += 1
-
-                        for i in range(idx):
-                            try:
-                                info = info + ' - ' + versioninfo[i] + '\n'
-                            except IndexError:
-                                Info = ''
-
-                        self.session.openWithCallback(self.downloadPlugin, MessageBox, '\nEine neue Plugin Version ist verf\xfcgbar:\n%s Version %s\n\n%s\nSoll die neue Version jetzt installiert werden?' % (self.pluginname, version, info), MessageBox.TYPE_YESNO)
-                    else:
-                        self.session.openWithCallback(self.downloadPlugin, MessageBox, '\nEine neue Plugin Version ist verf\xfcgbar:\n%s Version %s\n\nSoll die neue Version jetzt installiert werden?' % (self.pluginname, version), MessageBox.TYPE_YESNO)
-            else:
-                self.session.open(MessageBox, '\nwww.kashmir-plugins.de\n\nIhre %s Version %s ist aktuell.' % (self.pluginname, self.version), MessageBox.TYPE_INFO, close_on_any_key=True)
-        return
-
-    def downloadPlugin(self, answer):
-        if answer is True:
-            self.pluginfile = '/tmp/' + str(self.pluginfile)
-            self.session.openWithCallback(self.close, DownloadUpdate, self.pluginsource, self.pluginfile, self.pluginname)
-
-    def download(self, link, name):
-        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
-
-    def downloadError(self, output):
-        pass
-
-
-class DownloadUpdate(Screen):
-    skin = '\n\t\t\t<screen position="center,center" size="550,190" title="Download Update..." >\n\t\t\t\t<ePixmap position="10,10" size="530,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="name" position="10,70" size="530,50" font="Regular;20" halign="center" valign="center" transparent="1" zPosition="1" />\n\t\t\t\t<widget name="size" position="10,120" size="530,25" font="Regular;20" halign="center" transparent="1" zPosition="1" />\n\t\t\t\t<widget name="slider" position="10,150" size="530,30" transparent="0" zPosition="2" />\n\t\t\t</screen>'
-
-    def __init__(self, session, url, file, name):
-        Screen.__init__(self, session)
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1920, 1080)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1920, 1080))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        self.url = url
-        self.file = file
-        self.name = name
-        self.hideflag = True
-        self.install = False
-        self.filesize = 0
-        self.localsize = 0
-        self.progress = 0
-        self.slider = Slider(0, 100)
-        self['name'] = Label('Downloading: %s' % self.file)
-        self['size'] = Label('')
-        self['slider'] = self.slider
-        self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {'ok': self.hideScreen,
-         'cancel': self.exit,
-         'blue': self.hideScreen}, -1)
-        self.statusTimer = eTimer()
-        self.statusTimer.callback.append(self.UpdateStatus)
-        self.statusTimer.start(500, True)
-        self.updateTimer = eTimer()
-        self.updateTimer.callback.append(self.refresh)
-        self.update_interval = 3000
-        self.onLayoutFinish.append(self.onLayoutFinished)
-
-    def onLayoutFinished(self):
-        self.getFileSize()
-        downloadPage(six.ensure_binary(self.url), self.file).addCallback(self.installPlugin)
-
-    def installPlugin(self, string):
-        self.install = True
-        self.container = eConsoleAppContainer()
-        self.container.appClosed.append(self.finished)
-        self.container.dataAvail.append(self.dataAvail)
-        self.container.execute('opkg install %s' % self.file)
-
-    def getFileSize(self):
-        header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
-         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-         'Accept-Language': 'en-us,en;q=0.5'}
-        request = Request(self.url, None, header)
-        try:
-            filesize = urlopen(request, timeout=60).info().get('Content-Length')
-            filesize = float(filesize)
-            self.filesize = filesize
-        except (HTTPError,
-         URLError,
-         HTTPException,
-         socket.error,
-         AttributeError):
-            pass
-
-        return
-
-    def UpdateStatus(self):
-        if fileExists(self.file):
-            localsize = path.getsize(self.file)
-            self.localsize = localsize
-        else:
-            self.localsize = 0
-        if self.filesize > 0:
-            self.progress = self.localsize / self.filesize * 100
-        if int(self.progress) > 1:
-            self['slider'].setValue(int(self.progress))
-            self['size'].setText('%s KB von %s KB' % (int(self.localsize) / 1024, int(self.filesize) / 1024))
-        elif self.localsize > 0 and self.filesize == 0:
-            self['slider'].setValue(0)
-            self['size'].setText('%s KB von ??? KB' % (int(self.localsize) / 1024))
-        elif self.filesize > 0 and self.localsize == 0:
-            self['slider'].setValue(0)
-            self['size'].setText('0 KB von %s KB' % (int(self.filesize) / 1024))
-        self.updateTimer.start(self.update_interval)
-
-    def refresh(self):
-        self.UpdateStatus()
-
-    def dataAvail(self, data):
-        if data is not None:
-            self.session.open(MessageBox, '\n%s' % data, MessageBox.TYPE_INFO, close_on_any_key=True)
-        return
-
-    def finished(self, retval):
-        if self.hideflag == False:
-            self.hideflag = True
-            f = open('/proc/stb/video/alpha', 'w')
-            f.write('%i' % config.av.osd_alpha.value)
-            f.close()
-        self.install = False
-        del self.container.appClosed[:]
-        del self.container.dataAvail[:]
-        del self.container
-        self.statusTimer.stop()
-        self.updateTimer.stop()
-        if retval == 0:
-            self.setTitle('Update finished!')
-            text = self.name + ' Update finished!'
-            self['name'].setText(text)
-            self['slider'].setValue(100)
-            self.session.openWithCallback(self.restartGUI, MessageBox, '\nDas %s Plugin wurde erfolgreich installiert.\nBitte starten Sie Enigma neu.' % self.name, MessageBox.TYPE_YESNO)
-        else:
-            self.close()
-
-    def restartGUI(self, answer):
-        if answer is True:
-            try:
-                self.session.open(TryQuitMainloop, 3)
-            except RuntimeError:
-                self.close()
-
-        else:
-            self.close()
-
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-    def exit(self):
-        if self.hideflag == False:
-            self.hideflag = True
-            f = open('/proc/stb/video/alpha', 'w')
-            f.write('%i' % config.av.osd_alpha.value)
-            f.close()
-        if self.install == True:
-            del self.container.appClosed[:]
-            del self.container.dataAvail[:]
-            del self.container
-        self.setTitle('Update canceled!')
-        self['slider'].setValue(0)
-        self.statusTimer.stop()
-        self.updateTimer.stop()
-        if fileExists(self.file):
-            os.remove(self.file)
         self.close()
 
 
@@ -16913,7 +16330,6 @@ class tvMain(Screen):
         self.pic4 = '/tmp/tvspielfilm4.jpg'
         self.pic5 = '/tmp/tvspielfilm5.jpg'
         self.pic6 = '/tmp/tvspielfilm6.jpg'
-        self.wikihtml = '/tmp/wiki.html'
         self.senderhtml = '/tmp/tvssender.html'
         self.localhtml = '/tmp/tvspielfilm.html'
         self.localhtml2 = '/tmp/tvspielfilm2.html'
@@ -16965,9 +16381,7 @@ class tvMain(Screen):
          'red': self.red,
          'green': self.green,
          'blue': self.hideScreen,
-         'showEventInfo': self.infoScreen,
-         'contextMenu': self.config,
-         'displayHelp': self.infoScreen}, -1)
+         'contextMenu': self.config}, -1)
         self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             self.backcolor = False
@@ -16983,12 +16397,6 @@ class tvMain(Screen):
             if self.hidetipps == False:
                 self.TagesTipps.start()
                 self.TagesTipps.show()
-        #if config.plugins.tvspielfilm.autoupdate.value == 'yes':
-        #    self.version = '6.6rc4'
-        #    self.link = 'https://sites.google.com/site/kashmirplugins/home/tv-spielfilm'
-        #    self.makeVersionTimer = eTimer()
-        #    self.makeVersionTimer.callback.append(self.downloadVersion(self.link, self.checkVersion))
-        #    self.makeVersionTimer.start(2500, True)
         if config.plugins.tvspielfilm.meintvs.value == 'yes':
             self.MeinTVS = True
             self.error = False
@@ -18782,57 +18190,6 @@ class tvMain(Screen):
     def rightDown(self):
         self[self.actmenu].pageDown()
 
-    def checkVersion(self, output):
-        self.pluginname = 'TV Spielfilm'
-        version = search('<img alt="Version (.*?)"', output)
-        if version is not None:
-            version = version.group(1)
-            if version != self.version:
-                pluginsource = search('<a href="(.*?).attredirects=0".*?<img alt="Version ', output)
-                if pluginsource is not None:
-                    self.pluginsource = pluginsource.group(1)
-                    self.pluginfile = self.pluginsource.replace('https://sites.google.com/site/kashmirplugins/', '').replace('%5f', '_')
-                    versioninfo = re.findall('<li><span style="color:rgb\\(100,118,135\\)">(.*?)</span></li>', output)
-                    if len(versioninfo) > 0:
-                        info = ''
-                        idx = 0
-                        for x in versioninfo:
-                            idx += 1
-
-                        for i in range(idx):
-                            try:
-                                info = info + ' - ' + versioninfo[i] + '\n'
-                            except IndexError:
-                                Info = ''
-
-                        if self.tipps == True:
-                            self.stopTipps()
-                        self.session.openWithCallback(self.downloadPlugin, MessageBox, '\nEine neue Plugin Version ist verf\xfcgbar:\n%s Version %s\n\n%s\nSoll die neue Version jetzt installiert werden?' % (self.pluginname, version, info), MessageBox.TYPE_YESNO)
-                    else:
-                        if self.tipps == True:
-                            self.stopTipps()
-                        self.session.openWithCallback(self.downloadPlugin, MessageBox, '\nEine neue Plugin Version ist verf\xfcgbar:\n%s Version %s\n\nSoll die neue Version jetzt installiert werden?' % (self.pluginname, version), MessageBox.TYPE_YESNO)
-            #elif config.plugins.tvspielfilm.paypal.value == 'yes':
-            #    import random
-            #    number = random.randint(1, 4)
-            #    if number == 1:
-            #        self.session.open(infoScreenTVSpielfilm, None, False)
-        return
-
-    def downloadPlugin(self, answer):
-        if answer is True:
-            if self.tipps == True:
-                self.TagesTipps.stop()
-                self.session.deleteDialog(self.TagesTipps)
-            self.pluginfile = '/tmp/' + str(self.pluginfile)
-            self.session.openWithCallback(self.close, DownloadUpdate, self.pluginsource, self.pluginfile, self.pluginname)
-
-    def downloadVersion(self, link, name):
-        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadVersionError)
-
-    def downloadVersionError(self, output):
-        self.ready = True
-
     def downloadError(self, output):
         try:
             error = output.getErrorMessage()
@@ -18959,8 +18316,6 @@ class tvMain(Screen):
             os.remove(self.pic5)
         if fileExists(self.pic6):
             os.remove(self.pic6)
-        if fileExists(self.wikihtml):
-            os.remove(self.wikihtml)
         if fileExists(self.senderhtml):
             os.remove(self.senderhtml)
         if fileExists(self.localhtml):
@@ -18984,13 +18339,6 @@ class tvMain(Screen):
                 self.stopTipps()
             servicelist = self.session.instantiateDialog(ChannelSelection)
             self.session.execDialog(servicelist)
-
-    def infoScreen(self):
-        if self.ready == True:
-            if self.tipps == True:
-                self.stopTipps()
-            self.session.open(infoScreenTVSpielfilm, None, True)
-        return
 
     def hideScreen(self):
         if self.hideflag == True:
@@ -19035,8 +18383,6 @@ class tvMain(Screen):
                 os.remove(self.pic5)
             if fileExists(self.pic6):
                 os.remove(self.pic6)
-            if fileExists(self.wikihtml):
-                os.remove(self.wikihtml)
             if fileExists(self.senderhtml):
                 os.remove(self.senderhtml)
             if fileExists(self.localhtml):
@@ -19412,10 +18758,6 @@ class gotoPageMenu(Screen):
     def downloadError(self, output):
         pass
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def hideScreen(self):
         if self.hideflag == True:
             self.hideflag = False
@@ -19724,10 +19066,6 @@ class tvTipps(Screen):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
 
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
-
     def hideScreen(self):
         if self.hideflag == True:
             self.hideflag = False
@@ -19791,8 +19129,6 @@ class tvsConfig(ConfigListScreen, Screen):
         list.append(getConfigListEntry('Max. Seiten TV-Genre Suche:', config.plugins.tvspielfilm.maxgenre))
         list.append(getConfigListEntry('Benutze AutoTimer Plugin:', config.plugins.tvspielfilm.autotimer))
         list.append(getConfigListEntry('Full HD Skin Support:', config.plugins.tvspielfilm.fhd))
-#        list.append(getConfigListEntry('Auto Update Check:', config.plugins.tvspielfilm.autoupdate))
-#        list.append(getConfigListEntry('PayPal Info:', config.plugins.tvspielfilm.paypal))
         ConfigListScreen.__init__(self, list, on_change=self.UpdateComponents)
         self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {'ok': self.save,
          'cancel': self.cancel,
@@ -19807,26 +19143,12 @@ class tvsConfig(ConfigListScreen, Screen):
         current = self['config'].getCurrent()
         if current == self.foldername:
             self.session.openWithCallback(self.folderSelected, FolderSelection, config.plugins.tvspielfilm.piconfolder.value)
-        #elif current == getConfigListEntry('PayPal Info:', config.plugins.tvspielfilm.paypal):
-        #    import time
-        #    from Screens.InputBox import PinInput
-        #    self.pin = int(time.strftime('%d%m'))
-        #    self.session.openWithCallback(self.returnPin, PinInput, pinList=[self.pin], triesEntry=config.ParentalControl.retries.servicepin)
 
     def folderSelected(self, folder):
         if folder is not None:
             config.plugins.tvspielfilm.piconfolder.value = folder
             config.plugins.tvspielfilm.piconfolder.save()
         return
-
-    #def returnPin(self, pin):
-    #    if pin:
-    #        config.plugins.tvspielfilm.paypal.value = 'no'
-    #        config.plugins.tvspielfilm.paypal.save()
-    #        configfile.save()
-    #    else:
-    #        config.plugins.tvspielfilm.paypal.value = 'yes'
-    #        config.plugins.tvspielfilm.paypal.save()
 
     def save(self):
         config.plugins.tvspielfilm.plugin_size.save()
@@ -19865,8 +19187,6 @@ class tvsConfig(ConfigListScreen, Screen):
         config.plugins.tvspielfilm.maxgenre.save()
         config.plugins.tvspielfilm.autotimer.save()
         config.plugins.tvspielfilm.fhd.save()
-        #config.plugins.tvspielfilm.autoupdate.save()
-        #config.plugins.tvspielfilm.paypal.save()
         configfile.save()
         self.exit()
 
@@ -20349,8 +19669,7 @@ class TVHeuteView(tvBaseScreen):
          'info': self.getEPG,
          'epg': self.getEPG,
          'leavePlayer': self.youTube,
-         'startTeletext': self.pressText,
-         'displayHelp': self.infoScreen}, -1)
+         'startTeletext': self.pressText}, -1)
         self['ColorActions'] = ActionMap(['ColorActions'], {'green': self.green,
          'yellow': self.yellow,
          'red': self.makeTimer,
@@ -22168,8 +21487,6 @@ class TVHeuteView(tvBaseScreen):
                 self.abends = True
                 self.nachts = False
                 self.makeTVView('')
-        elif self.ready == True:
-            self.session.open(infoScreenTVSpielfilm, None, True)
         return
 
     def makeTimer(self):
@@ -22994,9 +22311,6 @@ class TVHeuteView(tvBaseScreen):
             except IndexError:
                 pass
 
-        elif self.current == 'postview':
-            self.wiki()
-
     def yellow(self):
         if self.current == 'postview':
             self.youTube()
@@ -23203,50 +22517,6 @@ class TVHeuteView(tvBaseScreen):
                 self.session.open(searchYouTube, titel, self.movie)
             except IndexError:
                 pass
-
-    def wiki(self):
-        if self.current == 'postview':
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/Wikipedia.pyo'):
-                from Plugins.Extensions.Wikipedia.Wikipedia import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Wikipedia/plugin.pyo'):
-                from Plugins.Extensions.Wikipedia.plugin import wikiSearch
-                name = transWIKI(self.name)
-                self.session.open(wikiSearch, name)
-            else:
-                self.session.openWithCallback(self.wikiInstall, MessageBox, '\nDas Wikipedia Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-                return
-
-    def wikiInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'wiki', True)
-
-    def translator(self):
-        if self.current == 'postview':
-            if self.showEPG == False:
-                text = self.POSTtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            else:
-                text = self.EPGtext + 'FIN'
-                text = re.sub('>>.*?FIN', '', text, flags=re.S)
-                text = re.sub('Cast und Crew.*?FIN', '', text, flags=re.S)
-                text = re.sub('_____________.*?FIN', '', text, flags=re.S)
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/EPGTranslator.pyo'):
-                from Plugins.Extensions.EPGTranslator.EPGTranslator import translatorMain
-                self.session.open(translatorMain, text)
-            elif fileExists('/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator/plugin.pyo'):
-                from Plugins.Extensions.EPGTranslator.plugin import translatorMain
-                self.session.open(translatorMain, text)
-            else:
-                self.session.openWithCallback(self.translatorInstall, MessageBox, '\nDas EPG Translator Plugin ist nicht installiert.\nSoll das Plugin installiert werden?', MessageBox.TYPE_YESNO)
-                return
-
-    def translatorInstall(self, answer):
-        if answer is True:
-            self.session.open(infoScreenTVSpielfilm, 'translator', True)
 
     def IMDb(self):
         if self.current == 'postview':
@@ -23484,8 +22754,6 @@ class TVHeuteView(tvBaseScreen):
             self['label'].setText('Bitte warten...')
             self['label'].startBlinking()
             self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
-        elif self.current == 'postview':
-            self.translator()
         return
 
     def prevWeek(self):
@@ -23951,10 +23219,6 @@ class TVHeuteView(tvBaseScreen):
     def zapDown(self):
         if InfoBar and InfoBar.instance:
             InfoBar.zapDown(InfoBar.instance)
-
-    def infoScreen(self):
-        self.session.open(infoScreenTVSpielfilm, None, True)
-        return
 
     def picReturn(self):
         pass
