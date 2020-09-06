@@ -7735,7 +7735,7 @@ class TVJetztView(tvBaseScreen):
             self.progress = False
         a = findall('<td>(.*?)</td>', bereich)
         y = 0
-        offset = 6
+        offset = 7
         for x in a:
             if y == 0:
                 x = sub('LOGO', '', x)
@@ -7856,15 +7856,14 @@ class TVJetztView(tvBaseScreen):
             if y == 3:
                 if self.filter == False:
                     if search('TITEL', x) is not None:
-                        x = sub('TITEL', '', x)
-                        titel = x.split('">')
-                        if self.showgenre == False:
-                            x = titel[1]
+                        t = sub('TITEL', '', x)
+                        if self.showgenre == True and search('GENRE', x) is not None:
+                            x = t + " " + sub('GENRE', '', x)
                         else:
-                            x = titel[0]
+                            x = t
                         res_titel = []
                         res_titel.append(service)
-                        res_titel.append(titel[1])
+                        res_titel.append(t)
                         self.tvtitel.append(res_titel)
                         if self.picon == True:
                             if self.xd == False:
@@ -7890,10 +7889,10 @@ class TVJetztView(tvBaseScreen):
                             res.append(MultiContentEntryProgress(pos=(200, 10), size=(50, 10), percent=percent, borderWidth=1, foreColor=16777215))
                             res.append(MultiContentEntryText(pos=(270, 3), size=(575, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                     else:
-                        y = 4
+                        y = 5
                 elif search('TITEL', x) is None:
-                    y = 4
-            if y == 4:
+                    y = 5
+            if y == 5:
                 if search('SPARTE', x) is not None:
                     if self.filter == False:
                         x = sub('SPARTE', '', x)
@@ -7907,8 +7906,8 @@ class TVJetztView(tvBaseScreen):
                         else:
                             res.append(MultiContentEntryText(pos=(855, 3), size=(135, 30), font=0, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                 else:
-                    y = 5
-            if y == 5:
+                    y = 6
+            if y == 6:
                 if self.filter == False:
                     x = sub('RATING', '', x)
                     if self.rec == True:

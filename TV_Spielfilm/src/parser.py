@@ -1,4 +1,6 @@
-from re import sub, findall, S as RES
+from __future__ import print_function
+import six
+from re import sub, findall, S as RES, search
 
 def shortenChannel(text):
     text = text.replace('ProSieben ', 'Pro7 ').replace('kabel eins CLASSICS', 'k1CLASSICS').replace('Sky Family', 'SkyFamily').replace('Sky Cinema+', 'SkyCine+').replace('Sky Comedy', 'SkyComedy').replace('Sky Emotion', 'SkyEmotion').replace('Sky Sport HD', 'SkySport').replace('Eurosport ', 'Eurosport').replace('EXTREME SPORTS', 'EXTREME').replace('NAT GEO WILD', 'NatGeoWild').replace('Romance TV', 'RomanceTV')
@@ -523,6 +525,7 @@ def parseInfoTable(output, debug=None):
     bereich = sub('</a></strong>', '</td>', bereich)
     bereich = sub('</strong>', '</td>', bereich)
     bereich = sub('"saveRef..;" title="', '<td>TITEL', bereich)
+    bereich = sub('"><td>TIME','</td>', bereich)
     bereich = sub('" title="', '</td>', bereich)
     bereich = sub('"></span></td>', '</td>', bereich)
     bereich = sub('</span>', '</td>', bereich)
@@ -548,16 +551,18 @@ def parseInfoTable2(output, debug=None):
     bereich = transHTML(bereich)
     bereich = sub('class="chl_bg_. c-', '<td>LOGO', bereich)
     bereich = sub('<strong><a href="https://my', '<td>LINKhttps://www', bereich)
-    bereich = sub('<strong><a href="https://www', '<td>LINKhttps://www', bereich)
+    bereich = sub('<span>\n\\s+<a href="https://www', '<td>LINKhttps://www', bereich)
     bereich = sub('standard">\n\\s+<a href="https://my', '<td>LINKhttps://www', bereich)
     bereich = sub('standard">\n\\s+<a href="https://www', '<td>LINKhttps://www', bereich)
     bereich = sub('" target="_self" onclick', '</td>', bereich)
     bereich = sub('<li><strong>[0-9]+</strong></li>', '', bereich)
-    bereich = sub('<strong>', '<td>TIME', bereich)
+    bereich = sub('<div>\n\\s+<strong>', '<td>TIME', bereich)
     bereich = sub('</a></strong>', '</td>', bereich)
     bereich = sub('</strong>', '</td>', bereich)
     bereich = sub('"saveRef..;" title="', '<td>TITEL', bereich)
+    bereich = sub('"><strong>', '</td>', bereich)
     bereich = sub('" title="', '</td>', bereich)
+    bereich = sub('<td class="col-4">\n\\s+<span>', '<td>GENRE', bereich)
     bereich = sub('"></span></td>', '</td>', bereich)
     bereich = sub('</span>', '</td>', bereich)
     bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
@@ -604,3 +609,58 @@ def parsePrimeTimeTable(output, showgenre, debug=None):
         print("[DEBUG] parsePrimeTimeTable %s\n" % debug)
         print(bereich)
     return bereich
+
+def testnowerr(output):
+    print(output)
+
+def testnow2():
+    output = open('/tmp/tvspielfilm.html', 'r').read()
+    bereich = parseInfoTable2(output, True)
+    a = findall('<td>(.*?)</td>', bereich)
+    y = 0
+    offset = 7
+    for x in a:
+#        print(x)
+        if y == 0:
+            x = sub('LOGO', '', x)
+            print("LOGO:" + x)
+        if y == 1:
+            x = sub('TIME', '', x)
+            print("TIME:" + x)
+        if y == 2:
+            x = sub('LINK', '', x)
+            print("LINK:" + x)
+        if y == 3:
+            if search('TITEL', x) is not None:
+                t = sub('TITEL', '', x)
+                if search('GENRE', x) is not None:
+                    x = t + " " + sub('GENRE', '', x)
+                else:
+                    x = t
+                print("TITEL:" + x)
+            else:
+                y = 5
+        if y == 5:
+            if search('SPARTE', x) is not None:
+                x = sub('SPARTE', '', x)
+                print("SPARTE:" + x)
+            else:
+                y = 6
+        if y == 6:
+            x = sub('RATING', '', x)
+            print("RATING:" + x)
+        y += 1
+        if y == offset:
+            y = 0
+            
+#    bereich = parseInfoTable2(output, True)
+#    a = findall('<td>(.*?)</td>', bereich)
+#    for x in a:
+#        print(x)
+
+#def testnow():
+#    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
+#    getPage(link).addCallback(testnow2).addErrback(testnowerr)
+
+if __name__ == '__main__':
+    testnow2()
