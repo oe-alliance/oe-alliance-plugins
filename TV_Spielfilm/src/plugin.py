@@ -102,8 +102,8 @@ config.plugins.tvspielfilm.zapexit = ConfigSelection(default='yes', choices=[('y
 config.plugins.tvspielfilm.maxsearch = ConfigInteger(50, (10, 999))
 config.plugins.tvspielfilm.maxgenre = ConfigInteger(250, (10, 999))
 config.plugins.tvspielfilm.autotimer = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
-config.plugins.tvspielfilm.autoupdate = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
-config.plugins.tvspielfilm.paypal = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
+#config.plugins.tvspielfilm.autoupdate = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
+#config.plugins.tvspielfilm.paypal = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 
 class tvBaseScreen(Screen):
 
@@ -9743,7 +9743,7 @@ class TVProgrammView(tvBaseScreen):
             self.percent = False
         a = findall('<td>(.*?)</td>', bereich)
         y = 0
-        offset = 6
+        offset = 7
         for x in a:
             if y == 0:
                 x = sub('LOGO', '', x)
@@ -9861,13 +9861,12 @@ class TVProgrammView(tvBaseScreen):
                 self.tvlink.append(x)
             if y == 3:
                 if search('TITEL', x) is not None:
-                    x = sub('TITEL', '', x)
-                    titel = x.split('">')
-                    if self.showgenre == False:
-                        x = titel[1]
+                    t = sub('TITEL', '', x)
+                    if self.showgenre and search('GENRE', x) is not None:
+                        x = t + " " + sub('GENRE', '', x)
                     else:
-                        x = titel[0]
-                    self.tvtitel.append(titel[1])
+                        x = t
+                    self.tvtitel.append(t)
                     if self.picon == True:
                         if self.xd == False:
                             if self.progress == True and self.percent == True:
@@ -9892,8 +9891,8 @@ class TVProgrammView(tvBaseScreen):
                     else:
                         res.append(MultiContentEntryText(pos=(200, 3), size=(645, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                 else:
-                    y = 4
-            if y == 4:
+                    y = 5
+            if y == 5:
                 if search('SPARTE', x) is not None:
                     x = sub('SPARTE', '', x)
                     if self.picon == True:
@@ -9916,8 +9915,8 @@ class TVProgrammView(tvBaseScreen):
                     else:
                         res.append(MultiContentEntryText(pos=(855, 3), size=(135, 30), font=0, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                 else:
-                    y = 5
-            if y == 5:
+                    y = 6
+            if y == 6:
                 if search('RATING', x) is not None:
                     x = sub('RATING', '', x)
                     if self.rec == True:
@@ -16984,12 +16983,12 @@ class tvMain(Screen):
             if self.hidetipps == False:
                 self.TagesTipps.start()
                 self.TagesTipps.show()
-        if config.plugins.tvspielfilm.autoupdate.value == 'yes':
-            self.version = '6.6rc4'
-            self.link = 'https://sites.google.com/site/kashmirplugins/home/tv-spielfilm'
-            self.makeVersionTimer = eTimer()
-            self.makeVersionTimer.callback.append(self.downloadVersion(self.link, self.checkVersion))
-            self.makeVersionTimer.start(2500, True)
+        #if config.plugins.tvspielfilm.autoupdate.value == 'yes':
+        #    self.version = '6.6rc4'
+        #    self.link = 'https://sites.google.com/site/kashmirplugins/home/tv-spielfilm'
+        #    self.makeVersionTimer = eTimer()
+        #    self.makeVersionTimer.callback.append(self.downloadVersion(self.link, self.checkVersion))
+        #    self.makeVersionTimer.start(2500, True)
         if config.plugins.tvspielfilm.meintvs.value == 'yes':
             self.MeinTVS = True
             self.error = False
@@ -18813,11 +18812,11 @@ class tvMain(Screen):
                         if self.tipps == True:
                             self.stopTipps()
                         self.session.openWithCallback(self.downloadPlugin, MessageBox, '\nEine neue Plugin Version ist verf\xfcgbar:\n%s Version %s\n\nSoll die neue Version jetzt installiert werden?' % (self.pluginname, version), MessageBox.TYPE_YESNO)
-            elif config.plugins.tvspielfilm.paypal.value == 'yes':
-                import random
-                number = random.randint(1, 4)
-                if number == 1:
-                    self.session.open(infoScreenTVSpielfilm, None, False)
+            #elif config.plugins.tvspielfilm.paypal.value == 'yes':
+            #    import random
+            #    number = random.randint(1, 4)
+            #    if number == 1:
+            #        self.session.open(infoScreenTVSpielfilm, None, False)
         return
 
     def downloadPlugin(self, answer):
@@ -19792,8 +19791,8 @@ class tvsConfig(ConfigListScreen, Screen):
         list.append(getConfigListEntry('Max. Seiten TV-Genre Suche:', config.plugins.tvspielfilm.maxgenre))
         list.append(getConfigListEntry('Benutze AutoTimer Plugin:', config.plugins.tvspielfilm.autotimer))
         list.append(getConfigListEntry('Full HD Skin Support:', config.plugins.tvspielfilm.fhd))
-        list.append(getConfigListEntry('Auto Update Check:', config.plugins.tvspielfilm.autoupdate))
-        list.append(getConfigListEntry('PayPal Info:', config.plugins.tvspielfilm.paypal))
+#        list.append(getConfigListEntry('Auto Update Check:', config.plugins.tvspielfilm.autoupdate))
+#        list.append(getConfigListEntry('PayPal Info:', config.plugins.tvspielfilm.paypal))
         ConfigListScreen.__init__(self, list, on_change=self.UpdateComponents)
         self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {'ok': self.save,
          'cancel': self.cancel,
@@ -19808,11 +19807,11 @@ class tvsConfig(ConfigListScreen, Screen):
         current = self['config'].getCurrent()
         if current == self.foldername:
             self.session.openWithCallback(self.folderSelected, FolderSelection, config.plugins.tvspielfilm.piconfolder.value)
-        elif current == getConfigListEntry('PayPal Info:', config.plugins.tvspielfilm.paypal):
-            import time
-            from Screens.InputBox import PinInput
-            self.pin = int(time.strftime('%d%m'))
-            self.session.openWithCallback(self.returnPin, PinInput, pinList=[self.pin], triesEntry=config.ParentalControl.retries.servicepin)
+        #elif current == getConfigListEntry('PayPal Info:', config.plugins.tvspielfilm.paypal):
+        #    import time
+        #    from Screens.InputBox import PinInput
+        #    self.pin = int(time.strftime('%d%m'))
+        #    self.session.openWithCallback(self.returnPin, PinInput, pinList=[self.pin], triesEntry=config.ParentalControl.retries.servicepin)
 
     def folderSelected(self, folder):
         if folder is not None:
@@ -19820,14 +19819,14 @@ class tvsConfig(ConfigListScreen, Screen):
             config.plugins.tvspielfilm.piconfolder.save()
         return
 
-    def returnPin(self, pin):
-        if pin:
-            config.plugins.tvspielfilm.paypal.value = 'no'
-            config.plugins.tvspielfilm.paypal.save()
-            configfile.save()
-        else:
-            config.plugins.tvspielfilm.paypal.value = 'yes'
-            config.plugins.tvspielfilm.paypal.save()
+    #def returnPin(self, pin):
+    #    if pin:
+    #        config.plugins.tvspielfilm.paypal.value = 'no'
+    #        config.plugins.tvspielfilm.paypal.save()
+    #        configfile.save()
+    #    else:
+    #        config.plugins.tvspielfilm.paypal.value = 'yes'
+    #        config.plugins.tvspielfilm.paypal.save()
 
     def save(self):
         config.plugins.tvspielfilm.plugin_size.save()
@@ -19866,8 +19865,8 @@ class tvsConfig(ConfigListScreen, Screen):
         config.plugins.tvspielfilm.maxgenre.save()
         config.plugins.tvspielfilm.autotimer.save()
         config.plugins.tvspielfilm.fhd.save()
-        config.plugins.tvspielfilm.autoupdate.save()
-        config.plugins.tvspielfilm.paypal.save()
+        #config.plugins.tvspielfilm.autoupdate.save()
+        #config.plugins.tvspielfilm.paypal.save()
         configfile.save()
         self.exit()
 

@@ -518,15 +518,16 @@ def parseInfoTable(output, debug=None):
     bereich = output[startpos:endpos]
     bereich = transHTML(bereich)
     bereich = sub('class="chl_bg_. c-', '<td>LOGO', bereich)
-    bereich = sub('<strong><a href="', '<td>LINK', bereich)
+    bereich = sub('<span>\n\\s+<a href="', '<td>LINK', bereich)
     bereich = sub('" target="_self" onclick', '</td>', bereich)
     bereich = sub('<li><strong>[0-9]+</strong></li>', '', bereich)
-    bereich = sub('<strong>', '<td>TIME', bereich)
+    bereich = sub('<div>\n\\s+<strong>', '<td>TIME', bereich)
     bereich = sub('</a></strong>', '</td>', bereich)
     bereich = sub('</strong>', '</td>', bereich)
     bereich = sub('"saveRef..;" title="', '<td>TITEL', bereich)
-    bereich = sub('"><td>TIME','</td>', bereich)
+    bereich = sub('"><strong>', '</td>', bereich)
     bereich = sub('" title="', '</td>', bereich)
+    bereich = sub('<td class="col-4">\n\\s+<span>', '<td>GENRE', bereich)
     bereich = sub('"></span></td>', '</td>', bereich)
     bereich = sub('</span>', '</td>', bereich)
     bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
@@ -615,12 +616,13 @@ def testnowerr(output):
 
 def testnow2():
     output = open('/tmp/tvspielfilm.html', 'r').read()
-    bereich = parseInfoTable2(output, True)
+    bereich = parseInfoTable(output, True)
     a = findall('<td>(.*?)</td>', bereich)
     y = 0
     offset = 7
     for x in a:
-#        print(x)
+        print(x)
+        continue
         if y == 0:
             x = sub('LOGO', '', x)
             print("LOGO:" + x)
