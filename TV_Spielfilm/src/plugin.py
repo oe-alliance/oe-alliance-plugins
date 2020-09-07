@@ -268,6 +268,146 @@ class tvBaseScreen(tvAllScreen):
             autotimer.writeXml()
         return
 
+    def _getPic(self, pic, output):
+        f = open(pic, 'wb')
+        f.write(output)
+        f.close()
+        if self.xd == False:
+            currPic = loadPic(pic, 135, 90, 3, 0, 0, 0)
+        else:
+            currPic = loadPic(pic, 112, 75, 3, 0, 0, 0)
+        return currPic
+
+    def getPic1(self, output):
+        currPic = self._getPic(self.pic1, output)
+        if currPic != None:
+            self['pic1'].instance.setPixmap(currPic)
+        return
+
+    def getPic2(self, output):
+        currPic = self._getPic(self.pic2, output)
+        if currPic != None:
+            self['pic2'].instance.setPixmap(currPic)
+        return
+
+    def getPic3(self, output):
+        currPic = self._getPic(self.pic3, output)
+        if currPic != None:
+            self['pic3'].instance.setPixmap(currPic)
+        return
+
+    def getPic4(self, output):
+        currPic = self._getPic(self.pic4, output)
+        if currPic != None:
+            self['pic4'].instance.setPixmap(currPic)
+        return
+
+    def getPic5(self, output):
+        currPic = self._getPic(self.pic5, output)
+        if currPic != None:
+            self['pic5'].instance.setPixmap(currPic)
+        return
+
+    def getPic6(self, output):
+        currPic = self._getPic(self.pic6, output)
+        if currPic != None:
+            self['pic6'].instance.setPixmap(currPic)
+        return
+
+    def GetPics(self, picurllist, offset, show=True, playshow=False):
+        try:
+            picurl1 = picurllist[offset]
+            self.picdownload(picurl1, self.getPic1)
+            if show:
+                self['pic1'].show()
+            if playshow:
+                self['play1'].show()
+        except IndexError:
+            if playshow:
+                self['play1'].hide()
+            if show:
+                self['pic1'].hide()
+            else:
+                return
+
+        try:
+            picurl2 = picurllist[offset + 1]
+            self.picdownload(picurl2, self.getPic2)
+            if show:
+                self['pic1'].show()
+            if playshow:
+                self['play2'].show()
+        except IndexError:
+            if playshow:
+                self['play2'].hide()
+            if show:
+                self['pic2'].hide()
+            else:
+                return
+
+        try:
+            picurl3 = picurllist[offset + 2]
+            self.picdownload(picurl3, self.getPic3)
+            if show:
+                self['pic3'].show()
+            if playshow:
+                self['play3'].show()
+        except IndexError:
+            if playshow:
+                self['play3'].hide()
+            if show:
+                self['pic3'].hide()
+            else:
+                return
+
+        try:
+            picurl4 = picurllist[offset + 3]
+            self.picdownload(picurl4, self.getPic4)
+            if show:
+                self['pic4'].show()
+            if playshow:
+                self['play4'].show()
+        except IndexError:
+            if playshow:
+                self['play4'].hide()
+            if show:
+                self['pic4'].hide()
+            else:
+                return
+
+        try:
+            picurl5 = picurllist[offset + 4]
+            self.picdownload(picurl5, self.getPic5)
+            if playshow:
+                self['play5'].show()
+            if show:
+                self['pic5'].show()
+        except IndexError:
+            if playshow:
+                self['play5'].hide()
+            if show:
+                self['pic5'].hide()
+            else:
+                return
+
+        try:
+            picurl6 = picurllist[offset + 5]
+            self.picdownload(picurl6, self.getPic6)
+            if playshow:
+                self['play6'].show()
+            if show:
+                self['pic6'].show()
+        except IndexError:
+            if playshow:
+                self['play6'].hide()
+            if show:
+                self['pic6'].hide()
+
+    def picdownload(self, link, name):
+        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.picdownloadError)
+
+    def picdownloadError(self, output):
+        pass
 
 class TVTippsView(tvBaseScreen):
     skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV-Tipps - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilm.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="880,450" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="890,60" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="890,135" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="890,210" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="890,285" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="890,360" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="890,435" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
@@ -635,48 +775,9 @@ class TVTippsView(tvBaseScreen):
         self['label'].stopBlinking()
         self['label'].show()
         self.ready = True
-        try:
-            picurl1 = self.picurllist[0]
-            self.download(picurl1, self.getPic1)
-            self['pic1'].show()
-        except IndexError:
-            self['pic1'].hide()
-
-        try:
-            picurl2 = self.picurllist[1]
-            self.download(picurl2, self.getPic2)
-            self['pic2'].show()
-        except IndexError:
-            self['pic2'].hide()
-
-        try:
-            picurl3 = self.picurllist[2]
-            self.download(picurl3, self.getPic3)
-            self['pic3'].show()
-        except IndexError:
-            self['pic3'].hide()
-
-        try:
-            picurl4 = self.picurllist[3]
-            self.download(picurl4, self.getPic4)
-            self['pic4'].show()
-        except IndexError:
-            self['pic4'].hide()
-
-        try:
-            picurl5 = self.picurllist[4]
-            self.download(picurl5, self.getPic5)
-            self['pic5'].show()
-        except IndexError:
-            self['pic5'].hide()
-
-        try:
-            picurl6 = self.picurllist[5]
-            self.download(picurl6, self.getPic6)
-            self['pic6'].show()
-        except IndexError:
-            self['pic6'].hide()
-
+        
+        self.GetPics(self.picurllist, 0)
+        
         return
 
     def makePostviewPage(self, string):
@@ -2009,96 +2110,6 @@ class TVTippsView(tvBaseScreen):
         if fileExists(pngname):
             return pngname
 
-    def getPic1(self, output):
-        f = open(self.pic1, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic1(self.pic1)
-
-    def showPic1(self, pic1):
-        if self.xd == False:
-            currPic = loadPic(pic1, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic1, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic1'].instance.setPixmap(currPic)
-        return
-
-    def getPic2(self, output):
-        f = open(self.pic2, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic2(self.pic2)
-
-    def showPic2(self, pic2):
-        if self.xd == False:
-            currPic = loadPic(pic2, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic2, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic2'].instance.setPixmap(currPic)
-        return
-
-    def getPic3(self, output):
-        f = open(self.pic3, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic3(self.pic3)
-
-    def showPic3(self, pic3):
-        if self.xd == False:
-            currPic = loadPic(pic3, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic3, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic3'].instance.setPixmap(currPic)
-        return
-
-    def getPic4(self, output):
-        f = open(self.pic4, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic4(self.pic4)
-
-    def showPic4(self, pic4):
-        if self.xd == False:
-            currPic = loadPic(pic4, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic4, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic4'].instance.setPixmap(currPic)
-        return
-
-    def getPic5(self, output):
-        f = open(self.pic5, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic5(self.pic5)
-
-    def showPic5(self, pic5):
-        if self.xd == False:
-            currPic = loadPic(pic5, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic5, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic5'].instance.setPixmap(currPic)
-        return
-
-    def getPic6(self, output):
-        f = open(self.pic6, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic6(self.pic6)
-
-    def showPic6(self, pic6):
-        if self.xd == False:
-            currPic = loadPic(pic6, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic6, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic6'].instance.setPixmap(currPic)
-        return
-
     def getPicPost(self, output):
         f = open(self.picfile, 'wb')
         f.write(output)
@@ -2234,90 +2245,9 @@ class TVTippsView(tvBaseScreen):
 
             self['menu'].down()
             if c + 1 == self.len:
-                try:
-                    picurl1 = self.picurllist[0]
-                    self.download(picurl1, self.getPic1)
-                    self['pic1'].show()
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[1]
-                    self.download(picurl2, self.getPic2)
-                    self['pic2'].show()
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[2]
-                    self.download(picurl3, self.getPic3)
-                    self['pic3'].show()
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[3]
-                    self.download(picurl4, self.getPic4)
-                    self['pic4'].show()
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[4]
-                    self.download(picurl5, self.getPic5)
-                    self['pic5'].show()
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[5]
-                    self.download(picurl6, self.getPic6)
-                    self['pic6'].show()
-                except IndexError:
-                    self['pic6'].hide()
-
+                self.GetPics(self.picurllist, 0)
             elif c % 6 == 5:
-                try:
-                    picurl1 = self.picurllist[c + 1]
-                    self.download(picurl1, self.getPic1)
-                    self['pic1'].show()
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 2]
-                    self.download(picurl2, self.getPic2)
-                    self['pic2'].show()
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 3]
-                    self.download(picurl3, self.getPic3)
-                    self['pic3'].show()
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 4]
-                    self.download(picurl4, self.getPic4)
-                    self['pic4'].show()
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 5]
-                    self.download(picurl5, self.getPic5)
-                    self['pic5'].show()
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 6]
-                    self.download(picurl6, self.getPic6)
-                    self['pic6'].show()
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c - 1)
 
         elif self.current == 'searchmenu':
             self['searchmenu'].down()
@@ -2337,90 +2267,11 @@ class TVTippsView(tvBaseScreen):
                 d = l % 6
                 if d == 0:
                     d = 6
-                try:
-                    picurl1 = self.picurllist[l - d]
-                    self.download(picurl1, self.getPic1)
-                    self['pic1'].show()
-                except IndexError:
-                    self['pic1'].hide()
 
-                try:
-                    picurl2 = self.picurllist[l - d + 1]
-                    self.download(picurl2, self.getPic2)
-                    self['pic2'].show()
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[l - d + 2]
-                    self.download(picurl3, self.getPic3)
-                    self['pic3'].show()
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[l - d + 3]
-                    self.download(picurl4, self.getPic4)
-                    self['pic4'].show()
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[l - d + 4]
-                    self.download(picurl5, self.getPic5)
-                    self['pic5'].show()
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[l - d + 5]
-                    self.download(picurl6, self.getPic6)
-                    self['pic6'].show()
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, l - d)
 
             elif c % 6 == 0:
-                try:
-                    picurl1 = self.picurllist[c - 6]
-                    self.download(picurl1, self.getPic1)
-                    self['pic1'].show()
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c - 5]
-                    self.download(picurl2, self.getPic2)
-                    self['pic2'].show()
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c - 4]
-                    self.download(picurl3, self.getPic3)
-                    self['pic3'].show()
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c - 3]
-                    self.download(picurl4, self.getPic4)
-                    self['pic4'].show()
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c - 2]
-                    self.download(picurl5, self.getPic5)
-                    self['pic5'].show()
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c - 1]
-                    self.download(picurl6, self.getPic6)
-                    self['pic6'].show()
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c - 6)
 
         elif self.current == 'searchmenu':
             self['searchmenu'].up()
@@ -2443,226 +2294,22 @@ class TVTippsView(tvBaseScreen):
             if c + e >= l:
                 pass
             elif d == 0:
-                try:
-                    picurl1 = self.picurllist[c + 6]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 7]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 8]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 9]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 10]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 11]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 6)
 
             elif d == 1:
-                try:
-                    picurl1 = self.picurllist[c + 5]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 6]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 7]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 8]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 9]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 10]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 5)
 
             elif d == 2:
-                try:
-                    picurl1 = self.picurllist[c + 4]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 5]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 6]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 7]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 8]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 9]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 4)
 
             elif d == 3:
-                try:
-                    picurl1 = self.picurllist[c + 3]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 4]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 5]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 6]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 7]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 8]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 3)
 
             elif d == 4:
-                try:
-                    picurl1 = self.picurllist[c + 2]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 3]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 4]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 5]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 6]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 7]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 2)
 
             elif d == 5:
-                try:
-                    picurl1 = self.picurllist[c + 1]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 2]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 3]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 4]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 5]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 6]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 1)
 
         elif self.current == 'searchmenu':
             self['searchmenu'].pageDown()
@@ -2681,106 +2328,22 @@ class TVTippsView(tvBaseScreen):
             if c < 6:
                 pass
             elif d == 0:
-                try:
-                    picurl1 = self.picurllist[c - 6]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 5]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 4]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 3]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 2]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 1]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 6, False)
 
             elif d == 1:
-                try:
-                    picurl1 = self.picurllist[c - 7]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 6]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 5]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 4]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 3]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 2]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 7, False)
 
             elif d == 2:
-                try:
-                    picurl1 = self.picurllist[c - 8]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 7]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 6]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 5]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 4]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 3]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 8, False)
 
             elif d == 3:
-                try:
-                    picurl1 = self.picurllist[c - 9]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 8]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 7]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 6]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 5]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 4]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 9, False)
 
             elif d == 4:
-                try:
-                    picurl1 = self.picurllist[c - 10]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 9]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 8]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 7]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 6]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 5]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 10, False)
 
             elif d == 5:
-                try:
-                    picurl1 = self.picurllist[c - 11]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 10]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 9]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 8]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 7]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 6]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 11, False)
 
             self['pic1'].show()
             self['pic2'].show()
@@ -3166,47 +2729,7 @@ class TVNeuView(tvBaseScreen):
         self['label'].stopBlinking()
         self['label'].show()
         self.ready = True
-        try:
-            picurl1 = self.picurllist[0]
-            self.download(picurl1, self.getPic1)
-            self['pic1'].show()
-        except IndexError:
-            self['pic1'].hide()
-
-        try:
-            picurl2 = self.picurllist[1]
-            self.download(picurl2, self.getPic2)
-            self['pic2'].show()
-        except IndexError:
-            self['pic2'].hide()
-
-        try:
-            picurl3 = self.picurllist[2]
-            self.download(picurl3, self.getPic3)
-            self['pic3'].show()
-        except IndexError:
-            self['pic3'].hide()
-
-        try:
-            picurl4 = self.picurllist[3]
-            self.download(picurl4, self.getPic4)
-            self['pic4'].show()
-        except IndexError:
-            self['pic4'].hide()
-
-        try:
-            picurl5 = self.picurllist[4]
-            self.download(picurl5, self.getPic5)
-            self['pic5'].show()
-        except IndexError:
-            self['pic5'].hide()
-
-        try:
-            picurl6 = self.picurllist[5]
-            self.download(picurl6, self.getPic6)
-            self['pic6'].show()
-        except IndexError:
-            self['pic6'].hide()
+        self.GetPics(self.picurllist, 0)
 
         return
 
@@ -4534,96 +4057,6 @@ class TVNeuView(tvBaseScreen):
         if fileExists(pngname):
             return pngname
 
-    def getPic1(self, output):
-        f = open(self.pic1, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic1(self.pic1)
-
-    def showPic1(self, pic1):
-        if self.xd == False:
-            currPic = loadPic(pic1, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic1, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic1'].instance.setPixmap(currPic)
-        return
-
-    def getPic2(self, output):
-        f = open(self.pic2, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic2(self.pic2)
-
-    def showPic2(self, pic2):
-        if self.xd == False:
-            currPic = loadPic(pic2, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic2, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic2'].instance.setPixmap(currPic)
-        return
-
-    def getPic3(self, output):
-        f = open(self.pic3, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic3(self.pic3)
-
-    def showPic3(self, pic3):
-        if self.xd == False:
-            currPic = loadPic(pic3, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic3, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic3'].instance.setPixmap(currPic)
-        return
-
-    def getPic4(self, output):
-        f = open(self.pic4, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic4(self.pic4)
-
-    def showPic4(self, pic4):
-        if self.xd == False:
-            currPic = loadPic(pic4, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic4, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic4'].instance.setPixmap(currPic)
-        return
-
-    def getPic5(self, output):
-        f = open(self.pic5, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic5(self.pic5)
-
-    def showPic5(self, pic5):
-        if self.xd == False:
-            currPic = loadPic(pic5, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic5, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic5'].instance.setPixmap(currPic)
-        return
-
-    def getPic6(self, output):
-        f = open(self.pic6, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic6(self.pic6)
-
-    def showPic6(self, pic6):
-        if self.xd == False:
-            currPic = loadPic(pic6, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic6, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic6'].instance.setPixmap(currPic)
-        return
-
     def getPicPost(self, output):
         f = open(self.picfile, 'wb')
         f.write(output)
@@ -4759,90 +4192,10 @@ class TVNeuView(tvBaseScreen):
 
             self['menu'].down()
             if c + 1 == self.len:
-                try:
-                    picurl1 = self.picurllist[0]
-                    self.download(picurl1, self.getPic1)
-                    self['pic1'].show()
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[1]
-                    self.download(picurl2, self.getPic2)
-                    self['pic2'].show()
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[2]
-                    self.download(picurl3, self.getPic3)
-                    self['pic3'].show()
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[3]
-                    self.download(picurl4, self.getPic4)
-                    self['pic4'].show()
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[4]
-                    self.download(picurl5, self.getPic5)
-                    self['pic5'].show()
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[5]
-                    self.download(picurl6, self.getPic6)
-                    self['pic6'].show()
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, 0)
 
             elif c % 6 == 5:
-                try:
-                    picurl1 = self.picurllist[c + 1]
-                    self.download(picurl1, self.getPic1)
-                    self['pic1'].show()
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 2]
-                    self.download(picurl2, self.getPic2)
-                    self['pic2'].show()
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 3]
-                    self.download(picurl3, self.getPic3)
-                    self['pic3'].show()
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 4]
-                    self.download(picurl4, self.getPic4)
-                    self['pic4'].show()
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 5]
-                    self.download(picurl5, self.getPic5)
-                    self['pic5'].show()
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 6]
-                    self.download(picurl6, self.getPic6)
-                    self['pic6'].show()
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 1)
 
         elif self.current == 'searchmenu':
             self['searchmenu'].down()
@@ -4862,90 +4215,10 @@ class TVNeuView(tvBaseScreen):
                 d = l % 6
                 if d == 0:
                     d = 6
-                try:
-                    picurl1 = self.picurllist[l - d]
-                    self.download(picurl1, self.getPic1)
-                    self['pic1'].show()
-                except IndexError:
-                    self['pic1'].hide()
 
-                try:
-                    picurl2 = self.picurllist[l - d + 1]
-                    self.download(picurl2, self.getPic2)
-                    self['pic2'].show()
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[l - d + 2]
-                    self.download(picurl3, self.getPic3)
-                    self['pic3'].show()
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[l - d + 3]
-                    self.download(picurl4, self.getPic4)
-                    self['pic4'].show()
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[l - d + 4]
-                    self.download(picurl5, self.getPic5)
-                    self['pic5'].show()
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[l - d + 5]
-                    self.download(picurl6, self.getPic6)
-                    self['pic6'].show()
-                except IndexError:
-                    self['pic6'].hide()
-
+                self.GetPics(self.picurllist, l - d)
             elif c % 6 == 0:
-                try:
-                    picurl1 = self.picurllist[c - 6]
-                    self.download(picurl1, self.getPic1)
-                    self['pic1'].show()
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c - 5]
-                    self.download(picurl2, self.getPic2)
-                    self['pic2'].show()
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c - 4]
-                    self.download(picurl3, self.getPic3)
-                    self['pic3'].show()
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c - 3]
-                    self.download(picurl4, self.getPic4)
-                    self['pic4'].show()
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c - 2]
-                    self.download(picurl5, self.getPic5)
-                    self['pic5'].show()
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c - 1]
-                    self.download(picurl6, self.getPic6)
-                    self['pic6'].show()
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c - 6)
 
         elif self.current == 'searchmenu':
             self['searchmenu'].up()
@@ -4968,226 +4241,22 @@ class TVNeuView(tvBaseScreen):
             if c + e >= l:
                 pass
             elif d == 0:
-                try:
-                    picurl1 = self.picurllist[c + 6]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 7]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 8]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 9]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 10]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 11]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 6)
 
             elif d == 1:
-                try:
-                    picurl1 = self.picurllist[c + 5]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 6]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 7]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 8]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 9]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 10]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 5)
 
             elif d == 2:
-                try:
-                    picurl1 = self.picurllist[c + 4]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 5]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 6]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 7]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 8]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 9]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 4)
 
             elif d == 3:
-                try:
-                    picurl1 = self.picurllist[c + 3]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 4]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 5]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 6]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 7]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 8]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 3)
 
             elif d == 4:
-                try:
-                    picurl1 = self.picurllist[c + 2]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 3]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 4]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 5]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 6]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 7]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 2)
 
             elif d == 5:
-                try:
-                    picurl1 = self.picurllist[c + 1]
-                    self.download(picurl1, self.getPic1)
-                except IndexError:
-                    self['pic1'].hide()
-
-                try:
-                    picurl2 = self.picurllist[c + 2]
-                    self.download(picurl2, self.getPic2)
-                except IndexError:
-                    self['pic2'].hide()
-
-                try:
-                    picurl3 = self.picurllist[c + 3]
-                    self.download(picurl3, self.getPic3)
-                except IndexError:
-                    self['pic3'].hide()
-
-                try:
-                    picurl4 = self.picurllist[c + 4]
-                    self.download(picurl4, self.getPic4)
-                except IndexError:
-                    self['pic4'].hide()
-
-                try:
-                    picurl5 = self.picurllist[c + 5]
-                    self.download(picurl5, self.getPic5)
-                except IndexError:
-                    self['pic5'].hide()
-
-                try:
-                    picurl6 = self.picurllist[c + 6]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    self['pic6'].hide()
+                self.GetPics(self.picurllist, c + 1)
 
         elif self.current == 'searchmenu':
             self['searchmenu'].pageDown()
@@ -5206,106 +4275,22 @@ class TVNeuView(tvBaseScreen):
             if c < 6:
                 pass
             elif d == 0:
-                try:
-                    picurl1 = self.picurllist[c - 6]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 5]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 4]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 3]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 2]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 1]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 6, False)
 
             elif d == 1:
-                try:
-                    picurl1 = self.picurllist[c - 7]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 6]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 5]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 4]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 3]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 2]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 7, False)
 
             elif d == 2:
-                try:
-                    picurl1 = self.picurllist[c - 8]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 7]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 6]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 5]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 4]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 3]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 8, False)
 
             elif d == 3:
-                try:
-                    picurl1 = self.picurllist[c - 9]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 8]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 7]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 6]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 5]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 4]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 9, False)
 
             elif d == 4:
-                try:
-                    picurl1 = self.picurllist[c - 10]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 9]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 8]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 7]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 6]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 5]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 10, False)
 
             elif d == 5:
-                try:
-                    picurl1 = self.picurllist[c - 11]
-                    self.download(picurl1, self.getPic1)
-                    picurl2 = self.picurllist[c - 10]
-                    self.download(picurl2, self.getPic2)
-                    picurl3 = self.picurllist[c - 9]
-                    self.download(picurl3, self.getPic3)
-                    picurl4 = self.picurllist[c - 8]
-                    self.download(picurl4, self.getPic4)
-                    picurl5 = self.picurllist[c - 7]
-                    self.download(picurl5, self.getPic5)
-                    picurl6 = self.picurllist[c - 6]
-                    self.download(picurl6, self.getPic6)
-                except IndexError:
-                    pass
+                self.GetPics(self.picurllist, c - 11, False)
 
             self['pic1'].show()
             self['pic2'].show()
@@ -11297,47 +10282,8 @@ class TVTrailer(tvBaseScreen):
             self['play5'].show()
             self.showPlay6(playlogo)
             self['play6'].show()
-        try:
-            picurl1 = self.picurllist[0]
-            self.download(picurl1, self.getPic1)
-            self['pic1'].show()
-        except IndexError:
-            self['pic1'].hide()
 
-        try:
-            picurl2 = self.picurllist[1]
-            self.download(picurl2, self.getPic2)
-            self['pic2'].show()
-        except IndexError:
-            self['pic2'].hide()
-
-        try:
-            picurl3 = self.picurllist[2]
-            self.download(picurl3, self.getPic3)
-            self['pic3'].show()
-        except IndexError:
-            self['pic3'].hide()
-
-        try:
-            picurl4 = self.picurllist[3]
-            self.download(picurl4, self.getPic4)
-            self['pic4'].show()
-        except IndexError:
-            self['pic4'].hide()
-
-        try:
-            picurl5 = self.picurllist[4]
-            self.download(picurl5, self.getPic5)
-            self['pic5'].show()
-        except IndexError:
-            self['pic5'].hide()
-
-        try:
-            picurl6 = self.picurllist[5]
-            self.download(picurl6, self.getPic6)
-            self['pic6'].show()
-        except IndexError:
-            self['pic6'].hide()
+            self.GetPics(self.picurllist, 0)
 
         return
 
@@ -11378,95 +10324,6 @@ class TVTrailer(tvBaseScreen):
                 self.leftUp()
                 self.rightDown()
 
-    def getPic1(self, output):
-        f = open(self.pic1, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic1(self.pic1)
-
-    def showPic1(self, pic1):
-        if self.xd == False:
-            currPic = loadPic(pic1, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic1, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic1'].instance.setPixmap(currPic)
-        return
-
-    def getPic2(self, output):
-        f = open(self.pic2, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic2(self.pic2)
-
-    def showPic2(self, pic2):
-        if self.xd == False:
-            currPic = loadPic(pic2, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic2, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic2'].instance.setPixmap(currPic)
-        return
-
-    def getPic3(self, output):
-        f = open(self.pic3, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic3(self.pic3)
-
-    def showPic3(self, pic3):
-        if self.xd == False:
-            currPic = loadPic(pic3, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic3, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic3'].instance.setPixmap(currPic)
-        return
-
-    def getPic4(self, output):
-        f = open(self.pic4, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic4(self.pic4)
-
-    def showPic4(self, pic4):
-        if self.xd == False:
-            currPic = loadPic(pic4, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic4, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic4'].instance.setPixmap(currPic)
-        return
-
-    def getPic5(self, output):
-        f = open(self.pic5, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic5(self.pic5)
-
-    def showPic5(self, pic5):
-        if self.xd == False:
-            currPic = loadPic(pic5, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic5, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic5'].instance.setPixmap(currPic)
-        return
-
-    def getPic6(self, output):
-        f = open(self.pic6, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic6(self.pic6)
-
-    def showPic6(self, pic6):
-        if self.xd == False:
-            currPic = loadPic(pic6, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic6, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic6'].instance.setPixmap(currPic)
-        return
 
     def showPlay1(self, playlogo):
         currPic = loadPic(playlogo, 109, 58, 3, 0, 0, 0)
@@ -11521,114 +10378,10 @@ class TVTrailer(tvBaseScreen):
 
         self['menu'].down()
         if c + 1 == len(self.tventries):
-            try:
-                picurl1 = self.picurllist[0]
-                self.download(picurl1, self.getPic1)
-                self['pic1'].show()
-                self['play1'].show()
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[1]
-                self.download(picurl2, self.getPic2)
-                self['pic2'].show()
-                self['play2'].show()
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[2]
-                self.download(picurl3, self.getPic3)
-                self['pic3'].show()
-                self['play3'].show()
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[3]
-                self.download(picurl4, self.getPic4)
-                self['pic4'].show()
-                self['play4'].show()
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[4]
-                self.download(picurl5, self.getPic5)
-                self['pic5'].show()
-                self['play5'].show()
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[5]
-                self.download(picurl6, self.getPic6)
-                self['pic6'].show()
-                self['play6'].show()
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, 0, True, True)
 
         elif c % 6 == 5:
-            try:
-                picurl1 = self.picurllist[c + 1]
-                self.download(picurl1, self.getPic1)
-                self['pic1'].show()
-                self['play1'].show()
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 2]
-                self.download(picurl2, self.getPic2)
-                self['pic2'].show()
-                self['play2'].show()
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 3]
-                self.download(picurl3, self.getPic3)
-                self['pic3'].show()
-                self['play3'].show()
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 4]
-                self.download(picurl4, self.getPic4)
-                self['pic4'].show()
-                self['play4'].show()
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 5]
-                self.download(picurl5, self.getPic5)
-                self['pic5'].show()
-                self['play5'].show()
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 6]
-                self.download(picurl6, self.getPic6)
-                self['pic6'].show()
-                self['play6'].show()
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 1, True, True)
 
     def up(self):
         try:
@@ -11642,114 +10395,10 @@ class TVTrailer(tvBaseScreen):
             d = l % 6
             if d == 0:
                 d = 6
-            try:
-                picurl1 = self.picurllist[l - d]
-                self.download(picurl1, self.getPic1)
-                self['pic1'].show()
-                self['play1'].show()
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[l - d + 1]
-                self.download(picurl2, self.getPic2)
-                self['pic2'].show()
-                self['play2'].show()
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[l - d + 2]
-                self.download(picurl3, self.getPic3)
-                self['pic3'].show()
-                self['play3'].show()
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[l - d + 3]
-                self.download(picurl4, self.getPic4)
-                self['pic4'].show()
-                self['play4'].show()
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[l - d + 4]
-                self.download(picurl5, self.getPic5)
-                self['pic5'].show()
-                self['play5'].show()
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[l - d + 5]
-                self.download(picurl6, self.getPic6)
-                self['pic6'].show()
-                self['play6'].show()
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, l - d, True, True)
 
         elif c % 6 == 0:
-            try:
-                picurl1 = self.picurllist[c - 6]
-                self.download(picurl1, self.getPic1)
-                self['pic1'].show()
-                self['play1'].show()
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c - 5]
-                self.download(picurl2, self.getPic2)
-                self['pic2'].show()
-                self['play2'].show()
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c - 4]
-                self.download(picurl3, self.getPic3)
-                self['pic3'].show()
-                self['play3'].show()
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c - 3]
-                self.download(picurl4, self.getPic4)
-                self['pic4'].show()
-                self['play4'].show()
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c - 2]
-                self.download(picurl5, self.getPic5)
-                self['pic5'].show()
-                self['play5'].show()
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c - 1]
-                self.download(picurl6, self.getPic6)
-                self['pic6'].show()
-                self['play6'].show()
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c - 6, True, True)
 
     def rightDown(self):
         try:
@@ -11766,262 +10415,22 @@ class TVTrailer(tvBaseScreen):
         if c + e >= l:
             pass
         elif d == 0:
-            try:
-                picurl1 = self.picurllist[c + 6]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 7]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 8]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 9]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 10]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 11]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 6, True, True)
 
         elif d == 1:
-            try:
-                picurl1 = self.picurllist[c + 5]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 6]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 7]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 8]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 9]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 10]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 5, True, True)
 
         elif d == 2:
-            try:
-                picurl1 = self.picurllist[c + 4]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 5]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 6]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 7]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 8]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 9]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 4, True, True)
 
         elif d == 3:
-            try:
-                picurl1 = self.picurllist[c + 3]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 4]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 5]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 6]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 7]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 8]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 3, True, True)
 
         elif d == 4:
-            try:
-                picurl1 = self.picurllist[c + 2]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 3]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 4]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 5]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 6]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 7]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 2, True, True)
 
         elif d == 5:
-            try:
-                picurl1 = self.picurllist[c + 1]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 2]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 3]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 4]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 5]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 6]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 1, True, True)
 
     def leftUp(self):
         try:
@@ -12034,106 +10443,22 @@ class TVTrailer(tvBaseScreen):
         if c < 6:
             pass
         elif d == 0:
-            try:
-                picurl1 = self.picurllist[c - 6]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 5]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 4]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 3]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 2]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 1]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 6, False)
 
         elif d == 1:
-            try:
-                picurl1 = self.picurllist[c - 7]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 6]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 5]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 4]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 3]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 2]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 7, False)
 
         elif d == 2:
-            try:
-                picurl1 = self.picurllist[c - 8]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 7]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 6]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 5]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 4]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 3]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 8, False)
 
         elif d == 3:
-            try:
-                picurl1 = self.picurllist[c - 9]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 8]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 7]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 6]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 5]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 4]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 9, False)
 
         elif d == 4:
-            try:
-                picurl1 = self.picurllist[c - 10]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 9]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 8]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 7]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 6]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 5]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 10, False)
 
         elif d == 5:
-            try:
-                picurl1 = self.picurllist[c - 11]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 10]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 9]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 8]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 7]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 6]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 11, False)
 
         self['pic1'].show()
         self['pic2'].show()
@@ -12296,47 +10621,8 @@ class TVBilder(tvBaseScreen):
             self['play5'].show()
             self.showPlay6(playlogo)
             self['play6'].show()
-        try:
-            picurl1 = self.picurllist[0]
-            self.download(picurl1, self.getPic1)
-            self['pic1'].show()
-        except IndexError:
-            self['pic1'].hide()
 
-        try:
-            picurl2 = self.picurllist[1]
-            self.download(picurl2, self.getPic2)
-            self['pic2'].show()
-        except IndexError:
-            self['pic2'].hide()
-
-        try:
-            picurl3 = self.picurllist[2]
-            self.download(picurl3, self.getPic3)
-            self['pic3'].show()
-        except IndexError:
-            self['pic3'].hide()
-
-        try:
-            picurl4 = self.picurllist[3]
-            self.download(picurl4, self.getPic4)
-            self['pic4'].show()
-        except IndexError:
-            self['pic4'].hide()
-
-        try:
-            picurl5 = self.picurllist[4]
-            self.download(picurl5, self.getPic5)
-            self['pic5'].show()
-        except IndexError:
-            self['pic5'].hide()
-
-        try:
-            picurl6 = self.picurllist[5]
-            self.download(picurl6, self.getPic6)
-            self['pic6'].show()
-        except IndexError:
-            self['pic6'].hide()
+        self.GetPics(self.picurllist, 0)
 
     def ok(self):
         if self.hideflag == False:
@@ -12357,95 +10643,6 @@ class TVBilder(tvBaseScreen):
                 self.leftUp()
                 self.rightDown()
 
-    def getPic1(self, output):
-        f = open(self.pic1, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic1(self.pic1)
-
-    def showPic1(self, pic1):
-        if self.xd == False:
-            currPic = loadPic(pic1, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic1, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic1'].instance.setPixmap(currPic)
-        return
-
-    def getPic2(self, output):
-        f = open(self.pic2, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic2(self.pic2)
-
-    def showPic2(self, pic2):
-        if self.xd == False:
-            currPic = loadPic(pic2, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic2, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic2'].instance.setPixmap(currPic)
-        return
-
-    def getPic3(self, output):
-        f = open(self.pic3, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic3(self.pic3)
-
-    def showPic3(self, pic3):
-        if self.xd == False:
-            currPic = loadPic(pic3, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic3, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic3'].instance.setPixmap(currPic)
-        return
-
-    def getPic4(self, output):
-        f = open(self.pic4, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic4(self.pic4)
-
-    def showPic4(self, pic4):
-        if self.xd == False:
-            currPic = loadPic(pic4, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic4, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic4'].instance.setPixmap(currPic)
-        return
-
-    def getPic5(self, output):
-        f = open(self.pic5, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic5(self.pic5)
-
-    def showPic5(self, pic5):
-        if self.xd == False:
-            currPic = loadPic(pic5, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic5, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic5'].instance.setPixmap(currPic)
-        return
-
-    def getPic6(self, output):
-        f = open(self.pic6, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic6(self.pic6)
-
-    def showPic6(self, pic6):
-        if self.xd == False:
-            currPic = loadPic(pic6, 135, 90, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(pic6, 112, 75, 3, 0, 0, 0)
-        if currPic != None:
-            self['pic6'].instance.setPixmap(currPic)
-        return
 
     def showPlay1(self, playlogo):
         currPic = loadPic(playlogo, 109, 58, 3, 0, 0, 0)
@@ -12500,114 +10697,10 @@ class TVBilder(tvBaseScreen):
 
         self['menu'].down()
         if c + 1 == len(self.tventries):
-            try:
-                picurl1 = self.picurllist[0]
-                self.download(picurl1, self.getPic1)
-                self['pic1'].show()
-                self['play1'].show()
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[1]
-                self.download(picurl2, self.getPic2)
-                self['pic2'].show()
-                self['play2'].show()
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[2]
-                self.download(picurl3, self.getPic3)
-                self['pic3'].show()
-                self['play3'].show()
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[3]
-                self.download(picurl4, self.getPic4)
-                self['pic4'].show()
-                self['play4'].show()
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[4]
-                self.download(picurl5, self.getPic5)
-                self['pic5'].show()
-                self['play5'].show()
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[5]
-                self.download(picurl6, self.getPic6)
-                self['pic6'].show()
-                self['play6'].show()
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, 0, True, True)
 
         elif c % 6 == 5:
-            try:
-                picurl1 = self.picurllist[c + 1]
-                self.download(picurl1, self.getPic1)
-                self['pic1'].show()
-                self['play1'].show()
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 2]
-                self.download(picurl2, self.getPic2)
-                self['pic2'].show()
-                self['play2'].show()
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 3]
-                self.download(picurl3, self.getPic3)
-                self['pic3'].show()
-                self['play3'].show()
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 4]
-                self.download(picurl4, self.getPic4)
-                self['pic4'].show()
-                self['play4'].show()
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 5]
-                self.download(picurl5, self.getPic5)
-                self['pic5'].show()
-                self['play5'].show()
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 6]
-                self.download(picurl6, self.getPic6)
-                self['pic6'].show()
-                self['play6'].show()
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 1, True, True)
 
     def up(self):
         try:
@@ -12621,114 +10714,10 @@ class TVBilder(tvBaseScreen):
             d = l % 6
             if d == 0:
                 d = 6
-            try:
-                picurl1 = self.picurllist[l - d]
-                self.download(picurl1, self.getPic1)
-                self['pic1'].show()
-                self['play1'].show()
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[l - d + 1]
-                self.download(picurl2, self.getPic2)
-                self['pic2'].show()
-                self['play2'].show()
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[l - d + 2]
-                self.download(picurl3, self.getPic3)
-                self['pic3'].show()
-                self['play3'].show()
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[l - d + 3]
-                self.download(picurl4, self.getPic4)
-                self['pic4'].show()
-                self['play4'].show()
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[l - d + 4]
-                self.download(picurl5, self.getPic5)
-                self['pic5'].show()
-                self['play5'].show()
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[l - d + 5]
-                self.download(picurl6, self.getPic6)
-                self['pic6'].show()
-                self['play6'].show()
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, l - d, True, True)
 
         elif c % 6 == 0:
-            try:
-                picurl1 = self.picurllist[c - 6]
-                self.download(picurl1, self.getPic1)
-                self['pic1'].show()
-                self['play1'].show()
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c - 5]
-                self.download(picurl2, self.getPic2)
-                self['pic2'].show()
-                self['play2'].show()
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c - 4]
-                self.download(picurl3, self.getPic3)
-                self['pic3'].show()
-                self['play3'].show()
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c - 3]
-                self.download(picurl4, self.getPic4)
-                self['pic4'].show()
-                self['play4'].show()
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c - 2]
-                self.download(picurl5, self.getPic5)
-                self['pic5'].show()
-                self['play5'].show()
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c - 1]
-                self.download(picurl6, self.getPic6)
-                self['pic6'].show()
-                self['play6'].show()
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c - 6, True, True)
 
     def rightDown(self):
         try:
@@ -12745,262 +10734,22 @@ class TVBilder(tvBaseScreen):
         if c + e >= l:
             pass
         elif d == 0:
-            try:
-                picurl1 = self.picurllist[c + 6]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 7]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 8]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 9]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 10]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 11]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 6, True, True)
 
         elif d == 1:
-            try:
-                picurl1 = self.picurllist[c + 5]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 6]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 7]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 8]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 9]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 10]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 5, True, True)
 
         elif d == 2:
-            try:
-                picurl1 = self.picurllist[c + 4]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 5]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 6]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 7]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 8]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 9]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 4, True, True)
 
         elif d == 3:
-            try:
-                picurl1 = self.picurllist[c + 3]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 4]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 5]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 6]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 7]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 8]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 3, True, True)
 
         elif d == 4:
-            try:
-                picurl1 = self.picurllist[c + 2]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 3]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 4]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 5]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 6]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 7]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 2, True, True)
 
         elif d == 5:
-            try:
-                picurl1 = self.picurllist[c + 1]
-                self.download(picurl1, self.getPic1)
-            except IndexError:
-                self['pic1'].hide()
-                self['play1'].hide()
-
-            try:
-                picurl2 = self.picurllist[c + 2]
-                self.download(picurl2, self.getPic2)
-            except IndexError:
-                self['pic2'].hide()
-                self['play2'].hide()
-
-            try:
-                picurl3 = self.picurllist[c + 3]
-                self.download(picurl3, self.getPic3)
-            except IndexError:
-                self['pic3'].hide()
-                self['play3'].hide()
-
-            try:
-                picurl4 = self.picurllist[c + 4]
-                self.download(picurl4, self.getPic4)
-            except IndexError:
-                self['pic4'].hide()
-                self['play4'].hide()
-
-            try:
-                picurl5 = self.picurllist[c + 5]
-                self.download(picurl5, self.getPic5)
-            except IndexError:
-                self['pic5'].hide()
-                self['play5'].hide()
-
-            try:
-                picurl6 = self.picurllist[c + 6]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                self['pic6'].hide()
-                self['play6'].hide()
+            self.GetPics(self.picurllist, c + 1, True, True)
 
     def leftUp(self):
         try:
@@ -13013,106 +10762,22 @@ class TVBilder(tvBaseScreen):
         if c < 6:
             pass
         elif d == 0:
-            try:
-                picurl1 = self.picurllist[c - 6]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 5]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 4]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 3]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 2]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 1]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 6, False)
 
         elif d == 1:
-            try:
-                picurl1 = self.picurllist[c - 7]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 6]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 5]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 4]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 3]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 2]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 7, False)
 
         elif d == 2:
-            try:
-                picurl1 = self.picurllist[c - 8]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 7]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 6]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 5]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 4]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 3]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 8, False)
 
         elif d == 3:
-            try:
-                picurl1 = self.picurllist[c - 9]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 8]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 7]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 6]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 5]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 4]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 9, False)
 
         elif d == 4:
-            try:
-                picurl1 = self.picurllist[c - 10]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 9]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 8]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 7]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 6]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 5]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 10, False)
 
         elif d == 5:
-            try:
-                picurl1 = self.picurllist[c - 11]
-                self.download(picurl1, self.getPic1)
-                picurl2 = self.picurllist[c - 10]
-                self.download(picurl2, self.getPic2)
-                picurl3 = self.picurllist[c - 9]
-                self.download(picurl3, self.getPic3)
-                picurl4 = self.picurllist[c - 8]
-                self.download(picurl4, self.getPic4)
-                picurl5 = self.picurllist[c - 7]
-                self.download(picurl5, self.getPic5)
-                picurl6 = self.picurllist[c - 6]
-                self.download(picurl6, self.getPic6)
-            except IndexError:
-                pass
+            self.GetPics(self.picurllist, c - 11, False)
 
         self['pic1'].show()
         self['pic2'].show()
