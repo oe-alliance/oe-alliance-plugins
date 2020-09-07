@@ -64,6 +64,9 @@
     <screen name="tvEvent" position="center,center" size="1920,1080" >
     </screen>
 
+    <screen name="tvJetzt" position="center,center" size="1920,1080" >
+    </screen>
+
     <screen name="FolderSelection" position="center,center" size="545,510" backgroundColor="#20000000" title="TV Spielfilm Setup">
         <ePixmap position="0,0" size="545,50" pixmap="~/pic/tvspielfilm.png" alphatest="blend" zPosition="1" />
         <ePixmap position="10,59" size="525,1" pixmap="~/pic/setup/seperator.png" alphatest="off" zPosition="1" />

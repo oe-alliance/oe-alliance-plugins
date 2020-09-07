@@ -16225,25 +16225,10 @@ class FolderSelection(Screen):
 
 
 class tvJetzt(tvAllScreen):
-    skin = '\n\t\t\t\t<screen position="0,0" size="0,0" >\n\t\t\t\t</screen>'
-
     def __init__(self, session, link):
         self.link = link
-        self.skin = tvJetzt.skin
         self.session = session
         tvAllScreen.__init__(self, session)
-        self.fhd = False
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            if getDesktop(0).size().width() == 1920:
-                self.fhd = True
-                try:
-                    gMainDC.getInstance().setResolution(1280, 720)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1280, 720))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
         self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         self.channel_db = channelDB(self.servicefile)
         self.JetztTimer = eTimer()
@@ -16261,27 +16246,9 @@ class tvJetzt(tvAllScreen):
         if result == True:
             self.session.openWithCallback(self.exit, TVJetztView, self.link, True)
         else:
-            if self.fhd == True:
-                try:
-                    gMainDC.getInstance().setResolution(1920, 1080)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 1080))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
             self.close()
 
     def exit(self):
-        if self.fhd == True:
-            try:
-                gMainDC.getInstance().setResolution(1920, 1080)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1920, 1080))
-            except:
-                import traceback
-                traceback.print_exc()
-
         self.close()
 
 
