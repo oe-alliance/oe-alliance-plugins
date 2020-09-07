@@ -65,9 +65,6 @@ if config.plugins.tvspielfilm.font.value == 'yes':
     except Exception as ex:
         addFont('/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/font/Sans.ttf', 'Sans', 100, False, 0)
 
-config.plugins.tvspielfilm.fhd = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
-if config.plugins.tvspielfilm.fhd.value == 'yes':
-    from enigma import eSize, gMainDC
 config.plugins.tvspielfilm.meintvs = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
 config.plugins.tvspielfilm.login = ConfigText(default='', fixed_size=False)
 config.plugins.tvspielfilm.password = ConfigPassword(default='', fixed_size=False)
@@ -234,39 +231,12 @@ class tvBaseScreen(tvAllScreen):
         return
 
     def finishedAutoTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
         if answer:
             from Plugins.Extensions.AutoTimer.AutoTimerEditor import AutoTimerEditor
             answer, session = answer
-            if config.plugins.tvspielfilm.fhd.value == 'yes':
-                try:
-                    gMainDC.getInstance().setResolution(1920, 1080)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 1080))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
             session.openWithCallback(self.finishedAutoTimerEdit, AutoTimerEditor, answer)
 
     def finishedAutoTimerEdit(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
         if answer:
             from Plugins.Extensions.AutoTimer.plugin import autotimer
             if autotimer is None:
@@ -1584,15 +1554,6 @@ class TVTippsView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -1606,15 +1567,6 @@ class TVTippsView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             elif self.search == True:
                 try:
@@ -1669,15 +1621,6 @@ class TVTippsView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -1691,15 +1634,6 @@ class TVTippsView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             else:
                 self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
@@ -1728,15 +1662,6 @@ class TVTippsView(tvBaseScreen):
         return
 
     def finishedTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
         if answer[0]:
             entry = answer[1]
             simulTimerList = self.session.nav.RecordTimer.record(entry)
@@ -3531,15 +3456,6 @@ class TVNeuView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -3553,15 +3469,6 @@ class TVNeuView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             elif self.search == True:
                 try:
@@ -3616,15 +3523,6 @@ class TVNeuView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -3638,15 +3536,6 @@ class TVNeuView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             else:
                 self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
@@ -3675,15 +3564,6 @@ class TVNeuView(tvBaseScreen):
         return
 
     def finishedTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
         if answer[0]:
             entry = answer[1]
             simulTimerList = self.session.nav.RecordTimer.record(entry)
@@ -5591,15 +5471,6 @@ class TVGenreView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -5613,15 +5484,6 @@ class TVGenreView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             elif self.search == True:
                 try:
@@ -5676,15 +5538,6 @@ class TVGenreView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -5698,15 +5551,6 @@ class TVGenreView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             else:
                 self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
@@ -5735,15 +5579,6 @@ class TVGenreView(tvBaseScreen):
         return
 
     def finishedTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
         if answer[0]:
             entry = answer[1]
             simulTimerList = self.session.nav.RecordTimer.record(entry)
@@ -7421,15 +7256,6 @@ class TVJetztView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -7443,15 +7269,6 @@ class TVJetztView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             elif self.search == True:
                 try:
@@ -7506,15 +7323,6 @@ class TVJetztView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -7528,15 +7336,6 @@ class TVJetztView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             else:
                 self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
@@ -7566,15 +7365,6 @@ class TVJetztView(tvBaseScreen):
         return
 
     def finishedTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
         if answer[0]:
             entry = answer[1]
             simulTimerList = self.session.nav.RecordTimer.record(entry)
@@ -9252,15 +9042,6 @@ class TVProgrammView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -9274,15 +9055,6 @@ class TVProgrammView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             elif self.search == True:
                 try:
@@ -9337,15 +9109,6 @@ class TVProgrammView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -9359,15 +9122,6 @@ class TVProgrammView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             else:
                 self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
@@ -9398,15 +9152,6 @@ class TVProgrammView(tvBaseScreen):
         return
 
     def finishedTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
         if answer[0]:
             entry = answer[1]
             simulTimerList = self.session.nav.RecordTimer.record(entry)
@@ -13380,18 +13125,6 @@ class tvMain(tvBaseScreen):
             else:
                 position = 'center'
         tvBaseScreen.__init__(self, session, tvMain.skin, tvMain.skinHD, 0, None, position)
-        self.fhd = False
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            if getDesktop(0).size().width() == 1920:
-                self.fhd = True
-                try:
-                    gMainDC.getInstance().setResolution(1280, 720)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1280, 720))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
         self.senderhtml = '/tmp/tvssender.html'
         if config.plugins.tvspielfilm.tipps.value == 'false':
             self.tipps = False
@@ -15358,15 +15091,6 @@ class tvMain(tvBaseScreen):
             os.remove(self.localhtml)
         if fileExists(self.localhtml2):
             os.remove(self.localhtml2)
-        if self.fhd == True:
-            try:
-                gMainDC.getInstance().setResolution(1920, 1080)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1920, 1080))
-            except:
-                import traceback
-                traceback.print_exc()
-
         self.close()
 
     def zap(self):
@@ -15408,15 +15132,6 @@ class tvMain(tvBaseScreen):
                 os.remove(self.localhtml2)
             config.usage.on_movie_stop.value = self.movie_stop
             config.usage.on_movie_eof.value = self.movie_eof
-            if self.fhd == True:
-                try:
-                    gMainDC.getInstance().setResolution(1920, 1080)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 1080))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
             self.close()
         elif self.actmenu == 'secondmenu':
             self.selectMainMenu()
@@ -16088,7 +15803,6 @@ class tvsConfig(ConfigListScreen, Screen):
         list.append(getConfigListEntry('Max. Seiten TV-Suche:', config.plugins.tvspielfilm.maxsearch))
         list.append(getConfigListEntry('Max. Seiten TV-Genre Suche:', config.plugins.tvspielfilm.maxgenre))
         list.append(getConfigListEntry('Benutze AutoTimer Plugin:', config.plugins.tvspielfilm.autotimer))
-        list.append(getConfigListEntry('Full HD Skin Support:', config.plugins.tvspielfilm.fhd))
         ConfigListScreen.__init__(self, list, on_change=self.UpdateComponents)
         self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {'ok': self.save,
          'cancel': self.cancel,
@@ -16146,7 +15860,6 @@ class tvsConfig(ConfigListScreen, Screen):
         config.plugins.tvspielfilm.maxsearch.save()
         config.plugins.tvspielfilm.maxgenre.save()
         config.plugins.tvspielfilm.autotimer.save()
-        config.plugins.tvspielfilm.fhd.save()
         configfile.save()
         self.exit()
 
@@ -18386,15 +18099,6 @@ class TVHeuteView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -18408,15 +18112,6 @@ class TVHeuteView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             elif self.oldcurrent == 'menu2' and self.zap2 == True:
                 c = self['menu2'].getSelectedIndex()
@@ -18467,15 +18162,6 @@ class TVHeuteView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -18489,15 +18175,6 @@ class TVHeuteView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             elif self.oldcurrent == 'menu3' and self.zap3 == True:
                 c = self['menu3'].getSelectedIndex()
@@ -18548,15 +18225,6 @@ class TVHeuteView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -18570,15 +18238,6 @@ class TVHeuteView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             elif self.oldcurrent == 'menu4' and self.zap4 == True:
                 c = self['menu4'].getSelectedIndex()
@@ -18629,15 +18288,6 @@ class TVHeuteView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -18651,15 +18301,6 @@ class TVHeuteView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             elif self.oldcurrent == 'menu5' and self.zap5 == True:
                 c = self['menu5'].getSelectedIndex()
@@ -18710,15 +18351,6 @@ class TVHeuteView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -18732,15 +18364,6 @@ class TVHeuteView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             elif self.oldcurrent == 'menu6' and self.zap6 == True:
                 c = self['menu6'].getSelectedIndex()
@@ -18791,15 +18414,6 @@ class TVHeuteView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -18813,15 +18427,6 @@ class TVHeuteView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             elif self.oldcurrent == 'searchmenu':
                 c = self['searchmenu'].getSelectedIndex()
@@ -18873,15 +18478,6 @@ class TVHeuteView(tvBaseScreen):
                  None)
                 newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
                 if self.autotimer == False:
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
                 else:
                     from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
@@ -18895,15 +18491,6 @@ class TVHeuteView(tvBaseScreen):
                     newTimer.name = self.name
                     newTimer.match = ''
                     newTimer.enabled = True
-                    if config.plugins.tvspielfilm.fhd.value == 'yes':
-                        try:
-                            gMainDC.getInstance().setResolution(1920, 1080)
-                            desktop = getDesktop(0)
-                            desktop.resize(eSize(1920, 1080))
-                        except:
-                            import traceback
-                            traceback.print_exc()
-
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             else:
                 self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
@@ -18987,15 +18574,6 @@ class TVHeuteView(tvBaseScreen):
         return
 
     def finishedTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
         if answer[0]:
             entry = answer[1]
             simulTimerList = self.session.nav.RecordTimer.record(entry)
