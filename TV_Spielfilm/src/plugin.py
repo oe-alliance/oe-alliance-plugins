@@ -105,12 +105,12 @@ config.plugins.tvspielfilm.maxsearch = ConfigInteger(50, (10, 999))
 config.plugins.tvspielfilm.maxgenre = ConfigInteger(250, (10, 999))
 config.plugins.tvspielfilm.autotimer = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 
-#if deskWidth <= 1280:
-#	loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/TVSpielfilm/skin_hd.xml")
-#elif deskWidth >= 1280:
+if deskWidth <= 1280:
+	loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/TVSpielfilm/skin_hd.xml")
+#elif deskWidth >= 1920:
 #	loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/TVSpielfilm/skin_uhd.xml")
-#else:
-#	loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/TVSpielfilm/skin_fhd.xml")
+else:
+	loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/TVSpielfilm/skin_fhd.xml")
 
 class tvAllScreen(Screen):
     def __init__(self, session):
@@ -12679,15 +12679,7 @@ class FullScreen(tvAllScreen):
 
 
 class searchYouTube(tvAllScreen):
-    skin = '\n\t\t\t<screen position="center,center" size="1000,560" title=" ">\n\t\t\t\t<ePixmap position="0,0" size="1000,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/youtube.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="10,6" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/blue.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="10,26" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="label" position="34,6" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="34,26" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="740,0" size="240,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t\t<widget name="poster1" position="10,55" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster2" position="10,180" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster3" position="10,305" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster4" position="10,430" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="list" position="235,55" size="755,500" scrollbarMode="showOnDemand" zPosition="1" />\n\t\t\t</screen>'
-
     def __init__(self, session, name, movie):
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
-        self.dict = {'font': font}
-        self.skin = applySkinVars(searchYouTube.skin, self.dict)
         tvAllScreen.__init__(self, session)
         if movie == True:
             self.name = name + ' Trailer'
@@ -15433,10 +15425,7 @@ class tvMain(tvBaseScreen):
 
 
 class makeServiceFile(Screen):
-    skin = '\n\t\t\t<screen position="center,180" size="565,195" backgroundColor="#20000000" title="Import TV Spielfilm Sender: TV Bouquet Auswahl">\n\t\t\t\t<ePixmap position="0,0" size="565,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="list" position="10,60" size="545,125" scrollbarMode="showOnDemand" zPosition="1" />\n\t\t\t</screen>'
-
     def __init__(self, session):
-        self.skin = makeServiceFile.skin
         self.session = session
         Screen.__init__(self, session)
         self['list'] = MenuList([])
@@ -15590,15 +15579,7 @@ class makeServiceFile(Screen):
 
 
 class getNumber(Screen):
-    skin = '\n\t\t\t<screen position="center,center" size="175,70" backgroundColor="#000000" flags="wfNoBorder" title=" ">\n\t\t\t\t<widget name="number" position="0,0" size="175,70" font="{font};40" halign="center" valign="center" transparent="1" zPosition="1"/>\n\t\t\t</screen>'
-
     def __init__(self, session, number):
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
-        self.dict = {'font': font}
-        self.skin = applySkinVars(getNumber.skin, self.dict)
         Screen.__init__(self, session)
         self.field = str(number)
         self['number'] = Label(self.field)
@@ -16081,15 +16062,7 @@ class tvTipps(tvAllScreen):
 
 
 class tvsConfig(ConfigListScreen, Screen):
-    skin = '\n\t\t\t<screen position="center,center" size="545,500" backgroundColor="#20000000" title="TV Spielfilm Setup">\n\t\t\t\t<ePixmap position="0,0" size="545,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="10,59" size="525,1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/setup/seperator.png" alphatest="off" zPosition="1" />\n\t\t\t\t<widget name="config" position="10,60" size="525,100" itemHeight="25" scrollbarMode="showOnDemand" zPosition="1" />\n\t\t\t\t<ePixmap position="10,161" size="525,1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/setup/seperator.png" alphatest="off" zPosition="1" />\n\t\t\t\t<ePixmap position="125,171" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="350,171" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<eLabel position="150,170" size="180,20" font="{font};18" halign="left" text="Speichern" transparent="1" zPosition="1" />\n\t\t\t\t<eLabel position="375,170" size="180,20" font="{font};18" halign="left" text="Abbrechen" transparent="1" zPosition="1" />\n\t\t\t\t<widget name="plugin" position="10,200" size="525,295" alphatest="blend" zPosition="1" />\n\t\t\t</screen>'
-
     def __init__(self, session):
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
-        self.dict = {'font': font}
-        self.skin = applySkinVars(tvsConfig.skin, self.dict)
         Screen.__init__(self, session)
         self.password = config.plugins.tvspielfilm.password.value
         self.encrypt = config.plugins.tvspielfilm.encrypt.value
@@ -16200,15 +16173,8 @@ class tvsConfig(ConfigListScreen, Screen):
 
 
 class FolderSelection(Screen):
-    skin = '\n\t\t\t<screen position="center,center" size="545,510" backgroundColor="#20000000" title="TV Spielfilm Setup">\n\t\t\t\t<ePixmap position="0,0" size="545,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="10,59" size="525,1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/setup/seperator.png" alphatest="off" zPosition="1" />\n\t\t\t\t<widget name="folderlist" position="10,60" size="525,100" itemHeight="25" scrollbarMode="showNever" zPosition="1" />\n\t\t\t\t<ePixmap position="10,161" size="525,1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/setup/seperator.png" alphatest="off" zPosition="1" />\n\t\t\t\t<ePixmap position="125,171" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="350,171" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<eLabel position="150,170" size="180,20" font="{font};18" halign="left" text="Speichern" transparent="1" zPosition="1" />\n\t\t\t\t<eLabel position="375,170" size="180,20" font="{font};18" halign="left" text="Abbrechen" transparent="1" zPosition="1" />\n\t\t\t\t<widget name="plugin" position="10,200" size="525,300" alphatest="blend" zPosition="1" />\n\t\t\t</screen>'
 
     def __init__(self, session, folder):
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
-        self.dict = {'font': font}
-        self.skin = applySkinVars(FolderSelection.skin, self.dict)
         Screen.__init__(self, session)
         self['plugin'] = Pixmap()
         noFolder = ['/bin',
@@ -16320,24 +16286,9 @@ class tvJetzt(tvAllScreen):
 
 
 class tvEvent(tvAllScreen):
-    skin = '\n\t\t\t\t<screen position="0,0" size="0,0" >\n\t\t\t\t</screen>'
-
     def __init__(self, session):
-        self.skin = tvEvent.skin
         self.session = session
         tvAllScreen.__init__(self, session)
-        self.fhd = False
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            if getDesktop(0).size().width() == 1920:
-                self.fhd = True
-                try:
-                    gMainDC.getInstance().setResolution(1280, 720)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1280, 720))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
         self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         self.channel_db = channelDB(self.servicefile)
         self.EventTimer = eTimer()
@@ -16353,15 +16304,6 @@ class tvEvent(tvAllScreen):
             channel = self.channel_db.lookup(sref)
             if channel == 'nope':
                 self.session.open(MessageBox, 'Service not found:\nNo entry for current service reference\n%s' % str(sref), MessageBox.TYPE_INFO, close_on_any_key=True)
-                if self.fhd == True:
-                    try:
-                        gMainDC.getInstance().setResolution(1920, 1080)
-                        desktop = getDesktop(0)
-                        desktop.resize(eSize(1920, 1080))
-                    except:
-                        import traceback
-                        traceback.print_exc()
-
                 self.close()
             else:
                 link = 'https://www.tvspielfilm.de/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
@@ -16373,27 +16315,9 @@ class tvEvent(tvAllScreen):
         if result == True:
             self.EventTimer.callback.append(self.makeChannelLink)
         else:
-            if self.fhd == True:
-                try:
-                    gMainDC.getInstance().setResolution(1920, 1080)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 1080))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
             self.close()
 
     def exit(self):
-        if self.fhd == True:
-            try:
-                gMainDC.getInstance().setResolution(1920, 1080)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1920, 1080))
-            except:
-                import traceback
-                traceback.print_exc()
-
         self.close()
 
 
@@ -20114,10 +20038,8 @@ class TVHeuteView(tvBaseScreen):
             self.showsearch()
             self.current = 'searchmenu'
 
-
 def main(session, **kwargs):
     session.open(tvMain)
-
 
 def mainjetzt(session, **kwargs):
     session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html')
@@ -20127,7 +20049,6 @@ def mainprime(session, **kwargs):
 
 def mainevent(session, **kwargs):
     session.open(tvEvent)
-
 
 def Plugins(**kwargs):
     return [PluginDescriptor(name='TV Spielfilm', description='TV Spielfilm', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=main),
