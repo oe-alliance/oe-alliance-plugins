@@ -16253,7 +16253,8 @@ class FolderSelection(Screen):
 class tvJetzt(tvAllScreen):
     skin = '\n\t\t\t\t<screen position="0,0" size="0,0" >\n\t\t\t\t</screen>'
 
-    def __init__(self, session):
+    def __init__(self, session, link):
+        self.link = link
         self.skin = tvJetzt.skin
         self.session = session
         tvAllScreen.__init__(self, session)
@@ -16278,15 +16279,13 @@ class tvJetzt(tvAllScreen):
 
     def makeCheck(self):
         if fileExists(self.servicefile):
-            link = 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
-            self.session.openWithCallback(self.exit, TVJetztView, link, True)
+            self.session.openWithCallback(self.exit, TVJetztView, self.link, True)
         else:
             self.session.openWithCallback(self.returnServiceFile, makeServiceFile)
 
     def returnServiceFile(self, result):
         if result == True:
-            link = 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
-            self.session.openWithCallback(self.exit, TVJetztView, link, True)
+            self.session.openWithCallback(self.exit, TVJetztView, self.link, True)
         else:
             if self.fhd == True:
                 try:
@@ -19760,50 +19759,18 @@ class TVHeuteView(tvBaseScreen):
 
     def down(self):
         try:
-            if self.current == 'menu1':
-                self['menu1'].down()
-                self['menu2'].down()
-                self['menu3'].down()
-                self['menu4'].down()
-                self['menu5'].down()
-                self['menu6'].down()
-            elif self.current == 'menu2':
-                self['menu2'].down()
-                self['menu3'].down()
-                self['menu4'].down()
-                self['menu5'].down()
-                self['menu6'].down()
-                self['menu1'].down()
-            elif self.current == 'menu3':
-                self['menu3'].down()
-                self['menu4'].down()
-                self['menu5'].down()
-                self['menu6'].down()
-                self['menu1'].down()
-                self['menu2'].down()
-            elif self.current == 'menu4':
-                self['menu4'].down()
-                self['menu5'].down()
-                self['menu6'].down()
-                self['menu1'].down()
-                self['menu2'].down()
-                self['menu3'].down()
-            elif self.current == 'menu5':
-                self['menu5'].down()
-                self['menu6'].down()
-                self['menu1'].down()
-                self['menu2'].down()
-                self['menu3'].down()
-                self['menu4'].down()
-            elif self.current == 'menu6':
-                self['menu6'].down()
-                self['menu1'].down()
-                self['menu2'].down()
-                self['menu3'].down()
-                self['menu4'].down()
-                self['menu5'].down()
-            elif self.current == 'searchmenu':
+            if self.current == 'searchmenu':
                 self['searchmenu'].down()
+            elif self.current.startswith("menu"):
+                for i in range(6):
+                    if self.current == 'menu' + str(i + 1):
+                        start = i + 1
+                        for x in range(6):
+                            self['menu' + str(start)].down()
+                            start = start + 1
+                            if start > 6:
+                                start = 1
+                        break
             else:
                 self['textpage'].pageDown()
         except IndexError:
@@ -19811,50 +19778,18 @@ class TVHeuteView(tvBaseScreen):
 
     def up(self):
         try:
-            if self.current == 'menu1':
-                self['menu1'].up()
-                self['menu2'].up()
-                self['menu3'].up()
-                self['menu4'].up()
-                self['menu5'].up()
-                self['menu6'].up()
-            elif self.current == 'menu2':
-                self['menu2'].up()
-                self['menu3'].up()
-                self['menu4'].up()
-                self['menu5'].up()
-                self['menu6'].up()
-                self['menu1'].up()
-            elif self.current == 'menu3':
-                self['menu3'].up()
-                self['menu4'].up()
-                self['menu5'].up()
-                self['menu6'].up()
-                self['menu1'].up()
-                self['menu2'].up()
-            elif self.current == 'menu4':
-                self['menu4'].up()
-                self['menu5'].up()
-                self['menu6'].up()
-                self['menu1'].up()
-                self['menu2'].up()
-                self['menu3'].up()
-            elif self.current == 'menu5':
-                self['menu5'].up()
-                self['menu6'].up()
-                self['menu1'].up()
-                self['menu2'].up()
-                self['menu3'].up()
-                self['menu4'].up()
-            elif self.current == 'menu6':
-                self['menu6'].up()
-                self['menu5'].up()
-                self['menu1'].up()
-                self['menu2'].up()
-                self['menu3'].up()
-                self['menu4'].up()
-            elif self.current == 'searchmenu':
+            if self.current == 'searchmenu':
                 self['searchmenu'].up()
+            elif self.current.startswith("menu"):
+                for i in range(6):
+                    if self.current == 'menu' + str(i + 1):
+                        start = i + 1
+                        for x in range(6):
+                            self['menu' + str(start)].up()
+                            start = start + 1
+                            if start > 6:
+                                start = 1
+                        break
             else:
                 self['textpage'].pageUp()
         except IndexError:
@@ -20177,8 +20112,10 @@ def main(session, **kwargs):
 
 
 def mainjetzt(session, **kwargs):
-    session.open(tvJetzt)
+    session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html')
 
+def mainprime(session, **kwargs):
+    session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html')
 
 def mainevent(session, **kwargs):
     session.open(tvEvent)
@@ -20186,6 +20123,7 @@ def mainevent(session, **kwargs):
 
 def Plugins(**kwargs):
     return [PluginDescriptor(name='TV Spielfilm', description='TV Spielfilm', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=main),
+     PluginDescriptor(name='TV Spielfilm 20:15', description='TV Spielfilm Prime Time', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=mainprime),
      PluginDescriptor(name='TV Spielfilm Jetzt', description='TV Spielfilm Jetzt im TV', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='jetzt.png', fnc=mainjetzt),
      PluginDescriptor(name='TV Spielfilm EventView', description='TV Spielfilm EventView', where=[PluginDescriptor.WHERE_EVENTINFO], fnc=mainevent)]
     
