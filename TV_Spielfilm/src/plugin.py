@@ -127,6 +127,42 @@ class tvAllScreen(Screen):
                 f.write('%i' % (config.av.osd_alpha.value * count / 40))
                 f.close()
 
+    def zapUp(self):
+        if InfoBar and InfoBar.instance:
+            InfoBar.zapUp(InfoBar.instance)
+
+    def zapDown(self):
+        if InfoBar and InfoBar.instance:
+            InfoBar.zapDown(InfoBar.instance)
+
+    def picReturn(self):
+        pass
+
+    def makeTimerDB(self):
+        timerxml = open('/etc/enigma2/timers.xml').read()
+        timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
+        timerfile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db'
+        f = open(timerfile, 'w')
+        data = ''
+        idx = 0
+        for x in timer:
+            idx += 1
+
+        for i in range(idx):
+            try:
+                timerstart = timer[i - 1][0]
+                timerstart = int(timerstart) + int(config.recording.margin_before.value) * 60
+                timerday = time.strftime('%Y-%m-%d', time.localtime(timerstart))
+                timerhour = time.strftime('%H:%M', time.localtime(timerstart))
+                timersref = timer[i - 1][1]
+                data = data + timerday + ':::' + timerhour + ':::' + timersref + '\n'
+            except IndexError:
+                pass
+
+        f.write(data)
+        f.close()
+        self.timer = data
+
 
 class tvBaseScreen(tvAllScreen):
 
@@ -1625,31 +1661,6 @@ class TVTippsView(tvBaseScreen):
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
 
-    def makeTimerDB(self):
-        timerxml = open('/etc/enigma2/timers.xml').read()
-        timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-        timerfile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db'
-        f = open(timerfile, 'w')
-        data = ''
-        idx = 0
-        for x in timer:
-            idx += 1
-
-        for i in range(idx):
-            try:
-                timerstart = timer[i - 1][0]
-                timerstart = int(timerstart) + int(config.recording.margin_before.value) * 60
-                timerday = time.strftime('%Y-%m-%d', time.localtime(timerstart))
-                timerhour = time.strftime('%H:%M', time.localtime(timerstart))
-                timersref = timer[i - 1][1]
-                data = data + timerday + ':::' + timerhour + ':::' + timersref + '\n'
-            except IndexError:
-                pass
-
-        f.write(data)
-        f.close()
-        self.timer = data
-
     def green(self):
         if self.current == 'menu' and self.search == False:
             c = self['menu'].getSelectedIndex()
@@ -2781,17 +2792,6 @@ class TVTippsView(tvBaseScreen):
             self['searchmenu'].pageUp()
         else:
             self['textpage'].pageUp()
-
-    def zapUp(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapUp(InfoBar.instance)
-
-    def zapDown(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapDown(InfoBar.instance)
-
-    def picReturn(self):
-        pass
 
     def exit(self):
         if self.hideflag == False:
@@ -4186,31 +4186,6 @@ class TVNeuView(tvBaseScreen):
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
 
-    def makeTimerDB(self):
-        timerxml = open('/etc/enigma2/timers.xml').read()
-        timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-        timerfile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db'
-        f = open(timerfile, 'w')
-        data = ''
-        idx = 0
-        for x in timer:
-            idx += 1
-
-        for i in range(idx):
-            try:
-                timerstart = timer[i - 1][0]
-                timerstart = int(timerstart) + int(config.recording.margin_before.value) * 60
-                timerday = time.strftime('%Y-%m-%d', time.localtime(timerstart))
-                timerhour = time.strftime('%H:%M', time.localtime(timerstart))
-                timersref = timer[i - 1][1]
-                data = data + timerday + ':::' + timerhour + ':::' + timersref + '\n'
-            except IndexError:
-                pass
-
-        f.write(data)
-        f.close()
-        self.timer = data
-
     def green(self):
         if self.current == 'menu' and self.search == False:
             c = self['menu'].getSelectedIndex()
@@ -5342,17 +5317,6 @@ class TVNeuView(tvBaseScreen):
             self['searchmenu'].pageUp()
         else:
             self['textpage'].pageUp()
-
-    def zapUp(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapUp(InfoBar.instance)
-
-    def zapDown(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapDown(InfoBar.instance)
-
-    def picReturn(self):
-        pass
 
     def exit(self):
         if self.hideflag == False:
@@ -6819,31 +6783,6 @@ class TVGenreView(tvBaseScreen):
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
 
-    def makeTimerDB(self):
-        timerxml = open('/etc/enigma2/timers.xml').read()
-        timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-        timerfile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db'
-        f = open(timerfile, 'w')
-        data = ''
-        idx = 0
-        for x in timer:
-            idx += 1
-
-        for i in range(idx):
-            try:
-                timerstart = timer[i - 1][0]
-                timerstart = int(timerstart) + int(config.recording.margin_before.value) * 60
-                timerday = time.strftime('%Y-%m-%d', time.localtime(timerstart))
-                timerhour = time.strftime('%H:%M', time.localtime(timerstart))
-                timersref = timer[i - 1][1]
-                data = data + timerday + ':::' + timerhour + ':::' + timersref + '\n'
-            except IndexError:
-                pass
-
-        f.write(data)
-        f.close()
-        self.timer = data
-
     def green(self):
         if self.current == 'menu' and self.search == False:
             c = self['menu'].getSelectedIndex()
@@ -7197,17 +7136,6 @@ class TVGenreView(tvBaseScreen):
     def zap(self):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
-
-    def zapUp(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapUp(InfoBar.instance)
-
-    def zapDown(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapDown(InfoBar.instance)
-
-    def picReturn(self):
-        pass
 
     def exit(self):
         if self.hideflag == False:
@@ -8687,31 +8615,6 @@ class TVJetztView(tvBaseScreen):
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
 
-    def makeTimerDB(self):
-        timerxml = open('/etc/enigma2/timers.xml').read()
-        timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-        timerfile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db'
-        f = open(timerfile, 'w')
-        data = ''
-        idx = 0
-        for x in timer:
-            idx += 1
-
-        for i in range(idx):
-            try:
-                timerstart = timer[i - 1][0]
-                timerstart = int(timerstart) + int(config.recording.margin_before.value) * 60
-                timerday = time.strftime('%Y-%m-%d', time.localtime(timerstart))
-                timerhour = time.strftime('%H:%M', time.localtime(timerstart))
-                timersref = timer[i - 1][1]
-                data = data + timerday + ':::' + timerhour + ':::' + timersref + '\n'
-            except IndexError:
-                pass
-
-        f.write(data)
-        f.close()
-        self.timer = data
-
     def green(self):
         if self.current == 'menu' and self.search == False:
             c = self['menu'].getSelectedIndex()
@@ -9079,17 +8982,6 @@ class TVJetztView(tvBaseScreen):
     def zap(self):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
-
-    def zapUp(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapUp(InfoBar.instance)
-
-    def zapDown(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapDown(InfoBar.instance)
-
-    def picReturn(self):
-        pass
 
     def exit(self):
         if self.hideflag == False:
@@ -10556,31 +10448,6 @@ class TVProgrammView(tvBaseScreen):
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
 
-    def makeTimerDB(self):
-        timerxml = open('/etc/enigma2/timers.xml').read()
-        timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-        timerfile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db'
-        f = open(timerfile, 'w')
-        data = ''
-        idx = 0
-        for x in timer:
-            idx += 1
-
-        for i in range(idx):
-            try:
-                timerstart = timer[i - 1][0]
-                timerstart = int(timerstart) + int(config.recording.margin_before.value) * 60
-                timerday = time.strftime('%Y-%m-%d', time.localtime(timerstart))
-                timerhour = time.strftime('%H:%M', time.localtime(timerstart))
-                timersref = timer[i - 1][1]
-                data = data + timerday + ':::' + timerhour + ':::' + timersref + '\n'
-            except IndexError:
-                pass
-
-        f.write(data)
-        f.close()
-        self.timer = data
-
     def green(self):
         if self.current == 'menu' and self.zap == True and self.eventview == False and self.search == False:
             c = self['menu'].getSelectedIndex()
@@ -11071,14 +10938,6 @@ class TVProgrammView(tvBaseScreen):
         except IndexError:
             pass
 
-    def zapUp(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapUp(InfoBar.instance)
-
-    def zapDown(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapDown(InfoBar.instance)
-
     def zapRefresh(self):
         if self.current == 'menu' and self.eventview == True and self.search == False:
             sref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
@@ -11096,9 +10955,6 @@ class TVProgrammView(tvBaseScreen):
                 self.link = 'https://www.tvspielfilm.de/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
                 self.refresh()
         return
-
-    def picReturn(self):
-        pass
 
     def exit(self):
         if self.hideflag == False:
@@ -12493,9 +12349,6 @@ class TVBilder(tvBaseScreen):
             except IndexError:
                 pass
 
-    def picReturn(self):
-        pass
-
     def gotoEnd(self):
         if self.ready == True:
             end = self.len - 1
@@ -13657,9 +13510,6 @@ class TVNews(tvBaseScreen):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
 
-    def picReturn(self):
-        pass
-
     def exit(self):
         if self.hideflag == False:
             self.hideflag = True
@@ -14226,9 +14076,6 @@ class TVBlog(tvBaseScreen):
                 best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
                 trailer_url = '%s' % best_video['fmturl'].split(';')[0]
             return trailer_url
-
-    def picReturn(self):
-        pass
 
     def exit(self):
         if self.hideflag == False:
@@ -17784,30 +17631,6 @@ class tvMain(tvBaseScreen):
     def getIndex(self, list):
         return list.getSelectedIndex()
 
-    def makeTimerDB(self):
-        timerxml = open('/etc/enigma2/timers.xml').read()
-        timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-        timerfile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db'
-        f = open(timerfile, 'w')
-        data = ''
-        idx = 0
-        for x in timer:
-            idx += 1
-
-        for i in range(idx):
-            try:
-                timerstart = timer[i - 1][0]
-                timerstart = int(timerstart) + int(config.recording.margin_before.value) * 60
-                timerday = time.strftime('%Y-%m-%d', time.localtime(timerstart))
-                timerhour = time.strftime('%H:%M', time.localtime(timerstart))
-                timersref = timer[i - 1][1]
-                data = data + timerday + ':::' + timerhour + ':::' + timersref + '\n'
-            except IndexError:
-                pass
-
-        f.write(data)
-        f.close()
-
     def red(self):
         if self.ready == True:
             if self.tipps == True:
@@ -18762,13 +18585,13 @@ class FolderSelection(Screen):
         return
 
 
-class tvJetzt(Screen):
+class tvJetzt(tvAllScreen):
     skin = '\n\t\t\t\t<screen position="0,0" size="0,0" >\n\t\t\t\t</screen>'
 
     def __init__(self, session):
         self.skin = tvJetzt.skin
         self.session = session
-        Screen.__init__(self, session)
+        tvAllScreen.__init__(self, session)
         self.fhd = False
         if config.plugins.tvspielfilm.fhd.value == 'yes':
             if getDesktop(0).size().width() == 1920:
@@ -18811,30 +18634,6 @@ class tvJetzt(Screen):
 
             self.close()
 
-    def makeTimerDB(self):
-        timerxml = open('/etc/enigma2/timers.xml').read()
-        timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-        timerfile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db'
-        f = open(timerfile, 'w')
-        data = ''
-        idx = 0
-        for x in timer:
-            idx += 1
-
-        for i in range(idx):
-            try:
-                timerstart = timer[i - 1][0]
-                timerstart = int(timerstart) + int(config.recording.margin_before.value) * 60
-                timerday = time.strftime('%Y-%m-%d', time.localtime(timerstart))
-                timerhour = time.strftime('%H:%M', time.localtime(timerstart))
-                timersref = timer[i - 1][1]
-                data = data + timerday + ':::' + timerhour + ':::' + timersref + '\n'
-            except IndexError:
-                pass
-
-        f.write(data)
-        f.close()
-
     def exit(self):
         if self.fhd == True:
             try:
@@ -18848,13 +18647,13 @@ class tvJetzt(Screen):
         self.close()
 
 
-class tvEvent(Screen):
+class tvEvent(tvAllScreen):
     skin = '\n\t\t\t\t<screen position="0,0" size="0,0" >\n\t\t\t\t</screen>'
 
     def __init__(self, session):
         self.skin = tvEvent.skin
         self.session = session
-        Screen.__init__(self, session)
+        tvAllScreen.__init__(self, session)
         self.fhd = False
         if config.plugins.tvspielfilm.fhd.value == 'yes':
             if getDesktop(0).size().width() == 1920:
@@ -18912,30 +18711,6 @@ class tvEvent(Screen):
                     traceback.print_exc()
 
             self.close()
-
-    def makeTimerDB(self):
-        timerxml = open('/etc/enigma2/timers.xml').read()
-        timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-        timerfile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db'
-        f = open(timerfile, 'w')
-        data = ''
-        idx = 0
-        for x in timer:
-            idx += 1
-
-        for i in range(idx):
-            try:
-                timerstart = timer[i - 1][0]
-                timerstart = int(timerstart) + int(config.recording.margin_before.value) * 60
-                timerday = time.strftime('%Y-%m-%d', time.localtime(timerstart))
-                timerhour = time.strftime('%H:%M', time.localtime(timerstart))
-                timersref = timer[i - 1][1]
-                data = data + timerday + ':::' + timerhour + ':::' + timersref + '\n'
-            except IndexError:
-                pass
-
-        f.write(data)
-        f.close()
 
     def exit(self):
         if self.fhd == True:
@@ -21691,31 +21466,6 @@ class TVHeuteView(tvBaseScreen):
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
 
-    def makeTimerDB(self):
-        timerxml = open('/etc/enigma2/timers.xml').read()
-        timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-        timerfile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db'
-        f = open(timerfile, 'w')
-        data = ''
-        idx = 0
-        for x in timer:
-            idx += 1
-
-        for i in range(idx):
-            try:
-                timerstart = timer[i - 1][0]
-                timerstart = int(timerstart) + int(config.recording.margin_before.value) * 60
-                timerday = time.strftime('%Y-%m-%d', time.localtime(timerstart))
-                timerhour = time.strftime('%H:%M', time.localtime(timerstart))
-                timersref = timer[i - 1][1]
-                data = data + timerday + ':::' + timerhour + ':::' + timersref + '\n'
-            except IndexError:
-                pass
-
-        f.write(data)
-        f.close()
-        self.timer = data
-
     def green(self):
         if self.current == 'menu1' and self.zap1 == True and self.search == False:
             try:
@@ -22659,17 +22409,6 @@ class TVHeuteView(tvBaseScreen):
         self['label'].stopBlinking()
         self['label'].show()
         self.ready = True
-
-    def zapUp(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapUp(InfoBar.instance)
-
-    def zapDown(self):
-        if InfoBar and InfoBar.instance:
-            InfoBar.zapDown(InfoBar.instance)
-
-    def picReturn(self):
-        pass
 
     def showProgrammPage(self):
         self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Men\xc3\xbc = Senderliste')
