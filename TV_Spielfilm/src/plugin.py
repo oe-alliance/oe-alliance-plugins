@@ -28,7 +28,7 @@ from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from ServiceReference import ServiceReference
 from time import mktime
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web import client, error
 from twisted.web.client import getPage, downloadPage
@@ -40,6 +40,8 @@ import datetime, os, re, socket, sys, time, six
 from os import path
 from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, TVSHDPNG, serviceDB, channelDB, BlinkingLabel, ItemList, makeWeekDay
 from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable
+from skin import loadSkin
+
 
 try:
     from cookielib import MozillaCookieJar
@@ -103,6 +105,12 @@ config.plugins.tvspielfilm.maxsearch = ConfigInteger(50, (10, 999))
 config.plugins.tvspielfilm.maxgenre = ConfigInteger(250, (10, 999))
 config.plugins.tvspielfilm.autotimer = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 
+#if deskWidth <= 1280:
+#	loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/TVSpielfilm/skin_hd.xml")
+#elif deskWidth >= 1280:
+#	loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/TVSpielfilm/skin_uhd.xml")
+#else:
+#	loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/TVSpielfilm/skin_fhd.xml")
 
 class tvAllScreen(Screen):
     def __init__(self, session):
