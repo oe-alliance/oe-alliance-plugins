@@ -13379,7 +13379,7 @@ class tvMain(tvBaseScreen):
                 position = str(config.plugins.tvspielfilm.position.value)
             else:
                 position = 'center'
-        tvBaseScreen.__init__(self, session, tvMain.skin, tvMain.skinHD, None, position)
+        tvBaseScreen.__init__(self, session, tvMain.skin, tvMain.skinHD, 0, None, position)
         self.fhd = False
         if config.plugins.tvspielfilm.fhd.value == 'yes':
             if getDesktop(0).size().width() == 1920:
