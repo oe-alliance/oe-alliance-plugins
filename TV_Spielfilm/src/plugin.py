@@ -103,9 +103,34 @@ config.plugins.tvspielfilm.maxsearch = ConfigInteger(50, (10, 999))
 config.plugins.tvspielfilm.maxgenre = ConfigInteger(250, (10, 999))
 config.plugins.tvspielfilm.autotimer = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 
-class tvBaseScreen(Screen):
 
-    def __init__(self, session, skin, skinHD, fontoffset=0, size=None):
+class tvAllScreen(Screen):
+    def __init__(self, session):
+        Screen.__init__(self, session)
+
+    def hideScreen(self):
+        if self.hideflag == True:
+            self.hideflag = False
+            count = 40
+            while count > 0:
+                count -= 1
+                f = open('/proc/stb/video/alpha', 'w')
+                f.write('%i' % (config.av.osd_alpha.value * count / 40))
+                f.close()
+
+        else:
+            self.hideflag = True
+            count = 0
+            while count < 40:
+                count += 1
+                f = open('/proc/stb/video/alpha', 'w')
+                f.write('%i' % (config.av.osd_alpha.value * count / 40))
+                f.close()
+
+
+class tvBaseScreen(tvAllScreen):
+
+    def __init__(self, session, skin, skinHD, fontoffset=0, size=None, posover=None):
         if config.plugins.tvspielfilm.font.value == 'yes':
             self.dict = {'font' : 'Sans'}
         else:
@@ -132,7 +157,9 @@ class tvBaseScreen(Screen):
                 position = 'center'
             else:
                 position = str(config.plugins.tvspielfilm.position.value)
-
+            
+        if posover != None:
+            position = posover
         _fontsize = _fontsize - fontoffset
         self.dict['fontsize'] = str(_fontsize)
         self.dict['fontsize2'] = str(_fontsize - 2)
@@ -144,7 +171,7 @@ class tvBaseScreen(Screen):
             self.skin = applySkinVars(skinHD, self.dict)
         else:
             self.skin = applySkinVars(skin, self.dict)
-        Screen.__init__(self, session)
+        tvAllScreen.__init__(self, session)
         self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.pic1 = '/tmp/tvspielfilm1.jpg'
@@ -155,6 +182,11 @@ class tvBaseScreen(Screen):
         self.pic6 = '/tmp/tvspielfilm6.jpg'
         self.localhtml = '/tmp/tvspielfilm.html'
         self.localhtml2 = '/tmp/tvspielfilm2.html'
+        if config.plugins.tvspielfilm.picon.value == 'yes':
+            self.picon = True
+            self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
+        else:
+            self.picon = False
         return
 
     def finishedAutoTimer(self, answer):
@@ -200,6 +232,7 @@ class tvBaseScreen(Screen):
             autotimer.writeXml()
         return
 
+
 class TVTippsView(tvBaseScreen):
     skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV-Tipps - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilm.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="880,450" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="890,60" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="890,135" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="890,210" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="890,285" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="890,360" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="890,435" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
     skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV-Tipps - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="1085,540" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
@@ -228,11 +261,6 @@ class TVTippsView(tvBaseScreen):
         self.trailerurl = ''
         self.POSTtext = ''
         self.EPGtext = ''
-        if config.plugins.tvspielfilm.picon.value == 'yes':
-            self.picon = True
-            self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
-        else:
-            self.picon = False
         self.hideflag = True
         self.new = False
         self.newfilter = False
@@ -2764,25 +2792,6 @@ class TVTippsView(tvBaseScreen):
 
     def picReturn(self):
         pass
-
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
 
     def exit(self):
         if self.hideflag == False:
@@ -5345,25 +5354,6 @@ class TVNeuView(tvBaseScreen):
     def picReturn(self):
         pass
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             self.hideflag = True
@@ -7218,25 +7208,6 @@ class TVGenreView(tvBaseScreen):
 
     def picReturn(self):
         pass
-
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
 
     def exit(self):
         if self.hideflag == False:
@@ -9119,25 +9090,6 @@ class TVJetztView(tvBaseScreen):
 
     def picReturn(self):
         pass
-
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
 
     def exit(self):
         if self.hideflag == False:
@@ -11148,25 +11100,6 @@ class TVProgrammView(tvBaseScreen):
     def picReturn(self):
         pass
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             self.hideflag = True
@@ -12359,25 +12292,6 @@ class TVTrailer(tvBaseScreen):
         self['play5'].show()
         self['play6'].show()
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             f = open('/proc/stb/video/alpha', 'w')
@@ -13360,25 +13274,6 @@ class TVBilder(tvBaseScreen):
         self['play5'].show()
         self['play6'].show()
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             f = open('/proc/stb/video/alpha', 'w')
@@ -13764,25 +13659,6 @@ class TVNews(tvBaseScreen):
 
     def picReturn(self):
         pass
-
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
 
     def exit(self):
         if self.hideflag == False:
@@ -14354,25 +14230,6 @@ class TVBlog(tvBaseScreen):
     def picReturn(self):
         pass
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             self.hideflag = True
@@ -14608,25 +14465,6 @@ class TVNewsPicShow(tvBaseScreen):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             f = open('/proc/stb/video/alpha', 'w')
@@ -14833,25 +14671,6 @@ class PlayboyPicShow(tvBaseScreen):
     def zap(self):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
-
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
 
     def exit(self):
         if self.hideflag == False:
@@ -15109,25 +14928,6 @@ class TVPicShow(tvBaseScreen):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             f = open('/proc/stb/video/alpha', 'w')
@@ -15312,25 +15112,6 @@ class PicShowFull(tvBaseScreen):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             f = open('/proc/stb/video/alpha', 'w')
@@ -15339,7 +15120,7 @@ class PicShowFull(tvBaseScreen):
         self.close()
 
 
-class FullScreen(Screen):
+class FullScreen(tvAllScreen):
     skin = '\n\t\t\t<screen position="center,center" size="1024,576" flags="wfNoBorder" title="  " >\n\t\t\t\t<eLabel position="0,0" size="1024,576" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="picture" position="128,0" size="768,576" alphatest="blend" zPosition="2" />\n\t\t\t</screen>'
     skinHD = '\n\t\t\t<screen position="center,center" size="1280,720" flags="wfNoBorder" title="  " >\n\t\t\t\t<eLabel position="0,0" size="1280,720" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="picture" position="160,0" size="960,720" alphatest="blend" zPosition="2" />\n\t\t\t</screen>'
 
@@ -15351,7 +15132,7 @@ class FullScreen(Screen):
         else:
             self.skin = FullScreen.skin
             self.xd = True
-        Screen.__init__(self, session)
+        tvAllScreen.__init__(self, session)
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.hideflag = True
         self['picture'] = Pixmap()
@@ -15369,25 +15150,6 @@ class FullScreen(Screen):
             self['picture'].instance.setPixmap(currPic)
         return
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             f = open('/proc/stb/video/alpha', 'w')
@@ -15396,7 +15158,7 @@ class FullScreen(Screen):
         self.close()
 
 
-class searchYouTube(Screen):
+class searchYouTube(tvAllScreen):
     skin = '\n\t\t\t<screen position="center,center" size="1000,560" title=" ">\n\t\t\t\t<ePixmap position="0,0" size="1000,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/youtube.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="10,6" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/blue.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="10,26" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="label" position="34,6" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="34,26" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="740,0" size="240,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t\t<widget name="poster1" position="10,55" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster2" position="10,180" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster3" position="10,305" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster4" position="10,430" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="list" position="235,55" size="755,500" scrollbarMode="showOnDemand" zPosition="1" />\n\t\t\t</screen>'
 
     def __init__(self, session, name, movie):
@@ -15406,7 +15168,7 @@ class searchYouTube(Screen):
             font = 'Regular'
         self.dict = {'font': font}
         self.skin = applySkinVars(searchYouTube.skin, self.dict)
-        Screen.__init__(self, session)
+        tvAllScreen.__init__(self, session)
         if movie == True:
             self.name = name + ' Trailer'
         else:
@@ -16073,25 +15835,6 @@ class searchYouTube(Screen):
     def showHelp(self):
         self.session.open(MessageBox, '\n%s' % 'Bouquet = +- Seite\nGelb = Neue YouTube Suche', MessageBox.TYPE_INFO, close_on_any_key=True)
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             f = open('/proc/stb/video/alpha', 'w')
@@ -16110,34 +15853,21 @@ class searchYouTube(Screen):
         self.close()
 
 
-class tvMain(Screen):
+class tvMain(tvBaseScreen):
     skin = '\n\t\t\t<screen position="center,{position}" size="310,560" flags="wfNoBorder" title="TV Spielfilm">\n\t\t\t\t<eLabel position="0,0" size="310,30" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<eLabel position="0,30" size="20,510" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<eLabel position="290,30" size="20,510" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<eLabel position="0,540" size="310,20" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<ePixmap position="20,30" size="270,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="262,35" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="green" position="262,57" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="label" position="176,35" size="80,20" font="{font};16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="176,57" size="80,20" font="{font};16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="mainmenu" position="30,90" size="250,390" scrollbarMode="showNever" zPosition="2" />\n\t\t\t\t<widget name="secondmenu" position="30,90" size="250,450" scrollbarMode="showNever" zPosition="2" />\n\t\t\t\t<widget name="thirdmenu" position="30,90" size="250,450" scrollbarMode="showNever" zPosition="2" />\n\t\t\t</screen>'
     skinHD = '\n\t\t\t<screen position="center,{position}" size="310,640" flags="wfNoBorder" title="TV Spielfilm">\n\t\t\t\t<eLabel position="0,0" size="310,30" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<eLabel position="0,30" size="20,590" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<eLabel position="290,30" size="20,590" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<eLabel position="0,620" size="310,20" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<ePixmap position="20,30" size="270,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="262,40" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="green" position="262,62" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="label" position="176,40" size="80,20" font="{font};16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="176,62" size="80,20" font="{font};16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="mainmenu" position="30,100" size="250,390" scrollbarMode="showNever" zPosition="2" />\n\t\t\t\t<widget name="secondmenu" position="30,100" size="250,510" scrollbarMode="showNever" zPosition="2" />\n\t\t\t\t<widget name="thirdmenu" position="30,100" size="250,510" scrollbarMode="showNever" zPosition="2" />\n\t\t\t</screen>'
 
     def __init__(self, session):
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
+        position = None
         if config.plugins.tvspielfilm.plugin_size.value == 'full':
             position = '20'
-            self.xd = False
-            self.dict = {'font': font,
-             'position': position}
-            self.skin = applySkinVars(tvMain.skinHD, self.dict)
         else:
             deskWidth = getDesktop(0).size().width()
             if deskWidth >= 1280:
-                position = '60'
+                position = str(config.plugins.tvspielfilm.position.value)
             else:
                 position = 'center'
-            self.xd = True
-            self.dict = {'font': font,
-             'position': position}
-            self.skin = applySkinVars(tvMain.skin, self.dict)
-        self.session = session
-        Screen.__init__(self, session)
-        self.baseurl = 'https://www.tvspielfilm.de'
+        tvBaseScreen.__init__(self, session, tvMain.skin, tvMain.skinHD, None, position)
         self.fhd = False
         if config.plugins.tvspielfilm.fhd.value == 'yes':
             if getDesktop(0).size().width() == 1920:
@@ -16150,16 +15880,7 @@ class tvMain(Screen):
                     import traceback
                     traceback.print_exc()
 
-        self.picfile = '/tmp/tvspielfilm.jpg'
-        self.pic1 = '/tmp/tvspielfilm1.jpg'
-        self.pic2 = '/tmp/tvspielfilm2.jpg'
-        self.pic3 = '/tmp/tvspielfilm3.jpg'
-        self.pic4 = '/tmp/tvspielfilm4.jpg'
-        self.pic5 = '/tmp/tvspielfilm5.jpg'
-        self.pic6 = '/tmp/tvspielfilm6.jpg'
         self.senderhtml = '/tmp/tvssender.html'
-        self.localhtml = '/tmp/tvspielfilm.html'
-        self.localhtml2 = '/tmp/tvspielfilm2.html'
         if config.plugins.tvspielfilm.tipps.value == 'false':
             self.tipps = False
             self.hidetipps = True
@@ -18167,25 +17888,6 @@ class tvMain(Screen):
             servicelist = self.session.instantiateDialog(ChannelSelection)
             self.session.execDialog(servicelist)
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             self.hideflag = True
@@ -18436,13 +18138,13 @@ class getNumber(Screen):
         self.close(0)
 
 
-class gotoPageMenu(Screen):
+class gotoPageMenu(tvAllScreen):
     skin = '\n\t\t\t<screen position="center,center" size="436,560" title=" ">\n\t\t\t\t<widget name="pagemenu" position="10,10" size="416,540" scrollbarMode="showNever" zPosition="1" />\n\t\t\t</screen>'
 
     def __init__(self, session, count, maxpages):
         self.skin = gotoPageMenu.skin
         self.session = session
-        Screen.__init__(self, session)
+        tvAllScreen.__init__(self, session)
         self.localhtml = '/tmp/tvspielfilm.html'
         self.hideflag = True
         self.index = count - 1
@@ -18585,25 +18287,6 @@ class gotoPageMenu(Screen):
     def downloadError(self, output):
         pass
 
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
     def exit(self):
         if self.hideflag == False:
             f = open('/proc/stb/video/alpha', 'w')
@@ -18612,7 +18295,7 @@ class gotoPageMenu(Screen):
         self.close(0)
 
 
-class tvTipps(Screen):
+class tvTipps(tvAllScreen):
     skin = '\n\t\t\t<screen position="{position}" size="740,270" flags="wfNoBorder" title=" ">\n\t\t\t\t<widget name="picture" position="0,0" size="387,270" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="elabel" position="387,0" size="{size},150" font="{font};18" backgroundColor="#FF000000" zPosition="1" />\n\t\t\t\t<widget name="elabel2" position="{position2},0" size="{size2}" font="{font};18" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="elabel3" position="387,150" size="353,125" font="{font};18" backgroundColor="#FFFFFF" zPosition="1" />\n\t\t\t\t<widget name="label" position="402,151" size="288,24" font="{font};20" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2" />\n\t\t\t\t<widget name="label2" position="402,176" size="288,48" font="{font};22" foregroundColor="#{color}" backgroundColor="#FFFFFF" halign="left" zPosition="2" />\n\t\t\t\t<widget name="label3" position="402,225" size="328,42" font="{font};18" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" zPosition="2" />\n\t\t\t\t<widget name="thumb" position="695,160" size="40,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/rating small1HD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="label4" position="40,220" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="label5" position="40,245" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t</screen>'
 
     def __init__(self, session):
@@ -18643,7 +18326,7 @@ class tvTipps(Screen):
          'font': font,
          'color': color}
         self.skin = applySkinVars(tvTipps.skin, self.dict)
-        Screen.__init__(self, session)
+        tvAllScreen.__init__(self, session)
         self.baseurl = 'http://www.tvspielfilm.de'
         self.pic1 = '/tmp/tvspielfilm1.jpg'
         self.pic2 = '/tmp/tvspielfilm2.jpg'
@@ -18892,25 +18575,6 @@ class tvTipps(Screen):
     def zap(self):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
-
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
 
     def exit(self):
         if self.hideflag == False:
@@ -23006,25 +22670,6 @@ class TVHeuteView(tvBaseScreen):
 
     def picReturn(self):
         pass
-
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
 
     def showProgrammPage(self):
         self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Men\xc3\xbc = Senderliste')
