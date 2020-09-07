@@ -157,6 +157,48 @@ class tvBaseScreen(Screen):
         self.localhtml2 = '/tmp/tvspielfilm2.html'
         return
 
+    def finishedAutoTimer(self, answer):
+        if config.plugins.tvspielfilm.fhd.value == 'yes':
+            try:
+                gMainDC.getInstance().setResolution(1240, 720)
+                desktop = getDesktop(0)
+                desktop.resize(eSize(1240, 720))
+            except:
+                import traceback
+                traceback.print_exc()
+
+        if answer:
+            from Plugins.Extensions.AutoTimer.AutoTimerEditor import AutoTimerEditor
+            answer, session = answer
+            if config.plugins.tvspielfilm.fhd.value == 'yes':
+                try:
+                    gMainDC.getInstance().setResolution(1920, 1080)
+                    desktop = getDesktop(0)
+                    desktop.resize(eSize(1920, 1080))
+                except:
+                    import traceback
+                    traceback.print_exc()
+
+            session.openWithCallback(self.finishedAutoTimerEdit, AutoTimerEditor, answer)
+
+    def finishedAutoTimerEdit(self, answer):
+        if config.plugins.tvspielfilm.fhd.value == 'yes':
+            try:
+                gMainDC.getInstance().setResolution(1240, 720)
+                desktop = getDesktop(0)
+                desktop.resize(eSize(1240, 720))
+            except:
+                import traceback
+                traceback.print_exc()
+
+        if answer:
+            from Plugins.Extensions.AutoTimer.plugin import autotimer
+            if autotimer is None:
+                from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+                autotimer = AutoTimer()
+            autotimer.add(answer)
+            autotimer.writeXml()
+        return
 
 class TVTippsView(tvBaseScreen):
     skin = '\n\t\t\t<screen position="center,{position}" size="1012,516" title="TV-Tipps - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1012,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilm.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,60" size="880,450" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="890,60" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="890,135" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="890,210" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="890,285" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="890,360" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="890,435" size="112,75" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="306,0" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,60" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,60" size="727,60" font="{font};24" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,120" size="992,360" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="306,60" size="400,200" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="391,216" size="90,22" font="{font};20" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="391,238" size="90,22" font="{font};16" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,60" size="252,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="685,60" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="685,90" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="685,120" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="685,150" size="317,20" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="65,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="120,185" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="65,210" size="45,15" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="267,60" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="463,138" size="85,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/play.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,270" size="992,235" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="987,270" size="20,235" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_235.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="150,5" size="712,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="376,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="486,27" size="80,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="596,27" size="100,20" font="{font};16" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="352,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="462,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="572,27" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="800,0" size="192,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
@@ -1554,49 +1596,6 @@ class TVTippsView(tvBaseScreen):
 
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
-
-    def finishedAutoTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.AutoTimerEditor import AutoTimerEditor
-            answer, session = answer
-            if config.plugins.tvspielfilm.fhd.value == 'yes':
-                try:
-                    gMainDC.getInstance().setResolution(1920, 1080)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 1080))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
-            session.openWithCallback(self.finishedAutoTimerEdit, AutoTimerEditor, answer)
-
-    def finishedAutoTimerEdit(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.plugin import autotimer
-            if autotimer is None:
-                from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                autotimer = AutoTimer()
-            autotimer.add(answer)
-            autotimer.writeXml()
-        return
 
     def makeTimerDB(self):
         timerxml = open('/etc/enigma2/timers.xml').read()
@@ -4177,49 +4176,6 @@ class TVNeuView(tvBaseScreen):
 
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
-
-    def finishedAutoTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.AutoTimerEditor import AutoTimerEditor
-            answer, session = answer
-            if config.plugins.tvspielfilm.fhd.value == 'yes':
-                try:
-                    gMainDC.getInstance().setResolution(1920, 1080)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 1080))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
-            session.openWithCallback(self.finishedAutoTimerEdit, AutoTimerEditor, answer)
-
-    def finishedAutoTimerEdit(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.plugin import autotimer
-            if autotimer is None:
-                from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                autotimer = AutoTimer()
-            autotimer.add(answer)
-            autotimer.writeXml()
-        return
 
     def makeTimerDB(self):
         timerxml = open('/etc/enigma2/timers.xml').read()
@@ -6873,49 +6829,6 @@ class TVGenreView(tvBaseScreen):
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
 
-    def finishedAutoTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.AutoTimerEditor import AutoTimerEditor
-            answer, session = answer
-            if config.plugins.tvspielfilm.fhd.value == 'yes':
-                try:
-                    gMainDC.getInstance().setResolution(1920, 1080)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 1080))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
-            session.openWithCallback(self.finishedAutoTimerEdit, AutoTimerEditor, answer)
-
-    def finishedAutoTimerEdit(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.plugin import autotimer
-            if autotimer is None:
-                from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                autotimer = AutoTimer()
-            autotimer.add(answer)
-            autotimer.writeXml()
-        return
-
     def makeTimerDB(self):
         timerxml = open('/etc/enigma2/timers.xml').read()
         timer = re.findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
@@ -8802,49 +8715,6 @@ class TVJetztView(tvBaseScreen):
 
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
-
-    def finishedAutoTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.AutoTimerEditor import AutoTimerEditor
-            answer, session = answer
-            if config.plugins.tvspielfilm.fhd.value == 'yes':
-                try:
-                    gMainDC.getInstance().setResolution(1920, 1080)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 1080))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
-            session.openWithCallback(self.finishedAutoTimerEdit, AutoTimerEditor, answer)
-
-    def finishedAutoTimerEdit(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.plugin import autotimer
-            if autotimer is None:
-                from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                autotimer = AutoTimer()
-            autotimer.add(answer)
-            autotimer.writeXml()
-        return
 
     def makeTimerDB(self):
         timerxml = open('/etc/enigma2/timers.xml').read()
@@ -10733,49 +10603,6 @@ class TVProgrammView(tvBaseScreen):
 
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
-
-    def finishedAutoTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.AutoTimerEditor import AutoTimerEditor
-            answer, session = answer
-            if config.plugins.tvspielfilm.fhd.value == 'yes':
-                try:
-                    gMainDC.getInstance().setResolution(1920, 1080)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 1080))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
-            session.openWithCallback(self.finishedAutoTimerEdit, AutoTimerEditor, answer)
-
-    def finishedAutoTimerEdit(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.plugin import autotimer
-            if autotimer is None:
-                from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                autotimer = AutoTimer()
-            autotimer.add(answer)
-            autotimer.writeXml()
-        return
 
     def makeTimerDB(self):
         timerxml = open('/etc/enigma2/timers.xml').read()
@@ -22199,49 +22026,6 @@ class TVHeuteView(tvBaseScreen):
 
     def finishSanityCorrection(self, answer):
         self.finishedTimer(answer)
-
-    def finishedAutoTimer(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.AutoTimerEditor import AutoTimerEditor
-            answer, session = answer
-            if config.plugins.tvspielfilm.fhd.value == 'yes':
-                try:
-                    gMainDC.getInstance().setResolution(1920, 1080)
-                    desktop = getDesktop(0)
-                    desktop.resize(eSize(1920, 1080))
-                except:
-                    import traceback
-                    traceback.print_exc()
-
-            session.openWithCallback(self.finishedAutoTimerEdit, AutoTimerEditor, answer)
-
-    def finishedAutoTimerEdit(self, answer):
-        if config.plugins.tvspielfilm.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1240, 720)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1240, 720))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        if answer:
-            from Plugins.Extensions.AutoTimer.plugin import autotimer
-            if autotimer is None:
-                from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                autotimer = AutoTimer()
-            autotimer.add(answer)
-            autotimer.writeXml()
-        return
 
     def makeTimerDB(self):
         timerxml = open('/etc/enigma2/timers.xml').read()
