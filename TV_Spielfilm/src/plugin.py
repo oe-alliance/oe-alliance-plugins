@@ -5991,7 +5991,8 @@ class TVGenreView(tvBaseScreen):
 class TVJetztView(tvBaseScreen):
     skinHD = """
     <screen position="center,{position}" size="{screensize}" title=" ">
-        <ePixmap position="0,0" size="{screensize}" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />
+        <eLabel position="0,0" size="{headersize}" backgroundColor="#FFFFFF" />
+        <ePixmap position="0,0" size="{headersize}" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" backgroundColor="#FFFFFF"/>
         <widget name="menu" position="10,75" size="{menusize}" scrollbarMode="showNever" zPosition="1" />
         <widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />
         <widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />
@@ -6035,6 +6036,7 @@ class TVJetztView(tvBaseScreen):
         w = DESKTOP_WIDTH - (40 * skinFactor)
         h = DESKTOP_HEIGHT - (80 * skinFactor)
         dict["screensize"] = "%s,%s" % (w, h)
+        dict["headersize"] = "%s,%s" % (w, 60)
         w = w - (20 * skinFactor)
         h = h - (60 * skinFactor)
 #        if config.plugins.tvspielfilm.picon.value == 'yes':
@@ -6336,10 +6338,10 @@ class TVJetztView(tvBaseScreen):
                         res_titel.append(t)
                         self.tvtitel.append(res_titel)
                         if self.progress == False:
-                            res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(820 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                            res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(self.menuwidth - 400 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                         else:
-                            res.append(MultiContentEntryProgress(pos=(235 + picleftoffset, 13), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
-                            res.append(MultiContentEntryText(pos=(325 + picleftoffset, 7 + pictopoffset), size=(730 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                            res.append(MultiContentEntryProgress(pos=(235 + picleftoffset, 13 + pictopoffset), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
+                            res.append(MultiContentEntryText(pos=(325 + picleftoffset, 7 + pictopoffset), size=(self.menuwidth - 490 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                     else:
                         y = 5
                 elif search('TITEL', x) is None:
@@ -6348,7 +6350,7 @@ class TVJetztView(tvBaseScreen):
                 if search('SPARTE', x) is not None:
                     if self.filter == False:
                         x = sub('SPARTE', '', x)
-                        res.append(MultiContentEntryText(pos=(1065, 7 + pictopoffset), size=(152, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160, 7 + pictopoffset), size=(152, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                 else:
                     y = 6
             if y == 6:
@@ -6359,7 +6361,7 @@ class TVJetztView(tvBaseScreen):
                     elif x != 'rating small':
                         png = '%s%sHD.png' % (ICONPATH, x)
                         if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(1054, pictopoffset), size=(40, 40), png=loadPNG(png)))
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 210, pictopoffset), size=(40, 40), png=loadPNG(png)))
                     self.tventries.append(res)
             y += 1
             if y == offset:
