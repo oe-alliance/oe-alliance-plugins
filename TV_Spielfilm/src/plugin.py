@@ -121,6 +121,9 @@ class tvAllScreen(Screen):
     def __init__(self, session):
         self.session = session
         Screen.__init__(self, session)
+        self.fontlarge = True
+        if config.plugins.tvspielfilm.font_size.value == 'normal':
+            self.fontlarge = False
 
     def hideScreen(self):
         if self.hideflag == True:
@@ -176,6 +179,13 @@ class tvAllScreen(Screen):
         f.write(data)
         f.close()
         self.timer = data
+    
+    def getFill(self, text):
+        if self.fontlarge == True:
+            return '____________________________________________________________________________________________________________________________________\n%s' % text
+        else:
+            return '____________________________________________________________________________________________________________________________________________________\n%s' % text
+
 
 class tvAllScreenFull(tvAllScreen):
     skin = '\n\t\t\t\t<screen position="0,0" size="{size}" >\n\t\t\t\t</screen>'
@@ -188,7 +198,6 @@ class tvAllScreenFull(tvAllScreen):
 
 class tvBaseScreen(tvAllScreen):
     def __init__(self, session, skin, fontoffset=0, dict={}, posover=None):
-        self.xd = False
         tvAllScreen.__init__(self, session)
         self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
@@ -359,6 +368,21 @@ class tvBaseScreen(tvAllScreen):
 
     def picdownloadError(self, output):
         pass
+
+    def getRecPNG(self):
+        return self.getPNG("icon-rec")
+
+    def getPNG(self, x, Pos=1100):
+        if self.picon == True:
+            png = '%s%sHD.png' % (ICONPATH, x)
+            if fileExists(png):
+                return MultiContentEntryPixmapAlphaTest(pos=(Pos, 20), size=(60, 20), png=loadPNG(png))
+        else:
+            png = '%s%sHD.png' % (ICONPATH, x)
+            if fileExists(png):
+                return MultiContentEntryPixmapAlphaTest(pos=(Pos, 10), size=(60, 20), png=loadPNG(png))
+        return None
+
 
 class TVTippsView(tvBaseScreen):
     def __init__(self, session, link, sparte):
@@ -571,10 +595,7 @@ class TVTippsView(tvBaseScreen):
                 res = [x]
                 self.new = False
                 if self.backcolor == True:
-                    if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1085, 90), font=-1, backcolor_sel=self.back_color, text=''))
-                    else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(880, 75), font=0, backcolor_sel=self.back_color, text=''))
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(1085, 90), font=-1, backcolor_sel=self.back_color, text=''))
                 x = sub('LINK', '', x)
                 linkfilter = x
             if y == 2:
@@ -879,10 +900,7 @@ class TVTippsView(tvBaseScreen):
 
         text = parsedetail(bereich)
 
-        if self.fontlarge == True:
-            fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
-        else:
-            fill = '____________________________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
+        fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
         self.POSTtext = text + fill
         self['textpage'].setText(self.POSTtext)
         self['textpage'].show()
@@ -1068,14 +1086,9 @@ class TVTippsView(tvBaseScreen):
                         timer = date + ':::' + start + ':::' + str(sref)
                         if timer in self.timer:
                             self.rec = True
-                            if self.picon == True:
-                                png = ICONPATH + 'icon-recHD.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = ICONPATH + 'icon-recHD.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            rp = self.getRecPNG()
+                            if rp != None:
+                                res.append(rp)
             if y == 3:
                 if self.filter == False:
                     x = sub('LINK', '', x)
@@ -1099,42 +1112,27 @@ class TVTippsView(tvBaseScreen):
                             self.rec = False
                         else:
                             x = sub('INFO', '', x)
-                            if self.picon == True:
-                                png = '%s%sHD.png' % (ICONPATH, x)
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = '%s%sHD.png' % (ICONPATH, x)
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            rp = self.getPNG(x)
+                            if rp != None:
+                                res.append(rp)
                 else:
                     y = 9
             if y == 7:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 20), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 10), size=(60, 20), png=loadPNG(png)))
+                        rp = self.getPNG(x, 1030)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 8:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 20), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 10), size=(60, 20), png=loadPNG(png)))
+                        rp = self.getPNG(x, 960)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 9:
@@ -1293,10 +1291,7 @@ class TVTippsView(tvBaseScreen):
 
                 else:
                     self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
-                if self.fontlarge == True:
-                        fill = '____________________________________________________________________________________________________________________________________\n%s' % channel
-                else:
-                    fill = '____________________________________________________________________________________________________________________________________________________\n%s' % channel
+                fill = self.getFill(channel)
                 self.EPGtext += '\n\n' + fill
                 self['textpage'].setText(self.EPGtext)
                 self['textpage'].show()
@@ -2640,10 +2635,7 @@ class TVNeuView(tvBaseScreen):
 
         text = parsedetail(bereich)
 
-        if self.fontlarge == True:
-            fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
-        else:
-            fill = '____________________________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
+        fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
         self.POSTtext = text + fill
         self['textpage'].setText(self.POSTtext)
         self['textpage'].show()
@@ -2829,14 +2821,9 @@ class TVNeuView(tvBaseScreen):
                         timer = date + ':::' + start + ':::' + str(sref)
                         if timer in self.timer:
                             self.rec = True
-                            if self.picon == True:
-                                png = ICONPATH + 'icon-recHD.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = ICONPATH + 'icon-recHD.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            rp = self.getRecPNG()
+                            if rp != None:
+                                res.append(rp)
             if y == 3:
                 if self.filter == False:
                     x = sub('LINK', '', x)
@@ -2860,42 +2847,27 @@ class TVNeuView(tvBaseScreen):
                             self.rec = False
                         else:
                             x = sub('INFO', '', x)
-                            if self.picon == True:
-                                png = '%s%sHD.png' % (ICONPATH, x)
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = '%s%sHD.png' % (ICONPATH, x)
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            rp = self.getPNG(x)
+                            if rp != None:
+                                res.append(rp)
                 else:
                     y = 9
             if y == 7:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 20), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 10), size=(60, 20), png=loadPNG(png)))
+                        rp = self.getPNG(x, 1030)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 8:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 20), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 10), size=(60, 20), png=loadPNG(png)))
+                        rp = self.getPNG(x, 960)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 9:
@@ -3054,10 +3026,7 @@ class TVNeuView(tvBaseScreen):
 
                 else:
                     self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
-                if self.fontlarge == True:
-                    fill = '____________________________________________________________________________________________________________________________________\n%s' % channel
-                else:
-                    fill = '____________________________________________________________________________________________________________________________________________________\n%s' % channel
+                fill = self.getFill(channel)
                 self.EPGtext += '\n\n' + fill
                 self['textpage'].setText(self.EPGtext)
                 self['textpage'].show()
@@ -4454,10 +4423,7 @@ class TVGenreView(tvBaseScreen):
 
         text = parsedetail(bereich)
 
-        if self.fontlarge == True:
-            fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
-        else:
-            fill = '____________________________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
+        fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
         self.POSTtext = text + fill
         self['textpage'].setText(self.POSTtext)
         self['textpage'].show()
@@ -4639,14 +4605,9 @@ class TVGenreView(tvBaseScreen):
                         timer = date + ':::' + start + ':::' + str(sref)
                         if timer in self.timer:
                             self.rec = True
-                            if self.picon == True:
-                                png = ICONPATH + 'icon-recHD.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = ICONPATH + 'icon-recHD.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            rp = self.getRecPNG()
+                            if rp != None:
+                                res.append(rp)
             if y == 3:
                 if self.filter == False:
                     x = sub('LINK', '', x)
@@ -4670,42 +4631,27 @@ class TVGenreView(tvBaseScreen):
                             self.rec = False
                         else:
                             x = sub('INFO', '', x)
-                            if self.picon == True:
-                                png = '%s%sHD.png' % (ICONPATH, x)
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = '%s%sHD.png' % (ICONPATH, x)
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            rp = self.getPNG(x)
+                            if rp != None:
+                                res.append(rp)
                 else:
                     y = 9
             if y == 7:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 20), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 10), size=(60, 20), png=loadPNG(png)))
+                        rp = self.getPNG(x, 1030)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 8:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 20), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 10), size=(60, 20), png=loadPNG(png)))
+                        rp = self.getPNG(x, 960)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 9:
@@ -4869,10 +4815,7 @@ class TVGenreView(tvBaseScreen):
 
                 else:
                     self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
-                if self.fontlarge == True:
-                    fill = '____________________________________________________________________________________________________________________________________\n%s' % channel
-                else:
-                    fill = '____________________________________________________________________________________________________________________________________________________\n%s' % channel
+                fill = self.getFill(channel)
                 self.EPGtext += '\n\n' + fill
                 self['textpage'].setText(self.EPGtext)
                 self['textpage'].show()
@@ -6036,10 +5979,7 @@ class TVJetztView(tvBaseScreen):
                 
         text = parsedetail(bereich)
 
-        if self.fontlarge == True:
-            fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
-        else:
-            fill = '____________________________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
+        fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
         self.POSTtext = text + fill
         self['textpage'].setText(self.POSTtext)
         self['textpage'].show()
@@ -6225,14 +6165,9 @@ class TVJetztView(tvBaseScreen):
                         timer = date + ':::' + start + ':::' + str(sref)
                         if timer in self.timer:
                             self.rec = True
-                            if self.picon == True:
-                                png = ICONPATH + 'icon-recHD.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = ICONPATH + 'icon-recHD.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            rp = self.getRecPNG()
+                            if rp != None:
+                                res.append(rp)
             if y == 3:
                 if self.filter == False:
                     x = sub('LINK', '', x)
@@ -6256,42 +6191,27 @@ class TVJetztView(tvBaseScreen):
                             self.rec = False
                         else:
                             x = sub('INFO', '', x)
-                            if self.picon == True:
-                                png = '%s%sHD.png' % (ICONPATH, x)
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = '%s%sHD.png' % (ICONPATH, x)
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            rp = self.getPNG(x)
+                            if rp != None:
+                                res.append(rp)
                 else:
                     y = 9
             if y == 7:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 20), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 10), size=(60, 20), png=loadPNG(png)))
+                        rp = self.getPNG(x, 1030)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 8:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 20), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 10), size=(60, 20), png=loadPNG(png)))
+                        rp = self.getPNG(x, 960)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 9:
@@ -6450,10 +6370,7 @@ class TVJetztView(tvBaseScreen):
 
                 else:
                     self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
-                if self.fontlarge == True:
-                    fill = '____________________________________________________________________________________________________________________________________\n%s' % channel
-                else:
-                    fill = '____________________________________________________________________________________________________________________________________________________\n%s' % channel
+                fill = self.getFill(channel)
                 self.EPGtext += '\n\n' + fill
                 self['textpage'].setText(self.EPGtext)
                 self['textpage'].show()
@@ -7394,28 +7311,17 @@ class TVProgrammView(tvBaseScreen):
                         x = t
                     self.tvtitel.append(t)
                     if self.picon == True:
-                        if self.xd == False:
-                            if self.progress == True and self.percent == True:
-                                res.append(MultiContentEntryProgress(pos=(275, 24), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
-                                res.append(MultiContentEntryText(pos=(365, 18), size=(690, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                            else:
-                                res.append(MultiContentEntryText(pos=(275, 18), size=(780, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                        elif self.progress == True and self.percent == True:
-                            res.append(MultiContentEntryProgress(pos=(255, 26), size=(50, 10), percent=percent, borderWidth=1, foreColor=16777215))
-                            res.append(MultiContentEntryText(pos=(325, 19), size=(520, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                        if self.progress == True and self.percent == True:
+                            res.append(MultiContentEntryProgress(pos=(275, 24), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
+                            res.append(MultiContentEntryText(pos=(365, 18), size=(690, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                         else:
-                            res.append(MultiContentEntryText(pos=(255, 19), size=(590, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                    elif self.xd == False:
+                            res.append(MultiContentEntryText(pos=(275, 18), size=(780, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                    else:
                         if self.progress == True and self.percent == True:
                             res.append(MultiContentEntryProgress(pos=(235, 13), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
                             res.append(MultiContentEntryText(pos=(325, 7), size=(730, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                         else:
                             res.append(MultiContentEntryText(pos=(235, 7), size=(820, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                    elif self.progress == True and self.percent == True:
-                        res.append(MultiContentEntryProgress(pos=(200, 10), size=(50, 10), percent=percent, borderWidth=1, foreColor=16777215))
-                        res.append(MultiContentEntryText(pos=(270, 3), size=(575, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                    else:
-                        res.append(MultiContentEntryText(pos=(200, 3), size=(645, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                 else:
                     y = 5
             if y == 5:
@@ -7684,10 +7590,7 @@ class TVProgrammView(tvBaseScreen):
 
         text = parsedetail(bereich)
 
-        if self.fontlarge == True:
-            fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
-        else:
-            fill = '____________________________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
+        fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
         self.POSTtext = text + fill
         self['textpage'].setText(self.POSTtext)
         self['textpage'].show()
@@ -7873,14 +7776,9 @@ class TVProgrammView(tvBaseScreen):
                         timer = date + ':::' + start + ':::' + str(sref)
                         if timer in self.timer:
                             self.rec = True
-                            if self.picon == True:
-                                png = ICONPATH + 'icon-recHD.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = ICONPATH + 'icon-recHD.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            rp = self.getRecPNG()
+                            if rp != None:
+                                res.append(rp)
             if y == 3:
                 if self.filter == False:
                     x = sub('LINK', '', x)
@@ -7904,42 +7802,27 @@ class TVProgrammView(tvBaseScreen):
                             self.rec = False
                         else:
                             x = sub('INFO', '', x)
-                            if self.picon == True:
-                                png = '%s%sHD.png' % (ICONPATH, x)
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = '%s%sHD.png' % (ICONPATH, x)
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
+                            rp = self.getPNG(x)
+                            if rp != None:
+                                res.append(rp)
                 else:
                     y = 9
             if y == 7:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 20), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 10), size=(60, 20), png=loadPNG(png)))
+                        rp = self.getPNG(x, 1030)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 8:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 20), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 10), size=(60, 20), png=loadPNG(png)))
+                        rp = self.getPNG(x, 960)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 9:
@@ -8095,10 +7978,7 @@ class TVProgrammView(tvBaseScreen):
 
                 else:
                     self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
-                if self.fontlarge == True:
-                    fill = '____________________________________________________________________________________________________________________________________\n%s' % channel
-                else:
-                    fill = '____________________________________________________________________________________________________________________________________________________\n%s' % channel
+                fill = self.getFill(channel)
                 self.EPGtext += '\n\n' + fill
                 self['textpage'].setText(self.EPGtext)
                 self['textpage'].show()
@@ -8974,10 +8854,7 @@ class TVTrailer(tvBaseScreen):
                 if y == 0:
                     res = [x]
                     if self.backcolor == True:
-                        if self.xd == False:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(923, 90), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(750, 75), font=0, backcolor_sel=self.back_color, text=''))
+                        res.append(MultiContentEntryText(pos=(0, 0), size=(923, 90), font=-1, backcolor_sel=self.back_color, text=''))
                     x = sub('LINK', '', x)
                     self.tvlink.append(x)
                 if y == 1:
@@ -8985,10 +8862,7 @@ class TVTrailer(tvBaseScreen):
                     self.picurllist.append(x)
                 if y == 2:
                     x = sub('TEXT', '', x)
-                    if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(5, 48), size=(913, 30), font=-1, color=10857646, color_sel=10857646, flags=RT_HALIGN_LEFT, text=x))
-                    else:
-                        res.append(MultiContentEntryText(pos=(5, 39), size=(740, 30), font=0, color=10857646, color_sel=10857646, flags=RT_HALIGN_LEFT, text=x))
+                    res.append(MultiContentEntryText(pos=(5, 48), size=(913, 30), font=-1, color=10857646, color_sel=10857646, flags=RT_HALIGN_LEFT, text=x))
                 if y == 3:
                     x = sub('TITEL', '', x)
                     titel = search('"(.*?)"', x)
@@ -8996,27 +8870,16 @@ class TVTrailer(tvBaseScreen):
                         self.tvtitel.append(titel.group(1))
                     else:
                         self.tvtitel.append(x)
-                    if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(5, 17), size=(913, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                    else:
-                        res.append(MultiContentEntryText(pos=(5, 12), size=(740, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                    if self.xd == False:
-                        png = ICONPATH + 'cin.png'
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 20), size=(60, 29), png=loadPNG(png)))
-                    else:
-                        png = ICONPATH + 'cin.png'
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(670, 20), size=(60, 29), png=loadPNG(png)))
+                    res.append(MultiContentEntryText(pos=(5, 17), size=(913, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                    png = ICONPATH + 'cin.png'
+                    if fileExists(png):
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 20), size=(60, 29), png=loadPNG(png)))
                     self.tventries.append(res)
                 y += 1
                 if y == offset:
                     y = 0
 
-            if self.xd == False:
-                self['menu'].l.setItemHeight(90)
-            else:
-                self['menu'].l.setItemHeight(75)
+            self['menu'].l.setItemHeight(90)
             self['menu'].l.setList(self.tventries)
             self['menu'].moveToIndex(self.oldindex)
         elif self.charts == False:
@@ -9037,10 +8900,7 @@ class TVTrailer(tvBaseScreen):
                 if y == 0:
                     res = [x]
                     if self.backcolor == True:
-                        if self.xd == False:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(923, 90), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(750, 75), font=0, backcolor_sel=self.back_color, text=''))
+                        res.append(MultiContentEntryText(pos=(0, 0), size=(923, 90), font=-1, backcolor_sel=self.back_color, text=''))
                     x = sub('LINK', '', x)
                     self.tvlink.append(x)
                 if y == 1:
@@ -9053,33 +8913,19 @@ class TVTrailer(tvBaseScreen):
                         self.tvtitel.append(titel.group(1))
                     else:
                         self.tvtitel.append(x)
-                    if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(5, 17), size=(913, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                    else:
-                        res.append(MultiContentEntryText(pos=(5, 12), size=(740, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                    if self.xd == False:
-                        png = ICONPATH + 'cin.png'
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 20), size=(60, 29), png=loadPNG(png)))
-                    else:
-                        png = ICONPATH + 'cin.png'
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(670, 20), size=(60, 29), png=loadPNG(png)))
+                    res.append(MultiContentEntryText(pos=(5, 17), size=(913, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                    png = ICONPATH + 'cin.png'
+                    if fileExists(png):
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 20), size=(60, 29), png=loadPNG(png)))
                 if y == 3:
                     x = sub('TEXT', '', x)
-                    if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(5, 48), size=(913, 30), font=-1, color=10857646, color_sel=10857646, flags=RT_HALIGN_LEFT, text=x))
-                    else:
-                        res.append(MultiContentEntryText(pos=(5, 39), size=(740, 30), font=0, color=10857646, color_sel=10857646, flags=RT_HALIGN_LEFT, text=x))
+                    res.append(MultiContentEntryText(pos=(5, 48), size=(913, 30), font=-1, color=10857646, color_sel=10857646, flags=RT_HALIGN_LEFT, text=x))
                     self.tventries.append(res)
                 y += 1
                 if y == offset:
                     y = 0
 
-            if self.xd == False:
-                self['menu'].l.setItemHeight(90)
-            else:
-                self['menu'].l.setItemHeight(75)
+            self['menu'].l.setItemHeight(90)
             self['menu'].l.setList(self.tventries)
             self['menu'].moveToIndex(self.oldindex)
         elif self.charts == True:
@@ -9100,10 +8946,7 @@ class TVTrailer(tvBaseScreen):
                 if y == 0:
                     res = [x]
                     if self.backcolor == True:
-                        if self.xd == False:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(923, 90), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(750, 75), font=0, backcolor_sel=self.back_color, text=''))
+                        res.append(MultiContentEntryText(pos=(0, 0), size=(923, 90), font=-1, backcolor_sel=self.back_color, text=''))
                     x = sub('LINK', '', x)
                     self.tvlink.append(x)
                 if y == 1:
@@ -9113,24 +8956,13 @@ class TVTrailer(tvBaseScreen):
                         self.tvtitel.append(titel.group(1))
                     else:
                         self.tvtitel.append(x)
-                    if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(5, 2), size=(913, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                    else:
-                        res.append(MultiContentEntryText(pos=(5, 2), size=(740, 24), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                    if self.xd == False:
-                        png = ICONPATH + 'cin.png'
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 20), size=(60, 29), png=loadPNG(png)))
-                    else:
-                        png = ICONPATH + 'cin.png'
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(670, 20), size=(60, 29), png=loadPNG(png)))
+                    res.append(MultiContentEntryText(pos=(5, 2), size=(913, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                    png = ICONPATH + 'cin.png'
+                    if fileExists(png):
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 20), size=(60, 29), png=loadPNG(png)))
                 if y == 2:
                     x = sub('TEXT', '', x)
-                    if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(5, 34), size=(833, 56), font=0, color=10857646, color_sel=10857646, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                    else:
-                        res.append(MultiContentEntryText(pos=(5, 28), size=(660, 46), font=1, color=10857646, color_sel=10857646, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                    res.append(MultiContentEntryText(pos=(5, 34), size=(833, 56), font=0, color=10857646, color_sel=10857646, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                 if y == 3:
                     x = sub('PIC', '', x)
                     self.picurllist.append(x)
@@ -9139,10 +8971,7 @@ class TVTrailer(tvBaseScreen):
                 if y == offset:
                     y = 0
 
-            if self.xd == False:
-                self['menu'].l.setItemHeight(90)
-            else:
-                self['menu'].l.setItemHeight(75)
+            self['menu'].l.setItemHeight(90)
             self['menu'].l.setList(self.tventries)
             self['menu'].moveToIndex(self.oldindex)
         if self.oldindex > 5:
@@ -9447,10 +9276,7 @@ class TVBilder(tvBaseScreen):
             if y == 0:
                 res = [x]
                 if self.backcolor == True:
-                    if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(923, 90), font=-1, backcolor_sel=self.back_color, text=''))
-                    else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(750, 75), font=0, backcolor_sel=self.back_color, text=''))
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(923, 90), font=-1, backcolor_sel=self.back_color, text=''))
                 x = sub('LINK', '', x)
                 self.piclink.append(x)
             if y == 1:
@@ -9458,27 +9284,16 @@ class TVBilder(tvBaseScreen):
                 self.picurllist.append(x)
             if y == 2:
                 x = sub('TITEL', '', x)
-                if self.xd == False:
-                    res.append(MultiContentEntryText(pos=(5, 17), size=(913, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                else:
-                    res.append(MultiContentEntryText(pos=(5, 12), size=(740, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                if self.xd == False:
-                    png = ICONPATH + 'icon-picHD.png'
-                    if fileExists(png):
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 20), size=(60, 20), png=loadPNG(png)))
-                else:
-                    png = ICONPATH + 'icon-pic.png'
-                    if fileExists(png):
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(685, 20), size=(45, 15), png=loadPNG(png)))
+                res.append(MultiContentEntryText(pos=(5, 17), size=(913, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                png = ICONPATH + 'icon-picHD.png'
+                if fileExists(png):
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 20), size=(60, 20), png=loadPNG(png)))
                 self.tventries.append(res)
             y += 1
             if y == offset:
                 y = 0
 
-        if self.xd == False:
-            self['menu'].l.setItemHeight(90)
-        else:
-            self['menu'].l.setItemHeight(75)
+        self['menu'].l.setItemHeight(90)
         self['menu'].l.setList(self.tventries)
         self['menu'].moveToIndex(self.oldindex)
         if self.oldindex > 5:
@@ -9770,14 +9585,8 @@ class TVNews(tvBaseScreen):
             try:
                 res = ['']
                 if self.backcolor == True:
-                    if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(475, 30), font=-1, backcolor_sel=self.back_color, text=''))
-                    else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(350, 30), font=0, backcolor_sel=self.back_color, text=''))
-                if self.xd == False:
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(475, 28), font=-1, flags=RT_HALIGN_LEFT, text=name[i]))
-                else:
-                    res.append(MultiContentEntryText(pos=(0, 2), size=(350, 26), font=0, flags=RT_HALIGN_LEFT, text=name[i]))
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(475, 30), font=-1, backcolor_sel=self.back_color, text=''))
+                res.append(MultiContentEntryText(pos=(0, 1), size=(475, 28), font=-1, flags=RT_HALIGN_LEFT, text=name[i]))
                 self.menulist.append(res)
                 self.menulink.append(link[i])
             except IndexError:
@@ -9860,15 +9669,7 @@ class TVNews(tvBaseScreen):
                 
         text = parsedetail(bereich)
 
-        if self.fontlarge == True:
-            if self.xd == False:
-                fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online'
-            else:
-                fill = '________________________________________________________________________________________________________________________\nTV Spielfilm Online'
-        elif self.xd == False:
-            fill = '____________________________________________________________________________________________________________________________________________________\nTV Spielfilm Online'
-        else:
-            fill = '_________________________________________________________________________________________________________________________________________\nTV Spielfilm Online'
+        fill = self.getFill('TV Spielfilm Online')
         self.POSTtext = text + fill
         self['textpage'].setText(self.POSTtext)
         self['textpage'].show()
@@ -9928,10 +9729,7 @@ class TVNews(tvBaseScreen):
         self.showPic(self.picfile)
 
     def showPic(self, picture):
-        if self.xd == False:
-            currPic = loadPic(picture, 525, 350, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picture, 412, 275, 3, 0, 0, 0)
+        currPic = loadPic(picture, 525, 350, 3, 0, 0, 0)
         if currPic != None:
             self['picture'].instance.setPixmap(currPic)
         return
@@ -9943,10 +9741,7 @@ class TVNews(tvBaseScreen):
         self.showPicPost(self.picfile)
 
     def showPicPost(self, picpost):
-        if self.xd == False:
-            currPic = loadPic(picpost, 490, 245, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picpost, 400, 200, 3, 0, 0, 0)
+        currPic = loadPic(picpost, 490, 245, 3, 0, 0, 0)
         if currPic != None:
             self['picpost'].instance.setPixmap(currPic)
             if self.trailer == True:
@@ -10300,15 +10095,7 @@ class TVBlog(tvBaseScreen):
         text = sub('<[^>]*>', '', text)
         text = sub('</p<<p<', '\n\n', text)
         text = sub('\n\\s+\n*', '\n\n', text)
-        if self.fontlarge == True:
-            if self.xd == False:
-                fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Blog'
-            else:
-                fill = '________________________________________________________________________________________________________________________\nTV Spielfilm Blog'
-        elif self.xd == False:
-            fill = '____________________________________________________________________________________________________________________________________________________\nTV Spielfilm Blog'
-        else:
-            fill = '_________________________________________________________________________________________________________________________________________\nTV Spielfilm Blog'
+        fill = self.getFill('TV Spielfilm Blog')
         text = text + fill
         self['textpage'].setText(text)
         self['textpage'].show()
@@ -10395,10 +10182,7 @@ class TVBlog(tvBaseScreen):
         self.showPic(self.picfile)
 
     def showPic(self, picture):
-        if self.xd == False:
-            currPic = loadPic(picture, 600, 400, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picture, 525, 350, 3, 0, 0, 0)
+        currPic = loadPic(picture, 600, 400, 3, 0, 0, 0)
         if currPic != None:
             self['picture'].instance.setPixmap(currPic)
         return
@@ -10410,10 +10194,7 @@ class TVBlog(tvBaseScreen):
         self.showPicPost(self.picfile)
 
     def showPicPost(self, picpost):
-        if self.xd == False:
-            currPic = loadPic(picpost, 490, 245, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picpost, 400, 200, 3, 0, 0, 0)
+        currPic = loadPic(picpost, 490, 245, 3, 0, 0, 0)
         if currPic != None:
             self['picpost'].instance.setPixmap(currPic)
             if self.trailer == True:
@@ -10829,10 +10610,7 @@ class TVNewsPicShow(tvBaseScreen):
         self.showPic(self.picfile)
 
     def showPic(self, picture):
-        if self.xd == False:
-            currPic = loadPic(picture, 889, 500, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picture, 711, 400, 3, 0, 0, 0)
+        currPic = loadPic(picture, 889, 500, 3, 0, 0, 0)
         if currPic != None:
             self['picture'].instance.setPixmap(currPic)
         return
@@ -11034,10 +10812,7 @@ class PlayboyPicShow(tvBaseScreen):
         self.showPic(self.picfile)
 
     def showPic(self, picture):
-        if self.xd == False:
-            currPic = loadPic(picture, 700, 500, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picture, 560, 400, 3, 0, 0, 0)
+        currPic = loadPic(picture, 700, 500, 3, 0, 0, 0)
         if currPic != None:
             self['picture'].instance.setPixmap(currPic)
         return
@@ -11287,10 +11062,7 @@ class TVPicShow(tvBaseScreen):
         self.showPic(self.picfile)
 
     def showPic(self, picture):
-        if self.xd == False:
-            currPic = loadPic(picture, 700, 525, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picture, 560, 420, 3, 0, 0, 0)
+        currPic = loadPic(picture, 700, 525, 3, 0, 0, 0)
         if currPic != None:
             self['picture'].instance.setPixmap(currPic)
         return
@@ -11468,10 +11240,7 @@ class PicShowFull(tvBaseScreen):
         self.showPic(self.picfile)
 
     def showPic(self, picture):
-        if self.xd == False:
-            currPic = loadPic(picture, 1280, 720, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picture, 1024, 576, 3, 0, 0, 0)
+        currPic = loadPic(picture, DESKTOP_WIDTH, DESKTOP_HEIGHT, 3, 0, 0, 0)
         if currPic != None:
             self['picture'].instance.setPixmap(currPic)
         return
@@ -15747,10 +15516,7 @@ class TVHeuteView(tvBaseScreen):
                     if self.menu == 'menu1':
                         res1 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res1.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res1.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res1.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                         res1.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                         hour = sub(':..', '', x)
                         if int(hour) < 5:
@@ -15763,17 +15529,11 @@ class TVHeuteView(tvBaseScreen):
                             self.rec = True
                             png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
                             if fileExists(png):
-                                if self.xd == False:
-                                    res1.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
-                                else:
-                                    res1.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                                res1.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
                     elif self.menu == 'menu2':
                         res2 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res2.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res2.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res2.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                         res2.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                         hour = sub(':..', '', x)
                         if int(hour) < 5:
@@ -15786,17 +15546,11 @@ class TVHeuteView(tvBaseScreen):
                             self.rec = True
                             png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
                             if fileExists(png):
-                                if self.xd == False:
-                                    res2.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
-                                else:
-                                    res2.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                                res2.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
                     elif self.menu == 'menu3':
                         res3 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res3.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res3.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res3.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                         res3.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                         hour = sub(':..', '', x)
                         if int(hour) < 5:
@@ -15809,17 +15563,11 @@ class TVHeuteView(tvBaseScreen):
                             self.rec = True
                             png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
                             if fileExists(png):
-                                if self.xd == False:
-                                    res3.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
-                                else:
-                                    res3.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                                res3.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
                     elif self.menu == 'menu4':
                         res4 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res4.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res4.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res4.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                         res4.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                         hour = sub(':..', '', x)
                         if int(hour) < 5:
@@ -15832,17 +15580,11 @@ class TVHeuteView(tvBaseScreen):
                             self.rec = True
                             png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
                             if fileExists(png):
-                                if self.xd == False:
-                                    res4.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
-                                else:
-                                    res4.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                                res4.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
                     elif self.menu == 'menu5':
                         res5 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res5.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res5.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res5.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                         res5.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                         hour = sub(':..', '', x)
                         if int(hour) < 5:
@@ -15855,17 +15597,11 @@ class TVHeuteView(tvBaseScreen):
                             self.rec = True
                             png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
                             if fileExists(png):
-                                if self.xd == False:
-                                    res5.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
-                                else:
-                                    res5.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                                res5.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
                     elif self.menu == 'menu6':
                         res6 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res6.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res6.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res6.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                         res6.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                         hour = sub(':..', '', x)
                         if int(hour) < 5:
@@ -15878,53 +15614,32 @@ class TVHeuteView(tvBaseScreen):
                             self.rec = True
                             png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
                             if fileExists(png):
-                                if self.xd == False:
-                                    res6.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
-                                else:
-                                    res6.append(MultiContentEntryPixmapAlphaTest(pos=(127, 87), size=(28, 29), png=loadPNG(png)))
+                                res6.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
                 else:
                     if self.menu == 'menu1':
                         res1 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res1.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res1.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res1.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                     elif self.menu == 'menu2':
                         res2 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res2.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res2.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res2.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                     elif self.menu == 'menu3':
                         res3 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res3.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res3.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res3.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                     elif self.menu == 'menu4':
                         res4 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res4.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res4.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res4.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                     elif self.menu == 'menu5':
                         res5 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res5.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res5.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res5.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                     elif self.menu == 'menu6':
                         res6 = [x]
                         if self.backcolor == True:
-                            if self.xd == False:
-                                res6.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res6.append(MultiContentEntryText(pos=(0, 0), size=(160, 115), font=1, backcolor_sel=self.back_color, text=''))
+                            res6.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
                     y = 2
             if y == 2:
                 if search('LOGO', x) is not None:
@@ -16083,147 +15798,81 @@ class TVHeuteView(tvBaseScreen):
                         x = titel
                     if self.menu == 'menu1':
                         self.tvtitel1.append(titel)
-                        if self.xd == False:
-                            if self.rec == True:
-                                self.rec = False
-                                if self.fontlarge == True:
-                                    res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                                else:
-                                    res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            elif self.fontlarge == True:
-                                res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            else:
-                                res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                        elif self.rec == True:
+                        if self.rec == True:
                             self.rec = False
                             if self.fontlarge == True:
-                                res1.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                             else:
-                                res1.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         elif self.fontlarge == True:
-                            res1.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         else:
-                            res1.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res1.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         self.tventries1.append(res1)
                     elif self.menu == 'menu2':
                         self.tvtitel2.append(titel)
-                        if self.xd == False:
-                            if self.rec == True:
-                                self.rec = False
-                                if self.fontlarge == True:
-                                    res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                                else:
-                                    res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            elif self.fontlarge == True:
-                                res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            else:
-                                res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                        elif self.rec == True:
+                        if self.rec == True:
                             self.rec = False
                             if self.fontlarge == True:
-                                res2.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                             else:
-                                res2.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         elif self.fontlarge == True:
-                            res2.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         else:
-                            res2.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res2.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         self.tventries2.append(res2)
                     elif self.menu == 'menu3':
                         self.tvtitel3.append(titel)
-                        if self.xd == False:
-                            if self.rec == True:
-                                self.rec = False
-                                if self.fontlarge == True:
-                                    res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                                else:
-                                    res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            elif self.fontlarge == True:
-                                res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            else:
-                                res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                        elif self.rec == True:
+                        if self.rec == True:
                             self.rec = False
                             if self.fontlarge == True:
-                                res3.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                             else:
-                                res3.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         elif self.fontlarge == True:
-                            res3.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         else:
-                            res3.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res3.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         self.tventries3.append(res3)
                     elif self.menu == 'menu4':
                         self.tvtitel4.append(titel)
-                        if self.xd == False:
-                            if self.rec == True:
-                                self.rec = False
-                                if self.fontlarge == True:
-                                    res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                                else:
-                                    res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            elif self.fontlarge == True:
-                                res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            else:
-                                res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                        elif self.rec == True:
+                        if self.rec == True:
                             self.rec = False
                             if self.fontlarge == True:
-                                res4.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                             else:
-                                res4.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         elif self.fontlarge == True:
-                            res4.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         else:
-                            res4.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res4.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         self.tventries4.append(res4)
                     elif self.menu == 'menu5':
                         self.tvtitel5.append(titel)
-                        if self.xd == False:
-                            if self.rec == True:
-                                self.rec = False
-                                if self.fontlarge == True:
-                                    res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                                else:
-                                    res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            elif self.fontlarge == True:
-                                res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            else:
-                                res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                        elif self.rec == True:
+                        if self.rec == True:
                             self.rec = False
                             if self.fontlarge == True:
-                                res5.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                             else:
-                                res5.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         elif self.fontlarge == True:
-                            res5.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         else:
-                            res5.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res5.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         self.tventries5.append(res5)
                     elif self.menu == 'menu6':
                         self.tvtitel6.append(titel)
-                        if self.xd == False:
-                            if self.rec == True:
-                                self.rec = False
-                                if self.fontlarge == True:
-                                    res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                                else:
-                                    res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            elif self.fontlarge == True:
-                                res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            else:
-                                res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                        elif self.rec == True:
+                        if self.rec == True:
                             self.rec = False
                             if self.fontlarge == True:
-                                res6.append(MultiContentEntryText(pos=(60, 0), size=(100, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                             else:
-                                res6.append(MultiContentEntryText(pos=(60, 0), size=(100, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                                res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         elif self.fontlarge == True:
-                            res6.append(MultiContentEntryText(pos=(60, 0), size=(100, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         else:
-                            res6.append(MultiContentEntryText(pos=(60, 0), size=(100, 109), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
+                            res6.append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
                         self.tventries6.append(res6)
                 elif search('BLOCK', x) is not None:
                     if self.menu == 'menu1':
@@ -16500,10 +16149,7 @@ class TVHeuteView(tvBaseScreen):
         tvinfo = re.findall('<span class="add-info (.*?)">', bereich)
         for pos in list(range(4)):
             try:
-                if self.xd == False:
-                    tvi = ICONPATH + tvinfo[pos] + 'HD.png'
-                else:
-                    tvi = ICONPATH + tvinfo[pos] + '.png'
+                tvi = ICONPATH + tvinfo[pos] + 'HD.png'
                 tvis = 'tvinfo' + str(pos+1)
                 self.showPicTVinfoX(tvi, tvis)
                 self[tvis].show()
@@ -16537,15 +16183,7 @@ class TVHeuteView(tvBaseScreen):
 
         text = parsedetail(bereich)
 
-        if self.fontlarge == True:
-            if self.xd == False:
-                fill = '____________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
-            else:
-                fill = '________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
-        elif self.xd == False:
-            fill = '____________________________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
-        else:
-            fill = '_________________________________________________________________________________________________________________________________________\nTV Spielfilm Online\n\n*Info/EPG = EPG einblenden'
+        fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
         self.POSTtext = text + fill
         self['textpage'].setText(self.POSTtext)
         self['textpage'].show()
@@ -16652,14 +16290,9 @@ class TVHeuteView(tvBaseScreen):
                 res = [x]
                 if self.backcolor == True:
                     if self.picon == True:
-                        if self.xd == False:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(992, 60), font=0, backcolor_sel=self.back_color, text=''))
-                    elif self.xd == False:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
+                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
                     else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(992, 30), font=0, backcolor_sel=self.back_color, text=''))
+                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
                 if search('DATUM', x) is not None:
                     if self.datum == True:
                         try:
@@ -16676,23 +16309,13 @@ class TVHeuteView(tvBaseScreen):
                     res_datum = [x]
                     if self.backcolor == True:
                         if self.picon == True:
-                            if self.xd == False:
-                                res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                            else:
-                                res_datum.append(MultiContentEntryText(pos=(0, 0), size=(992, 60), font=0, backcolor_sel=self.back_color, text=''))
-                        elif self.xd == False:
+                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
+                        else:
                             res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(992, 30), font=0, backcolor_sel=self.back_color, text=''))
                     if self.picon == True:
-                        if self.xd == False:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                        else:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(992, 60), font=0, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    elif self.xd == False:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
                     else:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(992, 30), font=0, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
                     self.searchref.append('na')
                     self.searchlink.append('na')
                     self.searchentries.append(res_datum)
@@ -16704,14 +16327,9 @@ class TVHeuteView(tvBaseScreen):
                 x = sub('TIME', '', x)
                 start = x
                 if self.picon == True:
-                    if self.xd == False:
-                        res.append(MultiContentEntryText(pos=(100, 17), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-                    else:
-                        res.append(MultiContentEntryText(pos=(100, 18), size=(154, 30), font=0, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-                elif self.xd == False:
-                    res.append(MultiContentEntryText(pos=(60, 7), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                    res.append(MultiContentEntryText(pos=(100, 17), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                 else:
-                    res.append(MultiContentEntryText(pos=(45, 3), size=(154, 30), font=0, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                    res.append(MultiContentEntryText(pos=(60, 7), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
             if y == 2:
                 if search('LOGO', x) is not None:
                     logo = search('LOGO(.*?)">', x)
@@ -16730,14 +16348,10 @@ class TVHeuteView(tvBaseScreen):
                                 res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
                             else:
                                 res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
-                        elif self.xd == False:
+                        else:
                             png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % x
                             if fileExists(png):
                                 res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
-                        else:
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%s.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(44, 27), png=loadPNG(png)))
                         start = sub(' - ..:..', '', start)
                         daynow = sub('....-..-', '', str(self.date))
                         day = search(', ([0-9]+). ', self.datum_string)
@@ -16754,23 +16368,9 @@ class TVHeuteView(tvBaseScreen):
                         timer = date + ':::' + start + ':::' + str(sref)
                         if timer in self.timer:
                             self.rec = True
-                            if self.picon == True:
-                                if self.xd == False:
-                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-recHD.png'
-                                    if fileExists(png):
-                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                                else:
-                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-rec.png'
-                                    if fileExists(png):
-                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(898, 23), size=(45, 15), png=loadPNG(png)))
-                            elif self.xd == False:
-                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-recHD.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-rec.png'
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(898, 8), size=(45, 15), png=loadPNG(png)))
+                            rp = self.getRecPNG()
+                            if rp != None:
+                                res.append(rp)
             if y == 3:
                 if self.filter == False:
                     x = sub('LINK', '', x)
@@ -16783,14 +16383,9 @@ class TVHeuteView(tvBaseScreen):
                 if self.filter == False:
                     if search('GENRE', x) is None:
                         if self.picon == True:
-                            if self.xd == False:
-                                res.append(MultiContentEntryText(pos=(275, 17), size=(675, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                            else:
-                                res.append(MultiContentEntryText(pos=(255, 18), size=(523, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                        elif self.xd == False:
-                            res.append(MultiContentEntryText(pos=(235, 7), size=(715, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                            res.append(MultiContentEntryText(pos=(275, 17), size=(675, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
                         else:
-                            res.append(MultiContentEntryText(pos=(200, 3), size=(578, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                            res.append(MultiContentEntryText(pos=(235, 7), size=(715, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
                         y = 6
             if y == 6:
                 if search('INFO', x) is not None:
@@ -16799,69 +16394,27 @@ class TVHeuteView(tvBaseScreen):
                             self.rec = False
                         else:
                             x = sub('INFO', '', x)
-                            if self.picon == True:
-                                if self.xd == False:
-                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
-                                    if fileExists(png):
-                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 20), size=(60, 20), png=loadPNG(png)))
-                                else:
-                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
-                                    if fileExists(png):
-                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(898, 23), size=(45, 15), png=loadPNG(png)))
-                            elif self.xd == False:
-                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1100, 10), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(898, 8), size=(45, 15), png=loadPNG(png)))
+                            rp = self.getPNG(x)
+                            if rp != None:
+                                res.append(rp)
                 else:
                     y = 9
             if y == 7:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            if self.xd == False:
-                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 23), size=(45, 15), png=loadPNG(png)))
-                        elif self.xd == False:
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1030, 10), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 8), size=(45, 15), png=loadPNG(png)))
+                        rp = self.getPNG(x, 1030)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 8:
                 if search('INFO', x) is not None:
                     if self.filter == False:
                         x = sub('INFO', '', x)
-                        if self.picon == True:
-                            if self.xd == False:
-                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 20), size=(60, 20), png=loadPNG(png)))
-                            else:
-                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(788, 23), size=(45, 15), png=loadPNG(png)))
-                        elif self.xd == False:
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(960, 10), size=(60, 20), png=loadPNG(png)))
-                        else:
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(788, 8), size=(45, 15), png=loadPNG(png)))
+                        rp = self.getPNG(x, 960)
+                        if rp != None:
+                            res.append(rp)
                 else:
                     y = 9
             if y == 9:
@@ -16873,31 +16426,17 @@ class TVHeuteView(tvBaseScreen):
                         x = sub('RATING', '', x)
                         if x != 'rating small':
                             if self.picon == True:
-                                if self.xd == False:
-                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
-                                    if fileExists(png):
-                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, 10), size=(40, 40), png=loadPNG(png)))
-                                else:
-                                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
-                                    if fileExists(png):
-                                        res.append(MultiContentEntryPixmapAlphaTest(pos=(958, 16), size=(29, 29), png=loadPNG(png)))
-                            elif self.xd == False:
+                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
+                                if fileExists(png):
+                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, 10), size=(40, 40), png=loadPNG(png)))
+                            else:
                                 png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
                                 if fileExists(png):
                                     res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, 0), size=(40, 40), png=loadPNG(png)))
-                            else:
-                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
-                                if fileExists(png):
-                                    res.append(MultiContentEntryPixmapAlphaTest(pos=(958, 1), size=(29, 29), png=loadPNG(png)))
                     if self.picon == True:
-                        if self.xd == False:
-                            res.append(MultiContentEntryText(pos=(275, 17), size=(675, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                        else:
-                            res.append(MultiContentEntryText(pos=(255, 18), size=(523, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                    elif self.xd == False:
-                        res.append(MultiContentEntryText(pos=(235, 7), size=(715, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                        res.append(MultiContentEntryText(pos=(275, 17), size=(675, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
                     else:
-                        res.append(MultiContentEntryText(pos=(200, 3), size=(578, 30), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                        res.append(MultiContentEntryText(pos=(235, 7), size=(715, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
                     self.searchentries.append(res)
             y += 1
             if y == offset:
@@ -16905,10 +16444,8 @@ class TVHeuteView(tvBaseScreen):
 
         if self.picon == True:
             self['searchmenu'].l.setItemHeight(60)
-        elif self.xd == False:
-            self['searchmenu'].l.setItemHeight(40)
         else:
-            self['searchmenu'].l.setItemHeight(30)
+            self['searchmenu'].l.setItemHeight(40)
         self['searchmenu'].l.setList(self.searchentries)
         self['searchmenu'].show()
         self.searchcount += 1
@@ -17147,15 +16684,7 @@ class TVHeuteView(tvBaseScreen):
 
                 else:
                     self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
-                if self.fontlarge == True:
-                    if self.xd == False:
-                        fill = '____________________________________________________________________________________________________________________________________\n%s' % channel
-                    else:
-                        fill = '________________________________________________________________________________________________________________________\n%s' % channel
-                elif self.xd == False:
-                    fill = '____________________________________________________________________________________________________________________________________________________\n%s' % channel
-                else:
-                    fill = '_________________________________________________________________________________________________________________________________________\n%s' % channel
+                fill = self.getFill(channel)
                 self.EPGtext += '\n\n' + fill
                 self['textpage'].setText(self.EPGtext)
                 self['textpage'].show()
@@ -18495,10 +18024,7 @@ class TVHeuteView(tvBaseScreen):
         self.showPic1(self.pic1)
 
     def showPic1(self, tvpic):
-        if self.xd == False:
-            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
         if currPic != None:
             self['pic1'].instance.setPixmap(currPic)
         return
@@ -18510,10 +18036,7 @@ class TVHeuteView(tvBaseScreen):
         self.showPic2(self.pic2)
 
     def showPic2(self, tvpic):
-        if self.xd == False:
-            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
         if currPic != None:
             self['pic2'].instance.setPixmap(currPic)
         return
@@ -18525,10 +18048,7 @@ class TVHeuteView(tvBaseScreen):
         self.showPic3(self.pic3)
 
     def showPic3(self, tvpic):
-        if self.xd == False:
-            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
         if currPic != None:
             self['pic3'].instance.setPixmap(currPic)
         return
@@ -18540,10 +18060,7 @@ class TVHeuteView(tvBaseScreen):
         self.showPic4(self.pic4)
 
     def showPic4(self, tvpic):
-        if self.xd == False:
-            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
         if currPic != None:
             self['pic4'].instance.setPixmap(currPic)
         return
@@ -18555,10 +18072,7 @@ class TVHeuteView(tvBaseScreen):
         self.showPic5(self.pic5)
 
     def showPic5(self, tvpic):
-        if self.xd == False:
-            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
         if currPic != None:
             self['pic5'].instance.setPixmap(currPic)
         return
@@ -18570,10 +18084,7 @@ class TVHeuteView(tvBaseScreen):
         self.showPic6(self.pic6)
 
     def showPic6(self, tvpic):
-        if self.xd == False:
-            currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(tvpic, 160, 106, 3, 0, 0, 0)
+        currPic = loadPic(tvpic, 200, 133, 3, 0, 0, 0)
         if currPic != None:
             self['pic6'].instance.setPixmap(currPic)
         return
@@ -18585,10 +18096,7 @@ class TVHeuteView(tvBaseScreen):
         self.showPicPost(self.picfile)
 
     def showPicPost(self, picpost):
-        if self.xd == False:
-            currPic = loadPic(picpost, 490, 245, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picpost, 400, 200, 3, 0, 0, 0)
+        currPic = loadPic(picpost, 490, 245, 3, 0, 0, 0)
         if currPic != None:
             self['picpost'].instance.setPixmap(currPic)
             self['piclabel'].show()
@@ -18599,10 +18107,7 @@ class TVHeuteView(tvBaseScreen):
         return
 
     def showPicTVinfoX(self, picinfo, X):
-        if self.xd == False:
-            currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(picinfo, 45, 15, 3, 0, 0, 0)
+        currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
         if currPic != None:
             self[X].instance.setPixmap(currPic)
         return
