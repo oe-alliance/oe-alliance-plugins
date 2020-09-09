@@ -68,7 +68,7 @@ class CScrollLabel(ScrollLabel):
         ScrollLabel.__init__(self, text=text)
 
         if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-            _fontsize = 22
+            _fontsize = 28
         elif config.plugins.tvspielfilm.font_size.value == 'large':
             _fontsize = 20
         else:
@@ -81,7 +81,7 @@ class CLabel2(Label):
         Label.__init__(self, text=text)
 
         if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-            _fontsize = 20
+            _fontsize = 26
         elif config.plugins.tvspielfilm.font_size.value == 'large':
             _fontsize = 18
         else:
@@ -94,7 +94,7 @@ class CLabel(Label):
         Label.__init__(self, text=text)
 
         if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-            _fontsize = 22
+            _fontsize = 28
         elif config.plugins.tvspielfilm.font_size.value == 'large':
             _fontsize = 20
         else:
@@ -125,7 +125,7 @@ class ItemList(MenuList):
 #        else:
         self.l.setFont(-2, gFont('Regular', 24))
         if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-            self.l.setFont(-1, gFont('Regular', 26))
+            self.l.setFont(-1, gFont('Regular', 28))
             self.l.setFont(0, gFont('Regular', 24))
             self.l.setFont(1, gFont('Regular', 22))
             self.l.setFont(2, gFont('Regular', 20))

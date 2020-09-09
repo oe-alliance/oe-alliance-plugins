@@ -564,7 +564,7 @@ class TVTippsView(tvBaseScreen):
         date = str(self.date.strftime('%d.%m.%Y'))
         self.titel = 'TV-Tipps - ' + str(self.sparte) + ' - ' + str(self.weekday) + ', ' + date
         self.setTitle(self.titel)
-        bereich = sub('<div class="image-wrapper.*?">\n\\s+<a href="', '<td>LINK', bereich)
+        bereich = sub('<div class="full-image image-wrapper.*?">\n\\s+<a href="', '<td>LINK', bereich)
         bereich = sub('" target="_self" onclick="', '</td>', bereich)
         bereich = sub('class="aholder" title=".*?<strong>', '<td>NAME', bereich)
         bereich = sub('class="aholder" title="', '<td>TITEL', bereich)
@@ -6992,13 +6992,9 @@ class TVProgrammView(tvBaseScreen):
     def __init__(self, session, link, eventview, tagestipp):
         self.eventview = eventview
         self.tagestipp = tagestipp
-        if config.plugins.tvspielfilm.picon.value == 'yes':
-            self.picon = True
-            self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
-        else:
-            self.picon = False
         self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         self.service_db = serviceDB(self.servicefile)
+        tvBaseScreen.__init__(self, session)
         if self.tagestipp == False:
             channel = re.findall(',(.*?).html', link)
             service = channel[0].lower()
@@ -7012,8 +7008,6 @@ class TVProgrammView(tvBaseScreen):
                     self.piconname = self.findPicon(self.sref)
                     if self.piconname is None:
                         self.picon = False
-
-        tvBaseScreen.__init__(self, session)
         self.current = 'menu'
         self.oldcurrent = 'menu'
         self.tventries = []
@@ -7191,7 +7185,6 @@ class TVProgrammView(tvBaseScreen):
             if y == 0:
                 x = sub('LOGO', '', x)
                 res = [x]
-
                 mh = 40
                 if self.picon == True:
                     mh = 62
@@ -14915,8 +14908,8 @@ class TVHeuteView(tvBaseScreen):
         w = w - (20 * skinFactor)
         h = DESKTOP_HEIGHT - (60 * skinFactor)
         if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-            fontsize = 22
-            fontsize2 = 20
+            fontsize = 28
+            fontsize2 = 26
             size = '135,50'
         elif config.plugins.tvspielfilm.font_size.value == 'large':
             fontsize = 20
