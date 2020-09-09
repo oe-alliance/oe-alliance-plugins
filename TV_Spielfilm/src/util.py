@@ -75,6 +75,18 @@ class CScrollLabel(ScrollLabel):
             _fontsize = 18
             self.setFont(-1, gFont('Regular', _fontsize))
 
+class CLabel2(Label):
+
+    def __init__(self, text = ''):
+        Label.__init__(self, text=text)
+
+        if config.plugins.tvspielfilm.font_size.value == 'verylarge':
+            _fontsize = 20
+        elif config.plugins.tvspielfilm.font_size.value == 'large':
+            _fontsize = 18
+        else:
+            _fontsize = 16
+            self.setFont(-1, gFont('Regular', _fontsize))
 
 class CLabel(Label):
 

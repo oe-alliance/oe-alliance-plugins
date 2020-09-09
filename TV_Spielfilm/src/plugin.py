@@ -38,7 +38,7 @@ from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirec
 from six.moves.urllib.error import URLError, HTTPError
 import datetime, os, re, socket, sys, time, six
 from os import path
-from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, channelDB, BlinkingLabel, ItemList, makeWeekDay, CLabel, CScrollLabel
+from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, channelDB, BlinkingLabel, ItemList, makeWeekDay, CLabel, CLabel2, CScrollLabel
 from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable
 from skin import loadSkin
 
@@ -197,7 +197,7 @@ class tvAllScreenFull(tvAllScreen):
 
 
 class tvBaseScreen(tvAllScreen):
-    def __init__(self, session, skin, fontoffset=0, dict={}, posover=None):
+    def __init__(self, session):
         tvAllScreen.__init__(self, session)
         self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
@@ -214,6 +214,9 @@ class tvBaseScreen(tvAllScreen):
             self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
         else:
             self.picon = False
+        w = DESKTOP_WIDTH - (40 * skinFactor)
+        w = w - (20 * skinFactor)
+        self.menuwidth = w
         return
 
     def finishedAutoTimer(self, answer):
@@ -1006,11 +1009,12 @@ class TVTippsView(tvBaseScreen):
         for x in a:
             if y == 0:
                 res = [x]
+                mh = 40
+                if self.picon == True:
+                    mh = 60
                 if self.backcolor == True:
-                    if self.picon == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                    else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+
                 if search('DATUM', x) is not None:
                     if self.datum == True:
                         try:
@@ -1026,14 +1030,8 @@ class TVTippsView(tvBaseScreen):
                     self.datum_string = x
                     res_datum = [x]
                     if self.backcolor == True:
-                        if self.picon == True:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
-                    if self.picon == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    else:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
                     self.searchref.append('na')
                     self.searchlink.append('na')
                     self.searchentries.append(res_datum)
@@ -2741,11 +2739,11 @@ class TVNeuView(tvBaseScreen):
         for x in a:
             if y == 0:
                 res = [x]
+                mh = 40
+                if self.picon == True:
+                    mh = 60
                 if self.backcolor == True:
-                    if self.picon == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                    else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
                 if search('DATUM', x) is not None:
                     if self.datum == True:
                         try:
@@ -2761,14 +2759,8 @@ class TVNeuView(tvBaseScreen):
                     self.datum_string = x
                     res_datum = [x]
                     if self.backcolor == True:
-                        if self.picon == True:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
-                    if self.picon == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    else:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
                     self.searchref.append('na')
                     self.searchlink.append('na')
                     self.searchentries.append(res_datum)
@@ -4019,11 +4011,12 @@ class TVGenreView(tvBaseScreen):
         for x in a:
             if y == 0:
                 res = [x]
+                mh = 40
+                if self.picon == True:
+                    mh = 62
                 if self.backcolor == True:
-                    if self.picon == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 62), font=-1, backcolor_sel=self.back_color, text=''))
-                    else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+
                 if search('DATUM', x) is not None:
                     if self.datum == True:
                         try:
@@ -4041,14 +4034,8 @@ class TVGenreView(tvBaseScreen):
                     self.datum_string = x
                     res_datum = [x]
                     if self.backcolor == True:
-                        if self.picon == True:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 62), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
-                    if self.picon == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 62), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    else:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
                     self.sref.append('na')
                     self.tvlink.append('na')
                     self.tvtitel.append('na')
@@ -4525,11 +4512,11 @@ class TVGenreView(tvBaseScreen):
         for x in a:
             if y == 0:
                 res = [x]
+                mh = 40
+                if self.picon == True:
+                    mh = 60
                 if self.backcolor == True:
-                    if self.picon == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                    else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
                 if search('DATUM', x) is not None:
                     if self.datum == True:
                         try:
@@ -4545,14 +4532,8 @@ class TVGenreView(tvBaseScreen):
                     self.datum_string = x
                     res_datum = [x]
                     if self.backcolor == True:
-                        if self.picon == True:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
-                    if self.picon == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    else:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
                     self.searchref.append('na')
                     self.searchlink.append('na')
                     self.searchentries.append(res_datum)
@@ -5424,9 +5405,6 @@ class TVGenreView(tvBaseScreen):
 
 class TVJetztView(tvBaseScreen):
     def __init__(self, session, link, standalone):
-        w = DESKTOP_WIDTH - (40 * skinFactor)
-        w = w - (20 * skinFactor)
-        self.menuwidth = w
         tvBaseScreen.__init__(self, session)
         self.current = 'menu'
         self.oldcurrent = 'menu'
@@ -6085,11 +6063,11 @@ class TVJetztView(tvBaseScreen):
         for x in a:
             if y == 0:
                 res = [x]
+                mh = 40
+                if self.picon == True:
+                    mh = 60
                 if self.backcolor == True:
-                    if self.picon == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                    else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
                 if search('DATUM', x) is not None:
                     if self.datum == True:
                         try:
@@ -6105,14 +6083,8 @@ class TVJetztView(tvBaseScreen):
                     self.datum_string = x
                     res_datum = [x]
                     if self.backcolor == True:
-                        if self.picon == True:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
-                    if self.picon == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    else:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
                     self.searchref.append('na')
                     self.searchlink.append('na')
                     self.searchentries.append(res_datum)
@@ -7219,11 +7191,13 @@ class TVProgrammView(tvBaseScreen):
             if y == 0:
                 x = sub('LOGO', '', x)
                 res = [x]
+
+                mh = 40
+                if self.picon == True:
+                    mh = 62
                 if self.backcolor == True:
-                    if self.picon == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 62), font=-1, backcolor_sel=self.back_color, text=''))
-                    else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+
                 if self.picon == True:
                     if fileExists(self.piconname):
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 1), size=(100, 60), png=LoadPixmap(self.piconname)))
@@ -7696,11 +7670,11 @@ class TVProgrammView(tvBaseScreen):
         for x in a:
             if y == 0:
                 res = [x]
+                mh = 40
+                if self.picon == True:
+                    mh = 60
                 if self.backcolor == True:
-                    if self.picon == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                    else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
                 if search('DATUM', x) is not None:
                     if self.datum == True:
                         try:
@@ -7715,15 +7689,10 @@ class TVProgrammView(tvBaseScreen):
                     x = sub('DATUM', '', x)
                     self.datum_string = x
                     res_datum = [x]
+
                     if self.backcolor == True:
-                        if self.picon == True:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
-                    if self.picon == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    else:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
                     self.searchref.append('na')
                     self.searchlink.append('na')
                     self.searchentries.append(res_datum)
@@ -14867,8 +14836,8 @@ class tvEvent(tvAllScreenFull):
 
 class TVHeuteView(tvBaseScreen):
     skinHD = """
-        <screen position="center,{position}" size="{w},{h}" title="TV Programm - TV Spielfilm">
-        <ePixmap position="0,0" size="{w},60" pixmap="~/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />
+        <screen position="center,center" size="{w},{h}" title="TV Programm - TV Spielfilm">
+        <ePixmap position="0,0" size="{w},60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />
         <widget name="sender1" position="7,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
         <widget name="sender2" position="212,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
         <widget name="sender3" position="417,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
@@ -14905,8 +14874,8 @@ class TVHeuteView(tvBaseScreen):
         <widget name="menu4" position="622,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
         <widget name="menu5" position="827,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
         <widget name="menu6" position="1032,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="searchtimer" position="420,5" size="400,50" pixmap="~/pic/search_timer.png" alphatest="blend" zPosition="3" />
-        <widget name="searchlogo" position="5,75" size="200,50" pixmap="~/pic/search.png" alphatest="blend" zPosition="1" />
+        <widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />
+        <widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />
         <widget name="searchtext" position="245,75" size="955,65" font="Regular;26" valign="center" zPosition="1" />
         <widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> 
         <widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />
@@ -14925,27 +14894,26 @@ class TVHeuteView(tvBaseScreen):
         <widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />
         <widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />
         <widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />
-        <widget name="cinlogo" position="325,70" size="60,29" pixmap="~/pic/icons/cin.png" alphatest="blend" zPosition="1" />
-        <widget name="playlogo" position="565,163" size="109,58" pixmap="~/pic/icons/playHD.png" alphatest="blend" zPosition="2" />
+        <widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />
+        <widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />
         <widget name="textpage" position="10,325" size="1220,315" font="Regular;{fontsize}" halign="left" zPosition="0" />
-        <widget name="slider_textpage" position="1214,325" size="22,315" pixmap="~/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />
+        <widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />
         <widget name="label" position="220,10" size="800,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
         <widget name="label2" position="469,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
         <widget name="label3" position="594,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
         <widget name="label4" position="719,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-        <ePixmap position="445,33" size="18,18" pixmap="~/pic/buttons/red.png" alphatest="blend" zPosition="2" />
-        <ePixmap position="570,33" size="18,18" pixmap="~/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />
-        <ePixmap position="695,33" size="18,18" pixmap="~/pic/buttons/green.png" alphatest="blend" zPosition="2" />
+        <ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />
+        <ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />
+        <ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />
         <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
         <convert type="ClockToText">Format:%H:%M:%S</convert>
         </widget>
         </screen>"""
 
     def __init__(self, session, link, opener):
-
         w = DESKTOP_WIDTH - (40 * skinFactor)
         w = w - (20 * skinFactor)
-        h = DESKTOP_HEiGHT - (60 * skinFactor)
+        h = DESKTOP_HEIGHT - (60 * skinFactor)
         if config.plugins.tvspielfilm.font_size.value == 'verylarge':
             fontsize = 22
             fontsize2 = 20
@@ -14958,7 +14926,7 @@ class TVHeuteView(tvBaseScreen):
             fontsize = 18
             fontsize2 = 16
             size = '135,42'
-        dict = {"h": str(h), "w": str(w), "size" : size, "fontsize" : str(fontsize), "fontsize2" : str(fontsize2)}
+        dict = {"h": str(h), "w": str(w), "size": size, "fontsize": str(fontsize), "fontsize2": str(fontsize2)}
         self.skin = applySkinVars(TVHeuteView.skinHD, dict)
         tvBaseScreen.__init__(self, session)
         if config.plugins.tvspielfilm.meintvs.value == 'yes':
@@ -16288,11 +16256,13 @@ class TVHeuteView(tvBaseScreen):
         for x in a:
             if y == 0:
                 res = [x]
+
+                mh = 40
+                if self.picon == True:
+                    mh = 60
                 if self.backcolor == True:
-                    if self.picon == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                    else:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+
                 if search('DATUM', x) is not None:
                     if self.datum == True:
                         try:
@@ -16308,14 +16278,8 @@ class TVHeuteView(tvBaseScreen):
                     self.datum_string = x
                     res_datum = [x]
                     if self.backcolor == True:
-                        if self.picon == True:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, backcolor_sel=self.back_color, text=''))
-                        else:
-                            res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, backcolor_sel=self.back_color, text=''))
-                    if self.picon == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 60), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    else:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(1220, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
                     self.searchref.append('na')
                     self.searchlink.append('na')
                     self.searchentries.append(res_datum)
