@@ -1,6 +1,7 @@
 from re import sub, findall, S as RES
 from Components.config import config
 from Components.ConditionalWidget import BlinkingWidget
+from Components.ScrollLabel import ScrollLabel
 from Components.Label import Label
 from Components.MenuList import MenuList
 from enigma import eListboxPythonMultiContent, gFont
@@ -61,45 +62,71 @@ class BlinkingLabel(Label, BlinkingWidget):
         Label.__init__(self, text=text)
         BlinkingWidget.__init__(self)
 
+class CScrollLabel(ScrollLabel):
+
+    def __init__(self, text = ''):
+        ScrollLabel.__init__(self, text=text)
+
+        if config.plugins.tvspielfilm.font_size.value == 'verylarge':
+            _fontsize = 22
+        elif config.plugins.tvspielfilm.font_size.value == 'large':
+            _fontsize = 20
+        else:
+            _fontsize = 18
+            self.setFont(-1, gFont('Regular', _fontsize))
+
+
+class CLabel(Label):
+
+    def __init__(self, text = ''):
+        Label.__init__(self, text=text)
+
+        if config.plugins.tvspielfilm.font_size.value == 'verylarge':
+            _fontsize = 22
+        elif config.plugins.tvspielfilm.font_size.value == 'large':
+            _fontsize = 20
+        else:
+            _fontsize = 18
+            self.setFont(-1, gFont('Regular', _fontsize))
 
 class ItemList(MenuList):
 
     def __init__(self, items, enableWrapAround = True):
         MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            self.l.setFont(-2, gFont('Sans', 24))
-            if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-                self.l.setFont(-1, gFont('Sans', 26))
-                self.l.setFont(0, gFont('Sans', 24))
-                self.l.setFont(1, gFont('Sans', 22))
-                self.l.setFont(2, gFont('Sans', 20))
-            elif config.plugins.tvspielfilm.font_size.value == 'large':
-                self.l.setFont(-1, gFont('Sans', 24))
-                self.l.setFont(0, gFont('Sans', 22))
-                self.l.setFont(1, gFont('Sans', 20))
-                self.l.setFont(2, gFont('Sans', 18))
-            else:
-                self.l.setFont(-1, gFont('Sans', 22))
-                self.l.setFont(0, gFont('Sans', 20))
-                self.l.setFont(1, gFont('Sans', 18))
-                self.l.setFont(2, gFont('Sans', 16))
+#        if config.plugins.tvspielfilm.font.value == 'yes':
+#            self.l.setFont(-2, gFont('Sans', 24))
+#            if config.plugins.tvspielfilm.font_size.value == 'verylarge':
+#                self.l.setFont(-1, gFont('Sans', 26))
+#                self.l.setFont(0, gFont('Sans', 24))
+#                self.l.setFont(1, gFont('Sans', 22))
+#                self.l.setFont(2, gFont('Sans', 20))
+#            elif config.plugins.tvspielfilm.font_size.value == 'large':
+#                self.l.setFont(-1, gFont('Sans', 24))
+#                self.l.setFont(0, gFont('Sans', 22))
+#                self.l.setFont(1, gFont('Sans', 20))
+#                self.l.setFont(2, gFont('Sans', 18))
+#            else:
+#                self.l.setFont(-1, gFont('Sans', 22))
+#                self.l.setFont(0, gFont('Sans', 20))
+#                self.l.setFont(1, gFont('Sans', 18))
+#                self.l.setFont(2, gFont('Sans', 16))
+#        else:
+        self.l.setFont(-2, gFont('Regular', 24))
+        if config.plugins.tvspielfilm.font_size.value == 'verylarge':
+            self.l.setFont(-1, gFont('Regular', 26))
+            self.l.setFont(0, gFont('Regular', 24))
+            self.l.setFont(1, gFont('Regular', 22))
+            self.l.setFont(2, gFont('Regular', 20))
+        elif config.plugins.tvspielfilm.font_size.value == 'large':
+            self.l.setFont(-1, gFont('Regular', 24))
+            self.l.setFont(0, gFont('Regular', 22))
+            self.l.setFont(1, gFont('Regular', 20))
+            self.l.setFont(2, gFont('Regular', 18))
         else:
-            self.l.setFont(-2, gFont('Regular', 24))
-            if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-                self.l.setFont(-1, gFont('Regular', 26))
-                self.l.setFont(0, gFont('Regular', 24))
-                self.l.setFont(1, gFont('Regular', 22))
-                self.l.setFont(2, gFont('Regular', 20))
-            elif config.plugins.tvspielfilm.font_size.value == 'large':
-                self.l.setFont(-1, gFont('Regular', 24))
-                self.l.setFont(0, gFont('Regular', 22))
-                self.l.setFont(1, gFont('Regular', 20))
-                self.l.setFont(2, gFont('Regular', 18))
-            else:
-                self.l.setFont(-1, gFont('Regular', 22))
-                self.l.setFont(0, gFont('Regular', 20))
-                self.l.setFont(1, gFont('Regular', 18))
-                self.l.setFont(2, gFont('Regular', 16))
+            self.l.setFont(-1, gFont('Regular', 22))
+            self.l.setFont(0, gFont('Regular', 20))
+            self.l.setFont(1, gFont('Regular', 18))
+            self.l.setFont(2, gFont('Regular', 16))
 
 
 def applySkinVars(skin, dict):

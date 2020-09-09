@@ -38,10 +38,9 @@ from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirec
 from six.moves.urllib.error import URLError, HTTPError
 import datetime, os, re, socket, sys, time, six
 from os import path
-from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, TVSHDPNG, serviceDB, channelDB, BlinkingLabel, ItemList, makeWeekDay
+from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, channelDB, BlinkingLabel, ItemList, makeWeekDay, CLabel, CScrollLabel
 from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable
 from skin import loadSkin
-
 
 try:
     from cookielib import MozillaCookieJar
@@ -57,13 +56,13 @@ config.plugins.tvspielfilm = ConfigSubsection()
 #    config.plugins.tvspielfilm.plugin_size = ConfigSelection(default='normal', choices=[('full', '1280x720'), ('normal', '1024x576')])
 #    config.plugins.tvspielfilm.position = ConfigInteger(40, (0, 160))
 config.plugins.tvspielfilm.font_size = ConfigSelection(default='large', choices=[('verylarge', 'Sehr gro\xc3\x9f'), ('large', 'Gro\xc3\x9f'), ('normal', 'Normal')])
-config.plugins.tvspielfilm.font = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
-if config.plugins.tvspielfilm.font.value == 'yes':
-    from enigma import addFont
-    try:
-        addFont('/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/font/Sans.ttf', 'Sans', 100, False)
-    except Exception as ex:
-        addFont('/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/font/Sans.ttf', 'Sans', 100, False, 0)
+#config.plugins.tvspielfilm.font = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
+#if config.plugins.tvspielfilm.font.value == 'yes':
+#    from enigma import addFont
+#    try:
+#        addFont('/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/font/Sans.ttf', 'Sans', 100, False)
+#    except Exception as ex:
+#        addFont('/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/font/Sans.ttf', 'Sans', 100, False, 0)
 
 config.plugins.tvspielfilm.meintvs = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
 config.plugins.tvspielfilm.login = ConfigText(default='', fixed_size=False)
@@ -109,15 +108,18 @@ skinFactor = 1
 DESKTOP_WIDTH = getDesktop(0).size().width()
 DESKTOP_HEIGHT = getDesktop(0).size().height()
 if DESKTOP_WIDTH > 1920:
+	loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/TVSpielfilm/skin_fhd.xml")
 	skinFactor = 3.0
 elif DESKTOP_WIDTH > 1280:
+	loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/TVSpielfilm/skin_fhd.xml")
 	skinFactor = 1.5
 else:
+	loadSkin(resolveFilename(SCOPE_PLUGINS) + "Extensions/TVSpielfilm/skin_hd.xml")
 	skinFactor = 1
-
 
 class tvAllScreen(Screen):
     def __init__(self, session):
+        self.session = session
         Screen.__init__(self, session)
 
     def hideScreen(self):
@@ -175,16 +177,19 @@ class tvAllScreen(Screen):
         f.close()
         self.timer = data
 
+class tvAllScreenFull(tvAllScreen):
+    skin = '\n\t\t\t\t<screen position="0,0" size="{size}" >\n\t\t\t\t</screen>'
+    def __init__(self, session):
+        size = "%s,%s" % (DESKTOP_WIDTH,DESKTOP_HEIGHT)
+        self.dict = {'size' : size}
+        self.skin = applySkinVars(tvAllScreenFull.skin, self.dict)
+        tvAllScreen.__init__(self, session)
+
 
 class tvBaseScreen(tvAllScreen):
-
     def __init__(self, session, skin, fontoffset=0, dict={}, posover=None):
 
         self.dict = dict
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            self.dict['font'] = 'Sans'
-        else:
-            self.dict['font'] = 'Regular'
 
         if config.plugins.tvspielfilm.font_size.value == 'verylarge':
             self.fontlarge = True
@@ -206,7 +211,7 @@ class tvBaseScreen(tvAllScreen):
         self.dict['fontsize'] = str(_fontsize)
         self.dict['fontsize2'] = str(_fontsize - 2)
         self.dict['position'] = position
-        self.skin = applySkinVars(skin, self.dict)
+        #self.skin = applySkinVars(skin, self.dict)
         tvAllScreen.__init__(self, session)
         self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
@@ -383,10 +388,8 @@ class tvBaseScreen(tvAllScreen):
         pass
 
 class TVTippsView(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV-Tipps - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="1085,540" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-
     def __init__(self, session, link, sparte):
-        tvBaseScreen.__init__(self, session, TVTippsView.skinHD)
+        tvBaseScreen.__init__(self, session)
         self.current = 'menu'
         self.oldcurrent = 'menu'
         self.sparte = sparte
@@ -2313,10 +2316,8 @@ class TVTippsView(tvBaseScreen):
 
 
 class TVNeuView(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV Neuerscheinungen - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="1085,540" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-
     def __init__(self, session, link):
-        tvBaseScreen.__init__(self, session, TVNeuView.skinHD)
+        tvBaseScreen.__init__(self, session)
         self.current = 'menu'
         self.oldcurrent = 'menu'
         self.titel = ''
@@ -4214,20 +4215,8 @@ class TVNeuView(tvBaseScreen):
 
 
 class TVGenreView(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="{size}" title=" ">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="{msize}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="170,10" size="900,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-
     def __init__(self, session, link, genre):
-        dict = {}
-        dict["size"] = '1240,640'
-        if config.plugins.tvspielfilm.picon.value == 'yes':
-            msize = '1220,558'
-            self.picon = True
-            self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
-        else:
-            msize = '1220,560'
-            self.picon = False
-        dict["msize"] = size
-        tvBaseScreen.__init__(self, session, TVGenreView.skinHD, 0, dict)
+        tvBaseScreen.__init__(self, session)
         self.current = 'menu'
         self.oldcurrent = 'menu'
         self.tventries = []
@@ -5989,67 +5978,11 @@ class TVGenreView(tvBaseScreen):
 
 
 class TVJetztView(tvBaseScreen):
-    skinHD = """
-    <screen position="center,{position}" size="{screensize}" title=" ">
-        <eLabel position="0,0" size="{headersize}" backgroundColor="#FFFFFF" />
-        <ePixmap position="0,0" size="{headersize}" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" backgroundColor="#FFFFFF"/>
-        <widget name="menu" position="10,75" size="{menusize}" scrollbarMode="showNever" zPosition="1" />
-        <widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />
-        <widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />
-        <widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />
-        <widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" />
-        <widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />
-        <widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
-        <widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />
-        <widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-        <widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-        <widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-        <widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-        <widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
-        <widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
-        <widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
-        <widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
-        <widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />
-        <widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />
-        <widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />
-        <widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />
-        <widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />
-        <widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />
-        <widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />
-        <widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />
-        <widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />
-        <widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
-        <widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-        <widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-        <widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-        <ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />
-        <ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />
-        <ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />
-        <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
-        <convert type="ClockToText">Format:%H:%M:%S</convert>
-        </widget>
-    </screen>"""
-
     def __init__(self, session, link, standalone):
-
-        dict = {}
         w = DESKTOP_WIDTH - (40 * skinFactor)
-        h = DESKTOP_HEIGHT - (80 * skinFactor)
-        dict["screensize"] = "%s,%s" % (w, h)
-        dict["headersize"] = "%s,%s" % (w, 60)
         w = w - (20 * skinFactor)
-        h = h - (60 * skinFactor)
-#        if config.plugins.tvspielfilm.picon.value == 'yes':
-#            size = '1220,558'
-#            h = h - (2 * skinFactor)
-#            self.picon = True
-#            self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
-#        else:
-#            size = '1220,560'
-#            self.picon = False
-        dict["menusize"] = "%s,%s" % (w, h)
         self.menuwidth = w
-        tvBaseScreen.__init__(self, session, TVJetztView.skinHD, 0, dict)
+        tvBaseScreen.__init__(self, session)
         self.current = 'menu'
         self.oldcurrent = 'menu'
         self.tventries = []
@@ -6106,21 +6039,21 @@ class TVJetztView(tvBaseScreen):
         self['searchtext'] = Label('')
         self['searchtext'].hide()
         self['textpage'] = ScrollLabel('')
-        self['infotext'] = Label('')
+        self['infotext'] = CLabel('')
         self['infotext'].hide()
-        self['infotext2'] = Label('')
+        self['infotext2'] = CLabel('')
         self['infotext2'].hide()
-        self['infotext3'] = Label('')
+        self['infotext3'] = CLabel('')
         self['infotext3'].hide()
-        self['infotext4'] = Label('')
+        self['infotext4'] = CLabel('')
         self['infotext4'].hide()
-        self['infotext5'] = Label('')
+        self['infotext5'] = CLabel('')
         self['infotext5'].hide()
-        self['infotext6'] = Label('')
+        self['infotext6'] = CLabel('')
         self['infotext6'].hide()
-        self['infotext7'] = Label('')
+        self['infotext7'] = CLabel('')
         self['infotext7'].hide()
-        self['infotext8'] = Label('')
+        self['infotext8'] = CLabel('')
         self['infotext8'].hide()
         self['piclabel'] = Label('')
         self['piclabel'].hide()
@@ -7767,8 +7700,6 @@ class TVJetztView(tvBaseScreen):
 
 
 class TVProgrammView(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="{size}" title="TV Programm - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,75" size="{msize}" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-
     def __init__(self, session, link, eventview, tagestipp):
         self.eventview = eventview
         self.tagestipp = tagestipp
@@ -7793,14 +7724,7 @@ class TVProgrammView(tvBaseScreen):
                     if self.piconname is None:
                         self.picon = False
 
-        dict = {}
-        dict['size'] = "1240,640"
-        if self.picon == True:
-            size = '1220,558'
-        else:
-            size = '1220,560'
-        dict['msize'] = size
-        tvBaseScreen.__init__(self, session, TVProgrammView.skinHD, 0, dict)
+        tvBaseScreen.__init__(self, session)
         self.current = 'menu'
         self.oldcurrent = 'menu'
         self.tventries = []
@@ -9693,10 +9617,8 @@ class TVProgrammView(tvBaseScreen):
 
 
 class TVTrailer(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="Trailer - Video - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="172,75" size="923,540" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play1" position="36,91" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play2" position="36,181" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play3" position="36,271" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play4" position="36,361" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play5" position="36,451" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play6" position="36,541" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="250,20" size="740,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-
     def __init__(self, session, link, sparte):
-        tvBaseScreen.__init__(self, session, TVTrailer.skinHD)
+        tvBaseScreen.__init__(self, session)
         self.sparte = sparte
         self.tventries = []
         self.tvlink = []
@@ -10191,10 +10113,8 @@ class TVTrailer(tvBaseScreen):
 
 
 class TVBilder(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="Bildergalerien - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="172,75" size="923,540" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play1" position="36,91" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play2" position="36,181" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play3" position="36,271" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play4" position="36,361" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play5" position="36,451" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="play6" position="36,541" size="109,58" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="250,20" size="740,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
-
     def __init__(self, session, link):
-        tvBaseScreen.__init__(self, session, TVBilder.skinHD)
+        tvBaseScreen.__init__(self, session)
         self.tventries = []
         self.piclink = []
         self.picurllist = []
@@ -10509,10 +10429,8 @@ class TVBilder(tvBaseScreen):
 
 
 class TVNews(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV-News - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="10,70" size="475,540" scrollbarMode="showAlways" zPosition="1" />\n\t\t\t\t<widget name="slider_menu" position="469,70" size="22,540" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_540.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="picture" position="600,70" size="525,350" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="picturetext" position="490,420" size="745,60" font="{font};{fontsize2}" valign="center" halign="center" zPosition="1" />\n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="364,20" size="512,20" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t\t<widget name="statuslabel" position="250,610" size="740,20" font="{font};{fontsize2}" foregroundColor="#858A95" halign="center" zPosition="2" />\n\t\t\t</screen>'
-
     def __init__(self, session, link):
-        tvBaseScreen.__init__(self, session, TVNews.skinHD)
+        tvBaseScreen.__init__(self, session)
         self.current = 'menu'
         self.menulist = []
         self.menulink = []
@@ -10898,10 +10816,8 @@ class TVNews(tvBaseScreen):
 
 
 class TVBlog(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV Spielfilm Blog">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/blogHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="menu" position="950,150" size="250,250" scrollbarMode="showNever" zPosition="1" />\n\t\t\t\t<widget name="meta" position="10,70" size="300,55" font="{font};{fontsize2}" foregroundColor="#F2A5BC" halign="left" zPosition="1" />\n\t\t\t\t<widget name="item" position="10,445" size="120,25" font="{font};{fontsize2}" foregroundColor="#F2A5BC" halign="left" zPosition="1" />\n\t\t\t\t<widget name="picture" position="320,70" size="600,400" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="topictext" position="10,475" size="1220,25" font="{font};{fontsize}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="previewtext" position="10,510" size="1220,130" font="{font};{fontsize}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_b315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="364,10" size="512,40" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" valign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t\t<widget name="statuslabel" position="250,610" size="740,20" font="{font};{fontsize2}" foregroundColor="#858A95" halign="center" zPosition="2" />\n\t\t\t</screen>'
-
     def __init__(self, session, link, post):
-        tvBaseScreen.__init__(self, session, TVBlog.skinHD)
+        tvBaseScreen.__init__(self, session)
         self.baseurl = 'https://blog.tvspielfilm.de'
         self.current = 'menu'
         self.menulist = []
@@ -11464,10 +11380,8 @@ class TVBlog(tvBaseScreen):
 
 
 class TVNewsPicShow(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="Fotostrecke - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="364,10" size="512,44" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t\t<widget name="picture" position="175,70" size="889,500" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="picindex" position="1065,70" size="165,24" font="{font};{fontsize}" halign="right" zPosition="1" />\n\t\t\t\t<widget name="pictext" position="10,577" size="1220,63" font="{font};{fontsize}" halign="center" zPosition="1" />\n\t\t\t</screen>'
-
     def __init__(self, session, link):
-        tvBaseScreen.__init__(self, session, TVNewsPicShow.skinHD)
+        tvBaseScreen.__init__(self, session)
         self.hideflag = True
         self.link = link
         self.pixlist = []
@@ -11476,8 +11390,8 @@ class TVNewsPicShow(tvBaseScreen):
         self.picmax = 1
         self.count = 0
         self['picture'] = Pixmap()
-        self['picindex'] = Label('')
-        self['pictext'] = ScrollLabel('')
+        self['picindex'] = CLabel('')
+        self['pictext'] = CScrollLabel('')
         self['label'] = Label('OK = Vollbild\n< > = Zur\xfcck / Vorw\xc3\xa4rts')
         self['NumberActions'] = NumberActionMap(['NumberActions',
          'OkCancelActions',
@@ -11691,17 +11605,16 @@ class TVNewsPicShow(tvBaseScreen):
 
 
 class PlayboyPicShow(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="Erotische Playmates - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="364,10" size="512,44" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t\t<widget name="textpage" position="10,70" size="250,560" font="{font};{fontsize}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="picture" position="270,70" size="700,500" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="picindex" position="1065,70" size="165,24" font="{font};{fontsize}" halign="right" zPosition="2" />\n\t\t\t\t<widget name="pictext" position="10,577" size="1220,63" font="{font};{fontsize}" halign="center" zPosition="2" />\n\t\t\t</screen>'
 
     def __init__(self, session, link):
-        tvBaseScreen.__init__(self, session, PlayboyPicShow.skinHD)
+        tvBaseScreen.__init__(self, session)
         self.hideflag = True
         self.link = link
         self.pixlist = []
         self.picmax = ''
         self.count = 0
         self['picture'] = Pixmap()
-        self['picindex'] = Label('')
+        self['picindex'] = CLabel('')
         self['pictext'] = ScrollLabel('')
         self['textpage'] = ScrollLabel('')
         self['label'] = Label('OK = Vollbild\n< > = Zur\xfcck / Vorw\xc3\xa4rts')
@@ -11897,10 +11810,8 @@ class PlayboyPicShow(tvBaseScreen):
 
 
 class TVPicShow(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="Fotostrecke - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="364,10" size="512,44" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t\t<widget name="infotext" position="10,70" size="250,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="250,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="250,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="250,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="980,70" size="250,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="980,105" size="250,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="980,140" size="250,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="980,175" size="250,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="picture" position="270,70" size="700,525" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="pictext" position="10,595" size="1220,48" font="{font};{fontsize2}" halign="center" valign="center" zPosition="1" />\n\t\t\t</screen>'
-
     def __init__(self, session, link):
-        tvBaseScreen.__init__(self, session, TVPicShow.skinHD)
+        tvBaseScreen.__init__(self, session)
         self.hideflag = True
         self.link = link
         self.pixlist = []
@@ -11908,16 +11819,16 @@ class TVPicShow(tvBaseScreen):
         self.titel = ''
         self.picmax = 1
         self.count = 0
-        self['infotext'] = Label('')
-        self['infotext2'] = Label('')
-        self['infotext3'] = Label('')
-        self['infotext4'] = Label('')
-        self['infotext5'] = Label('')
-        self['infotext6'] = Label('')
-        self['infotext7'] = Label('')
-        self['infotext8'] = Label('')
+        self['infotext'] = CLabel('')
+        self['infotext2'] = CLabel('')
+        self['infotext3'] = CLabel('')
+        self['infotext4'] = CLabel('')
+        self['infotext5'] = CLabel('')
+        self['infotext6'] = CLabel('')
+        self['infotext7'] = CLabel('')
+        self['infotext8'] = CLabel('')
         self['picture'] = Pixmap()
-        self['pictext'] = Label('')
+        self['pictext'] = CLabel('')
         self['label'] = Label('OK = Vollbild\n< > = Zur\xfcck / Vorw\xc3\xa4rts')
         self['NumberActions'] = NumberActionMap(['NumberActions',
          'OkCancelActions',
@@ -12152,17 +12063,15 @@ class TVPicShow(tvBaseScreen):
 
 
 class PicShowFull(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,center" size="1280,720" flags="wfNoBorder" title="  " >\n\t\t\t\t<eLabel position="0,0" size="1280,720" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="picture" position="0,0" size="1280,720" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="picindex" position="10,10" size="120,22" font="{font};{fontsize}" foregroundColor="#A5ACAE" halign="left" transparent="1" zPosition="3" />\n\t\t\t</screen>'
-
     def __init__(self, session, link, count, playboy):
-        tvBaseScreen.__init__(self, session, PicShowFull.skinHD, 2)
+        tvBaseScreen.__init__(self, session)
         self.hideflag = True
         self.playboy = playboy
         self.pixlist = []
         self.count = count
         self.picmax = 1
         self['picture'] = Pixmap()
-        self['picindex'] = Label('')
+        self['picindex'] = CLabel('')
         self['NumberActions'] = NumberActionMap(['NumberActions',
          'OkCancelActions',
          'DirectionActions',
@@ -12335,17 +12244,18 @@ class PicShowFull(tvBaseScreen):
 
 
 class FullScreen(tvAllScreen):
-    skin = '\n\t\t\t<screen position="center,center" size="1024,576" flags="wfNoBorder" title="  " >\n\t\t\t\t<eLabel position="0,0" size="1024,576" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="picture" position="128,0" size="768,576" alphatest="blend" zPosition="2" />\n\t\t\t</screen>'
-    skinHD = '\n\t\t\t<screen position="center,center" size="1280,720" flags="wfNoBorder" title="  " >\n\t\t\t\t<eLabel position="0,0" size="1280,720" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="picture" position="160,0" size="960,720" alphatest="blend" zPosition="2" />\n\t\t\t</screen>'
+    skin = """
+        <screen position="center,center" size="{size}" flags="wfNoBorder" title="  " >
+        <eLabel position="0,0" size="{size}" backgroundColor="#000000" zPosition="1" />
+        <widget name="picture" position="{ppos}" size="{psize}" alphatest="blend" zPosition="2" />
+        </screen>"""
 
     def __init__(self, session):
-        deskWidth = getDesktop(0).size().width()
-        if deskWidth >= 1280:
-            self.skin = FullScreen.skinHD
-            self.xd = False
-        else:
-            self.skin = FullScreen.skin
-            self.xd = True
+        size = "%s,%s" % (DESKTOP_WIDTH,DESKTOP_HEIGHT)
+        psize = "%s,%s" % (DESKTOP_WIDTH * 0.75,DESKTOP_HEIGHT)
+        ppos = "%s,%s" % (DESKTOP_WIDTH * 0.125,0)
+        self.dict = {'size' : size , 'psize' : psize , 'ppos' : ppos}
+        self.skin = applySkinVars(FullScreen.skin, self.dict)
         tvAllScreen.__init__(self, session)
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.hideflag = True
@@ -12356,10 +12266,7 @@ class FullScreen(tvAllScreen):
         self.onShown.append(self.showPic)
 
     def showPic(self):
-        if self.xd == False:
-            currPic = loadPic(self.picfile, 960, 720, 3, 0, 0, 0)
-        else:
-            currPic = loadPic(self.picfile, 768, 576, 3, 0, 0, 0)
+        currPic = loadPic(self.picfile, DESKTOP_WIDTH * 0.75, DESKTOP_HEIGHT, 3, 0, 0, 0)
         if currPic != None:
             self['picture'].instance.setPixmap(currPic)
         return
@@ -12373,14 +12280,7 @@ class FullScreen(tvAllScreen):
 
 
 class searchYouTube(tvAllScreen):
-    skin = '\n\t\t\t<screen position="center,center" size="1000,560" title=" ">\n\t\t\t\t<ePixmap position="0,0" size="1000,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/youtube.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="10,6" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/blue.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="10,26" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="label" position="34,6" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="34,26" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="740,0" size="240,50" font="{font};24" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t\t<widget name="poster1" position="10,55" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster2" position="10,180" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster3" position="10,305" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="poster4" position="10,430" size="215,120" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="list" position="235,55" size="755,500" scrollbarMode="showOnDemand" zPosition="1" />\n\t\t\t</screen>'
     def __init__(self, session, name, movie):
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
-        self.dict = {'font': font}
-        self.skin = applySkinVars(searchYouTube.skin, self.dict)
         tvAllScreen.__init__(self, session)
         if movie == True:
             self.name = name + ' Trailer'
@@ -13067,11 +12967,8 @@ class searchYouTube(tvAllScreen):
 
 
 class tvMain(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="310,640" flags="wfNoBorder" title="TV Spielfilm">\n\t\t\t\t<eLabel position="0,0" size="310,30" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<eLabel position="0,30" size="20,590" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<eLabel position="290,30" size="20,590" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<eLabel position="0,620" size="310,20" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<ePixmap position="20,30" size="270,60" pixmap="' + TVSHDPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="262,40" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="green" position="262,62" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="label" position="176,40" size="80,20" font="{font};16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="176,62" size="80,20" font="{font};16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="mainmenu" position="30,100" size="250,390" scrollbarMode="showNever" zPosition="2" />\n\t\t\t\t<widget name="secondmenu" position="30,100" size="250,510" scrollbarMode="showNever" zPosition="2" />\n\t\t\t\t<widget name="thirdmenu" position="30,100" size="250,510" scrollbarMode="showNever" zPosition="2" />\n\t\t\t</screen>'
-
     def __init__(self, session):
-        position = '20'
-        tvBaseScreen.__init__(self, session, tvMain.skinHD, 0, {}, position)
+        tvBaseScreen.__init__(self, session)
         self.senderhtml = '/tmp/tvssender.html'
         if config.plugins.tvspielfilm.tipps.value == 'false':
             self.tipps = False
@@ -15128,10 +15025,7 @@ class makeServiceFile(Screen):
         entrys = [ (x[0], x[1]) for x in bouquets ]
         self['list'].l.setList(entrys)
         try:
-            if config.plugins.tvspielfilm.font.value == 'yes':
-                self['list'].l.setFont(gFont('Sans', 20))
-            else:
-                self['list'].l.setFont(gFont('Regular', 20))
+            self['list'].l.setFont(gFont('Regular', 20))
         except (AttributeError, TypeError):
             pass
 
@@ -15243,14 +15137,7 @@ class makeServiceFile(Screen):
 
 
 class getNumber(Screen):
-    skin = '\n\t\t\t<screen position="center,center" size="175,70" backgroundColor="#000000" flags="wfNoBorder" title=" ">\n\t\t\t\t<widget name="number" position="0,0" size="175,70" font="{font};40" halign="center" valign="center" transparent="1" zPosition="1"/>\n\t\t\t</screen>'
     def __init__(self, session, number):
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
-        self.dict = {'font': font}
-        self.skin = applySkinVars(getNumber.skin, self.dict)
         Screen.__init__(self, session)
         self.field = str(number)
         self['number'] = Label(self.field)
@@ -15287,10 +15174,7 @@ class getNumber(Screen):
 
 
 class gotoPageMenu(tvAllScreen):
-    skin = '\n\t\t\t<screen position="center,center" size="436,560" title=" ">\n\t\t\t\t<widget name="pagemenu" position="10,10" size="416,540" scrollbarMode="showNever" zPosition="1" />\n\t\t\t</screen>'
-
     def __init__(self, session, count, maxpages):
-        self.skin = gotoPageMenu.skin
         self.session = session
         tvAllScreen.__init__(self, session)
         self.localhtml = '/tmp/tvspielfilm.html'
@@ -15444,13 +15328,21 @@ class gotoPageMenu(tvAllScreen):
 
 
 class tvTipps(tvAllScreen):
-    skin = '\n\t\t\t<screen position="{position}" size="740,270" flags="wfNoBorder" title=" ">\n\t\t\t\t<widget name="picture" position="0,0" size="387,270" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="elabel" position="387,0" size="{size},150" font="{font};18" backgroundColor="#FF000000" zPosition="1" />\n\t\t\t\t<widget name="elabel2" position="{position2},0" size="{size2}" font="{font};18" backgroundColor="#000000" zPosition="1" />\n\t\t\t\t<widget name="elabel3" position="387,150" size="353,125" font="{font};18" backgroundColor="#FFFFFF" zPosition="1" />\n\t\t\t\t<widget name="label" position="402,151" size="288,24" font="{font};20" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2" />\n\t\t\t\t<widget name="label2" position="402,176" size="288,48" font="{font};22" foregroundColor="#{color}" backgroundColor="#FFFFFF" halign="left" zPosition="2" />\n\t\t\t\t<widget name="label3" position="402,225" size="328,42" font="{font};18" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" zPosition="2" />\n\t\t\t\t<widget name="thumb" position="695,160" size="40,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/rating small1HD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="label4" position="40,220" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="label5" position="40,245" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t</screen>'
+    skin = """
+        <screen position="{position}" size="740,270" flags="wfNoBorder" title=" ">
+        <widget name="picture" position="0,0" size="387,270" alphatest="blend" zPosition="1" />
+        <widget name="elabel" position="387,0" size="{size},150" font="Regular;18" backgroundColor="#FF000000" zPosition="1" />
+        <widget name="elabel2" position="{position2},0" size="{size2}" font="Regular;18" backgroundColor="#000000" zPosition="1" />
+        <widget name="elabel3" position="387,150" size="353,125" font="Regular;18" backgroundColor="#FFFFFF" zPosition="1" />
+        <widget name="label" position="402,151" size="288,24" font="Regular;20" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
+        <widget name="label2" position="402,176" size="288,48" font="Regular;22" foregroundColor="#{color}" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
+        <widget name="label3" position="402,225" size="328,42" font="Regular;18" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
+        <widget name="thumb" position="695,160" size="40,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/rating small1HD.png" alphatest="blend" zPosition="2" />
+        <widget name="label4" position="40,220" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
+        <widget name="label5" position="40,245" size="100,25" font="Regular;18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />
+        </screen>"""
 
     def __init__(self, session):
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             color = '4176B6'
         else:
@@ -15471,7 +15363,6 @@ class tvTipps(tvAllScreen):
          'size': size,
          'position2': position2,
          'size2': size2,
-         'font': font,
          'color': color}
         self.skin = applySkinVars(tvTipps.skin, self.dict)
         tvAllScreen.__init__(self, session)
@@ -15733,14 +15624,7 @@ class tvTipps(tvAllScreen):
 
 
 class tvsConfig(ConfigListScreen, Screen):
-    skin = '\n\t\t\t<screen position="center,center" size="545,500" backgroundColor="#20000000" title="TV Spielfilm Setup">\n\t\t\t\t<ePixmap position="0,0" size="545,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="10,59" size="525,1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/setup/seperator.png" alphatest="off" zPosition="1" />\n\t\t\t\t<widget name="config" position="10,60" size="525,100" itemHeight="25" scrollbarMode="showOnDemand" zPosition="1" />\n\t\t\t\t<ePixmap position="10,161" size="525,1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/setup/seperator.png" alphatest="off" zPosition="1" />\n\t\t\t\t<ePixmap position="125,171" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="350,171" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<eLabel position="150,170" size="180,20" font="{font};18" halign="left" text="Speichern" transparent="1" zPosition="1" />\n\t\t\t\t<eLabel position="375,170" size="180,20" font="{font};18" halign="left" text="Abbrechen" transparent="1" zPosition="1" />\n\t\t\t\t<widget name="plugin" position="10,200" size="525,295" alphatest="blend" zPosition="1" />\n\t\t\t</screen>'
     def __init__(self, session):
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
-        self.dict = {'font': font}
-        self.skin = applySkinVars(tvsConfig.skin, self.dict)
         Screen.__init__(self, session)
         self.password = config.plugins.tvspielfilm.password.value
         self.encrypt = config.plugins.tvspielfilm.encrypt.value
@@ -15749,7 +15633,7 @@ class tvsConfig(ConfigListScreen, Screen):
         #list.append(getConfigListEntry('Plugin Gr\xc3\xb6\xc3\x9fe:', config.plugins.tvspielfilm.plugin_size))
         #list.append(getConfigListEntry('Plugin Position:', config.plugins.tvspielfilm.position))
         list.append(getConfigListEntry('Plugin Schriftgr\xc3\xb6\xc3\x9fe:', config.plugins.tvspielfilm.font_size))
-        list.append(getConfigListEntry('Plugin Sans Serif Schrift:', config.plugins.tvspielfilm.font))
+        #list.append(getConfigListEntry('Plugin Sans Serif Schrift:', config.plugins.tvspielfilm.font))
         list.append(getConfigListEntry('Benutze Mein TV SPIELFILM:', config.plugins.tvspielfilm.meintvs))
         list.append(getConfigListEntry('Login (E-mail):', config.plugins.tvspielfilm.login))
         list.append(getConfigListEntry('Passwort:', config.plugins.tvspielfilm.password))
@@ -15791,7 +15675,7 @@ class tvsConfig(ConfigListScreen, Screen):
         #config.plugins.tvspielfilm.plugin_size.save()
         #config.plugins.tvspielfilm.position.save()
         config.plugins.tvspielfilm.font_size.save()
-        config.plugins.tvspielfilm.font.save()
+        #config.plugins.tvspielfilm.font.save()
         config.plugins.tvspielfilm.meintvs.save()
         config.plugins.tvspielfilm.login.save()
         if config.plugins.tvspielfilm.password.value != self.password:
@@ -15849,14 +15733,7 @@ class tvsConfig(ConfigListScreen, Screen):
 
 
 class FolderSelection(Screen):
-    skin = '\n\t\t\t<screen position="center,center" size="545,510" backgroundColor="#20000000" title="TV Spielfilm Setup">\n\t\t\t\t<ePixmap position="0,0" size="545,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="10,59" size="525,1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/setup/seperator.png" alphatest="off" zPosition="1" />\n\t\t\t\t<widget name="folderlist" position="10,60" size="525,100" itemHeight="25" scrollbarMode="showNever" zPosition="1" />\n\t\t\t\t<ePixmap position="10,161" size="525,1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/setup/seperator.png" alphatest="off" zPosition="1" />\n\t\t\t\t<ePixmap position="125,171" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<ePixmap position="350,171" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<eLabel position="150,170" size="180,20" font="{font};18" halign="left" text="Speichern" transparent="1" zPosition="1" />\n\t\t\t\t<eLabel position="375,170" size="180,20" font="{font};18" halign="left" text="Abbrechen" transparent="1" zPosition="1" />\n\t\t\t\t<widget name="plugin" position="10,200" size="525,300" alphatest="blend" zPosition="1" />\n\t\t\t</screen>'
     def __init__(self, session, folder):
-        if config.plugins.tvspielfilm.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
-        self.dict = {'font': font}
-        self.skin = applySkinVars(FolderSelection.skin, self.dict)
         Screen.__init__(self, session)
         self['plugin'] = Pixmap()
         noFolder = ['/bin',
@@ -15906,16 +15783,10 @@ class FolderSelection(Screen):
         return
 
 
-class tvJetzt(tvAllScreen):
-    skin = '\n\t\t\t\t<screen position="0,0" size="{size}" >\n\t\t\t\t</screen>'
+class tvJetzt(tvAllScreenFull):
     def __init__(self, session, link):
-
-        size = "%s,%s" % (DESKTOP_WIDTH,DESKTOP_HEIGHT)
-        self.dict = {'size' : size}
-        self.skin = applySkinVars(tvJetzt.skin, self.dict)
         self.link = link
-        self.session = session
-        tvAllScreen.__init__(self, session)
+        tvAllScreenFull.__init__(self, session)
         self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         self.channel_db = channelDB(self.servicefile)
         self.JetztTimer = eTimer()
@@ -15939,14 +15810,9 @@ class tvJetzt(tvAllScreen):
         self.close()
 
 
-class tvEvent(tvAllScreen):
-    skin = '\n\t\t\t\t<screen position="0,0" size="{size}" >\n\t\t\t\t</screen>'
+class tvEvent(tvAllScreenFull):
     def __init__(self, session):
-        size = "%s,%s" % (DESKTOP_WIDTH,DESKTOP_HEIGHT)
-        self.dict = {'size' : size}
-        self.skin = applySkinVars(tvEvent.skin, self.dict)
-        self.session = session
-        tvAllScreen.__init__(self, session)
+        tvAllScreenFull.__init__(self, session)
         self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         self.channel_db = channelDB(self.servicefile)
         self.EventTimer = eTimer()
@@ -15980,17 +15846,101 @@ class tvEvent(tvAllScreen):
 
 
 class TVHeuteView(tvBaseScreen):
-    skinHD = '\n\t\t\t<screen position="center,{position}" size="1240,640" title="TV Programm - TV Spielfilm">\n\t\t\t\t<ePixmap position="0,0" size="1240,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="sender1" position="7,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender2" position="212,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender3" position="417,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender4" position="622,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender5" position="827,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="sender6" position="1032,63" size="151,24" font="{font};{fontsize2}" halign="left" zPosition="1" />\n\t\t\t\t<widget name="logo1" position="163,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo2" position="368,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo3" position="573,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo4" position="778,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo5" position="983,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="logo6" position="1188,60" size="44,27" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic1" position="7,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic2" position="212,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic3" position="417,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic4" position="622,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic5" position="827,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pic6" position="1032,87" size="200,133" alphatest="blend" zPosition="1" /> \n\t\t\t\t<widget name="pictime1" position="7,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime2" position="212,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime3" position="417,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime4" position="622,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime5" position="827,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictime6" position="1032,225" size="60,20" font="{font};{fontsize2}" valign="top" halign="center" zPosition="1" />\n\t\t\t\t<widget name="pictext1" position="72,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext2" position="277,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext3" position="482,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext4" position="687,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext5" position="892,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="pictext6" position="1097,225" size="{size}" font="{font};{fontsize2}" valign="top" halign="left" zPosition="1" />\n\t\t\t\t<widget name="menu1" position="7,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu2" position="212,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu3" position="417,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu4" position="622,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu5" position="827,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="menu6" position="1032,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />\n\t\t\t\t<widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="searchtext" position="245,75" size="955,65" font="{font};26" valign="center" zPosition="1" />\n\t\t\t\t<widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> \n\t\t\t\t<widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="piclabel" position="476,265" size="100,25" font="{font};22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="piclabel2" position="476,290" size="100,25" font="{font};18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />\n\t\t\t\t<widget name="infotext" position="10,70" size="310,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext2" position="10,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext3" position="10,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext4" position="10,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />\n\t\t\t\t<widget name="infotext5" position="855,70" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext6" position="855,105" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext7" position="855,140" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="infotext8" position="855,175" size="375,25" font="{font};{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />\n\t\t\t\t<widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="cinlogo" position="325,70" size="60,29" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/cin.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="playlogo" position="565,163" size="109,58" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/playHD.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget name="textpage" position="10,325" size="1220,315" font="{font};{fontsize}" halign="left" zPosition="0" />\n\t\t\t\t<widget name="slider_textpage" position="1214,325" size="22,315" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="label" position="220,10" size="800,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label2" position="469,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label3" position="594,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<widget name="label4" position="719,32" size="100,22" font="{font};18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />\n\t\t\t\t<ePixmap position="445,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/red.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="570,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<ePixmap position="695,33" size="18,18" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons/green.png" alphatest="blend" zPosition="2" />\n\t\t\t\t<widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="{font};26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">\n\t\t\t\t\t<convert type="ClockToText">Format:%H:%M:%S</convert>\n\t\t\t\t</widget>\n\t\t\t</screen>'
+    skinHD = """
+        <screen position="center,{position}" size="{w},{h}" title="TV Programm - TV Spielfilm">
+        <ePixmap position="0,0" size="{w},60" pixmap="~/pic/tvspielfilmHD.png" alphatest="blend" zPosition="1" />
+        <widget name="sender1" position="7,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="sender2" position="212,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="sender3" position="417,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="sender4" position="622,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="sender5" position="827,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="sender6" position="1032,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="logo1" position="163,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="logo2" position="368,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="logo3" position="573,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="logo4" position="778,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="logo5" position="983,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="logo6" position="1188,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="pic1" position="7,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pic2" position="212,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pic3" position="417,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pic4" position="622,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pic5" position="827,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pic6" position="1032,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pictime1" position="7,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictime2" position="212,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictime3" position="417,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictime4" position="622,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictime5" position="827,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictime6" position="1032,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictext1" position="72,225" size="{size}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="pictext2" position="277,225" size="{size}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="pictext3" position="482,225" size="{size}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="pictext4" position="687,225" size="{size}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="pictext5" position="892,225" size="{size}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="pictext6" position="1097,225" size="{size}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="menu1" position="7,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="menu2" position="212,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="menu3" position="417,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="menu4" position="622,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="menu5" position="827,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="menu6" position="1032,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="searchtimer" position="420,5" size="400,50" pixmap="~/pic/search_timer.png" alphatest="blend" zPosition="3" />
+        <widget name="searchlogo" position="5,75" size="200,50" pixmap="~/pic/search.png" alphatest="blend" zPosition="1" />
+        <widget name="searchtext" position="245,75" size="955,65" font="Regular;26" valign="center" zPosition="1" />
+        <widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />
+        <widget name="piclabel" position="476,265" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
+        <widget name="piclabel2" position="476,290" size="100,25" font="Regular;18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />
+        <widget name="infotext" position="10,70" size="310,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+        <widget name="infotext2" position="10,105" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+        <widget name="infotext3" position="10,140" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+        <widget name="infotext4" position="10,175" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+        <widget name="infotext5" position="855,70" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+        <widget name="infotext6" position="855,105" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+        <widget name="infotext7" position="855,140" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+        <widget name="infotext8" position="855,175" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+        <widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />
+        <widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />
+        <widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />
+        <widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />
+        <widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />
+        <widget name="cinlogo" position="325,70" size="60,29" pixmap="~/pic/icons/cin.png" alphatest="blend" zPosition="1" />
+        <widget name="playlogo" position="565,163" size="109,58" pixmap="~/pic/icons/playHD.png" alphatest="blend" zPosition="2" />
+        <widget name="textpage" position="10,325" size="1220,315" font="Regular;{fontsize}" halign="left" zPosition="0" />
+        <widget name="slider_textpage" position="1214,325" size="22,315" pixmap="~/pic/slider/slider_315.png" alphatest="blend" zPosition="1" />
+        <widget name="label" position="220,10" size="800,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
+        <widget name="label2" position="469,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+        <widget name="label3" position="594,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+        <widget name="label4" position="719,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+        <ePixmap position="445,33" size="18,18" pixmap="~/pic/buttons/red.png" alphatest="blend" zPosition="2" />
+        <ePixmap position="570,33" size="18,18" pixmap="~/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />
+        <ePixmap position="695,33" size="18,18" pixmap="~/pic/buttons/green.png" alphatest="blend" zPosition="2" />
+        <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
+        <convert type="ClockToText">Format:%H:%M:%S</convert>
+        </widget>
+        </screen>"""
 
     def __init__(self, session, link, opener):
+
+        w = DESKTOP_WIDTH - (40 * skinFactor)
+        w = w - (20 * skinFactor)
+        h = DESKTOP_HEiGHT - (60 * skinFactor)
         if config.plugins.tvspielfilm.font_size.value == 'verylarge':
+            fontsize = 22
+            fontsize2 = 20
             size = '135,50'
         elif config.plugins.tvspielfilm.font_size.value == 'large':
+            fontsize = 20
+            fontsize2 = 18
             size = '135,48'
         else:
+            fontsize = 18
+            fontsize2 = 16
             size = '135,42'
-        dict = {"size" : size}
-        tvBaseScreen.__init__(self, session, TVHeuteView.skinHD, 0, dict)
+        dict = {"h": str(h), "w": str(w), "size" : size, "fontsize" : str(fontsize), "fontsize2" : str(fontsize2)}
+        self.skin = applySkinVars(TVHeuteView.skinHD, dict)
+        tvBaseScreen.__init__(self, session)
         if config.plugins.tvspielfilm.meintvs.value == 'yes':
             self.MeinTVS = True
             self.error = False
