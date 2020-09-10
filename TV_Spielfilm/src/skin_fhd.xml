@@ -80,13 +80,6 @@
 		<panel name="_head2" />
     </screen>
 
-	<screen name="TVNeuView" position="center,center" size="1880,640" title="TV Neuerscheinungen - TV Spielfilm">
-		<panel name="_head" />
-		<panel name="_menu" />
-		<panel name="_headpic" />
-		<panel name="_head2" />
-    </screen>
-
 	<screen name="TVTippsView" position="center,center" size="1880,960" title="TV-Tipps - TV Spielfilm">
 		<panel name="_head" />
 		<panel name="_menu" />
@@ -94,7 +87,7 @@
 		<panel name="_head2" />
 	</screen>
 
-    <screen name="TVTrailer" position="center,center" size="1880,960" title="Trailer - Video - TV Spielfilm">
+    <screen name="TVTrailerBilder" position="center,center" size="1880,960" title=" ">
 		<panel name="_head" />
 		<panel name="_menu" />
 		<panel name="_headpic" />
@@ -104,18 +97,6 @@
         <convert type="ClockToText">Format:%H:%M:%S</convert>
         </widget>
     </screen>
-
-    <screen name="TVBilder" position="center,center" size="1880,960" title="Bildergalerien - TV Spielfilm">
-		<panel name="_head" />
-		<panel name="_menu2" />
-		<panel name="_headpic" />
-		<panel name="_headplay" />
-        <widget name="label" position="250,20" size="740,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
-        <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
-        <convert type="ClockToText">Format:%H:%M:%S</convert>
-        </widget>
-    </screen>
-
 
     <screen name="TVNews" position="center,center" size="1880,960" title="TV-News - TV Spielfilm">
 		<panel name="_head" />
