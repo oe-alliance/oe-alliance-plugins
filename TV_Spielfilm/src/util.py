@@ -5,6 +5,8 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Label import Label
 from Components.MenuList import MenuList
 from enigma import eListboxPythonMultiContent, gFont
+import xml.etree.ElementTree as ET
+import six
 
 MEDIAROOT = "/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/"
 PICPATH = MEDIAROOT + "pic/"
@@ -61,45 +63,6 @@ class BlinkingLabel(Label, BlinkingWidget):
     def __init__(self, text = ''):
         Label.__init__(self, text=text)
         BlinkingWidget.__init__(self)
-
-class CScrollLabel(ScrollLabel):
-
-    def __init__(self, text = ''):
-        ScrollLabel.__init__(self, text=text)
-
-        if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-            _fontsize = 28
-        elif config.plugins.tvspielfilm.font_size.value == 'large':
-            _fontsize = 20
-        else:
-            _fontsize = 18
-            self.setFont(-1, gFont('Regular', _fontsize))
-
-class CLabel2(Label):
-
-    def __init__(self, text = ''):
-        Label.__init__(self, text=text)
-
-        if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-            _fontsize = 26
-        elif config.plugins.tvspielfilm.font_size.value == 'large':
-            _fontsize = 18
-        else:
-            _fontsize = 16
-            self.setFont(-1, gFont('Regular', _fontsize))
-
-class CLabel(Label):
-
-    def __init__(self, text = ''):
-        Label.__init__(self, text=text)
-
-        if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-            _fontsize = 28
-        elif config.plugins.tvspielfilm.font_size.value == 'large':
-            _fontsize = 20
-        else:
-            _fontsize = 18
-            self.setFont(-1, gFont('Regular', _fontsize))
 
 class ItemList(MenuList):
 
@@ -165,3 +128,34 @@ def makeWeekDay(weekday):
     elif weekday == 6:
         _weekday = 'Sonntag'
     return _weekday
+
+def scaleskin(skin, factor):
+    if factor == 1:
+        return skin
+
+    def calc(old, factor):
+        if ',' in old and '_' in old:
+            _old = old.split(',')
+            a = _old[0]
+            if a[0] == '_':
+                a = a[1:]
+                a = int(int(a) * factor)
+            b = _old[1]
+            if b[0] == '_':
+                b = b[1:]
+                b = int(int(b) * factor)
+            return "%s,%s" % (a,b)
+        return old
+
+    root = ET.fromstring(skin)    
+    if 'position' in root.attrib:
+        root.attrib['position'] = calc(root.attrib['position'], factor)
+    if 'size' in root.attrib:
+        root.attrib['size'] = calc(root.attrib['size'], factor)
+    for child in root:
+        if 'position' in child.attrib:
+            child.attrib['position'] = calc(child.attrib['position'], factor)
+        if 'size' in child.attrib:
+            child.attrib['size'] = calc(child.attrib['size'], factor)
+    return six.ensure_str(ET.tostring(root))
+
