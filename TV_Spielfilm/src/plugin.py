@@ -115,7 +115,7 @@ else:
 	skinFactor = 1
 
 class tvAllScreen(Screen):
-    def __init__(self, session, skin=None, dic=None, scaleskin=False):
+    def __init__(self, session, skin=None, dic=None, scale=False):
         self.session = session
         w = DESKTOP_WIDTH - (40 * skinFactor)
         mw = w - (20 * skinFactor)
@@ -145,7 +145,7 @@ class tvAllScreen(Screen):
         dic["menusize"] = "%s,%s" % (mw,mh)
         if skin != None:
             self.skin = applySkinVars(skin, dic)
-            if scaleskin == True:
+            if scale == True:
                 self.skin = scaleskin(self.skin, skinFactor)
         Screen.__init__(self, session)
         self.fontlarge = True
@@ -223,8 +223,8 @@ class tvAllScreenFull(tvAllScreen):
 
 
 class tvBaseScreen(tvAllScreen):
-    def __init__(self, session, skin=None, dic=None, scaleskin=False):
-        tvAllScreen.__init__(self, session, skin, dic, scaleskin)
+    def __init__(self, session, skin=None, dic=None, scale=False):
+        tvAllScreen.__init__(self, session, skin, dic, scale)
         self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.pic1 = '/tmp/tvspielfilm1.jpg'
@@ -5324,7 +5324,7 @@ class TVProgrammView(tvBaseScreen):
         <screen name="TVProgrammView" position="{screenpos}" size="{screensize}" title="TV Programm - TV Spielfilm">
             %s%s%s
         </screen>""" % ( SKHEADTOP, SKMENU, SKHEADBOTTOM )
-        tvBaseScreen.__init__(self, session, skin)
+        tvBaseScreen.__init__(self, session, skin, None, True)
         if self.tagestipp == False:
             channel = re.findall(',(.*?).html', link)
             service = channel[0].lower()
@@ -5516,6 +5516,11 @@ class TVProgrammView(tvBaseScreen):
         if self.picon == True:
             pictopoffset = 11
             picleftoffset = 40
+
+        scaleoffset = 0
+        if self.fontlarge == True:
+            scaleoffset = 10
+
         for x in a:
             if y == 0:
                 x = sub('LOGO', '', x)
@@ -5601,19 +5606,19 @@ class TVProgrammView(tvBaseScreen):
                         x = t
                     self.tvtitel.append(t)
                     if self.progress == False or self.percent == False:
-                        res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(self.menuwidth - 400 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                        res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(self.menuwidth - 400 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                     else:
                         res.append(MultiContentEntryProgress(pos=(235 + picleftoffset, 13 + pictopoffset), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
-                        res.append(MultiContentEntryText(pos=(325 + picleftoffset, 7 + pictopoffset), size=(self.menuwidth - 490 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                        res.append(MultiContentEntryText(pos=(325 + picleftoffset, 7 + pictopoffset), size=(self.menuwidth - 490 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                 else:
                     y = 5
             if y == 5:
                 if search('SPARTE', x) is not None:
                     x = sub('SPARTE', '', x)
                     if self.primetime == False:
-                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160, 7 + pictopoffset), size=(152, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160 - scaleoffset, 7 + pictopoffset), size=(152 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                     else:
-                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160, 7 + pictopoffset), size=(152, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160 - scaleoffset, 7 + pictopoffset), size=(152 + scaleoffset, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                 else:
                     y = 6
             if y == 6:
@@ -10130,13 +10135,13 @@ class tvMain(tvBaseScreen):
             <widget name="green" position="_262,62" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="2" />
             <widget name="label" position="176,40" size="80,20" font="Regular;16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
             <widget name="label2" position="176,62" size="80,20" font="Regular;16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-            <widget name="mainmenu" position="30,100" size="250,390" scrollbarMode="showNever" zPosition="2" />
-            <widget name="secondmenu" position="30,100" size="250,510" scrollbarMode="showNever" zPosition="2" />
-            <widget name="thirdmenu" position="30,100" size="250,510" scrollbarMode="showNever" zPosition="2" />
+            <widget name="mainmenu" position="_30,100" size="_250,_390" scrollbarMode="showNever" zPosition="2" />
+            <widget name="secondmenu" position="_30,100" size="_250,_510" scrollbarMode="showNever" zPosition="2" />
+            <widget name="thirdmenu" position="_30,100" size="_250,_510" scrollbarMode="showNever" zPosition="2" />
         </screen>"""
 
     def __init__(self, session):
-        tvBaseScreen.__init__(self, session, skin, None, True)
+        tvBaseScreen.__init__(self, session, tvMain.skin, None, True)
         self.senderhtml = '/tmp/tvssender.html'
         if config.plugins.tvspielfilm.tipps.value == 'false':
             self.tipps = False
@@ -10426,87 +10431,46 @@ class tvMain(tvBaseScreen):
 
         return
 
+    def makeMenuItem(self, text, link):
+        res = ['']
+        if self.backcolor == True:
+            res.append(MultiContentEntryText(pos=(0, 0), size=(int(250 * skinFactor), int(30 * skinFactor)), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
+        res.append(MultiContentEntryText(pos=(0, 1), size=(int(250 * skinFactor), int(30 * skinFactor)), font=-2, flags=RT_HALIGN_CENTER, text=text))
+        self.mainmenulist.append(res)
+        self.mainmenulink.append(self.baseurl + link)
+
+    def makeSecondMenuItem(self, text):
+        self.makeSecondMenuItem3(text, '')
+        self.sender.append(text)
+
+    def makeSecondMenuItem2(self, text, link):
+        self.makeSecondMenuItem3(text, link)
+        self.sparte.append(text)
+
+    def makeSecondMenuItem3(self, text, link):
+        res = ['']
+        if self.backcolor == True:
+            res.append(MultiContentEntryText(pos=(0, 0), size=(int(250 * skinFactor), int(30 * skinFactor)), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
+        res.append(MultiContentEntryText(pos=(0, 1), size=(int(250 * skinFactor), int(30 * skinFactor)), font=-2, flags=RT_HALIGN_CENTER, text=text))
+        self.secondmenulist.append(res)
+        self.secondmenulink.append(self.baseurl + link)
+
     def makeMainMenu(self):
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Heute im TV'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append(self.baseurl + '/tv-programm/tv-sender/?page=1')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-Tipps'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Neu im TV'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append('https://www.tvspielfilm.de/tv-tipps//')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-Genre'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append('https://www.tvspielfilm.de/tv-genre/')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Jetzt im TV'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append(self.baseurl + '/tv-programm/sendungen/jetzt.html')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Gleich im TV'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append(self.baseurl + '/tv-programm/sendungen/?page=1&order=time&time=shortly')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='20:15 im TV'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append(self.baseurl + '/tv-programm/sendungen/abends.html')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='22:00 im TV'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append(self.baseurl + '/tv-programm/sendungen/fernsehprogramm-nachts.html')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-Programm'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append(self.baseurl + '/tv-programm/tv-sender/')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-Trailer'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append('https://www.tvspielfilm.de/kino/trailer-und-clips/')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-Bilder'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append('https://www.tvspielfilm.de/bilder/')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-News'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append('https://www.tvspielfilm.de/news-und-specials/')
-        res = ['']
-        if self.backcolor == True:
-            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='TV-Blog'))
-        self.mainmenulist.append(res)
-        self.mainmenulink.append('https://blog.tvspielfilm.de/page/1/')
+        self.makeMenuItem('Heute im TV', '/tv-programm/tv-sender/?page=1')
+        self.makeMenuItem('TV-Tipps', '/tv-tipps/')
+        self.makeMenuItem('Neu im TV', '/tv-tipps//')
+        self.makeMenuItem('TV-Genre', '/tv-genre/')
+        self.makeMenuItem('Jetzt im TV', '/tv-programm/sendungen/jetzt.html')
+        self.makeMenuItem('Gleich im TV', '/tv-programm/sendungen/?page=1&order=time&time=shortly')
+        self.makeMenuItem('20:15 im TV', '/tv-programm/sendungen/abends.html')
+        self.makeMenuItem('22:00 im TV', '/tv-programm/sendungen/fernsehprogramm-nachts.html')
+        self.makeMenuItem('TV-Programm', '/tv-programm/tv-sender/')
+        self.makeMenuItem('TV-Trailer', '/kino/trailer-und-clips/')
+        self.makeMenuItem('TV-Bilder', '/bilder/')
+        self.makeMenuItem('TV-News', '/news-und-specials/')
+        self.makeMenuItem('TV-Blog', '/page/1/')
         self['mainmenu'].l.setList(self.mainmenulist)
-        self['mainmenu'].l.setItemHeight(30)
+        self['mainmenu'].l.setItemHeight(int(30 * skinFactor))
         self.selectMainMenu()
 
     def makeSecondMenu(self, string, link):
@@ -10535,314 +10499,109 @@ class tvMain(tvBaseScreen):
             for i in range(idx):
                 try:
                     if name[i] == 'Lieblingssender':
-                        res = ['']
-                        if self.backcolor == True:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                        self.secondmenulist.append(res)
-                        self.secondmenulink.append(self.baseurl)
-                        self.sender.append('Lieblingssender')
+                        self.makeSecondMenuItem(name[i])
                     elif name[i] == 'Hauptsender':
-                        res = ['']
-                        if self.backcolor == True:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                        self.secondmenulist.append(res)
-                        self.secondmenulink.append(self.baseurl)
-                        self.sender.append('Hauptsender')
+                        self.makeSecondMenuItem(name[i])
                     elif name[i] == 'Dritte Programme':
-                        res = ['']
-                        if self.backcolor == True:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                        self.secondmenulist.append(res)
-                        self.secondmenulink.append(self.baseurl)
-                        self.sender.append('Dritte Programme')
+                        self.makeSecondMenuItem(name[i])
                     elif name[i] == 'Digitale ARD & ZDF':
-                        res = ['']
-                        if self.backcolor == True:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                        self.secondmenulist.append(res)
-                        self.secondmenulink.append(self.baseurl)
-                        self.sender.append('Digitale ARD & ZDF')
+                        self.makeSecondMenuItem(name[i])
                     elif name[i] == 'Sky Cinema':
-                        res = ['']
-                        if self.backcolor == True:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                        self.secondmenulist.append(res)
-                        self.secondmenulink.append(self.baseurl)
-                        self.sender.append('Sky Cinema')
+                        self.makeSecondMenuItem(name[i])
                     elif name[i] == 'Sky 3D HD':
-                        res = ['']
-                        if self.backcolor == True:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                        self.secondmenulist.append(res)
-                        self.secondmenulink.append(self.baseurl)
-                        self.sender.append('Sky 3D HD')
+                        self.makeSecondMenuItem(name[i])
                     elif name[i] == 'Sky Sport':
-                        res = ['']
-                        if self.backcolor == True:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                        self.secondmenulist.append(res)
-                        self.secondmenulink.append(self.baseurl)
-                        self.sender.append('Sky Sport')
+                        self.makeSecondMenuItem(name[i])
                     elif name[i] == 'Sky Entertainment':
-                        res = ['']
-                        if self.backcolor == True:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                        self.secondmenulist.append(res)
-                        self.secondmenulink.append(self.baseurl)
-                        self.sender.append('Sky Entertainment')
+                        self.makeSecondMenuItem(name[i])
                     elif name[i] == 'Sky Select':
-                        res = ['']
-                        if self.backcolor == True:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                        self.secondmenulist.append(res)
-                        self.secondmenulink.append(self.baseurl)
-                        self.sender.append('Sky Select')
+                        self.makeSecondMenuItem(name[i])
                     elif name[i] == 'Pay-TV':
-                        res = ['']
-                        if self.backcolor == True:
-                            res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                        res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                        self.secondmenulist.append(res)
-                        self.secondmenulink.append(self.baseurl)
-                        self.sender.append('Pay-TV')
+                        self.makeSecondMenuItem(name[i])
                 except IndexError:
                     pass
 
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kindersender'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append(self.baseurl)
-            self.sender.append('Kindersender')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Sportsender'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append(self.baseurl)
-            self.sender.append('Sportsender')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Musiksender'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append(self.baseurl)
-            self.sender.append('Musiksender')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='News'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append(self.baseurl)
-            self.sender.append('News')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Ausland'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append(self.baseurl)
-            self.sender.append('Ausland')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Spartensender'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append(self.baseurl)
-            self.sender.append('Spartensender')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Auslandssender'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append(self.baseurl)
-            self.sender.append('Auslandssender')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Regionalsender'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append(self.baseurl)
-            self.sender.append('Regionalsender')
+            for mi in ['Kindersender','Sportsender','Musiksender','News','Ausland','Spartensender','Auslandssender','Regionalsender']:
+                self.makeSecondMenuItem(mi)
+
             self['secondmenu'].l.setList(self.secondmenulist)
-            self['secondmenu'].l.setItemHeight(30)
+            self['secondmenu'].l.setItemHeight(int(30 * skinFactor))
             self['secondmenu'].moveToIndex(0)
             self.selectSecondMenu()
             if self.tipps == True:
                 self.hideTipps()
         elif search('/tv-tipps/', link) is not None:
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Spielfilm'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
-            self.sparte.append('Spielfilm')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Serie'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
-            self.sparte.append('Serie')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Report'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
-            self.sparte.append('Report')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Unterhaltung'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
-            self.sparte.append('Unterhaltung')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kinder'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
-            self.sparte.append('Kinder')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Sport'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-tipps/')
-            self.sparte.append('Sport')
+            for mi in ['Spielfilm','Serie','Report','Unterhaltung','Kinder','Sport']:
+                self.makeSecondMenuItem2(mi, '/tv-tipps/')
             self['secondmenu'].l.setList(self.secondmenulist)
-            self['secondmenu'].l.setItemHeight(30)
+            self['secondmenu'].l.setItemHeight(int(30 * skinFactor))
             self['secondmenu'].moveToIndex(0)
             self.selectSecondMenu()
         elif search('/tv-genre/', link) is not None:
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Spielfilm'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
-            self.sparte.append('Spielfilm')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Serie'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
-            self.sparte.append('Serie')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Report'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
-            self.sparte.append('Report')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Unterhaltung'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
-            self.sparte.append('Unterhaltung')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kinder'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
-            self.sparte.append('Kinder')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Sport'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tv-genre/')
-            self.sparte.append('Sport')
+            for mi in ['Spielfilm','Serie','Report','Unterhaltung','Kinder','Sport']:
+                self.makeSecondMenuItem2(mi, '/tv-genre/')
             self['secondmenu'].l.setList(self.secondmenulist)
-            self['secondmenu'].l.setItemHeight(30)
+            self['secondmenu'].l.setItemHeight(int(30 * skinFactor))
             self['secondmenu'].moveToIndex(0)
             self.selectSecondMenu()
         elif search('/trailer-und-clips/', link) is not None:
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kino Neustarts'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/kino/trailer-und-clips/')
-            self.sparte.append('Kino Neustarts')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kino Vorschau'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/kino/kino-vorschau/')
-            self.sparte.append('Kino Vorschau')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Neueste Trailer'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/kino/trailer-und-clips/')
-            self.sparte.append('Neueste Trailer')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kino Charts'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/kino/charts/')
-            self.sparte.append('Kino Charts')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='DVD Charts'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/kino/dvd/charts/')
-            self.sparte.append('DVD Charts')
+            self.makeSecondMenuItem2('Kino Neustarts', '/kino/trailer-und-clips/')
+            self.makeSecondMenuItem2('Kino Vorschau', '/kino/trailer-und-clips/')
+            self.makeSecondMenuItem2('Neueste Trailer', '/kino/kino-vorschau/')
+            self.makeSecondMenuItem2('Kino Charts', '/kino/charts/')
+            self.makeSecondMenuItem2('DVD Charts', '/kino/dvd/charts/')
             self['secondmenu'].l.setList(self.secondmenulist)
-            self['secondmenu'].l.setItemHeight(30)
+            self['secondmenu'].l.setItemHeight(int(30 * skinFactor))
             self['secondmenu'].moveToIndex(0)
             self.selectSecondMenu()
         elif search('/news-und-specials/', link) is not None:
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Interviews & Stories'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/news-und-specials/interviewsundstories/')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Tatort'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/tatort/')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kids TV'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/kids-tv/')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Playboy Girl'))
-            self.secondmenulist.append(res)
-            self.secondmenulink.append('https://www.tvspielfilm.de/news-und-specials/playboy/')
+            self.makeSecondMenuItem3('Interviews & Stories', '/news-und-specials/interviewsundstories/')
+            self.makeSecondMenuItem3('Tatort', '/tatort/')
+            self.makeSecondMenuItem3('Kids TV', '/kids-tv/')
+            self.makeSecondMenuItem3('Playboy Girl', '/news-und-specials/playboy/')
             self['secondmenu'].l.setList(self.secondmenulist)
-            self['secondmenu'].l.setItemHeight(30)
+            self['secondmenu'].l.setItemHeight(int(30 * skinFactor))
             self['secondmenu'].moveToIndex(0)
             self.selectSecondMenu()
         return
+
+    def makeThirdMenuItem(self, output, start, end):
+        startpos = output.find('<optgroup label="%s' % start)
+        endpos = output.find('<optgroup label="%s' % end)
+        bereich = output[startpos:endpos]
+        bereich = transHTML(bereich)
+        lnk = re.findall('value="(.*?)">', bereich)
+        name = re.findall('<option label="(.*?)"', bereich)
+        idx = 0
+        for x in name:
+            idx += 1
+
+        for i in range(idx):
+            try:
+                res = ['']
+                if self.backcolor == True:
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(int(250 * skinFactor), int(30 * skinFactor)), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
+                res.append(MultiContentEntryText(pos=(0, 1), size=(int(250 * skinFactor), int(30 * skinFactor)), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
+                self.thirdmenulist.append(res)
+                self.thirdmenulink.append(lnk[i])
+            except IndexError:
+                pass
+
+        self['thirdmenu'].l.setList(self.thirdmenulist)
+        self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
+        self['thirdmenu'].moveToIndex(0)
+        self.selectThirdMenu()
+
+    def makeThirdMenuItem2(self, text, genre, link=None, cat='SP'):
+        res = ['']
+        if self.backcolor == True:
+            res.append(MultiContentEntryText(pos=(0, 0), size=(int(250 * skinFactor), int(30 * skinFactor)), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
+        res.append(MultiContentEntryText(pos=(0, 1), size=(int(250 * skinFactor), int(30 * skinFactor)), font=-2, flags=RT_HALIGN_CENTER, text=text))
+        self.thirdmenulist.append(res)
+        if link == None:
+            link = text
+        self.thirdmenulink.append(self.baseurl + '/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=' + cat + '&genre' + cat + '=' + link + '&time=day&date=&channel=')
+        self.genre.append(genre + ':' + text)
 
     def makeThirdMenu(self, string, sender):
         if string != None:
@@ -10851,1063 +10610,149 @@ class tvMain(tvBaseScreen):
         self.thirdmenulink = []
         self.genre = []
         if sender == 'Lieblingssender':
-            startpos = output.find('<optgroup label="Meine Lieblingssender">')
-            endpos = output.find('<optgroup label="Hauptsender">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Meine Lieblingssender">', 'Hauptsender">')
         elif sender == 'Hauptsender':
-            startpos = output.find('<optgroup label="Hauptsender">')
-            endpos = output.find('<optgroup label="Dritte Programme">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Hauptsender">', 'Dritte Programme">')
         elif sender == 'Dritte Programme':
-            startpos = output.find('<optgroup label="Dritte Programme">')
-            endpos = output.find('<optgroup label="Sportsender">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Dritte Programme">', 'Sportsender">')
         elif sender == 'Kindersender':
-            startpos = output.find('<optgroup label="Kindersender">')
-            endpos = output.find('<optgroup label="Ausland ')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Kindersender">', 'Ausland ')
         elif sender == 'Digitale ARD & ZDF':
-            startpos = output.find('<optgroup label="Spartensender ARD')
-            endpos = output.find('<optgroup label="News')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Spartensender ARD', 'News')
         elif sender == 'Ausland':
-            startpos = output.find('<optgroup label="Ausland (deutschspr.)">')
-            endpos = output.find('<optgroup label="Regionalsender">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Ausland (deutschspr.)">', 'Regionalsender">')
         elif sender == 'Regionalsender':
-            startpos = output.find('<optgroup label="Regionalsender">')
-            endpos = output.find('<optgroup label="Musiksender">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Regionalsender">', 'Musiksender">')
         elif sender == 'News':
-            startpos = output.find('<optgroup label="News')
-            endpos = output.find('<optgroup label="Kindersender">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'News', 'Kindersender">')
         elif sender == 'Sportsender':
-            startpos = output.find('<optgroup label="Sportsender">')
-            endpos = output.find('<optgroup label="Spartensender ARD')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Sportsender">', 'Spartensender ARD')
         elif sender == 'Musiksender':
-            startpos = output.find('<optgroup label="Musiksender">')
-            endpos = output.find('<optgroup label="Spartensender">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Musiksender">', 'Spartensender">')
         elif sender == 'Spartensender':
-            startpos = output.find('<optgroup label="Spartensender">')
-            endpos = output.find('<optgroup label="Shopping">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Spartensender">', 'Shopping">')
         elif sender == 'Sky Cinema':
-            startpos = output.find('<optgroup label="Sky Cinema">')
-            endpos = output.find('<optgroup label="Sky Sport">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Sky Cinema">', 'Sky Sport">')
         elif sender == 'Sky Sport':
-            startpos = output.find('<optgroup label="Sky Sport">')
-            endpos = output.find('<optgroup label="Sky Entertainment">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Sky Sport">', 'Sky Sport">')
         elif sender == 'Sky Entertainment':
-            startpos = output.find('<optgroup label="Sky Entertainment">')
-            endpos = output.find('<optgroup label="Blue Movie">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Sky Entertainment">', 'Blue Movie">')
         elif sender == 'Sky Select':
-            startpos = output.find('<optgroup label="Sky Select">')
-            endpos = output.find('<optgroup label="Pay-TV">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Sky Select">', 'Pay-TV">')
         elif sender == 'Pay-TV':
-            startpos = output.find('<optgroup label="Pay-TV">')
-            endpos = output.find('<optgroup label="Auslandssender">')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Pay-TV">', 'Auslandssender">')
         elif sender == 'Auslandssender':
-            startpos = output.find('<optgroup label="Auslandssender">')
-            endpos = output.find('<optgroup label="alle Sender')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            lnk = re.findall('value="(.*?)">', bereich)
-            name = re.findall('<option label="(.*?)"', bereich)
-            idx = 0
-            for x in name:
-                idx += 1
-
-            for i in range(idx):
-                try:
-                    res = ['']
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-                    res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text=name[i]))
-                    self.thirdmenulist.append(res)
-                    self.thirdmenulink.append(lnk[i])
-                except IndexError:
-                    pass
-
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+            self.makeThirdMenuItem(output, 'Auslandssender">', 'alle Sender')
         elif sender == 'Spielfilm':
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Alle Genres')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Abenteuer'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Abenteuer&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Abenteuer')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Action'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Action&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Action')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Dokumentation'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Dokumentation&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Dokumentation')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Drama'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Drama&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Drama')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Episodenfilm'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Episodenfilm&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Episodenfilm')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Erotik'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Erotik&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Erotik')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Familie/Kinder'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Familie%2FKinder&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Familie/Kinder')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Fantasy'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Fantasy&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Fantasy')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Filmkunst'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Filmkunst&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Filmkunst')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Heimat'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Heimat&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Heimat')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Historie'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Historie&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Historie')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Horror'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Horror&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Horror')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Katastrophenfilm'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Katastrophenfilm&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Katastrophenfilm')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Klassiker'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Klassiker&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Klassiker')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kom\xc3\xb6die'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Kom%C3%B6die&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Kom\xc3\xb6die')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kriegsfilm'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Kriegsfilm&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Kriegsfilm')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Krimi'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Krimi&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Krimi')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Literatur/Theater'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Literatur%2FTheater&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Literatur/Theater')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Love Story'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Love+Story&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Love Story')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='M\xc3\xa4rchen'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=M%C3%A4rchen&time=day&date=&channel=')
-            self.genre.append('Spielfilm: M\xc3\xa4rchen')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Musikfilm'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Musikfilm&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Musikfilm')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Portr\xc3\xa4t'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Portr%C3%A4t&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Portr\xc3\xa4t')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Road Movie'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Road+Movie&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Road Movie')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='SciFi'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=SciFi&time=day&date=&channel=')
-            self.genre.append('Spielfilm: SciFi')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Thriller'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Thriller&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Thriller')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Trickfilm'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Trickfilm&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Trickfilm')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Western'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SP&genreSP=Western&time=day&date=&channel=')
-            self.genre.append('Spielfilm: Western')
+            self.makeThirdMenuItem2('Alle Genres', sender, '')
+            self.makeThirdMenuItem2('Abenteuer', sender)
+            self.makeThirdMenuItem2('Action', sender)
+            self.makeThirdMenuItem2('Dokumentation', sender)
+            self.makeThirdMenuItem2('Drama', sender)
+            self.makeThirdMenuItem2('Episodenfilm', sender)
+            self.makeThirdMenuItem2('Erotik', sender)
+            self.makeThirdMenuItem2('Familie/Kinder', sender, 'Familie%2FKinder')
+            self.makeThirdMenuItem2('Fantasy', sender)
+            self.makeThirdMenuItem2('Filmkunst', sender)
+            self.makeThirdMenuItem2('Heimat', sender)
+            self.makeThirdMenuItem2('Historie', sender)
+            self.makeThirdMenuItem2('Horror', sender)
+            self.makeThirdMenuItem2('Klassiker', sender)
+            self.makeThirdMenuItem2('Komödie', sender, 'Kom%C3%B6die')
+            self.makeThirdMenuItem2('Kriegsfilm', sender)
+            self.makeThirdMenuItem2('Krimi', sender)
+            self.makeThirdMenuItem2('Literatur/Theater', sender, 'Literatur%2FTheater')
+            self.makeThirdMenuItem2('Love Story', sender, 'Love+Story')
+            self.makeThirdMenuItem2('Märchen', sender, 'M%C3%A4rchen')
+            self.makeThirdMenuItem2('Musikfilm', sender)
+            self.makeThirdMenuItem2('Porträt', sender, 'Portr%C3%A4t')
+            self.makeThirdMenuItem2('Road Movie', sender, 'Road+Movie')
+            self.makeThirdMenuItem2('SciFi', sender)
+            self.makeThirdMenuItem2('Thriller', sender)
+            self.makeThirdMenuItem2('Trickfilm', sender)
+            self.makeThirdMenuItem2('Western', sender)
             self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
+            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
             self['thirdmenu'].moveToIndex(0)
             self.selectThirdMenu()
         elif sender == 'Serie':
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=&time=day&date=&channel=')
-            self.genre.append('Serie: Alle Genres')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Action'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Action&time=day&date=&channel=')
-            self.genre.append('Serie: Action')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Arzt'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Arzt&time=day&date=&channel=')
-            self.genre.append('Serie: Arzt')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Comedy'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Comedy&time=day&date=&channel=')
-            self.genre.append('Serie: Comedy')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Daily Soap'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Daily+Soap&time=day&date=&channel=')
-            self.genre.append('Serie: Daily Soap')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Dokuserie'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Dokuserie&time=day&date=&channel=')
-            self.genre.append('Serie: Dokuserie')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Familienserie'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Familienserie&time=day&date=&channel=')
-            self.genre.append('Serie: Familienserie')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Horror'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Horror&time=day&date=&channel=')
-            self.genre.append('Serie: Horror')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kinder-/Jugend'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Kinder-%2FJugend&time=day&date=&channel=')
-            self.genre.append('Serie: Kinder-/Jugend')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Krimi'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Krimi&time=day&date=&channel=')
-            self.genre.append('Serie: Krimi')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Science Fiction'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Science+Fiction&time=day&date=&channel=')
-            self.genre.append('Serie: Science Fiction')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Soap'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Soap&time=day&date=&channel=')
-            self.genre.append('Serie: Soap')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Western'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SE&genreSE=Western&time=day&date=&channel=')
-            self.genre.append('Serie: Western')
+            self.makeThirdMenuItem2('Alle Genres', sender, '', 'SE')
+            self.makeThirdMenuItem2('Action', sender, None, 'SE')
+            self.makeThirdMenuItem2('Arzt', sender, None, 'SE')
+            self.makeThirdMenuItem2('Comedy', sender, None, 'SE')
+            self.makeThirdMenuItem2('Daily Soap', sender, 'Daily+Soap', 'SE')
+            self.makeThirdMenuItem2('Dokuserie', sender, None, 'SE')
+            self.makeThirdMenuItem2('Familienserie', sender, None, 'SE')
+            self.makeThirdMenuItem2('Horror', sender, None, 'SE')
+            self.makeThirdMenuItem2('Kinder-/Jugend', sender, 'Kinder-%2FJugend', 'SE')
+            self.makeThirdMenuItem2('Krimi', sender, None, 'SE')
+            self.makeThirdMenuItem2('Science Fiction', sender, 'Science+Fiction', 'SE')
+            self.makeThirdMenuItem2('Soap', sender, None, 'SE')
+            self.makeThirdMenuItem2('Western', sender, None, 'SE')
             self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
+            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
             self['thirdmenu'].moveToIndex(0)
             self.selectThirdMenu()
         elif sender == 'Report':
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=&time=day&date=&channel=')
-            self.genre.append('Report: Alle Genres')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Dokumentation'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Dokumentation&time=day&date=&channel=')
-            self.genre.append('Report: Dokumentation')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Gesellschaft'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Gesellschaft&time=day&date=&channel=')
-            self.genre.append('Report: Gesellschaft')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Justiz'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Justiz&time=day&date=&channel=')
-            self.genre.append('Report: Justiz')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Magazin'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Magazin&time=day&date=&channel=')
-            self.genre.append('Report: Magazin')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Natur'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Natur&time=day&date=&channel=')
-            self.genre.append('Report: Natur')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Politik'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Politik&time=day&date=&channel=')
-            self.genre.append('Report: Politik')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Ratgeber'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Ratgeber&time=day&date=&channel=')
-            self.genre.append('Report: Ratgeber')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Technik'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Technik&time=day&date=&channel=')
-            self.genre.append('Report: Technik')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Wissenschaft'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=RE&genreRE=Wissenschaft&time=day&date=&channel=')
-            self.genre.append('Report: Wissenschaft')
+            self.makeThirdMenuItem2('Alle Genres', sender, '', 'RE')
+            self.makeThirdMenuItem2('Gesellschaft', sender, None, 'RE')
+            self.makeThirdMenuItem2('Justiz', sender, None, 'RE')
+            self.makeThirdMenuItem2('Magazin', sender, None, 'RE')
+            self.makeThirdMenuItem2('Natur', sender, None, 'RE')
+            self.makeThirdMenuItem2('Politik', sender, None, 'RE')
+            self.makeThirdMenuItem2('Ratgeber', sender, None, 'RE')
+            self.makeThirdMenuItem2('Technik', sender, None, 'RE')
+            self.makeThirdMenuItem2('Wissenschaft', sender, None, 'RE')
             self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
+            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
             self['thirdmenu'].moveToIndex(0)
             self.selectThirdMenu()
         elif sender == 'Unterhaltung':
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=&time=day&date=&channel=')
-            self.genre.append('Unterhaltung: Alle Genres')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Comedy'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Comedy&time=day&date=&channel=')
-            self.genre.append('Unterhaltung: Comedy')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Familie'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Familie&time=day&date=&channel=')
-            self.genre.append('Unterhaltung: Familie')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kultur'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Kultur&time=day&date=&channel=')
-            self.genre.append('Unterhaltung: Kultur')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Late Night'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Late+Night&time=day&date=&channel=')
-            self.genre.append('Unterhaltung: Late Night')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Musik'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Musik&time=day&date=&channel=')
-            self.genre.append('Unterhaltung: Musik')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Quiz'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Quiz&time=day&date=&channel=')
-            self.genre.append('Unterhaltung: Quiz')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Show'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Show&time=day&date=&channel=')
-            self.genre.append('Unterhaltung: Show')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Talk'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=U&genreU=Talk&time=day&date=&channel=')
-            self.genre.append('Unterhaltung: Talk')
+            self.makeThirdMenuItem2('Alle Genres', sender, '', 'U')
+            self.makeThirdMenuItem2('Comedy', sender, None, 'U')
+            self.makeThirdMenuItem2('Familie', sender, None, 'U')
+            self.makeThirdMenuItem2('Kultur', sender, None, 'U')
+            self.makeThirdMenuItem2('Late Night', sender, 'Late+Night', 'U')
+            self.makeThirdMenuItem2('Musik', sender, None, 'U')
+            self.makeThirdMenuItem2('Quiz', sender, None, 'U')
+            self.makeThirdMenuItem2('Show', sender, None, 'U')
+            self.makeThirdMenuItem2('Talk', sender, None, 'U')
             self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
+            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
             self['thirdmenu'].moveToIndex(0)
             self.selectThirdMenu()
         elif sender == 'Kinder':
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=&time=day&date=&channel=')
-            self.genre.append('Kinder: Alle Genres')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Bildung'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Bildung&time=day&date=&channel=')
-            self.genre.append('Kinder: Bildung')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Magazin'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Magazin&time=day&date=&channel=')
-            self.genre.append('Kinder: Magazin')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Reportage'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Reportage&time=day&date=&channel=')
-            self.genre.append('Kinder: Reportage')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Serie'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Serie&time=day&date=&channel=')
-            self.genre.append('Kinder: Serie')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Show'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=KIN&genreKIN=Show&time=day&date=&channel=')
-            self.genre.append('Kinder: Show')
+            self.makeThirdMenuItem2('Alle Genres', sender, '', 'KIN')
+            self.makeThirdMenuItem2('Bildung', sender, None, 'KIN')
+            self.makeThirdMenuItem2('Magazin', sender, None, 'KIN')
+            self.makeThirdMenuItem2('Reportage', sender, None, 'KIN')
+            self.makeThirdMenuItem2('Serie', sender, None, 'KIN')
+            self.makeThirdMenuItem2('Show', sender, None, 'KIN')
             self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
+            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
             self['thirdmenu'].moveToIndex(0)
             self.selectThirdMenu()
         elif sender == 'Sport':
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Alle Genres'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=&time=day&date=&channel=')
-            self.genre.append('Sport: Alle Genres')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Basketball'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Basketball&time=day&date=&channel=')
-            self.genre.append('Sport: Basketball')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Billard'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Billard&time=day&date=&channel=')
-            self.genre.append('Sport: Billard')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Boxen'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Boxen&time=day&date=&channel=')
-            self.genre.append('Sport: Boxen')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Formel 1'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Formel+1&time=day&date=&channel=')
-            self.genre.append('Sport: Formel 1')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Funsport'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Funsport&time=day&date=&channel=')
-            self.genre.append('Sport: Funsport')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Fu\xc3\x9fball'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Fu%C3%9Fball&time=day&date=&channel=')
-            self.genre.append('Sport: Fu\xc3\x9fball')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Golf'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Golf&time=day&date=&channel=')
-            self.genre.append('Sport: Golf')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Handball'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Handball&time=day&date=&channel=')
-            self.genre.append('Sport: Handball')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Kampfsport'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Kampfsport&time=day&date=&channel=')
-            self.genre.append('Sport: Kampfsport')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Leichtathletik'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Leichtathletik&time=day&date=&channel=')
-            self.genre.append('Sport: Leichtathletik')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Motorsport'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Motorsport&time=day&date=&channel=')
-            self.genre.append('Sport: Motorsport')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Poker'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Poker&time=day&date=&channel=')
-            self.genre.append('Sport: Poker')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Radsport'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Radsport&time=day&date=&channel=')
-            self.genre.append('Sport: Radsport')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Tennis'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Tennis&time=day&date=&channel=')
-            self.genre.append('Sport: Tennis')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='US Sport'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=US+Sport&time=day&date=&channel=')
-            self.genre.append('Sport: US Sport')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Wassersport'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Wassersport&time=day&date=&channel=')
-            self.genre.append('Sport: Wassersport')
-            res = ['']
-            if self.backcolor == True:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(250, 30), font=-2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-            res.append(MultiContentEntryText(pos=(0, 1), size=(250, 30), font=-2, flags=RT_HALIGN_CENTER, text='Wintersport'))
-            self.thirdmenulist.append(res)
-            self.thirdmenulink.append('https://www.tvspielfilm.de/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=SPO&genreSPO=Wintersport&time=day&date=&channel=')
-            self.genre.append('Sport: Wintersport')
+            self.makeThirdMenuItem2('Alle Genres', sender, '', 'SPO')
+            self.makeThirdMenuItem2('Basketball', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Billard', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Boxen', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Formel 1', sender, 'Formel+1', 'SPO')
+            self.makeThirdMenuItem2('Funsport', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Fußball', sender, 'Fu%C3%9Fball', 'SPO')
+            self.makeThirdMenuItem2('Golf', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Handball', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Kampfsport', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Leichtathletik', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Motorsport', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Poker', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Radsport', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Tennis', sender, None, 'SPO')
+            self.makeThirdMenuItem2('US Sport', sender, 'US+Sport', 'SPO')
+            self.makeThirdMenuItem2('Wassersport', sender, None, 'SPO')
+            self.makeThirdMenuItem2('Wintersport', sender, None, 'SPO')
             self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(30)
+            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
             self['thirdmenu'].moveToIndex(0)
             self.selectThirdMenu()
         return
@@ -13053,44 +11898,44 @@ class tvEvent(tvAllScreenFull):
 
 
 class TVHeuteView(tvBaseScreen):
-    skinHD = """
+    skin = """
         <screen position="{screenpos}" size="{screensize}" title="TV Programm - TV Spielfilm">""" + SKHEADTOP + """
-        <widget name="sender1" position="7,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="sender2" position="212,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="sender3" position="417,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="sender4" position="622,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="sender5" position="827,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="sender6" position="1032,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="logo1" position="163,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="logo2" position="368,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="logo3" position="573,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="logo4" position="778,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="logo5" position="983,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="logo6" position="1188,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="pic1" position="7,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pic2" position="212,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pic3" position="417,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pic4" position="622,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pic5" position="827,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pic6" position="1032,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pictime1" position="7,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictime2" position="212,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictime3" position="417,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictime4" position="622,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictime5" position="827,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictime6" position="1032,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictext1" position="72,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="pictext2" position="277,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="pictext3" position="482,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="pictext4" position="687,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="pictext5" position="892,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="pictext6" position="1097,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="menu1" position="7,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="menu2" position="212,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="menu3" position="417,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="menu4" position="622,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="menu5" position="827,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="menu6" position="1032,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="sender1" position="_7,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="sender2" position="_212,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="sender3" position="_417,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="sender4" position="_622,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="sender5" position="_827,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="sender6" position="_1032,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+        <widget name="logo1" position="_163,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="logo2" position="_368,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="logo3" position="_573,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="logo4" position="_778,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="logo5" position="_983,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="logo6" position="_1188,60" size="44,27" alphatest="blend" zPosition="1" /> 
+        <widget name="pic1" position="_7,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pic2" position="_212,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pic3" position="_417,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pic4" position="_622,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pic5" position="_827,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pic6" position="_1032,87" size="200,133" alphatest="blend" zPosition="1" /> 
+        <widget name="pictime1" position="_7,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictime2" position="_212,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictime3" position="_417,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictime4" position="_622,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictime5" position="_827,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictime6" position="_1032,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+        <widget name="pictext1" position="_72,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="pictext2" position="_277,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="pictext3" position="_482,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="pictext4" position="_687,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="pictext5" position="_892,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="pictext6" position="_1097,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+        <widget name="menu1" position="_7,273" size="_200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="menu2" position="_212,273" size="_200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="menu3" position="_417,273" size="_200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="menu4" position="_622,273" size="_200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="menu5" position="_827,273" size="_200,367" scrollbarMode="showNever" zPosition="1" /> 
+        <widget name="menu6" position="_1032,273" size="_200,367" scrollbarMode="showNever" zPosition="1" /> 
         <widget name="searchtimer" position="420,5" size="400,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search_timer.png" alphatest="blend" zPosition="3" />
         <widget name="searchlogo" position="5,75" size="200,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/search.png" alphatest="blend" zPosition="1" />
         <widget name="searchtext" position="245,75" size="955,65" font="Regular;26" valign="center" zPosition="1" />
@@ -13126,13 +11971,13 @@ class TVHeuteView(tvBaseScreen):
 
     def __init__(self, session, link, opener):
         if config.plugins.tvspielfilm.font_size.value == 'verylarge':
-            psize = '135,50'
+            psize = '50'
         elif config.plugins.tvspielfilm.font_size.value == 'large':
-            psize = '135,48'
+            psize = '48'
         else:
-            psize = '135,42'
-        dic = {"psize": psize}
-        tvBaseScreen.__init__(self, session, TVHeuteView.skin, dic)
+            psize = '42'
+        dic = {"psize": "%s,%s" % (int(135 * skinFactor) , psize)}
+        tvBaseScreen.__init__(self, session, TVHeuteView.skin, dic, True)
         if config.plugins.tvspielfilm.meintvs.value == 'yes':
             self.MeinTVS = True
             self.error = False

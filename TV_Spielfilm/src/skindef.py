@@ -2,7 +2,7 @@
 SKHEADTOP = '<eLabel position="0,0" size="{headw},60" backgroundColor="#FFFFFF" /><ePixmap position="0,0" size="{headw},60" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />'
 
 SKTIME = """
-        <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
+        <widget render="Label" source="global.CurrentTime" position="_1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
         <convert type="ClockToText">Format:%H:%M:%S</convert>
         </widget>"""
 

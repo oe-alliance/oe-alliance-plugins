@@ -88,6 +88,7 @@ class ItemList(MenuList):
 #        else:
         self.l.setFont(-2, gFont('Regular', 24))
         if config.plugins.tvspielfilm.font_size.value == 'verylarge':
+            self.l.setFont(-2, gFont('Regular', 28))
             self.l.setFont(-1, gFont('Regular', 28))
             self.l.setFont(0, gFont('Regular', 24))
             self.l.setFont(1, gFont('Regular', 22))
