@@ -36,27 +36,6 @@ class serviceDB():
     def close(self):
         pass
 
-class channelDB():
-
-    def __init__(self, servicefile):
-        self.servicefile = servicefile
-        self.d = dict()
-        try:
-            for x in open(self.servicefile):
-                val, key = x.split()
-                self.d[key] = val
-
-        except:
-            pass
-
-    def lookup(self, key):
-        if key in self.d:
-            return self.d[key]
-        return 'nope'
-
-    def close(self):
-        pass
-
 
 class BlinkingLabel(Label, BlinkingWidget):
 

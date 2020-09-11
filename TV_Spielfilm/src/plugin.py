@@ -40,7 +40,7 @@ from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirec
 from six.moves.urllib.error import URLError, HTTPError
 import datetime, os, re, socket, sys, time, six
 from os import path
-from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, channelDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin
+from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin
 from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable
 from .skindef import SKHEADTOP, SKHEADBOTTOM, SKMENU, SKHEADPIC, SKHEADPLAY, SKTIME
 
@@ -177,6 +177,7 @@ class tvAllScreen(Screen):
         if config.plugins.tvspielfilm.font_size.value == 'normal':
             self.fontlarge = False
         self.baseurl = 'https://www.tvspielfilm.de'
+        self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
 
     def hideScreen(self):
         if self.hideflag == True:
@@ -979,7 +980,6 @@ class TVTippsView(tvBaseScreen):
          'yellow': self.yellow,
          'red': self.makeTimer,
          'blue': self.hideScreen}, -1)
-        self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         self.service_db = serviceDB(self.servicefile)
         self.timer = open('/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db').read()
         self.date = datetime.date.today()
@@ -1065,64 +1065,60 @@ class TVTippsView(tvBaseScreen):
         self.picurllist = []
         a = findall('<td>(.*?)</td>', bereich)
         y = 0
-        offset = 9
         pictopoffset = 0
         picleftoffset = 0
         if self.picon == True:
             pictopoffset = 11
             picleftoffset = 41
+        sref = None
         for x in a:
-            if y == 0:
+            if search('LINK', x) is not None:
+                icount = 0
+                if sref != None and self.new == True:
+                    self.sref.append(sref)
+                    self.picurllist.append(picfilter)
+                    self.tvlink.append(linkfilter)
+                    self.tvtitel.append(titelfilter)
+                    self.tventries.append(res)
                 res = [x]
                 self.new = False
                 if self.backcolor == True:
                     res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, 90), font=-1, backcolor_sel=self.back_color, text=''))
                 x = sub('LINK', '', x)
                 linkfilter = x
-            if y == 2:
+            if search('PIC', x) is not None:
                 x = sub('PIC', '', x)
                 picfilter = x
-            if y == 3:
-                x = sub('TIME', '', x)		###########Zeit
+            if search('TIME', x) is not None:
+                x = sub('TIME', '', x)
                 start = x
                 res.append(MultiContentEntryText(pos=(74 + picleftoffset, 18), size=(75, 25), font=-1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-            if y == 4:
-                if search('INFO', x) is not None:
-                    x = sub('INFO', '', x)
-                    if search('neu|new', x) is not None:
-                        self.new = True
-                    png = '%s%sHD.png' % (ICONPATH, x)
-                    if fileExists(png):
+            if search('INFO', x) is not None:
+                icount = icount + 1
+                x = sub('INFO', '', x)
+                if search('neu|new', x) is not None:
+                    self.new = True
+                png = '%s%sHD.png' % (ICONPATH, x)
+                if fileExists(png):
+                    if icount == 1:
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 90, 20), size=(60, 20), png=loadPNG(png)))
-                else:
-                    y = 6
-            if y == 5:
-                if search('INFO', x) is not None:
-                    x = sub('INFO', '', x)
-                    if search('neu|new', x) is not None:
-                        self.new = True
-                    png = '%s%sHD.png' % (ICONPATH, x)
-                    if fileExists(png):
+                    else:
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 90, 50), size=(60, 20), png=loadPNG(png)))
-                else:
-                    y = 6
-            if y == 6:
+            if search('NAME', x) is not None:
                 x = sub('NAME', '', x)
                 titelfilter = x
                 res.append(MultiContentEntryText(pos=(162 + picleftoffset, 17), size=(self.menuwidth - 330 - picleftoffset, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-            if y == 7:
+            if search('GENRE', x) is not None:
                 x = sub('GENRE', '', x)
                 res.append(MultiContentEntryText(pos=(162 + picleftoffset, 48), size=(self.menuwidth - 330 - picleftoffset, 30), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-            if y == 8:
                 if self.sparte == 'Spielfilm':
                     png = ICONPATH + 'rating small1HD.png'
                     if fileExists(png):
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 160, 25), size=(40, 40), png=loadPNG(png)))
+            if search('LOGO', x) is not None:
                 x = sub('LOGO', '', x)
                 service = x
-                print(service)
                 sref = self.service_db.lookup(service)
-                print(sref)
                 if self.picon == True:
                     picon = self.findPicon(sref)
                     if picon is not None:
@@ -1134,8 +1130,8 @@ class TVTippsView(tvBaseScreen):
                     if fileExists(png):
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 12), size=(59, 36), png=loadPNG(png)))
                 if sref == 'nope':
-                    pass
-                elif self.newfilter == False or self.newfilter == True and self.new == True:
+                    sref = None
+                elif self.new == True:
                     hour = sub(':..', '', start)
                     if int(hour) < 5:
                         one_day = datetime.timedelta(days=1)
@@ -1147,14 +1143,13 @@ class TVTippsView(tvBaseScreen):
                         png = ICONPATH + 'icon-recHD.png'
                         if fileExists(png):
                             res.append(MultiContentEntryPixmapAlphaTest(pos=(89 + picleftoffset, 52), size=(60, 20), png=loadPNG(png)))
-                    self.sref.append(sref)
-                    self.picurllist.append(picfilter)
-                    self.tvlink.append(linkfilter)
-                    self.tvtitel.append(titelfilter)
-                    self.tventries.append(res)
-            y += 1
-            if y == offset:
-                y = 0
+
+        if sref != None and self.new == True:
+            self.sref.append(sref)
+            self.picurllist.append(picfilter)
+            self.tvlink.append(linkfilter)
+            self.tvtitel.append(titelfilter)
+            self.tventries.append(res)
 
         self['menu'].l.setItemHeight(90)
         self['menu'].l.setList(self.tventries)
@@ -2310,7 +2305,6 @@ class TVGenreView(tvBaseScreen):
          'yellow': self.yellow,
          'red': self.makeTimer,
          'blue': self.hideScreen}, -1)
-        self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         self.service_db = serviceDB(self.servicefile)
         f = open(self.servicefile, 'r')
         lines = f.readlines()
@@ -3405,7 +3399,6 @@ class TVJetztView(tvBaseScreen):
          'yellow': self.yellow,
          'red': self.makeTimer,
          'blue': self.hideScreen}, -1)
-        self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         self.service_db = serviceDB(self.servicefile)
         f = open(self.servicefile, 'r')
         lines = f.readlines()
@@ -4458,7 +4451,6 @@ class TVProgrammView(tvBaseScreen):
     def __init__(self, session, link, eventview, tagestipp):
         self.eventview = eventview
         self.tagestipp = tagestipp
-        self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         self.service_db = serviceDB(self.servicefile)
         skin = """
         <screen name="TVProgrammView" position="{screenpos}" size="{screensize}" title="TV Programm - TV Spielfilm">
@@ -4613,7 +4605,7 @@ class TVProgrammView(tvBaseScreen):
             from Components.ServiceEventTracker import ServiceEventTracker
             from enigma import iPlayableService
             self.__event_tracker = ServiceEventTracker(screen=self, eventmap={iPlayableService.evUpdatedEventInfo: self.zapRefresh})
-            self.channel_db = channelDB(self.servicefile)
+            self.channel_db = serviceDB(self.servicefile)
         elif self.tagestipp == False:
             nextday = sub('/sendungen/.*?html', '/sendungen/?page=1&order=time&date=', self.link)
             nextday = nextday + str(self.date)
@@ -8899,7 +8891,6 @@ class tvMain(tvBaseScreen):
          'green': self.green,
          'blue': self.hideScreen,
          'contextMenu': self.config}, -1)
-        self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             self.backcolor = False
         else:
@@ -10546,8 +10537,7 @@ class tvJetzt(tvAllScreenFull):
     def __init__(self, session, link):
         self.link = link
         tvAllScreenFull.__init__(self, session)
-        self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
-        self.channel_db = channelDB(self.servicefile)
+        self.channel_db = serviceDB(self.servicefile)
         self.JetztTimer = eTimer()
         self.JetztTimer.callback.append(self.makeTimerDB)
         self.JetztTimer.callback.append(self.makeCheck)
@@ -10572,8 +10562,7 @@ class tvJetzt(tvAllScreenFull):
 class tvEvent(tvAllScreenFull):
     def __init__(self, session):
         tvAllScreenFull.__init__(self, session)
-        self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
-        self.channel_db = channelDB(self.servicefile)
+        self.channel_db = serviceDB(self.servicefile)
         self.EventTimer = eTimer()
         self.EventTimer.callback.append(self.makeTimerDB)
         self.EventTimer.callback.append(self.makeChannelLink)
@@ -10848,7 +10837,6 @@ class TVHeuteView(tvBaseScreen):
          'yellow': self.yellow,
          'red': self.makeTimer,
          'blue': self.hideScreen}, -1)
-        self.servicefile = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/service.references'
         self.service_db = serviceDB(self.servicefile)
         self.timer = open('/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/db/timer.db').read()
         self.date = datetime.date.today()
