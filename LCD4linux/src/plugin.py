@@ -374,7 +374,7 @@ ProgressType = [("1", _("only Progress Bar")),
 ]
 now = localtime()
 begin = mktime((
-	now.tm_year, now.tm_mon, now.tm_mday, 06, 00, \
+	now.tm_year, now.tm_mon, now.tm_mday, 0o6, 00, \
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 
