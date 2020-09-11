@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import print_function, absolute_import
 from base64 import b64encode, b64decode
 from Components.ActionMap import ActionMap, NumberActionMap
@@ -47,6 +49,25 @@ try:
 except Exception:
     from http.cookiejar import MozillaCookieJar
 
+NOTIMER = '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.'
+OKZV = 'OK = Vollbild\n< > = Zur\xfcck / Vorw\xc3\xa4rts'
+NOEPG = 'Keine EPG Informationen verf\xfcgbar'
+if six.PY3:
+    NOTIMER = '\nTimer nicht möglich:\nKeine Service Reference vorhanden, der ausgewählte Sender wurde nicht importiert.'
+    OKZV = 'OK = Vollbild\n< > = Zurück / Vorwärts'
+    NOEPG = 'Keine EPG Informationen verfügbar'
+    
+def getEPGText():
+    try:
+        if six.PY2:
+            NOEPGTIME = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
+        else:
+            NOEPGTIME = 'Noch keine EPG Informationen verfügbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
+        return NOEPGTIME
+    except (KeyError, NameError):
+        return NOEPG
+
+
 config.plugins.tvspielfilm = ConfigSubsection()
 #deskWidth = getDesktop(0).size().width()
 #if deskWidth >= 1280:
@@ -55,7 +76,7 @@ config.plugins.tvspielfilm = ConfigSubsection()
 #else:
 #    config.plugins.tvspielfilm.plugin_size = ConfigSelection(default='normal', choices=[('full', '1280x720'), ('normal', '1024x576')])
 #    config.plugins.tvspielfilm.position = ConfigInteger(40, (0, 160))
-config.plugins.tvspielfilm.font_size = ConfigSelection(default='large', choices=[('verylarge', 'Sehr gro\xc3\x9f'), ('large', 'Gro\xc3\x9f'), ('normal', 'Normal')])
+config.plugins.tvspielfilm.font_size = ConfigSelection(default='large', choices=[('verylarge', 'Sehr gross'), ('large', 'Gross'), ('normal', 'Normal')])
 #config.plugins.tvspielfilm.font = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 #if config.plugins.tvspielfilm.font.value == 'yes':
 #    from enigma import addFont
@@ -92,7 +113,7 @@ config.plugins.tvspielfilm.color = ConfigSelection(default='0x00000000', choices
  ('0x004176B6', 'Tufts'),
  ('0x006C0AAB', 'Violet'),
  ('0x00BF9217', 'Yellow')])
-config.plugins.tvspielfilm.tipps = ConfigSelection(default='yes', choices=[('no', 'Gr\xfcne Taste im Startmen\xfc'), ('yes', 'Beim Start des Plugins'), ('false', 'Deaktiviert')])
+config.plugins.tvspielfilm.tipps = ConfigSelection(default='yes', choices=[('no', 'Gruene Taste im Startmenue'), ('yes', 'Beim Start des Plugins'), ('false', 'Deaktiviert')])
 config.plugins.tvspielfilm.primetime = ConfigSelection(default='primetime', choices=[('primetime', 'Primetime'), ('now', 'Aktuelle Zeit')])
 config.plugins.tvspielfilm.eventview = ConfigSelection(default='list', choices=[('list', 'Programmliste'), ('info', 'Sendungsinfo')])
 config.plugins.tvspielfilm.genreinfo = ConfigSelection(default='no', choices=[('no', 'Nein'), ('yes', 'Ja')])
@@ -155,6 +176,7 @@ class tvAllScreen(Screen):
         self.fontlarge = True
         if config.plugins.tvspielfilm.font_size.value == 'normal':
             self.fontlarge = False
+        self.baseurl = 'https://www.tvspielfilm.de'
 
     def hideScreen(self):
         if self.hideflag == True:
@@ -225,7 +247,6 @@ class tvAllScreenFull(tvAllScreen):
 class tvBaseScreen(tvAllScreen):
     def __init__(self, session, skin=None, dic=None, scale=True):
         tvAllScreen.__init__(self, session, skin, dic, scale)
-        self.baseurl = 'https://www.tvspielfilm.de'
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.pic1 = '/tmp/tvspielfilm1.jpg'
         self.pic2 = '/tmp/tvspielfilm2.jpg'
@@ -1435,10 +1456,7 @@ class TVTippsView(tvBaseScreen):
                         epgcache = eEPGCache.getInstance()
                         event = epgcache.startTimeQuery(eServiceReference(sref), start)
                         if event == -1:
-                            try:
-                                self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
-                            except (KeyError, NameError):
-                                self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                            self.EPGText = getEPGText()
 
                         else:
                             event = epgcache.getNextTimeEntry()
@@ -1453,13 +1471,10 @@ class TVTippsView(tvBaseScreen):
                             if dur:
                                 self.EPGtext += '\n\n' + dur
                     except:
-                        try:
-                            self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
-                        except (KeyError, NameError):
-                            self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                        self.EPGText = getEPGText()
 
                 else:
-                    self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                    self.EPGtext = NOEPG
                 fill = self.getFill(channel)
                 self.EPGtext += '\n\n' + fill
                 self['textpage'].setText(self.EPGtext)
@@ -1613,7 +1628,7 @@ class TVTippsView(tvBaseScreen):
                     newTimer.enabled = True
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             else:
-                self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
+                self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         elif self.current == 'menu' and self.ready == True:
             c = self['menu'].getSelectedIndex()
             self.oldindex = c
@@ -2320,7 +2335,7 @@ class TVGenreView(tvBaseScreen):
 
     def makeTVView(self, output):
         output = six.ensure_str(output)
-        self.titel = '%s - Sendungen der n\xc3\xa4chsten 14 Tage' % self.genre
+        self.titel = '%s - Sendungen der naechsten 14 Tage' % self.genre
         self.setTitle(self.titel)
         bereich = parsePrimeTimeTable(output, self.showgenre)
         a = findall('<td>(.*?)</td>', bereich)
@@ -2780,10 +2795,7 @@ class TVGenreView(tvBaseScreen):
                         epgcache = eEPGCache.getInstance()
                         event = epgcache.startTimeQuery(eServiceReference(sref), start)
                         if event == -1:
-                            try:
-                                self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
-                            except (KeyError, NameError):
-                                self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                            self.EPGText = getEPGText()
 
                         else:
                             event = epgcache.getNextTimeEntry()
@@ -2798,13 +2810,10 @@ class TVGenreView(tvBaseScreen):
                             if dur:
                                 self.EPGtext += '\n\n' + dur
                     except:
-                        try:
-                            self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
-                        except (KeyError, NameError):
-                            self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                        self.EPGText = getEPGText()
 
                 else:
-                    self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                    self.EPGtext = NOEPG
                 fill = self.getFill(channel)
                 self.EPGtext += '\n\n' + fill
                 self['textpage'].setText(self.EPGtext)
@@ -2952,7 +2961,7 @@ class TVGenreView(tvBaseScreen):
                     newTimer.enabled = True
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             else:
-                self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
+                self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         elif self.current == 'menu' and self.ready == True:
             c = self['menu'].getSelectedIndex()
             self.oldindex = c
@@ -3917,10 +3926,7 @@ class TVJetztView(tvBaseScreen):
                         epgcache = eEPGCache.getInstance()
                         event = epgcache.startTimeQuery(eServiceReference(sref), start)
                         if event == -1:
-                            try:
-                                self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
-                            except (KeyError, NameError):
-                                self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                            self.EPGText = getEPGText()
 
                         else:
                             event = epgcache.getNextTimeEntry()
@@ -3935,13 +3941,10 @@ class TVJetztView(tvBaseScreen):
                             if dur:
                                 self.EPGtext += '\n\n' + dur
                     except:
-                        try:
-                            self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
-                        except (KeyError, NameError):
-                            self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                        self.EPGText = getEPGText()
 
                 else:
-                    self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                    self.EPGtext = NOEPG
                 fill = self.getFill(channel)
                 self.EPGtext += '\n\n' + fill
                 self['textpage'].setText(self.EPGtext)
@@ -4111,7 +4114,7 @@ class TVJetztView(tvBaseScreen):
                     newTimer.enabled = True
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             else:
-                self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
+                self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         elif self.current == 'menu' and self.ready == True:
             c = self['menu'].getSelectedIndex()
             self.oldindex = c
@@ -5074,10 +5077,7 @@ class TVProgrammView(tvBaseScreen):
                         epgcache = eEPGCache.getInstance()
                         event = epgcache.startTimeQuery(eServiceReference(sref), start)
                         if event == -1:
-                            try:
-                                self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
-                            except (KeyError, NameError):
-                                self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                            self.EPGText = getEPGText()
 
                         else:
                             event = epgcache.getNextTimeEntry()
@@ -5092,13 +5092,10 @@ class TVProgrammView(tvBaseScreen):
                             if dur:
                                 self.EPGtext += '\n\n' + dur
                     except:
-                        try:
-                            self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
-                        except (KeyError, NameError):
-                            self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                        self.EPGText = getEPGText()
 
                 else:
-                    self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                    self.EPGtext = NOEPG
                 fill = self.getFill(channel)
                 self.EPGtext += '\n\n' + fill
                 self['textpage'].setText(self.EPGtext)
@@ -5246,7 +5243,7 @@ class TVProgrammView(tvBaseScreen):
                     newTimer.enabled = True
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             else:
-                self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
+                self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         elif self.current == 'menu' and self.ready == True and self.zap == True:
             c = self['menu'].getSelectedIndex()
             self.oldindex = c
@@ -5270,7 +5267,7 @@ class TVProgrammView(tvBaseScreen):
                 self.oldcurrent = self.current
                 self.download(self.postlink, self.makePostTimer)
         else:
-            self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
+            self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         return
 
     def finishedTimer(self, answer):
@@ -6093,7 +6090,7 @@ class TVTrailerBilder(tvBaseScreen):
                 pass
 
         elif search('rl: .https://video.tvspielfilm.de/.*?flv', output) is not None:
-            self.session.open(MessageBox, 'Der Trailer kann nicht abgespielt werden:\nnicht unterst\xfctzter Video-Codec: On2 VP6/Flash', MessageBox.TYPE_INFO, close_on_any_key=True)
+            self.session.open(MessageBox, 'Der Trailer kann nicht abgespielt werden:\nnicht unterstuetzter Video-Codec: On2 VP6/Flash', MessageBox.TYPE_INFO, close_on_any_key=True)
         else:
             self.session.open(MessageBox, '\nKein Trailer vorhanden', MessageBox.TYPE_INFO, close_on_any_key=True)
         return
@@ -6497,7 +6494,7 @@ class TVNews(tvBaseScreen):
                     self.current = 'postview'
                     self.downloadPostPage(self.postlink, self.makePostviewPageNews)
                 else:
-                    self['statuslabel'].setText('Kein Artikel verf\xfcgbar')
+                    self['statuslabel'].setText('Kein Artikel verfuegbar')
                     self['statuslabel'].show()
         except IndexError:
             pass
@@ -6938,7 +6935,7 @@ class TVBlog(tvBaseScreen):
                     self.current = 'postview'
                     self.downloadPostPage(self.postlink, self.makePostviewPageBlog)
                 else:
-                    self['statuslabel'].setText('Kein Artikel verf\xfcgbar')
+                    self['statuslabel'].setText('Kein Artikel verfuegbar')
                     self['statuslabel'].show()
         except IndexError:
             pass
@@ -7229,7 +7226,7 @@ class TVNewsPicShow(tvBaseScreen):
         self['picture'] = Pixmap()
         self['picindex'] = Label('')
         self['pictext'] = ScrollLabel('')
-        self['label'] = Label('OK = Vollbild\n< > = Zur\xfcck / Vorw\xc3\xa4rts')
+        self['label'] = Label(OKZV)
         self['NumberActions'] = NumberActionMap(['NumberActions',
          'OkCancelActions',
          'DirectionActions',
@@ -7458,7 +7455,7 @@ class PlayboyPicShow(tvBaseScreen):
         self['picindex'] = Label('')
         self['pictext'] = ScrollLabel('')
         self['textpage'] = ScrollLabel('')
-        self['label'] = Label('OK = Vollbild\n< > = Zur\xfcck / Vorw\xc3\xa4rts')
+        self['label'] = Label(OKZV)
         self['NumberActions'] = NumberActionMap(['NumberActions',
          'OkCancelActions',
          'DirectionActions',
@@ -7681,7 +7678,7 @@ class TVPicShow(tvBaseScreen):
         self['infotext8'] = Label('')
         self['picture'] = Pixmap()
         self['pictext'] = Label('')
-        self['label'] = Label('OK = Vollbild\n< > = Zur\xfcck / Vorw\xc3\xa4rts')
+        self['label'] = Label(OKZV)
         self['NumberActions'] = NumberActionMap(['NumberActions',
          'OkCancelActions',
          'DirectionActions',
@@ -9824,9 +9821,9 @@ class makeServiceFile(Screen):
             os.rename(self.servicefile + '.new', self.servicefile)
             self.ready = True
             if newdata == '':
-                self.session.openWithCallback(self.noBouquet, MessageBox, '\nKeine TV Spielfilm Sender gefunden.\nBitte w\xc3\xa4hlen Sie ein anderes TV Bouquet.', MessageBox.TYPE_YESNO)
+                self.session.openWithCallback(self.noBouquet, MessageBox, '\nKeine TV Spielfilm Sender gefunden.\nBitte waehlen Sie ein anderes TV Bouquet.', MessageBox.TYPE_YESNO)
             else:
-                self.session.openWithCallback(self.otherBouquet, MessageBox, '\nInsgesamt %s TV Spielfilm Sender importiert.\nM\xc3\xb6chten Sie ein weiteres TV Bouquet importieren?' % str(count), MessageBox.TYPE_YESNO)
+                self.session.openWithCallback(self.otherBouquet, MessageBox, '\nInsgesamt %s TV Spielfilm Sender importiert.\nMoechten Sie ein weiteres TV Bouquet importieren?' % str(count), MessageBox.TYPE_YESNO)
 
     def otherBouquet(self, answer):
         if answer is True:
@@ -10381,12 +10378,12 @@ class tvsConfig(ConfigListScreen, tvAllScreen):
         list = []
         #list.append(getConfigListEntry('Plugin Gr\xc3\xb6\xc3\x9fe:', config.plugins.tvspielfilm.plugin_size))
         #list.append(getConfigListEntry('Plugin Position:', config.plugins.tvspielfilm.position))
-        list.append(getConfigListEntry('Plugin Schriftgr\xc3\xb6\xc3\x9fe:', config.plugins.tvspielfilm.font_size))
+        list.append(getConfigListEntry('Plugin Schriftgroesse:', config.plugins.tvspielfilm.font_size))
         #list.append(getConfigListEntry('Plugin Sans Serif Schrift:', config.plugins.tvspielfilm.font))
         list.append(getConfigListEntry('Benutze Mein TV SPIELFILM:', config.plugins.tvspielfilm.meintvs))
         list.append(getConfigListEntry('Login (E-mail):', config.plugins.tvspielfilm.login))
         list.append(getConfigListEntry('Passwort:', config.plugins.tvspielfilm.password))
-        list.append(getConfigListEntry('Passwort Verschl\xfcsselung:', config.plugins.tvspielfilm.encrypt))
+        list.append(getConfigListEntry('Passwort Verschluesselung:', config.plugins.tvspielfilm.encrypt))
         list.append(getConfigListEntry('Benutze eigene Picons (100x60):', config.plugins.tvspielfilm.picon))
         self.foldername = getConfigListEntry('Picon Ordner:', config.plugins.tvspielfilm.piconfolder)
         list.append(self.foldername)
@@ -10467,7 +10464,7 @@ class tvsConfig(ConfigListScreen, tvAllScreen):
 
     def exit(self):
         if config.plugins.tvspielfilm.meintvs.value == 'yes' and config.plugins.tvspielfilm.login.value == '' or config.plugins.tvspielfilm.meintvs.value == 'yes' and config.plugins.tvspielfilm.password.value == '':
-            self.session.openWithCallback(self.nologin_return, MessageBox, 'Sie haben den Mein TV SPIELFILM Login aktiviert, aber unvollst\xc3\xa4ndige Login-Daten angegeben.\n\nM\xc3\xb6chten Sie die Mein TV SPIELFILM Login-Daten jetzt angeben oder Mein TV SPIELFILM deaktivieren?', MessageBox.TYPE_YESNO)
+            self.session.openWithCallback(self.nologin_return, MessageBox, 'Sie haben den Mein TV SPIELFILM Login aktiviert, aber unvollstaendige Login-Daten angegeben.\n\nMoechten Sie die Mein TV SPIELFILM Login-Daten jetzt angeben oder Mein TV SPIELFILM deaktivieren?', MessageBox.TYPE_YESNO)
         else:
             self.session.openWithCallback(self.close, tvMain)
 
@@ -11646,7 +11643,7 @@ class TVHeuteView(tvBaseScreen):
             self['menu4'].selectionEnabled(0)
             self['menu5'].selectionEnabled(0)
             self['menu6'].selectionEnabled(1)
-        self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Men\xc3\xbc = Senderliste')
+        self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Menue = Senderliste')
         self['label'].stopBlinking()
         self['label'].show()
         self.ready = True
@@ -12074,10 +12071,7 @@ class TVHeuteView(tvBaseScreen):
                         epgcache = eEPGCache.getInstance()
                         event = epgcache.startTimeQuery(eServiceReference(sref), start)
                         if event == -1:
-                            try:
-                                self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
-                            except (KeyError, NameError):
-                                self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                            self.EPGText = getEPGText()
 
                         else:
                             event = epgcache.getNextTimeEntry()
@@ -12092,13 +12086,10 @@ class TVHeuteView(tvBaseScreen):
                             if dur:
                                 self.EPGtext += '\n\n' + dur
                     except:
-                        try:
-                            self.EPGtext = 'Noch keine EPG Informationen verf\xfcgbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
-                        except (KeyError, NameError):
-                            self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                        self.EPGText = getEPGText()
 
                 else:
-                    self.EPGtext = 'Keine EPG Informationen verf\xfcgbar'
+                    self.EPGtext = NOEPG
                 fill = self.getFill(channel)
                 self.EPGtext += '\n\n' + fill
                 self['textpage'].setText(self.EPGtext)
@@ -12591,7 +12582,7 @@ class TVHeuteView(tvBaseScreen):
                     newTimer.enabled = True
                     self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
             else:
-                self.session.open(MessageBox, '\nTimer nicht m\xc3\xb6glich:\nKeine Service Reference vorhanden, der ausgew\xc3\xa4hlte Sender wurde nicht importiert.', MessageBox.TYPE_ERROR, close_on_any_key=True)
+                self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         elif self.current == 'menu1' and self.ready == True:
             c = self['menu1'].getSelectedIndex()
             self.oldindex = c
@@ -13435,13 +13426,13 @@ class TVHeuteView(tvBaseScreen):
 
     def downloadPageError(self, output):
         print(output)
-        self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Men\xc3\xbc = Senderliste')
+        self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Menue = Senderliste')
         self['label'].stopBlinking()
         self['label'].show()
         self.ready = True
 
     def showProgrammPage(self):
-        self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Men\xc3\xbc = Senderliste')
+        self['label'].setText('Info = +- Tageszeit, Bouquet = +- Tag, <> = +- Woche, Menue = Senderliste')
         self['label2'].setText('= Timer')
         self['label3'].setText('= Suche')
         self['label4'].setText('= Zappen')
