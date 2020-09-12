@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from __future__ import print_function, absolute_import
 from re import sub, findall, S as RES
 from Components.config import config
 from Components.ConditionalWidget import BlinkingWidget
@@ -110,9 +113,6 @@ def makeWeekDay(weekday):
     return _weekday
 
 def scaleskin(skin, factor):
-    if factor == 1:
-        return skin
-
     def calc(old, factor):
         if ',' in old and '_' in old:
             _old = old.split(',')
@@ -127,7 +127,7 @@ def scaleskin(skin, factor):
             return "%s,%s" % (a,b)
         return old
 
-    root = ET.fromstring(skin)    
+    root = ET.fromstring(skin)
     if 'position' in root.attrib:
         root.attrib['position'] = calc(root.attrib['position'], factor)
     if 'size' in root.attrib:
@@ -138,4 +138,3 @@ def scaleskin(skin, factor):
         if 'size' in child.attrib:
             child.attrib['size'] = calc(child.attrib['size'], factor)
     return six.ensure_str(ET.tostring(root))
-
