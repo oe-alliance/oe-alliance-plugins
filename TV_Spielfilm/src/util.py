@@ -17,7 +17,6 @@ ICONPATH = PICPATH + "icons/"
 TVSPNG = PICPATH + "tvspielfilm.png"
 TVSHDPNG = PICPATH + "tvspielfilmHD.png"
 
-
 class serviceDB():
 
     def __init__(self, servicefile):
@@ -138,3 +137,9 @@ def scaleskin(skin, factor):
         if 'size' in child.attrib:
             child.attrib['size'] = calc(child.attrib['size'], factor)
     return six.ensure_str(ET.tostring(root))
+
+def printStackTrace():
+    import sys, traceback
+    print("--- STACK TRACE ---")
+    traceback.print_exc(file=sys.stdout)
+    print('-' * 50)

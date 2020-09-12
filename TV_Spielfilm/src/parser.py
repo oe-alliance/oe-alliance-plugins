@@ -513,6 +513,11 @@ def fiximgLink(link):
     return sub('.*data-src="','',link)
     
 def parseInfoTable(output, debug=None):
+    bereich = _parseInfoTableStart(output)
+    bereich = sub('<span>\n\\s+<a href="', '<td>LINK', bereich)
+    return _parseInfoTable(bereich, debug)
+
+def _parseInfoTableStart(output):
     startpos = output.find('<table class="info-table"')
     endpos = output.find('<div class="block-in">')
     if endpos == -1:
@@ -520,7 +525,9 @@ def parseInfoTable(output, debug=None):
     bereich = output[startpos:endpos]
     bereich = transHTML(bereich)
     bereich = sub('class="chl_bg_. c-', '<td>LOGO', bereich)
-    bereich = sub('<span>\n\\s+<a href="', '<td>LINK', bereich)
+    return bereich
+
+def _parseInfoTable(bereich, debug=None):
     bereich = sub('" target="_self" onclick', '</td>', bereich)
     bereich = sub('<li><strong>[0-9]+</strong></li>', '', bereich)
     bereich = sub('<div>\n\\s+<strong>', '<td>TIME', bereich)
@@ -545,41 +552,14 @@ def parseInfoTable(output, debug=None):
         print(bereich)
     return bereich
 
+
 def parseInfoTable2(output, debug=None):
-    startpos = output.find('<table class="info-table"')
-    endpos = output.find('<div class="block-in">')
-    if endpos == -1:
-        endpos = output.find('<div class="two-blocks">')
-    bereich = output[startpos:endpos]
-    bereich = transHTML(bereich)
-    bereich = sub('class="chl_bg_. c-', '<td>LOGO', bereich)
+    bereich = _parseInfoTableStart(output)
     bereich = sub('<strong><a href="https://my', '<td>LINKhttps://www', bereich)
     bereich = sub('<span>\n\\s+<a href="https://www', '<td>LINKhttps://www', bereich)
     bereich = sub('standard">\n\\s+<a href="https://my', '<td>LINKhttps://www', bereich)
     bereich = sub('standard">\n\\s+<a href="https://www', '<td>LINKhttps://www', bereich)
-    bereich = sub('" target="_self" onclick', '</td>', bereich)
-    bereich = sub('<li><strong>[0-9]+</strong></li>', '', bereich)
-    bereich = sub('<div>\n\\s+<strong>', '<td>TIME', bereich)
-    bereich = sub('</a></strong>', '</td>', bereich)
-    bereich = sub('</strong>', '</td>', bereich)
-    bereich = sub('"saveRef..;" title="', '<td>TITEL', bereich)
-    bereich = sub('"><strong>', '</td>', bereich)
-    bereich = sub('" title="', '</td>', bereich)
-    bereich = sub('<td class="col-4">\n\\s+<span>', '<td>GENRE', bereich)
-    bereich = sub('"></span></td>', '</td>', bereich)
-    bereich = sub('</span>', '</td>', bereich)
-    bereich = sub('<span\n\\s+class="editorial-', '<td>RATING', bereich)
-    bereich = sub('<span class="editorial-', '<td>RATING', bereich)
-    bereich = sub('<span>Spielfilm\n', '<td>SPARTESpielfilm</td>', bereich)
-    bereich = sub('<span>Serie\n', '<td>SPARTESerie</td>', bereich)
-    bereich = sub('<span>Report\n', '<td>SPARTEReport</td>', bereich)
-    bereich = sub('<span>Unterhaltung\n', '<td>SPARTEUnterhaltung</td>', bereich)
-    bereich = sub('<span>Kinder\n', '<td>SPARTEKinder</td>', bereich)
-    bereich = sub('<span>Sport\n', '<td>SPARTESport</td>', bereich)
-    if debug != None:
-        print("[DEBUG] parseInfoTable2 %s\n" % debug)
-        print(bereich)
-    return bereich
+    return _parseInfoTable(bereich, debug)
 
 def parsePrimeTimeTable(output, showgenre, debug=None):
     startpos = output.find('<table class="primetime-table">')

@@ -12,7 +12,7 @@ SKHEADBOTTOM = """
         <widget name="searchlogo" position="5,75" size="200,50" pixmap="{picpath}search.png" alphatest="blend" zPosition="1" />
         <widget name="searchtext" position="245,75" size="955,65" font="Regular;26" valign="center" zPosition="1" />
         <widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="picpost" position="_375,70" size="490,245" alphatest="blend" zPosition="1" />
+        <widget name="picpost" position="center,70" size="490,245" alphatest="blend" zPosition="1" />
         <widget name="piclabel" position="_476,265" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
         <widget name="piclabel2" position="_476,290" size="100,25" font="Regular;18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />
         <widget name="infotext" position="10,_70" size="_310,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
@@ -29,16 +29,16 @@ SKHEADBOTTOM = """
         <widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />
         <widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />
         <widget name="cinlogo" position="_325,70" size="60,29" pixmap="{picpath}icons/cin.png" alphatest="blend" zPosition="1" />
-        <widget name="playlogo" position="_565,163" size="109,58" pixmap="{picpath}icons/playHD.png" alphatest="blend" zPosition="2" />
+        <widget name="playlogo" position="center,163" size="109,58" pixmap="{picpath}icons/playHD.png" alphatest="blend" zPosition="2" />
         <widget name="textpage" position="10,325" size="_1220,{slider}" font="Regular;{fontsize}" halign="left" zPosition="0" />
         <widget name="slider_textpage" position="_1214,325" size="22,{slider}" pixmap="{picpath}/slider/slider_{slider}.png" alphatest="blend" zPosition="1" />
-        <widget name="label" position="_220,10" size="800,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
+        <widget name="label" position="center,10" size="800,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
         <widget name="label2" position="_469,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
         <widget name="label3" position="_594,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
         <widget name="label4" position="_719,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-        <ePixmap position="445,33" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="2" />
-        <ePixmap position="570,33" size="18,18" pixmap="{picpath}buttons/yellow.png" alphatest="blend" zPosition="2" />
-        <ePixmap position="695,33" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="2" />""" + SKTIME
+        <ePixmap position="_445,33" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="2" />
+        <ePixmap position="_570,33" size="18,18" pixmap="{picpath}buttons/yellow.png" alphatest="blend" zPosition="2" />
+        <ePixmap position="_695,33" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="2" />""" + SKTIME
 
 SKMENU = '<widget name="menu" position="10,75" size="{menusize}" scrollbarMode="showNever" zPosition="1" />' 
 

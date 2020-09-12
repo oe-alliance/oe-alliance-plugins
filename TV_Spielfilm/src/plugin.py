@@ -41,7 +41,7 @@ from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirec
 from six.moves.urllib.error import URLError, HTTPError
 import datetime, os, re, socket, sys, time, six
 from os import path
-from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin
+from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin, printStackTrace
 from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable
 from .skindef import SKHEADTOP, SKHEADBOTTOM, SKMENU, SKHEADPIC, SKHEADPLAY, SKTIME
 
@@ -569,7 +569,7 @@ class tvBaseScreen(tvAllScreen):
             self['infotext8'].setText('')
 
         tvinfo = re.findall('<span class="add-info (.*?)">', bereich)
-        for pos in list(range(5)):
+        for i in list(range(5)):
             try:
                 tvi = ICONPATH + tvinfo[i] + 'HD.png'
                 self.showPicTVinfoX(tvi, i)
@@ -653,21 +653,29 @@ class tvBaseScreen(tvAllScreen):
         self['searchtext'].show()
 
     def showPicTVinfoX(self, picinfo, idx):
-        self.TVinfopicloads[idx] = ePicLoad()
-        self.TVinfopicloads[idx].PictureData.get().append(boundFunction(self.finish_decodeTVinfoX, idx))
-        self.TVinfopicloads[idx].setPara((60, 20, 3, 0, False, 1, "#00000000"))
-        self.TVinfopicloads[idx].startDecode(picinfo)
+        currPic = loadPic(picinfo, 60, 20, 3, 0, 0, 0)
+        if currPic != None:
+            self['tvinfo%s' % (idx + 1)].instance.setPixmap(currPic)
+            self['tvinfo%s' % (idx + 1)].show()
 
-    def finish_decodeTVinfoX(self, idx, info):
+# TODO: CHECK WHY
+#        self.TVinfopicloads[idx] = ePicLoad()
+#        self.TVinfopicloads[idx].PictureData.get().append(self.finish_decodeTVinfoX(idx))
+#        self.TVinfopicloads[idx].setPara((60, 20, 3, 0, False, 1, "#00000000"))
+#        self.TVinfopicloads[idx].startDecode(picinfo)
+
+    def finish_decodeTVinfoX(self, idx):
+        idx = int(idx)
         ptr = self.TVinfopicloads[idx].getData()
         if ptr != None:
-            self['tvinfo' % (idx + 1)].instance.setPixmap(ptr.__deref__())
-            self['tvinfo' % (idx + 1)].show()
+            self['tvinfo%s' % (idx + 1)].instance.setPixmap(ptr.__deref__())
+            self['tvinfo%s' % (idx + 1)].show()
 
-    def finish_postpic(self, info, label):
+    def finish_postpic(self, label):
         ptr = self.TVinfopicloads[100].getData()
         if ptr != None:
             self['picpost'].instance.setPixmap(ptr.__deref__())
+            self['picpost'].show()
             if label:
                 self['piclabel'].show()
                 self['piclabel2'].show()
@@ -682,13 +690,26 @@ class tvBaseScreen(tvAllScreen):
         self.showPicPost(label)
 
     def showPicPost(self, label=False):
-        self.TVinfopicloads[100] = ePicLoad()
-        self.TVinfopicloads[100].PictureData.get().append(boundFunction(self.finish_postpic, label))
-        self.TVinfopicloads[100].setPara((490, 245, 3, 0, False, 1, "#00000000"))
-        self.TVinfopicloads[100].startDecode(self.picfile)
+        currPic = loadPic(self.picfile, 490, 245, 3, 0, 0, 0)
+        if currPic != None:
+            self['picpost'].instance.setPixmap(currPic)
+            self['picpost'].show()
+            if label:
+                self['piclabel'].show()
+                self['piclabel2'].show()
+            if self.trailer == True:
+                self['cinlogo'].show()
+                self['playlogo'].show()
+# TODO: CHECK
+#        self.TVinfopicloads[100] = ePicLoad()
+#        self.TVinfopicloads[100].PictureData.get().append(self.finish_postpic(label))
+#        self.TVinfopicloads[100].setPara((490, 245, 3, 0, False, 1, "#00000000"))
+#        self.TVinfopicloads[100].startDecode(self.picfile)
 
     def downloadPicPost(self, link, label):
+        link = sub('.*?data-src="', '', link)
         getPage(six.ensure_binary(link)).addCallback(self.getPicPost, label).addErrback(self.downloadPicPostError)
+        return
 
     def downloadPicPostError(self, output):
         pass
@@ -1112,7 +1133,11 @@ class TVTippsView(tvBaseScreen):
         self['pic4'].hide()
         self['pic5'].hide()
         self['pic6'].hide()
-        self._makePostviewPage(string)
+        try:
+            self._makePostviewPage(string)
+        except:
+            printStackTrace()
+        
 
     def makeSearchView(self, url):
         header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
@@ -2426,7 +2451,10 @@ class TVGenreView(tvBaseScreen):
     def makePostviewPage(self, string):
         print("DEBUG makePostviewPage TVGenreView")
         self['menu'].hide()
-        self._makePostviewPage(string)
+        try:
+            self._makePostviewPage(string)
+        except:
+            printStackTrace()
 
     def makeSearchView(self, url):
         header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
@@ -3533,7 +3561,10 @@ class TVJetztView(tvBaseScreen):
     def makePostviewPage(self, string):
         print("DEBUG makePostviewPage TVJetztView")
         self['menu'].hide()
-        self._makePostviewPage(string)
+        try:
+            self._makePostviewPage(string)
+        except:
+            printStackTrace()
 
     def makeSearchView(self, url):
         header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
@@ -4467,7 +4498,7 @@ class TVProgrammView(tvBaseScreen):
             from Components.ServiceEventTracker import ServiceEventTracker
             from enigma import iPlayableService
             self.__event_tracker = ServiceEventTracker(screen=self, eventmap={iPlayableService.evUpdatedEventInfo: self.zapRefresh})
-            self.channel_db = serviceDB(self.servicefile)
+            self.service_db = serviceDB(self.servicefile)
         elif self.tagestipp == False:
             nextday = sub('/sendungen/.*?html', '/sendungen/?page=1&order=time&date=', self.link)
             nextday = nextday + str(self.date)
@@ -4661,7 +4692,10 @@ class TVProgrammView(tvBaseScreen):
     def makePostviewPage(self, string):
         print("DEBUG makePostviewPage TVProgrammView")
         self['menu'].hide()
-        self._makePostviewPage(string)
+        try:
+            self._makePostviewPage(string)
+        except:
+            printStackTrace()
 
     def makeSearchView(self, url):
         header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
@@ -5171,7 +5205,7 @@ class TVProgrammView(tvBaseScreen):
             sref = str(sref) + 'FIN'
             sref = sub(':0:0:0:.*?FIN', ':0:0:0:', sref)
             self.sref = sref
-            channel = self.channel_db.lookup(sref)
+            channel = self.service_db.lookup(sref)
             if channel == 'nope':
                 self.session.open(MessageBox, 'Service not found:\nNo entry for current service reference\n%s' % str(sref), MessageBox.TYPE_INFO, close_on_any_key=True)
             else:
@@ -5505,7 +5539,7 @@ class TVProgrammView(tvBaseScreen):
             sref = str(sref) + 'FIN'
             sref = sub(':0:0:0:.*?FIN', ':0:0:0:', sref)
             self.sref = sref
-            channel = self.channel_db.lookup(sref)
+            channel = self.service_db.lookup(sref)
             if channel == 'nope':
                 self.session.open(MessageBox, 'Service not found:\nNo entry for current service reference\n%s' % str(sref), MessageBox.TYPE_INFO, close_on_any_key=True)
             else:
@@ -10282,7 +10316,7 @@ class tvJetzt(tvAllScreenFull):
     def __init__(self, session, link):
         self.link = link
         tvAllScreenFull.__init__(self, session)
-        self.channel_db = serviceDB(self.servicefile)
+        self.service_db = serviceDB(self.servicefile)
         self.JetztTimer = eTimer()
         self.JetztTimer.callback.append(self.makeTimerDB)
         self.JetztTimer.callback.append(self.makeCheck)
@@ -10307,7 +10341,7 @@ class tvJetzt(tvAllScreenFull):
 class tvEvent(tvAllScreenFull):
     def __init__(self, session):
         tvAllScreenFull.__init__(self, session)
-        self.channel_db = serviceDB(self.servicefile)
+        self.service_db = serviceDB(self.servicefile)
         self.EventTimer = eTimer()
         self.EventTimer.callback.append(self.makeTimerDB)
         self.EventTimer.callback.append(self.makeChannelLink)
@@ -10318,7 +10352,7 @@ class tvEvent(tvAllScreenFull):
             sref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
             sref = str(sref) + 'FIN'
             sref = sub(':0:0:0:.*?FIN', ':0:0:0:', sref)
-            channel = self.channel_db.lookup(sref)
+            channel = self.service_db.lookup(sref)
             if channel == 'nope':
                 self.session.open(MessageBox, 'Service not found:\nNo entry for current service reference\n%s' % str(sref), MessageBox.TYPE_INFO, close_on_any_key=True)
                 self.close()
@@ -10947,7 +10981,10 @@ class TVHeuteView(tvBaseScreen):
             self['pictime%s' % i].hide()
             self['pictext%s' % i].hide()
             self['menu%s' % i].hide()
-        self._makePostviewPage(string)
+        try:
+            self._makePostviewPage(string)
+        except:
+            printStackTrace()
 
     def makeSearchView(self, url):
         header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
