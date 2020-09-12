@@ -6,6 +6,16 @@ SKTIME = """
         <convert type="ClockToText">Format:%H:%M:%S</convert>
         </widget>"""
 
+SKINFOTEXT = """
+        <widget name="infotext" position="10,_70" size="_310,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+        <widget name="infotext2" position="10,_105" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+        <widget name="infotext3" position="10,_140" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+        <widget name="infotext4" position="10,_175" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+        <widget name="infotext5" position="_855,_70" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+        <widget name="infotext6" position="_855,_105" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+        <widget name="infotext7" position="_855,_140" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+        <widget name="infotext8" position="_855,_175" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />"""
+
 
 SKHEADBOTTOM = """
         <widget name="searchtimer" position="420,5" size="400,50" pixmap="{picpath}search_timer.png" alphatest="blend" zPosition="3" />
@@ -14,15 +24,7 @@ SKHEADBOTTOM = """
         <widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> 
         <widget name="picpost" position="center,70" size="490,245" alphatest="blend" zPosition="1" />
         <widget name="piclabel" position="_476,265" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
-        <widget name="piclabel2" position="_476,290" size="100,25" font="Regular;18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />
-        <widget name="infotext" position="10,_70" size="_310,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-        <widget name="infotext2" position="10,_105" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-        <widget name="infotext3" position="10,_140" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-        <widget name="infotext4" position="10,_175" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-        <widget name="infotext5" position="_855,_70" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
-        <widget name="infotext6" position="_855,_105" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
-        <widget name="infotext7" position="_855,_140" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
-        <widget name="infotext8" position="_855,_175" size="_375,_25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+        <widget name="piclabel2" position="_476,290" size="100,25" font="Regular;18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />""" + SKINFOTEXT + """
         <widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />
         <widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />
         <widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />

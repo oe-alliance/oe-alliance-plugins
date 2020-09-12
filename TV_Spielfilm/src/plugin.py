@@ -41,9 +41,9 @@ from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirec
 from six.moves.urllib.error import URLError, HTTPError
 import datetime, os, re, socket, sys, time, six
 from os import path
-from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin, printStackTrace
+from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin, printStackTrace, channelDB
 from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable
-from .skindef import SKHEADTOP, SKHEADBOTTOM, SKMENU, SKHEADPIC, SKHEADPLAY, SKTIME
+from .skindef import SKHEADTOP, SKHEADBOTTOM, SKMENU, SKHEADPIC, SKHEADPLAY, SKTIME, SKINFOTEXT
 
 try:
     from cookielib import MozillaCookieJar
@@ -264,6 +264,13 @@ class tvBaseScreen(tvAllScreen):
         else:
             self.picon = False
         return
+
+    def setTVTitle(self, output):
+        title = search('<title>(.*?)</title>', output)
+        title = title.group(1).replace('&amp;', '&')
+        title = sub(' - TV Spielfilm', '', title)
+        self.titel = sub(' - TV SPIELFILM', '', title)
+        self.setTitle(title)
 
     def finishedAutoTimer(self, answer):
         if answer:
@@ -4498,7 +4505,7 @@ class TVProgrammView(tvBaseScreen):
             from Components.ServiceEventTracker import ServiceEventTracker
             from enigma import iPlayableService
             self.__event_tracker = ServiceEventTracker(screen=self, eventmap={iPlayableService.evUpdatedEventInfo: self.zapRefresh})
-            self.service_db = serviceDB(self.servicefile)
+            self.channel_db = channelDB(self.servicefile)
         elif self.tagestipp == False:
             nextday = sub('/sendungen/.*?html', '/sendungen/?page=1&order=time&date=', self.link)
             nextday = nextday + str(self.date)
@@ -4517,6 +4524,7 @@ class TVProgrammView(tvBaseScreen):
 
     def makeTVView(self, string):
         output = open(self.localhtml, 'r').read()
+        output = six.ensure_str(output)
         titel = search('<title>(.*?)von', output)
         date = str(self.date.strftime('%d.%m.%Y'))
         self.titel = str(titel.group(1)) + ' - ' + str(self.weekday) + ', ' + date
@@ -5205,7 +5213,7 @@ class TVProgrammView(tvBaseScreen):
             sref = str(sref) + 'FIN'
             sref = sub(':0:0:0:.*?FIN', ':0:0:0:', sref)
             self.sref = sref
-            channel = self.service_db.lookup(sref)
+            channel = self.channel_db.lookup(sref)
             if channel == 'nope':
                 self.session.open(MessageBox, 'Service not found:\nNo entry for current service reference\n%s' % str(sref), MessageBox.TYPE_INFO, close_on_any_key=True)
             else:
@@ -5539,7 +5547,7 @@ class TVProgrammView(tvBaseScreen):
             sref = str(sref) + 'FIN'
             sref = sub(':0:0:0:.*?FIN', ':0:0:0:', sref)
             self.sref = sref
-            channel = self.service_db.lookup(sref)
+            channel = self.channel_db.lookup(sref)
             if channel == 'nope':
                 self.session.open(MessageBox, 'Service not found:\nNo entry for current service reference\n%s' % str(sref), MessageBox.TYPE_INFO, close_on_any_key=True)
             else:
@@ -5674,73 +5682,75 @@ class TVTrailerBilder(tvBaseScreen):
 
 
     def makeTVGalerie(self, string):
-            output = open(self.localhtml, 'r').read()
-            self.makestart()
-            startpos = output.find('<p class="headline headline--section">')
-            endpos = output.find('<div id="gtm-livetv-footer"></div>')
-            bereich = output[startpos:endpos]
-            bereich = transHTML(bereich)
-            date = str(self.date.strftime('%d.%m.%Y'))
-            self.titel = str(self.weekday) + ', ' + date
-            self.setTitle(self.titel)
-            bereich = sub('<a href="', '<td>LINK', bereich)
-            bereich = sub('" target="', '</td>', bereich)
-            bereich = sub('<img src="', '<td>PIC', bereich)
-            bereich = sub('jpg">', 'jpg</td>', bereich)
-            bereich = sub('png">', 'png</td>', bereich)
-            bereich = sub('<span class="headline">', '<td>TITEL', bereich)
-            bereich = sub('</span>', '</td>', bereich)
-            a = findall('<td>(.*?)</td>', bereich)
-            y = 0
-            offset = 3
-            for x in a:
-                if y == 0:
-                    res = [x]
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(923, 90), font=-1, backcolor_sel=self.back_color, text=''))
-                    x = sub('LINK', '', x)
-                    self.tvlink.append(x)
-                if y == 1:
-                    x = sub('PIC', '', x)
-                    self.picurllist.append(x)
-                if y == 2:
-                    x = sub('TITEL', '', x)
-                    res.append(MultiContentEntryText(pos=(5, 17), size=(913, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                    png = ICONPATH + 'icon-picHD.png'
-                    if fileExists(png):
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 20), size=(60, 20), png=loadPNG(png)))
-                    self.tventries.append(res)
-                y += 1
-                if y == offset:
-                    y = 0
+        output = open(self.localhtml, 'r').read()
+        output = six.ensure_str(output)
+        self.makestart()
+        startpos = output.find('<p class="headline headline--section">')
+        endpos = output.find('<div id="gtm-livetv-footer"></div>')
+        bereich = output[startpos:endpos]
+        bereich = transHTML(bereich)
+        date = str(self.date.strftime('%d.%m.%Y'))
+        self.titel = str(self.weekday) + ', ' + date
+        self.setTitle(self.titel)
+        bereich = sub('<a href="', '<td>LINK', bereich)
+        bereich = sub('" target="', '</td>', bereich)
+        bereich = sub('<img src="', '<td>PIC', bereich)
+        bereich = sub('jpg">', 'jpg</td>', bereich)
+        bereich = sub('png">', 'png</td>', bereich)
+        bereich = sub('<span class="headline">', '<td>TITEL', bereich)
+        bereich = sub('</span>', '</td>', bereich)
+        a = findall('<td>(.*?)</td>', bereich)
+        y = 0
+        offset = 3
+        for x in a:
+            if y == 0:
+                res = [x]
+                if self.backcolor == True:
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(923, 90), font=-1, backcolor_sel=self.back_color, text=''))
+                x = sub('LINK', '', x)
+                self.tvlink.append(x)
+            if y == 1:
+                x = sub('PIC', '', x)
+                self.picurllist.append(x)
+            if y == 2:
+                x = sub('TITEL', '', x)
+                res.append(MultiContentEntryText(pos=(5, 17), size=(913, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                png = ICONPATH + 'icon-picHD.png'
+                if fileExists(png):
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(843, 20), size=(60, 20), png=loadPNG(png)))
+                self.tventries.append(res)
+            y += 1
+            if y == offset:
+                y = 0
 
-            self['menu'].l.setItemHeight(90)
-            self['menu'].l.setList(self.tventries)
-            self['menu'].moveToIndex(self.oldindex)
-            if self.oldindex > 5:
-                self.leftUp()
-                self.rightDown()
-            self.len = len(self.tventries)
-            self.ready = True
-            playlogo = ICONPATH + 'play.png'
-            if fileExists(playlogo):
-                self.showPlay1(playlogo)
-                self['play1'].show()
-                self.showPlay2(playlogo)
-                self['play2'].show()
-                self.showPlay3(playlogo)
-                self['play3'].show()
-                self.showPlay4(playlogo)
-                self['play4'].show()
-                self.showPlay5(playlogo)
-                self['play5'].show()
-                self.showPlay6(playlogo)
-                self['play6'].show()
+        self['menu'].l.setItemHeight(90)
+        self['menu'].l.setList(self.tventries)
+        self['menu'].moveToIndex(self.oldindex)
+        if self.oldindex > 5:
+            self.leftUp()
+            self.rightDown()
+        self.len = len(self.tventries)
+        self.ready = True
+        playlogo = ICONPATH + 'play.png'
+        if fileExists(playlogo):
+            self.showPlay1(playlogo)
+            self['play1'].show()
+            self.showPlay2(playlogo)
+            self['play2'].show()
+            self.showPlay3(playlogo)
+            self['play3'].show()
+            self.showPlay4(playlogo)
+            self['play4'].show()
+            self.showPlay5(playlogo)
+            self['play5'].show()
+            self.showPlay6(playlogo)
+            self['play6'].show()
 
-            self.GetPics(self.picurllist, 0)
+        self.GetPics(self.picurllist, 0)
 
     def makeTVTrailer(self, string):
         output = open(self.localhtml, 'r').read()
+        output = six.ensure_str(output)
         self.makestart()
         if self.sparte == 'Kino Neustarts':
             startpos = output.find('<p class="headline headline--section">Kino Neustarts</p>')
@@ -6194,6 +6204,7 @@ class TVNews(tvBaseScreen):
 
     def makeTVNews(self, string):
         output = open(self.localhtml, 'r').read()
+        output = six.ensure_str(output)
         titel = search('<title>(.*?)</title>', output)
         self.titel = titel.group(1).replace('&amp;', '&')
         self.setTitle(self.titel)
@@ -6259,11 +6270,7 @@ class TVNews(tvBaseScreen):
         self['statuslabel'].hide()
         self['menu'].hide()
         self['slider_menu'].hide()
-        if search('<title>', output) is not None:
-            titel = search('<title>(.*?)</title>', output)
-            titel = titel.group(1).replace('&amp;', '&')
-            self.title = sub(' - TV Spielfilm', '', titel)
-            self.setTitle(self.title)
+        self.setTVTitle(output)
         output = sub('</dl>.\n\\s+</div>.\n\\s+</section>', '</cast>', output)
         startpos = output.find('<div class="content-area">')
         endpos = output.find('>Weitere Bildergalerien<')
@@ -6562,6 +6569,7 @@ class TVBlog(tvBaseScreen):
 
     def makeTVBlog(self, string):
         output = open(self.localhtml, 'r').read()
+        output = six.ensure_str(output)
         titel = search('<title>(.*?)</title>', output)
         self.titel = titel.group(1).replace('TV Spielfilm Blog | ', '')
         self.setTitle(self.titel)
@@ -7085,11 +7093,8 @@ class TVNewsPicShow(tvBaseScreen):
         self.getInfoTimer.start(500, True)
 
     def getPixPage(self, output):
-        if search('<title>', output) is not None:
-            titel = search('<title>(.*?)</title>', output)
-            titel = titel.group(1).replace('&amp;', '&')
-            self.titel = sub(' - TV Spielfilm', '', titel)
-            self.setTitle(self.titel)
+        output = six.ensure_str(output)
+        self.setTVTitle(output)
         startpos = output.find('<div class="film-gallery">')
         if startpos == -1:
             startpos = output.find('class="film-gallery paragraph')
@@ -7314,9 +7319,8 @@ class PlayboyPicShow(tvBaseScreen):
         self.getInfoTimer.start(500, True)
 
     def getPicPage(self, output):
-        title = search('<title>(.*?)</title>', output)
-        title = sub(' - TV Spielfilm', '', title.group(1))
-        self.setTitle(title)
+        output = six.ensure_str(output)
+        self.setTVTitle(output)
         startpos = output.find('<div class="content-area">')
         endpos = output.find('Mehr Girls bei Playboy</a>')
         bereich = output[startpos:endpos]
@@ -7475,17 +7479,9 @@ class PlayboyPicShow(tvBaseScreen):
 
 class TVPicShow(tvBaseScreen):
     skin = '<screen name="TVPicShow" position="center,center" size="{screensize}" title="Fotostrecke - TV Spielfilm">' + SKHEADTOP + """
-            <widget name="label" position="364,10" size="512,44" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />""" + SKTIME + """
-            <widget name="infotext" position="10,70" size="250,25" font="Regular;20" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-            <widget name="infotext2" position="10,105" size="250,25" font="Regular;20" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-            <widget name="infotext3" position="10,140" size="250,25" font="Regular;20" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-            <widget name="infotext4" position="10,175" size="250,25" font="Regular;20" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
-            <widget name="infotext5" position="980,70" size="250,25" font="Regular;20" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
-            <widget name="infotext6" position="980,105" size="250,25" font="Regular;20" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
-            <widget name="infotext7" position="980,140" size="250,25" font="Regular;20" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
-            <widget name="infotext8" position="980,175" size="250,25" font="Regular;20" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
-            <widget name="picture" position="270,70" size="700,525" alphatest="blend" zPosition="1" />
-            <widget name="pictext" position="10,595" size="1220,48" font="Regular;18" halign="center" valign="center" zPosition="1" />
+            <widget name="label" position="center,10" size="_512,44" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />""" + SKTIME + SKINFOTEXT + """
+            <widget name="picture" position="center,70" size="700,525" alphatest="blend" zPosition="1" />
+            <widget name="pictext" position="10,_595" size="_1220,48" font="Regular;18" halign="center" valign="center" zPosition="1" />
         </screen>"""
 
     def __init__(self, session, link):
@@ -7537,19 +7533,16 @@ class TVPicShow(tvBaseScreen):
         self.getPicTimer.start(500, True)
 
     def getPicPage(self, output):
+        output = six.ensure_str(output)
         output = transHTML(output)
-        if search('<title>', output) is not None:
-            titel = search('<title>(.*?)</title>', output)
-            titel = titel.group(1)
-            self.titel = sub(' - TV Spielfilm', '', titel)
-            self.setTitle(self.titel)
+        self.setTVTitle(output)
         startpos = output.find('<div class="film-gallery">')
         endpos = output.find('<div class="swiper-slide more-galleries">')
         bereich = output[startpos:endpos]
         bereich = sub('<span class="credit">', '', bereich)
         bereich = sub('<span class="counter">.*?</span>\n\\s+', '', bereich)
         bereich = sub('</span>\n\\s+', '', bereich)
-        self.pixlist = re.findall('<img src="(.*?)"', bereich)
+        self.pixlist = re.findall('data-src="(.*?)"', bereich)
         try:
             self.download(self.pixlist[0], self.getPic)
         except IndexError:
@@ -7743,7 +7736,7 @@ class PicShowFull(tvBaseScreen):
         <screen name="PicShowFull" position="center,center" size="{fullsize}" title=" ">
             <eLabel position="0,0" size="{fullsize}" backgroundColor="#000000" zPosition="1" />
             <widget name="picture" position="0,0" size="{fullsize}" alphatest="blend" zPosition="2" />
-            <widget name="picindex" position="10,10" size="120,22" font="Regular;20" foregroundColor="#A5ACAE" halign="left" transparent="1" zPosition="3" />
+            <widget name="picindex" position="center,10" size="120,22" font="Regular;20" foregroundColor="#A5ACAE" halign="center" transparent="1" zPosition="3" />
         </screen>"""
 
     def __init__(self, session, link, count, playboy):
@@ -7784,6 +7777,7 @@ class PicShowFull(tvBaseScreen):
         self.getPicTimer.start(500, True)
 
     def getPicPage(self, output):
+        output = six.ensure_str(output)
         if self.playboy == False:
             startpos = output.find('<div class="film-gallery">')
             if startpos == -1:
@@ -7945,7 +7939,7 @@ class FullScreen(tvAllScreen):
         self.onShown.append(self.showPic)
 
     def showPic(self):
-        currPic = loadPic(self.picfile, DESKTOP_WIDTH * 0.75, DESKTOP_HEIGHT, 3, 0, 0, 0)
+        currPic = loadPic(self.picfile, int(DESKTOP_WIDTH * 0.75), DESKTOP_HEIGHT, 3, 0, 0, 0)
         if currPic != None:
             self['picture'].instance.setPixmap(currPic)
         return
@@ -8031,6 +8025,7 @@ class searchYouTube(tvAllScreen):
     def makeTrailerList(self, string):
         self.setTitle(self.titel + str(self.count))
         output = open(self.localhtml, 'r').read()
+        output = six.ensure_str(output)
         startpos = output.find('class="section-list">')
         endpos = output.find('\n</ol>\n\n')
         bereich = output[startpos:endpos]
@@ -9011,6 +9006,7 @@ class tvMain(tvBaseScreen):
     def makeSecondMenu(self, string, link):
         if fileExists(self.senderhtml):
             output = open(self.senderhtml, 'r').read()
+            output = six.ensure_str(output)
         else:
             output = ''
         self.secondmenulist = []
@@ -9141,6 +9137,7 @@ class tvMain(tvBaseScreen):
     def makeThirdMenu(self, string, sender):
         if string != None:
             output = open(self.senderhtml, 'r').read()
+            output = six.ensure_str(output)
         self.thirdmenulist = []
         self.thirdmenulink = []
         self.genre = []
@@ -9757,6 +9754,7 @@ class gotoPageMenu(tvAllScreen):
     def makePageMenu(self):
         self.setTitle('Senderliste')
         output = open(self.localhtml, 'r').read()
+        output = six.ensure_str(output)
         startpos = output.find('label="Alle Sender">Alle Sender</option>')
         if config.plugins.tvspielfilm.meintvs.value == 'yes':
             endpos = output.find('<optgroup label="Hauptsender">')
@@ -10316,7 +10314,7 @@ class tvJetzt(tvAllScreenFull):
     def __init__(self, session, link):
         self.link = link
         tvAllScreenFull.__init__(self, session)
-        self.service_db = serviceDB(self.servicefile)
+        self.channel_db = channelDB(self.servicefile)
         self.JetztTimer = eTimer()
         self.JetztTimer.callback.append(self.makeTimerDB)
         self.JetztTimer.callback.append(self.makeCheck)
@@ -10341,7 +10339,7 @@ class tvJetzt(tvAllScreenFull):
 class tvEvent(tvAllScreenFull):
     def __init__(self, session):
         tvAllScreenFull.__init__(self, session)
-        self.service_db = serviceDB(self.servicefile)
+        self.channel_db = channelDB(self.servicefile)
         self.EventTimer = eTimer()
         self.EventTimer.callback.append(self.makeTimerDB)
         self.EventTimer.callback.append(self.makeChannelLink)
@@ -10352,7 +10350,7 @@ class tvEvent(tvAllScreenFull):
             sref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
             sref = str(sref) + 'FIN'
             sref = sub(':0:0:0:.*?FIN', ':0:0:0:', sref)
-            channel = self.service_db.lookup(sref)
+            channel = self.channel_db.lookup(sref)
             if channel == 'nope':
                 self.session.open(MessageBox, 'Service not found:\nNo entry for current service reference\n%s' % str(sref), MessageBox.TYPE_INFO, close_on_any_key=True)
                 self.close()
