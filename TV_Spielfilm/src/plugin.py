@@ -249,10 +249,18 @@ class tvAllScreenFull(tvAllScreen):
 class tvBaseScreen(tvAllScreen):
     def __init__(self, session, skin=None, dic=None, scale=True):
         tvAllScreen.__init__(self, session, skin, dic, scale)
+        self.current = 'menu'
+        self.oldcurrent = 'menu'
+        self.start = ''
+        self.end = ''
+        self.day = ''
+        self.name = ''
+        self.shortdesc = ''
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.pics = []
         self.TVinfopicloads = {}
         self.trailer = False
+        self.trailerurl = ''
         for i in range(1,7):
             self.pics.append('/tmp/tvspielfilm%s.jpg' % i)
         self.localhtml = '/tmp/tvspielfilm.html'
@@ -264,6 +272,29 @@ class tvBaseScreen(tvAllScreen):
         else:
             self.picon = False
         return
+
+    def _tvinfoHide(self):
+        self['tvinfo1'].hide()
+        self['tvinfo2'].hide()
+        self['tvinfo3'].hide()
+        self['tvinfo4'].hide()
+        self['tvinfo5'].hide()
+
+    def _infotextHide(self):
+        self['infotext'].hide()
+        self['infotext2'].hide()
+        self['infotext3'].hide()
+        self['infotext4'].hide()
+        self['infotext5'].hide()
+        self['infotext6'].hide()
+        self['infotext7'].hide()
+        self['infotext8'].hide()
+        self['cinlogo'].hide()
+        self['playlogo'].hide()
+        self['searchlogo'].hide()
+        self['searchtimer'].hide()
+        self['searchtext'].hide()
+        self['searchmenu'].hide()
 
     def setTVTitle(self, output):
         title = search('<title>(.*?)</title>', output)
@@ -338,19 +369,7 @@ class tvBaseScreen(tvAllScreen):
                 return MultiContentEntryPixmapAlphaTest(pos=(Pos, 10), size=(60, 20), png=loadPNG(png))
         return None
 
-    def makePostTimer(self, output):
-        output = six.ensure_str(output)
-        startpos = output.find('<div class="content-area">')
-        endpos = output.find('>Weitere Bildergalerien<')
-        if endpos == -1:
-            endpos = output.find('<h2 class="broadcast-info">')
-            if endpos == -1:
-                endpos = output.find('<div class="OUTBRAIN"')
-                if endpos == -1:
-                    endpos = output.find('</footer>')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        infotext = re.findall('<span class="text-row">(.*?)<', bereich)
+    def _infotextStartEnd(self, infotext):
         try:
             parts = infotext[0].split(', ')
             x = parts[0]
@@ -384,6 +403,46 @@ class tvBaseScreen(tvAllScreen):
         except IndexError:
             pass
 
+    def _infotextText(self, infotext):
+        try:
+            parts = infotext[0].split(', ')
+            self['infotext'].setText(parts[0])
+            self['infotext'].show()
+        except IndexError:
+            self['infotext'].setText('')
+        try:
+            parts = infotext[0].split(', ')
+            self['infotext2'].setText(parts[1])
+            self['infotext2'].show()
+        except IndexError:
+            self['infotext2'].setText('')
+
+        try:
+            parts = infotext[0].split(', ')
+            self['infotext3'].setText(parts[2])
+            self['infotext3'].show()
+        except IndexError:
+            self['infotext3'].setText('')
+        try:
+            parts = infotext[1].split(', ')
+            self['infotext4'].setText(parts[0])
+            self['infotext4'].show()
+        except IndexError:
+            self['infotext4'].setText('')
+        try:
+            parts = infotext[1].split(', ')
+            self['infotext5'].setText(parts[1])
+            self['infotext5'].show()
+        except IndexError:
+            self['infotext5'].setText('')
+        try:
+            parts = infotext[1].split(', ')
+            self['infotext6'].setText(parts[2])
+            self['infotext6'].show()
+        except IndexError:
+            self['infotext6'].setText('')
+
+    def _shortdesc(self, bereich):
         shortdesc = search('<section class="serial-info">\\n\\s+(.*?)</section>', bereich)
         if shortdesc is not None:
             self.shortdesc = sub('<span class="info">', '', shortdesc.group(1))
@@ -400,6 +459,22 @@ class tvBaseScreen(tvAllScreen):
                 self.name = name[0]
             except IndexError:
                 self.name = ''
+
+    def makePostTimer(self, output):
+        output = six.ensure_str(output)
+        startpos = output.find('<div class="content-area">')
+        endpos = output.find('>Weitere Bildergalerien<')
+        if endpos == -1:
+            endpos = output.find('<h2 class="broadcast-info">')
+            if endpos == -1:
+                endpos = output.find('<div class="OUTBRAIN"')
+                if endpos == -1:
+                    endpos = output.find('</footer>')
+        bereich = output[startpos:endpos]
+        bereich = transHTML(bereich)
+        infotext = re.findall('<span class="text-row">(.*?)<', bereich)
+        self._infotextStartEnd(infotext)
+        self._shortdesc(bereich)
 
         self.current = 'postview'
         self.postviewready = True
@@ -486,81 +561,10 @@ class tvBaseScreen(tvAllScreen):
                 self['label'].setText('OK = Zum Video, Text = Vollbild, 7/8/9 = IMDb/TMDb/TVDb, Info = EPG')
             else:
                 self['label'].setText('OK = Vollbild, 7/8/9 = IMDb/TMDb/TVDb, Info = EPG')
+
         infotext = re.findall('<span class="text-row">(.*?)<', bereich)
-        try:
-            parts = infotext[0].split(', ')
-            x = parts[0]
-            if x == 'Heute':
-                d = sub('....-', '', str(self.date))
-                d2 = sub('-..', '', d)
-                d3 = sub('..-', '', d)
-                x = 'he ' + d3 + '.' + d2 + '.'
-            day = sub('.. ', '', x)
-            self.day = sub('[.]..[.]', '', day)
-            month = sub('.. ..[.]', '', x)
-            month = sub('[.]', '', month)
-            date = str(self.date) + 'FIN'
-            year = sub('......FIN', '', date)
-            self.postdate = year + '-' + month + '-' + self.day
-            today = datetime.date(int(year), int(month), int(self.day))
-            one_day = datetime.timedelta(days=1)
-            self.nextdate = today + one_day
-        except:
-            pass
-
-        try:
-            parts = infotext[0].split(', ')
-            x = parts[1]
-            start = sub(' - ..:..', '', x)
-            start = start + ':00'
-            end = sub('..:.. - ', '', x)
-            end = end + ':00'
-            self.start = start
-            self.end = end
-        except IndexError:
-            pass
-
-        try:
-            parts = infotext[0].split(', ')
-            self['infotext'].setText(parts[0])
-            self['infotext'].show()
-        except IndexError:
-            self['infotext'].setText('')
-
-        try:
-            parts = infotext[0].split(', ')
-            self['infotext2'].setText(parts[1])
-            self['infotext2'].show()
-        except IndexError:
-            self['infotext2'].setText('')
-
-        try:
-            parts = infotext[0].split(', ')
-            self['infotext3'].setText(parts[2])
-            self['infotext3'].show()
-        except IndexError:
-            self['infotext3'].setText('')
-
-        try:
-            parts = infotext[1].split(', ')
-            self['infotext4'].setText(parts[0])
-            self['infotext4'].show()
-        except IndexError:
-            self['infotext4'].setText('')
-
-        try:
-            parts = infotext[1].split(', ')
-            self['infotext5'].setText(parts[1])
-            self['infotext5'].show()
-        except IndexError:
-            self['infotext5'].setText('')
-
-        try:
-            parts = infotext[1].split(', ')
-            self['infotext6'].setText(parts[2])
-            self['infotext6'].show()
-        except IndexError:
-            self['infotext6'].setText('')
+        self._infotextStartEnd(infotext)
+        self._infotextText(infotext)
 
         try:
             parts = infotext[2].split(', ')
@@ -591,22 +595,7 @@ class tvBaseScreen(tvAllScreen):
         except IndexError:
             self['piclabel2'].setText('')
 
-        shortdesc = search('<section class="serial-info">\\n\\s+(.*?)</section>', bereich)
-        if shortdesc is not None:
-            self.shortdesc = sub('<span class="info">', '', shortdesc.group(1))
-            self.shortdesc = sub('</span>\\s+', ', ', self.shortdesc)
-            self.shortdesc = sub('  ', '', self.shortdesc)
-        else:
-            self.shortdesc = ''
-        name = re.findall('<h1 class="headline headline--article">(.*?)</h1>', bereich)
-        try:
-            self.name = name[0]
-        except IndexError:
-            name = re.findall('<span itemprop="name"><strong>(.*?)</strong></span>', bereich)
-            try:
-                self.name = name[0]
-            except IndexError:
-                self.name = ''
+        self._shortdesc(bereich)
 
         if self.tagestipp == True:
             channel = re.findall("var adsc_sender = '(.*?)'", output)
@@ -630,26 +619,13 @@ class tvBaseScreen(tvAllScreen):
 
     def showsearch(self):
         self.postviewready = False
-        self['infotext'].hide()
-        self['infotext2'].hide()
-        self['infotext3'].hide()
-        self['infotext4'].hide()
-        self['infotext5'].hide()
-        self['infotext6'].hide()
-        self['infotext7'].hide()
-        self['infotext8'].hide()
-        self['cinlogo'].hide()
-        self['playlogo'].hide()
+        self._infotextHide()
         self['textpage'].hide()
         self['slider_textpage'].hide()
         self['picpost'].hide()
         self['piclabel'].hide()
         self['piclabel2'].hide()
-        self['tvinfo1'].hide()
-        self['tvinfo2'].hide()
-        self['tvinfo3'].hide()
-        self['tvinfo4'].hide()
-        self['tvinfo5'].hide()
+        self._tvinfoHide()
         self['label'].setText('')
         self['label2'].setText('')
         self['label3'].setText('')
@@ -811,6 +787,115 @@ class tvBaseScreen(tvAllScreen):
             else:
                 self.session.openWithCallback(self.showPicPost, FullScreen)
 
+    def redTimer(self, search=False, serviceref=None):
+
+        if serviceref == None:
+            try:
+                if search == True:
+                    c = self['searchmenu'].getSelectedIndex()
+                    self.oldsearchindex = c
+                    sref = self.searchref[c]
+                else:
+                    c = self['menu'].getSelectedIndex()
+                    self.oldindex = c
+                    sref = self.sref[c]
+                serviceref = ServiceReference(sref)
+            except IndexError:
+                serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
+
+        try:
+            start = self.start
+            s1 = sub(':..', '', start)
+            date = str(self.postdate) + 'FIN'
+            date = sub('..FIN', '', date)
+            date = date + self.day
+            parts = start.split(':')
+            seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+            seconds -= int(config.recording.margin_before.value) * 60
+            start = time.strftime('%H:%M:%S', time.gmtime(seconds))
+            s2 = sub(':..:..', '', start)
+            if int(s2) > int(s1):
+                start = str(self.date) + ' ' + start
+            else:
+                start = date + ' ' + start
+            start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+            end = self.end
+            parts = end.split(':')
+            seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+            seconds += int(config.recording.margin_after.value) * 60
+            end = time.strftime('%H:%M:%S', time.gmtime(seconds))
+            e2 = sub(':..:..', '', end)
+            if int(s2) > int(e2):
+                end = str(self.nextdate) + ' ' + end
+            else:
+                end = date + ' ' + end
+            end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
+        except IndexError:
+            pass
+
+        name = self.name
+        shortdesc = self.shortdesc
+        if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
+            episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
+            episode = sub('Staffel ', 'S', episode.group(1))
+            episode = sub(', Folge ', 'E', episode)
+            name = name + ' ' + episode
+        data = (int(mktime(start.timetuple())),
+            int(mktime(end.timetuple())),
+            name,
+            shortdesc,
+            None)
+        newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
+        if self.autotimer == False:
+            self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
+        else:
+            from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
+            from Plugins.Extensions.AutoTimer.plugin import autotimer
+            if autotimer is None:
+                from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+                autotimer = AutoTimer()
+            autotimer.readXml()
+            newTimer = autotimer.defaultTimer.clone()
+            newTimer.id = autotimer.getUniqueId()
+            newTimer.name = self.name
+            newTimer.match = ''
+            newTimer.enabled = True
+            self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+
+    def _commonInit(self, ltxt = '= Suche', lltxt = '= Zappen'):
+        self['picpost'] = Pixmap()
+        self['tvinfo1'] = Pixmap()
+        self['tvinfo2'] = Pixmap()
+        self['tvinfo3'] = Pixmap()
+        self['tvinfo4'] = Pixmap()
+        self['tvinfo5'] = Pixmap()
+        self['cinlogo'] = Pixmap()
+        self['playlogo'] = Pixmap()
+        self['searchlogo'] = Pixmap()
+        self['searchtimer'] = Pixmap()
+        self['searchtext'] = Label('')
+        self['infotext'] = Label('')
+        self['infotext2'] = Label('')
+        self['infotext3'] = Label('')
+        self['infotext4'] = Label('')
+        self['infotext5'] = Label('')
+        self['infotext6'] = Label('')
+        self['infotext7'] = Label('')
+        self['infotext8'] = Label('')
+        self['searchmenu'] = ItemList([])
+        self['textpage'] = ScrollLabel('')
+        self['piclabel'] = Label('')
+        self['piclabel'].hide()
+        self['piclabel2'] = Label('')
+        self['piclabel2'].hide()
+        self['slider_textpage'] = Pixmap()
+        self['slider_textpage'].hide()
+        self['label'] = BlinkingLabel('Bitte warten...')
+        self['label'].startBlinking()
+        self['label2'] = Label('= Timer')
+        self['label3'] = Label(ltxt)
+        self['label4'] = Label(lltxt)
+
 
 class TVTippsView(tvBaseScreen):
     def __init__(self, session, link, sparte):
@@ -823,8 +908,6 @@ class TVTippsView(tvBaseScreen):
             self.titel = 'TV Neuerscheinungen - TV Spielfilm'
         else:
             self.titel = 'TV-Tipps - TV Spielfilm'
-        self.current = 'menu'
-        self.oldcurrent = 'menu'
         self.sparte = sparte
         self.tventries = []
         self.tvlink = []
@@ -833,15 +916,9 @@ class TVTippsView(tvBaseScreen):
         self.searchlink = []
         self.searchref = []
         self.searchentries = []
-        self.start = ''
-        self.end = ''
-        self.day = ''
-        self.name = ''
-        self.shortdesc = ''
         self.sref = []
         self.postlink = link
         self.link = link
-        self.trailerurl = ''
         self.POSTtext = ''
         self.EPGtext = ''
         self.hideflag = True
@@ -864,53 +941,9 @@ class TVTippsView(tvBaseScreen):
         self['pic4'] = Pixmap()
         self['pic5'] = Pixmap()
         self['pic6'] = Pixmap()
-        self['picpost'] = Pixmap()
-        self['tvinfo1'] = Pixmap()
-        self['tvinfo2'] = Pixmap()
-        self['tvinfo3'] = Pixmap()
-        self['tvinfo4'] = Pixmap()
-        self['tvinfo5'] = Pixmap()
-        self['cinlogo'] = Pixmap()
-        self['cinlogo'].hide()
-        self['playlogo'] = Pixmap()
-        self['playlogo'].hide()
-        self['searchlogo'] = Pixmap()
-        self['searchlogo'].hide()
-        self['searchtimer'] = Pixmap()
-        self['searchtimer'].hide()
-        self['searchtext'] = Label('')
-        self['searchtext'].hide()
-        self['textpage'] = ScrollLabel('')
-        self['infotext'] = Label('')
-        self['infotext'].hide()
-        self['infotext2'] = Label('')
-        self['infotext2'].hide()
-        self['infotext3'] = Label('')
-        self['infotext3'].hide()
-        self['infotext4'] = Label('')
-        self['infotext4'].hide()
-        self['infotext5'] = Label('')
-        self['infotext5'].hide()
-        self['infotext6'] = Label('')
-        self['infotext6'].hide()
-        self['infotext7'] = Label('')
-        self['infotext7'].hide()
-        self['infotext8'] = Label('')
-        self['infotext8'].hide()
-        self['piclabel'] = Label('')
-        self['piclabel'].hide()
-        self['piclabel2'] = Label('')
-        self['piclabel2'].hide()
-        self['slider_textpage'] = Pixmap()
-        self['slider_textpage'].hide()
-        self['searchmenu'] = ItemList([])
-        self['searchmenu'].hide()
+        self._commonInit()
+        self._infotextHide()
         self['menu'] = ItemList([])
-        self['label'] = BlinkingLabel('Bitte warten...')
-        self['label'].startBlinking()
-        self['label2'] = Label('= Timer')
-        self['label3'] = Label('= Suche')
-        self['label4'] = Label('= Zappen')
         self['actions'] = ActionMap(['OkCancelActions',
          'ChannelSelectBaseActions',
          'DirectionActions',
@@ -1455,139 +1488,9 @@ class TVTippsView(tvBaseScreen):
     def red(self):
         if self.current == 'postview' and self.postviewready == True:
             if self.search == False:
-                try:
-                    c = self['menu'].getSelectedIndex()
-                    self.oldindex = c
-                    sref = self.sref[c]
-                    serviceref = ServiceReference(sref)
-                except IndexError:
-                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
-
-                try:
-                    start = self.start
-                    s1 = sub(':..', '', start)
-                    date = str(self.postdate) + 'FIN'
-                    date = sub('..FIN', '', date)
-                    date = date + self.day
-                    parts = start.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds -= int(config.recording.margin_before.value) * 60
-                    start = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    s2 = sub(':..:..', '', start)
-                    if int(s2) > int(s1):
-                        start = str(self.date) + ' ' + start
-                    else:
-                        start = date + ' ' + start
-                    start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
-                    end = self.end
-                    parts = end.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds += int(config.recording.margin_after.value) * 60
-                    end = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    e2 = sub(':..:..', '', end)
-                    if int(s2) > int(e2):
-                        end = str(self.nextdate) + ' ' + end
-                    else:
-                        end = date + ' ' + end
-                    end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
-                except IndexError:
-                    pass
-
-                name = self.name
-                shortdesc = self.shortdesc
-                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
-                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
-                    episode = sub('Staffel ', 'S', episode.group(1))
-                    episode = sub(', Folge ', 'E', episode)
-                    name = name + ' ' + episode
-                data = (int(mktime(start.timetuple())),
-                 int(mktime(end.timetuple())),
-                 name,
-                 shortdesc,
-                 None)
-                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
-                if self.autotimer == False:
-                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
-                else:
-                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
-                    from Plugins.Extensions.AutoTimer.plugin import autotimer
-                    if autotimer is None:
-                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                        autotimer = AutoTimer()
-                    autotimer.readXml()
-                    newTimer = autotimer.defaultTimer.clone()
-                    newTimer.id = autotimer.getUniqueId()
-                    newTimer.name = self.name
-                    newTimer.match = ''
-                    newTimer.enabled = True
-                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+                self.redTimer()
             elif self.search == True:
-                try:
-                    c = self['searchmenu'].getSelectedIndex()
-                    self.oldsearchindex = c
-                    sref = self.searchref[c]
-                    serviceref = ServiceReference(sref)
-                except IndexError:
-                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
-
-                try:
-                    start = self.start
-                    s1 = sub(':..', '', start)
-                    date = str(self.postdate) + 'FIN'
-                    date = sub('..FIN', '', date)
-                    date = date + self.day
-                    parts = start.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds -= int(config.recording.margin_before.value) * 60
-                    start = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    s2 = sub(':..:..', '', start)
-                    if int(s2) > int(s1):
-                        start = str(self.date) + ' ' + start
-                    else:
-                        start = date + ' ' + start
-                    start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
-                    end = self.end
-                    parts = end.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds += int(config.recording.margin_after.value) * 60
-                    end = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    e2 = sub(':..:..', '', end)
-                    if int(s2) > int(e2):
-                        end = str(self.nextdate) + ' ' + end
-                    else:
-                        end = date + ' ' + end
-                    end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
-                except IndexError:
-                    pass
-
-                name = self.name
-                shortdesc = self.shortdesc
-                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
-                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
-                    episode = sub('Staffel ', 'S', episode.group(1))
-                    episode = sub(', Folge ', 'E', episode)
-                    name = name + ' ' + episode
-                data = (int(mktime(start.timetuple())),
-                 int(mktime(end.timetuple())),
-                 name,
-                 shortdesc,
-                 None)
-                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
-                if self.autotimer == False:
-                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
-                else:
-                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
-                    from Plugins.Extensions.AutoTimer.plugin import autotimer
-                    if autotimer is None:
-                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                        autotimer = AutoTimer()
-                    autotimer.readXml()
-                    newTimer = autotimer.defaultTimer.clone()
-                    newTimer.id = autotimer.getUniqueId()
-                    newTimer.name = self.name
-                    newTimer.match = ''
-                    newTimer.enabled = True
-                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+                self.redTimer(True)
             else:
                 self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         elif self.current == 'menu' and self.ready == True:
@@ -1911,30 +1814,13 @@ class TVTippsView(tvBaseScreen):
         self['label2'].setText('= Timer')
         self['label3'].setText('= Suche')
         self['label4'].setText('= Zappen')
-        self['infotext'].hide()
-        self['infotext2'].hide()
-        self['infotext3'].hide()
-        self['infotext4'].hide()
-        self['infotext5'].hide()
-        self['infotext6'].hide()
-        self['infotext7'].hide()
-        self['infotext8'].hide()
-        self['cinlogo'].hide()
-        self['playlogo'].hide()
+        self._infotextHide()
         self['textpage'].hide()
         self['slider_textpage'].hide()
         self['picpost'].hide()
         self['piclabel'].hide()
         self['piclabel2'].hide()
-        self['tvinfo1'].hide()
-        self['tvinfo2'].hide()
-        self['tvinfo3'].hide()
-        self['tvinfo4'].hide()
-        self['tvinfo5'].hide()
-        self['searchmenu'].hide()
-        self['searchlogo'].hide()
-        self['searchtimer'].hide()
-        self['searchtext'].hide()
+        self._tvinfoHide()
         self.current = 'menu'
         self['menu'].show()
         try:
@@ -2132,8 +2018,6 @@ class TVGenreView(tvBaseScreen):
             %s%s%s
         </screen>""" % ( SKHEADTOP, SKMENU, SKHEADBOTTOM )
         tvBaseScreen.__init__(self, session, skin)
-        self.current = 'menu'
-        self.oldcurrent = 'menu'
         self.tventries = []
         self.tvlink = []
         self.tvtitel = []
@@ -2141,14 +2025,8 @@ class TVGenreView(tvBaseScreen):
         self.searchlink = []
         self.searchref = []
         self.searchentries = []
-        self.start = ''
-        self.end = ''
-        self.day = ''
-        self.name = ''
-        self.shortdesc = ''
         self.postlink = link
         self.link = link
-        self.trailerurl = ''
         self.POSTtext = ''
         self.EPGtext = ''
         self.genre = genre
@@ -2171,53 +2049,9 @@ class TVGenreView(tvBaseScreen):
         self.genrecount = 0
         self.oldindex = 0
         self.oldsearchindex = 1
-        self['picpost'] = Pixmap()
-        self['tvinfo1'] = Pixmap()
-        self['tvinfo2'] = Pixmap()
-        self['tvinfo3'] = Pixmap()
-        self['tvinfo4'] = Pixmap()
-        self['tvinfo5'] = Pixmap()
-        self['cinlogo'] = Pixmap()
-        self['cinlogo'].hide()
-        self['playlogo'] = Pixmap()
-        self['playlogo'].hide()
-        self['searchlogo'] = Pixmap()
-        self['searchlogo'].hide()
-        self['searchtimer'] = Pixmap()
-        self['searchtimer'].hide()
-        self['searchtext'] = Label('')
-        self['searchtext'].hide()
-        self['textpage'] = ScrollLabel('')
-        self['infotext'] = Label('')
-        self['infotext'].hide()
-        self['infotext2'] = Label('')
-        self['infotext2'].hide()
-        self['infotext3'] = Label('')
-        self['infotext3'].hide()
-        self['infotext4'] = Label('')
-        self['infotext4'].hide()
-        self['infotext5'] = Label('')
-        self['infotext5'].hide()
-        self['infotext6'] = Label('')
-        self['infotext6'].hide()
-        self['infotext7'] = Label('')
-        self['infotext7'].hide()
-        self['infotext8'] = Label('')
-        self['infotext8'].hide()
-        self['piclabel'] = Label('')
-        self['piclabel'].hide()
-        self['piclabel2'] = Label('')
-        self['piclabel2'].hide()
-        self['slider_textpage'] = Pixmap()
-        self['slider_textpage'].hide()
-        self['searchmenu'] = ItemList([])
-        self['searchmenu'].hide()
+        self._commonInit('= Filter')
+        self._infotextHide()
         self['menu'] = ItemList([])
-        self['label'] = BlinkingLabel('Bitte warten...')
-        self['label'].startBlinking()
-        self['label2'] = Label('= Timer')
-        self['label3'] = Label('= Filter')
-        self['label4'] = Label('= Zappen')
         self['actions'] = ActionMap(['OkCancelActions',
          'DirectionActions',
          'HelpActions',
@@ -2766,139 +2600,9 @@ class TVGenreView(tvBaseScreen):
     def red(self):
         if self.current == 'postview' and self.postviewready == True:
             if self.search == False:
-                try:
-                    c = self['menu'].getSelectedIndex()
-                    self.oldindex = c
-                    sref = self.sref[c]
-                    serviceref = ServiceReference(sref)
-                except IndexError:
-                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
-
-                try:
-                    start = self.start
-                    s1 = sub(':..', '', start)
-                    date = str(self.postdate) + 'FIN'
-                    date = sub('..FIN', '', date)
-                    date = date + self.day
-                    parts = start.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds -= int(config.recording.margin_before.value) * 60
-                    start = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    s2 = sub(':..:..', '', start)
-                    if int(s2) > int(s1):
-                        start = str(self.date) + ' ' + start
-                    else:
-                        start = date + ' ' + start
-                    start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
-                    end = self.end
-                    parts = end.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds += int(config.recording.margin_after.value) * 60
-                    end = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    e2 = sub(':..:..', '', end)
-                    if int(s2) > int(e2):
-                        end = str(self.nextdate) + ' ' + end
-                    else:
-                        end = date + ' ' + end
-                    end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
-                except IndexError:
-                    pass
-
-                name = self.name
-                shortdesc = self.shortdesc
-                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
-                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
-                    episode = sub('Staffel ', 'S', episode.group(1))
-                    episode = sub(', Folge ', 'E', episode)
-                    name = name + ' ' + episode
-                data = (int(mktime(start.timetuple())),
-                 int(mktime(end.timetuple())),
-                 name,
-                 shortdesc,
-                 None)
-                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
-                if self.autotimer == False:
-                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
-                else:
-                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
-                    from Plugins.Extensions.AutoTimer.plugin import autotimer
-                    if autotimer is None:
-                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                        autotimer = AutoTimer()
-                    autotimer.readXml()
-                    newTimer = autotimer.defaultTimer.clone()
-                    newTimer.id = autotimer.getUniqueId()
-                    newTimer.name = self.name
-                    newTimer.match = ''
-                    newTimer.enabled = True
-                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+                self.redTimer()
             elif self.search == True:
-                try:
-                    c = self['searchmenu'].getSelectedIndex()
-                    self.oldsearchindex = c
-                    sref = self.searchref[c]
-                    serviceref = ServiceReference(sref)
-                except IndexError:
-                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
-
-                try:
-                    start = self.start
-                    s1 = sub(':..', '', start)
-                    date = str(self.postdate) + 'FIN'
-                    date = sub('..FIN', '', date)
-                    date = date + self.day
-                    parts = start.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds -= int(config.recording.margin_before.value) * 60
-                    start = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    s2 = sub(':..:..', '', start)
-                    if int(s2) > int(s1):
-                        start = str(self.date) + ' ' + start
-                    else:
-                        start = date + ' ' + start
-                    start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
-                    end = self.end
-                    parts = end.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds += int(config.recording.margin_after.value) * 60
-                    end = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    e2 = sub(':..:..', '', end)
-                    if int(s2) > int(e2):
-                        end = str(self.nextdate) + ' ' + end
-                    else:
-                        end = date + ' ' + end
-                    end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
-                except IndexError:
-                    pass
-
-                name = self.name
-                shortdesc = self.shortdesc
-                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
-                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
-                    episode = sub('Staffel ', 'S', episode.group(1))
-                    episode = sub(', Folge ', 'E', episode)
-                    name = name + ' ' + episode
-                data = (int(mktime(start.timetuple())),
-                 int(mktime(end.timetuple())),
-                 name,
-                 shortdesc,
-                 None)
-                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
-                if self.autotimer == False:
-                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
-                else:
-                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
-                    from Plugins.Extensions.AutoTimer.plugin import autotimer
-                    if autotimer is None:
-                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                        autotimer = AutoTimer()
-                    autotimer.readXml()
-                    newTimer = autotimer.defaultTimer.clone()
-                    newTimer.id = autotimer.getUniqueId()
-                    newTimer.name = self.name
-                    newTimer.match = ''
-                    newTimer.enabled = True
-                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+                self.redTimer(True)
             else:
                 self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         elif self.current == 'menu' and self.ready == True:
@@ -3087,30 +2791,13 @@ class TVGenreView(tvBaseScreen):
         self['label2'].setText('= Timer')
         self['label3'].setText('= Filter')
         self['label4'].setText('= Zappen')
-        self['infotext'].hide()
-        self['infotext2'].hide()
-        self['infotext3'].hide()
-        self['infotext4'].hide()
-        self['infotext5'].hide()
-        self['infotext6'].hide()
-        self['infotext7'].hide()
-        self['infotext8'].hide()
-        self['cinlogo'].hide()
-        self['playlogo'].hide()
+        self._infotextHide()
         self['textpage'].hide()
         self['slider_textpage'].hide()
         self['picpost'].hide()
         self['piclabel'].hide()
         self['piclabel2'].hide()
-        self['tvinfo1'].hide()
-        self['tvinfo2'].hide()
-        self['tvinfo3'].hide()
-        self['tvinfo4'].hide()
-        self['tvinfo5'].hide()
-        self['searchmenu'].hide()
-        self['searchlogo'].hide()
-        self['searchtimer'].hide()
-        self['searchtext'].hide()
+        self._tvinfoHide()
         self.current = 'menu'
         self['menu'].show()
 
@@ -3206,8 +2893,6 @@ class TVJetztView(tvBaseScreen):
             %s%s%s
         </screen>""" % ( SKHEADTOP, SKMENU, SKHEADBOTTOM )
         tvBaseScreen.__init__(self, session, skin)
-        self.current = 'menu'
-        self.oldcurrent = 'menu'
         self.tventries = []
         self.tvlink = []
         self.tvtitel = []
@@ -3215,15 +2900,9 @@ class TVJetztView(tvBaseScreen):
         self.searchlink = []
         self.searchref = []
         self.searchentries = []
-        self.start = ''
-        self.end = ''
-        self.day = ''
-        self.name = ''
-        self.shortdesc = ''
         self.postlink = link
         self.link1 = link
         self.link2 = link
-        self.trailerurl = ''
         self.titel = ''
         self.standalone = standalone
         self.POSTtext = ''
@@ -3244,53 +2923,9 @@ class TVJetztView(tvBaseScreen):
         self.index = 0
         self.oldindex = 0
         self.oldsearchindex = 1
-        self['picpost'] = Pixmap()
-        self['tvinfo1'] = Pixmap()
-        self['tvinfo2'] = Pixmap()
-        self['tvinfo3'] = Pixmap()
-        self['tvinfo4'] = Pixmap()
-        self['tvinfo5'] = Pixmap()
-        self['cinlogo'] = Pixmap()
-        self['cinlogo'].hide()
-        self['playlogo'] = Pixmap()
-        self['playlogo'].hide()
-        self['searchlogo'] = Pixmap()
-        self['searchlogo'].hide()
-        self['searchtimer'] = Pixmap()
-        self['searchtimer'].hide()
-        self['searchtext'] = Label('')
-        self['searchtext'].hide()
-        self['textpage'] = ScrollLabel('')
-        self['infotext'] = Label('')
-        self['infotext'].hide()
-        self['infotext2'] = Label('')
-        self['infotext2'].hide()
-        self['infotext3'] = Label('')
-        self['infotext3'].hide()
-        self['infotext4'] = Label('')
-        self['infotext4'].hide()
-        self['infotext5'] = Label('')
-        self['infotext5'].hide()
-        self['infotext6'] = Label('')
-        self['infotext6'].hide()
-        self['infotext7'] = Label('')
-        self['infotext7'].hide()
-        self['infotext8'] = Label('')
-        self['infotext8'].hide()
-        self['piclabel'] = Label('')
-        self['piclabel'].hide()
-        self['piclabel2'] = Label('')
-        self['piclabel2'].hide()
-        self['slider_textpage'] = Pixmap()
-        self['slider_textpage'].hide()
-        self['searchmenu'] = ItemList([])
-        self['searchmenu'].hide()
+        self._commonInit()
+        self._infotextHide()
         self['menu'] = ItemList([])
-        self['label'] = BlinkingLabel('Bitte warten...')
-        self['label'].startBlinking()
-        self['label2'] = Label('= Timer')
-        self['label3'] = Label('= Suche')
-        self['label4'] = Label('= Zappen')
         self['actions'] = ActionMap(['OkCancelActions',
          'DirectionActions',
          'HelpActions',
@@ -3904,65 +3539,7 @@ class TVJetztView(tvBaseScreen):
                     serviceref = ServiceReference(sref)
                 except IndexError:
                     serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
-
-                try:
-                    start = self.start
-                    s1 = sub(':..', '', start)
-                    date = str(self.postdate) + 'FIN'
-                    date = sub('..FIN', '', date)
-                    date = date + self.day
-                    parts = start.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds -= int(config.recording.margin_before.value) * 60
-                    start = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    s2 = sub(':..:..', '', start)
-                    if int(s2) > int(s1):
-                        start = str(self.date) + ' ' + start
-                    else:
-                        start = date + ' ' + start
-                    start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
-                    end = self.end
-                    parts = end.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds += int(config.recording.margin_after.value) * 60
-                    end = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    e2 = sub(':..:..', '', end)
-                    if int(s2) > int(e2):
-                        end = str(self.nextdate) + ' ' + end
-                    else:
-                        end = date + ' ' + end
-                    end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
-                except IndexError:
-                    pass
-
-                name = self.name
-                shortdesc = self.shortdesc
-                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
-                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
-                    episode = sub('Staffel ', 'S', episode.group(1))
-                    episode = sub(', Folge ', 'E', episode)
-                    name = name + ' ' + episode
-                data = (int(mktime(start.timetuple())),
-                 int(mktime(end.timetuple())),
-                 name,
-                 shortdesc,
-                 None)
-                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
-                if self.autotimer == False:
-                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
-                else:
-                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
-                    from Plugins.Extensions.AutoTimer.plugin import autotimer
-                    if autotimer is None:
-                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                        autotimer = AutoTimer()
-                    autotimer.readXml()
-                    newTimer = autotimer.defaultTimer.clone()
-                    newTimer.id = autotimer.getUniqueId()
-                    newTimer.name = self.name
-                    newTimer.match = ''
-                    newTimer.enabled = True
-                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+                self.redTimer(False, serviceref)
             elif self.search == True:
                 try:
                     c = self['searchmenu'].getSelectedIndex()
@@ -3972,64 +3549,7 @@ class TVJetztView(tvBaseScreen):
                 except IndexError:
                     serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
 
-                try:
-                    start = self.start
-                    s1 = sub(':..', '', start)
-                    date = str(self.postdate) + 'FIN'
-                    date = sub('..FIN', '', date)
-                    date = date + self.day
-                    parts = start.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds -= int(config.recording.margin_before.value) * 60
-                    start = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    s2 = sub(':..:..', '', start)
-                    if int(s2) > int(s1):
-                        start = str(self.date) + ' ' + start
-                    else:
-                        start = date + ' ' + start
-                    start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
-                    end = self.end
-                    parts = end.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds += int(config.recording.margin_after.value) * 60
-                    end = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    e2 = sub(':..:..', '', end)
-                    if int(s2) > int(e2):
-                        end = str(self.nextdate) + ' ' + end
-                    else:
-                        end = date + ' ' + end
-                    end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
-                except IndexError:
-                    pass
-
-                name = self.name
-                shortdesc = self.shortdesc
-                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
-                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
-                    episode = sub('Staffel ', 'S', episode.group(1))
-                    episode = sub(', Folge ', 'E', episode)
-                    name = name + ' ' + episode
-                data = (int(mktime(start.timetuple())),
-                 int(mktime(end.timetuple())),
-                 name,
-                 shortdesc,
-                 None)
-                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
-                if self.autotimer == False:
-                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
-                else:
-                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
-                    from Plugins.Extensions.AutoTimer.plugin import autotimer
-                    if autotimer is None:
-                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                        autotimer = AutoTimer()
-                    autotimer.readXml()
-                    newTimer = autotimer.defaultTimer.clone()
-                    newTimer.id = autotimer.getUniqueId()
-                    newTimer.name = self.name
-                    newTimer.match = ''
-                    newTimer.enabled = True
-                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+                self.redTimer(False, serviceref)
             else:
                 self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         elif self.current == 'menu' and self.ready == True:
@@ -4235,30 +3755,13 @@ class TVJetztView(tvBaseScreen):
         self['label2'].setText('= Timer')
         self['label3'].setText('= Suche')
         self['label4'].setText('= Zappen')
-        self['infotext'].hide()
-        self['infotext2'].hide()
-        self['infotext3'].hide()
-        self['infotext4'].hide()
-        self['infotext5'].hide()
-        self['infotext6'].hide()
-        self['infotext7'].hide()
-        self['infotext8'].hide()
-        self['cinlogo'].hide()
-        self['playlogo'].hide()
+        self._infotextHide()
         self['textpage'].hide()
         self['slider_textpage'].hide()
         self['picpost'].hide()
         self['piclabel'].hide()
         self['piclabel2'].hide()
-        self['tvinfo1'].hide()
-        self['tvinfo2'].hide()
-        self['tvinfo3'].hide()
-        self['tvinfo4'].hide()
-        self['tvinfo5'].hide()
-        self['searchmenu'].hide()
-        self['searchlogo'].hide()
-        self['searchtimer'].hide()
-        self['searchtext'].hide()
+        self._tvinfoHide()
         self.current = 'menu'
         self['menu'].show()
 
@@ -4371,22 +3874,14 @@ class TVProgrammView(tvBaseScreen):
                     self.piconname = self.findPicon(self.sref)
                     if self.piconname is None:
                         self.picon = False
-        self.current = 'menu'
-        self.oldcurrent = 'menu'
         self.tventries = []
         self.tvlink = []
         self.tvtitel = []
         self.searchlink = []
         self.searchref = []
         self.searchentries = []
-        self.start = ''
-        self.end = ''
-        self.day = ''
-        self.name = ''
-        self.shortdesc = ''
         self.postlink = link
         self.link = link
-        self.trailerurl = ''
         self.titel = ''
         self.POSTtext = ''
         self.EPGtext = ''
@@ -4402,56 +3897,12 @@ class TVProgrammView(tvBaseScreen):
         self.filter = True
         self.oldindex = 0
         self.oldsearchindex = 1
-        self['picpost'] = Pixmap()
-        self['tvinfo1'] = Pixmap()
-        self['tvinfo2'] = Pixmap()
-        self['tvinfo3'] = Pixmap()
-        self['tvinfo4'] = Pixmap()
-        self['tvinfo5'] = Pixmap()
-        self['cinlogo'] = Pixmap()
-        self['cinlogo'].hide()
-        self['playlogo'] = Pixmap()
-        self['playlogo'].hide()
-        self['searchlogo'] = Pixmap()
-        self['searchlogo'].hide()
-        self['searchtimer'] = Pixmap()
-        self['searchtimer'].hide()
-        self['searchtext'] = Label('')
-        self['searchtext'].hide()
-        self['textpage'] = ScrollLabel('')
-        self['infotext'] = Label('')
-        self['infotext'].hide()
-        self['infotext2'] = Label('')
-        self['infotext2'].hide()
-        self['infotext3'] = Label('')
-        self['infotext3'].hide()
-        self['infotext4'] = Label('')
-        self['infotext4'].hide()
-        self['infotext5'] = Label('')
-        self['infotext5'].hide()
-        self['infotext6'] = Label('')
-        self['infotext6'].hide()
-        self['infotext7'] = Label('')
-        self['infotext7'].hide()
-        self['infotext8'] = Label('')
-        self['infotext8'].hide()
-        self['piclabel'] = Label('')
-        self['piclabel'].hide()
-        self['piclabel2'] = Label('')
-        self['piclabel2'].hide()
-        self['slider_textpage'] = Pixmap()
-        self['slider_textpage'].hide()
-        self['searchmenu'] = ItemList([])
-        self['searchmenu'].hide()
-        self['menu'] = ItemList([])
-        self['label'] = BlinkingLabel('Bitte warten...')
-        self['label'].startBlinking()
-        self['label2'] = Label('= Timer')
-        self['label3'] = Label('= Suche')
         if self.eventview == False:
-            self['label4'] = Label('= Zappen')
+            self._commonInit()
         else:
-            self['label4'] = Label('= Refresh')
+            self._commonInit('= Suche', '= Refresh')
+        self._infotextHide()
+        self['menu'] = ItemList([])
         self['actions'] = ActionMap(['OkCancelActions',
          'ChannelSelectBaseActions',
          'DirectionActions',
@@ -5013,64 +4464,7 @@ class TVProgrammView(tvBaseScreen):
                 except IndexError:
                     serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
 
-                try:
-                    start = self.start
-                    s1 = sub(':..', '', start)
-                    date = str(self.postdate) + 'FIN'
-                    date = sub('..FIN', '', date)
-                    date = date + self.day
-                    parts = start.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds -= int(config.recording.margin_before.value) * 60
-                    start = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    s2 = sub(':..:..', '', start)
-                    if int(s2) > int(s1):
-                        start = str(self.date) + ' ' + start
-                    else:
-                        start = date + ' ' + start
-                    start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
-                    end = self.end
-                    parts = end.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds += int(config.recording.margin_after.value) * 60
-                    end = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    e2 = sub(':..:..', '', end)
-                    if int(s2) > int(e2):
-                        end = str(self.nextdate) + ' ' + end
-                    else:
-                        end = date + ' ' + end
-                    end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
-                except IndexError:
-                    pass
-
-                name = self.name
-                shortdesc = self.shortdesc
-                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
-                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
-                    episode = sub('Staffel ', 'S', episode.group(1))
-                    episode = sub(', Folge ', 'E', episode)
-                    name = name + ' ' + episode
-                data = (int(mktime(start.timetuple())),
-                 int(mktime(end.timetuple())),
-                 name,
-                 shortdesc,
-                 None)
-                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
-                if self.autotimer == False:
-                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
-                else:
-                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
-                    from Plugins.Extensions.AutoTimer.plugin import autotimer
-                    if autotimer is None:
-                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                        autotimer = AutoTimer()
-                    autotimer.readXml()
-                    newTimer = autotimer.defaultTimer.clone()
-                    newTimer.id = autotimer.getUniqueId()
-                    newTimer.name = self.name
-                    newTimer.match = ''
-                    newTimer.enabled = True
-                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+                self.redTimer(False, serviceref)
             elif self.search == True:
                 try:
                     c = self['searchmenu'].getSelectedIndex()
@@ -5080,64 +4474,7 @@ class TVProgrammView(tvBaseScreen):
                 except IndexError:
                     serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
 
-                try:
-                    start = self.start
-                    s1 = sub(':..', '', start)
-                    date = str(self.postdate) + 'FIN'
-                    date = sub('..FIN', '', date)
-                    date = date + self.day
-                    parts = start.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds -= int(config.recording.margin_before.value) * 60
-                    start = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    s2 = sub(':..:..', '', start)
-                    if int(s2) > int(s1):
-                        start = str(self.date) + ' ' + start
-                    else:
-                        start = date + ' ' + start
-                    start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
-                    end = self.end
-                    parts = end.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds += int(config.recording.margin_after.value) * 60
-                    end = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    e2 = sub(':..:..', '', end)
-                    if int(s2) > int(e2):
-                        end = str(self.nextdate) + ' ' + end
-                    else:
-                        end = date + ' ' + end
-                    end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
-                except IndexError:
-                    pass
-
-                name = self.name
-                shortdesc = self.shortdesc
-                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
-                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
-                    episode = sub('Staffel ', 'S', episode.group(1))
-                    episode = sub(', Folge ', 'E', episode)
-                    name = name + ' ' + episode
-                data = (int(mktime(start.timetuple())),
-                 int(mktime(end.timetuple())),
-                 name,
-                 shortdesc,
-                 None)
-                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
-                if self.autotimer == False:
-                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
-                else:
-                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
-                    from Plugins.Extensions.AutoTimer.plugin import autotimer
-                    if autotimer is None:
-                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                        autotimer = AutoTimer()
-                    autotimer.readXml()
-                    newTimer = autotimer.defaultTimer.clone()
-                    newTimer.id = autotimer.getUniqueId()
-                    newTimer.name = self.name
-                    newTimer.match = ''
-                    newTimer.enabled = True
-                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+                self.redTimer(False, serviceref)
             else:
                 self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         elif self.current == 'menu' and self.ready == True and self.zap == True:
@@ -5470,30 +4807,13 @@ class TVProgrammView(tvBaseScreen):
             self['label2'].setText('= Timer')
             self['label3'].setText('= Suche')
             self['label4'].setText('= Refresh')
-        self['infotext'].hide()
-        self['infotext2'].hide()
-        self['infotext3'].hide()
-        self['infotext4'].hide()
-        self['infotext5'].hide()
-        self['infotext6'].hide()
-        self['infotext7'].hide()
-        self['infotext8'].hide()
-        self['cinlogo'].hide()
-        self['playlogo'].hide()
+        self._infotextHide()
         self['textpage'].hide()
         self['slider_textpage'].hide()
         self['picpost'].hide()
         self['piclabel'].hide()
         self['piclabel2'].hide()
-        self['tvinfo1'].hide()
-        self['tvinfo2'].hide()
-        self['tvinfo3'].hide()
-        self['tvinfo4'].hide()
-        self['tvinfo5'].hide()
-        self['searchmenu'].hide()
-        self['searchlogo'].hide()
-        self['searchtimer'].hide()
-        self['searchtext'].hide()
+        self._tvinfoHide()
         self.current = 'menu'
         self['menu'].show()
 
@@ -5944,8 +5264,8 @@ class TVTrailerBilder(tvBaseScreen):
             c = self['menu'].getSelectedIndex()
             try:
                 self.link = self.tvlink[c]
-                if sparte == '_pic':
-                    self.session.openWithCallback(self.picReturn, TVNewsPicShow, self.link)
+                if self.sparte == '_pic':
+                    self.session.openWithCallback(self.picReturn, TVPicShow, self.link, 1)
                     return
 
                 self.titel = self.tvtitel[c]
@@ -6151,14 +5471,12 @@ class TVNews(tvBaseScreen):
         </screen>"""
     def __init__(self, session, link):
         tvBaseScreen.__init__(self, session, TVNews.skin)
-        self.current = 'menu'
         self.menulist = []
         self.menulink = []
         self.picurllist = []
         self.pictextlist = []
         self.postlink = link
         self.link = link
-        self.trailerurl = ''
         self.titel = ''
         self.hideflag = True
         self.mehrbilder = False
@@ -6338,9 +5656,9 @@ class TVNews(tvBaseScreen):
                     self.session.open(MoviePlayer, sref)
                 elif self.mehrbilder == True:
                     if search('/playboy/', self.postlink) is None:
-                        self.session.openWithCallback(self.picReturn, TVNewsPicShow, self.postlink)
+                        self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink, 2)
                     else:
-                        self.session.openWithCallback(self.picReturn, PlayboyPicShow, self.postlink)
+                        self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink, 1)
                 else:
                     self.session.openWithCallback(self.showPicPost, FullScreen)
             return
@@ -6355,9 +5673,9 @@ class TVNews(tvBaseScreen):
             self.postlink = self.menulink[c]
             if action == 'ok':
                 if search('/playboy/', self.postlink) is not None:
-                    self.session.openWithCallback(self.picReturn, PlayboyPicShow, self.postlink)
+                    self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink, 2)
                 elif search('blog.tvspielfilm.de', self.postlink) is not None:
-                    self.session.openWithCallback(self.picReturn, TVBlog, self.postlink, True)
+                    self.session.openWithCallback(self.picReturn, TVBlog, self.postlink)
                 elif search('www.tvspielfilm.de', self.postlink) is not None:
                     self.current = 'postview'
                     self.downloadPostPage(self.postlink, self.makePostviewPageNews)
@@ -6513,7 +5831,6 @@ class TVBlog(tvBaseScreen):
     def __init__(self, session, link, post):
         tvBaseScreen.__init__(self, session, TVBlog.skin)
         self.baseurl = 'https://blog.tvspielfilm.de'
-        self.current = 'menu'
         self.menulist = []
         self.menulink = []
         self.picurllist = []
@@ -6523,7 +5840,6 @@ class TVBlog(tvBaseScreen):
         self.post = post
         self.postlink = link
         self.link = link
-        self.trailerurl = ''
         self.titel = ''
         self.hideflag = True
         self.ready = False
@@ -7042,27 +6358,48 @@ class TVBlog(tvBaseScreen):
             self.setTitle(self.titel)
             self.showTVBlog()
 
-
-class TVNewsPicShow(tvBaseScreen):
-    skin = '<screen name="TVNewsPicShow" position="center,center" size="{screensize}" title="Fotostrecke - TV Spielfilm">' + SKHEADTOP + """
-            <widget name="label" position="364,10" size="512,44" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />""" + SKTIME + """
-            <widget name="picture" position="175,70" size="889,500" alphatest="blend" zPosition="1" />
+class TVPicShow(tvBaseScreen):
+    skin = '<screen name="TVPicShow" position="center,center" size="{screensize}" title="">' + SKHEADTOP + """
+            <widget name="label" position="center,10" size="_512,44" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />""" + SKTIME + SKINFOTEXT + """
+            <widget name="textpage" position="10,70" size="250,560" font="Regular;20" halign="left" zPosition="1" />
+            <widget name="picture" position="175,70" size="{picsz}" alphatest="blend" zPosition="1" />
             <widget name="picindex" position="1065,70" size="165,24" font="Regular;20" halign="right" zPosition="1" />
             <widget name="pictext" position="10,577" size="1220,63" font="Regular;20" halign="center" zPosition="1" />
         </screen>"""
 
-    def __init__(self, session, link):
-        tvBaseScreen.__init__(self, session, TVNewsPicShow.skin)
+    def __init__(self, session, link, picmode=0):
+        self.pich = 500
+        self.picw = 889
+        if picmode == 2:
+            self.pich = 525
+            self.picw = 700
+        picsz = "%s,%s" % (str(self.picw),str(self.pich))
+        dic = {"picsz": picsz}
+        tvBaseScreen.__init__(self, session, TVPicShow.skin, dic)
+        self.picmode = picmode
         self.hideflag = True
         self.link = link
         self.pixlist = []
         self.topline = []
         self.titel = ''
+        if picmode == 2:
+            self.setTitle('Erotische Playmates - TV Spielfilm')
+        else:
+            self.setTitle('Fotostrecke - TV Spielfilm')
         self.picmax = 1
         self.count = 0
+        self['infotext'] = Label('')
+        self['infotext2'] = Label('')
+        self['infotext3'] = Label('')
+        self['infotext4'] = Label('')
+        self['infotext5'] = Label('')
+        self['infotext6'] = Label('')
+        self['infotext7'] = Label('')
+        self['infotext8'] = Label('')
         self['picture'] = Pixmap()
         self['picindex'] = Label('')
         self['pictext'] = ScrollLabel('')
+        self['textpage'] = ScrollLabel('')
         self['label'] = Label(OKZV)
         self['NumberActions'] = NumberActionMap(['NumberActions',
          'OkCancelActions',
@@ -7089,10 +6426,97 @@ class TVNewsPicShow(tvBaseScreen):
          '8': self.gotoPic,
          '9': self.gotoPic}, -1)
         self.getInfoTimer = eTimer()
+        if picmode == 1:
+            self.getInfoTimer.callback.append(self.download(link, self.getNewsPicPage))
+        elif picmode == 2:
+            self.getInfoTimer.callback.append(self.download(link, self.getPlayboyPage))
+        else:
+            self.getInfoTimer.callback.append(self.download(link, self.getPicPage))
         self.getInfoTimer.callback.append(self.download(link, self.getPixPage))
         self.getInfoTimer.start(500, True)
 
-    def getPixPage(self, output):
+    def getPicPage(self, output):
+        output = six.ensure_str(output)
+        output = transHTML(output)
+        self.setTVTitle(output)
+        startpos = output.find('<div class="film-gallery">')
+        endpos = output.find('<div class="swiper-slide more-galleries">')
+        bereich = output[startpos:endpos]
+        bereich = sub('<span class="credit">', '', bereich)
+        bereich = sub('<span class="counter">.*?</span>\n\\s+', '', bereich)
+        bereich = sub('</span>\n\\s+', '', bereich)
+        self.pixlist = re.findall('data-src="(.*?)"', bereich)
+        try:
+            self.download(self.pixlist[0], self.getPic)
+        except IndexError:
+            pass
+
+        self.description = re.findall('<div class="description">\n\\s+(.*?)</div>', bereich, flags=re.S)
+        self.picmax = len(self.pixlist)
+        try:
+            picnumber = self.count + 1
+            self['pictext'].setText(self.description[0] + '\n%s von %s' % (picnumber, self.picmax))
+        except IndexError:
+            pass
+
+        infotext = re.findall('<span class="text-row">(.*?)<', output)
+        self._infotextText(infotext)
+
+        try:
+            parts = infotext[2].split(', ')
+            self['infotext7'].setText(parts[0])
+            self['infotext7'].show()
+        except IndexError:
+            self['infotext7'].setText('')
+
+        try:
+            parts = infotext[3].split(', ')
+            self['infotext8'].setText(parts[0])
+            self['infotext8'].show()
+        except IndexError:
+            self['infotext8'].setText('')
+
+        return
+
+    def getPlayboyPage(self, output):
+        output = six.ensure_str(output)
+        self.setTVTitle(output)
+        startpos = output.find('<div class="content-area">')
+        endpos = output.find('Mehr Girls bei Playboy</a>')
+        bereich = output[startpos:endpos]
+        bereich = transHTML(bereich)
+        self.pixlist = re.findall('<img src="(.*?)" alt=""', bereich)
+        try:
+            self.download(self.pixlist[0], self.getPic)
+        except IndexError:
+            pass
+
+        self.picmax = len(self.pixlist)
+        try:
+            picnumber = self.count + 1
+            self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
+        except IndexError:
+            pass
+
+        topline = search('<p><b>(.*?)</b><br/>', output)
+        if topline is not None:
+            self['pictext'].setText(transHTML(topline.group(1)))
+        bereich = sub('<p class="headline2">.*?</p>', '', bereich)
+        bereich = sub('<br/>\n', '', bereich)
+        bereich = sub('<b>', '', bereich)
+        bereich = sub('</b>', '', bereich)
+        text = ''
+        a = findall('<p.*?>(.*?)</p>', bereich, re.S)
+        for x in a:
+            if x != '':
+                text = text + x + '\n\n'
+
+        text = sub('<[^>]*>', '', text)
+        text = sub('</p<<p<', '\n\n', text)
+        self['textpage'].setText(text)
+        return
+
+    def getNewsPicPage(self, output):
         output = six.ensure_str(output)
         self.setTVTitle(output)
         startpos = output.find('<div class="film-gallery">')
@@ -7144,7 +6568,7 @@ class TVNewsPicShow(tvBaseScreen):
         return
 
     def ok(self):
-        self.session.openWithCallback(self.exit, PicShowFull, self.link, self.count, False)
+        self.session.openWithCallback(self.exit, PicShowFull, self.link, self.count, (self.picmode == 2))
 
     def picup(self):
         self.count += 1
@@ -7157,8 +6581,12 @@ class TVNewsPicShow(tvBaseScreen):
 
             try:
                 picnumber = self.count + 1
-                self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
-                self['pictext'].setText(self.topline[self.count])
+                if self.picmode == 0:
+                    self['pictext'].setText(self.description[self.count] + '\n%s von %s' % (picnumber, self.picmax))
+                else:
+                    self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
+                    if self.picmode == 1:
+                        self['pictext'].setText(self.topline[self.count])
             except IndexError:
                 pass
 
@@ -7172,8 +6600,12 @@ class TVNewsPicShow(tvBaseScreen):
 
             try:
                 picnumber = self.count + 1
-                self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
-                self['pictext'].setText(self.topline[self.count])
+                if self.picmode == 0:
+                    self['pictext'].setText(self.description[self.count] + '\n%s von %s' % (picnumber, self.picmax))
+                else:
+                    self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
+                    if self.picmode == 1:
+                        self['pictext'].setText(self.topline[self.count])
             except IndexError:
                 pass
 
@@ -7188,8 +6620,12 @@ class TVNewsPicShow(tvBaseScreen):
 
             try:
                 picnumber = self.count + 1
-                self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
-                self['pictext'].setText(self.topline[self.count])
+                if self.picmode == 0:
+                    self['pictext'].setText(self.description[self.count] + '\n%s von %s' % (picnumber, self.picmax))
+                else:
+                    self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
+                    if self.picmode == 1:
+                        self['pictext'].setText(self.topline[self.count])
             except IndexError:
                 pass
 
@@ -7203,8 +6639,12 @@ class TVNewsPicShow(tvBaseScreen):
 
             try:
                 picnumber = self.count + 1
-                self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
-                self['pictext'].setText(self.topline[self.count])
+                if self.picmode == 0:
+                    self['pictext'].setText(self.description[self.count] + '\n%s von %s' % (picnumber, self.picmax))
+                else:
+                    self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
+                    if self.picmode == 1:
+                        self['pictext'].setText(self.topline[self.count])
             except IndexError:
                 pass
 
@@ -7226,17 +6666,27 @@ class TVNewsPicShow(tvBaseScreen):
 
             try:
                 picnumber = self.count + 1
-                self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
-                self['pictext'].setText(self.topline[self.count])
+                if self.picmode == 0:
+                    self['pictext'].setText(self.description[self.count] + '\n%s von %s' % (picnumber, self.picmax))
+                else:
+                    self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
+                    if self.picmode == 1:
+                        self['pictext'].setText(self.topline[self.count])
             except IndexError:
                 pass
 
         return
 
     def up(self):
+        if self.picmode == 0:
+            self.picup()
+            return
         self['pictext'].pageUp()
 
     def down(self):
+        if self.picmode == 0:
+            self.picdown()
+            return
         self['pictext'].pageDown()
 
     def getPic(self, output):
@@ -7246,7 +6696,7 @@ class TVNewsPicShow(tvBaseScreen):
         self.showPic(self.picfile)
 
     def showPic(self, picture):
-        currPic = loadPic(picture, 889, 500, 3, 0, 0, 0)
+        currPic = loadPic(picture, self.picw, self.pich, 3, 0, 0, 0)
         if currPic != None:
             self['picture'].instance.setPixmap(currPic)
         return
@@ -7255,467 +6705,7 @@ class TVNewsPicShow(tvBaseScreen):
         getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
-        pass
-
-    def zap(self):
-        servicelist = self.session.instantiateDialog(ChannelSelection)
-        self.session.execDialog(servicelist)
-
-    def exit(self):
-        if self.hideflag == False:
-            f = open('/proc/stb/video/alpha', 'w')
-            f.write('%i' % config.av.osd_alpha.value)
-            f.close()
-        self.close()
-
-
-class PlayboyPicShow(tvBaseScreen):
-    skin = '<screen name="PlayboyPicShow" position="center,center" size="{screensize}" title="Erotische Playmates - TV Spielfilm">' + SKHEADTOP + """
-            <widget name="label" position="364,10" size="512,44" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />""" + SKTIME + """
-            <widget name="textpage" position="10,70" size="250,560" font="Regular;20" halign="left" zPosition="1" />
-            <widget name="picture" position="175,70" size="889,500" alphatest="blend" zPosition="1" />
-            <widget name="picindex" position="1065,70" size="165,24" font="Regular;20" halign="right" zPosition="1" />
-            <widget name="pictext" position="10,577" size="1220,63" font="Regular;20" halign="center" zPosition="1" />
-        </screen>"""
-
-    def __init__(self, session, link):
-        tvBaseScreen.__init__(self, session, PlayboyPicShow.skin)
-        self.hideflag = True
-        self.link = link
-        self.pixlist = []
-        self.picmax = ''
-        self.count = 0
-        self['picture'] = Pixmap()
-        self['picindex'] = Label('')
-        self['pictext'] = ScrollLabel('')
-        self['textpage'] = ScrollLabel('')
-        self['label'] = Label(OKZV)
-        self['NumberActions'] = NumberActionMap(['NumberActions',
-         'OkCancelActions',
-         'DirectionActions',
-         'ColorActions',
-         'ChannelSelectBaseActions',
-         'HelpActions'], {'ok': self.ok,
-         'cancel': self.exit,
-         'right': self.picup,
-         'left': self.picdown,
-         'up': self.up,
-         'down': self.down,
-         'nextBouquet': self.zap,
-         'prevBouquet': self.zap,
-         'blue': self.hideScreen,
-         '0': self.gotoPic,
-         '1': self.gotoPic,
-         '2': self.gotoPic,
-         '3': self.gotoPic,
-         '4': self.gotoPic,
-         '5': self.gotoPic,
-         '6': self.gotoPic,
-         '7': self.gotoPic,
-         '8': self.gotoPic,
-         '9': self.gotoPic}, -1)
-        self.getInfoTimer = eTimer()
-        self.getInfoTimer.callback.append(self.download(link, self.getPicPage))
-        self.getInfoTimer.start(500, True)
-
-    def getPicPage(self, output):
-        output = six.ensure_str(output)
-        self.setTVTitle(output)
-        startpos = output.find('<div class="content-area">')
-        endpos = output.find('Mehr Girls bei Playboy</a>')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
-        self.pixlist = re.findall('<img src="(.*?)" alt=""', bereich)
-        try:
-            self.download(self.pixlist[0], self.getPic)
-        except IndexError:
-            pass
-
-        self.picmax = len(self.pixlist)
-        try:
-            picnumber = self.count + 1
-            self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
-        except IndexError:
-            pass
-
-        topline = search('<p><b>(.*?)</b><br/>', output)
-        if topline is not None:
-            self['pictext'].setText(transHTML(topline.group(1)))
-        bereich = sub('<p class="headline2">.*?</p>', '', bereich)
-        bereich = sub('<br/>\n', '', bereich)
-        bereich = sub('<b>', '', bereich)
-        bereich = sub('</b>', '', bereich)
-        text = ''
-        a = findall('<p.*?>(.*?)</p>', bereich, re.S)
-        for x in a:
-            if x != '':
-                text = text + x + '\n\n'
-
-        text = sub('<[^>]*>', '', text)
-        text = sub('</p<<p<', '\n\n', text)
-        self['textpage'].setText(text)
-        return
-
-    def ok(self):
-        self.session.openWithCallback(self.exit, PicShowFull, self.link, self.count, True)
-
-    def picup(self):
-        self.count += 1
-        if self.count < self.picmax:
-            try:
-                link = self.pixlist[self.count]
-                self.download(link, self.getPic)
-            except IndexError:
-                pass
-
-            try:
-                picnumber = self.count + 1
-                self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
-            except IndexError:
-                pass
-
-        else:
-            self.count = 0
-            try:
-                link = self.pixlist[self.count]
-                self.download(link, self.getPic)
-            except IndexError:
-                pass
-
-            try:
-                picnumber = self.count + 1
-                self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
-            except IndexError:
-                pass
-
-    def picdown(self):
-        self.count -= 1
-        if self.count >= 0:
-            try:
-                link = self.pixlist[self.count]
-                self.download(link, self.getPic)
-            except IndexError:
-                pass
-
-            try:
-                picnumber = self.count + 1
-                self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
-            except IndexError:
-                pass
-
-        else:
-            self.count = self.picmax - 1
-            try:
-                link = self.pixlist[self.count]
-                self.download(link, self.getPic)
-            except IndexError:
-                pass
-
-            try:
-                picnumber = self.count + 1
-                self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
-            except IndexError:
-                pass
-
-    def gotoPic(self, number):
-        self.session.openWithCallback(self.numberEntered, getNumber, number)
-
-    def numberEntered(self, number):
-        if number is None or number == 0:
-            pass
-        else:
-            if number > self.picmax:
-                number = self.picmax
-            self.count = number - 1
-            try:
-                link = self.pixlist[self.count]
-                self.download(link, self.getPic)
-            except IndexError:
-                pass
-
-            try:
-                picnumber = self.count + 1
-                self['picindex'].setText('%s von %s' % (picnumber, self.picmax))
-            except IndexError:
-                pass
-
-        return
-
-    def up(self):
-        self['pictext'].pageUp()
-
-    def down(self):
-        self['pictext'].pageDown()
-
-    def getPic(self, output):
-        f = open(self.picfile, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic(self.picfile)
-
-    def showPic(self, picture):
-        currPic = loadPic(picture, 700, 500, 3, 0, 0, 0)
-        if currPic != None:
-            self['picture'].instance.setPixmap(currPic)
-        return
-
-    def download(self, link, name):
-        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
-
-    def downloadError(self, output):
-        self['pictext'].setText('Download Fehler')
-
-    def zap(self):
-        servicelist = self.session.instantiateDialog(ChannelSelection)
-        self.session.execDialog(servicelist)
-
-    def exit(self):
-        if self.hideflag == False:
-            f = open('/proc/stb/video/alpha', 'w')
-            f.write('%i' % config.av.osd_alpha.value)
-            f.close()
-        self.close()
-
-
-class TVPicShow(tvBaseScreen):
-    skin = '<screen name="TVPicShow" position="center,center" size="{screensize}" title="Fotostrecke - TV Spielfilm">' + SKHEADTOP + """
-            <widget name="label" position="center,10" size="_512,44" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />""" + SKTIME + SKINFOTEXT + """
-            <widget name="picture" position="center,70" size="700,525" alphatest="blend" zPosition="1" />
-            <widget name="pictext" position="10,_595" size="_1220,48" font="Regular;18" halign="center" valign="center" zPosition="1" />
-        </screen>"""
-
-    def __init__(self, session, link):
-        tvBaseScreen.__init__(self, session, TVPicShow.skin)
-        self.hideflag = True
-        self.link = link
-        self.pixlist = []
-        self.description = []
-        self.titel = ''
-        self.picmax = 1
-        self.count = 0
-        self['infotext'] = Label('')
-        self['infotext2'] = Label('')
-        self['infotext3'] = Label('')
-        self['infotext4'] = Label('')
-        self['infotext5'] = Label('')
-        self['infotext6'] = Label('')
-        self['infotext7'] = Label('')
-        self['infotext8'] = Label('')
-        self['picture'] = Pixmap()
-        self['pictext'] = Label('')
-        self['label'] = Label(OKZV)
-        self['NumberActions'] = NumberActionMap(['NumberActions',
-         'OkCancelActions',
-         'DirectionActions',
-         'ColorActions',
-         'ChannelSelectBaseActions',
-         'HelpActions'], {'ok': self.ok,
-         'cancel': self.exit,
-         'right': self.picup,
-         'left': self.picdown,
-         'up': self.picup,
-         'down': self.picdown,
-         'nextBouquet': self.zap,
-         'prevBouquet': self.zap,
-         'blue': self.hideScreen,
-         '0': self.gotoPic,
-         '1': self.gotoPic,
-         '2': self.gotoPic,
-         '3': self.gotoPic,
-         '4': self.gotoPic,
-         '5': self.gotoPic,
-         '6': self.gotoPic,
-         '7': self.gotoPic,
-         '8': self.gotoPic,
-         '9': self.gotoPic}, -1)
-        self.getPicTimer = eTimer()
-        self.getPicTimer.callback.append(self.download(link, self.getPicPage))
-        self.getPicTimer.start(500, True)
-
-    def getPicPage(self, output):
-        output = six.ensure_str(output)
-        output = transHTML(output)
-        self.setTVTitle(output)
-        startpos = output.find('<div class="film-gallery">')
-        endpos = output.find('<div class="swiper-slide more-galleries">')
-        bereich = output[startpos:endpos]
-        bereich = sub('<span class="credit">', '', bereich)
-        bereich = sub('<span class="counter">.*?</span>\n\\s+', '', bereich)
-        bereich = sub('</span>\n\\s+', '', bereich)
-        self.pixlist = re.findall('data-src="(.*?)"', bereich)
-        try:
-            self.download(self.pixlist[0], self.getPic)
-        except IndexError:
-            pass
-
-        self.description = re.findall('<div class="description">\n\\s+(.*?)</div>', bereich, flags=re.S)
-        self.picmax = len(self.pixlist)
-        try:
-            picnumber = self.count + 1
-            self['pictext'].setText(self.description[0] + '\n%s von %s' % (picnumber, self.picmax))
-        except IndexError:
-            pass
-
-        infotext = re.findall('<span class="text-row">(.*?)<', output)
-        try:
-            parts = infotext[0].split(', ')
-            self['infotext'].setText(parts[0])
-            self['infotext'].show()
-        except IndexError:
-            self['infotext'].setText('')
-
-        try:
-            parts = infotext[0].split(', ')
-            self['infotext2'].setText(parts[1])
-            self['infotext2'].show()
-        except IndexError:
-            self['infotext2'].setText('')
-
-        try:
-            parts = infotext[0].split(', ')
-            self['infotext3'].setText(parts[2])
-            self['infotext3'].show()
-        except IndexError:
-            self['infotext3'].setText('')
-
-        try:
-            parts = infotext[1].split(', ')
-            self['infotext4'].setText(parts[0])
-            self['infotext4'].show()
-        except IndexError:
-            self['infotext4'].setText('')
-
-        try:
-            parts = infotext[1].split(', ')
-            self['infotext5'].setText(parts[1])
-            self['infotext5'].show()
-        except IndexError:
-            self['infotext5'].setText('')
-
-        try:
-            parts = infotext[1].split(', ')
-            self['infotext6'].setText(parts[2])
-            self['infotext6'].show()
-        except IndexError:
-            self['infotext6'].setText('')
-
-        try:
-            parts = infotext[2].split(', ')
-            self['infotext7'].setText(parts[0])
-            self['infotext7'].show()
-        except IndexError:
-            self['infotext7'].setText('')
-
-        try:
-            parts = infotext[3].split(', ')
-            self['infotext8'].setText(parts[0])
-            self['infotext8'].show()
-        except IndexError:
-            self['infotext8'].setText('')
-
-        return
-
-    def ok(self):
-        self.session.openWithCallback(self.exit, PicShowFull, self.link, self.count, False)
-
-    def picup(self):
-        self.count += 1
-        if self.count < self.picmax:
-            try:
-                link = self.pixlist[self.count]
-                self.download(link, self.getPic)
-            except IndexError:
-                pass
-
-            try:
-                picnumber = self.count + 1
-                self['pictext'].setText(self.description[self.count] + '\n%s von %s' % (picnumber, self.picmax))
-            except IndexError:
-                pass
-
-        else:
-            self.count = 0
-            try:
-                link = self.pixlist[self.count]
-                self.download(link, self.getPic)
-            except IndexError:
-                pass
-
-            try:
-                picnumber = self.count + 1
-                self['pictext'].setText(self.description[self.count] + '\n%s von %s' % (picnumber, self.picmax))
-            except IndexError:
-                pass
-
-    def picdown(self):
-        self.count -= 1
-        if self.count >= 0:
-            try:
-                link = self.pixlist[self.count]
-                self.download(link, self.getPic)
-            except IndexError:
-                pass
-
-            try:
-                picnumber = self.count + 1
-                self['pictext'].setText(self.description[self.count] + '\n%s von %s' % (picnumber, self.picmax))
-            except IndexError:
-                pass
-
-        else:
-            self.count = self.picmax - 1
-            try:
-                link = self.pixlist[self.count]
-                self.download(link, self.getPic)
-            except IndexError:
-                pass
-
-            try:
-                picnumber = self.count + 1
-                self['pictext'].setText(self.description[self.count] + '\n%s von %s' % (picnumber, self.picmax))
-            except IndexError:
-                pass
-
-    def gotoPic(self, number):
-        self.session.openWithCallback(self.numberEntered, getNumber, number)
-
-    def numberEntered(self, number):
-        if number is None or number == 0:
-            pass
-        else:
-            if number > self.picmax:
-                number = self.picmax
-            self.count = number - 1
-            try:
-                link = self.pixlist[self.count]
-                self.download(link, self.getPic)
-            except IndexError:
-                pass
-
-            try:
-                picnumber = self.count + 1
-                self['pictext'].setText(self.description[self.count] + '\n%s von %s' % (picnumber, self.picmax))
-            except IndexError:
-                pass
-
-        return
-
-    def getPic(self, output):
-        f = open(self.picfile, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic(self.picfile)
-
-    def showPic(self, picture):
-        currPic = loadPic(picture, 700, 525, 3, 0, 0, 0)
-        if currPic != None:
-            self['picture'].instance.setPixmap(currPic)
-        return
-
-    def download(self, link, name):
-        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
-
-    def downloadError(self, output):
+#        self['pictext'].setText('Download Fehler')
         pass
 
     def zap(self):
@@ -10442,14 +9432,8 @@ class TVHeuteView(tvBaseScreen):
         self.searchlink = []
         self.searchref = []
         self.searchentries = []
-        self.start = ''
-        self.end = ''
-        self.day = ''
-        self.name = ''
-        self.shortdesc = ''
         self.link = link
         self.postlink = link
-        self.trailerurl = ''
         self.titel = ''
         self.POSTtext = ''
         self.EPGtext = ''
@@ -10478,22 +9462,7 @@ class TVHeuteView(tvBaseScreen):
         self['pic4'] = Pixmap()
         self['pic5'] = Pixmap()
         self['pic6'] = Pixmap()
-        self['picpost'] = Pixmap()
-        self['tvinfo1'] = Pixmap()
-        self['tvinfo2'] = Pixmap()
-        self['tvinfo3'] = Pixmap()
-        self['tvinfo4'] = Pixmap()
-        self['tvinfo5'] = Pixmap()
-        self['cinlogo'] = Pixmap()
-        self['cinlogo'].hide()
-        self['playlogo'] = Pixmap()
-        self['playlogo'].hide()
-        self['searchlogo'] = Pixmap()
-        self['searchlogo'].hide()
-        self['searchtimer'] = Pixmap()
-        self['searchtimer'].hide()
-        self['searchtext'] = Label('')
-        self['searchtext'].hide()
+        self._commonInit()
         self['sender1'] = Label('')
         self['sender2'] = Label('')
         self['sender3'] = Label('')
@@ -10512,31 +9481,7 @@ class TVHeuteView(tvBaseScreen):
         self['pictext4'] = Label('')
         self['pictext5'] = Label('')
         self['pictext6'] = Label('')
-        self['textpage'] = ScrollLabel('')
-        self['infotext'] = Label('')
-        self['infotext'].hide()
-        self['infotext2'] = Label('')
-        self['infotext2'].hide()
-        self['infotext3'] = Label('')
-        self['infotext3'].hide()
-        self['infotext4'] = Label('')
-        self['infotext4'].hide()
-        self['infotext5'] = Label('')
-        self['infotext5'].hide()
-        self['infotext6'] = Label('')
-        self['infotext6'].hide()
-        self['infotext7'] = Label('')
-        self['infotext7'].hide()
-        self['infotext8'] = Label('')
-        self['infotext8'].hide()
-        self['piclabel'] = Label('')
-        self['piclabel'].hide()
-        self['piclabel2'] = Label('')
-        self['piclabel2'].hide()
-        self['slider_textpage'] = Pixmap()
-        self['slider_textpage'].hide()
-        self['searchmenu'] = ItemList([])
-        self['searchmenu'].hide()
+        self._infotextHide()
         self['menu1'] = ItemList([])
         self['menu2'] = ItemList([])
         self['menu3'] = ItemList([])
@@ -10547,11 +9492,6 @@ class TVHeuteView(tvBaseScreen):
         self.currentsearch = 'menu1'
         self.current = 'menu1'
         self.menu = 'menu1'
-        self['label'] = BlinkingLabel('Bitte warten...')
-        self['label'].startBlinking()
-        self['label2'] = Label('= Timer')
-        self['label3'] = Label('= Suche')
-        self['label4'] = Label('= Zappen')
         self['NumberActions'] = NumberActionMap(['NumberActions',
          'OkCancelActions',
          'ChannelSelectBaseActions',
@@ -11344,60 +10284,7 @@ class TVHeuteView(tvBaseScreen):
                     except IndexError:
                         serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
 
-                    start = self.start
-                    s1 = sub(':..', '', start)
-                    date = str(self.postdate) + 'FIN'
-                    date = sub('..FIN', '', date)
-                    date = date + self.day
-                    parts = start.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds -= int(config.recording.margin_before.value) * 60
-                    start = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    s2 = sub(':..:..', '', start)
-                    if int(s2) > int(s1):
-                        start = str(self.date) + ' ' + start
-                    else:
-                        start = date + ' ' + start
-                    start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
-                    end = self.end
-                    parts = end.split(':')
-                    seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                    seconds += int(config.recording.margin_after.value) * 60
-                    end = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                    e2 = sub(':..:..', '', end)
-                    if int(s2) > int(e2):
-                        end = str(self.nextdate) + ' ' + end
-                    else:
-                        end = date + ' ' + end
-                    end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
-                    name = self.name
-                    shortdesc = self.shortdesc
-                    if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
-                        episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
-                        episode = sub('Staffel ', 'S', episode.group(1))
-                        episode = sub(', Folge ', 'E', episode)
-                        name = name + ' ' + episode
-                    data = (int(mktime(start.timetuple())),
-                    int(mktime(end.timetuple())),
-                    name,
-                    shortdesc,
-                    None)
-                    newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
-                    if self.autotimer == False:
-                        self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
-                    else:
-                        from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
-                        from Plugins.Extensions.AutoTimer.plugin import autotimer
-                        if autotimer is None:
-                            from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                            autotimer = AutoTimer()
-                        autotimer.readXml()
-                        newTimer = autotimer.defaultTimer.clone()
-                        newTimer.id = autotimer.getUniqueId()
-                        newTimer.name = self.name
-                        newTimer.match = ''
-                        newTimer.enabled = True
-                        self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+                    self.redTimer(False, serviceref)
             if self.oldcurrent == 'searchmenu':
                 c = self['searchmenu'].getSelectedIndex()
                 self.oldsearchindex = c
@@ -11408,60 +10295,7 @@ class TVHeuteView(tvBaseScreen):
                 except IndexError:
                     serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
 
-                start = self.start
-                s1 = sub(':..', '', start)
-                date = str(self.postdate) + 'FIN'
-                date = sub('..FIN', '', date)
-                date = date + self.day
-                parts = start.split(':')
-                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                seconds -= int(config.recording.margin_before.value) * 60
-                start = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                s2 = sub(':..:..', '', start)
-                if int(s2) > int(s1):
-                    start = str(self.date) + ' ' + start
-                else:
-                    start = date + ' ' + start
-                start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
-                end = self.end
-                parts = end.split(':')
-                seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-                seconds += int(config.recording.margin_after.value) * 60
-                end = time.strftime('%H:%M:%S', time.gmtime(seconds))
-                e2 = sub(':..:..', '', end)
-                if int(s2) > int(e2):
-                    end = str(self.nextdate) + ' ' + end
-                else:
-                    end = date + ' ' + end
-                end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
-                name = self.name
-                shortdesc = self.shortdesc
-                if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
-                    episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
-                    episode = sub('Staffel ', 'S', episode.group(1))
-                    episode = sub(', Folge ', 'E', episode)
-                    name = name + ' ' + episode
-                data = (int(mktime(start.timetuple())),
-                 int(mktime(end.timetuple())),
-                 name,
-                 shortdesc,
-                 None)
-                newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
-                if self.autotimer == False:
-                    self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
-                else:
-                    from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
-                    from Plugins.Extensions.AutoTimer.plugin import autotimer
-                    if autotimer is None:
-                        from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                        autotimer = AutoTimer()
-                    autotimer.readXml()
-                    newTimer = autotimer.defaultTimer.clone()
-                    newTimer.id = autotimer.getUniqueId()
-                    newTimer.name = self.name
-                    newTimer.match = ''
-                    newTimer.enabled = True
-                    self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+                self.redTimer(False, serviceref)
             else:
                 self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         if self.ready == True:
@@ -12019,30 +10853,13 @@ class TVHeuteView(tvBaseScreen):
         self['label2'].setText('= Timer')
         self['label3'].setText('= Suche')
         self['label4'].setText('= Zappen')
-        self['infotext'].hide()
-        self['infotext2'].hide()
-        self['infotext3'].hide()
-        self['infotext4'].hide()
-        self['infotext5'].hide()
-        self['infotext6'].hide()
-        self['infotext7'].hide()
-        self['infotext8'].hide()
-        self['cinlogo'].hide()
-        self['playlogo'].hide()
+        self._infotextHide()
         self['textpage'].hide()
         self['slider_textpage'].hide()
         self['picpost'].hide()
         self['piclabel'].hide()
         self['piclabel2'].hide()
-        self['tvinfo1'].hide()
-        self['tvinfo2'].hide()
-        self['tvinfo3'].hide()
-        self['tvinfo4'].hide()
-        self['tvinfo5'].hide()
-        self['searchmenu'].hide()
-        self['searchlogo'].hide()
-        self['searchtimer'].hide()
-        self['searchtext'].hide()
+        self._tvinfoHide()
         self['sender1'].show()
         self['sender2'].show()
         self['sender3'].show()
