@@ -326,8 +326,8 @@ class tvBaseScreen(tvAllScreen):
                 else:
                     return
 
-    def picdownload(self, link, name):
-        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.picdownloadError)
+    def picdownload(self, link, name, idx):
+        getPage(six.ensure_binary(link)).addCallback(name,idx).addErrback(self.picdownloadError)
 
     def picdownloadError(self, output):
         pass
@@ -840,12 +840,6 @@ class tvBaseScreen(tvAllScreen):
             self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
 
     def _commonInit(self, ltxt = '= Suche', lltxt = '= Zappen'):
-        self['pic1'] = Pixmap()
-        self['pic2'] = Pixmap()
-        self['pic3'] = Pixmap()
-        self['pic4'] = Pixmap()
-        self['pic5'] = Pixmap()
-        self['pic6'] = Pixmap()
         self['picpost'] = Pixmap()
         self['tvinfo1'] = Pixmap()
         self['tvinfo2'] = Pixmap()
@@ -882,9 +876,9 @@ class tvBaseScreen(tvAllScreen):
 
 class TVTippsView(tvBaseScreen):
     def __init__(self, session, link, sparte):
-        skin = readSkin("TVProgrammView")
+        skin = readSkin("TVTippsView")
         tvBaseScreen.__init__(self, session, skin)
-        self.skinName = "TVProgrammView"
+        self.skinName = "TVTippsView"
         if sparte == 'neu':
             self.titel = 'TV Neuerscheinungen - TV Spielfilm'
         else:
@@ -1072,7 +1066,7 @@ class TVTippsView(tvBaseScreen):
             if search('INFO', x) is not None:
                 icount = icount + 1
                 x = sub('INFO', '', x)
-                if search('neu|new', x) is not None:
+                if search('neu|new', x) is not None or self.sparte != "neu":
                     self.new = True
                 png = '%s%sHD.png' % (ICONPATH, x)
                 if fileExists(png):
