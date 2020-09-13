@@ -7,7 +7,7 @@ from Components.ConditionalWidget import BlinkingWidget
 from Components.ScrollLabel import ScrollLabel
 from Components.Label import Label
 from Components.MenuList import MenuList
-from enigma import eListboxPythonMultiContent, gFont
+from enigma import eListboxPythonMultiContent, gFont, getDesktop
 import xml.etree.ElementTree as ET
 import six
 
@@ -16,6 +16,22 @@ PICPATH = MEDIAROOT + "pic/"
 ICONPATH = PICPATH + "icons/"
 TVSPNG = PICPATH + "tvspielfilm.png"
 TVSHDPNG = PICPATH + "tvspielfilmHD.png"
+
+
+skinFactor = 1
+SKINFILE = MEDIAROOT + "skin_HD.xml"
+
+# Check if is Full HD / UHD
+DESKTOP_WIDTH = getDesktop(0).size().width()
+DESKTOP_HEIGHT = getDesktop(0).size().height()
+if DESKTOP_WIDTH > 1920:
+    skinFactor = 3.0
+    SKINFILE = MEDIAROOT + "skin_FHD.xml"
+elif DESKTOP_WIDTH > 1280:
+    skinFactor = 1.5
+    SKINFILE = MEDIAROOT + "skin_FHD.xml"
+else:
+    skinFactor = 1
 
 class channelDB():
 
@@ -158,6 +174,24 @@ def scaleskin(skin, factor):
         if 'size' in child.attrib:
             child.attrib['size'] = calc(child.attrib['size'], factor)
     return six.ensure_str(ET.tostring(root))
+
+def readSkin(skin):
+    skintext = ""
+    try:
+        with open(SKINFILE, "r") as fd:
+            try:
+                domSkin = ET.parse(fd).getroot()
+                for element in domSkin:
+                    if element.tag == "screen" and element.attrib['name'] == skin:
+                        skintext = six.ensure_str(ET.tostring(element))
+                        break
+            except Exception as err:
+                print("[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (filename, err))
+
+    except Exception as err:
+        print("[Skin] Error: Unexpected error opening skin file '%s'! (%s)" % (filename, err))
+    return skintext
+
 
 def printStackTrace():
     import sys, traceback

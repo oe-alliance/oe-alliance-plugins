@@ -14,7 +14,7 @@ from Components.Pixmap import Pixmap, MovingPixmap
 from Components.ScrollLabel import ScrollLabel
 from Components.Slider import Slider
 from Components.Sources.List import List
-from enigma import ePicLoad, eConsoleAppContainer, eListboxPythonMultiContent, eListbox, eEPGCache, eServiceCenter, eServiceReference, eTimer, getDesktop, gFont, loadPic, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP
+from enigma import ePicLoad, eConsoleAppContainer, eListboxPythonMultiContent, eListbox, eEPGCache, eServiceCenter, eServiceReference, eTimer, gFont, loadPic, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP
 from Plugins.Plugin import PluginDescriptor
 from re import findall, match, search, split, sub
 from RecordTimer import RecordTimerEntry
@@ -41,9 +41,8 @@ from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirec
 from six.moves.urllib.error import URLError, HTTPError
 import datetime, os, re, socket, sys, time, six
 from os import path
-from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin, printStackTrace, channelDB
+from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin, printStackTrace, channelDB, readSkin, DESKTOP_WIDTH, DESKTOP_HEIGHT, skinFactor
 from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable
-from .skindef import SKHEADTOP, SKHEADBOTTOM, SKMENU, SKHEADPIC, SKHEADPLAY, SKTIME, SKINFOTEXT
 
 try:
     from cookielib import MozillaCookieJar
@@ -124,21 +123,8 @@ config.plugins.tvspielfilm.maxgenre = ConfigInteger(250, (10, 999))
 config.plugins.tvspielfilm.autotimer = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 
 
-skinFactor = 1
-
-# Check if is Full HD / UHD
-DESKTOP_WIDTH = getDesktop(0).size().width()
-DESKTOP_HEIGHT = getDesktop(0).size().height()
-if DESKTOP_WIDTH > 1920:
-	skinFactor = 3.0
-elif DESKTOP_WIDTH > 1280:
-	skinFactor = 1.5
-else:
-	skinFactor = 1
-
 class tvAllScreen(Screen):
     def __init__(self, session, skin=None, dic=None, scale=False):
-        self.session = session
         w = DESKTOP_WIDTH - (40 * skinFactor)
         mw = w - (20 * skinFactor)
         h = DESKTOP_HEIGHT - (60 * skinFactor) - 40
@@ -157,22 +143,13 @@ class tvAllScreen(Screen):
             fontsize = 18
             fontsize2 = 16
 
-        if skinFactor == 1:
-            dic["slider"] = '315'
-        elif skinFactor == 1.5:
-            dic["slider"] = '450'
         dic["fontsize"] = str(fontsize)
         dic["fontsize2"] = str(fontsize2)
-        dic["fullsize"] = "%s,%s" % (DESKTOP_WIDTH,DESKTOP_HEIGHT)
-        dic["screenpos"] = "center,%s" % (60 * skinFactor)
-        dic["screensize"] = "%s,%s" % (w,h)
-        dic["headw"] = str(w)
         dic["picpath"] = PICPATH
-        dic["menusize"] = "%s,%s" % (mw,mh)
         if skin != None:
             self.skin = applySkinVars(skin, dic)
-            if scale == True:
-                self.skin = scaleskin(self.skin, skinFactor)
+#            if scale == True:
+#                self.skin = scaleskin(self.skin, skinFactor)
         Screen.__init__(self, session)
         self.fontlarge = True
         if config.plugins.tvspielfilm.font_size.value == 'normal':
@@ -863,6 +840,12 @@ class tvBaseScreen(tvAllScreen):
             self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
 
     def _commonInit(self, ltxt = '= Suche', lltxt = '= Zappen'):
+        self['pic1'] = Pixmap()
+        self['pic2'] = Pixmap()
+        self['pic3'] = Pixmap()
+        self['pic4'] = Pixmap()
+        self['pic5'] = Pixmap()
+        self['pic6'] = Pixmap()
         self['picpost'] = Pixmap()
         self['tvinfo1'] = Pixmap()
         self['tvinfo2'] = Pixmap()
@@ -899,11 +882,9 @@ class tvBaseScreen(tvAllScreen):
 
 class TVTippsView(tvBaseScreen):
     def __init__(self, session, link, sparte):
-        skin = """
-        <screen name="TVTippsView" position="{screenpos}" size="{screensize}" title=" ">
-            %s%s%s%s
-        </screen>""" % ( SKHEADTOP, SKMENU, SKHEADPIC, SKHEADBOTTOM )
+        skin = readSkin("TVProgrammView")
         tvBaseScreen.__init__(self, session, skin)
+        self.skinName = "TVProgrammView"
         if sparte == 'neu':
             self.titel = 'TV Neuerscheinungen - TV Spielfilm'
         else:
@@ -2013,11 +1994,9 @@ class TVTippsView(tvBaseScreen):
 
 class TVGenreView(tvBaseScreen):
     def __init__(self, session, link, genre):
-        skin = """
-        <screen name="TVGenreView" position="{screenpos}" size="{screensize}" title=" ">
-            %s%s%s
-        </screen>""" % ( SKHEADTOP, SKMENU, SKHEADBOTTOM )
+        skin = readSkin("TVProgrammView")
         tvBaseScreen.__init__(self, session, skin)
+        self.skinName = "TVProgrammView"
         self.tventries = []
         self.tvlink = []
         self.tvtitel = []
@@ -2888,11 +2867,9 @@ class TVGenreView(tvBaseScreen):
 
 class TVJetztView(tvBaseScreen):
     def __init__(self, session, link, standalone):
-        skin = """
-        <screen name="TVJetztView" position="{screenpos}" size="{screensize}" title=" ">
-            %s%s%s
-        </screen>""" % ( SKHEADTOP, SKMENU, SKHEADBOTTOM )
+        skin = readSkin("TVProgrammView")
         tvBaseScreen.__init__(self, session, skin)
+        self.skinName = "TVProgrammView"
         self.tventries = []
         self.tvlink = []
         self.tvtitel = []
@@ -3855,11 +3832,9 @@ class TVProgrammView(tvBaseScreen):
     def __init__(self, session, link, eventview, tagestipp):
         self.eventview = eventview
         self.tagestipp = tagestipp
-        skin = """
-        <screen name="TVProgrammView" position="{screenpos}" size="{screensize}" title="TV Programm - TV Spielfilm">
-            %s%s%s
-        </screen>""" % ( SKHEADTOP, SKMENU, SKHEADBOTTOM )
+        skin = readSkin("TVProgrammView")
         tvBaseScreen.__init__(self, session, skin)
+        self.skinName = "TVProgrammView"
         self.service_db = serviceDB(self.servicefile)
         if self.tagestipp == False:
             channel = re.findall(',(.*?).html', link)
@@ -4922,12 +4897,7 @@ class TVProgrammView(tvBaseScreen):
 
 class TVTrailerBilder(tvBaseScreen):
     def __init__(self, session, link, sparte):
-        skin = """
-        <screen name="TVTrailerBilder" position="{screenpos}" size="{screensize}" title=" ">
-            %s%s%s%s
-            <widget name="label" position="250,20" size="740,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
-            %s
-        </screen>""" % ( SKHEADTOP, SKMENU, SKHEADPIC, SKHEADPLAY, SKTIME )
+        skin = readSkin("TVTrailerBilder")
         tvBaseScreen.__init__(self, session, skin)
         self.sparte = sparte
         self.tventries = []
@@ -5456,21 +5426,9 @@ class TVTrailerBilder(tvBaseScreen):
 
 
 class TVNews(tvBaseScreen):
-    skin = '<screen name="TVNews" position="center,center" size="{screensize}" title="TV-News - TV Spielfilm"> ' + SKHEADTOP + """
-            <widget name="menu" position="10,70" size="475,540" scrollbarMode="showAlways" zPosition="1" />
-            <widget name="slider_menu" position="469,70" size="22,540" pixmap="{picpath}slider/slider_540.png" alphatest="blend" zPosition="2" />
-            <widget name="picture" position="600,70" size="525,350" alphatest="blend" zPosition="1" />
-            <widget name="picturetext" position="490,420" size="745,60" font="Regular;20" valign="center" halign="center" zPosition="1" />
-            <widget name="picpost" position="_375,70" size="490,245" alphatest="blend" zPosition="1" />
-            <widget name="cinlogo" position="_325,70" size="60,29" pixmap="{picpath}icons/cin.png" alphatest="blend" zPosition="1" />
-            <widget name="playlogo" position="_565,163" size="109,58" pixmap="{picpath}icons/playHD.png" alphatest="blend" zPosition="2" />
-            <widget name="textpage" position="10,325" size="_1220,{slider}" font="Regular;20" halign="left" zPosition="0" />
-            <widget name="slider_textpage" position="_1214,325" size="22,{slider}" pixmap="{picpath}slider/slider_{slider}.png" alphatest="blend" zPosition="1" />
-            <widget name="label" position="364,20" size="512,20" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />""" + SKTIME + """
-            <widget name="statuslabel" position="250,610" size="740,20" font="Regular;20" foregroundColor="#858A95" halign="center" zPosition="2" />
-        </screen>"""
     def __init__(self, session, link):
-        tvBaseScreen.__init__(self, session, TVNews.skin)
+        skin = readSkin("TVNews")
+        tvBaseScreen.__init__(self, session, skin)
         self.menulist = []
         self.menulink = []
         self.picurllist = []
@@ -5811,25 +5769,9 @@ class TVNews(tvBaseScreen):
             self.showTVNews()
 
 class TVBlog(tvBaseScreen):
-    skin = """
-        <screen name="TVBlog" position="center,center" size="{screensize}" title="TV Spielfilm Blog">
-            <eLabel position="0,0" size="{headw},60" backgroundColor="#FFFFFF" />
-            <ePixmap position="0,0" size="{headw},60" pixmap="{picpath}blogHD.png" alphatest="blend" zPosition="1" />
-            <widget name="menu" position="950,150" size="250,250" scrollbarMode="showNever" zPosition="1" />
-            <widget name="meta" position="10,70" size="300,55" font="Regular;18" foregroundColor="#F2A5BC" halign="left" zPosition="1" />
-            <widget name="item" position="10,445" size="120,25" font="Regular;18" foregroundColor="#F2A5BC" halign="left" zPosition="1" />
-            <widget name="picture" position="320,70" size="600,400" alphatest="blend" zPosition="1" />
-            <widget name="topictext" position="10,475" size="1220,25" font="Regular;20" halign="left" zPosition="1" />
-            <widget name="previewtext" position="10,510" size="1220,130" font="Regular;20" halign="left" zPosition="1" />
-            <widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />
-            <widget name="playlogo" position="565,163" size="109,58" pixmap="{picpath}icons/playHD.png" alphatest="blend" zPosition="2" />
-            <widget name="textpage" position="10,325" size="1220,{slider}" font="Regular;20" halign="left" zPosition="0" />
-            <widget name="slider_textpage" position="1214,325" size="22,{slider}" pixmap="{picpath}slider/slider_{slider}.png" alphatest="blend" zPosition="1" />
-            <widget name="label" position="364,10" size="512,40" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" valign="center" transparent="1" zPosition="2" />""" + SKTIME + """
-            <widget name="statuslabel" position="250,610" size="740,20" font="Regular;18" foregroundColor="#858A95" halign="center" zPosition="2" />
-        </screen>"""
     def __init__(self, session, link, post):
-        tvBaseScreen.__init__(self, session, TVBlog.skin)
+        skin = readSkin("TVBlog")
+        tvBaseScreen.__init__(self, session, skin)
         self.baseurl = 'https://blog.tvspielfilm.de'
         self.menulist = []
         self.menulink = []
@@ -6359,15 +6301,8 @@ class TVBlog(tvBaseScreen):
             self.showTVBlog()
 
 class TVPicShow(tvBaseScreen):
-    skin = '<screen name="TVPicShow" position="center,center" size="{screensize}" title="">' + SKHEADTOP + """
-            <widget name="label" position="center,10" size="_512,44" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />""" + SKTIME + SKINFOTEXT + """
-            <widget name="textpage" position="10,70" size="250,560" font="Regular;20" halign="left" zPosition="1" />
-            <widget name="picture" position="175,70" size="{picsz}" alphatest="blend" zPosition="1" />
-            <widget name="picindex" position="1065,70" size="165,24" font="Regular;20" halign="right" zPosition="1" />
-            <widget name="pictext" position="10,577" size="1220,63" font="Regular;20" halign="center" zPosition="1" />
-        </screen>"""
-
     def __init__(self, session, link, picmode=0):
+        skin = readSkin("TVPicShow")
         self.pich = 500
         self.picw = 889
         if picmode == 2:
@@ -6375,7 +6310,7 @@ class TVPicShow(tvBaseScreen):
             self.picw = 700
         picsz = "%s,%s" % (str(self.picw),str(self.pich))
         dic = {"picsz": picsz}
-        tvBaseScreen.__init__(self, session, TVPicShow.skin, dic)
+        tvBaseScreen.__init__(self, session, skin, dic)
         self.picmode = picmode
         self.hideflag = True
         self.link = link
@@ -6432,7 +6367,6 @@ class TVPicShow(tvBaseScreen):
             self.getInfoTimer.callback.append(self.download(link, self.getPlayboyPage))
         else:
             self.getInfoTimer.callback.append(self.download(link, self.getPicPage))
-        self.getInfoTimer.callback.append(self.download(link, self.getPixPage))
         self.getInfoTimer.start(500, True)
 
     def getPicPage(self, output):
@@ -6721,16 +6655,9 @@ class TVPicShow(tvBaseScreen):
 
 
 class PicShowFull(tvBaseScreen):
-
-    skin = """
-        <screen name="PicShowFull" position="center,center" size="{fullsize}" title=" ">
-            <eLabel position="0,0" size="{fullsize}" backgroundColor="#000000" zPosition="1" />
-            <widget name="picture" position="0,0" size="{fullsize}" alphatest="blend" zPosition="2" />
-            <widget name="picindex" position="center,10" size="120,22" font="Regular;20" foregroundColor="#A5ACAE" halign="center" transparent="1" zPosition="3" />
-        </screen>"""
-
     def __init__(self, session, link, count, playboy):
-        tvBaseScreen.__init__(self, session, PicShowFull.skin)
+        skin = readSkin("PicShowFull")
+        tvBaseScreen.__init__(self, session, skin)
         self.hideflag = True
         self.playboy = playboy
         self.pixlist = []
@@ -6908,18 +6835,13 @@ class PicShowFull(tvBaseScreen):
 
 
 class FullScreen(tvAllScreen):
-    skin = """
-        <screen position="center,center" size="{size}" flags="wfNoBorder" title="  " >
-        <eLabel position="0,0" size="{size}" backgroundColor="#000000" zPosition="1" />
-        <widget name="picture" position="{ppos}" size="{psize}" alphatest="blend" zPosition="2" />
-        </screen>"""
-
     def __init__(self, session):
+        skin = readSkin("FullScreen")
         size = "%s,%s" % (DESKTOP_WIDTH,DESKTOP_HEIGHT)
         psize = "%s,%s" % (DESKTOP_WIDTH * 0.75,DESKTOP_HEIGHT)
         ppos = "%s,%s" % (DESKTOP_WIDTH * 0.125,0)
         dic = {'size' : size , 'psize' : psize , 'ppos' : ppos}
-        tvAllScreen.__init__(self, session, FullScreen.skin, dic)
+        tvAllScreen.__init__(self, session, skin, dic)
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.hideflag = True
         self['picture'] = Pixmap()
@@ -6944,20 +6866,7 @@ class FullScreen(tvAllScreen):
 
 class searchYouTube(tvAllScreen):
     def __init__(self, session, name, movie):
-        skin = """
-        <screen name="searchYouTube" position="center,center" size="1000,560" title=" ">
-            <ePixmap position="0,0" size="1000,50" pixmap="{picpath}youtube.png" alphatest="blend" zPosition="1" />
-            <ePixmap position="10,6" size="18,18" pixmap="{picpath}buttons/blue.png" alphatest="blend" zPosition="2" />
-            <ePixmap position="10,26" size="18,18" pixmap="{picpath}buttons/yellow.png" alphatest="blend" zPosition="2" />
-            <widget name="label" position="34,6" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-            <widget name="label2" position="34,26" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />""" + SKTIME + """
-            <widget name="poster1" position="10,55" size="215,120" alphatest="blend" zPosition="1" />
-            <widget name="poster2" position="10,180" size="215,120" alphatest="blend" zPosition="1" />
-            <widget name="poster3" position="10,305" size="215,120" alphatest="blend" zPosition="1" />
-            <widget name="poster4" position="10,430" size="215,120" alphatest="blend" zPosition="1" />
-            <widget name="list" position="235,55" size="755,500" scrollbarMode="showOnDemand" zPosition="1" />
-        </screen>"""
-
+        skin = readSkin("searchYouTube")
         tvAllScreen.__init__(self, session, skin)
         if movie == True:
             self.name = name + ' Trailer'
@@ -7645,24 +7554,9 @@ class searchYouTube(tvAllScreen):
 
 
 class tvMain(tvBaseScreen):
-    skin = """
-        <screen name="tvMain" position="center,_20" size="_310,_640" flags="wfNoBorder" title="TV Spielfilm">
-            <eLabel position="0,0" size="310,30" backgroundColor="#000000" zPosition="1" />
-            <eLabel position="0,30" size="20,590" backgroundColor="#000000" zPosition="1" />
-            <eLabel position="290,30" size="20,590" backgroundColor="#000000" zPosition="1" />
-            <eLabel position="0,620" size="310,20" backgroundColor="#000000" zPosition="1" />
-            <ePixmap position="20,30" size="_270,60" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
-            <ePixmap position="_262,40" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="2" />
-            <widget name="green" position="_262,62" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="2" />
-            <widget name="label" position="176,40" size="80,20" font="Regular;16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-            <widget name="label2" position="176,62" size="80,20" font="Regular;16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-            <widget name="mainmenu" position="_30,100" size="_250,_390" scrollbarMode="showNever" zPosition="2" />
-            <widget name="secondmenu" position="_30,100" size="_250,_510" scrollbarMode="showNever" zPosition="2" />
-            <widget name="thirdmenu" position="_30,100" size="_250,_510" scrollbarMode="showNever" zPosition="2" />
-        </screen>"""
-
     def __init__(self, session):
-        tvBaseScreen.__init__(self, session, tvMain.skin)
+        skin = readSkin("tvMain")
+        tvBaseScreen.__init__(self, session, skin)
         self.senderhtml = '/tmp/tvssender.html'
         if config.plugins.tvspielfilm.tipps.value == 'false':
             self.tipps = False
@@ -8504,7 +8398,6 @@ class makeServiceFile(Screen):
     skin = '\n\t\t\t<screen position="center,180" size="565,195" backgroundColor="#20000000" title="Import TV Spielfilm Sender: TV Bouquet Auswahl">\n\t\t\t\t<ePixmap position="0,0" size="565,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="list" position="10,60" size="545,125" scrollbarMode="showOnDemand" zPosition="1" />\n\t\t\t</screen>'
     def __init__(self, session):
         self.skin = makeServiceFile.skin
-        self.session = session
         Screen.__init__(self, session)
         self['list'] = MenuList([])
         self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.ok,
@@ -8654,14 +8547,8 @@ class makeServiceFile(Screen):
 
 
 class getNumber(Screen):
-    skin = """
-    <screen name="getNumber" position="center,center" size="175,70" backgroundColor="#000000" flags="wfNoBorder" title=" ">
-        <widget name="number" position="0,0" size="175,70" font="Regular;40" halign="center" valign="center" transparent="1" zPosition="1"/>
-    </screen>"""
-
     def __init__(self, session, number):
-        self.skin = getNumber.skin
-        self.session = session
+        self.skin = readSkin("getNumber")
         Screen.__init__(self, session)
         self.field = str(number)
         self['number'] = Label(self.field)
@@ -8698,14 +8585,8 @@ class getNumber(Screen):
 
 
 class gotoPageMenu(tvAllScreen):
-    skin = """
-    <screen name="gotoPageMenu" position="center,center" size="436,560" title=" ">
-        <widget name="pagemenu" position="10,10" size="416,540" scrollbarMode="showNever" zPosition="1" />
-    </screen>"""
-
     def __init__(self, session, count, maxpages):
-        self.skin = gotoPageMenu.skin
-        self.session = session
+        self.skin = readSkin("gotoPageMenu")
         tvAllScreen.__init__(self, session)
         self.localhtml = '/tmp/tvspielfilm.html'
         self.hideflag = True
@@ -8819,43 +8700,15 @@ class gotoPageMenu(tvAllScreen):
 
 
 class tvTipps(tvAllScreen):
-    skin = """
-        <screen position="{position}" size="740,270" flags="wfNoBorder" title=" ">
-        <widget name="picture" position="0,0" size="387,270" alphatest="blend" zPosition="1" />
-        <widget name="elabel" position="387,0" size="{size},150" font="Regular;18" backgroundColor="#FF000000" zPosition="1" />
-        <widget name="elabel2" position="{position2},0" size="{size2}" font="Regular;18" backgroundColor="#000000" zPosition="1" />
-        <widget name="elabel3" position="387,150" size="353,125" font="Regular;18" backgroundColor="#FFFFFF" zPosition="1" />
-        <widget name="label" position="402,151" size="288,24" font="Regular;20" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
-        <widget name="label2" position="402,176" size="288,48" font="Regular;22" foregroundColor="#{color}" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
-        <widget name="label3" position="402,225" size="328,42" font="Regular;18" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
-        <widget name="thumb" position="695,160" size="40,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/rating small1HD.png" alphatest="blend" zPosition="2" />
-        <widget name="label4" position="40,220" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
-        <widget name="label5" position="40,245" size="100,25" font="Regular;18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />
-        </screen>"""
-
     def __init__(self, session):
         if config.plugins.tvspielfilm.color.value == '0x00000000':
             color = '4176B6'
         else:
             color = str(config.plugins.tvspielfilm.color.value)
             color = sub('0x00', '', color)
-        deskWidth = getDesktop(0).size().width()
-        if deskWidth >= 1280:
-            position = '0,450'
-            size = '98'
-            position2 = '485'
-            size2 = '20,150'
-        else:
-            position = '0,306'
-            size = '0'
-            position2 = '387'
-            size2 = '0,0'
-        self.dict = {'position': position,
-         'size': size,
-         'position2': position2,
-         'size2': size2,
-         'color': color}
-        self.skin = applySkinVars(tvTipps.skin, self.dict)
+        self.dict = {'color': color}
+        skin = readSkin("tvTipps")
+        self.skin = applySkinVars(skin, self.dict)
         tvAllScreen.__init__(self, session)
         self.baseurl = 'http://www.tvspielfilm.de'
         self.pic1 = '/tmp/tvspielfilm1.jpg'
@@ -9115,21 +8968,9 @@ class tvTipps(tvAllScreen):
 
 
 class tvsConfig(ConfigListScreen, tvAllScreen):
-    skin = """
-        <screen name="tvsConfig" position="center,center" size="545,500" backgroundColor="#20000000" title="TV Spielfilm Setup">
-            <ePixmap position="0,0" size="545,50" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
-            <ePixmap position="10,59" size="525,1" pixmap="{picpath}setup/seperator.png" alphatest="off" zPosition="1" />
-            <widget name="config" position="10,60" size="525,100" itemHeight="25" scrollbarMode="showOnDemand" zPosition="1" />
-            <ePixmap position="10,161" size="525,1" pixmap="{picpath}setup/seperator.png" alphatest="off" zPosition="1" />
-            <ePixmap position="125,171" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="1" />
-            <ePixmap position="350,171" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="1" />
-            <eLabel position="150,170" size="180,20" font="Regular;18" halign="left" text="Speichern" transparent="1" zPosition="1" />
-            <eLabel position="375,170" size="180,20" font="Regular;18" halign="left" text="Abbrechen" transparent="1" zPosition="1" />
-            <widget name="plugin" position="10,200" size="525,295" alphatest="blend" zPosition="1" />
-        </screen>"""
-
     def __init__(self, session):
-        tvAllScreen.__init__(self, session, tvsConfig.skin)
+        skin = readSkin("tvsConfig")
+        tvAllScreen.__init__(self, session, skin)
         self.password = config.plugins.tvspielfilm.password.value
         self.encrypt = config.plugins.tvspielfilm.encrypt.value
         self['plugin'] = Pixmap()
@@ -9237,21 +9078,9 @@ class tvsConfig(ConfigListScreen, tvAllScreen):
 
 
 class FolderSelection(tvAllScreen):
-    skin = """
-        <screen name="FolderSelection" position="center,center" size="545,510" backgroundColor="#20000000" title="TV Spielfilm Setup">
-            <ePixmap position="0,0" size="545,50" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
-            <ePixmap position="10,59" size="525,1" pixmap="{picpath}setup/seperator.png" alphatest="off" zPosition="1" />
-            <widget name="folderlist" position="10,60" size="525,100" itemHeight="25" scrollbarMode="showNever" zPosition="1" />
-            <ePixmap position="10,161" size="525,1" pixmap="{picpath}setup/seperator.png" alphatest="off" zPosition="1" />
-            <ePixmap position="125,171" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="1" />
-            <ePixmap position="350,171" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="1" />
-            <eLabel position="150,170" size="180,20" font="Regular;18" halign="left" text="Speichern" transparent="1" zPosition="1" />
-            <eLabel position="375,170" size="180,20" font="Regular;18" halign="left" text="Abbrechen" transparent="1" zPosition="1" />
-            <widget name="plugin" position="10,200" size="525,300" alphatest="blend" zPosition="1" />
-        </screen>"""
-
     def __init__(self, session, folder):
-        tvAllScreen.__init__(self, session, FolderSelection.skin)
+        skin = readSkin("FolderSelection")
+        tvAllScreen.__init__(self, session, skin)
         self['plugin'] = Pixmap()
         noFolder = ['/bin',
          '/boot',
@@ -9361,45 +9190,6 @@ class tvEvent(tvAllScreenFull):
 
 
 class TVHeuteView(tvBaseScreen):
-    skin = """
-        <screen position="{screenpos}" size="{screensize}" title="TV Programm - TV Spielfilm">""" + SKHEADTOP + """
-        <widget name="sender1" position="_7,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="sender2" position="_212,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="sender3" position="_417,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="sender4" position="_622,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="sender5" position="_827,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="sender6" position="_1032,63" size="_151,_24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-        <widget name="logo1" position="_163,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="logo2" position="_368,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="logo3" position="_573,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="logo4" position="_778,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="logo5" position="_983,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="logo6" position="_1188,60" size="44,27" alphatest="blend" zPosition="1" /> 
-        <widget name="pic1" position="_7,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pic2" position="_212,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pic3" position="_417,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pic4" position="_622,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pic5" position="_827,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pic6" position="_1032,87" size="200,133" alphatest="blend" zPosition="1" /> 
-        <widget name="pictime1" position="_7,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictime2" position="_212,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictime3" position="_417,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictime4" position="_622,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictime5" position="_827,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictime6" position="_1032,225" size="_60,_20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
-        <widget name="pictext1" position="_72,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="pictext2" position="_277,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="pictext3" position="_482,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="pictext4" position="_687,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="pictext5" position="_892,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="pictext6" position="_1097,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
-        <widget name="menu1" position="_7,273" size="_200,367" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="menu2" position="_212,273" size="_200,367" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="menu3" position="_417,273" size="_200,367" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="menu4" position="_622,273" size="_200,367" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="menu5" position="_827,273" size="_200,367" scrollbarMode="showNever" zPosition="1" /> 
-        <widget name="menu6" position="_1032,273" size="_200,367" scrollbarMode="showNever" zPosition="1" />""" + SKHEADBOTTOM + "</screen>"
-
     def __init__(self, session, link, opener):
         if config.plugins.tvspielfilm.font_size.value == 'verylarge':
             psize = '50'
@@ -9408,7 +9198,8 @@ class TVHeuteView(tvBaseScreen):
         else:
             psize = '42'
         dic = {"psize": "%s,%s" % (int(135 * skinFactor) , psize)}
-        tvBaseScreen.__init__(self, session, TVHeuteView.skin, dic)
+        skin = readSkin("TVHeuteView")
+        tvBaseScreen.__init__(self, session, skin, dic)
         if config.plugins.tvspielfilm.meintvs.value == 'yes':
             self.MeinTVS = True
             self.error = False
@@ -9456,12 +9247,6 @@ class TVHeuteView(tvBaseScreen):
         self['logo4'] = Pixmap()
         self['logo5'] = Pixmap()
         self['logo6'] = Pixmap()
-        self['pic1'] = Pixmap()
-        self['pic2'] = Pixmap()
-        self['pic3'] = Pixmap()
-        self['pic4'] = Pixmap()
-        self['pic5'] = Pixmap()
-        self['pic6'] = Pixmap()
         self._commonInit()
         self['sender1'] = Label('')
         self['sender2'] = Label('')

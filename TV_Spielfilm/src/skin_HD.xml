@@ -1,0 +1,296 @@
+<skin>
+
+        <screen name="tvMain" position="center,20" size="310,640" flags="wfNoBorder" title="TV Spielfilm">
+            <eLabel position="0,0" size="310,30" backgroundColor="#000000" zPosition="1" />
+            <eLabel position="0,30" size="20,590" backgroundColor="#000000" zPosition="1" />
+            <eLabel position="290,30" size="20,590" backgroundColor="#000000" zPosition="1" />
+            <eLabel position="0,620" size="310,20" backgroundColor="#000000" zPosition="1" />
+            <ePixmap position="20,30" size="270,60" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
+            <ePixmap position="262,40" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="2" />
+            <widget name="green" position="262,62" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="2" />
+            <widget name="label" position="176,40" size="80,20" font="Regular;16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
+            <widget name="label2" position="176,62" size="80,20" font="Regular;16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
+            <widget name="mainmenu" position="30,100" size="250,390" scrollbarMode="showNever" zPosition="2" />
+            <widget name="secondmenu" position="30,100" size="250,510" scrollbarMode="showNever" zPosition="2" />
+            <widget name="thirdmenu" position="30,100" size="250,510" scrollbarMode="showNever" zPosition="2" />
+        </screen>
+
+
+        <screen name="tvTipps" position="0,450" size="740,270" flags="wfNoBorder" title=" ">
+                <widget name="picture" position="0,0" size="387,270" alphatest="blend" zPosition="1" />
+                <widget name="elabel" position="387,0" size="98,150" font="Regular;18" backgroundColor="#FF000000" zPosition="1" />
+                <widget name="elabel2" position="485,0" size="20,150" font="Regular;18" backgroundColor="#000000" zPosition="1" />
+                <widget name="elabel3" position="387,150" size="353,125" font="Regular;18" backgroundColor="#FFFFFF" zPosition="1" />
+                <widget name="label" position="402,151" size="288,24" font="Regular;20" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
+                <widget name="label2" position="402,176" size="288,48" font="Regular;22" foregroundColor="#{color}" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
+                <widget name="label3" position="402,225" size="328,42" font="Regular;18" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
+                <widget name="thumb" position="695,160" size="40,40" pixmap="{picpath}icons/rating small1HD.png" alphatest="blend" zPosition="2" />
+                <widget name="label4" position="40,220" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
+                <widget name="label5" position="40,245" size="100,25" font="Regular;18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />
+        </screen>
+
+
+        <screen name="FullScreen" position="center,center" size="{size}" flags="wfNoBorder" title="  " >
+                <eLabel position="0,0" size="{size}" backgroundColor="#000000" zPosition="1" />
+                <widget name="picture" position="{ppos}" size="{psize}" alphatest="blend" zPosition="2" />
+        </screen>
+
+        <screen name="PicShowFull" position="center,center" size="1280,720" title=" ">
+                <eLabel position="0,0" size="1280,720" backgroundColor="#000000" zPosition="1" />
+                <widget name="picture" position="0,0" size="1280,720" alphatest="blend" zPosition="2" />
+                <widget name="picindex" position="center,10" size="120,22" font="Regular;20" foregroundColor="#A5ACAE" halign="center" transparent="1" zPosition="3" />
+        </screen>
+
+
+        <screen name="TVPicShow" position="center,center" size="1240,640" title="">
+                <eLabel position="0,0" size="1240,60" backgroundColor="#FFFFFF" /><ePixmap position="0,0" size="1240,60" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
+                <widget name="label" position="center,10" size="512,44" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
+                <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
+                <convert type="ClockToText">Format:%H:%M:%S</convert>
+                </widget>
+                <widget name="infotext" position="10,70" size="310,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext2" position="10,105" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext3" position="10,140" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext4" position="10,175" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext5" position="855,70" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="infotext6" position="855,105" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="infotext7" position="855,140" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="infotext8" position="855,175" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="textpage" position="10,70" size="250,560" font="Regular;20" halign="left" zPosition="1" />
+                <widget name="picture" position="175,70" size="{picsz}" alphatest="blend" zPosition="1" />
+                <widget name="picindex" position="1065,70" size="165,24" font="Regular;20" halign="right" zPosition="1" />
+                <widget name="pictext" position="10,577" size="1220,63" font="Regular;20" halign="center" zPosition="1" />
+        </screen>
+
+
+        <screen name="TVBlog" position="center,center" size="1240,640" title="TV Spielfilm Blog">
+                <eLabel position="0,0" size="1240,60" backgroundColor="#FFFFFF" />
+                <ePixmap position="0,0" size="1240,60" pixmap="{picpath}blogHD.png" alphatest="blend" zPosition="1" />
+                <widget name="menu" position="950,150" size="250,250" scrollbarMode="showNever" zPosition="1" />
+                <widget name="meta" position="10,70" size="300,55" font="Regular;18" foregroundColor="#F2A5BC" halign="left" zPosition="1" />
+                <widget name="item" position="10,445" size="120,25" font="Regular;18" foregroundColor="#F2A5BC" halign="left" zPosition="1" />
+                <widget name="picture" position="320,70" size="600,400" alphatest="blend" zPosition="1" />
+                <widget name="topictext" position="10,475" size="1220,25" font="Regular;20" halign="left" zPosition="1" />
+                <widget name="previewtext" position="10,510" size="1220,130" font="Regular;20" halign="left" zPosition="1" />
+                <widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />
+                <widget name="playlogo" position="565,163" size="109,58" pixmap="{picpath}icons/playHD.png" alphatest="blend" zPosition="2" />
+                <widget name="textpage" position="10,325" size="1220,315" font="Regular;20" halign="left" zPosition="0" />
+                <widget name="slider_textpage" position="1214,325" size="22,315" pixmap="{picpath}slider/slider_315.png" alphatest="blend" zPosition="1" />
+                <widget name="label" position="364,10" size="512,40" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" valign="center" transparent="1" zPosition="2" />
+                <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
+                <convert type="ClockToText">Format:%H:%M:%S</convert>
+                </widget>
+                <widget name="statuslabel" position="250,610" size="740,20" font="Regular;18" foregroundColor="#858A95" halign="center" zPosition="2" />
+        </screen>
+
+        <screen name="TVNews" position="center,center" size="1240,640" title="TV-News - TV Spielfilm">
+                <eLabel position="0,0" size="1240,60" backgroundColor="#FFFFFF" /><ePixmap position="0,0" size="1240,60" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
+                <widget name="menu" position="10,70" size="475,540" scrollbarMode="showAlways" zPosition="1" />
+                <widget name="slider_menu" position="469,70" size="22,540" pixmap="{picpath}slider/slider_540.png" alphatest="blend" zPosition="2" />
+                <widget name="picture" position="600,70" size="525,350" alphatest="blend" zPosition="1" />
+                <widget name="picturetext" position="490,420" size="745,60" font="Regular;20" valign="center" halign="center" zPosition="1" />
+                <widget name="picpost" position="375,70" size="490,245" alphatest="blend" zPosition="1" />
+                <widget name="cinlogo" position="325,70" size="60,29" pixmap="{picpath}icons/cin.png" alphatest="blend" zPosition="1" />
+                <widget name="playlogo" position="565,163" size="109,58" pixmap="{picpath}icons/playHD.png" alphatest="blend" zPosition="2" />
+                <widget name="textpage" position="10,325" size="1220,315" font="Regular;20" halign="left" zPosition="0" />
+                <widget name="slider_textpage" position="1214,325" size="22,315" pixmap="{picpath}slider/slider_315.png" alphatest="blend" zPosition="1" />
+                <widget name="label" position="364,20" size="512,20" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
+                <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
+                <convert type="ClockToText">Format:%H:%M:%S</convert>
+                </widget>
+                <widget name="statuslabel" position="250,610" size="740,20" font="Regular;20" foregroundColor="#858A95" halign="center" zPosition="2" />
+        </screen>
+
+        <screen name="TVProgrammView" position="center,60" size="1240,640" title=" ">
+                <eLabel position="0,0" size="1240,60" backgroundColor="#FFFFFF" /><ePixmap position="0,0" size="1240,60" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
+                <widget name="menu" position="10,75" size="1220,590" scrollbarMode="showNever" zPosition="1" />
+                <widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="searchtimer" position="420,5" size="400,50" pixmap="{picpath}search_timer.png" alphatest="blend" zPosition="3" />
+                <widget name="searchlogo" position="5,75" size="200,50" pixmap="{picpath}search.png" alphatest="blend" zPosition="1" />
+                <widget name="searchtext" position="245,75" size="955,65" font="Regular;26" valign="center" zPosition="1" />
+                <widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> 
+                <widget name="picpost" position="center,70" size="490,245" alphatest="blend" zPosition="1" />
+                <widget name="piclabel" position="476,265" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
+                <widget name="piclabel2" position="476,290" size="100,25" font="Regular;18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />
+                <widget name="infotext" position="10,70" size="310,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext2" position="10,105" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext3" position="10,140" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext4" position="10,175" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext5" position="855,70" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="infotext6" position="855,105" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="infotext7" position="855,140" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="infotext8" position="855,175" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />
+                <widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />
+                <widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />
+                <widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />
+                <widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />
+                <widget name="cinlogo" position="325,70" size="60,29" pixmap="{picpath}icons/cin.png" alphatest="blend" zPosition="1" />
+                <widget name="playlogo" position="center,163" size="109,58" pixmap="{picpath}icons/playHD.png" alphatest="blend" zPosition="2" />
+                <widget name="textpage" position="10,325" size="1220,315" font="Regular;{fontsize}" halign="left" zPosition="0" />
+                <widget name="slider_textpage" position="1214,325" size="22,315" pixmap="{picpath}/slider/slider_315.png" alphatest="blend" zPosition="1" />
+                <widget name="label" position="center,10" size="800,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
+                <widget name="label2" position="469,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+                <widget name="label3" position="594,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+                <widget name="label4" position="719,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+                <ePixmap position="445,33" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="2" />
+                <ePixmap position="570,33" size="18,18" pixmap="{picpath}buttons/yellow.png" alphatest="blend" zPosition="2" />
+                <ePixmap position="695,33" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="2" />
+                <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
+                <convert type="ClockToText">Format:%H:%M:%S</convert>
+                </widget>
+        </screen>
+
+
+        <screen name="TVTrailerBilder" position="center,60" size="1240,640" title=" ">
+                <eLabel position="0,0" size="1240,60" backgroundColor="#FFFFFF" /><ePixmap position="0,0" size="1240,60" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
+                <widget name="menu" position="10,75" size="1220,590" scrollbarMode="showNever" zPosition="1" />
+                <widget name="pic1" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="pic2" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="pic3" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="pic4" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="pic5" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="pic6" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />
+                <widget name="play1" position="36,91" size="109,58" alphatest="blend" zPosition="1" />
+                <widget name="play2" position="36,181" size="109,58" alphatest="blend" zPosition="1" />
+                <widget name="play3" position="36,271" size="109,58" alphatest="blend" zPosition="1" />
+                <widget name="play4" position="36,361" size="109,58" alphatest="blend" zPosition="1" />
+                <widget name="play5" position="36,451" size="109,58" alphatest="blend" zPosition="1" />
+                <widget name="play6" position="36,541" size="109,58" alphatest="blend" zPosition="1" />
+                <widget name="label" position="250,20" size="740,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
+                <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
+                <convert type="ClockToText">Format:%H:%M:%S</convert>
+                </widget>
+        </screen>
+
+
+        <screen name="TVHeuteView" position="center,60" size="1240,640" title="TV Programm - TV Spielfilm">
+                <eLabel position="0,0" size="1240,60" backgroundColor="#FFFFFF" /><ePixmap position="0,0" size="1240,60" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
+                <widget name="sender1" position="7,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+                <widget name="sender2" position="212,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+                <widget name="sender3" position="417,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+                <widget name="sender4" position="622,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+                <widget name="sender5" position="827,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+                <widget name="sender6" position="1032,63" size="151,24" font="Regular;{fontsize2}" halign="left" zPosition="1" />
+                <widget name="logo1" position="163,60" size="44,27" alphatest="blend" zPosition="1" /> 
+                <widget name="logo2" position="368,60" size="44,27" alphatest="blend" zPosition="1" /> 
+                <widget name="logo3" position="573,60" size="44,27" alphatest="blend" zPosition="1" /> 
+                <widget name="logo4" position="778,60" size="44,27" alphatest="blend" zPosition="1" /> 
+                <widget name="logo5" position="983,60" size="44,27" alphatest="blend" zPosition="1" /> 
+                <widget name="logo6" position="1188,60" size="44,27" alphatest="blend" zPosition="1" /> 
+                <widget name="pic1" position="7,87" size="200,133" alphatest="blend" zPosition="1" /> 
+                <widget name="pic2" position="212,87" size="200,133" alphatest="blend" zPosition="1" /> 
+                <widget name="pic3" position="417,87" size="200,133" alphatest="blend" zPosition="1" /> 
+                <widget name="pic4" position="622,87" size="200,133" alphatest="blend" zPosition="1" /> 
+                <widget name="pic5" position="827,87" size="200,133" alphatest="blend" zPosition="1" /> 
+                <widget name="pic6" position="1032,87" size="200,133" alphatest="blend" zPosition="1" /> 
+                <widget name="pictime1" position="7,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+                <widget name="pictime2" position="212,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+                <widget name="pictime3" position="417,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+                <widget name="pictime4" position="622,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+                <widget name="pictime5" position="827,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+                <widget name="pictime6" position="1032,225" size="60,20" font="Regular;{fontsize2}" valign="top" halign="center" zPosition="1" />
+                <widget name="pictext1" position="72,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+                <widget name="pictext2" position="277,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+                <widget name="pictext3" position="482,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+                <widget name="pictext4" position="687,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+                <widget name="pictext5" position="892,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+                <widget name="pictext6" position="1097,225" size="{psize}" font="Regular;{fontsize2}" valign="top" halign="left" zPosition="1" />
+                <widget name="menu1" position="7,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+                <widget name="menu2" position="212,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+                <widget name="menu3" position="417,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+                <widget name="menu4" position="622,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+                <widget name="menu5" position="827,273" size="200,367" scrollbarMode="showNever" zPosition="1" /> 
+                <widget name="menu6" position="1032,273" size="200,367" scrollbarMode="showNever" zPosition="1" />
+                <widget name="searchtimer" position="420,5" size="400,50" pixmap="{picpath}search_timer.png" alphatest="blend" zPosition="3" />
+                <widget name="searchlogo" position="5,75" size="200,50" pixmap="{picpath}search.png" alphatest="blend" zPosition="1" />
+                <widget name="searchtext" position="245,75" size="955,65" font="Regular;26" valign="center" zPosition="1" />
+                <widget name="searchmenu" position="10,140" size="1220,480" scrollbarMode="showNever" zPosition="1" /> 
+                <widget name="picpost" position="center,70" size="490,245" alphatest="blend" zPosition="1" />
+                <widget name="piclabel" position="476,265" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
+                <widget name="piclabel2" position="476,290" size="100,25" font="Regular;18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />
+                <widget name="infotext" position="10,70" size="310,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext2" position="10,105" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext3" position="10,140" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext4" position="10,175" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="left" zPosition="1" />
+                <widget name="infotext5" position="855,70" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="infotext6" position="855,105" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="infotext7" position="855,140" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="infotext8" position="855,175" size="375,25" font="Regular;{fontsize}" foregroundColor="#AAB2BA" halign="right" zPosition="1" />
+                <widget name="tvinfo1" position="10,215" size="60,20" alphatest="blend" zPosition="1" />
+                <widget name="tvinfo2" position="80,215" size="60,20" alphatest="blend" zPosition="1" />
+                <widget name="tvinfo3" position="150,215" size="60,20" alphatest="blend" zPosition="1" />
+                <widget name="tvinfo4" position="10,245" size="60,20" alphatest="blend" zPosition="1" />
+                <widget name="tvinfo5" position="80,245" size="60,20" alphatest="blend" zPosition="1" />
+                <widget name="cinlogo" position="325,70" size="60,29" pixmap="{picpath}icons/cin.png" alphatest="blend" zPosition="1" />
+                <widget name="playlogo" position="center,163" size="109,58" pixmap="{picpath}icons/playHD.png" alphatest="blend" zPosition="2" />
+                <widget name="textpage" position="10,325" size="1220,315" font="Regular;{fontsize}" halign="left" zPosition="0" />
+                <widget name="slider_textpage" position="1214,325" size="22,315" pixmap="{picpath}/slider/slider_315.png" alphatest="blend" zPosition="1" />
+                <widget name="label" position="center,10" size="800,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
+                <widget name="label2" position="469,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+                <widget name="label3" position="594,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+                <widget name="label4" position="719,32" size="100,22" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+                <ePixmap position="445,33" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="2" />
+                <ePixmap position="570,33" size="18,18" pixmap="{picpath}buttons/yellow.png" alphatest="blend" zPosition="2" />
+                <ePixmap position="695,33" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="2" />
+                <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
+                <convert type="ClockToText">Format:%H:%M:%S</convert>
+                </widget>
+        </screen>
+
+
+        <screen name="getNumber" position="center,center" size="175,70" backgroundColor="#000000" flags="wfNoBorder" title=" ">
+                <widget name="number" position="0,0" size="175,70" font="Regular;40" halign="center" valign="center" transparent="1" zPosition="1"/>
+        </screen>
+
+        <screen name="gotoPageMenu" position="center,center" size="436,560" title=" ">
+                <widget name="pagemenu" position="10,10" size="416,540" scrollbarMode="showNever" zPosition="1" />
+        </screen>
+
+        <screen name="searchYouTube" position="center,center" size="1000,560" title=" ">
+                <ePixmap position="0,0" size="1000,50" pixmap="{picpath}youtube.png" alphatest="blend" zPosition="1" />
+                <ePixmap position="10,6" size="18,18" pixmap="{picpath}buttons/blue.png" alphatest="blend" zPosition="2" />
+                <ePixmap position="10,26" size="18,18" pixmap="{picpath}buttons/yellow.png" alphatest="blend" zPosition="2" />
+                <widget name="label" position="34,6" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+                <widget name="label2" position="34,26" size="200,20" font="Regular;16" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+                <widget render="Label" source="global.CurrentTime" position="1000,0" size="225,60" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
+                <convert type="ClockToText">Format:%H:%M:%S</convert>
+                </widget>
+                <widget name="poster1" position="10,55" size="215,120" alphatest="blend" zPosition="1" />
+                <widget name="poster2" position="10,180" size="215,120" alphatest="blend" zPosition="1" />
+                <widget name="poster3" position="10,305" size="215,120" alphatest="blend" zPosition="1" />
+                <widget name="poster4" position="10,430" size="215,120" alphatest="blend" zPosition="1" />
+                <widget name="list" position="235,55" size="755,500" scrollbarMode="showOnDemand" zPosition="1" />
+        </screen>
+
+
+        <screen name="tvsConfig" position="center,center" size="545,500" backgroundColor="#20000000" title="TV Spielfilm Setup">
+                <ePixmap position="0,0" size="545,50" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
+                <ePixmap position="10,59" size="525,1" pixmap="{picpath}setup/seperator.png" alphatest="off" zPosition="1" />
+                <widget name="config" position="10,60" size="525,100" itemHeight="25" scrollbarMode="showOnDemand" zPosition="1" />
+                <ePixmap position="10,161" size="525,1" pixmap="{picpath}setup/seperator.png" alphatest="off" zPosition="1" />
+                <ePixmap position="125,171" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="1" />
+                <ePixmap position="350,171" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="1" />
+                <eLabel position="150,170" size="180,20" font="Regular;18" halign="left" text="Speichern" transparent="1" zPosition="1" />
+                <eLabel position="375,170" size="180,20" font="Regular;18" halign="left" text="Abbrechen" transparent="1" zPosition="1" />
+                <widget name="plugin" position="10,200" size="525,295" alphatest="blend" zPosition="1" />
+        </screen>
+
+        <screen name="FolderSelection" position="center,center" size="545,510" backgroundColor="#20000000" title="TV Spielfilm Setup">
+                <ePixmap position="0,0" size="545,50" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
+                <ePixmap position="10,59" size="525,1" pixmap="{picpath}setup/seperator.png" alphatest="off" zPosition="1" />
+                <widget name="folderlist" position="10,60" size="525,100" itemHeight="25" scrollbarMode="showNever" zPosition="1" />
+                <ePixmap position="10,161" size="525,1" pixmap="{picpath}setup/seperator.png" alphatest="off" zPosition="1" />
+                <ePixmap position="125,171" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="1" />
+                <ePixmap position="350,171" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="1" />
+                <eLabel position="150,170" size="180,20" font="Regular;18" halign="left" text="Speichern" transparent="1" zPosition="1" />
+                <eLabel position="375,170" size="180,20" font="Regular;18" halign="left" text="Abbrechen" transparent="1" zPosition="1" />
+                <widget name="plugin" position="10,200" size="525,300" alphatest="blend" zPosition="1" />
+        </screen>
+
+</skin>
