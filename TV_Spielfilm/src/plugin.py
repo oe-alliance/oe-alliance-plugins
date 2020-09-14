@@ -32,7 +32,6 @@ from ServiceReference import ServiceReference
 from time import mktime
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
-from Tools.BoundFunction import boundFunction
 from twisted.web import client, error
 from twisted.web.client import getPage, downloadPage
 from six.moves.http_client import HTTPException
@@ -312,7 +311,7 @@ class tvBaseScreen(tvAllScreen):
     def GetPics(self, picurllist, offset, show=True, playshow=False):
         for i in range(6):
             try:
-                picurl = picurllist[offset]
+                picurl = picurllist[offset + i]
                 self.picdownload(picurl, self.getPics, i)
                 if show:
                     self['pic%s' % (i + 1)].show()
@@ -2007,46 +2006,49 @@ class TVTippsView(tvBaseScreen):
             self.showsearch()
             self.current = 'searchmenu'
 
-
-class TVGenreView(tvBaseScreen):
-    def __init__(self, session, link, genre):
+class tvGenreJetztProgrammView(tvBaseScreen):
+    def __init__(self, session, link):
         skin = readSkin("TVProgrammView")
         tvBaseScreen.__init__(self, session, skin)
         self.skinName = "TVProgrammView"
         self.tventries = []
         self.tvlink = []
         self.tvtitel = []
-        self.sref = []
         self.searchlink = []
         self.searchref = []
         self.searchentries = []
         self.postlink = link
-        self.link = link
         self.POSTtext = ''
         self.EPGtext = ''
+        self.rec = False
+        self.ready = False
+        self.hideflag = True
+        self.movie = False
+        self.datum = False
+        self.filter = True
+        self.search = False
+        self.postviewready = False
+        self.mehrbilder = False
+        self.oldindex = 0
+        self.oldsearchindex = 1
+        self.titel = ''
+        self['menu'] = ItemList([])
+
+class TVGenreView(tvBaseScreen):
+    def __init__(self, session, link, genre):
+        tvGenreJetztProgrammView.__init__(self, session, link)
+        self.sref = []
+        self.link = link
         self.genre = genre
         if search('Serie', genre) is not None:
             self.serie = True
         else:
             self.serie = False
-        self.titel = ''
-        self.hideflag = True
-        self.search = False
-        self.rec = False
         self.load = True
-        self.ready = False
-        self.postviewready = False
-        self.mehrbilder = False
-        self.movie = False
-        self.datum = False
-        self.filter = True
         self.maxgenrecount = config.plugins.tvspielfilm.maxgenre.value
         self.genrecount = 0
-        self.oldindex = 0
-        self.oldsearchindex = 1
         self._commonInit('= Filter')
         self._infotextHide()
-        self['menu'] = ItemList([])
         self['actions'] = ActionMap(['OkCancelActions',
          'DirectionActions',
          'HelpActions',
@@ -2687,42 +2689,18 @@ class TVGenreView(tvBaseScreen):
 
 class TVJetztView(tvBaseScreen):
     def __init__(self, session, link, standalone):
-        skin = readSkin("TVProgrammView")
-        tvBaseScreen.__init__(self, session, skin)
-        self.skinName = "TVProgrammView"
-        self.tventries = []
-        self.tvlink = []
-        self.tvtitel = []
+        tvGenreJetztProgrammView.__init__(self, session, link)
         self.sref = []
-        self.searchlink = []
-        self.searchref = []
-        self.searchentries = []
-        self.postlink = link
         self.link1 = link
         self.link2 = link
-        self.titel = ''
         self.standalone = standalone
-        self.POSTtext = ''
-        self.EPGtext = ''
-        self.hideflag = True
         self.jetzt = False
         self.gleich = False
         self.abends = False
         self.nachts = False
-        self.search = False
-        self.rec = False
-        self.ready = False
-        self.postviewready = False
-        self.mehrbilder = False
-        self.movie = False
-        self.datum = False
-        self.filter = True
         self.index = 0
-        self.oldindex = 0
-        self.oldsearchindex = 1
         self._commonInit()
         self._infotextHide()
-        self['menu'] = ItemList([])
         self['actions'] = ActionMap(['OkCancelActions',
          'DirectionActions',
          'HelpActions',
@@ -3450,11 +3428,9 @@ class TVJetztView(tvBaseScreen):
 
 class TVProgrammView(tvBaseScreen):
     def __init__(self, session, link, eventview, tagestipp):
+        tvGenreJetztProgrammView.__init__(self, session, link)
         self.eventview = eventview
         self.tagestipp = tagestipp
-        skin = readSkin("TVProgrammView")
-        tvBaseScreen.__init__(self, session, skin)
-        self.skinName = "TVProgrammView"
         self.service_db = serviceDB(self.servicefile)
         if self.tagestipp == False:
             channel = re.findall(',(.*?).html', link)
@@ -3469,35 +3445,13 @@ class TVProgrammView(tvBaseScreen):
                     self.piconname = self.findPicon(self.sref)
                     if self.piconname is None:
                         self.picon = False
-        self.tventries = []
-        self.tvlink = []
-        self.tvtitel = []
-        self.searchlink = []
-        self.searchref = []
-        self.searchentries = []
-        self.postlink = link
         self.link = link
-        self.titel = ''
-        self.POSTtext = ''
-        self.EPGtext = ''
-        self.hideflag = True
         self.primetime = False
-        self.search = False
-        self.rec = False
-        self.ready = False
-        self.postviewready = False
-        self.mehrbilder = False
-        self.movie = False
-        self.datum = False
-        self.filter = True
-        self.oldindex = 0
-        self.oldsearchindex = 1
         if self.eventview == False:
             self._commonInit()
         else:
             self._commonInit('= Suche', '= Refresh')
         self._infotextHide()
-        self['menu'] = ItemList([])
         self['actions'] = ActionMap(['OkCancelActions',
          'ChannelSelectBaseActions',
          'DirectionActions',
@@ -9771,26 +9725,32 @@ class TVHeuteView(tvBaseScreen):
             return pngname
 
     def showLogo(self, idx, logo):
-        self.picloads[idx+10] = ePicLoad()
-        self.picloads[idx+10].PictureData.get().append(boundFunction(self.finish_decodelogo, idx))
-        self.picloads[idx+10].setPara((44, 27, 3, 0, False, 1, "#00000000"))
-        self.picloads[idx+10].startDecode(logo)
+        currPic = loadPic(logo, 44, 27, 3, 0, 0, 0)
+        if currPic != None:
+            self['logo%s' % (idx + 1)].instance.setPixmap(currPic)
+#        self.picloads[idx+10] = ePicLoad()
+#        self.picloads[idx+10].PictureData.get().append(self.finish_decodelogo(idx))
+#        self.picloads[idx+10].setPara((44, 27, 3, 0, False, 1, "#00000000"))
+#        self.picloads[idx+10].startDecode(logo)
 
     def getPic(self, output, idx):
         f = open(self.pics[idx], 'wb')
         f.write(output)
         f.close()
-        self.picloads[idx] = ePicLoad()
-        self.picloads[idx].PictureData.get().append(boundFunction(self.finish_decodepic, idx))
-        self.picloads[idx].setPara((200, 133, 3, 0, False, 1, "#00000000"))
-        self.picloads[idx].startDecode(self.pics[idx])
+        currPic = loadPic(self.pics[idx], 200, 133, 3, 0, 0, 0)
+        if currPic != None:
+            self['pic%s' % (idx + 1)].instance.setPixmap(currPic)
+#        self.picloads[idx] = ePicLoad()
+#        self.picloads[idx].PictureData.get().append(self.finish_decodepic(idx))
+#        self.picloads[idx].setPara((200, 133, 3, 0, False, 1, "#00000000"))
+#        self.picloads[idx].startDecode(self.pics[idx])
 
-    def finish_decodelogo(self, idx, info):
+    def finish_decodelogo(self, idx):
         ptr = self.picloads[idx+10].getData()
         if ptr != None:
             self['logo%s' % (idx + 1)].instance.setPixmap(ptr.__deref__())
 
-    def finish_decodepic(self, idx, info):
+    def finish_decodepic(self, idx):
         ptr = self.picloads[idx].getData()
         if ptr != None:
             self['pic%s' % (idx + 1)].instance.setPixmap(ptr.__deref__())
