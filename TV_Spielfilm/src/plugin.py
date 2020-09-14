@@ -8614,6 +8614,12 @@ class TVHeuteView(tvBaseScreen):
         self.filter = True
         self.oldindex = 0
         self.oldsearchindex = 1
+        self['pic1'] = Pixmap()
+        self['pic2'] = Pixmap()
+        self['pic3'] = Pixmap()
+        self['pic4'] = Pixmap()
+        self['pic5'] = Pixmap()
+        self['pic6'] = Pixmap()
         self['logo1'] = Pixmap()
         self['logo2'] = Pixmap()
         self['logo3'] = Pixmap()
@@ -8848,168 +8854,86 @@ class TVHeuteView(tvBaseScreen):
         self.tventriess = [[],[],[],[],[],[]]
         self.tvlinks = [[],[],[],[],[],[]]
         self.tvtitels = [[],[],[],[],[],[]]
-        self.menu = 'menu6'
+        menupos = 5
+        menuitems = [[],[],[],[],[],[]]
         a = findall('<td>(.*?)</td>', bereich)
-        y = 0
-        offset = 9
-        ress = ['','','','','','']
         for x in a:
-            if y == 0:
-                logo3 = False
-                if search('BLOCK', x) is not None:
-                    if self.menu == 'menu1':
-                        self.menu = 'menu2'
-                    elif self.menu == 'menu2':
-                        self.menu = 'menu3'
-                    elif self.menu == 'menu3':
-                        self.menu = 'menu4'
-                    elif self.menu == 'menu4':
-                        self.menu = 'menu5'
-                    elif self.menu == 'menu5':
-                        self.menu = 'menu6'
-                    elif self.menu == 'menu6':
-                        self.menu = 'menu1'
+            if x == 'BLOCK':
+                if menupos == 5:
+                    menupos = 0
                 else:
-                    y = 1
-            if y == 1:
-                if search('BLOCK', x) is not None:
-                    ress = ['','','','','','']
-                    y = 7
-                elif search('TIME', x) is not None:
+                    menupos = menupos + 1
+            else:
+                menuitems[menupos].append(x)
+
+        midx = 0
+        currentitem = None
+        currentlink = 'na'
+        currenttitle = ''
+        for mi in menuitems:
+            midx = midx + 1
+            self.menu = 'menu%s' % midx
+            logo = 0
+            for x in mi:
+                if search('TIME', x) is not None:
                     x = sub('TIME', '', x)
-                    for i in range(6):
-                        if self.menu == 'menu%s' % (i + 1):
-                            ress[i] = [x]
-                            if self.backcolor == True:
-                                ress[i].append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                            ress[i].append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-                            hour = sub(':..', '', x)
-                            if int(hour) < 5:
-                                one_day = datetime.timedelta(days=1)
-                                date = self.date + one_day
-                            else:
-                                date = self.date
-                            timer = str(date) + ':::' + x + ':::' + str(self.srefs[i][0])
-                            if timer in self.timer:
-                                self.rec = True
-                                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/icon-small-rec.png'
-                                if fileExists(png):
-                                    ress[i].append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
-                else:
-                    for i in range(6):
-                        if self.menu == 'menu%s' % (i + 1):
-                            ress[i] = [x]
-                            if self.backcolor == True:
-                                ress[i].append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                    y = 2
-            if y == 2:
+                    if currentitem != None:
+                        self.tventriess[midx-1].append(currentitem)
+                        self.tvlinks[midx-1].append(currentlink)
+                        self.tvtitels[midx-1].append(currenttitle)
+                    currentitem = [x]
+                    if self.backcolor == True:
+                        currentitem.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
+                    currentitem.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                    currentlink = 'na'
+                    currenttitle = ''
+                    logo = 0
+                    hour = sub(':..', '', x)
+                    if int(hour) < 5:
+                        one_day = datetime.timedelta(days=1)
+                        date = self.date + one_day
+                    else:
+                        date = self.date
+                    timer = str(date) + ':::' + x + ':::' + str(self.srefs[midx-1][0])
+                    if timer in self.timer:
+                        self.rec = True
+                        png = ICONPATH + 'icon-small-recHD.png'
+                        if fileExists(png):
+                            currentitem.append(MultiContentEntryPixmapAlphaTest(pos=(167, 87), size=(28, 29), png=loadPNG(png)))
                 if search('LOGO', x) is not None:
                     x = sub('LOGO', '', x)
-                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                    png = '%s%sHD.png' % (ICONPATH, x)
                     if fileExists(png):
-                        for i in range(6):
-                            if self.menu == 'menu%s' % (i + 1):
-                                ress[i].append(MultiContentEntryPixmapAlphaTest(pos=(0, 25), size=(45, 15), png=loadPNG(png)))
-                else:
-                    y = 3
-            if y == 3:
-                if search('LOGO', x) is not None:
-                    x = sub('LOGO', '', x)
-                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
-                    if fileExists(png):
-                        for i in range(6):
-                            if self.menu == 'menu%s' % (i + 1):
-                                ress[i].append(MultiContentEntryPixmapAlphaTest(pos=(0, 45), size=(45, 15), png=loadPNG(png)))
-                else:
-                    y = 4
-            if y == 4:
-                if search('LOGO', x) is not None:
-                    x = sub('LOGO', '', x)
-                    logo3 = True
-                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
-                    if fileExists(png):
-                        for i in range(6):
-                            if self.menu == 'menu%s' % (i + 1):
-                                ress[i].append(MultiContentEntryPixmapAlphaTest(pos=(0, 65), size=(45, 15), png=loadPNG(png)))
-                else:
-                    y = 5
-            if y == 5:
+                        currentitem.append(MultiContentEntryPixmapAlphaTest(pos=(0, 25 + (logo * 20)), size=(45, 15), png=loadPNG(png)))
+                    logo = logo + 1
                 if search('RATING', x) is not None:
                     x = sub('RATING', '', x)
-                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
+                    png = '%s%sHD.png' % (ICONPATH, x)
                     if fileExists(png):
-                        for i in range(6):
-                            if self.menu == 'menu%s' % (i + 1):
-                                if logo3 == False:
-                                    ress[i].append(MultiContentEntryPixmapAlphaTest(pos=(5, 65), size=(29, 29), png=loadPNG(png)))
-                                else:
-                                    ress[i].append(MultiContentEntryPixmapAlphaTest(pos=(5, 80), size=(29, 29), png=loadPNG(png)))
-                elif search('LOGO', x) is not None:
-                    x = sub('LOGO', '', x)
-                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%s.png' % x
-                    if fileExists(png):
-                        for i in range(6):
-                            if self.menu == 'menu%s' % (i + 1):
-                                ress[i].append(MultiContentEntryPixmapAlphaTest(pos=(0, 85), size=(45, 15), png=loadPNG(png)))
-                    y = 4
-                else:
-                    y = 6
-            if y == 6:
+                        currentitem.append(MultiContentEntryPixmapAlphaTest(pos=(5, 25 + (logo * 20)), size=(29, 29), png=loadPNG(png)))
                 if search('LINK', x) is not None:
                     x = sub('LINK', '', x)
-                    for i in range(6):
-                        if self.menu == 'menu%s' % (i + 1):
-                            self.tvlinks[i].append(x)
-                else:
-                    for i in range(6):
-                        if self.menu == 'menu%s' % (i + 1):
-                            self.tvlinks[i].append('na')
-                    y = 7
-            if y == 7:
-                if search('TITEL', x) is not None:
+                    currentlink = x
+                if search('TITEL', x) is not None and search('SUBTITEL', x) is None:
                     x = sub('TITEL', '', x)
-                    titel = x
-                else:
-                    titel = ''
-                    y = 8
-            if y == 8:
+                    currenttitle = x
                 if search('SUBTITEL', x) is not None:
                     x = sub('SUBTITEL', '', x)
                     if x != '':
-                        x = titel + ', ' + x
-                    else:
-                        x = titel
-                    for i in range(6):
-                        if self.menu == 'menu%s' % (i + 1):
-                            self.tvtitels[i].append(titel)
-                            if self.rec == True:
-                                self.rec = False
-                                if self.fontlarge == True:
-                                    ress[i].append(MultiContentEntryText(pos=(60, 0), size=(140, 94), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                                else:
-                                    ress[i].append(MultiContentEntryText(pos=(60, 0), size=(140, 84), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            elif self.fontlarge == True:
-                                ress[i].append(MultiContentEntryText(pos=(60, 0), size=(140, 115), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            else:
-                                ress[i].append(MultiContentEntryText(pos=(60, 0), size=(140, 108), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=x))
-                            self.tventriess[i].append(ress[i])
+                        currenttitle = currenttitle + ', ' + x
+                    tpos = 84
+                    if self.rec == True:
+                        tpos = tpos - 10
+                        self.rec = False
+                    if self.fontlarge == True:
+                        tpos = tpos + 10
+                    currentitem.append(MultiContentEntryText(pos=(60, 0), size=(140, tpos), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=currenttitle))
 
-                elif search('BLOCK', x) is not None:
-                    if self.menu == 'menu1':
-                        self.menu = 'menu2'
-                    elif self.menu == 'menu2':
-                        self.menu = 'menu3'
-                    elif self.menu == 'menu3':
-                        self.menu = 'menu4'
-                    elif self.menu == 'menu4':
-                        self.menu = 'menu5'
-                    elif self.menu == 'menu5':
-                        self.menu = 'menu6'
-                    elif self.menu == 'menu6':
-                        self.menu = 'menu1'
-            y += 1
-            if y == offset:
-                y = 0
+        if currentitem != None:
+            self.tventriess[midx-1].append(currentitem)
+            self.tvlinks[midx-1].append(currentlink)
+            self.tvtitels[midx-1].append(currenttitle)
+
 
         for i in range(6):
             self['menu%s' % (i + 1)].l.setItemHeight(115)
