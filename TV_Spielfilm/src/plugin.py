@@ -237,6 +237,7 @@ class tvBaseScreen(tvAllScreen):
         self.TVinfopicloads = {}
         self.trailer = False
         self.trailerurl = ''
+        self.searchcount = 0
         for i in range(1,7):
             self.pics.append('/tmp/tvspielfilm%s.jpg' % i)
         self.localhtml = '/tmp/tvspielfilm.html'
@@ -2034,7 +2035,7 @@ class tvGenreJetztProgrammView(tvBaseScreen):
         self.titel = ''
         self['menu'] = ItemList([])
 
-class TVGenreView(tvBaseScreen):
+class TVGenreView(tvGenreJetztProgrammView):
     def __init__(self, session, link, genre):
         tvGenreJetztProgrammView.__init__(self, session, link)
         self.sref = []
@@ -2687,7 +2688,7 @@ class TVGenreView(tvBaseScreen):
             self.current = 'searchmenu'
 
 
-class TVJetztView(tvBaseScreen):
+class TVJetztView(tvGenreJetztProgrammView):
     def __init__(self, session, link, standalone):
         tvGenreJetztProgrammView.__init__(self, session, link)
         self.sref = []
@@ -3284,9 +3285,14 @@ class TVJetztView(tvBaseScreen):
         getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadFullError)
 
     def downloadFullError(self, output):
-        self['label'].setText('Text = Sender,        Info = Jetzt im TV/Gleich im TV')
-        self['label'].stopBlinking()
-        self['label'].show()
+        try:
+            print("downloadFullError")
+            print(output)
+            self['label'].setText('Text = Sender,        Info = Jetzt im TV/Gleich im TV')
+            self['label'].stopBlinking()
+            self['label'].show()
+        except:
+            pass
         self.ready = True
 
     def downloadPostPage(self, link, name):
@@ -3296,10 +3302,14 @@ class TVJetztView(tvBaseScreen):
         downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadPageError)
 
     def downloadPageError(self, output):
-        print(output)
-        self['label'].setText('Text = Sender, Info = Jetzt im TV/Gleich im TV')
-        self['label'].stopBlinking()
-        self['label'].show()
+        try:
+            print("downloadPageError")
+            print(output)
+            self['label'].setText('Text = Sender, Info = Jetzt im TV/Gleich im TV')
+            self['label'].stopBlinking()
+            self['label'].show()
+        except:
+            pass
         self.ready = True
 
     def refresh(self):
@@ -3426,7 +3436,7 @@ class TVJetztView(tvBaseScreen):
             self.current = 'searchmenu'
 
 
-class TVProgrammView(tvBaseScreen):
+class TVProgrammView(tvGenreJetztProgrammView):
     def __init__(self, session, link, eventview, tagestipp):
         tvGenreJetztProgrammView.__init__(self, session, link)
         self.eventview = eventview
@@ -4358,8 +4368,8 @@ class TVTrailerBilder(tvBaseScreen):
         bereich = sub('<a href="', '<td>LINK', bereich)
         bereich = sub('" target="', '</td>', bereich)
         bereich = sub('<img src="', '<td>PIC', bereich)
-        bereich = sub('jpg">', 'jpg</td>', bereich)
-        bereich = sub('png">', 'png</td>', bereich)
+        bereich = sub('.jpg"', '.jpg</td>', bereich)
+        bereich = sub('.png"', '.png</td>', bereich)
         bereich = sub('<span class="headline">', '<td>TITEL', bereich)
         bereich = sub('</span>', '</td>', bereich)
         a = findall('<td>(.*?)</td>', bereich)
@@ -4420,18 +4430,18 @@ class TVTrailerBilder(tvBaseScreen):
             endpos = output.find('<div class="OUTBRAIN"')
         elif self.sparte == 'Kino Vorschau':
             startpos = output.find('<h2 class="headline headline--section">Neustarts')
-            endpos = output.find('<div id="gtm-livetv-footer"></div>')
+            endpos = output.find('</section>')
         elif self.sparte == 'Neueste Trailer':
             startpos = output.find('<p class="headline headline--section">Neueste Trailer</p>')
             endpos = output.find('<p class="headline headline--section">Kino Neustarts</p>')
         elif self.sparte == 'Kino Charts':
             self.charts = True
             startpos = output.find('<ul class="chart-content charts-list-content">')
-            endpos = output.find('<div id="gtm-livetv-footer"></div>')
+            endpos = output.find('footer')
         elif self.sparte == 'DVD Charts':
             self.charts = True
             startpos = output.find('<ul class="chart-content charts-list-content">')
-            endpos = output.find('<div id="gtm-livetv-footer"></div>')
+            endpos = output.find('footer')
         bereich = output[startpos:endpos]
         bereich = re.sub('<ul class="btns">.*?</ul>', '', bereich, flags=re.S)
         bereich = transHTML(bereich)
@@ -4444,8 +4454,8 @@ class TVTrailerBilder(tvBaseScreen):
             bereich = sub('<a href="', '<td>LINK', bereich)
             bereich = sub('" target="', '</td>', bereich)
             bereich = sub('<img src="', '<td>PIC', bereich)
-            bereich = sub('jpg">', 'jpg</td>', bereich)
-            bereich = sub('png">', 'png</td>', bereich)
+            bereich = sub('.jpg"', '.jpg</td>', bereich)
+            bereich = sub('.png"', '.png</td>', bereich)
             bereich = sub('<span class="headline">', '<td>TITEL', bereich)
             bereich = sub('<span class="subline .*?">', '<td>TEXT', bereich)
             bereich = sub('</span>', '</td>', bereich)
@@ -4490,8 +4500,8 @@ class TVTrailerBilder(tvBaseScreen):
             bereich = sub('<a href="', '<td>LINK', bereich)
             bereich = sub('" target="', '</td>', bereich)
             bereich = sub('<img src="', '<td>PIC', bereich)
-            bereich = sub('jpg">', 'jpg</td>', bereich)
-            bereich = sub('png">', 'png</td>', bereich)
+            bereich = sub('.jpg"', '.jpg</td>', bereich)
+            bereich = sub('.png"', '.png</td>', bereich)
             bereich = sub('<span class="headline">', '<td>TITEL', bereich)
             bereich = sub('<span class="subline .*?">', '<td>TEXT', bereich)
             bereich = sub('</span>', '</td>', bereich)
@@ -4537,8 +4547,8 @@ class TVTrailerBilder(tvBaseScreen):
             bereich = sub('<p class="title">', '<td>TITEL', bereich)
             bereich = sub('</p>', '</td>', bereich)
             bereich = sub('<img src="', '<td>PIC', bereich)
-            bereich = sub('jpg">', 'jpg</td>', bereich)
-            bereich = sub('png">', 'png</td>', bereich)
+            bereich = sub('.jpg"', '.jpg</td>', bereich)
+            bereich = sub('.png"', '.png</td>', bereich)
             bereich = sub('<span class="country">', '<td>TEXT', bereich)
             bereich = sub('</span>', '</td>', bereich)
             a = findall('<td>(.*?)</td>', bereich)
@@ -5005,8 +5015,6 @@ class TVNews(tvBaseScreen):
             if action == 'ok':
                 if search('/playboy/', self.postlink) is not None:
                     self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink, 2)
-                elif search('blog.tvspielfilm.de', self.postlink) is not None:
-                    self.session.openWithCallback(self.picReturn, TVBlog, self.postlink)
                 elif search('www.tvspielfilm.de', self.postlink) is not None:
                     self.current = 'postview'
                     self.downloadPostPage(self.postlink, self.makePostviewPageNews)
@@ -5140,538 +5148,6 @@ class TVNews(tvBaseScreen):
             self.setTitle('')
             self.setTitle(self.titel)
             self.showTVNews()
-
-class TVBlog(tvBaseScreen):
-    def __init__(self, session, link, post):
-        skin = readSkin("TVBlog")
-        tvBaseScreen.__init__(self, session, skin)
-        self.baseurl = 'https://blog.tvspielfilm.de'
-        self.menulist = []
-        self.menulink = []
-        self.picurllist = []
-        self.toptextlist = []
-        self.textlist = []
-        self.metalist = []
-        self.post = post
-        self.postlink = link
-        self.link = link
-        self.titel = ''
-        self.hideflag = True
-        self.ready = False
-        self.postviewready = False
-        self.count = 1
-        self.max = 1
-        self['picture'] = Pixmap()
-        self['picpost'] = Pixmap()
-        self['playlogo'] = Pixmap()
-        self['playlogo'].hide()
-        self['statuslabel'] = Label('')
-        self['statuslabel'].hide()
-        self['item'] = Label('')
-        self['meta'] = Label('')
-        self['topictext'] = Label('')
-        self['previewtext'] = Label('')
-        self['textpage'] = ScrollLabel('')
-        self['slider_textpage'] = Pixmap()
-        self['slider_textpage'].hide()
-        self['menu'] = MenuList([])
-        self['menu'].hide()
-        self['label'] = Label('OK = Post, Up/Down = Blog\nBouquet = +- Seite')
-        self['actions'] = ActionMap(['OkCancelActions',
-         'DirectionActions',
-         'ColorActions',
-         'ChannelSelectBaseActions',
-         'HelpActions'], {'ok': self.ok,
-         'cancel': self.exit,
-         'right': self.rightDown,
-         'left': self.leftUp,
-         'down': self.down,
-         'up': self.up,
-         'nextBouquet': self.nextPage,
-         'prevBouquet': self.prevPage,
-         'blue': self.hideScreen}, -1)
-        self.getInfoTimer = eTimer()
-        if self.post == False:
-            self.getInfoTimer.callback.append(self.downloadFullPage(link, self.makeTVBlog))
-        else:
-            self.current = 'postview'
-            self.getInfoTimer.callback.append(self.downloadPostPage(link, self.makePostviewPageBlog))
-        self.getInfoTimer.start(500, True)
-
-    def makeTVBlog(self, string):
-        output = open(self.localhtml, 'r').read()
-        output = six.ensure_str(output)
-        titel = search('<title>(.*?)</title>', output)
-        self.titel = titel.group(1).replace('TV Spielfilm Blog | ', '')
-        self.setTitle(self.titel)
-        startpos = output.find('<div id="content">')
-        endpos = output.find('<!-- end #content-->')
-        bereich = output[startpos:endpos]
-        bereich = sub('<iframe width="[0-9]+" height="[0-9]+" src="//www.youtube.com/embed/', '<img width="785" height="510" src="https://img.youtube.com/vi/', bereich)
-        bereich = sub('" frameborder="0"', '/0.jpg"', bereich)
-        bereich = sub('<img class="replacement" src="">', '<img width="630" height="404" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/TV-Spielfilm-Logo.svg/630px-TV-Spielfilm-Logo.svg.png">', bereich)
-        bereich = sub('<i class="fa fa-heart-o">', 'Likes: ', bereich)
-        bereich = sub('&bull;', '\xb7', bereich)
-        bereich = sub('<a href=".*?>', '', bereich)
-        bereich = sub('<a title=".*?>', '', bereich)
-        bereich = sub('<span class=".*?>', '', bereich)
-        bereich = sub('</span>', '', bereich)
-        bereich = sub('<strong>', '', bereich)
-        bereich = sub('</strong', '', bereich)
-        bereich = sub('</a>', ' ', bereich)
-        bereich = sub('<i>', '', bereich)
-        bereich = sub('</i>', '', bereich)
-        bereich = sub('<b>', '', bereich)
-        bereich = sub('</b>', '', bereich)
-        bereich = sub('<del>', '', bereich)
-        bereich = sub('</del>', '', bereich)
-        bereich = sub('<br />\n', '', bereich)
-        bereich = sub('<div><em>', '<p>', bereich)
-        bereich = sub('</em></div>', '</p>', bereich)
-        bereich = sub('<em>', '', bereich)
-        bereich = sub('</em>', '', bereich)
-        bereich = sub('</p></blockquote>\n<p>', '', bereich)
-        bereich = transHTML(bereich)
-        picurl = re.findall('<img width="[0-9]+" height="[0-9]+" src="(.*?)"', bereich)
-        picurlblog = 'https://blog.tvspielfilm.de/wp-content/themes/tvspielfilm/images/header.png'
-        metatext = re.findall('<p class="meta">(.*?)</p>', bereich, flags=re.S)
-        toptext = re.findall('<h2 class="upperfont">(.*?)</h2>', bereich)
-        text = re.findall('<div class="entry">.*?<p>(.*?)</p>', bereich, flags=re.S)
-        lnk = re.findall('<a class="mainbutton" href="(.*?)"', bereich)
-        idx = 0
-        for x in toptext:
-            idx += 1
-
-        for i in range(idx):
-            try:
-                self.toptextlist.append(toptext[i])
-            except IndexError:
-                self.toptextlist.append(' ')
-
-            try:
-                self.textlist.append(text[i])
-            except IndexError:
-                self.textlist.append(' ')
-
-            try:
-                self.picurllist.append(picurl[i])
-            except IndexError:
-                self.picurllist.append(picurlblog)
-
-            try:
-                meta = sub('\n', '', metatext[i])
-                meta = sub('[ ]+', ' ', meta)
-                meta = sub('\t', '', meta)
-                self.metalist.append(meta)
-            except IndexError:
-                self.metalist.append(' ')
-
-            self.menulist.append(toptext[i])
-            self.menulink.append(lnk[i])
-
-        self['menu'].l.setList(self.menulist)
-        self['menu'].moveToIndex(0)
-        self.max = len(self.menulist)
-        item = 'Post 1/%s' % str(self.max)
-        self['item'].setText(item)
-        try:
-            self.download(picurl[0], self.getPic)
-        except IndexError:
-            self.download(picurlblog, self.getPic)
-
-        try:
-            meta = sub('\n', '', metatext[0])
-            meta = sub('[ ]+', ' ', meta)
-            meta = sub('\t', '', meta)
-            self['meta'].setText(meta)
-        except IndexError:
-            self['meta'].setText('')
-
-        try:
-            self['topictext'].setText(toptext[0])
-        except IndexError:
-            self['topictext'].setText('')
-
-        try:
-            self['previewtext'].setText(text[0])
-        except IndexError:
-            self['previewtext'].setText('')
-
-        if search('<a class="next page-numbers"', output) is not None:
-            self['label'].setText('OK = Post, Up/Down = Blog\nBouquet = +- Seite')
-        else:
-            self['label'].setText('OK = Post, Up/Down = Blog\nLetzte Blog Seite')
-        self.ready = True
-        return
-
-    def makePostviewPageBlog(self, string):
-        print("DEBUG makePostviewPageBlog")
-        output = open(self.localhtml2, 'r').read()
-        output = six.ensure_str(output)
-        self['item'].hide()
-        self['picture'].hide()
-        self['topictext'].hide()
-        self['previewtext'].hide()
-        self['statuslabel'].hide()
-        if search('<title>', output) is not None:
-            titel = search('<title>(.*?)</title>', output)
-            self.title = transHTML(titel.group(1)).replace(' | TV Spielfilm Blog | TV SPIELFILM bloggt aus Hollywood, aus dem Kino und von der Wohnzimmercouch', '')
-            self.setTitle(self.title)
-        startpos = output.find('<div id="content">')
-        endpos = output.find('<!-- #homecontent -->')
-        bereich = output[startpos:endpos]
-        if search('<source type="video/mp4" src=".*?mp4"', bereich) is not None:
-            trailerurl = search('<source type="video/mp4" src="(.*?)"', bereich)
-            self.trailerurl = trailerurl.group(1)
-            self['label'].setText('OK = Zum Video')
-            self.trailer = True
-        elif search('src="//www.youtube.com/embed/', bereich) is not None:
-            trailerurl = search('src="//www.youtube.com/embed/(.*?)"', bereich)
-            self.trailerurl = trailerurl.group(1)
-            self['label'].setText('OK = Zum Video')
-            self.trailer = True
-        else:
-            self['label'].setText('OK = Vollbild')
-            self.trailer = False
-        bereich = sub('<iframe width="[0-9]+" height="[0-9]+" src="//www.youtube.com/embed/', '<img width="785" height="510" src="https://img.youtube.com/vi/', bereich)
-        bereich = sub('" frameborder="0"', '/0.jpg"', bereich)
-        picurl = search('<img width="[0-9]+" height="[0-9]+" src="(.*?)"', bereich)
-        if picurl is not None:
-            self.downloadPicPost(picurl.group(1), False)
-        else:
-            picurl = 'https://blog.tvspielfilm.de/wp-content/themes/tvspielfilm/images/header.png'
-            self.downloadPicPost(picurl, False)
-        meta = search('<p class="meta">(.*?)</p>', bereich, flags=re.S)
-        if meta is not None:
-            meta = sub('\n', '', meta.group(1))
-            meta = sub('[ ]+', ' ', meta)
-            meta = sub('\t', '', meta)
-            meta = sub('[ ]+von', 'Von', meta)
-            meta = sub('&bull;', '\xb7', meta)
-            meta = sub('<i class="fa fa-heart-o">', 'Likes: ', meta)
-            meta = '<p>' + meta + '</p>'
-        bereich = sub('<div>', '<p>', bereich)
-        bereich = sub('</div>', '</p>', bereich)
-        bereich = sub('<p><b>[^A-Za-z0-9]+</b></p>', '', bereich)
-        bereich = sub('<h1 class="heading">', '<p>', bereich)
-        bereich = sub('<h3 id="comments-title">', '<p>', bereich)
-        bereich = sub('</h[0-9]+>', '</p>', bereich)
-        bereich = sub('<cite class="fn">', '<p>', bereich)
-        bereich = sub('</cite> <span class="says">', ' ', bereich)
-        bereich = sub('<span.*?></span>', '', bereich)
-        bereich = sub('</span>', '</p>', bereich)
-        bereich = sub('class="wp-smiley" />', '>:-)', bereich)
-        bereich = sub('<div class="comment-meta commentmetadata">', '<p>', bereich)
-        bereich = transHTML(bereich)
-        text = meta
-        a = findall('<p>(.*?)</p>', bereich.replace('\r', '').replace('\n', ''))
-        for x in a:
-            if x != '':
-                text = text + x + '\n\n'
-
-        text = sub('<[^>]*>', '', text)
-        text = sub('</p<<p<', '\n\n', text)
-        text = sub('\n\\s+\n*', '\n\n', text)
-        fill = self.getFill('TV Spielfilm Blog')
-        text = text + fill
-        self['textpage'].setText(text)
-        self['textpage'].show()
-        self['slider_textpage'].show()
-        self.postviewready = True
-        return
-
-    def ok(self):
-        if self.hideflag == False:
-            return
-        else:
-            if self.current == 'menu' and self.ready == True:
-                self.selectPage('ok')
-            elif self.current == 'postview' and self.postviewready == True:
-                if self.trailer == True:
-                    if search('blog.tvspielfilm.de', self.trailerurl) is not None:
-                        sref = eServiceReference(4097, 0, self.trailerurl)
-                        sref.setName(self.title)
-                        self.session.open(MoviePlayer, sref)
-                    else:
-                        video = self.getYouTubeURL(self.trailerurl)
-                        if video is not None:
-                            sref = eServiceReference(4097, 0, video)
-                            sref.setName(self.title)
-                            self.session.open(MoviePlayer, sref)
-                        else:
-                            self.session.open(MessageBox, '\nYouTube Video nicht gefunden', MessageBox.TYPE_ERROR)
-                else:
-                    self.session.openWithCallback(self.showPicPost, FullScreen)
-            return
-
-    def selectPage(self, action):
-        try:
-            c = self['menu'].getSelectedIndex()
-        except IndexError:
-            pass
-
-        try:
-            self.postlink = self.menulink[c]
-            if action == 'ok':
-                if search('blog.tvspielfilm.de', self.postlink) is not None:
-                    self.current = 'postview'
-                    self.downloadPostPage(self.postlink, self.makePostviewPageBlog)
-                else:
-                    self['statuslabel'].setText('Kein Artikel verfuegbar')
-                    self['statuslabel'].show()
-        except IndexError:
-            pass
-
-        return
-
-    def nextPage(self):
-        if self.ready == True:
-            self.ready = False
-            self.count += 1
-            self.link = sub('/page/[0-9]+', '/page/' + str(self.count), self.link)
-            self.menulist = []
-            self.menulink = []
-            self.picurllist = []
-            self.metalist = []
-            self.toptextlist = []
-            self.textlist = []
-            self['statuslabel'].hide()
-            self.getInfoTimer.callback.append(self.downloadFullPage(self.link, self.makeTVBlog))
-
-    def prevPage(self):
-        if self.ready == True:
-            self.ready = False
-            self.count -= 1
-            self.link = sub('/page/[0-9]+', '/page/' + str(self.count), self.link)
-            self.menulist = []
-            self.menulink = []
-            self.picurllist = []
-            self.metalist = []
-            self.toptextlist = []
-            self.textlist = []
-            self['statuslabel'].hide()
-            self.getInfoTimer.callback.append(self.downloadFullPage(self.link, self.makeTVBlog))
-
-    def getPic(self, output):
-        f = open(self.picfile, 'wb')
-        f.write(output)
-        f.close()
-        self.showPic(self.picfile)
-
-    def showPic(self, picture):
-        currPic = loadPic(picture, 600, 400, 3, 0, 0, 0)
-        if currPic != None:
-            self['picture'].instance.setPixmap(currPic)
-        return
-
-    def download(self, link, name):
-        getPage(six.ensure_binary(link)).addCallback(name).addErrback(self.downloadError)
-
-    def downloadPostPage(self, link, name):
-        downloadPage(six.ensure_binary(link), self.localhtml2).addCallback(name).addErrback(self.downloadError)
-
-    def downloadFullPage(self, link, name):
-        downloadPage(six.ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadError)
-
-    def downloadError(self, output):
-        self['statuslabel'].setText('Download Fehler')
-        self['statuslabel'].show()
-        self.ready = True
-
-    def showTVBlog(self):
-        self.current = 'menu'
-        self['label'].setText('OK = Post, Up/Down = Blog\nBouquet = +- Seite')
-        self['item'].show()
-        self['picture'].show()
-        self['topictext'].show()
-        self['previewtext'].show()
-        self['textpage'].hide()
-        self['slider_textpage'].hide()
-        self['picpost'].hide()
-        self['playlogo'].hide()
-        self['statuslabel'].hide()
-
-    def down(self):
-        try:
-            if self.current == 'menu':
-                self['menu'].down()
-                c = self['menu'].getSelectedIndex()
-                item = 'Post %s/%s' % (str(c + 1), str(self.max))
-                self['item'].setText(item)
-                picurl = self.picurllist[c]
-                self.download(picurl, self.getPic)
-                meta = self.metalist[c]
-                self['meta'].setText(meta)
-                toptext = self.toptextlist[c]
-                self['topictext'].setText(toptext)
-                text = self.textlist[c]
-                self['previewtext'].setText(text)
-                self['statuslabel'].hide()
-            else:
-                self['textpage'].pageDown()
-        except IndexError:
-            pass
-
-    def up(self):
-        try:
-            if self.current == 'menu':
-                self['menu'].up()
-                c = self['menu'].getSelectedIndex()
-                item = 'Post %s/%s' % (str(c + 1), str(self.max))
-                self['item'].setText(item)
-                picurl = self.picurllist[c]
-                self.download(picurl, self.getPic)
-                meta = self.metalist[c]
-                self['meta'].setText(meta)
-                toptext = self.toptextlist[c]
-                self['topictext'].setText(toptext)
-                text = self.textlist[c]
-                self['previewtext'].setText(text)
-                self['statuslabel'].hide()
-            else:
-                self['textpage'].pageUp()
-        except IndexError:
-            pass
-
-    def rightDown(self):
-        try:
-            if self.current == 'menu':
-                self['menu'].pageDown()
-                c = self['menu'].getSelectedIndex()
-                item = 'Post %s/%s' % (str(c + 1), str(self.max))
-                self['item'].setText(item)
-                picurl = self.picurllist[c]
-                self.download(picurl, self.getPic)
-                meta = self.metalist[c]
-                self['meta'].setText(meta)
-                toptext = self.toptextlist[c]
-                self['topictext'].setText(toptext)
-                text = self.textlist[c]
-                self['previewtext'].setText(text)
-                self['statuslabel'].hide()
-            else:
-                self['textpage'].pageDown()
-        except IndexError:
-            pass
-
-    def leftUp(self):
-        try:
-            if self.current == 'menu':
-                self['menu'].pageUp()
-                c = self['menu'].getSelectedIndex()
-                item = 'Post %s/%s' % (str(c + 1), str(self.max))
-                self['item'].setText(item)
-                picurl = self.picurllist[c]
-                self.download(picurl, self.getPic)
-                meta = self.metalist[c]
-                self['meta'].setText(meta)
-                toptext = self.toptextlist[c]
-                self['topictext'].setText(toptext)
-                text = self.textlist[c]
-                self['previewtext'].setText(text)
-                self['statuslabel'].hide()
-            else:
-                self['textpage'].pageUp()
-        except IndexError:
-            pass
-
-    def getYouTubeURL(self, trailer_id):
-        header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
-         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-         'Accept-Language': 'en-us,en;q=0.5'}
-        VIDEO_FMT_PRIORITY_MAP = {'38': 3,
-         '37': 1,
-         '22': 2,
-         '35': 5,
-         '18': 4,
-         '34': 6}
-        trailer_url = None
-        watch_url = 'https://www.youtube.com/watch?v=%s&gl=US&hl=en' % trailer_id
-        watchrequest = Request(watch_url, None, header)
-        try:
-            watchvideopage = urlopen(watchrequest).read()
-        except (HTTPError,
-         URLError,
-         HTTPException,
-         socket.error,
-         AttributeError):
-            return trailer_url
-
-        for el in ['&el=embedded',
-         '&el=detailpage',
-         '&el=vevo',
-         '']:
-            info_url = 'https://www.youtube.com/get_video_info?&video_id=%s%s&ps=default&eurl=&gl=US&hl=en' % (trailer_id, el)
-            request = Request(info_url, None, header)
-            try:
-                infopage = urlopen(request).read()
-                videoinfo = parse_qs(infopage)
-                if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
-                    break
-            except (HTTPError,
-             URLError,
-             HTTPException,
-             socket.error,
-             AttributeError):
-                return trailer_url
-
-        if ('url_encoded_fmt_stream_map' or 'fmt_url_map') not in videoinfo:
-            return trailer_url
-        else:
-            video_fmt_map = {}
-            fmt_infomap = {}
-            if 'url_encoded_fmt_stream_map' in videoinfo:
-                tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',')
-            else:
-                tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
-            for fmtstring in tmp_fmtUrlDATA:
-                fmturl = fmtid = ''
-                if 'url_encoded_fmt_stream_map' in videoinfo:
-                    try:
-                        for arg in fmtstring.split('&'):
-                            if arg.find('=') >= 0:
-                                key, value = arg.split('=')
-                                if key == 'itag':
-                                    if len(value) > 3:
-                                        value = value[:2]
-                                    fmtid = value
-                                elif key == 'url':
-                                    fmturl = value
-
-                        if fmtid != '' and fmturl != '' and fmtid in VIDEO_FMT_PRIORITY_MAP:
-                            video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid,
-                             'fmturl': unquote_plus(fmturl)}
-                            fmt_infomap[int(fmtid)] = '%s' % unquote_plus(fmturl)
-                        fmturl = fmtid = ''
-                    except:
-                        return trailer_url
-
-                else:
-                    fmtid, fmturl = fmtstring.split('|')
-                if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != '':
-                    video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid,
-                     'fmturl': unquote_plus(fmturl)}
-                    fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
-
-            if video_fmt_map and len(video_fmt_map):
-                best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
-                trailer_url = '%s' % best_video['fmturl'].split(';')[0]
-            return trailer_url
-
-    def exit(self):
-        if self.hideflag == False:
-            self.hideflag = True
-            f = open('/proc/stb/video/alpha', 'w')
-            f.write('%i' % config.av.osd_alpha.value)
-            f.close()
-        if self.current == 'menu':
-            self.close()
-        else:
-            self.postviewready = False
-            self.setTitle('')
-            self.setTitle(self.titel)
-            self.showTVBlog()
 
 class TVPicShow(tvBaseScreen):
     def __init__(self, session, link, picmode=0):
@@ -7117,11 +6593,6 @@ class tvMain(tvBaseScreen):
                             self.stopTipps()
                         link = self.mainmenulink[c]
                         self.session.openWithCallback(self.selectMainMenu, TVTippsView, link, 'neu')
-                    elif search('/blog', self.mainmenulink[c]) is not None:
-                        if self.tipps == True:
-                            self.stopTipps()
-                        link = self.mainmenulink[c]
-                        self.session.openWithCallback(self.selectMainMenu, TVBlog, link, False)
                     elif search('/tv-tipps/', self.mainmenulink[c]) is not None or search('/tv-genre/', self.mainmenulink[c]) is not None or search('/trailer-und-clips/', self.mainmenulink[c]) is not None or search('/news-und-specials/', self.mainmenulink[c]) is not None:
                         link = self.mainmenulink[c]
                         self.makeSecondMenu(None, link)
@@ -7162,7 +6633,7 @@ class tvMain(tvBaseScreen):
                             self.stopTipps()
                         link = self.secondmenulink[c]
                         if search('/playboy/', link) is not None:
-                            self.session.openWithCallback(self.selectSecondMenu, PlayboyPicShow, link)
+                            self.session.openWithCallback(self.selectSecondMenu, TVPicShow, link, 2)
                         else:
                             self.session.openWithCallback(self.selectSecondMenu, TVNews, link)
                     except IndexError:
@@ -7255,7 +6726,6 @@ class tvMain(tvBaseScreen):
         self.makeMenuItem('TV-Trailer', '/kino/trailer-und-clips/')
         self.makeMenuItem('TV-Bilder', '/bilder/')
         self.makeMenuItem('TV-News', '/news-und-specials/')
-        self.makeMenuItem('TV-Blog', '/page/1/')
         self['mainmenu'].l.setList(self.mainmenulist)
         self['mainmenu'].l.setItemHeight(int(30 * skinFactor))
         self.selectMainMenu()
@@ -7334,8 +6804,8 @@ class tvMain(tvBaseScreen):
             self.selectSecondMenu()
         elif search('/trailer-und-clips/', link) is not None:
             self.makeSecondMenuItem2('Kino Neustarts', '/kino/trailer-und-clips/')
-            self.makeSecondMenuItem2('Kino Vorschau', '/kino/trailer-und-clips/')
-            self.makeSecondMenuItem2('Neueste Trailer', '/kino/kino-vorschau/')
+            self.makeSecondMenuItem2('Kino Vorschau', '/kino/kino-vorschau/')
+            self.makeSecondMenuItem2('Neueste Trailer', '/kino/trailer-und-clips/')
             self.makeSecondMenuItem2('Kino Charts', '/kino/charts/')
             self.makeSecondMenuItem2('DVD Charts', '/kino/dvd/charts/')
             self['secondmenu'].l.setList(self.secondmenulist)
