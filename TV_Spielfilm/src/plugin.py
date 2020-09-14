@@ -873,6 +873,229 @@ class tvBaseScreen(tvAllScreen):
         self['label3'] = Label(ltxt)
         self['label4'] = Label(lltxt)
 
+    def _makeSearchView(self, url, titlemode=0, searchmode=0):
+        header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
+         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+         'Accept-Language': 'en-us,en;q=0.5'}
+        searchrequest = Request(url, None, header)
+        try:
+            output = urlopen(searchrequest).read()
+            output = six.ensure_str(output)
+        except (HTTPError,
+         URLError,
+         HTTPException,
+         socket.error,
+         AttributeError):
+            output = ' '
+
+        if titlemode == 1:
+            title = 'Genre: ' + self.genre.replace(':', ' -') + ', Filter: ' + self.searchstring
+            self.setTitle(title)
+        else:
+            title = search('<title>(.*?)</title>', output)
+            if title is not None:
+                self['searchtext'].setText(title.group(1))
+                self['searchtext'].show()
+                self.setTitle('')
+                self.setTitle(title.group(1))
+
+        bereich = parsePrimeTimeTable(output, self.showgenre)
+        a = findall('<td>(.*?)</td>', bereich)
+        y = 0
+        offset = 10
+        mh = 40
+        pictopoffset = 0
+        picleftoffset = 0
+        if self.picon == True:
+            mh = 60
+            pictopoffset = 10
+            picleftoffset = 40
+        for x in a:
+            if y == 0:
+                res = [x]
+                if self.backcolor == True:
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+
+                if search('DATUM', x) is not None:
+                    if self.datum == True:
+                        try:
+                            del self.searchref[-1]
+                            del self.searchlink[-1]
+                            del self.searchentries[-1]
+                        except IndexError:
+                            pass
+
+                    else:
+                        self.datum = True
+                    x = sub('DATUM', '', x)
+                    self.datum_string = x
+                    res_datum = [x]
+                    if self.backcolor == True:
+                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
+                    self.searchref.append('na')
+                    self.searchlink.append('na')
+                    self.searchentries.append(res_datum)
+                    self.filter = True
+                    y = 9
+                else:
+                    y = 1
+            if y == 1:
+                x = sub('TIME', '', x)
+                start = x
+                res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+            if y == 2:
+                if search('LOGO', x) is not None:
+                    logo = search('LOGO(.*?)">', x)
+                    if logo is not None:
+                        x = logo.group(1)
+                    service = x
+                    sref = self.service_db.lookup(service)
+                    if sref == 'nope':
+                        self.filter = True
+                    else:
+                        self.filter = False
+                        self.searchref.append(sref)
+                        if self.picon == True:
+                            picon = self.findPicon(sref)
+                            if picon is not None:
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
+                            else:
+                                res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+                        else:
+                            png =  '%slogos/%sHD.png' % (PICPATH, x)
+                            if fileExists(png):
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
+                        start = sub(' - ..:..', '', start)
+                        daynow = sub('....-..-', '', str(self.date))
+                        day = search(', ([0-9]+). ', self.datum_string)
+                        if day is not None:
+                            day = day.group(1)
+                        else:
+                            day = daynow
+                        if int(day) >= int(daynow) - 1:
+                            date = str(self.date) + 'FIN'
+                        else:
+                            four_weeks = datetime.timedelta(weeks=4)
+                            date = str(self.date + four_weeks) + 'FIN'
+                        date = sub('[0-9][0-9]FIN', day, date)
+                        timer = date + ':::' + start + ':::' + str(sref)
+                        if timer in self.timer:
+                            self.rec = True
+                            rp = self.getRecPNG()
+                            if rp != None:
+                                res.append(rp)
+            if y == 3:
+                if self.filter == False:
+                    x = sub('LINK', '', x)
+                    self.searchlink.append(x)
+            if y == 4:
+                if self.filter == False:
+                    x = sub('TITEL', '', x)
+                    titelfilter = x
+            if y == 5:
+                if self.filter == False:
+                    if search('GENRE', x) is None:
+                        res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                        y = 6
+            if y == 6:
+                if search('INFO', x) is not None:
+                    if self.filter == False:
+                        if self.rec == True:
+                            self.rec = False
+                        else:
+                            x = sub('INFO', '', x)
+                            rp = self.getPNG(x, self.menuwidth - 140)
+                            if rp != None:
+                                res.append(rp)
+                else:
+                    y = 9
+            if y == 7:
+                if search('INFO', x) is not None:
+                    if self.filter == False:
+                        x = sub('INFO', '', x)
+                        rp = self.getPNG(x, self.menuwidth - 210)
+                        if rp != None:
+                            res.append(rp)
+                else:
+                    y = 9
+            if y == 8:
+                if search('INFO', x) is not None:
+                    if self.filter == False:
+                        x = sub('INFO', '', x)
+                        rp = self.getPNG(x, self.menuwidth - 280)
+                        if rp != None:
+                            res.append(rp)
+                else:
+                    y = 9
+            if y == 9:
+                if search('INFO', x) is not None:
+                    y = 7
+                elif self.filter == False:
+                    self.datum = False
+                    if search('RATING', x) is not None:
+                        x = sub('RATING', '', x)
+                        if x != 'rating small':
+                            png = '%s%sHD.png' % (ICONPATH, x)
+                            if fileExists(png):
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, pictopoffset), size=(40, 40), png=loadPNG(png)))
+                    res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
+                    self.searchentries.append(res)
+            y += 1
+            if y == offset:
+                y = 0
+
+        self['searchmenu'].l.setItemHeight(mh)
+        self['searchmenu'].l.setList(self.searchentries)
+        self['searchmenu'].show()
+        self.searchcount += 1
+
+        if searchmode == 1:
+            searchtext1 = '<a class="next" href=".*?"'
+            searchtext2 = '<a class="next" href="(.*?)"'
+        else:
+            searchtext1 = 'class="pagination__link pagination__link--next" >'
+            searchtext2 = '<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >'
+
+        if self.searchcount <= self.maxsearchcount and search(searchtext1, bereich) is not None:
+            nextpage = search(searchtext2, bereich)
+            if nextpage is not None:
+                self.makeSearchView(nextpage.group(1))
+            else:
+                self.ready = True
+        else:
+            try:
+                if self.searchref[-1] == 'na':
+                    del self.searchref[-1]
+                    del self.searchlink[-1]
+                    del self.searchentries[-1]
+                    self['searchmenu'].l.setList(self.searchentries)
+            except IndexError:
+                pass
+
+            self['searchmenu'].moveToIndex(self.oldsearchindex)
+            self.current = 'searchmenu'
+            self.ready = True
+        return
+
+    def _ok(self):
+        if self.hideflag == False:
+            return
+        if self.current == 'postview' and self.postviewready == True:
+            if self.trailer == True:
+                sref = eServiceReference(4097, 0, self.trailerurl)
+                sref.setName(self.name)
+                self.session.open(MoviePlayer, sref)
+            elif self.mehrbilder == True:
+                self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink)
+            else:
+                self.session.openWithCallback(self.showPicPost, FullScreen)
+        elif self.current == 'postview' and self.postviewready == False:
+            pass
+        else:
+            self.selectPage('ok')
+
 
 class TVTippsView(tvBaseScreen):
     def __init__(self, session, link, sparte):
@@ -1155,212 +1378,11 @@ class TVTippsView(tvBaseScreen):
         
 
     def makeSearchView(self, url):
-        header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
-         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-         'Accept-Language': 'en-us,en;q=0.5'}
-        searchrequest = Request(url, None, header)
-        try:
-            output = urlopen(searchrequest).read()
-            output = six.ensure_str(output)
-        except (HTTPError,
-         URLError,
-         HTTPException,
-         socket.error,
-         AttributeError):
-            output = ' '
-
-        title = search('<title>(.*?)</title>', output)
-        if title is not None:
-            self['searchtext'].setText(title.group(1))
-            self['searchtext'].show()
-            self.setTitle('')
-            self.setTitle(title.group(1))
-        bereich = parsePrimeTimeTable(output, self.showgenre)
-        a = findall('<td>(.*?)</td>', bereich)
-        y = 0
-        offset = 10
-        mh = 40
-        pictopoffset = 0
-        picleftoffset = 0
-        if self.picon == True:
-            mh = 60
-            pictopoffset = 10
-            picleftoffset = 40
-        for x in a:
-            if y == 0:
-                res = [x]
-                if self.backcolor == True:
-                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-
-                if search('DATUM', x) is not None:
-                    if self.datum == True:
-                        try:
-                            del self.searchref[-1]
-                            del self.searchlink[-1]
-                            del self.searchentries[-1]
-                        except IndexError:
-                            pass
-
-                    else:
-                        self.datum = True
-                    x = sub('DATUM', '', x)
-                    self.datum_string = x
-                    res_datum = [x]
-                    if self.backcolor == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    self.searchref.append('na')
-                    self.searchlink.append('na')
-                    self.searchentries.append(res_datum)
-                    self.filter = True
-                    y = 9
-                else:
-                    y = 1
-            if y == 1:
-                x = sub('TIME', '', x)
-                start = x
-                res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-            if y == 2:
-                if search('LOGO', x) is not None:
-                    logo = search('LOGO(.*?)">', x)
-                    if logo is not None:
-                        x = logo.group(1)
-                    service = x
-                    sref = self.service_db.lookup(service)
-                    if sref == 'nope':
-                        self.filter = True
-                    else:
-                        self.filter = False
-                        self.searchref.append(sref)
-                        if self.picon == True:
-                            picon = self.findPicon(sref)
-                            if picon is not None:
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
-                            else:
-                                res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
-                        else:
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
-                        start = sub(' - ..:..', '', start)
-                        daynow = sub('....-..-', '', str(self.date))
-                        day = search(', ([0-9]+). ', self.datum_string)
-                        if day is not None:
-                            day = day.group(1)
-                        else:
-                            day = daynow
-                        if int(day) >= int(daynow) - 1:
-                            date = str(self.date) + 'FIN'
-                        else:
-                            four_weeks = datetime.timedelta(weeks=4)
-                            date = str(self.date + four_weeks) + 'FIN'
-                        date = sub('[0-9][0-9]FIN', day, date)
-                        timer = date + ':::' + start + ':::' + str(sref)
-                        if timer in self.timer:
-                            self.rec = True
-                            rp = self.getRecPNG()
-                            if rp != None:
-                                res.append(rp)
-            if y == 3:
-                if self.filter == False:
-                    x = sub('LINK', '', x)
-                    self.searchlink.append(x)
-            if y == 4:
-                if self.filter == False:
-                    x = sub('TITEL', '', x)
-                    titelfilter = x
-            if y == 5:
-                if self.filter == False:
-                    if search('GENRE', x) is None:
-                        res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                        y = 6
-            if y == 6:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        if self.rec == True:
-                            self.rec = False
-                        else:
-                            x = sub('INFO', '', x)
-                            rp = self.getPNG(x, self.menuwidth - 140)
-                            if rp != None:
-                                res.append(rp)
-                else:
-                    y = 9
-            if y == 7:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 210)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 8:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 280)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 9:
-                if search('INFO', x) is not None:
-                    y = 7
-                elif self.filter == False:
-                    self.datum = False
-                    if search('RATING', x) is not None:
-                        x = sub('RATING', '', x)
-                        if x != 'rating small':
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, pictopoffset), size=(40, 40), png=loadPNG(png)))
-                    res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                    self.searchentries.append(res)
-            y += 1
-            if y == offset:
-                y = 0
-
-        self['searchmenu'].l.setItemHeight(mh)
-        self['searchmenu'].l.setList(self.searchentries)
-        self['searchmenu'].show()
-        self.searchcount += 1
-        if self.searchcount <= self.maxsearchcount and search('<a class="next" href=".*?"', bereich) is not None:
-            nextpage = search('<a class="next" href="(.*?)"', bereich)
-            if nextpage is not None:
-                self.makeSearchView(nextpage.group(1))
-            else:
-                self.ready = True
-        else:
-            try:
-                if self.searchref[-1] == 'na':
-                    del self.searchref[-1]
-                    del self.searchlink[-1]
-                    del self.searchentries[-1]
-                    self['searchmenu'].l.setList(self.searchentries)
-            except IndexError:
-                pass
-
-            self['searchmenu'].moveToIndex(self.oldsearchindex)
-            self.current = 'searchmenu'
-            self.ready = True
+        self._makeSearchView(url, 0, 1)
         return
 
     def ok(self):
-        if self.hideflag == False:
-            return
-        if self.current == 'menu' or self.current == 'searchmenu':
-            self.selectPage('ok')
-        elif self.current == 'postview' and self.postviewready == True:
-            if self.trailer == True:
-                sref = eServiceReference(4097, 0, self.trailerurl)
-                sref.setName(self.name)
-                self.session.open(MoviePlayer, sref)
-            elif self.mehrbilder == True:
-                self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink)
-            else:
-                self.session.openWithCallback(self.showPicPost, FullScreen)
+        self._ok()
 
     def selectPage(self, action):
         if self.current == 'menu' and self.ready == True:
@@ -2271,207 +2293,11 @@ class TVGenreView(tvBaseScreen):
             printStackTrace()
 
     def makeSearchView(self, url):
-        header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
-         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-         'Accept-Language': 'en-us,en;q=0.5'}
-        searchrequest = Request(url, None, header)
-        try:
-            output = urlopen(searchrequest).read()
-            output = six.ensure_str(output)
-        except (HTTPError,
-         URLError,
-         HTTPException,
-         socket.error,
-         AttributeError):
-            output = ' '
-
-        title = 'Genre: ' + self.genre.replace(':', ' -') + ', Filter: ' + self.searchstring
-        self.setTitle(title)
-        bereich = parsePrimeTimeTable(output, self.showgenre)
-        a = findall('<td>(.*?)</td>', bereich)
-        y = 0
-        offset = 10
-        mh = 40
-        pictopoffset = 0
-        picleftoffset = 0
-        if self.picon == True:
-            mh = 60
-            pictopoffset = 10
-            picleftoffset = 40
-        for x in a:
-            if y == 0:
-                res = [x]
-                if self.backcolor == True:
-                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-                if search('DATUM', x) is not None:
-                    if self.datum == True:
-                        try:
-                            del self.searchref[-1]
-                            del self.searchlink[-1]
-                            del self.searchentries[-1]
-                        except IndexError:
-                            pass
-
-                    else:
-                        self.datum = True
-                    x = sub('DATUM', '', x)
-                    self.datum_string = x
-                    res_datum = [x]
-                    if self.backcolor == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    self.searchref.append('na')
-                    self.searchlink.append('na')
-                    self.searchentries.append(res_datum)
-                    self.filter = True
-                    y = 9
-                else:
-                    y = 1
-            if y == 1:
-                x = sub('TIME', '', x)
-                start = x
-                res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7 + pictopoffset), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-            if y == 2:
-                if search('LOGO', x) is not None:
-                    logo = search('LOGO(.*?)">', x)
-                    if logo is not None:
-                        x = logo.group(1)
-                    service = x
-                    sref = self.service_db.lookup(service)
-                    if sref == 'nope':
-                        self.filter = True
-                    else:
-                        self.filter = False
-                        self.searchref.append(sref)
-                        if self.picon == True:
-                            picon = self.findPicon(sref)
-                            if picon is not None:
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
-                            else:
-                                res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
-                        else:
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
-                        start = sub(' - ..:..', '', start)
-                        daynow = sub('....-..-', '', str(self.date))
-                        day = search(', ([0-9]+). ', self.datum_string)
-                        if day is not None:
-                            day = day.group(1)
-                        else:
-                            day = daynow
-                        if int(day) >= int(daynow) - 1:
-                            date = str(self.date) + 'FIN'
-                        else:
-                            four_weeks = datetime.timedelta(weeks=4)
-                            date = str(self.date + four_weeks) + 'FIN'
-                        date = sub('[0-9][0-9]FIN', day, date)
-                        timer = date + ':::' + start + ':::' + str(sref)
-                        if timer in self.timer:
-                            self.rec = True
-                            rp = self.getRecPNG()
-                            if rp != None:
-                                res.append(rp)
-            if y == 3:
-                if self.filter == False:
-                    x = sub('LINK', '', x)
-                    self.searchlink.append(x)
-            if y == 4:
-                if self.filter == False:
-                    x = sub('TITEL', '', x)
-                    titelfilter = x
-            if y == 5:
-                if self.filter == False:
-                    if search('GENRE', x) is None:
-                        res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                        y = 6
-            if y == 6:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        if self.rec == True:
-                            self.rec = False
-                        else:
-                            x = sub('INFO', '', x)
-                            rp = self.getPNG(x, self.menuwidth - 140)
-                            if rp != None:
-                                res.append(rp)
-                else:
-                    y = 9
-            if y == 7:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 210)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 8:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 280)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 9:
-                if search('INFO', x) is not None:
-                    y = 7
-                elif self.filter == False:
-                    self.datum = False
-                    if search('RATING', x) is not None:
-                        x = sub('RATING', '', x)
-                        if x != 'rating small':
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, pictopoffset), size=(40, 40), png=loadPNG(png)))
-                    res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                    self.searchentries.append(res)
-            y += 1
-            if y == offset:
-                y = 0
-
-        self['searchmenu'].l.setItemHeight(mh)
-        self['searchmenu'].l.setList(self.searchentries)
-        self['searchmenu'].show()
-        self.searchcount += 1
-        if self.searchcount <= self.maxsearchcount and search('class="pagination__link pagination__link--next" >', bereich) is not None:
-            nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
-            if nextpage is not None:
-                self.makeSearchView(nextpage.group(1))
-            else:
-                self.ready = True
-        else:
-            try:
-                if self.searchref[-1] == 'na':
-                    del self.searchref[-1]
-                    del self.searchlink[-1]
-                    del self.searchentries[-1]
-                    self['searchmenu'].l.setList(self.searchentries)
-            except IndexError:
-                pass
-
-            self['searchmenu'].moveToIndex(self.oldsearchindex)
-            self.current = 'searchmenu'
-            self.ready = True
+        self._makeSearchView(url, 1, 0)
         return
 
     def ok(self):
-        if self.hideflag == False:
-            return
-        if self.current == 'menu' or self.current == 'searchmenu':
-            self.selectPage('ok')
-        elif self.current == 'postview' and self.postviewready == True:
-            if self.trailer == True:
-                sref = eServiceReference(4097, 0, self.trailerurl)
-                sref.setName(self.name)
-                self.session.open(MoviePlayer, sref)
-            elif self.mehrbilder == True:
-                self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink)
-            else:
-                self.session.openWithCallback(self.showPicPost, FullScreen)
+        self._ok()
 
     def selectPage(self, action):
         if self.current == 'menu' and self.ready == True:
@@ -3180,211 +3006,11 @@ class TVJetztView(tvBaseScreen):
             printStackTrace()
 
     def makeSearchView(self, url):
-        header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
-         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-         'Accept-Language': 'en-us,en;q=0.5'}
-        searchrequest = Request(url, None, header)
-        try:
-            output = urlopen(searchrequest).read()
-            output = six.ensure_str(output)
-        except (HTTPError,
-         URLError,
-         HTTPException,
-         socket.error,
-         AttributeError):
-            output = ' '
-
-        title = search('<title>(.*?)</title>', output)
-        if title is not None:
-            self['searchtext'].setText(title.group(1))
-            self['searchtext'].show()
-            self.setTitle('')
-            self.setTitle(title.group(1))
-        bereich = parsePrimeTimeTable(output, self.showgenre)
-        a = findall('<td>(.*?)</td>', bereich)
-        y = 0
-        offset = 10
-        mh = 40
-        pictopoffset = 0
-        picleftoffset = 0
-        if self.picon == True:
-            mh = 60
-            pictopoffset = 10
-            picleftoffset = 40
-        for x in a:
-            if y == 0:
-                res = [x]
-                if self.backcolor == True:
-                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-                if search('DATUM', x) is not None:
-                    if self.datum == True:
-                        try:
-                            del self.searchref[-1]
-                            del self.searchlink[-1]
-                            del self.searchentries[-1]
-                        except IndexError:
-                            pass
-
-                    else:
-                        self.datum = True
-                    x = sub('DATUM', '', x)
-                    self.datum_string = x
-                    res_datum = [x]
-                    if self.backcolor == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    self.searchref.append('na')
-                    self.searchlink.append('na')
-                    self.searchentries.append(res_datum)
-                    self.filter = True
-                    y = 9
-                else:
-                    y = 1
-            if y == 1:
-                x = sub('TIME', '', x)
-                start = x
-                res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7 + pictopoffset), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-            if y == 2:
-                if search('LOGO', x) is not None:
-                    logo = search('LOGO(.*?)">', x)
-                    if logo is not None:
-                        x = logo.group(1)
-                    service = x
-                    sref = self.service_db.lookup(service)
-                    if sref == 'nope':
-                        self.filter = True
-                    else:
-                        self.filter = False
-                        self.searchref.append(sref)
-                        if self.picon == True:
-                            picon = self.findPicon(sref)
-                            if picon is not None:
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
-                            else:
-                                res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
-                        else:
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
-                        start = sub(' - ..:..', '', start)
-                        daynow = sub('....-..-', '', str(self.date))
-                        day = search(', ([0-9]+). ', self.datum_string)
-                        if day is not None:
-                            day = day.group(1)
-                        else:
-                            day = daynow
-                        if int(day) >= int(daynow) - 1:
-                            date = str(self.date) + 'FIN'
-                        else:
-                            four_weeks = datetime.timedelta(weeks=4)
-                            date = str(self.date + four_weeks) + 'FIN'
-                        date = sub('[0-9][0-9]FIN', day, date)
-                        timer = date + ':::' + start + ':::' + str(sref)
-                        if timer in self.timer:
-                            self.rec = True
-                            rp = self.getRecPNG()
-                            if rp != None:
-                                res.append(rp)
-            if y == 3:
-                if self.filter == False:
-                    x = sub('LINK', '', x)
-                    self.searchlink.append(x)
-            if y == 4:
-                if self.filter == False:
-                    x = sub('TITEL', '', x)
-                    titelfilter = x
-            if y == 5:
-                if self.filter == False:
-                    if search('GENRE', x) is None:
-                        res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                        y = 6
-            if y == 6:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        if self.rec == True:
-                            self.rec = False
-                        else:
-                            x = sub('INFO', '', x)
-                            rp = self.getPNG(x, self.menuwidth - 140)
-                            if rp != None:
-                                res.append(rp)
-                else:
-                    y = 9
-            if y == 7:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 210)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 8:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 280)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 9:
-                if search('INFO', x) is not None:
-                    y = 7
-                elif self.filter == False:
-                    self.datum = False
-                    if search('RATING', x) is not None:
-                        x = sub('RATING', '', x)
-                        if x != 'rating small':
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, pictopoffset), size=(40, 40), png=loadPNG(png)))
-                    res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                    self.searchentries.append(res)
-            y += 1
-            if y == offset:
-                y = 0
-
-        self['searchmenu'].l.setItemHeight(mh)
-        self['searchmenu'].l.setList(self.searchentries)
-        self['searchmenu'].show()
-        self.searchcount += 1
-        if self.searchcount <= self.maxsearchcount and search('class="pagination__link pagination__link--next" >', bereich) is not None:
-            nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
-            if nextpage is not None:
-                self.makeSearchView(nextpage.group(1))
-            else:
-                self.ready = True
-        else:
-            try:
-                if self.searchref[-1] == 'na':
-                    del self.searchref[-1]
-                    del self.searchlink[-1]
-                    del self.searchentries[-1]
-                    self['searchmenu'].l.setList(self.searchentries)
-            except IndexError:
-                pass
-
-            self['searchmenu'].moveToIndex(self.oldsearchindex)
-            self.current = 'searchmenu'
-            self.ready = True
+        self._makeSearchView(url)
         return
 
     def ok(self):
-        if self.hideflag == False:
-            return
-        if self.current == 'menu' or self.current == 'searchmenu':
-            self.selectPage('ok')
-        elif self.current == 'postview' and self.postviewready == True:
-            if self.trailer == True:
-                sref = eServiceReference(4097, 0, self.trailerurl)
-                sref.setName(self.name)
-                self.session.open(MoviePlayer, sref)
-            elif self.mehrbilder == True:
-                self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink)
-            else:
-                self.session.openWithCallback(self.showPicPost, FullScreen)
+        self._ok()
 
     def selectPage(self, action):
         if self.current == 'menu' and self.ready == True:
@@ -4126,212 +3752,11 @@ class TVProgrammView(tvBaseScreen):
             printStackTrace()
 
     def makeSearchView(self, url):
-        header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
-         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-         'Accept-Language': 'en-us,en;q=0.5'}
-        searchrequest = Request(url, None, header)
-        try:
-            output = urlopen(searchrequest).read()
-            output = six.ensure_str(output)
-        except (HTTPError,
-         URLError,
-         HTTPException,
-         socket.error,
-         AttributeError):
-            output = ' '
-
-        title = search('<title>(.*?)</title>', output)
-        if title is not None:
-            self['searchtext'].setText(title.group(1))
-            self['searchtext'].show()
-            self.setTitle('')
-            self.setTitle(title.group(1))
-        bereich = parsePrimeTimeTable(output, self.showgenre)
-        a = findall('<td>(.*?)</td>', bereich)
-        y = 0
-        offset = 10
-        mh = 40
-        pictopoffset = 0
-        picleftoffset = 0
-        if self.picon == True:
-            mh = 60
-            pictopoffset = 10
-            picleftoffset = 40
-        for x in a:
-            if y == 0:
-                res = [x]
-                if self.backcolor == True:
-                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-                if search('DATUM', x) is not None:
-                    if self.datum == True:
-                        try:
-                            del self.searchref[-1]
-                            del self.searchlink[-1]
-                            del self.searchentries[-1]
-                        except IndexError:
-                            pass
-
-                    else:
-                        self.datum = True
-                    x = sub('DATUM', '', x)
-                    self.datum_string = x
-                    res_datum = [x]
-
-                    if self.backcolor == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    self.searchref.append('na')
-                    self.searchlink.append('na')
-                    self.searchentries.append(res_datum)
-                    self.filter = True
-                    y = 9
-                else:
-                    y = 1
-            if y == 1:
-                x = sub('TIME', '', x)
-                start = x
-                res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7 + pictopoffset), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-            if y == 2:
-                if search('LOGO', x) is not None:
-                    logo = search('LOGO(.*?)">', x)
-                    if logo is not None:
-                        x = logo.group(1)
-                    service = x
-                    sref = self.service_db.lookup(service)
-                    if sref == 'nope':
-                        self.filter = True
-                    else:
-                        self.filter = False
-                        self.searchref.append(sref)
-                        if self.picon == True:
-                            picon = self.findPicon(sref)
-                            if picon is not None:
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
-                            else:
-                                res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
-                        else:
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
-                        start = sub(' - ..:..', '', start)
-                        daynow = sub('....-..-', '', str(self.date))
-                        day = search(', ([0-9]+). ', self.datum_string)
-                        if day is not None:
-                            day = day.group(1)
-                        else:
-                            day = daynow
-                        if int(day) >= int(daynow) - 1:
-                            date = str(self.date) + 'FIN'
-                        else:
-                            four_weeks = datetime.timedelta(weeks=4)
-                            date = str(self.date + four_weeks) + 'FIN'
-                        date = sub('[0-9][0-9]FIN', day, date)
-                        timer = date + ':::' + start + ':::' + str(sref)
-                        if timer in self.timer:
-                            self.rec = True
-                            rp = self.getRecPNG()
-                            if rp != None:
-                                res.append(rp)
-            if y == 3:
-                if self.filter == False:
-                    x = sub('LINK', '', x)
-                    self.searchlink.append(x)
-            if y == 4:
-                if self.filter == False:
-                    x = sub('TITEL', '', x)
-                    titelfilter = x
-            if y == 5:
-                if self.filter == False:
-                    if search('GENRE', x) is None:
-                        res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                        y = 6
-            if y == 6:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        if self.rec == True:
-                            self.rec = False
-                        else:
-                            x = sub('INFO', '', x)
-                            rp = self.getPNG(x, self.menuwidth - 140)
-                            if rp != None:
-                                res.append(rp)
-                else:
-                    y = 9
-            if y == 7:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 210)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 8:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 280)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 9:
-                if search('INFO', x) is not None:
-                    y = 7
-                elif self.filter == False:
-                    self.datum = False
-                    if search('RATING', x) is not None:
-                        x = sub('RATING', '', x)
-                        if x != 'rating small':
-                            png = '%s%sHD.png' % (ICONPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, pictopoffset), size=(40, 40), png=loadPNG(png)))
-                    res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                    self.searchentries.append(res)
-            y += 1
-            if y == offset:
-                y = 0
-
-        self['searchmenu'].l.setItemHeight(mh)
-        self['searchmenu'].l.setList(self.searchentries)
-        self['searchmenu'].show()
-        self.searchcount += 1
-        if self.searchcount <= self.maxsearchcount and search('class="pagination__link pagination__link--next" >', bereich) is not None:
-            nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
-            if nextpage is not None:
-                self.makeSearchView(nextpage.group(1))
-            else:
-                self.ready = True
-        else:
-            try:
-                if self.searchref[-1] == 'na':
-                    del self.searchref[-1]
-                    del self.searchlink[-1]
-                    del self.searchentries[-1]
-                    self['searchmenu'].l.setList(self.searchentries)
-            except IndexError:
-                pass
-
-            self['searchmenu'].moveToIndex(self.oldsearchindex)
-            self.current = 'searchmenu'
-            self.ready = True
+        self._makeSearchView(url)
         return
 
     def ok(self):
-        if self.hideflag == False:
-            return
-        if self.current == 'menu' or self.current == 'searchmenu':
-            self.selectPage('ok')
-        elif self.current == 'postview' and self.postviewready == True:
-            if self.trailer == True:
-                sref = eServiceReference(4097, 0, self.trailerurl)
-                sref.setName(self.name)
-                self.session.open(MoviePlayer, sref)
-            elif self.mehrbilder == True:
-                self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink)
-            else:
-                self.session.openWithCallback(self.showPicPost, FullScreen)
+        self._ok()
 
     def selectPage(self, action):
         if self.current == 'menu' and self.ready == True:
@@ -9704,214 +9129,11 @@ class TVHeuteView(tvBaseScreen):
             printStackTrace()
 
     def makeSearchView(self, url):
-        header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
-         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-         'Accept-Language': 'en-us,en;q=0.5'}
-        searchrequest = Request(url, None, header)
-        try:
-            output = urlopen(searchrequest).read()
-            output = six.ensure_str(output)
-        except (HTTPError,
-         URLError,
-         HTTPException,
-         socket.error,
-         AttributeError):
-            output = ' '
-
-        title = search('<title>(.*?)</title>', output)
-        if title is not None:
-            self['searchtext'].setText(title.group(1))
-            self['searchtext'].show()
-            self.setTitle('')
-            self.setTitle(title.group(1))
-        bereich = parsePrimeTimeTable(output, self.showgenre)
-        a = findall('<td>(.*?)</td>', bereich)
-        y = 0
-        offset = 10
-        mh = 40
-        pictopoffset = 0
-        picleftoffset = 0
-        if self.picon == True:
-            mh = 60
-            pictopoffset = 10
-            picleftoffset = 40
-        for x in a:
-            if y == 0:
-                res = [x]
-                if self.backcolor == True:
-                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-
-                if search('DATUM', x) is not None:
-                    if self.datum == True:
-                        try:
-                            del self.searchref[-1]
-                            del self.searchlink[-1]
-                            del self.searchentries[-1]
-                        except IndexError:
-                            pass
-
-                    else:
-                        self.datum = True
-                    x = sub('DATUM', '', x)
-                    self.datum_string = x
-                    res_datum = [x]
-                    if self.backcolor == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    self.searchref.append('na')
-                    self.searchlink.append('na')
-                    self.searchentries.append(res_datum)
-                    self.filter = True
-                    y = 9
-                else:
-                    y = 1
-            if y == 1:
-                x = sub('TIME', '', x)
-                start = x
-                res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7 + pictopoffset), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-            if y == 2:
-                if search('LOGO', x) is not None:
-                    logo = search('LOGO(.*?)">', x)
-                    if logo is not None:
-                        x = logo.group(1)
-                    service = x
-                    sref = self.service_db.lookup(service)
-                    if sref == 'nope':
-                        self.filter = True
-                    else:
-                        self.filter = False
-                        self.searchref.append(sref)
-                        if self.picon == True:
-                            picon = self.findPicon(sref)
-                            if picon is not None:
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
-                            else:
-                                res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
-                        else:
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
-                        start = sub(' - ..:..', '', start)
-                        daynow = sub('....-..-', '', str(self.date))
-                        day = search(', ([0-9]+). ', self.datum_string)
-                        if day is not None:
-                            day = day.group(1)
-                        else:
-                            day = daynow
-                        if int(day) >= int(daynow) - 1:
-                            date = str(self.date) + 'FIN'
-                        else:
-                            four_weeks = datetime.timedelta(weeks=4)
-                            date = str(self.date + four_weeks) + 'FIN'
-                        date = sub('[0-9][0-9]FIN', day, date)
-                        timer = date + ':::' + start + ':::' + str(sref)
-                        if timer in self.timer:
-                            self.rec = True
-                            rp = self.getRecPNG()
-                            if rp != None:
-                                res.append(rp)
-            if y == 3:
-                if self.filter == False:
-                    x = sub('LINK', '', x)
-                    self.searchlink.append(x)
-            if y == 4:
-                if self.filter == False:
-                    x = sub('TITEL', '', x)
-                    titelfilter = x
-            if y == 5:
-                if self.filter == False:
-                    if search('GENRE', x) is None:
-                        res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                        y = 6
-            if y == 6:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        if self.rec == True:
-                            self.rec = False
-                        else:
-                            x = sub('INFO', '', x)
-                            rp = self.getPNG(x, self.menuwidth - 140)
-                            if rp != None:
-                                res.append(rp)
-                else:
-                    y = 9
-            if y == 7:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 210)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 8:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 280)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 9:
-                if search('INFO', x) is not None:
-                    y = 7
-                elif self.filter == False:
-                    self.datum = False
-                    if search('RATING', x) is not None:
-                        x = sub('RATING', '', x)
-                        if x != 'rating small':
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/icons/%sHD.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, pictopoffset), size=(40, 40), png=loadPNG(png)))
-                    res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                    self.searchentries.append(res)
-            y += 1
-            if y == offset:
-                y = 0
-
-        self['searchmenu'].l.setItemHeight(mh)
-        self['searchmenu'].l.setList(self.searchentries)
-        self['searchmenu'].show()
-        self.searchcount += 1
-        if self.searchcount <= self.maxsearchcount and search('class="pagination__link pagination__link--next" >', bereich) is not None:
-            nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
-            if nextpage is not None:
-                self.makeSearchView(nextpage.group(1))
-            else:
-                self.ready = True
-        else:
-            try:
-                if self.searchref[-1] == 'na':
-                    del self.searchref[-1]
-                    del self.searchlink[-1]
-                    del self.searchentries[-1]
-                    self['searchmenu'].l.setList(self.searchentries)
-            except IndexError:
-                pass
-
-            self['searchmenu'].moveToIndex(self.oldsearchindex)
-            self.current = 'searchmenu'
-            self.ready = True
+        self._makeSearchView(url)
         return
 
     def ok(self):
-        if self.hideflag == False:
-            return
-        if self.current == 'postview' and self.postviewready == True:
-            if self.trailer == True:
-                sref = eServiceReference(4097, 0, self.trailerurl)
-                sref.setName(self.name)
-                self.session.open(MoviePlayer, sref)
-            elif self.mehrbilder == True:
-                self.session.openWithCallback(self.picReturn, TVPicShow, self.postlink)
-            else:
-                self.session.openWithCallback(self.showPicPost, FullScreen)
-        elif self.current == 'postview' and self.postviewready == False:
-            pass
-        else:
-            self.selectPage('ok')
+        self._ok()
 
     def selectPage(self, action):
         self.oldcurrent = self.current
