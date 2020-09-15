@@ -186,10 +186,10 @@ def readSkin(skin):
                         skintext = six.ensure_str(ET.tostring(element))
                         break
             except Exception as err:
-                print("[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (filename, err))
+                print("[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (SKINFILE, err))
 
     except Exception as err:
-        print("[Skin] Error: Unexpected error opening skin file '%s'! (%s)" % (filename, err))
+        print("[Skin] Error: Unexpected error opening skin file '%s'! (%s)" % (SKINFILE, err))
     return skintext
 
 

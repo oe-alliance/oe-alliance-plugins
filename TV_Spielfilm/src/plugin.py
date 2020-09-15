@@ -6782,45 +6782,28 @@ class tvMain(tvBaseScreen):
             for mi in ['Kindersender','Sportsender','Musiksender','News','Ausland','Spartensender','Auslandssender','Regionalsender']:
                 self.makeSecondMenuItem(mi)
 
-            self['secondmenu'].l.setList(self.secondmenulist)
-            self['secondmenu'].l.setItemHeight(int(30 * skinFactor))
-            self['secondmenu'].moveToIndex(0)
-            self.selectSecondMenu()
             if self.tipps == True:
                 self.hideTipps()
         elif search('/tv-tipps/', link) is not None:
             for mi in ['Spielfilm','Serie','Report','Unterhaltung','Kinder','Sport']:
                 self.makeSecondMenuItem2(mi, '/tv-tipps/')
-            self['secondmenu'].l.setList(self.secondmenulist)
-            self['secondmenu'].l.setItemHeight(int(30 * skinFactor))
-            self['secondmenu'].moveToIndex(0)
-            self.selectSecondMenu()
         elif search('/tv-genre/', link) is not None:
             for mi in ['Spielfilm','Serie','Report','Unterhaltung','Kinder','Sport']:
                 self.makeSecondMenuItem2(mi, '/tv-genre/')
-            self['secondmenu'].l.setList(self.secondmenulist)
-            self['secondmenu'].l.setItemHeight(int(30 * skinFactor))
-            self['secondmenu'].moveToIndex(0)
-            self.selectSecondMenu()
         elif search('/trailer-und-clips/', link) is not None:
             self.makeSecondMenuItem2('Kino Neustarts', '/kino/trailer-und-clips/')
             self.makeSecondMenuItem2('Kino Vorschau', '/kino/kino-vorschau/')
             self.makeSecondMenuItem2('Neueste Trailer', '/kino/trailer-und-clips/')
             self.makeSecondMenuItem2('Kino Charts', '/kino/charts/')
             self.makeSecondMenuItem2('DVD Charts', '/kino/dvd/charts/')
-            self['secondmenu'].l.setList(self.secondmenulist)
-            self['secondmenu'].l.setItemHeight(int(30 * skinFactor))
-            self['secondmenu'].moveToIndex(0)
-            self.selectSecondMenu()
         elif search('/news-und-specials/', link) is not None:
             self.makeSecondMenuItem3('Interviews & Stories', '/news-und-specials/interviewsundstories/')
             self.makeSecondMenuItem3('Tatort', '/tatort/')
             self.makeSecondMenuItem3('Kids TV', '/kids-tv/')
             self.makeSecondMenuItem3('Playboy Girl', '/news-und-specials/playboy/')
-            self['secondmenu'].l.setList(self.secondmenulist)
-            self['secondmenu'].l.setItemHeight(int(30 * skinFactor))
-            self['secondmenu'].moveToIndex(0)
-            self.selectSecondMenu()
+        self['secondmenu'].l.setList(self.secondmenulist)
+        self['secondmenu'].l.setItemHeight(int(30 * skinFactor))
+        self.selectSecondMenu()
         return
 
     def makeThirdMenuItem(self, output, start, end):
@@ -6844,11 +6827,6 @@ class tvMain(tvBaseScreen):
                 self.thirdmenulink.append(lnk[i])
             except IndexError:
                 pass
-
-        self['thirdmenu'].l.setList(self.thirdmenulist)
-        self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
-        self['thirdmenu'].moveToIndex(0)
-        self.selectThirdMenu()
 
     def makeThirdMenuItem2(self, text, genre, link=None, cat='SP'):
         res = ['']
@@ -6930,10 +6908,6 @@ class tvMain(tvBaseScreen):
             self.makeThirdMenuItem2('Thriller', sender)
             self.makeThirdMenuItem2('Trickfilm', sender)
             self.makeThirdMenuItem2('Western', sender)
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
         elif sender == 'Serie':
             self.makeThirdMenuItem2('Alle Genres', sender, '', 'SE')
             self.makeThirdMenuItem2('Action', sender, None, 'SE')
@@ -6948,10 +6922,6 @@ class tvMain(tvBaseScreen):
             self.makeThirdMenuItem2('Science Fiction', sender, 'Science+Fiction', 'SE')
             self.makeThirdMenuItem2('Soap', sender, None, 'SE')
             self.makeThirdMenuItem2('Western', sender, None, 'SE')
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
         elif sender == 'Report':
             self.makeThirdMenuItem2('Alle Genres', sender, '', 'RE')
             self.makeThirdMenuItem2('Gesellschaft', sender, None, 'RE')
@@ -6962,10 +6932,6 @@ class tvMain(tvBaseScreen):
             self.makeThirdMenuItem2('Ratgeber', sender, None, 'RE')
             self.makeThirdMenuItem2('Technik', sender, None, 'RE')
             self.makeThirdMenuItem2('Wissenschaft', sender, None, 'RE')
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
         elif sender == 'Unterhaltung':
             self.makeThirdMenuItem2('Alle Genres', sender, '', 'U')
             self.makeThirdMenuItem2('Comedy', sender, None, 'U')
@@ -6976,10 +6942,6 @@ class tvMain(tvBaseScreen):
             self.makeThirdMenuItem2('Quiz', sender, None, 'U')
             self.makeThirdMenuItem2('Show', sender, None, 'U')
             self.makeThirdMenuItem2('Talk', sender, None, 'U')
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
         elif sender == 'Kinder':
             self.makeThirdMenuItem2('Alle Genres', sender, '', 'KIN')
             self.makeThirdMenuItem2('Bildung', sender, None, 'KIN')
@@ -6987,10 +6949,6 @@ class tvMain(tvBaseScreen):
             self.makeThirdMenuItem2('Reportage', sender, None, 'KIN')
             self.makeThirdMenuItem2('Serie', sender, None, 'KIN')
             self.makeThirdMenuItem2('Show', sender, None, 'KIN')
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
         elif sender == 'Sport':
             self.makeThirdMenuItem2('Alle Genres', sender, '', 'SPO')
             self.makeThirdMenuItem2('Basketball', sender, None, 'SPO')
@@ -7010,10 +6968,9 @@ class tvMain(tvBaseScreen):
             self.makeThirdMenuItem2('US Sport', sender, 'US+Sport', 'SPO')
             self.makeThirdMenuItem2('Wassersport', sender, None, 'SPO')
             self.makeThirdMenuItem2('Wintersport', sender, None, 'SPO')
-            self['thirdmenu'].l.setList(self.thirdmenulist)
-            self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
-            self['thirdmenu'].moveToIndex(0)
-            self.selectThirdMenu()
+        self['thirdmenu'].l.setList(self.thirdmenulist)
+        self['thirdmenu'].l.setItemHeight(int(30 * skinFactor))
+        self.selectThirdMenu()
         return
 
     def selectMainMenu(self):
@@ -7041,6 +6998,7 @@ class tvMain(tvBaseScreen):
             self['mainmenu'].selectionEnabled(0)
             self['secondmenu'].selectionEnabled(1)
             self['thirdmenu'].selectionEnabled(0)
+            self['secondmenu'].moveToIndex(0)
             if self.tipps == True and self.hidetipps == False:
                 self.showTipps()
         self.ready = True
@@ -7054,6 +7012,7 @@ class tvMain(tvBaseScreen):
             self['mainmenu'].selectionEnabled(0)
             self['secondmenu'].selectionEnabled(0)
             self['thirdmenu'].selectionEnabled(1)
+            self['thirdmenu'].moveToIndex(0)
             if self.tipps == True:
                 self.hideTipps()
         self.ready = True
