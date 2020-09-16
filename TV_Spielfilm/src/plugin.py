@@ -764,9 +764,9 @@ class tvBaseScreen(tvAllScreen):
             else:
                 self.session.openWithCallback(self.showPicPost, FullScreen)
 
-    def redTimer(self, search=False, serviceref=None):
+    def redTimer(self, search=False, sref=None):
 
-        if serviceref == None:
+        if sref == None:
             try:
                 if search == True:
                     c = self['searchmenu'].getSelectedIndex()
@@ -779,6 +779,8 @@ class tvBaseScreen(tvAllScreen):
                 serviceref = ServiceReference(sref)
             except IndexError:
                 serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
+        else:
+            serviceref = ServiceReference(sref)
 
         try:
             start = self.start
@@ -812,32 +814,40 @@ class tvBaseScreen(tvAllScreen):
 
         name = self.name
         shortdesc = self.shortdesc
-        if search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
+        if shortdesc != '' and search('Staffel [0-9]+, Folge [0-9]+', shortdesc) is not None:
             episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
             episode = sub('Staffel ', 'S', episode.group(1))
             episode = sub(', Folge ', 'E', episode)
             name = name + ' ' + episode
-        data = (int(mktime(start.timetuple())),
-            int(mktime(end.timetuple())),
-            name,
-            shortdesc,
-            None)
-        newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
-        if self.autotimer == False:
-            self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
-        else:
-            from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
-            from Plugins.Extensions.AutoTimer.plugin import autotimer
-            if autotimer is None:
-                from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
-                autotimer = AutoTimer()
-            autotimer.readXml()
-            newTimer = autotimer.defaultTimer.clone()
-            newTimer.id = autotimer.getUniqueId()
-            newTimer.name = self.name
-            newTimer.match = ''
-            newTimer.enabled = True
-            self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+
+        try:
+            data = (int(mktime(start.timetuple())),
+                int(mktime(end.timetuple())),
+                name,
+                shortdesc,
+                None)
+        except:
+            printStackTrace()
+
+        try:
+            newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
+            if self.autotimer == False:
+                self.session.openWithCallback(self.finishedTimer, TimerEntry, newEntry)
+            else:
+                from Plugins.Extensions.AutoTimer.AutoTimerImporter import AutoTimerImporter
+                from Plugins.Extensions.AutoTimer.plugin import autotimer
+                if autotimer is None:
+                    from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
+                    autotimer = AutoTimer()
+                autotimer.readXml()
+                newTimer = autotimer.defaultTimer.clone()
+                newTimer.id = autotimer.getUniqueId()
+                newTimer.name = self.name
+                newTimer.match = ''
+                newTimer.enabled = True
+                self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+        except:
+            printStackTrace()
 
     def _commonInit(self, ltxt = '= Suche', lltxt = '= Zappen'):
         self['picpost'] = Pixmap()
@@ -3112,20 +3122,17 @@ class TVJetztView(tvGenreJetztProgrammView):
                     c = self['menu'].getSelectedIndex()
                     self.oldindex = c
                     sref = self.sref[c][1]
-                    serviceref = ServiceReference(sref)
+                    self.redTimer(False, sref)
                 except IndexError:
-                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
-                self.redTimer(False, serviceref)
+                    self.redTimer(False)
             elif self.search == True:
                 try:
                     c = self['searchmenu'].getSelectedIndex()
                     self.oldsearchindex = c
                     sref = self.searchref[c]
-                    serviceref = ServiceReference(sref)
+                    self.redTimer(False, sref)
                 except IndexError:
-                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
-
-                self.redTimer(False, serviceref)
+                    self.redTimer(False)
             else:
                 self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         elif self.current == 'menu' and self.ready == True:
@@ -3818,21 +3825,17 @@ class TVProgrammView(tvGenreJetztProgrammView):
                     c = self['menu'].getSelectedIndex()
                     self.oldindex = c
                     sref = self.sref
-                    serviceref = ServiceReference(sref)
+                    self.redTimer(False, sref)
                 except IndexError:
-                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
-
-                self.redTimer(False, serviceref)
+                    self.redTimer(False)
             elif self.search == True:
                 try:
                     c = self['searchmenu'].getSelectedIndex()
                     self.oldsearchindex = c
                     sref = self.searchref[c]
-                    serviceref = ServiceReference(sref)
+                    self.redTimer(False, sref)
                 except IndexError:
-                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
-
-                self.redTimer(False, serviceref)
+                    self.redTimer(False)
             else:
                 self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         elif self.current == 'menu' and self.ready == True and self.zap == True:
@@ -8588,22 +8591,18 @@ class TVHeuteView(tvBaseScreen):
                     self.oldindex = c
                     try:
                         sref = self.srefs[i][0]
-                        serviceref = ServiceReference(sref)
+                        self.redTimer(False, sref)
                     except IndexError:
-                        serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
-
-                    self.redTimer(False, serviceref)
+                        self.redTimer(False)
             if self.oldcurrent == 'searchmenu':
                 c = self['searchmenu'].getSelectedIndex()
                 self.oldsearchindex = c
                 try:
                     c = self['searchmenu'].getSelectedIndex()
                     sref = self.searchref[c]
-                    serviceref = ServiceReference(sref)
+                    self.redTimer(False, sref)
                 except IndexError:
-                    serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
-
-                self.redTimer(False, serviceref)
+                    self.redTimer(False)
             else:
                 self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
         if self.ready == True:
