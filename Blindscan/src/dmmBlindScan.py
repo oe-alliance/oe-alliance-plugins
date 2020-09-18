@@ -107,9 +107,9 @@ class DmmBlindscanState(Screen):
 		elif self.post_action != -1:
 			self.post_action ^= 1
 			if self.post_action:
-				self["post_action"].setText(_("MANUALLY start service searching, press green to change."))
+				self["post_action"].setText(_("Service searching to be started MANUALLY by the user. To change this press green."))
 			else:
-				self["post_action"].setText(_("AUTOMATICALLY start service searching, press green to change."))
+				self["post_action"].setText(_("Service searching will start AUTOMATICALLY. To change this press green."))
 
 	def setFinished(self):
 		if self.post_action:
