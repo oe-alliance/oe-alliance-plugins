@@ -71,8 +71,7 @@ class DmmBlindscanState(Screen):
 
 	def __init__(self, session, fe_num, text):
 		Screen.__init__(self, session)
-		self.setup_title = _("Blind scan state")
-		Screen.setTitle(self, _(self.setup_title))
+		Screen.setTitle(self, _("Blind scan state"))
 		self.skinName = ["DmmBlindscanState", "SatBlindscanState2"]
 		self["list"]=List()
 		self["text"]=Label()
@@ -537,9 +536,8 @@ class SatelliteTransponderSearchSupport:
 class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, TransponderFiltering):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.setup_title = _("Blind scan for DVB-S2 tuners")
 		self.skinName = ["DmmBlindscanScreen", "Blindscan", "Setup"]
-		Screen.setTitle(self, _(self.setup_title))
+		Screen.setTitle(self, _("Blind scan for DVB-S2 tuners"))
 		self.updateSatList()
 		self.service = session.nav.getCurrentService()
 		self.feinfo = None
