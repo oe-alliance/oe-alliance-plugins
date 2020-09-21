@@ -27,3 +27,7 @@ endif
 if VUDUO4K
 SUBDIRS = vuduo4k
 endif
+
+if VUDUO4KSE
+SUBDIRS = vuduo4kse
+endif
