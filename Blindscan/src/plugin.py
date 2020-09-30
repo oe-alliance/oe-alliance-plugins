@@ -29,7 +29,7 @@ from Tools.BoundFunction import boundFunction
 import os
 import six
 
-from filters import TransponderFiltering # imported from Blindscan folder
+from . filters import TransponderFiltering # imported from Blindscan folder
 
 #used for the XML file
 from time import strftime, time
