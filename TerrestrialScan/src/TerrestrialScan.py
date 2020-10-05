@@ -360,9 +360,11 @@ class TerrestrialScan(Screen):
 	def tsidOnidWait(self):
 		self.getCurrentTsidOnid()
 		if self.tsid is not None and self.onid is not None:
-			print "[TerrestrialScan][tsidOnidWaitABM] tsid & onid found", self.tsid, self.onid
+			print "[TerrestrialScan][tsidOnidWait] tsid & onid found", self.tsid, self.onid
 			self.signalQualityCounter = 0
-			self.signalQualityWait()
+			self.signalQualitytimer = eTimer()
+			self.signalQualitytimer.callback.append(self.signalQualityWait)
+			self.signalQualitytimer.start(100, 1)
 			return
 
 		print "[TerrestrialScan][tsidOnidWaitABM] tsid & onid wait failed"
