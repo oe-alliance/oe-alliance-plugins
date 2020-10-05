@@ -458,7 +458,7 @@ class MakeBouquet(Screen):
 		xml.append('\t<terrestrial name="My local region (Europe DVB-T/T2)" flags="5">\n')
 		for tsidOnidKey in self.iterateUniqueTranspondersByFrequency():
 			transponder = self.transponders_unique[tsidOnidKey]
-			xml.append('\t\t<transponder centre_frequency="%d" system="%d" bandwidth="%d" constellation="3"/>\n' % (transponder["frequency"], transponder["system"], transponder["bandwidth"] == 7 and 1 or 0))
+			xml.append('\t\t<transponder centre_frequency="%d" system="%d" bandwidth="%d" constellation="3"/><!-- onid="%d" tsid="%d" signal_quality="%d" -->\n' % (transponder["frequency"], transponder["system"], transponder["bandwidth"] == 7 and 1 or 0, transponder["onid"], transponder["tsid"], transponder["signalQuality"]))
 		xml.append('\t</terrestrial>\n')
 		xml.append('</locations>')
 
