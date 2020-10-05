@@ -1116,6 +1116,7 @@ class TVTippsView(tvBaseScreen):
             self.titel = 'TV Neuerscheinungen - TV Spielfilm'
         else:
             self.titel = 'TV-Tipps - TV Spielfilm'
+        self.menuwidth = self.menuwidth - 135
         self.sparte = sparte
         self.tventries = []
         self.tvlink = []
