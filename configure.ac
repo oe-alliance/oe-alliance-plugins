@@ -353,13 +353,6 @@ LCD4linux/src/sh4/Makefile
 LCD4linux/meta/Makefile
 LCD4linux/po/Makefile
 
-MisPlsLcnScan/Makefile
-MisPlsLcnScan/images/Makefile
-MisPlsLcnScan/lib/Makefile
-MisPlsLcnScan/meta/Makefile
-MisPlsLcnScan/po/Makefile
-MisPlsLcnScan/src/Makefile
-
 OdinM7VFDControl/Makefile
 OdinM7VFDControl/src/Makefile
 OdinM7VFDControl/meta/Makefile
