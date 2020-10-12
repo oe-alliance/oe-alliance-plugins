@@ -1,1 +1,0 @@
-SUBDIRS = meta images lib po src
