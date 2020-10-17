@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Button import Button
@@ -146,7 +144,7 @@ class StalkerClient_EventViewBase:
 		self["epg_description"].setText(text)
 
 		t = localtime(float(event.time))
-		self["datetime"].setText("%02d.%02d, %02d:%02d"%(t[2], t[1], t[3], t[4]))
+		self["datetime"].setText("%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4]))
 		self["duration"].setText(_("%d min")%(int(event.duration)/60))
 
 	def pageUp(self):
@@ -226,13 +224,13 @@ class StalkerClient_EPGSelection(Screen):
 		self["actions"] = ActionMap(["OkCancelActions", "WizardActions", "EPGSelectActions"],
 		{
 			"cancel": self.close,
-			"ok": self.onKeyOK,
-			"up": self.onKeyUp,
-			"down": self.onKeyDown,
-			"left": self.onKeyLeft,
-			"right": self.onKeyRight,
+			"ok"    : self.onKeyOK,
+			"up"    : self.onKeyUp,
+			"down"  : self.onKeyDown,
+			"left"  : self.onKeyLeft,
+			"right" : self.onKeyRight,
 			"yellow": self.onKeyYellow,
-			"blue": self.onKeyBlue,
+			"blue"  : self.onKeyBlue,
 		}, -1)
 
 		self.scepgList = StalkerEPGList(self.m_type)
@@ -353,7 +351,7 @@ class StalkerClient_EPGSelection(Screen):
 				selected_item = result.get('selected_item') and int(result.get('selected_item')) - 1 or index
 
 				self.scepgList.clear(cur_page, self.m_last_page)
-				if cur_page == -1:
+				if cur_page is -1:
 					print("[StalkerClient] got no event.")
 					return
 
@@ -563,7 +561,7 @@ def StalkerEPGComponent(entry, size, type):
 		t = localtime(float(entry.time))
 
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width/20*2-10, height, 0, RT_HALIGN_RIGHT, days[t[6]]))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, width/20*2, 0, width/20*5-15, height, 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d"%(t[2], t[1], t[3], t[4])))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, width/20*2, 0, width/20*5-15, height, 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d"%(t[2],t[1],t[3],t[4])))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, width/20*7, 0, width/20*13, height, 0, RT_HALIGN_LEFT, entry.name))
 	else:
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width/10*3-10, height, 0, RT_HALIGN_LEFT, entry.ch_name))
@@ -615,13 +613,13 @@ class StalkerEPGList(MenuList):
 		self.item_last += 1
 
 	def leftPage(self):
-		if self.page_last < 0 or int(self.page_last) == 1:
+		if self.page_last < 0 or int(self.page_last) is 1:
 			self.pageUp()
 		else:
 			self.page_current = int(self.page_current) - 1 if (int(self.page_current) > 1) else self.page_last
 
 	def rightPage(self):
-		if self.page_last < 0 or int(self.page_last) == 1:
+		if self.page_last < 0 or int(self.page_last) is 1:
 			self.pageDown()
 		else:
 			self.page_current = int(self.page_current) + 1 if (int(self.page_current) < int(self.page_last)) else 1
@@ -633,7 +631,7 @@ class StalkerEPGList(MenuList):
 			if self.page_last < 0:
 				self.moveToIndex(self.item_last)
 			else:
-				self.item_refresh = True if int(self.page_last) != 1 else False
+				self.item_refresh = True if not int(self.page_last) is 1 else False
 				self.leftPage()
 
 	def downPage(self):
@@ -643,7 +641,7 @@ class StalkerEPGList(MenuList):
 			if self.page_last < 0:
 				self.moveToIndex(0)
 			else:
-				self.item_refresh = True if int(self.page_last) != 1 else False
+				self.item_refresh = True if not int(self.page_last) is 1 else False
 				self.rightPage()
 
 	def updateList(self, index = 0):

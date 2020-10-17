@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
@@ -50,8 +48,8 @@ class StalkerClient_SetupScreen(Screen, ConfigListScreen):
 	</screen>
 	"""
 
-	def __init__(self, session):
-		Screen.__init__(self, session)
+	def __init__(self,session):
+		Screen.__init__(self,session)
 		self.session = session
 		dh = self.session.desktop.size().height()
 		self.skin = StalkerClient_SetupScreen.skin_default_1080p if dh > 720 else StalkerClient_SetupScreen.skin_default
@@ -89,7 +87,7 @@ class StalkerClient_SetupScreen(Screen, ConfigListScreen):
 			"mac": config.plugins.stalker_client.mac.value,
 			"authEnabled": config.plugins.stalker_client.authEnabled.value,
 		}
-		if self.backup["authEnabled"] == "1":
+		if self.backup["authEnabled"] is "1":
 			self.backup["username"] = config.plugins.stalker_client.username.value
 			self.backup["password"] = config.plugins.stalker_client.password.value
 
@@ -183,7 +181,7 @@ class StalkerClient_SetupScreen(Screen, ConfigListScreen):
 		self.list.append(self.macEntry)
 		self.list.append(self.authEnableEntry)
 
-		if config.plugins.stalker_client.authEnabled.value == "1":
+		if config.plugins.stalker_client.authEnabled.value is "1":
 			self.list.append(self.usernameEntry)
 			self.list.append(self.passwordEntry)
 
@@ -217,7 +215,7 @@ class StalkerClient_SetupScreen(Screen, ConfigListScreen):
 		config.plugins.stalker_client.server.save()
 		config.plugins.stalker_client.mac.save()
 		config.plugins.stalker_client.authEnabled.save()
-		if config.plugins.stalker_client.authEnabled.value == "1":
+		if config.plugins.stalker_client.authEnabled.value is "1":
 			config.plugins.stalker_client.username.save()
 			config.plugins.stalker_client.password.save()
 		config.plugins.stalker_client.save()
@@ -229,7 +227,7 @@ class StalkerClient_SetupScreen(Screen, ConfigListScreen):
 		config.plugins.stalker_client.server.value = self.backup["server"]
 		config.plugins.stalker_client.mac.value = self.backup["mac"]
 		config.plugins.stalker_client.authEnabled.value = self.backup["authEnabled"]
-		if config.plugins.stalker_client.authEnabled.value == "1":
+		if config.plugins.stalker_client.authEnabled.value is "1":
 			config.plugins.stalker_client.username.value = self.backup["username"]
 			config.plugins.stalker_client.password.value = self.backup["password"]
 

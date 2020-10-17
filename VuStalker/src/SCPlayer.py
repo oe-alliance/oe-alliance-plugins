@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications
@@ -140,7 +138,7 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 		self.__seekableStatusChanged()
 
 		current_ref = self.session.nav.getCurrentlyPlayingServiceReference()
-		if self.session.nav.getCurrentlyPlayingServiceReference() != self.service_ref:
+		if current_ref is None or current_ref != self.service_ref:
 			self.doPlay()
 		else:
 			if self.shown:

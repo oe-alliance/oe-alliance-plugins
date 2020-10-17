@@ -481,6 +481,7 @@ VuStalker/src/vuultimo4k/Makefile
 VuStalker/src/vuuno4k/Makefile
 VuStalker/src/vuuno4kse/Makefile
 VuStalker/src/vuzero4k/Makefile
+VuStalker/src/vuzero/Makefile
 VuStalker/meta/Makefile
 VuStalker/po/Makefile
 

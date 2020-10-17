@@ -6,12 +6,8 @@ import collections, json, os, threading
 
 from ctypes import cdll, cast, c_char_p, c_void_p
 from time import localtime, strftime, time
+from urllib.parse import quote as urlencode
 from uuid import getnode
-
-import six
-from six.moves import reload_module
-from six.moves.urllib.parse import quote
-
 
 def get_mac_address():
 	macaddr = "00:00:00:00:00:00"
@@ -25,10 +21,10 @@ DEFAULT_MAC = get_mac_address()
 DEFAULT_URL = "http://stalker-server/stalker_portal/c/"
 
 SUPPORT_MODULES = {
-	'tv': 0x1,
-	'epg': 0x2,
-	'epg.simple': 0x4,
-	'account': 0x80,
+	'tv'        :0x1,
+	'epg'       :0x2,
+	'epg.simple':0x4,
+	'account'   :0x80,
 }
 
 selection_list = [("0", _("Disabled")), ("1", _("Enabled"))]
@@ -39,16 +35,16 @@ config.plugins.stalker_client.mac = ConfigText(default=DEFAULT_MAC, fixed_size=F
 config.plugins.stalker_client.authEnabled = ConfigSelection(choices = selection_list)
 config.plugins.stalker_client.username = ConfigText(default="", fixed_size=False, visible_width = 18)
 config.plugins.stalker_client.password = ConfigText(default="", fixed_size=False, visible_width = 18)
-config.plugins.stalker_client.retrycount = ConfigInteger(default=5, limits=(1, 5))
+config.plugins.stalker_client.retrycount = ConfigInteger(default=5, limits=(1,5))
 config.plugins.stalker_client.numFavlist = ConfigInteger(default=0)
 
 def convert(data):
-	if isinstance(data, six.string_types):
+	if isinstance(data, str):
 		return str(data)
 	elif isinstance(data, collections.Mapping):
-		return dict(map(convert, six.iteritems(data)))
+		return dict(list(map(convert, iter(data.items()))))
 	elif isinstance(data, collections.Iterable):
-		return type(data)(map(convert, data))
+		return type(data)(list(map(convert, data)))
 	else:
 		return data
 
@@ -116,64 +112,64 @@ class SCAPI(object):
 	def GetStatusMessage(self):
 		self.ResetString()
 		self.m_str = self.m_clib.GetStatusMessage(self.m_obj)
-		return cast(self.m_str, c_char_p).value
+		return cast(self.m_str, c_char_p).value.decode('utf-8')
 
 	def Authenticate(self):
 		return self.m_clib.Authenticate(self.m_obj)
 
 	def ITV_CreateLink(self, cmd):
 		self.ResetString()
-		self.m_str = self.m_clib.ITV_CreateLink(self.m_obj, str(cmd))
-		return cast(self.m_str, c_char_p).value
+		self.m_str = self.m_clib.ITV_CreateLink(self.m_obj, str(cmd).encode())
+		return cast(self.m_str, c_char_p).value.decode('utf-8')
 
 	def ITV_GetAllChannels(self):
 		self.ResetString()
 		self.m_str = self.m_clib.getAllChannels(self.m_obj)
-		return cast(self.m_str, c_char_p).value
+		return cast(self.m_str, c_char_p).value.decode('utf-8')
 
 	def ITV_GetGenres(self):
 		self.ResetString()
 		self.m_str = self.m_clib.ITV_GetGenres(self.m_obj)
-		return cast(self.m_str, c_char_p).value
+		return cast(self.m_str, c_char_p).value.decode('utf-8')
 
 	def ITV_GetOrderedList(self, genre_id, idx):
 		self.ResetString()
-		self.m_str = self.m_clib.ITV_GetOrderedList(self.m_obj, str(genre_id), str(idx))
-		return cast(self.m_str, c_char_p).value
+		self.m_str = self.m_clib.ITV_GetOrderedList(self.m_obj, str(genre_id).encode(), str(idx).encode())
+		return cast(self.m_str, c_char_p).value.decode('utf-8')
 
 	def ITV_GetEpgInfo(self, period):
 		self.ResetString()
 		self.m_str = self.m_clib.ITV_GetEpgInfo(self.m_obj, str(period))
-		return cast(self.m_str, c_char_p).value
+		return cast(self.m_str, c_char_p).value.decode('utf-8')
 
 	def ITV_GetShortEpg(self, ch_id):
 		self.ResetString()
 		self.m_str = self.m_clib.ITV_GetShortEpg(self.m_obj, str(ch_id))
-		return cast(self.m_str, c_char_p).value
+		return cast(self.m_str, c_char_p).value.decode('utf-8')
 
 	def EPG_GetWeek(self):
 		self.ResetString()
 		self.m_str = self.m_clib.EPG_GetWeek(self.m_obj)
-		return cast(self.m_str, c_char_p).value
+		return cast(self.m_str, c_char_p).value.decode('utf-8')
 
 	def EPG_GetSimpleDataTable(self, ch_id, date, page):
 		self.ResetString()
-		self.m_str = self.m_clib.EPG_GetSimpleDataTable(self.m_obj, str(ch_id), str(date), str(page))
-		return cast(self.m_str, c_char_p).value
+		self.m_str = self.m_clib.EPG_GetSimpleDataTable(self.m_obj, str(ch_id).encode(), str(date).encode(), str(page).encode())
+		return cast(self.m_str, c_char_p).value.decode('utf-8')
 
 	def EPG_GetDataTable(self, from_ts, to_ts, fav, ch_id, page):
 		self.ResetString()
 
-		t_from = quote(strftime('%Y-%m-%d %H:%M:%S', localtime(float(from_ts))))
-		t_to = quote(strftime('%Y-%m-%d %H:%M:%S', localtime(float(to_ts))))
+		t_from = urlencode(strftime('%Y-%m-%d %H:%M:%S', localtime(float(from_ts))))
+		t_to = urlencode(strftime('%Y-%m-%d %H:%M:%S', localtime(float(to_ts))))
 
-		self.m_str = self.m_clib.EPG_GetDataTable(self.m_obj, "", "", str(t_from), str(t_to), str(fav), str(ch_id), str(page))
-		return cast(self.m_str, c_char_p).value
+		self.m_str = self.m_clib.EPG_GetDataTable(self.m_obj, "", "", str(t_from).encode(), str(t_to).encode(), str(fav).encode(), str(ch_id).encode(), str(page).encode())
+		return cast(self.m_str, c_char_p).value.decode('utf-8')
 
 	def OTHER_GetAccountInfo(self):
 		self.ResetString()
 		self.m_str = self.m_clib.OTHER_GetAccountInfo(self.m_obj)
-		return cast(self.m_str, c_char_p).value
+		return cast(self.m_str, c_char_p).value.decode('utf-8')
 
 
 class SCAsyncCall(object):
@@ -200,18 +196,17 @@ class SCTask:
 		self.args = args
 		self.cb = cb
 
+	@property
 	def getFunc(self):
 		return self.func
 
+	@property
 	def getArgs(self):
 		return self.args
 
+	@property
 	def getCallback(self):
 		return self.cb
-
-	func = property(getFunc)
-	args = property(getArgs)
-	cb = property(getCallback)
 
 	def __str__(self):
 		return "task: %s [%s]" % (self.func and self.func.__name__ or "None", self.cb and self.cb.__name__ or "None")
@@ -362,7 +357,7 @@ class StalkerClient(object):
 		self.m_api.CreateObject()
 		return self.reload(True)
 
-	def reload_module(self, init=False):
+	def reload(self, init=False):
 		if not init:
 			self.setStalkerServer()
 			self.setStalkerAuth()

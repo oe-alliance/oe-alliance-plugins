@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
@@ -62,7 +60,7 @@ class StalkerClient_AccountInfoScreen(Screen):
 		def getAccountInfoCB(result):
 			if result:
 				AccountInfo = ""
-				for i in [i for i in result.values() if isinstance(result, dict)]:
+				for i in [i for i in list(result.values()) if isinstance(result, dict)]:
 					AccountInfo += (str(i) + "\n") if (len(i) > 0) else ""
 					self["AccountInfo"].setText(AccountInfo)
 
@@ -107,7 +105,7 @@ class StalkerClient_ChannelContextMenu(Screen):
 		sid = int(self.service.getId())
 		tsid, onid = getTsidOnid()
 		haslink = int(int(self.service.m_http_temp_link) == 1 or int(self.service.m_load_balancing) == 1)
-		uri = self.service.getUrl(False).replace(':', '%3a')
+		uri = self.service.getUrl(False).replace(':','%3a')
 		name = self.service.name
 		self.service_ref = createStalkerSref(sid, tsid, onid, haslink, uri, name)
 
@@ -209,17 +207,17 @@ class StalkerClient_ChannelSelection(Screen):
 		self.skin = StalkerClient_ChannelSelection.skin_default_1080p if dh > 720 else StalkerClient_ChannelSelection.skin_default
 
 		self["actions"]  = ActionMap(["OkCancelActions", "WizardActions", "ColorActions", "MenuActions", "ChannelSelectEPGActions"], {
-			"ok": self.onKeyOK,
+			"ok"    : self.onKeyOK,
 			"cancel": self.onKeyCancel,
-			"up": self.onKeyUp,
-			"down": self.onKeyDown,
-			"left": self.onKeyLeft,
-			"right": self.onKeyRight,
-			"red": self.onKeyRed,
-			"green": self.onKeyGreen,
+			"up"    : self.onKeyUp,
+			"down"  : self.onKeyDown,
+			"left"  : self.onKeyLeft,
+			"right" : self.onKeyRight,
+			"red"   : self.onKeyRed,
+			"green" : self.onKeyGreen,
 			"yellow": self.onKeyYellow,
-			"blue": self.onKeyBlue,
-			"menu": self.onKeyMenu,
+			"blue"  : self.onKeyBlue,
+			"menu"  : self.onKeyMenu,
 			"showEPGList": self.onKeyEPG,
 		}, -1)
 
@@ -305,7 +303,7 @@ class StalkerClient_ChannelSelection(Screen):
 					print("[StalkerClient]", e)
 					genre[0].size = -1
 
-		new = (eListboxPythonMultiContent.TYPE_TEXT, genre[1][1] + genre[1][3], genre[1][2], 100, genre[1][4], 0, RT_HALIGN_RIGHT, str(genre[0].size))
+		new = (eListboxPythonMultiContent.TYPE_TEXT,genre[1][1] + genre[1][3], genre[1][2], 100, genre[1][4], 0, RT_HALIGN_RIGHT, str(genre[0].size))
 		genre.remove(genre[2])
 		genre.append(new)
 
@@ -368,12 +366,12 @@ class StalkerClient_ChannelSelection(Screen):
 					if isinstance(service, dict):
 						s = StalkerService(service)
 						self.scList.addItem(s)
-						if s.name == '':
+						if s.name is '':
 							need2reload = True
 					else:
 						need2reload = True
 
-				if page is self.m_last_page and len(items) is not int(total_items % self.m_max_page_items):
+				if page is self.m_last_page and len(items) != int(total_items % self.m_max_page_items):
 					need2reload = True
 
 				if need2reload:
@@ -517,7 +515,7 @@ class StalkerClient_ChannelSelection(Screen):
 			sid = int(service.getId())
 			tsid, onid = getTsidOnid()
 			haslink = int(int(service.m_http_temp_link) == 1 or int(service.m_load_balancing) == 1)
-			uri = uri.replace(':', '%3a')
+			uri = uri.replace(':','%3a')
 			name = service.name
 			self.scPlayerRef = createStalkerSref(sid, tsid, onid, haslink, uri, name)
 
@@ -580,6 +578,7 @@ class StalkerClient_ChannelSelection(Screen):
 		if self.scPlayerQuit:
 			self.session.nav.playService(self.beforeService)
 			print('[StalkerClient] player done!!')
+			self.scPlayerCur = None
 
 
 class StalkerBaseService(object):
@@ -697,10 +696,10 @@ def StalkerEntryComponent(entry, x, y, w, h):
 
 	if entry.isFolder():
 		size = str(entry.size) if entry.size > 0 else "loading"
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w - 100, h, 0, RT_HALIGN_LEFT, name))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, x + w - 100, y, 100, h, 0, RT_HALIGN_RIGHT, size))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT,x,y,w - 100,h,0,RT_HALIGN_LEFT, name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT,x + w - 100,y,100,h,0,RT_HALIGN_RIGHT, size))
 	else:
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT,x,y,w,h,0,RT_HALIGN_LEFT, name))
 	return res
 
 class StalkerList(MenuList):
@@ -751,7 +750,7 @@ class StalkerList(MenuList):
 			if int(self.page_last) < 2:
 				self.moveToIndex(self.item_last)
 			else:
-				self.item_refresh = True if int(self.page_last) != 1 else False
+				self.item_refresh = True if not int(self.page_last) == 1 else False
 				self.leftPage()
 
 	def downPage(self):
@@ -761,7 +760,7 @@ class StalkerList(MenuList):
 			if int(self.page_last) < 2:
 				self.moveToIndex(0)
 			else:
-				self.item_refresh = True if int(self.page_last) != 1 else False
+				self.item_refresh = True if not int(self.page_last) == 1 else False
 				self.rightPage()
 
 	def updateList(self, index = 0):

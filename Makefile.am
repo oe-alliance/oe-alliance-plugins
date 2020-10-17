@@ -299,7 +299,7 @@ SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup libvupldemo
 endif
 
 if VUZERO
-SUBDIRS += FirmwareUpgrade VuRemote
+SUBDIRS += FirmwareUpgrade VuRemote VuStalker
 endif
 
 if VUSOLO4K

@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
 from Components.config import config
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer
@@ -74,8 +72,8 @@ def sc_genres_cb(result):
 		print("[StalkerClient] got no genres.")
 
 def sc_authenticate_cb(result):
-	print("[StalkerClient] authenticated: %s" % ("OK" if result > 0 else "Fail"))
-	if result > 0:
+	print("[StalkerClient] authenticated: %s" % ("OK" if result is not None and result > 0 else "Fail"))
+	if result is not None and result > 0:
 		scpoll.task(sc_genres_cb, stalker.getGenres)
 		scinfo.epgdb.serviceListUpdated()
 		if config.plugins.stalker_client.numFavlist.value > 0:
