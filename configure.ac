@@ -465,6 +465,7 @@ witaispeechtotext/src/Makefile
 VuBluetoothSetup/Makefile
 VuBluetoothSetup/src/Makefile
 VuBluetoothSetup/src/vuduo4k/Makefile
+VuBluetoothSetup/src/vuduo4kse/Makefile
 VuBluetoothSetup/src/vusolo4k/Makefile
 VuBluetoothSetup/src/vuultimo4k/Makefile
 VuBluetoothSetup/src/vuuno4k/Makefile
@@ -476,6 +477,7 @@ VuBluetoothSetup/po/Makefile
 VuStalker/Makefile
 VuStalker/src/Makefile
 VuStalker/src/vuduo4k/Makefile
+VuStalker/src/vuduo4kse/Makefile
 VuStalker/src/vusolo4k/Makefile
 VuStalker/src/vuultimo4k/Makefile
 VuStalker/src/vuuno4k/Makefile
