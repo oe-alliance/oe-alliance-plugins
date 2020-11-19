@@ -14,7 +14,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V5.0-r4"
+Version = "V5.0-r5"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -2899,7 +2899,7 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 					s = os.statvfs(P2C)
 					if (s.f_bsize * s.f_bavail / 1024) < 100:
 						L4log("Error: Cache Directory near full")
-						return ""			
+						return ""
 					PD = os.path.join(P2C,os.path.basename(PD))
 					L4logE("save Picon",PD)
 					pil_image.save(PD)
@@ -8778,7 +8778,7 @@ class UpdateStatus(Screen):
 				getBilder()
 				rmFile(PICfritz)
 				getWWW()
-			self.StandbyChanged = Standby.inStandby 
+			self.StandbyChanged = Standby.inStandby
 			self.restartTimer()
 		if ConfigMode == True:
 			self.StatusTimer.startLongTimer(2)
@@ -8795,6 +8795,34 @@ class UpdateStatus(Screen):
 			self.ServiceTimer.start(int(LCD4linux.Delay.value)+500, True)
 		else:
 			self.ServiceTimer.start(int(LCD4linux.Delay.value), True)
+
+############# Helper functions
+	def _getProcVal(self, pathname, base=10):
+		val = None
+		try:
+			with open(pathname, 'r') as f:
+				val = int(f.read(), base)
+			if val >= 2 ** 31:
+				val -= 2 ** 32
+		except Exception as e:
+			pass
+		return val
+
+	def _getVal(self, pathname, info, infoVal, base=10):
+		return self._getProcVal(pathname, base=base) or info.getInfo(infoVal)
+
+	def _getValInt(self, pathname, info, infoVal, base=10, default=-1):
+		return self._getVal(pathname, info, infoVal, base) or default
+
+	def _getVideoHeight(self, info):
+		return self._getValInt("/proc/stb/vmpeg/0/yres", info, iServiceInformation.sVideoHeight, base=16)
+
+	def _getVideoWidth(self, info):
+		return self._getValInt("/proc/stb/vmpeg/0/xres", info, iServiceInformation.sVideoWidth, base=16)
+
+	def _getAspect(self, info):
+		return self._getValInt("/proc/stb/vmpeg/0/aspect", info, iServiceInformation.sAspect)
+############# End helper functions
 
 	def ServiceChange(self):
 		global ThreadRunning
@@ -8887,6 +8915,8 @@ class UpdateStatus(Screen):
 						self.Llength = seek.getLength()
 						self.Lposition = seek.getPlayPosition()
 						if self.Llength is not None:
+							if self.Llength == [0, 0]:
+								self.Llength = [-1, 7776000000L]
 							if self.Llength[1] >= 7776000000:
 								self.Llength[1] = 7776000000
 					else:
@@ -8899,14 +8929,23 @@ class UpdateStatus(Screen):
 						if self.ref != self.LsreftoString:
 							self.startBitrateData()
 					self.LgetName = info.getName()
-					if self.LsreftoString.startswith("1:"):
+					if self.LsreftoString.startswith("1:") and not self.Lpath:
 						self.Lprovider = info.getInfoString(iServiceInformation.sProvider)
 						self.LtransponderData = info.getInfoObject(iServiceInformation.sTransponderData)
+					elif self.Lpath and self.Lpath.startswith("http"):
+						self.LtransponderData = {'orbital_position': None, 'tuner_type': 'IPTV'}
+						try:
+							from utils import getIPTVProvider
+							self.Lprovider = getIPTVProvider(self.Lpath)
+						except ImportError:
+							pass
 					L4logE("self.Transponderdata2",self.LtransponderData)
-					self.LsVideoWidth = info.getInfo(iServiceInformation.sVideoWidth)
-					self.LsVideoHeight = info.getInfo(iServiceInformation.sVideoHeight)
-					self.LsIsCrypted = info.getInfo(iServiceInformation.sIsCrypted) 
-					self.LsAspect = info.getInfo(iServiceInformation.sAspect)
+					self.LsVideoWidth = self._getVideoWidth(info)
+					self.LsVideoHeight = self._getVideoHeight(info)
+					self.LsIsCrypted = info.getInfo(iServiceInformation.sIsCrypted)
+					self.LsAspect = self._getAspect(info)
+					if self.LsAspect == 1:
+						self.LsAspect = info.getInfo(iServiceInformation.sAspect)
 					self.LsTagAlbum = info.getInfoString(iServiceInformation.sTagAlbum)
 					self.LsTagTitle = info.getInfoString(iServiceInformation.sTagTitle)
 					self.LsTagArtist = info.getInfoString(iServiceInformation.sTagArtist)
@@ -8935,7 +8974,7 @@ class UpdateStatus(Screen):
 				if audio:
 					self.LaudioTracks = audio.getNumberOfTracks()
 					self.LaudioCurrentTrack = audio.getCurrentTrack()
-					if self.LaudioCurrentTrack is not None and self.LaudioCurrentTrack >= 0:	
+					if self.LaudioCurrentTrack is not None and self.LaudioCurrentTrack >= 0:
 						i = audio.getTrackInfo(self.LaudioCurrentTrack)
 						self.Laudiodescription = i.getDescription()
 						L4logE("Audio activ %d" % self.LaudioCurrentTrack, self.Laudiodescription)
@@ -8960,7 +8999,7 @@ class UpdateStatus(Screen):
 				self.LgetName = self.LsTagTitle
 				self.Llength = self.GPLlength
 				self.Lposition = self.GPLposition
-				self.Lpath = cjukeboxevent.CurrSource 
+				self.Lpath = cjukeboxevent.CurrSource
 			elif self.SonosRunning:
 				self.LsreftoString = "4097:0:0:0:0:0:0:0:0:0:Sonos"
 				self.Lchannel_name = "Sonos"
@@ -8976,7 +9015,7 @@ class UpdateStatus(Screen):
 				except:
 					self.SonosSoCo = None
 					L4log("Sonos Time Error",self.SonosTrack)
-				self.Lpath = "Sonos" 
+				self.Lpath = "Sonos"
 				self.LShortDescription = ""
 				self.LExtendedDescription = ""
 				self.LEventsDesc = None
@@ -9016,7 +9055,7 @@ class UpdateStatus(Screen):
 				else:
 					self.Llength = [1,tt*90000]
 					self.Lposition = [1,pt*90000]
-				self.Lpath = "MusicCast" 
+				self.Lpath = "MusicCast"
 				self.LShortDescription = ""
 				self.LExtendedDescription = ""
 				self.LEventsDesc = None
@@ -9049,7 +9088,7 @@ class UpdateStatus(Screen):
 			self.LsIsCrypted = None
 			self.LsAspect = None
 			self.Laudiodescription = None
-	
+
 		self.ServiceChangeRunning = False
 		L4logE("Service Change Time:", time() - tt)
 		if L4LdoThread == True:
@@ -9061,7 +9100,7 @@ class UpdateStatus(Screen):
 				L4log("Thread already running")
 				return
 			if BriefLCD.qsize()<=2:
-				BriefLCD.put(1) 
+				BriefLCD.put(1)
 			else:
 				L4log("LCD-Queue full, Thread hanging?")
 		else:
@@ -9307,7 +9346,7 @@ class UpdateStatus(Screen):
 				from traceback import format_exc
 				L4log("Error:",format_exc() )
 			i+=1
-				
+
 	def downloadwwwBoxCallback(self,element, page=""):
 		sR=sN=sS=""
 		dom=parseString(page)
@@ -9359,7 +9398,7 @@ class UpdateStatus(Screen):
 				from traceback import format_exc
 				L4log("Error:",format_exc() )
 			i+=1
-				
+
 	def downloadwwwBoxTimerCallback(self,element, page=""):
 		L4logE("download BoxTimer",element)
 		self.wwwBoxTimer = []
@@ -11751,13 +11790,13 @@ def LCD4linuxPIC(self,session):
 				ms = 1
 			font = ImageFont.truetype(ConfigFont, int(ConfigSize*ms)+8, encoding='unic') #5
 #			if self.Lpath and ":0:" not in self.Lpath and "//" not in self.Lpath: # Movie
-			if self.Llength is not None:
+			if self.Llength is not None and self.Llength[0]!=-1:
 				isVideoPlaying = 1
 				try:
 					length = self.Llength
 					position = self.Lposition
 					if length and position:
-						if length[1] > 0 and length[0] != -1:
+						if length[1] > 0:
 							if ConfigType[0] in ["2","4","6","8","9","A"]:
 								if ConfigType[0] in ["8","9","A"] or length[0] == 1:
 									dur = int(position[1]/90000)
@@ -12069,9 +12108,12 @@ def LCD4linuxPIC(self,session):
 				return
 			if transponderData.has_key("tuner_type"):
 				orbital=""
-				if (transponderData["tuner_type"] == "DVB-S") or (transponderData["tuner_type"] == "DVB-S2") or (transponderData["tuner_type"] == feSatellite ):
+				if transponderData["tuner_type"] == "IPTV":
+					orbital = transponderData["tuner_type"]
+					L4logE("Orbital1",orbital)
+				elif (transponderData["tuner_type"] in ("DVB-S", "DVB-S2")) or (transponderData["tuner_type"] == feSatellite):
 					orbital = transponderData["orbital_position"]
-					L4logE("Orbital",orbital)
+					L4logE("Orbital2",orbital)
 					orbital = int(orbital)
 					if orbital > 1800:
 						orbital = str((float(3600 - orbital))/10.0) + "W"
@@ -12096,13 +12138,13 @@ def LCD4linuxPIC(self,session):
 										SAT[position]=name
 										L4logE(position,name)
 						orbital = SAT.get(orbital,orbital)
-						L4logE("Orbital",orbital)
+						L4logE("Orbital2",orbital)
 				else:
 					if isinstance(transponderData["tuner_type"],int):
 						orbital = { feCable : 'DVB-C', feSatellite : 'DVB-S', feTerrestrial : 'DVB-T' }.get(transponderData["tuner_type"], "-")
 					else:
 						orbital = transponderData["tuner_type"]
-					L4logE("Orbital2",orbital)
+					L4logE("Orbital3",orbital)
 				font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 				w,h = self.draw[draw].textsize(Code_utf8(orbital), font=font)
 				if ConfigType[0] == "2" and os.path.isfile(os.path.join(LCD4linux.SatPath.value,str(orbital).replace(".","") + ".png")):
@@ -12404,25 +12446,18 @@ def LCD4linuxPIC(self,session):
 
 # Audio/Video
 	def putAV((ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigType, ConfigFont), draw, im):
-		def getAudio(description):
-			if description in ["AC3", "AC-3", "Dolby Digital", "AC-3 audio"]:
-				return "dolby.png"
-			elif "DTS-HD" in description:
-				return "dtsHD.png"
-			elif "DTS" in description:
-				return "dts.png"
-			elif description in ["Dolby Digital+", "AC3+"]:
-				return "dolbyplus.png"
-			else:
-				return "mpeg.png"
 
 		MAX_W,MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W/2)
 		if self.LsVideoWidth is not None and self.LsVideoHeight is not None:
-			dat = "mpeg.png"
+			dat = "audio/picon_default.png"
 			if self.Laudiodescription is not None:
-				dat = getAudio(self.Laudiodescription)
+				try:
+					from utils import getAudio
+					dat = getAudio(self.Laudiodescription)
+				except ImportError:
+					pass
 			Video = "%dx%d" % (self.LsVideoWidth,self.LsVideoHeight)
 			if len(Video)<6:
 				Video = ""
@@ -12709,7 +12744,7 @@ def LCD4linuxPIC(self,session):
 			MAX_W,MAX_H = self.im[im].size
 			if ConfigSplit == True:
 				MAX_W = int(MAX_W/2)
-			imW = Image.open(os.path.join(Data,"mute.png"))
+			imW = Image.open(os.path.join(Data,"audio/audio_off.png"))
 			xx,yy = imW.size
 			x=int(float(ConfigSize)/yy*xx)
 			imW = imW.resize((x,ConfigSize))
