@@ -8985,12 +8985,15 @@ class UpdateStatus(Screen):
 							L4logE("Audio %d" % idx, self.Laudiodescription)
 
 			self.LEventsDesc = None
-			if self.LsreftoString.startswith("4097:0") == False:
-				epgcache = eEPGCache.getInstance()
-				if epgcache is not None:
-					self.LEventsNext = epgcache.lookupEvent(['RIBDT', (self.LsreftoString, 0, -1, 1440)])
-					self.LEventsDesc = epgcache.lookupEvent(['IBDCTSERNX', (self.LsreftoString, 0, -1)])
-
+                        _LsreftoString = None                                                                                                                
+                                                                                                                                                             
+                        if self.LsreftoString.startswith(("4097:0", "5001:0", "5002:0")):                                                                    
+                                _LsreftoString = self.LsreftoString.replace("4097:0", "1:0", 1).replace("5001:0", "1:0", 1).replace("5002:0", "1:0", 1)      
+                                                                                                                                                             
+                        epgcache = eEPGCache.getInstance()                                                                                                   
+                        if epgcache is not None:                                                                                                             
+                                self.LEventsNext = epgcache.lookupEvent(['RIBDT', (_LsreftoString or self.LsreftoString, 0, -1, 1440)])                      
+                                self.LEventsDesc = epgcache.lookupEvent(['IBDCTSERNX', (_LsreftoString or self.LsreftoString, 0, -1)])
 		else:
 			if GPjukeboxOK == True and cjukeboxevent.LastStatus != "":
 				self.LsreftoString = "4097:0:0:0:0:0:0:0:0:0:" + cjukeboxevent.CurrSource
