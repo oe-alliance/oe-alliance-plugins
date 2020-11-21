@@ -14,7 +14,7 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-Version = "V5.0-r5"
+Version = "V5.0-r4"
 from __init__ import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -2857,7 +2857,7 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 			PIC.append(os.path.join(P2,name))
 			PIC.append(os.path.join(P2,name4))
 			fields = picon.split("_", 3)
-			if fields[0] == "4097":
+			if fields[0] in ("4097", "5001", "5002"):
 				fields[0] = "1"
 				PIC.append(os.path.join(P2,"_".join(fields)))
 			if len(P2A) > 3:
@@ -2867,7 +2867,7 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 				PIC.append(os.path.join(P2A,name))
 				PIC.append(os.path.join(P2A,name4))
 				fields = picon.split("_", 3)
-				if fields[0] == "4097":
+				if fields[0] in ("4097", "5001", "5002"):
 					fields[0] = "1"
 					PIC.append(os.path.join(P2A,"_".join(fields)))
 			fields = picon.split("_", 3)
@@ -5203,20 +5203,20 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 		self.mtime3 = 0.0
 
 		self.toggle = time()
-	
+
 		self.picload = ePicLoad()
 		if DPKG:
-			self.picload_conn = self.picload.PictureData.connect(self.setPictureCB)		
+			self.picload_conn = self.picload.PictureData.connect(self.setPictureCB)
 		else:
-			self.picload.PictureData.get().append(self.setPictureCB)		
+			self.picload.PictureData.get().append(self.setPictureCB)
 		sc = AVSwitch().getFramebufferScale()
 		self.picload.setPara((pic_w, pic_h, sc[0], sc[1], False, 1, '#00000000'))
-		
+
 		self.picload2 = ePicLoad()
 		if DPKG:
-			self.picload2_conn = self.picload2.PictureData.connect(self.setPictureCB2)		
+			self.picload2_conn = self.picload2.PictureData.connect(self.setPictureCB2)
 		else:
-			self.picload2.PictureData.get().append(self.setPictureCB2)		
+			self.picload2.PictureData.get().append(self.setPictureCB2)
 		sc = AVSwitch().getFramebufferScale()
 		self.picload2.setPara((pic_w, pic_h, sc[0], sc[1], False, 1, '#00000000'))
 
@@ -7822,11 +7822,11 @@ class LCDdisplayConfig(ConfigListScreen,Screen):
 		rmFile("%stft.bmp" % TMPL)
 		rmFiles(PIC + "*.*")
 		if Briefkasten.qsize()<=3:
-			Briefkasten.put(4) 
+			Briefkasten.put(4)
 		else:
 			L4log("Queue full, Thread hanging?")
 		if Briefkasten.qsize()<=3:
-			Briefkasten.put(6) 
+			Briefkasten.put(6)
 		else:
 			L4log("Queue full, Thread hanging?")
 
@@ -8822,7 +8822,7 @@ class UpdateStatus(Screen):
 
 	def _getAspect(self, info):
 		return self._getValInt("/proc/stb/vmpeg/0/aspect", info, iServiceInformation.sAspect)
-############# End helper functions
+############# End Helper functions
 
 	def ServiceChange(self):
 		global ThreadRunning
@@ -8955,6 +8955,7 @@ class UpdateStatus(Screen):
 					if event:
 						self.LShortDescription = event.getShortDescription()
 						self.LExtendedDescription = event.getExtendedDescription()
+
 				feinfo = service.frontendInfo()
 				if feinfo is not None:
 					self.LsignalQuality = feinfo.getFrontendInfo(iFrontendInformation.signalQuality)
@@ -8985,15 +8986,15 @@ class UpdateStatus(Screen):
 							L4logE("Audio %d" % idx, self.Laudiodescription)
 
 			self.LEventsDesc = None
-                        _LsreftoString = None                                                                                                                
-                                                                                                                                                             
-                        if self.LsreftoString.startswith(("4097:0", "5001:0", "5002:0")):                                                                    
-                                _LsreftoString = self.LsreftoString.replace("4097:0", "1:0", 1).replace("5001:0", "1:0", 1).replace("5002:0", "1:0", 1)      
-                                                                                                                                                             
-                        epgcache = eEPGCache.getInstance()                                                                                                   
-                        if epgcache is not None:                                                                                                             
-                                self.LEventsNext = epgcache.lookupEvent(['RIBDT', (_LsreftoString or self.LsreftoString, 0, -1, 1440)])                      
-                                self.LEventsDesc = epgcache.lookupEvent(['IBDCTSERNX', (_LsreftoString or self.LsreftoString, 0, -1)])
+			_LsreftoString = None
+
+			if self.LsreftoString.startswith(("4097:0", "5001:0", "5002:0")):
+				_LsreftoString = self.LsreftoString.replace("4097:0", "1:0", 1).replace("5001:0", "1:0", 1).replace("5002:0", "1:0", 1)
+
+			epgcache = eEPGCache.getInstance()
+			if epgcache is not None:
+				self.LEventsNext = epgcache.lookupEvent(['RIBDT', (_LsreftoString or self.LsreftoString, 0, -1, 1440)])
+				self.LEventsDesc = epgcache.lookupEvent(['IBDCTSERNX', (_LsreftoString or self.LsreftoString, 0, -1)])
 		else:
 			if GPjukeboxOK == True and cjukeboxevent.LastStatus != "":
 				self.LsreftoString = "4097:0:0:0:0:0:0:0:0:0:" + cjukeboxevent.CurrSource
@@ -10470,7 +10471,7 @@ def LCD4linuxPIC(self,session):
 					PIC.append(os.path.join(P2,name))
 					PIC.append(os.path.join(P2,name4))
 					fields = picon.split("_", 3)
-					if fields[0] == "4097":
+					if fields[0] in ("4097", "5001", "5002"):
 						fields[0] = "1"
 						PIC.append(os.path.join(P2,"_".join(fields)))
 					if len(P2A) > 3:
@@ -10479,7 +10480,7 @@ def LCD4linuxPIC(self,session):
 						PIC.append(os.path.join(P2A,name))
 						PIC.append(os.path.join(P2A,name4))
 						fields = picon.split("_", 3)
-						if fields[0] == "4097":
+						if fields[0] in ("4097", "5001", "5002"):
 							fields[0] = "1"
 							PIC.append(os.path.join(P2,"_".join(fields)))
 					fields = picon.split("_", 3)
@@ -11631,7 +11632,7 @@ def LCD4linuxPIC(self,session):
 				PIC.append(os.path.join(P2,name))
 				PIC.append(os.path.join(P2,name4))
 				fields = picon.split("_", 3)
-				if fields[0] == "4097":
+				if fields[0] in ("4097", "5001", "5002"):
 					fields[0] = "1"
 					PIC.append(os.path.join(P2,"_".join(fields)))
 				if len(P2A) > 3:
@@ -11641,7 +11642,7 @@ def LCD4linuxPIC(self,session):
 					PIC.append(os.path.join(P2A,name))
 					PIC.append(os.path.join(P2A,name4))
 					fields = picon.split("_", 3)
-					if fields[0] == "4097":
+					if fields[0] in ("4097", "5001", "5002"):
 						fields[0] = "1"
 						PIC.append(os.path.join(P2,"_".join(fields)))
 				fields = picon.split("_", 3)
@@ -12114,6 +12115,7 @@ def LCD4linuxPIC(self,session):
 				if transponderData["tuner_type"] == "IPTV":
 					orbital = transponderData["tuner_type"]
 					L4logE("Orbital1",orbital)
+
 				elif (transponderData["tuner_type"] in ("DVB-S", "DVB-S2")) or (transponderData["tuner_type"] == feSatellite):
 					orbital = transponderData["orbital_position"]
 					L4logE("Orbital2",orbital)
@@ -14020,9 +14022,13 @@ def LCD4linuxPIC(self,session):
 				isMediaPlayer = "radio"
 				self.CoverIm = None
 				self.CoverName = ["-","-"]
-			elif sref.startswith("4097:0") is True:
-				L4log("detected AudioMedia")
-				isMediaPlayer = "mp3"
+			elif sref.startswith(("4097:0", "5001:0", "5002:0")):
+				if self.Lpath and self.Lpath.startswith("http") and self.Llength and self.Llength[0] == -1:
+					L4log("detected IPTV")
+				else:
+					L4log("detected VOD Media")
+					isMediaPlayer = "mp3"
+
 			elif "0:0:0:0:0:0:0:0:0:" in sref:
 				L4log("detected Video")
 				isMediaPlayer = "record"
