@@ -4,5 +4,5 @@ Description: Download and install new Picons for your current bouquet channels. 
 Section: extra
 Priority: optional
 Maintainer: svox, mike99, jbleyel
-Depends: python-imaging, python-io, python-textutils, python-compression, pngquant
+Depends: python3-pillow, python3-io, python3-compression, pngquant
 OE: enigma2-plugin-extensions-piconsupdater
