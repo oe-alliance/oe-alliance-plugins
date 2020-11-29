@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="System" />
+	  </prerequisites>
+          <info>
+                    <author>Huevos</author>
+                    <name>About Boxbranding</name>
+                    <packagename>enigma2-plugin-systemplugins-aboutboxbranding</packagename>
+                    <shortdescription>View box branding data.</shortdescription>
+                    <description>View box branding data from the GUI.</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-systemplugins-aboutboxbranding" />
+	</files>
+</default>

@@ -234,6 +234,17 @@ Makefile
 3GModemManager/po/Makefile
 3GModemManager/meta/Makefile
 
+AboutBoxBranding/Makefile
+AboutBoxBranding/meta/Makefile
+#AboutBoxBranding/po/Makefile
+AboutBoxBranding/src/Makefile
+
+ABMCustomMixImporter/Makefile
+ABMCustomMixImporter/meta/Makefile
+ABMCustomMixImporter/po/Makefile
+ABMCustomMixImporter/src/Makefile
+ABMCustomMixImporter/mixes/Makefile
+
 AudioEffect/Makefile
 AudioEffect/src/Makefile
 AudioEffect/meta/Makefile
@@ -274,12 +285,6 @@ DMBlindscan/Makefile
 DMBlindscan/src/Makefile
 DMBlindscan/meta/Makefile
 DMBlindscan/po/Makefile
-
-ABMCustomMixImporter/Makefile
-ABMCustomMixImporter/meta/Makefile
-ABMCustomMixImporter/po/Makefile
-ABMCustomMixImporter/src/Makefile
-ABMCustomMixImporter/mixes/Makefile
 
 FirmwareUpgrade/Makefile
 FirmwareUpgrade/src/Makefile
