@@ -1,0 +1,5 @@
+Package: enigma2-plugin-systemplugins-aboutboxbranding
+Version: 1.0-r0
+Description: Display box branding info
+Maintainer: Huevos
+Depends: 
