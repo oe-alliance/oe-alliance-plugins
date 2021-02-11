@@ -2,6 +2,7 @@ History:
 5.0r5a (11.02.2021)
  Modifikationen von Mr.Servo @ OpenA.TV:
  - rechteckige Ziffernblätter sind nun erlaubt
+ - fehlende Clocks (also Lücken im Verzeichnis "data") sind nun erlaubt
  - bereits vorhandene Clock7 aktiviert
  - neue Clock8+9 ergänzt und aktiviert
  - neue Clock10+21 ergänzt und zum individuellen Download bereitgestellt
@@ -18,51 +19,51 @@ History:
  - extra Terminliste
  - LCD-Hntergrundfarbe einstellbar
  - mehr Farben/horiz.Positionen
- - Signalst�rkebar als Verlauf
- - Programmvortschritt/Lautst�rke schattiert
+ - Signalstärkebar als Verlauf
+ - Programmvortschritt/Lautstärke schattiert
  - Netatmo CO2 Visualisierung
  - Sonnenaufgang umgestellt auf openweathermap.org
- - LCD-OFF Zeiten f�r Wochentag/-ende
+ - LCD-OFF Zeiten für Wochentag/-ende
  - einige Fixes
- - sehr experimentell mit Einschr�nkungen: WWW-Internet Konverter
+ - sehr experimentell mit Einschränkungen: WWW-Internet Konverter
  r1 (08.06.): Fix Crash bei Nutzung 2.MP-Bild
  r2 (09.06.): Fix LCD Hintergrundfarbe ohne Funktion
- r3 (18.06.): Workaround f�r Kalender-Hintergrund-Verarbeitung ; Netatmo-CO2-Indikator + Wert ; Fix: u.U. Crash bei Bild-Erzeugung
+ r3 (18.06.): Workaround für Kalender-Hintergrund-Verarbeitung ; Netatmo-CO2-Indikator + Wert ; Fix: u.U. Crash bei Bild-Erzeugung
 3.4r0 (05.05.2013) Testrelease
- - intern komplett �berarbeitet (wegen Problemen im neuem OE2)
- r1 (06.05.): weiter basteln f�r's neue OE2
+ - intern komplett überarbeitet (wegen Problemen im neuem OE2)
+ r1 (06.05.): weiter basteln für's neue OE2
  r2 (10.05.): Fix: MP falsche Info-Anzeige bei Aufnahmen ; Netatmo-Plugin-Anbindung erst bei Datenabfrage
- r3 (13.05.): weiter basteln f�r's neue OE2
+ r3 (13.05.): weiter basteln für's neue OE2
  r4 (15.05.): Fix: Config-Konflikt mit Netatmo-Plugin
 3.3r0 (03.05.2013)
- - Netatmo Unterst�tzung (ben�tigt Netatmo-Plugin und HW www.netatmo.de)
+ - Netatmo Unterstützung (benötigt Netatmo-Plugin und HW www.netatmo.de)
  - Schriftarteinstellung bei weiteren Elementen
  - kleinere Anpassungen: zeige leere Mailboxen; 00:00 bei kurzen Services; WebIF f�r gedrehte LCDs berichtigt
  r1 (04.05.): Fix: Crash bei OSD mit neuem E2 (Screengrab backported)
 3.2r0 (06.04.2013)
- - Mail: IMAP m�glich
+ - Mail: IMAP möglich
  - WebIF: Element-Copy
  - Designelement Recheck (auch als Linie nutzbar)
  - Fritzcall erweiterte-Bildsuche @MatzeFro
  - MP: +Online, +Aufnahmen
- - Anzahl Threads pro LCD einstellbar (f�r Problemf�lle)
+ - Anzahl Threads pro LCD einstellbar (für Problemfälle)
  - Fixes/Backports
  r1 (07.04.): small fix
  r2 (11.04.): Fix: LCD2 QuickBild ohne Funktion
 3.1r0 (30.03.2013)
  - 2.Picon
- - FritzCall: Eintr�ge "�berleben" einen Neustart ; LCD f�r PopUp getrennt einstellbar
+ - FritzCall: Einträge "überleben" einen Neustart ; LCD für PopUp getrennt einstellbar
  - interne Optimierungen (u.a. 2 Elemente-Tasks je LCD)
  - Fix: Default-Provider-Picon
- - weitere kleinere �nderungen
- r1 (30.03.): fix Crash im Setup m�glich
- r2 (01.04.): 2 Tage-Wetter ; u.U. kein "ohne Hintergrundbild" f�r Standby/Media m�glich ; Termine u.U. nicht vom n�chsten Monat ; Sommerzeit Sonnenauf-/untergang
- r3 (01.04.): Elementeaufbau nach gro�en Elementen synchronisiert
+ - weitere kleinere Änderungen
+ r1 (30.03.): fix Crash im Setup möglich
+ r2 (01.04.): 2 Tage-Wetter ; u.U. kein "ohne Hintergrundbild" für Standby/Media möglich ; Termine u.U. nicht vom nächsten Monat ; Sommerzeit Sonnenauf-/untergang
+ r3 (01.04.): Elementeaufbau nach großen Elementen synchronisiert
 3.0r0 (09.03.2013)
- - Plugin-Konfigmen� mit Vorschau am TV
- - interne LCD/OLED Anbindung �ber Skin (Dank @Nobody28 f�r Idee und Unterst�tzung)
+ - Plugin-Konfigmenü mit Vorschau am TV
+ - interne LCD/OLED Anbindung über Skin (Dank @Nobody28 für Idee und Unterstützung)
  - einstellbare erweiterte Beschreibung (Dank @R2E2)
- - Kalender: Terminvorschau einstellbar (monats�bergreifend) ; Terminliste
+ - Kalender: Terminvorschau einstellbar (monatsübergreifend) ; Terminliste
  - Sonnenauf-/untergang
  - Fix: fehlerhaftes Reagieren bei nicht mehr vorhandenen Speicher-Devices ; ICS-Daten bei Jahr<1900
  r1 (10.03.): Sonnenaufgang auch horizontale Anordnung
@@ -70,105 +71,105 @@ History:
 2.9r0 (19.01.2013)
  - Pop-Mail
  - HDD (running)
- - WebIf: Crashdatei zeigen/l�schen
+ - WebIf: Crashdatei zeigen/löschen
  - WebIf: Global aufgeteilt
  - MP: +Moon,Devices
  - Kalender: zeige 7 Termintage-Ereignisse
- - 1 zus�tzliches Bildelement
+ - 1 zusätzliches Bildelement
  - Moontext, noCrypt, Prov-Picon +-Text
- r1 (26.01.): Idle:+Devices ; etwas Zeit gespart bei SPF-Bilderzeugung f�r WebIf ; "Quick-Aktualisierung" f�r Bildelemente
+ r1 (26.01.): Idle:+Devices ; etwas Zeit gespart bei SPF-Bilderzeugung für WebIf ; "Quick-Aktualisierung" für Bildelemente
  r2 (27.01.): Fix: SPF als LCD2 geht nicht
  r3 (16.02.): kleine Optikfix ; Mail: +2 , Abrufinterval , Anzeigename
  r4 (17.02.): Mail: nicht alle Pop-Server funktionierten ; Workaround gegen doppelte Fritzcall-Meldungen
- r5 (20.02.): Mail: weitere Pop-Server-Anpassung ; Nacht Hintergrundbild m�glich
+ r5 (20.02.): Mail: weitere Pop-Server-Anpassung ; Nacht Hintergrundbild möglich
 2.8r0 (01.01.2013)
  - Provider
  - Sat-Picon
  - Mond-Phase
  - 9 neue hor. Ausrichtungen 10% - 90%
- - 9 Schirme (f�r 5-9 keine Schirmkombinationen)
- - Kalender: mehr Gestaltungsm�glichkeiten
+ - 9 Schirme (für 5-9 keine Schirmkombinationen)
+ - Kalender: mehr Gestaltungsmöglichkeiten
  - Aufnahmeanzeige kann auch ein Bild sein
  - Definition von 3 Schriftarten und Zuweisung zu (ersteinmal einigen) Elementen
- - weitere Anpassungen f�r internes TFT-LCD
+ - weitere Anpassungen für internes TFT-LCD
  - SPF107H alt (FW1003)
- !!! es werden keine Picons f�r Satpos, Provider und Mondphase mitgeliefert !!!
-2.7r0 (21.12.)
+ !!! es werden keine Picons für Satpos, Provider und Mondphase mitgeliefert !!!
+2.7r0 (21.12.2012)
  - Kalender mit iCal-Anzeige (lokales Verzeichnis + 2x http-Url)
  - besseres Crash Logging/Info/Handling
  - 2.Wetter + 2.Uhrzeit
  - Sat-Position
  - 5.Schirm
- - Unterst�tzung "Buck's" internes TFT-LCD (exp.)
+ - Unterstützung "Buck's" internes TFT-LCD (exp.)
  - noch ein OpenWebIF Versuch
- - WebIF-Refresh mit Javascript f�r "flimmerfreie" Aktualisierung
+ - WebIF-Refresh mit Javascript für "flimmerfreie" Aktualisierung
  - Fix: MP Crash bei Sonderzeichen
  - modifizierte Installation
- - WebIF: benutzerdefinierte Bildgr��e; Refresh-Zeit; Schirm-Wahl
+ - WebIF: benutzerdefinierte Bildgröße; Refresh-Zeit; Schirm-Wahl
  r1 (22.12.): Fix: Kalenderaktualisierung geht u.U. nicht
  r2 (24.12.): Bild2 kann auch ein Verzeichnis/Diashow sein; verz�gerter WebIF-Init
-   Fix: internes TFT-LCD; FritzBild wird gel�scht; Configeintr�ge werden nicht immer eingeblendet; Einstellung "Bilder Rekursiv" keine Funktion
-2.6r0 (04.11.)
+   Fix: internes TFT-LCD; FritzBild wird gelöscht; Configeintr�ge werden nicht immer eingeblendet; Einstellung "Bilder Rekursiv" keine Funktion
+2.6r0 (04.11.2012)
  - direkte FritzCall-Registrierung ab V703
  - FritzBilder vertikal + horizontale Position
  - Anruferbildname kann auch Anrufername sein
  - Wetter-Icon Zoom
  - Wochentag (Uhreneinstellung muss angepasst werden)
  r1 (04.11.): kleine Wetterfixes
- r2 (23.11.): Fix: MSN liefert keine gef�hlte Temperatur; Logging beim Pluginstart
-2.5r0 (29.09.)
- - Popup Text (Text setzen �ber WebIF)
+ r2 (23.11.): Fix: MSN liefert keine gefühlte Temperatur; Logging beim Pluginstart
+2.5r0 (29.09.2012)
+ - Popup Text (Text setzen über WebIF)
  - 5 Tage Wetter
- - Wetteranzeige mit Ort und gef�hlte Temperatur
+ - Wetteranzeige mit Ort und gefühlte Temperatur
  - aktiver Coverdownload
  - FritzCall Anrufbilder-Liste
  - Fixes: zeige aktiven Audiotyp; Wettercity Umlaute; Wetteraktualisierung; Ping; WebIF-LCD2only; usw.
  r1 (30.09.): Import alter Konfig's entfernt > E2-Restart Konfig-Problem?
  r2 (02.10.): Fix: crash ohne Config-Datei
- r3 (03.10.): Cover: maximale H�he einstellbar
- r4 (12.10.): Wetter: Zoom f�r Extra Info + Regenwahrscheinlichkeit ; Differenz f�r gef�hlte Temp einstellbar
+ r3 (03.10.): Cover: maximale Höhe einstellbar
+ r4 (12.10.): Wetter: Zoom für Extra Info + Regenwahrscheinlichkeit ; Differenz f�r gef�hlte Temp einstellbar
  r5 (13.10.): Fix: vorhandene Cover werden nicht beachtet und immer nur heruntergeladen
- r6 (13.10.): Wetter: Farbeinstellung f�r Extra-Info + Regenw.
- r7 (21.10.): alternativer LCD Check f�r Kernel ohne USBFS-Support
-2.4r0 (28.08.)
+ r6 (13.10.): Wetter: Farbeinstellung für Extra-Info + Regenw.
+ r7 (21.10.): alternativer LCD Check für Kernel ohne USBFS-Support
+2.4r0 (28.08.2012)
  - Config WebIF
  - FritzCall
  - Signalquality Bar
  - Wetterumstellung auf MSN (Google hat Dienst eingestellt)
  r1: Fix: kein Online-Ping ohne OSD; Wetter-Linie einstellbar
  r2 (29.8.): Fix: alternatives Wetterpiconverzeichnis wird nicht benutzt; bessere Temperaturausrichtung; Anzeige Regenwahrscheinlichkeit
- r3 (31.8.): Bild Fullscreen/Gr��e bis 1024; Datum/Uhrzeit Abst�nde; einige nicht unterst�tzte Wetter Sprachen auf Englisch gesetzt
- r4 (07.9.): Fritz: Fix:Verzeichnisauswahl,Schirmunabh�ngig,schnellere Anzeige ; Config-Webif Abh�ngigkeiten verarbeiten; u.a....
- r5 (08.9.): Fix: Doppeltastenschalter (Mod2 Fritz-Schirmauswahl wieder zur�ck)
- r6 (09.9.): Fix: HTTP-Bild mit User:pass@ zur�ck zur alten Version
+ r3 (31.8.): Bild Fullscreen/Größe bis 1024; Datum/Uhrzeit Abstände; einige nicht unterstützte Wetter Sprachen auf Englisch gesetzt
+ r4 (07.9.): Fritz: Fix:Verzeichnisauswahl,Schirmunabhängig,schnellere Anzeige ; Config-Webif Abhängigkeiten verarbeiten; u.a....
+ r5 (08.9.): Fix: Doppeltastenschalter (Mod2 Fritz-Schirmauswahl wieder zurück)
+ r6 (09.9.): Fix: HTTP-Bild mit User:pass@ zurück zur alten Version
 2.3r0 (11.08.)
  - LCD Einstellung nur Bilderzeugung (nur Web-Zugriff, ohne USB-LCD-Hardware)
  - Audio/Video Info
  - Online Status (Ping 5xTCP/IP-Namen)
- - Lautst�rke-Bar
+ - Lautstärke-Bar
  - OpenWebif kann benutzt werden
  r1: Fehler bei Bild2/3 im Standby
-2.2r0 (19.06.)
+2.2r0 (19.06.2012)
  - Analog-Uhr (6 Designs)
  - (Sensor)info + CPU%/Load
- - Fortschittbar: 3 Textgr��en; Zahlwert �ber/unter Bar
+ - Fortschittbar: 3 Textgrößen; Zahlwert über/unter Bar
  - Programmname mehrzeilig
  - Einstellung zeige OSD in welchem Mode
  - Einstellung ob und welches LCD als Bild gespeichert werden soll (spart etwas Zeit, wenn nicht ben�tigt)
- - Einstellung recursives Durchsuchen des Bildverzeichnisses (f�r Diashow), aber Vorsicht zu bei vielen Dateien!
+ - Einstellung recursives Durchsuchen des Bildverzeichnisses (für Diashow), aber Vorsicht zu bei vielen Dateien!
  - MP,Standby: (Sensor)info
  - MP: Oscam.lcd
- - Workaround f�r nicht gespeicherte Zeiteinstellungen
+ - Workaround für nicht gespeicherte Zeiteinstellungen
  r1: Analoguhr Zwischenwerte Stundenzeiger
  r2: Fix: Anzeige Textdateien ohne Fonteinstellung
- r3: (01.07.) N�chste Programminfo: Mini-EPG ; Progressbar: aktuelle Position (00:00)
-2.1r0 (01.05.)
- - bei 2 Pearl LCD: LCD mit der kleinsten Seriennummer wird LCD1 (manuell Tauschen: "Help" im Men�)
+ r3: (01.07.) Nächste Programminfo: Mini-EPG ; Progressbar: aktuelle Position (00:00)
+2.1r0 (01.05.2012)
+ - bei 2 Pearl LCD: LCD mit der kleinsten Seriennummer wird LCD1 (manuell Tauschen: "Help" im Menü)
  - normale Standard-Picon nun auch Transparent
  - Einstellung Picon Fullscreen
  - Anzeige: erweiterte Beschreibung
  - Wetter "Aktuelle Temperatur" mit/ohne "C"
- - Cover: .flac Unterst�tzung
+ - Cover: .flac Unterstützung
  - Cover: Senderlogo bei Aufnahmen
  - Schirmwechseltaste Einstellung: Lang Vorspultaste
  r1: - Cover: EMC-fix; WebRadioFS
@@ -176,159 +177,159 @@ History:
  - Debug-Filelogging
  r2: fix: OSD beschneiden
  r3-OE2.0: fix: Memoryleck bei Nutzung von Pearl-LCD
- r4: - fix: Crash bei "ok" im Men� ; Redesign der Hintergrundprozess-Steuerung
-2.0r0 (13.04.)
+ r4: - fix: Crash bei "ok" im Menü ; Redesign der Hintergrundprozess-Steuerung
+2.0r0 (13.04.2012)
  - Redesign der Pearl-LCD-Ansteuerung. Es wird kein lcd4linux-Daemon mehr verwendet und das LCD direkt angesteuert. Daher ist libusb nun auch Grundvoraussetzung (wie bei Samsung)
  r1: Fix: Bild3 Dateiauswahl fehlerhaft ; Timeranzeigetyp (mit/ohne Vorlaufzeit) einstellbar
- r2: unn�tiger Crash wenn libusb nicht ordentlich installiert
-1.4r0 (09.04.)
+ r2: unnötiger Crash wenn libusb nicht ordentlich installiert
+1.4r0 (09.04.2012)
  - Bildersortierung alphabetisch/Zufall
- - Skalierungsqualit�t einstellbar
+ - Skalierungsqualität einstellbar
  - 3.Bild
  - MP Textdatei
  - Standard-Coverdatei einstellbar
  - unterschiedliche Schirm-Wechselzeiten On/Standby
- - Piconeinstellung angepasst (z.B.kein Seitenverh�ltnis mehr einstellbar, daf�r Position), also neu einstellen!
+ - Piconeinstellung angepasst (z.B.kein Seitenverhältnis mehr einstellbar, daf�r Position), also neu einstellen!
  - Zeichensatz (.ttf) einstellbar
  - Samsung-LCD: bessere Erkennung einer verlorenen Verbindung
- - 2 Samsung-LCD gleichen Types k�nnen zeitgleich angesteuert werden
+ - 2 Samsung-LCD gleichen Types können zeitgleich angesteuert werden
  - "Stotter"-Live-TV (Spielerchen)
-1.3r0 (16.03.)
+1.3r0 (16.03.2012)
  - MP Coveranzeige (Dank an R2E2)
  - MP Tunerbar
  - Aufgenommen: SPF-85P
  - OSD kann beschnitten werden (transparent/schwarz)
- - Einstellung, wenn man 32bit transparente Picon nutzen m�chte und weis was das bedeutet.
+ - Einstellung, wenn man 32bit transparente Picon nutzen möchte und weis was das bedeutet.
  - Fix: kein Hintergrundbild im Standby/MP wenn im On-Modus nichts definiert
- r1: zur�ck zu RGB Erzeugung ohne Alpha, ist wohl nicht n�tig und scheint etwas schneller
+ r1: zurück zu RGB Erzeugung ohne Alpha, ist wohl nicht nötig und scheint etwas schneller
  r2: etwas bessere Covererkennung
  r3: Fix: Hintergrundbild2 wird auf LCD1 angezeigt
-1.2r0 (04.03.)
- - transparentes Wetter - DM800hd nur eingeschr�nkt > 24bit Modus (Icons nicht transparent, da 32bit PNG nicht m�glich)
+1.2r0 (04.03.2012)
+ - transparentes Wetter - DM800hd nur eingeschränkt > 24bit Modus (Icons nicht transparent, da 32bit PNG nicht möglich)
  - Wetter Temperaturfarbe einstellbar
  - vertikale Wetterbar
- - 270�
+ - 270Ü
  - aufgenommen: SPF-700T
- - Datei-Browser f�r alle Dateiangaben
- - im Plugin bl�ttern mit Bouquet-Tasten
+ - Datei-Browser für alle Dateiangaben
+ - im Plugin blättern mit Bouquet-Tasten
  - MP eigenes Hintergrundbild
  - 3.Textdatei / 2.Bild
- r1: Fix: Crash im Dateibrowser m�glich
-1.1r0 (24.02.)
+ r1: Fix: Crash im Dateibrowser möglich
+1.1r0 (24.02.2012)
  - Abfrage/Anzeige von eigenen Meteo-Informationen (www.meteohub.de) @compilator
  - Tuner Nutzungsbar
  - Datenspeicheransicht
- - Hintergrundbild einstellbar (muss LCD-Aufl�sung haben)
- - alternativer Pfad f�r Wetterpicons einstellbar (Picons nicht �berschreiben bei Update)
- . (Picons k�nnen nun auch ".png" sein, weis aber nicht ob die image-lib auf allen Boxen Alphachannel unterst�tzt, also testen)
+ - Hintergrundbild einstellbar (muss LCD-Auflösung haben)
+ - alternativer Pfad für Wetterpicons einstellbar (Picons nicht überschreiben bei Update)
+ . (Picons können nun auch ".png" sein, weis aber nicht ob die image-lib auf allen Boxen Alphachannel unterstützt, also testen)
  . existieren *_night.* Icons, werden diese zwischen 19 und 7 Uhr verwendet
- - Programminfos auch mit L�ngenangabe
- - Einstellung Fastmode; interner Takt = 2s; alle Zeiten m�ssen selber umgerechnet werden; Zeit/5*2
+ - Programminfos auch mit Längenangabe
+ - Einstellung Fastmode; interner Takt = 2s; alle Zeiten müssen selber umgerechnet werden; Zeit/5*2
  - Pearl kann neben einem Samsung nun auch LCD2 sein
  r1: Tunerbar auch nur mit aktiven Tunern
-1.0r0 (11.02.)
- - kleines Konfigmanagement (Men�-Taste) / eigene Konfigdatei (/etc/enigma2/lcd4linux)
+1.0r0 (11.02.2012)
+ - kleines Konfigmanagement (Menü-Taste) / eigene Konfigdatei (/etc/enigma2/lcd4linux)
  - SPF-72H, SPF-85H aufgenommen
  - MP: Info1 zeigt Aufnahmedaten
  - MP: Wetter
  - WebIF: Parameter width/height/file z.B. http;//ip.der.box/lcd4linux?width=640&file=dpf2.jpg
  r1: fix: Wetterausrichtung + Crash ohne Channelname; Sensorinfo auch 2zeilig; next Timer halb rechts
-0.9r0 (05.02.)
- - Wetter Gr��e/Ausrichtung & nur Temp
- - check LAN f�r Wetterdownload
- - Klappen-Design-Uhr (Danke .:TBX:. f�r den Ideenlink)
+0.9r0 (05.02.2012)
+ - Wetter Größe/Ausrichtung & nur Temp
+ - check LAN für Wetterdownload
+ - Klappen-Design-Uhr (Danke .:TBX:. für den Ideenlink)
  - MP-Einstellung Bild
  - bei Display aus / zeitgesteuertem Displayaus wird ein schwarzes Bild erzeugt
  - Radiomodus ist kein MP mehr
  - ecm.info
- - fix: keine Anzeige "n�chste Aufnahme" / MP ohne Record-Ecke
+ - fix: keine Anzeige "nächste Aufnahme" / MP ohne Record-Ecke
  r1: fix: unterschiedlicher WetterZoom wird bei Standby/On nicht beachtet
- r2: n�chste Aufnahme Anzahl / SPF-105P aufgenommen / Klappen-Uhr-�nderung (DM800hd geht jetzt auch)
-0.8r0 (28.01.)
- - Samsung-Fotorahmen Unterst�tzung (experimental)
+ r2: nächste Aufnahme Anzahl / SPF-105P aufgenommen / Klappen-Uhr-�nderung (DM800hd geht jetzt auch)
+0.8r0 (28.01.2012)
+ - Samsung-Fotorahmen Unterstützung (experimental)
  - eigene Mediaplayer-Einstellung (als erster Anfang)
- - viele �nderungen bei den Einstellungen (neu Signalpegel, Temeratur, Drehzahl, Display drehen)
- - sehr umfangreiche �nderungen wegen Aufl�sungsunabh�ngigkeit / einige Fixes
- r1: Einstellung f�r alte 87H ID (Firmware 1004)
- r2: Fix: Picon abgeschnitten bei Anzeige unten // Fix: st�ndiger Bildaufbau im Standby bei OSD-Ein // Ausrichtung Tuner/Sensor-Info // Doppelschalt-Keys im Mediaplayermode deaktiviert und generell ausschaltbar // Fix: MP Anzeigen auf LCD2
- r3: Fix: Dauerrestart Pearl bei nicht eingeschalteten Samsung // Wetterrefresh 2/h // MP-Einstellung Uhr // keine Verwendung der DMM-Sensorbibliothek // n�chste Aufnahme auch im On-Modus // etwas schnelleres OSD-Grab einschaltbar, aber niedrige Qualit�t, sinnvoll nur f�r Samsung-LCDs // alternativ 2.Piconordner einstellbar
-0.7r0 (19.01.)
- - enth�lt neuen lcd4linux Daemon (Danke @loomes)
+ - viele Änderungen bei den Einstellungen (neu Signalpegel, Temeratur, Drehzahl, Display drehen)
+ - sehr umfangreiche Änderungen wegen Auflösungsunabhängigkeit / einige Fixes
+ r1: Einstellung für alte 87H ID (Firmware 1004)
+ r2: Fix: Picon abgeschnitten bei Anzeige unten // Fix: ständiger Bildaufbau im Standby bei OSD-Ein // Ausrichtung Tuner/Sensor-Info // Doppelschalt-Keys im Mediaplayermode deaktiviert und generell ausschaltbar // Fix: MP Anzeigen auf LCD2
+ r3: Fix: Dauerrestart Pearl bei nicht eingeschalteten Samsung // Wetterrefresh 2/h // MP-Einstellung Uhr // keine Verwendung der DMM-Sensorbibliothek // nächste Aufnahme auch im On-Modus // etwas schnelleres OSD-Grab einschaltbar, aber niedrige Qualit�t, sinnvoll nur f�r Samsung-LCDs // alternativ 2.Piconordner einstellbar
+0.7r0 (19.01.2012)
+ - enthält neuen lcd4linux Daemon (Danke @loomes)
  - 2. Textdatei anzeigbar
- - Wetter erlaubt Umlaute und andere L�nder/Sprachen (Danke @compilator)
+ - Wetter erlaubt Umlaute und andere Länder/Sprachen (Danke @compilator)
  - aktueller Service/Fortschritt benutzt EPG
  - lcd4linux (Re)Start als Thread
  - 2 x Taste innerhalb 2s
- Zur�ckspulen = LCD Backlight aus/ein
- Vorspulen = LCD Schirm bl�ttern
- - OSD deaktiv wenn Bilddatei "fritz" enth�lt
+ Zurückspulen = LCD Backlight aus/ein
+ Vorspulen = LCD Schirm blättern
+ - OSD deaktiv wenn Bilddatei "fritz" enthält
  - wenn Webinterface installiert:
  http://ip.der.box/lcd4linux = 3s Refresh (IE cached leider, Firefox ok)
  http://ip.der.box/lcd4linux/dpf.png = Original zum selber Laden
  r1: ohne EPG verwende Serviceinfo
-0.6-r0 (13.01.)
+0.6-r0 (13.01.2012)
  - OSD Anzeige
- - Einstellungsdialog modifiziert (Mehrseitenanzeige bl�ttern "Blau" )
- - Zeitbereich f�r LCD aus
+ - Einstellungsdialog modifiziert (Mehrseitenanzeige blättern "Blau" )
+ - Zeitbereich für LCD aus
  - 4 Schirme
- - Picon->Sendername Textgr��e einstellbar
+ - Picon->Sendername Textgröße einstellbar
  - Fix: wenn Wetter ausgeschaltet, kein Internetzugriff
- r1: (15.01.)
- - LCD-Zeitaus f�r On/Standby unterschiedlich
- - Wetter Darstellungsart f�r On/Standby unterschiedlich
- - N�chste Programm Info
+ r1: (15.01.2012)
+ - LCD-Zeitaus für On/Standby unterschiedlich
+ - Wetter Darstellungsart für On/Standby unterschiedlich
+ - Nächste Programm Info
  - zeige umbenannte Sendernamen
- - zeigte nicht alle OSD (Title&Skin-Namen werden zur Pr�fung herangezogen)
- r2: Fix: Crash bei N�chste Programminfo m�glich
-0.5-r0 (07.01.)
- - Programminfo max Zeilenzahl einstellbar / �berlange W�rter verkleinert
- - lcd4linux DemonCheck falls LCD zur�ckgesetzt wurde oder h�ngt - Neustart
+ - zeigte nicht alle OSD (Title&Skin-Namen werden zur Prüfung herangezogen)
+ r2: Fix: Crash bei Nächste Programminfo möglich
+0.5-r0 (07.01.2012)
+ - Programminfo max Zeilenzahl einstellbar / überlange Wörter verkleinert
+ - lcd4linux DemonCheck falls LCD zurückgesetzt wurde oder hängt - Neustart
  - HTTP Text-URL anzeigbar (nur reiner Text, kein HTML-Parsing)
  - Bilderverzeichnis alphabetisch sortiert
- - Wechselzeit f�r jeden Schirm einstellbar
+ - Wechselzeit für jeden Schirm einstellbar
  - Wetter aktuell Voll
  r1: Demontest per Default AUS; fix: Crash bei Picon
  r2: Demoncheck etwas unempfindlicher; Logfile /tmp/LCD4log.txt
  r3: fix: Crash bei Bildwechselzeitauswahl
- r4: Bildfile�nderung triggert (l�st ein Refresh aus)
-0.4-r0 (03.01.)
- - gleichzeitige Nutzung von 2 LCD-Displays unterst�tzt
- - Wetter gro�, 4 Tage oder Aktuell
+ r4: Bildfileänderung triggert (löst ein Refresh aus)
+0.4-r0 (03.01.2012)
+ - gleichzeitige Nutzung von 2 LCD-Displays unterstützt
+ - Wetter groß, 4 Tage oder Aktuell
  - Fortschrittsbar mit Restminuten oder Prozent
  - nur Datum einstellbar
  r1: miniupdate, fix refresh Bar bei Videoplay, Textfile rechts, Sendername passt immer
- r2: Programminfo Zeilenl�nge gr��enabh�ngig
+ r2: Programminfo Zeilenlänge größenabhängig
  r3: fix: kein Picon bei umbenannten Sendern; isRecording-Ecke
- r4: gleiche Informationen auf LCD 1 und LCD 2 m�glich
+ r4: gleiche Informationen auf LCD 1 und LCD 2 möglich
 0.3-r0 (01.01.2012)
  - Fortschrittsbar beim Videoabspielen
- - Dateiname f�r Textfile definierbar On/Standby
+ - Dateiname für Textfile definierbar On/Standby
  - Uhrzeit Ausrichtung links/mitte/rechts
  - Bild, Verzeichnis mit Bildern oder HTTP-URL-Bild anzeigen
  - lcd4linux-demon Refreshrate einstellbar (3s ist aber optimal)
- - bis 3 Schirme, unterschiedlich Anzahl f�r On/Standby
- - cached WetterBar Erzeugung (spart viel Ausf�hrungszeit)
+ - bis 3 Schirme, unterschiedlich Anzahl für On/Standby
+ - cached WetterBar Erzeugung (spart viel Ausführungszeit)
  - Bilderzeugung im eigenen Thread (Experimental!)
-0.2-r0 (28.12.)
+0.2-r0 (28.12.2011)
  - Sendernummer
  - Picon Ausrichtung (links/mitte/rechts)
  - kein Picon -> Sendername
  - Senderinfo Zeit ausschaltbar
- - Anzahl Aufnahmen bei "n�chste Aufnahme"
+ - Anzahl Aufnahmen bei "nächste Aufnahme"
  - Google Wettervorhersage
  - os***.lcd Ausgabe
  - Multiscreen (wechselnd 2 Anzeigen)
  - Uhrzeit auch mit Datum
- r1: Picongr��e einstellbar; Fix: Crash beim Textfile
-0.1-r0 (26.12.)
+ r1: Picongröße einstellbar; Fix: Crash beim Textfile
+0.1-r0 (26.12.2011)
  - Farben einstellbar
  - Fortschrittsbalken
- - Mehrsprachenunterst�tzung
+ - Mehrsprachenunterstützung
  - Inhalt einer Textdatei anzeigen /tmp/lcd4linux.txt (von extern bescripten)
- - Seitenverh�ltnis vom Picon kann eingehalten werden
- - Standby zeige n�chste Aufnahme
-0.0 (23.12)
+ - Seitenverhältnis vom Picon kann eingehalten werden
+ - Standby zeige nächste Aufnahme
+0.0 (23.12.2011)
  r1 : bessere Restartfunktion
- r2 : Fix: Crash beim Start m�glich
+ r2 : Fix: Crash beim Start möglich
  r3 : Fix: komische Zeichen im Sendernamen
- r4 : Fix: Sendername linsb�ndig wenn zu breit f�r Mitte
+ r4 : Fix: Sendername linsbündig wenn zu breit für Mitte
