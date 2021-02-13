@@ -11231,10 +11231,10 @@ def LCD4linuxPIC(self,session):
 					if ConfigType[:3] == "521":
 						if "+" in ConfigType: # means weekday in combination with date
 							now = Code_utf8(_(strftime("%A")))
-							font = ImageFont.truetype(ConfigFont, int(y/6), encoding='unic')
+							font = ImageFont.truetype(ConfigFont, int(ConfigSize/3), encoding='unic')
 						else:                 # means weekday in clockface only
 							now = Code_utf8(_(strftime("%a")))
-							font = ImageFont.truetype(ConfigFont, int(y/9), encoding='unic')
+							font = ImageFont.truetype(ConfigFont, int(ConfigSize/5), encoding='unic')
 						w,h = self.draw[draw].textsize(now, font=font)
 						if "+" in ConfigType: # means weekday in combination with date
 							x1 = POSX+int(x/2)-int(w*1.1)
@@ -11274,7 +11274,7 @@ def LCD4linuxPIC(self,session):
 					# Date underneath clockface
 					if ConfigType[:2] == "52":
 						now = strftime(_("%d.%m.%Y"))
-						font = ImageFont.truetype(ConfigFont, int(y/6), encoding='unic')
+						font = ImageFont.truetype(ConfigFont, int(ConfigSize/3), encoding='unic')
 						w,h = self.draw[draw].textsize(now, font=font)
 						if "+" in ConfigType: # means weekday in combination with date
 							x1 = POSX+int(x/2)
