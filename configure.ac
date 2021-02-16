@@ -288,7 +288,6 @@ DMBlindscan/po/Makefile
 EPGTranslator/Makefile
 EPGTranslator/meta/Makefile
 EPGTranslator/src/Makefile
-EPGTranslator/src/Makefile
 EPGTranslator/src/pic/Makefile
 EPGTranslator/src/pic/buttons/Makefile
 EPGTranslator/src/pic/flag/Makefile
