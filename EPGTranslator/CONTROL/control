@@ -1,0 +1,5 @@
+Package: enigma2-plugin-extensions-epgtranslator
+Version: 1.0-r0
+Description: epgtranslator...
+Maintainer: OpenViX
+Depends: 
