@@ -20,5 +20,8 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: ..\n"
 
+msgid "%a %e %b  %-H:%M"
+msgstr ""
+
 msgid "Save"
 msgstr ""
