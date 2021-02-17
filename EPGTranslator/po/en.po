@@ -1,0 +1,222 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2021 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-17 00:23+0000\n"
+"PO-Revision-Date: 2021-02-17 00:23+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Afrikaans"
+msgstr "Afrikaans"
+
+msgid "Albanian"
+msgstr "Albanian"
+
+msgid "Arabic"
+msgstr "Arabic"
+
+msgid "Azerbaijani"
+msgstr "Azerbaijani"
+
+msgid "Basque"
+msgstr "Basque"
+
+msgid "Belarusian"
+msgstr "Belarusian"
+
+msgid "Bosnian"
+msgstr "Bosnian"
+
+msgid "Bulgarian"
+msgstr "Bulgarian"
+
+msgid "Cache cleared"
+msgstr "Cache cleared"
+
+msgid "Cache timeout hours (0 == while valid):"
+msgstr "Cache timeout hours (0 == while valid):"
+
+msgid "Catalan"
+msgstr "Catalan"
+
+msgid "Cebuano"
+msgstr "Cebuano"
+
+msgid "Clear cache"
+msgstr "Clear cache"
+
+msgid "Croatian"
+msgstr "Croatian"
+
+msgid "Czech"
+msgstr "Czech"
+
+msgid "Danish"
+msgstr "Danish"
+
+msgid "Destination Language:"
+msgstr "Destination Language:"
+
+msgid "Detect Language"
+msgstr "Detect Language"
+
+msgid "Dutch"
+msgstr "Dutch"
+
+msgid "English"
+msgstr "English"
+
+msgid "Estonian"
+msgstr "Estonian"
+
+msgid "Exit"
+msgstr "Exit"
+
+msgid "Filipino"
+msgstr "Filipino"
+
+msgid "Finnish"
+msgstr "Finnish"
+
+msgid "French"
+msgstr "French"
+
+msgid "Galician"
+msgstr "Galician"
+
+msgid "German"
+msgstr "German"
+
+msgid "Greek"
+msgstr "Greek"
+
+msgid "Haitian Creole"
+msgstr "Haitian Creole"
+
+msgid "Hide"
+msgstr "Hide"
+
+msgid "Hungarian"
+msgstr "Hungarian"
+
+msgid "Icelandic"
+msgstr "Icelandic"
+
+msgid "Indonesian"
+msgstr "Indonesian"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Irish"
+msgstr "Irish"
+
+msgid "Italian"
+msgstr "Italian"
+
+msgid "Javanese"
+msgstr "Javanese"
+
+msgid "Latvian"
+msgstr "Latvian"
+
+msgid "Lithuanian"
+msgstr "Lithuanian"
+
+msgid "MENU"
+msgstr "MENU"
+
+msgid "Macedonian"
+msgstr "Macedonian"
+
+msgid "Malay"
+msgstr "Malay"
+
+msgid "Maltese"
+msgstr "Maltese"
+
+msgid "No"
+msgstr "No"
+
+msgid "Norwegian"
+msgstr "Norwegian"
+
+msgid "Persian"
+msgstr "Persian"
+
+msgid "Polish"
+msgstr "Polish"
+
+msgid "Portuguese"
+msgstr "Portuguese"
+
+msgid "Refresh EPG"
+msgstr "Refresh EPG"
+
+msgid "Romanian"
+msgstr "Romanian"
+
+msgid "Russian"
+msgstr "Russian"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Serbian"
+msgstr "Serbian"
+
+msgid "Show Source EPG:"
+msgstr "Show Source EPG:"
+
+msgid "Show traceback in errors:"
+msgstr "Show traceback in errors:"
+
+msgid "Slovak"
+msgstr "Slovak"
+
+msgid "Slovenian"
+msgstr "Slovenian"
+
+msgid "Source Language:"
+msgstr "Source Language:"
+
+msgid "Spanish"
+msgstr "Spanish"
+
+msgid "Swahili"
+msgstr "Swahili"
+
+msgid "Swedish"
+msgstr "Swedish"
+
+msgid "Translate text"
+msgstr "Translate text"
+
+msgid "Turkish"
+msgstr "Turkish"
+
+msgid "Ukrainian"
+msgstr "Ukrainian"
+
+msgid "Urdu"
+msgstr "Urdu"
+
+msgid "Vietnamese"
+msgstr "Vietnamese"
+
+msgid "Welsh"
+msgstr "Welsh"
+
+msgid "Yes"
+msgstr "Yes"
