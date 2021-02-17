@@ -1,4 +1,4 @@
-s# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 # So we can use Py3 print style
 from __future__ import print_function
