@@ -552,13 +552,17 @@ Red: Refresh EPG
 # ==================================================================
     def __init__(self, session, text):
         self.showsource = CfgPlTr.showsource.getValue()
-        if self.showsource == 'yes':    size = MySD.tMyes
-        else:                           size = MySD.tMno
+        if self.showsource == "yes":
+            size = MySD.tMyes
+        else:
+            size = MySD.tMno
 
         self.dict = {'size': size, 'plug_loc': plugin_location}
         self.skin = applySkinVars(MySD.translatorMain_skin, self.dict)
         self.session = session
         Screen.__init__(self, session)
+        if self.showsource != "yes":
+            self.skinName = ["translatorMainSingle", "translatorMain" ]
 
         self.text = text
         self.hideflag = True
