@@ -30,7 +30,7 @@ from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import fileExists
 
-import sys, re, time, os, traceback, inspect
+import sys, re, time, os, traceback
 
 from .AutoflushCache import AutoflushCache
 from .HTML5Entities import name2codepoint
@@ -466,7 +466,7 @@ def make_uref(sv_id, sv_name):
 # We need to know where we are to find the files relative to this
 # script. Can't do this until we've defined a piece of code/object.
 #
-plugin_location = os.path.dirname(inspect.getsourcefile(applySkinVars))
+plugin_location = os.path.dirname(os.path.realpath(__file__))
 def lang_flag(lang):    # Where the language images are
     global plugin_location
     return plugin_location + '/pic/flag/' + lang  + '.png'
