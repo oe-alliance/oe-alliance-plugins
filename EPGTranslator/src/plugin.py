@@ -464,7 +464,7 @@ def make_uref(sv_id, sv_name):
 
 # ==================================================================
 # We need to know where we are to find the files relative to this
-# script. Can't do this until we've defined a piece of code/object.
+# script.
 #
 plugin_location = os.path.dirname(os.path.realpath(__file__))
 def lang_flag(lang):    # Where the language images are
