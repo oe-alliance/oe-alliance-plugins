@@ -6,8 +6,7 @@ from __future__ import print_function
 # for localized messages
 from . import _
 
-
-EPGTrans_vers = "2.02-rc2"
+EPGTrans_vers = "2.02-release"
 
 from Components.ActionMap import ActionMap
 from Components.config import (config, configfile, ConfigSubsection,
@@ -247,6 +246,15 @@ for c in ([" ", "\n", "\t"]):   # Actually .<ws>
 #
 def DO_translation(text, source, dest):     # source, dest are langs
     global enc_wspace, enc_space
+
+# It seems that this incoming text may contain some EIT CR/LF sequences
+# (see estring.cpp)
+# So convert these to newlines now - they can end up being translated
+# into other (displayed) characters
+# Add any others to this list as required...
+#
+    for rpl in ("\xc2\x8a", "\xee\x82\x8a"):
+        text = text.replace(rpl, "\n")
 
     enc_text = quote(text)
     enc_len = len(enc_text)
