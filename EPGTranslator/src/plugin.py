@@ -1107,6 +1107,7 @@ def My_EVB__init__(self, *args, **kwargs):
     self[which] = ActionMap(["VirtualKeyboardActions"],
            {"showVirtualKeyboard": self.EPGTr_ToggleMode})
     self[which].setEnabled(True)
+    self["key_text"] = StaticText(_("TEXT"))
 
 # Start each EventView in non-translating mode
 #
