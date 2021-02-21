@@ -1,0 +1,16 @@
+<default>
+	  <prerequisites>
+                    <tag type="Extension" />
+	  </prerequisites>
+          <info>
+                    <author>OpenViX</author>
+                    <name>EPGTranslator</name>
+                    <packagename>enigma2-plugin-extensions-epgtranslator</packagename>
+                    <shortdescription>Translates EPG text</shortdescription>
+                    <description>Translates EPG text</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-epgtranslator" />
+	</files>
+</default>
