@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 # print(" LCD4linux.StandbyBildLCD" in zip(*L4)[2])
+# -*- coding: utf-8 -*-
 from __future__ import print_function, absolute_import
 from twisted.web import resource, http
 from .plugin import *
@@ -39,7 +39,6 @@ ElementList = []
 ExeMode = False
 StatusMode = False
 
-
 def _unescape(string):
 	index = string.find("%")
 	if index == -1:
@@ -53,7 +52,7 @@ def _exec(command):
 	else:
 		variable = command.split(" ", 1)[0]
 		exec("global %s;%s" % (variable, command))
-	
+
 def ParseCode():
 	global L1
 	global L2
@@ -70,7 +69,6 @@ def ParseCode():
 	i4 = 0
 	L4log("WebIF: parsing Code....")
 	for line in open(Py, "r").readlines():
-#		print(line)
 		if line.find("self.list1.append") >= 0 or line.find("self.list2.append") >= 0 or line.find("self.list3.append") >= 0 or line.find("self.list4.append") >= 0:
 			Z = line.replace("getConfigListEntry(_", ",").replace(")", "").replace("(", "").replace(".append", "").replace("\t", "").replace("\n", "").replace("\"", "").split(",")
 			if Z[0]=="self.list1":
@@ -224,7 +222,6 @@ class LCD4linuxConfigweb(resource.Resource):
 		el = req.args.get(b"Element", None)
 		self.restartTimer()
 		L4log("Command received %s" % (command), ex)
-#		print("[L4L EX]-", ex,"-")
 		if self.CurrentMode == ("-", "-"):
 			self.CurrentMode = (getConfigStandby(), getisMediaPlayer())
 		if mo is not None:
@@ -233,7 +230,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			if Mode in ["1", "2"]:
 				setisMediaPlayer("")
 				setConfigStandby(False)
-			elif Mode == "3":	
+			elif Mode == "3":
 				setisMediaPlayer("config")
 				setConfigStandby(False)
 			elif Mode == "4":
@@ -548,7 +545,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<tr><td bgcolor=\"#000000\" width=\"220\">\n"
 		html += "<p align=\"center\"><img title=\"\" border=\"0\" src=\"/lcd4linux/data/WEBdreambox.png\" width=\"181\" height=\"10\">\n"
 		CCM = "#FFFFFF" if getConfigMode() == False else "#FFCC00"
-		html += "<font color=\"%s\"><b>LCD4linux Config</b></font><br />%s\n" % (CCM, Version if L4LElement.getVersion()==True else Version+"?")
+		html += "<font color=\"%s\"><b>LCD4linux Config</b></font><br />%s\n" % (CCM, Version if L4LElement.getVersion()==True else Version)
 		if IP is None:
 			html += "<br><span style=\"font-size:7pt;color: #FF0000\">%s!</span>" % _l(_("IP seurity not supported by Box"))
 		html += "</p></td><td bgcolor=\"#000000\">\n"
@@ -673,7 +670,7 @@ class LCD4linuxConfigweb(resource.Resource):
 				ConfObj = eval(Conf)
 
 				if (Conf.startswith(Element) and (LL[3] == AktCode or AktCode == 0)) or (Element=="other" and LL[3] == 0):
-				
+
 					if Mode in "2":
 						if "." in Conf:
 							b = Conf.replace(".", ".MP")
@@ -698,7 +695,7 @@ class LCD4linuxConfigweb(resource.Resource):
 							b = Conf.replace(".Standby", ".MP")
 							if (" "+b) in list(zip(*L3))[2]:
 								isMP = True
-		
+
 					if AktCode == 0:
 						AktCode = LL[3]
 					Curr = ConfObj.value
@@ -727,7 +724,7 @@ class LCD4linuxConfigweb(resource.Resource):
 							html += "<input type=\"checkbox\" name=\"%s\" value=\"%s\" %s>" % (Conf, "checked", Aktiv)
 							html += "</td>\n"
 						else:
-#ConfigText	
+#ConfigText
 							if isinstance(ConfObj, ConfigText):
 								html += "<td width=\"300\">%s</td><td>\n" % _l(_(LL[1]))
 								if isinstance(ConfObj, ConfigPassword):
@@ -785,7 +782,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			html += "Screen: %s<br />\n" % str(getScreenActive(True))
 			html += "Hold/HoldKey: %s/%s<br />\n" % (str(getSaveEventListChanged()), str(L4LElement.getHoldKey()))
 			html += "Brightness org/set %s/%s<br />\n" %(str(L4LElement.getBrightness()), str(L4LElement.getBrightness(0, False)))
-	
+
 		html += "<hr><span style=\"font-size:8pt\">%s (%s)</span>" % (getINFO(), IP)
 		html += "<BR><a style=\"font-size:10pt; color:#FFCC00;\" href=\"http://www.i-have-a-dreambox.com/wbb2/thread.php?postid=1634882\">Support & FAQ & Info & Donation</a>"
 		if len(L4LElement.get()) > 0:
