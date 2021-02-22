@@ -3,8 +3,9 @@ History:
 Modifikationen von Mr.Servo @ OpenA.TV:
 - Ausgabe des aktuellen Betriebsmodus Python 2 / Python 3
 - Absturzfehler im WebIF unter Python 3 in Funktion "def xmlFind(Num):" beseitigt
-- Umstellung der "PixmapLcd4linux.py" auf Python 2/3-Kompatibilität
 - weitere Kleinigkeiten beseitigt (z.B. Sonderzeichenbehandlung korrigert)
+- Umstellung der "PixmapLcd4linux.py" auf Python 2/3-Kompatibilität
+- Entfernung des "?" in der Versionsausgabe der "WebConfigSite.py"
 [...]
  - [ungepflegeter/unbekannter Revisionsverlauf]
 [...]
