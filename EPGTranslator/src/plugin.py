@@ -6,7 +6,7 @@ from __future__ import print_function
 # for localized messages
 from . import _
 
-EPGTrans_vers = "2.02-release"
+EPGTrans_vers = "2.03-release"
 
 from Components.ActionMap import ActionMap
 from Components.config import (config, configfile, ConfigSubsection,
@@ -118,6 +118,7 @@ CfgPlTr.source = ConfigSelection(default='auto',
 # Destination has no auto...
 #
 CfgPlTr.destination = ConfigSelection(default='en', choices=langs)
+CfgPlTr.start_EV_trans = ConfigBoolean(default=False)
 CfgPlTr.timeout_hr = ConfigInteger(0, (0, 350))
 CfgPlTr.showsource = ConfigSelection(default='yes',
  choices=[('yes', _('Yes')), ('no', _('No'))])
@@ -492,6 +493,7 @@ class translatorConfig(ConfigListScreen, Screen):
         list = [
             getConfigListEntry(_('Source Language:'), CfgPlTr.source, _("Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language.")),
             getConfigListEntry(_('Destination Language:'), CfgPlTr.destination, _("This is the language the source text will be translated into.")),
+            getConfigListEntry(_('EventViews open translated:'), CfgPlTr.start_EV_trans, _("When an EventView window is opened, start with the translated text.")),
             getConfigListEntry(_('Cache timeout hours (0 == while valid):'), CfgPlTr.timeout_hr, _("Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed.")),
             getConfigListEntry(_('Show Source EPG:'), CfgPlTr.showsource, _("Selct this option to show the source text as well as the translated text in EPG Translator main screen show.")),
             getConfigListEntry(_('Show traceback in errors:'), CfgPlTr.showtrace, _("This is a development feature. On a translation failure, if enabled, extra debug information will be logged.")),
@@ -1125,9 +1127,9 @@ def My_EVB__init__(self, *args, **kwargs):
     self[which].setEnabled(True)
     self["key_text"] = StaticText(_("TEXT"))
 
-# Start each EventView in non-translating mode
+# Start each EventView in the user-chosen translate mode
 #
-    self.EPGTr_translating = False
+    self.EPGTr_translating = CfgPlTr.start_EV_trans.getValue()
 
 # ==================================================================
 # Start-up links (see PluginDescriptor defs)
