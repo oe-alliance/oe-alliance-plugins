@@ -490,11 +490,11 @@ class translatorConfig(ConfigListScreen, Screen):
         Screen.__init__(self, session)
         self['flag'] = Pixmap()
         list = [
-            getConfigListEntry(_('Source Language:'), CfgPlTr.source),
-            getConfigListEntry(_('Destination Language:'), CfgPlTr.destination),
-            getConfigListEntry(_('Cache timeout hours (0 == while valid):'), CfgPlTr.timeout_hr),
-            getConfigListEntry(_('Show Source EPG:'), CfgPlTr.showsource),
-            getConfigListEntry(_('Show traceback in errors:'), CfgPlTr.showtrace),
+            getConfigListEntry(_('Source Language:'), CfgPlTr.source, _("Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language.")),
+            getConfigListEntry(_('Destination Language:'), CfgPlTr.destination, _("This is the language the source text will be translated into.")),
+            getConfigListEntry(_('Cache timeout hours (0 == while valid):'), CfgPlTr.timeout_hr, _("Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed.")),
+            getConfigListEntry(_('Show Source EPG:'), CfgPlTr.showsource, _("Selct this option to show the source text as well as the translated text in EPG Translator main screen show.")),
+            getConfigListEntry(_('Show traceback in errors:'), CfgPlTr.showtrace, _("This is a development feature. On a translation failure, if enabled, extra debug information will be logged.")),
         ]
         ConfigListScreen.__init__(self, list, on_change=self.UpdateComponents)
         self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'],
@@ -507,8 +507,17 @@ class translatorConfig(ConfigListScreen, Screen):
         self["key_red"] = StaticText(_("Exit"))
         self["key_green"] = StaticText(_("Save"))
         self.setTitle("EPG Translator Setup - " + EPGTrans_vers)
+        self["description"] = Label("")
+        print(dir(self))
+        self["config"].onSelectionChanged.append(self.selectionChanged)
+        self.onLayoutFinish.append(self.selectionChanged)
         self.onLayoutFinish.append(self.UpdateComponents)
 
+# ==================================================================
+
+    def selectionChanged(self):
+		self["description"].setText(self.getCurrentDescription())
+		
 # ==================================================================
     def UpdateComponents(self):
         png = lang_flag(str(CfgPlTr.destination.getValue()))
