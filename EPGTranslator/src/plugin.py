@@ -456,7 +456,7 @@ def EPGdata_translate(title, descr, start, duration, uref):
                 if limit < to:  to = limit
             AfCache.add(uref, (t_title, t_descr), abs_timeout=to)
         except Exception as e:  # Use originals on a failure...
-            print("[EPGTranslator-Plugin] translateEPG error:", e)
+            print('[EPGTranslator-Plugin] translateEPG, %s: "%s"' % (type(e).__name__, e))
             if (CfgPlTr.showtrace.getValue()): traceback.print_exc()
             (t_title, t_descr) = (title, descr)
 
