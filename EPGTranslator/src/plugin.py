@@ -497,11 +497,10 @@ class translatorConfig(ConfigListScreen, Screen):
             getConfigListEntry(_('Show traceback in errors:'), CfgPlTr.showtrace, _("This is a development feature. On a translation failure, if enabled, extra debug information will be logged.")),
         ]
         ConfigListScreen.__init__(self, list, on_change=self.UpdateComponents)
-        self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'],
+        self['actions'] = ActionMap(['SetupActions'],
              {'ok': self.save,
               'cancel': self.cancel,
-              'red': self.cancel,
-              'green': self.save
+              'save': self.save
              },
             -1)
         self["key_red"] = StaticText(_("Exit"))
