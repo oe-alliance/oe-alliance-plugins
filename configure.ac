@@ -361,6 +361,10 @@ LCD4linux/src/data/Clock3/Makefile
 LCD4linux/src/data/Clock4/Makefile
 LCD4linux/src/data/Clock5/Makefile
 LCD4linux/src/data/Clock6/Makefile
+LCD4linux/src/data/Clock7/Makefile
+LCD4linux/src/data/Clock8/Makefile
+LCD4linux/src/data/Clock9/Makefile
+LCD4linux/src/data/Clock10/Makefile
 LCD4linux/src/meteo/Makefile
 LCD4linux/src/renderer/Makefile
 LCD4linux/src/wetter/Makefile
