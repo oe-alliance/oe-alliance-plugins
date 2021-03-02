@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-17 00:23+0000\n"
-"PO-Revision-Date: 2021-02-18 15:29+0100\n"
+"POT-Creation-Date: 2021-02-28 23:49+0000\n"
+"PO-Revision-Date: 2021-03-02 11:48+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: none\n"
 "Language: nl\n"
@@ -80,6 +80,9 @@ msgstr ""
 
 msgid "Estonian"
 msgstr ""
+
+msgid "EventViews open translated:"
+msgstr "Eventview opent met vertaling:"
 
 msgid "Exit"
 msgstr "Sluit af"
@@ -172,7 +175,13 @@ msgid "Russian"
 msgstr ""
 
 msgid "Save"
-msgstr ""
+msgstr "Sla op"
+
+msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
+msgstr "Kies deze optie om zowel de brontaal als de doeltaal in het hoofdscherm van EPG translator te laten zien."
+
+msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
+msgstr "Kies de te vertalen brontaal of kies \"Detecteer taal\" waarmee de translator zal proberen de brontaal automatisch te vinden."
 
 msgid "Serbian"
 msgstr ""
@@ -201,8 +210,20 @@ msgstr ""
 msgid "Swedish"
 msgstr ""
 
+msgid "TEXT"
+msgstr "TEKST"
+
+msgid "This is a development feature. On a translation failure, if enabled, extra debug information will be logged."
+msgstr "Deze optie is in ontwikkeling. Als het vertalen niet lukt, zal extra debug informatie worden geschreven."
+
+msgid "This is the language the source text will be translated into."
+msgstr "Dit is de taal waarin de brontaal zal worden vertaald."
+
 msgid "Translate text"
 msgstr "Vertaal tekst"
+
+msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."
+msgstr "Vertalingen worden opgeslagen om onnodig hervertalen te vermijden. Dit is het aantal uren dat de vertaling zal worden bewaard. Kies '0' om het geheugen op te schonen als het programma is afgelopen."
 
 msgid "Turkish"
 msgstr ""
@@ -218,6 +239,9 @@ msgstr ""
 
 msgid "Welsh"
 msgstr ""
+
+msgid "When an EventView window is opened, start with the translated text."
+msgstr "Als Eventview geopend wordt, zal de vertaling meteen plaatsvinden."
 
 msgid "Yes"
 msgstr "Ja"
