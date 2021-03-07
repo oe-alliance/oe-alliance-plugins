@@ -896,7 +896,7 @@ Red: Refresh EPG
 #
             t_now = int(time.time())
             epg_base = t_now - 60*int(config.epg.histminutes.getValue())
-            epg_extent = 86400*14   # Get up to 14 days from now
+            epg_extent = 1440*14    # Get up to 14 days from now (minutes)
             test = [ EPG_OPTIONS, (self.My_Sref().toCompareString(), 0, epg_base, epg_extent) ]
             epgcache = eEPGCache.getInstance()
             self.list = epgcache.lookupEvent(test)
