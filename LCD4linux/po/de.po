@@ -878,7 +878,7 @@ msgid "Corner"
 msgstr "Ecke"
 
 msgid "Corner+Timeshift"
-msgstr "Corner+Timeshift"
+msgstr "Ecke+Timeshift"
 
 msgid "Coversearch"
 msgstr "Coversuche"
@@ -977,7 +977,7 @@ msgid "ESE"
 msgstr "OSO"
 
 msgid "Event Icon Bar"
-msgstr "Ereigns Icon Bar"
+msgstr "Ereignis Icon Bar"
 
 msgid "Exec"
 msgstr "Ausführung"
