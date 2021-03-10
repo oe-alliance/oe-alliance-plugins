@@ -545,7 +545,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<tr><td bgcolor=\"#000000\" width=\"220\">\n"
 		html += "<p align=\"center\"><img title=\"\" border=\"0\" src=\"/lcd4linux/data/WEBdreambox.png\" width=\"181\" height=\"10\">\n"
 		CCM = "#FFFFFF" if getConfigMode() == False else "#FFCC00"
-		html += "<font color=\"%s\"><b>LCD4linux Config</b></font><br />%s\n" % (CCM, Version if L4LElement.getVersion()==True else Version)
+		html += "<font color=\"%s\"><b>LCD4linux Config</b></font><br />%s\n" % (CCM, (Version if L4LElement.getVersion()==True else Version+"")+" (mode: Py" + ("2" if six.PY2 else "3") +")")
 		if IP is None:
 			html += "<br><span style=\"font-size:7pt;color: #FF0000\">%s!</span>" % _l(_("IP seurity not supported by Box"))
 		html += "</p></td><td bgcolor=\"#000000\">\n"
@@ -597,6 +597,8 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<input id=\"r2\" name=\"Mode\" type=\"radio\" value=\"2\" %s onclick=\"this.form.submit();\"><label %s for=\"r2\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("2", _l(_("On"))))
 		html += "<input id=\"r3\" name=\"Mode\" type=\"radio\" value=\"3\" %s onclick=\"this.form.submit();\"><label %s for=\"r3\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("3", _l(_("Media"))))
 		html += "<input id=\"r4\" name=\"Mode\" type=\"radio\" value=\"4\" %s onclick=\"this.form.submit();\"><label %s for=\"r4\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("4", _l(_("Idle"))))
+		if LCD4linuxConfigweb.RestartGUI == True:
+			html += "<span style=\"color: #FF0000;\"><strong>%s</strong></span>" % _l(_("GUI Restart is required"))
 		if str(LCD4linux.Popup.value) != "0":
 			html += "<input id=\"r5\" name=\"Mode\" type=\"radio\" value=\"5\" %s onclick=\"this.form.submit();\"><label %s for=\"r5\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("5", "Popup-Text"))
 		html += "</fieldset></form>\n"
@@ -768,8 +770,6 @@ class LCD4linuxConfigweb(resource.Resource):
 			html += "<input type=\"submit\" style=\"background-color: #FFCC00\" value=\"%s\">\n" % _l(_("set Settings"))
 			html += "</fieldset></form>\n"
 
-		if LCD4linuxConfigweb.RestartGUI == True:
-			html += "<span style=\"color: #FF0000;\"><strong>%s</strong></span>" % _l(_("GUI Restart is required"))
 		if ExeMode == True:
 			html += "<br />\n"
 			html += "<form method=\"GET\">\n"
