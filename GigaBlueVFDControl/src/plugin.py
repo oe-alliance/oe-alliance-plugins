@@ -8,7 +8,7 @@ from Components.Button import Button
 from Components.ActionMap import ActionMap
 from Components.config import config, configfile, ConfigSubsection, ConfigEnableDisable, getConfigListEntry, ConfigInteger, ConfigSelection, ConfigYesNo, ConfigSlider
 from Components.ConfigList import ConfigListScreen, ConfigList
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
 from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap
 from boxbranding import getBoxType, getImageDistro
 from os import system
@@ -23,6 +23,12 @@ import Components.RecordingConfig
 from Components.Harddisk import harddiskmanager
 
 BOX = getBoxType()
+if fileExists("/proc/stb/fp/vfd_status"):
+	file = open("/proc/stb/fp/vfd_status")
+	version = file.read().strip().lower()
+	file.close()
+	if version == "enable":
+		BOX = "gbip4kled"
 
 config.plugins.VFD_Giga = ConfigSubsection()
 config.plugins.VFD_Giga.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")),("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
@@ -39,7 +45,7 @@ config.plugins.VFD_Giga.ledDSBY2 = ConfigYesNo(default = True)
 config.plugins.VFD_Giga.ledSDA1 = ConfigSelection(led, default = "0")
 config.plugins.VFD_Giga.ledSDB1 = ConfigSelection(led, default = "0")
 config.plugins.VFD_Giga.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
-if BOX in ('gbtrio4k'):
+if BOX in ('gbtrio4k', 'gbip4kled'):
 	Brightness_default = 1
 	Brightness_increment = 1
 	Brightness_limits_min = 0
@@ -61,7 +67,7 @@ def vfd_write(text):
 		print "[LED-GIGA] vfd_write failed!"
 
 def setvfdBrightness(value):
-	if BOX in ('gbtrio4k'):
+	if BOX in ('gbtrio4k', 'gbip4kled'):
 		value *= 255
 		value /= 10
 		if value > 255:
@@ -159,7 +165,7 @@ class Channelnumber:
 
 	def __eventInfoChanged(self):
 		self.RecordingLed()
-		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase','gbtrio4k'):
+		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase','gbtrio4k', 'gbip4kled'):
 			return
 		if config.plugins.VFD_Giga.showClock.value == 'Off' or config.plugins.VFD_Giga.showClock.value == 'True_All':
 			return
@@ -228,7 +234,7 @@ class Channelnumber:
 
 	def vrime(self):
 		self.RecordingLed()
-		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k'):
+		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k', 'gbip4kled'):
 			self.zaPrik.start(self.updatetime, 1)
 			return
 
@@ -326,7 +332,7 @@ def leaveStandby():
 	else:
 		setLed(config.plugins.VFD_Giga.ledREC.getValue())
 
-	if BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k'):
+	if BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k', 'gbip4kled'):
 		if config.plugins.VFD_Giga.vfdBrightness.value:
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightness.getValue())
 		else:
@@ -349,7 +355,7 @@ def standbyCounterChanged(configElement):
 	else:
 		setLed(config.plugins.VFD_Giga.ledREC.getValue())
 
-	if BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k'):
+	if BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k', 'gbip4kled'):
 		if config.plugins.VFD_Giga.vfdBrightnessStandby.value:
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightnessStandby.getValue())
 		else:
@@ -367,7 +373,7 @@ def initLED():
 		forcmd = '1'
 	else:
 		forcmd = '0'
-	if BOX in ("gbtrio4k","gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h", "gbx34k"):
+	if BOX in ("gbtrio4k", "gbip4kled", "gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h", "gbx34k"):
 		cmd = 'echo STB does not support to show clock in Deep Standby'
 	else:
 		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
@@ -376,7 +382,7 @@ def initLED():
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
 		vfd_write("    ")
 
-	if BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k'):
+	if BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k', 'gbip4kled'):
 		if config.plugins.VFD_Giga.vfdBrightness.value:
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightness.getValue())
 		else:
@@ -435,7 +441,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("Led Deep Standby"), config.plugins.VFD_Giga.ledDSBY2))
 			self.list.append(getConfigListEntry(_("Led state RUN"), config.plugins.VFD_Giga.ledRUN))
 			self.list.append(getConfigListEntry(_("Led state Standby"), config.plugins.VFD_Giga.ledSBY))
-			if BOX not in ("gbtrio4k", "gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gb800seplus", "gbquadplus", "gbipbox", "gbultra", "gbultraue", "gbultraueh", "gbultrase", "gbx1", "gbx2", "gbx3", "gbx3h", "gbx34k"):
+			if BOX not in ("gbtrio4k", "gbip4kled", "gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gb800seplus", "gbquadplus", "gbipbox", "gbultra", "gbultraue", "gbultraueh", "gbultrase", "gbx1", "gbx2", "gbx3", "gbx3h", "gbx34k"):
 				self.list.append(getConfigListEntry(_("Led state Deep Standby"), config.plugins.VFD_Giga.ledDSBY))
 			self.list.append(getConfigListEntry(_("Led state Record"), config.plugins.VFD_Giga.ledREC))
 			self.list.append(getConfigListEntry(_("Blink Record Led"), config.plugins.VFD_Giga.recLedBlink))
@@ -445,14 +451,14 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		else:
 			setLed("0")
 
-		if BOX in ("gb800seplus", "gbultra", "gbultrase", "gbtrio4k"):
+		if BOX in ("gb800seplus", "gbultra", "gbultrase", "gbtrio4k", "gbip4kled"):
 			self.list.append(getConfigListEntry(_("Brightness"), config.plugins.VFD_Giga.vfdBrightness))
 			self.list.append(getConfigListEntry(_("Brightness Standby"), config.plugins.VFD_Giga.vfdBrightnessStandby))
-		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase", "gbtrio4k"):
+		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase", "gbtrio4k", "gbip4kled"):
 			self.list.append(getConfigListEntry(_("Show on VFD"), config.plugins.VFD_Giga.showClock))
 		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase"):
 			self.list.append(getConfigListEntry(_("Show clock in Deep Standby"), config.plugins.VFD_Giga.showClockDeepStandby))
-		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase", "gbtrio4k"):
+		if BOX in ('gb800se', 'gb800solo', "gb800seplus", "gbultra", "gbultrase", "gbtrio4k", "gbip4kled"):
 			if config.plugins.VFD_Giga.showClock.value != "Off" or config.plugins.VFD_Giga.showClockDeepStandby.value == "True":
 				self.list.append(getConfigListEntry(_("Time mode"), config.plugins.VFD_Giga.timeMode))
 			self.list.append(getConfigListEntry(_("Channel number with leading zeros"), config.plugins.VFD_Giga.channelnrformat))
@@ -537,7 +543,7 @@ def main(menuid, **kwargs):
 	if getImageDistro() == "openvix":
 		if BOX in ('gb800se', 'gb800solo', 'gbx1', 'gbx2', 'gbx3', 'gbx3h', 'gbx34k') and menuid == "leddisplay":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
-		elif BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k') and menuid == "display":
+		elif BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k', 'gbip4kled') and menuid == "display":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
 		elif menuid == "display":
 			return [(_("LED"), startLED, "LED_Giga", None)]
@@ -555,7 +561,7 @@ def main(menuid, **kwargs):
 		else:
 			if menuid != "system":
 				return [ ]
-		if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k'):
+		if BOX in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k', 'gbip4kled'):
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
 		else:
 			return [(_("LED"), startLED, "LED_Giga", None)]
