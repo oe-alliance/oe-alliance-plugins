@@ -1,14 +1,16 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+from __future__ import print_function
 import os
 import sys
 import time
 import usb.core
 import usb.util
-import StringIO
-import Image
+#import Image
+from PIL import Image
 import struct
+from six.moves import cStringIO as StringIO
 
 def write_jpg2frame(dev, pic):
 	"""Attach header to picture, pad with zeros if necessary, and send to frame"""
@@ -87,13 +89,13 @@ def get_known_devices():
 	return dList
      
 
-def find_device(Anzahl,device,device2):
+def find_device(Anzahl, device, device2):
 	"""Try to find device on USB bus."""
 	try:
-		print "[LCD4linux] looking for frame",Anzahl, device['name'], device['idVendor'], device['idProduct'], device2['idProduct']
+		print("[LCD4linux] looking for frame", Anzahl, device['name'], device['idVendor'], device['idProduct'], device2['idProduct'])
 		if Anzahl == 2:
 			d = list(usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True))+list(usb.core.find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True))
-			if isinstance(d,list):
+			if isinstance(d, list):
 				if len(d) >= 2:
 					d = d[1]
 				else:
@@ -104,38 +106,38 @@ def find_device(Anzahl,device,device2):
 			d = list(list(usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True))+list(usb.core.find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True)))[0]
 	except:
 		from traceback import format_exc
-		print "[LCD4linux] find exception"
-		print "Error:",format_exc()
+		print("[LCD4linux] find exception")
+		print("Error:", format_exc())
 		d = None
 	return d  
 
-def init_device(Anzahl,device0, device1):
+def init_device(Anzahl, device0, device1):
 	"""First try Mini Monitor mode, then Mass storage mode"""
-	dev = find_device(Anzahl,device0,device1)
+	dev = find_device(Anzahl, device0, device1)
 
 	if dev is not None:
 		## found it, trying to init it
-		print "[LCD4linux] Find frame device",dev
+		print("[LCD4linux] Find frame device", dev)
 		if dev.idProduct == device0["idProduct"]:
-			print "[LCD4linux] init Device"
+			print("[LCD4linux] init Device")
 			frame_init(dev)
 		else:
-			print "[LCD4linux] Find frame device in Mass Storage Mode"
+			print("[LCD4linux] Find frame device in Mass Storage Mode")
 			frame_switch(dev)
 			ts = time.time()
 			while True:
 				# may need to burn some time
-				dev = find_device(Anzahl,device0,device1)
+				dev = find_device(Anzahl, device0, device1)
 				if dev is not None and dev.idProduct == device0["idProduct"]:
 					#switching successful
 					break
 				elif time.time() - ts > 3:
-					print "[LCD4linux] switching failed. Ending program"
+					print("[LCD4linux] switching failed. Ending program")
 					return None
 			frame_init(dev)
-			print "[LCD4linux] frame device switched to Mini Monitor"
+			print("[LCD4linux] frame device switched to Mini Monitor")
 	else:
-		print "[LCD4linux] Could not find frame in either mode"
+		print("[LCD4linux] Could not find frame in either mode")
 		return None
 	return dev
 
@@ -166,18 +168,18 @@ def frame_switch(dev):
 	# settling of the bus and frame takes about 0.42 sec
 	# give it some extra time, but then still make sure it has settled
 	except:
-		print "[LCD4linux] switching ERROR"
+		print("[LCD4linux] switching ERROR")
 #		from traceback import format_exc
-#		print format_exc()
+#		print(format_exc())
 	finally:
 		time.sleep(2)
 
 def name(dev):
 	try:
-		return usb.util.get_string(dev,1) 
+		return usb.util.get_string(dev, 1) 
 	except:
 		try:
-			return usb.util.get_string(dev,256,2) 
+			return usb.util.get_string(dev, 256, 2) 
 		except:
 			return None
 
@@ -191,7 +193,7 @@ def main():
 	device1 = known_devices_list[1] # Mass Storage mode
 
 	dev = init_device(device0, device1)   
-	print "Frame is in Mini Monitor mode and initialized. Sending pictures now"
+	print("Frame is in Mini Monitor mode and initialized. Sending pictures now")
 
 	image = Image.open("mypicture.jpg")
 	#manipulations to consider:
@@ -199,7 +201,7 @@ def main():
 	#  thumbnail
 	#  rotate
 	#  crop
-	image = image.resize((800,480))
+	image = image.resize((800, 480))
 	output = StringIO.StringIO()
 	image.save(output, "JPEG", quality=94)
 	pic  = output.getvalue()

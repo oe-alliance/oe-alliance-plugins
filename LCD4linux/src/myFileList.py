@@ -38,7 +38,7 @@ def FileEntryComponent(name, absolute = None, isDir = False):
 	else:
 #		extension = name.split('.')
 #		extension = extension[-1].lower()
-#		if EXTENSIONS.has_key(extension):
+#		if extension in EXTENSIONS:
 #			png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer/res/" + EXTENSIONS[extension] + ".png")
 #		else:
 #			png = None
@@ -71,8 +71,8 @@ class FileList(MenuList):
 		else:
 			se = os_path.basename(directory)
 			direct = directory+"/"
-#		print "direct,se",direct,se
-		self.changeDir(direct,se)
+#		print("direct,se",direct,se)
+		self.changeDir(direct, se)
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setItemHeight(26)
 		self.serviceHandler = eServiceCenter.getInstance()
@@ -150,7 +150,7 @@ class FileList(MenuList):
 				root.setName(self.additional_extensions)
 			serviceHandler = eServiceCenter.getInstance()
 			list = serviceHandler.list(root)
-			while 1:
+			while True:
 				s = list.getNext()
 				if not s.valid():
 					del list
@@ -203,7 +203,7 @@ class FileList(MenuList):
 					EXext = "nothing"
 				if (self.matchingPattern is None) or (EXext in self.matchingPattern):
 					if nx is None:
-						self.list.append(FileEntryComponent(name = name, absolute = x , isDir = False))
+						self.list.append(FileEntryComponent(name = name, absolute = x, isDir = False))
 					else:
 						res = [ (x, False) ]
 						res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, name + " [" + self.getTSLength(path) + "]"))
@@ -217,15 +217,15 @@ class FileList(MenuList):
 			select2 = select
 			if select.endswith("/"):
 				select2 = os_path.basename(select[:-1])
-#			print "dir,select",directory,select,select2
+#			print("dir,select",directory,select,select2)
 			for x in self.list:
-#				print "xx",x
+#				print("xx",x)
 				p = x[0][0]
-#				print "pp",p
+#				print("pp",p)
 				if isinstance(p, eServiceReference):
 					p = p.getPath()
 				if p == select or p == select2:
-#					print "moveto",i
+#					print("moveto",i)
 					self.moveToIndex(i)
 				i += 1
 
@@ -295,7 +295,7 @@ class FileList(MenuList):
 				txt = info.getName(serviceref)
 				description = info.getInfoString(serviceref, iServiceInformation.sDescription)
 				if not txt.endswith(".ts"):
-					if description is not "":
+					if description != "":
 						return txt + ' - ' + description
 					else:
 						return txt

@@ -1,15 +1,27 @@
 History:
-5.0r5a (11.02.2021)
- Modifikationen von Mr.Servo @ OpenA.TV:
- - rechteckige Ziffernblätter sind nun erlaubt
- - fehlende Clocks (also Lücken im Verzeichnis "data") sind nun erlaubt
- - bereits vorhandene Clock7 aktiviert
- - neue Clock8+9 ergänzt und aktiviert
- - neue Clock10+21 ergänzt und zum individuellen Download bereitgestellt
-  Modifikationen von Turbohai @ OpenA.TV:
- - Zusammenstellung und graphische Aufarbeitung von Clock8-21
+5.0r8 (10.03.2021)
+Modifikationen von Mr.Servo @ OpenA.TV:
+- rechteckige Ziffernblätter werden nun unterstützt
+- fehlende Clocks sind nun erlaubt (also Lücken im Verzeichnis "data")
+- bereits vorhandene Clock7 aktiviert
+- neue Clock8-10 ergänzt und aktiviert
+- neue Clock11-21 ergänzt und zum individuellen Download bereitgestellt
+- Ausgabe des aktuellen Betriebsmodus Python 2 / Python 3
+- Absturzfehler im WebIF unter Python 3 in Funktion "def xmlFind(Num):" beseitigt
+- etliche Crashfehler aufgrund der Umstellung PY2->PY2/3 beseitigt
+- weitere Kleinigkeiten beseitigt (z.B. Sonderzeichenbehandlung korrigert)
+- Umstellung der "PixmapLcd4linux.py" auf Python 2/3-Kompatibilität
+- Entfernung des "?" in der Versionsausgabe der "WebConfigSite.py"
+- Verschiebung der Ausgabe "GUI Neustart erforderlich" in der "WebConfigSite.py"
+- neue Python2+3-kombatible 'ping.py' ausgetauscht
+Modifikationen von 4l3x2k @ OpenA.TV:
+- L4L-Element "Bitrate" wurde an das oe-alliance-Plugin "bitrate (2.0+git30)" angepaßt
+Modifikationen von Turbohai @ OpenA.TV:
+- Zusammenstellung und graphische Aufarbeitung von Clock8-21
 [...]
- - ungepflegeter/unbekannter Revisionsverlauf]
+ - [ungepflegeter/unbekannter Revisionsverlauf]
+[...]
+ - [ungepflegeter/unbekannter Revisionsverlauf]
 [...]
 3.6r0 (01.07.2013)
  - Text-Schatten-Umrandung
