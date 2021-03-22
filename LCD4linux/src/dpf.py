@@ -1,6 +1,7 @@
 from __future__ import print_function
 #import Image
 from PIL import Image
+from six import PY2
 try:
 	from . import dpflib
 except:
@@ -19,15 +20,18 @@ def setBacklight(dev, value):
 	except:
 		print("[LCD4linux] Error set Backlight")
 		return False
-	
+
 def showImage(dev, image):
 	try:
 		ir = image.convert("RGBA")
 		x, y = image.size
-		dev.showRGBAImage(0, 0, x, y, ir.tobytes())
+		if PY2:
+			dev.showRGBAImage(0, 0, x, y, ir.tostring())
+		else:
+			dev.showRGBAImage(0, 0, x, y, ir.tobytes())
 		return True
 	except:
-		print("[LCD4linux] Error writing DPF Device") 
+		print("[LCD4linux] Error writing DPF Device")
 		return False
 
 def open(usb):
