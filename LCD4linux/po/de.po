@@ -2207,7 +2207,7 @@ msgid "Waning Crescent"
 msgstr "Abnehmender Halbmond"
 
 msgid "Waning Gibbous"
-msgstr "Abnehmender Mond"
+msgstr "Abnehmender Dreiviertelmond"
 
 msgid "Waxing Crescent"
 msgstr "Zunehmender Halbmond"
