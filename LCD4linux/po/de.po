@@ -1075,6 +1075,9 @@ msgstr "FritzCall entferne Anrufe nach Stunden"
 msgid "Full Moon"
 msgstr "Vollmond"
 
+msgid "Waning Moon"
+msgstr "Abnehmender Mond"
+
 msgid "GUI Restart is required"
 msgstr "GUI Neustart ist notwendig"
 
@@ -2209,8 +2212,11 @@ msgstr "Abnehmender Mond"
 msgid "Waxing Crescent"
 msgstr "Zunehmender Halbmond"
 
-msgid "Waxing Gibbous"
+msgid "Waxing Moon"
 msgstr "Zunehmender Mond"
+
+msgid "Waxing Gibbous"
+msgstr "Zunehmender Dreiviertelmond"
 
 msgid "Weather"
 msgstr "Wetter"
