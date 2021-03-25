@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8"
+Version = "V5.0-r8f"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -10288,6 +10288,8 @@ def LCD4linuxPIC(self, session):
 				D = 1
 			elif D > 3:
 				D = 3
+			if six.PY3: # for equal result, .draw_bitmap() needs an y-offset under Python 3
+				ty += round(h/6.) # only estimated & tested value
 			tx1=tx+D
 			tx0=tx-D
 			ty1=ty+D
@@ -11664,7 +11666,7 @@ def LCD4linuxPIC(self, session):
 				xx, yy = pil_image.size
 				if OSDon > 0:
 					if str(LCD4linux.OSDTransparenz.value) == "0":
-						self.im[im].paste(pil_image, ((MAX_W-xx)/2, (MAX_H-yy)/2))
+						self.im[im].paste(pil_image, (int((MAX_W-xx)/2), int((MAX_H-yy)/2)))
 					else:
 						pix=pil_image.load()
 						pcheck = (0, 0, 0) if pix[0, 0] == (0, 0, 0) else (255, 255, 255)
@@ -11844,6 +11846,8 @@ def LCD4linuxPIC(self, session):
 					hadd = 0
 					l = 0
 					for Channel_line in Channel_list:
+						if six.PY3:
+							Channel_line = Channel_line.replace('\x87', '').replace('\x86', '')
 						if l < 3:
 							w, h = getFsize(Channel_line, font)
 							TextSize = ConfigTextSize
@@ -11924,7 +11928,10 @@ def LCD4linuxPIC(self, session):
 		channel_name = ""
 		Progress = getProgess(MAX_W, ConfigProzent)
 		if self.Lchannel_name is not None:
-			channel_name = self.Lchannel_name
+			if six.PY2:
+				channel_name = self.Lchannel_name
+			else:
+				channel_name = self.Lchannel_name.replace('\x87', '').replace('\x86', '')
 			ch = self.LsreftoString.split("::")
 			if len(ch) > 1:
 				channel_name = Code_utf8(ch[1])
@@ -12391,7 +12398,7 @@ def LCD4linuxPIC(self, session):
 			if len(str(ConfigAlign))>1:
 				ProgressBar -= getSplit(ConfigSplit, ConfigAlign, MAX_W-ConfigSize, ProgressBar)
 			POSX = getSplit(ConfigSplit, ConfigAlign, MAX_W-ConfigSize, ProgressBar)
-			staerkeVal = self.LsignalQuality * 100 / 65536
+			staerkeVal = int(self.LsignalQuality * 100 / 65536)
 			staerkeVal2 = staerkeVal
 			if staerkeVal2 < int(LCD4linux.SignalMin.value):
 				staerkeVal2 = int(LCD4linux.SignalMin.value)
@@ -12625,7 +12632,7 @@ def LCD4linuxPIC(self, session):
 			if "C" in ConfigInfo:
 				i += " %d%s" % (self.LbitErrorRate, NL(ConfigLines))
 		if "T" in ConfigInfo:
-			if os.path.exists("/proc/stb/sensors"):
+			if os.path.exists("/proc/stb/sensors"): # try system temperature #1
 				m1 = 0
 				for dirname in os.listdir("/proc/stb/sensors"):
 					if dirname.find("temp", 0, 4) == 0:
@@ -12635,12 +12642,42 @@ def LCD4linuxPIC(self, session):
 								m1 = tt
 				if m1 != 0:
 					i += " %d%sC%s" % (m1, SIGN, NL(ConfigLines))
-		if os.path.isfile("/sys/class/thermal/thermal_zone0/temp"):
-			try:
-				line = open("/sys/class/thermal/thermal_zone0/temp").readline().strip()
-				i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
-			except:
-				L4logE("Error read Temp")
+			elif os.path.isfile("/proc/stb/fp/temp_sensor"): # try system temperature #2
+				try:
+					line = open("/proc/stb/fp/temp_sensor").readline().strip()
+					i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
+				except:
+					L4logE("Error read Temp '/proc/stb/fp/temp_sensor'")
+			elif os.path.isfile("/proc/stb/sensors/temp/value"): # try system temperature #3
+				try:
+					line = open("/proc/stb/sensors/temp/value").readline().strip()
+					i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
+				except:
+					L4logE("Error read Temp '/proc/stb/sensors/temp/value'")
+			elif os.path.isfile("/proc/stb/fp/temp_sensor_avs"): # try processor temperature #1
+				try:
+					line = open("/proc/stb/fp/temp_sensor_avs").readline().strip()
+					i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
+				except:
+					L4logE("Error read Temp '/proc/stb/fp/temp_sensor_avs'")
+			elif os.path.isfile("/proc/stb/power/avs"): # try processor temperature #2
+				try:
+					line = open("/proc/stb/power/avs").readline().strip()
+					i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
+				except:
+					L4logE("Error read Temp '/proc/stb/power/avs'")
+			elif os.path.isfile("/sys/class/thermal/thermal_zone0/temp"): # try processor temperature #3
+				try:
+					line = open("/sys/class/thermal/thermal_zone0/temp").readline().strip()
+					i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
+				except:
+					L4logE("Error read Temp '/sys/class/thermal/thermal_zone0/temp'")
+			elif os.path.isfile("/proc/hisi/msp/pm_cpu"): # try processor temperature #4
+				try:
+					line = open("/proc/hisi/msp/pm_cpu").read().strip()
+					i += " %.1f%sC%s" % (int(line[line.find("temperature = ")+len("temperature = "):line.find(" degree")]), SIGN, NL(ConfigLines))
+				except:
+					L4logE("Error read Temp '/proc/hisi/msp/pm_cpu'")
 		if "R" in ConfigInfo:
 			if os.path.isfile("/proc/stb/fp/fan_speed"):
 				value = SensorRead("/proc/stb/fp/fan_speed")
