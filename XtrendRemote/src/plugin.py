@@ -59,6 +59,7 @@ class RCSetupScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
 		self.skin = RCSetupScreen.skin
 		Screen.__init__(self, session)
+		self.skinName = ['RCSetupScreen', 'Setup']
 
 		from Components.ActionMap import ActionMap
 		from Components.Button import Button

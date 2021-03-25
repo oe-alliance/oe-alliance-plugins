@@ -31,11 +31,15 @@ class xmlUpdate(ConfigListScreen, Screen):
 		
 		self["actions"] = ActionMap(["SetupActions"],
 		{
-			"ok": self.keyGo,
-			"menu": self.keyCancel,
 			"cancel": self.keyCancel,
 			"save": self.keyGo,
 		}, -2)
+
+		self["actions2"] = ActionMap(["SetupActions"],
+		{
+			"ok": self.keyGo,
+			"menu": self.keyCancel,
+		}, 2)
 
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = StaticText(_("Fetch"))
