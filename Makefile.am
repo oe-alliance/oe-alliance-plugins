@@ -270,6 +270,10 @@ if HD61
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if PULSE4K
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if I55PLUS
 SUBDIRS += MultiTransCodingSetup
 endif
