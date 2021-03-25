@@ -47,8 +47,9 @@ class LCD4linuxweb(resource.Resource):
 		html += "</head>"
 		html += "<body bgcolor=\"%s\" text=\"#FFFFFF\">\n" % ("#666666" if getConfigMode() == True else "#000000")
 		html += "<form method=\"POST\" action=\"--WEBBOT-SELF--\">\n"
-		datei = req.args.get("file", None)
+		datei = req.args.get(b"file", None)
 		if datei is not None:
+			datei[0] = datei[0].decode("utf-8")
 			if os.path.isfile("%s%s" % (getTMPL(), datei[0])):
 				t=os.path.getmtime("%s%s" % (getTMPL(), datei[0]))
 				JR = "" if JavaRefresh == "" else JavaRefresh % (1, 1, datei[0])
