@@ -71,8 +71,8 @@ def getAudio(description):
 		return "audio/DTS-HD.png"
 	elif "DTS" in description:
 		return "audio/DTS.png"
-        elif "AAC-HE" in description:
-		 return "audio/AAC-HE.png"
+    elif "AAC-HE" in description:
+		return "audio/AAC-HE.png"
 	elif "AAC" in description:
 		return "audio/AAC.png"
 	elif "MPEG-1" in description:
