@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8f"
+Version = "V5.0-r8g"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -10985,7 +10985,9 @@ def LCD4linuxPIC(self, session):
 					else:
 						minus5 = -3
 						font = ImageFont.truetype(ConfigFont, int(13*Wmulti), encoding='unic')
-						ShadowText(Wim, POSX-minus5, POSY+int(64*Wmulti), Wind, font, ConfigColor, ConfigShadow) #silver
+						Wind = (Wind.split(" ",2))
+						ShadowText(Wim, POSX-minus5, POSY+int(55*Wmulti), Wind[0]+" "+Wind[1], font, ConfigColor, ConfigShadow) #silver
+						ShadowText(Wim, POSX-minus5, POSY+int(67*Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(25*Wmulti), encoding='unic')
 						w, h = self.draw[Wim].textsize(Temp_c, font=font)
 						TextSize = int(25*Wmulti)
@@ -11758,6 +11760,7 @@ def LCD4linuxPIC(self, session):
 		(ConfigSize, ConfigPos, ConfigAlign, ConfigFullScreen, ConfigSplit, ConfigTextSize, Picon2) = workaround
 		ConfigSize = int(ConfigSize)
 		ConfigPos = int(ConfigPos)
+		ConfigTextSize = int(ConfigTextSize)
 		MAXi_W, MAXi_H = self.im[im].size
 		if ConfigSplit == True:
 			MAXi_W = int(MAXi_W/2)
@@ -12632,7 +12635,7 @@ def LCD4linuxPIC(self, session):
 			if "C" in ConfigInfo:
 				i += " %d%s" % (self.LbitErrorRate, NL(ConfigLines))
 		if "T" in ConfigInfo:
-			if os.path.exists("/proc/stb/sensors"): # try system temperature #1
+			if os.path.exists("/proc/stb/sensors"): # try system temp #1 (e.g. Dreambox?)
 				m1 = 0
 				for dirname in os.listdir("/proc/stb/sensors"):
 					if dirname.find("temp", 0, 4) == 0:
@@ -12642,37 +12645,37 @@ def LCD4linuxPIC(self, session):
 								m1 = tt
 				if m1 != 0:
 					i += " %d%sC%s" % (m1, SIGN, NL(ConfigLines))
-			elif os.path.isfile("/proc/stb/fp/temp_sensor"): # try system temperature #2
+			elif os.path.isfile("/proc/stb/fp/temp_sensor"): # try system temp #2 (e.g. ZGemma H9Twin)
 				try:
 					line = open("/proc/stb/fp/temp_sensor").readline().strip()
-					i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
+					i += " %.1f%sC%s" % (int(line), SIGN, NL(ConfigLines))
 				except:
 					L4logE("Error read Temp '/proc/stb/fp/temp_sensor'")
-			elif os.path.isfile("/proc/stb/sensors/temp/value"): # try system temperature #3
+			elif os.path.isfile("/proc/stb/sensors/temp/value"): # try system temp #3
 				try:
 					line = open("/proc/stb/sensors/temp/value").readline().strip()
-					i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
+					i += " 3s:%.1f%sC%s" % (int(line), SIGN, NL(ConfigLines))
 				except:
 					L4logE("Error read Temp '/proc/stb/sensors/temp/value'")
-			elif os.path.isfile("/proc/stb/fp/temp_sensor_avs"): # try processor temperature #1
+			elif os.path.isfile("/proc/stb/fp/temp_sensor_avs"): # try CPU temp #1
 				try:
 					line = open("/proc/stb/fp/temp_sensor_avs").readline().strip()
-					i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
+					i += " 1p:%.1f%sC%s" % (int(line), SIGN, NL(ConfigLines))
 				except:
 					L4logE("Error read Temp '/proc/stb/fp/temp_sensor_avs'")
-			elif os.path.isfile("/proc/stb/power/avs"): # try processor temperature #2
+			elif os.path.isfile("/proc/stb/power/avs"): # try CPU temp #2
 				try:
 					line = open("/proc/stb/power/avs").readline().strip()
-					i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
+					i += " 2p:%.1f%sC%s" % (int(line), SIGN, NL(ConfigLines))
 				except:
 					L4logE("Error read Temp '/proc/stb/power/avs'")
-			elif os.path.isfile("/sys/class/thermal/thermal_zone0/temp"): # try processor temperature #3
+			elif os.path.isfile("/sys/class/thermal/thermal_zone0/temp"): # try CPU temp #3 (e.g. GigaBlue UE4K)
 				try:
 					line = open("/sys/class/thermal/thermal_zone0/temp").readline().strip()
 					i += " %.1f%sC%s" % (int(line)/1000.0, SIGN, NL(ConfigLines))
 				except:
 					L4logE("Error read Temp '/sys/class/thermal/thermal_zone0/temp'")
-			elif os.path.isfile("/proc/hisi/msp/pm_cpu"): # try processor temperature #4
+			elif os.path.isfile("/proc/hisi/msp/pm_cpu"): # try CPU temp #4 (e.g. Octagon SF8008)
 				try:
 					line = open("/proc/hisi/msp/pm_cpu").read().strip()
 					i += " %.1f%sC%s" % (int(line[line.find("temperature = ")+len("temperature = "):line.find(" degree")]), SIGN, NL(ConfigLines))
