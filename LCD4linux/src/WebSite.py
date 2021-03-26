@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from __future__ import absolute_import
 from twisted.web import resource, http
 from .plugin import *
@@ -88,6 +89,6 @@ class LCD4linuxweb(resource.Resource):
 		return six.ensure_binary(html)
 
 class LCD4linuxwebView(LCD4linuxweb):
-    
+
 	def __init__(self):
 		self.HREF = ""
