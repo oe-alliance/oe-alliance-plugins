@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8g"
+Version = "V5.0-r8h"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -5193,7 +5193,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 		key_y = size_h-40
 		key_x = int((conf_w-40)/4)
 		pic_w = size_w-conf_w
-		if str(LCD4linux.LCDType3.value) != "00":
+		if str(LCD4linux.LCDType3.value) != "00": # depend on current skin, GUI-preview of LCDs are not correct when using LCD3
 			pic_h = int(size_h/3)
 		else:
 			pic_h = int(size_h/2)
@@ -7599,7 +7599,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self["config"].setList(self.list4)
 
 	def Page(self):
-		if time()-self.toggle < 0.5:
+		if time()-self.toggle < 0.25: # changed from 0.5 to 0.25 due to todays faster CPUs
 			L4log("to fast")
 			return
 		L4log("Page", self.mode)
@@ -11432,11 +11432,12 @@ def LCD4linuxPIC(self, session):
 		(ConfigPos, ConfigSize, ConfigSizeH, ConfigAlign, ConfigTransp, ConfigTrim) = workaround
 		ConfigPos = int(ConfigPos)
 		ConfigSize = int(ConfigSize)
+		ConfigSizeH = int(ConfigSizeH)
 		MAX_W, MAX_H = self.im[im].size
 		small = ""
 		x = ConfigSize
 		if ConfigMode == True:
-			POSX = getSplit(False, ConfigAlign, MAX_W, ConfigSize)
+			POSX = int(getSplit(False, ConfigAlign, MAX_W, ConfigSize))
 			if ConfigSizeH>0:
 				self.draw[draw].rectangle((POSX, ConfigPos, POSX+ConfigSize, ConfigPos+ConfigSizeH), fill="red")
 			else:
@@ -11516,7 +11517,7 @@ def LCD4linuxPIC(self, session):
 				elif small == "0":
 					POSX += int((ConfigSize-x)/2)
 				if ConfigSizeH>0:
-					ConfigPos = ConfigPos+int((ConfigSizeH-y)/2)
+					ConfigPos = ConfigPos+int((ConfigSizeH-int(y))/2)
 				if ConfigAlign == "9":
 					POSX, ConfigPos = 0, 0
 				try:
