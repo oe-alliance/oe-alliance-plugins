@@ -262,6 +262,10 @@ if H10
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if H11
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if HD60
 SUBDIRS += MultiTransCodingSetup
 endif
