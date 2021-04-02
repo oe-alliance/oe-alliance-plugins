@@ -15,10 +15,10 @@ from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from . import tmdb
 from .__init__ import _
-import importlib
+from six.moves import reload_module
 
 def main(session, service, **kwargs):
-	importlib.reload(tmdb)
+	reload_module(tmdb)
 	try:
 		session.open(tmdb.tmdbScreen, service, 1)
 	except:
@@ -26,7 +26,7 @@ def main(session, service, **kwargs):
 		traceback.print_exc()
 		
 def eventinfo(session, eventName="", **kwargs):
-	importlib.reload(tmdb)
+	reload_module(tmdb)
 	try:
 		s = session.nav.getCurrentService()
 		info = s.info()
