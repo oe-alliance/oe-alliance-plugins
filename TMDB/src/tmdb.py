@@ -11,6 +11,9 @@
 #source code of your modifications.
 #######################################################################
 
+from __future__ import print_function
+from __future__ import absolute_import
+
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import *
 from Components.Label import Label
@@ -48,15 +51,15 @@ from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, 
 import sys, os, re, shutil, json
 import skin
 from os import path, remove
-from twisted.web.client import getPage
 from twisted.web.client import downloadPage
 from twisted.web import client, error as weberror
 from twisted.internet import reactor
 from twisted.internet import defer
-from urllib import urlencode
-from __init__ import _
+import six
+from six.moves.urllib.parse import urlencode
+from .__init__ import _
 
-import tmdbsimple as tmdb
+from . import tmdbsimple as tmdb
 tmdb.API_KEY = 'd42e6b820a1541cc69ce789671feba39'
 
 
@@ -243,7 +246,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		else:
 			self.text = service
 		
-		print "[TMDb] " + str(self.text)
+		print("[TMDb] " + str(self.text))
 		
 		HelpableScreen.__init__(self)
 		self["actions"] = HelpableActionMap(self,"TMDbActions",
@@ -281,7 +284,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			#self.text="xyzabc"
 			self.tmdbSearch()
 		else:
-			print "[TMDb] no movie found."
+			print("[TMDb] no movie found.")
 			self['searchinfo'].setText(_("No Movie information found for %s") % self.text)
 			
 	def tmdbSearch(self):
@@ -357,7 +360,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
 			if not fileExists(self.tempDir+id+".jpg"):
-				downloadPage(url_cover, self.tempDir+id+".jpg").addCallback(self.getData, self.tempDir+id+".jpg").addErrback(self.dataError)
+				downloadPage(six.ensure_binary(url_cover), self.tempDir+id+".jpg").addCallback(self.getData, self.tempDir+id+".jpg").addErrback(self.dataError)
 			else:
 				self.showCover(self.tempDir+id+".jpg")
 
@@ -365,7 +368,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
-		print "[TMDb] Error: %s" % error
+		print("[TMDb] Error: %s" % error)
 
 	def baseName(self, str):
 		name = str.split('/')[-1]
@@ -576,7 +579,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		if self.movie:
 			self['key_yellow'].setText(" ")
 		# TMDb read
-		print "[TMDb] Selected: %s" % self.mname
+		print("[TMDb] Selected: %s" % self.mname)
 		self['searchinfo'].setText("%s" % self.mname)
 		self.showCover(self.coverName)
 		self.getData()
@@ -591,7 +594,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 
 	def getData(self):
 		self.lang = config.plugins.tmdb.lang.value
-		print "[TMDb] ID: ", self.id
+		print("[TMDb] ID: ", self.id)
 				
 		try:
 			if self.movie:
@@ -815,7 +818,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self.showFSK(fsk)
 			
 	def dataError(self, error):
-		print error
+		print(error)
 
 	def showCover(self, coverName):
 		self.picload = ePicLoad()
@@ -874,7 +877,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			wFile = open(self.saveFilename+".txt","w") 
 			wFile.write(self.text) 
 			wFile.close()
-			print "[TMDb] %s.txt created" % (self.saveFilename)
+			print("[TMDb] %s.txt created" % (self.saveFilename))
 			self.session.open(MessageBox, _("TMDb information created!"), type = 1, timeout = 5)
 			self.session.openWithCallback(self.deleteEIT, MessageBox, _("Delete EIT file?"), MessageBox.TYPE_YESNO, default = False)
 
@@ -883,7 +886,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			eitFile = cleanEnd(self.saveFilename)+".eit"
 			container = eConsoleAppContainer()
 			container.execute("rm -rf '%s'" % eitFile)
-			print "[TMDb] %s deleted" % (eitFile)
+			print("[TMDb] %s deleted" % (eitFile))
 			self.session.open(MessageBox, _("EIT file deleted!"), type = 1, timeout = 5)
 
 class tmdbScreenPeople(Screen, HelpableScreen):
@@ -945,7 +948,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		
 	def onFinish(self):
 		# TMDb read
-		print "[TMDb] Selected: %s" % self.mname
+		print("[TMDb] Selected: %s" % self.mname)
 		self['searchinfo'].setText("%s" % self.mname)	
 		self.tmdbSearch()
 			
@@ -994,7 +997,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
-		print "[TMDb] Error: %s" % error
+		print("[TMDb] Error: %s" % error)
 
 	def baseName(self, str):
 		name = str.split('/')[-1]
@@ -1165,7 +1168,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		
 	def onFinish(self):
 		# TMDb read
-		print "[TMDb] Selected: %s" % self.mname
+		print("[TMDb] Selected: %s" % self.mname)
 		self['searchinfo'].setText("%s" % self.mname)	
 		self.tmdbSearch()
 			
@@ -1177,7 +1180,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			# Seasons
 			json_data_seasons = tmdb.TV(self.id).info(language=self.lang)
 			for seasons in json_data_seasons['seasons']:
-				print "[TMDb] Seasons: %s" % seasons['season_number']
+				print("[TMDb] Seasons: %s" % seasons['season_number'])
 				id = str(seasons['id'])
 				season = seasons['season_number']
 				
@@ -1228,7 +1231,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
-		print "[TMDb] Error: %s" % error
+		print("[TMDb] Error: %s" % error)
 
 	def baseName(self, str):
 		name = str.split('/')[-1]

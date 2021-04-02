@@ -101,6 +101,6 @@ class TMDB(object):
         >>> movie.title  # instead of response['title']
         """
         if isinstance(response, dict):
-            for key in response.keys():
+            for key in list(response.keys()):
                 setattr(self, key, response[key])
 

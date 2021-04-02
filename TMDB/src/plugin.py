@@ -10,12 +10,15 @@
 # source code of your modifications.
 #######################################################################
 
+from __future__ import absolute_import
+
 from Plugins.Plugin import PluginDescriptor
-import tmdb
-from __init__ import _
+from . import tmdb
+from .__init__ import _
+import importlib
 
 def main(session, service, **kwargs):
-	reload(tmdb)
+	importlib.reload(tmdb)
 	try:
 		session.open(tmdb.tmdbScreen, service, 1)
 	except:
@@ -23,7 +26,7 @@ def main(session, service, **kwargs):
 		traceback.print_exc()
 		
 def eventinfo(session, eventName="", **kwargs):
-	reload(tmdb)
+	importlib.reload(tmdb)
 	try:
 		s = session.nav.getCurrentService()
 		info = s.info()
@@ -37,5 +40,5 @@ def eventinfo(session, eventName="", **kwargs):
 def Plugins(**kwargs):
 	return [
 			PluginDescriptor(name=_("TMDb"), description=_("TMDb Infos ..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart = False),
-			PluginDescriptor(name=_("TMDb") ,description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart = False)
+			PluginDescriptor(name=_("TMDb") ,description=_("TMDb Infos ..."), where = PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart = False)
 			]
