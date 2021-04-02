@@ -1,4 +1,3 @@
-# print(" LCD4linux.StandbyBildLCD" in zip(*L4)[2])
 # -*- coding: utf-8 -*-
 from __future__ import print_function, absolute_import
 from twisted.web import resource, http
@@ -16,8 +15,8 @@ import os
 import datetime
 import glob
 import time
-
-Py = "/usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/plugin.py"
+from Tools.Directories import SCOPE_PLUGINS, resolveFilename
+Py = resolveFilename(SCOPE_PLUGINS, "Extensions/LCD4linux/plugin.py")
 
 try:
 	from enigma import eMediaDatabase
@@ -70,7 +69,7 @@ def ParseCode():
 	L4log("WebIF: parsing Code....")
 	for line in open(Py, "r").readlines():
 		if line.find("self.list1.append") >= 0 or line.find("self.list2.append") >= 0 or line.find("self.list3.append") >= 0 or line.find("self.list4.append") >= 0:
-			Z = line.replace("getConfigListEntry(_", ",").replace(")", "").replace("(", "").replace(".append", "").replace("\t", "").replace("\n", "").replace("\"", "").split(",")
+			Z = line.replace("getConfigListEntry(_", ",").replace(")", "").replace("(", "").replace(".append", "").replace("\t", "").replace("\n", "").replace("\r", "").replace("\"", "").split(",")
 			if Z[0]=="self.list1":
 				if Z[2].strip()[:13] in M1:
 					idx = M1.index(Z[2].strip()[:13])
@@ -88,6 +87,7 @@ def ParseCode():
 					i3+=1
 				Z.append(i3)
 				L3.append(Z)
+
 			elif Z[0]=="self.list4":
 				if Z[1][:1] != "-":
 					i4+=1
@@ -360,14 +360,14 @@ class LCD4linuxConfigweb(resource.Resource):
 					if (" "+b) in list(zip(*L3))[2]:
 						print(a, b)
 						obja = eval(a)
-						obja = eval(b)
+						objb = eval(b)
 						objb.value = obja.value
 				elif "." in _a:
 					b = _a.replace(".", ".MP")
 					if (" "+b) in list(zip(*L3))[2]:
 						print(a, b)
 						obja = eval(a)
-						obja = eval(b)
+						objb = eval(b)
 						objb.value = obja.value
 		elif _command == "copyIdle":
 			for a in req.args.keys():
@@ -377,14 +377,14 @@ class LCD4linuxConfigweb(resource.Resource):
 					if (" "+b) in list(zip(*L4))[2]:
 						print(a, b)
 						obja = eval(a)
-						obja = eval(b)
+						objb = eval(b)
 						objb.value = obja.value
 				elif "." in _a:
 					b = _a.replace(".", ".Standby")
 					if (" "+b) in list(zip(*L4))[2]:
 						print(a, b)
 						obja = eval(a)
-						obja = eval(b)
+						objb = eval(b)
 						objb.value = obja.value
 		elif _command == "copyOn":
 			for a in req.args.keys():
@@ -394,14 +394,15 @@ class LCD4linuxConfigweb(resource.Resource):
 					if (" "+b) in list(zip(*L2))[2]:
 						print(a, b)
 						obja = eval(a)
-						obja = eval(b)
+						objb = eval(b)
 						objb.value = obja.value
+
 				elif ".Standby" in _a:
 					b = _a.replace(".Standby", ".")
 					if (" "+b) in list(zip(*L2))[2]:
-						print(a, b)
+						print(_a, b)
 						obja = eval(a)
-						obja = eval(b)
+						objb = eval(b)
 						objb.value = obja.value
 
 #####################
