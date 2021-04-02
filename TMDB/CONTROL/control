@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-tmdb
+Version: 0.7-r2
+Description: Show TMDb information
+Architecture: all
+Section: extra
+Priority: optional
+Maintainer: schomi
+Homepage: http://www.vuplus-support.org
+Depends: python-json, python-requests
+Source: http://www.vuplus-support.org
