@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+					<tag type="Network" />
+	  </prerequisites>
+		  <info>
+					<author>schomi</author>
+					<name>TMDB</name>
+					<packagename>enigma2-plugin-extensions-tmdb</packagename>
+					<shortdescription>Show TMDb information</shortdescription>
+					<description>Show TMDb information</description>
+		  </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-tmdb" />
+	  </files>
+</default>
