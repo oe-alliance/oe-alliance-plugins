@@ -471,6 +471,13 @@ StreamTV/meta/Makefile
 StreamTV/po/Makefile
 StreamTV/icons/Makefile
 
+tmdb/Makefile
+tmdb/src/Makefile
+tmdb/src/pic/Makefile
+tmdb/src/tmdbsimple/Makefile
+tmdb/meta/Makefile
+tmdb/po/Makefile
+
 VentonFancontrol/Makefile
 VentonFancontrol/src/Makefile
 VentonFancontrol/meta/Makefile
