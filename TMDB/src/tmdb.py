@@ -342,8 +342,8 @@ class tmdbScreen(Screen, HelpableScreen):
 				
 				cover = self.tempDir+id+".jpg"
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
-					
-				if not id == "" or not title =="" or not media =="":
+
+				if not id == "" or not title == "" or not media == "":
 					res.append(((title, url_cover, media, id),))
 			self['list'].setList(res)
 			self.piclist = res
@@ -789,11 +789,11 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		try:
 			description = json_data['overview']
 			description = description + "\n\n" + cast_string + "\n" + crew_string
-			self['description'].setText("%s" % description.encode('utf_8','ignore'))
+			self['description'].setText("%s" % description)
 			
-			movieinfo ="%s%s %s %s" % (str(genre_string), str(country_string), str(year), str(runtime))
+			movieinfo = "%s%s %s %s" % (str(genre_string), str(country_string), str(year), str(runtime))
 			fulldescription = subtitle + movieinfo + "\n\n" + description + "\n" + season
-			self['fulldescription'].setText("%s" % fulldescription.encode('utf_8','ignore'))
+			self['fulldescription'].setText("%s" % fulldescription)
 			self.text = fulldescription
 		except:
 			description = "-"
@@ -989,7 +989,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
 			if not fileExists(self.tempDir+id+".jpg"):
-				downloadPage(url_cover, self.tempDir+id+".jpg").addCallback(self.getData, self.tempDir+id+".jpg").addErrback(self.dataError)
+				downloadPage(six.ensure_binary(url_cover), self.tempDir+id+".jpg").addCallback(self.getData, self.tempDir+id+".jpg").addErrback(self.dataError)
 			else:
 				self.showCover(self.tempDir+id+".jpg")
 		
@@ -1223,7 +1223,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
 			if not fileExists(self.tempDir+id+".jpg"):
-				downloadPage(url_cover, self.tempDir+id+".jpg").addCallback(self.getData, self.tempDir+id+".jpg").addErrback(self.dataError)
+				downloadPage(six.ensure_binary(url_cover), self.tempDir+id+".jpg").addCallback(self.getData, self.tempDir+id+".jpg").addErrback(self.dataError)
 			else:
 				self.showCover(self.tempDir+id+".jpg")
 		
