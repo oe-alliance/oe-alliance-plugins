@@ -1,0 +1,8 @@
+#!/bin/sh
+echo ""
+echo ""
+echo "Plugin successfully removed!"
+echo ""
+echo "You should restart GUI now!"
+echo ""
+exit 0
