@@ -1,0 +1,152 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tmdb\n"
+"POT-Creation-Date: 2017-12-15 16:43+0100\n"
+"PO-Revision-Date: 2017-12-15 16:44+0100\n"
+"Last-Translator: schomi <schomi@vuplus-support.org>\n"
+"Language-Team: schomi <schomi@vuplus-support.org>\n"
+"Language: DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: C:\\Users\\michael\\Desktop\\Plugins\\Plugin tmdb"
+"\\tmdb\n"
+
+msgid "Author:"
+msgstr "Author:"
+
+msgid "Cancel"
+msgstr "Abbruch"
+
+msgid "Countries:"
+msgstr "Länder:"
+
+msgid "Cover resolution:"
+msgstr "Cover Auflösung:"
+
+msgid "Crew"
+msgstr "Besetzung"
+
+msgid "Delete EIT file?"
+msgstr "Lösche EIT Datei?"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Details down"
+msgstr "Details runter"
+
+msgid "Details up"
+msgstr "Details hoch"
+
+msgid "Director:"
+msgstr "Regie:"
+
+msgid "EIT file deleted!"
+msgstr "EIT Datei gelöscht!"
+
+msgid "Edit search"
+msgstr "Bearbeite Suche"
+
+msgid "Episodes"
+msgstr "Episoden"
+
+msgid "Exit"
+msgstr "Verlassen"
+
+msgid "Genre:"
+msgstr "Genre:"
+
+msgid "Language:"
+msgstr "Sprache:"
+
+msgid "Loading..."
+msgstr "Lade ..."
+
+msgid "Movie"
+msgstr "Film"
+
+msgid "No Movie information found for %s"
+msgstr "Keine Filminformationen für %s"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Page down"
+msgstr "Seite runter"
+
+msgid "Page up"
+msgstr "Seite hoch"
+
+msgid "Runtime:"
+msgstr "Dauer:"
+
+msgid "Save TMDb movie infos to file"
+msgstr "Schreibe TMDB Film Information in Datei"
+
+msgid "Search for Movie:"
+msgstr "Suche nach Film:"
+
+msgid "Season"
+msgstr "Staffel"
+
+msgid "Seasons"
+msgstr "Staffeln"
+
+msgid "Selection down"
+msgstr "Auswahl runter"
+
+msgid "Selection up"
+msgstr "Auswahl hoch"
+
+msgid "Series"
+msgstr "Serie"
+
+msgid "Setup"
+msgstr "Einstellungen"
+
+msgid "Show details"
+msgstr "Zeige Details"
+
+msgid "Show details if single result:"
+msgstr "Zeige Details bei nur einem Suchergebnis an:"
+
+msgid "Studio:"
+msgstr "Studio:"
+
+msgid "TMDB: Results for %s"
+msgstr "TMDb: Ergebnisse für %s"
+
+msgid "TMDb"
+msgstr "TMDb"
+
+msgid "TMDb ... function for Movielist"
+msgstr "TMDb ... Funktion für die Aufnahmenliste"
+
+msgid "TMDb Infos ..."
+msgstr "TMDb Infos ..."
+
+msgid "TMDb information created!"
+msgstr "TMDb Informationen erstellt!"
+
+msgid "TMDb: No results found, or does not respond!"
+msgstr "TMDb: Keine Ergebnisse gefunden, oder antwortet nicht!"
+
+msgid "Try to find %s in tmdb ..."
+msgstr "Versuche %s in tmdb zu finden ..."
+
+msgid "Various"
+msgstr "Verschiedenes"
+
+msgid "Votes:"
+msgstr "Stimmen:"
+
+msgid "Write TMDb Information?"
+msgstr "Schreibe TMDb Informationen?"
+
+msgid "Year:"
+msgstr "Jahr:"

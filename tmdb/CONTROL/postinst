@@ -1,0 +1,15 @@
+#!/bin/sh
+echo ""
+echo ""
+echo "*********************************"
+echo "*               TMDb            *"
+echo "*    (c) by schomi & einfall    *"
+echo "* http://www.vuplus-support.org *"
+echo "*********************************"
+echo ""
+echo "Plugin successfully installed"
+echo ""
+echo "You must restart GUI ..."
+echo ""
+echo ""
+exit 0
