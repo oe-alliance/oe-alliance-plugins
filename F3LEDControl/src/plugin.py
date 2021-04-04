@@ -139,7 +139,7 @@ class Channelnumber:
 					self.show()
 			else:
 				self.__eventInfoChanged(True)
-					
+
 		if config.plugins.SEG.showClock.value == 'Off':
 			display_write("....")
 			self.TimerText.start(self.updatetime, True)
@@ -322,4 +322,3 @@ def sessionstart(reason, **kwargs):
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
 		PluginDescriptor(name="LED Display Setup", description="Change LED display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]
-

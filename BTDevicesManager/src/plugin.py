@@ -7,15 +7,15 @@ from __future__ import absolute_import
 #
 # requierments: bluez4-testtools bluez4 bluez-hcidump
 # Some Kernel modules for support HID devices
-# 
-# For example: 
-# kernel-module-hid-a4tech 
-# kernel-module-hid-apple 
-# kernel-module-hid-appleir 
-# kernel-module-hid-belkin 
-# kernel-module-hid-magicmouse 
-# kernel-module-hid-microsoft 
-# kernel-module-hid-wacom 
+#
+# For example:
+# kernel-module-hid-a4tech
+# kernel-module-hid-apple
+# kernel-module-hid-appleir
+# kernel-module-hid-belkin
+# kernel-module-hid-magicmouse
+# kernel-module-hid-microsoft
+# kernel-module-hid-wacom
 #====================================================
 
 from . import _
@@ -134,10 +134,10 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 		self["key_green"] = Label(_("Save"))
 
 		ConfigListScreen.__init__(self, list)
-		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], 
+		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'],
 		{
-			'red': self.dontSaveAndExit,  
-			'green': self.saveAndExit, 
+			'red': self.dontSaveAndExit,
+			'green': self.saveAndExit,
 			'cancel': self.dontSaveAndExit
 		}, -1)
 
@@ -209,7 +209,7 @@ class BluetoothDevicesManager(Screen):
 		self["key_blue"] = Label(_("Config"))
 
 		self["ConnStatus"] = Label(_("No connected to any device"))
-    
+
 		self.devicelist = []
 		self["devicelist"] = MenuList(self.devicelist)
 
@@ -241,7 +241,7 @@ class BluetoothDevicesManager(Screen):
 			self.scanForDevices()
 
 	def keyGreen(self):
-		print("[BluetoothManager] keyGreen")  
+		print("[BluetoothManager] keyGreen")
 		if config.btdevicesmanager.autostart.getValue() or brandoem in ("xcore", "edision"):
 			self["ConnStatus"].setText(_("No connected to any device"))
 			self.initDevice()
@@ -249,7 +249,7 @@ class BluetoothDevicesManager(Screen):
 			self["devicelist"].setList([])
 			self["ConnStatus"].setText(_("Please load BT driver by pressing BLUE button."))
 
-	def scanForDevices(self):  
+	def scanForDevices(self):
 		print("[BluetoothManager] scanForDevices")
 		# lets clear the list before Rescanning
 		self.devicelist = []
@@ -421,7 +421,7 @@ class BluetoothDevicesManager(Screen):
 			print("[BluetoothManager] connection faild")
 			msg = _("Can't not pair with selected device!")
 			self["ConnStatus"].setText(msg)
-			
+
 	def keyBlue(self):
 		print("[BluetoothManager] keyBlue")
 		self.session.openWithCallback(self.keyGreen, BluetoothDevicesManagerSetup)
@@ -540,4 +540,3 @@ def Plugins(**kwargs):
 		return l
 	else:
 		return []
-

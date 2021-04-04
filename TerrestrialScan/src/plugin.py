@@ -103,7 +103,7 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 			setup_list.append(getConfigListEntry(_("LCN Descriptor"), config.plugins.TerrestrialScan.lcndescriptor, _('Select the LCN descriptor used in your area. 0x83 is the default DVB standard descriptor. 0x87 is used in some Scandinavian countries.')))
 			if config.plugins.TerrestrialScan.lcndescriptor.value == 0x87:
 				setup_list.append(getConfigListEntry(_("Channel list ID"), config.plugins.TerrestrialScan.channel_list_id, _('Enter channel list ID used in your area. If you are not sure enter zero.')))
-		
+
 		setup_list.append(getConfigListEntry(_("Create terrestrial.xml file"), config.plugins.TerrestrialScan.makexmlfile, _('Select "yes" to create a custom terrestrial.xml file and install it in /etc/enigma2 for system scans to use.')))
 		setup_list.append(getConfigListEntry(_("Signal quality stabisation time (secs)"), config.plugins.TerrestrialScan.stabliseTime, _('Period of time to wait for the tuner to stabalise before taking a signal quality reading. 2 seconds is good for most hardware but some may require longer.')))
 

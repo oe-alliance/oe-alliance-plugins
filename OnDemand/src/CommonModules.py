@@ -129,7 +129,7 @@ class MainMenuList(HTMLComponent, GUIComponent):
 		r1 = self.image_rect
 
 		res = [None]
-		
+
 		icon = resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/%s.png" % imagename)
 		if fileExists(icon):
 			self.picload.setPara((r1.w, r1.h, 0, 0, 1, 1, "#00000000"))
@@ -163,7 +163,7 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		self.imagedir = "/tmp/onDemandImg/"
 		self.defaultImg = iconDefault
 		self.showIcon = showIcon
-		
+
 		if not os_path.exists(self.imagedir):
 			os_mkdir(self.imagedir)
 
@@ -255,7 +255,7 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		r4 = self.date_rect
 
 		res = [None]
-		
+
 		# If we don't want to show the icons then shift everything to the left.
 		if self.showIcon != 'False':
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.x + r1.w, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP, name))
@@ -309,7 +309,7 @@ class EpisodeList(HTMLComponent, GUIComponent):
 				if not os_path.exists(thumbnailFile):
 					u = six.ensure_binary(x[5])
 					client.downloadPage(u, thumbnailFile)
-			
+
 		self.l.setList(mediaList)
 		self.selectionChanged()
 
@@ -317,12 +317,12 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		try:
 			temp_icon = str(x)
 			icon_name = temp_icon.rsplit('/', 1)
-			
+
 			# OUG streams doesn't handle thumbnals well
 			if icon_name[1][:5] == "nicam":
 				icon_name = temp_icon.rsplit('/', 2)
 				return str(icon_name[1]) + ".jpg"
-			else:				
+			else:
 				return str(icon_name[1])
 		except (Exception) as exception:
 			print("getThumbnailName: No image found: ", exception, " for: ", x)
@@ -461,7 +461,7 @@ class MyHTTPHandler(HTTPHandler):
 	def http_open(self, req):
 		return self.do_open(MyHTTPConnection, req)
 
-###########################################################################	   
+###########################################################################
 
 
 class MoviePlayer(MP_parent):
@@ -478,7 +478,7 @@ class MoviePlayer(MP_parent):
 			return
 		self.close()
 
-###########################################################################	   
+###########################################################################
 
 
 class RTMP:

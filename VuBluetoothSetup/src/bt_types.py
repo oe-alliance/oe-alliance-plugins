@@ -72,7 +72,7 @@ BT_VUPLUS_RCU_NAME = "VUPLUS-BLE-RCU"
 BT_VOICE_PATH = "/tmp/voice.wav"
 
 btkeyboard = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/BluetoothSetup/bt_keyboard.png"))
-btaudio = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/BluetoothSetup/bt_audio.png")) 	
+btaudio = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/BluetoothSetup/bt_audio.png"))
 btrc = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/BluetoothSetup/bt_rc.png"))
 bticon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/BluetoothSetup/bt_misc.png"))
 
@@ -87,4 +87,3 @@ def getIcon(profile):
 		return btaudio
 	else:
 		return bticon
-

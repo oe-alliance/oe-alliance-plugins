@@ -35,7 +35,7 @@ MyRecLed = False
 use_oled = False
 if HardwareInfo().get_device_model() in ("sf8008", "sf8008m", "gbmv200", "viper4k"):
 	use_oled = True
-	
+
 
 def vfd_write(text):
 	if use_oled:
@@ -168,7 +168,7 @@ class Channelnumber:
 					self.prikaz()
 			else:
 				self.__eventInfoChanged()
-					
+
 		if config.plugins.VFD_ini.showClock.value == 'Off':
 			vfd_write("    ")
 			self.zaPrik.start(self.updatetime, 1)
@@ -197,7 +197,7 @@ class Channelnumber:
 			if self.blink:
 				eDBoxLCD.getInstance().setLCDBrightness(config.lcd.bright.value * 255 / 10)
 				self.blink = False
-			
+
 
 ChannelnumberInstance = None
 
@@ -243,7 +243,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self.onClose.append(self.abort)
 
 		self.onChangedEntry = []
-			
+
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 

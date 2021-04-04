@@ -345,7 +345,7 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 	def doPlay(self):
 		if self.state == self.PLAYER_PAUSED:
 			if self.shown:
-				self.__setHideTimer()	
+				self.__setHideTimer()
 		self.state = self.PLAYER_PLAYING
 		self.session.nav.playService(self.service_ref)
 		if self.shown:

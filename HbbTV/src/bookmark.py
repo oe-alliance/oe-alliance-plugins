@@ -301,5 +301,3 @@ class BookmarkManager(SimpleConfigParser):
 	@staticmethod
 	def getInstance():
 		return BookmarkManager(vbcfg.PLUGINROOT + "/bookmark.ini")
-
-

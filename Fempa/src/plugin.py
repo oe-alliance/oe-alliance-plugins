@@ -32,23 +32,23 @@ socket.setdefaulttimeout(300) #in seconds
 class fempa(Screen):
 	wsize = getDesktop(0).size().width()
 	hsize = getDesktop(0).size().height()
-	
+
 	skin = """
 		<screen flags="wfNoBorder" position="0,0" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="Fem Pa" >
 		<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/fempa/main.png" position="0,0" size=\"""" + str(wsize) + "," + str(hsize) + """\"  zPosition="-2"/>
 		<widget name="myMenu" position="310,310" size=\"""" + str((wsize / 2) - 30) + "," + str(hsize - 350) + """\" scrollbarMode="showOnDemand"/>
 		</screen>"""
-			
+
 	theFunc = "main"
 	osdList = []
 	osdList.append((_("Simple Search"), "search"))
 	osdList.append((_("VirtualKb Search"), "virtualkb"))
 	historyList = []
 	historyInt = 0
-	currentService = ""	  
+	currentService = ""
 
 	def __init__(self, session):
-		
+
 		def gethtml(url, data=''):
 			try:
 				req = Request(url)
@@ -56,45 +56,45 @@ class fempa(Screen):
 				if data == '':
 					response = urlopen(req)
 				else:
-					response = urlopen(req, data)	  
+					response = urlopen(req, data)
 				htmldoc = str(response.read())
 				response.close()
-				return htmldoc 
+				return htmldoc
 			except:
 				print("jebiga gethtml")
-		
+
 		html = gethtml("http://www.p4.no/section.aspx?id=443")
-	
+
 		files = re.compile('''"Id":([0-9]*?),"Path":"openP4PlayerModal\('clip', ([0-9]*?)\); return false;","Title":"(.*?)","MediaLinkText":"(.+?)"''', re.DOTALL).findall(html)
-		
+
 		self.osdList = [(x[2], x[1]) for x in files]
-		
+
 		Screen.__init__(self, session)
 		self["myMenu"] = MenuList(self.osdList)
 		self["myActionMap"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 		"ok": self.go,
 		"cancel": self.cancel
-		}, -1)	  
+		}, -1)
 		self.currentService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.session.nav.stopService()
-	
+
 	def go(self):
 		returnTitle = self["myMenu"].l.getCurrentSelection()[0]
 		returnValue = self["myMenu"].l.getCurrentSelection()[1]
-		
+
 		print(returnTitle)
 		print(returnValue)
-		
+
 		html = self.gethtml("http://www.p4.no/player/player.aspx?type=clip&id=" + returnValue)
 		x = re.compile("var omp3='(.+?)'", re.DOTALL).findall(html)
 		if not x == []:
-			x = "http://www.p4.no" + x[0]	
-		
+			x = "http://www.p4.no" + x[0]
+
 			fileRef = eServiceReference(4097, 0, x)
 			fileRef.setName(returnTitle)
 			self.session.nav.playService(fileRef)
-			 
+
 	def gethtml(self, url, data=''):
 		try:
 			req = Request(url)
@@ -102,24 +102,24 @@ class fempa(Screen):
 			if data == '':
 				response = urlopen(req)
 			else:
-				response = urlopen(req, data)	  
+				response = urlopen(req, data)
 			htmldoc = str(response.read())
 			response.close()
 			return htmldoc
 		except:
-			print("jebiga gethtml")				  
-   
+			print("jebiga gethtml")
+
 	def cancel(self):
-		self.session.nav.playService(self.currentService)	 
+		self.session.nav.playService(self.currentService)
 		self.close(None)
-		  
-		
+
+
 ###########################################################################
 
 def main(session, **kwargs):
-	
+
 	burek = session.open(fempa)
-		
+
 ###########################################################################
 
 
@@ -130,5 +130,3 @@ def Plugins(**kwargs):
 		where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU],
 		icon="./icon.png",
 		fnc=main)
-
-

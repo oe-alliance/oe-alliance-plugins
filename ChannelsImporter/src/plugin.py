@@ -80,7 +80,7 @@ class ChannelsImporterScreen(Setup):
 	def keySave(self):
 		self.saveConfig()
 		self.close()
-	
+
 	def keyGo(self):
 		self.saveConfig()
 		self.startImporter()
@@ -93,7 +93,7 @@ class ChannelsImporterScreen(Setup):
 			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:8001" % (config.plugins.ChannelsImporter.ip.value[0], config.plugins.ChannelsImporter.ip.value[1], config.plugins.ChannelsImporter.ip.value[2], config.plugins.ChannelsImporter.ip.value[3])
 			config.usage.remote_fallback.save()
 		configfile.save()
-	
+
 	def keyCancel(self):
 		if self["config"].isChanged():
 			self.session.openWithCallback(self.cancelCallback, MessageBox, _("Really close without saving settings?"))

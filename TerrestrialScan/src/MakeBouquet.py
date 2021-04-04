@@ -469,7 +469,7 @@ class MakeBouquet(Screen):
 		xmlFile.write(''.join(xml))
 		xmlFile.close()
 		del xml
-	
+
 	def iterateUniqueTranspondersByFrequency(self):
 		# returns an iterator list for self.transponders_unique in frequency order ascending
 		sort_list = [(x[0], x[1]["frequency"]) for x in self.transponders_unique.items()]

@@ -10,7 +10,7 @@ from six.moves import _thread
 from enigma import eTimer
 
 from six.moves.urllib.request import urlretrieve
-from six.moves import urllib 
+from six.moves import urllib
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -423,4 +423,3 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("FPGA Upgrade"), description="Upgrade FPGA..", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
-

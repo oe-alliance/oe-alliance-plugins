@@ -572,7 +572,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 	def ConfigFinishedMsgCallback(self, data):
 		isRalinkKmodUploaded = self.checkProcModules() == 1
 		needRalinkKmod_ = self.needRalinkKmod()
-	
+
 		if needRalinkKmod_: # ralink device is activated in AP Mode.
 			if not isRalinkKmodUploaded: # reboot to loading kernel module.
 				msg = "You should now reboot your STB in order to ralink device operate in AP mode.\n\nReboot now ?\n\n"
@@ -729,7 +729,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 		printDebugMsg("== printConfigList ==")
 		for (key, entry) in confList.items():
 			printDebugMsg("%s = %s" % (key, str(entry.value)))
-		
+
 		printDebugMsg("== printConfigList end ==")
 
 	def loadHostapConfig(self):
@@ -742,7 +742,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 			printDebugMsg("open /etc/hostapd.conf.linuxap.back")
 			fd = open("/etc/hostapd.conf.linuxap.back", "r")
 		if fd == -1:
-			printDebugMsg("can not open hostapd.conf") 
+			printDebugMsg("can not open hostapd.conf")
 			return -1
 
 		for line in fd.readlines():
@@ -820,7 +820,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 					fix_line = "wep_default_key=%s\n" % self.hostapdConf["wep_default_key"].value
 
 			elif line.find("wep_key0=") != -1: # is WepKeyLine
-				if isEncryptOn: 
+				if isEncryptOn:
 					if isEncryptWEP:
 						fix_line = "wep_key0=%s\n" % self.hostapdConf["wep_key0"].value
 					else:
@@ -830,7 +830,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 					fix_line = "#wep_key0=%s\n" % self.hostapdConf["wep_key0"].value
 
 			elif line.find("wpa=") != -1: # is wpaLine
-				if isEncryptOn and isEncryptWPA: 
+				if isEncryptOn and isEncryptWPA:
 					fix_line = "wpa=%s\n" % apModeConfig.method.value
 ##
 			elif line.startswith("#ssid"):
@@ -864,4 +864,3 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name=_("Wireless Access Point"), description=_("Using a Wireless module as access point."), where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=True, fnc=main)]
-

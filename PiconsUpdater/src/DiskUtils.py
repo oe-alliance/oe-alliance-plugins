@@ -10,9 +10,9 @@ def getCleanFileName(value):
     Converts to lowercase, removes non-word characters (alphanumerics and
     underscores) and converts spaces to hyphens. Also strips leading and
     trailing whitespace.
-    
+
     Function is from django
-    
+
     https://github.com/django/django/blob/9108696a7553123f57c5d42f9c4a90cad44532f4/django/utils/text.py#L417
     """
     if six.PY2:
@@ -28,7 +28,7 @@ def getCleanFileName(value):
 def getOldestFile(path, fileExtensions=None):
     """
     get oldest file from folder
-    
+
     fileExtensions as tuple. example: ('.txt', '.png')
     """
     files = getFilesFromPath(path)
@@ -44,7 +44,7 @@ def getFiles(path, fileExtensions=None):
     get file list as an array
     sorted by date.
     The oldest first
-    
+
     fileExtensions as tuple. example: ('.txt', '.png')
     """
     files = getFilesFromPath(path)

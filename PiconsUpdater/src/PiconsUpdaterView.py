@@ -173,7 +173,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
         try:
             previewImagePath = TMP_PREVIEW_IMAGE_PATH + '/' + getPiconsTypeValue() + '.png'
             if os.path.isfile(previewImagePath) is False:
-                raise 
+                raise
             return previewImagePath
         except:
             return PREVIEW_IMAGE_PATH

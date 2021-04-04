@@ -165,7 +165,7 @@ class WitAiSpeechToText:
 		self.msg_instance = None
 		self.text = None
 		self.voicePath = "/tmp/voice.wav"
-		self.running = False	
+		self.running = False
 
 	def setVoicePath(self, voicePath):
 		self.voicePath = voicePath
@@ -173,14 +173,14 @@ class WitAiSpeechToText:
 	def start(self):
 		if self.running:
 			return
-		
+
 		self.running = True
 		self.text = None
 
 		global witaistt_thread_instance
 		witaistt_thread_instance = WitAiSttThread(self.STTCallBack)
 		witaistt_thread_instance.setVoicePath(self.voicePath)
-		
+
 		global g_session
 		self.msg_instance = g_session.openWithCallback(self.msgCallback, MessageBox, _("Converting speech to text using wit.ai server..."), type=MessageBox.TYPE_INFO, enable_input=False, timeout=30)
 
@@ -278,4 +278,3 @@ def Plugins(**kwargs):
 		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart))
 
 	return list
-

@@ -39,17 +39,17 @@ class Search(TMDB):
             query: CGI escpaed string.
             page: (optional) Minimum value of 1. Expected value is an integer.
             language: (optional) ISO 639-1 code.
-            include_adult: (optional) Toggle the inclusion of adult titles. 
+            include_adult: (optional) Toggle the inclusion of adult titles.
                            Expected value is True or False.
-            year: (optional) Filter the results release dates to matches that 
+            year: (optional) Filter the results release dates to matches that
                   include this value.
-            primary_release_year: (optional) Filter the results so that only 
+            primary_release_year: (optional) Filter the results so that only
                                   the primary release dates have this value.
-            search_type: (optional) By default, the search type is 'phrase'. 
-                         This is almost guaranteed the option you will want. 
-                         It's a great all purpose search type and by far the 
-                         most tuned for every day querying. For those wanting 
-                         more of an "autocomplete" type search, set this 
+            search_type: (optional) By default, the search type is 'phrase'.
+                         This is almost guaranteed the option you will want.
+                         It's a great all purpose search type and by far the
+                         most tuned for every day querying. For those wanting
+                         more of an "autocomplete" type search, set this
                          option to 'ngram'.
 
         Returns:
@@ -87,13 +87,13 @@ class Search(TMDB):
             query: CGI escpaed string.
             page: (optional) Minimum value of 1. Expected value is an integer.
             language: (optional) ISO 639-1 code.
-            first_air_date_year: (optional) Filter the results to only match 
+            first_air_date_year: (optional) Filter the results to only match
                                  shows that have a air date with with value.
-            search_type: (optional) By default, the search type is 'phrase'. 
-                         This is almost guaranteed the option you will want. 
-                         It's a great all purpose search type and by far the 
-                         most tuned for every day querying. For those wanting 
-                         more of an "autocomplete" type search, set this 
+            search_type: (optional) By default, the search type is 'phrase'.
+                         This is almost guaranteed the option you will want.
+                         It's a great all purpose search type and by far the
+                         most tuned for every day querying. For those wanting
+                         more of an "autocomplete" type search, set this
                          option to 'ngram'.
 
         Returns:
@@ -112,13 +112,13 @@ class Search(TMDB):
         Args:
             query: CGI escpaed string.
             page: (optional) Minimum value of 1. Expected value is an integer.
-            include_adult: (optional) Toggle the inclusion of adult titles. 
+            include_adult: (optional) Toggle the inclusion of adult titles.
                            Expected value is True or False.
-            search_type: (optional) By default, the search type is 'phrase'. 
-                         This is almost guaranteed the option you will want. 
-                         It's a great all purpose search type and by far the 
-                         most tuned for every day querying. For those wanting 
-                         more of an "autocomplete" type search, set this 
+            search_type: (optional) By default, the search type is 'phrase'.
+                         This is almost guaranteed the option you will want.
+                         It's a great all purpose search type and by far the
+                         most tuned for every day querying. For those wanting
+                         more of an "autocomplete" type search, set this
                          option to 'ngram'.
 
         Returns:

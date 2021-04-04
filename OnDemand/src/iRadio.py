@@ -81,9 +81,9 @@ def urlType(target):
 		http_message = res.info()
 		full = http_message.type
 		main = http_message.maintype
-		
+
 		return full
- 
+
 	except (Exception) as exception:
 		print('urlType: Error retrieving URL Type ', exception)
 		return ''
@@ -120,13 +120,13 @@ class iRadioMenu(Screen):
 		{
 			"ok": self.go,
 			"cancel": self.cancel
-		}, -1)	  
+		}, -1)
 
 	def go(self):
 		name = self["iRadioMenu"].l.getCurrentSelection()[0]
 		id = self["iRadioMenu"].l.getCurrentSelection()[1]
 		url = self["iRadioMenu"].l.getCurrentSelection()[2]
-		
+
 		if id == "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
@@ -140,7 +140,7 @@ class iRadioMenu(Screen):
 
 	def cancel(self):
 		self.removeFiles(self.imagedir)
-		self.close(None)		
+		self.close(None)
 
 	def removeFiles(self, targetdir):
 		for root, dirs, files in os_walk(targetdir):
@@ -169,7 +169,7 @@ class shoutGenresMenu(Screen):
 		osdList = []
 
 		osdList.append((_("Search"), "search", "false"))
-		
+
 		# Read the URL for the selected category on the Main Menu.
 		try:
 			# Read the Genre List from Shoutcast.
@@ -189,7 +189,7 @@ class shoutGenresMenu(Screen):
 					osdList.append((_(name), id, children))
 
 		except (Exception) as exception:
-			print('iRadioMenu: Error parsing genres: ', exception)											
+			print('iRadioMenu: Error parsing genres: ', exception)
 
 		osdList.append((_("Exit"), "exit", "false"))
 
@@ -198,13 +198,13 @@ class shoutGenresMenu(Screen):
 		{
 			"ok": self.go,
 			"cancel": self.cancel
-		}, -1) 
+		}, -1)
 
 	def go(self):
 		name = self["shoutGenresMenu"].l.getCurrentSelection()[0]
 		id = self["shoutGenresMenu"].l.getCurrentSelection()[1]
 		children = self["shoutGenresMenu"].l.getCurrentSelection()[2]
-		
+
 		if id is not None:
 			if id == "exit":
 				self.close(None)
@@ -263,7 +263,7 @@ class shoutSubGenresMenu(Screen):
 					osdList.append((_(name), id, children))
 
 		except (Exception) as exception:
-			print('shoutSubGenresMenu: Error parsing feed: ', exception)											
+			print('shoutSubGenresMenu: Error parsing feed: ', exception)
 
 		osdList.append((_("Exit"), "exit", "false"))
 
@@ -272,13 +272,13 @@ class shoutSubGenresMenu(Screen):
 		{
 			"ok": self.go,
 			"cancel": self.cancel
-		}, -1) 
+		}, -1)
 
 	def go(self):
 		name = self["shoutSubGenresMenu"].l.getCurrentSelection()[0]
 		id = self["shoutSubGenresMenu"].l.getCurrentSelection()[1]
 		children = self["shoutSubGenresMenu"].l.getCurrentSelection()[2]
-		
+
 		if id is not None:
 			if id == "exit":
 				self.close(None)
@@ -312,7 +312,7 @@ class tuneinGenresMenu(Screen):
 		osdList = []
 
 		osdList.append((_("Search"), "search", "false"))
-		
+
 		# Read the URL for the selected category on the Main Menu.
 		try:
 			# Read the Genre List from Shoutcast.
@@ -331,7 +331,7 @@ class tuneinGenresMenu(Screen):
 				osdList.append((_(name), id, "false"))
 
 		except (Exception) as exception:
-			print('tuneinGenresMenu: Error parsing genres: ', exception)											
+			print('tuneinGenresMenu: Error parsing genres: ', exception)
 
 		osdList.append((_("Exit"), "exit", "false"))
 
@@ -340,12 +340,12 @@ class tuneinGenresMenu(Screen):
 		{
 			"ok": self.go,
 			"cancel": self.cancel
-		}, -1) 
+		}, -1)
 
 	def go(self):
 		name = self["tuneinGenresMenu"].l.getCurrentSelection()[0]
 		id = self["tuneinGenresMenu"].l.getCurrentSelection()[1]
-		
+
 		if id != 'None':
 			if id == "exit":
 				self.close(None)
@@ -409,7 +409,7 @@ def findPlayUrl(showID, function, showWMA, **kwargs):
 						elif fileType == 'audio/mpeg':
 							fileUrl = link
 							break
-						
+
 						# This is a HTML page that can be returned from the stream
 						elif fileType == 'text/plain':
 							result = wgetUrl(link)
@@ -437,7 +437,7 @@ def findPlayUrl(showID, function, showWMA, **kwargs):
 
 
 def checkUnicode(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
@@ -446,7 +446,7 @@ def checkUnicode(value, **kwargs):
 
 
 def tidyString(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('(', '')
 	stringValue = stringValue.replace(')', '')
 	stringValue = stringValue.replace('|', '')
@@ -458,7 +458,7 @@ def tidyString(value, **kwargs):
 
 def main(session, **kwargs):
 	action = "start"
-	value = 0 
+	value = 0
 	start = session.open(iRadioMenu, action, value)
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
@@ -467,12 +467,12 @@ def main(session, **kwargs):
 class shoutGenresThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = 'Extensions/OnDemand/icons/SHOUTcast.png'
-		
+
 		self.showWMA = str(config.ondemand.ShowiRadioWMA.value)
 		self.showDefault = str(config.ondemand.ShowShoutcastDefault.value)
 		self.showIcon = str(config.ondemand.ShowShoutcastLogos.value)
 
-		if self.showIcon == 'True':		
+		if self.showIcon == 'True':
 			if self.showDefault == 'False':
 				self.defaultImg = ''
 
@@ -497,14 +497,14 @@ class shoutGenresThumb(StreamsThumbCommon):
 				</screen>"""
 
 		self["key_green"] = StaticText(_("Add to Favorites"))
-		
+
 		self["genreActions"] = ActionMap(["ColorActions"],
 		{
 			"red": self.red_pressed,
 			"green": self.green_pressed,
 			"yellow": self.yellow_pressed,
 			"blue": self.blue_pressed,
-		
+
 		}, -1)
 
 	def layoutFinished(self):
@@ -599,7 +599,7 @@ class shoutGenresThumb(StreamsThumbCommon):
 	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
 			return
-			
+
 		elif retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
@@ -608,7 +608,7 @@ class shoutGenresThumb(StreamsThumbCommon):
 			genresearch = self.url.replace(' All', '')
 			genresearch = genresearch.replace(' ', '+')
 			stationurl = 'http://api.shoutcast.com/legacy/genresearch?k=%s&genre=%s' % (devid, genresearch)
-			
+
 			self.getShoutcastMediaData(self.mediaList, stationurl)
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Stations Found!")
@@ -617,10 +617,10 @@ class shoutGenresThumb(StreamsThumbCommon):
 	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
 			self.setTitle("SHOUTcast Radio Player: Search Listings for " + callback)
-			
+
 			genresearch = callback.replace(' ', '+')
 			searchurl = 'http://api.shoutcast.com/legacy/stationsearch?k=%s&search=%s' % (devid, str(genresearch))
-			
+
 			self.getShoutcastMediaData(self.mediaList, searchurl)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
@@ -634,7 +634,7 @@ class shoutGenresThumb(StreamsThumbCommon):
 
 		if showID:
 			fileUrl = findPlayUrl(showID, 'shoutcast', self.showWMA)
-			
+
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, fileUrl)
 				fileRef.setName(showName)
@@ -676,7 +676,7 @@ class shoutGenresThumb(StreamsThumbCommon):
 					genre = str(elem.get('genre'))
 					bitrate = str(elem.get('br'))
 					audio = str(elem.get('mt'))
-					
+
 					if genre != 'None':
 						short = _("Recently Played: ") + checkUnicode(short_tmp) + _("\n\nGenre: ") + genre
 					else:
@@ -686,7 +686,7 @@ class shoutGenresThumb(StreamsThumbCommon):
 						date1 = _("Bitrate: ") + bitrate + " kbps"
 					else:
 						date1 = _("Bitrate: Unknown")
-					
+
 					if audio != 'None':
 						duration = _("Audio: ") + audio
 					else:
@@ -703,12 +703,12 @@ class shoutGenresThumb(StreamsThumbCommon):
 class FavoritesThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = 'Extensions/OnDemand/icons/favorite.png'
-		
+
 		self.showWMA = str(config.ondemand.ShowiRadioWMA.value)
 		self.showDefault = str(config.ondemand.ShowFavoriteDefault.value)
 		self.showIcon = str(config.ondemand.ShowFavoriteLogos.value)
 
-		if self.showIcon == 'True':		
+		if self.showIcon == 'True':
 			if self.showDefault == 'False':
 				self.defaultImg = ''
 
@@ -733,14 +733,14 @@ class FavoritesThumb(StreamsThumbCommon):
 				</screen>"""
 
 		self["key_yellow"] = StaticText(_("Delete from Favorites"))
-		
+
 		self["favActions"] = ActionMap(["ColorActions"],
 		{
 			"red": self.red_pressed,
 			"green": self.green_pressed,
 			"yellow": self.yellow_pressed,
 			"blue": self.blue_pressed,
-		
+
 		}, -1)
 
 	def layoutFinished(self):
@@ -773,7 +773,7 @@ class FavoritesThumb(StreamsThumbCommon):
 			if selFav is not None:
 				self.favoriteConfig.entriescount.value = self.favoriteConfig.entriescount.value - 1
 				self.favoriteConfig.entriescount.save()
-				
+
 				for item in self.favoriteConfig.Entries:
 					if str(item.text.value) == str(selFav):
 						self.favoriteConfig.Entries.remove(item)
@@ -833,7 +833,7 @@ class FavoritesThumb(StreamsThumbCommon):
 				fileUrl = findPlayUrl(stationID, 'tunein', self.showWMA)
 			else:
 				fileUrl = findPlayUrl(stationID, 'favourite', self.showWMA)
-			
+
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, fileUrl)
 				fileRef.setName(stationName)
@@ -845,7 +845,7 @@ class FavoritesThumb(StreamsThumbCommon):
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
 	def getFavMediaData(self, weekList, genre):
-		
+
 		shoutIcon = 'http://977music.com/images/uploads/pages/SHOUTcast_yellow.jpg'
 		tuneIcon = 'http://www.ipadmaniac.com/wp-content/uploads/2011/06/TuneIn-Radio-Logo.png'
 		short = ''
@@ -866,7 +866,7 @@ class FavoritesThumb(StreamsThumbCommon):
 				channel = str(item.type.value)
 				stream = str(item.text.value)
 				duration = str(item.audio.value)
-				
+
 				# Show the logo for the Favorite source.
 				if self.showIcon == 'True':
 					icon = str(item.icon.value)
@@ -889,15 +889,15 @@ class FavoritesThumb(StreamsThumbCommon):
 class tuneinGenresThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = 'Extensions/OnDemand/icons/FolderIcon.png'
-		
+
 		self.showWMA = str(config.ondemand.ShowiRadioWMA.value)
 		self.showDefault = str(config.ondemand.ShowTuneinDefault.value)
 		self.showIcon = str(config.ondemand.ShowTuneinLogos.value)
 
-		if self.showIcon == 'True':		
+		if self.showIcon == 'True':
 			if self.showDefault == 'False':
 				self.defaultImg = ''
-			
+
 		self.favoriteConfig = Config()
 		if os_path.exists(FAVORITE_FILE):
 			self.favoriteConfig.loadFromFile(FAVORITE_FILE)
@@ -921,14 +921,14 @@ class tuneinGenresThumb(StreamsThumbCommon):
 				</screen>"""
 
 		self["key_green"] = StaticText(_("Add to Favorites"))
-		
+
 		self["genreActions"] = ActionMap(["ColorActions"],
 		{
 			"red": self.red_pressed,
 			"green": self.green_pressed,
 			"yellow": self.yellow_pressed,
 			"blue": self.blue_pressed,
-		
+
 		}, -1)
 
 	def layoutFinished(self):
@@ -946,7 +946,7 @@ class tuneinGenresThumb(StreamsThumbCommon):
 		channel = self["list"].l.getCurrentSelection()[3]
 		stream = self["list"].l.getCurrentSelection()[4]
 		icon = self["list"].l.getCurrentSelection()[5]
-		duration = self["list"].l.getCurrentSelection()[6]	
+		duration = self["list"].l.getCurrentSelection()[6]
 		exists = 'False'
 
 		if (stream != 'None') and (channel != 'link'):
@@ -1049,13 +1049,13 @@ class tuneinGenresThumb(StreamsThumbCommon):
 			self.session.open(tuneinGenresThumb, showID, showName, showID)
 		elif showID != 'None':
 			fileUrl = findPlayUrl(showID, 'tunein', self.showWMA)
-			
+
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, fileUrl)
 				fileRef.setName(showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
-				
+
 				# TODO: Find out how to use this!
 				#NavigationInstance.instance.playService(fileRef)
 			else:
@@ -1087,7 +1087,7 @@ class tuneinGenresThumb(StreamsThumbCommon):
 				name_split = name_tmp.rsplit('(', 1)
 				name = tidyString(name_split[0])
 				avail = str(elem.get('key'))
-				
+
 				if (avail != 'unavailable') and (name != 'This program is not available'):
 					genreID = str(elem.get('genre_id'))
 					genre = self.getGenreName(genreID)

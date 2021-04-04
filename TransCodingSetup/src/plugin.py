@@ -149,7 +149,7 @@ if len(encoders) > 1:
 else:
 	choices.append(('0', '0'))
 	SystemInfo["NoAuto0"] = True
-	
+
 config.plugins.transcodingsetup.encodernum = ConfigSelection(default='0', choices=choices)
 
 SystemInfo["AdvancedTranscoding"] = checkSupportAdvanced()
@@ -447,29 +447,29 @@ class TranscodingSetup(Screen, ConfigListScreen):
 					self.list.append(getConfigListEntry(_("Bitrate"), config.plugins.transcodingsetup.encoder[int(encoder)].bitrate))
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "framerate"):
 					self.list.append(getConfigListEntry(_("Framerate"), config.plugins.transcodingsetup.encoder[int(encoder)].framerate))
-			
+
 			if checkSupportAdvanced() and self.setupMode != "Normal":
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "resolution"):
 					self.list.append(getConfigListEntry(_("Resolution"), config.plugins.transcodingsetup.encoder[int(encoder)].resolution))
-			
+
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "aspectratio"):
 					self.list.append(getConfigListEntry(_("Aspect Ratio"), config.plugins.transcodingsetup.encoder[int(encoder)].aspectratio))
-			
+
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "audiocodec"):
 					self.list.append(getConfigListEntry(_("Audio codec"), config.plugins.transcodingsetup.encoder[int(encoder)].audiocodec))
-			
+
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "videocodec"):
 					self.list.append(getConfigListEntry(_("Video codec"), config.plugins.transcodingsetup.encoder[int(encoder)].videocodec))
-			
+
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "gopframeb"):
 					self.list.append(getConfigListEntry(_("GOP Frame B"), config.plugins.transcodingsetup.encoder[int(encoder)].gopframeb))
-			
+
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "gopframep"):
 					self.list.append(getConfigListEntry(_("GOP Frame P"), config.plugins.transcodingsetup.encoder[int(encoder)].gopframep))
-			
+
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "level"):
 					self.list.append(getConfigListEntry(_("Level"), config.plugins.transcodingsetup.encoder[int(encoder)].level))
-			
+
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "profile"):
 					self.list.append(getConfigListEntry(_("Profile"), config.plugins.transcodingsetup.encoder[int(encoder)].profile))
 
@@ -486,7 +486,7 @@ class TranscodingSetup(Screen, ConfigListScreen):
 		if className == "ConfigSelection" or className == "TconfigSelection":
 			text = configName
 			for choice in current.choices.choices:
-				if text == configName:	
+				if text == configName:
 					text += choice[1]
 				else:
 					text += ', ' + choice[1]
@@ -572,11 +572,11 @@ def startSession(reason):
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(
-			name=_("TranscodingSetup"), 
-			description=_("Transcoding Setup"), 
-			where=PluginDescriptor.WHERE_PLUGINMENU, 
-			needsRestart=False, 
-			icon="plugin.png", 
-			fnc=main), 
-			PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], 
+			name=_("TranscodingSetup"),
+			description=_("Transcoding Setup"),
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			needsRestart=False,
+			icon="plugin.png",
+			fnc=main),
+			PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART],
 			fnc=startSession)]

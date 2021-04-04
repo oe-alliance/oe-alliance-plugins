@@ -5,7 +5,7 @@ from . import _
 
 import os
 from six.moves.urllib.request import urlretrieve
-from six.moves import urllib 
+from six.moves import urllib
 
 from Plugins.Plugin import PluginDescriptor
 
@@ -64,7 +64,7 @@ if os.path.exists("/proc/stb/info/vumodel"):
 		fwlist = [
 			 ("fpga", _("FPGA")), ("fp", _("Front Processor"))
 			]
-		fwdata = { 
+		fwdata = {
 			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			, "fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
 			}
 
@@ -793,13 +793,13 @@ class FirmwareUpgrade(Screen, ConfigListScreen):
 		device = None
 		for d in fwdata[self._item_firmware.value][2].split(';'):
 			if os.path.exists(d):
-				device = d			
+				device = d
 		if device is None:
 			self.session.open(MessageBox, _("Can't found device file!!"), MessageBox.TYPE_INFO, timeout=10)
 			return
 		fbs = self.session.open(UpgradeStatus, self, self._item_firmware.value, self.updateFilePath, device)
 		fbs.setCallback(self.cbFinishedUpgrade)
-	
+
 	def doFileOpen(self):
 		fbs = self.session.open(FUFilebrowser, self, self._item_firmware.value)
 		fbs.setCallback(self.cbSetStatus)
@@ -883,6 +883,5 @@ def main(session, **kwargs):
 	session.open(FirmwareUpgrade)
 
 
-def Plugins(**kwargs):           
+def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Firmware Upgrade"), description=_("Upgrade Firmware.."), icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
-

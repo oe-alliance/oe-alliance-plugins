@@ -56,7 +56,7 @@ class MisPlsLcnScan(Screen):
 		self.index = 0
 		self.LOCK_TIMEOUT_ROTOR = 1200 	# 100ms for tick - 120 sec
 		self.LOCK_TIMEOUT_FIXED = 50 	# 100ms for tick - 5 sec
-		
+
 		self.path = "/etc/enigma2"
 		self.services_dict = {}
 		self.tmp_services_dict = {}
@@ -265,9 +265,9 @@ class MisPlsLcnScan(Screen):
 			print("[MisPlsLcnScan][getFrontend] Fixed dish. Will wait up to %i seconds for tuner lock." % (self.LOCK_TIMEOUT / 10))
 
 		self.selectedNIM = current_slotid  # Remember for downloading SI tables
-		
+
 		self["tuner_text"].setText(chr(ord('A') + current_slotid))
-		
+
 		self.frontend = self.rawchannel.getFrontend()
 		if not self.frontend:
 			print("[MisPlsLcnScan][getFrontend] Cannot get frontend")
@@ -499,7 +499,7 @@ class MisPlsLcnScan(Screen):
 				if override in servicekeys:
 					self.tmp_services_dict[override]["logical_channel_number"] = PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["overrides"][override]
 					self.services_dict[PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["overrides"][override]] = self.tmp_services_dict[override]
-					
+
 		# for debug only
 		for key in self.dict_sorter(self.tmp_services_dict, "service_name"):
 			print("[service]", key, self.tmp_services_dict[key])
@@ -575,4 +575,3 @@ class MisPlsLcnScan(Screen):
 		if self.frontend:
 			self.frontend = None
 			del(self.rawchannel)
-

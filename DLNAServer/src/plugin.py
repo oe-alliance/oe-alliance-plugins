@@ -120,7 +120,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		</screen>
 		"""
 
-	def __init__(self, session): 
+	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
 
@@ -164,14 +164,14 @@ class DLNAServer(ConfigListScreen, Screen):
 	def keyExit(self):
 		config.plugins.dlnaserver.autostart.save()
 		self.close()
-	
+
 	def keyOK(self):
 		currentItem = self.getCurrentItem()
 		if currentItem is not None:
 			self.session.openWithCallback(self.cbChangeDirectory, SelectDirectoryWindow, currentItem.value)
 
 	def keyGreen(self):
-		args = ' stop' 
+		args = ' stop'
 		if self["key_green"].getText().strip() == 'Start':
 			args = ' start'
 			self.saveConfigFile()
@@ -347,7 +347,7 @@ class DLNAServer(ConfigListScreen, Screen):
 					self.oldConfig[key] = default
 			except:
 				self.oldConfig[key] = default
-			
+
 		try:
 			model = os.popen('cat /proc/stb/info/boxtype').read().strip()
 		except:

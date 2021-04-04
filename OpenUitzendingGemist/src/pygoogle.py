@@ -1,4 +1,4 @@
- 
+
 #!/usr/bin/python
 """
 Google AJAX Search Module
@@ -54,23 +54,23 @@ FILTER_ON = 1
 #http://code.google.com/apis/ajaxsearch/documentation/reference.html#_fonje_args
 """
 RSZ
-This optional argument supplies the number of results that the application would like to recieve. 
-A value of small indicates a small result set size or 4 results. 
-A value of large indicates a large result set or 8 results. If this argument is not supplied, a value of small is assumed. 
+This optional argument supplies the number of results that the application would like to recieve.
+A value of small indicates a small result set size or 4 results.
+A value of large indicates a large result set or 8 results. If this argument is not supplied, a value of small is assumed.
 """
 RSZ_SMALL = "small"
 RSZ_LARGE = "large"
 
 """
 HL
-This optional argument supplies the host language of the application making the request. 
-If this argument is not present then the system will choose a value based on the value of the Accept-Language http header. 
+This optional argument supplies the host language of the application making the request.
+If this argument is not present then the system will choose a value based on the value of the Accept-Language http header.
 If this header is not present, a value of en is assumed.
 """
 
 
 class pygoogle:
-    
+
     def __init__(self, query, pages=10, hl='en', log_level=logging.INFO):
         self.pages = pages          #Number of pages. default 10
         self.query = query
@@ -79,7 +79,7 @@ class pygoogle:
         self.safe = SAFE_OFF        #SafeBrowsing -  active/moderate/off
         self.hl = hl                #Defaults to English (en)
         self.__setup_logging(level=log_level)
-        
+
     def __setup_logging(self, level):
         logger = logging.getLogger('pygoogle')
         logger.setLevel(level)
@@ -101,8 +101,8 @@ class pygoogle:
                     'v': '1.0',
                     'start': page * rsz,
                     'rsz': self.rsz,
-                    'safe': self.safe, 
-                    'filter': self.filter,    
+                    'safe': self.safe,
+                    'filter': self.filter,
                     'hl': self.hl
                     }
             self.logger.debug('search: "%s" page# : %s' % (self.query, page))
@@ -122,13 +122,13 @@ class pygoogle:
                         if result:
                             print('[%s]' % (unquote(result['titleNoFormatting'])))
                             print(result['content'].strip("<b>...</b>").replace("<b>", '').replace("</b>", '').replace("&#39;", "'").strip())
-                            print(unquote(result['unescapedUrl']) + '\n')                
+                            print(unquote(result['unescapedUrl']) + '\n')
                 else:
-                    # no responseData key was found in 'data' 
+                    # no responseData key was found in 'data'
                     self.logger.error('no responseData key found in response. very unusal')
             results.append(data)
         return results
-    
+
     def search(self):
         """Returns a dict of Title/URLs"""
         results = {}
@@ -155,8 +155,8 @@ class pygoogle:
                     'v': '1.0',
                     'start': page,
                     'rsz': RSZ_LARGE,
-                    'safe': SAFE_OFF, 
-                    'filter': FILTER_ON,    
+                    'safe': SAFE_OFF,
+                    'filter': FILTER_ON,
                     }
             q = urlencode(args)
             search_results = urlopen(URL + q)
@@ -166,12 +166,12 @@ class pygoogle:
                 for result in data['responseData']['results']:
                     if result and 'unescapedUrl' in result:
                         url = unquote(result['unescapedUrl'])
-                        urls.append(url)            
+                        urls.append(url)
             else:
                 self.logger.error('no responseData key found in response')
             results[page] = urls
         return results
-        
+
     def get_urls(self):
         """Returns list of result URLs"""
         results = []
@@ -208,7 +208,7 @@ class pygoogle:
         finally:
             self.pages = temp
         return result_count
-        
+
     def display_results(self):
         """Prints results (for command line)"""
         self.__search__(True)

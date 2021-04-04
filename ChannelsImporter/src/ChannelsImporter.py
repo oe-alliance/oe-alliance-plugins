@@ -189,7 +189,7 @@ class ChannelsImporter(Screen):
 			if not inStandby:
 				self["action"].setText(_('Force EPG save on remote receiver'))
 				self["status"].setText("")
-			
+
 			self.forceSaveEPGonRemoteReceiver()
 			print("[ChannelsImporter] Searching for epg.dat...")
 			if not inStandby:

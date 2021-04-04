@@ -102,7 +102,7 @@ def FanSetup(menuid, **kwargs):
 		return [(_("FAN Control"), FanMain, "fan_control", None)]
 	else:
 		return []
-		
+
 
 def Plugins(**kwargs):
 	from os import path

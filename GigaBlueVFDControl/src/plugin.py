@@ -99,7 +99,7 @@ def setLed(color):
 	# 3 = purple
 	led0 = '/proc/stb/fp/led0_pattern'
 	led1 = '/proc/stb/fp/led1_pattern'
-	
+
 	if BOX in ('gb800se', 'gb800solo', 'gb800ue'):
 		if color == '0':
 			value0 = 0
@@ -316,7 +316,7 @@ class Channelnumber:
 				led_rec = config.plugins.VFD_Giga.ledRUN.getValue()
 		if config.plugins.VFD_Giga.setLed.value:
 			setLed(str(int(led_sda1) | int(led_sdb1) | int(led_rec)))
-					
+
 	def keyPressed(self, key, tag):
 		self.begin = time() + int(self.channelnrdelay)
 		self.endkeypress = True

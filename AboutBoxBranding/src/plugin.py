@@ -66,7 +66,7 @@ def Plugins(**kwargs):
 	prlist = []
 	try:
 		prlist = getBoxbranding()[1]
-		res = len(prlist) 
+		res = len(prlist)
 		print("[AboutBoxBranding]... Number of entries = %s" % (res))
 		for x in range(0, res):
 			print("{: <24} {: <20}".format(prlist[x][0], prlist[x][1]))
@@ -75,4 +75,3 @@ def Plugins(**kwargs):
 		return []
 	from Plugins.Plugin import PluginDescriptor
 	return [PluginDescriptor(where=PluginDescriptor.WHERE_MENU, fnc=start)]
-			

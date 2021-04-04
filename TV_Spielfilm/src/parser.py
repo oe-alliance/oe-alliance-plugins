@@ -496,7 +496,7 @@ def parsedetail(bereich, debug=None):
     if debug != None:
         print("[DEBUG] parsedetail %s\n" % debug)
         print(text)
-    
+
     return text
 
 
@@ -515,7 +515,7 @@ def cleanHTML(bereich):
 def fiximgLink(link):
     link = sub('" alt.*', '', link)
     return sub('.*data-src="', '', link)
-    
+
 
 def parseInfoTable(output, debug=None):
     bereich = _parseInfoTableStart(output)
@@ -646,7 +646,7 @@ def testnow2():
         y += 1
         if y == offset:
             y = 0
-            
+
 #    bereich = parseInfoTable2(output, True)
 #    a = findall('<td>(.*?)</td>', bereich)
 #    for x in a:

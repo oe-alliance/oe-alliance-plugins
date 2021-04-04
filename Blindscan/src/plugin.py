@@ -84,7 +84,7 @@ _unsupportedNims = ('Vuplus DVB-S NIM(7376 FBC)', 'Vuplus DVB-S NIM(45308X FBC)'
 # blindscan-s2 supported tuners
 _blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
 
-defaults = {"search_type": "transponders", 
+defaults = {"search_type": "transponders",
 	"user_defined_lnb_inversion": False,
 	"step_mhz_tbs5925": 10,
 	"polarization": str(eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1), # "vertical and horizontal"
@@ -122,7 +122,7 @@ config.blindscan.filter_off_adjacent_satellites = ConfigSelection(default=defaul
 	("1", _("up to 1 degree")),
 	("2", _("up to 2 degrees")),
 	("3", _("up to 3 degrees"))])
-			
+
 
 class BlindscanState(Screen, ConfigListScreen):
 	skin = """
@@ -269,7 +269,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 
 		ConfigListScreen.__init__(self, self.list, session=session)
 		self["footnote"] = Label("")
-		
+
 		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"cancel": self.keyCancel,
@@ -292,11 +292,11 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = StaticText(_("Restore defaults"))
-		
+
 		if self.scan_nims.value is not None and self.scan_nims.value != "": # self.scan_nims set in createConfig()
 			self["key_green"] = StaticText(_("Scan"))
 			self.createSetup()
-			
+
 		else:
 			self["footnote"].setText(_("Please setup your tuner configuration."))
 
@@ -313,7 +313,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		if not self.selectionChanged in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.selectionChanged()
-		
+
 	def selectionChanged(self):
 		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
 		self.setBlueText()
@@ -713,7 +713,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		# swap start and stop values if entered the wrong way round
 		if start.value > stop.value:
 			start.value, stop.value = (stop.value, start.value)
-	
+
 	def doRun(self, tmp_list, tmp_pol, tmp_band):
 		print("[Blindscan][doRun] started")
 
@@ -831,7 +831,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		  # https://github.com/OpenPLi/enigma2/commit/31100de1c93ce55ccc96340b21a02cc122bdb23e#diff-9124337eaf07c5d7314ae98b4eac37ef
 		  # https://github.com/OpenPLi/enigma2/commit/4030ed7c718accbcbc511a238b3b1abb288bb2f8#diff-021996494dde61d73519d0ab55099cb4
 		  # https://github.com/OpenPLi/enigma2/commit/7c0e71a5d059be5b0ac6df623e5810793938c09a#diff-d2b5b80c343086e51125ca863f948965
-		  # https://github.com/OpenPLi/enigma2/commit/597a9eec8f91d02c44c15d7a22e12e14d21589a6#diff-d2b5b80c343086e51125ca863f948965 
+		  # https://github.com/OpenPLi/enigma2/commit/597a9eec8f91d02c44c15d7a22e12e14d21589a6#diff-d2b5b80c343086e51125ca863f948965
 
 		nim = nimmanager.nim_slots[self.feid]
 		tunername = nim.description
@@ -1456,7 +1456,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			self.blindscan_user_defined_lnb_inverted_stop_frequency.value = self.user_defined_lnb_lo_freq - self.tunerIfLimits["low"]
 		self.createSetup()
 		self.setBlueText()
-			
+
 	def setBlueText(self):
 		for key in defaults.keys():
 			if getattr(config.blindscan, key).value != defaults[key]:
@@ -1501,7 +1501,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 				userSatellitesList = ast.literal_eval(currSat.userSatellitesList.getValue())
 				if not cur_orb_pos in userSatellitesList:
 					currSat = nimconfig.advanced.sat[cur_orb_pos]
-			else: 
+			else:
 				currSat = nimconfig.advanced.sat[cur_orb_pos]
 			lnbnum = int(currSat.lnb.getValue())
 			if lnbnum == 0 and nimconfig.advanced.sats.value in ("3601", "3602", "3603", "3604"):

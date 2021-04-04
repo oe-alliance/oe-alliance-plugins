@@ -126,7 +126,7 @@ class Channelnumber:
 					self.show()
 			else:
 				self.__eventInfoChanged()
-					
+
 		if config.plugins.VFD_ini.showClock.value == 'Off':
 			vfd_write("....")
 			self.zaPrik.start(self.updatetime, 1)
@@ -173,13 +173,13 @@ class VFD_INISetup(ConfigListScreen, Screen):
 				<ePixmap position="180,165" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
 				<widget name="key_green" position="40,165" size="140,40" font="Regular;20" backgroundColor="#1f771f" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 				<widget name="key_red" position="180,165" size="140,40" font="Regular;20" backgroundColor="#9f1313" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-			</screen>"""  
+			</screen>"""
 
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("7-LED Display Setup"))
 		self.skinName = ["Setup"]
-		
+
 		self.onClose.append(self.abort)
 
 		self.onChangedEntry = []

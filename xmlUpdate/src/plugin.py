@@ -29,7 +29,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 		self.source = ConfigSelection(default="OE-Alliance", choices=[("OE-Alliance", _("OE-Alliance"))])
 		self.DVBtype = ConfigSelection(default="satellites", choices=[("satellites", _("satellite")), ("cables", _("cable")), ("terrestrial", _("terrestrial"))])
 		self.folder = ConfigSelection(default="/etc/tuxbox", choices=[("/etc/tuxbox", _("/etc/tuxbox (default)")), ("/etc/enigma2", _("/etc/enigma2"))])
-		
+
 		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"cancel": self.keyCancel,
@@ -46,7 +46,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 		self["key_green"] = StaticText(_("Fetch"))
 
 		self["description"] = Label("")
-		
+
 		self.createSetup()
 
 		if not self.selectionChanged in self["config"].onSelectionChanged:

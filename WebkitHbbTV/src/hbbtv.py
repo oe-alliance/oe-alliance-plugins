@@ -96,4 +96,3 @@ class HbbTVWindow(Screen):
 		vbcfg.set_bgcolor("0")
 		vbcfg.LOG("Stop HbbTV")
 		self.close()
-

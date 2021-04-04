@@ -200,7 +200,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		BluetoothSetup.__init__(self)
-		self.session = session	
+		self.session = session
 
 		self["key_red"] = Label(_("Enable"))
 		self["key_green"] = Label(" ")

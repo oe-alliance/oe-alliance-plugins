@@ -125,7 +125,7 @@ class BluetoothDiscovery(BluetoothTask):
 			self.eventTimer.start(10, True)
 
 	def handleEvents(self):
-		(event, name, data) = self.events.pop(0) 
+		(event, name, data) = self.events.pop(0)
 
 		if event == bt_types.BT_EVENT_DEVICE_ADDED:
 			self.onDeviceAdded(event, name, data)
@@ -320,7 +320,7 @@ class BluetoothDiscoveryScreen(Screen, BluetoothDiscovery):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		BluetoothDiscovery.__init__(self)
-		self.session = session	
+		self.session = session
 
 		self["key_red"] = Label(_("Exit"))
 		self["key_green"] = Label(" ")
@@ -465,7 +465,7 @@ class BluetoothDiscoveryScreen(Screen, BluetoothDiscovery):
 		self.addTaskExit()
 
 	def keyOk(self):
-		self.keyGreen() 
+		self.keyGreen()
 
 	def keyCancel(self):
 		self.keyRed()
@@ -596,4 +596,3 @@ class BluetoothRCUSetup(BluetoothDiscoveryScreen):
 	def onDeviceAdded(self, event, name, data):
 		if name == bt_types.BT_VUPLUS_RCU_NAME:
 			self.scanAbortTimer.start(10, True)
-

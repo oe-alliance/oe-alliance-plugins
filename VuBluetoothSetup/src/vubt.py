@@ -86,7 +86,7 @@ class Vu_PyBluetooth(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, Vu_PyBluetooth, name)
     __repr__ = _swig_repr
 
-    def __init__(self): 
+    def __init__(self):
         this = _vubt.new_Vu_PyBluetooth()
         try:
             self.this.append(this)
@@ -139,5 +139,3 @@ Vu_PyBluetooth_swigregister = _vubt.Vu_PyBluetooth_swigregister
 Vu_PyBluetooth_swigregister(Vu_PyBluetooth)
 
 # This file is compatible with both classic and new-style classes.
-
-

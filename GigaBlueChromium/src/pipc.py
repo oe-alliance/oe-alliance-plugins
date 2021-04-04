@@ -132,7 +132,7 @@ class PServerThread(threading.Thread):
 	def run(self):
 		print('PServerThread:run')
 		if self.mSock is None:
-			raise 
+			raise
 		self.mFlag = True
 		self.mSock.listen(1)
 		cbcfg.DEBUG('PServerThread Start')

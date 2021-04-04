@@ -43,7 +43,7 @@ class AutoChannelsImporterTimer:
 			self.boottimer.callback.append(self.doautostartscan)
 			print("[ChannelsImporterScheduler][AutoChannelsImporterTimer] Run plugin on boot")
 			self.boottimer.start(100, 1)
-	
+
 		global ChannelsImporterTime
 		if config.plugins.ChannelsImporter.enableSchedule.value:
 			print("[ChannelsImporterScheduler][AutoChannelsImporterTimer] Schedule Enabled at ", strftime("%c", localtime(now)))

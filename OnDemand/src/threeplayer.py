@@ -52,9 +52,9 @@ def wgetUrl(query):
 		headers = {}
 		headers['User-Agent'] = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
 		headers['DNT'] = '1'
-		headers['Referer'] = 'http://www.tv3.ie/3player/'  
+		headers['Referer'] = 'http://www.tv3.ie/3player/'
 		headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-		
+
 		data = urlencode(values)
 		req = Request(target, data, headers)
 		response = urlopen(req)
@@ -64,7 +64,7 @@ def wgetUrl(query):
 	except (Exception) as exception:
 		print('wgetUrl: Error retrieving URL ', exception)
 		return ''
-		
+
 #===================================================================================
 
 
@@ -124,14 +124,14 @@ class threeMainMenu(Screen):
 	def cancel(self):
 		self.removeFiles(self.imagedir)
 		self.close(None)
-        
+
 	def removeFiles(self, targetdir):
 		for root, dirs, files in os_walk(targetdir):
 			for name in files:
-				os_remove(os_path.join(root, name))	
+				os_remove(os_path.join(root, name))
 
 #===================================================================================
-###########################################################################	   
+###########################################################################
 
 
 class StreamsThumb(StreamsThumbCommon):
@@ -153,31 +153,31 @@ class StreamsThumb(StreamsThumbCommon):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'straight':
 			self.getMediaData(self.mediaList, self.url, "slider2")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'going':
 			self.getMediaData(self.mediaList, self.url, "slider3")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'all_shows':
 			self.getAllShowsMediaData(self.mediaList, self.url, "gridshow")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'one_show':
 			self.getMediaData(self.mediaList, self.url, "slider1a")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
@@ -208,7 +208,7 @@ class StreamsThumb(StreamsThumbCommon):
 				fileUrl = str(showID[:-12]) + '.mp4'
 				#fileUrl = fileUrl.replace('3player', '3Player')
 				print('fileUrl: ', fileUrl)
-				
+
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, str(fileUrl))
 				fileRef.setName(showName)
@@ -247,7 +247,7 @@ class StreamsThumb(StreamsThumbCommon):
 					titleData = elem[0].attrib.get('title')
 					titleDecode = titleData.encode('charmap', 'ignore')
 
-					match = re.search("3player\s+\|\s+(.+),\s+(\d\d/\d\d/\d\d\d\d)\.\s*(.*)", titleDecode) 
+					match = re.search("3player\s+\|\s+(.+),\s+(\d\d/\d\d/\d\d\d\d)\.\s*(.*)", titleDecode)
 					name_tmp = str(match.group(1))
 					name = checkUnicode(name_tmp)
 					date_tmp = str(match.group(2))
@@ -265,17 +265,17 @@ class StreamsThumb(StreamsThumbCommon):
 					# For all functions other than 'straight' we get the stream url from the icon url.
 					if self.cmd != 'straight':
 						stream = icon
-						
+
 					# Only set the Icon if they are enabled
 					if self.showIcon == 'False':
 						icon = ''
-						
+
 					weekList.append((date, name, short, channel, stream, icon, duration, False))
 					iconSet = False
 
 		except (Exception) as exception:
 			print('getMediaData: Error parsing feed: ', exception)
-		        
+
 #===================================================================================
 
 	def getAllShowsMediaData(self, weekList, url, function):
@@ -362,25 +362,25 @@ class StreamsThumb(StreamsThumbCommon):
 
 					# For all functions other than 'straight' we get the stream url from the icon url.
 					stream = icon
-					
+
 					# Only set the Icon if they are enabled
 					if self.showIcon == 'False':
 						icon = ''
-					
+
 					weekList.append((date, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
 			print('getMediaData: Error parsing feed: ', exception)
 
 #===================================================================================
-	
+
 	def findPlayUrl(self, value):
 		fileUrl = ""
 		url = value
 
 		try:
 			url1 = 'http://www.tv3.ie' + url
-			
+
 			req = Request(url1)
 			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 			response = urlopen(req)
@@ -397,7 +397,7 @@ class StreamsThumb(StreamsThumbCommon):
 					html = str(response.read())
 					response.close()
 
-				except (Exception) as exception:				
+				except (Exception) as exception:
 					print('Error getting webpage for age restrict: ', exception)
 					return ""
 
@@ -407,7 +407,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 			return fileUrl
 
-		except (Exception) as exception:					
+		except (Exception) as exception:
 			print('findPlayUrl: Error getting URLs: ', exception)
 			return ""
 
@@ -415,15 +415,15 @@ class StreamsThumb(StreamsThumbCommon):
 
 
 def checkUnicode(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
-	
+
 #===================================================================================
 
 
 def main(session, **kwargs):
 	action = "start"
-	value = 0 
+	value = 0
 	start = session.open(threeMainMenu, action, value)

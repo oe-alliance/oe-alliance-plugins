@@ -200,7 +200,7 @@ class VuRcuOtaUpdate(Screen, HelpableScreen, BluetoothTask):
 		elif event == OTA_RCU_DISCONNECTED:
 			self.exit_text = _("OTA Failed.\n%s is disconnected.") % bt_types.BT_VUPLUS_RCU_NAME
 			self.exit_text += " Press exit."
-			self["text"].setText("%s" % self.exit_text) 
+			self["text"].setText("%s" % self.exit_text)
 		else:
 			if event in g_ota_event_description:
 				self["text"].setText(_("%s") % g_ota_event_description[event])
@@ -292,4 +292,3 @@ class VuRcuOtaUpdate(Screen, HelpableScreen, BluetoothTask):
 
 		if self.events:
 			self.eventTimer.start(10, True)
-

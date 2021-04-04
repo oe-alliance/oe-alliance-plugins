@@ -77,4 +77,3 @@ def Plugins(**kwargs):
 		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart))
 
 	return list
-

@@ -49,7 +49,7 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("OnDemand Configuration"))
 		self.skinName = ["OnDemandScreenSetup", "Setup"]
-		
+
 		self.configlist = []
 		ConfigListScreen.__init__(self, self.configlist)
 		self.configlist.append(getConfigListEntry((_("Show in main menu")), config.ondemand.ShowMainMenu))
@@ -74,12 +74,12 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.configlist.append(getConfigListEntry((_("iRadio: Display SHOUTcast Default Thumbnails")), config.ondemand.ShowShoutcastDefault))
 		self.configlist.append(getConfigListEntry((_("iRadio: Display Tunein Thumbnails")), config.ondemand.ShowTuneinLogos))
 		self.configlist.append(getConfigListEntry((_("iRadio: Display Tunein Default Thumbnails")), config.ondemand.ShowTuneinDefault))
-		
+
 		self.configlist.append(getConfigListEntry((_("Primary DNS: To watch UK Streams outside the UK")), config.ondemand.PrimaryDNS))
 		self.configlist.append(getConfigListEntry((_("Secondary DNS: A backup DNS if the primary is down")), config.ondemand.SecondaryDNS))
 
 		self["config"].setList(self.configlist)
-		
+
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 
@@ -101,10 +101,10 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 			x[1].save()
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.close()
-		
+
 	def keyInfo(self):
 		self.session.open(OnDemand_About)
-	
+
 	def keyCancel(self):
 		self.close()
 
@@ -122,7 +122,7 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("OnDemand"))
-		
+
 		self["arrowup"] = MultiPixmap()
 		self["arrowdown"] = MultiPixmap()
 
@@ -132,10 +132,10 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 			"menu": self.keySetup,
 			"log": self.keyInfo
 		}, -1)
-		
+
 		self['PlayerList'] = MainMenuList()
 		self.onLayoutFinish.append(self.layoutFinished)
-		
+
 	def layoutFinished(self):
 		list = []
 		#if config.ondemand.ShowBBCiPlayer.value:
@@ -158,13 +158,13 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 		self['PlayerList'].showArrows()
 		self["arrowup"].setPixmapNum(self['PlayerList'].showArrows())
 		self["arrowdown"].setPixmapNum(self['PlayerList'].showArrows())
-	
+
 	def keySetup(self):
 		self.session.openWithCallback(self.layoutFinished, OnDemandScreenSetup)
-		
+
 	def keyInfo(self):
 		self.session.open(OnDemand_About)
-		
+
 	def keyOK(self):
 		player = self['PlayerList'].l.getCurrentSelection()[1]
 		if player == "rteplayer":
@@ -210,7 +210,7 @@ class OnDemand_About(Screen):
 		}, -2)
 
 		self["key_red"] = Button(_("Close"))
-  
+
 		credit = "OE-Alliance OnDemand (c) 2013 \n"
 		credit += "http://github.com/oe-alliance\n"
 		credit += "http://www.world-of-satellite.com\n\n"
@@ -235,4 +235,3 @@ class OnDemand_About(Screen):
 
 	def quit(self):
 		self.close()
-

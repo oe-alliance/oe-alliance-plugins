@@ -339,12 +339,12 @@ class BTAutoAudioConnect:
 			fd.close()
 			if enable is True:
 				self.gbbt.playAudioDevice(config.plugins.bluetoothsetup.lastAudioConn.value)
-			else:	
+			else:
 				self.gbbt.stopAudioDevice()
 
 		except:
 			print("[BT] set %s failed!" % BT_AUDIO_ONOFF_PROC)
- 
+
 	def setBTAudioDelay(self, updateNow=True):
 		global BT_AUDIO_DELAY_PROC
 		if self.btaudioActivated:
@@ -466,7 +466,7 @@ class BTOTAProcess:
 
 	def OTAEventCallback(self, evType, value):
 		print("[OTAEventCallback] evType : %s, value : %s" % (str(evType), str(value)))
-		
+
 		if evType == BTOTAProcess.OTA_COMPLETE:
 			self.handleOtaDoneTimer.start(0, True)
 
@@ -813,7 +813,7 @@ class PyBluetoothInterface(VoiceEventHandler, BTVolumeControl, BTAutoAudioConnec
 		###print("[BT] current status : %s" % str(self.status))
 
 		for handler in self.pluginStatusHandler:
-			handler(self.status)			
+			handler(self.status)
 
 	def startScan(self, isBle=False):
 		return self.gbbt.startScan(False, isBle)
@@ -886,7 +886,7 @@ class PyBluetoothInterface(VoiceEventHandler, BTVolumeControl, BTAutoAudioConnec
 
 	def onCheckStatusFinished(self):
 		pass
-	
+
 	def isMaxBLEPairedDevice(self):
 		return self.gbbt.isMaxBLEPairedDevice()
 
@@ -916,4 +916,3 @@ def BluetoothVoiceCheckValChanged(configElement):
 
 
 config.plugins.bluetoothsetup.voiceCheckDb.addNotifier(BluetoothVoiceCheckValChanged)
-

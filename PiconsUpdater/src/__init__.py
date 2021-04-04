@@ -90,9 +90,9 @@ def getCurrentPicon():
     """
     try:
         piconType = config.plugins.PiconsUpdater.piconsType.getValue()
-    
+
         piconsUrls = PICONS_URLS[piconType]
-    
+
         return piconsUrls
     except Exception:
         return PICONS_URLS["picons-all"]

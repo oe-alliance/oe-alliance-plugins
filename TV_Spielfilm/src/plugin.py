@@ -61,7 +61,7 @@ if six.PY3:
     NOTIMER = '\nTimer nicht möglich:\nKeine Service Reference vorhanden, der ausgewählte Sender wurde nicht importiert.'
     OKZV = 'OK = Vollbild\n< > = Zurück / Vorwärts'
     NOEPG = 'Keine EPG Informationen verfügbar'
-    
+
 
 def getEPGText():
     try:
@@ -217,7 +217,7 @@ class tvAllScreen(Screen):
         f.write(data)
         f.close()
         self.timer = data
-    
+
     def getFill(self, text):
         return '______________________________________\n%s' % text
 
@@ -1377,9 +1377,9 @@ class TVTippsView(tvBaseScreen):
         self['label'].stopBlinking()
         self['label'].show()
         self.ready = True
-        
+
         self.GetPics(self.picurllist, 0)
-        
+
         return
 
     def makePostviewPage(self, string):
@@ -1395,7 +1395,7 @@ class TVTippsView(tvBaseScreen):
             self._makePostviewPage(string)
         except:
             printStackTrace()
-        
+
     def makeSearchView(self, url):
         self._makeSearchView(url, 0, 1)
         return
@@ -2844,7 +2844,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                     res_sref.append(sref)
                     self.sref.append(res_sref)
                     res = [x]
-                    
+
                     if self.backcolor == True:
                         res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
                     if self.picon == True:
@@ -4983,7 +4983,7 @@ class TVNews(tvBaseScreen):
                 self['label'].setText('OK = Zum Video')
             else:
                 self['label'].setText('OK = Vollbild')
-                
+
         text = parsedetail(bereich)
 
         fill = self.getFill('TV Spielfilm Online')
@@ -9271,4 +9271,3 @@ def Plugins(**kwargs):
      PluginDescriptor(name='TV Spielfilm 20:15', description='TV Spielfilm Prime Time', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=mainprime),
      PluginDescriptor(name='TV Spielfilm Jetzt', description='TV Spielfilm Jetzt im TV', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='jetzt.png', fnc=mainjetzt),
      PluginDescriptor(name='TV Spielfilm EventView', description='TV Spielfilm EventView', where=[PluginDescriptor.WHERE_EVENTINFO], fnc=mainevent)]
-    

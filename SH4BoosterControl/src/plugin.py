@@ -43,7 +43,7 @@ def initBooster():
 	f = open("/proc/cpu_frequ/pll0_ndiv_mdiv", "w")
 	f.write(config.plugins.booster.normalfrequenz.getValue())
 	f.close()
-	
+
 
 def initStandbyBooster():
 	print("[SH4BoosterControl] initStandbyBooster")
@@ -89,9 +89,9 @@ class SH4BoosterControl(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		
+
 		self.list.append(getConfigListEntry(_("Start boot frequency"), config.plugins.booster.startfrequenz))
-		self.list.append(getConfigListEntry(_("Normal running frequency"), config.plugins.booster.normalfrequenz))		
+		self.list.append(getConfigListEntry(_("Normal running frequency"), config.plugins.booster.normalfrequenz))
 		self.list.append(getConfigListEntry(_("Standby saver frequency"), config.plugins.booster.standbyfrequenz))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -144,7 +144,7 @@ class SH4_Booster:
 
 	def abort(self):
 		print("[SH4BoosterControl] aborting")
-	
+
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 
@@ -173,7 +173,7 @@ def controlsh4booster():
 		sh4booster = SH4_Booster(mySession)
 	elif gReason == 1 and sh4booster != None:
 		print("[SH4BoosterControl] Stopping !!")
-		
+
 		sh4booster = None
 
 
@@ -193,4 +193,3 @@ def sessionstart(reason, **kwargs):
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
 		PluginDescriptor(name="SH4 Booster Control", description="Change CPU speed settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]
-

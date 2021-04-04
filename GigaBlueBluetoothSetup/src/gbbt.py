@@ -308,5 +308,3 @@ Gb_PyBluetooth_swigregister = _gbbt.Gb_PyBluetooth_swigregister
 Gb_PyBluetooth_swigregister(Gb_PyBluetooth)
 
 # This file is compatible with both classic and new-style classes.
-
-
