@@ -34,48 +34,38 @@ if os.path.exists("/proc/stb/info/vumodel"):
 
 	if info == "ultimo":
 		fwlist= [
-			 ("fpga", _("FPGA"))
-			, ("fp", _("Front Processor"))
+			 ("fpga", _("FPGA"))			, ("fp", _("Front Processor"))
 			]
 		fwdata= {
-			 "fpga" : ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]
-			,"fp"   : ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
+			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			,"fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
 			}
 	elif info == "uno":
 		fwlist= [
 			("fpga", _("FPGA"))
 			]
 		fwdata= {
-			"fpga" : ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]
+			"fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]
 			}
 	elif info == "solo2":
 		fwlist= [
-			 ("fpga", _("FPGA"))
-			, ("fp", _("Front Processor"))
+			 ("fpga", _("FPGA"))			, ("fp", _("Front Processor"))
 			]
 		fwdata= {
-			 "fpga" : ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]
-			,"fp"   : ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
+			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			,"fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
 			}
 	elif info == "duo2":
 		fwlist= [
-			 ("fpga", _("FPGA"))
-			, ("fp", _("Front Processor"))
-			, ("vfd", _("VFD Controller"))
+			 ("fpga", _("FPGA"))			, ("fp", _("Front Processor"))			, ("vfd", _("VFD Controller"))
 			]
 		fwdata= {
-			 "fpga" : ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]
-			,"fp"   : ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
-			,"vfd"  : ["http://archive.vuplus.com/download/vfd", "vfd.files", "/dev/bcm_vfd_ctrl;"]
+			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			,"fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]			,"vfd": ["http://archive.vuplus.com/download/vfd", "vfd.files", "/dev/bcm_vfd_ctrl;"]
 			}
 	elif info == "zero":
 		fwlist= [
-			 ("fpga", _("FPGA"))
-			, ("fp", _("Front Processor"))
+			 ("fpga", _("FPGA"))			, ("fp", _("Front Processor"))
 			]
 		fwdata= { 
-			 "fpga" : ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]
-			,"fp"   : ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
+			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			,"fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
 			}
 
 import os
@@ -89,7 +79,7 @@ STATUS_PREPARED		= 3
 STATUS_PROGRAMMING 	= 4
 STATUS_RETRY_UPGRADE 	= 5
 
-class FPUpgradeCore() :
+class FPUpgradeCore():
 	status = STATUS_READY
 	errmsg = ''
 	MAX_CALL_COUNT = 120
@@ -160,7 +150,7 @@ class FPUpgradeCore() :
 		else:
 			print('unknown.')
 
-class FPGAUpgradeCore() :
+class FPGAUpgradeCore():
 	status = STATUS_READY
 	errmsg = ''
 	callcount 	= 0
@@ -230,7 +220,7 @@ class FPGAUpgradeCore() :
 		else:
 			print('[FPGAUpgrade] occur unknown error.')
 
-class VFDCtrlUpgradeCore() :
+class VFDCtrlUpgradeCore():
 	status = STATUS_READY
 	errmsg = ''
 	MAX_CALL_COUNT = 120
@@ -493,7 +483,7 @@ class FUFilebrowser(Screen):
 		if self.downloadLock:
 			return
 
-		if self["file_list"].canDescent() : # isDir
+		if self["file_list"].canDescent(): # isDir
 			self["file_list"].descent()
 			return
 
@@ -546,7 +536,7 @@ class FUFilebrowser(Screen):
 	def doDownload(self, uri, tf, bd='/tmp', cbfunc=None, errmsg="Fail to download."):
 		tar = bd + "/" + tf
 		#print "[FirmwareUpgrade] - Download Info : [%s][%s]" % (uri, tar)
-		def doHook(blockNumber, blockSize, totalSize) :
+		def doHook(blockNumber, blockSize, totalSize):
 			if blockNumber*blockSize > totalSize and cbfunc is not None:
 				cbfunc(tar)
 		opener = urllib.URLopener()
@@ -558,7 +548,7 @@ class FUFilebrowser(Screen):
 			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout=10)
 			del opener
 			return False
-		try :
+		try:
 			f, h = urlretrieve(uri, tar, doHook)
 		except IOError as msg:
 			#self.session.open(MessageBox, _(str(msg)), MessageBox.TYPE_INFO, timeout = 10)
@@ -569,7 +559,7 @@ class FUFilebrowser(Screen):
 		del opener
 		return True
 
-	def runDownloading(self) :
+	def runDownloading(self):
 		self.timer_downloading.stop()
 		file = open("/proc/stb/info/vumodel")
 		data = file.read().strip()
@@ -626,7 +616,7 @@ class FUFilebrowser(Screen):
 		t = ''
 		self["file_list"].changeDir("/tmp/")
 		self["file_list"].moveToIndex(0)
-		while cmp(self["file_list"].getFilename(), self.gbin) != 0 :
+		while cmp(self["file_list"].getFilename(), self.gbin) != 0:
 			self["file_list"].down()
 			if cmp(t, self["file_list"].getFilename()) == 0:
 				break
@@ -694,7 +684,7 @@ class FirmwareUpgrade(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		self.session = session
 
-		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
 			"ok":      self.keyGreen,
 			"cancel":  self.keyRed,

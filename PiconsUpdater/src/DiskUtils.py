@@ -55,7 +55,7 @@ def getFiles(path, fileExtensions=None):
 
 
 def getFilesFromPath(path):
-    return [ os.path.join(path, fname) for fname in os.listdir(path) ]
+    return [os.path.join(path, fname) for fname in os.listdir(path)]
 
 
 def getFilesWithNameKey(path, excludedDirNames=None, excludeDirs=None):

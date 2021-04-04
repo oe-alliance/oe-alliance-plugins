@@ -46,14 +46,14 @@ class SelectDirectoryWindow(Screen):
 		inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]
 		self["filelist"] = FileList(currentDir, showDirectories=True, showFiles=False, inhibitMounts=[], inhibitDirs=inhibitDirs)
 		self["actions"]  = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"], {
-			"back"  : self.cancel,
-			"left"  : self.left,
-			"right" : self.right,
-			"up"    : self.up,
-			"down"  : self.down,
-			"ok"    : self.ok,
-			"green" : self.green,
-			"red"   : self.cancel
+			"back": self.cancel,
+			"left": self.left,
+			"right": self.right,
+			"up": self.up,
+			"down": self.down,
+			"ok": self.ok,
+			"green": self.green,
+			"red": self.cancel
 		}, -1)
 
 		self["currentDir"] = Label()
@@ -125,12 +125,12 @@ class DLNAServer(ConfigListScreen, Screen):
 
 		self.configFileName = "/etc/minidlna.conf"
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", ], {
-			"red"    : self.keyExit,
-			"green"  : self.keyGreen,
-			"blue"   : self.keyBlue,
-			"yellow" : self.keyYellow,
-			"cancel" : self.keyExit,
-			"ok"     : self.keyOK
+			"red": self.keyExit,
+			"green": self.keyGreen,
+			"blue": self.keyBlue,
+			"yellow": self.keyYellow,
+			"cancel": self.keyExit,
+			"ok": self.keyOK
                 }, -2)
 		self["key_red"]     = StaticText(_("Exit"))
 		self["key_green"]   = StaticText(_("Start"))
@@ -331,7 +331,7 @@ class DLNAServer(ConfigListScreen, Screen):
 					k += v[0]
 					v  = v[2:]
 				self.oldConfig[k] = v
-			except :
+			except:
 				pass
 		def setDefault(key, default):
 			try:

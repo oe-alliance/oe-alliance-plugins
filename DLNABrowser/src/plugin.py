@@ -136,16 +136,16 @@ class DLNAFileBrowser(Screen):
 		Screen.__init__(self, session)
 
 		self["actions"]  = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"], {
-			"back"  : self.keyCancel,
-			"left"  : self.keyLeft,
-			"right" : self.keyRight,
-			"up"    : self.keyUp,
-			"down"  : self.keyDown,
-			"ok"    : self.keyOK,
-			"green" : self.keyGreen,
-			"red"   : self.keyCancel,
+			"back": self.keyCancel,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"up": self.keyUp,
+			"down": self.keyDown,
+			"ok": self.keyOK,
+			"green": self.keyGreen,
+			"red": self.keyCancel,
 			"yellow": self.keyYellow,
-			"blue"  : self.keyBlue
+			"blue": self.keyBlue
 		}, -1)
 
 		self["directory"]  = Label()
@@ -783,7 +783,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 				i   = line.find('=')
 				k, v = line[:i], line[i+1:]
 				self.oldConfig[k] = v
-			except :
+			except:
 				pass
 
 		#setDefault('rootdir', '/media/upnp/')
@@ -909,7 +909,7 @@ class DLNADeviceBrowser(Screen):
 					DLNA_CONFIG_DEVICE_REFRESH = int(v)*1000
 				elif k == 'slideshow':
 					DLNA_CONFIG_SLIDESHOW = int(v)*1000
-			except :
+			except:
 				pass
 		print("config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH))
 
@@ -977,7 +977,7 @@ class DLNADeviceBrowser(Screen):
 	def setListOnView(slelf):
 		global DLNA_CONFIG_ROOT_DIR
 		items, rootdir = [], DLNA_CONFIG_ROOT_DIR
-		deviceList = [ name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name)) ]
+		deviceList = [name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name))]
 		deviceList.sort()
 		for d in deviceList:
 			if d[0] in ('.', '_'):

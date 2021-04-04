@@ -210,7 +210,7 @@ def findPlayUrl(showID, **kwargs):
 
 		# If zero, an error occurred retrieving the url, pass empty string back
 		if html:
-			links = (re.compile ('url="rtmpe://fmsod.rte.ie/rtevod/mp4:(.+?)" type="video/mp4"').findall(html)[0])
+			links = (re.compile('url="rtmpe://fmsod.rte.ie/rtevod/mp4:(.+?)" type="video/mp4"').findall(html)[0])
 			fileUrl = "rtmpe://fmsod.rte.ie/rtevod/ app=rtevod/ swfUrl=http://www.rte.ie/player/assets/player_458.swf swfVfy=1 timeout=180 playpath=mp4:"+links
 			return fileUrl
 		else:
@@ -294,7 +294,7 @@ class StreamsThumb(StreamsThumbCommon):
 			
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, fileUrl)
-				fileRef.setName (showName)
+				fileRef.setName(showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
 			else:

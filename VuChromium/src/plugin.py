@@ -42,7 +42,7 @@ def dvbapp_unlock():
     _g_locked = False
     eRCInput.getInstance().unlock()
 
-_OPCODES = [ 'CONTROL_EXIT', 'VIRTUAL_KEYBOARD', 'OPCODE_END' ]
+_OPCODES = ['CONTROL_EXIT', 'VIRTUAL_KEYBOARD', 'OPCODE_END']
 class BrowserHandlers(PServerHandlers):
     def __init__(self):
         PServerHandlers.__init__(self, _OPCODES, '_CBH_')
@@ -108,10 +108,10 @@ class BBrowserLauncher(Screen):
             if feId != -1:
                 self.TryCloseFrontend(feId)
 
-        if VolumeControl.instance.volctrl.isMuted() :
+        if VolumeControl.instance.volctrl.isMuted():
             VolumeControl.instance.volctrl.volumeUnMute()
             self.isMute = 1
-        else :
+        else:
             self.isMute = 0
 
         cbcfg.DEBUG("[Chromium Plugin] ==== >> default mute [%d]" % self.isMute)
@@ -141,7 +141,7 @@ class BBrowserLauncher(Screen):
             except:
                 pass
             command += "&"
-        else :
+        else:
             self.setTitle(_('ChromiumOS by STT'))
             command += "-c %s " % (url)
             command += "-x %d -y %d " % (config.plugins.browser.margin_x.value, config.plugins.browser.margin_y.value)
@@ -179,11 +179,11 @@ class BBrowserLauncher(Screen):
 
     def TryCloseFrontend(self, feId):
         res_mgr = eDVBResourceManager.getInstance()
-        if res_mgr :
+        if res_mgr:
             raw_channel = res_mgr.allocateRawChannel(feId)
-            if raw_channel :
+            if raw_channel:
                 frontend = raw_channel.getFrontend()
-                if frontend :
+                if frontend:
                     frontend.closeFrontend() # immediate close...
                     del frontend
                     del raw_channel
@@ -195,9 +195,9 @@ class BBrowserLauncher(Screen):
         dvbapp_lock()
 
     def Exit(self):
-        if self.isMute :
+        if self.isMute:
             VolumeControl.instance.volctrl.volumeMute()
-        else :
+        else:
             VolumeControl.instance.volctrl.volumeUnMute()
 
         cbcfg.DEBUG("[Chromium Plugin] ==== >> default mute [%d] , restore mute [%d]" % (self.isMute, self.isMute))
@@ -272,7 +272,7 @@ def plugin_start_chromiumos(session, **kwargs):
 
 def session_start_main(session, reason, **kwargs):
     PServerThread.close()
-    try :
+    try:
         from Plugins.SystemPlugins.BluetoothSetup.bt import pybluetooth_instance
         pybluetooth_instance.addTextHandler(stt_event_callback)
 

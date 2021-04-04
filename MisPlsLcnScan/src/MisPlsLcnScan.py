@@ -49,7 +49,7 @@ class MisPlsLcnScan(Screen):
 		if args:
 			pass
 		self.frontend = None
-		self["Frontend"] = FrontendStatus(frontend_source=lambda : self.frontend, update_interval=100)
+		self["Frontend"] = FrontendStatus(frontend_source=lambda: self.frontend, update_interval=100)
 		self.rawchannel = None
 		self.session.postScanService = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.index = 0

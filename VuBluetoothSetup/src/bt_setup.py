@@ -115,13 +115,13 @@ class BluetoothSetup(BluetoothTask):
 	def addTaskConnect(self, mac, profile, name):
 		args = (mac, profile, name)
 		eventCB = {
-			bt_types.BT_EVENT_CONNECTED : None,
+			bt_types.BT_EVENT_CONNECTED: None,
 			bt_types.BT_EVENT_CONNECT_TIMEOUT: self.onConnectTimeout}
 		self.addTask(BluetoothTask.TASK_CONNECT, self.connectDevice, mac, args, eventCB)
 
 	def addTaskDisconnect(self, mac, profile, name):
 		args = (mac, profile, name)
-		eventCB = {bt_types.BT_EVENT_LINK_DOWN : None}
+		eventCB = {bt_types.BT_EVENT_LINK_DOWN: None}
 		self.addTask(BluetoothTask.TASK_DISCONNECT, self.disconnectDevice, mac, args, eventCB)
 
 	def addTaskRemove(self, mac, profile, name):
@@ -130,7 +130,7 @@ class BluetoothSetup(BluetoothTask):
 
 	def addTaskWaitDisconnect(self, mac, profile, name):
 		args = (mac, profile, name)
-		eventCB = {bt_types.BT_EVENT_LINK_DOWN : None}
+		eventCB = {bt_types.BT_EVENT_LINK_DOWN: None}
 		self.addTask(BluetoothTask.TASK_WAIT_DISCONNECT, None, mac, args, eventCB)
 
 	def addTaskStartRcuSetupTimer(self):
@@ -346,7 +346,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 
 				icon = getIcon(profile)
 
-				deviceEntry = ( name, classOfDevice, status, icon, v)
+				deviceEntry = (name, classOfDevice, status, icon, v)
 				self.deviceList.append(deviceEntry)
 
 		print("[showPairedList] self.deviceList : ", self.deviceList)
@@ -561,7 +561,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 		_profile = None
 		_isConnected = False
 		for d in self.deviceList:
-			if d[4] ['name'] == bt_types.BT_VUPLUS_RCU_NAME:
+			if d[4]['name'] == bt_types.BT_VUPLUS_RCU_NAME:
 				_mac = d[4]['bd_addr']
 				_name = d[4]['name']
 				_profile = d[4]['profile']

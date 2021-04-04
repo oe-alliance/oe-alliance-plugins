@@ -241,7 +241,7 @@ class VuRcuOtaUpdate(Screen, HelpableScreen, BluetoothTask):
 
 	def addTaskDisconnect(self, mac, profile, name):
 		args = (mac, profile, name)
-		eventCB = {bt_types.BT_EVENT_LINK_DOWN : None}
+		eventCB = {bt_types.BT_EVENT_LINK_DOWN: None}
 		self.addTask(BluetoothTask.TASK_DISCONNECT, self.disconnectDevice, mac, args, eventCB)
 
 	def addTaskOTAStart(self):

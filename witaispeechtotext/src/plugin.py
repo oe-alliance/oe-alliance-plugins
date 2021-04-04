@@ -79,7 +79,7 @@ class WitAiSttSetup(Screen, ConfigListScreen):
 
 	def createSetup(self):
 		self.list = []
-		self.list.append( self.tokenEntry )
+		self.list.append(self.tokenEntry)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -262,10 +262,10 @@ def Plugins(**kwargs):
 		fnc=main))
 
 	list.append(
-		PluginDescriptor( where=PluginDescriptor.WHERE_AUTOSTART, fnc=auto_start_main))
+		PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=auto_start_main))
 
 	list.append(
-		PluginDescriptor( where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart ))
+		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart))
 
 	return list
 

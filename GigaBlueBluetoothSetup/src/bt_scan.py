@@ -208,7 +208,7 @@ class BluetoothDiscovery(BluetoothTask):
 	def addTaskStartScan(self):
 		#print "addTaskStartScan"
 		if self.isTaskEmpty():
-			eventCB = {bt_types.BT_EVENT_SCAN_END : self.onScanFinished}
+			eventCB = {bt_types.BT_EVENT_SCAN_END: self.onScanFinished}
 			BluetoothTask.addTask(self, BluetoothTask.TASK_START_SCAN, self.startScan, None, None, eventCB)
 
 	def addTaskAbortScan(self):
@@ -225,11 +225,11 @@ class BluetoothDiscovery(BluetoothTask):
 			self.addTaskAbortScan()
 
 		args = (mac, profile, name)
-		eventCB = {bt_types.BT_EVENT_PAIRING_SUCCESS : self.onPairingSuccess,
-					bt_types.BT_EVENT_PAIRING_FAIL : self.onPairingFailed,
-					bt_types.BT_EVENT_PAIRING_TIMEOUT : self.onPairingFailed,
-					bt_types.BT_EVENT_PAIRING_WRONG_PIN : self.onPairingFailed,
-					bt_types.BT_EVENT_PAIRING_PASSCODE_REQUIRED : self.onPairingFailed}
+		eventCB = {bt_types.BT_EVENT_PAIRING_SUCCESS: self.onPairingSuccess,
+					bt_types.BT_EVENT_PAIRING_FAIL: self.onPairingFailed,
+					bt_types.BT_EVENT_PAIRING_TIMEOUT: self.onPairingFailed,
+					bt_types.BT_EVENT_PAIRING_WRONG_PIN: self.onPairingFailed,
+					bt_types.BT_EVENT_PAIRING_PASSCODE_REQUIRED: self.onPairingFailed}
 		BluetoothTask.addTask(self, BluetoothTask.TASK_START_PAIRING, self.startPairing, mac, args, eventCB)
 
 	def addTaskCancelPair(self, mac, profile, name):
@@ -244,7 +244,7 @@ class BluetoothDiscovery(BluetoothTask):
 			return
 
 		args = (mac, profile, name)
-		eventCB = {bt_types.BT_EVENT_LINK_DOWN : self.onDisconnected}
+		eventCB = {bt_types.BT_EVENT_LINK_DOWN: self.onDisconnected}
 		self.addTask(BluetoothTask.TASK_DISCONNECT, self.disconnectDevice, mac, args, eventCB)
 
 	def addTaskExit(self):
@@ -340,7 +340,7 @@ class BluetoothDiscoveryScreen(Screen, BluetoothDiscovery):
 		self["key_yellow"] = Label(" ")
 		self["key_blue"] = Label(" ")
 
-		self["shortcuts"] = ActionMap(["BluetoothSetupActions" ],
+		self["shortcuts"] = ActionMap(["BluetoothSetupActions"],
 		{
 			"ok": self.keyOk,
 			"cancel": self.keyCancel,
@@ -727,7 +727,7 @@ class BluetoothRCUSetup(BluetoothDiscoveryScreen):
 	def getGbRCUInfo(self):
 		gbRcuDevInfo = []
 		for d in self.deviceList:
-			if d[2] ['name'] == bt_types.BT_GB_RCU_NAME:
+			if d[2]['name'] == bt_types.BT_GB_RCU_NAME:
 				_mac = d[2]['bd_addr']
 				_name = d[2]['name']
 				_profile = d[2]['profile']

@@ -20,7 +20,7 @@ from time import localtime, strftime, time
 
 def checkFuture(chid):
 	service = scinfo.epgdb.getServiceFromFavList(chid)
-	query = [ 'BDTn', (service, 0, -1, -1) ]
+	query = ['BDTn', (service, 0, -1, -1)]
 	events = scinfo.epgdb.epgcache.lookupEvent(query)
 	if events:
 		last_stop = events[-1][0] + events[-1][1]
@@ -224,13 +224,13 @@ class StalkerClient_EPGSelection(Screen):
 		self["actions"] = ActionMap(["OkCancelActions", "WizardActions", "EPGSelectActions"],
 		{
 			"cancel": self.close,
-			"ok"    : self.onKeyOK,
-			"up"    : self.onKeyUp,
-			"down"  : self.onKeyDown,
-			"left"  : self.onKeyLeft,
-			"right" : self.onKeyRight,
+			"ok": self.onKeyOK,
+			"up": self.onKeyUp,
+			"down": self.onKeyDown,
+			"left": self.onKeyLeft,
+			"right": self.onKeyRight,
 			"yellow": self.onKeyYellow,
-			"blue"  : self.onKeyBlue,
+			"blue": self.onKeyBlue,
 		}, -1)
 
 		self.scepgList = StalkerEPGList(self.m_type)
@@ -267,7 +267,7 @@ class StalkerClient_EPGSelection(Screen):
 				self.applyButtonState(2)
 			else:
 				self.applyButtonState(1)
-			days = [ _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun") ]
+			days = [_("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun")]
 			datestr = ""
 			cur = self.scepgList.getCurrent()
 			if cur and len(cur.epglist) > 0:

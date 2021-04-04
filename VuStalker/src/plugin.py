@@ -136,11 +136,11 @@ def Plugins(**kwargs):
 		PluginDescriptor(
 			name=_("StalkerClient Configuration"),
 			description=_("Configure Stalker Client"),
-			where=[PluginDescriptor.WHERE_PLUGINMENU ],
+			where=[PluginDescriptor.WHERE_PLUGINMENU],
 			fnc=sc_setup),
 		PluginDescriptor(
 			name=_("StalkerClient TV"),
 			description=_("Stalker Client TV Channels"),
-			where=[ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
+			where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU],
 			fnc=sc_main),
 		]

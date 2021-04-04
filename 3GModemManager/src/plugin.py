@@ -208,7 +208,7 @@ class EditModemManual(ConfigListScreen, Screen):
 			"blue":   self.keyRemove,
 		}, -2)
 
-		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions" ],
+		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
 		{
 			"showVirtualKeyboard": self.KeyText,
 		}, -1)
@@ -341,7 +341,7 @@ class EditModemManual(ConfigListScreen, Screen):
 
 config.plugins.gmodemmanager = ConfigSubsection()
 config.plugins.gmodemmanager.autostart = ConfigYesNo(default=False)
-config.plugins.gmodemmanager.vendorid = ConfigText(default="0000" )
+config.plugins.gmodemmanager.vendorid = ConfigText(default="0000")
 config.plugins.gmodemmanager.productid = ConfigText(default="0000")
 config.plugins.gmodemmanager.apn = ConfigText(default="apn")
 config.plugins.gmodemmanager.uid = ConfigText(default="user")
@@ -460,7 +460,7 @@ class ModemManual(Screen):
 				tempStr += ' password="%s"'%(password)
 			if not isEmpty(pin):
 				tempStr += ' pin="%s"'%(pin)
-			if not isEmpty(phone) :
+			if not isEmpty(phone):
 				tempStr += ' phone="%s"'%(phone)
 			tempStr += ' />\n'
 			return tempStr
@@ -853,7 +853,7 @@ class ModemManager(Screen):
 			return
 
 		devFile = '/usr/share/usb_modeswitch/%s:%s' % (x.get("Vendor"), x.get("ProdID"))
-		if not os.path.exists(devFile) :
+		if not os.path.exists(devFile):
 			message = "Can't found device file!! [%s]" % (devFile)
 			printInfoModemMgr(message)
 			#self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO)
@@ -916,19 +916,13 @@ class ModemManager(Screen):
 
 	def setConnectStatus(self, idx):
 		STATUS = {
-		 0:'1. Load a Mobile Broadband Device'
-		,1:'2. Set up a Mobile Broadband Device'
-		,2:'3. Generate a WvDial profile'
-		,3:'4. Attempt to connect'
-		,4:'5. Done'
+		 0:'1. Load a Mobile Broadband Device'		,1:'2. Set up a Mobile Broadband Device'		,2:'3. Generate a WvDial profile'		,3:'4. Attempt to connect'		,4:'5. Done'
 		}
 		self.printStatus(idx, STATUS)
 
 	def setDisconnectStatus(self, idx):
 		STATUS = {
-		 0:'1. Drop WvDial'
-		,1:'2. Unload a Mobile Broadband Device'
-		,2:'3. Done'
+		 0:'1. Drop WvDial'		,1:'2. Unload a Mobile Broadband Device'		,2:'3. Done'
 		}
 		self.printStatus(idx, STATUS)
 

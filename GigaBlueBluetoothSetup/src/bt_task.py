@@ -102,7 +102,7 @@ class BluetoothTask(BluetoothState):
 			pass
 
 	def addTask1(self, taskType, callFunc, mac, args, eventCB):
-		task = {"taskType" : taskType, "callFunc" : callFunc, "mac": mac, "args" : args, "eventCB" : eventCB}
+		task = {"taskType": taskType, "callFunc": callFunc, "mac": mac, "args": args, "eventCB": eventCB}
 		#print("==> addTask1 : ")
 		#self.printTask(task)
 		#print("taskType :", task["taskType"])
@@ -181,7 +181,7 @@ class BluetoothTask(BluetoothState):
 		return (self.curTask1 is None) and (not self.tasks1)
 
 	def addTask(self, taskType, callFunc, mac, args, eventCB):
-		task = {"taskType" : taskType, "callFunc" : callFunc, "mac": mac, "args" : args, "eventCB" : eventCB}
+		task = {"taskType": taskType, "callFunc": callFunc, "mac": mac, "args": args, "eventCB": eventCB}
 		#print("==> addTask : ")
 		#self.printTask(task)
 		#print("taskType :", task["taskType"])
@@ -300,14 +300,14 @@ class BluetoothTask(BluetoothState):
 			return
 
 		taskDesc = {
-			self.TASK_CONNECT : "TASK_CONNECT",
-			self.TASK_DISCONNECT : "TASK_DISCONNECT",
-			self.TASK_WAIT_DISCONNECT : "TASK_WAIT_DISCONNECT",
-			self.TASK_START_SCAN : "TASK_START_SCAN",
-			self.TASK_START_PAIRING : "TASK_START_PAIRING",
-			self.TASK_CALL_FUNC : "TASK_CALL_FUNC",
-			self.TASK_CHECK_STATUS : "TASK_CHECK_STATUS",
-			self.TASK_EXIT : "TASK_EXIT"
+			self.TASK_CONNECT: "TASK_CONNECT",
+			self.TASK_DISCONNECT: "TASK_DISCONNECT",
+			self.TASK_WAIT_DISCONNECT: "TASK_WAIT_DISCONNECT",
+			self.TASK_START_SCAN: "TASK_START_SCAN",
+			self.TASK_START_PAIRING: "TASK_START_PAIRING",
+			self.TASK_CALL_FUNC: "TASK_CALL_FUNC",
+			self.TASK_CHECK_STATUS: "TASK_CHECK_STATUS",
+			self.TASK_EXIT: "TASK_EXIT"
 		}
 
 		print("		taskType : ", taskDesc[task["taskType"]])

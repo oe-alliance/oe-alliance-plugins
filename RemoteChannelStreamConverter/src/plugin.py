@@ -668,4 +668,4 @@ def mainInMenu(menuid, **kwargs):
 			return []
 
 def Plugins(**kwargs):
-	return [ PluginDescriptor(name=_("Remote channel stream converter"), description=_("Convert remote channel list for streaming"), where=PluginDescriptor.WHERE_MENU, fnc=mainInMenu) ]
+	return [PluginDescriptor(name=_("Remote channel stream converter"), description=_("Convert remote channel list for streaming"), where=PluginDescriptor.WHERE_MENU, fnc=mainInMenu)]

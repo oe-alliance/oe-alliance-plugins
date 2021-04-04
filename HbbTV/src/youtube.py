@@ -51,8 +51,8 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 	def layoutFinished(self):
 		self.setTitle(_('Start YouTube TV'))
 		self["infomation"].setText(_("YouTube TV is a new way to watch YouTube videos"))
-		self["startdesc" ].setText(_("* Start YouTube TV"))
-		self["helpdesc"  ].setText(_("* RC Help"))
+		self["startdesc"].setText(_("* Start YouTube TV"))
+		self["helpdesc"].setText(_("* RC Help"))
 
 	def setHelpModeActions(self):
 		self.helpList = []
@@ -99,7 +99,7 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 		self.setHelpModeActions()
 
 	def keyBlue(self):
-		if config.plugins.youtubetv.showhelp.value == True :
+		if config.plugins.youtubetv.showhelp.value == True:
 			config.plugins.youtubetv.showhelp.setValue(False)
 		else:
 			config.plugins.youtubetv.showhelp.setValue(True)

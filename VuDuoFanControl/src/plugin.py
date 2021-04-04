@@ -39,7 +39,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		self.fanontimeEntry = None
 		self.fanofftimeEntry = None
 
-		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
@@ -96,12 +96,12 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		self.fanontimeEntry = getConfigListEntry(_("Fan on duration time"), config.plugins.fansetups.fanontime)
 		self.fanofftimeEntry = getConfigListEntry(_("Fan off duration time"), config.plugins.fansetups.fanofftime)
 
-		self.list.append( self.standbyEntry )
+		self.list.append(self.standbyEntry)
 		if config.plugins.fansetups.standbymode.value == "off":
-			self.list.append( self.usetimerEntry )
+			self.list.append(self.usetimerEntry)
 			if config.plugins.fansetups.usetimer.value != "off":
-				self.list.append( self.fanontimeEntry )
-				self.list.append( self.fanofftimeEntry )
+				self.list.append(self.fanontimeEntry)
+				self.list.append(self.fanofftimeEntry)
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -153,7 +153,7 @@ def openconfig(session, **kwargs):
 
 def selSetup(menuid, **kwargs):
 	if menuid != "system":
-		return [ ]
+		return []
 	return [(_("Fan Control"), openconfig, "fansetup_config", 70)]
 
 def setfansetup(reason, **kwargs):

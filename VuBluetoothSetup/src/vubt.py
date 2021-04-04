@@ -71,7 +71,7 @@ try:
     _object = object
     _newclass = 1
 except AttributeError:
-    class _object :
+    class _object:
         pass
     _newclass = 0
 
@@ -89,7 +89,7 @@ class Vu_PyBluetooth(_object):
         except:
             self.this = this
     __swig_destroy__ = _vubt.delete_Vu_PyBluetooth
-    __del__ = lambda self : None
+    __del__ = lambda self: None
     def enable(self): return _vubt.Vu_PyBluetooth_enable(self)
     def disable(self): return _vubt.Vu_PyBluetooth_disable(self)
     def checkBTUSB(self): return _vubt.Vu_PyBluetooth_checkBTUSB(self)

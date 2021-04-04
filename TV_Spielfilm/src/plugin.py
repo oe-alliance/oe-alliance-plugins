@@ -224,7 +224,7 @@ class tvAllScreenFull(tvAllScreen):
     skin = '\n\t\t\t\t<screen position="0,0" size="{size}" >\n\t\t\t\t</screen>'
     def __init__(self, session):
         size = "%s,%s" % (DESKTOP_WIDTH,DESKTOP_HEIGHT)
-        dict = {'size' : size}
+        dict = {'size': size}
         tvAllScreen.__init__(self, session, tvAllScreenFull.skin, dict)
 
 
@@ -2752,7 +2752,7 @@ class TVJetztView(tvGenreJetztProgrammView):
         f = open(self.servicefile, 'r')
         lines = f.readlines()
         f.close()
-        ordertext = [ '"%s": %d, ' % (line.partition(' ')[0], i) for i, line in enumerate(lines) ]
+        ordertext = ['"%s": %d, ' % (line.partition(' ')[0], i) for i, line in enumerate(lines)]
         self.order = '{' + str(''.join(ordertext)) + '}'
         if self.standalone == True:
             self.movie_stop = config.usage.on_movie_stop.value
@@ -5699,7 +5699,7 @@ class FullScreen(tvAllScreen):
         size = "%s,%s" % (DESKTOP_WIDTH,DESKTOP_HEIGHT)
         psize = "%s,%s" % (DESKTOP_WIDTH * 0.75,DESKTOP_HEIGHT)
         ppos = "%s,%s" % (DESKTOP_WIDTH * 0.125,0)
-        dic = {'size' : size , 'psize' : psize , 'ppos' : ppos}
+        dic = {'size': size, 'psize': psize, 'ppos': ppos}
         tvAllScreen.__init__(self, session, skin, dic)
         self.picfile = '/tmp/tvspielfilm.jpg'
         self.hideflag = True
@@ -7244,7 +7244,7 @@ class makeServiceFile(Screen):
             info = serviceHandler.info(bouquet_root)
             if info:
                 bouquets.append((info.getName(bouquet_root), bouquet_root))
-        entrys = [ (x[0], x[1]) for x in bouquets ]
+        entrys = [(x[0], x[1]) for x in bouquets]
         self['list'].l.setList(entrys)
         try:
             self['list'].l.setFont(gFont('Regular', 20))
@@ -7262,7 +7262,7 @@ class makeServiceFile(Screen):
                 slist = ServiceList(bouquet, validate_commands=False)
                 services = slist.getServicesAsList(format='S')
                 search = ['IBDCTSERNX']
-                search.extend([ (service, 0, -1) for service in services ])
+                search.extend([(service, 0, -1) for service in services])
                 self.epgcache = eEPGCache.getInstance()
                 events = self.epgcache.lookupEvent(search)
                 eventlist = []
@@ -7276,7 +7276,7 @@ class makeServiceFile(Screen):
                 slist = ServiceList(bouquet, validate_commands=False)
                 services = slist.getServicesAsList(format='S')
                 search = ['IBDCTSERNX']
-                search.extend([ (service, 0, -1) for service in services ])
+                search.extend([(service, 0, -1) for service in services])
                 self.epgcache = eEPGCache.getInstance()
                 events = self.epgcache.lookupEvent(search)
                 eventlist = []
@@ -8009,7 +8009,7 @@ class TVHeuteView(tvBaseScreen):
             psize = '48'
         else:
             psize = '42'
-        dic = {"psize": "%s,%s" % (int(135 * skinFactor) , psize)}
+        dic = {"psize": "%s,%s" % (int(135 * skinFactor), psize)}
         skin = readSkin("TVHeuteView")
         tvBaseScreen.__init__(self, session, skin, dic)
         if config.plugins.tvspielfilm.meintvs.value == 'yes':

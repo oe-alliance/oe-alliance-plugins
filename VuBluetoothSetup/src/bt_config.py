@@ -55,13 +55,13 @@ class BluetoothSetupConfig(Screen, ConfigListScreen):
 
 	def createSetup(self):
 		self.list = []
-		self.list.append( self.btaudiodelay )
-		self.list.append( self.showMsgBoxEntry )
-		self.list.append( self.lastAudioConnEntry )
-		self.list.append( self.showBatteryLowEntry )
+		self.list.append(self.btaudiodelay)
+		self.list.append(self.showMsgBoxEntry)
+		self.list.append(self.lastAudioConnEntry)
+		self.list.append(self.showBatteryLowEntry)
 		#self.list.append( self.voiceCheckDbEntry )
 		if self.skipVuRcuUpdateEntry:
-			self.list.append( self.skipVuRcuUpdateEntry )
+			self.list.append(self.skipVuRcuUpdateEntry)
 		self.list.append(self.voiceCallbackName)
 
 		self["config"].list = self.list

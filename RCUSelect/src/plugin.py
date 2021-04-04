@@ -140,7 +140,7 @@ class RCUSelect(Screen):
 				if boxime == 'wetekplay2':
 					fin = open('/etc/amremote/wetek.conf')
 					fout = open('/etc/amremote/wetek_tmp.conf', 'w')
-					for line in fin :
+					for line in fin:
 						if 'work_mode' in line:
 							line = 'work_mode  	= 0\n'
 						fout.write(line)
@@ -177,7 +177,7 @@ def system(menuid):
         
 def Plugins(**kwargs):
 	boxime = HardwareInfo().get_device_name()
-	if boxime == 'wetekplay' or boxime == 'wetekplayplus' or boxime == 'wetekplay2' or boxime == 'wetekplay2s' :
+	if boxime == 'wetekplay' or boxime == 'wetekplayplus' or boxime == 'wetekplay2' or boxime == 'wetekplay2s':
 		return \
 			[PluginDescriptor(name=_("RCU Select"), where=PluginDescriptor.WHERE_MENU, fnc=system),
 			]

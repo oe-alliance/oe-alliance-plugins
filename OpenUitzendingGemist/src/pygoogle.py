@@ -96,13 +96,13 @@ class pygoogle:
             rsz = 8
             if self.rsz == RSZ_SMALL:
                 rsz = 4
-            args = {'q' : self.query,
-                    'v' : '1.0',
-                    'start' : page*rsz,
+            args = {'q': self.query,
+                    'v': '1.0',
+                    'start': page*rsz,
                     'rsz': self.rsz,
-                    'safe' : self.safe, 
-                    'filter' : self.filter,    
-                    'hl'    : self.hl
+                    'safe': self.safe, 
+                    'filter': self.filter,    
+                    'hl': self.hl
                     }
             self.logger.debug('search: "%s" page# : %s'%(self.query, page))
             q = urlencode(args)
@@ -226,7 +226,7 @@ def main():
     if not query:
         parser.print_help()
         exit()
-    search = pygoogle( log_level=log_level, query=query, pages=args.pages, hl=args.language)
+    search = pygoogle(log_level=log_level, query=query, pages=args.pages, hl=args.language)
     search.display_results()
 
 if __name__ == "__main__":

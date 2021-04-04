@@ -257,9 +257,9 @@ class ChromiumOSWindow(ConfigListScreen, Screen):
 
     def layoutFinished(self):
         self.setTitle(_('Start ChromiumOS'))
-        self["startdesc"   ].setText(_("* Start ChromiumOS"))
-        self["settingdesc" ].setText(_("* Setting ChromiumOS"))
-        self["helpdesc"    ].setText(_("* RC Help"))
+        self["startdesc"].setText(_("* Start ChromiumOS"))
+        self["settingdesc"].setText(_("* Setting ChromiumOS"))
+        self["helpdesc"].setText(_("* RC Help"))
 
     def keyPass(self):
         pass

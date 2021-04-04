@@ -207,17 +207,17 @@ class StalkerClient_ChannelSelection(Screen):
 		self.skin = StalkerClient_ChannelSelection.skin_default_1080p if dh > 720 else StalkerClient_ChannelSelection.skin_default
 
 		self["actions"]  = ActionMap(["OkCancelActions", "WizardActions", "ColorActions", "MenuActions", "ChannelSelectEPGActions"], {
-			"ok"    : self.onKeyOK,
+			"ok": self.onKeyOK,
 			"cancel": self.onKeyCancel,
-			"up"    : self.onKeyUp,
-			"down"  : self.onKeyDown,
-			"left"  : self.onKeyLeft,
-			"right" : self.onKeyRight,
-			"red"   : self.onKeyRed,
-			"green" : self.onKeyGreen,
+			"up": self.onKeyUp,
+			"down": self.onKeyDown,
+			"left": self.onKeyLeft,
+			"right": self.onKeyRight,
+			"red": self.onKeyRed,
+			"green": self.onKeyGreen,
 			"yellow": self.onKeyYellow,
-			"blue"  : self.onKeyBlue,
-			"menu"  : self.onKeyMenu,
+			"blue": self.onKeyBlue,
+			"menu": self.onKeyMenu,
 			"showEPGList": self.onKeyEPG,
 		}, -1)
 
@@ -691,7 +691,7 @@ class StalkerGenre(StalkerBaseService):
 
 
 def StalkerEntryComponent(entry, x, y, w, h):
-	res = [ entry ]
+	res = [entry]
 	name = entry.name
 
 	if entry.isFolder():
@@ -735,7 +735,7 @@ class StalkerList(MenuList):
 		if self.page_last < 0 or int(self.page_last) == 1:
 			self.pageUp()
 		else:
-			self.page_current = int(self.page_current) - 1 if (int(self.page_current) > 1 ) else self.page_last
+			self.page_current = int(self.page_current) - 1 if (int(self.page_current) > 1) else self.page_last
 
 	def rightPage(self):
 		if self.page_last < 0 or int(self.page_last) == 1:

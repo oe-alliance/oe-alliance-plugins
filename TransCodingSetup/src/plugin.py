@@ -55,7 +55,7 @@ def checkSupportAdvanced():
 	return False
 
 config.plugins.transcodingsetup = ConfigSubsection()
-config.plugins.transcodingsetup.transcoding = ConfigSelection(default="enable", choices=[ ("enable", _("enable")), ("disable", _("disable"))])
+config.plugins.transcodingsetup.transcoding = ConfigSelection(default="enable", choices=[("enable", _("enable")), ("disable", _("disable"))])
 config.plugins.transcodingsetup.port = ConfigInteger(default=8002, limits=(8002, 9999))
 config.plugins.transcodingsetup.encoder = ConfigSubList()
 
@@ -78,7 +78,7 @@ def createTransCodingConfig(encoder):
 
 	if checkSupportAdvanced():
 		if (hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "bitrate") or hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "framerate")):
-			choice = ConfigSelection(default="Off", choices=[ ("On", _("On")), ("Off", _("Off")) ])
+			choice = ConfigSelection(default="Off", choices=[("On", _("On")), ("Off", _("Off"))])
 			config.plugins.transcodingsetup.encoder[int(encoder)].automode = choice
 
 		if fileExists(getProcPath(encoder, "resolution")):
@@ -89,7 +89,7 @@ def createTransCodingConfig(encoder):
 			config.plugins.transcodingsetup.encoder[int(encoder)].resolution = choice
 
 		if fileExists(getProcPath(encoder, "aspectratio")):
-			choice = ConfigSelection(default="2", choices=[ ("0", _("auto")), ("1", _("4x3")), ("2", _("16x9")) ])
+			choice = ConfigSelection(default="2", choices=[("0", _("auto")), ("1", _("4x3")), ("2", _("16x9"))])
 			config.plugins.transcodingsetup.encoder[int(encoder)].aspectratio = choice
 
 		if fileExists(getProcPath(encoder, "audiocodec")):
@@ -97,7 +97,7 @@ def createTransCodingConfig(encoder):
 			config.plugins.transcodingsetup.encoder[int(encoder)].audiocodec = choice
 
 		if fileExists(getProcPath(encoder, "videocodec")):
-			choice = ConfigSelection(default="h264", choices=[ ("h264", _("h264")) ])
+			choice = ConfigSelection(default="h264", choices=[("h264", _("h264"))])
 			config.plugins.transcodingsetup.encoder[int(encoder)].videocodec = choice
 
 		if fileExists(getProcPath(encoder, "gopframeb")):
@@ -253,7 +253,7 @@ class TranscodingSetupInit:
 
 	def setResolution(self, configElement, extra_args):
 		resolution = configElement.value
-		if resolution in [ "320x240", "160x120" ]:
+		if resolution in ["320x240", "160x120"]:
 			(width, height) = tuple(resolution.split('x'))
 			self.setConfig(getProcPath(int(extra_args[0]), "resolution"), "custom")
 			self.setConfig(getProcPath(int(extra_args[0]), "width"), width)
@@ -348,7 +348,7 @@ class TranscodingSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.skinName = "TranscodingSetup"
 		self.setup_title = _("Transcoding Setup")
 		self.setTitle(self.setup_title)
@@ -373,7 +373,7 @@ class TranscodingSetup(Screen, ConfigListScreen):
 
 		self["description"] = Label()
 
-		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
@@ -384,7 +384,7 @@ class TranscodingSetup(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.setupMode = "Normal" # Normal / Advanced
 		self.encoder = None

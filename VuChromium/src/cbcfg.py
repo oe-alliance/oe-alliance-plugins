@@ -39,9 +39,9 @@ class PSingleton:
 
 _DEBUG, _WARNING, _ERROR = 0xB1, 0xB2, 0xB3
 _LVSTR = {
-    _DEBUG   : "  DEBUG",
-    _WARNING : "WARNING",
-    _ERROR   : "  ERROR"
+    _DEBUG: "  DEBUG",
+    _WARNING: "WARNING",
+    _ERROR: "  ERROR"
 }
 
 @PSingleton

@@ -132,7 +132,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, list)
 		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], 
 		{
-			'red' : self.dontSaveAndExit,  
+			'red': self.dontSaveAndExit,  
 			'green': self.saveAndExit, 
 			'cancel': self.dontSaveAndExit
 		}, -1)
@@ -481,13 +481,13 @@ class BluetoothDevicesTask:
 	def __evStart(self):
 		curr_time = datetime.now()
 		next_time = self.timestamp + timedelta(hours=3)
-		if curr_time > next_time :
+		if curr_time > next_time:
 			self.flush()
 
 	def poll(self):
 		curr_time = datetime.now()
 		next_time = self.timestamp + timedelta(hours=6)
-		if curr_time > next_time :
+		if curr_time > next_time:
 			self.flush()
 
 	def flush(self):
@@ -516,7 +516,7 @@ def Plugins(**kwargs):
 			if version in ('10'):
 				ShowPlugin = False
 
-	if ShowPlugin :
+	if ShowPlugin:
 		l = []
 		l.append(PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart))
 		l.append(PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart))

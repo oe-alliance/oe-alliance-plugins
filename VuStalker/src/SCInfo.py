@@ -125,12 +125,12 @@ def createStalkerSref(sid, tsid, onid, haslink, uri, name):
 	stalker_flag = str(stalker_flag)
 
 	sref_str = "4097:0:1:%(SID)s:%(TSID)s:%(ONID)s:0:0:0:%(SFLAG)s:%(URI)s:%(NAME)s" % {
-		'SID' : sid,
-		'TSID' : tsid,
-		'ONID' : onid,
-		'SFLAG' : stalker_flag,
-		'URI'  : uri,
-		'NAME' : name.replace(':', '%3A')
+		'SID': sid,
+		'TSID': tsid,
+		'ONID': onid,
+		'SFLAG': stalker_flag,
+		'URI': uri,
+		'NAME': name.replace(':', '%3A')
 	}
 	return eServiceReference(sref_str)
 

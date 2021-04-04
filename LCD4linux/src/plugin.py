@@ -413,10 +413,10 @@ LCD4linux.Night = ConfigSelectionNumber(0, 10, 1, default=0)
 LCD4linux.Night2 = ConfigSelectionNumber(0, 10, 1, default=0)
 LCD4linux.Night3 = ConfigSelectionNumber(0, 10, 1, default=0)
 LCD4linux.AutoOFF = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="0")
-LCD4linux.LCDoff = ConfigClock(default=int(begin) ) # ((5 * 60 + 0) * 60)
-LCD4linux.LCDon = ConfigClock(default=int(begin) )
-LCD4linux.LCDWEoff = ConfigClock(default=int(begin) ) # ((5 * 60 + 0) * 60)
-LCD4linux.LCDWEon = ConfigClock(default=int(begin) )
+LCD4linux.LCDoff = ConfigClock(default=int(begin)) # ((5 * 60 + 0) * 60)
+LCD4linux.LCDon = ConfigClock(default=int(begin))
+LCD4linux.LCDWEoff = ConfigClock(default=int(begin)) # ((5 * 60 + 0) * 60)
+LCD4linux.LCDWEon = ConfigClock(default=int(begin))
 LCD4linux.LCDshutdown = ConfigYesNo(default=True)
 LCD4linux.Delay = ConfigSlider(default=400,  increment=50, limits=(50, 2000))
 LCD4linux.ElementThreads = ConfigSelectionNumber(1, 2, 1, default=2)
@@ -1851,10 +1851,10 @@ LCD4linux.StandbyNight = ConfigSelectionNumber(0, 10, 1, default=0)
 LCD4linux.StandbyNight2 = ConfigSelectionNumber(0, 10, 1, default=0)
 LCD4linux.StandbyNight3 = ConfigSelectionNumber(0, 10, 1, default=0)
 LCD4linux.StandbyAutoOFF = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="0")
-LCD4linux.StandbyLCDoff = ConfigClock(default=int(begin) )
-LCD4linux.StandbyLCDon = ConfigClock(default=int(begin) )
-LCD4linux.StandbyLCDWEoff = ConfigClock(default=int(begin) )
-LCD4linux.StandbyLCDWEon = ConfigClock(default=int(begin) )
+LCD4linux.StandbyLCDoff = ConfigClock(default=int(begin))
+LCD4linux.StandbyLCDon = ConfigClock(default=int(begin))
+LCD4linux.StandbyLCDWEoff = ConfigClock(default=int(begin))
+LCD4linux.StandbyLCDWEon = ConfigClock(default=int(begin))
 LCD4linux.StandbyLCDBild1 = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.StandbyLCDBild2 = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.StandbyLCDBild3 = ConfigText(default="", fixed_size=False, visible_width=50)
@@ -2572,7 +2572,7 @@ def getDirection(angle):
 	direction_names = [_("N"), _("NNE"), _("NE"), _("ENE"), _("E"), _("ESE"), _("SE"), _("SSE"), _("S"), _("SSW"), _("SW"), _("WSW"), _("W"), _("WNW"), _("NW"), _("NNW")]
 	directions_num = len(direction_names)
 	directions_step = 360./directions_num
-	index = int(round( normalize_angle(angle)/directions_step ))
+	index = int(round(normalize_angle(angle)/directions_step))
 	index %= directions_num
 	return direction_names[index]
 
@@ -2586,7 +2586,7 @@ def getExternalIP():
 		return response.read()
 	except:
 		from traceback import format_exc
-		L4logE("Error: getExternalIP", format_exc() )
+		L4logE("Error: getExternalIP", format_exc())
 		return "Error"
 
 def setFB2(value):
@@ -2674,13 +2674,13 @@ def ICSdownloads():
 			L4log("use iCal 2.x")
 		except:
 			from traceback import format_exc
-			L4logE("Error: ICS 2.x", format_exc() )
+			L4logE("Error: ICS 2.x", format_exc())
 			try:
 				gcal = icalendar.Calendar().from_ical(name[0])
 				L4log("use iCal 3.x")
 			except:
 				from traceback import format_exc
-				L4log("Error: ICS not readable!", format_exc() )
+				L4log("Error: ICS not readable!", format_exc())
 				continue
 		try:
 			for Icomp in gcal.walk("VEVENT"):
@@ -2733,7 +2733,7 @@ def ICSdownloads():
 		except:
 			from traceback import format_exc
 			L4log("Error ICS", name)
-			L4log("Error:", format_exc() )
+			L4log("Error:", format_exc())
 			try:
 				open(CrashFile, "w").write(format_exc())
 			except:
@@ -3047,7 +3047,7 @@ def writeHelligkeit(hell, night, STOP):
 			LCDdisplay.setBright(h3)
 	except:
 		from traceback import format_exc
-		L4logE("Error LCD:", format_exc() )
+		L4logE("Error LCD:", format_exc())
 		pass
 	if PNGutilOK == True:
 		H = -1
@@ -3501,7 +3501,7 @@ def NextScreen(PRESS):
 		ScreenTime += 1
 
 def _getDirs(base):
-	return [x for x in glob.iglob(os.path.join( base, '*')) if os.path.isdir(x) ]
+	return [x for x in glob.iglob(os.path.join(base, '*')) if os.path.isdir(x)]
 
 def rglob(base, pattern):
 	list = []
@@ -3644,7 +3644,7 @@ class MJPEGHandler1(BaseHTTPRequestHandler):
 						self.end_headers()
 		except:
 			from traceback import format_exc
-			L4log("Error1:", format_exc() )
+			L4log("Error1:", format_exc())
 			if LCD4linux.MJPEGRestart.value:
 				MJPEG[0]=MJPEG[0].replace("A", "a")
 
@@ -3702,7 +3702,7 @@ class MJPEGHandler2(BaseHTTPRequestHandler):
 						self.end_headers()
 		except:
 			from traceback import format_exc
-			L4log("Error2:", format_exc() )
+			L4log("Error2:", format_exc())
 			if LCD4linux.MJPEGRestart.value:
 				MJPEG[0]=MJPEG[0].replace("B", "b")
 
@@ -3760,7 +3760,7 @@ class MJPEGHandler3(BaseHTTPRequestHandler):
 						self.end_headers()
 		except:
 			from traceback import format_exc
-			L4log("Error3:", format_exc() )
+			L4log("Error3:", format_exc())
 			if LCD4linux.MJPEGRestart.value:
 				MJPEG[0]=MJPEG[0].replace("C", "c")
 
@@ -4497,7 +4497,7 @@ def doGrab(i, ConfigFast, ConfigSize):
 		setFB2("0")
 	else:
 		CF = "" if ConfigFast == True else "-b"
-		GrabOSD("/usr/bin/grab -o -p -j 95 %s -r %d %sdpfgrab.jpg" % (CF, ConfigSize, TMPL) )
+		GrabOSD("/usr/bin/grab -o -p -j 95 %s -r %d %sdpfgrab.jpg" % (CF, ConfigSize, TMPL))
 
 def InitWebIF():
 	L4log("WebIf-Init...")
@@ -4522,17 +4522,17 @@ def InitWebIF():
 		root.putChild(b"data", static.File(six.ensure_binary(Data[:-1])))
 		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web/external.xml"):
 			try:
-				addExternalChild( ("lcd4linux", root, "LCD4linux", Version, True) )
+				addExternalChild(("lcd4linux", root, "LCD4linux", Version, True))
 				L4log("use new WebIf")
 			except:
-				addExternalChild( ("lcd4linux", root) )
+				addExternalChild(("lcd4linux", root))
 				L4log("Error, fall back to old WebIf")
 		else:
-			addExternalChild( ("lcd4linux", root) )
+			addExternalChild(("lcd4linux", root))
 			L4log("use old WebIf")
 		if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/OpenWebif/pluginshook.src"):
 			try:
-				addExternalChild( ("lcd4linux", root, "LCD4linux", Version) )
+				addExternalChild(("lcd4linux", root, "LCD4linux", Version))
 				L4log("use OpenWebIf")
 			except:
 				pass
@@ -4566,7 +4566,7 @@ class L4LWorkerRes(Thread):
 					para[0](para[1], para[2], para[3], para[4], para[5], para[6], para[7])
 			except:
 				from traceback import format_exc
-				L4log("Error1:", format_exc() )
+				L4log("Error1:", format_exc())
 				try:
 					open(CrashFile, "w").write(format_exc())
 				except:
@@ -4598,7 +4598,7 @@ class L4LWorker1(Thread):
 					para[0](para[1], para[2], para[3], para[4], para[5], para[6], para[7])
 			except:
 				from traceback import format_exc
-				L4log("Error1:", format_exc() )
+				L4log("Error1:", format_exc())
 				try:
 					open(CrashFile, "w").write(format_exc())
 				except:
@@ -4630,7 +4630,7 @@ class L4LWorker2(Thread):
 					para[0](para[1], para[2], para[3], para[4], para[5], para[6], para[7])
 			except:
 				from traceback import format_exc
-				L4log("Error2:", format_exc() )
+				L4log("Error2:", format_exc())
 				try:
 					open(CrashFile, "w").write(format_exc())
 				except:
@@ -4662,7 +4662,7 @@ class L4LWorker3(Thread):
 					para[0](para[1], para[2], para[3], para[4], para[5], para[6], para[7])
 			except:
 				from traceback import format_exc
-				L4log("Error3:", format_exc() )
+				L4log("Error3:", format_exc())
 				try:
 					open(CrashFile, "w").write(format_exc())
 				except:
@@ -4753,7 +4753,7 @@ class L4LWorker(Thread):
 			except:
 				from traceback import format_exc
 				L4log("Error: ICS Open", name)
-				L4log("Error:", format_exc() )
+				L4log("Error:", format_exc())
 				return
 			if r is not None:
 				L4log("Read ICS", name)
@@ -4771,7 +4771,7 @@ class L4LWorker(Thread):
 		except:
 			from traceback import format_exc
 			L4log("Error ICS", name)
-			L4log("Error:", format_exc() )
+			L4log("Error:", format_exc())
 			try:
 				open(CrashFile, "w").write(format_exc())
 			except:
@@ -4877,7 +4877,7 @@ class L4LWorker(Thread):
 						L4log("Mail Error:", U[i])
 						PopMail[i].append(["Mail Error", "", "", ""])
 						from traceback import format_exc
-						L4log("Error:", format_exc() )
+						L4log("Error:", format_exc())
 						continue
 					try:
 						mailserver.quit()
@@ -4918,14 +4918,14 @@ class L4LWorker(Thread):
 						if ids != None:
 							id_list = ids.split()
 							if len(id_list)>0:
-								latest_email_id = int( id_list[-1] )
+								latest_email_id = int(id_list[-1])
 								L4logE(typ, data)
 								for M in id_list:
 									Date = ""
 									From = ""
 									Subj = ""
 									ID = ""
-									typ, data = mailserver.fetch( str(M), "(RFC822)" )
+									typ, data = mailserver.fetch(str(M), "(RFC822)")
 									for response_part in data:
 										if isinstance(response_part, tuple):
 											msg = email.message_from_string(response_part[1])
@@ -4944,7 +4944,7 @@ class L4LWorker(Thread):
 						L4log("Mail Error:", U[i])
 						PopMail[i].append(["Mail Error", "", "", ""])
 						from traceback import format_exc
-						L4log("Error:", format_exc() )
+						L4log("Error:", format_exc())
 						continue
 					try:
 						mailserver.close()
@@ -4955,7 +4955,7 @@ class L4LWorker(Thread):
 				if len(PopMail[i]) > 0:
 					PopMail[i] = list(reversed(PopMail[i]))
 					L4logE("currend ID", PopMailUid[i][0])
-					if PopMailUid[i][0] == "" or not (PopMailUid[i][0] in (e[2] for e in PopMail[i]) ):
+					if PopMailUid[i][0] == "" or not (PopMailUid[i][0] in (e[2] for e in PopMail[i])):
 						if len(PopMail[i]) > 1 or PopMailUid[i][0] != "-":
 							PopMailUid[i][0] = PopMail[i][0][2]
 							L4logE("new ID", PopMailUid[i][0])
@@ -5014,7 +5014,7 @@ class L4LWorker(Thread):
 		except:
 			L4LWorker.QuickRunning = False
 			from traceback import format_exc
-			L4log("QuickPic Error:", format_exc() )
+			L4log("QuickPic Error:", format_exc())
 			try:
 				open(CrashFile, "w").write(format_exc())
 			except:
@@ -5226,7 +5226,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			<widget source="LCD3text" render="Label" position="%d,%d" size="200,20" zPosition="1" font="Regular;11" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
 
 			</screen>""" % (75, size_w, size_h, conf_w, conf_h, int_y, conf_w-10, 0, key_y, key_x, key_x, key_y, key_x, 2*key_x, key_y, key_x, 3*key_x, key_y, key_x, 0, key_y, key_x, key_x, key_y, key_x, 2*key_x, key_y, key_x, 3*key_x, key_y, key_x,
-			4*key_x, key_y+15, conf_w-100, key_y-10, conf_w-100, key_y-30, conf_w-100, key_y-30, conf_w, 0, pic_w, pic_h, conf_w, pic_h, pic_w, pic_h, conf_w, pic_h2, pic_w, pic_h, conf_w, 5, conf_w, pic_h+5, conf_w, pic_h2+5 )
+			4*key_x, key_y+15, conf_w-100, key_y-10, conf_w-100, key_y-30, conf_w-100, key_y-30, conf_w, 0, pic_w, pic_h, conf_w, pic_h, pic_w, pic_h, conf_w, pic_h2, pic_w, pic_h, conf_w, 5, conf_w, pic_h+5, conf_w, pic_h2+5)
 		self.skin = skin
 		self.session = session
 		Screen.__init__(self, session)
@@ -8399,7 +8399,7 @@ class UpdateStatus(Screen):
 				self.SonosRunning = False
 				L4log("Sonos Communikation Error")
 				from traceback import format_exc
-				L4log("Error:", format_exc() )
+				L4log("Error:", format_exc())
 			L4logE("Sonos RunTime: %.3f" % (time()-tt))
 
 	def getYMCast(self):
@@ -8452,7 +8452,7 @@ class UpdateStatus(Screen):
 				self.YMCastRunning = False
 				L4log("YMC Communikation Error")
 				from traceback import format_exc
-				L4log("Error:", format_exc() )
+				L4log("Error:", format_exc())
 			L4logE("YMC RunTime: %.3f" % (time()-tt))
 
 	def getBlue(self):
@@ -8506,7 +8506,7 @@ class UpdateStatus(Screen):
 				self.BlueRunning = False
 				L4log("BlueSound Communikation Error")
 				from traceback import format_exc
-				L4log("Error:", format_exc() )
+				L4log("Error:", format_exc())
 			L4logE("BlueSound RunTime: %.3f" % (time()-tt))
 
 	def getNetatmo(self):
@@ -8587,7 +8587,7 @@ class UpdateStatus(Screen):
 			except:
 				L4logE("Netatmo Error Dataread")
 				from traceback import format_exc
-				L4logE("Error:", format_exc() )
+				L4logE("Error:", format_exc())
 				try:
 					open(CrashFile, "w").write(format_exc())
 				except:
@@ -9400,7 +9400,7 @@ class UpdateStatus(Screen):
 			except:
 				L4log("wwwBox Syntax Error", wwwURL)
 				from traceback import format_exc
-				L4log("Error:", format_exc() )
+				L4log("Error:", format_exc())
 			i+=1
 
 	def downloadwwwBoxCallback(self,element, page=""):
@@ -9454,7 +9454,7 @@ class UpdateStatus(Screen):
 			except:
 				L4log("wwwBoxTimer Syntax Error", wwwURL)
 				from traceback import format_exc
-				L4log("Error:", format_exc() )
+				L4log("Error:", format_exc())
 			i+=1
 
 	def downloadwwwBoxTimerCallback(self, element, page=""):
@@ -9812,7 +9812,7 @@ class UpdateStatus(Screen):
 		except:
 			L4log("Error Sunrise processing")
 			from traceback import format_exc
-			L4log("Error:", format_exc() )
+			L4log("Error:", format_exc())
 		L4log(L4LSun, L4LMoon)
 
 	def downloadSunriseCallback2(self, page=""):
@@ -9851,7 +9851,7 @@ class UpdateStatus(Screen):
 		except:
 			L4log("Error Sunrise2 processing")
 			from traceback import format_exc
-			L4log("Error:", format_exc() )
+			L4log("Error:", format_exc())
 		L4log(L4LSun, L4LMoon)
 
 	def coverDownloadFailed(self, result):
@@ -9894,7 +9894,7 @@ class UpdateStatus(Screen):
 					self.LgetGoogleCover = None
 					L4log("Apple Cover Error")
 					from traceback import format_exc
-					L4log("Error:", format_exc() )
+					L4log("Error:", format_exc())
 			else:
 				if len(LCD4linux.MPCoverApiGoogle.value)<10:
 					self.CoverError = "Google API Key is required"
@@ -9913,7 +9913,7 @@ class UpdateStatus(Screen):
 						self.LgetGoogleCover = None
 						L4log("Google Cover Error")
 						from traceback import format_exc
-						L4log("Error:", format_exc() )
+						L4log("Error:", format_exc())
 		else:
 			self.LgetGoogleCover = None
 
@@ -10003,7 +10003,7 @@ def LCD4linuxPICThread(self, session):
 		LCD4linuxPIC(self, session)
 	except Exception:
 		from traceback import format_exc
-		L4log("Thread Error:", format_exc() )
+		L4log("Thread Error:", format_exc())
 		try:
 			open(CrashFile, "w").write(format_exc())
 		except:
@@ -11651,7 +11651,7 @@ def LCD4linuxPIC(self, session):
 				except:
 					pass
 					from traceback import format_exc
-					L4log("put Grab Error:", format_exc() )
+					L4log("put Grab Error:", format_exc())
 		TVrunning = False
 
 	def putGrab(ConfigFast, ConfigSize, im, draw):
@@ -11699,7 +11699,7 @@ def LCD4linuxPIC(self, session):
 						self.im[im].paste(pix_image, ((MAX_W-xx)//2, (MAX_H-yy)//2))
 			except:
 				from traceback import format_exc
-				L4log("put Grab Error:", format_exc() )
+				L4log("put Grab Error:", format_exc())
 
 # Timer Record
 	def putTimer(workaround, draw, im):
@@ -12322,7 +12322,7 @@ def LCD4linuxPIC(self, session):
 				return
 			if "tuner_type" in transponderData:
 				orbital=""
-				if (transponderData["tuner_type"] == "DVB-S") or (transponderData["tuner_type"] == "DVB-S2") or (transponderData["tuner_type"] == feSatellite ):
+				if (transponderData["tuner_type"] == "DVB-S") or (transponderData["tuner_type"] == "DVB-S2") or (transponderData["tuner_type"] == feSatellite):
 					orbital = transponderData["orbital_position"]
 					L4logE("Orbital", orbital)
 					orbital = int(orbital)
@@ -12352,7 +12352,7 @@ def LCD4linuxPIC(self, session):
 						L4logE("Orbital", orbital)
 				else:
 					if isinstance(transponderData["tuner_type"], int):
-						orbital = { feCable : 'DVB-C', feSatellite : 'DVB-S', feTerrestrial : 'DVB-T' }.get(transponderData["tuner_type"], "-")
+						orbital = {feCable: 'DVB-C', feSatellite: 'DVB-S', feTerrestrial: 'DVB-T'}.get(transponderData["tuner_type"], "-")
 					else:
 						orbital = transponderData["tuner_type"]
 					L4logE("Orbital2", orbital)
@@ -13475,7 +13475,7 @@ def LCD4linuxPIC(self, session):
 							NM += 1
 						else:
 							break
-					Mtext = _("%d Mails  %d New  %s") % ( len(PopMail[CP]), NM, Code_utf8(Konto[CP].split(":")[0]))
+					Mtext = _("%d Mails  %d New  %s") % (len(PopMail[CP]), NM, Code_utf8(Konto[CP].split(":")[0]))
 					POSXi = POSX
 					if os.path.isfile(os.path.join(Data, "email.png")):
 						try:
@@ -13897,7 +13897,7 @@ def LCD4linuxPIC(self, session):
 				except:
 					L4log("Error Knob")
 					from traceback import format_exc
-					L4log("Error:", format_exc() )
+					L4log("Error:", format_exc())
 			if ConfigType[1:] == "9":
 				ZW = str(int(staerkeValOrg))
 				font = ImageFont.truetype(FONT, int(ConfigSize/3), encoding='unic')
@@ -14177,7 +14177,7 @@ def LCD4linuxPIC(self, session):
 				try:
 					if ConfigSplit == True:
 						MAX_W = int(MAX_W/2)
-					pil_image = Image.open(LCD4linux.RecordingPath.value if os.path.isfile(LCD4linux.RecordingPath.value) else RecPic )
+					pil_image = Image.open(LCD4linux.RecordingPath.value if os.path.isfile(LCD4linux.RecordingPath.value) else RecPic)
 					xx, yy = pil_image.size
 					x=int(float(ConfigSize)/yy*xx)
 					pil_image = pil_image.resize((x, ConfigSize))

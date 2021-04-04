@@ -167,7 +167,7 @@ def MisPlsLcnScanCallback(close, answer):
 def Plugins(**kwargs):
 	pList = []
 	if hasMultistream():
-		pList.append( PluginDescriptor(name=_("MIS/PLS LCN Scan"), description="For scanning multiple input stream tv", where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=MisPlsLcnScanStart) )
+		pList.append(PluginDescriptor(name=_("MIS/PLS LCN Scan"), description="For scanning multiple input stream tv", where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=MisPlsLcnScanStart))
 	else:
 		print("[MisPlsLcnScan] No MIS/PLS capable tuner available so don't load")
 	return pList

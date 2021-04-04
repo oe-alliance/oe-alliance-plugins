@@ -208,7 +208,7 @@ class StreamsThumb(StreamsThumbCommon):
 				
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, str(fileUrl))
-				fileRef.setName (showName)
+				fileRef.setName(showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
 			else:
@@ -386,7 +386,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 			if html.find('age_check_form_row') > 0:
 				try:
-					headers = { 'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}
+					headers = {'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}
 					values = {'age_ok':'1'}
 					data = urlencode(values)
 					req = Request(url1, data, headers)
@@ -398,8 +398,8 @@ class StreamsThumb(StreamsThumbCommon):
 					print('Error getting webpage for age restrict: ', exception)
 					return ""
 
-			url = (re.compile ('url: "mp4:(.+?)",').findall(html)[0])
-			connection = (re.compile ('netConnectionUrl: "rtmp.+?content/videos/(.+?)/"').findall(html)[0])
+			url = (re.compile('url: "mp4:(.+?)",').findall(html)[0])
+			connection = (re.compile('netConnectionUrl: "rtmp.+?content/videos/(.+?)/"').findall(html)[0])
 			fileUrl = 'http://content.tv3.ie/content/videos/'+str(connection)+'/'+str(url)
 
 			return fileUrl

@@ -629,7 +629,7 @@ class shoutGenresThumb(StreamsThumbCommon):
 			
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, fileUrl)
-				fileRef.setName (showName)
+				fileRef.setName(showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
 			else:
@@ -827,7 +827,7 @@ class FavoritesThumb(StreamsThumbCommon):
 			
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, fileUrl)
-				fileRef.setName (stationName)
+				fileRef.setName(stationName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
 			else:
@@ -1042,7 +1042,7 @@ class tuneinGenresThumb(StreamsThumbCommon):
 			
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, fileUrl)
-				fileRef.setName (showName)
+				fileRef.setName(showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
 				

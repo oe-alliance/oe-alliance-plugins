@@ -630,7 +630,7 @@ class LCD4linuxConfigweb(resource.Resource):
 				Conf = LL[2].strip()
 				if Mode == "1":
 					Conf = Conf[:13]
-				if ((LL[1][:1] != "-" and Mode!="1") or (Mode == "1" and Conf not in ElementList )) and LL[3] != 0:
+				if ((LL[1][:1] != "-" and Mode!="1") or (Mode == "1" and Conf not in ElementList)) and LL[3] != 0:
 					if Element == "" or ModeOld != Mode:
 						Element = "other"
 						ModeOld = Mode
@@ -649,7 +649,7 @@ class LCD4linuxConfigweb(resource.Resource):
 								Ec = Ec.replace("=\"", "=\"font-weight:bold;")
 					if Ea == "checked":
 						ElementText = (_l(_(LL[1])) if Mode !="1" else _l(M2[LL[3]-1]))
-					html += "<input id=\"e%d\" name=\"Element\" type=\"radio\" value=\"%s\" %s onclick=\"this.form.submit();\"><label %s for=\"e%d\">%s&nbsp;&nbsp;</label>\n" % (i, Conf, Ea, Ec, i, (_l(_(LL[1])) if Mode !="1" else _l(M2[LL[3]-1])) )
+					html += "<input id=\"e%d\" name=\"Element\" type=\"radio\" value=\"%s\" %s onclick=\"this.form.submit();\"><label %s for=\"e%d\">%s&nbsp;&nbsp;</label>\n" % (i, Conf, Ea, Ec, i, (_l(_(LL[1])) if Mode !="1" else _l(M2[LL[3]-1])))
 					if str(LCD4linux.WebIfDesign.value) == "2":
 						html += "<br>"
 			Ea, Ec = AktiveElement("other")

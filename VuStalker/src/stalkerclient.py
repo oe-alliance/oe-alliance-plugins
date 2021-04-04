@@ -24,10 +24,10 @@ DEFAULT_MAC = get_mac_address()
 DEFAULT_URL = "http://stalker-server/stalker_portal/c/"
 
 SUPPORT_MODULES = {
-	'tv'        :0x1,
-	'epg'       :0x2,
+	'tv':0x1,
+	'epg':0x2,
 	'epg.simple':0x4,
-	'account'   :0x80,
+	'account':0x80,
 }
 
 selection_list = [("0", _("Disabled")), ("1", _("Enabled"))]

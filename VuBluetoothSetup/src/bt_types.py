@@ -74,7 +74,7 @@ bticon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlug
 
 def getIcon(profile):
 	global btkeyboard, btaudio, btrc, bticon
-	if profile == BT_PROFILE_VU_RC :
+	if profile == BT_PROFILE_VU_RC:
 		return btrc
 	elif profile in (BT_PROFILE_HID_UNKNOWN, BT_PROFILE_KEYBOARD, BT_PROFILE_MOUSE, BT_PROFILE_GATT_HID):
 		return btkeyboard

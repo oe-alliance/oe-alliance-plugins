@@ -215,7 +215,7 @@ def streamListEntry(entry):
 	#print entry
 	uriInfo = entry[1].get('uri')
 	return [entry,
-		(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 1, 35, 35, loadPNG('%s/icons/%s' % (PLUGIN_PATH, str(entry[1].get('icon'))) )),
+		(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 1, 35, 35, loadPNG('%s/icons/%s' % (PLUGIN_PATH, str(entry[1].get('icon'))))),
 		(eListboxPythonMultiContent.TYPE_TEXT, 45, 7, 200, 37, 0, RT_HALIGN_LEFT, entry[0]),
 		(eListboxPythonMultiContent.TYPE_TEXT, 250, 7, 310, 37, 1, RT_HALIGN_LEFT, str(uriInfo.get('URL')))
 	] 

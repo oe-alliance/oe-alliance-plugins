@@ -89,10 +89,10 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self["VKeyIcon"] = Boolean(False)
 
 		self["actions"]  = ActionMap(["SetupActions"], {
-			"ok"    : self.keyOK,
+			"ok": self.keyOK,
 			"cancel": self.keyCancel,
-			"save"    : self.keyOK,
-			"info" : self.keyInfo
+			"save": self.keyOK,
+			"info": self.keyInfo
 		}, -1)
 
 	def keyOK(self):
@@ -125,10 +125,10 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 		self["arrowdown"]   = MultiPixmap()
 
 		self["actions"]  = ActionMap(["SetupActions", "TimerEditActions"], {
-			"ok"    : self.keyOK,
+			"ok": self.keyOK,
 			"cancel": self.keyCancel,
-			"menu" : self.keySetup,
-			"log" : self.keyInfo
+			"menu": self.keySetup,
+			"log": self.keyInfo
 		}, -1)
 		
 		self['PlayerList'] = MainMenuList()

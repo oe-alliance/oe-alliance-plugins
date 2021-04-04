@@ -47,7 +47,7 @@ config.plugins.OpenUitzendingGemist.RTL = ConfigBoolean(default=True)
 config.plugins.OpenUitzendingGemist.SBS = ConfigBoolean(default=True)
 config.plugins.OpenUitzendingGemist.RADIO = ConfigBoolean(default=True)
 config.plugins.OpenUitzendingGemist.INETTV = ConfigBoolean(default=True)
-config.plugins.OpenUitzendingGemist.ListFontSize = ConfigInteger(default=18, limits=(18, 36) )
+config.plugins.OpenUitzendingGemist.ListFontSize = ConfigInteger(default=18, limits=(18, 36))
 
 def wgetUrl(target, refer='', cookie=''):
 	req = Request(target)
@@ -89,7 +89,7 @@ def Csplit(data, string, number=None):
 	return data
 
 def MPanelEntryComponent(channel, text, png):
-	res = [ text ]
+	res = [text]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 200, 15, 800, 100, 0, RT_HALIGN_LEFT|RT_WRAP|RT_VALIGN_TOP, text))
 	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 5, 150, 150, png))
 	return res
@@ -175,7 +175,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.returning = False
 		self.state = self.STATE_PLAYING
 		self.lastseekstate = self.STATE_PLAYING
-		self.onPlayStateChanged = [ ]
+		self.onPlayStateChanged = []
 		self.play()
 		self.onClose.append(self.__onClose)
 
@@ -282,7 +282,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.handleLeave()
 
@@ -815,8 +815,7 @@ class OpenUg(Screen):
 			"right": self.key_right,
 			"ok": self.go,
 			"back": self.Exit,
-		}
-		, -1)
+		}		, -1)
 		self["NumberActions"] = NumberActionMap(["NumberActions", "InputAsciiActions"],
 			{
 				"gotAsciiCode": self.keyAsciiCode,
@@ -944,7 +943,7 @@ class OpenUg(Screen):
 				thumbnailFile = self.imagedir + tmp_icon
 				self.pixmaps_to_load.append(tmp_icon)
 				if tmp_icon not in self.Details:
-					self.Details[tmp_icon] = { 'thumbnail': None}
+					self.Details[tmp_icon] = {'thumbnail': None}
 				if x[self.UG_ICON] != '':
 					if (os_path.exists(thumbnailFile) == True):
 						self.fetchFinished(True, picture_id=tmp_icon, failed=False)

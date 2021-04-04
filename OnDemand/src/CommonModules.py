@@ -61,7 +61,7 @@ class MainMenuList(HTMLComponent, GUIComponent):
 		self.picload = ePicLoad()
 		self.l = eListboxPythonMultiContent()
 		self.l.setBuildFunc(self.buildEntry)
-		self.onSelChanged = [ ]
+		self.onSelChanged = []
 
 	def applySkin(self, desktop, screen):
 		rc = GUIComponent.applySkin(self, desktop, screen)
@@ -126,7 +126,7 @@ class MainMenuList(HTMLComponent, GUIComponent):
 	def buildEntry(self, name, imagename):
 		r1 = self.image_rect
 
-		res = [ None ]
+		res = [None]
 		
 		icon = resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/%s.png" % imagename)
 		if fileExists(icon):
@@ -148,7 +148,7 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		self.picload = ePicLoad()
 		self.l = eListboxPythonMultiContent()
 		self.l.setBuildFunc(self.buildEntry)
-		self.onSelChanged = [ ]
+		self.onSelChanged = []
 
 		self.titleFontName = "Regular"
 		self.titleFontSize = 26
@@ -166,18 +166,18 @@ class EpisodeList(HTMLComponent, GUIComponent):
 
 	def applySkin(self, desktop, screen):
 		if self.skinAttributes is not None:
-			attribs = [ ]
+			attribs = []
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "TileFont":
-					font = parseFont(value, ((1, 1), (1, 1)) )
+					font = parseFont(value, ((1, 1), (1, 1)))
 					self.tileFontName = font.family
 					self.tileFontSize = font.pointSize
 				elif attrib == "DateFont":
-					font = parseFont(value, ((1, 1), (1, 1)) )
+					font = parseFont(value, ((1, 1), (1, 1)))
 					self.dateFontName = font.family
 					self.dateFontSize = font.pointSize
 				elif attrib == "DescriptionFont":
-					font = parseFont(value, ((1, 1), (1, 1)) )
+					font = parseFont(value, ((1, 1), (1, 1)))
 					self.descriptionFontName = font.family
 					self.descriptionFontSize = font.pointSize
 				else:
@@ -251,7 +251,7 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		r3 = self.descr_rect
 		r4 = self.date_rect
 
-		res = [ None ]
+		res = [None]
 		
 		# If we don't want to show the icons then shift everything to the left.
 		if self.showIcon != 'False':
@@ -420,7 +420,7 @@ class StreamsThumbCommon(Screen):
 
 ###########################################################################
 class MyHTTPConnection(HTTPConnection):
-	def connect (self):
+	def connect(self):
 		try:
 			primaryDNS = ".".join("%d" % d for d in config.ondemand.PrimaryDNS.value)
 			myDNS = []
@@ -429,7 +429,7 @@ class MyHTTPConnection(HTTPConnection):
 			resolver.nameservers = myDNS  #DNS Now coming from OnDemand Settings
 			answer = resolver.query(self.host, 'A')
 			self.host = answer.rrset.items[0].address
-			self.sock = socket.create_connection ((self.host, self.port))
+			self.sock = socket.create_connection((self.host, self.port))
 		except (Exception) as exception:
 			print("MyHTTPConnection: Failed to Connect to: ", primaryDNS, " , error: ", exception)
 
@@ -444,14 +444,14 @@ class MyHTTPConnection(HTTPConnection):
 					resolver.nameservers = myDNS  #DNS Now coming from OnDemand Settings
 					answer = resolver.query(self.host, 'A')
 					self.host = answer.rrset.items[0].address
-					self.sock = socket.create_connection ((self.host, self.port))
+					self.sock = socket.create_connection((self.host, self.port))
 
 			except (Exception) as exception:
 				print("MyHTTPConnection: Failed to Connect to: ", secondaryDNS, " , error: ", exception)
 
 class MyHTTPHandler(HTTPHandler):
 	def http_open(self, req):
-		return self.do_open (MyHTTPConnection, req)
+		return self.do_open(MyHTTPConnection, req)
 
 ###########################################################################	   
 class MoviePlayer(MP_parent):
@@ -464,7 +464,7 @@ class MoviePlayer(MP_parent):
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.close()
 
@@ -500,7 +500,7 @@ class RTMP:
 			# rtmpdump path is not set
 			raise exception
 
-		args = [ self.rtmpdumpPath ]
+		args = [self.rtmpdumpPath]
 		args.append(getParameters())
 		command = ' '.join(args)
 
@@ -561,7 +561,7 @@ class RTMP:
 			# rtmp url is not set
 			raise exception
 
-		args = [ u"--rtmp", u'"%s"' % self.rtmp, u"-o", u'"%s"' % self.downloadFolder ]
+		args = [u"--rtmp", u'"%s"' % self.rtmp, u"-o", u'"%s"' % self.downloadFolder]
 
 		if self.auth is not None:
 			args.append(u"--auth")
@@ -616,10 +616,10 @@ class RTMP:
 		else:
 			try:
 				# Replace "rtmp://abc.def.com:default_port/ghi/jkl" with "rtmp://abc.def.com:port/ghi/jkl"
-				match=re.search("(.+//[^/]+):\d+(/.*)", self.rtmp,  re.DOTALL | re.IGNORECASE )
+				match=re.search("(.+//[^/]+):\d+(/.*)", self.rtmp,  re.DOTALL | re.IGNORECASE)
 				if match is None:
 					# Replace "rtmp://abc.def.com/ghi/jkl" with "rtmp://abc.def.com:port/ghi/jkl"
-					match=re.search("(.+//[^/]+)(/.*)", self.rtmp,  re.DOTALL | re.IGNORECASE )
+					match=re.search("(.+//[^/]+)(/.*)", self.rtmp,  re.DOTALL | re.IGNORECASE)
 
 				args = [u"%s:%d%s" % (match.group(1), self.port, match.group(2))]
 			except (Exception) as exception:

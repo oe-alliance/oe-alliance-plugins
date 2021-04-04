@@ -62,7 +62,7 @@ class SH4BoosterControl(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.onClose.append(self.abort)
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
@@ -127,7 +127,7 @@ class SH4_Booster:
 		print("[SH4BoosterControl] initializing")
 		self.session = session
 		self.service = None
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.Console = Console()
 
@@ -143,7 +143,7 @@ class SH4_Booster:
 
 def main(menuid):
 	if menuid != "system":
-		return [ ]
+		return []
 	return [(_("Booster Control"), startBooster, "Booster Control", None)]
 
 def startBooster(session, **kwargs):
@@ -179,6 +179,6 @@ def sessionstart(reason, **kwargs):
 	controlsh4booster()
 
 def Plugins(**kwargs):
-	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-		PluginDescriptor(name="SH4 Booster Control", description="Change CPU speed settings", where=PluginDescriptor.WHERE_MENU, fnc=main) ]
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+		PluginDescriptor(name="SH4 Booster Control", description="Change CPU speed settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]
 

@@ -83,12 +83,12 @@ def vfd_write(text):
 	
 def vfd_text_out(text):
 	led7ctrl = subprocess.Popen(['/usr/lib/enigma2/python/Plugins/SystemPlugins/VFDControl/led7ctrl'], stdin=subprocess.PIPE)
-	index = [ 'a', 'b', 'c', 'd' ] # 'a' means the first digit, 'b' is second, ...
+	index = ['a', 'b', 'c', 'd'] # 'a' means the first digit, 'b' is second, ...
 	cmd = ""
 	for i in range(4): # display up to 4 character. todo: check short string.
 		ascii_val = ord(text[i])
 		# todo: we only has 128 byte length list. check ascii val.
-		cmd += (index[i] + hex(ascii_bitmap[ascii_val])[2:] ) # should not use 0x prefix in command.
+		cmd += (index[i] + hex(ascii_bitmap[ascii_val])[2:]) # should not use 0x prefix in command.
 		cmd += " "  # use space as seperator
 	led7ctrl.communicate(cmd + "\n")
 
@@ -106,7 +106,7 @@ class Channelnumber:
 		self.zaPrik = eTimer()
 		self.zaPrik.timeout.get().append(self.vrime)
 		self.zaPrik.start(1000, 1)
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
@@ -239,7 +239,7 @@ class VFD_SF8Setup(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.onClose.append(self.abort)
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
@@ -304,7 +304,7 @@ class VFD_SF8:
 		print("[VFD-SF8] initializing")
 		self.session = session
 		self.service = None
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.Console = Console()
 
@@ -323,7 +323,7 @@ class VFD_SF8:
 
 def main(menuid):
 	if menuid != "system":
-		return [ ]
+		return []
 	return [(_("VFD_SF8"), startVFD, "VFD_SF8", None)]
 
 def startVFD(session, **kwargs):
@@ -360,7 +360,7 @@ def sessionstart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	if getBoxType() in ('sf8'):
-	 	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-	 		PluginDescriptor(name="LED Display Setup", description="Change LED display settings", where=PluginDescriptor.WHERE_MENU, fnc=main) ]
+	 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+	 		PluginDescriptor(name="LED Display Setup", description="Change LED display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]
 	else:
 		return []

@@ -109,7 +109,7 @@ def wgetUrl(target):
 				try:
 					opener = urllib2.build_opener(MyHTTPHandler)
 					old_opener = urllib2._opener
-					urllib2.install_opener (opener)
+					urllib2.install_opener(opener)
 					req = urllib2.Request(target)
 					req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 					response = urllib2.urlopen(req)
@@ -128,7 +128,7 @@ def wgetUrl(target):
 
 					outtxt = str(data.decode(charset))			
 					response.close()
-					urllib2.install_opener (old_opener)
+					urllib2.install_opener(old_opener)
 
 				except (Exception) as exception:
 					print(__plugin__, __version__, "wgetUrl: Unable to connect to DNS: ", exception)
@@ -328,7 +328,7 @@ class StreamsThumb(StreamsThumbCommon):
 				
 				if fileUrl:
 					fileRef = eServiceReference(4097, 0, str(fileUrl))
-					fileRef.setName (showName)
+					fileRef.setName(showName)
 					lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 					self.session.open(MoviePlayer, fileRef, None, lastservice)
 				else:
@@ -401,7 +401,7 @@ class StreamsThumb(StreamsThumbCommon):
 		returnMessage = "Non-UK User!!\n\nUnable to find playable Stream in "+str(maxAttempts)+" attempts!!\n\nPlease try again!"
 		
 		for attemptNumber in range(0, maxAttempts):
-			(xml, isUK) = wgetUrl( assetUrl )
+			(xml, isUK) = wgetUrl(assetUrl)
 			
 			# No DNS set in Settings, exit.NOCONNECT
 			if (xml == "NODNS"):
@@ -463,7 +463,7 @@ class StreamsThumb(StreamsThumbCommon):
 			print(__plugin__, __version__, 'GetAuthentication: Error getting decodedToken: ', exception)
 			return ("")
 
-		if ( cdn ==  u"ll" ):
+		if (cdn ==  u"ll"):
 			ip = uriData.find(u'ip')
 			e = uriData.find(u'e')
 
@@ -633,7 +633,7 @@ class StreamsThumb(StreamsThumbCommon):
 						pattern = u'\s*Channel\s4\s*\((.*?)\)'
 						for p in pList:
 							try:
-								durationMatch = re.search( pattern, p.text, re.DOTALL | re.IGNORECASE )
+								durationMatch = re.search(pattern, p.text, re.DOTALL | re.IGNORECASE)
 								duration = _("Duration:")+" "+str(durationMatch.group(1))
 								break
 							except (Exception) as exception:
@@ -761,7 +761,7 @@ class StreamsThumb(StreamsThumbCommon):
 					entries = jsonData['results']
 				else:
 					# Single entry, put in a list
-					entries = [ jsonData['results'] ] 
+					entries = [jsonData['results']] 
 
 				# Loop through each of the search result entries.
 				for entry in entries:

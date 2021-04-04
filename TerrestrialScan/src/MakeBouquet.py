@@ -62,7 +62,7 @@ class MakeBouquet(Screen):
 		self["progress"] = ProgressBar()
 		self["progress_text"] = Progress()
 		self["tuner_text"] = Label("")
-		self["Frontend"] = FrontendStatus(frontend_source=lambda : self.frontend, update_interval=100)
+		self["Frontend"] = FrontendStatus(frontend_source=lambda: self.frontend, update_interval=100)
 
 		self["actions"] = ActionMap(["SetupActions"],
 		{
