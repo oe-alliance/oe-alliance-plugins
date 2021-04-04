@@ -18,7 +18,7 @@ import json
 import threading
 
 config.plugins.witaisttsetup = ConfigSubsection()
-config.plugins.witaisttsetup.serverAccessToken = ConfigText(fixed_size = False, visible_width = 32)
+config.plugins.witaisttsetup.serverAccessToken = ConfigText(fixed_size=False, visible_width=32)
 
 g_session = None
 
@@ -47,7 +47,7 @@ class WitAiSttSetup(Screen, ConfigListScreen):
 			"green": self.keySave,
 		}, -2)
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self["VirtualKB"].setEnabled(True)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Ok"))
@@ -178,7 +178,7 @@ class WitAiSpeechToText:
 		witaistt_thread_instance.setVoicePath(self.voicePath)
 		
 		global g_session
-		self.msg_instance = g_session.openWithCallback(self.msgCallback, MessageBox, _("Converting speech to text using wit.ai server..."), type = MessageBox.TYPE_INFO, enable_input = False, timeout = 30)
+		self.msg_instance = g_session.openWithCallback(self.msgCallback, MessageBox, _("Converting speech to text using wit.ai server..."), type=MessageBox.TYPE_INFO, enable_input=False, timeout=30)
 
 		witaistt_thread_instance.start()
 
@@ -210,7 +210,7 @@ class WitAiSpeechToText:
 	def showMsgFail(self):
 		global g_session
 		msg = _("Conversion of speech to text failed.\nPlease check auth token in Wit.ai STT Setup Plugin.")
-		g_session.openWithCallback(self.msgFailCB, MessageBox, msg, type = MessageBox.TYPE_ERROR, timeout = 10)
+		g_session.openWithCallback(self.msgFailCB, MessageBox, msg, type=MessageBox.TYPE_ERROR, timeout=10)
 
 	def msgFailCB(self, ret):
 		self.running = False
@@ -257,15 +257,15 @@ def Plugins(**kwargs):
 	list.append(
 		PluginDescriptor(name=_("Wit.ai Speech to Text Setup"),
 		description=_("Speech to text using Wit.ai for VUPLUS-BLE-RCU."),
-		where = [PluginDescriptor.WHERE_PLUGINMENU],
-		needsRestart = False,
-		fnc = main))
+		where=[PluginDescriptor.WHERE_PLUGINMENU],
+		needsRestart=False,
+		fnc=main))
 
 	list.append(
-		PluginDescriptor( where = PluginDescriptor.WHERE_AUTOSTART, fnc=auto_start_main))
+		PluginDescriptor( where=PluginDescriptor.WHERE_AUTOSTART, fnc=auto_start_main))
 
 	list.append(
-		PluginDescriptor( where = PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart ))
+		PluginDescriptor( where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart ))
 
 	return list
 

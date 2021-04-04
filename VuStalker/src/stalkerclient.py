@@ -34,10 +34,10 @@ selection_list = [("0", _("Disabled")), ("1", _("Enabled"))]
 
 config.plugins.stalker_client = ConfigSubsection()
 config.plugins.stalker_client.server = ConfigText(default=DEFAULT_URL, fixed_size=False)
-config.plugins.stalker_client.mac = ConfigText(default=DEFAULT_MAC, fixed_size=False, visible_width = 18)
-config.plugins.stalker_client.authEnabled = ConfigSelection(choices = selection_list)
-config.plugins.stalker_client.username = ConfigText(default="", fixed_size=False, visible_width = 18)
-config.plugins.stalker_client.password = ConfigText(default="", fixed_size=False, visible_width = 18)
+config.plugins.stalker_client.mac = ConfigText(default=DEFAULT_MAC, fixed_size=False, visible_width=18)
+config.plugins.stalker_client.authEnabled = ConfigSelection(choices=selection_list)
+config.plugins.stalker_client.username = ConfigText(default="", fixed_size=False, visible_width=18)
+config.plugins.stalker_client.password = ConfigText(default="", fixed_size=False, visible_width=18)
 config.plugins.stalker_client.retrycount = ConfigInteger(default=5, limits=(1,5))
 config.plugins.stalker_client.numFavlist = ConfigInteger(default=0)
 
@@ -176,13 +176,13 @@ class SCAPI(object):
 
 
 class SCAsyncCall(object):
-	def __init__(self, func, callback = None):
+	def __init__(self, func, callback=None):
 		self.func = func
 		self.callback = callback
 		self.lock = threading.Lock()
 
 	def __call__(self, *args, **kwargs):
-		self.thread = threading.Thread(target = self.wrapper, args = args, kwargs = kwargs)
+		self.thread = threading.Thread(target=self.wrapper, args=args, kwargs=kwargs)
 		self.thread.start()
 		return self
 
@@ -218,7 +218,7 @@ class SCThread(threading.Thread):
 	CHECK_INTERVAL = 100
 
 	def __init__(self, name):
-		threading.Thread.__init__(self, name = name)
+		threading.Thread.__init__(self, name=name)
 		self.semaphore = threading.Semaphore(0)
 		self.lock = threading.Lock()
 		self.running = False

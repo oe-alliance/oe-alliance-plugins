@@ -181,6 +181,6 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	if getImageDistro() == "openvix":
-		return PluginDescriptor(name=_("Tuner Server setup"), description=_("Allow Streaming From Box Tuners"), where = PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=settings)
+		return PluginDescriptor(name=_("Tuner Server setup"), description=_("Allow Streaming From Box Tuners"), where=PluginDescriptor.WHERE_MENU, needsRestart=True, fnc=settings)
 	else:
-		return PluginDescriptor(name=_("Tuner Server"), description=_("Allow Streaming From Box Tuners"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main)
+		return PluginDescriptor(name=_("Tuner Server"), description=_("Allow Streaming From Box Tuners"), where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=main)

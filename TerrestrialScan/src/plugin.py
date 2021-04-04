@@ -24,21 +24,21 @@ from .MakeBouquet import MakeBouquet
 import os
 
 config.plugins.TerrestrialScan = ConfigSubsection()
-config.plugins.TerrestrialScan.networkid_bool = ConfigYesNo(default = False)
-config.plugins.TerrestrialScan.networkid = ConfigInteger(default = 0, limits = (0, 65535))
-config.plugins.TerrestrialScan.clearallservices = ConfigYesNo(default = True)
-config.plugins.TerrestrialScan.onlyfree = ConfigYesNo(default = True)
-config.plugins.TerrestrialScan.uhf_vhf = ConfigSelection(default = 'uhf', choices = [
+config.plugins.TerrestrialScan.networkid_bool = ConfigYesNo(default=False)
+config.plugins.TerrestrialScan.networkid = ConfigInteger(default=0, limits=(0, 65535))
+config.plugins.TerrestrialScan.clearallservices = ConfigYesNo(default=True)
+config.plugins.TerrestrialScan.onlyfree = ConfigYesNo(default=True)
+config.plugins.TerrestrialScan.uhf_vhf = ConfigSelection(default='uhf', choices=[
 			('uhf', _("UHF Europe")),
 			('uhf_vhf', _("UHF/VHF Europe")),
 			('australia', _("Australia"))])
-config.plugins.TerrestrialScan.makebouquet = ConfigYesNo(default = True)
-config.plugins.TerrestrialScan.makexmlfile = ConfigYesNo(default = False)
-config.plugins.TerrestrialScan.lcndescriptor = ConfigSelection(default = 0x83, choices = [
+config.plugins.TerrestrialScan.makebouquet = ConfigYesNo(default=True)
+config.plugins.TerrestrialScan.makexmlfile = ConfigYesNo(default=False)
+config.plugins.TerrestrialScan.lcndescriptor = ConfigSelection(default=0x83, choices=[
 			(0x83, "0x83"),
 			(0x87, "0x87")])
-config.plugins.TerrestrialScan.channel_list_id = ConfigInteger(default = 0, limits = (0, 65535))
-config.plugins.TerrestrialScan.stabliseTime = ConfigSelection(default = 2, choices = [(i, "%d" % i) for i in range(2, 11)])
+config.plugins.TerrestrialScan.channel_list_id = ConfigInteger(default=0, limits=(0, 65535))
+config.plugins.TerrestrialScan.stabliseTime = ConfigSelection(default=2, choices=[(i, "%d" % i) for i in range(2, 11)])
 
 class TerrestrialScanScreen(ConfigListScreen, Screen):
 	def __init__(self, session):
@@ -48,7 +48,7 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		self.skinName = ["TerrestrialScanScreen", "Setup"]
 		self.onChangedEntry = []
 		self.session = session
-		ConfigListScreen.__init__(self, [], session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, [], session=session, on_change=self.changedEntry)
 
 		self["actions2"] = ActionMap(["SetupActions"],
 		{
@@ -76,7 +76,7 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		nim_list.append((-1, _("Automatic")))
 		for x in dvbt_capable_nims:
 			nim_list.append((nimmanager.nim_slots[x].slot, nimmanager.nim_slots[x].friendly_full_description))
-		self.scan_nims = ConfigSelection(choices = nim_list)
+		self.scan_nims = ConfigSelection(choices=nim_list)
 
 		self.createSetup()
 
@@ -226,7 +226,7 @@ def TerrestrialScanCallback(close, answer):
 def Plugins(**kwargs):
 	pList = []
 	if nimmanager.hasNimType("DVB-T"):
-		pList.append( PluginDescriptor(name=_("Terrestrial Scan"), description="For scanning terrestrial tv", where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=TerrestrialScanStart) )
+		pList.append( PluginDescriptor(name=_("Terrestrial Scan"), description="For scanning terrestrial tv", where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=TerrestrialScanStart) )
 	else:
 		print("[TerrestrialScan] No DVB-T tuner available so don't load")
 	return pList

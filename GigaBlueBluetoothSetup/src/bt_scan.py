@@ -64,7 +64,7 @@ class BluetoothDiscovery(BluetoothTask):
 		self.pincodeRequired = 0
 		self.pairingFailed = 0
 
-	def appendEventCallback(self, value = True):
+	def appendEventCallback(self, value=True):
 		if value:
 			if self.discEventCallback not in self.gbbt.pluginEventHandler:
 				self.gbbt.pluginEventHandler.append(self.discEventCallback)
@@ -288,7 +288,7 @@ class BluetoothDiscovery(BluetoothTask):
 	def onDeviceAdded(self, event, name, data):
 		self.updateDeviceList()
 
-	def doExit(self, msg = None):
+	def doExit(self, msg=None):
 		pass
 
 	def updateDeviceList(self):
@@ -462,7 +462,7 @@ class BluetoothDiscoveryScreen(Screen, BluetoothDiscovery):
 		elif self.isScanning():
 			self.addTaskAbortScan()
 
-	def doExit(self, msg = None):
+	def doExit(self, msg=None):
 		if (self.pincodeRequired == 1) and (self.pairingFailed == 1):
 			cur = self["deviceList"].getCurrent()
 			if not cur:

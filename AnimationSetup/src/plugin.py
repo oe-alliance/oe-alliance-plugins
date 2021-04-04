@@ -191,13 +191,13 @@ def sessionAnimationSetup(session, reason, **kwargs):
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
-			name = "Animations",
-			description = "Setup UI animations",
-			where = PluginDescriptor.WHERE_MENU,
-			needsRestart = False,
-			fnc = startAnimationSetup),
+			name="Animations",
+			description="Setup UI animations",
+			where=PluginDescriptor.WHERE_MENU,
+			needsRestart=False,
+			fnc=startAnimationSetup),
 		PluginDescriptor(
-			where = PluginDescriptor.WHERE_SESSIONSTART,
-			needsRestart = False,
-			fnc = sessionAnimationSetup)
+			where=PluginDescriptor.WHERE_SESSIONSTART,
+			needsRestart=False,
+			fnc=sessionAnimationSetup)
 	]

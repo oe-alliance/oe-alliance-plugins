@@ -22,9 +22,9 @@ from .MisPlsLcnScan import MisPlsLcnScan
 from .providers import PROVIDERS
 
 config.plugins.MisPlsLcnScan = ConfigSubsection()
-config.plugins.MisPlsLcnScan.provider = ConfigSelection(default = "fransat_5W", choices = [(x, PROVIDERS[x]["name"]) for x in sorted(PROVIDERS.keys())])
-config.plugins.MisPlsLcnScan.clearallservices = ConfigYesNo(default = False)
-config.plugins.MisPlsLcnScan.onlyfree = ConfigYesNo(default = True)
+config.plugins.MisPlsLcnScan.provider = ConfigSelection(default="fransat_5W", choices=[(x, PROVIDERS[x]["name"]) for x in sorted(PROVIDERS.keys())])
+config.plugins.MisPlsLcnScan.clearallservices = ConfigYesNo(default=False)
+config.plugins.MisPlsLcnScan.onlyfree = ConfigYesNo(default=True)
 
 class MisPlsLcnScanScreen(ConfigListScreen, Screen):
 	def __init__(self, session):
@@ -34,7 +34,7 @@ class MisPlsLcnScanScreen(ConfigListScreen, Screen):
 		self.skinName = ["MisPlsLcnScanScreen", "Setup"]
 		self.onChangedEntry = []
 		self.session = session
-		ConfigListScreen.__init__(self, [], session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, [], session=session, on_change=self.changedEntry)
 
 		self["actions2"] = ActionMap(["SetupActions"],
 		{
@@ -167,7 +167,7 @@ def MisPlsLcnScanCallback(close, answer):
 def Plugins(**kwargs):
 	pList = []
 	if hasMultistream():
-		pList.append( PluginDescriptor(name=_("MIS/PLS LCN Scan"), description="For scanning multiple input stream tv", where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=MisPlsLcnScanStart) )
+		pList.append( PluginDescriptor(name=_("MIS/PLS LCN Scan"), description="For scanning multiple input stream tv", where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=MisPlsLcnScanStart) )
 	else:
 		print("[MisPlsLcnScan] No MIS/PLS capable tuner available so don't load")
 	return pList

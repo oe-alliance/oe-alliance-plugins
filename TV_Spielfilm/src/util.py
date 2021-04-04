@@ -78,13 +78,13 @@ class serviceDB():
 
 class BlinkingLabel(Label, BlinkingWidget):
 
-    def __init__(self, text = ''):
+    def __init__(self, text=''):
         Label.__init__(self, text=text)
         BlinkingWidget.__init__(self)
 
 class ItemList(MenuList):
 
-    def __init__(self, items, enableWrapAround = True):
+    def __init__(self, items, enableWrapAround=True):
         MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
 #        if config.plugins.tvspielfilm.font.value == 'yes':
 #            self.l.setFont(-2, gFont('Sans', 24))

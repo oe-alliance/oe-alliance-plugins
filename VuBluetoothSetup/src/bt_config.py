@@ -27,7 +27,7 @@ class BluetoothSetupConfig(Screen, ConfigListScreen):
 			"vuRcuSetup": self.keyVuRcuSetup,
 		}, -2)
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session = self.session)
+		ConfigListScreen.__init__(self, self.list,session=self.session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Ok"))
 

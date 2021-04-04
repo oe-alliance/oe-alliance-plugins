@@ -15,28 +15,28 @@ from .ChannelsImporter import ChannelsImporter
 from .scheduler import autostart
 
 config.plugins.ChannelsImporter = ConfigSubsection()
-config.plugins.ChannelsImporter.ip = ConfigIP(default = [0, 0, 0, 0])
-config.plugins.ChannelsImporter.username = ConfigText(default = "root", fixed_size = False)
-config.plugins.ChannelsImporter.password = ConfigText(default = "", fixed_size = False)
+config.plugins.ChannelsImporter.ip = ConfigIP(default=[0, 0, 0, 0])
+config.plugins.ChannelsImporter.username = ConfigText(default="root", fixed_size=False)
+config.plugins.ChannelsImporter.password = ConfigText(default="", fixed_size=False)
 config.plugins.ChannelsImporter.port = ConfigInteger(21, (0, 65535))
 config.plugins.ChannelsImporter.passive = ConfigYesNo(False)
 config.plugins.ChannelsImporter.importEPG = ConfigYesNo(False)
-config.plugins.ChannelsImporter.retrycount = NoSave(ConfigNumber(default = 0))
-config.plugins.ChannelsImporter.nextscheduletime = NoSave(ConfigNumber(default = 0))
+config.plugins.ChannelsImporter.retrycount = NoSave(ConfigNumber(default=0))
+config.plugins.ChannelsImporter.nextscheduletime = NoSave(ConfigNumber(default=0))
 config.plugins.ChannelsImporter.importOnRestart = ConfigYesNo(False)
 config.plugins.ChannelsImporter.enableSchedule = ConfigYesNo(False)
-config.plugins.ChannelsImporter.extensions = ConfigYesNo(default = False)
-config.plugins.ChannelsImporter.setupFallback = ConfigYesNo(default = False)
-config.plugins.ChannelsImporter.scheduleRepeatInterval = ConfigSelection(default = "daily", choices = [("2", _("Every 2 minutes (for testing)")), ("5", _("Every 5 minutes (for testing)")), ("60", _("Every hour")), ("120", _("Every 2 hours")), ("180", _("Every 3 hours")), ("360", _("Every 6 hours")), ("720", _("Every 12 hours")), ("daily", _("Daily"))])
-config.plugins.ChannelsImporter.scheduletime = ConfigClock(default = 0) # 1:00
+config.plugins.ChannelsImporter.extensions = ConfigYesNo(default=False)
+config.plugins.ChannelsImporter.setupFallback = ConfigYesNo(default=False)
+config.plugins.ChannelsImporter.scheduleRepeatInterval = ConfigSelection(default="daily", choices=[("2", _("Every 2 minutes (for testing)")), ("5", _("Every 5 minutes (for testing)")), ("60", _("Every hour")), ("120", _("Every 2 hours")), ("180", _("Every 3 hours")), ("360", _("Every 6 hours")), ("720", _("Every 12 hours")), ("daily", _("Daily"))])
+config.plugins.ChannelsImporter.scheduletime = ConfigClock(default=0) # 1:00
 config.plugins.ChannelsImporter.errorMessages = ConfigYesNo(False)
 def scheduleRepeatIntervalChanged(configElement):
 	if config.plugins.ChannelsImporter.enableSchedule.value and config.plugins.ChannelsImporter.scheduleRepeatInterval.value == "daily":
 		SystemInfo["ChannelsImporterRepeatDaily"] = True
 	else:
 		SystemInfo["ChannelsImporterRepeatDaily"] = False
-config.plugins.ChannelsImporter.enableSchedule.addNotifier(scheduleRepeatIntervalChanged, immediate_feedback = True, initial_call = True)
-config.plugins.ChannelsImporter.scheduleRepeatInterval.addNotifier(scheduleRepeatIntervalChanged, immediate_feedback = True, initial_call = True)
+config.plugins.ChannelsImporter.enableSchedule.addNotifier(scheduleRepeatIntervalChanged, immediate_feedback=True, initial_call=True)
+config.plugins.ChannelsImporter.scheduleRepeatInterval.addNotifier(scheduleRepeatIntervalChanged, immediate_feedback=True, initial_call=True)
 
 class ChannelsImporterScreen(Setup):
 	skin = """
@@ -104,7 +104,7 @@ class ChannelsImporterScreen(Setup):
 	def startImporter(self):
 		self.session.openWithCallback(self.startImporterCallback, ChannelsImporter)
 
-	def startImporterCallback(self, answer = None):
+	def startImporterCallback(self, answer=None):
 		if answer:
 			self.close()
 
@@ -123,7 +123,7 @@ def ChannelsImporterMain(session, **kwargs):
 def Plugins(**kwargs):
 	pList = []
 	if config.plugins.ChannelsImporter.extensions.getValue():
-		pList.append(PluginDescriptor(name=_("Channels importer"), description=_("Fetch channels from the server."), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=startimport, needsRestart=True))
-	pList.append( PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
-	pList.append( PluginDescriptor(name=_("ChannelsImporter"), description=_("For importing bouquets from another receiver"), where = PluginDescriptor.WHERE_MENU, fnc=ChannelsImporterStart, needsRestart=True) )
+		pList.append(PluginDescriptor(name=_("Channels importer"), description=_("Fetch channels from the server."), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=startimport, needsRestart=True))
+	pList.append( PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
+	pList.append( PluginDescriptor(name=_("ChannelsImporter"), description=_("For importing bouquets from another receiver"), where=PluginDescriptor.WHERE_MENU, fnc=ChannelsImporterStart, needsRestart=True) )
 	return pList

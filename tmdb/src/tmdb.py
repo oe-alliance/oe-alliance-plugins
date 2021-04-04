@@ -73,9 +73,9 @@ pversion = "0.7-r2"
 pdate = "20171215"
 
 config.plugins.tmdb = ConfigSubsection()
-config.plugins.tmdb.themoviedb_coversize = ConfigSelection(default="w185", choices = ["w92", "w185", "w500", "original"])
-config.plugins.tmdb.lang = ConfigSelection(default="de", choices = ["de", "en"])
-config.plugins.tmdb.firsthit = ConfigYesNo(default = True)
+config.plugins.tmdb.themoviedb_coversize = ConfigSelection(default="w185", choices=["w92", "w185", "w500", "original"])
+config.plugins.tmdb.lang = ConfigSelection(default="de", choices=["de", "en"])
+config.plugins.tmdb.firsthit = ConfigYesNo(default=True)
 
 def cleanFile(text):
 	cutlist = ['x264','720p','1080p','1080i','PAL','GERMAN','ENGLiSH','WS','DVDRiP','UNRATED','RETAIL','Web-DL','DL','LD','MiC','MD','DVDR','BDRiP','BLURAY','DTS','UNCUT','ANiME',
@@ -167,7 +167,7 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 
 		self.onChangedEntry = [ ]
 		self.list = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		
 		self["actions"] = ActionMap(["TMDbActions"],
 			{
@@ -448,7 +448,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.session.open(tmdbConfigScreen)
 
 	def searchString(self):
-		self.session.openWithCallback(self.goSearch, VirtualKeyBoard, title = (_("Search for Movie:")), text = self.text)
+		self.session.openWithCallback(self.goSearch, VirtualKeyBoard, title=(_("Search for Movie:")), text=self.text)
 
 	def goSearch(self, newTitle):
 		if newTitle is not None:
@@ -874,7 +874,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 
 	def writeTofile(self):
 		if not self.saveFilename == "":
-			self.session.openWithCallback(self.createTXT, MessageBox, _("Write TMDb Information?"), MessageBox.TYPE_YESNO, default = False)
+			self.session.openWithCallback(self.createTXT, MessageBox, _("Write TMDb Information?"), MessageBox.TYPE_YESNO, default=False)
 			
 	def createTXT(self, result):
 		if result:
@@ -882,8 +882,8 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			wFile.write(self.text) 
 			wFile.close()
 			print("[TMDb] %s.txt created" % (self.saveFilename))
-			self.session.open(MessageBox, _("TMDb information created!"), type = 1, timeout = 5)
-			self.session.openWithCallback(self.deleteEIT, MessageBox, _("Delete EIT file?"), MessageBox.TYPE_YESNO, default = False)
+			self.session.open(MessageBox, _("TMDb information created!"), type=1, timeout=5)
+			self.session.openWithCallback(self.deleteEIT, MessageBox, _("Delete EIT file?"), MessageBox.TYPE_YESNO, default=False)
 
 	def deleteEIT(self, result):
 		if result:
@@ -891,7 +891,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			container = eConsoleAppContainer()
 			container.execute("rm -rf '%s'" % eitFile)
 			print("[TMDb] %s deleted" % (eitFile))
-			self.session.open(MessageBox, _("EIT file deleted!"), type = 1, timeout = 5)
+			self.session.open(MessageBox, _("EIT file deleted!"), type=1, timeout=5)
 
 class tmdbScreenPeople(Screen, HelpableScreen):
 	skin = """

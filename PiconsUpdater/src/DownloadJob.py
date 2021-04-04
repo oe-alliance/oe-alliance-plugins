@@ -23,7 +23,7 @@ class download:
 
 class DownloadJob:
 
-    def __init__(self, downloadUrl, targetFileName, callbackFinished = None, callbackFailed = None, override = False):
+    def __init__(self, downloadUrl, targetFileName, callbackFinished=None, callbackFailed=None, override=False):
         self.downloadUrl = downloadUrl
         self.targetFileName = targetFileName
         self.callbackFinished = callbackFinished
@@ -53,7 +53,7 @@ class DownloadJob:
         printToConsole("file '%s' already exists." % self.targetFileName)
         self.__downloadFinished()
 
-    def __downloadFinished(self, string = ''):
+    def __downloadFinished(self, string=''):
         if self.callbackFinished is not None:
             callback = self.callbackFinished
             self.clean()
@@ -62,7 +62,7 @@ class DownloadJob:
             self.download.stop()
             self.download = None
 
-    def __downloadFailed(self, failureInstance = None, errorMessage = ''):
+    def __downloadFailed(self, failureInstance=None, errorMessage=''):
         self.errorMessage = errorMessage
         if errorMessage == '' and failureInstance is not None:
             self.errorMessage = failureInstance.getErrorMessage()

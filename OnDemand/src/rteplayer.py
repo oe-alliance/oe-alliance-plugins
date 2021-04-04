@@ -247,7 +247,7 @@ class StreamsThumb(StreamsThumbCommon):
 	def layoutFinished(self):
 		self.setTitle("RTE Player: Listings for " +self.title)
 
-	def setupCallback(self, retval = None):
+	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
 			return
 
@@ -273,13 +273,13 @@ class StreamsThumb(StreamsThumbCommon):
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)			
 
-	def keyboardCallback(self, callback = None):
+	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
 			self.setTitle("RTE Player: Search Listings for " +callback)
 			self.getSearchMediaData(self.mediaList, self.url + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple=True)
 		else:
 			self.close()
 

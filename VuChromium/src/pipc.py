@@ -61,7 +61,7 @@ class PServerThread(threading.Thread):
         self.mFlag = False
         self.mTimeout = 5
 
-    def open(self, timeout = 5):
+    def open(self, timeout=5):
         addr = _SOCKETFILE
         self.mTimeout = timeout
         try:

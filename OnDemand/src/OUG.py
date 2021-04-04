@@ -238,7 +238,7 @@ class OpenUg(StreamsThumbCommon):
 		if doExit:
 			self.close()
 
-	def setupCallback(self, retval = None):
+	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
 			return
 		self.isAtotZ = False
@@ -292,14 +292,14 @@ class OpenUg(StreamsThumbCommon):
 			else:
 				self.updateMenu()
 
-	def keyboardCallback(self, callback = None):
+	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
 			self.isRtl = False
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/search/protocol/html/searchString/" + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple=True)
 		else:
 			self.close()
 
@@ -702,4 +702,4 @@ def checkUnicode(value, **kwargs):
 	
 #=========================================================================================
 def Plugins(**kwargs):
-	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]
+	return [PluginDescriptor(name="Open uitzending gemist", description=_("Watch uitzending gemist"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]

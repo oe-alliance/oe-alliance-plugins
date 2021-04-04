@@ -54,7 +54,7 @@ ST = "urn:ses-com:device:SatIPServer:1"
 MS = 'M-SEARCH * HTTP/1.1\r\nHOST: %s:%d\r\nMAN: "%s"\r\nMX: %d\r\nST: %s\r\n\r\n' % (SSDP_ADDR, SSDP_PORT, MAN, MX, ST)
 
 class SSDPServerDiscovery(DatagramProtocol):
-	def __init__(self, callback, iface = None):
+	def __init__(self, callback, iface=None):
 		self.callback = callback
 		self.port = None
 
@@ -118,7 +118,7 @@ class SATIPDiscovery:
 	def DiscoveryTimerStart(self):
 		self.discoveryStartTimer.start(10, True)
 
-	def DiscoveryStart(self, stop_timeout = discoveryTimeoutMS):
+	def DiscoveryStart(self, stop_timeout=discoveryTimeoutMS):
 		self.discoveryStopTimer.stop()
 		self.ssdp.stop_msearch()
 		
@@ -343,7 +343,7 @@ class SATIPTuner(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self.satipconfig = ConfigSubsection()
 
 		if not self.discoveryEnd in satipdiscovery.updateCallback:
@@ -394,7 +394,7 @@ class SATIPTuner(Screen, ConfigListScreen):
 		if server_default is None:
 			server_default = server_choices[0][0]
 
-		self.satipconfig.server = ConfigSelection(default = server_default, choices = server_choices )
+		self.satipconfig.server = ConfigSelection(default=server_default, choices=server_choices )
 
 	def createSetup(self):
 		if self.satipconfig.server is None:
@@ -431,7 +431,7 @@ class SATIPTuner(Screen, ConfigListScreen):
 		if isEmpty(type_choices):
 			type_choices = [ ("DVB-S", _("DVB-S")) ]
 
-		self.satipconfig.tunertype = ConfigSelection(default = type_default, choices = type_choices )
+		self.satipconfig.tunertype = ConfigSelection(default=type_default, choices=type_choices )
 
 	def selectionChanged(self):
 		if self.satipconfig.server is None:
@@ -622,7 +622,7 @@ class SATIPClient(Screen):
 
 	def checkVTuner(self):
 		if not VTUNER_IDX_LIST:
-			self.session.open(MessageBox, _("No vtuner found."), MessageBox.TYPE_ERROR, close_on_any_key = True)
+			self.session.open(MessageBox, _("No vtuner found."), MessageBox.TYPE_ERROR, close_on_any_key=True)
 			self.close()
 
 	def isChanged(self):
@@ -717,7 +717,7 @@ class SATIPClient(Screen):
 		vtuner_uuid = self["vtunerList"].getCurrent()[7]
 		self.session.openWithCallback(self.SATIPTunerCB, SATIPTuner, vtuner_idx, vtuner_uuid, vtuner_type, self.vtunerConfig)
 
-	def SATIPTunerCB(self, data = None):
+	def SATIPTunerCB(self, data=None):
 		if data is not None:
 			self.setConfig(data)
 
@@ -813,5 +813,5 @@ def menu(menuid, **kwargs):
 
 def Plugins(**kwargs):
 	pList = []
-	pList.append( PluginDescriptor(name=_("SAT>IP Client"), description=_("SAT>IP Client attached to vtuner."), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=menu) )
+	pList.append( PluginDescriptor(name=_("SAT>IP Client"), description=_("SAT>IP Client attached to vtuner."), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=menu) )
 	return pList

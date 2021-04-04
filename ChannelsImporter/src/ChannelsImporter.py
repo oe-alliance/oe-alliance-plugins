@@ -281,7 +281,7 @@ class ChannelsImporter(Screen):
 	def getRemoteAddress(self):
 		return '%d.%d.%d.%d' % (config.plugins.ChannelsImporter.ip.value[0], config.plugins.ChannelsImporter.ip.value[1], config.plugins.ChannelsImporter.ip.value[2], config.plugins.ChannelsImporter.ip.value[3])
 
-	def download(self, file, contextFactory = None, *args, **kwargs):
+	def download(self, file, contextFactory=None, *args, **kwargs):
 		print("[ChannelsImporter] Downloading remote file '%s'" % file)
 		client = FTPDownloader(
 			self.getRemoteAddress(),
@@ -295,7 +295,7 @@ class ChannelsImporter(Screen):
 		)
 		return client.deferred
 
-	def download2(self, sourcefile, destfile, contextFactory = None, *args, **kwargs):
+	def download2(self, sourcefile, destfile, contextFactory=None, *args, **kwargs):
 		print("[ChannelsImporter] Downloading remote file '%s'" % sourcefile)
 		client = FTPDownloader(
 			self.getRemoteAddress(),

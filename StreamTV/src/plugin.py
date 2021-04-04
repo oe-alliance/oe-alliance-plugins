@@ -66,7 +66,7 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 			"playpauseService": self.playpauseService,
 		}, -2)
 
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap = {
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 			iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 			iPlayableService.evStart: self.__serviceStarted,
 			iPlayableService.evEOF: self.__evEOF,
@@ -345,7 +345,7 @@ class StreamTVList(Screen):
 								    service, 
 								    cbServiceCommand=self.cbServiceCommand,
 								    chName=str(streamInfo.get('name')),
-								    chURL =str(uriInfo.get('URL')),
+								    chURL=str(uriInfo.get('URL')),
 								    chIcon=str(streamInfo.get('icon')))
 
 	def cbServiceCommand(self, params=None):
@@ -420,6 +420,6 @@ def main(session, **kwargs):
 		session.open(MessageBox, _("This plugin need internet connection. Please plug in ethernet cable and try again!"), MessageBox.TYPE_INFO, timeout=4)
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name=_("StreamTVPlayer"), description="Watching IPTV implemented by RTSP/RTMP protocol.", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
+	return PluginDescriptor(name=_("StreamTVPlayer"), description="Watching IPTV implemented by RTSP/RTMP protocol.", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
 
 

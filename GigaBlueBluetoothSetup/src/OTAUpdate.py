@@ -178,7 +178,7 @@ class GbRcuOtaUpdate(Screen, HelpableScreen, BluetoothTask):
 		self.appendOTAEventCallback(False)
 		self.appendEventCallback(False)
 
-	def appendOTAEventCallback(self, value = True):
+	def appendOTAEventCallback(self, value=True):
 		if value:
 			if self.otaEventCallback not in self.gbbt.pluginOtaEventHandler:
 				self.gbbt.pluginOtaEventHandler.append(self.otaEventCallback)
@@ -256,7 +256,7 @@ class GbRcuOtaUpdate(Screen, HelpableScreen, BluetoothTask):
 	def __repr__(self):
 		return str(type(self)) + "(" + self.text + ")"
 
-	def appendEventCallback(self, value = True):
+	def appendEventCallback(self, value=True):
 		if value:
 			if self.eventCallback not in self.gbbt.pluginEventHandler:
 				self.gbbt.pluginEventHandler.append(self.eventCallback)

@@ -110,13 +110,13 @@ class TaskManager:
 config.btdevicesmanager = ConfigSubsection()
 config.btdevicesmanager.autostart = ConfigYesNo(default=False)
 config.btdevicesmanager.audioconnect = ConfigYesNo(default=False)
-config.btdevicesmanager.audioaddress = ConfigText(default = "", fixed_size = False)
+config.btdevicesmanager.audioaddress = ConfigText(default="", fixed_size=False)
 
 commandconnect = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/BTDevicesManager/BTAudioConnect")
 
 class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 	__module__ = __name__
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Bluetooth Devices Manager Setup"))
 		self.skinName = ["Setup"]
@@ -470,8 +470,7 @@ class BluetoothDevicesTask:
 	def __init__(self, session):
 		self.session = session
 		self.onClose = []
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__evStart,
 			})
 		self.timestamp = datetime.now()
@@ -519,12 +518,12 @@ def Plugins(**kwargs):
 
 	if ShowPlugin :
 		l = []
-		l.append(PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart))
-		l.append(PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = sessionstart))
+		l.append(PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart))
+		l.append(PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart))
 		if getImageDistro() in ("miracleboxhd", "miraclebox"):
 			l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), icon="plugin.png", where=PluginDescriptor.WHERE_MENU, fnc=start_menu_main))
 		else:
-			l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), description = _("This is bt devices manager"), icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main))
+			l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), description=_("This is bt devices manager"), icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main))
 		return l
 	else:
 		return []

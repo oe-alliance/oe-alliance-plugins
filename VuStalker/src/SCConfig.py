@@ -55,7 +55,7 @@ class StalkerClient_SetupScreen(Screen, ConfigListScreen):
 		self.skin = StalkerClient_SetupScreen.skin_default_1080p if dh > 720 else StalkerClient_SetupScreen.skin_default
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -271,7 +271,7 @@ class StalkerClient_SetupScreen(Screen, ConfigListScreen):
 
 	def onKeyText(self):
 		self.hideKeypad()
-		self.session.openWithCallback(self.cbKeyText, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
+		self.session.openWithCallback(self.cbKeyText, VirtualKeyBoard, title=self["config"].getCurrent()[0], text=self["config"].getCurrent()[1].getValue())
 
 	def cbKeyText(self, data=None):
 		if data is not None:

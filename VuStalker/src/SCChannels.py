@@ -132,9 +132,9 @@ class StalkerClient_ChannelContextMenu(Screen):
 		if self.bouquets:
 			bouquetCnt = len(self.bouquets)
 		if config.usage.multibouquet.value and bouquetCnt > 1:
-			self.menulist.append(ChoiceEntryComponent(text = (_("add service to bouquet"), self.addServiceToBouquetSelected, 0)))
+			self.menulist.append(ChoiceEntryComponent(text=(_("add service to bouquet"), self.addServiceToBouquetSelected, 0)))
 		elif bouquetCnt == 1:
-			self.menulist.append(ChoiceEntryComponent(text = (_("add service to favourites"), self.addServiceToBouquetSelected, 1)))
+			self.menulist.append(ChoiceEntryComponent(text=(_("add service to favourites"), self.addServiceToBouquetSelected, 1)))
 		self["menu"].setList(self.menulist)
 
 	def onKeyOK(self):
@@ -148,14 +148,14 @@ class StalkerClient_ChannelContextMenu(Screen):
 		if idx == 0:
 			self.bsel = self.session.openWithCallback(self.bouquetSelClosed, BouquetSelector, self.bouquets, self.addCurrentServiceToBouquet)
 		elif idx == 1: # add to only one existing bouquet
-			self.addCurrentServiceToBouquet(self.bouquets[0][1], closeBouquetSelection = False)
+			self.addCurrentServiceToBouquet(self.bouquets[0][1], closeBouquetSelection=False)
 
 	def bouquetSelClosed(self, recursive):
 		self.bsel = None
 		if recursive:
 			self.close(False)
 
-	def addCurrentServiceToBouquet(self, dest, closeBouquetSelection = True):
+	def addCurrentServiceToBouquet(self, dest, closeBouquetSelection=True):
 		self.csel.addServiceToBouquet(dest, self.service_ref)
 		scinfo.epgdb.serviceListUpdated()
 
@@ -200,8 +200,8 @@ class StalkerClient_ChannelSelection(Screen):
 	</screen>
 	"""
 
-	def __init__(self, session, csel = None, parent = None):
-		Screen.__init__(self, session, parent = parent)
+	def __init__(self, session, csel=None, parent=None):
+		Screen.__init__(self, session, parent=parent)
 		self.session = session
 		dh = self.session.desktop.size().height()
 		self.skin = StalkerClient_ChannelSelection.skin_default_1080p if dh > 720 else StalkerClient_ChannelSelection.skin_default
@@ -653,7 +653,7 @@ class StalkerService(StalkerBaseService):
 		return "[StalkerClient] TV [%04s] #%s %s %s (%s, %s)" % (self.m_id, self.m_number, self.m_name, self.m_url, self.m_http_temp_link, self.m_load_balancing)
 
 class StalkerGenre(StalkerBaseService):
-	def __init__(self, data, count = 0):
+	def __init__(self, data, count=0):
 		StalkerBaseService.__init__(self, isFolder=True)
 
 		self.m_id = data.get('id')
@@ -703,7 +703,7 @@ def StalkerEntryComponent(entry, x, y, w, h):
 	return res
 
 class StalkerList(MenuList):
-	def __init__(self, dh, enableWrapAround = False):
+	def __init__(self, dh, enableWrapAround=False):
 		self.dh = dh
 		self.font_size = 28 if dh > 720 else 22
 		self.item_width = 840 if dh > 720 else 550
@@ -719,7 +719,7 @@ class StalkerList(MenuList):
 		self.item_last = -1
 		self.item_refresh = False
 
-	def clear(self, current = -1, last = -1):
+	def clear(self, current=-1, last=-1):
 		del self.list[:]
 		self.l.setList(self.list)
 		self.page_current = current
@@ -763,7 +763,7 @@ class StalkerList(MenuList):
 				self.item_refresh = True if not int(self.page_last) == 1 else False
 				self.rightPage()
 
-	def updateList(self, index = 0):
+	def updateList(self, index=0):
 		self.l.setList(self.list)
 		i = index if int(index) < int(self.item_last) else self.item_last
 		self.moveToIndex(int(i))

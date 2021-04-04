@@ -70,5 +70,5 @@ def Plugins(**kwargs):
 		print("[AboutBoxBranding] Error: %s: '%s'!" % (type(err).__name__, err))
 		return []
 	from Plugins.Plugin import PluginDescriptor
-	return [PluginDescriptor(where = PluginDescriptor.WHERE_MENU, fnc=start)]
+	return [PluginDescriptor(where=PluginDescriptor.WHERE_MENU, fnc=start)]
 			

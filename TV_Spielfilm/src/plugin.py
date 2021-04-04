@@ -855,7 +855,7 @@ class tvBaseScreen(tvAllScreen):
         except:
             printStackTrace()
 
-    def _commonInit(self, ltxt = '= Suche', lltxt = '= Zappen'):
+    def _commonInit(self, ltxt='= Suche', lltxt='= Zappen'):
         self['picpost'] = Pixmap()
         self['tvinfo1'] = Pixmap()
         self['tvinfo2'] = Pixmap()

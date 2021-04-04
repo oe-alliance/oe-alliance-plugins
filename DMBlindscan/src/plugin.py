@@ -545,8 +545,8 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 			limit_list = self.nim_sat_frequency_range[index_to_scan][int(selected_sat_pos)]
 			l = limit_list[0]
 			limits = ( l[0]//1000, l[1]//1000 )
-			self.scan_sat.bs_freq_start = ConfigInteger(default = limits[0], limits = (limits[0], limits[1]))
-			self.scan_sat.bs_freq_stop = ConfigInteger(default = limits[1], limits = (limits[0], limits[1]))
+			self.scan_sat.bs_freq_start = ConfigInteger(default=limits[0], limits=(limits[0], limits[1]))
+			self.scan_sat.bs_freq_stop = ConfigInteger(default=limits[1], limits=(limits[0], limits[1]))
 			self.satelliteEntry = getConfigListEntry(_("Satellite"), self.scan_satselection[index_to_scan])
 			self.list.append(self.satelliteEntry)
 			self.list.append(getConfigListEntry(_("Frequency start"), self.scan_sat.bs_freq_start))
@@ -616,9 +616,9 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 					defaultSat["orbpos"] = frontendData.get("orbital_position", 0)
 
 			self.scan_sat = ConfigSubsection()
-			self.scan_clearallservices = ConfigSelection(default = "no", choices = [("no", _("no")), ("yes", _("yes")), ("yes_hold_feeds", _("yes (keep feeds)"))])
-			self.scan_onlyfree = ConfigYesNo(default = False)
-			self.scan_networkScan = ConfigYesNo(default = False)
+			self.scan_clearallservices = ConfigSelection(default="no", choices=[("no", _("no")), ("yes", _("yes")), ("yes_hold_feeds", _("yes (keep feeds)"))])
+			self.scan_onlyfree = ConfigYesNo(default=False)
+			self.scan_networkScan = ConfigYesNo(default=False)
 #			self.scan_skipEmpty = ConfigYesNo(default = True)
 #			self.scan_otherSDT = ConfigYesNo(default = False)
 
@@ -642,21 +642,21 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 						continue
 				nim_list.append((str(n.slot), n.friendly_full_description))
 
-			self.scan_nims = ConfigSelection(choices = nim_list)
+			self.scan_nims = ConfigSelection(choices=nim_list)
 
-			self.scan_sat.bs_system = ConfigSelection(default = eDVBFrontendParametersSatellite.System_DVB_S2, 
-				choices = [ (eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S + DVB-S2")),
+			self.scan_sat.bs_system = ConfigSelection(default=eDVBFrontendParametersSatellite.System_DVB_S2, 
+				choices=[ (eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S + DVB-S2")),
 					(eDVBFrontendParametersSatellite.System_DVB_S, _("DVB-S only"))])
 
-			self.scan_sat.bs_accuracy = ConfigSelection(default = 2, choices = [ (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")])
+			self.scan_sat.bs_accuracy = ConfigSelection(default=2, choices=[ (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")])
 
-			self.scan_sat.bs_horizontal = ConfigYesNo(default = True)
-			self.scan_sat.bs_vertical = ConfigYesNo(default = True)
+			self.scan_sat.bs_horizontal = ConfigYesNo(default=True)
+			self.scan_sat.bs_vertical = ConfigYesNo(default=True)
 
 			self.scan_scansat = {}
 			for sat in nimmanager.satList:
 				#print sat[1]
-				self.scan_scansat[sat[0]] = ConfigYesNo(default = False)
+				self.scan_scansat[sat[0]] = ConfigYesNo(default=False)
 
 			sec = secClass.getInstance()
 
@@ -799,6 +799,6 @@ def BlindscanSetup(menuid, **kwargs):
 
 def Plugins(**kwargs):
 	if nimmanager.hasNimType("DVB-S") and getBoxType().startswith('dm'):
-		return PluginDescriptor(name=_("Blind scan"), description=_("Scan satellites for new transponders"), where = PluginDescriptor.WHERE_MENU, fnc=BlindscanSetup)
+		return PluginDescriptor(name=_("Blind scan"), description=_("Scan satellites for new transponders"), where=PluginDescriptor.WHERE_MENU, fnc=BlindscanSetup)
 	else:
 		return []

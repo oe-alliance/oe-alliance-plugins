@@ -10,8 +10,8 @@ from . import vbcfg
 from .__init__ import _
 
 config.plugins.youtubetv = ConfigSubsection()
-config.plugins.youtubetv.showhelp = ConfigYesNo(default = False)
-config.plugins.youtubetv.uri = ConfigText(default = "http://www.youtube.com/tv", visible_width = 50, fixed_size = False)
+config.plugins.youtubetv.showhelp = ConfigYesNo(default=False)
+config.plugins.youtubetv.uri = ConfigText(default="http://www.youtube.com/tv", visible_width=50, fixed_size=False)
 
 vbcfg.g_youtubetv_cfg = config.plugins.youtubetv
 

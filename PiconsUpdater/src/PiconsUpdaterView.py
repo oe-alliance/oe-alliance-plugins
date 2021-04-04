@@ -319,14 +319,14 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
             self.showBackgroundPicture()
             self.showForegroundPicture()
 
-    def __previewDownloadFinished(self, downloadJob = None):
+    def __previewDownloadFinished(self, downloadJob=None):
         self.__setPreviewImageDownloadFinished()
 
     def __previewDownloadFailed(self, downloadJob):
         self.__setPreviewImageDownloadFinished()
         printToConsole("[ERROR] Download Failed: '%s'" % downloadJob.errorMessage)
 
-    def __bgDownloadFinished(self, downloadJob = None):
+    def __bgDownloadFinished(self, downloadJob=None):
         if downloadJob is not None:
             printToConsole("Background Download finished for url '%s'" % downloadJob.downloadUrl)
         self.__setBackgroundImageDownloadFinished()
@@ -335,7 +335,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
         printToConsole("Background Download failed for url '%s'" % downloadJob.downloadUrl)
         self.__setBackgroundImageDownloadFinished()
 
-    def __fgDownloadFinished(self, downloadJob = None):
+    def __fgDownloadFinished(self, downloadJob=None):
         if downloadJob is not None:
             printToConsole("Foreground Download finished for url '%s'" % downloadJob.downloadUrl)
         self.__setForegroundImageDownloadFinished()

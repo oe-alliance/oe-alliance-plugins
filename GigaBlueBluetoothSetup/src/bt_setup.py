@@ -26,7 +26,7 @@ class BluetoothSetup(BluetoothTask):
 		self.eventTimer.callback.append(self.handleEvents)
 		self.events = []
 
-	def appendEventCallback(self, value = True):
+	def appendEventCallback(self, value=True):
 		#print "appendEventCallback"
 		if value:
 			if self.eventCallback not in self.gbbt.pluginEventHandler:
@@ -156,7 +156,7 @@ class BluetoothSetup(BluetoothTask):
 	def updateKeyDesc(self):
 		pass
 
-	def updateDescription(self, text = None):
+	def updateDescription(self, text=None):
 		pass
 
 	def updateDeviceList(self):
@@ -473,7 +473,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 		self.appendEventCallback(False)
 		self.session.openWithCallback(self.BTScanCB, BluetoothDiscoveryScreen, ble)
 
-	def BTScanCB(self, msg = None):
+	def BTScanCB(self, msg=None):
 		self.appendEventCallback()
 		self.updateAll(msg)
 
@@ -504,7 +504,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 			self["key_yellow"].setText("")
 			self["key_blue"].setText("")
 
-	def updateDescription(self, text = None):
+	def updateDescription(self, text=None):
 		if text is None:
 			if self.isEnabled():
 				text = _("Device is enabled.")
@@ -561,7 +561,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 		self.appendEventCallback(False)
 		self.session.openWithCallback(self.BluetoothRCUSetupCB, BluetoothRCUSetup, autoStart=autoStart)
 
-	def BluetoothRCUSetupCB(self, msg = None):
+	def BluetoothRCUSetupCB(self, msg=None):
 		self.appendEventCallback()
 		self.updateAll(msg)
 
@@ -591,7 +591,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 		)
 
 		from Screens.ChoiceBox import ChoiceBox
-		self.session.openWithCallback(self.selectScanTypeConfirmed, ChoiceBox, title=_("Please select scan mode."), list = scanChoice)
+		self.session.openWithCallback(self.selectScanTypeConfirmed, ChoiceBox, title=_("Please select scan mode."), list=scanChoice)
 
 	def selectScanTypeConfirmed(self, answer):
 		answer = answer and answer[1]

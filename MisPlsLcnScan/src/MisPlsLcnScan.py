@@ -26,7 +26,7 @@ from .MisPlsLcnScanSkin import downloadBar
 class MisPlsLcnScan(Screen):
 	skin = downloadBar
 
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		print("[MisPlsLcnScan][__init__] Starting...")
 		print("[MisPlsLcnScan][__init__] args", args)
 		self.session = session
@@ -49,7 +49,7 @@ class MisPlsLcnScan(Screen):
 		if args:
 			pass
 		self.frontend = None
-		self["Frontend"] = FrontendStatus(frontend_source = lambda : self.frontend, update_interval = 100)
+		self["Frontend"] = FrontendStatus(frontend_source=lambda : self.frontend, update_interval=100)
 		self.rawchannel = None
 		self.session.postScanService = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.index = 0

@@ -26,10 +26,10 @@ import NavigationInstance
 from Screens.SessionGlobals import SessionGlobals
 
 config.plugins.VFD_spark = ConfigSubsection()
-config.plugins.VFD_spark.showClock = ConfigSelection(default = "True_Switch", choices = [("NameOff", _("Channelname in Standby off")), ("NameOn", _("Channelname in Standby Clock")), ("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
-config.plugins.VFD_spark.timeMode = ConfigSelection(default = "24h", choices = [("12h"), ("24h")])
-config.plugins.VFD_spark.redLed = ConfigSelection(default = "0", choices = [("0", _("Off")), ("1", _("Standby only")), ("2", _("Record only"))])
-config.plugins.VFD_spark.greenLed = ConfigSelection(default = "0", choices = [("0", _("Off")), ("1", _("Standby only"))])
+config.plugins.VFD_spark.showClock = ConfigSelection(default="True_Switch", choices=[("NameOff", _("Channelname in Standby off")), ("NameOn", _("Channelname in Standby Clock")), ("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.VFD_spark.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
+config.plugins.VFD_spark.redLed = ConfigSelection(default="0", choices=[("0", _("Off")), ("1", _("Standby only")), ("2", _("Record only"))])
+config.plugins.VFD_spark.greenLed = ConfigSelection(default="0", choices=[("0", _("Off")), ("1", _("Standby only"))])
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
@@ -50,8 +50,7 @@ class Channelnumber:
 		self.zaPrik.start(1000, 1)
 		self.onClose = [ ]
 
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 		session.nav.record_event.append(self.gotRecordEvent)
@@ -207,7 +206,7 @@ def initVFD():
 		vfd_write("....")
 
 class VFD_SPARKSetup(ConfigListScreen, Screen):
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 
 		self.skin = """
 			<screen position="100,100" size="500,210" title="LED Display Setup" >
@@ -223,7 +222,7 @@ class VFD_SPARKSetup(ConfigListScreen, Screen):
 
 		self.onChangedEntry = [ ]
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
 		self.createSetup()
 
@@ -303,7 +302,7 @@ class VFD_SPARK:
 
 	def abort(self):
 		print("[VFD-SPARK] aborting")
-		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 baseSessionGlobals__init__ = None
 SessionGlobals_instance = None
@@ -325,16 +324,16 @@ def newSessionGlobals__init__(self, session):
 	self["CurrentService"] = CurrentService(session.nav)
 	self["Event_Now"] = EventInfo(session.nav, EventInfo.NOW)
 	self["Event_Next"] = EventInfo(session.nav, EventInfo.NEXT)
-	self["FrontendStatus"] = FrontendStatus(service_source = session.nav.getCurrentService)
-	self["FrontendInfo"] = FrontendInfo(navcore = session.nav)
+	self["FrontendStatus"] = FrontendStatus(service_source=session.nav.getCurrentService)
+	self["FrontendInfo"] = FrontendInfo(navcore=session.nav)
 	self["VideoPicture"] = Source()
 	self["TunerInfo"] = TunerInfo()
 	self["RecordState"] = RecordState(session)
-	self["Standby"] = Boolean(fixed = False)
+	self["Standby"] = Boolean(fixed=False)
 
 	from Components.SystemInfo import SystemInfo
 
-	combine = Combine(func = lambda s: {(False, False): 0, (False, True): 1, (True, False): 2, (True, True): 3}[(s[0].boolean, s[1].boolean)])
+	combine = Combine(func=lambda s: {(False, False): 0, (False, True): 1, (True, False): 2, (True, True): 3}[(s[0].boolean, s[1].boolean)])
 	combine.connect(self["Standby"])
 	combine.connect(self["RecordState"])
 
@@ -352,15 +351,15 @@ def newSessionGlobals__init__(self, session):
 	nr_leds = SystemInfo.get("NumFrontpanelLEDs", 0)
 
 	if nr_leds == 1:
-		FrontpanelLed(which = 0, boolean = False, patterns = [PATTERN_OFF, PATTERN_BLINK, PATTERN_OFF, PATTERN_BLINK]).connect(combine)
+		FrontpanelLed(which=0, boolean=False, patterns=[PATTERN_OFF, PATTERN_BLINK, PATTERN_OFF, PATTERN_BLINK]).connect(combine)
 	elif nr_leds == 2:
 		if config.plugins.VFD_spark.redLed.value == '1':
-			FrontpanelLed(which = 0, boolean = False, patterns = [PATTERN_OFF, PATTERN_BLINK, PATTERN_ON, PATTERN_BLINK]).connect(combine)
+			FrontpanelLed(which=0, boolean=False, patterns=[PATTERN_OFF, PATTERN_BLINK, PATTERN_ON, PATTERN_BLINK]).connect(combine)
 		if config.plugins.VFD_spark.greenLed.value == '1':
-			FrontpanelLed(which = 1, boolean = False, patterns = [PATTERN_OFF, PATTERN_OFF, PATTERN_ON, PATTERN_OFF]).connect(combine)
+			FrontpanelLed(which=1, boolean=False, patterns=[PATTERN_OFF, PATTERN_OFF, PATTERN_ON, PATTERN_OFF]).connect(combine)
 		else:
-			FrontpanelLed(which = 0, boolean = False, patterns = [PATTERN_OFF, PATTERN_OFF, PATTERN_OFF, PATTERN_OFF]).connect(combine)
-			FrontpanelLed(which = 1, boolean = False, patterns = [PATTERN_OFF, PATTERN_OFF, PATTERN_OFF, PATTERN_OFF]).connect(combine)
+			FrontpanelLed(which=0, boolean=False, patterns=[PATTERN_OFF, PATTERN_OFF, PATTERN_OFF, PATTERN_OFF]).connect(combine)
+			FrontpanelLed(which=1, boolean=False, patterns=[PATTERN_OFF, PATTERN_OFF, PATTERN_OFF, PATTERN_OFF]).connect(combine)
 
 
 def main(menuid):
@@ -407,6 +406,6 @@ def sessionstart(reason, **kwargs):
 def Plugins(**kwargs):
 		if getBoxType() in ('amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'amikomini'):
 			return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings", where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings", where=PluginDescriptor.WHERE_MENU, fnc=main) ]
 		else:
 			return []

@@ -39,6 +39,6 @@ def eventinfo(session, eventName="", **kwargs):
 		
 def Plugins(**kwargs):
 	return [
-			PluginDescriptor(name=_("TMDb"), description=_("TMDb Infos ..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart = False),
-			PluginDescriptor(name=_("TMDb") ,description=_("TMDb Infos ..."), where = PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart = False)
+			PluginDescriptor(name=_("TMDb"), description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False),
+			PluginDescriptor(name=_("TMDb") ,description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
 			]

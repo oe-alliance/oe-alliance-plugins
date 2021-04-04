@@ -73,7 +73,7 @@ class AutoChannelsImporterTimer:
 			return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min + repeatIntervalMinutes, 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 		return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, backupclock[0], backupclock[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 
-	def channelsimporterdate(self, atLeast = 0):
+	def channelsimporterdate(self, atLeast=0):
 		self.channelsimportertimer.stop()
 		global ChannelsImporterTime
 		ChannelsImporterTime = self.getChannelsImporterTime()
@@ -139,7 +139,7 @@ class AutoChannelsImporterTimer:
 			else:
 				atLeast = 60
 				print("[ChannelsImporterScheduler][doChannelsImporter] Enough Retries, delaying till next schedule.", strftime("%c", localtime(now)))
-				self.session.open(MessageBox, _("Enough Retries, delaying till next schedule."), MessageBox.TYPE_INFO, timeout = 10)
+				self.session.open(MessageBox, _("Enough Retries, delaying till next schedule."), MessageBox.TYPE_INFO, timeout=10)
 				config.plugins.ChannelsImporter.retrycount.value = 0
 				self.channelsimporterdate(atLeast)
 		else:

@@ -300,7 +300,7 @@ def checksum(source_string):
     return answer
 
 #=============================================================================#
-def do_one(myStats, destIP, hostname, timeout, mySeqNumber, packet_size, quiet = False):
+def do_one(myStats, destIP, hostname, timeout, mySeqNumber, packet_size, quiet=False):
     """
     Returns either the delay (in ms) or None on timeout.
     """

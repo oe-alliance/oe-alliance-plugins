@@ -7,16 +7,16 @@ g_browser_cfg = None
 g_service = None
 
 config.plugins.browser = ConfigSubsection()
-config.plugins.browser.startup = ConfigText(default = "http://www.vuplus.com", visible_width = 50, fixed_size = False)
-config.plugins.browser.margin_x = ConfigInteger(default=30, limits = (0, 1280))
-config.plugins.browser.margin_y = ConfigInteger(default=20, limits = (0, 720))
-config.plugins.browser.rcu_type = ConfigSelection(choices = {"en": "en", "de": "de"}, default="en")
-config.plugins.browser.enable_ntpd = ConfigYesNo(default = False)
-config.plugins.browser.ntpd_url = ConfigText(default = "0.rhel.pool.ntp.org", visible_width = 50, fixed_size = False)
-config.plugins.browser.youtube_showhelp = ConfigYesNo(default = False)
-config.plugins.browser.youtube_uri = ConfigText(default = "http://www.youtube.com/tv", visible_width = 50, fixed_size = False)
-config.plugins.browser.youtube_enable_ntpd = ConfigYesNo(default = False)
-config.plugins.browser.youtube_ntpd_url = ConfigText(default = "0.rhel.pool.ntp.org", visible_width = 50, fixed_size = False)
+config.plugins.browser.startup = ConfigText(default="http://www.vuplus.com", visible_width=50, fixed_size=False)
+config.plugins.browser.margin_x = ConfigInteger(default=30, limits=(0, 1280))
+config.plugins.browser.margin_y = ConfigInteger(default=20, limits=(0, 720))
+config.plugins.browser.rcu_type = ConfigSelection(choices={"en": "en", "de": "de"}, default="en")
+config.plugins.browser.enable_ntpd = ConfigYesNo(default=False)
+config.plugins.browser.ntpd_url = ConfigText(default="0.rhel.pool.ntp.org", visible_width=50, fixed_size=False)
+config.plugins.browser.youtube_showhelp = ConfigYesNo(default=False)
+config.plugins.browser.youtube_uri = ConfigText(default="http://www.youtube.com/tv", visible_width=50, fixed_size=False)
+config.plugins.browser.youtube_enable_ntpd = ConfigYesNo(default=False)
+config.plugins.browser.youtube_ntpd_url = ConfigText(default="0.rhel.pool.ntp.org", visible_width=50, fixed_size=False)
 
 g_browser_cfg = config.plugins.browser
 

@@ -57,7 +57,7 @@ class BluetoothDiscovery(BluetoothTask):
 			bt_types.BT_EVENT_PAIRING_WRONG_PIN	: _("Wrong pin number for %s. Please try again and check pin number."),
 			bt_types.BT_EVENT_DISCONNECTED		: _("%s is disconnected.")}
 
-	def appendEventCallback(self, value = True):
+	def appendEventCallback(self, value=True):
 		if value:
 			if self.discEventCallback not in self.vubt.pluginEventHandler:
 				self.vubt.pluginEventHandler.append(self.discEventCallback)
@@ -275,7 +275,7 @@ class BluetoothDiscovery(BluetoothTask):
 	def onDeviceAdded(self, event, name, data):
 		self.updateDeviceList()
 
-	def doExit(self, msg = None):
+	def doExit(self, msg=None):
 		pass
 
 	def updateDeviceList(self):
@@ -428,7 +428,7 @@ class BluetoothDiscoveryScreen(Screen, BluetoothDiscovery):
 		elif self.isScanning():
 			self.addTaskAbortScan()
 
-	def doExit(self, msg = None):
+	def doExit(self, msg=None):
 		if msg:
 			self.close(msg)
 		else:

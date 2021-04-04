@@ -113,9 +113,9 @@ def sc_autostart(reason, **kwargs):
 		scthreads.clearThread()
 
 def sc_sessionstart(session, **kwargs):
-	config.plugins.stalker_client.mac.addNotifier(sc_changed_setup, initial_call = False, immediate_feedback = False)
-	config.plugins.stalker_client.server.addNotifier(sc_changed_setup, initial_call = False, immediate_feedback = False)
-	config.plugins.stalker_client.numFavlist.addNotifier(sc_changed_favlists, initial_call = False, immediate_feedback = True)
+	config.plugins.stalker_client.mac.addNotifier(sc_changed_setup, initial_call=False, immediate_feedback=False)
+	config.plugins.stalker_client.server.addNotifier(sc_changed_setup, initial_call=False, immediate_feedback=False)
+	config.plugins.stalker_client.numFavlist.addNotifier(sc_changed_favlists, initial_call=False, immediate_feedback=True)
 
 	scpoll.startup()
 	if scpoll.state:
@@ -130,17 +130,17 @@ def sc_main(session, **kwargs):
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
-			where = PluginDescriptor.WHERE_AUTOSTART, fnc = sc_autostart),
+			where=PluginDescriptor.WHERE_AUTOSTART, fnc=sc_autostart),
 		PluginDescriptor(
-			where = PluginDescriptor.WHERE_SESSIONSTART, fnc = sc_sessionstart),
+			where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sc_sessionstart),
 		PluginDescriptor(
 			name=_("StalkerClient Configuration"),
 			description=_("Configure Stalker Client"),
-			where = [PluginDescriptor.WHERE_PLUGINMENU ],
+			where=[PluginDescriptor.WHERE_PLUGINMENU ],
 			fnc=sc_setup),
 		PluginDescriptor(
 			name=_("StalkerClient TV"),
 			description=_("Stalker Client TV Channels"),
-			where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
+			where=[ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
 			fnc=sc_main),
 		]

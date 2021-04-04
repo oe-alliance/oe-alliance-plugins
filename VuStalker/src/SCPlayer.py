@@ -124,7 +124,7 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 			"playpauseService": self.playpauseService,
 		}, -2)
 
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap = {
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 			iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 			iPlayableService.evStart: self.__serviceStarted,
 			iPlayableService.evEOF: self.__evEOF,

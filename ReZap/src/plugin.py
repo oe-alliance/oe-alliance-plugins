@@ -6,7 +6,7 @@ from enigma import eTimer
 #########
 
 class LoopSyncMain(Screen):
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.session = session
 		self.gotSession()

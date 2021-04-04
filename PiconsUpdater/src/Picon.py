@@ -148,7 +148,7 @@ class OptimizePiconsFileSize:
     def __clearExecutionQueueList(self):
         self.executionQueueList = deque()
 
-    def __runFinished(self, retval = None):
+    def __runFinished(self, retval=None):
         try:
             if len(self.executionQueueList) > 0:
                 self.execQueue()

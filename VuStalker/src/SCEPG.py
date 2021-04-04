@@ -340,7 +340,7 @@ class StalkerClient_EPGSelection(Screen):
 		if stalker.isAvailable(SUPPORT_MODULES['epg.simple']):
 			self.thread.addTask(showSimpleDataTableCB, stalker.getSimpleDataTable, self.m_channel[0], str(strftime('%Y-%m-%d', today)), "0")
 
-	def showDataTable(self, from_ts, ch_id, page = "0", index = 0):
+	def showDataTable(self, from_ts, ch_id, page="0", index=0):
 		def showDataTableCB(result):
 			if result:
 				total_items = int(result.get('total_items'))
@@ -586,7 +586,7 @@ def StalkerEPGComponent(entry, size, type):
 	return res
 
 class StalkerEPGList(MenuList):
-	def __init__(self, type, enableWrapAround = False):
+	def __init__(self, type, enableWrapAround=False):
 		self.type = type
 		self.list = []
 		MenuList.__init__(self, [], enableWrapAround, eListboxPythonMultiContent)
@@ -600,7 +600,7 @@ class StalkerEPGList(MenuList):
 		self.item_last = -1
 		self.item_refresh = False
 
-	def clear(self, current = -1, last = -1):
+	def clear(self, current=-1, last=-1):
 		del self.list[:]
 		self.l.setList(self.list)
 		self.page_current = current
@@ -644,7 +644,7 @@ class StalkerEPGList(MenuList):
 				self.item_refresh = True if not int(self.page_last) is 1 else False
 				self.rightPage()
 
-	def updateList(self, index = 0):
+	def updateList(self, index=0):
 		self.l.setList(self.list)
 		i = index if int(index) < int(self.item_last) else self.item_last
 		self.moveToIndex(int(i))

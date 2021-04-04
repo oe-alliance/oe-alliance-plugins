@@ -24,7 +24,7 @@ def getCleanFileName(value):
     return six.ensure_str(value)
 
 
-def getOldestFile(path, fileExtensions = None):
+def getOldestFile(path, fileExtensions=None):
     """
     get oldest file from folder
     
@@ -38,7 +38,7 @@ def getOldestFile(path, fileExtensions = None):
     return oldestFile
 
 
-def getFiles(path, fileExtensions = None):
+def getFiles(path, fileExtensions=None):
     """
     get file list as an array
     sorted by date.
@@ -58,7 +58,7 @@ def getFilesFromPath(path):
     return [ os.path.join(path, fname) for fname in os.listdir(path) ]
 
 
-def getFilesWithNameKey(path, excludedDirNames = None, excludeDirs = None):
+def getFilesWithNameKey(path, excludedDirNames=None, excludeDirs=None):
     """
     get recursive all files from given path
     """
@@ -99,7 +99,7 @@ def ismount(path):
     return os.path.isdir(mountpoint(path))
 
 
-def mountpoint(path, first = True):
+def mountpoint(path, first=True):
     if first:
         path = os.path.realpath(path)
     if os.path.ismount(path) or len(path) == 0:

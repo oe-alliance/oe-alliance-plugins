@@ -240,7 +240,7 @@ def createLink(sref, checkParentalControl, forceRestart):
 
 	return new_sref
 
-def sc_playService(ref, checkParentalControl = True, forceRestart = False):
+def sc_playService(ref, checkParentalControl=True, forceRestart=False):
 	new_sref = createLink(ref, checkParentalControl, forceRestart)
 	res = navigation_playservice(new_sref, checkParentalControl, forceRestart)
 	if not res:
@@ -418,7 +418,7 @@ class StalkerEventHandler:
 	def addSessionStart(self):
 		from Components.PluginComponent import plugins
 		from Plugins.Plugin import PluginDescriptor
-		p = PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc=self.onSessionStart)
+		p = PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=self.onSessionStart)
 		plugins.plugins.setdefault(PluginDescriptor.WHERE_SESSIONSTART, []).append(p)
 
 	def onSessionStart(self, session, **kwargs):

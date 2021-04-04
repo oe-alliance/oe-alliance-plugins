@@ -39,15 +39,15 @@ from six.moves.http_client import HTTPException
 
 
 config.plugins.OpenUitzendingGemist = ConfigSubsection()
-config.plugins.OpenUitzendingGemist.showpictures = ConfigBoolean(default = True)
-config.plugins.OpenUitzendingGemist.Npolivestreams = ConfigBoolean(default = False)
-config.plugins.OpenUitzendingGemist.Modern = ConfigBoolean(default = False)
-config.plugins.OpenUitzendingGemist.NPO = ConfigBoolean(default = True)
-config.plugins.OpenUitzendingGemist.RTL = ConfigBoolean(default = True)
-config.plugins.OpenUitzendingGemist.SBS = ConfigBoolean(default = True)
-config.plugins.OpenUitzendingGemist.RADIO = ConfigBoolean(default = True)
-config.plugins.OpenUitzendingGemist.INETTV = ConfigBoolean(default = True)
-config.plugins.OpenUitzendingGemist.ListFontSize = ConfigInteger(default = 18, limits=(18, 36) )
+config.plugins.OpenUitzendingGemist.showpictures = ConfigBoolean(default=True)
+config.plugins.OpenUitzendingGemist.Npolivestreams = ConfigBoolean(default=False)
+config.plugins.OpenUitzendingGemist.Modern = ConfigBoolean(default=False)
+config.plugins.OpenUitzendingGemist.NPO = ConfigBoolean(default=True)
+config.plugins.OpenUitzendingGemist.RTL = ConfigBoolean(default=True)
+config.plugins.OpenUitzendingGemist.SBS = ConfigBoolean(default=True)
+config.plugins.OpenUitzendingGemist.RADIO = ConfigBoolean(default=True)
+config.plugins.OpenUitzendingGemist.INETTV = ConfigBoolean(default=True)
+config.plugins.OpenUitzendingGemist.ListFontSize = ConfigInteger(default=18, limits=(18, 36) )
 
 def wgetUrl(target, refer='', cookie=''):
 	req = Request(target)
@@ -58,7 +58,7 @@ def wgetUrl(target, refer='', cookie=''):
 		req.add_header('Cookie', cookie)
 	req.add_header('DNT', '1')
 	try:
-		r = urlopen2(req, timeout = 5)
+		r = urlopen2(req, timeout=5)
 		outtxt = r.read()
 		r.close()
 	except:
@@ -81,7 +81,7 @@ def resolve_http_redirect(url, depth=0):
 	else:
 		return url
 
-def Csplit(data, string, number = None):
+def Csplit(data, string, number=None):
 	if string in data:
 		data = data.split(string)
 		if number != None:
@@ -95,7 +95,7 @@ def MPanelEntryComponent(channel, text, png):
 	return res
 
 class MPanelList(MenuList):
-	def __init__(self, list, selection = 0, enableWrapAround=True):
+	def __init__(self, list, selection=0, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setFont(0, gFont("Regular", config.plugins.OpenUitzendingGemist.ListFontSize.value))
 		self.l.setItemHeight(120)
@@ -142,7 +142,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		</widget>
 		</screen>"""
 
-	def __init__(self, session, service, seekable = False, pauseable = False, radio = False):
+	def __init__(self, session, service, seekable=False, pauseable=False, radio=False):
 		Screen.__init__(self, session)
 		self.skinName = "MoviePlayer"
 		InfoBarNotifications.__init__(self)
@@ -157,8 +157,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.pauseable = pauseable
 		self.radio = radio
 		self.screen_timeout = 3000
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__serviceStarted,
 				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 				iPlayableService.evEOF: self.__evEOF,
@@ -293,7 +292,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def unlockShow(self):
 		return
 
-	def setSeekState(self, wantstate, onlyGUI = False):
+	def setSeekState(self, wantstate, onlyGUI=False):
 		print("setSeekState")
 		if wantstate == self.STATE_PAUSED:
 			print("trying to switch to Pause- state:", self.STATE_PAUSED)
@@ -329,7 +328,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def showVideoInfo(self):
 		name = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName()
 		refstr = self.session.nav.getCurrentlyPlayingServiceReference().toString()
-		self.session.open(MessageBox, _(" Media Info\nName = " + name + '\nService = ' +refstr), MessageBox.TYPE_INFO, timeout=20, simple = True)
+		self.session.open(MessageBox, _(" Media Info\nName = " + name + '\nService = ' +refstr), MessageBox.TYPE_INFO, timeout=20, simple=True)
 
 class OpenUgConfigureScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
@@ -340,7 +339,7 @@ class OpenUgConfigureScreen(Screen, ConfigListScreen):
 		self.session = session
 		Screen.__init__(self, session)
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"ok": self.keyGo,
@@ -474,7 +473,7 @@ class OpenUgSetupScreen(Screen):
 					self.search = 'rtl'
 				if 'kijk' in selection[1]:
 					self.search = 'kijk'
-				self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title = (_("Search term")), text = "")
+				self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title=(_("Search term")), text="")
 			else:
 				self.session.open(OpenUg, selection[1])
 
@@ -518,7 +517,7 @@ class OpenUgSetupScreen(Screen):
 			selection = self.mmenu[self.CurSel+1]
 			self["menudown"].setText(selection[0])
 
-	def keyboardCallback(self, callback = None):
+	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
 			if self.search is not None:
 				self.session.open(OpenUg, ['search', callback, self.search])
@@ -805,7 +804,7 @@ class OpenUg(Screen):
 		self.imagedir = "/tmp/openUgImg/"
 		if (os_path.exists(self.imagedir) != True):
 			os_mkdir(self.imagedir)
-		self["list"] = MPanelList(list = self.tmplist, selection = 0)
+		self["list"] = MPanelList(list=self.tmplist, selection=0)
 		self.list = self["list"]
 		self.updateMenu()
 		self["actions"] = ActionMap(["WizardActions", "MovieSelectionActions", "DirectionActions"],
@@ -940,7 +939,7 @@ class OpenUg(Screen):
 		if len(self.mediaList) > 0:
 			pos = 0
 			for x in self.mediaList:
-				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.png))
+				self.tmplist.append(MPanelEntryComponent(channel=x[self.UG_CHANNELNAME], text=(x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png=self.png))
 				tmp_icon = self.getThumbnailName(x)
 				thumbnailFile = self.imagedir + tmp_icon
 				self.pixmaps_to_load.append(tmp_icon)
@@ -948,7 +947,7 @@ class OpenUg(Screen):
 					self.Details[tmp_icon] = { 'thumbnail': None}
 				if x[self.UG_ICON] != '':
 					if (os_path.exists(thumbnailFile) == True):
-						self.fetchFinished(True, picture_id = tmp_icon, failed = False)
+						self.fetchFinished(True, picture_id=tmp_icon, failed=False)
 					else:
 						if config.plugins.OpenUitzendingGemist.showpictures.value:
 							u = six.ensure_binary(x[self.UG_ICON])
@@ -966,7 +965,7 @@ class OpenUg(Screen):
 		self.pixmaps_to_load = []
 		self.page = 0
 
-	def setupCallback(self, retval = None):
+	def setupCallback(self, retval=None):
 		self.retval = retval
 		if retval == 'cancel' or retval is None:
 			return
@@ -1206,9 +1205,9 @@ class OpenUg(Screen):
 		if self.timerCmd == self.TIMER_CMD_START:
 			self.setupCallback(self.cmd)
 		elif self.timerCmd == self.TIMER_CMD_VKEY:
-			self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title = (_("Search term")), text = "")
+			self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title=(_("Search term")), text="")
 
-	def keyboardCallback(self, callback = None):
+	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
@@ -1216,17 +1215,17 @@ class OpenUg(Screen):
 				self.getRTLSerie(self.mediaList, "search.php?q=*" + callback + "*")
 				self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple=True)
 		else:
 			self.close()
 
 	def mediaProblemPopup(self):
-		self.session.openWithCallback(self.close, MessageBox, _("There was a problem retrieving the media list"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+		self.session.openWithCallback(self.close, MessageBox, _("There was a problem retrieving the media list"), MessageBox.TYPE_ERROR, timeout=5, simple=True)
 
 	def fetchFailed(self, string, picture_id):
-		self.fetchFinished(False, picture_id, failed = True)
+		self.fetchFinished(False, picture_id, failed=True)
 
-	def fetchFinished(self, x, picture_id, failed = False):
+	def fetchFinished(self, x, picture_id, failed=False):
 		if failed:
 			return
 		else:
@@ -1248,7 +1247,7 @@ class OpenUg(Screen):
 					break
 		else:
 			self.pixmaps_to_load.append(picture_id)
-			self.fetchFinished(False, picture_id, failed = True)
+			self.fetchFinished(False, picture_id, failed=True)
 
 	def loadPicPage(self):
 		self.Details = {}
@@ -1264,9 +1263,9 @@ class OpenUg(Screen):
 		pos = 0
 		for x in self.mediaList:
 			if self.Details[self.getThumbnailName(x)]["thumbnail"] is not None:
-				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.Details[self.getThumbnailName(x)]["thumbnail"]))
+				self.tmplist.append(MPanelEntryComponent(channel=x[self.UG_CHANNELNAME], text=(x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png=self.Details[self.getThumbnailName(x)]["thumbnail"]))
 			else:
-				self.tmplist.append(MPanelEntryComponent(channel = x[self.UG_CHANNELNAME], text = (x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png = self.png))
+				self.tmplist.append(MPanelEntryComponent(channel=x[self.UG_CHANNELNAME], text=(x[self.UG_PROGNAME] + '\n' + x[self.UG_PROGDATE] + '\n' + x[self.UG_SHORT_DESCR]), png=self.png))
 			pos += 1
 		self["list"].setList(self.tmplist)
 
@@ -1297,7 +1296,7 @@ class OpenUg(Screen):
 					myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
 					self.session.open(UGMediaPlayer, myreference, True, True)
 				else:
-					self.session.open(MessageBox, _("Voor deze aflevering moet waarschijnlijk betaald worden."), MessageBox.TYPE_INFO, timeout=5, simple = True)
+					self.session.open(MessageBox, _("Voor deze aflevering moet waarschijnlijk betaald worden."), MessageBox.TYPE_INFO, timeout=5, simple=True)
 		elif self.choice == 'dumpert':
 			if self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME] == ' ---> Volgende Pagina':
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
@@ -1351,7 +1350,7 @@ class OpenUg(Screen):
 						myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
 						self.session.open(UGMediaPlayer, myreference, True, True)
 					else:
-						self.session.open(MessageBox, _("Voor deze aflevering moet waarschijnlijk betaald worden."), MessageBox.TYPE_INFO, timeout=5, simple = True)
+						self.session.open(MessageBox, _("Voor deze aflevering moet waarschijnlijk betaald worden."), MessageBox.TYPE_INFO, timeout=5, simple=True)
 				else:
 					tmp = tmp.split('-')[-1]
 					self.session.open(OpenUg, ['rtlseason', tmp])
@@ -2061,5 +2060,5 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 
-	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="oe-alliancek.png", fnc = main),
-			PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]
+	return [PluginDescriptor(name="Open uitzending gemist", description=_("Watch uitzending gemist"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="oe-alliancek.png", fnc=main),
+			PluginDescriptor(name="Open uitzending gemist", description=_("Watch uitzending gemist"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]

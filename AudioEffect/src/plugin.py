@@ -93,12 +93,12 @@ def getSpeakerPosition():
 	return choices
 
 config.plugins.audioeffect = ConfigSubsection()
-config.plugins.audioeffect.effect = ConfigSelection( default = AUDIOEFFECT_DEFAULT, choices = getEffectChoices() )
+config.plugins.audioeffect.effect = ConfigSelection( default=AUDIOEFFECT_DEFAULT, choices=getEffectChoices() )
 if SUPPORT_AUDIOEFFECT:
 	for aout in AUDIOOUT_TYPES:
-		setattr(config.plugins.audioeffect, aout, ConfigSelection( default = AUDIOOUT_DEFAULT, choices = [("on", _("On")), ("off", _("Off"))] ) )
+		setattr(config.plugins.audioeffect, aout, ConfigSelection( default=AUDIOOUT_DEFAULT, choices=[("on", _("On")), ("off", _("Off"))] ) )
 	if SUPPORT_3D_SURROUND_SPEAKER_POSITION:
-		config.plugins.audioeffect.speakerposition = ConfigSelection( default = SPEAKER_POSITION_DEFAULT, choices = getSpeakerPosition() )
+		config.plugins.audioeffect.speakerposition = ConfigSelection( default=SPEAKER_POSITION_DEFAULT, choices=getSpeakerPosition() )
 
 def setAudioEffectConfigs():
 		if not SUPPORT_AUDIOEFFECT:
@@ -170,7 +170,7 @@ class AudioEffect(Screen, ConfigListScreen):
 		}, -2)
 
 		self.setupList = []
-		ConfigListScreen.__init__(self, self.setupList, session = self.session)
+		ConfigListScreen.__init__(self, self.setupList, session=self.session)
 		self.configEffect = None
 		self.createSetup()
 
@@ -252,6 +252,6 @@ def OnSessionStart(session, **kwargs):
 def Plugins(**kwargs):
 	if SUPPORT_AUDIOEFFECT:
 		return [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=OnSessionStart),
-				PluginDescriptor(name=_("AudioEffect"), description=_("sets the audio effetcs"), where = PluginDescriptor.WHERE_AUDIOMENU, fnc=main)]
+				PluginDescriptor(name=_("AudioEffect"), description=_("sets the audio effetcs"), where=PluginDescriptor.WHERE_AUDIOMENU, fnc=main)]
 	else:
 		return []

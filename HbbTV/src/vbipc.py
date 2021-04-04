@@ -41,7 +41,7 @@ class VBController:
 		return header + data
 
 	@staticmethod
-	def command(opcodestr, data = ""):
+	def command(opcodestr, data=""):
 		cmd_fd = None
 		vbcfg.DEBUG("send ipc: [%s]" % opcodestr)
 		try:
@@ -70,7 +70,7 @@ class VBServerThread(threading.Thread):
 		self.mFlag = False
 		self.mTimeout = 5
 
-	def open(self, timeout = 5):
+	def open(self, timeout=5):
 		addr = vbcfg.SOCKETFILE
 		self.mTimeout = timeout
 

@@ -92,7 +92,7 @@ class BBrowserLauncher(Screen):
         self.isMute = -1
 
         self.pServerThread = PServerThread()
-        self.pServerThread.open(timeout = 1)
+        self.pServerThread.open(timeout=1)
         self.pServerThread.start()
 
         self.closeTimer = eTimer()
