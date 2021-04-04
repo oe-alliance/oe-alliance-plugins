@@ -328,7 +328,7 @@ class BluetoothDiscoveryScreen(Screen, BluetoothDiscovery):
 		</screen>
 		"""
 
-	def __init__(self,session, ble=False):
+	def __init__(self, session, ble=False):
 		Screen.__init__(self, session)
 		BluetoothDiscovery.__init__(self, ble)
 		self.session = session	

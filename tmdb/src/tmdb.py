@@ -78,19 +78,19 @@ config.plugins.tmdb.lang = ConfigSelection(default="de", choices=["de", "en"])
 config.plugins.tmdb.firsthit = ConfigYesNo(default=True)
 
 def cleanFile(text):
-	cutlist = ['x264','720p','1080p','1080i','PAL','GERMAN','ENGLiSH','WS','DVDRiP','UNRATED','RETAIL','Web-DL','DL','LD','MiC','MD','DVDR','BDRiP','BLURAY','DTS','UNCUT','ANiME',
-				'AC3MD','AC3','AC3D','TS','DVDSCR','COMPLETE','INTERNAL','DTSD','XViD','DIVX','DUBBED','LINE.DUBBED','DD51','DVDR9','DVDR5','h264','AVC',
-				'WEBHDTVRiP','WEBHDRiP','WEBRiP','WEBHDTV','WebHD','HDTVRiP','HDRiP','HDTV','ITUNESHD','REPACK','SYNC']
-	text = text.replace('.wmv','').replace('.flv','').replace('.ts','').replace('.m2ts','').replace('.mkv','').replace('.avi','').replace('.mpeg','').replace('.mpg','').replace('.iso','')
+	cutlist = ['x264', '720p', '1080p', '1080i', 'PAL', 'GERMAN', 'ENGLiSH', 'WS', 'DVDRiP', 'UNRATED', 'RETAIL', 'Web-DL', 'DL', 'LD', 'MiC', 'MD', 'DVDR', 'BDRiP', 'BLURAY', 'DTS', 'UNCUT', 'ANiME',
+				'AC3MD', 'AC3', 'AC3D', 'TS', 'DVDSCR', 'COMPLETE', 'INTERNAL', 'DTSD', 'XViD', 'DIVX', 'DUBBED', 'LINE.DUBBED', 'DD51', 'DVDR9', 'DVDR5', 'h264', 'AVC',
+				'WEBHDTVRiP', 'WEBHDRiP', 'WEBRiP', 'WEBHDTV', 'WebHD', 'HDTVRiP', 'HDRiP', 'HDTV', 'ITUNESHD', 'REPACK', 'SYNC']
+	text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '')
 	
 	for word in cutlist:
-		text = re.sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)','+', text, flags=re.I)
-	text = text.replace('.',' ').replace('-',' ').replace('_',' ').replace('+','')
+		text = re.sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)', '+', text, flags=re.I)
+	text = text.replace('.', ' ').replace('-', ' ').replace('_', ' ').replace('+', '')
 
 	return text
 	
 def cleanEnd(text):
-	text = text.replace('.wmv','').replace('.flv','').replace('.ts','').replace('.m2ts','').replace('.mkv','').replace('.avi','').replace('.mpeg','').replace('.mpg','').replace('.iso','').replace('.mp4','')
+	text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '').replace('.mp4', '')
 	return text
 
 class createList(GUIComponent, object):
@@ -111,7 +111,7 @@ class createList(GUIComponent, object):
 			width = self.l.getItemSize().width()
 			(title, coverUrl, media, id) = entry
 			res = [None]
-			x,y,w,h = skin.parameters.get("TMDbListName", (5,1,1920,30))
+			x, y, w, h = skin.parameters.get("TMDbListName", (5, 1, 1920, 30))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, str(title)))
 			#res.append((eListboxPythonMultiContent.TYPE_TEXT, 10, 0, 800, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(title)))
 			return res
@@ -253,10 +253,10 @@ class tmdbScreen(Screen, HelpableScreen):
 		print("[TMDb] " + str(self.text))
 		
 		HelpableScreen.__init__(self)
-		self["actions"] = HelpableActionMap(self,"TMDbActions",
+		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
 				"ok": (self.ok, _("Show details")),
-				"cancel": (self.cancel,_("Exit")),
+				"cancel": (self.cancel, _("Exit")),
 				"up": (self.keyUp, _("Selection up")),
 				"down": (self.keyDown, _("Selection down")),
 				"left": (self.keyLeft, _("Page up")),
@@ -284,7 +284,7 @@ class tmdbScreen(Screen, HelpableScreen):
 	def onFinish(self):
 		if not self.text == "":
 			if re.search('[Ss][0-9]+[Ee][0-9]+', self.text):
-				self.text = re.sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+','', self.text, flags=re.S | re.I)
+				self.text = re.sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+', '', self.text, flags=re.S | re.I)
 			#self.text="xyzabc"
 			self.tmdbSearch()
 		else:
@@ -336,7 +336,7 @@ class tmdbScreen(Screen, HelpableScreen):
 				else:
 					mediasubst = _("Series")
 					
-				title = "%s (%s%s)" % (title,mediasubst,date)
+				title = "%s (%s%s)" % (title, mediasubst, date)
 				
 				coverPath = ""
 				try:
@@ -531,10 +531,10 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self.saveFilename = saveFilename
 
 		HelpableScreen.__init__(self)
-		self["actions"] = HelpableActionMap(self,"TMDbActions",
+		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
 				"ok": (self.ok, _("Crew")),
-				"cancel": (self.cancel,_("Exit")),
+				"cancel": (self.cancel, _("Exit")),
 				"up": (self.keyLeft, _("Selection up")),
 				"down": (self.keyRight, _("Selection down")),
 				"left": (self.keyLeft, _("Page up")),
@@ -878,7 +878,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			
 	def createTXT(self, result):
 		if result:
-			wFile = open(self.saveFilename + ".txt","w") 
+			wFile = open(self.saveFilename + ".txt", "w") 
 			wFile.write(self.text) 
 			wFile.close()
 			print("[TMDb] %s.txt created" % (self.saveFilename))
@@ -921,10 +921,10 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 			self.movie = False
 		
 		HelpableScreen.__init__(self)
-		self["actions"] = HelpableActionMap(self,"TMDbActions",
+		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
 				"ok": (self.ok, _("Show details")),
-				"cancel": (self.cancel,_("Exit")),
+				"cancel": (self.cancel, _("Exit")),
 				"up": (self.keyUp, _("Selection up")),
 				"down": (self.keyDown, _("Selection down")),
 				"up": (self.keyUp, _("Selection up")),
@@ -1141,10 +1141,10 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		self.piclist = ""
 		
 		HelpableScreen.__init__(self)
-		self["actions"] = HelpableActionMap(self,"TMDbActions",
+		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
 				"ok": (self.ok, _("Show details")),
-				"cancel": (self.cancel,_("Exit")),
+				"cancel": (self.cancel, _("Exit")),
 				"up": (self.keyUp, _("Selection up")),
 				"down": (self.keyDown, _("Selection down")),
 				"up": (self.keyUp, _("Selection up")),
@@ -1204,7 +1204,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 					id = str(names['id'])
 					title = str(names['episode_number'])
 					name = str(names['name'])
-					title = "%+6s %s" % (title,name)
+					title = "%+6s %s" % (title, name)
 					overview = str(names['overview'])
 					coverPath = str(names['still_path'])
 					cover = self.tempDir + id + ".jpg"

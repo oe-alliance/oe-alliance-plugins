@@ -356,15 +356,15 @@ class StreamsThumb(StreamsThumbCommon):
 			# Looks like the ABC don't always include this field.
 			# If not included, that's okay -- ABC usually gives us the server in the auth result as well.
 
-			rtmp_url = xml.find('param', attrs={'name':'server_streaming'}).get('value')
+			rtmp_url = xml.find('param', attrs={'name': 'server_streaming'}).get('value')
 			rtmp_chunks = rtmp_url.split('/')
 
 			return {
 				'rtmp_url': rtmp_url,
 				'rtmp_host': rtmp_chunks[2],
 				'rtmp_app': rtmp_chunks[3],
-				'api_url': xml.find('param', attrs={'name':'api'}).get('value'),
-				'categories_url': xml.find('param', attrs={'name':'categories'}).get('value'),
+				'api_url': xml.find('param', attrs={'name': 'api'}).get('value'),
+				'categories_url': xml.find('param', attrs={'name': 'categories'}).get('value'),
 			}
 		except (Exception) as exception:
 			print("%s: version %s: parse_config: Problem Parsing Config: %s" % (__plugin__, __version__, exception))

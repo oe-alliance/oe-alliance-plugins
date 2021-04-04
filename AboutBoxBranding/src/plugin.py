@@ -18,7 +18,7 @@ class AboutBoxBranding(Screen):
 		self["key_red"] = StaticText(_("Close"))
 		self["AboutScrollLabel"] = ScrollLabel(getBoxbranding()[0])
 
-		self["actions"] = ActionMap(["SetupActions","NavigationActions"],
+		self["actions"] = ActionMap(["SetupActions", "NavigationActions"],
 		{
 			"cancel": self.close,
 			"up": self.pageUp,

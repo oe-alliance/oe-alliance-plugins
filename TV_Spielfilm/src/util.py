@@ -160,7 +160,7 @@ def scaleskin(skin, factor):
             if b[0] == '_':
                 b = b[1:]
                 b = int(int(b) * factor)
-            return "%s,%s" % (a,b)
+            return "%s,%s" % (a, b)
         return old
 
     root = ET.fromstring(skin)

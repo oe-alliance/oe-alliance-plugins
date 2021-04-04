@@ -344,7 +344,7 @@ class BTAutoAudioConnect:
 
 		try:
 			global BT_AUDIO_ONOFF_PROC
-			fd = open(BT_AUDIO_ONOFF_PROC,'w')
+			fd = open(BT_AUDIO_ONOFF_PROC, 'w')
 			data = enable and "on" or "off"
 			fd.write(data)
 			fd.close()
@@ -356,7 +356,7 @@ class BTAutoAudioConnect:
 		if self.btaudioActivated:
 			data = int(config.plugins.bluetoothsetup.audiodelay.value) * 90
 			if data < 0:
-				data = hex(int('0xffffffff',16) + data - 1).strip('0x')
+				data = hex(int('0xffffffff', 16) + data - 1).strip('0x')
 			elif data > 0:
 				data = hex(data).strip('0x')
 			else:
@@ -367,7 +367,7 @@ class BTAutoAudioConnect:
 		if self.btaudioActivated or updateNow:
 			try:
 				global BT_AUDIO_DELAY_PROC
-				fd = open(BT_AUDIO_DELAY_PROC,'w')
+				fd = open(BT_AUDIO_DELAY_PROC, 'w')
 				fd.write(data)
 				fd.close()
 			except:

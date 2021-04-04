@@ -99,7 +99,7 @@ class VBServerThread(threading.Thread):
 			packet = ""
 		header = struct.pack('ibi', opcode, (result and 1 or 0), len(packet))
 		if isinstance(packet, str):
-			return header + bytes(packet, 'utf-8',errors='ignore')
+			return header + bytes(packet, 'utf-8', errors='ignore')
 		else:
 			return header + packet
 

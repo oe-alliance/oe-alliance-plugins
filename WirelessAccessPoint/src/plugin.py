@@ -624,7 +624,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 		else:
 			self.close()
 
-	def msgPlugins(self,reason=False):
+	def msgPlugins(self, reason=False):
 		for p in plugins.getPlugins(PluginDescriptor.WHERE_NETWORKCONFIG_READ):
 				p(reason=reason)
 

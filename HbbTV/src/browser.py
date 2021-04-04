@@ -396,7 +396,7 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 		self.menulist = []
 		ConfigListScreen.__init__(self, self.menulist)
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", ], {
 			"ok": self.keyGreen,
 			"green": self.keyGreen,
 			"red": self.keyRed,
@@ -846,17 +846,17 @@ class Browser(Screen):
 			<widget name="submenulist" position="252,60" size="200,150" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 			<widget name="bottomArea" position="0,%(bottom_pos_y)d" size="%(bottom_size_x)d,80" font="Regular;20" valign="center" halign="center" backgroundColor="#000000" />
 		</screen>
-		""" % {'width':WIDTH,
-			'height':HEIGHT,
-			'bottom_pos_y':HEIGHT - 80,
-			'bottom_size_x':WIDTH}
+		""" % {'width': WIDTH,
+			'height': HEIGHT,
+			'bottom_pos_y': HEIGHT - 80,
+			'bottom_size_x': WIDTH}
 
 	MENULIST_ITEMS = []
 	COMMAND_MAP = {}
 	def __init__(self, session, url=None, is_webapp=False):
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["DirectionActions", "MenuActions", "OkCancelActions"], {
-			 "cancel": self.keyCancel			,"ok": self.keyOK			,"left": self.keyLeft			,"right": self.keyRight			,"up": self.keyUp			,"down": self.keyDown			,"menu": self.keyMenu
+			 "cancel": self.keyCancel			, "ok": self.keyOK			, "left": self.keyLeft			, "right": self.keyRight			, "up": self.keyUp			, "down": self.keyDown			, "menu": self.keyMenu
 		}, -2)
 
 		self._cb_update_language()

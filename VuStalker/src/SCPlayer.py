@@ -102,9 +102,9 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 		self.session = session
 
 		dh = self.session.desktop.size().height()
-		self.skin = {1080:StalkerClient_Player.skin_default_1080p,
-						720:StalkerClient_Player.skin_default_720p,
-						576:StalkerClient_Player.skin_default_576p}.get(dh, StalkerClient_Player.skin_default_1080p)
+		self.skin = {1080: StalkerClient_Player.skin_default_1080p,
+						720: StalkerClient_Player.skin_default_720p,
+						576: StalkerClient_Player.skin_default_576p}.get(dh, StalkerClient_Player.skin_default_1080p)
 
 		self.service_ref = service_ref
 		self.service = service

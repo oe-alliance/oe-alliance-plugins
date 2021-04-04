@@ -926,7 +926,7 @@ Red: Refresh EPG
 # Update the starting point to the currently running service, which will be
 # the last one before one with a future starting time
 #
-            for i in list(range(1,len(self.list))):
+            for i in list(range(1, len(self.list))):
                 if self.list[i][epg_B] > t_now:
                     break
                 self.count = i

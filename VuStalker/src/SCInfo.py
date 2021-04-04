@@ -111,13 +111,13 @@ def getTsidOnid():
 
 def createStalkerSref(sid, tsid, onid, haslink, uri, name):
 	if isinstance(sid, int):
-		sid = str(hex(sid).replace("0x","",1))
+		sid = str(hex(sid).replace("0x", "", 1))
 
 	if isinstance(tsid, int):
-		tsid = str(hex(tsid).replace("0x","",1))
+		tsid = str(hex(tsid).replace("0x", "", 1))
 
 	if isinstance(onid, int):
-		onid = str(hex(onid).replace("0x","",1))
+		onid = str(hex(onid).replace("0x", "", 1))
 
 	stalker_flag = SREF_FLAG_STALKER
 	if haslink:
@@ -164,7 +164,7 @@ def getLink(sref):
 			try:
 				cmd = str(json_object.get('cmd')).split(" ")
 				uri = len(cmd) > 1 and cmd[1] or cmd[0]
-				uri = uri.replace(':','%3a')
+				uri = uri.replace(':', '%3a')
 				new_sref = createStalkerSref(sid, tsid, onid, 0, uri, sname)
 				prev_linked = (sref.toString(), new_sref.toString())
 			except Exception as e:

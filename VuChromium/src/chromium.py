@@ -31,7 +31,7 @@ class ChromiumOSSettings(ConfigListScreen, Screen):
         Screen.__init__(self, session)
         ConfigListScreen.__init__(self, self.menulist)
 
-        self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
+        self["actions"] = ActionMap(["OkCancelActions", "ColorActions", ], {
                 "ok": self.keyGreen,
                 "green": self.keyGreen,
                 "red": self.keyRed,
@@ -235,7 +235,7 @@ class ChromiumOSWindow(ConfigListScreen, Screen):
         Screen.__init__(self, session)
         ConfigListScreen.__init__(self, self.menulist)
 
-        self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
+        self["actions"] = ActionMap(["OkCancelActions", "ColorActions", ], {
                 "ok": self.keyGreen,
                 "cancel": self.keyCancel,
                 "red": self.keyCancel,

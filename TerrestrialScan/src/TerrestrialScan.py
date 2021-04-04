@@ -415,7 +415,7 @@ class TerrestrialScan(Screen):
 			time.sleep(self.stabliseTime) # allow extra time to get a stable reading
 			signalQuality = self.frontend.readFrontendData(iFrontendInformation.signalQuality)
 			if signalQuality > 0:
-				found = {"frequency": self.frequency, "tsid": self.tsid, "onid": self.onid, "system": self.system, "bandwidth": self.bandwidth,"signalQuality": signalQuality}
+				found = {"frequency": self.frequency, "tsid": self.tsid, "onid": self.onid, "system": self.system, "bandwidth": self.bandwidth, "signalQuality": signalQuality}
 				self.transponders_found.append(self.frequency)
 				tsidOnidKey = "%x:%x" % (self.tsid, self.onid)
 				if (tsidOnidKey not in self.transponders_unique or self.transponders_unique[tsidOnidKey]["signalQuality"] < signalQuality) and (not self.restrict_to_networkid or self.networkid == self.onid):

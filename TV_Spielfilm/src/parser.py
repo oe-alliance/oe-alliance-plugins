@@ -509,8 +509,8 @@ def cleanHTML(bereich):
     return bereich
 
 def fiximgLink(link):
-    link = sub('" alt.*','',link)
-    return sub('.*data-src="','',link)
+    link = sub('" alt.*', '', link)
+    return sub('.*data-src="', '', link)
     
 def parseInfoTable(output, debug=None):
     bereich = _parseInfoTableStart(output)

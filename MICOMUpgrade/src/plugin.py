@@ -443,7 +443,7 @@ class FirmwareUpgrade(Screen):
 	def setupUI(self):
 		self.setupStatus()
 
-	def setupStatus(self,message=None,reboot=False):
+	def setupStatus(self, message=None, reboot=False):
 		self.updateFilePath = ""
 		if message is not None:
 			self.rebootLock = reboot

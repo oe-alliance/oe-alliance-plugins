@@ -70,7 +70,7 @@ XML_BLINDSCAN_DIR = "/tmp"
 XML_FILE = None
 
 # _supportNimType is only used by vuplus hardware
-_supportNimType = {'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_', 'BCM7356':'bcm7346_', 'SI2166':'si2166_'}
+_supportNimType = {'AVL1208': '', 'AVL6222': '6222_', 'AVL6211': '6211_', 'BCM7356': 'bcm7346_', 'SI2166': 'si2166_'}
 
 # For STBs that support multiple DVB-S tuner models, e.g. Solo 4K.
 _unsupportedNims = ('Vuplus DVB-S NIM(7376 FBC)', 'Vuplus DVB-S NIM(45308X FBC)', 'DVB-S2 NIM(45308 FBC)') # format = nim.description from nimmanager
@@ -354,7 +354,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 
 	def makeNimSocket(self, nimname=""):
 		is_exist_i2c = False
-		self.i2c_mapping_table = {0:2, 1:3, 2:1, 3:0}
+		self.i2c_mapping_table = {0: 2, 1: 3, 2: 1, 3: 0}
 		if self.nimSockets is not None:
 			for XX in self.nimSockets.keys():
 				nimsocket = self.nimSockets[XX]
@@ -370,20 +370,20 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 
 		if nimname == "AVL6222":
 			if getBoxType() == "vuuno":
-				self.i2c_mapping_table = {0:3, 1:3, 2:1, 3:0}
+				self.i2c_mapping_table = {0: 3, 1: 3, 2: 1, 3: 0}
 			elif getBoxType() == "vuduo2":
 				nimdata = self.nimSockets['0']
 				try:
 					if nimdata[0] == "AVL6222":
-						self.i2c_mapping_table = {0:2, 1:2, 2:4, 3:4}
+						self.i2c_mapping_table = {0: 2, 1: 2, 2: 4, 3: 4}
 					else:
-						self.i2c_mapping_table = {0:2, 1:4, 2:4, 3:0}
+						self.i2c_mapping_table = {0: 2, 1: 4, 2: 4, 3: 0}
 				except:
-					self.i2c_mapping_table = {0:2, 1:4, 2:4, 3:0}
+					self.i2c_mapping_table = {0: 2, 1: 4, 2: 4, 3: 0}
 			else:
-				self.i2c_mapping_table = {0:2, 1:4, 2:0, 3:0}
+				self.i2c_mapping_table = {0: 2, 1: 4, 2: 0, 3: 0}
 		else:
-			self.i2c_mapping_table = {0:2, 1:3, 2:1, 3:0}
+			self.i2c_mapping_table = {0: 2, 1: 3, 2: 1, 3: 0}
 
 	def getNimSocket(self, slot_number):
 		return self.i2c_mapping_table.get(slot_number, -1)
@@ -715,7 +715,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			try:
 				sName = _nimSocket[str(nimIdx)][0]
 				sType = _supportNimType[sName]
-				return "vuplus_%(TYPE)sblindscan" % {'TYPE':sType}, sName
+				return "vuplus_%(TYPE)sblindscan" % {'TYPE': sType}, sName
 			except:
 				pass
 			return "vuplus_blindscan", ""
@@ -921,9 +921,9 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			exe_path = "/usr/bin/%s" % exe_filename
 			if os.path.exists(exe_path):
 				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
-				if getBrandOEM() in ('ceryon', 'clap', 'dinobot', 'uclan', 'amiko') or getBoxType().startswith('sf8008') or getMachineBuild() in ('gbmv200','dags72604', 'dagsmv200'):
+				if getBrandOEM() in ('ceryon', 'clap', 'dinobot', 'uclan', 'amiko') or getBoxType().startswith('sf8008') or getMachineBuild() in ('gbmv200', 'dags72604', 'dagsmv200'):
 					cmd += " %d" % self.is_c_band_scan
-				if getBrandOEM() in ('clap', 'dinobot', 'uclan', 'amiko') or getBoxType().startswith('sf8008') or getMachineBuild() in ('gbmv200','dags72604', 'dagsmv200'):
+				if getBrandOEM() in ('clap', 'dinobot', 'uclan', 'amiko') or getBoxType().startswith('sf8008') or getMachineBuild() in ('gbmv200', 'dags72604', 'dagsmv200'):
 					cmd += " %d" % orb[0]
 				if getBrandOEM() in ('azbox',):
 					self.polsave = tab_pol[pol] # Data returned by the binary is not good we must save polarisation
@@ -1172,7 +1172,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 				if 'Scanning' in data:
 					self.tp_found.append(str)
 					seconds_done = int(time() - self.start_time)
-					tmpstr = "\n" + str + _("Step %d %d:%02d min") % (len(self.tp_found),seconds_done / 60, seconds_done % 60)
+					tmpstr = "\n" + str + _("Step %d %d:%02d min") % (len(self.tp_found), seconds_done / 60, seconds_done % 60)
 					self.blindscan_session["progress"].setText(self.tmpstr + tmpstr)
 				if len(data) >= 6 and data[0] == 'OK':
 					self.blindscan_session["post_action"].setText(str)

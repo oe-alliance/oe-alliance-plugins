@@ -34,10 +34,10 @@ if os.path.exists("/proc/stb/info/vumodel"):
 
 	if info == "ultimo":
 		fwlist = [
-			 ("fpga", _("FPGA"))			, ("fp", _("Front Processor"))
+			 ("fpga", _("FPGA")), ("fp", _("Front Processor"))
 			]
 		fwdata = {
-			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			,"fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
+			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			, "fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
 			}
 	elif info == "uno":
 		fwlist = [
@@ -48,24 +48,24 @@ if os.path.exists("/proc/stb/info/vumodel"):
 			}
 	elif info == "solo2":
 		fwlist = [
-			 ("fpga", _("FPGA"))			, ("fp", _("Front Processor"))
+			 ("fpga", _("FPGA")), ("fp", _("Front Processor"))
 			]
 		fwdata = {
-			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			,"fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
+			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			, "fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
 			}
 	elif info == "duo2":
 		fwlist = [
-			 ("fpga", _("FPGA"))			, ("fp", _("Front Processor"))			, ("vfd", _("VFD Controller"))
+			 ("fpga", _("FPGA")), ("fp", _("Front Processor")), ("vfd", _("VFD Controller"))
 			]
 		fwdata = {
-			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			,"fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]			,"vfd": ["http://archive.vuplus.com/download/vfd", "vfd.files", "/dev/bcm_vfd_ctrl;"]
+			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			, "fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]			, "vfd": ["http://archive.vuplus.com/download/vfd", "vfd.files", "/dev/bcm_vfd_ctrl;"]
 			}
 	elif info == "zero":
 		fwlist = [
-			 ("fpga", _("FPGA"))			, ("fp", _("Front Processor"))
+			 ("fpga", _("FPGA")), ("fp", _("Front Processor"))
 			]
 		fwdata = { 
-			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			,"fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
+			 "fpga": ["http://archive.vuplus.com/download/fpga", "fpga.files", "/dev/fpga_dp;/dev/misc/dp;"]			, "fp": ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
 			}
 
 import os
@@ -730,7 +730,7 @@ class FirmwareUpgrade(Screen, ConfigListScreen):
 		self["config"].l.setList(self.list)
 		self.setupStatus()
 
-	def setupStatus(self,message=None,reboot=False):
+	def setupStatus(self, message=None, reboot=False):
 		self.updateFilePath = ""
 		if message is not None:
 			self.rebootLock = reboot
@@ -767,7 +767,7 @@ class FirmwareUpgrade(Screen, ConfigListScreen):
 				self.upgrade_auto_run_timer.start(1000)
 
 	# upgrade window callback function
-	def cbFinishedUpgrade(self,message=None,reboot=False):
+	def cbFinishedUpgrade(self, message=None, reboot=False):
 		self.setupStatus(message=message, reboot=reboot)
 
 	def cbRunUpgrade(self, ret):

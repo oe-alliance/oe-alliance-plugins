@@ -48,8 +48,8 @@ class StalkerClient_SetupScreen(Screen, ConfigListScreen):
 	</screen>
 	"""
 
-	def __init__(self,session):
-		Screen.__init__(self,session)
+	def __init__(self, session):
+		Screen.__init__(self, session)
 		self.session = session
 		dh = self.session.desktop.size().height()
 		self.skin = StalkerClient_SetupScreen.skin_default_1080p if dh > 720 else StalkerClient_SetupScreen.skin_default

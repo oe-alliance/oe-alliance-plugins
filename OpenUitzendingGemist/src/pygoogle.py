@@ -70,7 +70,7 @@ If this header is not present, a value of en is assumed.
 
 class pygoogle:
     
-    def __init__(self,query,pages=10,hl='en',log_level=logging.INFO):
+    def __init__(self, query, pages=10, hl='en', log_level=logging.INFO):
         self.pages = pages          #Number of pages. default 10
         self.query = query
         self.filter = FILTER_ON     #Controls turning on or off the duplicate content filter. On = 1.
@@ -87,7 +87,7 @@ class pygoogle:
         logger.addHandler(handler)
         self.logger = logger
 
-    def __search__(self,print_results=False):
+    def __search__(self, print_results=False):
         '''
         returns list of results if successful or False otherwise
         '''

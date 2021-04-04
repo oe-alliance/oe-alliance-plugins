@@ -223,7 +223,7 @@ class tvAllScreen(Screen):
 class tvAllScreenFull(tvAllScreen):
     skin = '\n\t\t\t\t<screen position="0,0" size="{size}" >\n\t\t\t\t</screen>'
     def __init__(self, session):
-        size = "%s,%s" % (DESKTOP_WIDTH,DESKTOP_HEIGHT)
+        size = "%s,%s" % (DESKTOP_WIDTH, DESKTOP_HEIGHT)
         dict = {'size': size}
         tvAllScreen.__init__(self, session, tvAllScreenFull.skin, dict)
 
@@ -244,7 +244,7 @@ class tvBaseScreen(tvAllScreen):
         self.trailer = False
         self.trailerurl = ''
         self.searchcount = 0
-        for i in range(1,7):
+        for i in range(1, 7):
             self.pics.append('/tmp/tvspielfilm%s.jpg' % i)
         self.localhtml = '/tmp/tvspielfilm.html'
         self.localhtml2 = '/tmp/tvspielfilm2.html'
@@ -333,7 +333,7 @@ class tvBaseScreen(tvAllScreen):
                     return
 
     def picdownload(self, link, name, idx):
-        getPage(six.ensure_binary(link)).addCallback(name,idx).addErrback(self.picdownloadError)
+        getPage(six.ensure_binary(link)).addCallback(name, idx).addErrback(self.picdownloadError)
 
     def picdownloadError(self, output):
         pass
@@ -5167,7 +5167,7 @@ class TVPicShow(tvBaseScreen):
         if picmode == 2:
             self.pich = 525
             self.picw = 700
-        picsz = "%s,%s" % (str(self.picw),str(self.pich))
+        picsz = "%s,%s" % (str(self.picw), str(self.pich))
         dic = {"picsz": picsz}
         tvBaseScreen.__init__(self, session, skin, dic)
         self.picmode = picmode
@@ -5696,9 +5696,9 @@ class PicShowFull(tvBaseScreen):
 class FullScreen(tvAllScreen):
     def __init__(self, session):
         skin = readSkin("FullScreen")
-        size = "%s,%s" % (DESKTOP_WIDTH,DESKTOP_HEIGHT)
-        psize = "%s,%s" % (DESKTOP_WIDTH * 0.75,DESKTOP_HEIGHT)
-        ppos = "%s,%s" % (DESKTOP_WIDTH * 0.125,0)
+        size = "%s,%s" % (DESKTOP_WIDTH, DESKTOP_HEIGHT)
+        psize = "%s,%s" % (DESKTOP_WIDTH * 0.75, DESKTOP_HEIGHT)
+        ppos = "%s,%s" % (DESKTOP_WIDTH * 0.125, 0)
         dic = {'size': size, 'psize': psize, 'ppos': ppos}
         tvAllScreen.__init__(self, session, skin, dic)
         self.picfile = '/tmp/tvspielfilm.jpg'
@@ -6789,16 +6789,16 @@ class tvMain(tvBaseScreen):
                 except IndexError:
                     pass
 
-            for mi in ['Kindersender','Sportsender','Musiksender','News','Ausland','Spartensender','Auslandssender','Regionalsender']:
+            for mi in ['Kindersender', 'Sportsender', 'Musiksender', 'News', 'Ausland', 'Spartensender', 'Auslandssender', 'Regionalsender']:
                 self.makeSecondMenuItem(mi)
 
             if self.tipps == True:
                 self.hideTipps()
         elif search('/tv-tipps/', link) is not None:
-            for mi in ['Spielfilm','Serie','Report','Unterhaltung','Kinder','Sport']:
+            for mi in ['Spielfilm', 'Serie', 'Report', 'Unterhaltung', 'Kinder', 'Sport']:
                 self.makeSecondMenuItem2(mi, '/tv-tipps/')
         elif search('/tv-genre/', link) is not None:
-            for mi in ['Spielfilm','Serie','Report','Unterhaltung','Kinder','Sport']:
+            for mi in ['Spielfilm', 'Serie', 'Report', 'Unterhaltung', 'Kinder', 'Sport']:
                 self.makeSecondMenuItem2(mi, '/tv-genre/')
         elif search('/trailer-und-clips/', link) is not None:
             self.makeSecondMenuItem2('Kino Neustarts', '/kino/trailer-und-clips/')
@@ -8027,10 +8027,10 @@ class TVHeuteView(tvBaseScreen):
             self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
         else:
             self.picon = False
-        self.tventriess = [[],[],[],[],[],[]]
-        self.tvlinks = [[],[],[],[],[],[]]
-        self.tvtitels = [[],[],[],[],[],[]]
-        self.srefs = [[],[],[],[],[],[]]
+        self.tventriess = [[], [], [], [], [], []]
+        self.tvlinks = [[], [], [], [], [], []]
+        self.tvtitels = [[], [], [], [], [], []]
+        self.srefs = [[], [], [], [], [], []]
         self.picloads = {}
         self.searchlink = []
         self.searchref = []
@@ -8042,7 +8042,7 @@ class TVHeuteView(tvBaseScreen):
         self.EPGtext = ''
         self.hideflag = True
         self.search = False
-        self.zaps = [True,True,True,True,True,True]
+        self.zaps = [True, True, True, True, True, True]
         self.rec = False
         self.first = True
         self.ready = False
@@ -8187,8 +8187,8 @@ class TVHeuteView(tvBaseScreen):
             self.maxpages = len(sender) // 6
             if len(sender) % 6 != 0:
                 self.maxpages += 1
-        self.zaps = [True,True,True,True,True,True]
-        self.srefs = [[],[],[],[],[],[]]
+        self.zaps = [True, True, True, True, True, True]
+        self.srefs = [[], [], [], [], [], []]
         date = str(self.date.strftime('%d.%m.%Y'))
         self.titel = 'Heute im TV  - ' + str(self.weekday) + ', ' + date
         self.setTitle(self.titel)
@@ -8217,11 +8217,11 @@ class TVHeuteView(tvBaseScreen):
 
         sender = re.findall('<h3>(.*?)</h3>', bereichtop)
         if sender is not None:
-            for i in range(1,7):
+            for i in range(1, 7):
                 self['sender%s' % i].setText(sender[i - 1])
                 self['sender%s' % i].show()
         else:
-            for i in range(1,7):
+            for i in range(1, 7):
                 self['sender%s' % i].setText('')
         pic = re.findall('<img src="(.*?)" width="', bereichtop)
         if pic is not None:
@@ -8290,11 +8290,11 @@ class TVHeuteView(tvBaseScreen):
         bereich = sub('</span>', '</td>', bereich)
         bereich = sub('<wbr/>', '', bereich)
         bereich = sub('<div class="program-block">', '<td>BLOCK</td>', bereich)
-        self.tventriess = [[],[],[],[],[],[]]
-        self.tvlinks = [[],[],[],[],[],[]]
-        self.tvtitels = [[],[],[],[],[],[]]
+        self.tventriess = [[], [], [], [], [], []]
+        self.tvlinks = [[], [], [], [], [], []]
+        self.tvtitels = [[], [], [], [], [], []]
         menupos = 5
-        menuitems = [[],[],[],[],[],[]]
+        menuitems = [[], [], [], [], [], []]
         a = findall('<td>(.*?)</td>', bereich)
         for x in a:
             if x == 'BLOCK':
@@ -8433,7 +8433,7 @@ class TVHeuteView(tvBaseScreen):
 
     def makePostviewPage(self, string):
         print("DEBUG makePostviewPage TVHeuteView")
-        for i in range(1,7):
+        for i in range(1, 7):
             self['sender%s' % i].hide()
             self['logo%s' % i].hide()
             self['pic%s' % i].hide()
@@ -8695,7 +8695,7 @@ class TVHeuteView(tvBaseScreen):
     def searchReturn(self, search):
         if search and search != '':
             self.searchstring = search
-            for i in range(1,7):
+            for i in range(1, 7):
                 self['sender%s' % i].hide()
                 self['logo%s' % i].hide()
                 self['pic%s' % i].hide()

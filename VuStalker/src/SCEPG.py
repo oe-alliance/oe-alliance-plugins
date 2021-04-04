@@ -144,7 +144,7 @@ class StalkerClient_EventViewBase:
 		self["epg_description"].setText(text)
 
 		t = localtime(float(event.time))
-		self["datetime"].setText("%02d.%02d, %02d:%02d" % (t[2],t[1],t[3],t[4]))
+		self["datetime"].setText("%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 		self["duration"].setText(_("%d min") % (int(event.duration) / 60))
 
 	def pageUp(self):
@@ -561,7 +561,7 @@ def StalkerEPGComponent(entry, size, type):
 		t = localtime(float(entry.time))
 
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width / 20 * 2 - 10, height, 0, RT_HALIGN_RIGHT, days[t[6]]))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, width / 20 * 2, 0, width / 20 * 5 - 15, height, 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d" % (t[2],t[1],t[3],t[4])))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, width / 20 * 2, 0, width / 20 * 5 - 15, height, 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4])))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, width / 20 * 7, 0, width / 20 * 13, height, 0, RT_HALIGN_LEFT, entry.name))
 	else:
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width / 10 * 3 - 10, height, 0, RT_HALIGN_LEFT, entry.ch_name))

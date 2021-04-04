@@ -105,7 +105,7 @@ class StalkerClient_ChannelContextMenu(Screen):
 		sid = int(self.service.getId())
 		tsid, onid = getTsidOnid()
 		haslink = int(int(self.service.m_http_temp_link) == 1 or int(self.service.m_load_balancing) == 1)
-		uri = self.service.getUrl(False).replace(':','%3a')
+		uri = self.service.getUrl(False).replace(':', '%3a')
 		name = self.service.name
 		self.service_ref = createStalkerSref(sid, tsid, onid, haslink, uri, name)
 
@@ -303,7 +303,7 @@ class StalkerClient_ChannelSelection(Screen):
 					print("[StalkerClient]", e)
 					genre[0].size = -1
 
-		new = (eListboxPythonMultiContent.TYPE_TEXT,genre[1][1] + genre[1][3], genre[1][2], 100, genre[1][4], 0, RT_HALIGN_RIGHT, str(genre[0].size))
+		new = (eListboxPythonMultiContent.TYPE_TEXT, genre[1][1] + genre[1][3], genre[1][2], 100, genre[1][4], 0, RT_HALIGN_RIGHT, str(genre[0].size))
 		genre.remove(genre[2])
 		genre.append(new)
 
@@ -515,7 +515,7 @@ class StalkerClient_ChannelSelection(Screen):
 			sid = int(service.getId())
 			tsid, onid = getTsidOnid()
 			haslink = int(int(service.m_http_temp_link) == 1 or int(service.m_load_balancing) == 1)
-			uri = uri.replace(':','%3a')
+			uri = uri.replace(':', '%3a')
 			name = service.name
 			self.scPlayerRef = createStalkerSref(sid, tsid, onid, haslink, uri, name)
 
@@ -696,10 +696,10 @@ def StalkerEntryComponent(entry, x, y, w, h):
 
 	if entry.isFolder():
 		size = str(entry.size) if entry.size > 0 else "loading"
-		res.append((eListboxPythonMultiContent.TYPE_TEXT,x,y,w - 100,h,0,RT_HALIGN_LEFT, name))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT,x + w - 100,y,100,h,0,RT_HALIGN_RIGHT, size))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w - 100, h, 0, RT_HALIGN_LEFT, name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, x + w - 100, y, 100, h, 0, RT_HALIGN_RIGHT, size))
 	else:
-		res.append((eListboxPythonMultiContent.TYPE_TEXT,x,y,w,h,0,RT_HALIGN_LEFT, name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, name))
 	return res
 
 class StalkerList(MenuList):

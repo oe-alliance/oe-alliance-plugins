@@ -46,7 +46,7 @@ from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHan
 def wgetUrl(query):
 	try:
 		target = "http://www.tv3.ie/player/assets/php/search.php"
-		values = {'queryString':query, 'limit':20}
+		values = {'queryString': query, 'limit': 20}
 		headers = {}
 		headers['User-Agent'] = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
 		headers['DNT'] = '1'
@@ -387,7 +387,7 @@ class StreamsThumb(StreamsThumbCommon):
 			if html.find('age_check_form_row') > 0:
 				try:
 					headers = {'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}
-					values = {'age_ok':'1'}
+					values = {'age_ok': '1'}
 					data = urlencode(values)
 					req = Request(url1, data, headers)
 					response = urlopen(req)

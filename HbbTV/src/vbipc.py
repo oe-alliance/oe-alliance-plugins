@@ -101,7 +101,7 @@ class VBServerThread(threading.Thread):
 		if packet is None:
 			packet = ""
 		header = struct.pack('ibi', opcode, (result and 1 or 0), len(packet))
-		return header + bytes(packet, 'utf-8',errors='ignore')
+		return header + bytes(packet, 'utf-8', errors='ignore')
 
 	def process(self, conn, addr):
 		read_data = conn.recv(_BUFSIZE)

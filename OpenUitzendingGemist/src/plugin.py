@@ -815,7 +815,7 @@ class OpenUg(Screen):
 			"right": self.key_right,
 			"ok": self.go,
 			"back": self.Exit,
-		}		, -1)
+		}, -1)
 		self["NumberActions"] = NumberActionMap(["NumberActions", "InputAsciiActions"],
 			{
 				"gotAsciiCode": self.keyAsciiCode,

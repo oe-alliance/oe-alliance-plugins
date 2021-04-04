@@ -32,7 +32,7 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
-		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "OkCancelActions", "ColorActions", "EPGSelectActions",], {
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "OkCancelActions", "ColorActions", "EPGSelectActions", ], {
 			"cancel": self.keyCancel,
 			"red": self.keyCancel,
 			"green": self.keyGreen,
@@ -124,7 +124,7 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		ConfigListScreen.__init__(self, self.menulist)
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", ], {
 			"ok": self.keyGreen,
 			"green": self.keyGreen,
 			"red": self.keyRed,

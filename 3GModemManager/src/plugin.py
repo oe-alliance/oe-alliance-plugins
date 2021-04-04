@@ -199,7 +199,7 @@ class EditModemManual(ConfigListScreen, Screen):
 			if self.phone is None:
 				self.phone = ""
 
-		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions",],
+		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", ],
 		{
 			"ok": self.keyOK,
 			"cancel": self.keyExit,
@@ -409,7 +409,7 @@ class ModemManual(Screen):
 			self.phone = isEmpty(phone) and "" or phone
 			
 		if name is not None:
-			self["menulist"].list.append((name, {'region':region, 'carrier':name, 'apn':self.apn, 'user':self.uid, 'password':self.pwd, 'pin':self.pin, 'phone':self.phone}))
+			self["menulist"].list.append((name, {'region': region, 'carrier': name, 'apn': self.apn, 'user': self.uid, 'password': self.pwd, 'pin': self.pin, 'phone': self.phone}))
 			self["menulist"].setList(self["menulist"].list)
 			self["menulist"].moveToIndex(len(self["menulist"].list) - 1)
 		if isRemove:
@@ -916,13 +916,13 @@ class ModemManager(Screen):
 
 	def setConnectStatus(self, idx):
 		STATUS = {
-		 0:'1. Load a Mobile Broadband Device'		,1:'2. Set up a Mobile Broadband Device'		,2:'3. Generate a WvDial profile'		,3:'4. Attempt to connect'		,4:'5. Done'
+		 0: '1. Load a Mobile Broadband Device'		, 1: '2. Set up a Mobile Broadband Device'		, 2: '3. Generate a WvDial profile'		, 3: '4. Attempt to connect'		, 4: '5. Done'
 		}
 		self.printStatus(idx, STATUS)
 
 	def setDisconnectStatus(self, idx):
 		STATUS = {
-		 0:'1. Drop WvDial'		,1:'2. Unload a Mobile Broadband Device'		,2:'3. Done'
+		 0: '1. Drop WvDial'		, 1: '2. Unload a Mobile Broadband Device'		, 2: '3. Done'
 		}
 		self.printStatus(idx, STATUS)
 
