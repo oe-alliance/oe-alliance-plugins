@@ -51,7 +51,7 @@ from six.moves.http_client import HTTPConnection, CannotSendRequest, BadStatusLi
 HTTPConnection.debuglevel = 1
 
 model_rc = "rc_wb_desc.png"
-if getBrandOEM() =='gigablue':
+if getBrandOEM() == 'gigablue':
 	model_rc = "rc_wb_desc_gb.png"
 elif getBrandOEM() == 'ini':
 	model_rc = "rc_wb_desc_hdx.png"
@@ -62,7 +62,7 @@ def excute_cmd(cmd):
 
 alpha_value = 0
 def change_galpha(set_const, set_value):
-	op  = "/proc/stb/fb/alpha_op"
+	op = "/proc/stb/fb/alpha_op"
 	val = "/proc/stb/fb/alpha_value"
 	global alpha_value
 	if os.path.exists(op) and set_const and alpha_value < 255:
@@ -82,7 +82,7 @@ def is_process_running(pname):
 	if pname is None or len(pname) == 0:
 		return False
 
-	cmd = "/bin/ps | grep %s | grep -v grep | awk \'{print $5}\'"%(pname)
+	cmd = "/bin/ps | grep %s | grep -v grep | awk \'{print $5}\'" % (pname)
 	for line in os.popen(cmd).readlines():
 		return True
 	return False
@@ -107,7 +107,7 @@ def wb_islock():
 	return lock
 
 class Player(Screen, InfoBarNotifications):
-	skin = 	"""
+	skin = """
 		<screen name="Player" flags="wfNoBorder" position="center,620" size="455,53" title="Webbrowser" backgroundColor="transparent">
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WebBrowser/icons/mp_wb_background.png" position="0,0" zPosition="-1" size="455,53" />
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WebBrowser/icons/mp_wb_buttons.png" position="40,23" size="30,13" alphatest="on" />
@@ -125,16 +125,16 @@ class Player(Screen, InfoBarNotifications):
 			</widget>
 		</screen>
 		"""
-	PLAYER_IDLE	= 0
-	PLAYER_PLAYING 	= 1
-	PLAYER_PAUSED 	= 2
+	PLAYER_IDLE = 0
+	PLAYER_PLAYING = 1
+	PLAYER_PAUSED = 2
 
 	def __init__(self, session, service, lastservice):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
 
-		self.session     = session
-		self.service     = service
+		self.session = session
+		self.service = service
 		self.lastservice = lastservice
 		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"],
 		{
@@ -304,7 +304,7 @@ class PlayerLauncher:
 		for fmtstring in tmp_fmtUrlDATA:
 			if 'url_encoded_fmt_stream_map' in videoinfo:
 				(fmturl, fmtid) = fmtstring.split('&itag=')
-				if fmturl.find("url=") !=-1:
+				if fmturl.find("url=") != -1:
 					fmturl = fmturl.replace("url=", "")
 			else:
 				(fmtid, fmturl) = fmtstring.split('|')
@@ -422,7 +422,7 @@ class PlayerService:
 		conn.close()
 
 class BrowserLauncher(ConfigListScreen, Screen):
-	skin=   """
+	skin = """
 		<screen name="BrowserLauncher" position="center,60" size="415,630" title="Web Browser">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="75,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="225,0" size="140,40" alphatest="on" />
@@ -489,7 +489,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		change_galpha(set_const=False, set_value=False)
 		self.saveConfig()
 		self.service.stop()
-		excute_cmd("killall -15 %s"%(self.browser_name))
+		excute_cmd("killall -15 %s" % (self.browser_name))
 		excute_cmd("echo 60 > /proc/sys/vm/swappiness")
 		excute_cmd("echo 0 > /proc/stb/fp/mouse")
 		enable_rc_mouse(False) #rc-mouse off
@@ -526,7 +526,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 	# mouse:keyboard:alpha_value
 	def saveConfig(self):
 		if is_process_running(self.browser_name) == False:
-			command = "echo \"%s:%s:%d:%s\" > %s"%(self.mouse.value, self.keyboard.value, int(self.alpha.value), self.langs.value, self.conf_file)
+			command = "echo \"%s:%s:%d:%s\" > %s" % (self.mouse.value, self.keyboard.value, int(self.alpha.value), self.langs.value, self.conf_file)
 			excute_cmd(command)
 
 	# mouse:keyboard:alpha_value
@@ -535,14 +535,14 @@ class BrowserLauncher(ConfigListScreen, Screen):
 			return
 		config_list = open(self.conf_file).readline().strip().split(':')
 		if len(config_list) == 3:
-			self.conf_mouse 	= config_list[0]
-			self.conf_keyboard 	= config_list[1]
-			self.conf_alpha 	= config_list[2]
+			self.conf_mouse = config_list[0]
+			self.conf_keyboard = config_list[1]
+			self.conf_alpha = config_list[2]
 		elif len(config_list) == 4:
-			self.conf_mouse 	= config_list[0]
-			self.conf_keyboard 	= config_list[1]
-			self.conf_alpha 	= config_list[2]
-			self.conf_keymap 	= config_list[3]
+			self.conf_mouse = config_list[0]
+			self.conf_keyboard = config_list[1]
+			self.conf_alpha = config_list[2]
+			self.conf_keymap = config_list[3]
 		print("load config : ", config_list)
 
 	def resetExitCond(self):
@@ -555,11 +555,11 @@ class BrowserLauncher(ConfigListScreen, Screen):
 
 
 	def createConfig(self):
-		self.name_list  = []
+		self.name_list = []
 		self.mouse_list = None
 		self.keyboard_list = None
 		
-		self.devices = [(x, iInputDevices.getDeviceName(x).replace("dreambox advanced remote control (native)", "Remote Control").replace("dreambox front panel", "Front Panel") + "(" + x  + ")") for x in iInputDevices.getDeviceList()]
+		self.devices = [(x, iInputDevices.getDeviceName(x).replace("dreambox advanced remote control (native)", "Remote Control").replace("dreambox front panel", "Front Panel") + "(" + x + ")") for x in iInputDevices.getDeviceList()]
 
 		if self.conf_mouse == "":
 			self.conf_mouse = "event1"
@@ -595,7 +595,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		self.timer_start.stop()
 
 		self.lock = True
-		excute_cmd("killall -15 %s"%(self.browser_name))
+		excute_cmd("killall -15 %s" % (self.browser_name))
 		excute_cmd("echo 0 > /proc/sys/vm/swappiness")
 
 		kbd_cmd = " "

@@ -65,22 +65,22 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 
 	def getFaninfo(self):
 		try:
-			value=int(open('/proc/stb/system/standby_fan_off', 'r').read())
+			value = int(open('/proc/stb/system/standby_fan_off', 'r').read())
 			if value == 0:
-				config.plugins.fansetups.standbymode.value="on"
+				config.plugins.fansetups.standbymode.value = "on"
 			else:
-				config.plugins.fansetups.standbymode.value="off"
-			value=int(open('/proc/stb/system/use_fan_timer', 'r').read())
+				config.plugins.fansetups.standbymode.value = "off"
+			value = int(open('/proc/stb/system/use_fan_timer', 'r').read())
 			if value == 0:
 				config.plugins.fansetups.usetimer.value = "off"
 			else:
 				config.plugins.fansetups.usetimer.value = "on"
-			time=int(open('/proc/stb/system/fan_on_time', 'r').read())
+			time = int(open('/proc/stb/system/fan_on_time', 'r').read())
 			if time > 0 and time < 101:
 				config.plugins.fansetups.fanontime.value = time
 			else:
 				config.plugins.fansetups.fanontime.value = 1
-			time=int(open('/proc/stb/system/fan_off_time', 'r').read())
+			time = int(open('/proc/stb/system/fan_off_time', 'r').read())
 			if time > 0 and time < 101:
 				config.plugins.fansetups.fanofftime.value = time
 			else:
@@ -142,8 +142,8 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 					open('/proc/stb/system/use_fan_timer', 'w').write('0')
 				else:
 					open('/proc/stb/system/use_fan_timer', 'w').write('1')
-					open('/proc/stb/system/fan_on_time', 'w').write('%s'%config.plugins.fansetups.fanontime.value)
-					open('/proc/stb/system/fan_off_time', 'w').write('%s'%config.plugins.fansetups.fanofftime.value)
+					open('/proc/stb/system/fan_on_time', 'w').write('%s' % config.plugins.fansetups.fanontime.value)
+					open('/proc/stb/system/fan_off_time', 'w').write('%s' % config.plugins.fansetups.fanofftime.value)
 		except:
 			print('Error write proc of fan')
 
@@ -166,8 +166,8 @@ def setfansetup(reason, **kwargs):
 				open('/proc/stb/system/use_fan_timer', 'w').write('0')
 			else:
 				open('/proc/stb/system/use_fan_timer', 'w').write('1')
-				open('/proc/stb/system/fan_on_time', 'w').write('%s'%config.plugins.fansetups.fanontime.value)
-				open('/proc/stb/system/fan_off_time', 'w').write('%s'%config.plugins.fansetups.fanofftime.value)
+				open('/proc/stb/system/fan_on_time', 'w').write('%s' % config.plugins.fansetups.fanontime.value)
+				open('/proc/stb/system/fan_off_time', 'w').write('%s' % config.plugins.fansetups.fanofftime.value)
 	except:
 		print('Error to set fan control')
 

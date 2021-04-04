@@ -34,18 +34,18 @@ def setProcValue(procPath, value):
 
 def getProcPath(encoder, configName):
 	_configName = {
-		"bitrate":	"bitrate",
-		"framerate":	"framerate",
-		"resolution": 	"display_format",
-		"aspectratio": 	"aspectratio",
-		"audiocodec": 	"audio_codec",
-		"videocodec": 	"video_codec",
-		"gopframeb": 	"gop_frameb",
-		"gopframep": 	"gop_framep",
-		"level": 	"level",
-		"profile": 	"profile",
-		"width": 	"width",
-		"height": 	"height",
+		"bitrate": "bitrate",
+		"framerate": "framerate",
+		"resolution": "display_format",
+		"aspectratio": "aspectratio",
+		"audiocodec": "audio_codec",
+		"videocodec": "video_codec",
+		"gopframeb": "gop_frameb",
+		"gopframep": "gop_framep",
+		"level": "level",
+		"profile": "profile",
+		"width": "width",
+		"height": "height",
 	}.get(configName)
 	return "/proc/stb/encoder/%s/%s" % (encoder, _configName)
 
@@ -138,7 +138,7 @@ if len(encoders) > 1:
 	encoders.sort()
 	for encoder in encoders:
 		choices.append((encoder, encoder))
-		SystemInfo["NoAuto"+str(encoder)] = True
+		SystemInfo["NoAuto" + str(encoder)] = True
 else:
 	choices.append(('0', '0'))
 	SystemInfo["NoAuto0"] = True
@@ -230,7 +230,7 @@ class TranscodingSetupInit:
 
 	def setAutomode(self, configElement, extra_args):
 		configName = "AutoMode"
-		SystemInfo["NoAuto"+str(extra_args[0])] = config.plugins.transcodingsetup.encoder[int(extra_args[0])].automode.value == 'Off'
+		SystemInfo["NoAuto" + str(extra_args[0])] = config.plugins.transcodingsetup.encoder[int(extra_args[0])].automode.value == 'Off'
 		if configElement.value == "On":
 			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "bitrate") and hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "framerate"):
 				config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.setValue("-1")
@@ -329,7 +329,7 @@ class TranscodingSetupInit:
 			self.pluginsetup.showMessage(msg, msgType)
 
 class TranscodingSetup(Screen, ConfigListScreen):
-	skin =  """
+	skin = """
 		<screen name="TranscodingSetup" position="center,center" size="600,450">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
@@ -357,7 +357,7 @@ class TranscodingSetup(Screen, ConfigListScreen):
 			TEXT = _("Transcoding and PIP are mutually exclusive.")
 		else:
 			TEXT = _("2nd transcoding and PIP are mutually exclusive.")
-		self["text"] = Label(_("%s")%TEXT)
+		self["text"] = Label(_("%s") % TEXT)
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
@@ -432,7 +432,7 @@ class TranscodingSetup(Screen, ConfigListScreen):
 			if self.automode is not None:
 				self.list.append(self.automode)
 
-			if SystemInfo["NoAuto"+str(encoder)]:
+			if SystemInfo["NoAuto" + str(encoder)]:
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "bitrate"):
 					self.list.append(getConfigListEntry(_("Bitrate"), config.plugins.transcodingsetup.encoder[int(encoder)].bitrate))
 				if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "framerate"):
@@ -469,7 +469,7 @@ class TranscodingSetup(Screen, ConfigListScreen):
 			self["config"].onSelectionChanged.append(self.showDescription)
 
 	def showDescription(self):
-		configName = "<%s>\n"%self["config"].getCurrent()[0]
+		configName = "<%s>\n" % self["config"].getCurrent()[0]
 		current = self["config"].getCurrent()[1]
 		className = self["config"].getCurrent()[1].__class__.__name__
 		text = ""

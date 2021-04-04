@@ -67,17 +67,17 @@ def wgetUrl(target, refer='', cookie=''):
 
 def resolve_http_redirect(url, depth=0):
 	if depth > 10:
-		raise Exception("Redirected "+depth+" times, giving up.")
+		raise Exception("Redirected " + depth + " times, giving up.")
 	o = urlparse.urlparse(url, allow_fragments=True)
 	conn = http_client.HTTPConnection(o.netloc)
 	path = o.path
 	if o.query:
-		path +='?'+o.query
+		path += '?' + o.query
 	conn.request("HEAD", path)
 	res = conn.getresponse()
 	headers = dict(res.getheaders())
 	if 'location' in headers and headers['location'] != url:
-		return resolve_http_redirect(headers['location'], depth+1)
+		return resolve_http_redirect(headers['location'], depth + 1)
 	else:
 		return url
 
@@ -90,7 +90,7 @@ def Csplit(data, string, number=None):
 
 def MPanelEntryComponent(channel, text, png):
 	res = [text]
-	res.append((eListboxPythonMultiContent.TYPE_TEXT, 200, 15, 800, 100, 0, RT_HALIGN_LEFT|RT_WRAP|RT_VALIGN_TOP, text))
+	res.append((eListboxPythonMultiContent.TYPE_TEXT, 200, 15, 800, 100, 0, RT_HALIGN_LEFT | RT_WRAP | RT_VALIGN_TOP, text))
 	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 5, 150, 150, png))
 	return res
 
@@ -328,7 +328,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def showVideoInfo(self):
 		name = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName()
 		refstr = self.session.nav.getCurrentlyPlayingServiceReference().toString()
-		self.session.open(MessageBox, _(" Media Info\nName = " + name + '\nService = ' +refstr), MessageBox.TYPE_INFO, timeout=20, simple=True)
+		self.session.open(MessageBox, _(" Media Info\nName = " + name + '\nService = ' + refstr), MessageBox.TYPE_INFO, timeout=20, simple=True)
 
 class OpenUgConfigureScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
@@ -421,7 +421,7 @@ class OpenUgSetupScreen(Screen):
 			}, -2)
 		self.imagedir = '/tmp/openUgImg/'
 		self["info"] = Label(_("Open Uitzending Gemist\n\nBased on Xtrend code"))
-		self.mmenu= []
+		self.mmenu = []
 		if config.plugins.OpenUitzendingGemist.NPO.value:
 			self.mmenu.append((_("NPO Uitgelicht"), 'uitgelicht'))
 			self.mmenu.append((_("NPO Popular"), 'pop'))
@@ -445,10 +445,10 @@ class OpenUgSetupScreen(Screen):
 			selection = self.mmenu[self.CurSel]
 			self["menu"] = Label(selection[0])
 			self["menuup"] = Label()
-			if len(self.mmenu)==1:
+			if len(self.mmenu) == 1:
 				self["menudown"] = Label()
 			else:
-				selectiondown = self.mmenu[self.CurSel+1]
+				selectiondown = self.mmenu[self.CurSel + 1]
 			self["menudown"] = Label(selectiondown[0])
 		else:
 			self["menu"] = MenuList(self.mmenu)
@@ -480,7 +480,7 @@ class OpenUgSetupScreen(Screen):
 	def up(self):
 		sel = self.CurSel
 		if sel == 0:
-			self.CurSel = len(self.mmenu)-1
+			self.CurSel = len(self.mmenu) - 1
 		else:
 			self.CurSel = sel - 1
 		self.refresh()
@@ -488,8 +488,8 @@ class OpenUgSetupScreen(Screen):
 	def down(self):
 		sel = self.CurSel
 		print('len menu')
-		print(len(self.mmenu)-1)
-		if sel == len(self.mmenu)-1:
+		print(len(self.mmenu) - 1)
+		if sel == len(self.mmenu) - 1:
 			self.CurSel = 0
 		else:
 			self.CurSel = sel + 1
@@ -500,7 +500,7 @@ class OpenUgSetupScreen(Screen):
 		self.refresh()
 
 	def right(self):
-		self.CurSel = len(self.mmenu)-1
+		self.CurSel = len(self.mmenu) - 1
 		self.refresh()
 
 	def refresh(self):
@@ -509,12 +509,12 @@ class OpenUgSetupScreen(Screen):
 		if self.CurSel == 0:
 			self["menuup"].setText('')
 		else:
-			selection = self.mmenu[self.CurSel-1]
+			selection = self.mmenu[self.CurSel - 1]
 			self["menuup"].setText(selection[0])
-		if self.CurSel == len(self.mmenu)-1:
+		if self.CurSel == len(self.mmenu) - 1:
 			self["menudown"].setText('')
 		else:
-			selection = self.mmenu[self.CurSel+1]
+			selection = self.mmenu[self.CurSel + 1]
 			self["menudown"].setText(selection[0])
 
 	def keyboardCallback(self, callback=None):
@@ -658,10 +658,10 @@ class SmallScreen(Screen):
 			selection = self.mmenu[self.CurSel]
 			self["menu"] = Label(selection[0])
 			self["menuup"] = Label()
-			if len(self.mmenu)==1:
+			if len(self.mmenu) == 1:
 				self["menudown"] = Label()
 			else:
-				selectiondown = self.mmenu[self.CurSel+1]
+				selectiondown = self.mmenu[self.CurSel + 1]
 			self["menudown"] = Label(selectiondown[0])
 		else:
 			self["menu"] = MenuList(self.mmenu)
@@ -686,11 +686,11 @@ class SmallScreen(Screen):
 			if selection[2] == 'npo':
 				API_URL = 'http://ida.omroep.nl/aapi/?stream='
 				BASE_URL = 'http://livestreams.omroep.nl/live/npo/'
-				data = wgetUrl(API_URL+BASE_URL+selection[1], 'http://www.npo.nl')
+				data = wgetUrl(API_URL + BASE_URL + selection[1], 'http://www.npo.nl')
 				data = Csplit(data, "?hash=", 1)
 				data = Csplit(data, '"', 0)
 				if data != '':
-					url = BASE_URL+selection[1]+'?hash='+data
+					url = BASE_URL + selection[1] + '?hash=' + data
 					url = resolve_http_redirect(url, 3)
 					myreference = eServiceReference(4097, 0, url)
 					myreference.setName(selection[0])
@@ -709,14 +709,14 @@ class SmallScreen(Screen):
 	def up(self):
 		sel = self.CurSel
 		if sel == 0:
-			self.CurSel = len(self.mmenu)-1
+			self.CurSel = len(self.mmenu) - 1
 		else:
 			self.CurSel = sel - 1
 		self.refresh()
 
 	def down(self):
 		sel = self.CurSel
-		if sel == len(self.mmenu)-1:
+		if sel == len(self.mmenu) - 1:
 			self.CurSel = 0
 		else:
 			self.CurSel = sel + 1
@@ -727,7 +727,7 @@ class SmallScreen(Screen):
 		self.refresh()
 
 	def right(self):
-		self.CurSel = len(self.mmenu)-1
+		self.CurSel = len(self.mmenu) - 1
 		self.refresh()
 
 	def refresh(self):
@@ -736,12 +736,12 @@ class SmallScreen(Screen):
 		if self.CurSel == 0:
 			self["menuup"].setText('')
 		else:
-			selection = self.mmenu[self.CurSel-1]
+			selection = self.mmenu[self.CurSel - 1]
 			self["menuup"].setText(selection[0])
-		if self.CurSel == len(self.mmenu)-1:
+		if self.CurSel == len(self.mmenu) - 1:
 			self["menudown"].setText('')
 		else:
-			selection = self.mmenu[self.CurSel+1]
+			selection = self.mmenu[self.CurSel + 1]
 			self["menudown"].setText(selection[0])
 
 	def keyCancel(self):
@@ -1049,7 +1049,7 @@ class OpenUg(Screen):
 				self.clearList()
 				self.choice = 'rdec'
 				self.level = self.UG_LEVEL_SERIE
-				self.rdec(self.mediaList, 'http://www.decibel.nl'+retval[1], True)
+				self.rdec(self.mediaList, 'http://www.decibel.nl' + retval[1], True)
 				if len(self.mediaList) == 0:
 					self.mediaProblemPopup()
 				else:
@@ -1170,9 +1170,9 @@ class OpenUg(Screen):
 		else:
 			self.title = "Open Uitzending Gemist NPO"
 			if retval >= 128:
-				retval -=  128
+				retval -= 128
 				now = int(time.time())
-				worktime =  '%s' % (time.strftime("%H:%M:%S", time.localtime()))
+				worktime = '%s' % (time.strftime("%H:%M:%S", time.localtime()))
 				wtime = worktime.split(":")
 				if int(wtime[0]) < 6:
 					t = int(wtime[0]) + (24 - 6)
@@ -1232,7 +1232,7 @@ class OpenUg(Screen):
 		sc = AVSwitch().getFramebufferScale()
 		if (os_path.exists(thumbnailFile) == True):
 			start = self.page * self.MAX_PIC_PAGE
-			end  = (self.page * self.MAX_PIC_PAGE) + self.MAX_PIC_PAGE
+			end = (self.page * self.MAX_PIC_PAGE) + self.MAX_PIC_PAGE
 			count = 0
 			for x in self.mediaList:
 				if count >= start and count < end:
@@ -1367,12 +1367,12 @@ class OpenUg(Screen):
 	def doUGPlay(self):
 		out = wgetUrl(self.UG_BASE_URL + "/nu/bekijk/context/bekijk_gemist/trm_id/%s?XHRUrlAddOn=1" % (self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]))
 		print(out)
-		if out !='':
+		if out != '':
 			url = ''
 			tmp = out.split('\n')
 			for x in tmp:
 				if 'fetchLinkAndStart' in x:
-					tmp =  x.split("('")[1].split("'")[0]
+					tmp = x.split("('")[1].split("'")[0]
 					tmp = wgetUrl(self.UG_BASE_URL + tmp)
 					tmp = tmp.replace('\/', '/')
 					url = tmp.split("stream_link\":\"")[1].split("\",")[0]
@@ -1382,10 +1382,10 @@ class OpenUg(Screen):
 				myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
 				self.session.open(UGMediaPlayer, myreference, False)
 		else:
-			data=wgetUrl('http://ida.omroep.nl/npoplayer/i.js')
+			data = wgetUrl('http://ida.omroep.nl/npoplayer/i.js')
 			token = re.compile('.token\s*=\s*"(.*?)"', re.DOTALL + re.IGNORECASE).search(str(data)).group(1)
 			playerid = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-			data = wgetUrl('http://ida.omroep.nl/odi/?prid='+playerid+'&puboptions=adaptive&adaptive=yes&part=1&token='+token)
+			data = wgetUrl('http://ida.omroep.nl/odi/?prid=' + playerid + '&puboptions=adaptive&adaptive=yes&part=1&token=' + token)
 			if data != '':
 				json_data = json.loads(data)
 				streamdataurl = json_data['streams'][0]
@@ -1402,7 +1402,7 @@ class OpenUg(Screen):
 
 	def getRTLStream(self, url):
 		uuid = url
-		data = wgetUrl('http://www.rtl.nl/system/s4m/xldata/ux/'+ url +'?context=rtlxl&d=pc&fmt=adaptive&version=3')
+		data = wgetUrl('http://www.rtl.nl/system/s4m/xldata/ux/' + url + '?context=rtlxl&d=pc&fmt=adaptive&version=3')
 		state = 0
 		url = ''
 		name = ''
@@ -1418,7 +1418,7 @@ class OpenUg(Screen):
 			return ''
 
 	def getRTLSerie(self, weekList, url, Skey):
-		url = self.RTL_BASE_URL + '/ak='+ url +'/sk='+ Skey +'/pg=1'
+		url = self.RTL_BASE_URL + '/ak=' + url + '/sk=' + Skey + '/pg=1'
 		data = wgetUrl(url)
 		tmp = '\"schedule\":'
 		if tmp in data:
@@ -1681,7 +1681,7 @@ class OpenUg(Screen):
 		i = data.count(tmp)
 		j = 1
 		data = data.split(tmp)
-		while j<i:
+		while j < i:
 			short = ''
 			name = ''
 			date = ''

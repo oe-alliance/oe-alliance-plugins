@@ -12,7 +12,7 @@ from enigma import eTimer
 from . import cbcfg
 
 class ChromiumOSSettings(ConfigListScreen, Screen):
-    skin=   """
+    skin = """
             <screen position="center,center" size="600,220" title="ChromiumOS Settings">
                     <widget name="config" position="0,0" size="600,180" scrollbarMode="showOnDemand" />
 
@@ -37,7 +37,7 @@ class ChromiumOSSettings(ConfigListScreen, Screen):
                 "red": self.keyRed,
                 "cancel": self.keyRed,
         }, -2)
-        self["key_red"]   = StaticText(_("Cancel"))
+        self["key_red"] = StaticText(_("Cancel"))
         self["key_green"] = StaticText(_("Save"))
 
         self.makeConfigList()
@@ -79,11 +79,11 @@ class ChromiumOSSettings(ConfigListScreen, Screen):
     def makeConfigList(self):
         self.menulist = []
 
-        entryStartUp    = getConfigListEntry(_("Start Up URL"), config.plugins.browser.startup)
-        entryMarginX    = getConfigListEntry(_("X-margin on GUI"), config.plugins.browser.margin_x)
-        entryMarginY    = getConfigListEntry(_("Y-margin on GUI"), config.plugins.browser.margin_y)
+        entryStartUp = getConfigListEntry(_("Start Up URL"), config.plugins.browser.startup)
+        entryMarginX = getConfigListEntry(_("X-margin on GUI"), config.plugins.browser.margin_x)
+        entryMarginY = getConfigListEntry(_("Y-margin on GUI"), config.plugins.browser.margin_y)
         entryEnableNtpd = getConfigListEntry(_("Enable Ntpd when start ChromiumOS"), config.plugins.browser.enable_ntpd)
-        entryNtpdUri    = getConfigListEntry(_("Ntpd URL"), config.plugins.browser.ntpd_url)
+        entryNtpdUri = getConfigListEntry(_("Ntpd URL"), config.plugins.browser.ntpd_url)
 #               entryRcuType    = getConfigListEntry(_("RCU language type"), config.plugins.browser.rcu_type)
         self.menulist.append(entryStartUp)
         self.menulist.append(entryMarginX)
@@ -114,10 +114,10 @@ class ChromiumOSHelpWindow(Screen, HelpableScreen):
         Screen.__init__(self, session)
         HelpableScreen.__init__(self)
 
-        self["key_red"]    = StaticText(_("Exit"))
-        self["key_green"]  = StaticText(_("Global"))
+        self["key_red"] = StaticText(_("Exit"))
+        self["key_green"] = StaticText(_("Global"))
         self["key_yellow"] = StaticText(_("Mouse"))
-        self["key_blue"]   = StaticText(_("Keyboard"))
+        self["key_blue"] = StaticText(_("Keyboard"))
 
         self["actions"] = ActionMap(["DirectionActions", "OkCancelActions", "ColorActions"], {
                         "ok": self.keyRed,
@@ -213,7 +213,7 @@ class ChromiumOSHelpWindow(Screen, HelpableScreen):
         self.setHelpModeActions(self.MODE_KEYBOARD)
 
 class ChromiumOSWindow(ConfigListScreen, Screen):
-    skin =  """
+    skin = """
             <screen name="ChromiumOSWindow" position="center,center" size="550,200" title="Start ChromiumOS" >
                     <widget name="config" position="10,0" size="540,80" scrollbarMode="showOnDemand" />
                     <widget name="startdesc" position="10,80" size="395,40" valign="center" font="Regular;20" />
@@ -244,13 +244,13 @@ class ChromiumOSWindow(ConfigListScreen, Screen):
                 "yellow": self.keyYellow,
         }, -2)
 
-        self["key_green"]  = StaticText(_("Start"))
-        self["key_blue"]   = StaticText(_("Setting"))
+        self["key_green"] = StaticText(_("Start"))
+        self["key_blue"] = StaticText(_("Setting"))
         self["key_yellow"] = StaticText(_("Help"))
 
-        self["startdesc"]    = Label()
-        self["settingdesc"]  = Label()
-        self["helpdesc"]     = Label()
+        self["startdesc"] = Label()
+        self["settingdesc"] = Label()
+        self["helpdesc"] = Label()
 
         self.makeConfigList()
         self.onLayoutFinish.append(self.layoutFinished)
@@ -286,7 +286,7 @@ class ChromiumOSWindow(ConfigListScreen, Screen):
 
     def makeConfigList(self):
         self.menulist = []
-        entryURL     = getConfigListEntry(_("Start URL"), config.plugins.browser.startup)
+        entryURL = getConfigListEntry(_("Start URL"), config.plugins.browser.startup)
 #               entryRcuType = getConfigListEntry(_("RCU Type"), config.plugins.browser.rcu_type)
         self.menulist.append(entryURL)
 #               self.menulist.append(entryRcuType)

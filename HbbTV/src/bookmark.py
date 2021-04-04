@@ -4,19 +4,19 @@ from . import vbcfg
 
 class BookmarkData:
 	def __init__(self, _id, _title, _url, _parent, _type):
-		self.mId 	= _id
-		self.mTitle 	= _title
-		self.mUrl 	= _url
-		self.mParent 	= _parent
-		self.mType	= _type
+		self.mId = _id
+		self.mTitle = _title
+		self.mUrl = _url
+		self.mParent = _parent
+		self.mType = _type
 	def dump(self, _intent='  '):
 		print("%s-> %d, %s, %s, %d, %d" % (_intent, self.mId, self.mTitle, self.mUrl, self.mParent, self.mType))
 
 class CategoryData:
 	def __init__(self, _id, _name):
-		self.mId 	= _id
-		self.mName	= _name
-		self.mBookmarks	= {}
+		self.mId = _id
+		self.mName = _name
+		self.mBookmarks = {}
 
 	def setBookmarks(self, _bookmarks):
 		self.mBookmarks = _bookmarks
@@ -129,28 +129,28 @@ class BookmarkManager(SimpleConfigParser):
 			#manualmode = (model == "solo2" or model == "duo2" or model == "solose" or model == "zero")
 			manualmode = False
 
-			os.system('echo "[__SYS__]" > %s'%(_dbFileName))
-			os.system('echo "category_current_idx = 1" >> %s'%(_dbFileName))
+			os.system('echo "[__SYS__]" > %s' % (_dbFileName))
+			os.system('echo "category_current_idx = 1" >> %s' % (_dbFileName))
 			if manualmode:
-				os.system('echo "bookmark_current_idx = 2" >> %s'%(_dbFileName))
+				os.system('echo "bookmark_current_idx = 2" >> %s' % (_dbFileName))
 			else:
-				os.system('echo "bookmark_current_idx = 1" >> %s'%(_dbFileName))
-			os.system('echo "[c-1]" >> %s'%(_dbFileName))
-			os.system('echo "id = 1" >> %s'%(_dbFileName))
-			os.system('echo "name = My favorite" >> %s'%(_dbFileName))
-			os.system('echo "[b-1]" >> %s'%(_dbFileName))
-			os.system('echo "url = http://wiki.opena.tv/" >> %s'%(_dbFileName))
-			os.system('echo "id = 1" >> %s'%(_dbFileName))
-			os.system('echo "parent = 1" >> %s'%(_dbFileName))
-			os.system('echo "title = open Alliance WIKI" >> %s'%(_dbFileName))
-			os.system('echo "type = 0" >> %s'%(_dbFileName))
+				os.system('echo "bookmark_current_idx = 1" >> %s' % (_dbFileName))
+			os.system('echo "[c-1]" >> %s' % (_dbFileName))
+			os.system('echo "id = 1" >> %s' % (_dbFileName))
+			os.system('echo "name = My favorite" >> %s' % (_dbFileName))
+			os.system('echo "[b-1]" >> %s' % (_dbFileName))
+			os.system('echo "url = http://wiki.opena.tv/" >> %s' % (_dbFileName))
+			os.system('echo "id = 1" >> %s' % (_dbFileName))
+			os.system('echo "parent = 1" >> %s' % (_dbFileName))
+			os.system('echo "title = open Alliance WIKI" >> %s' % (_dbFileName))
+			os.system('echo "type = 0" >> %s' % (_dbFileName))
 			if manualmode:
-				os.system('echo "[b-2]" >> %s'%(_dbFileName))
-				os.system('echo "url = file:///usr/local/manual/main.html" >> %s'%(_dbFileName))
-				os.system('echo "id = 2" >> %s'%(_dbFileName))
-				os.system('echo "parent = 1" >> %s'%(_dbFileName))
-				os.system('echo "title = User Manual" >> %s'%(_dbFileName))
-				os.system('echo "type = 1" >> %s'%(_dbFileName))
+				os.system('echo "[b-2]" >> %s' % (_dbFileName))
+				os.system('echo "url = file:///usr/local/manual/main.html" >> %s' % (_dbFileName))
+				os.system('echo "id = 2" >> %s' % (_dbFileName))
+				os.system('echo "parent = 1" >> %s' % (_dbFileName))
+				os.system('echo "title = User Manual" >> %s' % (_dbFileName))
+				os.system('echo "type = 1" >> %s' % (_dbFileName))
 		self.init(_dbFileName)
 
 	def message(self, format, params=None):

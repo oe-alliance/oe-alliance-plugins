@@ -9,7 +9,7 @@ import select
 import struct
 from . import vbcfg
 
-_OPCODE  = {}
+_OPCODE = {}
 _BUFSIZE = 4096
 
 def SetHandler(opcode, handler):
@@ -94,7 +94,7 @@ class VBServerThread(threading.Thread):
 		opcode, result, length = struct.unpack('ibi', data[:hlen])
 		#vbcfg.DEBUG("%s %s %d" % (opcode, result, length))
 		if length > 0:
-			packet = data[hlen:hlen+length]
+			packet = data[hlen:hlen + length]
 		return [opcode, result, packet]
 
 	def assamble(self, opcode, result, packet):

@@ -10,7 +10,7 @@ from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText,
 from . import cbcfg
 
 class YoutubeTVSettings(ConfigListScreen, Screen):
-    skin=   """
+    skin = """
             <screen position="center,center" size="600,180" title="YouTube TV Settings">
                     <widget name="config" position="0,0" size="600,140" scrollbarMode="showOnDemand" />
 
@@ -35,7 +35,7 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
                 "red": self.keyRed,
                 "cancel": self.keyRed,
         }, -2)
-        self["key_red"]   = StaticText(_("Cancel"))
+        self["key_red"] = StaticText(_("Cancel"))
         self["key_green"] = StaticText(_("Save"))
 
         self.makeConfigList()
@@ -86,7 +86,7 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
         self["config"].l.setList(self.menulist)
 
 class YoutubeTVWindow(Screen, HelpableScreen):
-    skin =  """
+    skin = """
             <screen name="YoutubeTVWindow" position="center,center" size="550,200" title="Start YouTube TV" >
                     <widget name="infomation" position="5,0" size="540,80" valign="center" halign="center" font="Regular;20" />
                     <widget name="startdesc" position="10,80" size="395,40" valign="center" font="Regular;20" />
@@ -116,14 +116,14 @@ class YoutubeTVWindow(Screen, HelpableScreen):
                 "blue": self.keyBlue,
         }, -2)
 
-        self["key_green"]  = StaticText(_("Start"))
-        self["key_blue"]   = StaticText(_("Setting"))
+        self["key_green"] = StaticText(_("Start"))
+        self["key_blue"] = StaticText(_("Setting"))
         self["key_yellow"] = StaticText(_("Help"))
 
-        self["infomation"]   = Label()
-        self["startdesc"]    = Label()
-        self["settingdesc"]  = Label()
-        self["helpdesc"]     = Label()
+        self["infomation"] = Label()
+        self["startdesc"] = Label()
+        self["settingdesc"] = Label()
+        self["helpdesc"] = Label()
 
         self.onLayoutFinish.append(self.layoutFinished)
 

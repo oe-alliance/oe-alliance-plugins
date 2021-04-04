@@ -420,10 +420,10 @@ class MyBlowfish:
             self.P[i] = self.P[i] ^ data
 
         self.processTable(0, 0, self.P)
-        self.processTable(self.P[self.P_SZ-2], self.P[self.P_SZ-1], self.S0)
-        self.processTable(self.S0[self.SBOX_SK-2], self.S0[self.SBOX_SK-1], self.S1)
-        self.processTable(self.S1[self.SBOX_SK-2], self.S1[self.SBOX_SK-1], self.S2)
-        self.processTable(self.S2[self.SBOX_SK-2], self.S2[self.SBOX_SK-1], self.S3)
+        self.processTable(self.P[self.P_SZ - 2], self.P[self.P_SZ - 1], self.S0)
+        self.processTable(self.S0[self.SBOX_SK - 2], self.S0[self.SBOX_SK - 1], self.S1)
+        self.processTable(self.S1[self.SBOX_SK - 2], self.S1[self.SBOX_SK - 1], self.S2)
+        self.processTable(self.S2[self.SBOX_SK - 2], self.S2[self.SBOX_SK - 1], self.S3)
 
     def F(self, x):
         result = (((self.S0[(x >> 24)] + self.S1[(x >> 16) & 0xff]) ^ self.S2[(x >> 8) & 0xff]) + self.S3[x & 0xff])
@@ -437,12 +437,12 @@ class MyBlowfish:
             xl = xl ^ self.P[0]
             for i in range(1, self.ROUNDS, 2):
                 xr = xr ^ (self.F(xl) ^ self.P[i])
-                xl = xl ^ (self.F(xr) ^ self.P[i+1])
+                xl = xl ^ (self.F(xr) ^ self.P[i + 1])
 
-            xr = xr ^ self.P[self.ROUNDS+1]
+            xr = xr ^ self.P[self.ROUNDS + 1]
 
             table[s] = xr
-            table[s+1] = xl
+            table[s + 1] = xl
 
             xr = xl
             xl = table[s]
@@ -457,7 +457,7 @@ class MyBlowfish:
         b[offset + 0] = (i >> 24) & 0xff
 
     def unpad(self, a):
-        c = a[len(a)-1]
+        c = a[len(a) - 1]
         for i in range(c, 0, -1):
             a.pop()
     
@@ -469,7 +469,7 @@ class MyBlowfish:
 
         for i in range(self.ROUNDS, 0, -2):
             xr = xr ^ (self.F(xl) ^ self.P[i])
-            xl = xl ^ (self.F(xr) ^ self.P[i-1])
+            xl = xl ^ (self.F(xr) ^ self.P[i - 1])
 
         xr = xr ^ self.P[0]
 
@@ -481,7 +481,7 @@ class MyBlowfish:
         for i in range(0, len(byteArray), 8):
             blockBytes = []
             for j in range(0, 8):
-                blockBytes.append(byteArray[i+j])
+                blockBytes.append(byteArray[i + j])
             self.decryptBlock(blockBytes)
             decrypted.extend(blockBytes)
         self.unpad(decrypted)

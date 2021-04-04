@@ -7,7 +7,7 @@ import select
 import struct
 from . import cbcfg
 
-_OPCODE  = {}
+_OPCODE = {}
 _BUFSIZE = 4096
 
 _SOCKETFILE = None

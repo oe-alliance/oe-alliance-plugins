@@ -23,7 +23,7 @@ config.plugins.witaisttsetup.serverAccessToken = ConfigText(fixed_size=False, vi
 g_session = None
 
 class WitAiSttSetup(Screen, ConfigListScreen):
-	skin =	"""
+	skin = """
 		<screen position="center,center" size="550,350">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="55,10" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="355,10" size="140,40" alphatest="on" />
@@ -71,7 +71,7 @@ class WitAiSttSetup(Screen, ConfigListScreen):
 		from enigma import ePoint
 		help_win = self["config"].getCurrent()[1].help_window.instance
 		orgpos = help_win.position()
-		help_win.move(ePoint(orgpos.x(), orgpos.y()+pos))
+		help_win.move(ePoint(orgpos.x(), orgpos.y() + pos))
 		self.keyLeft()
 
 	def createConfig(self):

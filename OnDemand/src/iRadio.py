@@ -226,7 +226,7 @@ class shoutSubGenresMenu(Screen):
 
 	def __init__(self, session, action, value, url):
 		Screen.__init__(self, session)
-		Screen.setTitle(self, _("iRadio Player - SHOUTcast Sub Genres for " +value))
+		Screen.setTitle(self, _("iRadio Player - SHOUTcast Sub Genres for " + value))
 
 		self.action = action
 		self.value = value
@@ -248,7 +248,7 @@ class shoutSubGenresMenu(Screen):
 					# Iterate through the elements
 					parentid = str(elem.get('parentid'))
 					if parentid == '0':
-						name = str(elem.get('name'))+ " All"
+						name = str(elem.get('name')) + " All"
 						id = str(elem.get('id'))
 						children = "false"
 					else:
@@ -500,7 +500,7 @@ class shoutGenresThumb(StreamsThumbCommon):
 		}, -1)
 
 	def layoutFinished(self):
-		self.setTitle("SHOUTcast Radio Player: Listings for " +self.title)
+		self.setTitle("SHOUTcast Radio Player: Listings for " + self.title)
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -608,7 +608,7 @@ class shoutGenresThumb(StreamsThumbCommon):
 
 	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("SHOUTcast Radio Player: Search Listings for " +callback)
+			self.setTitle("SHOUTcast Radio Player: Search Listings for " + callback)
 			
 			genresearch = callback.replace(' ', '+')
 			searchurl = 'http://api.shoutcast.com/legacy/stationsearch?k=%s&search=%s' % (devid, str(genresearch))
@@ -663,24 +663,24 @@ class shoutGenresThumb(StreamsThumbCommon):
 					name_tmp = str(elem.get('name'))
 					name = checkUnicode(name_tmp)
 					id = str(elem.get('id'))
-					stream = plsurl+id
+					stream = plsurl + id
 					short_tmp = str(elem.get('ct'))
 					genre = str(elem.get('genre'))
 					bitrate = str(elem.get('br'))
 					audio = str(elem.get('mt'))
 					
 					if genre != 'None':
-						short = _("Recently Played: ")+checkUnicode(short_tmp)+_("\n\nGenre: ")+genre
+						short = _("Recently Played: ") + checkUnicode(short_tmp) + _("\n\nGenre: ") + genre
 					else:
-						short = _("Recently Played: ")+checkUnicode(short_tmp)
+						short = _("Recently Played: ") + checkUnicode(short_tmp)
 
 					if bitrate != 'None':
-						date1 = _("Bitrate: ")+bitrate+" kbps"
+						date1 = _("Bitrate: ") + bitrate + " kbps"
 					else:
 						date1 = _("Bitrate: Unknown")
 					
 					if audio != 'None':
-						duration = _("Audio: ")+audio
+						duration = _("Audio: ") + audio
 					else:
 						duration = _("Audio: Unknown")
 
@@ -922,7 +922,7 @@ class tuneinGenresThumb(StreamsThumbCommon):
 		}, -1)
 
 	def layoutFinished(self):
-		self.setTitle("Tunein Radio Player: Listings for " +self.title)
+		self.setTitle("Tunein Radio Player: Listings for " + self.title)
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -1018,7 +1018,7 @@ class tuneinGenresThumb(StreamsThumbCommon):
 
 	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("Tunein Radio Player: Search Listings for " +callback)
+			self.setTitle("Tunein Radio Player: Search Listings for " + callback)
 			stationsearch = callback.replace(' ', '+')
 			searchurl = 'http://opml.radiotime.com/Search.ashx?query=%s' % (stationsearch)
 			self.getTuneinMediaData(self.mediaList, searchurl)
@@ -1087,25 +1087,25 @@ class tuneinGenresThumb(StreamsThumbCommon):
 
 					if channel == 'link':
 						date1 = 'More --->'
-						short = '\nPress OK for sub items of '+name
+						short = '\nPress OK for sub items of ' + name
 						duration = ''
 					else:
 						bitrate = str(elem.get('bitrate'))
 						if bitrate == 'None':
 							date1 = _("Bitrate: Unknown")
 						else:
-							date1 = _("Bitrate: ")+bitrate+" kbps"
+							date1 = _("Bitrate: ") + bitrate + " kbps"
 
 						short_tmp = str(elem.get('subtext'))
 						if genre != 'None':
-							short = _("Recently Played: ")+checkUnicode(short_tmp)+_("\n\nGenre: ")+genre
+							short = _("Recently Played: ") + checkUnicode(short_tmp) + _("\n\nGenre: ") + genre
 						else:
-							short = _("Recently Played: ")+checkUnicode(short_tmp)
+							short = _("Recently Played: ") + checkUnicode(short_tmp)
 
 						if formats == 'None':
 							duration = _("Audio: Unknown")
 						else:
-							duration = _("Audio: ")+formats
+							duration = _("Audio: ") + formats
 
 					if self.showIcon == 'True':
 						icon = str(elem.get('image'))
@@ -1115,7 +1115,7 @@ class tuneinGenresThumb(StreamsThumbCommon):
 						icon = ''
 
 					if (channel != 'None'):
-						if (self.showWMA == 'False' and formats =='wma'):
+						if (self.showWMA == 'False' and formats == 'wma'):
 							print('getTuneinMediaData: Not showing WMA: showWMA: ', self.showWMA)
 							pass
 						else:

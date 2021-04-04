@@ -34,134 +34,134 @@ if os.path.exists("/proc/stb/info/boxtype"):
 	inimodel.close()
 
 	if info == "ini-1000":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS100_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-1000ru":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS100RU_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-1000sv":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS100SV_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-1000de":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS100DE_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-1000am":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS300AM_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-2000am":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS200AM_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-2000sv":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS200SV_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-3000":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS300_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-5000":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS500_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-5000ru":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS500RU_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-5000sv":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS500SV_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-7000":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS700_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-7012":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS712_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-7012au":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "RHS712AU_Micom.bin", "/dev/dbox/oled0;/dev/mcu;"]
 			}
 	elif info == "ini-8000am":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "INI800AM_Micom.bin", "/proc/vfd;/dev/mcu;"]
 			}
 	elif info == "ini-8000sv":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "INI800SV_Micom.bin", "/proc/vfd;/dev/mcu;"]
 			}
 	elif info == "ini-9000de":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "INI900DE_Micom.bin", "/proc/vfd;/dev/mcu;"]
 			}
 	elif info == "ini-9000ru":
-		fwlist= [
+		fwlist = [
 			("fp", _("Front Panel"))
 			]
-		fwdata= {
+		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "INI900RU_Micom.bin", "/proc/vfd;/dev/mcu;"]
 			}
 			
 class Filebrowser(Screen):
-	skin = 	"""
+	skin = """
 		<screen position="center,center" size="500,490" title="File Browser" >
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/buttons/yellow.png" position="5,7" size="140,40" alphatest="blend" />		
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/buttons/blue-340.png" position="150,7" size="340,40" alphatest="blend" />
@@ -179,19 +179,19 @@ class Filebrowser(Screen):
 		self["key_blue"] = StaticText(_("Download the firmware (latest)"))
 		self["key_yellow"] = StaticText(_("Cancel"))
 
-		self["status"]    = StaticText(" ")
+		self["status"] = StaticText(" ")
 		self["file_list"] = FileList("/", matchingPattern="^.*")
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", ],
 		{
-			"ok":     self.onClickOk,
+			"ok": self.onClickOk,
 			"cancel": self.onClickCancel,
-			"blue":   self.onClickBlue,
+			"blue": self.onClickBlue,
 			"yellow": self.onClickCancel,
-			"up":     self.onClickUp,
-			"down":   self.onClickDown,
-			"left":   self.onClickLeft,
-			"right":  self.onClickRight,
+			"up": self.onClickUp,
+			"down": self.onClickDown,
+			"left": self.onClickLeft,
+			"right": self.onClickRight,
 		}, -1)
 
 		self.resetGUI()
@@ -222,13 +222,13 @@ class Filebrowser(Screen):
 		if not os.path.exists(self.gbin):
 			self.session.open(MessageBox, _("Can't found binary file."), MessageBox.TYPE_INFO, timeout=10)
 			return
-		if not os.path.exists(self.gbin+".md5"):
+		if not os.path.exists(self.gbin + ".md5"):
 			self.session.open(MessageBox, _("Can't found MD5 file."), MessageBox.TYPE_INFO, timeout=10)
 			return
 		try:
 			def checkExt(ext):
 				name_ext = os.path.splitext(self["file_list"].getFilename())
-				return len(name_ext)==2 and ext.startswith(name_ext[1])
+				return len(name_ext) == 2 and ext.startswith(name_ext[1])
 			self.check_ext = False
 			if (self.firmware == "micom" and checkExt(".bin")):
 				self.check_ext = True
@@ -242,12 +242,12 @@ class Filebrowser(Screen):
 		if os.path.exists("/usr/bin/md5sum") == False:
 			self.session.open(MessageBox, _("Can't find /usr/bin/md5sum"), MessageBox.TYPE_INFO, timeout=10)
 			return
-		md5sum_A = os.popen("md5sum %s | awk \'{print $1}\'"%(self.gbin)).readline().strip()
-		md5sum_B = os.popen("cat %s.md5 | awk \'{print $1}\'"%(self.gbin)).readline().strip()
+		md5sum_A = os.popen("md5sum %s | awk \'{print $1}\'" % (self.gbin)).readline().strip()
+		md5sum_B = os.popen("cat %s.md5 | awk \'{print $1}\'" % (self.gbin)).readline().strip()
 		#print "[FirmwareUpgrade] - Verify : file[%s], md5[%s]"%(md5sum_A,md5sum_B)
 
 		if md5sum_A != md5sum_B:
-			self.session.open(MessageBox, _("Fail to verify data file. \nfile[%s]\nmd5[%s]"%(md5sum_A, md5sum_B)), MessageBox.TYPE_INFO, timeout=10)
+			self.session.open(MessageBox, _("Fail to verify data file. \nfile[%s]\nmd5[%s]" % (md5sum_A, md5sum_B)), MessageBox.TYPE_INFO, timeout=10)
 			return
 
 		
@@ -266,7 +266,7 @@ class Filebrowser(Screen):
 		tar = bd + "/" + tf
 		#print "[FirmwareUpgrade] - Download Info : [%s][%s]" % (uri, tar)
 		def doHook(blockNumber, blockSize, totalSize):
-			if blockNumber*blockSize > totalSize and cbfunc is not None:
+			if blockNumber * blockSize > totalSize and cbfunc is not None:
 				cbfunc(tar)
 		opener = urllib.URLopener()
 		try:
@@ -294,12 +294,12 @@ class Filebrowser(Screen):
 
 		def cbDownloadDone(tar):
 			try:
-				self["status"].setText("Downloaded : %s\nSelect to press OK, Exit to press Cancel."%(tar))
+				self["status"].setText("Downloaded : %s\nSelect to press OK, Exit to press Cancel." % (tar))
 			except:
 				pass
 		# target
 		global fwdata
-		root_uri  = fwdata[self.firmware][0]
+		root_uri = fwdata[self.firmware][0]
 		root_file = fwdata[self.firmware][1]
 		micom_url = root_uri + machine + "/" + root_file
 		
@@ -310,7 +310,7 @@ class Filebrowser(Screen):
 		os.system("rm -f /tmp/" + root_file)
 
 		# md5
-		if not self.doDownload(self.guri+".md5", self.gbin+".md5", cbfunc=cbDownloadDone, errmsg="Can't download the checksum file."):
+		if not self.doDownload(self.guri + ".md5", self.gbin + ".md5", cbfunc=cbDownloadDone, errmsg="Can't download the checksum file."):
 			self.resetGUI()
 			self.downloadLock = False
 			return
@@ -320,7 +320,7 @@ class Filebrowser(Screen):
 			self.downloadLock = False
 			return
 		# version
-		if not self.doDownload(self.guri+".version", self.gbin+".version", cbfunc=cbDownloadDone, errmsg="Can't download the version file."):
+		if not self.doDownload(self.guri + ".version", self.gbin + ".version", cbfunc=cbDownloadDone, errmsg="Can't download the version file."):
 			self.resetGUI()
 			self.downloadLock = False
 			return
@@ -379,7 +379,7 @@ class Filebrowser(Screen):
 		None
 
 class FirmwareUpgrade(Screen):
-	skin = 	"""
+	skin = """
 		<screen position="center,center" size="530,295" title="Firmware Upgrade" >
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/buttons/red.png" position="80,7" size="140,40" alphatest="blend" />
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/buttons/green.png" position="320,7" size="140,40" alphatest="blend" />
@@ -398,10 +398,10 @@ class FirmwareUpgrade(Screen):
 
 		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
-			"ok":      self.keyGreen,
-			"cancel":  self.keyRed,
-			"red":     self.keyRed,
-			"green":   self.keyGreen,
+			"ok": self.keyGreen,
+			"cancel": self.keyRed,
+			"red": self.keyRed,
+			"green": self.keyGreen,
 		}, -2)
 
 		self.list = []
@@ -458,7 +458,7 @@ class FirmwareUpgrade(Screen):
 	def cbSetStatus(self, data=None):
 		if data is not None:
 			try:
-				fp = open(data+'.version', "r")
+				fp = open(data + '.version', "r")
 				self.verfile = fp.readline()
 				fp.close()
 				self.verfile = self.verfile.strip("\n")

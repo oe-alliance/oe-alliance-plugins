@@ -5,7 +5,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 
 class BluetoothSetupConfig(Screen, ConfigListScreen):
-	skin =	"""
+	skin = """
 		<screen position="100,100" size="530,250">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="45,10" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="345,10" size="140,40" alphatest="on" />

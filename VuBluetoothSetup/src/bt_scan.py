@@ -144,7 +144,7 @@ class BluetoothDiscovery(BluetoothTask):
 	def startScan(self):
 		ret = self.vubt.startScan()
 		if ret:
-			self.scanAbortTimer.start(int(config.plugins.bluetoothsetup.scanTime.value)*1000, True)
+			self.scanAbortTimer.start(int(config.plugins.bluetoothsetup.scanTime.value) * 1000, True)
 			self.displayScanMsgStart()
 		else:
 			text = _("Scan failed! try again.")
@@ -524,7 +524,7 @@ class BluetoothRCUSetup(BluetoothDiscoveryScreen):
 	def startScan(self):
 		ret = self.vubt.startScan(True)
 		if ret:
-			self.scanAbortTimer.start(self.MaxscanTime*1000, True)
+			self.scanAbortTimer.start(self.MaxscanTime * 1000, True)
 			self.displayScanMsgStart()
 
 		else:
@@ -574,7 +574,7 @@ class BluetoothRCUSetup(BluetoothDiscoveryScreen):
 			self.pairingTimer.start(1000, True)
 		else:
 			if self.scanRetry:
-				self.scanRetry -=1
+				self.scanRetry -= 1
 				self.scanTimer.start(0, True)
 			else:
 				text = _("%s is not found.") % (bt_types.BT_VUPLUS_RCU_NAME)

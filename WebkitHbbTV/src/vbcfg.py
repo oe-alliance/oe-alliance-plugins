@@ -23,7 +23,7 @@ PLUGINROOT = "/usr/lib/enigma2/python/Plugins/Extensions/WebkitHbbTV"
 MANUALROOT = "/usr/local/manual"
 DFBRC = "/etc/directfbrc"
 
-SOCKETFILE  = None
+SOCKETFILE = None
 CONTROLFILE = None
 
 def getPosition():
@@ -102,7 +102,7 @@ def LogEntry(mode, string):
 	if g_debug:
 		print(strftime("%x %X", localtime()), "%5s [%12s]" % (mode, "Plugin"), string)
 	elif mode != "DEBUG":
-		print("[browser] %s"% string)
+		print("[browser] %s" % string)
 
 def DEBUG(string):
 	if g_debug:

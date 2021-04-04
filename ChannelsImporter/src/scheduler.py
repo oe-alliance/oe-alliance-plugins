@@ -82,20 +82,20 @@ class AutoChannelsImporterTimer:
 			if ChannelsImporterTime < now + atLeast:
 				if config.plugins.ChannelsImporter.scheduleRepeatInterval.value.isdigit(): # contains wait time in minutes
 					ChannelsImporterTime = now + (60 * int(config.plugins.ChannelsImporter.scheduleRepeatInterval.value))
-					while (int(ChannelsImporterTime)-30) < now:
+					while (int(ChannelsImporterTime) - 30) < now:
 						ChannelsImporterTime += 60 * int(config.plugins.ChannelsImporter.scheduleRepeatInterval.value)
 				elif config.plugins.ChannelsImporter.scheduleRepeatInterval.value == "daily":
-					ChannelsImporterTime += 24*3600
-					while (int(ChannelsImporterTime)-30) < now:
-						ChannelsImporterTime += 24*3600
+					ChannelsImporterTime += 24 * 3600
+					while (int(ChannelsImporterTime) - 30) < now:
+						ChannelsImporterTime += 24 * 3600
 				elif config.plugins.ChannelsImporter.scheduleRepeatInterval.value == "weekly":
-					ChannelsImporterTime += 7*24*3600
-					while (int(ChannelsImporterTime)-30) < now:
-						ChannelsImporterTime += 7*24*3600
+					ChannelsImporterTime += 7 * 24 * 3600
+					while (int(ChannelsImporterTime) - 30) < now:
+						ChannelsImporterTime += 7 * 24 * 3600
 				elif config.plugins.ChannelsImporter.scheduleRepeatInterval.value == "monthly":
-					ChannelsImporterTime += 30*24*3600
-					while (int(ChannelsImporterTime)-30) < now:
-						ChannelsImporterTime += 30*24*3600
+					ChannelsImporterTime += 30 * 24 * 3600
+					while (int(ChannelsImporterTime) - 30) < now:
+						ChannelsImporterTime += 30 * 24 * 3600
 			next = ChannelsImporterTime - now
 			self.channelsimportertimer.startLongTimer(next)
 		else:

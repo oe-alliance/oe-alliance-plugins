@@ -62,7 +62,7 @@ def wgetUrl(target):
 
 def calcDuration(miliseconds):
 	try:
-		mins = int((miliseconds / (1000*60)))
+		mins = int((miliseconds / (1000 * 60)))
 		duration = str(mins)
 		return str(duration)
 	except (Exception) as exception:
@@ -203,7 +203,7 @@ class StreamsMenu(Screen):
 
 def findPlayUrl(showID, **kwargs):
 	# Take the accepted showID and append it onto the url below.
-	url = 'http://feeds.rasset.ie/rteavgen/player/playlist?type=iptv1&showId='+showID
+	url = 'http://feeds.rasset.ie/rteavgen/player/playlist?type=iptv1&showId=' + showID
 
 	try:
 		html = wgetUrl(url)
@@ -211,7 +211,7 @@ def findPlayUrl(showID, **kwargs):
 		# If zero, an error occurred retrieving the url, pass empty string back
 		if html:
 			links = (re.compile('url="rtmpe://fmsod.rte.ie/rtevod/mp4:(.+?)" type="video/mp4"').findall(html)[0])
-			fileUrl = "rtmpe://fmsod.rte.ie/rtevod/ app=rtevod/ swfUrl=http://www.rte.ie/player/assets/player_458.swf swfVfy=1 timeout=180 playpath=mp4:"+links
+			fileUrl = "rtmpe://fmsod.rte.ie/rtevod/ app=rtevod/ swfUrl=http://www.rte.ie/player/assets/player_458.swf swfVfy=1 timeout=180 playpath=mp4:" + links
 			return fileUrl
 		else:
 			return ""
@@ -245,7 +245,7 @@ class StreamsThumb(StreamsThumbCommon):
 		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
-		self.setTitle("RTE Player: Listings for " +self.title)
+		self.setTitle("RTE Player: Listings for " + self.title)
 
 	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
@@ -263,7 +263,7 @@ class StreamsThumb(StreamsThumbCommon):
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
 			
-		elif  retval == 'programmeListMenu':
+		elif retval == 'programmeListMenu':
 			self.canBeMultiple(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
@@ -275,7 +275,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("RTE Player: Search Listings for " +callback)
+			self.setTitle("RTE Player: Search Listings for " + callback)
 			self.getSearchMediaData(self.mediaList, self.url + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
@@ -303,13 +303,13 @@ class StreamsThumb(StreamsThumbCommon):
 ##############################################################
 
 	def canBeMultiple(self, weekList, showID):
-		url = 'http://www.rte.ie/player/ie/show/'+showID
+		url = 'http://www.rte.ie/player/ie/show/' + showID
 
 		showIDs = []
 		
 		try: 
 			parser = etree.HTMLParser(encoding='utf-8')
-			tree   = etree.parse(url, parser)
+			tree = etree.parse(url, parser)
 
 			for shows in tree.xpath('//div[@class="more-videos-pane"]//article[@class="thumbnail-module"]//a[@class="thumbnail-programme-link"]/@href'):
 				show_split = shows.rsplit('/', 2)
@@ -334,7 +334,7 @@ class StreamsThumb(StreamsThumbCommon):
 		duration = ''
 
 		for show in showIDs:
-			newUrl = 'http://feeds.rasset.ie/rteavgen/player/playlist?showId='+show
+			newUrl = 'http://feeds.rasset.ie/rteavgen/player/playlist?showId=' + show
 
 			try:
 				# Parse the XML with lxml
@@ -376,29 +376,29 @@ class StreamsThumb(StreamsThumbCommon):
 					try:
 						lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[1].text), "%Y-%m-%dT%H:%M:%S+00:00"))) #2012-12-31T12:54:29+00:00
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-						date1 = _("Added: ")+str(date_tmp)
+						date1 = _("Added: ") + str(date_tmp)
 					except (Exception) as exception:
 						lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[1].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-						date1 = _("Added: ")+str(date_tmp)
+						date1 = _("Added: ") + str(date_tmp)
 						print("canBeMultiple: date1 parse error: ", exception)
 
 					name = checkUnicode(name_tmp)
 					short = checkUnicode(short_tmp)
 
 					# Calcualte the stream duration
-					duration = _("Duration: ")+str(calcDuration(millisecs))
+					duration = _("Duration: ") + str(calcDuration(millisecs))
 
 					# Only set the Icon if they are enabled
 					if self.showIcon == 'True':
 						try:
 							icon_url = str(elem[22].attrib.get('url'))
-							icon = icon_url[0:-7]+"-261.jpg"
+							icon = icon_url[0:-7] + "-261.jpg"
 						except (Exception) as exception:
 							print("canBeMultiple: icon parse error: ", exception)
 							icon = ''
 					else:
-						icon=''
+						icon = ''
 
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
@@ -457,11 +457,11 @@ class StreamsThumb(StreamsThumbCommon):
 				try:
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[3].text), "%Y-%m-%dT%H:%M:%S+00:00"))) #2012-12-31T12:54:29+00:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-					date1 = _("Added: ")+str(date_tmp)
+					date1 = _("Added: ") + str(date_tmp)
 				except (Exception) as exception:
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[3].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-					date1 = _("Added: ")+" "+str(date_tmp)
+					date1 = _("Added: ") + " " + str(date_tmp)
 					print("getMediaData: date1 parse error: ", exception)
 
 				name = checkUnicode(name_tmp)
@@ -471,16 +471,16 @@ class StreamsThumb(StreamsThumbCommon):
 				if self.showIcon == 'True':
 					try:
 						icon_url = str(elem[23].attrib.get('url'))
-						icon = icon_url[0:-4]+"-261.jpg" # higher quality image 261x147
+						icon = icon_url[0:-4] + "-261.jpg" # higher quality image 261x147
 						#icon = line[5] lower quality image 150x84
 					except (Exception) as exception:
 						print("getMediaData: icon parse error: ", exception)
 						icon = ''
 				else:
-					icon=''
+					icon = ''
 
 				# Calcualte the stream duration
-				duration = _("Duration: ")+str(calcDuration(millisecs))
+				duration = _("Duration: ") + str(calcDuration(millisecs))
 
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
@@ -520,11 +520,11 @@ class StreamsThumb(StreamsThumbCommon):
 				try:
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[4].text), "%Y-%m-%dT%H:%M:%S+00:00"))) #2012-12-31T12:54:29+00:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-					date1 = _("Added:")+" "+str(date_tmp)
+					date1 = _("Added:") + " " + str(date_tmp)
 				except (Exception) as exception:
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[4].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-					date1 = _("Added: ")+str(date_tmp)
+					date1 = _("Added: ") + str(date_tmp)
 					print("getCatsMediaData: date1 parse error: ", exception)
 
 				stream = checkUnicode(stream_tmp)
@@ -536,12 +536,12 @@ class StreamsThumb(StreamsThumbCommon):
 				if self.showIcon == 'True':
 					try:
 						icon_url = str(elem[23].attrib.get('url'))
-						icon = icon_url[0:-4]+"-261.jpg" # higher quality image 261x147
+						icon = icon_url[0:-4] + "-261.jpg" # higher quality image 261x147
 					except (Exception) as exception:
 						print("getCatsMediaData: icon parse error: ", exception)
 						icon = ''
 				else:
-					icon=''
+					icon = ''
 
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
@@ -582,7 +582,7 @@ class StreamsThumb(StreamsThumbCommon):
 						print("getSearchMediaData: icon parse error: ", exception)
 						icon = ''
 				else:
-					icon=''
+					icon = ''
 
 				try:
 					name_tmp = str(title.text_content())
@@ -599,7 +599,7 @@ class StreamsThumb(StreamsThumbCommon):
 					stream = ''
 				
 				try:
-					date1 = _("Added: ")+str(select(".search-programme-episodes").text_content())
+					date1 = _("Added: ") + str(select(".search-programme-episodes").text_content())
 				except (Exception) as exception:
 					print("getSearchMediaData: date1 parse error: ", exception)
 					date1 = ''

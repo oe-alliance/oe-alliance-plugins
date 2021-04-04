@@ -980,7 +980,7 @@ class tvBaseScreen(tvAllScreen):
                             else:
                                 res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
                         else:
-                            png =  '%slogos/%sHD.png' % (PICPATH, x)
+                            png = '%slogos/%sHD.png' % (PICPATH, x)
                             if fileExists(png):
                                 res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
                         start = sub(' - ..:..', '', start)
@@ -3221,7 +3221,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                     titel = self.tvtitel[c][1]
                 except IndexError:
                     pass
-                    titel=''
+                    titel = ''
 
                 self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='TV Spielfilm Suche:', text=titel)
             except IndexError:
@@ -8218,7 +8218,7 @@ class TVHeuteView(tvBaseScreen):
         sender = re.findall('<h3>(.*?)</h3>', bereichtop)
         if sender is not None:
             for i in range(1,7):
-                self['sender%s' % i].setText(sender[i-1])
+                self['sender%s' % i].setText(sender[i - 1])
                 self['sender%s' % i].show()
         else:
             for i in range(1,7):
@@ -8317,9 +8317,9 @@ class TVHeuteView(tvBaseScreen):
                 if search('TIME', x) is not None:
                     x = sub('TIME', '', x)
                     if currentitem != None:
-                        self.tventriess[midx-1].append(currentitem)
-                        self.tvlinks[midx-1].append(currentlink)
-                        self.tvtitels[midx-1].append(currenttitle)
+                        self.tventriess[midx - 1].append(currentitem)
+                        self.tvlinks[midx - 1].append(currentlink)
+                        self.tvtitels[midx - 1].append(currenttitle)
                     currentitem = [x]
                     if self.backcolor == True:
                         currentitem.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
@@ -8333,7 +8333,7 @@ class TVHeuteView(tvBaseScreen):
                         date = self.date + one_day
                     else:
                         date = self.date
-                    timer = str(date) + ':::' + x + ':::' + str(self.srefs[midx-1][0])
+                    timer = str(date) + ':::' + x + ':::' + str(self.srefs[midx - 1][0])
                     if timer in self.timer:
                         self.rec = True
                         png = ICONPATH + 'icon-small-recHD.png'
@@ -8369,9 +8369,9 @@ class TVHeuteView(tvBaseScreen):
                     currentitem.append(MultiContentEntryText(pos=(60, 0), size=(140, tpos), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=currenttitle))
 
         if currentitem != None:
-            self.tventriess[midx-1].append(currentitem)
-            self.tvlinks[midx-1].append(currentlink)
-            self.tvtitels[midx-1].append(currenttitle)
+            self.tventriess[midx - 1].append(currentitem)
+            self.tvlinks[midx - 1].append(currentlink)
+            self.tvtitels[midx - 1].append(currenttitle)
 
 
         for i in range(6):
@@ -9105,7 +9105,7 @@ class TVHeuteView(tvBaseScreen):
 #        self.picloads[idx].startDecode(self.pics[idx])
 
     def finish_decodelogo(self, idx):
-        ptr = self.picloads[idx+10].getData()
+        ptr = self.picloads[idx + 10].getData()
         if ptr != None:
             self['logo%s' % (idx + 1)].instance.setPixmap(ptr.__deref__())
 

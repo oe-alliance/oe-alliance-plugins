@@ -25,7 +25,7 @@ class PixmapLcd4linux(Renderer):
 		self.changed((self.CHANGED_DEFAULT,))
 
 	def changed(*s):
-		sel=s[0]
+		sel = s[0]
 		sel.L4Ltimer.stop()
 		if os.path.isfile("/tmp/l4ldisplay.png"):
 			try:

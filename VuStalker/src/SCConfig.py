@@ -157,7 +157,7 @@ class StalkerClient_SetupScreen(Screen, ConfigListScreen):
 			if current[1].help_window.instance is not None:
 				help_window_size = current[1].help_window.instance.size()
 				current[1].help_window.instance.show()
-				current[1].help_window.instance.move(ePoint(screen_pos.x() + (screen_size.width() - help_window_size.width())/2, screen_pos.y() + screen_size.height() + 10))
+				current[1].help_window.instance.move(ePoint(screen_pos.x() + (screen_size.width() - help_window_size.width()) / 2, screen_pos.y() + screen_size.height() + 10))
 
 	def hideKeypad(self):
 		current = self["config"].getCurrent()

@@ -206,7 +206,7 @@ class StalkerClient_ChannelSelection(Screen):
 		dh = self.session.desktop.size().height()
 		self.skin = StalkerClient_ChannelSelection.skin_default_1080p if dh > 720 else StalkerClient_ChannelSelection.skin_default
 
-		self["actions"]  = ActionMap(["OkCancelActions", "WizardActions", "ColorActions", "MenuActions", "ChannelSelectEPGActions"], {
+		self["actions"] = ActionMap(["OkCancelActions", "WizardActions", "ColorActions", "MenuActions", "ChannelSelectEPGActions"], {
 			"ok": self.onKeyOK,
 			"cancel": self.onKeyCancel,
 			"up": self.onKeyUp,
@@ -274,7 +274,7 @@ class StalkerClient_ChannelSelection(Screen):
 	def updateInfomation(self):
 		if self.scList.hasItems():
 			if int(self.scList.getPage()) > 0:
-				cmd = "%s/%s " %(self.scList.getPage(), self.m_last_page)
+				cmd = "%s/%s " % (self.scList.getPage(), self.m_last_page)
 			else:
 				cmd = ""
 
@@ -298,7 +298,7 @@ class StalkerClient_ChannelSelection(Screen):
 			if result:
 				try:
 					self.m_total_items[genre[0].getId()] = result.get('total_items')
-					genre[0].size =  self.m_total_items[genre[0].getId()]
+					genre[0].size = self.m_total_items[genre[0].getId()]
 				except Exception as e:
 					print("[StalkerClient]", e)
 					genre[0].size = -1
@@ -728,7 +728,7 @@ class StalkerList(MenuList):
 		self.item_refresh = False
 
 	def addItem(self, item):
-		self.list.append(StalkerEntryComponent(item, self.font_size, self.font_size/4, self.item_width, self.item_height))
+		self.list.append(StalkerEntryComponent(item, self.font_size, self.font_size / 4, self.item_width, self.item_height))
 		self.item_last += 1
 
 	def leftPage(self):

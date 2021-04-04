@@ -88,7 +88,7 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
 
-		self["actions"]  = ActionMap(["SetupActions"], {
+		self["actions"] = ActionMap(["SetupActions"], {
 			"ok": self.keyOK,
 			"cancel": self.keyCancel,
 			"save": self.keyOK,
@@ -108,7 +108,7 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.close()
 
 class OnDemand_Screen(Screen, ConfigListScreen):
-	skin = 	"""
+	skin = """
 		<screen position="e-203,0" size="203,e-0" backgroundColor="#ffffffff" flags="wfNoBorder" >
 			<widget name="arrowup" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/top.png,/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/arrow-up.png" position="e-203,0" size="203,25" alphatest="on" />
 			<widget name="PlayerList" position="0,25" size="203,670" backgroundColor="#80000000" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/selectbar.png" transparent="0" scrollbarMode="showNever" />
@@ -121,10 +121,10 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("OnDemand"))
 		
-		self["arrowup"]   = MultiPixmap()
-		self["arrowdown"]   = MultiPixmap()
+		self["arrowup"] = MultiPixmap()
+		self["arrowdown"] = MultiPixmap()
 
-		self["actions"]  = ActionMap(["SetupActions", "TimerEditActions"], {
+		self["actions"] = ActionMap(["SetupActions", "TimerEditActions"], {
 			"ok": self.keyOK,
 			"cancel": self.keyCancel,
 			"menu": self.keySetup,
@@ -184,7 +184,7 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 		self.close()
 
 class OnDemand_About(Screen):
-	skin="""
+	skin = """
 		<screen position="360,150" size="600,450" >
 			<widget name="about" position="10,10" size="580,430" font="Regular;15" />
 			<widget name="key_red" position="0,e-40" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>

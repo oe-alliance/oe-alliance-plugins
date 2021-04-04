@@ -69,7 +69,7 @@ class RCUSelect(Screen):
 
 	def MakeKeymapBckUp(self):
 		filename = '/usr/lib/enigma2/python/Plugins/Extensions/RCUSelect/conf/keymap.orig.xml'
-		cmd ='cp -f /usr/share/enigma2/keymap.xml ' + filename + ' &'
+		cmd = 'cp -f /usr/share/enigma2/keymap.xml ' + filename + ' &'
 		if not os.path.exists(filename):
 			os.system(cmd)
 

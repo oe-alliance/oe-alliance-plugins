@@ -93,9 +93,9 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 	</screen>
 	""" % (PLUGIN_PATH, PLUGIN_PATH)
 
-	PLAYER_IDLE	= 0
-	PLAYER_PLAYING 	= 1
-	PLAYER_PAUSED 	= 2
+	PLAYER_IDLE = 0
+	PLAYER_PLAYING = 1
+	PLAYER_PAUSED = 2
 	def __init__(self, session, service_ref, service, cbListCommand=None, cbServiceCommand=None):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
@@ -146,19 +146,19 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 
 		self['channel_icon'] = Pixmap()
 		self['channel_name'] = Label("")
-		self['channel_uri']  = Label("")
+		self['channel_uri'] = Label("")
 
-		self['eventNow_time']  = Label("")
-		self['eventNow_name']  = Label("")
-		self['eventNow_remaining']  = Label("")
-		self['eventNext_time']  = Label("")
-		self['eventNext_name']  = Label("")
-		self['eventNext_duration']  = Label("")
+		self['eventNow_time'] = Label("")
+		self['eventNow_name'] = Label("")
+		self['eventNow_remaining'] = Label("")
+		self['eventNext_time'] = Label("")
+		self['eventNext_name'] = Label("")
+		self['eventNext_duration'] = Label("")
 		self['eventProgressbar'] = ProgressBar()
 		self['eventProgressbar'].hide()
 
 		self.picload = ePicLoad()
-		self.scale   = AVSwitch().getFramebufferScale()
+		self.scale = AVSwitch().getFramebufferScale()
 		self.picload.PictureData.get().append(self.cbDrawChannelIcon)
 
 		self.event_timer = eTimer()
@@ -168,7 +168,7 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 		self.event_view_cur = 0
 		self.setServiceInfo(self.service)
 
-		chIcon = '%s/%s'%(PLUGIN_PATH, 'default.png')
+		chIcon = '%s/%s' % (PLUGIN_PATH, 'default.png')
 		self.picload.setPara((35, 35, self.scale[0], self.scale[1], False, 0, "#00000000"))
 		self.picload.startDecode(chIcon)
 
@@ -221,7 +221,7 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 					if cur_item == total_items:
 						t = scthreads.getRunningThread()
 						if t:
-							t.addTask(self.getEventNext, stalker.getSimpleDataTable, self.service.getId(), str(strftime('%Y-%m-%d', localtime(time() + 60*60*24))), "0")
+							t.addTask(self.getEventNext, stalker.getSimpleDataTable, self.service.getId(), str(strftime('%Y-%m-%d', localtime(time() + 60 * 60 * 24))), "0")
 					elif selected_item == max_page_items:
 						t = scthreads.getRunningThread()
 						if t:

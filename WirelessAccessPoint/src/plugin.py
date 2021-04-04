@@ -160,7 +160,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 	def formatAddr(self, address=[0, 0, 0, 0]):
 		if address is None:
 			return "N/A"
-		return "%d:%d:%d:%d"%(address[0], address[1], address[2], address[3])
+		return "%d:%d:%d:%d" % (address[0], address[1], address[2], address[3])
 
 	def checkRunHostapd(self):
 		global apModeConfig
@@ -170,18 +170,18 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 	def checkWirelessDevices(self):
 		global apModeConfig
 		self.wlanDeviceList = []
-		wlanIfaces =[]
+		wlanIfaces = []
 		for x in iNetwork.getInstalledAdapters():
 			if x.startswith('eth') or x.startswith('br') or x.startswith('mon'):
 				continue
-			elif os_path.exists("/tmp/bcm/%s"%x):
+			elif os_path.exists("/tmp/bcm/%s" % x):
 				continue
 			wlanIfaces.append(x)
-			description=self.getAdapterDescription(x)
+			description = self.getAdapterDescription(x)
 			if description == "Unknown network adapter":
 				self.wlanDeviceList.append((x, x))
 			else:
-				self.wlanDeviceList.append((x, description + " (%s)"%x))
+				self.wlanDeviceList.append((x, description + " (%s)" % x))
 
 		if len(self.wlanDeviceList) == 0:
 			self.msg = "Can not find wireless lan devices that support AP mode."
@@ -309,7 +309,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 			self.configList.append(self.wirelessModeEntry)
 			self.configList.append(self.channelEntry)
 			self.configList.append(self.ssidEntry)
-			if apModeConfig.setupmode.value  == "advanced":
+			if apModeConfig.setupmode.value == "advanced":
 				self.configList.append(self.beaconEntry)
 				self.configList.append(self.rtsThresholdEntry)
 				self.configList.append(self.fragmThresholdEntry)
@@ -441,7 +441,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 				return True
 		return False
 
-	def checkWep(self,  key):
+	def checkWep(self, key):
 		global apModeConfig
 		length = len(key)
 		if length == 0:
@@ -675,15 +675,15 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 			line = line.strip()
 			try:
 				(key, value) = line.split("=")
-				key=key.strip()
-				value=value.strip()
+				key = key.strip()
+				value = value.strip()
 			except:
 				continue
 			sysctlList[key] = value
 		sysctlList["net.ipv4.ip_forward"] = str(setValue)
 		fp = open(sysctlPath, "w")
 		for (key, value) in sysctlList.items():
-			fp.write("%s=%s\n"%(key, value))
+			fp.write("%s=%s\n" % (key, value))
 		fp.close()
 		return 0
 
@@ -694,15 +694,15 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 			files = listdir(classdir)
 			if 'driver' in files:
 				if os_path.realpath(driverdir).endswith('rtw_usb_drv'):
-					return _("Realtek")+ " " + _("WLAN adapter.")
+					return _("Realtek") + " " + _("WLAN adapter.")
 				elif os_path.realpath(driverdir).endswith('ath_pci'):
-					return _("Atheros")+ " " + _("WLAN adapter.")
+					return _("Atheros") + " " + _("WLAN adapter.")
 				elif os_path.realpath(driverdir).endswith('zd1211b'):
-					return _("Zydas")+ " " + _("WLAN adapter.")
+					return _("Zydas") + " " + _("WLAN adapter.")
 				elif os_path.realpath(driverdir).endswith('rt73'):
-					return _("Ralink")+ " " + _("WLAN adapter.")
+					return _("Ralink") + " " + _("WLAN adapter.")
 				elif os_path.realpath(driverdir).endswith('rt73usb'):
-					return _("Ralink")+ " " + _("WLAN adapter.")
+					return _("Ralink") + " " + _("WLAN adapter.")
 				else:
 					return str(os_path.basename(os_path.realpath(driverdir))) + " " + _("WLAN adapter")
 			else:
@@ -723,7 +723,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 	def printConfigList(self, confList):
 		printDebugMsg("== printConfigList ==")
 		for (key, entry) in confList.items():
-			printDebugMsg("%s = %s"%(key, str(entry.value)))
+			printDebugMsg("%s = %s" % (key, str(entry.value)))
 		
 		printDebugMsg("== printConfigList end ==")
 
@@ -834,8 +834,8 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 			else:
 				for (key, entry) in self.hostapdConf.items():
 					value = str(entry.value)
-					pos = line.find(key+'=')
-					if ((pos != -1) and (pos < 2)) and len(value)!=0:
+					pos = line.find(key + '=')
+					if ((pos != -1) and (pos < 2)) and len(value) != 0:
 						fix_line = "%s=%s\n" % (key, value)
 						break
 

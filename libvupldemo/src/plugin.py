@@ -8,7 +8,7 @@ RUNPATH = "/usr/bin"
 RUNNAME = "cube"
 
 class runScreen(Screen):
-	skin =	"""
+	skin = """
 		<screen position="center,center" size="640,480">
 		</screen>
 		"""

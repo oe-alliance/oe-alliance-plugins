@@ -41,8 +41,8 @@ class TransponderFiltering:
 				else:
 					t2mi_check = True # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
-					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
-					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier) and \
+					abs(t.frequency - k.frequency) < (tolerance * multiplier) and \
+					abs(t.symbol_rate - k.symbol_rate) < (tolerance * multiplier) and \
 					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode and \
 					t2mi_check:
 					tplist[x] = k
@@ -60,14 +60,14 @@ class TransponderFiltering:
 		for i in range(len(tplist)):
 			t = tplist[i]
 			found = False
-			for k in tplist[i+1:]:
+			for k in tplist[i + 1:]:
 				if hasattr(t, "t2mi_plp_id"):
 					t2mi_check = t.t2mi_plp_id == eDVBFrontendParametersSatellite.No_T2MI_PLP_Id or t.t2mi_plp_id == k.t2mi_plp_id
 				else:
 					t2mi_check = True # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
-					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
-					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier) and \
+					abs(t.frequency - k.frequency) < (tolerance * multiplier) and \
+					abs(t.symbol_rate - k.symbol_rate) < (tolerance * multiplier) and \
 					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode and \
 					t2mi_check:
 					found = True
@@ -88,8 +88,8 @@ class TransponderFiltering:
 				else:
 					t2mi_check = True # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
-					abs(t.frequency - k.frequency) < (tolerance*multiplier) and \
-					abs(t.symbol_rate - k.symbol_rate) < (tolerance*multiplier) and \
+					abs(t.frequency - k.frequency) < (tolerance * multiplier) and \
+					abs(t.symbol_rate - k.symbol_rate) < (tolerance * multiplier) and \
 					t.is_id == k.is_id and t.pls_code == k.pls_code and t.pls_mode == k.pls_mode and \
 					t2mi_check:
 					isnt_known = False
@@ -104,7 +104,7 @@ class TransponderFiltering:
 		lowest_sr_to_adjust = 4996
 		multiplier = 1000
 		# Cosmetic: tweak symbol rates to nearest multiple of 100 if this is closer than "pull_sr_max" away and t.symbol_rate > lowest_sr_to_adjust
-		if t.symbol_rate > (lowest_sr_to_adjust*multiplier) and abs(t.symbol_rate - int(round(t.symbol_rate, -5))) <= (pull_sr_max*multiplier):
+		if t.symbol_rate > (lowest_sr_to_adjust * multiplier) and abs(t.symbol_rate - int(round(t.symbol_rate, -5))) <= (pull_sr_max * multiplier):
 			t.symbol_rate = int(round(t.symbol_rate, -5))
 
 	def filterOffAdjacentSatellites(self, tplist, pos, degrees):

@@ -41,7 +41,7 @@ import re
 
 from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
-__plugin__  = "ITV Player: "
+__plugin__ = "ITV Player: "
 __version__ = "Version 1.0.2: "
 
 #===================================================================================
@@ -109,7 +109,7 @@ class StreamsThumb(StreamsThumbCommon):
 		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
-		self.setTitle("ITV Player: Listings for " +self.title)
+		self.setTitle("ITV Player: Listings for " + self.title)
 
 	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
@@ -127,13 +127,13 @@ class StreamsThumb(StreamsThumbCommon):
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
 
-		elif  retval == 'search':
+		elif retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
 
 	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("ITV Player: Search Listings for " +callback)
+			self.setTitle("ITV Player: Search Listings for " + callback)
 			self.getSearchMediaData(self.mediaList, self.url, callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
@@ -153,14 +153,14 @@ class StreamsThumb(StreamsThumbCommon):
 
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, fileUrl)
-				fileRef.setData(2, 10240*1024)
+				fileRef.setData(2, 10240 * 1024)
 				fileRef.setName(showName)
 				self.session.open(MoviePlayer, fileRef)
 			else:
 				if retMessage:
-					self.mediaProblemPopup(retMessage+str(showName))
+					self.mediaProblemPopup(retMessage + str(showName))
 				else:
-					self.mediaProblemPopup("Sorry, unable to find a playable stream for "+str(showName))
+					self.mediaProblemPopup("Sorry, unable to find a playable stream for " + str(showName))
 
 #===================================================================================
 	def getMediaData(self, weekList, url):
@@ -197,8 +197,8 @@ class StreamsThumb(StreamsThumbCommon):
 				day = int(date_tmp[8:10])
 				oldDate = date(int(year), int(month), int(day)) # year, month, day
 				dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-				newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16]
-				date1 = _("Last Updated:")+" "+str(newDate)
+				newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " + date_tmp[11:16]
+				date1 = _("Last Updated:") + " " + str(newDate)
 
 				name = checkUnicode(name_tmp)
 				short = "The current list of episodes stored for " + str(name)
@@ -224,7 +224,7 @@ class StreamsThumb(StreamsThumbCommon):
 		try:
 			# Parse the HTML with lxml
 			parser = etree.HTMLParser(encoding='utf-8')
-			tree   = etree.parse(url, parser)
+			tree = etree.parse(url, parser)
 
 			for elem in tree.xpath('//div[contains(@class,"listItem")]//div'):
 				#print elem.tag, elem.attrib, elem.text
@@ -244,7 +244,7 @@ class StreamsThumb(StreamsThumbCommon):
 				if elem.attrib.get('class') == "content":
 					contentSet = True
 					name_tmp = str(elem[0][0].text)
-					date1 = _("Added: ")+str(elem[1].text)
+					date1 = _("Added: ") + str(elem[1].text)
 					short_tmp = str(elem[2].text)
 					dur_tmp = str(elem[3][0].text)
 					duration = dur_tmp.strip()
@@ -300,8 +300,8 @@ class StreamsThumb(StreamsThumbCommon):
 					day = int(date_tmp[8:10])
 					oldDate = date(int(year), int(month), int(day)) # year, month, day
 					dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-					newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16]
-					date1 = _("Added: ")+str(newDate)
+					newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " + date_tmp[11:16]
+					date1 = _("Added: ") + str(newDate)
 
 					short = "The current list of episodes stored for " + str(name)
 
@@ -331,7 +331,7 @@ class StreamsThumb(StreamsThumbCommon):
 			if html:
 				# Parse the XML with LXML
 				parser = etree.XMLParser(encoding='utf-8')
-				tree   = etree.fromstring(html, parser)
+				tree = etree.fromstring(html, parser)
 
 				# Get the rtmpe stream URL
 				rtmp_list = tree.xpath("//VideoEntries//MediaFiles/@base")
@@ -392,7 +392,7 @@ class StreamsThumb(StreamsThumbCommon):
 			</tem:GetPlaylist>
 		  </SOAP-ENV:Body>
 		</SOAP-ENV:Envelope>
-		"""%episodeID
+		""" % episodeID
 
 		url = 'http://mercury.itv.com/PlaylistService.svc'
 		htmldoc = ""
@@ -416,7 +416,7 @@ class StreamsThumb(StreamsThumbCommon):
 			if 'InvalidGeoRegion' in exResp:
 				print(__plugin__, __version__, "Non UK Address!!")
 				
-				if  primaryDNS == str(config.ondemand.PrimaryDNS.default):
+				if primaryDNS == str(config.ondemand.PrimaryDNS.default):
 					print(__plugin__, __version__, "Non UK Address: NO DNS Set!! ", primaryDNS)
 					return ("", "Non-UK IP Address and no DNS set in OnDemand Settings! Not able to play ")
 				else:
@@ -437,7 +437,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 					except (Exception) as exception:
 						print(__plugin__, __version__, "wgetUrl: Unable to connect to DNS: ", exception)
-						return ("", "Could not connect to "+primaryDNS+", make sure your subscription is valid! Not able to play ")
+						return ("", "Could not connect to " + primaryDNS + ", make sure your subscription is valid! Not able to play ")
 			else:
 				print(__plugin__, __version__, "HTTPError: Error retrieving stream: ", exResp)
 				return ("", "Could not retrieve a playable stream for ")

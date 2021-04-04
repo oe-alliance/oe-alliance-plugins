@@ -348,21 +348,21 @@ class VBMain(Screen):
 
 	def start_browser(self):
 		if not self.check_browser():
-			os.system("%s/%s start"%(vbcfg.APPROOT, vbcfg.APP_RUN))
+			os.system("%s/%s start" % (vbcfg.APPROOT, vbcfg.APP_RUN))
 		return True
 
 	def stop_browser(self):
 		VBController.command('CONTROL_EXIT')
 		return True
 		try:
-			os.system("%s/%s stop"%(vbcfg.APPROOT, vbcfg.APP_RUN))
+			os.system("%s/%s stop" % (vbcfg.APPROOT, vbcfg.APP_RUN))
 		except:
 			pass
 		return True
 
 	def check_browser(self):
 		try:
-			ret = os.popen('%s/%s check'%(vbcfg.APPROOT, vbcfg.APP_RUN)).read()
+			ret = os.popen('%s/%s check' % (vbcfg.APPROOT, vbcfg.APP_RUN)).read()
 			return ret.strip() != "0"
 		except Exception as ErrMsg:
 			vbcfg.ERR("check browser running: %s" % ErrMsg)
@@ -370,7 +370,7 @@ class VBMain(Screen):
 
 	def restart_browser(self):
 		try:
-			os.system("%s/%s restart"%(vbcfg.APPROOT, vbcfg.APP_RUN))
+			os.system("%s/%s restart" % (vbcfg.APPROOT, vbcfg.APP_RUN))
 		except:
 			pass
 		return True

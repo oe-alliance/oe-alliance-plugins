@@ -180,7 +180,7 @@ class Channelnumber:
 		if chnr == "----":
 			vfd_write(chnr)
 		else:
-			if config.plugins.VFD_Giga.channelnrformat.value =='True':
+			if config.plugins.VFD_Giga.channelnrformat.value == 'True':
 				Channelnr = "%04d" % (int(chnr))
 			else:
 				Channelnr = "% 4d" % (int(chnr))
@@ -376,7 +376,7 @@ def initLED():
 	if BOX in ("gbtrio4k", "gbquad", "gbquad4k", "gbue4k", "gb800ueplus", "gbquadplus", "gbultraue", "gbultraueh", "gbipbox", "gbx1", "gbx2", "gbx3", "gbx3h", "gbx34k"):
 		cmd = 'echo STB does not support to show clock in Deep Standby'
 	else:
-		cmd = 'echo '+str(forcmd)+' > /proc/stb/fp/enable_clock'
+		cmd = 'echo ' + str(forcmd) + ' > /proc/stb/fp/enable_clock'
 	res = system(cmd)
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
@@ -589,9 +589,9 @@ def SetTime():
 	print("[LED-GIGA] Set RTC time")
 	import time
 	if time.localtime().tm_isdst == 0:
-		forsleep = 7200+time.timezone
+		forsleep = 7200 + time.timezone
 	else:
-		forsleep = 3600-time.timezone
+		forsleep = 3600 - time.timezone
 
 	t_local = time.localtime(int(time.time()))
 	print("set Gigabox RTC to %s (rtc_offset = %s sec.)" % (time.strftime("%Y/%m/%d %H:%M", t_local), forsleep))

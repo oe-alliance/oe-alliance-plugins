@@ -354,9 +354,9 @@ class BTAutoAudioConnect:
 	def setBTAudioDelay(self, updateNow=True):
 		global BT_AUDIO_DELAY_PROC
 		if self.btaudioActivated:
-			data = int(config.plugins.bluetoothsetup.audiodelay.value)*90
+			data = int(config.plugins.bluetoothsetup.audiodelay.value) * 90
 			if data < 0:
-				data = hex(int('0xffffffff',16)+data-1).strip('0x')
+				data = hex(int('0xffffffff',16) + data - 1).strip('0x')
 			elif data > 0:
 				data = hex(data).strip('0x')
 			else:
@@ -376,7 +376,7 @@ class BTAutoAudioConnect:
 	def isAudioDeviceConnected(self):
 		return bool(self.getAudioDeviceConnected())
 
-	def	getAudioDeviceConnected(self):
+	def getAudioDeviceConnected(self):
 		audio_connected = None
 		paired_devices = self.getPairedDevice()
 		if paired_devices:
@@ -416,8 +416,8 @@ class BTBatteryLevel:
 	def __init__(self):
 		self.batteryLevelTimer = eTimer()
 		self.batteryLevelTimer.callback.append(self.updateBatteryLevel)
-		self.batteryUpdateInterval = 60*60*12*1000 # every 12 hours
-		self.batteryCheckRetryTime = 15*1000 # maximum time to waiting voice stop
+		self.batteryUpdateInterval = 60 * 60 * 12 * 1000 # every 12 hours
+		self.batteryCheckRetryTime = 15 * 1000 # maximum time to waiting voice stop
 		self.lastMsgMday = -1
 		self.batteryLevel = 0
 
@@ -463,7 +463,7 @@ class BTOTAProcess:
 
 		self.firmwareCheckTimer = eTimer()
 		self.firmwareCheckTimer.callback.append(self.checkFWVersion)
-		self.FWCheckRetryTime = 15*1000 # maximum time to waiting voice stop
+		self.FWCheckRetryTime = 15 * 1000 # maximum time to waiting voice stop
 		self.bd_addr = None
 		self.rcuAppVersion = None
 
@@ -634,8 +634,8 @@ class BTHotplugEvent:
 		return self.vubt.checkBTUSB()
 
 class PyBluetoothInterface(VoiceEventHandler, BTVolumeControl, BTAutoAudioConnect, BTInStandby, BTBatteryLevel, BTOTAProcess, BTHotplugEvent):
-	BT_STATUS_DISABLED	= 0
-	BT_STATUS_ENABLED	= 1
+	BT_STATUS_DISABLED = 0
+	BT_STATUS_ENABLED = 1
 
 	def __init__(self):
 		self.vubt = vubt.Vu_PyBluetooth()
@@ -861,7 +861,7 @@ class PyBluetoothInterface(VoiceEventHandler, BTVolumeControl, BTAutoAudioConnec
 
 	def setVoiceCheckDB(self, value):
 		int_value = int(value)
-		print("[setVoiceCheckDB] value : %d" %  int_value)
+		print("[setVoiceCheckDB] value : %d" % int_value)
 		self.vubt.setVoiceCheckDB(int_value)
 
 pybluetooth_instance = PyBluetoothInterface()

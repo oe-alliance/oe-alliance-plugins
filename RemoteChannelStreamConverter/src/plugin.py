@@ -313,7 +313,7 @@ class StreamingChannelFromServerScreen(Screen):
 	def fetchUserBouquetsFinished(self, string):
 		self.readIndex += 1
 		if self.readIndex < len(self.workList):
-			self["statusbar"].setText(_("FTP reading bouquets %d of %d") % (self.readIndex, len(self.workList)-1))
+			self["statusbar"].setText(_("FTP reading bouquets %d of %d") % (self.readIndex, len(self.workList) - 1))
 			self.download(self.workList[self.readIndex]).addCallback(self.fetchUserBouquetsFinished).addErrback(self.fetchUserBouquetsFailed)
 		else:
 			if len(self.workList) > 0:
@@ -415,7 +415,7 @@ class StreamingChannelFromServerScreen(Screen):
 		for line in lines:
 			if step == 0:
 				if 'transponders' in line:
-					step =1
+					step = 1
 			elif step == 1:
 				if 'end' in line[:3]:
 					fp.write(line)
@@ -431,7 +431,7 @@ class StreamingChannelFromServerScreen(Screen):
 		for line in lines:
 			if step == 0:
 				if 'services' in line[:8]:
-					step =1
+					step = 1
 			elif step == 1:
 				if 'end' in line[:3]:
 					fp.write(line)
@@ -626,7 +626,7 @@ class StreamingChannelFromServerScreen(Screen):
 	def downloadAlternativesCallback(self, string):
 		self.alternativesCounter += 1
 		if self.alternativesCounter < len(self.alternatives):
-			self["statusbar"].setText(_("FTP reading alternatives %d of %d") % (self.alternativesCounter, len(self.alternatives)-1))
+			self["statusbar"].setText(_("FTP reading alternatives %d of %d") % (self.alternativesCounter, len(self.alternatives) - 1))
 			self.download(self.alternatives[self.alternativesCounter]).addCallback(self.downloadAlternativesCallback).addErrback(self.downloadAlternativesErrback)
 		else:
 			self["statusbar"].setText(_("Make your selection"))

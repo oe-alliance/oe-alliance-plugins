@@ -151,7 +151,7 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 
 	def newConfig(self):
 		cur = self["config"].getCurrent()
-		if len(cur)>1:
+		if len(cur) > 1:
 			if cur[1] in (config.plugins.TerrestrialScan.networkid_bool, config.plugins.TerrestrialScan.makebouquet, config.plugins.TerrestrialScan.lcndescriptor):
 				self.createSetup()
 

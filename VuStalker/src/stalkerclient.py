@@ -15,7 +15,7 @@ from uuid import getnode
 def get_mac_address():
 	macaddr = "00:00:00:00:00:00"
 	try:
-		macaddr = ':'.join(("%012X" % getnode())[i:i+2] for i in range(0, 12, 2))
+		macaddr = ':'.join(("%012X" % getnode())[i:i + 2] for i in range(0, 12, 2))
 	except Exception:
 		macaddr = "00:00:00:00:00:00"
 	return macaddr

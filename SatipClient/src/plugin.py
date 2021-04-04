@@ -110,7 +110,7 @@ class SATIPDiscovery:
 		if not address:
 			return None
 
-		return "%d.%d.%d.%d"%(address[0], address[1], address[2], address[3])
+		return "%d.%d.%d.%d" % (address[0], address[1], address[2], address[3])
 
 	def getEthernetAddr(self):
 		return self.formatAddr(iNetwork.getAdapterAttribute("eth0", "ip"))
@@ -209,12 +209,12 @@ class SATIPDiscovery:
 			AAA = location.find(':')
 			BBB = location.find('/')
 			if AAA == -1:
-				address = location[AAA+1: BBB]
+				address = location[AAA + 1: BBB]
 				port = "80"
 				request = location[BBB:]
 			else:
 				address = location[:AAA]
-				port = location[AAA+1: BBB]
+				port = location[AAA + 1: BBB]
 				request = location[BBB:]
 
 			#print("address2 : ", address)
@@ -228,7 +228,7 @@ class SATIPDiscovery:
 			print("http request error %s" % ErrMsg)
 			return -1
 
-		if res.status != 200 or res.reason !="OK":
+		if res.status != 200 or res.reason != "OK":
 			print("response error")
 			return -1
 
@@ -304,7 +304,7 @@ satipdiscovery = SATIPDiscovery()
 SATIP_CONF_CHANGED = False
 
 class SATIPTuner(Screen, ConfigListScreen):
-	skin =  """
+	skin = """
 		<screen position="center,center" size="590,370">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="40,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="230,0" size="140,40" alphatest="on" />
@@ -754,7 +754,7 @@ class SATIPClient(Screen):
 			for k in sorted(conf):
 				attr.append("%s:%s" % (k, conf[k]))
 
-			data += str(idx) + '=' + ",".join(attr)+"\n"
+			data += str(idx) + '=' + ",".join(attr) + "\n"
 
 		if data:
 			fd = open(SATIP_CONFFILE, 'w')

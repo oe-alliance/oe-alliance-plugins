@@ -94,7 +94,7 @@ def find_device(Anzahl, device, device2):
 	try:
 		print("[LCD4linux] looking for frame", Anzahl, device['name'], device['idVendor'], device['idProduct'], device2['idProduct'])
 		if Anzahl == 2:
-			d = list(usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True))+list(usb.core.find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True))
+			d = list(usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True)) + list(usb.core.find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True))
 			if isinstance(d, list):
 				if len(d) >= 2:
 					d = d[1]
@@ -103,7 +103,7 @@ def find_device(Anzahl, device, device2):
 			else:
 				d = None
 		else:
-			d = list(list(usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True))+list(usb.core.find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True)))[0]
+			d = list(list(usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True)) + list(usb.core.find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True)))[0]
 	except:
 		from traceback import format_exc
 		print("[LCD4linux] find exception")
@@ -155,8 +155,8 @@ def frame_switch(dev):
 	CTRL_RECIPIENT_DEVICE = 0
 	try:
 		time.sleep(0.5)
-		s="\x00"*251
-		dev.ctrl_transfer(0x00|0x80,  0x06, 0xfe, 0xfe, 0xfe)
+		s = "\x00" * 251
+		dev.ctrl_transfer(0x00 | 0x80, 0x06, 0xfe, 0xfe, 0xfe)
 #		dev.ctrl_transfer(0x00|0x80,  0x06, 0xfe, 0xfe, s, 0xfe )
 #		dev.ctrl_transfer(CTRL_TYPE_VENDOR | CTRL_IN | CTRL_RECIPIENT_DEVICE, 0x04, 0x00, 0x00, 1)
 #		result = dev.ctrl_transfer(CTRL_TYPE_VENDOR | CTRL_IN | CTRL_RECIPIENT_DEVICE, 0x04, 0x00, 0x00, 1)
@@ -204,6 +204,6 @@ def main():
 	image = image.resize((800, 480))
 	output = StringIO.StringIO()
 	image.save(output, "JPEG", quality=94)
-	pic  = output.getvalue()
+	pic = output.getvalue()
 	output.close()
 	write_jpg2frame(dev, pic)       
