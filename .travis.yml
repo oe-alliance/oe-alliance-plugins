@@ -41,7 +41,8 @@ matrix:
       before_install:
         - pyenv global 3.8
         - pip3 install --upgrade pip tox six autopep8
-
+      after_success:
+        - ./build.sh
 git:
   depth: 1
 
