@@ -1,4 +1,4 @@
-installdir = $(pkglibdir)/python/Plugins/Extensions/WebkitHbbTV
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/WebkitHbbTV
 
 install_PYTHON = \
 	keymap.xml \
