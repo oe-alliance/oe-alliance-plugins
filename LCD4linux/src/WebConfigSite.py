@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import
 from twisted.web import resource, http
 from .plugin import *
 from . import _
@@ -358,14 +358,12 @@ class LCD4linuxConfigweb(resource.Resource):
 				if ".Standby" in _a:
 					b = _a.replace(".Standby", ".MP")
 					if (" "+b) in list(zip(*L3))[2]:
-						print(a, b)
 						obja = eval(a)
 						objb = eval(b)
 						objb.value = obja.value
 				elif "." in _a:
 					b = _a.replace(".", ".MP")
 					if (" "+b) in list(zip(*L3))[2]:
-						print(a, b)
 						obja = eval(a)
 						objb = eval(b)
 						objb.value = obja.value
@@ -375,14 +373,12 @@ class LCD4linuxConfigweb(resource.Resource):
 				if ".MP" in _a:
 					b = _a.replace(".MP", ".Standby")
 					if (" "+b) in list(zip(*L4))[2]:
-						print(a, b)
 						obja = eval(a)
 						objb = eval(b)
 						objb.value = obja.value
 				elif "." in _a:
 					b = _a.replace(".", ".Standby")
 					if (" "+b) in list(zip(*L4))[2]:
-						print(a, b)
 						obja = eval(a)
 						objb = eval(b)
 						objb.value = obja.value
@@ -392,7 +388,6 @@ class LCD4linuxConfigweb(resource.Resource):
 				if ".MP" in _a:
 					b = _a.replace(".MP", ".")
 					if (" "+b) in list(zip(*L2))[2]:
-						print(a, b)
 						obja = eval(a)
 						objb = eval(b)
 						objb.value = obja.value
@@ -400,7 +395,6 @@ class LCD4linuxConfigweb(resource.Resource):
 				elif ".Standby" in _a:
 					b = _a.replace(".Standby", ".")
 					if (" "+b) in list(zip(*L2))[2]:
-						print(_a, b)
 						obja = eval(a)
 						objb = eval(b)
 						objb.value = obja.value
