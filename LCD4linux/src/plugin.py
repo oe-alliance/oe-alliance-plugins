@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8i"
+Version = "V5.0-r8j"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString
@@ -7599,7 +7599,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self["config"].setList(self.list4)
 
 	def Page(self):
-		if time()-self.toggle < 0.25: # changed from 0.5 to 0.25 due to todays faster CPUs
+		if time()-self.toggle < 0.2: # changed from 0.5 to 0.2 due to today's faster CPUs
 			L4log("to fast")
 			return
 		L4log("Page", self.mode)
@@ -9621,8 +9621,6 @@ class UpdateStatus(Screen):
 					x=self.WDay[ConfigWWW]["Wind"].split()
 					if len(x) == 3:
 						self.WDay[ConfigWWW]["Wind"]="%.1f m/s %s" % (float(int(x[0])/3.6), x[2])
-					else:
-						self.WDay[ConfigWWW]["Wind"]="? km/h ?"
 				self.WDay[ConfigWWW]["Cond"] = curr[0].getAttribute("skytext")
 				self.WDay[ConfigWWW]["Icon"] = curr[0].getAttribute("skycode") + ".png"
 				self.WDay[ConfigWWW]["Feel"] = curr[0].getAttribute("feelslike")
@@ -10987,7 +10985,9 @@ def LCD4linuxPIC(self, session):
 					else:
 						minus5 = -3
 						font = ImageFont.truetype(ConfigFont, int(13*Wmulti), encoding='unic')
-						Wind = (Wind.split(" ",2))
+						Wind = Wind.split(" ",2)
+						if len(Wind) < 3:
+							Wind = ["?", "km/h", "?"]
 						ShadowText(Wim, POSX-minus5, POSY+int(55*Wmulti), Wind[0]+" "+Wind[1], font, ConfigColor, ConfigShadow) #silver
 						ShadowText(Wim, POSX-minus5, POSY+int(67*Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(25*Wmulti), encoding='unic')
