@@ -95,22 +95,27 @@ def set_bgcolor(val):
 	os.system('mv /tmp/tmprc %s && rm -f /tmp/tmprc' % DFBRC)
 
 # for debug True
+#g_debug = True
 g_debug = False
 
 def LogEntry(mode, string):
 	if g_debug:
 		print(strftime("%x %X", localtime()), "%5s [%12s]" % (mode, "Plugin"), string)
 	elif mode != "DEBUG":
-		print("[browser]", string)
+		print("[browser] %s"% string)
 
 def DEBUG(string):
-	LogEntry("DEBUG", string)
+	if g_debug:
+		LogEntry("DEBUG", string)
 
 def LOG(string):
-	LogEntry("LOG", string)
+	if g_debug:
+		LogEntry("LOG", string)
 
 def WARN(string):
-	LogEntry("WARN", string)
+	if g_debug:
+		LogEntry("WARN", string)
 
 def ERR(string):
-	LogEntry("ERROR", string)
+	if g_debug:
+		LogEntry("ERROR", string)

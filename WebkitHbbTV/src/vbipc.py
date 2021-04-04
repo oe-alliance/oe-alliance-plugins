@@ -82,7 +82,7 @@ class VBServerThread(threading.Thread):
 		hlen = struct.calcsize('ibi')
 		packet = ""
 		opcode, result, length = struct.unpack('ibi', data[:hlen])
-		#vbcfg.DEBUG("%s %s %d" % (opcode, result, length))
+		vbcfg.DEBUG("%s %s %d" % (opcode, result, length))
 		if length > 0:
 			packet = data[hlen:hlen+length]
 		return [opcode, result, packet]
@@ -91,12 +91,16 @@ class VBServerThread(threading.Thread):
 		if packet is None:
 			packet = ""
 		header = struct.pack('ibi', opcode, (result and 1 or 0), len(packet))
-		return header + packet
+		if isinstance(packet, str):
+			return header + bytes(packet, 'utf-8',errors='ignore')
+		else:
+			return header + packet
 
 	def process(self, conn, addr):
 		read_data = conn.recv(_BUFSIZE)
 		request = self.parse(read_data)
 		opcode, result, read_packet = request[0], request[1], request[2]
+		vbcfg.DEBUG("opcode %d" % opcode)
 		result, send_packet = False, None
 		try:
 			result, send_packet = GetHandler(opcode)(result, read_packet)

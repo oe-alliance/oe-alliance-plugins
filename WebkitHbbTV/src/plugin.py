@@ -106,7 +106,7 @@ class VBHandler(VBHandlers):
 		return (True, None)
 
 	def _CB_CONTROL_TITLE(self, result, packet):
-		if packet.startswith('file://') or packet.startswith('http://'):
+		if packet.startswith(b'file://') or packet.startswith(b'http://'):
 			return (True, None)
 		for x in self.onSetTitleCB:
 			try:
@@ -118,7 +118,7 @@ class VBHandler(VBHandlers):
 		return (True, None)
 
 	def _CB_CONTROL_OK(self, result, packet):
-		if vbcfg.g_browser and packet.startswith('stop'):
+		if vbcfg.g_browser and packet.startswith(b'stop'):
 			vbcfg.g_browser.keyOK()
 		return (True, None)
 
@@ -172,7 +172,7 @@ class VBHandler(VBHandlers):
 		orgid = appinfo and appinfo["orgid"]
 		if (vbcfg.g_channel_info):
 			try:
-				data = struct.pack('iiiii', int(orgid), vbcfg.g_channel_info[0], vbcfg.g_channel_info[1], vbcfg.g_channel_info[2], len(vbcfg.g_channel_info[3])) + vbcfg.g_channel_info[3]
+				data = struct.pack('iiiii', int(orgid), vbcfg.g_channel_info[0], vbcfg.g_channel_info[1], vbcfg.g_channel_info[2], len(vbcfg.g_channel_info[3])) + bytes(vbcfg.g_channel_info[3], 'utf-8')
 			except Exception as err:
 				vbcfg.ERR(err)
 				return (False, None)
@@ -306,7 +306,7 @@ class VBMain(Screen):
 				reader = eAITSectionReader(demux, pmtid, sid)
 				if reader.doOpen(info, self.m_vuplus):
 					reader.doParseApplications()
-					reader.doDump()
+					#reader.doDump()
 				else:
 					vbcfg.ERR("no AIT")
 
