@@ -18,6 +18,7 @@ from .bt_task import BluetoothTask
 from . import bt_types
 from .OTAUpdate import GbRcuOtaUpdate
 
+
 class BluetoothSetup(BluetoothTask):
 	def __init__(self):
 		BluetoothTask.__init__(self)
@@ -165,6 +166,7 @@ class BluetoothSetup(BluetoothTask):
 	def eventHandled(self):
 		pass
 
+
 class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 	skin = """
 		<screen position="center,center" size="660,500">
@@ -193,6 +195,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 			<widget source="description" render="Label" position="30,410" size="600,90" font="Regular;28" halign="center" valign="center" />
 		</screen>
 		"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)

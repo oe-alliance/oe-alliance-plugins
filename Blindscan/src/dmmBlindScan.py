@@ -26,6 +26,7 @@ try:
 except:
 	boxtype = ""
 
+
 class TransponderSearchSupport:
 	def tryGetRawFrontend(self, feid, ret_boolean=True, do_close=True):
 		res_mgr = eDVBResourceManager.getInstance()
@@ -44,6 +45,7 @@ class TransponderSearchSupport:
 		if ret_boolean:
 			return False
 		return (False, False)
+
 
 class SatBlindscanState(Screen):
 	skin = """
@@ -177,6 +179,7 @@ class SatBlindscanState(Screen):
 	def keyCancel(self):
 		self.tmr.stop()
 		self.close(False)
+
 
 class SatelliteTransponderSearchSupport:
 	def satelliteTransponderSearchSessionClosed(self, *val):
@@ -498,6 +501,7 @@ class SatelliteTransponderSearchSupport:
 		self.timer.callback.append(self.updateStateSat)
 		self.timer.stop()
 		self.updateStateSat()
+
 
 class DmmBlindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTransponderSearchSupport):
 	skin = """

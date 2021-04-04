@@ -17,6 +17,7 @@ from . import tmdb
 from .__init__ import _
 from six.moves import reload_module
 
+
 def main(session, service, **kwargs):
 	reload_module(tmdb)
 	try:
@@ -25,6 +26,7 @@ def main(session, service, **kwargs):
 		import traceback
 		traceback.print_exc()
 		
+
 def eventinfo(session, eventName="", **kwargs):
 	reload_module(tmdb)
 	try:
@@ -37,6 +39,7 @@ def eventinfo(session, eventName="", **kwargs):
 		import traceback
 		traceback.print_exc()
 		
+
 def Plugins(**kwargs):
 	return [
 			PluginDescriptor(name=_("TMDb"), description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False),

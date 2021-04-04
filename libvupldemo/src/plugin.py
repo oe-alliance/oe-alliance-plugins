@@ -7,11 +7,13 @@ from os import system as cmd, popen
 RUNPATH = "/usr/bin"
 RUNNAME = "cube"
 
+
 class runScreen(Screen):
 	skin = """
 		<screen position="center,center" size="640,480">
 		</screen>
 		"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -38,8 +40,10 @@ class runScreen(Screen):
 		self.stop_application()
 		self.close()
 
+
 def runMenu(session, **kwargs):
 	session.open(runScreen)
+
 
 def Plugins(**kwargs):
 	l = []

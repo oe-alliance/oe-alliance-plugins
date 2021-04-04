@@ -1,6 +1,7 @@
 from Components.NimManager import nimmanager
 from enigma import eDVBFrontendParametersSatellite
 
+
 class TransponderFiltering:
 	def getKnownTransponders(self, pos):
 		tlist = []

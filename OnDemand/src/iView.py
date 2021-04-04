@@ -51,6 +51,8 @@ __plugin__ = "ABC iView"
 __version__ = "1.0.1"
 
 #==============================================================================
+
+
 def wgetUrl(target):
 	try:
 		req = Request(target)
@@ -64,6 +66,8 @@ def wgetUrl(target):
 		return ""
 
 #==============================================================================
+
+
 def calcDuration(seconds):
 	try:
 		mins = int((seconds / 60))
@@ -74,6 +78,8 @@ def calcDuration(seconds):
 		return ""
 
 #==============================================================================
+
+
 class iViewMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
@@ -161,6 +167,8 @@ class iViewMenu(Screen):
 				os_remove(os_path.join(root, name))
 
 #==============================================================================
+
+
 class StreamsMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
@@ -212,6 +220,7 @@ class StreamsMenu(Screen):
 
 #==============================================================================
 
+
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	stringValue = stringValue.replace('&#39;', '\'')
@@ -219,11 +228,14 @@ def checkUnicode(value, **kwargs):
 	return stringValue
 	
 #==============================================================================
+
+
 def remove_extra_spaces(data):
 	p = re.compile(r'\s+')
 	return p.sub(' ', data)
 
 #==============================================================================
+
 
 def main(session, **kwargs):
 	action = "start"
@@ -231,6 +243,8 @@ def main(session, **kwargs):
 	start = session.open(iViewMenu, action, value)
 
 #==============================================================================	   
+
+
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/iView.png"
@@ -617,7 +631,6 @@ class StreamsThumb(StreamsThumbCommon):
 					except (Exception) as exception:
 						short = ""
 					
-									
 					# Only output the names that match the search query
 					if re.search(query, name, re.IGNORECASE) or re.search(query, short, re.IGNORECASE):
 						try:

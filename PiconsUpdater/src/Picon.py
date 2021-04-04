@@ -15,6 +15,7 @@ from . import _, printToConsole, getPiconsPath, getTmpLocalPicon
 MERGE_PICONS_FINISHED = 'mergePiconsFinished'
 OPTIMIZE_PICONS_FINISHED = 'optimizePiconsFinished'
 
+
 class MergeVO:
 
     def __init__(self, channelPicon, targetPicon):

@@ -18,6 +18,7 @@ config.plugins.browser.youtube_enable_ntpd = ConfigYesNo(default=False)
 config.plugins.browser.youtube_ntpd_url = ConfigText(default='0.rhel.pool.ntp.org', visible_width=50, fixed_size=False)
 g_browser_cfg = config.plugins.browser
 
+
 class PSingleton:
 
 	def __init__(self, decorated):
@@ -42,8 +43,8 @@ _LVSTR = {_DEBUG: '  DEBUG',
  _WARNING: 'WARNING',
  _ERROR: '  ERROR'}
 
-@PSingleton
 
+@PSingleton
 class PLogger:
 
 	def __init__(self):

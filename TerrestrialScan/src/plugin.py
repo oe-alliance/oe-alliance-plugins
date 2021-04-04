@@ -40,6 +40,7 @@ config.plugins.TerrestrialScan.lcndescriptor = ConfigSelection(default=0x83, cho
 config.plugins.TerrestrialScan.channel_list_id = ConfigInteger(default=0, limits=(0, 65535))
 config.plugins.TerrestrialScan.stabliseTime = ConfigSelection(default=2, choices=[(i, "%d" % i) for i in range(2, 11)])
 
+
 class TerrestrialScanScreen(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -216,12 +217,15 @@ def TerrestrialScanStart(menuid, **kwargs):
 		return [(_("Terrestrial Scan"), TerrestrialScanMain, "TerrestrialScanScreen", 75, True)]
 	return []
 
+
 def TerrestrialScanMain(session, close=None, **kwargs):
 	session.openWithCallback(boundFunction(TerrestrialScanCallback, close), TerrestrialScanScreen)
+
 
 def TerrestrialScanCallback(close, answer):
 	if close and answer:
 		close(True)
+
 
 def Plugins(**kwargs):
 	pList = []

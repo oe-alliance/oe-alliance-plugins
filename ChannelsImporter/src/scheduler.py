@@ -10,6 +10,8 @@ from enigma import eTimer
 from .ChannelsImporter import ChannelsImporter
 
 autoChannelsImporterTimer = None
+
+
 def autostart(reason, session=None, **kwargs):
 	"called with reason=1 to during /sbin/shutdown.sysvinit, with reason=0 at startup?"
 	global autoChannelsImporterTimer
@@ -25,8 +27,10 @@ def autostart(reason, session=None, **kwargs):
 		print("[ChannelsImporterScheduler][ChannelsImporterautostart] Stop")
 		autoChannelsImporterTimer.stop()
 
+
 class AutoChannelsImporterTimer:
 	instance = None
+
 	def __init__(self, session):
 		self.session = session
 		self.channelsimportertimer = eTimer()

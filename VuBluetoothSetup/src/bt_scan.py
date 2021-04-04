@@ -11,6 +11,7 @@ from .bt_config import BluetoothSetupConfig
 from . import bt_types
 from .bt_task import BluetoothTask
 
+
 class BluetoothDiscovery(BluetoothTask):
 	def __init__(self):
 		BluetoothTask.__init__(self)
@@ -287,6 +288,7 @@ class BluetoothDiscovery(BluetoothTask):
 	def eventHandled(self):
 		pass
 
+
 class BluetoothDiscoveryScreen(Screen, BluetoothDiscovery):
 	skin = """
 		<screen position="center,center" size="660,500">
@@ -470,6 +472,7 @@ class BluetoothDiscoveryScreen(Screen, BluetoothDiscovery):
 
 	def keyMenu(self):
 		self.session.open(BluetoothSetupConfig)
+
 
 class BluetoothRCUSetup(BluetoothDiscoveryScreen):
 	def __init__(self, session, autoStart=True):

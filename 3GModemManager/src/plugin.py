@@ -28,18 +28,24 @@ import time
 
 
 debug_mode_modem_mgr = False
+
+
 def printDebugModemMgr(msg):
 	global debug_mode_modem_mgr
 	if debug_mode_modem_mgr:
 		print("[ModemManager Plugin] Debug >>", msg)
 
+
 def printInfoModemMgr(msg):
 	print("[ModemManager Plugin] Info >>", msg)
 
+
 isEmpty = lambda x: x is None or len(x) == 0
+
 
 class DeviceEventListener:
 	notifyCallbackFunctionList = []
+
 	def __init__(self):
 		self.sock = socket.socket(socket.AF_NETLINK, socket.SOCK_DGRAM, 15)
 		try:		
@@ -74,6 +80,7 @@ class DeviceEventListener:
 			self.sock.close()
 		except:
 			pass
+
 
 class TaskManager:
 	def __init__(self):
@@ -136,28 +143,38 @@ class TaskManager:
 		self.taskIdx += 1
 		return True
 
+
 class ParserHandler(handler.ContentHandler):
 	nodeList = []
+
 	def __init__(self):
 		self.nodeList = []
+
 	def startDocument(self):
 		pass
+
 	def endDocument(self):  
 		pass
+
 	def startElement(self, name, attrs):
 		if name == 'apn':
 			node = {}
 			for attr in attrs.getNames():
 				node[attr] = str(attrs.getValue(attr))
 			self.nodeList.append(node)
+
 	def endElement(self, name):
 		pass
+
 	def characters(self, content):
 		pass
+
 	def setDocumentLocator(self, locator):
 		pass
+
 	def getNodeList(self):
 		return self.nodeList
+
 
 class EditModemManual(ConfigListScreen, Screen):
 	skin = """
@@ -348,6 +365,7 @@ config.plugins.gmodemmanager.uid = ConfigText(default="user")
 config.plugins.gmodemmanager.pwd = ConfigText(default="pass")
 config.plugins.gmodemmanager.pin = ConfigText(default="")
 config.plugins.gmodemmanager.phone = ConfigText(default="*99#")
+
 
 class ModemManual(Screen):
 	skin = """
@@ -546,6 +564,7 @@ class ModemManual(Screen):
 
 	def setListOnView(self):
 		lvApnItems = []
+
 		def uppercaseCompare(a, b):
 			aa = a.get("carrier")
 			bb = b.get("carrier")
@@ -554,6 +573,7 @@ class ModemManual(Screen):
 			if isEmpty(bb):
 				bb = ""
 			return cmp(aa.upper(), bb.upper())
+
 		def isExistAPN(name):
 			for x in lvApnItems:
 				if x[0] == name:
@@ -591,8 +611,10 @@ class ModemManual(Screen):
 
 commandBin = resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/3GModemManager/3gcommand")
 
+
 def isConnected():
 	return len(os.popen('ifconfig -a | grep ppp').read().strip()) > 0
+
 
 class ModemManager(Screen):
 	skin = """
@@ -622,6 +644,7 @@ class ModemManager(Screen):
 		"""
 	uid, pwd, pin, apn, phone = None, None, None, None, '*99#'
 	connectionStatus = 0
+
 	def __init__(self, session): 
 		Screen.__init__(self, session)
 		self.usb_lv_items = self.setListOnView()
@@ -691,7 +714,6 @@ class ModemManager(Screen):
 		else:
 		  self['myip'].setText(_('IP : 0.0.0.0'))
 		  
-		
 	def cbRestartAppTimer(self):
 		self.restartAppTimer.stop()
 		file = open('/proc/stb/info/vumodel')
@@ -1171,6 +1193,7 @@ class ModemManager(Screen):
 		printInfoModemMgr("USB DEVICE LIST : " + str(rt_usb_list))
 		return rt_usb_list
 
+
 def autostart(reason, **kwargs):
 	vendorid = config.plugins.gmodemmanager.vendorid.getValue()
 	productid = config.plugins.gmodemmanager.productid.getValue()
@@ -1198,11 +1221,10 @@ def autostart(reason, **kwargs):
 				os.system("ifconfig eth0 up")
 						
 
-
-				
 def main(session, **kwargs):
 	session.open(ModemManager)
                                                            
+
 def Plugins(**kwargs):            
 	return [PluginDescriptor(name=_("3G / 4G Modem Manager"), description="management 3g modem", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
 		PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]

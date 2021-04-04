@@ -68,6 +68,7 @@ If this argument is not present then the system will choose a value based on the
 If this header is not present, a value of en is assumed.
 """
 
+
 class pygoogle:
     
     def __init__(self, query, pages=10, hl='en', log_level=logging.INFO):
@@ -212,6 +213,7 @@ class pygoogle:
         """Prints results (for command line)"""
         self.__search__(True)
 
+
 def main():
     parser = argparse.ArgumentParser(description='A simple Google search module for Python')
     parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', default=False, help='Verbose mode')
@@ -228,6 +230,7 @@ def main():
         exit()
     search = pygoogle(log_level=log_level, query=query, pages=args.pages, hl=args.language)
     search.display_results()
+
 
 if __name__ == "__main__":
     main()

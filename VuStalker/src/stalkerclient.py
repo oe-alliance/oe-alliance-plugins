@@ -12,6 +12,7 @@ from time import localtime, strftime, time
 from urllib.parse import quote as urlencode
 from uuid import getnode
 
+
 def get_mac_address():
 	macaddr = "00:00:00:00:00:00"
 	try:
@@ -19,6 +20,7 @@ def get_mac_address():
 	except Exception:
 		macaddr = "00:00:00:00:00:00"
 	return macaddr
+
 
 DEFAULT_MAC = get_mac_address()
 DEFAULT_URL = "http://stalker-server/stalker_portal/c/"
@@ -40,6 +42,7 @@ config.plugins.stalker_client.username = ConfigText(default="", fixed_size=False
 config.plugins.stalker_client.password = ConfigText(default="", fixed_size=False, visible_width=18)
 config.plugins.stalker_client.retrycount = ConfigInteger(default=5, limits=(1, 5))
 config.plugins.stalker_client.numFavlist = ConfigInteger(default=0)
+
 
 def convert(data):
 	if isinstance(data, str):
@@ -193,6 +196,7 @@ class SCAsyncCall(object):
 			if self.callback:
 				self.callback(result)
 
+
 class SCTask:
 	def __init__(self, cb, func, *args):
 		self.func = func
@@ -213,6 +217,7 @@ class SCTask:
 
 	def __str__(self):
 		return "task: %s [%s]" % (self.func and self.func.__name__ or "None", self.cb and self.cb.__name__ or "None")
+
 
 class SCThread(threading.Thread):
 	CHECK_INTERVAL = 100
@@ -281,6 +286,7 @@ class SCThread(threading.Thread):
 	def clearTask(self):
 		self.tasks_to_poll[:] = []
 		self.checkTimer.stop()
+
 
 class SCCache(object):
 	CACHE_DIR = '/tmp/stalker/'

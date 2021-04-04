@@ -11,6 +11,7 @@ from enigma import eTimer
 
 from . import cbcfg
 
+
 class ChromiumOSSettings(ConfigListScreen, Screen):
     skin = """
             <screen position="center,center" size="600,220" title="ChromiumOS Settings">
@@ -95,6 +96,7 @@ class ChromiumOSSettings(ConfigListScreen, Screen):
         self["config"].list = self.menulist
         self["config"].l.setList(self.menulist)
 
+
 class ChromiumOSHelpWindow(Screen, HelpableScreen):
     MODE_GLOBAL, MODE_KEYBOARD, MODE_MOUSE = 1, 2, 3
     skin = """
@@ -110,6 +112,7 @@ class ChromiumOSHelpWindow(Screen, HelpableScreen):
                     <widget source="key_blue" render="Label" position="450,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" foregroundColor="#ffffff" transparent="1" />
             </screen>
             """
+
     def __init__(self, session):
         Screen.__init__(self, session)
         HelpableScreen.__init__(self)
@@ -211,6 +214,7 @@ class ChromiumOSHelpWindow(Screen, HelpableScreen):
 
     def keyBlue(self):
         self.setHelpModeActions(self.MODE_KEYBOARD)
+
 
 class ChromiumOSWindow(ConfigListScreen, Screen):
     skin = """

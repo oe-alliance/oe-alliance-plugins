@@ -12,6 +12,7 @@ PLUGIN_PATH = resolveFilename(SCOPE_PLUGINS, 'Extensions/PiconsUpdater')
 CONFIG_FILE = 'https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/config.json'
 PluginLanguageDomain = 'PiconsUpdater'
 
+
 def localeInit():
     gettext.bindtextdomain(PluginLanguageDomain, PLUGIN_PATH + '/locale')
 
@@ -25,6 +26,7 @@ def _(txt):
 
 language.addCallback(localeInit())
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 def printToConsole(msg):
     logging.info('[PiconsUpdater] %s' % msg)
@@ -40,6 +42,7 @@ TMP_FG_PATH = TMP_PICON_PATH + '/fgs'
 TMP_PREVIEW_IMAGE_PATH = TMP_PICON_PATH + '/preview'
 PREVIEW_IMAGE_PATH = PLUGIN_PATH + '/previewimage/default.png'
 DEFAULT_PICON_PATH = '/usr/share/enigma2/picon'
+
 
 def byteify(input):
     if isinstance(input, dict):

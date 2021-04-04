@@ -21,6 +21,7 @@ pipc._SOCKETFILE = '/tmp/.chromium.sock'
 cbcfg.INIT(cbcfg._ERROR)
 _g_locked = False
 
+
 def enigma2_lock():
 	global _g_locked
 	cbcfg.DEBUG('enigma2_lock')
@@ -36,6 +37,7 @@ def enigma2_unlock():
 
 
 _OPCODES = ['CONTROL_EXIT', 'VIRTUAL_KEYBOARD', 'OPCODE_END']
+
 
 class BrowserHandlers(PServerHandlers):
 
@@ -86,6 +88,7 @@ class BrowserHandlers(PServerHandlers):
 
 
 _HANDLER = BrowserHandlers()
+
 
 class BBrowserLauncher(Screen):
 	skin = '<screen name="BBrowserLauncher" position="0,0" size="0,0" backgroundColor="transparent" flags="wfNoBorder" title=" "></screen>'
@@ -235,6 +238,7 @@ class BBrowserLauncher(Screen):
 
 
 global_session = None
+
 
 def stt_event_callback(text):
 	global global_session

@@ -26,6 +26,7 @@ from .TerrestrialScan import setParams, setParamsFe
 import dvbreader
 from .TerrestrialScanSkin import downloadBar
 
+
 class MakeBouquet(Screen):
 	skin = downloadBar
 

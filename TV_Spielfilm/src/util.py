@@ -33,6 +33,7 @@ elif DESKTOP_WIDTH > 1280:
 else:
     skinFactor = 1
 
+
 class channelDB():
 
     def __init__(self, servicefile):
@@ -53,6 +54,7 @@ class channelDB():
 
     def close(self):
         pass
+
 
 class serviceDB():
 
@@ -81,6 +83,7 @@ class BlinkingLabel(Label, BlinkingWidget):
     def __init__(self, text=''):
         Label.__init__(self, text=text)
         BlinkingWidget.__init__(self)
+
 
 class ItemList(MenuList):
 
@@ -131,6 +134,7 @@ def applySkinVars(skin, dict):
             print(e, '@key=', key)
     return skin
 
+
 def makeWeekDay(weekday):
     if weekday == 0:
         _weekday = 'Montag'
@@ -147,6 +151,7 @@ def makeWeekDay(weekday):
     elif weekday == 6:
         _weekday = 'Sonntag'
     return _weekday
+
 
 def scaleskin(skin, factor):
     def calc(old, factor):
@@ -174,6 +179,7 @@ def scaleskin(skin, factor):
         if 'size' in child.attrib:
             child.attrib['size'] = calc(child.attrib['size'], factor)
     return six.ensure_str(ET.tostring(root))
+
 
 def readSkin(skin):
     skintext = ""

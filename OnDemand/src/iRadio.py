@@ -59,6 +59,7 @@ FAVORITE_FILE = '/etc/enigma2/iRadio.favorites'
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
+
 def wgetUrl(target):
 	try:
 		req = Request(target)
@@ -72,6 +73,7 @@ def wgetUrl(target):
 		return ''
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
+
 
 def urlType(target):
 	try:
@@ -87,6 +89,7 @@ def urlType(target):
 		return ''
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
+
 
 class iRadioMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
@@ -146,6 +149,7 @@ class iRadioMenu(Screen):
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
+
 class shoutGenresMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
@@ -201,7 +205,6 @@ class shoutGenresMenu(Screen):
 		id = self["shoutGenresMenu"].l.getCurrentSelection()[1]
 		children = self["shoutGenresMenu"].l.getCurrentSelection()[2]
 		
-
 		if id is not None:
 			if id == "exit":
 				self.close(None)
@@ -214,6 +217,7 @@ class shoutGenresMenu(Screen):
 		self.close(None)
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
+
 
 class shoutSubGenresMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
@@ -275,7 +279,6 @@ class shoutSubGenresMenu(Screen):
 		id = self["shoutSubGenresMenu"].l.getCurrentSelection()[1]
 		children = self["shoutSubGenresMenu"].l.getCurrentSelection()[2]
 		
-
 		if id is not None:
 			if id == "exit":
 				self.close(None)
@@ -288,6 +291,7 @@ class shoutSubGenresMenu(Screen):
 		self.close(None)
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
+
 
 class tuneinGenresMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
@@ -342,7 +346,6 @@ class tuneinGenresMenu(Screen):
 		name = self["tuneinGenresMenu"].l.getCurrentSelection()[0]
 		id = self["tuneinGenresMenu"].l.getCurrentSelection()[1]
 		
-
 		if id != 'None':
 			if id == "exit":
 				self.close(None)
@@ -353,6 +356,7 @@ class tuneinGenresMenu(Screen):
 		self.close(None)
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
+
 
 def findPlayUrl(showID, function, showWMA, **kwargs):
 	# Take the accepted showID and append it onto the url below.
@@ -431,6 +435,7 @@ def findPlayUrl(showID, function, showWMA, **kwargs):
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
+
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	stringValue = stringValue.replace('&#39;', '\'')
@@ -438,6 +443,7 @@ def checkUnicode(value, **kwargs):
 	return stringValue
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
+
 
 def tidyString(value, **kwargs):
 	stringValue = value 
@@ -449,12 +455,14 @@ def tidyString(value, **kwargs):
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
+
 def main(session, **kwargs):
 	action = "start"
 	value = 0 
 	start = session.open(iRadioMenu, action, value)
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
+
 
 class shoutGenresThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
@@ -691,6 +699,7 @@ class shoutGenresThumb(StreamsThumbCommon):
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
+
 class FavoritesThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = 'Extensions/OnDemand/icons/favorite.png'
@@ -875,6 +884,7 @@ class FavoritesThumb(StreamsThumbCommon):
 			print('getFavMediaData: Error getting Media info: ', exception)
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
+
 
 class tuneinGenresThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):

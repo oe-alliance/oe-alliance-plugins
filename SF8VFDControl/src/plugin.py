@@ -78,9 +78,11 @@ ascii_bitmap = [
 	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # x y z { | } ~ 
 ]
 
+
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
 	
+
 def vfd_text_out(text):
 	led7ctrl = subprocess.Popen(['/usr/lib/enigma2/python/Plugins/SystemPlugins/VFDControl/led7ctrl'], stdin=subprocess.PIPE)
 	index = ['a', 'b', 'c', 'd'] # 'a' means the first digit, 'b' is second, ...
@@ -91,6 +93,7 @@ def vfd_text_out(text):
 		cmd += (index[i] + hex(ascii_bitmap[ascii_val])[2:]) # should not use 0x prefix in command.
 		cmd += " "  # use space as seperator
 	led7ctrl.communicate(cmd + "\n")
+
 
 class Channelnumber:
 
@@ -201,13 +204,16 @@ class Channelnumber:
 		self.begin = time() + int(self.channelnrdelay)
 		self.endkeypress = True
 
+
 ChannelnumberInstance = None
+
 
 def leaveStandby():
 	print("[VFD-SF8] Leave Standby")
 
 	if config.plugins.VFD_SF8.showClock.value == 'Off':
 		vfd_text_out("....")
+
 
 def standbyCounterChanged(configElement):
 	print("[VFD-SF8] In Standby")
@@ -218,11 +224,13 @@ def standbyCounterChanged(configElement):
 	if config.plugins.VFD_SF8.showClock.value == 'Off':
 		vfd_text_out("....")
 
+
 def initVFD():
 	print("[VFD-SF8] initVFD")
 
 	if config.plugins.VFD_SF8.showClock.value == 'Off':
 		vfd_text_out("....")
+
 
 class VFD_SF8Setup(ConfigListScreen, Screen):
 	def __init__(self, session, args=None):
@@ -299,6 +307,7 @@ class VFD_SF8Setup(ConfigListScreen, Screen):
 		self.createSetup()
 		initVFD()
 
+
 class VFD_SF8:
 	def __init__(self, session):
 		print("[VFD-SF8] initializing")
@@ -321,17 +330,21 @@ class VFD_SF8:
 		print("[VFD-SF8] aborting")
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
+
 def main(menuid):
 	if menuid != "system":
 		return []
 	return [(_("VFD_SF8"), startVFD, "VFD_SF8", None)]
 
+
 def startVFD(session, **kwargs):
 	session.open(VFD_SF8Setup)
+
 
 SF8VFD = None
 gReason = -1
 mySession = None
+
 
 def controlSF8VFD():
 	global SF8VFD
@@ -346,6 +359,7 @@ def controlSF8VFD():
 
 		SF8VFD = None
 
+
 def sessionstart(reason, **kwargs):
 	print("[VFD-SF8] sessionstart")
 	global SF8VFD
@@ -357,6 +371,7 @@ def sessionstart(reason, **kwargs):
 	else:
 		gReason = reason
 	controlSF8VFD()
+
 
 def Plugins(**kwargs):
 	if getBoxType() in ('sf8'):

@@ -57,6 +57,7 @@ _OPCODE_LIST = [
 		'OPCODE_END'
 		]
 
+
 class VBHandler(VBHandlers):
 	def __init__(self, session):
 		self._session = session
@@ -205,8 +206,10 @@ class VBHandler(VBHandlers):
 			return (False, None)
 		return (True, None)
 
+
 class VBMain(Screen):
 	skin = """<screen name="VBMAIN" position="0,0" size="0,0" backgroundColor="transparent" flags="wfNoBorder" title=" "></screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -375,6 +378,7 @@ class VBMain(Screen):
 			pass
 		return True
 
+
 def HelpableScreen__init__(self):
 	if isinstance(self, HelpableScreen):
 		HelpableScreen.showManual = showManual
@@ -383,6 +387,7 @@ def HelpableScreen__init__(self):
 			"help_b": self.showHelp,
 			"help_l": self.showManual,
 		}, -2)
+
 
 def showManual(self):
 	if not os.path.exists(vbcfg.MANUALROOT):
@@ -395,6 +400,7 @@ def showManual(self):
 
 	vbcfg.g_browser = self.session.open(Browser, url)
 
+
 def auto_start_main(reason, **kwargs):
 	if reason:
 		try:
@@ -403,10 +409,12 @@ def auto_start_main(reason, **kwargs):
 		except:
 			pass
 
+
 def session_start_main(session, reason, **kwargs):
 	vbcfg.g_main = session.open(VBMain)
 	HelpableScreen.__init__ = HelpableScreen__init__
 	HelpableScreen.session = session
+
 
 def start_youtubetv_main(session, **kwargs):
 	def _cb_youtubetv_close(ret):
@@ -421,19 +429,24 @@ def start_youtubetv_main(session, **kwargs):
 	else:
 		session.openWithCallback(_cb_youtubetv_close, YoutubeTVWindow)
 
+
 def plugin_setting_youtube(session, **kwargs):
 	session.open(YoutubeTVSettings)
 
+
 def plugin_start_browser(session, **kwargs):
 	vbcfg.g_browser = session.open(Browser)
+
 
 def extension_toggle_browser(session, **kwargs):
 	if vbcfg.g_main is not None:
 		vbcfg.g_main.menu_toggle_browser()
 
+
 def extension_start_application(session, **kwargs):
 	if vbcfg.g_main is not None:
 		vbcfg.g_main.menu_hbbtv_applications()
+
 
 def Plugins(**kwargs):
 	l = []

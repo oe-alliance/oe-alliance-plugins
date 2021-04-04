@@ -26,6 +26,7 @@ config.plugins.MisPlsLcnScan.provider = ConfigSelection(default="fransat_5W", ch
 config.plugins.MisPlsLcnScan.clearallservices = ConfigYesNo(default=False)
 config.plugins.MisPlsLcnScan.onlyfree = ConfigYesNo(default=True)
 
+
 class MisPlsLcnScanScreen(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -152,17 +153,21 @@ class MisPlsLcnScanScreen(ConfigListScreen, Screen):
 def hasMultistream():
 	return [nim for nim in nimmanager.nim_slots if nim.isCompatible("DVB-S") and nim.isMultistream()]
 
+
 def MisPlsLcnScanStart(menuid, **kwargs):
 	if menuid == "scan":
 		return [(_("MIS/PLS LCN Scan"), MisPlsLcnScanMain, "MisPlsLcnScanScreen", 75, True)]
 	return []
 
+
 def MisPlsLcnScanMain(session, close=None, **kwargs):
 	session.openWithCallback(boundFunction(MisPlsLcnScanCallback, close), MisPlsLcnScanScreen)
+
 
 def MisPlsLcnScanCallback(close, answer):
 	if close and answer:
 		close(True)
+
 
 def Plugins(**kwargs):
 	pList = []

@@ -39,10 +39,12 @@ g_event_description[BT_EVENT_NEW_VOICE] = "new voice"
 g_event_description[BT_EVENT_BT_CONNECTED] = "BT dongle is inserted!"
 g_event_description[BT_EVENT_BT_DISCONNECTED] = "BT dongle is removed!"
 
+
 def getEventDesc(event):
 	if event in list(g_event_description.keys()):
 		return g_event_description[event]
 	return "Unknown event"
+
 
 BT_PROFILE_VU_RC = 1
 BT_PROFILE_HID_UNKNOWN = 2
@@ -61,8 +63,10 @@ OTA_FILE_APP_VERSION = 7
 
 BT_FIRMWARE_FILEPATH = resolveFilename(SCOPE_PLUGINS, "SystemPlugins/BluetoothSetup/vu_rcu_firmware.bin")
 
+
 def isAudioProfile(profile):
 	return profile in (BT_PROFILE_HEADPHONE, BT_PROFILE_SPEAKER)
+
 
 BT_VUPLUS_RCU_NAME = "VUPLUS-BLE-RCU"
 BT_VOICE_PATH = "/tmp/voice.wav"
@@ -71,6 +75,7 @@ btkeyboard = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "System
 btaudio = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/BluetoothSetup/bt_audio.png")) 	
 btrc = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/BluetoothSetup/bt_rc.png"))
 bticon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "SystemPlugins/BluetoothSetup/bt_misc.png"))
+
 
 def getIcon(profile):
 	global btkeyboard, btaudio, btrc, bticon

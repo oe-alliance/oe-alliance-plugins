@@ -19,6 +19,7 @@ from .stalkerclient import SUPPORT_MODULES, SCThread, stalker
 from copy import deepcopy
 from math import ceil as math_ceil
 
+
 class StalkerClient_AccountInfoScreen(Screen):
 	skin_default_1080p = """
 	<screen name="stalkerclientinfo" position="center,center" size="900,300">
@@ -80,6 +81,8 @@ class StalkerClient_AccountInfoScreen(Screen):
 
 from Screens.InfoBar import InfoBar
 from Screens.ChannelSelection import BouquetSelector
+
+
 class StalkerClient_ChannelContextMenu(Screen):
 	skin_default_1080p = """
 	<screen name="stalkerclientcontext" position="center,center" size="680,300">
@@ -592,6 +595,7 @@ class StalkerBaseService(object):
 	def isPlayable(self):
 		return self.m_playable
 
+
 class StalkerService(StalkerBaseService):
 	def __init__(self, data):
 		StalkerBaseService.__init__(self, isPlayable=True)
@@ -652,6 +656,7 @@ class StalkerService(StalkerBaseService):
 	def __str__(self):
 		return "[StalkerClient] TV [%04s] #%s %s %s (%s, %s)" % (self.m_id, self.m_number, self.m_name, self.m_url, self.m_http_temp_link, self.m_load_balancing)
 
+
 class StalkerGenre(StalkerBaseService):
 	def __init__(self, data, count=0):
 		StalkerBaseService.__init__(self, isFolder=True)
@@ -701,6 +706,7 @@ def StalkerEntryComponent(entry, x, y, w, h):
 	else:
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, name))
 	return res
+
 
 class StalkerList(MenuList):
 	def __init__(self, dh, enableWrapAround=False):

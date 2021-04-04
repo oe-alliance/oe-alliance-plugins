@@ -4,6 +4,7 @@ from Components.config import config, ConfigSelection, getConfigListEntry, Confi
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 
+
 class BluetoothSetupConfig(Screen, ConfigListScreen):
 	skin = """
 		<screen position="100,100" size="530,250">

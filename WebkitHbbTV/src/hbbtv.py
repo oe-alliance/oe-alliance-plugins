@@ -10,11 +10,13 @@ from .__init__ import _
 from . import vbcfg
 from .vbipc import VBController
 
+
 class HbbTVWindow(Screen):
 	skin = """
 		<screen name="HbbTVWindow" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder" title="HbbTV Plugin">
 		</screen>
 		"""
+
 	def __init__(self, session, url=None, app_info=None):
 		vbcfg.g_position = vbcfg.getPosition()
 		vbcfg.osd_lock()
@@ -65,7 +67,6 @@ class HbbTVWindow(Screen):
 				os.system("run-webkit.sh restart %s" % (self._url))
 			else:
 				os.system("run-webkit.sh restart %s" % (self._info["url"]))
-
 
 	def stop_hbbtv_application(self):
 		self._close_timer.stop()

@@ -9,8 +9,10 @@ import os
 
 g_BTVolumeControlHandle = None
 
+
 def main(session, **kwargs):
 	session.open(BluetoothSetupScreen)
+
 
 def bt_keyPressed(key, flag):
 	if flag != 0: # if not release
@@ -30,6 +32,7 @@ def bt_keyPressed(key, flag):
 
 	return 0
 
+
 def auto_start_main(reason, **kwargs):
 	if reason == 0: # when add plugins
 		global g_BTVolumeControlHandle
@@ -44,15 +47,18 @@ def auto_start_main(reason, **kwargs):
 		except:
 			pass
 
+
 def selSetup(menuid, **kwargs):
 	res = []
 	if menuid == "system" and pybluetooth_instance.checkBTUSB():
 		res.append((_("Bluetooth Setup"), main, "bluetooth_setup", 80))
 	return res
 
+
 def sessionstart(reason, session):
 	if pybluetooth_instance:
 		pybluetooth_instance.setSession(session)
+
 
 def Plugins(**kwargs):
 	list = []

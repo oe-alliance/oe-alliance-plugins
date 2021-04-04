@@ -5,6 +5,7 @@
 #
 import time
 
+
 class AutoflushCache:
     def __init__(self, default_timeout, null_return=None):
         self.cache = {}         # key -> val pairs

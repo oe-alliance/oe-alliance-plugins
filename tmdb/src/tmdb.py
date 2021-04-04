@@ -77,6 +77,7 @@ config.plugins.tmdb.themoviedb_coversize = ConfigSelection(default="w185", choic
 config.plugins.tmdb.lang = ConfigSelection(default="de", choices=["de", "en"])
 config.plugins.tmdb.firsthit = ConfigYesNo(default=True)
 
+
 def cleanFile(text):
 	cutlist = ['x264', '720p', '1080p', '1080i', 'PAL', 'GERMAN', 'ENGLiSH', 'WS', 'DVDRiP', 'UNRATED', 'RETAIL', 'Web-DL', 'DL', 'LD', 'MiC', 'MD', 'DVDR', 'BDRiP', 'BLURAY', 'DTS', 'UNCUT', 'ANiME',
 				'AC3MD', 'AC3', 'AC3D', 'TS', 'DVDSCR', 'COMPLETE', 'INTERNAL', 'DTSD', 'XViD', 'DIVX', 'DUBBED', 'LINE.DUBBED', 'DD51', 'DVDR9', 'DVDR5', 'h264', 'AVC',
@@ -89,9 +90,11 @@ def cleanFile(text):
 
 	return text
 	
+
 def cleanEnd(text):
 	text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '').replace('.mp4', '')
 	return text
+
 
 class createList(GUIComponent, object):
 	GUI_WIDGET = eListbox
@@ -159,6 +162,7 @@ class createList(GUIComponent, object):
 		if self.instance is not None:
 			self.instance.moveSelection(self.instance.moveDown)
 		
+
 class tmdbConfigScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -205,6 +209,7 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 			x[1].save()
 		configfile.save()			
 		self.close()
+
 
 class tmdbScreen(Screen, HelpableScreen):
 	skin = """
@@ -475,6 +480,7 @@ class tmdbScreen(Screen, HelpableScreen):
 				pass
 			count += 1	
 
+
 class tmdbScreenMovie(Screen, HelpableScreen):
 	skin = """
 		<screen position="40,80" size="1200,600" title="TMDb - The Movie Database" backgroundColor="#20666666">
@@ -723,7 +729,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		except:
 			studio_string = ""
 
-		
 		#
 		# modify Data for TV/Series
 		#
@@ -747,7 +752,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			except:
 				country_string = ""
 
-		
 			## Crew Director 
 			director = ""
 			try:
@@ -855,7 +859,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				self['fsklogo'].show()
 		del self.picload
 
-			
 	def ok(self):
 		self.keyGreen()
 		
@@ -892,6 +895,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			container.execute("rm -rf '%s'" % eitFile)
 			print("[TMDb] %s deleted" % (eitFile))
 			self.session.open(MessageBox, _("EIT file deleted!"), type=1, timeout=5)
+
 
 class tmdbScreenPeople(Screen, HelpableScreen):
 	skin = """
@@ -1112,6 +1116,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 				pass
 			count += 1
 			
+
 class tmdbScreenSeason(Screen, HelpableScreen):
 	skin = """
 		<screen position="40,80" size="1200,600" title="TMDb - The Movie Database" >
@@ -1127,6 +1132,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			<ePixmap position="660,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
 			<ePixmap position="955,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
 		</screen>"""	
+
 	def __init__(self, session, mname, id, media):
 		Screen.__init__(self, session)
 		#self.skinName = [ "tmdbScreenSeason", "tmdbScreenPeople" ]

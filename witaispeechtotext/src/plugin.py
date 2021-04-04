@@ -22,6 +22,7 @@ config.plugins.witaisttsetup.serverAccessToken = ConfigText(fixed_size=False, vi
 
 g_session = None
 
+
 class WitAiSttSetup(Screen, ConfigListScreen):
 	skin = """
 		<screen position="center,center" size="550,350">
@@ -91,7 +92,9 @@ class WitAiSttSetup(Screen, ConfigListScreen):
 		for x in self["config"].list:
 			x[1].cancel()
 
+
 witaistt_thread_instance = None
+
 
 class WitAiSttThread(threading.Thread):
 	def __init__(self, textCB):
@@ -149,6 +152,7 @@ class WitAiSttThread(threading.Thread):
 
 	def setVoicePath(self, voicePath):
 		self.voicePath = voicePath
+
 
 class WitAiSpeechToText:
 	def __init__(self):
@@ -215,15 +219,19 @@ class WitAiSpeechToText:
 	def msgFailCB(self, ret):
 		self.running = False
 
+
 witaispeechtotext_instance = WitAiSpeechToText()
+
 
 def main(session, **kwargs):
 	session.open(WitAiSttSetup)
+
 
 def voiceHandler(voicePath):
 	global witaispeechtotext_instance
 	witaispeechtotext_instance.setVoicePath(voicePath)
 	witaispeechtotext_instance.start()
+
 
 def auto_start_main(reason, **kwargs):
 	if reason == 0:
@@ -241,6 +249,7 @@ def auto_start_main(reason, **kwargs):
 		except:
 			pass
 
+
 def sessionstart(reason, session):
 	global g_session
 	g_session = session
@@ -251,6 +260,7 @@ def sessionstart(reason, session):
 			pybluetooth_instance.addVoiceHandler(voiceHandler)
 	except:
 		pass
+
 
 def Plugins(**kwargs):
 	list = []

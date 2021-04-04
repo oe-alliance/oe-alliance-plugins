@@ -25,8 +25,10 @@ config.plugins.VFD_ini = ConfigSubsection()
 config.plugins.VFD_ini.showClock = ConfigSelection(default="True_Switch", choices=[("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
 config.plugins.VFD_ini.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
 
+
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
+
 
 class Channelnumber:
 	def __init__(self, session):
@@ -139,12 +141,15 @@ class Channelnumber:
 		self.begin = time() + int(self.channelnrdelay)
 		self.endkeypress = True
 
+
 ChannelnumberInstance = None
+
 
 def leaveStandby():
 	print("[VFD-INI] Leave Standby")
 	if config.plugins.VFD_ini.showClock.value == 'Off':
 		vfd_write("....")
+
 
 def standbyCounterChanged(configElement):
 	print("[VFD-INI] In Standby")
@@ -154,10 +159,12 @@ def standbyCounterChanged(configElement):
 	if config.plugins.VFD_ini.showClock.value == 'Off':
 		vfd_write("....")
 
+
 def initVFD():
 	print("[VFD-INI] initVFD")
 	if config.plugins.VFD_ini.showClock.value == 'Off':
 		vfd_write("....")
+
 
 class VFD_INISetup(ConfigListScreen, Screen):
 	skin = """<screen position="100,100" size="500,210" title="LED Display Setup" >
@@ -229,6 +236,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 			x[1].cancel()
 		self.close()
 
+
 class VFD_INI:
 	def __init__(self, session):
 		print("[VFD-INI] initializing")
@@ -251,17 +259,21 @@ class VFD_INI:
 		print("[VFD-INI] aborting")
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
+
 def main(menuid):
 	if menuid != "system":
 		return []
 	return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
 
+
 def startVFD(session, **kwargs):
 	session.open(VFD_INISetup)
+
 
 iniVfd = None
 gReason = -1
 mySession = None
+
 
 def controliniVfd():
 	global iniVfd
@@ -276,6 +288,7 @@ def controliniVfd():
 
 		iniVfd = None
 
+
 def sessionstart(reason, **kwargs):
 	print("[VFD-INI] sessionstart")
 	global iniVfd
@@ -287,6 +300,7 @@ def sessionstart(reason, **kwargs):
 	else:
 		gReason = reason
 	controliniVfd()
+
 
 def Plugins(**kwargs):
 		if getBoxType() in ('xpeedlx1', 'atemio6000', 'atemio6100', 'bwidowx', 'bwidowx2', 'mbhybrid', 'opticumtt'):

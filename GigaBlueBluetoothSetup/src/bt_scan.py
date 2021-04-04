@@ -12,6 +12,7 @@ from .bt_config import BluetoothSetupConfig
 from . import bt_types
 from .bt_task import BluetoothTask
 
+
 class BluetoothDiscovery(BluetoothTask):
 	def __init__(self, ble):
 		BluetoothTask.__init__(self)
@@ -299,6 +300,7 @@ class BluetoothDiscovery(BluetoothTask):
 
 	def eventHandled(self):
 		pass
+
 
 class BluetoothDiscoveryScreen(Screen, BluetoothDiscovery):
 	skin = """

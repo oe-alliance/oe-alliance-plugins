@@ -239,6 +239,7 @@ class Account(TMDB):
         self._set_attrs_to_values(response)
         return response
 
+
 class Authentication(TMDB):
     """
     Authentication functionality.
@@ -327,6 +328,7 @@ class Authentication(TMDB):
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
+
 
 class GuestSessions(TMDB):
     """

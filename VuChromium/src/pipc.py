@@ -12,6 +12,7 @@ _BUFSIZE = 4096
 
 _SOCKETFILE = None
 
+
 def SetHandler(opcode, handler):
     try:
         _OPCODE[opcode][1] = handler
@@ -20,12 +21,14 @@ def SetHandler(opcode, handler):
         return False
     return True
 
+
 def GetHandler(opcode):
     for key, value in _OPCODE.items():
         if value[0] == opcode:
             cbcfg.DEBUG("recv socket: [%s]", key)
             return value[1]
     return None
+
 
 class PServerHandlers:
     def __init__(self, opcode_list, szcbh):
@@ -53,6 +56,7 @@ class PServerHandlers:
             except:
                 pass
         cbcfg.DEBUG("%d handlers registreated.", registreted_idx)
+
 
 class PServerThread(threading.Thread):
     def __init__(self):

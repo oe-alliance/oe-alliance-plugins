@@ -62,6 +62,7 @@ if six.PY3:
     OKZV = 'OK = Vollbild\n< > = Zurück / Vorwärts'
     NOEPG = 'Keine EPG Informationen verfügbar'
     
+
 def getEPGText():
     try:
         if six.PY2:
@@ -220,8 +221,10 @@ class tvAllScreen(Screen):
     def getFill(self, text):
         return '______________________________________\n%s' % text
 
+
 class tvAllScreenFull(tvAllScreen):
     skin = '\n\t\t\t\t<screen position="0,0" size="{size}" >\n\t\t\t\t</screen>'
+
     def __init__(self, session):
         size = "%s,%s" % (DESKTOP_WIDTH, DESKTOP_HEIGHT)
         dict = {'size': size}
@@ -1393,7 +1396,6 @@ class TVTippsView(tvBaseScreen):
         except:
             printStackTrace()
         
-
     def makeSearchView(self, url):
         self._makeSearchView(url, 0, 1)
         return
@@ -2024,6 +2026,7 @@ class TVTippsView(tvBaseScreen):
             self.showsearch()
             self.current = 'searchmenu'
 
+
 class tvGenreJetztProgrammView(tvBaseScreen):
     def __init__(self, session, link):
         skin = readSkin("TVProgrammView")
@@ -2051,6 +2054,7 @@ class tvGenreJetztProgrammView(tvBaseScreen):
         self.oldsearchindex = 1
         self.titel = ''
         self['menu'] = ItemList([])
+
 
 class TVGenreView(tvGenreJetztProgrammView):
     def __init__(self, session, link, genre):
@@ -2841,7 +2845,6 @@ class TVJetztView(tvGenreJetztProgrammView):
                     self.sref.append(res_sref)
                     res = [x]
                     
-
                     if self.backcolor == True:
                         res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
                     if self.picon == True:
@@ -4363,7 +4366,6 @@ class TVTrailerBilder(tvBaseScreen):
         self['play5'].hide()
         self['play6'].hide()
 
-
     def makeTVGalerie(self, string):
         output = open(self.localhtml, 'r').read()
         output = six.ensure_str(output)
@@ -4660,7 +4662,6 @@ class TVTrailerBilder(tvBaseScreen):
             if end > 5:
                 self.leftUp()
                 self.rightDown()
-
 
     def showPlay1(self, playlogo):
         currPic = loadPic(playlogo, 109, 58, 3, 0, 0, 0)
@@ -5158,6 +5159,7 @@ class TVNews(tvBaseScreen):
             self.setTitle('')
             self.setTitle(self.titel)
             self.showTVNews()
+
 
 class TVPicShow(tvBaseScreen):
     def __init__(self, session, link, picmode=0):
@@ -7208,6 +7210,7 @@ class tvMain(tvBaseScreen):
 
 class makeServiceFile(Screen):
     skin = '\n\t\t\t<screen position="center,180" size="565,195" backgroundColor="#20000000" title="Import TV Spielfilm Sender: TV Bouquet Auswahl">\n\t\t\t\t<ePixmap position="0,0" size="565,50" pixmap="' + TVSPNG + '" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="list" position="10,60" size="545,125" scrollbarMode="showOnDemand" zPosition="1" />\n\t\t\t</screen>'
+
     def __init__(self, session):
         self.skin = makeServiceFile.skin
         Screen.__init__(self, session)
@@ -8373,7 +8376,6 @@ class TVHeuteView(tvBaseScreen):
             self.tvlinks[midx - 1].append(currentlink)
             self.tvtitels[midx - 1].append(currenttitle)
 
-
         for i in range(6):
             self['menu%s' % (i + 1)].l.setItemHeight(115)
             self['menu%s' % (i + 1)].l.setList(self.tventriess[i])
@@ -9247,17 +9249,22 @@ class TVHeuteView(tvBaseScreen):
             self.showsearch()
             self.current = 'searchmenu'
 
+
 def main(session, **kwargs):
     session.open(tvMain)
+
 
 def mainjetzt(session, **kwargs):
     session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html')
 
+
 def mainprime(session, **kwargs):
     session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html')
 
+
 def mainevent(session, **kwargs):
     session.open(tvEvent)
+
 
 def Plugins(**kwargs):
     return [PluginDescriptor(name='TV Spielfilm', description='TV Spielfilm', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=main),

@@ -26,8 +26,10 @@ config.plugins.SEG.showClock = ConfigSelection(default="True_Switch", choices=[(
 config.plugins.SEG.showCHnumber = ConfigSelection(default="15", choices=[("15", _("15 sec")), ("30", _("30 sec")), ("45", _("45 sec")), ("60", _("60 sec"))])
 config.plugins.SEG.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
 
+
 def display_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
+
 
 class Channelnumber:
 
@@ -155,11 +157,14 @@ class Channelnumber:
 		self.begin = time() + int(self.channelnrdelay)
 		self.endkeypress = True
 
+
 ChannelnumberInstance = None
+
 
 def leaveStandby():
 	if config.plugins.SEG.showClock.value == 'Off':
 		display_write("....")
+
 
 def standbyCounterChanged(configElement):
 	from Screens.Standby import inStandby
@@ -167,9 +172,11 @@ def standbyCounterChanged(configElement):
 	if config.plugins.SEG.showClock.value == 'Off':
 		display_write("....")
 
+
 def initSEG():
 	if config.plugins.SEG.showClock.value == 'Off':
 		display_write("....")
+
 
 class VFD_INISetup(ConfigListScreen, Screen):
 	def __init__(self, session, args=None):
@@ -247,6 +254,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self.createSetup()
 		initSEG()
 
+
 class SEG:
 	def __init__(self, session):
 		self.session = session
@@ -265,6 +273,7 @@ class SEG:
 	def abort(self):
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
+
 def main(menuid):
 		if getImageDistro() in ("openatv", "openhdf", "openvix"):
 			if menuid == "display":
@@ -277,12 +286,15 @@ def main(menuid):
 			else:
 				return [(_("LED Display Setup"), startSEG, "VFD_INI", None)]
 
+
 def startSEG(session, **kwargs):
 	session.open(VFD_INISetup)
+
 
 Seg = None
 gReason = -1
 mySession = None
+
 
 def controlSeg():
 	global Seg
@@ -294,6 +306,7 @@ def controlSeg():
 	elif gReason == 1 and Seg != None:
 		Seg = None
 
+
 def sessionstart(reason, **kwargs):
 	global Seg
 	global gReason
@@ -304,6 +317,7 @@ def sessionstart(reason, **kwargs):
 	else:
 		gReason = reason
 	controlSeg()
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),

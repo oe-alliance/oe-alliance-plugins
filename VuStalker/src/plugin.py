@@ -12,6 +12,7 @@ from math import ceil as math_ceil
 
 scpoll = None
 
+
 class SCPoll:
 	CHECK_INTERVAL = 3600
 	RETRY_INTERVAL = 3000
@@ -65,11 +66,13 @@ class SCPoll:
 			self.poll_timer.callback.remove(self.poll)
 			self.poll_timer = None
 
+
 def sc_genres_cb(result):
 	if result:
 		print("[StalkerClient] genres available.")
 	else:
 		print("[StalkerClient] got no genres.")
+
 
 def sc_authenticate_cb(result):
 	print("[StalkerClient] authenticated: %s" % ("OK" if result is not None and result > 0 else "Fail"))
@@ -88,11 +91,13 @@ def sc_authenticate_cb(result):
 			if stalker.retry > 0:
 				scpoll.task(sc_authenticate_cb, stalker.authenticate)
 
+
 def sc_changed_setup(unused):
 	print("[StalkerClient] changed config values.")
 	if not scpoll.state:
 		scpoll.startup()
 		scpoll.task(sc_authenticate_cb, stalker.startup)
+
 
 def sc_changed_favlists(unused):
 	if scpoll.state:
@@ -101,6 +106,7 @@ def sc_changed_favlists(unused):
 			scpoll.poll_timer.stop()
 		else:
 			scpoll.poll_timer.start(scpoll.RETRY_INTERVAL, True)
+
 
 def sc_autostart(reason, **kwargs):
 	global scpoll
@@ -112,6 +118,7 @@ def sc_autostart(reason, **kwargs):
 			del scpoll
 		scthreads.clearThread()
 
+
 def sc_sessionstart(session, **kwargs):
 	config.plugins.stalker_client.mac.addNotifier(sc_changed_setup, initial_call=False, immediate_feedback=False)
 	config.plugins.stalker_client.server.addNotifier(sc_changed_setup, initial_call=False, immediate_feedback=False)
@@ -121,11 +128,14 @@ def sc_sessionstart(session, **kwargs):
 	if scpoll.state:
 		scpoll.task(sc_authenticate_cb, stalker.startup)
 
+
 def sc_setup(session, **kwargs):
 	session.open(StalkerClient_SetupScreen)
 
+
 def sc_main(session, **kwargs):
 	session.open(StalkerClient_ChannelSelection)
+
 
 def Plugins(**kwargs):
 	return [

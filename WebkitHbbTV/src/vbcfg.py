@@ -26,6 +26,7 @@ DFBRC = "/etc/directfbrc"
 SOCKETFILE = None
 CONTROLFILE = None
 
+
 def getPosition():
 	if fileExists("/proc/stb/fb/dst_left"):
 		try:
@@ -45,6 +46,7 @@ def getPosition():
 			ERR(Err)
 			return None
 	return (dst_left, dst_width, dst_top, dst_height)
+
 
 def setPosition(params):
 	if params is None:
@@ -69,6 +71,7 @@ def setPosition(params):
 			ERR(Err)
 			return
 
+
 def osd_lock():
 	fbClass.getInstance().lock()
 	eRCInput.getInstance().lock()
@@ -78,6 +81,7 @@ def osd_lock():
 			os.system('config -c DirectFB -visible on; config -c 1 -visible off')
 		except Exception as Err:
 			ERR(Err)
+
 
 def osd_unlock():
 	if fileExists("/usr/bin/config"):
@@ -89,14 +93,17 @@ def osd_unlock():
 	fbClass.getInstance().unlock()
 	eRCInput.getInstance().unlock()
 
+
 def set_bgcolor(val):
 	DEBUG("val = %s from %s" % (val, DFBRC))
 	os.system('sed \'s/bg-color=[0,f]*/bg-color=%s/\' %s > /tmp/tmprc' % (val, DFBRC))
 	os.system('mv /tmp/tmprc %s && rm -f /tmp/tmprc' % DFBRC)
 
+
 # for debug True
 #g_debug = True
 g_debug = False
+
 
 def LogEntry(mode, string):
 	if g_debug:
@@ -104,17 +111,21 @@ def LogEntry(mode, string):
 	elif mode != "DEBUG":
 		print("[browser] %s" % string)
 
+
 def DEBUG(string):
 	if g_debug:
 		LogEntry("DEBUG", string)
+
 
 def LOG(string):
 	if g_debug:
 		LogEntry("LOG", string)
 
+
 def WARN(string):
 	if g_debug:
 		LogEntry("WARN", string)
+
 
 def ERR(string):
 	if g_debug:

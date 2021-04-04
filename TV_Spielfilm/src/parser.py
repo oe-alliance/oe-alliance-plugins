@@ -4,6 +4,7 @@ from __future__ import print_function
 import six
 from re import sub, findall, S as RES, search
 
+
 def shortenChannel(text):
     text = text.replace('ProSieben ', 'Pro7 ').replace('kabel eins CLASSICS', 'k1CLASSICS').replace('Sky Family', 'SkyFamily').replace('Sky Cinema+', 'SkyCine+').replace('Sky Comedy', 'SkyComedy').replace('Sky Emotion', 'SkyEmotion').replace('Sky Sport HD', 'SkySport').replace('Eurosport ', 'Eurosport').replace('EXTREME SPORTS', 'EXTREME').replace('NAT GEO WILD', 'NatGeoWild').replace('Romance TV', 'RomanceTV')
     text = text.replace('13th Street', '13thStreet').replace('VH1 Classic', 'VH1Classic').replace('COMEDY CENTRAL', 'COMEDY C').replace('Cartoon Network', 'CartoonNet').replace('Disney Cinemagic', 'DisneyCine').replace('HISTORY HD', 'History HD').replace('DELUXE MUSIC', 'DeluxMusic')
@@ -449,6 +450,7 @@ def transCHANNEL(data):
     data = sub('BR.*?,', 'swr', data)
     return data
 
+
 def parsedetail(bereich, debug=None):
     bereich = sub('<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
     bereich = sub('</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
@@ -497,6 +499,7 @@ def parsedetail(bereich, debug=None):
     
     return text
 
+
 def cleanHTML(bereich):
     bereich = transHTML(bereich)
     bereich = sub('\r', '', bereich)
@@ -508,14 +511,17 @@ def cleanHTML(bereich):
     bereich = sub('<div class="vod".*?</div>', '', bereich, flags=RES)
     return bereich
 
+
 def fiximgLink(link):
     link = sub('" alt.*', '', link)
     return sub('.*data-src="', '', link)
     
+
 def parseInfoTable(output, debug=None):
     bereich = _parseInfoTableStart(output)
     bereich = sub('<span>\n\\s+<a href="', '<td>LINK', bereich)
     return _parseInfoTable(bereich, debug)
+
 
 def _parseInfoTableStart(output):
     startpos = output.find('<table class="info-table"')
@@ -526,6 +532,7 @@ def _parseInfoTableStart(output):
     bereich = transHTML(bereich)
     bereich = sub('class="chl_bg_. c-', '<td>LOGO', bereich)
     return bereich
+
 
 def _parseInfoTable(bereich, debug=None):
     bereich = sub('" target="_self" onclick', '</td>', bereich)
@@ -561,6 +568,7 @@ def parseInfoTable2(output, debug=None):
     bereich = sub('standard">\n\\s+<a href="https://www', '<td>LINKhttps://www', bereich)
     return _parseInfoTable(bereich, debug)
 
+
 def parsePrimeTimeTable(output, showgenre, debug=None):
     startpos = output.find('<table class="primetime-table">')
     endpos = output.find('</table>')
@@ -593,8 +601,10 @@ def parsePrimeTimeTable(output, showgenre, debug=None):
         print(bereich)
     return bereich
 
+
 def testnowerr(output):
     print(output)
+
 
 def testnow2():
     output = open('/tmp/tvspielfilm.html', 'r').read()
@@ -645,6 +655,7 @@ def testnow2():
 #def testnow():
 #    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
 #    getPage(link).addCallback(testnow2).addErrback(testnowerr)
+
 
 if __name__ == '__main__':
     testnow2()

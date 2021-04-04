@@ -23,6 +23,7 @@ import time
 import dvbreader
 from .TerrestrialScanSkin import downloadBar
 
+
 def setParams(frequency, system, bandwidth=8): # freq is nine digits (474000000)
 	params = eDVBFrontendParametersTerrestrial()
 	params.frequency = frequency
@@ -37,16 +38,19 @@ def setParams(frequency, system, bandwidth=8): # freq is nine digits (474000000)
 	params.hierarchy = eDVBFrontendParametersTerrestrial.Hierarchy_Auto
 	return params
 
+
 def setParamsFe(params):
 	params_fe = eDVBFrontendParameters()
 	params_fe.setDVBT(params)
 	return params_fe
+
 
 def channel2freq(channel, bandwidth=8): # Europe channels
 	if 4 < channel < 13: # Band III
 		return (((177 + (bandwidth * (channel - 5))) * 1000000) + 500000)
 	elif 20 < channel < 70: # Bands IV,V
 		return ((474 + (bandwidth * (channel - 21))) * 1000000) # returns nine digits
+
 
 def getChannelNumber(frequency, descr):
 	f = (frequency + 50000) / 100000 / 10.
@@ -67,6 +71,7 @@ def getChannelNumber(frequency, descr):
 		elif 526 < f < 820:	 # IV, V: CH28-CH69
 			return str(int(f - 526) / 7 + 28)
 	return ""
+
 
 class TerrestrialScan(Screen):
 	skin = downloadBar

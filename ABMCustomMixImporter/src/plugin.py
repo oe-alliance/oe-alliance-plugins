@@ -43,6 +43,7 @@ config.plugins.abmImporter.mix = ConfigSelection(default=default_mix, choices=ch
 config.plugins.abmImporter.enableImporter = ConfigYesNo(default=False)
 config.plugins.abmImporter.leadTime = ConfigSelection(default="5", choices=[("1", _("1 minute")), ("2", _("2 minutes")), ("3", _("3 minutes")), ("5", _("5 minutes")), ("10", _("10 minutes")), ("20", _("20 minutes")), ("30", _("30 minutes"))])
 
+
 class ABMCustomMixImporterScreen(Setup):
 	skin = """
 		<screen position="340,70" size="600,620">
@@ -127,6 +128,7 @@ class ABMCustomMixImporterScreen(Setup):
 		if answer:
 			self.close()
 
+
 class ABMCustomMixImporter(Screen):
 	skin = """
 	<screen position="0,0" size="1280,35" backgroundColor="transpBlack" flags="wfNoBorder" >
@@ -200,8 +202,10 @@ class ABMCustomMixImporter(Screen):
 	def keyCancel(self):
 		self.close()
 
+
 class schedule:
 	instance = None
+
 	def __init__(self, session):
 		print("[ABMCustomMixSchedule][__init__] Starting...")
 		self.session = session
@@ -279,6 +283,8 @@ class schedule:
 
 
 scheduleTimer = None
+
+
 def pluginAutoStart(reason, session=None, **kwargs):
 	"called with reason=1 to during /sbin/shutdown.sysvinit, with reason=0 at startup?"
 	global scheduleTimer
@@ -294,6 +300,7 @@ def pluginAutoStart(reason, session=None, **kwargs):
 		print("[ABMCustomMixImporter][schedule] Stop")
 		scheduleTimer.stop()
 
+
 def ABMisLoaded():
 	return pathExists(ABMpath)
 
@@ -301,14 +308,17 @@ def ABMisLoaded():
 def taskToSchedule(session, **kwargs):
 	session.open(ABMCustomMixImporter)
 
+
 def pluginManualStart(menuid, **kwargs):
 	if menuid == "scan":
 		return [(_("ABM CustomMix Importer"), ABMCustomMixImporterMain, "ABMCustomMixImporterScreen", 11)]
 	return []
 
+
 def ABMCustomMixImporterMain(session, **kwargs):
 	menu_path = "%s / %s / %s" % (_('Main menu'), _('Setup'), _('Service searching'))
 	session.open(ABMCustomMixImporterScreen, 'abmcustommiximporter', 'SystemPlugins/ABMCustomMixImporter', menu_path, PluginLanguageDomain)
+
 
 def Plugins(**kwargs):
 	pList = []

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 handler = []
 
+
 def hasEventListener(eventType, function):
     for e in handler:
         if e[0] == eventType and e[1] == function:

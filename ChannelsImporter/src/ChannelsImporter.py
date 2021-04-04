@@ -27,6 +27,7 @@ from .FTPDownloader import FTPDownloader
 DIR_ENIGMA2 = '/etc/enigma2/'
 DIR_TMP = '/tmp/'
 
+
 class ChannelsImporter(Screen):
 	skin = """
 	<screen position="0,0" size="1280,35" backgroundColor="transpBlack" flags="wfNoBorder" >

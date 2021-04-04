@@ -18,6 +18,7 @@ from .stalkerclient import SUPPORT_MODULES, SCThread, stalker
 from math import ceil as math_ceil
 from time import localtime, strftime, time
 
+
 def checkFuture(chid):
 	service = scinfo.epgdb.getServiceFromFavList(chid)
 	query = ['BDTn', (service, 0, -1, -1)]
@@ -26,6 +27,7 @@ def checkFuture(chid):
 		last_stop = events[-1][0] + events[-1][1]
 		return float(last_stop)
 	return time()
+
 
 def saveEvents(result):
 	res = ("0", time())
@@ -40,6 +42,7 @@ def saveEvents(result):
 	else:
 		print("[StalkerClient] got no events.")
 	return res
+
 
 def updateFuture(result):
 	chid, t = saveEvents(result)
@@ -65,11 +68,13 @@ def updateFuture(result):
 			result = stalker.getSimpleDataTable(str(chid), str(strftime('%Y-%m-%d', localtime(t))), str(p + 1))
 			saveEvents(result)
 
+
 def updateEvent(chid, future=False):
 	t = future and checkFuture(chid) or time()
 	# 1 week
 	if not t > time() + 604800:
 		return stalker.getSimpleDataTable(str(chid), str(strftime('%Y-%m-%d', localtime(t))), "0")
+
 
 def updateEvents(future=False):
 	if stalker.isAvailable(SUPPORT_MODULES['epg.simple']) and scinfo.epgdb.getFavouriteServiceList:
@@ -80,6 +85,7 @@ def updateEvents(future=False):
 			for chid in favlist:
 				t.addTask(updateFuture, updateEvent, chid, future)
 			t.addTask(None, updateDone)
+
 
 def updateDone(unused=None):
 	print("[StalkerClient] Events updated.")
@@ -153,11 +159,13 @@ class StalkerClient_EventViewBase:
 	def pageDown(self):
 		self["epg_description"].pageDown()
 
+
 class StalkerClient_EventViewSimple(Screen, StalkerClient_EventViewBase):
 	def __init__(self, session, Event, Channel, callback=None):
 		Screen.__init__(self, session)
 		self.skinName = ["StalkerClient_EventView", "EventView"]
 		StalkerClient_EventViewBase.__init__(self, Event, Channel, callback)
+
 
 class StalkerClient_EventViewEPGSelect(Screen, StalkerClient_EventViewBase):
 	def __init__(self, session, Event, Channel, callback=None, singleEPGCB=None, multiEPGCB=None):
@@ -182,8 +190,10 @@ class StalkerClient_EventViewEPGSelect(Screen, StalkerClient_EventViewBase):
 		if self.cbMultiEPG is not None:
 			self.cbMultiEPG()
 
+
 # 2 hours
 DT_DURATION = 7200
+
 
 class StalkerClient_EPGSelection(Screen):
 	def __init__(self, session, Channel, type=EPG_TYPE_SINGLE):
@@ -515,6 +525,7 @@ class StalkerEvent(object):
 		if int(self.m_ch_id) in scinfo.epgdb.getFavouriteServiceList():
 			scinfo.epgdb.putEvent(event)
 
+
 class StalkerServiceEvent(object):
 	def __init__(self, data):
 		self.m_chid = data.get('ch_id')
@@ -584,6 +595,7 @@ def StalkerEPGComponent(entry, size, type):
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, width / 10 * 3 + width / 10 * 2, 0, width / 10 * 5, height, 0, RT_HALIGN_LEFT, name))
 
 	return res
+
 
 class StalkerEPGList(MenuList):
 	def __init__(self, type, enableWrapAround=False):

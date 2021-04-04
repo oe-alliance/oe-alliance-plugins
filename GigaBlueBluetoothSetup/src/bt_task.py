@@ -1,6 +1,7 @@
 from __future__ import print_function
 from enigma import eTimer
 
+
 class BluetoothState:
 	STATE_NONE = 0
 	STATE_CONNECTING = 1
@@ -62,6 +63,7 @@ class BluetoothState:
 		###print("setScanning")
 		self.setState(self.STATE_PAIRING)
 
+
 class BluetoothTask(BluetoothState):
 	TASK_CONNECT = 0
 	TASK_DISCONNECT = 1
@@ -85,7 +87,6 @@ class BluetoothTask(BluetoothState):
 		self.doNextTmer1 = eTimer()
 		self.doNextTmer1.callback.append(self.doNext1)
 		self.doNextInterval1 = 100 # ms
-
 
 	def updateState(self, taskType):
 		if taskType == self.TASK_CONNECT:
@@ -256,7 +257,6 @@ class BluetoothTask(BluetoothState):
 
 				if eventCB:
 					eventCB(event, args)
-
 
 				self.doNextTmer.start(self.doNextInterval, True)
 

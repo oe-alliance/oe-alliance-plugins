@@ -60,6 +60,7 @@ _OPCODE_LIST = [
 		'OPCODE_END'
 		]
 
+
 class VBHandler(VBHandlers):
 	def __init__(self, session):
 		self._session = session
@@ -212,8 +213,10 @@ class VBHandler(VBHandlers):
 
 		return (True, data)
 
+
 class VBMain(Screen):
 	skin = """<screen name="VBMAIN" position="0,0" size="0,0" backgroundColor="transparent" flags="wfNoBorder" title=" "></screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -323,6 +326,7 @@ class VBMain(Screen):
 					return app
 		return None
 
+
 def HelpableScreen__init__(self):
 	if isinstance(self, HelpableScreen):
 		HelpableScreen.showManual = showManual
@@ -331,6 +335,7 @@ def HelpableScreen__init__(self):
 			"help_b": self.showHelp,
 			"help_l": self.showManual,
 		}, -2)
+
 
 def showManual(self):
 	if not os.path.exists(vbcfg.MANUALROOT):
@@ -344,6 +349,7 @@ def showManual(self):
 	vbcfg.set_bgcolor("ffffffff")
 	vbcfg.g_browser = self.session.open(HbbTVWindow, url, None)
 
+
 def auto_start_main(reason, **kwargs):
 	if reason:
 		try:
@@ -352,14 +358,17 @@ def auto_start_main(reason, **kwargs):
 		except:
 			pass
 
+
 def session_start_main(session, reason, **kwargs):
 	vbcfg.g_main = session.open(VBMain)
 	HelpableScreen.__init__ = HelpableScreen__init__
 	HelpableScreen.session = session
 
+
 def extension_start_application(session, **kwargs):
 	if vbcfg.g_main is not None:
 		vbcfg.g_main.menu_hbbtv_applications()
+
 
 def Plugins(**kwargs):
 	l = []

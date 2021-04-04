@@ -6,6 +6,7 @@ import gettext
 PluginLanguageDomain = "WebkitHbbTV"
 PluginLanguagePath = "Extensions/WebkitHbbTV/locale"
 
+
 def localeInit():
 	lang = language.getLanguage()[:2]
 	os.environ["LANGUAGE"] = lang
@@ -13,11 +14,13 @@ def localeInit():
 	gettext.textdomain("enigma2")
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
+
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
 		t = gettext.gettext(txt)
 	return t
+
 
 localeInit()
 language.addCallback(localeInit)

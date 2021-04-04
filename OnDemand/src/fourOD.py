@@ -57,6 +57,8 @@ __version__ = "Version 1.0.2: "
 fourodSearchDefault = u'http://www.channel4.com/search/predictive/?q='
 
 #=========================================================================================
+
+
 def readUrl(target):
 	try:
 		req = urllib2.Request(target)
@@ -67,6 +69,7 @@ def readUrl(target):
 		return outtxt
 	except:
 		return ''
+
 
 def wgetUrl(target):
 	try:
@@ -150,6 +153,8 @@ def wgetUrl(target):
 			return ("", isUK)
 		
 #==============================================================================
+
+
 def GetCharset(response):
 	if u'content-type' in response.info():
 		contentType = response.info()[u'content-type']
@@ -166,6 +171,8 @@ def GetCharset(response):
 	return None
         
 #==============================================================================
+
+
 class fourODMainMenu(Screen):
 
 	wsize = getDesktop(0).size().width() - 200
@@ -175,7 +182,6 @@ class fourODMainMenu(Screen):
 		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="4OD - Main Menu" >
 			<widget name="fourODMainMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
 		</screen>"""
-
 
 	def __init__(self, session, action, value):
 
@@ -271,6 +277,8 @@ class fourODMainMenu(Screen):
 				os_remove(os_path.join(root, name))
 
 ###########################################################################	   
+
+
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/fourOD.png"
@@ -804,6 +812,8 @@ class StreamsThumb(StreamsThumbCommon):
 			print(__plugin__, __version__, 'getSearchMediaData: Error parsing feed: ', exception)
 			
 #==============================================================================
+
+
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	stringValue = stringValue.replace('&#39;', '\'')
@@ -811,6 +821,8 @@ def checkUnicode(value, **kwargs):
 	return stringValue
 
 #==============================================================================
+
+
 def getJsonReady(value, **kwargs):
 	stringValue = str(value)
 	stringValue = stringValue.replace("(", "")
@@ -820,6 +832,8 @@ def getJsonReady(value, **kwargs):
 	return stringValue
 	
 #==========================================================================
+
+
 def remove_extra_spaces(data):
 	p = re.compile(r'\s+')
 	return p.sub(' ', data)

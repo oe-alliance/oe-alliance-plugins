@@ -19,6 +19,7 @@ g_max_speed = 30
 config.misc.window_animation_default = ConfigNumber(default=g_default["current"])
 config.misc.window_animation_speed = ConfigSelectionNumber(1, g_max_speed, 1, default=g_default["speed"])
 
+
 class AnimationSetupConfig(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="600,140" title="Animation Settings">
@@ -175,8 +176,10 @@ class AnimationSetupScreen(Screen):
 			setAnimation_current(current[1])
 			self.session.open(MessageBox, current[0], MessageBox.TYPE_INFO, timeout=3)
 
+
 def animationSetupMain(session, **kwargs):
 	session.open(AnimationSetupScreen)
+
 
 def startAnimationSetup(menuid):
 	if menuid != "system":
@@ -184,9 +187,11 @@ def startAnimationSetup(menuid):
 
 	return [(_("Animations"), animationSetupMain, "animation_setup", None)]
 
+
 def sessionAnimationSetup(session, reason, **kwargs):
 	setAnimation_current(config.misc.window_animation_default.value)
 	setAnimation_speed(int(config.misc.window_animation_speed.value))
+
 
 def Plugins(**kwargs):
 	return [

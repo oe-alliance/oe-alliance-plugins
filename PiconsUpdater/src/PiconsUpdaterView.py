@@ -16,6 +16,7 @@ from .EventDispatcher import addEventListener, removeEventListener
 from .Picon import MergePiconJob, OptimizePiconsFileSize, OPTIMIZE_PICONS_FINISHED, MERGE_PICONS_FINISHED
 from .BouquetParser import BouquetParser
 
+
 class PiconsUpdaterView(ConfigListScreen, Screen):
     skin = """
     <screen name="PiconsUpdater-Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="#90000000">

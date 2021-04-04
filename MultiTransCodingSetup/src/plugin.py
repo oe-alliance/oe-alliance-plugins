@@ -43,6 +43,7 @@ else:
 	config.plugins.transcodingsetup.aspectratio = ConfigSelection(default="2", choices=[("0", _("4x3")), ("1", _("16x9")), ("2", _("Auto"))])
 	config.plugins.transcodingsetup.interlaced = ConfigSelection(default="0", choices=[("1", _("Yes")), ("0", _("No"))])
 
+
 class TranscodingSetup(Screen, ConfigListScreen):
 	skin = """
 		<screen name="TranscodingSetup" position="center,center" size="900,500">
@@ -183,8 +184,10 @@ class TranscodingSetup(Screen, ConfigListScreen):
 		else:
 			self.close()
 
+
 def main(session, **kwargs):
 	session.open(TranscodingSetup)
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(

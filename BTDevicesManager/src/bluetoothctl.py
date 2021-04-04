@@ -29,6 +29,7 @@ import sys
 import re
 import six
 
+
 class BluetoothctlError(Exception):
     """This exception is raised, when bluetoothctl fails to start."""
     pass
@@ -235,5 +236,6 @@ class Bluetoothctl:
         except BluetoothctlError as e:
             print(e)
             return None
+
 
 iBluetoothctl = Bluetoothctl()

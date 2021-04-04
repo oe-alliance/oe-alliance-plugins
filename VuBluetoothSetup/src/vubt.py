@@ -5,9 +5,6 @@
 # the SWIG interface file instead.
 
 
-
-
-
 from sys import version_info
 if version_info >= (2, 6, 0):
     def swig_import_helper():
@@ -34,6 +31,8 @@ try:
     _swig_property = property
 except NameError:
     pass # Python < 2.2 doesn't have 'property'.
+
+
 def _swig_setattr_nondynamic(self, class_type, name, value, static=1):
     if (name == "thisown"):
         return self.this.own(value)
@@ -49,8 +48,10 @@ def _swig_setattr_nondynamic(self, class_type, name, value, static=1):
     else:
         raise AttributeError("You cannot add attributes to %s" % self)
 
+
 def _swig_setattr(self, class_type, name, value):
     return _swig_setattr_nondynamic(self, class_type, name, value, 0)
+
 
 def _swig_getattr(self, class_type, name):
     if (name == "thisown"):
@@ -60,12 +61,14 @@ def _swig_getattr(self, class_type, name):
         return method(self)
     raise AttributeError(name)
 
+
 def _swig_repr(self):
     try:
         strthis = "proxy of " + self.this.__repr__()
     except:
         strthis = ""
     return "<%s.%s; %s >" % (self.__class__.__module__, self.__class__.__name__, strthis,)
+
 
 try:
     _object = object
@@ -82,6 +85,7 @@ class Vu_PyBluetooth(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Vu_PyBluetooth, name)
     __repr__ = _swig_repr
+
     def __init__(self): 
         this = _vubt.new_Vu_PyBluetooth()
         try:
@@ -129,6 +133,8 @@ class Vu_PyBluetooth(_object):
     def OTAStart(self): return _vubt.Vu_PyBluetooth_OTAStart(self)
     def OTAStop(self): return _vubt.Vu_PyBluetooth_OTAStop(self)
     def OTACheckFWVersion(self, *args): return _vubt.Vu_PyBluetooth_OTACheckFWVersion(self, *args)
+
+
 Vu_PyBluetooth_swigregister = _vubt.Vu_PyBluetooth_swigregister
 Vu_PyBluetooth_swigregister(Vu_PyBluetooth)
 

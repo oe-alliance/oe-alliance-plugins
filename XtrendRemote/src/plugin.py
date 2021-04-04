@@ -46,6 +46,7 @@ elif temp == 4:
 elif temp == 3:
 	config.plugins.RCSetup.mode = ConfigSelection(choices=modelist, default="3")
 
+
 class RCSetupScreen(Screen, ConfigListScreen):
 	skin = """
 	<screen position="c-200,c-100" size="400,200" title="Remote setup">
@@ -77,7 +78,6 @@ class RCSetupScreen(Screen, ConfigListScreen):
 		}, -2)
 		self.createSetup()
 		self.grabLastGoodMode()
-
 
 	def grabLastGoodMode(self):
 		mode = config.plugins.RCSetup.mode.value
@@ -177,17 +177,21 @@ class RCSetupScreen(Screen, ConfigListScreen):
 			except:
 				return
 
+
 def main(session, **kwargs):
 	session.open(RCSetupScreen)
 
+
 def startup(reason, **kwargs):
 	return
+
 
 def RemoteControlSetup(menuid, **kwargs):
 	if menuid == "system":
 		return [(_("Remote Control Code"), main, "remotecontrolcode", 50)]
 	else:
 		return []
+
 
 def Plugins(**kwargs):
 	if os_path.exists("/proc/stb/ir/rc/type"):

@@ -16,6 +16,8 @@ RE_XML_ILLEGAL = u'([\u0000-\u0008\u000b-\u000c\u000e-\u001f\ufffe-\uffff])' + \
 
 
 DUMPBIN = vbcfg.PLUGINROOT + "/dumpait"
+
+
 class eAITSectionReader:
 	def __init__(self, demux, pmtid, sid):
 		self.mVuplusBox = False
@@ -108,6 +110,7 @@ class eAITSectionReader:
 			print("Control Code :", x["control"])
 			print("Profile Code :", x["profile"])
 			print("")
+
 
 def unit_test(demux, pmtid, sid):
 	reader = eAITSectionReader(demux, pmtid, sid)

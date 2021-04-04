@@ -20,6 +20,7 @@ config.plugins.browser.youtube_ntpd_url = ConfigText(default="0.rhel.pool.ntp.or
 
 g_browser_cfg = config.plugins.browser
 
+
 class PSingleton:
     def __init__(self, decorated):
         self._decorated = decorated
@@ -37,12 +38,14 @@ class PSingleton:
     def __instancecheck__(self, inst):
         return isinstance(inst, self._decorated)
 
+
 _DEBUG, _WARNING, _ERROR = 0xB1, 0xB2, 0xB3
 _LVSTR = {
     _DEBUG: "  DEBUG",
     _WARNING: "WARNING",
     _ERROR: "  ERROR"
 }
+
 
 @PSingleton
 class PLogger:
@@ -59,17 +62,22 @@ class PLogger:
             return
         print("[" + _LVSTR[level] + "]", format % argv)
 
+
 def INIT(level=_ERROR):
     PLogger.GetInstance().Init(level)
+
 
 def DEBUG(format, *argv):
     PLogger.GetInstance().Log(_DEBUG, format, argv)
 
+
 def WARNING(format, *argv):
     PLogger.GetInstance().Log(_WARNING, format, argv)
 
+
 def ERROR(format, *argv):
     PLogger.GetInstance().Log(_ERROR, format, argv)
+
 
 '''
 INIT(level = _DEBUG)

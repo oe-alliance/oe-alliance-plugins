@@ -28,12 +28,14 @@ cbcfg.INIT(cbcfg._ERROR)
 
 _g_locked = False
 
+
 def dvbapp_lock():
     cbcfg.DEBUG("dvbapp_lock")
 #       fbClass.getInstance().lock()
     global _g_locked
     _g_locked = True
     eRCInput.getInstance().lock()
+
 
 def dvbapp_unlock():
     cbcfg.DEBUG("dvbapp_unlock")
@@ -42,7 +44,10 @@ def dvbapp_unlock():
     _g_locked = False
     eRCInput.getInstance().unlock()
 
+
 _OPCODES = ['CONTROL_EXIT', 'VIRTUAL_KEYBOARD', 'OPCODE_END']
+
+
 class BrowserHandlers(PServerHandlers):
     def __init__(self):
         PServerHandlers.__init__(self, _OPCODES, '_CBH_')
@@ -81,9 +86,13 @@ class BrowserHandlers(PServerHandlers):
             return (False, None)
         return (True, returned_data)
 
+
 _HANDLER = BrowserHandlers()
+
+
 class BBrowserLauncher(Screen):
     skin = """<screen name="BBrowserLauncher" position="0,0" size="0,0" backgroundColor="transparent" flags="wfNoBorder" title=" "></screen>"""
+
     def __init__(self, session, mode=None, url="http://vuplus.com"):
         self.session = session
 
@@ -234,7 +243,10 @@ class BBrowserLauncher(Screen):
         self.virtual_keyboard_closed = False
         self.session.openWithCallback(self._virtual_keyborad_closed_cb, VirtualKeyBoard, title=(_("Chromium Virtual Keyboard")), text=default_data)
 
+
 global_session = None
+
+
 def stt_event_callback(text):
     global _g_locked
     url = "https://www.google.co.kr/search?q=" + text.replace(' ', '+')
@@ -242,6 +254,7 @@ def stt_event_callback(text):
         dvbapp_unlock()
         _g_locked = True
         cbcfg.g_browser = global_session.open(BBrowserLauncher, mode="chromiumos_stt", url=url)
+
 
 def start_youtubetv_main(session, **kwargs):
     def _cb_youtubetv_close(ret):
@@ -254,21 +267,26 @@ def start_youtubetv_main(session, **kwargs):
     else:
         session.openWithCallback(_cb_youtubetv_close, YoutubeTVWindow)
 
+
 def menu_start_youtube(menuid, **kwargs):
     if menuid == "mainmenu":
         return [(_("YouTubeTV"), start_youtubetv_main, "youtubetv", 46)]
     return []
 
+
 def plugin_setting_youtube(session, **kwargs):
     session.open(YoutubeTVSettings)
 
+
 def plugin_start_chromiumos(session, **kwargs):
     dvbapp_unlock()
+
     def _cb_chromiumos_close(ret):
         if ret:
             dvbapp_unlock()
             cbcfg.g_browser = session.open(BBrowserLauncher, mode="chromiumos")
     cbcfg.g_browser = session.openWithCallback(_cb_chromiumos_close, ChromiumOSWindow)
+
 
 def session_start_main(session, reason, **kwargs):
     PServerThread.close()
@@ -280,6 +298,7 @@ def session_start_main(session, reason, **kwargs):
         global_session = session
     except:
         pass
+
 
 def Plugins(**kwargs):
     l = []

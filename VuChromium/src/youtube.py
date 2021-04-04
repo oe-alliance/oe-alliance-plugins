@@ -9,6 +9,7 @@ from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText,
 
 from . import cbcfg
 
+
 class YoutubeTVSettings(ConfigListScreen, Screen):
     skin = """
             <screen position="center,center" size="600,180" title="YouTube TV Settings">
@@ -84,6 +85,7 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
             self.menulist.append(entryNtpdUri)
         self["config"].list = self.menulist
         self["config"].l.setList(self.menulist)
+
 
 class YoutubeTVWindow(Screen, HelpableScreen):
     skin = """

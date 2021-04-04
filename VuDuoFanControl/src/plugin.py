@@ -21,6 +21,7 @@ config.plugins.fansetups.usetimer = ConfigSelection(default="off", choices=[
 config.plugins.fansetups.fanontime = ConfigInteger(default=5, limits=(1, 100))
 config.plugins.fansetups.fanofftime = ConfigInteger(default=60, limits=(1, 100))
 
+
 class FanSetupConfiguration(Screen, ConfigListScreen):
 	skin = """
 		<screen name="FanSetupConfiguration" position="center,center" size="560,300" title="Standbymode FanSetup settings" >
@@ -30,6 +31,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ececec" backgroundColor="#1f771f" transparent="1" />
 			<widget name="config" zPosition="2" position="5,50" size="550,200" scrollbarMode="showOnDemand" transparent="1" />
 		</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Fan Control"))
@@ -88,7 +90,6 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		except:
 			print('Error read proc of fan')
 
-
 	def createSetup(self):
 		self.list = []
 		self.standbyEntry = getConfigListEntry(_("Fan basic action"), config.plugins.fansetups.standbymode)
@@ -123,7 +124,6 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 			x[1].cancel()
 		self.close()
 
-
 	def keyCancel(self):
 		print("cancel")
 		if self["config"].isChanged():
@@ -151,10 +151,12 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 def openconfig(session, **kwargs):
 	session.open(FanSetupConfiguration)
 
+
 def selSetup(menuid, **kwargs):
 	if menuid != "system":
 		return []
 	return [(_("Fan Control"), openconfig, "fansetup_config", 70)]
+
 
 def setfansetup(reason, **kwargs):
 	try:
@@ -170,6 +172,7 @@ def setfansetup(reason, **kwargs):
 				open('/proc/stb/system/fan_off_time', 'w').write('%s' % config.plugins.fansetups.fanofftime.value)
 	except:
 		print('Error to set fan control')
+
 
 def Plugins(**kwargs):
 	from os import path

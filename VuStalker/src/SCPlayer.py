@@ -96,6 +96,7 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 	PLAYER_IDLE = 0
 	PLAYER_PLAYING = 1
 	PLAYER_PAUSED = 2
+
 	def __init__(self, session, service_ref, service, cbListCommand=None, cbServiceCommand=None):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)

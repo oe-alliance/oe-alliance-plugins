@@ -12,6 +12,7 @@ from . import vbcfg
 _OPCODE = {}
 _BUFSIZE = 4096
 
+
 def SetHandler(opcode, handler):
 	try:
 		_OPCODE[opcode][1] = handler
@@ -20,6 +21,7 @@ def SetHandler(opcode, handler):
 		return False
 	return True
 
+
 def GetHandler(opcode):
 	for key, value in _OPCODE.items():
 		if value[0] == opcode:
@@ -27,11 +29,13 @@ def GetHandler(opcode):
 			return value[1]
 	return None
 
+
 def GetOpcode(opcode):
 	try:
 		return _OPCODE[opcode][0]
 	except:
 		return -1
+
 
 class VBController:
 	@staticmethod
@@ -62,6 +66,7 @@ class VBController:
 			if cmd_fd is not None:
 				os.close(cmd_fd)
 		return True
+
 
 class VBServerThread(threading.Thread):
 	def __init__(self):
@@ -137,6 +142,7 @@ class VBServerThread(threading.Thread):
 
 	def kill(self):
 		self.mFlag = False
+
 
 class VBHandlers:
 	def __init__(self, opcode_list, szcbh):

@@ -37,6 +37,7 @@ except ImportError:
     except ImportError:
         raise ImportError('The Python Imaging Library was not found.')
 
+
 def add_reflection(im, opacity=0.8):
     """ Returns the supplied PIL Image (im) with a reflection effect
     bgcolor  The background color of the reflection gradient

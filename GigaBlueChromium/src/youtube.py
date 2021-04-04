@@ -8,6 +8,7 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText, getConfigListEntry
 from . import cbcfg
 
+
 class YoutubeTVSettings(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="600,180" title="YouTube TV Settings">

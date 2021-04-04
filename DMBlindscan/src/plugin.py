@@ -791,11 +791,13 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 def main(session, close=None, **kwargs):
 	session.openWithCallback(close, Blindscan)
 
+
 def BlindscanSetup(menuid, **kwargs):
 	if menuid == "scan":
 		return [(_("Blind scan"), main, "blindscan", 50)]
 	else:
 		return []
+
 
 def Plugins(**kwargs):
 	if nimmanager.hasNimType("DVB-S") and getBoxType().startswith('dm'):

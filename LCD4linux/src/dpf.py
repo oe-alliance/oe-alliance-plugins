@@ -13,6 +13,7 @@ PROPERTY_FGCOLOR = 0x02
 PROPERTY_BGCOLOR = 0x03
 PROPERTY_ORIENTATION = 0x10
 
+
 def setBacklight(dev, value):
 	try:
 		dev.setProperty(PROPERTY_BRIGHTNESS, value)
@@ -20,6 +21,7 @@ def setBacklight(dev, value):
 	except:
 		print("[LCD4linux] Error set Backlight")
 		return False
+
 
 def showImage(dev, image):
 	try:
@@ -34,6 +36,7 @@ def showImage(dev, image):
 		print("[LCD4linux] Error writing DPF Device")
 		return False
 
+
 def open(usb):
 	try:
 		d = dpflib.open(usb)
@@ -43,6 +46,7 @@ def open(usb):
 		d = None
 		print("[LCD4linux] open Error", usb)
 	return d
+
 
 def close(dev):
 	try:

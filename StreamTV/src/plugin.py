@@ -28,6 +28,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 PLUGIN_PATH = resolveFilename(SCOPE_PLUGINS, "Extensions/StreamTV")
 
+
 class StreamTVPlayer(Screen, InfoBarNotifications):
 	skin = """
 		<screen name="StreamTVPlayer" flags="wfNoBorder" position="0,570" size="1280,190" title="StreamTV Player" backgroundColor="#41000000" >
@@ -44,6 +45,7 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 	PLAYER_IDLE = 0
 	PLAYER_PLAYING = 1
 	PLAYER_PAUSED = 2
+
 	def __init__(self, session, service, cbServiceCommand, chName, chURL, chIcon):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
@@ -185,6 +187,7 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 		elif self.state == self.PLAYER_PAUSED:
 			self.setSeekState(self.PLAYER_PLAYING)
 
+
 class StreamURIParser:
 	def __init__(self, xml):
 		self.xml = xml
@@ -211,6 +214,7 @@ class StreamURIParser:
 			uriInfo[x[:i].upper()] = str(x[i + 1:])
 		return uriInfo
 
+
 def streamListEntry(entry):
 	#print entry
 	uriInfo = entry[1].get('uri')
@@ -220,12 +224,14 @@ def streamListEntry(entry):
 		(eListboxPythonMultiContent.TYPE_TEXT, 250, 7, 310, 37, 1, RT_HALIGN_LEFT, str(uriInfo.get('URL')))
 	] 
 
+
 class StreamTVList(Screen):
 	skin = """
 		<screen name="StreamTVList" position="center,center" size="600,350" title="StreamTV List">
 			<widget name="streamlist" position="0,0" size="600,350" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 	        </screen>
 		"""
+
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
@@ -267,6 +273,7 @@ class StreamTVList(Screen):
 		if rc is not None:
 			if rc.strip() != '':
 				os.system('killall -INT rtmpdump')
+
 	def keyLeft(self):
 		if self.keyLocked:
 			return
@@ -405,6 +412,7 @@ class StreamTVList(Screen):
 		for x in streamDB:
 			self.streamList.append((x.get('name'), x))
 
+
 def main(session, **kwargs):
 	system("ethtool eth0 > /tmp/.eth0_test")
 	f = open("/tmp/.eth0_test", 'r')
@@ -418,6 +426,7 @@ def main(session, **kwargs):
 		session.open(StreamTVList)
 	else:
 		session.open(MessageBox, _("This plugin need internet connection. Please plug in ethernet cable and try again!"), MessageBox.TYPE_INFO, timeout=4)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("StreamTVPlayer"), description="Watching IPTV implemented by RTSP/RTMP protocol.", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)

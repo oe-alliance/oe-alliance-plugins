@@ -3,6 +3,7 @@ import gettext
 
 PluginLanguageDomain = "BROWSER"
 
+
 def _(txt):
     t = gettext.dgettext(PluginLanguageDomain, txt)
     if t == txt:

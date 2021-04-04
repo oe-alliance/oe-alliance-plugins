@@ -4,6 +4,7 @@ import unicodedata
 import re
 import six
 
+
 def getCleanFileName(value):
     """
     Converts to lowercase, removes non-word characters (alphanumerics and

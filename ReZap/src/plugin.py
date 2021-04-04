@@ -5,6 +5,7 @@ import os
 from enigma import eTimer
 #########
 
+
 class LoopSyncMain(Screen):
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
@@ -73,6 +74,8 @@ class LoopSyncMain(Screen):
 			print("[ReZap] Can't ResetFlag")
 
 ###################################                
+
+
 class DoReZap(Screen):
   
 	skin = """
@@ -99,6 +102,7 @@ class DoReZap(Screen):
 def sessionstart(session, **kwargs):
 	session.open(LoopSyncMain)
        
+
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)

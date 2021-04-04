@@ -7,6 +7,8 @@ import os
 import time
 import six
 ########################################################
+
+
 class LCD4linuxweb(resource.Resource):
 
 	title = "LCD4Linux Webinterface"
@@ -87,6 +89,7 @@ class LCD4linuxweb(resource.Resource):
 		html += "</form>\n"
 
 		return six.ensure_binary(html)
+
 
 class LCD4linuxwebView(LCD4linuxweb):
 

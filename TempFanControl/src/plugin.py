@@ -15,6 +15,7 @@ from Components.FanControl import fancontrol
 
 from boxbranding import getBrandOEM, getImageDistro
 
+
 class TempFanControl(Screen, ConfigListScreen):
 	skin = """
 		<screen position="center,center" size="570,420" title="Fan Control" >
@@ -173,8 +174,10 @@ class TempFanControl(Screen, ConfigListScreen):
 			fancontrol.getConfig(count).pwm_standby.load()
 		self.close()
 
+
 def main(session, **kwargs):
 	session.open(TempFanControl)
+
 
 def startMenu(menuid):
 	if getImageDistro() in ('openatv'):
@@ -187,6 +190,7 @@ def startMenu(menuid):
 		if menuid != "system":
 			return []
 	return [(_("Temperature and fan control"), main, "tempfancontrol", 80)]
+
 
 def Plugins(**kwargs):
 	from os import path

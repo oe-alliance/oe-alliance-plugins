@@ -48,6 +48,7 @@ try:
 except ImportError:
     import __builtin__
 
+
 def _swig_setattr_nondynamic(self, class_type, name, value, static=1):
     if (name == "thisown"):
         return self.this.own(value)
@@ -86,6 +87,7 @@ def _swig_repr(self):
     except __builtin__.Exception:
         strthis = ""
     return "<%s.%s; %s >" % (self.__class__.__module__, self.__class__.__name__, strthis,)
+
 
 try:
     _object = object
@@ -133,6 +135,8 @@ BT_REQUEST_CANCELPAIRING = _gbbt.BT_REQUEST_CANCELPAIRING
 BT_REQUEST_REMOVEPAIRING = _gbbt.BT_REQUEST_REMOVEPAIRING
 BT_REQUEST_CONNECT = _gbbt.BT_REQUEST_CONNECT
 BT_REQUEST_DISCONNECT = _gbbt.BT_REQUEST_DISCONNECT
+
+
 class Gb_PyBluetooth(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Gb_PyBluetooth, name, value)
@@ -298,6 +302,8 @@ class Gb_PyBluetooth(_object):
 
     def isMaxBLEPairedDevice(self):
         return _gbbt.Gb_PyBluetooth_isMaxBLEPairedDevice(self)
+
+
 Gb_PyBluetooth_swigregister = _gbbt.Gb_PyBluetooth_swigregister
 Gb_PyBluetooth_swigregister(Gb_PyBluetooth)
 

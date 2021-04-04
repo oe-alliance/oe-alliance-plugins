@@ -73,6 +73,7 @@ config.plugins.iptvimport.showinextensions = ConfigYesNo(default=False)
 config.plugins.iptvimport.showinmenu = ConfigYesNo(default=True)
 #TODO : add debug setting for print output
 
+
 class IPTVImporter(Screen, ConfigListScreen):
 
     #TODO : update Metrix skin
@@ -158,6 +159,7 @@ class IPTVImporter(Screen, ConfigListScreen):
     def start(self):
         # TODO: start as thread
         main(self.session)
+
 
 def setup(session, **kwargs):
     session.open(IPTVImporter)
@@ -550,6 +552,7 @@ if getDesktop(0).size().width() <= 1280:
     pluginlist = PluginDescriptor(name='IPTV Import', description='IPTV Import', where=PluginDescriptor.WHERE_PLUGINMENU, icon='plugin.png', fnc=main)
 else:
     pluginlist = PluginDescriptor(name='IPTV Import', description='IPTV Import', where=PluginDescriptor.WHERE_PLUGINMENU, icon='pluginfhd.png', fnc=main)
+
 
 def Plugins(**kwargs):
     result = [PluginDescriptor(name='IPTV Import Edit', description='IPTV Import Edit', where=PluginDescriptor.WHERE_PLUGINMENU, icon='edit.png', fnc=setup)]

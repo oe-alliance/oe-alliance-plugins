@@ -5,6 +5,7 @@ from Components.config import config, ConfigSubsection, ConfigSelection, ConfigT
 from .PiconsUpdaterView import PiconsUpdaterView
 from . import _, getConfigSizeList, getConfigBackgroundList, DEFAULT_PICON_PATH
 
+
 def main(session, **kwargs):
     config.plugins.PiconsUpdater = ConfigSubsection()
     config.plugins.PiconsUpdater.piconsPath = ConfigText(default=DEFAULT_PICON_PATH, fixed_size=False, visible_width=30)

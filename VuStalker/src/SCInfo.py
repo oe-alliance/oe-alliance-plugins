@@ -16,6 +16,7 @@ navigation_playservice = None
 SREF_FLAG_STALKER = 256
 SREF_FLAG_HASLINK = 512
 
+
 class StalkerServiceReference:
 	def __init__(self, sref):
 		self.type = 0
@@ -97,6 +98,7 @@ class StalkerServiceReference:
 	def __str__(self):
 		return "type : %d, flag : %d, sid : %d, tsid : %d, onid : %d, is_stalker : %d, haslink : %d, uri : %s, name : %s" % (self.type, self.flag, self.sid, self.tsid, self.onid, self.is_stalker, self.haslink, self.uri, self.name)
 
+
 def getTsidOnid():
 		from Components.config import config
 		import hashlib
@@ -108,6 +110,7 @@ def getTsidOnid():
 			tsid = 0
 		onid = 8000
 		return (tsid, onid)
+
 
 def createStalkerSref(sid, tsid, onid, haslink, uri, name):
 	if isinstance(sid, int):
@@ -134,6 +137,7 @@ def createStalkerSref(sid, tsid, onid, haslink, uri, name):
 	}
 	return eServiceReference(sref_str)
 
+
 def checkSameSref(sref_1, sref_2):
 	if not isinstance(sref_1, eServiceReference) or not isinstance(sref_2, eServiceReference):
 		return False
@@ -143,7 +147,10 @@ def checkSameSref(sref_1, sref_2):
 
 	return sref_1 == sref_2
 
+
 prev_linked = ()
+
+
 def getLink(sref):
 	global prev_linked
 	if prev_linked and sref.toString() == prev_linked[1]:
@@ -173,6 +180,7 @@ def getLink(sref):
 			new_sref = None
 
 	return new_sref
+
 
 class checkAvailable:
 	def __init__(self):
@@ -224,7 +232,9 @@ class checkAvailable:
 			else:
 				self.checkTimer.start(1000, True)
 
+
 check_available_instance = checkAvailable()
+
 
 def createLink(sref, checkParentalControl, forceRestart):
 	check_available_instance.stop()
@@ -240,6 +250,7 @@ def createLink(sref, checkParentalControl, forceRestart):
 
 	return new_sref
 
+
 def sc_playService(ref, checkParentalControl=True, forceRestart=False):
 	new_sref = createLink(ref, checkParentalControl, forceRestart)
 	res = navigation_playservice(new_sref, checkParentalControl, forceRestart)
@@ -248,12 +259,14 @@ def sc_playService(ref, checkParentalControl=True, forceRestart=False):
 		if new_sref and cur_sref and new_sref == cur_sref:
 			check_available_instance.setCurrentChannel(ref)
 
+
 def hookPlayService():
 	global navigation_playservice
 	import NavigationInstance
 	if NavigationInstance.instance:
 		navigation_playservice = NavigationInstance.instance.playService
 		NavigationInstance.instance.playService = sc_playService
+
 
 class EPGDB:
 	def __init__(self):
@@ -386,6 +399,7 @@ class EPGDB:
 		if NavigationInstance.instance is not None:
 			NavigationInstance.instance.dispatchEvent(iPlayableService.evUpdatedEventInfo)
 
+
 class StalkerThreadHandler:
 	def __init__(self):
 		self.threads = []
@@ -409,6 +423,7 @@ class StalkerThreadHandler:
 		if len(self.threads) > 0:
 			return self.threads.pop()
 
+
 class StalkerEventHandler:
 	def __init__(self):
 		self.epgdb = EPGDB()
@@ -424,6 +439,7 @@ class StalkerEventHandler:
 	def onSessionStart(self, session, **kwargs):
 		self.session = session
 		hookPlayService()
+
 
 scinfo = StalkerEventHandler()
 scthreads = StalkerThreadHandler()

@@ -20,7 +20,6 @@
 #######################################################################
 
 
-
 from re import compile as re_compile
 from os import path as os_path, listdir, stat as os_stat
 from Components.MenuList import MenuList
@@ -46,7 +45,6 @@ def FileEntryComponent(name, absolute=None, isDir=False):
 	if png is not None:
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 12, 3, 20, 20, png))
 	return res
-
 
 
 class FileList(MenuList):

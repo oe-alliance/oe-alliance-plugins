@@ -6,6 +6,7 @@ from enigma import eServiceCenter, eServiceReference
 from ServiceReference import ServiceReference
 SKIP_BOUQUET_NAMES = 'userbouquet.lastscanned.tv'
 
+
 def getChannelKey(service):
     channelKeyMatch = re.match('([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):', str(service))
     channelKey = '_'.join(map(str, channelKeyMatch.groups()))

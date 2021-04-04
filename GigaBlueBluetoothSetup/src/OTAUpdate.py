@@ -98,6 +98,7 @@ g_ota_event_description[OTA_RCU_DONE] = "OTA Completed."
 g_ota_event_description[OTA_RCU_DISCONNECTED] = "RCU disconnected."
 g_ota_event_description[OTA_INVALID_FIRMWARE] = "invalid firmware"
 
+
 class GbRcuOtaUpdate(Screen, HelpableScreen, BluetoothTask):
 	skin = """
 		<screen position="center,center" size="660,280" title="GB RCU OTA Update">

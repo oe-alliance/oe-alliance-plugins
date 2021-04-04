@@ -1,6 +1,7 @@
 from __future__ import print_function
 from enigma import eTimer
 
+
 class BluetoothState:
 	STATE_NONE = 0
 	STATE_CONNECTING = 1
@@ -56,6 +57,7 @@ class BluetoothState:
 
 	def setPairing(self):
 		self.setState(self.STATE_PAIRING)
+
 
 class BluetoothTask(BluetoothState):
 	TASK_CONNECT = 0
