@@ -50,7 +50,8 @@ class PServerHandlers:
                 cbcfg.DEBUG("add handler -> [%s]", opcodestr)
                 SetHandler(opcodestr, fref)
                 registreted_idx += 1
-            except: pass
+            except:
+                pass
         cbcfg.DEBUG("%d handlers registreated.", registreted_idx)
 
 class PServerThread(threading.Thread):

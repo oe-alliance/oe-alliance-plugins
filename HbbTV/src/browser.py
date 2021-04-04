@@ -42,7 +42,8 @@ class BrowserSetting:
 				self._start = tmp[0]
 				if len(tmp) > 1:
 					self._type = int(tmp[1])
-				else:	self._type = 0
+				else:
+					self._type = 0
 			elif line.startswith('keymap='):
 				self._keymap = line[7:len(line)-1]
 		f.close()
@@ -91,7 +92,7 @@ class BrowserPositionSetting:
 		str = f.read()
 		f.close()
 
-		pos = str.split();
+		pos = str.split()
 		self._left = int(pos[0])
 		self._width = int(pos[1])
 		self._top = int(pos[2])
@@ -344,7 +345,8 @@ class BrowserPreferenceWindow(ConfigListScreen, Screen):
 			self._startPageUrl = d['start']
 			self._keymapType = d['keymap']
 			#d['type']
-		except: self._startPageUrl = 'http://www.google.com'
+		except:
+			self._startPageUrl = 'http://www.google.com'
 		self.updateStartPageUrl()
 
 		if self._keymapType is None or len(self._keymapType) == 0:
@@ -602,7 +604,8 @@ class BrowserBookmarkWindow(Screen):
 				if data[0] == '#':
 					return self.mBookmarkList[idx][1]
 				idx -= 1
-		except: pass
+		except:
+			pass
 		return None
 
 	def isCategoryItem(self):
@@ -610,11 +613,13 @@ class BrowserBookmarkWindow(Screen):
 			head = self["bookmarklist"].getCurrent()[0].strip()
 			if head[0] == '#':
 				return True
-		except: pass
+		except:
+			pass
 		return False
 
 	def keyNumber(self):
-		if self.isCategoryItem(): return
+		if self.isCategoryItem():
+			return
 
 		data = self["bookmarklist"].getCurrent()[1]
 		if strIsEmpty(data.mUrl):
@@ -622,7 +627,8 @@ class BrowserBookmarkWindow(Screen):
 			self.mSession.open(MessageBox, msg, MessageBox.TYPE_INFO)
 			return
 		def cbSetStartpage(ret=None):
-			if ret is None: return
+			if ret is None:
+				return
 			if ret:
 				data = self["bookmarklist"].getCurrent()[1]
 				BrowserSetting().setData(data.mUrl, data.mType)
@@ -655,30 +661,36 @@ class BrowserBookmarkWindow(Screen):
 				self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, _('Add'), BookmarkEditWindow.CATEGORY, c, self.mBookmarkManager)
 		if strIsEmpty(self.mUrl):
 			l = [(_('Direct Input(Bookmark)'), 2,), (_('Direct Input(Category)'), 3,)]
-		else:	l = [(_('Currentpage(Bookmark)'), 1,), (_('Direct Input(Bookmark)'), 2,), (_('Direct Input(Category)'), 3,)]
+		else:
+			l = [(_('Currentpage(Bookmark)'), 1,), (_('Direct Input(Bookmark)'), 2,), (_('Direct Input(Category)'), 3,)]
 		self.mSession.openWithCallback(cbGreen, ChoiceBox, title=_("Please choose."), list=l)
 
 	def keyYellow(self):
 		data = self["bookmarklist"].getCurrent()[1]
 		if self.isCategoryItem():
 			self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, _('Edit'), BookmarkEditWindow.CATEGORY, data, self.mBookmarkManager)
-		else:	self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, _('Edit'), BookmarkEditWindow.BOOKMARK, data, self.mBookmarkManager)
+		else:
+			self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, _('Edit'), BookmarkEditWindow.BOOKMARK, data, self.mBookmarkManager)
 
 	def keyBlue(self):
 		def cbBlue(ret=None):
-			if not ret: return
+			if not ret:
+				return
 			data = self["bookmarklist"].getCurrent()[1]
 			if self.isCategoryItem():
 				self.mBookmarkManager.deleteCategory(data.mId)
-			else:	self.mBookmarkManager.deleteBookmark(data.mId)
+			else:
+				self.mBookmarkManager.deleteBookmark(data.mId)
 			self.updateBookmarkList()
 		if self.isCategoryItem():
 			msg = _("Do you want to delete the category and the bookmarks?")
-		else:	msg = _("Do you want to delete the bookmark?")
+		else:
+			msg = _("Do you want to delete the bookmark?")
 		self.mSession.openWithCallback(cbBlue, MessageBox, msg, MessageBox.TYPE_YESNO, default=True)
 
 	def keyOK(self):
-		if self.isCategoryItem(): return
+		if self.isCategoryItem():
+			return
 
 		data = self["bookmarklist"].getCurrent()[1]
 		url = data.mUrl.strip()

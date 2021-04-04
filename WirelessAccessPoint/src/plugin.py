@@ -458,23 +458,23 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 		# ssid Check
 		if len(apModeConfig.ssid.value) == 0 or len(apModeConfig.ssid.value) > 32:
 			self.session.open(MessageBox, _("Invalid SSID\n"), type = MessageBox.TYPE_ERROR, timeout = 10)
-			return False;
+			return False
 		elif apModeConfig.channel.value not in range(1, 14):
 			self.session.open(MessageBox, _("Invalid channel\n"), type = MessageBox.TYPE_ERROR, timeout = 10)
-			return False;
+			return False
 		elif apModeConfig.beacon.value < 15 or apModeConfig.beacon.value > 65535:
 			self.session.open(MessageBox, _("Invalid beacon\n"), type = MessageBox.TYPE_ERROR, timeout = 10)
-			return False;
+			return False
 		elif apModeConfig.rts_threshold.value < 0 or apModeConfig.rts_threshold.value > 2347:
 			self.session.open(MessageBox, _("Invalid RTS Threshold\n"), type = MessageBox.TYPE_ERROR, timeout = 10)
-			return False;
+			return False
 		elif apModeConfig.fragm_threshold.value < 256 or apModeConfig.fragm_threshold.value > 2346:
 			self.session.open(MessageBox, _("Invalid Fragm Threshold\n"), type = MessageBox.TYPE_ERROR, timeout = 10)
-			return False;
+			return False
 		elif apModeConfig.wpagrouprekey.value < 0 or apModeConfig.wpagrouprekey.value > 3600:
 			self.session.open(MessageBox, _("Invalid wpagrouprekey\n"), type = MessageBox.TYPE_ERROR, timeout = 10)
-			return False;
-		return True;
+			return False
+		return True
 
 	def networkRestart(self, nextFunc = None ):
 		self.networkRestart_stop( nextFunc = nextFunc )
@@ -596,10 +596,12 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 
 			if need_ralink_kmod: # check legacy modules in blacklist
 				for mod in legacy_modules:
-					if data.find(mod) != -1: return
+					if data.find(mod) != -1:
+						return
 			else:
 				for mod in kernel_modules: # check kernel modules in blacklist
-					if data.find(mod) != -1: return
+					if data.find(mod) != -1:
+						return
 
 		if not os_path.exists(blacklist_conf_dir):
 			makedirs(blacklist_conf_dir)
@@ -719,11 +721,11 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 		self.close()
 
 	def printConfigList(self, confList):
-		printDebugMsg("== printConfigList ==");
+		printDebugMsg("== printConfigList ==")
 		for (key, entry) in confList.items():
-			printDebugMsg("%s = %s"%(key, str(entry.value)));
+			printDebugMsg("%s = %s"%(key, str(entry.value)))
 		
-		printDebugMsg("== printConfigList end ==");
+		printDebugMsg("== printConfigList end ==")
 
 	def loadHostapConfig(self):
 		global apModeConfig

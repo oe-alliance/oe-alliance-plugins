@@ -35,13 +35,15 @@ try:
 except NameError:
     pass # Python < 2.2 doesn't have 'property'.
 def _swig_setattr_nondynamic(self,class_type,name,value,static=1):
-    if (name == "thisown"): return self.this.own(value)
+    if (name == "thisown"):
+        return self.this.own(value)
     if (name == "this"):
         if type(value).__name__ == 'SwigPyObject':
             self.__dict__[name] = value
             return
     method = class_type.__swig_setmethods__.get(name,None)
-    if method: return method(self,value)
+    if method:
+        return method(self,value)
     if (not static):
         self.__dict__[name] = value
     else:
@@ -51,21 +53,26 @@ def _swig_setattr(self,class_type,name,value):
     return _swig_setattr_nondynamic(self,class_type,name,value,0)
 
 def _swig_getattr(self,class_type,name):
-    if (name == "thisown"): return self.this.own()
+    if (name == "thisown"):
+        return self.this.own()
     method = class_type.__swig_getmethods__.get(name,None)
-    if method: return method(self)
+    if method:
+        return method(self)
     raise AttributeError(name)
 
 def _swig_repr(self):
-    try: strthis = "proxy of " + self.this.__repr__()
-    except: strthis = ""
+    try:
+        strthis = "proxy of " + self.this.__repr__()
+    except:
+        strthis = ""
     return "<%s.%s; %s >" % (self.__class__.__module__, self.__class__.__name__, strthis,)
 
 try:
     _object = object
     _newclass = 1
 except AttributeError:
-    class _object : pass
+    class _object :
+        pass
     _newclass = 0
 
 
@@ -77,10 +84,12 @@ class Vu_PyBluetooth(_object):
     __repr__ = _swig_repr
     def __init__(self): 
         this = _vubt.new_Vu_PyBluetooth()
-        try: self.this.append(this)
-        except: self.this = this
+        try:
+            self.this.append(this)
+        except:
+            self.this = this
     __swig_destroy__ = _vubt.delete_Vu_PyBluetooth
-    __del__ = lambda self : None;
+    __del__ = lambda self : None
     def enable(self): return _vubt.Vu_PyBluetooth_enable(self)
     def disable(self): return _vubt.Vu_PyBluetooth_disable(self)
     def checkBTUSB(self): return _vubt.Vu_PyBluetooth_checkBTUSB(self)

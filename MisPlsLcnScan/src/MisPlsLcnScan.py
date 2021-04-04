@@ -487,7 +487,7 @@ class MisPlsLcnScan(Screen):
 	def corelate_data(self):
 		servicekeys = self.tmp_services_dict.keys()
 		for servicekey in servicekeys:
-			if servicekey in self.logical_channel_number_dict and (self.logical_channel_number_dict[servicekey]["logical_channel_number"] not in self.services_dict or \
+			if servicekey in self.logical_channel_number_dict and (self.logical_channel_number_dict[servicekey]["logical_channel_number"] not in self.services_dict or
 				"priority" in PROVIDERS[config.plugins.MisPlsLcnScan.provider.value] and servicekey in PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["priority"]): # this line decides who wins if an LCN maps to more than one service
 				self.tmp_services_dict[servicekey]["logical_channel_number"] = self.logical_channel_number_dict[servicekey]["logical_channel_number"]
 				self.services_dict[self.logical_channel_number_dict[servicekey]["logical_channel_number"]] = self.tmp_services_dict[servicekey]

@@ -76,7 +76,8 @@ EPG_OPTIONS = 'BDTSEINX'    # X is not a returned-value setting
 #
 ci = 0
 for i in list(range(len(EPG_OPTIONS))):
-    if EPG_OPTIONS[i] == 'X': continue
+    if EPG_OPTIONS[i] == 'X':
+        continue
     exec("epg_%s = %d" % (EPG_OPTIONS[i], ci))
     ci += 1
 epg_PB = ci # Extra index for Playback Begin time.
@@ -315,7 +316,8 @@ def DO_translation(text, source, dest):     # source, dest are langs
         res += this_part + this_sep
         si += this_len
         togo -= this_len
-        if togo <= 0:   break
+        if togo <= 0:
+            break
 
 # Iff the remaining quoted length is less than twice bsize then lower
 # bsize, so we can't(?) end up with a very small final part.
@@ -458,11 +460,13 @@ def EPGdata_translate(title, descr, start, duration, uref):
                 to = int(start + duration + 60*config.epg.histminutes.getValue())
             if CfgPlTr.timeout_hr.getValue() > 0:
                 limit = int(time.time() + 3600*CfgPlTr.timeout_hr.getValue())
-                if limit < to:  to = limit
+                if limit < to:
+                    to = limit
             AfCache.add(uref, (t_title, t_descr), abs_timeout=to)
         except Exception as e:  # Use originals on a failure...
             print('[EPGTranslator-Plugin] translateEPG, %s: "%s"' % (type(e).__name__, e))
-            if (CfgPlTr.showtrace.getValue()): traceback.print_exc()
+            if (CfgPlTr.showtrace.getValue()):
+                traceback.print_exc()
             (t_title, t_descr) = (title, descr)
 
     return (t_title, t_descr)
@@ -686,8 +690,10 @@ Red: Refresh EPG
         elif fileExists(destination):
             self['flag'].instance.setPixmapFromFile(destination)
 # I think self.text is always None, but leave this here anyway.
-        if self.text is None:   self.getEPG()
-        else:                   self.translateEPG(self.text, '')
+        if self.text is None:
+            self.getEPG()
+        else:
+            self.translateEPG(self.text, '')
         return
 
 # ==================================================================
@@ -845,17 +851,27 @@ Red: Refresh EPG
             rec_began = None
             play_began = None
             if curEvent:
-                try:    eventID = curEvent.getEventId()
-                except: pass
-                try:    short = curEvent.getShortDescription()
-                except: pass
-                try:    extended = curEvent.getExtendedDescription()
-                except: pass
-                try:    ename = curEvent.getEventName()
-                except: pass
+                try:
+                    eventID = curEvent.getEventId()
+                except:
+                    pass
+                try:
+                    short = curEvent.getShortDescription()
+                except:
+                    pass
+                try:
+                    extended = curEvent.getExtendedDescription()
+                except:
+                    pass
+                try:
+                    ename = curEvent.getEventName()
+                except:
+                    pass
                 Servname = ename
-                try:    dur = curEvent.getDuration()
-                except: pass
+                try:
+                    dur = curEvent.getDuration()
+                except:
+                    pass
 # Approximate start time of playback
 # The getPlayPosition is in units of 1/90000s
 # BUT a playback has TWO start times.
@@ -868,8 +884,10 @@ Red: Refresh EPG
                     play_began = int(time.time() - secs_in)
                 except:
                     pass
-                try:    rec_began = curEvent.getBeginTime()
-                except: pass
+                try:
+                    rec_began = curEvent.getBeginTime()
+                except:
+                    pass
 
             if eventID == None:
 # Generate another unique ID instead.
@@ -909,7 +927,8 @@ Red: Refresh EPG
 # the last one before one with a future starting time
 #
             for i in list(range(1,len(self.list))):
-                if self.list[i][epg_B] > t_now: break
+                if self.list[i][epg_B] > t_now:
+                    break
                 self.count = i
 # Get the display going...
         self.showEPG()
@@ -998,8 +1017,10 @@ Red: Refresh EPG
         with open('/proc/stb/video/alpha', 'w') as f:
             count = 40
             while count >= 0:
-                if self.hideflag:   wv = count      # 40 -> 0
-                else:               wv = 40 - count # 0 -> 40
+                if self.hideflag:
+                    wv = count      # 40 -> 0
+                else:
+                    wv = 40 - count # 0 -> 40
                 f.write('%i' % (config.av.osd_alpha.getValue() * wv / 40))
                 f.flush()               # So it does something
                 count -= 1
@@ -1051,7 +1072,8 @@ def My_setEvent(self, event):
 
 # If we aren't translating then we have nothing more to do...
 #
-    if not self.EPGTr_translating: return
+    if not self.EPGTr_translating:
+        return
 
 # ... but if we are translating we need to change the text which
 # the orig_EVB_setEvent() call above has set.
@@ -1152,8 +1174,10 @@ def autostart(reason, **kwargs):
 # AND we only want to do it once (although we will probably only get
 # called once with reason 0).
 
-    if reason != 0: return
-    if autostart_init_done: return
+    if reason != 0:
+        return
+    if autostart_init_done:
+        return
 
 # Note that we will have done it.
 #

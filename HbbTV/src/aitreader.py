@@ -79,7 +79,8 @@ class eAITSectionReader:
 			return True
 
 		document = ""
-		try:	document = os.popen(self.mCommand).read()
+		try:
+			document = os.popen(self.mCommand).read()
 		except Exception as ErrMsg:
 			vbcfg.ERR(ErrMsg)
 			return False

@@ -411,7 +411,7 @@ class FirmwareUpgrade(Screen):
 
 		self.rebootLock = False
 		self.rebootMessage = ""
-		self.cbRebootCallCount = 0;
+		self.cbRebootCallCount = 0
 
 		from Tools.StbHardware import getFPVersion
 		self.version = str(getFPVersion() or "N/A")

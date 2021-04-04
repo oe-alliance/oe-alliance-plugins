@@ -49,9 +49,12 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 		InfoBarNotifications.__init__(self)
 
 		isEmpty = lambda x: x is None or len(x)==0 or x == 'None'
-		if isEmpty(chName): chName = 'Unknown'
-		if isEmpty(chURL):  chURL  = 'Unknown'
-		if isEmpty(chIcon): chIcon = 'default.png'
+		if isEmpty(chName):
+			chName = 'Unknown'
+		if isEmpty(chURL):
+			chURL  = 'Unknown'
+		if isEmpty(chIcon):
+			chIcon = 'default.png'
 		chIcon = '%s/icons/%s'%(PLUGIN_PATH, chIcon)
 		self.session = session
 		self.service = service
@@ -323,10 +326,12 @@ class StreamTVList(Screen):
 			#	os.unlink(url)
 		try:
 			serviceType = int(serviceType)
-		except:	serviceType = 4097
+		except:
+			serviceType = 4097
 		try:
 			bufferSize = int(bufferSize)
-		except:	bufferSize = None
+		except:
+			bufferSize = None
 
 		service = eServiceReference(serviceType, 0, url)
 		#if bufferSize is not None:
@@ -385,7 +390,8 @@ class StreamTVList(Screen):
 				d = uriInfo.get(key)
 				if d is not None:
 					return "-%s %s " %(option, d)
-			except: pass
+			except:
+				pass
 			return ''
 		command  = '%s -v ' % (self.streamBin)
 		command += appendCommand('URL', 'r')

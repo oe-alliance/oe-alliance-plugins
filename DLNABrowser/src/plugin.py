@@ -94,7 +94,8 @@ class DLNAFileList(FileList):
 			selectedFileName = self.getSelection()[0]
 			splitedFileName  = os.path.splitext(selectedFileName)
 			return EXTENSIONS[splitedFileName[1]]
-		except: pass
+		except:
+			pass
 		return 'unknown'
 
 class DLNAFileBrowser(Screen):
@@ -201,7 +202,8 @@ class DLNAFileBrowser(Screen):
 					else:
 						self.showUnknown()
 				return
-		except:	return
+		except:
+			return
 
 	def recursiveFileCheck(self, firstFileType = None):
 		files = []
@@ -233,7 +235,8 @@ class DLNAFileBrowser(Screen):
 						if firstFileType is None or fileType == firstFileType:
 							firstFileType = fileType
 							files = files + newFiles
-			except: pass
+			except:
+				pass
 			self["filelist"].down()
 		self["filelist"].changeParent()
 		return (files, firstFileType)
@@ -264,7 +267,8 @@ class DLNAFileBrowser(Screen):
 				self["filelist"].descent()
 				self.updateDirectory()
 				return
-		except:	return
+		except:
+			return
 		fileType = self["filelist"].getFileType()
 		self.showCB[fileType]()
 
@@ -310,7 +314,8 @@ class DLNAFileBrowser(Screen):
 			self.beforeService = None
 
 	def cbShowPicture(self, idx=0):
-		if idx > 0: self["filelist"].moveToIndex(idx)
+		if idx > 0:
+			self["filelist"].moveToIndex(idx)
 
 class DLNAStreamPlayer(Screen, InfoBarNotifications):
 	skin = 	"""
@@ -545,12 +550,15 @@ class DLNAImageViewer(Screen):
 			if l == 3:
 				if x[0][1] == False:
 					self.fileList.append(path + x[0][0])
-				else:	self.directoryCount += 1
+				else:
+					self.directoryCount += 1
 			elif l == 2:
 				if x[0][1] == False:
 					self.fileList.append(x[0][0])
-				else:	self.directoryCount += 1
-			else:	self.fileList.append(x[4])
+				else:
+					self.directoryCount += 1
+			else:
+				self.fileList.append(x[4])
 
 		self.currentIndex = self.lsatIndex - self.directoryCount
 		if self.currentIndex < 0:
@@ -758,7 +766,8 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 				value = self.oldConfig.get(key)
 				if value == None or value.strip() == '':
 					self.oldConfig[key] = default
-			except: self.oldConfig[key] = default
+			except:
+				self.oldConfig[key] = default
 
 		self.oldConfig = {}
 		if not os.path.exists(self.configFileName):
@@ -774,7 +783,8 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 				i   = line.find('=')
 				k, v = line[:i], line[i+1:]
 				self.oldConfig[k] = v
-			except : pass
+			except :
+				pass
 
 		#setDefault('rootdir', '/media/upnp/')
 		setDefault('refresh', '10')
@@ -893,10 +903,14 @@ class DLNADeviceBrowser(Screen):
 			try:
 				i   = line.find('=')
 				k, v = line[:i], line[i+1:]
-				if k == 'rootdir':	DLNA_CONFIG_ROOT_DIR = v
-				elif k == 'refresh':	DLNA_CONFIG_DEVICE_REFRESH = int(v)*1000
-				elif k == 'slideshow':	DLNA_CONFIG_SLIDESHOW = int(v)*1000
-			except : pass
+				if k == 'rootdir':
+					DLNA_CONFIG_ROOT_DIR = v
+				elif k == 'refresh':
+					DLNA_CONFIG_DEVICE_REFRESH = int(v)*1000
+				elif k == 'slideshow':
+					DLNA_CONFIG_SLIDESHOW = int(v)*1000
+			except :
+				pass
 		print("config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH))
 
 	def updateGUI(self):
@@ -915,19 +929,22 @@ class DLNADeviceBrowser(Screen):
 				newRefresh = int(refresh)*1000
 				if DLNA_CONFIG_DEVICE_REFRESH != newRefresh:
 					DLNA_CONFIG_DEVICE_REFRESH = newRefresh
-		except: pass
+		except:
+			pass
 		try:
 			if rootdir is not None:
 				if DLNA_CONFIG_ROOT_DIR != rootdir:
 					DLNA_CONFIG_ROOT_DIR = rootdir
 					print("need restart!!!")
-		except: pass
+		except:
+			pass
 		try:
 			if slideshow is not None:
 				newSlideshow = int(slideshow)*1000
 				if DLNA_CONFIG_SLIDESHOW != newSlideshow:
 					DLNA_CONFIG_SLIDESHOW = newSlideshow
-		except: pass
+		except:
+			pass
 		self.deviceListRefreshTimer.start(DLNA_CONFIG_DEVICE_REFRESH)
 		print("config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH))
 
@@ -963,7 +980,8 @@ class DLNADeviceBrowser(Screen):
 		deviceList = [ name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name)) ]
 		deviceList.sort()
 		for d in deviceList:
-			if d[0] in ('.', '_'): continue
+			if d[0] in ('.', '_'):
+				continue
 			items.append((d, d))
 		return items
 

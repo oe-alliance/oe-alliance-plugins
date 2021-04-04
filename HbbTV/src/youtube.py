@@ -101,7 +101,8 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 	def keyBlue(self):
 		if config.plugins.youtubetv.showhelp.value == True :
 			config.plugins.youtubetv.showhelp.setValue(False)
-		else:	config.plugins.youtubetv.showhelp.setValue(True)
+		else:
+			config.plugins.youtubetv.showhelp.setValue(True)
 
 class YoutubeTVSettings(ConfigListScreen, Screen):
 	skin=   """

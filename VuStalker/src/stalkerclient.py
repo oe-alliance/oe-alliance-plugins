@@ -299,7 +299,7 @@ class SCCache(object):
 	def ClearCache(self):
 		for file in os.listdir(self.basepath):
 			if file.startswith(self.prefix):
-				os.remove(self.basepath + '/' + file);
+				os.remove(self.basepath + '/' + file)
 		os.rmdir(self.basepath)
 
 	def SaveData(self, filename, contents='\"\"'):

@@ -100,11 +100,14 @@ class FPUpgradeCore() :
 	def doUpgrade(self):
 		firmware, device = None, None
 		def closefp(fp, fd):
-			if fd is not None: os.close(fd)
-			if fp is not None: fp.close()
+			if fd is not None:
+				os.close(fd)
+			if fp is not None:
+				fp.close()
 		try:
 			size = os.path.getsize(self.firmwarefile)
-			if size == 0: raise Exception('data_size is zero')
+			if size == 0:
+				raise Exception('data_size is zero')
 			#print '[FPUpgradeCore] data_size :',size
 
 			for xx in range(3):
@@ -116,25 +119,30 @@ class FPUpgradeCore() :
 				#print '[FPUpgradeCore] open >> [ok]'
 
 				rc = fcntl.ioctl(device, 0, size)
-				if rc < 0:raise_(Exception, 'fail to set size : %d'%(rc))
+				if rc < 0:
+					raise_(Exception, 'fail to set size : %d'%(rc))
 				#print '[FPUpgradeCore] set size >> [ok]'
 				self.status = STATUS_PREPARED
 
 				while True:
 					data = firmware.read(1024)
-					if data == '': break
+					if data == '':
+						break
 					os.write(device, data)
 				#print '[FPUpgradeCore] write data >> [ok]'
 
 				self.status = STATUS_PROGRAMMING
 				rc = fcntl.ioctl(device, 1, 0)
-				if rc == 0: break
-				if xx == 2:raise_(Exception, 'fail to upgrade : %d'%(rc))
+				if rc == 0:
+					break
+				if xx == 2:
+					raise_(Exception, 'fail to upgrade : %d'%(rc))
 				self.errmsg = 'fail to upgrade, retry..'
 				self.status = STATUS_RETRY_UPGRADE
 				closefp(firmware, device)
 			#print '[FPUpgradeCore] upgrade done.'
-			if self.callcount < 20: raise Exception('wrong fpga file.')
+			if self.callcount < 20:
+				raise Exception('wrong fpga file.')
 		except Exception as msg:
 			self.errmsg = msg
 			print('[FPUpgradeCore] ERROR >>', msg)
@@ -149,7 +157,8 @@ class FPUpgradeCore() :
 			print('upgrade done.')
 		elif self.status == STATUS_ERROR:
 			print('error!!')
-		else:	print('unknown.')
+		else:
+			print('unknown.')
 
 class FPGAUpgradeCore() :
 	status = STATUS_READY
@@ -164,11 +173,14 @@ class FPGAUpgradeCore() :
 	def doUpgrade(self):
 		firmware, device = None, None
 		def closefpga(fp, fd):
-			if fd is not None: os.close(fd)
-			if fp is not None: fp.close()
+			if fd is not None:
+				os.close(fd)
+			if fp is not None:
+				fp.close()
 		try:
 			size = os.path.getsize(self.firmwarefile)
-			if size == 0: raise Exception('data_size is zero')
+			if size == 0:
+				raise Exception('data_size is zero')
 			#print '[FPGAUpgradeCore] data_size :',size
 
 			firmware = open(self.firmwarefile, 'rb')
@@ -176,25 +188,30 @@ class FPGAUpgradeCore() :
 			#print '[FPGAUpgradeCore] open >> [ok]'
 
 			rc = fcntl.ioctl(device, 0, size)
-			if rc < 0:raise_(Exception, 'fail to set size : %d'%(rc))
+			if rc < 0:
+				raise_(Exception, 'fail to set size : %d'%(rc))
 			#print '[FPGAUpgradeCore] set size >> [ok]'
 
 			rc = fcntl.ioctl(device, 2, 5)
-			if rc < 0:raise_(Exception, 'fail to set programming mode : %d'%(rc))
+			if rc < 0:
+				raise_(Exception, 'fail to set programming mode : %d'%(rc))
 			#print '[FPGAUpgradeCore] programming mode >> [ok]'
 			self.status = STATUS_PREPARED
 
 			while True:
 				data = firmware.read(1024)
-				if data == '': break
+				if data == '':
+					break
 				os.write(device, data)
 			#print '[FPGAUpgradeCore] write data >> [ok]'
 
 			self.status = STATUS_PROGRAMMING
 			rc = fcntl.ioctl(device, 1, 0)
-			if rc < 0:raise_(Exception, 'fail to programming : %d'%(rc))
+			if rc < 0:
+				raise_(Exception, 'fail to programming : %d'%(rc))
 			#print '[FPGAUpgradeCore] upgrade done.'
-			if self.callcount < 20: raise Exception('wrong fpga file.')
+			if self.callcount < 20:
+				raise Exception('wrong fpga file.')
 		except Exception as msg:
 			self.errmsg = msg
 			print('[FPGAUpgradeCore] ERROR >>', msg)
@@ -210,7 +227,8 @@ class FPGAUpgradeCore() :
 			print('[FPGAUpgrade] upgrade done.')
 		elif self.status == STATUS_ERROR:
 			print('[FPGAUpgrade] occur error.')
-		else:	print('[FPGAUpgrade] occur unknown error.')
+		else:
+			print('[FPGAUpgrade] occur unknown error.')
 
 class VFDCtrlUpgradeCore() :
 	status = STATUS_READY
@@ -227,13 +245,17 @@ class VFDCtrlUpgradeCore() :
 		firmware, device, firmwarename = None, None, None
 
 		def closevfd(fp, fd, filename):
-			if fd is not None: os.close(fd)
-			if fp is not None: fp.close()
-			if filename is not None: os.system('rm -f %s' % (filename))
+			if fd is not None:
+				os.close(fd)
+			if fp is not None:
+				fp.close()
+			if filename is not None:
+				os.system('rm -f %s' % (filename))
 		try:
 			max_size = 1024 * 16
 			size = max_size #os.path.getsize(self.firmwarefile)
-			if size == 0: raise Exception('data_size is zero')
+			if size == 0:
+				raise Exception('data_size is zero')
 			#print '[VFDCtrlUpgradeCore] data_size :',size
 
 			for xx in range(3):
@@ -245,7 +267,8 @@ class VFDCtrlUpgradeCore() :
 				#print '[VFDCtrlUpgradeCore] open >> [ok]'
 
 				rc = fcntl.ioctl(device, 0, size)
-				if rc < 0:raise_(Exception, 'fail to set size : %d'%(rc))
+				if rc < 0:
+					raise_(Exception, 'fail to set size : %d'%(rc))
 				#print '[VFDCtrlUpgradeCore] set size >> [ok]'
 				self.status = STATUS_PREPARED
 
@@ -260,12 +283,15 @@ class VFDCtrlUpgradeCore() :
 
 				self.status = STATUS_PROGRAMMING
 				rc = fcntl.ioctl(device, 1, 0)
-				if rc == 0: break
-				if rc < 0 or xx == 2:raise_(Exception, 'fail to upgrade : %d'%(rc))
+				if rc == 0:
+					break
+				if rc < 0 or xx == 2:
+					raise_(Exception, 'fail to upgrade : %d'%(rc))
 				self.errmsg = 'fail to upgrade, retry..'
 				self.status = STATUS_RETRY_UPGRADE
 			#print '[VFDCtrlUpgradeCore] upgrade done.'
-			if self.callcount < 20: raise Exception('wrong fpga file.')
+			if self.callcount < 20:
+				raise Exception('wrong fpga file.')
 		except Exception as msg:
 			self.errmsg = msg
 			print('[VFDCtrlUpgradeCore] ERROR >>', msg)
@@ -281,7 +307,8 @@ class VFDCtrlUpgradeCore() :
 			print('[VFDCtrlUpgradeCore] upgrade done.')
 		elif self.status == STATUS_ERROR:
 			print('[VFDCtrlUpgradeCore] error.')
-		else:	print('[VFDCtrlUpgradeCore] unknown error.')
+		else:
+			print('[VFDCtrlUpgradeCore] unknown error.')
 
 class FirmwareUpgradeManager:
 	fu = None
@@ -311,7 +338,8 @@ class FirmwareUpgradeManager:
 		elif self.fu.status == STATUS_PROGRAMMING:
 			self.fu.callcount += 1
 			ret = (self.fu.callcount * 100) / self.fu.MAX_CALL_COUNT + 2
-			if ret >= 100: ret = 99
+			if ret >= 100:
+				ret = 99
 			#print "callcount : [%d]"%(self.fu.callcount);
 			return ret
 		elif self.fu.status == STATUS_DONE:
@@ -363,7 +391,7 @@ class UpgradeStatus(Screen):
 		self.check_status.callback.append(self.cbCheckStatus)
 		self.check_status.start(self.FU.getInterval())
 
-		self.exitTimerCallCount = 0;
+		self.exitTimerCallCount = 0
 		self.upgradeLock = True
 		self.FU.startUpgrade(self.datafile, device, firmware)
 
@@ -682,7 +710,7 @@ class FirmwareUpgrade(Screen, ConfigListScreen):
 
 		self.rebootLock = False
 		self.rebootMessage = ""
-		self.cbRebootCallCount = 0;
+		self.cbRebootCallCount = 0
 
 		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self["key_red"] = StaticText(_("Close"))

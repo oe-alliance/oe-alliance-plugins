@@ -148,7 +148,8 @@ class VoiceEventHandler:
 		for callback in self.findVoiceCallbackByName(name):
 			try:
 				callback(bt_types.BT_VOICE_PATH)
-			except:	pass
+			except:
+				pass
 
 	def updateCallbackNameList(self):
 		voiceCallbackNameList = [("Default", "Default")]

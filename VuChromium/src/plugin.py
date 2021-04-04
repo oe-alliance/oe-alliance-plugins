@@ -51,7 +51,8 @@ class BrowserHandlers(PServerHandlers):
     def _player_exit_cb(self, ret=None):
         try:
             self.playerHandle.playlist.clear()
-        except: pass
+        except:
+            pass
         self.playerHandle = None
 
     def _CBH_CONTROL_EXIT(self, result, packet):
@@ -124,7 +125,8 @@ class BBrowserLauncher(Screen):
             try:
                 if config.plugins.fccsetup.activate.value == True:
                     command += "-d 4"
-            except: pass
+            except:
+                pass
             command += "&"
         elif mode == "chromiumos":
             self.setTitle(_('ChromiumOS'))
@@ -136,7 +138,8 @@ class BBrowserLauncher(Screen):
             try:
                 if config.plugins.fccsetup.activate.value == True:
                     command += "-d 4"
-            except: pass
+            except:
+                pass
             command += "&"
         else :
             self.setTitle(_('ChromiumOS by STT'))
@@ -148,7 +151,8 @@ class BBrowserLauncher(Screen):
             try:
                 if config.plugins.fccsetup.activate.value == True:
                     command += "-d 4"
-            except: pass
+            except:
+                pass
             command += "&"
 
         #os.system(command)
@@ -274,7 +278,8 @@ def session_start_main(session, reason, **kwargs):
 
         global global_session
         global_session = session
-    except: pass
+    except:
+        pass
 
 def Plugins(**kwargs):
     l = []

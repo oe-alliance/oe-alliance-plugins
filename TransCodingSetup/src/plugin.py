@@ -298,7 +298,8 @@ class TranscodingSetupInit:
 					if L[0] == '#':
 						newConfigData += L + '\n'
 						continue
-				except: continue
+				except:
+					continue
 				LL = L.split()
 				if LL[5] == '/usr/bin/transtreamproxy':
 					LL[0] = port
