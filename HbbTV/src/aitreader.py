@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function, absolute_import
-import os, xml.dom.minidom, re, six
+import os
+import xml.dom.minidom
+import re
+import six
 from enigma import iServiceInformation
 from . import vbcfg
 

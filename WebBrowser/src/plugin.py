@@ -5,7 +5,10 @@ from . import _
 
 from Plugins.Plugin import PluginDescriptor
 
-import time, os, socket, copy
+import time
+import os
+import socket
+import copy
 from socket import gaierror, error
 from os import path as os_path, remove as os_remove
 from six.moves import _thread

@@ -194,7 +194,8 @@ def readSkin(skin):
 
 
 def printStackTrace():
-    import sys, traceback
+    import sys
+    import traceback
     print("--- STACK TRACE ---")
     traceback.print_exc(file=sys.stdout)
     print('-' * 50)

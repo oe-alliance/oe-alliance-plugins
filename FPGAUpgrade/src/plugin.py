@@ -3,7 +3,8 @@ from __future__ import print_function
 from future.utils import raise_
 from . import _
 
-import os, fcntl
+import os
+import fcntl
 from six.moves import _thread
 
 from enigma import eTimer

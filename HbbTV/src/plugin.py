@@ -1,5 +1,6 @@
 from __future__ import absolute_import
-import os, struct
+import os
+import struct
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.InfoBar import InfoBar

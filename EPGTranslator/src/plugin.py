@@ -29,7 +29,11 @@ from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import fileExists
 
-import sys, re, time, os, traceback
+import sys
+import re
+import time
+import os
+import traceback
 
 from .AutoflushCache import AutoflushCache
 from .HTML5Entities import name2codepoint

@@ -78,7 +78,8 @@ if os.path.exists("/proc/stb/info/vumodel"):
 			,"fp"   : ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
 			}
 
-import os, fcntl
+import os
+import fcntl
 from six.moves import _thread
 
 STATUS_READY 		= 0

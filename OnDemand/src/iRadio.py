@@ -37,7 +37,8 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 import NavigationInstance
 
-import time, random
+import time
+import random
 from time import strftime, strptime, mktime
 from datetime import timedelta, date, datetime
 

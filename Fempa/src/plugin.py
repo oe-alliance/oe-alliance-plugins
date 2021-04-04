@@ -15,7 +15,9 @@ from Components.MenuList import MenuList
 from Components.Input import Input
 from Screens.InputBox import InputBox
 from Components.ActionMap import ActionMap
-import re, time, os
+import re
+import time
+import os
 import socket
 
 from six.moves.http_cookiejar import CookieJar

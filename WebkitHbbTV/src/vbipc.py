@@ -1,5 +1,10 @@
 from __future__ import absolute_import
-import os, threading, time, socket, select, struct
+import os
+import threading
+import time
+import socket
+import select
+import struct
 from . import vbcfg
 
 _OPCODE  = {}

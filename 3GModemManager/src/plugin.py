@@ -22,7 +22,9 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUG
 from enigma import eTimer, eConsoleAppContainer, eSocketNotifier, getDesktop
 from select import POLLIN, POLLPRI
 from xml.sax import make_parser, handler
-import os, socket, time
+import os
+import socket
+import time
 
 
 debug_mode_modem_mgr = False

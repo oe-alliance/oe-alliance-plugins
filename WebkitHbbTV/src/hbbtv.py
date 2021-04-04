@@ -3,7 +3,8 @@ from Screens.Screen import Screen
 
 from enigma import eTimer
 
-import os, struct
+import os
+import struct
 
 from .__init__ import _
 from . import vbcfg
