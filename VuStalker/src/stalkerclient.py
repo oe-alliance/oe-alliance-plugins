@@ -2,7 +2,10 @@ from Components.config import config, ConfigSubsection, ConfigSelection, ConfigT
 
 from enigma import eTimer
 
-import collections, json, os, threading
+import collections
+import json
+import os
+import threading
 
 from ctypes import cdll, cast, c_char_p, c_void_p
 from time import localtime, strftime, time

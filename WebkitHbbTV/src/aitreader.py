@@ -1,6 +1,8 @@
 from __future__ import absolute_import
 from __future__ import print_function
-import os, xml.dom.minidom, re
+import os
+import xml.dom.minidom
+import re
 from enigma import iServiceInformation
 
 from . import vbcfg

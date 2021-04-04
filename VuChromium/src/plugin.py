@@ -6,7 +6,9 @@ from Components.config import config
 from Components.ActionMap import ActionMap
 from Components.VolumeControl import VolumeControl
 
-import os, time, subprocess
+import os
+import time
+import subprocess
 from . import cbcfg
 from . import pipc
 

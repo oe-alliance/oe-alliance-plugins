@@ -31,7 +31,8 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as os_walk
 
-import time, random
+import time
+import random
 from time import strftime, strptime, mktime
 from datetime import timedelta, date, datetime
 

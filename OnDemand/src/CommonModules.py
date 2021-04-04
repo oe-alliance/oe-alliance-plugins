@@ -39,7 +39,8 @@ from twisted.web import client
 from dns.resolver import Resolver
 from os import path as os_path, mkdir as os_mkdir
 
-import socket, sys
+import socket
+import sys
 
 from six.moves.http_client import HTTPConnection
 from six.moves.urllib.request import HTTPHandler

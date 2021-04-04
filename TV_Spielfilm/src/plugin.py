@@ -38,7 +38,13 @@ from six.moves.http_client import HTTPException
 from six.moves.urllib.parse import unquote_plus, urlencode, parse_qs
 from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirectHandler, HTTPHandler, HTTPCookieProcessor
 from six.moves.urllib.error import URLError, HTTPError
-import datetime, os, re, socket, sys, time, six
+import datetime
+import os
+import re
+import socket
+import sys
+import time
+import six
 from os import path
 from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin, printStackTrace, channelDB, readSkin, DESKTOP_WIDTH, DESKTOP_HEIGHT, skinFactor
 from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable

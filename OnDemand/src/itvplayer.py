@@ -36,7 +36,8 @@ from datetime import date
 from time import strftime
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as os_walk
 
-import urllib2, re
+import urllib2
+import re
 
 from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 

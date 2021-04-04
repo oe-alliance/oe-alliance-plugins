@@ -2,7 +2,8 @@
 # for localized messages
 from __future__ import print_function
 from __future__ import absolute_import
-import os, re
+import os
+import re
 from . import _
 from boxbranding import getBoxType, getImageDistro
 

@@ -4,7 +4,8 @@ from __future__ import print_function
 from __future__ import absolute_import
 from . import _
 
-import os, re
+import os
+import re
 from six.moves.urllib.request import Request, urlopen
 from six.moves.urllib.error import URLError, HTTPError
 

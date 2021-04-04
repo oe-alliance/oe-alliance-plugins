@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import re, unicodedata
+import re
+import unicodedata
 import six
 from enigma import eServiceCenter, eServiceReference
 from ServiceReference import ServiceReference

@@ -14,7 +14,9 @@ from Components.VolumeControl import VolumeControl
 
 from enigma import eTimer, iServiceInformation, iPlayableService
 
-import os, struct, time
+import os
+import struct
+import time
 
 from .__init__ import _
 from . import vbcfg

@@ -6,7 +6,10 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.config import config
 from Components.ActionMap import ActionMap
 from Components.VolumeControl import VolumeControl
-import os, pipc, time, subprocess
+import os
+import pipc
+import time
+import subprocess
 from enigma import eTimer, fbClass, eRCInput, eDVBResourceManager
 from Tools.Transponder import ConvertToHumanReadable
 from .pipc import PServerThread, PServerHandlers

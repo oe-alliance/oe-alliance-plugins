@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-import os, unicodedata, re, six
+import os
+import unicodedata
+import re
+import six
 
 def getCleanFileName(value):
     """
