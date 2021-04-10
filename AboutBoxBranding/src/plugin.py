@@ -18,12 +18,12 @@ class AboutBoxBranding(Screen):
 		self["key_red"] = StaticText(_("Close"))
 		self["AboutScrollLabel"] = ScrollLabel(getBoxbranding()[0])
 
-		self["actions"] = ActionMap(["SetupActions","NavigationActions"],
+		self["actions"] = ActionMap(["SetupActions", "NavigationActions"],
 		{
 			"cancel": self.close,
 			"up": self.pageUp,
-			"down":	self.pageDown,
-			"left":	self.pageUp,
+			"down": self.pageDown,
+			"left": self.pageUp,
 			"right": self.pageDown,
 			"pageUp": self.pageUp,
 			"pageDown": self.pageDown,
@@ -34,6 +34,7 @@ class AboutBoxBranding(Screen):
 
 	def pageDown(self):
 		self["AboutScrollLabel"].pageDown()
+
 
 def getBoxbranding():
 	import boxbranding
@@ -50,19 +51,22 @@ def getBoxbranding():
 			prlist.append(tuple([m, v]))
 	return (''.join(bblist), prlist)
 
+
 def main(session, **kwargs):
 	session.open(AboutBoxBranding)
+
 
 def start(menuid):
 	if menuid == "information":
 		return [(_("Boxbranding"), main, "About Boxbranding", 1000)]
 	return []
 
+
 def Plugins(**kwargs):
 	prlist = []
 	try:
 		prlist = getBoxbranding()[1]
-		res = len(prlist) 
+		res = len(prlist)
 		print("[AboutBoxBranding]... Number of entries = %s" % (res))
 		for x in range(0, res):
 			print("{: <24} {: <20}".format(prlist[x][0], prlist[x][1]))
@@ -70,5 +74,4 @@ def Plugins(**kwargs):
 		print("[AboutBoxBranding] Error: %s: '%s'!" % (type(err).__name__, err))
 		return []
 	from Plugins.Plugin import PluginDescriptor
-	return [PluginDescriptor(where = PluginDescriptor.WHERE_MENU, fnc=start)]
-			
+	return [PluginDescriptor(where=PluginDescriptor.WHERE_MENU, fnc=start)]

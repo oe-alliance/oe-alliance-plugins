@@ -22,12 +22,14 @@ from boxbranding import getImageDistro, getBoxType
 import Screens.Standby
 
 config.plugins.SEG = ConfigSubsection()
-config.plugins.SEG.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.SEG.showCHnumber = ConfigSelection(default = "15", choices = [("15",_("15 sec")),("30",_("30 sec")),("45",_("45 sec")),("60",_("60 sec"))])
-config.plugins.SEG.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.SEG.showClock = ConfigSelection(default="True_Switch", choices=[("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.SEG.showCHnumber = ConfigSelection(default="15", choices=[("15", _("15 sec")), ("30", _("30 sec")), ("45", _("45 sec")), ("60", _("60 sec"))])
+config.plugins.SEG.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
+
 
 def display_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
+
 
 class Channelnumber:
 
@@ -44,10 +46,9 @@ class Channelnumber:
 		self.TimerText = eTimer()
 		self.TimerText.timeout.get().append(self.showclock)
 		self.TimerText.start(1000, True)
-		self.onClose = [ ]
+		self.onClose = []
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__evStart,
 			})
 
@@ -138,7 +139,7 @@ class Channelnumber:
 					self.show()
 			else:
 				self.__eventInfoChanged(True)
-					
+
 		if config.plugins.SEG.showClock.value == 'Off':
 			display_write("....")
 			self.TimerText.start(self.updatetime, True)
@@ -156,11 +157,14 @@ class Channelnumber:
 		self.begin = time() + int(self.channelnrdelay)
 		self.endkeypress = True
 
+
 ChannelnumberInstance = None
+
 
 def leaveStandby():
 	if config.plugins.SEG.showClock.value == 'Off':
 		display_write("....")
+
 
 def standbyCounterChanged(configElement):
 	from Screens.Standby import inStandby
@@ -168,12 +172,14 @@ def standbyCounterChanged(configElement):
 	if config.plugins.SEG.showClock.value == 'Off':
 		display_write("....")
 
+
 def initSEG():
 	if config.plugins.SEG.showClock.value == 'Off':
 		display_write("....")
 
+
 class VFD_INISetup(ConfigListScreen, Screen):
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 
 		self.skin = """
 			<screen position="100,100" size="500,210" title="LED Display Setup" >
@@ -188,9 +194,9 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self.setTitle(_("LED Display Setup"))
 		self.onClose.append(self.abort)
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
 		self.createSetup()
 
@@ -199,7 +205,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("Save"))
 		self["key_yellow"] = Button(_("Update Date/Time"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.Save,
 			"cancel": self.Cancel,
@@ -248,11 +254,12 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self.createSetup()
 		initSEG()
 
+
 class SEG:
 	def __init__(self, session):
 		self.session = session
 		self.service = None
-		self.onClose = [ ]
+		self.onClose = []
 		self.Console = Console()
 		initSEG()
 
@@ -264,26 +271,30 @@ class SEG:
 		self.abort()
 
 	def abort(self):
-		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
+
 
 def main(menuid):
-		if getImageDistro() in ("openatv" , "openhdf", "openvix"):
+		if getImageDistro() in ("openatv", "openhdf", "openvix"):
 			if menuid == "display":
 				return [(_("LED Display Setup"), startSEG, "VFD_INI", None)]
 			else:
-				return[ ]
+				return[]
 		else:
 			if menuid != "system":
-				return [ ]
+				return []
 			else:
 				return [(_("LED Display Setup"), startSEG, "VFD_INI", None)]
+
 
 def startSEG(session, **kwargs):
 	session.open(VFD_INISetup)
 
+
 Seg = None
 gReason = -1
 mySession = None
+
 
 def controlSeg():
 	global Seg
@@ -294,6 +305,7 @@ def controlSeg():
 		Seg = SEG(mySession)
 	elif gReason == 1 and Seg != None:
 		Seg = None
+
 
 def sessionstart(reason, **kwargs):
 	global Seg
@@ -306,7 +318,7 @@ def sessionstart(reason, **kwargs):
 		gReason = reason
 	controlSeg()
 
-def Plugins(**kwargs):
-	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-		PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
 
+def Plugins(**kwargs):
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+		PluginDescriptor(name="LED Display Setup", description="Change LED display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]

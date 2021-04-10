@@ -3,7 +3,8 @@ from . import _, PluginLanguageDomain
 
 # Python
 from time import mktime, strftime, time, localtime
-import urllib2, os
+import urllib2
+import os
 
 # enigma
 from enigma import eTimer
@@ -35,9 +36,10 @@ default_mix = "dsayers_vmuk_into_skyuk"
 ABMpath = "/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/custom/"
 
 config.plugins.abmImporter = ConfigSubsection()
-config.plugins.abmImporter.mix = ConfigSelection(default = default_mix, choices = choices)
-config.plugins.abmImporter.enableImporter = ConfigYesNo(default = False)
-config.plugins.abmImporter.leadTime = ConfigSelection(default = "5", choices = [("1", _("1 minute")), ("2", _("2 minutes")), ("3", _("3 minutes")), ("5", _("5 minutes")), ("10", _("10 minutes")), ("20", _("20 minutes")), ("30", _("30 minutes"))])
+config.plugins.abmImporter.mix = ConfigSelection(default=default_mix, choices=choices)
+config.plugins.abmImporter.enableImporter = ConfigYesNo(default=False)
+config.plugins.abmImporter.leadTime = ConfigSelection(default="5", choices=[("1", _("1 minute")), ("2", _("2 minutes")), ("3", _("3 minutes")), ("5", _("5 minutes")), ("10", _("10 minutes")), ("20", _("20 minutes")), ("30", _("30 minutes"))])
+
 
 class ABMCustomMixImporterScreen(Setup):
 	skin = """
@@ -119,9 +121,10 @@ class ABMCustomMixImporterScreen(Setup):
 	def startImporter(self):
 		self.session.openWithCallback(self.startImporterCallback, ABMCustomMixImporter)
 
-	def startImporterCallback(self, answer = None):
+	def startImporterCallback(self, answer=None):
 		if answer:
 			self.close()
+
 
 class ABMCustomMixImporter(Screen):
 	skin = """
@@ -174,11 +177,11 @@ class ABMCustomMixImporter(Screen):
 			if int(response.getcode()) == 200:
 				return response.read()
 		except urllib2.HTTPError, err:
-			print '[ABMCustomMixImporter][fetchURL] ERROR:',err
+			print '[ABMCustomMixImporter][fetchURL] ERROR:', err
 		except urllib2.URLError, err:
-			print '[ABMCustomMixImporter][fetchURL] ERROR:',err.reason[0]
+			print '[ABMCustomMixImporter][fetchURL] ERROR:', err.reason[0]
 		except urllib2, err:
-			print '[ABMCustomMixImporter][fetchURL] ERROR:',err
+			print '[ABMCustomMixImporter][fetchURL] ERROR:', err
 		except:
 			import sys
 			print '[ABMCustomMixImporter][fetchURL] undefined error', sys.exc_info()[0]
@@ -196,8 +199,10 @@ class ABMCustomMixImporter(Screen):
 	def keyCancel(self):
 		self.close()
 
+
 class schedule:
 	instance = None
+
 	def __init__(self, session):
 		print "[ABMCustomMixSchedule][__init__] Starting..."
 		self.session = session
@@ -212,7 +217,7 @@ class schedule:
 			print "[ABMCustomMixSchedule][__init__] ABM config available"
 		except:
 			self.enableSchedule = False
-			self.clock = [0,0]
+			self.clock = [0, 0]
 			self.repeattype = "daily"
 			print "[ABMCustomMixSchedule][__init__] ABM config was not available"
 		self.fetchtimer = eTimer()
@@ -235,8 +240,7 @@ class schedule:
 			self.mix != config.plugins.abmImporter.mix.value or \
 			self.enableSchedule != config.autobouquetsmaker.schedule.value or \
 			self.clock[0] != config.autobouquetsmaker.scheduletime.value[0] or \
-			self.clock[1] != config.autobouquetsmaker.scheduletime.value[1] \
-		:
+			self.clock[1] != config.autobouquetsmaker.scheduletime.value[1]		:
 			print "[ABMCustomMixImporter][configChecker] config has changed"
 			self.enableImporter = config.plugins.abmImporter.enableImporter.value
 			self.leadTime = config.plugins.abmImporter.leadTime.value
@@ -267,7 +271,7 @@ class schedule:
 		ltime = localtime(now)
 		next = int(mktime((ltime.tm_year, ltime.tm_mon, ltime.tm_mday, self.clock[0], self.clock[1] - int(self.leadTime), 0, ltime.tm_wday, ltime.tm_yday, ltime.tm_isdst)))
 		if next > 0:
-			while (next-30) < now:
+			while (next - 30) < now:
 				next += intervals[self.repeattype]
 			self.fetchtimer.startLongTimer(next - now)
 		else:
@@ -276,6 +280,8 @@ class schedule:
 
 
 scheduleTimer = None
+
+
 def pluginAutoStart(reason, session=None, **kwargs):
 	"called with reason=1 to during /sbin/shutdown.sysvinit, with reason=0 at startup?"
 	global scheduleTimer
@@ -291,6 +297,7 @@ def pluginAutoStart(reason, session=None, **kwargs):
 		print "[ABMCustomMixImporter][schedule] Stop"
 		scheduleTimer.stop()
 
+
 def ABMisLoaded():
 	return pathExists(ABMpath)
 
@@ -298,18 +305,21 @@ def ABMisLoaded():
 def taskToSchedule(session, **kwargs):
 	session.open(ABMCustomMixImporter)
 
+
 def pluginManualStart(menuid, **kwargs):
 	if menuid == "scan":
 		return [(_("ABM CustomMix Importer"), ABMCustomMixImporterMain, "ABMCustomMixImporterScreen", 11)]
 	return []
 
+
 def ABMCustomMixImporterMain(session, **kwargs):
 	menu_path = "%s / %s / %s" % (_('Main menu'), _('Setup'), _('Service searching'))
 	session.open(ABMCustomMixImporterScreen, 'abmcustommiximporter', 'SystemPlugins/ABMCustomMixImporter', menu_path, PluginLanguageDomain)
 
+
 def Plugins(**kwargs):
 	pList = []
 	if ABMisLoaded():
-		pList.append( PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=pluginAutoStart))
-		pList.append( PluginDescriptor(name=_("ABM CustomMix Importer"), description="Imports CustomMix files for ABM", where = PluginDescriptor.WHERE_MENU, fnc=pluginManualStart, needsRestart=True) )
+		pList.append(PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=pluginAutoStart))
+		pList.append(PluginDescriptor(name=_("ABM CustomMix Importer"), description="Imports CustomMix files for ABM", where=PluginDescriptor.WHERE_MENU, fnc=pluginManualStart, needsRestart=True))
 	return pList

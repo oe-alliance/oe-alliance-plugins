@@ -1,6 +1,7 @@
 import os
 import xml.dom.minidom
 
+
 class Mixes():
 	MIXES_DIR = os.path.dirname(__file__) + "/mixes"
 
@@ -59,4 +60,3 @@ class Mixes():
 			mixes[mix["key"]] = mix
 
 		return mixes
-			

@@ -63,18 +63,18 @@ timsetlist = {"none": _("None"), "off": _("Fan - Off"), "on": _("Fan - On"), "au
 syswatchlist = {"off": _("Off"), "on": _("On")}
 
 config.plugins.FanSetup = ConfigSubsection()
-config.plugins.FanSetup.mode = ConfigSelection(choices = modelist, default = "auto")
-config.plugins.FanSetup.timeset = ConfigSelection(choices = timsetlist, default = "none")
-config.plugins.FanSetup.timestartoff = ConfigClock(default = ((21 * 60 + 30) * 60) )
-config.plugins.FanSetup.timeendoff = ConfigClock(default = ((7 * 60 + 0) * 60) )
-config.plugins.FanSetup.hddwatch = ConfigSelection(choices = hddwatchlist, default = "none")
-config.plugins.FanSetup.hdddevice = ConfigText(default = "all")
-config.plugins.FanSetup.hddsleep = ConfigBoolean(default = False)
-config.plugins.FanSetup.hddtemp = ConfigInteger(0, limits = (0,80))
-config.plugins.FanSetup.menuhdd = ConfigYesNo(default = False)
+config.plugins.FanSetup.mode = ConfigSelection(choices=modelist, default="auto")
+config.plugins.FanSetup.timeset = ConfigSelection(choices=timsetlist, default="none")
+config.plugins.FanSetup.timestartoff = ConfigClock(default=((21 * 60 + 30) * 60))
+config.plugins.FanSetup.timeendoff = ConfigClock(default=((7 * 60 + 0) * 60))
+config.plugins.FanSetup.hddwatch = ConfigSelection(choices=hddwatchlist, default="none")
+config.plugins.FanSetup.hdddevice = ConfigText(default="all")
+config.plugins.FanSetup.hddsleep = ConfigBoolean(default=False)
+config.plugins.FanSetup.hddtemp = ConfigInteger(0, limits=(0, 80))
+config.plugins.FanSetup.menuhdd = ConfigYesNo(default=False)
 config.plugins.FanSetup.fanspeed = ConfigSlider(default=127, increment=8, limits=(0, 255))
-config.plugins.FanSetup.systemtemp = ConfigInteger(40, limits = (15,80))
-config.plugins.FanSetup.systempwatch = ConfigSelection(choices = syswatchlist, default = "off")
+config.plugins.FanSetup.systemtemp = ConfigInteger(40, limits=(15, 80))
+config.plugins.FanSetup.systempwatch = ConfigSelection(choices=syswatchlist, default="off")
 
 
 class FanSetupScreen(Screen, ConfigListScreen):
@@ -102,7 +102,8 @@ class FanSetupScreen(Screen, ConfigListScreen):
 		<widget name="hddTemp" position="c+0,e-75" size="260,20" font="Regular;19" halign="right" zPosition="1" transparent="1" />
 	</screen>
 	"""
-	def __init__(self, session, args = None):
+
+	def __init__(self, session, args=None):
 		self.skin = FanSetupScreen.skin
 		self.setup_title = _("Fan setup:") + PLUGIN_VERSION
 		self.timer = eTimer()
@@ -202,7 +203,7 @@ class FanSetupScreen(Screen, ConfigListScreen):
 		self.timer.start(1000, True)
 
 	def getHddList(self):
-		hddlist = { }
+		hddlist = {}
 		for hdd in harddiskmanager.HDDList():
 			if "pci" in hdd[1].phys_path or "ahci" in hdd[1].phys_path:
 				devdir = hdd[1].getDeviceDir()
@@ -214,8 +215,8 @@ class FanSetupScreen(Screen, ConfigListScreen):
 
 	def initConfig(self):
 		def getPrevValues(section):
-			res = { }
-			for (key,val) in section.content.items.items():
+			res = {}
+			for (key, val) in section.content.items.items():
 				if isinstance(val, ConfigSubsection):
 					res[key] = getPrevValues(val)
 				else:
@@ -223,28 +224,28 @@ class FanSetupScreen(Screen, ConfigListScreen):
 			return res
 
 		self.FAN = config.plugins.FanSetup
-		self.prev_values      = getPrevValues(self.FAN)
-		self.cfg_mode         = getConfigListEntry(_("Fan mode"), self.FAN.mode)
-		self.cfg_timeset      = getConfigListEntry(_("Switch Fan mode on time setting"), self.FAN.timeset)
-		self.cfg_hddwatch     = getConfigListEntry(_("Watch HDD state"), self.FAN.hddwatch)
+		self.prev_values = getPrevValues(self.FAN)
+		self.cfg_mode = getConfigListEntry(_("Fan mode"), self.FAN.mode)
+		self.cfg_timeset = getConfigListEntry(_("Switch Fan mode on time setting"), self.FAN.timeset)
+		self.cfg_hddwatch = getConfigListEntry(_("Watch HDD state"), self.FAN.hddwatch)
 		self.cfg_systempwatch = getConfigListEntry(_("Watch system temp"), self.FAN.systempwatch)
 
 		# select internal hdd-drive
 		hddlist = self.getHddList()
 		hddlist["all"] = _("All")
 		default = not hddlist.has_key(self.FAN.hdddevice.value) and "all" or self.FAN.hdddevice.value
-		self.hddlistsel = ConfigSelection(choices = hddlist, default = default)
-		self.cfg_hdddevice= getConfigListEntry(_("Select internal HDD device"), self.hddlistsel)
+		self.hddlistsel = ConfigSelection(choices=hddlist, default=default)
+		self.cfg_hdddevice = getConfigListEntry(_("Select internal HDD device"), self.hddlistsel)
 		self.prev_hdddevice = self.FAN.hdddevice.value
 
 	def createSetup(self):
-		list = [ self.cfg_mode ]
-		if self.FAN.mode.value !="off":
+		list = [self.cfg_mode]
+		if self.FAN.mode.value != "off":
 			list.append(self.cfg_timeset)
 			if self.FAN.timeset.value != "none":
 					list.append(getConfigListEntry(_("Start time"), self.FAN.timestartoff))
 					list.append(getConfigListEntry(_("End time"), self.FAN.timeendoff))
-		if self.FAN.mode.value =="off":
+		if self.FAN.mode.value == "off":
 			list.append(self.cfg_hddwatch)
 			if self.FAN.hddwatch.value != "none":
 				list.append(self.cfg_hdddevice)
@@ -274,7 +275,7 @@ class FanSetupScreen(Screen, ConfigListScreen):
 
 	def keyRed(self):
 		def setPrevValues(section, values):
-			for (key,val) in section.content.items.items():
+			for (key, val) in section.content.items.items():
 				value = values.get(key, None)
 				if value is not None:
 					if isinstance(val, ConfigSubsection):
@@ -300,7 +301,7 @@ class FanSetupScreen(Screen, ConfigListScreen):
 		if mode == "off" and self.FAN.hddwatch.value != "none":
 			removable = False
 			file_removable = '/sys/block/sda/removable'
-			if os.path.exists(file_removable) :
+			if os.path.exists(file_removable):
 				fd = open(file_removable, 'r')
 				removable = fd.read()
 				fd.close()
@@ -308,18 +309,18 @@ class FanSetupScreen(Screen, ConfigListScreen):
 			if removable == '0':
 				print "removable state for device HDD"
 			else:
-				self.session.open(MessageBox, _("You may not use this mode!\nNot found an internal hard drive!"), MessageBox.TYPE_INFO, timeout = 5)
+				self.session.open(MessageBox, _("You may not use this mode!\nNot found an internal hard drive!"), MessageBox.TYPE_INFO, timeout=5)
 				self.FAN.hddwatch.value = "none"
 				return
 		if self.FAN.timeset.value != "none" and self.FAN.timestartoff.value == self.FAN.timeendoff.value:
 			# show warning message and return
-			self.session.open(MessageBox, _("Start time OFF mode equal End time OFF mode\nYou may not use this time settings!"), MessageBox.TYPE_INFO, timeout = 5)
+			self.session.open(MessageBox, _("Start time OFF mode equal End time OFF mode\nYou may not use this time settings!"), MessageBox.TYPE_INFO, timeout=5)
 			self.FAN.timeset.value = "none"
 			return
 			# or just set it to False and continue
 		if self.FAN.hddwatch.value == "sleep" and self.FAN.hddsleep.value is True and timehddsleep == "0":
 			# show warning message and return
-			self.session.open(MessageBox, _("Harddisk standby after - no standby\nYou may not use this mode!"), MessageBox.TYPE_INFO, timeout = 5)
+			self.session.open(MessageBox, _("Harddisk standby after - no standby\nYou may not use this mode!"), MessageBox.TYPE_INFO, timeout=5)
 			self.FAN.hddsleep.value = False
 			return
 			# or just set it to False and continue
@@ -357,7 +358,7 @@ class FanManager:
 		if mode != "off" and timeset != "none":
 			ts = localtime()
 			nowsec = (ts.tm_hour * 3600) + (ts.tm_min * 60)
-			offlist= config.plugins.FanSetup.timestartoff.value
+			offlist = config.plugins.FanSetup.timestartoff.value
 			offsec = (offlist[0] * 3600) + (offlist[1] * 60)
 			onlist = config.plugins.FanSetup.timeendoff.value
 			onsec = (onlist[0] * 3600) + (onlist[1] * 60)
@@ -385,7 +386,7 @@ class FanManager:
 				if FanConf.hddwatch.value == "sleep" and FanConf.hddsleep.value is True:
 					sleepcount = 0
 					hddlist = harddiskmanager.HDDList()
-					for x in range (hddcount):
+					for x in range(hddcount):
 						if hddlist[x][1].isSleeping():
 							sleepcount += 1
 						else:
@@ -410,7 +411,7 @@ class FanManager:
 			if temp is not None:
 				if temp >= FanConf.systemtemp.value:
 					mode = "on"
-					# adjust speed: 
+					# adjust speed:
 					# - use initial speed when current sys temp > user specified value
 					# - increase speed til max. Max is reached when current sys temp = 2 * user specified value
 					speed = min(FanConf.fanspeed.value + (255 - FanConf.fanspeed.value) * ((temp / FanConf.systemtemp.value) - 1), 255)
@@ -439,6 +440,7 @@ class FanManager:
 		except:
 			pass
 
+
 def getSysTemp():
 	try:
 		if os.path.exists("/proc/stb/sensors/temp/value"):
@@ -453,6 +455,7 @@ def getSysTemp():
 	except:
 		return None
 
+
 def getTempForDevice(device):
 	try:
 		os.system('/usr/sbin/hddtemp -q %s > /tmp/hdd.temperature' % device)
@@ -464,12 +467,13 @@ def getTempForDevice(device):
 		pos1 = temperature.rfind(':')
 		pos2 = temperature.rfind('C')
 		if pos1 != -1 and pos2 != -1 and pos1 < pos2:
-			temp = int(temperature[pos1+1:pos2])
-			disk = temperature[1:pos1].replace('\x10\x80','').strip()
+			temp = int(temperature[pos1 + 1:pos2])
+			disk = temperature[1:pos1].replace('\x10\x80', '').strip()
 			return disk, temp
 	except:
 		pass
 	return None, None
+
 
 def getHddTemp():
 	if os.path.exists("/usr/sbin/hddtemp"):
@@ -492,14 +496,16 @@ def getHddTemp():
 				return None, None
 	return None, None
 
+
 def selSetup(menuid, **kwargs):
 	if getImageDistro() in ("openatv"):
 		if menuid != "extended":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
-			return [ ]
+			return []
 	return [(_("Fan Control"), main, "fansetup_config", 70)]
+
 
 def show_temp(session, **kwargs):
 	sysTemp = getSysTemp()
@@ -516,21 +522,24 @@ def show_temp(session, **kwargs):
 		message += "\n\n" + _("System temperature") + " " + str(sysTemp) + str('\xc2\xb0') + ' C'
 	session.open(MessageBox, message, type=MessageBox.TYPE_INFO)
 
+
 def main(session, **kwargs):
 	session.open(FanSetupScreen)
 
+
 def startup(reason, **kwargs):
 	fanmanager = FanManager()
+
 
 def Plugins(**kwargs):
 	from os import path
 	if path.exists("/proc/stb/fp/fan"):
 		from Plugins.Plugin import PluginDescriptor
 		if config.plugins.FanSetup.menuhdd.value is True:
-			return [PluginDescriptor(name=_("Fan Control"), description=_("switch Fan On/Off"), where = PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=selSetup),
-					PluginDescriptor(name=_("Fan Setup"), description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup),
-					PluginDescriptor(name=_("Show Temp"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc = show_temp)]
+			return [PluginDescriptor(name=_("Fan Control"), description=_("switch Fan On/Off"), where=PluginDescriptor.WHERE_MENU, needsRestart=True, fnc=selSetup),
+					PluginDescriptor(name=_("Fan Setup"), description="", where=PluginDescriptor.WHERE_SESSIONSTART, fnc=startup),
+					PluginDescriptor(name=_("Show Temp"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=show_temp)]
 		else:
-			return [PluginDescriptor(name=_("Fan Control"), description=_("switch Fan On/Off"), where = PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=selSetup),
-					PluginDescriptor(name=_("Fan Setup"), description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
+			return [PluginDescriptor(name=_("Fan Control"), description=_("switch Fan On/Off"), where=PluginDescriptor.WHERE_MENU, needsRestart=True, fnc=selSetup),
+					PluginDescriptor(name=_("Fan Setup"), description="", where=PluginDescriptor.WHERE_SESSIONSTART, fnc=startup)]
 	return []

@@ -1,7 +1,9 @@
 # for localized messages
 from . import _
 
-import os, fcntl, thread
+import os
+import fcntl
+import thread
 
 from enigma import eTimer
 
@@ -23,30 +25,36 @@ from Components.ActionMap import ActionMap
 from Components.PluginComponent import plugins
 from Components.Sources.StaticText import StaticText
 
-STATUS_READY 		= 0
-STATUS_DONE 		= 1
-STATUS_ERROR		= 2
-STATUS_PREPARED		= 3
-STATUS_PROGRAMMING 	= 4
+STATUS_READY = 0
+STATUS_DONE = 1
+STATUS_ERROR = 2
+STATUS_PREPARED = 3
+STATUS_PROGRAMMING = 4
 
-class FPGAUpgradeCore() :
+
+class FPGAUpgradeCore():
 	status = STATUS_READY
 	errmsg = ''
-	callcount 	= 0
-	MAX_CALL_COUNT 	= 1500
+	callcount = 0
+	MAX_CALL_COUNT = 1500
+
 	def __init__(self, firmwarefile, devicefile):
 		print '[FPGAUpgrade]'
 		self.devicefile = devicefile
 		self.firmwarefile = firmwarefile
 
 	def doUpgrade(self):
-		firmware,device = None,None
+		firmware, device = None, None
+
 		def closefpga(fp, fd):
-			if fd is not None: os.close(fd)
-			if fp is not None: fp.close()
+			if fd is not None:
+				os.close(fd)
+			if fp is not None:
+				fp.close()
 		try:
 			size = os.path.getsize(self.firmwarefile)
-			if size == 0: raise Exception, 'data_size is zero'
+			if size == 0:
+				raise Exception, 'data_size is zero'
 			#print '[FPGAUpgradeCore] data_size :',size
 
 			firmware = open(self.firmwarefile, 'rb')
@@ -54,28 +62,33 @@ class FPGAUpgradeCore() :
 			#print '[FPGAUpgradeCore] open >> [ok]'
 
 			rc = fcntl.ioctl(device, 0, size)
-			if rc < 0: raise Exception, 'fail to set size : %d'%(rc)
+			if rc < 0:
+				raise Exception, 'fail to set size : %d' % (rc)
 			#print '[FPGAUpgradeCore] set size >> [ok]'
 
 			rc = fcntl.ioctl(device, 2, 5)
-			if rc < 0: raise Exception, 'fail to set programming mode : %d'%(rc)
+			if rc < 0:
+				raise Exception, 'fail to set programming mode : %d' % (rc)
 			#print '[FPGAUpgradeCore] programming mode >> [ok]'
 			self.status = STATUS_PREPARED
 
 			while True:
 				data = firmware.read(1024)
-				if data == '': break
+				if data == '':
+					break
 				os.write(device, data)
 			#print '[FPGAUpgradeCore] write data >> [ok]'
 
 			self.status = STATUS_PROGRAMMING
 			rc = fcntl.ioctl(device, 1, 0)
-			if rc < 0: raise Exception, 'fail to programming : %d'%(rc)
+			if rc < 0:
+				raise Exception, 'fail to programming : %d' % (rc)
 			#print '[FPGAUpgradeCore] upgrade done.'
-			if self.callcount < 100: raise Exception, 'wrong fpga file.'
+			if self.callcount < 100:
+				raise Exception, 'wrong fpga file.'
 		except Exception, msg:
 			self.errmsg = msg
-			print '[FPGAUpgradeCore] ERROR >>',msg
+			print '[FPGAUpgradeCore] ERROR >>', msg
 			closefpga(firmware, device)
 			return STATUS_ERROR
 		closefpga(firmware, device)
@@ -88,10 +101,13 @@ class FPGAUpgradeCore() :
 			print '[FPGAUpgrade] upgrade done.'
 		elif self.status == STATUS_ERROR:
 			print '[FPGAUpgrade] occur error.'
-		else:	print '[FPGAUpgrade] occur unknown error.'
+		else:
+			print '[FPGAUpgrade] occur unknown error.'
+
 
 class FPGAUpgradeManager:
 	fu = None
+
 	def get_interval(self):
 		return 200
 
@@ -115,7 +131,8 @@ class FPGAUpgradeManager:
 		elif self.fu.status == STATUS_PROGRAMMING:
 			self.fu.callcount += 1
 			ret = (self.fu.callcount * 100) / self.fu.MAX_CALL_COUNT + 2
-			if ret >= 100: ret = 99
+			if ret >= 100:
+				ret = 99
 			#print "callcount : [%d]"%(self.fu.callcount);
 			return ret
 		elif self.fu.status == STATUS_DONE:
@@ -124,8 +141,9 @@ class FPGAUpgradeManager:
 	def get_error_msg(self, errno, errmsg):
 		return str(self.fu.errmsg)
 
+
 class UpgradeStatus(Screen):
-	skin = 	"""
+	skin = """
 		<screen position="center,center" size="450,100" title="FPGA Upgrade">
 			<widget name="name" position="10,0" size="430,20" font="Regular;18" halign="left" valign="bottom"/>
 			<widget name="slider" position="10,25" size="430,30" backgroundColor="white"/>
@@ -133,8 +151,9 @@ class UpgradeStatus(Screen):
 			<widget source="info" render="Label" position="10,70" zPosition="1" size="430,30" font="Regular;22" halign="center" valign="center" backgroundColor="black" transparent="1"/>
 		</screen>
 		"""
-	def __init__(self, session, parent, timeout = 20):
-		Screen.__init__(self,session)
+
+	def __init__(self, session, parent, timeout=20):
+		Screen.__init__(self, session)
 		self.session = session
 
 		self["actions"] = ActionMap(["OkCancelActions"],
@@ -201,17 +220,18 @@ class UpgradeStatus(Screen):
 			self.keyExit()
 		self.exit_count = self.exit_count + 1
 		#self.instance.setTitle("%s (%d)" % (self.title_str, (self.timeout-self.exit_count)))
-		self["info"].setText("Reboot after %d seconds.\nPress the OK to reboot now." %(self.timeout-self.exit_count))
+		self["info"].setText("Reboot after %d seconds.\nPress the OK to reboot now." % (self.timeout - self.exit_count))
 
 	def keyExit(self):
 		if self.need_restart:
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
-		if self.is_done :
+		if self.is_done:
 			self.close()
 
+
 class FPGAUpgrade(Screen):
-	skin = 	"""
+	skin = """
 		<screen position="center,center" size="560,440" title="FPGA Upgrade" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
@@ -237,7 +257,7 @@ class FPGAUpgrade(Screen):
 		self["key_blue"] = StaticText(_("Download"))
 
 		self["status"] = StaticText(" ")
-		self["file_list"] = FileList("/", matchingPattern = "^.*")
+		self["file_list"] = FileList("/", matchingPattern="^.*")
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", ],
                 {
@@ -288,10 +308,10 @@ class FPGAUpgrade(Screen):
 			file.close()
 			self.DOWNLOAD_URL = str(download_uri_header) + "vu" + str(model) + "/" + self.DOWNLOAD_FILE_NAME
 
-	def doHook(self, blockNumber, blockSize, totalSize) :
-		if blockNumber*blockSize > totalSize :
+	def doHook(self, blockNumber, blockSize, totalSize):
+		if blockNumber * blockSize > totalSize:
 			self.STATUS_BAR.setText(_("Downloaded " + self.DOWNLOAD_TAR_PATH + self.DOWNLOAD_FILE_NAME))
-		else :
+		else:
 			self.STATUS_BAR.setText(_("Downloading..."))
 
 	def onCallbackHandler(self, confirmed):
@@ -319,7 +339,7 @@ class FPGAUpgrade(Screen):
 
 		if device == None or len(device) == 0:
 			message = "Fail to upgrade.\nCause : Can't found device.\nDo you want to exit?"
-			self.session.openWithCallback(self.onCallbackHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout = 10, default = True)
+			self.session.openWithCallback(self.onCallbackHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout=10, default=True)
 			print "DEVICE_LIST : ", device_list
 
 		print "DEVICE : ", device
@@ -327,12 +347,12 @@ class FPGAUpgrade(Screen):
 		if self.ERROR_CODE > 0:
 			self.ERROR_MSG = self.FPGA.get_error_msg(self.ERROR_CODE, self.ERROR_MSG)
 			message = "Fail to upgrade.\nCause : " + self.ERROR_MSG + "\nDo you want to exit?"
-			self.session.openWithCallback(self.onCallbackHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout = 10, default = True)
+			self.session.openWithCallback(self.onCallbackHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout=10, default=True)
 			print "DEVICE : ", device
 			print "FILE : ", path
 		else:
 			#self.session.open(MessageBox, _("Success!!"), MessageBox.TYPE_INFO, timeout = 5)
-			self.session.open(UpgradeStatus, self, timeout = 20)
+			self.session.open(UpgradeStatus, self, timeout=20)
 
 	def onClickRed(self):
 		self.doExit()
@@ -341,7 +361,7 @@ class FPGAUpgrade(Screen):
 	def onClickGreen(self):
 		#self.session.open(MessageBox, _("Upgrade will take about 5 minutes to finish."), MessageBox.TYPE_INFO, timeout = 10)
 		message = "Upgrade will take about 5 minutes to finish.\nDo you want to upgrade?"
-		self.session.openWithCallback(self.doUpgradeHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout = 10, default = True)
+		self.session.openWithCallback(self.doUpgradeHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout=10, default=True)
 
 	def onClickBlue(self):
 		fname = ''
@@ -350,13 +370,13 @@ class FPGAUpgrade(Screen):
 		try:
 			test_opener.open(self.DOWNLOAD_URL)
 		except:
-			self.session.open(MessageBox, _('File not found'), MessageBox.TYPE_INFO, timeout = 5)
+			self.session.open(MessageBox, _('File not found'), MessageBox.TYPE_INFO, timeout=5)
 			del test_opener
 			return
-		try :
+		try:
 			fname, header = urlretrieve(self.DOWNLOAD_URL, self.DOWNLOAD_TAR_PATH + self.DOWNLOAD_FILE_NAME, self.doHook)
 		except IOError, msg:
-			self.session.open(MessageBox, _(str(msg)), MessageBox.TYPE_INFO, timeout = 5)
+			self.session.open(MessageBox, _(str(msg)), MessageBox.TYPE_INFO, timeout=5)
 			del test_opener
 			return
 		del test_opener
@@ -364,14 +384,14 @@ class FPGAUpgrade(Screen):
 		before_name = ''
 		self.SOURCELIST.changeDir(self.DOWNLOAD_TAR_PATH)
 		self.SOURCELIST.moveToIndex(0)
-		while cmp(self.SOURCELIST.getFilename(), self.DOWNLOAD_FILE_NAME) != 0 :
+		while cmp(self.SOURCELIST.getFilename(), self.DOWNLOAD_FILE_NAME) != 0:
 			self.SOURCELIST.down()
 			if cmp(before_name, self.SOURCELIST.getFilename()) == 0:
 				break
 			before_name = self.SOURCELIST.getFilename()
 
 	def onClickOk(self):
-	        if self.SOURCELIST.canDescent() : # isDir
+	        if self.SOURCELIST.canDescent(): # isDir
 	        	self.SOURCELIST.descent()
 			if self.SOURCELIST.getCurrentDirectory():
 				self.STATUS_BAR.setText(_(self.SOURCELIST.getCurrentDirectory()))
@@ -394,9 +414,10 @@ class FPGAUpgrade(Screen):
 		self.SOURCELIST.pageDown()
 		self.STATUS_BAR.setText(_(self.SOURCELIST.getCurrentDirectory()))
 
+
 def main(session, **kwargs):
         session.open(FPGAUpgrade)
 
-def Plugins(**kwargs):
-	return PluginDescriptor(name=_("FPGA Upgrade"), description="Upgrade FPGA..", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
 
+def Plugins(**kwargs):
+	return PluginDescriptor(name=_("FPGA Upgrade"), description="Upgrade FPGA..", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)

@@ -13,6 +13,7 @@ Created by Celia Oakley on 2013-10-31.
 
 from .base import TMDB
 
+
 class Find(TMDB):
     """
     Find functionality.
@@ -23,6 +24,7 @@ class Find(TMDB):
     URLS = {
         'info': '/{id}',
     }
+
     def __init__(self, id=0):
         super(Find, self).__init__()
         self.id = id
@@ -30,8 +32,8 @@ class Find(TMDB):
     def info(self, **kwargs):
         """
         Search for objects in the database by an external id. For instance,
-        an IMDB ID. This will search all objects (movies, TV shows and people) 
-        and return the results in a single response. TV season and TV episode 
+        an IMDB ID. This will search all objects (movies, TV shows and people)
+        and return the results in a single response. TV season and TV episode
         searches will be supported shortly.
 
         The supported external sources for each object are as follows:

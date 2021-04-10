@@ -44,6 +44,8 @@ from datetime import date, timedelta
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 #=========================================================================================
+
+
 def wgetUrl(target):
 	std_headers = {
 		'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
@@ -60,6 +62,8 @@ def wgetUrl(target):
 	return outtxt
 
 #=========================================================================================
+
+
 class OpenUgSetupScreen(Screen):
 	def __init__(self, session, action, value):
 		self.skin = """
@@ -85,7 +89,7 @@ class OpenUgSetupScreen(Screen):
 
 		self["info"] = Label(_("Open Uitzending Gemist\n\nBased on Xtrend code"))
 
-		self.mmenu= []
+		self.mmenu = []
 		self.mmenu.append((_("UG Recently added"), 'recent'))
 		self.mmenu.append((_("UG Popular"), 'pop'))
 		self.mmenu.append((_("UG A-Z"), 'atotz'))
@@ -141,6 +145,8 @@ class OpenUgSetupScreen(Screen):
 				os.remove(os.path.join(root, name))
 
 #=========================================================================================
+
+
 class DaysBackScreen(Screen):
 	def __init__(self, session):
 		self.skin = """
@@ -159,7 +165,7 @@ class DaysBackScreen(Screen):
 			"cancel": self.keyCancel,
 		}, -2)
 
-		self.mmenu= []
+		self.mmenu = []
 		count = 0
 		now = date.today()
 		while count < 15:
@@ -184,7 +190,9 @@ class DaysBackScreen(Screen):
 	def keyCancel(self):
 		self.close()
 
-###########################################################################	   
+###########################################################################
+
+
 class OpenUg(StreamsThumbCommon):
 	UG_PROGDATE = 0
 	UG_PROGNAME = 1
@@ -213,7 +221,7 @@ class OpenUg(StreamsThumbCommon):
 		self.isRtl = False
 		self.isRtlBack = False
 		self.level = self.UG_LEVEL_ALL
-		
+
 	def layoutFinished(self):
 		self.setTitle("Open Uitzending Gemist")
 
@@ -235,7 +243,7 @@ class OpenUg(StreamsThumbCommon):
 		if doExit:
 			self.close()
 
-	def setupCallback(self, retval = None):
+	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
 			return
 		self.isAtotZ = False
@@ -248,14 +256,14 @@ class OpenUg(StreamsThumbCommon):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'pop':
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "popular/protocol/html")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'atotz':
 			self.isAtotZ = True
 			self.level = self.UG_LEVEL_ALL
@@ -266,11 +274,11 @@ class OpenUg(StreamsThumbCommon):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
-			
+
 		elif retval == 'rtl':
 			self.isRtl = True
 			self.level = self.UG_LEVEL_ALL
@@ -289,21 +297,21 @@ class OpenUg(StreamsThumbCommon):
 			else:
 				self.updateMenu()
 
-	def keyboardCallback(self, callback = None):
+	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
 			self.isRtl = False
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.STAGING_UG_BASE_URL + "ug/ajax/action/search/protocol/html/searchString/" + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple=True)
 		else:
 			self.close()
 
 	def go(self):
 		currSel = self["list"].l.getCurrentSelection()
 		selIndex = self.mediaList.index(currSel)
-		
+
 		if len(self.mediaList) == 0 or selIndex > len(self.mediaList) - 1:
 			return
 
@@ -314,10 +322,10 @@ class OpenUg(StreamsThumbCommon):
 				self.getRTLSerie(self.mediaList, tmp)
 				self.level = self.UG_LEVEL_SERIE
 				self.updateMenu()
-				
+
 			elif self.level == self.UG_LEVEL_SERIE:
 				tmp = self.getRTLStream(self.mediaList[selIndex][self.UG_STREAMURL])
-				
+
 				if tmp:
 					myreference = eServiceReference(4097, 0, tmp)
 					myreference.setName(self.mediaList[selIndex][self.UG_PROGNAME])
@@ -342,7 +350,7 @@ class OpenUg(StreamsThumbCommon):
 #=========================================================================================
 	def doUGPlay(self, selIndex):
 		out = wgetUrl(self.STAGING_UG_BASE_URL + "streams/video/pr_id/" + self.mediaList[selIndex][self.UG_STREAMURL])
-		
+
 		if out:
 			myreference = eServiceReference(4097, 0, out.split('stream_link":"')[1].split('\",')[0].replace('\/', '/'))
 			myreference.setName(self.mediaList[selIndex][self.UG_PROGNAME])
@@ -405,19 +413,19 @@ class OpenUg(StreamsThumbCommon):
 					tmp = "<div class=\"stationlogo\""
 					if tmp in line:
 						lineTmp = line.split(tmp)[1].split('</div>')[0]
-						channelTmp = lineTmp.rsplit('>',1)
+						channelTmp = lineTmp.rsplit('>', 1)
 						channel = channelTmp[1]
 
 					tmp = "<span class=\"title\">"
 					if tmp in line:
 						name = line.split(tmp)[1].split('</span>')[0]
 						name = checkUnicode(name)
-						state = 2					
+						state = 2
 
 				elif state == 2:
 					if '<span class=\"extra_info\">' in line:
 						continue
-					date = _("Added: ")+str(line.split("<br />")[0].lstrip())
+					date = _("Added: ") + str(line.split("<br />")[0].lstrip())
 					state = 3
 
 				elif state == 3:
@@ -438,7 +446,7 @@ class OpenUg(StreamsThumbCommon):
 		# Only attempt to parse the data if anything returned.
 		if data:
 			data = data.split('\n')
-			
+
 			state = 0
 			name = ''
 			short = ''
@@ -447,7 +455,7 @@ class OpenUg(StreamsThumbCommon):
 			date = ''
 			channel = ''
 			duration = ''
-			
+
 			for line in data:
 				if "<li" in line:
 					tmp = "<a href=\""
@@ -472,7 +480,7 @@ class OpenUg(StreamsThumbCommon):
 
 		url = self.RTL_BASE_URL + "?daysback=" + '%d' % (days)
 		data = wgetUrl(url)
-		
+
 		# Only attempt to parse the data if anything returned.
 		if data:
 			data = data.split('\n')
@@ -484,7 +492,7 @@ class OpenUg(StreamsThumbCommon):
 			date = ''
 			channel = ''
 			duration = ''
-			
+
 			for line in data:
 				if "<li>" in line:
 					state = 1
@@ -503,7 +511,7 @@ class OpenUg(StreamsThumbCommon):
 					tmp = "<div class=\"stationlogo\""
 					if tmp in line:
 						lineTmp = line.split(tmp)[1].split('</div>')[0]
-						channelTmp = lineTmp.rsplit('>',1)
+						channelTmp = lineTmp.rsplit('>', 1)
 						channel = channelTmp[1]
 
 					tmp = "<span class=\"title\">"
@@ -521,7 +529,7 @@ class OpenUg(StreamsThumbCommon):
 						state = 3
 
 				elif state == 3:
-					date = _("Time: ")+str(line[:5])
+					date = _("Time: ") + str(line[:5])
 					weekList.append((date, name, short, channel, stream, icon, duration, False))
 					state = 0
 
@@ -539,9 +547,9 @@ class OpenUg(StreamsThumbCommon):
 			channel = ''
 			icon = ''
 			duration = ''
-			
+
 			data = data.split("\n")
-			
+
 			for line in data:
 				if state == 0:
 					if "<div class=\"menuEntry\">" in line:
@@ -554,7 +562,7 @@ class OpenUg(StreamsThumbCommon):
 
 				elif state == 1:
 					tmp = "<div class=\"programDetails\" id=\""
-					if  tmp in line:
+					if tmp in line:
 						stream = line.split(tmp)[1].split('\">')[0]
 
 					tmp = "<h3>"
@@ -569,7 +577,7 @@ class OpenUg(StreamsThumbCommon):
 
 					tmp = "<div class='datum'>"
 					if tmp in line and date == '':
-						date = _("Added: ")+str(line.split(tmp)[1].split("</div>")[0])
+						date = _("Added: ") + str(line.split(tmp)[1].split("</div>")[0])
 						channel = date[-3:]
 
 					# Only set the Icon if they are enabled
@@ -579,7 +587,7 @@ class OpenUg(StreamsThumbCommon):
 							icon = line.split(tmp)[1].split("\'/>")[0]
 							if "http://" not in icon:
 								icon_tmp = self.UG_BASE_URL
-								icon =  icon_tmp + icon
+								icon = icon_tmp + icon
 					else:
 						icon = ''
 
@@ -642,13 +650,13 @@ class OpenUg(StreamsThumbCommon):
 								icon = line.split(tmp)[1].split('\'/>')[0]
 								if "http://" not in icon:
 									icon_tmp = self.UG_BASE_URL
-									icon =  icon_tmp + icon
+									icon = icon_tmp + icon
 						else:
 							icon = ''
 
 						tmp = "<div class='datum'>"
 						if tmp in line and date == '':
-							date = _("Added: ")+str(line.split(tmp)[1].split("</div>")[0])
+							date = _("Added: ") + str(line.split(tmp)[1].split("</div>")[0])
 							channel = date[-3:]
 
 						tmp = "<div class='short'>"
@@ -663,7 +671,7 @@ class OpenUg(StreamsThumbCommon):
 								icon = line.split("url(\"")[1].split("\"")[0]
 								if "http://" not in icon:
 									icon_tmp = self.UG_BASE_URL
-									icon =  icon_tmp + icon
+									icon = icon_tmp + icon
 						else:
 							icon = ''
 
@@ -691,12 +699,16 @@ class OpenUg(StreamsThumbCommon):
 						state = 0
 
 #=========================================================================================
+
+
 def checkUnicode(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
-	
+
 #=========================================================================================
+
+
 def Plugins(**kwargs):
-	return [PluginDescriptor(name = "Open uitzending gemist", description = _("Watch uitzending gemist"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main)]
+	return [PluginDescriptor(name="Open uitzending gemist", description=_("Watch uitzending gemist"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]

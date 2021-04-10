@@ -27,6 +27,7 @@ from boxbranding import getImageDistro
 from shutil import rmtree, move, copy
 import os
 
+
 class TunerServer(Screen):
 	skin = """
 	<screen position="center,center" size="800,505" >
@@ -99,7 +100,7 @@ NOTE: The server is built, based on your current ip and the current channel list
 		os.mkdir("/media/hdd/tuner", 0755)
 		s_type = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
 		serviceHandler = eServiceCenter.getInstance()
-		services = serviceHandler.list(eServiceReference('%s FROM BOUQUET "bouquets.tv" ORDER BY bouquet'%(s_type)))
+		services = serviceHandler.list(eServiceReference('%s FROM BOUQUET "bouquets.tv" ORDER BY bouquet' % (s_type)))
 		bouquets = services and services.getContent("SN", True)
 		count = 1
 		for bouquet in bouquets:
@@ -110,7 +111,6 @@ NOTE: The server is built, based on your current ip and the current channel list
 		self["lab1"].setText(_(mytext))
 		self.session.open(MessageBox, _("Build Complete!"), MessageBox.TYPE_INFO)
 		self.updateServ()
-
 
 	def poPulate(self, bouquet, count):
 		n = "%03d_" % (count)
@@ -131,7 +131,7 @@ NOTE: The server is built, based on your current ip and the current channel list
 					continue
 				out.write("#EXTM3U\n")
 				out.write("#EXTINF:-1," + channel[1] + "\n")
-				out.write("http://" + self.ip + ":8001/" + channel[0]+ "\n\n")
+				out.write("http://" + self.ip + ":8001/" + channel[0] + "\n\n")
 				out.close()
 				count2 += 1
 
@@ -176,11 +176,13 @@ def settings(menuid, **kwargs):
 		return [(_("Tuner Server setup"), main, "tuner_server_setup", None)]
 	return []
 
+
 def main(session, **kwargs):
 	session.open(TunerServer)
 
+
 def Plugins(**kwargs):
 	if getImageDistro() == "openvix":
-		return PluginDescriptor(name=_("Tuner Server setup"), description=_("Allow Streaming From Box Tuners"), where = PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=settings)
+		return PluginDescriptor(name=_("Tuner Server setup"), description=_("Allow Streaming From Box Tuners"), where=PluginDescriptor.WHERE_MENU, needsRestart=True, fnc=settings)
 	else:
-		return PluginDescriptor(name=_("Tuner Server"), description=_("Allow Streaming From Box Tuners"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main)
+		return PluginDescriptor(name=_("Tuner Server"), description=_("Allow Streaming From Box Tuners"), where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=main)

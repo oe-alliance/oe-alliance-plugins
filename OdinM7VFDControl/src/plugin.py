@@ -19,11 +19,13 @@ from time import localtime, time
 import Screens.Standby
 
 config.plugins.VFD_odin = ConfigSubsection()
-config.plugins.VFD_odin.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_odin.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.VFD_odin.showClock = ConfigSelection(default="True_Switch", choices=[("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.VFD_odin.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
+
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
+
 
 class Channelnumber:
 
@@ -39,10 +41,9 @@ class Channelnumber:
 		self.zaPrik = eTimer()
 		self.zaPrik.timeout.get().append(self.vrime)
 		self.zaPrik.start(1000, 1)
-		self.onClose = [ ]
+		self.onClose = []
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 
@@ -120,7 +121,7 @@ class Channelnumber:
 					self.show()
 			else:
 				self.__eventInfoChanged()
-					
+
 		if config.plugins.VFD_odin.showClock.value == 'Off':
 			vfd_write("....")
 			self.zaPrik.start(self.updatetime, 1)
@@ -135,13 +136,16 @@ class Channelnumber:
 		self.begin = time() + int(self.channelnrdelay)
 		self.endkeypress = True
 
+
 ChannelnumberInstance = None
+
 
 def leaveStandby():
 	print "[VFD-ODINM7] Leave Standby"
 
 	if config.plugins.VFD_odin.showClock.value == 'Off':
 		vfd_write("....")
+
 
 def standbyCounterChanged(configElement):
 	print "[VFD-ODINM7] In Standby"
@@ -152,14 +156,16 @@ def standbyCounterChanged(configElement):
 	if config.plugins.VFD_odin.showClock.value == 'Off':
 		vfd_write("....")
 
+
 def initVFD():
 	print "[VFD-ODINM7] initVFD"
 
 	if config.plugins.VFD_odin.showClock.value == 'Off':
 		vfd_write("....")
 
+
 class VFD_OdinM7Setup(ConfigListScreen, Screen):
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 
 		self.skin = """<screen position="100,100" size="500,210" title="LED Display Setup" >
 				<widget name="config" position="20,15" size="460,150" scrollbarMode="showOnDemand" />
@@ -174,9 +180,9 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 		self.skinName = ["Setup"]
 		self.onClose.append(self.abort)
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
 		self.createSetup()
 
@@ -184,7 +190,7 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -228,12 +234,13 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 			x[1].cancel()
 		self.close()
 
+
 class VFD_Odin:
 	def __init__(self, session):
 		print "[VFD-ODINM7] initializing"
 		self.session = session
 		self.service = None
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.Console = Console()
 
@@ -248,19 +255,23 @@ class VFD_Odin:
 
 	def abort(self):
 		print "[VFD-ODINM7] aborting"
-		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
+
 
 def main(menuid):
 	if menuid != "system":
-		return [ ]
+		return []
 	return [(_("LED Display Setup"), startVFD, "VFD_M7", None)]
+
 
 def startVFD(session, **kwargs):
 	session.open(VFD_OdinM7Setup)
 
+
 odinm7Vfd = None
 gReason = -1
 mySession = None
+
 
 def controlodinm7Vfd():
 	global odinm7Vfd
@@ -275,6 +286,7 @@ def controlodinm7Vfd():
 
 		odinm7Vfd = None
 
+
 def sessionstart(reason, **kwargs):
 	print "[VFD-ODINM7] sessionstart"
 	global odinm7Vfd
@@ -287,6 +299,7 @@ def sessionstart(reason, **kwargs):
 		gReason = reason
 	controlodinm7Vfd()
 
+
 def Plugins(**kwargs):
- 	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
- 		PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+ 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+ 		PluginDescriptor(name="LED Display Setup", description="Change VFD display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]

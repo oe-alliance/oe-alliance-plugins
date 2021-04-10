@@ -30,21 +30,24 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as os_walk
 
-import time, random
+import time
+import random
 from time import strftime, strptime, mktime
 from datetime import timedelta, date, datetime
 
-import urllib2, re
+import urllib2
+import re
 
 import xml.dom.minidom as dom
 from lxml import html
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
-__plugin__  = "BBC iPlayer: "
+__plugin__ = "BBC iPlayer: "
 __version__ = "Version 1.0.2: "
 
 #===================================================================================
+
 
 def wgetUrl(target):
 	try:
@@ -55,34 +58,38 @@ def wgetUrl(target):
 		response.close()
 		return outtxt
 	except (Exception) as exception:
-		print __plugin__, __version__,"wgetUrl: Error reading URL: ", exception
+		print __plugin__, __version__, "wgetUrl: Error reading URL: ", exception
 		return ""
 
 #===================================================================================
+
+
 def checkUnicode(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
 
 #===================================================================================
+
+
 class BBCiMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
-	
+
 	skin = """
 		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="BBC iPlayer" >
 		<widget name="BBCiMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
 		</screen>"""
-			
+
 	def __init__(self, session, action, value):
-		
+
 		self.imagedir = "/tmp/onDemandImg/"
 		self.session = session
 		self.action = action
 		self.value = value
 		osdList = []
-		
+
 		if self.action is "start":
 			osdList.append((_("Search"), "search"))
 			osdList.append((_("TV Highlights"), "bbchighlights"))
@@ -113,21 +120,21 @@ class BBCiMenu(Screen):
 			osdList.append((_("BBC News"), "bbcn"))
 			osdList.append((_("BBC Alba"), "bbca"))
 			osdList.append((_("BBC HD"), "bbchd"))
-		
+
 		osdList.append((_("Back"), "exit"))
-		
+
 		Screen.__init__(self, session)
 		self["BBCiMenu"] = MenuList(osdList)
 		self["myActionMap"] = ActionMap(["SetupActions"],
 		{
 		"ok": self.go,
 		"cancel": self.cancel
-		}, -1)	  
-	
+		}, -1)
+
 	def go(self):
 		returnValue = self["BBCiMenu"].l.getCurrentSelection()[1]
-		returnValue2 = self["BBCiMenu"].l.getCurrentSelection()[1] + "," + self["BBCiMenu"].l.getCurrentSelection()[0] 
-		
+		returnValue2 = self["BBCiMenu"].l.getCurrentSelection()[1] + "," + self["BBCiMenu"].l.getCurrentSelection()[0]
+
 		if returnValue is "exit":
 				self.removeFiles(self.imagedir)
 				self.close(None)
@@ -195,14 +202,16 @@ class BBCiMenu(Screen):
 
 	def cancel(self):
 		self.removeFiles(self.imagedir)
-		self.close(None)		
+		self.close(None)
 
 	def removeFiles(self, targetdir):
 		for root, dirs, files in os_walk(targetdir):
 			for name in files:
-				os_remove(os_path.join(root, name))		
+				os_remove(os_path.join(root, name))
 
 #===================================================================================
+
+
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/bbciplayer.png"
@@ -211,35 +220,35 @@ class StreamsThumb(StreamsThumbCommon):
 		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
-		self.setTitle("BBC iPlayer: Listings for " +self.title)
+		self.setTitle("BBC iPlayer: Listings for " + self.title)
 
-	def setupCallback(self, retval = None):
+	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
 			return
-		
+
 		elif retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
 		else:
 			self.getMediaData(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
-				self.mediaProblemPopup("No Episodes Found for "+self.title)
+				self.mediaProblemPopup("No Episodes Found for " + self.title)
 			self.updateMenu()
 
-	def keyboardCallback(self, callback = None):
+	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("BBC iPlayer: Search Listings for " +callback)
+			self.setTitle("BBC iPlayer: Search Listings for " + callback)
 			self.getMediaData(self.mediaList, self.url + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No matching search items were found for "+callback), MessageBox.TYPE_INFO, timeout=5, simple = True)
+				self.session.openWithCallback(self.close, MessageBox, _("No matching search items were found for " + callback), MessageBox.TYPE_INFO, timeout=5, simple=True)
 		else:
 			self.close()
 
 	def go(self):
 		showID = self["list"].l.getCurrentSelection()[4]
 		showName = self["list"].l.getCurrentSelection()[1]
-		
+
 		retMessage = ""
 		(fileUrl, retMessage) = self.findPlayUrl(showID)
 
@@ -247,25 +256,25 @@ class StreamsThumb(StreamsThumbCommon):
 		if fileUrl:
 			# If a warning message is returned then display this before playing the programme
 			if retMessage:
-				self.session.openWithCallback(self.play(fileUrl,showName), MessageBox, _(retMessage+str(showName)), timeout=5, type = MessageBox.TYPE_INFO)
+				self.session.openWithCallback(self.play(fileUrl, showName), MessageBox, _(retMessage + str(showName)), timeout=5, type=MessageBox.TYPE_INFO)
 			else:
-				self.play(fileUrl,showName)
+				self.play(fileUrl, showName)
 		else:
 			# If not stream URL is returned and a warning message is returned then display it.
 			if retMessage:
-				self.mediaProblemPopup(retMessage+str(showName))
+				self.mediaProblemPopup(retMessage + str(showName))
 			else:
-				self.mediaProblemPopup("Sorry, unable to find a playable stream for "+str(showName))
+				self.mediaProblemPopup("Sorry, unable to find a playable stream for " + str(showName))
 
 	def play(self, fileUrl, showName):
-		fileRef = eServiceReference(4097,0,fileUrl)
-		fileRef.setData(2,10240*1024)
+		fileRef = eServiceReference(4097, 0, fileUrl)
+		fileRef.setData(2, 10240 * 1024)
 		fileRef.setName(showName)
 		self.session.open(MoviePlayer, fileRef)
 
 #===================================================================================
 	def getMediaData(self, weekList, url):
-		
+
 		short = ''
 		name = ''
 		date1 = ''
@@ -273,15 +282,15 @@ class StreamsThumb(StreamsThumbCommon):
 		channel = ''
 		icon = ''
 		duration = ''
-		
+
 		try:
 			# Retrieve the search results from the feeds.
 			data = wgetUrl(url)
-			
+
 			# If we hit problems retrieving the data don't try to parse.
 			if data:
 				# Use Regex to parse out the required element data
-				links = (re.compile ('<entry>\n    <title type="text">(.+?)</title>\n    <id>tag:feeds.bbc.co.uk,2008:PIPS:(.+?)</id>\n    <updated>(.+?)</updated>\n    <content type="html">\n      &lt;p&gt;\n        &lt;a href=&quot;.+?&quot;&gt;\n          &lt;img src=&quot;(.+?)&quot; alt=&quot;.+?&quot; /&gt;\n        &lt;/a&gt;\n      &lt;/p&gt;\n      &lt;p&gt;\n        (.+?)\n      &lt;/p&gt;\n    </content>').findall(data))
+				links = (re.compile('<entry>\n    <title type="text">(.+?)</title>\n    <id>tag:feeds.bbc.co.uk,2008:PIPS:(.+?)</id>\n    <updated>(.+?)</updated>\n    <content type="html">\n      &lt;p&gt;\n        &lt;a href=&quot;.+?&quot;&gt;\n          &lt;img src=&quot;(.+?)&quot; alt=&quot;.+?&quot; /&gt;\n        &lt;/a&gt;\n      &lt;/p&gt;\n      &lt;p&gt;\n        (.+?)\n      &lt;/p&gt;\n    </content>').findall(data))
 
 				# Loop through each element <entry>
 				for line in links:
@@ -292,9 +301,9 @@ class StreamsThumb(StreamsThumbCommon):
 					try:
 						lastDate = datetime.fromtimestamp(mktime(strptime(str(line[2]), "%Y-%m-%dT%H:%M:%SZ"))) #2013-03-06T18:27:43Z
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-						date1 = _("Added:")+" "+str(date_tmp)
+						date1 = _("Added:") + " " + str(date_tmp)
 					except (Exception) as exception:
-						date1=str(line[2])
+						date1 = str(line[2])
 
 					# Only set the Icon if they are enabled
 					if self.showIcon == 'True':
@@ -307,13 +316,13 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,"getMediaData: Error getting Media info: ", exception
+			print __plugin__, __version__, "getMediaData: Error getting Media info: ", exception
 
 #===================================================================================
 	def getSearchMediaData(self, weekList, url):
 
 		#============ Not Used - More robust but not as quick ==============
-		
+
 		short = ''
 		name = ''
 		date1 = ''
@@ -325,7 +334,7 @@ class StreamsThumb(StreamsThumbCommon):
 		try:
 			# Retrieve the search results from the feeds.
 			data = wgetUrl(url)
-			
+
 			# Problems with tags resulted in non-parsed tags, fix them.
 			data = data.replace("&lt;", "<")
 			data = data.replace("&gt;", ">")
@@ -337,28 +346,28 @@ class StreamsThumb(StreamsThumbCommon):
 			for show in tree.xpath('//entry'):
 				# Iterate through the children of <entry>
 				select = lambda expr: show.cssselect(expr)[0]
-				
+
 				# Only set the Icon if they are enabled
 				if self.showIcon == 'True':
-					icon=select("thumbnail").get('url')
+					icon = select("thumbnail").get('url')
 				else:
-					icon=''
+					icon = ''
 
-				name_tmp=str(select('title').text_content())
-				
-				stream_tmp=select('id').text_content()
-				stream_split = stream_tmp.rsplit(':',1)
+				name_tmp = str(select('title').text_content())
+
+				stream_tmp = select('id').text_content()
+				stream_split = stream_tmp.rsplit(':', 1)
 				stream = stream_split[1]
-				
+
 				try:
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(select('updated').text_content()), "%Y-%m-%dT%H:%M:%SZ"))) #2013-03-06T18:27:43Z
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-					date1 = _("Added:")+" "+str(date_tmp)
+					date1 = _("Added:") + " " + str(date_tmp)
 				except (Exception) as exception:
-					date1=select('updated').text_content()
-					print __plugin__, __version__,"getMediaData: date1 parse error: ", exception
-				
-				short_tmp=str(select('content').text_content().strip())
+					date1 = select('updated').text_content()
+					print __plugin__, __version__, "getMediaData: date1 parse error: ", exception
+
+				short_tmp = str(select('content').text_content().strip())
 
 				name = checkUnicode(name_tmp)
 				short = checkUnicode(short_tmp)
@@ -366,15 +375,14 @@ class StreamsThumb(StreamsThumbCommon):
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,"getMediaData: Error getting Media info: ", exception
+			print __plugin__, __version__, "getMediaData: Error getting Media info: ", exception
 
 #===================================================================================
-	
+
 	def findPlayUrl(self, showID):
 
-		
 		notUK = 0
-		url1 = 'http://www.bbc.co.uk/iplayer/playlist/'+showID
+		url1 = 'http://www.bbc.co.uk/iplayer/playlist/' + showID
 		supplier = ""
 		fileUrl = ""
 		quality = 0
@@ -387,53 +395,53 @@ class StreamsThumb(StreamsThumbCommon):
 		currQuality = 0
 		prefQuality = int(config.ondemand.PreferredQuality.value)
 		primaryDNS = str(config.ondemand.PrimaryDNS.value)
-		print __plugin__, __version__,"DNS Set: ", primaryDNS
-		print __plugin__, __version__,"Default DNS Set: ", str(config.ondemand.PrimaryDNS.default)
+		print __plugin__, __version__, "DNS Set: ", primaryDNS
+		print __plugin__, __version__, "Default DNS Set: ", str(config.ondemand.PrimaryDNS.default)
 
 		try:
 			# Read the URL to get the stream options
 			html = wgetUrl(url1)
 			try:
-				links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[1])
+				links = (re.compile('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[1])
 			except:
-				links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[0])
+				links = (re.compile('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[0])
 
-			url2 = 'http://www.bbc.co.uk/mediaselector/4/mtis/stream/'+links
+			url2 = 'http://www.bbc.co.uk/mediaselector/4/mtis/stream/' + links
 			html1 = html = wgetUrl(url2)
 
 			if html1.find('notukerror') > 0:
 				notUK = 1
-				print __plugin__, __version__,"Non UK Address!!"
-				
-				if  primaryDNS == str(config.ondemand.PrimaryDNS.default):
-					print __plugin__, __version__,"Non UK Address: NO DNS Set!! ", primaryDNS
+				print __plugin__, __version__, "Non UK Address!!"
+
+				if primaryDNS == str(config.ondemand.PrimaryDNS.default):
+					print __plugin__, __version__, "Non UK Address: NO DNS Set!! ", primaryDNS
 					return ("", "Non-UK IP Address and no DNS set in OnDemand Settings! Not able to play ")
 				else:
 					try:
 						opener = urllib2.build_opener(MyHTTPHandler)
 						old_opener = urllib2._opener
-						urllib2.install_opener (opener)
+						urllib2.install_opener(opener)
 						req = urllib2.Request(url2)
 						req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 						response = urllib2.urlopen(req)
 						html1 = str(response.read())
 						response.close()
-						urllib2.install_opener (old_opener)
+						urllib2.install_opener(old_opener)
 
 					except (Exception) as exception:
-						print __plugin__, __version__,"findPlayUrl: Unable to connect to DNS: ", exception
-						return ("", "Could not connect to "+primaryDNS+", make sure your subscription is valid! Not able to play ")
+						print __plugin__, __version__, "findPlayUrl: Unable to connect to DNS: ", exception
+						return ("", "Could not connect to " + primaryDNS + ", make sure your subscription is valid! Not able to play ")
 
 			# Parse the HTML returned
 			doc = dom.parseString(html1)
 			root = doc.documentElement
-			media = root.getElementsByTagName( "media" )
+			media = root.getElementsByTagName("media")
 			i = 0
 
 			# Loop for each streaming option available
 			for list in media:
 				service = media[i].attributes['service'].nodeValue
-				
+
 				# If quality is Very-Low, Low, Normal, High or HD proceed
 				if service == 'iplayer_streaming_h264_flv_vlo' or \
 					service == 'iplayer_streaming_h264_flv_lo' or \
@@ -442,7 +450,7 @@ class StreamsThumb(StreamsThumbCommon):
 					service == 'pc_streaming_hd':
 
 					# Get stream data for first Media element
-					conn  = media[i].getElementsByTagName( "connection" )[0]
+					conn = media[i].getElementsByTagName("connection")[0]
 					returnedList = self.getHosts(conn, service)
 
 					if returnedList:
@@ -474,7 +482,7 @@ class StreamsThumb(StreamsThumbCommon):
 								otherLimelightUrl = fileUrl
 
 					# Repeat for the second Media element
-					conn  = media[i].getElementsByTagName( "connection" )[1]
+					conn = media[i].getElementsByTagName("connection")[1]
 					returnedList = self.getHosts(conn, service)
 
 					if returnedList:
@@ -483,7 +491,7 @@ class StreamsThumb(StreamsThumbCommon):
 						quality = int(returnedList[2])
 
 					if fileUrl:
-						# Try and match the stream quality to the preferred config stream quality			
+						# Try and match the stream quality to the preferred config stream quality
 						if quality == prefQuality:
 							currQuality = quality
 							if supplier == 'akamai':
@@ -505,8 +513,7 @@ class StreamsThumb(StreamsThumbCommon):
 							else:
 								otherLimelightUrl = fileUrl
 
-				i=i+1
-
+				i = i + 1
 
 			# If we have found our required Stream Quality and it's limelight return the URL.
 			if limelightFound:
@@ -526,34 +533,34 @@ class StreamsThumb(StreamsThumbCommon):
 						else:
 							# If we haven't found a matching stream quality or lower return whatever found
 							if otherLimelightUrl:
-								print __plugin__, __version__,"findPlayUrl: Unable to find Preferred Stream quality, playing only available stream!!"
+								print __plugin__, __version__, "findPlayUrl: Unable to find Preferred Stream quality, playing only available stream!!"
 								return (otherLimelightUrl, "Unable to find Preferred Stream quality, playing only available stream for ")
 							elif otherAkamaiUrl and notUK == 0:
 								return (otherAkamaiUrl, "")
 							else:
-								print __plugin__, __version__,"findPlayUrl: Non-UK and no limelight, return blank: "
+								print __plugin__, __version__, "findPlayUrl: Non-UK and no limelight, return blank: "
 								return ("", "Non-UK and no limelight, No playable stream for ")
 
 		except (Exception) as exception:
-			print __plugin__, __version__,"findPlayUrl: Error getting URLs: ", exception
+			print __plugin__, __version__, "findPlayUrl: Error getting URLs: ", exception
 			return ("", "findPlayUrl: Error getting URLs! Could not play ")
-		
+
 #===================================================================================
 	def getHosts(self, conn, service):
 
 		try:
-			identifier  = str(conn.attributes['identifier'].nodeValue)
+			identifier = str(conn.attributes['identifier'].nodeValue)
 			server = str(conn.attributes['server'].nodeValue)
 			auth = str(conn.attributes['authString'].nodeValue)
 			supplier = str(conn.attributes['supplier'].nodeValue)
 
 			# Build up the stream URL based on the supplier
 			if supplier == 'limelight':    # SD streams that can be played by all users.
-				fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
+				fileUrl = "rtmp://" + server + ":1935/ app=a1414/e3?" + auth + " tcurl=rtmp://" + server + ":1935/a1414/e3?" + auth + " playpath=" + identifier + " swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
 			elif supplier == 'akamai':     # SD & HD streams that only UK users can play.
-				fileUrl = "rtmp://"+server+":1935/ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
+				fileUrl = "rtmp://" + server + ":1935/ondemand?" + auth + " playpath=" + identifier + " swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
 			elif supplier == 'level3':     # HD Streams that can be played by all users.
-				fileUrl = "rtmp://"+server+":1935/iplayertok?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
+				fileUrl = "rtmp://" + server + ":1935/iplayertok?" + auth + " playpath=" + identifier + " swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
 			else:
 				fileUrl = ""
 
@@ -576,11 +583,13 @@ class StreamsThumb(StreamsThumbCommon):
 			return streamData
 
 		except (Exception) as exception:
-			print __plugin__, __version__,"getHosts: Error setting stream URL: ", exception
+			print __plugin__, __version__, "getHosts: Error setting stream URL: ", exception
 			return ""
 
 #===================================================================================
+
+
 def main(session, **kwargs):
 	action = "start"
-	value = 0 
-	start = session.open(BBCiMenu, action, value)	
+	value = 0
+	start = session.open(BBCiMenu, action, value)

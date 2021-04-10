@@ -66,6 +66,7 @@ table_a2b_base64 = {
     '=': 0,
 }
 
+
 def Base64_decodeToByteArray(s):
     if not isinstance(s, (str, unicode)):
         raise TypeError("expected string or unicode, got %r" % (s,))
@@ -83,7 +84,7 @@ def Base64_decodeToByteArray(s):
                 except KeyError:
                     pass
         return None
-    
+
     quad_pos = 0
     leftbits = 0
     leftchar = 0
@@ -110,27 +111,31 @@ def Base64_decodeToByteArray(s):
             leftchar &= ((1 << leftbits) - 1)
     if leftbits != 0:
         raise Error('Incorrect padding')
-    
+
     return res
 
-def Hex_fromArray( a ):
-    return ''.join( ["%0.2X" % i for i in a] )
 
-def StringToByteArray( s ):
+def Hex_fromArray(a):
+    return ''.join(["%0.2X" % i for i in a])
+
+
+def StringToByteArray(s):
     arr = []
-    for i,c in enumerate(s):
-        arr.append( ord(c) )
+    for i, c in enumerate(s):
+        arr.append(ord(c))
     return arr
 
-def ByteArrayToString( a ):
-    return ''.join( [chr(i) for i in a] )
+
+def ByteArrayToString(a):
+    return ''.join([chr(i) for i in a])
+
 
 class MyBlowfish:
     ROUNDS = 16
     P_SZ = ROUNDS + 2
     SBOX_SK = 256
-    
-    def __init__ (self, keyByteArray):
+
+    def __init__(self, keyByteArray):
         self.P = [
             0x243F6A88, 0x85A308D3, 0x13198A2E, 0x03707344,
             0xA4093822, 0x299F31D0, 0x082EFA98, 0xEC4E6C89,
@@ -407,89 +412,89 @@ class MyBlowfish:
         keyLength = len(keyByteArray)
         keyIndex = 0
 
-        for i in range(0,self.P_SZ):
+        for i in range(0, self.P_SZ):
             data = 0
-            for j in range(0,4):
-                data = (data << 8) | (keyByteArray[keyIndex] & 0xff);
+            for j in range(0, 4):
+                data = (data << 8) | (keyByteArray[keyIndex] & 0xff)
                 keyIndex = keyIndex + 1
-                if ( keyIndex >= keyLength):
+                if (keyIndex >= keyLength):
                     keyIndex = 0
             self.P[i] = self.P[i] ^ data
 
-        self.processTable(0,0,self.P)
-        self.processTable(self.P[self.P_SZ-2], self.P[self.P_SZ-1], self.S0)
-        self.processTable(self.S0[self.SBOX_SK-2], self.S0[self.SBOX_SK-1], self.S1)
-        self.processTable(self.S1[self.SBOX_SK-2], self.S1[self.SBOX_SK-1], self.S2)
-        self.processTable(self.S2[self.SBOX_SK-2], self.S2[self.SBOX_SK-1], self.S3)
+        self.processTable(0, 0, self.P)
+        self.processTable(self.P[self.P_SZ - 2], self.P[self.P_SZ - 1], self.S0)
+        self.processTable(self.S0[self.SBOX_SK - 2], self.S0[self.SBOX_SK - 1], self.S1)
+        self.processTable(self.S1[self.SBOX_SK - 2], self.S1[self.SBOX_SK - 1], self.S2)
+        self.processTable(self.S2[self.SBOX_SK - 2], self.S2[self.SBOX_SK - 1], self.S3)
 
-    def F (self, x):
+    def F(self, x):
         result = (((self.S0[(x >> 24)] + self.S1[(x >> 16) & 0xff]) ^ self.S2[(x >> 8) & 0xff]) + self.S3[x & 0xff])
         result = result & 0xffffffff
         return result
-    
-    
-    def processTable (self, xl, xr, table):
-        size = len(table)
-        for s in range(0,size,2):
-            xl = xl ^ self.P[0]
-            for i in range(1,self.ROUNDS,2):
-                xr = xr ^ (self.F(xl) ^ self.P[i])
-                xl = xl ^ (self.F(xr) ^ self.P[i+1])
 
-            xr = xr ^ self.P[self.ROUNDS+1]
+    def processTable(self, xl, xr, table):
+        size = len(table)
+        for s in range(0, size, 2):
+            xl = xl ^ self.P[0]
+            for i in range(1, self.ROUNDS, 2):
+                xr = xr ^ (self.F(xl) ^ self.P[i])
+                xl = xl ^ (self.F(xr) ^ self.P[i + 1])
+
+            xr = xr ^ self.P[self.ROUNDS + 1]
 
             table[s] = xr
-            table[s+1] = xl
+            table[s + 1] = xl
 
             xr = xl
             xl = table[s]
 
-    def BytesTo32bits( self, b, i ):
+    def BytesTo32bits(self, b, i):
         return ((b[i] & 0xff) << 24) | ((b[i + 1] & 0xff) << 16) | ((b[i + 2] & 0xff) << 8) | ((b[i + 3] & 0xff))
 
-    def Bits32ToBytes( self, i, b, offset ):
+    def Bits32ToBytes(self, i, b, offset):
         b[offset + 3] = i & 0xff
         b[offset + 2] = (i >> 8) & 0xff
         b[offset + 1] = (i >> 16) & 0xff
         b[offset + 0] = (i >> 24) & 0xff
 
-    def unpad( self, a ):
-        c = a[len(a)-1]
-        for i in range(c,0,-1):
+    def unpad(self, a):
+        c = a[len(a) - 1]
+        for i in range(c, 0, -1):
             a.pop()
-    
-    def decryptBlock( self, src ):
-        xl = self.BytesTo32bits( src, 0 )
-        xr = self.BytesTo32bits( src, 4 )
+
+    def decryptBlock(self, src):
+        xl = self.BytesTo32bits(src, 0)
+        xr = self.BytesTo32bits(src, 4)
 
         xl = xl ^ self.P[self.ROUNDS + 1]
 
-        for i in range(self.ROUNDS,0,-2):
+        for i in range(self.ROUNDS, 0, -2):
             xr = xr ^ (self.F(xl) ^ self.P[i])
-            xl = xl ^ (self.F(xr) ^ self.P[i-1])
+            xl = xl ^ (self.F(xr) ^ self.P[i - 1])
 
         xr = xr ^ self.P[0]
 
-        self.Bits32ToBytes( xr, src, 0 )
-        self.Bits32ToBytes( xl, src, 4 )
+        self.Bits32ToBytes(xr, src, 0)
+        self.Bits32ToBytes(xl, src, 4)
 
-    def decrypt (self, byteArray):
+    def decrypt(self, byteArray):
         decrypted = []
-        for i in range(0,len(byteArray),8):
+        for i in range(0, len(byteArray), 8):
             blockBytes = []
-            for j in range(0,8):
-                blockBytes.append( byteArray[i+j] )
-            self.decryptBlock( blockBytes )
-            decrypted.extend( blockBytes )
-        self.unpad( decrypted )
+            for j in range(0, 8):
+                blockBytes.append(byteArray[i + j])
+            self.decryptBlock(blockBytes)
+            decrypted.extend(blockBytes)
+        self.unpad(decrypted)
         return decrypted
 
-def Decode4odToken( token ):
-    encryptedBytes = Base64_decodeToByteArray( token )
-    
+
+def Decode4odToken(token):
+    encryptedBytes = Base64_decodeToByteArray(token)
+
     #key = "STINGMIMI"
     key = "wHcnqpHNN"
-    keyBytes = StringToByteArray( key )
-    bf = MyBlowfish( keyBytes )
-    decryptedBytes = bf.decrypt( encryptedBytes )
-    return ByteArrayToString( decryptedBytes )
+    keyBytes = StringToByteArray(key)
+    bf = MyBlowfish(keyBytes)
+    decryptedBytes = bf.decrypt(encryptedBytes)
+    return ByteArrayToString(decryptedBytes)

@@ -40,7 +40,7 @@ class TMDB(object):
     def _get_guest_session_id_path(self, key):
         return self._get_path(key).format(
             guest_session_id=self.guest_session_id)
-    
+
     def _get_credit_id_path(self, key):
         return self._get_path(key).format(credit_id=self.credit_id)
 
@@ -73,7 +73,7 @@ class TMDB(object):
         params = self._get_params(params)
 
         response = requests.request(
-            method, url, params=params, 
+            method, url, params=params,
             data=json.dumps(payload) if payload else payload,
             headers=self.headers)
 
@@ -103,4 +103,3 @@ class TMDB(object):
         if isinstance(response, dict):
             for key in response.keys():
                 setattr(self, key, response[key])
-

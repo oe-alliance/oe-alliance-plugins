@@ -24,34 +24,34 @@ from Components.MultiContent import MultiContentEntryText
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 EXTENSIONS = {
-	".m4a" : "music",
-	".mp2" : "music",
-	".mp3" : "music",
-	".wav" : "music",
-	".ogg" : "music",
+	".m4a": "music",
+	".mp2": "music",
+	".mp3": "music",
+	".wav": "music",
+	".ogg": "music",
 	".flac": "music",
-	".ts"  : "movie",
-	".avi" : "movie",
+	".ts": "movie",
+	".avi": "movie",
 	".divx": "movie",
-	".m4v" : "movie",
-	".mpg" : "movie",
+	".m4v": "movie",
+	".mpg": "movie",
 	".mpeg": "movie",
-	".mkv" : "movie",
-	".mp4" : "movie",
-	".mov" : "movie",
+	".mkv": "movie",
+	".mp4": "movie",
+	".mov": "movie",
 	".m2ts": "movie",
-	".wmv" : "movie",
-	".jpg" : "picture",
+	".wmv": "movie",
+	".jpg": "picture",
 	".jpeg": "picture",
-	".png" : "picture",
-	".bmp" : "picture",
-	".m3u" : "stream",
+	".png": "picture",
+	".bmp": "picture",
+	".m3u": "stream",
 	".m3u8": "stream",
 }
 
-DLNA_CONFIG_SLIDESHOW       = 10000
-DLNA_CONFIG_DEVICE_REFRESH  = 10000
-DLNA_CONFIG_ROOT_DIR        = '/media/upnp/'
+DLNA_CONFIG_SLIDESHOW = 10000
+DLNA_CONFIG_DEVICE_REFRESH = 10000
+DLNA_CONFIG_ROOT_DIR = '/media/upnp/'
 DLNA_CONFIG_CLIENT_CONFNAME = "/etc/djmount.conf"
 
 
@@ -67,7 +67,7 @@ class DLNAFileList(FileList):
 		directoryItem = self.rootDir[:-1].split('/')
 		directoryItem.pop()
 		for di in directoryItem:
-			parent += di+'/'
+			parent += di + '/'
 		self.changeDir(self.rootDir, select=parent)
 
 	def changeParent(self):
@@ -78,11 +78,11 @@ class DLNAFileList(FileList):
 		directoryItem = currentDir[:-1].split('/')
 		directoryItem.pop()
 		for di in directoryItem:
-			parent += di+'/'
+			parent += di + '/'
 		if len(directoryItem) > 0:
 			directoryItem.pop()
 		for di in directoryItem:
-			grandParent += di+'/'
+			grandParent += di + '/'
 		if parent == grandParent:
 			return False
 		self.changeDir(parent, select=grandParent)
@@ -91,13 +91,15 @@ class DLNAFileList(FileList):
 	def getFileType(self):
 		try:
 			selectedFileName = self.getSelection()[0]
-			splitedFileName  = os.path.splitext(selectedFileName)
+			splitedFileName = os.path.splitext(selectedFileName)
 			return EXTENSIONS[splitedFileName[1]]
-		except: pass
+		except:
+			pass
 		return 'unknown'
 
+
 class DLNAFileBrowser(Screen):
-	skin = 	"""
+	skin = """
 		<screen name="DLNAFileBrowser" position="center,center" size="600,350" title="File Browser">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
@@ -129,38 +131,39 @@ class DLNAFileBrowser(Screen):
 		</screen>
 		-->
 		"""
+
 	def __init__(self, session, directory):
 		self.session = session
 		Screen.__init__(self, session)
 
-		self["actions"]  = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"], {
-			"back"  : self.keyCancel,
-			"left"  : self.keyLeft,
-			"right" : self.keyRight,
-			"up"    : self.keyUp,
-			"down"  : self.keyDown,
-			"ok"    : self.keyOK,
-			"green" : self.keyGreen,
-			"red"   : self.keyCancel,
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"], {
+			"back": self.keyCancel,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"up": self.keyUp,
+			"down": self.keyDown,
+			"ok": self.keyOK,
+			"green": self.keyGreen,
+			"red": self.keyCancel,
 			"yellow": self.keyYellow,
-			"blue"  : self.keyBlue
+			"blue": self.keyBlue
 		}, -1)
 
-		self["directory"]  = Label()
-		self["key_red"]    = StaticText(_("Show Device"))
-		self["key_green"]  = StaticText(_("Add all"))
+		self["directory"] = Label()
+		self["key_red"] = StaticText(_("Show Device"))
+		self["key_green"] = StaticText(_("Add all"))
 		self["key_yellow"] = StaticText(_("Up"))
-		self["key_blue"]   = StaticText(_("Top"))
-		self["filelist"]   = DLNAFileList(directory)
+		self["key_blue"] = StaticText(_("Top"))
+		self["filelist"] = DLNAFileList(directory)
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
 		self.showCB = {
-			'movie'   : self.showMovie,
-			'music'   : self.showMusic,
-			'picture' : self.showPicture,
-			'stream'  : self.showStream,
-			'unknown' : self.showUnknown,
+			'movie': self.showMovie,
+			'music': self.showMusic,
+			'picture': self.showPicture,
+			'stream': self.showStream,
+			'unknown': self.showUnknown,
 		}
 
 	def layoutFinished(self):
@@ -179,7 +182,7 @@ class DLNAFileBrowser(Screen):
 				idx = self["filelist"].getSelectionIndex()
 				(files, fileTypes) = self.recursiveFileCheck()
 				# goto the correct selection index (as it was before)
-				newIdx=self["filelist"].getSelectionIndex()
+				newIdx = self["filelist"].getSelectionIndex()
 				while idx > newIdx:
 					self["filelist"].down()
 					newIdx += 1
@@ -200,17 +203,18 @@ class DLNAFileBrowser(Screen):
 					else:
 						self.showUnknown()
 				return
-		except:	return
+		except:
+			return
 
-	def recursiveFileCheck(self, firstFileType = None):
+	def recursiveFileCheck(self, firstFileType=None):
 		files = []
 		self["filelist"].descent()
 		fileList = self["filelist"].getFileList()
 		try:
 			fileDir = str(fileList[0][0][0])
-			idx = fileDir[:len(fileDir)-2].rfind(os.sep)
+			idx = fileDir[:len(fileDir) - 2].rfind(os.sep)
 			if idx > 0:
-				fileDir = fileDir[:idx]+os.sep
+				fileDir = fileDir[:idx] + os.sep
 		except:
 			return ([], firstFileType)
 		for f in fileList:
@@ -226,13 +230,14 @@ class DLNAFileBrowser(Screen):
 						newIdx += 1
 				else:
 					fileType = self["filelist"].getFileType()
-					newFiles = [fileDir+str(f[0][0])]
+					newFiles = [fileDir + str(f[0][0])]
 				if len(newFiles) > 0:
 					if not fileType is None and fileType != 'unknown':
 						if firstFileType is None or fileType == firstFileType:
 							firstFileType = fileType
 							files = files + newFiles
-			except: pass
+			except:
+				pass
 			self["filelist"].down()
 		self["filelist"].changeParent()
 		return (files, firstFileType)
@@ -263,7 +268,8 @@ class DLNAFileBrowser(Screen):
 				self["filelist"].descent()
 				self.updateDirectory()
 				return
-		except:	return
+		except:
+			return
 		fileType = self["filelist"].getFileType()
 		self.showCB[fileType]()
 
@@ -309,10 +315,12 @@ class DLNAFileBrowser(Screen):
 			self.beforeService = None
 
 	def cbShowPicture(self, idx=0):
-		if idx > 0: self["filelist"].moveToIndex(idx)
+		if idx > 0:
+			self["filelist"].moveToIndex(idx)
+
 
 class DLNAStreamPlayer(Screen, InfoBarNotifications):
-	skin = 	"""
+	skin = """
 		<screen name="DLNAStreamPlayer" flags="wfNoBorder" position="center,620" size="455,53" title="DLNAStreamPlayer" backgroundColor="transparent">
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/DLNABrowser/icons/mp_wb_background.png" position="0,0" zPosition="-1" size="455,53" />
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/DLNABrowser/icons/mp_wb_buttons.png" position="40,23" size="30,13" alphatest="on" />
@@ -330,16 +338,16 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 			</widget>
 		</screen>
 		"""
-	PLAYER_IDLE	= 0
-	PLAYER_PLAYING 	= 1
-	PLAYER_PAUSED 	= 2
+	PLAYER_IDLE = 0
+	PLAYER_PLAYING = 1
+	PLAYER_PAUSED = 2
 
 	def __init__(self, session, service, lastservice):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
 
-		self.session     = session
-		self.service     = service
+		self.session = session
+		self.service = service
 		self.lastservice = lastservice
 		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"], {
 			"ok": self.doInfoAction,
@@ -349,7 +357,7 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 		}, -2)
 		self["sidebar"] = Label(_("/"))
 
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap = {
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 			iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 			iPlayableService.evStart: self.__serviceStarted,
 			iPlayableService.evEOF: self.__evEOF,
@@ -387,7 +395,7 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 
 	def doExit(self):
 		list = ((_("Yes"), "y"), (_("No"), "n"),)
-		self.session.openWithCallback(self.cbDoExit, ChoiceBox, title=_("Stop playing this movie?"), list = list)
+		self.session.openWithCallback(self.cbDoExit, ChoiceBox, title=_("Stop playing this movie?"), list=list)
 
 	def cbDoExit(self, answer):
 		answer = answer and answer[1]
@@ -440,6 +448,7 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 		elif self.state == self.PLAYER_PAUSED:
 			self.setSeekState(self.PLAYER_PLAYING)
 
+
 class DLNAImageViewer(Screen):
 	s, w, h = 30, getDesktop(0).size().width(), getDesktop(0).size().height()
 	skin = """
@@ -450,29 +459,29 @@ class DLNAImageViewer(Screen):
 			<widget name="icon" position="%d,%d" size="20,20" zPosition="2" pixmap="skin_default/icons/ico_mp_play.png"  alphatest="on" />
 			<widget source="message" render="Label" position="%d,%d" size="%d,25" font="Regular;20" halign="left" foregroundColor="#0038FF48" zPosition="2" noWrap="1" transparent="1" />
 		</screen>
-		""" % (w, h, w, h, s, s, w-(s*2), h-(s*2), s+5, s+2, s+25, s+2, s+45, s, w-(s*2)-50)
+		""" % (w, h, w, h, s, s, w - (s * 2), h - (s * 2), s + 5, s + 2, s + 25, s + 2, s + 45, s, w - (s * 2) - 50)
 
 	def __init__(self, session, fileList, index, path):
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MovieSelectionActions"], {
 			"cancel": self.keyCancel,
-			"left"  : self.keyLeft,
-			"right" : self.keyRight,
-			"blue"  : self.keyBlue,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"blue": self.keyBlue,
 			"yellow": self.keyYellow,
 		}, -1)
 
-		self["icon"]    = Pixmap()
-		self["image"]   = Pixmap()
-		self["status"]  = Pixmap()
+		self["icon"] = Pixmap()
+		self["image"] = Pixmap()
+		self["status"] = Pixmap()
 		self["message"] = StaticText(_("Please wait, Loading image."))
 
-		self.fileList     = []
+		self.fileList = []
 		self.currentImage = []
 
-		self.lsatIndex      = index
-		self.fileListLen    = 0
-		self.currentIndex   = 0
+		self.lsatIndex = index
+		self.fileListLen = 0
+		self.currentIndex = 0
 		self.directoryCount = 0
 
 		self.displayNow = True
@@ -544,12 +553,15 @@ class DLNAImageViewer(Screen):
 			if l == 3:
 				if x[0][1] == False:
 					self.fileList.append(path + x[0][0])
-				else:	self.directoryCount += 1
+				else:
+					self.directoryCount += 1
 			elif l == 2:
 				if x[0][1] == False:
 					self.fileList.append(x[0][0])
-				else:	self.directoryCount += 1
-			else:	self.fileList.append(x[4])
+				else:
+					self.directoryCount += 1
+			else:
+				self.fileList.append(x[4])
 
 		self.currentIndex = self.lsatIndex - self.directoryCount
 		if self.currentIndex < 0:
@@ -575,8 +587,8 @@ class DLNAImageViewer(Screen):
 		if ptr != None:
 			text = ""
 			try:
-				text = picInfo.split('\n',1)
-				text = "(" + str(self.currentIndex+1) + "/" + str(self.fileListLen+1) + ") " + text[0].split('/')[-1]
+				text = picInfo.split('\n', 1)
+				text = "(" + str(self.currentIndex + 1) + "/" + str(self.fileListLen + 1) + ") " + text[0].split('/')[-1]
 			except:
 				pass
 			self.currentImage = []
@@ -591,10 +603,11 @@ class DLNAImageViewer(Screen):
 
 	def cbSlideShow(self):
 		print "slide to next Picture index=" + str(self.lsatIndex)
-		if config.pic.loop.value==False and self.lsatIndex == self.fileListLen:
+		if config.pic.loop.value == False and self.lsatIndex == self.fileListLen:
 			self.PlayPause()
 		self.displayNow = True
 		self.showPicture()
+
 
 class TaskManager:
 	def __init__(self):
@@ -605,7 +618,7 @@ class TaskManager:
 		self.cbSetStatusCB = None
 
 	def append(self, command, cbDataFunc, cbCloseFunc):
-		self.taskList.append([command+'\n', cbDataFunc, cbCloseFunc])
+		self.taskList.append([command + '\n', cbDataFunc, cbCloseFunc])
 
 	def dump(self):
 		print "############### TASK ###############"
@@ -640,8 +653,8 @@ class TaskManager:
 		if self.taskIdx >= len(self.taskList) or self.occurError:
 			print "[DLNAClient Plugin] Info >> can't run task!!"
 			return False
-		command     = self.taskList[self.taskIdx][0]
-		cbDataFunc  = self.taskList[self.taskIdx][1]
+		command = self.taskList[self.taskIdx][0]
+		cbDataFunc = self.taskList[self.taskIdx][1]
 		cbCloseFunc = self.taskList[self.taskIdx][2]
 
 		self.gTaskInstance = eConsoleAppContainer()
@@ -652,14 +665,15 @@ class TaskManager:
 		if self.cbSetStatusCB is not None:
 			self.cbSetStatusCB(self.taskIdx)
 
-		print "[DLNAClient Plugin] Info >> prepared command : %s"%(command)
+		print "[DLNAClient Plugin] Info >> prepared command : %s" % (command)
 		self.gTaskInstance.execute(command)
 		self.taskIdx += 1
 		return True
 
 
 config.plugins.dlnabrowser = ConfigSubsection()
-config.plugins.dlnabrowser.autostart = ConfigYesNo(default = True)
+config.plugins.dlnabrowser.autostart = ConfigYesNo(default=True)
+
 
 def isRunning():
 	ps_str = os.popen('cat /etc/mtab | grep djmount').read()
@@ -667,8 +681,9 @@ def isRunning():
 		return True
 	return False
 
+
 class DLNAClientConfig(ConfigListScreen, Screen):
-	skin=   """
+	skin = """
 		<screen position="center,center" size="600,350" title="Mini DLNA Runcher">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
@@ -683,26 +698,27 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 			<widget name="config" position="0,50" size="600,200" scrollbarMode="showOnDemand" />
 		</screen>
 		"""
+
 	def __init__(self, session):
                 self.session = session
 		Screen.__init__(self, session)
 
-		self.menulist  = []
+		self.menulist = []
 		self.oldConfig = {}
 		ConfigListScreen.__init__(self, self.menulist)
 
 		global DLNA_CONFIG_CLIENT_CONFNAME
 		self.configFileName = DLNA_CONFIG_CLIENT_CONFNAME
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", ], {
-			"red"    : self.keyExit,
-			"green"  : self.keyOK,
-			"cancel" : self.keyExit,
-			"ok"     : self.keyOK,
+			"red": self.keyExit,
+			"green": self.keyOK,
+			"cancel": self.keyExit,
+			"ok": self.keyOK,
                 }, -2)
-		self["key_red"]     = StaticText(_("Exit"))
-		self["key_green"]   = StaticText(_("Save"))
-		self["key_yellow"]  = StaticText(_(" "))
-		self["key_blue"]    = StaticText(_(" "))
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText(_(" "))
+		self["key_blue"] = StaticText(_(" "))
 
 		self.makeMenuList()
 
@@ -719,13 +735,13 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 	def makeMenuList(self):
 		self.readConfigFile()
 		#self.menuItemRootDir   = ConfigText(default=self.oldConfig.get('rootdir'))
-		self.menuItemRefresh   = ConfigSelection(default=self.oldConfig.get('refresh'), choices = [("5", _("5")), ("10", _("10")), ("15", _("15"))])
-		self.menuItemSlideshow = ConfigSelection(default=self.oldConfig.get('slideshow'), choices = [("5", _("5")), ("10", _("10")), ("15", _("15")), ("20", _("20"))])
+		self.menuItemRefresh = ConfigSelection(default=self.oldConfig.get('refresh'), choices=[("5", _("5")), ("10", _("10")), ("15", _("15"))])
+		self.menuItemSlideshow = ConfigSelection(default=self.oldConfig.get('slideshow'), choices=[("5", _("5")), ("10", _("10")), ("15", _("15")), ("20", _("20"))])
 
 		#self.menuEntryRootDir   = getConfigListEntry(_("Mount Point"), self.menuItemRootDir)
-		self.menuEntryRefresh   = getConfigListEntry(_("DeviceList Refresh Interval"), self.menuItemRefresh)
+		self.menuEntryRefresh = getConfigListEntry(_("DeviceList Refresh Interval"), self.menuItemRefresh)
 		self.menuEntrySlideshow = getConfigListEntry(_("Slideshow Interval"), self.menuItemSlideshow)
-		self.menuEntryAutoStart  = getConfigListEntry(_("Enable Autostart for DLNA Browser"), config.plugins.dlnabrowser.autostart)
+		self.menuEntryAutoStart = getConfigListEntry(_("Enable Autostart for DLNA Browser"), config.plugins.dlnabrowser.autostart)
 		self.resetMenuList()
 
 	def resetMenuList(self):
@@ -740,7 +756,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 	def writeConfigFile(self):
 		def configDataAppend(origin, key, value):
 			if key.strip() != '' and value.strip() != '':
-				origin += "%s=%s\n" % (key,value)
+				origin += "%s=%s\n" % (key, value)
 			return origin
 		configString = ""
 		#configString = configDataAppend(configString, "rootdir", self.menuItemRootDir.value)
@@ -757,7 +773,8 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 				value = self.oldConfig.get(key)
 				if value == None or value.strip() == '':
 					self.oldConfig[key] = default
-			except: self.oldConfig[key] = default
+			except:
+				self.oldConfig[key] = default
 
 		self.oldConfig = {}
 		if not os.path.exists(self.configFileName):
@@ -770,10 +787,11 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 			if line == '' or line[0] == '#':
 				continue
 			try:
-				i   = line.find('=')
-				k,v = line[:i],line[i+1:]
+				i = line.find('=')
+				k, v = line[:i], line[i + 1:]
 				self.oldConfig[k] = v
-			except : pass
+			except:
+				pass
 
 		#setDefault('rootdir', '/media/upnp/')
 		setDefault('refresh', '10')
@@ -782,7 +800,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 
 
 class DLNADeviceBrowser(Screen):
-	skin = 	"""
+	skin = """
 		<screen name="DLNADeviceBrowser" position="center,center" size="600,350" title="Device Browser">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
@@ -797,23 +815,24 @@ class DLNADeviceBrowser(Screen):
 			<widget name="devicelist" position="0,50" size="600,300" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 	        </screen>
 		"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self["actions"]  = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
-			"ok"    : self.keyOK,
+		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
+			"ok": self.keyOK,
 			"cancel": self.keyCancel,
-			"red"   : self.keyCancel,
-			"green" : self.keyGreen,
+			"red": self.keyCancel,
+			"green": self.keyGreen,
 			"yellow": self.keyYellow,
-			"blue"  : self.keyBlue,
+			"blue": self.keyBlue,
 		}, -1)
 
 		global DLNA_CONFIG_CLIENT_CONFNAME
 		self.configFileName = DLNA_CONFIG_CLIENT_CONFNAME
-		self["key_red"]    = StaticText(_("Exit"))
-		self["key_green"]  = StaticText(_("Start"))
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_green"] = StaticText(_("Start"))
 		self["key_yellow"] = StaticText(_("Setting"))
-		self["key_blue"]   = StaticText(_("Reload Device"))
+		self["key_blue"] = StaticText(_("Reload Device"))
 
 		#self["devicelist"] = MenuList(self.setListOnView())
 		self["devicelist"] = MenuList([])
@@ -845,7 +864,7 @@ class DLNADeviceBrowser(Screen):
 	def keyGreen(self):
 		global DLNA_CONFIG_ROOT_DIR
 		if self["key_green"].getText() == 'Stop':
-			cmd = 'fusermount -u %s'%(DLNA_CONFIG_ROOT_DIR)
+			cmd = 'fusermount -u %s' % (DLNA_CONFIG_ROOT_DIR)
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbPrintClose)
 			cmd = 'modprobe -r fuse'
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbStopDone)
@@ -855,7 +874,7 @@ class DLNADeviceBrowser(Screen):
 		else:
 			cmd = 'modprobe fuse'
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbPrintClose)
-			cmd = 'djmount -o allow_other -o iocharset=utf8 %s'%(DLNA_CONFIG_ROOT_DIR)
+			cmd = 'djmount -o allow_other -o iocharset=utf8 %s' % (DLNA_CONFIG_ROOT_DIR)
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbStartDone)
 		self.taskManager.next()
 
@@ -867,7 +886,7 @@ class DLNADeviceBrowser(Screen):
 		selectedItem = self["devicelist"].getCurrent()
 		if selectedItem is None:
 			return
-		selectedFullPaht = '%s%s/'%(DLNA_CONFIG_ROOT_DIR, selectedItem[1])
+		selectedFullPaht = '%s%s/' % (DLNA_CONFIG_ROOT_DIR, selectedItem[1])
 		self.session.openWithCallback(self.cbDeviceListRefresh, DLNAFileBrowser, selectedFullPaht)
 		self.deviceListRefreshTimer.stop()
 
@@ -883,20 +902,24 @@ class DLNADeviceBrowser(Screen):
 			DLNA_CONFIG_ROOT_DIR = '/media/upnp/'
 			DLNA_CONFIG_DEVICE_REFRESH = 10000
 			DLNA_CONFIG_SLIDESHOW = 10000
-			print "config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH)
+			print "config : [%s][%d][%d]" % (DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH)
 			return
 		for line in file(self.configFileName).readlines():
 			line = line.strip()
 			if line == '' or line[0] == '#':
 				continue
 			try:
-				i   = line.find('=')
-				k,v = line[:i],line[i+1:]
-				if k == 'rootdir':	DLNA_CONFIG_ROOT_DIR = v
-				elif k == 'refresh':	DLNA_CONFIG_DEVICE_REFRESH = int(v)*1000
-				elif k == 'slideshow':	DLNA_CONFIG_SLIDESHOW = int(v)*1000
-			except : pass
-		print "config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH)
+				i = line.find('=')
+				k, v = line[:i], line[i + 1:]
+				if k == 'rootdir':
+					DLNA_CONFIG_ROOT_DIR = v
+				elif k == 'refresh':
+					DLNA_CONFIG_DEVICE_REFRESH = int(v) * 1000
+				elif k == 'slideshow':
+					DLNA_CONFIG_SLIDESHOW = int(v) * 1000
+			except:
+				pass
+		print "config : [%s][%d][%d]" % (DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH)
 
 	def updateGUI(self):
 		green_btm_str = 'Start'
@@ -911,24 +934,27 @@ class DLNADeviceBrowser(Screen):
 		global DLNA_CONFIG_DEVICE_REFRESH
 		try:
 			if refresh is not None:
-				newRefresh = int(refresh)*1000
+				newRefresh = int(refresh) * 1000
 				if DLNA_CONFIG_DEVICE_REFRESH != newRefresh:
 					DLNA_CONFIG_DEVICE_REFRESH = newRefresh
-		except: pass
+		except:
+			pass
 		try:
 			if rootdir is not None:
 				if DLNA_CONFIG_ROOT_DIR != rootdir:
 					DLNA_CONFIG_ROOT_DIR = rootdir
 					print "need restart!!!"
-		except: pass
+		except:
+			pass
 		try:
 			if slideshow is not None:
-				newSlideshow = int(slideshow)*1000
+				newSlideshow = int(slideshow) * 1000
 				if DLNA_CONFIG_SLIDESHOW != newSlideshow:
 					DLNA_CONFIG_SLIDESHOW = newSlideshow
-		except: pass
+		except:
+			pass
 		self.deviceListRefreshTimer.start(DLNA_CONFIG_DEVICE_REFRESH)
-		print "config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH)
+		print "config : [%s][%d][%d]" % (DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH)
 
 	def cbPrintAvail(self, data):
 		print data
@@ -958,21 +984,23 @@ class DLNADeviceBrowser(Screen):
 
 	def setListOnView(slelf):
 		global DLNA_CONFIG_ROOT_DIR
-		items,rootdir = [],DLNA_CONFIG_ROOT_DIR
-		deviceList = [ name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name)) ]
+		items, rootdir = [], DLNA_CONFIG_ROOT_DIR
+		deviceList = [name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name))]
 		deviceList.sort()
 		for d in deviceList:
-			if d[0] in ('.', '_'): continue
-			items.append((d,d))
+			if d[0] in ('.', '_'):
+				continue
+			items.append((d, d))
 		return items
+
 
 def autostart(reason, **kwargs):
 	if reason == 0:
 		if isRunning():
-			args = 'fusermount -u %s;modprobe -r fuse'%(DLNA_CONFIG_ROOT_DIR)
+			args = 'fusermount -u %s;modprobe -r fuse' % (DLNA_CONFIG_ROOT_DIR)
 			is_running = True
 		else:
-			args = "modprobe fuse;" + 'djmount -o allow_other -o iocharset=utf8 %s'%(DLNA_CONFIG_ROOT_DIR)
+			args = "modprobe fuse;" + 'djmount -o allow_other -o iocharset=utf8 %s' % (DLNA_CONFIG_ROOT_DIR)
 			is_running = False
 		cmd = args
 
@@ -985,9 +1013,12 @@ def autostart(reason, **kwargs):
 		elif config.plugins.dlnabrowser.autostart.value == False and is_running == True:
 				print "[DLNABrowser] stopping ..."
 				os.system(cmd)
+
+
 def main(session, **kwargs):
 	session.open(DLNADeviceBrowser)
 
+
 def Plugins(**kwargs):
-	return [PluginDescriptor(name=_("DLNA/uPnP Browser"), description=_("This is dlna/upnp client using djmount."), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
-		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart)]
+	return [PluginDescriptor(name=_("DLNA/uPnP Browser"), description=_("This is dlna/upnp client using djmount."), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]

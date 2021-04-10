@@ -15,6 +15,7 @@ from Components.FanControl import fancontrol
 
 from boxbranding import getBrandOEM, getImageDistro
 
+
 class TempFanControl(Screen, ConfigListScreen):
 	skin = """
 		<screen position="center,center" size="570,420" title="Fan Control" >
@@ -94,7 +95,7 @@ class TempFanControl(Screen, ConfigListScreen):
 			</widget>
 		</screen>"""
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Fan Control"))
 
@@ -111,10 +112,10 @@ class TempFanControl(Screen, ConfigListScreen):
 				id = templist[count]
 				if getBrandOEM() not in ('dags', 'vuplus'):
 					self["SensorTempText%d" % count] = StaticText(sensors.getSensorName(id))
-					self["SensorTemp%d" % count] = SensorSource(sensorid = id)
+					self["SensorTemp%d" % count] = SensorSource(sensorid=id)
 				elif getBrandOEM() in ('dags', 'vuplus') and id < 1:
 					self["SensorTempText%d" % count] = StaticText(sensors.getSensorName(id))
-					self["SensorTemp%d" % count] = SensorSource(sensorid = id)
+					self["SensorTemp%d" % count] = SensorSource(sensorid=id)
 				else:
 					self["SensorTempText%d" % count] = StaticText("")
 					self["SensorTemp%d" % count] = SensorSource()
@@ -125,7 +126,7 @@ class TempFanControl(Screen, ConfigListScreen):
 			if count < fancount:
 				id = fanlist[count]
 				self["SensorFanText%d" % count] = StaticText(sensors.getSensorName(id))
-				self["SensorFan%d" % count] = SensorSource(sensorid = id)
+				self["SensorFan%d" % count] = SensorSource(sensorid=id)
 			else:
 				self["SensorFanText%d" % count] = StaticText("")
 				self["SensorFan%d" % count] = SensorSource()
@@ -139,7 +140,7 @@ class TempFanControl(Screen, ConfigListScreen):
 				self.list.append(getConfigListEntry(_("Standby fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt_standby))
 			self.list.append(getConfigListEntry(_("Standby fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm_standby))
 
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		#self["config"].list = self.list
 		#self["config"].setList(self.list)
 		self["config"].l.setSeperation(300)
@@ -173,8 +174,10 @@ class TempFanControl(Screen, ConfigListScreen):
 			fancontrol.getConfig(count).pwm_standby.load()
 		self.close()
 
+
 def main(session, **kwargs):
 	session.open(TempFanControl)
+
 
 def startMenu(menuid):
 	if getImageDistro() in ('openatv'):
@@ -182,14 +185,15 @@ def startMenu(menuid):
 			return []
 	elif getImageDistro() in ('openhdf'):
 		if menuid != "devices_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []
 	return [(_("Temperature and fan control"), main, "tempfancontrol", 80)]
 
+
 def Plugins(**kwargs):
 	from os import path
 	if not path.exists("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/plugin.pyo"):
-		return PluginDescriptor(name = _("Fan Control"), description = _("Temperature and Fan control"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc = startMenu)
+		return PluginDescriptor(name=_("Fan Control"), description=_("Temperature and Fan control"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=startMenu)
 	return []

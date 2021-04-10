@@ -8,7 +8,7 @@
 # 0x10 |     | 0x4
 #       -----
 #        0x8
-# Note: 
+# Note:
 #  extra segment is provided only in second digit. use 0x80 bit to turn on ':' sign.
 #
 # usage of led7ctrl:
@@ -53,17 +53,17 @@ import Screens.Standby
 import subprocess
 
 config.plugins.VFD_SF8 = ConfigSubsection()
-config.plugins.VFD_SF8.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_SF8.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.VFD_SF8.showClock = ConfigSelection(default="True_Switch", choices=[("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.VFD_SF8.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
 
-# this bitmap is not complete. 
+# this bitmap is not complete.
 # please populate it as you want.
 ascii_bitmap = [
 	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # 0 ~ 7
 	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # 8 ~ f
 	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # 10 ~ 17
 	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # 18 ~ 1f
-	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # SPC ! " # $ % & ' 
+	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # SPC ! " # $ % & '
 	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # ( ) * + - . /
 	0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, # 0 1 2 3 4 5 6 7
 	0x7f, 0x6f, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # 8 9 : ; < = > ?
@@ -74,22 +74,25 @@ ascii_bitmap = [
 	0x0, 0x77, 0x7c, 0x58, 0x5e, 0x79, 0x71, 0x0, # ` a b c d e f g
 	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # h i j k l m n o
 	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # p q r s t u v w
-	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # x y z { | } ~ 
+	0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, # x y z { | } ~
 ]
+
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
-	
+
+
 def vfd_text_out(text):
 	led7ctrl = subprocess.Popen(['/usr/lib/enigma2/python/Plugins/SystemPlugins/VFDControl/led7ctrl'], stdin=subprocess.PIPE)
-	index = [ 'a', 'b', 'c', 'd' ] # 'a' means the first digit, 'b' is second, ...
+	index = ['a', 'b', 'c', 'd'] # 'a' means the first digit, 'b' is second, ...
 	cmd = ""
 	for i in range(4): # display up to 4 character. todo: check short string.
 		ascii_val = ord(text[i])
 		# todo: we only has 128 byte length list. check ascii val.
-		cmd += (index[i] + hex(ascii_bitmap[ascii_val])[2:] ) # should not use 0x prefix in command.
+		cmd += (index[i] + hex(ascii_bitmap[ascii_val])[2:]) # should not use 0x prefix in command.
 		cmd += " "  # use space as seperator
 	led7ctrl.communicate(cmd + "\n")
+
 
 class Channelnumber:
 
@@ -105,10 +108,9 @@ class Channelnumber:
 		self.zaPrik = eTimer()
 		self.zaPrik.timeout.get().append(self.vrime)
 		self.zaPrik.start(1000, 1)
-		self.onClose = [ ]
+		self.onClose = []
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 
@@ -186,7 +188,7 @@ class Channelnumber:
 					self.prikaz()
 			else:
 				self.__eventInfoChanged()
-					
+
 		if config.plugins.VFD_SF8.showClock.value == 'Off':
 			vfd_text_out("....")
 			self.zaPrik.start(self.updatetime, 1)
@@ -201,13 +203,16 @@ class Channelnumber:
 		self.begin = time() + int(self.channelnrdelay)
 		self.endkeypress = True
 
+
 ChannelnumberInstance = None
+
 
 def leaveStandby():
 	print "[VFD-SF8] Leave Standby"
 
 	if config.plugins.VFD_SF8.showClock.value == 'Off':
 		vfd_text_out("....")
+
 
 def standbyCounterChanged(configElement):
 	print "[VFD-SF8] In Standby"
@@ -218,14 +223,16 @@ def standbyCounterChanged(configElement):
 	if config.plugins.VFD_SF8.showClock.value == 'Off':
 		vfd_text_out("....")
 
+
 def initVFD():
 	print "[VFD-SF8] initVFD"
 
 	if config.plugins.VFD_SF8.showClock.value == 'Off':
 		vfd_text_out("....")
 
+
 class VFD_SF8Setup(ConfigListScreen, Screen):
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 
 		self.skin = """
 			<screen position="100,100" size="500,210" title="VFD_SF8 Setup" >
@@ -239,9 +246,9 @@ class VFD_SF8Setup(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.onClose.append(self.abort)
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
 		self.createSetup()
 
@@ -250,7 +257,7 @@ class VFD_SF8Setup(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("Save"))
 		self["key_yellow"] = Button(_("Update Date/Time"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -299,12 +306,13 @@ class VFD_SF8Setup(ConfigListScreen, Screen):
 		self.createSetup()
 		initVFD()
 
+
 class VFD_SF8:
 	def __init__(self, session):
 		print "[VFD-SF8] initializing"
 		self.session = session
 		self.service = None
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.Console = Console()
 
@@ -319,19 +327,23 @@ class VFD_SF8:
 
 	def abort(self):
 		print "[VFD-SF8] aborting"
-		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
+
 
 def main(menuid):
 	if menuid != "system":
-		return [ ]
+		return []
 	return [(_("VFD_SF8"), startVFD, "VFD_SF8", None)]
+
 
 def startVFD(session, **kwargs):
 	session.open(VFD_SF8Setup)
 
+
 SF8VFD = None
 gReason = -1
 mySession = None
+
 
 def controlSF8VFD():
 	global SF8VFD
@@ -346,6 +358,7 @@ def controlSF8VFD():
 
 		SF8VFD = None
 
+
 def sessionstart(reason, **kwargs):
 	print "[VFD-SF8] sessionstart"
 	global SF8VFD
@@ -358,9 +371,10 @@ def sessionstart(reason, **kwargs):
 		gReason = reason
 	controlSF8VFD()
 
+
 def Plugins(**kwargs):
 	if getBoxType() in ('sf8'):
-	 	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-	 		PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+	 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+	 		PluginDescriptor(name="LED Display Setup", description="Change LED display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]
 	else:
 		return []

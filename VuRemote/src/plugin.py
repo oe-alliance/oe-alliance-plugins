@@ -11,30 +11,30 @@ from Tools.Directories import fileExists
 from enigma import eTimer
 from boxbranding import getImageDistro, getBoxType
 
+
 def getRcuDefaultType():
 	if getBoxType() in ["vuultimo4k"]:
 		return "type5"
-	elif getBoxType() in ["vuuno4kse","vuzero4k","vuduo4k","vuduo4kse"]:
+	elif getBoxType() in ["vuuno4kse", "vuzero4k", "vuduo4k", "vuduo4kse"]:
 		return "type6"
 	return "legacy"
 
-config.misc.remotecontrol_text_support = ConfigYesNo(default = True)
+
+config.misc.remotecontrol_text_support = ConfigYesNo(default=True)
 
 config.plugins.remotecontrolcode = ConfigSubsection()
 if getBoxType() in ("vusolo", "vuduo"):
-	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "1", choices =
-		[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
+	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="1", choices=[("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ")])
 else:
-	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "2", choices =
-		[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
-config.plugins.remotecontrolcode.rcuType = ConfigSelection(default = getRcuDefaultType(), choices = 
-	[ ("legacy", "Legacy Vu+ Universal RCU"), ("type5", "New Vu+ Bluetooth RCU"), ("type6", "New Vu+ Type 6 RCU") ] )
+	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="2", choices=[("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ")])
+config.plugins.remotecontrolcode.rcuType = ConfigSelection(default=getRcuDefaultType(), choices=[("legacy", "Legacy Vu+ Universal RCU"), ("type5", "New Vu+ Bluetooth RCU"), ("type6", "New Vu+ Type 6 RCU")])
+
 
 class RemoteControlCodeInit:
 	def __init__(self):
 		self.setSystemCode(int(config.plugins.remotecontrolcode.systemcode.value))
 
-	def setSystemCode(self, type = 2):
+	def setSystemCode(self, type=2):
 		if not fileExists("/proc/stb/fp/remote_code"):
 			return -1
 		print "[RemoteControlCode] Write Remote Control Code : %d" % type
@@ -44,12 +44,13 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose", "vuzero", "vusolo4k", "vuuno4k", "vuuno4kse", "vuzero4k", "vuultimo4k", "vuduo4k", "vuduo4kse"):
+		if getBoxType() in ("vuuno", "vuultimo", "vusolo2", "vuduo2", "vusolose", "vuzero", "vusolo4k", "vuuno4k", "vuuno4kse", "vuzero4k", "vuultimo4k", "vuduo4k", "vuduo4kse"):
 			return True
 		else:
 			return False
 
-class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
+
+class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 	skin = """
 		<screen position="center,center" size="400,250" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />
@@ -60,12 +61,12 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		</screen>
 	"""
 
-	def __init__(self,session):
-		Screen.__init__(self,session)
+	def __init__(self, session):
+		Screen.__init__(self, session)
 		self.skinName = ['RemoteControlCode', 'Setup']
 		self.session = session
 		Screen.setTitle(self, _("Remote Control Code"))
-		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
@@ -74,7 +75,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		}, -2)
 		self.codestartup = config.plugins.remotecontrolcode.systemcode.value
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self.createSetup()
@@ -84,7 +85,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 
 	def checkModel(self):
 		if not self.getModel():
-			self.checkModelTimer.start(1000,True)
+			self.checkModelTimer.start(1000, True)
 
 	def invalidmodel(self):
 		self.session.openWithCallback(self.close, MessageBox, _("Sorry, but %s is not supported.") % getBoxType(), MessageBox.TYPE_ERROR)
@@ -93,8 +94,8 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		self.list = []
 		self.rcuTypeEntry = getConfigListEntry(_("Remote Control Type"), config.plugins.remotecontrolcode.rcuType)
 		self.rcsctype = getConfigListEntry(_("Remote Control System Code"), config.plugins.remotecontrolcode.systemcode)
-		self.list.append( self.rcuTypeEntry )
-		self.list.append( self.rcsctype )
+		self.list.append(self.rcuTypeEntry)
+		self.list.append(self.rcsctype)
 		if getImageDistro() in ("openvix", "openatv"):
 			self.list.append(getConfigListEntry(_("Text support"), config.misc.remotecontrol_text_support))
 		self["config"].list = self.list
@@ -104,16 +105,16 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		config.misc.remotecontrol_text_support.save()
 		configfile.save()
 		if self.codestartup != config.plugins.remotecontrolcode.systemcode.value:
-			print "[RemoteControlCode] Selected System Code : ",config.plugins.remotecontrolcode.systemcode.value
+			print "[RemoteControlCode] Selected System Code : ", config.plugins.remotecontrolcode.systemcode.value
 			ret = self.setSystemCode(int(config.plugins.remotecontrolcode.systemcode.value))
 			if ret == -1:
 				self.restoreCode()
 				self.session.openWithCallback(self.close, MessageBox, _("FILE NOT EXIST : /proc/stb/fp/remote_code"), MessageBox.TYPE_ERROR)
 			else:
 				if config.plugins.remotecontrolcode.rcuType.value == "legacy":
-					self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000") + config.plugins.remotecontrolcode.systemcode.value + "'\n" + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout = 60, default = False)
+					self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000") + config.plugins.remotecontrolcode.systemcode.value + "'\n" + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout=60, default=False)
 				else:
-					self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold <OK> and <STB> until red LED is solid, then press '0000") + config.plugins.remotecontrolcode.systemcode.value + "', then press <OK>\n" + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout = 60, default = False)
+					self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold <OK> and <STB> until red LED is solid, then press '0000") + config.plugins.remotecontrolcode.systemcode.value + "', then press <OK>\n" + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout=60, default=False)
 		else:
 			self.close()
 
@@ -122,25 +123,26 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 			x[1].cancel()
 		self.close()
 
-	def MessageBoxConfirmCodeCallback(self,ret):
+	def MessageBoxConfirmCodeCallback(self, ret):
 		if ret:
 			ConfigListScreen.keySave(self)
 		else:
 			self.restoreCode()
 			self.setSystemCode(int(config.plugins.remotecontrolcode.systemcode.value))
 
+
 class MessageBoxConfirmCode(MessageBox):
-	def __init__(self, session, text, type = MessageBox.TYPE_YESNO, timeout = -1, close_on_any_key = False, default = True, enable_input = True, msgBoxID = None):
-		MessageBox.__init__(self,session,text,type,timeout,close_on_any_key,default,enable_input,msgBoxID)
+	def __init__(self, session, text, type=MessageBox.TYPE_YESNO, timeout=-1, close_on_any_key=False, default=True, enable_input=True, msgBoxID=None):
+		MessageBox.__init__(self, session, text, type, timeout, close_on_any_key, default, enable_input, msgBoxID)
 		self.skinName = "MessageBox"
 		if type == MessageBox.TYPE_YESNO:
-			self.list = [ (_("Keep"), True), (_("Restore"), False) ]
+			self.list = [(_("Keep"), True), (_("Restore"), False)]
 			self["list"].setList(self.list)
 
 	def timerTick(self):
 		if self.execing:
 			self.timeout -= 1
-			self["text"].setText(self.text + (_(" in %d seconds.")) %self.timeout)
+			self["text"].setText(self.text + (_(" in %d seconds.")) % self.timeout)
 			if self.timeout == 0:
 				self.timer.stop()
 				self.timerRunning = False
@@ -157,10 +159,13 @@ class MessageBoxConfirmCode(MessageBox):
 	def timeoutCallback(self):
 		self.close(False)
 
+
 remotecontrolcodeinit = RemoteControlCodeInit()
+
 
 def main(session, **kwargs):
 	session.open(RemoteControlCode)
+
 
 def RemoteControlSetup(menuid, **kwargs):
 	if menuid == "system":
@@ -168,8 +173,9 @@ def RemoteControlSetup(menuid, **kwargs):
 	else:
 		return []
 
+
 def Plugins(**kwargs):
 	if fileExists("/proc/stb/fp/remote_code"):
 		from Plugins.Plugin import PluginDescriptor
-		return [PluginDescriptor(name=_("Remote Control Code"), where=PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=RemoteControlSetup)]
+		return [PluginDescriptor(name=_("Remote Control Code"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=RemoteControlSetup)]
 	return []

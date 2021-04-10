@@ -16,8 +16,9 @@ APP_RUN = "run.sh"
 PLUGINROOT = "/usr/lib/enigma2/python/Plugins/Extensions/HbbTV"
 MANUALROOT = "/usr/local/manual"
 
-SOCKETFILE  = None
+SOCKETFILE = None
 CONTROLFILE = None
+
 
 def getPosition():
 	dst_left = 0
@@ -43,10 +44,11 @@ def getPosition():
 			return None
 	return (dst_left, dst_width, dst_top, dst_height)
 
+
 def setPosition(params):
 	if params is None:
 		return
-	if params[0] + params[1] > 720 or params[2] + params[3] > 576 :
+	if params[0] + params[1] > 720 or params[2] + params[3] > 576:
 		return
 	else:
 		try:
@@ -66,8 +68,10 @@ def setPosition(params):
 			ERR(Err)
 			return
 
+
 # for debug True
 g_debug = False
+
 
 def LogEntry(mode, string):
 	if g_debug:
@@ -75,14 +79,18 @@ def LogEntry(mode, string):
 	elif mode != "DEBUG":
 		print "[browser]", string
 
+
 def DEBUG(string):
 	LogEntry("DEBUG", string)
+
 
 def LOG(string):
 	LogEntry("LOG", string)
 
+
 def WARN(string):
 	LogEntry("WARN", string)
+
 
 def ERR(string):
 	LogEntry("ERROR", string)

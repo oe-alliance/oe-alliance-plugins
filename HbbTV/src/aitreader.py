@@ -1,22 +1,26 @@
 # -*- coding: utf-8 -*-
-import os, xml.dom.minidom, re
+import os
+import xml.dom.minidom
+import re
 from enigma import iServiceInformation
 
 RE_XML_ILLEGAL = u'([\u0000-\u0008\u000b-\u000c\u000e-\u001f\ufffe-\uffff])' + \
                  u'|' + \
                  u'([%s-%s][^%s-%s])|([^%s-%s][%s-%s])|([%s-%s]$)|(^[%s-%s])' % \
-                  (unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff),
-                   unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff),
-                   unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff))
+                  (unichr(0xd800), unichr(0xdbff), unichr(0xdc00), unichr(0xdfff),
+                   unichr(0xd800), unichr(0xdbff), unichr(0xdc00), unichr(0xdfff),
+                   unichr(0xd800), unichr(0xdbff), unichr(0xdc00), unichr(0xdfff))
 import vbcfg
 DUMPBIN = vbcfg.PLUGINROOT + "/dumpait"
+
+
 class eAITSectionReader:
 	def __init__(self, demux, pmtid, sid):
 		self.mVuplusBox = False
 		self.mInfo = None
-		self.mAppList  = []
+		self.mAppList = []
 		self.mDocument = None
-		self.mCommand  = "%s --demux=%s --pmtid=%x --serviceid=%x"%(DUMPBIN, demux, pmtid, sid)
+		self.mCommand = "%s --demux=%s --pmtid=%x --serviceid=%x" % (DUMPBIN, demux, pmtid, sid)
 
 	def __text(self, nodelist):
 		rc = []
@@ -34,18 +38,18 @@ class eAITSectionReader:
 		item = {}
 
 		if self.mVuplusBox:
-			item["name"]    = str(application[1])
-			item["url"]     = str(application[2])
+			item["name"] = str(application[1])
+			item["url"] = str(application[2])
 			item["control"] = int(application[0])
-			item["orgid"]   = int(application[3])
-			item["appid"]   = int(application[4])
+			item["orgid"] = int(application[3])
+			item["appid"] = int(application[4])
 			item["profile"] = int(application[5])
 		else:
-			item["name"]    = str(self.__item(application, "name"))
-			item["url"]     = str(self.__item(application, "url"))
+			item["name"] = str(self.__item(application, "name"))
+			item["url"] = str(self.__item(application, "url"))
 			item["control"] = int(self.__item(application, "control"))
-			item["orgid"]   = int(self.__item(application, "orgid"))
-			item["appid"]   = int(self.__item(application, "appid"))
+			item["orgid"] = int(self.__item(application, "orgid"))
+			item["appid"] = int(self.__item(application, "appid"))
 			item["profile"] = int(self.__item(application, "profile"))
 		#print item
 		return item
@@ -73,7 +77,8 @@ class eAITSectionReader:
 			return True
 
 		document = ""
-		try:	document = os.popen(self.mCommand).read()
+		try:
+			document = os.popen(self.mCommand).read()
 		except Exception, ErrMsg:
 			vbcfg.ERR(ErrMsg)
 			return False
@@ -102,6 +107,7 @@ class eAITSectionReader:
 			print "Profile Code :", x["profile"]
 			print ""
 
+
 def unit_test(demux, pmtid, sid):
 	reader = eAITSectionReader(demux, pmtid, sid)
 	if reader.doOpen():
@@ -111,4 +117,3 @@ def unit_test(demux, pmtid, sid):
 		vbcfg.ERR("no data!!")
 
 #unit_test('0', 0x17d4, 0x2b66)
-

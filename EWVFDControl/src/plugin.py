@@ -19,11 +19,13 @@ from Tools.Directories import fileExists
 import Screens.Standby
 
 config.plugins.vfd_ew = ConfigSubsection()
-config.plugins.vfd_ew.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.vfd_ew.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.vfd_ew.showClock = ConfigSelection(default="True_Switch", choices=[("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.vfd_ew.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
+
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
+
 
 class Channelnumber:
 
@@ -39,10 +41,9 @@ class Channelnumber:
 		self.zaPrik = eTimer()
 		self.zaPrik.timeout.get().append(self.vrime)
 		self.zaPrik.start(1000, 1)
-		self.onClose = [ ]
+		self.onClose = []
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 
@@ -120,7 +121,7 @@ class Channelnumber:
 					self.prikaz()
 			else:
 				self.__eventInfoChanged()
-					
+
 		if config.plugins.vfd_ew.showClock.value == 'Off':
 			vfd_write("....")
 			self.zaPrik.start(self.updatetime, 1)
@@ -135,13 +136,16 @@ class Channelnumber:
 		self.begin = time() + int(self.channelnrdelay)
 		self.endkeypress = True
 
+
 ChannelnumberInstance = None
+
 
 def leaveStandby():
 	print "[VFD-EW] Leave Standby"
 
 	if config.plugins.vfd_ew.showClock.value == 'Off':
 		vfd_write("....")
+
 
 def standbyCounterChanged(configElement):
 	print "[VFD-EW] In Standby"
@@ -152,14 +156,16 @@ def standbyCounterChanged(configElement):
 	if config.plugins.vfd_ew.showClock.value == 'Off':
 		vfd_write("....")
 
+
 def initVFD():
 	print "[VFD-EW] initVFD"
 
 	if config.plugins.vfd_ew.showClock.value == 'Off':
 		vfd_write("....")
 
+
 class vfd_ewSetup(ConfigListScreen, Screen):
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 
 		self.skin = """
 			<screen position="100,100" size="500,210" title="LED Display Setup" >
@@ -173,9 +179,9 @@ class vfd_ewSetup(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.onClose.append(self.abort)
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
 		self.createSetup()
 
@@ -184,7 +190,7 @@ class vfd_ewSetup(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("Save"))
 		self["key_yellow"] = Button(_("Update Date/Time"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -233,12 +239,13 @@ class vfd_ewSetup(ConfigListScreen, Screen):
 		self.createSetup()
 		initVFD()
 
+
 class vfd_ew:
 	def __init__(self, session):
 		print "[VFD-EW] initializing"
 		self.session = session
 		self.service = None
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.Console = Console()
 
@@ -253,19 +260,23 @@ class vfd_ew:
 
 	def abort(self):
 		print "[VFD-EW] aborting"
-		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
+
 
 def main(menuid):
 	if menuid != "system":
-		return [ ]
+		return []
 	return [(_("LED Display Setup"), startVFD, "vfd_ew", None)]
+
 
 def startVFD(session, **kwargs):
 	session.open(vfd_ewSetup)
 
+
 ewVfd = None
 gReason = -1
 mySession = None
+
 
 def controlewVfd():
 	global ewVfd
@@ -280,6 +291,7 @@ def controlewVfd():
 
 		ewVfd = None
 
+
 def sessionstart(reason, **kwargs):
 	print "[VFD-EW] sessionstart"
 	global ewVfd
@@ -292,6 +304,7 @@ def sessionstart(reason, **kwargs):
 		gReason = reason
 	controlewVfd()
 
+
 def Plugins(**kwargs):
 		if fileExists("/proc/stb/fp/version"):
 			file = open("/proc/stb/fp/version")
@@ -300,5 +313,5 @@ def Plugins(**kwargs):
 		if version.startswith('2'):
 			return []
 		else:
-			return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-				PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+			return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+				PluginDescriptor(name="LED Display Setup", description="Change LED display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]

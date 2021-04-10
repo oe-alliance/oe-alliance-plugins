@@ -12,15 +12,16 @@ from enigma import setAnimation_current, setAnimation_speed
 # default = slide to left
 g_default = {
 		"current": 6,
-		"speed"	 : 20,
+		"speed": 20,
 }
 g_max_speed = 30
 
 config.misc.window_animation_default = ConfigNumber(default=g_default["current"])
 config.misc.window_animation_speed = ConfigSelectionNumber(1, g_max_speed, 1, default=g_default["speed"])
 
+
 class AnimationSetupConfig(ConfigListScreen, Screen):
-	skin=	"""
+	skin = """
 		<screen position="center,center" size="600,140" title="Animation Settings">
 			<widget name="config" position="0,0" size="600,100" scrollbarMode="showOnDemand" />
 
@@ -41,14 +42,14 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		ConfigListScreen.__init__(self, self.entrylist)
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
-			"ok"	 : self.keyGreen,
-			"green"	 : self.keyGreen,
-			"yellow" : self.keyYellow,
-			"red"	 : self.keyRed,
-			"cancel" : self.keyRed,
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", ], {
+			"ok": self.keyGreen,
+			"green": self.keyGreen,
+			"yellow": self.keyYellow,
+			"red": self.keyRed,
+			"cancel": self.keyRed,
 		}, -2)
-		self["key_red"]	  = StaticText(_("Cancel"))
+		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self["key_yellow"] = StaticText(_("Default"))
 
@@ -88,15 +89,15 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 
 class AnimationSetupScreen(Screen):
 	animationSetupItems = [
-		{"idx":0, "name":_("Disable Animations")},
-		{"idx":1, "name":_("Simple fade")},
-		{"idx":2, "name":_("Grow drop")},
-		{"idx":3, "name":_("Grow from left")},
-		{"idx":4, "name":_("Popup")},
-		{"idx":5, "name":_("Slide drop")},
-		{"idx":6, "name":_("Slide left to right")},
-		{"idx":7, "name":_("Slide top to bottom")},
-		{"idx":8, "name":_("Stripes")},
+		{"idx": 0, "name": _("Disable Animations")},
+		{"idx": 1, "name": _("Simple fade")},
+		{"idx": 2, "name": _("Grow drop")},
+		{"idx": 3, "name": _("Grow from left")},
+		{"idx": 4, "name": _("Popup")},
+		{"idx": 5, "name": _("Slide drop")},
+		{"idx": 6, "name": _("Slide left to right")},
+		{"idx": 7, "name": _("Slide top to bottom")},
+		{"idx": 8, "name": _("Stripes")},
 	]
 
 	skin = """
@@ -132,7 +133,7 @@ class AnimationSetupScreen(Screen):
 			{
 				"cancel": self.keyclose,
 				"save": self.ok,
-				"ok" : self.ok,
+				"ok": self.ok,
 				"yellow": self.config,
 				"blue": self.preview
 			}, -3)
@@ -148,7 +149,7 @@ class AnimationSetupScreen(Screen):
 			name = x.get("name", "??")
 			if key == config.misc.window_animation_default.value:
 				name = "* %s" % (name)
-			l.append( (name, key) )
+			l.append((name, key))
 
 		self["list"].setList(l)
 
@@ -175,29 +176,33 @@ class AnimationSetupScreen(Screen):
 			setAnimation_current(current[1])
 			self.session.open(MessageBox, current[0], MessageBox.TYPE_INFO, timeout=3)
 
+
 def animationSetupMain(session, **kwargs):
 	session.open(AnimationSetupScreen)
+
 
 def startAnimationSetup(menuid):
 	if menuid != "system":
 		return []
 
-	return [( _("Animations"), animationSetupMain, "animation_setup", None)]
+	return [(_("Animations"), animationSetupMain, "animation_setup", None)]
+
 
 def sessionAnimationSetup(session, reason, **kwargs):
 	setAnimation_current(config.misc.window_animation_default.value)
 	setAnimation_speed(int(config.misc.window_animation_speed.value))
 
+
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(
-			name = "Animations",
-			description = "Setup UI animations",
-			where = PluginDescriptor.WHERE_MENU,
-			needsRestart = False,
-			fnc = startAnimationSetup),
+			name="Animations",
+			description="Setup UI animations",
+			where=PluginDescriptor.WHERE_MENU,
+			needsRestart=False,
+			fnc=startAnimationSetup),
 		PluginDescriptor(
-			where = PluginDescriptor.WHERE_SESSIONSTART,
-			needsRestart = False,
-			fnc = sessionAnimationSetup)
+			where=PluginDescriptor.WHERE_SESSIONSTART,
+			needsRestart=False,
+			fnc=sessionAnimationSetup)
 	]

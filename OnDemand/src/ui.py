@@ -37,17 +37,22 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 from enigma import gFont, ePicLoad, eListboxPythonMultiContent, RT_HALIGN_RIGHT
 
-import itvplayer, rteplayer, threeplayer, iView, iRadio
+import itvplayer
+import rteplayer
+import threeplayer
+import iView
+import iRadio
 from CommonModules import MainMenuList
 
 ##########################################################################
+
 
 class OnDemandScreenSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("OnDemand Configuration"))
 		self.skinName = ["OnDemandScreenSetup", "Setup"]
-		
+
 		self.configlist = []
 		ConfigListScreen.__init__(self, self.configlist)
 		self.configlist.append(getConfigListEntry((_("Show in main menu")), config.ondemand.ShowMainMenu))
@@ -72,12 +77,12 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.configlist.append(getConfigListEntry((_("iRadio: Display SHOUTcast Default Thumbnails")), config.ondemand.ShowShoutcastDefault))
 		self.configlist.append(getConfigListEntry((_("iRadio: Display Tunein Thumbnails")), config.ondemand.ShowTuneinLogos))
 		self.configlist.append(getConfigListEntry((_("iRadio: Display Tunein Default Thumbnails")), config.ondemand.ShowTuneinDefault))
-		
+
 		self.configlist.append(getConfigListEntry((_("Primary DNS: To watch UK Streams outside the UK")), config.ondemand.PrimaryDNS))
 		self.configlist.append(getConfigListEntry((_("Secondary DNS: A backup DNS if the primary is down")), config.ondemand.SecondaryDNS))
 
 		self["config"].setList(self.configlist)
-		
+
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 
@@ -87,11 +92,11 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
 
-		self["actions"]  = ActionMap(["SetupActions"], {
-			"ok"    : self.keyOK,
+		self["actions"] = ActionMap(["SetupActions"], {
+			"ok": self.keyOK,
 			"cancel": self.keyCancel,
-			"save"    : self.keyOK,
-			"info" : self.keyInfo
+			"save": self.keyOK,
+			"info": self.keyInfo
 		}, -1)
 
 	def keyOK(self):
@@ -99,15 +104,16 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 			x[1].save()
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.close()
-		
+
 	def keyInfo(self):
 		self.session.open(OnDemand_About)
-	
+
 	def keyCancel(self):
 		self.close()
 
+
 class OnDemand_Screen(Screen, ConfigListScreen):
-	skin = 	"""
+	skin = """
 		<screen position="e-203,0" size="203,e-0" backgroundColor="#ffffffff" flags="wfNoBorder" >
 			<widget name="arrowup" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/top.png,/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/arrow-up.png" position="e-203,0" size="203,25" alphatest="on" />
 			<widget name="PlayerList" position="0,25" size="203,670" backgroundColor="#80000000" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/selectbar.png" transparent="0" scrollbarMode="showNever" />
@@ -119,20 +125,20 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("OnDemand"))
-		
-		self["arrowup"]   = MultiPixmap()
-		self["arrowdown"]   = MultiPixmap()
 
-		self["actions"]  = ActionMap(["SetupActions", "TimerEditActions"], {
-			"ok"    : self.keyOK,
+		self["arrowup"] = MultiPixmap()
+		self["arrowdown"] = MultiPixmap()
+
+		self["actions"] = ActionMap(["SetupActions", "TimerEditActions"], {
+			"ok": self.keyOK,
 			"cancel": self.keyCancel,
-			"menu" : self.keySetup,
-			"log" : self.keyInfo
+			"menu": self.keySetup,
+			"log": self.keyInfo
 		}, -1)
-		
+
 		self['PlayerList'] = MainMenuList()
 		self.onLayoutFinish.append(self.layoutFinished)
-		
+
 	def layoutFinished(self):
 		list = []
 		#if config.ondemand.ShowBBCiPlayer.value:
@@ -155,13 +161,13 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 		self['PlayerList'].showArrows()
 		self["arrowup"].setPixmapNum(self['PlayerList'].showArrows())
 		self["arrowdown"].setPixmapNum(self['PlayerList'].showArrows())
-	
+
 	def keySetup(self):
 		self.session.openWithCallback(self.layoutFinished, OnDemandScreenSetup)
-		
+
 	def keyInfo(self):
 		self.session.open(OnDemand_About)
-		
+
 	def keyOK(self):
 		player = self['PlayerList'].l.getCurrentSelection()[1]
 		if player == "rteplayer":
@@ -182,8 +188,9 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 	def keyCancel(self):
 		self.close()
 
+
 class OnDemand_About(Screen):
-	skin="""
+	skin = """
 		<screen position="360,150" size="600,450" >
 			<widget name="about" position="10,10" size="580,430" font="Regular;15" />
 			<widget name="key_red" position="0,e-40" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
@@ -206,7 +213,7 @@ class OnDemand_About(Screen):
 		}, -2)
 
 		self["key_red"] = Button(_("Close"))
-  
+
 		credit = "OE-Alliance OnDemand (c) 2013 \n"
 		credit += "http://github.com/oe-alliance\n"
 		credit += "http://www.world-of-satellite.com\n\n"
@@ -231,4 +238,3 @@ class OnDemand_About(Screen):
 
 	def quit(self):
 		self.close()
-

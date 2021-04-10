@@ -29,21 +29,25 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as os_walk
 
-import time, random
+import time
+import random
 from time import strftime, strptime, mktime
 from datetime import timedelta, date, datetime
 
-import urllib2, re
+import urllib2
+import re
 
 import simplejson
 from bs4 import BeautifulSoup
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
-__plugin__  = "ABC iView"
+__plugin__ = "ABC iView"
 __version__ = "1.0.1"
 
 #==============================================================================
+
+
 def wgetUrl(target):
 	try:
 		req = urllib2.Request(target)
@@ -57,6 +61,8 @@ def wgetUrl(target):
 		return ""
 
 #==============================================================================
+
+
 def calcDuration(seconds):
 	try:
 		mins = int((seconds / 60))
@@ -67,6 +73,8 @@ def calcDuration(seconds):
 		return ""
 
 #==============================================================================
+
+
 class iViewMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
@@ -128,16 +136,16 @@ class iViewMenu(Screen):
 		{
 			"ok": self.go,
 			"cancel": self.cancel
-		}, -1)	  
+		}, -1)
 
 	def go(self):
 		name = self["iViewMenu"].l.getCurrentSelection()[0]
 		selection = self["iViewMenu"].l.getCurrentSelection()[1]
-		
+
 		if selection is "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
-			
+
 		elif self.action is "start":
 			if selection is "atoz":
 				self.session.open(StreamsMenu, selection, name, selection)
@@ -146,7 +154,7 @@ class iViewMenu(Screen):
 
 	def cancel(self):
 		self.removeFiles(self.imagedir)
-		self.close(None)		
+		self.close(None)
 
 	def removeFiles(self, targetdir):
 		for root, dirs, files in os_walk(targetdir):
@@ -154,6 +162,8 @@ class iViewMenu(Screen):
 				os_remove(os_path.join(root, name))
 
 #==============================================================================
+
+
 class StreamsMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
@@ -188,12 +198,12 @@ class StreamsMenu(Screen):
 		{
 			"ok": self.go,
 			"cancel": self.cancel
-		}, -1) 
+		}, -1)
 
 	def go(self):
 		title = self["latestMenu"].l.getCurrentSelection()[0]
 		selection = self["latestMenu"].l.getCurrentSelection()[1]
-		
+
 		if selection is not None:
 			if selection is "exit":
 				self.close(None)
@@ -205,25 +215,31 @@ class StreamsMenu(Screen):
 
 #==============================================================================
 
+
 def checkUnicode(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
-	
+
 #==============================================================================
+
+
 def remove_extra_spaces(data):
 	p = re.compile(r'\s+')
 	return p.sub(' ', data)
 
 #==============================================================================
 
+
 def main(session, **kwargs):
 	action = "start"
-	value = 0 
+	value = 0
 	start = session.open(iViewMenu, action, value)
 
-#==============================================================================	   
+#==============================================================================
+
+
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/iView.png"
@@ -232,12 +248,12 @@ class StreamsThumb(StreamsThumbCommon):
 		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
-		self.setTitle("ABC iView: Listings for " +self.title)
+		self.setTitle("ABC iView: Listings for " + self.title)
 
-	def setupCallback(self, retval = None):
+	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
 			return
-			
+
 		if retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
@@ -247,7 +263,7 @@ class StreamsThumb(StreamsThumbCommon):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		else:
 			self.getCatsMediaData(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
@@ -255,13 +271,13 @@ class StreamsThumb(StreamsThumbCommon):
 			self.updateMenu()
 
 #==============================================================================
-	def keyboardCallback(self, callback = None):
+	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("ABC iView: Search Listings for " +callback)
+			self.setTitle("ABC iView: Search Listings for " + callback)
 			self.getSearchMediaData(self.mediaList, callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple=True)
 		else:
 			self.close()
 
@@ -276,8 +292,8 @@ class StreamsThumb(StreamsThumbCommon):
 			fileUrl = self.findPlayUrl(showID)
 
 			if fileUrl:
-				fileRef = eServiceReference(4097,0,fileUrl)
-				fileRef.setName (showName)
+				fileRef = eServiceReference(4097, 0, fileUrl)
+				fileRef.setName(showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
 			else:
@@ -292,7 +308,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 			# If zero, an error occurred retrieving the url, pass empty string back
 			if auth:
-				swf_url  = 'http://www.abc.net.au/iview/images/iview.jpg'
+				swf_url = 'http://www.abc.net.au/iview/images/iview.jpg'
 
 				playpath = auth['playpath_prefix'] + showID
 				if playpath.split('.')[-1] == 'mp4':
@@ -301,7 +317,7 @@ class StreamsThumb(StreamsThumbCommon):
 				# Strip off the .flv or .mp4
 				playpath = playpath.split('.')[0]
 
-				# rtmp://cp53909.edgefcs.net/ondemand?auth=daEbjbeaCbGcgb6bedYacdWcsdXc7cWbDda-bmt0Pk-8-slp_zFtpL&aifp=v001 
+				# rtmp://cp53909.edgefcs.net/ondemand?auth=daEbjbeaCbGcgb6bedYacdWcsdXc7cWbDda-bmt0Pk-8-slp_zFtpL&aifp=v001
 				# playpath=mp4:flash/playback/_definst_/kids/astroboy_10_01_22 swfurl=http://www.abc.net.au/iview/images/iview.jpg swfvfy=true
 				rtmp_url = "%s?auth=%s playpath=%s swfurl=%s swfvfy=true" % (auth['rtmp_url'], auth['token'], playpath, swf_url)
 				print "%s: version %s: findPlayUrl: rtmp_url: %s" % (__plugin__, __version__, rtmp_url)
@@ -349,15 +365,15 @@ class StreamsThumb(StreamsThumbCommon):
 			# Looks like the ABC don't always include this field.
 			# If not included, that's okay -- ABC usually gives us the server in the auth result as well.
 
-			rtmp_url = xml.find('param', attrs={'name':'server_streaming'}).get('value')
+			rtmp_url = xml.find('param', attrs={'name': 'server_streaming'}).get('value')
 			rtmp_chunks = rtmp_url.split('/')
 
 			return {
-				'rtmp_url'  : rtmp_url,
-				'rtmp_host' : rtmp_chunks[2],
-				'rtmp_app'  : rtmp_chunks[3],
-				'api_url' : xml.find('param', attrs={'name':'api'}).get('value'),
-				'categories_url' : xml.find('param', attrs={'name':'categories'}).get('value'),
+				'rtmp_url': rtmp_url,
+				'rtmp_host': rtmp_chunks[2],
+				'rtmp_app': rtmp_chunks[3],
+				'api_url': xml.find('param', attrs={'name': 'api'}).get('value'),
+				'categories_url': xml.find('param', attrs={'name': 'categories'}).get('value'),
 			}
 		except (Exception) as exception:
 			print "%s: version %s: parse_config: Problem Parsing Config: %s" % (__plugin__, __version__, exception)
@@ -370,7 +386,7 @@ class StreamsThumb(StreamsThumbCommon):
 			and gives us a one-time token we need to use to speak RTSP with
 			ABC's servers, and tells us what the RTMP URL is.
 		"""
-		auth_url   = 'http://tviview.abc.net.au/iview/auth/?v2'
+		auth_url = 'http://tviview.abc.net.au/iview/auth/?v2'
 
 		try:
 			auth_config = wgetUrl(auth_url)
@@ -427,18 +443,18 @@ class StreamsThumb(StreamsThumbCommon):
 			return ""
 
 		return {
-			'rtmp_url'        : rtmp_url,
-			'rtmp_host'       : rtmp_host,
-			'rtmp_app'        : rtmp_app,
-			'playpath_prefix' : playpath_prefix,
-			'token'           : token,
-			'free'            : (xml.find("free").string == "yes")
+			'rtmp_url': rtmp_url,
+			'rtmp_host': rtmp_host,
+			'rtmp_app': rtmp_app,
+			'playpath_prefix': playpath_prefix,
+			'token': token,
+			'free': (xml.find("free").string == "yes")
 		}
 
 #==============================================================================
 	def getMediaData(self, weekList, seriesID):
 
-		self.url = u"http://tviview.abc.net.au/iview/api2/?series="+seriesID
+		self.url = u"http://tviview.abc.net.au/iview/api2/?series=" + seriesID
 		channel = ""
 		short = ''
 		name = ''
@@ -489,25 +505,25 @@ class StreamsThumb(StreamsThumbCommon):
 					try:
 						# Calcualte the stream duration
 						secs = int(entry[u'j'])
-						duration = _("Duration: ")+str(calcDuration(secs))
+						duration = _("Duration: ") + str(calcDuration(secs))
 					except (Exception) as exception:
 						episodes = ""
 
 					try:
 						lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'f']), u"%Y-%m-%d %H:%M:%S")))
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-						date1 = _("Added:")+" "+str(date_tmp)
+						date1 = _("Added:") + " " + str(date_tmp)
 					except (Exception) as exception:
 						lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'g']), u"%Y-%m-%d %H:%M:%S")))
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-						date1 = _("Added:")+" "+str(date_tmp)
+						date1 = _("Added:") + " " + str(date_tmp)
 
 					try:
 						channel = str(entry[u'a'])
 					except (Exception) as exception:
 						channel = ""
 
-					weekList.append((date1, name, short, channel, stream, icon, duration, False))			
+					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
 			print "%s: version %s: getMediaData: Error parsing feed: %s" % (__plugin__, __version__, exception)
@@ -515,7 +531,7 @@ class StreamsThumb(StreamsThumbCommon):
 #==============================================================================
 	def getCatsMediaData(self, weekList, category):
 
-		self.url = u"http://tviview.abc.net.au/iview/api2/?keyword="+category
+		self.url = u"http://tviview.abc.net.au/iview/api2/?keyword=" + category
 		channel = ""
 		short = ''
 		name = ''
@@ -564,7 +580,7 @@ class StreamsThumb(StreamsThumbCommon):
 						short = ""
 
 					try:
-						episodes = _("Episodes: ")+str(len(entry['f']))
+						episodes = _("Episodes: ") + str(len(entry['f']))
 					except (Exception) as exception:
 						episodes = ""
 
@@ -609,8 +625,7 @@ class StreamsThumb(StreamsThumbCommon):
 						short = remove_extra_spaces(short_tmp1)
 					except (Exception) as exception:
 						short = ""
-					
-									
+
 					# Only output the names that match the search query
 					if re.search(query, name, re.IGNORECASE) or re.search(query, short, re.IGNORECASE):
 						try:
@@ -628,7 +643,7 @@ class StreamsThumb(StreamsThumbCommon):
 							icon = ''
 
 						try:
-							episodes = _("Episodes: ")+str(len(entry['f']))
+							episodes = _("Episodes: ") + str(len(entry['f']))
 						except (Exception) as exception:
 							episodes = ""
 

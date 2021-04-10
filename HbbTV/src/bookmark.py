@@ -1,20 +1,23 @@
 import vbcfg
 
+
 class BookmarkData:
 	def __init__(self, _id, _title, _url, _parent, _type):
-		self.mId 	= _id
-		self.mTitle 	= _title
-		self.mUrl 	= _url
-		self.mParent 	= _parent
-		self.mType	= _type
+		self.mId = _id
+		self.mTitle = _title
+		self.mUrl = _url
+		self.mParent = _parent
+		self.mType = _type
+
 	def dump(self, _intent='  '):
 		print "%s-> %d, %s, %s, %d, %d" % (_intent, self.mId, self.mTitle, self.mUrl, self.mParent, self.mType)
 
+
 class CategoryData:
 	def __init__(self, _id, _name):
-		self.mId 	= _id
-		self.mName	= _name
-		self.mBookmarks	= {}
+		self.mId = _id
+		self.mName = _name
+		self.mBookmarks = {}
 
 	def setBookmarks(self, _bookmarks):
 		self.mBookmarks = _bookmarks
@@ -27,7 +30,10 @@ class CategoryData:
 		for key in self.mBookmarks.iterkeys():
 			self.mBookmarks[key].dump('      ')
 
+
 import ConfigParser
+
+
 class SimpleConfigParser:
 	def __init__(self):
 		self.mFileName = None
@@ -68,7 +74,8 @@ class SimpleConfigParser:
 		except Exception, e:
 			vbcfg.ERR(e)
 			return _default
-		else :	return data
+		else:
+			return data
 
 	def _set(self, _section, _option, _value):
 		self.mConfig.set(_section, _option, _value)
@@ -107,8 +114,10 @@ class SimpleConfigParser:
 		self._read()
 		return True
 
+
 class BookmarkManager(SimpleConfigParser):
 	_instance = None
+
 	def __new__(cls, *args, **kwargs):
 		if not cls._instance:
 			cls._instance = super(Singleton, cls).__new__(cls, *args, **kwargs)
@@ -127,27 +136,28 @@ class BookmarkManager(SimpleConfigParser):
 			#manualmode = (model == "solo2" or model == "duo2" or model == "solose" or model == "zero")
 			manualmode = False
 
-			os.system('echo "[__SYS__]" > %s'%(_dbFileName))
-			os.system('echo "category_current_idx = 1" >> %s'%(_dbFileName))
-			if manualmode :
-				os.system('echo "bookmark_current_idx = 2" >> %s'%(_dbFileName))
-			else:	os.system('echo "bookmark_current_idx = 1" >> %s'%(_dbFileName))
-			os.system('echo "[c-1]" >> %s'%(_dbFileName))
-			os.system('echo "id = 1" >> %s'%(_dbFileName))
-			os.system('echo "name = My favorite" >> %s'%(_dbFileName))
-			os.system('echo "[b-1]" >> %s'%(_dbFileName))
-			os.system('echo "url = http://wiki.opena.tv/" >> %s'%(_dbFileName))
-			os.system('echo "id = 1" >> %s'%(_dbFileName))
-			os.system('echo "parent = 1" >> %s'%(_dbFileName))
-			os.system('echo "title = open Alliance WIKI" >> %s'%(_dbFileName))
-			os.system('echo "type = 0" >> %s'%(_dbFileName))
-			if manualmode :
-				os.system('echo "[b-2]" >> %s'%(_dbFileName))
-				os.system('echo "url = file:///usr/local/manual/main.html" >> %s'%(_dbFileName))
-				os.system('echo "id = 2" >> %s'%(_dbFileName))
-				os.system('echo "parent = 1" >> %s'%(_dbFileName))
-				os.system('echo "title = User Manual" >> %s'%(_dbFileName))
-				os.system('echo "type = 1" >> %s'%(_dbFileName))
+			os.system('echo "[__SYS__]" > %s' % (_dbFileName))
+			os.system('echo "category_current_idx = 1" >> %s' % (_dbFileName))
+			if manualmode:
+				os.system('echo "bookmark_current_idx = 2" >> %s' % (_dbFileName))
+			else:
+				os.system('echo "bookmark_current_idx = 1" >> %s' % (_dbFileName))
+			os.system('echo "[c-1]" >> %s' % (_dbFileName))
+			os.system('echo "id = 1" >> %s' % (_dbFileName))
+			os.system('echo "name = My favorite" >> %s' % (_dbFileName))
+			os.system('echo "[b-1]" >> %s' % (_dbFileName))
+			os.system('echo "url = http://wiki.opena.tv/" >> %s' % (_dbFileName))
+			os.system('echo "id = 1" >> %s' % (_dbFileName))
+			os.system('echo "parent = 1" >> %s' % (_dbFileName))
+			os.system('echo "title = open Alliance WIKI" >> %s' % (_dbFileName))
+			os.system('echo "type = 0" >> %s' % (_dbFileName))
+			if manualmode:
+				os.system('echo "[b-2]" >> %s' % (_dbFileName))
+				os.system('echo "url = file:///usr/local/manual/main.html" >> %s' % (_dbFileName))
+				os.system('echo "id = 2" >> %s' % (_dbFileName))
+				os.system('echo "parent = 1" >> %s' % (_dbFileName))
+				os.system('echo "title = User Manual" >> %s' % (_dbFileName))
+				os.system('echo "type = 1" >> %s' % (_dbFileName))
 		self.init(_dbFileName)
 
 	def message(self, format, params=None):
@@ -228,7 +238,8 @@ class BookmarkManager(SimpleConfigParser):
 		try:
 			for key in self.mBookmarkRoot[_id].mBookmarks.iterkeys():
 				self.delSection('b-%d' % (key,))
-		except: pass
+		except:
+			pass
 		self.delSection('c-%d' % (_id,))
 		self._save()
 
@@ -266,7 +277,8 @@ class BookmarkManager(SimpleConfigParser):
 				e = self.getNumber(s, 'type')
 				try:
 					categoryList[p].appendBookmark(BookmarkData(i, t, u, p, e))
-				except Exception, e: self._del(s)
+				except Exception, e:
+					self._del(s)
 			bx += 1
 		for key in categoryList.iterkeys():
 			sorted(categoryList[key].mBookmarks)
@@ -290,5 +302,3 @@ class BookmarkManager(SimpleConfigParser):
 	@staticmethod
 	def getInstance():
 		return BookmarkManager(vbcfg.PLUGINROOT + "/bookmark.ini")
-
-

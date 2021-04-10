@@ -11,13 +11,14 @@ import vbcfg
 from __init__ import _
 
 config.plugins.youtubetv = ConfigSubsection()
-config.plugins.youtubetv.showhelp = ConfigYesNo(default = False)
-config.plugins.youtubetv.uri = ConfigText(default = "http://www.youtube.com/tv", visible_width = 50, fixed_size = False)
+config.plugins.youtubetv.showhelp = ConfigYesNo(default=False)
+config.plugins.youtubetv.uri = ConfigText(default="http://www.youtube.com/tv", visible_width=50, fixed_size=False)
 
 vbcfg.g_youtubetv_cfg = config.plugins.youtubetv
 
+
 class YoutubeTVWindow(Screen, HelpableScreen):
-	skin =  """
+	skin = """
 		<screen name="YoutubeTVWindow" position="center,center" size="550,160" title="Start YouTube TV" >
 			<widget name="infomation" position="5,0" size="540,80" valign="center" halign="center" font="Regular;20" />
 			<widget name="startdesc" position="10,80" size="395,40" valign="center" font="Regular;20" />
@@ -33,52 +34,52 @@ class YoutubeTVWindow(Screen, HelpableScreen):
                 Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
-		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "OkCancelActions","ColorActions", "EPGSelectActions",], {
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "OkCancelActions", "ColorActions", "EPGSelectActions", ], {
 			"cancel": self.keyCancel,
-			"red"	: self.keyCancel,
-			"green"	: self.keyGreen,
+			"red": self.keyCancel,
+			"green": self.keyGreen,
 			"yellow": self.keyYellow,
-		},-2)
+		}, -2)
 
-		self["key_green"]  = StaticText(_("Start"))
+		self["key_green"] = StaticText(_("Start"))
 		self["key_yellow"] = StaticText(_("Help"))
 
 		self["infomation"] = Label()
-		self["startdesc"]  = Label()
-		self["helpdesc"]   = Label()
+		self["startdesc"] = Label()
+		self["helpdesc"] = Label()
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
 		self.setTitle(_('Start YouTube TV'))
 		self["infomation"].setText(_("YouTube TV is a new way to watch YouTube videos"))
-		self["startdesc" ].setText(_("* Start YouTube TV"))
-		self["helpdesc"  ].setText(_("* RC Help"))
+		self["startdesc"].setText(_("* Start YouTube TV"))
+		self["helpdesc"].setText(_("* RC Help"))
 
 	def setHelpModeActions(self):
 		self.helpList = []
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions", {
-			"ok"    : (self.keyPass, _("Play ther selected the video")),
+			"ok": (self.keyPass, _("Play ther selected the video")),
 			"cancel": (self.keyPass, _("Exit the YouTube TV")),
 		})
 		self["EventViewActions"] = HelpableActionMap(self, "EventViewActions", {
-			"pageUp"    : (self.keyPass, _("Move up")),
-			"pageDown"  : (self.keyPass, _("Move down")),
-			"prevEvent" : (self.keyPass, _("Move left")),
-			"nextEvent" : (self.keyPass, _("Move right")),
+			"pageUp": (self.keyPass, _("Move up")),
+			"pageDown": (self.keyPass, _("Move down")),
+			"prevEvent": (self.keyPass, _("Move left")),
+			"nextEvent": (self.keyPass, _("Move right")),
 		})
 		self["EPGSelectActions"] = HelpableActionMap(self, "EPGSelectActions", {
-			"info"        : (self.keyPass, _("Search a video")),
-			"nextService" : (self.keyPass, _("Skip forward 10 sec")),
-			"prevService" : (self.keyPass, _("Skip backward 10 sec")),
+			"info": (self.keyPass, _("Search a video")),
+			"nextService": (self.keyPass, _("Skip forward 10 sec")),
+			"prevService": (self.keyPass, _("Skip backward 10 sec")),
 		})
 		self["MediaPlayerActions"] = HelpableActionMap(self, "MediaPlayerActions", {
-			"play"  : (self.keyPass, _("Play current video")),
-			"pause" : (self.keyPass, _("Pause current video")),
-			"stop"  : (self.keyPass, _("Stop current video")),
+			"play": (self.keyPass, _("Play current video")),
+			"pause": (self.keyPass, _("Pause current video")),
+			"stop": (self.keyPass, _("Stop current video")),
 		})
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions", {
-			"red"   : (self.keyPass, _("Back")),
+			"red": (self.keyPass, _("Back")),
 		})
 		self.showHelp()
 
@@ -100,12 +101,14 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 		self.setHelpModeActions()
 
 	def keyBlue(self):
-		if config.plugins.youtubetv.showhelp.value == True :
+		if config.plugins.youtubetv.showhelp.value == True:
 			config.plugins.youtubetv.showhelp.setValue(False)
-		else:	config.plugins.youtubetv.showhelp.setValue(True)
+		else:
+			config.plugins.youtubetv.showhelp.setValue(True)
+
 
 class YoutubeTVSettings(ConfigListScreen, Screen):
-	skin=   """
+	skin = """
 		<screen position="center,center" size="600,140" title="YouTube TV Settings">
 			<widget name="config" position="0,0" size="600,100" scrollbarMode="showOnDemand" />
 
@@ -124,13 +127,13 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		ConfigListScreen.__init__(self, self.menulist)
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
-			"ok"     : self.keyGreen,
-			"green"  : self.keyGreen,
-			"red"    : self.keyRed,
-			"cancel" : self.keyRed,
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", ], {
+			"ok": self.keyGreen,
+			"green": self.keyGreen,
+			"red": self.keyRed,
+			"cancel": self.keyRed,
 		}, -2)
-		self["key_red"]   = StaticText(_("Cancel"))
+		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 
 		self.makeConfigList()
@@ -168,4 +171,3 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 		self.menulist.append(entryShowHelp)
 		self["config"].list = self.menulist
 		self["config"].l.setList(self.menulist)
-

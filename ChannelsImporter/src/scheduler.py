@@ -8,6 +8,8 @@ from enigma import eTimer
 from ChannelsImporter import ChannelsImporter
 
 autoChannelsImporterTimer = None
+
+
 def autostart(reason, session=None, **kwargs):
 	"called with reason=1 to during /sbin/shutdown.sysvinit, with reason=0 at startup?"
 	global autoChannelsImporterTimer
@@ -23,8 +25,10 @@ def autostart(reason, session=None, **kwargs):
 		print "[ChannelsImporterScheduler][ChannelsImporterautostart] Stop"
 		autoChannelsImporterTimer.stop()
 
+
 class AutoChannelsImporterTimer:
 	instance = None
+
 	def __init__(self, session):
 		self.session = session
 		self.channelsimportertimer = eTimer()
@@ -37,7 +41,7 @@ class AutoChannelsImporterTimer:
 			self.boottimer.callback.append(self.doautostartscan)
 			print "[ChannelsImporterScheduler][AutoChannelsImporterTimer] Run plugin on boot"
 			self.boottimer.start(100, 1)
-	
+
 		global ChannelsImporterTime
 		if config.plugins.ChannelsImporter.enableSchedule.value:
 			print "[ChannelsImporterScheduler][AutoChannelsImporterTimer] Schedule Enabled at ", strftime("%c", localtime(now))
@@ -71,7 +75,7 @@ class AutoChannelsImporterTimer:
 			return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min + repeatIntervalMinutes, 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 		return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, backupclock[0], backupclock[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 
-	def channelsimporterdate(self, atLeast = 0):
+	def channelsimporterdate(self, atLeast=0):
 		self.channelsimportertimer.stop()
 		global ChannelsImporterTime
 		ChannelsImporterTime = self.getChannelsImporterTime()
@@ -80,20 +84,20 @@ class AutoChannelsImporterTimer:
 			if ChannelsImporterTime < now + atLeast:
 				if config.plugins.ChannelsImporter.scheduleRepeatInterval.value.isdigit(): # contains wait time in minutes
 					ChannelsImporterTime = now + (60 * int(config.plugins.ChannelsImporter.scheduleRepeatInterval.value))
-					while (int(ChannelsImporterTime)-30) < now:
+					while (int(ChannelsImporterTime) - 30) < now:
 						ChannelsImporterTime += 60 * int(config.plugins.ChannelsImporter.scheduleRepeatInterval.value)
 				elif config.plugins.ChannelsImporter.scheduleRepeatInterval.value == "daily":
-					ChannelsImporterTime += 24*3600
-					while (int(ChannelsImporterTime)-30) < now:
-						ChannelsImporterTime += 24*3600
+					ChannelsImporterTime += 24 * 3600
+					while (int(ChannelsImporterTime) - 30) < now:
+						ChannelsImporterTime += 24 * 3600
 				elif config.plugins.ChannelsImporter.scheduleRepeatInterval.value == "weekly":
-					ChannelsImporterTime += 7*24*3600
-					while (int(ChannelsImporterTime)-30) < now:
-						ChannelsImporterTime += 7*24*3600
+					ChannelsImporterTime += 7 * 24 * 3600
+					while (int(ChannelsImporterTime) - 30) < now:
+						ChannelsImporterTime += 7 * 24 * 3600
 				elif config.plugins.ChannelsImporter.scheduleRepeatInterval.value == "monthly":
-					ChannelsImporterTime += 30*24*3600
-					while (int(ChannelsImporterTime)-30) < now:
-						ChannelsImporterTime += 30*24*3600
+					ChannelsImporterTime += 30 * 24 * 3600
+					while (int(ChannelsImporterTime) - 30) < now:
+						ChannelsImporterTime += 30 * 24 * 3600
 			next = ChannelsImporterTime - now
 			self.channelsimportertimer.startLongTimer(next)
 		else:
@@ -137,7 +141,7 @@ class AutoChannelsImporterTimer:
 			else:
 				atLeast = 60
 				print "[ChannelsImporterScheduler][doChannelsImporter] Enough Retries, delaying till next schedule.", strftime("%c", localtime(now))
-				self.session.open(MessageBox, _("Enough Retries, delaying till next schedule."), MessageBox.TYPE_INFO, timeout = 10)
+				self.session.open(MessageBox, _("Enough Retries, delaying till next schedule."), MessageBox.TYPE_INFO, timeout=10)
 				config.plugins.ChannelsImporter.retrycount.value = 0
 				self.channelsimporterdate(atLeast)
 		else:

@@ -1,10 +1,16 @@
 # -*- coding: UTF-8 -*-
 from enigma import fbClass, eRCInput
-import os, threading, time, socket, select, struct
+import os
+import threading
+import time
+import socket
+import select
+import struct
 import vbcfg
 
-_OPCODE  = {}
+_OPCODE = {}
 _BUFSIZE = 4096
+
 
 def SetHandler(opcode, handler):
 	try:
@@ -14,6 +20,7 @@ def SetHandler(opcode, handler):
 		return False
 	return True
 
+
 def GetHandler(opcode):
 	for key, value in _OPCODE.items():
 		if value[0] == opcode:
@@ -21,10 +28,13 @@ def GetHandler(opcode):
 			return value[1]
 	return None
 
+
 def GetOpcode(opcode):
 	try:
 		return _OPCODE[opcode][0]
-	except: return -1;
+	except:
+		return -1
+
 
 class VBController:
 	@staticmethod
@@ -34,7 +44,7 @@ class VBController:
 		return header + data
 
 	@staticmethod
-	def command(opcodestr, data = ""):
+	def command(opcodestr, data=""):
 		cmd_fd = None
 		vbcfg.DEBUG("send ipc: [%s]" % opcodestr)
 		try:
@@ -56,6 +66,7 @@ class VBController:
 				os.close(cmd_fd)
 		return True
 
+
 class VBServerThread(threading.Thread):
 	def __init__(self):
 		threading.Thread.__init__(self)
@@ -63,7 +74,7 @@ class VBServerThread(threading.Thread):
 		self.mFlag = False
 		self.mTimeout = 5
 
-	def open(self, timeout = 5):
+	def open(self, timeout=5):
 		addr = vbcfg.SOCKETFILE
 		self.mTimeout = timeout
 
@@ -77,7 +88,8 @@ class VBServerThread(threading.Thread):
 			self.mSock.settimeout(self.mTimeout)
 			self.mSock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 			self.mSock.bind(addr)
-		except: return False
+		except:
+			return False
 		return True
 
 	def parse(self, data):
@@ -86,7 +98,7 @@ class VBServerThread(threading.Thread):
 		opcode, result, length = struct.unpack('ibi', data[:hlen])
 		#vbcfg.DEBUG("%s %s %d" % (opcode, result, length))
 		if length > 0:
-			packet = data[hlen:hlen+length]
+			packet = data[hlen:hlen + length]
 		return [opcode, result, packet]
 
 	def assamble(self, opcode, result, packet):
@@ -99,7 +111,7 @@ class VBServerThread(threading.Thread):
 		read_data = conn.recv(_BUFSIZE)
 		request = self.parse(read_data)
 		opcode, result, read_packet = request[0], request[1], request[2]
-		result, send_packet = False,None
+		result, send_packet = False, None
 		try:
 			result, send_packet = GetHandler(opcode)(result, read_packet)
 		except Exception, ErrMsg:
@@ -130,6 +142,7 @@ class VBServerThread(threading.Thread):
 	def kill(self):
 		self.mFlag = False
 
+
 class VBHandlers:
 	def __init__(self, opcode_list, szcbh):
 		opcode = 0
@@ -151,5 +164,6 @@ class VBHandlers:
 				vbcfg.DEBUG("registrated at %s" % opcodestr)
 				SetHandler(opcodestr, fref)
 				registreted_idx += 1
-			except: pass
+			except:
+				pass
 		vbcfg.DEBUG("%d registreated" % registreted_idx)

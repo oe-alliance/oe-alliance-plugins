@@ -11,6 +11,7 @@ import fileinput
 option = 'options spark7162 UnionTunerType='
 filename = '/etc/modprobe.d/_spark7162.conf'
 
+
 class UnionTunerType(Screen, ConfigListScreen):
 
     def __init__(self, session):
@@ -49,7 +50,7 @@ class UnionTunerType(Screen, ConfigListScreen):
 
     def settingsWrite(self, result):
         if result is not None and result:
-		for line in fileinput.input(filename, inplace = 1):
+		for line in fileinput.input(filename, inplace=1):
 			if line.startswith(option):
 				print option + self.tunerconfig.value
 			else:

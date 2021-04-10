@@ -27,6 +27,7 @@ import subprocess
 import sys
 import re
 
+
 class BluetoothctlError(Exception):
     """This exception is raised, when bluetoothctl fails to start."""
     pass
@@ -36,10 +37,10 @@ class Bluetoothctl:
     """A wrapper for bluetoothctl utility."""
 
     def __init__(self):
-        out = subprocess.check_output("rfkill unblock bluetooth", shell = True)
-        self.child = pexpect.spawn("bluetoothctl", echo = False)
+        out = subprocess.check_output("rfkill unblock bluetooth", shell=True)
+        self.child = pexpect.spawn("bluetoothctl", echo=False)
 
-    def get_output(self, command, pause = 0):
+    def get_output(self, command, pause=0):
         """Run a command in bluetoothctl prompt, return output as a list of lines."""
         self.child.send(command + "\n")
         time.sleep(pause)
@@ -231,5 +232,6 @@ class Bluetoothctl:
         except BluetoothctlError, e:
             print(e)
             return None
+
 
 iBluetoothctl = Bluetoothctl()

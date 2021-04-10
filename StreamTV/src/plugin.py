@@ -27,8 +27,9 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 PLUGIN_PATH = resolveFilename(SCOPE_PLUGINS, "Extensions/StreamTV")
 
+
 class StreamTVPlayer(Screen, InfoBarNotifications):
-	skin = 	"""
+	skin = """
 		<screen name="StreamTVPlayer" flags="wfNoBorder" position="0,570" size="1280,190" title="StreamTV Player" backgroundColor="#41000000" >
 			<ePixmap position="80,25" size="117,72" pixmap="%s/channel_background.png" zPosition="-1" transparent="1" alphatest="blend" />
 			<widget name="channel_icon" position="121,43" zPosition="10" size="35,35" backgroundColor="#41000000" />
@@ -40,18 +41,22 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 		</screen>
 		""" % (PLUGIN_PATH)
 
-	PLAYER_IDLE	= 0
-	PLAYER_PLAYING 	= 1
-	PLAYER_PAUSED 	= 2
+	PLAYER_IDLE = 0
+	PLAYER_PLAYING = 1
+	PLAYER_PAUSED = 2
+
 	def __init__(self, session, service, cbServiceCommand, chName, chURL, chIcon):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
 
-		isEmpty = lambda x: x is None or len(x)==0 or x == 'None'
-		if isEmpty(chName): chName = 'Unknown'
-		if isEmpty(chURL):  chURL  = 'Unknown'
-		if isEmpty(chIcon): chIcon = 'default.png'
-		chIcon = '%s/icons/%s'%(PLUGIN_PATH,chIcon)
+		isEmpty = lambda x: x is None or len(x) == 0 or x == 'None'
+		if isEmpty(chName):
+			chName = 'Unknown'
+		if isEmpty(chURL):
+			chURL = 'Unknown'
+		if isEmpty(chIcon):
+			chIcon = 'default.png'
+		chIcon = '%s/icons/%s' % (PLUGIN_PATH, chIcon)
 		self.session = session
 		self.service = service
 		self.cbServiceCommand = cbServiceCommand
@@ -62,7 +67,7 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 			"playpauseService": self.playpauseService,
 		}, -2)
 
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap = {
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 			iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 			iPlayableService.evStart: self.__serviceStarted,
 			iPlayableService.evEOF: self.__evEOF,
@@ -74,16 +79,16 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 		self.state = self.PLAYER_PLAYING
 		self.lastseekstate = self.PLAYER_PLAYING
 		self.__seekableStatusChanged()
-	
+
 		self.onClose.append(self.__onClose)
 		self.doPlay()
 
 		self['channel_icon'] = Pixmap()
 		self['channel_name'] = Label(chName)
-		self['channel_uri']  = Label(chURL)
+		self['channel_uri'] = Label(chURL)
 
 		self.picload = ePicLoad()
-		self.scale   = AVSwitch().getFramebufferScale()
+		self.scale = AVSwitch().getFramebufferScale()
 		self.picload.PictureData.get().append(self.cbDrawChannelIcon)
 		print self.scale[0]
 		print self.scale[1]
@@ -91,12 +96,12 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 		self.picload.startDecode(chIcon)
 
 		self.bypassExit = False
-		self.cbServiceCommand(('docommand',self.doCommand))
+		self.cbServiceCommand(('docommand', self.doCommand))
 
 	def doCommand(self, cmd):
 		if cmd == 'bypass_exit':
 			self.bypassExit = True
-			
+
 	def cbDrawChannelIcon(self, picInfo=None):
 		ptr = self.picload.getData()
 		if ptr != None:
@@ -169,7 +174,7 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 	def doPlay(self):
 		if self.state == self.PLAYER_PAUSED:
 			if self.shown:
-				self.__setHideTimer()	
+				self.__setHideTimer()
 		self.state = self.PLAYER_PLAYING
 		self.session.nav.playService(self.service)
 		if self.shown:
@@ -180,6 +185,7 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 			self.setSeekState(self.PLAYER_PAUSED)
 		elif self.state == self.PLAYER_PAUSED:
 			self.setSeekState(self.PLAYER_PLAYING)
+
 
 class StreamURIParser:
 	def __init__(self, xml):
@@ -195,7 +201,7 @@ class StreamURIParser:
 			i = str(iptv.findtext('icon'))
 			u = str(iptv.findtext('uri'))
 			t = str(iptv.findtext('type'))
-			tvlist.append({'name':n, 'icon':i, 'type':t, 'uri':self.parseStreamURI(u)})
+			tvlist.append({'name': n, 'icon': i, 'type': t, 'uri': self.parseStreamURI(u)})
 		return tvlist
 
 	def parseStreamURI(self, uri):
@@ -204,37 +210,40 @@ class StreamURIParser:
 		uriInfo['URL'] = splitedURI[0]
 		for x in splitedURI[1:]:
 			i = x.find('=')
-			uriInfo[x[:i].upper()] = str(x[i+1:])
+			uriInfo[x[:i].upper()] = str(x[i + 1:])
 		return uriInfo
+
 
 def streamListEntry(entry):
 	#print entry
 	uriInfo = entry[1].get('uri')
 	return [entry,
-		(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 1, 35, 35, loadPNG('%s/icons/%s' % (PLUGIN_PATH, str(entry[1].get('icon'))) )),
-		(eListboxPythonMultiContent.TYPE_TEXT,45,7,200,37,0,RT_HALIGN_LEFT,entry[0]),
-		(eListboxPythonMultiContent.TYPE_TEXT,250,7,310,37,1,RT_HALIGN_LEFT,str(uriInfo.get('URL')))
-	] 
+		(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 1, 35, 35, loadPNG('%s/icons/%s' % (PLUGIN_PATH, str(entry[1].get('icon'))))),
+		(eListboxPythonMultiContent.TYPE_TEXT, 45, 7, 200, 37, 0, RT_HALIGN_LEFT, entry[0]),
+		(eListboxPythonMultiContent.TYPE_TEXT, 250, 7, 310, 37, 1, RT_HALIGN_LEFT, str(uriInfo.get('URL')))
+	]
+
 
 class StreamTVList(Screen):
-	skin = 	"""
+	skin = """
 		<screen name="StreamTVList" position="center,center" size="600,350" title="StreamTV List">
 			<widget name="streamlist" position="0,0" size="600,350" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 	        </screen>
 		"""
+
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self["actions"]  = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
-			"ok"    : self.keyOK,
+		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
+			"ok": self.keyOK,
 			"cancel": self.keyCancel,
-			"up"    : self.keyUp,
-			"down"  : self.keyDown,
-			"left"  : self.keyLeft,
-			"right" : self.keyRight,
+			"up": self.keyUp,
+			"down": self.keyDown,
+			"left": self.keyLeft,
+			"right": self.keyRight,
 		}, -1)
 
-		self.streamBin  = resolveFilename(SCOPE_PLUGINS, "Extensions/StreamTV/rtmpdump")
+		self.streamBin = resolveFilename(SCOPE_PLUGINS, "Extensions/StreamTV/rtmpdump")
 		self.streamFile = resolveFilename(SCOPE_PLUGINS, "Extensions/StreamTV/stream.xml")
 
 		self.streamList = []
@@ -243,16 +252,16 @@ class StreamTVList(Screen):
 		self.streamMenuList = MenuList([], enableWrapAround=True, content=eListboxPythonMultiContent)
 		self.streamMenuList.l.setFont(0, gFont('Regular', 22))
 		self.streamMenuList.l.setFont(1, gFont('Regular', 18))
-		self.streamMenuList.l.setItemHeight(37) 
+		self.streamMenuList.l.setItemHeight(37)
 		self['streamlist'] = self.streamMenuList
 		self.streamMenuList.setList(map(streamListEntry, self.streamList))
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
-		self.rtmpConsole    = None
-		self.beforeService  = None
+		self.rtmpConsole = None
+		self.beforeService = None
 		self.currentService = None
-		self.playerStoped   = False
+		self.playerStoped = False
 		self.serviceDoCommand = None
 
 		self.keyLocked = False
@@ -263,6 +272,7 @@ class StreamTVList(Screen):
 		if rc is not None:
 			if rc.strip() != '':
 				os.system('killall -INT rtmpdump')
+
 	def keyLeft(self):
 		if self.keyLocked:
 			return
@@ -291,18 +301,18 @@ class StreamTVList(Screen):
 		if self.keyLocked:
 			return
 		self.keyLocked = True
-		self.rtmpConsole    = None
-		self.beforeService  = None
+		self.rtmpConsole = None
+		self.beforeService = None
 		self.currentService = None
-		self.playerStoped   = False
+		self.playerStoped = False
 		self.serviceDoCommand = None
 
 		streamInfo = self["streamlist"].getCurrent()[0][1]
-		uriInfo    = streamInfo.get('uri')
-		typeInfo   = streamInfo.get('type').split(':')
+		uriInfo = streamInfo.get('uri')
+		typeInfo = streamInfo.get('type').split(':')
 
 		protocol = typeInfo[0]
-		url      = uriInfo.get('URL')
+		url = uriInfo.get('URL')
 		if protocol == 'rtmp':
 			self.layoutFinished()
 			self.rtmpConsole = eConsoleAppContainer()
@@ -311,35 +321,37 @@ class StreamTVList(Screen):
 			self.rtmpConsole.execute(self.makeCommand(uriInfo))
 		elif protocol in ('rtsp', 'http', 'hls'):
 			serviceType = typeInfo[1]
-			bufferSize  = typeInfo[2]
+			bufferSize = typeInfo[2]
 			self.doStreamAction(url, serviceType, bufferSize)
 
 	def doStreamAction(self, url=None, serviceType='4097', bufferSize=None):
 		if url is None:
-			url='/tmp/stream.avi'
+			url = '/tmp/stream.avi'
 			self.streamPlayerTimer.stop()
 			#if os.path.exists(url):
 			#	os.unlink(url)
 		try:
 			serviceType = int(serviceType)
-		except:	serviceType = 4097
+		except:
+			serviceType = 4097
 		try:
 			bufferSize = int(bufferSize)
-		except:	bufferSize = None
+		except:
+			bufferSize = None
 
 		service = eServiceReference(serviceType, 0, url)
 		#if bufferSize is not None:
 		#	service.setData(2, bufferSize*1024)
 
 		streamInfo = self["streamlist"].getCurrent()[0][1]
-		uriInfo    = streamInfo.get('uri')
-		self.beforeService  = self.session.nav.getCurrentlyPlayingServiceReference()
-		self.currentService = self.session.openWithCallback(self.cbFinishedStream, 
-								    StreamTVPlayer, 
-								    service, 
+		uriInfo = streamInfo.get('uri')
+		self.beforeService = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.currentService = self.session.openWithCallback(self.cbFinishedStream,
+								    StreamTVPlayer,
+								    service,
 								    cbServiceCommand=self.cbServiceCommand,
 								    chName=str(streamInfo.get('name')),
-								    chURL =str(uriInfo.get('URL')),
+								    chURL=str(uriInfo.get('URL')),
 								    chIcon=str(streamInfo.get('icon')))
 
 	def cbServiceCommand(self, params=None):
@@ -383,10 +395,11 @@ class StreamTVList(Screen):
 			try:
 				d = uriInfo.get(key)
 				if d is not None:
-					return "-%s %s " %(option, d)
-			except: pass
+					return "-%s %s " % (option, d)
+			except:
+				pass
 			return ''
-		command  = '%s -v ' % (self.streamBin)
+		command = '%s -v ' % (self.streamBin)
 		command += appendCommand('URL', 'r')
 		command += appendCommand('PLAYPATH', 'y')
 		command += appendCommand('SWFURL', 'W')
@@ -398,21 +411,21 @@ class StreamTVList(Screen):
 		for x in streamDB:
 			self.streamList.append((x.get('name'), x))
 
+
 def main(session, **kwargs):
 	system("ethtool eth0 > /tmp/.eth0_test")
 	f = open("/tmp/.eth0_test", 'r')
 	for line in f.readlines():
 		line = line.strip()
 		if line.find('Link detected:') >= 0:
-			x = line.split(':',1)
+			x = line.split(':', 1)
 			active = x[1].strip()
-	if (active=="yes"):
+	if (active == "yes"):
 		system("rm /tmp/.eth0_test")
 		session.open(StreamTVList)
 	else:
 		session.open(MessageBox, _("This plugin need internet connection. Please plug in ethernet cable and try again!"), MessageBox.TYPE_INFO, timeout=4)
 
+
 def Plugins(**kwargs):
-	return PluginDescriptor(name=_("StreamTVPlayer"), description="Watching IPTV implemented by RTSP/RTMP protocol.", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
-
-
+	return PluginDescriptor(name=_("StreamTVPlayer"), description="Watching IPTV implemented by RTSP/RTMP protocol.", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)

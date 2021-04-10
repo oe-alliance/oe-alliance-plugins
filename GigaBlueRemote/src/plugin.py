@@ -12,7 +12,8 @@ from enigma import eTimer
 from boxbranding import getMachineBuild, getImageDistro, getBoxType
 
 config.plugins.remotecontrolcode = ConfigSubsection()
-config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "50af", choices = [ ("50af", _("Code 1")), ("51ae", _("Code 2")) ] )
+config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="50af", choices=[("50af", _("Code 1")), ("51ae", _("Code 2"))])
+
 
 class RemoteControlCodeInit:
 	def __init__(self):
@@ -28,12 +29,13 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if getMachineBuild() in ("gb7252","gb7356","gb73625","gb7362","gb7358","gbmv200"):
+		if getMachineBuild() in ("gb7252", "gb7356", "gb73625", "gb7362", "gb7358", "gbmv200"):
 			return True
 		else:
 			return False
 
-class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
+
+class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 	skin = """
 		<screen position="center,center" size="400,250" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />
@@ -44,12 +46,12 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		</screen>
 	"""
 
-	def __init__(self,session):
-		Screen.__init__(self,session)
+	def __init__(self, session):
+		Screen.__init__(self, session)
 		self.skinName = ['RemoteControlCode', 'Setup']
 		self.session = session
 		Screen.setTitle(self, _("Remote Control Code"))
-		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
@@ -58,7 +60,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		}, -2)
 		self.codestartup = config.plugins.remotecontrolcode.systemcode.value
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self.createSetup()
@@ -68,7 +70,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 
 	def checkModel(self):
 		if not self.getModel():
-			self.checkModelTimer.start(1000,True)
+			self.checkModelTimer.start(1000, True)
 
 	def invalidmodel(self):
 		self.session.openWithCallback(self.close, MessageBox, _("Sorry, but %s is not supported.") % getBoxType(), MessageBox.TYPE_ERROR)
@@ -76,20 +78,20 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 	def createSetup(self):
 		self.list = []
 		self.rcsctype = getConfigListEntry(_("Remote Control Code:"), config.plugins.remotecontrolcode.systemcode)
-		self.list.append( self.rcsctype )
+		self.list.append(self.rcsctype)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
 	def keySave(self):
 		configfile.save()
 		if self.codestartup != config.plugins.remotecontrolcode.systemcode.value:
-			print "[RemoteControlCode] Selected System Code : ",config.plugins.remotecontrolcode.systemcode.value
+			print "[RemoteControlCode] Selected System Code : ", config.plugins.remotecontrolcode.systemcode.value
 			ret = self.setSystemCode(config.plugins.remotecontrolcode.systemcode.value)
 			if ret == -1:
 				self.restoreCode()
 				self.session.openWithCallback(self.close, MessageBox, _("FILE DOES NOT EXIST : /proc/stb/ir/rc/customcode"), MessageBox.TYPE_ERROR)
 			else:
-				self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change now the mode on your RCU.") + '\n\n' + _("Press and hold 'GIGA' & '5' for 5 seconds.") + "\n" + _("Then choose 'Confirm' "), MessageBox.TYPE_YESNO, timeout = 60, default = False)
+				self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change now the mode on your RCU.") + '\n\n' + _("Press and hold 'GIGA' & '5' for 5 seconds.") + "\n" + _("Then choose 'Confirm' "), MessageBox.TYPE_YESNO, timeout=60, default=False)
 		else:
 			self.close()
 
@@ -98,25 +100,26 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 			x[1].cancel()
 		self.close()
 
-	def MessageBoxConfirmCodeCallback(self,ret):
+	def MessageBoxConfirmCodeCallback(self, ret):
 		if ret:
 			ConfigListScreen.keySave(self)
 		else:
 			self.restoreCode()
 			self.setSystemCode(config.plugins.remotecontrolcode.systemcode.value)
 
+
 class MessageBoxConfirmCode(MessageBox):
-	def __init__(self, session, text, type = MessageBox.TYPE_YESNO, timeout = -1, close_on_any_key = False, default = False, enable_input = True, msgBoxID = None):
-		MessageBox.__init__(self,session,text,type,timeout,close_on_any_key,default,enable_input,msgBoxID)
+	def __init__(self, session, text, type=MessageBox.TYPE_YESNO, timeout=-1, close_on_any_key=False, default=False, enable_input=True, msgBoxID=None):
+		MessageBox.__init__(self, session, text, type, timeout, close_on_any_key, default, enable_input, msgBoxID)
 		self.skinName = "MessageBox"
 		if type == MessageBox.TYPE_YESNO:
-			self.list = [ (_("Confirm"), True), (_("Cancel"), False) ]
+			self.list = [(_("Confirm"), True), (_("Cancel"), False)]
 			self["list"].setList(self.list)
 
 	def timerTick(self):
 		if self.execing:
 			self.timeout -= 1
-			self["text"].setText(self.text + (_(" within %d seconds.")) %self.timeout)
+			self["text"].setText(self.text + (_(" within %d seconds.")) % self.timeout)
 			if self.timeout == 0:
 				self.timer.stop()
 				self.timerRunning = False
@@ -133,10 +136,13 @@ class MessageBoxConfirmCode(MessageBox):
 	def timeoutCallback(self):
 		self.close(False)
 
+
 remotecontrolcodeinit = RemoteControlCodeInit()
+
 
 def main(session, **kwargs):
 	session.open(RemoteControlCode)
+
 
 def RemoteControlSetup(menuid, **kwargs):
 	if getImageDistro() in ("teamblue"):
@@ -147,8 +153,9 @@ def RemoteControlSetup(menuid, **kwargs):
 			return []
 	return [(_("Remote Control Code"), main, "remotecontrolcode", 50)]
 
+
 def Plugins(**kwargs):
 	if fileExists("/proc/stb/ir/rc/customcode"):
 		from Plugins.Plugin import PluginDescriptor
-		return [PluginDescriptor(name=_("Remote Control Code"), where=PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=RemoteControlSetup)]
+		return [PluginDescriptor(name=_("Remote Control Code"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=RemoteControlSetup)]
 	return []

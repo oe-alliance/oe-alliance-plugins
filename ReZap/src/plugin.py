@@ -4,8 +4,9 @@ import os
 from enigma import eTimer
 #########
 
+
 class LoopSyncMain(Screen):
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.session = session
 		self.gotSession()
@@ -47,7 +48,7 @@ class LoopSyncMain(Screen):
 				else:		### IPTV or VOD ###
 					self.ResetFlag()
 					self.AVSyncTimer.start(500, True)
-					return				
+					return
 			else:
 				self.AVSyncTimer.start(500, True)
 				return
@@ -58,11 +59,12 @@ class LoopSyncMain(Screen):
 
 	def CheckFlag(self):
 		try:
-			if int(open("/sys/class/tsync/reset_flag", "r").read(),16) == 1: return True;
+			if int(open("/sys/class/tsync/reset_flag", "r").read(), 16) == 1:
+				return True
 		except Exception, e:
 			print "[ReZap] Can't read class"
 			self.AVSyncTimer.start(500, True)
-		return False;
+		return False
 
 	def ResetFlag(self):
 		try:
@@ -70,9 +72,11 @@ class LoopSyncMain(Screen):
 		except Exception, e:
 			print "[ReZap] Can't ResetFlag"
 
-###################################                
+###################################
+
+
 class DoReZap(Screen):
-  
+
 	skin = """
 		<screen position="center,center" size="1920,1080" title="" >
 		</screen>"""
@@ -89,14 +93,15 @@ class DoReZap(Screen):
 			open("/sys/class/video/blackout_policy", "w").write("1")
 		except Exception, e:
 			print "[ReZap] Can't change policy(1)"
-		self.close()	
+		self.close()
 
 
-###################################                
+###################################
 
 def sessionstart(session, **kwargs):
 	session.open(LoopSyncMain)
-       
+
+
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart)

@@ -29,7 +29,11 @@ from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import fileExists
 
-import sys, re, time, os, traceback
+import sys
+import re
+import time
+import os
+import traceback
 
 from .AutoflushCache import AutoflushCache
 from .HTML5Entities import name2codepoint
@@ -40,7 +44,7 @@ if sys.version_info[0] == 2:
 # Python2 version
     from urllib import quote, unquote
     from urllib2 import Request, urlopen
-    def dec2utf8(n):         return unichr(n).encode('utf-8')
+    def dec2utf8(n): return unichr(n).encode('utf-8')
 
 else:
 # Python3 version
@@ -48,7 +52,7 @@ else:
     from urllib.request import Request, urlopen
 # No unichr in Py3. chr() returns a unicode string.
 #
-    def dec2utf8(n):         return chr(n)
+    def dec2utf8(n): return chr(n)
 
 # Who we will pretend to be when calling translate.google.com
 #
@@ -72,7 +76,8 @@ EPG_OPTIONS = 'BDTSEINX'    # X is not a returned-value setting
 #
 ci = 0
 for i in list(range(len(EPG_OPTIONS))):
-    if EPG_OPTIONS[i] == 'X': continue
+    if EPG_OPTIONS[i] == 'X':
+        continue
     exec("epg_%s = %d" % (EPG_OPTIONS[i], ci))
     ci += 1
 epg_PB = ci # Extra index for Playback Begin time.
@@ -82,24 +87,24 @@ epg_PB = ci # Extra index for Playback Begin time.
 #
 # The list of available languages (sorted alphabetically)
 #
-langs =  [
-('af', _('Afrikaans')),         ('sq', _('Albanian')),          ('ar', _('Arabic')),
-('az', _('Azerbaijani')),       ('eu', _('Basque')),            ('be', _('Belarusian')),
-('bs', _('Bosnian')),           ('bg', _('Bulgarian')),         ('ca', _('Catalan')),
-('ceb', _('Cebuano')),          ('hr', _('Croatian')),          ('cs', _('Czech')),
-('da', _('Danish')),            ('nl', _('Dutch')),             ('en', _('English')),
-('et', _('Estonian')),          ('tl', _('Filipino')),          ('fi', _('Finnish')),
-('fr', _('French')),            ('gl', _('Galician')),          ('de', _('German')),
-('el', _('Greek')),             ('ht', _('Haitian Creole')),    ('hu', _('Hungarian')),
-('is', _('Icelandic')),         ('id', _('Indonesian')),        ('ga', _('Irish')),
-('it', _('Italian')),           ('jw', _('Javanese')),          ('lv', _('Latvian')),
-('lt', _('Lithuanian')),        ('mk', _('Macedonian')),        ('ms', _('Malay')),
-('mt', _('Maltese')),           ('no', _('Norwegian')),         ('fa', _('Persian')),
-('pl', _('Polish')),            ('pt', _('Portuguese')),        ('ro', _('Romanian')),
-('ru', _('Russian')),           ('sr', _('Serbian')),           ('sk', _('Slovak')),
-('sl', _('Slovenian')),         ('es', _('Spanish')),           ('sw', _('Swahili')),
-('sv', _('Swedish')),           ('tr', _('Turkish')),           ('uk', _('Ukrainian')),
-('ur', _('Urdu')),              ('vi', _('Vietnamese')),        ('cy', _('Welsh'))
+langs = [
+('af', _('Afrikaans')), ('sq', _('Albanian')), ('ar', _('Arabic')),
+('az', _('Azerbaijani')), ('eu', _('Basque')), ('be', _('Belarusian')),
+('bs', _('Bosnian')), ('bg', _('Bulgarian')), ('ca', _('Catalan')),
+('ceb', _('Cebuano')), ('hr', _('Croatian')), ('cs', _('Czech')),
+('da', _('Danish')), ('nl', _('Dutch')), ('en', _('English')),
+('et', _('Estonian')), ('tl', _('Filipino')), ('fi', _('Finnish')),
+('fr', _('French')), ('gl', _('Galician')), ('de', _('German')),
+('el', _('Greek')), ('ht', _('Haitian Creole')), ('hu', _('Hungarian')),
+('is', _('Icelandic')), ('id', _('Indonesian')), ('ga', _('Irish')),
+('it', _('Italian')), ('jw', _('Javanese')), ('lv', _('Latvian')),
+('lt', _('Lithuanian')), ('mk', _('Macedonian')), ('ms', _('Malay')),
+('mt', _('Maltese')), ('no', _('Norwegian')), ('fa', _('Persian')),
+('pl', _('Polish')), ('pt', _('Portuguese')), ('ro', _('Romanian')),
+('ru', _('Russian')), ('sr', _('Serbian')), ('sk', _('Slovak')),
+('sl', _('Slovenian')), ('es', _('Spanish')), ('sw', _('Swahili')),
+('sv', _('Swedish')), ('tr', _('Turkish')), ('uk', _('Ukrainian')),
+('ur', _('Urdu')), ('vi', _('Vietnamese')), ('cy', _('Welsh'))
 ]
 
 rtol = {'ar', 'fa', 'ur'}
@@ -113,7 +118,7 @@ config.plugins.translator = ConfigSubsection()
 CfgPlTr = config.plugins.translator
 
 CfgPlTr.source = ConfigSelection(default='auto',
- choices=[ ( 'auto', _('Detect Language')) ] + langs[:] )
+ choices=[('auto', _('Detect Language'))] + langs[:])
 
 # Destination has no auto...
 #
@@ -148,6 +153,8 @@ else:
 # Used for skins, where time formats may contain %H:%M etc...,
 # making % replacements a bit messy
 #
+
+
 def applySkinVars(skin, dict):
     for key in list(dict.keys()):   # Py3 needs the list, Py2 is OK with it
         try:
@@ -162,6 +169,8 @@ def applySkinVars(skin, dict):
 # html.entities for Py3) is incomplete, so we'll use a complete
 # one (which is easy to create).
 #
+
+
 def transHTMLEnts(text):
     def repl(ent):              # The code for re.sub to run on matches
         res = ent.group(0)      # get the text of the match
@@ -187,6 +196,8 @@ def transHTMLEnts(text):
 # This is the only code to know about the Web call and structure of the
 # returned page.
 #
+
+
 def PART_translate(enc_text, source, dest):
 
 # The /m url produces a smaller result to the "full" (/) page.
@@ -219,6 +230,7 @@ def PART_translate(enc_text, source, dest):
         newtext = ''    # leaving failed as True
     return (failed, newtext)
 
+
 # ==================================================================
 # We need to split on ".<whitespace>" and "<whitespace>", whilst
 # remembering what the actual splitter was.
@@ -245,6 +257,8 @@ for c in ([" ", "\n", "\t"]):   # Actually .<ws>
 # failing that, at a word boundary (ws). If it can't do that it's
 # en error.
 #
+
+
 def DO_translation(text, source, dest):     # source, dest are langs
     global enc_wspace, enc_space
 
@@ -260,8 +274,8 @@ def DO_translation(text, source, dest):     # source, dest are langs
     enc_text = quote(text)
     enc_len = len(enc_text)
     max = 7000              # Less than the actual ~7656 to 7707
-    nsplit = int(enc_len/max) + 1
-    bsize = int(enc_len/nsplit) - 10
+    nsplit = int(enc_len / max) + 1
+    bsize = int(enc_len / nsplit) - 10
 
 # We need to step along the string finding the longest match within the
 # limits that ends a sentence.  Or, if we can't find a sentence end, at
@@ -311,13 +325,14 @@ def DO_translation(text, source, dest):     # source, dest are langs
         res += this_part + this_sep
         si += this_len
         togo -= this_len
-        if togo <= 0:   break
+        if togo <= 0:
+            break
 
 # Iff the remaining quoted length is less than twice bsize then lower
 # bsize, so we can't(?) end up with a very small final part.
 #
-        if check_end and (togo < bsize*2):
-            bsize = int(bsize*2.0/3.0)
+        if check_end and (togo < bsize * 2):
+            bsize = int(bsize * 2.0 / 3.0)
             check_end = False
 
     return res.strip()
@@ -336,6 +351,7 @@ def DO_translation(text, source, dest):     # source, dest are langs
 #
 # Also the compiled expression for the patterns.
 #
+
 
 # Patterns for matching [...] and (...)
 # Interpolated into the working patterns using %s (so look out for them -
@@ -357,7 +373,7 @@ begin_props = """
 (.*)                        # The real description
 \s*$                        # Strip trailing whitespace to EOL
 """ % (sbk_prop, par_prop, sbk_prop)
-begin_matcher = re.compile(begin_props, flags=re.X|re.S)
+begin_matcher = re.compile(begin_props, flags=re.X | re.S)
 
 end_props = """
 ^\s*                        # Strip any leading whitespace
@@ -373,7 +389,7 @@ end_props = """
 )                           # End all () or [] groups saving
 \s*$                        # Strip trailing whitespace to EOL
 """ % (sbk_prop, sbk_prop, par_prop)
-end_matcher = re.compile(end_props, flags=re.X|re.S)
+end_matcher = re.compile(end_props, flags=re.X | re.S)
 
 # A string to use as a separator when the title and description are
 # combined for a one-call translation.
@@ -384,6 +400,8 @@ sepline = "=========="
 
 # The actual code to translate the title and description.
 #
+
+
 def EPGdata_translate(title, descr, start, duration, uref):
     global sepline, begin_matcher, end_matcher
 
@@ -451,14 +469,16 @@ def EPGdata_translate(title, descr, start, duration, uref):
             if start == None:   # A non-native recording?
                 to = int(time.time() + 10800)
             else:
-                to = int(start + duration + 60*config.epg.histminutes.getValue())
+                to = int(start + duration + 60 * config.epg.histminutes.getValue())
             if CfgPlTr.timeout_hr.getValue() > 0:
-                limit = int(time.time() + 3600*CfgPlTr.timeout_hr.getValue())
-                if limit < to:  to = limit
+                limit = int(time.time() + 3600 * CfgPlTr.timeout_hr.getValue())
+                if limit < to:
+                    to = limit
             AfCache.add(uref, (t_title, t_descr), abs_timeout=to)
         except Exception as e:  # Use originals on a failure...
             print('[EPGTranslator-Plugin] translateEPG, %s: "%s"' % (type(e).__name__, e))
-            if (CfgPlTr.showtrace.getValue()): traceback.print_exc()
+            if (CfgPlTr.showtrace.getValue()):
+                traceback.print_exc()
             (t_title, t_descr) = (title, descr)
 
     return (t_title, t_descr)
@@ -468,20 +488,27 @@ def EPGdata_translate(title, descr, start, duration, uref):
 # Done in one place to ensure consistency.
 # Not a class method as it is called from multiple classes
 #
+
+
 def make_uref(sv_id, sv_name):
     return ":".join([CfgPlTr.destination.getValue(), str(sv_id), str(sv_name)])
+
 
 # ==================================================================
 # We need to know where we are to find the files relative to this
 # script.
 #
 plugin_location = os.path.dirname(os.path.realpath(__file__))
+
+
 def lang_flag(lang):    # Where the language images are
-    return plugin_location + '/pic/flag/' + lang  + '.png'
+    return plugin_location + '/pic/flag/' + lang + '.png'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 # Our classes
 #
+
+
 class translatorConfig(ConfigListScreen, Screen):
 
 # ==================================================================
@@ -546,6 +573,7 @@ class translatorConfig(ConfigListScreen, Screen):
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
+
 class translatorMain(Screen):
 
 # Create the helptext as a class variable
@@ -580,7 +608,7 @@ Red: Refresh EPG
         self.session = session
         Screen.__init__(self, session)
         if self.showsource != "yes":
-            self.skinName = ["translatorMainSingle", "translatorMain" ]
+            self.skinName = ["translatorMainSingle", "translatorMain"]
 
         self.text = text
         self.hideflag = True
@@ -649,7 +677,7 @@ Red: Refresh EPG
 # if there may be a user prompt related to timeshift.
 #
             self.__event_tracker = ServiceEventTracker(screen=self,
-                  eventmap= {iPlayableService.evTunedIn: self.__serviceTuned})
+                  eventmap={iPlayableService.evTunedIn: self.__serviceTuned})
 
         self['actions'] = ActionMap(['OkCancelActions',
              'DirectionActions',
@@ -666,11 +694,13 @@ Red: Refresh EPG
         self["key_blue"] = StaticText(_("Hide"))
         self["key_menu"] = StaticText(_("MENU"))
         self["key_ok"] = StaticText(_("Translate text"))
-        
+
 
 # ==================================================================
 # Set the current country flags as the screen displays
 #
+
+
     def onLayoutFinished(self):
         source = lang_flag(CfgPlTr.source.getValue())
         destination = lang_flag(CfgPlTr.destination.getValue())
@@ -682,8 +712,10 @@ Red: Refresh EPG
         elif fileExists(destination):
             self['flag'].instance.setPixmapFromFile(destination)
 # I think self.text is always None, but leave this here anyway.
-        if self.text is None:   self.getEPG()
-        else:                   self.translateEPG(self.text, '')
+        if self.text is None:
+            self.getEPG()
+        else:
+            self.translateEPG(self.text, '')
         return
 
 # ==================================================================
@@ -766,14 +798,14 @@ Red: Refresh EPG
 # are none if we hit the exception.
 #
         try:
-            begin=time.strftime("%a %Y-%m-%d %H:%M", time.localtime(int(self.event[epg_B])))
+            begin = time.strftime("%a %Y-%m-%d %H:%M", time.localtime(int(self.event[epg_B])))
         except:
             begin = ''
         if self.event[epg_D] > 0:
             plen = (int(self.event[epg_D]) / 60)    # mins
             if plen >= 60:
-                hr = int(plen/60)
-                plen -= 60*hr
+                hr = int(plen / 60)
+                plen -= 60 * hr
                 duration = "%dh %dm" % (hr, plen)
             else:
                 duration = "%dm" % (plen)
@@ -841,17 +873,27 @@ Red: Refresh EPG
             rec_began = None
             play_began = None
             if curEvent:
-                try:    eventID = curEvent.getEventId()
-                except: pass
-                try:    short = curEvent.getShortDescription()
-                except: pass
-                try:    extended = curEvent.getExtendedDescription()
-                except: pass
-                try:    ename = curEvent.getEventName()
-                except: pass
+                try:
+                    eventID = curEvent.getEventId()
+                except:
+                    pass
+                try:
+                    short = curEvent.getShortDescription()
+                except:
+                    pass
+                try:
+                    extended = curEvent.getExtendedDescription()
+                except:
+                    pass
+                try:
+                    ename = curEvent.getEventName()
+                except:
+                    pass
                 Servname = ename
-                try:    dur = curEvent.getDuration()
-                except: pass
+                try:
+                    dur = curEvent.getDuration()
+                except:
+                    pass
 # Approximate start time of playback
 # The getPlayPosition is in units of 1/90000s
 # BUT a playback has TWO start times.
@@ -860,12 +902,14 @@ Red: Refresh EPG
 #
                 try:
                     seek = service.seek()
-                    secs_in = seek.getPlayPosition()[1]/90000
+                    secs_in = seek.getPlayPosition()[1] / 90000
                     play_began = int(time.time() - secs_in)
                 except:
                     pass
-                try:    rec_began = curEvent.getBeginTime()
-                except: pass
+                try:
+                    rec_began = curEvent.getBeginTime()
+                except:
+                    pass
 
             if eventID == None:
 # Generate another unique ID instead.
@@ -878,7 +922,7 @@ Red: Refresh EPG
 
 # Create a list of the correct size with all elements None
 #
-            pbinfo = [None]*(len(EPG_OPTIONS)-1)    # Ignoring X
+            pbinfo = [None] * (len(EPG_OPTIONS) - 1)    # Ignoring X
             pbinfo[epg_I] = eventID
             pbinfo[epg_S] = short
             pbinfo[epg_E] = extended
@@ -895,17 +939,18 @@ Red: Refresh EPG
 # We'll remember everything returned by lookupEvent()
 #
             t_now = int(time.time())
-            epg_base = t_now - 60*int(config.epg.histminutes.getValue())
-            epg_extent = 1440*14    # Get up to 14 days from now (minutes)
-            test = [ EPG_OPTIONS, (self.My_Sref().toCompareString(), 0, epg_base, epg_extent) ]
+            epg_base = t_now - 60 * int(config.epg.histminutes.getValue())
+            epg_extent = 1440 * 14    # Get up to 14 days from now (minutes)
+            test = [EPG_OPTIONS, (self.My_Sref().toCompareString(), 0, epg_base, epg_extent)]
             epgcache = eEPGCache.getInstance()
             self.list = epgcache.lookupEvent(test)
             self.max = len(self.list)
 # Update the starting point to the currently running service, which will be
 # the last one before one with a future starting time
 #
-            for i in list(range(1,len(self.list))):
-                if self.list[i][epg_B] > t_now: break
+            for i in list(range(1, len(self.list))):
+                if self.list[i][epg_B] > t_now:
+                    break
                 self.count = i
 # Get the display going...
         self.showEPG()
@@ -917,9 +962,9 @@ Red: Refresh EPG
     def showEPG(self):
         try:
             self.event = self.list[self.count]
-            title=self.event[epg_T]
-            short=self.event[epg_S]
-            extended=self.event[epg_E]
+            title = self.event[epg_T]
+            short = self.event[epg_S]
+            extended = self.event[epg_E]
             self.refresh = False
         except:
             title = 'Press red button to refresh EPG'
@@ -994,8 +1039,10 @@ Red: Refresh EPG
         with open('/proc/stb/video/alpha', 'w') as f:
             count = 40
             while count >= 0:
-                if self.hideflag:   wv = count      # 40 -> 0
-                else:               wv = 40 - count # 0 -> 40
+                if self.hideflag:
+                    wv = count      # 40 -> 0
+                else:
+                    wv = 40 - count # 0 -> 40
                 f.write('%i' % (config.av.osd_alpha.getValue() * wv / 40))
                 f.flush()               # So it does something
                 count -= 1
@@ -1013,6 +1060,7 @@ Red: Refresh EPG
 # pressing the Text key.
 #
 
+
 ##################################################################
 # The original values of functions we intercept
 #
@@ -1023,6 +1071,8 @@ orig_EVB_setEvent = None
 # Code to toggle whether we are translating.
 # Bound to Text in any EventView screen.
 #
+
+
 def EPGTr_ToggleMode(self):
     self.EPGTr_translating = not self.EPGTr_translating
 
@@ -1038,6 +1088,8 @@ def EPGTr_ToggleMode(self):
 # The code to handle the text that will be displayed.
 # This is an extension to the EventViewbase.setEvent().
 #
+
+
 def My_setEvent(self, event):
     global orig_EVB_setEvent
 
@@ -1047,7 +1099,8 @@ def My_setEvent(self, event):
 
 # If we aren't translating then we have nothing more to do...
 #
-    if not self.EPGTr_translating: return
+    if not self.EPGTr_translating:
+        return
 
 # ... but if we are translating we need to change the text which
 # the orig_EVB_setEvent() call above has set.
@@ -1110,6 +1163,8 @@ def My_setEvent(self, event):
 # Intercepting code for EventViewBase __init__()
 # We add an ActionMap for text key binding.
 #
+
+
 def My_EVB__init__(self, *args, **kwargs):
     global orig_EVB__init__
 
@@ -1121,7 +1176,7 @@ def My_EVB__init__(self, *args, **kwargs):
 # We create our own ActionMap. The VirtualKeyboardActions contexts only
 # defines a Text key (convenient!) and calls it "showVirtualKeyboard".
 #
-    which= "EPGTrans"
+    which = "EPGTrans"
     self[which] = ActionMap(["VirtualKeyboardActions"],
            {"showVirtualKeyboard": self.EPGTr_ToggleMode})
     self[which].setEnabled(True)
@@ -1130,6 +1185,7 @@ def My_EVB__init__(self, *args, **kwargs):
 # Start each EventView in the user-chosen translate mode
 #
     self.EPGTr_translating = CfgPlTr.start_EV_trans.getValue()
+
 
 # ==================================================================
 # Start-up links (see PluginDescriptor defs)
@@ -1140,6 +1196,8 @@ def My_EVB__init__(self, *args, **kwargs):
 # We also add our additional handlers to EventViewBase
 #
 autostart_init_done = False
+
+
 def autostart(reason, **kwargs):
     global orig_EVB__init__, orig_EVB_setEvent
     global autostart_init_done      # Otherwise we create a local one
@@ -1148,8 +1206,10 @@ def autostart(reason, **kwargs):
 # AND we only want to do it once (although we will probably only get
 # called once with reason 0).
 
-    if reason != 0: return
-    if autostart_init_done: return
+    if reason != 0:
+        return
+    if autostart_init_done:
+        return
 
 # Note that we will have done it.
 #
@@ -1175,6 +1235,8 @@ def main(session, **kwargs):
     return
 
 # ==================================================================
+
+
 def Plugins(**kwargs):
     return [
      PluginDescriptor(name='EPG Translator', description='Translate your EPG', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=main),

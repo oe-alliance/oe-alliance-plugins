@@ -13,7 +13,9 @@ from Components.VolumeControl import VolumeControl
 
 from enigma import eTimer, fbClass, eRCInput, iServiceInformation, iPlayableService
 
-import os, struct, vbcfg
+import os
+import struct
+import vbcfg
 
 from __init__ import _
 from hbbtv import HbbTVWindow
@@ -56,6 +58,7 @@ _OPCODE_LIST = [
 		'CONTROL_RELOAD_KEYMAP',
 		'OPCODE_END'
 		]
+
 
 class VBHandler(VBHandlers):
 	def __init__(self, session):
@@ -123,7 +126,7 @@ class VBHandler(VBHandlers):
 		return (True, None)
 
 	def _CB_CONTROL_OUT_OF_MEMORY(self, result, packet):
-		vbcfg.need_restart = True;
+		vbcfg.need_restart = True
 		return (True, None)
 
 	def _CB_CONTROL_INVALIDATE(self, result, packet):
@@ -205,8 +208,10 @@ class VBHandler(VBHandlers):
 			return (False, None)
 		return (True, None)
 
+
 class VBMain(Screen):
 	skin = """<screen name="VBMAIN" position="0,0" size="0,0" backgroundColor="transparent" flags="wfNoBorder" title=" "></screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -348,21 +353,21 @@ class VBMain(Screen):
 
 	def start_browser(self):
 		if not self.check_browser():
-			os.system("%s/%s start"%(vbcfg.APPROOT, vbcfg.APP_RUN))
+			os.system("%s/%s start" % (vbcfg.APPROOT, vbcfg.APP_RUN))
 		return True
 
 	def stop_browser(self):
 		VBController.command('CONTROL_EXIT')
 		return True
 		try:
-			os.system("%s/%s stop"%(vbcfg.APPROOT, vbcfg.APP_RUN))
+			os.system("%s/%s stop" % (vbcfg.APPROOT, vbcfg.APP_RUN))
 		except:
 			pass
 		return True
 
 	def check_browser(self):
 		try:
-			ret = os.popen('%s/%s check'%(vbcfg.APPROOT, vbcfg.APP_RUN)).read()
+			ret = os.popen('%s/%s check' % (vbcfg.APPROOT, vbcfg.APP_RUN)).read()
 			return ret.strip() != "0"
 		except Exception, ErrMsg:
 			vbcfg.ERR("check browser running: %s" % ErrMsg)
@@ -370,19 +375,21 @@ class VBMain(Screen):
 
 	def restart_browser(self):
 		try:
-			os.system("%s/%s restart"%(vbcfg.APPROOT, vbcfg.APP_RUN))
+			os.system("%s/%s restart" % (vbcfg.APPROOT, vbcfg.APP_RUN))
 		except:
 			pass
 		return True
+
 
 def HelpableScreen__init__(self):
 	if isinstance(self, HelpableScreen):
 		HelpableScreen.showManual = showManual
 
 		self["helpActions"] = ActionMap(["HelpbuttonActions"], {
-			"help_b" : self.showHelp,
-			"help_l" : self.showManual,
+			"help_b": self.showHelp,
+			"help_l": self.showManual,
 		}, -2)
+
 
 def showManual(self):
 	if not os.path.exists(vbcfg.MANUALROOT):
@@ -395,17 +402,21 @@ def showManual(self):
 
 	vbcfg.g_browser = self.session.open(Browser, url)
 
+
 def auto_start_main(reason, **kwargs):
 	if reason:
 		try:
 			if vbcfg.g_main.vbserver is not None:
 				vbcfg.g_main.vbserver.kill()
-		except: pass
+		except:
+			pass
+
 
 def session_start_main(session, reason, **kwargs):
 	vbcfg.g_main = session.open(VBMain)
 	HelpableScreen.__init__ = HelpableScreen__init__
 	HelpableScreen.session = session
+
 
 def start_youtubetv_main(session, **kwargs):
 	def _cb_youtubetv_close(ret):
@@ -420,19 +431,24 @@ def start_youtubetv_main(session, **kwargs):
 	else:
 		session.openWithCallback(_cb_youtubetv_close, YoutubeTVWindow)
 
+
 def plugin_setting_youtube(session, **kwargs):
 	session.open(YoutubeTVSettings)
 
+
 def plugin_start_browser(session, **kwargs):
 	vbcfg.g_browser = session.open(Browser)
+
 
 def extension_toggle_browser(session, **kwargs):
 	if vbcfg.g_main is not None:
 		vbcfg.g_main.menu_toggle_browser()
 
+
 def extension_start_application(session, **kwargs):
 	if vbcfg.g_main is not None:
 		vbcfg.g_main.menu_hbbtv_applications()
+
 
 def Plugins(**kwargs):
 	l = []

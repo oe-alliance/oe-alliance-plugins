@@ -4,7 +4,7 @@ from . import _
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
-from Components.ActionMap import ActionMap,NumberActionMap
+from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config
 from Components.config import config, getConfigListEntry, ConfigInteger, ConfigSubsection, ConfigSelection
 from Components.ConfigList import ConfigListScreen
@@ -13,12 +13,13 @@ from Components.Sources.StaticText import StaticText
 
 
 config.plugins.fansetups = ConfigSubsection()
-config.plugins.fansetups.standbymode = ConfigSelection(default = "off", choices = [
+config.plugins.fansetups.standbymode = ConfigSelection(default="off", choices=[
 	("off", _("off")), ("on", _("on"))])
-config.plugins.fansetups.usetimer = ConfigSelection(default = "off", choices = [
+config.plugins.fansetups.usetimer = ConfigSelection(default="off", choices=[
 	("off", _("no")), ("on", _("yes"))])
-config.plugins.fansetups.fanontime = ConfigInteger(default = 5, limits = (1, 100))
-config.plugins.fansetups.fanofftime = ConfigInteger(default = 60, limits = (1, 100))
+config.plugins.fansetups.fanontime = ConfigInteger(default=5, limits=(1, 100))
+config.plugins.fansetups.fanofftime = ConfigInteger(default=60, limits=(1, 100))
+
 
 class FanSetupConfiguration(Screen, ConfigListScreen):
 	skin = """
@@ -29,6 +30,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" foregroundColor="#ececec" backgroundColor="#1f771f" transparent="1" />
 			<widget name="config" zPosition="2" position="5,50" size="550,200" scrollbarMode="showOnDemand" transparent="1" />
 		</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Fan Control"))
@@ -38,7 +40,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		self.fanontimeEntry = None
 		self.fanofftimeEntry = None
 
-		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
@@ -47,7 +49,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 #		self.getFaninfo()
 		self.createSetup()
 
@@ -64,29 +66,28 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 
 	def getFaninfo(self):
 		try:
-			value=int(open('/proc/stb/system/standby_fan_off','r').read())
+			value = int(open('/proc/stb/system/standby_fan_off', 'r').read())
 			if value is 0:
-				config.plugins.fansetups.standbymode.value="on"
+				config.plugins.fansetups.standbymode.value = "on"
 			else:
-				config.plugins.fansetups.standbymode.value="off"
-			value=int(open('/proc/stb/system/use_fan_timer','r').read())
+				config.plugins.fansetups.standbymode.value = "off"
+			value = int(open('/proc/stb/system/use_fan_timer', 'r').read())
 			if value is 0:
 				config.plugins.fansetups.usetimer.value = "off"
 			else:
 				config.plugins.fansetups.usetimer.value = "on"
-			time=int(open('/proc/stb/system/fan_on_time','r').read())
+			time = int(open('/proc/stb/system/fan_on_time', 'r').read())
 			if time > 0 and time < 101:
 				config.plugins.fansetups.fanontime.value = time
 			else:
 				config.plugins.fansetups.fanontime.value = 1
-			time=int(open('/proc/stb/system/fan_off_time','r').read())
+			time = int(open('/proc/stb/system/fan_off_time', 'r').read())
 			if time > 0 and time < 101:
 				config.plugins.fansetups.fanofftime.value = time
 			else:
 				config.plugins.fansetups.fanofftime.value = 1
 		except:
 			print 'Error read proc of fan'
-
 
 	def createSetup(self):
 		self.list = []
@@ -95,12 +96,12 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		self.fanontimeEntry = getConfigListEntry(_("Fan on duration time"), config.plugins.fansetups.fanontime)
 		self.fanofftimeEntry = getConfigListEntry(_("Fan off duration time"), config.plugins.fansetups.fanofftime)
 
-		self.list.append( self.standbyEntry )
+		self.list.append(self.standbyEntry)
 		if config.plugins.fansetups.standbymode.value is "off":
-			self.list.append( self.usetimerEntry )
+			self.list.append(self.usetimerEntry)
 			if config.plugins.fansetups.usetimer.value is not "off":
-				self.list.append( self.fanontimeEntry )
-				self.list.append( self.fanofftimeEntry )
+				self.list.append(self.fanontimeEntry)
+				self.list.append(self.fanofftimeEntry)
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -122,7 +123,6 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 			x[1].cancel()
 		self.close()
 
-
 	def keyCancel(self):
 		print "cancel"
 		if self["config"].isChanged():
@@ -134,15 +134,15 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		ConfigListScreen.keySave(self)
 		try:
 			if config.plugins.fansetups.standbymode.value is "on":
-				open('/proc/stb/system/standby_fan_off','w').write('0')
+				open('/proc/stb/system/standby_fan_off', 'w').write('0')
 			else:
-				open('/proc/stb/system/standby_fan_off','w').write('1')
+				open('/proc/stb/system/standby_fan_off', 'w').write('1')
 				if config.plugins.fansetups.usetimer.value is "off":
-					open('/proc/stb/system/use_fan_timer','w').write('0')
+					open('/proc/stb/system/use_fan_timer', 'w').write('0')
 				else:
-					open('/proc/stb/system/use_fan_timer','w').write('1')
-					open('/proc/stb/system/fan_on_time','w').write('%s'%config.plugins.fansetups.fanontime.value)
-					open('/proc/stb/system/fan_off_time','w').write('%s'%config.plugins.fansetups.fanofftime.value)
+					open('/proc/stb/system/use_fan_timer', 'w').write('1')
+					open('/proc/stb/system/fan_on_time', 'w').write('%s' % config.plugins.fansetups.fanontime.value)
+					open('/proc/stb/system/fan_off_time', 'w').write('%s' % config.plugins.fansetups.fanofftime.value)
 		except:
 			print 'Error write proc of fan'
 
@@ -150,29 +150,32 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 def openconfig(session, **kwargs):
 	session.open(FanSetupConfiguration)
 
+
 def selSetup(menuid, **kwargs):
 	if menuid != "system":
-		return [ ]
+		return []
 	return [(_("Fan Control"), openconfig, "fansetup_config", 70)]
+
 
 def setfansetup(reason, **kwargs):
 	try:
 		if config.plugins.fansetups.standbymode.value is "on":
-			open('/proc/stb/system/standby_fan_off','w').write('0')
+			open('/proc/stb/system/standby_fan_off', 'w').write('0')
 		else:
-			open('/proc/stb/system/standby_fan_off','w').write('1')
+			open('/proc/stb/system/standby_fan_off', 'w').write('1')
 			if config.plugins.fansetups.usetimer.value is "off":
-				open('/proc/stb/system/use_fan_timer','w').write('0')
+				open('/proc/stb/system/use_fan_timer', 'w').write('0')
 			else:
-				open('/proc/stb/system/use_fan_timer','w').write('1')
-				open('/proc/stb/system/fan_on_time','w').write('%s'%config.plugins.fansetups.fanontime.value)
-				open('/proc/stb/system/fan_off_time','w').write('%s'%config.plugins.fansetups.fanofftime.value)
+				open('/proc/stb/system/use_fan_timer', 'w').write('1')
+				open('/proc/stb/system/fan_on_time', 'w').write('%s' % config.plugins.fansetups.fanontime.value)
+				open('/proc/stb/system/fan_off_time', 'w').write('%s' % config.plugins.fansetups.fanofftime.value)
 	except:
 		print 'Error to set fan control'
+
 
 def Plugins(**kwargs):
 	from os import path
 	if not path.exists("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/plugin.pyo"):
-		return [PluginDescriptor(name=_("Fan Control"), description="check Fan Control settings", where = PluginDescriptor.WHERE_AUTOSTART, needsRestart = True, fnc=setfansetup),
-				PluginDescriptor(name=_("Fan Control"), description=_("Fan Control"), where = PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=selSetup)]
+		return [PluginDescriptor(name=_("Fan Control"), description="check Fan Control settings", where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=setfansetup),
+				PluginDescriptor(name=_("Fan Control"), description=_("Fan Control"), where=PluginDescriptor.WHERE_MENU, needsRestart=True, fnc=selSetup)]
 	return []

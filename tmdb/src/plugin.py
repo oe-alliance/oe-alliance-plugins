@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #######################################################################
-# maintainer: <schomi@vuplus-support.org> 
+# maintainer: <schomi@vuplus-support.org>
 # This plugin is free software, you are allowed to
 # modify it (if you keep the license),
 # but you are not allowed to distribute/publish
@@ -14,6 +14,7 @@ from Plugins.Plugin import PluginDescriptor
 import tmdb
 from __init__ import _
 
+
 def main(session, service, **kwargs):
 	reload(tmdb)
 	try:
@@ -21,7 +22,8 @@ def main(session, service, **kwargs):
 	except:
 		import traceback
 		traceback.print_exc()
-		
+
+
 def eventinfo(session, eventName="", **kwargs):
 	reload(tmdb)
 	try:
@@ -33,9 +35,10 @@ def eventinfo(session, eventName="", **kwargs):
 	except:
 		import traceback
 		traceback.print_exc()
-		
+
+
 def Plugins(**kwargs):
 	return [
-			PluginDescriptor(name=_("TMDb"), description=_("TMDb Infos ..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart = False),
-			PluginDescriptor(name=_("TMDb") ,description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart = False)
+			PluginDescriptor(name=_("TMDb"), description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False),
+			PluginDescriptor(name=_("TMDb"), description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
 			]

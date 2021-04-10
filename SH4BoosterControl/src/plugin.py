@@ -16,17 +16,19 @@ import Screens.Standby
 
 config.plugins.booster = ConfigSubsection()
 if getMachineBuild() in ("spark"):
-	config.plugins.booster.startfrequenz = ConfigSelection(default = "3841", choices = [('3841',_("450 (default)")),('12803',"500"),('4609',"550"),('5121',"600"),('16643',"650"),('17923',"700")])
-	config.plugins.booster.normalfrequenz = ConfigSelection(default = "3841", choices = [('3841',_("450 (default)")),('12803',"500"),('4609',"550"),('5121',"600"),('16643',"650"),('17923',"700")])
-	config.plugins.booster.standbyfrequenz = ConfigSelection(default = "3841", choices = [('3841',_("450 (default)")),('2561',"300"),('5123',"200")])
+	config.plugins.booster.startfrequenz = ConfigSelection(default="3841", choices=[('3841', _("450 (default)")), ('12803', "500"), ('4609', "550"), ('5121', "600"), ('16643', "650"), ('17923', "700")])
+	config.plugins.booster.normalfrequenz = ConfigSelection(default="3841", choices=[('3841', _("450 (default)")), ('12803', "500"), ('4609', "550"), ('5121', "600"), ('16643', "650"), ('17923', "700")])
+	config.plugins.booster.standbyfrequenz = ConfigSelection(default="3841", choices=[('3841', _("450 (default)")), ('2561', "300"), ('5123', "200")])
 else:
-	config.plugins.booster.startfrequenz = ConfigSelection(default = "4609", choices = [('4609',_("540 (default)")),('5377',"630"),('18179',"710"),('39686',"775"),('20483',"800")])
-	config.plugins.booster.normalfrequenz = ConfigSelection(default = "4609", choices = [('4609',_("540 (default)")),('5377',"630"),('18179',"710"),('39686',"775"),('20483',"800")])
-	config.plugins.booster.standbyfrequenz = ConfigSelection(default = "4609", choices = [('4609',_("540 (default)")),('2561',"300"),('5123',"200")])
+	config.plugins.booster.startfrequenz = ConfigSelection(default="4609", choices=[('4609', _("540 (default)")), ('5377', "630"), ('18179', "710"), ('39686', "775"), ('20483', "800")])
+	config.plugins.booster.normalfrequenz = ConfigSelection(default="4609", choices=[('4609', _("540 (default)")), ('5377', "630"), ('18179', "710"), ('39686', "775"), ('20483', "800")])
+	config.plugins.booster.standbyfrequenz = ConfigSelection(default="4609", choices=[('4609', _("540 (default)")), ('2561', "300"), ('5123', "200")])
+
 
 def leaveStandby():
 	print "[SH4BoosterControl] Leave Standby"
 	initBooster()
+
 
 def standbyCounterChanged(configElement):
 	print "[SH4BoosterControl] In Standby"
@@ -34,20 +36,23 @@ def standbyCounterChanged(configElement):
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
 
+
 def initBooster():
 	print "[SH4BoosterControl] initBooster"
 	f = open("/proc/cpu_frequ/pll0_ndiv_mdiv", "w")
 	f.write(config.plugins.booster.normalfrequenz.getValue())
 	f.close()
-	
+
+
 def initStandbyBooster():
 	print "[SH4BoosterControl] initStandbyBooster"
 	f = open("/proc/cpu_frequ/pll0_ndiv_mdiv", "w")
 	f.write(config.plugins.booster.standbyfrequenz.getValue())
 	f.close()
 
+
 class SH4BoosterControl(ConfigListScreen, Screen):
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 
 		self.skin = """
 			<screen position="100,100" size="500,210" title="Booster Control" >
@@ -61,9 +66,9 @@ class SH4BoosterControl(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.onClose.append(self.abort)
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
 		self.createSetup()
 
@@ -72,7 +77,7 @@ class SH4BoosterControl(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("Save"))
 		self["key_yellow"] = Button(_("Test"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -83,9 +88,9 @@ class SH4BoosterControl(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		
+
 		self.list.append(getConfigListEntry(_("Start boot frequency"), config.plugins.booster.startfrequenz))
-		self.list.append(getConfigListEntry(_("Normal running frequency"), config.plugins.booster.normalfrequenz))		
+		self.list.append(getConfigListEntry(_("Normal running frequency"), config.plugins.booster.normalfrequenz))
 		self.list.append(getConfigListEntry(_("Standby saver frequency"), config.plugins.booster.standbyfrequenz))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -121,12 +126,13 @@ class SH4BoosterControl(ConfigListScreen, Screen):
 		self.createSetup()
 		initBooster()
 
+
 class SH4_Booster:
 	def __init__(self, session):
 		print "[SH4BoosterControl] initializing"
 		self.session = session
 		self.service = None
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.Console = Console()
 
@@ -137,20 +143,24 @@ class SH4_Booster:
 
 	def abort(self):
 		print "[SH4BoosterControl] aborting"
-	
-	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+
+	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
+
 
 def main(menuid):
 	if menuid != "system":
-		return [ ]
+		return []
 	return [(_("Booster Control"), startBooster, "Booster Control", None)]
+
 
 def startBooster(session, **kwargs):
 	session.open(SH4BoosterControl)
 
+
 sh4booster = None
 gReason = -1
 mySession = None
+
 
 def controlsh4booster():
 	global sh4booster
@@ -162,8 +172,9 @@ def controlsh4booster():
 		sh4booster = SH4_Booster(mySession)
 	elif gReason == 1 and sh4booster != None:
 		print "[SH4BoosterControl] Stopping !!"
-		
+
 		sh4booster = None
+
 
 def sessionstart(reason, **kwargs):
 	print "[SH4BoosterControl] sessionstart"
@@ -177,7 +188,7 @@ def sessionstart(reason, **kwargs):
 		gReason = reason
 	controlsh4booster()
 
-def Plugins(**kwargs):
-	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-		PluginDescriptor(name="SH4 Booster Control", description="Change CPU speed settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
 
+def Plugins(**kwargs):
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+		PluginDescriptor(name="SH4 Booster Control", description="Change CPU speed settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]

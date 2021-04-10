@@ -38,7 +38,14 @@ from httplib import HTTPException
 from urllib import unquote_plus, urlencode
 from urllib2 import Request, urlopen, URLError, HTTPError
 from urlparse import parse_qs
-import cookielib, datetime, os, re, socket, sys, time, urllib2
+import cookielib
+import datetime
+import os
+import re
+import socket
+import sys
+import time
+import urllib2
 from os import path
 config.plugins.tvspielfilm = ConfigSubsection()
 deskWidth = getDesktop(0).size().width()
@@ -98,6 +105,7 @@ config.plugins.tvspielfilm.maxgenre = ConfigInteger(250, (10, 999))
 config.plugins.tvspielfilm.autotimer = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 config.plugins.tvspielfilm.autoupdate = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 config.plugins.tvspielfilm.paypal = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
+
 
 def applySkinVars(skin, dict):
     for key in dict.keys():
@@ -8502,7 +8510,7 @@ class TVJetztView(Screen):
         f = open(self.servicefile, 'r')
         lines = f.readlines()
         f.close()
-        ordertext = [ '"%s": %d, ' % (line.partition(' ')[0], i) for i, line in enumerate(lines) ]
+        ordertext = ['"%s": %d, ' % (line.partition(' ')[0], i) for i, line in enumerate(lines)]
         self.order = '{' + str(''.join(ordertext)) + '}'
         if self.standalone == True:
             self.movie_stop = config.usage.on_movie_stop.value
@@ -20766,7 +20774,7 @@ class makeServiceFile(Screen):
             info = serviceHandler.info(bouquet_root)
             if info:
                 bouquets.append((info.getName(bouquet_root), bouquet_root))
-        entrys = [ (x[0], x[1]) for x in bouquets ]
+        entrys = [(x[0], x[1]) for x in bouquets]
         self['list'].l.setList(entrys)
         try:
             if config.plugins.tvspielfilm.font.value == 'yes':
@@ -20787,7 +20795,7 @@ class makeServiceFile(Screen):
                 slist = ServiceList(bouquet, validate_commands=False)
                 services = slist.getServicesAsList(format='S')
                 search = ['IBDCTSERNX']
-                search.extend([ (service, 0, -1) for service in services ])
+                search.extend([(service, 0, -1) for service in services])
                 self.epgcache = eEPGCache.getInstance()
                 events = self.epgcache.lookupEvent(search)
                 eventlist = []
@@ -20801,7 +20809,7 @@ class makeServiceFile(Screen):
                 slist = ServiceList(bouquet, validate_commands=False)
                 services = slist.getServicesAsList(format='S')
                 search = ['IBDCTSERNX']
-                search.extend([ (service, 0, -1) for service in services ])
+                search.extend([(service, 0, -1) for service in services])
                 self.epgcache = eEPGCache.getInstance()
                 events = self.epgcache.lookupEvent(search)
                 eventlist = []
@@ -21391,7 +21399,7 @@ class FolderSelection(Screen):
 
 class ItemList(MenuList):
 
-    def __init__(self, items, enableWrapAround = True):
+    def __init__(self, items, enableWrapAround=True):
         MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
         if config.plugins.tvspielfilm.font.value == 'yes':
             self.l.setFont(-2, gFont('Sans', 24))
@@ -21431,7 +21439,7 @@ class ItemList(MenuList):
 
 class BlinkingLabel(Label, BlinkingWidget):
 
-    def __init__(self, text = ''):
+    def __init__(self, text=''):
         Label.__init__(self, text=text)
         BlinkingWidget.__init__(self)
 

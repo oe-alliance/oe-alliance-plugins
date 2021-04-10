@@ -17,9 +17,10 @@ from Components.FileList import FileList
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 config.plugins.dlnaserver = ConfigSubsection()
-config.plugins.dlnaserver.autostart = ConfigYesNo(default = False)
+config.plugins.dlnaserver.autostart = ConfigYesNo(default=False)
 
 runcherBin = "/etc/init.d/minidlna"
+
 
 def isRunning():
 	ps_str = os.popen('ps | grep minidlna | grep -v grep').read()
@@ -27,8 +28,9 @@ def isRunning():
 		return True
 	return False
 
+
 class SelectDirectoryWindow(Screen):
-	skin = 	"""
+	skin = """
 		<screen name="SelectDirectoryWindow" position="center,center" size="560,320" title="Select Directory">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" zPosition="0" size="140,40" transparent="1" alphatest="on" />
@@ -40,24 +42,25 @@ class SelectDirectoryWindow(Screen):
 			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>
 		"""
+
 	def __init__(self, session, currentDir):
 		Screen.__init__(self, session)
 		inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]
-		self["filelist"] = FileList(currentDir, showDirectories = True, showFiles = False, inhibitMounts=[], inhibitDirs=inhibitDirs)
-		self["actions"]  = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"], {
-			"back"  : self.cancel,
-			"left"  : self.left,
-			"right" : self.right,
-			"up"    : self.up,
-			"down"  : self.down,
-			"ok"    : self.ok,
-			"green" : self.green,
-			"red"   : self.cancel
+		self["filelist"] = FileList(currentDir, showDirectories=True, showFiles=False, inhibitMounts=[], inhibitDirs=inhibitDirs)
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"], {
+			"back": self.cancel,
+			"left": self.left,
+			"right": self.right,
+			"up": self.up,
+			"down": self.down,
+			"ok": self.ok,
+			"green": self.green,
+			"red": self.cancel
 		}, -1)
 
 		self["currentDir"] = Label()
-		self["key_green"]  = StaticText(_("OK"))
-		self["key_red"]    = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
+		self["key_red"] = StaticText(_("Cancel"))
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -97,8 +100,9 @@ class SelectDirectoryWindow(Screen):
 			currentDir = "Invalid Location"
 		self["currentDir"].setText(currentDir)
 
+
 class DLNAServer(ConfigListScreen, Screen):
-	skin=   """
+	skin = """
 		<screen position="center,center" size="600,350" title="DLNA Server">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
@@ -114,7 +118,8 @@ class DLNAServer(ConfigListScreen, Screen):
 			<widget name="information" position="0,250" size="600,100" valign="center" font="Regular;20" />
 		</screen>
 		"""
-	def __init__(self, session): 
+
+	def __init__(self, session):
                 self.session = session
 		Screen.__init__(self, session)
 
@@ -124,17 +129,17 @@ class DLNAServer(ConfigListScreen, Screen):
 
 		self.configFileName = "/etc/minidlna.conf"
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", ], {
-			"red"    : self.keyExit,
-			"green"  : self.keyGreen,
-			"blue"   : self.keyBlue,
-			"yellow" : self.keyYellow,
-			"cancel" : self.keyExit,
-			"ok"     : self.keyOK
+			"red": self.keyExit,
+			"green": self.keyGreen,
+			"blue": self.keyBlue,
+			"yellow": self.keyYellow,
+			"cancel": self.keyExit,
+			"ok": self.keyOK
                 }, -2)
-		self["key_red"]     = StaticText(_("Exit"))
-		self["key_green"]   = StaticText(_("Start"))
-		self["key_yellow"]  = StaticText(_("Save"))
-		self["key_blue"]    = StaticText(_("Reset"))
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_green"] = StaticText(_("Start"))
+		self["key_yellow"] = StaticText(_("Save"))
+		self["key_blue"] = StaticText(_("Reset"))
 		self["information"] = Label()
 
 		self.makeMenuEntry()
@@ -158,18 +163,18 @@ class DLNAServer(ConfigListScreen, Screen):
 	def keyExit(self):
 		config.plugins.dlnaserver.autostart.save()
 		self.close()
-	
+
 	def keyOK(self):
-		currentItem  = self.getCurrentItem()
+		currentItem = self.getCurrentItem()
 		if currentItem is not None:
 			self.session.openWithCallback(self.cbChangeDirectory, SelectDirectoryWindow, currentItem.value)
 
 	def keyGreen(self):
-		args = ' stop' 
+		args = ' stop'
 		if self["key_green"].getText().strip() == 'Start':
 			args = ' start'
 			self.saveConfigFile()
-		rc = os.popen('%s %s'%(runcherBin, args)).read()
+		rc = os.popen('%s %s' % (runcherBin, args)).read()
 		self["information"].setText(rc)
 		self.updateGreenTimer.start(1000)
 
@@ -179,20 +184,20 @@ class DLNAServer(ConfigListScreen, Screen):
 
 	def keyBlue(self):
 		self.menuItemServerName.value = self.oldConfig.get('friendly_name')
-		self.menuItemVideoDir.value   = self.oldConfig.get('media_dirV')
-		self.menuItemMusicDir.value   = self.oldConfig.get('media_dirA')
+		self.menuItemVideoDir.value = self.oldConfig.get('media_dirV')
+		self.menuItemMusicDir.value = self.oldConfig.get('media_dirA')
 		self.menuItemPictureDir.value = self.oldConfig.get('media_dirP')
 
 		log_level_list = self.oldConfig.get('log_level').split('=')
 		enable_log = False
-		log_level  = log_level_list[1]
+		log_level = log_level_list[1]
 		if log_level != 'off':
 			enable_log = True
 		if log_level not in ('off', 'error', 'warn', 'debug'):
 			log_level = 'error'
 		self.menuItemEnableLog.value = enable_log
-		self.menuItemLogLevel.value  = log_level
-		self.menuItemLogDir.value    = self.oldConfig.get('log_dir')
+		self.menuItemLogLevel.value = log_level
+		self.menuItemLogDir.value = self.oldConfig.get('log_dir')
 		config.plugins.dlnaserver.autostart.value = False
 		self.resetMenuList()
 
@@ -209,13 +214,13 @@ class DLNAServer(ConfigListScreen, Screen):
 
 	def saveConfigFile(self):
 		serverName = self.menuItemServerName.value
-		videoDir   = self.menuItemVideoDir.value
-		auditDir   = self.menuItemMusicDir.value
+		videoDir = self.menuItemVideoDir.value
+		auditDir = self.menuItemMusicDir.value
 		pictureDir = self.menuItemPictureDir.value
-		logDir     = self.menuItemLogDir.value
-		logLevel   = self.menuItemLogLevel.value
+		logDir = self.menuItemLogDir.value
+		logLevel = self.menuItemLogLevel.value
 		if not self.menuItemEnableLog.value:
-			logDir,logLevel = None, None
+			logDir, logLevel = None, None
 		self.writeConfigFile(serverName=serverName, videoDir=videoDir, auditDir=auditDir, pictureDir=pictureDir, logDir=logDir, logLevel=logLevel)
 
 	def getCurrentItem(self):
@@ -234,7 +239,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		if pathStr is None or pathStr.strip() == '':
 			return
 
-		currentItem  = self.getCurrentItem()
+		currentItem = self.getCurrentItem()
 		if currentItem is not None:
 			currentItem.value = pathStr
 
@@ -246,29 +251,29 @@ class DLNAServer(ConfigListScreen, Screen):
 			os.system('mkdir -p /media/dlna/Musics/')
 			os.system('mkdir -p /media/dlna/Pictures/')
 		self.menuItemServerName = ConfigText(default=self.oldConfig.get('friendly_name'))
-		self.menuItemVideoDir   = ConfigDirectory(default = self.oldConfig.get('media_dirV'))
-		self.menuItemMusicDir   = ConfigDirectory(default = self.oldConfig.get('media_dirA'))
-		self.menuItemPictureDir = ConfigDirectory(default = self.oldConfig.get('media_dirP'))
+		self.menuItemVideoDir = ConfigDirectory(default=self.oldConfig.get('media_dirV'))
+		self.menuItemMusicDir = ConfigDirectory(default=self.oldConfig.get('media_dirA'))
+		self.menuItemPictureDir = ConfigDirectory(default=self.oldConfig.get('media_dirP'))
 
 		log_level_list = self.oldConfig.get('log_level').split('=')
 		enable_log = False
-		log_level  = log_level_list[1]
+		log_level = log_level_list[1]
 		if log_level != 'off':
 			enable_log = True
 		if log_level not in ('off', 'error', 'warn', 'debug'):
 			log_level = 'error'
-		self.menuItemEnableLog = ConfigYesNo(default = enable_log)
-		self.menuItemLogLevel  = ConfigSelection(default = log_level, choices = [("off", _("off")), ("error", _("error")), ("warn", _("warn")), ("debug", _("debug"))])
-		self.menuItemLogDir    = ConfigDirectory(default = self.oldConfig.get('log_dir'))
+		self.menuItemEnableLog = ConfigYesNo(default=enable_log)
+		self.menuItemLogLevel = ConfigSelection(default=log_level, choices=[("off", _("off")), ("error", _("error")), ("warn", _("warn")), ("debug", _("debug"))])
+		self.menuItemLogDir = ConfigDirectory(default=self.oldConfig.get('log_dir'))
 
 		self.menuEntryServerName = getConfigListEntry(_("Server Name"), self.menuItemServerName)
-		self.menuEntryVideoDir   = getConfigListEntry(_("Video Directory"), self.menuItemVideoDir)
-		self.menuEntryMusicDir   = getConfigListEntry(_("Music Directory"), self.menuItemMusicDir)
+		self.menuEntryVideoDir = getConfigListEntry(_("Video Directory"), self.menuItemVideoDir)
+		self.menuEntryMusicDir = getConfigListEntry(_("Music Directory"), self.menuItemMusicDir)
 		self.menuEntryPictureDir = getConfigListEntry(_("Picture Directory"), self.menuItemPictureDir)
-		self.menuEntryEnableLog  = getConfigListEntry(_("Enable Logging"), self.menuItemEnableLog)
-		self.menuEntryLogLevel   = getConfigListEntry(_("    - Log Level"), self.menuItemLogLevel)
-		self.menuEntryLogDir     = getConfigListEntry(_("    - Log Directory"), self.menuItemLogDir)
-		self.menuEntryAutoStart  = getConfigListEntry(_("Enable Autostart for DLNA Server"), config.plugins.dlnaserver.autostart)
+		self.menuEntryEnableLog = getConfigListEntry(_("Enable Logging"), self.menuItemEnableLog)
+		self.menuEntryLogLevel = getConfigListEntry(_("    - Log Level"), self.menuItemLogLevel)
+		self.menuEntryLogDir = getConfigListEntry(_("    - Log Directory"), self.menuItemLogDir)
+		self.menuEntryAutoStart = getConfigListEntry(_("Enable Autostart for DLNA Server"), config.plugins.dlnaserver.autostart)
 		self.resetMenuList()
 
 	def resetMenuList(self):
@@ -287,20 +292,21 @@ class DLNAServer(ConfigListScreen, Screen):
 
 	def writeConfigFile(self, serverName=None, videoDir=None, auditDir=None, pictureDir=None, logDir=None, logLevel='error'):
 		configString = ""
+
 		def configDataAppend(origin, key, value):
 			if key.strip() != '' and value.strip() != '':
-				origin += "%s=%s\n" % (key,value)
+				origin += "%s=%s\n" % (key, value)
 			return origin
 		configString = configDataAppend(configString, "friendly_name", serverName)
 		if videoDir is not None and videoDir.strip() != '':
-			configString = configDataAppend(configString, "media_dir", "V,%s"%(videoDir))
+			configString = configDataAppend(configString, "media_dir", "V,%s" % (videoDir))
 		if auditDir is not None and auditDir.strip() != '':
-			configString = configDataAppend(configString, "media_dir", "A,%s"%(auditDir))
+			configString = configDataAppend(configString, "media_dir", "A,%s" % (auditDir))
 		if pictureDir is not None and pictureDir.strip() != '':
-			configString = configDataAppend(configString, "media_dir", "P,%s"%(pictureDir))
+			configString = configDataAppend(configString, "media_dir", "P,%s" % (pictureDir))
 		if logDir is not None and logDir.strip() != '':
 			configString = configDataAppend(configString, "log_dir", logDir)
-			configString = configDataAppend(configString, "log_level", "general,artwork,database,inotify,scanner,metadata,http,ssdp,tivo=%s"%(logLevel))
+			configString = configDataAppend(configString, "log_level", "general,artwork,database,inotify,scanner,metadata,http,ssdp,tivo=%s" % (logLevel))
 		configString = configDataAppend(configString, "port", self.oldConfig.get('port'))
 		configString = configDataAppend(configString, "db_dir", self.oldConfig.get('db_dir'))
 		configString = configDataAppend(configString, "album_art_names", self.oldConfig.get('album_art_names'))
@@ -324,24 +330,28 @@ class DLNAServer(ConfigListScreen, Screen):
 			if line == '' or line[0] == '#':
 				continue
 			try:
-				i   = line.find('=')
-				k,v = line[:i],line[i+1:]
+				i = line.find('=')
+				k, v = line[:i], line[i + 1:]
 				if k == 'media_dir':
 					k += v[0]
-					v  = v[2:]
+					v = v[2:]
 				self.oldConfig[k] = v
-			except : pass
+			except:
+				pass
+
 		def setDefault(key, default):
 			try:
 				value = self.oldConfig.get(key)
 				if value == None or value.strip() == '':
 					self.oldConfig[key] = default
-			except: self.oldConfig[key] = default
-			
+			except:
+				self.oldConfig[key] = default
+
 		try:
 			model = os.popen('cat /proc/stb/info/boxtype').read().strip()
-		except: model = 'My'
-		setDefault('friendly_name', '%s DLNA Server'%(model.upper()))
+		except:
+			model = 'My'
+		setDefault('friendly_name', '%s DLNA Server' % (model.upper()))
 		setDefault('media_dirV', '/media/dlna/Videos')
 		setDefault('media_dirA', '/media/dlna/Musics')
 		setDefault('media_dirP', '/media/dlna/Pictures')
@@ -358,8 +368,10 @@ class DLNAServer(ConfigListScreen, Screen):
 		setDefault('model_number', '1')
 		print "Current Config : ", self.oldConfig
 
+
 def main(session, **kwargs):
 	session.open(DLNAServer)
+
 
 def autostart(reason, **kwargs):
 	if reason == 0:
@@ -381,6 +393,7 @@ def autostart(reason, **kwargs):
 				print "[DLNAServer] stopping ..."
 				os.system(cmd)
 
+
 def Plugins(**kwargs):
- 	return [PluginDescriptor(name="DLNA Server", description="This is dlna server using minidlna.", where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main),
-		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart)]
+ 	return [PluginDescriptor(name="DLNA Server", description="This is dlna server using minidlna.", where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=main),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]

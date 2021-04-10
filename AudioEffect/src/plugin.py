@@ -17,7 +17,7 @@ AUDIOEFFECT_PROC_PATH = {
 }
 
 AUDIOOUT_ENTRY_NAME = {
-	"dac"	:	"Analog Audio"
+	"dac"	: "Analog Audio"
 }
 
 AUDIOEFFECT_DEFAULT = "none"
@@ -42,18 +42,21 @@ if fileExists(AUDIOEFFECT_PROC_PATH["AVL"]) and fileExists(AUDIOEFFECT_PROC_PATH
 if SUPPORT_3D_SURROUND or SUPPORT_AVL:
 	SUPPORT_AUDIOEFFECT = True
 
+
 def getProcValue(procPath):
-	fd = open(procPath,'r')
+	fd = open(procPath, 'r')
 	curValue = fd.read().strip(' ').strip('\n')
 	fd.close()
 #	print "[AudioEffect] get %s from %s" % (curValue, procPath)
 	return curValue
 
+
 def setProcValue(procPath, value):
 #	print "[AudioEffect] set %s to %s" % (value, procPath)
-	fd = open(procPath,'w')
+	fd = open(procPath, 'w')
 	fd.write(value)
 	fd.close()
+
 
 def setConfigValue(procPath, value):
 #	print "[AudioEffect][setConfigValue] try set %s to %s" % (value, procPath)
@@ -62,13 +65,15 @@ def setConfigValue(procPath, value):
 		setProcValue(procPath, value)
 	return 0
 
+
 def getEffectChoices():
-	choices = [ ("none", _("none")) ]
-	if SUPPORT_3D_SURROUND :
-		choices.append( ("3D_Surround", _("3D Surround") ) )
-	if SUPPORT_AVL :
-		choices.append( ("AVL", _("AVL (Automatic Volume Leveler)") ) )
+	choices = [("none", _("none"))]
+	if SUPPORT_3D_SURROUND:
+		choices.append(("3D_Surround", _("3D Surround")))
+	if SUPPORT_AVL:
+		choices.append(("AVL", _("AVL (Automatic Volume Leveler)")))
 	return choices
+
 
 def getAudioOutTypes():
 	if SUPPORT_3D_SURROUND:
@@ -79,26 +84,30 @@ def getAudioOutTypes():
 	for aType in data.split(' '):
 		if aType == "none":
 			continue
-		aTypes.append( aType )
+		aTypes.append(aType)
 	return aTypes
+
 
 if SUPPORT_AUDIOEFFECT:
 	AUDIOOUT_TYPES = getAudioOutTypes()
+
 
 def getSpeakerPosition():
 	choices = []
 	data = getProcValue(AUDIOEFFECT_PROC_PATH["3D_SURROUND_SPEAKER_POSITION_CHOICE"])
 	for choice in data.split(' '):
-		choices.append( (choice, _(choice)) )
+		choices.append((choice, _(choice)))
 	return choices
 
+
 config.plugins.audioeffect = ConfigSubsection()
-config.plugins.audioeffect.effect = ConfigSelection( default = AUDIOEFFECT_DEFAULT, choices = getEffectChoices() )
+config.plugins.audioeffect.effect = ConfigSelection(default=AUDIOEFFECT_DEFAULT, choices=getEffectChoices())
 if SUPPORT_AUDIOEFFECT:
 	for aout in AUDIOOUT_TYPES:
-		setattr(config.plugins.audioeffect, aout, ConfigSelection( default = AUDIOOUT_DEFAULT, choices = [("on", _("On")), ("off", _("Off"))] ) )
+		setattr(config.plugins.audioeffect, aout, ConfigSelection(default=AUDIOOUT_DEFAULT, choices=[("on", _("On")), ("off", _("Off"))]))
 	if SUPPORT_3D_SURROUND_SPEAKER_POSITION:
-		config.plugins.audioeffect.speakerposition = ConfigSelection( default = SPEAKER_POSITION_DEFAULT, choices = getSpeakerPosition() )
+		config.plugins.audioeffect.speakerposition = ConfigSelection(default=SPEAKER_POSITION_DEFAULT, choices=getSpeakerPosition())
+
 
 def setAudioEffectConfigs():
 		if not SUPPORT_AUDIOEFFECT:
@@ -129,13 +138,14 @@ def setAudioEffectConfigs():
 		if SUPPORT_AVL:
 			setConfigValue(AUDIOEFFECT_PROC_PATH["AVL"], _AvlValue)
 		if SUPPORT_3D_SURROUND_SPEAKER_POSITION:
-			if _3DSurroundValue == "none" :
+			if _3DSurroundValue == "none":
 				config.plugins.audioeffect.speakerposition.value = config.plugins.audioeffect.speakerposition.default
 			_3DSpeakerPosition = config.plugins.audioeffect.speakerposition.value
 			setConfigValue(AUDIOEFFECT_PROC_PATH["3D_SURROUND_SPEAKER_POSITION"], _3DSpeakerPosition)
 
+
 class AudioEffect(Screen, ConfigListScreen):
-	skin =  """
+	skin = """
 		<screen position="center,center" size="540,300">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="200,10" size="140,40" alphatest="on" />
@@ -148,7 +158,7 @@ class AudioEffect(Screen, ConfigListScreen):
 		</screen>
 	"""
 
-	def __init__(self, session):		
+	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setTitle(_("Audio Effect Setup"))
 		self.skin = AudioEffect.skin
@@ -160,17 +170,17 @@ class AudioEffect(Screen, ConfigListScreen):
 		self["key_yellow"] = StaticText(_("Default"))
 		self["description"] = StaticText(_("Audio Effect Setup is not supported."))
 
-		self["shortcuts"] = ActionMap(["AudioEffectActions" ],
+		self["shortcuts"] = ActionMap(["AudioEffectActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
 			"red": self.keyCancel,
 			"green": self.keySave,
-			"yellow" : self.keyDefault,
+			"yellow": self.keyDefault,
 		}, -2)
 
 		self.setupList = []
-		ConfigListScreen.__init__(self, self.setupList, session = self.session)
+		ConfigListScreen.__init__(self, self.setupList, session=self.session)
 		self.configEffect = None
 		self.createSetup()
 
@@ -180,7 +190,7 @@ class AudioEffect(Screen, ConfigListScreen):
 		self.setupList = []
 		self.configEffect = getConfigListEntry(_("Effect"), config.plugins.audioeffect.effect)
 		self.setupList.append(self.configEffect)
-		if config.plugins.audioeffect.effect.value != "none" :
+		if config.plugins.audioeffect.effect.value != "none":
 			for aout in AUDIOOUT_TYPES:
 				entryName = AUDIOOUT_ENTRY_NAME.get(aout, aout.upper())
 				self.setupList.append(getConfigListEntry(_(entryName), getattr(config.plugins.audioeffect, aout)))
@@ -230,28 +240,31 @@ class AudioEffect(Screen, ConfigListScreen):
 		def getClassName(C):
 			return C.__class__.__name__
 
-		configName = "<%s>\n"%self["config"].getCurrent()[0]
+		configName = "<%s>\n" % self["config"].getCurrent()[0]
 		currentConfig = self["config"].getCurrent()[1]
 		className = getClassName(currentConfig)
 		text = ""
 		if className == "ConfigSelection":
 			text = configName
 			for choice in currentConfig.choices.choices:
-				if text == configName:	
+				if text == configName:
 					text += choice[1]
 				else:
 					text += ', ' + choice[1]
-		self["description"].setText( _(text) )
+		self["description"].setText(_(text))
+
 
 def main(session, **kwargs):
 	session.open(AudioEffect)
 
+
 def OnSessionStart(session, **kwargs):
 	setAudioEffectConfigs()
+
 
 def Plugins(**kwargs):
 	if SUPPORT_AUDIOEFFECT:
 		return [PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=OnSessionStart),
-				PluginDescriptor(name=_("AudioEffect"), description=_("sets the audio effetcs"), where = PluginDescriptor.WHERE_AUDIOMENU, fnc=main)]
+				PluginDescriptor(name=_("AudioEffect"), description=_("sets the audio effetcs"), where=PluginDescriptor.WHERE_AUDIOMENU, fnc=main)]
 	else:
 		return []

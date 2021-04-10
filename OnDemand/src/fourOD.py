@@ -30,11 +30,13 @@ from Components.Pixmap import Pixmap
 from Tools.LoadPixmap import LoadPixmap
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as os_walk
 
-import time, random
+import time
+import random
 from time import strftime, strptime, mktime
 from datetime import timedelta, date, datetime
 
-import urllib2, re
+import urllib2
+import re
 from bs4 import BeautifulSoup
 import simplejson
 
@@ -42,7 +44,7 @@ import fourOD_token_decoder
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon, RTMP
 
-__plugin__  = "4OD: "
+__plugin__ = "4OD: "
 __version__ = "Version 1.0.2: "
 
 #=================== Default URL's =======================================================
@@ -50,6 +52,8 @@ __version__ = "Version 1.0.2: "
 fourodSearchDefault = u'http://www.channel4.com/search/predictive/?q='
 
 #=========================================================================================
+
+
 def readUrl(target):
 	try:
 		req = urllib2.Request(target)
@@ -61,16 +65,17 @@ def readUrl(target):
 	except:
 		return ''
 
+
 def wgetUrl(target):
 	try:
 		isUK = 0
 		outtxt = ""
 		primaryDNS = str(config.ondemand.PrimaryDNS.value)
-		print __plugin__, __version__,"DNS Set: ", primaryDNS
-		
+		print __plugin__, __version__, "DNS Set: ", primaryDNS
+
 		req = urllib2.Request(target)
 		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-		response = urllib2.urlopen(req)	
+		response = urllib2.urlopen(req)
 
 		# Find out the character set of the returned data
 		charset = GetCharset(response)
@@ -92,17 +97,17 @@ def wgetUrl(target):
 		# If the returned data contains ERROR then geo restriction has applied.
 		# Now attempt to use your proxy DNS to bypass the Geo restriction.
 		if outtxt.find('ERROR') > 0:
-			print __plugin__, __version__,"Non UK Address"
+			print __plugin__, __version__, "Non UK Address"
 			isUK = 1
-							
-			if  primaryDNS == str(config.ondemand.PrimaryDNS.default):
-				print __plugin__, __version__,"Non UK Address: NO DNS Set!! ", primaryDNS
+
+			if primaryDNS == str(config.ondemand.PrimaryDNS.default):
+				print __plugin__, __version__, "Non UK Address: NO DNS Set!! ", primaryDNS
 				return ("NODNS", isUK)
 			else:
 				try:
 					opener = urllib2.build_opener(MyHTTPHandler)
 					old_opener = urllib2._opener
-					urllib2.install_opener (opener)
+					urllib2.install_opener(opener)
 					req = urllib2.Request(target)
 					req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 					response = urllib2.urlopen(req)
@@ -119,30 +124,32 @@ def wgetUrl(target):
 						except:
 							charset = 'latin1'
 
-					outtxt = str(data.decode(charset))			
+					outtxt = str(data.decode(charset))
 					response.close()
-					urllib2.install_opener (old_opener)
+					urllib2.install_opener(old_opener)
 
 				except (Exception) as exception:
-					print __plugin__, __version__,"wgetUrl: Unable to connect to DNS: ", exception
+					print __plugin__, __version__, "wgetUrl: Unable to connect to DNS: ", exception
 					return ("NOCONNECT", isUK)
 
 		# Now return the decoded webpage
 		return (outtxt, isUK)
 
 	except (Exception) as exception:
-		print __plugin__, __version__,"wgetUrl: Exception: ", exception
+		print __plugin__, __version__, "wgetUrl: Exception: ", exception
 		outtxt = str(response.read())
 		response.close()
-		
+
 		# If we managed to read the URL then return data, might have failed on decode.
 		if outtxt:
-			print __plugin__, __version__,"wgetUrl: Exception: outtxt: ", outtxt
+			print __plugin__, __version__, "wgetUrl: Exception: outtxt: ", outtxt
 			return (outtxt, isUK)
 		else:
 			return ("", isUK)
-		
+
 #==============================================================================
+
+
 def GetCharset(response):
 	if u'content-type' in response.info():
 		contentType = response.info()[u'content-type']
@@ -157,8 +164,10 @@ def GetCharset(response):
 			pass
 
 	return None
-        
+
 #==============================================================================
+
+
 class fourODMainMenu(Screen):
 
 	wsize = getDesktop(0).size().width() - 200
@@ -168,7 +177,6 @@ class fourODMainMenu(Screen):
 		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="4OD - Main Menu" >
 			<widget name="fourODMainMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
 		</screen>"""
-
 
 	def __init__(self, session, action, value):
 
@@ -227,7 +235,7 @@ class fourODMainMenu(Screen):
 						osdList.append((_(str(label)), str(categoryName)))
 
 			except (Exception) as exception:
-				print __plugin__, __version__,'StreamsMenu: Error parsing feed: ', exception
+				print __plugin__, __version__, 'StreamsMenu: Error parsing feed: ', exception
 
 			osdList.append((_("Back"), "exit"))
 
@@ -243,7 +251,7 @@ class fourODMainMenu(Screen):
 	def go(self):
 		title = self["fourODMainMenu"].l.getCurrentSelection()[0]
 		category = self["fourODMainMenu"].l.getCurrentSelection()[1]
-		
+
 		if category is "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
@@ -263,7 +271,9 @@ class fourODMainMenu(Screen):
 			for name in files:
 				os_remove(os_path.join(root, name))
 
-###########################################################################	   
+###########################################################################
+
+
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/fourOD.png"
@@ -272,9 +282,9 @@ class StreamsThumb(StreamsThumbCommon):
 		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
-		self.setTitle("4OD Player: Listings for " +self.title)
+		self.setTitle("4OD Player: Listings for " + self.title)
 
-	def setupCallback(self, retval = None):
+	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
 			return
 
@@ -297,13 +307,13 @@ class StreamsThumb(StreamsThumbCommon):
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
 
-	def keyboardCallback(self, callback = None):
+	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("4OD: Search Listings for " +callback)
+			self.setTitle("4OD: Search Listings for " + callback)
 			self.getSearchMediaData(self.mediaList, fourodSearchDefault + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple=True)
 		else:
 			self.close()
 
@@ -318,10 +328,10 @@ class StreamsThumb(StreamsThumbCommon):
 		else:
 			try:
 				(fileUrl, rtmpvar, returnMessage) = self.getRTMPUrl(showID)
-				
+
 				if fileUrl:
-					fileRef = eServiceReference(4097,0,str(fileUrl))
-					fileRef.setName (showName)
+					fileRef = eServiceReference(4097, 0, str(fileUrl))
+					fileRef.setName(showName)
 					lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 					self.session.open(MoviePlayer, fileRef, None, lastservice)
 				else:
@@ -329,9 +339,9 @@ class StreamsThumb(StreamsThumbCommon):
 						self.mediaProblemPopup(returnMessage)
 					else:
 						self.mediaProblemPopup("Problem retreiving the stream URL!")
-					
+
 			except (Exception) as exception:
-				print __plugin__, __version__,'go: Error getting fileUrl: ', exception
+				print __plugin__, __version__, 'go: Error getting fileUrl: ', exception
 
 #==============================================================================
 	def getRTMPUrl(self, showID):
@@ -342,60 +352,60 @@ class StreamsThumb(StreamsThumbCommon):
 			assetUrl = aisUrl % showID
 			(rtmpvar, returnMessage) = self.InitialiseRTMP(assetUrl)
 			if rtmpvar:
-				playUrl = rtmpvar.getPlayUrl()    
+				playUrl = rtmpvar.getPlayUrl()
 
 				return (playUrl, rtmpvar, returnMessage)
 			else:
 				return ("", "", returnMessage)
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getRTMPUrl: Error getting playUrl: ', exception
+			print __plugin__, __version__, 'getRTMPUrl: Error getting playUrl: ', exception
 			return ("", "", "")
 
-#==============================================================================			
+#==============================================================================
 	def InitialiseRTMP(self, assetUrl):
 
 		try:
 			self.urlRoot = u"http://m.channel4.com"
 			streamUri = ""
 			auth = ""
-			
+
 			# Get the stream info
 			(streamUri, auth, returnMessage) = self.GetStreamInfo(assetUrl)
-			
+
 			if streamUri:
 				url = re.search(u'(.*?)mp4:', streamUri).group(1)
 				app = re.search(u'.com/(.*?)mp4:', streamUri).group(1)
 				playPath = re.search(u'(mp4:.*)', streamUri).group(1)
 
-				if "ll."  not in streamUri: 
+				if "ll." not in streamUri:
 					app = app + u"?ovpfv=1.1&" + auth
 				else:
 					playPath += "?" + auth
 
 				swfPlayer = self.GetSwfPlayer()
-				
+
 				port = None
-				
-				rtmpvar =  RTMP(rtmp = streamUri, app = app, swfVfy = swfPlayer, playPath = playPath, pageUrl = self.urlRoot, port = port)
+
+				rtmpvar = RTMP(rtmp=streamUri, app=app, swfVfy=swfPlayer, playPath=playPath, pageUrl=self.urlRoot, port=port)
 				return (rtmpvar, returnMessage)
 			else:
 				return ("", returnMessage)
 		except (Exception) as exception:
-			print __plugin__, __version__,'InitialiseRTMP: Error getting mp4: ', exception
+			print __plugin__, __version__, 'InitialiseRTMP: Error getting mp4: ', exception
 			return ("", "InitialiseRTMP: Error getting mp4")
 
 #==============================================================================
 	def GetStreamInfo(self, assetUrl):
 		maxAttempts = 15
-		
+
 		streamURI = ""
 		auth = ""
-		returnMessage = "Non-UK User!!\n\nUnable to find playable Stream in "+str(maxAttempts)+" attempts!!\n\nPlease try again!"
-		
+		returnMessage = "Non-UK User!!\n\nUnable to find playable Stream in " + str(maxAttempts) + " attempts!!\n\nPlease try again!"
+
 		for attemptNumber in range(0, maxAttempts):
-			(xml, isUK) = wgetUrl( assetUrl )
-			
+			(xml, isUK) = wgetUrl(assetUrl)
+
 			# No DNS set in Settings, exit.NOCONNECT
 			if (xml == "NODNS"):
 				return (streamURI, auth, "Non-UK User!!\n\nYou need to specify a DNS in the OnDemand Settings!!")
@@ -416,7 +426,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 				# If call is from Outside UK then stream URL might need to be altered.
 				if isUK == 1:
-					print __plugin__, __version__,"GetStreamInfo: notUK user: streamURI: ", streamURI, " streamURI[:10]: ", streamURI[:10]
+					print __plugin__, __version__, "GetStreamInfo: notUK user: streamURI: ", streamURI, " streamURI[:10]: ", streamURI[:10]
 					if streamURI[:10] <> "rtmpe://ll":
 						streamURI = ""
 						continue
@@ -429,7 +439,7 @@ class StreamsThumb(StreamsThumbCommon):
 					# No MP4 found, probably HTTP Dynamic Streaming. Stream URI - %s
 					raise exception
 
-				auth =  self.GetAuthentication(uriData)
+				auth = self.GetAuthentication(uriData)
 
 				if auth is None:
 					# If we didn't get the cdn we're looking for then try again
@@ -439,7 +449,7 @@ class StreamsThumb(StreamsThumbCommon):
 				break
 			else:
 				break
-		
+
 		if streamURI:
 			return (streamURI, auth, "")
 		else:
@@ -453,10 +463,10 @@ class StreamsThumb(StreamsThumbCommon):
 		try:
 			decodedToken = fourOD_token_decoder.Decode4odToken(token)
 		except (Exception) as exception:
-			print __plugin__, __version__,'GetAuthentication: Error getting decodedToken: ', exception
+			print __plugin__, __version__, 'GetAuthentication: Error getting decodedToken: ', exception
 			return ("")
 
-		if ( cdn ==  u"ll" ):
+		if (cdn == u"ll"):
 			ip = uriData.find(u'ip')
 			e = uriData.find(u'e')
 
@@ -494,10 +504,10 @@ class StreamsThumb(StreamsThumbCommon):
 		except (Exception) as exception:
 			if jsHtml is not None:
 				msg = "jsHtml:\n\n%s\n\n" % jsHtml
-				print __plugin__, __version__,"GetSwfPlayer: Error getting player: ", msg
+				print __plugin__, __version__, "GetSwfPlayer: Error getting player: ", msg
 
 			# Unable to determine swfPlayer URL. Using default:
-			print __plugin__, __version__,"GetSwfPlayer: Unable to determine swfPlayer URL. Using default: ", exception
+			print __plugin__, __version__, "GetSwfPlayer: Unable to determine swfPlayer URL. Using default: ", exception
 			swfPlayer = self.swfDefault
 
 		return swfPlayer
@@ -566,7 +576,7 @@ class StreamsThumb(StreamsThumbCommon):
 			if data:
 				# Use BeautifulSoup to parse the returned data
 				soup = BeautifulSoup(data)
-				
+
 				# I'm afraid that each episode does not have it's own description.
 				summary = soup.find("div", id="aboutTheShow").findAll('p')
 				sum1 = str(summary[0])
@@ -584,7 +594,7 @@ class StreamsThumb(StreamsThumbCommon):
 					try:
 						assetUrl = entry['data-preselectasseturl']
 						match = re.search(u'http://ais.channel4.com/asset/(\d+)', assetUrl)
-						stream= str(match.group(1))
+						stream = str(match.group(1))
 					except (Exception) as exception:
 						stream = ""
 
@@ -602,15 +612,15 @@ class StreamsThumb(StreamsThumbCommon):
 							try:
 								timeString = p.text.replace('\r\n', '').replace('Sept', 'Sep').replace('July', 'Jul').replace('June', 'Jun')
 								timeString = re.sub(' +', ' ', timeString)
-								time_split = timeString.rsplit('m ',1)
+								time_split = timeString.rsplit('m ', 1)
 								lastDate = date.fromtimestamp(mktime(strptime(time_split[1].strip(), u"%a %d %b %Y")))
 								premieredDate = lastDate.strftime(u"%a %b %d %Y")
-								date1 = _("Added:")+" "+str(premieredDate)
+								date1 = _("Added:") + " " + str(premieredDate)
 								break
 							except (Exception) as exception:
 								date1 = ""
 					except (Exception) as exception:
-						print __plugin__, __version__,'getShowMediaData: name error: ', exception
+						print __plugin__, __version__, 'getShowMediaData: name error: ', exception
 						date1 = ""
 
 					try:
@@ -619,27 +629,27 @@ class StreamsThumb(StreamsThumbCommon):
 						name_tmp1 = checkUnicode(str(name_tmp1))
 						name = name_tmp1.strip()
 					except (Exception) as exception:
-						print __plugin__, __version__,'getShowMediaData: name error: ', exception
+						print __plugin__, __version__, 'getShowMediaData: name error: ', exception
 						name = ""
-					
+
 					try:
 						pattern = u'\s*Channel\s4\s*\((.*?)\)'
 						for p in pList:
 							try:
-								durationMatch = re.search( pattern, p.text, re.DOTALL | re.IGNORECASE )
-								duration = _("Duration:")+" "+str(durationMatch.group(1))
+								durationMatch = re.search(pattern, p.text, re.DOTALL | re.IGNORECASE)
+								duration = _("Duration:") + " " + str(durationMatch.group(1))
 								break
 							except (Exception) as exception:
 								duration = ""
-					                    
+
 					except (Exception) as exception:
-						print __plugin__, __version__,'getShowMediaData: name error: ', exception
+						print __plugin__, __version__, 'getShowMediaData: name error: ', exception
 						duration = ""
 
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getShowMediaData: Error parsing feed: ', exception
+			print __plugin__, __version__, 'getShowMediaData: Error parsing feed: ', exception
 
 #==============================================================================
 	def getCatsMediaData(self, weekList, category):
@@ -659,13 +669,13 @@ class StreamsThumb(StreamsThumbCommon):
 		    {    "title":"The Function Room",
 			 "url":"/4od/the-function-room",
 			 "img":"http://cache.channel4.com/assets/programmes/images/the-function-room/7d5d701c-f7f8-4357-a128-67cac7896f95_200x113.jpg"
-		    },...        
+		    },...
 		"""
 
 		# You can specify the order and page number but I'm just hard-coding for now.
 		page = '1'
 		order = u'/atoz'
-		
+
 		# Need to loop here until last page is reached or 500 entries have been returned.
 		self.nextUrl = self.url % (category, order, u'/page-%s' % page)
 
@@ -678,7 +688,7 @@ class StreamsThumb(StreamsThumbCommon):
 				# Use JSON to parse the returned data
 				jsonData = simplejson.loads(jsonText)
 
-				entries = jsonData[u'results'] 
+				entries = jsonData[u'results']
 
 				for entry in entries:
 
@@ -722,10 +732,10 @@ class StreamsThumb(StreamsThumbCommon):
 					#	date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 					#	date1 = _("Added:")+" "+str(date_tmp)
 
-					weekList.append((date1, name, short, channel, stream, icon, duration, False))				
+					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getCatsMediaData: Error parsing feed: ', exception
+			print __plugin__, __version__, 'getCatsMediaData: Error parsing feed: ', exception
 
 #==============================================================================
 	def getSearchMediaData(self, weekList, searchUrl):
@@ -741,7 +751,7 @@ class StreamsThumb(StreamsThumbCommon):
 		try:
 			# Read the Category URL
 			(jsonText, isUK) = wgetUrl(searchUrl)
-			
+
 			# Only want to try and parse if stream data is returned.
 			if jsonText:
 				# We need to tidy the returned search results, format not json friendly
@@ -754,7 +764,7 @@ class StreamsThumb(StreamsThumbCommon):
 					entries = jsonData['results']
 				else:
 					# Single entry, put in a list
-					entries = [ jsonData['results'] ] 
+					entries = [jsonData['results']]
 
 				# Loop through each of the search result entries.
 				for entry in entries:
@@ -765,7 +775,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 					try:
 						stream_tmp = str(unicode(entry[u'siteUrl']))
-						stream_split = stream_tmp.rsplit('/',2)
+						stream_split = stream_tmp.rsplit('/', 2)
 						stream = str(stream_split[1])
 					except (Exception) as exception:
 						stream = ""
@@ -791,19 +801,23 @@ class StreamsThumb(StreamsThumbCommon):
 					except (Exception) as exception:
 						short = ""
 
-					weekList.append((date1, name, short, channel, stream, icon, duration, False))		
+					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getSearchMediaData: Error parsing feed: ', exception
-			
+			print __plugin__, __version__, 'getSearchMediaData: Error parsing feed: ', exception
+
 #==============================================================================
+
+
 def checkUnicode(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
 
 #==============================================================================
+
+
 def getJsonReady(value, **kwargs):
 	stringValue = str(value)
 	stringValue = stringValue.replace("(", "")
@@ -811,8 +825,10 @@ def getJsonReady(value, **kwargs):
 	stringValue = stringValue.replace(";", "")
 	stringValue = stringValue.replace("\\'s", "'s")
 	return stringValue
-	
+
 #==========================================================================
+
+
 def remove_extra_spaces(data):
 	p = re.compile(r'\s+')
 	return p.sub(' ', data)

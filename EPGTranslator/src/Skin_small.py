@@ -2,6 +2,7 @@
 # Only contains "class" data.  No instance data
 #
 
+
 class MySkinData:
 
 # class translatorConfig bits
@@ -42,7 +43,7 @@ class MySkinData:
         </screen>
         """
     tMyes = "255"
-    tMno  = "515"
+    tMno = "515"
 
 
 MySD = MySkinData()

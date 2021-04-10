@@ -34,14 +34,17 @@ from datetime import date
 from time import strftime
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as os_walk
 
-import urllib2, re
+import urllib2
+import re
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
-__plugin__  = "ITV Player: "
+__plugin__ = "ITV Player: "
 __version__ = "Version 1.0.2: "
 
 #===================================================================================
+
+
 class ITVplayer(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
@@ -68,7 +71,7 @@ class ITVplayer(Screen):
 		{
 			"ok": self.go,
 			"cancel": self.cancel
-		}, -1)	  
+		}, -1)
 
 	def go(self):
 		returnValue = self["ITVMenu"].l.getCurrentSelection()[1]
@@ -83,7 +86,7 @@ class ITVplayer(Screen):
 
 	def cancel(self):
 		self.removeFiles(self.imagedir)
-		self.close(None)		
+		self.close(None)
 
 	def removeFiles(self, targetdir):
 		for root, dirs, files in os_walk(targetdir):
@@ -91,13 +94,17 @@ class ITVplayer(Screen):
 				os_remove(os_path.join(root, name))
 
 #===================================================================================
+
+
 def checkUnicode(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
 
 #===================================================================================
+
+
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/itvDefault.png"
@@ -106,9 +113,9 @@ class StreamsThumb(StreamsThumbCommon):
 		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
-		self.setTitle("ITV Player: Listings for " +self.title)
+		self.setTitle("ITV Player: Listings for " + self.title)
 
-	def setupCallback(self, retval = None):
+	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
 			return
 
@@ -124,24 +131,24 @@ class StreamsThumb(StreamsThumbCommon):
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
 
-		elif  retval == 'search':
+		elif retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
 
-	def keyboardCallback(self, callback = None):
+	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("ITV Player: Search Listings for " +callback)
+			self.setTitle("ITV Player: Search Listings for " + callback)
 			self.getSearchMediaData(self.mediaList, self.url, callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple=True)
 		else:
 			self.close()
 
 	def go(self):
 		showID = self["list"].l.getCurrentSelection()[4]
 		showName = self["list"].l.getCurrentSelection()[1]
-		
+
 		if self.cmd == "all_shows" or self.cmd == "search":
 			self.session.open(StreamsThumb, "one_show", showName, showID)
 		else:
@@ -149,15 +156,15 @@ class StreamsThumb(StreamsThumbCommon):
 			(fileUrl, retMessage) = self.findPlayUrl(showID)
 
 			if fileUrl:
-				fileRef = eServiceReference(4097,0,fileUrl)
-				fileRef.setData(2,10240*1024)
+				fileRef = eServiceReference(4097, 0, fileUrl)
+				fileRef.setData(2, 10240 * 1024)
 				fileRef.setName(showName)
 				self.session.open(MoviePlayer, fileRef)
 			else:
 				if retMessage:
-					self.mediaProblemPopup(retMessage+str(showName))
+					self.mediaProblemPopup(retMessage + str(showName))
 				else:
-					self.mediaProblemPopup("Sorry, unable to find a playable stream for "+str(showName))
+					self.mediaProblemPopup("Sorry, unable to find a playable stream for " + str(showName))
 
 #===================================================================================
 	def getMediaData(self, weekList, url):
@@ -194,8 +201,8 @@ class StreamsThumb(StreamsThumbCommon):
 				day = int(date_tmp[8:10])
 				oldDate = date(int(year), int(month), int(day)) # year, month, day
 				dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-				newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16]
-				date1 = _("Last Updated:")+" "+str(newDate)
+				newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " + date_tmp[11:16]
+				date1 = _("Last Updated:") + " " + str(newDate)
 
 				name = checkUnicode(name_tmp)
 				short = "The current list of episodes stored for " + str(name)
@@ -203,12 +210,12 @@ class StreamsThumb(StreamsThumbCommon):
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getMediaData: Error getting Media info: ', exception
+			print __plugin__, __version__, 'getMediaData: Error getting Media info: ', exception
 
 #===================================================================================
 	def getShowMediaData(self, weekList, progID):
 		url = "http://www.itv.com/_app/Dynamic/CatchUpData.ashx?ViewType=1&Filter=" + progID + "&moduleID=115107"
-		
+
 		short = ''
 		name = ''
 		date1 = ''
@@ -221,13 +228,13 @@ class StreamsThumb(StreamsThumbCommon):
 		try:
 			# Parse the HTML with lxml
 			parser = etree.HTMLParser(encoding='utf-8')
-			tree   = etree.parse(url, parser)
+			tree = etree.parse(url, parser)
 
 			for elem in tree.xpath('//div[contains(@class,"listItem")]//div'):
 				#print elem.tag, elem.attrib, elem.text
 				if elem.attrib.get('class') == "floatLeft":
 					show_url = str(elem[0].attrib.get('href'))
-					show_split = show_url.rsplit('=',1)
+					show_split = show_url.rsplit('=', 1)
 					show = str(show_split[1])
 
 					# Only set the Icon if they are enabled
@@ -241,7 +248,7 @@ class StreamsThumb(StreamsThumbCommon):
 				if elem.attrib.get('class') == "content":
 					contentSet = True
 					name_tmp = str(elem[0][0].text)
-					date1 = _("Added: ")+str(elem[1].text)
+					date1 = _("Added: ") + str(elem[1].text)
 					short_tmp = str(elem[2].text)
 					dur_tmp = str(elem[3][0].text)
 					duration = dur_tmp.strip()
@@ -254,7 +261,7 @@ class StreamsThumb(StreamsThumbCommon):
 					contentSet = False
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getCatsMediaData: Error getting Media info: ', exception
+			print __plugin__, __version__, 'getCatsMediaData: Error getting Media info: ', exception
 
 #===================================================================================
 	def getSearchMediaData(self, weekList, url, query):
@@ -278,7 +285,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 				name_tmp = str(elem[1].text)
 				name = checkUnicode(name_tmp)
-				
+
 				# Only output the names that match the search query
 				if re.search(query, name, re.IGNORECASE):
 					stream = str(elem[0].text)
@@ -297,18 +304,18 @@ class StreamsThumb(StreamsThumbCommon):
 					day = int(date_tmp[8:10])
 					oldDate = date(int(year), int(month), int(day)) # year, month, day
 					dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-					newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " +date_tmp[11:16]
-					date1 = _("Added: ")+str(newDate)
+					newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " + date_tmp[11:16]
+					date1 = _("Added: ") + str(newDate)
 
 					short = "The current list of episodes stored for " + str(name)
 
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getSearchMediaData: Error getting Media info: ', exception
+			print __plugin__, __version__, 'getSearchMediaData: Error getting Media info: ', exception
 
 #===================================================================================
-	
+
 	def findPlayUrl(self, url):
 
 		fileUrl = ""
@@ -328,7 +335,7 @@ class StreamsThumb(StreamsThumbCommon):
 			if html:
 				# Parse the XML with LXML
 				parser = etree.XMLParser(encoding='utf-8')
-				tree   = etree.fromstring(html, parser)
+				tree = etree.fromstring(html, parser)
 
 				# Get the rtmpe stream URL
 				rtmp_list = tree.xpath("//VideoEntries//MediaFiles/@base")
@@ -339,7 +346,7 @@ class StreamsThumb(StreamsThumbCommon):
 					streamUrl = str(elem[0].text)
 					bitRate = elem.attrib.get("bitrate")
 					quality = int(bitRate) / 1000
-					
+
 					if quality == prefQuality:
 						prefStream = streamUrl
 						fileUrl = rtmp + " swfurl=http://www.itv.com/mercury/Mercury_VideoPlayer.swf playpath=" + prefStream + " swfvfy=true"
@@ -351,7 +358,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 			# If we have found a stream then return it.
 			if fileUrl:
-				return (fileUrl,"")
+				return (fileUrl, "")
 			else:
 				if retMessage:
 					return ("", retMessage)
@@ -359,7 +366,7 @@ class StreamsThumb(StreamsThumbCommon):
 					return ("", "Unable to find a playable stream! Could not play ")
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'findPlayUrl: Error getting URLs: ', exception
+			print __plugin__, __version__, 'findPlayUrl: Error getting URLs: ', exception
 			return ("", "findPlayUrl: Error getting URLs! Could not play ")
 
 #========== Retrieve the webpage data ==============================================
@@ -389,58 +396,58 @@ class StreamsThumb(StreamsThumbCommon):
 			</tem:GetPlaylist>
 		  </SOAP-ENV:Body>
 		</SOAP-ENV:Envelope>
-		"""%episodeID
+		""" % episodeID
 
 		url = 'http://mercury.itv.com/PlaylistService.svc'
 		htmldoc = ""
 		primaryDNS = str(config.ondemand.PrimaryDNS.value)
-		print __plugin__, __version__,"DNS Set: ", primaryDNS
-		print __plugin__, __version__,"Default DNS Set: ", str(config.ondemand.PrimaryDNS.default)
+		print __plugin__, __version__, "DNS Set: ", primaryDNS
+		print __plugin__, __version__, "Default DNS Set: ", str(config.ondemand.PrimaryDNS.default)
 
 		try:
 			req = urllib2.Request(url, soapMessage)
-			req.add_header("Host","mercury.itv.com")
-			req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
-			req.add_header("Content-type","text/xml; charset=\"UTF-8\"")
-			req.add_header("Content-length","%d" % len(soapMessage))
-			req.add_header("SOAPAction","http://tempuri.org/PlaylistService/GetPlaylist")	 
-			response = urllib2.urlopen(req)	  
+			req.add_header("Host", "mercury.itv.com")
+			req.add_header("Referer", "http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
+			req.add_header("Content-type", "text/xml; charset=\"UTF-8\"")
+			req.add_header("Content-length", "%d" % len(soapMessage))
+			req.add_header("SOAPAction", "http://tempuri.org/PlaylistService/GetPlaylist")
+			response = urllib2.urlopen(req)
 			htmldoc = str(response.read())
 			response.close()
 		except urllib2.HTTPError, exception:
 			exResp = str(exception.read())
 
 			if 'InvalidGeoRegion' in exResp:
-				print __plugin__, __version__,"Non UK Address!!"
-				
-				if  primaryDNS == str(config.ondemand.PrimaryDNS.default):
-					print __plugin__, __version__,"Non UK Address: NO DNS Set!! ", primaryDNS
+				print __plugin__, __version__, "Non UK Address!!"
+
+				if primaryDNS == str(config.ondemand.PrimaryDNS.default):
+					print __plugin__, __version__, "Non UK Address: NO DNS Set!! ", primaryDNS
 					return ("", "Non-UK IP Address and no DNS set in OnDemand Settings! Not able to play ")
 				else:
 					try:
 						opener = urllib2.build_opener(MyHTTPHandler)
 						old_opener = urllib2._opener
-						urllib2.install_opener (opener)
+						urllib2.install_opener(opener)
 						req = urllib2.Request(url, soapMessage)
-						req.add_header("Host","mercury.itv.com")
-						req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
-						req.add_header("Content-type","text/xml; charset=\"UTF-8\"")
-						req.add_header("Content-length","%d" % len(soapMessage))
-						req.add_header("SOAPAction","http://tempuri.org/PlaylistService/GetPlaylist")	 
-						response = urllib2.urlopen(req)	  
+						req.add_header("Host", "mercury.itv.com")
+						req.add_header("Referer", "http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
+						req.add_header("Content-type", "text/xml; charset=\"UTF-8\"")
+						req.add_header("Content-length", "%d" % len(soapMessage))
+						req.add_header("SOAPAction", "http://tempuri.org/PlaylistService/GetPlaylist")
+						response = urllib2.urlopen(req)
 						htmldoc = str(response.read())
 						response.close()
-						urllib2.install_opener (old_opener)
+						urllib2.install_opener(old_opener)
 
 					except (Exception) as exception:
-						print __plugin__, __version__,"wgetUrl: Unable to connect to DNS: ", exception
-						return ("", "Could not connect to "+primaryDNS+", make sure your subscription is valid! Not able to play ")
+						print __plugin__, __version__, "wgetUrl: Unable to connect to DNS: ", exception
+						return ("", "Could not connect to " + primaryDNS + ", make sure your subscription is valid! Not able to play ")
 			else:
-				print __plugin__, __version__,"HTTPError: Error retrieving stream: ", exResp
+				print __plugin__, __version__, "HTTPError: Error retrieving stream: ", exResp
 				return ("", "Could not retrieve a playable stream for ")
 
 		except (Exception) as exception2:
-			print __plugin__, __version__,"wgetUrl: Error calling urllib2: ", exception2
+			print __plugin__, __version__, "wgetUrl: Error calling urllib2: ", exception2
 			return ("", "Could not retrieve a playable stream for ")
-		
+
 		return (htmldoc, "")

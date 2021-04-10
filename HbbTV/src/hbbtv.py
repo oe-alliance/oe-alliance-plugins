@@ -2,16 +2,19 @@ from Screens.Screen import Screen
 
 from enigma import eTimer, fbClass, eRCInput
 
-import struct, vbcfg
+import struct
+import vbcfg
 
 from __init__ import _
 from vbipc import VBController
+
 
 class HbbTVWindow(Screen):
 	skin = """
 		<screen name="HbbTVWindow" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder" title="HbbTV Plugin">
 		</screen>
 		"""
+
 	def __init__(self, session, url=None, app_info=None):
 		vbcfg.g_position = vbcfg.getPosition()
 		fbClass.getInstance().lock()
@@ -95,4 +98,3 @@ class HbbTVWindow(Screen):
 
 		vbcfg.LOG("Stop HbbTV")
 		self.close()
-

@@ -3,7 +3,7 @@
 """
 tmdbsimple.people
 ~~~~~~~~~~~~~~~~~
-This module implements the People, Credits, and Jobs functionality 
+This module implements the People, Credits, and Jobs functionality
 of tmdbsimple.
 
 Created by Celia Oakley on 2013-10-31.
@@ -13,6 +13,7 @@ Created by Celia Oakley on 2013-10-31.
 """
 
 from .base import TMDB
+
 
 class People(TMDB):
     """
@@ -91,8 +92,8 @@ class People(TMDB):
         """
         Get the combined (movie and TV) credits for a specific person id.
 
-        To get the expanded details for each TV record, call the /credit method 
-        with the provided credit_id. This will provide details about which 
+        To get the expanded details for each TV record, call the /credit method
+        with the provided credit_id. This will provide details about which
         episode and/or season the credit is for.
 
         Args:
@@ -138,9 +139,9 @@ class People(TMDB):
         """
         Get the changes for a specific person id.
 
-        Changes are grouped by key, and ordered by date in descending order. 
-        By default, only the last 24 hours of changes are returned. The maximum 
-        number of days that can be returned in a single request is 14. The 
+        Changes are grouped by key, and ordered by date in descending order.
+        By default, only the last 24 hours of changes are returned. The maximum
+        number of days that can be returned in a single request is 14. The
         language is present on fields that are translatable.
 
         Args:
@@ -158,7 +159,7 @@ class People(TMDB):
 
     def popular(self, **kwargs):
         """
-        Get the list of popular people on The Movie Database. This list 
+        Get the list of popular people on The Movie Database. This list
         refreshes every day.
 
         Args:
@@ -186,6 +187,7 @@ class People(TMDB):
         self._set_attrs_to_values(response)
         return response
 
+
 class Credits(TMDB):
     """
     Credits functionality.
@@ -203,15 +205,15 @@ class Credits(TMDB):
 
     def info(self, **kwargs):
         """
-        Get the detailed information about a particular credit record. This is 
-        currently only supported with the new credit model found in TV. These 
-        ids can be found from any TV credit response as well as the tv_credits 
+        Get the detailed information about a particular credit record. This is
+        currently only supported with the new credit model found in TV. These
+        ids can be found from any TV credit response as well as the tv_credits
         and combined_credits methods for people.
 
-        The episodes object returns a list of episodes and are generally going 
-        to be guest stars. The season array will return a list of season 
-        numbers.  Season credits are credits that were marked with the 
-        "add to every season" option in the editing interface and are 
+        The episodes object returns a list of episodes and are generally going
+        to be guest stars. The season array will return a list of season
+        numbers.  Season credits are credits that were marked with the
+        "add to every season" option in the editing interface and are
         assumed to be "season regulars".
 
         Args:
@@ -225,6 +227,7 @@ class Credits(TMDB):
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
+
 
 class Jobs(TMDB):
     """
@@ -249,4 +252,3 @@ class Jobs(TMDB):
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
-        

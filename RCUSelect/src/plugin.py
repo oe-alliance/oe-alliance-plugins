@@ -15,6 +15,7 @@ from boxbranding import getImageDistro
 import os
 import os.path
 
+
 class RCUSelect(Screen):
 	skin = """
 	<screen name="Menusimple" position="center,center" size="600,475" title="" >
@@ -22,14 +23,14 @@ class RCUSelect(Screen):
 	<widget name="info" position="75,5" zPosition="4" size="330,340" font="Regular;18" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" />
 	<ePixmap name="red"    position="20,425"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 	<ePixmap name="green"  position="190,425" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-	<widget name="key_red" position="20,425" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
-	<widget name="key_green" position="190,425" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
+	<widget name="key_red" position="20,425" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_green" position="190,425" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 	</screen>"""
 
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		self.session = session
 		Screen.__init__(self, session)
-		self.skinName = "RCUSelect"                 
+		self.skinName = "RCUSelect"
 		self.index = 0
 		self.rcuval = []
 		self.rcuvalOSD = []
@@ -42,7 +43,7 @@ class RCUSelect(Screen):
 		}, -1)
 		self["key_green"] = Button(_("Apply"))
 		self["key_red"] = Button(_("Cancel"))
-		
+
 		self.testlist = []
 		self["info"] = Label()
 		self["list"] = MenuList(self.rcuvalOSD)
@@ -68,14 +69,16 @@ class RCUSelect(Screen):
 
 	def MakeKeymapBckUp(self):
 		filename = '/usr/lib/enigma2/python/Plugins/Extensions/RCUSelect/conf/keymap.orig.xml'
-		cmd ='cp -f /usr/share/enigma2/keymap.xml ' + filename + ' &'
+		cmd = 'cp -f /usr/share/enigma2/keymap.xml ' + filename + ' &'
 		if not os.path.exists(filename):
 			os.system(cmd)
 
 	def SetOSDList(self):
 		boxime = HardwareInfo().get_device_name()
-		if boxime == 'wetekplay2': choice = 'WeTek Play2 RCU'
-		if boxime == 'wetekplay': choice = 'WeTek Play Enigma2 RCU'
+		if boxime == 'wetekplay2':
+			choice = 'WeTek Play2 RCU'
+		if boxime == 'wetekplay':
+			choice = 'WeTek Play Enigma2 RCU'
 		try:
 			choice = open("/etc/amremote/.choice", "r").read()
 		except IOError:
@@ -90,7 +93,7 @@ class RCUSelect(Screen):
 
 	def action(self):
 		from Screens.MessageBox import MessageBox
-		self.session.openWithCallback(self.confirm, MessageBox, _("Are you sure?"), MessageBox.TYPE_YESNO, timeout = 15, default = False)
+		self.session.openWithCallback(self.confirm, MessageBox, _("Are you sure?"), MessageBox.TYPE_YESNO, timeout=15, default=False)
 
 	def confirm(self, confirmed):
 		if not confirmed:
@@ -137,8 +140,9 @@ class RCUSelect(Screen):
 				if boxime == 'wetekplay2':
 					fin = file('/etc/amremote/wetek.conf')
 					fout = open('/etc/amremote/wetek_tmp.conf', 'w')
-					for line in fin :
-						if 'work_mode' in line: line = 'work_mode  	= 0\n'
+					for line in fin:
+						if 'work_mode' in line:
+							line = 'work_mode  	= 0\n'
 						fout.write(line)
 					fout.close()
 					os.system('mv -f /etc/amremote/wetek_tmp.conf /etc/amremote/wetek.conf &')
@@ -162,20 +166,23 @@ class RCUSelect(Screen):
 	def cancel(self):
 		self.close()
 
+
 def startConfig(session, **kwargs):
         session.open(RCUSelect)
+
 
 def system(menuid):
 	if menuid == "system":
 		return [(_("RCU Select"), startConfig, "RCU Select", None)]
 	else:
 		return []
-        
+
+
 def Plugins(**kwargs):
 	boxime = HardwareInfo().get_device_name()
-	if boxime == 'wetekplay' or boxime == 'wetekplayplus' or boxime == 'wetekplay2' or boxime == 'wetekplay2s' :
+	if boxime == 'wetekplay' or boxime == 'wetekplayplus' or boxime == 'wetekplay2' or boxime == 'wetekplay2s':
 		return \
-			[PluginDescriptor(name=_("RCU Select"), where = PluginDescriptor.WHERE_MENU, fnc=system),
+			[PluginDescriptor(name=_("RCU Select"), where=PluginDescriptor.WHERE_MENU, fnc=system),
 			]
 	else:
 		return []

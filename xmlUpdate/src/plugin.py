@@ -13,6 +13,7 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 
+
 class xmlUpdate(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -20,13 +21,13 @@ class xmlUpdate(ConfigListScreen, Screen):
 		Screen.setTitle(self, self.setup_title)
 		self.skinName = ["xmlUpdate", "Setup"]
 		self.session = session
-		ConfigListScreen.__init__(self, [], session = session)
+		ConfigListScreen.__init__(self, [], session=session)
 
 		self.url = "https://raw.githubusercontent.com/oe-alliance/oe-alliance-tuxbox-common/master/src/%s.xml"
 		self.source = ConfigSelection(default="OE-Alliance", choices=[("OE-Alliance", _("OE-Alliance"))])
 		self.DVBtype = ConfigSelection(default="satellites", choices=[("satellites", _("satellite")), ("cables", _("cable")), ("terrestrial", _("terrestrial"))])
 		self.folder = ConfigSelection(default="/etc/tuxbox", choices=[("/etc/tuxbox", _("/etc/tuxbox (default)")), ("/etc/enigma2", _("/etc/enigma2"))])
-		
+
 		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"cancel": self.keyCancel,
@@ -43,7 +44,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 		self["key_green"] = StaticText(_("Fetch"))
 
 		self["description"] = Label("")
-		
+
 		self.createSetup()
 
 		if not self.selectionChanged in self["config"].onSelectionChanged:
@@ -93,11 +94,11 @@ class xmlUpdate(ConfigListScreen, Screen):
 			if int(response.getcode()) == 200:
 				return response.read()
 		except urllib2.HTTPError, err:
-			print '[xmlUpdate][fetchURL] ERROR:',err
+			print '[xmlUpdate][fetchURL] ERROR:', err
 		except urllib2.URLError, err:
-			print '[xmlUpdate][fetchURL] ERROR:',err.reason[0]
+			print '[xmlUpdate][fetchURL] ERROR:', err.reason[0]
 		except urllib2, err:
-			print '[xmlUpdate][fetchURL] ERROR:',err
+			print '[xmlUpdate][fetchURL] ERROR:', err
 		except:
 			import sys
 			print '[xmlUpdate][fetchURL] undefined error', sys.exc_info()[0]
@@ -118,15 +119,18 @@ class xmlUpdate(ConfigListScreen, Screen):
 		if answer:
 			self.session.open(TryQuitMainloop, 3)
 
+
 def xmlUpdateStart(menuid, **kwargs):
 	if menuid == "scan":
 		return [(_("XML update"), xmlUpdateMain, "xmlUpdate", 70)]
 	return []
 
+
 def xmlUpdateMain(session, **kwargs):
 	session.open(xmlUpdate)
 
+
 def Plugins(**kwargs):
 	pList = []
-	pList.append( PluginDescriptor(name=_("XML update"), description="For undating transponder xml files", where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=xmlUpdateStart) )
+	pList.append(PluginDescriptor(name=_("XML update"), description="For undating transponder xml files", where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=xmlUpdateStart))
 	return pList
