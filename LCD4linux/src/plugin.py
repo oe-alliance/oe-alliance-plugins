@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-#
+# -*- coding: utf-8 -*-#
 #
 #  LCD4linux - Pearl DPF LCD Display, Samsung SPF-Line, Grautec-TFT, WLAN-LCDs, internes LCD über Skin
 #
