@@ -8509,7 +8509,7 @@ class TVJetztView(Screen):
         f = open(self.servicefile, 'r')
         lines = f.readlines()
         f.close()
-        ordertext = [ '"%s": %d, ' % (line.partition(' ')[0], i) for i, line in enumerate(lines) ]
+        ordertext = ['"%s": %d, ' % (line.partition(' ')[0], i) for i, line in enumerate(lines)]
         self.order = '{' + str(''.join(ordertext)) + '}'
         if self.standalone == True:
             self.movie_stop = config.usage.on_movie_stop.value
@@ -20773,7 +20773,7 @@ class makeServiceFile(Screen):
             info = serviceHandler.info(bouquet_root)
             if info:
                 bouquets.append((info.getName(bouquet_root), bouquet_root))
-        entrys = [ (x[0], x[1]) for x in bouquets ]
+        entrys = [(x[0], x[1]) for x in bouquets]
         self['list'].l.setList(entrys)
         try:
             if config.plugins.tvspielfilm.font.value == 'yes':
@@ -20794,7 +20794,7 @@ class makeServiceFile(Screen):
                 slist = ServiceList(bouquet, validate_commands=False)
                 services = slist.getServicesAsList(format='S')
                 search = ['IBDCTSERNX']
-                search.extend([ (service, 0, -1) for service in services ])
+                search.extend([(service, 0, -1) for service in services])
                 self.epgcache = eEPGCache.getInstance()
                 events = self.epgcache.lookupEvent(search)
                 eventlist = []
@@ -20808,7 +20808,7 @@ class makeServiceFile(Screen):
                 slist = ServiceList(bouquet, validate_commands=False)
                 services = slist.getServicesAsList(format='S')
                 search = ['IBDCTSERNX']
-                search.extend([ (service, 0, -1) for service in services ])
+                search.extend([(service, 0, -1) for service in services])
                 self.epgcache = eEPGCache.getInstance()
                 events = self.epgcache.lookupEvent(search)
                 eventlist = []

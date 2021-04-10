@@ -421,7 +421,7 @@ class StreamsThumb(StreamsThumbCommon):
 					try:
 						opener = urllib2.build_opener(MyHTTPHandler)
 						old_opener = urllib2._opener
-						urllib2.install_opener (opener)
+						urllib2.install_opener(opener)
 						req = urllib2.Request(url, soapMessage)
 						req.add_header("Host","mercury.itv.com")
 						req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
@@ -431,7 +431,7 @@ class StreamsThumb(StreamsThumbCommon):
 						response = urllib2.urlopen(req)	  
 						htmldoc = str(response.read())
 						response.close()
-						urllib2.install_opener (old_opener)
+						urllib2.install_opener(old_opener)
 
 					except (Exception) as exception:
 						print __plugin__, __version__,"wgetUrl: Unable to connect to DNS: ", exception

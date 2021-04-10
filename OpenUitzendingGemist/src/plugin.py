@@ -41,7 +41,7 @@ config.plugins.OpenUitzendingGemist.RTL = ConfigBoolean(default=True)
 config.plugins.OpenUitzendingGemist.SBS = ConfigBoolean(default=True)
 config.plugins.OpenUitzendingGemist.RADIO = ConfigBoolean(default=True)
 config.plugins.OpenUitzendingGemist.INETTV = ConfigBoolean(default=True)
-config.plugins.OpenUitzendingGemist.ListFontSize = ConfigInteger(default=18, limits=(18, 36) )
+config.plugins.OpenUitzendingGemist.ListFontSize = ConfigInteger(default=18, limits=(18, 36))
 
 def wgetUrl(target, refer='', cookie=''):
 	req = Request(target)
@@ -83,7 +83,7 @@ def Csplit(data, string, number=None):
 	return data
 
 def MPanelEntryComponent(channel, text, png):
-	res = [ text ]
+	res = [text]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 200, 15, 800, 100, 0, RT_HALIGN_LEFT|RT_WRAP|RT_VALIGN_TOP, text))
 	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 5, 150, 150, png))
 	return res
@@ -169,7 +169,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.returning = False
 		self.state = self.STATE_PLAYING
 		self.lastseekstate = self.STATE_PLAYING
-		self.onPlayStateChanged = [ ]
+		self.onPlayStateChanged = []
 		self.play()
 		self.onClose.append(self.__onClose)
 
@@ -276,7 +276,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def doEofInternal(self, playing):
 		if not self.execing:
 			return
-		if not playing :
+		if not playing:
 			return
 		self.handleLeave()
 
@@ -809,8 +809,7 @@ class OpenUg(Screen):
 			"right": self.key_right,
 			"ok": self.go,
 			"back": self.Exit,
-		}
-		, -1)
+		}		, -1)
 		self["NumberActions"] = NumberActionMap(["NumberActions", "InputAsciiActions"],
 			{
 				"gotAsciiCode": self.keyAsciiCode,
@@ -938,7 +937,7 @@ class OpenUg(Screen):
 				thumbnailFile = self.imagedir + tmp_icon
 				self.pixmaps_to_load.append(tmp_icon)
 				if not self.Details.has_key(tmp_icon):
-					self.Details[tmp_icon] = { 'thumbnail': None}
+					self.Details[tmp_icon] = {'thumbnail': None}
 				if x[self.UG_ICON] != '':
 					if (os_path.exists(thumbnailFile) == True):
 						self.fetchFinished(True, picture_id=tmp_icon, failed=False)
@@ -1268,7 +1267,7 @@ class OpenUg(Screen):
 		if self.choice == 'sbs':
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.session.open(OpenUg, ['sbs' , tmp , self.channel])
+				self.session.open(OpenUg, ['sbs', tmp, self.channel])
 			elif self.level == self.UG_LEVEL_SERIE:
 				tmp = self.sbsGetMediaUrl(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
 				if tmp != '':
@@ -1278,10 +1277,10 @@ class OpenUg(Screen):
 		elif self.choice == 'rtl':
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.session.open(OpenUg, ['rtlseason' , tmp])
+				self.session.open(OpenUg, ['rtlseason', tmp])
 			elif self.level == self.UG_LEVEL_SEASON:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.session.open(OpenUg, ['rtlepisode' , tmp[0], tmp[1]])
+				self.session.open(OpenUg, ['rtlepisode', tmp[0], tmp[1]])
 			elif self.level == self.UG_LEVEL_SERIE:
 				tmp = self.getRTLStream(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
 				if tmp != '':
@@ -1293,11 +1292,11 @@ class OpenUg(Screen):
 		elif self.choice == 'dumpert':
 			if self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME] == ' ---> Volgende Pagina':
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.session.open(OpenUg, ['dumpert' , tmp])
+				self.session.open(OpenUg, ['dumpert', tmp])
 				self.close()
 			elif self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME] == ' <--- Vorige Pagina':
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				self.session.open(OpenUg, ['dumpert' , tmp])
+				self.session.open(OpenUg, ['dumpert', tmp])
 				self.close()
 			else:
 				tmp = self.getDumpertStream(self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL])
@@ -1534,7 +1533,7 @@ class OpenUg(Screen):
 					channel = line.split(tmp)[1].split('\"')[0]
 				tmp = '\"abstract_key\":\"'
 				if tmp in line:
-					url = [(line.split(tmp)[1].split('\"')[0]) , url]
+					url = [(line.split(tmp)[1].split('\"')[0]), url]
 				tmp = "\"name\":\""
 				if tmp in line:
 					name = line.split(tmp)[1].split('"')[0]

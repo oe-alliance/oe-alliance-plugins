@@ -12,7 +12,7 @@ from enigma import eTimer
 from boxbranding import getMachineBuild, getImageDistro, getBoxType
 
 config.plugins.remotecontrolcode = ConfigSubsection()
-config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="50af", choices=[ ("50af", _("Code 1")), ("51ae", _("Code 2")) ] )
+config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="50af", choices=[("50af", _("Code 1")), ("51ae", _("Code 2"))])
 
 class RemoteControlCodeInit:
 	def __init__(self):
@@ -49,7 +49,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		self.skinName = ['RemoteControlCode', 'Setup']
 		self.session = session
 		Screen.setTitle(self, _("Remote Control Code"))
-		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
@@ -76,7 +76,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 	def createSetup(self):
 		self.list = []
 		self.rcsctype = getConfigListEntry(_("Remote Control Code:"), config.plugins.remotecontrolcode.systemcode)
-		self.list.append( self.rcsctype )
+		self.list.append(self.rcsctype)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -110,7 +110,7 @@ class MessageBoxConfirmCode(MessageBox):
 		MessageBox.__init__(self,session,text,type,timeout,close_on_any_key,default,enable_input,msgBoxID)
 		self.skinName = "MessageBox"
 		if type == MessageBox.TYPE_YESNO:
-			self.list = [ (_("Confirm"), True), (_("Cancel"), False) ]
+			self.list = [(_("Confirm"), True), (_("Cancel"), False)]
 			self["list"].setList(self.list)
 
 	def timerTick(self):

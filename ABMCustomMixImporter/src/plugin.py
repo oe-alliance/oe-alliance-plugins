@@ -236,8 +236,7 @@ class schedule:
 			self.mix != config.plugins.abmImporter.mix.value or \
 			self.enableSchedule != config.autobouquetsmaker.schedule.value or \
 			self.clock[0] != config.autobouquetsmaker.scheduletime.value[0] or \
-			self.clock[1] != config.autobouquetsmaker.scheduletime.value[1] \
-		:
+			self.clock[1] != config.autobouquetsmaker.scheduletime.value[1]		:
 			print "[ABMCustomMixImporter][configChecker] config has changed"
 			self.enableImporter = config.plugins.abmImporter.enableImporter.value
 			self.leadTime = config.plugins.abmImporter.leadTime.value
@@ -311,6 +310,6 @@ def ABMCustomMixImporterMain(session, **kwargs):
 def Plugins(**kwargs):
 	pList = []
 	if ABMisLoaded():
-		pList.append( PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=pluginAutoStart))
-		pList.append( PluginDescriptor(name=_("ABM CustomMix Importer"), description="Imports CustomMix files for ABM", where=PluginDescriptor.WHERE_MENU, fnc=pluginManualStart, needsRestart=True) )
+		pList.append(PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=pluginAutoStart))
+		pList.append(PluginDescriptor(name=_("ABM CustomMix Importer"), description="Imports CustomMix files for ABM", where=PluginDescriptor.WHERE_MENU, fnc=pluginManualStart, needsRestart=True))
 	return pList

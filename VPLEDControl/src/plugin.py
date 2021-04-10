@@ -62,7 +62,7 @@ class Channelnumber:
 		self.zaPrik = eTimer()
 		self.zaPrik.timeout.get().append(self.vrime)
 		self.zaPrik.start(1000, 1)
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.__event_tracker = ServiceEventTracker(screen=self,eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
@@ -234,7 +234,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self.setTitle(_("LED Display Setup"))
 		self.onClose.append(self.abort)
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 			
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
@@ -310,7 +310,7 @@ class VFD_INI:
 		print "[Stb LED] initializing"
 		self.session = session
 		self.service = None
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.Console = Console()
 
@@ -332,10 +332,10 @@ def main(menuid):
 			if menuid == "display":
 				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
 			else:
-				return[ ]
+				return[]
 		else:
 			if menuid != "system":
-				return [ ]
+				return []
 			else:
 				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
 
@@ -372,5 +372,5 @@ def sessionstart(reason, **kwargs):
 	controliniVfd()
 
 def Plugins(**kwargs):
-	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-		PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where=PluginDescriptor.WHERE_MENU, fnc=main) ]
+	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+		PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where=PluginDescriptor.WHERE_MENU, fnc=main)]

@@ -118,7 +118,7 @@ config.plugins.translator = ConfigSubsection()
 CfgPlTr = config.plugins.translator
 
 CfgPlTr.source = ConfigSelection(default='auto',
- choices=[ ( 'auto', _('Detect Language')) ] + langs[:] )
+ choices=[('auto', _('Detect Language'))] + langs[:])
 
 # Destination has no auto...
 #
@@ -588,7 +588,7 @@ Red: Refresh EPG
         self.session = session
         Screen.__init__(self, session)
         if self.showsource != "yes":
-            self.skinName = ["translatorMainSingle", "translatorMain" ]
+            self.skinName = ["translatorMainSingle", "translatorMain"]
 
         self.text = text
         self.hideflag = True
@@ -919,7 +919,7 @@ Red: Refresh EPG
             t_now = int(time.time())
             epg_base = t_now - 60*int(config.epg.histminutes.getValue())
             epg_extent = 1440*14    # Get up to 14 days from now (minutes)
-            test = [ EPG_OPTIONS, (self.My_Sref().toCompareString(), 0, epg_base, epg_extent) ]
+            test = [EPG_OPTIONS, (self.My_Sref().toCompareString(), 0, epg_base, epg_extent)]
             epgcache = eEPGCache.getInstance()
             self.list = epgcache.lookupEvent(test)
             self.max = len(self.list)

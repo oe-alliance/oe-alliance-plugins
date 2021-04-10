@@ -382,8 +382,8 @@ def HelpableScreen__init__(self):
 		HelpableScreen.showManual = showManual
 
 		self["helpActions"] = ActionMap(["HelpbuttonActions"], {
-			"help_b" : self.showHelp,
-			"help_l" : self.showManual,
+			"help_b": self.showHelp,
+			"help_l": self.showManual,
 		}, -2)
 
 def showManual(self):

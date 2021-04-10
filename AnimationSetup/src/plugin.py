@@ -12,7 +12,7 @@ from enigma import setAnimation_current, setAnimation_speed
 # default = slide to left
 g_default = {
 		"current": 6,
-		"speed"	 : 20,
+		"speed": 20,
 }
 g_max_speed = 30
 
@@ -42,11 +42,11 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.entrylist)
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
-			"ok"	 : self.keyGreen,
-			"green"	 : self.keyGreen,
-			"yellow" : self.keyYellow,
-			"red"	 : self.keyRed,
-			"cancel" : self.keyRed,
+			"ok": self.keyGreen,
+			"green": self.keyGreen,
+			"yellow": self.keyYellow,
+			"red": self.keyRed,
+			"cancel": self.keyRed,
 		}, -2)
 		self["key_red"]	  = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
@@ -132,7 +132,7 @@ class AnimationSetupScreen(Screen):
 			{
 				"cancel": self.keyclose,
 				"save": self.ok,
-				"ok" : self.ok,
+				"ok": self.ok,
 				"yellow": self.config,
 				"blue": self.preview
 			}, -3)
@@ -148,7 +148,7 @@ class AnimationSetupScreen(Screen):
 			name = x.get("name", "??")
 			if key == config.misc.window_animation_default.value:
 				name = "* %s" % (name)
-			l.append( (name, key) )
+			l.append((name, key))
 
 		self["list"].setList(l)
 
@@ -182,7 +182,7 @@ def startAnimationSetup(menuid):
 	if menuid != "system":
 		return []
 
-	return [( _("Animations"), animationSetupMain, "animation_setup", None)]
+	return [(_("Animations"), animationSetupMain, "animation_setup", None)]
 
 def sessionAnimationSetup(session, reason, **kwargs):
 	setAnimation_current(config.misc.window_animation_default.value)

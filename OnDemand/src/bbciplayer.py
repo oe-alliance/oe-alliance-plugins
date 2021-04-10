@@ -283,7 +283,7 @@ class StreamsThumb(StreamsThumbCommon):
 			# If we hit problems retrieving the data don't try to parse.
 			if data:
 				# Use Regex to parse out the required element data
-				links = (re.compile ('<entry>\n    <title type="text">(.+?)</title>\n    <id>tag:feeds.bbc.co.uk,2008:PIPS:(.+?)</id>\n    <updated>(.+?)</updated>\n    <content type="html">\n      &lt;p&gt;\n        &lt;a href=&quot;.+?&quot;&gt;\n          &lt;img src=&quot;(.+?)&quot; alt=&quot;.+?&quot; /&gt;\n        &lt;/a&gt;\n      &lt;/p&gt;\n      &lt;p&gt;\n        (.+?)\n      &lt;/p&gt;\n    </content>').findall(data))
+				links = (re.compile('<entry>\n    <title type="text">(.+?)</title>\n    <id>tag:feeds.bbc.co.uk,2008:PIPS:(.+?)</id>\n    <updated>(.+?)</updated>\n    <content type="html">\n      &lt;p&gt;\n        &lt;a href=&quot;.+?&quot;&gt;\n          &lt;img src=&quot;(.+?)&quot; alt=&quot;.+?&quot; /&gt;\n        &lt;/a&gt;\n      &lt;/p&gt;\n      &lt;p&gt;\n        (.+?)\n      &lt;/p&gt;\n    </content>').findall(data))
 
 				# Loop through each element <entry>
 				for line in links:
@@ -396,9 +396,9 @@ class StreamsThumb(StreamsThumbCommon):
 			# Read the URL to get the stream options
 			html = wgetUrl(url1)
 			try:
-				links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[1])
+				links = (re.compile('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[1])
 			except:
-				links = (re.compile ('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[0])
+				links = (re.compile('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[0])
 
 			url2 = 'http://www.bbc.co.uk/mediaselector/4/mtis/stream/'+links
 			html1 = html = wgetUrl(url2)
@@ -414,13 +414,13 @@ class StreamsThumb(StreamsThumbCommon):
 					try:
 						opener = urllib2.build_opener(MyHTTPHandler)
 						old_opener = urllib2._opener
-						urllib2.install_opener (opener)
+						urllib2.install_opener(opener)
 						req = urllib2.Request(url2)
 						req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
 						response = urllib2.urlopen(req)
 						html1 = str(response.read())
 						response.close()
-						urllib2.install_opener (old_opener)
+						urllib2.install_opener(old_opener)
 
 					except (Exception) as exception:
 						print __plugin__, __version__,"findPlayUrl: Unable to connect to DNS: ", exception
@@ -429,7 +429,7 @@ class StreamsThumb(StreamsThumbCommon):
 			# Parse the HTML returned
 			doc = dom.parseString(html1)
 			root = doc.documentElement
-			media = root.getElementsByTagName( "media" )
+			media = root.getElementsByTagName("media")
 			i = 0
 
 			# Loop for each streaming option available
@@ -444,7 +444,7 @@ class StreamsThumb(StreamsThumbCommon):
 					service == 'pc_streaming_hd':
 
 					# Get stream data for first Media element
-					conn  = media[i].getElementsByTagName( "connection" )[0]
+					conn  = media[i].getElementsByTagName("connection")[0]
 					returnedList = self.getHosts(conn, service)
 
 					if returnedList:
@@ -476,7 +476,7 @@ class StreamsThumb(StreamsThumbCommon):
 								otherLimelightUrl = fileUrl
 
 					# Repeat for the second Media element
-					conn  = media[i].getElementsByTagName( "connection" )[1]
+					conn  = media[i].getElementsByTagName("connection")[1]
 					returnedList = self.getHosts(conn, service)
 
 					if returnedList:

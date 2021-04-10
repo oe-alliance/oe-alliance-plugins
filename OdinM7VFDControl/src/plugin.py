@@ -39,7 +39,7 @@ class Channelnumber:
 		self.zaPrik = eTimer()
 		self.zaPrik.timeout.get().append(self.vrime)
 		self.zaPrik.start(1000, 1)
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.__event_tracker = ServiceEventTracker(screen=self,eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
@@ -173,7 +173,7 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 		self.skinName = ["Setup"]
 		self.onClose.append(self.abort)
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
@@ -232,7 +232,7 @@ class VFD_Odin:
 		print "[VFD-ODINM7] initializing"
 		self.session = session
 		self.service = None
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.Console = Console()
 
@@ -251,7 +251,7 @@ class VFD_Odin:
 
 def main(menuid):
 	if menuid != "system":
-		return [ ]
+		return []
 	return [(_("LED Display Setup"), startVFD, "VFD_M7", None)]
 
 def startVFD(session, **kwargs):
@@ -287,5 +287,5 @@ def sessionstart(reason, **kwargs):
 	controlodinm7Vfd()
 
 def Plugins(**kwargs):
- 	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
- 		PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where=PluginDescriptor.WHERE_MENU, fnc=main) ]
+ 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+ 		PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where=PluginDescriptor.WHERE_MENU, fnc=main)]

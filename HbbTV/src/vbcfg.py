@@ -46,7 +46,7 @@ def getPosition():
 def setPosition(params):
 	if params is None:
 		return
-	if params[0] + params[1] > 720 or params[2] + params[3] > 576 :
+	if params[0] + params[1] > 720 or params[2] + params[3] > 576:
 		return
 	else:
 		try:

@@ -32,18 +32,18 @@ HOSTAPD_CONF_BACK = "/etc/hostapd.conf.linuxap.back"
 
 apModeConfig = ConfigSubsection()
 apModeConfig.useap = ConfigYesNo(default=False)
-apModeConfig.setupmode = ConfigSelection(default="simple", choices=[ ("simple", "Simple"), ("advanced", "Advanced") ] )
+apModeConfig.setupmode = ConfigSelection(default="simple", choices=[("simple", "Simple"), ("advanced", "Advanced")])
 #apModeConfig.wirelessdevice = fixedValue(value = "")
 apModeConfig.branch = fixedValue(value="br0")
 apModeConfig.driver = fixedValue(value="nl80211")
-apModeConfig.wirelessmode = ConfigSelection(default="g", choices=[ ("b", "802.11b"), ("a", "802.11a"), ("g", "802.11g") ] )
-apModeConfig.channel = ConfigInteger(default=1, limits=(1,13) )
+apModeConfig.wirelessmode = ConfigSelection(default="g", choices=[("b", "802.11b"), ("a", "802.11a"), ("g", "802.11g")])
+apModeConfig.channel = ConfigInteger(default=1, limits=(1,13))
 apModeConfig.ssid = ConfigText(default="Vuplus AP", visible_width=50, fixed_size=False)
 apModeConfig.beacon = ConfigInteger(default=100, limits=(15,65535))
-apModeConfig.rts_threshold = ConfigInteger(default=2347, limits=(0,2347) )
-apModeConfig.fragm_threshold = ConfigInteger(default=2346, limits=(256,2346) )
-apModeConfig.preamble = ConfigSelection(default="0", choices=[ ("0", "Long"), ("1", "Short") ] )
-apModeConfig.ignore_broadcast_ssid = ConfigSelection(default="0", choices=[ ("0", _("disabled")), ("1", _("enabled")) ])
+apModeConfig.rts_threshold = ConfigInteger(default=2347, limits=(0,2347))
+apModeConfig.fragm_threshold = ConfigInteger(default=2346, limits=(256,2346))
+apModeConfig.preamble = ConfigSelection(default="0", choices=[("0", "Long"), ("1", "Short")])
+apModeConfig.ignore_broadcast_ssid = ConfigSelection(default="0", choices=[("0", _("disabled")), ("1", _("enabled"))])
 
 apModeConfig.encrypt = ConfigYesNo(default=False)
 apModeConfig.method = ConfigSelection(default="0", choices=[
@@ -94,7 +94,7 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 	def __init__(self,session):
 		Screen.__init__(self,session)
 		self.session = session
-		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
 			"ok": self.doConfigMsg,
 			"cancel": self.keyCancel,
@@ -145,7 +145,7 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 			self.configErrorTimer.start(100, True)
 
 	def configErrorMsg(self):
-		self.session.openWithCallback(self.close ,MessageBox, _(self.msg), MessageBox.TYPE_ERROR)
+		self.session.openWithCallback(self.close,MessageBox, _(self.msg), MessageBox.TYPE_ERROR)
 
 	def checkwlanDeviceList(self):
 		if len(self.wlanDeviceList) == 0:
@@ -180,13 +180,13 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 			if description == "Unknown network adapter":
 				self.wlanDeviceList.append((x, x))
 			else:
-				self.wlanDeviceList.append(( x, description + " (%s)"%x ))
+				self.wlanDeviceList.append((x, description + " (%s)"%x))
 
 		if len(self.wlanDeviceList) == 0:
 			self.msg = "Can not find wireless lan devices that support AP mode."
 			return -1
 
-		apModeConfig.wirelessdevice = ConfigSelection( choices=self.wlanDeviceList )
+		apModeConfig.wirelessdevice = ConfigSelection(choices=self.wlanDeviceList)
 		return 0
 
 	def makeConfigList(self):
@@ -301,36 +301,36 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 		apModeConfig.gateway.value = iNetwork.getAdapterAttribute(apModeConfig.branch.value, "gateway") or [0,0,0,0]
 
 		self.configList = []
-		self.configList.append( self.useApEntry )
+		self.configList.append(self.useApEntry)
 		if apModeConfig.useap.value is True:
-			self.configList.append( self.setupModeEntry )
-			self.configList.append( self.wirelessDeviceEntry )
-			self.configList.append( self.wirelessModeEntry )
-			self.configList.append( self.channelEntry )
-			self.configList.append( self.ssidEntry )
+			self.configList.append(self.setupModeEntry)
+			self.configList.append(self.wirelessDeviceEntry)
+			self.configList.append(self.wirelessModeEntry)
+			self.configList.append(self.channelEntry)
+			self.configList.append(self.ssidEntry)
 			if apModeConfig.setupmode.value  is "advanced":
-				self.configList.append( self.beaconEntry )
-				self.configList.append( self.rtsThresholdEntry )
-				self.configList.append( self.fragmThresholdEntry )
-				self.configList.append( self.prambleEntry )
-				self.configList.append( self.ignoreBroadcastSsid )
-			self.configList.append( self.encryptEntry )
+				self.configList.append(self.beaconEntry)
+				self.configList.append(self.rtsThresholdEntry)
+				self.configList.append(self.fragmThresholdEntry)
+				self.configList.append(self.prambleEntry)
+				self.configList.append(self.ignoreBroadcastSsid)
+			self.configList.append(self.encryptEntry)
 			if apModeConfig.encrypt.value is True:
-				self.configList.append( self.methodEntry )
+				self.configList.append(self.methodEntry)
 				if apModeConfig.method.value is "0": # wep
-					self.configList.append( self.wepKeyTypeEntry )
-					self.configList.append( self.wepKey0Entry )
+					self.configList.append(self.wepKeyTypeEntry)
+					self.configList.append(self.wepKey0Entry)
 				else:
-					self.configList.append( self.wpaKeyEntry )
+					self.configList.append(self.wpaKeyEntry)
 					if apModeConfig.setupmode.value  is "advanced":
-						self.configList.append( self.groupRekeyEntry )
+						self.configList.append(self.groupRekeyEntry)
 ## 		set network interfaces
-			self.configList.append( self.usedhcpEntry )
+			self.configList.append(self.usedhcpEntry)
 			if apModeConfig.usedhcp.value is False:
-				self.configList.append( self.ipEntry )
-				self.configList.append( self.netmaskEntry )
-				self.configList.append( self.gatewayEntry )
-				self.configList.append( self.nameserverEntry )
+				self.configList.append(self.ipEntry)
+				self.configList.append(self.netmaskEntry)
+				self.configList.append(self.gatewayEntry)
+				self.configList.append(self.nameserverEntry)
 		self["config"].list = self.configList
 		self["config"].l.setList(self.configList)
 
@@ -343,7 +343,7 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 		self.newConfig()
 
 	def newConfig(self):
-		if self["config"].getCurrent() in [ self.encryptEntry, self.methodEntry, self.useApEntry, self.usedhcpEntry, self.setupModeEntry]:
+		if self["config"].getCurrent() in [self.encryptEntry, self.methodEntry, self.useApEntry, self.usedhcpEntry, self.setupModeEntry]:
 			self.createConfig()
 
 	# 0 : legacy module activated, 1 : kernel module activated, -1 : None
@@ -403,11 +403,11 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 		isApMode = apModeConfig.useap.value is True
 		isRalinkKmodUploaded = self.checkProcModules() == 1
 
-		if isRainkIface and isApMode and (not isRalinkKmodUploaded ):
+		if isRainkIface and isApMode and (not isRalinkKmodUploaded):
 			msg += "( STB should be reboot to enable AP mode. )\n"
 		else:
 			msg += ("\n")
-		self.session.openWithCallback(self.doConfig, MessageBox, (_(msg) ) )
+		self.session.openWithCallback(self.doConfig, MessageBox, (_(msg)))
 
 	def doConfig(self, ret=False):
 		global apModeConfig
@@ -419,18 +419,18 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 		if not self.checkConfig():
 			return
 
-		self.configStartMsg = self.session.openWithCallback(self.ConfigFinishedMsg, MessageBox, _("Please wait for AP Configuration....\n") , type=MessageBox.TYPE_INFO, enable_input=False)
+		self.configStartMsg = self.session.openWithCallback(self.ConfigFinishedMsg, MessageBox, _("Please wait for AP Configuration....\n"), type=MessageBox.TYPE_INFO, enable_input=False)
 
 		if apModeConfig.useap.value is True:
-			self.networkRestart( nextFunc=self.makeConf )
+			self.networkRestart(nextFunc=self.makeConf)
 		else:
-			self.networkRestart( nextFunc=self.removeConf )
+			self.networkRestart(nextFunc=self.removeConf)
 
 	def checkEncrypKey(self):
 		global apModeConfig
 		if apModeConfig.method.value == "0":
 			if self.checkWep(apModeConfig.wep_key0.value) is False:
-				self.session.open(MessageBox, _("Invalid WEP key\n\n"), type=MessageBox.TYPE_ERROR, timeout=10 )
+				self.session.open(MessageBox, _("Invalid WEP key\n\n"), type=MessageBox.TYPE_ERROR, timeout=10)
 			else:
 				return True
 		else:
@@ -475,10 +475,10 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 			return False
 		return True
 
-	def networkRestart(self, nextFunc=None ):
-		self.networkRestart_stop( nextFunc=nextFunc )
+	def networkRestart(self, nextFunc=None):
+		self.networkRestart_stop(nextFunc=nextFunc)
 
-	def networkRestart_stop(self, nextFunc=None ):
+	def networkRestart_stop(self, nextFunc=None):
 		printDebugMsg("networkRestart_stop")
 		self.msgPlugins(False)
 		self.commands = [] # stop current network
@@ -520,10 +520,10 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 			fp.write("iface eth0 inet dhcp\n")
 		else:
 			fp.write("iface eth0 inet static\n")
-			fp.write("	address %d.%d.%d.%d\n" % tuple(apModeConfig.address.value) )
-			fp.write("	netmask %d.%d.%d.%d\n" % tuple(apModeConfig.netmask.value) )
-			fp.write("	gateway %d.%d.%d.%d\n" % tuple(apModeConfig.gateway.value) )
-			fp.write("	dns-nameservers %d.%d.%d.%d\n" % tuple(apModeConfig.nameserver.value) )
+			fp.write("	address %d.%d.%d.%d\n" % tuple(apModeConfig.address.value))
+			fp.write("	netmask %d.%d.%d.%d\n" % tuple(apModeConfig.netmask.value))
+			fp.write("	gateway %d.%d.%d.%d\n" % tuple(apModeConfig.gateway.value))
+			fp.write("	dns-nameservers %d.%d.%d.%d\n" % tuple(apModeConfig.nameserver.value))
 		fp.close()
 		self.setIpForward(0)
 		self.networkRestart_start()
@@ -551,7 +551,7 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 
 	def ConfigFinishedMsg(self, ret):
 		if ret is True:
-			self.session.openWithCallback(self.ConfigFinishedMsgCallback ,MessageBox, _("Configuration your AP is finished"), type=MessageBox.TYPE_INFO, timeout=5, default=False)
+			self.session.openWithCallback(self.ConfigFinishedMsgCallback,MessageBox, _("Configuration your AP is finished"), type=MessageBox.TYPE_INFO, timeout=5, default=False)
 
 	def needRalinkKmod(self):
 		global apModeConfig
@@ -567,15 +567,15 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 		isRalinkKmodUploaded = self.checkProcModules() == 1
 		needRalinkKmod_ = self.needRalinkKmod()
 	
-		if needRalinkKmod_ : # ralink device is activated in AP Mode.
-			if not isRalinkKmodUploaded : # reboot to loading kernel module.
+		if needRalinkKmod_: # ralink device is activated in AP Mode.
+			if not isRalinkKmodUploaded: # reboot to loading kernel module.
 				msg = "You should now reboot your STB in order to ralink device operate in AP mode.\n\nReboot now ?\n\n"
-				self.session.openWithCallback(self.doReboot, MessageBox, _(msg), type=MessageBox.TYPE_YESNO, default=True )
+				self.session.openWithCallback(self.doReboot, MessageBox, _(msg), type=MessageBox.TYPE_YESNO, default=True)
 			else:
 				self.close()
-		elif isRalinkKmodUploaded :
+		elif isRalinkKmodUploaded:
 			msg = "You should now reboot your STB to better performance of ralink device in STA mode.\n\nReboot now ?\n\n"
-			self.session.openWithCallback(self.doReboot, MessageBox, _(msg), type=MessageBox.TYPE_YESNO, default=True )
+			self.session.openWithCallback(self.doReboot, MessageBox, _(msg), type=MessageBox.TYPE_YESNO, default=True)
 		else:
 			self.close()
 
@@ -644,10 +644,10 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 			fp.write("iface br0 inet dhcp\n")
 		else:
 			fp.write("iface br0 inet static\n")
-			fp.write("	address %d.%d.%d.%d\n" % tuple(apModeConfig.address.value) )
-			fp.write("	netmask %d.%d.%d.%d\n" % tuple(apModeConfig.netmask.value) )
-			fp.write("	gateway %d.%d.%d.%d\n" % tuple(apModeConfig.gateway.value) )
-			fp.write("	dns-nameservers %d.%d.%d.%d\n" % tuple(apModeConfig.nameserver.value) )
+			fp.write("	address %d.%d.%d.%d\n" % tuple(apModeConfig.address.value))
+			fp.write("	netmask %d.%d.%d.%d\n" % tuple(apModeConfig.netmask.value))
+			fp.write("	gateway %d.%d.%d.%d\n" % tuple(apModeConfig.gateway.value))
+			fp.write("	dns-nameservers %d.%d.%d.%d\n" % tuple(apModeConfig.nameserver.value))
 		fp.write("	pre-up brctl addbr br0\n")
 		fp.write("	pre-up brctl addif br0 eth0\n")
 		fp.write("	post-down brctl delif br0 eth0\n")
@@ -722,7 +722,7 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 	def printConfigList(self, confList):
 		printDebugMsg("== printConfigList ==")
 		for (key, entry) in confList.items():
-			printDebugMsg("%s = %s"%(key , str(entry.value)))
+			printDebugMsg("%s = %s"%(key, str(entry.value)))
 		
 		printDebugMsg("== printConfigList end ==")
 
@@ -763,7 +763,7 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 			elif key.startswith('#'):
 				continue
 
-			elif key == "channel" :
+			elif key == "channel":
 				if int(value) not in range(14):
 					self.hostapdConf[key].value = 1
 				else:
@@ -809,13 +809,13 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 
 			fix_line = None
 # for encrypt line
-			if line.find("wep_default_key=") != -1 : # is wepLine
-				if isEncryptOn and isEncryptWEP :
+			if line.find("wep_default_key=") != -1: # is wepLine
+				if isEncryptOn and isEncryptWEP:
 					fix_line = "wep_default_key=%s\n" % self.hostapdConf["wep_default_key"].value
 
-			elif line.find("wep_key0=") != -1 : # is WepKeyLine
+			elif line.find("wep_key0=") != -1: # is WepKeyLine
 				if isEncryptOn: 
-					if isEncryptWEP :
+					if isEncryptWEP:
 						fix_line = "wep_key0=%s\n" % self.hostapdConf["wep_key0"].value
 					else:
 						fix_line = "#wep_key0=%s\n" % self.hostapdConf["wep_key0"].value
@@ -823,18 +823,18 @@ class WirelessAccessPoint(Screen,ConfigListScreen):
 				else:
 					fix_line = "#wep_key0=%s\n" % self.hostapdConf["wep_key0"].value
 
-			elif line.find("wpa=") != -1 : # is wpaLine
-				if isEncryptOn and isEncryptWPA : 
+			elif line.find("wpa=") != -1: # is wpaLine
+				if isEncryptOn and isEncryptWPA: 
 					fix_line = "wpa=%s\n" % apModeConfig.method.value
 ##
 			elif line.startswith("#ssid"):
 				pass
 
 			else:
-				for (key , entry) in self.hostapdConf.items():
+				for (key, entry) in self.hostapdConf.items():
 					value = str(entry.value)
 					pos = line.find(key+'=')
-					if ( (pos != -1) and (pos < 2) ) and len(value)!=0 :
+					if ((pos != -1) and (pos < 2)) and len(value)!=0:
 						fix_line = "%s=%s\n" % (key, value)
 						break
 

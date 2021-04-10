@@ -63,11 +63,11 @@ def setConfigValue(procPath, value):
 	return 0
 
 def getEffectChoices():
-	choices = [ ("none", _("none")) ]
-	if SUPPORT_3D_SURROUND :
-		choices.append( ("3D_Surround", _("3D Surround") ) )
-	if SUPPORT_AVL :
-		choices.append( ("AVL", _("AVL (Automatic Volume Leveler)") ) )
+	choices = [("none", _("none"))]
+	if SUPPORT_3D_SURROUND:
+		choices.append(("3D_Surround", _("3D Surround")))
+	if SUPPORT_AVL:
+		choices.append(("AVL", _("AVL (Automatic Volume Leveler)")))
 	return choices
 
 def getAudioOutTypes():
@@ -79,7 +79,7 @@ def getAudioOutTypes():
 	for aType in data.split(' '):
 		if aType == "none":
 			continue
-		aTypes.append( aType )
+		aTypes.append(aType)
 	return aTypes
 
 if SUPPORT_AUDIOEFFECT:
@@ -89,16 +89,16 @@ def getSpeakerPosition():
 	choices = []
 	data = getProcValue(AUDIOEFFECT_PROC_PATH["3D_SURROUND_SPEAKER_POSITION_CHOICE"])
 	for choice in data.split(' '):
-		choices.append( (choice, _(choice)) )
+		choices.append((choice, _(choice)))
 	return choices
 
 config.plugins.audioeffect = ConfigSubsection()
-config.plugins.audioeffect.effect = ConfigSelection( default=AUDIOEFFECT_DEFAULT, choices=getEffectChoices() )
+config.plugins.audioeffect.effect = ConfigSelection(default=AUDIOEFFECT_DEFAULT, choices=getEffectChoices())
 if SUPPORT_AUDIOEFFECT:
 	for aout in AUDIOOUT_TYPES:
-		setattr(config.plugins.audioeffect, aout, ConfigSelection( default=AUDIOOUT_DEFAULT, choices=[("on", _("On")), ("off", _("Off"))] ) )
+		setattr(config.plugins.audioeffect, aout, ConfigSelection(default=AUDIOOUT_DEFAULT, choices=[("on", _("On")), ("off", _("Off"))]))
 	if SUPPORT_3D_SURROUND_SPEAKER_POSITION:
-		config.plugins.audioeffect.speakerposition = ConfigSelection( default=SPEAKER_POSITION_DEFAULT, choices=getSpeakerPosition() )
+		config.plugins.audioeffect.speakerposition = ConfigSelection(default=SPEAKER_POSITION_DEFAULT, choices=getSpeakerPosition())
 
 def setAudioEffectConfigs():
 		if not SUPPORT_AUDIOEFFECT:
@@ -129,7 +129,7 @@ def setAudioEffectConfigs():
 		if SUPPORT_AVL:
 			setConfigValue(AUDIOEFFECT_PROC_PATH["AVL"], _AvlValue)
 		if SUPPORT_3D_SURROUND_SPEAKER_POSITION:
-			if _3DSurroundValue == "none" :
+			if _3DSurroundValue == "none":
 				config.plugins.audioeffect.speakerposition.value = config.plugins.audioeffect.speakerposition.default
 			_3DSpeakerPosition = config.plugins.audioeffect.speakerposition.value
 			setConfigValue(AUDIOEFFECT_PROC_PATH["3D_SURROUND_SPEAKER_POSITION"], _3DSpeakerPosition)
@@ -160,13 +160,13 @@ class AudioEffect(Screen, ConfigListScreen):
 		self["key_yellow"] = StaticText(_("Default"))
 		self["description"] = StaticText(_("Audio Effect Setup is not supported."))
 
-		self["shortcuts"] = ActionMap(["AudioEffectActions" ],
+		self["shortcuts"] = ActionMap(["AudioEffectActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
 			"red": self.keyCancel,
 			"green": self.keySave,
-			"yellow" : self.keyDefault,
+			"yellow": self.keyDefault,
 		}, -2)
 
 		self.setupList = []
@@ -180,7 +180,7 @@ class AudioEffect(Screen, ConfigListScreen):
 		self.setupList = []
 		self.configEffect = getConfigListEntry(_("Effect"), config.plugins.audioeffect.effect)
 		self.setupList.append(self.configEffect)
-		if config.plugins.audioeffect.effect.value != "none" :
+		if config.plugins.audioeffect.effect.value != "none":
 			for aout in AUDIOOUT_TYPES:
 				entryName = AUDIOOUT_ENTRY_NAME.get(aout, aout.upper())
 				self.setupList.append(getConfigListEntry(_(entryName), getattr(config.plugins.audioeffect, aout)))
@@ -241,7 +241,7 @@ class AudioEffect(Screen, ConfigListScreen):
 					text += choice[1]
 				else:
 					text += ', ' + choice[1]
-		self["description"].setText( _(text) )
+		self["description"].setText(_(text))
 
 def main(session, **kwargs):
 	session.open(AudioEffect)

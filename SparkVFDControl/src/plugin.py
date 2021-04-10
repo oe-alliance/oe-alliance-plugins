@@ -47,7 +47,7 @@ class Channelnumber:
 		self.zaPrik = eTimer()
 		self.zaPrik.timeout.get().append(self.vrime)
 		self.zaPrik.start(1000, 1)
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.__event_tracker = ServiceEventTracker(screen=self,eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
@@ -219,7 +219,7 @@ class VFD_SPARKSetup(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.onClose.append(self.abort)
 
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
@@ -286,7 +286,7 @@ class VFD_SPARK:
 		print "[VFD-SPARK] initializing"
 		self.session = session
 		self.service = None
-		self.onClose = [ ]
+		self.onClose = []
 
 		self.Console = Console()
 
@@ -363,7 +363,7 @@ def newSessionGlobals__init__(self, session):
 
 def main(menuid):
 	if menuid != "system":
-		return [ ]
+		return []
 	return [(_("LED Display Setup"), startVFD, "VFD_SPARK", None)]
 
 def startVFD(session, **kwargs):
@@ -404,7 +404,7 @@ def sessionstart(reason, **kwargs):
 
 def Plugins(**kwargs):
 		if getBoxType() in ('amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'amikomini'):
-			return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where=PluginDescriptor.WHERE_MENU, fnc=main) ]
+			return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
+				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where=PluginDescriptor.WHERE_MENU, fnc=main)]
 		else:
 			return []

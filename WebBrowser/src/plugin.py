@@ -240,12 +240,12 @@ class Player(Screen, InfoBarNotifications):
 			self.setSeekState(self.PLAYER_PLAYING)
 
 VIDEO_FMT_PRIORITY_MAP = {
-	'38' : 1, #MP4 Original (HD)
-	'37' : 2, #MP4 1080p (HD)
-	'22' : 3, #MP4 720p (HD)
-	'18' : 4, #MP4 360p
-	'35' : 5, #FLV 480p
-	'34' : 6, #FLV 360p
+	'38': 1, #MP4 Original (HD)
+	'37': 2, #MP4 1080p (HD)
+	'22': 3, #MP4 720p (HD)
+	'18': 4, #MP4 360p
+	'35': 5, #FLV 480p
+	'34': 6, #FLV 360p
 }
 std_headers = {
 	'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
@@ -306,7 +306,7 @@ class PlayerLauncher:
 			else:
 				(fmtid,fmturl) = fmtstring.split('|')
 			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
-				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = { 'fmtid': fmtid, 'fmturl': unquote_plus(fmturl) }
+				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 			fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print "got",sorted(fmt_infomap.iterkeys())
 		if video_fmt_map and len(video_fmt_map):

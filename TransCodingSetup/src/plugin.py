@@ -54,12 +54,12 @@ def checkSupportAdvanced():
 	return False
 
 config.plugins.transcodingsetup = ConfigSubsection()
-config.plugins.transcodingsetup.transcoding = ConfigSelection(default="enable", choices=[ ("enable", _("enable")), ("disable", _("disable"))])
+config.plugins.transcodingsetup.transcoding = ConfigSelection(default="enable", choices=[("enable", _("enable")), ("disable", _("disable"))])
 config.plugins.transcodingsetup.port = ConfigInteger(default=8002, limits=(8002, 9999))
 config.plugins.transcodingsetup.encoder = ConfigSubList()
 
 def createTransCodingConfig(encoder):
-	if fileExists(getProcPath(encoder ,"bitrate")):
+	if fileExists(getProcPath(encoder,"bitrate")):
 		if getBoxType() in ('vusolo2') or getMachineBuild() in ('dags3', 'dags4'):
 			choice = ConfigSelection(default="400000", choices=[("-1", _("auto")), ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
 		elif getBoxType() in ('gbquad', 'gbquadplus'):
@@ -68,7 +68,7 @@ def createTransCodingConfig(encoder):
 			choice = ConfigSelection(default="2000000", choices=[("-1", _("auto")), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("750000", "750 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits"), ("10000000", "10 Mbits")])
 		config.plugins.transcodingsetup.encoder[int(encoder)].bitrate = choice
 
-	if fileExists(getProcPath(encoder ,"framerate")):
+	if fileExists(getProcPath(encoder,"framerate")):
 		if getBoxType() in ('gbquad', 'gbquadplus'):
 			choice = ConfigSelection(default="-1", choices=[("-1", _("auto")), ("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps")])
 		else:
@@ -77,7 +77,7 @@ def createTransCodingConfig(encoder):
 
 	if checkSupportAdvanced():
 		if (hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "bitrate") or hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "framerate")):
-			choice = ConfigSelection(default="Off", choices=[ ("On", _("On")), ("Off", _("Off")) ])
+			choice = ConfigSelection(default="Off", choices=[("On", _("On")), ("Off", _("Off"))])
 			config.plugins.transcodingsetup.encoder[int(encoder)].automode = choice
 
 		if fileExists(getProcPath(encoder, "resolution")):
@@ -88,7 +88,7 @@ def createTransCodingConfig(encoder):
 			config.plugins.transcodingsetup.encoder[int(encoder)].resolution = choice
 
 		if fileExists(getProcPath(encoder, "aspectratio")):
-			choice = ConfigSelection(default="2", choices=[ ("0", _("auto")), ("1", _("4x3")), ("2", _("16x9")) ])
+			choice = ConfigSelection(default="2", choices=[("0", _("auto")), ("1", _("4x3")), ("2", _("16x9"))])
 			config.plugins.transcodingsetup.encoder[int(encoder)].aspectratio = choice
 
 		if fileExists(getProcPath(encoder, "audiocodec")):
@@ -96,7 +96,7 @@ def createTransCodingConfig(encoder):
 			config.plugins.transcodingsetup.encoder[int(encoder)].audiocodec = choice
 
 		if fileExists(getProcPath(encoder, "videocodec")):
-			choice = ConfigSelection(default="h264", choices=[ ("h264", _("h264")) ])
+			choice = ConfigSelection(default="h264", choices=[("h264", _("h264"))])
 			config.plugins.transcodingsetup.encoder[int(encoder)].videocodec = choice
 
 		if fileExists(getProcPath(encoder, "gopframeb")):
@@ -245,41 +245,41 @@ class TranscodingSetupInit:
 				config.plugins.transcodingsetup.encoder[int(extra_args[0])].framerate.setValue(config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.default)
 
 	def setBitrate(self, configElement, extra_args):
-		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"bitrate"))
+		self.setupConfig(configElement, getProcPath(int(extra_args[0]),"bitrate"))
 
 	def setFramerate(self, configElement, extra_args):
-		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"framerate"))
+		self.setupConfig(configElement, getProcPath(int(extra_args[0]),"framerate"))
 
 	def setResolution(self, configElement, extra_args):
 		resolution = configElement.value
-		if resolution in [ "320x240", "160x120" ]:
+		if resolution in ["320x240", "160x120"]:
 			(width, height) = tuple(resolution.split('x'))
-			self.setConfig(getProcPath(int(extra_args[0]) ,"resolution"), "custom")
-			self.setConfig(getProcPath(int(extra_args[0]) ,"width"), width)
-			self.setConfig(getProcPath(int(extra_args[0]) ,"height"), height)
+			self.setConfig(getProcPath(int(extra_args[0]),"resolution"), "custom")
+			self.setConfig(getProcPath(int(extra_args[0]),"width"), width)
+			self.setConfig(getProcPath(int(extra_args[0]),"height"), height)
 		else:
-			self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"resolution"))
+			self.setupConfig(configElement, getProcPath(int(extra_args[0]),"resolution"))
 
 	def setAspectRatio(self, configElement, extra_args):
-		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"aspectratio"))
+		self.setupConfig(configElement, getProcPath(int(extra_args[0]),"aspectratio"))
 
 	def setAudioCodec(self, configElement, extra_args):
-		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"audiocodec"))
+		self.setupConfig(configElement, getProcPath(int(extra_args[0]),"audiocodec"))
 
 	def setVideoCodec(self, configElement, extra_args):
-		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"videocodec"))
+		self.setupConfig(configElement, getProcPath(int(extra_args[0]),"videocodec"))
 
 	def setGopFrameB(self, configElement, extra_args):
-		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"gopframeb"))
+		self.setupConfig(configElement, getProcPath(int(extra_args[0]),"gopframeb"))
 
 	def setGopFrameP(self, configElement, extra_args):
-		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"gopframep"))
+		self.setupConfig(configElement, getProcPath(int(extra_args[0]),"gopframep"))
 
 	def setLevel(self, configElement, extra_args):
-		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"level"))
+		self.setupConfig(configElement, getProcPath(int(extra_args[0]),"level"))
 
 	def setProfile(self, configElement, extra_args):
-		self.setupConfig(configElement, getProcPath(int(extra_args[0]) ,"profile"))
+		self.setupConfig(configElement, getProcPath(int(extra_args[0]),"profile"))
 
 	def setPort(self, configElement):
 		port = str(configElement.getValue())
@@ -347,7 +347,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 	def __init__(self,session):
 		Screen.__init__(self,session)
 		self.session = session
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.skinName = "TranscodingSetup"
 		self.setup_title = _("Transcoding Setup")
 		self.setTitle(self.setup_title)
@@ -372,18 +372,18 @@ class TranscodingSetup(Screen,ConfigListScreen):
 
 		self["description"] = Label()
 
-		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
 			"red": self.keyCancel,
 			"green": self.keySave,
-			"yellow" : self.KeyDefault,
-			"blue" : self.keyBlue,
+			"yellow": self.KeyDefault,
+			"blue": self.keyBlue,
 		}, -2)
 
 		self.list = []
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.setupMode = "Normal" # Normal / Advanced
 		self.encoder = None

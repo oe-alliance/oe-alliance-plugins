@@ -22,7 +22,7 @@ def write_jpg2frame(dev, pic):
 	tdata = rawdata + b'\xff\x00' + pad * b'\x00'
 	# Syntax: write(self, endpoint, data, interface = None, timeout = None):
 	endpoint = 0x02               
-	dev.write(endpoint, tdata )
+	dev.write(endpoint, tdata)
        
 
 def get_known_devices():
@@ -31,60 +31,60 @@ def get_known_devices():
 	# listed as: Name, idVendor, idProduct, [width , height - in pixel if applicable]
 	#
 	#0,1 Samsung SPF-75H/76H (23)
-	dList.append({'name':"SPF75H/76H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x200f, 'width':800, 'height':480 })
+	dList.append({'name':"SPF75H/76H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x200f, 'width':800, 'height':480})
 	dList.append({'name':"SPF75H/76H Mass Storage", 'idVendor':0x04e8, 'idProduct':0x200e})
 
 	#2,3 Samsung SPF-87H (24)
-	dList.append({'name':"SPF87H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2034, 'width':800, 'height':480 })
+	dList.append({'name':"SPF87H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2034, 'width':800, 'height':480})
 	dList.append({'name':"SPF87H Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2033})
 
 	#4,5 Samsung SPF-87Hold (25)
-	dList.append({'name':"SPF87Hold Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2026, 'width':800, 'height':480 })
+	dList.append({'name':"SPF87Hold Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2026, 'width':800, 'height':480})
 	dList.append({'name':"SPF87Hold Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2025})
 
 	#6,7 Samsung SPF-83H (26)
-	dList.append({'name':"SPF83H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x200d, 'width':800, 'height':600 })
+	dList.append({'name':"SPF83H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x200d, 'width':800, 'height':600})
 	dList.append({'name':"SPF83H Mass Storage", 'idVendor':0x04e8, 'idProduct':0x200c})
 
 	#8,9 Samsung SPF-107H (27)
-	dList.append({'name':"SPF107H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2036, 'width':1024, 'height':600 })
+	dList.append({'name':"SPF107H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2036, 'width':1024, 'height':600})
 	dList.append({'name':"SPF107H Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2035})      
 
 	#10,11 Samsung SPF-105P (28)
-	dList.append({'name':"SPF105P Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x201b, 'width':1024, 'height':600 })
+	dList.append({'name':"SPF105P Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x201b, 'width':1024, 'height':600})
 	dList.append({'name':"SPF105P Mass Storage", 'idVendor':0x04e8, 'idProduct':0x201c})      
 
 	#12,13 Samsung SPF-85H/86H (29)
-	dList.append({'name':"SPF85H/86H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2013, 'width':800, 'height':600 })
+	dList.append({'name':"SPF85H/86H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2013, 'width':800, 'height':600})
 	dList.append({'name':"SPF85H/86H Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2012})
 
 	#14,15 Samsung SPF-72H (210)
-	dList.append({'name':"SPF72H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x200b, 'width':800, 'height':480 })
+	dList.append({'name':"SPF72H Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x200b, 'width':800, 'height':480})
 	dList.append({'name':"SPF72H Mass Storage", 'idVendor':0x04e8, 'idProduct':0x200a})
 
 	#16,17 Samsung SPF-700T (211)
-	dList.append({'name':"SPF700T Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2050, 'width':800, 'height':600 })
-	dList.append({'name':"SPF700T Mass Storage", 'idVendor':0x04e8, 'idProduct':0x204f })
+	dList.append({'name':"SPF700T Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2050, 'width':800, 'height':600})
+	dList.append({'name':"SPF700T Mass Storage", 'idVendor':0x04e8, 'idProduct':0x204f})
  
 	#18,19 Samsung SPF-85P/86P (212)
-	dList.append({'name':"SPF85P/86P Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2017, 'width':800, 'height':600 })
+	dList.append({'name':"SPF85P/86P Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2017, 'width':800, 'height':600})
 	dList.append({'name':"SPF85P/86P Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2016})
 
 	#20,21 Samsung SPF-107Hold (213)
-	dList.append({'name':"SPF107Hold Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2028, 'width':1024, 'height':600 })
+	dList.append({'name':"SPF107Hold Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2028, 'width':1024, 'height':600})
 	dList.append({'name':"SPF107Hold Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2027})      
 
 	#22,23 Samsung SPF-1000P (214)
-	dList.append({'name':"SPF1000P Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2040, 'width':1024, 'height':600 })
+	dList.append({'name':"SPF1000P Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2040, 'width':1024, 'height':600})
 	dList.append({'name':"SPF1000P Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2039})      
 
 	#24,25 Samsung SPF-800P (215)
-	dList.append({'name':"SPF800P Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2038, 'width':800, 'height':480 })
+	dList.append({'name':"SPF800P Mini Monitor", 'idVendor':0x04e8, 'idProduct':0x2038, 'width':800, 'height':480})
 	dList.append({'name':"SPF800P Mass Storage", 'idVendor':0x04e8, 'idProduct':0x2037})      
 
 	# Pearl DPF for Testing
-	dList.append({'name':"Pearl DPF", 'idVendor':0x1908, 'idProduct':0x0102, 'width':320, 'height':240 })
-	dList.append({'name':"Pearl DPF", 'idVendor':0x1908, 'idProduct':0x0102, 'width':320, 'height':240 })
+	dList.append({'name':"Pearl DPF", 'idVendor':0x1908, 'idProduct':0x0102, 'width':320, 'height':240})
+	dList.append({'name':"Pearl DPF", 'idVendor':0x1908, 'idProduct':0x0102, 'width':320, 'height':240})
        
 	return dList
      
@@ -146,7 +146,7 @@ def frame_init(dev):
 	# this is the minimum required to keep the frame in Mini Monitor mode!!!
 #	dev.ctrl_transfer(0xc0, 4 )
 #	dev.ctrl_transfer(0xc0, 0x01, 0x00, 0x00, 0x09, 0x04 )
-	dev.ctrl_transfer(0xc0, 0x01, 0x00, 0x00, 0x02 )
+	dev.ctrl_transfer(0xc0, 0x01, 0x00, 0x00, 0x02)
 
 def frame_switch(dev):
 	"""Switch device from Mass Storage to Mini Monitor""" 

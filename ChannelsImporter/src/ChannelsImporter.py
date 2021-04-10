@@ -210,7 +210,7 @@ class ChannelsImporter(Screen):
 				self.remoteEPGpath = line.strip().split("=")[1]
 			if "config.misc.epgcachefilename" in line:
 				self.remoteEPGfile = line.strip().split("=")[1]
-		self.remoteEPGfilename = "%s%s.dat" % (self.remoteEPGpath , self.remoteEPGfile.replace('.dat',''))
+		self.remoteEPGfilename = "%s%s.dat" % (self.remoteEPGpath, self.remoteEPGfile.replace('.dat',''))
 		print "[ChannelsImporter] Remote EPG filename. '%s'" % self.remoteEPGfilename
 		self.removeFiles(DIR_TMP, "settings")
 		self.download2(self.remoteEPGfilename, "epg.dat").addCallback(self.importEPGCallback).addErrback(self.importEPGErrback)

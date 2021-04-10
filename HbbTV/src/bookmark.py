@@ -68,7 +68,7 @@ class SimpleConfigParser:
 		except Exception, e:
 			vbcfg.ERR(e)
 			return _default
-		else :
+		else:
 			return data
 
 	def _set(self, _section, _option, _value):
@@ -130,7 +130,7 @@ class BookmarkManager(SimpleConfigParser):
 
 			os.system('echo "[__SYS__]" > %s'%(_dbFileName))
 			os.system('echo "category_current_idx = 1" >> %s'%(_dbFileName))
-			if manualmode :
+			if manualmode:
 				os.system('echo "bookmark_current_idx = 2" >> %s'%(_dbFileName))
 			else:
 				os.system('echo "bookmark_current_idx = 1" >> %s'%(_dbFileName))
@@ -143,7 +143,7 @@ class BookmarkManager(SimpleConfigParser):
 			os.system('echo "parent = 1" >> %s'%(_dbFileName))
 			os.system('echo "title = open Alliance WIKI" >> %s'%(_dbFileName))
 			os.system('echo "type = 0" >> %s'%(_dbFileName))
-			if manualmode :
+			if manualmode:
 				os.system('echo "[b-2]" >> %s'%(_dbFileName))
 				os.system('echo "url = file:///usr/local/manual/main.html" >> %s'%(_dbFileName))
 				os.system('echo "id = 2" >> %s'%(_dbFileName))

@@ -279,7 +279,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 			if fileUrl:
 				fileRef = eServiceReference(4097,0,fileUrl)
-				fileRef.setName (showName)
+				fileRef.setName(showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
 			else:
@@ -355,11 +355,11 @@ class StreamsThumb(StreamsThumbCommon):
 			rtmp_chunks = rtmp_url.split('/')
 
 			return {
-				'rtmp_url'  : rtmp_url,
-				'rtmp_host' : rtmp_chunks[2],
-				'rtmp_app'  : rtmp_chunks[3],
-				'api_url' : xml.find('param', attrs={'name':'api'}).get('value'),
-				'categories_url' : xml.find('param', attrs={'name':'categories'}).get('value'),
+				'rtmp_url': rtmp_url,
+				'rtmp_host': rtmp_chunks[2],
+				'rtmp_app': rtmp_chunks[3],
+				'api_url': xml.find('param', attrs={'name':'api'}).get('value'),
+				'categories_url': xml.find('param', attrs={'name':'categories'}).get('value'),
 			}
 		except (Exception) as exception:
 			print "%s: version %s: parse_config: Problem Parsing Config: %s" % (__plugin__, __version__, exception)
@@ -429,12 +429,12 @@ class StreamsThumb(StreamsThumbCommon):
 			return ""
 
 		return {
-			'rtmp_url'        : rtmp_url,
-			'rtmp_host'       : rtmp_host,
-			'rtmp_app'        : rtmp_app,
-			'playpath_prefix' : playpath_prefix,
-			'token'           : token,
-			'free'            : (xml.find("free").string == "yes")
+			'rtmp_url': rtmp_url,
+			'rtmp_host': rtmp_host,
+			'rtmp_app': rtmp_app,
+			'playpath_prefix': playpath_prefix,
+			'token': token,
+			'free': (xml.find("free").string == "yes")
 		}
 
 #==============================================================================

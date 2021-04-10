@@ -66,10 +66,10 @@ XML_BLINDSCAN_DIR = "/tmp"
 XML_FILE = None
 
 # _supportNimType is only used by vuplus hardware
-_supportNimType = { 'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_', 'BCM7356':'bcm7346_', 'SI2166':'si2166_'}
+_supportNimType = {'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_', 'BCM7356':'bcm7346_', 'SI2166':'si2166_'}
 
 # For STBs that support multiple DVB-S tuner models, e.g. Solo 4K.
-_unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', 'Vuplus DVB-S NIM(45308X FBC)', 'DVB-S2 NIM(45308 FBC)') # format = nim.description from nimmanager
+_unsupportedNims = ('Vuplus DVB-S NIM(7376 FBC)', 'Vuplus DVB-S NIM(45308X FBC)', 'DVB-S2 NIM(45308 FBC)') # format = nim.description from nimmanager
 
 # blindscan-s2 supported tuners
 _blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
@@ -232,7 +232,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		self.createConfig()
 
 		self.frontend = None
-		self["Frontend"] = FrontendStatus(frontend_source=lambda : self.frontend, update_interval=100)
+		self["Frontend"] = FrontendStatus(frontend_source=lambda: self.frontend, update_interval=100)
 
 		self.list = []
 		self.status = ""
@@ -642,12 +642,12 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		self.tp_found = []
 
 		tab_pol = {
-			eDVBFrontendParametersSatellite.Polarisation_Horizontal : "horizontal",
-			eDVBFrontendParametersSatellite.Polarisation_Vertical : "vertical",
-			eDVBFrontendParametersSatellite.Polarisation_CircularLeft : "circular left",
-			eDVBFrontendParametersSatellite.Polarisation_CircularRight : "circular right",
-			eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1 : "horizontal and vertical",
-			eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2 : "circular left and circular right"
+			eDVBFrontendParametersSatellite.Polarisation_Horizontal: "horizontal",
+			eDVBFrontendParametersSatellite.Polarisation_Vertical: "vertical",
+			eDVBFrontendParametersSatellite.Polarisation_CircularLeft: "circular left",
+			eDVBFrontendParametersSatellite.Polarisation_CircularRight: "circular right",
+			eDVBFrontendParametersSatellite.Polarisation_CircularRight + 1: "horizontal and vertical",
+			eDVBFrontendParametersSatellite.Polarisation_CircularRight + 2: "circular left and circular right"
 		}
 
 		self.tmp_tplist=[]
@@ -777,12 +777,12 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		self.orb_position = orb[0]
 		self.sat_name = orb[1]
 		self.feid = int(self.scan_nims.value)
-		tab_hilow = {"high" : 1, "low" : 0}
+		tab_hilow = {"high": 1, "low": 0}
 		tab_pol = {
-			"horizontal" : eDVBFrontendParametersSatellite.Polarisation_Horizontal,
-			"vertical" : eDVBFrontendParametersSatellite.Polarisation_Vertical,
-			"circular left" : eDVBFrontendParametersSatellite.Polarisation_CircularLeft,
-			"circular right" : eDVBFrontendParametersSatellite.Polarisation_CircularRight
+			"horizontal": eDVBFrontendParametersSatellite.Polarisation_Horizontal,
+			"vertical": eDVBFrontendParametersSatellite.Polarisation_Vertical,
+			"circular left": eDVBFrontendParametersSatellite.Polarisation_CircularLeft,
+			"circular right": eDVBFrontendParametersSatellite.Polarisation_CircularRight
 		}
 		uni_lnb_cutoff = self.uni_lnb_cutoff
 
@@ -1062,15 +1062,15 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 							self.offset = (self.user_defined_lnb_lo_freq if self.user_defined_lnb_scan else self.universal_lo_freq["low"]) * 1000
 				if len(data) >= 6 and data[0] == 'OK' and self.Sundtek_pol != "" and self.offset and self.dataSundtekIsGood(data):
 					parm = eDVBFrontendParametersSatellite()
-					sys = { "DVB-S" : parm.System_DVB_S,
-						"DVB-S2" : parm.System_DVB_S2,
-						"DVB-S2X" : parm.System_DVB_S2}
-					qam = { "QPSK" : parm.Modulation_QPSK,
-						"8PSK" : parm.Modulation_8PSK,
-						"16APSK" : parm.Modulation_16APSK,
-						"APSK_16" : parm.Modulation_16APSK,
-						"APSK_32" : parm.Modulation_32APSK,
-						"32APSK" : parm.Modulation_32APSK}
+					sys = {"DVB-S": parm.System_DVB_S,
+						"DVB-S2": parm.System_DVB_S2,
+						"DVB-S2X": parm.System_DVB_S2}
+					qam = {"QPSK": parm.Modulation_QPSK,
+						"8PSK": parm.Modulation_8PSK,
+						"16APSK": parm.Modulation_16APSK,
+						"APSK_16": parm.Modulation_16APSK,
+						"APSK_32": parm.Modulation_32APSK,
+						"32APSK": parm.Modulation_32APSK}
 					parm.orbital_position = self.orb_position
 					parm.polarisation = self.Sundtek_pol
 					parm.frequency = ((int(data[2]) + self.offset) / 1000) * 1000
@@ -1092,38 +1092,38 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			elif len(data) >= 10 and self.dataIsGood(data):
 				if data[0] == 'OK':
 					parm = eDVBFrontendParametersSatellite()
-					sys = { "DVB-S" : parm.System_DVB_S,
-						"DVB-S2" : parm.System_DVB_S2,
-						"DVB-S2X" : parm.System_DVB_S2}
-					qam = { "QPSK" : parm.Modulation_QPSK,
-						"8PSK" : parm.Modulation_8PSK,
-						"16APSK" : parm.Modulation_16APSK,
-						"32APSK" : parm.Modulation_32APSK}
-					inv = { "INVERSION_OFF" : parm.Inversion_Off,
-						"INVERSION_ON" : parm.Inversion_On,
-						"INVERSION_AUTO" : parm.Inversion_Unknown}
-					fec = { "FEC_AUTO" : parm.FEC_Auto,
-						"FEC_1_2" : parm.FEC_1_2,
-						"FEC_2_3" : parm.FEC_2_3,
-						"FEC_3_4" : parm.FEC_3_4,
-						"FEC_4_5" : parm.FEC_4_5,
+					sys = {"DVB-S": parm.System_DVB_S,
+						"DVB-S2": parm.System_DVB_S2,
+						"DVB-S2X": parm.System_DVB_S2}
+					qam = {"QPSK": parm.Modulation_QPSK,
+						"8PSK": parm.Modulation_8PSK,
+						"16APSK": parm.Modulation_16APSK,
+						"32APSK": parm.Modulation_32APSK}
+					inv = {"INVERSION_OFF": parm.Inversion_Off,
+						"INVERSION_ON": parm.Inversion_On,
+						"INVERSION_AUTO": parm.Inversion_Unknown}
+					fec = {"FEC_AUTO": parm.FEC_Auto,
+						"FEC_1_2": parm.FEC_1_2,
+						"FEC_2_3": parm.FEC_2_3,
+						"FEC_3_4": parm.FEC_3_4,
+						"FEC_4_5": parm.FEC_4_5,
 						"FEC_5_6": parm.FEC_5_6,
-						"FEC_7_8" : parm.FEC_7_8,
-						"FEC_8_9" : parm.FEC_8_9,
-						"FEC_3_5" : parm.FEC_3_5,
-						"FEC_9_10" : parm.FEC_9_10,
-						"FEC_NONE" : parm.FEC_None}
-					roll ={ "ROLLOFF_20" : parm.RollOff_alpha_0_20,
-						"ROLLOFF_25" : parm.RollOff_alpha_0_25,
-						"ROLLOFF_35" : parm.RollOff_alpha_0_35,
-						"ROLLOFF_AUTO" : parm.RollOff_auto}
-					pilot={ "PILOT_ON" : parm.Pilot_On,
-						"PILOT_OFF" : parm.Pilot_Off,
-						"PILOT_AUTO" : parm.Pilot_Unknown}
-					pol = { "HORIZONTAL" : parm.Polarisation_Horizontal,
-						"CIRCULARRIGHT" : parm.Polarisation_CircularRight,
-						"CIRCULARLEFT" : parm.Polarisation_CircularLeft,
-						"VERTICAL" : parm.Polarisation_Vertical}
+						"FEC_7_8": parm.FEC_7_8,
+						"FEC_8_9": parm.FEC_8_9,
+						"FEC_3_5": parm.FEC_3_5,
+						"FEC_9_10": parm.FEC_9_10,
+						"FEC_NONE": parm.FEC_None}
+					roll ={"ROLLOFF_20": parm.RollOff_alpha_0_20,
+						"ROLLOFF_25": parm.RollOff_alpha_0_25,
+						"ROLLOFF_35": parm.RollOff_alpha_0_35,
+						"ROLLOFF_AUTO": parm.RollOff_auto}
+					pilot={"PILOT_ON": parm.Pilot_On,
+						"PILOT_OFF": parm.Pilot_Off,
+						"PILOT_AUTO": parm.Pilot_Unknown}
+					pol = {"HORIZONTAL": parm.Polarisation_Horizontal,
+						"CIRCULARRIGHT": parm.Polarisation_CircularRight,
+						"CIRCULARLEFT": parm.Polarisation_CircularLeft,
+						"VERTICAL": parm.Polarisation_Vertical}
 					parm.orbital_position = self.orb_position
 					if getBrandOEM() == 'azbox':
 						parm.polarisation = self.polsave
@@ -1236,27 +1236,27 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 				for p in self.tmp_tplist:
 					print "[Blindscan][blindscanSessionClose] data: [%d][%d][%d][%d][%d][%d][%d][%d][%d][%d]" % (p.orbital_position, p.polarisation, p.frequency, p.symbol_rate, p.system, p.inversion, p.pilot, p.fec, p.modulation, p.modulation)
 
-					pol = { p.Polarisation_Horizontal : "H",
-						p.Polarisation_CircularRight : "R",
-						p.Polarisation_CircularLeft : "L",
-						p.Polarisation_Vertical : "V"}
-					fec = { p.FEC_Auto : "Auto",
-						p.FEC_1_2 : "1/2",
-						p.FEC_2_3 : "2/3",
-						p.FEC_3_4 : "3/4",
-						p.FEC_4_5 : "4/5",
-						p.FEC_5_6 : "5/6",
-						p.FEC_7_8 : "7/8",
-						p.FEC_8_9 : "8/9",
-						p.FEC_3_5 : "3/5",
-						p.FEC_9_10 : "9/10",
-						p.FEC_None : "None"}
-					sys = { p.System_DVB_S : "DVB-S",
-						p.System_DVB_S2 : "DVB-S2"}
-					qam = { p.Modulation_QPSK : "QPSK",
-						p.Modulation_8PSK : "8PSK",
-						p.Modulation_16APSK : "16APSK",
-						p.Modulation_32APSK : "32APSK"}
+					pol = {p.Polarisation_Horizontal: "H",
+						p.Polarisation_CircularRight: "R",
+						p.Polarisation_CircularLeft: "L",
+						p.Polarisation_Vertical: "V"}
+					fec = {p.FEC_Auto: "Auto",
+						p.FEC_1_2: "1/2",
+						p.FEC_2_3: "2/3",
+						p.FEC_3_4: "3/4",
+						p.FEC_4_5: "4/5",
+						p.FEC_5_6: "5/6",
+						p.FEC_7_8: "7/8",
+						p.FEC_8_9: "8/9",
+						p.FEC_3_5: "3/5",
+						p.FEC_9_10: "9/10",
+						p.FEC_None: "None"}
+					sys = {p.System_DVB_S: "DVB-S",
+						p.System_DVB_S2: "DVB-S2"}
+					qam = {p.Modulation_QPSK: "QPSK",
+						p.Modulation_8PSK: "8PSK",
+						p.Modulation_16APSK: "16APSK",
+						p.Modulation_32APSK: "32APSK"}
 					tp_str = "%g%s %d FEC %s %s %s" % (p.frequency/1000.0, pol[p.polarisation], p.symbol_rate/1000, fec[p.fec], sys[p.system], qam[p.modulation])
 					if p.is_id > eDVBFrontendParametersSatellite.No_Stream_Id_Filter:
 						tp_str += " MIS %d" % p.is_id

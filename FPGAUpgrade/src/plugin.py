@@ -31,7 +31,7 @@ STATUS_ERROR		= 2
 STATUS_PREPARED		= 3
 STATUS_PROGRAMMING 	= 4
 
-class FPGAUpgradeCore() :
+class FPGAUpgradeCore():
 	status = STATUS_READY
 	errmsg = ''
 	callcount 	= 0
@@ -219,7 +219,7 @@ class UpgradeStatus(Screen):
 		if self.need_restart:
 			from Screens.Standby import TryQuitMainloop
 			self.session.open(TryQuitMainloop, 2)
-		if self.is_done :
+		if self.is_done:
 			self.close()
 
 class FPGAUpgrade(Screen):
@@ -300,10 +300,10 @@ class FPGAUpgrade(Screen):
 			file.close()
 			self.DOWNLOAD_URL = str(download_uri_header) + "vu" + str(model) + "/" + self.DOWNLOAD_FILE_NAME
 
-	def doHook(self, blockNumber, blockSize, totalSize) :
-		if blockNumber*blockSize > totalSize :
+	def doHook(self, blockNumber, blockSize, totalSize):
+		if blockNumber*blockSize > totalSize:
 			self.STATUS_BAR.setText(_("Downloaded " + self.DOWNLOAD_TAR_PATH + self.DOWNLOAD_FILE_NAME))
-		else :
+		else:
 			self.STATUS_BAR.setText(_("Downloading..."))
 
 	def onCallbackHandler(self, confirmed):
@@ -365,7 +365,7 @@ class FPGAUpgrade(Screen):
 			self.session.open(MessageBox, _('File not found'), MessageBox.TYPE_INFO, timeout=5)
 			del test_opener
 			return
-		try :
+		try:
 			fname, header = urlretrieve(self.DOWNLOAD_URL, self.DOWNLOAD_TAR_PATH + self.DOWNLOAD_FILE_NAME, self.doHook)
 		except IOError, msg:
 			self.session.open(MessageBox, _(str(msg)), MessageBox.TYPE_INFO, timeout=5)
@@ -376,14 +376,14 @@ class FPGAUpgrade(Screen):
 		before_name = ''
 		self.SOURCELIST.changeDir(self.DOWNLOAD_TAR_PATH)
 		self.SOURCELIST.moveToIndex(0)
-		while cmp(self.SOURCELIST.getFilename(), self.DOWNLOAD_FILE_NAME) != 0 :
+		while cmp(self.SOURCELIST.getFilename(), self.DOWNLOAD_FILE_NAME) != 0:
 			self.SOURCELIST.down()
 			if cmp(before_name, self.SOURCELIST.getFilename()) == 0:
 				break
 			before_name = self.SOURCELIST.getFilename()
 
 	def onClickOk(self):
-	        if self.SOURCELIST.canDescent() : # isDir
+	        if self.SOURCELIST.canDescent(): # isDir
 	        	self.SOURCELIST.descent()
 			if self.SOURCELIST.getCurrentDirectory():
 				self.STATUS_BAR.setText(_(self.SOURCELIST.getCurrentDirectory()))

@@ -112,7 +112,7 @@ class SATIPDiscovery:
 		return "%d.%d.%d.%d"%(address[0],address[1],address[2],address[3])
 
 	def getEthernetAddr(self):
-		return self.formatAddr(iNetwork.getAdapterAttribute("eth0", "ip") )
+		return self.formatAddr(iNetwork.getAdapterAttribute("eth0", "ip"))
 
 	def DiscoveryTimerStart(self):
 		self.discoveryStartTimer.start(10, True)
@@ -170,7 +170,7 @@ class SATIPDiscovery:
 
 			return None
 
-		def getAttrN2(root, parent, tag, namespace_1 , namespace_2):
+		def getAttrN2(root, parent, tag, namespace_1, namespace_2):
 			try:
 				pElem = findChild(root, parent, namespace_1)
 				if pElem is not None:
@@ -208,12 +208,12 @@ class SATIPDiscovery:
 			AAA = location.find(':')
 			BBB = location.find('/')
 			if AAA == -1:
-				address = location[AAA+1 : BBB]
+				address = location[AAA+1: BBB]
 				port = "80"
 				request = location[BBB:]
 			else:
 				address = location[:AAA]
-				port = location[AAA+1 : BBB]
+				port = location[AAA+1: BBB]
 				request = location[BBB:]
 
 			#print "address2 : ", address
@@ -332,13 +332,13 @@ class SATIPTuner(Screen, ConfigListScreen):
 		self["description"] = StaticText(_("Starting..."))
 		self["choices"] = StaticText(_(" "))
 
-		self["shortcuts"] = ActionMap(["SATIPCliActions" ],
+		self["shortcuts"] = ActionMap(["SATIPCliActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
 			"red": self.keyCancel,
 			"green": self.keySave,
-			"yellow" : self.DiscoveryStart,
+			"yellow": self.DiscoveryStart,
 		}, -2)
 
 		self.list = []
@@ -387,14 +387,14 @@ class SATIPTuner(Screen, ConfigListScreen):
 		server_default = None
 		for uuid in satipdiscovery.getServerKeys():
 			description = satipdiscovery.getServerInfo(uuid, "modelName")
-			server_choices.append( (uuid, description) )
+			server_choices.append((uuid, description))
 			if self.vtuner_uuid == uuid:
 				server_default = uuid
 
 		if server_default is None:
 			server_default = server_choices[0][0]
 
-		self.satipconfig.server = ConfigSelection(default=server_default, choices=server_choices )
+		self.satipconfig.server = ConfigSelection(default=server_default, choices=server_choices)
 
 	def createSetup(self):
 		if self.satipconfig.server is None:
@@ -402,11 +402,11 @@ class SATIPTuner(Screen, ConfigListScreen):
 
 		self.list = []
 		self.server_entry = getConfigListEntry(_("SAT>IP Server : "), self.satipconfig.server)
-		self.list.append( self.server_entry )
+		self.list.append(self.server_entry)
 
 		self.createTypeConfig(self.satipconfig.server.value)
 		self.type_entry = getConfigListEntry(_("SAT>IP Tuner Type : "), self.satipconfig.tunertype)
-		self.list.append( self.type_entry )
+		self.list.append(self.type_entry)
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -424,14 +424,14 @@ class SATIPTuner(Screen, ConfigListScreen):
 
 		for (t, n) in capability.items():
 			if n != 0:
-				type_choices.append( (t, _(t)) )
+				type_choices.append((t, _(t)))
 				if self.vtuner_type == t:
 					type_default = t
 
 		if isEmpty(type_choices):
-			type_choices = [ ("DVB-S", _("DVB-S")) ]
+			type_choices = [("DVB-S", _("DVB-S"))]
 
-		self.satipconfig.tunertype = ConfigSelection(default=type_default, choices=type_choices )
+		self.satipconfig.tunertype = ConfigSelection(default=type_default, choices=type_choices)
 
 	def selectionChanged(self):
 		if self.satipconfig.server is None:
@@ -479,7 +479,7 @@ class SATIPTuner(Screen, ConfigListScreen):
 		self["choices"].setText(text)
 
 	def getCapability(self, uuid):
-		capability = { 'DVB-S' : 0, 'DVB-C' : 0, 'DVB-T' : 0}
+		capability = {'DVB-S': 0, 'DVB-C': 0, 'DVB-T': 0}
 		data = satipdiscovery.getServerInfo(uuid, "X_SATIPCAP")
 		if data is not None:
 			for x in data.split(','):
@@ -490,7 +490,7 @@ class SATIPTuner(Screen, ConfigListScreen):
 				elif x.upper().find("DVBT") != -1:
 					capability['DVB-T'] = int(x.split('-')[1])
 		else:
-			capability = { 'DVB-S' : 1, 'DVB-C' : 0, 'DVB-T' : 0}
+			capability = {'DVB-S': 1, 'DVB-C': 0, 'DVB-T': 0}
 
 		return capability
 
@@ -603,7 +603,7 @@ class SATIPClient(Screen):
 		self.configList = []
 		self["vtunerList"] = List(self.configList)
 
-		self["shortcuts"] = ActionMap(["SATIPCliActions" ],
+		self["shortcuts"] = ActionMap(["SATIPCliActions"],
 		{
 			"ok": self.keySetup,
 			"cancel": self.keyCancel,
@@ -641,7 +641,7 @@ class SATIPClient(Screen):
 	def KeySave(self):
 		if self.isChanged():
 			msg = "You should now reboot your STB to change SAT>IP Configuration.\n\nReboot now ?\n\n"
-			self.session.openWithCallback(self.keySaveCB, MessageBox, (_(msg) ) )
+			self.session.openWithCallback(self.keySaveCB, MessageBox, (_(msg)))
 
 		else:
 			self.close()
@@ -811,5 +811,5 @@ def menu(menuid, **kwargs):
 
 def Plugins(**kwargs):
 	pList = []
-	pList.append( PluginDescriptor(name=_("SAT>IP Client"), description=_("SAT>IP Client attached to vtuner."), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=menu) )
+	pList.append(PluginDescriptor(name=_("SAT>IP Client"), description=_("SAT>IP Client attached to vtuner."), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=menu))
 	return pList

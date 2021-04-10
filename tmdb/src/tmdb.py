@@ -107,7 +107,7 @@ class createList(GUIComponent, object):
 		if self.mode == 0:
 			width = self.l.getItemSize().width()
 			(title, coverUrl, media, id) = entry
-			res = [ None ]
+			res = [None]
 			x,y,w,h = skin.parameters.get("TMDbListName", (5,1,1920,30))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, str(title)))
 			#res.append((eListboxPythonMultiContent.TYPE_TEXT, 10, 0, 800, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(title)))
@@ -162,8 +162,8 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 		self.skinName = ["tmdbConfigScreen", "Setup"]
 		self.setup_title = _("Setup")
 
-		self.onChangedEntry = [ ]
-		self.list = [ ]
+		self.onChangedEntry = []
+		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		
 		self["actions"] = ActionMap(["TMDbActions"],

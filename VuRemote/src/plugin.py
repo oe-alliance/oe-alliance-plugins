@@ -22,10 +22,10 @@ config.misc.remotecontrol_text_support = ConfigYesNo(default=True)
 
 config.plugins.remotecontrolcode = ConfigSubsection()
 if getBoxType() in ("vusolo", "vuduo"):
-	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="1", choices=[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
+	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="1", choices=[("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ")])
 else:
-	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="2", choices=[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
-config.plugins.remotecontrolcode.rcuType = ConfigSelection(default=getRcuDefaultType(), choices=[ ("legacy", "Legacy Vu+ Universal RCU"), ("type5", "New Vu+ Bluetooth RCU"), ("type6", "New Vu+ Type 6 RCU") ] )
+	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="2", choices=[("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ")])
+config.plugins.remotecontrolcode.rcuType = ConfigSelection(default=getRcuDefaultType(), choices=[("legacy", "Legacy Vu+ Universal RCU"), ("type5", "New Vu+ Bluetooth RCU"), ("type6", "New Vu+ Type 6 RCU")])
 
 class RemoteControlCodeInit:
 	def __init__(self):
@@ -41,7 +41,7 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose", "vuzero", "vusolo4k", "vuuno4k", "vuuno4kse", "vuzero4k", "vuultimo4k", "vuduo4k", "vuduo4kse"):
+		if getBoxType() in ("vuuno", "vuultimo", "vusolo2","vuduo2", "vusolose", "vuzero", "vusolo4k", "vuuno4k", "vuuno4kse", "vuzero4k", "vuultimo4k", "vuduo4k", "vuduo4kse"):
 			return True
 		else:
 			return False
@@ -62,7 +62,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		self.skinName = ['RemoteControlCode', 'Setup']
 		self.session = session
 		Screen.setTitle(self, _("Remote Control Code"))
-		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions" ],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
@@ -90,8 +90,8 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		self.list = []
 		self.rcuTypeEntry = getConfigListEntry(_("Remote Control Type"), config.plugins.remotecontrolcode.rcuType)
 		self.rcsctype = getConfigListEntry(_("Remote Control System Code"), config.plugins.remotecontrolcode.systemcode)
-		self.list.append( self.rcuTypeEntry )
-		self.list.append( self.rcsctype )
+		self.list.append(self.rcuTypeEntry)
+		self.list.append(self.rcsctype)
 		if getImageDistro() in ("openvix", "openatv"):
 			self.list.append(getConfigListEntry(_("Text support"), config.misc.remotecontrol_text_support))
 		self["config"].list = self.list
@@ -131,7 +131,7 @@ class MessageBoxConfirmCode(MessageBox):
 		MessageBox.__init__(self,session,text,type,timeout,close_on_any_key,default,enable_input,msgBoxID)
 		self.skinName = "MessageBox"
 		if type == MessageBox.TYPE_YESNO:
-			self.list = [ (_("Keep"), True), (_("Restore"), False) ]
+			self.list = [(_("Keep"), True), (_("Restore"), False)]
 			self["list"].setList(self.list)
 
 	def timerTick(self):

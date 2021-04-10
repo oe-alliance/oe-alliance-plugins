@@ -58,7 +58,7 @@ class fempa(Screen):
 				htmldoc = str(response.read())
 				response.close()
 				return htmldoc 
-			except :
+			except:
 				print "jebiga gethtml"
 		
 		html = gethtml("http://www.p4.no/section.aspx?id=443")
@@ -90,7 +90,7 @@ class fempa(Screen):
 			x = "http://www.p4.no" + x[0]	
 		
 			fileRef = eServiceReference(4097,0,x)
-			fileRef.setName (returnTitle)
+			fileRef.setName(returnTitle)
 			self.session.nav.playService(fileRef)
 			 
 					
@@ -106,7 +106,7 @@ class fempa(Screen):
 			htmldoc = str(response.read())
 			response.close()
 			return htmldoc
-		except :
+		except:
 			print "jebiga gethtml"				  
    
 	def cancel(self):
@@ -126,7 +126,7 @@ def Plugins(**kwargs):
 	return PluginDescriptor(
 		name="Fem Pa",
 		description=_("Norwegian P4 FEM PAA radio show player"),
-		where=[ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
+		where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU],
 		icon="./icon.png",
 		fnc=main)
 

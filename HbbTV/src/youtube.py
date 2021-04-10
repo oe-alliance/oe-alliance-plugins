@@ -52,33 +52,33 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 	def layoutFinished(self):
 		self.setTitle(_('Start YouTube TV'))
 		self["infomation"].setText(_("YouTube TV is a new way to watch YouTube videos"))
-		self["startdesc" ].setText(_("* Start YouTube TV"))
-		self["helpdesc"  ].setText(_("* RC Help"))
+		self["startdesc"].setText(_("* Start YouTube TV"))
+		self["helpdesc"].setText(_("* RC Help"))
 
 	def setHelpModeActions(self):
 		self.helpList = []
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions", {
-			"ok"    : (self.keyPass, _("Play ther selected the video")),
+			"ok": (self.keyPass, _("Play ther selected the video")),
 			"cancel": (self.keyPass, _("Exit the YouTube TV")),
 		})
 		self["EventViewActions"] = HelpableActionMap(self, "EventViewActions", {
-			"pageUp"    : (self.keyPass, _("Move up")),
-			"pageDown"  : (self.keyPass, _("Move down")),
-			"prevEvent" : (self.keyPass, _("Move left")),
-			"nextEvent" : (self.keyPass, _("Move right")),
+			"pageUp": (self.keyPass, _("Move up")),
+			"pageDown": (self.keyPass, _("Move down")),
+			"prevEvent": (self.keyPass, _("Move left")),
+			"nextEvent": (self.keyPass, _("Move right")),
 		})
 		self["EPGSelectActions"] = HelpableActionMap(self, "EPGSelectActions", {
-			"info"        : (self.keyPass, _("Search a video")),
-			"nextService" : (self.keyPass, _("Skip forward 10 sec")),
-			"prevService" : (self.keyPass, _("Skip backward 10 sec")),
+			"info": (self.keyPass, _("Search a video")),
+			"nextService": (self.keyPass, _("Skip forward 10 sec")),
+			"prevService": (self.keyPass, _("Skip backward 10 sec")),
 		})
 		self["MediaPlayerActions"] = HelpableActionMap(self, "MediaPlayerActions", {
-			"play"  : (self.keyPass, _("Play current video")),
-			"pause" : (self.keyPass, _("Pause current video")),
-			"stop"  : (self.keyPass, _("Stop current video")),
+			"play": (self.keyPass, _("Play current video")),
+			"pause": (self.keyPass, _("Pause current video")),
+			"stop": (self.keyPass, _("Stop current video")),
 		})
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions", {
-			"red"   : (self.keyPass, _("Back")),
+			"red": (self.keyPass, _("Back")),
 		})
 		self.showHelp()
 
@@ -100,7 +100,7 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 		self.setHelpModeActions()
 
 	def keyBlue(self):
-		if config.plugins.youtubetv.showhelp.value == True :
+		if config.plugins.youtubetv.showhelp.value == True:
 			config.plugins.youtubetv.showhelp.setValue(False)
 		else:
 			config.plugins.youtubetv.showhelp.setValue(True)
@@ -126,10 +126,10 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.menulist)
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
-			"ok"     : self.keyGreen,
-			"green"  : self.keyGreen,
-			"red"    : self.keyRed,
-			"cancel" : self.keyRed,
+			"ok": self.keyGreen,
+			"green": self.keyGreen,
+			"red": self.keyRed,
+			"cancel": self.keyRed,
 		}, -2)
 		self["key_red"]   = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))

@@ -24,28 +24,28 @@ from Components.MultiContent import MultiContentEntryText
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 EXTENSIONS = {
-	".m4a" : "music",
-	".mp2" : "music",
-	".mp3" : "music",
-	".wav" : "music",
-	".ogg" : "music",
+	".m4a": "music",
+	".mp2": "music",
+	".mp3": "music",
+	".wav": "music",
+	".ogg": "music",
 	".flac": "music",
-	".ts"  : "movie",
-	".avi" : "movie",
+	".ts": "movie",
+	".avi": "movie",
 	".divx": "movie",
-	".m4v" : "movie",
-	".mpg" : "movie",
+	".m4v": "movie",
+	".mpg": "movie",
 	".mpeg": "movie",
-	".mkv" : "movie",
-	".mp4" : "movie",
-	".mov" : "movie",
+	".mkv": "movie",
+	".mp4": "movie",
+	".mov": "movie",
 	".m2ts": "movie",
-	".wmv" : "movie",
-	".jpg" : "picture",
+	".wmv": "movie",
+	".jpg": "picture",
 	".jpeg": "picture",
-	".png" : "picture",
-	".bmp" : "picture",
-	".m3u" : "stream",
+	".png": "picture",
+	".bmp": "picture",
+	".m3u": "stream",
 	".m3u8": "stream",
 }
 
@@ -135,16 +135,16 @@ class DLNAFileBrowser(Screen):
 		Screen.__init__(self, session)
 
 		self["actions"]  = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"], {
-			"back"  : self.keyCancel,
-			"left"  : self.keyLeft,
-			"right" : self.keyRight,
-			"up"    : self.keyUp,
-			"down"  : self.keyDown,
-			"ok"    : self.keyOK,
-			"green" : self.keyGreen,
-			"red"   : self.keyCancel,
+			"back": self.keyCancel,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"up": self.keyUp,
+			"down": self.keyDown,
+			"ok": self.keyOK,
+			"green": self.keyGreen,
+			"red": self.keyCancel,
 			"yellow": self.keyYellow,
-			"blue"  : self.keyBlue
+			"blue": self.keyBlue
 		}, -1)
 
 		self["directory"]  = Label()
@@ -157,11 +157,11 @@ class DLNAFileBrowser(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 		self.showCB = {
-			'movie'   : self.showMovie,
-			'music'   : self.showMusic,
-			'picture' : self.showPicture,
-			'stream'  : self.showStream,
-			'unknown' : self.showUnknown,
+			'movie': self.showMovie,
+			'music': self.showMusic,
+			'picture': self.showPicture,
+			'stream': self.showStream,
+			'unknown': self.showUnknown,
 		}
 
 	def layoutFinished(self):
@@ -461,9 +461,9 @@ class DLNAImageViewer(Screen):
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MovieSelectionActions"], {
 			"cancel": self.keyCancel,
-			"left"  : self.keyLeft,
-			"right" : self.keyRight,
-			"blue"  : self.keyBlue,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"blue": self.keyBlue,
 			"yellow": self.keyYellow,
 		}, -1)
 
@@ -702,10 +702,10 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 		global DLNA_CONFIG_CLIENT_CONFNAME
 		self.configFileName = DLNA_CONFIG_CLIENT_CONFNAME
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", ], {
-			"red"    : self.keyExit,
-			"green"  : self.keyOK,
-			"cancel" : self.keyExit,
-			"ok"     : self.keyOK,
+			"red": self.keyExit,
+			"green": self.keyOK,
+			"cancel": self.keyExit,
+			"ok": self.keyOK,
                 }, -2)
 		self["key_red"]     = StaticText(_("Exit"))
 		self["key_green"]   = StaticText(_("Save"))
@@ -782,7 +782,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 				i   = line.find('=')
 				k,v = line[:i],line[i+1:]
 				self.oldConfig[k] = v
-			except :
+			except:
 				pass
 
 		#setDefault('rootdir', '/media/upnp/')
@@ -810,12 +810,12 @@ class DLNADeviceBrowser(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self["actions"]  = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
-			"ok"    : self.keyOK,
+			"ok": self.keyOK,
 			"cancel": self.keyCancel,
-			"red"   : self.keyCancel,
-			"green" : self.keyGreen,
+			"red": self.keyCancel,
+			"green": self.keyGreen,
 			"yellow": self.keyYellow,
-			"blue"  : self.keyBlue,
+			"blue": self.keyBlue,
 		}, -1)
 
 		global DLNA_CONFIG_CLIENT_CONFNAME
@@ -908,7 +908,7 @@ class DLNADeviceBrowser(Screen):
 					DLNA_CONFIG_DEVICE_REFRESH = int(v)*1000
 				elif k == 'slideshow':
 					DLNA_CONFIG_SLIDESHOW = int(v)*1000
-			except :
+			except:
 				pass
 		print "config : [%s][%d][%d]"%(DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH)
 
@@ -976,7 +976,7 @@ class DLNADeviceBrowser(Screen):
 	def setListOnView(slelf):
 		global DLNA_CONFIG_ROOT_DIR
 		items,rootdir = [],DLNA_CONFIG_ROOT_DIR
-		deviceList = [ name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name)) ]
+		deviceList = [name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name))]
 		deviceList.sort()
 		for d in deviceList:
 			if d[0] in ('.', '_'):

@@ -205,13 +205,13 @@ class SatelliteTransponderSearchSupport:
 		if self.frontend is None:
 			self.timer.start(5000, True)
 			return
-		x = { }
+		x = {}
 		self.frontend.getFrontendStatus(x)
 		assert x, "getFrontendStatus failed!"
 		if x["tuner_state"] in ("LOCKED", "FAILED", "LOSTLOCK"):
 			state = self.satellite_search_session
 
-			d = { }
+			d = {}
 			self.frontend.getTransponderData(d, False)
 			d["tuner_type"] = 'DVB-S' # what is this doing? Nothing good by the look of it.
 			r = ConvertToHumanReadable(d)
@@ -366,7 +366,7 @@ class SatelliteTransponderSearchSupport:
 			parm = eDVBFrontendParametersSatellite()
 			parm.frequency = bs_range[0]
 			if self.nim.isCompatible("DVB-S2"):
-				steps = { 5 : 2000, 4 : 4000, 3 : 6000, 2 : 8000, 1 : 10000 }[self.dmmBlindscan.accuracy.value]
+				steps = {5: 2000, 4: 4000, 3: 6000, 2: 8000, 1: 10000}[self.dmmBlindscan.accuracy.value]
 				parm.system = self.dmmBlindscan.system.value
 				parm.pilot = eDVBFrontendParametersSatellite.Pilot_Unknown
 				parm.rolloff = eDVBFrontendParametersSatellite.RollOff_alpha_0_35
@@ -455,10 +455,10 @@ class SatelliteTransponderSearchSupport:
 		self.releaseFrontend()
 		self.nim = nimmanager.nim_slots[self.feid]
 		tunername = nimmanager.getNimName(self.feid)
-		self.__tlist = [ ]
-		self.tp_found = [ ]
+		self.__tlist = []
+		self.tp_found = []
 		self.current_range = None
-		self.range_list = [ ] # contains tuples, (start, stop, polarisation), max length 4, i.e. 4 sub-bands
+		self.range_list = [] # contains tuples, (start, stop, polarisation), max length 4, i.e. 4 sub-bands
 		tuner_no = -1
 		self.auto_scan = False
 
@@ -516,7 +516,7 @@ class SatelliteTransponderSearchSupport:
 				tmpstr = _("Searching for active satellite transponders...")
 			else:
 				tmpstr = _("Nothing to scan! Press Exit!")
-			x = { }
+			x = {}
 			data = self.frontend.getFrontendData(x)
 			tuner_no = x["tuner_number"]
 		else:
@@ -684,7 +684,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 			"polarization": eDVBFrontendParametersSatellite.Polarisation_Horizontal,
 			"fec": eDVBFrontendParametersSatellite.FEC_Auto,
 			"fec_s2": eDVBFrontendParametersSatellite.FEC_9_10,
-			"modulation": eDVBFrontendParametersSatellite.Modulation_QPSK }
+			"modulation": eDVBFrontendParametersSatellite.Modulation_QPSK}
 
 		if frontendData is not None:
 			ttype = frontendData.get("tuner_type", "UNKNOWN")
@@ -756,10 +756,10 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 
 		# this is not currently a user option
 		self.dmmBlindscan.system = ConfigSelection(default=eDVBFrontendParametersSatellite.System_DVB_S2, 
-			choices=[ (eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S + DVB-S2")),
+			choices=[(eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S + DVB-S2")),
 				(eDVBFrontendParametersSatellite.System_DVB_S, _("DVB-S only"))])
 
-		self.dmmBlindscan.accuracy = ConfigSelection(default=2, choices=[ (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")])
+		self.dmmBlindscan.accuracy = ConfigSelection(default=2, choices=[(1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")])
 #		self.dmmBlindscan.multiple_scan = ConfigSelection(default = 1, choices = [(1, "only scan once"), (2, "scan twice"), (3, "scan three times")])
 		self.search_type = ConfigSelection(default="services", choices=[
 			("services", _("scan for channels")),
@@ -777,8 +777,8 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 			if slot.isCompatible("DVB-S"):
 				satlist_for_slot = self.satList[slot_id]
 				self.scan_satselection.append(getConfigSatlist(defaultSat["orbpos"], satlist_for_slot))
-				sat_freq_range = {(10700000, 12750000) }
-				sat_band_cutoff = {11700000 }
+				sat_freq_range = {(10700000, 12750000)}
+				sat_band_cutoff = {11700000}
 				for sat in satlist_for_slot:
 					orbpos = sat[0]
 				self.nim_sat_frequency_range.append(sat_freq_range)
@@ -901,13 +901,13 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 			self.close(True)
 			
 
-	def createSatellitesXMLfile(self) :
+	def createSatellitesXMLfile(self):
 		pos = self.orb_pos
-		if pos > 1800 :
+		if pos > 1800:
 			pos -= 3600
-		if pos < 0 :
+		if pos < 0:
 			pos_name = '%dW' % (abs(int(pos))/10)
-		else :
+		else:
 			pos_name = '%dE' % (abs(int(pos))/10)
 		location = '%s/dmm_blindscan_%s_%s.xml' %(XML_BLINDSCAN_DIR, pos_name, strftime("%d-%m-%Y_%H-%M-%S"))
 		tuner = nimmanager.nim_slots[self.feid].friendly_full_description
