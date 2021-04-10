@@ -85,7 +85,7 @@ class OpenUgSetupScreen(Screen):
 
 		self["info"] = Label(_("Open Uitzending Gemist\n\nBased on Xtrend code"))
 
-		self.mmenu= []
+		self.mmenu = []
 		self.mmenu.append((_("UG Recently added"), 'recent'))
 		self.mmenu.append((_("UG Popular"), 'pop'))
 		self.mmenu.append((_("UG A-Z"), 'atotz'))
@@ -159,7 +159,7 @@ class DaysBackScreen(Screen):
 			"cancel": self.keyCancel,
 		}, -2)
 
-		self.mmenu= []
+		self.mmenu = []
 		count = 0
 		now = date.today()
 		while count < 15:
@@ -417,7 +417,7 @@ class OpenUg(StreamsThumbCommon):
 				elif state == 2:
 					if '<span class=\"extra_info\">' in line:
 						continue
-					date = _("Added: ")+str(line.split("<br />")[0].lstrip())
+					date = _("Added: ") + str(line.split("<br />")[0].lstrip())
 					state = 3
 
 				elif state == 3:
@@ -521,7 +521,7 @@ class OpenUg(StreamsThumbCommon):
 						state = 3
 
 				elif state == 3:
-					date = _("Time: ")+str(line[:5])
+					date = _("Time: ") + str(line[:5])
 					weekList.append((date, name, short, channel, stream, icon, duration, False))
 					state = 0
 
@@ -554,7 +554,7 @@ class OpenUg(StreamsThumbCommon):
 
 				elif state == 1:
 					tmp = "<div class=\"programDetails\" id=\""
-					if  tmp in line:
+					if tmp in line:
 						stream = line.split(tmp)[1].split('\">')[0]
 
 					tmp = "<h3>"
@@ -569,7 +569,7 @@ class OpenUg(StreamsThumbCommon):
 
 					tmp = "<div class='datum'>"
 					if tmp in line and date == '':
-						date = _("Added: ")+str(line.split(tmp)[1].split("</div>")[0])
+						date = _("Added: ") + str(line.split(tmp)[1].split("</div>")[0])
 						channel = date[-3:]
 
 					# Only set the Icon if they are enabled
@@ -579,7 +579,7 @@ class OpenUg(StreamsThumbCommon):
 							icon = line.split(tmp)[1].split("\'/>")[0]
 							if "http://" not in icon:
 								icon_tmp = self.UG_BASE_URL
-								icon =  icon_tmp + icon
+								icon = icon_tmp + icon
 					else:
 						icon = ''
 
@@ -642,13 +642,13 @@ class OpenUg(StreamsThumbCommon):
 								icon = line.split(tmp)[1].split('\'/>')[0]
 								if "http://" not in icon:
 									icon_tmp = self.UG_BASE_URL
-									icon =  icon_tmp + icon
+									icon = icon_tmp + icon
 						else:
 							icon = ''
 
 						tmp = "<div class='datum'>"
 						if tmp in line and date == '':
-							date = _("Added: ")+str(line.split(tmp)[1].split("</div>")[0])
+							date = _("Added: ") + str(line.split(tmp)[1].split("</div>")[0])
 							channel = date[-3:]
 
 						tmp = "<div class='short'>"
@@ -663,7 +663,7 @@ class OpenUg(StreamsThumbCommon):
 								icon = line.split("url(\"")[1].split("\"")[0]
 								if "http://" not in icon:
 									icon_tmp = self.UG_BASE_URL
-									icon =  icon_tmp + icon
+									icon = icon_tmp + icon
 						else:
 							icon = ''
 

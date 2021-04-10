@@ -29,10 +29,10 @@ except:
 def insertValues(xml, values):
 	# The skin template is designed for an HD screen so the scaling factor is 720.
 	# double negative to round up not round down
-	return xml % tuple([int(-(x*getDesktop(0).size().height()//(-720))) for x in values])
+	return xml % tuple([int(-(x * getDesktop(0).size().height() // (-720))) for x in values])
 
 class DmmBlindscanState(Screen):
-	skin=insertValues("""
+	skin = insertValues("""
 	<screen position="center,center" size="%d,%d" title="Satellite Blindscan">
 		<widget name="text" position="%d,%d" size="%d,%d" font="Regular;%d" />
 		<widget name="progress" position="%d,%d" size="%d,%d" font="Regular;%d" />
@@ -73,11 +73,11 @@ class DmmBlindscanState(Screen):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Blind scan state"))
 		self.skinName = ["DmmBlindscanState", "SatBlindscanState2"]
-		self["list"]=List()
-		self["text"]=Label()
+		self["list"] = List()
+		self["text"] = Label()
 		self["text"].setText(text)
-		self["post_action"]=Label()
-		self["progress"]=Label()
+		self["post_action"] = Label()
+		self["progress"] = Label()
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText("Auto / Manual")
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
@@ -94,11 +94,11 @@ class DmmBlindscanState(Screen):
 		self.tmr.callback.append(self.updateConstellation)
 		self.constellation_supported = None
 		if fe_num != -1:
-			self.post_action=1
-			self.finished=0
+			self.post_action = 1
+			self.finished = 0
 			self.keyGreen()
 		else:
-			self.post_action=-1
+			self.post_action = -1
 
 	def keyGreen(self):
 		if self.finished:
@@ -112,7 +112,7 @@ class DmmBlindscanState(Screen):
 
 	def setFinished(self):
 		if self.post_action:
-			self.finished=1
+			self.finished = 1
 			self["text"].setText(_("Transponder searching finished!"))
 			self["post_action"].setText(_("Press green to start service searching."))
 		else:
@@ -149,7 +149,7 @@ class DmmBlindscanState(Screen):
 			I = []
 			for pos in range(0,30,2):
 				try:
-					val = int(bitmap[pos:pos+2], 16)
+					val = int(bitmap[pos:pos + 2], 16)
 					val = 128 + (val - 256 if val > 127 else val)
 					#val = (int(bitmap[pos:pos+2], 16) + 128) & 0xff
 				except ValueError:
@@ -158,7 +158,7 @@ class DmmBlindscanState(Screen):
 				I.append(val)
 			for pos in range(30,60,2):
 				try:
-					val = int(bitmap[pos:pos+2], 16)
+					val = int(bitmap[pos:pos + 2], 16)
 					val = 128 + (val - 256 if val > 127 else val)
 					#val = (int(bitmap[pos:pos+2], 16) + 128) & 0xff
 				except ValueError:
@@ -255,7 +255,7 @@ class SatelliteTransponderSearchSupport:
 					fstr = "%s %s %s %s %s %s" % (
 						str(parm.frequency / 1000),
 						{eDVBFrontendParametersSatellite.Polarisation_Horizontal: "H", eDVBFrontendParametersSatellite.Polarisation_Vertical: "V", eDVBFrontendParametersSatellite.Polarisation_CircularLeft: "L", eDVBFrontendParametersSatellite.Polarisation_CircularRight: "R"}.get(parm.polarisation),
-						str(parm.symbol_rate/1000),
+						str(parm.symbol_rate / 1000),
 						r["fec_inner"],
 						r["system"],
 						r["modulation"])
@@ -266,10 +266,10 @@ class SatelliteTransponderSearchSupport:
 					if self.auto_scan:
 						print "[dmmBlindscan][frontendStateChanged] LOCKED at", freq, {eDVBFrontendParametersSatellite.Polarisation_Horizontal: "H", eDVBFrontendParametersSatellite.Polarisation_Vertical: "V", eDVBFrontendParametersSatellite.Polarisation_CircularLeft: "L", eDVBFrontendParametersSatellite.Polarisation_CircularRight: "R"}.get(parm.polarisation)
 					else:
-						print "[dmmBlindscan][frontendStateChanged] LOCKED at", freq, "SEARCHED at", self.parm.frequency, "half bw", (135L*((sr+1000)/1000)/200), "half search range", (self.parm.symbol_rate/2)
+						print "[dmmBlindscan][frontendStateChanged] LOCKED at", freq, "SEARCHED at", self.parm.frequency, "half bw", (135L * ((sr + 1000) / 1000) / 200), "half search range", (self.parm.symbol_rate / 2)
 						self.parm.frequency = freq
-						self.parm.frequency += (135L*((sr+999)/1000)/200)
-						self.parm.frequency += self.parm.symbol_rate/2
+						self.parm.frequency += (135L * ((sr + 999) / 1000) / 200)
+						self.parm.frequency += self.parm.symbol_rate / 2
 
 					if parm_list:
 						bm = state.getConstellationBitmap(5)
@@ -293,7 +293,7 @@ class SatelliteTransponderSearchSupport:
 #				freq /= 2
 				freq = int(round(d["frequency"], -3)) # round to nearest 1000
 				mhz_complete, mhz_done = self.stats(freq)
-				print "[dmmBlindscan][frontendStateChanged] CURRENT freq", freq, "%d/%d" %(mhz_done, mhz_complete)
+				print "[dmmBlindscan][frontendStateChanged] CURRENT freq", freq, "%d/%d" % (mhz_done, mhz_complete)
 				check_finished = self.parm is None
 			else:
 				print "[dmmBlindscan][frontendStateChanged] NEXT freq", self.parm.frequency
@@ -308,7 +308,7 @@ class SatelliteTransponderSearchSupport:
 				if self.parm is None:
 					tmpstr = _("%dMHz scanned") % mhz_complete
 					tmpstr += ', '
-					tmpstr += _("%d transponders found at %d:%02d min") %(len(self.tp_found),seconds_done / 60, seconds_done % 60)
+					tmpstr += _("%d transponders found at %d:%02d min") % (len(self.tp_found),seconds_done / 60, seconds_done % 60)
 					state["progress"].setText(tmpstr)
 					state.setFinished()
 					self.frontend = None
@@ -316,9 +316,9 @@ class SatelliteTransponderSearchSupport:
 					return
 
 			if self.auto_scan:
-				tmpstr = str((freq+500)/1000)
+				tmpstr = str((freq + 500) / 1000)
 			else:
-				tmpstr = str((self.parm.frequency+500)/1000)
+				tmpstr = str((self.parm.frequency + 500) / 1000)
 
 			if self.parm.polarisation == eDVBFrontendParametersSatellite.Polarisation_Horizontal:
 				tmpstr += "H"
@@ -330,15 +330,15 @@ class SatelliteTransponderSearchSupport:
 				tmpstr += "R"
 
 			tmpstr += ', '
-			tmpstr += "%d/%dMhz" %(mhz_done, mhz_complete)
+			tmpstr += "%d/%dMhz" % (mhz_done, mhz_complete)
 
 			tmpstr += ", "
-			tmpstr += _("%d transponder(s) found") %len(self.tp_found)
+			tmpstr += _("%d transponder(s) found") % len(self.tp_found)
 
 			tmpstr += ', '
 
 			seconds_complete = (seconds_done * mhz_complete) / max(mhz_done, 1)
-			tmpstr += _("%d:%02d/%d:%02dmin") %(seconds_done / 60, seconds_done % 60, seconds_complete / 60, seconds_complete % 60)
+			tmpstr += _("%d:%02d/%d:%02dmin") % (seconds_done / 60, seconds_done % 60, seconds_complete / 60, seconds_complete % 60)
 
 			state["progress"].setText(tmpstr)
 
@@ -482,12 +482,12 @@ class SatelliteTransponderSearchSupport:
 			stop = max(s1,s2)
 
 			if self.auto_scan: # hack for driver based blindscan... extend search range +/- 50Mhz
-				freq_limits = list(map(lambda x: x*1000, self.freq_limits))
+				freq_limits = list(map(lambda x: x * 1000, self.freq_limits))
 				start -= 50000
 				stop += 50000
 				if start < freq_limits[0]:
 					start = freq_limits[0]
-				if stop >freq_limits[1]:
+				if stop > freq_limits[1]:
 					stop = freq_limits[1]
 
 			pols = {eDVBFrontendParametersSatellite.Polarisation_Horizontal: "horizontal", eDVBFrontendParametersSatellite.Polarisation_Vertical: "vertical"}
@@ -496,7 +496,7 @@ class SatelliteTransponderSearchSupport:
 					if self.auto_scan:
 						pol or self.range_list.append((start, min(stop, start + 5000), pol)) # hack alert, this is crap and should not be here, but scan misses a lot of services without it.
 						if start < band_cutoff_frequency:
-							self.range_list.append((start, min(stop, band_cutoff_frequency -1), pol))
+							self.range_list.append((start, min(stop, band_cutoff_frequency - 1), pol))
 						if stop > band_cutoff_frequency:
 							self.range_list.append((max(band_cutoff_frequency, start), stop, pol))
 					else:
@@ -634,11 +634,11 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 		self.list.append(self.satelliteEntry)
 		self.searchtypeEntry = getConfigListEntry(_("Search type"), self.search_type, _('"scan for channels" searches for channels and saves them to your receiver; "Save to XML" does a transponder search and saves the results in satellites.xml format and stores it in /tmp'))
 		self.list.append(self.searchtypeEntry)
-		self.list.append(getConfigListEntry(_("Start frequency"), self.dmmBlindscan.freq_start, _("Frequency values must be between %d MHz and %d MHz") % (self.freq_limits[0], self.freq_limits[1]-1)))
-		self.list.append(getConfigListEntry(_("Stop frequency"), self.dmmBlindscan.freq_stop, _("Frequency values must be between %d MHz and %d MHz") % (self.freq_limits[0]+1, self.freq_limits[1])))
+		self.list.append(getConfigListEntry(_("Start frequency"), self.dmmBlindscan.freq_start, _("Frequency values must be between %d MHz and %d MHz") % (self.freq_limits[0], self.freq_limits[1] - 1)))
+		self.list.append(getConfigListEntry(_("Stop frequency"), self.dmmBlindscan.freq_stop, _("Frequency values must be between %d MHz and %d MHz") % (self.freq_limits[0] + 1, self.freq_limits[1])))
 		self.list.append(getConfigListEntry(_("Polarization"), self.dmmBlindscan.polarization, _("Polarisation, select horizontal, vertical or both.")))
-		self.list.append(getConfigListEntry(_("Start symbol rate"), self.dmmBlindscan.sr_start, _("Symbol rate values are in megasymbols; enter a value between %d and %d") % (self.sr_limits[0], self.sr_limits[1]-1)))
-		self.list.append(getConfigListEntry(_("Stop symbol rate"), self.dmmBlindscan.sr_stop, _("Symbol rate values are in megasymbols; enter a value between %d and %d") % (self.sr_limits[0]+1, self.sr_limits[1])))
+		self.list.append(getConfigListEntry(_("Start symbol rate"), self.dmmBlindscan.sr_start, _("Symbol rate values are in megasymbols; enter a value between %d and %d") % (self.sr_limits[0], self.sr_limits[1] - 1)))
+		self.list.append(getConfigListEntry(_("Stop symbol rate"), self.dmmBlindscan.sr_stop, _("Symbol rate values are in megasymbols; enter a value between %d and %d") % (self.sr_limits[0] + 1, self.sr_limits[1])))
 		if nim.isCompatible("DVB-S2") and not (nimmanager.nim_slots[index_to_scan].supportsBlindScan() or tunername in ("Si2166B", "Si2169C")):
 			self.list.append(getConfigListEntry(_("Accuracy (higher is better)"), self.dmmBlindscan.accuracy, _("Select between 1 and 5. Higher numbers give more accurat search results.")))
 		if self.search_type.value == "services":
@@ -708,13 +708,13 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 		self.dmmBlindscan.scan_onlyfree = ConfigYesNo(default=False)
 
 		self.freq_limits = (10700, 12750)
-		self.dmmBlindscan.freq_start = ConfigInteger(default=self.freq_limits[0], limits=(self.freq_limits[0], self.freq_limits[1] -1))
-		self.dmmBlindscan.freq_stop = ConfigInteger(default=self.freq_limits[1], limits=(self.freq_limits[0] +1, self.freq_limits[1]))
+		self.dmmBlindscan.freq_start = ConfigInteger(default=self.freq_limits[0], limits=(self.freq_limits[0], self.freq_limits[1] - 1))
+		self.dmmBlindscan.freq_stop = ConfigInteger(default=self.freq_limits[1], limits=(self.freq_limits[0] + 1, self.freq_limits[1]))
 
 		self.sr_limits = (1, 60)
 		sr_defaults = (2, 45)
-		self.dmmBlindscan.sr_start = ConfigInteger(default=sr_defaults[0], limits=(self.sr_limits[0], self.sr_limits[1] -1))
-		self.dmmBlindscan.sr_stop = ConfigInteger(default=sr_defaults[1], limits=(self.sr_limits[0] +1, self.sr_limits[1]))
+		self.dmmBlindscan.sr_start = ConfigInteger(default=sr_defaults[0], limits=(self.sr_limits[0], self.sr_limits[1] - 1))
+		self.dmmBlindscan.sr_stop = ConfigInteger(default=sr_defaults[1], limits=(self.sr_limits[0] + 1, self.sr_limits[1]))
 
 		self.dmmBlindscan.dont_scan_known_tps = ConfigYesNo(default=False)
 		self.dmmBlindscan.disable_sync_with_known_tps = ConfigYesNo(default=False)
@@ -906,10 +906,10 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 		if pos > 1800:
 			pos -= 3600
 		if pos < 0:
-			pos_name = '%dW' % (abs(int(pos))/10)
+			pos_name = '%dW' % (abs(int(pos)) / 10)
 		else:
-			pos_name = '%dE' % (abs(int(pos))/10)
-		location = '%s/dmm_blindscan_%s_%s.xml' %(XML_BLINDSCAN_DIR, pos_name, strftime("%d-%m-%Y_%H-%M-%S"))
+			pos_name = '%dE' % (abs(int(pos)) / 10)
+		location = '%s/dmm_blindscan_%s_%s.xml' % (XML_BLINDSCAN_DIR, pos_name, strftime("%d-%m-%Y_%H-%M-%S"))
 		tuner = nimmanager.nim_slots[self.feid].friendly_full_description
 		xml = ['<?xml version="1.0" encoding="iso-8859-1"?>\n\n']
 		xml.append('<!--\n')

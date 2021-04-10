@@ -25,17 +25,17 @@ from Components.ActionMap import ActionMap
 from Components.PluginComponent import plugins
 from Components.Sources.StaticText import StaticText
 
-STATUS_READY 		= 0
-STATUS_DONE 		= 1
-STATUS_ERROR		= 2
-STATUS_PREPARED		= 3
-STATUS_PROGRAMMING 	= 4
+STATUS_READY = 0
+STATUS_DONE = 1
+STATUS_ERROR = 2
+STATUS_PREPARED = 3
+STATUS_PROGRAMMING = 4
 
 class FPGAUpgradeCore():
 	status = STATUS_READY
 	errmsg = ''
-	callcount 	= 0
-	MAX_CALL_COUNT 	= 1500
+	callcount = 0
+	MAX_CALL_COUNT = 1500
 	def __init__(self, firmwarefile, devicefile):
 		print '[FPGAUpgrade]'
 		self.devicefile = devicefile
@@ -60,12 +60,12 @@ class FPGAUpgradeCore():
 
 			rc = fcntl.ioctl(device, 0, size)
 			if rc < 0:
-				raise Exception, 'fail to set size : %d'%(rc)
+				raise Exception, 'fail to set size : %d' % (rc)
 			#print '[FPGAUpgradeCore] set size >> [ok]'
 
 			rc = fcntl.ioctl(device, 2, 5)
 			if rc < 0:
-				raise Exception, 'fail to set programming mode : %d'%(rc)
+				raise Exception, 'fail to set programming mode : %d' % (rc)
 			#print '[FPGAUpgradeCore] programming mode >> [ok]'
 			self.status = STATUS_PREPARED
 
@@ -79,7 +79,7 @@ class FPGAUpgradeCore():
 			self.status = STATUS_PROGRAMMING
 			rc = fcntl.ioctl(device, 1, 0)
 			if rc < 0:
-				raise Exception, 'fail to programming : %d'%(rc)
+				raise Exception, 'fail to programming : %d' % (rc)
 			#print '[FPGAUpgradeCore] upgrade done.'
 			if self.callcount < 100:
 				raise Exception, 'wrong fpga file.'
@@ -137,7 +137,7 @@ class FPGAUpgradeManager:
 		return str(self.fu.errmsg)
 
 class UpgradeStatus(Screen):
-	skin = 	"""
+	skin = """
 		<screen position="center,center" size="450,100" title="FPGA Upgrade">
 			<widget name="name" position="10,0" size="430,20" font="Regular;18" halign="left" valign="bottom"/>
 			<widget name="slider" position="10,25" size="430,30" backgroundColor="white"/>
@@ -213,7 +213,7 @@ class UpgradeStatus(Screen):
 			self.keyExit()
 		self.exit_count = self.exit_count + 1
 		#self.instance.setTitle("%s (%d)" % (self.title_str, (self.timeout-self.exit_count)))
-		self["info"].setText("Reboot after %d seconds.\nPress the OK to reboot now." %(self.timeout-self.exit_count))
+		self["info"].setText("Reboot after %d seconds.\nPress the OK to reboot now." % (self.timeout - self.exit_count))
 
 	def keyExit(self):
 		if self.need_restart:
@@ -223,7 +223,7 @@ class UpgradeStatus(Screen):
 			self.close()
 
 class FPGAUpgrade(Screen):
-	skin = 	"""
+	skin = """
 		<screen position="center,center" size="560,440" title="FPGA Upgrade" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
@@ -301,7 +301,7 @@ class FPGAUpgrade(Screen):
 			self.DOWNLOAD_URL = str(download_uri_header) + "vu" + str(model) + "/" + self.DOWNLOAD_FILE_NAME
 
 	def doHook(self, blockNumber, blockSize, totalSize):
-		if blockNumber*blockSize > totalSize:
+		if blockNumber * blockSize > totalSize:
 			self.STATUS_BAR.setText(_("Downloaded " + self.DOWNLOAD_TAR_PATH + self.DOWNLOAD_FILE_NAME))
 		else:
 			self.STATUS_BAR.setText(_("Downloading..."))

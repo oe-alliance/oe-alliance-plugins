@@ -16,9 +16,9 @@ class eAITSectionReader:
 	def __init__(self, demux, pmtid, sid):
 		self.mVuplusBox = False
 		self.mInfo = None
-		self.mAppList  = []
+		self.mAppList = []
 		self.mDocument = None
-		self.mCommand  = "%s --demux=%s --pmtid=%x --serviceid=%x"%(DUMPBIN, demux, pmtid, sid)
+		self.mCommand = "%s --demux=%s --pmtid=%x --serviceid=%x" % (DUMPBIN, demux, pmtid, sid)
 
 	def __text(self, nodelist):
 		rc = []
@@ -36,18 +36,18 @@ class eAITSectionReader:
 		item = {}
 
 		if self.mVuplusBox:
-			item["name"]    = str(application[1])
-			item["url"]     = str(application[2])
+			item["name"] = str(application[1])
+			item["url"] = str(application[2])
 			item["control"] = int(application[0])
-			item["orgid"]   = int(application[3])
-			item["appid"]   = int(application[4])
+			item["orgid"] = int(application[3])
+			item["appid"] = int(application[4])
 			item["profile"] = int(application[5])
 		else:
-			item["name"]    = str(self.__item(application, "name"))
-			item["url"]     = str(self.__item(application, "url"))
+			item["name"] = str(self.__item(application, "name"))
+			item["url"] = str(self.__item(application, "url"))
 			item["control"] = int(self.__item(application, "control"))
-			item["orgid"]   = int(self.__item(application, "orgid"))
-			item["appid"]   = int(self.__item(application, "appid"))
+			item["orgid"] = int(self.__item(application, "orgid"))
+			item["appid"] = int(self.__item(application, "appid"))
 			item["profile"] = int(self.__item(application, "profile"))
 		#print item
 		return item

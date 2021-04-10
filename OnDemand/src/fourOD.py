@@ -44,7 +44,7 @@ import fourOD_token_decoder
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon, RTMP
 
-__plugin__  = "4OD: "
+__plugin__ = "4OD: "
 __version__ = "Version 1.0.2: "
 
 #=================== Default URL's =======================================================
@@ -97,7 +97,7 @@ def wgetUrl(target):
 			print __plugin__, __version__,"Non UK Address"
 			isUK = 1
 							
-			if  primaryDNS == str(config.ondemand.PrimaryDNS.default):
+			if primaryDNS == str(config.ondemand.PrimaryDNS.default):
 				print __plugin__, __version__,"Non UK Address: NO DNS Set!! ", primaryDNS
 				return ("NODNS", isUK)
 			else:
@@ -274,7 +274,7 @@ class StreamsThumb(StreamsThumbCommon):
 		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
-		self.setTitle("4OD Player: Listings for " +self.title)
+		self.setTitle("4OD Player: Listings for " + self.title)
 
 	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
@@ -301,7 +301,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("4OD: Search Listings for " +callback)
+			self.setTitle("4OD: Search Listings for " + callback)
 			self.getSearchMediaData(self.mediaList, fourodSearchDefault + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
@@ -370,7 +370,7 @@ class StreamsThumb(StreamsThumbCommon):
 				app = re.search(u'.com/(.*?)mp4:', streamUri).group(1)
 				playPath = re.search(u'(mp4:.*)', streamUri).group(1)
 
-				if "ll."  not in streamUri: 
+				if "ll." not in streamUri: 
 					app = app + u"?ovpfv=1.1&" + auth
 				else:
 					playPath += "?" + auth
@@ -379,7 +379,7 @@ class StreamsThumb(StreamsThumbCommon):
 				
 				port = None
 				
-				rtmpvar =  RTMP(rtmp=streamUri, app=app, swfVfy=swfPlayer, playPath=playPath, pageUrl=self.urlRoot, port=port)
+				rtmpvar = RTMP(rtmp=streamUri, app=app, swfVfy=swfPlayer, playPath=playPath, pageUrl=self.urlRoot, port=port)
 				return (rtmpvar, returnMessage)
 			else:
 				return ("", returnMessage)
@@ -393,7 +393,7 @@ class StreamsThumb(StreamsThumbCommon):
 		
 		streamURI = ""
 		auth = ""
-		returnMessage = "Non-UK User!!\n\nUnable to find playable Stream in "+str(maxAttempts)+" attempts!!\n\nPlease try again!"
+		returnMessage = "Non-UK User!!\n\nUnable to find playable Stream in " + str(maxAttempts) + " attempts!!\n\nPlease try again!"
 		
 		for attemptNumber in range(0, maxAttempts):
 			(xml, isUK) = wgetUrl(assetUrl)
@@ -431,7 +431,7 @@ class StreamsThumb(StreamsThumbCommon):
 					# No MP4 found, probably HTTP Dynamic Streaming. Stream URI - %s
 					raise exception
 
-				auth =  self.GetAuthentication(uriData)
+				auth = self.GetAuthentication(uriData)
 
 				if auth is None:
 					# If we didn't get the cdn we're looking for then try again
@@ -458,7 +458,7 @@ class StreamsThumb(StreamsThumbCommon):
 			print __plugin__, __version__,'GetAuthentication: Error getting decodedToken: ', exception
 			return ("")
 
-		if (cdn ==  u"ll"):
+		if (cdn == u"ll"):
 			ip = uriData.find(u'ip')
 			e = uriData.find(u'e')
 
@@ -586,7 +586,7 @@ class StreamsThumb(StreamsThumbCommon):
 					try:
 						assetUrl = entry['data-preselectasseturl']
 						match = re.search(u'http://ais.channel4.com/asset/(\d+)', assetUrl)
-						stream= str(match.group(1))
+						stream = str(match.group(1))
 					except (Exception) as exception:
 						stream = ""
 
@@ -607,7 +607,7 @@ class StreamsThumb(StreamsThumbCommon):
 								time_split = timeString.rsplit('m ',1)
 								lastDate = date.fromtimestamp(mktime(strptime(time_split[1].strip(), u"%a %d %b %Y")))
 								premieredDate = lastDate.strftime(u"%a %b %d %Y")
-								date1 = _("Added:")+" "+str(premieredDate)
+								date1 = _("Added:") + " " + str(premieredDate)
 								break
 							except (Exception) as exception:
 								date1 = ""
@@ -629,7 +629,7 @@ class StreamsThumb(StreamsThumbCommon):
 						for p in pList:
 							try:
 								durationMatch = re.search(pattern, p.text, re.DOTALL | re.IGNORECASE)
-								duration = _("Duration:")+" "+str(durationMatch.group(1))
+								duration = _("Duration:") + " " + str(durationMatch.group(1))
 								break
 							except (Exception) as exception:
 								duration = ""

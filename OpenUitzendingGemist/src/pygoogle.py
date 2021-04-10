@@ -32,9 +32,9 @@ This optional argument supplies the search safety level which may be one of:
     * safe=moderate - enables moderate safe search filtering (default)
     * safe=off - disables safe search filtering
 """
-SAFE_ACTIVE     = "active"
-SAFE_MODERATE   = "moderate"
-SAFE_OFF        = "off"
+SAFE_ACTIVE = "active"
+SAFE_MODERATE = "moderate"
+SAFE_OFF = "off"
 
 """
 FILTER
@@ -44,8 +44,8 @@ This optional argument controls turning on or off the duplicate content filter:
     * filter=1 - Turns on the duplicate content filter (default)
 
 """
-FILTER_OFF  = 0
-FILTER_ON   = 1
+FILTER_OFF = 0
+FILTER_ON = 1
 
 #Standard URL Arguments
 #http://code.google.com/apis/ajaxsearch/documentation/reference.html#_fonje_args
@@ -95,30 +95,30 @@ class pygoogle:
                 rsz = 4
             args = {'q': self.query,
                     'v': '1.0',
-                    'start': page*rsz,
+                    'start': page * rsz,
                     'rsz': self.rsz,
                     'safe': self.safe, 
                     'filter': self.filter,    
                     'hl': self.hl
                     }
-            self.logger.debug('search: "%s" page# : %s'%(self.query, page))
+            self.logger.debug('search: "%s" page# : %s' % (self.query, page))
             q = urllib.urlencode(args)
-            search_results = urllib.urlopen(URL+q)
+            search_results = urllib.urlopen(URL + q)
             data = json.loads(search_results.read())
             if not data.has_key('responseStatus'):
                 self.logger.error('response does not have a responseStatus key')
                 continue
             if data.get('responseStatus') != 200:
                 self.logger.debug('responseStatus is not 200')
-                self.logger.error('responseDetails : %s'%(data.get('responseDetails', None)))
+                self.logger.error('responseDetails : %s' % (data.get('responseDetails', None)))
                 continue
             if print_results:
                 if data.has_key('responseData') and data['responseData'].has_key('results'):
-                    for result in  data['responseData']['results']:
+                    for result in data['responseData']['results']:
                         if result:
-                            print '[%s]'%(urllib.unquote(result['titleNoFormatting']))
+                            print '[%s]' % (urllib.unquote(result['titleNoFormatting']))
                             print result['content'].strip("<b>...</b>").replace("<b>",'').replace("</b>",'').replace("&#39;","'").strip()
-                            print urllib.unquote(result['unescapedUrl'])+'\n'                
+                            print urllib.unquote(result['unescapedUrl']) + '\n'                
                 else:
                     # no responseData key was found in 'data' 
                     self.logger.error('no responseData key found in response. very unusal')
@@ -155,11 +155,11 @@ class pygoogle:
                     'filter': FILTER_ON,    
                     }
             q = urllib.urlencode(args)
-            search_results = urllib.urlopen(URL+q)
+            search_results = urllib.urlopen(URL + q)
             data = json.loads(search_results.read())
             urls = []
             if data.has_key('responseData') and data['responseData'].has_key('results'):
-                for result in  data['responseData']['results']:
+                for result in data['responseData']['results']:
                     if result and result.has_key('unescapedUrl'):
                         url = urllib.unquote(result['unescapedUrl'])
                         urls.append(url)            
@@ -177,7 +177,7 @@ class pygoogle:
             return results
         for data in search_results:
             if data and data.has_key('responseData') and data['responseData']['results']:
-                for result in  data['responseData']['results']:
+                for result in data['responseData']['results']:
                     if result:
                         results.append(urllib.unquote(result['unescapedUrl']))
         return results

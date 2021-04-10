@@ -35,7 +35,7 @@ def printDebugModemMgr(msg):
 def printInfoModemMgr(msg):
 	print "[ModemManager Plugin] Info >>", msg
 
-isEmpty = lambda x: x is None or len(x)==0
+isEmpty = lambda x: x is None or len(x) == 0
 
 class DeviceEventListener:
 	notifyCallbackFunctionList = []
@@ -43,7 +43,7 @@ class DeviceEventListener:
 		self.sock = socket.socket(socket.AF_NETLINK, socket.SOCK_DGRAM, 15)
 		try:		
 			self.sock.bind((os.getpid(), 1))
-			self.notifier = eSocketNotifier(self.sock.fileno(), POLLIN|POLLPRI)
+			self.notifier = eSocketNotifier(self.sock.fileno(), POLLIN | POLLPRI)
 			self.notifier.callback.append(self.cbEventHandler)
 		except Exception, msg:
 			print "[ModemManager Plugin] Error >>", msg
@@ -83,7 +83,7 @@ class TaskManager:
 		self.cbSetStatusCB = None
 
 	def append(self, command, cbDataFunc, cbCloseFunc):
-		self.taskList.append([command+'\n', cbDataFunc, cbCloseFunc])
+		self.taskList.append([command + '\n', cbDataFunc, cbCloseFunc])
 
 	def dump(self):
 		print "############### TASK ###############"
@@ -118,8 +118,8 @@ class TaskManager:
 		if self.taskIdx >= len(self.taskList) or self.occurError:
 			printInfoModemMgr("can't run task!!")
 			return False
-		command     = self.taskList[self.taskIdx][0]
-		cbDataFunc  = self.taskList[self.taskIdx][1]
+		command = self.taskList[self.taskIdx][0]
+		cbDataFunc = self.taskList[self.taskIdx][1]
 		cbCloseFunc = self.taskList[self.taskIdx][2]
 
 		self.gTaskInstance = eConsoleAppContainer()
@@ -130,7 +130,7 @@ class TaskManager:
 		if self.cbSetStatusCB is not None:
 			self.cbSetStatusCB(self.taskIdx)
 
-		printInfoModemMgr("prepared command :%s"%(command))
+		printInfoModemMgr("prepared command :%s" % (command))
 		self.gTaskInstance.execute(command)
 		self.taskIdx += 1
 		return True
@@ -159,7 +159,7 @@ class ParserHandler(handler.ContentHandler):
 		return self.nodeList
 
 class EditModemManual(ConfigListScreen, Screen):
-	skin = 	"""
+	skin = """
 		<screen position="center,center" size="600,360" title="3G Modem Manager Config Edit">
 			<widget name="config" zPosition="2" position="0,0" size="600,300" scrollbarMode="showOnDemand" transparent="1" />
 
@@ -200,11 +200,11 @@ class EditModemManual(ConfigListScreen, Screen):
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions",],
 		{
-			"ok":     self.keyOK,
+			"ok": self.keyOK,
 			"cancel": self.keyExit,
-			"red":    self.keyExit,
-			"green":  self.keyOK,
-			"blue":   self.keyRemove,
+			"red": self.keyExit,
+			"green": self.keyOK,
+			"blue": self.keyRemove,
 		}, -2)
 
 		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
@@ -216,31 +216,31 @@ class EditModemManual(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.configList, session=session)
 		self.createConfigList()
 
-		self["key_red"]    = StaticText(_("Cancel"))
-		self["key_green"]  = StaticText(_("Save"))
-		self["key_blue"]   = StaticText(_(self.isAdd and " " or "Remove"))
-		self["VKeyIcon"]   = Boolean(False)
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Save"))
+		self["key_blue"] = StaticText(_(self.isAdd and " " or "Remove"))
+		self["VKeyIcon"] = Boolean(False)
 		self["HelpWindow"] = Pixmap()
 		self["VirtualKB"].setEnabled(False)
 		if self.isAdd:
 			self.setTitle("3G Modem Manager Config Add")
 
 	def createConfigList(self):
-		self.configRegion   = ConfigText(default="", visible_width=50, fixed_size=False)
-		self.configName     = ConfigText(default="", visible_width=50, fixed_size=False)
+		self.configRegion = ConfigText(default="", visible_width=50, fixed_size=False)
+		self.configName = ConfigText(default="", visible_width=50, fixed_size=False)
 		self.configUserName = ConfigText(default=str(self.uid), visible_width=50, fixed_size=False)
 		self.configPassword = ConfigText(default=str(self.pwd), visible_width=50, fixed_size=False)
-		self.configAPN      = ConfigText(default=str(self.apn), visible_width=50, fixed_size=False)
-		self.configPIN      = ConfigText(default=str(self.pin), visible_width=50, fixed_size=False)
-		self.configPhone    = ConfigText(default=str(self.phone), visible_width=50, fixed_size=False)
+		self.configAPN = ConfigText(default=str(self.apn), visible_width=50, fixed_size=False)
+		self.configPIN = ConfigText(default=str(self.pin), visible_width=50, fixed_size=False)
+		self.configPhone = ConfigText(default=str(self.phone), visible_width=50, fixed_size=False)
 
-		self.configEntryRegion   = getConfigListEntry(_("Region :"),     self.configRegion)
-		self.configEntryName     = getConfigListEntry(_("Name :"),     self.configName)
-		self.configEntryUserName = getConfigListEntry(_("User :"),     self.configUserName)
+		self.configEntryRegion = getConfigListEntry(_("Region :"), self.configRegion)
+		self.configEntryName = getConfigListEntry(_("Name :"), self.configName)
+		self.configEntryUserName = getConfigListEntry(_("User :"), self.configUserName)
 		self.configEntryPassword = getConfigListEntry(_("Password :"), self.configPassword)
-		self.configEntryAPN      = getConfigListEntry(_("APN :"),      self.configAPN)
-		self.configEntryPIN      = getConfigListEntry(_("PIN :"),      self.configPIN)
-		self.configEntryPhone    = getConfigListEntry(_("Phone :"),    self.configPhone)
+		self.configEntryAPN = getConfigListEntry(_("APN :"), self.configAPN)
+		self.configEntryPIN = getConfigListEntry(_("PIN :"), self.configPIN)
+		self.configEntryPhone = getConfigListEntry(_("Phone :"), self.configPhone)
 
 		if self.isAdd:
 			self.configList.append(self.configEntryRegion)
@@ -315,25 +315,25 @@ class EditModemManual(ConfigListScreen, Screen):
 		message = '%s field is empty!!'
 		if isEmpty(self.configRegion.value) and self.isAdd:
 			self.hideKeyboard()
-			self.session.openWithCallback(self.showKeyboard, MessageBox, message%('Region'), MessageBox.TYPE_INFO)
+			self.session.openWithCallback(self.showKeyboard, MessageBox, message % ('Region'), MessageBox.TYPE_INFO)
 			return
 		if isEmpty(self.configName.value) and self.isAdd:
 			self.hideKeyboard()
-			self.session.openWithCallback(self.showKeyboard, MessageBox, message%('Name'), MessageBox.TYPE_INFO)
+			self.session.openWithCallback(self.showKeyboard, MessageBox, message % ('Name'), MessageBox.TYPE_INFO)
 			return
 		if isEmpty(self.configAPN.value):
 			self.hideKeyboard()
-			self.session.openWithCallback(self.showKeyboard, MessageBox, message%('APN'), MessageBox.TYPE_INFO)
+			self.session.openWithCallback(self.showKeyboard, MessageBox, message % ('APN'), MessageBox.TYPE_INFO)
 			return
 
 		if self.cbFuncClose is not None:
-			self.uid   = self.configUserName.value
-			self.pwd   = self.configPassword.value
-			self.pin   = self.configPIN.value
-			self.apn   = self.configAPN.value
+			self.uid = self.configUserName.value
+			self.pwd = self.configPassword.value
+			self.pin = self.configPIN.value
+			self.apn = self.configAPN.value
 			self.phone = self.configPhone.value
-			self.name  = self.isAdd and self.configName.value or None
-			self.region  = self.isAdd and self.configRegion.value or None
+			self.name = self.isAdd and self.configName.value or None
+			self.region = self.isAdd and self.configRegion.value or None
 			self.cbFuncClose(self.uid,self.pwd,self.pin,self.apn,self.phone,self.name,self.region)
 		self.close()
 
@@ -349,7 +349,7 @@ config.plugins.gmodemmanager.pin = ConfigText(default="")
 config.plugins.gmodemmanager.phone = ConfigText(default="*99#")
 
 class ModemManual(Screen):
-	skin = 	"""
+	skin = """
 		<screen position="center,center" size="600,360" title="3G Modem Manager Config">
 			<widget name="menulist" position="0,0" size="300,300" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 			<widget name="apnInfo" position="310,0" size="290,300" font="Regular;20" halign="left" backgroundColor="#a08500" transparent="1" />
@@ -371,25 +371,25 @@ class ModemManual(Screen):
 		self.cbFuncClose,self.uid,self.pwd,self.pin,self.apn,self.phone = cbFuncClose,uid,pwd,pin,apn,phone
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions"],
 		{
-			"ok":     self.keyOK,
+			"ok": self.keyOK,
 			"cancel": self.keyExit,
-			"red":    self.keyExit,
-			"green":  self.keyOK,
+			"red": self.keyExit,
+			"green": self.keyOK,
 			"yellow": self.keyEdit,
-			"blue":   self.keyAdd,
-			"left":   self.keyLeft,
-			"right":  self.keyRight,
-			"up":     self.keyUp,
-			"down":   self.keyDown,
+			"blue": self.keyAdd,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"up": self.keyUp,
+			"down": self.keyDown,
 		}, -2)
 
 		self.apnItems = self.setListOnView()
-		self["menulist"]   = MenuList(self.apnItems)
-		self["key_red"]    = StaticText(_("Cancel"))
-		self["key_green"]  = StaticText(_("OK"))
+		self["menulist"] = MenuList(self.apnItems)
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText(_("Edit"))
-		self["key_blue"]   = StaticText(_("Add"))
-		self["apnInfo"]    = Label(' ')
+		self["key_blue"] = StaticText(_("Add"))
+		self["apnInfo"] = Label(' ')
 
 		self.keyUp()
 	
@@ -410,7 +410,7 @@ class ModemManual(Screen):
 		if name is not None:
 			self["menulist"].list.append((name, {'region':region, 'carrier':name, 'apn':self.apn, 'user':self.uid, 'password':self.pwd, 'pin':self.pin, 'phone':self.phone}))
 			self["menulist"].setList(self["menulist"].list)
-			self["menulist"].moveToIndex(len(self["menulist"].list)-1)
+			self["menulist"].moveToIndex(len(self["menulist"].list) - 1)
 		if isRemove:
 			index = 0
 			newList = []
@@ -448,19 +448,19 @@ class ModemManual(Screen):
 		selectedIndex = self["menulist"].getSelectionIndex()
 
 		def makeItem(region, carrier, apn, user, password, pin, phone):
-			printDebugModemMgr("%s, %s, %s, %s, %s, %s, %s"%(region, carrier, apn, user, password, pin, phone))
-			tempStr  = '    <apn'
-			tempStr += ' region="%s"'%(region)
-			tempStr += ' carrier="%s"'%(carrier)
-			tempStr += ' apn="%s"'%(apn)
+			printDebugModemMgr("%s, %s, %s, %s, %s, %s, %s" % (region, carrier, apn, user, password, pin, phone))
+			tempStr = '    <apn'
+			tempStr += ' region="%s"' % (region)
+			tempStr += ' carrier="%s"' % (carrier)
+			tempStr += ' apn="%s"' % (apn)
 			if not isEmpty(user):
-				tempStr += ' user="%s"'%(user)
+				tempStr += ' user="%s"' % (user)
 			if not isEmpty(password):
-				tempStr += ' password="%s"'%(password)
+				tempStr += ' password="%s"' % (password)
 			if not isEmpty(pin):
-				tempStr += ' pin="%s"'%(pin)
+				tempStr += ' pin="%s"' % (pin)
 			if not isEmpty(phone):
-				tempStr += ' phone="%s"'%(phone)
+				tempStr += ' phone="%s"' % (phone)
 			tempStr += ' />\n'
 			return tempStr
 
@@ -573,13 +573,13 @@ class ModemManual(Screen):
 				if isExistAPN(name):
 					continue
 				d = {}
-				d['carrier']  = name
-				d['region']   = x.get('region')
-				d['apn']      = x.get('apn')
-				d['user']     = x.get('user')
+				d['carrier'] = name
+				d['region'] = x.get('region')
+				d['apn'] = x.get('apn')
+				d['user'] = x.get('user')
 				d['password'] = x.get('password')
-				d['pin']      = x.get('pin')
-				d['phone']    = x.get('phone')
+				d['pin'] = x.get('pin')
+				d['phone'] = x.get('phone')
 				lvApnItems.append((name,d))
 		except Exception, err:
 			pass
@@ -594,7 +594,7 @@ def isConnected():
 	return len(os.popen('ifconfig -a | grep ppp').read().strip()) > 0
 
 class ModemManager(Screen):
-	skin = 	"""
+	skin = """
 		<screen position="center,center" size="600,460" title="3G Modem Manager">
 			<widget name="menulist" position="0,0" size="300,150" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 			<widget name="usbinfo" position="310,0" size="290,150" font="Regular;18" halign="left" />
@@ -627,23 +627,23 @@ class ModemManager(Screen):
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions"],
 		{
-			"ok":     self.keyOK,
+			"ok": self.keyOK,
 			"cancel": self.keyExit,
-			"red":    self.keyExit,
-			"green":  self.keyOK,
+			"red": self.keyExit,
+			"green": self.keyOK,
 			"yellow": self.keyManual,
-			"blue":   self.keyAutoConnect,
-			"up":     self.keyUp,
-			"down":   self.keyDown,
-			"left":   self.keyLeft,
-			"right":  self.keyRight,
-			"0":      self.keyNumber,
+			"blue": self.keyAutoConnect,
+			"up": self.keyUp,
+			"down": self.keyDown,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"0": self.keyNumber,
 		}, -2)
 		self["menulist"] = MenuList(self.usb_lv_items)
 		self['usbinfo'] = Label(' ')
 		self['statusTitle'] = Label('[ Status ]')
 		self['statusInfo'] = Label(' ')
-		self['myip']= Label(' ')
+		self['myip'] = Label(' ')
 		self['autostart_text'] = Label(_("Auto connect:"))
 		self['autostart_stop'] = Label(_("Disable"))
 		self['autostart_start'] = Label(_("Enable"))
@@ -771,7 +771,7 @@ class ModemManager(Screen):
 	def keyNumber(self, num=None):
 		global debug_mode_modem_mgr
 		debug_mode_modem_mgr = not debug_mode_modem_mgr
-		printInfoModemMgr('changed log mode, debug %s'%(debug_mode_modem_mgr and 'on' or 'off'))
+		printInfoModemMgr('changed log mode, debug %s' % (debug_mode_modem_mgr and 'on' or 'off'))
 
 	def keyExit(self):
 		if self.isAttemptConnect():
@@ -994,13 +994,13 @@ class ModemManager(Screen):
 			return
 
 		if not isEmpty(self.apn):
-			info['apn']   = self.apn
+			info['apn'] = self.apn
 		if not isEmpty(self.uid):
-			info['uid']   = self.uid
+			info['uid'] = self.uid
 		if not isEmpty(self.pwd):
-			info['pwd']   = self.pwd
+			info['pwd'] = self.pwd
 		if not isEmpty(self.pin):
-			info['pin']   = self.pin
+			info['pin'] = self.pin
 		if not isEmpty(self.phone):
 			info['phone'] = self.phone
 
@@ -1015,8 +1015,8 @@ class ModemManager(Screen):
 		os.system(cmd)
 
 	def makeWvDialConf(self, params):
-		baud  = params.get('Baud')
-		init  = params.get('Init')
+		baud = params.get('Baud')
+		init = params.get('Init')
 		modem = params.get('Modem')
 		phone = params.get('phone')
 		apn = params.get('apn')
@@ -1150,7 +1150,7 @@ class ModemManager(Screen):
 								tmp_device['ProdID'] = xx[7:]
 						#tmp_device['Vendor'] = tmp
 					elif tmp.find('Driver=') > 0:
-						d = tmp[tmp.find('Driver=')+7:]
+						d = tmp[tmp.find('Driver=') + 7:]
 						if d != '(none)':
 							tmp_device['Interface'] = d
 			except Exception, errmsg:
@@ -1175,7 +1175,7 @@ def autostart(reason, **kwargs):
 	productid = config.plugins.gmodemmanager.productid.getValue()
 	if reason == 0:
 		if isConnected():
-			args = ("%s 0;" % (commandBin))+ ("%s 1" % (commandBin))
+			args = ("%s 0;" % (commandBin)) + ("%s 1" % (commandBin))
 			is_running = True
 		else:
 			args = ("%s 2 vendor=0x%s product=0x%s;" % (commandBin, vendorid, productid)) + ("%s 3 %s %s;sleep 8;" % (commandBin, vendorid, productid)) + ("%s 5" % (commandBin))

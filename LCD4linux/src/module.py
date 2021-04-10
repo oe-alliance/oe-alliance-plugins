@@ -24,10 +24,10 @@ class L4Lelement:
 	def add(self, element, para):
 		print("[LCD4linuxE] Add", element, para)
 		if "%" in para.get("Align", ""):
-			para["Align"] = ("0000"+para["Align"].replace("%", "00"))[-4:]
+			para["Align"] = ("0000" + para["Align"].replace("%", "00"))[-4:]
 		if para.get("Value", None) is not None:
 			para["Value"] = min(max(int(para["Value"]), 0), 100)
-		L4Lelement.List[element]=para
+		L4Lelement.List[element] = para
 	def delete(self, element):
 		print("[LCD4linuxE] Del", element)
 		if L4Lelement.List.get(element, None) is not None:
@@ -49,12 +49,12 @@ class L4Lelement:
 		except:
 			print("[LCD4linuxE] Error: L4L Web-Elements")
 	def getResolution(self, LCD):
-		if int(LCD)<1 or int(LCD)>3:
+		if int(LCD) < 1 or int(LCD) > 3:
 			return 0, 0
-		return L4Lelement.MAX_W[int(LCD)-1], L4Lelement.MAX_H[int(LCD)-1]
+		return L4Lelement.MAX_W[int(LCD) - 1], L4Lelement.MAX_H[int(LCD) - 1]
 	def setResolution(self, LCD, MW, MH):
-		L4Lelement.MAX_W[int(LCD)-1]=int(MW)
-		L4Lelement.MAX_H[int(LCD)-1]=int(MH)
+		L4Lelement.MAX_W[int(LCD) - 1] = int(MW)
+		L4Lelement.MAX_H[int(LCD) - 1] = int(MH)
 	def resetRefresh(self):
 		L4Lelement.Refresh = False
 	def setRefresh(self):
@@ -82,7 +82,7 @@ class L4Lelement:
 		return L4Lelement.Screen
 	def setScreen(self,S,Lcd="",Hold=False):
 		if Lcd != "":
-			if len(str(Lcd))>1 or int(Lcd)>3:
+			if len(str(Lcd)) > 1 or int(Lcd) > 3:
 				Lcd = "1"
 		L4Lelement.Screen = str(S)
 		L4Lelement.LCD = str(Lcd)
@@ -94,13 +94,13 @@ class L4Lelement:
 		else:
 			L4Lelement.Bright = [-1, -1, -1]
 	def setBrightness(self,LCD,BRI=-1):
-		if int(LCD)<1 or int(LCD)>3:
+		if int(LCD) < 1 or int(LCD) > 3:
 			return
-		L4Lelement.Bright[int(LCD)-1] = int(BRI)
+		L4Lelement.Bright[int(LCD) - 1] = int(BRI)
 		L4Lelement.Refresh = True
 	def getBrightness(self,LCD=0,ORG=True):
-		if int(LCD)>0 and int(LCD)<4:
-			return L4Lelement.Bright[int(LCD)-1] if ORG == False else L4Lelement.BrightAkt[int(LCD)-1]
+		if int(LCD) > 0 and int(LCD) < 4:
+			return L4Lelement.Bright[int(LCD) - 1] if ORG == False else L4Lelement.BrightAkt[int(LCD) - 1]
 		else:
 			return L4Lelement.Bright if ORG == False else L4Lelement.BrightAkt
 	def getLcd(self):

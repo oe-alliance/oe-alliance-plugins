@@ -16,7 +16,7 @@ APP_RUN = "run.sh"
 PLUGINROOT = "/usr/lib/enigma2/python/Plugins/Extensions/HbbTV"
 MANUALROOT = "/usr/local/manual"
 
-SOCKETFILE  = None
+SOCKETFILE = None
 CONTROLFILE = None
 
 def getPosition():

@@ -81,7 +81,7 @@ def cleanFile(text):
 	text = text.replace('.wmv','').replace('.flv','').replace('.ts','').replace('.m2ts','').replace('.mkv','').replace('.avi','').replace('.mpeg','').replace('.mpg','').replace('.iso','')
 	
 	for word in cutlist:
-		text = re.sub('(\_|\-|\.|\+)'+word+'(\_|\-|\.|\+)','+', text, flags=re.I)
+		text = re.sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)','+', text, flags=re.I)
 	text = text.replace('.',' ').replace('-',' ').replace('_',' ').replace('+','')
 
 	return text
@@ -185,7 +185,7 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 		self.setTitle(pname + " (" + pversion + ")")
 
 	def createConfigList(self):
-		self.setTitle("TMDb - The Movie Database v"+pversion)
+		self.setTitle("TMDb - The Movie Database v" + pversion)
 		self.list = []
 		self.list.append(getConfigListEntry(_("Cover resolution:"), config.plugins.tmdb.themoviedb_coversize))
 		self.list.append(getConfigListEntry(_("Language:"), config.plugins.tmdb.lang))
@@ -225,7 +225,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.mode = mode
 		self.saveFilename = ""
 		self.coverName = ""
-		self.piclist =""
+		self.piclist = ""
 		
 		if self.mode == 1:
 			self.isDirectory = False
@@ -281,7 +281,7 @@ class tmdbScreen(Screen, HelpableScreen):
 	def onFinish(self):
 		if not self.text == "":
 			if re.search('[Ss][0-9]+[Ee][0-9]+', self.text):
-				self.text = re.sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+','', self.text, flags=re.S|re.I)
+				self.text = re.sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+','', self.text, flags=re.S | re.I)
 			#self.text="xyzabc"
 			self.tmdbSearch()
 		else:
@@ -300,7 +300,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			#print json_data
 			
 			for IDs in json_data['results']:
-				self.count+=1
+				self.count += 1
 				try:
 					media = str(IDs['media_type'])
 				except:
@@ -322,7 +322,7 @@ class tmdbScreen(Screen, HelpableScreen):
 				
 				date = ""
 				try:
-					date = ", "+ str(IDs['release_date'])[:4]
+					date = ", " + str(IDs['release_date'])[:4]
 				except:
 					pass					
 				if date == ", ":
@@ -341,10 +341,10 @@ class tmdbScreen(Screen, HelpableScreen):
 				except:
 					pass
 				
-				cover = self.tempDir+id+".jpg"
+				cover = self.tempDir + id + ".jpg"
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
 					
-				if not id == "" or not title =="" or not media =="":
+				if not id == "" or not title == "" or not media == "":
 					res.append(((title, url_cover, media, id),))
 			self['list'].setList(res)
 			self.piclist = res
@@ -360,10 +360,10 @@ class tmdbScreen(Screen, HelpableScreen):
 		if url_cover[-4:] == "None":
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
-			if not fileExists(self.tempDir+id+".jpg"):
-				downloadPage(url_cover, self.tempDir+id+".jpg").addCallback(self.getData, self.tempDir+id+".jpg").addErrback(self.dataError)
+			if not fileExists(self.tempDir + id + ".jpg"):
+				downloadPage(url_cover, self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback(self.dataError)
 			else:
-				self.showCover(self.tempDir+id+".jpg")
+				self.showCover(self.tempDir + id + ".jpg")
 
 	def getData(self, data, coverSaved):
 		self.showCover(coverSaved)
@@ -403,10 +403,10 @@ class tmdbScreen(Screen, HelpableScreen):
 		if check == None:
 			return
 		# title, url_cover, media, id
-		title =  self['list'].getCurrent()[0]
+		title = self['list'].getCurrent()[0]
 		media = self['list'].getCurrent()[2]
 		id = self['list'].getCurrent()[3]
-		cover = self.tempDir+id+".jpg"
+		cover = self.tempDir + id + ".jpg"
 
 		self.session.open(tmdbScreenMovie, title, media, cover, id, self.saveFilename)
 
@@ -463,14 +463,14 @@ class tmdbScreen(Screen, HelpableScreen):
 		if list == None:
 			return		
 		
-		count=0
-		while count<len(list):
+		count = 0
+		while count < len(list):
 			id = list[count][0][3]
 			try:
-				os.remove(self.tempDir+id+".jpg")
+				os.remove(self.tempDir + id + ".jpg")
 			except:
 				pass
-			count+=1	
+			count += 1	
 
 class tmdbScreenMovie(Screen, HelpableScreen):
 	skin = """
@@ -656,7 +656,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		country_string = ""
 		try:
 			for country in json_data['production_countries']:
-				country_string += country['iso_3166_1']+"/"
+				country_string += country['iso_3166_1'] + "/"
 			country_string = country_string[:-1]
 			self['country'].setText("%s" % str(country_string))
 		except:
@@ -667,7 +667,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		try:
 			genre_count = len(json_data['genres'])
 			for genre in json_data['genres']:
-				genre_string += genre['name']+", "
+				genre_string += genre['name'] + ", "
 			self['genre'].setText("%s" % str(genre_string[:-2]))
 		except:
 			genre_string = ""
@@ -685,7 +685,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		cast_string = ""
 		try:
 			for cast in json_data_cast['cast']:
-				cast_string += cast['name']+" ("+ cast['character'] + ")\n"
+				cast_string += cast['name'] + " (" + cast['character'] + ")\n"
 		except:
 			cast_string = ""
 			
@@ -695,12 +695,12 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		author = ""
 		try:
 			for crew in json_data_cast['crew']:
-				crew_string += crew['name']+" ("+ crew['job'] + ")\n"
+				crew_string += crew['name'] + " (" + crew['job'] + ")\n"
 				
 				if crew['job'] == "Director":
-					director += crew['name']+", "
+					director += crew['name'] + ", "
 				if crew['job'] == "Screenplay" or crew['job'] == "Writer":
-					author += crew['name']+", "
+					author += crew['name'] + ", "
 			director = director[:-2]
 			author = author[:-2]
 			self['director'].setText("%s" % str(director))
@@ -714,7 +714,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		studio_string = ""
 		try:
 			for studio in json_data['production_companies']:
-				studio_string += studio['name'] +", "
+				studio_string += studio['name'] + ", "
 			studio_string = studio_string[:-2]
 			self['studio'].setText("%s" % str(studio_string))
 		except:
@@ -749,7 +749,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			director = ""
 			try:
 				for directors in json_data['created_by']:
-					director += directors['name'] +", "
+					director += directors['name'] + ", "
 				director = director[:-2]
 				self['director'].setText(_("Various"))
 				self['author'].setText("%s" % str(director))
@@ -759,7 +759,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			## Studio/Production Company
 			try:
 				for studio in json_data['networks']:
-					studio_string += studio['name'] +", "
+					studio_string += studio['name'] + ", "
 				studio_string = studio_string[:-2]
 				self['studio'].setText("%s" % str(studio_string))
 			except:
@@ -770,9 +770,9 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			try:
 				seasons = json_data['number_of_seasons']
 				episodes = json_data['number_of_episodes']
-				runtime = str(seasons) + " " + _("Seasons")+ " / " + str(episodes) + " " + _("Episodes")
+				runtime = str(seasons) + " " + _("Seasons") + " / " + str(episodes) + " " + _("Episodes")
 				self['runtime'].setText("%s" % runtime)
-				runtime =  ", " + runtime
+				runtime = ", " + runtime
 			except:
 				runtime = ""
 
@@ -781,7 +781,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			try:
 				for seasons in json_data['seasons']:
 					if seasons['season_number'] >= 1:
-						season += _("Season") + " " + str(seasons['season_number']) +"/"+ str(seasons['episode_count']) + " (" + str(seasons['air_date'])[:4] + ")\n"
+						season += _("Season") + " " + str(seasons['season_number']) + "/" + str(seasons['episode_count']) + " (" + str(seasons['air_date'])[:4] + ")\n"
 			except:
 				season = ""
 			
@@ -792,7 +792,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			description = description + "\n\n" + cast_string + "\n" + crew_string
 			self['description'].setText("%s" % description.encode('utf_8','ignore'))
 			
-			movieinfo ="%s%s %s %s" % (str(genre_string), str(country_string), str(year), str(runtime))
+			movieinfo = "%s%s %s %s" % (str(genre_string), str(country_string), str(year), str(runtime))
 			fulldescription = subtitle + movieinfo + "\n\n" + description + "\n" + season
 			self['fulldescription'].setText("%s" % fulldescription.encode('utf_8','ignore'))
 			self.text = fulldescription
@@ -875,7 +875,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			
 	def createTXT(self, result):
 		if result:
-			wFile = open(self.saveFilename+".txt","w") 
+			wFile = open(self.saveFilename + ".txt","w") 
 			wFile.write(self.text) 
 			wFile.close()
 			print "[TMDb] %s.txt created" % (self.saveFilename)
@@ -884,7 +884,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 
 	def deleteEIT(self, result):
 		if result:
-			eitFile = cleanEnd(self.saveFilename)+".eit"
+			eitFile = cleanEnd(self.saveFilename) + ".eit"
 			container = eConsoleAppContainer()
 			container.execute("rm -rf '%s'" % eitFile)
 			print "[TMDb] %s deleted" % (eitFile)
@@ -969,10 +969,10 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 				id = str(casts['id'])
 				title = str(casts['name']) + " (" + str(casts['character']) + ")"
 				coverPath = str(casts['profile_path'])
-				cover = self.tempDir+id+".jpg"
+				cover = self.tempDir + id + ".jpg"
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
 				
-				if not id == "" or not title =="":
+				if not id == "" or not title == "":
 					res.append(((title, url_cover, "", id),))
 			
 			self['list'].setList(res)
@@ -989,10 +989,10 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		if url_cover[-4:] == "None":
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
-			if not fileExists(self.tempDir+id+".jpg"):
-				downloadPage(url_cover, self.tempDir+id+".jpg").addCallback(self.getData, self.tempDir+id+".jpg").addErrback(self.dataError)
+			if not fileExists(self.tempDir + id + ".jpg"):
+				downloadPage(url_cover, self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback(self.dataError)
 			else:
-				self.showCover(self.tempDir+id+".jpg")
+				self.showCover(self.tempDir + id + ".jpg")
 		
 	def getData(self, data, coverSaved):
 		self.showCover(coverSaved)
@@ -1046,7 +1046,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		biography = ""
 		try:
 			biography = str(json_data_person['biography'])
-			if biography =="":
+			if biography == "":
 				json_data_person = tmdb.People(id).info()
 				biography = str(json_data_person['biography'])
 		except:
@@ -1100,14 +1100,14 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		list = self.piclist
 		if list == None:
 			return		
-		count=0
-		while count<len(list):
+		count = 0
+		while count < len(list):
 			id = list[count][0][3]
 			try:
-				os.remove(self.tempDir+id+".jpg")
+				os.remove(self.tempDir + id + ".jpg")
 			except:
 				pass
-			count+=1
+			count += 1
 			
 class tmdbScreenSeason(Screen, HelpableScreen):
 	skin = """
@@ -1187,26 +1187,26 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 				
 				#Episodes
 				json_data_episodes = tmdb.TV_Seasons(self.id, season).info(language=self.lang)
-				titledate = "("+str(json_data_episodes['air_date'])[:4]+")"
+				titledate = "(" + str(json_data_episodes['air_date'])[:4] + ")"
 				title = str(json_data_episodes['name'])
-				title = "%s %s" %(title, titledate)
+				title = "%s %s" % (title, titledate)
 				overview = str(json_data_episodes['overview'])
 				coverPath = str(json_data_episodes['poster_path'])
-				cover = self.tempDir+id+".jpg"
+				cover = self.tempDir + id + ".jpg"
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
-				if not id == "" or not title =="":
+				if not id == "" or not title == "":
 					res.append(((title, url_cover, overview, id),))
 
 				for names in json_data_episodes['episodes']:
 					id = str(names['id'])
 					title = str(names['episode_number'])
 					name = str(names['name'])
-					title = "%+6s %s" %(title,name)
+					title = "%+6s %s" % (title,name)
 					overview = str(names['overview'])
 					coverPath = str(names['still_path'])
-					cover = self.tempDir+id+".jpg"
+					cover = self.tempDir + id + ".jpg"
 					url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
-					if not id == "" or not title =="":
+					if not id == "" or not title == "":
 						res.append(((title, url_cover, overview, id),))
 			self['list'].setList(res)
 			self.piclist = res
@@ -1223,10 +1223,10 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		if url_cover[-4:] == "None":
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
-			if not fileExists(self.tempDir+id+".jpg"):
-				downloadPage(url_cover, self.tempDir+id+".jpg").addCallback(self.getData, self.tempDir+id+".jpg").addErrback(self.dataError)
+			if not fileExists(self.tempDir + id + ".jpg"):
+				downloadPage(url_cover, self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback(self.dataError)
 			else:
-				self.showCover(self.tempDir+id+".jpg")
+				self.showCover(self.tempDir + id + ".jpg")
 		
 	def getData(self, data, coverSaved):
 		self.showCover(coverSaved)
@@ -1308,11 +1308,11 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		list = self.piclist
 		if list == None:
 			return		
-		count=0
-		while count<len(list):
+		count = 0
+		while count < len(list):
 			id = list[count][0][3]
 			try:
-				os.remove(self.tempDir+id+".jpg")
+				os.remove(self.tempDir + id + ".jpg")
 			except:
 				pass
-			count+=1
+			count += 1

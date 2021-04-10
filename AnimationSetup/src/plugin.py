@@ -20,7 +20,7 @@ config.misc.window_animation_default = ConfigNumber(default=g_default["current"]
 config.misc.window_animation_speed = ConfigSelectionNumber(1, g_max_speed, 1, default=g_default["speed"])
 
 class AnimationSetupConfig(ConfigListScreen, Screen):
-	skin=	"""
+	skin = """
 		<screen position="center,center" size="600,140" title="Animation Settings">
 			<widget name="config" position="0,0" size="600,100" scrollbarMode="showOnDemand" />
 
@@ -48,7 +48,7 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 			"red": self.keyRed,
 			"cancel": self.keyRed,
 		}, -2)
-		self["key_red"]	  = StaticText(_("Cancel"))
+		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self["key_yellow"] = StaticText(_("Default"))
 

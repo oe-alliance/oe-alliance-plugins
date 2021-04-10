@@ -42,7 +42,7 @@ from bs4 import BeautifulSoup
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
-__plugin__  = "ABC iView"
+__plugin__ = "ABC iView"
 __version__ = "1.0.1"
 
 #==============================================================================
@@ -234,7 +234,7 @@ class StreamsThumb(StreamsThumbCommon):
 		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
-		self.setTitle("ABC iView: Listings for " +self.title)
+		self.setTitle("ABC iView: Listings for " + self.title)
 
 	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
@@ -259,7 +259,7 @@ class StreamsThumb(StreamsThumbCommon):
 #==============================================================================
 	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("ABC iView: Search Listings for " +callback)
+			self.setTitle("ABC iView: Search Listings for " + callback)
 			self.getSearchMediaData(self.mediaList, callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
@@ -294,7 +294,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 			# If zero, an error occurred retrieving the url, pass empty string back
 			if auth:
-				swf_url  = 'http://www.abc.net.au/iview/images/iview.jpg'
+				swf_url = 'http://www.abc.net.au/iview/images/iview.jpg'
 
 				playpath = auth['playpath_prefix'] + showID
 				if playpath.split('.')[-1] == 'mp4':
@@ -372,7 +372,7 @@ class StreamsThumb(StreamsThumbCommon):
 			and gives us a one-time token we need to use to speak RTSP with
 			ABC's servers, and tells us what the RTMP URL is.
 		"""
-		auth_url   = 'http://tviview.abc.net.au/iview/auth/?v2'
+		auth_url = 'http://tviview.abc.net.au/iview/auth/?v2'
 
 		try:
 			auth_config = wgetUrl(auth_url)
@@ -440,7 +440,7 @@ class StreamsThumb(StreamsThumbCommon):
 #==============================================================================
 	def getMediaData(self, weekList, seriesID):
 
-		self.url = u"http://tviview.abc.net.au/iview/api2/?series="+seriesID
+		self.url = u"http://tviview.abc.net.au/iview/api2/?series=" + seriesID
 		channel = ""
 		short = ''
 		name = ''
@@ -491,18 +491,18 @@ class StreamsThumb(StreamsThumbCommon):
 					try:
 						# Calcualte the stream duration
 						secs = int(entry[u'j'])
-						duration = _("Duration: ")+str(calcDuration(secs))
+						duration = _("Duration: ") + str(calcDuration(secs))
 					except (Exception) as exception:
 						episodes = ""
 
 					try:
 						lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'f']), u"%Y-%m-%d %H:%M:%S")))
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-						date1 = _("Added:")+" "+str(date_tmp)
+						date1 = _("Added:") + " " + str(date_tmp)
 					except (Exception) as exception:
 						lastDate = datetime.fromtimestamp(mktime(strptime(str(entry[u'g']), u"%Y-%m-%d %H:%M:%S")))
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-						date1 = _("Added:")+" "+str(date_tmp)
+						date1 = _("Added:") + " " + str(date_tmp)
 
 					try:
 						channel = str(entry[u'a'])
@@ -517,7 +517,7 @@ class StreamsThumb(StreamsThumbCommon):
 #==============================================================================
 	def getCatsMediaData(self, weekList, category):
 
-		self.url = u"http://tviview.abc.net.au/iview/api2/?keyword="+category
+		self.url = u"http://tviview.abc.net.au/iview/api2/?keyword=" + category
 		channel = ""
 		short = ''
 		name = ''
@@ -566,7 +566,7 @@ class StreamsThumb(StreamsThumbCommon):
 						short = ""
 
 					try:
-						episodes = _("Episodes: ")+str(len(entry['f']))
+						episodes = _("Episodes: ") + str(len(entry['f']))
 					except (Exception) as exception:
 						episodes = ""
 
@@ -630,7 +630,7 @@ class StreamsThumb(StreamsThumbCommon):
 							icon = ''
 
 						try:
-							episodes = _("Episodes: ")+str(len(entry['f']))
+							episodes = _("Episodes: ") + str(len(entry['f']))
 						except (Exception) as exception:
 							episodes = ""
 

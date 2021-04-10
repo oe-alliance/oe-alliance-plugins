@@ -22,8 +22,8 @@ class AboutBoxBranding(Screen):
 		{
 			"cancel": self.close,
 			"up": self.pageUp,
-			"down":	self.pageDown,
-			"left":	self.pageUp,
+			"down": self.pageDown,
+			"left": self.pageUp,
 			"right": self.pageDown,
 			"pageUp": self.pageUp,
 			"pageDown": self.pageDown,

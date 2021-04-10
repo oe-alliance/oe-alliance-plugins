@@ -44,7 +44,7 @@ if sys.version_info[0] == 2:
 # Python2 version
     from urllib import quote, unquote
     from urllib2 import Request, urlopen
-    def dec2utf8(n):         return unichr(n).encode('utf-8')
+    def dec2utf8(n): return unichr(n).encode('utf-8')
 
 else:
 # Python3 version
@@ -52,7 +52,7 @@ else:
     from urllib.request import Request, urlopen
 # No unichr in Py3. chr() returns a unicode string.
 #
-    def dec2utf8(n):         return chr(n)
+    def dec2utf8(n): return chr(n)
 
 # Who we will pretend to be when calling translate.google.com
 #
@@ -87,24 +87,24 @@ epg_PB = ci # Extra index for Playback Begin time.
 #
 # The list of available languages (sorted alphabetically)
 #
-langs =  [
-('af', _('Afrikaans')),         ('sq', _('Albanian')),          ('ar', _('Arabic')),
-('az', _('Azerbaijani')),       ('eu', _('Basque')),            ('be', _('Belarusian')),
-('bs', _('Bosnian')),           ('bg', _('Bulgarian')),         ('ca', _('Catalan')),
-('ceb', _('Cebuano')),          ('hr', _('Croatian')),          ('cs', _('Czech')),
-('da', _('Danish')),            ('nl', _('Dutch')),             ('en', _('English')),
-('et', _('Estonian')),          ('tl', _('Filipino')),          ('fi', _('Finnish')),
-('fr', _('French')),            ('gl', _('Galician')),          ('de', _('German')),
-('el', _('Greek')),             ('ht', _('Haitian Creole')),    ('hu', _('Hungarian')),
-('is', _('Icelandic')),         ('id', _('Indonesian')),        ('ga', _('Irish')),
-('it', _('Italian')),           ('jw', _('Javanese')),          ('lv', _('Latvian')),
-('lt', _('Lithuanian')),        ('mk', _('Macedonian')),        ('ms', _('Malay')),
-('mt', _('Maltese')),           ('no', _('Norwegian')),         ('fa', _('Persian')),
-('pl', _('Polish')),            ('pt', _('Portuguese')),        ('ro', _('Romanian')),
-('ru', _('Russian')),           ('sr', _('Serbian')),           ('sk', _('Slovak')),
-('sl', _('Slovenian')),         ('es', _('Spanish')),           ('sw', _('Swahili')),
-('sv', _('Swedish')),           ('tr', _('Turkish')),           ('uk', _('Ukrainian')),
-('ur', _('Urdu')),              ('vi', _('Vietnamese')),        ('cy', _('Welsh'))
+langs = [
+('af', _('Afrikaans')), ('sq', _('Albanian')), ('ar', _('Arabic')),
+('az', _('Azerbaijani')), ('eu', _('Basque')), ('be', _('Belarusian')),
+('bs', _('Bosnian')), ('bg', _('Bulgarian')), ('ca', _('Catalan')),
+('ceb', _('Cebuano')), ('hr', _('Croatian')), ('cs', _('Czech')),
+('da', _('Danish')), ('nl', _('Dutch')), ('en', _('English')),
+('et', _('Estonian')), ('tl', _('Filipino')), ('fi', _('Finnish')),
+('fr', _('French')), ('gl', _('Galician')), ('de', _('German')),
+('el', _('Greek')), ('ht', _('Haitian Creole')), ('hu', _('Hungarian')),
+('is', _('Icelandic')), ('id', _('Indonesian')), ('ga', _('Irish')),
+('it', _('Italian')), ('jw', _('Javanese')), ('lv', _('Latvian')),
+('lt', _('Lithuanian')), ('mk', _('Macedonian')), ('ms', _('Malay')),
+('mt', _('Maltese')), ('no', _('Norwegian')), ('fa', _('Persian')),
+('pl', _('Polish')), ('pt', _('Portuguese')), ('ro', _('Romanian')),
+('ru', _('Russian')), ('sr', _('Serbian')), ('sk', _('Slovak')),
+('sl', _('Slovenian')), ('es', _('Spanish')), ('sw', _('Swahili')),
+('sv', _('Swedish')), ('tr', _('Turkish')), ('uk', _('Ukrainian')),
+('ur', _('Urdu')), ('vi', _('Vietnamese')), ('cy', _('Welsh'))
 ]
 
 rtol = {'ar', 'fa', 'ur'}
@@ -265,8 +265,8 @@ def DO_translation(text, source, dest):     # source, dest are langs
     enc_text = quote(text)
     enc_len = len(enc_text)
     max = 7000              # Less than the actual ~7656 to 7707
-    nsplit = int(enc_len/max) + 1
-    bsize = int(enc_len/nsplit) - 10
+    nsplit = int(enc_len / max) + 1
+    bsize = int(enc_len / nsplit) - 10
 
 # We need to step along the string finding the longest match within the
 # limits that ends a sentence.  Or, if we can't find a sentence end, at
@@ -322,8 +322,8 @@ def DO_translation(text, source, dest):     # source, dest are langs
 # Iff the remaining quoted length is less than twice bsize then lower
 # bsize, so we can't(?) end up with a very small final part.
 #
-        if check_end and (togo < bsize*2):
-            bsize = int(bsize*2.0/3.0)
+        if check_end and (togo < bsize * 2):
+            bsize = int(bsize * 2.0 / 3.0)
             check_end = False
 
     return res.strip()
@@ -363,7 +363,7 @@ begin_props = """
 (.*)                        # The real description
 \s*$                        # Strip trailing whitespace to EOL
 """ % (sbk_prop, par_prop, sbk_prop)
-begin_matcher = re.compile(begin_props, flags=re.X|re.S)
+begin_matcher = re.compile(begin_props, flags=re.X | re.S)
 
 end_props = """
 ^\s*                        # Strip any leading whitespace
@@ -379,7 +379,7 @@ end_props = """
 )                           # End all () or [] groups saving
 \s*$                        # Strip trailing whitespace to EOL
 """ % (sbk_prop, sbk_prop, par_prop)
-end_matcher = re.compile(end_props, flags=re.X|re.S)
+end_matcher = re.compile(end_props, flags=re.X | re.S)
 
 # A string to use as a separator when the title and description are
 # combined for a one-call translation.
@@ -457,9 +457,9 @@ def EPGdata_translate(title, descr, start, duration, uref):
             if start == None:   # A non-native recording?
                 to = int(time.time() + 10800)
             else:
-                to = int(start + duration + 60*config.epg.histminutes.getValue())
+                to = int(start + duration + 60 * config.epg.histminutes.getValue())
             if CfgPlTr.timeout_hr.getValue() > 0:
-                limit = int(time.time() + 3600*CfgPlTr.timeout_hr.getValue())
+                limit = int(time.time() + 3600 * CfgPlTr.timeout_hr.getValue())
                 if limit < to:
                     to = limit
             AfCache.add(uref, (t_title, t_descr), abs_timeout=to)
@@ -485,7 +485,7 @@ def make_uref(sv_id, sv_name):
 #
 plugin_location = os.path.dirname(os.path.realpath(__file__))
 def lang_flag(lang):    # Where the language images are
-    return plugin_location + '/pic/flag/' + lang  + '.png'
+    return plugin_location + '/pic/flag/' + lang + '.png'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 # Our classes
@@ -776,14 +776,14 @@ Red: Refresh EPG
 # are none if we hit the exception.
 #
         try:
-            begin=time.strftime("%a %Y-%m-%d %H:%M", time.localtime(int(self.event[epg_B])))
+            begin = time.strftime("%a %Y-%m-%d %H:%M", time.localtime(int(self.event[epg_B])))
         except:
             begin = ''
         if self.event[epg_D] > 0:
             plen = (int(self.event[epg_D]) / 60)    # mins
             if plen >= 60:
-                hr = int(plen/60)
-                plen -= 60*hr
+                hr = int(plen / 60)
+                plen -= 60 * hr
                 duration = "%dh %dm" % (hr, plen)
             else:
                 duration = "%dm" % (plen)
@@ -880,7 +880,7 @@ Red: Refresh EPG
 #
                 try:
                     seek = service.seek()
-                    secs_in = seek.getPlayPosition()[1]/90000
+                    secs_in = seek.getPlayPosition()[1] / 90000
                     play_began = int(time.time() - secs_in)
                 except:
                     pass
@@ -900,7 +900,7 @@ Red: Refresh EPG
 
 # Create a list of the correct size with all elements None
 #
-            pbinfo = [None]*(len(EPG_OPTIONS)-1)    # Ignoring X
+            pbinfo = [None] * (len(EPG_OPTIONS) - 1)    # Ignoring X
             pbinfo[epg_I] = eventID
             pbinfo[epg_S] = short
             pbinfo[epg_E] = extended
@@ -917,8 +917,8 @@ Red: Refresh EPG
 # We'll remember everything returned by lookupEvent()
 #
             t_now = int(time.time())
-            epg_base = t_now - 60*int(config.epg.histminutes.getValue())
-            epg_extent = 1440*14    # Get up to 14 days from now (minutes)
+            epg_base = t_now - 60 * int(config.epg.histminutes.getValue())
+            epg_extent = 1440 * 14    # Get up to 14 days from now (minutes)
             test = [EPG_OPTIONS, (self.My_Sref().toCompareString(), 0, epg_base, epg_extent)]
             epgcache = eEPGCache.getInstance()
             self.list = epgcache.lookupEvent(test)
@@ -940,9 +940,9 @@ Red: Refresh EPG
     def showEPG(self):
         try:
             self.event = self.list[self.count]
-            title=self.event[epg_T]
-            short=self.event[epg_S]
-            extended=self.event[epg_E]
+            title = self.event[epg_T]
+            short = self.event[epg_S]
+            extended = self.event[epg_E]
             self.refresh = False
         except:
             title = 'Press red button to refresh EPG'
@@ -1147,7 +1147,7 @@ def My_EVB__init__(self, *args, **kwargs):
 # We create our own ActionMap. The VirtualKeyboardActions contexts only
 # defines a Text key (convenient!) and calls it "showVirtualKeyboard".
 #
-    which= "EPGTrans"
+    which = "EPGTrans"
     self[which] = ActionMap(["VirtualKeyboardActions"],
            {"showVirtualKeyboard": self.EPGTr_ToggleMode})
     self[which].setEnabled(True)

@@ -116,7 +116,7 @@ def ChannelsImporterStart(menuid, **kwargs):
 	return []
 
 def ChannelsImporterMain(session, **kwargs):
-	menu_path = _("Main menu")+' / '+_("Setup")+' / '+_('Service searching')
+	menu_path = _("Main menu") + ' / ' + _("Setup") + ' / ' + _('Service searching')
 	session.open(ChannelsImporterScreen, 'channelsimporter', 'SystemPlugins/ChannelsImporter', menu_path, PluginLanguageDomain)
 
 def Plugins(**kwargs):

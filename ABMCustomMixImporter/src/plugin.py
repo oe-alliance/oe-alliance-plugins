@@ -267,7 +267,7 @@ class schedule:
 		ltime = localtime(now)
 		next = int(mktime((ltime.tm_year, ltime.tm_mon, ltime.tm_mday, self.clock[0], self.clock[1] - int(self.leadTime), 0, ltime.tm_wday, ltime.tm_yday, ltime.tm_isdst)))
 		if next > 0:
-			while (next-30) < now:
+			while (next - 30) < now:
 				next += intervals[self.repeattype]
 			self.fetchtimer.startLongTimer(next - now)
 		else:

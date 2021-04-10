@@ -40,14 +40,14 @@ class BrowserSetting:
 		f = open(self._settingFileName)
 		for line in f.readlines():
 			if line.startswith('start='):
-				tmp = line[6:len(line)-1].split()
+				tmp = line[6:len(line) - 1].split()
 				self._start = tmp[0]
 				if len(tmp) > 1:
 					self._type = int(tmp[1])
 				else:
 					self._type = 0
 			elif line.startswith('keymap='):
-				self._keymap = line[7:len(line)-1]
+				self._keymap = line[7:len(line) - 1]
 		f.close()
 
 	def _write(self):
@@ -123,7 +123,7 @@ class BrowserPositionSetting:
 		return (self._left, self._width, self._top, self._height)
 
 class BrowserPositionWindow(Screen, ConfigListScreen):
-	skin = 	"""
+	skin = """
 		<screen position="0,0" size="%d,%d" title="Browser Position Setup" backgroundColor="#27d8dee2" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="%d,%d" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="%d,%d" size="140,40" alphatest="on" />"
@@ -135,10 +135,10 @@ class BrowserPositionWindow(Screen, ConfigListScreen):
 		</screen>
 		"""
 	def __init__(self, session):
-		w,h   = session.desktop.size().width(), session.desktop.size().height()
-		cw,ch = w/2, h/2
+		w,h = session.desktop.size().width(), session.desktop.size().height()
+		cw,ch = w / 2, h / 2
 		#                             btn_red        btn_green     lb_red         lb_green      config
-		self.skin = self.skin % (w,h, cw-190,ch-110, cw+50,ch-110, cw-190,ch-110, cw+50,ch-110, cw-250,ch-50)
+		self.skin = self.skin % (w,h, cw - 190,ch - 110, cw + 50,ch - 110, cw - 190,ch - 110, cw + 50,ch - 110, cw - 250,ch - 50)
 
 		Screen.__init__(self,session)
 		self.session = session
@@ -164,19 +164,19 @@ class BrowserPositionWindow(Screen, ConfigListScreen):
 		params = BrowserPositionSetting().getPosition()
 		vbcfg.setPosition(params)
 
-		left   = params[0]
-		width  = params[1]
-		top    = params[2]
+		left = params[0]
+		width = params[1]
+		top = params[2]
 		height = params[3]
 
-		self.dst_left   = ConfigSlider(default=left, increment=5, limits=(0, 720))
-		self.dst_width  = ConfigSlider(default=width, increment=5, limits=(0, 720))
-		self.dst_top    = ConfigSlider(default=top, increment=5, limits=(0, 576))
+		self.dst_left = ConfigSlider(default=left, increment=5, limits=(0, 720))
+		self.dst_width = ConfigSlider(default=width, increment=5, limits=(0, 720))
+		self.dst_top = ConfigSlider(default=top, increment=5, limits=(0, 576))
 		self.dst_height = ConfigSlider(default=height, increment=5, limits=(0, 576))
 
-		self.dst_left_entry   = getConfigListEntry(_("left"), self.dst_left)
-		self.dst_width_entry  = getConfigListEntry(_("width"), self.dst_width)
-		self.dst_top_entry    = getConfigListEntry(_("top"), self.dst_top)
+		self.dst_left_entry = getConfigListEntry(_("left"), self.dst_left)
+		self.dst_width_entry = getConfigListEntry(_("width"), self.dst_width)
+		self.dst_top_entry = getConfigListEntry(_("top"), self.dst_top)
 		self.dst_height_entry = getConfigListEntry(_("height"), self.dst_height)
 
 		self.list.append(self.dst_left_entry)
@@ -193,20 +193,20 @@ class BrowserPositionWindow(Screen, ConfigListScreen):
 
 	def adjustBorder(self):
 		if self["config"].getCurrent() == self.dst_left_entry:
-			if self.dst_left.value + self.dst_width.value >720:
-				self.dst_width.setValue(720-self.dst_left.value)
+			if self.dst_left.value + self.dst_width.value > 720:
+				self.dst_width.setValue(720 - self.dst_left.value)
 				self.resetDisplay()
 		elif self["config"].getCurrent() == self.dst_width_entry:
-			if self.dst_left.value + self.dst_width.value >720:
-				self.dst_left.setValue(720-self.dst_width.value)
+			if self.dst_left.value + self.dst_width.value > 720:
+				self.dst_left.setValue(720 - self.dst_width.value)
 				self.resetDisplay()
 		elif self["config"].getCurrent() == self.dst_top_entry:
-			if self.dst_top.value + self.dst_height.value >576:
-				self.dst_height.setValue(576-self.dst_top.value)
+			if self.dst_top.value + self.dst_height.value > 576:
+				self.dst_height.setValue(576 - self.dst_top.value)
 				self.resetDisplay()
 		elif self["config"].getCurrent() == self.dst_height_entry:
-			if self.dst_top.value + self.dst_height.value >576:
-				self.dst_top.setValue(576-self.dst_height.value)
+			if self.dst_top.value + self.dst_height.value > 576:
+				self.dst_top.setValue(576 - self.dst_height.value)
 				self.resetDisplay()
 
 	def keyLeft(self):
@@ -410,8 +410,8 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 		self["key_green"] = StaticText(_("Save"))
 
 		self.menuItemTitle = None
-		self.menuItemUrl   = None
-		self.menuItemName  = None
+		self.menuItemUrl = None
+		self.menuItemName = None
 
 		self.menuEntryName = None
 		self.menuEntryTitle = None
@@ -517,7 +517,7 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 			self.menulist.append(self.menuEntryName)
 		else:
 			self.menuItemTitle = ConfigText(default=self.mData.mTitle, visible_width=65, fixed_size=False)
-			self.menuItemUrl   = ConfigText(default=self.mData.mUrl, visible_width=65, fixed_size=False)
+			self.menuItemUrl = ConfigText(default=self.mData.mUrl, visible_width=65, fixed_size=False)
 
 			self.menuEntryTitle = getConfigListEntry(_("Title"), self.menuItemTitle)
 			self.menuEntryUrl = getConfigListEntry(_("Url"), self.menuItemUrl)
@@ -564,11 +564,11 @@ class BrowserBookmarkWindow(Screen):
 				"0": self.keyNumber,
 			},-2)
 
-		self["key_red"]    = StaticText(_("Exit"))
-		self["key_green"]  = StaticText(_("Add"))
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_green"] = StaticText(_("Add"))
 		self["key_yellow"] = StaticText(_("Edit"))
-		self["key_blue"]   = StaticText(_("Delete"))
-		self["key_0"]      = StaticText(_("Set as Startpage"))
+		self["key_blue"] = StaticText(_("Delete"))
+		self["key_0"] = StaticText(_("Set as Startpage"))
 
 		self.mBookmarkList = self.setBookmarkList()
 		self["bookmarklist"] = MenuList(self.mBookmarkList)
@@ -731,10 +731,10 @@ class BrowserHelpWindow(Screen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
-		self["key_red"]    = StaticText(_("Exit"))
-		self["key_green"]  = StaticText(_("Global"))
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_green"] = StaticText(_("Global"))
 		self["key_yellow"] = StaticText(_("Mouse"))
-		self["key_blue"]   = StaticText(_("Keyboard"))
+		self["key_blue"] = StaticText(_("Keyboard"))
 
 		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions","ColorActions"], {
 				"ok": self.keyRed,
@@ -827,18 +827,18 @@ class BrowserHelpWindow(Screen, HelpableScreen):
 		self.setHelpModeActions(self.MODE_KEYBOARD)
 
 class Browser(Screen):
-	MENU_ITEM_WIDTH  = 150
+	MENU_ITEM_WIDTH = 150
 	MENU_ITEM_HEIGHT = 30
-	MENULIST_WIDTH   = 200
-	MENULIST_HEIGHT  = 25
+	MENULIST_WIDTH = 200
+	MENULIST_HEIGHT = 25
 
 	# menulist->position->y : MENU_ITEM_HEIGHT+30
 	# menulist->size->x     : MENULIST_WIDTH
 
 	size = getDesktop(0).size()
-	WIDTH  = int(size.width())
+	WIDTH = int(size.width())
 	HEIGHT = int(size.height())
-	skin =	"""
+	skin = """
 		<screen name="OperaBrowser" position="0,0" size="%(width)d,%(height)d" backgroundColor="transparent" flags="wfNoBorder" title="Opera Browser">
 			<widget name="topArea" zPosition="-1" position="0,0" size="1280,60" font="Regular;20" valign="center" halign="center" backgroundColor="#000000" />
 			<widget name="menuitemFile" position="30,20" size="150,30" font="Regular;20" valign="center" halign="center" backgroundColor="#000000" foregroundColors="#9f1313,#a08500" />
@@ -850,7 +850,7 @@ class Browser(Screen):
 		</screen>
 		""" % {'width':WIDTH,
 			'height':HEIGHT,
-			'bottom_pos_y':HEIGHT-80,
+			'bottom_pos_y':HEIGHT - 80,
 			'bottom_size_x':WIDTH}
 
 	MENULIST_ITEMS = []
@@ -871,7 +871,7 @@ class Browser(Screen):
 		self._current_url = None
 		self._current_title = None
 
-		self["topArea"]    = Label()
+		self["topArea"] = Label()
 		self["bottomArea"] = Label()
 
 		self["menuitemFile"] = MultiColorLabel()
@@ -1183,8 +1183,8 @@ class Browser(Screen):
 	def keyDown(self):
 		if not self.is_show_menu:
 			self["menulist"].setList(self.get_menulist_items(self.idx_menu))
-			self["menulist"].resize(self.MENULIST_WIDTH, self.MENULIST_HEIGHT*len(self.get_menulist_items(self.idx_menu))+5)
-			self["menulist"].move(self.MENU_ITEM_WIDTH*self.idx_menu+50,self.MENU_ITEM_HEIGHT+30)
+			self["menulist"].resize(self.MENULIST_WIDTH, self.MENULIST_HEIGHT * len(self.get_menulist_items(self.idx_menu)) + 5)
+			self["menulist"].move(self.MENU_ITEM_WIDTH * self.idx_menu + 50,self.MENU_ITEM_HEIGHT + 30)
 			self.toggle_menulist()
 			return
 		self["menulist"].down()

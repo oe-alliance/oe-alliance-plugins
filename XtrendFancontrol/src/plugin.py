@@ -223,10 +223,10 @@ class FanSetupScreen(Screen, ConfigListScreen):
 			return res
 
 		self.FAN = config.plugins.FanSetup
-		self.prev_values      = getPrevValues(self.FAN)
-		self.cfg_mode         = getConfigListEntry(_("Fan mode"), self.FAN.mode)
-		self.cfg_timeset      = getConfigListEntry(_("Switch Fan mode on time setting"), self.FAN.timeset)
-		self.cfg_hddwatch     = getConfigListEntry(_("Watch HDD state"), self.FAN.hddwatch)
+		self.prev_values = getPrevValues(self.FAN)
+		self.cfg_mode = getConfigListEntry(_("Fan mode"), self.FAN.mode)
+		self.cfg_timeset = getConfigListEntry(_("Switch Fan mode on time setting"), self.FAN.timeset)
+		self.cfg_hddwatch = getConfigListEntry(_("Watch HDD state"), self.FAN.hddwatch)
 		self.cfg_systempwatch = getConfigListEntry(_("Watch system temp"), self.FAN.systempwatch)
 
 		# select internal hdd-drive
@@ -234,17 +234,17 @@ class FanSetupScreen(Screen, ConfigListScreen):
 		hddlist["all"] = _("All")
 		default = not hddlist.has_key(self.FAN.hdddevice.value) and "all" or self.FAN.hdddevice.value
 		self.hddlistsel = ConfigSelection(choices=hddlist, default=default)
-		self.cfg_hdddevice= getConfigListEntry(_("Select internal HDD device"), self.hddlistsel)
+		self.cfg_hdddevice = getConfigListEntry(_("Select internal HDD device"), self.hddlistsel)
 		self.prev_hdddevice = self.FAN.hdddevice.value
 
 	def createSetup(self):
 		list = [self.cfg_mode]
-		if self.FAN.mode.value !="off":
+		if self.FAN.mode.value != "off":
 			list.append(self.cfg_timeset)
 			if self.FAN.timeset.value != "none":
 					list.append(getConfigListEntry(_("Start time"), self.FAN.timestartoff))
 					list.append(getConfigListEntry(_("End time"), self.FAN.timeendoff))
-		if self.FAN.mode.value =="off":
+		if self.FAN.mode.value == "off":
 			list.append(self.cfg_hddwatch)
 			if self.FAN.hddwatch.value != "none":
 				list.append(self.cfg_hdddevice)
@@ -357,7 +357,7 @@ class FanManager:
 		if mode != "off" and timeset != "none":
 			ts = localtime()
 			nowsec = (ts.tm_hour * 3600) + (ts.tm_min * 60)
-			offlist= config.plugins.FanSetup.timestartoff.value
+			offlist = config.plugins.FanSetup.timestartoff.value
 			offsec = (offlist[0] * 3600) + (offlist[1] * 60)
 			onlist = config.plugins.FanSetup.timeendoff.value
 			onsec = (onlist[0] * 3600) + (onlist[1] * 60)
@@ -464,7 +464,7 @@ def getTempForDevice(device):
 		pos1 = temperature.rfind(':')
 		pos2 = temperature.rfind('C')
 		if pos1 != -1 and pos2 != -1 and pos1 < pos2:
-			temp = int(temperature[pos1+1:pos2])
+			temp = int(temperature[pos1 + 1:pos2])
 			disk = temperature[1:pos1].replace('\x10\x80','').strip()
 			return disk, temp
 	except:

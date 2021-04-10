@@ -52,7 +52,7 @@ class TaskManager:
 		self.cbSetStatusCB = None
 
 	def append(self, command, cbDataFunc, cbCloseFunc):
-		self.taskList.append([command+'\n', cbDataFunc, cbCloseFunc])
+		self.taskList.append([command + '\n', cbDataFunc, cbCloseFunc])
 
 	def dump(self):
 		print "############### TASK ###############"
@@ -87,8 +87,8 @@ class TaskManager:
 		if self.taskIdx >= len(self.taskList) or self.occurError:
 			print "[BluetoothManager] Info >> can't run task!!"
 			return False
-		command     = self.taskList[self.taskIdx][0]
-		cbDataFunc  = self.taskList[self.taskIdx][1]
+		command = self.taskList[self.taskIdx][0]
+		cbDataFunc = self.taskList[self.taskIdx][1]
 		cbCloseFunc = self.taskList[self.taskIdx][2]
 
 		self.gTaskInstance = eConsoleAppContainer()
@@ -99,7 +99,7 @@ class TaskManager:
 		if self.cbSetStatusCB is not None:
 			self.cbSetStatusCB(self.taskIdx)
 
-		print "[BluetoothManager] Info >> prepared command : %s"%(command)
+		print "[BluetoothManager] Info >> prepared command : %s" % (command)
 		self.gTaskInstance.execute(command)
 		self.taskIdx += 1
 		return True
@@ -163,7 +163,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 		self.close()
 		
 class BluetoothDevicesManager(Screen):
-	skin = 	"""
+	skin = """
 		<screen name="BluetoothDevicesManager" position="center,center" size="600,450" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
@@ -185,7 +185,7 @@ class BluetoothDevicesManager(Screen):
 
 		self.taskManager = TaskManager()
 
-		self["actions"]  = ActionMap(["OkCancelActions","WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
+		self["actions"] = ActionMap(["OkCancelActions","WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
 			"ok": self.keyOK,
 			"cancel": self.keyCancel,
 			"red": self.keyCancel,
@@ -194,10 +194,10 @@ class BluetoothDevicesManager(Screen):
 			"blue": self.keyBlue,
 		}, -1)
 
-		self["key_red"]    = Label(_("Exit"))
-		self["key_green"]  = Label(_("(Re)Scan"))
+		self["key_red"] = Label(_("Exit"))
+		self["key_green"] = Label(_("(Re)Scan"))
 		self["key_yellow"] = Label(_("Connect"))
-		self["key_blue"]   = Label(_("Config"))
+		self["key_blue"] = Label(_("Config"))
 
 		self["ConnStatus"] = Label(_("No connected to any device"))
     

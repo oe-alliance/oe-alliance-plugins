@@ -42,7 +42,7 @@ class MySkinData:
         </screen>
         """
     tMyes = "380"
-    tMno  = "770"
+    tMno = "770"
 
 
 MySD = MySkinData()

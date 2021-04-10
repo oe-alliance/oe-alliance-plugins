@@ -14,7 +14,7 @@ modelist = {"3": _("OdinM9"), "5": _("ET9000/ET9100"), "4": _("DMM/DMM ADV"), "6
 config.plugins.RCSetup = ConfigSubsection()
 from os import system as os_system
 file = open("/proc/stb/ir/rc/type", "r")
-text=file.read()
+text = file.read()
 file.close()
 temp = int(text)
 if temp == 19:

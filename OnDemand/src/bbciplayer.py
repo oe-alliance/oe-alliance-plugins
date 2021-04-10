@@ -43,7 +43,7 @@ from lxml import html
 
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
-__plugin__  = "BBC iPlayer: "
+__plugin__ = "BBC iPlayer: "
 __version__ = "Version 1.0.2: "
 
 #===================================================================================
@@ -213,7 +213,7 @@ class StreamsThumb(StreamsThumbCommon):
 		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
-		self.setTitle("BBC iPlayer: Listings for " +self.title)
+		self.setTitle("BBC iPlayer: Listings for " + self.title)
 
 	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
@@ -225,16 +225,16 @@ class StreamsThumb(StreamsThumbCommon):
 		else:
 			self.getMediaData(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
-				self.mediaProblemPopup("No Episodes Found for "+self.title)
+				self.mediaProblemPopup("No Episodes Found for " + self.title)
 			self.updateMenu()
 
 	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("BBC iPlayer: Search Listings for " +callback)
+			self.setTitle("BBC iPlayer: Search Listings for " + callback)
 			self.getMediaData(self.mediaList, self.url + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No matching search items were found for "+callback), MessageBox.TYPE_INFO, timeout=5, simple=True)
+				self.session.openWithCallback(self.close, MessageBox, _("No matching search items were found for " + callback), MessageBox.TYPE_INFO, timeout=5, simple=True)
 		else:
 			self.close()
 
@@ -249,19 +249,19 @@ class StreamsThumb(StreamsThumbCommon):
 		if fileUrl:
 			# If a warning message is returned then display this before playing the programme
 			if retMessage:
-				self.session.openWithCallback(self.play(fileUrl,showName), MessageBox, _(retMessage+str(showName)), timeout=5, type=MessageBox.TYPE_INFO)
+				self.session.openWithCallback(self.play(fileUrl,showName), MessageBox, _(retMessage + str(showName)), timeout=5, type=MessageBox.TYPE_INFO)
 			else:
 				self.play(fileUrl,showName)
 		else:
 			# If not stream URL is returned and a warning message is returned then display it.
 			if retMessage:
-				self.mediaProblemPopup(retMessage+str(showName))
+				self.mediaProblemPopup(retMessage + str(showName))
 			else:
-				self.mediaProblemPopup("Sorry, unable to find a playable stream for "+str(showName))
+				self.mediaProblemPopup("Sorry, unable to find a playable stream for " + str(showName))
 
 	def play(self, fileUrl, showName):
 		fileRef = eServiceReference(4097,0,fileUrl)
-		fileRef.setData(2,10240*1024)
+		fileRef.setData(2,10240 * 1024)
 		fileRef.setName(showName)
 		self.session.open(MoviePlayer, fileRef)
 
@@ -294,9 +294,9 @@ class StreamsThumb(StreamsThumbCommon):
 					try:
 						lastDate = datetime.fromtimestamp(mktime(strptime(str(line[2]), "%Y-%m-%dT%H:%M:%SZ"))) #2013-03-06T18:27:43Z
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-						date1 = _("Added:")+" "+str(date_tmp)
+						date1 = _("Added:") + " " + str(date_tmp)
 					except (Exception) as exception:
-						date1=str(line[2])
+						date1 = str(line[2])
 
 					# Only set the Icon if they are enabled
 					if self.showIcon == 'True':
@@ -342,25 +342,25 @@ class StreamsThumb(StreamsThumbCommon):
 				
 				# Only set the Icon if they are enabled
 				if self.showIcon == 'True':
-					icon=select("thumbnail").get('url')
+					icon = select("thumbnail").get('url')
 				else:
-					icon=''
+					icon = ''
 
-				name_tmp=str(select('title').text_content())
+				name_tmp = str(select('title').text_content())
 				
-				stream_tmp=select('id').text_content()
+				stream_tmp = select('id').text_content()
 				stream_split = stream_tmp.rsplit(':',1)
 				stream = stream_split[1]
 				
 				try:
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(select('updated').text_content()), "%Y-%m-%dT%H:%M:%SZ"))) #2013-03-06T18:27:43Z
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
-					date1 = _("Added:")+" "+str(date_tmp)
+					date1 = _("Added:") + " " + str(date_tmp)
 				except (Exception) as exception:
-					date1=select('updated').text_content()
+					date1 = select('updated').text_content()
 					print __plugin__, __version__,"getMediaData: date1 parse error: ", exception
 				
-				short_tmp=str(select('content').text_content().strip())
+				short_tmp = str(select('content').text_content().strip())
 
 				name = checkUnicode(name_tmp)
 				short = checkUnicode(short_tmp)
@@ -376,7 +376,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 		
 		notUK = 0
-		url1 = 'http://www.bbc.co.uk/iplayer/playlist/'+showID
+		url1 = 'http://www.bbc.co.uk/iplayer/playlist/' + showID
 		supplier = ""
 		fileUrl = ""
 		quality = 0
@@ -400,14 +400,14 @@ class StreamsThumb(StreamsThumbCommon):
 			except:
 				links = (re.compile('<mediator identifier="(.+?)" name=".+?" media_set=".+?"/>').findall(html)[0])
 
-			url2 = 'http://www.bbc.co.uk/mediaselector/4/mtis/stream/'+links
+			url2 = 'http://www.bbc.co.uk/mediaselector/4/mtis/stream/' + links
 			html1 = html = wgetUrl(url2)
 
 			if html1.find('notukerror') > 0:
 				notUK = 1
 				print __plugin__, __version__,"Non UK Address!!"
 				
-				if  primaryDNS == str(config.ondemand.PrimaryDNS.default):
+				if primaryDNS == str(config.ondemand.PrimaryDNS.default):
 					print __plugin__, __version__,"Non UK Address: NO DNS Set!! ", primaryDNS
 					return ("", "Non-UK IP Address and no DNS set in OnDemand Settings! Not able to play ")
 				else:
@@ -424,7 +424,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 					except (Exception) as exception:
 						print __plugin__, __version__,"findPlayUrl: Unable to connect to DNS: ", exception
-						return ("", "Could not connect to "+primaryDNS+", make sure your subscription is valid! Not able to play ")
+						return ("", "Could not connect to " + primaryDNS + ", make sure your subscription is valid! Not able to play ")
 
 			# Parse the HTML returned
 			doc = dom.parseString(html1)
@@ -444,7 +444,7 @@ class StreamsThumb(StreamsThumbCommon):
 					service == 'pc_streaming_hd':
 
 					# Get stream data for first Media element
-					conn  = media[i].getElementsByTagName("connection")[0]
+					conn = media[i].getElementsByTagName("connection")[0]
 					returnedList = self.getHosts(conn, service)
 
 					if returnedList:
@@ -476,7 +476,7 @@ class StreamsThumb(StreamsThumbCommon):
 								otherLimelightUrl = fileUrl
 
 					# Repeat for the second Media element
-					conn  = media[i].getElementsByTagName("connection")[1]
+					conn = media[i].getElementsByTagName("connection")[1]
 					returnedList = self.getHosts(conn, service)
 
 					if returnedList:
@@ -507,7 +507,7 @@ class StreamsThumb(StreamsThumbCommon):
 							else:
 								otherLimelightUrl = fileUrl
 
-				i=i+1
+				i = i + 1
 
 
 			# If we have found our required Stream Quality and it's limelight return the URL.
@@ -544,18 +544,18 @@ class StreamsThumb(StreamsThumbCommon):
 	def getHosts(self, conn, service):
 
 		try:
-			identifier  = str(conn.attributes['identifier'].nodeValue)
+			identifier = str(conn.attributes['identifier'].nodeValue)
 			server = str(conn.attributes['server'].nodeValue)
 			auth = str(conn.attributes['authString'].nodeValue)
 			supplier = str(conn.attributes['supplier'].nodeValue)
 
 			# Build up the stream URL based on the supplier
 			if supplier == 'limelight':    # SD streams that can be played by all users.
-				fileUrl = "rtmp://"+server+":1935/ app=a1414/e3?"+auth+" tcurl=rtmp://"+server+":1935/a1414/e3?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
+				fileUrl = "rtmp://" + server + ":1935/ app=a1414/e3?" + auth + " tcurl=rtmp://" + server + ":1935/a1414/e3?" + auth + " playpath=" + identifier + " swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
 			elif supplier == 'akamai':     # SD & HD streams that only UK users can play.
-				fileUrl = "rtmp://"+server+":1935/ondemand?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
+				fileUrl = "rtmp://" + server + ":1935/ondemand?" + auth + " playpath=" + identifier + " swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
 			elif supplier == 'level3':     # HD Streams that can be played by all users.
-				fileUrl = "rtmp://"+server+":1935/iplayertok?"+auth+" playpath="+identifier+" swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
+				fileUrl = "rtmp://" + server + ":1935/iplayertok?" + auth + " playpath=" + identifier + " swfurl=http://www.bbc.co.uk/emp/releases/iplayer/revisions/617463_618125_4/617463_618125_4_emp.swf swfvfy=true timeout=180"
 			else:
 				fileUrl = ""
 

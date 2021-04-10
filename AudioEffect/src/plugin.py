@@ -17,7 +17,7 @@ AUDIOEFFECT_PROC_PATH = {
 }
 
 AUDIOOUT_ENTRY_NAME = {
-	"dac"	:	"Analog Audio"
+	"dac"	: "Analog Audio"
 }
 
 AUDIOEFFECT_DEFAULT = "none"
@@ -135,7 +135,7 @@ def setAudioEffectConfigs():
 			setConfigValue(AUDIOEFFECT_PROC_PATH["3D_SURROUND_SPEAKER_POSITION"], _3DSpeakerPosition)
 
 class AudioEffect(Screen, ConfigListScreen):
-	skin =  """
+	skin = """
 		<screen position="center,center" size="540,300">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="200,10" size="140,40" alphatest="on" />
@@ -230,7 +230,7 @@ class AudioEffect(Screen, ConfigListScreen):
 		def getClassName(C):
 			return C.__class__.__name__
 
-		configName = "<%s>\n"%self["config"].getCurrent()[0]
+		configName = "<%s>\n" % self["config"].getCurrent()[0]
 		currentConfig = self["config"].getCurrent()[1]
 		className = getClassName(currentConfig)
 		text = ""

@@ -104,7 +104,7 @@ class MainMenuList(HTMLComponent, GUIComponent):
 		self.itemHeight = 94
 		self.itemWidth = 188
 		self.l.setItemHeight(self.itemHeight)
-		self.instance.resize(eSize(self.itemWidth+15, (self.listHeight / self.itemHeight) * self.itemHeight))
+		self.instance.resize(eSize(self.itemWidth + 15, (self.listHeight / self.itemHeight) * self.itemHeight))
 		self.listHeight = self.instance.size().height()
 		self.listWidth = self.instance.size().width()
 
@@ -239,9 +239,9 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		width = esize.width()
 		height = esize.height()
 		self.image_rect = Rect(0, 0, 178, height)
-		self.name_rect = Rect(15, 0, width-178-35, 30)
-		self.descr_rect = Rect(15, 0, width-178-35, height-30-25)
-		self.date_rect = Rect(15, 0, width-178-35, 25)
+		self.name_rect = Rect(15, 0, width - 178 - 35, 30)
+		self.descr_rect = Rect(15, 0, width - 178 - 35, height - 30 - 25)
+		self.date_rect = Rect(15, 0, width - 178 - 35, 25)
 
 	def buildEntry(self, date, name, short, channel, show, icon, duration, test):
 		r1 = self.image_rect
@@ -253,11 +253,11 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		
 		# If we don't want to show the icons then shift everything to the left.
 		if self.showIcon != 'False':
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.x+r1.w, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, name))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x+r1.w, r3.y+r2.h, r3.w, r3.h, 2, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, short))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x+r1.w, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, date))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.x + r1.w, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP, name))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x + r1.w, r3.y + r2.h, r3.w, r3.h, 2, RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, short))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x + r1.w, r4.y + r2.h + r3.h, r4.w, r4.h, 1, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, date))
 			if duration:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x+r1.w, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, duration))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x + r1.w, r4.y + r2.h + r3.h, r4.w, r4.h, 1, RT_HALIGN_LEFT | RT_VALIGN_BOTTOM, duration))
 
 			self.picload.setPara((r1.w, r1.h, 0, 0, 1, 1, "#00000000"))
 			self.picload.startDecode(resolveFilename(SCOPE_PLUGINS, "Extensions/OnDemand/icons/empty.png"), 0, 0, False)
@@ -280,11 +280,11 @@ class EpisodeList(HTMLComponent, GUIComponent):
 				pngthumb = self.picload.getData()
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
 		else:
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT|RT_VALIGN_TOP, name))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y+r2.h, r3.w, r3.h, 2, RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, short))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x+r1.w, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, date))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, r2.w, r2.h, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP, name))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y + r2.h, r3.w, r3.h, 2, RT_HALIGN_LEFT | RT_VALIGN_TOP | RT_WRAP, short))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x + r1.w, r4.y + r2.h + r3.h, r4.w, r4.h, 1, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, date))
 			if duration:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y+r2.h+r3.h, r4.w, r4.h, 1, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, duration))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y + r2.h + r3.h, r4.w, r4.h, 1, RT_HALIGN_LEFT | RT_VALIGN_BOTTOM, duration))
 
 		self.picload.setPara((self.l.getItemSize().width(), 2, 0, 0, 1, 1, "#00000000"))
 		try:
@@ -292,7 +292,7 @@ class EpisodeList(HTMLComponent, GUIComponent):
 		except:
 			self.picload.startDecode(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"), 0, 0, False)
 		pngthumb = self.picload.getData()
-		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 0, self.l.getItemSize().height()-2, self.l.getItemSize().width(), 2, pngthumb))
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 0, self.l.getItemSize().height() - 2, self.l.getItemSize().width(), 2, pngthumb))
 
  		return res
 
@@ -315,7 +315,7 @@ class EpisodeList(HTMLComponent, GUIComponent):
 			# OUG streams doesn't handle thumbnals well
 			if icon_name[1][:5] == "nicam":
 				icon_name = temp_icon.rsplit('/',2)
-				return str(icon_name[1])+".jpg"
+				return str(icon_name[1]) + ".jpg"
 			else:				
 				return str(icon_name[1])
 		except (Exception) as exception:
@@ -433,7 +433,7 @@ class MyHTTPConnection(HTTPConnection):
 			try:
 				secondaryDNS = str(config.ondemand.SecondaryDNS.value)
 
-				if  secondaryDNS != str(config.ondemand.SecondaryDNS.default):
+				if secondaryDNS != str(config.ondemand.SecondaryDNS.default):
 					secondaryDNS = ".".join("%d" % d for d in config.ondemand.SecondaryDNS.value)
 					myDNS = []
 					myDNS.append(secondaryDNS)
@@ -613,10 +613,10 @@ class RTMP:
 		else:
 			try:
 				# Replace "rtmp://abc.def.com:default_port/ghi/jkl" with "rtmp://abc.def.com:port/ghi/jkl"
-				match=re.search("(.+//[^/]+):\d+(/.*)", self.rtmp,  re.DOTALL | re.IGNORECASE)
+				match = re.search("(.+//[^/]+):\d+(/.*)", self.rtmp, re.DOTALL | re.IGNORECASE)
 				if match is None:
 					# Replace "rtmp://abc.def.com/ghi/jkl" with "rtmp://abc.def.com:port/ghi/jkl"
-					match=re.search("(.+//[^/]+)(/.*)", self.rtmp,  re.DOTALL | re.IGNORECASE)
+					match = re.search("(.+//[^/]+)(/.*)", self.rtmp, re.DOTALL | re.IGNORECASE)
 
 				args = [u"%s:%d%s" % (match.group(1), self.port, match.group(2))]
 			except (Exception) as exception:

@@ -137,7 +137,7 @@ class StreamsThumb(StreamsThumbCommon):
 		StreamsThumbCommon.__init__(self, session, action, value, url, self.screenName)
 
 	def layoutFinished(self):
-		self.setTitle("3 Player: Listings for " +self.title)
+		self.setTitle("3 Player: Listings for " + self.title)
 
 	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
@@ -149,37 +149,37 @@ class StreamsThumb(StreamsThumbCommon):
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
 			
-		elif  retval == 'straight':
+		elif retval == 'straight':
 			self.getMediaData(self.mediaList, self.url, "slider2")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
 			
-		elif  retval == 'going':
+		elif retval == 'going':
 			self.getMediaData(self.mediaList, self.url, "slider3")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
 			
-		elif  retval == 'all_shows':
+		elif retval == 'all_shows':
 			self.getAllShowsMediaData(self.mediaList, self.url, "gridshow")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
 			
-		elif  retval == 'one_show':
+		elif retval == 'one_show':
 			self.getMediaData(self.mediaList, self.url, "slider1a")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
 			
-		elif  retval == 'search':
+		elif retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
 
 	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
-			self.setTitle("3 Player: Search Listings for " +callback)
+			self.setTitle("3 Player: Search Listings for " + callback)
 			self.getSearchMediaData(self.mediaList, callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
@@ -200,7 +200,7 @@ class StreamsThumb(StreamsThumbCommon):
 				print 'fileUrl: ', fileUrl
 			else:
 				#fileUrl = str(icon[:-12])+'.mp4'
-				fileUrl = str(showID[:-12])+'.mp4'
+				fileUrl = str(showID[:-12]) + '.mp4'
 				#fileUrl = fileUrl.replace('3player', '3Player')
 				print 'fileUrl: ', fileUrl
 				
@@ -230,9 +230,9 @@ class StreamsThumb(StreamsThumbCommon):
 
 		try:
 			parser = etree.HTMLParser(encoding='utf-8')
-			tree   = etree.parse(url, parser)
+			tree = etree.parse(url, parser)
 
-			for elem in tree.xpath("//div[@id='"+func+"']//div[contains(@id,'gridshow')] | //div[@id='"+func+"']//div[contains(@id,'gridshow')]//img[@class='shadow smallroundcorner']"):
+			for elem in tree.xpath("//div[@id='" + func + "']//div[contains(@id,'gridshow')] | //div[@id='" + func + "']//div[contains(@id,'gridshow')]//img[@class='shadow smallroundcorner']"):
 				if elem.tag == 'img':
 					icon = str(elem.attrib.get('src'))
 					iconSet = True
@@ -242,19 +242,19 @@ class StreamsThumb(StreamsThumbCommon):
 					titleData = elem[0].attrib.get('title')
 					titleDecode = titleData.encode('charmap', 'ignore')
 
-					match=re.search("3player\s+\|\s+(.+),\s+(\d\d/\d\d/\d\d\d\d)\.\s*(.*)", titleDecode) 
+					match = re.search("3player\s+\|\s+(.+),\s+(\d\d/\d\d/\d\d\d\d)\.\s*(.*)", titleDecode) 
 					name_tmp = str(match.group(1))
 					name = checkUnicode(name_tmp)
 					date_tmp = str(match.group(2))
-					date = _("Added: ")+str(date_tmp)
+					date = _("Added: ") + str(date_tmp)
 					short_tmp = str(match.group(3))
 					short = checkUnicode(short_tmp)
 
 					if func == "slider1":
 						if funcDiff == "a":
-							duration = _("Duration: ")+str(elem[3].text)
+							duration = _("Duration: ") + str(elem[3].text)
 						else:
-							duration = _("Duration: ")+str(elem[4].text)
+							duration = _("Duration: ") + str(elem[4].text)
 
 				if iconSet == True:
 					# For all functions other than 'straight' we get the stream url from the icon url.
@@ -288,7 +288,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 		try:
 			parser = etree.HTMLParser(encoding='utf-8')
-			tree   = etree.parse(url, parser)
+			tree = etree.parse(url, parser)
 
 			for elem in tree.xpath("//div[contains(@class,'gridshow')]//h3//a | //div[contains(@class,'gridshow')]//a//img"):
 				if elem.tag == 'img':
@@ -339,7 +339,7 @@ class StreamsThumb(StreamsThumbCommon):
 					select = lambda expr: show.cssselect(expr)[0]
 
 					stream_tmp = str(select('li.unselected_video').get('onclick'))
-					stream = baseUrl+stream_tmp[10:-3]
+					stream = baseUrl + stream_tmp[10:-3]
 
 					icon_url = select('img').get('src')
 					icon = str(icon_url)
@@ -351,9 +351,9 @@ class StreamsThumb(StreamsThumbCommon):
 					short = checkUnicode(short_tmp)
 
 					date_tmp = show.get_element_by_id('videosearch_date').text_content()
-					date = _("Added: ")+str(date_tmp)
+					date = _("Added: ") + str(date_tmp)
 
-					duration = _("Duration: ")+str(show.get_element_by_id('videosearch_duration').text_content())
+					duration = _("Duration: ") + str(show.get_element_by_id('videosearch_duration').text_content())
 
 					# For all functions other than 'straight' we get the stream url from the icon url.
 					stream = icon
@@ -374,7 +374,7 @@ class StreamsThumb(StreamsThumbCommon):
 		url = value
 
 		try:
-			url1 = 'http://www.tv3.ie'+url
+			url1 = 'http://www.tv3.ie' + url
 			
 			req = urllib2.Request(url1)
 			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
@@ -398,7 +398,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 			url = (re.compile('url: "mp4:(.+?)",').findall(html)[0])
 			connection = (re.compile('netConnectionUrl: "rtmp.+?content/videos/(.+?)/"').findall(html)[0])
-			fileUrl = 'http://content.tv3.ie/content/videos/'+str(connection)+'/'+str(url)
+			fileUrl = 'http://content.tv3.ie/content/videos/' + str(connection) + '/' + str(url)
 
 			return fileUrl
 
