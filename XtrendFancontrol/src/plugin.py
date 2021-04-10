@@ -411,7 +411,7 @@ class FanManager:
 			if temp is not None:
 				if temp >= FanConf.systemtemp.value:
 					mode = "on"
-					# adjust speed: 
+					# adjust speed:
 					# - use initial speed when current sys temp > user specified value
 					# - increase speed til max. Max is reached when current sys temp = 2 * user specified value
 					speed = min(FanConf.fanspeed.value + (255 - FanConf.fanspeed.value) * ((temp / FanConf.systemtemp.value) - 1), 255)

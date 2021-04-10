@@ -171,4 +171,3 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 		self.menulist.append(entryShowHelp)
 		self["config"].list = self.menulist
 		self["config"].l.setList(self.menulist)
-

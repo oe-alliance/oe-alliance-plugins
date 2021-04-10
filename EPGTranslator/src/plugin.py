@@ -694,7 +694,7 @@ Red: Refresh EPG
         self["key_blue"] = StaticText(_("Hide"))
         self["key_menu"] = StaticText(_("MENU"))
         self["key_ok"] = StaticText(_("Translate text"))
-        
+
 
 # ==================================================================
 # Set the current country flags as the screen displays

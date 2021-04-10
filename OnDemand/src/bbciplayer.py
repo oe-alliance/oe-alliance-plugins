@@ -65,7 +65,7 @@ def wgetUrl(target):
 
 
 def checkUnicode(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
@@ -76,20 +76,20 @@ def checkUnicode(value, **kwargs):
 class BBCiMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
-	
+
 	skin = """
 		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="BBC iPlayer" >
 		<widget name="BBCiMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
 		</screen>"""
-			
+
 	def __init__(self, session, action, value):
-		
+
 		self.imagedir = "/tmp/onDemandImg/"
 		self.session = session
 		self.action = action
 		self.value = value
 		osdList = []
-		
+
 		if self.action is "start":
 			osdList.append((_("Search"), "search"))
 			osdList.append((_("TV Highlights"), "bbchighlights"))
@@ -120,21 +120,21 @@ class BBCiMenu(Screen):
 			osdList.append((_("BBC News"), "bbcn"))
 			osdList.append((_("BBC Alba"), "bbca"))
 			osdList.append((_("BBC HD"), "bbchd"))
-		
+
 		osdList.append((_("Back"), "exit"))
-		
+
 		Screen.__init__(self, session)
 		self["BBCiMenu"] = MenuList(osdList)
 		self["myActionMap"] = ActionMap(["SetupActions"],
 		{
 		"ok": self.go,
 		"cancel": self.cancel
-		}, -1)	  
-	
+		}, -1)
+
 	def go(self):
 		returnValue = self["BBCiMenu"].l.getCurrentSelection()[1]
-		returnValue2 = self["BBCiMenu"].l.getCurrentSelection()[1] + "," + self["BBCiMenu"].l.getCurrentSelection()[0] 
-		
+		returnValue2 = self["BBCiMenu"].l.getCurrentSelection()[1] + "," + self["BBCiMenu"].l.getCurrentSelection()[0]
+
 		if returnValue is "exit":
 				self.removeFiles(self.imagedir)
 				self.close(None)
@@ -202,12 +202,12 @@ class BBCiMenu(Screen):
 
 	def cancel(self):
 		self.removeFiles(self.imagedir)
-		self.close(None)		
+		self.close(None)
 
 	def removeFiles(self, targetdir):
 		for root, dirs, files in os_walk(targetdir):
 			for name in files:
-				os_remove(os_path.join(root, name))		
+				os_remove(os_path.join(root, name))
 
 #===================================================================================
 
@@ -225,7 +225,7 @@ class StreamsThumb(StreamsThumbCommon):
 	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
 			return
-		
+
 		elif retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
@@ -248,7 +248,7 @@ class StreamsThumb(StreamsThumbCommon):
 	def go(self):
 		showID = self["list"].l.getCurrentSelection()[4]
 		showName = self["list"].l.getCurrentSelection()[1]
-		
+
 		retMessage = ""
 		(fileUrl, retMessage) = self.findPlayUrl(showID)
 
@@ -274,7 +274,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 #===================================================================================
 	def getMediaData(self, weekList, url):
-		
+
 		short = ''
 		name = ''
 		date1 = ''
@@ -282,11 +282,11 @@ class StreamsThumb(StreamsThumbCommon):
 		channel = ''
 		icon = ''
 		duration = ''
-		
+
 		try:
 			# Retrieve the search results from the feeds.
 			data = wgetUrl(url)
-			
+
 			# If we hit problems retrieving the data don't try to parse.
 			if data:
 				# Use Regex to parse out the required element data
@@ -322,7 +322,7 @@ class StreamsThumb(StreamsThumbCommon):
 	def getSearchMediaData(self, weekList, url):
 
 		#============ Not Used - More robust but not as quick ==============
-		
+
 		short = ''
 		name = ''
 		date1 = ''
@@ -334,7 +334,7 @@ class StreamsThumb(StreamsThumbCommon):
 		try:
 			# Retrieve the search results from the feeds.
 			data = wgetUrl(url)
-			
+
 			# Problems with tags resulted in non-parsed tags, fix them.
 			data = data.replace("&lt;", "<")
 			data = data.replace("&gt;", ">")
@@ -346,7 +346,7 @@ class StreamsThumb(StreamsThumbCommon):
 			for show in tree.xpath('//entry'):
 				# Iterate through the children of <entry>
 				select = lambda expr: show.cssselect(expr)[0]
-				
+
 				# Only set the Icon if they are enabled
 				if self.showIcon == 'True':
 					icon = select("thumbnail").get('url')
@@ -354,11 +354,11 @@ class StreamsThumb(StreamsThumbCommon):
 					icon = ''
 
 				name_tmp = str(select('title').text_content())
-				
+
 				stream_tmp = select('id').text_content()
 				stream_split = stream_tmp.rsplit(':', 1)
 				stream = stream_split[1]
-				
+
 				try:
 					lastDate = datetime.fromtimestamp(mktime(strptime(str(select('updated').text_content()), "%Y-%m-%dT%H:%M:%SZ"))) #2013-03-06T18:27:43Z
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
@@ -366,7 +366,7 @@ class StreamsThumb(StreamsThumbCommon):
 				except (Exception) as exception:
 					date1 = select('updated').text_content()
 					print __plugin__, __version__, "getMediaData: date1 parse error: ", exception
-				
+
 				short_tmp = str(select('content').text_content().strip())
 
 				name = checkUnicode(name_tmp)
@@ -378,7 +378,7 @@ class StreamsThumb(StreamsThumbCommon):
 			print __plugin__, __version__, "getMediaData: Error getting Media info: ", exception
 
 #===================================================================================
-	
+
 	def findPlayUrl(self, showID):
 
 		notUK = 0
@@ -412,7 +412,7 @@ class StreamsThumb(StreamsThumbCommon):
 			if html1.find('notukerror') > 0:
 				notUK = 1
 				print __plugin__, __version__, "Non UK Address!!"
-				
+
 				if primaryDNS == str(config.ondemand.PrimaryDNS.default):
 					print __plugin__, __version__, "Non UK Address: NO DNS Set!! ", primaryDNS
 					return ("", "Non-UK IP Address and no DNS set in OnDemand Settings! Not able to play ")
@@ -441,7 +441,7 @@ class StreamsThumb(StreamsThumbCommon):
 			# Loop for each streaming option available
 			for list in media:
 				service = media[i].attributes['service'].nodeValue
-				
+
 				# If quality is Very-Low, Low, Normal, High or HD proceed
 				if service == 'iplayer_streaming_h264_flv_vlo' or \
 					service == 'iplayer_streaming_h264_flv_lo' or \
@@ -491,7 +491,7 @@ class StreamsThumb(StreamsThumbCommon):
 						quality = int(returnedList[2])
 
 					if fileUrl:
-						# Try and match the stream quality to the preferred config stream quality			
+						# Try and match the stream quality to the preferred config stream quality
 						if quality == prefQuality:
 							currQuality = quality
 							if supplier == 'akamai':
@@ -544,7 +544,7 @@ class StreamsThumb(StreamsThumbCommon):
 		except (Exception) as exception:
 			print __plugin__, __version__, "findPlayUrl: Error getting URLs: ", exception
 			return ("", "findPlayUrl: Error getting URLs! Could not play ")
-		
+
 #===================================================================================
 	def getHosts(self, conn, service):
 
@@ -591,5 +591,5 @@ class StreamsThumb(StreamsThumbCommon):
 
 def main(session, **kwargs):
 	action = "start"
-	value = 0 
-	start = session.open(BBCiMenu, action, value)	
+	value = 0
+	start = session.open(BBCiMenu, action, value)

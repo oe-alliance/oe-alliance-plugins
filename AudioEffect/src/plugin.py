@@ -158,7 +158,7 @@ class AudioEffect(Screen, ConfigListScreen):
 		</screen>
 	"""
 
-	def __init__(self, session):		
+	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setTitle(_("Audio Effect Setup"))
 		self.skin = AudioEffect.skin
@@ -247,7 +247,7 @@ class AudioEffect(Screen, ConfigListScreen):
 		if className == "ConfigSelection":
 			text = configName
 			for choice in currentConfig.choices.choices:
-				if text == configName:	
+				if text == configName:
 					text += choice[1]
 				else:
 					text += ', ' + choice[1]

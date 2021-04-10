@@ -60,4 +60,3 @@ class Mixes():
 			mixes[mix["key"]] = mix
 
 		return mixes
-			

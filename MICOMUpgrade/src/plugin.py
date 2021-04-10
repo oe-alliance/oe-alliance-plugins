@@ -158,12 +158,12 @@ if os.path.exists("/proc/stb/info/boxtype"):
 		fwdata = {
 			 "micom": ["http://micom.mynonpublic.com/software/micom/", "INI900RU_Micom.bin", "/proc/vfd;/dev/mcu;"]
 			}
-			
+
 
 class Filebrowser(Screen):
 	skin = """
 		<screen position="center,center" size="500,490" title="File Browser" >
-			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/buttons/yellow.png" position="5,7" size="140,40" alphatest="blend" />		
+			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/buttons/yellow.png" position="5,7" size="140,40" alphatest="blend" />
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MICOMUpgrade/buttons/blue-340.png" position="150,7" size="340,40" alphatest="blend" />
 			<widget source="key_yellow" render="Label" position="5,7" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" transparent="1"/>
 			<widget source="key_blue" render="Label" position="150,7" zPosition="1" size="340,40" font="Regular;20" halign="center" valign="center" transparent="1"/>
@@ -302,7 +302,7 @@ class Filebrowser(Screen):
 		root_uri = fwdata[self.firmware][0]
 		root_file = fwdata[self.firmware][1]
 		micom_url = root_uri + machine + "/" + root_file
-		
+
 		target_path = "/tmp/" + root_file
 
 		self.guri = micom_url
@@ -324,7 +324,7 @@ class Filebrowser(Screen):
 			self.resetGUI()
 			self.downloadLock = False
 			return
-		      
+
 		t = ''
 		self["file_list"].changeDir("/tmp/")
 		self["file_list"].moveToIndex(0)
@@ -424,7 +424,7 @@ class FirmwareUpgrade(Screen):
 
 		self["oldversion"] = Label(self.version)
 		self["newversion"] = Label(newversion)
-		
+
 		self["key_red"] = StaticText(_("Close"))
 
 		self.logmode = None
@@ -455,7 +455,7 @@ class FirmwareUpgrade(Screen):
 	def doReboot(self):
 		from Screens.Standby import TryQuitMainloop
 		self.session.open(TryQuitMainloop, 44)
-		
+
 	# filebrowser window callback function
 	def cbSetStatus(self, data=None):
 		if data is not None:
@@ -467,7 +467,7 @@ class FirmwareUpgrade(Screen):
 			except:
 				self.verfile = "N/A"
 			self["newversion"].setText(self.verfile)
-			
+
 			# HACK for samples, which does not have micom version
 			try:
 				if int(self.verfile) <= int(self.version):
@@ -479,7 +479,7 @@ class FirmwareUpgrade(Screen):
 			self.updateFilePath = data
 			if self.fileopenmode == False:
 				self.upgrade_auto_run_timer.start(1000)
-		
+
 	def cbRunUpgrade(self, ret):
 		if ret == False:
 			return
@@ -494,7 +494,7 @@ class FirmwareUpgrade(Screen):
 		if device is None:
 			self.session.open(MessageBox, _("Can't found device file!!"), MessageBox.TYPE_INFO, timeout=10)
 			return
-		      
+
 		copyfile(self.updateFilePath, "/tmp/micom.bin")
 		self.doReboot()
 		return
@@ -516,7 +516,7 @@ class FirmwareUpgrade(Screen):
 		# check if downloaded verion is newer then flashed one
 		# HACK for samples, which does not have micom version
 		try:
-			if int(self.verfile) <= int(self.version):      
+			if int(self.verfile) <= int(self.version):
 				self.session.open(MessageBox, _("You can not upgrade to the same or lower version !"), MessageBox.TYPE_INFO, timeout=10)
 				return
 		except:
@@ -533,11 +533,10 @@ class FirmwareUpgrade(Screen):
 	def keyNone(self):
 		None
 
-      
+
 def main(session, **kwargs):
         session.open(FirmwareUpgrade)
 
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("Front Panel Update"), description="Upgrade Front panel..", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
-

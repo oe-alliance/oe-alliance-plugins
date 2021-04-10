@@ -71,7 +71,7 @@ class ITVplayer(Screen):
 		{
 			"ok": self.go,
 			"cancel": self.cancel
-		}, -1)	  
+		}, -1)
 
 	def go(self):
 		returnValue = self["ITVMenu"].l.getCurrentSelection()[1]
@@ -86,7 +86,7 @@ class ITVplayer(Screen):
 
 	def cancel(self):
 		self.removeFiles(self.imagedir)
-		self.close(None)		
+		self.close(None)
 
 	def removeFiles(self, targetdir):
 		for root, dirs, files in os_walk(targetdir):
@@ -97,7 +97,7 @@ class ITVplayer(Screen):
 
 
 def checkUnicode(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
@@ -148,7 +148,7 @@ class StreamsThumb(StreamsThumbCommon):
 	def go(self):
 		showID = self["list"].l.getCurrentSelection()[4]
 		showName = self["list"].l.getCurrentSelection()[1]
-		
+
 		if self.cmd == "all_shows" or self.cmd == "search":
 			self.session.open(StreamsThumb, "one_show", showName, showID)
 		else:
@@ -215,7 +215,7 @@ class StreamsThumb(StreamsThumbCommon):
 #===================================================================================
 	def getShowMediaData(self, weekList, progID):
 		url = "http://www.itv.com/_app/Dynamic/CatchUpData.ashx?ViewType=1&Filter=" + progID + "&moduleID=115107"
-		
+
 		short = ''
 		name = ''
 		date1 = ''
@@ -285,7 +285,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 				name_tmp = str(elem[1].text)
 				name = checkUnicode(name_tmp)
-				
+
 				# Only output the names that match the search query
 				if re.search(query, name, re.IGNORECASE):
 					stream = str(elem[0].text)
@@ -315,7 +315,7 @@ class StreamsThumb(StreamsThumbCommon):
 			print __plugin__, __version__, 'getSearchMediaData: Error getting Media info: ', exception
 
 #===================================================================================
-	
+
 	def findPlayUrl(self, url):
 
 		fileUrl = ""
@@ -346,7 +346,7 @@ class StreamsThumb(StreamsThumbCommon):
 					streamUrl = str(elem[0].text)
 					bitRate = elem.attrib.get("bitrate")
 					quality = int(bitRate) / 1000
-					
+
 					if quality == prefQuality:
 						prefStream = streamUrl
 						fileUrl = rtmp + " swfurl=http://www.itv.com/mercury/Mercury_VideoPlayer.swf playpath=" + prefStream + " swfvfy=true"
@@ -410,8 +410,8 @@ class StreamsThumb(StreamsThumbCommon):
 			req.add_header("Referer", "http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
 			req.add_header("Content-type", "text/xml; charset=\"UTF-8\"")
 			req.add_header("Content-length", "%d" % len(soapMessage))
-			req.add_header("SOAPAction", "http://tempuri.org/PlaylistService/GetPlaylist")	 
-			response = urllib2.urlopen(req)	  
+			req.add_header("SOAPAction", "http://tempuri.org/PlaylistService/GetPlaylist")
+			response = urllib2.urlopen(req)
 			htmldoc = str(response.read())
 			response.close()
 		except urllib2.HTTPError, exception:
@@ -419,7 +419,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 			if 'InvalidGeoRegion' in exResp:
 				print __plugin__, __version__, "Non UK Address!!"
-				
+
 				if primaryDNS == str(config.ondemand.PrimaryDNS.default):
 					print __plugin__, __version__, "Non UK Address: NO DNS Set!! ", primaryDNS
 					return ("", "Non-UK IP Address and no DNS set in OnDemand Settings! Not able to play ")
@@ -433,8 +433,8 @@ class StreamsThumb(StreamsThumbCommon):
 						req.add_header("Referer", "http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
 						req.add_header("Content-type", "text/xml; charset=\"UTF-8\"")
 						req.add_header("Content-length", "%d" % len(soapMessage))
-						req.add_header("SOAPAction", "http://tempuri.org/PlaylistService/GetPlaylist")	 
-						response = urllib2.urlopen(req)	  
+						req.add_header("SOAPAction", "http://tempuri.org/PlaylistService/GetPlaylist")
+						response = urllib2.urlopen(req)
 						htmldoc = str(response.read())
 						response.close()
 						urllib2.install_opener(old_opener)
@@ -449,5 +449,5 @@ class StreamsThumb(StreamsThumbCommon):
 		except (Exception) as exception2:
 			print __plugin__, __version__, "wgetUrl: Error calling urllib2: ", exception2
 			return ("", "Could not retrieve a playable stream for ")
-		
+
 		return (htmldoc, "")

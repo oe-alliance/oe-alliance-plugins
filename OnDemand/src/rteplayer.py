@@ -102,7 +102,7 @@ class RTEMenu(Screen):
 		{
 			"ok": self.go,
 			"cancel": self.cancel
-		}, -1)	  
+		}, -1)
 
 	def go(self):
 		returnValue = self["RTEMenu"].l.getCurrentSelection()[1]
@@ -125,7 +125,7 @@ class RTEMenu(Screen):
 
 	def cancel(self):
 		self.removeFiles(self.imagedir)
-		self.close(None)		
+		self.close(None)
 
 	def removeFiles(self, targetdir):
 		for root, dirs, files in os_walk(targetdir):
@@ -175,7 +175,7 @@ class StreamsMenu(Screen):
 					osdList.append((_(name), url))
 
 		except (Exception) as exception:
-			print 'StreamsMenu: Error parsing feed: ', exception											
+			print 'StreamsMenu: Error parsing feed: ', exception
 
 		osdList.append((_("Exit"), "exit"))
 
@@ -184,7 +184,7 @@ class StreamsMenu(Screen):
 		{
 			"ok": self.go,
 			"cancel": self.cancel
-		}, -1) 
+		}, -1)
 
 	def go(self):
 		returnValue = self["latestMenu"].l.getCurrentSelection()[1]
@@ -227,7 +227,7 @@ def findPlayUrl(showID, **kwargs):
 
 
 def checkUnicode(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
@@ -237,12 +237,12 @@ def checkUnicode(value, **kwargs):
 
 def main(session, **kwargs):
 	action = "start"
-	value = 0 
+	value = 0
 	start = session.open(RTEMenu, action, value)
 
 ###########################################################################
 
-###########################################################################	   
+###########################################################################
 
 
 class StreamsThumb(StreamsThumbCommon):
@@ -264,22 +264,22 @@ class StreamsThumb(StreamsThumbCommon):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		if retval == 'cat_secs':
 			self.getCatsMediaData(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'programmeListMenu':
 			self.canBeMultiple(self.mediaList, self.url)
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
-			self.cbTimer.start(10)			
+			self.cbTimer.start(10)
 
 	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
@@ -299,7 +299,7 @@ class StreamsThumb(StreamsThumbCommon):
 			self.session.open(StreamsThumb, "programmeListMenu", showName, showID)
 		else:
 			fileUrl = findPlayUrl(showID)
-			
+
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, fileUrl)
 				fileRef.setName(showName)
@@ -314,8 +314,8 @@ class StreamsThumb(StreamsThumbCommon):
 		url = 'http://www.rte.ie/player/ie/show/' + showID
 
 		showIDs = []
-		
-		try: 
+
+		try:
 			parser = etree.HTMLParser(encoding='utf-8')
 			tree = etree.parse(url, parser)
 
@@ -473,7 +473,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 				name = checkUnicode(name_tmp)
 				short = checkUnicode(short_tmp)
-				
+
 				# Only set the Icon if they are enabled
 				if self.showIcon == 'True':
 					try:
@@ -517,7 +517,7 @@ class StreamsThumb(StreamsThumbCommon):
 				except (Exception) as exception:
 					print "getCatsMediaData: stream_tmp parse error: ", exception
 					stream_tmp = ''
-					
+
 				try:
 					name_tmp = str(elem[5].text)
 				except (Exception) as exception:
@@ -536,9 +536,9 @@ class StreamsThumb(StreamsThumbCommon):
 
 				stream = checkUnicode(stream_tmp)
 				name = checkUnicode(name_tmp)
-				
+
 				short = "\nThe current list of episodes stored for " + str(name)
-				
+
 				# Only set the Icon if they are enabled
 				if self.showIcon == 'True':
 					try:
@@ -596,7 +596,7 @@ class StreamsThumb(StreamsThumbCommon):
 				except (Exception) as exception:
 					print "getSearchMediaData: name_tmp parse error: ", exception
 					name_tmp = ''
-				
+
 				try:
 					stream_tmp = str(title.find('a').get('href'))
 					stream_split = stream_tmp.rsplit('/', 2)
@@ -604,7 +604,7 @@ class StreamsThumb(StreamsThumbCommon):
 				except (Exception) as exception:
 					print "getSearchMediaData: stream parse error: ", exception
 					stream = ''
-				
+
 				try:
 					date1 = _("Added: ") + str(select(".search-programme-episodes").text_content())
 				except (Exception) as exception:

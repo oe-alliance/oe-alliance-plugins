@@ -85,7 +85,7 @@ class SSDPServerDiscovery(DatagramProtocol):
 
 SATIPSERVERDATA = {}
 
-DEVICE_ATTR = [ 
+DEVICE_ATTR = [
 'friendlyName',
 'manufacturer',
 'manufacturerURL',
@@ -126,7 +126,7 @@ class SATIPDiscovery:
 	def DiscoveryStart(self, stop_timeout=discoveryTimeoutMS):
 		self.discoveryStopTimer.stop()
 		self.ssdp.stop_msearch()
-		
+
 #		print "Discovery Start!"
 		self.ssdp.send_msearch(self.getEthernetAddr())
 		self.discoveryStopTimer.start(stop_timeout, True)
@@ -467,12 +467,12 @@ class SATIPTuner(Screen, ConfigListScreen):
 
 		description = ""
 		description += _("Description") + " : %s\n" % modelDescription
-		description += _("Manufacturer") + " : %s\n" % manufacturer 
+		description += _("Manufacturer") + " : %s\n" % manufacturer
 		description += "Model URL : %s\n" % modelURL
 		description += "Presentation URL : %s\n" % presentationURL
-		description += "UUID : %s\n" % uuid		
+		description += "UUID : %s\n" % uuid
 		description += "SAT>IP Capability : %s" % satipcap
-		
+
 		self["description"].setText(description)
 
 	def showChoices(self):
@@ -588,8 +588,8 @@ class SATIPClient(Screen):
 							MultiContentEntryText(pos = (210, 28), size = (140, 20), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 2),
 							MultiContentEntryText(pos = (370, 28), size = (140, 20), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 3),
 							MultiContentEntryText(pos = (50, 48), size = (490, 20), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 4),
-							
-							
+
+
 					]),
 					},
 					"fonts": [gFont("Regular", 24),gFont("Regular", 16)],

@@ -22,9 +22,9 @@ def write_jpg2frame(dev, pic):
 	pad = (0x10000 - ((len(rawdata) + 2) % 0x10000)) % 0x10000
 	tdata = rawdata + b'\xff\x00' + pad * b'\x00'
 	# Syntax: write(self, endpoint, data, interface = None, timeout = None):
-	endpoint = 0x02               
+	endpoint = 0x02
 	dev.write(endpoint, tdata)
-       
+
 
 def get_known_devices():
 	"""Return a dict of photo frames"""
@@ -49,11 +49,11 @@ def get_known_devices():
 
 	#8,9 Samsung SPF-107H (27)
 	dList.append({'name': "SPF107H Mini Monitor", 'idVendor': 0x04e8, 'idProduct': 0x2036, 'width': 1024, 'height': 600})
-	dList.append({'name': "SPF107H Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x2035})      
+	dList.append({'name': "SPF107H Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x2035})
 
 	#10,11 Samsung SPF-105P (28)
 	dList.append({'name': "SPF105P Mini Monitor", 'idVendor': 0x04e8, 'idProduct': 0x201b, 'width': 1024, 'height': 600})
-	dList.append({'name': "SPF105P Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x201c})      
+	dList.append({'name': "SPF105P Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x201c})
 
 	#12,13 Samsung SPF-85H/86H (29)
 	dList.append({'name': "SPF85H/86H Mini Monitor", 'idVendor': 0x04e8, 'idProduct': 0x2013, 'width': 800, 'height': 600})
@@ -66,29 +66,29 @@ def get_known_devices():
 	#16,17 Samsung SPF-700T (211)
 	dList.append({'name': "SPF700T Mini Monitor", 'idVendor': 0x04e8, 'idProduct': 0x2050, 'width': 800, 'height': 600})
 	dList.append({'name': "SPF700T Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x204f})
- 
+
 	#18,19 Samsung SPF-85P/86P (212)
 	dList.append({'name': "SPF85P/86P Mini Monitor", 'idVendor': 0x04e8, 'idProduct': 0x2017, 'width': 800, 'height': 600})
 	dList.append({'name': "SPF85P/86P Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x2016})
 
 	#20,21 Samsung SPF-107Hold (213)
 	dList.append({'name': "SPF107Hold Mini Monitor", 'idVendor': 0x04e8, 'idProduct': 0x2028, 'width': 1024, 'height': 600})
-	dList.append({'name': "SPF107Hold Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x2027})      
+	dList.append({'name': "SPF107Hold Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x2027})
 
 	#22,23 Samsung SPF-1000P (214)
 	dList.append({'name': "SPF1000P Mini Monitor", 'idVendor': 0x04e8, 'idProduct': 0x2040, 'width': 1024, 'height': 600})
-	dList.append({'name': "SPF1000P Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x2039})      
+	dList.append({'name': "SPF1000P Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x2039})
 
 	#24,25 Samsung SPF-800P (215)
 	dList.append({'name': "SPF800P Mini Monitor", 'idVendor': 0x04e8, 'idProduct': 0x2038, 'width': 800, 'height': 480})
-	dList.append({'name': "SPF800P Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x2037})      
+	dList.append({'name': "SPF800P Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x2037})
 
 	# Pearl DPF for Testing
 	dList.append({'name': "Pearl DPF", 'idVendor': 0x1908, 'idProduct': 0x0102, 'width': 320, 'height': 240})
 	dList.append({'name': "Pearl DPF", 'idVendor': 0x1908, 'idProduct': 0x0102, 'width': 320, 'height': 240})
-       
+
 	return dList
-     
+
 
 def find_device(Anzahl, device, device2):
 	"""Try to find device on USB bus."""
@@ -110,7 +110,7 @@ def find_device(Anzahl, device, device2):
 		print("[LCD4linux] find exception")
 		print("Error:", format_exc())
 		d = None
-	return d  
+	return d
 
 
 def init_device(Anzahl, device0, device1):
@@ -153,7 +153,7 @@ def frame_init(dev):
 
 
 def frame_switch(dev):
-	"""Switch device from Mass Storage to Mini Monitor""" 
+	"""Switch device from Mass Storage to Mini Monitor"""
 	CTRL_TYPE_VENDOR = (2 << 5)
 	CTRL_IN = 0x80
 	CTRL_RECIPIENT_DEVICE = 0
@@ -181,24 +181,24 @@ def frame_switch(dev):
 
 def name(dev):
 	try:
-		return usb.util.get_string(dev, 1) 
+		return usb.util.get_string(dev, 1)
 	except:
 		try:
-			return usb.util.get_string(dev, 256, 2) 
+			return usb.util.get_string(dev, 256, 2)
 		except:
 			return None
 
 
 def main():
 	global dev, known_devices_list
-       
+
 	known_devices_list = get_known_devices()
 
 	# define which frame to use, here use Samsung SPF-87H
 	device0 = known_devices_list[0] # Mini Monitor mode
 	device1 = known_devices_list[1] # Mass Storage mode
 
-	dev = init_device(device0, device1)   
+	dev = init_device(device0, device1)
 	print("Frame is in Mini Monitor mode and initialized. Sending pictures now")
 
 	image = Image.open("mypicture.jpg")
@@ -212,4 +212,4 @@ def main():
 	image.save(output, "JPEG", quality=94)
 	pic = output.getvalue()
 	output.close()
-	write_jpg2frame(dev, pic)       
+	write_jpg2frame(dev, pic)

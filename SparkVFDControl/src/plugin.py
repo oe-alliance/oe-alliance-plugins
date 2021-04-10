@@ -144,7 +144,7 @@ class Channelnumber:
 					self.prikaz()
 			else:
 				self.__eventInfoChanged()
-					
+
 		if val == 'Off':
 			vfd_write("....")
 			self.zaPrik.start(self.updatetime, 1)
@@ -164,14 +164,14 @@ class Channelnumber:
 			self.RecTimer = eTimer()
 			self.RecTimer.callback.append(self.showRec)
 			self.RecTimer.start(1000, True)
-    
+
 	def showRec(self):
 		try:
 			#not all images support recording type indicators
 			recordings = len(NavigationInstance.instance.getRecordings(False, Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue())))
 		except:
 			recordings = len(NavigationInstance.instance.getRecordings())
-		
+
 		if recordings >= 1:
 			pattern = 4294967295
 			f = open("/proc/stb/fp/led0_pattern", "w")
@@ -411,7 +411,7 @@ def sessionstart(reason, **kwargs):
 	else:
 		gReason = reason
 	controlsparkVfd()
-	global baseSessionGlobals__init__	
+	global baseSessionGlobals__init__
 	if baseSessionGlobals__init__ is None:
 		baseSessionGlobals__init__ = SessionGlobals.__init__
 		SessionGlobals.__init__ = newSessionGlobals__init__

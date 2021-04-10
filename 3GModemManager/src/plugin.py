@@ -47,7 +47,7 @@ class DeviceEventListener:
 
 	def __init__(self):
 		self.sock = socket.socket(socket.AF_NETLINK, socket.SOCK_DGRAM, 15)
-		try:		
+		try:
 			self.sock.bind((os.getpid(), 1))
 			self.notifier = eSocketNotifier(self.sock.fileno(), POLLIN | POLLPRI)
 			self.notifier.callback.append(self.cbEventHandler)
@@ -120,7 +120,7 @@ class TaskManager:
 
 	def setStatusCB(self, cbfunc):
 		self.cbSetStatusCB = cbfunc
-		
+
 	def next(self):
 		if self.taskIdx >= len(self.taskList) or self.occurError:
 			printInfoModemMgr("can't run task!!")
@@ -152,7 +152,7 @@ class ParserHandler(handler.ContentHandler):
 	def startDocument(self):
 		pass
 
-	def endDocument(self):  
+	def endDocument(self):
 		pass
 
 	def startElement(self, name, attrs):
@@ -194,8 +194,8 @@ class EditModemManual(ConfigListScreen, Screen):
 			</widget>
 			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="160,300" zPosition="1" size="1,1" transparent="1" alphatest="on" />
 		</screen>
-		""" 
-		
+		"""
+
 	def __init__(self, session, cbFuncClose, uid=None, pwd=None, pin=None, apn=None, phone='*99#', isAdd=False):
 		Screen.__init__(self, session)
 		self.cbFuncClose, self.isAdd = cbFuncClose, isAdd
@@ -410,7 +410,7 @@ class ModemManual(Screen):
 		self["apnInfo"] = Label(' ')
 
 		self.keyUp()
-	
+
 	def keyAdd(self):
 		self.session.open(EditModemManual, self.cb3GManualSetting, isAdd=True)
 
@@ -424,7 +424,7 @@ class ModemManual(Screen):
 			self.pin = isEmpty(pin) and "" or pin
 			self.apn = isEmpty(apn) and "" or apn
 			self.phone = isEmpty(phone) and "" or phone
-			
+
 		if name is not None:
 			self["menulist"].list.append((name, {'region': region, 'carrier': name, 'apn': self.apn, 'user': self.uid, 'password': self.pwd, 'pin': self.pin, 'phone': self.phone}))
 			self["menulist"].setList(self["menulist"].list)
@@ -630,11 +630,11 @@ class ModemManager(Screen):
 			<ePixmap pixmap="skin_default/buttons/blue.png" position="455,420" size="140,40" alphatest="on" />
 
 			<widget name="myip" position="50,320" size="600,120" font="Regular;20" halign="left" backgroundColor="#a08500" transparent="1" />
-			
+
 			<widget name="autostart_text" position="50,360" size="200,120" font="Regular;20" halign="left" backgroundColor="#a08500" transparent="1" />
 			<widget name="autostart_stop" position="190,357" size="100,30" font="Regular;20" valign="center"  halign="center" backgroundColor="red"/>
 			<widget name="autostart_start" position="190,357" size="100,30" zPosition="1" font="Regular;20" valign="center"  halign="center" backgroundColor="green"/>
-			
+
 			<widget source="key_red" render="Label" position="5,420" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_green" render="Label" position="155,420" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
 			<widget source="key_yellow" render="Label" position="305,420" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#a08500"  foregroundColor="#ffffff" transparent="1" />
@@ -644,7 +644,7 @@ class ModemManager(Screen):
 	uid, pwd, pin, apn, phone = None, None, None, None, '*99#'
 	connectionStatus = 0
 
-	def __init__(self, session): 
+	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.usb_lv_items = self.setListOnView()
 
@@ -670,7 +670,7 @@ class ModemManager(Screen):
 		self['autostart_text'] = Label(_("Auto connect:"))
 		self['autostart_stop'] = Label(_("Disable"))
 		self['autostart_start'] = Label(_("Enable"))
-		
+
 		self["key_red"] = StaticText(_("Exit"))
 		if isConnected():
 			self["key_green"] = StaticText("Disconnect")
@@ -678,7 +678,7 @@ class ModemManager(Screen):
 		else:
 			self["key_green"] = StaticText("Connect")
 			self.setConnectStatus(0)
-			
+
 		self["key_yellow"] = StaticText(_("Manual"))
 		self["key_blue"] = StaticText(_("Auto connect"))
 
@@ -698,12 +698,12 @@ class ModemManager(Screen):
 		else:
 			self['autostart_stop'].show()
 			self['autostart_start'].hide()
-			
+
 		#self.restartAppTimer = eTimer()
 		#self.restartAppTimer.callback.append(self.cbRestartAppTimer)
 		self.forceStop = False
 		self.GetIP()
-		
+
 	def GetIP(self):
 		if self["key_green"].getText() == 'Disconnect':
 		  os.system('killall -9 wget')
@@ -712,7 +712,7 @@ class ModemManager(Screen):
 		  self['myip'].setText(_('IP : ' + str(res)))
 		else:
 		  self['myip'].setText(_('IP : 0.0.0.0'))
-		  
+
 	def cbRestartAppTimer(self):
 		self.restartAppTimer.stop()
 		file = open('/proc/stb/info/vumodel')
@@ -727,7 +727,7 @@ class ModemManager(Screen):
 		if self["key_green"].getText() == 'Connect':
 			self.setConnectStatus(0)
 			self.GetIP()
-		elif self["key_green"].getText() == 'Disconnect': 
+		elif self["key_green"].getText() == 'Disconnect':
 			self.setDisconnectStatus(0)
 			self.GetIP()
 
@@ -763,7 +763,7 @@ class ModemManager(Screen):
 				config.plugins.gmodemmanager.autostart.save()
 				self['autostart_stop'].show()
 				self['autostart_start'].hide()
-				
+
 	def keyAutoConnect(self):
 		## AUTOSTART
 		if isConnected():
@@ -781,7 +781,7 @@ class ModemManager(Screen):
 				self.session.openWithCallback(self.disableAutoConnect, MessageBox, message, MessageBox.TYPE_YESNO)
 		elif not isConnected() and config.plugins.gmodemmanager.autostart.value:
 			message = "3G Modem Manager is already in autoconnect mode on startup.\nWould You like to disable auto connect on startup ?"
-			self.session.openWithCallback(self.disableAutoConnect, MessageBox, message, MessageBox.TYPE_YESNO)		  
+			self.session.openWithCallback(self.disableAutoConnect, MessageBox, message, MessageBox.TYPE_YESNO)
 		else:
 			message = "Please connect before enable autoconnect on startup!"
 			self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO, 5)
@@ -887,16 +887,16 @@ class ModemManager(Screen):
 			cmd = "%s 1" % (commandBin)
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbUnloadClose)
 			self.taskManager.setStatusCB(self.setDisconnectStatus)
-			
+
 			self['myip'].setText(_('IP : 0.0.0.0'))
-			
+
 			# After Disconnect turn on all adapters and restart network
 			networkAdapters = iNetwork.getConfiguredAdapters()
 			for x in networkAdapters:
 				iNetwork.setAdapterAttribute(x, "up", True)
 				iNetwork.activateInterface(x)
-			
-			iNetwork.restartNetwork()	
+
+			iNetwork.restartNetwork()
 
 		else:
 			cmd = "%s 2 vendor=0x%s product=0x%s" % (commandBin, x.get("Vendor"), x.get("ProdID"))
@@ -904,14 +904,14 @@ class ModemManager(Screen):
 
 			cmd = "%s 3 %s %s" % (commandBin, x.get("Vendor"), x.get("ProdID"))
 
-			# do not save new vendor id and product id changed by usb-switchmode, use only 1st ones ( when no /dev/ttyUSB0 ) - it appears ONLY when it is switched to GSM MODE 
+			# do not save new vendor id and product id changed by usb-switchmode, use only 1st ones ( when no /dev/ttyUSB0 ) - it appears ONLY when it is switched to GSM MODE
 			if not fileExists("/dev/ttyUSB0"):
 				# SAVE Current Connection vendor and product ids for future Auto-Connect mode
 				config.plugins.gmodemmanager.vendorid.setValue(x.get("Vendor"))
 				config.plugins.gmodemmanager.productid.setValue(x.get("ProdID"))
 				config.plugins.gmodemmanager.vendorid.save()
 				config.plugins.gmodemmanager.productid.save()
-			
+
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbPrintClose)
 
 			cmd = "%s 4" % (commandBin)
@@ -920,7 +920,7 @@ class ModemManager(Screen):
 			cmd = "%s 5" % (commandBin)
 			self.taskManager.append(cmd, self.cbRunWvDialAvail, self.cbPrintClose)
 			self.taskManager.setStatusCB(self.setConnectStatus)
-		
+
 		self.taskManager.next()
 
 	def printStatus(self, idx, STATUS):
@@ -1010,7 +1010,7 @@ class ModemManager(Screen):
 				elif x.startswith('Baud ='):
 					print x
 					info['Baud'] = x[6:].strip()
-		except Exception, err: 
+		except Exception, err:
 			printDebugModemMgr("getModemInfo Error : [%s]" % (str(err)))
 			# TODO : occur error!!
 			return
@@ -1109,8 +1109,8 @@ class ModemManager(Screen):
 				phone = ""
 			x = self["menulist"].getCurrent()[1]
 			info = 'Vendor : %s/%s\nAPN : %s\nUser : %s\nPassword : %s\nPin : %s\nPhone : %s' % (
-					x.get("Vendor"), 
-					x.get("ProdID"), 
+					x.get("Vendor"),
+					x.get("ProdID"),
 					apn,
 					uid,
 					pwd,
@@ -1218,13 +1218,12 @@ def autostart(reason, **kwargs):
 				os.system(cmd)
 				print "[3GModemManager] disable all others network adapters ..."
 				os.system("ifconfig eth0 up")
-						
+
 
 def main(session, **kwargs):
 	session.open(ModemManager)
-                                                           
 
-def Plugins(**kwargs):            
+
+def Plugins(**kwargs):
 	return [PluginDescriptor(name=_("3G / 4G Modem Manager"), description="management 3g modem", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
 		PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
-

@@ -190,7 +190,7 @@ class DaysBackScreen(Screen):
 	def keyCancel(self):
 		self.close()
 
-###########################################################################	   
+###########################################################################
 
 
 class OpenUg(StreamsThumbCommon):
@@ -221,7 +221,7 @@ class OpenUg(StreamsThumbCommon):
 		self.isRtl = False
 		self.isRtlBack = False
 		self.level = self.UG_LEVEL_ALL
-		
+
 	def layoutFinished(self):
 		self.setTitle("Open Uitzending Gemist")
 
@@ -256,14 +256,14 @@ class OpenUg(StreamsThumbCommon):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'pop':
 			self.level = self.UG_LEVEL_SERIE
 			self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "popular/protocol/html")
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'atotz':
 			self.isAtotZ = True
 			self.level = self.UG_LEVEL_ALL
@@ -274,11 +274,11 @@ class OpenUg(StreamsThumbCommon):
 			if len(self.mediaList) == 0:
 				self.mediaProblemPopup("No Episodes Found!")
 			self.updateMenu()
-			
+
 		elif retval == 'search':
 			self.timerCmd = self.TIMER_CMD_VKEY
 			self.cbTimer.start(10)
-			
+
 		elif retval == 'rtl':
 			self.isRtl = True
 			self.level = self.UG_LEVEL_ALL
@@ -311,7 +311,7 @@ class OpenUg(StreamsThumbCommon):
 	def go(self):
 		currSel = self["list"].l.getCurrentSelection()
 		selIndex = self.mediaList.index(currSel)
-		
+
 		if len(self.mediaList) == 0 or selIndex > len(self.mediaList) - 1:
 			return
 
@@ -322,10 +322,10 @@ class OpenUg(StreamsThumbCommon):
 				self.getRTLSerie(self.mediaList, tmp)
 				self.level = self.UG_LEVEL_SERIE
 				self.updateMenu()
-				
+
 			elif self.level == self.UG_LEVEL_SERIE:
 				tmp = self.getRTLStream(self.mediaList[selIndex][self.UG_STREAMURL])
-				
+
 				if tmp:
 					myreference = eServiceReference(4097, 0, tmp)
 					myreference.setName(self.mediaList[selIndex][self.UG_PROGNAME])
@@ -350,7 +350,7 @@ class OpenUg(StreamsThumbCommon):
 #=========================================================================================
 	def doUGPlay(self, selIndex):
 		out = wgetUrl(self.STAGING_UG_BASE_URL + "streams/video/pr_id/" + self.mediaList[selIndex][self.UG_STREAMURL])
-		
+
 		if out:
 			myreference = eServiceReference(4097, 0, out.split('stream_link":"')[1].split('\",')[0].replace('\/', '/'))
 			myreference.setName(self.mediaList[selIndex][self.UG_PROGNAME])
@@ -420,7 +420,7 @@ class OpenUg(StreamsThumbCommon):
 					if tmp in line:
 						name = line.split(tmp)[1].split('</span>')[0]
 						name = checkUnicode(name)
-						state = 2					
+						state = 2
 
 				elif state == 2:
 					if '<span class=\"extra_info\">' in line:
@@ -446,7 +446,7 @@ class OpenUg(StreamsThumbCommon):
 		# Only attempt to parse the data if anything returned.
 		if data:
 			data = data.split('\n')
-			
+
 			state = 0
 			name = ''
 			short = ''
@@ -455,7 +455,7 @@ class OpenUg(StreamsThumbCommon):
 			date = ''
 			channel = ''
 			duration = ''
-			
+
 			for line in data:
 				if "<li" in line:
 					tmp = "<a href=\""
@@ -480,7 +480,7 @@ class OpenUg(StreamsThumbCommon):
 
 		url = self.RTL_BASE_URL + "?daysback=" + '%d' % (days)
 		data = wgetUrl(url)
-		
+
 		# Only attempt to parse the data if anything returned.
 		if data:
 			data = data.split('\n')
@@ -492,7 +492,7 @@ class OpenUg(StreamsThumbCommon):
 			date = ''
 			channel = ''
 			duration = ''
-			
+
 			for line in data:
 				if "<li>" in line:
 					state = 1
@@ -547,9 +547,9 @@ class OpenUg(StreamsThumbCommon):
 			channel = ''
 			icon = ''
 			duration = ''
-			
+
 			data = data.split("\n")
-			
+
 			for line in data:
 				if state == 0:
 					if "<div class=\"menuEntry\">" in line:
@@ -702,11 +702,11 @@ class OpenUg(StreamsThumbCommon):
 
 
 def checkUnicode(value, **kwargs):
-	stringValue = value 
+	stringValue = value
 	stringValue = stringValue.replace('&#39;', '\'')
 	stringValue = stringValue.replace('&amp;', '&')
 	return stringValue
-	
+
 #=========================================================================================
 
 

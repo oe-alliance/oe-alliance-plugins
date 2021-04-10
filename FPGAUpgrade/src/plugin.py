@@ -421,4 +421,3 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("FPGA Upgrade"), description="Upgrade FPGA..", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
-

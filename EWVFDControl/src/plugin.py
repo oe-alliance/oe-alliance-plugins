@@ -121,7 +121,7 @@ class Channelnumber:
 					self.prikaz()
 			else:
 				self.__eventInfoChanged()
-					
+
 		if config.plugins.vfd_ew.showClock.value == 'Off':
 			vfd_write("....")
 			self.zaPrik.start(self.updatetime, 1)

@@ -101,7 +101,7 @@ class TransponderFiltering:
 		return new_tplist
 
 	def tweakSR(self, t):
-		pull_sr_max = 4 
+		pull_sr_max = 4
 		lowest_sr_to_adjust = 4996
 		multiplier = 1000
 		# Cosmetic: tweak symbol rates to nearest multiple of 100 if this is closer than "pull_sr_max" away and t.symbol_rate > lowest_sr_to_adjust
@@ -114,7 +114,7 @@ class TransponderFiltering:
 		for sat in nimmanager.satList:
 			if sat[0] != pos and self.positionDiff(pos, sat[0]) <= tenths_of_degrees:
 				neighbours.append(sat[0])
-		
+
 		for neighbour in neighbours:
 			tplist = self.removeKnownTransponders(tplist, self.getKnownTransponders(neighbour))
 		return tplist
