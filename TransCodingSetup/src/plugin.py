@@ -54,68 +54,68 @@ def checkSupportAdvanced():
 	return False
 
 config.plugins.transcodingsetup = ConfigSubsection()
-config.plugins.transcodingsetup.transcoding = ConfigSelection(default = "enable", choices = [ ("enable", _("enable")), ("disable", _("disable"))])
-config.plugins.transcodingsetup.port = ConfigInteger(default = 8002, limits = (8002, 9999))
+config.plugins.transcodingsetup.transcoding = ConfigSelection(default="enable", choices=[ ("enable", _("enable")), ("disable", _("disable"))])
+config.plugins.transcodingsetup.port = ConfigInteger(default=8002, limits=(8002, 9999))
 config.plugins.transcodingsetup.encoder = ConfigSubList()
 
 def createTransCodingConfig(encoder):
 	if fileExists(getProcPath(encoder ,"bitrate")):
 		if getBoxType() in ('vusolo2') or getMachineBuild() in ('dags3', 'dags4'):
-			choice = ConfigSelection(default = "400000", choices=[("-1", _("auto")), ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
+			choice = ConfigSelection(default="400000", choices=[("-1", _("auto")), ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
 		elif getBoxType() in ('gbquad', 'gbquadplus'):
-			choice = ConfigSelection(default = "-1", choices=[("-1", _("auto")), ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
+			choice = ConfigSelection(default="-1", choices=[("-1", _("auto")), ("50000", "50 Kbits"), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("600000", "600 Kbits"), ("700000", "700 Kbits"), ("800000", "800 Kbits"), ("900000", "900 Kbits"), ("1000000", "1 Mbits")])
 		else:
-			choice = ConfigSelection(default = "2000000", choices=[("-1", _("auto")), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("750000", "750 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits"), ("10000000", "10 Mbits")])
+			choice = ConfigSelection(default="2000000", choices=[("-1", _("auto")), ("100000", "100 Kbits"), ("150000", "150 Kbits"), ("200000", "200 Kbits"), ("250000", "250 Kbits"), ("300000", "300 Kbits"), ("350000", "350 Kbits"), ("400000", "400 Kbits"), ("450000", "450 Kbits"), ("500000", "500 Kbits"), ("750000", "750 Kbits"), ("1000000", "1 Mbits"), ("1500000", "1.5 Mbits"), ("2000000", "2 Mbits"), ("2500000", "2.5 Mbits"), ("3000000", "3 Mbits"), ("3500000", "3.5 Mbits"), ("4000000", "4 Mbits"), ("4500000", "4.5 Mbits"), ("5000000", "5 Mbits"), ("10000000", "10 Mbits")])
 		config.plugins.transcodingsetup.encoder[int(encoder)].bitrate = choice
 
 	if fileExists(getProcPath(encoder ,"framerate")):
 		if getBoxType() in ('gbquad', 'gbquadplus'):
-			choice = ConfigSelection(default = "-1", choices = [("-1", _("auto")), ("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps")])
+			choice = ConfigSelection(default="-1", choices=[("-1", _("auto")), ("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps")])
 		else:
-			choice = ConfigSelection(default = "50000", choices = [("-1", _("auto")), ("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps"), ("30000", "30 fps"), ("50000", "50 fps"), ("59940", "59.940 fps"), ("60000", "60 fps")])
+			choice = ConfigSelection(default="50000", choices=[("-1", _("auto")), ("23976", "23.976 fps"), ("24000", "24 fps"), ("25000", "25 fps"), ("29970", "29.970 fps"), ("30000", "30 fps"), ("50000", "50 fps"), ("59940", "59.940 fps"), ("60000", "60 fps")])
 		config.plugins.transcodingsetup.encoder[int(encoder)].framerate = choice
 
 	if checkSupportAdvanced():
 		if (hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "bitrate") or hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "framerate")):
-			choice = ConfigSelection(default = "Off", choices = [ ("On", _("On")), ("Off", _("Off")) ])
+			choice = ConfigSelection(default="Off", choices=[ ("On", _("On")), ("Off", _("Off")) ])
 			config.plugins.transcodingsetup.encoder[int(encoder)].automode = choice
 
 		if fileExists(getProcPath(encoder, "resolution")):
 			resolution_choices = [("480p", _("480p")), ("576p", _("576p")), ("720p", _("720p")), ("320x240", _("320x240")), ("160x120", _("160x120"))]
 			if getBoxType() in ("vusolo4k"):
 				resolution_choices.insert(3, ("1080p", _("1080p")))
-			choice = ConfigSelection(default = "480p", choices=resolution_choices)
+			choice = ConfigSelection(default="480p", choices=resolution_choices)
 			config.plugins.transcodingsetup.encoder[int(encoder)].resolution = choice
 
 		if fileExists(getProcPath(encoder, "aspectratio")):
-			choice = ConfigSelection(default = "2", choices = [ ("0", _("auto")), ("1", _("4x3")), ("2", _("16x9")) ])
+			choice = ConfigSelection(default="2", choices=[ ("0", _("auto")), ("1", _("4x3")), ("2", _("16x9")) ])
 			config.plugins.transcodingsetup.encoder[int(encoder)].aspectratio = choice
 
 		if fileExists(getProcPath(encoder, "audiocodec")):
-			choice = ConfigSelection(default = "aac", choices = [("mpg", _("mpg")), ("mp3", _("mp3")), ("aac", _("aac")), ("aac+", _("aac+")), ("aac+loas", _("aac+loas")), ("aac+adts", _("aac+adts")), ("ac3", _("ac3"))])
+			choice = ConfigSelection(default="aac", choices=[("mpg", _("mpg")), ("mp3", _("mp3")), ("aac", _("aac")), ("aac+", _("aac+")), ("aac+loas", _("aac+loas")), ("aac+adts", _("aac+adts")), ("ac3", _("ac3"))])
 			config.plugins.transcodingsetup.encoder[int(encoder)].audiocodec = choice
 
 		if fileExists(getProcPath(encoder, "videocodec")):
-			choice = ConfigSelection(default = "h264", choices = [ ("h264", _("h264")) ])
+			choice = ConfigSelection(default="h264", choices=[ ("h264", _("h264")) ])
 			config.plugins.transcodingsetup.encoder[int(encoder)].videocodec = choice
 
 		if fileExists(getProcPath(encoder, "gopframeb")):
-			choice = ConfigInteger(default = 0, limits = (0, 60))
+			choice = ConfigInteger(default=0, limits=(0, 60))
 			config.plugins.transcodingsetup.encoder[int(encoder)].gopframeb = choice
 
 		if fileExists(getProcPath(encoder, "gopframep")):
-			choice = ConfigInteger(default = 29, limits = (0, 60))
+			choice = ConfigInteger(default=29, limits=(0, 60))
 			config.plugins.transcodingsetup.encoder[int(encoder)].gopframep = choice
 
 		if fileExists(getProcPath(encoder, "level")):
-			choice = ConfigSelection(default = "3.1", choices = [("1.0", _("1.0")), ("2.0", _("2.0")),
+			choice = ConfigSelection(default="3.1", choices=[("1.0", _("1.0")), ("2.0", _("2.0")),
 				("2.1", _("2.1")), ("2.2", _("2.2")), ("3.0", _("3.0")), ("3.1", _("3.1")),
 				("3.2", _("3.2")), ("4.0", _("4.0")), ("4.1", _("4.1")), ("4.2", _("4.2")),
 				("5.0", _("5.0")), ("low", _("low")), ("main", _("main")), ("high", _("high"))])
 			config.plugins.transcodingsetup.encoder[int(encoder)].level = choice
 
 		if fileExists(getProcPath(encoder, "profile")):
-			choice = ConfigSelection(default = "baseline", choices = [("baseline", _("baseline")), ("simple", _("simple")), ("main", _("main")), ("high", _("high")), ("advanced simple", _("advancedsimple"))])
+			choice = ConfigSelection(default="baseline", choices=[("baseline", _("baseline")), ("simple", _("simple")), ("main", _("main")), ("high", _("high")), ("advanced simple", _("advancedsimple"))])
 			config.plugins.transcodingsetup.encoder[int(encoder)].profile = choice
 
 # check encoders
@@ -142,7 +142,7 @@ else:
 	choices.append(('0','0'))
 	SystemInfo["NoAuto0"] = True
 	
-config.plugins.transcodingsetup.encodernum = ConfigSelection(default = '0', choices = choices)
+config.plugins.transcodingsetup.encodernum = ConfigSelection(default='0', choices=choices)
 
 SystemInfo["AdvancedTranscoding"] = checkSupportAdvanced()
 SystemInfo["MultipleEncoders"] = len(encoders) > 1
@@ -186,7 +186,7 @@ class TranscodingSetupInit:
 			if hasattr(config.plugins.transcodingsetup.encoder[int(encoder)], "automode"):
 				config.plugins.transcodingsetup.encoder[int(encoder)].automode.addNotifier(self.setAutomode, extra_args=[int(encoder)])
 
-		config.plugins.transcodingsetup.port.addNotifier(self.setPort, initial_call = False)
+		config.plugins.transcodingsetup.port.addNotifier(self.setPort, initial_call=False)
 
 	def setConfig(self, procPath, value):
 		if not fileExists(procPath):
@@ -384,7 +384,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 
 		self.list = []
 		self.onChangedEntry = [ ]
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.setupMode = "Normal" # Normal / Advanced
 		self.encoder = None
 		self.automode = None
@@ -485,7 +485,7 @@ class TranscodingSetup(Screen,ConfigListScreen):
 			text += "%s : %d, %s : %d" % (_("Min"), limits[0], _("Max"), limits[1])
 		self["description"].setText(text)
 
-	def showMessage(self, msg, msgType = MessageBox.TYPE_ERROR):
+	def showMessage(self, msg, msgType=MessageBox.TYPE_ERROR):
 		self.session.open(MessageBox, _(msg), msgType)
 
 	def saveAll(self):
@@ -559,8 +559,8 @@ def Plugins(**kwargs):
 	return [PluginDescriptor(
 			name=_("TranscodingSetup"), 
 			description=_("Transcoding Setup"), 
-			where = PluginDescriptor.WHERE_PLUGINMENU, 
-			needsRestart = False, 
+			where=PluginDescriptor.WHERE_PLUGINMENU, 
+			needsRestart=False, 
 			icon="plugin.png", 
 			fnc=main), 
 			PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], 

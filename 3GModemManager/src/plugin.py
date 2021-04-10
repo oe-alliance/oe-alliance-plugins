@@ -294,7 +294,7 @@ class EditModemManual(ConfigListScreen, Screen):
 		if self.isAdd:
 			return
 		if self.cbFuncClose is not None:
-			self.cbFuncClose(isRemove = True)
+			self.cbFuncClose(isRemove=True)
 		self.close()
 
 	def showKeyboard(self, ret=None):
@@ -339,14 +339,14 @@ class EditModemManual(ConfigListScreen, Screen):
 
 
 config.plugins.gmodemmanager = ConfigSubsection()
-config.plugins.gmodemmanager.autostart = ConfigYesNo(default = False)
-config.plugins.gmodemmanager.vendorid = ConfigText(default = "0000" )
-config.plugins.gmodemmanager.productid = ConfigText(default = "0000")
-config.plugins.gmodemmanager.apn = ConfigText(default = "apn")
-config.plugins.gmodemmanager.uid = ConfigText(default = "user")
-config.plugins.gmodemmanager.pwd = ConfigText(default = "pass")
-config.plugins.gmodemmanager.pin = ConfigText(default = "")
-config.plugins.gmodemmanager.phone = ConfigText(default = "*99#")
+config.plugins.gmodemmanager.autostart = ConfigYesNo(default=False)
+config.plugins.gmodemmanager.vendorid = ConfigText(default="0000" )
+config.plugins.gmodemmanager.productid = ConfigText(default="0000")
+config.plugins.gmodemmanager.apn = ConfigText(default="apn")
+config.plugins.gmodemmanager.uid = ConfigText(default="user")
+config.plugins.gmodemmanager.pwd = ConfigText(default="pass")
+config.plugins.gmodemmanager.pin = ConfigText(default="")
+config.plugins.gmodemmanager.phone = ConfigText(default="*99#")
 
 class ModemManual(Screen):
 	skin = 	"""
@@ -776,7 +776,7 @@ class ModemManager(Screen):
 	def keyExit(self):
 		if self.isAttemptConnect():
 			message = "Can't disconnect doring connecting..\nDo you want to forcibly exit?"
-			self.session.openWithCallback(self.cbForciblyExit, MessageBox, _(message), default = False)
+			self.session.openWithCallback(self.cbForciblyExit, MessageBox, _(message), default=False)
 			return
 		self.udevListener.close()
 		self.close()
@@ -824,12 +824,12 @@ class ModemManager(Screen):
 
 			if self["key_green"].getText() == 'Disconnect':
 				message = "Do you want to disconnect?"
-				self.session.openWithCallback(self.cbConfirmDone, MessageBox, _(message), default = False)
+				self.session.openWithCallback(self.cbConfirmDone, MessageBox, _(message), default=False)
 				return
 
 			if areadyExistAnotherAdapter():
 				message = "Another adapter connected has been found.\n\nA connection is attempted after disconnect all of other device. Do you want to?"
-				self.session.openWithCallback(self.cbConfirmDone, MessageBox, _(message), default = True)
+				self.session.openWithCallback(self.cbConfirmDone, MessageBox, _(message), default=True)
 			else:
 				self.cbConfirmDone(True)
 
@@ -1209,6 +1209,6 @@ def main(session, **kwargs):
 	session.open(ModemManager)
                                                            
 def Plugins(**kwargs):            
-	return [PluginDescriptor(name=_("3G / 4G Modem Manager"), description="management 3g modem", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
-		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart)]
+	return [PluginDescriptor(name=_("3G / 4G Modem Manager"), description="management 3g modem", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
 

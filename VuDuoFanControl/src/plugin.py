@@ -13,12 +13,12 @@ from Components.Sources.StaticText import StaticText
 
 
 config.plugins.fansetups = ConfigSubsection()
-config.plugins.fansetups.standbymode = ConfigSelection(default = "off", choices = [
+config.plugins.fansetups.standbymode = ConfigSelection(default="off", choices=[
 	("off", _("off")), ("on", _("on"))])
-config.plugins.fansetups.usetimer = ConfigSelection(default = "off", choices = [
+config.plugins.fansetups.usetimer = ConfigSelection(default="off", choices=[
 	("off", _("no")), ("on", _("yes"))])
-config.plugins.fansetups.fanontime = ConfigInteger(default = 5, limits = (1, 100))
-config.plugins.fansetups.fanofftime = ConfigInteger(default = 60, limits = (1, 100))
+config.plugins.fansetups.fanontime = ConfigInteger(default=5, limits=(1, 100))
+config.plugins.fansetups.fanofftime = ConfigInteger(default=60, limits=(1, 100))
 
 class FanSetupConfiguration(Screen, ConfigListScreen):
 	skin = """
@@ -47,7 +47,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session = self.session)
+		ConfigListScreen.__init__(self, self.list,session=self.session)
 #		self.getFaninfo()
 		self.createSetup()
 
@@ -173,6 +173,6 @@ def setfansetup(reason, **kwargs):
 def Plugins(**kwargs):
 	from os import path
 	if not path.exists("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/plugin.pyo"):
-		return [PluginDescriptor(name=_("Fan Control"), description="check Fan Control settings", where = PluginDescriptor.WHERE_AUTOSTART, needsRestart = True, fnc=setfansetup),
-				PluginDescriptor(name=_("Fan Control"), description=_("Fan Control"), where = PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=selSetup)]
+		return [PluginDescriptor(name=_("Fan Control"), description="check Fan Control settings", where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=setfansetup),
+				PluginDescriptor(name=_("Fan Control"), description=_("Fan Control"), where=PluginDescriptor.WHERE_MENU, needsRestart=True, fnc=selSetup)]
 	return []

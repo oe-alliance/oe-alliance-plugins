@@ -47,7 +47,7 @@ class fempa(Screen):
 	currentService = ""	  
 	def __init__(self, session):
 		
-		def gethtml(url, data =''):
+		def gethtml(url, data=''):
 			try:
 				req = urllib2.Request(url)
 				req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
@@ -95,7 +95,7 @@ class fempa(Screen):
 			 
 					
 				
-	def gethtml(self, url, data = ''):
+	def gethtml(self, url, data=''):
 		try:
 			req = urllib2.Request(url)
 			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
@@ -126,7 +126,7 @@ def Plugins(**kwargs):
 	return PluginDescriptor(
 		name="Fem Pa",
 		description=_("Norwegian P4 FEM PAA radio show player"),
-		where = [ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
+		where=[ PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU ],
 		icon="./icon.png",
 		fnc=main)
 

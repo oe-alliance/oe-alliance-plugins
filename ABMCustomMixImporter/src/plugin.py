@@ -36,9 +36,9 @@ default_mix = "dsayers_vmuk_into_skyuk"
 ABMpath = "/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/custom/"
 
 config.plugins.abmImporter = ConfigSubsection()
-config.plugins.abmImporter.mix = ConfigSelection(default = default_mix, choices = choices)
-config.plugins.abmImporter.enableImporter = ConfigYesNo(default = False)
-config.plugins.abmImporter.leadTime = ConfigSelection(default = "5", choices = [("1", _("1 minute")), ("2", _("2 minutes")), ("3", _("3 minutes")), ("5", _("5 minutes")), ("10", _("10 minutes")), ("20", _("20 minutes")), ("30", _("30 minutes"))])
+config.plugins.abmImporter.mix = ConfigSelection(default=default_mix, choices=choices)
+config.plugins.abmImporter.enableImporter = ConfigYesNo(default=False)
+config.plugins.abmImporter.leadTime = ConfigSelection(default="5", choices=[("1", _("1 minute")), ("2", _("2 minutes")), ("3", _("3 minutes")), ("5", _("5 minutes")), ("10", _("10 minutes")), ("20", _("20 minutes")), ("30", _("30 minutes"))])
 
 class ABMCustomMixImporterScreen(Setup):
 	skin = """
@@ -120,7 +120,7 @@ class ABMCustomMixImporterScreen(Setup):
 	def startImporter(self):
 		self.session.openWithCallback(self.startImporterCallback, ABMCustomMixImporter)
 
-	def startImporterCallback(self, answer = None):
+	def startImporterCallback(self, answer=None):
 		if answer:
 			self.close()
 
@@ -311,6 +311,6 @@ def ABMCustomMixImporterMain(session, **kwargs):
 def Plugins(**kwargs):
 	pList = []
 	if ABMisLoaded():
-		pList.append( PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc=pluginAutoStart))
-		pList.append( PluginDescriptor(name=_("ABM CustomMix Importer"), description="Imports CustomMix files for ABM", where = PluginDescriptor.WHERE_MENU, fnc=pluginManualStart, needsRestart=True) )
+		pList.append( PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=pluginAutoStart))
+		pList.append( PluginDescriptor(name=_("ABM CustomMix Importer"), description="Imports CustomMix files for ABM", where=PluginDescriptor.WHERE_MENU, fnc=pluginManualStart, needsRestart=True) )
 	return pList

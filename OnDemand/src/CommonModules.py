@@ -386,7 +386,7 @@ class StreamsThumbCommon(Screen):
 		self.hidemessage.stop()
 		self['lab1'].hide()
 
-	def refreshData(self, force = False):
+	def refreshData(self, force=False):
 		self.refreshTimer.stop()
 		self['list'].fillEpisodeList(self.mediaList)
 
@@ -410,10 +410,10 @@ class StreamsThumbCommon(Screen):
 		if self.timerCmd == self.TIMER_CMD_START:
 			self.setupCallback(self.cmd)
 		elif self.timerCmd == self.TIMER_CMD_VKEY:
-			self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title = (_("Search term")), text = "")
+			self.session.openWithCallback(self.keyboardCallback, VirtualKeyBoard, title=(_("Search term")), text="")
 
 	def mediaProblemPopup(self, error):
-		self.session.openWithCallback(self.close, MessageBox, _(error), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+		self.session.openWithCallback(self.close, MessageBox, _(error), MessageBox.TYPE_ERROR, timeout=5, simple=True)
 
 ###########################################################################
 class MyHTTPConnection(HTTPConnection):
@@ -452,7 +452,7 @@ class MyHTTPHandler(urllib2.HTTPHandler):
 
 ###########################################################################	   
 class MoviePlayer(MP_parent):
-	def __init__(self, session, service, slist = None, lastservice = None):
+	def __init__(self, session, service, slist=None, lastservice=None):
 		MP_parent.__init__(self, session, service, slist, lastservice)
 
 	def leavePlayer(self):
@@ -467,7 +467,7 @@ class MoviePlayer(MP_parent):
 
 ###########################################################################	   
 class RTMP:
-	def __init__(self, rtmp, tcUrl = None, auth = None, app = None, playPath = None, swfUrl = None, swfVfy = None, pageUrl = None, live = None, socks = None, port = None):
+	def __init__(self, rtmp, tcUrl=None, auth=None, app=None, playPath=None, swfUrl=None, swfVfy=None, pageUrl=None, live=None, socks=None, port=None):
 
 		self.rtmp = rtmp
 		self.tcUrl = tcUrl

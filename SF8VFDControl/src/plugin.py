@@ -53,8 +53,8 @@ import Screens.Standby
 import subprocess
 
 config.plugins.VFD_SF8 = ConfigSubsection()
-config.plugins.VFD_SF8.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_SF8.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.VFD_SF8.showClock = ConfigSelection(default="True_Switch", choices=[("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
+config.plugins.VFD_SF8.timeMode = ConfigSelection(default="24h", choices=[("12h"),("24h")])
 
 # this bitmap is not complete. 
 # please populate it as you want.
@@ -107,8 +107,7 @@ class Channelnumber:
 		self.zaPrik.start(1000, 1)
 		self.onClose = [ ]
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self,eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 
@@ -225,7 +224,7 @@ def initVFD():
 		vfd_text_out("....")
 
 class VFD_SF8Setup(ConfigListScreen, Screen):
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 
 		self.skin = """
 			<screen position="100,100" size="500,210" title="VFD_SF8 Setup" >
@@ -241,7 +240,7 @@ class VFD_SF8Setup(ConfigListScreen, Screen):
 
 		self.onChangedEntry = [ ]
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
 		self.createSetup()
 
@@ -319,7 +318,7 @@ class VFD_SF8:
 
 	def abort(self):
 		print "[VFD-SF8] aborting"
-		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 def main(menuid):
 	if menuid != "system":
@@ -361,6 +360,6 @@ def sessionstart(reason, **kwargs):
 def Plugins(**kwargs):
 	if getBoxType() in ('sf8'):
 	 	return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-	 		PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+	 		PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where=PluginDescriptor.WHERE_MENU, fnc=main) ]
 	else:
 		return []

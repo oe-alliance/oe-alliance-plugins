@@ -27,10 +27,10 @@ DIR_TMP = '/tmp/'
 RCSC_PREFIX = 'userbouquet.rcsc.'
 
 config.plugins.RemoteStreamConverter = ConfigSubsection()
-config.plugins.RemoteStreamConverter.address = ConfigText(default = "", fixed_size = False)
-config.plugins.RemoteStreamConverter.ip = ConfigIP(default = [0,0,0,0])
-config.plugins.RemoteStreamConverter.username = ConfigText(default = "root", fixed_size = False)
-config.plugins.RemoteStreamConverter.password = ConfigText(default = "", fixed_size = False)
+config.plugins.RemoteStreamConverter.address = ConfigText(default="", fixed_size=False)
+config.plugins.RemoteStreamConverter.ip = ConfigIP(default=[0,0,0,0])
+config.plugins.RemoteStreamConverter.username = ConfigText(default="root", fixed_size=False)
+config.plugins.RemoteStreamConverter.password = ConfigText(default="", fixed_size=False)
 config.plugins.RemoteStreamConverter.port = ConfigInteger(21, (0, 65535))
 config.plugins.RemoteStreamConverter.passive = ConfigYesNo(False)
 config.plugins.RemoteStreamConverter.telnetport = ConfigInteger(23, (0, 65535))
@@ -151,7 +151,7 @@ class ServerEditor(ConfigListScreen, Screen):
 		elif self["config"].getCurrentIndex() == self.POS_PASSWORD:
 			txt = config.plugins.RemoteStreamConverter.password.value
 			head = _("Enter password")
-		self.session.openWithCallback(self.urlCallback, VirtualKeyBoard, title = head, text = txt)
+		self.session.openWithCallback(self.urlCallback, VirtualKeyBoard, title=head, text=txt)
 
 	def urlCallback(self, res):
 		if res is not None:
@@ -232,7 +232,7 @@ class StreamingChannelFromServerScreen(Screen):
 		if not self.hasFiles:
 			self.session.openWithCallback(self.setRemoteIpCallback, ServerEditor)
 
-	def setRemoteIpCallback(self, ret = False):
+	def setRemoteIpCallback(self, ret=False):
 		if ret:
 			self["statusbar"].setText(_("Testing remote connection"))
 			timeout = 3000
@@ -339,7 +339,7 @@ class StreamingChannelFromServerScreen(Screen):
 				self["key_blue"].setText(_("Invert"))
 				self["key_yellow"].setText("")
 
-	def download(self, file, contextFactory = None, *args, **kwargs):
+	def download(self, file, contextFactory=None, *args, **kwargs):
 		client = FTPDownloader(
 			self.getRemoteAdress(),
 			config.plugins.RemoteStreamConverter.port.value,
@@ -666,4 +666,4 @@ def mainInMenu(menuid, **kwargs):
 			return []
 
 def Plugins(**kwargs):
-	return [ PluginDescriptor(name = _("Remote channel stream converter"), description = _("Convert remote channel list for streaming"), where = PluginDescriptor.WHERE_MENU, fnc = mainInMenu) ]
+	return [ PluginDescriptor(name=_("Remote channel stream converter"), description=_("Convert remote channel list for streaming"), where=PluginDescriptor.WHERE_MENU, fnc=mainInMenu) ]

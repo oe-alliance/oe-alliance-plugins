@@ -145,7 +145,7 @@ class UpgradeStatus(Screen):
 			<widget source="info" render="Label" position="10,70" zPosition="1" size="430,30" font="Regular;22" halign="center" valign="center" backgroundColor="black" transparent="1"/>
 		</screen>
 		"""
-	def __init__(self, session, parent, timeout = 20):
+	def __init__(self, session, parent, timeout=20):
 		Screen.__init__(self,session)
 		self.session = session
 
@@ -249,7 +249,7 @@ class FPGAUpgrade(Screen):
 		self["key_blue"] = StaticText(_("Download"))
 
 		self["status"] = StaticText(" ")
-		self["file_list"] = FileList("/", matchingPattern = "^.*")
+		self["file_list"] = FileList("/", matchingPattern="^.*")
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", ],
                 {
@@ -331,7 +331,7 @@ class FPGAUpgrade(Screen):
 
 		if device == None or len(device) == 0:
 			message = "Fail to upgrade.\nCause : Can't found device.\nDo you want to exit?"
-			self.session.openWithCallback(self.onCallbackHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout = 10, default = True)
+			self.session.openWithCallback(self.onCallbackHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout=10, default=True)
 			print "DEVICE_LIST : ", device_list
 
 		print "DEVICE : ", device
@@ -339,12 +339,12 @@ class FPGAUpgrade(Screen):
 		if self.ERROR_CODE > 0:
 			self.ERROR_MSG = self.FPGA.get_error_msg(self.ERROR_CODE, self.ERROR_MSG)
 			message = "Fail to upgrade.\nCause : " + self.ERROR_MSG + "\nDo you want to exit?"
-			self.session.openWithCallback(self.onCallbackHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout = 10, default = True)
+			self.session.openWithCallback(self.onCallbackHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout=10, default=True)
 			print "DEVICE : ", device
 			print "FILE : ", path
 		else:
 			#self.session.open(MessageBox, _("Success!!"), MessageBox.TYPE_INFO, timeout = 5)
-			self.session.open(UpgradeStatus, self, timeout = 20)
+			self.session.open(UpgradeStatus, self, timeout=20)
 
 	def onClickRed(self):
 		self.doExit()
@@ -353,7 +353,7 @@ class FPGAUpgrade(Screen):
 	def onClickGreen(self):
 		#self.session.open(MessageBox, _("Upgrade will take about 5 minutes to finish."), MessageBox.TYPE_INFO, timeout = 10)
 		message = "Upgrade will take about 5 minutes to finish.\nDo you want to upgrade?"
-		self.session.openWithCallback(self.doUpgradeHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout = 10, default = True)
+		self.session.openWithCallback(self.doUpgradeHandler, MessageBox, _(message), MessageBox.TYPE_YESNO, timeout=10, default=True)
 
 	def onClickBlue(self):
 		fname = ''
@@ -362,13 +362,13 @@ class FPGAUpgrade(Screen):
 		try:
 			test_opener.open(self.DOWNLOAD_URL)
 		except:
-			self.session.open(MessageBox, _('File not found'), MessageBox.TYPE_INFO, timeout = 5)
+			self.session.open(MessageBox, _('File not found'), MessageBox.TYPE_INFO, timeout=5)
 			del test_opener
 			return
 		try :
 			fname, header = urlretrieve(self.DOWNLOAD_URL, self.DOWNLOAD_TAR_PATH + self.DOWNLOAD_FILE_NAME, self.doHook)
 		except IOError, msg:
-			self.session.open(MessageBox, _(str(msg)), MessageBox.TYPE_INFO, timeout = 5)
+			self.session.open(MessageBox, _(str(msg)), MessageBox.TYPE_INFO, timeout=5)
 			del test_opener
 			return
 		del test_opener
@@ -410,5 +410,5 @@ def main(session, **kwargs):
         session.open(FPGAUpgrade)
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name=_("FPGA Upgrade"), description="Upgrade FPGA..", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
+	return PluginDescriptor(name=_("FPGA Upgrade"), description="Upgrade FPGA..", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
 

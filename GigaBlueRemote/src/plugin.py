@@ -12,7 +12,7 @@ from enigma import eTimer
 from boxbranding import getMachineBuild, getImageDistro, getBoxType
 
 config.plugins.remotecontrolcode = ConfigSubsection()
-config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "50af", choices = [ ("50af", _("Code 1")), ("51ae", _("Code 2")) ] )
+config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="50af", choices=[ ("50af", _("Code 1")), ("51ae", _("Code 2")) ] )
 
 class RemoteControlCodeInit:
 	def __init__(self):
@@ -58,7 +58,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		}, -2)
 		self.codestartup = config.plugins.remotecontrolcode.systemcode.value
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session = self.session)
+		ConfigListScreen.__init__(self, self.list,session=self.session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self.createSetup()
@@ -89,7 +89,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 				self.restoreCode()
 				self.session.openWithCallback(self.close, MessageBox, _("FILE DOES NOT EXIST : /proc/stb/ir/rc/customcode"), MessageBox.TYPE_ERROR)
 			else:
-				self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change now the mode on your RCU.") + '\n\n' + _("Press and hold 'GIGA' & '5' for 5 seconds.") + "\n" + _("Then choose 'Confirm' "), MessageBox.TYPE_YESNO, timeout = 60, default = False)
+				self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change now the mode on your RCU.") + '\n\n' + _("Press and hold 'GIGA' & '5' for 5 seconds.") + "\n" + _("Then choose 'Confirm' "), MessageBox.TYPE_YESNO, timeout=60, default=False)
 		else:
 			self.close()
 
@@ -106,7 +106,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 			self.setSystemCode(config.plugins.remotecontrolcode.systemcode.value)
 
 class MessageBoxConfirmCode(MessageBox):
-	def __init__(self, session, text, type = MessageBox.TYPE_YESNO, timeout = -1, close_on_any_key = False, default = False, enable_input = True, msgBoxID = None):
+	def __init__(self, session, text, type=MessageBox.TYPE_YESNO, timeout=-1, close_on_any_key=False, default=False, enable_input=True, msgBoxID=None):
 		MessageBox.__init__(self,session,text,type,timeout,close_on_any_key,default,enable_input,msgBoxID)
 		self.skinName = "MessageBox"
 		if type == MessageBox.TYPE_YESNO:
@@ -150,5 +150,5 @@ def RemoteControlSetup(menuid, **kwargs):
 def Plugins(**kwargs):
 	if fileExists("/proc/stb/ir/rc/customcode"):
 		from Plugins.Plugin import PluginDescriptor
-		return [PluginDescriptor(name=_("Remote Control Code"), where=PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=RemoteControlSetup)]
+		return [PluginDescriptor(name=_("Remote Control Code"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=RemoteControlSetup)]
 	return []

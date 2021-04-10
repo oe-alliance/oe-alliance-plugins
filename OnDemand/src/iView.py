@@ -236,7 +236,7 @@ class StreamsThumb(StreamsThumbCommon):
 	def layoutFinished(self):
 		self.setTitle("ABC iView: Listings for " +self.title)
 
-	def setupCallback(self, retval = None):
+	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
 			return
 			
@@ -257,13 +257,13 @@ class StreamsThumb(StreamsThumbCommon):
 			self.updateMenu()
 
 #==============================================================================
-	def keyboardCallback(self, callback = None):
+	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
 			self.setTitle("ABC iView: Search Listings for " +callback)
 			self.getSearchMediaData(self.mediaList, callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple = True)
+				self.session.openWithCallback(self.close, MessageBox, _("No items matching your search criteria were found"), MessageBox.TYPE_ERROR, timeout=5, simple=True)
 		else:
 			self.close()
 

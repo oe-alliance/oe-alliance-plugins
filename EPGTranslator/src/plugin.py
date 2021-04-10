@@ -657,7 +657,7 @@ Red: Refresh EPG
 # if there may be a user prompt related to timeshift.
 #
             self.__event_tracker = ServiceEventTracker(screen=self,
-                  eventmap= {iPlayableService.evTunedIn: self.__serviceTuned})
+                  eventmap={iPlayableService.evTunedIn: self.__serviceTuned})
 
         self['actions'] = ActionMap(['OkCancelActions',
              'DirectionActions',

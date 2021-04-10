@@ -21,8 +21,8 @@ from boxbranding import getBoxType
 import Screens.Standby
 
 config.plugins.VFD_ini = ConfigSubsection()
-config.plugins.VFD_ini.showClock = ConfigSelection(default = "True_Switch", choices = [("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_ini.timeMode = ConfigSelection(default = "24h", choices = [("12h"),("24h")])
+config.plugins.VFD_ini.showClock = ConfigSelection(default="True_Switch", choices=[("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
+config.plugins.VFD_ini.timeMode = ConfigSelection(default="24h", choices=[("12h"),("24h")])
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
@@ -167,7 +167,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 				<widget name="key_red" position="180,165" size="140,40" font="Regular;20" backgroundColor="#9f1313" zPosition="2" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 			</screen>"""  
 
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("7-LED Display Setup"))
 		self.skinName = ["Setup"]
@@ -176,7 +176,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 
 		self.onChangedEntry = [ ]
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
 		self.createSetup()
 
@@ -248,7 +248,7 @@ class VFD_INI:
 
 	def abort(self):
 		print "[VFD-INI] aborting"
-		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 def main(menuid):
 	if menuid != "system":
@@ -290,6 +290,6 @@ def sessionstart(reason, **kwargs):
 def Plugins(**kwargs):
 		if getBoxType() in ('xpeedlx1', 'atemio6000', 'atemio6100', 'bwidowx', 'bwidowx2', 'mbhybrid', 'opticumtt'):
 			return [ PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where = PluginDescriptor.WHERE_MENU, fnc = main) ]
+				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where=PluginDescriptor.WHERE_MENU, fnc=main) ]
 		else:
 			return []

@@ -704,22 +704,22 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 				defaultSat["orbpos"] = frontendData.get("orbital_position", 0)
 
 		self.dmmBlindscan = ConfigSubsection()
-		self.dmmBlindscan.scan_clearallservices = ConfigSelection(default = "no", choices = [("no", _("no")), ("yes", _("yes")), ("yes_hold_feeds", _("yes (keep feeds)"))])
-		self.dmmBlindscan.scan_onlyfree = ConfigYesNo(default = False)
+		self.dmmBlindscan.scan_clearallservices = ConfigSelection(default="no", choices=[("no", _("no")), ("yes", _("yes")), ("yes_hold_feeds", _("yes (keep feeds)"))])
+		self.dmmBlindscan.scan_onlyfree = ConfigYesNo(default=False)
 
 		self.freq_limits = (10700, 12750)
-		self.dmmBlindscan.freq_start = ConfigInteger(default = self.freq_limits[0], limits = (self.freq_limits[0], self.freq_limits[1] -1))
-		self.dmmBlindscan.freq_stop = ConfigInteger(default = self.freq_limits[1], limits = (self.freq_limits[0] +1, self.freq_limits[1]))
+		self.dmmBlindscan.freq_start = ConfigInteger(default=self.freq_limits[0], limits=(self.freq_limits[0], self.freq_limits[1] -1))
+		self.dmmBlindscan.freq_stop = ConfigInteger(default=self.freq_limits[1], limits=(self.freq_limits[0] +1, self.freq_limits[1]))
 
 		self.sr_limits = (1, 60)
 		sr_defaults = (2, 45)
-		self.dmmBlindscan.sr_start = ConfigInteger(default = sr_defaults[0], limits = (self.sr_limits[0], self.sr_limits[1] -1))
-		self.dmmBlindscan.sr_stop = ConfigInteger(default = sr_defaults[1], limits = (self.sr_limits[0] +1, self.sr_limits[1]))
+		self.dmmBlindscan.sr_start = ConfigInteger(default=sr_defaults[0], limits=(self.sr_limits[0], self.sr_limits[1] -1))
+		self.dmmBlindscan.sr_stop = ConfigInteger(default=sr_defaults[1], limits=(self.sr_limits[0] +1, self.sr_limits[1]))
 
-		self.dmmBlindscan.dont_scan_known_tps = ConfigYesNo(default = False)
-		self.dmmBlindscan.disable_sync_with_known_tps = ConfigYesNo(default = False)
-		self.dmmBlindscan.disable_remove_duplicate_tps = ConfigYesNo(default = False)
-		self.dmmBlindscan.filter_off_adjacent_satellites = ConfigSelection(default = "1", choices = [
+		self.dmmBlindscan.dont_scan_known_tps = ConfigYesNo(default=False)
+		self.dmmBlindscan.disable_sync_with_known_tps = ConfigYesNo(default=False)
+		self.dmmBlindscan.disable_remove_duplicate_tps = ConfigYesNo(default=False)
+		self.dmmBlindscan.filter_off_adjacent_satellites = ConfigSelection(default="1", choices=[
 			("0", _("no")),
 			("1", _("up to 1 degree")),
 			("2", _("up to 2 degrees")),
@@ -752,20 +752,20 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 					continue
 			if n.isCompatible("DVB-S"):
 				nim_list.append((str(n.slot), n.friendly_full_description))
-		self.scan_nims = ConfigSelection(choices = nim_list)
+		self.scan_nims = ConfigSelection(choices=nim_list)
 
 		# this is not currently a user option
-		self.dmmBlindscan.system = ConfigSelection(default = eDVBFrontendParametersSatellite.System_DVB_S2, 
-			choices = [ (eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S + DVB-S2")),
+		self.dmmBlindscan.system = ConfigSelection(default=eDVBFrontendParametersSatellite.System_DVB_S2, 
+			choices=[ (eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S + DVB-S2")),
 				(eDVBFrontendParametersSatellite.System_DVB_S, _("DVB-S only"))])
 
-		self.dmmBlindscan.accuracy = ConfigSelection(default = 2, choices = [ (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")])
+		self.dmmBlindscan.accuracy = ConfigSelection(default=2, choices=[ (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")])
 #		self.dmmBlindscan.multiple_scan = ConfigSelection(default = 1, choices = [(1, "only scan once"), (2, "scan twice"), (3, "scan three times")])
-		self.search_type = ConfigSelection(default = "services", choices = [
+		self.search_type = ConfigSelection(default="services", choices=[
 			("services", _("scan for channels")),
 			("xml", _("save to XML file"))])
 
-		self.dmmBlindscan.polarization = ConfigSelection(default = "vertical and horizontal", choices = [
+		self.dmmBlindscan.polarization = ConfigSelection(default="vertical and horizontal", choices=[
 			("vertical and horizontal", _("vertical and horizontal")),
 			("vertical", _("vertical")),
 			("horizontal", _("horizontal"))])
@@ -835,7 +835,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 	def callbackNone(self, *retval):
 		None
 
-	def runFilters(self, tplist, orig_tplist = None):
+	def runFilters(self, tplist, orig_tplist=None):
 		# tplist should only contain one tp
 
 		# Sync with or remove transponders that exist in satellites.xml

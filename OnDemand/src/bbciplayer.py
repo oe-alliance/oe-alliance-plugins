@@ -215,7 +215,7 @@ class StreamsThumb(StreamsThumbCommon):
 	def layoutFinished(self):
 		self.setTitle("BBC iPlayer: Listings for " +self.title)
 
-	def setupCallback(self, retval = None):
+	def setupCallback(self, retval=None):
 		if retval == 'cancel' or retval is None:
 			return
 		
@@ -228,13 +228,13 @@ class StreamsThumb(StreamsThumbCommon):
 				self.mediaProblemPopup("No Episodes Found for "+self.title)
 			self.updateMenu()
 
-	def keyboardCallback(self, callback = None):
+	def keyboardCallback(self, callback=None):
 		if callback is not None and len(callback):
 			self.setTitle("BBC iPlayer: Search Listings for " +callback)
 			self.getMediaData(self.mediaList, self.url + callback)
 			self.updateMenu()
 			if len(self.mediaList) == 0:
-				self.session.openWithCallback(self.close, MessageBox, _("No matching search items were found for "+callback), MessageBox.TYPE_INFO, timeout=5, simple = True)
+				self.session.openWithCallback(self.close, MessageBox, _("No matching search items were found for "+callback), MessageBox.TYPE_INFO, timeout=5, simple=True)
 		else:
 			self.close()
 
@@ -249,7 +249,7 @@ class StreamsThumb(StreamsThumbCommon):
 		if fileUrl:
 			# If a warning message is returned then display this before playing the programme
 			if retMessage:
-				self.session.openWithCallback(self.play(fileUrl,showName), MessageBox, _(retMessage+str(showName)), timeout=5, type = MessageBox.TYPE_INFO)
+				self.session.openWithCallback(self.play(fileUrl,showName), MessageBox, _(retMessage+str(showName)), timeout=5, type=MessageBox.TYPE_INFO)
 			else:
 				self.play(fileUrl,showName)
 		else:

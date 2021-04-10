@@ -150,7 +150,7 @@ class BrowserPositionWindow(Screen, ConfigListScreen):
 			"green": self.keyOk,
 		}, -2)
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
@@ -169,10 +169,10 @@ class BrowserPositionWindow(Screen, ConfigListScreen):
 		top    = params[2]
 		height = params[3]
 
-		self.dst_left   = ConfigSlider(default = left, increment = 5, limits = (0, 720))
-		self.dst_width  = ConfigSlider(default = width, increment = 5, limits = (0, 720))
-		self.dst_top    = ConfigSlider(default = top, increment = 5, limits = (0, 576))
-		self.dst_height = ConfigSlider(default = height, increment = 5, limits = (0, 576))
+		self.dst_left   = ConfigSlider(default=left, increment=5, limits=(0, 720))
+		self.dst_width  = ConfigSlider(default=width, increment=5, limits=(0, 720))
+		self.dst_top    = ConfigSlider(default=top, increment=5, limits=(0, 576))
+		self.dst_height = ConfigSlider(default=height, increment=5, limits=(0, 576))
 
 		self.dst_left_entry   = getConfigListEntry(_("left"), self.dst_left)
 		self.dst_width_entry  = getConfigListEntry(_("width"), self.dst_width)
@@ -292,7 +292,7 @@ class BrowserPreferenceWindow(ConfigListScreen, Screen):
 	def keyGreen(self):
 		url = self["url"].getText()
 		if strIsEmpty(url):
-			self.session.open(MessageBox, _('Invalid URL!!(Empty)\nPlease, Input to the URL.'), type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _('Invalid URL!!(Empty)\nPlease, Input to the URL.'), type=MessageBox.TYPE_INFO)
 			return
 		mode = 0
 		if url.find('/usr/local/manual') > 0:
@@ -337,7 +337,7 @@ class BrowserPreferenceWindow(ConfigListScreen, Screen):
 		if not strIsEmpty(self._currentPageUrl):
 			l.append(("current", _("Current Page")))
 		l.append(("direct", _("Direct Input")))
-		self.menuItemStartpage = ConfigSelection(default="startpage", choices = l)
+		self.menuItemStartpage = ConfigSelection(default="startpage", choices=l)
 		self.menuEntryStartpage = getConfigListEntry(_("Startpage"), self.menuItemStartpage)
 
 		kl = self.getKeymapTypeList()
@@ -353,7 +353,7 @@ class BrowserPreferenceWindow(ConfigListScreen, Screen):
 
 		if self._keymapType is None or len(self._keymapType) == 0:
 			self._keymapType = "us-rc"
-		self.menuItemKeyboardLayout = ConfigSelection(default=self._keymapType, choices = kl)
+		self.menuItemKeyboardLayout = ConfigSelection(default=self._keymapType, choices=kl)
 		self.menuEntryKeyboardLayout = getConfigListEntry(_("Keyboard Layout"), self.menuItemKeyboardLayout)
 		self.resetMenuList()
 
@@ -697,7 +697,7 @@ class BrowserBookmarkWindow(Screen):
 		data = self["bookmarklist"].getCurrent()[1]
 		url = data.mUrl.strip()
 		if len(url) == 0:
-			self.session.open(MessageBox, _("Can't open selected bookmark.\n   - URL data is empty!!"), type = MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("Can't open selected bookmark.\n   - URL data is empty!!"), type=MessageBox.TYPE_INFO)
 			return
 		mode = data.mType
 		if mode:
@@ -1077,7 +1077,7 @@ class Browser(Screen):
 		self.session.open(BrowserPositionWindow)
 
 	def _cmd_About(self):
-		self.session.open(MessageBox, _('Opera Web Browser Plugin v2.0'), type = MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, _('Opera Web Browser Plugin v2.0'), type=MessageBox.TYPE_INFO)
 
 	def _cmd_Help(self):
 		self.session.open(BrowserHelpWindow)

@@ -399,12 +399,12 @@ class UpgradeStatus(Screen):
 			self.check_status.stop()
 			errmsg = self.FU.getErrorMessage(errno, errmsg)
 			print "[FirmwareUpgrade] - ERROR : [%d][%s]" % (errno, errmsg)
-			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout=10)
 			self.cbConfirmExit(False)
 			return
 		status = self.FU.getStatus()
 		if self.old_status > status and status != -1:
-			self.session.open(MessageBox, _("Fail to upgrade!! Retry!!"), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("Fail to upgrade!! Retry!!"), MessageBox.TYPE_INFO, timeout=10)
 		self.slider.setValue(status)
 		self["status"].setText(_("%d / 100" % (status)))
 		if status == 100:
@@ -438,7 +438,7 @@ class UpgradeStatus(Screen):
 			return
 		if self.callback is not None:
 			self.callback("Reboot now for a successful upgrade.", True)
-		self.session.openWithCallback(self.cbConfirmExit, MessageBox, _("Do you want to remove binary data?"), MessageBox.TYPE_YESNO, timeout = 10, default = False)
+		self.session.openWithCallback(self.cbConfirmExit, MessageBox, _("Do you want to remove binary data?"), MessageBox.TYPE_YESNO, timeout=10, default=False)
 
 class FUFilebrowser(Screen):
 	skin = 	"""
@@ -458,7 +458,7 @@ class FUFilebrowser(Screen):
 
 		self["key_blue"] = StaticText(_("Download"))
 		self["status"]    = StaticText(" ")
-		self["file_list"] = FileList("/", matchingPattern = "^.*")
+		self["file_list"] = FileList("/", matchingPattern="^.*")
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", ],
                 {
@@ -497,10 +497,10 @@ class FUFilebrowser(Screen):
 		# verify data
 		self.gbin = self["file_list"].getCurrentDirectory() + self["file_list"].getFilename()
 		if not os.path.exists(self.gbin):
-			self.session.open(MessageBox, _("Can't found binary file."), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("Can't found binary file."), MessageBox.TYPE_INFO, timeout=10)
 			return
 		if not os.path.exists(self.gbin+".md5"):
-			self.session.open(MessageBox, _("Can't found MD5 file."), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("Can't found MD5 file."), MessageBox.TYPE_INFO, timeout=10)
 			return
 		try:
 			def checkExt(ext):
@@ -519,14 +519,14 @@ class FUFilebrowser(Screen):
 			return
 
 		if os.path.exists("/usr/bin/md5sum") == False:
-			self.session.open(MessageBox, _("Can't find /usr/bin/md5sum"), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("Can't find /usr/bin/md5sum"), MessageBox.TYPE_INFO, timeout=10)
 			return
 		md5sum_A = os.popen("md5sum %s | awk \'{print $1}\'"%(self.gbin)).readline().strip()
 		md5sum_B = os.popen("cat %s.md5 | awk \'{print $1}\'"%(self.gbin)).readline().strip()
 		#print "[FirmwareUpgrade] - Verify : file[%s], md5[%s]"%(md5sum_A,md5sum_B)
 
 		if md5sum_A != md5sum_B:
-			self.session.open(MessageBox, _("Fail to verify data file. \nfile[%s]\nmd5[%s]"%(md5sum_A,md5sum_B)), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("Fail to verify data file. \nfile[%s]\nmd5[%s]"%(md5sum_A,md5sum_B)), MessageBox.TYPE_INFO, timeout=10)
 			return
 
 		if self.callback is not None:
@@ -552,7 +552,7 @@ class FUFilebrowser(Screen):
 		except:
 			#self.session.open(MessageBox, _("File not found in this URL:\n%s"%(uri)), MessageBox.TYPE_INFO, timeout = 10)
 			print "[FirmwareUpgrade] - Fail to download. URL :",uri
-			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout=10)
 			del opener
 			return False
 		try :
@@ -560,7 +560,7 @@ class FUFilebrowser(Screen):
 		except IOError, msg:
 			#self.session.open(MessageBox, _(str(msg)), MessageBox.TYPE_INFO, timeout = 10)
 			print "[FirmwareUpgrade] - Fail to download. ERR_MSG :",str(msg)
-			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout=10)
 			del opener
 			return False
 		del opener
@@ -638,7 +638,7 @@ class FUFilebrowser(Screen):
 			return
 		self.downloadLock = True
 		if not os.path.exists("/proc/stb/info/vumodel"):
-			self.session.open(MessageBox, _("Can't found model name."), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("Can't found model name."), MessageBox.TYPE_INFO, timeout=10)
 			self.downloadLock = False
 			return
 		self["status"].setText("Please wait during download.")
@@ -782,14 +782,14 @@ class FirmwareUpgrade(Screen, ConfigListScreen):
 			return
 
 		if self.updateFilePath == "":
-			self.session.open(MessageBox, _("No selected binary data!!"), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("No selected binary data!!"), MessageBox.TYPE_INFO, timeout=10)
 			return
 		device = None
 		for d in fwdata[self._item_firmware.value][2].split(';'):
 			if os.path.exists(d):
 				device = d			
 		if device is None:
-			self.session.open(MessageBox, _("Can't found device file!!"), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("Can't found device file!!"), MessageBox.TYPE_INFO, timeout=10)
 			return
 		fbs = self.session.open(UpgradeStatus, self, self._item_firmware.value, self.updateFilePath, device)
 		fbs.setCallback(self.cbFinishedUpgrade)
@@ -831,7 +831,7 @@ class FirmwareUpgrade(Screen, ConfigListScreen):
 			self.doFileOpen()
 			return
 		msg = "You can't cancel during upgrade.\nDo you want to continue?"
-		self.session.openWithCallback(self.cbRunUpgrade, MessageBox, _(msg), MessageBox.TYPE_YESNO, timeout = 15, default = True)
+		self.session.openWithCallback(self.cbRunUpgrade, MessageBox, _(msg), MessageBox.TYPE_YESNO, timeout=15, default=True)
 		self.fileopenmode = False
 
 	def keyYellow(self):
@@ -876,5 +876,5 @@ def main(session, **kwargs):
 	session.open(FirmwareUpgrade)
 
 def Plugins(**kwargs):           
-	return PluginDescriptor(name=_("Firmware Upgrade"), description=_("Upgrade Firmware.."), icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
+	return PluginDescriptor(name=_("Firmware Upgrade"), description=_("Upgrade Firmware.."), icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
 

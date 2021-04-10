@@ -204,7 +204,7 @@ class DLNAFileBrowser(Screen):
 		except:
 			return
 
-	def recursiveFileCheck(self, firstFileType = None):
+	def recursiveFileCheck(self, firstFileType=None):
 		files = []
 		self["filelist"].descent()
 		fileList = self["filelist"].getFileList()
@@ -354,7 +354,7 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 		}, -2)
 		self["sidebar"] = Label(_("/"))
 
-		self.__event_tracker = ServiceEventTracker(screen = self, eventmap = {
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 			iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 			iPlayableService.evStart: self.__serviceStarted,
 			iPlayableService.evEOF: self.__evEOF,
@@ -392,7 +392,7 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 
 	def doExit(self):
 		list = ((_("Yes"), "y"), (_("No"), "n"),)
-		self.session.openWithCallback(self.cbDoExit, ChoiceBox, title=_("Stop playing this movie?"), list = list)
+		self.session.openWithCallback(self.cbDoExit, ChoiceBox, title=_("Stop playing this movie?"), list=list)
 
 	def cbDoExit(self, answer):
 		answer = answer and answer[1]
@@ -667,7 +667,7 @@ class TaskManager:
 
 
 config.plugins.dlnabrowser = ConfigSubsection()
-config.plugins.dlnabrowser.autostart = ConfigYesNo(default = True)
+config.plugins.dlnabrowser.autostart = ConfigYesNo(default=True)
 
 def isRunning():
 	ps_str = os.popen('cat /etc/mtab | grep djmount').read()
@@ -727,8 +727,8 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 	def makeMenuList(self):
 		self.readConfigFile()
 		#self.menuItemRootDir   = ConfigText(default=self.oldConfig.get('rootdir'))
-		self.menuItemRefresh   = ConfigSelection(default=self.oldConfig.get('refresh'), choices = [("5", _("5")), ("10", _("10")), ("15", _("15"))])
-		self.menuItemSlideshow = ConfigSelection(default=self.oldConfig.get('slideshow'), choices = [("5", _("5")), ("10", _("10")), ("15", _("15")), ("20", _("20"))])
+		self.menuItemRefresh   = ConfigSelection(default=self.oldConfig.get('refresh'), choices=[("5", _("5")), ("10", _("10")), ("15", _("15"))])
+		self.menuItemSlideshow = ConfigSelection(default=self.oldConfig.get('slideshow'), choices=[("5", _("5")), ("10", _("10")), ("15", _("15")), ("20", _("20"))])
 
 		#self.menuEntryRootDir   = getConfigListEntry(_("Mount Point"), self.menuItemRootDir)
 		self.menuEntryRefresh   = getConfigListEntry(_("DeviceList Refresh Interval"), self.menuItemRefresh)
@@ -1007,5 +1007,5 @@ def main(session, **kwargs):
 	session.open(DLNADeviceBrowser)
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name=_("DLNA/uPnP Browser"), description=_("This is dlna/upnp client using djmount."), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
-		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart)]
+	return [PluginDescriptor(name=_("DLNA/uPnP Browser"), description=_("This is dlna/upnp client using djmount."), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]

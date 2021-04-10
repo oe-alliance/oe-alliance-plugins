@@ -13,7 +13,7 @@ class YMC:
 		self.IP = ip
 
 	def Urlget(self, url):
-		f = urlopen(url, timeout = 1)
+		f = urlopen(url, timeout=1)
 		fr = f.read()
 		fc = f.code
 		f.close()

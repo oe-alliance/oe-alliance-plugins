@@ -17,7 +17,7 @@ from Components.FileList import FileList
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 config.plugins.dlnaserver = ConfigSubsection()
-config.plugins.dlnaserver.autostart = ConfigYesNo(default = False)
+config.plugins.dlnaserver.autostart = ConfigYesNo(default=False)
 
 runcherBin = "/etc/init.d/minidlna"
 
@@ -43,7 +43,7 @@ class SelectDirectoryWindow(Screen):
 	def __init__(self, session, currentDir):
 		Screen.__init__(self, session)
 		inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]
-		self["filelist"] = FileList(currentDir, showDirectories = True, showFiles = False, inhibitMounts=[], inhibitDirs=inhibitDirs)
+		self["filelist"] = FileList(currentDir, showDirectories=True, showFiles=False, inhibitMounts=[], inhibitDirs=inhibitDirs)
 		self["actions"]  = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"], {
 			"back"  : self.cancel,
 			"left"  : self.left,
@@ -246,9 +246,9 @@ class DLNAServer(ConfigListScreen, Screen):
 			os.system('mkdir -p /media/dlna/Musics/')
 			os.system('mkdir -p /media/dlna/Pictures/')
 		self.menuItemServerName = ConfigText(default=self.oldConfig.get('friendly_name'))
-		self.menuItemVideoDir   = ConfigDirectory(default = self.oldConfig.get('media_dirV'))
-		self.menuItemMusicDir   = ConfigDirectory(default = self.oldConfig.get('media_dirA'))
-		self.menuItemPictureDir = ConfigDirectory(default = self.oldConfig.get('media_dirP'))
+		self.menuItemVideoDir   = ConfigDirectory(default=self.oldConfig.get('media_dirV'))
+		self.menuItemMusicDir   = ConfigDirectory(default=self.oldConfig.get('media_dirA'))
+		self.menuItemPictureDir = ConfigDirectory(default=self.oldConfig.get('media_dirP'))
 
 		log_level_list = self.oldConfig.get('log_level').split('=')
 		enable_log = False
@@ -257,9 +257,9 @@ class DLNAServer(ConfigListScreen, Screen):
 			enable_log = True
 		if log_level not in ('off', 'error', 'warn', 'debug'):
 			log_level = 'error'
-		self.menuItemEnableLog = ConfigYesNo(default = enable_log)
-		self.menuItemLogLevel  = ConfigSelection(default = log_level, choices = [("off", _("off")), ("error", _("error")), ("warn", _("warn")), ("debug", _("debug"))])
-		self.menuItemLogDir    = ConfigDirectory(default = self.oldConfig.get('log_dir'))
+		self.menuItemEnableLog = ConfigYesNo(default=enable_log)
+		self.menuItemLogLevel  = ConfigSelection(default=log_level, choices=[("off", _("off")), ("error", _("error")), ("warn", _("warn")), ("debug", _("debug"))])
+		self.menuItemLogDir    = ConfigDirectory(default=self.oldConfig.get('log_dir'))
 
 		self.menuEntryServerName = getConfigListEntry(_("Server Name"), self.menuItemServerName)
 		self.menuEntryVideoDir   = getConfigListEntry(_("Video Directory"), self.menuItemVideoDir)
@@ -385,5 +385,5 @@ def autostart(reason, **kwargs):
 				os.system(cmd)
 
 def Plugins(**kwargs):
- 	return [PluginDescriptor(name="DLNA Server", description="This is dlna server using minidlna.", where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=main),
-		PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart)]
+ 	return [PluginDescriptor(name="DLNA Server", description="This is dlna server using minidlna.", where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=main),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
