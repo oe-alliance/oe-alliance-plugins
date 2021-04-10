@@ -3,7 +3,8 @@ from . import _, PluginLanguageDomain
 
 # Python
 from time import mktime, strftime, time, localtime
-import urllib2, os
+import urllib2
+import os
 
 # enigma
 from enigma import eTimer

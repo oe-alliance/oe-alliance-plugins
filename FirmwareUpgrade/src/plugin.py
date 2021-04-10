@@ -1,7 +1,8 @@
 # for localized messages
 from . import _
 
-import os, urllib
+import os
+import urllib
 from urllib import urlretrieve
 
 from Plugins.Plugin import PluginDescriptor
@@ -75,7 +76,9 @@ if os.path.exists("/proc/stb/info/vumodel"):
 			,"fp"   : ["http://archive.vuplus.com/download/fp", "fp.files", "/dev/bcm_mu;"]
 			}
 
-import os, fcntl, thread
+import os
+import fcntl
+import thread
 STATUS_READY 		= 0
 STATUS_DONE 		= 1
 STATUS_ERROR		= 2

@@ -2,7 +2,9 @@
 # for localized messages
 from . import _
 
-import os, re, urllib2
+import os
+import re
+import urllib2
 
 from enigma import eServiceReference, eDVBDB
 

@@ -37,7 +37,11 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 from enigma import gFont, ePicLoad, eListboxPythonMultiContent, RT_HALIGN_RIGHT
 
-import itvplayer, rteplayer, threeplayer, iView, iRadio
+import itvplayer
+import rteplayer
+import threeplayer
+import iView
+import iRadio
 from CommonModules import MainMenuList
 
 ##########################################################################

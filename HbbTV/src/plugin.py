@@ -13,7 +13,9 @@ from Components.VolumeControl import VolumeControl
 
 from enigma import eTimer, fbClass, eRCInput, iServiceInformation, iPlayableService
 
-import os, struct, vbcfg
+import os
+import struct
+import vbcfg
 
 from __init__ import _
 from hbbtv import HbbTVWindow

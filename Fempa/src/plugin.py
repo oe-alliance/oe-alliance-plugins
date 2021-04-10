@@ -15,7 +15,11 @@ from Components.Input import Input
 from Screens.InputBox import InputBox
 from Components.ActionMap import ActionMap
 from cookielib import CookieJar
-import urllib, urllib2, re, time, os
+import urllib
+import urllib2
+import re
+import time
+import os
 import socket
 socket.setdefaulttimeout(300) #in seconds
 

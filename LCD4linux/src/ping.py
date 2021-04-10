@@ -210,7 +210,13 @@
 
 #=============================================================================#
 import argparse
-import os, sys, socket, struct, select, time, signal
+import os
+import sys
+import socket
+import struct
+import select
+import time
+import signal
 
 __description__ = 'A pure python ICMP ping implementation using raw sockets.'
 

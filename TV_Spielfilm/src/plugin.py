@@ -38,7 +38,14 @@ from httplib import HTTPException
 from urllib import unquote_plus, urlencode
 from urllib2 import Request, urlopen, URLError, HTTPError
 from urlparse import parse_qs
-import cookielib, datetime, os, re, socket, sys, time, urllib2
+import cookielib
+import datetime
+import os
+import re
+import socket
+import sys
+import time
+import urllib2
 from os import path
 config.plugins.tvspielfilm = ConfigSubsection()
 deskWidth = getDesktop(0).size().width()

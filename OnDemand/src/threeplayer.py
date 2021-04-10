@@ -31,7 +31,9 @@ from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as 
 from datetime import date
 from time import strftime
 
-import urllib, urllib2, re
+import urllib
+import urllib2
+import re
 
 from lxml import etree
 from lxml import html

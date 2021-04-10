@@ -1,7 +1,9 @@
 # for localized messages
 from . import _
 
-import os, fcntl, thread
+import os
+import fcntl
+import thread
 
 from enigma import eTimer
 

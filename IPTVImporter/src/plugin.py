@@ -21,7 +21,10 @@
 ##########################################################################
 
 from __future__ import absolute_import, print_function
-import re, os, json, six
+import re
+import os
+import json
+import six
 from . import _
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard

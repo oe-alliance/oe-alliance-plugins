@@ -13,7 +13,8 @@ from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.config import ConfigText, ConfigSelection, ConfigSlider, getConfigListEntry
 
-import os, vbcfg
+import os
+import vbcfg
 
 from enigma import fbClass, eRCInput, eTimer, getDesktop
 

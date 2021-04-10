@@ -1,7 +1,8 @@
 # for localized messages
 from . import _
 
-import os, urllib
+import os
+import urllib
 from urllib import urlretrieve
 
 from Plugins.Plugin import PluginDescriptor
