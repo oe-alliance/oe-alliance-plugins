@@ -21,11 +21,13 @@ config.plugins.dlnaserver.autostart = ConfigYesNo(default=False)
 
 runcherBin = "/etc/init.d/minidlna"
 
+
 def isRunning():
 	ps_str = os.popen('ps | grep minidlna | grep -v grep').read()
 	if ps_str.strip() != '':
 		return True
 	return False
+
 
 class SelectDirectoryWindow(Screen):
 	skin = """
@@ -40,6 +42,7 @@ class SelectDirectoryWindow(Screen):
 			<widget render="Label" source="key_green" position="140,0" size="140,40" zPosition="5" valign="center" halign="center" backgroundColor="red" font="Regular;20" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>
 		"""
+
 	def __init__(self, session, currentDir):
 		Screen.__init__(self, session)
 		inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]
@@ -97,6 +100,7 @@ class SelectDirectoryWindow(Screen):
 			currentDir = "Invalid Location"
 		self["currentDir"].setText(currentDir)
 
+
 class DLNAServer(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="600,350" title="DLNA Server">
@@ -114,6 +118,7 @@ class DLNAServer(ConfigListScreen, Screen):
 			<widget name="information" position="0,250" size="600,100" valign="center" font="Regular;20" />
 		</screen>
 		"""
+
 	def __init__(self, session): 
                 self.session = session
 		Screen.__init__(self, session)
@@ -287,6 +292,7 @@ class DLNAServer(ConfigListScreen, Screen):
 
 	def writeConfigFile(self, serverName=None, videoDir=None, auditDir=None, pictureDir=None, logDir=None, logLevel='error'):
 		configString = ""
+
 		def configDataAppend(origin, key, value):
 			if key.strip() != '' and value.strip() != '':
 				origin += "%s=%s\n" % (key, value)
@@ -332,6 +338,7 @@ class DLNAServer(ConfigListScreen, Screen):
 				self.oldConfig[k] = v
 			except:
 				pass
+
 		def setDefault(key, default):
 			try:
 				value = self.oldConfig.get(key)
@@ -361,8 +368,10 @@ class DLNAServer(ConfigListScreen, Screen):
 		setDefault('model_number', '1')
 		print "Current Config : ", self.oldConfig
 
+
 def main(session, **kwargs):
 	session.open(DLNAServer)
+
 
 def autostart(reason, **kwargs):
 	if reason == 0:
@@ -383,6 +392,7 @@ def autostart(reason, **kwargs):
 		elif config.plugins.dlnaserver.autostart.value == False and is_running == True:
 				print "[DLNAServer] stopping ..."
 				os.system(cmd)
+
 
 def Plugins(**kwargs):
  	return [PluginDescriptor(name="DLNA Server", description="This is dlna server using minidlna.", where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=main),

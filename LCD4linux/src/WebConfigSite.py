@@ -38,6 +38,7 @@ ElementList = []
 ExeMode = False
 StatusMode = False
 
+
 def _unescape(string):
 	index = string.find("%")
 	if index == -1:
@@ -45,12 +46,14 @@ def _unescape(string):
 	else:
 		return HTMLParser().unescape(string)
 
+
 def _exec(command):
 	if six.PY2:
 		exec(command)
 	else:
 		variable = command.split(" ", 1)[0]
 		exec("global %s;%s" % (variable, command))
+
 
 def ParseCode():
 	global L1
@@ -94,10 +97,12 @@ def ParseCode():
 				Z.append(i4)
 				L4.append(Z)
 
+
 def _l(st):
 	st = six.ensure_str(st, "utf-8", "ignore")
 	st = st.replace(" [ok]>", "").encode('ascii', 'xmlcharrefreplace')
 	return six.ensure_str(st)
+
 
 def AktiveMode(Test, R):
 	Aktiv = ""
@@ -107,6 +112,7 @@ def AktiveMode(Test, R):
 		Color = "style=\"color: #FFCC00\""
 	return Aktiv, Color, R
 
+
 def AktiveElement(Test):
 	Aktiv = ""
 	Color = ""
@@ -114,6 +120,7 @@ def AktiveElement(Test):
 		Aktiv = "checked"
 		Color = "style=\"color: #FFCC00\""
 	return Aktiv, Color
+
 
 def AktiveScreen(Test):
 	Color = ""
@@ -124,10 +131,13 @@ def AktiveScreen(Test):
 	return Color
 
 ########################################################
+
+
 class LCD4linuxConfigweb(resource.Resource):
 	title = "L4L Webinterface"
 	isLeaf = True
 	RestartGUI = False
+
 	def __init__(self):
 		self.StatusTimer = eTimer()
 		if DPKG:
@@ -152,6 +162,7 @@ class LCD4linuxConfigweb(resource.Resource):
 	def render_GET(self, request):
 		L4logE("GET received", request.args)
 		return self.action(request)
+
 	def render_POST(self, request):
 		L4logE("POST received", request.args)
 		return self.action(request)

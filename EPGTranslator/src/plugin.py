@@ -153,6 +153,8 @@ else:
 # Used for skins, where time formats may contain %H:%M etc...,
 # making % replacements a bit messy
 #
+
+
 def applySkinVars(skin, dict):
     for key in list(dict.keys()):   # Py3 needs the list, Py2 is OK with it
         try:
@@ -167,6 +169,8 @@ def applySkinVars(skin, dict):
 # html.entities for Py3) is incomplete, so we'll use a complete
 # one (which is easy to create).
 #
+
+
 def transHTMLEnts(text):
     def repl(ent):              # The code for re.sub to run on matches
         res = ent.group(0)      # get the text of the match
@@ -192,6 +196,8 @@ def transHTMLEnts(text):
 # This is the only code to know about the Web call and structure of the
 # returned page.
 #
+
+
 def PART_translate(enc_text, source, dest):
 
 # The /m url produces a smaller result to the "full" (/) page.
@@ -224,6 +230,7 @@ def PART_translate(enc_text, source, dest):
         newtext = ''    # leaving failed as True
     return (failed, newtext)
 
+
 # ==================================================================
 # We need to split on ".<whitespace>" and "<whitespace>", whilst
 # remembering what the actual splitter was.
@@ -250,6 +257,8 @@ for c in ([" ", "\n", "\t"]):   # Actually .<ws>
 # failing that, at a word boundary (ws). If it can't do that it's
 # en error.
 #
+
+
 def DO_translation(text, source, dest):     # source, dest are langs
     global enc_wspace, enc_space
 
@@ -343,6 +352,7 @@ def DO_translation(text, source, dest):     # source, dest are langs
 # Also the compiled expression for the patterns.
 #
 
+
 # Patterns for matching [...] and (...)
 # Interpolated into the working patterns using %s (so look out for them -
 # do not confuse them with \s!)
@@ -390,6 +400,8 @@ sepline = "=========="
 
 # The actual code to translate the title and description.
 #
+
+
 def EPGdata_translate(title, descr, start, duration, uref):
     global sepline, begin_matcher, end_matcher
 
@@ -476,20 +488,27 @@ def EPGdata_translate(title, descr, start, duration, uref):
 # Done in one place to ensure consistency.
 # Not a class method as it is called from multiple classes
 #
+
+
 def make_uref(sv_id, sv_name):
     return ":".join([CfgPlTr.destination.getValue(), str(sv_id), str(sv_name)])
+
 
 # ==================================================================
 # We need to know where we are to find the files relative to this
 # script.
 #
 plugin_location = os.path.dirname(os.path.realpath(__file__))
+
+
 def lang_flag(lang):    # Where the language images are
     return plugin_location + '/pic/flag/' + lang + '.png'
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 # Our classes
 #
+
+
 class translatorConfig(ConfigListScreen, Screen):
 
 # ==================================================================
@@ -553,6 +572,7 @@ class translatorConfig(ConfigListScreen, Screen):
         return
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
 
 class translatorMain(Screen):
 
@@ -679,6 +699,8 @@ Red: Refresh EPG
 # ==================================================================
 # Set the current country flags as the screen displays
 #
+
+
     def onLayoutFinished(self):
         source = lang_flag(CfgPlTr.source.getValue())
         destination = lang_flag(CfgPlTr.destination.getValue())
@@ -1038,6 +1060,7 @@ Red: Refresh EPG
 # pressing the Text key.
 #
 
+
 ##################################################################
 # The original values of functions we intercept
 #
@@ -1048,6 +1071,8 @@ orig_EVB_setEvent = None
 # Code to toggle whether we are translating.
 # Bound to Text in any EventView screen.
 #
+
+
 def EPGTr_ToggleMode(self):
     self.EPGTr_translating = not self.EPGTr_translating
 
@@ -1063,6 +1088,8 @@ def EPGTr_ToggleMode(self):
 # The code to handle the text that will be displayed.
 # This is an extension to the EventViewbase.setEvent().
 #
+
+
 def My_setEvent(self, event):
     global orig_EVB_setEvent
 
@@ -1136,6 +1163,8 @@ def My_setEvent(self, event):
 # Intercepting code for EventViewBase __init__()
 # We add an ActionMap for text key binding.
 #
+
+
 def My_EVB__init__(self, *args, **kwargs):
     global orig_EVB__init__
 
@@ -1157,6 +1186,7 @@ def My_EVB__init__(self, *args, **kwargs):
 #
     self.EPGTr_translating = CfgPlTr.start_EV_trans.getValue()
 
+
 # ==================================================================
 # Start-up links (see PluginDescriptor defs)
 # This gets the current setting of functions we intercept
@@ -1166,6 +1196,8 @@ def My_EVB__init__(self, *args, **kwargs):
 # We also add our additional handlers to EventViewBase
 #
 autostart_init_done = False
+
+
 def autostart(reason, **kwargs):
     global orig_EVB__init__, orig_EVB_setEvent
     global autostart_init_done      # Otherwise we create a local one
@@ -1203,6 +1235,8 @@ def main(session, **kwargs):
     return
 
 # ==================================================================
+
+
 def Plugins(**kwargs):
     return [
      PluginDescriptor(name='EPG Translator', description='Translate your EPG', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=main),

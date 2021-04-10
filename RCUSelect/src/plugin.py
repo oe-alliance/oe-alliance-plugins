@@ -15,6 +15,7 @@ from boxbranding import getImageDistro
 import os
 import os.path
 
+
 class RCUSelect(Screen):
 	skin = """
 	<screen name="Menusimple" position="center,center" size="600,475" title="" >
@@ -165,8 +166,10 @@ class RCUSelect(Screen):
 	def cancel(self):
 		self.close()
 
+
 def startConfig(session, **kwargs):
         session.open(RCUSelect)
+
 
 def system(menuid):
 	if menuid == "system":
@@ -174,6 +177,7 @@ def system(menuid):
 	else:
 		return []
         
+
 def Plugins(**kwargs):
 	boxime = HardwareInfo().get_device_name()
 	if boxime == 'wetekplay' or boxime == 'wetekplayplus' or boxime == 'wetekplay2' or boxime == 'wetekplay2s':

@@ -41,6 +41,8 @@ from lxml import html
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 #===================================================================================
+
+
 def wgetUrl(query):
 	try:
 		target = "http://www.tv3.ie/player/assets/php/search.php"
@@ -62,6 +64,8 @@ def wgetUrl(query):
 		return ''
 		
 #===================================================================================
+
+
 class threeMainMenu(Screen):
 
 	wsize = getDesktop(0).size().width() - 200
@@ -71,7 +75,6 @@ class threeMainMenu(Screen):
 		<screen position="100,150" size=\"""" + str(wsize) + "," + str(hsize) + """\" title="3Player - Main Menu" >
 			<widget name="threeMainMenu" position="10,10" size=\"""" + str(wsize - 20) + "," + str(hsize - 20) + """\" scrollbarMode="showOnDemand" />
 		</screen>"""
-
 
 	def __init__(self, session, action, value):
 
@@ -98,7 +101,6 @@ class threeMainMenu(Screen):
 			"cancel": self.cancel
 		}, -1)
 
-
 	def go(self):
 		returnValue = self["threeMainMenu"].l.getCurrentSelection()[1]
 
@@ -117,7 +119,6 @@ class threeMainMenu(Screen):
 			elif returnValue is "search":
 				self.session.open(StreamsThumb, "search", "Search", "http://www.tv3.ie/player/assets/php/search.php")
 
-
 	def cancel(self):
 		self.removeFiles(self.imagedir)
 		self.close(None)
@@ -129,6 +130,8 @@ class threeMainMenu(Screen):
 
 #===================================================================================
 ###########################################################################	   
+
+
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/threeDefault.png"
@@ -407,6 +410,8 @@ class StreamsThumb(StreamsThumbCommon):
 			return ""
 
 #===================================================================================
+
+
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	stringValue = stringValue.replace('&#39;', '\'')
@@ -414,6 +419,8 @@ def checkUnicode(value, **kwargs):
 	return stringValue
 	
 #===================================================================================
+
+
 def main(session, **kwargs):
 	action = "start"
 	value = 0 

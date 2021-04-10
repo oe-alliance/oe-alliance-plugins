@@ -8,6 +8,7 @@ try:
 except:
 	DPKG = False
 
+
 class PixmapLcd4linux(Renderer):
 	def __init__(self):
 		Renderer.__init__(self)

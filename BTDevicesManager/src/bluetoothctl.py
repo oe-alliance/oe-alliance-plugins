@@ -27,6 +27,7 @@ import subprocess
 import sys
 import re
 
+
 class BluetoothctlError(Exception):
     """This exception is raised, when bluetoothctl fails to start."""
     pass
@@ -231,5 +232,6 @@ class Bluetoothctl:
         except BluetoothctlError, e:
             print(e)
             return None
+
 
 iBluetoothctl = Bluetoothctl()

@@ -13,6 +13,7 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 
+
 class xmlUpdate(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -118,13 +119,16 @@ class xmlUpdate(ConfigListScreen, Screen):
 		if answer:
 			self.session.open(TryQuitMainloop, 3)
 
+
 def xmlUpdateStart(menuid, **kwargs):
 	if menuid == "scan":
 		return [(_("XML update"), xmlUpdateMain, "xmlUpdate", 70)]
 	return []
 
+
 def xmlUpdateMain(session, **kwargs):
 	session.open(xmlUpdate)
+
 
 def Plugins(**kwargs):
 	pList = []

@@ -14,6 +14,7 @@ from boxbranding import getMachineBuild, getImageDistro, getBoxType
 config.plugins.remotecontrolcode = ConfigSubsection()
 config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="50af", choices=[("50af", _("Code 1")), ("51ae", _("Code 2"))])
 
+
 class RemoteControlCodeInit:
 	def __init__(self):
 		self.setSystemCode(config.plugins.remotecontrolcode.systemcode.value)
@@ -32,6 +33,7 @@ class RemoteControlCodeInit:
 			return True
 		else:
 			return False
+
 
 class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 	skin = """
@@ -105,6 +107,7 @@ class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 			self.restoreCode()
 			self.setSystemCode(config.plugins.remotecontrolcode.systemcode.value)
 
+
 class MessageBoxConfirmCode(MessageBox):
 	def __init__(self, session, text, type=MessageBox.TYPE_YESNO, timeout=-1, close_on_any_key=False, default=False, enable_input=True, msgBoxID=None):
 		MessageBox.__init__(self, session, text, type, timeout, close_on_any_key, default, enable_input, msgBoxID)
@@ -133,10 +136,13 @@ class MessageBoxConfirmCode(MessageBox):
 	def timeoutCallback(self):
 		self.close(False)
 
+
 remotecontrolcodeinit = RemoteControlCodeInit()
+
 
 def main(session, **kwargs):
 	session.open(RemoteControlCode)
+
 
 def RemoteControlSetup(menuid, **kwargs):
 	if getImageDistro() in ("teamblue"):
@@ -146,6 +152,7 @@ def RemoteControlSetup(menuid, **kwargs):
 		if menuid != "system":
 			return []
 	return [(_("Remote Control Code"), main, "remotecontrolcode", 50)]
+
 
 def Plugins(**kwargs):
 	if fileExists("/proc/stb/ir/rc/customcode"):

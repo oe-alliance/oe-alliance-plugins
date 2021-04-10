@@ -43,6 +43,7 @@ config.plugins.OpenUitzendingGemist.RADIO = ConfigBoolean(default=True)
 config.plugins.OpenUitzendingGemist.INETTV = ConfigBoolean(default=True)
 config.plugins.OpenUitzendingGemist.ListFontSize = ConfigInteger(default=18, limits=(18, 36))
 
+
 def wgetUrl(target, refer='', cookie=''):
 	req = Request(target)
 	req.add_header('User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:30.0) Gecko/20100101 Firefox/30.0')
@@ -58,6 +59,7 @@ def wgetUrl(target, refer='', cookie=''):
 	except:
 		outtxt = ''
 	return outtxt
+
 
 def resolve_http_redirect(url, depth=0):
 	if depth > 10:
@@ -75,6 +77,7 @@ def resolve_http_redirect(url, depth=0):
 	else:
 		return url
 
+
 def Csplit(data, string, number=None):
 	if string in data:
 		data = data.split(string)
@@ -82,11 +85,13 @@ def Csplit(data, string, number=None):
 			data = data[number]
 	return data
 
+
 def MPanelEntryComponent(channel, text, png):
 	res = [text]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 200, 15, 800, 100, 0, RT_HALIGN_LEFT | RT_WRAP | RT_VALIGN_TOP, text))
 	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 5, 150, 150, png))
 	return res
+
 
 class MPanelList(MenuList):
 	def __init__(self, list, selection=0, enableWrapAround=True):
@@ -99,6 +104,7 @@ class MPanelList(MenuList):
 		MenuList.postWidgetCreate(self, instance)
 		self.moveToIndex(self.selection)
 
+
 def getShortName(name, serviceref):
 	if serviceref.flags & eServiceReference.mustDescent: #Directory
 		pathName = serviceref.getPath()
@@ -108,6 +114,7 @@ def getShortName(name, serviceref):
 		return p[1].upper()
 	else:
 		return name
+
 
 class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	STATE_IDLE = 0
@@ -324,6 +331,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		refstr = self.session.nav.getCurrentlyPlayingServiceReference().toString()
 		self.session.open(MessageBox, _(" Media Info\nName = " + name + '\nService = ' + refstr), MessageBox.TYPE_INFO, timeout=20, simple=True)
 
+
 class OpenUgConfigureScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
 		self.skin = """
@@ -375,6 +383,7 @@ class OpenUgConfigureScreen(Screen, ConfigListScreen):
 			x[1].cancel()
 		self.session.open(OpenUgSetupScreen)
 		self.close()
+
 
 class OpenUgSetupScreen(Screen):
 	def __init__(self, session):
@@ -527,6 +536,7 @@ class OpenUgSetupScreen(Screen):
 		for root, dirs, files in os.walk(targetdir):
 			for name in files:
 				os.remove(os.path.join(root, name))
+
 
 class SmallScreen(Screen):
 	def __init__(self, session, cmd):
@@ -740,6 +750,7 @@ class SmallScreen(Screen):
 
 	def keyCancel(self):
 		self.close()
+
 
 class OpenUg(Screen):
 
@@ -2047,8 +2058,10 @@ class OpenUg(Screen):
 			return tmp
 		return ""
 
+
 def main(session, **kwargs):
 	session.open(OpenUgSetupScreen)
+
 
 def Plugins(**kwargs):
 

@@ -31,8 +31,10 @@ import copy
 
 from Components.config import config, ConfigSubList, ConfigSelection, ConfigElement
 
+
 def isEmpty(x):
 		return len(x) == 0
+
 
 def getVtunerList():
 	data = []
@@ -43,6 +45,7 @@ def getVtunerList():
 	data.sort()
 	return data
 
+
 VTUNER_IDX_LIST = getVtunerList()
 
 SSDP_ADDR = '239.255.255.250'
@@ -51,6 +54,7 @@ MAN = "ssdp:discover"
 MX = 2
 ST = "urn:ses-com:device:SatIPServer:1"
 MS = 'M-SEARCH * HTTP/1.1\r\nHOST: %s:%d\r\nMAN: "%s"\r\nMX: %d\r\nST: %s\r\n\r\n' % (SSDP_ADDR, SSDP_PORT, MAN, MX, ST)
+
 
 class SSDPServerDiscovery(DatagramProtocol):
 	def __init__(self, callback, iface=None):
@@ -78,6 +82,7 @@ class SSDPServerDiscovery(DatagramProtocol):
 	def stop(self):
 		pass
 
+
 SATIPSERVERDATA = {}
 
 DEVICE_ATTR = [ 
@@ -93,6 +98,7 @@ DEVICE_ATTR = [
 ]
 
 discoveryTimeoutMS = 5000
+
 
 class SATIPDiscovery:
 	def __init__(self):
@@ -299,8 +305,10 @@ class SATIPDiscovery:
 				return uuid
 		return None
 
+
 satipdiscovery = SATIPDiscovery()
 SATIP_CONF_CHANGED = False
+
 
 class SATIPTuner(Screen, ConfigListScreen):
 	skin = """
@@ -316,6 +324,7 @@ class SATIPTuner(Screen, ConfigListScreen):
 			<widget source="choices" render="Label" position="20,120" size="550,40" font="Regular;18" halign="left" valign="center" />
 		</screen>
 	"""
+
 	def __init__(self, session, vtuner_idx, vtuner_uuid, vtuner_type, current_satipConfig):
 		Screen.__init__(self, session)
 		self.setTitle(_("SAT>IP Client Tuner Setup"))
@@ -553,7 +562,10 @@ class SATIPTuner(Screen, ConfigListScreen):
 	def keyCancel(self):
 		self.close()
 
+
 SATIP_CONFFILE = "/etc/vtuner.conf"
+
+
 class SATIPClient(Screen):
 	skin = """
 		<screen position="center,center" size="590,370">
@@ -588,6 +600,7 @@ class SATIPClient(Screen):
 			<widget source="description" render="Label" position="0,340" size="590,30" font="Regular;20" halign="center" valign="center" />
 		</screen>
 	"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setTitle(_("SAT>IP Client Setup"))
@@ -775,7 +788,6 @@ class SATIPClient(Screen):
 					if len(line) == 0 or line[0] == '#':
 						continue
 
-
 					data = line.split('=')
 					if len(data) != 2:
 						continue
@@ -801,13 +813,16 @@ class SATIPClient(Screen):
 
 		return vtunerConfig
 
+
 def main(session, **kwargs):
 	session.open(SATIPClient)
+
 
 def menu(menuid, **kwargs):
 	if menuid == "scan":
 		return [(_("SAT>IP Client"), main, "sat_ip_client", 55)]
 	return []
+
 
 def Plugins(**kwargs):
 	pList = []

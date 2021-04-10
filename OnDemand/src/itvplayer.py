@@ -43,6 +43,8 @@ __plugin__ = "ITV Player: "
 __version__ = "Version 1.0.2: "
 
 #===================================================================================
+
+
 class ITVplayer(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
@@ -92,6 +94,8 @@ class ITVplayer(Screen):
 				os_remove(os_path.join(root, name))
 
 #===================================================================================
+
+
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	stringValue = stringValue.replace('&#39;', '\'')
@@ -99,6 +103,8 @@ def checkUnicode(value, **kwargs):
 	return stringValue
 
 #===================================================================================
+
+
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/itvDefault.png"

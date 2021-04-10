@@ -13,6 +13,7 @@ Created by Celia Oakley on 2013-10-31.
 
 from .base import TMDB
 
+
 class Find(TMDB):
     """
     Find functionality.
@@ -23,6 +24,7 @@ class Find(TMDB):
     URLS = {
         'info': '/{id}',
     }
+
     def __init__(self, id=0):
         super(Find, self).__init__()
         self.id = id

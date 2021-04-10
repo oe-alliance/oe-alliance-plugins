@@ -31,11 +31,13 @@ STATUS_ERROR = 2
 STATUS_PREPARED = 3
 STATUS_PROGRAMMING = 4
 
+
 class FPGAUpgradeCore():
 	status = STATUS_READY
 	errmsg = ''
 	callcount = 0
 	MAX_CALL_COUNT = 1500
+
 	def __init__(self, firmwarefile, devicefile):
 		print '[FPGAUpgrade]'
 		self.devicefile = devicefile
@@ -43,6 +45,7 @@ class FPGAUpgradeCore():
 
 	def doUpgrade(self):
 		firmware, device = None, None
+
 		def closefpga(fp, fd):
 			if fd is not None:
 				os.close(fd)
@@ -101,8 +104,10 @@ class FPGAUpgradeCore():
 		else:
 			print '[FPGAUpgrade] occur unknown error.'
 
+
 class FPGAUpgradeManager:
 	fu = None
+
 	def get_interval(self):
 		return 200
 
@@ -136,6 +141,7 @@ class FPGAUpgradeManager:
 	def get_error_msg(self, errno, errmsg):
 		return str(self.fu.errmsg)
 
+
 class UpgradeStatus(Screen):
 	skin = """
 		<screen position="center,center" size="450,100" title="FPGA Upgrade">
@@ -145,6 +151,7 @@ class UpgradeStatus(Screen):
 			<widget source="info" render="Label" position="10,70" zPosition="1" size="430,30" font="Regular;22" halign="center" valign="center" backgroundColor="black" transparent="1"/>
 		</screen>
 		"""
+
 	def __init__(self, session, parent, timeout=20):
 		Screen.__init__(self, session)
 		self.session = session
@@ -221,6 +228,7 @@ class UpgradeStatus(Screen):
 			self.session.open(TryQuitMainloop, 2)
 		if self.is_done:
 			self.close()
+
 
 class FPGAUpgrade(Screen):
 	skin = """
@@ -406,8 +414,10 @@ class FPGAUpgrade(Screen):
 		self.SOURCELIST.pageDown()
 		self.STATUS_BAR.setText(_(self.SOURCELIST.getCurrentDirectory()))
 
+
 def main(session, **kwargs):
         session.open(FPGAUpgrade)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=_("FPGA Upgrade"), description="Upgrade FPGA..", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)

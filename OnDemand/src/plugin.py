@@ -49,14 +49,17 @@ config.ondemand.ShowTuneinDefault = ConfigYesNo(default=True)
 config.ondemand.PrimaryDNS = ConfigIP(default=[0, 0, 0, 0])
 config.ondemand.SecondaryDNS = ConfigIP(default=[0, 0, 0, 0])
 		
+
 def OnDemanMenu(menuid):
 	if menuid == "mainmenu":
 		return [(_("OnDemand"), main, "ondemand", None)]
 	return []
 
+
 def main(session, **kwargs):
 	session.open(OnDemand_Screen)
                                                            
+
 def Plugins(**kwargs):
 	plist = []
 	if config.ondemand.ShowPluginBrowser.getValue():

@@ -22,8 +22,10 @@ config.plugins.VFD_odin = ConfigSubsection()
 config.plugins.VFD_odin.showClock = ConfigSelection(default="True_Switch", choices=[("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
 config.plugins.VFD_odin.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
 
+
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
+
 
 class Channelnumber:
 
@@ -134,13 +136,16 @@ class Channelnumber:
 		self.begin = time() + int(self.channelnrdelay)
 		self.endkeypress = True
 
+
 ChannelnumberInstance = None
+
 
 def leaveStandby():
 	print "[VFD-ODINM7] Leave Standby"
 
 	if config.plugins.VFD_odin.showClock.value == 'Off':
 		vfd_write("....")
+
 
 def standbyCounterChanged(configElement):
 	print "[VFD-ODINM7] In Standby"
@@ -151,11 +156,13 @@ def standbyCounterChanged(configElement):
 	if config.plugins.VFD_odin.showClock.value == 'Off':
 		vfd_write("....")
 
+
 def initVFD():
 	print "[VFD-ODINM7] initVFD"
 
 	if config.plugins.VFD_odin.showClock.value == 'Off':
 		vfd_write("....")
+
 
 class VFD_OdinM7Setup(ConfigListScreen, Screen):
 	def __init__(self, session, args=None):
@@ -227,6 +234,7 @@ class VFD_OdinM7Setup(ConfigListScreen, Screen):
 			x[1].cancel()
 		self.close()
 
+
 class VFD_Odin:
 	def __init__(self, session):
 		print "[VFD-ODINM7] initializing"
@@ -249,17 +257,21 @@ class VFD_Odin:
 		print "[VFD-ODINM7] aborting"
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
+
 def main(menuid):
 	if menuid != "system":
 		return []
 	return [(_("LED Display Setup"), startVFD, "VFD_M7", None)]
 
+
 def startVFD(session, **kwargs):
 	session.open(VFD_OdinM7Setup)
+
 
 odinm7Vfd = None
 gReason = -1
 mySession = None
+
 
 def controlodinm7Vfd():
 	global odinm7Vfd
@@ -274,6 +286,7 @@ def controlodinm7Vfd():
 
 		odinm7Vfd = None
 
+
 def sessionstart(reason, **kwargs):
 	print "[VFD-ODINM7] sessionstart"
 	global odinm7Vfd
@@ -285,6 +298,7 @@ def sessionstart(reason, **kwargs):
 	else:
 		gReason = reason
 	controlodinm7Vfd()
+
 
 def Plugins(**kwargs):
  	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),

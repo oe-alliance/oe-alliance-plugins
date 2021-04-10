@@ -44,6 +44,8 @@ from datetime import date, timedelta
 from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 #=========================================================================================
+
+
 def wgetUrl(target):
 	std_headers = {
 		'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
@@ -60,6 +62,8 @@ def wgetUrl(target):
 	return outtxt
 
 #=========================================================================================
+
+
 class OpenUgSetupScreen(Screen):
 	def __init__(self, session, action, value):
 		self.skin = """
@@ -141,6 +145,8 @@ class OpenUgSetupScreen(Screen):
 				os.remove(os.path.join(root, name))
 
 #=========================================================================================
+
+
 class DaysBackScreen(Screen):
 	def __init__(self, session):
 		self.skin = """
@@ -185,6 +191,8 @@ class DaysBackScreen(Screen):
 		self.close()
 
 ###########################################################################	   
+
+
 class OpenUg(StreamsThumbCommon):
 	UG_PROGDATE = 0
 	UG_PROGNAME = 1
@@ -691,6 +699,8 @@ class OpenUg(StreamsThumbCommon):
 						state = 0
 
 #=========================================================================================
+
+
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	stringValue = stringValue.replace('&#39;', '\'')
@@ -698,5 +708,7 @@ def checkUnicode(value, **kwargs):
 	return stringValue
 	
 #=========================================================================================
+
+
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="Open uitzending gemist", description=_("Watch uitzending gemist"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)]

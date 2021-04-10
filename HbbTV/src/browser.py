@@ -24,6 +24,7 @@ from vbipc import VBController
 
 strIsEmpty = lambda x: x is None or len(x) == 0
 
+
 class BrowserSetting:
 	def __init__(self):
 		self._settingFileName = '%s/home/setting.ini' % vbcfg.APPROOT
@@ -76,6 +77,7 @@ class BrowserSetting:
 			'keymap': self._keymap,
 		}
 
+
 class BrowserPositionSetting:
 	def __init__(self):
 		self._positionFileName = '%s/home/position.cfg' % vbcfg.APPROOT
@@ -122,6 +124,7 @@ class BrowserPositionSetting:
 	def getPosition(self):
 		return (self._left, self._width, self._top, self._height)
 
+
 class BrowserPositionWindow(Screen, ConfigListScreen):
 	skin = """
 		<screen position="0,0" size="%d,%d" title="Browser Position Setup" backgroundColor="#27d8dee2" >
@@ -134,6 +137,7 @@ class BrowserPositionWindow(Screen, ConfigListScreen):
 			<widget name="config" zPosition="2" position="%d,%d" size="500,200" scrollbarMode="showOnDemand" foregroundColor="#1c1c1c" transparent="1" />
 		</screen>
 		"""
+
 	def __init__(self, session):
 		w, h = session.desktop.size().width(), session.desktop.size().height()
 		cw, ch = w / 2, h / 2
@@ -253,6 +257,7 @@ class BrowserPreferenceWindow(ConfigListScreen, Screen):
 			<widget source="key_green" render="Label" position="150,310" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" foregroundColor="#ffffff" transparent="1" />
 		</screen>
 		"""
+
 	def __init__(self, session, currentUrl):
 		self.session = session
 		Screen.__init__(self, session)
@@ -365,6 +370,7 @@ class BrowserPreferenceWindow(ConfigListScreen, Screen):
 		self["config"].list = self.menulist
 		self["config"].l.setList(self.menulist)
 
+
 class BookmarkEditWindow(ConfigListScreen, Screen):
 	CATEGORY, BOOKMARK = 0, 1
 	skin = """
@@ -383,6 +389,7 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 
 		</screen>
 		"""
+
 	def __init__(self, session, _mode, _type, _data, _bm):
 		self.mMode = _mode
 		self.mType = _type
@@ -528,6 +535,7 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 		self["config"].list = self.menulist
 		self["config"].l.setList(self.menulist)
 
+
 class BrowserBookmarkWindow(Screen):
 	skin = """
 		<screen name="BrowserBookmarkWindow" position="center,120" size="600,400" title="Bookmark" >
@@ -628,6 +636,7 @@ class BrowserBookmarkWindow(Screen):
 			msg = _("Invalid URL. Please check again!!")
 			self.mSession.open(MessageBox, msg, MessageBox.TYPE_INFO)
 			return
+
 		def cbSetStartpage(ret=None):
 			if ret is None:
 				return
@@ -712,6 +721,7 @@ class BrowserBookmarkWindow(Screen):
 	def keyCancel(self):
 		self.close()
 
+
 class BrowserHelpWindow(Screen, HelpableScreen):
 	MODE_GLOBAL, MODE_KEYBOARD, MODE_MOUSE = 1, 2, 3
 	skin = """
@@ -727,6 +737,7 @@ class BrowserHelpWindow(Screen, HelpableScreen):
 			<widget source="key_blue" render="Label" position="450,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" foregroundColor="#ffffff" transparent="1" />
 		</screen>
 		"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
@@ -826,6 +837,7 @@ class BrowserHelpWindow(Screen, HelpableScreen):
 	def keyBlue(self):
 		self.setHelpModeActions(self.MODE_KEYBOARD)
 
+
 class Browser(Screen):
 	MENU_ITEM_WIDTH = 150
 	MENU_ITEM_HEIGHT = 30
@@ -855,6 +867,7 @@ class Browser(Screen):
 
 	MENULIST_ITEMS = []
 	COMMAND_MAP = {}
+
 	def __init__(self, session, url=None, is_webapp=False):
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["DirectionActions", "MenuActions", "OkCancelActions"], {

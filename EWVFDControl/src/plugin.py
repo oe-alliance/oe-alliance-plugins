@@ -22,8 +22,10 @@ config.plugins.vfd_ew = ConfigSubsection()
 config.plugins.vfd_ew.showClock = ConfigSelection(default="True_Switch", choices=[("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
 config.plugins.vfd_ew.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
 
+
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
+
 
 class Channelnumber:
 
@@ -134,13 +136,16 @@ class Channelnumber:
 		self.begin = time() + int(self.channelnrdelay)
 		self.endkeypress = True
 
+
 ChannelnumberInstance = None
+
 
 def leaveStandby():
 	print "[VFD-EW] Leave Standby"
 
 	if config.plugins.vfd_ew.showClock.value == 'Off':
 		vfd_write("....")
+
 
 def standbyCounterChanged(configElement):
 	print "[VFD-EW] In Standby"
@@ -151,11 +156,13 @@ def standbyCounterChanged(configElement):
 	if config.plugins.vfd_ew.showClock.value == 'Off':
 		vfd_write("....")
 
+
 def initVFD():
 	print "[VFD-EW] initVFD"
 
 	if config.plugins.vfd_ew.showClock.value == 'Off':
 		vfd_write("....")
+
 
 class vfd_ewSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args=None):
@@ -232,6 +239,7 @@ class vfd_ewSetup(ConfigListScreen, Screen):
 		self.createSetup()
 		initVFD()
 
+
 class vfd_ew:
 	def __init__(self, session):
 		print "[VFD-EW] initializing"
@@ -254,17 +262,21 @@ class vfd_ew:
 		print "[VFD-EW] aborting"
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
+
 def main(menuid):
 	if menuid != "system":
 		return []
 	return [(_("LED Display Setup"), startVFD, "vfd_ew", None)]
 
+
 def startVFD(session, **kwargs):
 	session.open(vfd_ewSetup)
+
 
 ewVfd = None
 gReason = -1
 mySession = None
+
 
 def controlewVfd():
 	global ewVfd
@@ -279,6 +291,7 @@ def controlewVfd():
 
 		ewVfd = None
 
+
 def sessionstart(reason, **kwargs):
 	print "[VFD-EW] sessionstart"
 	global ewVfd
@@ -290,6 +303,7 @@ def sessionstart(reason, **kwargs):
 	else:
 		gReason = reason
 	controlewVfd()
+
 
 def Plugins(**kwargs):
 		if fileExists("/proc/stb/fp/version"):

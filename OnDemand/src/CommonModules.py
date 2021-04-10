@@ -46,12 +46,14 @@ import sys
 
 socket.setdefaulttimeout(300) #in seconds
 
+
 class Rect:
 	def __init__(self, x, y, width, height):
 		self.x = x
 		self.y = y
 		self.w = width
 		self.h = height
+
 
 class MainMenuList(HTMLComponent, GUIComponent):
 	def __init__(self):
@@ -139,6 +141,7 @@ class MainMenuList(HTMLComponent, GUIComponent):
 		self.totalitems = len(list)
 		self.l.setList(list)
 		self.selectionChanged()
+
 
 class EpisodeList(HTMLComponent, GUIComponent):
 	def __init__(self, iconDefault, showIcon):
@@ -323,6 +326,8 @@ class EpisodeList(HTMLComponent, GUIComponent):
 			return ''
 
 ###########################################################################
+
+
 class StreamsThumbCommon(Screen):
 
 	TIMER_CMD_START = 0
@@ -416,6 +421,8 @@ class StreamsThumbCommon(Screen):
 		self.session.openWithCallback(self.close, MessageBox, _(error), MessageBox.TYPE_ERROR, timeout=5, simple=True)
 
 ###########################################################################
+
+
 class MyHTTPConnection(HTTPConnection):
 	def connect(self):
 		try:
@@ -446,11 +453,14 @@ class MyHTTPConnection(HTTPConnection):
 			except (Exception) as exception:
 				print "MyHTTPConnection: Failed to Connect to: ", secondaryDNS, " , error: ", exception
 
+
 class MyHTTPHandler(urllib2.HTTPHandler):
 	def http_open(self, req):
 		return self.do_open(MyHTTPConnection, req)
 
 ###########################################################################	   
+
+
 class MoviePlayer(MP_parent):
 	def __init__(self, session, service, slist=None, lastservice=None):
 		MP_parent.__init__(self, session, service, slist, lastservice)
@@ -466,6 +476,8 @@ class MoviePlayer(MP_parent):
 		self.close()
 
 ###########################################################################	   
+
+
 class RTMP:
 	def __init__(self, rtmp, tcUrl=None, auth=None, app=None, playPath=None, swfUrl=None, swfVfy=None, pageUrl=None, live=None, socks=None, port=None):
 

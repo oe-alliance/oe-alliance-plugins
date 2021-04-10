@@ -35,6 +35,7 @@ class AboutBoxBranding(Screen):
 	def pageDown(self):
 		self["AboutScrollLabel"].pageDown()
 
+
 def getBoxbranding():
 	import boxbranding
 	bblist = []
@@ -50,13 +51,16 @@ def getBoxbranding():
 			prlist.append(tuple([m, v]))
 	return (''.join(bblist), prlist)
 
+
 def main(session, **kwargs):
 	session.open(AboutBoxBranding)
+
 
 def start(menuid):
 	if menuid == "information":
 		return [(_("Boxbranding"), main, "About Boxbranding", 1000)]
 	return []
+
 
 def Plugins(**kwargs):
 	prlist = []

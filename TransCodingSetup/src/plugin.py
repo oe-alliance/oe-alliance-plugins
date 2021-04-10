@@ -18,6 +18,7 @@ from enigma import eTimer
 from boxbranding import getBoxType, getMachineBuild
 from os import system as os_system, path as os_path, listdir as os_listdir
 
+
 def getProcValue(procPath):
 #	print "[TranscodingSetup] get %s from %s" % (curValue, procPath)
 	fd = open(procPath, 'r')
@@ -25,11 +26,13 @@ def getProcValue(procPath):
 	fd.close()
 	return curValue
 
+
 def setProcValue(procPath, value):
 	print "[TranscodingSetup] set %s to %s" % (procPath, value)
 	fd = open(procPath, 'w')
 	fd.write(value)
 	fd.close()
+
 
 def getProcPath(encoder, configName):
 	_configName = {
@@ -48,15 +51,18 @@ def getProcPath(encoder, configName):
 	}.get(configName)
 	return "/proc/stb/encoder/%s/%s" % (encoder, _configName)
 
+
 def checkSupportAdvanced():
 	if fileExists(getProcPath(0, "aspectratio")):
 		return True
 	return False
 
+
 config.plugins.transcodingsetup = ConfigSubsection()
 config.plugins.transcodingsetup.transcoding = ConfigSelection(default="enable", choices=[("enable", _("enable")), ("disable", _("disable"))])
 config.plugins.transcodingsetup.port = ConfigInteger(default=8002, limits=(8002, 9999))
 config.plugins.transcodingsetup.encoder = ConfigSubList()
+
 
 def createTransCodingConfig(encoder):
 	if fileExists(getProcPath(encoder, "bitrate")):
@@ -118,6 +124,7 @@ def createTransCodingConfig(encoder):
 			choice = ConfigSelection(default="baseline", choices=[("baseline", _("baseline")), ("simple", _("simple")), ("main", _("main")), ("high", _("high")), ("advanced simple", _("advancedsimple"))])
 			config.plugins.transcodingsetup.encoder[int(encoder)].profile = choice
 
+
 # check encoders
 encoders = []
 encoderPath = "/proc/stb/encoder"
@@ -148,6 +155,8 @@ SystemInfo["AdvancedTranscoding"] = checkSupportAdvanced()
 SystemInfo["MultipleEncoders"] = len(encoders) > 1
 
 transcodingsetupinit = None
+
+
 class TranscodingSetupInit:
 	def __init__(self):
 		self.pluginsetup = None
@@ -326,6 +335,7 @@ class TranscodingSetupInit:
 	def showMessage(self, msg, msgType):
 		if self.pluginsetup:
 			self.pluginsetup.showMessage(msg, msgType)
+
 
 class TranscodingSetup(Screen, ConfigListScreen):
 	skin = """
@@ -536,6 +546,7 @@ class TranscodingSetup(Screen, ConfigListScreen):
 		for x in self.onChangedEntry:
 			x()
 		self.createSetup()
+
 	def getCurrentEntry(self):
 		if self["config"].getCurrent():
 			return self["config"].getCurrent()[0]
@@ -548,12 +559,15 @@ class TranscodingSetup(Screen, ConfigListScreen):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 
+
 def main(session, **kwargs):
 	session.open(TranscodingSetup)
+
 
 def startSession(reason):
 	global transcodingsetupinit
 	transcodingsetupinit = TranscodingSetupInit()
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(

@@ -240,6 +240,7 @@ ICMP_MAX_RECV = 2048 # Max size of incoming buffer
 
 MAX_SLEEP = 1000
 
+
 class MyStats:
     thisIP = "0.0.0.0"
     pktsSent = 0
@@ -250,9 +251,12 @@ class MyStats:
     avrgTime = 0
     fracLoss = 1.0
 
+
 myStats = MyStats # NOT Used globally anymore.
 
 #=============================================================================#
+
+
 def checksum(source_string):
     """
     A port of the functionality of in_cksum() from ping.c
@@ -300,6 +304,8 @@ def checksum(source_string):
     return answer
 
 #=============================================================================#
+
+
 def do_one(myStats, destIP, hostname, timeout, mySeqNumber, packet_size, quiet=False):
     """
     Returns either the delay (in ms) or None on timeout.
@@ -344,6 +350,8 @@ def do_one(myStats, destIP, hostname, timeout, mySeqNumber, packet_size, quiet=F
     return delay
 
 #=============================================================================#
+
+
 def send_one_ping(mySocket, destIP, myID, mySeqNumber, packet_size):
     """
     Send one ping to the given >destIP<.
@@ -374,7 +382,6 @@ def send_one_ping(mySocket, destIP, myID, mySeqNumber, packet_size):
         #data = bytes(padBytes)
         data = bytearray(padBytes)
 
-
     # Calculate the checksum on the data and the dummy header.
     myChecksum = checksum(header + data) # Checksum is in network order
 
@@ -397,6 +404,8 @@ def send_one_ping(mySocket, destIP, myID, mySeqNumber, packet_size):
     return sendTime
 
 #=============================================================================#
+
+
 def receive_one_ping(mySocket, myID, timeout):
     """
     Receive the ping from the socket. Timeout = in ms
@@ -437,6 +446,8 @@ def receive_one_ping(mySocket, myID, timeout):
             return None, 0, 0, 0, 0
 
 #=============================================================================#
+
+
 def dump_stats(myStats):
     """
     Show stats when pings are done
@@ -459,6 +470,8 @@ def dump_stats(myStats):
     return
 
 #=============================================================================#
+
+
 def signal_handler(signum, frame):
     """
     Handle exit via signals
@@ -468,6 +481,8 @@ def signal_handler(signum, frame):
     sys.exit(0)
 
 #=============================================================================#
+
+
 def verbose_ping(hostname, timeout=WAIT_TIMEOUT, count=NUM_PACKETS,
                  packet_size=PACKET_SIZE, path_finder=False):
     """
@@ -508,6 +523,8 @@ def verbose_ping(hostname, timeout=WAIT_TIMEOUT, count=NUM_PACKETS,
     dump_stats(myStats)
 
 #=============================================================================#
+
+
 def quiet_ping(hostname, timeout=WAIT_TIMEOUT, count=NUM_PACKETS,
                packet_size=PACKET_SIZE, path_finder=False):
     """
@@ -553,6 +570,8 @@ def quiet_ping(hostname, timeout=WAIT_TIMEOUT, count=NUM_PACKETS,
     return myStats.maxTime, myStats.minTime, myStats.avrgTime, myStats.fracLoss
 
 #=============================================================================#
+
+
 def main():
 
     parser = argparse.ArgumentParser(description=__description__)
@@ -576,6 +595,7 @@ def main():
 
     ping(args.destination, timeout=args.timeout * 1000, count=args.count,
          packet_size=args.packet_size)
+
 
 if __name__ == '__main__':
     main()

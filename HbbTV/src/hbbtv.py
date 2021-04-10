@@ -8,11 +8,13 @@ import vbcfg
 from __init__ import _
 from vbipc import VBController
 
+
 class HbbTVWindow(Screen):
 	skin = """
 		<screen name="HbbTVWindow" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder" title="HbbTV Plugin">
 		</screen>
 		"""
+
 	def __init__(self, session, url=None, app_info=None):
 		vbcfg.g_position = vbcfg.getPosition()
 		fbClass.getInstance().lock()

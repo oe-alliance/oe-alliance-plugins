@@ -29,13 +29,18 @@ config.plugins.ChannelsImporter.setupFallback = ConfigYesNo(default=False)
 config.plugins.ChannelsImporter.scheduleRepeatInterval = ConfigSelection(default="daily", choices=[("2", _("Every 2 minutes (for testing)")), ("5", _("Every 5 minutes (for testing)")), ("60", _("Every hour")), ("120", _("Every 2 hours")), ("180", _("Every 3 hours")), ("360", _("Every 6 hours")), ("720", _("Every 12 hours")), ("daily", _("Daily"))])
 config.plugins.ChannelsImporter.scheduletime = ConfigClock(default=0) # 1:00
 config.plugins.ChannelsImporter.errorMessages = ConfigYesNo(False)
+
+
 def scheduleRepeatIntervalChanged(configElement):
 	if config.plugins.ChannelsImporter.enableSchedule.value and config.plugins.ChannelsImporter.scheduleRepeatInterval.value == "daily":
 		SystemInfo["ChannelsImporterRepeatDaily"] = True
 	else:
 		SystemInfo["ChannelsImporterRepeatDaily"] = False
+
+
 config.plugins.ChannelsImporter.enableSchedule.addNotifier(scheduleRepeatIntervalChanged, immediate_feedback=True, initial_call=True)
 config.plugins.ChannelsImporter.scheduleRepeatInterval.addNotifier(scheduleRepeatIntervalChanged, immediate_feedback=True, initial_call=True)
+
 
 class ChannelsImporterScreen(Setup):
 	skin = """
@@ -107,17 +112,21 @@ class ChannelsImporterScreen(Setup):
 		if answer:
 			self.close()
 
+
 def startimport(session, **kwargs):
 	session.open(ChannelsImporter)
+
 
 def ChannelsImporterStart(menuid, **kwargs):
 	if menuid == "scan":
 		return [(_("Channels importer"), ChannelsImporterMain, "ChannelsImporterScreen", 80)]
 	return []
 
+
 def ChannelsImporterMain(session, **kwargs):
 	menu_path = _("Main menu") + ' / ' + _("Setup") + ' / ' + _('Service searching')
 	session.open(ChannelsImporterScreen, 'channelsimporter', 'SystemPlugins/ChannelsImporter', menu_path, PluginLanguageDomain)
+
 
 def Plugins(**kwargs):
 	pList = []

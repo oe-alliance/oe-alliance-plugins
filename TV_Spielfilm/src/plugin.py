@@ -106,6 +106,7 @@ config.plugins.tvspielfilm.autotimer = ConfigSelection(default='yes', choices=[(
 config.plugins.tvspielfilm.autoupdate = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 config.plugins.tvspielfilm.paypal = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 
+
 def applySkinVars(skin, dict):
     for key in dict.keys():
         try:

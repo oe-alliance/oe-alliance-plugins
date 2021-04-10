@@ -44,6 +44,7 @@ from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHand
 
 ########### Retrieve the webpage data ####################################
 
+
 def wgetUrl(target):
 	try:
 		req = urllib2.Request(target)
@@ -58,6 +59,7 @@ def wgetUrl(target):
 
 ##########################################################################
 
+
 def calcDuration(miliseconds):
 	try:
 		mins = int((miliseconds / (1000 * 60)))
@@ -68,6 +70,8 @@ def calcDuration(miliseconds):
 		return ''
 
 ##########################################################################
+
+
 class RTEMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
 	hsize = getDesktop(0).size().height() - 300
@@ -129,6 +133,7 @@ class RTEMenu(Screen):
 				os_remove(os_path.join(root, name))
 
 ###########################################################################
+
 
 class StreamsMenu(Screen):
 	wsize = getDesktop(0).size().width() - 200
@@ -199,6 +204,7 @@ class StreamsMenu(Screen):
 
 ###########################################################################
 
+
 def findPlayUrl(showID, **kwargs):
 	# Take the accepted showID and append it onto the url below.
 	url = 'http://feeds.rasset.ie/rteavgen/player/playlist?type=iptv1&showId=' + showID
@@ -219,6 +225,7 @@ def findPlayUrl(showID, **kwargs):
 
 ###########################################################################
 
+
 def checkUnicode(value, **kwargs):
 	stringValue = value 
 	stringValue = stringValue.replace('&#39;', '\'')
@@ -226,6 +233,7 @@ def checkUnicode(value, **kwargs):
 	return stringValue
 
 ###########################################################################
+
 
 def main(session, **kwargs):
 	action = "start"
@@ -235,6 +243,8 @@ def main(session, **kwargs):
 ###########################################################################
 
 ###########################################################################	   
+
+
 class StreamsThumb(StreamsThumbCommon):
 	def __init__(self, session, action, value, url):
 		self.defaultImg = "Extensions/OnDemand/icons/rteDefault.png"
@@ -317,7 +327,6 @@ class StreamsThumb(StreamsThumbCommon):
 		except (Exception) as exception:
 			print 'canBeMultiple: getShows: Error getting show numbers: ', exception
 			showIDs.append(showID)
-
 
 		# If zero we only have 1 show in this category
 		if len(showIDs) == 0:

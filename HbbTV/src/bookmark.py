@@ -1,5 +1,6 @@
 import vbcfg
 
+
 class BookmarkData:
 	def __init__(self, _id, _title, _url, _parent, _type):
 		self.mId = _id
@@ -7,8 +8,10 @@ class BookmarkData:
 		self.mUrl = _url
 		self.mParent = _parent
 		self.mType = _type
+
 	def dump(self, _intent='  '):
 		print "%s-> %d, %s, %s, %d, %d" % (_intent, self.mId, self.mTitle, self.mUrl, self.mParent, self.mType)
+
 
 class CategoryData:
 	def __init__(self, _id, _name):
@@ -27,7 +30,10 @@ class CategoryData:
 		for key in self.mBookmarks.iterkeys():
 			self.mBookmarks[key].dump('      ')
 
+
 import ConfigParser
+
+
 class SimpleConfigParser:
 	def __init__(self):
 		self.mFileName = None
@@ -108,8 +114,10 @@ class SimpleConfigParser:
 		self._read()
 		return True
 
+
 class BookmarkManager(SimpleConfigParser):
 	_instance = None
+
 	def __new__(cls, *args, **kwargs):
 		if not cls._instance:
 			cls._instance = super(Singleton, cls).__new__(cls, *args, **kwargs)

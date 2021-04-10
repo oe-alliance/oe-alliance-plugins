@@ -30,8 +30,10 @@ config.plugins.VFD_spark.timeMode = ConfigSelection(default="24h", choices=[("12
 config.plugins.VFD_spark.redLed = ConfigSelection(default="0", choices=[("0", _("Off")), ("1", _("Standby only")), ("2", _("Record only"))])
 config.plugins.VFD_spark.greenLed = ConfigSelection(default="0", choices=[("0", _("Off")), ("1", _("Standby only"))])
 
+
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
+
 
 class Channelnumber:
 
@@ -181,13 +183,16 @@ class Channelnumber:
 			f.write("%08x" % pattern)
 			f.close()
 
+
 ChannelnumberInstance = None
+
 
 def leaveStandby():
 	print "[VFD-SPARK] Leave Standby"
 
 	if config.plugins.VFD_spark.showClock.value == 'Off':
 		vfd_write("....")
+
 
 def standbyCounterChanged(configElement):
 	print "[VFD-SPARK] In Standby"
@@ -198,11 +203,13 @@ def standbyCounterChanged(configElement):
 	if config.plugins.VFD_spark.showClock.value == 'Off':
 		vfd_write("....")
 
+
 def initVFD():
 	print "[VFD-SPARK] initVFD"
 
 	if config.plugins.VFD_spark.showClock.value == 'Off':
 		vfd_write("....")
+
 
 class VFD_SPARKSetup(ConfigListScreen, Screen):
 	def __init__(self, session, args=None):
@@ -281,6 +288,7 @@ class VFD_SPARKSetup(ConfigListScreen, Screen):
 		self.createSetup()
 		initVFD()
 
+
 class VFD_SPARK:
 	def __init__(self, session):
 		print "[VFD-SPARK] initializing"
@@ -303,8 +311,10 @@ class VFD_SPARK:
 		print "[VFD-SPARK] aborting"
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
+
 baseSessionGlobals__init__ = None
 SessionGlobals_instance = None
+
 
 def newSessionGlobals__init__(self, session):
 	baseSessionGlobals__init__(self, session)
@@ -366,12 +376,15 @@ def main(menuid):
 		return []
 	return [(_("LED Display Setup"), startVFD, "VFD_SPARK", None)]
 
+
 def startVFD(session, **kwargs):
 	session.open(VFD_SPARKSetup)
+
 
 sparkVfd = None
 gReason = -1
 mySession = None
+
 
 def controlsparkVfd():
 	global sparkVfd
@@ -385,6 +398,7 @@ def controlsparkVfd():
 		print "[VFD-SPARK] Stopping !!"
 
 		sparkVfd = None
+
 
 def sessionstart(reason, **kwargs):
 	print "[VFD-SPARK] sessionstart"
@@ -401,6 +415,7 @@ def sessionstart(reason, **kwargs):
 	if baseSessionGlobals__init__ is None:
 		baseSessionGlobals__init__ = SessionGlobals.__init__
 		SessionGlobals.__init__ = newSessionGlobals__init__
+
 
 def Plugins(**kwargs):
 		if getBoxType() in ('amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'amikomini'):

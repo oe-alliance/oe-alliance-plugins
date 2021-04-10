@@ -8,6 +8,7 @@ except:
 from six.moves.urllib.request import urlopen
 from .plugin import L4logE
 
+
 class YMC:
 	def __init__(self, ip):
 		self.IP = ip

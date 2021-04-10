@@ -17,14 +17,18 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from enigma import eTimer
 
 debug_msg_on = False
+
+
 def printDebugMsg(msg):
 	global debug_msg_on
 	if debug_msg_on:
 		print "[Wireless Access Point] ", msg
 
+
 class fixedValue:
 	def __init__(self, value=""):
 		self.value = value
+
 
 ORIG_HOSTAPD_CONF = resolveFilename(SCOPE_PLUGINS, "SystemPlugins/WirelessAccessPoint/hostapd.conf.orig")
 HOSTAPD_CONF = "/etc/hostapd.conf"
@@ -67,6 +71,7 @@ apModeConfig.address = ConfigIP(default=[0, 0, 0, 0])
 apModeConfig.netmask = ConfigIP(default=[255, 0, 0, 0])
 apModeConfig.gateway = ConfigIP(default=[0, 0, 0, 0])
 apModeConfig.nameserver = ConfigIP(default=[0, 0, 0, 0])
+
 
 class WirelessAccessPoint(Screen, ConfigListScreen):
 	skin = """
@@ -851,8 +856,10 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 		new_conf.close()
 		return 0
 
+
 def main(session, **kwargs):
 	session.open(WirelessAccessPoint)
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name=_("Wireless Access Point"), description=_("Using a Wireless module as access point."), where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=True, fnc=main)]

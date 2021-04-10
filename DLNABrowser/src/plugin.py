@@ -97,6 +97,7 @@ class DLNAFileList(FileList):
 			pass
 		return 'unknown'
 
+
 class DLNAFileBrowser(Screen):
 	skin = """
 		<screen name="DLNAFileBrowser" position="center,center" size="600,350" title="File Browser">
@@ -130,6 +131,7 @@ class DLNAFileBrowser(Screen):
 		</screen>
 		-->
 		"""
+
 	def __init__(self, session, directory):
 		self.session = session
 		Screen.__init__(self, session)
@@ -316,6 +318,7 @@ class DLNAFileBrowser(Screen):
 		if idx > 0:
 			self["filelist"].moveToIndex(idx)
 
+
 class DLNAStreamPlayer(Screen, InfoBarNotifications):
 	skin = """
 		<screen name="DLNAStreamPlayer" flags="wfNoBorder" position="center,620" size="455,53" title="DLNAStreamPlayer" backgroundColor="transparent">
@@ -444,6 +447,7 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 			self.setSeekState(self.PLAYER_PAUSED)
 		elif self.state == self.PLAYER_PAUSED:
 			self.setSeekState(self.PLAYER_PLAYING)
+
 
 class DLNAImageViewer(Screen):
 	s, w, h = 30, getDesktop(0).size().width(), getDesktop(0).size().height()
@@ -604,6 +608,7 @@ class DLNAImageViewer(Screen):
 		self.displayNow = True
 		self.showPicture()
 
+
 class TaskManager:
 	def __init__(self):
 		self.taskIdx = 0
@@ -669,11 +674,13 @@ class TaskManager:
 config.plugins.dlnabrowser = ConfigSubsection()
 config.plugins.dlnabrowser.autostart = ConfigYesNo(default=True)
 
+
 def isRunning():
 	ps_str = os.popen('cat /etc/mtab | grep djmount').read()
 	if ps_str.strip() != '':
 		return True
 	return False
+
 
 class DLNAClientConfig(ConfigListScreen, Screen):
 	skin = """
@@ -691,6 +698,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 			<widget name="config" position="0,50" size="600,200" scrollbarMode="showOnDemand" />
 		</screen>
 		"""
+
 	def __init__(self, session):
                 self.session = session
 		Screen.__init__(self, session)
@@ -807,6 +815,7 @@ class DLNADeviceBrowser(Screen):
 			<widget name="devicelist" position="0,50" size="600,300" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 	        </screen>
 		"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
@@ -984,6 +993,7 @@ class DLNADeviceBrowser(Screen):
 			items.append((d, d))
 		return items
 
+
 def autostart(reason, **kwargs):
 	if reason == 0:
 		if isRunning():
@@ -1003,8 +1013,11 @@ def autostart(reason, **kwargs):
 		elif config.plugins.dlnabrowser.autostart.value == False and is_running == True:
 				print "[DLNABrowser] stopping ..."
 				os.system(cmd)
+
+
 def main(session, **kwargs):
 	session.open(DLNADeviceBrowser)
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name=_("DLNA/uPnP Browser"), description=_("This is dlna/upnp client using djmount."), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),

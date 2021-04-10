@@ -43,6 +43,7 @@ from datetime import datetime, timedelta
 
 brandoem = getBrandOEM()
 
+
 class TaskManager:
 	def __init__(self):
 		self.taskIdx = 0
@@ -104,6 +105,7 @@ class TaskManager:
 		self.taskIdx += 1
 		return True
 
+
 config.btdevicesmanager = ConfigSubsection()
 config.btdevicesmanager.autostart = ConfigYesNo(default=False)
 config.btdevicesmanager.audioconnect = ConfigYesNo(default=False)
@@ -111,8 +113,10 @@ config.btdevicesmanager.audioaddress = ConfigText(default="", fixed_size=False)
 
 commandconnect = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/BTDevicesManager/BTAudioConnect")
 
+
 class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 	__module__ = __name__
+
 	def __init__(self, session, args=0):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Bluetooth Devices Manager Setup"))
@@ -162,6 +166,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 
 		self.close()
 		
+
 class BluetoothDevicesManager(Screen):
 	skin = """
 		<screen name="BluetoothDevicesManager" position="center,center" size="600,450" >
@@ -179,6 +184,7 @@ class BluetoothDevicesManager(Screen):
 			<widget name="ConnStatus" position="0,330" size="600,150" zPosition="1" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
 	        </screen>
 		"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Bluetooth Devices Manager"))
@@ -438,14 +444,17 @@ class BluetoothDevicesManager(Screen):
 	def setListOnView(self):
 		return self.devicelist
 
+
 def start_menu_main(menuid, **kwargs):
 	if menuid == "system":
 		return [(_("Bluetooth Devices Manager"), main, "bt_control", None)]
 	else:
 		return []
 		      
+
 def main(session, **kwargs):
 	session.open(BluetoothDevicesManager)
+
 
 def autostart(reason, **kwargs):
 	if reason == 0:
@@ -461,7 +470,9 @@ def autostart(reason, **kwargs):
 			if config.btdevicesmanager.audioconnect.getValue():
 				os.system("%s %s" % (commandconnect, config.btdevicesmanager.audioaddress.getValue()))
 
+
 iBluetoothDevicesTask = None
+
 
 class BluetoothDevicesTask:
 	def __init__(self, session):
@@ -495,6 +506,7 @@ class BluetoothDevicesTask:
 			pass
 		self.timestamp = datetime.now()
 
+
 def sessionstart(session, reason, **kwargs):
 	global iBluetoothDevicesTask
 
@@ -502,6 +514,7 @@ def sessionstart(session, reason, **kwargs):
 		if brandoem in ("xcore", "edision"):
 			if iBluetoothDevicesTask is None:
 				iBluetoothDevicesTask = BluetoothDevicesTask(session)
+
 
 def Plugins(**kwargs):
 	ShowPlugin = True

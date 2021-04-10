@@ -14,6 +14,7 @@ Created by Celia Oakley on 2013-10-31.
 
 from .base import TMDB
 
+
 class TV(TMDB):
     """
     TV functionality.
@@ -62,7 +63,6 @@ class TV(TMDB):
         self._set_attrs_to_values(response)
         return response
 
-
     def alternative_titles(self, **kwargs):
         """
         Get the alternative titles for a specific tv id.
@@ -78,7 +78,6 @@ class TV(TMDB):
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
-
 
     def credits(self, **kwargs):
         """

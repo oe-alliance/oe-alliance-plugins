@@ -11,6 +11,7 @@ import fileinput
 option = 'options spark7162 UnionTunerType='
 filename = '/etc/modprobe.d/_spark7162.conf'
 
+
 class UnionTunerType(Screen, ConfigListScreen):
 
     def __init__(self, session):

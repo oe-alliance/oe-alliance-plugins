@@ -66,6 +66,7 @@ table_a2b_base64 = {
     '=': 0,
 }
 
+
 def Base64_decodeToByteArray(s):
     if not isinstance(s, (str, unicode)):
         raise TypeError("expected string or unicode, got %r" % (s,))
@@ -113,8 +114,10 @@ def Base64_decodeToByteArray(s):
     
     return res
 
+
 def Hex_fromArray(a):
     return ''.join(["%0.2X" % i for i in a])
+
 
 def StringToByteArray(s):
     arr = []
@@ -122,8 +125,10 @@ def StringToByteArray(s):
         arr.append(ord(c))
     return arr
 
+
 def ByteArrayToString(a):
     return ''.join([chr(i) for i in a])
+
 
 class MyBlowfish:
     ROUNDS = 16
@@ -427,7 +432,6 @@ class MyBlowfish:
         result = result & 0xffffffff
         return result
     
-    
     def processTable(self, xl, xr, table):
         size = len(table)
         for s in range(0, size, 2):
@@ -483,6 +487,7 @@ class MyBlowfish:
             decrypted.extend(blockBytes)
         self.unpad(decrypted)
         return decrypted
+
 
 def Decode4odToken(token):
     encryptedBytes = Base64_decodeToByteArray(token)

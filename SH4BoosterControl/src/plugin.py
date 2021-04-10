@@ -24,9 +24,11 @@ else:
 	config.plugins.booster.normalfrequenz = ConfigSelection(default="4609", choices=[('4609', _("540 (default)")), ('5377', "630"), ('18179', "710"), ('39686', "775"), ('20483', "800")])
 	config.plugins.booster.standbyfrequenz = ConfigSelection(default="4609", choices=[('4609', _("540 (default)")), ('2561', "300"), ('5123', "200")])
 
+
 def leaveStandby():
 	print "[SH4BoosterControl] Leave Standby"
 	initBooster()
+
 
 def standbyCounterChanged(configElement):
 	print "[SH4BoosterControl] In Standby"
@@ -34,17 +36,20 @@ def standbyCounterChanged(configElement):
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
 
+
 def initBooster():
 	print "[SH4BoosterControl] initBooster"
 	f = open("/proc/cpu_frequ/pll0_ndiv_mdiv", "w")
 	f.write(config.plugins.booster.normalfrequenz.getValue())
 	f.close()
 	
+
 def initStandbyBooster():
 	print "[SH4BoosterControl] initStandbyBooster"
 	f = open("/proc/cpu_frequ/pll0_ndiv_mdiv", "w")
 	f.write(config.plugins.booster.standbyfrequenz.getValue())
 	f.close()
+
 
 class SH4BoosterControl(ConfigListScreen, Screen):
 	def __init__(self, session, args=None):
@@ -121,6 +126,7 @@ class SH4BoosterControl(ConfigListScreen, Screen):
 		self.createSetup()
 		initBooster()
 
+
 class SH4_Booster:
 	def __init__(self, session):
 		print "[SH4BoosterControl] initializing"
@@ -140,17 +146,21 @@ class SH4_Booster:
 	
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
+
 def main(menuid):
 	if menuid != "system":
 		return []
 	return [(_("Booster Control"), startBooster, "Booster Control", None)]
 
+
 def startBooster(session, **kwargs):
 	session.open(SH4BoosterControl)
+
 
 sh4booster = None
 gReason = -1
 mySession = None
+
 
 def controlsh4booster():
 	global sh4booster
@@ -165,6 +175,7 @@ def controlsh4booster():
 		
 		sh4booster = None
 
+
 def sessionstart(reason, **kwargs):
 	print "[SH4BoosterControl] sessionstart"
 	global sh4booster
@@ -176,6 +187,7 @@ def sessionstart(reason, **kwargs):
 	else:
 		gReason = reason
 	controlsh4booster()
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),

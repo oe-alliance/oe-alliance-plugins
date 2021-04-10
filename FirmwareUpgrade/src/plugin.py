@@ -76,16 +76,19 @@ STATUS_PREPARED = 3
 STATUS_PROGRAMMING = 4
 STATUS_RETRY_UPGRADE = 5
 
+
 class FPUpgradeCore():
 	status = STATUS_READY
 	errmsg = ''
 	MAX_CALL_COUNT = 120
+
 	def __init__(self, firmwarefile, devicefile):
 		self.devicefile = devicefile
 		self.firmwarefile = firmwarefile
 
 	def doUpgrade(self):
 		firmware, device = None, None
+
 		def closefp(fp, fd):
 			if fd is not None:
 				os.close(fd)
@@ -147,11 +150,13 @@ class FPUpgradeCore():
 		else:
 			print 'unknown.'
 
+
 class FPGAUpgradeCore():
 	status = STATUS_READY
 	errmsg = ''
 	callcount = 0
 	MAX_CALL_COUNT = 1500
+
 	def __init__(self, firmwarefile, devicefile):
 		print '[FPGAUpgrade]'
 		self.devicefile = devicefile
@@ -159,6 +164,7 @@ class FPGAUpgradeCore():
 
 	def doUpgrade(self):
 		firmware, device = None, None
+
 		def closefpga(fp, fd):
 			if fd is not None:
 				os.close(fd)
@@ -217,10 +223,12 @@ class FPGAUpgradeCore():
 		else:
 			print '[FPGAUpgrade] occur unknown error.'
 
+
 class VFDCtrlUpgradeCore():
 	status = STATUS_READY
 	errmsg = ''
 	MAX_CALL_COUNT = 120
+
 	def __init__(self, firmwarefile, devicefile):
 		#print '[VFDCtrlUpgradeCore]'
 		self.devicefile = devicefile
@@ -297,8 +305,10 @@ class VFDCtrlUpgradeCore():
 		else:
 			print '[VFDCtrlUpgradeCore] unknown error.'
 
+
 class FirmwareUpgradeManager:
 	fu = None
+
 	def getInterval(self):
 		return 200
 
@@ -334,6 +344,7 @@ class FirmwareUpgradeManager:
 
 	def getErrorMessage(self, errno, errmsg):
 		return str(self.fu.errmsg)
+
 
 class UpgradeStatus(Screen):
 	skin = """
@@ -430,6 +441,7 @@ class UpgradeStatus(Screen):
 			self.callback("Reboot now for a successful upgrade.", True)
 		self.session.openWithCallback(self.cbConfirmExit, MessageBox, _("Do you want to remove binary data?"), MessageBox.TYPE_YESNO, timeout=10, default=False)
 
+
 class FUFilebrowser(Screen):
 	skin = """
 		<screen position="center,center" size="500,290" title="File Browser" >
@@ -444,7 +456,6 @@ class FUFilebrowser(Screen):
 	def __init__(self, session, parent, firmware):
 		Screen.__init__(self, session)
                 self.session = session
-
 
 		self["key_blue"] = StaticText(_("Download"))
 		self["status"] = StaticText(" ")
@@ -533,6 +544,7 @@ class FUFilebrowser(Screen):
 	def doDownload(self, uri, tf, bd='/tmp', cbfunc=None, errmsg="Fail to download."):
 		tar = bd + "/" + tf
 		#print "[FirmwareUpgrade] - Download Info : [%s][%s]" % (uri, tar)
+
 		def doHook(blockNumber, blockSize, totalSize):
 			if blockNumber * blockSize > totalSize and cbfunc is not None:
 				cbfunc(tar)
@@ -662,6 +674,7 @@ class FUFilebrowser(Screen):
 
 	def keyNone(self):
 		None
+
 
 class FirmwareUpgrade(Screen, ConfigListScreen):
 	skin = """
@@ -862,8 +875,10 @@ class FirmwareUpgrade(Screen, ConfigListScreen):
 	def keyNone(self):
 		None
 
+
 def main(session, **kwargs):
 	session.open(FirmwareUpgrade)
+
 
 def Plugins(**kwargs):           
 	return PluginDescriptor(name=_("Firmware Upgrade"), description=_("Upgrade Firmware.."), icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)

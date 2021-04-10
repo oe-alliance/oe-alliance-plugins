@@ -46,6 +46,7 @@ from CommonModules import MainMenuList
 
 ##########################################################################
 
+
 class OnDemandScreenSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -109,6 +110,7 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 	
 	def keyCancel(self):
 		self.close()
+
 
 class OnDemand_Screen(Screen, ConfigListScreen):
 	skin = """
@@ -185,6 +187,7 @@ class OnDemand_Screen(Screen, ConfigListScreen):
 
 	def keyCancel(self):
 		self.close()
+
 
 class OnDemand_About(Screen):
 	skin = """

@@ -31,6 +31,8 @@ from filters import TransponderFiltering # imported from Blindscan folder
 from time import strftime, time
 
 # root2gold based on https://github.com/DigitalDevices/dddvb/blob/master/apps/pls.c
+
+
 def root2gold(root):
 	if root < 0 or root > 0x3ffff:
 		return 0
@@ -44,6 +46,8 @@ def root2gold(root):
 	return 0
 
 # helper function for initializing mis/pls properties
+
+
 def getMisPlsValue(d, idx, defaultValue):
 	try:
 		return int(d[idx])
@@ -51,6 +55,8 @@ def getMisPlsValue(d, idx, defaultValue):
 		return defaultValue
 
 #used for blindscan-s2
+
+
 def getAdapterFrontend(frontend, description):
 	for adapter in range(1, 5):
 		try:
@@ -706,6 +712,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 	
 	def doRun(self, tmp_list, tmp_pol, tmp_band):
 		print "[Blindscan][doRun] started"
+
 		def GetCommand(nimIdx):
 			_nimSocket = self.nimSockets
 			try:
@@ -1172,7 +1179,6 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 				if len(data) >= 6 and data[0] == 'OK':
 					self.blindscan_session["post_action"].setText(str)
 
-
 	def blindscanSessionNone(self, *val):
 		import time
 		self.blindscan_container.sendCtrlC()
@@ -1577,9 +1583,11 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		if hasattr(self, 'raw_channel'):
 			del self.raw_channel
 
+
 def BlindscanCallback(close, answer):
 	if close and answer:
 		close(True)
+
 
 def BlindscanMain(session, close=None, **kwargs):
 	have_Support_Blindscan = False
@@ -1594,11 +1602,13 @@ def BlindscanMain(session, close=None, **kwargs):
 	else:
 		session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)
 
+
 def BlindscanSetup(menuid, **kwargs):
 	if menuid == "scan":
 		return [(_("Blind scan"), BlindscanMain, "blindscan", 25, True)]
 	else:
 		return []
+
 
 def Plugins(**kwargs):
 	if nimmanager.hasNimType("DVB-S"):
