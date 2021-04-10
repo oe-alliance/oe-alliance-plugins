@@ -175,11 +175,11 @@ class ABMCustomMixImporter(Screen):
 			if int(response.getcode()) == 200:
 				return response.read()
 		except urllib2.HTTPError, err:
-			print '[ABMCustomMixImporter][fetchURL] ERROR:',err
+			print '[ABMCustomMixImporter][fetchURL] ERROR:', err
 		except urllib2.URLError, err:
-			print '[ABMCustomMixImporter][fetchURL] ERROR:',err.reason[0]
+			print '[ABMCustomMixImporter][fetchURL] ERROR:', err.reason[0]
 		except urllib2, err:
-			print '[ABMCustomMixImporter][fetchURL] ERROR:',err
+			print '[ABMCustomMixImporter][fetchURL] ERROR:', err
 		except:
 			import sys
 			print '[ABMCustomMixImporter][fetchURL] undefined error', sys.exc_info()[0]
@@ -213,7 +213,7 @@ class schedule:
 			print "[ABMCustomMixSchedule][__init__] ABM config available"
 		except:
 			self.enableSchedule = False
-			self.clock = [0,0]
+			self.clock = [0, 0]
 			self.repeattype = "daily"
 			print "[ABMCustomMixSchedule][__init__] ABM config was not available"
 		self.fetchtimer = eTimer()

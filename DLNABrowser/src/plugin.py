@@ -583,7 +583,7 @@ class DLNAImageViewer(Screen):
 		if ptr != None:
 			text = ""
 			try:
-				text = picInfo.split('\n',1)
+				text = picInfo.split('\n', 1)
 				text = "(" + str(self.currentIndex + 1) + "/" + str(self.fileListLen + 1) + ") " + text[0].split('/')[-1]
 			except:
 				pass
@@ -748,7 +748,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 	def writeConfigFile(self):
 		def configDataAppend(origin, key, value):
 			if key.strip() != '' and value.strip() != '':
-				origin += "%s=%s\n" % (key,value)
+				origin += "%s=%s\n" % (key, value)
 			return origin
 		configString = ""
 		#configString = configDataAppend(configString, "rootdir", self.menuItemRootDir.value)
@@ -780,7 +780,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 				continue
 			try:
 				i = line.find('=')
-				k,v = line[:i],line[i + 1:]
+				k, v = line[:i], line[i + 1:]
 				self.oldConfig[k] = v
 			except:
 				pass
@@ -901,7 +901,7 @@ class DLNADeviceBrowser(Screen):
 				continue
 			try:
 				i = line.find('=')
-				k,v = line[:i],line[i + 1:]
+				k, v = line[:i], line[i + 1:]
 				if k == 'rootdir':
 					DLNA_CONFIG_ROOT_DIR = v
 				elif k == 'refresh':
@@ -975,13 +975,13 @@ class DLNADeviceBrowser(Screen):
 
 	def setListOnView(slelf):
 		global DLNA_CONFIG_ROOT_DIR
-		items,rootdir = [],DLNA_CONFIG_ROOT_DIR
+		items, rootdir = [], DLNA_CONFIG_ROOT_DIR
 		deviceList = [name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name))]
 		deviceList.sort()
 		for d in deviceList:
 			if d[0] in ('.', '_'):
 				continue
-			items.append((d,d))
+			items.append((d, d))
 		return items
 
 def autostart(reason, **kwargs):

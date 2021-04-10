@@ -320,7 +320,7 @@ class tuneinGenresMenu(Screen):
 			for elem in tree.iter('outline'):
 				# Iterate through the elements
 				name_tmp = str(elem.get('text'))
-				name_split = name_tmp.rsplit('(',1)
+				name_split = name_tmp.rsplit('(', 1)
 				name = tidyString(name_split[0])
 				id = str(elem.get('URL'))
 				osdList.append((_(name), id, "false"))
@@ -627,7 +627,7 @@ class shoutGenresThumb(StreamsThumbCommon):
 			fileUrl = findPlayUrl(showID, 'shoutcast', self.showWMA)
 			
 			if fileUrl:
-				fileRef = eServiceReference(4097,0,fileUrl)
+				fileRef = eServiceReference(4097, 0, fileUrl)
 				fileRef.setName(showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
@@ -825,7 +825,7 @@ class FavoritesThumb(StreamsThumbCommon):
 				fileUrl = findPlayUrl(stationID, 'favourite', self.showWMA)
 			
 			if fileUrl:
-				fileRef = eServiceReference(4097,0,fileUrl)
+				fileRef = eServiceReference(4097, 0, fileUrl)
 				fileRef.setName(stationName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
@@ -1040,7 +1040,7 @@ class tuneinGenresThumb(StreamsThumbCommon):
 			fileUrl = findPlayUrl(showID, 'tunein', self.showWMA)
 			
 			if fileUrl:
-				fileRef = eServiceReference(4097,0,fileUrl)
+				fileRef = eServiceReference(4097, 0, fileUrl)
 				fileRef.setName(showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
@@ -1073,7 +1073,7 @@ class tuneinGenresThumb(StreamsThumbCommon):
 			for elem in tree.iter('outline'):
 				# Iterate through the elements
 				name_tmp = str(elem.get('text'))
-				name_split = name_tmp.rsplit('(',1)
+				name_split = name_tmp.rsplit('(', 1)
 				name = tidyString(name_split[0])
 				avail = str(elem.get('key'))
 				

@@ -150,8 +150,8 @@ class StreamsThumb(StreamsThumbCommon):
 			(fileUrl, retMessage) = self.findPlayUrl(showID)
 
 			if fileUrl:
-				fileRef = eServiceReference(4097,0,fileUrl)
-				fileRef.setData(2,10240 * 1024)
+				fileRef = eServiceReference(4097, 0, fileUrl)
+				fileRef.setData(2, 10240 * 1024)
 				fileRef.setName(showName)
 				self.session.open(MoviePlayer, fileRef)
 			else:
@@ -204,7 +204,7 @@ class StreamsThumb(StreamsThumbCommon):
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getMediaData: Error getting Media info: ', exception
+			print __plugin__, __version__, 'getMediaData: Error getting Media info: ', exception
 
 #===================================================================================
 	def getShowMediaData(self, weekList, progID):
@@ -228,7 +228,7 @@ class StreamsThumb(StreamsThumbCommon):
 				#print elem.tag, elem.attrib, elem.text
 				if elem.attrib.get('class') == "floatLeft":
 					show_url = str(elem[0].attrib.get('href'))
-					show_split = show_url.rsplit('=',1)
+					show_split = show_url.rsplit('=', 1)
 					show = str(show_split[1])
 
 					# Only set the Icon if they are enabled
@@ -255,7 +255,7 @@ class StreamsThumb(StreamsThumbCommon):
 					contentSet = False
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getCatsMediaData: Error getting Media info: ', exception
+			print __plugin__, __version__, 'getCatsMediaData: Error getting Media info: ', exception
 
 #===================================================================================
 	def getSearchMediaData(self, weekList, url, query):
@@ -306,7 +306,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'getSearchMediaData: Error getting Media info: ', exception
+			print __plugin__, __version__, 'getSearchMediaData: Error getting Media info: ', exception
 
 #===================================================================================
 	
@@ -352,7 +352,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 			# If we have found a stream then return it.
 			if fileUrl:
-				return (fileUrl,"")
+				return (fileUrl, "")
 			else:
 				if retMessage:
 					return ("", retMessage)
@@ -360,7 +360,7 @@ class StreamsThumb(StreamsThumbCommon):
 					return ("", "Unable to find a playable stream! Could not play ")
 
 		except (Exception) as exception:
-			print __plugin__, __version__,'findPlayUrl: Error getting URLs: ', exception
+			print __plugin__, __version__, 'findPlayUrl: Error getting URLs: ', exception
 			return ("", "findPlayUrl: Error getting URLs! Could not play ")
 
 #========== Retrieve the webpage data ==============================================
@@ -395,16 +395,16 @@ class StreamsThumb(StreamsThumbCommon):
 		url = 'http://mercury.itv.com/PlaylistService.svc'
 		htmldoc = ""
 		primaryDNS = str(config.ondemand.PrimaryDNS.value)
-		print __plugin__, __version__,"DNS Set: ", primaryDNS
-		print __plugin__, __version__,"Default DNS Set: ", str(config.ondemand.PrimaryDNS.default)
+		print __plugin__, __version__, "DNS Set: ", primaryDNS
+		print __plugin__, __version__, "Default DNS Set: ", str(config.ondemand.PrimaryDNS.default)
 
 		try:
 			req = urllib2.Request(url, soapMessage)
-			req.add_header("Host","mercury.itv.com")
-			req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
-			req.add_header("Content-type","text/xml; charset=\"UTF-8\"")
-			req.add_header("Content-length","%d" % len(soapMessage))
-			req.add_header("SOAPAction","http://tempuri.org/PlaylistService/GetPlaylist")	 
+			req.add_header("Host", "mercury.itv.com")
+			req.add_header("Referer", "http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
+			req.add_header("Content-type", "text/xml; charset=\"UTF-8\"")
+			req.add_header("Content-length", "%d" % len(soapMessage))
+			req.add_header("SOAPAction", "http://tempuri.org/PlaylistService/GetPlaylist")	 
 			response = urllib2.urlopen(req)	  
 			htmldoc = str(response.read())
 			response.close()
@@ -412,10 +412,10 @@ class StreamsThumb(StreamsThumbCommon):
 			exResp = str(exception.read())
 
 			if 'InvalidGeoRegion' in exResp:
-				print __plugin__, __version__,"Non UK Address!!"
+				print __plugin__, __version__, "Non UK Address!!"
 				
 				if primaryDNS == str(config.ondemand.PrimaryDNS.default):
-					print __plugin__, __version__,"Non UK Address: NO DNS Set!! ", primaryDNS
+					print __plugin__, __version__, "Non UK Address: NO DNS Set!! ", primaryDNS
 					return ("", "Non-UK IP Address and no DNS set in OnDemand Settings! Not able to play ")
 				else:
 					try:
@@ -423,25 +423,25 @@ class StreamsThumb(StreamsThumbCommon):
 						old_opener = urllib2._opener
 						urllib2.install_opener(opener)
 						req = urllib2.Request(url, soapMessage)
-						req.add_header("Host","mercury.itv.com")
-						req.add_header("Referer","http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
-						req.add_header("Content-type","text/xml; charset=\"UTF-8\"")
-						req.add_header("Content-length","%d" % len(soapMessage))
-						req.add_header("SOAPAction","http://tempuri.org/PlaylistService/GetPlaylist")	 
+						req.add_header("Host", "mercury.itv.com")
+						req.add_header("Referer", "http://www.itv.com/mercury/Mercury_VideoPlayer.swf?v=1.6.479/[[DYNAMIC]]/2")
+						req.add_header("Content-type", "text/xml; charset=\"UTF-8\"")
+						req.add_header("Content-length", "%d" % len(soapMessage))
+						req.add_header("SOAPAction", "http://tempuri.org/PlaylistService/GetPlaylist")	 
 						response = urllib2.urlopen(req)	  
 						htmldoc = str(response.read())
 						response.close()
 						urllib2.install_opener(old_opener)
 
 					except (Exception) as exception:
-						print __plugin__, __version__,"wgetUrl: Unable to connect to DNS: ", exception
+						print __plugin__, __version__, "wgetUrl: Unable to connect to DNS: ", exception
 						return ("", "Could not connect to " + primaryDNS + ", make sure your subscription is valid! Not able to play ")
 			else:
-				print __plugin__, __version__,"HTTPError: Error retrieving stream: ", exResp
+				print __plugin__, __version__, "HTTPError: Error retrieving stream: ", exResp
 				return ("", "Could not retrieve a playable stream for ")
 
 		except (Exception) as exception2:
-			print __plugin__, __version__,"wgetUrl: Error calling urllib2: ", exception2
+			print __plugin__, __version__, "wgetUrl: Error calling urllib2: ", exception2
 			return ("", "Could not retrieve a playable stream for ")
 		
 		return (htmldoc, "")

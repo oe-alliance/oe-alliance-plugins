@@ -23,16 +23,16 @@ from boxbranding import getImageDistro, getBoxType
 import Screens.Standby
 
 config.plugins.VFD_ini = ConfigSubsection()
-config.plugins.VFD_ini.showClock = ConfigSelection(default="True_Switch", choices=[("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_ini.timeMode = ConfigSelection(default="24h", choices=[("12h"),("24h")])
-config.plugins.VFD_ini.recDisplay = ConfigSelection(default="False", choices=[("True",_("yes")),("False",_("no"))])
-config.plugins.VFD_ini.recClockBlink = ConfigSelection(default="off", choices=[("off",_("Off")),("on_off",_("On/Off")),("brightness",_("Brightness level"))])
+config.plugins.VFD_ini.showClock = ConfigSelection(default="True_Switch", choices=[("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.VFD_ini.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
+config.plugins.VFD_ini.recDisplay = ConfigSelection(default="False", choices=[("True", _("yes")), ("False", _("no"))])
+config.plugins.VFD_ini.recClockBlink = ConfigSelection(default="off", choices=[("off", _("Off")), ("on_off", _("On/Off")), ("brightness", _("Brightness level"))])
 config.plugins.VFD_ini.ClockLevel1 = ConfigSlider(default=1, limits=(0, 10))
 config.plugins.VFD_ini.ClockLevel2 = ConfigSlider(default=4, limits=(1, 10))
 
 MyRecLed = False
 use_oled = False
-if HardwareInfo().get_device_model() in ("sf8008","sf8008m","gbmv200","viper4k"):
+if HardwareInfo().get_device_model() in ("sf8008", "sf8008m", "gbmv200", "viper4k"):
 	use_oled = True
 	
 def vfd_write(text):
@@ -64,7 +64,7 @@ class Channelnumber:
 		self.zaPrik.start(1000, 1)
 		self.onClose = []
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap={
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 
@@ -184,7 +184,7 @@ class Channelnumber:
 		global MyRecLed
 		try:
 			#not all images support recording type indicators
-			recordings = self.session.nav.getRecordings(False,Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue()))
+			recordings = self.session.nav.getRecordings(False, Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue()))
 		except:
 			recordings = self.session.nav.getRecordings()
 		if recordings:
@@ -246,7 +246,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("Save"))
 		self["key_yellow"] = Button(_("Update Date/Time"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -373,4 +373,4 @@ def sessionstart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-		PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where=PluginDescriptor.WHERE_MENU, fnc=main)]
+		PluginDescriptor(name="LED Display Setup", description="Change LED display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]

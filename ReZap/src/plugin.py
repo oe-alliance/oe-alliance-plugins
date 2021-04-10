@@ -58,7 +58,7 @@ class LoopSyncMain(Screen):
 
 	def CheckFlag(self):
 		try:
-			if int(open("/sys/class/tsync/reset_flag", "r").read(),16) == 1:
+			if int(open("/sys/class/tsync/reset_flag", "r").read(), 16) == 1:
 				return True
 		except Exception, e:
 			print "[ReZap] Can't read class"

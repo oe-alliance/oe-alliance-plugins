@@ -65,11 +65,11 @@ class fempa(Screen):
 	
 		files = re.compile('''"Id":([0-9]*?),"Path":"openP4PlayerModal\('clip', ([0-9]*?)\); return false;","Title":"(.*?)","MediaLinkText":"(.+?)"''', re.DOTALL).findall(html)
 		
-		self.osdList = [(x[2],x[1]) for x in files]
+		self.osdList = [(x[2], x[1]) for x in files]
 		
 		Screen.__init__(self, session)
 		self["myMenu"] = MenuList(self.osdList)
-		self["myActionMap"] = ActionMap(["SetupActions","ColorActions"],
+		self["myActionMap"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 		"ok": self.go,
 		"cancel": self.cancel
@@ -89,7 +89,7 @@ class fempa(Screen):
 		if not x == []:
 			x = "http://www.p4.no" + x[0]	
 		
-			fileRef = eServiceReference(4097,0,x)
+			fileRef = eServiceReference(4097, 0, x)
 			fileRef.setName(returnTitle)
 			self.session.nav.playService(fileRef)
 			 

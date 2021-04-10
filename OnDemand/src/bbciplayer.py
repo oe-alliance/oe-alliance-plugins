@@ -57,7 +57,7 @@ def wgetUrl(target):
 		response.close()
 		return outtxt
 	except (Exception) as exception:
-		print __plugin__, __version__,"wgetUrl: Error reading URL: ", exception
+		print __plugin__, __version__, "wgetUrl: Error reading URL: ", exception
 		return ""
 
 #===================================================================================
@@ -249,9 +249,9 @@ class StreamsThumb(StreamsThumbCommon):
 		if fileUrl:
 			# If a warning message is returned then display this before playing the programme
 			if retMessage:
-				self.session.openWithCallback(self.play(fileUrl,showName), MessageBox, _(retMessage + str(showName)), timeout=5, type=MessageBox.TYPE_INFO)
+				self.session.openWithCallback(self.play(fileUrl, showName), MessageBox, _(retMessage + str(showName)), timeout=5, type=MessageBox.TYPE_INFO)
 			else:
-				self.play(fileUrl,showName)
+				self.play(fileUrl, showName)
 		else:
 			# If not stream URL is returned and a warning message is returned then display it.
 			if retMessage:
@@ -260,8 +260,8 @@ class StreamsThumb(StreamsThumbCommon):
 				self.mediaProblemPopup("Sorry, unable to find a playable stream for " + str(showName))
 
 	def play(self, fileUrl, showName):
-		fileRef = eServiceReference(4097,0,fileUrl)
-		fileRef.setData(2,10240 * 1024)
+		fileRef = eServiceReference(4097, 0, fileUrl)
+		fileRef.setData(2, 10240 * 1024)
 		fileRef.setName(showName)
 		self.session.open(MoviePlayer, fileRef)
 
@@ -309,7 +309,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,"getMediaData: Error getting Media info: ", exception
+			print __plugin__, __version__, "getMediaData: Error getting Media info: ", exception
 
 #===================================================================================
 	def getSearchMediaData(self, weekList, url):
@@ -349,7 +349,7 @@ class StreamsThumb(StreamsThumbCommon):
 				name_tmp = str(select('title').text_content())
 				
 				stream_tmp = select('id').text_content()
-				stream_split = stream_tmp.rsplit(':',1)
+				stream_split = stream_tmp.rsplit(':', 1)
 				stream = stream_split[1]
 				
 				try:
@@ -358,7 +358,7 @@ class StreamsThumb(StreamsThumbCommon):
 					date1 = _("Added:") + " " + str(date_tmp)
 				except (Exception) as exception:
 					date1 = select('updated').text_content()
-					print __plugin__, __version__,"getMediaData: date1 parse error: ", exception
+					print __plugin__, __version__, "getMediaData: date1 parse error: ", exception
 				
 				short_tmp = str(select('content').text_content().strip())
 
@@ -368,7 +368,7 @@ class StreamsThumb(StreamsThumbCommon):
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__,"getMediaData: Error getting Media info: ", exception
+			print __plugin__, __version__, "getMediaData: Error getting Media info: ", exception
 
 #===================================================================================
 	
@@ -389,8 +389,8 @@ class StreamsThumb(StreamsThumbCommon):
 		currQuality = 0
 		prefQuality = int(config.ondemand.PreferredQuality.value)
 		primaryDNS = str(config.ondemand.PrimaryDNS.value)
-		print __plugin__, __version__,"DNS Set: ", primaryDNS
-		print __plugin__, __version__,"Default DNS Set: ", str(config.ondemand.PrimaryDNS.default)
+		print __plugin__, __version__, "DNS Set: ", primaryDNS
+		print __plugin__, __version__, "Default DNS Set: ", str(config.ondemand.PrimaryDNS.default)
 
 		try:
 			# Read the URL to get the stream options
@@ -405,10 +405,10 @@ class StreamsThumb(StreamsThumbCommon):
 
 			if html1.find('notukerror') > 0:
 				notUK = 1
-				print __plugin__, __version__,"Non UK Address!!"
+				print __plugin__, __version__, "Non UK Address!!"
 				
 				if primaryDNS == str(config.ondemand.PrimaryDNS.default):
-					print __plugin__, __version__,"Non UK Address: NO DNS Set!! ", primaryDNS
+					print __plugin__, __version__, "Non UK Address: NO DNS Set!! ", primaryDNS
 					return ("", "Non-UK IP Address and no DNS set in OnDemand Settings! Not able to play ")
 				else:
 					try:
@@ -423,7 +423,7 @@ class StreamsThumb(StreamsThumbCommon):
 						urllib2.install_opener(old_opener)
 
 					except (Exception) as exception:
-						print __plugin__, __version__,"findPlayUrl: Unable to connect to DNS: ", exception
+						print __plugin__, __version__, "findPlayUrl: Unable to connect to DNS: ", exception
 						return ("", "Could not connect to " + primaryDNS + ", make sure your subscription is valid! Not able to play ")
 
 			# Parse the HTML returned
@@ -528,16 +528,16 @@ class StreamsThumb(StreamsThumbCommon):
 						else:
 							# If we haven't found a matching stream quality or lower return whatever found
 							if otherLimelightUrl:
-								print __plugin__, __version__,"findPlayUrl: Unable to find Preferred Stream quality, playing only available stream!!"
+								print __plugin__, __version__, "findPlayUrl: Unable to find Preferred Stream quality, playing only available stream!!"
 								return (otherLimelightUrl, "Unable to find Preferred Stream quality, playing only available stream for ")
 							elif otherAkamaiUrl and notUK == 0:
 								return (otherAkamaiUrl, "")
 							else:
-								print __plugin__, __version__,"findPlayUrl: Non-UK and no limelight, return blank: "
+								print __plugin__, __version__, "findPlayUrl: Non-UK and no limelight, return blank: "
 								return ("", "Non-UK and no limelight, No playable stream for ")
 
 		except (Exception) as exception:
-			print __plugin__, __version__,"findPlayUrl: Error getting URLs: ", exception
+			print __plugin__, __version__, "findPlayUrl: Error getting URLs: ", exception
 			return ("", "findPlayUrl: Error getting URLs! Could not play ")
 		
 #===================================================================================
@@ -578,7 +578,7 @@ class StreamsThumb(StreamsThumbCommon):
 			return streamData
 
 		except (Exception) as exception:
-			print __plugin__, __version__,"getHosts: Error setting stream URL: ", exception
+			print __plugin__, __version__, "getHosts: Error setting stream URL: ", exception
 			return ""
 
 #===================================================================================

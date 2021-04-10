@@ -215,7 +215,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		logDir = self.menuItemLogDir.value
 		logLevel = self.menuItemLogLevel.value
 		if not self.menuItemEnableLog.value:
-			logDir,logLevel = None, None
+			logDir, logLevel = None, None
 		self.writeConfigFile(serverName=serverName, videoDir=videoDir, auditDir=auditDir, pictureDir=pictureDir, logDir=logDir, logLevel=logLevel)
 
 	def getCurrentItem(self):
@@ -289,7 +289,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		configString = ""
 		def configDataAppend(origin, key, value):
 			if key.strip() != '' and value.strip() != '':
-				origin += "%s=%s\n" % (key,value)
+				origin += "%s=%s\n" % (key, value)
 			return origin
 		configString = configDataAppend(configString, "friendly_name", serverName)
 		if videoDir is not None and videoDir.strip() != '':
@@ -325,7 +325,7 @@ class DLNAServer(ConfigListScreen, Screen):
 				continue
 			try:
 				i = line.find('=')
-				k,v = line[:i],line[i + 1:]
+				k, v = line[:i], line[i + 1:]
 				if k == 'media_dir':
 					k += v[0]
 					v = v[2:]

@@ -93,11 +93,11 @@ class xmlUpdate(ConfigListScreen, Screen):
 			if int(response.getcode()) == 200:
 				return response.read()
 		except urllib2.HTTPError, err:
-			print '[xmlUpdate][fetchURL] ERROR:',err
+			print '[xmlUpdate][fetchURL] ERROR:', err
 		except urllib2.URLError, err:
-			print '[xmlUpdate][fetchURL] ERROR:',err.reason[0]
+			print '[xmlUpdate][fetchURL] ERROR:', err.reason[0]
 		except urllib2, err:
-			print '[xmlUpdate][fetchURL] ERROR:',err
+			print '[xmlUpdate][fetchURL] ERROR:', err
 		except:
 			import sys
 			print '[xmlUpdate][fetchURL] undefined error', sys.exc_info()[0]

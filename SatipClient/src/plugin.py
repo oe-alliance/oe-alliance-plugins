@@ -109,7 +109,7 @@ class SATIPDiscovery:
 		if not address:
 			return None
 
-		return "%d.%d.%d.%d" % (address[0],address[1],address[2],address[3])
+		return "%d.%d.%d.%d" % (address[0], address[1], address[2], address[3])
 
 	def getEthernetAddr(self):
 		return self.formatAddr(iNetwork.getAdapterAttribute("eth0", "ip"))
@@ -676,7 +676,7 @@ class SATIPClient(Screen):
 			if vtuner['vtuner_type'] == "satip_client":
 				entry = (
 				_("VIRTUAL TUNER %s") % vtuner_idx,
-				_("TYPE : %s") % vtuner['vtuner_type'].replace('_',' ').upper(),
+				_("TYPE : %s") % vtuner['vtuner_type'].replace('_', ' ').upper(),
 				_("IP : %s") % vtuner['ipaddr'],
 				_("TUNER TYPE : %s") % vtuner['tuner_type'],
 				_("SAT>IP SERVER : %s") % vtuner['desc'],
@@ -688,7 +688,7 @@ class SATIPClient(Screen):
 			else:
 				entry = (
 				_("VIRTUAL TUNER %s") % vtuner_idx,
-				_("TYPE : %s") % vtuner['vtuner_type'].replace('_',' ').upper(),
+				_("TYPE : %s") % vtuner['vtuner_type'].replace('_', ' ').upper(),
 				"",
 				"",
 				"",
@@ -706,7 +706,7 @@ class SATIPClient(Screen):
 
 		self.vtunerConfig[int(idx)] = copy.deepcopy(self.old_vtunerConfig[int(idx)])
 		if self.vtunerConfig[int(idx)] and self.vtunerConfig[int(idx)]['vtuner_type'] == "satip_client":
-			self.vtunerConfig[int(idx)] = {'vtuner_type':"usb_tuner"}
+			self.vtunerConfig[int(idx)] = {'vtuner_type': "usb_tuner"}
 
 		self.sortVtunerConfig()
 		self.createSetup()
@@ -763,7 +763,7 @@ class SATIPClient(Screen):
 		vtunerConfig = []
 
 		for idx in self.vtunerIndex:
-			vtunerConfig.append({'vtuner_type':"usb_tuner"})
+			vtunerConfig.append({'vtuner_type': "usb_tuner"})
 
 		if os.access(SATIP_CONFFILE, os.R_OK):
 			fd = open(SATIP_CONFFILE)

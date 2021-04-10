@@ -405,7 +405,7 @@ class OpenUg(StreamsThumbCommon):
 					tmp = "<div class=\"stationlogo\""
 					if tmp in line:
 						lineTmp = line.split(tmp)[1].split('</div>')[0]
-						channelTmp = lineTmp.rsplit('>',1)
+						channelTmp = lineTmp.rsplit('>', 1)
 						channel = channelTmp[1]
 
 					tmp = "<span class=\"title\">"
@@ -503,7 +503,7 @@ class OpenUg(StreamsThumbCommon):
 					tmp = "<div class=\"stationlogo\""
 					if tmp in line:
 						lineTmp = line.split(tmp)[1].split('</div>')[0]
-						channelTmp = lineTmp.rsplit('>',1)
+						channelTmp = lineTmp.rsplit('>', 1)
 						channel = channelTmp[1]
 
 					tmp = "<span class=\"title\">"

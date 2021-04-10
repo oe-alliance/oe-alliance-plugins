@@ -41,7 +41,7 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		ConfigListScreen.__init__(self, self.entrylist)
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", ], {
 			"ok": self.keyGreen,
 			"green": self.keyGreen,
 			"yellow": self.keyYellow,
@@ -88,15 +88,15 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 
 class AnimationSetupScreen(Screen):
 	animationSetupItems = [
-		{"idx":0, "name":_("Disable Animations")},
-		{"idx":1, "name":_("Simple fade")},
-		{"idx":2, "name":_("Grow drop")},
-		{"idx":3, "name":_("Grow from left")},
-		{"idx":4, "name":_("Popup")},
-		{"idx":5, "name":_("Slide drop")},
-		{"idx":6, "name":_("Slide left to right")},
-		{"idx":7, "name":_("Slide top to bottom")},
-		{"idx":8, "name":_("Stripes")},
+		{"idx": 0, "name": _("Disable Animations")},
+		{"idx": 1, "name": _("Simple fade")},
+		{"idx": 2, "name": _("Grow drop")},
+		{"idx": 3, "name": _("Grow from left")},
+		{"idx": 4, "name": _("Popup")},
+		{"idx": 5, "name": _("Slide drop")},
+		{"idx": 6, "name": _("Slide left to right")},
+		{"idx": 7, "name": _("Slide top to bottom")},
+		{"idx": 8, "name": _("Stripes")},
 	]
 
 	skin = """

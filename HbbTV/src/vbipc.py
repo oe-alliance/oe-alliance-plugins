@@ -106,7 +106,7 @@ class VBServerThread(threading.Thread):
 		read_data = conn.recv(_BUFSIZE)
 		request = self.parse(read_data)
 		opcode, result, read_packet = request[0], request[1], request[2]
-		result, send_packet = False,None
+		result, send_packet = False, None
 		try:
 			result, send_packet = GetHandler(opcode)(result, read_packet)
 		except Exception, ErrMsg:

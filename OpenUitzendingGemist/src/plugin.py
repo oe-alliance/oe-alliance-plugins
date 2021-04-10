@@ -62,7 +62,7 @@ def wgetUrl(target, refer='', cookie=''):
 def resolve_http_redirect(url, depth=0):
 	if depth > 10:
 		raise Exception("Redirected " + depth + " times, giving up.")
-	o = urlparse.urlparse(url,allow_fragments=True)
+	o = urlparse.urlparse(url, allow_fragments=True)
 	conn = httplib.HTTPConnection(o.netloc)
 	path = o.path
 	if o.query:
@@ -289,9 +289,9 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def setSeekState(self, wantstate, onlyGUI=False):
 		print "setSeekState"
 		if wantstate == self.STATE_PAUSED:
-			print "trying to switch to Pause- state:",self.STATE_PAUSED
+			print "trying to switch to Pause- state:", self.STATE_PAUSED
 		elif wantstate == self.STATE_PLAYING:
-			print "trying to switch to playing- state:",self.STATE_PLAYING
+			print "trying to switch to playing- state:", self.STATE_PLAYING
 		service = self.session.nav.getCurrentService()
 		if service is None:
 			print "No Service found"
@@ -398,7 +398,7 @@ class OpenUgSetupScreen(Screen):
 		self["key_green"] = StaticText(_("OK"))
 		self.lastservice = session.nav.getCurrentlyPlayingServiceReference()
 		if config.plugins.OpenUitzendingGemist.Modern.value:
-			self["actions"] = ActionMap(["SetupActions","DirectionActions"],
+			self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 			{
 			"ok": self.keyGo,
 			"cancel": self.keyCancel,
@@ -408,7 +408,7 @@ class OpenUgSetupScreen(Screen):
 			"right": self.right
 			}, -2)
 		else:
-			self["actions"] = ActionMap(["SetupActions","DirectionActions"],
+			self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 			{
 			"ok": self.keyGo,
 			"cancel": self.keyCancel
@@ -547,7 +547,7 @@ class SmallScreen(Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		if config.plugins.OpenUitzendingGemist.Modern.value:
-			self["actions"] = ActionMap(["SetupActions","DirectionActions"],
+			self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 			{
 			"ok": self.keyGo,
 			"cancel": self.keyCancel,
@@ -557,7 +557,7 @@ class SmallScreen(Screen):
 			"right": self.right
 			}, -2)
 		else:
-			self["actions"] = ActionMap(["SetupActions","DirectionActions"],
+			self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 			{
 			"ok": self.keyGo,
 			"cancel": self.keyCancel
@@ -809,7 +809,7 @@ class OpenUg(Screen):
 			"right": self.key_right,
 			"ok": self.go,
 			"back": self.Exit,
-		}		, -1)
+		}, -1)
 		self["NumberActions"] = NumberActionMap(["NumberActions", "InputAsciiActions"],
 			{
 				"gotAsciiCode": self.keyAsciiCode,
@@ -1519,7 +1519,7 @@ class OpenUg(Screen):
 				if "\"name\"" in line:
 					state = 1
 			if state == 1:
-				url = line.split('\"')[1].replace(' ','')
+				url = line.split('\"')[1].replace(' ', '')
 				tmp = ".png"
 				icon_type = ''
 				if tmp in line:
@@ -1555,7 +1555,7 @@ class OpenUg(Screen):
 				if "\"name\"" in line:
 					state = 1
 			if state == 1:
-				url = line.split('\"')[1].replace(' ','')
+				url = line.split('\"')[1].replace(' ', '')
 				tmp = ".png"
 				if tmp in line:
 					tmp = "\"proglogo\":\""
@@ -1776,9 +1776,9 @@ class OpenUg(Screen):
 
 	def dumpert(self, mediaList, url):
 		data = wgetUrl(self.DUMPERT_BASE_URL + url, 'http://www.dumpert.nl/', 'playersize=large; nsfw=1')
-		data = Csplit(data, '<section id="content">',1)
-		data = Csplit(data, '<section class="dump-cnt">',1)
-		data = Csplit(data, '<div class="pagecontainer">',1)
+		data = Csplit(data, '<section id="content">', 1)
+		data = Csplit(data, '<section class="dump-cnt">', 1)
+		data = Csplit(data, '<div class="pagecontainer">', 1)
 		data = Csplit(data, '<div id="footcontainer">', 0)
 		data = Csplit(data, '<footer class="dump-ftr">', 0)
 		nexturl = ''
@@ -1839,14 +1839,14 @@ class OpenUg(Screen):
 			if tmp in data:
 				url = data.split(tmp)[1].split('"')[0]
 				url = base64.b64decode(url)
-				url = url.replace("{","").replace("}","").split(",")
+				url = url.replace("{", "").replace("}", "").split(",")
 				for line in url:
 					if '"720p"' in line:
-						vidurl = line.split('":"')[1].replace("\/","/").replace('"','')
+						vidurl = line.split('":"')[1].replace("\/", "/").replace('"', '')
 						if 'dumpert' in vidurl:
 							return vidurl
 					if '"tablet"' in line:
-						vidurl = line.split('":"')[1].replace("\/","/").replace('"','')
+						vidurl = line.split('":"')[1].replace("\/", "/").replace('"', '')
 				if 'dumpert' in vidurl:
 					return vidurl
 		return ''
@@ -2011,7 +2011,7 @@ class OpenUg(Screen):
 		g.pages = 2
 		result = g.search()
 		print result
-		for k,v in result.items():
+		for k, v in result.items():
 			name = k.encode("utf8")
 			url = v.encode("utf8")
 			if 'site:rtlxl.nl/#!' in search:

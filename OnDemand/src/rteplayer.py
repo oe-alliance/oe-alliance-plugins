@@ -291,7 +291,7 @@ class StreamsThumb(StreamsThumbCommon):
 			fileUrl = findPlayUrl(showID)
 			
 			if fileUrl:
-				fileRef = eServiceReference(4097,0,fileUrl)
+				fileRef = eServiceReference(4097, 0, fileUrl)
 				fileRef.setName(showName)
 				lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 				self.session.open(MoviePlayer, fileRef, None, lastservice)
@@ -310,7 +310,7 @@ class StreamsThumb(StreamsThumbCommon):
 			tree = etree.parse(url, parser)
 
 			for shows in tree.xpath('//div[@class="more-videos-pane"]//article[@class="thumbnail-module"]//a[@class="thumbnail-programme-link"]/@href'):
-				show_split = shows.rsplit('/',2)
+				show_split = shows.rsplit('/', 2)
 				show = str(show_split[1])
 				showIDs.append(show)
 
@@ -590,7 +590,7 @@ class StreamsThumb(StreamsThumbCommon):
 				
 				try:
 					stream_tmp = str(title.find('a').get('href'))
-					stream_split = stream_tmp.rsplit('/',2)
+					stream_split = stream_tmp.rsplit('/', 2)
 					stream = stream_split[1]
 				except (Exception) as exception:
 					print "getSearchMediaData: stream parse error: ", exception

@@ -378,7 +378,7 @@ begin = mktime((
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 # Find all directories "clock*" with result in a list, extract last two chars, extract integers, remove dupes, sort integers and convert it back to a list
-FoundClockDir = list(map(str,sorted(set([int(i) for i in re.findall(r'\d+', str(list(map(lambda found: str(found)[-2:], glob.glob(Clock + "*")))))]))))
+FoundClockDir = list(map(str, sorted(set([int(i) for i in re.findall(r'\d+', str(list(map(lambda found: str(found)[-2:], glob.glob(Clock + "*")))))]))))
 LCD4linux = Config()
 LCD4linux.Enable = ConfigYesNo(default=True)
 LCD4linux.L4LVersion = ConfigText(default="0.0r0", fixed_size=False)
@@ -2365,11 +2365,11 @@ class MyTimer: # only for debug
 	callback = property(getCallback)
 
 def getFsize(text, f):
-	m1,m2 = f.getmetrics()
-	(w1,h1),(o1,o2) = f.font.getsize(text)
+	m1, m2 = f.getmetrics()
+	(w1, h1), (o1, o2) = f.font.getsize(text)
 	h1 = m1 + m2
 	h = h1 + int(round(h1 / 33.))
-	return w1,h
+	return w1, h
 
 def Code_utf8(wert):
 	if wert is None:
@@ -2382,7 +2382,7 @@ def Code_utf8(wert):
 		wert.replace('\x86', '').replace('\x87', '')
 		return wert
 
-def L4log(nfo,wert=""):
+def L4log(nfo, wert=""):
 	if str(LCD4linux.EnableEventLog.value) != "0":
 		print("[LCD4linux]", nfo, wert)
 		if str(LCD4linux.EnableEventLog.value) != "3":
@@ -2395,7 +2395,7 @@ def L4log(nfo,wert=""):
 			except IOError:
 				print("[LCD4linux]", strftime("%H:%M:%S"), "Logging-Error")
 
-def L4logE(nfo,wert=""):
+def L4logE(nfo, wert=""):
 	if str(LCD4linux.EnableEventLog.value) == "2":
 		L4log(nfo, wert)
 
@@ -2418,7 +2418,7 @@ def setConfigStandby(w):
 def setisMediaPlayer(w):
 	global isMediaPlayer
 	isMediaPlayer = w
-def setScreenActive(w,lcd=""):
+def setScreenActive(w, lcd=""):
 	global ScreenActive
 	global ScreenTime
 	if lcd == "":
@@ -3089,7 +3089,7 @@ def doDPF(dev, im, s):
 			dpf.close(SamsungDevice3)
 			SamsungDevice3 = None
 
-def writeLCD1(s,im,quality,SAVE=True):
+def writeLCD1(s, im, quality, SAVE=True):
 	global SamsungDevice
 	global MJPEGreader
 	if s.imWrite[im] == True:
@@ -3204,7 +3204,7 @@ def writeLCD1(s,im,quality,SAVE=True):
 		MJPEGreader[1] += 1 if MJPEGreader[1] < 100 else 0
 	s.imWrite[im] = False
 
-def writeLCD2(s,im,quality,SAVE=True):
+def writeLCD2(s, im, quality, SAVE=True):
 	global SamsungDevice2
 	global MJPEGreader
 	if s.imWrite[im] == True:
@@ -3319,7 +3319,7 @@ def writeLCD2(s,im,quality,SAVE=True):
 		MJPEGreader[2] += 1 if MJPEGreader[2] < 100 else 0
 	s.imWrite[im] = False
 
-def writeLCD3(s,im,quality,SAVE=True):
+def writeLCD3(s, im, quality, SAVE=True):
 	global SamsungDevice3
 	global MJPEGreader
 	if s.imWrite[im] == True:
@@ -3921,9 +3921,9 @@ def getHTMLwwwCloudconvert(fn, www):
 	filename = WWWpic % str(fn)
 	L4log("downloading HTMLwww from", www)
 	try:
-		datastart = {"input": "url","file": www,"filename": "convert.website","outputformat": "jpg"}
+		datastart = {"input": "url", "file": www, "filename": "convert.website", "outputformat": "jpg"}
 		for API in LCD4linux.WwwApiKeyCloudconvert.value.split():
-			dataget = {"apikey": API,"inputformat": "website","outputformat": "jpg"}
+			dataget = {"apikey": API, "inputformat": "website", "outputformat": "jpg"}
 			content, resp = Urlget("https://api.cloudconvert.org/process", dataget, "POST")
 			L4logE(content, resp)
 			if resp == 200:
@@ -4105,7 +4105,7 @@ class RunShell:
 		ShellRunning = False
 		L4log("Shell Data")
 
-def TFTCheck(Force,SetMode=""):
+def TFTCheck(Force, SetMode=""):
 	global AktTFT
 	if os.path.isfile("/usr/bin/tft-bmp-mode.sh") == True and os.path.isfile("/usr/bin/tft-dream-mode.sh") == True:
 		CurTFT = os.path.isfile("/etc/grautec/settings/takeownership")
@@ -8542,8 +8542,8 @@ class UpdateStatus(Screen):
 							L4log("please use newer Netatmo-Plugin")
 						self.oM.append([]) # Wert1,Wert2,Wert3,Wert4,Name,Type,Batt
 						# Outdoor , Wind , Rain , Indoor
-						BatterylistR = {"NAModule1":4000,"NAModule2":4360,"NAModule3":4000,"NAModule4":4560}
-						BatterylistY = {"NAModule1":4500,"NAModule2":4770,"NAModule3":4500,"NAModule4":4920}
+						BatterylistR = {"NAModule1": 4000, "NAModule2": 4360, "NAModule3": 4000, "NAModule4": 4560}
+						BatterylistY = {"NAModule1": 4500, "NAModule2": 4770, "NAModule3": 4500, "NAModule4": 4920}
 						for Mod in na.modules:
 							Battery = "green"
 							if Mod.module_type.startswith("NAModule"):
@@ -9403,7 +9403,7 @@ class UpdateStatus(Screen):
 				L4log("Error:", format_exc())
 			i += 1
 
-	def downloadwwwBoxCallback(self,element, page=""):
+	def downloadwwwBoxCallback(self, element, page=""):
 		sR = sN = sS = ""
 		page = six.ensure_str(page)
 		dom = parseString(page)
@@ -9419,7 +9419,7 @@ class UpdateStatus(Screen):
 		self.wwwBox[element] = [self.wwwBox[element][0], sR, sN, sS]
 		L4logE("wwwBox %d" % element, self.wwwBox[element])
 
-	def downloadwwwBoxError(self,element,error=""):
+	def downloadwwwBoxError(self, element, error=""):
 		self.wwwBox[element] = [[""], [""], [""], [""], [""]]
 		if error == "":
 			L4log("wwwBox Error %d?" % elemtent)
@@ -9496,7 +9496,7 @@ class UpdateStatus(Screen):
 				self.wwwBoxTimer.append(e2t)
 				L4logE("wwwBoxTimer", e2t.values())
 
-	def downloadwwwBoxTimerError(self,element,error=""):
+	def downloadwwwBoxTimerError(self, element, error=""):
 		self.wwwBoxTimer = []
 		if error == "":
 			L4log("wwwBox Error %d?" % elemtent)
@@ -9598,7 +9598,7 @@ class UpdateStatus(Screen):
 					L4logE("Error: MSN date check", date)
 					days = -1
 				if days < 0:
-					self.WWeek[ConfigWWW].append({"High":High,"Low":Low,"Day":Day,"Icon":Icon,"Cond":Cond,"Regen":Regen})
+					self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
 				else:
 					L4log("MSN ignore", date)
 			self.WDay[ConfigWWW] = {}
@@ -9660,7 +9660,7 @@ class UpdateStatus(Screen):
 				Cond = curr.get("weather", [{}])[0].get("description", "")
 				Regen = "%.1f" % (curr.get("rain", 0) + curr.get("snow", 0))
 				IconID = curr.get("weather", [{}])[0].get("id", "0")
-				self.WWeek[ConfigWWW].append({"High":High,"Low":Low,"Day":Day,"Icon":Icon,"Cond":Cond,"Regen":Regen,"IconID":IconID})
+				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen, "IconID": IconID})
 			PICwetter[ConfigWWW] = None
 
 		elif r.get("name", None) != None:
@@ -9721,7 +9721,7 @@ class UpdateStatus(Screen):
 				Cond = curr["Timeframes"][4]["wx_desc"]
 				Regen = "%.1f" % (curr["Timeframes"][4]["rain_mm"])
 				IconID = curr["Timeframes"][4]["wx_code"]
-				self.WWeek[ConfigWWW].append({"High":High,"Low":Low,"Day":Day,"Icon":Icon,"Cond":Cond,"Regen":Regen,"IconID":IconID})
+				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen, "IconID": IconID})
 			PICwetter[ConfigWWW] = None
 			L4logE("Wetter:", self.WWeek[ConfigWWW])
 
@@ -10323,7 +10323,7 @@ def LCD4linuxPIC(self, session):
 			self.draw[draw].text((tx, ty), TXT, font=font, fill=tCol)
 #			self.draw[draw].text((tx, ty), TXT, font=font, fill=None)
 
-	def writeMultiline(sts,ConfigSize,ConfigPos,ConfigLines,ConfigColor,ConfigAlign,ConfigSplit,draw,im,utf=True,ConfigBackColor="0",ConfigFont=FONT,Shadow=False,Width=0,PosX=-1):
+	def writeMultiline(sts, ConfigSize, ConfigPos, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, draw, im, utf=True, ConfigBackColor="0", ConfigFont=FONT, Shadow=False, Width=0, PosX=-1):
 		MAX_W, MAX_H = self.im[im].size
 		if ConfigSplit == True:
 			MAX_W = int(MAX_W / 2)
@@ -10365,7 +10365,7 @@ def LCD4linuxPIC(self, session):
 			ShadowText(draw, POSX, current_h, line, font, ConfigColor, Shadow)
 			current_h += h
 
-	def writeMultiline2(sts,ConfigSize,ConfigPos,ConfigLines,ConfigColor,ConfigX,MAX_W,draw,im,ConfigFont=FONT,Shadow=False):
+	def writeMultiline2(sts, ConfigSize, ConfigPos, ConfigLines, ConfigColor, ConfigX, MAX_W, draw, im, ConfigFont=FONT, Shadow=False):
 		para = sts.split("\n")
 		current_h = ConfigPos
 		while len(para) > int(ConfigLines):
@@ -10984,7 +10984,7 @@ def LCD4linuxPIC(self, session):
 					else:
 						minus5 = -3
 						font = ImageFont.truetype(ConfigFont, int(13 * Wmulti), encoding='unic')
-						Wind = Wind.split(" ",2)
+						Wind = Wind.split(" ", 2)
 						if len(Wind) < 3:
 							Wind = ["?", "km/h", "?"]
 						ShadowText(Wim, POSX - minus5, POSY + int(55 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow) #silver
@@ -11322,22 +11322,22 @@ def LCD4linuxPIC(self, session):
 					pass
 		elif ConfigType[0] == "5":
 			y = int(ConfigSize * 1.8)
-			POSX = getSplit(ConfigSplit,ConfigAlign,MAX_W,y)
+			POSX = getSplit(ConfigSplit, ConfigAlign, MAX_W, y)
 			pil_image = Clock + str(ConfigAnalog) + "/Clock.png"
 			if os.path.isfile(pil_image) == True:
 				ClockfaceIm = Image.open(pil_image)
-				x1,y1 = ClockfaceIm.size
+				x1, y1 = ClockfaceIm.size
 				x = int(x1 * y / y1)
-				POSX = getSplit(ConfigSplit,ConfigAlign,MAX_W,x)
+				POSX = getSplit(ConfigSplit, ConfigAlign, MAX_W, x)
 				try:
-					if self.ClockName[ConfigNum] != [int(ConfigAnalog),y]:
+					if self.ClockName[ConfigNum] != [int(ConfigAnalog), y]:
 						self.ClockIm[ConfigNum] = Image.open(pil_image)
 						if str(LCD4linux.BilderQuality.value) == "0":
 							self.ClockIm[ConfigNum] = self.ClockIm[ConfigNum].resize((x, y))
 						else:
 							self.ClockIm[ConfigNum] = self.ClockIm[ConfigNum].resize((x, y), Image.ANTIALIAS)
-						self.ClockName[ConfigNum] = [int(ConfigAnalog),y]
-					self.im[im].paste(self.ClockIm[ConfigNum],(POSX,ConfigPos),self.ClockIm[ConfigNum])
+						self.ClockName[ConfigNum] = [int(ConfigAnalog), y]
+					self.im[im].paste(self.ClockIm[ConfigNum], (POSX, ConfigPos), self.ClockIm[ConfigNum])
 					# Weekday in or underneath clockface
 					if ConfigType[:3] == "521":
 						if "+" in ConfigType: # means weekday in combination with date
@@ -11346,7 +11346,7 @@ def LCD4linuxPIC(self, session):
 						else:                 # means weekday in clockface only
 							now = Code_utf8(_(strftime("%a")))
 							font = ImageFont.truetype(ConfigFont, int(y / 9), encoding='unic')
-						w,h = getFsize(now, font)
+						w, h = getFsize(now, font)
 						if "+" in ConfigType: # means weekday in combination with date
 							x1 = POSX + int(x / 2) - int(w * 1.1)
 							y1 = ConfigPos + y
@@ -11354,11 +11354,11 @@ def LCD4linuxPIC(self, session):
 							x1 = POSX + int(x * 3 / 4)
 							y1 = ConfigPos + int(y / 2) - int(h / 2)
 							di = int(h / 7)
-							self.draw[draw].rectangle((x1 - di, y1 + di - 1, x1 + w + di, y1 + h - di),fill="black")
-						ShadowText(draw,x1,y1,now,font,ConfigColor,ConfigShadow)
+							self.draw[draw].rectangle((x1 - di, y1 + di - 1, x1 + w + di, y1 + h - di), fill="black")
+						ShadowText(draw, x1, y1, now, font, ConfigColor, ConfigShadow)
 					# Hour
 					pil_image = Image.open(Clock + str(ConfigAnalog) + "/Hour.png")
-					x1,y1 = pil_image.size
+					x1, y1 = pil_image.size
 					x1 = int(x1 * y / y1)
 					y1 = y
 					if str(LCD4linux.BilderQuality.value) == "0":
@@ -11368,10 +11368,10 @@ def LCD4linuxPIC(self, session):
 					S = int(strftime("%H")) % 12
 					pil_image = pil_image.rotate(360 - int(30 * S + int(int(strftime("%M")) / 2))) #360/12
 					pil_image = pil_image.convert("RGBA")
-					self.im[im].paste(pil_image,(POSX + int((x - x1) / 2),ConfigPos + int((y - y1) / 2)),pil_image)
+					self.im[im].paste(pil_image, (POSX + int((x - x1) / 2), ConfigPos + int((y - y1) / 2)), pil_image)
 					# Minute
 					pil_image = Image.open(Clock + str(ConfigAnalog) + "/Minute.png")
-					x1,y1 = pil_image.size
+					x1, y1 = pil_image.size
 					x1 = int(x1 * y / y1)
 					y1 = y
 					if str(LCD4linux.BilderQuality.value) == "0":
@@ -11380,20 +11380,20 @@ def LCD4linuxPIC(self, session):
 						pil_image = pil_image.resize((x1, y1), Image.ANTIALIAS)
 					pil_image = pil_image.rotate(360 - int(6 * int(strftime("%M")))) #360/60
 					pil_image = pil_image.convert("RGBA")
-					self.im[im].paste(pil_image,(POSX + int((x - x1) / 2),ConfigPos + int((y - y1) / 2)),pil_image)
+					self.im[im].paste(pil_image, (POSX + int((x - x1) / 2), ConfigPos + int((y - y1) / 2)), pil_image)
 					# Seconds: Due to the bad refresh rates, the second hand was deliberately not programmed!
 					# Date underneath clockface
 					if ConfigType[:2] == "52":
 						now = strftime(_("%d.%m.%Y"))
 						font = ImageFont.truetype(ConfigFont, int(y / 6), encoding='unic')
-						w,h = getFsize(now, font)
+						w, h = getFsize(now, font)
 						if "+" in ConfigType: # means weekday in combination with date
 							x1 = POSX + int(x / 2)
 							y1 = ConfigPos + y
 						else:                 # means date only
 							x1 = POSX + int(x / 2) - int(w / 2)
 							y1 = ConfigPos + y
-						ShadowText(draw,x1,y1,now,font,ConfigColor,ConfigShadow)
+						ShadowText(draw, x1, y1, now, font, ConfigColor, ConfigShadow)
 				except:
 					pass
 		elif ConfigType[0] == "1":
@@ -15193,9 +15193,9 @@ def LCD4linuxPIC(self, session):
 	INFO = PUSH + "   " + INFO
 	return
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	session.open(LCDdisplayConfig)
-def screenswitch(session,**kwargs):
+def screenswitch(session, **kwargs):
 	session.open(LCDscreenSwitch)
 
 def autostart(reason, **kwargs):

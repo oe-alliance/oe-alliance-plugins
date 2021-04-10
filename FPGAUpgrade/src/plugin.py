@@ -42,7 +42,7 @@ class FPGAUpgradeCore():
 		self.firmwarefile = firmwarefile
 
 	def doUpgrade(self):
-		firmware,device = None,None
+		firmware, device = None, None
 		def closefpga(fp, fd):
 			if fd is not None:
 				os.close(fd)
@@ -85,7 +85,7 @@ class FPGAUpgradeCore():
 				raise Exception, 'wrong fpga file.'
 		except Exception, msg:
 			self.errmsg = msg
-			print '[FPGAUpgradeCore] ERROR >>',msg
+			print '[FPGAUpgradeCore] ERROR >>', msg
 			closefpga(firmware, device)
 			return STATUS_ERROR
 		closefpga(firmware, device)
@@ -146,7 +146,7 @@ class UpgradeStatus(Screen):
 		</screen>
 		"""
 	def __init__(self, session, parent, timeout=20):
-		Screen.__init__(self,session)
+		Screen.__init__(self, session)
 		self.session = session
 
 		self["actions"] = ActionMap(["OkCancelActions"],

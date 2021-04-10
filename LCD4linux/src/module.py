@@ -38,7 +38,7 @@ class L4Lelement:
 					del L4Lelement.List[x]
 	def show(self):
 		print(L4Lelement.List)
-	def get(self,element=None):
+	def get(self, element=None):
 		if element == None:
 			return L4Lelement.List
 		else:
@@ -68,10 +68,10 @@ class L4Lelement:
 		L4Lelement.Hold = H
 	def getHoldKey(self):
 		return L4Lelement.HoldKey
-	def setHoldKey(self,H=False):
+	def setHoldKey(self, H=False):
 		print("[LCD4linuxE] HoldKey", H)
 		L4Lelement.HoldKey = H
-	def getFont(self,F="0"):
+	def getFont(self, F="0"):
 		if L4Lelement.Font[int(F)].endswith(".ttf") and os.path.isfile(L4Lelement.Font[int(F)]):
 			return L4Lelement.Font[int(F)]
 		else:
@@ -80,7 +80,7 @@ class L4Lelement:
 		L4Lelement.Font = F
 	def getScreen(self):
 		return L4Lelement.Screen
-	def setScreen(self,S,Lcd="",Hold=False):
+	def setScreen(self, S, Lcd="", Hold=False):
 		if Lcd != "":
 			if len(str(Lcd)) > 1 or int(Lcd) > 3:
 				Lcd = "1"
@@ -88,17 +88,17 @@ class L4Lelement:
 		L4Lelement.LCD = str(Lcd)
 		L4Lelement.Hold = Hold
 		L4Lelement.Refresh = True
-	def resetBrightness(self,AKT=""):
+	def resetBrightness(self, AKT=""):
 		if len(AKT) == 3:
 			L4Lelement.BrightAkt = AKT
 		else:
 			L4Lelement.Bright = [-1, -1, -1]
-	def setBrightness(self,LCD,BRI=-1):
+	def setBrightness(self, LCD, BRI=-1):
 		if int(LCD) < 1 or int(LCD) > 3:
 			return
 		L4Lelement.Bright[int(LCD) - 1] = int(BRI)
 		L4Lelement.Refresh = True
-	def getBrightness(self,LCD=0,ORG=True):
+	def getBrightness(self, LCD=0, ORG=True):
 		if int(LCD) > 0 and int(LCD) < 4:
 			return L4Lelement.Bright[int(LCD) - 1] if ORG == False else L4Lelement.BrightAkt[int(LCD) - 1]
 		else:

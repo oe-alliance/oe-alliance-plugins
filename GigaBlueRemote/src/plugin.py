@@ -28,12 +28,12 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if getMachineBuild() in ("gb7252","gb7356","gb73625","gb7362","gb7358","gbmv200"):
+		if getMachineBuild() in ("gb7252", "gb7356", "gb73625", "gb7362", "gb7358", "gbmv200"):
 			return True
 		else:
 			return False
 
-class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
+class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 	skin = """
 		<screen position="center,center" size="400,250" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />
@@ -44,8 +44,8 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		</screen>
 	"""
 
-	def __init__(self,session):
-		Screen.__init__(self,session)
+	def __init__(self, session):
+		Screen.__init__(self, session)
 		self.skinName = ['RemoteControlCode', 'Setup']
 		self.session = session
 		Screen.setTitle(self, _("Remote Control Code"))
@@ -58,7 +58,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 		}, -2)
 		self.codestartup = config.plugins.remotecontrolcode.systemcode.value
 		self.list = []
-		ConfigListScreen.__init__(self, self.list,session=self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self.createSetup()
@@ -68,7 +68,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 
 	def checkModel(self):
 		if not self.getModel():
-			self.checkModelTimer.start(1000,True)
+			self.checkModelTimer.start(1000, True)
 
 	def invalidmodel(self):
 		self.session.openWithCallback(self.close, MessageBox, _("Sorry, but %s is not supported.") % getBoxType(), MessageBox.TYPE_ERROR)
@@ -83,7 +83,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 	def keySave(self):
 		configfile.save()
 		if self.codestartup != config.plugins.remotecontrolcode.systemcode.value:
-			print "[RemoteControlCode] Selected System Code : ",config.plugins.remotecontrolcode.systemcode.value
+			print "[RemoteControlCode] Selected System Code : ", config.plugins.remotecontrolcode.systemcode.value
 			ret = self.setSystemCode(config.plugins.remotecontrolcode.systemcode.value)
 			if ret == -1:
 				self.restoreCode()
@@ -98,7 +98,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 			x[1].cancel()
 		self.close()
 
-	def MessageBoxConfirmCodeCallback(self,ret):
+	def MessageBoxConfirmCodeCallback(self, ret):
 		if ret:
 			ConfigListScreen.keySave(self)
 		else:
@@ -107,7 +107,7 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 
 class MessageBoxConfirmCode(MessageBox):
 	def __init__(self, session, text, type=MessageBox.TYPE_YESNO, timeout=-1, close_on_any_key=False, default=False, enable_input=True, msgBoxID=None):
-		MessageBox.__init__(self,session,text,type,timeout,close_on_any_key,default,enable_input,msgBoxID)
+		MessageBox.__init__(self, session, text, type, timeout, close_on_any_key, default, enable_input, msgBoxID)
 		self.skinName = "MessageBox"
 		if type == MessageBox.TYPE_YESNO:
 			self.list = [(_("Confirm"), True), (_("Cancel"), False)]

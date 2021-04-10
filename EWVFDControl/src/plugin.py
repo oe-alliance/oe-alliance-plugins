@@ -19,8 +19,8 @@ from Tools.Directories import fileExists
 import Screens.Standby
 
 config.plugins.vfd_ew = ConfigSubsection()
-config.plugins.vfd_ew.showClock = ConfigSelection(default="True_Switch", choices=[("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.vfd_ew.timeMode = ConfigSelection(default="24h", choices=[("12h"),("24h")])
+config.plugins.vfd_ew.showClock = ConfigSelection(default="True_Switch", choices=[("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.vfd_ew.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
@@ -41,7 +41,7 @@ class Channelnumber:
 		self.zaPrik.start(1000, 1)
 		self.onClose = []
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap={
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 
@@ -183,7 +183,7 @@ class vfd_ewSetup(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("Save"))
 		self["key_yellow"] = Button(_("Update Date/Time"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -300,4 +300,4 @@ def Plugins(**kwargs):
 			return []
 		else:
 			return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-				PluginDescriptor(name="LED Display Setup", description="Change LED display settings",where=PluginDescriptor.WHERE_MENU, fnc=main)]
+				PluginDescriptor(name="LED Display Setup", description="Change LED display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]

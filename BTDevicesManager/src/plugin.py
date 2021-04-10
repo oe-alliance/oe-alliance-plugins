@@ -138,7 +138,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 		for x in self['config'].list:
 			x[1].save()
 
-		if brandoem not in ("xcore","edision"):
+		if brandoem not in ("xcore", "edision"):
 			if config.btdevicesmanager.autostart.getValue():
 				print "[BluetoothManager] Autostart: Loading driver"
 				os.system("modprobe rtk_btusb")
@@ -146,7 +146,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 				print "[BluetoothManager] Autostart: Unloading driver"
 				os.system("rmmod rtk_btusb")
 
-		if brandoem in ("xcore","edision"):
+		if brandoem in ("xcore", "edision"):
 			if config.btdevicesmanager.audioconnect.getValue():
 				os.system("%s %s" % (commandconnect, config.btdevicesmanager.audioaddress.getValue()))
 			else:
@@ -185,7 +185,7 @@ class BluetoothDevicesManager(Screen):
 
 		self.taskManager = TaskManager()
 
-		self["actions"] = ActionMap(["OkCancelActions","WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
+		self["actions"] = ActionMap(["OkCancelActions", "WizardActions", "ColorActions", "SetupActions", "NumberActions", "MenuActions"], {
 			"ok": self.keyOK,
 			"cancel": self.keyCancel,
 			"red": self.keyCancel,
@@ -206,7 +206,7 @@ class BluetoothDevicesManager(Screen):
 
 		if config.btdevicesmanager.autostart.getValue():
 			self.initDevice()
-		if brandoem in ("xcore","edision"):
+		if brandoem in ("xcore", "edision"):
 			self.initDevice()
 			self.showConnections()
 
@@ -233,7 +233,7 @@ class BluetoothDevicesManager(Screen):
 			
 	def keyGreen(self):
 		print "[BluetoothManager] keyGreen"  
-		if config.btdevicesmanager.autostart.getValue() or brandoem in ("xcore","edision"):
+		if config.btdevicesmanager.autostart.getValue() or brandoem in ("xcore", "edision"):
 			self["ConnStatus"].setText(_("No connected to any device"))
 			self.initDevice()
 		else:
@@ -256,7 +256,7 @@ class BluetoothDevicesManager(Screen):
 		print "[BluetoothManager] cbPrintAvailDevices"
 		
 		self.devicelist = []
-		self.devicelist.append((_("MAC:\t\tDevice name:"),_("entry")))
+		self.devicelist.append((_("MAC:\t\tDevice name:"), _("entry")))
 		
 		data = data.splitlines()
 		i = 1
@@ -264,11 +264,11 @@ class BluetoothDevicesManager(Screen):
 			y = x.split("\t")
 			if not y[0] == "Scanning ...": ## We do not need to put this to the list
 			        i += 1
-				self.devicelist.append((y[1] + "\t" + y[2],y[1]))
+				self.devicelist.append((y[1] + "\t" + y[2], y[1]))
 		
 		if i == 1: ## Not sure if it is good idea, but worth to inform user that BT can not detect any other devices
 			self.devicelist = []
-			self.devicelist.append((_("MAC:\t\tDevice name:"),_("entry")))
+			self.devicelist.append((_("MAC:\t\tDevice name:"), _("entry")))
 			self["ConnStatus"].setText(_("Not detected devices around STB"))
 			
 		self["devicelist"].setList(self.devicelist)
@@ -276,7 +276,7 @@ class BluetoothDevicesManager(Screen):
 		
 	def showConnections(self):
 		print "[BluetoothManager] showConnections"
-		if brandoem not in ("xcore","edision"):
+		if brandoem not in ("xcore", "edision"):
 			cmd = "hidd --show"
 			self.taskManager.append(cmd, self.cbPrintCurrentConnections, self.cbStopDone)
 			self.taskManager.next()
@@ -320,7 +320,7 @@ class BluetoothDevicesManager(Screen):
 	def keyYellow(self):
 		if self["key_yellow"].getText() == _('Disconnect'):
 			print "[BluetoothManager] Disconnecting"
-			if brandoem not in ("xcore","edision"):
+			if brandoem not in ("xcore", "edision"):
 				cmd = "hidd --killall"
 				rc = os.system(cmd)
 				if not rc:
@@ -355,7 +355,7 @@ class BluetoothDevicesManager(Screen):
 			msg = _("Trying to pair with:") + " " + selectedItem[1]
 			self["ConnStatus"].setText(msg)
 			
-			if brandoem not in ("xcore","edision"):
+			if brandoem not in ("xcore", "edision"):
 				cmd = "hidd --connect " + selectedItem[1]
 				self.taskManager.append(cmd, self.cbPrintAvailConnections, self.cbRunNextTask)
 				cmd = "hidd --show"
@@ -417,7 +417,7 @@ class BluetoothDevicesManager(Screen):
 		print "[BluetoothManager] keyBlue"
 		self.session.openWithCallback(self.keyGreen, BluetoothDevicesManagerSetup)
 
-	def showMessage(self,msg):
+	def showMessage(self, msg):
 		self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, 3)
 
 	def keyCancel(self):
@@ -449,7 +449,7 @@ def main(session, **kwargs):
 
 def autostart(reason, **kwargs):
 	if reason == 0:
-		if brandoem not in ("xcore","edision"):
+		if brandoem not in ("xcore", "edision"):
 			if config.btdevicesmanager.autostart.getValue():
 				print "[BluetoothManager] Autostart: Loading driver" ## We have it on a blacklist because We want to have faster system loading, so We load driver while we enable it.
 				os.system("modprobe rtk_btusb")
@@ -457,7 +457,7 @@ def autostart(reason, **kwargs):
 				print "[BluetoothManager] Autostart: Unloading driver" ## We know it is blacklisted, but try to remove it anyway.
 				os.system("rmmod rtk_btusb")
 
-		if brandoem in ("xcore","edision"):
+		if brandoem in ("xcore", "edision"):
 			if config.btdevicesmanager.audioconnect.getValue():
 				os.system("%s %s" % (commandconnect, config.btdevicesmanager.audioaddress.getValue()))
 
@@ -467,7 +467,7 @@ class BluetoothDevicesTask:
 	def __init__(self, session):
 		self.session = session
 		self.onClose = []
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap={
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__evStart,
 			})
 		self.timestamp = datetime.now()
@@ -499,7 +499,7 @@ def sessionstart(session, reason, **kwargs):
 	global iBluetoothDevicesTask
 
 	if reason == 0:
-		if brandoem in ("xcore","edision"):
+		if brandoem in ("xcore", "edision"):
 			if iBluetoothDevicesTask is None:
 				iBluetoothDevicesTask = BluetoothDevicesTask(session)
 

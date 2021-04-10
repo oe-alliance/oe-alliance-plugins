@@ -14,7 +14,7 @@ from ChannelsImporter import ChannelsImporter
 from scheduler import autostart
 
 config.plugins.ChannelsImporter = ConfigSubsection()
-config.plugins.ChannelsImporter.ip = ConfigIP(default=[0,0,0,0])
+config.plugins.ChannelsImporter.ip = ConfigIP(default=[0, 0, 0, 0])
 config.plugins.ChannelsImporter.username = ConfigText(default="root", fixed_size=False)
 config.plugins.ChannelsImporter.password = ConfigText(default="", fixed_size=False)
 config.plugins.ChannelsImporter.port = ConfigInteger(21, (0, 65535))

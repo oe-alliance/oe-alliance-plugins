@@ -54,7 +54,7 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 			chURL = 'Unknown'
 		if isEmpty(chIcon):
 			chIcon = 'default.png'
-		chIcon = '%s/icons/%s' % (PLUGIN_PATH,chIcon)
+		chIcon = '%s/icons/%s' % (PLUGIN_PATH, chIcon)
 		self.session = session
 		self.service = service
 		self.cbServiceCommand = cbServiceCommand
@@ -94,7 +94,7 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 		self.picload.startDecode(chIcon)
 
 		self.bypassExit = False
-		self.cbServiceCommand(('docommand',self.doCommand))
+		self.cbServiceCommand(('docommand', self.doCommand))
 
 	def doCommand(self, cmd):
 		if cmd == 'bypass_exit':
@@ -198,7 +198,7 @@ class StreamURIParser:
 			i = str(iptv.findtext('icon'))
 			u = str(iptv.findtext('uri'))
 			t = str(iptv.findtext('type'))
-			tvlist.append({'name':n, 'icon':i, 'type':t, 'uri':self.parseStreamURI(u)})
+			tvlist.append({'name': n, 'icon': i, 'type': t, 'uri': self.parseStreamURI(u)})
 		return tvlist
 
 	def parseStreamURI(self, uri):
@@ -215,8 +215,8 @@ def streamListEntry(entry):
 	uriInfo = entry[1].get('uri')
 	return [entry,
 		(eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 1, 35, 35, loadPNG('%s/icons/%s' % (PLUGIN_PATH, str(entry[1].get('icon'))))),
-		(eListboxPythonMultiContent.TYPE_TEXT,45,7,200,37,0,RT_HALIGN_LEFT,entry[0]),
-		(eListboxPythonMultiContent.TYPE_TEXT,250,7,310,37,1,RT_HALIGN_LEFT,str(uriInfo.get('URL')))
+		(eListboxPythonMultiContent.TYPE_TEXT, 45, 7, 200, 37, 0, RT_HALIGN_LEFT, entry[0]),
+		(eListboxPythonMultiContent.TYPE_TEXT, 250, 7, 310, 37, 1, RT_HALIGN_LEFT, str(uriInfo.get('URL')))
 	] 
 
 class StreamTVList(Screen):
@@ -410,7 +410,7 @@ def main(session, **kwargs):
 	for line in f.readlines():
 		line = line.strip()
 		if line.find('Link detected:') >= 0:
-			x = line.split(':',1)
+			x = line.split(':', 1)
 			active = x[1].strip()
 	if (active == "yes"):
 		system("rm /tmp/.eth0_test")

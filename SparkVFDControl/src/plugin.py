@@ -25,10 +25,10 @@ import NavigationInstance
 from Screens.SessionGlobals import SessionGlobals
 
 config.plugins.VFD_spark = ConfigSubsection()
-config.plugins.VFD_spark.showClock = ConfigSelection(default="True_Switch", choices=[("NameOff",_("Channelname in Standby off")), ("NameOn",_("Channelname in Standby Clock")), ("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")), ("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_spark.timeMode = ConfigSelection(default="24h", choices=[("12h"),("24h")])
-config.plugins.VFD_spark.redLed = ConfigSelection(default="0", choices=[("0",_("Off")),("1",_("Standby only")), ("2",_("Record only"))])
-config.plugins.VFD_spark.greenLed = ConfigSelection(default="0", choices=[("0",_("Off")),("1",_("Standby only"))])
+config.plugins.VFD_spark.showClock = ConfigSelection(default="True_Switch", choices=[("NameOff", _("Channelname in Standby off")), ("NameOn", _("Channelname in Standby Clock")), ("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.VFD_spark.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
+config.plugins.VFD_spark.redLed = ConfigSelection(default="0", choices=[("0", _("Off")), ("1", _("Standby only")), ("2", _("Record only"))])
+config.plugins.VFD_spark.greenLed = ConfigSelection(default="0", choices=[("0", _("Off")), ("1", _("Standby only"))])
 
 def vfd_write(text):
 	open("/dev/dbox/oled0", "w").write(text)
@@ -49,7 +49,7 @@ class Channelnumber:
 		self.zaPrik.start(1000, 1)
 		self.onClose = []
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap={
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 		session.nav.record_event.append(self.gotRecordEvent)
@@ -166,7 +166,7 @@ class Channelnumber:
 	def showRec(self):
 		try:
 			#not all images support recording type indicators
-			recordings = len(NavigationInstance.instance.getRecordings(False,Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue())))
+			recordings = len(NavigationInstance.instance.getRecordings(False, Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue())))
 		except:
 			recordings = len(NavigationInstance.instance.getRecordings())
 		
@@ -230,7 +230,7 @@ class VFD_SPARKSetup(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("Save"))
 		self["key_yellow"] = Button(_("Update Date/Time"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -405,6 +405,6 @@ def sessionstart(reason, **kwargs):
 def Plugins(**kwargs):
 		if getBoxType() in ('amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'amikomini'):
 			return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings",where=PluginDescriptor.WHERE_MENU, fnc=main)]
+				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]
 		else:
 			return []

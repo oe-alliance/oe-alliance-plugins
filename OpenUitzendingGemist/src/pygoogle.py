@@ -7,9 +7,9 @@ Needs Python 2.6 or later
 """
 try:
     import json
-except ImportError,e:
+except ImportError, e:
     import simplejson as json
-except ImportError,e:
+except ImportError, e:
     print e
     exit()
 
@@ -67,7 +67,7 @@ If this header is not present, a value of en is assumed.
 
 class pygoogle:
     
-    def __init__(self,query,pages=10,hl='en',log_level=logging.INFO):
+    def __init__(self, query, pages=10, hl='en', log_level=logging.INFO):
         self.pages = pages          #Number of pages. default 10
         self.query = query
         self.filter = FILTER_ON     #Controls turning on or off the duplicate content filter. On = 1.
@@ -84,12 +84,12 @@ class pygoogle:
         logger.addHandler(handler)
         self.logger = logger
 
-    def __search__(self,print_results=False):
+    def __search__(self, print_results=False):
         '''
         returns list of results if successful or False otherwise
         '''
         results = []
-        for page in range(0,self.pages):
+        for page in range(0, self.pages):
             rsz = 8
             if self.rsz == RSZ_SMALL:
                 rsz = 4
@@ -117,7 +117,7 @@ class pygoogle:
                     for result in data['responseData']['results']:
                         if result:
                             print '[%s]' % (urllib.unquote(result['titleNoFormatting']))
-                            print result['content'].strip("<b>...</b>").replace("<b>",'').replace("</b>",'').replace("&#39;","'").strip()
+                            print result['content'].strip("<b>...</b>").replace("<b>", '').replace("</b>", '').replace("&#39;", "'").strip()
                             print urllib.unquote(result['unescapedUrl']) + '\n'                
                 else:
                     # no responseData key was found in 'data' 
@@ -146,7 +146,7 @@ class pygoogle:
     def search_page_wise(self):
         """Returns a dict of page-wise urls"""
         results = {}
-        for page in range(0,self.pages):
+        for page in range(0, self.pages):
             args = {'q': self.query,
                     'v': '1.0',
                     'start': page,
@@ -199,7 +199,7 @@ class pygoogle:
                 if result_count.has_key('cursor') and result_count['cursor'].has_key('estimatedResultCount'):
                     return result_count['cursor']['estimatedResultCount']
             return 0
-        except Exception,e:
+        except Exception, e:
             self.logger.error(e)
         finally:
             self.pages = temp

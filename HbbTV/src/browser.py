@@ -71,9 +71,9 @@ class BrowserSetting:
 
 	def getData(self):
 		return {
-			'start':self._start,
-			'type':self._type,
-			'keymap':self._keymap,
+			'start': self._start,
+			'type': self._type,
+			'keymap': self._keymap,
 		}
 
 class BrowserPositionSetting:
@@ -135,12 +135,12 @@ class BrowserPositionWindow(Screen, ConfigListScreen):
 		</screen>
 		"""
 	def __init__(self, session):
-		w,h = session.desktop.size().width(), session.desktop.size().height()
-		cw,ch = w / 2, h / 2
+		w, h = session.desktop.size().width(), session.desktop.size().height()
+		cw, ch = w / 2, h / 2
 		#                             btn_red        btn_green     lb_red         lb_green      config
-		self.skin = self.skin % (w,h, cw - 190,ch - 110, cw + 50,ch - 110, cw - 190,ch - 110, cw + 50,ch - 110, cw - 250,ch - 50)
+		self.skin = self.skin % (w, h, cw - 190, ch - 110, cw + 50, ch - 110, cw - 190, ch - 110, cw + 50, ch - 110, cw - 250, ch - 50)
 
-		Screen.__init__(self,session)
+		Screen.__init__(self, session)
 		self.session = session
 		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{
@@ -234,7 +234,7 @@ class BrowserPositionWindow(Screen, ConfigListScreen):
 			vbcfg.setPosition(vbcfg.g_position)
 			self.close()
 
-	def cancelConfirm(self,ret):
+	def cancelConfirm(self, ret):
 		if ret:
 			vbcfg.setPosition(vbcfg.g_position)
 			self.close()
@@ -366,7 +366,7 @@ class BrowserPreferenceWindow(ConfigListScreen, Screen):
 		self["config"].l.setList(self.menulist)
 
 class BookmarkEditWindow(ConfigListScreen, Screen):
-	CATEGORY,BOOKMARK = 0,1
+	CATEGORY, BOOKMARK = 0, 1
 	skin = """
 		<screen position="center,center" size="600,140" title="Bookmark Edit">
 			<widget name="config" position="0,0" size="600,100" scrollbarMode="showOnDemand" />
@@ -398,7 +398,7 @@ class BookmarkEditWindow(ConfigListScreen, Screen):
 		self.menulist = []
 		ConfigListScreen.__init__(self, self.menulist)
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions",], {
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", ], {
 			"ok": self.keyGreen,
 			"green": self.keyGreen,
 			"red": self.keyRed,
@@ -554,15 +554,15 @@ class BrowserBookmarkWindow(Screen):
 		self.mBookmarkManager = BookmarkManager.getInstance()
 		self.mSession = _session
 		Screen.__init__(self, _session)
-		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions","ColorActions", "NumberActions"], {
-				"ok"	: self.keyOK,
+		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions", "ColorActions", "NumberActions"], {
+				"ok": self.keyOK,
 				"cancel": self.keyCancel,
-				"red"	: self.keyRed,
+				"red": self.keyRed,
 				"green": self.keyGreen,
 				"yellow": self.keyYellow,
-				"blue"	: self.keyBlue,
+				"blue": self.keyBlue,
 				"0": self.keyNumber,
-			},-2)
+			}, -2)
 
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = StaticText(_("Add"))
@@ -662,9 +662,9 @@ class BrowserBookmarkWindow(Screen):
 				c = CategoryData(0, '')
 				self.mSession.openWithCallback(self.cbEditWindow, BookmarkEditWindow, _('Add'), BookmarkEditWindow.CATEGORY, c, self.mBookmarkManager)
 		if strIsEmpty(self.mUrl):
-			l = [(_('Direct Input(Bookmark)'),2,), (_('Direct Input(Category)'),3,)]
+			l = [(_('Direct Input(Bookmark)'), 2,), (_('Direct Input(Category)'), 3,)]
 		else:
-			l = [(_('Currentpage(Bookmark)'),1,), (_('Direct Input(Bookmark)'),2,), (_('Direct Input(Category)'),3,)]
+			l = [(_('Currentpage(Bookmark)'), 1,), (_('Direct Input(Bookmark)'), 2,), (_('Direct Input(Category)'), 3,)]
 		self.mSession.openWithCallback(cbGreen, ChoiceBox, title=_("Please choose."), list=l)
 
 	def keyYellow(self):
@@ -713,7 +713,7 @@ class BrowserBookmarkWindow(Screen):
 		self.close()
 
 class BrowserHelpWindow(Screen, HelpableScreen):
-	MODE_GLOBAL,MODE_KEYBOARD,MODE_MOUSE = 1,2,3
+	MODE_GLOBAL, MODE_KEYBOARD, MODE_MOUSE = 1, 2, 3
 	skin = """
 		<screen name="BrowserHelpWindow" position="center,center" size="600,40" title="Browser Help" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
@@ -736,14 +736,14 @@ class BrowserHelpWindow(Screen, HelpableScreen):
 		self["key_yellow"] = StaticText(_("Mouse"))
 		self["key_blue"] = StaticText(_("Keyboard"))
 
-		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions","ColorActions"], {
+		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions", "ColorActions"], {
 				"ok": self.keyRed,
 				"cancel": self.keyRed,
-				"red"	: self.keyRed,
+				"red": self.keyRed,
 				"green": self.keyGreen,
 				"yellow": self.keyYellow,
-				"blue"	: self.keyBlue,
-			},-2)
+				"blue": self.keyBlue,
+			}, -2)
 
 		self.showHelpTimer = eTimer()
 		self.showHelpTimer.callback.append(self.cbShowHelpTimerClosed)
@@ -848,17 +848,17 @@ class Browser(Screen):
 			<widget name="submenulist" position="252,60" size="200,150" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 			<widget name="bottomArea" position="0,%(bottom_pos_y)d" size="%(bottom_size_x)d,80" font="Regular;20" valign="center" halign="center" backgroundColor="#000000" />
 		</screen>
-		""" % {'width':WIDTH,
-			'height':HEIGHT,
-			'bottom_pos_y':HEIGHT - 80,
-			'bottom_size_x':WIDTH}
+		""" % {'width': WIDTH,
+			'height': HEIGHT,
+			'bottom_pos_y': HEIGHT - 80,
+			'bottom_size_x': WIDTH}
 
 	MENULIST_ITEMS = []
 	COMMAND_MAP = {}
 	def __init__(self, session, url=None, is_webapp=False):
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["DirectionActions", "MenuActions", "OkCancelActions"], {
-			 "cancel": self.keyCancel			,"ok": self.keyOK			,"left": self.keyLeft			,"right": self.keyRight			,"up": self.keyUp			,"down": self.keyDown			,"menu": self.keyMenu
+			 "cancel": self.keyCancel			, "ok": self.keyOK			, "left": self.keyLeft			, "right": self.keyRight			, "up": self.keyUp			, "down": self.keyDown			, "menu": self.keyMenu
 		}, -2)
 
 		self._cb_update_language()
@@ -914,7 +914,7 @@ class Browser(Screen):
 
 	def _cb_update_language(self):
 		self.MENULIST_ITEMS = [
-			[(_('Open Startpage'), None), (_('Open URL'), None), (_('Start/Stop'),None), (_('Exit'), None)],
+			[(_('Open Startpage'), None), (_('Open URL'), None), (_('Start/Stop'), None), (_('Exit'), None)],
 			[(_('Bookmark'), None), (_('Preference'), None), (_('Position Setup'), None)],
 			[(_('About'), None), (_('Help'), None)]
 		]
@@ -1184,7 +1184,7 @@ class Browser(Screen):
 		if not self.is_show_menu:
 			self["menulist"].setList(self.get_menulist_items(self.idx_menu))
 			self["menulist"].resize(self.MENULIST_WIDTH, self.MENULIST_HEIGHT * len(self.get_menulist_items(self.idx_menu)) + 5)
-			self["menulist"].move(self.MENU_ITEM_WIDTH * self.idx_menu + 50,self.MENU_ITEM_HEIGHT + 30)
+			self["menulist"].move(self.MENU_ITEM_WIDTH * self.idx_menu + 50, self.MENU_ITEM_HEIGHT + 30)
 			self.toggle_menulist()
 			return
 		self["menulist"].down()

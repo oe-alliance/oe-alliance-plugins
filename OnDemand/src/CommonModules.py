@@ -167,19 +167,19 @@ class EpisodeList(HTMLComponent, GUIComponent):
 			attribs = []
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "TileFont":
-					font = parseFont(value, ((1,1),(1,1)))
+					font = parseFont(value, ((1, 1), (1, 1)))
 					self.tileFontName = font.family
 					self.tileFontSize = font.pointSize
 				elif attrib == "DateFont":
-					font = parseFont(value, ((1,1),(1,1)))
+					font = parseFont(value, ((1, 1), (1, 1)))
 					self.dateFontName = font.family
 					self.dateFontSize = font.pointSize
 				elif attrib == "DescriptionFont":
-					font = parseFont(value, ((1,1),(1,1)))
+					font = parseFont(value, ((1, 1), (1, 1)))
 					self.descriptionFontName = font.family
 					self.descriptionFontSize = font.pointSize
 				else:
-					attribs.append((attrib,value))
+					attribs.append((attrib, value))
 			self.skinAttributes = attribs
 		rc = GUIComponent.applySkin(self, desktop, screen)
 		self.listHeight = self.instance.size().height()
@@ -310,11 +310,11 @@ class EpisodeList(HTMLComponent, GUIComponent):
 	def getThumbnailName(self, x):
 		try:
 			temp_icon = str(x)
-			icon_name = temp_icon.rsplit('/',1)
+			icon_name = temp_icon.rsplit('/', 1)
 			
 			# OUG streams doesn't handle thumbnals well
 			if icon_name[1][:5] == "nicam":
-				icon_name = temp_icon.rsplit('/',2)
+				icon_name = temp_icon.rsplit('/', 2)
 				return str(icon_name[1]) + ".jpg"
 			else:				
 				return str(icon_name[1])
@@ -424,7 +424,7 @@ class MyHTTPConnection(HTTPConnection):
 			myDNS.append(primaryDNS)
 			resolver = Resolver()
 			resolver.nameservers = myDNS  #DNS Now coming from OnDemand Settings
-			answer = resolver.query(self.host,'A')
+			answer = resolver.query(self.host, 'A')
 			self.host = answer.rrset.items[0].address
 			self.sock = socket.create_connection((self.host, self.port))
 		except (Exception) as exception:
@@ -439,7 +439,7 @@ class MyHTTPConnection(HTTPConnection):
 					myDNS.append(secondaryDNS)
 					resolver = Resolver()
 					resolver.nameservers = myDNS  #DNS Now coming from OnDemand Settings
-					answer = resolver.query(self.host,'A')
+					answer = resolver.query(self.host, 'A')
 					self.host = answer.rrset.items[0].address
 					self.sock = socket.create_connection((self.host, self.port))
 

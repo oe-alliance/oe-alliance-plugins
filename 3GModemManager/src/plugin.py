@@ -184,9 +184,9 @@ class EditModemManual(ConfigListScreen, Screen):
 		self.cbFuncClose, self.isAdd = cbFuncClose, isAdd
 
 		if isAdd:
-			self.uid,self.pwd,self.pin,self.apn,self.phone = "","","","",""
+			self.uid, self.pwd, self.pin, self.apn, self.phone = "", "", "", "", ""
 		else:
-			self.uid,self.pwd,self.pin,self.apn,self.phone = uid,pwd,pin,apn,phone
+			self.uid, self.pwd, self.pin, self.apn, self.phone = uid, pwd, pin, apn, phone
 			if self.uid is None:
 				self.uid = ""
 			if self.pwd is None:
@@ -198,7 +198,7 @@ class EditModemManual(ConfigListScreen, Screen):
 			if self.phone is None:
 				self.phone = ""
 
-		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions",],
+		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", ],
 		{
 			"ok": self.keyOK,
 			"cancel": self.keyExit,
@@ -334,7 +334,7 @@ class EditModemManual(ConfigListScreen, Screen):
 			self.phone = self.configPhone.value
 			self.name = self.isAdd and self.configName.value or None
 			self.region = self.isAdd and self.configRegion.value or None
-			self.cbFuncClose(self.uid,self.pwd,self.pin,self.apn,self.phone,self.name,self.region)
+			self.cbFuncClose(self.uid, self.pwd, self.pin, self.apn, self.phone, self.name, self.region)
 		self.close()
 
 
@@ -368,7 +368,7 @@ class ModemManual(Screen):
 
 	def __init__(self, session, cbFuncClose, uid=None, pwd=None, pin=None, apn=None, phone='*99#'):
 		Screen.__init__(self, session)
-		self.cbFuncClose,self.uid,self.pwd,self.pin,self.apn,self.phone = cbFuncClose,uid,pwd,pin,apn,phone
+		self.cbFuncClose, self.uid, self.pwd, self.pin, self.apn, self.phone = cbFuncClose, uid, pwd, pin, apn, phone
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions"],
 		{
 			"ok": self.keyOK,
@@ -397,7 +397,7 @@ class ModemManual(Screen):
 		self.session.open(EditModemManual, self.cb3GManualSetting, isAdd=True)
 
 	def keyEdit(self):
-		self.session.open(EditModemManual, self.cb3GManualSetting, self.uid,self.pwd,self.pin,self.apn,self.phone)
+		self.session.open(EditModemManual, self.cb3GManualSetting, self.uid, self.pwd, self.pin, self.apn, self.phone)
 
 	def cb3GManualSetting(self, uid=None, pwd=None, pin=None, apn=None, phone='*99#', name=None, region=None, isRemove=False):
 		if not isRemove:
@@ -408,7 +408,7 @@ class ModemManual(Screen):
 			self.phone = isEmpty(phone) and "" or phone
 			
 		if name is not None:
-			self["menulist"].list.append((name, {'region':region, 'carrier':name, 'apn':self.apn, 'user':self.uid, 'password':self.pwd, 'pin':self.pin, 'phone':self.phone}))
+			self["menulist"].list.append((name, {'region': region, 'carrier': name, 'apn': self.apn, 'user': self.uid, 'password': self.pwd, 'pin': self.pin, 'phone': self.phone}))
 			self["menulist"].setList(self["menulist"].list)
 			self["menulist"].moveToIndex(len(self["menulist"].list) - 1)
 		if isRemove:
@@ -509,7 +509,7 @@ class ModemManual(Screen):
 			config.plugins.gmodemmanager.pin.save()
 			config.plugins.gmodemmanager.phone.save()
 			config.plugins.gmodemmanager.save()
-			self.cbFuncClose(self.uid,self.pwd,self.pin,self.apn,self.phone)
+			self.cbFuncClose(self.uid, self.pwd, self.pin, self.apn, self.phone)
 		self.close()
 
 	def keyExit(self):
@@ -527,7 +527,7 @@ class ModemManual(Screen):
 		self.updateAPNInfo()
 
 	def updateAPNInfo(self):
-		region,apn,uid,pwd,pin,phone = self.region, self.apn,self.uid,self.pwd,self.pin,self.phone
+		region, apn, uid, pwd, pin, phone = self.region, self.apn, self.uid, self.pwd, self.pin, self.phone
 		if region is None:
 			region = ""
 		if apn is None:
@@ -545,14 +545,14 @@ class ModemManual(Screen):
 
 	def setListOnView(self):
 		lvApnItems = []
-		def uppercaseCompare(a,b):
+		def uppercaseCompare(a, b):
 			aa = a.get("carrier")
 			bb = b.get("carrier")
 			if isEmpty(aa):
 				aa = ""
 			if isEmpty(bb):
 				bb = ""
-			return cmp(aa.upper(),bb.upper())
+			return cmp(aa.upper(), bb.upper())
 		def isExistAPN(name):
 			for x in lvApnItems:
 				if x[0] == name:
@@ -580,7 +580,7 @@ class ModemManual(Screen):
 				d['password'] = x.get('password')
 				d['pin'] = x.get('pin')
 				d['phone'] = x.get('phone')
-				lvApnItems.append((name,d))
+				lvApnItems.append((name, d))
 		except Exception, err:
 			pass
 		finally:
@@ -619,7 +619,7 @@ class ModemManager(Screen):
 			<widget source="key_blue" render="Label" position="455,420" zPosition="1" size="140,40" font="Regular;20" valign="center" halign="center" backgroundColor="#18188b"  foregroundColor="#ffffff" transparent="1" />
 		</screen>
 		"""
-	uid,pwd,pin,apn,phone = None,None,None,None, '*99#'
+	uid, pwd, pin, apn, phone = None, None, None, None, '*99#'
 	connectionStatus = 0
 	def __init__(self, session): 
 		Screen.__init__(self, session)
@@ -729,7 +729,7 @@ class ModemManager(Screen):
 	def keyManual(self):
 		if self.isAttemptConnect():
 			return
-		self.session.open(ModemManual, self.cb3GManualSetting, self.uid,self.pwd,self.pin,self.apn,self.phone)
+		self.session.open(ModemManual, self.cb3GManualSetting, self.uid, self.pwd, self.pin, self.apn, self.phone)
 
 	def disableAutoConnect(self, answer):
 		if answer is True:
@@ -753,7 +753,7 @@ class ModemManager(Screen):
 				self['autostart_stop'].hide()
 				self['autostart_start'].show()
 				message = "3G Modem Manager will connect automaticlly on boot"
-				self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO,5)
+				self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO, 5)
 			else:
 				message = "3G Modem Manager is already in autoconnect mode on startup.\nWould You like to disable auto connect on startup ?"
 				self.session.openWithCallback(self.disableAutoConnect, MessageBox, message, MessageBox.TYPE_YESNO)
@@ -762,10 +762,10 @@ class ModemManager(Screen):
 			self.session.openWithCallback(self.disableAutoConnect, MessageBox, message, MessageBox.TYPE_YESNO)		  
 		else:
 			message = "Please connect before enable autoconnect on startup!"
-			self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO,5)
+			self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO, 5)
 
 	def cb3GManualSetting(self, uid=None, pwd=None, pin=None, apn=None, phone='*99#'):
-		self.uid,self.pwd,self.pin,self.apn,self.phone = uid,pwd,pin,apn,phone
+		self.uid, self.pwd, self.pin, self.apn, self.phone = uid, pwd, pin, apn, phone
 		self.updateUSBInfo()
 
 	def keyNumber(self, num=None):
@@ -808,7 +808,7 @@ class ModemManager(Screen):
 	def keyOK(self):
 		if len(self.usb_lv_items) < 1:
 			message = "Please connect 3G or 4G modem to USB port!"
-			self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO,5)
+			self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO, 5)
 			self.close()
 		else:
 			self.forceStop = False
@@ -904,7 +904,7 @@ class ModemManager(Screen):
 	def printStatus(self, idx, STATUS):
 		message = ''
 		self.connectionStatus = idx
-		for x in range(0,len(STATUS)):
+		for x in range(0, len(STATUS)):
 			if idx == x:
 				message += '  > '
 			else:
@@ -915,13 +915,13 @@ class ModemManager(Screen):
 
 	def setConnectStatus(self, idx):
 		STATUS = {
-		 0:'1. Load a Mobile Broadband Device'		,1:'2. Set up a Mobile Broadband Device'		,2:'3. Generate a WvDial profile'		,3:'4. Attempt to connect'		,4:'5. Done'
+		 0: '1. Load a Mobile Broadband Device'		, 1: '2. Set up a Mobile Broadband Device'		, 2: '3. Generate a WvDial profile'		, 3: '4. Attempt to connect'		, 4: '5. Done'
 		}
 		self.printStatus(idx, STATUS)
 
 	def setDisconnectStatus(self, idx):
 		STATUS = {
-		 0:'1. Drop WvDial'		,1:'2. Unload a Mobile Broadband Device'		,2:'3. Done'
+		 0: '1. Drop WvDial'		, 1: '2. Unload a Mobile Broadband Device'		, 2: '3. Done'
 		}
 		self.printStatus(idx, STATUS)
 
@@ -1032,7 +1032,7 @@ class ModemManager(Screen):
 		if isEmpty(pwd):
 			pwd = 'PASSWORD'
 
-		self.writeConf('','>')
+		self.writeConf('', '>')
 
 		#self.writeConf('[Dialer modem-start]')
 		#self.writeConf('Init1 = ATZ+CFUN=1')
@@ -1074,7 +1074,7 @@ class ModemManager(Screen):
 	def updateUSBInfo(self):
 		info = ' '
 		try:
-			apn,uid,pwd,pin,phone = config.plugins.gmodemmanager.apn.getValue(), config.plugins.gmodemmanager.uid.getValue(), config.plugins.gmodemmanager.pwd.getValue(), config.plugins.gmodemmanager.pin.getValue(), config.plugins.gmodemmanager.phone.getValue()#self.apn,self.uid,self.pwd,self.pin,self.phone
+			apn, uid, pwd, pin, phone = config.plugins.gmodemmanager.apn.getValue(), config.plugins.gmodemmanager.uid.getValue(), config.plugins.gmodemmanager.pwd.getValue(), config.plugins.gmodemmanager.pin.getValue(), config.plugins.gmodemmanager.phone.getValue()#self.apn,self.uid,self.pwd,self.pin,self.phone
 			if apn is None:
 				apn = ""
 			if uid is None:
@@ -1103,7 +1103,7 @@ class ModemManager(Screen):
 		lv_usb_items = []
 		try:
 			for x in self.getUSBList():
-				lv_usb_items.append((x.get("Product"),x))
+				lv_usb_items.append((x.get("Product"), x))
 		except:
 			pass
 		return lv_usb_items

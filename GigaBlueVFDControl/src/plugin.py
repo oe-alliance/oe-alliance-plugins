@@ -31,12 +31,12 @@ if fileExists("/proc/stb/fp/vfd_status"):
 		BOX = "gbip4kled"
 
 config.plugins.VFD_Giga = ConfigSubsection()
-config.plugins.VFD_Giga.showClock = ConfigSelection(default="True_Switch", choices=[("False",_("Channelnumber in Standby off")),("True",_("Channelnumber in Standby Clock")),("True_Switch",_("Channelnumber/Clock in Standby Clock")),("True_All",_("Clock always")),("Off",_("Always off"))])
-config.plugins.VFD_Giga.showClockDeepStandby = ConfigSelection(default="False", choices=[("False",_("No")),("True",_("Yes"))])
-config.plugins.VFD_Giga.channelnrformat = ConfigSelection(default="True", choices=[("False",_("No")),("True",_("Yes"))])
+config.plugins.VFD_Giga.showClock = ConfigSelection(default="True_Switch", choices=[("False", _("Channelnumber in Standby off")), ("True", _("Channelnumber in Standby Clock")), ("True_Switch", _("Channelnumber/Clock in Standby Clock")), ("True_All", _("Clock always")), ("Off", _("Always off"))])
+config.plugins.VFD_Giga.showClockDeepStandby = ConfigSelection(default="False", choices=[("False", _("No")), ("True", _("Yes"))])
+config.plugins.VFD_Giga.channelnrformat = ConfigSelection(default="True", choices=[("False", _("No")), ("True", _("Yes"))])
 config.plugins.VFD_Giga.setLed = ConfigYesNo(default=True)
 config.plugins.VFD_Giga.recLedBlink = ConfigYesNo(default=True)
-led = [("0",_("None")),("1",_("Blue")),("2",_("Red")),("3",_("Purple"))]
+led = [("0", _("None")), ("1", _("Blue")), ("2", _("Red")), ("3", _("Purple"))]
 config.plugins.VFD_Giga.ledRUN = ConfigSelection(led, default="1")
 config.plugins.VFD_Giga.ledSBY = ConfigSelection(led, default="2")
 config.plugins.VFD_Giga.ledREC = ConfigSelection(led, default="3")
@@ -44,7 +44,7 @@ config.plugins.VFD_Giga.ledDSBY = ConfigSelection(led, default="2")
 config.plugins.VFD_Giga.ledDSBY2 = ConfigYesNo(default=True)
 config.plugins.VFD_Giga.ledSDA1 = ConfigSelection(led, default="0")
 config.plugins.VFD_Giga.ledSDB1 = ConfigSelection(led, default="0")
-config.plugins.VFD_Giga.timeMode = ConfigSelection(default="24h", choices=[("12h"),("24h")])
+config.plugins.VFD_Giga.timeMode = ConfigSelection(default="24h", choices=[("12h"), ("24h")])
 if BOX in ('gbtrio4k', 'gbip4kled'):
 	Brightness_default = 1
 	Brightness_increment = 1
@@ -55,8 +55,8 @@ else:
 	Brightness_increment = 5
 	Brightness_limits_min = 0
 	Brightness_limits_max = 255
-config.plugins.VFD_Giga.vfdBrightness = ConfigSlider(default=Brightness_default, increment=Brightness_increment, limits=(Brightness_limits_min,Brightness_limits_max))
-config.plugins.VFD_Giga.vfdBrightnessStandby = ConfigSlider(default=Brightness_default, increment=Brightness_increment, limits=(0,Brightness_limits_max))
+config.plugins.VFD_Giga.vfdBrightness = ConfigSlider(default=Brightness_default, increment=Brightness_increment, limits=(Brightness_limits_min, Brightness_limits_max))
+config.plugins.VFD_Giga.vfdBrightnessStandby = ConfigSlider(default=Brightness_default, increment=Brightness_increment, limits=(0, Brightness_limits_max))
 
 RecLed = None
 
@@ -129,14 +129,14 @@ def setLed(color):
 			value1 = 0
 
 	try:
-		f = open(led0,"w")
+		f = open(led0, "w")
 		f.write(str(value0))
 		f.close()
 	except IOError:
 		print "[LED-GIGA] set LED Pattern failed!"
 
 	try:
-		f = open(led1,"w")
+		f = open(led1, "w")
 		f.write(str(value1))
 		f.close()
 	except IOError:
@@ -158,13 +158,13 @@ class Channelnumber:
 		self.zaPrik.start(1000, 1)
 		self.onClose = []
 
-		self.__event_tracker = ServiceEventTracker(screen=self,eventmap={
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 
 	def __eventInfoChanged(self):
 		self.RecordingLed()
-		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase','gbtrio4k', 'gbip4kled'):
+		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k', 'gbip4kled'):
 			return
 		if config.plugins.VFD_Giga.showClock.value == 'Off' or config.plugins.VFD_Giga.showClock.value == 'True_All':
 			return
@@ -280,7 +280,7 @@ class Channelnumber:
 				pass
 		try:
 			#not all images support recording type indicators
-			recordings = self.session.nav.getRecordings(False,Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue()))
+			recordings = self.session.nav.getRecordings(False, Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue()))
 		except:
 			recordings = self.session.nav.getRecordings()
 		led_rec = "0"
@@ -423,7 +423,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 		else:
 			self["key_yellow"] = Button(_("Update Date/Time"))
 
-		self["setupActions"] = ActionMap(["SetupActions","ColorActions"],
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.save,
 			"cancel": self.cancel,
@@ -621,4 +621,4 @@ def sessionstart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-		PluginDescriptor(name="LED_Giga", description="Change LED display settings",where=PluginDescriptor.WHERE_MENU, fnc=main)]
+		PluginDescriptor(name="LED_Giga", description="Change LED display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]

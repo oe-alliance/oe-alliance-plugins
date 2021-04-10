@@ -125,7 +125,7 @@ class DmmBlindscanState(Screen):
 			s = fileExists(path)
 			self.constellation_supported = s
 			if not s:
-				self["constellation"].fill(0,0,256,256,0x25101010)
+				self["constellation"].fill(0, 0, 256, 256, 0x25101010)
 				self["constellation"].flush()
 
 		if self.constellation_supported:
@@ -139,7 +139,7 @@ class DmmBlindscanState(Screen):
 	def updateConstellation(self, constellation_bitmap_list=None):
 		if not (self.constellation_supported or self.constellation_supported is None):
 			return
-		self["constellation"].fill(0,0,256,256,0x25101010)
+		self["constellation"].fill(0, 0, 256, 256, 0x25101010)
 		if constellation_bitmap_list:
 			bitmap_list = constellation_bitmap_list
 		else:
@@ -147,7 +147,7 @@ class DmmBlindscanState(Screen):
 		for bitmap in bitmap_list:
 			Q = []
 			I = []
-			for pos in range(0,30,2):
+			for pos in range(0, 30, 2):
 				try:
 					val = int(bitmap[pos:pos + 2], 16)
 					val = 128 + (val - 256 if val > 127 else val)
@@ -156,7 +156,7 @@ class DmmBlindscanState(Screen):
 					print "[dmmBlindscan][updateConstellation] I constellation data broken at pos", pos
 					val = 0
 				I.append(val)
-			for pos in range(30,60,2):
+			for pos in range(30, 60, 2):
 				try:
 					val = int(bitmap[pos:pos + 2], 16)
 					val = 128 + (val - 256 if val > 127 else val)
@@ -166,7 +166,7 @@ class DmmBlindscanState(Screen):
 					val = 0
 				Q.append(val)
 			for i in range(15):
-				self["constellation"].fill(I[i],Q[i],1,1,0x25ffffff)
+				self["constellation"].fill(I[i], Q[i], 1, 1, 0x25ffffff)
 		self["constellation"].flush()
 		if constellation_bitmap_list:
 			self.tmr.start(3000, True)
@@ -308,7 +308,7 @@ class SatelliteTransponderSearchSupport:
 				if self.parm is None:
 					tmpstr = _("%dMHz scanned") % mhz_complete
 					tmpstr += ', '
-					tmpstr += _("%d transponders found at %d:%02d min") % (len(self.tp_found),seconds_done / 60, seconds_done % 60)
+					tmpstr += _("%d transponders found at %d:%02d min") % (len(self.tp_found), seconds_done / 60, seconds_done % 60)
 					state["progress"].setText(tmpstr)
 					state.setFinished()
 					self.frontend = None
@@ -478,8 +478,8 @@ class SatelliteTransponderSearchSupport:
 			s1 = self.dmmBlindscan.freq_start.value * 1000
 			s2 = self.dmmBlindscan.freq_stop.value * 1000
 
-			start = min(s1,s2)
-			stop = max(s1,s2)
+			start = min(s1, s2)
+			stop = max(s1, s2)
 
 			if self.auto_scan: # hack for driver based blindscan... extend search range +/- 50Mhz
 				freq_limits = list(map(lambda x: x * 1000, self.freq_limits))
@@ -644,12 +644,12 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 		if self.search_type.value == "services":
 			self.list.append(getConfigListEntry(_("Clear before scan"), self.dmmBlindscan.scan_clearallservices, _('If you select "yes" all channels on the satellite being searched will be deleted before starting the current search, yes (keep feeds) means the same but hold all feed services/transponders.')))
 			self.list.append(getConfigListEntry(_("Only free scan"), self.dmmBlindscan.scan_onlyfree, _('If you select "yes" the scan will only save channels that are not encrypted; "no" will find encrypted and non-encrypted channels.')))
-			self.onlyUnknownTpsEntry = getConfigListEntry(_("Only scan unknown transponders"), self.dmmBlindscan.dont_scan_known_tps,_('If you select "yes" the scan will only search transponders not listed in satellites.xml'))
+			self.onlyUnknownTpsEntry = getConfigListEntry(_("Only scan unknown transponders"), self.dmmBlindscan.dont_scan_known_tps, _('If you select "yes" the scan will only search transponders not listed in satellites.xml'))
 			self.list.append(self.onlyUnknownTpsEntry)
 			if not self.dmmBlindscan.dont_scan_known_tps.value:
-				self.list.append(getConfigListEntry(_("Disable sync with known transponders"), self.dmmBlindscan.disable_sync_with_known_tps,_('CAUTION: If you select "yes" the scan will not sync with transponders listed in satellites.xml. Default is "no". Only change this if you understand why you are doing it.')))
-			self.list.append(getConfigListEntry(_("Disable remove duplicates"), self.dmmBlindscan.disable_remove_duplicate_tps,_('CAUTION: If you select "yes" the scan will not remove "duplicated" transponders from the list. Default is "no". Only change this if you understand why you are doing it.')))
-			self.list.append(getConfigListEntry(_("Filter out adjacent satellites"), self.dmmBlindscan.filter_off_adjacent_satellites,_('When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite.')))
+				self.list.append(getConfigListEntry(_("Disable sync with known transponders"), self.dmmBlindscan.disable_sync_with_known_tps, _('CAUTION: If you select "yes" the scan will not sync with transponders listed in satellites.xml. Default is "no". Only change this if you understand why you are doing it.')))
+			self.list.append(getConfigListEntry(_("Disable remove duplicates"), self.dmmBlindscan.disable_remove_duplicate_tps, _('CAUTION: If you select "yes" the scan will not remove "duplicated" transponders from the list. Default is "no". Only change this if you understand why you are doing it.')))
+			self.list.append(getConfigListEntry(_("Filter out adjacent satellites"), self.dmmBlindscan.filter_off_adjacent_satellites, _('When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite.')))
 #		self.list.append(getConfigListEntry(_("Scan multiple times"), self.dmmBlindscan.multiple_scan,_('Scan all frequencies multiple times to capture transponders missed on the first attempt.')))
 
 		self["config"].list = self.list
