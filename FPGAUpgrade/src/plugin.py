@@ -44,11 +44,14 @@ class FPGAUpgradeCore() :
 	def doUpgrade(self):
 		firmware,device = None,None
 		def closefpga(fp, fd):
-			if fd is not None: os.close(fd)
-			if fp is not None: fp.close()
+			if fd is not None:
+				os.close(fd)
+			if fp is not None:
+				fp.close()
 		try:
 			size = os.path.getsize(self.firmwarefile)
-			if size == 0: raise Exception, 'data_size is zero'
+			if size == 0:
+				raise Exception, 'data_size is zero'
 			#print '[FPGAUpgradeCore] data_size :',size
 
 			firmware = open(self.firmwarefile, 'rb')
@@ -56,25 +59,30 @@ class FPGAUpgradeCore() :
 			#print '[FPGAUpgradeCore] open >> [ok]'
 
 			rc = fcntl.ioctl(device, 0, size)
-			if rc < 0: raise Exception, 'fail to set size : %d'%(rc)
+			if rc < 0:
+				raise Exception, 'fail to set size : %d'%(rc)
 			#print '[FPGAUpgradeCore] set size >> [ok]'
 
 			rc = fcntl.ioctl(device, 2, 5)
-			if rc < 0: raise Exception, 'fail to set programming mode : %d'%(rc)
+			if rc < 0:
+				raise Exception, 'fail to set programming mode : %d'%(rc)
 			#print '[FPGAUpgradeCore] programming mode >> [ok]'
 			self.status = STATUS_PREPARED
 
 			while True:
 				data = firmware.read(1024)
-				if data == '': break
+				if data == '':
+					break
 				os.write(device, data)
 			#print '[FPGAUpgradeCore] write data >> [ok]'
 
 			self.status = STATUS_PROGRAMMING
 			rc = fcntl.ioctl(device, 1, 0)
-			if rc < 0: raise Exception, 'fail to programming : %d'%(rc)
+			if rc < 0:
+				raise Exception, 'fail to programming : %d'%(rc)
 			#print '[FPGAUpgradeCore] upgrade done.'
-			if self.callcount < 100: raise Exception, 'wrong fpga file.'
+			if self.callcount < 100:
+				raise Exception, 'wrong fpga file.'
 		except Exception, msg:
 			self.errmsg = msg
 			print '[FPGAUpgradeCore] ERROR >>',msg
@@ -90,7 +98,8 @@ class FPGAUpgradeCore() :
 			print '[FPGAUpgrade] upgrade done.'
 		elif self.status == STATUS_ERROR:
 			print '[FPGAUpgrade] occur error.'
-		else:	print '[FPGAUpgrade] occur unknown error.'
+		else:
+			print '[FPGAUpgrade] occur unknown error.'
 
 class FPGAUpgradeManager:
 	fu = None
@@ -117,7 +126,8 @@ class FPGAUpgradeManager:
 		elif self.fu.status == STATUS_PROGRAMMING:
 			self.fu.callcount += 1
 			ret = (self.fu.callcount * 100) / self.fu.MAX_CALL_COUNT + 2
-			if ret >= 100: ret = 99
+			if ret >= 100:
+				ret = 99
 			#print "callcount : [%d]"%(self.fu.callcount);
 			return ret
 		elif self.fu.status == STATUS_DONE:

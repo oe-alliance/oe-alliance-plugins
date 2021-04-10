@@ -74,8 +74,10 @@ class RCUSelect(Screen):
 
 	def SetOSDList(self):
 		boxime = HardwareInfo().get_device_name()
-		if boxime == 'wetekplay2': choice = 'WeTek Play2 RCU'
-		if boxime == 'wetekplay': choice = 'WeTek Play Enigma2 RCU'
+		if boxime == 'wetekplay2':
+			choice = 'WeTek Play2 RCU'
+		if boxime == 'wetekplay':
+			choice = 'WeTek Play Enigma2 RCU'
 		try:
 			choice = open("/etc/amremote/.choice", "r").read()
 		except IOError:
@@ -138,7 +140,8 @@ class RCUSelect(Screen):
 					fin = file('/etc/amremote/wetek.conf')
 					fout = open('/etc/amremote/wetek_tmp.conf', 'w')
 					for line in fin :
-						if 'work_mode' in line: line = 'work_mode  	= 0\n'
+						if 'work_mode' in line:
+							line = 'work_mode  	= 0\n'
 						fout.write(line)
 					fout.close()
 					os.system('mv -f /etc/amremote/wetek_tmp.conf /etc/amremote/wetek.conf &')

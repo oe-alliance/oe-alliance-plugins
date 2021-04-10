@@ -330,17 +330,20 @@ class DLNAServer(ConfigListScreen, Screen):
 					k += v[0]
 					v  = v[2:]
 				self.oldConfig[k] = v
-			except : pass
+			except :
+				pass
 		def setDefault(key, default):
 			try:
 				value = self.oldConfig.get(key)
 				if value == None or value.strip() == '':
 					self.oldConfig[key] = default
-			except: self.oldConfig[key] = default
+			except:
+				self.oldConfig[key] = default
 			
 		try:
 			model = os.popen('cat /proc/stb/info/boxtype').read().strip()
-		except: model = 'My'
+		except:
+			model = 'My'
 		setDefault('friendly_name', '%s DLNA Server'%(model.upper()))
 		setDefault('media_dirV', '/media/dlna/Videos')
 		setDefault('media_dirA', '/media/dlna/Musics')

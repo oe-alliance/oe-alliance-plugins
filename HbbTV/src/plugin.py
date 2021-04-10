@@ -125,7 +125,7 @@ class VBHandler(VBHandlers):
 		return (True, None)
 
 	def _CB_CONTROL_OUT_OF_MEMORY(self, result, packet):
-		vbcfg.need_restart = True;
+		vbcfg.need_restart = True
 		return (True, None)
 
 	def _CB_CONTROL_INVALIDATE(self, result, packet):
@@ -402,7 +402,8 @@ def auto_start_main(reason, **kwargs):
 		try:
 			if vbcfg.g_main.vbserver is not None:
 				vbcfg.g_main.vbserver.kill()
-		except: pass
+		except:
+			pass
 
 def session_start_main(session, reason, **kwargs):
 	vbcfg.g_main = session.open(VBMain)

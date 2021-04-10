@@ -374,7 +374,7 @@ ProgressType = [("1", _("only Progress Bar")),
 ]
 now = localtime()
 begin = mktime((
-	now.tm_year, now.tm_mon, now.tm_mday, 0o6, 00, \
+	now.tm_year, now.tm_mon, now.tm_mday, 0o6, 00,
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 # Find all directories "clock*" with result in a list, extract last two chars, extract integers, remove dupes, sort integers and convert it back to a list
@@ -12534,7 +12534,8 @@ def LCD4linuxPIC(self, session):
 				except:
 					L4logE("Error Desc txt file")
 		if ConfigMode == True and event_name == "":
-			for i in range(1, 21): event_name += "Description%d\n" % i
+			for i in range(1, 21):
+				event_name += "Description%d\n" % i
 		if event_name == "":
 			if ConfigInfo:
 				putComm((ConfigPos, ConfigSize, ConfigProzent, ConfigLines, ConfigColor, ConfigAlign, ConfigSplit, ConfigShadow, ConfigFont), draw, im)

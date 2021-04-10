@@ -506,11 +506,11 @@ class RTMP:
 	def getSimpleParameters(self):
 		if self.downloadFolder is None or self.downloadFolder == '':
 			# Download Folder is not set
-			raise exception;
+			raise exception
 
 		if self.rtmp is None or self.rtmp == '':
 			# rtmp url is not set
-			raise exception;
+			raise exception
 
 		parameters = {}
 
@@ -552,11 +552,11 @@ class RTMP:
 	def getParameters(self):
 		if self.downloadFolder is None or self.downloadFolder == '':
 			# Download Folder is not set
-			raise exception;
+			raise exception
 
 		if self.rtmp is None or self.rtmp == '':
 			# rtmp url is not set
-			raise exception;
+			raise exception
 
 		args = [ u"--rtmp", u'"%s"' % self.rtmp, u"-o", u'"%s"' % self.downloadFolder ]
 
@@ -606,7 +606,7 @@ class RTMP:
 	def getPlayUrl(self):
 		if self.rtmp is None or self.rtmp == '':
 			# rtmp url is not set
-			raise exception;
+			raise exception
 
 		if self.port is None:
 			args = [u"%s" % self.rtmp]

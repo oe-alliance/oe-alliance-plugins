@@ -410,7 +410,7 @@ class MyBlowfish:
         for i in range(0,self.P_SZ):
             data = 0
             for j in range(0,4):
-                data = (data << 8) | (keyByteArray[keyIndex] & 0xff);
+                data = (data << 8) | (keyByteArray[keyIndex] & 0xff)
                 keyIndex = keyIndex + 1
                 if ( keyIndex >= keyLength):
                     keyIndex = 0

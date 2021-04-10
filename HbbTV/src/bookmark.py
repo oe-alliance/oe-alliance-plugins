@@ -68,7 +68,8 @@ class SimpleConfigParser:
 		except Exception, e:
 			vbcfg.ERR(e)
 			return _default
-		else :	return data
+		else :
+			return data
 
 	def _set(self, _section, _option, _value):
 		self.mConfig.set(_section, _option, _value)
@@ -131,7 +132,8 @@ class BookmarkManager(SimpleConfigParser):
 			os.system('echo "category_current_idx = 1" >> %s'%(_dbFileName))
 			if manualmode :
 				os.system('echo "bookmark_current_idx = 2" >> %s'%(_dbFileName))
-			else:	os.system('echo "bookmark_current_idx = 1" >> %s'%(_dbFileName))
+			else:
+				os.system('echo "bookmark_current_idx = 1" >> %s'%(_dbFileName))
 			os.system('echo "[c-1]" >> %s'%(_dbFileName))
 			os.system('echo "id = 1" >> %s'%(_dbFileName))
 			os.system('echo "name = My favorite" >> %s'%(_dbFileName))
@@ -228,7 +230,8 @@ class BookmarkManager(SimpleConfigParser):
 		try:
 			for key in self.mBookmarkRoot[_id].mBookmarks.iterkeys():
 				self.delSection('b-%d' % (key,))
-		except: pass
+		except:
+			pass
 		self.delSection('c-%d' % (_id,))
 		self._save()
 
@@ -266,7 +269,8 @@ class BookmarkManager(SimpleConfigParser):
 				e = self.getNumber(s, 'type')
 				try:
 					categoryList[p].appendBookmark(BookmarkData(i, t, u, p, e))
-				except Exception, e: self._del(s)
+				except Exception, e:
+					self._del(s)
 			bx += 1
 		for key in categoryList.iterkeys():
 			sorted(categoryList[key].mBookmarks)

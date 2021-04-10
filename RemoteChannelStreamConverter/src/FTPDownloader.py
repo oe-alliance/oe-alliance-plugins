@@ -5,8 +5,8 @@ from twisted.protocols.ftp import FTPClient, FTPFileListProtocol
 from os import SEEK_END
 
 class FTPDownloader(Protocol):
-	def __init__(self, host, port, path, fileOrName, username = 'root', \
-		password = '', passive = True, supportPartial = False, \
+	def __init__(self, host, port, path, fileOrName, username = 'root',
+		password = '', passive = True, supportPartial = False,
 		*args, **kwargs):
 		timeout = 30
 		self.path = path

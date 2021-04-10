@@ -54,8 +54,10 @@ class DeviceEventListener:
 		#printDebugModemMgr(str(recv.splitlines()))
 		if recv.startswith("add@/block") or recv.startswith("remove@/block"):
 			for x in self.notifyCallbackFunctionList:
-				try: 	x(recv)
-				except:	self.notifyCallbackFunctionList.remove(x)
+				try:
+					x(recv)
+				except:
+					self.notifyCallbackFunctionList.remove(x)
 
 	def addCallback(self, func):
 		if func is not None:
@@ -69,7 +71,8 @@ class DeviceEventListener:
 		try:
 			self.notifier.callback.remove(self.cbEventHandler)
 			self.sock.close()
-		except: pass
+		except:
+			pass
 
 class TaskManager:
 	def __init__(self):
@@ -184,11 +187,16 @@ class EditModemManual(ConfigListScreen, Screen):
 			self.uid,self.pwd,self.pin,self.apn,self.phone = "","","","",""
 		else:
 			self.uid,self.pwd,self.pin,self.apn,self.phone = uid,pwd,pin,apn,phone
-			if self.uid is None: self.uid = ""
-			if self.pwd is None: self.pwd = ""
-			if self.pin is None: self.pin = ""
-			if self.apn is None: self.apn = ""
-			if self.phone is None: self.phone = ""
+			if self.uid is None:
+				self.uid = ""
+			if self.pwd is None:
+				self.pwd = ""
+			if self.pin is None:
+				self.pin = ""
+			if self.apn is None:
+				self.apn = ""
+			if self.phone is None:
+				self.phone = ""
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions",],
 		{
@@ -445,10 +453,14 @@ class ModemManual(Screen):
 			tempStr += ' region="%s"'%(region)
 			tempStr += ' carrier="%s"'%(carrier)
 			tempStr += ' apn="%s"'%(apn)
-			if not isEmpty(user):	  tempStr += ' user="%s"'%(user)
-			if not isEmpty(password): tempStr += ' password="%s"'%(password)
-			if not isEmpty(pin):	  tempStr += ' pin="%s"'%(pin)
-			if not isEmpty(phone) :	  tempStr += ' phone="%s"'%(phone)
+			if not isEmpty(user):
+				tempStr += ' user="%s"'%(user)
+			if not isEmpty(password):
+				tempStr += ' password="%s"'%(password)
+			if not isEmpty(pin):
+				tempStr += ' pin="%s"'%(pin)
+			if not isEmpty(phone) :
+				tempStr += ' phone="%s"'%(phone)
 			tempStr += ' />\n'
 			return tempStr
 
@@ -460,7 +472,8 @@ class ModemManual(Screen):
 					apnString += makeItem(x[0], self.region, self.apn, self.uid, self.pwd, self.pin, self.phone)
 					continue
 				apnString += makeItem(x[1].get('region'), x[1].get('carrier'), x[1].get('apn'), x[1].get('user'), x[1].get('password'), x[1].get('pin'), x[1].get('phone'))
-			finally: tempIndex += 1
+			finally:
+				tempIndex += 1
 		apnString += '</apns>\n'
 		printDebugModemMgr(apnString)
 		apnListFile = file(resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/3GModemManager/apnlist.xml"), 'w')
@@ -507,18 +520,26 @@ class ModemManual(Screen):
 		try:
 			x = self["menulist"].getCurrent()[1]
 			self.region, self.apn, self.uid, self.pwd, self.pin, self.phone = x.get("region"), x.get("apn"), x.get("user"), x.get("password"), x.get('pin'), x.get('phone')
-		except Exception, err: pass
-		if noUpdate: return
+		except Exception, err:
+			pass
+		if noUpdate:
+			return
 		self.updateAPNInfo()
 
 	def updateAPNInfo(self):
 		region,apn,uid,pwd,pin,phone = self.region, self.apn,self.uid,self.pwd,self.pin,self.phone
-		if region is None: region = ""
-		if apn is None:   apn = ""
-		if uid is None:   uid = ""
-		if pwd is None:   pwd = ""
-		if pin is None:   pin = ""
-		if phone is None: phone = ""
+		if region is None:
+			region = ""
+		if apn is None:
+			apn = ""
+		if uid is None:
+			uid = ""
+		if pwd is None:
+			pwd = ""
+		if pin is None:
+			pin = ""
+		if phone is None:
+			phone = ""
 		info = 'REGION : %s\nAPN : %s\nUSER : %s\nPASSWD : %s\nPIN : %s\nPHONE : %s\n' % (region, apn, uid, pwd, pin, phone)
 		self["apnInfo"].setText(info)
 
@@ -527,8 +548,10 @@ class ModemManual(Screen):
 		def uppercaseCompare(a,b):
 			aa = a.get("carrier")
 			bb = b.get("carrier")
-			if isEmpty(aa): aa = ""
-			if isEmpty(bb): bb = ""
+			if isEmpty(aa):
+				aa = ""
+			if isEmpty(bb):
+				bb = ""
 			return cmp(aa.upper(),bb.upper())
 		def isExistAPN(name):
 			for x in lvApnItems:
@@ -558,8 +581,10 @@ class ModemManual(Screen):
 				d['pin']      = x.get('pin')
 				d['phone']    = x.get('phone')
 				lvApnItems.append((name,d))
-		except Exception, err: pass
-		finally: del handle
+		except Exception, err:
+			pass
+		finally:
+			del handle
 		return lvApnItems
 
 
@@ -805,19 +830,23 @@ class ModemManager(Screen):
 			if areadyExistAnotherAdapter():
 				message = "Another adapter connected has been found.\n\nA connection is attempted after disconnect all of other device. Do you want to?"
 				self.session.openWithCallback(self.cbConfirmDone, MessageBox, _(message), default = True)
-			else:	self.cbConfirmDone(True)
+			else:
+				self.cbConfirmDone(True)
 
 	def cbConfirmDone(self, ret):
-		if not ret: return
+		if not ret:
+			return
 		if self["key_green"].getText() == 'Connect':
 			networkAdapters = iNetwork.getConfiguredAdapters()
 			for x in networkAdapters:
-				if x[:3] == 'ppp': continue
+				if x[:3] == 'ppp':
+					continue
 				iNetwork.setAdapterAttribute(x, "up", False)
 				iNetwork.deactivateInterface(x)
 
 		x = {}
-		try: x = self["menulist"].getCurrent()[1]
+		try:
+			x = self["menulist"].getCurrent()[1]
 		except:
 			printInfoModemMgr('no selected device..')
 			return
@@ -878,7 +907,8 @@ class ModemManager(Screen):
 		for x in range(0,len(STATUS)):
 			if idx == x:
 				message += '  > '
-			else: 	message += '      '
+			else:
+				message += '      '
 			message += STATUS[x]
 			message += '\n'
 		self['statusInfo'].setText(message)
@@ -969,11 +999,16 @@ class ModemManager(Screen):
 			# TODO : occur error!!
 			return
 
-		if not isEmpty(self.apn):   info['apn']   = self.apn
-		if not isEmpty(self.uid):   info['uid']   = self.uid
-		if not isEmpty(self.pwd):   info['pwd']   = self.pwd
-		if not isEmpty(self.pin):   info['pin']   = self.pin
-		if not isEmpty(self.phone): info['phone'] = self.phone
+		if not isEmpty(self.apn):
+			info['apn']   = self.apn
+		if not isEmpty(self.uid):
+			info['uid']   = self.uid
+		if not isEmpty(self.pwd):
+			info['pwd']   = self.pwd
+		if not isEmpty(self.pin):
+			info['pin']   = self.pin
+		if not isEmpty(self.phone):
+			info['phone'] = self.phone
 
 		self.makeWvDialConf(info)
 		self.taskManager.next()
@@ -996,9 +1031,12 @@ class ModemManager(Screen):
 		pin = params.get('pin')
 		idxInit = 1
 
-		if isEmpty(phone): phone = '*99#'
-		if isEmpty(uid):   uid = 'USER'
-		if isEmpty(pwd):   pwd = 'PASSWORD'
+		if isEmpty(phone):
+			phone = '*99#'
+		if isEmpty(uid):
+			uid = 'USER'
+		if isEmpty(pwd):
+			pwd = 'PASSWORD'
 
 		self.writeConf('','>')
 
@@ -1043,11 +1081,16 @@ class ModemManager(Screen):
 		info = ' '
 		try:
 			apn,uid,pwd,pin,phone = config.plugins.gmodemmanager.apn.getValue(), config.plugins.gmodemmanager.uid.getValue(), config.plugins.gmodemmanager.pwd.getValue(), config.plugins.gmodemmanager.pin.getValue(), config.plugins.gmodemmanager.phone.getValue()#self.apn,self.uid,self.pwd,self.pin,self.phone
-			if apn is None:   apn = ""
-			if uid is None:   uid = ""
-			if pwd is None:   pwd = ""
-			if pin is None:   pin = ""
-			if phone is None: phone = ""
+			if apn is None:
+				apn = ""
+			if uid is None:
+				uid = ""
+			if pwd is None:
+				pwd = ""
+			if pin is None:
+				pin = ""
+			if phone is None:
+				phone = ""
 			x = self["menulist"].getCurrent()[1]
 			info = 'Vendor : %s/%s\nAPN : %s\nUser : %s\nPassword : %s\nPin : %s\nPhone : %s' % (
 					x.get("Vendor"), 
@@ -1058,7 +1101,8 @@ class ModemManager(Screen):
 					pin,
 					phone
 				)
-		except: pass
+		except:
+			pass
 		self['usbinfo'].setText(info)
 
 	def setListOnView(self):
@@ -1066,7 +1110,8 @@ class ModemManager(Screen):
 		try:
 			for x in self.getUSBList():
 				lv_usb_items.append((x.get("Product"),x))
-		except: pass
+		except:
+			pass
 		return lv_usb_items
 
 	def getUSBList(self):
@@ -1126,7 +1171,8 @@ class ModemManager(Screen):
 				xx = x.get("Interface")
 				if xx.startswith('usb'):
 					rt_usb_list.append(x)
-			except: pass
+			except:
+				pass
 		printInfoModemMgr("USB DEVICE LIST : " + str(rt_usb_list))
 		return rt_usb_list
 

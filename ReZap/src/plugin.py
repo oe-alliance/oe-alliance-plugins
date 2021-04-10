@@ -58,11 +58,12 @@ class LoopSyncMain(Screen):
 
 	def CheckFlag(self):
 		try:
-			if int(open("/sys/class/tsync/reset_flag", "r").read(),16) == 1: return True;
+			if int(open("/sys/class/tsync/reset_flag", "r").read(),16) == 1:
+				return True
 		except Exception, e:
 			print "[ReZap] Can't read class"
 			self.AVSyncTimer.start(500, True)
-		return False;
+		return False
 
 	def ResetFlag(self):
 		try:

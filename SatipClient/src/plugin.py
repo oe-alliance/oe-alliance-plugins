@@ -92,7 +92,7 @@ DEVICE_ATTR = [
 'presentationURL'
 ]
 
-discoveryTimeoutMS = 5000;
+discoveryTimeoutMS = 5000
 
 class SATIPDiscovery:
 	def __init__(self):
@@ -242,7 +242,7 @@ class SATIPDiscovery:
 
 		udn = getAttr(root, 'device', 'UDN', xmlns_dev)
 		if udn is None:
-			return -1;
+			return -1
 
 		uuid = udn.strip('uuid:')
 		SATIPSERVERDATA[uuid] = {}
@@ -543,7 +543,7 @@ class SATIPTuner(Screen, ConfigListScreen):
 		else:
 			data = {}
 			data['idx'] = self.vtuner_idx
-			data['ip'] = satipdiscovery.getServerInfo(uuid, 'ipaddress');
+			data['ip'] = satipdiscovery.getServerInfo(uuid, 'ipaddress')
 			data['desc'] = satipdiscovery.getServerInfo(uuid, "modelName")
 			data['tuner_type'] = tunertype
 			data['uuid'] = uuid

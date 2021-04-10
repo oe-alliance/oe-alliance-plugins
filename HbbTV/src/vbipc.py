@@ -29,7 +29,8 @@ def GetHandler(opcode):
 def GetOpcode(opcode):
 	try:
 		return _OPCODE[opcode][0]
-	except: return -1;
+	except:
+		return -1
 
 class VBController:
 	@staticmethod
@@ -82,7 +83,8 @@ class VBServerThread(threading.Thread):
 			self.mSock.settimeout(self.mTimeout)
 			self.mSock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 			self.mSock.bind(addr)
-		except: return False
+		except:
+			return False
 		return True
 
 	def parse(self, data):
@@ -156,5 +158,6 @@ class VBHandlers:
 				vbcfg.DEBUG("registrated at %s" % opcodestr)
 				SetHandler(opcodestr, fref)
 				registreted_idx += 1
-			except: pass
+			except:
+				pass
 		vbcfg.DEBUG("%d registreated" % registreted_idx)
