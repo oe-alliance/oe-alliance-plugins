@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-#
 
-
 def getIPTVProvider(url):
 	'''
 	This function determines the name of the IPTV provider by
@@ -12,42 +11,43 @@ def getIPTVProvider(url):
 	:ret type: String limited to 12 characters
 	'''
 	providers = {
-			'tvshka.net': 'ShuraTV',      # shura.tv
-			'1ott.': '1ott',         # my.1ott.net
-			'only4.tv': '1Cent',        # 1cent.tv
+			'tvshka.net'  : 'ShuraTV',      # shura.tv
+			'1ott.'       : '1ott',         # my.1ott.net
+			'only4.tv'    : '1Cent',        # 1cent.tv
 			'satbiling.com': 'Satbilling',  # iptv.satbilling.com
-			'.crd-s.': 'CdruTV',       # crdru.net
-			'/live/s.': 'Shara.club',   # shara.club
-			'/live/u.': 'IPStream',     # ipstream.one
-			'/iptv/': 'iLook',        # edem.tv (ilook.tv)
-			'.ottg.': 'Glanz',        # glanz (ottg.tv)
-			'.fox-tv.': 'Fox-TV',       # fox-tv.fun
-			'.iptv.': 'IPTV.Online',  # iptv.online
-			'.mymagic.': 'MyMagic',      # mymagic.tv
-			'tvfor.pro': 'Shara-TV',     # shara-tv.org
-			'uz-tv': 'UZ-TV',        # uz-tv.net
+			'.crd-s.'     : 'CdruTV',       # crdru.net
+			'/live/s.'    : 'Shara.club',   # shara.club
+			'/live/u.'    : 'IPStream',     # ipstream.one
+			'/iptv/'      : 'iLook',        # edem.tv (ilook.tv)
+			'.ottg.'      : 'Glanz',        # glanz (ottg.tv)
+			'.fox-tv.'    : 'Fox-TV',       # fox-tv.fun
+			'.iptv.'      : 'IPTV.Online',  # iptv.online
+			'.mymagic.'   : 'MyMagic',      # mymagic.tv
+			'tvfor.pro'   : 'Shara-TV',     # shara-tv.org
+			'uz-tv'       : 'UZ-TV',        # uz-tv.net
 			'.bcumedia.pro': 'BCUMedia',    # bcumedia.pro
-			'.antifriz.': 'Antifriz',     # antifriz.tx
+			'.antifriz.'  : 'Antifriz',     # antifriz.tx
 			'app-greatiptv': 'GreatIPTV',   # app.greatiptv.cc
-			'.zala.': 'ZalaBY',       # zala.by
+			'.zala.'      : 'ZalaBY',       # zala.by
+			'/zatv/'      : 'ZalaBY',       # zala.by
 			'178.124.183.': 'ZalaBY',       # zala.by
-			'zabava': 'Zabava',       # zabava.tv
+			'zabava'      : 'Zabava',       # zabava.tv
 			'cdn.ngenix.net': 'Zabava',     # zabava.tv
-			'.spr24.': 'Sharavoz',     # sharavoz.tv
-			'.onlineott.': 'TvoeTV',       # tvoetv.in.ua
-			'85.143.191.': 'NTTV',         # ttv.run
-			'myott.top': 'Ottclub',      # ottclub.cc
-			'.itv.': 'ITV',          # itv.live
-			'cdn.wf': 'ITV',          # itv.live
-			'iptvx.tv': 'Cbilling',     # cbilling.me
-			'tv.team': 'TVTeam',       # tv.team
-			'troya.tv': 'TVTeam',       # tv.team
-			'1usd.tv': 'TVTeam',       # tv.team
+			'.spr24.'     : 'Sharavoz',     # sharavoz.tv
+			'.onlineott.' : 'TvoeTV',       # tvoetv.in.ua
+			'85.143.191.' : 'NTTV',         # ttv.run
+			'myott.top'   : 'Ottclub',      # ottclub.cc
+			'.itv.'       : 'ITV',          # itv.live
+			'cdn.wf'      : 'ITV',          # itv.live
+			'iptvx.tv'    : 'Cbilling',     # cbilling.me
+			'tv.team'     : 'TVTeam',       # tv.team
+			'troya.tv'    : 'TVTeam',       # tv.team
+			'1usd.tv'     : 'TVTeam',       # tv.team
 			'cdntv.online': 'VIPLime',      # viplime.fun
-			'.tvdosug.': 'TVDosug',      # tvdosug.tv
-			'/channel/': 'Zmedia',       # ZMedia Proxy vps https://t.me/wink_news/107
-			'/rmtv/': 'Zmedia',       # ZMedia Proxy local
-			'undefined': '',
+			'.tvdosug.'   : 'TVDosug',      # tvdosug.tv
+			'/channel/'   : 'Zmedia',       # ZMedia Proxy vps https://t.me/wink_news/107
+			'/rmtv/'      : 'Zmedia',       # ZMedia Proxy local
+			'undefined'   : '',
 		}
 
 	return providers[next(iter([x for x in list(providers.keys()) if x in url]), 'undefined')][:12]
@@ -64,7 +64,7 @@ def getAudio(description):
 	'''
 	if "Dolby Digital" in description:
 		return "audio/dolbydigital.png"
-	elif any(x in description for x in ["AC3+", "ac3+"]):
+	elif any(x in description for x in ["AC3+", "DD+", "E-AC-3", "EC-3", "ac3+", "dd+", "e-ac-3", "ec-3"]):
 		return "audio/AC3+.png"
 	elif any(x in description for x in ["AC3", "AC-3", "ac3", "ac-3"]):
 		return "audio/AC3.png"
