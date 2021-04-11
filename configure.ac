@@ -367,6 +367,7 @@ VPLEDControl/po/Makefile
 LCD4linux/Makefile
 LCD4linux/src/Makefile
 LCD4linux/src/data/Makefile
+LCD4linux/src/data/audio/Makefile
 LCD4linux/src/data/Clock1/Makefile
 LCD4linux/src/data/Clock2/Makefile
 LCD4linux/src/data/Clock3/Makefile
