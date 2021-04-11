@@ -9180,7 +9180,7 @@ class UpdateStatus(Screen):
 					elif self.Lpath and self.Lpath.startswith("http"):
 						self.LtransponderData = {'orbital_position': None, 'tuner_type': 'IPTV'}
 						try:
-							from utils import getIPTVProvider
+							from .utils import getIPTVProvider
 							self.Lprovider = getIPTVProvider(self.Lpath)
 						except ImportError:
 							pass
@@ -12954,7 +12954,7 @@ def LCD4linuxPIC(self, session):
 			dat = "audio/picon_default.png"
 			if self.Laudiodescription is not None:
 				try:
-					from utils import getAudio
+					from .utils import getAudio
 					dat = getAudio(self.Laudiodescription)
 				except ImportError:
 					pass
