@@ -72,7 +72,7 @@ def resolve_http_redirect(url, depth=0):
 	conn.request("HEAD", path)
 	res = conn.getresponse()
 	headers = dict(res.getheaders())
-	if headers.has_key('location') and headers['location'] != url:
+	if 'location' in headers and headers['location'] != url:
 		return resolve_http_redirect(headers['location'], depth + 1)
 	else:
 		return url
@@ -947,7 +947,7 @@ class OpenUg(Screen):
 				tmp_icon = self.getThumbnailName(x)
 				thumbnailFile = self.imagedir + tmp_icon
 				self.pixmaps_to_load.append(tmp_icon)
-				if not self.Details.has_key(tmp_icon):
+				if tmp_icon not in self.Details:
 					self.Details[tmp_icon] = {'thumbnail': None}
 				if x[self.UG_ICON] != '':
 					if (os_path.exists(thumbnailFile) == True):
@@ -1260,7 +1260,7 @@ class OpenUg(Screen):
 		ptr = self.picloads[picture_id].getData()
 		thumbnailFile = self.imagedir + str(picture_id)
 		if ptr != None:
-			if self.Details.has_key(picture_id):
+			if picture_id in self.Details:
 				self.Details[picture_id]["thumbnail"] = ptr
 		self.tmplist = []
 		pos = 0
