@@ -66,7 +66,7 @@ def getAudio(description):
 	if "Dolby Digital" in description:
 		return "audio/dolbydigital.png"
 	elif any(x in description for x in ["AC3+", "DD+", "E-AC-3", "EC-3", "ac3+", "dd+", "e-ac-3", "ec-3"]):
-		return "audio/AC3+.png"
+		return "audio/AC3plus.png"
 	elif any(x in description for x in ["AC3", "AC-3", "ac3", "ac-3"]):
 		return "audio/AC3.png"
 	elif "DTS-HD" in description:
