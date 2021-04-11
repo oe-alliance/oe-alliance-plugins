@@ -11209,7 +11209,7 @@ def LCD4linuxPIC(self, session):
 						ShadowText(Wim, POSX - wH - int(3 * Wmulti), POSY + h + int(hS / 2), Hum, font, ConfigColor, ConfigShadow) #silver
 					else:
 						font = ImageFont.truetype(ConfigFont, int(13 * Wmulti), encoding='unic')
-						Wind = (Wind.split(" ",2))
+						Wind = (Wind.split(" ", 2))
 						ShadowText(Wim, POSX - minus5, POSY + int(55 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow) #silver
 						ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(25 * Wmulti), encoding='unic')
@@ -12549,7 +12549,7 @@ def LCD4linuxPIC(self, session):
 				orbital = ""
 				if transponderData["tuner_type"] == "IPTV":
 					orbital = transponderData["tuner_type"]
-					L4logE("Orbital1",orbital)
+					L4logE("Orbital1", orbital)
 				elif (transponderData["tuner_type"] in ("DVB-S", "DVB-S2")) or (transponderData["tuner_type"] == feSatellite):
 					orbital = transponderData["orbital_position"]
 					L4logE("Orbital2", orbital)
@@ -13263,7 +13263,7 @@ def LCD4linuxPIC(self, session):
 				MAX_W, MAX_H = self.im[im].size
 				if ConfigSplit == True:
 					MAX_W = int(MAX_W / 2)
-				imW = Image.open(os.path.join(Data,"audio/audio_off.png"))
+				imW = Image.open(os.path.join(Data, "audio/audio_off.png"))
 				xx, yy = imW.size
 				x = int(float(ConfigSize) / yy * xx)
 				imW = imW.resize((x, ConfigSize))
