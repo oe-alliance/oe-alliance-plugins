@@ -233,7 +233,7 @@ class FanSetupScreen(Screen, ConfigListScreen):
 		# select internal hdd-drive
 		hddlist = self.getHddList()
 		hddlist["all"] = _("All")
-		default = not hddlist.has_key(self.FAN.hdddevice.value) and "all" or self.FAN.hdddevice.value
+		default = self.FAN.hdddevice.value not in hddlist and "all" or self.FAN.hdddevice.value
 		self.hddlistsel = ConfigSelection(choices=hddlist, default=default)
 		self.cfg_hdddevice = getConfigListEntry(_("Select internal HDD device"), self.hddlistsel)
 		self.prev_hdddevice = self.FAN.hdddevice.value

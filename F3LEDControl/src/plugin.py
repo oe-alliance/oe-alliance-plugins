@@ -312,7 +312,7 @@ def sessionstart(reason, **kwargs):
 	global gReason
 	global mySession
 
-	if kwargs.has_key("session"):
+	if "session" in kwargs:
 		mySession = kwargs["session"]
 	else:
 		gReason = reason

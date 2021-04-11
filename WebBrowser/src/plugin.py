@@ -308,18 +308,18 @@ class PlayerLauncher:
 
 		video_fmt_map = {}
 		fmt_infomap = {}
-		if videoinfo.has_key('url_encoded_fmt_stream_map'):
+		if 'url_encoded_fmt_stream_map' in videoinfo:
 			tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',url=')
 		else:
 			tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
 		for fmtstring in tmp_fmtUrlDATA:
-			if videoinfo.has_key('url_encoded_fmt_stream_map'):
+			if 'url_encoded_fmt_stream_map' in videoinfo:
 				(fmturl, fmtid) = fmtstring.split('&itag=')
 				if fmturl.find("url=") != -1:
 					fmturl = fmturl.replace("url=", "")
 			else:
 				(fmtid, fmturl) = fmtstring.split('|')
-			if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+			if fmtid in VIDEO_FMT_PRIORITY_MAP:
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 			fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print "got", sorted(fmt_infomap.iterkeys())
