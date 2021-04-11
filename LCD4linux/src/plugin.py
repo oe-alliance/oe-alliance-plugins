@@ -4648,7 +4648,7 @@ def doGrab(i, ConfigFast, ConfigSize):
 		setFB2("0")
 	else:
 		CF = "" if ConfigFast == True else "-b"
-		GrabOSD(LCD4bin+"grab -o -p -j 95 %s -r %d %sdpfgrab.jpg" % (CF, ConfigSize, TMPL) )
+		GrabOSD(LCD4bin+"grab -o -p -j 95 %s -r %d %sdpfgrab.jpg" % (CF, ConfigSize, TMPL))
 
 
 def InitWebIF():

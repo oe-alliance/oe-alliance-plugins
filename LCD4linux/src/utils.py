@@ -30,7 +30,7 @@ def getIPTVProvider(url):
 			'.antifriz.': 'Antifriz',     # antifriz.tx
 			'app-greatiptv': 'GreatIPTV',   # app.greatiptv.cc
 			'.zala.': 'ZalaBY',       # zala.by
-			'/zatv/'      : 'ZalaBY',       # zala.by
+			'/zatv/': 'ZalaBY',       # zala.by
 			'178.124.183.': 'ZalaBY',       # zala.by
 			'zabava': 'Zabava',       # zabava.tv
 			'cdn.ngenix.net': 'Zabava',     # zabava.tv
