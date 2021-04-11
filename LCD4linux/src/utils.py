@@ -30,6 +30,7 @@ def getIPTVProvider(url):
 			'.antifriz.': 'Antifriz',     # antifriz.tx
 			'app-greatiptv': 'GreatIPTV',   # app.greatiptv.cc
 			'.zala.': 'ZalaBY',       # zala.by
+			'/zatv/'      : 'ZalaBY',       # zala.by
 			'178.124.183.': 'ZalaBY',       # zala.by
 			'zabava': 'Zabava',       # zabava.tv
 			'cdn.ngenix.net': 'Zabava',     # zabava.tv
@@ -64,7 +65,7 @@ def getAudio(description):
 	'''
 	if "Dolby Digital" in description:
 		return "audio/dolbydigital.png"
-	elif any(x in description for x in ["AC3+", "ac3+"]):
+	elif any(x in description for x in ["AC3+", "DD+", "E-AC-3", "EC-3", "ac3+", "dd+", "e-ac-3", "ec-3"]):
 		return "audio/AC3+.png"
 	elif any(x in description for x in ["AC3", "AC-3", "ac3", "ac-3"]):
 		return "audio/AC3.png"
