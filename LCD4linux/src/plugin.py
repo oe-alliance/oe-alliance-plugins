@@ -186,15 +186,15 @@ else:
 	LCD4default = Data + "default.lcd"
 WetterPath = LCD4plugin + "Extensions/LCD4linux/wetter/"
 MeteoPath = LCD4plugin + "Extensions/LCD4linux/meteo/"
-FONTdefault=resolveFilename(SCOPE_FONTS) + "nmsbd.ttf" # /usr/share/fonts/
+FONTdefault = resolveFilename(SCOPE_FONTS) + "nmsbd.ttf" # /usr/share/fonts/
 FONT = FONTdefault
 ClockBack = Data + "PAclock2.png"
 Clock = Data + "Clock"
 RecPic = Data + "rec.png"
 xmlPIC = "/tmp/l4ldisplay.png"
 xmlPICtmp = "/tmp/l4ldisplaytmp.png"
-if os.path.islink(LCD4plugin+"Extensions/LCD4linux/tmp") == True:
-	TMP = os.path.realpath(LCD4plugin+"Extensions/LCD4linux/tmp") + "/"
+if os.path.islink(LCD4plugin + "Extensions/LCD4linux/tmp") == True:
+	TMP = os.path.realpath(LCD4plugin + "Extensions/LCD4linux/tmp") + "/"
 else:
 	TMP = "/tmp/"
 TMPL = TMP + "lcd4linux/"
@@ -382,7 +382,7 @@ ProgressType = [("1", _("only Progress Bar")),
 ]
 now = localtime()
 begin = mktime((
-	now.tm_year, now.tm_mon, now.tm_mday, 0o6, 00, \
+	now.tm_year, now.tm_mon, now.tm_mday, 0o6, 00,
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 # Find all directories "clock*" with result in a list, extract last two chars, extract integers, remove dupes, sort integers and convert it back to a list
@@ -3109,7 +3109,7 @@ def writeHelligkeit(hell, night, STOP):
 		if dpf.setBacklight(SamsungDevice3, h3 if h3 < 8 else 7) == False:
 			dpf.close(SamsungDevice3)
 			SamsungDevice3 = None
-	if os.path.isfile(LCD4etc+"grautec/settings/takeownership") and STOP == False:
+	if os.path.isfile(LCD4etc + "grautec/settings/takeownership") and STOP == False:
 		try:
 			if LCD4linux.LCDType1.value[0] == "4":
 				if os.path.isfile("/tmp/usbtft-brightness"):
@@ -4247,7 +4247,7 @@ class RunShell:
 
 def TFTCheck(Force, SetMode=""):
 	global AktTFT
-	if os.path.isfile(LCD4bin + "tft-bmp-mode.sh") == True and os.path.isfile(LCD4bin+"tft-dream-mode.sh") == True:
+	if os.path.isfile(LCD4bin + "tft-bmp-mode.sh") == True and os.path.isfile(LCD4bin + "tft-dream-mode.sh") == True:
 		CurTFT = os.path.isfile(LCD4etc + "grautec/settings/takeownership")
 		L4logE("TFT mode...", CurTFT)
 		if LCD4linux.LCDType1.value[0] == "4" or LCD4linux.LCDType2.value[0] == "4" or LCD4linux.LCDType3.value[0] == "4" and SetMode != "DREAM":
@@ -4648,7 +4648,7 @@ def doGrab(i, ConfigFast, ConfigSize):
 		setFB2("0")
 	else:
 		CF = "" if ConfigFast == True else "-b"
-		GrabOSD(LCD4bin+"grab -o -p -j 95 %s -r %d %sdpfgrab.jpg" % (CF, ConfigSize, TMPL) )
+		GrabOSD(LCD4bin + "grab -o -p -j 95 %s -r %d %sdpfgrab.jpg" % (CF, ConfigSize, TMPL))
 
 
 def InitWebIF():
@@ -9824,9 +9824,9 @@ class UpdateStatus(Screen):
 				if str(LCD4linux.WetterWind.value) == "1":
 					x = self.WDay[ConfigWWW]["Wind"].split()
 					if len(x) == 3:
-						self.WDay[ConfigWWW]["Wind"]="%.1f m/s %s" % (float(int(x[0]) / 3.6), x[2])
+						self.WDay[ConfigWWW]["Wind"] = "%.1f m/s %s" % (float(int(x[0]) / 3.6), x[2])
 					else:
-						self.WDay[ConfigWWW]["Wind"]="N/A N/A N/A"
+						self.WDay[ConfigWWW]["Wind"] = "N/A N/A N/A"
 				self.WDay[ConfigWWW]["Cond"] = curr[0].getAttribute("skytext")
 				self.WDay[ConfigWWW]["Icon"] = curr[0].getAttribute("skycode") + ".png"
 				self.WDay[ConfigWWW]["Feel"] = curr[0].getAttribute("feelslike")
@@ -11013,16 +11013,16 @@ def LCD4linuxPIC(self, session):
 							PX = int(POSX - Dayw - (3 * Wmulti))
 							ShadowText(Wim, PX, POSY, Day, fontD, ConfigColor, ConfigShadow)
 							w, h = getFsize(High + SIGN, font)
-							PX = int(POSX-w-(3*Wmulti))
-							ShadowText(Wim, PX, POSY+h, High + SIGN, font, LCD4linux.WetterHighColor.value, ConfigShadow)
-							w, h = getFsize(Low + SIGN + "  "+High + SIGN, font)
-							PX = int(POSX-w-(3*Wmulti))
-							ShadowText(Wim, PX, POSY+h, Low + SIGN, font, LCD4linux.WetterLowColor.value, ConfigShadow)
+							PX = int(POSX - w - (3 * Wmulti))
+							ShadowText(Wim, PX, POSY + h, High + SIGN, font, LCD4linux.WetterHighColor.value, ConfigShadow)
+							w, h = getFsize(Low + SIGN + "  " + High + SIGN, font)
+							PX = int(POSX - w - (3 * Wmulti))
+							ShadowText(Wim, PX, POSY + h, Low + SIGN, font, LCD4linux.WetterLowColor.value, ConfigShadow)
 							w, h = getFsize(Cond, font)
-							PX = max(int(POSX-w-(3*Wmulti)), 0)
-							ShadowText(Wim, PX, POSY+2*h, Cond, font, ConfigColor, ConfigShadow)
+							PX = max(int(POSX - w - (3 * Wmulti)), 0)
+							ShadowText(Wim, PX, POSY + 2 * h, Cond, font, ConfigColor, ConfigShadow)
 							if LCD4linux.WetterRain.value != "false":
-								font = ImageFont.truetype(ConfigFont, int(int(LCD4linux.WetterRainZoom.value)*Wmulti/10.0), encoding='unic')
+								font = ImageFont.truetype(ConfigFont, int(int(LCD4linux.WetterRainZoom.value) * Wmulti / 10.0), encoding='unic')
 								w, h = getFsize(Regen, font)
 								RColor = LCD4linux.WetterRainColor.value
 								if "." in Regen:
@@ -11036,12 +11036,12 @@ def LCD4linuxPIC(self, session):
 						else:
 							Leer, h = getFsize(" ", font)
 							w, Dayh = getFsize(Day, fontD)
-							PX = POSX + int((27*Wmulti)-w/2)
+							PX = POSX + int((27 * Wmulti) - w / 2)
 							ShadowText(Wim, PX, POSY, Day, fontD, ConfigColor, ConfigShadow)
 							w, h = getFsize(Low, font)
-							PX = POSX + int((27*Wmulti))-w-int(Leer/2)
-							if len(High)>2 or len(Low)>2:
-								PY = int(h/10)
+							PX = POSX + int((27 * Wmulti)) - w - int(Leer / 2)
+							if len(High) > 2 or len(Low) > 2:
+								PY = int(h / 10)
 							else:
 								PY = 0
 							ShadowText(Wim, PX, POSY + PY + int(60 * Wmulti), Low, font, LCD4linux.WetterLowColor.value, ConfigShadow)
@@ -11187,8 +11187,8 @@ def LCD4linuxPIC(self, session):
 					else:
 						POSXs, POSYs = POSX, POSY
 					minus5 = -3
-					fontS = ImageFont.truetype(ConfigFont, int(((int(LCD4linux.WetterExtraZoom.value)-100)/20.0+8)*Wmulti), encoding='unic')
-					ShadowText(Wim, POSXs-minus5, POSYs, Locname+" "+Wtime, fontS, LCD4linux.WetterExtraColorCity.value, ConfigShadow)
+					fontS = ImageFont.truetype(ConfigFont, int(((int(LCD4linux.WetterExtraZoom.value) - 100) / 20.0 + 8) * Wmulti), encoding='unic')
+					ShadowText(Wim, POSXs - minus5, POSYs, Locname + " " + Wtime, fontS, LCD4linux.WetterExtraColorCity.value, ConfigShadow)
 
 					font = ImageFont.truetype(ConfigFont, int(15 * Wmulti), encoding='unic')
 					if ConfigType[0] == "5":
@@ -11209,7 +11209,7 @@ def LCD4linuxPIC(self, session):
 						ShadowText(Wim, POSX - wH - int(3 * Wmulti), POSY + h + int(hS / 2), Hum, font, ConfigColor, ConfigShadow) #silver
 					else:
 						font = ImageFont.truetype(ConfigFont, int(13 * Wmulti), encoding='unic')
-						Wind = (Wind.split(" ",2))
+						Wind = (Wind.split(" ", 2))
 						ShadowText(Wim, POSX - minus5, POSY + int(55 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow) #silver
 						ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(25 * Wmulti), encoding='unic')
@@ -11219,21 +11219,21 @@ def LCD4linuxPIC(self, session):
 							TextSize -= 1
 							font = ImageFont.truetype(ConfigFont, TextSize, encoding='unic')
 							w, h = getFsize(Temp_c, font)
-						ShadowText(Wim, POSX+int(45*Wmulti), POSY+int(12*Wmulti), Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
+						ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(12 * Wmulti), Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
 						w, h = getFsize(Temp_c[:-1], font)
 						fontF = ImageFont.truetype(ConfigFont, int(int(LCD4linux.WetterExtraZoom.value) / 10.0 * Wmulti), encoding='unic')
 						wS, hS = getFsize(Feel, fontF)
-						ShadowText(Wim, POSX+int(45*Wmulti)+w, POSY+int(12*Wmulti)+h-int(hS*0.8), Feel, fontF, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
-						font = ImageFont.truetype(ConfigFont, int(16*Wmulti), encoding='unic')
+						ShadowText(Wim, POSX + int(45 * Wmulti) + w, POSY + int(12 * Wmulti) + h - int(hS * 0.8), Feel, fontF, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
+						font = ImageFont.truetype(ConfigFont, int(16 * Wmulti), encoding='unic')
 						wH, hH = getFsize(Hum, font)
 						TextSize = int(25 * Wmulti)
 						while POSX + int(45 * Wmulti) + wH > MAX_W:
 							TextSize -= 1
 							font = ImageFont.truetype(ConfigFont, TextSize, encoding='unic')
 							wH, hH = getFsize(Hum, font)
-						ShadowText(Wim, POSX+int(48*Wmulti), POSY+int(10*Wmulti)+h, Hum, font, ConfigColor, ConfigShadow) #silver
-			PICwetter[ConfigWWW]=1
-		counter=20
+						ShadowText(Wim, POSX + int(48 * Wmulti), POSY + int(10 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow) #silver
+			PICwetter[ConfigWWW] = 1
+		counter = 20
 		while PICwetter[ConfigWWW] == "wait" and counter > 0:
 			L4logE("Weatherwait")
 			sleep(0.03)
@@ -11857,7 +11857,7 @@ def LCD4linuxPIC(self, session):
 		else:
 			self.im[0] = Image.new('RGB', (int(x), int(y)), (0, 0, 0, 0))
 			while TVrunning == True and getSA(int(lcd)) in LCD4linux.TV.value:
-				GrabTV(LCD4bin+"grab %s -j 40 -r %s %stvgrab.jpg" % (vt, x, TMPL))
+				GrabTV(LCD4bin + "grab %s -j 40 -r %s %stvgrab.jpg" % (vt, x, TMPL))
 				i = 0
 				while GrabTVRunning == True and i < 500:
 					sleep(0.01)
@@ -12218,7 +12218,7 @@ def LCD4linuxPIC(self, session):
 				ms = 1
 			font = ImageFont.truetype(ConfigFont, int(ConfigSize * ms) + 8, encoding='unic') #5
 #			if self.Lpath and ":0:" not in self.Lpath and "//" not in self.Lpath: # Movie
-			if self.Llength is not None and self.Llength[0]!=-1:
+			if self.Llength is not None and self.Llength[0] != -1:
 				isVideoPlaying = 1
 				try:
 					length = self.Llength
@@ -12549,7 +12549,7 @@ def LCD4linuxPIC(self, session):
 				orbital = ""
 				if transponderData["tuner_type"] == "IPTV":
 					orbital = transponderData["tuner_type"]
-					L4logE("Orbital1",orbital)
+					L4logE("Orbital1", orbital)
 				elif (transponderData["tuner_type"] in ("DVB-S", "DVB-S2")) or (transponderData["tuner_type"] == feSatellite):
 					orbital = transponderData["orbital_position"]
 					L4logE("Orbital2", orbital)
@@ -12559,8 +12559,8 @@ def LCD4linuxPIC(self, session):
 					else:
 						orbital = str((float(orbital)) / 10.0) + "E"
 					if ConfigType == "1":
-						if len(SAT)==0 and os.path.isfile(LCD4etc+"tuxbox/satellites.xml"):
-							satXml = parseE(LCD4etc+"tuxbox/satellites.xml").getroot()
+						if len(SAT) == 0 and os.path.isfile(LCD4etc + "tuxbox/satellites.xml"):
+							satXml = parseE(LCD4etc + "tuxbox/satellites.xml").getroot()
 							if satXml is not None:
 								L4log("parsing satellites...")
 								for sat in satXml.findall("sat"):
@@ -13263,7 +13263,7 @@ def LCD4linuxPIC(self, session):
 				MAX_W, MAX_H = self.im[im].size
 				if ConfigSplit == True:
 					MAX_W = int(MAX_W / 2)
-				imW = Image.open(os.path.join(Data,"audio/audio_off.png"))
+				imW = Image.open(os.path.join(Data, "audio/audio_off.png"))
 				xx, yy = imW.size
 				x = int(float(ConfigSize) / yy * xx)
 				imW = imW.resize((x, ConfigSize))
@@ -14187,13 +14187,13 @@ def LCD4linuxPIC(self, session):
 			if "A" in ConfigType:
 				M = Code_utf8(_(calendar.month_name[datetime.now().month]) + " " + str(datetime.now().year))
 				w, h = getFsize(M, font)
-				ShadowText(4, POSX+int(MAX_W/2)-int(w/2), POSY, M, font, ConfigColor, ConfigShadow)
-				POSY += h+int(ConfigSize*0.2)
+				ShadowText(4, POSX + int(MAX_W / 2) - int(w / 2), POSY, M, font, ConfigColor, ConfigShadow)
+				POSY += h + int(ConfigSize * 0.2)
 			if ConfigType[0] in ["0", "1"]:
 				i = 1
 				for Week in calendar.weekheader(3).split():
 					w, h = getFsize(Code_utf8(_(Week)), font)
-					ShadowText(4, POSX+int(ConfigSize*2*i)+int(ConfigSize/2)-int(w/2), POSY, Code_utf8(_(Week)), font, ConfigCaptionColor, ConfigShadow)
+					ShadowText(4, POSX + int(ConfigSize * 2 * i) + int(ConfigSize / 2) - int(w / 2), POSY, Code_utf8(_(Week)), font, ConfigCaptionColor, ConfigShadow)
 					i += 1
 				POSY += h
 				font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
@@ -14209,7 +14209,7 @@ def LCD4linuxPIC(self, session):
 							Week = str(Week)
 							w, h = getFsize(Week, font)
 							w1, h1 = getFsize("8", font)
-							ShadowText(4, POSX+w1-int(w/2), POSY+int(h/3), Week, font, ConfigCaptionColor, ConfigShadow)
+							ShadowText(4, POSX + w1 - int(w / 2), POSY + int(h / 3), Week, font, ConfigCaptionColor, ConfigShadow)
 					if PutWeek == True:
 						font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 						if day[0] > 0:
@@ -15460,7 +15460,7 @@ def autostart(reason, **kwargs):
 			InitWebIF()
 		if os.path.islink(LCD4lib + "libpython2.5.so.1.0") == False:
 			try:
-				os.symlink(LCD4lib + "libpython2.6.so.1.0", LCD4lib+"libpython2.5.so.1.0")
+				os.symlink(LCD4lib + "libpython2.6.so.1.0", LCD4lib + "libpython2.5.so.1.0")
 				L4log("create Link")
 			except:
 				L4log("Error create Link")
@@ -15499,7 +15499,7 @@ def autostart(reason, **kwargs):
 		if len(FritzList) > 0:
 			L4logE("write Fritzlist")
 			try:
-				f=open(LCD4enigma2 + "lcd4fritz", "w")
+				f = open(LCD4enigma2 + "lcd4fritz", "w")
 				for i in FritzList:
 					f.write(str(i) + "\n")
 				f.close()
