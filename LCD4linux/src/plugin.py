@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8m"
+Version = "V5.0-r8n"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -11210,7 +11210,7 @@ def LCD4linuxPIC(self, session):
 					else:
 						font = ImageFont.truetype(ConfigFont, int(13 * Wmulti), encoding='unic')
 						Wind = (Wind.split(" ", 2))
-						ShadowText(Wim, POSX - minus5, POSY + int(55 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow) #silver
+						ShadowText(Wim, POSX - minus5, POSY + int(57 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow) #silver
 						ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(25 * Wmulti), encoding='unic')
 						w, h = getFsize(Temp_c, font)
@@ -11219,11 +11219,11 @@ def LCD4linuxPIC(self, session):
 							TextSize -= 1
 							font = ImageFont.truetype(ConfigFont, TextSize, encoding='unic')
 							w, h = getFsize(Temp_c, font)
-						ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(12 * Wmulti), Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
+						ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(16 * Wmulti), Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
 						w, h = getFsize(Temp_c[:-1], font)
 						fontF = ImageFont.truetype(ConfigFont, int(int(LCD4linux.WetterExtraZoom.value) / 10.0 * Wmulti), encoding='unic')
 						wS, hS = getFsize(Feel, fontF)
-						ShadowText(Wim, POSX + int(45 * Wmulti) + w, POSY + int(12 * Wmulti) + h - int(hS * 0.8), Feel, fontF, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
+						ShadowText(Wim, POSX + int(45 * Wmulti) + w, POSY + int(16 * Wmulti) + h - int(hS * 0.8), Feel, fontF, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(16 * Wmulti), encoding='unic')
 						wH, hH = getFsize(Hum, font)
 						TextSize = int(25 * Wmulti)
@@ -11231,7 +11231,7 @@ def LCD4linuxPIC(self, session):
 							TextSize -= 1
 							font = ImageFont.truetype(ConfigFont, TextSize, encoding='unic')
 							wH, hH = getFsize(Hum, font)
-						ShadowText(Wim, POSX + int(48 * Wmulti), POSY + int(10 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow) #silver
+						ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(14 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow) #silver
 			PICwetter[ConfigWWW] = 1
 		counter = 20
 		while PICwetter[ConfigWWW] == "wait" and counter > 0:
