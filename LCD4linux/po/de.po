@@ -539,13 +539,13 @@ msgid "2 x FastBackwardKey Type 2"
 msgstr "2 x Rückspultaste Typ 2"
 
 msgid "2 x FastForwardKey"
-msgstr "2 x Vorspultaste"
+msgstr "2 x VorSpulTaste"
 
 msgid "2 x FastForwardKey Type 2"
-msgstr "2 x Vorspultaste Typ 2"
+msgstr "2 x VorSpulTaste Typ 2"
 
 msgid "2 x InfoKey"
-msgstr "2 x Info-Taste"
+msgstr "2 x InfoTaste"
 
 msgid "2 x Mute"
 msgstr "2 x Stumm"
@@ -1072,12 +1072,6 @@ msgstr "FritzCall Popup-Zeit"
 msgid "FritzCall remove Calls after hours"
 msgstr "FritzCall entferne Anrufe nach Stunden"
 
-msgid "Full Moon"
-msgstr "Vollmond"
-
-msgid "Waning Moon"
-msgstr "Abnehmender Mond"
-
 msgid "GUI Restart is required"
 msgstr "GUI Neustart ist notwendig"
 
@@ -1568,9 +1562,6 @@ msgstr "Netatmo Komfort Indikator"
 
 msgid "Network Check active"
 msgstr "Netzwerk Check Aktive"
-
-msgid "New Moon"
-msgstr "Neumond"
 
 msgid "Next Program Info"
 msgstr "Nächste Programm Info"
@@ -2203,17 +2194,26 @@ msgstr "WWW Konverter Verwendung"
 msgid "WWW-Internet Converter"
 msgstr "WWW-Internet Konverter"
 
+msgid "Full Moon"
+msgstr "Vollmond"
+
+msgid "Waning Moon"
+msgstr "Abnehmender Mond"
+
 msgid "Waning Crescent"
 msgstr "Abnehmender Halbmond"
 
 msgid "Waning Gibbous"
 msgstr "Abnehmender Dreiviertelmond"
 
-msgid "Waxing Crescent"
-msgstr "Zunehmender Halbmond"
+msgid "New Moon"
+msgstr "Neumond"
 
 msgid "Waxing Moon"
 msgstr "Zunehmender Mond"
+
+msgid "Waxing Crescent"
+msgstr "Zunehmender Halbmond"
 
 msgid "Waxing Gibbous"
 msgstr "Zunehmender Dreiviertelmond"
