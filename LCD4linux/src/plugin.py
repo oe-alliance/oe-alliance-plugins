@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8n"
+Version = "V5.0-r8o"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -526,8 +526,8 @@ LCD4linux.SizeH = ConfigSlider(default=600, increment=1, limits=(100, 1100))
 LCD4linux.SizeW2 = ConfigSlider(default=800, increment=1, limits=(100, 2000))
 LCD4linux.SizeH2 = ConfigSlider(default=600, increment=1, limits=(100, 1100))
 LCD4linux.KeySwitch = ConfigYesNo(default=True)
-LCD4linux.KeyScreen = ConfigSelection(choices=[("999", _("off")), ("163", _("2 x FastForwardKey")), ("208", _("2 x FastForwardKey Type 2")), ("163", _("Long FastForwardKey")), ("2081", _("Long FastForwardKey Type 2")), ("358", _("2 x InfoKey")), ("3581", _("Long InfoKey")), ("113", _("2 x Mute"))], default="163")
-LCD4linux.KeyOff = ConfigSelection(choices=[("999", _("off")), ("165", _("2 x FastBackwardKey")), ("168", _("2 x FastBackwardKey Type 2")), ("165", _("Long FastBackwardKey")), ("1681", _("Long FastBackwardKey Type 2")), ("358", _("2 x InfoKey")), ("3581", _("Long InfoKey")), ("113", _("2 x Mute"))], default="1651")
+LCD4linux.KeyScreen = ConfigSelection(choices=[("999", _("off")), ("163", _("2 x FastForwardKey")), ("208", _("2 x FastForwardKey Type 2")), ("1631", _("Long FastForwardKey")), ("2081", _("Long FastForwardKey Type 2")), ("358", _("2 x InfoKey")), ("3581", _("Long InfoKey")), ("113", _("2 x Mute"))], default="163")
+LCD4linux.KeyOff = ConfigSelection(choices=[("999", _("off")), ("165", _("2 x FastBackwardKey")), ("168", _("2 x FastBackwardKey Type 2")), ("1651", _("Long FastBackwardKey")), ("1681", _("Long FastBackwardKey Type 2")), ("358", _("2 x InfoKey")), ("3581", _("Long InfoKey")), ("113", _("2 x Mute"))], default="165")
 LCD4linux.Mail1Pop = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.Mail1Connect = ConfigSelection(choices=MailConnect, default="0")
 LCD4linux.Mail1User = ConfigText(default="", fixed_size=False, visible_width=50)
@@ -9466,16 +9466,16 @@ class UpdateStatus(Screen):
 				self.restartTimer()
 		if LCD4linux.KeySwitch.value == True:
 			if flag == 3:
-				if LCD4linux.KeyScreen.value[-1:] == "l" and key == self.k:
+				if LCD4linux.KeyScreen.value[-1:] == "1" and key == self.k:
 					ScreenTime = 9999
 					L4logE("Restart at Scr-longkey")
 					NextScreen(True)
 					LCD4linux.ScreenActive.value = ScreenActive[0]
 					self.Refresh = "1"
 					self.restartTimer()
-				elif LCD4linux.KeyOff.value[-1:] == "l" and key == self.ko:
-					L4logE("Restart at Off-longkey")
+				elif LCD4linux.KeyOff.value[-1:] == "1" and key == self.ko:
 					LCDon = True if LCDon == False else False
+					L4logE("Restart at Off-longkey")
 					self.Refresh = "1"
 					self.restartTimer()
 			else:
@@ -9484,12 +9484,12 @@ class UpdateStatus(Screen):
 				self.KeyTime = time()
 				if self.KeyDoppel == key and flag == 0:
 					self.KeyDoppel = 0
-					if LCD4linux.KeyOff.value[-1:] != "l" and key == self.ko: # PREVIOUS
+					if LCD4linux.KeyOff.value[-1:] != "1" and key == self.ko: # PREVIOUS
 						LCDon = True if LCDon == False else False
 						L4logE("Restart at Off-doublekey", key)
 						self.Refresh = "1"
 						self.restartTimer()
-					elif LCD4linux.KeyScreen.value[-1:] != "l" and key == self.k: # FORWARD / INFO
+					elif LCD4linux.KeyScreen.value[-1:] != "1" and key == self.k: # FORWARD / INFO
 						ScreenTime = 9999
 						NextScreen(True)
 						LCD4linux.ScreenActive.value = ScreenActive[0]
@@ -11231,7 +11231,7 @@ def LCD4linuxPIC(self, session):
 							TextSize -= 1
 							font = ImageFont.truetype(ConfigFont, TextSize, encoding='unic')
 							wH, hH = getFsize(Hum, font)
-						ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(14 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow) #silver
+						ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(16 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow) #silver
 			PICwetter[ConfigWWW] = 1
 		counter = 20
 		while PICwetter[ConfigWWW] == "wait" and counter > 0:
