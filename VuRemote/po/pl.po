@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2016-05-07 14:21+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -34,7 +34,8 @@ msgstr "Zmień swój tryb pilota"
 msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
 msgstr "Nacisnij i przytrzymaj '2' & '7' aż czerwona dioda LED zacznie świecić, a następnie naciśnij 'Help', a następnie '000'"
 
-msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000'"
+#, fuzzy
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
 msgstr "Nacisnij i przytrzymaj <OK> i <STB> aż czerwona dioda LED zacznie świecić, a następnie naciśnij '0000'"
 
 msgid "Remote Control Code"

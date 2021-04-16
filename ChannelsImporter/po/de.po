@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 17:16+0000\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2018-11-05 14:38+0100\n"
 "Last-Translator: Ralf Biedermann <ralf.biedermann@rbsoft.de>\n"
 "Language-Team: none\n"
@@ -24,6 +24,15 @@ msgstr ""
 #, python-format
 msgid "%d/%d"
 msgstr ""
+
+msgid "'yes' and remote fallback tuner will be automatically configured to stream from the remote receiver. 'no' and fallback will not be edited."
+msgstr "'Ja' und der Ausweichreceiver wird automatisch zum Streamen vom Server konfiguriert. Bei 'Nein' wird der Ausweichreceiver nicht verändert."
+
+msgid "Allows you to set a schedule to perform an import."
+msgstr "Erlaubt es einen Zeitplan für den Import zu erstellen."
+
+msgid "Auto configure remote fallback tuner"
+msgstr "Den Ausweichreceiver automatisch konfigurieren"
 
 msgid "Channels importer"
 msgstr ""
@@ -48,12 +57,10 @@ msgstr "Täglich"
 
 #, python-format
 msgid ""
-"Download epg.dat from remote receiver failed. Check file exists on remote "
-"receiver.\n"
+"Download epg.dat from remote receiver failed. Check file exists on remote receiver.\n"
 "%s"
 msgstr ""
-"Download von epg.dat vom Server fehlgeschlagen. Überprüfe ob Datei "
-"existiert.\n"
+"Download von epg.dat vom Server fehlgeschlagen. Überprüfe ob Datei existiert.\n"
 "%s"
 
 #, python-format
@@ -100,6 +107,24 @@ msgstr "Jede Stunde"
 msgid "Exit"
 msgstr "Ende"
 
+msgid "FTP Password"
+msgstr "FTP Passwort"
+
+msgid "FTP Port"
+msgstr ""
+
+msgid "FTP Username"
+msgstr "FTP Benutzername"
+
+msgid "FTP password of the remote receiver the channel list is being imported from."
+msgstr "FTP Passwort vom Server dessen Kanalliste importiert werden soll."
+
+msgid "FTP port of the remote receiver the channel list is being imported from."
+msgstr "FTP Port vom Server dessen Kanalliste importiert werden soll."
+
+msgid "FTP username of the remote receiver the channel list is being imported from."
+msgstr "FTP Benutzername vom Server dessen Kanalliste importiert werden soll."
+
 msgid "Fetch channels from the server."
 msgstr "Hole Kanäle vom Server."
 
@@ -109,8 +134,20 @@ msgstr "Zum Import vom Server"
 msgid "Force EPG save on remote receiver"
 msgstr "Erzwinge Sichern von epg.dat auf dem Server"
 
+msgid "IP address of the remote receiver the channel list is  being imported from."
+msgstr "IP Adresse des Servers von dem die Kanalliste importiert werden soll."
+
+msgid "If 'yes' the importer will automatically import and load EPG data from the remote receiver if the file exists."
+msgstr "Wenn 'Ja' importiert und lädt der Importer das EPG wenn es vorhanden ist."
+
+msgid "If 'yes' the importer will automatically run at startup or reboot."
+msgstr "Wenn 'Ja' startet der Import beim Start von Enigma2."
+
 msgid "Import"
 msgstr ""
+
+msgid "Import EPG"
+msgstr "Inportiere EPG"
 
 msgid "Loading epg.dat..."
 msgstr "Lade epg.dat..."
@@ -121,91 +158,20 @@ msgstr "Lade neue Kanalliste..."
 msgid "Main menu"
 msgstr "Hauptmenü"
 
-msgid "Really close without saving settings?"
-msgstr "Ohne Sichern beenden. Sicher?"
-
-msgid "Removing current channel list..."
-msgstr "Lösche aktuelle Kanalliste..."
-
-msgid "Save"
-msgstr "Sichern"
-
-msgid "Searching for epg.dat"
-msgstr "Suche epg.dat"
-
-msgid "Service searching"
-msgstr "Suche Kanal"
-
-msgid "Setup"
-msgstr "Konfiguration"
-
-msgid "Starting importer"
-msgstr "Start Import..."
-
-msgid "Starting importer..."
-msgstr "Starte Import...."
-
-msgid "epg.dat not found"
-msgstr "epg.dat nicht gefunden"
-
-msgid ""
-"'yes' and remote fallback tuner will be automatically configured to stream "
-"from the remote receiver. 'no' and fallback will not be edited."
-msgstr ""
-"'Ja' und der Ausweichreceiver wird automatisch zum Streamen vom Server "
-"konfiguriert. Bei 'Nein' wird der Ausweichreceiver nicht verändert."
-
-msgid "Allows you to set a schedule to perform an import."
-msgstr "Erlaubt es einen Zeitplan für den Import zu erstellen."
-
-msgid "Auto configure remote fallback tuner"
-msgstr "Den Ausweichreceiver automatisch konfigurieren"
-
-msgid "FTP Password"
-msgstr "FTP Passwort"
-
-msgid "FTP Port"
-msgstr ""
-
-msgid "FTP Username"
-msgstr "FTP Benutzername"
-
-msgid ""
-"FTP password of the remote receiver the channel list is being imported from."
-msgstr "FTP Passwort vom Server dessen Kanalliste importiert werden soll."
-
-msgid ""
-"FTP port of the remote receiver the channel list is being imported from."
-msgstr "FTP Port vom Server dessen Kanalliste importiert werden soll."
-
-msgid ""
-"FTP username of the remote receiver the channel list is being imported from."
-msgstr "FTP Benutzername vom Server dessen Kanalliste importiert werden soll."
-
-msgid ""
-"IP address of the remote receiver the channel list is  being imported from."
-msgstr "IP Adresse des Servers von dem die Kanalliste importiert werden soll."
-
-msgid ""
-"If 'yes' the importer will automatically import and load EPG data from the "
-"remote receiver if the file exists."
-msgstr ""
-"Wenn 'Ja' importiert und lädt der Importer das EPG wenn es vorhanden ist."
-
-msgid "If 'yes' the importer will automatically run at startup or reboot."
-msgstr "Wenn 'Ja' startet der Import beim Start von Enigma2."
-
-msgid "Import EPG"
-msgstr "Inportiere EPG"
-
 msgid "Passive mode"
 msgstr "Passiver Modus"
 
 msgid "Push error messages to the screen. Switch on for debugging only."
 msgstr "Zeige Fehler am Bildschirm an. Nur zu debuggen aktivieren."
 
+msgid "Really close without saving settings?"
+msgstr "Ohne Sichern beenden. Sicher?"
+
 msgid "Remote receiver IP"
 msgstr "Server IP?"
+
+msgid "Removing current channel list..."
+msgstr "Lösche aktuelle Kanalliste..."
 
 msgid "Repeat how often"
 msgstr "Wie oft wiederholen"
@@ -213,8 +179,17 @@ msgstr "Wie oft wiederholen"
 msgid "Run at restart"
 msgstr "Starte beim Start"
 
+msgid "Save"
+msgstr "Sichern"
+
 msgid "Schedule import"
 msgstr "Plane Import"
+
+msgid "Searching for epg.dat"
+msgstr "Suche epg.dat"
+
+msgid "Service searching"
+msgstr "Suche Kanal"
 
 msgid "Set the repeat interval of the schedule."
 msgstr "Stelle das Intervall für den Zeitplan ein."
@@ -222,11 +197,11 @@ msgstr "Stelle das Intervall für den Zeitplan ein."
 msgid "Set the time of day to perform the scan."
 msgstr "Stelle die Zeit ein zu der ein Scan erfolgen soll."
 
-msgid ""
-"Should the FTP connection to the remote receiver be established in passive "
-"mode?"
-msgstr ""
-"Soll die FTP-Verbindung zum Server im passiven Modus aufgebaut werden?"
+msgid "Setup"
+msgstr "Konfiguration"
+
+msgid "Should the FTP connection to the remote receiver be established in passive mode?"
+msgstr "Soll die FTP-Verbindung zum Server im passiven Modus aufgebaut werden?"
 
 msgid "Show error messages"
 msgstr "Zeige Fehlermeldungen"
@@ -234,8 +209,17 @@ msgstr "Zeige Fehlermeldungen"
 msgid "Show in extensions"
 msgstr "Zeige in Erweiterungen"
 
+msgid "Starting importer"
+msgstr "Start Import..."
+
+msgid "Starting importer..."
+msgstr "Starte Import...."
+
 msgid "Time import should start"
 msgstr "Zeit zu der Import starten soll"
 
 msgid "When enabled, allows you start an import from the extensions list."
 msgstr "Wenn aktiviert erlaubt es den Import aus den Erweiterungen heraus"
+
+msgid "epg.dat not found"
+msgstr "epg.dat nicht gefunden"

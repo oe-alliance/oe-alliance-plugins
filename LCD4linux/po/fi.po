@@ -7,10 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-
-"POT-Creation-Date: 2018-10-30 17:38+0000\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2018-10-31 22:03+0200\n"
-
 "Last-Translator: Kojo\n"
 "Language-Team: Kojo\n"
 "Language: fi\n"
@@ -421,6 +419,9 @@ msgstr "- Aikakatkaisu [ms]"
 msgid "- Transparency"
 msgstr "- Läpinäkyvyys"
 
+msgid "- Trimmed"
+msgstr ""
+
 msgid "- Tunerinfo"
 msgstr "- Viritininfo"
 
@@ -438,6 +439,10 @@ msgstr "- Miten sää-tiedot näytetään?"
 
 msgid "- Zoom"
 msgstr "- Zoom"
+
+#, fuzzy
+msgid "- external IP URL"
+msgstr "- Lisätietoa"
 
 msgid "- extra Info"
 msgstr "- Lisätietoa"
@@ -784,6 +789,24 @@ msgstr "Palkki+Arvo"
 msgid "Bitrate"
 msgstr "Bittinopeus"
 
+msgid "BlueSound"
+msgstr ""
+
+msgid "BlueSound IP"
+msgstr ""
+
+#, fuzzy
+msgid "BlueSound Ping Timeout [ms]"
+msgstr "Sonos: Ping Aikakatkaisu [ms]"
+
+#, fuzzy
+msgid "BlueSound Play Check"
+msgstr "Sonos: Play-tarkistus"
+
+#, fuzzy
+msgid "BlueSound Refresh [s]"
+msgstr "Sonos: Virkistä [s]"
+
 msgid "Box-Skin-LCD"
 msgstr "VDF-näyttö"
 
@@ -999,6 +1022,9 @@ msgstr "Laajennettu (lyhyt)"
 
 msgid "Extended Description"
 msgstr "Laajennettu kuvaus"
+
+msgid "External IP Address"
+msgstr ""
 
 msgid "Fastmode (2s)"
 msgstr "Nopea (2s)"
@@ -2104,6 +2130,10 @@ msgstr "Vaihda ruutubufferia [jos mahdollista]"
 msgid "TV"
 msgstr "TV"
 
+#, fuzzy
+msgid "TV (full)"
+msgstr "normaali (täysi)"
+
 msgid "TV+OSD"
 msgstr "TV+OSD"
 
@@ -2212,13 +2242,15 @@ msgstr "WWW Internet-muunnin"
 msgid "Waning Crescent"
 msgstr "Waning Crescent"
 
-msgid "Waning Gibbous"
+#, fuzzy
+msgid "Waning Moon"
 msgstr "Waning Gibbous"
 
 msgid "Waxing Crescent"
 msgstr "Waxing Crescent"
 
-msgid "Waxing Gibbous"
+#, fuzzy
+msgid "Waxing Moon"
 msgstr "Waxing Gibbous"
 
 msgid "Weather"

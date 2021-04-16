@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2018-07-31 07:44+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -336,9 +336,6 @@ msgstr "Toets naar boven"
 
 msgid "Url"
 msgstr "Url"
-
-msgid "YouTube TV"
-msgstr "YouTube TV"
 
 msgid "YouTube TV Settings"
 msgstr "YouTube TV instellingen"

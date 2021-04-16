@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MultiTransCodingSetup oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2017-07-05 20:05+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -119,6 +119,9 @@ msgstr "Dvieilio pynimo"
 msgid "Encoder Resolution"
 msgstr "Rezoliucija"
 
+msgid "Encoder Video Codec"
+msgstr ""
+
 msgid "Exit"
 msgstr "Užverti"
 
@@ -129,6 +132,15 @@ msgid "H.264"
 msgstr ""
 
 msgid "H.265"
+msgstr ""
+
+msgid "HD1080"
+msgstr ""
+
+msgid "HD1080 DV"
+msgstr ""
+
+msgid "HD720"
 msgstr ""
 
 msgid "Interlaced"
@@ -148,6 +160,18 @@ msgstr "Multi-perkodavimo sąranka"
 
 msgid "No"
 msgstr "ne"
+
+msgid "PAL"
+msgstr ""
+
+msgid "PAL DV"
+msgstr ""
+
+msgid "PAL SVCD"
+msgstr ""
+
+msgid "PAL-wide"
+msgstr ""
 
 msgid "Really close without saving settings?"
 msgstr "Tikrai uždaryti, neišsaugant nustatymų?"

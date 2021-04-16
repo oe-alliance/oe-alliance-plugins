@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2018-10-14 15:28+0200\n"
 "Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: ViX <LL@li.org>\n"
@@ -115,6 +115,10 @@ msgstr "Encoder Interlaced"
 msgid "Encoder Resolution"
 msgstr "Encoder Auflösung"
 
+#, fuzzy
+msgid "Encoder Video Codec"
+msgstr "Video codec"
+
 msgid "Exit"
 msgstr "Abbrechen"
 
@@ -126,6 +130,15 @@ msgstr "H.264"
 
 msgid "H.265"
 msgstr "H.265"
+
+msgid "HD1080"
+msgstr ""
+
+msgid "HD1080 DV"
+msgstr ""
+
+msgid "HD720"
+msgstr ""
 
 msgid "Interlaced"
 msgstr "Interlaced"
@@ -144,6 +157,18 @@ msgstr "Multi-Transcoding Einstellungen"
 
 msgid "No"
 msgstr "Nein"
+
+msgid "PAL"
+msgstr ""
+
+msgid "PAL DV"
+msgstr ""
+
+msgid "PAL SVCD"
+msgstr ""
+
+msgid "PAL-wide"
+msgstr ""
 
 msgid "Really close without saving settings?"
 msgstr "Wirklich beenden ohne die Einstellungen zu sichern?"

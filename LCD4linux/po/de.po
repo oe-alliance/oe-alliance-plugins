@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2018-10-14 14:54+0200\n"
 "Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: \n"
@@ -165,6 +165,10 @@ msgstr "- Datei [ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- Datei oder Verzeichnis [ok]>"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- Datei [ok]>"
 
 msgid "- Font"
 msgstr "- Schriftart"
@@ -412,6 +416,9 @@ msgstr "- Timeout [ms]"
 msgid "- Transparency"
 msgstr "- Transparenz"
 
+msgid "- Trimmed"
+msgstr ""
+
 msgid "- Tunerinfo"
 msgstr "- Tunerinfo"
 
@@ -429,6 +436,10 @@ msgstr "- Wettertyp"
 
 msgid "- Zoom"
 msgstr "- Zoom"
+
+#, fuzzy
+msgid "- external IP URL"
+msgstr "- Zusatzinfo"
 
 msgid "- extra Info"
 msgstr "- Zusatzinfo"
@@ -775,6 +786,24 @@ msgstr "Balken+Wert"
 msgid "Bitrate"
 msgstr "Bitrate"
 
+msgid "BlueSound"
+msgstr ""
+
+msgid "BlueSound IP"
+msgstr ""
+
+#, fuzzy
+msgid "BlueSound Ping Timeout [ms]"
+msgstr "Sonos Ping Timeout [ms]"
+
+#, fuzzy
+msgid "BlueSound Play Check"
+msgstr "Sonos Play Check"
+
+#, fuzzy
+msgid "BlueSound Refresh [s]"
+msgstr "Sonos Refresh [s]"
+
 msgid "Box-Skin-LCD"
 msgstr "Boxskin-LCD"
 
@@ -991,6 +1020,9 @@ msgstr "Erweitert (Kurz)"
 msgid "Extended Description"
 msgstr "Erweiterte Beschreibung"
 
+msgid "External IP Address"
+msgstr ""
+
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
 
@@ -1071,6 +1103,9 @@ msgstr "FritzCall Popup-Zeit"
 
 msgid "FritzCall remove Calls after hours"
 msgstr "FritzCall entferne Anrufe nach Stunden"
+
+msgid "Full Moon"
+msgstr "Vollmond"
 
 msgid "GUI Restart is required"
 msgstr "GUI Neustart ist notwendig"
@@ -1562,6 +1597,9 @@ msgstr "Netatmo Komfort Indikator"
 
 msgid "Network Check active"
 msgstr "Netzwerk Check Aktive"
+
+msgid "New Moon"
+msgstr "Neumond"
 
 msgid "Next Program Info"
 msgstr "Nächste Programm Info"
@@ -2089,6 +2127,10 @@ msgstr "FramBuffer umschalten [wenn möglich]"
 msgid "TV"
 msgstr "TV"
 
+#, fuzzy
+msgid "TV (full)"
+msgstr "normal (voll)"
+
 msgid "TV+OSD"
 msgstr "TV+OSD"
 
@@ -2194,29 +2236,17 @@ msgstr "WWW Konverter Verwendung"
 msgid "WWW-Internet Converter"
 msgstr "WWW-Internet Konverter"
 
-msgid "Full Moon"
-msgstr "Vollmond"
+msgid "Waning Crescent"
+msgstr "Abnehmender Halbmond"
 
 msgid "Waning Moon"
 msgstr "Abnehmender Mond"
 
-msgid "Waning Crescent"
-msgstr "Abnehmender Halbmond"
-
-msgid "Waning Gibbous"
-msgstr "Abnehmender Dreiviertelmond"
-
-msgid "New Moon"
-msgstr "Neumond"
-
-msgid "Waxing Moon"
-msgstr "Zunehmender Mond"
-
 msgid "Waxing Crescent"
 msgstr "Zunehmender Halbmond"
 
-msgid "Waxing Gibbous"
-msgstr "Zunehmender Dreiviertelmond"
+msgid "Waxing Moon"
+msgstr "Zunehmender Mond"
 
 msgid "Weather"
 msgstr "Wetter"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2016-11-13 22:48+0000\n"
 "Last-Translator: nunigaia\n"
 "Language-Team: BH Team\n"
@@ -337,9 +337,6 @@ msgstr "Up Key"
 
 msgid "Url"
 msgstr "Url"
-
-msgid "YouTube TV"
-msgstr "YouTube TV"
 
 msgid "YouTube TV Settings"
 msgstr "Definições do YouTube TV"

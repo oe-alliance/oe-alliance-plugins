@@ -2,63 +2,55 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-04-24 18:47+0200\n"
-"PO-Revision-Date: 2016-09-29 04:50+0200\n"
-"Last-Translator: FULL NAME <madie1@gmx.de>\n"
-"Language-Team: LANGUAGE <openATV>\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 16:22+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 2.0.6\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: .\n"
 
-msgid "Portal"
+msgid "Cancel"
 msgstr ""
 
-msgid "User"
-msgstr ""
-
-msgid "Password"
+msgid "Connection failed! Aborted!"
 msgstr ""
 
 msgid "Delete IPTV Bouquets before Import"
 msgstr ""
 
-msgid "Import VOD in Bouquet"
+msgid "IPTV Import"
 msgstr ""
 
-msgid "Import Sky Germany Channels in Bouquet"
-msgstr ""
-
-msgid "Import Germany Channels in Bouquet"
-msgstr ""
-
-msgid "Import German Sport Channels in Bouquet"
+msgid "Import Arabic Channels in Bouquet"
 msgstr ""
 
 msgid "Import Bundesliga Channels in Bouquet"
 msgstr ""
 
-msgid "Import Suisse and Austria Channels in Bouquet"
+msgid "Import Ex-Yu Channels in Bouquet"
 msgstr ""
 
-msgid "Import XXX Channels in Bouquet"
-msgstr ""
-
-msgid "Import Italian Channels in Bouquet"
+msgid "Import Finland Channels in Bouquet"
 msgstr ""
 
 msgid "Import France Channels in Bouquet"
 msgstr ""
 
-msgid "Import UK Channels in Bouquet"
+msgid "Import German Sport Channels in Bouquet"
+msgstr ""
+
+msgid "Import Germany Channels in Bouquet"
+msgstr ""
+
+msgid "Import Italian Channels in Bouquet"
 msgstr ""
 
 msgid "Import Netherlands Channels in Bouquet"
@@ -67,31 +59,49 @@ msgstr ""
 msgid "Import Polish Channels in Bouquet"
 msgstr ""
 
-msgid "Import Ex-Yu Channels in Bouquet"
+msgid "Import Portugal Channels in Bouquet"
 msgstr ""
 
 msgid "Import Romania Channels in Bouquet"
 msgstr ""
 
-msgid "Import US Channels in Bouquet"
+msgid "Import Sky Germany Channels in Bouquet"
 msgstr ""
 
-msgid "Import Arabic Channels in Bouquet"
+msgid "Import Spain Channels in Bouquet"
 msgstr ""
 
-msgid "Import Turkey Channels in Bouquet"
+msgid "Import Suisse and Austria Channels in Bouquet"
 msgstr ""
 
 msgid "Import Sweden Channels in Bouquet"
 msgstr ""
 
-msgid "Import Finland Channels in Bouquet"
+msgid "Import Turkey Channels in Bouquet"
 msgstr ""
 
-msgid "Import Portugal Channels in Bouquet"
+msgid "Import UK Channels in Bouquet"
 msgstr ""
 
-msgid "Import Spain Channels in Bouquet"
+msgid "Import US Channels in Bouquet"
+msgstr ""
+
+msgid "Import VOD in Bouquet"
+msgstr ""
+
+msgid "Import XXX Channels in Bouquet"
+msgstr ""
+
+msgid "Import successful!"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Portal"
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Show IPTV Importer in Extensions"
@@ -103,21 +113,11 @@ msgstr ""
 msgid "Show IPTV Importer in Plugins"
 msgstr ""
 
-msgid "Cancel"
+msgid "Start Import"
 msgstr ""
 
-msgid "Save"
+msgid "User"
 msgstr ""
 
-msgid "Import successful!"
-msgstr ""
-
-msgid "Connection failed! Aborted!"
-msgstr ""
-
-msgid "IPTV Import"
-msgstr ""
-
-
-msgid "IPTV Import Edit"
+msgid "none"
 msgstr ""
