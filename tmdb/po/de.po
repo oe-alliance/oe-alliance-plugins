@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tmdb\n"
-"POT-Creation-Date: 2017-12-15 16:43+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2017-12-15 16:44+0100\n"
 "Last-Translator: schomi <schomi@vuplus-support.org>\n"
 "Language-Team: schomi <schomi@vuplus-support.org>\n"
@@ -13,8 +14,10 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: C:\\Users\\michael\\Desktop\\Plugins\\Plugin tmdb"
-"\\tmdb\n"
+"X-Poedit-SearchPath-0: C:\\Users\\michael\\Desktop\\Plugins\\Plugin tmdb\\tmdb\n"
+
+msgid " "
+msgstr ""
 
 msgid "Author:"
 msgstr "Author:"
@@ -70,6 +73,7 @@ msgstr "Lade ..."
 msgid "Movie"
 msgstr "Film"
 
+#, python-format
 msgid "No Movie information found for %s"
 msgstr "Keine Filminformationen für %s"
 
@@ -118,6 +122,7 @@ msgstr "Zeige Details bei nur einem Suchergebnis an:"
 msgid "Studio:"
 msgstr "Studio:"
 
+#, python-format
 msgid "TMDB: Results for %s"
 msgstr "TMDb: Ergebnisse für %s"
 
@@ -136,6 +141,7 @@ msgstr "TMDb Informationen erstellt!"
 msgid "TMDb: No results found, or does not respond!"
 msgstr "TMDb: Keine Ergebnisse gefunden, oder antwortet nicht!"
 
+#, python-format
 msgid "Try to find %s in tmdb ..."
 msgstr "Versuche %s in tmdb zu finden ..."
 

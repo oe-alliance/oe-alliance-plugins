@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 17:21+0000\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2019-03-08 14:42+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: \n"
@@ -413,6 +413,9 @@ msgstr "- Timeout [ms]"
 
 msgid "- Transparency"
 msgstr "- Transparantie"
+
+msgid "- Trimmed"
+msgstr ""
 
 msgid "- Tunerinfo"
 msgstr "- Tunerinfo"
@@ -2118,6 +2121,10 @@ msgstr "Schakel framebuffer [indien mogelijk)"
 msgid "TV"
 msgstr "TV"
 
+#, fuzzy
+msgid "TV (full)"
+msgstr "normaal (vol)"
+
 msgid "TV+OSD"
 msgstr "TV+OSD"
 
@@ -2226,13 +2233,15 @@ msgstr "WWW-Internet Converter"
 msgid "Waning Crescent"
 msgstr "Afnemende halve maan"
 
-msgid "Waning Gibbous"
+#, fuzzy
+msgid "Waning Moon"
 msgstr "Afnemende volle maan"
 
 msgid "Waxing Crescent"
 msgstr "Wassende halve maan"
 
-msgid "Waxing Gibbous"
+#, fuzzy
+msgid "Waxing Moon"
 msgstr "Wassende volle maan"
 
 msgid "Weather"

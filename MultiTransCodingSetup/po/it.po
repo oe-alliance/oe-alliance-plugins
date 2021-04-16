@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MultiTransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2017-12-03 19:32+0000\n"
 "Last-Translator: insanity\n"
 "Language-Team: www.vuplus-community.net <insanity@>\n"
@@ -115,6 +115,9 @@ msgstr "Interlacciato"
 msgid "Encoder Resolution"
 msgstr "Risoluzione"
 
+msgid "Encoder Video Codec"
+msgstr ""
+
 msgid "Exit"
 msgstr "Esci"
 
@@ -125,6 +128,15 @@ msgid "H.264"
 msgstr ""
 
 msgid "H.265"
+msgstr ""
+
+msgid "HD1080"
+msgstr ""
+
+msgid "HD1080 DV"
+msgstr ""
+
+msgid "HD720"
 msgstr ""
 
 msgid "Interlaced"
@@ -144,6 +156,18 @@ msgstr "Impostazioni multi transcodifica"
 
 msgid "No"
 msgstr "No"
+
+msgid "PAL"
+msgstr ""
+
+msgid "PAL DV"
+msgstr ""
+
+msgid "PAL SVCD"
+msgstr ""
+
+msgid "PAL-wide"
+msgstr ""
 
 msgid "Really close without saving settings?"
 msgstr "Chiudere senza salvare le configurazioni?"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2017-01-12 13:44+0200\n"
 "Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
 "Language-Team: \n"
@@ -22,6 +22,13 @@ msgstr ""
 
 msgid "(Re)Scan"
 msgstr "(Επαν)ανίχνευση"
+
+msgid "Audio Address"
+msgstr ""
+
+#, fuzzy
+msgid "Audio Connect"
+msgstr "Σύνδεση"
 
 msgid "Autostart"
 msgstr "Αυτόματη εκκίνηση"
@@ -47,6 +54,10 @@ msgstr "Σύνδεση με:\n"
 msgid "Disconnect"
 msgstr "Αποσύνδεση"
 
+#, fuzzy
+msgid "Disconnect with:\n"
+msgstr "Σύνδεση με:\n"
+
 msgid "Exit"
 msgstr "Έξοδος"
 
@@ -61,6 +72,9 @@ msgstr "Δεν έχει συνδεθεί συσκευή"
 
 msgid "Not detected devices around STB"
 msgstr "Δεν εντοπίστηκαν κοντινές συσκευές στο δέκτη"
+
+msgid "Please Enter Passkey: \n"
+msgstr ""
 
 msgid "Please load BT driver by pressing BLUE button."
 msgstr "Παρακαλώ φορτώστε τον οδηγό BT πιέζοντας το ΜΠΛΕ πλήκτρο."

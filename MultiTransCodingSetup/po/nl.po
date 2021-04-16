@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2018-07-31 09:21+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -116,6 +116,10 @@ msgstr "Encoder Interlaced"
 msgid "Encoder Resolution"
 msgstr "Encoder Resolution"
 
+#, fuzzy
+msgid "Encoder Video Codec"
+msgstr "Videocodec"
+
 msgid "Exit"
 msgstr "Sluit af"
 
@@ -127,6 +131,15 @@ msgstr "H.264"
 
 msgid "H.265"
 msgstr "H.265"
+
+msgid "HD1080"
+msgstr ""
+
+msgid "HD1080 DV"
+msgstr ""
+
+msgid "HD720"
+msgstr ""
 
 msgid "Interlaced"
 msgstr "Interlaced"
@@ -145,6 +158,18 @@ msgstr "Multi-transcodeerinstellingen"
 
 msgid "No"
 msgstr "Nee"
+
+msgid "PAL"
+msgstr ""
+
+msgid "PAL DV"
+msgstr ""
+
+msgid "PAL SVCD"
+msgstr ""
+
+msgid "PAL-wide"
+msgstr ""
 
 msgid "Really close without saving settings?"
 msgstr "Echt afsluiten zonder op te slaan?"

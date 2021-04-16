@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2017-01-18 13:38\n"
 "Last-Translator: insanity\n"
 "Language-Team: \n"
@@ -169,6 +169,10 @@ msgstr "- File [OK] >"
 
 msgid "- File or Path [ok]>"
 msgstr "- File o percorso [OK] >"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- File [OK] >"
 
 msgid "- Font"
 msgstr "- Carattere"
@@ -416,6 +420,9 @@ msgstr "- Timeout [ms]"
 msgid "- Transparency"
 msgstr "- Trasparenza"
 
+msgid "- Trimmed"
+msgstr ""
+
 msgid "- Tunerinfo"
 msgstr "- Tunerinfo"
 
@@ -433,6 +440,10 @@ msgstr "- Tipo Meteo"
 
 msgid "- Zoom"
 msgstr "- Zoom"
+
+#, fuzzy
+msgid "- external IP URL"
+msgstr "- extra Info"
 
 msgid "- extra Info"
 msgstr "- extra Info"
@@ -781,6 +792,24 @@ msgstr "Barra + Valore"
 msgid "Bitrate"
 msgstr "Bitrate"
 
+msgid "BlueSound"
+msgstr ""
+
+msgid "BlueSound IP"
+msgstr ""
+
+#, fuzzy
+msgid "BlueSound Ping Timeout [ms]"
+msgstr "Sonos Ping Timeout [ms] "
+
+#, fuzzy
+msgid "BlueSound Play Check"
+msgstr "Sonos test riproduzione"
+
+#, fuzzy
+msgid "BlueSound Refresh [s]"
+msgstr "Sonos aggiornare [s] "
+
 msgid "Box-Skin-LCD"
 msgstr "Box-Skin-LCD"
 
@@ -997,6 +1026,9 @@ msgstr "Esteso (breve)"
 
 msgid "Extended Description"
 msgstr "Descrizione estesa"
+
+msgid "External IP Address"
+msgstr ""
 
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
@@ -2120,6 +2152,10 @@ msgstr "Passare  FrameBuffer [se possibile]"
 msgid "TV"
 msgstr "TV"
 
+#, fuzzy
+msgid "TV (full)"
+msgstr "normale (completo)"
+
 msgid "TV+OSD"
 msgstr "TV+OSD"
 
@@ -2228,13 +2264,15 @@ msgstr "Convertitore  WWW-Internet"
 msgid "Waning Crescent"
 msgstr "Mezzaluna calante"
 
-msgid "Waning Gibbous"
+#, fuzzy
+msgid "Waning Moon"
 msgstr "Luna calante"
 
 msgid "Waxing Crescent"
 msgstr "Mezzaluna crescente"
 
-msgid "Waxing Gibbous"
+#, fuzzy
+msgid "Waxing Moon"
 msgstr "Luna crescente "
 
 msgid "Weather"

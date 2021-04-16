@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BTDevicesManager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2016-05-07 13:09+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: openspa <openspa.info>\n"
@@ -14,6 +14,13 @@ msgstr ""
 
 msgid "(Re)Scan"
 msgstr "(Re)escanejar"
+
+msgid "Audio Address"
+msgstr ""
+
+#, fuzzy
+msgid "Audio Connect"
+msgstr "Connectar"
 
 msgid "Autostart"
 msgstr "Autoinici"
@@ -39,6 +46,10 @@ msgstr "Connectat amb:\n"
 msgid "Disconnect"
 msgstr "Desconnectar"
 
+#, fuzzy
+msgid "Disconnect with:\n"
+msgstr "Connectat amb:\n"
+
 msgid "Exit"
 msgstr "Sortir"
 
@@ -53,6 +64,9 @@ msgstr "No s'ha connectat a cap dispositiu"
 
 msgid "Not detected devices around STB"
 msgstr "No s'ha detectat cap dispositiu aprop"
+
+msgid "Please Enter Passkey: \n"
+msgstr ""
 
 msgid "Please load BT driver by pressing BLUE button."
 msgstr "Carregueu el driver BT mitjançant el botó BLAU."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2016-05-07 13:44+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: ViX <LL@li.org>\n"
@@ -112,6 +112,9 @@ msgstr ""
 msgid "Encoder Resolution"
 msgstr ""
 
+msgid "Encoder Video Codec"
+msgstr ""
+
 msgid "Exit"
 msgstr ""
 
@@ -122,6 +125,15 @@ msgid "H.264"
 msgstr ""
 
 msgid "H.265"
+msgstr ""
+
+msgid "HD1080"
+msgstr ""
+
+msgid "HD1080 DV"
+msgstr ""
+
+msgid "HD720"
 msgstr ""
 
 msgid "Interlaced"
@@ -140,6 +152,18 @@ msgid "Multi-Transcoding Setup"
 msgstr ""
 
 msgid "No"
+msgstr ""
+
+msgid "PAL"
+msgstr ""
+
+msgid "PAL DV"
+msgstr ""
+
+msgid "PAL SVCD"
+msgstr ""
+
+msgid "PAL-wide"
 msgstr ""
 
 msgid "Really close without saving settings?"

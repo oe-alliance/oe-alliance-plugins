@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BTDevicesManager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2017-12-02 22:12+0100\n"
 "Last-Translator: insanity@\n"
 "Language-Team: vuplus-community.net <insanity@>\n"
@@ -17,6 +17,13 @@ msgstr ""
 
 msgid "(Re)Scan"
 msgstr "Ripeti scansione"
+
+msgid "Audio Address"
+msgstr ""
+
+#, fuzzy
+msgid "Audio Connect"
+msgstr "Connettere"
 
 msgid "Autostart"
 msgstr "Avvio automatico"
@@ -42,6 +49,10 @@ msgstr "Connesso con:\n"
 msgid "Disconnect"
 msgstr "Disconnesso"
 
+#, fuzzy
+msgid "Disconnect with:\n"
+msgstr "Connesso con:\n"
+
 msgid "Exit"
 msgstr "Esci"
 
@@ -56,6 +67,9 @@ msgstr "Non connesso a nessun dispositivo"
 
 msgid "Not detected devices around STB"
 msgstr "Nessun dispositivo rilevato nei dintorni"
+
+msgid "Please Enter Passkey: \n"
+msgstr ""
 
 msgid "Please load BT driver by pressing BLUE button."
 msgstr "Premere  tasto BLU per caricare il driver BT."
