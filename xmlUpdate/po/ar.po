@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XML update\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2020-03-06 12:15+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -10,8 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
 "X-Generator: Poedit 2.3\n"
 
 msgid "/etc/enigma2"
@@ -26,6 +25,7 @@ msgstr "خروج"
 msgid "Fetch"
 msgstr "إلتقاط"
 
+#, python-format
 msgid ""
 "Fetching and saving %s.xml succeeded.\n"
 "Restart now for changes to take immediate effect?"
@@ -33,19 +33,13 @@ msgstr ""
 "نجح جلب وحفظ %s.xml.\n"
 "أعد التشغيل الآن لتصبح التغييرات سارية المفعول؟"
 
-msgid ""
-"File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
+msgid "File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
 msgstr "يتم تحديث الملف، مثال satellites.xml أو cables.xml أو earth.xml."
 
-msgid ""
-"Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the "
-"default location. Files stored in \"/etc/enigma2\" override the default file "
-"and are not updated on a software update."
+msgid "Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the default location. Files stored in \"/etc/enigma2\" override the default file and are not updated on a software update."
 msgstr ""
-"مجلد حيث سيتم حفظ الملف الذي تم تنزيله. \"/ etc / tuxbox\" هو الموقع "
-"الافتراضي. الملفات المخزنة في\n"
-"\"/ etc / enigma2\" تتجاوز الملف الافتراضي ولا يتم تحديثها عند تحديث "
-"البرنامج."
+"مجلد حيث سيتم حفظ الملف الذي تم تنزيله. \"/ etc / tuxbox\" هو الموقع الافتراضي. الملفات المخزنة في\n"
+"\"/ etc / enigma2\" تتجاوز الملف الافتراضي ولا يتم تحديثها عند تحديث البرنامج."
 
 msgid "OE-Alliance"
 msgstr "صور مفتوحة المصدر"
@@ -56,15 +50,18 @@ msgstr "مصدر أونلاين حيث سيتم استرداد ملف معلوم
 msgid "Save to"
 msgstr "حفظ إلى"
 
+#, python-format
 msgid "Saving the %s.xml file failed"
 msgstr "فشل حفظ ملف %s.xml"
 
 msgid "Source"
 msgstr "المصدر"
 
+#, python-format
 msgid "The %s.xml download was corrupt."
 msgstr "تحميل %s.xml تألف."
 
+#, python-format
 msgid "The %s.xml file could not be fetched"
 msgstr "لا يمكن جلب ملف %s.xml"
 

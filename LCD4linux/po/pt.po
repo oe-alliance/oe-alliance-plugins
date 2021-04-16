@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: nunigaia\n"
 "Language-Team: BH Team\n"
@@ -168,6 +168,10 @@ msgstr "- Arquivo [OK]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- Arquivo ou Percurso [OK]>"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- Arquivo [OK]>"
 
 msgid "- Font"
 msgstr "- Fonte"
@@ -415,6 +419,9 @@ msgstr "- Descanso [ms]"
 msgid "- Transparency"
 msgstr "- Transparência"
 
+msgid "- Trimmed"
+msgstr ""
+
 msgid "- Tunerinfo"
 msgstr "- Informação do Tuner"
 
@@ -432,6 +439,10 @@ msgstr "- Tipo de Tempo"
 
 msgid "- Zoom"
 msgstr "- Zoom"
+
+#, fuzzy
+msgid "- external IP URL"
+msgstr "- informação extra"
 
 msgid "- extra Info"
 msgstr "- informação extra"
@@ -780,6 +791,24 @@ msgstr "Pre+Valor"
 msgid "Bitrate"
 msgstr "Bitrate"
 
+msgid "BlueSound"
+msgstr ""
+
+msgid "BlueSound IP"
+msgstr ""
+
+#, fuzzy
+msgid "BlueSound Ping Timeout [ms]"
+msgstr "Tempo limite de Ping Sonos [ms] "
+
+#, fuzzy
+msgid "BlueSound Play Check"
+msgstr "Verificar reprodução Sonos"
+
+#, fuzzy
+msgid "BlueSound Refresh [s]"
+msgstr "Refrescar Sonos [s]"
+
 msgid "Box-Skin-LCD"
 msgstr "LCD Box-Skin"
 
@@ -996,6 +1025,9 @@ msgstr "Extendido (Curto)"
 
 msgid "Extended Description"
 msgstr "Descrição Extendida"
+
+msgid "External IP Address"
+msgstr ""
 
 msgid "Fastmode (2s)"
 msgstr "Modo Rápido (2s)"
@@ -2116,6 +2148,10 @@ msgstr "Por contador de planos (se for possível)"
 msgid "TV"
 msgstr "TV"
 
+#, fuzzy
+msgid "TV (full)"
+msgstr "normal (completo)"
+
 msgid "TV+OSD"
 msgstr "TV+OSD"
 
@@ -2224,13 +2260,15 @@ msgstr "Conversor WWW-Internet"
 msgid "Waning Crescent"
 msgstr "Quarto Minguante"
 
-msgid "Waning Gibbous"
+#, fuzzy
+msgid "Waning Moon"
 msgstr "Quarto Minguante"
 
 msgid "Waxing Crescent"
 msgstr "Quarto Crescente"
 
-msgid "Waxing Gibbous"
+#, fuzzy
+msgid "Waxing Moon"
 msgstr "Quarto Crescente"
 
 msgid "Weather"

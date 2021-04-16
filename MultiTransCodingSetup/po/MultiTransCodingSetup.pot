@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,6 +110,15 @@ msgstr ""
 msgid "H.265"
 msgstr ""
 
+msgid "HD1080"
+msgstr ""
+
+msgid "HD1080 DV"
+msgstr ""
+
+msgid "HD720"
+msgstr ""
+
 msgid "Interlaced"
 msgstr ""
 
@@ -126,6 +135,18 @@ msgid "Multi-Transcoding Setup"
 msgstr ""
 
 msgid "No"
+msgstr ""
+
+msgid "PAL"
+msgstr ""
+
+msgid "PAL DV"
+msgstr ""
+
+msgid "PAL SVCD"
+msgstr ""
+
+msgid "PAL-wide"
 msgstr ""
 
 msgid "Really close without saving settings?"
@@ -178,6 +199,9 @@ msgid "Encoder Interlaced"
 msgstr ""
 
 msgid "Encoder Resolution"
+msgstr ""
+
+msgid "Encoder Video Codec"
 msgstr ""
 
 msgid "Setup your timezone."

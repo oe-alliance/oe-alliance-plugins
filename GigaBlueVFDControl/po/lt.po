@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GigaBlueVFDControl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2017-07-05 19:15+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -58,6 +58,9 @@ msgstr "LED ekranas"
 
 msgid "Enable led"
 msgstr "Įjungti LED"
+
+msgid "GigaBlue Setup"
+msgstr ""
 
 msgid "LED"
 msgstr "LED"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 02:59+0100\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2018-12-08 11:51+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -13,6 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2\n"
 
+#, python-format
 msgid "%s"
 msgstr "%s"
 
@@ -208,7 +209,8 @@ msgstr "الدقة"
 msgid "Save"
 msgstr "حفظ"
 
-msgid "This model is not support transcoding."
+#, fuzzy
+msgid "This model does not support transcoding."
 msgstr "هذا الموديل البث عبر الشبكة غير مدعوم."
 
 msgid "Transcoding Setup"

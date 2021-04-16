@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "(Re)Scan"
+msgstr ""
+
+msgid "Audio Address"
+msgstr ""
+
+msgid "Audio Connect"
 msgstr ""
 
 msgid "Autostart"
@@ -44,6 +50,9 @@ msgstr ""
 msgid "Disconnect"
 msgstr ""
 
+msgid "Disconnect with:\n"
+msgstr ""
+
 msgid "Exit"
 msgstr ""
 
@@ -57,6 +66,9 @@ msgid "No connected to any device"
 msgstr ""
 
 msgid "Not detected devices around STB"
+msgstr ""
+
+msgid "Please Enter Passkey: \n"
 msgstr ""
 
 msgid "Please load BT driver by pressing BLUE button."

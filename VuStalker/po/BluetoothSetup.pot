@@ -17,143 +17,147 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid " "
+#, python-format
+msgid "%d min"
 msgstr ""
 
-msgid "Author:"
+msgid "Account"
+msgstr ""
+
+msgid "Advanced option"
+msgstr ""
+
+msgid "Available"
 msgstr ""
 
 msgid "Cancel"
 msgstr ""
 
-msgid "Countries:"
+msgid "Configure Stalker Client"
 msgstr ""
 
-msgid "Cover resolution:"
+msgid "Default"
 msgstr ""
 
-msgid "Crew"
+msgid "Disabled"
 msgstr ""
 
-msgid "Delete EIT file?"
+msgid "Enabled"
 msgstr ""
 
-msgid "Details"
+msgid "Fri"
 msgstr ""
 
-msgid "Details down"
+msgid "Genres"
 msgstr ""
 
-msgid "Details up"
+msgid "Loading"
 msgstr ""
 
-msgid "Director:"
+msgid "Login"
 msgstr ""
 
-msgid "EIT file deleted!"
+msgid "Mon"
 msgstr ""
 
-msgid "Edit search"
+msgid "Multi EPG"
 msgstr ""
 
-msgid "Episodes"
+msgid "Next"
 msgstr ""
 
-msgid "Exit"
+msgid "No"
 msgstr ""
 
-msgid "Genre:"
+msgid "No channel info"
 msgstr ""
 
-msgid "Language:"
+msgid "Not available"
 msgstr ""
 
-msgid "Loading..."
+msgid "Ok"
 msgstr ""
 
-msgid "Movie"
+msgid "Prev"
 msgstr ""
 
-#, python-format
-msgid "No Movie information found for %s"
+msgid "Reload"
 msgstr ""
 
-msgid "OK"
-msgstr ""
-
-msgid "Page down"
-msgstr ""
-
-msgid "Page up"
-msgstr ""
-
-msgid "Runtime:"
-msgstr ""
-
-msgid "Save TMDb movie infos to file"
-msgstr ""
-
-msgid "Search for Movie:"
-msgstr ""
-
-msgid "Season"
-msgstr ""
-
-msgid "Seasons"
-msgstr ""
-
-msgid "Selection down"
-msgstr ""
-
-msgid "Selection up"
-msgstr ""
-
-msgid "Series"
+msgid "Sat"
 msgstr ""
 
 msgid "Setup"
 msgstr ""
 
-msgid "Show details"
+msgid "Single EPG"
 msgstr ""
 
-msgid "Show details if single result:"
+msgid "Stalker Client"
 msgstr ""
 
-msgid "Studio:"
+msgid "Stalker Client TV Channels"
 msgstr ""
 
-#, python-format
-msgid "TMDB: Results for %s"
+msgid "Stalker MAC"
 msgstr ""
 
-msgid "TMDb"
+msgid "Stalker Server URL"
 msgstr ""
 
-msgid "TMDb ... function for Movielist"
+msgid "Stalker password"
 msgstr ""
 
-msgid "TMDb Infos ..."
+msgid "Stalker username"
 msgstr ""
 
-msgid "TMDb information created!"
+msgid "StalkerClient Account"
 msgstr ""
 
-msgid "TMDb: No results found, or does not respond!"
+msgid "StalkerClient Configuration"
 msgstr ""
 
-#, python-format
-msgid "Try to find %s in tmdb ..."
+msgid "StalkerClient Setup"
 msgstr ""
 
-msgid "Various"
+msgid "StalkerClient TV"
 msgstr ""
 
-msgid "Votes:"
+msgid "StalkerClient TV Menu"
 msgstr ""
 
-msgid "Write TMDb Information?"
+msgid "Stop playing this stream?"
 msgstr ""
 
-msgid "Year:"
+msgid "Sun"
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Wed"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "add service to bouquet"
+msgstr ""
+
+msgid "add service to favourites"
+msgstr ""
+
+msgid "offline"
+msgstr ""
+
+msgid "online"
+msgstr ""
+
+msgid "unknown service"
 msgstr ""

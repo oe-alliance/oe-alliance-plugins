@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DsayersCustomMixImporter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -13,8 +13,7 @@ msgstr ""
 "X-Generator: Poedit 2.2\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: .\n"
 
 msgid "1 minute"
@@ -44,11 +43,17 @@ msgstr "ABM CustomMix"
 msgid "ABM CustomMix Importer"
 msgstr "ABM CustomMix importas"
 
+msgid "Allows you automatically fetch the CustomMix file."
+msgstr "Leidžia automatiškai iškviesti CustomMix failą."
+
 msgid "Channels importer"
 msgstr "Kanalų importas"
 
 msgid "Delete file"
 msgstr "Ištrinti failą"
+
+msgid "Enable autofetch"
+msgstr "Įjungti autoiškvietimą"
 
 msgid "Exit"
 msgstr "Uždaryti"
@@ -62,8 +67,17 @@ msgstr "Atsiunčiama iš GitHub"
 msgid "File fetched and saved OK"
 msgstr "Failas įkeltas ir išsaugotas"
 
+msgid "Import"
+msgstr "Importas"
+
+msgid "Lead time"
+msgstr "Vykdymo laikas"
+
 msgid "Main menu"
 msgstr "Pagrindinis meniu"
+
+msgid "Number of minutes prior to the ABM scan that the CustomMix file should be fetched"
+msgstr "Minučių skaičius iki ABM paieškos, kada CustomMix failas turėtų būti paimtas"
 
 msgid "Really close without saving settings?"
 msgstr "Ar tikrai uždaryti langą neišsaugant nuostatų?"
@@ -74,6 +88,9 @@ msgstr "Įrašyti nuostatas"
 msgid "Saving CustomMix file"
 msgstr "Išsaugomas CustomMix failas"
 
+msgid "Select the CustomMix you want to import"
+msgstr "Pasirinkite norimą importuoti CustomMix"
+
 msgid "Service searching"
 msgstr "Kanalų paieška"
 
@@ -82,25 +99,3 @@ msgstr "Sąranka"
 
 msgid "Starting importer..."
 msgstr "Importuotojas atveriamas..."
-
-msgid "Allows you automatically fetch the CustomMix file."
-msgstr "Leidžia automatiškai iškviesti CustomMix failą."
-
-msgid "Enable autofetch"
-msgstr "Įjungti autoiškvietimą"
-
-msgid "Import"
-msgstr "Importas"
-
-msgid "Lead time"
-msgstr "Vykdymo laikas"
-
-msgid ""
-"Number of minutes prior to the ABM scan that the CustomMix file should be "
-"fetched"
-msgstr ""
-"Minučių skaičius iki ABM paieškos, kada CustomMix failas turėtų būti "
-"paimtas"
-
-msgid "Select the CustomMix you want to import"
-msgstr "Pasirinkite norimą importuoti CustomMix"

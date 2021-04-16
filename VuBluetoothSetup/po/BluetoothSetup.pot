@@ -19,7 +19,7 @@ msgstr ""
 
 msgid ""
 "\n"
-"Please repair Gb RCU. (by AUDIO+MENU)"
+"Please repair Vu+ RCU. (by AUDIO+MENU)"
 msgstr ""
 
 msgid " "
@@ -49,20 +49,16 @@ msgstr ""
 msgid "%s is not found."
 msgstr ""
 
-#, python-format
-msgid "%s is paired."
-msgstr ""
-
 msgid ""
 "1. Move to Bluetooth Setup Options.\n"
 "(press MENU key in BluetoothSetup)\n"
 msgstr ""
 
-msgid "2. Change \"Skip firmware update of GB-BLE-RCU\" option to \"no\"\n"
+msgid "2. Change \"Skip firmware update of VUPLUS-BLE-RCU\" option to \"no\"\n"
 msgstr ""
 
 msgid ""
-"3. Reconnect the GB-BLE-RCU.\n"
+"3. Reconnect the VUPLUS-BLE-RCU.\n"
 "\n"
 msgstr ""
 
@@ -81,9 +77,6 @@ msgid "Battery level for OTA : %s"
 msgstr ""
 
 msgid "Bluetooth Scan"
-msgstr ""
-
-msgid "Bluetooth Scan (BLE device)"
 msgstr ""
 
 msgid "Bluetooth Setup"
@@ -163,12 +156,6 @@ msgstr ""
 msgid "Exit bluetooth setup"
 msgstr ""
 
-msgid "GB-BLE-RCU is disconnected. Please connect and select again."
-msgstr ""
-
-msgid "Gb Bluetooth RCU Setup"
-msgstr ""
-
 msgid ""
 "If you want to update this firmware version, follow belows.\n"
 "\n"
@@ -179,7 +166,7 @@ msgid "New FW version : %d"
 msgstr ""
 
 msgid ""
-"New firmware detected for GB-BLE-RCU.\n"
+"New firmware detected for VUPLUS-BLE-RCU.\n"
 "\n"
 msgstr ""
 
@@ -188,7 +175,7 @@ msgstr ""
 
 msgid ""
 "Not enough battery level for OTA update.\n"
-"Press exit and change battery of GB-BLE-RCU."
+"Press exit and change battery of VUPLUS-BLE-RCU."
 msgstr ""
 
 #, python-format
@@ -219,7 +206,7 @@ msgstr ""
 
 msgid ""
 "Please enable bluetooth \n"
-"before pairing the GB-BLE-RCU."
+"before pairing the VUPLUS-BLE-RCU."
 msgstr ""
 
 msgid "Please select scan mode."
@@ -248,27 +235,27 @@ msgstr ""
 msgid "Remove selected device"
 msgstr ""
 
-msgid "Removing GB-BLE-RCU..."
+msgid "Removing VUPLUS-BLE-RCU..."
 msgstr ""
 
 msgid "Scan"
 msgstr ""
 
-msgid "Scan and setup Bluetooth RCU"
+msgid "Scan and setup Vu+ Bluetooth RCU"
 msgstr ""
 
 msgid "Scan failed! try again."
 msgstr ""
 
 msgid ""
-"Scan failed. Please try again GB BLE RCU setup.\n"
+"Scan failed. Please try again VUPLUS BLE RCU setup.\n"
 "(AUDIO+MENU buttons)"
 msgstr ""
 
 msgid "Scan other bluetooth 3.0 device (A2DP, HID)"
 msgstr ""
 
-msgid "Scanning GB BLE RCU"
+msgid "Scanning VUPLUS BLE RCU"
 msgstr ""
 
 msgid "Scanning bluetooth devices"
@@ -280,17 +267,20 @@ msgstr ""
 msgid "Setup bluetooth options"
 msgstr ""
 
+msgid "Show battery low message on infobar notification"
+msgstr ""
+
 msgid "Show state message on infobar notification"
 msgstr ""
 
 #, python-format
-msgid "Skip firmware update of GB-BLE-RCU (version : %d)"
+msgid "Skip firmware update of VUPLUS-BLE-RCU (version : %d)"
 msgstr ""
 
 msgid "Skip this version"
 msgstr ""
 
-msgid "Start Scan / Setup GB BLE RCU"
+msgid "Start Scan / Setup VUPLUS BLE RCU"
 msgstr ""
 
 msgid "Start scan"
@@ -312,11 +302,7 @@ msgid "Try connect to last audio device on start enable"
 msgstr ""
 
 #, python-format
-msgid "Type PINCODE on %s to connect, then press OK. Your PINCODE is %s"
-msgstr ""
-
-#, python-format
-msgid "Type PINCODE to connect, then press OK. Your PINCODE is %s"
+msgid "Type %s on %s to connect, then press Enter or Return."
 msgstr ""
 
 #, python-format
@@ -324,6 +310,15 @@ msgid "Updateing %d %%"
 msgstr ""
 
 msgid "Upgrade now"
+msgstr ""
+
+msgid "VUPLUS-BLE-RCU is disconnected. Please connect and select again."
+msgstr ""
+
+msgid "Voice event handler"
+msgstr ""
+
+msgid "Vu+ Bluetooth RCU Setup"
 msgstr ""
 
 msgid ""

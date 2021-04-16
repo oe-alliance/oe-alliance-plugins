@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2018-10-14 23:22+0200\n"
 "Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -14,56 +14,128 @@ msgstr ""
 "X-Generator: Poedit 2.2\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
+msgid " ver. 3.2"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Abbrechen"
 
-msgid "DMM/DMM ADV"
-msgstr "DMM/DMM ADV"
+msgid "End time"
+msgstr ""
 
-msgid "ET4000"
-msgstr "ET4000"
+msgid "Fan - Auto"
+msgstr ""
 
-msgid "ET5000/ET6000"
-msgstr "ET5000/ET6000"
+msgid "Fan - Off"
+msgstr ""
 
-msgid "ET6500/ET9500"
-msgstr "ET6500/ET9500"
+msgid "Fan - Off in standby"
+msgstr ""
 
-msgid "ET9000/ET9100"
-msgstr "ET9000/ET9100"
+msgid "Fan - On"
+msgstr ""
 
-msgid "ET9200/ET9500"
-msgstr "ET9200/ET9500"
+msgid "Fan Control"
+msgstr ""
 
-msgid "F1/F3"
-msgstr "F1/F3"
+msgid "Fan Setup"
+msgstr ""
 
-msgid "HD1100"
-msgstr "HD1100"
+msgid "Fan mode"
+msgstr ""
 
-msgid "HD2400"
-msgstr "HD2400"
+msgid "Fan setup:"
+msgstr ""
 
-msgid "Is this remote ok?"
-msgstr "Ist das Fernbedienung OK?"
+msgid "HDD Sleeping"
+msgstr ""
 
-msgid "OK"
-msgstr "OK"
+msgid "HDD Temperature"
+msgstr ""
 
-msgid "OdinM9"
-msgstr "OdinM9"
+msgid ""
+"Harddisk standby after - no standby\n"
+"You may not use this mode!"
+msgstr ""
 
-msgid "Remote"
-msgstr "Fernbedienung"
+msgid "Harddisk temperature"
+msgstr ""
 
-msgid "Remote Control Code"
-msgstr "Fernbedienung Code"
+msgid "Harddisks:"
+msgstr ""
 
-msgid "Vu"
-msgstr "Vu"
+msgid "Initial fan speed"
+msgstr ""
 
-msgid "XP1000"
-msgstr "XP1000"
+msgid "No harddisk with temperature sensor found!"
+msgstr ""
 
-msgid "XP3000"
-msgstr "XP3000"
+msgid "No system temperature sensor found!"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Power status"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Select internal HDD device"
+msgstr ""
+
+msgid "Show Temp"
+msgstr ""
+
+msgid "Show temp. HDD to extensions menu"
+msgstr ""
+
+msgid "Start time"
+msgstr ""
+
+msgid ""
+"Start time OFF mode equal End time OFF mode\n"
+"You may not use this time settings!"
+msgstr ""
+
+msgid "Switch Fan mode on time setting"
+msgstr ""
+
+msgid "Switch OFF mode on HDD sleep"
+msgstr ""
+
+msgid "Switch ON mode on HDD max.temp. (0 - disable)"
+msgstr ""
+
+msgid "Switch ON on system temp"
+msgstr ""
+
+msgid "System temperature"
+msgstr ""
+
+msgid "Watch HDD state"
+msgstr ""
+
+msgid "Watch system temp"
+msgstr ""
+
+msgid ""
+"You may not use this mode!\n"
+"Not found an internal hard drive!"
+msgstr ""
+
+msgid "n.a."
+msgstr ""
+
+msgid "switch Fan On/Off"
+msgstr ""

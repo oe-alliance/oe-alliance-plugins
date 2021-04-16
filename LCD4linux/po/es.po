@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2016-05-07 13:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: OpenPlus\n"
@@ -171,6 +171,10 @@ msgstr "- Archivo [ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- Archivo o Ruta [ok]>"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- Archivo [ok]>"
 
 msgid "- Font"
 msgstr "- Fuente"
@@ -419,6 +423,9 @@ msgstr "- Descanso [ms]"
 msgid "- Transparency"
 msgstr "- Transparencia"
 
+msgid "- Trimmed"
+msgstr ""
+
 msgid "- Tunerinfo"
 msgstr "- Información Sintonizador"
 
@@ -436,6 +443,10 @@ msgstr "- Tipo de Tiempo"
 
 msgid "- Zoom"
 msgstr "- Zoom"
+
+#, fuzzy
+msgid "- external IP URL"
+msgstr "- información extra"
 
 msgid "- extra Info"
 msgstr "- información extra"
@@ -787,6 +798,23 @@ msgstr "Pre+Valor"
 msgid "Bitrate"
 msgstr "Bitrate"
 
+msgid "BlueSound"
+msgstr ""
+
+msgid "BlueSound IP"
+msgstr ""
+
+#, fuzzy
+msgid "BlueSound Ping Timeout [ms]"
+msgstr "- Descanso [ms]"
+
+msgid "BlueSound Play Check"
+msgstr ""
+
+#, fuzzy
+msgid "BlueSound Refresh [s]"
+msgstr "Refresco WebIF [s]"
+
 msgid "Box-Skin-LCD"
 msgstr "LCD Box-Skin"
 
@@ -1005,6 +1033,9 @@ msgstr "Extendido (Corto)"
 
 msgid "Extended Description"
 msgstr "Descripción Extendida"
+
+msgid "External IP Address"
+msgstr ""
 
 msgid "Fastmode (2s)"
 msgstr "Modo Rápido (2s)"
@@ -2146,6 +2177,10 @@ msgstr "Poner contador de planos (si es posible)"
 msgid "TV"
 msgstr "TV"
 
+#, fuzzy
+msgid "TV (full)"
+msgstr "normal (completo)"
+
 msgid "TV+OSD"
 msgstr "TV+OSD"
 
@@ -2255,13 +2290,15 @@ msgstr "Convertidor WWW-Internet"
 msgid "Waning Crescent"
 msgstr "Cuarto Menguante"
 
-msgid "Waning Gibbous"
+#, fuzzy
+msgid "Waning Moon"
 msgstr "Cuarto Menguante"
 
 msgid "Waxing Crescent"
 msgstr "Cuarto Creciente"
 
-msgid "Waxing Gibbous"
+#, fuzzy
+msgid "Waxing Moon"
 msgstr "Cuarto Creciente"
 
 msgid "Weather"

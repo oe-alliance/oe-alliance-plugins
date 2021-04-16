@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2016-05-07 13:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -171,6 +171,10 @@ msgstr "- Файл [ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- Файл или путь [ok]>"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- Файл [ok]>"
 
 msgid "- Font"
 msgstr "- Шрифт"
@@ -419,6 +423,9 @@ msgstr ""
 msgid "- Transparency"
 msgstr "- Прозрачность"
 
+msgid "- Trimmed"
+msgstr ""
+
 msgid "- Tunerinfo"
 msgstr "- Инфо о тюнере"
 
@@ -436,6 +443,10 @@ msgstr "- Тип погоды"
 
 msgid "- Zoom"
 msgstr "- Увеличение"
+
+#, fuzzy
+msgid "- external IP URL"
+msgstr "- экстра инфо"
 
 msgid "- extra Info"
 msgstr "- экстра инфо"
@@ -785,6 +796,22 @@ msgstr "Balken+Wert"
 msgid "Bitrate"
 msgstr "Bitrate"
 
+msgid "BlueSound"
+msgstr ""
+
+msgid "BlueSound IP"
+msgstr ""
+
+msgid "BlueSound Ping Timeout [ms]"
+msgstr ""
+
+msgid "BlueSound Play Check"
+msgstr ""
+
+#, fuzzy
+msgid "BlueSound Refresh [s]"
+msgstr "WebIF обновление [s]"
+
 msgid "Box-Skin-LCD"
 msgstr "Box-Skin-LCD"
 
@@ -1001,6 +1028,9 @@ msgstr "Расширенное (Short)"
 
 msgid "Extended Description"
 msgstr "Расширенное описание"
+
+msgid "External IP Address"
+msgstr ""
 
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
@@ -2132,6 +2162,10 @@ msgstr ""
 msgid "TV"
 msgstr "TV"
 
+#, fuzzy
+msgid "TV (full)"
+msgstr "нормальный (полный)"
+
 msgid "TV+OSD"
 msgstr "TV+OSD"
 
@@ -2241,13 +2275,15 @@ msgstr "WWW-Internet Converter"
 msgid "Waning Crescent"
 msgstr "Убывающая луна"
 
-msgid "Waning Gibbous"
+#, fuzzy
+msgid "Waning Moon"
 msgstr "Убывающая луна"
 
 msgid "Waxing Crescent"
 msgstr "Растущий серп"
 
-msgid "Waxing Gibbous"
+#, fuzzy
+msgid "Waxing Moon"
 msgstr "Растущая луна"
 
 msgid "Weather"
