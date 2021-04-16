@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-06 00:57+0000\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2019-11-12 20:34+0000\n"
 "Last-Translator: @Kos\n"
 "Language-Team: Special for OpenATV\n"
@@ -12,6 +12,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.4\n"
+
+msgid " "
+msgstr ""
 
 msgid "Cancel"
 msgstr "Anuluj"
@@ -28,6 +31,7 @@ msgstr "Wyłącz"
 msgid "Discover"
 msgstr "Odkryj"
 
+#, python-format
 msgid "IP : %s"
 msgstr "IP : %s"
 
@@ -40,14 +44,8 @@ msgstr "Nie znaleziono vtuner."
 msgid "Ok"
 msgstr "Zapisz"
 
-msgid "Presentation URL : %s\n"
-msgstr "Prezentacja URL : %s\n"
-
 msgid "Really close without saving settings?"
 msgstr "Naprawdę zamknąć bez zapisywania ustawień?"
-
-msgid "SAT>IP Capability : %s"
-msgstr "SAT>IP Zdolność : %s"
 
 msgid "SAT>IP Client"
 msgstr "SAT>IP Client"
@@ -61,6 +59,7 @@ msgstr "SAT>IP Client Ustawienia Tunera"
 msgid "SAT>IP Client attached to vtuner."
 msgstr "SAT>IP Client dołączony do vtuner."
 
+#, python-format
 msgid "SAT>IP SERVER : %s"
 msgstr "SAT>IP SERVER : %s"
 
@@ -70,6 +69,7 @@ msgstr "SAT>IP Server : "
 msgid "SAT>IP Tuner Type : "
 msgstr "SAT>IP Typ tunera : "
 
+#, python-format
 msgid "SAT>IP server discovering for %d seconds..."
 msgstr "SAT>IP wykrywanie serwera przez %d sekund ..."
 
@@ -94,22 +94,14 @@ msgstr "Ustawienia"
 msgid "Starting..."
 msgstr "Uruchamianie…"
 
+#, python-format
 msgid "TUNER TYPE : %s"
 msgstr "TYP TUNERA : %s"
 
+#, python-format
 msgid "TYPE : %s"
 msgstr "TYP : %s"
 
+#, python-format
 msgid "VIRTUAL TUNER %s"
 msgstr "WIRTUALNY TUNER %s"
-
-msgid ""
-"You should now reboot your STB to change SAT>IP Configuration.\n"
-"\n"
-"Reboot now ?\n"
-"\n"
-msgstr ""
-"Powinieneś teraz zrestartować swój STB, aby zmienić konfigurację SAT>IP. \n"
-" \n"
-" Zrestartować teraz? \n"
-" \n"

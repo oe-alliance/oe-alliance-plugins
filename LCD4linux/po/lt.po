@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. vyteniui@gmail.com\n"
@@ -164,6 +164,10 @@ msgstr "- Kelias į failą [Ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- Kelias iki failo [Ok]>"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- Kelias į failą [Ok]>"
 
 msgid "- Font"
 msgstr "- Šriftas"
@@ -411,6 +415,9 @@ msgstr "- Intervalas [ms]"
 msgid "- Transparency"
 msgstr "- Skaidrumas"
 
+msgid "- Trimmed"
+msgstr ""
+
 msgid "- Tunerinfo"
 msgstr "- Informacija apie imtuvą"
 
@@ -428,6 +435,10 @@ msgstr "- Orų tipas"
 
 msgid "- Zoom"
 msgstr "- Padidinti"
+
+#, fuzzy
+msgid "- external IP URL"
+msgstr "- Papildoma informacija"
 
 msgid "- extra Info"
 msgstr "- Papildoma informacija"
@@ -776,6 +787,24 @@ msgstr "Juosta + reikšmė"
 msgid "Bitrate"
 msgstr "Bitų dažnis"
 
+msgid "BlueSound"
+msgstr ""
+
+msgid "BlueSound IP"
+msgstr ""
+
+#, fuzzy
+msgid "BlueSound Ping Timeout [ms]"
+msgstr "Sonos ping intervalas [ms]"
+
+#, fuzzy
+msgid "BlueSound Play Check"
+msgstr "Sonos veiklos tikrinimas"
+
+#, fuzzy
+msgid "BlueSound Refresh [s]"
+msgstr "Sonos atnaujinimo intervalas [sek.]"
+
 msgid "Box-Skin-LCD"
 msgstr "Aparato LCD ekranas"
 
@@ -991,6 +1020,9 @@ msgstr "Išplėstinis (trumpas)"
 
 msgid "Extended Description"
 msgstr "Išsamus aprašymas"
+
+msgid "External IP Address"
+msgstr ""
 
 msgid "Fastmode (2s)"
 msgstr "Greitasis režimas (2s)"
@@ -2102,6 +2134,10 @@ msgstr "Kadrų įkėlimas į podėlį [jei įmanoma]"
 msgid "TV"
 msgstr "TV"
 
+#, fuzzy
+msgid "TV (full)"
+msgstr "įprastas (visas)"
+
 msgid "TV+OSD"
 msgstr "TV+Ekrano meniu"
 
@@ -2210,13 +2246,15 @@ msgstr "WWW-internetinis keitiklis"
 msgid "Waning Crescent"
 msgstr "Delčia"
 
-msgid "Waning Gibbous"
+#, fuzzy
+msgid "Waning Moon"
 msgstr "Delčia"
 
 msgid "Waxing Crescent"
 msgstr "Jaunatis"
 
-msgid "Waxing Gibbous"
+#, fuzzy
+msgid "Waxing Moon"
 msgstr "Priešpilnis"
 
 msgid "Weather"

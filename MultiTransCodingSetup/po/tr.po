@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2019-06-21 21:10+0200\n"
+"Last-Translator: Schimmelreiter\n"
+"Language-Team: \n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Schimmelreiter\n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.2.3\n"
 
 msgid "1.0 Mbps"
@@ -98,6 +98,25 @@ msgstr "Oto"
 msgid "Bitrate in bits"
 msgstr "Bit Hızı bits olarak"
 
+msgid "Encoder Aspect Ratio"
+msgstr "Enkoder Boy Oranı"
+
+msgid "Encoder Bitrate"
+msgstr "Enkoder Bit Hızı"
+
+msgid "Encoder Framerate"
+msgstr "Enkoder Frame (kare) Hızı"
+
+msgid "Encoder Interlaced"
+msgstr "Enkoder üst üste bindirilmiş"
+
+msgid "Encoder Resolution"
+msgstr "Enkoder çözünürlük"
+
+#, fuzzy
+msgid "Encoder Video Codec"
+msgstr "Vidyo codec bileseni"
+
 msgid "Exit"
 msgstr "Çıkış"
 
@@ -109,6 +128,15 @@ msgstr "H2.64"
 
 msgid "H.265"
 msgstr "H.265"
+
+msgid "HD1080"
+msgstr ""
+
+msgid "HD1080 DV"
+msgstr ""
+
+msgid "HD720"
+msgstr ""
 
 msgid "Interlaced"
 msgstr "Üst üste bindirilmiş"
@@ -128,6 +156,18 @@ msgstr "Coklu Multi-Transcoding ayarı"
 msgid "No"
 msgstr "Hayır"
 
+msgid "PAL"
+msgstr ""
+
+msgid "PAL DV"
+msgstr ""
+
+msgid "PAL SVCD"
+msgstr ""
+
+msgid "PAL-wide"
+msgstr ""
+
 msgid "Really close without saving settings?"
 msgstr "Ayarlari kaydetmeden kapatmaya eminmisiniz?"
 
@@ -136,6 +176,9 @@ msgstr "Çözünürlük"
 
 msgid "Save"
 msgstr "Kaydet"
+
+msgid "Setup your timezone."
+msgstr "Saat diliminizi ayarlayın."
 
 msgid "This model does not support transcoding."
 msgstr "Bu Model Transcoding desteklemiyor"
@@ -166,22 +209,3 @@ msgstr "Devre dışı"
 
 msgid "enable"
 msgstr "Etkinleştirme"
-
-msgid "Encoder Aspect Ratio"
-msgstr "Enkoder Boy Oranı"
-
-msgid "Encoder Bitrate"
-msgstr "Enkoder Bit Hızı"
-
-msgid "Encoder Framerate"
-msgstr "Enkoder Frame (kare) Hızı"
-
-msgid "Encoder Interlaced"
-msgstr "Enkoder üst üste bindirilmiş"
-
-msgid "Encoder Resolution"
-msgstr "Enkoder çözünürlük"
-
-msgid "Setup your timezone."
-msgstr "Saat diliminizi ayarlayın."
-

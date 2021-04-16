@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-23 15:20+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2019-07-23 15:40+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -414,6 +414,9 @@ msgstr "- Temps dépassé [ms]"
 
 msgid "- Transparency"
 msgstr "- Transparence"
+
+msgid "- Trimmed"
+msgstr ""
 
 msgid "- Tunerinfo"
 msgstr "- Info Tuner"
@@ -2119,6 +2122,10 @@ msgstr "Commuter TamponFram [si possible"
 msgid "TV"
 msgstr "TV"
 
+#, fuzzy
+msgid "TV (full)"
+msgstr "normal (complet)"
+
 msgid "TV+OSD"
 msgstr "TV+OSD"
 
@@ -2227,13 +2234,15 @@ msgstr "WWW-Internet convertisseur"
 msgid "Waning Crescent"
 msgstr "Lune descendante"
 
-msgid "Waning Gibbous"
+#, fuzzy
+msgid "Waning Moon"
 msgstr "Lune gibbeuse décroissante"
 
 msgid "Waxing Crescent"
 msgstr "Lune montante"
 
-msgid "Waxing Gibbous"
+#, fuzzy
+msgid "Waxing Moon"
 msgstr "Lune gibbeuse croissante"
 
 msgid "Weather"

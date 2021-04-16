@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 17:21+0000\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2019-03-08 14:35+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: \n"
@@ -22,6 +22,13 @@ msgstr ""
 
 msgid "(Re)Scan"
 msgstr "(Re)Scan"
+
+msgid "Audio Address"
+msgstr ""
+
+#, fuzzy
+msgid "Audio Connect"
+msgstr "Verbind"
 
 msgid "Autostart"
 msgstr "Autostart"

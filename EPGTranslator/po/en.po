@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-17 00:23+0000\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2021-02-17 00:23+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -79,6 +79,9 @@ msgstr "English"
 
 msgid "Estonian"
 msgstr "Estonian"
+
+msgid "EventViews open translated:"
+msgstr ""
 
 msgid "Exit"
 msgstr "Exit"
@@ -173,6 +176,12 @@ msgstr "Russian"
 msgid "Save"
 msgstr "Save"
 
+msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
+msgstr ""
+
+msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
+msgstr ""
+
 msgid "Serbian"
 msgstr "Serbian"
 
@@ -200,8 +209,20 @@ msgstr "Swahili"
 msgid "Swedish"
 msgstr "Swedish"
 
+msgid "TEXT"
+msgstr ""
+
+msgid "This is a development feature. On a translation failure, if enabled, extra debug information will be logged."
+msgstr ""
+
+msgid "This is the language the source text will be translated into."
+msgstr ""
+
 msgid "Translate text"
 msgstr "Translate text"
+
+msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."
+msgstr ""
 
 msgid "Turkish"
 msgstr "Turkish"
@@ -217,6 +238,9 @@ msgstr "Vietnamese"
 
 msgid "Welsh"
 msgstr "Welsh"
+
+msgid "When an EventView window is opened, start with the translated text."
+msgstr ""
 
 msgid "Yes"
 msgstr "Yes"

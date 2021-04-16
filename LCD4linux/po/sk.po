@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2016-05-07 13:07+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -171,6 +171,10 @@ msgstr "- súbor [ok]>"
 
 msgid "- File or Path [ok]>"
 msgstr "- súbor alebo cesta [ok]>"
+
+#, fuzzy
+msgid "- Find Cover File [ok]>"
+msgstr "- súbor [ok]>"
 
 msgid "- Font"
 msgstr "- písmo"
@@ -419,6 +423,9 @@ msgstr "- čas vypršania [ms]"
 msgid "- Transparency"
 msgstr "- priehľadnosť"
 
+msgid "- Trimmed"
+msgstr ""
+
 msgid "- Tunerinfo"
 msgstr "- Tuner nfo"
 
@@ -436,6 +443,10 @@ msgstr "- typ počasia"
 
 msgid "- Zoom"
 msgstr "- zväčšenie"
+
+#, fuzzy
+msgid "- external IP URL"
+msgstr "- extra Info"
 
 msgid "- extra Info"
 msgstr "- extra Info"
@@ -785,6 +796,23 @@ msgstr "Stĺpec+hodnota"
 msgid "Bitrate"
 msgstr "Bitrate"
 
+msgid "BlueSound"
+msgstr ""
+
+msgid "BlueSound IP"
+msgstr ""
+
+#, fuzzy
+msgid "BlueSound Ping Timeout [ms]"
+msgstr "- čas vypršania [ms]"
+
+msgid "BlueSound Play Check"
+msgstr ""
+
+#, fuzzy
+msgid "BlueSound Refresh [s]"
+msgstr "WebIF aktualizácia [s]"
+
 msgid "Box-Skin-LCD"
 msgstr "Box-Skin-LCD"
 
@@ -1001,6 +1029,9 @@ msgstr "Rozšírený (menej info)"
 
 msgid "Extended Description"
 msgstr "Rozšírený popis"
+
+msgid "External IP Address"
+msgstr ""
 
 msgid "Fastmode (2s)"
 msgstr "Rýchly mód (2s)"
@@ -2148,6 +2179,10 @@ msgstr ""
 msgid "TV"
 msgstr "TV"
 
+#, fuzzy
+msgid "TV (full)"
+msgstr "normálne (plné)"
+
 msgid "TV+OSD"
 msgstr "TV+OSD"
 
@@ -2257,13 +2292,15 @@ msgstr "Konvertor web stránok"
 msgid "Waning Crescent"
 msgstr "Ubúdajúci kosáčik"
 
-msgid "Waning Gibbous"
+#, fuzzy
+msgid "Waning Moon"
 msgstr "Ubúdajúci mesiac"
 
 msgid "Waxing Crescent"
 msgstr "Dorastajúci kosáčik"
 
-msgid "Waxing Gibbous"
+#, fuzzy
+msgid "Waxing Moon"
 msgstr "Dorastajúci mesiac"
 
 msgid "Weather"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 20:23+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2010-09-19 21:07+0100\n"
 "Last-Translator: JR <openspateM@gmail.com>\n"
 "Language-Team: openspa <LL@li.org>\n"
@@ -97,6 +97,25 @@ msgstr ""
 msgid "Bitrate in bits"
 msgstr "Bitrate en bits"
 
+msgid "Encoder Aspect Ratio"
+msgstr "Relación de aspecto del codificador"
+
+msgid "Encoder Bitrate"
+msgstr "Bitrate del codificador"
+
+msgid "Encoder Framerate"
+msgstr "Framerate del codificador"
+
+msgid "Encoder Interlaced"
+msgstr "Entrelazado codificador"
+
+msgid "Encoder Resolution"
+msgstr "Resolución codificador"
+
+#, fuzzy
+msgid "Encoder Video Codec"
+msgstr "Códec de vídeo"
+
 msgid "Exit"
 msgstr "Salir"
 
@@ -107,6 +126,15 @@ msgid "H.264"
 msgstr ""
 
 msgid "H.265"
+msgstr ""
+
+msgid "HD1080"
+msgstr ""
+
+msgid "HD1080 DV"
+msgstr ""
+
+msgid "HD720"
 msgstr ""
 
 msgid "Interlaced"
@@ -127,6 +155,18 @@ msgstr "Configuración multi-transcoding"
 msgid "No"
 msgstr ""
 
+msgid "PAL"
+msgstr ""
+
+msgid "PAL DV"
+msgstr ""
+
+msgid "PAL SVCD"
+msgstr ""
+
+msgid "PAL-wide"
+msgstr ""
+
 msgid "Really close without saving settings?"
 msgstr "Quieres cerrar sin guardar ajustes?"
 
@@ -135,6 +175,9 @@ msgstr "Resolución"
 
 msgid "Save"
 msgstr "Guardar"
+
+msgid "Setup your timezone."
+msgstr "Configurar zona horaria"
 
 msgid "This model does not support transcoding."
 msgstr "Este modelo no soporta transcoding."
@@ -167,21 +210,3 @@ msgstr "Desactivar"
 
 msgid "enable"
 msgstr "Activar"
-
-msgid "Encoder Aspect Ratio"
-msgstr "Relación de aspecto del codificador"
-
-msgid "Encoder Bitrate"
-msgstr "Bitrate del codificador"
-
-msgid "Encoder Framerate"
-msgstr "Framerate del codificador"
-
-msgid "Encoder Interlaced"
-msgstr "Entrelazado codificador"
-
-msgid "Encoder Resolution"
-msgstr "Resolución codificador"
-
-msgid "Setup your timezone."
-msgstr "Configurar zona horaria"

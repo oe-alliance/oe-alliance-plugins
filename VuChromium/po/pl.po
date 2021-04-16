@@ -1,279 +1,214 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VuChromium\n"
-"POT-Creation-Date: 2020-07-07 13:36+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2020-07-09 19:19+0100\n"
+"Last-Translator: \n"
 "Language-Team: pololoko111 <pololoko111@o2.pl>\n"
+"Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3.1\n"
 "X-Poedit-Basepath: ../src\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"Last-Translator: \n"
-"Language: pl_PL\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: chromium.py:40 youtube.py:38
-msgid "Cancel"
-msgstr "Anuluj"
-
-#: chromium.py:41 youtube.py:39
-msgid "Save"
-msgstr "Zapisz"
-
-#: chromium.py:47
-msgid "ChromiumOS Settings"
-msgstr "Ustawienia ChromiumOS"
-
-#: chromium.py:82
-msgid "Start Up URL"
-msgstr "Początkowy adres URL"
-
-#: chromium.py:83
-msgid "X-margin on GUI"
-msgstr "Margines X na GUI"
-
-#: chromium.py:84
-msgid "Y-margin on GUI"
-msgstr "Margines Y na GUI"
-
-#: chromium.py:85
-msgid "Enable Ntpd when start ChromiumOS"
-msgstr "Włącz Ntpd podczas uruchamiania ChromiumOS"
-
-#: chromium.py:86 youtube.py:79
-msgid "Ntpd URL"
-msgstr ""
-
-#: chromium.py:117
-msgid "Exit"
-msgstr "Wyjście"
-
-#: chromium.py:118
-msgid "Global"
-msgstr "Globalny"
-
-#: chromium.py:119
-msgid "Mouse"
-msgstr "Myszka"
-
-#: chromium.py:120
-msgid "Keyboard"
-msgstr "Klawiatura"
-
-#: chromium.py:138
-msgid "Browser Help"
-msgstr "Pomoc Przeglądarki"
-
-#: chromium.py:148
-msgid "Exit the Browser."
-msgstr "Wyjdź z Przeglądarki."
-
-#: chromium.py:151 chromium.py:188
-msgid "Enter Key"
-msgstr "Klawisz ENTER"
-
-#: chromium.py:152
-msgid "Backspace Key"
-msgstr "Klawisz Backspace"
-
-#: chromium.py:153
-msgid "Open the virtual-keyboard on enigma2"
-msgstr "Otwórz wirtualną klawiaturę na enigma2"
-
-#: chromium.py:156
-msgid "Switch to keyboard/mouse mode."
-msgstr "Przełącz na tryb klawiatury / myszy."
-
-#: chromium.py:161
-msgid "It will move the mouse pointer up."
-msgstr "Przesuwa wskaźnik myszy w górę."
-
-#: chromium.py:162
-msgid "It will move the mouse pointer down."
-msgstr "Przesuwa wskaźnik myszy w dół."
-
-#: chromium.py:163
-msgid "It will move the mouse pointer left."
-msgstr "Przesuwa wskaźnik myszy w lewo."
-
-#: chromium.py:164
-msgid "It will move the mouse pointer right."
-msgstr "Przesuwa wskaźnik myszy w prawo."
-
-#: chromium.py:167
-msgid "Left Mouse Button"
-msgstr "Lewy Przycisk Myszy"
-
-#: chromium.py:170
-msgid "Right Mouse Button"
-msgstr "Prawy Przycisk Myszy"
-
-#: chromium.py:171 chromium.py:184
-msgid "Left Key"
-msgstr "Lewy Klawisz"
-
-#: chromium.py:172 chromium.py:185
-msgid "Right Key"
-msgstr "Prawy Klawisz"
-
-#: chromium.py:175
-msgid "Page up key"
-msgstr "Klawisz Strona w górę"
-
-#: chromium.py:178
-msgid "Page down key"
-msgstr "Klawisz Strona w dół"
-
-#: chromium.py:182
-msgid "Up Key"
-msgstr "Klawisz w Górę"
-
-#: chromium.py:183
-msgid "Down Key"
-msgstr "Klawisz w Dół"
-
-#: chromium.py:191
-msgid "PageUp Key"
-msgstr "Klawisz Strona w górę"
-
-#: chromium.py:192
-msgid "PageDown Key"
-msgstr "Klawisz Strona w dół"
-
-#: chromium.py:193
-msgid "Go to previous page."
-msgstr "Wróć do poprzedniej strony."
-
-#: chromium.py:194
-msgid "Go to next page."
-msgstr "Przejdź do następnej strony."
-
-#: chromium.py:247 youtube.py:119
-msgid "Start"
-msgstr ""
-
-#: chromium.py:248 youtube.py:120
-msgid "Setting"
-msgstr "Ustawienia"
-
-#: chromium.py:249 youtube.py:121
-msgid "Help"
-msgstr "Pomoc"
-
-#: chromium.py:259 plugin.py:280
-msgid "Start ChromiumOS"
-msgstr "Uruchom ChromiumOS"
-
-#: chromium.py:260
-msgid "* Start ChromiumOS"
-msgstr "* Uruchom ChromiumOS"
-
-#: chromium.py:261
-msgid "* Setting ChromiumOS"
-msgstr "* Ustawienia ChromiumOS"
-
-#: chromium.py:262 youtube.py:135
 msgid "* RC Help"
 msgstr "* Pomoc RC"
 
-#: chromium.py:289
-msgid "Start URL"
-msgstr "Początkowy adres URL"
+msgid "* Setting ChromiumOS"
+msgstr "* Ustawienia ChromiumOS"
 
-#: plugin.py:116 plugin.py:251 plugin.py:278
-msgid "YouTubeTV"
-msgstr ""
-
-#: plugin.py:126 plugin.py:280
-msgid "ChromiumOS"
-msgstr ""
-
-#: plugin.py:138
-msgid "ChromiumOS by STT"
-msgstr "ChromiumOS firmy STT"
-
-#: plugin.py:227
-msgid "Chromium Virtual Keyboard"
-msgstr "Klawiatura wirtualna Chromium"
-
-#: plugin.py:279
-msgid "YouTubeTV Settings"
-msgstr "Ustawienia YouTubeTV"
-
-#: youtube.py:45
-msgid "YouTube TV Settings"
-msgstr "Ustawienia YouTube TV"
-
-#: youtube.py:77
-msgid "Do not show YouTube TV Starter again"
-msgstr "Nie pokazuj ponownie strony początkowej YouTube TV "
-
-#: youtube.py:78
-msgid "Enable Ntpd when start YoutubeTV"
-msgstr "Włącz Ntp podczas uruchamiania Youtube TV"
-
-#: youtube.py:131
-msgid "Start YouTube TV"
-msgstr "Uruchom YouTube TV"
-
-#: youtube.py:132
-msgid "YouTube TV is a new way to watch YouTube videos on Vu+"
-msgstr "YouTube TV to nowy sposób oglądania filmów z YouTube na Vu +"
-
-#: youtube.py:133
-msgid "* Start YouTube TV"
-msgstr "* Uruchom YouTube TV"
-
-#: youtube.py:134
 msgid "* Setting YouTube TV"
 msgstr "* Ustawienia YouTube TV"
 
-#: youtube.py:140
-msgid "Play selected video"
-msgstr "Odtwórz wybrane wideo"
+msgid "* Start ChromiumOS"
+msgstr "* Uruchom ChromiumOS"
 
-#: youtube.py:141
-msgid "Exit YoutubeTV"
-msgstr "Wyjdź z YoutubeTV"
+msgid "* Start YouTube TV"
+msgstr "* Uruchom YouTube TV"
 
-#: youtube.py:144
 msgid "Back key"
 msgstr "Powrót"
 
-#: youtube.py:147
-msgid "Move up"
-msgstr "W Górę"
+msgid "Backspace Key"
+msgstr "Klawisz Backspace"
 
-#: youtube.py:148
+msgid "Browser Help"
+msgstr "Pomoc Przeglądarki"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Chromium Virtual Keyboard"
+msgstr "Klawiatura wirtualna Chromium"
+
+msgid "ChromiumOS"
+msgstr ""
+
+msgid "ChromiumOS Settings"
+msgstr "Ustawienia ChromiumOS"
+
+msgid "ChromiumOS by STT"
+msgstr "ChromiumOS firmy STT"
+
+msgid "Do not show YouTube TV Starter again"
+msgstr "Nie pokazuj ponownie strony początkowej YouTube TV "
+
+msgid "Down Key"
+msgstr "Klawisz w Dół"
+
+msgid "Enable Ntpd when start ChromiumOS"
+msgstr "Włącz Ntpd podczas uruchamiania ChromiumOS"
+
+msgid "Enable Ntpd when start YoutubeTV"
+msgstr "Włącz Ntp podczas uruchamiania Youtube TV"
+
+msgid "Enter Key"
+msgstr "Klawisz ENTER"
+
+msgid "Exit"
+msgstr "Wyjście"
+
+msgid "Exit YoutubeTV"
+msgstr "Wyjdź z YoutubeTV"
+
+msgid "Exit the Browser."
+msgstr "Wyjdź z Przeglądarki."
+
+msgid "Global"
+msgstr "Globalny"
+
+msgid "Go to next page."
+msgstr "Przejdź do następnej strony."
+
+msgid "Go to previous page."
+msgstr "Wróć do poprzedniej strony."
+
+msgid "Help"
+msgstr "Pomoc"
+
+msgid "It will move the mouse pointer down."
+msgstr "Przesuwa wskaźnik myszy w dół."
+
+msgid "It will move the mouse pointer left."
+msgstr "Przesuwa wskaźnik myszy w lewo."
+
+msgid "It will move the mouse pointer right."
+msgstr "Przesuwa wskaźnik myszy w prawo."
+
+msgid "It will move the mouse pointer up."
+msgstr "Przesuwa wskaźnik myszy w górę."
+
+msgid "Keyboard"
+msgstr "Klawiatura"
+
+msgid "Left Key"
+msgstr "Lewy Klawisz"
+
+msgid "Left Mouse Button"
+msgstr "Lewy Przycisk Myszy"
+
+msgid "Mouse"
+msgstr "Myszka"
+
 msgid "Move down"
 msgstr "W Dół"
 
-#: youtube.py:149
 msgid "Move left"
 msgstr "W Lewo"
 
-#: youtube.py:150
 msgid "Move right"
 msgstr "W Prawo"
 
-#: youtube.py:153
-msgid "Search a video"
-msgstr "Wyszukaj wideo"
+msgid "Move up"
+msgstr "W Górę"
 
-#: youtube.py:156
-msgid "Play current video"
-msgstr "Odtwórz bieżące wideo"
+msgid "Ntpd URL"
+msgstr ""
 
-#: youtube.py:157
+msgid "Open the virtual-keyboard on enigma2"
+msgstr "Otwórz wirtualną klawiaturę na enigma2"
+
+msgid "Page down key"
+msgstr "Klawisz Strona w dół"
+
+msgid "Page up key"
+msgstr "Klawisz Strona w górę"
+
+msgid "PageDown Key"
+msgstr "Klawisz Strona w dół"
+
+msgid "PageUp Key"
+msgstr "Klawisz Strona w górę"
+
 msgid "Pause current video"
 msgstr "Wstrzymaj bieżące wideo"
 
-#: youtube.py:158
+msgid "Play current video"
+msgstr "Odtwórz bieżące wideo"
+
+msgid "Play selected video"
+msgstr "Odtwórz wybrane wideo"
+
+msgid "Right Key"
+msgstr "Prawy Klawisz"
+
+msgid "Right Mouse Button"
+msgstr "Prawy Przycisk Myszy"
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Search a video"
+msgstr "Wyszukaj wideo"
+
+msgid "Setting"
+msgstr "Ustawienia"
+
+msgid "Skip backward 10 sec"
+msgstr "Przeskocz do tyłu o 10 sekund"
+
 msgid "Skip forward 10 sec"
 msgstr "Przeskocz do przodu o 10 sekund"
 
-#: youtube.py:159
-msgid "Skip backward 10 sec"
-msgstr "Przeskocz do tyłu o 10 sekund"
+msgid "Start"
+msgstr ""
+
+msgid "Start ChromiumOS"
+msgstr "Uruchom ChromiumOS"
+
+msgid "Start URL"
+msgstr "Początkowy adres URL"
+
+msgid "Start Up URL"
+msgstr "Początkowy adres URL"
+
+msgid "Start YouTube TV"
+msgstr "Uruchom YouTube TV"
+
+msgid "Switch to keyboard/mouse mode."
+msgstr "Przełącz na tryb klawiatury / myszy."
+
+msgid "Up Key"
+msgstr "Klawisz w Górę"
+
+msgid "X-margin on GUI"
+msgstr "Margines X na GUI"
+
+msgid "Y-margin on GUI"
+msgstr "Margines Y na GUI"
+
+msgid "YouTube TV Settings"
+msgstr "Ustawienia YouTube TV"
+
+msgid "YouTube TV is a new way to watch YouTube videos on Vu+"
+msgstr "YouTube TV to nowy sposób oglądania filmów z YouTube na Vu +"
+
+msgid "YouTubeTV"
+msgstr ""
+
+msgid "YouTubeTV Settings"
+msgstr "Ustawienia YouTubeTV"
