@@ -57,6 +57,7 @@ config.WetterExtraFeel=3
 config.WetterExtraColorCity=silver
 config.WetterExtraColorFeel=silver
 config.WetterWind=0
+config.WetterWindInfoLines=1
 config.MeteoURL=http://
 config.MoonPath=
 config.LCDType2=00
