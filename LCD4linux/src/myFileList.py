@@ -27,13 +27,14 @@ from Components.Harddisk import harddiskmanager
 from Components.config import config
 from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, eServiceReference, eServiceCenter, gFont, iServiceInformation
 from Tools.LoadPixmap import LoadPixmap
+from Tools.Directories import SCOPE_PLUGINS, resolveFilename
 
 
 def FileEntryComponent(name, absolute=None, isDir=False):
 	res = [(absolute, isDir)]
 	res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, name))
 	if isDir:
-		png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/data/dir.png")
+		png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/LCD4linux/data/dir.png"))
 	else:
 #		extension = name.split('.')
 #		extension = extension[-1].lower()
