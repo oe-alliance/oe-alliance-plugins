@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8o"
+Version = "V5.0-r8p"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -478,6 +478,7 @@ LCD4linux.WetterExtraFeel = ConfigSelectionNumber(0, 5, 1, default=3)
 LCD4linux.WetterExtraColorCity = ConfigSelection(choices=Farbe, default="silver")
 LCD4linux.WetterExtraColorFeel = ConfigSelection(choices=Farbe, default="silver")
 LCD4linux.WetterWind = ConfigSelection(choices=[("0", _("km/h")), ("1", _("m/s"))], default="0")
+LCD4linux.WetterWindInfoLines = ConfigSelectionNumber(1, 2, 1, default=1)
 LCD4linux.MeteoURL = ConfigText(default="http://", fixed_size=False, visible_width=50)
 LCD4linux.MoonPath = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.BlueIP = ConfigText(default="", fixed_size=False, visible_width=50)
@@ -2391,7 +2392,7 @@ def getFsize(text, f):
 def Code_utf8(wert):
 	if wert is None:
 		wert = ""
-	wert = HTMLParser().unescape(wert) # workaround in order to decode HTML-encoded special characters like &#9650;
+	wert = HTMLParser().unescape(wert)
 	if six.PY2:
 		wert = wert.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8") or ""
 		return codecs.decode(wert, 'UTF-8')
@@ -5720,6 +5721,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.list1.append(getConfigListEntry(_("Weather High Temperature Color"), LCD4linux.WetterHighColor))
 			self.list1.append(getConfigListEntry(_("Weather Transparency"), LCD4linux.WetterTransparenz))
 			self.list1.append(getConfigListEntry(_("Weather Wind speed unit"), LCD4linux.WetterWind))
+			self.list1.append(getConfigListEntry(_("Weather Wind Info Lines"), LCD4linux.WetterWindInfoLines))
 			self.list1.append(getConfigListEntry(_("Weather Rain Chance"), LCD4linux.WetterRain))
 			if LCD4linux.WetterRain.value != "false":
 				self.list1.append(getConfigListEntry(_("- Rain Zoom"), LCD4linux.WetterRainZoom))
@@ -9708,7 +9710,6 @@ class UpdateStatus(Screen):
 			L4log("wwwBox Error %d" % element, str(error.getErrorMessage()))
 
 	def downloadWetter(self, ort, wetter):
-		ort = HTMLParser().unescape(ort)
 		src = ["outlook", "vista"][self.MSNsrc]
 		if self.NetworkConnectionAvailable or self.NetworkConnectionAvailable == None:
 			la = language.getLanguage().replace("_", "-")
@@ -11209,9 +11210,16 @@ def LCD4linuxPIC(self, session):
 						ShadowText(Wim, POSX - wH - int(3 * Wmulti), POSY + h + int(hS / 2), Hum, font, ConfigColor, ConfigShadow) #silver
 					else:
 						font = ImageFont.truetype(ConfigFont, int(13 * Wmulti), encoding='unic')
-						Wind = (Wind.split(" ", 2))
-						ShadowText(Wim, POSX - minus5, POSY + int(57 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow) #silver
-						ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
+						if str(LCD4linux.WetterWindInfoLines.value) == "2":
+							Wind = (Wind.split(" ", 2))
+							if ConfigType[0] == "3":
+								ShadowText(Wim, POSX - minus5, POSY + int(60 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow) #silver
+								ShadowText(Wim, POSX - minus5, POSY + int(72 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow) #silver
+							else:
+								ShadowText(Wim, POSX - minus5, POSY + int(55 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow) #silver
+								ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow) #silver
+						else:
+							ShadowText(Wim,POSX-minus5, POSY+int(64*Wmulti), Wind, font, ConfigColor, ConfigShadow) #silver
 						font = ImageFont.truetype(ConfigFont, int(25 * Wmulti), encoding='unic')
 						w, h = getFsize(Temp_c, font)
 						TextSize = int(25 * Wmulti)
@@ -11219,11 +11227,17 @@ def LCD4linuxPIC(self, session):
 							TextSize -= 1
 							font = ImageFont.truetype(ConfigFont, TextSize, encoding='unic')
 							w, h = getFsize(Temp_c, font)
-						ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(16 * Wmulti), Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
+						if str(LCD4linux.WetterWindInfoLines.value) == "2" and ConfigType[0] != "3":
+							ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(10 * Wmulti), Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
+						else:
+							ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(16 * Wmulti), Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
 						w, h = getFsize(Temp_c[:-1], font)
 						fontF = ImageFont.truetype(ConfigFont, int(int(LCD4linux.WetterExtraZoom.value) / 10.0 * Wmulti), encoding='unic')
 						wS, hS = getFsize(Feel, fontF)
-						ShadowText(Wim, POSX + int(45 * Wmulti) + w, POSY + int(16 * Wmulti) + h - int(hS * 0.8), Feel, fontF, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
+						if str(LCD4linux.WetterWindInfoLines.value) == "2" and ConfigType[0] != "3":
+							ShadowText(Wim, POSX + int(45 * Wmulti) + w, POSY + int(10 * Wmulti) + h - int(hS * 0.8), Feel, fontF, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
+						else:
+							ShadowText(Wim, POSX + int(45 * Wmulti) + w, POSY + int(16 * Wmulti) + h - int(hS * 0.8), Feel, fontF, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(16 * Wmulti), encoding='unic')
 						wH, hH = getFsize(Hum, font)
 						TextSize = int(25 * Wmulti)
@@ -11231,7 +11245,10 @@ def LCD4linuxPIC(self, session):
 							TextSize -= 1
 							font = ImageFont.truetype(ConfigFont, TextSize, encoding='unic')
 							wH, hH = getFsize(Hum, font)
-						ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(16 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow) #silver
+						if str(LCD4linux.WetterWindInfoLines.value) == "2" and ConfigType[0] != "3":
+							ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(10 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow) #silver
+						else:
+							ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(16 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow) #silver
 			PICwetter[ConfigWWW] = 1
 		counter = 20
 		while PICwetter[ConfigWWW] == "wait" and counter > 0:
@@ -11371,7 +11388,7 @@ def LCD4linuxPIC(self, session):
 			except:
 				L4log("Error Moon")
 		if ConfigColor != "0":
-			font = ImageFont.truetype(ConfigFont, int(ConfigSize / 5), encoding='unic')
+			font = ImageFont.truetype(ConfigFont, int(ConfigSize / 8), encoding='unic')
 			if len(PHASE) > 10:
 				P = PHASE.split(" ")
 			else:
