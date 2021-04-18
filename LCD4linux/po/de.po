@@ -539,13 +539,13 @@ msgid "2 x FastBackwardKey Type 2"
 msgstr "2 x Rückspultaste Typ 2"
 
 msgid "2 x FastForwardKey"
-msgstr "2 x VorSpulTaste"
+msgstr "2 x Vorspultaste"
 
 msgid "2 x FastForwardKey Type 2"
-msgstr "2 x VorSpulTaste Typ 2"
+msgstr "2 x Vorspultaste Typ 2"
 
 msgid "2 x InfoKey"
-msgstr "2 x InfoTaste"
+msgstr "2 x Infotaste"
 
 msgid "2 x Mute"
 msgstr "2 x Stumm"
@@ -2259,6 +2259,9 @@ msgstr "Wetter Transparenz"
 
 msgid "Weather Wind speed unit"
 msgstr "Wetter Wind Einheit"
+
+msgid "Weather Wind Info Lines"
+msgstr "Wetter Wind Infozeilen"
 
 msgid "Weather-Icon Zoom"
 msgstr "Wetter-Icon Zoom"

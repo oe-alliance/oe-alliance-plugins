@@ -2297,7 +2297,10 @@ msgid "Weather Transparency"
 msgstr "Weather Transparency"
 
 msgid "Weather Wind speed unit"
-msgstr ""
+msgstr "Weather Wind speed unit"
+
+msgid "Weather Wind Info Lines"
+msgstr "Weather Wind Info Lines"
 
 msgid "Weather-Icon Zoom"
 msgstr "Weather-Icon Zoom"
