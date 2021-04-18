@@ -11219,7 +11219,7 @@ def LCD4linuxPIC(self, session):
 								ShadowText(Wim, POSX - minus5, POSY + int(55 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow) #silver
 								ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow) #silver
 						else:
-							ShadowText(Wim,POSX - minus5, POSY + int(64 * Wmulti), Wind, font, ConfigColor, ConfigShadow) #silver
+							ShadowText(Wim, POSX - minus5, POSY + int(64 * Wmulti), Wind, font, ConfigColor, ConfigShadow) #silver
 						font = ImageFont.truetype(ConfigFont, int(25 * Wmulti), encoding='unic')
 						w, h = getFsize(Temp_c, font)
 						TextSize = int(25 * Wmulti)
