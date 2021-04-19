@@ -478,7 +478,7 @@ LCD4linux.WetterExtraFeel = ConfigSelectionNumber(0, 5, 1, default=3)
 LCD4linux.WetterExtraColorCity = ConfigSelection(choices=Farbe, default="silver")
 LCD4linux.WetterExtraColorFeel = ConfigSelection(choices=Farbe, default="silver")
 LCD4linux.WetterWind = ConfigSelection(choices=[("0", _("km/h")), ("1", _("m/s"))], default="0")
-LCD4linux.WetterWindInfoLines = ConfigSelectionNumber(1, 2, 1, default=1)
+LCD4linux.WetterWindInfoLines = ConfigSelection(choices=[("off", _("off")), ("1", _("1")), ("2", _("2"))], default="1")
 LCD4linux.MeteoURL = ConfigText(default="http://", fixed_size=False, visible_width=50)
 LCD4linux.MoonPath = ConfigText(default="", fixed_size=False, visible_width=50)
 LCD4linux.BlueIP = ConfigText(default="", fixed_size=False, visible_width=50)
@@ -11195,9 +11195,9 @@ def LCD4linuxPIC(self, session):
 					if ConfigType[0] == "5":
 						w, h = getFsize(Cond, font)
 						PX = max(MAX_W - w - int(3 * Wmulti), 0)
-						ShadowText(Wim, PX, int(70 * Wmulti), Cond, font, ConfigColor, ConfigShadow) #silver
+						ShadowText(Wim, PX, int(70 * Wmulti), Cond, font, ConfigColor, ConfigShadow)
 						w, h = getFsize(Wind, font)
-						ShadowText(Wim, MAX_W - w - int(3 * Wmulti), int(70 * Wmulti) + h, Wind, font, ConfigColor, ConfigShadow) #silver
+						ShadowText(Wim, MAX_W - w - int(3 * Wmulti), int(70 * Wmulti) + h, Wind, font, ConfigColor, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(35 * Wmulti), encoding='unic')
 						w, h = getFsize(Temp_c, font)
 						ShadowText(Wim, POSX - w - int(3 * Wmulti), POSY, Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
@@ -11207,19 +11207,19 @@ def LCD4linuxPIC(self, session):
 						ShadowText(Wim, POSX - w - int(3 * Wmulti), POSY + h - int(hS * 0.8), Feel, fontF, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(15 * Wmulti), encoding='unic')
 						wH, hH = getFsize(Hum, font)
-						ShadowText(Wim, POSX - wH - int(3 * Wmulti), POSY + h + int(hS / 2), Hum, font, ConfigColor, ConfigShadow) #silver
+						ShadowText(Wim, POSX - wH - int(3 * Wmulti), POSY + h + int(hS / 2), Hum, font, ConfigColor, ConfigShadow)
 					else:
 						font = ImageFont.truetype(ConfigFont, int(13 * Wmulti), encoding='unic')
-						if str(LCD4linux.WetterWindInfoLines.value) == "2":
+						if LCD4linux.WetterWindInfoLines.value == "2":
 							Wind = (Wind.split(" ", 2))
 							if ConfigType[0] == "3":
-								ShadowText(Wim, POSX - minus5, POSY + int(60 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow) #silver
-								ShadowText(Wim, POSX - minus5, POSY + int(72 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow) #silver
+								ShadowText(Wim, POSX - minus5, POSY + int(60 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow)
+								ShadowText(Wim, POSX - minus5, POSY + int(72 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
 							else:
-								ShadowText(Wim, POSX - minus5, POSY + int(55 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow) #silver
-								ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow) #silver
-						else:
-							ShadowText(Wim, POSX - minus5, POSY + int(64 * Wmulti), Wind, font, ConfigColor, ConfigShadow) #silver
+								ShadowText(Wim, POSX - minus5, POSY + int(55 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow)
+								ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
+						elif LCD4linux.WetterWindInfoLines.value != "off":
+							ShadowText(Wim,POSX-minus5, POSY+int(64*Wmulti), Wind, font, ConfigColor, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(25 * Wmulti), encoding='unic')
 						w, h = getFsize(Temp_c, font)
 						TextSize = int(25 * Wmulti)
@@ -11227,14 +11227,14 @@ def LCD4linuxPIC(self, session):
 							TextSize -= 1
 							font = ImageFont.truetype(ConfigFont, TextSize, encoding='unic')
 							w, h = getFsize(Temp_c, font)
-						if str(LCD4linux.WetterWindInfoLines.value) == "2" and ConfigType[0] != "3":
+						if LCD4linux.WetterWindInfoLines.value == "2" and ConfigType[0] != "3":
 							ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(10 * Wmulti), Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
 						else:
 							ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(16 * Wmulti), Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
 						w, h = getFsize(Temp_c[:-1], font)
 						fontF = ImageFont.truetype(ConfigFont, int(int(LCD4linux.WetterExtraZoom.value) / 10.0 * Wmulti), encoding='unic')
 						wS, hS = getFsize(Feel, fontF)
-						if str(LCD4linux.WetterWindInfoLines.value) == "2" and ConfigType[0] != "3":
+						if LCD4linux.WetterWindInfoLines.value == "2" and ConfigType[0] != "3":
 							ShadowText(Wim, POSX + int(45 * Wmulti) + w, POSY + int(10 * Wmulti) + h - int(hS * 0.8), Feel, fontF, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
 						else:
 							ShadowText(Wim, POSX + int(45 * Wmulti) + w, POSY + int(16 * Wmulti) + h - int(hS * 0.8), Feel, fontF, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
@@ -11245,10 +11245,10 @@ def LCD4linuxPIC(self, session):
 							TextSize -= 1
 							font = ImageFont.truetype(ConfigFont, TextSize, encoding='unic')
 							wH, hH = getFsize(Hum, font)
-						if str(LCD4linux.WetterWindInfoLines.value) == "2" and ConfigType[0] != "3":
-							ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(10 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow) #silver
+						if LCD4linux.WetterWindInfoLines.value == "2" and ConfigType[0] != "3":
+							ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(10 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow)
 						else:
-							ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(16 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow) #silver
+							ShadowText(Wim, POSX + int(45 * Wmulti), POSY + int(16 * Wmulti) + h, Hum, font, ConfigColor, ConfigShadow)
 			PICwetter[ConfigWWW] = 1
 		counter = 20
 		while PICwetter[ConfigWWW] == "wait" and counter > 0:
