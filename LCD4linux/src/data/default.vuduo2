@@ -532,6 +532,7 @@ config.MeteoColor=white
 config.Moon=0
 config.MoonLCD=1
 config.MoonSize=60
+config.MoonFontSize=12
 config.MoonPos=10
 config.MoonAlign=0
 config.MoonSplit=false
