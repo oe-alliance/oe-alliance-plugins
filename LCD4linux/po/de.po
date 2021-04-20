@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2021-04-16 16:21+0430\n"
 "PO-Revision-Date: 2018-10-14 14:54+0200\n"
 "Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: \n"
@@ -1026,9 +1026,6 @@ msgstr ""
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
 
-msgid "First Quarter"
-msgstr "Erstes Viertel"
-
 msgid "Flaps Design Date"
 msgstr "Klappen Design Datum"
 
@@ -1103,9 +1100,6 @@ msgstr "FritzCall Popup-Zeit"
 
 msgid "FritzCall remove Calls after hours"
 msgstr "FritzCall entferne Anrufe nach Stunden"
-
-msgid "Full Moon"
-msgstr "Vollmond"
 
 msgid "GUI Restart is required"
 msgstr "GUI Neustart ist notwendig"
@@ -1263,9 +1257,6 @@ msgstr "LCD4linux Einstellungen"
 
 msgid "LCD4linux enabled"
 msgstr "LCD4linux aktiviert"
-
-msgid "Last Quarter"
-msgstr "Letztes Viertel"
 
 msgid "Line"
 msgstr "Linie"
@@ -1535,6 +1526,30 @@ msgstr "Mond-Icon-Verz. [ok]>"
 msgid "Moonphase"
 msgstr "Mondphase"
 
+msgid "New Moon"
+msgstr "Neumond"
+
+msgid "First Quarter"
+msgstr "Erstes Viertel"
+
+msgid "Waxing Crescent"
+msgstr "Zunehmender Halbmond"
+
+msgid "Waxing Moon"
+msgstr "Zunehmender Mond"
+
+msgid "Full Moon"
+msgstr "Vollmond"
+
+msgid "Waning Moon"
+msgstr "Abnehmender Mond"
+
+msgid "Waning Crescent"
+msgstr "Abnehmender Halbmond"
+
+msgid "Last Quarter"
+msgstr "Letztes Viertel"
+
 msgid "MusicCast"
 msgstr "MusicCast"
 
@@ -1597,9 +1612,6 @@ msgstr "Netatmo Komfort Indikator"
 
 msgid "Network Check active"
 msgstr "Netzwerk Check Aktive"
-
-msgid "New Moon"
-msgstr "Neumond"
 
 msgid "Next Program Info"
 msgstr "Nächste Programm Info"
@@ -2236,18 +2248,6 @@ msgstr "WWW Konverter Verwendung"
 msgid "WWW-Internet Converter"
 msgstr "WWW-Internet Konverter"
 
-msgid "Waning Crescent"
-msgstr "Abnehmender Halbmond"
-
-msgid "Waning Moon"
-msgstr "Abnehmender Mond"
-
-msgid "Waxing Crescent"
-msgstr "Zunehmender Halbmond"
-
-msgid "Waxing Moon"
-msgstr "Zunehmender Mond"
-
 msgid "Weather"
 msgstr "Wetter"
 
@@ -2586,7 +2586,7 @@ msgid "only Picture Custom Size"
 msgstr "nur Bild benutzerdefinierte Größe"
 
 msgid "only Picture Custom Size 2"
-msgstr "nur Bild Benutzer Definierte Größe 2"
+msgstr "nur Bild Benutzerdefinierte Größe 2"
 
 msgid "only Progress Bar"
 msgstr "nur Fortschrittsbalken"

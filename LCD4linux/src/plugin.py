@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8p"
+Version = "V5.0-r8q"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -1063,6 +1063,7 @@ LCD4linux.MeteoColor = ConfigSelection(choices=Farbe, default="white")
 LCD4linux.Moon = ConfigSelection(choices=ScreenSelect, default="0")
 LCD4linux.MoonLCD = ConfigSelection(choices=LCDSelect, default="1")
 LCD4linux.MoonSize = ConfigSlider(default=60, increment=2, limits=(10, 300))
+LCD4linux.MoonFontSize = ConfigSlider(default=12, increment=1, limits=(8, 100))
 LCD4linux.MoonPos = ConfigSlider(default=10, increment=2, limits=(0, 1024))
 LCD4linux.MoonAlign = ConfigSelection(choices=AlignType, default="0")
 LCD4linux.MoonSplit = ConfigYesNo(default=False)
@@ -6314,6 +6315,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			if LCD4linux.Moon.value != "0":
 				self.list2.append(getConfigListEntry(_("- which LCD"), LCD4linux.MoonLCD))
 				self.list2.append(getConfigListEntry(_("- Size"), LCD4linux.MoonSize))
+				self.list2.append(getConfigListEntry(_("- Font Size"), LCD4linux.MoonFontSize))
 				self.list2.append(getConfigListEntry(_("- Position"), LCD4linux.MoonPos))
 				self.list2.append(getConfigListEntry(_("- Alignment"), LCD4linux.MoonAlign))
 				self.list2.append(getConfigListEntry(_("- Split Screen"), LCD4linux.MoonSplit))
@@ -6985,6 +6987,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			if LCD4linux.MPMoon.value != "0":
 				self.list3.append(getConfigListEntry(_("- which LCD"), LCD4linux.MPMoonLCD))
 				self.list3.append(getConfigListEntry(_("- Size"), LCD4linux.MPMoonSize))
+				self.list3.append(getConfigListEntry(_("- Font Size"), LCD4linux.MoonFontSize))
 				self.list3.append(getConfigListEntry(_("- Position"), LCD4linux.MPMoonPos))
 				self.list3.append(getConfigListEntry(_("- Alignment"), LCD4linux.MPMoonAlign))
 				self.list3.append(getConfigListEntry(_("- Split Screen"), LCD4linux.MPMoonSplit))
@@ -7490,6 +7493,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			if LCD4linux.StandbyMoon.value != "0":
 				self.list4.append(getConfigListEntry(_("- which LCD"), LCD4linux.StandbyMoonLCD))
 				self.list4.append(getConfigListEntry(_("- Size"), LCD4linux.StandbyMoonSize))
+				self.list4.append(getConfigListEntry(_("- Font Size"), LCD4linux.MoonFontSize))
 				self.list4.append(getConfigListEntry(_("- Position"), LCD4linux.StandbyMoonPos))
 				self.list4.append(getConfigListEntry(_("- Alignment"), LCD4linux.StandbyMoonAlign))
 				self.list4.append(getConfigListEntry(_("- Split Screen"), LCD4linux.StandbyMoonSplit))
@@ -9826,8 +9830,6 @@ class UpdateStatus(Screen):
 					x = self.WDay[ConfigWWW]["Wind"].split()
 					if len(x) == 3:
 						self.WDay[ConfigWWW]["Wind"] = "%.1f m/s %s" % (float(int(x[0]) / 3.6), x[2])
-					else:
-						self.WDay[ConfigWWW]["Wind"] = "N/A N/A N/A"
 				self.WDay[ConfigWWW]["Cond"] = curr[0].getAttribute("skytext")
 				self.WDay[ConfigWWW]["Icon"] = curr[0].getAttribute("skycode") + ".png"
 				self.WDay[ConfigWWW]["Feel"] = curr[0].getAttribute("feelslike")
@@ -11212,6 +11214,8 @@ def LCD4linuxPIC(self, session):
 						font = ImageFont.truetype(ConfigFont, int(13 * Wmulti), encoding='unic')
 						if LCD4linux.WetterWindInfoLines.value == "2":
 							Wind = (Wind.split(" ", 2))
+							if len(Wind) < 3:
+								Wind = ["N/A", "N/A", "N/A"]
 							if ConfigType[0] == "3":
 								ShadowText(Wim, POSX - minus5, POSY + int(60 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow)
 								ShadowText(Wim, POSX - minus5, POSY + int(72 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
@@ -11365,7 +11369,7 @@ def LCD4linuxPIC(self, session):
 
 # Mondphase
 	def putMoon(workaround, draw, im):
-		(ConfigPos, ConfigSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont) = workaround
+		(ConfigPos, ConfigSize, ConfigFontSize, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow, ConfigFont) = workaround
 		ConfigPos = int(ConfigPos)
 		ConfigSize = int(ConfigSize)
 		MAX_W, MAX_H = self.im[im].size
@@ -11388,8 +11392,9 @@ def LCD4linuxPIC(self, session):
 			except:
 				L4log("Error Moon")
 		if ConfigColor != "0":
-			font = ImageFont.truetype(ConfigFont, int(ConfigSize / 8), encoding='unic')
-			if len(PHASE) > 10:
+			font = ImageFont.truetype(ConfigFont, int(ConfigFontSize), encoding='unic')
+			w, h = getFsize(Code_utf8(PHASE), font)
+			if w > ConfigSize:
 				P = PHASE.split(" ")
 			else:
 				P = [PHASE]
@@ -14882,7 +14887,7 @@ def LCD4linuxPIC(self, session):
 				Para = LCD4linux.StandbyBox2x1.value, LCD4linux.StandbyBox2y1.value, LCD4linux.StandbyBox2x2.value, LCD4linux.StandbyBox2y2.value, LCD4linux.StandbyBox2Color.value, LCD4linux.StandbyBox2BackColor.value
 				Lput(LCD4linux.StandbyBox2LCD.value, LCD4linux.StandbyBox2.value, putBox, Para)
 # Moonphase
-				Para = LCD4linux.StandbyMoonPos.value, LCD4linux.StandbyMoonSize.value, LCD4linux.StandbyMoonAlign.value, LCD4linux.StandbyMoonSplit.value, LCD4linux.StandbyMoonColor.value, LCD4linux.StandbyMoonShadow.value, getFont(LCD4linux.StandbyMoonFont.value)
+				Para = LCD4linux.StandbyMoonPos.value, LCD4linux.StandbyMoonSize.value, LCD4linux.MoonFontSize.value, LCD4linux.StandbyMoonAlign.value, LCD4linux.StandbyMoonSplit.value, LCD4linux.StandbyMoonColor.value, LCD4linux.StandbyMoonShadow.value, getFont(LCD4linux.StandbyMoonFont.value)
 				Lput(LCD4linux.StandbyMoonLCD.value, LCD4linux.StandbyMoon.value, putMoon, Para)
 # Meteo station
 				if wwwMeteo.find("current_conditions") > 1:
@@ -15087,7 +15092,7 @@ def LCD4linuxPIC(self, session):
 			Para = LCD4linux.MPBitratePos.value, LCD4linux.MPBitrateSize.value, LCD4linux.MPBitrateAlign.value, LCD4linux.MPBitrateSplit.value, LCD4linux.MPBitrateColor.value, LCD4linux.MPBitrateShadow.value, getFont(LCD4linux.MPBitrateFont.value)
 			Lput(LCD4linux.MPBitrateLCD.value, LCD4linux.MPBitrate.value, putBitrate, Para)
 # Moonphase
-			Para = LCD4linux.MPMoonPos.value, LCD4linux.MPMoonSize.value, LCD4linux.MPMoonAlign.value, LCD4linux.MPMoonSplit.value, LCD4linux.MPMoonColor.value, LCD4linux.MPMoonShadow.value, getFont(LCD4linux.MPMoonFont.value)
+			Para = LCD4linux.MPMoonPos.value, LCD4linux.MPMoonSize.value, LCD4linux.MoonFontSize.value, LCD4linux.MPMoonAlign.value, LCD4linux.MPMoonSplit.value, LCD4linux.MPMoonColor.value, LCD4linux.MPMoonShadow.value, getFont(LCD4linux.MPMoonFont.value)
 			Lput(LCD4linux.MPMoonLCD.value, LCD4linux.MPMoon.value, putMoon, Para)
 # Online-Ping
 			Para = LCD4linux.MPPingPos.value, LCD4linux.MPPingSize.value, LCD4linux.MPPingAlign.value, LCD4linux.MPPingSplit.value, LCD4linux.MPPingColor.value, LCD4linux.MPPingType.value, LCD4linux.MPPingShow.value, LCD4linux.MPPingTimeout.value, (LCD4linux.MPPingName1.value, LCD4linux.MPPingName2.value, LCD4linux.MPPingName3.value, LCD4linux.MPPingName4.value, LCD4linux.MPPingName5.value), LCD4linux.MPPingShadow.value, getFont(LCD4linux.MPPingFont.value)
@@ -15237,7 +15242,7 @@ def LCD4linuxPIC(self, session):
 			Para = LCD4linux.Box2x1.value, LCD4linux.Box2y1.value, LCD4linux.Box2x2.value, LCD4linux.Box2y2.value, LCD4linux.Box2Color.value, LCD4linux.Box2BackColor.value
 			Lput(LCD4linux.Box2LCD.value, LCD4linux.Box2.value, putBox, Para)
 # Moonphase
-			Para = LCD4linux.MoonPos.value, LCD4linux.MoonSize.value, LCD4linux.MoonAlign.value, LCD4linux.MoonSplit.value, LCD4linux.MoonColor.value, LCD4linux.MoonShadow.value, getFont(LCD4linux.MoonFont.value)
+			Para = LCD4linux.MoonPos.value, LCD4linux.MoonSize.value, LCD4linux.MoonFontSize.value, LCD4linux.MoonAlign.value, LCD4linux.MoonSplit.value, LCD4linux.MoonColor.value, LCD4linux.MoonShadow.value, getFont(LCD4linux.MoonFont.value)
 			Lput(LCD4linux.MoonLCD.value, LCD4linux.Moon.value, putMoon, Para)
 # Netatmo
 			Para = LCD4linux.NetAtmoPos.value, LCD4linux.NetAtmoSize.value, LCD4linux.NetAtmoAlign.value, LCD4linux.NetAtmoSplit.value, LCD4linux.NetAtmoStation.value, LCD4linux.NetAtmoModule.value, LCD4linux.NetAtmoModuleUser.value, LCD4linux.NetAtmoBasis.value, LCD4linux.NetAtmoName.value, LCD4linux.NetAtmoType.value, LCD4linux.NetAtmoType2.value, [LCD4linux.NetAtmoColor.value, LCD4linux.NetAtmoColor2.value, LCD4linux.NetAtmoColor3.value, LCD4linux.NetAtmoColor4.value, LCD4linux.NetAtmoColor5.value, LCD4linux.NetAtmoColor6.value, LCD4linux.NetAtmoColor7.value], LCD4linux.NetAtmoShadow.value, getFont(LCD4linux.NetAtmoFont.value)
