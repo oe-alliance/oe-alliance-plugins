@@ -1305,7 +1305,7 @@ class TVTippsView(tvBaseScreen):
             if search('TIME', x) is not None:
                 x = sub('TIME', '', x)
                 start = x
-                res.append(MultiContentEntryText(pos=(74 + picleftoffset, 18), size=(75, 25), font=-1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                res.append(MultiContentEntryText(pos=(74 + picleftoffset, 25), size=(75, 40), font=-1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
             if search('INFO', x) is not None:
                 icount = icount + 1
                 x = sub('INFO', '', x)
@@ -1320,10 +1320,10 @@ class TVTippsView(tvBaseScreen):
             if search('NAME', x) is not None:
                 x = sub('NAME', '', x)
                 titelfilter = x
-                res.append(MultiContentEntryText(pos=(162 + picleftoffset, 17), size=(self.menuwidth - 330 - picleftoffset, 30), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                res.append(MultiContentEntryText(pos=(162 + picleftoffset, 10), size=(self.menuwidth - 330 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
             if search('GENRE', x) is not None:
                 x = sub('GENRE', '', x)
-                res.append(MultiContentEntryText(pos=(162 + picleftoffset, 48), size=(self.menuwidth - 330 - picleftoffset, 30), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                res.append(MultiContentEntryText(pos=(162 + picleftoffset, 40), size=(self.menuwidth - 330 - picleftoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                 if self.sparte == 'Spielfilm':
                     png = ICONPATH + 'rating small1HD.png'
                     if fileExists(png):
@@ -1335,7 +1335,7 @@ class TVTippsView(tvBaseScreen):
                 if self.picon == True:
                     picon = self.findPicon(sref)
                     if picon is not None:
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 15), size=(100, 60), png=LoadPixmap(picon)))
                     else:
                         res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
                 else:
@@ -2829,7 +2829,7 @@ class TVJetztView(tvGenreJetztProgrammView):
         scaleoffset = 0
         if self.fontlarge == True:
             scaleoffset = 10
-
+#20:15#################################################################20:15########################
         for x in a:
             if y == 0:
                 x = sub('LOGO', '', x)
@@ -2893,7 +2893,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                         else:
                             passed = nowsec - startsec
                             percent = passed * 100 / length
-                    res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7 + pictopoffset), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                    res.append(MultiContentEntryText(pos=(80 + picleftoffset, 1 + pictopoffset), size=(200, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                     start = sub(' - ..:..', '', x)
                     hour = sub(':..', '', start)
                     if int(nowhour) - int(hour) > 6:
@@ -2927,10 +2927,10 @@ class TVJetztView(tvGenreJetztProgrammView):
                         res_titel.append(t)
                         self.tvtitel.append(res_titel)
                         if self.progress == False:
-                            res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(self.menuwidth - 400 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                            res.append(MultiContentEntryText(pos=(295 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 500 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                         else:
-                            res.append(MultiContentEntryProgress(pos=(235 + picleftoffset, 13 + pictopoffset), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
-                            res.append(MultiContentEntryText(pos=(325 + picleftoffset, 7 + pictopoffset), size=(self.menuwidth - 490 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                            res.append(MultiContentEntryProgress(pos=(295 + picleftoffset, 13 + pictopoffset), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
+                            res.append(MultiContentEntryText(pos=(385 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 490 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                     else:
                         y = 5
                 elif search('TITEL', x) is None:
@@ -2939,7 +2939,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                 if search('SPARTE', x) is not None:
                     if self.filter == False:
                         x = sub('SPARTE', '', x)
-                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160, 7 + pictopoffset), size=(152 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        res.append(MultiContentEntryText(pos=(self.menuwidth - 170, 7 + pictopoffset), size=(172 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                 else:
                     y = 6
             if y == 6:
@@ -2950,7 +2950,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                     elif x != 'rating small':
                         png = '%s%sHD.png' % (ICONPATH, x)
                         if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 210, pictopoffset), size=(40, 40), png=loadPNG(png)))
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 190, pictopoffset), size=(40, 40), png=loadPNG(png)))
                     self.tventries.append(res)
             y += 1
             if y == offset:
@@ -3582,7 +3582,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
         scaleoffset = 0
         if self.fontlarge == True:
             scaleoffset = 10
-
+#TVjetzt####
         for x in a:
             if y == 0:
                 x = sub('LOGO', '', x)
@@ -3639,7 +3639,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
                     self.primetime = True
                 else:
                     self.primetime = False
-                res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7 + pictopoffset), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                res.append(MultiContentEntryText(pos=(80 + picleftoffset, 1 + pictopoffset), size=(195, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                 start = sub(' - ..:..', '', x)
                 hour = sub(':..', '', start)
                 if int(hour) < 5 and len(self.tventries) > 6 or int(hour) < 5 and self.eventview == True:
@@ -3665,19 +3665,19 @@ class TVProgrammView(tvGenreJetztProgrammView):
                         x = t
                     self.tvtitel.append(t)
                     if self.progress == False or self.percent == False:
-                        res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(self.menuwidth - 400 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                        res.append(MultiContentEntryText(pos=(295 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 400 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                     else:
-                        res.append(MultiContentEntryProgress(pos=(235 + picleftoffset, 13 + pictopoffset), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
-                        res.append(MultiContentEntryText(pos=(325 + picleftoffset, 7 + pictopoffset), size=(self.menuwidth - 490 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                        res.append(MultiContentEntryProgress(pos=(295 + picleftoffset, 13 + pictopoffset), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
+                        res.append(MultiContentEntryText(pos=(385 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 490 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                 else:
                     y = 5
             if y == 5:
                 if search('SPARTE', x) is not None:
                     x = sub('SPARTE', '', x)
                     if self.primetime == False:
-                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160 - scaleoffset, 7 + pictopoffset), size=(152 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160 - scaleoffset, 7 + pictopoffset), size=(162 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                     else:
-                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160 - scaleoffset, 7 + pictopoffset), size=(152 + scaleoffset, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160 - scaleoffset, 7 + pictopoffset), size=(162 + scaleoffset, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                 else:
                     y = 6
             if y == 6:
