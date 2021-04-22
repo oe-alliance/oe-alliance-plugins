@@ -67,10 +67,10 @@
 		</widget>
 		<widget name="statuslabel" position="250,610" size="740,20" font="Regular;20" foregroundColor="#858A95" halign="center" zPosition="2" />
 	</screen>
-		<screen name="TVProgrammView" position="center,80" size="1860,990" title=" ">
-		<eLabel position="0,0" size="1860,60" backgroundColor="#FFFFFF" />
+		<screen name="TVProgrammView" position="center,80" size="1870,990" title=" ">
+		<eLabel position="0,0" size="1870,60" backgroundColor="#FFFFFF" />
 		<ePixmap position="0,0" size="1860,60" pixmap="{picpath}tvspielfilmHD.png" alphatest="blend" zPosition="1" />
-		<widget name="menu" position="10,75" size="1830,868" scrollbarMode="showNever" zPosition="1" />
+		<widget name="menu" position="10,75" size="1860,868" scrollbarMode="showNever" zPosition="1" />
 		<widget name="searchtimer" position="420,5" size="400,50" pixmap="{picpath}search_timer.png" alphatest="blend" zPosition="3" />
 		<widget name="searchlogo" position="5,75" size="200,50" pixmap="{picpath}search.png" alphatest="blend" zPosition="1" />
 		<widget name="searchtext" position="245,75" size="955,65" font="Regular;26" valign="center" zPosition="1" />
