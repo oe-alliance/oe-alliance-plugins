@@ -1293,10 +1293,10 @@ msgid "Long FastBackwardKey Type 2"
 msgstr "Lang RückSpulTaste Typ 2"
 
 msgid "Long FastForwardKey"
-msgstr "Lang VorSpulTaste"
+msgstr "Lang Vorspultaste"
 
 msgid "Long FastForwardKey Type 2"
-msgstr "Lang VorSpulTaste Typ 2"
+msgstr "Lang Vorspultaste Typ 2"
 
 msgid "Long InfoKey"
 msgstr "Lang InfoTaste"
@@ -2586,7 +2586,7 @@ msgid "only Picture Custom Size"
 msgstr "nur Bild benutzerdefinierte Größe"
 
 msgid "only Picture Custom Size 2"
-msgstr "nur Bild Benutzerdefinierte Größe 2"
+msgstr "nur Bild benutzerdefinierte Größe 2"
 
 msgid "only Progress Bar"
 msgstr "nur Fortschrittsbalken"
