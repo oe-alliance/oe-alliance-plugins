@@ -2939,7 +2939,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                 if search('SPARTE', x) is not None:
                     if self.filter == False:
                         x = sub('SPARTE', '', x)
-                        res.append(MultiContentEntryText(pos=(self.menuwidth - 170, 7 + pictopoffset), size=(172 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        res.append(MultiContentEntryText(pos=(self.menuwidth - 190, 7 + pictopoffset), size=(182 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                 else:
                     y = 6
             if y == 6:
@@ -2950,7 +2950,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                     elif x != 'rating small':
                         png = '%s%sHD.png' % (ICONPATH, x)
                         if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 190, pictopoffset), size=(40, 40), png=loadPNG(png)))
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 170, pictopoffset), size=(40, 40), png=loadPNG(png)))
                     self.tventries.append(res)
             y += 1
             if y == offset:
@@ -3665,19 +3665,19 @@ class TVProgrammView(tvGenreJetztProgrammView):
                         x = t
                     self.tvtitel.append(t)
                     if self.progress == False or self.percent == False:
-                        res.append(MultiContentEntryText(pos=(295 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 400 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                        res.append(MultiContentEntryText(pos=(295 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 480 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                     else:
                         res.append(MultiContentEntryProgress(pos=(295 + picleftoffset, 13 + pictopoffset), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
-                        res.append(MultiContentEntryText(pos=(385 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 490 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                        res.append(MultiContentEntryText(pos=(385 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 480 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
                 else:
                     y = 5
             if y == 5:
                 if search('SPARTE', x) is not None:
                     x = sub('SPARTE', '', x)
                     if self.primetime == False:
-                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160 - scaleoffset, 7 + pictopoffset), size=(162 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        res.append(MultiContentEntryText(pos=(self.menuwidth - 190 - scaleoffset, 7 + pictopoffset), size=(182 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                     else:
-                        res.append(MultiContentEntryText(pos=(self.menuwidth - 160 - scaleoffset, 7 + pictopoffset), size=(162 + scaleoffset, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        res.append(MultiContentEntryText(pos=(self.menuwidth - 190 - scaleoffset, 7 + pictopoffset), size=(182 + scaleoffset, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
                 else:
                     y = 6
             if y == 6:
@@ -3688,7 +3688,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
                     elif x != 'rating small':
                         png = '%s%sHD.png' % (ICONPATH, x)
                         if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 210, pictopoffset), size=(40, 40), png=loadPNG(png)))
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 170, pictopoffset), size=(40, 40), png=loadPNG(png)))
                     self.tventries.append(res)
                 else:
                     self.tventries.append(res)
@@ -8325,8 +8325,8 @@ class TVHeuteView(tvBaseScreen):
                         self.tvtitels[midx - 1].append(currenttitle)
                     currentitem = [x]
                     if self.backcolor == True:
-                        currentitem.append(MultiContentEntryText(pos=(0, 0), size=(200, 115), font=1, backcolor_sel=self.back_color, text=''))
-                    currentitem.append(MultiContentEntryText(pos=(0, 0), size=(55, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+                        currentitem.append(MultiContentEntryText(pos=(0, 0), size=(400, 115), font=1, backcolor_sel=self.back_color, text=''))
+                    currentitem.append(MultiContentEntryText(pos=(0, 0), size=(57, 22), font=1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
                     currentlink = 'na'
                     currenttitle = ''
                     logo = 0
@@ -8346,13 +8346,13 @@ class TVHeuteView(tvBaseScreen):
                     x = sub('LOGO', '', x)
                     png = '%s%sHD.png' % (ICONPATH, x)
                     if fileExists(png):
-                        currentitem.append(MultiContentEntryPixmapAlphaTest(pos=(0, 25 + (logo * 20)), size=(45, 15), png=loadPNG(png)))
+                        currentitem.append(MultiContentEntryPixmapAlphaTest(pos=(0, 25 + (logo * 20)), size=(55, 22), png=loadPNG(png)))
                     logo = logo + 1
                 if search('RATING', x) is not None:
                     x = sub('RATING', '', x)
                     png = '%s%sHD.png' % (ICONPATH, x)
                     if fileExists(png):
-                        currentitem.append(MultiContentEntryPixmapAlphaTest(pos=(5, 25 + (logo * 20)), size=(29, 29), png=loadPNG(png)))
+                        currentitem.append(MultiContentEntryPixmapAlphaTest(pos=(5, 25 + (logo * 20)), size=(40, 40), png=loadPNG(png)))
                 if search('LINK', x) is not None:
                     x = sub('LINK', '', x)
                     currentlink = x
@@ -8369,7 +8369,7 @@ class TVHeuteView(tvBaseScreen):
                         self.rec = False
                     if self.fontlarge == True:
                         tpos = tpos + 10
-                    currentitem.append(MultiContentEntryText(pos=(60, 0), size=(140, tpos), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=currenttitle))
+                    currentitem.append(MultiContentEntryText(pos=(60, 0), size=(220, tpos), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=currenttitle))
 
         if currentitem != None:
             self.tventriess[midx - 1].append(currentitem)
