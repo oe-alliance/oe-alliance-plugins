@@ -91,7 +91,7 @@ class eAITSectionReader:
 			return False
 		document = re.sub(RE_XML_ILLEGAL, "?", document)
 		document = re.sub("&", "+", document)
-		document = document.decode("cp1252").encode("utf-8")
+		# document = document.decode("cp1252").encode("utf-8") # Py3 does not have str.decode()
 		document = "<URL>" + document + "</URL>"
 		try:
 			self.mDocument = xml.dom.minidom.parseString(document)
