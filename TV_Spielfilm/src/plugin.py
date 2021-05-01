@@ -47,7 +47,7 @@ import time
 import six
 from os import path
 from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin, printStackTrace, channelDB, readSkin, DESKTOP_WIDTH, DESKTOP_HEIGHT, skinFactor
-from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable
+from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable, getTrailerUrl
 
 try:
     from cookielib import MozillaCookieJar
@@ -510,9 +510,9 @@ class tvBaseScreen(tvAllScreen):
                         endpos = output.find('</footer>')
         bereich = output[startpos:endpos]
         bereich = cleanHTML(bereich)
-        if search('rl: .https://video.tvspielfilm.de/.*?mp4', output) is not None:
-            trailerurl = search('rl: .https://video.tvspielfilm.de/(.*?).mp4', output)
-            self.trailerurl = 'https://video.tvspielfilm.de/' + trailerurl.group(1) + '.mp4'
+        trailerurl = getTrailerUrl(output)
+        if trailerurl != None:
+            self.trailerurl = trailerurl
             self.trailer = True
         else:
             self.trailer = False
@@ -4639,17 +4639,16 @@ class TVTrailerBilder(tvBaseScreen):
                 pass
 
     def playTrailer(self, output):
-        if search('rl: .https://video.tvspielfilm.de/.*?mp4', output) is not None:
-            trailer = search('rl: .https://video.tvspielfilm.de/(.*?).mp4', output)
-            self.trailer = 'https://video.tvspielfilm.de/' + trailer.group(1) + '.mp4'
+        trailerurl = getTrailerUrl(output)
+        if trailerurl != None:
+            self.trailer = trailerurl
             try:
                 sref = eServiceReference(4097, 0, self.trailer)
                 sref.setName(self.titel)
                 self.session.open(MoviePlayer, sref)
             except IndexError:
                 pass
-
-        elif search('rl: .https://video.tvspielfilm.de/.*?flv', output) is not None:
+        elif search('https://video.tvspielfilm.de/.*?flv', output) is not None:
             self.session.open(MessageBox, 'Der Trailer kann nicht abgespielt werden:\nnicht unterstuetzter Video-Codec: On2 VP6/Flash', MessageBox.TYPE_INFO, close_on_any_key=True)
         else:
             self.session.open(MessageBox, '\nKein Trailer vorhanden', MessageBox.TYPE_INFO, close_on_any_key=True)
@@ -4954,9 +4953,9 @@ class TVNews(tvBaseScreen):
                         endpos = output.find('</footer>')
         bereich = output[startpos:endpos]
         bereich = cleanHTML(bereich)
-        if search('rl: .https://video.tvspielfilm.de/.*?mp4', output) is not None:
-            trailerurl = search('rl: .https://video.tvspielfilm.de/(.*?).mp4', output)
-            self.trailerurl = 'https://video.tvspielfilm.de/' + trailerurl.group(1) + '.mp4'
+        trailerurl = getTrailerUrl(output)
+        if trailerurl != None:
+            self.trailerurl = trailerurl
             self.trailer = True
         else:
             self.trailer = False

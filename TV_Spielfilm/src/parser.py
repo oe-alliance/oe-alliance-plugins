@@ -3,7 +3,8 @@
 from __future__ import print_function
 import six
 from re import sub, findall, S as RES, search
-
+from twisted.web.client import getPage
+from twisted.internet import reactor
 
 def shortenChannel(text):
     text = text.replace('ProSieben ', 'Pro7 ').replace('kabel eins CLASSICS', 'k1CLASSICS').replace('Sky Family', 'SkyFamily').replace('Sky Cinema+', 'SkyCine+').replace('Sky Comedy', 'SkyComedy').replace('Sky Emotion', 'SkyEmotion').replace('Sky Sport HD', 'SkySport').replace('Eurosport ', 'Eurosport').replace('EXTREME SPORTS', 'EXTREME').replace('NAT GEO WILD', 'NatGeoWild').replace('Romance TV', 'RomanceTV')
@@ -601,20 +602,26 @@ def parsePrimeTimeTable(output, showgenre, debug=None):
         print(bereich)
     return bereich
 
+def getTrailerUrl(output, videoformat='.mp4'):
+    if search('https://video.tvspielfilm.de/.*?' + videoformat, output) is not None:
+        trailerurl = search('https://video.tvspielfilm.de/(.*?)' + videoformat, output)
+        return 'https://video.tvspielfilm.de/' + trailerurl.group(1) + videoformat
+    else:
+        return None
+
 
 def testnowerr(output):
     print(output)
+    reactor.stop()
 
 
-def testnow2():
-    output = open('/tmp/tvspielfilm.html', 'r').read()
+def testnow2(output):
+    output = six.ensure_str(output)
     bereich = parseInfoTable(output, True)
     a = findall('<td>(.*?)</td>', bereich)
     y = 0
     offset = 7
     for x in a:
-        print(x)
-        continue
         if y == 0:
             x = sub('LOGO', '', x)
             print("LOGO:" + x)
@@ -646,16 +653,17 @@ def testnow2():
         y += 1
         if y == offset:
             y = 0
+    reactor.stop()
 
 #    bereich = parseInfoTable2(output, True)
 #    a = findall('<td>(.*?)</td>', bereich)
 #    for x in a:
 #        print(x)
 
-#def testnow():
-#    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
-#    getPage(link).addCallback(testnow2).addErrback(testnowerr)
-
+def test():
+    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
+    getPage(link).addCallback(testnow2).addErrback(testnowerr)
+    reactor.run()
 
 if __name__ == '__main__':
-    testnow2()
+    test()
