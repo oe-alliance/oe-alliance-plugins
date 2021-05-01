@@ -604,7 +604,7 @@ def parsePrimeTimeTable(output, showgenre, debug=None):
     return bereich
 
 
-def getTrailerUrl(output, videoformat='.mp4'):
+def parseTrailerUrl(output, videoformat='.mp4'):
     if search('https://video.tvspielfilm.de/.*?' + videoformat, output) is not None:
         trailerurl = search('https://video.tvspielfilm.de/(.*?)' + videoformat, output)
         return 'https://video.tvspielfilm.de/' + trailerurl.group(1) + videoformat
