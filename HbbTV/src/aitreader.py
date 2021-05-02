@@ -91,7 +91,8 @@ class eAITSectionReader:
 		document = re.sub(RE_XML_ILLEGAL, "?", document)
 		document = re.sub("&", "+", document)
 		document = re.sub("%", " ", document)
-		document = document.decode("cp1252").encode("utf-8")
+		if six.PY3:
+			document = document.decode("cp1252").encode("utf-8")
 		document = "<URL>" + document + "</URL>"
 		#print document
 		try:
