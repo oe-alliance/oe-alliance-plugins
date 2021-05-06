@@ -532,7 +532,8 @@ def _parseInfoTableStart(output):
         endpos = output.find('<div class="two-blocks">')
     bereich = output[startpos:endpos]
     bereich = transHTML(bereich)
-    bereich = sub('class="chl_bg_. c-', '<td>LOGO', bereich)
+    bereich = sub('https://a2.tvspielfilm.de/images/tv/sender/mini/', '<td>LOGO', bereich)
+    bereich = sub('.png"', '</td>', bereich)
     return bereich
 
 
@@ -560,15 +561,6 @@ def _parseInfoTable(bereich, debug=None):
         print("[DEBUG] parseInfoTable %s\n" % debug)
         print(bereich)
     return bereich
-
-
-def parseInfoTable2(output, debug=None):
-    bereich = _parseInfoTableStart(output)
-    bereich = sub('<strong><a href="https://my', '<td>LINKhttps://www', bereich)
-    bereich = sub('<span>\n\\s+<a href="https://www', '<td>LINKhttps://www', bereich)
-    bereich = sub('standard">\n\\s+<a href="https://my', '<td>LINKhttps://www', bereich)
-    bereich = sub('standard">\n\\s+<a href="https://www', '<td>LINKhttps://www', bereich)
-    return _parseInfoTable(bereich, debug)
 
 
 def parsePrimeTimeTable(output, showgenre, debug=None):
@@ -611,11 +603,115 @@ def parseTrailerUrl(output, videoformat='.mp4'):
     else:
         return None
 
+def buildTVTippsArray(sparte, output):
+    if sparte == 'neu':
+        startpos = output.find('id="c-sp-opener"><span>Spielfilm</span></a>')
+        endpos = output.find('id="c-spo-opener"><span>Sport</span></a>')
+    elif sparte == 'Spielfilm':
+        startpos = output.find('id="c-sp-opener"><span>Spielfilm</span></a>')
+        endpos = output.find('id="c-se-opener"><span>Serie</span></a>')
+    elif sparte == 'Serie':
+        startpos = output.find('id="c-se-opener"><span>Serie</span></a>')
+        endpos = output.find('id="c-re-opener"><span>Report</span></a>')
+    elif sparte == 'Report':
+        startpos = output.find('id="c-re-opener"><span>Report</span></a>')
+        endpos = output.find('id="c-u-opener"><span>Unterhaltung</span></a>')
+    elif sparte == 'Unterhaltung':
+        startpos = output.find('id="c-u-opener"><span>Unterhaltung</span></a>')
+        endpos = output.find('id="c-kin-opener"><span>Kinder</span></a>')
+    elif sparte == 'Kinder':
+        startpos = output.find('id="c-kin-opener"><span>Kinder</span></a>')
+        endpos = output.find('id="c-spo-opener"><span>Sport</span></a>')
+    elif sparte == 'Sport':
+        startpos = output.find('id="c-spo-opener"><span>Sport</span></a>')
+        endpos = output.find('<p class="h3 headline headline--section">')
+    bereich = output[startpos:endpos]
+    bereich = transHTML(bereich)
+    bereich = sub('<div class="full-image image-wrapper.*?">\n\\s+<a href="', '<td>LINK', bereich)
+    bereich = sub('" target="_self" onclick="', '</td>', bereich)
+    bereich = sub('class="aholder" title=".*?<strong>', '<td>NAME', bereich)
+    bereich = sub('class="aholder" title="', '<td>TITEL', bereich)
+    bereich = sub('<span class="add-info ', '<td>INFO', bereich)
+    bereich = sub('">TIPP</span>', '</td>', bereich)
+    bereich = sub('">LIVE</span>', '</td>', bereich)
+    bereich = sub('">HDTV</span>', '</td>', bereich)
+    bereich = sub('">NEU</span>', '</td>', bereich)
+    bereich = sub('">OMU</span>', '</td>', bereich)
+    bereich = sub('"></span>', '</td>', bereich)
+    bereich = sub('" data-src="', '</td><td>PIC', bereich)
+    bereich = sub('" alt="', '</td>', bereich)
+    bereich = sub('<span class="time">', '<td>TIME', bereich)
+    bereich = sub('</span>', '</td>', bereich)
+    bereich = sub('</strong>', '</td>', bereich)
+    bereich = sub('opener"><span>', '', bereich)
+    bereich = sub('<span>Play</td>', '', bereich)
+    bereich = sub('<span>', '<td>GENRE', bereich)
+    bereich = sub('https://a2.tvspielfilm.de/images/tv/sender/mini/', '<td>LOGO', bereich)
+    bereich = sub('.png</td>', '</td>', bereich)
+    bereich = sub('<br/>', '', bereich)
+    return findall('<td>(.*?)</td>', bereich)
 
-def testnowerr(output):
+
+def parseNow(output):
+    items = findall('<tr class="hover">(.*?)</tr>', output, RES)
+    entries = []
+    for item in items:
+        b = findall('<img src="https://a2.tvspielfilm.de/images/tv/sender/mini/(.*?).png.*?<div>\n\\s+<strong>(.*?)</strong>\n\\s+<span>(.*?)</span>', item, RES)
+        LOGO, TIME, DATE = b[0]
+        title = findall(';" title="(.*?)"', item, RES)[0]
+        try:
+            genre = findall('<td class="col-4">\n\\s+<span>(.*?)</span>', item, RES)
+        except:
+            genre = None
+        try:
+            sparte = findall('<td class="col-5">\n\\s+<span>(.*?)\n\\s+</span>', item, RES)[0]
+        except:
+            sparte = None
+        try:
+            rating = findall('class="editorial-(.*?)"', item, RES)[0]
+        except:
+            rating = None
+        LINK = findall('<span>\n\\s+<a href="(https://www..*?.html)"', item, RES)[0]
+        entries.append((LOGO, TIME, DATE, LINK, title, sparte, genre, rating))
+    return entries, output
+
+def testtvtipps(output):
+    output = six.ensure_str(output)
+    a = buildTVTippsArray("Spielfilm", output)
+    print(a)
+
+def testtvnow(output):
+    output = six.ensure_str(output)
+    print(output)
+    startpos = output.find('<table class="info-table"')
+    endpos = output.find('<div class="block-in">')
+    if endpos == -1:
+        endpos = output.find('<div class="two-blocks">')
+    bereich = output[startpos:endpos]
+    bereich = transHTML(bereich)
+    print(bereich)
+    a = findall('<tr class="hover">(.*?)</tr>', output, RES)
+    #bereich = parseInfoTable2(output, True)
+    #a = findall('<td>(.*?)</td>', bereich)
+    for item in a:
+        b = findall('<img src="https://a2.tvspielfilm.de/images/tv/sender/mini/(.*?).png.*?<div>\n\\s+<strong>(.*?)</strong>\n\\s+<span>(.*?)</span>', item, RES)
+        LOGO, TIME, DATE = b[0]
+        TITLE = findall(';" title="(.*?)"', item, RES)
+        LINK = findall('<span>\n\\s+<a href="(https://www..*?.html)"', item, RES)[0]
+        #genres = findall('<td class="col-4">\n\\s+<span>(.*?)</span>', item, RES)
+        #SPARTE = findall('<td class="col-5">\n\\s+<span>(.*?)\n\\s+</span>', item, RES)[0]
+        #ratings = findall('class="editorial-(.*?)"', item, RES)
+        #print(LOGO, TIME, DATE, LINK, TITLE, SPARTE)
+        print((LOGO, LINK))
+        #break
+
+def saveerr(output):
     print(output)
     reactor.stop()
 
+def savefile(output):
+    open('tmp.html', 'wb').write(output)
+    reactor.stop()
 
 def testnow2(output):
     output = six.ensure_str(output)
@@ -655,7 +751,6 @@ def testnow2(output):
         y += 1
         if y == offset:
             y = 0
-    reactor.stop()
 
 #    bereich = parseInfoTable2(output, True)
 #    a = findall('<td>(.*?)</td>', bereich)
@@ -664,10 +759,13 @@ def testnow2(output):
 
 
 def test():
-    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
-    getPage(link).addCallback(testnow2).addErrback(testnowerr)
-    reactor.run()
-
+    link = b'https://www.tvspielfilm.de/tv-tipps/'
+#    getPage(link).addCallback(testtvtipps).addErrback(testnowerr)
+#    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
+#    getPage(link).addCallback(savefile).addErrback(saveerr)
+#    reactor.run()
+    output = open('tmp.html', 'rb').read()
+    testtvtipps(output)
 
 if __name__ == '__main__':
     test()

@@ -46,7 +46,7 @@ import time
 import six
 from os import path
 from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin, printStackTrace, channelDB, readSkin, DESKTOP_WIDTH, DESKTOP_HEIGHT, skinFactor
-from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parseInfoTable2, parsePrimeTimeTable, parseTrailerUrl
+from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parsePrimeTimeTable, parseTrailerUrl, buildTVTippsArray, parseNow
 
 try:
     from cookielib import MozillaCookieJar
@@ -1166,61 +1166,16 @@ class TVTippsView(tvBaseScreen):
         self['pic4'].hide()
         self['pic5'].hide()
         self['pic6'].hide()
-        if self.sparte == 'neu':
-            startpos = output.find('id="c-sp-opener"><span>Spielfilm</span></a>')
-            endpos = output.find('id="c-spo-opener"><span>Sport</span></a>')
-        elif self.sparte == 'Spielfilm':
-            startpos = output.find('id="c-sp-opener"><span>Spielfilm</span></a>')
-            endpos = output.find('id="c-se-opener"><span>Serie</span></a>')
-        elif self.sparte == 'Serie':
-            startpos = output.find('id="c-se-opener"><span>Serie</span></a>')
-            endpos = output.find('id="c-re-opener"><span>Report</span></a>')
-        elif self.sparte == 'Report':
-            startpos = output.find('id="c-re-opener"><span>Report</span></a>')
-            endpos = output.find('id="c-u-opener"><span>Unterhaltung</span></a>')
-        elif self.sparte == 'Unterhaltung':
-            startpos = output.find('id="c-u-opener"><span>Unterhaltung</span></a>')
-            endpos = output.find('id="c-kin-opener"><span>Kinder</span></a>')
-        elif self.sparte == 'Kinder':
-            startpos = output.find('id="c-kin-opener"><span>Kinder</span></a>')
-            endpos = output.find('id="c-spo-opener"><span>Sport</span></a>')
-        elif self.sparte == 'Sport':
-            startpos = output.find('id="c-spo-opener"><span>Sport</span></a>')
-            endpos = output.find('<p class="h3 headline headline--section">')
-        bereich = output[startpos:endpos]
-        bereich = transHTML(bereich)
+        a = buildTVTippsArray(self.sparte, output)
         date = str(self.date.strftime('%d.%m.%Y'))
         self.titel = 'TV-Tipps - ' + str(self.sparte) + ' - ' + str(self.weekday) + ', ' + date
         if self.sparte == 'neu':
             self.titel = 'TV Neuerscheinungen - ' + str(self.weekday) + ', ' + date
         self.setTitle(self.titel)
-        bereich = sub('<div class="full-image image-wrapper.*?">\n\\s+<a href="', '<td>LINK', bereich)
-        bereich = sub('" target="_self" onclick="', '</td>', bereich)
-        bereich = sub('class="aholder" title=".*?<strong>', '<td>NAME', bereich)
-        bereich = sub('class="aholder" title="', '<td>TITEL', bereich)
-        bereich = sub('<span class="add-info ', '<td>INFO', bereich)
-        bereich = sub('">TIPP</span>', '</td>', bereich)
-        bereich = sub('">LIVE</span>', '</td>', bereich)
-        bereich = sub('">HDTV</span>', '</td>', bereich)
-        bereich = sub('">NEU</span>', '</td>', bereich)
-        bereich = sub('">OMU</span>', '</td>', bereich)
-        bereich = sub('"></span>', '</td>', bereich)
-        bereich = sub('" data-src="', '</td><td>PIC', bereich)
-        bereich = sub('" alt="', '</td>', bereich)
-        bereich = sub('<span class="time">', '<td>TIME', bereich)
-        bereich = sub('</span>', '</td>', bereich)
-        bereich = sub('</strong>', '</td>', bereich)
-        bereich = sub('opener"><span>', '', bereich)
-        bereich = sub('<span>Play</td>', '', bereich)
-        bereich = sub('<span>', '<td>GENRE', bereich)
-        bereich = sub('<span class="logotype chl_bg_. c-', '<td>LOGO', bereich)
-        bereich = sub('">\n.*?<a href="', '</td>', bereich)
-        bereich = sub('<wbr/>', '', bereich)
         self.tventries = []
         self.tvlink = []
         self.tvtitel = []
         self.picurllist = []
-        a = findall('<td>(.*?)</td>', bereich)
         y = 0
         pictopoffset = 0
         picleftoffset = 0
@@ -2751,7 +2706,7 @@ class TVJetztView(tvGenreJetztProgrammView):
         else:
             self.titel = '22:00 im TV - Heute, ' + str(self.weekday) + ', ' + date
         self.setTitle(self.titel)
-        bereich = parseInfoTable2(output)
+        items, bereich = parseNow(output)
         nowhour = datetime.datetime.now().hour
         if self.jetzt == True or self.gleich == True or self.abends == True and nowhour == 20 or self.abends == True and nowhour == 21 or self.nachts == True and nowhour == 22:
             self.progress = True
@@ -2759,7 +2714,6 @@ class TVJetztView(tvGenreJetztProgrammView):
             nowsec = int(nowhour) * 3600 + int(nowminute) * 60
         else:
             self.progress = False
-        a = findall('<td>(.*?)</td>', bereich)
         y = 0
         offset = 7
         pictopoffset = 0
@@ -2774,131 +2728,108 @@ class TVJetztView(tvGenreJetztProgrammView):
         if self.fontlarge == True:
             scaleoffset = 10
 #20:15#################################################################20:15########################
-        for x in a:
-            if y == 0:
-                x = sub('LOGO', '', x)
-                service = x
-                sref = self.service_db.lookup(service)
-                if sref == 'nope':
-                    self.filter = True
-                else:
-                    self.filter = False
-                    res_sref = []
-                    res_sref.append(service)
-                    res_sref.append(sref)
-                    self.sref.append(res_sref)
-                    res = [x]
-
-                    if self.backcolor == True:
-                        res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-                    if self.picon == True:
-                        picon = self.findPicon(sref)
-                        if picon is not None:
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 1), size=(100, 60), png=LoadPixmap(picon)))
-                        else:
-                            res.append(MultiContentEntryText(pos=(0, 1), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+        for LOGO, TIME, DATE, LINK, title, sparte, genre, rating in items:
+            print(LINK)
+            service = LOGO
+            sref = self.service_db.lookup(service)
+            if sref == 'nope':
+                self.filter = True
+            else:
+                self.filter = False
+                res_sref = []
+                res_sref.append(service)
+                res_sref.append(sref)
+                self.sref.append(res_sref)
+                res = [LOGO]
+                if self.backcolor == True:
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                if self.picon == True:
+                    picon = self.findPicon(sref)
+                    if picon is not None:
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 1), size=(100, 60), png=LoadPixmap(picon)))
                     else:
-                        png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % x
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
-            if y == 1:
-                if self.filter == False:
-                    x = sub('TIME', '', x)
-                    if self.progress == True:
-                        start = sub(' - ..:..', '', x)
-                        startparts = start.split(':')
-                        startsec = int(startparts[0]) * 3600 + int(startparts[1]) * 60
-                        end = sub('..:.. - ', '', x)
-                        endparts = end.split(':')
-                        endsec = int(endparts[0]) * 3600 + int(endparts[1]) * 60
-                        if endsec >= startsec:
-                            length = endsec - startsec
-                        else:
-                            length = 86400 - startsec + endsec
-                        if nowsec < startsec and endsec - nowsec > 43200:
-                            percent = 100
-                        elif nowsec < startsec and endsec > startsec:
-                            percent = 0
-                        elif endsec < startsec:
-                            if nowsec > startsec:
-                                passed = nowsec - startsec
-                                percent = passed * 100 / length
-                            elif nowsec < endsec:
-                                passed = 86400 - startsec + nowsec
-                                percent = passed * 100 / length
-                            elif nowsec - endsec < startsec - nowsec:
-                                percent = 100
-                            else:
-                                percent = 0
-                        elif nowsec > endsec and nowsec - endsec > 43200:
-                            percent = 0
-                        elif nowsec > endsec:
-                            percent = 100
-                        else:
+                        res.append(MultiContentEntryText(pos=(0, 1), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+                else:
+                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % LOGO
+                    if fileExists(png):
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
+
+                if self.progress == True:
+                    start = sub(' - ..:..', '', TIME)
+                    startparts = start.split(':')
+                    startsec = int(startparts[0]) * 3600 + int(startparts[1]) * 60
+                    end = sub('..:.. - ', '', TIME)
+                    endparts = end.split(':')
+                    endsec = int(endparts[0]) * 3600 + int(endparts[1]) * 60
+                    if endsec >= startsec:
+                        length = endsec - startsec
+                    else:
+                        length = 86400 - startsec + endsec
+                    if nowsec < startsec and endsec - nowsec > 43200:
+                        percent = 100
+                    elif nowsec < startsec and endsec > startsec:
+                        percent = 0
+                    elif endsec < startsec:
+                        if nowsec > startsec:
                             passed = nowsec - startsec
                             percent = passed * 100 / length
-                    res.append(MultiContentEntryText(pos=(80 + picleftoffset, 1 + pictopoffset), size=(200, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-                    start = sub(' - ..:..', '', x)
-                    hour = sub(':..', '', start)
-                    if int(nowhour) - int(hour) > 6:
-                        one_day = datetime.timedelta(days=1)
-                        date = self.date + one_day
-                    else:
-                        date = self.date
-                    timer = str(date) + ':::' + start + ':::' + str(sref)
-                    if timer in self.timer:
-                        self.rec = True
-                        png = ICONPATH + 'icon-small-recHD.png'
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(1014, pictopoffset), size=(39, 40), png=loadPNG(png)))
-            if y == 2:
-                if self.filter == False:
-                    x = sub('LINK', '', x)
-                    res_link = []
-                    res_link.append(service)
-                    res_link.append(x)
-                    self.tvlink.append(res_link)
-            if y == 3:
-                if self.filter == False:
-                    if search('TITEL', x) is not None:
-                        t = sub('TITEL', '', x)
-                        if self.showgenre == True and search('GENRE', x) is not None:
-                            x = t + " " + sub('GENRE', '', x)
+                        elif nowsec < endsec:
+                            passed = 86400 - startsec + nowsec
+                            percent = passed * 100 / length
+                        elif nowsec - endsec < startsec - nowsec:
+                            percent = 100
                         else:
-                            x = t
-                        res_titel = []
-                        res_titel.append(service)
-                        res_titel.append(t)
-                        self.tvtitel.append(res_titel)
-                        if self.progress == False:
-                            res.append(MultiContentEntryText(pos=(295 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 500 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                        else:
-                            res.append(MultiContentEntryProgress(pos=(295 + picleftoffset, 13 + pictopoffset), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
-                            res.append(MultiContentEntryText(pos=(385 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 490 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                            percent = 0
+                    elif nowsec > endsec and nowsec - endsec > 43200:
+                        percent = 0
+                    elif nowsec > endsec:
+                        percent = 100
                     else:
-                        y = 5
-                elif search('TITEL', x) is None:
-                    y = 5
-            if y == 5:
-                if search('SPARTE', x) is not None:
-                    if self.filter == False:
-                        x = sub('SPARTE', '', x)
-                        res.append(MultiContentEntryText(pos=(self.menuwidth - 190, 7 + pictopoffset), size=(182 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
+                        passed = nowsec - startsec
+                        percent = passed * 100 / length
+                res.append(MultiContentEntryText(pos=(80 + picleftoffset, 1 + pictopoffset), size=(200, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=TIME))
+                start = sub(' - ..:..', '', TIME)
+                hour = sub(':..', '', start)
+                if int(nowhour) - int(hour) > 6:
+                    one_day = datetime.timedelta(days=1)
+                    date = self.date + one_day
                 else:
-                    y = 6
-            if y == 6:
-                if self.filter == False:
-                    x = sub('RATING', '', x)
-                    if self.rec == True:
-                        self.rec = False
-                    elif x != 'rating small':
-                        png = '%s%sHD.png' % (ICONPATH, x)
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 170, pictopoffset), size=(40, 40), png=loadPNG(png)))
-                    self.tventries.append(res)
-            y += 1
-            if y == offset:
-                y = 0
+                    date = self.date
+                timer = str(date) + ':::' + start + ':::' + str(sref)
+                if timer in self.timer:
+                    self.rec = True
+                    png = ICONPATH + 'icon-small-recHD.png'
+                    if fileExists(png):
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(1014, pictopoffset), size=(39, 40), png=loadPNG(png)))
+                res_link = []
+                res_link.append(service)
+                res_link.append(LINK)
+                self.tvlink.append(res_link)
+                if title is not None:
+                    if self.showgenre == True and genre is not None:
+                        x = title + " " + genre
+                    else:
+                        x = title
+                    res_titel = []
+                    res_titel.append(service)
+                    res_titel.append(title)
+                    self.tvtitel.append(res_titel)
+                    if self.progress == False:
+                        res.append(MultiContentEntryText(pos=(295 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 500 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                    else:
+                        res.append(MultiContentEntryProgress(pos=(295 + picleftoffset, 13 + pictopoffset), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
+                        res.append(MultiContentEntryText(pos=(385 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 490 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+
+                if sparte is not None:
+                    res.append(MultiContentEntryText(pos=(self.menuwidth - 190, 7 + pictopoffset), size=(182 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=sparte))
+
+                if self.rec == True:
+                    self.rec = False
+                elif rating != 'rating small':
+                    png = '%s%sHD.png' % (ICONPATH, rating)
+                    if fileExists(png):
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 170, pictopoffset), size=(40, 40), png=loadPNG(png)))
+                self.tventries.append(res)
 
         order = eval(self.order)
         self.sref = sorted(self.sref, key=lambda x: order[x[0]])
