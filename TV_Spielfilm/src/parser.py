@@ -603,6 +603,7 @@ def parseTrailerUrl(output, videoformat='.mp4'):
     else:
         return None
 
+
 def buildTVTippsArray(sparte, output):
     if sparte == 'neu':
         startpos = output.find('id="c-sp-opener"><span>Spielfilm</span></a>')
@@ -675,10 +676,12 @@ def parseNow(output):
         entries.append((LOGO, TIME, DATE, LINK, title, sparte, genre, rating))
     return entries, output
 
+
 def testtvtipps(output):
     output = six.ensure_str(output)
     a = buildTVTippsArray("Spielfilm", output)
     print(a)
+
 
 def testtvnow(output):
     output = six.ensure_str(output)
@@ -705,13 +708,16 @@ def testtvnow(output):
         print((LOGO, LINK))
         #break
 
+
 def saveerr(output):
     print(output)
     reactor.stop()
 
+
 def savefile(output):
     open('tmp.html', 'wb').write(output)
     reactor.stop()
+
 
 def testnow2(output):
     output = six.ensure_str(output)
@@ -766,6 +772,7 @@ def test():
 #    reactor.run()
     output = open('tmp.html', 'rb').read()
     testtvtipps(output)
+
 
 if __name__ == '__main__':
     test()
