@@ -938,7 +938,7 @@ class tvBaseScreen(tvAllScreen):
                     titelfilter = TITLE
                     if GENRE is None:
                         res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                    infooffset = 140    
+                    infooffset = 140
                     for INFO in INFOS:
                         if self.rec == True:
                             self.rec = False
