@@ -529,7 +529,7 @@ def parsePrimeTimeTable(output, debug=None):
     for item in items:
         date = findall('<span>TV-Sendungen am (.*?)</span>', item, RES)
         if len(date) == 1:
-            entries.append((date[0], None,None, None, None, None,None,None))
+            entries.append((date[0], None, None, None, None, None, None, None))
         else:
             try:
                 LOGO = findall('<img src="https://a2.tvspielfilm.de/images/tv/sender/mini/(.*?).png.*?', item, RES)[0]
@@ -548,7 +548,7 @@ def parsePrimeTimeTable(output, debug=None):
                     RATING = findall('class="editorial-(.*?)"', item, RES)[0]
                 except:
                     RATING = None
-                entries.append((None, START,TITLE, GENRE, INFOS, LOGO,LINK,RATING))
+                entries.append((None, START, TITLE, GENRE, INFOS, LOGO, LINK, RATING))
             except:
                 pass
     if debug != None:
@@ -668,7 +668,7 @@ def savefile(output):
 
 def testparseNow(output):
     output = six.ensure_str(output)
-    a,b = parseNow(output)
+    a, b = parseNow(output)
     print(a)
 
 

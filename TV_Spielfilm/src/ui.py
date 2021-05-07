@@ -876,7 +876,7 @@ class tvBaseScreen(tvAllScreen):
 
 # TODO: self.showgenre
 
-        for DATUM, START,TITLE, GENRE, INFOS, LOGO,LINK,RATING in items:
+        for DATUM, START, TITLE, GENRE, INFOS, LOGO, LINK, RATING in items:
             if DATUM is not None:
                 self.datum_string = DATUM
                 res_datum = [DATUM]
@@ -1971,7 +1971,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 
 # TODO: self.showgenre
 
-        for DATUM, START,TITLE, GENRE, INFOS, LOGO,LINK,RATING in items:
+        for DATUM, START, TITLE, GENRE, INFOS, LOGO, LINK, RATING in items:
             if DATUM is not None:
                 self.datum_string = DATUM
                 res_datum = [DATUM]
