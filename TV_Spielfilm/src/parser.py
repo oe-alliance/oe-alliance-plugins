@@ -628,7 +628,7 @@ def parseNow(output):
         LOGO, TIME, DATE = b[0]
         title = findall(';" title="(.*?)"', item, RES)[0]
         try:
-            genre = findall('<td class="col-4">\n\\s+<span>(.*?)</span>', item, RES)
+            genre = findall('<td class="col-4">\n\\s+<span>(.*?)</span>', item, RES)[0]
         except:
             genre = None
         try:
