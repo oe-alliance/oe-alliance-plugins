@@ -46,7 +46,7 @@ import time
 import six
 from os import path
 from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin, printStackTrace, channelDB, readSkin, DESKTOP_WIDTH, DESKTOP_HEIGHT, skinFactor
-from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parseInfoTable, parsePrimeTimeTable, parseTrailerUrl, buildTVTippsArray, parseNow
+from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parsePrimeTimeTable, parseTrailerUrl, buildTVTippsArray, parseNow
 
 try:
     from cookielib import MozillaCookieJar
@@ -863,8 +863,7 @@ class tvBaseScreen(tvAllScreen):
                 self.setTitle('')
                 self.setTitle(title.group(1))
 
-        bereich = parsePrimeTimeTable(output, self.showgenre)
-        a = findall('<td>(.*?)</td>', bereich)
+        items, bereich = parsePrimeTimeTable(output)
         y = 0
         offset = 10
         mh = 40
@@ -874,140 +873,88 @@ class tvBaseScreen(tvAllScreen):
             mh = 60
             pictopoffset = 10
             picleftoffset = 40
-        for x in a:
-            if y == 0:
-                res = [x]
+
+# TODO: self.showgenre
+
+        for DATUM, START ,TITLE, GENRE, INFOS, LOGO ,LINK ,RATING in items:
+            if DATUM is not None:
+                self.datum_string = DATUM
+                res_datum = [DATUM]
                 if self.backcolor == True:
-                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=DATUM))
+                self.searchref.append('na')
+                self.searchlink.append('na')
+                self.searchentries.append(res_datum)
+                self.filter = True
+                continue
 
-                if search('DATUM', x) is not None:
-                    if self.datum == True:
-                        try:
-                            del self.searchref[-1]
-                            del self.searchlink[-1]
-                            del self.searchentries[-1]
-                        except IndexError:
-                            pass
+            res = [LOGO]
+            if self.backcolor == True:
+                res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
 
-                    else:
-                        self.datum = True
-                    x = sub('DATUM', '', x)
-                    self.datum_string = x
-                    res_datum = [x]
-                    if self.backcolor == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    self.searchref.append('na')
-                    self.searchlink.append('na')
-                    self.searchentries.append(res_datum)
+            start = START
+            res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=START))
+
+            if LOGO is not None:
+                service = LOGO
+                sref = self.service_db.lookup(service)
+                if sref == 'nope':
                     self.filter = True
-                    y = 9
                 else:
-                    y = 1
-            if y == 1:
-                x = sub('TIME', '', x)
-                start = x
-                res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-            if y == 2:
-                if search('LOGO', x) is not None:
-                    logo = search('LOGO(.*?)">', x)
-                    if logo is not None:
-                        x = logo.group(1)
-                    service = x
-                    sref = self.service_db.lookup(service)
-                    if sref == 'nope':
-                        self.filter = True
+                    self.filter = False
+                    self.searchref.append(sref)
+                    if self.picon == True:
+                        picon = self.findPicon(sref)
+                        if picon is not None:
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
+                        else:
+                            res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
                     else:
-                        self.filter = False
-                        self.searchref.append(sref)
-                        if self.picon == True:
-                            picon = self.findPicon(sref)
-                            if picon is not None:
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
-                            else:
-                                res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
-                        else:
-                            png = '%slogos/%sHD.png' % (PICPATH, x)
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
-                        start = sub(' - ..:..', '', start)
-                        daynow = sub('....-..-', '', str(self.date))
-                        day = search(', ([0-9]+). ', self.datum_string)
-                        if day is not None:
-                            day = day.group(1)
-                        else:
-                            day = daynow
-                        if int(day) >= int(daynow) - 1:
-                            date = str(self.date) + 'FIN'
-                        else:
-                            four_weeks = datetime.timedelta(weeks=4)
-                            date = str(self.date + four_weeks) + 'FIN'
-                        date = sub('[0-9][0-9]FIN', day, date)
-                        timer = date + ':::' + start + ':::' + str(sref)
-                        if timer in self.timer:
-                            self.rec = True
-                            rp = self.getRecPNG()
-                            if rp != None:
-                                res.append(rp)
-            if y == 3:
-                if self.filter == False:
-                    x = sub('LINK', '', x)
-                    self.searchlink.append(x)
-            if y == 4:
-                if self.filter == False:
-                    x = sub('TITEL', '', x)
-                    titelfilter = x
-            if y == 5:
-                if self.filter == False:
-                    if search('GENRE', x) is None:
+                        png = '%slogos/%sHD.png' % (PICPATH, LOGO)
+                        if fileExists(png):
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
+                    start = sub(' - ..:..', '', start)
+                    daynow = sub('....-..-', '', str(self.date))
+                    day = search(', ([0-9]+). ', self.datum_string)
+                    if day is not None:
+                        day = day.group(1)
+                    else:
+                        day = daynow
+                    if int(day) >= int(daynow) - 1:
+                        date = str(self.date) + 'FIN'
+                    else:
+                        four_weeks = datetime.timedelta(weeks=4)
+                        date = str(self.date + four_weeks) + 'FIN'
+                    date = sub('[0-9][0-9]FIN', day, date)
+                    timer = date + ':::' + start + ':::' + str(sref)
+                    if timer in self.timer:
+                        self.rec = True
+                        rp = self.getRecPNG()
+                        if rp != None:
+                            res.append(rp)
+
+                    self.searchlink.append(LINK)
+                    titelfilter = TITLE
+                    if GENRE is None:
                         res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                        y = 6
-            if y == 6:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
+                    infooffset = 140    
+                    for INFO in INFOS:
                         if self.rec == True:
                             self.rec = False
                         else:
-                            x = sub('INFO', '', x)
-                            rp = self.getPNG(x, self.menuwidth - 140)
+                            rp = self.getPNG(INFO, self.menuwidth - infooffset)
                             if rp != None:
                                 res.append(rp)
-                else:
-                    y = 9
-            if y == 7:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 210)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 8:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        rp = self.getPNG(x, self.menuwidth - 280)
-                        if rp != None:
-                            res.append(rp)
-                else:
-                    y = 9
-            if y == 9:
-                if search('INFO', x) is not None:
-                    y = 7
-                elif self.filter == False:
+                            infooffset = infooffset + 70
                     self.datum = False
-                    if search('RATING', x) is not None:
-                        x = sub('RATING', '', x)
-                        if x != 'rating small':
-                            png = '%s%sHD.png' % (ICONPATH, x)
+                    if RATING is not None:
+                        if RATING != 'rating small':
+                            png = '%s%sHD.png' % (ICONPATH, RATING)
                             if fileExists(png):
                                 res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, pictopoffset), size=(40, 40), png=loadPNG(png)))
                     res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
                     self.searchentries.append(res)
-            y += 1
-            if y == offset:
-                y = 0
 
         self['searchmenu'].l.setItemHeight(mh)
         self['searchmenu'].l.setList(self.searchentries)
@@ -1166,7 +1113,7 @@ class TVTippsView(tvBaseScreen):
         self['pic4'].hide()
         self['pic5'].hide()
         self['pic6'].hide()
-        a = buildTVTippsArray(self.sparte, output)
+        items = buildTVTippsArray(self.sparte, output)
         date = str(self.date.strftime('%d.%m.%Y'))
         self.titel = 'TV-Tipps - ' + str(self.sparte) + ' - ' + str(self.weekday) + ', ' + date
         if self.sparte == 'neu':
@@ -1182,54 +1129,41 @@ class TVTippsView(tvBaseScreen):
         if self.picon == True:
             pictopoffset = 11
             picleftoffset = 41
-        sref = None
-        for x in a:
-            if search('LINK', x) is not None:
-                icount = 0
-                if sref != None and self.new == True:
-                    self.sref.append(sref)
-                    self.picurllist.append(picfilter)
-                    self.tvlink.append(linkfilter)
-                    self.tvtitel.append(titelfilter)
-                    self.tventries.append(res)
-                res = [x]
-                self.new = False
+        for LINK, PIC, TIME, INFOS, NAME, GENRE, LOGO in items:
+            sref = None
+            self.new = False
+            if LINK is not None:
+                res = [LINK]
                 if self.backcolor == True:
                     res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, 90), font=-1, backcolor_sel=self.back_color, text=''))
-                x = sub('LINK', '', x)
-                linkfilter = x
-            if search('PIC', x) is not None:
-                x = sub('PIC', '', x)
-                picfilter = x
-            if search('TIME', x) is not None:
-                x = sub('TIME', '', x)
-                start = x
-                res.append(MultiContentEntryText(pos=(74 + picleftoffset, 25), size=(75, 40), font=-1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-            if search('INFO', x) is not None:
-                icount = icount + 1
-                x = sub('INFO', '', x)
-                if search('neu|new', x) is not None or self.sparte != "neu":
+                linkfilter = LINK
+            if PIC is not None:
+                picfilter = PIC
+            if TIME is not None:
+                start = TIME
+                res.append(MultiContentEntryText(pos=(74 + picleftoffset, 25), size=(75, 40), font=-1, backcolor=12255304, color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=TIME))
+            icount = 0
+            for INFO in INFOS:
+                if search('neu|new', INFO) is not None or self.sparte != "neu":
                     self.new = True
-                png = '%s%sHD.png' % (ICONPATH, x)
+                png = '%s%sHD.png' % (ICONPATH, INFO)
                 if fileExists(png):
                     if icount == 1:
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 90, 20), size=(60, 20), png=loadPNG(png)))
                     else:
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 90, 50), size=(60, 20), png=loadPNG(png)))
-            if search('NAME', x) is not None:
-                x = sub('NAME', '', x)
-                titelfilter = x
-                res.append(MultiContentEntryText(pos=(162 + picleftoffset, 10), size=(self.menuwidth - 330 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-            if search('GENRE', x) is not None:
-                x = sub('GENRE', '', x)
-                res.append(MultiContentEntryText(pos=(162 + picleftoffset, 40), size=(self.menuwidth - 330 - picleftoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+                    icount = icount + 1
+            if NAME is not None:
+                titelfilter = NAME
+                res.append(MultiContentEntryText(pos=(162 + picleftoffset, 10), size=(self.menuwidth - 330 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=NAME))
+            if GENRE is not None:
+                res.append(MultiContentEntryText(pos=(162 + picleftoffset, 40), size=(self.menuwidth - 330 - picleftoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT, text=GENRE))
                 if self.sparte == 'Spielfilm':
                     png = ICONPATH + 'rating small1HD.png'
                     if fileExists(png):
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 160, 25), size=(40, 40), png=loadPNG(png)))
-            if search('LOGO', x) is not None:
-                x = sub('LOGO', '', x)
-                service = x
+            if LOGO is not None:
+                service = LOGO
                 sref = self.service_db.lookup(service)
                 if self.picon == True:
                     picon = self.findPicon(sref)
@@ -1238,7 +1172,7 @@ class TVTippsView(tvBaseScreen):
                     else:
                         res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
                 else:
-                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % x
+                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % LOGO
                     if fileExists(png):
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 12), size=(59, 36), png=loadPNG(png)))
                 if sref == 'nope':
@@ -1255,13 +1189,12 @@ class TVTippsView(tvBaseScreen):
                         png = ICONPATH + 'icon-recHD.png'
                         if fileExists(png):
                             res.append(MultiContentEntryPixmapAlphaTest(pos=(89 + picleftoffset, 52), size=(60, 20), png=loadPNG(png)))
-
-        if sref != None and self.new == True:
-            self.sref.append(sref)
-            self.picurllist.append(picfilter)
-            self.tvlink.append(linkfilter)
-            self.tvtitel.append(titelfilter)
-            self.tventries.append(res)
+            if sref != None and self.new == True:
+                self.sref.append(sref)
+                self.picurllist.append(picfilter)
+                self.tvlink.append(linkfilter)
+                self.tvtitel.append(titelfilter)
+                self.tventries.append(res)
 
         self['menu'].l.setItemHeight(90)
         self['menu'].l.setList(self.tventries)
@@ -2017,16 +1950,15 @@ class TVGenreView(tvGenreJetztProgrammView):
         else:
             self.showgenre = True
         self.makeTVTimer = eTimer()
-        self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
+        self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVGenreView))
         self.makeTVTimer.start(500, True)
         return
 
-    def makeTVView(self, output):
+    def makeTVGenreView(self, output):
         output = six.ensure_str(output)
         self.titel = '%s - Sendungen der naechsten 14 Tage' % self.genre
         self.setTitle(self.titel)
-        bereich = parsePrimeTimeTable(output, self.showgenre)
-        a = findall('<td>(.*?)</td>', bereich)
+        items, bereich = parsePrimeTimeTable(output)
         y = 0
         offset = 10
         pictopoffset = 0
@@ -2036,144 +1968,91 @@ class TVGenreView(tvGenreJetztProgrammView):
             mh = 62
             pictopoffset = 11
             picleftoffset = 40
-        for x in a:
-            if y == 0:
-                res = [x]
+
+# TODO: self.showgenre
+
+        for DATUM, START ,TITLE, GENRE, INFOS, LOGO ,LINK ,RATING in items:
+            if DATUM is not None:
+                self.datum_string = DATUM
+                res_datum = [DATUM]
                 if self.backcolor == True:
-                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+                res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=DATUM))
+                self.sref.append('na')
+                self.tvlink.append('na')
+                self.tvtitel.append('na')
+                self.tventries.append(res_datum)
+                self.filter = True
+                continue
 
-                if search('DATUM', x) is not None:
-                    if self.datum == True:
-                        try:
-                            del self.sref[-1]
-                            del self.tvlink[-1]
-                            del self.tvtitel[-1]
-                            del self.tventries[-1]
-                            self.datum = True
-                        except IndexError:
-                            pass
+            res = [LOGO]
+            if self.backcolor == True:
+                res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
 
-                    else:
-                        self.datum = True
-                    x = sub('DATUM', '', x)
-                    self.datum_string = x
-                    res_datum = [x]
-                    if self.backcolor == True:
-                        res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
-                    res_datum.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
-                    self.sref.append('na')
-                    self.tvlink.append('na')
-                    self.tvtitel.append('na')
-                    self.tventries.append(res_datum)
+            start = START
+            res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7 + pictopoffset), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=START))
+            if LOGO is not None:
+                service = LOGO
+                sref = self.service_db.lookup(service)
+                if sref == 'nope':
                     self.filter = True
-                    y = 9
                 else:
-                    y = 1
-            if y == 1:
-                x = sub('TIME', '', x)
-                start = x
-                res.append(MultiContentEntryText(pos=(60 + picleftoffset, 7 + pictopoffset), size=(175, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-            if y == 2:
-                if search('LOGO', x) is not None:
-                    logo = search('LOGO(.*?)">', x)
-                    if logo is not None:
-                        x = logo.group(1)
-                    service = x
-                    sref = self.service_db.lookup(service)
-                    if sref == 'nope':
-                        self.filter = True
+                    self.filter = False
+                    self.sref.append(sref)
+                    if self.picon == True:
+                        picon = self.findPicon(sref)
+                        if picon is not None:
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 1), size=(100, 60), png=LoadPixmap(picon)))
+                        else:
+                            res.append(MultiContentEntryText(pos=(0, 1), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
                     else:
-                        self.filter = False
-                        self.sref.append(sref)
-                        if self.picon == True:
-                            picon = self.findPicon(sref)
-                            if picon is not None:
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 1), size=(100, 60), png=LoadPixmap(picon)))
-                            else:
-                                res.append(MultiContentEntryText(pos=(0, 1), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
-                        else:
-                            png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % x
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
-                        start = sub(' - ..:..', '', start)
-                        daynow = sub('....-..-', '', str(self.date))
-                        day = search(', ([0-9]+). ', self.datum_string)
-                        if day is not None:
-                            day = day.group(1)
-                        else:
-                            day = daynow
-                        if int(day) >= int(daynow) - 1:
-                            date = str(self.date) + 'FIN'
-                        else:
-                            four_weeks = datetime.timedelta(weeks=4)
-                            date = str(self.date + four_weeks) + 'FIN'
-                        date = sub('[0-9][0-9]FIN', day, date)
-                        timer = date + ':::' + start + ':::' + str(sref)
-                        if timer in self.timer:
-                            self.rec = True
-                            png = ICONPATH + 'icon-recHD.png'
-                            if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 130, 21 + picontopoffset), size=(60, 20), png=loadPNG(png)))
-            if y == 3:
-                if self.filter == False:
-                    x = sub('LINK', '', x)
-                    self.tvlink.append(x)
-            if y == 4:
-                if self.filter == False:
-                    x = sub('TITEL', '', x)
-                    self.tvtitel.append(x)
-                    titelfilter = x
-            if y == 5:
-                if self.filter == False:
-                    if search('GENRE', x) is None:
+                        png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % LOGO
+                        if fileExists(png):
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
+                    start = sub(' - ..:..', '', start)
+                    daynow = sub('....-..-', '', str(self.date))
+                    day = search(', ([0-9]+). ', self.datum_string)
+                    if day is not None:
+                        day = day.group(1)
+                    else:
+                        day = daynow
+                    if int(day) >= int(daynow) - 1:
+                        date = str(self.date) + 'FIN'
+                    else:
+                        four_weeks = datetime.timedelta(weeks=4)
+                        date = str(self.date + four_weeks) + 'FIN'
+                    date = sub('[0-9][0-9]FIN', day, date)
+                    timer = date + ':::' + start + ':::' + str(sref)
+                    if timer in self.timer:
+                        self.rec = True
+                        png = ICONPATH + 'icon-recHD.png'
+                        if fileExists(png):
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 130, 21 + pictopoffset), size=(60, 20), png=loadPNG(png)))
+
+                    self.tvlink.append(LINK)
+                    self.tvtitel.append(TITLE)
+                    titelfilter = TITLE
+                    if GENRE is None:
                         res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
-                        y = 6
-            if y == 6:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
+
+                    infooffset = 130
+                    for INFO in INFOS:
                         if self.rec == True:
                             self.rec = False
                         else:
-                            x = sub('INFO', '', x)
-                            png = '%s%sHD.png' % (ICONPATH, x)
+                            png = '%s%sHD.png' % (ICONPATH, INFO)
                             if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 130, 10 + pictopoffset), size=(60, 20), png=loadPNG(png)))
-                else:
-                    y = 9
-            if y == 7:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        png = '%s%sHD.png' % (ICONPATH, x)
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 210, 10 + pictopoffset), size=(60, 20), png=loadPNG(png)))
-                else:
-                    y = 9
-            if y == 8:
-                if search('INFO', x) is not None:
-                    if self.filter == False:
-                        x = sub('INFO', '', x)
-                        png = '%s%sHD.png' % (ICONPATH, x)
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 290, 10 + pictopoffset), size=(60, 20), png=loadPNG(png)))
-                else:
-                    y = 9
-            if y == 9:
-                if search('INFO', x) is not None:
-                    y = 7
-                elif self.filter == False:
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - infooffset, 10 + pictopoffset), size=(60, 20), png=loadPNG(png)))
+                            infooffset = infooffset + 80
+
                     self.datum = False
-                    if search('RATING', x) is not None:
-                        x = sub('RATING', '', x)
-                        if x != 'rating small':
-                            png = '%s%sHD.png' % (ICONPATH, x)
+                    if RATING is not None:
+                        if RATING != 'rating small':
+                            png = '%s%sHD.png' % (ICONPATH, RATING)
                             if fileExists(png):
                                 res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 65, pictopoffset), size=(40, 40), png=loadPNG(png)))
                     res.append(MultiContentEntryText(pos=(235 + picleftoffset, 7 + pictopoffset), size=(715 - picleftoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
                     self.tventries.append(res)
-            y += 1
-            if y == offset:
-                y = 0
 
         self['menu'].l.setItemHeight(mh)
         self['menu'].l.setList(self.tventries)
@@ -2184,7 +2063,7 @@ class TVGenreView(tvGenreJetztProgrammView):
         if self.genrecount <= self.maxgenrecount and search('class="pagination__link pagination__link--next" >', bereich) is not None and self.load == True:
             nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
             if nextpage is not None:
-                self.downloadFull(nextpage.group(1), self.makeTVView)
+                self.downloadFull(nextpage.group(1), self.makeTVGenreView)
             else:
                 self.load = False
                 self.ready = True
@@ -2506,7 +2385,7 @@ class TVGenreView(tvGenreJetztProgrammView):
         self.tvtitel = []
         self.sref = []
         self.genrecount = 0
-        self.makeTVTimer.callback.append(self.downloadFull(self.link, self.makeTVView))
+        self.makeTVTimer.callback.append(self.downloadFull(self.link, self.makeTVGenreView))
 
     def showProgrammPage(self):
         self['label'].setText('OK = Sendung, Stop = YouTube Trailer')
@@ -2681,30 +2560,31 @@ class TVJetztView(tvGenreJetztProgrammView):
         self.makeTVTimer = eTimer()
         if search('/sendungen/jetzt.html', link) is not None:
             self.jetzt = True
-            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVJetztView))
         elif search('time=shortly', link) is not None:
             self.gleich = True
-            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVJetztView))
         elif search('/sendungen/abends.html', link) is not None:
             self.abends = True
-            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVJetztView))
         elif search('/sendungen/fernsehprogramm-nachts.html', link) is not None:
             self.nachts = True
-            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVJetztView))
         self.makeTVTimer.start(500, True)
         return
 
-    def makeTVView(self, output):
+    def makeTVJetztView(self, output):
         output = six.ensure_str(output)
         date = str(self.date.strftime('%d.%m.%Y'))
         if self.jetzt == True:
-            self.titel = 'Jetzt im TV - Heute, ' + str(self.weekday) + ', ' + date
+            self.titel = 'Jetzt'
         elif self.gleich == True:
-            self.titel = 'Gleich im TV - Heute, ' + str(self.weekday) + ', ' + date
+            self.titel = 'Gleich'
         elif self.abends:
-            self.titel = '20:15 im TV - Heute, ' + str(self.weekday) + ', ' + date
+            self.titel = '20:15'
         else:
-            self.titel = '22:00 im TV - Heute, ' + str(self.weekday) + ', ' + date
+            self.titel = '22:00'
+        self.titel = self.titel + ' im TV - Heute, ' + str(self.weekday) + ', ' + date
         self.setTitle(self.titel)
         items, bereich = parseNow(output)
         nowhour = datetime.datetime.now().hour
@@ -2728,8 +2608,7 @@ class TVJetztView(tvGenreJetztProgrammView):
         if self.fontlarge == True:
             scaleoffset = 10
 #20:15#################################################################20:15########################
-        for LOGO, TIME, DATE, LINK, title, sparte, genre, rating in items:
-            print(LINK)
+        for LOGO, TIME, LINK, title, sparte, genre, rating in items:
             service = LOGO
             sref = self.service_db.lookup(service)
             if sref == 'nope':
@@ -2841,7 +2720,7 @@ class TVJetztView(tvGenreJetztProgrammView):
         if self.jetzt == True:
             nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
             if nextpage is not None:
-                self.downloadFull(nextpage.group(1), self.makeTVView)
+                self.downloadFull(nextpage.group(1), self.makeTVJetztView)
             else:
                 self['menu'].moveToIndex(self.index)
                 self.ready = True
@@ -2852,7 +2731,7 @@ class TVJetztView(tvGenreJetztProgrammView):
             if search('<a href=".*?tvspielfilm.de/tv-programm/sendungen/.*?page=[2-9]', bereich) is not None:
                 nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
                 if nextpage is not None:
-                    self.downloadFull(nextpage.group(1), self.makeTVView)
+                    self.downloadFull(nextpage.group(1), self.makeTVJetztView)
             else:
                 self['menu'].moveToIndex(self.index)
                 self.ready = True
@@ -2862,7 +2741,7 @@ class TVJetztView(tvGenreJetztProgrammView):
         elif search('<a href=".*?tvspielfilm.de/tv-programm/sendungen/.*?page=[2-9]', bereich) is not None:
             nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
             if nextpage is not None:
-                self.downloadFull(nextpage.group(1), self.makeTVView)
+                self.downloadFull(nextpage.group(1), self.makeTVJetztView)
         else:
             self['menu'].moveToIndex(self.index)
             self.ready = True
@@ -2988,7 +2867,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                 self['label'].setText('Bitte warten...')
                 self['label'].startBlinking()
                 link = self.baseurl + '/tv-programm/sendungen/?page=1&order=time&time=shortly'
-                self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
+                self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVJetztView))
             else:
                 self.jetzt = True
                 self.gleich = False
@@ -2997,7 +2876,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                 self['label'].setText('Bitte warten...')
                 self['label'].startBlinking()
                 link = self.baseurl + '/tv-programm/sendungen/jetzt.html'
-                self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
+                self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVJetztView))
         return
 
     def red(self):
@@ -3216,16 +3095,16 @@ class TVJetztView(tvGenreJetztProgrammView):
         self.sref = []
         if self.jetzt == True:
             link = self.baseurl + '/tv-programm/sendungen/jetzt.html'
-            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVJetztView))
         elif self.gleich == True:
             link = self.baseurl + '/tv-programm/sendungen/?page=1&order=time&time=shortly'
-            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVJetztView))
         elif self.abends == True:
             link = self.baseurl + '/tv-programm/sendungen/abends.html'
-            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVJetztView))
         else:
             link = self.baseurl + '/tv-programm/sendungen/fernsehprogramm-nachts.html'
-            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVJetztView))
 
     def showProgrammPage(self):
         self['label'].setText('Text = Sender, Info = Jetzt im TV/Gleich im TV')
@@ -3415,7 +3294,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
             self.link = nextday
         self.makeTVTimer = eTimer()
         if self.tagestipp == False:
-            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVProgrammView))
         else:
             self.current = 'postview'
             self['label'].stopBlinking()
@@ -3424,14 +3303,14 @@ class TVProgrammView(tvGenreJetztProgrammView):
         self.makeTVTimer.start(500, True)
         return
 
-    def makeTVView(self, string):
+    def makeTVProgrammView(self, string):
         output = open(self.localhtml, 'r').read()
         output = six.ensure_str(output)
         titel = search('<title>(.*?)von', output)
         date = str(self.date.strftime('%d.%m.%Y'))
         self.titel = str(titel.group(1)) + ' - ' + str(self.weekday) + ', ' + date
         self.setTitle(self.titel)
-        bereich = parseInfoTable(output)
+        items, bereich = parseNow(output)
         today = datetime.date.today()
         one_day = datetime.timedelta(days=1)
         yesterday = today - one_day
@@ -3443,7 +3322,6 @@ class TVProgrammView(tvGenreJetztProgrammView):
         else:
             self.progress = False
             self.percent = False
-        a = findall('<td>(.*?)</td>', bereich)
         y = 0
         offset = 7
         pictopoffset = 0
@@ -3458,118 +3336,103 @@ class TVProgrammView(tvGenreJetztProgrammView):
         if self.fontlarge == True:
             scaleoffset = 10
 #TVjetzt####
-        for x in a:
-            if y == 0:
-                x = sub('LOGO', '', x)
-                res = [x]
-                if self.backcolor == True:
-                    res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
+        for LOGO, TIME, LINK, TITEL, SPARTE, GENRE, RATING in items:
+            res = [LOGO]
+            if self.backcolor == True:
+                res.append(MultiContentEntryText(pos=(0, 0), size=(self.menuwidth, mh), font=-1, backcolor_sel=self.back_color, text=''))
 
-                if self.picon == True:
-                    if fileExists(self.piconname):
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 1), size=(100, 60), png=LoadPixmap(self.piconname)))
+            if self.picon == True:
+                if fileExists(self.piconname):
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 1), size=(100, 60), png=LoadPixmap(self.piconname)))
+            else:
+                png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % LOGO
+                if fileExists(png):
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
+
+            if self.progress == True:
+                start = sub(' - ..:..', '', TIME)
+                startparts = start.split(':')
+                startsec = int(startparts[0]) * 3600 + int(startparts[1]) * 60
+                end = sub('..:.. - ', '', TIME)
+                endparts = end.split(':')
+                endsec = int(endparts[0]) * 3600 + int(endparts[1]) * 60
+                if endsec >= startsec:
+                    length = endsec - startsec
                 else:
-                    png = '/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/logos/%sHD.png' % x
-                    if fileExists(png):
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(59, 36), png=loadPNG(png)))
-            if y == 1:
-                x = sub('TIME', '', x)
-                if self.progress == True:
-                    start = sub(' - ..:..', '', x)
-                    startparts = start.split(':')
-                    startsec = int(startparts[0]) * 3600 + int(startparts[1]) * 60
-                    end = sub('..:.. - ', '', x)
-                    endparts = end.split(':')
-                    endsec = int(endparts[0]) * 3600 + int(endparts[1]) * 60
-                    if endsec >= startsec:
-                        length = endsec - startsec
-                    else:
-                        length = 86400 - startsec + endsec
-                    if nowsec < startsec and endsec > startsec:
-                        percent = 0
-                        self.percent = False
-                    elif endsec < startsec:
-                        if nowsec > startsec:
-                            passed = nowsec - startsec
-                            percent = passed * 100 / length
-                            self.percent = True
-                        elif nowsec < endsec:
-                            passed = 86400 - startsec + nowsec
-                            percent = passed * 100 / length
-                            self.percent = True
-                        elif nowsec - endsec < startsec - nowsec:
-                            percent = 100
-                            self.percent = False
-                        else:
-                            percent = 0
-                            self.percent = False
-                    elif nowsec > endsec:
-                        percent = 100
-                        self.percent = False
-                    else:
+                    length = 86400 - startsec + endsec
+                if nowsec < startsec and endsec > startsec:
+                    percent = 0
+                    self.percent = False
+                elif endsec < startsec:
+                    if nowsec > startsec:
                         passed = nowsec - startsec
                         percent = passed * 100 / length
                         self.percent = True
-                if search('20:15 -', x) is not None or self.percent == True:
-                    self.primetime = True
+                    elif nowsec < endsec:
+                        passed = 86400 - startsec + nowsec
+                        percent = passed * 100 / length
+                        self.percent = True
+                    elif nowsec - endsec < startsec - nowsec:
+                        percent = 100
+                        self.percent = False
+                    else:
+                        percent = 0
+                        self.percent = False
+                elif nowsec > endsec:
+                    percent = 100
+                    self.percent = False
                 else:
-                    self.primetime = False
-                res.append(MultiContentEntryText(pos=(80 + picleftoffset, 1 + pictopoffset), size=(195, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
-                start = sub(' - ..:..', '', x)
-                hour = sub(':..', '', start)
-                if int(hour) < 5 and len(self.tventries) > 6 or int(hour) < 5 and self.eventview == True:
-                    one_day = datetime.timedelta(days=1)
-                    date = self.date + one_day
+                    passed = nowsec - startsec
+                    percent = passed * 100 / length
+                    self.percent = True
+            if search('20:15 -', TIME) is not None or self.percent == True:
+                self.primetime = True
+            else:
+                self.primetime = False
+            res.append(MultiContentEntryText(pos=(80 + picleftoffset, 1 + pictopoffset), size=(195, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER, text=TIME))
+            start = sub(' - ..:..', '', TIME)
+            hour = sub(':..', '', start)
+            if int(hour) < 5 and len(self.tventries) > 6 or int(hour) < 5 and self.eventview == True:
+                one_day = datetime.timedelta(days=1)
+                date = self.date + one_day
+            else:
+                date = self.date
+            timer = str(date) + ':::' + start + ':::' + str(self.sref)
+            if timer in self.timer:
+                self.rec = True
+                png = ICONPATH + 'icon-small-recHD.png'
+                if fileExists(png):
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(1014, pictopoffset), size=(39, 40), png=loadPNG(png)))
+            self.tvlink.append(LINK)
+
+            t = TITEL
+            if self.showgenre and GENRE is not None:
+                x = t + " " + GENRE
+            else:
+                x = t
+            self.tvtitel.append(t)
+            if self.progress == False or self.percent == False:
+                res.append(MultiContentEntryText(pos=(295 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 480 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+            else:
+                res.append(MultiContentEntryProgress(pos=(295 + picleftoffset, 13 + pictopoffset), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
+                res.append(MultiContentEntryText(pos=(385 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 480 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
+
+            if SPARTE is not None:
+                if self.primetime == False:
+                    res.append(MultiContentEntryText(pos=(self.menuwidth - 190 - scaleoffset, 7 + pictopoffset), size=(182 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=SPARTE))
                 else:
-                    date = self.date
-                timer = str(date) + ':::' + start + ':::' + str(self.sref)
-                if timer in self.timer:
-                    self.rec = True
-                    png = ICONPATH + 'icon-small-recHD.png'
+                    res.append(MultiContentEntryText(pos=(self.menuwidth - 190 - scaleoffset, 7 + pictopoffset), size=(182 + scaleoffset, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=SPARTE))
+
+            if RATING is not None:
+                if self.rec == True:
+                    self.rec = False
+                elif RATING != 'rating small':
+                    png = '%s%sHD.png' % (ICONPATH, RATING)
                     if fileExists(png):
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(1014, pictopoffset), size=(39, 40), png=loadPNG(png)))
-            if y == 2:
-                x = sub('LINK', '', x)
-                self.tvlink.append(x)
-            if y == 3:
-                if search('TITEL', x) is not None:
-                    t = sub('TITEL', '', x)
-                    if self.showgenre and search('GENRE', x) is not None:
-                        x = t + " " + sub('GENRE', '', x)
-                    else:
-                        x = t
-                    self.tvtitel.append(t)
-                    if self.progress == False or self.percent == False:
-                        res.append(MultiContentEntryText(pos=(295 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 480 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                    else:
-                        res.append(MultiContentEntryProgress(pos=(295 + picleftoffset, 13 + pictopoffset), size=(70, 14), percent=percent, borderWidth=1, foreColor=16777215))
-                        res.append(MultiContentEntryText(pos=(385 + picleftoffset, 1 + pictopoffset), size=(self.menuwidth - 480 - picleftoffset - scaleoffset, 40), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-                else:
-                    y = 5
-            if y == 5:
-                if search('SPARTE', x) is not None:
-                    x = sub('SPARTE', '', x)
-                    if self.primetime == False:
-                        res.append(MultiContentEntryText(pos=(self.menuwidth - 190 - scaleoffset, 7 + pictopoffset), size=(182 + scaleoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
-                    else:
-                        res.append(MultiContentEntryText(pos=(self.menuwidth - 190 - scaleoffset, 7 + pictopoffset), size=(182 + scaleoffset, 40), font=-1, color=16777215, color_sel=16777215, flags=RT_HALIGN_RIGHT, text=x))
-                else:
-                    y = 6
-            if y == 6:
-                if search('RATING', x) is not None:
-                    x = sub('RATING', '', x)
-                    if self.rec == True:
-                        self.rec = False
-                    elif x != 'rating small':
-                        png = '%s%sHD.png' % (ICONPATH, x)
-                        if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 170, pictopoffset), size=(40, 40), png=loadPNG(png)))
-                    self.tventries.append(res)
-                else:
-                    self.tventries.append(res)
-            y += 1
-            if y == offset:
-                y = 0
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 170, pictopoffset), size=(40, 40), png=loadPNG(png)))
+                self.tventries.append(res)
+            else:
+                self.tventries.append(res)
 
         self['menu'].l.setItemHeight(mh)
         self['menu'].l.setList(self.tventries)
@@ -3577,7 +3440,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
         if search('class="pagination__link pagination__link--next" >', bereich) is not None:
             link = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
             if link is not None:
-                self.makeTVTimer.callback.append(self.downloadFullPage(link.group(1), self.makeTVView))
+                self.makeTVTimer.callback.append(self.downloadFullPage(link.group(1), self.makeTVProgrammView))
             else:
                 self.ready = True
         else:
@@ -4040,7 +3903,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
         self.tventries = []
         self.tvlink = []
         self.tvtitel = []
-        self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+        self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVProgrammView))
 
     def showProgrammPage(self):
         if self.eventview == False:
@@ -8046,10 +7909,10 @@ class TVHeuteView(tvBaseScreen):
 
     def onLayoutFinished(self):
         self.makeTVTimer = eTimer()
-        self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+        self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVHeuteView))
         self.makeTVTimer.start(500, True)
 
-    def makeTVView(self, string):
+    def makeTVHeuteView(self, string):
         output = open(self.localhtml, 'r').read()
         output = six.ensure_str(output)
         if self.first == True:
@@ -8075,7 +7938,7 @@ class TVHeuteView(tvBaseScreen):
         bereichtop = transHTML(bereichtop)
         bereichtop = sub('<wbr/>', '', bereichtop)
         bereichtop = sub('<div class="first-program block-1">\n.*?</div>', '<div class="first-program block-1"><img src="http://a2.tvspielfilm.de/imedia/8461/5218461,qfQElNSTpxAGvxxuSsPkPjQRIrO6vJjPQCu3KaA_RQPfIknB77GUEYh_MB053lNvumg7bMd+vkJk3F+_CzBZSQ==.jpg" width="149" height="99" border="0" /><span class="time"> </span><strong class="title"> </strong></div>', bereichtop)
-        logos = re.findall('<span class="logotype chl_bg_. c-(.*?)">', bereichtop)
+        logos = findall('<img src="https://a2.tvspielfilm.de/images/tv/sender/mini/(.*?).png.*?', bereichtop)
         if logos is not None:
             for i in range(6):
                 try:
@@ -8435,35 +8298,35 @@ class TVHeuteView(tvBaseScreen):
                 self.vorabend = False
                 self.abends = False
                 self.nachts = True
-                self.makeTVView('')
+                self.makeTVHeuteView('')
             elif self.nachts == True:
                 self.morgens = True
                 self.mittags = False
                 self.vorabend = False
                 self.abends = False
                 self.nachts = False
-                self.makeTVView('')
+                self.makeTVHeuteView('')
             elif self.morgens == True:
                 self.morgens = False
                 self.mittags = True
                 self.vorabend = False
                 self.abends = False
                 self.nachts = False
-                self.makeTVView('')
+                self.makeTVHeuteView('')
             elif self.mittags == True:
                 self.morgens = False
                 self.mittags = False
                 self.vorabend = True
                 self.abends = False
                 self.nachts = False
-                self.makeTVView('')
+                self.makeTVHeuteView('')
             elif self.vorabend == True:
                 self.morgens = False
                 self.mittags = False
                 self.vorabend = False
                 self.abends = True
                 self.nachts = False
-                self.makeTVView('')
+                self.makeTVHeuteView('')
         return
 
     def red(self):
@@ -8531,7 +8394,7 @@ class TVHeuteView(tvBaseScreen):
             self.current = self.oldcurrent
             if self.search == False:
                 self.showProgrammPage()
-                self.makeTVView('')
+                self.makeTVHeuteView('')
             else:
                 self.showsearch()
         else:
@@ -8653,7 +8516,7 @@ class TVHeuteView(tvBaseScreen):
                 self['label'].setText('Bitte warten...')
                 self['label'].startBlinking()
                 self.ready = False
-                self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+                self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVHeuteView))
         return
 
     def nextDay(self):
@@ -8690,7 +8553,7 @@ class TVHeuteView(tvBaseScreen):
             self.oldindex = 0
             self['label'].setText('Bitte warten...')
             self['label'].startBlinking()
-            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVHeuteView))
         elif self.current == 'postview' or self.search == True:
             servicelist = self.session.instantiateDialog(ChannelSelection)
             self.session.execDialog(servicelist)
@@ -8730,7 +8593,7 @@ class TVHeuteView(tvBaseScreen):
             self.oldindex = 0
             self['label'].setText('Bitte warten...')
             self['label'].startBlinking()
-            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVHeuteView))
         elif self.current == 'postview' or self.search == True:
             servicelist = self.session.instantiateDialog(ChannelSelection)
             self.session.execDialog(servicelist)
@@ -8770,7 +8633,7 @@ class TVHeuteView(tvBaseScreen):
             self.oldindex = 0
             self['label'].setText('Bitte warten...')
             self['label'].startBlinking()
-            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVHeuteView))
         return
 
     def prevWeek(self):
@@ -8807,7 +8670,7 @@ class TVHeuteView(tvBaseScreen):
             self.oldindex = 0
             self['label'].setText('Bitte warten...')
             self['label'].startBlinking()
-            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+            self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVHeuteView))
         return
 
     def rightDown(self):
@@ -8851,7 +8714,7 @@ class TVHeuteView(tvBaseScreen):
                 self['label'].setText('Bitte warten...')
                 self['label'].startBlinking()
                 self.ready = False
-                self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+                self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVHeuteView))
             elif self.current == 'searchmenu':
                 self['searchmenu'].pageDown()
             else:
@@ -8902,7 +8765,7 @@ class TVHeuteView(tvBaseScreen):
                 self['label'].setText('Bitte warten...')
                 self['label'].startBlinking()
                 self.ready = False
-                self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVView))
+                self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVHeuteView))
             elif self.current == 'searchmenu':
                 self['searchmenu'].pageUp()
             else:
@@ -9023,7 +8886,7 @@ class TVHeuteView(tvBaseScreen):
                 self.error = 'Attribute Error: ' + str(e.message)
 
             if self.error == False:
-                self.makeTVView('')
+                self.makeTVHeuteView('')
             else:
                 self.makeErrorTimer = eTimer()
                 self.makeErrorTimer.callback.append(self.displayError)
