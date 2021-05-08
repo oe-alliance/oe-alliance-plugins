@@ -12,9 +12,9 @@
 	</screen>
 		<screen name="tvTipps" position="10,460" size="740,270" flags="wfNoBorder" title=" ">
 		<widget name="picture" position="0,0" size="387,270" alphatest="blend" zPosition="1" />
-		<widget name="elabel3" position="387,136" size="353,125" font="Regular;18" backgroundColor="#FFFFFF" zPosition="1" />
-		<widget name="label" position="402,141" size="288,30" font="Regular;20" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
-		<widget name="label2" position="402,163" size="288,50" font="Regular;22" foregroundColor="#{color}" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
+		<widget name="elabel3" position="387,126" size="353,135" font="Regular;18" backgroundColor="#FFFFFF" zPosition="1" />
+		<widget name="label" position="402,131" size="288,30" font="Regular;20" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
+		<widget name="label2" position="402,163" size="288,50" font="Regular;22" foregroundColor="#0a8aee" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
 		<widget name="label3" position="402,218" size="328,42" font="Regular;18" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
 		<widget name="thumb" position="695,160" size="40,40" pixmap="{picpath}icons/rating small1HD.png" alphatest="blend" zPosition="2" />
 		<widget name="label4" position="500,50" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
