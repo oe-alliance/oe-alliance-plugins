@@ -149,7 +149,7 @@ msgid "- Download Type"
 msgstr "- Downloadtyp"
 
 msgid "- Extra Color Chill"
-msgstr "- Extrafarbe Chill"
+msgstr "- Extrafarbe gefühlte Temperatur"
 
 msgid "- Extra Color City"
 msgstr "- Extrafarbe Stadt"
@@ -2372,7 +2372,7 @@ msgid "brown"
 msgstr "braun"
 
 msgid "cache + adjustment (high quality, slow)"
-msgstr "Cache + Anpassung (hoche Qualität, langsam)"
+msgstr "Cache + Anpassung (hohe Qualität, langsam)"
 
 msgid "cache + adjustment (low quality, fast)"
 msgstr "Cache + Anpassung (niedrige Qualität, schnell)"
