@@ -11196,7 +11196,7 @@ def LCD4linuxPIC(self, session):
 					ShadowText(Wim, POSXs - minus5, POSYs, Locname + " " + Wtime, fontS, LCD4linux.WetterExtraColorCity.value, ConfigShadow)
 
 					font = ImageFont.truetype(ConfigFont, int(15 * Wmulti), encoding='unic')
-					if int(Hum.replace("%","")) < LCD4linux.WetterRainColor2use.value:
+					if int(Hum.replace("%", "")) < LCD4linux.WetterRainColor2use.value:
 						HumColor = LCD4linux.WetterRainColor.value
 					else:
 						HumColor = LCD4linux.WetterRainColor2.value
