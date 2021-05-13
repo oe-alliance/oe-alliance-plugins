@@ -1,0 +1,59 @@
+name: oe-alliance plugins
+
+on:
+  push:
+    branches: [ master, python3 ]
+  pull_request:
+    branches: [ master, python3 ]
+
+jobs:
+  build:
+    name: Build oe-alliance plugins
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        gcc: [8, 9, 10]
+    steps:
+      - name: Install prerequisites
+        run: |
+          sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+          sudo apt-get -q update
+          sudo apt-get install automake
+          sudo apt-get install build-essential
+          sudo apt-get install gettext
+          sudo apt-get install g++-${{ matrix.gcc }}
+
+      - uses: actions/checkout@v2
+        with:
+          ref: 'master'
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '2.7'
+
+      - name: Build plugins, gcc-${{ matrix.gcc }}, python 2.7
+        env:
+          CC: "gcc-${{ matrix.gcc }}"
+          CXX: "g++-${{ matrix.gcc }}"
+        run: |
+          autoreconf -i
+          ./configure
+          make
+          python -m compileall .
+
+      - uses: actions/checkout@v2
+        with:
+          ref: 'python3'
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Build plugins, gcc-${{ matrix.gcc }}, python 3.8
+        env:
+          CC: "gcc-${{ matrix.gcc }}"
+          CXX: "g++-${{ matrix.gcc }}"
+        run: |
+          pip3 install six
+          autoreconf -i
+          ./configure
+          make
+          python -m compileall .
