@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8t"
+Version = "V5.0-r8u"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -191,13 +191,13 @@ FONT = FONTdefault
 ClockBack = Data + "PAclock2.png"
 Clock = Data + "Clock"
 RecPic = Data + "rec.png"
-xmlPIC = "/tmp/l4ldisplay.png"
-xmlPICtmp = "/tmp/l4ldisplaytmp.png"
 if os.path.islink(LCD4plugin + "Extensions/LCD4linux/tmp") == True:
 	TMP = os.path.realpath(LCD4plugin + "Extensions/LCD4linux/tmp") + "/"
 else:
 	TMP = "/tmp/"
 TMPL = TMP + "lcd4linux/"
+xmlPIC = TMP + "l4ldisplay.png"
+xmlPICtmp = TMP + "l4ldisplaytmp.png"
 Fritz = "%sfritz.txt" % TMPL
 FritzFrame = Data + "fritzcallframe.png"
 FritzRing = Data + "fritzcallring.png"
@@ -467,13 +467,13 @@ LCD4linux.WetterHighColor = ConfigSelection(choices=Farbe, default="violet")
 LCD4linux.WetterTransparenz = ConfigSelection(choices=[("false", _("no")), ("crop", _("alternative Copy-Mode/DM800hd (24bit)")), ("true", _("yes (32bit)"))], default="false")
 LCD4linux.WetterIconZoom = ConfigSelectionNumber(30, 70, 1, default=40)
 LCD4linux.WetterRain = ConfigSelection(choices=[("false", _("no")), ("true", _("yes")), ("true2", _("yes + %"))], default="true")
-LCD4linux.WetterRainZoom = ConfigSlider(default=100, increment=1, limits=(90, 300))
+LCD4linux.WetterRainZoom = ConfigSlider(default=100, increment=1, limits=(90, 200))
 LCD4linux.WetterRainColor = ConfigSelection(choices=Farbe, default="silver")
 LCD4linux.WetterRainColor2use = ConfigSelectionNumber(10, 100, 10, default=80)
 LCD4linux.WetterRainColor2 = ConfigSelection(choices=Farbe, default="cyan")
 LCD4linux.WetterLine = ConfigSelection(choices=[("false", _("no")), ("true", _("yes, short")), ("trueLong", _("yes, long"))], default="trueLong")
 LCD4linux.WetterExtra = ConfigYesNo(default=True)
-LCD4linux.WetterExtraZoom = ConfigSlider(default=100, increment=1, limits=(90, 200))
+LCD4linux.WetterExtraZoom = ConfigSlider(default=100, increment=1, limits=(90, 300))
 LCD4linux.WetterExtraFeel = ConfigSelectionNumber(0, 5, 1, default=3)
 LCD4linux.WetterExtraColorCity = ConfigSelection(choices=Farbe, default="silver")
 LCD4linux.WetterExtraColorFeel = ConfigSelection(choices=Farbe, default="silver")
@@ -3247,10 +3247,10 @@ def writeLCD1(s, im, quality, SAVE=True):
 				s.im[im] = imt
 				del imt
 			if s.im[im].size == (700, 390):
-				s.im[im].convert("RGB", colors=254).resize((700, 561)).save(xmlPICtmp, "PNG")
+				s.im[im].convert("P", colors=254).resize((700, 561)).save(xmlPICtmp, "PNG")
 			else:
 				if str(LCD4linux.xmlLCDColor.value) == "8":
-					s.im[im].convert("RGB", colors=254).save(xmlPICtmp, "PNG")
+					s.im[im].convert("P", colors=254).save(xmlPICtmp, "PNG")
 				else:
 					s.im[im].save(xmlPICtmp, "PNG")
 			if os.path.isfile(xmlPICtmp):
@@ -3363,10 +3363,10 @@ def writeLCD2(s, im, quality, SAVE=True):
 				s.im[im] = imt
 				del imt
 			if s.im[im].size == (700, 390):
-				s.im[im].convert("RGB", colors=254).resize((700, 561)).save(xmlPICtmp, "PNG")
+				s.im[im].convert("P", colors=254).resize((700, 561)).save(xmlPICtmp, "PNG")
 			else:
 				if str(LCD4linux.xmlLCDColor.value) == "8":
-					s.im[im].convert("RGB", colors=254).save(xmlPICtmp, "PNG")
+					s.im[im].convert("P", colors=254).save(xmlPICtmp, "PNG")
 				else:
 					s.im[im].save(xmlPICtmp, "PNG")
 			if os.path.isfile(xmlPICtmp):
@@ -3479,10 +3479,10 @@ def writeLCD3(s, im, quality, SAVE=True):
 				s.im[im] = imt
 				del imt
 			if s.im[im].size == (700, 390):
-				s.im[im].convert("RGB", colors=254).resize((700, 561)).save(xmlPICtmp, "PNG")
+				s.im[im].convert("P", colors=254).resize((700, 561)).save(xmlPICtmp, "PNG")
 			else:
 				if str(LCD4linux.xmlLCDColor.value) == "8":
-					s.im[im].convert("RGB", colors=254).save(xmlPICtmp, "PNG")
+					s.im[im].convert("P", colors=254).save(xmlPICtmp, "PNG")
 				else:
 					s.im[im].save(xmlPICtmp, "PNG")
 			if os.path.isfile(xmlPICtmp):
@@ -9738,7 +9738,7 @@ class UpdateStatus(Screen):
 					city = "id=%s" % ort[3:]
 				self.feedurl = "http://api.openweathermap.org/data/2.5/weather?%s&lang=%s&units=metric%s" % (city, la[:2], apkey)
 				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadOpenListCallback, wetter)).addErrback(self.downloadListError)
-				self.feedurl = "http://api.openweathermap.org/data/2.5/forecast/daily?%s&lang=%s&units=metric&cnt=5%s" % (city, la[:2], apkey)
+				self.feedurl = "http://api.openweathermap.org/data/2.5/forecast?%s&lang=%s&units=metric&cnt=5%s" % (city, la[:2], apkey)
 				L4log(self.feedurl)
 				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadOpenListCallback, wetter)).addErrback(self.downloadListError)
 			elif LCD4linux.WetterApi.value == "WEATHERUNLOCKED":
@@ -11196,7 +11196,7 @@ def LCD4linuxPIC(self, session):
 					ShadowText(Wim, POSXs - minus5, POSYs, Locname + " " + Wtime, fontS, LCD4linux.WetterExtraColorCity.value, ConfigShadow)
 
 					font = ImageFont.truetype(ConfigFont, int(15 * Wmulti), encoding='unic')
-					if int(Hum.replace("%","")) < LCD4linux.WetterRainColor2use.value:
+					if int(re.sub('[^0-9]+', '', Hum)) < LCD4linux.WetterRainColor2use.value:
 						HumColor = LCD4linux.WetterRainColor.value
 					else:
 						HumColor = LCD4linux.WetterRainColor2.value
@@ -14145,7 +14145,7 @@ def LCD4linuxPIC(self, session):
 					imM = Image.open(os.path.join(Data, "pointmask.png"))
 					imM = imM.resize((ConfigSize, ConfigSize))
 					b = Image.new("RGBA", (ConfigSize, ConfigSize), ScaleGtoR(staerke))
-					b.putalpha(imM.convert("RGB"))
+					b.putalpha(imM.convert("L"))
 					self.im[im].paste(b, (POSX, ConfigPos), b)
 				except:
 					L4log("Error Knob")
@@ -14668,18 +14668,17 @@ def LCD4linuxPIC(self, session):
 				if os.path.isfile(pil_open.replace(pil_open[-4:], "_night" + pil_open[-4:])):
 					pil_open = pil_open.replace(pil_open[-4:], "_night" + pil_open[-4:])
 					L4logE("Nightbackground", pil_open)
-			if str(LCD4linux.BilderBackground.value) == "0":
+			if LCD4linux.BilderBackground.value == "0":
 				pil_image = Image.open(pil_open)
 				if pil_image is not None:
 					self.im[1].paste(pil_image, (0, 0))
 			else:
-				if self.BackName[0] != [pil_open, os.path.getmtime(pil_open)]:
-					palette.load()
-					if str(LCD4linux.BilderBackground.value) == "1":
+				if self.BackName[0] != [pil_open, os.path.getmtime(pil_open), LCD4linux.BilderBackground.value]:
+					self.BackName[0] = [pil_open, os.path.getmtime(pil_open), LCD4linux.BilderBackground.value]
+					if LCD4linux.BilderBackground.value == "1":
 						self.BackIm[0] = Image.open(pil_open).resize((MAX_W, MAX_H), Image.ANTIALIAS).convert("RGB", dither=Image.NONE, palette=Image.ADAPTIVE)
 					else:
-						self.BackIm[0] = Image.open(pil_open).resize((MAX_W, MAX_H)).convert("RGB")
-					self.BackName[0] = [pil_open, os.path.getmtime(pil_open)]
+						self.BackIm[0] = Image.open(pil_open).resize((MAX_W, MAX_H)).convert("P")
 					L4log("change Background")
 				if self.BackIm[0] is not None:
 					self.im[1].paste(self.BackIm[0], (0, 0))
@@ -14727,20 +14726,21 @@ def LCD4linuxPIC(self, session):
 					if os.path.isfile(pil_open.replace(pil_open[-4:], "_night" + pil_open[-4:])):
 						pil_open = pil_open.replace(pil_open[-4:], "_night" + pil_open[-4:])
 						L4logE("Nightbackground", pil_open)
-				if str(LCD4linux.BilderBackground.value) == "0":
+				if LCD4linux.BilderBackground.value == "0":
 					pil_image = Image.open(pil_open)
 					if pil_image is not None:
 						self.im[2].paste(pil_image, (0, 0))
 				else:
-					if self.BackName[1] != [pil_open, os.path.getmtime(pil_open)]:
-						self.BackName[1] = [pil_open, os.path.getmtime(pil_open)]
+					if self.BackName[1] != [pil_open, os.path.getmtime(pil_open), LCD4linux.BilderBackground.value]:
+						self.BackName[1] = [pil_open, os.path.getmtime(pil_open), LCD4linux.BilderBackground.value]
 						if self.BackName[1] == self.BackName[0]:
 							self.BackIm[1] = self.BackIm[0]
-					if str(LCD4linux.BilderBackground.value) == "1":
-						self.BackIm[1] = Image.open(pil_open).resize((MAX_W, MAX_H), Image.ANTIALIAS).convert("RGB", dither=Image.NONE, palette=Image.ADAPTIVE)
-					else:
-						self.BackIm[1] = Image.open(pil_open).resize((MAX_W, MAX_H)).convert("RGB")
-					L4log("change Background")
+						else:
+							if LCD4linux.BilderBackground.value == "1":
+								self.BackIm[1] = Image.open(pil_open).resize((MAX_W, MAX_H), Image.ANTIALIAS).convert("RGB", dither=Image.NONE, palette=Image.ADAPTIVE)
+							else:
+								self.BackIm[1] = Image.open(pil_open).resize((MAX_W, MAX_H)).convert("P")
+						L4log("change Background")
 					if self.BackIm[1] is not None:
 						self.im[2].paste(self.BackIm[1], (0, 0))
 			else:
@@ -14782,25 +14782,25 @@ def LCD4linuxPIC(self, session):
 				doGrabTV(str(MAX_W), str(MAX_H), "3", LCD4linux.TVType.value)
 		try:
 			pil_image = None
-			if pil_open != "" and os.path.isfile(pil_open) and not ("3" in LCD4linux.TVLCD.value and ScreenActive[0] in LCD4linux.TV.value):
+			if pil_open != "" and os.path.isfile(pil_open) and not (TVrunning and "3" in LCD4linux.TVLCD.value and ScreenActive[0] in LCD4linux.TV.value):
 				if isOffTime(L4LMoon, L4LSun, L4LMoon, L4LSun):
 					if os.path.isfile(pil_open.replace(pil_open[-4:], "_night" + pil_open[-4:])):
 						pil_open = pil_open.replace(pil_open[-4:], "_night" + pil_open[-4:])
 						L4logE("Nightbackground", pil_open)
-				if str(LCD4linux.BilderBackground.value) == "0":
+				if LCD4linux.BilderBackground.value == "0":
 					pil_image = Image.open(pil_open)
 					if pil_image is not None:
 						self.im[3].paste(pil_image, (0, 0))
 				else:
-					if self.BackName[2] != [pil_open, os.path.getmtime(pil_open)]:
-						self.BackName[2] = [pil_open, os.path.getmtime(pil_open)]
+					if self.BackName[2] != [pil_open, os.path.getmtime(pil_open), LCD4linux.BilderBackground.value]:
+						self.BackName[2] = [pil_open, os.path.getmtime(pil_open), LCD4linux.BilderBackground.value]
 						if self.BackName[2] == self.BackName[0]:
 							self.BackIm[2] = self.BackIm[0]
 						else:
-							if str(LCD4linux.BilderBackground.value) == "1":
+							if LCD4linux.BilderBackground.value == "1":
 								self.BackIm[2] = Image.open(pil_open).resize((MAX_W, MAX_H), Image.ANTIALIAS).convert("RGB", dither=Image.NONE, palette=Image.ADAPTIVE)
 							else:
-								self.BackIm[2] = Image.open(pil_open).resize((MAX_W, MAX_H)).convert("RGB")
+								self.BackIm[2] = Image.open(pil_open).resize((MAX_W, MAX_H)).convert("P")
 						L4log("change Background")
 					if self.BackIm[2] is not None:
 						self.im[3].paste(self.BackIm[2], (0, 0))
