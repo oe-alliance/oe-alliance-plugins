@@ -949,7 +949,7 @@ class tvBaseScreen(tvAllScreen):
                             infooffset = infooffset + 70
                     self.datum = False
                     if RATING is not None:
-                        if RATING != 'rating small':
+                        if RATING != 'rating-small':
                             png = '%s%sHD.png' % (ICONPATH, RATING)
                             if fileExists(png):
                                 res.append(MultiContentEntryPixmapAlphaTest(pos=(1175, pictopoffset), size=(40, 40), png=loadPNG(png)))
@@ -1159,7 +1159,7 @@ class TVTippsView(tvBaseScreen):
             if GENRE is not None:
                 res.append(MultiContentEntryText(pos=(162 + picleftoffset, 40), size=(self.menuwidth - 330 - picleftoffset, 40), font=-1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT, text=GENRE))
                 if self.sparte == 'Spielfilm':
-                    png = ICONPATH + 'rating small1HD.png'
+                    png = ICONPATH + 'rating-small1HD.png'
                     if fileExists(png):
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 160, 25), size=(40, 40), png=loadPNG(png)))
             if LOGO is not None:
@@ -2047,7 +2047,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 
                     self.datum = False
                     if RATING is not None:
-                        if RATING != 'rating small':
+                        if RATING != 'rating-small':
                             png = '%s%sHD.png' % (ICONPATH, RATING)
                             if fileExists(png):
                                 res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 65, pictopoffset), size=(40, 40), png=loadPNG(png)))
@@ -2704,7 +2704,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 
                 if self.rec == True:
                     self.rec = False
-                elif rating != 'rating small':
+                elif rating != 'rating-small':
                     png = '%s%sHD.png' % (ICONPATH, rating)
                     if fileExists(png):
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 170, pictopoffset), size=(40, 40), png=loadPNG(png)))
@@ -3426,7 +3426,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
             if RATING is not None:
                 if self.rec == True:
                     self.rec = False
-                elif RATING != 'rating small':
+                elif RATING != 'rating-small':
                     png = '%s%sHD.png' % (ICONPATH, RATING)
                     if fileExists(png):
                         res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - 170, pictopoffset), size=(40, 40), png=loadPNG(png)))
