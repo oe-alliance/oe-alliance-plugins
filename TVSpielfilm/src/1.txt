@@ -1,0 +1,835 @@
+<div class="content-area">
+	       
+
+<section id="content">
+   <div class="two-blocks">
+        <div class="posts-column">
+						<article class="broadcast-detail">
+				<header class="broadcast-detail__header">
+					<div class="header-row">
+						<div class="tv-show-label">
+							<span class="tv-show-label__time">17:50</span>
+							<span class="tv-show-label__channel">
+                                <span class="logotype chl_bg_m c-ard">ARD</span>
+                            </span>
+						</div>
+						<div class="text-wrapper">
+							<h1 class="headline headline--article">Der Kotzbrocken</h1>
+							<span class="text-row">Heute, 17:50 - 19:20, Das Erste</span><span class="text-row">Tragikomödie, D 2015, 90 Min.</span>
+						</div>
+					</div>
+
+				</header>
+
+				<section class="broadcast-detail__stage
+                     broadcast-detail__stage--trailer"
+                >
+
+                                            
+                                                                                        <div id="realVideo" class="broadcast-stage-video" data-info="1619884200:1619889600">
+
+                                                            <div id="videoDefaultContent">
+                                        <div id="more-videos" class="more-videos recommendations-box" style="display:none; position: absolute;
+    z-index: 1111;
+    width: 100%;
+    height: 100%;
+    background: white;">
+        <div class="tab-content sliderholdersingle">
+            <section class="teaser-section">
+                <div class="teasers slidercontent" style="width:5612px;"
+                     id="c-608d8cfe48cd4-scroller">
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/new-order-eine-neue-weltordnung-deutscher-trailer,10414861,ApplicationVideo.html" target="_self" title="Trailer New Order - Eine neue Weltordnung: deutscher Trailer"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/4896/10414896,cA9FKagBsf6d+qZUkDKzNZVTSA23U+tIV_dRvHmzQER_N+yFVUN+TzFWtBSbfIJcNOnm6BmvaO83xvmIMchrew==.jpg" alt="New Order">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">"New Order - Eine neue Weltordnung": deutscher Trailer</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/neuer-trailer-zu-star-wars-the-bad-batch,10403858,ApplicationVideo.html" target="_self" title="Trailer Neuer Trailer zu Star Wars: The bad Batch"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/3860/10403860,yxCj2JmwUaYxJBAnB_7p+Qw9q+UOxD6OsfDS0DZktWOmOtcQehnZiDeqbGvELmT3hk5epnzIauj5GUsVLoClZg==.jpg" alt="The Bad Batch">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Neuer Trailer zu "Star Wars: The bad Batch"</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/news-und-specials/star-video-news/kevin-allein-zu-haus-was-sie-noch-nicht-ueber-den-klassiker-wussten,10031163,ApplicationVideoNews.html" target="_self" title="Star-News Kevin allein zu Haus: Was Sie noch nicht über den Klassiker wussten"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/1162/10031162,1K3F+rNzXl+FNE_IluUvxUdQ6utpOIkEnkIYhMCALRatE4GOLFfmadCNBwc2kvHPbjI5kmENPeKPzwsGs5i+Rw==.jpg" alt="Kevin allein zu Haus: Was Sie noch nicht über den Klassiker wussten">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                            <span class="badge">Star-News</span>
+                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Kevin allein zu Haus: Was Sie noch nicht über den Klassiker wussten</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/news-und-specials/star-video-news/ghostbusters-2020-bill-murray-ist-dabei,10005529,ApplicationVideoNews.html" target="_self" title="Star-News 'Ghostbusters 2020': Bill Murray ist dabei"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/5528/10005528,1K3F+rNzXl+FNE_IluUvxUdQ6utpOIkEnkIYhMCALRatE4GOLFfmadCNBwc2kvHPbjI5kmENPeKPzwsGs5i+Rw==.jpg" alt="Ghostbusters 2020: Bill Murray ist dabei">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                            <span class="badge">Star-News</span>
+                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">'Ghostbusters 2020': Bill Murray ist dabei</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/deutscher-trailer-cash-truck,10416787,ApplicationVideo.html" target="_self" title="Trailer Deutscher Trailer: Cash Truck"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/6789/10416789,qJAckdOT9HZL4cZDzEoU_G0BSqCIljBJAMxxKvrNSZo5GkO8P3PgCI25yn6S0FcNg7DsFU4IwPT2DjcIeOyEfQ==.jpg" alt="Cash Truck">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Deutscher Trailer: "Cash Truck"</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/bigfoot-junior-ein-tierisch-verrueckter-familientrip-exklusives-making-of,10403773,ApplicationVideo.html" target="_self" title="Trailer Bigfoot Junior – Ein tierisch verrückter Familientrip: exklusives Making-of"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/1534/10381534,Wz1pchy7AVHPP1rGuhxHQ9n6uhYUF+otHK53UfX7TrTiiRvc7n1n0PDa4iOhv8IgtzDfWL5L2sNxQuStkxkx5Q==.jpg" alt="Bigfoot Junior 2 – Ein tierisch verrückter Familientrip">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">"Bigfoot Junior – Ein tierisch verrückter Familientrip": exklusives Making-of</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/trailer-zur-doku-der-wilde-wald,10413871,ApplicationVideo.html" target="_self" title="Trailer Trailer zur Doku Der wilde Wald"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/5039/10395039,Wz1pchy7AVHPP1rGuhxHQ9n6uhYUF+otHK53UfX7TrTiiRvc7n1n0PDa4iOhv8IgtzDfWL5L2sNxQuStkxkx5Q==.jpg" alt="Der wilde Wald">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Trailer zur Doku "Der wilde Wald"</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/deutscher-trailer-zum-drama-the-father,10413614,ApplicationVideo.html" target="_self" title="Trailer Deutscher Trailer zum Drama The Father"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/2559/10412559,Wz1pchy7AVHPP1rGuhxHQ9n6uhYUF+otHK53UfX7TrRBjmePWMNeFgd3fPSbJjq6wzKb_fFyuTeHO9i+18XSGw==.jpg" alt="The Father">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Deutscher Trailer zum Drama "The Father"</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/1986-trailer-omu,10413667,ApplicationVideo.html" target="_self" title="Trailer 1986: Trailer OmU"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/1800/10391800,Wz1pchy7AVHPP1rGuhxHQ9n6uhYUF+otHK53UfX7TrTIDDY2dnsMaee6R5rVg26jc0U_+RMxgCv7C2q09Ep2xA==.jpg" alt="1986">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">"1986": Trailer OmU</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/exklusiv-deutsche-trailerpremiere-zu-im-feuer,10418168,ApplicationVideo.html" target="_self" title="Trailer Exklusiv: Deutsche Trailerpremiere zu Im Feuer"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/8167/10418167,lYNaCD1XqiZGRYpyJmdl+vWKj9uK1JOekOZFp7ELPHscAH9XAnWzk3K3MRsCKQL9BBXq3BkvpFWmYi22uQ_3mg==.jpg" alt="Im Feuer">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Exklusiv: Deutsche Trailerpremiere zu "Im Feuer"</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/exklusiver-clip-zur-bbc-serie-world-on-fire,10409534,ApplicationVideo.html" target="_self" title="Trailer Exklusiver Clip zur BBC-Serie World on Fire"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/9537/10409537,nM3C2+CVAfIsM52VFqlzwtI5Z42NF9UgS94rpeClkJqOwpsiS96Ou1fWHViKk_VKjAZWv2UOro9aHAkG1Cgyrg==.jpg" alt="World on Fire">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Exklusiver Clip zur BBC-Serie "World on Fire"</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/deutscher-trailer-zum-thriller-they-want-me-dead,10409543,ApplicationVideo.html" target="_self" title="Trailer Deutscher Trailer zum Thriller They want me Dead"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/9739/10409739,alPlWn8JWXRb8msgiA3IA3C1yhCbHq3uKUW6fpboPH1L0U4vY06xNOOhZPzb0t5WNoNTvd8q_E6A0tCBKIoxaQ==.jpg" alt="They want me Dead">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Deutscher Trailer zum Thriller "They want me Dead"</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/langer-trailer-zu-army-of-the-dead,10412640,ApplicationVideo.html" target="_self" title="Trailer Langer Trailer zu Army of the Dead"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/2644/10412644,NzO2JPDRYkzB8VE_70CWZUGGGIzFEsEGLcEoXI1ld9CaK3W9flXIKSEhlMmUcCYRa1tBsPuN+FlQi1mAtT+d8g==.jpg" alt="Army of the Dead">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Langer Trailer zu "Army of the Dead"</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/fast-and-furious-9-vollstaendiger-trailer,10412641,ApplicationVideo.html" target="_self" title="Trailer Fast and Furious 9: Vollständiger Trailer"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/2646/10412646,xF2PajaQ5m53hBs+KRfFHvMhVYvX38k6C9ssdsUU6gI5GkO8P3PgCI25yn6S0FcNg7DsFU4IwPT2DjcIeOyEfQ==.jpg" alt="Fast & Furious 9">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">"Fast and Furious 9": Vollständiger Trailer</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/trailer-zur-doku-die-letzten-reporter,10416791,ApplicationVideo.html" target="_self" title="Trailer Trailer zur Doku Die letzten Reporter"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/4213/10414213,Wz1pchy7AVHPP1rGuhxHQ9n6uhYUF+otHK53UfX7TrTIDDY2dnsMaee6R5rVg26jc0U_+RMxgCv7C2q09Ep2xA==.jpg" alt="Die letzten Reporter">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Trailer zur Doku "Die letzten Reporter"</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/making-of-zu-the-falcon-and-the-winter-soldier,10418245,ApplicationVideo.html" target="_self" title="Trailer Making-of zu The Falcon and the Winter Soldier"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/0187/10380187,NzO2JPDRYkzB8VE_70CWZUGGGIzFEsEGLcEoXI1ld9De_BwTX4DqsqS1+T_gJouVbu+JxLOQ+cv3kY54BBgqTA==.jpg" alt="The Falcon and the Winter Soldier">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Making-of zu "The Falcon and the Winter Soldier"</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                            
+        
+                                                
+
+                                            
+                                 
+                                                                            
+            
+                    <div class="content-teaser teaser-m teaser-m-standard">
+    <a href="https://www.tvspielfilm.de/kino/trailer-und-clips/deutscher-trailer-zur-dc-action-the-suicide-squad,10401383,ApplicationVideo.html" target="_self" title="Trailer Deutscher Trailer zur DC-Action The Suicide Squad"  >
+                    <img src="https://a2.tvspielfilm.de/imedia/1384/10401384,RrVNZ2spBEo91imzCWLZ6KC43RvHc1tYr5f4ifsnd8WeSXIbrz6sD_bgmsUai+qCg5vmsNNyCMkyeCogV5h9Xw==.jpg" alt="The Suicide Squad">
+                <div class="teaser-m-overlay video-content">
+            <div class="badge-holder">
+                                                                </div>
+            <div class="icon-holder">
+                <div class="icon"></div>
+            </div>
+            <div class="text-holder">
+                <div class="headline-holder">
+                    <span class="headline">Deutscher Trailer zur DC-Action "The Suicide Squad"</span>
+                                    </div>
+            </div>
+        </div>
+    </a>
+</div>        
+    
+
+                                    </div>
+                <div class="scroll-box">
+                    <a id="608d8cfe48cd4-left" href="javascript://"
+                       class=" scroll-box__button left singleleft"></a>
+                    <div data-count="0" id="608d8cfe48cd4-scroller"
+                         class="scroll-block"></div>
+                    <a id="608d8cfe48cd4-right" href="javascript://"
+                       class="scroll-box__button right singleright"></a>
+                </div>
+            </section>
+        </div>
+        <a href="#" id="play-again" class="button button--secondary button--full-width">Nochmal abspielen</a>
+    </div>
+
+
+<div id="playercontainer" class="mainVideo" style="display:block; position: absolute; width: 100%; height: 100%;">
+                
+
+<div class="xymatic-video"
+     id="player-BC606f394b8189653c12805c18"
+     data-config='{
+                                        "videoTracking": "VIDEOTRACKING",
+                                        "trackingEventReceiverSelector": "#player-BC606f394b8189653c12805c18",
+                                        "domPlayerSelector": "#player-BC606f394b8189653c12805c18",
+                                        "templateId": "tvspielfilm-desktop-article-autoplay",
+                                        "position" : "0",
+                                        "contentDesc": {
+                                            "contentId": "pBC606f394b8189653c12805c18",
+                                            "vendorSpecificId": "pBC606f394b8189653c12805c18",
+                                            "posterRenditions": [{
+                                                "format": "DEFAULT",
+                                                "src": "https://a2.tvspielfilm.de/imedia/2386/8942386,4BtIBOubxODq2P3cPbP1Q9RZdd3Sfd9SC+VfYksa2wcl4KO8XVQDyikbNjAARxVwpPsfod66njXf5g8L8Q1fRQ==.png",
+                                                "version": "0"
+                                            }],
+                                            "shortTitle": "TV-Tragikomödie, D 2015",
+                                            "title": "Der Kotzbrocken",
+                                            "videoRenditions": [{
+                                                "src": "https://video.tvspielfilm.de/ivideo/video/86/8942386_1.mp4",
+                                                "version": "0",
+                                                "format": "MONO_FLAT",
+                                                "name": "SD"
+                                            }],
+                                            "url": "https://www.tvspielfilm.de/tv-programm/sendung/der-kotzbrocken,606f394b8189653c12805c18.html",
+                                            "adsDisallowed": false                                        }
+                                    }'></div>
+
+
+
+</div>
+
+
+                                </div>
+                                                    </div>
+
+                    				</section>
+
+
+                <section class="broadcast-detail__reminder">
+                    
+                                                                                        <a href="#inline-section_images" class="button-gray orange image-galery marker-button" rel="no-follow" title="Bilder von Der Kotzbrocken">
+                            <svg width="19" height="19" xmlns="http://www.w3.org/2000/svg">
+                                <g stroke="#FFF" stroke-width="2" fill="none" fill-rule="evenodd">
+                                    <path d="M1 6h13v11H1z"/>
+                                    <path stroke-linecap="square" d="M5 2h13M18 13V3"/>
+                                </g>
+                            </svg>
+                            <span>Bildergalerie</span>
+                        </a>
+                    
+                    
+                                        <a rel="nofollow" class="marker-button button-gray button--secondary reminder calendar-reminder" rel="nofollow" href="https://www.tvspielfilm.de/tv-programm/sendung/der-kotzbrocken,606f394b8189653c12805c18.html?iCalendar=on" onclick="trackKlickElement('clickLink','merken','606f394b8189653c12805c18-Der Kotzbrocken','');">
+                        <svg width="19" height="19" viewBox="0 0 448 512" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M400 64h-48V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v52H160V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v52H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 01-6-6V160h352v298a6 6 0 01-6 6zm-52.849-200.65L198.842 404.519c-4.705 4.667-12.303 4.637-16.971-.068l-75.091-75.699c-4.667-4.705-4.637-12.303.068-16.971l22.719-22.536c4.705-4.667 12.303-4.637 16.97.069l44.104 44.461 111.072-110.181c4.705-4.667 12.303-4.637 16.971.068l22.536 22.718c4.667 4.705 4.636 12.303-.069 16.97z"
+                                   fill-rule="nonzero"/>
+                        </svg>
+                        <span>Termin eintragen</span>
+                    </a>
+
+                                            <div class="broadcast-detail--live">
+                                                                                    <div style="display:none;" class="livetv-running distance" data-info="1619884200:1619889600">
+                                <a title="Sendung jetzt auf Zattoo live ansehen" target="_blank" href="https://live.tvspielfilm.de/" class="live-icon" data-zattoo="tv-programm_sendung_senderdetailseite-jetzt_stoerer-auf-bild" >
+                                </a>
+                            </div>
+                        </div>
+                    
+
+
+                </section>
+
+                                    <blockquote class="broadcast-detail__quote">
+                        <p>Freche, weitestgehend kitschfreie Inklusions-Romanze</p>
+                    </blockquote>
+                
+                                    <section class="broadcast-detail__rating">
+                        <div class="editorial-rating big1"></div>
+                        <ul class="rating-dots">
+                            <li>
+                                <span class="rating-dots__label">Humor</span>
+                                <span class="rating-dots__rating" data-rating="2"><i></i></span>
+                            </li>
+                            <li>
+                                <span class="rating-dots__label">Anspruch</span>
+                                <span class="rating-dots__rating" data-rating="1"><i></i></span>
+                            </li>
+                            <li>
+                                <span class="rating-dots__label">Action</span>
+                                <span class="rating-dots__rating" data-rating="1"><i></i></span>
+                            </li>
+                            <li>
+                                <span class="rating-dots__label">Spannung</span>
+                                <span class="rating-dots__rating" data-rating="1"><i></i></span>
+                            </li>
+                            <li>
+                                <span class="rating-dots__label">Erotik</span>
+                                <span class="rating-dots__rating" data-rating="0"><i></i></span>
+                            </li>
+                        </ul>
+                                                    <div class="rating-stars">
+                                <span class="rating-stars__label">Community</span>
+                                <span class="rating-stars__rating" data-rating="4"></span>
+                            </div>
+                                            </section>
+                
+                
+
+                
+                
+                <section class="broadcast-detail__description">
+                                            <p class="headline">TV-Tragikomödie. Zum Sozialdienst verurteilte Parksünderin bringt Zyniker im Rollstuhl auf Kurs.</p>
+                                                            
+                                            <p>„Mein Reich, meine Regeln!“ Wenn Georg (Roeland Wiesnekker) grantig ist, schmeißt er schon mal mit Aschenbechern um sich. Und Georg ist eigentlich immer grantig. Seit einem Autounfall sitzt der ehemalige Triathlet im Rollstuhl. In der stationären Pflegeeinrichtung übt sich der verbitterte Paraplegiker in drei neuen Disziplinen: Zorn, Zynismus und Verweigerung. Die alleinerziehende Sophie (Aglaia Szyszkowitz), vom Gericht zu 300 Sozialstunden verdonnert, weil sie 47 Parktickets nicht bezahlt hat, soll nun versuchen, an ihn „ranzukommen“. Wahrlich kein leichtes Unterfangen – doch nach Anlaufschwierigkeiten klappt es sogar. Sophies Chef und neuer Freund Jacques (Martin Rapold) schmeckt dieses Engagement allerdings nicht… <br/>Erwartbare Story, die vom guten Ensemble und pointierten, angenehm unverkrampften Dialogen getragen wird.</p>
+
+                        
+                        
+                                   </section>
+
+
+                <h2 class="broadcast-info">Mehr zu Der Kotzbrocken</h2>
+                <section class="broadcast-detail__buttons">
+                                            <div class="button-row">
+                                                                                        <a href="https://www.tvspielfilm.de/tv-programm/sendungen/das-erste,ARD.html" class="button button--secondary" title="Tagesprogramm von Das Erste">Tagesprogramm Das Erste</a>
+                                                    </div>
+                    
+                                            <div class="button-row">
+                            <a href="https://www.tvspielfilm.de/kino/filmarchiv/film/der-kotzbrocken,6379772,ApplicationMovie.html" target="_self" class="button button--secondary" title="TragikomÃ¶die, DE 2015 Der Kotzbrocken">"Der Kotzbrocken" im Filmarchiv</a>                        </div>
+                    
+                    
+                                                        </section>
+
+                                                                                <div class="streamingguide-content">
+        <a href="https://www.streampicker.de/?utm_source=tvspielfilm_web&utm_medium=sg_absprungstellen&utm_campaign=detailseite_tv-programm_neutral" target="_blank" title="Streaming-Highlights - StreamPicker">
+            <div class="streamingguide">
+                <div class="image-wrapper">
+                    <span class="cover distributor"></span>
+                </div>
+                <div class="info">
+                    <span class="streaming-logo"></span>
+                    <span class="title">Alle Highlights von Netflix, Prime, Disney+ & Co.</span>
+                    <span class="subtitle">Wir zeigen dir, welche Filme & Serien bei welchem Streaming-Anbieter laufen.</span>
+                    <span class="button">ZUM GUIDE</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+                
+
+                                    <div class="static-detail-page cast-crew-box">
+                        <h2 class="headline headline--section">Cast und Crew von "Der Kotzbrocken"</h2>
+<section class="cast" id="inline-section_crew" data-special-anchor>
+    <div class="col">
+        <p class="headline">Crew</p>
+        <dl><dt>Regie:</dt><dd><a href="https://www.tvspielfilm.de/kino/stars/star/tomy-wigand,1564526,ApplicationStar.html" target="_self" title="Tomy Wigand">Tomy Wigand</a></dd><dt>Drehbuch:</dt><dd><a href="https://www.tvspielfilm.de/kino/stars/star/uli-bre,1583542,ApplicationStar.html" target="_self" title="Uli Bree">Uli Bree</a></dd><dt>Kamera:</dt><dd><a href="https://www.tvspielfilm.de/kino/stars/star/egon-werdin,1574060,ApplicationStar.html" target="_self" title="Egon Werdin">Egon Werdin</a></dd><dt>Musik:</dt><dd><a href="https://www.tvspielfilm.de/kino/stars/star/alex-komlew,5809478,ApplicationStar.html" target="_self" title="Alex Komlew">Alex Komlew</a></dd></dl>
+    </div>
+    <div class="col">
+                    <p class="headline">Cast</p>
+	        <dl class="actors">
+	                                                            <dt class="role">Sophie</dt>
+                   <dd class="name"><a href="https://www.tvspielfilm.de/kino/stars/star/aglaia-szyszkowitz,1573929,ApplicationStar.html" target="_self" title="Aglaia Szyszkowitz">Aglaia Szyszkowitz</a></dd>
+               	                                                            <dt class="role">Georg</dt>
+                   <dd class="name"><a href="https://www.tvspielfilm.de/kino/stars/star/roeland-wiesnekker,1587471,ApplicationStar.html" target="_self" title="Roeland Wiesnekker">Roeland Wiesnekker</a></dd>
+               	                                                            <dt class="role">Jacques</dt>
+                   <dd class="name"><a href="https://www.tvspielfilm.de/kino/stars/star/martin-rapold,1557007,ApplicationStar.html" target="_self" title="Martin Rapold">Martin Rapold</a></dd>
+               	                                                            <dt class="role">Linus</dt>
+                   <dd class="name"><a href="https://www.tvspielfilm.de/kino/stars/star/arsseni-bultmann,6400909,ApplicationStar.html" target="_self" title="Arsseni Bultmann">Arsseni Bultmann</a></dd>
+               	                                                            <dt class="role">Laura</dt>
+                   <dd class="name"><a href="https://www.tvspielfilm.de/kino/stars/star/emilie-neumeister,6400914,ApplicationStar.html" target="_self" title="Emilie Neumeister">Emilie Neumeister</a></dd>
+               	                                                            <dt class="role">Frau Marold</dt>
+                   <dd class="name"><a href="https://www.tvspielfilm.de/kino/stars/star/eva-loebau,1622841,ApplicationStar.html" target="_self" title="Eva Löbau">Eva Löbau</a></dd>
+               	                                                            <dt class="role">Barbara</dt>
+                   <dd class="name"><a href="https://www.tvspielfilm.de/kino/stars/star/annika-kuhl,1600261,ApplicationStar.html" target="_self" title="Annika Kuhl">Annika Kuhl</a></dd>
+               	                                                            <dt class="role">Martin</dt>
+                   <dd class="name"><a href="https://www.tvspielfilm.de/kino/stars/star/patrick-schorn,4737712,ApplicationStar.html" target="_self" title="Patrick Schorn">Patrick Schorn</a></dd>
+               	           	        </dl>
+	               </div>
+</section>
+                    </div>
+                
+                <section id ="inline-section_images">
+                                                                        
+<div class="film-gallery">
+
+    <div id="container_BC606f394b8189653c12805c18">
+        <section class="gallery teaser-slider teaser-slider--images-gallery js-default-teaser-slider YOMAMA">
+
+
+                            <h2 class="headline headline--section">
+                                            Bilder von "Der Kotzbrocken"
+                                    </h2>
+                        <div class="swiper-container"
+                 data-loop="false"
+                 data-lazy="true"
+                 data-autoplay="false"
+                 data-autoplay-delay="5000"
+                 data-autoHeight="true"
+                 data-slides-per-view="1"
+                 data-init-slide="1">
+                <div class="swiper-wrapper">
+                                            <div class="swiper-slide"
+                             data-caption="<div class="firstParagraph"></div>"
+                             data-index="1/6"
+                             >
+                            
+                                                            
+                                <picture>
+            <source srcset="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/606f3d6d8189653c12806367_780.webp" type="image/webp">
+        <source srcset="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/606f3d6d8189653c12806367_780.jpg" type="image/jpeg">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAO7u7gAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/606f3d6d8189653c12806367_780.jpg" alt="Bild Der Kotzbrocken - ARD" width="780" class="">
+    </picture>
+                            
+
+                            <div class="description">
+                                                                <span class="counter">1/6</span>
+                            </div>
+
+
+                            <div class="firstParagraph"></div>
+
+                        </div>
+                                            <div class="swiper-slide"
+                             data-caption="<div class="firstParagraph"></div>"
+                             data-index="2/6"
+                             >
+                            
+                                                            
+                                <picture class="upright">
+            <img src="https://a2.tvspielfilm.de/imedia/tv/606f/606f3d728189653c12806374,ZrCCT1NdcRULTB62mQKZrNq_bpzADtFowCgMeea3sfuBIwULIDiFC_rmxQ2nnlNBZwbFxX69a6hauTp1e+Cweg==.jpg" alt="Bild Der Kotzbrocken - ARD" width="718">
+    </picture>
+                            
+
+                            <div class="description">
+                                                                <span class="counter">2/6</span>
+                            </div>
+
+
+                            <div class="firstParagraph"></div>
+
+                        </div>
+                                            <div class="swiper-slide"
+                             data-caption="<div class="firstParagraph"></div>"
+                             data-index="3/6"
+                             }data-credit="ARD, Marion von der Mehden">
+                            
+                                                            
+                                <picture>
+            <source srcset="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/57028799ea60e57ff2f5c4d1_780.webp" type="image/webp">
+        <source srcset="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/57028799ea60e57ff2f5c4d1_780.jpg" type="image/jpeg">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAO7u7gAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/57028799ea60e57ff2f5c4d1_780.jpg" alt="Bild Der Kotzbrocken - ARD" width="780" class="">
+    </picture>
+                            
+
+                            <div class="description">
+                                                                    <span class="credit">Foto: ARD, Marion von der Mehden</span>
+                                                                <span class="counter">3/6</span>
+                            </div>
+
+
+                            <div class="firstParagraph"></div>
+
+                        </div>
+                                            <div class="swiper-slide"
+                             data-caption="<div class="firstParagraph"></div>"
+                             data-index="4/6"
+                             }data-credit="ARD, Marion von der Mehden">
+                            
+                                                            
+                                <picture>
+            <source srcset="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/57026b88ea60e57ff2f59d92_780.webp" type="image/webp">
+        <source srcset="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/57026b88ea60e57ff2f59d92_780.jpg" type="image/jpeg">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAO7u7gAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/57026b88ea60e57ff2f59d92_780.jpg" alt="Bild Der Kotzbrocken - ARD" width="780" class="">
+    </picture>
+                            
+
+                            <div class="description">
+                                                                    <span class="credit">Foto: ARD, Marion von der Mehden</span>
+                                                                <span class="counter">4/6</span>
+                            </div>
+
+
+                            <div class="firstParagraph"></div>
+
+                        </div>
+                                            <div class="swiper-slide"
+                             data-caption="<div class="firstParagraph"></div>"
+                             data-index="5/6"
+                             }data-credit="ARD, Marion von der Mehden">
+                            
+                                                            
+                                <picture>
+            <source srcset="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/57028663ea60e57ff2f5c31b_780.webp" type="image/webp">
+        <source srcset="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/57028663ea60e57ff2f5c31b_780.jpg" type="image/jpeg">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAO7u7gAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://a2.tvspielfilm.de/itv_sofa/2021-05-01/57028663ea60e57ff2f5c31b_780.jpg" alt="Bild Der Kotzbrocken - ARD" width="780" class="">
+    </picture>
+                            
+
+                            <div class="description">
+                                                                    <span class="credit">Foto: ARD, Marion von der Mehden</span>
+                                                                <span class="counter">5/6</span>
+                            </div>
+
+
+                            <div class="firstParagraph"></div>
+
+                        </div>
+                    
+
+                    
+                                            <div class="swiper-slide more-galleries">
+                                <div class="smallGallery">
+        <p class="headline headline--section"
+trailer NO
+[DEBUG] parseInfoTable True
+
+

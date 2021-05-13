@@ -567,17 +567,17 @@ SparkUnionTunerType/src/Makefile
 SparkUnionTunerType/po/Makefile
 SparkUnionTunerType/meta/Makefile
 
-TV_Spielfilm/Makefile
-TV_Spielfilm/meta/Makefile
-TV_Spielfilm/src/Makefile
-TV_Spielfilm/src/db/Makefile
-TV_Spielfilm/src/font/Makefile
-TV_Spielfilm/src/pic/Makefile
-TV_Spielfilm/src/pic/buttons/Makefile
-TV_Spielfilm/src/pic/icons/Makefile
-TV_Spielfilm/src/pic/logos/Makefile
-TV_Spielfilm/src/pic/setup/Makefile
-TV_Spielfilm/src/pic/slider/Makefile
+TVSpielfilm/Makefile
+TVSpielfilm/meta/Makefile
+TVSpielfilm/src/Makefile
+TVSpielfilm/src/db/Makefile
+TVSpielfilm/src/font/Makefile
+TVSpielfilm/src/pic/Makefile
+TVSpielfilm/src/pic/buttons/Makefile
+TVSpielfilm/src/pic/icons/Makefile
+TVSpielfilm/src/pic/logos/Makefile
+TVSpielfilm/src/pic/setup/Makefile
+TVSpielfilm/src/pic/slider/Makefile
 
 
 ])
