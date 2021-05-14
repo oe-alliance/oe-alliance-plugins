@@ -16,7 +16,7 @@
 		<widget name="label" position="402,131" size="288,30" font="Regular;20" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
 		<widget name="label2" position="402,163" size="288,50" font="Regular;22" foregroundColor="#0a8aee" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
 		<widget name="label3" position="402,218" size="328,42" font="Regular;18" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
-		<widget name="thumb" position="695,160" size="40,40" pixmap="{picpath}icons/rating small1HD.png" alphatest="blend" zPosition="2" />
+		<widget name="thumb" position="695,160" size="40,40" pixmap="{picpath}icons/rating-small1HD.png" alphatest="blend" zPosition="2" />
 		<widget name="label4" position="500,50" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
 		<widget name="label5" position="500,75" size="100,25" font="Regular;18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />
 	</screen>

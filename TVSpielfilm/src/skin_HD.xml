@@ -24,7 +24,7 @@
                 <widget name="label" position="402,151" size="288,24" font="Regular;20" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
                 <widget name="label2" position="402,176" size="288,48" font="Regular;22" foregroundColor="#{color}" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
                 <widget name="label3" position="402,225" size="328,42" font="Regular;18" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
-                <widget name="thumb" position="695,160" size="40,40" pixmap="{picpath}icons/rating small1HD.png" alphatest="blend" zPosition="2" />
+                <widget name="thumb" position="695,160" size="40,40" pixmap="{picpath}icons/rating-small1HD.png" alphatest="blend" zPosition="2" />
                 <widget name="label4" position="40,220" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CD006C" halign="center" valign="center" zPosition="2" />
                 <widget name="label5" position="40,245" size="100,25" font="Regular;18" foregroundColor="#CD006C" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2" />
         </screen>
