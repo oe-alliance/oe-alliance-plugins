@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8u"
+Version = "V5.0-r8v"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -465,7 +465,7 @@ LCD4linux.WetterPath = ConfigText(default="", fixed_size=False, visible_width=50
 LCD4linux.WetterLowColor = ConfigSelection(choices=Farbe, default="aquamarine")
 LCD4linux.WetterHighColor = ConfigSelection(choices=Farbe, default="violet")
 LCD4linux.WetterTransparenz = ConfigSelection(choices=[("false", _("no")), ("crop", _("alternative Copy-Mode/DM800hd (24bit)")), ("true", _("yes (32bit)"))], default="false")
-LCD4linux.WetterIconZoom = ConfigSelectionNumber(30, 70, 1, default=40)
+LCD4linux.WetterIconZoom = ConfigSelectionNumber(20, 70, 1, default=40)
 LCD4linux.WetterRain = ConfigSelection(choices=[("false", _("no")), ("true", _("yes")), ("true2", _("yes + %"))], default="true")
 LCD4linux.WetterRainZoom = ConfigSlider(default=100, increment=1, limits=(90, 200))
 LCD4linux.WetterRainColor = ConfigSelection(choices=Farbe, default="silver")
@@ -5360,7 +5360,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 		key_x = int((conf_w - 40) / 4)
 		pic_w = size_w - conf_w
 		if LCD4linux.LCDType3.value != "00":
-			pic_h = int(size_h / 3) # replace 'pic_h = int(size_h / 2)' in case the current skin supports only 2 LCDs in the GUI-preview
+			pic_h = int(size_h / 2) # replace 'pic_h = int(size_h / 3)' in case the current skin supports only 2 LCDs in the GUI-preview
 		else:
 			pic_h = int(size_h / 2)
 		pic_h2 = pic_h * 2
@@ -9736,9 +9736,9 @@ class UpdateStatus(Screen):
 				city = "q=%s" % quote(ort)
 				if ort.startswith("wc:"):
 					city = "id=%s" % ort[3:]
-				self.feedurl = "http://api.openweathermap.org/data/2.5/weather?%s&lang=%s&units=metric%s" % (city, la[:2], apkey)
+				self.feedurl = "http://api.openweathermap.org/data/2.5/weather?%s&lang=%s&units=metric%s" % (city,la[:2],apkey)
 				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadOpenListCallback, wetter)).addErrback(self.downloadListError)
-				self.feedurl = "http://api.openweathermap.org/data/2.5/forecast?%s&lang=%s&units=metric&cnt=5%s" % (city, la[:2], apkey)
+				self.feedurl = "https://api.openweathermap.org/data/2.5/onecall?&lon=%s&lat=%s&units=metric&exclude=hourly,minutely,current&lang=%s%s" % (self.Long,self.Lat,la[:2],apkey)
 				L4log(self.feedurl)
 				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadOpenListCallback, wetter)).addErrback(self.downloadListError)
 			elif LCD4linux.WetterApi.value == "WEATHERUNLOCKED":
@@ -10916,7 +10916,7 @@ def LCD4linuxPIC(self, session):
 			elif ConfigType == "21":
 				MAX_W = int(55 * 5 * Wmulti)
 			elif ConfigType == "3":
-				MAX_W = int(49 * 2 * Wmulti)
+				MAX_W = int(55 * 2 * Wmulti)
 			elif ConfigType[0] == "4":
 				MAX_W = int(55 * Wmulti)
 			elif ConfigType[0] == "5":
