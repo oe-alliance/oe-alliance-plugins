@@ -10,7 +10,7 @@ from Components.Input import Input
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest, MultiContentEntryProgress
-from Components.Pixmap import Pixmap, MovingPixmap
+from Components.Pixmap import Pixmap
 from Components.ScrollLabel import ScrollLabel
 from Components.Slider import Slider
 from Components.Sources.List import List
@@ -22,14 +22,14 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.Console import Console
 from Screens.InfoBar import InfoBar, MoviePlayer
 from Screens.Standby import TryQuitMainloop
-from Screens.TimerEdit import TimerEditList, TimerSanityConflict
+from Screens.TimerEdit import TimerSanityConflict
 from Screens.TimerEntry import TimerEntry
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from ServiceReference import ServiceReference
 from time import mktime
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import fileExists, isPluginInstalled
 from Tools.LoadPixmap import LoadPixmap
 from twisted.web import client, error
 from twisted.web.client import getPage, downloadPage
@@ -629,7 +629,7 @@ class tvBaseScreen(tvAllScreen):
 
     def IMDb(self):
         if self.current == 'postview':
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/IMDb/plugin.pyo'):
+            if isPluginInstalled('IMDb'):
                 from Plugins.Extensions.IMDb.plugin import IMDB
                 self.session.open(IMDB, self.name)
             else:
@@ -638,16 +638,16 @@ class tvBaseScreen(tvAllScreen):
 
     def TMDb(self):
         if self.current == 'postview':
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/TMDb/plugin.pyo'):
-                from Plugins.Extensions.TMDb.plugin import TMDbMain
-                self.session.open(TMDbMain, self.name)
+            if isPluginInstalled('TMDb'):
+                from Plugins.Extensions.TMDb.tmdb import tmdbScreen
+                self.session.open(tmdbScreen, self.name)
             else:
                 self.session.openWithCallback(self.TMDbInstall, MessageBox, '\nDas TMDb Plugin ist nicht installiert.\n\nDas Plugin kann automatisch installiert werden, wenn es auf dem Feed ihres Images vorhanden ist.\n\nSoll das Plugin jetzt auf dem Feed gesucht und wenn vorhanden automatisch installiert werden?', MessageBox.TYPE_YESNO)
                 return
 
     def TVDb(self):
         if self.current == 'postview':
-            if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/TheTVDB/plugin.pyo'):
+            if isPluginInstalled('TheTVDB'):
                 from Plugins.Extensions.TheTVDB.plugin import TheTVDBMain
                 self.name = sub('Die ', '', self.name)
                 self.session.open(TheTVDBMain, self.name)
@@ -664,7 +664,7 @@ class tvBaseScreen(tvAllScreen):
     def finishedIMDbInstall(self, retval):
         del self.container.appClosed[:]
         del self.container
-        if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/IMDb/plugin.pyo'):
+        if isPluginInstalled('IMDb'):
             self.session.openWithCallback(self.restartGUI, MessageBox, '\nDas IMDb Plugin wurde installiert.\nBitte starten Sie Enigma neu.', MessageBox.TYPE_YESNO)
         else:
             self.session.open(MessageBox, '\nDas IMDb Plugin ist nicht auf dem Feed ihres Images vorhanden.\n\nBitte installieren Sie das IMDb Plugin manuell.', MessageBox.TYPE_ERROR)
@@ -678,7 +678,7 @@ class tvBaseScreen(tvAllScreen):
     def finishedTMDbInstall(self, retval):
         del self.container.appClosed[:]
         del self.container
-        if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/TMDb/plugin.pyo'):
+        if isPluginInstalled('TMDb'):
             self.session.openWithCallback(self.restartGUI, MessageBox, '\nDas TMDb Plugin wurde installiert.\nBitte starten Sie Enigma neu.', MessageBox.TYPE_YESNO)
         else:
             self.session.open(MessageBox, '\nDas TMDb Plugin ist nicht auf dem Feed ihres Images vorhanden.\n\nBitte installieren Sie das TMDb Plugin manuell.', MessageBox.TYPE_ERROR)
@@ -692,7 +692,7 @@ class tvBaseScreen(tvAllScreen):
     def finishedTVDbInstall(self, retval):
         del self.container.appClosed[:]
         del self.container
-        if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/TheTVDB/plugin.pyo'):
+        if isPluginInstalled('TheTVDB'):
             self.session.openWithCallback(self.restartGUI, MessageBox, '\nDas TheTVDb Plugin wurde installiert.\nBitte starten Sie Enigma neu.', MessageBox.TYPE_YESNO)
         else:
             self.session.open(MessageBox, '\nDas TheTVDb Plugin ist nicht auf dem Feed ihres Images vorhanden.\n\nBitte installieren Sie das TheTVDb Plugin manuell.', MessageBox.TYPE_ERROR)
