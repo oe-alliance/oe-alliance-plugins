@@ -638,9 +638,9 @@ class tvBaseScreen(tvAllScreen):
 
     def TMDb(self):
         if self.current == 'postview':
-            if isPluginInstalled('TMDb'):
-                from Plugins.Extensions.TMDb.tmdb import tmdbScreen
-                self.session.open(tmdbScreen, self.name)
+            if isPluginInstalled('tmdb'):
+                from Plugins.Extensions.tmdb.tmdb import tmdbScreen
+                self.session.open(tmdbScreen, self.name, 2)
             else:
                 self.session.openWithCallback(self.TMDbInstall, MessageBox, '\nDas TMDb Plugin ist nicht installiert.\n\nDas Plugin kann automatisch installiert werden, wenn es auf dem Feed ihres Images vorhanden ist.\n\nSoll das Plugin jetzt auf dem Feed gesucht und wenn vorhanden automatisch installiert werden?', MessageBox.TYPE_YESNO)
                 return
