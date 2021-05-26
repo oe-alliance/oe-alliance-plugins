@@ -10,7 +10,7 @@
 		<widget name="secondmenu" position="10,104" size="400,535" scrollbarMode="showOnDemand" zPosition="2" />		
 		<widget name="thirdmenu" position="10,104" size="400,535" scrollbarMode="showOnDemand" zPosition="2" />
 	</screen>
-		<screen name="tvTipps" position="10,460" size="740,270" flags="wfNoBorder" title=" ">
+		<screen name="tvTipps" position="10,604" size="740,270" flags="wfNoBorder" title=" ">
 		<widget name="picture" position="0,0" size="387,270" alphatest="blend" zPosition="1" />
 		<widget name="elabel3" position="387,126" size="353,135" font="Regular;18" backgroundColor="#FFFFFF" zPosition="1" />
 		<widget name="label" position="402,131" size="288,30" font="Regular;20" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2" />
