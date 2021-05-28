@@ -2700,28 +2700,28 @@ def SensorRead(dat,isTemp=False):
 	T = 0
 	if os.path.isfile(dat) == True:
 		line = open(dat).readline().strip()
-		i=0
-		while len(line)<1 and i<10:
+		i = 0
+		while len(line) < 1 and i < 10:
 			L4log("Sensor-Wait")
-			i+=1
+			i += 1
 			sleep(0.01)
 			line = open(dat).readline().strip()
 		if line.find("temperature") >= 0:
-			line=line[line.find("temperature"):]
-		T = float("0"+re.sub("[^0-9^.]", "", line))
+			line = line[line.find("temperature"):]
+		T = float("0" + re.sub("[^0-9^.]", "", line))
 		if isTemp and T > 1000.:
 			T /= 1000.
 	return T
 
 def GetTempSensor():
 	d = []
-	d+= glob.glob("/proc/stb/sensors/temp*/value") # e.g. Dreambox
-	d+= glob.glob("/sys/class/thermal/thermal_zone0/temp") # e.g. GigaBlue UE4K
-	d+= glob.glob("/proc/hisi/msp/pm_cpu") # e.g. Octagon SF8008
-	d+= glob.glob("/proc/stb/fp/temp_sensor") # e.g. ZGemma H9Twin
-	d+= glob.glob("/proc/stb/sensors/temp/value") # unverified, unknown Boxes
-	d+= glob.glob("/proc/stb/fp/temp_sensor_avs") # unverified, unknown Boxes
-	d+= glob.glob("/proc/stb/power/avs") # unverified, unknown Boxes
+	d += glob.glob("/proc/stb/sensors/temp*/value") # e.g. Dreambox
+	d += glob.glob("/sys/class/thermal/thermal_zone0/temp") # e.g. GigaBlue UE4K
+	d += glob.glob("/proc/hisi/msp/pm_cpu") # e.g. Octagon SF8008
+	d += glob.glob("/proc/stb/fp/temp_sensor") # e.g. ZGemma H9Twin
+	d += glob.glob("/proc/stb/sensors/temp/value") # unverified, unknown Boxes
+	d += glob.glob("/proc/stb/fp/temp_sensor_avs") # unverified, unknown Boxes
+	d += glob.glob("/proc/stb/power/avs") # unverified, unknown Boxes
 	L4logE("looking for Temp",str(d))
 	for ts in d:
 		try:
