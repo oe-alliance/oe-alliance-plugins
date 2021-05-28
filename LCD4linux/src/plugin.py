@@ -2695,7 +2695,7 @@ def virtBRI(LCD):
 	else:
 		return ((0.08 * vb) + 0.2)
 
-def SensorRead(dat,isTemp=False):
+def SensorRead(dat, isTemp=False):
 	line = ""
 	T = 0
 	if os.path.isfile(dat) == True:
@@ -2722,16 +2722,16 @@ def GetTempSensor():
 	d += glob.glob("/proc/stb/sensors/temp/value") # unverified, unknown Boxes
 	d += glob.glob("/proc/stb/fp/temp_sensor_avs") # unverified, unknown Boxes
 	d += glob.glob("/proc/stb/power/avs") # unverified, unknown Boxes
-	L4logE("looking for Temp",str(d))
+	L4logE("looking for Temp", str(d))
 	for ts in d:
 		try:
-			Temp = SensorRead(ts,True)
+			Temp = SensorRead(ts, True)
 			usable = float(Temp) > 10.0 and float(Temp) < 100.0
 			L4logE("found Temp: '" + ts + "', raw data: '" + str(Temp) + "', ", "usable: " + str(usable))
 			if usable:
 				return ts
 		except:
-			L4logE("Error Temp: ",ts)
+			L4logE("Error Temp: ", ts)
 	return ""
 
 def ICSdownloads():
@@ -9775,7 +9775,7 @@ class UpdateStatus(Screen):
 				city = "q=%s" % quote(ort)
 				if ort.startswith("wc:"):
 					city = "id=%s" % ort[3:]
-				self.feedurl = "http://api.openweathermap.org/data/2.5/weather?%s&lang=%s&units=metric%s" % (city,la[:2],apkey)
+				self.feedurl = "http://api.openweathermap.org/data/2.5/weather?%s&lang=%s&units=metric%s" % (city, la[:2], apkey)
 				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadOpenListCallback, wetter)).addErrback(self.downloadListError)
 				self.feedurl = "https://api.openweathermap.org/data/2.5/onecall?&lon=%s&lat=%s&units=metric&exclude=hourly,minutely,current&lang=%s%s" % (self.Long[wetter], self.Lat[wetter], la[:2], apkey)
 				L4log(self.feedurl)
