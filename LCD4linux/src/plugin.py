@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8v"
+Version = "V5.0-r8w"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -2695,6 +2695,44 @@ def virtBRI(LCD):
 	else:
 		return ((0.08 * vb) + 0.2)
 
+def SensorRead(dat,isTemp=False):
+	line = ""
+	T = 0
+	if os.path.isfile(dat) == True:
+		line = open(dat).readline().strip()
+		i=0
+		while len(line)<1 and i<10:
+			L4log("Sensor-Wait")
+			i+=1
+			sleep(0.01)
+			line = open(dat).readline().strip()
+		if line.find("temperature") >= 0:
+			line=line[line.find("temperature"):]
+		T = float("0"+re.sub("[^0-9^.]", "", line))
+		if isTemp and T > 1000.:
+			T /= 1000.
+	return T
+
+def GetTempSensor():
+	d = []
+	d+= glob.glob("/proc/stb/sensors/temp*/value") # e.g. Dreambox
+	d+= glob.glob("/sys/class/thermal/thermal_zone0/temp") # e.g. GigaBlue UE4K
+	d+= glob.glob("/proc/hisi/msp/pm_cpu") # e.g. Octagon SF8008
+	d+= glob.glob("/proc/stb/fp/temp_sensor") # e.g. ZGemma H9Twin
+	d+= glob.glob("/proc/stb/sensors/temp/value") # unverified, unknown Boxes
+	d+= glob.glob("/proc/stb/fp/temp_sensor_avs") # unverified, unknown Boxes
+	d+= glob.glob("/proc/stb/power/avs") # unverified, unknown Boxes
+	L4logE("looking for Temp",str(d))
+	for ts in d:
+		try:
+			Temp = SensorRead(ts,True)
+			usable = float(Temp) > 10.0 and float(Temp) < 100.0
+			L4logE("found Temp: '" + ts + "', raw data: '" + str(Temp) + "', ", "usable: " + str(usable))
+			if usable:
+				return ts
+		except:
+			L4logE("Error Temp: ",ts)
+	return ""
 
 def ICSdownloads():
 	global ICS
@@ -4560,7 +4598,7 @@ try:
 	FritzCallRegisterUserAction(FritzCallLCD4Linux)
 	L4log("Register FritzCall ok")
 except:
-	L4log("FritCall not registered")
+	L4log("FritzCall not registered")
 
 try:
 	from Plugins.Extensions.NcidClient.plugin import registerUserAction as NcidClientRegisterUserAction
@@ -4626,7 +4664,6 @@ except:
 	L4log("Sonos not registered")
 from .ymc import YMC
 from .bluesound import BlueSound
-
 
 class GrabOSD:
 	def __init__(self, cmd):
@@ -8294,9 +8331,9 @@ class UpdateStatus(Screen):
 		self.TunerCallBack = False
 		self.MSNsrc = 0
 		self.WetterOK = False
-		self.TimeZone = "0"
-		self.Long = ""
-		self.Lat = "0"
+		self.TimeZone = ["0", "0"]
+		self.Long = ["", ""]
+		self.Lat = ["0", "0"]
 		self.ExternalIP = "waiting <1h..."
 		self.WDay = [{}, {}]
 		self.WWeek = [[], []]
@@ -8322,6 +8359,7 @@ class UpdateStatus(Screen):
 		self.im[3] = self.im[1]
 		self.draw[2] = self.draw[1]
 		self.draw[3] = self.draw[1]
+		self.Temp = ""
 		L4LElist.setFont([FONT, LCD4linux.Font1.value, LCD4linux.Font2.value, LCD4linux.Font3.value, LCD4linux.Font4.value, LCD4linux.Font5.value])
 		L4LElist.setVersion(Version)
 		if getFB2(False):
@@ -8410,6 +8448,7 @@ class UpdateStatus(Screen):
 #####		self.onShow.append(self.ServiceChange)
 		config.misc.standbyCounter.addNotifier(self.standbyQuery, initial_call=False)
 		getBilder()
+		self.Temp = GetTempSensor()
 		self.StatusTimer.startLongTimer(int(LCD4linux.FastMode.value))
 		self.QuickTimer.start(int(LCD4linux.BilderQuick.value), True)
 		self.CheckRefresh.start(500, True)
@@ -9736,9 +9775,9 @@ class UpdateStatus(Screen):
 				city = "q=%s" % quote(ort)
 				if ort.startswith("wc:"):
 					city = "id=%s" % ort[3:]
-				self.feedurl = "http://api.openweathermap.org/data/2.5/weather?%s&lang=%s&units=metric%s" % (city, la[:2], apkey)
+				self.feedurl = "http://api.openweathermap.org/data/2.5/weather?%s&lang=%s&units=metric%s" % (city,la[:2],apkey)
 				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadOpenListCallback, wetter)).addErrback(self.downloadListError)
-				self.feedurl = "https://api.openweathermap.org/data/2.5/onecall?&lon=%s&lat=%s&units=metric&exclude=hourly,minutely,current&lang=%s%s" % (self.Long, self.Lat, la[:2], apkey)
+				self.feedurl = "https://api.openweathermap.org/data/2.5/onecall?&lon=%s&lat=%s&units=metric&exclude=hourly,minutely,current&lang=%s%s" % (self.Long[wetter], self.Lat[wetter], la[:2], apkey)
 				L4log(self.feedurl)
 				getPage(six.ensure_binary(self.feedurl)).addCallback(boundFunction(self.downloadOpenListCallback, wetter)).addErrback(self.downloadListError)
 			elif LCD4linux.WetterApi.value == "WEATHERUNLOCKED":
@@ -9817,12 +9856,11 @@ class UpdateStatus(Screen):
 			curr = dom.getElementsByTagName("weather")
 			if len(curr) != 0:
 				self.WDay[ConfigWWW]["Locname"] = curr[0].getAttribute("weatherlocationname")
-				if ConfigWWW == 0:
-					self.TimeZone = curr[0].getAttribute("timezone")
-					self.Long = curr[0].getAttribute("long")
-					self.Lat = curr[0].getAttribute("lat")
-					self.downloadSunrise()
-			L4log(self.Long, self.Lat)
+				self.TimeZone[ConfigWWW] = curr[0].getAttribute("timezone")
+				self.Long[ConfigWWW] = curr[0].getAttribute("long")
+				self.Lat[ConfigWWW] = curr[0].getAttribute("lat")
+				self.downloadSunrise()
+			L4log(self.Long[ConfigWWW], self.Lat[ConfigWWW])
 			curr = dom.getElementsByTagName("current")
 			if len(curr) != 0:
 				self.WDay[ConfigWWW]["Temp_c"] = curr[0].getAttribute("temperature")
@@ -9894,11 +9932,10 @@ class UpdateStatus(Screen):
 			self.WDay[ConfigWWW]["Wtime"] = strftime("%H:%M", localtime(r["dt"]))
 			self.WDay[ConfigWWW]["IconID"] = r.get("weather", [{}])[0].get("id", "0")
 
-			if ConfigWWW == 0:
-				self.TimeZone = 0
-				self.Long = r.get("coord", {}).get("lon", 0)
-				self.Lat = r.get("coord", {}).get("lat", 0)
-				self.downloadSunrise()
+			self.TimeZone[ConfigWWW] = 0
+			self.Long[ConfigWWW] = r.get("coord", {}).get("lon", 0)
+			self.Lat[ConfigWWW] = r.get("coord", {}).get("lat", 0)
+			self.downloadSunrise()
 			PICwetter[ConfigWWW] = None
 		else:
 			wwwWetter[ConfigWWW] = ""
@@ -9955,11 +9992,10 @@ class UpdateStatus(Screen):
 			self.WDay[ConfigWWW]["Wtime"] = strftime("%H:%M", localtime())
 			self.WDay[ConfigWWW]["IconID"] = r.get("wx_code", "0")
 
-			if ConfigWWW == 0:
-				self.TimeZone = 0
-				self.Long = str(r.get("lon", 0))
-				self.Lat = str(r.get("lat", 0))
-				self.downloadSunrise()
+			self.TimeZone[ConfigWWW] = 0
+			self.Long[ConfigWWW] = str(r.get("lon", 0))
+			self.Lat[ConfigWWW] = str(r.get("lat", 0))
+			self.downloadSunrise()
 			PICwetter[ConfigWWW] = None
 		else:
 			wwwWetter[ConfigWWW] = ""
@@ -9971,11 +10007,11 @@ class UpdateStatus(Screen):
 		apkey = ""
 		if len(LCD4linux.WetterApiKeyOpenWeatherMap.value) > 599:
 			apkey = "&appid=%s" % LCD4linux.WetterApiKeyOpenWeatherMap.value
-			self.feedurl = str("http://api.openweathermap.org/data/2.5/weather?lat=%.2f&lon=%.2f&mode=xml&cnt=1%s" % (float(self.Lat.replace(",", ".")), float(self.Long.replace(",", ".")), apkey))
+			self.feedurl = str("http://api.openweathermap.org/data/2.5/weather?lat=%.2f&lon=%.2f&mode=xml&cnt=1%s" % (float(self.Lat[0].replace(",", ".")), float(self.Long[0].replace(",", ".")), apkey))
 			L4log("Sunrise downloadstart:", self.feedurl)
 			getPage(six.ensure_binary(self.feedurl)).addCallback(self.downloadSunriseCallback).addErrback(self.downloadSunriseError)
 		else:
-			self.feedurl = str("http://api.sunrise-sunset.org/json?lat=%s&lng=%s&formatted=0" % (self.Lat, self.Long)).replace(",", ".")
+			self.feedurl = str("http://api.sunrise-sunset.org/json?lat=%s&lng=%s&formatted=0" % (self.Lat[0], self.Long[0])).replace(",", ".")
 			L4log("Sunrise2 downloadstart:", self.feedurl)
 			getPage(six.ensure_binary(self.feedurl)).addCallback(self.downloadSunriseCallback2).addErrback(self.downloadSunriseError)
 
@@ -12868,17 +12904,6 @@ def LCD4linuxPIC(self, session):
 		def NL(count):
 			return "\n" if int(count) > 2 else ""
 
-		def SensorRead(dat):
-			line = ""
-			if os.path.isfile(dat) == True:
-				line = open(dat).readline().strip()
-				i = 0
-				while len(line) < 1 and i < 10:
-					L4log("Sensor-Wait")
-					i += 1
-					sleep(0.01)
-					line = open(dat).readline().strip()
-			return int("0" + re.sub("[^0-9]", "", line))
 		global CPUtotal
 		global CPUidle
 		MAX_W, MAX_H = self.im[im].size
@@ -12895,53 +12920,9 @@ def LCD4linuxPIC(self, session):
 				i += " %d%%%s" % (self.LsignalQuality * 100 / 65536, NL(ConfigLines))
 			if "C" in ConfigInfo:
 				i += " %d%s" % (self.LbitErrorRate, NL(ConfigLines))
-		if "T" in ConfigInfo:
-			if os.path.exists("/proc/stb/sensors"): # try system temp #1 (e.g. Dreambox?)
-				m1 = 0
-				for dirname in os.listdir("/proc/stb/sensors"):
-					if dirname.find("temp", 0, 4) == 0:
-						if os.path.isfile("/proc/stb/sensors/%s/value" % dirname) == True:
-							tt = SensorRead("/proc/stb/sensors/%s/value" % dirname)
-							if m1 < tt:
-								m1 = tt
-				if m1 != 0:
-					i += " %d%sC%s" % (m1, SIGN, NL(ConfigLines))
-			elif os.path.isfile("/proc/stb/fp/temp_sensor"): # try system temp #2 (e.g. ZGemma H9Twin)
-				try:
-					line = open("/proc/stb/fp/temp_sensor").readline().strip()
-					i += " %.1f%sC%s" % (int(line), SIGN, NL(ConfigLines))
-				except:
-					L4logE("Error read Temp '/proc/stb/fp/temp_sensor'")
-			elif os.path.isfile("/proc/stb/sensors/temp/value"): # try system temp #3
-				try:
-					line = open("/proc/stb/sensors/temp/value").readline().strip()
-					i += " 3s:%.1f%sC%s" % (int(line), SIGN, NL(ConfigLines))
-				except:
-					L4logE("Error read Temp '/proc/stb/sensors/temp/value'")
-			elif os.path.isfile("/proc/stb/fp/temp_sensor_avs"): # try CPU temp #1
-				try:
-					line = open("/proc/stb/fp/temp_sensor_avs").readline().strip()
-					i += " 1p:%.1f%sC%s" % (int(line), SIGN, NL(ConfigLines))
-				except:
-					L4logE("Error read Temp '/proc/stb/fp/temp_sensor_avs'")
-			elif os.path.isfile("/proc/stb/power/avs"): # try CPU temp #2
-				try:
-					line = open("/proc/stb/power/avs").readline().strip()
-					i += " 2p:%.1f%sC%s" % (int(line), SIGN, NL(ConfigLines))
-				except:
-					L4logE("Error read Temp '/proc/stb/power/avs'")
-			elif os.path.isfile("/sys/class/thermal/thermal_zone0/temp"): # try CPU temp #3 (e.g. GigaBlue UE4K)
-				try:
-					line = open("/sys/class/thermal/thermal_zone0/temp").readline().strip()
-					i += " %.1f%sC%s" % (int(line) / 1000.0, SIGN, NL(ConfigLines))
-				except:
-					L4logE("Error read Temp '/sys/class/thermal/thermal_zone0/temp'")
-			elif os.path.isfile("/proc/hisi/msp/pm_cpu"): # try CPU temp #4 (e.g. Octagon SF8008)
-				try:
-					line = open("/proc/hisi/msp/pm_cpu").read().strip()
-					i += " %.1f%sC%s" % (int(line[line.find("temperature = ") + len("temperature = "):line.find(" degree")]), SIGN, NL(ConfigLines))
-				except:
-					L4logE("Error read Temp '/proc/hisi/msp/pm_cpu'")
+#			print3("%d" % (feinfo.getFrontendInfo(iFrontendInformation.signalPower)))
+		if "T" in ConfigInfo and self.Temp != "":
+			i += " %d%sC%s" % (SensorRead(self.Temp[0], True), SIGN, NL(ConfigLines))
 		if "R" in ConfigInfo:
 			if os.path.isfile("/proc/stb/fp/fan_speed"):
 				value = SensorRead("/proc/stb/fp/fan_speed")
