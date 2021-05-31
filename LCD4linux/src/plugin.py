@@ -2695,6 +2695,7 @@ def virtBRI(LCD):
 	else:
 		return ((0.08 * vb) + 0.2)
 
+
 def SensorRead(dat, isTemp=False):
 	line = ""
 	T = 0
@@ -2712,6 +2713,7 @@ def SensorRead(dat, isTemp=False):
 		if isTemp and T > 1000.:
 			T /= 1000.
 	return T
+
 
 def GetTempSensor():
 	d = []
@@ -2733,6 +2735,7 @@ def GetTempSensor():
 		except:
 			L4logE("Error Temp: ", ts)
 	return ""
+
 
 def ICSdownloads():
 	global ICS
@@ -4664,6 +4667,7 @@ except:
 	L4log("Sonos not registered")
 from .ymc import YMC
 from .bluesound import BlueSound
+
 
 class GrabOSD:
 	def __init__(self, cmd):
