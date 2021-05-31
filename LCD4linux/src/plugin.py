@@ -2715,14 +2715,14 @@ def SensorRead(dat, isTemp = False):
 
 def GetTempSensor():
 	d = []
-	d+= glob.glob("/proc/stb/sensors/temp*/value") # e.g. Dreambox
-	d+= glob.glob("/sys/class/thermal/thermal_zone0/temp") # e.g. GigaBlue UE4K
-	d+= glob.glob("/proc/hisi/msp/pm_cpu") # e.g. Octagon SF8008
-	d+= glob.glob("/proc/stb/fp/temp_sensor") # e.g. ZGemma H9Twin
-	d+= glob.glob("/proc/stb/sensors/temp/value") # unverified, unknown Boxes
-	d+= glob.glob("/proc/stb/fp/temp_sensor_avs") # unverified, unknown Boxes
-	d+= glob.glob("/proc/stb/power/avs") # unverified, unknown Boxes
-	L4logE("looking for Temp",str(d))
+	d += glob.glob("/proc/stb/sensors/temp*/value") # e.g. Dreambox
+	d += glob.glob("/sys/class/thermal/thermal_zone0/temp") # e.g. GigaBlue UE4K
+	d += glob.glob("/proc/hisi/msp/pm_cpu") # e.g. Octagon SF8008
+	d += glob.glob("/proc/stb/fp/temp_sensor") # e.g. ZGemma H9Twin
+	d += glob.glob("/proc/stb/sensors/temp/value") # unverified, unknown Boxes
+	d += glob.glob("/proc/stb/fp/temp_sensor_avs") # unverified, unknown Boxes
+	d += glob.glob("/proc/stb/power/avs") # unverified, unknown Boxes
+	L4logE("looking for Temp", str(d))
 	for ts in d:
 		try:
 			Temp = SensorRead(ts, True)
