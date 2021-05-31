@@ -450,6 +450,7 @@ def transCHANNEL(data):
     data = sub('HR.*?,', 'hr', data)
     data = sub('SWR.*?,', 'swr', data)
     data = sub('BR.*?,', 'swr', data)
+    data = sub('TELE 5.*?,', 'TELE5', data)
     return data
 
 
