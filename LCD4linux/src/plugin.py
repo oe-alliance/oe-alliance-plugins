@@ -12922,7 +12922,7 @@ def LCD4linuxPIC(self, session):
 				i += " %d%s" % (self.LbitErrorRate, NL(ConfigLines))
 #			print3("%d" % (feinfo.getFrontendInfo(iFrontendInformation.signalPower)))
 		if "T" in ConfigInfo and self.Temp != "":
-			i += " %d%sC%s" % (SensorRead(self.Temp[0], True), SIGN, NL(ConfigLines))
+			i += " %d%sC%s" % (SensorRead(self.Temp, True), SIGN, NL(ConfigLines))
 		if "R" in ConfigInfo:
 			if os.path.isfile("/proc/stb/fp/fan_speed"):
 				value = SensorRead("/proc/stb/fp/fan_speed")
