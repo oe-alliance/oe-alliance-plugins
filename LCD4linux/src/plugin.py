@@ -2695,7 +2695,7 @@ def virtBRI(LCD):
 	else:
 		return ((0.08 * vb) + 0.2)
 
-def SensorRead(dat, isTemp = False):
+def SensorRead(dat, isTemp=False):
 	line = ""
 	T = 0
 	if os.path.isfile(dat) == True:
