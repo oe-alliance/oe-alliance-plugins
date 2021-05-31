@@ -2695,8 +2695,7 @@ def virtBRI(LCD):
 	else:
 		return ((0.08 * vb) + 0.2)
 
-
-def SensorRead(dat, isTemp=False):
+def SensorRead(dat, isTemp = False):
 	line = ""
 	T = 0
 	if os.path.isfile(dat) == True:
@@ -2713,7 +2712,6 @@ def SensorRead(dat, isTemp=False):
 		if isTemp and T > 1000.:
 			T /= 1000.
 	return T
-
 
 def GetTempSensor():
 	d = []
@@ -2735,7 +2733,6 @@ def GetTempSensor():
 		except:
 			L4logE("Error Temp: ", ts)
 	return ""
-
 
 def ICSdownloads():
 	global ICS
@@ -4667,7 +4664,6 @@ except:
 	L4log("Sonos not registered")
 from .ymc import YMC
 from .bluesound import BlueSound
-
 
 class GrabOSD:
 	def __init__(self, cmd):
@@ -12926,7 +12922,7 @@ def LCD4linuxPIC(self, session):
 				i += " %d%s" % (self.LbitErrorRate, NL(ConfigLines))
 #			print3("%d" % (feinfo.getFrontendInfo(iFrontendInformation.signalPower)))
 		if "T" in ConfigInfo and self.Temp != "":
-			i += " %d%sC%s" % (SensorRead(self.Temp[0], True), SIGN, NL(ConfigLines))
+			i += " %d%sC%s" % (SensorRead(self.Temp, True), SIGN, NL(ConfigLines))
 		if "R" in ConfigInfo:
 			if os.path.isfile("/proc/stb/fp/fan_speed"):
 				value = SensorRead("/proc/stb/fp/fan_speed")
