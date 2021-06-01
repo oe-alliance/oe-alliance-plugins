@@ -1,0 +1,275 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenATV\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-06-01 04:28+0300\n"
+"Last-Translator: tomppaa <http://www.huoltovalikko.com/>\n"
+"Language-Team: tomppaa\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.3\n"
+"POT-Creation-Date: \n"
+
+msgid "%s"
+msgstr "%s"
+
+msgid "1.0"
+msgstr "1.0"
+
+msgid "1080p"
+msgstr "1080p"
+
+msgid "160x120"
+msgstr "160x120"
+
+msgid "16x9"
+msgstr "16x9"
+
+msgid "2.0"
+msgstr "2.0"
+
+msgid "2.1"
+msgstr "2.1"
+
+msgid "2.2"
+msgstr "2.2"
+
+msgid "2nd transcoding and PIP are mutually exclusive."
+msgstr "2nd Transkoodaus ja PIP sulkevat toisensa pois."
+
+msgid "3.0"
+msgstr "3.0"
+
+msgid "3.1"
+msgstr "3.1"
+
+msgid "3.2"
+msgstr "3.2"
+
+msgid "320x240"
+msgstr "320x240"
+
+msgid "4.0"
+msgstr "4.0"
+
+msgid "4.1"
+msgstr "4.1"
+
+msgid "4.2"
+msgstr "4.2"
+
+msgid "480p"
+msgstr "480p"
+
+msgid "4x3"
+msgstr "4x3"
+
+msgid "5.0"
+msgstr "5.0"
+
+msgid "576p"
+msgstr "576p"
+
+msgid "720p"
+msgstr "720p"
+
+msgid "Advanced"
+msgstr "Laajat"
+
+msgid "Aspect Ratio"
+msgstr "Kuvasuhde"
+
+msgid "Audio codec"
+msgstr "Ääni koodekki"
+
+msgid "Auto set Framerate / Bitrate"
+msgstr "Automaattinen Kuvataajuus / Bittinopeus"
+
+msgid "Bitrate"
+msgstr "Bittinopeus"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Default"
+msgstr "Oletus"
+
+msgid "Encoder"
+msgstr "Enkooderi"
+
+msgid "Encoder 0: Aspect Ratio"
+msgstr "Enkooderi 0: kuvasuhde"
+
+msgid "Encoder 0: Audio codec"
+msgstr "Enkooderi 0: Ääni koodekki"
+
+msgid "Encoder 0: Auto mode (Bitrate/Framerate)"
+msgstr "Encooderi 0: Automaattinen tila (Bittinopeus/Kuvataajuus)"
+
+msgid "Encoder 0: Bitrate"
+msgstr "Enkooderi 0: Bittinopeus"
+
+msgid "Encoder 0: Framerate"
+msgstr "Encooderi 0: Kuvataajuus"
+
+msgid "Encoder 0: GOP Frame B"
+msgstr "Encooderi 0: GOP Kehys B"
+
+msgid "Encoder 0: GOP Frame P"
+msgstr "Encooderi 0: GOP Kehys P"
+
+msgid "Encoder 0: Level"
+msgstr "Encoder 0: Taso"
+
+msgid "Encoder 0: Profile"
+msgstr "Encoder 0: Profiili"
+
+msgid "Encoder 0: Resolution"
+msgstr "Enkooderi 0: Resoluutio"
+
+msgid "Encoder 0: Video codec"
+msgstr "Enkooderi 0: Videokoodekki"
+
+msgid "Encoder 1: Aspect Ratio"
+msgstr "Enkooderi 1: kuvasuhde"
+
+msgid "Encoder 1: Audio codec"
+msgstr "Enkooderi 1: Ääni koodekki"
+
+msgid "Encoder 1: Auto mode (Bitrate/Framerate)"
+msgstr "Encooderi 1: Automaattinen tila (Bittinopeus/Kuvataajuus)"
+
+msgid "Encoder 1: Bitrate"
+msgstr "Enkooderi 1: Bittinopeus"
+
+msgid "Encoder 1: Framerate"
+msgstr "Encooderi 1: Kuvataajuus"
+
+msgid "Encoder 1: GOP Frame B"
+msgstr "Encooderi 1: GOP Kehys B"
+
+msgid "Encoder 1: GOP Frame P"
+msgstr "Encooderi 1: GOP Kehys P"
+
+msgid "Encoder 1: Level"
+msgstr "Encoder 1: Taso"
+
+msgid "Encoder 1: Profile"
+msgstr "Encoder 1: Profiili"
+
+msgid "Encoder 1: Resolution"
+msgstr "Enkooderi 1: Resoluutio"
+
+msgid "Encoder 1: Video codec"
+msgstr "Enkooderi 1: Videokoodekki"
+
+msgid "Framerate"
+msgstr "Ruudunpäivitysnopeus"
+
+msgid "GOP Frame B"
+msgstr "GOP Kehys B"
+
+msgid "GOP Frame P"
+msgstr "GOP Kehys P"
+
+msgid "Level"
+msgstr "Taso"
+
+msgid "Max"
+msgstr "Maksimi"
+
+msgid "Min"
+msgstr "Minimi"
+
+msgid "Normal"
+msgstr "Normaali"
+
+msgid "Off"
+msgstr "Pois"
+
+msgid "On"
+msgstr "Päällä"
+
+msgid "Port"
+msgstr "Portti"
+
+msgid "Profile"
+msgstr "Profiili"
+
+msgid "Really close without saving settings?"
+msgstr "Haluatko varmasti poistua tallentamatta asetuksia?"
+
+msgid "Resolution"
+msgstr "Resoluutio"
+
+msgid "Save"
+msgstr "Tallenna"
+
+msgid "This model does not support transcoding."
+msgstr "Laitteesi ei tue transkoodausta."
+
+msgid "Transcoding Setup"
+msgstr "Transkoodauksen Asetukset"
+
+msgid "Transcoding and PIP are mutually exclusive."
+msgstr "Transkoodaus ja PIP sulkevat toisensa pois."
+
+msgid "TranscodingSetup"
+msgstr "Transkoodauksen Asetukset"
+
+msgid "Video codec"
+msgstr "Videokoodekki"
+
+msgid "aac"
+msgstr "aac"
+
+msgid "aac+"
+msgstr "aac+"
+
+msgid "aac+adts"
+msgstr "aac+adts"
+
+msgid "aac+loas"
+msgstr "aac+loas"
+
+msgid "ac3"
+msgstr "ac3"
+
+msgid "advancedsimple"
+msgstr "edistynyt yksinkertainen"
+
+msgid "auto"
+msgstr "automaattinen"
+
+msgid "baseline"
+msgstr "lähtötaso"
+
+msgid "disable"
+msgstr "poista käytöstä"
+
+msgid "enable"
+msgstr "ota käyttöön"
+
+msgid "h264"
+msgstr "H264"
+
+msgid "high"
+msgstr "suuri"
+
+msgid "low"
+msgstr "matala"
+
+msgid "main"
+msgstr "tärkein"
+
+msgid "mp3"
+msgstr "mp3"
+
+msgid "mpg"
+msgstr "mpg"
+
+msgid "simple"
+msgstr "yksinkertainen"
