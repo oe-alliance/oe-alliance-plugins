@@ -1,114 +1,110 @@
-# Finnish translations for Enigma2.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 16:21+0430\n"
-"PO-Revision-Date: 2016-05-07 13:27+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-06-01 04:02+0300\n"
+"Last-Translator: tomppaa <www.huoltovalikko.com>\n"
+"Language-Team: Tomppaa\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.4.3\n"
+"POT-Creation-Date: \n"
 
 msgid "Always off"
-msgstr ""
+msgstr "Aina pois päältä"
 
 msgid "Blink Record Led"
-msgstr ""
+msgstr "Led vilkkuu tallentaessa"
 
 msgid "Blue"
-msgstr ""
+msgstr "Sininen"
 
 msgid "Brightness"
-msgstr ""
+msgstr "Kirkkaus"
 
 msgid "Brightness Standby"
-msgstr ""
+msgstr "Kirkkaus Valmiustila"
 
-#
 msgid "Cancel"
 msgstr "Peruuta"
 
 msgid "Channel number with leading zeros"
-msgstr ""
+msgstr "Kanavanumero etu nollilla"
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
+msgstr "Kanavannumero valmiustilassa"
 
 msgid "Channelnumber in Standby off"
-msgstr ""
+msgstr "Kanavanumero valmiustilassa pois päältä"
 
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
+msgstr "Kanavanumero / kello valmiustilassa"
 
 msgid "Clock always"
-msgstr ""
+msgstr "Näytä kello aina"
 
 msgid "Display/LED"
-msgstr ""
+msgstr "Näyttö/LED"
 
 msgid "Enable led"
-msgstr ""
+msgstr "Ota Led käyttöön"
 
 msgid "GigaBlue Setup"
-msgstr ""
+msgstr "GigaBlue Asetukset"
 
 msgid "LED"
-msgstr ""
+msgstr "LED asetukset"
 
 msgid "Led Deep Standby"
-msgstr ""
+msgstr "Ledin virransäästötilassa"
 
 msgid "Led state Deep Standby"
-msgstr ""
+msgstr "Ledin väri virransäästötilassa"
 
 msgid "Led state HDD /dev/sda active"
-msgstr ""
+msgstr "Ledin väri HDD /dev/sda aktiivinen"
 
 msgid "Led state HDD /dev/sdb active"
-msgstr ""
+msgstr "Ledin väri HDD /dev/sdb aktiivinen"
 
 msgid "Led state RUN"
-msgstr ""
+msgstr "Ledin väri Käynnissä"
 
 msgid "Led state Record"
-msgstr ""
+msgstr "Ledin väri Tallentaessa"
 
 msgid "Led state Standby"
-msgstr ""
+msgstr "Ledin väri valmistilassa"
 
 msgid "No"
-msgstr ""
+msgstr "Ei"
 
 msgid "None"
-msgstr ""
+msgstr "Ei mitään"
 
 msgid "Purple"
-msgstr ""
+msgstr "Violetti"
 
 msgid "Red"
-msgstr ""
+msgstr "Punainen"
 
-#
 msgid "Save"
 msgstr "Tallenna"
 
 msgid "Show clock in Deep Standby"
-msgstr ""
+msgstr "Näytä kello virransäästötilassa"
 
 msgid "Show on VFD"
-msgstr ""
+msgstr "Näytä VFD:ssä"
 
 msgid "Time mode"
-msgstr ""
+msgstr "Aikatila"
 
 msgid "Update Date/Time"
-msgstr ""
+msgstr "Päivitä Päivä/Aika"
 
 msgid "Yes"
-msgstr ""
+msgstr "Kyllä"
