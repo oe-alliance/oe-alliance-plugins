@@ -3,7 +3,8 @@ from . import _, PluginLanguageDomain
 
 # Python
 from time import mktime, strftime, time, localtime
-import urllib2
+
+# import urllib2
 import os
 
 # enigma
@@ -16,8 +17,8 @@ from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 from Components.Button import Button
 
-#screens
-from Screens.MessageBox import MessageBox # for are you sure questions after config changes
+# screens
+from Screens.MessageBox import MessageBox  # for are you sure questions after config changes
 from Screens.Screen import Screen
 from Screens.Setup import Setup
 from Screens.Standby import inStandby
@@ -25,9 +26,20 @@ from Screens.Standby import inStandby
 # Tools
 from Tools.Directories import pathExists, fileExists
 
-#Plugins
+# Plugins
 from Plugins.Plugin import PluginDescriptor
-from mixes import Mixes
+from .mixes import Mixes
+
+import sys
+pythonVer = 2
+if sys.version_info.major == 3:
+	pythonVer = 3
+
+if pythonVer == 3:
+	from urllib.request import urlopen, Request
+	from urllib.error import URLError, HTTPError
+else:
+	from urllib2 import urlopen, Request, HTTPError, URLError
 
 mixes = Mixes().read()
 choices = sorted([(mixes[x]["key"], mixes[x]["name"]) for x in mixes], key=lambda listItem: listItem[1])
@@ -65,8 +77,7 @@ class ABMCustomMixImporterScreen(Setup):
 
 		self.skinName = ["ABMCustomMixImporterScreen", "Setup4buttons"]
 
-		self["actions2"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
-		{
+		self["actions2"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"], {
 			"ok": self.keySave,
 			"cancel": self.keyCancel,
 			"menu": self.keyCancel,
@@ -84,14 +95,14 @@ class ABMCustomMixImporterScreen(Setup):
 		self.onLayoutFinish.append(self.updatebuttontext)
 
 	def updatebuttontext(self):
-		if fileExists(ABMpath + mixes[config.plugins.abmImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
+		if fileExists(str(ABMpath) + str(mixes[config.plugins.abmImporter.mix.value]["provider"]) + str("_CustomMix.xml")):
 			self["key_blue"].setText(_("Delete file"))
 		else:
 			self["key_blue"].setText("")
 
 	def keyDelete(self):
-		if fileExists(ABMpath + mixes[config.plugins.abmImporter.mix.value]["provider"] + "_CustomMix.xml", "w"):
-			os.remove(ABMpath + mixes[config.plugins.abmImporter.mix.value]["provider"] + "_CustomMix.xml")
+		if fileExists(str(ABMpath) + str(mixes[config.plugins.abmImporter.mix.value]["provider"]) + str("_CustomMix.xml")):
+			os.remove(str(ABMpath) + str(mixes[config.plugins.abmImporter.mix.value]["provider"]) + str("_CustomMix.xml"))
 		self.updatebuttontext()
 
 	def keySave(self):
@@ -134,15 +145,14 @@ class ABMCustomMixImporter(Screen):
 	</screen>"""
 
 	def __init__(self, session):
-		print "[ABMCustomMixImporter][__init__] Starting..."
+		print("[ABMCustomMixImporter][__init__] Starting...")
 		self.session = session
 		Screen.__init__(self, session)
 		self.skinName = ["AutoBouquetsMaker"]
 		Screen.setTitle(self, _("ABM CustomMix"))
 		self["action"] = Label(_("Starting importer..."))
 		self["status"] = Label("")
-		self["actions"] = ActionMap(["SetupActions"],
-		{
+		self["actions"] = ActionMap(["SetupActions"], {
 			"cancel": self.keyCancel,
 		}, -2)
 		self.onFirstExecBegin.append(self.firstExec)
@@ -152,45 +162,52 @@ class ABMCustomMixImporter(Screen):
 			self["action"].setText(_('Fetching from github'))
 			self["status"] = Label("1/1")
 		CustomMix = self.fetchURL()
-		if CustomMix:
+		if pythonVer == 3:
 			try:
-				if not inStandby:
-					self["action"].setText(_('Saving CustomMix file'))
-					self["status"] = Label("")
-				with open(ABMpath + mixes[config.plugins.abmImporter.mix.value]["provider"] + "_CustomMix.xml", "w") as f:
-					f.write(CustomMix)
-					f.close()
-				if not inStandby:
-					self["action"].setText(_('File fetched and saved OK'))
-					self.donetimer = eTimer()
-					self.donetimer.callback.append(self.success)
-					self.donetimer.startLongTimer(3)
+				CustomMix = CustomMix.decode()
 			except:
+				pass
+
+		if CustomMix:
+
+			if not inStandby:
+				self["action"].setText(_('Saving CustomMix file'))
+				self["status"] = Label("")
+
+			try:
+				provider = mixes[config.plugins.abmImporter.mix.value]["provider"]
+				with open(str(ABMpath) + str(provider) + str("_CustomMix.xml"), "w") as f:
+					f.write(CustomMix)
+
+			except Exception as e:
 				self.showError("Saving the CustomMix file failed")
-				print "[ABMCustomMixImporter]Saving file failed."
+				print("[ABMCustomMixImporter]Saving file failed. %s" % e)
+
+			if not inStandby:
+				self["action"].setText(_('File fetched and saved OK'))
+				self.donetimer = eTimer()
+				self.donetimer.callback.append(self.success)
+				self.donetimer.startLongTimer(3)
 
 	def fetchURL(self):
 		try:
-			req = urllib2.Request(mixes[config.plugins.abmImporter.mix.value]["url"])
-			response = urllib2.urlopen(req)
-			print '[ABMCustomMixImporter][fetchURL] Response: %d' % response.getcode()
+			fileurl = mixes[config.plugins.abmImporter.mix.value]["url"]
+			req = Request(fileurl)
+			response = urlopen(req)
+			print('[ABMCustomMixImporter][fetchURL] Response: %d' % response.getcode())
 			if int(response.getcode()) == 200:
 				return response.read()
-		except urllib2.HTTPError, err:
-			print '[ABMCustomMixImporter][fetchURL] ERROR:', err
-		except urllib2.URLError, err:
-			print '[ABMCustomMixImporter][fetchURL] ERROR:', err.reason[0]
-		except urllib2, err:
-			print '[ABMCustomMixImporter][fetchURL] ERROR:', err
+		except Exception as err:
+			print('[ABMCustomMixImporter][fetchURL] ERROR 3: &s' % err)
 		except:
 			import sys
-			print '[ABMCustomMixImporter][fetchURL] undefined error', sys.exc_info()[0]
+			print('[ABMCustomMixImporter][fetchURL] undefined error %s' % sys.exc_info()[0])
 		self.showError("The CustomMix file could not be fetched")
 
 	def showError(self, message):
 		if not inStandby:
 			mbox = self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
-			mbox.setTitle(_("Channels importer"))
+			mbox.setTitle(_("ABMCustomMixImporter"))
 		self.close()
 
 	def success(self):
@@ -204,7 +221,7 @@ class schedule:
 	instance = None
 
 	def __init__(self, session):
-		print "[ABMCustomMixSchedule][__init__] Starting..."
+		print("[ABMCustomMixSchedule][__init__] Starting...")
 		self.session = session
 		self.justBootedOrConfigChanged = True
 		self.enableImporter = config.plugins.abmImporter.enableImporter.value
@@ -213,13 +230,13 @@ class schedule:
 		try:
 			self.enableSchedule = config.autobouquetsmaker.schedule.value
 			self.clock = [config.autobouquetsmaker.scheduletime.value[0], config.autobouquetsmaker.scheduletime.value[1]]
-			self.repeattype = "daily" # config.autobouquetsmaker.repeattype.value
-			print "[ABMCustomMixSchedule][__init__] ABM config available"
+			self.repeattype = "daily"  # config.autobouquetsmaker.repeattype.value
+			print("[ABMCustomMixSchedule][__init__] ABM config available")
 		except:
 			self.enableSchedule = False
 			self.clock = [0, 0]
 			self.repeattype = "daily"
-			print "[ABMCustomMixSchedule][__init__] ABM config was not available"
+			print("[ABMCustomMixSchedule][__init__] ABM config was not available")
 		self.fetchtimer = eTimer()
 		self.fetchtimer.callback.append(self.doSchedule)
 		if self.enableSchedule:
@@ -228,7 +245,7 @@ class schedule:
 		self.configtimer.callback.append(self.configChecker)
 		self.configtimer.startLongTimer(60)
 
-		assert simpleSchedule.instance is None, "[ABMCustomMixImporter] class simpleSchedule is a singleton class and just one instance of this class is allowed!"
+		# assert simpleSchedule.instance is None, "[ABMCustomMixImporter] class simpleSchedule is a singleton class and just one instance of this class is allowed!"
 		schedule.instance = self
 
 	def __onClose(self):
@@ -236,36 +253,38 @@ class schedule:
 
 	def configChecker(self):
 		if self.enableImporter != config.plugins.abmImporter.enableImporter.value or \
-			self.leadTime != config.plugins.abmImporter.leadTime.value or \
-			self.mix != config.plugins.abmImporter.mix.value or \
-			self.enableSchedule != config.autobouquetsmaker.schedule.value or \
-			self.clock[0] != config.autobouquetsmaker.scheduletime.value[0] or \
-			self.clock[1] != config.autobouquetsmaker.scheduletime.value[1]		:
-			print "[ABMCustomMixImporter][configChecker] config has changed"
-			self.enableImporter = config.plugins.abmImporter.enableImporter.value
-			self.leadTime = config.plugins.abmImporter.leadTime.value
-			self.mix = config.plugins.abmImporter.mix.value
-			self.enableSchedule = config.autobouquetsmaker.schedule.value
-			self.clock[0] = config.autobouquetsmaker.scheduletime.value[0]
-			self.clock[1] = config.autobouquetsmaker.scheduletime.value[1]
-			justBootedOrConfigChanged = True
-			self.doSchedule()
+				self.leadTime != config.plugins.abmImporter.leadTime.value or \
+				self.mix != config.plugins.abmImporter.mix.value or \
+				self.enableSchedule != config.autobouquetsmaker.schedule.value or \
+				self.clock[0] != config.autobouquetsmaker.scheduletime.value[0] or \
+				self.clock[1] != config.autobouquetsmaker.scheduletime.value[1]:
+
+			print("[ABMCustomMixImporter][configChecker] config has changed")
+
+		self.enableImporter = config.plugins.abmImporter.enableImporter.value
+		self.leadTime = config.plugins.abmImporter.leadTime.value
+		self.mix = config.plugins.abmImporter.mix.value
+		self.enableSchedule = config.autobouquetsmaker.schedule.value
+		self.clock[0] = config.autobouquetsmaker.scheduletime.value[0]
+		self.clock[1] = config.autobouquetsmaker.scheduletime.value[1]
+		self.justBootedOrConfigChanged = True
+		self.doSchedule()
 		self.configtimer.startLongTimer(60)
 
 	def doSchedule(self):
 		if self.fetchtimer.isActive():
 			self.fetchtimer.stop()
 		if self.enableSchedule and self.enableImporter:
-			if not self.justBootedOrConfigChanged: # Do not do the task if this function was called due to a config change or reboot.
+			if not self.justBootedOrConfigChanged:  # Do not do the task if this function was called due to a config change or reboot.
 				taskToSchedule(self.session)
 			self.startNextCycle()
 		else:
-			print "[ABMCustomMixImporter][doSchedule] Scheduler disabled."
+			print("[ABMCustomMixImporter][doSchedule] Scheduler disabled.")
 		self.justBootedOrConfigChanged = False
 
 	def startNextCycle(self):
 		now = int(time())
-		if now < 1483228800: # STB clock not correctly set. Check back in 12 hours.
+		if now < 1483228800:  # STB clock not correctly set. Check back in 12 hours.
 			return 60 * 60 * 12
 		intervals = {"daily": 60 * 60 * 24, "weekly": 60 * 60 * 24 * 7, "monthly": 60 * 60 * 24 * 30}
 		ltime = localtime(now)
@@ -276,7 +295,7 @@ class schedule:
 			self.fetchtimer.startLongTimer(next - now)
 		else:
 			next = -1
-		print "[ABMCustomMixImporter][startNextCycle] Time set to", strftime("%c", localtime(next)), strftime("(now=%c)", localtime(now))
+		print("[ABMCustomMixImporter][startNextCycle] Time set to", strftime("%c", localtime(next)), strftime("(now=%c)", localtime(now)))
 
 
 scheduleTimer = None
@@ -286,15 +305,15 @@ def pluginAutoStart(reason, session=None, **kwargs):
 	"called with reason=1 to during /sbin/shutdown.sysvinit, with reason=0 at startup?"
 	global scheduleTimer
 	global _session
-	now = int(time())
+	# now = int(time())
 	if reason == 0:
-		print "[ABMCustomMixImporter][pluginAutoStart] AutoStart Enabled"
+		print("[ABMCustomMixImporter][pluginAutoStart] AutoStart Enabled")
 		if session is not None:
 			_session = session
 			if scheduleTimer is None:
 				scheduleTimer = schedule(session)
 	else:
-		print "[ABMCustomMixImporter][schedule] Stop"
+		print("[ABMCustomMixImporter][schedule] Stop")
 		scheduleTimer.stop()
 
 
