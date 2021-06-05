@@ -14,7 +14,7 @@ from Components.Pixmap import Pixmap
 from Components.ScrollLabel import ScrollLabel
 from Components.Slider import Slider
 from Components.Sources.List import List
-from enigma import ePicLoad, eConsoleAppContainer, eListboxPythonMultiContent, eListbox, eEPGCache, eServiceCenter, eServiceReference, eTimer, gFont, loadPic, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP
+from enigma import ePicLoad, eConsoleAppContainer, eListboxPythonMultiContent, eListbox, eEPGCache, eServiceCenter, eServiceReference, eTimer, gFont, loadPic, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE
 from re import findall, match, search, split, sub
 from RecordTimer import RecordTimerEntry
 from Screens.ChannelSelection import ChannelSelection
@@ -907,7 +907,7 @@ class tvBaseScreen(tvAllScreen):
                     if self.picon == True:
                         picon = self.findPicon(sref)
                         if picon is not None:
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon)))
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(100, 60), png=LoadPixmap(picon), flags=BT_SCALE))
                         else:
                             res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
                     else:
@@ -1169,7 +1169,7 @@ class TVTippsView(tvBaseScreen):
                 if self.picon == True:
                     picon = self.findPicon(sref)
                     if picon is not None:
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 15), size=(100, 60), png=LoadPixmap(picon)))
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 15), size=(100, 60), png=LoadPixmap(picon), flags=BT_SCALE))
                     else:
                         res.append(MultiContentEntryText(pos=(0, 0), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
                 else:
@@ -2003,7 +2003,7 @@ class TVGenreView(tvGenreJetztProgrammView):
                     if self.picon == True:
                         picon = self.findPicon(sref)
                         if picon is not None:
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 1), size=(100, 60), png=LoadPixmap(picon)))
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 1), size=(100, 60), png=LoadPixmap(picon), flags=BT_SCALE))
                         else:
                             res.append(MultiContentEntryText(pos=(0, 1), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
                     else:
@@ -2627,7 +2627,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                 if self.picon == True:
                     picon = self.findPicon(sref)
                     if picon is not None:
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 1), size=(100, 60), png=LoadPixmap(picon)))
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 1), size=(100, 60), png=LoadPixmap(picon), flags=BT_SCALE))
                     else:
                         res.append(MultiContentEntryText(pos=(0, 1), size=(100, 60), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
                 else:
