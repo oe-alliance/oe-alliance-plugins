@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenATV\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-06 19:27+0430\n"
+"PO-Revision-Date: 2021-06-08 02:32+0300\n"
+"Last-Translator: tomppaa <http://www.huoltovalikko.com/>\n"
+"Language-Team: tomppaa\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+
+msgid "* current animation"
+msgstr "* nykyinen animaatio"
+
+msgid "Animation Setup"
+msgstr "Animation Asetukset"
+
+msgid "Animation Speed"
+msgstr "Animation Nopeus"
+
+msgid "Animations"
+msgstr "Animaatiot"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Default"
+msgstr "Oletus"
+
+msgid "Disable Animations"
+msgstr "Poista animaatiot käytöstä"
+
+msgid "Grow drop"
+msgstr "Kasvava pudotus"
+
+msgid "Grow from left"
+msgstr "Kasvata vasemmalta"
+
+msgid "Popup"
+msgstr "Ponnahdusikkuna"
+
+msgid "Preview"
+msgstr "Esikatselu"
+
+msgid "Save"
+msgstr "Tallenna"
+
+msgid "Setting"
+msgstr "Asetukset"
+
+msgid "Simple fade"
+msgstr "Yksinkertainen haalistuminen"
+
+msgid "Slide drop"
+msgstr "Dian pudotus"
+
+msgid "Slide left to right"
+msgstr "Liu'uta vasemmalta oikealle"
+
+msgid "Slide top to bottom"
+msgstr "Liu'uta ylhäältä alas"
+
+msgid "Stripes"
+msgstr "Raidat"
