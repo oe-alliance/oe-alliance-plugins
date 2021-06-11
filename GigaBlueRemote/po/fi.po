@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: plugins 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-06-11 01:31+0300\n"
+"Last-Translator: Tomppaa <http://www.huoltovalikko.com/>\n"
+"Language-Team: none\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+"POT-Creation-Date: \n"
+
+#, python-format
+msgid " within %d seconds."
+msgstr " sekunnin %d kuluessa."
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Code 1"
+msgstr "Koodi 1"
+
+msgid "Code 2"
+msgstr "Koodi 2"
+
+msgid "Confirm"
+msgstr "Vahvista"
+
+msgid "FILE DOES NOT EXIST : /proc/stb/ir/rc/customcode"
+msgstr "TIEDOSTOA EI OLE : /proc/stb/ir/rc/customcode"
+
+msgid "Please change now the mode on your RCU."
+msgstr "Vaihda kaukosäätimen koodaus nyt."
+
+msgid "Press and hold 'GIGA' & '5' for 5 seconds."
+msgstr "Pidä 'GIGA' & '5' painettuna 5 sekunnin ajan."
+
+msgid "Remote Control Code"
+msgstr "Kaukosäätimen koodi"
+
+msgid "Remote Control Code:"
+msgstr "Kaukosäätimen koodi:"
+
+msgid "Save"
+msgstr "Tallenna"
+
+#, python-format
+msgid "Sorry, but %s is not supported."
+msgstr "Valitettavasti %s ei ole tuettu."
+
+msgid "Then choose 'Confirm' "
+msgstr "Valitse sitten `Vahvista` "
