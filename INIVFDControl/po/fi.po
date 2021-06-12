@@ -1,51 +1,47 @@
-# Finnish translations for Enigma2.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2\n"
+"Project-Id-Version: OpenATV\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:35+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2021-06-11 19:27+0430\n"
+"PO-Revision-Date: 2021-06-11 21:08+0300\n"
+"Last-Translator: tomppaa <http://www.huoltovalikko.com/>\n"
+"Language-Team: tomppaa\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.4.2\n"
 
 msgid "7-LED Display Setup"
-msgstr ""
+msgstr "7-LED Näytön Asetukset"
 
 msgid "Always off"
-msgstr ""
+msgstr "Aina pois päältä"
 
-#
 msgid "Cancel"
 msgstr "Peruuta"
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
+msgstr "Kanavannumero valmiustilassa"
 
 msgid "Channelnumber in Standby off"
-msgstr ""
+msgstr "Kanavanumero pois päältä valmiustilassa"
 
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
+msgstr "Kanavanumero/kello valmiustilassa"
 
 msgid "Clock always"
-msgstr ""
+msgstr "Kello aina"
 
 msgid "LED Display Setup"
-msgstr ""
+msgstr "LED Display Einstellungen"
 
-#
 msgid "Save"
 msgstr "Tallenna"
 
 msgid "Show on display"
-msgstr ""
+msgstr "Näytä näytöllä"
 
 msgid "Time mode"
-msgstr ""
+msgstr "Aikatila"
