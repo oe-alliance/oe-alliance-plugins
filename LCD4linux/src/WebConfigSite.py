@@ -7,8 +7,14 @@ from Components.config import configfile, config, ConfigSelection
 from enigma import eTimer
 from .module import L4Lelement
 from boxbranding import getOEVersion
-from six.moves.html_parser import HTMLParser
 import six
+
+if six.PY2:
+	from HTMLParser import HTMLParser
+	_unescape = HTMLParser().unescape
+else:
+	from html import unescape as _unescape
+
 L4LElement = L4Lelement()
 
 import os
@@ -306,7 +312,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		elif _command == "pop":
 			V = _l(req.args.get(b"PopText", "")[0])
 			try:
-				V = HTMLParser().unescape(V)
+				V = _unescape(V)
 			except Exception as e:
 				L4log("WebIF Error: Parse Text")
 			setPopText(V)
@@ -434,7 +440,7 @@ class LCD4linuxConfigweb(resource.Resource):
 							if isinstance(ConfObj, ConfigText):
 								V = _l(val)
 								try:
-									V = HTMLParser().unescape(V)
+									V = _unescape(V)
 								except Exception as e:
 									L4log("WebIF Error: Parse Text")
 								ConfObj.value = V

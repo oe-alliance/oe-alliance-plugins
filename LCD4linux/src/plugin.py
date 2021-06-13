@@ -108,9 +108,15 @@ import six
 from six.moves.urllib.parse import urlencode, quote, quote_plus, urlparse, urlunparse
 from six.moves.urllib.request import urlopen, Request, urlretrieve, FancyURLopener
 from six.moves.BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
-from six.moves.html_parser import HTMLParser
 from six.moves.socketserver import ThreadingMixIn
 from six.moves import queue
+
+if six.PY2:
+	from HTMLParser import HTMLParser
+	_unescape = HTMLParser().unescape
+else:
+	from html import unescape as _unescape
+
 
 SIGN = u"°"
 L4LElist = L4Lelement()
@@ -2395,7 +2401,7 @@ def getFsize(text, f):
 def Code_utf8(wert):
 	if wert is None:
 		wert = ""
-	wert = HTMLParser().unescape(wert)
+	wert = _unescape(wert)
 	if six.PY2:
 		wert = wert.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8") or ""
 		return codecs.decode(wert, 'UTF-8')
@@ -11515,7 +11521,7 @@ def LCD4linuxPIC(self, session):
 		t = ["not found"]
 		try:
 			r = urlopen(HTTPurl)
-			t = HTMLParser().unescape(r.read()[:500].decode()).split("\n")
+			t = _unescape(r.read()[:500].decode()).split("\n")
 			r.close()
 		except:
 			pass
