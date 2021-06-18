@@ -1,0 +1,9 @@
+Package: enigma2-plugin-extensions-chefkoch
+Version: 1.5
+Description: Chefkoch Plugin
+Architecture: all
+Section: extra
+Priority: optional
+Maintainer: kashmir (RIP), oe-a
+Homepage: http://www.kashmir-plugins.de (OFFLINE)
+Source: https://github.com/oe-alliance/oe-alliance-plugins
