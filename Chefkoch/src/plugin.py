@@ -1,4 +1,12 @@
-# Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/Chefkoch/Chefkoch.py
+# TODO: remove plugin update
+# TODO: remove paypal
+# TODO: improve imports
+# TODO: fix getPage , downloadPage
+# TODO: fix b64encode , b64decode
+# TODO: fix skin
+# TODO: test
+
+from __future__ import print_function
 from base64 import b64encode, b64decode
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, configfile, ConfigSubsection, ConfigInteger, ConfigPassword, ConfigSelection, ConfigText, getConfigListEntry
@@ -28,11 +36,18 @@ from string import find
 from Tools.Directories import fileExists
 from twisted.web import client, error
 from twisted.web.client import getPage, downloadPage
-import os, re, smtplib, sys, time, urllib
+import os
+import re
+import smtplib
+import sys
+import time
+import urllib
 from os import path
-from urllib import unquote_plus
-from urllib2 import Request, urlopen, URLError
-from urlparse import parse_qs
+
+from six.moves.urllib.parse import unquote_plus, parse_qs
+from six.moves.urllib.request import Request, urlopen
+from six.moves.urllib.error import URLError
+
 config.plugins.chefkoch = ConfigSubsection()
 deskWidth = getDesktop(0).size().width()
 if deskWidth >= 1280:
@@ -64,12 +79,13 @@ config.plugins.chefkoch.server = ConfigText(default='', fixed_size=False)
 config.plugins.chefkoch.port = ConfigInteger(465, (0, 99999))
 config.plugins.chefkoch.ssl = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 
+
 def applySkinVars(skin, dict):
     for key in dict.keys():
         try:
             skin = skin.replace('{' + key + '}', dict[key])
         except Exception as e:
-            print e, '@key=', key
+            print(e, '@key=', key)
 
     return skin
 
@@ -3170,7 +3186,7 @@ class DownloadUpdate(Screen):
 
 class ItemList(MenuList):
 
-    def __init__(self, items, enableWrapAround = True):
+    def __init__(self, items, enableWrapAround=True):
         MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
         if config.plugins.chefkoch.font.value == 'yes':
             self.l.setFont(-2, gFont('Sans', 24))
