@@ -69,6 +69,7 @@ config.plugins.chefkoch.server = ConfigText(default='', fixed_size=False)
 config.plugins.chefkoch.port = ConfigInteger(465, (0, 99999))
 config.plugins.chefkoch.ssl = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 
+
 def applySkinVars(skin, dict):
     for key in dict.keys():
         try:
