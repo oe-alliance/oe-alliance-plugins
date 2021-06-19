@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        gcc: [8, 9, 10]
+        gcc: [8, 9, 10, 11]
     steps:
       - name: Install prerequisites
         run: |
@@ -48,6 +48,24 @@ jobs:
           python-version: '3.8'
 
       - name: Build plugins, gcc-${{ matrix.gcc }}, python 3.8
+        env:
+          CC: "gcc-${{ matrix.gcc }}"
+          CXX: "g++-${{ matrix.gcc }}"
+        run: |
+          pip3 install six
+          autoreconf -i
+          ./configure
+          make
+          python -m compileall .
+
+      - uses: actions/checkout@v2
+        with:
+          ref: 'python3'
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Build plugins, gcc-${{ matrix.gcc }}, python 3.9
         env:
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
