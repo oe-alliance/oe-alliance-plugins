@@ -70,6 +70,7 @@ jobs:
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
         run: |
+          sudo apt-get install python3.9-dev
           pip3 install six
           autoreconf -i
           ./configure
