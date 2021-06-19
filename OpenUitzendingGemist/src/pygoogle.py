@@ -8,9 +8,9 @@ Needs Python 2.6 or later
 from __future__ import print_function
 try:
     import json
-except ImportError, e:
+except ImportError as e:
     import simplejson as json
-except ImportError, e:
+except ImportError as e:
     print(e)
     exit()
 
@@ -201,7 +201,7 @@ class pygoogle:
                 if 'cursor' in result_count and 'estimatedResultCount' in result_count['cursor']:
                     return result_count['cursor']['estimatedResultCount']
             return 0
-        except Exception, e:
+        except Exception as e:
             self.logger.error(e)
         finally:
             self.pages = temp

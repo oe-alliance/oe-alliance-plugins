@@ -62,7 +62,7 @@ class LoopSyncMain(Screen):
 		try:
 			if int(open("/sys/class/tsync/reset_flag", "r").read(), 16) == 1:
 				return True
-		except Exception, e:
+		except Exception as e:
 			print("[ReZap] Can't read class")
 			self.AVSyncTimer.start(500, True)
 		return False
@@ -70,7 +70,7 @@ class LoopSyncMain(Screen):
 	def ResetFlag(self):
 		try:
 			open("/sys/class/tsync/reset_flag", "w").write("0")
-		except Exception, e:
+		except Exception as e:
 			print("[ReZap] Can't ResetFlag")
 
 ###################################
@@ -87,12 +87,12 @@ class DoReZap(Screen):
 
 		try:
 			open("/sys/class/video/blackout_policy", "w").write("0")
-		except Exception, e:
+		except Exception as e:
 			print("[ReZap] Can't change policy(0)")
 		self.session.nav.playService(xxx)
 		try:
 			open("/sys/class/video/blackout_policy", "w").write("1")
-		except Exception, e:
+		except Exception as e:
 			print("[ReZap] Can't change policy(1)")
 		self.close()
 

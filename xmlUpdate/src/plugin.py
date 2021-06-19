@@ -73,7 +73,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 					with open(self.folder.value + "/" + self.DVBtype.value + ".xml", "w") as f:
 						f.write(XMLdata)
 						f.close()
-				except IOError, err:
+				except IOError as err:
 					print("[xmlUpdate][keyGo] Saving file failed.", err)
 					self.showError(_("Saving the %s.xml file failed") % self.DVBtype.value)
 				else:
@@ -94,11 +94,11 @@ class xmlUpdate(ConfigListScreen, Screen):
 			print('[xmlUpdate][fetchURL] Response: %d' % response.getcode())
 			if int(response.getcode()) == 200:
 				return response.read()
-		except urllib2.HTTPError, err:
+		except urllib2.HTTPError as err:
 			print('[xmlUpdate][fetchURL] ERROR:', err)
-		except urllib2.URLError, err:
+		except urllib2.URLError as err:
 			print('[xmlUpdate][fetchURL] ERROR:', err.reason[0])
-		except urllib2, err:
+		except urllib2 as err:
 			print('[xmlUpdate][fetchURL] ERROR:', err)
 		except:
 			import sys

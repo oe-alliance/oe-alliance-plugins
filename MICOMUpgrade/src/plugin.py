@@ -280,7 +280,7 @@ class Filebrowser(Screen):
 			return False
 		try:
 			f, h = urlretrieve(uri, tar, doHook)
-		except IOError, msg:
+		except IOError as msg:
 			#self.session.open(MessageBox, _(str(msg)), MessageBox.TYPE_INFO, timeout = 10)
 			print("[FirmwareUpgrade] - Fail to download. ERR_MSG :", str(msg))
 			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout=10)

@@ -52,7 +52,7 @@ class DeviceEventListener:
 			self.sock.bind((os.getpid(), 1))
 			self.notifier = eSocketNotifier(self.sock.fileno(), POLLIN | POLLPRI)
 			self.notifier.callback.append(self.cbEventHandler)
-		except Exception, msg:
+		except Exception as msg:
 			print("[ModemManager Plugin] Error >>", msg)
 			self.sock.close()
 
@@ -539,7 +539,7 @@ class ModemManual(Screen):
 		try:
 			x = self["menulist"].getCurrent()[1]
 			self.region, self.apn, self.uid, self.pwd, self.pin, self.phone = x.get("region"), x.get("apn"), x.get("user"), x.get("password"), x.get('pin'), x.get('phone')
-		except Exception, err:
+		except Exception as err:
 			pass
 		if noUpdate:
 			return
@@ -602,7 +602,7 @@ class ModemManual(Screen):
 				d['pin'] = x.get('pin')
 				d['phone'] = x.get('phone')
 				lvApnItems.append((name, d))
-		except Exception, err:
+		except Exception as err:
 			pass
 		finally:
 			del handle
@@ -1011,7 +1011,7 @@ class ModemManager(Screen):
 				elif x.startswith('Baud ='):
 					print(x)
 					info['Baud'] = x[6:].strip()
-		except Exception, err:
+		except Exception as err:
 			printDebugModemMgr("getModemInfo Error : [%s]" % (str(err)))
 			# TODO : occur error!!
 			return
@@ -1176,7 +1176,7 @@ class ModemManager(Screen):
 						d = tmp[tmp.find('Driver=') + 7:]
 						if d != '(none)':
 							tmp_device['Interface'] = d
-			except Exception, errmsg:
+			except Exception as errmsg:
 				print(errmsg)
 		if len(tmp_device):
 			parsed_usb_list.append(tmp_device)

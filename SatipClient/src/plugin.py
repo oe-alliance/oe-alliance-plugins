@@ -229,7 +229,7 @@ class SATIPDiscovery:
 			conn = httplib.HTTPConnection(address, int(port))
 			conn.request("GET", request)
 			res = conn.getresponse()
-		except Exception, ErrMsg:
+		except Exception as ErrMsg:
 			print("http request error %s" % ErrMsg)
 			return -1
 

@@ -415,7 +415,7 @@ class StreamsThumb(StreamsThumbCommon):
 			response = urllib2.urlopen(req)
 			htmldoc = str(response.read())
 			response.close()
-		except urllib2.HTTPError, exception:
+		except urllib2.HTTPError as exception:
 			exResp = str(exception.read())
 
 			if 'InvalidGeoRegion' in exResp:

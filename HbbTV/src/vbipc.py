@@ -55,7 +55,7 @@ class VBController:
 			if cmd_fd is None:
 				raise Exception("fail to open controller file.")
 			os.write(cmd_fd, send_data)
-		except Exception, err:
+		except Exception as err:
 			vbcfg.ERR("VBHController: %s" % err)
 			vbcfg.setPosition(vbcfg.g_position)
 			fbClass.getInstance().unlock()
@@ -114,7 +114,7 @@ class VBServerThread(threading.Thread):
 		result, send_packet = False, None
 		try:
 			result, send_packet = GetHandler(opcode)(result, read_packet)
-		except Exception, ErrMsg:
+		except Exception as ErrMsg:
 			vbcfg.ERR(ErrMsg)
 		send_data = self.assamble(opcode, result, send_packet)
 		conn.sendall(send_data)
@@ -133,7 +133,7 @@ class VBServerThread(threading.Thread):
 					try:
 						conn, addr = self.mSock.accept()
 						self.process(conn, addr)
-					except Exception, err:
+					except Exception as err:
 						vbcfg.ERR("VBSServerThread: %s" % err)
 					finally:
 						if conn is not None:

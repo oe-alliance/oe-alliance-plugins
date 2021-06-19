@@ -40,7 +40,7 @@ def getPosition():
 			file = open("/proc/stb/fb/dst_height", "r")
 			dst_height = int(file.read().strip(), 16)
 			file.close()
-		except Exception, Err:
+		except Exception as Err:
 			ERR(Err)
 			return None
 	return (dst_left, dst_width, dst_top, dst_height)
@@ -65,7 +65,7 @@ def setPosition(params):
 			file = open("/proc/stb/fb/dst_height", "w")
 			file.write('%X' % params[3])
 			file.close()
-		except Exception, Err:
+		except Exception as Err:
 			ERR(Err)
 			return
 

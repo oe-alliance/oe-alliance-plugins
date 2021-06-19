@@ -282,7 +282,7 @@ class PlayerLauncher:
 		try:
 			#print "trying to find out if a HD Stream is available",watch_url
 			watchvideopage = urlopen2(watchrequest).read()
-		except (URLError, HTTPException, socket.error), err:
+		except (URLError, HTTPException, socket.error) as err:
 			print("Error: Unable to retrieve watchpage - Error code: ", str(err))
 			return video_url
 
@@ -295,7 +295,7 @@ class PlayerLauncher:
 				videoinfo = parse_qs(infopage)
 				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
 					break
-			except (URLError, HTTPException, socket.error), err:
+			except (URLError, HTTPException, socket.error) as err:
 				print("Error: unable to download video infopage", str(err))
 				return video_url
 
@@ -339,7 +339,7 @@ class PlayerLauncher:
 				return
 			myreference = eServiceReference(4097, 0, myurl)
 			session.open(Player, myreference, service)
-		except Exception, msg:
+		except Exception as msg:
 			wb_unlock()
 			print("Error >>", msg)
 

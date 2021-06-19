@@ -72,7 +72,7 @@ class SimpleConfigParser:
 	def _get(self, _section, _option, _default):
 		try:
 			data = self.mConfig.get(_section, _option)
-		except Exception, e:
+		except Exception as e:
 			vbcfg.ERR(e)
 			return _default
 		else:
@@ -278,7 +278,7 @@ class BookmarkManager(SimpleConfigParser):
 				e = self.getNumber(s, 'type')
 				try:
 					categoryList[p].appendBookmark(BookmarkData(i, t, u, p, e))
-				except Exception, e:
+				except Exception as e:
 					self._del(s)
 			bx += 1
 		for key in categoryList.iterkeys():
