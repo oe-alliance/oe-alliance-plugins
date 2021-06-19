@@ -876,13 +876,13 @@ class ChefkochView(Screen):
         else:
             video_fmt_map = {}
             fmt_infomap = {}
-            if videoinfo.has_key('url_encoded_fmt_stream_map'):
+            if 'url_encoded_fmt_stream_map' in videoinfo:
                 tmp_fmtUrlDATA = videoinfo['url_encoded_fmt_stream_map'][0].split(',')
             else:
                 tmp_fmtUrlDATA = videoinfo['fmt_url_map'][0].split(',')
             for fmtstring in tmp_fmtUrlDATA:
                 fmturl = fmtid = ''
-                if videoinfo.has_key('url_encoded_fmt_stream_map'):
+                if 'url_encoded_fmt_stream_map' in videoinfo:
                     try:
                         for arg in fmtstring.split('&'):
                             if arg.find('=') >= 0:
@@ -894,7 +894,7 @@ class ChefkochView(Screen):
                                 elif key == 'url':
                                     fmturl = value
 
-                        if fmtid != '' and fmturl != '' and VIDEO_FMT_PRIORITY_MAP.has_key(fmtid):
+                        if fmtid != '' and fmturl != '' and fmtid in VIDEO_FMT_PRIORITY_MAP:
                             video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid,
                              'fmturl': unquote_plus(fmturl)}
                             fmt_infomap[int(fmtid)] = '%s' % unquote_plus(fmturl)
@@ -904,7 +904,7 @@ class ChefkochView(Screen):
 
                 else:
                     fmtid, fmturl = fmtstring.split('|')
-                if VIDEO_FMT_PRIORITY_MAP.has_key(fmtid) and fmtid != '':
+                if fmtid in VIDEO_FMT_PRIORITY_MAP and fmtid != '':
                     video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid,
                      'fmturl': unquote_plus(fmturl)}
                     fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
