@@ -3175,7 +3175,7 @@ class DownloadUpdate(Screen):
 
 class ItemList(MenuList):
 
-    def __init__(self, items, enableWrapAround = True):
+    def __init__(self, items, enableWrapAround=True):
         MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
         if config.plugins.chefkoch.font.value == 'yes':
             self.l.setFont(-2, gFont('Sans', 24))
