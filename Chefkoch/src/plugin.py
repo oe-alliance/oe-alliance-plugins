@@ -1,7 +1,5 @@
-# TODO: remove plugin update
-# TODO: remove paypal
 # TODO: improve imports
-# TODO: fix getPage , downloadPage
+# TODO: fix getPage
 # TODO: fix b64encode , b64decode
 # TODO: fix skin
 # TODO: test
@@ -68,8 +66,6 @@ if config.plugins.chefkoch.font.value == 'yes':
 config.plugins.chefkoch.fhd = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
 if config.plugins.chefkoch.fhd.value == 'yes':
     from enigma import eSize, gMainDC
-config.plugins.chefkoch.autoupdate = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
-config.plugins.chefkoch.paypal = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
 config.plugins.chefkoch.mail = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
 config.plugins.chefkoch.mailfrom = ConfigText(default='', fixed_size=False)
 config.plugins.chefkoch.mailto = ConfigText(default='', fixed_size=False)
@@ -2020,7 +2016,7 @@ class ChefkochView(Screen):
         self.ready = True
 
     def infoScreen(self):
-        self.session.open(infoScreenChefkoch, True)
+        pass
 
     def zap(self):
         servicelist = self.session.instantiateDialog(ChannelSelection)
@@ -2214,7 +2210,7 @@ class rezepteList(Screen):
         self.session.execDialog(servicelist)
 
     def infoScreen(self):
-        self.session.open(infoScreenChefkoch, True)
+        pass
 
     def hideScreen(self):
         if self.hideflag == True:
@@ -2505,7 +2501,7 @@ class ChefkochPicShow(Screen):
         pass
 
     def infoScreen(self):
-        self.session.open(infoScreenChefkoch, True)
+        pass
 
     def hideScreen(self):
         if self.hideflag == True:
@@ -2568,7 +2564,7 @@ class FullScreen(Screen):
         return
 
     def infoScreen(self):
-        self.session.open(infoScreenChefkoch, True)
+        pass
 
     def hideScreen(self):
         if self.hideflag == True:
@@ -2777,7 +2773,7 @@ class chefkochFav(Screen):
         self['favmenu'].up()
 
     def infoScreen(self):
-        self.session.open(infoScreenChefkoch, True)
+        pass
 
     def hideScreen(self):
         if self.hideflag == True:
@@ -2913,7 +2909,7 @@ class DownloadVideo(Screen):
             self.close()
 
     def infoScreen(self):
-        self.session.open(infoScreenChefkoch, True)
+        pass
 
     def hideScreen(self):
         if self.hideflag == True:
@@ -2956,232 +2952,6 @@ class DownloadVideo(Screen):
             self.session.openWithCallback(self.stopDownload, MessageBox, '\nDer Download ist noch nicht beendet.\nSoll der Download abgebrochen und das Video gel\xc3\xb6scht werden?', MessageBox.TYPE_YESNO)
         else:
             self.close()
-
-
-class infoScreenChefkoch(Screen):
-    skin = '\n\t\t\t\t<screen position="center,center" size="425,425" title=" " >\n\t\t\t\t\t<ePixmap position="0,0" size="425,425" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Chefkoch/pic/info.png" zPosition="1"/>\n\t\t\t\t\t<widget name="label" position="0,72" size="425,350" font="{font};18" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="center" valign="center" transparent="1" zPosition="2" />\n\t\t\t\t</screen>'
-
-    def __init__(self, session, check):
-        if config.plugins.chefkoch.font.value == 'yes':
-            font = 'Sans'
-        else:
-            font = 'Regular'
-        self.dict = {'font': font}
-        self.skin = applySkinVars(infoScreenChefkoch.skin, self.dict)
-        Screen.__init__(self, session)
-        self.check = check
-        self['label'] = Label('www.kashmir-plugins.de\n\nGef\xc3\xa4llt Ihnen das Plugin?\nM\xc3\xb6chten Sie etwas spenden?\nGehen Sie dazu bitte wie folgt vor:\n\n\n\n1. Melden Sie sich bei PayPal an\n2. Klicken Sie auf: Geld senden\n3. Geld an Freunde und Familie senden\n4. Adresse: paypal@kashmir-plugins.de\n5. Betrag: 5 Euro\n6. Weiter\n7. Geld senden\nDanke!')
-        self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.close,
-         'cancel': self.close}, -1)
-        self.version = '1.5rc5'
-        if self.check == True:
-            self.setTitle('Chefkoch.de %s' % self.version)
-            self.link = 'http://sites.google.com/site/kashmirplugins/home/chefkoch-de'
-            self.makeVersionTimer = eTimer()
-            self.makeVersionTimer.callback.append(self.download(self.link, self.checkVersion))
-            self.makeVersionTimer.start(500, True)
-        else:
-            self.setTitle('PayPal Info')
-
-    def checkVersion(self, output):
-        self.pluginname = 'Chefkoch.de'
-        version = search('<img alt="Version (.*?)"', output)
-        if version is not None:
-            version = version.group(1)
-            if version != self.version:
-                pluginsource = search('<a href="(.*?)\\?attredirects=0".*?<img alt="Version ', output)
-                if pluginsource is not None:
-                    self.pluginsource = pluginsource.group(1)
-                    self.pluginfile = self.pluginsource.replace('https://sites.google.com/site/kashmirplugins/', '').replace('%5f', '_')
-                    versioninfo = re.findall('<li><span style="color:rgb\\(100,118,135\\)">(.*?)</span></li>', output)
-                    if len(versioninfo) > 0:
-                        info = ''
-                        idx = 0
-                        for x in versioninfo:
-                            idx += 1
-
-                        for i in range(idx):
-                            try:
-                                info = info + ' - ' + versioninfo[i] + '\n'
-                            except IndexError:
-                                Info = ''
-
-                        self.session.openWithCallback(self.downloadPlugin, MessageBox, '\nEine neue Plugin Version ist verf\xfcgbar:\n%s Version %s\n\n%s\nSoll die neue Version jetzt installiert werden?' % (self.pluginname, version, info), MessageBox.TYPE_YESNO)
-                    else:
-                        self.session.openWithCallback(self.downloadPlugin, MessageBox, '\nEine neue Plugin Version ist verf\xfcgbar:\n%s Version %s\n\nSoll die neue Version jetzt installiert werden?' % (self.pluginname, version), MessageBox.TYPE_YESNO)
-            else:
-                self.session.open(MessageBox, '\nwww.kashmir-plugins.de\n\nIhre %s Version %s ist aktuell.' % (self.pluginname, self.version), MessageBox.TYPE_INFO, close_on_any_key=True)
-        return
-
-    def downloadPlugin(self, answer):
-        if answer is True:
-            self.pluginfile = '/tmp/' + str(self.pluginfile)
-            self.session.openWithCallback(self.close, DownloadUpdate, self.pluginsource, self.pluginfile, self.pluginname)
-
-    def download(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadError)
-
-    def downloadError(self, output):
-        pass
-
-
-class DownloadUpdate(Screen):
-    skin = '\n\t\t\t<screen position="center,center" size="550,190" title="Download Update..." >\n\t\t\t\t<ePixmap position="10,10" size="530,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Chefkoch/pic/download.png" alphatest="blend" zPosition="1" />\n\t\t\t\t<widget name="name" position="10,70" size="530,50" font="Regular;20" halign="center" valign="center" transparent="1" zPosition="1" />\n\t\t\t\t<widget name="size" position="10,120" size="530,25" font="Regular;20" halign="center" transparent="1" zPosition="1" />\n\t\t\t\t<widget name="slider" position="10,150" size="530,30" transparent="0" zPosition="2" />\n\t\t\t</screen>'
-
-    def __init__(self, session, url, file, name):
-        Screen.__init__(self, session)
-        if config.plugins.chefkoch.fhd.value == 'yes':
-            try:
-                gMainDC.getInstance().setResolution(1920, 1080)
-                desktop = getDesktop(0)
-                desktop.resize(eSize(1920, 1080))
-            except:
-                import traceback
-                traceback.print_exc()
-
-        self.url = url
-        self.file = file
-        self.name = name
-        self.hideflag = True
-        self.install = False
-        self.filesize = 0
-        self.localsize = 0
-        self.progress = 0
-        self.slider = Slider(0, 100)
-        self['name'] = Label('Downloading: %s' % self.file)
-        self['size'] = Label('')
-        self['slider'] = self.slider
-        self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {'ok': self.hideScreen,
-         'cancel': self.exit,
-         'blue': self.hideScreen}, -1)
-        self.statusTimer = eTimer()
-        self.statusTimer.callback.append(self.UpdateStatus)
-        self.statusTimer.start(500, True)
-        self.updateTimer = eTimer()
-        self.updateTimer.callback.append(self.refresh)
-        self.update_interval = 3000
-        self.onLayoutFinish.append(self.onLayoutFinished)
-
-    def onLayoutFinished(self):
-        self.getFileSize()
-        downloadPage(self.url, self.file).addCallback(self.installPlugin)
-
-    def installPlugin(self, string):
-        self.install = True
-        self.container = eConsoleAppContainer()
-        self.container.appClosed.append(self.finished)
-        self.container.dataAvail.append(self.dataAvail)
-        self.container.execute('opkg install %s' % self.file)
-
-    def getFileSize(self):
-        header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
-         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-         'Accept-Language': 'en-us,en;q=0.5'}
-        request = Request(self.url, None, header)
-        try:
-            filesize = urlopen(request, timeout=20).info().get('Content-Length')
-            filesize = float(filesize)
-            self.filesize = filesize
-        except URLError:
-            pass
-
-        return
-
-    def UpdateStatus(self):
-        if fileExists(self.file):
-            localsize = path.getsize(self.file)
-            self.localsize = localsize
-        else:
-            self.localsize = 0
-        if self.filesize > 0:
-            self.progress = self.localsize / self.filesize * 100
-        if int(self.progress) > 1:
-            self['slider'].setValue(int(self.progress))
-            self['size'].setText('%s KB von %s KB' % (int(self.localsize) / 1024, int(self.filesize) / 1024))
-        elif self.localsize > 0 and self.filesize == 0:
-            self['slider'].setValue(0)
-            self['size'].setText('%s KB von ??? KB' % (int(self.localsize) / 1024))
-        elif self.filesize > 0 and self.localsize == 0:
-            self['slider'].setValue(0)
-            self['size'].setText('0 KB von %s KB' % (int(self.filesize) / 1024))
-        self.updateTimer.start(self.update_interval)
-
-    def refresh(self):
-        self.UpdateStatus()
-
-    def dataAvail(self, data):
-        if data is not None:
-            self.session.open(MessageBox, '\n%s' % data, MessageBox.TYPE_INFO, close_on_any_key=True)
-        return
-
-    def finished(self, retval):
-        if self.hideflag == False:
-            self.hideflag = True
-            f = open('/proc/stb/video/alpha', 'w')
-            f.write('%i' % config.av.osd_alpha.value)
-            f.close()
-        self.install = False
-        del self.container.appClosed[:]
-        del self.container.dataAvail[:]
-        del self.container
-        self.statusTimer.stop()
-        self.updateTimer.stop()
-        if retval == 0:
-            self.setTitle('Update finished!')
-            text = self.name + ' Update finished!'
-            self['name'].setText(text)
-            self['slider'].setValue(100)
-            self.session.openWithCallback(self.restartGUI, MessageBox, '\nDas %s Plugin wurde erfolgreich installiert.\nBitte starten Sie Enigma neu.' % self.name, MessageBox.TYPE_YESNO)
-        else:
-            self.close()
-
-    def restartGUI(self, answer):
-        if answer is True:
-            try:
-                self.session.open(TryQuitMainloop, 3)
-            except RuntimeError:
-                self.close()
-
-        else:
-            self.close()
-
-    def hideScreen(self):
-        if self.hideflag == True:
-            self.hideflag = False
-            count = 40
-            while count > 0:
-                count -= 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-        else:
-            self.hideflag = True
-            count = 0
-            while count < 40:
-                count += 1
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * count / 40))
-                f.close()
-
-    def exit(self):
-        if self.hideflag == False:
-            self.hideflag = True
-            f = open('/proc/stb/video/alpha', 'w')
-            f.write('%i' % config.av.osd_alpha.value)
-            f.close()
-        if self.install == True:
-            del self.container.appClosed[:]
-            del self.container.dataAvail[:]
-            del self.container
-        self.setTitle('Update canceled!')
-        self['slider'].setValue(0)
-        self.statusTimer.stop()
-        self.updateTimer.stop()
-        if fileExists(self.file):
-            os.remove(self.file)
-        self.close()
 
 
 class ItemList(MenuList):
@@ -3293,12 +3063,6 @@ class ChefkochMain(Screen):
         self.movie_eof = config.usage.on_movie_eof.value
         config.usage.on_movie_stop.value = 'quit'
         config.usage.on_movie_eof.value = 'quit'
-        if config.plugins.chefkoch.autoupdate.value == 'yes':
-            self.version = '1.5rc5'
-            self.link = 'http://sites.google.com/site/kashmirplugins/home/chefkoch-de'
-            self.makeVersionTimer = eTimer()
-            self.makeVersionTimer.callback.append(self.downloadVersion(self.link, self.checkVersion))
-            self.makeVersionTimer.start(500, True)
         self.ChefTimer = eTimer()
         self.ChefTimer.callback.append(self.downloadFullPage(self.baseurl, self.makeMainMenu))
         self.ChefTimer.start(500, True)
@@ -3345,7 +3109,8 @@ class ChefkochMain(Screen):
                 pass
 
     def makeMainMenu(self, string):
-        output = open(self.localhtml, 'r').read()
+        output = open(self.localhtml, 'rb').read()
+        output = six.ensure_str(output)
         startpos = output.find('>Rezeptkategorien</h1>')
         endpos = output.find('<!-- /content -->')
         bereich = output[startpos:endpos].decode('latin1').encode('utf-8')
@@ -3652,50 +3417,6 @@ class ChefkochMain(Screen):
     def rightDown(self):
         self[self.actmenu].pageDown()
 
-    def checkVersion(self, output):
-        self.pluginname = 'Chefkoch.de'
-        version = search('<img alt="Version (.*?)"', output)
-        if version is not None:
-            version = version.group(1)
-            if version != self.version:
-                pluginsource = search('<a href="(.*?)\\?attredirects=0".*?<img alt="Version ', output)
-                if pluginsource is not None:
-                    self.pluginsource = pluginsource.group(1)
-                    self.pluginfile = self.pluginsource.replace('https://sites.google.com/site/kashmirplugins/', '').replace('%5f', '_')
-                    versioninfo = re.findall('<li><span style="color:rgb\\(100,118,135\\)">(.*?)</span></li>', output)
-                    if len(versioninfo) > 0:
-                        info = ''
-                        idx = 0
-                        for x in versioninfo:
-                            idx += 1
-
-                        for i in range(idx):
-                            try:
-                                info = info + ' - ' + versioninfo[i] + '\n'
-                            except IndexError:
-                                Info = ''
-
-                        self.session.openWithCallback(self.downloadPlugin, MessageBox, '\nEine neue Plugin Version ist verf\xfcgbar:\n%s Version %s\n\n%s\nSoll die neue Version jetzt installiert werden?' % (self.pluginname, version, info), MessageBox.TYPE_YESNO)
-                    else:
-                        self.session.openWithCallback(self.downloadPlugin, MessageBox, '\nEine neue Plugin Version ist verf\xfcgbar:\n%s Version %s\n\nSoll die neue Version jetzt installiert werden?' % (self.pluginname, version), MessageBox.TYPE_YESNO)
-            elif config.plugins.chefkoch.paypal.value == 'yes':
-                import random
-                number = random.randint(1, 4)
-                if number == 1:
-                    self.session.open(infoScreenChefkoch, False)
-        return
-
-    def downloadPlugin(self, answer):
-        if answer is True:
-            self.pluginfile = '/tmp/' + str(self.pluginfile)
-            self.session.openWithCallback(self.close, DownloadUpdate, self.pluginsource, self.pluginfile, self.pluginname)
-
-    def downloadVersion(self, link, name):
-        getPage(link).addCallback(name).addErrback(self.downloadVersionError)
-
-    def downloadVersionError(self, output):
-        pass
-
     def downloadSecondTVMenu(self, link):
         getPage(link).addCallback(self.makeSecondTVMenu).addErrback(self.downloadError)
 
@@ -3703,6 +3424,7 @@ class ChefkochMain(Screen):
         getPage(link).addCallback(self.makeThirdTVMenu, seite).addErrback(self.downloadError)
 
     def downloadFullPage(self, link, name):
+        link = six.ensure_binary(link)
         downloadPage(link, self.localhtml).addCallback(name).addErrback(self.downloadError)
 
     def downloadError(self, output):
@@ -3737,7 +3459,7 @@ class ChefkochMain(Screen):
         self.session.openWithCallback(self.exit, chefkochConfig)
 
     def infoScreen(self):
-        self.session.open(infoScreenChefkoch, True)
+        pass
 
     def hideScreen(self):
         if self.hideflag == True:
@@ -3821,7 +3543,6 @@ class chefkochConfig(ConfigListScreen, Screen):
         list.append(getConfigListEntry('Plugin Position:', config.plugins.chefkoch.position))
         list.append(getConfigListEntry('Plugin Schriftgr\xc3\xb6\xc3\x9fe:', config.plugins.chefkoch.font_size))
         list.append(getConfigListEntry('Plugin Sans Serif Schrift:', config.plugins.chefkoch.font))
-        list.append(getConfigListEntry('Auto Update Check:', config.plugins.chefkoch.autoupdate))
         list.append(getConfigListEntry('Versende Rezepte per E-mail:', config.plugins.chefkoch.mail))
         list.append(getConfigListEntry('E-mail Absender:', config.plugins.chefkoch.mailfrom))
         list.append(getConfigListEntry('E-mail Empf\xc3\xa4nger:', config.plugins.chefkoch.mailto))
@@ -3831,7 +3552,6 @@ class chefkochConfig(ConfigListScreen, Screen):
         list.append(getConfigListEntry('E-mail Server Port:', config.plugins.chefkoch.port))
         list.append(getConfigListEntry('E-mail Server SSL:', config.plugins.chefkoch.ssl))
         list.append(getConfigListEntry('Full HD Skin Support:', config.plugins.chefkoch.fhd))
-        list.append(getConfigListEntry('PayPal Info:', config.plugins.chefkoch.paypal))
         ConfigListScreen.__init__(self, list, on_change=self.UpdateComponents)
         self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {'ok': self.save,
          'cancel': self.cancel,
@@ -3846,28 +3566,12 @@ class chefkochConfig(ConfigListScreen, Screen):
             if PNG != None:
                 self['plugin'].instance.setPixmap(PNG)
         current = self['config'].getCurrent()
-        if current == getConfigListEntry('PayPal Info:', config.plugins.chefkoch.paypal):
-            import time
-            from Screens.InputBox import PinInput
-            self.pin = int(time.strftime('%d%m'))
-            self.session.openWithCallback(self.returnPin, PinInput, pinList=[self.pin], triesEntry=config.ParentalControl.retries.servicepin)
         return
-
-    def returnPin(self, pin):
-        if pin:
-            config.plugins.chefkoch.paypal.value = 'no'
-            config.plugins.chefkoch.paypal.save()
-            configfile.save()
-        else:
-            config.plugins.chefkoch.paypal.value = 'yes'
-            config.plugins.chefkoch.paypal.save()
 
     def save(self):
         config.plugins.chefkoch.plugin_size.save()
         config.plugins.chefkoch.font_size.save()
         config.plugins.chefkoch.font.save()
-        config.plugins.chefkoch.autoupdate.save()
-        config.plugins.chefkoch.paypal.save()
         config.plugins.chefkoch.mail.save()
         config.plugins.chefkoch.mailfrom.save()
         config.plugins.chefkoch.mailto.save()
