@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -273,7 +274,7 @@ class Filebrowser(Screen):
 			opener.open(uri)
 		except:
 			#self.session.open(MessageBox, _("File not found in this URL:\n%s"%(uri)), MessageBox.TYPE_INFO, timeout = 10)
-			print "[FirmwareUpgrade] - Fail to download. URL :", uri
+			print("[FirmwareUpgrade] - Fail to download. URL :", uri)
 			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout=10)
 			del opener
 			return False
@@ -281,7 +282,7 @@ class Filebrowser(Screen):
 			f, h = urlretrieve(uri, tar, doHook)
 		except IOError, msg:
 			#self.session.open(MessageBox, _(str(msg)), MessageBox.TYPE_INFO, timeout = 10)
-			print "[FirmwareUpgrade] - Fail to download. ERR_MSG :", str(msg)
+			print("[FirmwareUpgrade] - Fail to download. ERR_MSG :", str(msg))
 			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout=10)
 			del opener
 			return False

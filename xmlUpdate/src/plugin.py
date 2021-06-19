@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -73,13 +74,13 @@ class xmlUpdate(ConfigListScreen, Screen):
 						f.write(XMLdata)
 						f.close()
 				except IOError, err:
-					print "[xmlUpdate][keyGo] Saving file failed.", err
+					print("[xmlUpdate][keyGo] Saving file failed.", err)
 					self.showError(_("Saving the %s.xml file failed") % self.DVBtype.value)
 				else:
-					print "[xmlUpdate][keyGo] Saving file succeeded."
+					print("[xmlUpdate][keyGo] Saving file succeeded.")
 					self.showRestartMessage(_("Fetching and saving %s.xml succeeded.\nRestart now for changes to take immediate effect?") % self.DVBtype.value)
 			else: # XML did not validate
-				print "[xmlUpdate][validXML] Closing documentElement missing."
+				print("[xmlUpdate][validXML] Closing documentElement missing.")
 				self.showError(_("The %s.xml download was corrupt.") % self.DVBtype.value)
 
 	def keyCancel(self):
@@ -87,21 +88,21 @@ class xmlUpdate(ConfigListScreen, Screen):
 
 	def fetchURL(self):
 		try:
-			print '[xmlUpdate][fetchURL] URL', self.url % self.DVBtype.value
+			print('[xmlUpdate][fetchURL] URL', self.url % self.DVBtype.value)
 			req = urllib2.Request(self.url % self.DVBtype.value)
 			response = urllib2.urlopen(req)
-			print '[xmlUpdate][fetchURL] Response: %d' % response.getcode()
+			print('[xmlUpdate][fetchURL] Response: %d' % response.getcode())
 			if int(response.getcode()) == 200:
 				return response.read()
 		except urllib2.HTTPError, err:
-			print '[xmlUpdate][fetchURL] ERROR:', err
+			print('[xmlUpdate][fetchURL] ERROR:', err)
 		except urllib2.URLError, err:
-			print '[xmlUpdate][fetchURL] ERROR:', err.reason[0]
+			print('[xmlUpdate][fetchURL] ERROR:', err.reason[0])
 		except urllib2, err:
-			print '[xmlUpdate][fetchURL] ERROR:', err
+			print('[xmlUpdate][fetchURL] ERROR:', err)
 		except:
 			import sys
-			print '[xmlUpdate][fetchURL] undefined error', sys.exc_info()[0]
+			print('[xmlUpdate][fetchURL] undefined error', sys.exc_info()[0])
 		self.showError(_("The %s.xml file could not be fetched") % self.DVBtype.value)
 
 	def validXML(self, XMLdata): # Looks for closing documentElement, i.e. </satellites>, </cables>, or </locations>

@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -28,7 +29,7 @@ def getProcValue(procPath):
 
 
 def setProcValue(procPath, value):
-	print "[TranscodingSetup] set %s to %s" % (procPath, value)
+	print("[TranscodingSetup] set %s to %s" % (procPath, value))
 	fd = open(procPath, 'w')
 	fd.write(value)
 	fd.close()
@@ -208,11 +209,11 @@ class TranscodingSetupInit:
 			setProcValue(procPath, value)
 			setValue = getProcValue(procPath)
 			if value != setValue:
-				print "[TranscodingSetup] set failed. (%s > %s)" % (value, procPath)
+				print("[TranscodingSetup] set failed. (%s > %s)" % (value, procPath))
 				return -1
 			return 0
 		except:
-			print "setConfig exception error (%s > %s)" % (value, procPath)
+			print("setConfig exception error (%s > %s)" % (value, procPath))
 			return -1
 		return 0
 
@@ -293,7 +294,7 @@ class TranscodingSetupInit:
 	def setPort(self, configElement):
 		port = str(configElement.getValue())
 
-		print "[TranscodingSetup] set port", port
+		print("[TranscodingSetup] set port", port)
 		try:
 			fp = file('/etc/inetd.conf', 'r')
 			datas = fp.read()
@@ -542,7 +543,7 @@ class TranscodingSetup(Screen, ConfigListScreen):
 
 	# for summary:
 	def changedEntry(self):
-		print 'self.onChangedEntry', self.onChangedEntry
+		print('self.onChangedEntry', self.onChangedEntry)
 		for x in self.onChangedEntry:
 			x()
 		self.createSetup()

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.MenuList import MenuList
@@ -294,30 +295,30 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		return
 
 	def setSeekState(self, wantstate, onlyGUI=False):
-		print "setSeekState"
+		print("setSeekState")
 		if wantstate == self.STATE_PAUSED:
-			print "trying to switch to Pause- state:", self.STATE_PAUSED
+			print("trying to switch to Pause- state:", self.STATE_PAUSED)
 		elif wantstate == self.STATE_PLAYING:
-			print "trying to switch to playing- state:", self.STATE_PLAYING
+			print("trying to switch to playing- state:", self.STATE_PLAYING)
 		service = self.session.nav.getCurrentService()
 		if service is None:
-			print "No Service found"
+			print("No Service found")
 			return False
 		pauseable = service.pause()
 		if pauseable is None:
-			print "not pauseable."
+			print("not pauseable.")
 			self.state = self.STATE_PLAYING
 		if pauseable is not None:
-			print "service is pausable"
+			print("service is pausable")
 			if wantstate == self.STATE_PAUSED:
-				print "WANT TO PAUSE"
+				print("WANT TO PAUSE")
 				pauseable.pause()
 				self.state = self.STATE_PAUSED
 				if not self.shown:
 					self.hidetimer.stop()
 					self.show()
 			elif wantstate == self.STATE_PLAYING:
-				print "WANT TO PLAY"
+				print("WANT TO PLAY")
 				pauseable.unpause()
 				self.state = self.STATE_PLAYING
 				if self.shown:
@@ -490,8 +491,8 @@ class OpenUgSetupScreen(Screen):
 
 	def down(self):
 		sel = self.CurSel
-		print 'len menu'
-		print len(self.mmenu) - 1
+		print('len menu')
+		print(len(self.mmenu) - 1)
 		if sel == len(self.mmenu) - 1:
 			self.CurSel = 0
 		else:
@@ -983,7 +984,7 @@ class OpenUg(Screen):
 					tmp = 'site:rtlxl.nl/#! ' + tmp
 				elif retval[2] == 'kijk':
 					tmp = 'site:kijk.nl/video/ ' + tmp
-					print tmp
+					print(tmp)
 				self.googleMediaList(self.mediaList, tmp)
 				if len(self.mediaList) == 0:
 					self.mediaProblemPopup()
@@ -1370,7 +1371,7 @@ class OpenUg(Screen):
 
 	def doUGPlay(self):
 		out = wgetUrl(self.UG_BASE_URL + "/nu/bekijk/context/bekijk_gemist/trm_id/%s?XHRUrlAddOn=1" % (self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]))
-		print out
+		print(out)
 		if out != '':
 			url = ''
 			tmp = out.split('\n')
@@ -2021,13 +2022,13 @@ class OpenUg(Screen):
 		g = pygoogle(search)
 		g.pages = 2
 		result = g.search()
-		print result
+		print(result)
 		for k, v in result.items():
 			name = k.encode("utf8")
 			url = v.encode("utf8")
 			if 'site:rtlxl.nl/#!' in search:
 				if 'http://www.rtlxl.nl/#!/a-z/' in url or url is 'http://www.rtlxl.nl/#!/gemist' or 'http://www.rtlxl.nl/#!/films/' in url:
-					print 'Not in list'
+					print('Not in list')
 				else:
 					mediaList.append((date, name, short, channel, url, icon, '', True))
 			elif 'site:kijk.nl/video/' in search:

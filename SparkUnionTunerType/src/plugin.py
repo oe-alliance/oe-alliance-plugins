@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from Screens.MessageBox import MessageBox
@@ -34,7 +35,7 @@ class UnionTunerType(Screen, ConfigListScreen):
                     try:
                         t = s[len(option)]
                     except IndexError:
-                        print '[UnionTunerType] bad format in modprobe config'
+                        print('[UnionTunerType] bad format in modprobe config')
 
                     break
 
@@ -52,9 +53,9 @@ class UnionTunerType(Screen, ConfigListScreen):
         if result is not None and result:
 		for line in fileinput.input(filename, inplace=1):
 			if line.startswith(option):
-				print option + self.tunerconfig.value
+				print(option + self.tunerconfig.value)
 			else:
-				print line,
+				print(line, end=' ')
 		fileinput.close()
 		self.session.open(TryQuitMainloop, retvalue=2)
         self.close()

@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 from Components.ActionMap import NumberActionMap, ActionMap
@@ -155,7 +156,7 @@ class DmmBlindscanState(Screen):
 					val = 128 + (val - 256 if val > 127 else val)
 					#val = (int(bitmap[pos:pos+2], 16) + 128) & 0xff
 				except ValueError:
-					print "[dmmBlindscan][updateConstellation] I constellation data broken at pos", pos
+					print("[dmmBlindscan][updateConstellation] I constellation data broken at pos", pos)
 					val = 0
 				I.append(val)
 			for pos in range(30, 60, 2):
@@ -164,7 +165,7 @@ class DmmBlindscanState(Screen):
 					val = 128 + (val - 256 if val > 127 else val)
 					#val = (int(bitmap[pos:pos+2], 16) + 128) & 0xff
 				except ValueError:
-					print "[dmmBlindscan][updateConstellation] Q constellation data broken at pos", pos
+					print("[dmmBlindscan][updateConstellation] Q constellation data broken at pos", pos)
 					val = 0
 				Q.append(val)
 			for i in range(15):
@@ -189,7 +190,7 @@ class SatelliteTransponderSearchSupport:
 	def satelliteTransponderSearchSessionClosed(self, *val):
 		user_aborted_scan = False
 		self.releaseFrontend()
-		print "[dmmBlindscan][satelliteTransponderSearchSessionClosed] val", val
+		print("[dmmBlindscan][satelliteTransponderSearchSessionClosed] val", val)
 		if val and len(val):
 			if val[0]:
 				self.tlist = self.__tlist
@@ -224,7 +225,7 @@ class SatelliteTransponderSearchSupport:
 				parm = eDVBFrontendParametersSatellite()
 				parm.frequency = freq
 				if d["symbol_rate"] < 0:
-					print "[dmmBlindscan][frontendStateChanged] WARNING blind SR is < 0... skip"
+					print("[dmmBlindscan][frontendStateChanged] WARNING blind SR is < 0... skip")
 					if not self.auto_scan:
 						self.parm.frequency += self.parm.symbol_rate
 				else:
@@ -249,7 +250,7 @@ class SatelliteTransponderSearchSupport:
 					if hasattr(parm, "t2mi_pid"):
 						parm.t2mi_pid = d["t2mi_pid"]
 
-					print "[dmmBlindscan][frontendStateChanged] About to run filters"
+					print("[dmmBlindscan][frontendStateChanged] About to run filters")
 					parm_list = self.runFilters([parm], self.__tlist) # parm_list will contain a maximum of one transponder as the input is only one transponder
 					if parm_list:
 						parm = parm_list[0]
@@ -264,12 +265,12 @@ class SatelliteTransponderSearchSupport:
 						r["modulation"])
 
 					if not parm_list:
-						print "[dmmBlindscan][frontendStateChanged] Transponder removed by filters, %s" % fstr
+						print("[dmmBlindscan][frontendStateChanged] Transponder removed by filters, %s" % fstr)
 
 					if self.auto_scan:
-						print "[dmmBlindscan][frontendStateChanged] LOCKED at", freq, {eDVBFrontendParametersSatellite.Polarisation_Horizontal: "H", eDVBFrontendParametersSatellite.Polarisation_Vertical: "V", eDVBFrontendParametersSatellite.Polarisation_CircularLeft: "L", eDVBFrontendParametersSatellite.Polarisation_CircularRight: "R"}.get(parm.polarisation)
+						print("[dmmBlindscan][frontendStateChanged] LOCKED at", freq, {eDVBFrontendParametersSatellite.Polarisation_Horizontal: "H", eDVBFrontendParametersSatellite.Polarisation_Vertical: "V", eDVBFrontendParametersSatellite.Polarisation_CircularLeft: "L", eDVBFrontendParametersSatellite.Polarisation_CircularRight: "R"}.get(parm.polarisation))
 					else:
-						print "[dmmBlindscan][frontendStateChanged] LOCKED at", freq, "SEARCHED at", self.parm.frequency, "half bw", (135L * ((sr + 1000) / 1000) / 200), "half search range", (self.parm.symbol_rate / 2)
+						print("[dmmBlindscan][frontendStateChanged] LOCKED at", freq, "SEARCHED at", self.parm.frequency, "half bw", (135L * ((sr + 1000) / 1000) / 200), "half search range", (self.parm.symbol_rate / 2))
 						self.parm.frequency = freq
 						self.parm.frequency += (135L * ((sr + 999) / 1000) / 200)
 						self.parm.frequency += self.parm.symbol_rate / 2
@@ -296,10 +297,10 @@ class SatelliteTransponderSearchSupport:
 #				freq /= 2
 				freq = int(round(d["frequency"], -3)) # round to nearest 1000
 				mhz_complete, mhz_done = self.stats(freq)
-				print "[dmmBlindscan][frontendStateChanged] CURRENT freq", freq, "%d/%d" % (mhz_done, mhz_complete)
+				print("[dmmBlindscan][frontendStateChanged] CURRENT freq", freq, "%d/%d" % (mhz_done, mhz_complete))
 				check_finished = self.parm is None
 			else:
-				print "[dmmBlindscan][frontendStateChanged] NEXT freq", self.parm.frequency
+				print("[dmmBlindscan][frontendStateChanged] NEXT freq", self.parm.frequency)
 				mhz_complete, mhz_done = self.stats()
 				check_finished = self.parm.frequency > self.range_list[self.current_range][1]
 				if check_finished:
@@ -347,12 +348,12 @@ class SatelliteTransponderSearchSupport:
 
 			self.tuneNext()
 		else:
-			print "[dmmBlindscan]unhandled tuner state", x["tuner_state"]
+			print("[dmmBlindscan]unhandled tuner state", x["tuner_state"])
 		self.timer.start(1500, True)
 
 	def tuneNext(self):
 		if self.parm is not None:
-			print "[dmmBlindscan][tuneNext] pos %d, freq %d, pol %d, sys %d" % (self.parm.orbital_position, self.parm.frequency, self.parm.polarisation, self.parm.system)
+			print("[dmmBlindscan][tuneNext] pos %d, freq %d, pol %d, sys %d" % (self.parm.orbital_position, self.parm.frequency, self.parm.polarisation, self.parm.system))
 			tparm = eDVBFrontendParameters()
 			tparm.setDVBS(self.parm, False)
 			self.frontend.tune(tparm, True)
@@ -362,10 +363,10 @@ class SatelliteTransponderSearchSupport:
 			self.current_range = 0
 		else:
 			self.current_range += 1
-		print "[dmmBlindscan][setNextRange] self.current_range", self.current_range
+		print("[dmmBlindscan][setNextRange] self.current_range", self.current_range)
 		if len(self.range_list) > self.current_range:
 			bs_range = self.range_list[self.current_range]
-			print "[dmmBlindscan][setNextRange] Sat Blindscan current range", bs_range
+			print("[dmmBlindscan][setNextRange] Sat Blindscan current range", bs_range)
 			parm = eDVBFrontendParametersSatellite()
 			parm.frequency = bs_range[0]
 			if self.nim.isCompatible("DVB-S2"):
@@ -420,11 +421,11 @@ class SatelliteTransponderSearchSupport:
 				if self.frontend:
 					return True
 				else:
-					print "[dmmBlindscan][openFrontend] getFrontend failed"
+					print("[dmmBlindscan][openFrontend] getFrontend failed")
 			else:
-				print "[dmmBlindscan][openFrontend] getRawChannel failed"
+				print("[dmmBlindscan][openFrontend] getRawChannel failed")
 		else:
-			print "[dmmBlindscan][openFrontend] getResourceManager instance failed"
+			print("[dmmBlindscan][openFrontend] getResourceManager instance failed")
 		return False
 
 	def prepareFrontend(self):
@@ -465,11 +466,11 @@ class SatelliteTransponderSearchSupport:
 		tuner_no = -1
 		self.auto_scan = False
 
-		print "[dmmBlindscan][startSatelliteTransponderSearch] tunername", tunername
+		print("[dmmBlindscan][startSatelliteTransponderSearch] tunername", tunername)
 		if nimmanager.nim_slots[self.feid].supportsBlindScan() or tunername in ("BCM4505", "BCM4506 (internal)", "BCM4506", "Alps BSBE1 C01A/D01A.", "Si2166B", "Si2169C"):
 			self.auto_scan = nimmanager.nim_slots[self.feid].supportsBlindScan() or tunername in ("Si2166B", "Si2169C")
 			if not self.prepareFrontend():
-				print "[dmmBlindscan][startSatelliteTransponderSearch] couldn't allocate tuner %d for blindscan!" % self.feid
+				print("[dmmBlindscan][startSatelliteTransponderSearch] couldn't allocate tuner %d for blindscan!" % self.feid)
 				text = _("Sorry, this tuner is in use.")
 				if self.session.nav.getRecordings():
 					text += _("\nA recording is in progress.")
@@ -508,7 +509,7 @@ class SatelliteTransponderSearchSupport:
 #			if self.dmmBlindscan.multiple_scan.value > 1:
 #				self.range_list = [self.range_list[i//self.dmmBlindscan.multiple_scan.value] for i in range(len(self.range_list)*self.dmmBlindscan.multiple_scan.value)]
 
-			print "[dmmBlindscan][startSatelliteTransponderSearch] self.range_list", self.range_list
+			print("[dmmBlindscan][startSatelliteTransponderSearch] self.range_list", self.range_list)
 
 			self.parm = self.setNextRange()
 			if self.parm is not None:
@@ -623,7 +624,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 		self.list = []
 		self.multiscanlist = []
 		index_to_scan = int(self.scan_nims.value)
-		print "[dmmBlindscan][createSetup] ID: ", index_to_scan
+		print("[dmmBlindscan][createSetup] ID: ", index_to_scan)
 
 		self.tunerEntry = getConfigListEntry(_("Tuner"), self.scan_nims, _("Select a tuner that is configured for the satellite you wish to search"))
 		self.list.append(self.tunerEntry)

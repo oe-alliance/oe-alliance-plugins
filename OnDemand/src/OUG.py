@@ -16,6 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -316,7 +317,7 @@ class OpenUg(StreamsThumbCommon):
 			return
 
 		if self.isRtl:
-			print "go: isRtl: ", self.isRtl
+			print("go: isRtl: ", self.isRtl)
 			if self.level == self.UG_LEVEL_ALL:
 				tmp = self.mediaList[selIndex][self.UG_STREAMURL]
 				self.getRTLSerie(self.mediaList, tmp)

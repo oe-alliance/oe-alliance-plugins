@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # for localized messages
+from __future__ import print_function
 import os
 import re
 from . import _
@@ -301,7 +302,7 @@ class StreamingChannelFromServerScreen(Screen):
 		self.download(self.workList[0]).addCallback(self.fetchUserBouquetsFinished).addErrback(self.fetchUserBouquetsFailed)
 
 	def fetchUserBouquetsFailed(self, string):
-		print "string", string
+		print("string", string)
 		if self.readIndex < len(self.workList) and self.readIndex > 0:
 			self.workList.remove(self.workList[self.readIndex])
 			self.readIndex -= 1
@@ -631,7 +632,7 @@ class StreamingChannelFromServerScreen(Screen):
 			self["statusbar"].setText(_("Make your selection"))
 
 	def downloadAlternativesErrback(self, string):
-		print "[RCSC] error downloading alternative: '%s', error: %s" % (self.alternatives[self.alternativesCounter], string)
+		print("[RCSC] error downloading alternative: '%s', error: %s" % (self.alternatives[self.alternativesCounter], string))
 		self.downloadAlternativesCallback(string)
 
 	def getAlternativeLine(self, line):

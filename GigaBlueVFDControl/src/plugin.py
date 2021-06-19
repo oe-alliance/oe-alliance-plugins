@@ -1,3 +1,4 @@
+from __future__ import print_function
 #Giga
 # for localized messages
 from . import _
@@ -65,7 +66,7 @@ def vfd_write(text):
 	try:
 		open("/dev/mcu", "w").write(text)
 	except IOError:
-		print "[LED-GIGA] vfd_write failed!"
+		print("[LED-GIGA] vfd_write failed!")
 
 
 def setvfdBrightness(value):
@@ -79,7 +80,7 @@ def setvfdBrightness(value):
 		f.write(str(value))
 		f.close()
 	except IOError:
-		print "[LED-GIGA] vfdBrightness failed!"
+		print("[LED-GIGA] vfdBrightness failed!")
 
 
 def setvfdDSBY2(value):
@@ -88,7 +89,7 @@ def setvfdDSBY2(value):
 		f.write(str(value))
 		f.close()
 	except IOError:
-		print "[LED-GIGA] vfdDSBY2 failed!"
+		print("[LED-GIGA] vfdDSBY2 failed!")
 
 
 def setLed(color):
@@ -137,14 +138,14 @@ def setLed(color):
 		f.write(str(value0))
 		f.close()
 	except IOError:
-		print "[LED-GIGA] set LED Pattern failed!"
+		print("[LED-GIGA] set LED Pattern failed!")
 
 	try:
 		f = open(led1, "w")
 		f.write(str(value1))
 		f.close()
 	except IOError:
-		print "[LED-GIGA] set LED Pattern failed!"
+		print("[LED-GIGA] set LED Pattern failed!")
 
 
 class Channelnumber:
@@ -325,7 +326,7 @@ ChannelnumberInstance = None
 
 
 def leaveStandby():
-	print "[LED-GIGA] Leave Standby"
+	print("[LED-GIGA] Leave Standby")
 
 	if config.plugins.VFD_Giga.showClock.value == 'Off':
 		vfd_write("    ")
@@ -346,7 +347,7 @@ def leaveStandby():
 
 
 def standbyCounterChanged(configElement):
-	print "[LED-GIGA] In Standby"
+	print("[LED-GIGA] In Standby")
 
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
@@ -370,7 +371,7 @@ def standbyCounterChanged(configElement):
 
 
 def initLED():
-	print "[LED-GIGA] initVFD box = %s" % BOX
+	print("[LED-GIGA] initVFD box = %s" % BOX)
 
 	if config.plugins.VFD_Giga.setLed.value:
 		setLed(config.plugins.VFD_Giga.ledRUN.getValue())
@@ -496,7 +497,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 			setvfdBrightness(config.plugins.VFD_Giga.vfdBrightnessStandby.getValue())
 
 	def abort(self):
-		print "aborting"
+		print("aborting")
 
 	def save(self):
 		for x in self["config"].list:
@@ -521,7 +522,7 @@ class LED_GigaSetup(ConfigListScreen, Screen):
 
 class LED_Giga:
 	def __init__(self, session):
-		print "[LED-GIGA] initializing"
+		print("[LED-GIGA] initializing")
 		self.session = session
 		self.service = None
 		self.onClose = []
@@ -541,10 +542,10 @@ class LED_Giga:
 		self.abort()
 
 	def abort(self):
-		print "[LED-GIGA] aborting"
+		print("[LED-GIGA] aborting")
 
 	def delay_init(self):
-		print "[LED-GIGA] delay init on boot"
+		print("[LED-GIGA] delay init on boot")
 		initLED()
 
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
@@ -593,15 +594,15 @@ def controlgigaLED():
 	global mySession
 
 	if gReason == 0 and mySession != None and gigaLED == None:
-		print "[LED-GIGA] Starting !!"
+		print("[LED-GIGA] Starting !!")
 		gigaLED = LED_Giga(mySession)
 	elif gReason == 1 and gigaLED != None:
-		print "[LED-GIGA] Stopping !!"
+		print("[LED-GIGA] Stopping !!")
 		gigaLED = None
 
 
 def SetTime():
-	print "[LED-GIGA] Set RTC time"
+	print("[LED-GIGA] Set RTC time")
 	import time
 	if time.localtime().tm_isdst == 0:
 		forsleep = 7200 + time.timezone
@@ -609,23 +610,23 @@ def SetTime():
 		forsleep = 3600 - time.timezone
 
 	t_local = time.localtime(int(time.time()))
-	print "set Gigabox RTC to %s (rtc_offset = %s sec.)" % (time.strftime("%Y/%m/%d %H:%M", t_local), forsleep)
+	print("set Gigabox RTC to %s (rtc_offset = %s sec.)" % (time.strftime("%Y/%m/%d %H:%M", t_local), forsleep))
 
 	# Set RTC OFFSET (diff. between UTC and Local Time)
 	try:
 		open("/proc/stb/fp/rtc_offset", "w").write(str(forsleep))
 	except IOError:
-		print "[LED-GIGA] set RTC Offset failed!"
+		print("[LED-GIGA] set RTC Offset failed!")
 
 	# Set RTC
 	try:
 		open("/proc/stb/fp/rtc", "w").write(str(int(time.time())))
 	except IOError:
-		print "[LED-GIGA] set RTC time failed!"
+		print("[LED-GIGA] set RTC time failed!")
 
 
 def sessionstart(reason, **kwargs):
-	print "[LED-GIGA] sessionstart"
+	print("[LED-GIGA] sessionstart")
 	global gigaLED
 	global gReason
 	global mySession

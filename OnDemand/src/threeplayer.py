@@ -15,6 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -60,7 +61,7 @@ def wgetUrl(query):
 		response.close()
 		return html
 	except (Exception) as exception:
-		print 'wgetUrl: Error retrieving URL ', exception
+		print('wgetUrl: Error retrieving URL ', exception)
 		return ''
 
 #===================================================================================
@@ -200,12 +201,12 @@ class StreamsThumb(StreamsThumbCommon):
 		else:
 			if self.cmd == 'straight':
 				fileUrl = self.findPlayUrl(showID)
-				print 'fileUrl: ', fileUrl
+				print('fileUrl: ', fileUrl)
 			else:
 				#fileUrl = str(icon[:-12])+'.mp4'
 				fileUrl = str(showID[:-12]) + '.mp4'
 				#fileUrl = fileUrl.replace('3player', '3Player')
-				print 'fileUrl: ', fileUrl
+				print('fileUrl: ', fileUrl)
 
 			if fileUrl:
 				fileRef = eServiceReference(4097, 0, str(fileUrl))
@@ -272,7 +273,7 @@ class StreamsThumb(StreamsThumbCommon):
 					iconSet = False
 
 		except (Exception) as exception:
-			print 'getMediaData: Error parsing feed: ', exception
+			print('getMediaData: Error parsing feed: ', exception)
 
 #===================================================================================
 
@@ -315,7 +316,7 @@ class StreamsThumb(StreamsThumbCommon):
 					hrefSet = False
 
 		except (Exception) as exception:
-			print 'getAllShowsMediaData: Error parsing feed: ', exception
+			print('getAllShowsMediaData: Error parsing feed: ', exception)
 
 #===================================================================================
 
@@ -368,7 +369,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print 'getMediaData: Error parsing feed: ', exception
+			print('getMediaData: Error parsing feed: ', exception)
 
 #===================================================================================
 
@@ -396,7 +397,7 @@ class StreamsThumb(StreamsThumbCommon):
 					response.close()
 
 				except (Exception) as exception:
-					print 'Error getting webpage for age restrict: ', exception
+					print('Error getting webpage for age restrict: ', exception)
 					return ""
 
 			url = (re.compile('url: "mp4:(.+?)",').findall(html)[0])
@@ -406,7 +407,7 @@ class StreamsThumb(StreamsThumbCommon):
 			return fileUrl
 
 		except (Exception) as exception:
-			print 'findPlayUrl: Error getting URLs: ', exception
+			print('findPlayUrl: Error getting URLs: ', exception)
 			return ""
 
 #===================================================================================

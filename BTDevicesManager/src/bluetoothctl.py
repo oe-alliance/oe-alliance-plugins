@@ -1,3 +1,4 @@
+from __future__ import print_function
 # ReachView code is placed under the GPL license.
 # Written by Egor Fedorov (egor.fedorov@emlid.com)
 # Copyright (c) 2015, Emlid Limited

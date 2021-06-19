@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # for localized messages
+from __future__ import print_function
 from . import _
 
 from Plugins.Plugin import PluginDescriptor
@@ -55,7 +56,7 @@ elif getBrandOEM() == 'ini':
 
 
 def excute_cmd(cmd):
-	print "prepared cmd:", cmd
+	print("prepared cmd:", cmd)
 	os.system(cmd)
 
 
@@ -208,7 +209,7 @@ class Player(Screen, InfoBarNotifications):
 	def setSeekState(self, wantstate):
 		service = self.session.nav.getCurrentService()
 		if service is None:
-			print "No Service found"
+			print("No Service found")
 			return
 
 		pauseable = service.pause()
@@ -282,7 +283,7 @@ class PlayerLauncher:
 			#print "trying to find out if a HD Stream is available",watch_url
 			watchvideopage = urlopen2(watchrequest).read()
 		except (URLError, HTTPException, socket.error), err:
-			print "Error: Unable to retrieve watchpage - Error code: ", str(err)
+			print("Error: Unable to retrieve watchpage - Error code: ", str(err))
 			return video_url
 
 		# Get video info
@@ -295,15 +296,15 @@ class PlayerLauncher:
 				if ('url_encoded_fmt_stream_map' or 'fmt_url_map') in videoinfo:
 					break
 			except (URLError, HTTPException, socket.error), err:
-				print "Error: unable to download video infopage", str(err)
+				print("Error: unable to download video infopage", str(err))
 				return video_url
 
 		if ('url_encoded_fmt_stream_map' or 'fmt_url_map') not in videoinfo:
 			if 'reason' not in videoinfo:
-				print 'Error: unable to extract "fmt_url_map" or "url_encoded_fmt_stream_map" parameter for unknown reason'
+				print('Error: unable to extract "fmt_url_map" or "url_encoded_fmt_stream_map" parameter for unknown reason')
 			else:
 				reason = unquote_plus(videoinfo['reason'][0])
-				print 'Error: YouTube said: %s' % reason.decode('utf-8')
+				print('Error: YouTube said: %s' % reason.decode('utf-8'))
 			return video_url
 
 		video_fmt_map = {}
@@ -322,7 +323,7 @@ class PlayerLauncher:
 			if fmtid in VIDEO_FMT_PRIORITY_MAP:
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 			fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
-		print "got", sorted(fmt_infomap.iterkeys())
+		print("got", sorted(fmt_infomap.iterkeys()))
 		if video_fmt_map and len(video_fmt_map):
 			video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
 			#print "found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
@@ -332,7 +333,7 @@ class PlayerLauncher:
 	def run(self, tubeid, session, service):
 		try:
 			myurl = self.getVideoUrl(tubeid)
-			print "Playing URL", myurl
+			print("Playing URL", myurl)
 			if myurl is None:
 				session.open(MessageBox, _("Sorry, video is not available!"), MessageBox.TYPE_INFO)
 				return
@@ -340,7 +341,7 @@ class PlayerLauncher:
 			session.open(Player, myreference, service)
 		except Exception, msg:
 			wb_unlock()
-			print "Error >>", msg
+			print("Error >>", msg)
 
 
 class PlayerService:
@@ -368,7 +369,7 @@ class PlayerService:
 	def run(self, e=True):
 		if self.enable:
 			return
-		print "PlayerService start!!"
+		print("PlayerService start!!")
 		self.enable = e
 		self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 		self.sock.settimeout(self.socket_timeout)
@@ -381,24 +382,24 @@ class PlayerService:
 			except socket.timeout:
 				#print "[socket timeout]"
 				pass
-		print "PlayerService stop!!"
+		print("PlayerService stop!!")
 
 	def parseHandle(self, conn, addr):
 		# [http://www.youtube.com/watch?v=BpThu778qB4&feature=related]
 		data = conn.recv(self.max_buffer_size)
-		print "[%s]" % (data)
+		print("[%s]" % (data))
 		enable_rc_mouse(False)
 		if data.startswith("http://www.youtube.com"):
-			print "youtube start!!"
+			print("youtube start!!")
 			tmp = data.split("?")
-			print tmp # ['http://www.youtube.com/watch', 'v=BpThu778qB4&feature=related']
+			print(tmp) # ['http://www.youtube.com/watch', 'v=BpThu778qB4&feature=related']
 			service = self.session.nav.getCurrentlyPlayingServiceReference()
 			if len(tmp) == 2 and tmp[0] == "http://www.youtube.com/watch":
 				tmp = tmp[1].split("&")
-				print tmp # ['v=BpThu778qB4', 'feature=related']
+				print(tmp) # ['v=BpThu778qB4', 'feature=related']
 				if len(tmp) == 2:
 					tmp = tmp[0].split("=")
-					print tmp # ['v', 'BpThu778qB4']
+					print(tmp) # ['v', 'BpThu778qB4']
 					if len(tmp) == 2 and tmp[0] == "v":
 						wb_lock()
 						player = PlayerLauncher()
@@ -415,14 +416,14 @@ class PlayerService:
 				data = "nok$parsing fail"
 			self.sendResponse(conn, data)
 		elif data.startswith("vk://open"):
-			print "virtual keyboard start!!"
+			print("virtual keyboard start!!")
 			from Screens.VirtualKeyBoard import VirtualKeyBoard
 			wb_lock()
 			self.vk_conn = conn
 			self.session.openWithCallback(self.cbOpenKeyboard, VirtualKeyBoard, title=(_("Enter your input data")), text="")
 
         def cbOpenKeyboard(self, data=None):
-		print "virtual keyboard callback!!"
+		print("virtual keyboard callback!!")
 		wb_unlock()
 		self.sendResponse(self.vk_conn, data)
 
@@ -556,7 +557,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 			self.conf_keyboard = config_list[1]
 			self.conf_alpha = config_list[2]
 			self.conf_keymap = config_list[3]
-		print "load config : ", config_list
+		print("load config : ", config_list)
 
 	def resetExitCond(self):
 		self.timer_exit_cond.stop()
@@ -623,7 +624,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 			keymap_param = ":keymap=/usr/share/keymaps/player/de.qmap"
 
 		cmd = "%s%s%s%s" % (extra_cmd, kbd_cmd, mouse_cmd, browser_cmd)
-		print "prepared command : [%s]" % cmd
+		print("prepared command : [%s]" % cmd)
 
 		self.launcher = eConsoleAppContainer()
 		self.launcher.appClosed.append(self.callbackLauncherAppClosed)
@@ -637,7 +638,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		change_galpha(set_const=True, set_value=True)
 
 		self.launcher.execute(cmd)
-		print "started browser..."
+		print("started browser...")
 
 	def keyGo(self):
 		self.saveConfig()
@@ -652,7 +653,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 			self.timer_start.start(10)
 
 	def callbackLauncherDataAvail(self, ret_data):
-		print ret_data
+		print(ret_data)
 		if ret_data.startswith("--done--"):
 			self.lock = False
 			self.doExit()

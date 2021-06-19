@@ -1,3 +1,4 @@
+from __future__ import print_function
 import vbcfg
 
 
@@ -10,7 +11,7 @@ class BookmarkData:
 		self.mType = _type
 
 	def dump(self, _intent='  '):
-		print "%s-> %d, %s, %s, %d, %d" % (_intent, self.mId, self.mTitle, self.mUrl, self.mParent, self.mType)
+		print("%s-> %d, %s, %s, %d, %d" % (_intent, self.mId, self.mTitle, self.mUrl, self.mParent, self.mType))
 
 
 class CategoryData:
@@ -26,7 +27,7 @@ class CategoryData:
 		self.mBookmarks[_bookmark.mId] = _bookmark
 
 	def dump(self):
-		print "  -> %d, %s" % (self.mId, self.mName)
+		print("  -> %d, %s" % (self.mId, self.mName))
 		for key in self.mBookmarks.iterkeys():
 			self.mBookmarks[key].dump('      ')
 
@@ -294,10 +295,10 @@ class BookmarkManager(SimpleConfigParser):
 		if not self.mDebugEnable:
 			return
 		self.populate()
-		print "-- snapshot --"
+		print("-- snapshot --")
 		for key in self.mBookmarkRoot.iterkeys():
 			self.mBookmarkRoot[key].dump()
-		print "--------------"
+		print("--------------")
 
 	@staticmethod
 	def getInstance():

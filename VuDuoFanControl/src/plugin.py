@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -87,7 +88,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 			else:
 				config.plugins.fansetups.fanofftime.value = 1
 		except:
-			print 'Error read proc of fan'
+			print('Error read proc of fan')
 
 	def createSetup(self):
 		self.list = []
@@ -114,7 +115,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 
 	def selectionChanged(self):
 		current = self["config"].getCurrent()
-		print current
+		print(current)
 
 	def cancelConfirm(self, result):
 		if not result:
@@ -124,7 +125,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 		self.close()
 
 	def keyCancel(self):
-		print "cancel"
+		print("cancel")
 		if self["config"].isChanged():
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
 		else:
@@ -144,7 +145,7 @@ class FanSetupConfiguration(Screen, ConfigListScreen):
 					open('/proc/stb/system/fan_on_time', 'w').write('%s' % config.plugins.fansetups.fanontime.value)
 					open('/proc/stb/system/fan_off_time', 'w').write('%s' % config.plugins.fansetups.fanofftime.value)
 		except:
-			print 'Error write proc of fan'
+			print('Error write proc of fan')
 
 
 def openconfig(session, **kwargs):
@@ -170,7 +171,7 @@ def setfansetup(reason, **kwargs):
 				open('/proc/stb/system/fan_on_time', 'w').write('%s' % config.plugins.fansetups.fanontime.value)
 				open('/proc/stb/system/fan_off_time', 'w').write('%s' % config.plugins.fansetups.fanofftime.value)
 	except:
-		print 'Error to set fan control'
+		print('Error to set fan control')
 
 
 def Plugins(**kwargs):

@@ -15,6 +15,7 @@
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from __future__ import print_function
 
 # for localized messages
 from . import _
@@ -210,7 +211,7 @@ class StreamsThumb(StreamsThumbCommon):
 				weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__, 'getMediaData: Error getting Media info: ', exception
+			print(__plugin__, __version__, 'getMediaData: Error getting Media info: ', exception)
 
 #===================================================================================
 	def getShowMediaData(self, weekList, progID):
@@ -261,7 +262,7 @@ class StreamsThumb(StreamsThumbCommon):
 					contentSet = False
 
 		except (Exception) as exception:
-			print __plugin__, __version__, 'getCatsMediaData: Error getting Media info: ', exception
+			print(__plugin__, __version__, 'getCatsMediaData: Error getting Media info: ', exception)
 
 #===================================================================================
 	def getSearchMediaData(self, weekList, url, query):
@@ -312,7 +313,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print __plugin__, __version__, 'getSearchMediaData: Error getting Media info: ', exception
+			print(__plugin__, __version__, 'getSearchMediaData: Error getting Media info: ', exception)
 
 #===================================================================================
 
@@ -366,7 +367,7 @@ class StreamsThumb(StreamsThumbCommon):
 					return ("", "Unable to find a playable stream! Could not play ")
 
 		except (Exception) as exception:
-			print __plugin__, __version__, 'findPlayUrl: Error getting URLs: ', exception
+			print(__plugin__, __version__, 'findPlayUrl: Error getting URLs: ', exception)
 			return ("", "findPlayUrl: Error getting URLs! Could not play ")
 
 #========== Retrieve the webpage data ==============================================
@@ -401,8 +402,8 @@ class StreamsThumb(StreamsThumbCommon):
 		url = 'http://mercury.itv.com/PlaylistService.svc'
 		htmldoc = ""
 		primaryDNS = str(config.ondemand.PrimaryDNS.value)
-		print __plugin__, __version__, "DNS Set: ", primaryDNS
-		print __plugin__, __version__, "Default DNS Set: ", str(config.ondemand.PrimaryDNS.default)
+		print(__plugin__, __version__, "DNS Set: ", primaryDNS)
+		print(__plugin__, __version__, "Default DNS Set: ", str(config.ondemand.PrimaryDNS.default))
 
 		try:
 			req = urllib2.Request(url, soapMessage)
@@ -418,10 +419,10 @@ class StreamsThumb(StreamsThumbCommon):
 			exResp = str(exception.read())
 
 			if 'InvalidGeoRegion' in exResp:
-				print __plugin__, __version__, "Non UK Address!!"
+				print(__plugin__, __version__, "Non UK Address!!")
 
 				if primaryDNS == str(config.ondemand.PrimaryDNS.default):
-					print __plugin__, __version__, "Non UK Address: NO DNS Set!! ", primaryDNS
+					print(__plugin__, __version__, "Non UK Address: NO DNS Set!! ", primaryDNS)
 					return ("", "Non-UK IP Address and no DNS set in OnDemand Settings! Not able to play ")
 				else:
 					try:
@@ -440,14 +441,14 @@ class StreamsThumb(StreamsThumbCommon):
 						urllib2.install_opener(old_opener)
 
 					except (Exception) as exception:
-						print __plugin__, __version__, "wgetUrl: Unable to connect to DNS: ", exception
+						print(__plugin__, __version__, "wgetUrl: Unable to connect to DNS: ", exception)
 						return ("", "Could not connect to " + primaryDNS + ", make sure your subscription is valid! Not able to play ")
 			else:
-				print __plugin__, __version__, "HTTPError: Error retrieving stream: ", exResp
+				print(__plugin__, __version__, "HTTPError: Error retrieving stream: ", exResp)
 				return ("", "Could not retrieve a playable stream for ")
 
 		except (Exception) as exception2:
-			print __plugin__, __version__, "wgetUrl: Error calling urllib2: ", exception2
+			print(__plugin__, __version__, "wgetUrl: Error calling urllib2: ", exception2)
 			return ("", "Could not retrieve a playable stream for ")
 
 		return (htmldoc, "")

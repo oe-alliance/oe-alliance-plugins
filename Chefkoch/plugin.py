@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/Chefkoch/Chefkoch.py
 from base64 import b64encode, b64decode
 from Components.ActionMap import ActionMap, NumberActionMap
@@ -75,7 +76,7 @@ def applySkinVars(skin, dict):
         try:
             skin = skin.replace('{' + key + '}', dict[key])
         except Exception as e:
-            print e, '@key=', key
+            print(e, '@key=', key)
 
     return skin
 

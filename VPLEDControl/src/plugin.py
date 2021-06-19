@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -202,14 +203,14 @@ ChannelnumberInstance = None
 
 
 def leaveStandby():
-	print "[Stb LED] Leave Standby"
+	print("[Stb LED] Leave Standby")
 
 	if config.plugins.VFD_ini.showClock.value == 'Off':
 		vfd_write("    ")
 
 
 def standbyCounterChanged(configElement):
-	print "[Stb LED] In Standby"
+	print("[Stb LED] In Standby")
 
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
@@ -219,7 +220,7 @@ def standbyCounterChanged(configElement):
 
 
 def initVFD():
-	print "[Stb LED] initVFD"
+	print("[Stb LED] initVFD")
 
 	if config.plugins.VFD_ini.showClock.value == 'Off':
 		vfd_write("    ")
@@ -283,7 +284,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 		self.newConfig()
 
 	def newConfig(self):
-		print self["config"].getCurrent()[0]
+		print(self["config"].getCurrent()[0])
 		if self["config"].getCurrent()[0] == _('Show on LED'):
 			self.createSetup()
 		elif self["config"].getCurrent()[0] == _('Show REC-Symbol in Display'):
@@ -292,7 +293,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 			self.createSetup()
 
 	def abort(self):
-		print "aborting"
+		print("aborting")
 
 	def save(self):
 		for x in self["config"].list:
@@ -315,7 +316,7 @@ class VFD_INISetup(ConfigListScreen, Screen):
 
 class VFD_INI:
 	def __init__(self, session):
-		print "[Stb LED] initializing"
+		print("[Stb LED] initializing")
 		self.session = session
 		self.service = None
 		self.onClose = []
@@ -332,7 +333,7 @@ class VFD_INI:
 		self.abort()
 
 	def abort(self):
-		print "[Stb LED] aborting"
+		print("[Stb LED] aborting")
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 
@@ -364,16 +365,16 @@ def controliniVfd():
 	global mySession
 
 	if gReason == 0 and mySession != None and iniVfd == None:
-		print "[Stb LED] Starting !!"
+		print("[Stb LED] Starting !!")
 		iniVfd = VFD_INI(mySession)
 	elif gReason == 1 and iniVfd != None:
-		print "[Stb LED] Stopping !!"
+		print("[Stb LED] Stopping !!")
 
 		iniVfd = None
 
 
 def sessionstart(reason, **kwargs):
-	print "[Stb LED] sessionstart"
+	print("[Stb LED] sessionstart")
 	global iniVfd
 	global gReason
 	global mySession

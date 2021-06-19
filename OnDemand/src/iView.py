@@ -15,6 +15,7 @@
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from __future__ import print_function
 
 # for localized messages
 from . import _
@@ -57,7 +58,7 @@ def wgetUrl(target):
 		response.close()
 		return outtxt
 	except (Exception) as exception:
-		print "%s: version %s: wgetUrl: Error retrieving URL: %s" % (__plugin__, __version__, exception)
+		print("%s: version %s: wgetUrl: Error retrieving URL: %s" % (__plugin__, __version__, exception))
 		return ""
 
 #==============================================================================
@@ -69,7 +70,7 @@ def calcDuration(seconds):
 		duration = str(mins)
 		return str(duration)
 	except (Exception) as exception:
-		print "%s: version %s: calcDuration: Error calculating minutes: %s" % (__plugin__, __version__, exception)
+		print("%s: version %s: calcDuration: Error calculating minutes: %s" % (__plugin__, __version__, exception))
 		return ""
 
 #==============================================================================
@@ -320,13 +321,13 @@ class StreamsThumb(StreamsThumbCommon):
 				# rtmp://cp53909.edgefcs.net/ondemand?auth=daEbjbeaCbGcgb6bedYacdWcsdXc7cWbDda-bmt0Pk-8-slp_zFtpL&aifp=v001
 				# playpath=mp4:flash/playback/_definst_/kids/astroboy_10_01_22 swfurl=http://www.abc.net.au/iview/images/iview.jpg swfvfy=true
 				rtmp_url = "%s?auth=%s playpath=%s swfurl=%s swfvfy=true" % (auth['rtmp_url'], auth['token'], playpath, swf_url)
-				print "%s: version %s: findPlayUrl: rtmp_url: %s" % (__plugin__, __version__, rtmp_url)
+				print("%s: version %s: findPlayUrl: rtmp_url: %s" % (__plugin__, __version__, rtmp_url))
 				return str(rtmp_url)
 			else:
 				return ""
 
 		except (Exception) as exception:
-			print "%s: version %s: findPlayUrl: Problem rerieving URL: %s" % (__plugin__, __version__, exception)
+			print("%s: version %s: findPlayUrl: Problem rerieving URL: %s" % (__plugin__, __version__, exception))
 			return ""
 
 #==============================================================================
@@ -346,7 +347,7 @@ class StreamsThumb(StreamsThumbCommon):
 				return ""
 
 		except (Exception) as exception:
-			print "%s: version %s: get_config: Problem Getting Config: %s" % (__plugin__, __version__, exception)
+			print("%s: version %s: get_config: Problem Getting Config: %s" % (__plugin__, __version__, exception))
 			return ""
 
 #==============================================================================
@@ -376,7 +377,7 @@ class StreamsThumb(StreamsThumbCommon):
 				'categories_url': xml.find('param', attrs={'name': 'categories'}).get('value'),
 			}
 		except (Exception) as exception:
-			print "%s: version %s: parse_config: Problem Parsing Config: %s" % (__plugin__, __version__, exception)
+			print("%s: version %s: parse_config: Problem Parsing Config: %s" % (__plugin__, __version__, exception))
 			return ""
 
 #==============================================================================
@@ -390,7 +391,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 		try:
 			auth_config = wgetUrl(auth_url)
-			print '%s: version %s: get_auth: auth_config: %s' % (__plugin__, __version__, auth_config)
+			print('%s: version %s: get_auth: auth_config: %s' % (__plugin__, __version__, auth_config))
 
 			if auth_config:
 				return self.parse_auth(auth_config, iview_config)
@@ -398,7 +399,7 @@ class StreamsThumb(StreamsThumbCommon):
 				return ""
 
 		except (Exception) as exception:
-			print "%s: version %s: get_auth: Problem Getting Auth: %s" % (__plugin__, __version__, exception)
+			print("%s: version %s: get_auth: Problem Getting Auth: %s" % (__plugin__, __version__, exception))
 			return ""
 
 #==============================================================================
@@ -439,7 +440,7 @@ class StreamsThumb(StreamsThumbCommon):
 			token = token.replace('&amp;', '&') # work around BeautifulSoup bug
 
 		except:
-			print "%s: version %s: parse_auth: Problem Parsing Auth: %s" % (__plugin__, __version__, exception)
+			print("%s: version %s: parse_auth: Problem Parsing Auth: %s" % (__plugin__, __version__, exception))
 			return ""
 
 		return {
@@ -526,7 +527,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, duration, False))
 
 		except (Exception) as exception:
-			print "%s: version %s: getMediaData: Error parsing feed: %s" % (__plugin__, __version__, exception)
+			print("%s: version %s: getMediaData: Error parsing feed: %s" % (__plugin__, __version__, exception))
 
 #==============================================================================
 	def getCatsMediaData(self, weekList, category):
@@ -587,7 +588,7 @@ class StreamsThumb(StreamsThumbCommon):
 					weekList.append((date1, name, short, channel, stream, icon, episodes, False))
 
 		except (Exception) as exception:
-			print "%s: version %s: getMediaData: Error getting Media info: %s" % (__plugin__, __version__, exception)
+			print("%s: version %s: getMediaData: Error getting Media info: %s" % (__plugin__, __version__, exception))
 
 #==============================================================================
 	def getSearchMediaData(self, weekList, query):
@@ -650,6 +651,6 @@ class StreamsThumb(StreamsThumbCommon):
 						weekList.append((date1, name, short, channel, stream, icon, episodes, False))
 
 		except (Exception) as exception:
-			print "%s: version %s: getSearchMediaData: Error getting Media info: %s" % (__plugin__, __version__, exception)
+			print("%s: version %s: getSearchMediaData: Error getting Media info: %s" % (__plugin__, __version__, exception))
 
 #==============================================================================

@@ -31,6 +31,7 @@
 #   AA, BB, CC, DD can be composed of one digit if the value is less than 0x10.
 #      ex: a06 and a6 is both allowed.
 #
+from __future__ import print_function
 from . import _
 
 from Screens.Screen import Screen
@@ -208,14 +209,14 @@ ChannelnumberInstance = None
 
 
 def leaveStandby():
-	print "[VFD-SF8] Leave Standby"
+	print("[VFD-SF8] Leave Standby")
 
 	if config.plugins.VFD_SF8.showClock.value == 'Off':
 		vfd_text_out("....")
 
 
 def standbyCounterChanged(configElement):
-	print "[VFD-SF8] In Standby"
+	print("[VFD-SF8] In Standby")
 
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
@@ -225,7 +226,7 @@ def standbyCounterChanged(configElement):
 
 
 def initVFD():
-	print "[VFD-SF8] initVFD"
+	print("[VFD-SF8] initVFD")
 
 	if config.plugins.VFD_SF8.showClock.value == 'Off':
 		vfd_text_out("....")
@@ -281,12 +282,12 @@ class VFD_SF8Setup(ConfigListScreen, Screen):
 		self.newConfig()
 
 	def newConfig(self):
-		print self["config"].getCurrent()[0]
+		print(self["config"].getCurrent()[0])
 		if self["config"].getCurrent()[0] == _('Show on VFD'):
 			self.createSetup()
 
 	def abort(self):
-		print "aborting"
+		print("aborting")
 
 	def save(self):
 		for x in self["config"].list:
@@ -309,7 +310,7 @@ class VFD_SF8Setup(ConfigListScreen, Screen):
 
 class VFD_SF8:
 	def __init__(self, session):
-		print "[VFD-SF8] initializing"
+		print("[VFD-SF8] initializing")
 		self.session = session
 		self.service = None
 		self.onClose = []
@@ -326,7 +327,7 @@ class VFD_SF8:
 		self.abort()
 
 	def abort(self):
-		print "[VFD-SF8] aborting"
+		print("[VFD-SF8] aborting")
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 
@@ -351,16 +352,16 @@ def controlSF8VFD():
 	global mySession
 
 	if gReason == 0 and mySession != None and SF8VFD == None:
-		print "[VFD-SF8] Starting !!"
+		print("[VFD-SF8] Starting !!")
 		SF8VFD = VFD_SF8(mySession)
 	elif gReason == 1 and SF8VFD != None:
-		print "[VFD-SF8] Stopping !!"
+		print("[VFD-SF8] Stopping !!")
 
 		SF8VFD = None
 
 
 def sessionstart(reason, **kwargs):
-	print "[VFD-SF8] sessionstart"
+	print("[VFD-SF8] sessionstart")
 	global SF8VFD
 	global gReason
 	global mySession

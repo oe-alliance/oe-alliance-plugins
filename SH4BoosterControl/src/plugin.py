@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -26,26 +27,26 @@ else:
 
 
 def leaveStandby():
-	print "[SH4BoosterControl] Leave Standby"
+	print("[SH4BoosterControl] Leave Standby")
 	initBooster()
 
 
 def standbyCounterChanged(configElement):
-	print "[SH4BoosterControl] In Standby"
+	print("[SH4BoosterControl] In Standby")
 	initStandbyBooster()
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
 
 
 def initBooster():
-	print "[SH4BoosterControl] initBooster"
+	print("[SH4BoosterControl] initBooster")
 	f = open("/proc/cpu_frequ/pll0_ndiv_mdiv", "w")
 	f.write(config.plugins.booster.normalfrequenz.getValue())
 	f.close()
 
 
 def initStandbyBooster():
-	print "[SH4BoosterControl] initStandbyBooster"
+	print("[SH4BoosterControl] initStandbyBooster")
 	f = open("/proc/cpu_frequ/pll0_ndiv_mdiv", "w")
 	f.write(config.plugins.booster.standbyfrequenz.getValue())
 	f.close()
@@ -101,12 +102,12 @@ class SH4BoosterControl(ConfigListScreen, Screen):
 		self.newConfig()
 
 	def newConfig(self):
-		print self["config"].getCurrent()[0]
+		print(self["config"].getCurrent()[0])
 		if self["config"].getCurrent()[0] == _('Start Boot Frequency'):
 			self.createSetup()
 
 	def abort(self):
-		print "aborting"
+		print("aborting")
 
 	def save(self):
 		for x in self["config"].list:
@@ -129,7 +130,7 @@ class SH4BoosterControl(ConfigListScreen, Screen):
 
 class SH4_Booster:
 	def __init__(self, session):
-		print "[SH4BoosterControl] initializing"
+		print("[SH4BoosterControl] initializing")
 		self.session = session
 		self.service = None
 		self.onClose = []
@@ -142,7 +143,7 @@ class SH4_Booster:
 		self.abort()
 
 	def abort(self):
-		print "[SH4BoosterControl] aborting"
+		print("[SH4BoosterControl] aborting")
 
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
@@ -168,16 +169,16 @@ def controlsh4booster():
 	global mySession
 
 	if gReason == 0 and mySession != None and sh4booster == None:
-		print "[SH4BoosterControl] Starting !!"
+		print("[SH4BoosterControl] Starting !!")
 		sh4booster = SH4_Booster(mySession)
 	elif gReason == 1 and sh4booster != None:
-		print "[SH4BoosterControl] Stopping !!"
+		print("[SH4BoosterControl] Stopping !!")
 
 		sh4booster = None
 
 
 def sessionstart(reason, **kwargs):
-	print "[SH4BoosterControl] sessionstart"
+	print("[SH4BoosterControl] sessionstart")
 	global sh4booster
 	global gReason
 	global mySession

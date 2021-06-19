@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigSubsection, ConfigInteger
@@ -71,12 +72,12 @@ class Screen_adjust(Screen):
         global right
         global left
         if rightbottom is False:
-            print '[OSD Adjustment] left'
+            print('[OSD Adjustment] left')
             left = int(left) - 5
             if left < 0:
                 left = 0
         else:
-            print '[OSD Adjustment] right'
+            print('[OSD Adjustment] right')
             right = int(right) - 5
             if right < -150:
                 right = -150
@@ -87,12 +88,12 @@ class Screen_adjust(Screen):
         global right
         global left
         if rightbottom is False:
-            print '[OSD Adjustment] left'
+            print('[OSD Adjustment] left')
             left = int(left) + 5
             if left > 150:
                 left = 150
         else:
-            print '[OSD Adjustment] right'
+            print('[OSD Adjustment] right')
             right = int(right) + 5
             if right > 0:
                 right = 0
@@ -103,12 +104,12 @@ class Screen_adjust(Screen):
         global top
         global bottom
         if rightbottom is False:
-            print '[OSD Adjustment] top'
+            print('[OSD Adjustment] top')
             top = int(top) - 5
             if top < 0:
                 top = 0
         else:
-            print '[OSD Adjustment] bottom'
+            print('[OSD Adjustment] bottom')
             bottom = int(bottom) - 5
             if bottom < -150:
                 bottom = -150
@@ -119,12 +120,12 @@ class Screen_adjust(Screen):
         global top
         global bottom
         if rightbottom is False:
-            print '[OSD Adjustment] top'
+            print('[OSD Adjustment] top')
             top = int(top) + 5
             if top > 150:
                 top = 150
         else:
-            print '[OSD Adjustment] bottom'
+            print('[OSD Adjustment] bottom')
             bottom = int(bottom) + 5
             if bottom > 0:
                 bottom = 0
@@ -136,7 +137,7 @@ class Screen_adjust(Screen):
         global right
         global bottom
         global left
-        print '[OSD Adjustment] set Default Screen Settings'
+        print('[OSD Adjustment] set Default Screen Settings')
         top = 0
         bottom = 0
         left = 0
@@ -174,7 +175,7 @@ class SetScreen:
         self.ScreenOnStartup()
 
     def ScreenOnStartup(self):
-        print '[OSD Adjustment] Set Screen on startup'
+        print('[OSD Adjustment] Set Screen on startup')
         top = config.OSDAdjustment.top.value
         bottom = config.OSDAdjustment.bottom.value
         left = config.OSDAdjustment.left.value
@@ -289,7 +290,7 @@ class SetScreen:
                         EndY = line
 
                 if not VTStartX == int(StartX) or not VTEndX == int(EndX) or not VTStartY == int(StartY) or not VTEndY == int(EndY):
-                    print '[OSD Adjustment] Write tuxtxt2.conf with new OSD settings'
+                    print('[OSD Adjustment] Write tuxtxt2.conf with new OSD settings')
                     self.e = []
                     self.e.append('ScreenMode16x9Normal ' + ScreenMode16x9Normal + '\n')
                     self.e.append('ScreenMode16x9Divided ' + ScreenMode16x9Divided + '\n')

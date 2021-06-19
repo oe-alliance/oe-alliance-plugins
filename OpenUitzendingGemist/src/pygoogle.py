@@ -5,12 +5,13 @@ Google AJAX Search Module
 http://code.google.com/apis/ajaxsearch/documentation/reference.html
 Needs Python 2.6 or later
 """
+from __future__ import print_function
 try:
     import json
 except ImportError, e:
     import simplejson as json
 except ImportError, e:
-    print e
+    print(e)
     exit()
 
 import sys
@@ -117,9 +118,9 @@ class pygoogle:
                 if 'responseData' in data and 'results' in data['responseData']:
                     for result in data['responseData']['results']:
                         if result:
-                            print '[%s]' % (urllib.unquote(result['titleNoFormatting']))
-                            print result['content'].strip("<b>...</b>").replace("<b>", '').replace("</b>", '').replace("&#39;", "'").strip()
-                            print urllib.unquote(result['unescapedUrl']) + '\n'
+                            print('[%s]' % (urllib.unquote(result['titleNoFormatting'])))
+                            print(result['content'].strip("<b>...</b>").replace("<b>", '').replace("</b>", '').replace("&#39;", "'").strip())
+                            print(urllib.unquote(result['unescapedUrl']) + '\n')
                 else:
                     # no responseData key was found in 'data'
                     self.logger.error('no responseData key found in response. very unusal')

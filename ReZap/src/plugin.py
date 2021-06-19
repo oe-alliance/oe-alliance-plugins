@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 import os
@@ -23,7 +24,7 @@ class LoopSyncMain(Screen):
 			try:
 				self.session.open(DoReZap, self.srv)
 			except Exception as e:
-				print "[ReZap] Can't Zap"
+				print("[ReZap] Can't Zap")
 			self.stopped = 0
 			self.AVSyncTimer.start(100, True)
 			return
@@ -37,7 +38,7 @@ class LoopSyncMain(Screen):
 				frontendDataOrg = feinfo and feinfo.getAll(True)
 				if frontendDataOrg:		### DVB-S/C/T ###
 					if self.CheckFlag():
-						print "[ReZap] DoReZap !!!"
+						print("[ReZap] DoReZap !!!")
 						self.ResetFlag()
 						self.session.nav.stopService()
 						self.session.nav.playService(None)
@@ -62,7 +63,7 @@ class LoopSyncMain(Screen):
 			if int(open("/sys/class/tsync/reset_flag", "r").read(), 16) == 1:
 				return True
 		except Exception, e:
-			print "[ReZap] Can't read class"
+			print("[ReZap] Can't read class")
 			self.AVSyncTimer.start(500, True)
 		return False
 
@@ -70,7 +71,7 @@ class LoopSyncMain(Screen):
 		try:
 			open("/sys/class/tsync/reset_flag", "w").write("0")
 		except Exception, e:
-			print "[ReZap] Can't ResetFlag"
+			print("[ReZap] Can't ResetFlag")
 
 ###################################
 
@@ -87,12 +88,12 @@ class DoReZap(Screen):
 		try:
 			open("/sys/class/video/blackout_policy", "w").write("0")
 		except Exception, e:
-			print "[ReZap] Can't change policy(0)"
+			print("[ReZap] Can't change policy(0)")
 		self.session.nav.playService(xxx)
 		try:
 			open("/sys/class/video/blackout_policy", "w").write("1")
 		except Exception, e:
-			print "[ReZap] Can't change policy(1)"
+			print("[ReZap] Can't change policy(1)")
 		self.close()
 
 

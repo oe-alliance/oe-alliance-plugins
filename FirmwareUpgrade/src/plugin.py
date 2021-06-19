@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -135,7 +136,7 @@ class FPUpgradeCore():
 				raise Exception, 'wrong fpga file.'
 		except Exception, msg:
 			self.errmsg = msg
-			print '[FPUpgradeCore] ERROR >>', msg
+			print('[FPUpgradeCore] ERROR >>', msg)
 			closefp(firmware, device)
 			return STATUS_ERROR
 		return STATUS_DONE
@@ -144,11 +145,11 @@ class FPUpgradeCore():
 		self.status = STATUS_READY
 		self.status = self.doUpgrade()
 		if self.status == STATUS_DONE:
-			print 'upgrade done.'
+			print('upgrade done.')
 		elif self.status == STATUS_ERROR:
-			print 'error!!'
+			print('error!!')
 		else:
-			print 'unknown.'
+			print('unknown.')
 
 
 class FPGAUpgradeCore():
@@ -158,7 +159,7 @@ class FPGAUpgradeCore():
 	MAX_CALL_COUNT = 1500
 
 	def __init__(self, firmwarefile, devicefile):
-		print '[FPGAUpgrade]'
+		print('[FPGAUpgrade]')
 		self.devicefile = devicefile
 		self.firmwarefile = firmwarefile
 
@@ -207,7 +208,7 @@ class FPGAUpgradeCore():
 				raise Exception, 'wrong fpga file.'
 		except Exception, msg:
 			self.errmsg = msg
-			print '[FPGAUpgradeCore] ERROR >>', msg
+			print('[FPGAUpgradeCore] ERROR >>', msg)
 			closefpga(firmware, device)
 			return STATUS_ERROR
 		closefpga(firmware, device)
@@ -217,11 +218,11 @@ class FPGAUpgradeCore():
 		self.status = STATUS_READY
 		self.status = self.doUpgrade()
 		if self.status == STATUS_DONE:
-			print '[FPGAUpgrade] upgrade done.'
+			print('[FPGAUpgrade] upgrade done.')
 		elif self.status == STATUS_ERROR:
-			print '[FPGAUpgrade] occur error.'
+			print('[FPGAUpgrade] occur error.')
 		else:
-			print '[FPGAUpgrade] occur unknown error.'
+			print('[FPGAUpgrade] occur unknown error.')
 
 
 class VFDCtrlUpgradeCore():
@@ -289,7 +290,7 @@ class VFDCtrlUpgradeCore():
 				raise Exception, 'wrong fpga file.'
 		except Exception, msg:
 			self.errmsg = msg
-			print '[VFDCtrlUpgradeCore] ERROR >>', msg
+			print('[VFDCtrlUpgradeCore] ERROR >>', msg)
 			closevfd(firmware, device, firmwarename)
 			return STATUS_ERROR
 		closevfd(firmware, device, firmwarename)
@@ -299,11 +300,11 @@ class VFDCtrlUpgradeCore():
 		self.status = STATUS_READY
 		self.status = self.doUpgrade()
 		if self.status == STATUS_DONE:
-			print '[VFDCtrlUpgradeCore] upgrade done.'
+			print('[VFDCtrlUpgradeCore] upgrade done.')
 		elif self.status == STATUS_ERROR:
-			print '[VFDCtrlUpgradeCore] error.'
+			print('[VFDCtrlUpgradeCore] error.')
 		else:
-			print '[VFDCtrlUpgradeCore] unknown error.'
+			print('[VFDCtrlUpgradeCore] unknown error.')
 
 
 class FirmwareUpgradeManager:
@@ -399,7 +400,7 @@ class UpgradeStatus(Screen):
 		if errno:
 			self.check_status.stop()
 			errmsg = self.FU.getErrorMessage(errno, errmsg)
-			print "[FirmwareUpgrade] - ERROR : [%d][%s]" % (errno, errmsg)
+			print("[FirmwareUpgrade] - ERROR : [%d][%s]" % (errno, errmsg))
 			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout=10)
 			self.cbConfirmExit(False)
 			return
@@ -511,11 +512,11 @@ class FUFilebrowser(Screen):
 			if (self.firmware == "fp" and checkExt(".bin")) or (self.firmware == "fpga" and checkExt(".dat")) or (self.firmware == "vfd" and checkExt(".vfd")):
 				self.check_ext = True
 			if self.check_ext == False:
-				print self.firmware, ",", self["file_list"].getFilename()
+				print(self.firmware, ",", self["file_list"].getFilename())
 				self.session.open(MessageBox, _("You choose the incorrect file. "), MessageBox.TYPE_INFO)
 				return
 		except:
-			print self.firmware, ",", self["file_list"].getFilename()
+			print(self.firmware, ",", self["file_list"].getFilename())
 			self.session.open(MessageBox, _("You choose the incorrect file. "), MessageBox.TYPE_INFO)
 			return
 
@@ -553,7 +554,7 @@ class FUFilebrowser(Screen):
 			opener.open(uri)
 		except:
 			#self.session.open(MessageBox, _("File not found in this URL:\n%s"%(uri)), MessageBox.TYPE_INFO, timeout = 10)
-			print "[FirmwareUpgrade] - Fail to download. URL :", uri
+			print("[FirmwareUpgrade] - Fail to download. URL :", uri)
 			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout=10)
 			del opener
 			return False
@@ -561,7 +562,7 @@ class FUFilebrowser(Screen):
 			f, h = urlretrieve(uri, tar, doHook)
 		except IOError, msg:
 			#self.session.open(MessageBox, _(str(msg)), MessageBox.TYPE_INFO, timeout = 10)
-			print "[FirmwareUpgrade] - Fail to download. ERR_MSG :", str(msg)
+			print("[FirmwareUpgrade] - Fail to download. ERR_MSG :", str(msg))
 			self.session.open(MessageBox, _(errmsg), MessageBox.TYPE_INFO, timeout=10)
 			del opener
 			return False

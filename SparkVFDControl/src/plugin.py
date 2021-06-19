@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -188,14 +189,14 @@ ChannelnumberInstance = None
 
 
 def leaveStandby():
-	print "[VFD-SPARK] Leave Standby"
+	print("[VFD-SPARK] Leave Standby")
 
 	if config.plugins.VFD_spark.showClock.value == 'Off':
 		vfd_write("....")
 
 
 def standbyCounterChanged(configElement):
-	print "[VFD-SPARK] In Standby"
+	print("[VFD-SPARK] In Standby")
 
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
@@ -205,7 +206,7 @@ def standbyCounterChanged(configElement):
 
 
 def initVFD():
-	print "[VFD-SPARK] initVFD"
+	print("[VFD-SPARK] initVFD")
 
 	if config.plugins.VFD_spark.showClock.value == 'Off':
 		vfd_write("....")
@@ -263,12 +264,12 @@ class VFD_SPARKSetup(ConfigListScreen, Screen):
 		self.newConfig()
 
 	def newConfig(self):
-		print self["config"].getCurrent()[0]
+		print(self["config"].getCurrent()[0])
 		if self["config"].getCurrent()[0] == _('Show on VFD'):
 			self.createSetup()
 
 	def abort(self):
-		print "aborting"
+		print("aborting")
 
 	def save(self):
 		for x in self["config"].list:
@@ -291,7 +292,7 @@ class VFD_SPARKSetup(ConfigListScreen, Screen):
 
 class VFD_SPARK:
 	def __init__(self, session):
-		print "[VFD-SPARK] initializing"
+		print("[VFD-SPARK] initializing")
 		self.session = session
 		self.service = None
 		self.onClose = []
@@ -308,7 +309,7 @@ class VFD_SPARK:
 		self.abort()
 
 	def abort(self):
-		print "[VFD-SPARK] aborting"
+		print("[VFD-SPARK] aborting")
 		config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 
@@ -392,16 +393,16 @@ def controlsparkVfd():
 	global mySession
 
 	if gReason == 0 and mySession != None and sparkVfd == None:
-		print "[VFD-SPARK] Starting !!"
+		print("[VFD-SPARK] Starting !!")
 		sparkVfd = VFD_SPARK(mySession)
 	elif gReason == 1 and sparkVfd != None:
-		print "[VFD-SPARK] Stopping !!"
+		print("[VFD-SPARK] Stopping !!")
 
 		sparkVfd = None
 
 
 def sessionstart(reason, **kwargs):
-	print "[VFD-SPARK] sessionstart"
+	print("[VFD-SPARK] sessionstart")
 	global sparkVfd
 	global gReason
 	global mySession
