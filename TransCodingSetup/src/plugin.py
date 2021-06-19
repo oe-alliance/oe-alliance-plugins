@@ -129,8 +129,7 @@ def createTransCodingConfig(encoder):
 # check encoders
 encoders = []
 encoderPath = "/proc/stb/encoder"
-numofencoders = os_listdir(encoderPath)
-numofencoders.sort()
+numofencoders = sorted(os_listdir(encoderPath))
 for encoder in numofencoders:
 	encPath = os_path.join(encoderPath, encoder)
 	if not os_path.isdir(encPath):

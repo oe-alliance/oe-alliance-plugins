@@ -986,8 +986,7 @@ class DLNADeviceBrowser(Screen):
 	def setListOnView(slelf):
 		global DLNA_CONFIG_ROOT_DIR
 		items, rootdir = [], DLNA_CONFIG_ROOT_DIR
-		deviceList = [name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name))]
-		deviceList.sort()
+		deviceList = sorted([name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name))])
 		for d in deviceList:
 			if d[0] in ('.', '_'):
 				continue

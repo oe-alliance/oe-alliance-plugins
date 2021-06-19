@@ -974,7 +974,7 @@ class OpenUg(Screen):
 		if retval == 'cancel' or retval is None:
 			return
 
-		if type(retval) == list:
+		if isinstance(retval, list):
 			if retval[0] == 'search':
 				self.title = 'Zoeken'
 				tmp = retval[1]
@@ -1064,7 +1064,7 @@ class OpenUg(Screen):
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
 			offset = 0
-			while 1:
+			while True:
 				self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "must_see/offset/%d/numrows/24?XHRUrlAddOn=1" % (offset))
 				if len(self.mediaList) == 0:
 					self.mediaProblemPopup()
@@ -1078,7 +1078,7 @@ class OpenUg(Screen):
 			self.clearList()
 			self.level = self.UG_LEVEL_SERIE
 			offset = 0
-			while 1:
+			while True:
 				self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "popular/offset/%d/numrows/24?XHRUrlAddOn=1" % (offset))
 				if len(self.mediaList) == 0:
 					self.mediaProblemPopup()
@@ -1193,7 +1193,7 @@ class OpenUg(Screen):
 				self.clearList()
 				self.level = self.UG_LEVEL_SERIE
 				offset = 0
-				while 1:
+				while True:
 					self.getMediaData(self.mediaList, self.HBBTV_UG_BASE_URL + "epg/timeStart/%d/timeEnd/%d/day/%d/offset/%d/numrows/24?XHRUrlAddOn=1" % (startime, now, retval, offset))
 					if len(self.mediaList) == 0:
 						self.mediaProblemPopup()
