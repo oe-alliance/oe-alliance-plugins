@@ -4,6 +4,7 @@ from . import _
 
 from six.moves.urllib.request import Request, urlopen
 from six.moves.urllib.error import URLError, HTTPError
+from six import ensure_str
 
 from Components.ActionMap import ActionMap
 from Components.config import ConfigSelection, getConfigListEntry
@@ -94,7 +95,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 			response = urlopen(req)
 			print('[xmlUpdate][fetchURL] Response: %d' % response.getcode())
 			if int(response.getcode()) == 200:
-				return response.read()
+				return ensure_str(response.read())
 		except HTTPError as err:
 			print('[xmlUpdate][fetchURL] ERROR:', err)
 		except URLError as err:
