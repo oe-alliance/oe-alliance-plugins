@@ -154,6 +154,7 @@ AM_CONDITIONAL(HD51, test "$BOXTYPE" == "hd51")
 AM_CONDITIONAL(HD60, test "$BOXTYPE" == "hd60")
 AM_CONDITIONAL(HD61, test "$BOXTYPE" == "hd61")
 AM_CONDITIONAL(PULSE4K, test "$BOXTYPE" == "pulse4k")
+AM_CONDITIONAL(PULSE4KMINI, test "$BOXTYPE" == "pulse4kmini")
 AM_CONDITIONAL(HD2400, test "$BOXTYPE" == "hd2400")
 AM_CONDITIONAL(HD1500, test "$BOXTYPE" == "hd1500")
 AM_CONDITIONAL(HD1265, test "$BOXTYPE" == "hd1265")
@@ -225,7 +226,7 @@ fi
 AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm800sev2 -o "$BOXTYPE" == dm500hd -o "$BOXTYPE" == vuuno -o "$BOXTYPE" == vuultimo -o "$BOXTYPE" == vusolo2 -o "$BOXTYPE" == vuduo2 -o "$BOXTYPE" == dags1 -o "$BOXTYPE" == dags2 -o "$BOXTYPE" == dags3 -o "$BOXTYPE" == dags4 -o "$BOXTYPE" == dags5 -o "$BOXTYPE" == dags7335 -o "$BOXTYPE" == dags7362 -o "$BOXTYPE" == dags73625 -o "$BOXTYPE" == dags7356 -o "$BOXTYPE" == dags7252 -o "$BOXTYPE" == triplex)
 
 AM_CONDITIONAL(HAVE_ARMV7A, test "$BOXTYPE" == cube)
-AM_CONDITIONAL(HAVE_ARMV7AHF, test "$BOXTYPE" == hd51 -o "$BOXTYPE" == 8100s -o "$BOXTYPE" == vs1500 -o "$BOXTYPE" == vusolo4k -o "$BOXTYPE" == vuuno4k -o "$BOXTYPE" == vuuno4kse -o "$BOXTYPE" == vuzero4k -o "$BOXTYPE" == vuultimo4k -o "$BOXTYPE" == vuduo4k -o "$BOXTYPE" == vuduo4kse -o "$BOXTYPE" == dm900 -o "$BOXTYPE" == dm920 -o "$BOXTYPE" == sf4008 -o "$BOXTYPE" == dags7252 -o "$BOXTYPE" == dags72604 -o "$BOXTYPE" == gb7252 -o "$BOXTYPE" == xc7439 -o "$BOXTYPE" == h7 -o "$BOXTYPE" == h9 -o "$BOXTYPE" == h9combo -o "$BOXTYPE" == h10 -o "$BOXTYPE" == h11 -o "$BOXTYPE" == sf5008 -o "$BOXTYPE" == et1x000 -o "$BOXTYPE" == et13000 -o "$BOXTYPE" == cc1 -o "$BOXTYPE" == sf8008 -o "$BOXTYPE" == sf8008m -o "$BOXTYPE" == gbmv200 -o "$BOXTYPE" == viper4k -o "$BOXTYPE" == hd60 -o "$BOXTYPE" == hd61 -o "$BOXTYPE" == i55plus -o "$BOXTYPE" == ustym4kpro -o "$BOXTYPE" == multiboxse -o "$BOXTYPE" == multibox -o "$BOXTYPE" == osmio4k -o "$BOXTYPE" == osmio4kplus -o "$BOXTYPE" == osmini4k -o "$BOXTYPE" == pulse4k)
+AM_CONDITIONAL(HAVE_ARMV7AHF, test "$BOXTYPE" == hd51 -o "$BOXTYPE" == 8100s -o "$BOXTYPE" == vs1500 -o "$BOXTYPE" == vusolo4k -o "$BOXTYPE" == vuuno4k -o "$BOXTYPE" == vuuno4kse -o "$BOXTYPE" == vuzero4k -o "$BOXTYPE" == vuultimo4k -o "$BOXTYPE" == vuduo4k -o "$BOXTYPE" == vuduo4kse -o "$BOXTYPE" == dm900 -o "$BOXTYPE" == dm920 -o "$BOXTYPE" == sf4008 -o "$BOXTYPE" == dags7252 -o "$BOXTYPE" == dags72604 -o "$BOXTYPE" == gb7252 -o "$BOXTYPE" == xc7439 -o "$BOXTYPE" == h7 -o "$BOXTYPE" == h9 -o "$BOXTYPE" == h9combo -o "$BOXTYPE" == h10 -o "$BOXTYPE" == h11 -o "$BOXTYPE" == sf5008 -o "$BOXTYPE" == et1x000 -o "$BOXTYPE" == et13000 -o "$BOXTYPE" == cc1 -o "$BOXTYPE" == sf8008 -o "$BOXTYPE" == sf8008m -o "$BOXTYPE" == gbmv200 -o "$BOXTYPE" == viper4k -o "$BOXTYPE" == hd60 -o "$BOXTYPE" == hd61 -o "$BOXTYPE" == i55plus -o "$BOXTYPE" == ustym4kpro -o "$BOXTYPE" == multiboxse -o "$BOXTYPE" == multibox -o "$BOXTYPE" == osmio4k -o "$BOXTYPE" == osmio4kplus -o "$BOXTYPE" == osmini4k -o "$BOXTYPE" == pulse4k -o "$BOXTYPE" == pulse4kmini)
 AM_CONDITIONAL(HAVE_CORTEXA9HF, test "$BOXTYPE" == wetekplay)
 AM_CONDITIONAL(HAVE_AARCH64, test "$BOXTYPE" == wetekplay2 -o "$BOXTYPE" == alien5 )
 
