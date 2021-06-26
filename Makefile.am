@@ -276,7 +276,11 @@ endif
 
 if PULSE4K
 SUBDIRS += MultiTransCodingSetup
-endif	  
+endif
+
+if PULSE4KMINI
+SUBDIRS += MultiTransCodingSetup
+endif
 
 if I55PLUS
 SUBDIRS += MultiTransCodingSetup
