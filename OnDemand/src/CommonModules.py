@@ -23,7 +23,6 @@ from . import _
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.GUIComponent import GUIComponent
-from Components.HTMLComponent import HTMLComponent
 from Components.config import config
 from Screens.Screen import Screen
 from Screens.InfoBar import MoviePlayer as MP_parent
@@ -57,7 +56,7 @@ class Rect:
 		self.h = height
 
 
-class MainMenuList(HTMLComponent, GUIComponent):
+class MainMenuList(GUIComponent):
 	def __init__(self):
 		GUIComponent.__init__(self)
 		self.picload = ePicLoad()
@@ -145,7 +144,7 @@ class MainMenuList(HTMLComponent, GUIComponent):
 		self.selectionChanged()
 
 
-class EpisodeList(HTMLComponent, GUIComponent):
+class EpisodeList(GUIComponent):
 	def __init__(self, iconDefault, showIcon):
 		GUIComponent.__init__(self)
 		self.picload = ePicLoad()
