@@ -626,7 +626,7 @@ def parseNow(output):
     for item in items:
         b = findall('<img src="https://a2.tvspielfilm.de/images/tv/sender/mini/(.*?).png.*?<div>\n\\s+<strong>(.*?)</strong>\n\\s+<span>(.*?)</span>', item, RES)
         LOGO, TIME, DATE = b[0]
-        title = findall(';" title="(.*?)"', item, RES)[0]
+        title = findall('" title="(.*?)"', item, RES)[0]
         try:
             genre = findall('<td class="col-4">\n\\s+<span>(.*?)</span>', item, RES)[0]
         except:
@@ -679,10 +679,12 @@ def test():
 #    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&date=2021-05-06&tips=0&time=day&channel=3SAT'
 #    link = b'https://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&ext=1&q=&cat%5B0%5D=SP&genreSP=Abenteuer&time=day&date=&channel='
 #    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&date=2021-05-07&tips=0&time=day&channel=ARD'
+#    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html'
 #    getPage(link).addCallback(savefile).addErrback(saveerr)
 #    reactor.run()
     output = open('tmp.html', 'rb').read()
 #    testtvsuche(output)
+#    testparseNow(output)
     testparseNow(output)
 
 
