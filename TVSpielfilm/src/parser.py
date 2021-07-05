@@ -626,7 +626,10 @@ def parseNow(output):
     for item in items:
         b = findall('<img src="https://a2.tvspielfilm.de/images/tv/sender/mini/(.*?).png.*?<div>\n\\s+<strong>(.*?)</strong>\n\\s+<span>(.*?)</span>', item, RES)
         LOGO, TIME, DATE = b[0]
-        title = findall('" title="(.*?)"', item, RES)[0]
+        try:
+            title = findall('link" title="(.*?)"', item, RES)[1]
+        except:
+            title = findall('link" title="(.*?)"', item, RES)[0]
         try:
             genre = findall('<td class="col-4">\n\\s+<span>(.*?)</span>', item, RES)[0]
         except:
