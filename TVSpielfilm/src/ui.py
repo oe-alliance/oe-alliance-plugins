@@ -46,7 +46,7 @@ import time
 import six
 from os import path
 from .util import applySkinVars, MEDIAROOT, PICPATH, ICONPATH, TVSPNG, serviceDB, BlinkingLabel, ItemList, makeWeekDay, scaleskin, printStackTrace, channelDB, readSkin, DESKTOP_WIDTH, DESKTOP_HEIGHT, skinFactor
-from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parsePrimeTimeTable, parseTrailerUrl, buildTVTippsArray, parseNow
+from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parsePrimeTimeTable, parseTrailerUrl, buildTVTippsArray, parseNow, NEXTPage1, NEXTPage2
 
 try:
     from cookielib import MozillaCookieJar
@@ -966,8 +966,8 @@ class tvBaseScreen(tvAllScreen):
             searchtext1 = '<a class="next" href=".*?"'
             searchtext2 = '<a class="next" href="(.*?)"'
         else:
-            searchtext1 = 'class="pagination__link pagination__link--next" >'
-            searchtext2 = '<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >'
+            searchtext1 = NEXTPage1
+            searchtext2 = NEXTPage2
 
         if self.searchcount <= self.maxsearchcount and search(searchtext1, bereich) is not None:
             nextpage = search(searchtext2, bereich)
@@ -2062,8 +2062,8 @@ class TVGenreView(tvGenreJetztProgrammView):
         self['menu'].moveToIndex(end)
         self['menu'].show()
         self.genrecount += 1
-        if self.genrecount <= self.maxgenrecount and search('class="pagination__link pagination__link--next" >', bereich) is not None and self.load == True:
-            nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
+        if self.genrecount <= self.maxgenrecount and search(NEXTPage1, bereich) is not None and self.load == True:
+            nextpage = search(NEXTPage2, bereich)
             if nextpage is not None:
                 self.downloadFull(nextpage.group(1), self.makeTVGenreView)
             else:
@@ -2721,7 +2721,7 @@ class TVJetztView(tvGenreJetztProgrammView):
         self['menu'].l.setItemHeight(mh)
         self['menu'].l.setList(self.tventries)
         if self.jetzt == True:
-            nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
+            nextpage = search(NEXTPage2, bereich)
             if nextpage is not None:
                 self.downloadFull(nextpage.group(1), self.makeTVJetztView)
             else:
@@ -2732,7 +2732,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                 self['label'].show()
         elif self.gleich == True:
             if search('<a href=".*?tvspielfilm.de/tv-programm/sendungen/.*?page=[2-9]', bereich) is not None:
-                nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
+                nextpage = search(NEXTPage2, bereich)
                 if nextpage is not None:
                     self.downloadFull(nextpage.group(1), self.makeTVJetztView)
             else:
@@ -2742,7 +2742,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                 self['label'].stopBlinking()
                 self['label'].show()
         elif search('<a href=".*?tvspielfilm.de/tv-programm/sendungen/.*?page=[2-9]', bereich) is not None:
-            nextpage = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
+            nextpage = search(NEXTPage2, bereich)
             if nextpage is not None:
                 self.downloadFull(nextpage.group(1), self.makeTVJetztView)
         else:
@@ -3441,8 +3441,8 @@ class TVProgrammView(tvGenreJetztProgrammView):
         self['menu'].l.setItemHeight(mh)
         self['menu'].l.setList(self.tventries)
         self['menu'].moveToIndex(self.oldindex)
-        if search('class="pagination__link pagination__link--next" >', bereich) is not None:
-            link = search('<a href="(.*?)"\\n\\s+class="pagination__link pagination__link--next" >', bereich)
+        if search(NEXTPage1, bereich) is not None:
+            link = search(NEXTPage2, bereich)
             if link is not None:
                 self.makeTVTimer.callback.append(self.downloadFullPage(link.group(1), self.makeTVProgrammView))
             else:
