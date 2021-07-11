@@ -12114,7 +12114,7 @@ def LCD4linuxPIC(self, session):
 				name6 = ''
 				name7 = ''
 				if os.path.exists(LCD4enigma2 + 'lamedb5'):
-					channel_fbname = self.Lchannel_name.replace('HD','').rstrip()
+					channel_fbname = self.Lchannel_name.replace('HD', '').rstrip()
 					with open(LCD4enigma2 + 'lamedb5', 'r') as file:
 						lamedb5 = file.readlines()
 					for line in lamedb5:
@@ -12126,7 +12126,7 @@ def LCD4linuxPIC(self, session):
 								fields[2] = '1'
 								name5 = name5.join("_".join(fields)) + '_' + line[1].upper() + '_' + line[3].upper().lstrip('0') + '_' + line[4].lstrip('0') + '_' + line[2].upper() + '_0_0_0.png'
 								name6 = channel_fbname + '.png'
-								name7 = channel_fbname.replace(' ','').lower() + '.png'
+								name7 = channel_fbname.replace(' ', '').lower() + '.png'
 				PIC.append(os.path.join(P2, name3))
 				PIC.append(os.path.join(P2, name2))
 				PIC.append(os.path.join(P2, name))
