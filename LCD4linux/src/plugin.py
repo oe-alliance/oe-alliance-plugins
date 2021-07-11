@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8w"
+Version = "V5.0-r8x"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -12109,10 +12109,31 @@ def LCD4linuxPIC(self, session):
 					name2 = self.Lchannel_name + ".png"
 					name4 = self.Lchannel_name + ".png"
 					name3 = self.Lchannel_name2.replace('\x87', '').replace('\x86', '') + ".png"
+				# try to find fallback to picon to relating SD-station via 'lamedb5'
+				name5 = ''
+				name6 = ''
+				name7 = ''
+				if os.path.exists(LCD4enigma2 + 'lamedb5'):
+					channel_fbname = self.Lchannel_name.replace('HD','').rstrip()
+					with open(LCD4enigma2 + 'lamedb5', 'r') as file:
+						lamedb5 = file.readlines()
+					for line in lamedb5:
+						line = line.split(',')
+						if len(line) > 1:
+							if line[1] == ('"' + channel_fbname + '"'):
+								line = line[0].split(':')
+								fields = picon.split("_", 2)
+								fields[2] = '1'
+								name5 = name5.join("_".join(fields)) + '_' + line[1].upper() + '_' + line[3].upper().lstrip('0') + '_' + line[4].lstrip('0') + '_' + line[2].upper() + '_0_0_0.png'
+								name6 = channel_fbname + '.png'
+								name7 = channel_fbname.replace(' ','').lower() + '.png'
 				PIC.append(os.path.join(P2, name3))
 				PIC.append(os.path.join(P2, name2))
 				PIC.append(os.path.join(P2, name))
 				PIC.append(os.path.join(P2, name4))
+				PIC.append(os.path.join(P2, name5))
+				PIC.append(os.path.join(P2, name6))
+				PIC.append(os.path.join(P2, name7))
 				fields = picon.split("_", 3)
 				if fields[0] in ("4097", "5001", "5002", "5003"):
 					fields[0] = "1"
@@ -12123,6 +12144,9 @@ def LCD4linuxPIC(self, session):
 					PIC.append(os.path.join(P2A, name2))
 					PIC.append(os.path.join(P2A, name))
 					PIC.append(os.path.join(P2A, name4))
+					PIC.append(os.path.join(P2A, name5))
+					PIC.append(os.path.join(P2A, name6))
+					PIC.append(os.path.join(P2A, name7))
 					fields = picon.split("_", 3)
 					if fields[0] in ("4097", "5001", "5002", "5003"):
 						fields[0] = "1"
