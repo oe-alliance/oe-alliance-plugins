@@ -1268,7 +1268,7 @@ msgid "Load Active Config-File"
 msgstr "Lade aktive Konfig-Datei"
 
 msgid "Load Defaults / Empty Config"
-msgstr "Lade Standart/Leere Konfiguration"
+msgstr "Lade Standard/Leere Konfiguration"
 
 #, python-format
 msgid "Load File : %s"
