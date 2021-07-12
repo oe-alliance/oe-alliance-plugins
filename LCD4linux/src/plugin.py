@@ -16,7 +16,7 @@
 
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8w"
+Version = "V5.0-r8x"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -33,6 +33,7 @@ from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
 from Components.Lcd import LCD
 from Components.SystemInfo import SystemInfo
+from Components.Renderer.Picon import getPiconName
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Screens.InfoBar import InfoBar
@@ -12109,10 +12110,12 @@ def LCD4linuxPIC(self, session):
 					name2 = self.Lchannel_name + ".png"
 					name4 = self.Lchannel_name + ".png"
 					name3 = self.Lchannel_name2.replace('\x87', '').replace('\x86', '') + ".png"
+					name5 = getPiconName(self.LsreftoString)
 				PIC.append(os.path.join(P2, name3))
 				PIC.append(os.path.join(P2, name2))
 				PIC.append(os.path.join(P2, name))
 				PIC.append(os.path.join(P2, name4))
+				PIC.append(os.path.join(P2, name5))
 				fields = picon.split("_", 3)
 				if fields[0] in ("4097", "5001", "5002", "5003"):
 					fields[0] = "1"
@@ -12123,6 +12126,7 @@ def LCD4linuxPIC(self, session):
 					PIC.append(os.path.join(P2A, name2))
 					PIC.append(os.path.join(P2A, name))
 					PIC.append(os.path.join(P2A, name4))
+					PIC.append(os.path.join(P2A, name5))
 					fields = picon.split("_", 3)
 					if fields[0] in ("4097", "5001", "5002", "5003"):
 						fields[0] = "1"
