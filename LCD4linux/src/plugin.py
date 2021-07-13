@@ -12110,7 +12110,7 @@ def LCD4linuxPIC(self, session):
 					name2 = self.Lchannel_name + ".png"
 					name4 = self.Lchannel_name + ".png"
 					name3 = self.Lchannel_name2.replace('\x87', '').replace('\x86', '') + ".png"
-					name5 = getPiconName(self.LsreftoString)
+				name5 = getPiconName(self.LsreftoString)
 				PIC.append(os.path.join(P2, name3))
 				PIC.append(os.path.join(P2, name2))
 				PIC.append(os.path.join(P2, name))
