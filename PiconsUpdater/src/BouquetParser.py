@@ -48,6 +48,11 @@ class BouquetParser:
                     break
                 if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):
                     continue
-                services.append(ServiceReference(service))
+                sref = service.toString()
+                fields = sref.split(':', 10)[:10]
+                if fields[0] != '1':
+                    continue
+                sref = ':'.join(fields) + ':'
+                services.append(ServiceReference(sref))
 
         return services
