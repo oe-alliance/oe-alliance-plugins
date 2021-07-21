@@ -13,6 +13,8 @@ def main(session, **kwargs):
     config.plugins.PiconsUpdater.size = ConfigSelection(default='220x132', choices=getConfigSizeList())
     config.plugins.PiconsUpdater.background = ConfigSelection(default='', choices=getConfigBackgroundList())
     config.plugins.PiconsUpdater.mirror_effect = ConfigYesNo(default=False)
+    config.plugins.PiconsUpdater.exclude_iptv = ConfigYesNo(default=True)
+    config.plugins.PiconsUpdater.exclude_radio = ConfigYesNo(default=False)
     session.open(PiconsUpdaterView)
 
 

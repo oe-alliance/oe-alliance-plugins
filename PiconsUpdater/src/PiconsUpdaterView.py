@@ -51,6 +51,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
          'red': self.cancel}, -1)
         self.onChangedEntry = []
         ConfigListScreen.__init__(self, self.getMenuItemList(), session, self.__selectionChanged)
+        # FIXME : don't scan channels on start without background thread
         parser = BouquetParser(BOUQUET_PATH)
         self.serviceList = parser.getServiceList()
         self.previewImagesToDownload = len(getPiconUrls().items())
@@ -92,6 +93,9 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 
         menuList.append(getConfigListEntry(_('Mirror Effect'), config.plugins.PiconsUpdater.mirror_effect, _('Mirror Effect')))
         menuList.append(getConfigListEntry(_('Picons Folder'), getPiconsPath(), _("Picons folder\n\nPress 'Ok' to open path selection view")))
+        menuList.append(getConfigListEntry(_('Exclude IPTV'), config.plugins.PiconsUpdater.exclude_iptv, _("Exclude IPTV")))
+        menuList.append(getConfigListEntry(_('Exclude Radio'), config.plugins.PiconsUpdater.exclude_radio, _("Exclude Radio")))
+
         return menuList
 
     def downloadPreviewImages(self):
@@ -247,6 +251,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
         self.close()
 
     def save(self):
+        # FIXME : rescan channels if needed
         for x in self['config'].list:
             if len(x) > 1:
                 x[1].save_forced = True

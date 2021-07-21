@@ -3,8 +3,9 @@ import re
 import unicodedata
 import six
 from enigma import eServiceCenter, eServiceReference
+from Components.config import config
 from ServiceReference import ServiceReference
-SKIP_BOUQUET_NAMES = 'userbouquet.lastscanned.tv'
+SKIP_BOUQUET_NAMES = 'userbouquet.lastscanned'
 
 
 def getChannelKey(service):
@@ -21,6 +22,8 @@ class BouquetParser:
     def __init__(self, bouquetPath):
         self.serviceList = []
         self.bouquetPath = bouquetPath
+        self.excludeiptv = config.plugins.PiconsUpdater.exclude_iptv.value
+        self.excluderadio = config.plugins.PiconsUpdater.exclude_radio.value
         self.__loadBouquetList()
 
     def getServiceList(self):
@@ -30,11 +33,22 @@ class BouquetParser:
         file = open(self.bouquetPath + '/bouquets.tv', 'r')
         data = file.read()
         file.close()
-        bouquetFiles = re.findall('([-_a-z0-9]+\\.[^.]+\\.[a-z]+)', data, re.DOTALL | re.IGNORECASE)
+        bouquetFilesTV = re.findall('([-_a-z0-9]+\\.[^.]+\\.[a-z]+)', data, re.DOTALL | re.IGNORECASE)
         self.serviceList = []
-        for fileName in bouquetFiles:
-            if fileName.lower() not in SKIP_BOUQUET_NAMES:
+        for fileName in bouquetFilesTV:
+            if SKIP_BOUQUET_NAMES not in fileName.lower():
                 bouquetList = eServiceReference('1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + fileName + '" ORDER BY bouquet')
+                services = self.__getBouquetServices(bouquetList)
+                self.serviceList += services
+        if self.excluderadio:
+            return
+        file = open(self.bouquetPath + '/bouquets.radio', 'r')
+        data = file.read()
+        file.close()
+        bouquetFilesRadio = re.findall('([-_a-z0-9]+\\.[^.]+\\.[a-z]+)', data, re.DOTALL | re.IGNORECASE)
+        for fileName in bouquetFilesRadio:
+            if SKIP_BOUQUET_NAMES not in fileName.lower():
+                bouquetList = eServiceReference('1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "' + fileName + '" ORDER BY bouquet')
                 services = self.__getBouquetServices(bouquetList)
                 self.serviceList += services
 
@@ -48,11 +62,14 @@ class BouquetParser:
                     break
                 if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):
                     continue
-                sref = service.toString()
-                fields = sref.split(':', 10)[:10]
-                if fields[0] != '1':
-                    continue
-                sref = ':'.join(fields) + ':'
-                services.append(ServiceReference(sref))
+                if self.excludeiptv:
+                    sref = service.toString()
+                    fields = sref.split(':', 10)[:10]
+                    if fields[0] != '1':
+                        continue
+                    sref = ':'.join(fields) + ':'
+                    services.append(ServiceReference(sref))
+                else:
+                    services.append(ServiceReference(service))
 
         return services

@@ -26,6 +26,7 @@ def _(txt):
 
 language.addCallback(localeInit())
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.getLogger("PIL").setLevel(logging.WARNING)
 
 
 def printToConsole(msg):
