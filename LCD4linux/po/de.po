@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 16:21+0430\n"
-"PO-Revision-Date: 2018-10-14 14:54+0200\n"
-"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
+"PO-Revision-Date: 2021-07-27 19:16+0200\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 3.0\n"
 
 msgid "%"
 msgstr "%"
@@ -50,7 +50,7 @@ msgid "%s - Current value: %s"
 msgstr "%s - Aktueller Wert: %s"
 
 msgid "-  Type"
-msgstr "-  Typ"
+msgstr "- Typ"
 
 msgid "- Alignment"
 msgstr "- Ausrichtung"
@@ -65,16 +65,16 @@ msgid "- Background/Transparency"
 msgstr "- Hintergrund/Transparenz"
 
 msgid "- Backlight Off [disable set Off=On]"
-msgstr "- Hintergrundbeleuchtung aus [inaktiv bei aus=ein]"
+msgstr "- Hintergrundbeleuchtung aus [inaktiv bei Aus=Ein]"
 
 msgid "- Backlight On"
-msgstr "- Hintergrundbeleuchtung ein"
+msgstr "- Hintergrundbeleuchtung Ein"
 
 msgid "- Backlight Weekend Off [disable set Off=On]"
-msgstr "- Hintergrundbeleuchtung am Wochenende aus [inaktiv bei aus=ein]"
+msgstr "- Hintergrundbeleuchtung am Wochenende aus [inaktiv bei Aus=Ein]"
 
 msgid "- Backlight Weekend On"
-msgstr "- Hintergrundbeleuchtung am Wochenende ein"
+msgstr "- Hintergrundbeleuchtung am Wochenende Ein"
 
 msgid "- Bar Range Max"
 msgstr "- Bar-Bereich Max"
@@ -158,7 +158,7 @@ msgid "- Extra Zoom"
 msgstr "- Extra Zoom"
 
 msgid "- Fast Grab lower quality"
-msgstr "- schnelles Grab niedrige Qualität"
+msgstr "- schneller Zugriff niedrige Qualität"
 
 msgid "- File [ok]>"
 msgstr "- Datei [ok]>"
@@ -166,9 +166,8 @@ msgstr "- Datei [ok]>"
 msgid "- File or Path [ok]>"
 msgstr "- Datei oder Verzeichnis [ok]>"
 
-#, fuzzy
 msgid "- Find Cover File [ok]>"
-msgstr "- Datei [ok]>"
+msgstr "- Finde Cover-Datei [ok]>"
 
 msgid "- Font"
 msgstr "- Schriftart"
@@ -279,19 +278,19 @@ msgid "- Online Name:Address"
 msgstr "- Online Name:Adresse"
 
 msgid "- Picon Cache Path [ok]>"
-msgstr "- Picon-Cache-Verz. [ok]>"
+msgstr "- Picon Cache Verz. [ok]>"
 
 msgid "- Picon First"
 msgstr "- Picon zuerst"
 
 msgid "- Picon Path 2 [ok]>"
-msgstr "- Picon-Verzeichnis 2 [ok]>"
+msgstr "- Picon Verzeichnis 2 [ok]>"
 
 msgid "- Picon Path [ok]>"
-msgstr "- Picon-Verzeichnis [ok]>"
+msgstr "- Picon Verzeichnis [ok]>"
 
 msgid "- Picon Size"
-msgstr "- Picon-Größe"
+msgstr "- Picon Größe"
 
 msgid "- Picture Alignment"
 msgstr "- Bildausrichtung"
@@ -417,7 +416,7 @@ msgid "- Transparency"
 msgstr "- Transparenz"
 
 msgid "- Trimmed"
-msgstr ""
+msgstr "- Getrimmt"
 
 msgid "- Tunerinfo"
 msgstr "- Tunerinfo"
@@ -437,9 +436,8 @@ msgstr "- Wettertyp"
 msgid "- Zoom"
 msgstr "- Zoom"
 
-#, fuzzy
 msgid "- external IP URL"
-msgstr "- Zusatzinfo"
+msgstr "- externe IP-URL"
 
 msgid "- extra Info"
 msgstr "- Zusatzinfo"
@@ -499,7 +497,7 @@ msgid "100%"
 msgstr "100%"
 
 msgid "10min"
-msgstr "10min"
+msgstr "10 min"
 
 msgid "10s"
 msgstr "10s"
@@ -520,7 +518,7 @@ msgid "15%"
 msgstr "15%"
 
 msgid "15min"
-msgstr "15min"
+msgstr "15 min"
 
 msgid "15s"
 msgstr "15s"
@@ -529,7 +527,7 @@ msgid "180"
 msgstr "180"
 
 msgid "1min"
-msgstr "1min"
+msgstr "1 min"
 
 msgid "2"
 msgstr "2"
@@ -652,7 +650,7 @@ msgid "480x320"
 msgstr "480x320"
 
 msgid "4min"
-msgstr "4min"
+msgstr "4 min"
 
 msgid "5"
 msgstr "5"
@@ -682,7 +680,7 @@ msgid "5h"
 msgstr "5h"
 
 msgid "5min"
-msgstr "5min"
+msgstr "5 min"
 
 msgid "5s"
 msgstr "5s"
@@ -694,7 +692,7 @@ msgid "60%"
 msgstr "60%"
 
 msgid "60min"
-msgstr "60min"
+msgstr "60 min"
 
 msgid "65%"
 msgstr "65%"
@@ -748,10 +746,10 @@ msgid "All"
 msgstr "Alles"
 
 msgid "Always All"
-msgstr "Immer alle"
+msgstr "Immer Alle"
 
 msgid "Always New"
-msgstr "Immer neue"
+msgstr "Immer Neue"
 
 msgid "Analog"
 msgstr "Analog"
@@ -787,22 +785,19 @@ msgid "Bitrate"
 msgstr "Bitrate"
 
 msgid "BlueSound"
-msgstr ""
+msgstr "BlueSound"
 
 msgid "BlueSound IP"
-msgstr ""
+msgstr "BlueSound IP"
 
-#, fuzzy
 msgid "BlueSound Ping Timeout [ms]"
-msgstr "Sonos Ping Timeout [ms]"
+msgstr "BlueSound Ping Timeout [ms]"
 
-#, fuzzy
 msgid "BlueSound Play Check"
-msgstr "Sonos Play Check"
+msgstr "BlueSound Play-Prüfung"
 
-#, fuzzy
 msgid "BlueSound Refresh [s]"
-msgstr "Sonos Refresh [s]"
+msgstr "BlueSound Refresh [s]"
 
 msgid "Box-Skin-LCD"
 msgstr "Boxskin-LCD"
@@ -814,13 +809,13 @@ msgid "Box-Skin-LCD Dimension"
 msgstr "Boxskin-LCD Größe"
 
 msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "Boxskin-LCD Aktiviere Idle-Mode"
+msgstr "Boxskin-LCD Aktiviere Modus Leerlauf"
 
 msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "Boxskin-LCD Aktiviere Media-Mode"
+msgstr "Boxskin-LCD Aktiviere Modus Medien"
 
 msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "Boxskin-LCD Aktiviere On-Mode"
+msgstr "Boxskin-LCD Aktiviere Modus An"
 
 msgid "Box-Skin-LCD Offset"
 msgstr "Boxskin-LCD Offset"
@@ -1021,7 +1016,7 @@ msgid "Extended Description"
 msgstr "Erweiterte Beschreibung"
 
 msgid "External IP Address"
-msgstr ""
+msgstr "Externe IP Adresse"
 
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
@@ -1133,7 +1128,7 @@ msgid "IP seurity not supported by Box"
 msgstr "IP Sicherheit durch Box nicht unterstützt"
 
 msgid "Idle"
-msgstr "Idle"
+msgstr "Leerlauf"
 
 msgid "Indoor"
 msgstr "Indoor"
@@ -1175,7 +1170,7 @@ msgid "Key for Screen Change"
 msgstr "Taste für Schirmwechsel"
 
 msgid "Key for Screen On/Off"
-msgstr "Taste für LCD Ein/Aus"
+msgstr "Taste für Schirm Ein/Aus"
 
 msgid "Knob"
 msgstr "Knopf"
@@ -1241,19 +1236,19 @@ msgid "LCD4linux"
 msgstr "LCD4linux"
 
 msgid "LCD4linux Display-Mode Idle"
-msgstr "LCD4linux Display Modus beim Leerlauf"
+msgstr "LCD4linux Display Modus Leerlauf"
 
 msgid "LCD4linux Display-Mode MediaPlayer"
-msgstr "LCD4linux Display Modus Media Player"
+msgstr "LCD4linux Display Modus Medien Player"
 
 msgid "LCD4linux Display-Mode On"
-msgstr "LCD4linux Display Modus an"
+msgstr "LCD4linux Display Modus An"
 
 msgid "LCD4linux Screen Switch"
 msgstr "LCD4linux Schirm Schalter"
 
 msgid "LCD4linux Settings"
-msgstr "LCD4linux Einstellungen"
+msgstr "LCD4linux Einstellungen Global"
 
 msgid "LCD4linux enabled"
 msgstr "LCD4linux aktiviert"
@@ -1344,7 +1339,7 @@ msgid "MSN"
 msgstr "MSN"
 
 msgid "MUTE or defined Keys"
-msgstr "STUMME oder definierte Schlüssel"
+msgstr "STUMM oder definierte Schlüssel"
 
 msgid "Mail"
 msgstr "Mail"
@@ -1425,7 +1420,7 @@ msgid "Mail Show Empty Mailboxes"
 msgstr "Mail Zeige Leere Mailboxen"
 
 msgid "Media"
-msgstr "Media"
+msgstr "Medien"
 
 msgid "Memory available"
 msgstr "Hauptspeicher verfügbar"
@@ -1647,7 +1642,7 @@ msgid "On"
 msgstr "On"
 
 msgid "On+Media+Standby"
-msgstr "On+Media+Standby"
+msgstr "On+Medien+Standby"
 
 msgid "Online"
 msgstr "Online"
@@ -1767,7 +1762,7 @@ msgid "Radio"
 msgstr "Radio"
 
 msgid "Radio+Media"
-msgstr "Radio+Media"
+msgstr "Radio+Medien"
 
 msgid "Rain"
 msgstr "Regen"
@@ -1881,7 +1876,7 @@ msgid "Samsung SPF-87H old 800x480"
 msgstr "Samsung SPF-87H alt 800x480"
 
 msgid "Sat"
-msgstr "Sa"
+msgstr "Sat"
 
 msgid "Satellite"
 msgstr "Satellit"
@@ -2014,16 +2009,16 @@ msgid "Service search first"
 msgstr "Service Suche zuerst"
 
 msgid "Set Global >>"
-msgstr "Set Global >>"
+msgstr "Setze Global >>"
 
 msgid "Set Idle >>"
-msgstr "Set Idle >>"
+msgstr "Setze Leerlauf >>"
 
 msgid "Set Media >>"
-msgstr "Set Media >>"
+msgstr "Setze Medien >>"
 
 msgid "Set On >>"
-msgstr "Set On >>"
+msgstr "Setze An >>"
 
 msgid "Shadow Edges"
 msgstr "Schattenkanten"
@@ -2128,7 +2123,7 @@ msgid "Stutter TV"
 msgstr "Stotter TV"
 
 msgid "Sun"
-msgstr "So"
+msgstr "Sonne"
 
 msgid "Sunrise"
 msgstr "Sonnenaufgang"
@@ -2139,9 +2134,8 @@ msgstr "FramBuffer umschalten [wenn möglich]"
 msgid "TV"
 msgstr "TV"
 
-#, fuzzy
 msgid "TV (full)"
-msgstr "normal (voll)"
+msgstr "TV (voll)"
 
 msgid "TV+OSD"
 msgstr "TV+OSD"
@@ -2150,7 +2144,7 @@ msgid "TV+Radio"
 msgstr "TV+Radio"
 
 msgid "TV+Radio+Media"
-msgstr "TV+Radio+Media"
+msgstr "TV+Radio+Medien"
 
 msgid "Temperature"
 msgstr "Temperatur"
@@ -2186,7 +2180,7 @@ msgid "Time+Weekday"
 msgstr "Uhrzeit+Wochentag"
 
 msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
-msgstr "Timing ! rechne alle Zeiten um Zeit/5*2 im Fastmode"
+msgstr "Timing ! rechne alle Zeiten um Zeit/5*2 im Schnellmodus"
 
 msgid "Title"
 msgstr "Titel"
@@ -2345,7 +2339,7 @@ msgid "alphabetic"
 msgstr "alphabetisch"
 
 msgid "alternative Copy-Mode/DM800hd (24bit)"
-msgstr "alternativer Copy-Mode/DM800hd (24bit)"
+msgstr "alternativer Kopiermodus/DM800hd (24bit)"
 
 msgid "always"
 msgstr "immer"
@@ -2390,13 +2384,13 @@ msgid "convertapi.com"
 msgstr "convertapi.com"
 
 msgid "copy to Idle"
-msgstr "kopiere nach Idle"
+msgstr "kopiere nach Leerlauf"
 
 msgid "copy to Media"
-msgstr "kopiere nach Media"
+msgstr "kopiere nach Medien"
 
 msgid "copy to On"
-msgstr "kopiere nach On"
+msgstr "kopiere nach An"
 
 msgid "cornflowerblue"
 msgstr "kornblumenblau"
@@ -2652,13 +2646,13 @@ msgid "stop Screencycle"
 msgstr "Schirmwechsel anhalten"
 
 msgid "tomato"
-msgstr "tomato"
+msgstr "tomate"
 
 msgid "trimmed (black)"
-msgstr "beschnitten (schwarz)"
+msgstr "getrimmt (schwarz)"
 
 msgid "trimmed (transparent)"
-msgstr "beschnitten (transparent)"
+msgstr "getrimmt (transparent)"
 
 msgid "two lines"
 msgstr "zwei Zeilen"
