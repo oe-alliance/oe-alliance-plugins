@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
+import os
 from _collections import deque
-from . import _, printToConsole, PICON_TYPE_NAME, PICON_TYPE_KEY
+from . import _, printToConsole, getPiconsPath, getTmpLocalPicon, PICON_TYPE_NAME, PICON_TYPE_KEY
 from .DownloadJob import DownloadJob
 from .EventDispatcher import dispatchEvent
 from .DiskUtils import getCleanFileName
@@ -29,6 +30,13 @@ class DownloadPicons:
         self.queueDownloadList = deque()
 
     def downloadPicons(self):
+        for i in ['4097', '5001', '5002', '5003']:  # essential remove of obstructive Picon-filenames
+            obstructive = getTmpLocalPicon('%s_0_1_0_0_0_0_0_0_0' % i)
+            if os.path.isfile(obstructive):
+                os.remove(obstructive)
+            obstructive = getPiconsPath().getValue() + '/%s_0_1_0_0_0_0_0_0_0.png' % i
+            if os.path.isfile(obstructive):
+                os.remove(obstructive)
         self.queueDownloadList = deque()
         printToConsole('Picons to download: %d' % len(self.serviceList))
         for service in self.serviceList:
@@ -37,6 +45,8 @@ class DownloadPicons:
                 piconName = getCleanFileName(service.getServiceName())
             else:
                 piconName = channelKey
+            if any(channelKey.find(i) + 1 for i in ['4097', '5001', '5002', '5003']): # Internetstream found, therefore use SNP:
+                channelKey = piconName.replace('-','')
             if not piconName:
                 continue
             urlPng = self.piconsUrl % piconName
