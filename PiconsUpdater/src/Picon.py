@@ -8,7 +8,7 @@ from PIL import Image
 from .reflection import add_reflection
 from Components.config import config
 from .BouquetParser import getChannelKey
-from .DiskUtils import getFiles
+from .DiskUtils import getFiles, getCleanFileName
 from .EventDispatcher import dispatchEvent
 from .JobProgressView import JobProgressView
 from . import _, printToConsole, getPiconsPath, getTmpLocalPicon
@@ -37,6 +37,8 @@ class MergePiconJob:
         self.executionQueueList = deque()
         for service in self.serviceList:
             piconName = getChannelKey(service)
+            if any(piconName.find(i) + 1 for i in ['4097', '5001', '5002', '5003']): # Internetstream found, therefore use SNP:
+                piconName = getCleanFileName(service.getServiceName()).replace('-','')
             piconFile = getTmpLocalPicon(piconName)
             if os.path.isfile(piconFile):
                 job = MergeVO(piconFile, self.targetPicon % piconName)
