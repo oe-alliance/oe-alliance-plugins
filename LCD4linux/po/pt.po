@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2021-04-16 16:22+0430\n"
 "PO-Revision-Date: \n"
-"Last-Translator: nunigaia\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: BH Team\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 msgid "%"
@@ -37,16 +37,16 @@ msgid "%d Mails  %d New  %s"
 msgstr "%d E-Mails %d Novos %s"
 
 msgid "%d-%b-%Y"
-msgstr ""
+msgstr "%d-%b-%Y"
 
 msgid "%d.%m.%Y"
-msgstr ""
+msgstr "%d.%m.%Y"
 
 msgid "%d.%m.%Y - %H:%M"
-msgstr ""
+msgstr "%d.%m.%Y - %H:%M"
 
 msgid "%d.%m.%y %H:%M:%S"
-msgstr ""
+msgstr "%d.%m.%y %H:%M:%S"
 
 #, python-format
 msgid "%s - Current value: %s"
@@ -98,7 +98,7 @@ msgid "- Caption Color"
 msgstr "- Cor da Legenda"
 
 msgid "- Clear Key"
-msgstr ""
+msgstr "- Clear Key"
 
 msgid "- Color"
 msgstr "- Cor"
@@ -149,7 +149,7 @@ msgid "- Download Cover"
 msgstr "- Descarregar Capa"
 
 msgid "- Download Type"
-msgstr " - Tipo de Descarga"
+msgstr "- Tipo de Descarga"
 
 msgid "- Extra Color Chill"
 msgstr "- Cor Extra do Frio"
@@ -169,9 +169,8 @@ msgstr "- Arquivo [OK]>"
 msgid "- File or Path [ok]>"
 msgstr "- Arquivo ou Percurso [OK]>"
 
-#, fuzzy
 msgid "- Find Cover File [ok]>"
-msgstr "- Arquivo [OK]>"
+msgstr "- Encontrar arquivo de capa [OK]>"
 
 msgid "- Font"
 msgstr "- Fonte"
@@ -183,7 +182,7 @@ msgid "- Full Screen"
 msgstr "- Ecrã Completo"
 
 msgid "- Google API-Key console.developers.google.com/apis"
-msgstr "- Google API-Key console.developers.google.com/apis "
+msgstr "- Google API-Key console.developers.google.com/apis"
 
 msgid "- Gradient"
 msgstr "- Gradiente"
@@ -270,7 +269,7 @@ msgid "- Module"
 msgstr "- Módulo"
 
 msgid "- Module userdefined"
-msgstr " - Módulo definido pelo usuário"
+msgstr "- Módulo definido pelo usuário"
 
 msgid "- Name"
 msgstr "- Nome"
@@ -372,7 +371,7 @@ msgid "- Sensors"
 msgstr "- Sensores"
 
 msgid "- Shaded"
-msgstr " - Sombreado"
+msgstr "- Sombreado"
 
 msgid "- Shadow Edges"
 msgstr "- Margens de Sombra"
@@ -420,7 +419,7 @@ msgid "- Transparency"
 msgstr "- Transparência"
 
 msgid "- Trimmed"
-msgstr ""
+msgstr "Aparado"
 
 msgid "- Tunerinfo"
 msgstr "- Informação do Tuner"
@@ -440,9 +439,8 @@ msgstr "- Tipo de Tempo"
 msgid "- Zoom"
 msgstr "- Zoom"
 
-#, fuzzy
 msgid "- external IP URL"
-msgstr "- informação extra"
+msgstr "- URL de IP externo"
 
 msgid "- extra Info"
 msgstr "- informação extra"
@@ -499,7 +497,7 @@ msgid "10%"
 msgstr "10%"
 
 msgid "100%"
-msgstr "100% "
+msgstr "100%"
 
 msgid "10min"
 msgstr "10min"
@@ -565,7 +563,7 @@ msgid "2 x Mute"
 msgstr "2 x Tecla MUTE"
 
 msgid "2%"
-msgstr "2% "
+msgstr "2%"
 
 msgid "20"
 msgstr "20"
@@ -616,7 +614,7 @@ msgid "30s"
 msgstr "30s"
 
 msgid "32bit - color"
-msgstr "32bit - color "
+msgstr "32bit - color"
 
 msgid "35%"
 msgstr "35%"
@@ -718,7 +716,7 @@ msgid "80%"
 msgstr "80%"
 
 msgid "800x480"
-msgstr ""
+msgstr "800x480"
 
 msgid "85%"
 msgstr "85%"
@@ -738,13 +736,11 @@ msgstr "95%"
 msgid "96x64"
 msgstr "96x64"
 
-#, fuzzy
 msgid "97%"
-msgstr "70%"
+msgstr "97%"
 
-#, fuzzy
 msgid "98%"
-msgstr "80%"
+msgstr "98%"
 
 msgid "Active Screen"
 msgstr "Ecrã Ativo"
@@ -792,44 +788,40 @@ msgid "Bitrate"
 msgstr "Bitrate"
 
 msgid "BlueSound"
-msgstr ""
+msgstr "BlueSound"
 
 msgid "BlueSound IP"
-msgstr ""
+msgstr "BlueSound IP"
 
-#, fuzzy
 msgid "BlueSound Ping Timeout [ms]"
-msgstr "Tempo limite de Ping Sonos [ms] "
+msgstr "BlueSound tempo limite de Ping [ms]"
 
-#, fuzzy
 msgid "BlueSound Play Check"
-msgstr "Verificar reprodução Sonos"
+msgstr "BlueSound verificar reprodução"
 
-#, fuzzy
 msgid "BlueSound Refresh [s]"
-msgstr "Refrescar Sonos [s]"
+msgstr "BlueSound Refrescar [s]"
 
 msgid "Box-Skin-LCD"
-msgstr "LCD Box-Skin"
+msgstr "Box-Skin-LCD"
 
 msgid "Box-Skin-LCD Color"
-msgstr "Cor LCD Box-Skin"
+msgstr "Box-Skin-LCD Cor"
 
 msgid "Box-Skin-LCD Dimension"
-msgstr "Tamanho LCD Box-Skin"
+msgstr "Box-Skin-LCD Tamanho"
 
 msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "Ativar Modo Apagado LCD Box-Skin"
+msgstr "Box-Skin-LCD Ativar Modo Apagado"
 
 msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "Ativar Modo Mídia LCD Box-Skin"
+msgstr "Box-Skin-LCD Ativar Modo Mídia"
 
 msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "Ativar Modo On LCD Box-Skin"
+msgstr "Box-Skin-LCD Ativar Modo On"
 
-#, fuzzy
 msgid "Box-Skin-LCD Offset"
-msgstr "LCD Box-Skin"
+msgstr "Box-Skin-LCD Desvio"
 
 msgid "C"
 msgstr "C"
@@ -907,7 +899,7 @@ msgid "Console normal"
 msgstr "Consola normal"
 
 msgid "Corby@Pearl 128x128"
-msgstr "Corby@Pearl 128x128 "
+msgstr "Corby@Pearl 128x128"
 
 msgid "Corner"
 msgstr "Esquina"
@@ -916,7 +908,7 @@ msgid "Corner+Timeshift"
 msgstr "Canto+Timeshift"
 
 msgid "Coversearch"
-msgstr ""
+msgstr "Coversearch"
 
 msgid "Crashlog"
 msgstr "Registo de Bloqueio"
@@ -1015,7 +1007,7 @@ msgid "Event Icon Bar"
 msgstr "Barra de Icon do Evento"
 
 msgid "Exec"
-msgstr "Exec."
+msgstr "Exec"
 
 msgid "Extended"
 msgstr "Extendido"
@@ -1027,7 +1019,7 @@ msgid "Extended Description"
 msgstr "Descrição Extendida"
 
 msgid "External IP Address"
-msgstr ""
+msgstr "Endereço IP Externo"
 
 msgid "Fastmode (2s)"
 msgstr "Modo Rápido (2s)"
@@ -1065,9 +1057,8 @@ msgstr "Fonte Global [OK]>"
 msgid "Frame"
 msgstr "Quadro"
 
-#, fuzzy
 msgid "Frame x2"
-msgstr "Quadro"
+msgstr "Quadro x2"
 
 msgid "Fri"
 msgstr "Sex"
@@ -1128,7 +1119,7 @@ msgid "Global"
 msgstr "Global"
 
 msgid "Google API"
-msgstr "Google API "
+msgstr "Google API"
 
 msgid "Gradient"
 msgstr "Gradiente"
@@ -1158,7 +1149,7 @@ msgid "Informations"
 msgstr "Informações"
 
 msgid "Informations 2"
-msgstr "informações 2"
+msgstr "Informações 2"
 
 msgid "Infos"
 msgstr "Informações"
@@ -1178,9 +1169,8 @@ msgstr "JPG"
 msgid "Javascript"
 msgstr "Javascript"
 
-#, fuzzy
 msgid "Javascript no Refresh"
-msgstr "Javascript"
+msgstr "Javascript sem atualização"
 
 msgid "Key"
 msgstr "Chave"
@@ -1213,7 +1203,7 @@ msgid "LCD 1+3"
 msgstr "LCD 1+3"
 
 msgid "LCD 1-3"
-msgstr "LCD 1-3 "
+msgstr "LCD 1-3"
 
 msgid "LCD 2"
 msgstr "LCD 2"
@@ -1246,24 +1236,22 @@ msgid "LCD Display"
 msgstr "Ecrã LCD"
 
 msgid "LCD Off when shutdown"
-msgstr ""
+msgstr "LCD Desligado ao desligar"
 
-#, fuzzy
 msgid "LCD4Linux"
-msgstr "LCD4linux ativado"
+msgstr "LCD4linux"
 
-#, fuzzy
 msgid "LCD4linux"
-msgstr "LCD4linux ativado"
+msgstr "LCD4linux"
 
 msgid "LCD4linux Display-Mode Idle"
-msgstr "LCD4linux Display-Modo Idle "
+msgstr "LCD4linux Display-Modo Idle"
 
 msgid "LCD4linux Display-Mode MediaPlayer"
-msgstr "Visor LCD4linux-Modo MediaPlayer "
+msgstr "Visor LCD4linux-Modo MediaPlayer"
 
 msgid "LCD4linux Display-Mode On"
-msgstr "LCD4linux Display-Mode On "
+msgstr "LCD4linux Display-Mode On"
 
 msgid "LCD4linux Screen Switch"
 msgstr "Mudar o Ecrã LCD4linux"
@@ -1280,9 +1268,8 @@ msgstr "Quarto Minguante"
 msgid "Line"
 msgstr "Linha"
 
-#, fuzzy
 msgid "List of Storage Devices"
-msgstr "Dispositivos de Armazenamento"
+msgstr "Lista de Dispositivos de Armazenamento"
 
 msgid "Load Active Config-File"
 msgstr "Carregar Arquivo de Configuração Ativo"
@@ -1361,10 +1348,10 @@ msgid "MJPEG Stream LCD 3 enable"
 msgstr "Activar Stream MJPEG LCD 3"
 
 msgid "MSN"
-msgstr "MSN "
+msgstr "MSN"
 
 msgid "MUTE or defined Keys"
-msgstr ""
+msgstr "MUTE ou teclas definidas"
 
 msgid "Mail"
 msgstr "E-Mail"
@@ -1547,32 +1534,28 @@ msgid "Moonphase"
 msgstr "Fases da Lua"
 
 msgid "MusicCast"
-msgstr ""
+msgstr "MusicCast"
 
 msgid "MusicCast Cover"
-msgstr ""
+msgstr "MusicCast Cobrir"
 
 msgid "MusicCast IP"
-msgstr ""
+msgstr "MusicCast IP"
 
-#, fuzzy
 msgid "MusicCast Ping Timeout [ms]"
-msgstr "Tempo limite de Ping Sonos [ms] "
+msgstr "MusicCast Tempo limite de Ping [ms]"
 
-#, fuzzy
 msgid "MusicCast Play Check"
-msgstr "Verificar reprodução Sonos"
+msgstr "MusicCast Verificar reprodução"
 
-#, fuzzy
 msgid "MusicCast Refresh [s]"
-msgstr "Refrescar Sonos [s]"
+msgstr "MusicCast Refrescar [s]"
 
 msgid "MusicCast Server IP [optional]"
-msgstr ""
+msgstr "MusicCast IP [opcional]"
 
-#, fuzzy
 msgid "Mute"
-msgstr "2 x Tecla MUTE"
+msgstr "2 x Muda"
 
 msgid "N"
 msgstr "N"
@@ -1665,7 +1648,7 @@ msgid "Only New"
 msgstr "Só os Novos"
 
 msgid "OpenWeatherMap"
-msgstr "OpenWeatherMap "
+msgstr "OpenWeatherMap"
 
 msgid "Outdoor"
 msgstr "Fora de Casa"
@@ -1673,9 +1656,8 @@ msgstr "Fora de Casa"
 msgid "PNG"
 msgstr "PNG"
 
-#, fuzzy
 msgid "Parent Directory"
-msgstr "Diretório Recursivo de Imagens"
+msgstr "Diretório Parental"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (ou LCD compatível) 240x320"
@@ -1845,9 +1827,8 @@ msgstr "SSO"
 msgid "SW"
 msgstr "SO"
 
-#, fuzzy
 msgid "Samsung SPF-1000P 1024x600"
-msgstr "Samsung SPF-105P 1024x600"
+msgstr "Samsung SPF-1000P 1024x600"
 
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
@@ -1862,14 +1843,13 @@ msgid "Samsung SPF-700T 800x600"
 msgstr "Samsung SPF-700T 800x600"
 
 msgid "Samsung SPF-72H 800x480"
-msgstr "Samsung SPF-72H 800x480 "
+msgstr "Samsung SPF-72H 800x480"
 
 msgid "Samsung SPF-75H/76H 800x480"
-msgstr "Samsung SPF-75H/76H 800x480 "
+msgstr "Samsung SPF-75H/76H 800x480"
 
-#, fuzzy
 msgid "Samsung SPF-800P 800x480"
-msgstr "Samsung SPF-87H 800x480"
+msgstr "Samsung SPF-800P 800x480"
 
 msgid "Samsung SPF-83H 800x600"
 msgstr "Samsung SPF-83H 800x600"
@@ -1939,7 +1919,7 @@ msgid "Screen 1+4"
 msgstr "Ecrãs 1+4"
 
 msgid "Screen 1-2"
-msgstr "Ecrãs 1-2 "
+msgstr "Ecrãs 1-2"
 
 msgid "Screen 1-3"
 msgstr "Ecrãs 1-3"
@@ -2104,7 +2084,7 @@ msgid "Sonos IP"
 msgstr "IP Sonos"
 
 msgid "Sonos Ping Timeout [ms]"
-msgstr "Tempo limite de Ping Sonos [ms] "
+msgstr "Tempo limite de Ping Sonos [ms]"
 
 msgid "Sonos Play Check"
 msgstr "Verificar reprodução Sonos"
@@ -2118,17 +2098,14 @@ msgstr "Repouso"
 msgid "Storage-Devices"
 msgstr "Dispositivos de Armazenamento"
 
-#, fuzzy
 msgid "Storage-Devices: Color Back"
-msgstr "Forçar Leitura de Dispositivos de Armazenamento"
+msgstr "Dispositivos de armazenamento: Cor Fundo"
 
-#, fuzzy
 msgid "Storage-Devices: Color Bar"
-msgstr "Forçar Leitura de Dispositivos de Armazenamento"
+msgstr "Dispositivos de armazenamento: Cor Barra"
 
-#, fuzzy
 msgid "Storage-Devices: Color Full"
-msgstr "Forçar Leitura de Dispositivos de Armazenamento"
+msgstr "Dispositivos de armazenamento: Cor Cheia"
 
 msgid "Storage-Devices: Force Read"
 msgstr "Forçar Leitura de Dispositivos de Armazenamento"
@@ -2148,9 +2125,8 @@ msgstr "Por contador de planos (se for possível)"
 msgid "TV"
 msgstr "TV"
 
-#, fuzzy
 msgid "TV (full)"
-msgstr "normal (completo)"
+msgstr "TV (completo)"
 
 msgid "TV+OSD"
 msgstr "TV+OSD"
@@ -2260,16 +2236,14 @@ msgstr "Conversor WWW-Internet"
 msgid "Waning Crescent"
 msgstr "Quarto Minguante"
 
-#, fuzzy
 msgid "Waning Moon"
-msgstr "Quarto Minguante"
+msgstr "Lua minguante"
 
 msgid "Waxing Crescent"
 msgstr "Quarto Crescente"
 
-#, fuzzy
 msgid "Waxing Moon"
-msgstr "Quarto Crescente"
+msgstr "Lua crescente"
 
 msgid "Weather"
 msgstr "O Tempo"
@@ -2280,12 +2254,11 @@ msgstr "O Tempo 2"
 msgid "Weather API"
 msgstr "O Tempo API"
 
-#, fuzzy
 msgid "Weather API-ID Key WeatherUnlocked"
-msgstr "Chave do Tempo API OpenWeatherMap "
+msgstr "Weather API-ID Key WeatherUnlocked"
 
 msgid "Weather API-Key OpenWeatherMap"
-msgstr "Chave do Tempo API OpenWeatherMap "
+msgstr "Chave do Tempo API OpenWeatherMap"
 
 msgid "Weather City"
 msgstr "Cidade para o Tempo"
@@ -2314,15 +2287,17 @@ msgstr "Transparências do Tempo"
 msgid "Weather Wind speed unit"
 msgstr "Unidade de Velocidade do Viento no Tempo"
 
+msgid "Weather Wind Info Lines"
+msgstr "Linhas de informação do vento do tempo"
+
 msgid "Weather-Icon Zoom"
 msgstr "Zoom de Icons do Tempo"
 
 msgid "Weather-Icon-Path [ok]>"
 msgstr "Percurso de Icons do Tempo [OK]>"
 
-#, fuzzy
 msgid "WeatherUnlocked"
-msgstr "Linhas do Tempo"
+msgstr "WeatherUnlocked"
 
 msgid "WebIF"
 msgstr "WebIF"
@@ -2367,13 +2342,13 @@ msgid "alphabetic"
 msgstr "alfabético"
 
 msgid "alternative Copy-Mode/DM800hd (24bit)"
-msgstr "Modo Cópia alternativo/DM800hd (24bit)"
+msgstr "modo Cópia alternativo/DM800hd (24bit)"
 
 msgid "always"
 msgstr "sempre"
 
 msgid "any Key"
-msgstr ""
+msgstr "qualquer Chave"
 
 msgid "aquamarine"
 msgstr "agua-marinha"
@@ -2403,15 +2378,13 @@ msgid "cadetblue"
 msgstr "azul cadete"
 
 msgid "center"
-msgstr "Centro"
+msgstr "centro"
 
 msgid "cloudconvert.org"
-msgstr ""
-" \t\n"
-"cloudconvert.org "
+msgstr "cloudconvert.org"
 
 msgid "convertapi.com"
-msgstr "convertapi.com "
+msgstr "convertapi.com"
 
 msgid "copy to Idle"
 msgstr "copiar a Espera"
@@ -2469,7 +2442,7 @@ msgid "disabled"
 msgstr "desligado"
 
 msgid "full Screen"
-msgstr "Ecrã completo"
+msgstr "ecrã completo"
 
 msgid "gold"
 msgstr "dourado"
@@ -2538,7 +2511,7 @@ msgid "no Bar"
 msgstr "sem Barra"
 
 msgid "no Calendar"
-msgstr "Sem Calendário"
+msgstr "sem Calendário"
 
 msgid "no Calls"
 msgstr "sem Chamadas"
@@ -2553,7 +2526,7 @@ msgid "no Icon"
 msgstr "sem Icons"
 
 msgid "no Icon, with Targetnumber"
-msgstr "Sem Icon, com Número de Destino"
+msgstr "sem Icon, com Número de Destino"
 
 msgid "no LCD1 Picture-File"
 msgstr "não existe Arquivo de Imagem de LCD1"
@@ -2565,7 +2538,7 @@ msgid "no LCD3 Picture-File"
 msgstr "não existe Arquivo de Imagem de LCD"
 
 msgid "no Netatmo-Plugin installed"
-msgstr "Plugin Netatmo não instalado"
+msgstr "plugin Netatmo não instalado"
 
 msgid "no Timer"
 msgstr "sem Timer"
@@ -2595,19 +2568,19 @@ msgid "one line"
 msgstr "uma linha"
 
 msgid "only Picture 1024x600"
-msgstr "Só Imagens 1024x600"
+msgstr "só Imagens 1024x600"
 
 msgid "only Picture 320x240"
-msgstr "Só Imagens 320x240"
+msgstr "só Imagens 320x240"
 
 msgid "only Picture 800x480"
-msgstr "Só Imagens 800x480"
+msgstr "só Imagens 800x480"
 
 msgid "only Picture 800x600"
-msgstr "Só Imagens 800x600"
+msgstr "só Imagens 800x600"
 
 msgid "only Picture Custom Size"
-msgstr "Só Imagens de tamanho configurável"
+msgstr "só Imagens de tamanho configurável"
 
 msgid "only Picture Custom Size 2"
 msgstr "só Imagem Personalizada Tamanho 2"
@@ -2655,13 +2628,13 @@ msgid "sandybrown"
 msgstr "castanho areia"
 
 msgid "set Settings"
-msgstr "Ajustar"
+msgstr "ajustar"
 
 msgid "show run"
-msgstr "Mostrar execução"
+msgstr "mostrar execução"
 
 msgid "show run+sleep"
-msgstr "Mostrar execução+repouso"
+msgstr "mostrar execução+repouso"
 
 msgid "show total Timer"
 msgstr "mostrar Temporizador completo"
@@ -2703,31 +2676,31 @@ msgid "white"
 msgstr "branco"
 
 msgid "with Current 00:00"
-msgstr "Com o Atual 00:00"
+msgstr "com o Atual 00:00"
 
 msgid "with Current 00:00 (Size 1.5)"
-msgstr "Com o Atual 00:00 (Tamanho 1.5)"
+msgstr "com o Atual 00:00 (Tamanho 1.5)"
 
 msgid "with Current 00:00 (Size 2)"
-msgstr "Com o Atual 00:00 (Tamanho 2)"
+msgstr "com o Atual 00:00 (Tamanho 2)"
 
 msgid "with Current 00:00 (above)"
-msgstr "Com o Atual 00:00 (acima)"
+msgstr "com o Atual 00:00 (acima)"
 
 msgid "with Current 00:00 (above/Size 1.5)"
-msgstr "Com o Atual 00:00 (acima/Tamanho 1.5)"
+msgstr "com o Atual 00:00 (acima/Tamanho 1.5)"
 
 msgid "with Current 00:00 (above/Size 2)"
-msgstr "Com o Atual 00:00 (acima/Tamanho 2)"
+msgstr "com o Atual 00:00 (acima/Tamanho 2)"
 
 msgid "with Current 00:00 (below)"
-msgstr "Com o Atual 00:00 (abaixo)"
+msgstr "com o Atual 00:00 (abaixo)"
 
 msgid "with Current 00:00 (below/Size 1.5)"
-msgstr "Com o Atual 00:00 (abaixo/Tamanho 1.5)"
+msgstr "com o Atual 00:00 (abaixo/Tamanho 1.5)"
 
 msgid "with Current 00:00 (below/Size 2)"
-msgstr "Com o Atual 00:00 (abaixo/Tamanho 2)"
+msgstr "com o Atual 00:00 (abaixo/Tamanho 2)"
 
 msgid "with Icon"
 msgstr "com Icon"
