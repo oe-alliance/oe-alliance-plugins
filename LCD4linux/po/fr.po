@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
-"PO-Revision-Date: 2019-07-23 15:40+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"POT-Creation-Date: 2021-04-16 16:22+0430\n"
+"PO-Revision-Date: 2021-08-05 16:08+0200\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 3.0\n"
 
 msgid "%"
 msgstr "%"
@@ -416,7 +416,7 @@ msgid "- Transparency"
 msgstr "- Transparence"
 
 msgid "- Trimmed"
-msgstr ""
+msgstr "- Coupé"
 
 msgid "- Tunerinfo"
 msgstr "- Info Tuner"
@@ -1019,7 +1019,7 @@ msgid "External IP Address"
 msgstr "Adresse IP externe"
 
 msgid "Fastmode (2s)"
-msgstr "mode rapide (2s)"
+msgstr "Mode rapide (2s)"
 
 msgid "First Quarter"
 msgstr "Premier quart"
@@ -1609,10 +1609,10 @@ msgid "Normal"
 msgstr "Normal"
 
 msgid "Normal (5s)"
-msgstr "normal (5s)"
+msgstr "Normal (5s)"
 
 msgid "Now/Next"
-msgstr "actuellement/suivant"
+msgstr "Actuellement/suivant"
 
 msgid "OSCAM not running"
 msgstr "OSCAM ne fonctionne pas"
@@ -1886,103 +1886,103 @@ msgid "Screen"
 msgstr "Ecran"
 
 msgid "Screen 1"
-msgstr "écran 1"
+msgstr "Écran 1"
 
 msgid "Screen 1 Changing Time"
 msgstr "Durée de changement écran 1"
 
 msgid "Screen 1+2"
-msgstr "écran 1+2"
+msgstr "Écran 1+2"
 
 msgid "Screen 1+2+3"
-msgstr "écran 1+2+3"
+msgstr "Écran 1+2+3"
 
 msgid "Screen 1+2+3+4"
-msgstr "écran 1+2+3+4"
+msgstr "Écran 1+2+3+4"
 
 msgid "Screen 1+2+4"
-msgstr "écran 1+2+4"
+msgstr "Écran 1+2+4"
 
 msgid "Screen 1+3"
-msgstr "écran 1+3"
+msgstr "Écran 1+3"
 
 msgid "Screen 1+3+4"
-msgstr "écran 1+3+4"
+msgstr "Écran 1+3+4"
 
 msgid "Screen 1+3+5+7+9"
-msgstr "écran 1+3+5+7+9"
+msgstr "Écran 1+3+5+7+9"
 
 msgid "Screen 1+4"
-msgstr "écran 1+4"
+msgstr "Écran 1+4"
 
 msgid "Screen 1-2"
-msgstr "écran 1-2"
+msgstr "Écran 1-2"
 
 msgid "Screen 1-3"
-msgstr "écran 1-3"
+msgstr "Écran 1-3"
 
 msgid "Screen 1-4"
-msgstr "écran 1-4"
+msgstr "Écran 1-4"
 
 msgid "Screen 1-5"
-msgstr "écran 1-5"
+msgstr "Écran 1-5"
 
 msgid "Screen 1-6"
-msgstr "écran 1-6"
+msgstr "Écran 1-6"
 
 msgid "Screen 1-7"
-msgstr "écran 1-7"
+msgstr "Écran 1-7"
 
 msgid "Screen 1-8"
-msgstr "écran 1-8"
+msgstr "Écran 1-8"
 
 msgid "Screen 1-9"
-msgstr "écran 1-9"
+msgstr "Écran 1-9"
 
 msgid "Screen 2"
-msgstr "écran 2"
+msgstr "Écran 2"
 
 msgid "Screen 2+3"
-msgstr "écran 2+3"
+msgstr "Écran 2+3"
 
 msgid "Screen 2+3+4"
-msgstr "écran 2+3+4"
+msgstr "Écran 2+3+4"
 
 msgid "Screen 2+4"
-msgstr "écran 2+4"
+msgstr "Écran 2+4"
 
 msgid "Screen 2+4+6+8"
-msgstr "écran 2+4+6+8"
+msgstr "Écran 2+4+6+8"
 
 msgid "Screen 3"
-msgstr "écran 3"
+msgstr "Écran 3"
 
 msgid "Screen 3+4"
-msgstr "écran 3+4"
+msgstr "Écran 3+4"
 
 msgid "Screen 4"
-msgstr "écran 4"
+msgstr "Écran 4"
 
 msgid "Screen 5"
-msgstr "écran 5"
+msgstr "Écran 5"
 
 msgid "Screen 5-8"
 msgstr "Écran 5-8"
 
 msgid "Screen 5-9"
-msgstr "écran 5-9"
+msgstr "Écran 5-9"
 
 msgid "Screen 6"
-msgstr "écran 6"
+msgstr "Écran 6"
 
 msgid "Screen 7"
-msgstr "écran 7"
+msgstr "Écran 7"
 
 msgid "Screen 8"
-msgstr "écran 8"
+msgstr "Écran 8"
 
 msgid "Screen 9"
-msgstr "écran 9"
+msgstr "Écran 9"
 
 msgid "Screen Switch Select - LCD"
 msgstr "Ecran sélection commutation  - LCD"
@@ -2122,9 +2122,8 @@ msgstr "Commuter TamponFram [si possible"
 msgid "TV"
 msgstr "TV"
 
-#, fuzzy
 msgid "TV (full)"
-msgstr "normal (complet)"
+msgstr "TV (complet)"
 
 msgid "TV+OSD"
 msgstr "TV+OSD"
@@ -2232,18 +2231,16 @@ msgid "WWW-Internet Converter"
 msgstr "WWW-Internet convertisseur"
 
 msgid "Waning Crescent"
-msgstr "Lune descendante"
+msgstr "Croissant décroissant"
 
-#, fuzzy
 msgid "Waning Moon"
-msgstr "Lune gibbeuse décroissante"
+msgstr "Lune décroissante"
 
 msgid "Waxing Crescent"
-msgstr "Lune montante"
+msgstr "Croissant de cire"
 
-#, fuzzy
 msgid "Waxing Moon"
-msgstr "Lune gibbeuse croissante"
+msgstr "Lune croissante"
 
 msgid "Weather"
 msgstr "Météo"
@@ -2286,6 +2283,9 @@ msgstr "Météo transparence"
 
 msgid "Weather Wind speed unit"
 msgstr "Météo unité vitesse vent"
+
+msgid "Weather Wind Info Lines"
+msgstr "Météo Vent Lignes d'informations"
 
 msgid "Weather-Icon Zoom"
 msgstr "Zoom icône météo"
@@ -2333,7 +2333,7 @@ msgid "Wind"
 msgstr "Vent"
 
 msgid "all"
-msgstr "Tous"
+msgstr "tous"
 
 msgid "alphabetic"
 msgstr "alphabétique"
@@ -2384,13 +2384,13 @@ msgid "convertapi.com"
 msgstr "convertapi.com"
 
 msgid "copy to Idle"
-msgstr "Copier vers repos"
+msgstr "copier vers repos"
 
 msgid "copy to Media"
-msgstr "Copier vers média"
+msgstr "copier vers média"
 
 msgid "copy to On"
-msgstr "Copier vers en"
+msgstr "copier vers en"
 
 msgid "cornflowerblue"
 msgstr "bleu fleur de maïs"
@@ -2517,7 +2517,7 @@ msgid "no Dates"
 msgstr "pas de Dates"
 
 msgid "no Frame"
-msgstr "Pas de cadre"
+msgstr "pas de cadre"
 
 msgid "no Icon"
 msgstr "pas d'icône"
@@ -2535,7 +2535,7 @@ msgid "no LCD3 Picture-File"
 msgstr "pas de fichier image LCD3"
 
 msgid "no Netatmo-Plugin installed"
-msgstr "Pas de plugiciel Netatmo installé"
+msgstr "pas de plugiciel Netatmo installé"
 
 msgid "no Timer"
 msgstr "pas de programmation"

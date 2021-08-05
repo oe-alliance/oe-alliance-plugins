@@ -2,16 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2021-04-16 16:22+0430\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Vytenis P. vyteniui@gmail.com\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "%"
 msgstr "%"
@@ -19,13 +20,13 @@ msgstr "%"
 msgid "% + BER"
 msgstr "% + BER"
 
-#, fuzzy, python-format
+#, python-format
 msgid "% + Load@1min"
-msgstr "% + apkrova@1min"
+msgstr "% + Load@1min"
 
-#, fuzzy, python-format
+#, python-format
 msgid "% + Load@5min"
-msgstr "% + apkrova@5min"
+msgstr "% + Load@5min"
 
 #, python-format
 msgid "%d Mails  %d New  %s"
@@ -37,9 +38,8 @@ msgstr "%Y-%b-%d"
 msgid "%d.%m.%Y"
 msgstr "%Y.%m.%d"
 
-#, fuzzy
 msgid "%d.%m.%Y - %H:%M"
-msgstr "%Y.%m.%e - %H:%M"
+msgstr "%d.%m.%Y - %H:%M"
 
 msgid "%d.%m.%y %H:%M:%S"
 msgstr "%y.%m.%d %H:%M:%S"
@@ -165,9 +165,8 @@ msgstr "- Kelias į failą [Ok]>"
 msgid "- File or Path [ok]>"
 msgstr "- Kelias iki failo [Ok]>"
 
-#, fuzzy
 msgid "- Find Cover File [ok]>"
-msgstr "- Kelias į failą [Ok]>"
+msgstr "- Raskite viršelio failą"
 
 msgid "- Font"
 msgstr "- Šriftas"
@@ -416,7 +415,7 @@ msgid "- Transparency"
 msgstr "- Skaidrumas"
 
 msgid "- Trimmed"
-msgstr ""
+msgstr "- Apipjaustytas"
 
 msgid "- Tunerinfo"
 msgstr "- Informacija apie imtuvą"
@@ -428,7 +427,7 @@ msgid "- URL"
 msgstr "- Internetinis adresas"
 
 msgid "- Unit min"
-msgstr "- Vienetai - min."
+msgstr "- Vienetai - min"
 
 msgid "- Weather Type"
 msgstr "- Orų tipas"
@@ -436,9 +435,8 @@ msgstr "- Orų tipas"
 msgid "- Zoom"
 msgstr "- Padidinti"
 
-#, fuzzy
 msgid "- external IP URL"
-msgstr "- Papildoma informacija"
+msgstr "- išorinis IP URL"
 
 msgid "- extra Info"
 msgstr "- Papildoma informacija"
@@ -465,7 +463,7 @@ msgid "0"
 msgstr "0"
 
 msgid "0.5"
-msgstr "0.5 "
+msgstr "0.5"
 
 msgid "1"
 msgstr "1"
@@ -474,7 +472,7 @@ msgid "1 - normal"
 msgstr "1 - normalus"
 
 msgid "1 / min"
-msgstr "1 / min."
+msgstr "1 / min"
 
 msgid "1-2"
 msgstr "1-2"
@@ -495,21 +493,19 @@ msgid "10%"
 msgstr "10%"
 
 msgid "100%"
-msgstr "100% "
+msgstr "100%"
 
 msgid "10min"
-msgstr "10min."
+msgstr "10min"
 
 msgid "10s"
-msgstr "10sek."
+msgstr "10sek"
 
 msgid "128x32"
-msgstr ""
-" \t\n"
-"128x32 "
+msgstr "128x32"
 
 msgid "128x64"
-msgstr "128x64 "
+msgstr "128x64"
 
 msgid "132x64"
 msgstr "132x64"
@@ -521,16 +517,16 @@ msgid "15%"
 msgstr "15%"
 
 msgid "15min"
-msgstr "15min."
+msgstr "15min"
 
 msgid "15s"
-msgstr "15sek."
+msgstr "15sek"
 
 msgid "180"
 msgstr "180"
 
 msgid "1min"
-msgstr "1min."
+msgstr "1min"
 
 msgid "2"
 msgstr "2"
@@ -563,7 +559,7 @@ msgid "2 x Mute"
 msgstr "2 x 'Mute' mygtukas"
 
 msgid "2%"
-msgstr "2% "
+msgstr "2%"
 
 msgid "20"
 msgstr "20"
@@ -572,10 +568,10 @@ msgid "20%"
 msgstr "20%"
 
 msgid "20min"
-msgstr "20min."
+msgstr "20min"
 
 msgid "20s"
-msgstr "20sek."
+msgstr "20sek"
 
 msgid "220x176"
 msgstr "220x176"
@@ -590,10 +586,10 @@ msgid "270"
 msgstr "270"
 
 msgid "2h"
-msgstr "2val."
+msgstr "2val"
 
 msgid "2min"
-msgstr "2min."
+msgstr "2min"
 
 msgid "3"
 msgstr "3"
@@ -608,10 +604,10 @@ msgid "30%"
 msgstr "30%"
 
 msgid "30min"
-msgstr "30min."
+msgstr "30min"
 
 msgid "30s"
-msgstr "30sek."
+msgstr "30sek"
 
 msgid "32bit - color"
 msgstr "32bitų spalvos"
@@ -620,10 +616,10 @@ msgid "35%"
 msgstr "35%"
 
 msgid "3h"
-msgstr "3val."
+msgstr "3val"
 
 msgid "3min"
-msgstr "3min."
+msgstr "3min"
 
 msgid "4"
 msgstr "4"
@@ -644,7 +640,7 @@ msgid "400x240"
 msgstr "400x240"
 
 msgid "40s"
-msgstr "40sek."
+msgstr "40sek"
 
 msgid "45%"
 msgstr "45%"
@@ -653,7 +649,7 @@ msgid "480x320"
 msgstr "480x320"
 
 msgid "4min"
-msgstr "4min."
+msgstr "4min"
 
 msgid "5"
 msgstr "5"
@@ -674,19 +670,19 @@ msgid "50%"
 msgstr "50%"
 
 msgid "50s"
-msgstr "50sek."
+msgstr "50sek"
 
 msgid "55%"
 msgstr "55%"
 
 msgid "5h"
-msgstr "5val."
+msgstr "5val"
 
 msgid "5min"
-msgstr "5min."
+msgstr "5min"
 
 msgid "5s"
-msgstr "5sek."
+msgstr "5sek"
 
 msgid "60"
 msgstr "60"
@@ -695,7 +691,7 @@ msgid "60%"
 msgstr "60%"
 
 msgid "60min"
-msgstr "60min."
+msgstr "60min"
 
 msgid "65%"
 msgstr "65%"
@@ -788,22 +784,19 @@ msgid "Bitrate"
 msgstr "Bitų dažnis"
 
 msgid "BlueSound"
-msgstr ""
+msgstr "BlueSound"
 
 msgid "BlueSound IP"
-msgstr ""
+msgstr "BlueSound IP"
 
-#, fuzzy
 msgid "BlueSound Ping Timeout [ms]"
-msgstr "Sonos ping intervalas [ms]"
+msgstr "BlueSound ping intervalas [ms]"
 
-#, fuzzy
 msgid "BlueSound Play Check"
-msgstr "Sonos veiklos tikrinimas"
+msgstr "BlueSound veiklos tikrinimas"
 
-#, fuzzy
 msgid "BlueSound Refresh [s]"
-msgstr "Sonos atnaujinimo intervalas [sek.]"
+msgstr "BlueSound atnaujinimo intervalas [sek.]"
 
 msgid "Box-Skin-LCD"
 msgstr "Aparato LCD ekranas"
@@ -1010,7 +1003,7 @@ msgid "Event Icon Bar"
 msgstr "Įvykio piktogramų juosta"
 
 msgid "Exec"
-msgstr "Vykd."
+msgstr "Vykd"
 
 msgid "Extended"
 msgstr "Išplėstinis"
@@ -1022,7 +1015,7 @@ msgid "Extended Description"
 msgstr "Išsamus aprašymas"
 
 msgid "External IP Address"
-msgstr ""
+msgstr "Išorinis IP adresas"
 
 msgid "Fastmode (2s)"
 msgstr "Greitasis režimas (2s)"
@@ -1058,10 +1051,10 @@ msgid "Font global [ok]>"
 msgstr "Visuotinis šriftas [Ok]>"
 
 msgid "Frame"
-msgstr "rėmelis"
+msgstr "Rėmelis"
 
 msgid "Frame x2"
-msgstr "rėmelis x2"
+msgstr "Rėmelis x2"
 
 msgid "Fri"
 msgstr "Pen"
@@ -1109,7 +1102,7 @@ msgid "Full Moon"
 msgstr "Pilnatis"
 
 msgid "GUI Restart is required"
-msgstr "Reikia paleisti grafinę aplinką iš naujo."
+msgstr "Reikia paleisti grafinę aplinką iš naujo"
 
 msgid ""
 "GUI needs a restart to apply the changes.\n"
@@ -1241,12 +1234,11 @@ msgstr "LCD ekranas"
 msgid "LCD Off when shutdown"
 msgstr "Išjungti LCD, išjungus aparatą"
 
-#, fuzzy
 msgid "LCD4Linux"
-msgstr "atvaizduos pasirinktą informaciją imtuvo LCD ekrane."
+msgstr "LCD4Linux"
 
 msgid "LCD4linux"
-msgstr "atvaizduos pasirinktą informaciją imtuvo LCD ekrane."
+msgstr "LCD4linux"
 
 msgid "LCD4linux Display-Mode Idle"
 msgstr "LCD4linux Ekranas-Neveiklos režimas"
@@ -1270,11 +1262,10 @@ msgid "Last Quarter"
 msgstr "Paskutinis ketvirtis"
 
 msgid "Line"
-msgstr "eilutė"
+msgstr "Eilutė"
 
-#, fuzzy
 msgid "List of Storage Devices"
-msgstr "Laikmenos"
+msgstr "Saugojimo įrenginių sąrašas"
 
 msgid "Load Active Config-File"
 msgstr "Įkelti aktyvų konfigūracijos failą"
@@ -1287,10 +1278,10 @@ msgid "Load File : %s"
 msgstr "Įkelti failą : %s"
 
 msgid "Load@1min"
-msgstr "apkrova@1min"
+msgstr "Apkrova@1min"
 
 msgid "Load@5min"
-msgstr "apkrova@5min"
+msgstr "Apkrova@5min"
 
 msgid "Logfile extensive"
 msgstr "Išsamus žurnalas"
@@ -1353,7 +1344,7 @@ msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG srautas į LCD 3 įjungtas"
 
 msgid "MSN"
-msgstr "MSN "
+msgstr "MSN"
 
 msgid "MUTE or defined Keys"
 msgstr "'MUTE', arba priskirti mygtukai"
@@ -1559,9 +1550,8 @@ msgstr "MusicCast atnaujinimas [sek.]"
 msgid "MusicCast Server IP [optional]"
 msgstr "MusicCast serverio IP [pasirinktinai]"
 
-#, fuzzy
 msgid "Mute"
-msgstr "2 x 'Mute' mygtukas"
+msgstr "Nutildyti"
 
 msgid "N"
 msgstr "Š"
@@ -1621,7 +1611,7 @@ msgid "Normal (5s)"
 msgstr "Normalus (5s)"
 
 msgid "Now/Next"
-msgstr "dabar/sekantis"
+msgstr "Dabar/sekantis"
 
 msgid "OSCAM not running"
 msgstr "OSCAM neveikia"
@@ -1654,7 +1644,7 @@ msgid "Only New"
 msgstr "Tik naujus"
 
 msgid "OpenWeatherMap"
-msgstr "OpenWeatherMap "
+msgstr "OpenWeatherMap"
 
 msgid "Outdoor"
 msgstr "Lauke"
@@ -1662,9 +1652,8 @@ msgstr "Lauke"
 msgid "PNG"
 msgstr "PNG"
 
-#, fuzzy
 msgid "Parent Directory"
-msgstr "Vaizdų rekursinis katalogas"
+msgstr "Tėvų katalogas"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "Pearl (arba suderinamas LCD) 240x320"
@@ -1721,7 +1710,7 @@ msgid "Picture not available"
 msgstr "Paveikslėlis neprieinamas"
 
 msgid "Plug Tuner"
-msgstr "prijungtas imtuvas"
+msgstr "Prijungtas imtuvas"
 
 msgid "Pop3"
 msgstr "Pop3"
@@ -1834,9 +1823,8 @@ msgstr "PPV"
 msgid "SW"
 msgstr "PV"
 
-#, fuzzy
 msgid "Samsung SPF-1000P 1024x600"
-msgstr "Samsung SPF-105P 1024x600"
+msgstr "Samsung SPF-1000P 1024x600"
 
 msgid "Samsung SPF-105P 1024x600"
 msgstr "Samsung SPF-105P 1024x600"
@@ -1856,9 +1844,8 @@ msgstr "Samsung SPF-72H 800x480"
 msgid "Samsung SPF-75H/76H 800x480"
 msgstr "Samsung SPF-75H/76H 800x480"
 
-#, fuzzy
 msgid "Samsung SPF-800P 800x480"
-msgstr "Samsung SPF-87H 800x480"
+msgstr "Samsung SPF-800P 800x480"
 
 msgid "Samsung SPF-83H 800x600"
 msgstr "Samsung SPF-83H 800x600"
@@ -1898,103 +1885,103 @@ msgid "Screen"
 msgstr "Ekranas"
 
 msgid "Screen 1"
-msgstr "ekranas 1"
+msgstr "Ekranas 1"
 
 msgid "Screen 1 Changing Time"
 msgstr "1 ekrano rodymo laikas"
 
 msgid "Screen 1+2"
-msgstr "ekranai 1+2"
+msgstr "Ekranai 1+2"
 
 msgid "Screen 1+2+3"
-msgstr "ekranai 1+2+3"
+msgstr "Ekranai 1+2+3"
 
 msgid "Screen 1+2+3+4"
-msgstr "ekranai 1+2+3+4"
+msgstr "Ekranai 1+2+3+4"
 
 msgid "Screen 1+2+4"
-msgstr "ekranai 1+2+4"
+msgstr "Ekranai 1+2+4"
 
 msgid "Screen 1+3"
-msgstr "ekranai 1+3"
+msgstr "Ekranai 1+3"
 
 msgid "Screen 1+3+4"
-msgstr "ekranai 1+3+4"
+msgstr "Ekranai 1+3+4"
 
 msgid "Screen 1+3+5+7+9"
-msgstr "ekranai 1+3+5+7+9"
+msgstr "Ekranai 1+3+5+7+9"
 
 msgid "Screen 1+4"
-msgstr "ekranai 1+4"
+msgstr "Ekranai 1+4"
 
 msgid "Screen 1-2"
-msgstr "ekranai 1-2"
+msgstr "Ekranai 1-2"
 
 msgid "Screen 1-3"
-msgstr "ekranai 1-3"
+msgstr "Ekranai 1-3"
 
 msgid "Screen 1-4"
-msgstr "ekranai 1-4"
+msgstr "Ekranai 1-4"
 
 msgid "Screen 1-5"
-msgstr "ekranai 1-5"
+msgstr "Ekranai 1-5"
 
 msgid "Screen 1-6"
-msgstr "ekranai 1-6"
+msgstr "Ekranai 1-6"
 
 msgid "Screen 1-7"
-msgstr "ekranai 1-7"
+msgstr "Ekranai 1-7"
 
 msgid "Screen 1-8"
-msgstr "ekranai 1-8"
+msgstr "Ekranai 1-8"
 
 msgid "Screen 1-9"
-msgstr "ekranai 1-9"
+msgstr "Ekranai 1-9"
 
 msgid "Screen 2"
-msgstr "ekranas 2"
+msgstr "Ekranas 2"
 
 msgid "Screen 2+3"
-msgstr "ekranai 2+3"
+msgstr "Ekranai 2+3"
 
 msgid "Screen 2+3+4"
-msgstr "ekranai 2+3+4"
+msgstr "Ekranai 2+3+4"
 
 msgid "Screen 2+4"
-msgstr "ekranai 2+4"
+msgstr "Ekranai 2+4"
 
 msgid "Screen 2+4+6+8"
-msgstr "ekranai 2+4+6+8"
+msgstr "Ekranai 2+4+6+8"
 
 msgid "Screen 3"
-msgstr "ekranas 3"
+msgstr "Ekranas 3"
 
 msgid "Screen 3+4"
-msgstr "ekranai 3+4"
+msgstr "Ekranai 3+4"
 
 msgid "Screen 4"
-msgstr "ekranas 4"
+msgstr "Ekranas 4"
 
 msgid "Screen 5"
-msgstr "ekranas 5"
+msgstr "Ekranas 5"
 
 msgid "Screen 5-8"
 msgstr "Ekranai 5-8"
 
 msgid "Screen 5-9"
-msgstr "ekranai 5-9"
+msgstr "Ekranai 5-9"
 
 msgid "Screen 6"
-msgstr "ekranas 6"
+msgstr "Ekranas 6"
 
 msgid "Screen 7"
-msgstr "ekranas 7"
+msgstr "Ekranas 7"
 
 msgid "Screen 8"
-msgstr "ekranas 8"
+msgstr "Ekranas 8"
 
 msgid "Screen 9"
-msgstr "ekranas 9"
+msgstr "Ekranas 9"
 
 msgid "Screen Switch Select - LCD"
 msgstr "Ekranų perjungimas - LCD"
@@ -2134,9 +2121,8 @@ msgstr "Kadrų įkėlimas į podėlį [jei įmanoma]"
 msgid "TV"
 msgstr "TV"
 
-#, fuzzy
 msgid "TV (full)"
-msgstr "įprastas (visas)"
+msgstr "TV (visas)"
 
 msgid "TV+OSD"
 msgstr "TV+Ekrano meniu"
@@ -2244,18 +2230,16 @@ msgid "WWW-Internet Converter"
 msgstr "WWW-internetinis keitiklis"
 
 msgid "Waning Crescent"
-msgstr "Delčia"
+msgstr "Mažėjantis pusmėnulis"
 
-#, fuzzy
 msgid "Waning Moon"
-msgstr "Delčia"
+msgstr "Mažėjantis mėnulis"
 
 msgid "Waxing Crescent"
-msgstr "Jaunatis"
+msgstr "Vaškuojantis pusmėnulis"
 
-#, fuzzy
 msgid "Waxing Moon"
-msgstr "Priešpilnis"
+msgstr "Augantis mėnulis"
 
 msgid "Weather"
 msgstr "Orai"
@@ -2266,9 +2250,8 @@ msgstr "Orai 2"
 msgid "Weather API"
 msgstr "Orų API"
 
-#, fuzzy
 msgid "Weather API-ID Key WeatherUnlocked"
-msgstr "Orų API raktas OpenWeatherMap puslapyje"
+msgstr "Weather API-ID Key WeatherUnlocked"
 
 msgid "Weather API-Key OpenWeatherMap"
 msgstr "Orų API raktas OpenWeatherMap puslapyje"
@@ -2300,15 +2283,17 @@ msgstr "Orų lango skaidrumas"
 msgid "Weather Wind speed unit"
 msgstr "Vėjo greičio matavimo vienetai"
 
+msgid "Weather Wind Info Lines"
+msgstr "Oras Vėjas Informacijos linijos"
+
 msgid "Weather-Icon Zoom"
 msgstr "Orų piktogramos dydis"
 
 msgid "Weather-Icon-Path [ok]>"
 msgstr "Kelias į orų piktogramas [Ok]>"
 
-#, fuzzy
 msgid "WeatherUnlocked"
-msgstr "Orų linijos"
+msgstr "WeatherUnlocked"
 
 msgid "WebIF"
 msgstr "WebIF"
@@ -2483,7 +2468,7 @@ msgid "indigo"
 msgstr "indigo"
 
 msgid "km/h"
-msgstr "km/val."
+msgstr "km/val"
 
 msgid "lawngreen"
 msgstr "žolės žalia"
@@ -2522,13 +2507,13 @@ msgid "no Bar"
 msgstr "be juostos"
 
 msgid "no Calendar"
-msgstr "Be kalendoriaus"
+msgstr "be kalendoriaus"
 
 msgid "no Calls"
 msgstr "be skambučių"
 
 msgid "no Dates"
-msgstr "Be datų"
+msgstr "be datų"
 
 msgid "no Frame"
 msgstr "be rėmelio"
@@ -2549,7 +2534,7 @@ msgid "no LCD3 Picture-File"
 msgstr "nėra LCD 3 vaizdo failo"
 
 msgid "no Netatmo-Plugin installed"
-msgstr "Netatmo įskiepis neįdiegtas."
+msgstr "neįdiegtas Netatmo-Plugin"
 
 msgid "no Timer"
 msgstr "be laikmačio"
@@ -2627,7 +2612,7 @@ msgid "rosybrown"
 msgstr "rausvai ruda"
 
 msgid "rpm"
-msgstr "aps./min."
+msgstr "aps/min"
 
 msgid "rpm/2"
 msgstr "aps./min. 2"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 16:21+0430\n"
-"PO-Revision-Date: 2021-07-29 23:20+0200\n"
+"PO-Revision-Date: 2021-08-03 18:33+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -11,6 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
+"X-Poedit-Bookmarks: -1,-1,-1,-1,-1,-1,-1,-1,-1,747\n"
 
 msgid "%"
 msgstr "%"
@@ -74,10 +75,10 @@ msgid "- Backlight Weekend On"
 msgstr "- Podsvietenie cez víkend zap"
 
 msgid "- Bar Range Max"
-msgstr "- Bar rozsah Max"
+msgstr "- rozsah stĺpca kvality signálu na Max"
 
 msgid "- Bar Range Min"
-msgstr "- Bar rozsah Min"
+msgstr "- rozsah stĺpca kvality signálu na Min"
 
 msgid "- Base"
 msgstr "- Základ"
@@ -935,16 +936,16 @@ msgid "Dates"
 msgstr "Dátumy"
 
 msgid "Dates 1 Line"
-msgstr "Dátumy 1 riadok"
+msgstr "Dátum 1 riadok"
 
 msgid "Dates 3 Lines"
-msgstr "Dátumy 3 riadky"
+msgstr "Dátum 3 riadky"
 
 msgid "Dates 5 Lines"
-msgstr "Dátumy 5 riadkov"
+msgstr "Dátum 5 riadkov"
 
 msgid "Dates 9 Lines"
-msgstr "Dátumy 9 riadkov"
+msgstr "Dátum 9 riadkov"
 
 msgid "Dates List"
 msgstr "Zoznam dátumov"
@@ -1131,7 +1132,7 @@ msgid "IP seurity not supported by Box"
 msgstr "IP zabezpečenie nie je podporované v box-e"
 
 msgid "Idle"
-msgstr "Idle"
+msgstr "Nečinný"
 
 msgid "Indoor"
 msgstr "Vnútorné"
@@ -1173,7 +1174,7 @@ msgid "Key for Screen Change"
 msgstr "Kľúč na zmenu obrazovky"
 
 msgid "Key for Screen On/Off"
-msgstr "Kláves pre zapnutie / vypnutie obrazovky"
+msgstr "Klávesa pre zapnutie / vypnutie obrazovky"
 
 msgid "Knob"
 msgstr "Tlačidlo"
@@ -1345,7 +1346,7 @@ msgid "MSN"
 msgstr "MSN"
 
 msgid "MUTE or defined Keys"
-msgstr "ZTLUMIŤ alebo definované kľúče"
+msgstr "ZTLM alebo definuj kľúče"
 
 msgid "Mail"
 msgstr "Pošta"
@@ -1693,13 +1694,13 @@ msgid "Picture Directory Recursive"
 msgstr "Obrázok rekurzívny priečinok"
 
 msgid "Picture Quality for Resizing"
-msgstr "Obrázok kvalita pri zmenu veľkosti"
+msgstr "Kvalita obrázka na zmenu veľkosti"
 
 msgid "Picture Quick Update Time [s]"
 msgstr "Obrázok čas rychlej aktualizácie [s]"
 
 msgid "Picture Sort"
-msgstr "Zotriedenie obrázkov"
+msgstr "Zoradenie obrázkov"
 
 msgid "Picture Type [only Picture]"
 msgstr "Typ obrázka [len obrázok]"
@@ -2105,7 +2106,7 @@ msgid "Storage-Devices: Force Read"
 msgstr "Úložné zariadenia: Vynútiť čítanie"
 
 msgid "Stutter TV"
-msgstr "Koktavá TV"
+msgstr "Zobraz - zrkadlenie TV"
 
 msgid "Sun"
 msgstr "Ne"
@@ -2264,13 +2265,13 @@ msgid "Weather Extra Infos"
 msgstr "Počasie rozšírené info"
 
 msgid "Weather High Temperature Color"
-msgstr "Počasie farba vysokej teploty"
+msgstr "Počasie farba vysokej (plusovej) teploty"
 
 msgid "Weather Lines"
 msgstr "Počasie riadky"
 
 msgid "Weather Low Temperature Color"
-msgstr "Počasie farba nízkej teploty"
+msgstr "Počasie farba nízkej  (mínusovej) teploty"
 
 msgid "Weather Rain Chance"
 msgstr "Počasie pravdepodobnosť dažďa"
@@ -2280,6 +2281,9 @@ msgstr "Počasie priehľadnosť"
 
 msgid "Weather Wind speed unit"
 msgstr "Počasie jednotky rýchlosti vetra"
+
+msgid "Weather Wind Info Lines"
+msgstr "Wetter Wind Infozeilen"
 
 msgid "Weather-Icon Zoom"
 msgstr "Počasie-Ikona zväčšenie"
@@ -2363,7 +2367,7 @@ msgid "cache + adjustment (high quality, slow)"
 msgstr "cache + prispôsobenie(vysoká kvalita, pomalšie)"
 
 msgid "cache + adjustment (low quality, fast)"
-msgstr "ache + prispôsobenie(nízka kvalita, rýchlejšie)"
+msgstr "cache + prispôsobenie(nízka kvalita, rýchlejšie)"
 
 msgid "cadetblue"
 msgstr "kadet modrá"

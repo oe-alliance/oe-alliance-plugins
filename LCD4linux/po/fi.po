@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
-"PO-Revision-Date: 2018-10-31 22:03+0200\n"
-"Last-Translator: Kojo\n"
+"POT-Creation-Date: 2021-04-16 16:22+0430\n"
+"PO-Revision-Date: 2021-08-05 16:08+0200\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Kojo\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Finnish\n"
-"X-Poedit-Country: FINLAND\n"
+"X-Generator: Poedit 3.0\n"
 
 msgid "%"
 msgstr "%"
@@ -336,7 +335,7 @@ msgid "- Rain Zoom"
 msgstr "- Sade Zoom"
 
 msgid "- Rain use Color 2 from"
-msgstr "- Sade: Käytä väriä 2 paikasta:"
+msgstr "- Sade: Käytä väriä 2 paikasta"
 
 msgid "- Screen 2 Changing Time"
 msgstr "- Näyttö 2 vaihtumisaika"
@@ -381,7 +380,7 @@ msgid "- Show State"
 msgstr "- Näytä tila"
 
 msgid "- Show chill temperature from difference"
-msgstr "- Näytä viileän läpötilan ero paikasta:"
+msgstr "- Näytä viileän läpötilan ero paikasta"
 
 msgid "- Show in Mode"
 msgstr "- Näytä tilassa"
@@ -420,7 +419,7 @@ msgid "- Transparency"
 msgstr "- Läpinäkyvyys"
 
 msgid "- Trimmed"
-msgstr ""
+msgstr "- Leikattu"
 
 msgid "- Tunerinfo"
 msgstr "- Viritininfo"
@@ -435,14 +434,13 @@ msgid "- Unit min"
 msgstr "- Yksikkö min"
 
 msgid "- Weather Type"
-msgstr "- Miten sää-tiedot näytetään?"
+msgstr "- Miten sää-tiedot näytetään"
 
 msgid "- Zoom"
 msgstr "- Zoom"
 
-#, fuzzy
 msgid "- external IP URL"
-msgstr "- Lisätietoa"
+msgstr "- ulkoinen IP URL"
 
 msgid "- extra Info"
 msgstr "- Lisätietoa"
@@ -463,7 +461,7 @@ msgid "- use Info when empty"
 msgstr "- näytä Info kun tämä on tyhjä"
 
 msgid "- which LCD"
-msgstr "- mikä LCD-näyttö?"
+msgstr "- mikä LCD-näyttö"
 
 msgid "0"
 msgstr "0"
@@ -790,22 +788,19 @@ msgid "Bitrate"
 msgstr "Bittinopeus"
 
 msgid "BlueSound"
-msgstr ""
+msgstr "BlueSound"
 
 msgid "BlueSound IP"
-msgstr ""
+msgstr "BlueSound IP"
 
-#, fuzzy
 msgid "BlueSound Ping Timeout [ms]"
-msgstr "Sonos: Ping Aikakatkaisu [ms]"
+msgstr "BlueSound: Ping Aikakatkaisu [ms]"
 
-#, fuzzy
 msgid "BlueSound Play Check"
-msgstr "Sonos: Play-tarkistus"
+msgstr "BlueSound: Play-tarkistus"
 
-#, fuzzy
 msgid "BlueSound Refresh [s]"
-msgstr "Sonos: Virkistä [s]"
+msgstr "BlueSound: Virkistä [s]"
 
 msgid "Box-Skin-LCD"
 msgstr "VDF-näyttö"
@@ -901,7 +896,7 @@ msgid "Config Restore All Settings"
 msgstr "Asetukset: Palauta kaikki asetukset"
 
 msgid "Console normal"
-msgstr "normaali konsoli"
+msgstr "Normaali konsoli"
 
 msgid "Corby@Pearl 128x128"
 msgstr "Corby@Pearl 128x128"
@@ -982,7 +977,7 @@ msgid "Delete"
 msgstr "Poista"
 
 msgid "Delete File?"
-msgstr "Poista tiedosto"
+msgstr "Poista tiedosto?"
 
 msgid "Delete Logfile"
 msgstr "Poista lokitiedosto"
@@ -1024,7 +1019,7 @@ msgid "Extended Description"
 msgstr "Laajennettu kuvaus"
 
 msgid "External IP Address"
-msgstr ""
+msgstr "Ulkoinen IP Osoite"
 
 msgid "Fastmode (2s)"
 msgstr "Nopea (2s)"
@@ -1075,7 +1070,7 @@ msgid "FritzCall Frame Picture [ok]>"
 msgstr "FritzCall: Kuva [ok]>"
 
 msgid "FritzCall Number of Lines per Entry"
-msgstr "FritzCall: Rivien määrä "
+msgstr "FritzCall: Rivien määrä"
 
 msgid "FritzCall Number of List Entries"
 msgstr "FritzCall: Listojen määrä"
@@ -2130,9 +2125,8 @@ msgstr "Vaihda ruutubufferia [jos mahdollista]"
 msgid "TV"
 msgstr "TV"
 
-#, fuzzy
 msgid "TV (full)"
-msgstr "normaali (täysi)"
+msgstr "TV (täysi)"
 
 msgid "TV+OSD"
 msgstr "TV+OSD"
@@ -2222,10 +2216,10 @@ msgid "WSW"
 msgstr "Länsiluode"
 
 msgid "WWW ApiKey from cloudconvert.org"
-msgstr "cloudconvert.org:n WWW ApiKey"
+msgstr "Cloudconvert.org WWW ApiKey"
 
 msgid "WWW ApiKey from convertapi.com"
-msgstr "convertapi.com:n WWW ApiKey"
+msgstr "Convertapi.com WWW ApiKey"
 
 msgid "WWW Converter"
 msgstr "WWW-muunnin"
@@ -2240,18 +2234,16 @@ msgid "WWW-Internet Converter"
 msgstr "WWW Internet-muunnin"
 
 msgid "Waning Crescent"
-msgstr "Waning Crescent"
+msgstr "Vähenevä puolikuu"
 
-#, fuzzy
 msgid "Waning Moon"
-msgstr "Waning Gibbous"
+msgstr "Vähenevä kuu"
 
 msgid "Waxing Crescent"
-msgstr "Waxing Crescent"
+msgstr "Kasvava puolikuu"
 
-#, fuzzy
 msgid "Waxing Moon"
-msgstr "Waxing Gibbous"
+msgstr "Kasvava kuu"
 
 msgid "Weather"
 msgstr "Sää"
@@ -2293,7 +2285,10 @@ msgid "Weather Transparency"
 msgstr "Sää: Läpiväkyvyys"
 
 msgid "Weather Wind speed unit"
-msgstr "Sää: Tuulennopeuden yksikkö"
+msgstr "Sää: Tuulen nopeuden yksikkö"
+
+msgid "Weather Wind Info Lines"
+msgstr "Sää: Tuuli Info Linja"
 
 msgid "Weather-Icon Zoom"
 msgstr "Sää-ikoni zoom"
@@ -2392,13 +2387,13 @@ msgid "convertapi.com"
 msgstr "convertapi.com"
 
 msgid "copy to Idle"
-msgstr "Kopioi Valmiustilaan"
+msgstr "kopioi Valmiustilaan"
 
 msgid "copy to Media"
-msgstr "Kopioi Mediaan"
+msgstr "kopioi Mediaan"
 
 msgid "copy to On"
-msgstr "Kopioi Päällä"
+msgstr "kopioi Päällä"
 
 msgid "cornflowerblue"
 msgstr "cornflowerblue"
@@ -2543,7 +2538,7 @@ msgid "no LCD3 Picture-File"
 msgstr "ei LCD3 -kuvatiedostoa"
 
 msgid "no Netatmo-Plugin installed"
-msgstr "Netatmo-Pluginia ei ole asennettu"
+msgstr "ei Netatmo-Pluginia ole asennettu"
 
 msgid "no Timer"
 msgstr "ei Ajastusta"
@@ -2603,7 +2598,7 @@ msgid "orangered"
 msgstr "oranssinpunainen"
 
 msgid "other"
-msgstr "Muut"
+msgstr "muut"
 
 msgid "random"
 msgstr "sekalainen"
@@ -2633,7 +2628,7 @@ msgid "sandybrown"
 msgstr "hiekanruskea"
 
 msgid "set Settings"
-msgstr "Aseta"
+msgstr "aseta Asetukset"
 
 msgid "show run"
 msgstr "näytä käynnissä"
@@ -2651,7 +2646,7 @@ msgid "slategray"
 msgstr "slategray"
 
 msgid "stop Screencycle"
-msgstr "Pysäytä ruutujen kierrätys"
+msgstr "pysäytä ruutujen kierrätys"
 
 msgid "tomato"
 msgstr "tomaatti"
