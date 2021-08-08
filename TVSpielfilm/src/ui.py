@@ -461,9 +461,9 @@ class tvBaseScreen(tvAllScreen):
         else:
             self.trailer = False
         bereich = sub('" alt=".*?" width="', '" width="', bereich)
-        picurl = search('<img src="(.*?)" width="', bereich)
+        picurl = search('<img src="(.*?)" data-src="(.*?)" width="', bereich)
         if picurl is not None:
-            self.downloadPicPost(picurl.group(1), True)
+            self.downloadPicPost(picurl.group(2), True)
         else:
             picurl = search('<meta property="og:image" content="(.*?)"', output)
             if picurl is not None:
@@ -4702,9 +4702,9 @@ class TVNews(tvBaseScreen):
         else:
             self.trailer = False
         bereich = sub('" alt=".*?" width="', '" width="', bereich)
-        picurl = search('<img src="(.*?)" width="', bereich)
+        picurl = search('<img src="(.*?)" data-src="(.*?)" width="', bereich)
         if picurl is not None:
-            self.downloadPicPost(picurl.group(1), False)
+            self.downloadPicPost(picurl.group(2), False)
         else:
             picurl = search('<meta property="og:image" content="(.*?)"', output)
             if picurl is not None:

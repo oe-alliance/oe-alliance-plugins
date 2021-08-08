@@ -650,6 +650,31 @@ def parseNow(output):
     return entries, output
 
 
+def parseInfo(output):
+
+    output = sub('</dl>.\n\\s+</div>.\n\\s+</section>', '</cast>', output)
+    startpos = output.find('<div class="content-area">')
+    endpos = output.find('>Weitere Bildergalerien<')
+
+    if endpos == -1:
+        endpos = output.find('</cast>')
+        if endpos == -1:
+            endpos = output.find('<h2 class="broadcast-info">')
+            if endpos == -1:
+                endpos = output.find('<div class="OUTBRAIN"')
+                if endpos == -1:
+                    endpos = output.find('</footer>')
+    bereich = output[startpos:endpos]
+    bereich = cleanHTML(bereich)
+    trailerurl = parseTrailerUrl(output)
+    print(bereich)
+    print(trailerurl)
+
+    bereich = sub('" alt=".*?" width="', '" width="', bereich)
+    picurl = search('<img src="(.*?)" data-src="(.*?)" width="', bereich)
+    print(picurl.group(2))
+
+
 def testtvtipps(output):
     output = six.ensure_str(output)
     a = buildTVTippsArray("Serie", output)
@@ -678,20 +703,26 @@ def testparseNow(output):
     a, b = parseNow(output)
     print(a)
 
+def testparseInfo(output):
+    output = six.ensure_str(output)
+    parseInfo(output)
+
 
 def test():
 #    link = b'https://www.tvspielfilm.de/tv-tipps/'
-#    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
+    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
 #    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&date=2021-05-06&tips=0&time=day&channel=3SAT'
 #    link = b'https://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&ext=1&q=&cat%5B0%5D=SP&genreSP=Abenteuer&time=day&date=&channel='
 #    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&date=2021-05-07&tips=0&time=day&channel=ARD'
 #    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html'
+    link = b'https://www.tvspielfilm.de/tv-programm/sendung/wasserball,60f06a338189652e9978032c.html'
 #    getPage(link).addCallback(savefile).addErrback(saveerr)
 #    reactor.run()
     output = open('tmp.html', 'rb').read()
 #    testtvsuche(output)
 #    testparseNow(output)
-    testparseNow(output)
+#    testparseNow(output)
+    testparseInfo(output)
 
 
 if __name__ == '__main__':
