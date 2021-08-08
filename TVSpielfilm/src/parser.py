@@ -703,6 +703,7 @@ def testparseNow(output):
     a, b = parseNow(output)
     print(a)
 
+
 def testparseInfo(output):
     output = six.ensure_str(output)
     parseInfo(output)
