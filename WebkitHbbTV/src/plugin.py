@@ -3,12 +3,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.InfoBar import InfoBar
 from Screens.ChoiceBox import ChoiceBox
-from Screens.HelpMenu import HelpableScreen
-from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Components.config import config
-from Components.ActionMap import ActionMap
-from Components.Language import language
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.VolumeControl import VolumeControl
 
@@ -28,37 +23,37 @@ strIsEmpty = lambda x: x is None or len(x) == 0
 vbcfg.SOCKETFILE = '/tmp/.browser.support'
 vbcfg.CONTROLFILE = '/tmp/.browser.controller'
 _OPCODE_LIST = [
-		'CONTROL_BACK',
-		'CONTROL_FORWARD',
-		'CONTROL_STOP',
-		'CONTROL_RELOAD',
-		'CONTROL_OPENURL',
-		'CONTROL_EXIT',
-		'CONTROL_TITLE',
-		'CONTROL_OK',
-		'CONTROL_OUT_OF_MEMORY',
-		'CONTROL_INVALIDATE',
-		'CONTROL_GET_FBSIZE',
-		'CONTROL_GET_VOLUME',
-		'CONTROL_SET_VOLUME',
-		'CONTROL_VOLUME_UP',
-		'CONTROL_VOLUME_DOWN',
-		'HBBTV_LOADAIT',
-		'HBBTV_OPENURL',
-		'YOUTUBETV_OPENURL',
-		'BROWSER_OPENURL',
-		'BROWSER_MENU_OPEN',
-		'BROWSER_MENU_CLOSE',
-		'BROWSER_VKB_OPEN',
-		'BROWSER_VKB_CLOSE',
-		'OOIF_GET_CURRENT_CHANNEL',
-		'OOIF_BROADCAST_PLAY',
-		'OOIF_BROADCAST_STOP',
-		'OOIF_BROADCAST_CHECK',
-		'CONTROL_RELOAD_KEYMAP',
-		'GET_TIME_OFFSET',
-		'OPCODE_END'
-		]
+	'CONTROL_BACK',
+	'CONTROL_FORWARD',
+	'CONTROL_STOP',
+	'CONTROL_RELOAD',
+	'CONTROL_OPENURL',
+	'CONTROL_EXIT',
+	'CONTROL_TITLE',
+	'CONTROL_OK',
+	'CONTROL_OUT_OF_MEMORY',
+	'CONTROL_INVALIDATE',
+	'CONTROL_GET_FBSIZE',
+	'CONTROL_GET_VOLUME',
+	'CONTROL_SET_VOLUME',
+	'CONTROL_VOLUME_UP',
+	'CONTROL_VOLUME_DOWN',
+	'HBBTV_LOADAIT',
+	'HBBTV_OPENURL',
+	'YOUTUBETV_OPENURL',
+	'BROWSER_OPENURL',
+	'BROWSER_MENU_OPEN',
+	'BROWSER_MENU_CLOSE',
+	'BROWSER_VKB_OPEN',
+	'BROWSER_VKB_CLOSE',
+	'OOIF_GET_CURRENT_CHANNEL',
+	'OOIF_BROADCAST_PLAY',
+	'OOIF_BROADCAST_STOP',
+	'OOIF_BROADCAST_CHECK',
+	'CONTROL_RELOAD_KEYMAP',
+	'GET_TIME_OFFSET',
+	'OPCODE_END'
+]
 
 
 class VBHandler(VBHandlers):
@@ -327,29 +322,6 @@ class VBMain(Screen):
 		return None
 
 
-def HelpableScreen__init__(self):
-	if isinstance(self, HelpableScreen):
-		HelpableScreen.showManual = showManual
-
-		self["helpActions"] = ActionMap(["HelpbuttonActions"], {
-			"help_b": self.showHelp,
-			"help_l": self.showManual,
-		}, -2)
-
-
-def showManual(self):
-	if not os.path.exists(vbcfg.MANUALROOT):
-		return
-
-	url = 'file://' + vbcfg.MANUALROOT + '/main.html'
-	lang = language.getLanguage()
-	if os.path.exists(vbcfg.MANUALROOT + '/' + lang):
-		url = 'file://' + vbcfg.MANUALROOT + '/' + lang + '/main.html'
-
-	vbcfg.set_bgcolor("ffffffff")
-	vbcfg.g_browser = self.session.open(HbbTVWindow, url, None)
-
-
 def auto_start_main(reason, **kwargs):
 	if reason:
 		try:
@@ -361,8 +333,6 @@ def auto_start_main(reason, **kwargs):
 
 def session_start_main(session, reason, **kwargs):
 	vbcfg.g_main = session.open(VBMain)
-	HelpableScreen.__init__ = HelpableScreen__init__
-	HelpableScreen.session = session
 
 
 def extension_start_application(session, **kwargs):
