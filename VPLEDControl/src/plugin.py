@@ -33,7 +33,7 @@ config.plugins.VFD_ini.ClockLevel2 = ConfigSlider(default=4, limits=(1, 10))
 
 MyRecLed = False
 use_oled = False
-if HardwareInfo().get_device_model() in ("sf8008", "sf8008m", "gbmv200", "viper4k"):
+if HardwareInfo().get_device_model() in ("sf8008", "sf8008m", "sf8008ta", "gbmv200", "viper4k"):
 	use_oled = True
 
 
