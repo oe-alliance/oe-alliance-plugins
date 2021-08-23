@@ -11735,6 +11735,7 @@ def LCD4linuxPIC(self, session):
 				else:
 					pp += h - int(h2 / (5 - int(ConfigSpacing)))
 # Cover
+
 	def putCover(workaround, ConfigLCD, draw, im):
 		(ConfigPos, ConfigSize, ConfigSizeH, ConfigAlign, ConfigTransp, ConfigTrim) = workaround
 		ConfigPos = int(ConfigPos)
