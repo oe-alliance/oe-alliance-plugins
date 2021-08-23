@@ -4,6 +4,8 @@
 #
 # written by joergm6 @ IHAD
 # (Meteo-Station @ compilator)
+# (dynamic scaling for rectangle analog clockfaces and -hands and tested by Mr.Servo @ OpenA.TV + Turbohai @ IHAD)
+#
 #
 #  This plugin is licensed under the The Non-Profit Open Software License version 3.0 (NPOSL-3.0)
 #  http://opensource.org/licenses/NPOSL-3.0
@@ -13,10 +15,10 @@
 #  distributed other than under the conditions noted above.
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
-
+#
 from __future__ import print_function, absolute_import
 from __future__ import division
-Version = "V5.0-r8x"
+Version = "V5.0-r8y"
 from .import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -165,16 +167,18 @@ except:
 
 # globals
 L4LdoThread = True
-LCD4enigma2 = resolveFilename(SCOPE_CONFIG) # /etc/enigma2/
-LCD4plugin = resolveFilename(SCOPE_PLUGINS) # /usr/lib/enigma2/python/Plugins/
+LCD4enigma2config = resolveFilename(SCOPE_CONFIG) # /etc/enigma2/
+LCD4enigma2plugin = resolveFilename(SCOPE_PLUGINS) # /usr/lib/enigma2/python/Plugins/
 LCD4lib = resolveFilename(SCOPE_LIBDIR) # /usr/lib/
 LCD4etc = resolveFilename(SCOPE_SYSETC) # /etc/
 LCD4bin = eEnv.resolve("${bindir}") + "/" # /usr/bin/
 LCD4python = eEnv.resolve("${PYTHONPATH}") + "/" # /usr/lib/enigma2/python/
 LCD4share = eEnv.resolve("${datarootdir}") + "/" # /usr/share/
-LCD4config = LCD4enigma2 + "lcd4config" # /etc/enigma2/lcd4config
 LCD4picon = LCD4share + "enigma2/picon/" #/usr/share/enigma2/picon/
-Data = LCD4plugin + "Extensions/LCD4linux/data/" # /usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/data/
+LCD4fonts = resolveFilename(SCOPE_FONTS) # /usr/share/fonts/
+LCD4config = LCD4enigma2config + "lcd4config" # /etc/enigma2/lcd4config
+LCD4plugin = LCD4enigma2plugin + "Extensions/LCD4linux/" # /usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/
+Data = LCD4plugin + "data/" # /usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/data/
 if getDisplayType() in ('colorlcd220'):
 	LCD4default = Data + "default.colorlcd220"
 elif getDisplayType() in ('colorlcd400'):
@@ -191,15 +195,15 @@ elif getDisplayType() in ('bwlcd255'):
 	LCD4default = Data + "default.bwlcd255"
 else:
 	LCD4default = Data + "default.lcd"
-WetterPath = LCD4plugin + "Extensions/LCD4linux/wetter/"
-MeteoPath = LCD4plugin + "Extensions/LCD4linux/meteo/"
-FONTdefault = resolveFilename(SCOPE_FONTS) + "nmsbd.ttf" # /usr/share/fonts/
+WetterPath = LCD4enigma2plugin + "Extensions/LCD4linux/wetter/"
+MeteoPath = LCD4enigma2plugin + "Extensions/LCD4linux/meteo/"
+FONTdefault = LCD4fonts + "nmsbd.ttf"
 FONT = FONTdefault
 ClockBack = Data + "PAclock2.png"
 Clock = Data + "Clock"
 RecPic = Data + "rec.png"
-if os.path.islink(LCD4plugin + "Extensions/LCD4linux/tmp") == True:
-	TMP = os.path.realpath(LCD4plugin + "Extensions/LCD4linux/tmp") + "/"
+if os.path.islink(LCD4enigma2plugin + "Extensions/LCD4linux/tmp") == True:
+	TMP = os.path.realpath(LCD4enigma2plugin + "Extensions/LCD4linux/tmp") + "/"
 else:
 	TMP = "/tmp/"
 TMPL = TMP + "lcd4linux/"
@@ -4167,16 +4171,7 @@ def xmlInsert(Lis2):
 					xmlList[i] = xmlList[i].replace("\"%s\"" % xl[i2], "\"L4L%s\"" % xl[i2])
 	L4log("insert Skindata")
 	for i in Lis2:
-		ttt = LCD4linux.xmlLCDType.value.split("x")
-		aw = ah = 0
-		if LCD4linux.xmlLCDType.value == "96x64":
-			i = i.replace("\">", "\" id=\"2\">")
-		if getFB2(False):
-			if "PixmapLcd4linux" in i:
-				i = i.replace("0,0", "10,13")
-			aw = 10
-			ah = 171
-		xmlList.insert(-1, i.replace("$w$", str(int(ttt[0]) + aw)).replace("$h$", str(int(ttt[1]) + ah)))
+		xmlList.insert(-1, i)
 
 
 def xmlDelete(Num):
@@ -4215,14 +4210,25 @@ def xmlClear():
 def xmlRead():
 	global xmlList
 	xmlList = []
-	if os.path.isfile(LCD4enigma2 + "skin_user.xml"):
-		for i in open(LCD4enigma2 + "skin_user.xml").read().splitlines():
+	if os.path.isfile(LCD4enigma2config + "skin_user.xml"):
+		for i in open(LCD4enigma2config + "skin_user.xml").read().splitlines():
 			xmlList.append(i)
 		if len(xmlList) > 1:
 			while len(xmlList[-1]) < 2 and len(xmlList) > 1:
 				del xmlList[-1]
 	else:
-		xmlList = ["<skin>", "</skin>"]
+		sli = xmlReadData()
+		for i in sli[0]:
+			ttt = LCD4linux.xmlLCDType.value.split("x")
+			aw = ah = 0
+			if LCD4linux.xmlLCDType.value == "96x64":
+				i = i.replace("\">", "\" id=\"2\">")
+			if getFB2(False):
+				if "PixmapLcd4linux" in i:
+					i = i.replace("0,0", "10,13")
+				aw = 10
+				ah = 171
+		xmlList = ["\n".join(sli[0]).replace("$w$", str(int(ttt[0]) + aw)).replace("$h$", str(int(ttt[1]) + ah)), "</skin>"]
 
 
 def xmlReadData():
@@ -4241,20 +4247,23 @@ def xmlReadData():
 def xmlWrite():
 	if len(xmlList) > 1:
 		L4log("write SkinData")
-		fw = open(LCD4enigma2 + "skin_user.xml", "w")
+		fw = open(LCD4enigma2config + "skin_user.xml", "w")
 		for i in xmlList:
 			fw.write(i + "\n")
 		fw.close()
 
 
 def xmlSkin():
+	if LCD4linux.xmlType01.value == False and LCD4linux.xmlType02.value == False and LCD4linux.xmlType03.value == False:
+		rmFile(LCD4enigma2config + "skin_user.xml")
+		return True
 	change = False
 	xmlRead()
 	if xmlList[-1].find("/skin") == -1:
+		L4log("Error xmlSkin")
 		return False
 	sli = xmlReadData()
 	xf = xmlFind(1)
-	L4log("xf:" + str(xf))
 	if xf == -1 and LCD4linux.xmlType01.value == True:
 		change = True
 		xmlInsert(sli[1])
@@ -4707,10 +4716,10 @@ def InitWebIF():
 	L4log("WebIf-Init...")
 	i = 20
 	if LCD4linux.WebIfInitDelay.value == True:
-		while len(glob.glob(LCD4plugin + "Extensions/WebInterface/__init__.py*")) == 0 and i > 0:
+		while len(glob.glob(LCD4enigma2plugin + "Extensions/WebInterface/__init__.py*")) == 0 and i > 0:
 			sleep(0.5)
 			i -= 1
-	if i > 0 and len(glob.glob(LCD4plugin + "Extensions/WebInterface/__init__.py*")) > 0:
+	if i > 0 and len(glob.glob(LCD4enigma2plugin + "Extensions/WebInterface/__init__.py*")) > 0:
 		if i < 20:
 			L4log("WebIf-Wait %d s" % int((20 - i) / 2))
 			sleep(5)
@@ -4724,7 +4733,7 @@ def InitWebIF():
 		root.putChild(b"view", LCD4linuxwebView())
 		root.putChild(b"config", LCD4linuxConfigweb())
 		root.putChild(b"data", static.File(six.ensure_binary(Data[:-1])))
-		if os.path.exists(LCD4plugin + "Extensions/LCD4linux/WebInterface/web/external.xml"):
+		if os.path.exists(LCD4enigma2plugin + "Extensions/LCD4linux/WebInterface/web/external.xml"):
 			try:
 				addExternalChild(("lcd4linux", root, "LCD4linux", Version, True))
 				L4log("use new WebIf")
@@ -4734,7 +4743,7 @@ def InitWebIF():
 		else:
 			addExternalChild(("lcd4linux", root))
 			L4log("use old WebIf")
-		if os.path.exists(LCD4plugin + "Extensions/OpenWebif/pluginshook.src"):
+		if os.path.exists(LCD4enigma2plugin + "Extensions/OpenWebif/pluginshook.src"):
 			try:
 				addExternalChild(("lcd4linux", root, "LCD4linux", Version))
 				L4log("use OpenWebIf")
@@ -9292,10 +9301,11 @@ class UpdateStatus(Screen):
 			_LsreftoString = None
 			if self.LsreftoString.startswith(("4097:0", "5001:0", "5002:0", "5003")):
 				_LsreftoString = self.LsreftoString.replace("4097:0", "1:0", 1).replace("5001:0", "1:0", 1).replace("5002:0", "1:0", 1).replace("5003:0", "1:0", 1)
-			epgcache = eEPGCache.getInstance()
-			if epgcache is not None:
-				self.LEventsNext = epgcache.lookupEvent(['RIBDT', (_LsreftoString or self.LsreftoString, 0, -1, 1440)])
-				self.LEventsDesc = epgcache.lookupEvent(['IBDCTSERNX', (_LsreftoString or self.LsreftoString, 0, -1)])
+				epgcache = eEPGCache.getInstance()
+				if epgcache is not None:
+					self.LEventsNext = epgcache.lookupEvent(['RIBDT', (_LsreftoString or self.LsreftoString, 0, -1, 1440)])
+					self.LEventsDesc = epgcache.lookupEvent(['IBDCTSERNX', (_LsreftoString or self.LsreftoString, 0, -1)])
+
 		else:
 			if GPjukeboxOK == True and cjukeboxevent.LastStatus != "":
 				self.LsreftoString = "4097:0:0:0:0:0:0:0:0:0:" + cjukeboxevent.CurrSource
@@ -10872,8 +10882,6 @@ def LCD4linuxPIC(self, session):
 				Title = Title.replace(".mpg", "").replace(".vob", "").replace(".avi", "").replace(".divx", "").replace(".mv4", "").replace(".mkv", "").replace(".mp4", "").replace(".ts", "")
 			if cover == "" and os.path.isfile(GoogleCover):
 				cover = GoogleCover
-			if Title == "Pate":
-				Title = Title1
 			if ((cover == "" or (cover == GoogleCover and self.oldTitle != Title)) and str(LCD4linux.MPCoverDownload.value) != "0") or self.CoverCount > 0:
 				rmFile(GoogleCover)
 				self.oldTitle = Title
@@ -11727,7 +11735,6 @@ def LCD4linuxPIC(self, session):
 				else:
 					pp += h - int(h2 / (5 - int(ConfigSpacing)))
 # Cover
-
 	def putCover(workaround, ConfigLCD, draw, im):
 		(ConfigPos, ConfigSize, ConfigSizeH, ConfigAlign, ConfigTransp, ConfigTrim) = workaround
 		ConfigPos = int(ConfigPos)
@@ -13406,12 +13413,12 @@ def LCD4linuxPIC(self, session):
 					Title = "%s - %s" % (MP3artist, MP3title)
 					if len(Title) < 5:
 						Title = ""
-			if Title == "" or Title == "Pate":
+			if Title == "":
 				Title = self.LgetName
 				if self.LsTagTitle is not None:
 					Title = self.LsTagTitle
 					Video = Title.endswith(".mpg") or Title.endswith(".vob") or Title.endswith(".avi") or Title.endswith(".divx") or Title.endswith(".mv4") or Title.endswith(".mkv") or Title.endswith(".mp4") or Title.endswith(".ts")
-					if Title == "" or Video == True or Title == "Pate":
+					if Title == "" or Video == True:
 						Title = self.LgetName
 						Title = Title.replace(".mpg", "").replace(".vob", "").replace(".avi", "").replace(".divx", "").replace(".mv4", "").replace(".mkv", "").replace(".mp4", "").replace(".ts", "")
 					if Title.find(" ") > 20 or (Title.find(" ") == -1 and len(Title) > 20):
@@ -14608,7 +14615,6 @@ def LCD4linuxPIC(self, session):
 				else:
 					L4log("detected VOD Media")
 					isMediaPlayer = "mp3"
-
 			elif "0:0:0:0:0:0:0:0:0:" in sref:
 				L4log("detected Video")
 				isMediaPlayer = "record"
@@ -15494,7 +15500,7 @@ def autostart(reason, **kwargs):
 			LCD4linux.Crash.value = True
 		CheckFstab()
 		TFTCheck(False)
-		if os.path.isfile(LCD4enigma2 + "skin_user.xml"):
+		if os.path.isfile(LCD4enigma2config + "skin_user.xml"):
 			xmlRead()
 			LCD4linux.xmlType01.value = False if xmlFind(1) == -1 else True
 			LCD4linux.xmlType02.value = False if xmlFind(2) == -1 else True
@@ -15508,11 +15514,11 @@ def autostart(reason, **kwargs):
 		if os.path.isfile(LCD4bin + "lcd4linux-start.sh"):
 			RunShell(LCD4bin + "lcd4linux-start.sh")
 		try:
-			if os.path.isfile(LCD4enigma2 + "lcd4fritz"):
+			if os.path.isfile(LCD4enigma2config + "lcd4fritz"):
 				L4logE("read Fritzlist")
-				for line in open(LCD4enigma2 + "lcd4fritz", "r").readlines():
+				for line in open(LCD4enigma2config + "lcd4fritz", "r").readlines():
 					exec("FritzList.append(%s)" % line)
-				rmFile(LCD4enigma2 + "lcd4fritz")
+				rmFile(LCD4enigma2config + "lcd4fritz")
 		except:
 				L4log("Error load Fritzlist")
 
@@ -15522,7 +15528,7 @@ def autostart(reason, **kwargs):
 		if len(FritzList) > 0:
 			L4logE("write Fritzlist")
 			try:
-				f = open(LCD4enigma2 + "lcd4fritz", "w")
+				f = open(LCD4enigma2config + "lcd4fritz", "w")
 				for i in FritzList:
 					f.write(str(i) + "\n")
 				f.close()
