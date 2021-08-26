@@ -374,13 +374,13 @@ class SATIPTuner(Screen, ConfigListScreen):
 
 	def DiscoveryStart(self):
 		self["shortcuts"].setEnabled(False)
-		self["config_actions"].setEnabled(False)
+		# self["config_actions"].setEnabled(False)
 		self["description"].setText(_("SAT>IP server discovering for %d seconds...") % (discoveryTimeoutMS / 1000))
 		satipdiscovery.DiscoveryStart()
 
 	def discoveryEnd(self):
 		self["shortcuts"].setEnabled(True)
-		self["config_actions"].setEnabled(True)
+		# self["config_actions"].setEnabled(True)
 		if not satipdiscovery.isEmptyServerData():
 			self.createServerConfig()
 			self.createSetup()
