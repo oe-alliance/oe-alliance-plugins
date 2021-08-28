@@ -10529,6 +10529,8 @@ def getShowPicture(BildFile, idx):
 Author: Sean B. Palmer, inamidst.com
 http://inamidst.com/code/moonphase.py
 """
+
+
 def MoonPosition(now=datetime.now()):
 	diff = now - datetime(2001, 1, 1)
 	days = diff.days + diff.seconds / 86400
@@ -10556,6 +10558,8 @@ series expansion of the moon orbital elements from Chapront und Chapront-Touzé
 Quelle: htps://de.wikipedia.org/wiki/Mondbahn
 http://articles.adsabs.harvard.edu/full/1994A%26A...282..663S
 """
+
+
 def MoonDistance(now=datetime.utcnow()):
     diff = now - datetime(2000, 1, 1, 12, 0, 0)
     t = diff.days + diff.seconds / 86400
