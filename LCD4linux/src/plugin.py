@@ -11482,7 +11482,7 @@ def LCD4linuxPIC(self, session):
 				if w > ConfigSize:
 					P.extend(INFOS.split("-"))
 				else:
-					INFOS = INFOS.replace('-',' ')
+					INFOS = INFOS.replace('-', ' ')
 					P.extend([INFOS])
 			if ConfigInfo[0] == "1":
 				w, h = getFsize(Code_utf8(PHASE), font)
