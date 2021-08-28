@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 16:22+0430\n"
+"POT-Creation-Date: 2021-08-27 17:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
 
 msgid "%"
 msgstr ""
@@ -190,6 +191,9 @@ msgid "- HTTP Height"
 msgstr ""
 
 msgid "- HTTP Width"
+msgstr ""
+
+msgid "- Infolines"
 msgstr ""
 
 msgid "- LCD 1 Background Color"
@@ -747,6 +751,9 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+msgid "All Informations"
+msgstr ""
+
 msgid "Always All"
 msgstr ""
 
@@ -984,6 +991,18 @@ msgstr ""
 msgid "Display Delay [ms]"
 msgstr ""
 
+msgid "Distance only"
+msgstr ""
+
+msgid "Distance+Illumination"
+msgstr ""
+
+msgid "Illumination+Moonphase"
+msgstr ""
+
+msgid "Distance+Moonphase"
+msgstr ""
+
 msgid "Double-button switches"
 msgstr ""
 
@@ -1122,6 +1141,9 @@ msgid "Gradient"
 msgstr ""
 
 msgid "HDD"
+msgstr ""
+
+msgid "Illumination only"
 msgstr ""
 
 msgid "IMAP"
@@ -1342,6 +1364,9 @@ msgid "MJPEG Stream LCD 3 Virtual Brightness"
 msgstr ""
 
 msgid "MJPEG Stream LCD 3 enable"
+msgstr ""
+
+msgid "Moonphase only"
 msgstr ""
 
 msgid "MSN"
