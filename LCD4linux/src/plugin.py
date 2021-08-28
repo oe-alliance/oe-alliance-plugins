@@ -10561,7 +10561,7 @@ def MoonDistance(now=datetime.utcnow()):
     t = diff.days + diff.seconds / 86400
     GM = (134.96341138 + 13.064992953630 * t) * math.pi / 180
     DD = (297.85020420 + 12.190749117502 * t) * math.pi / 90
-    a = 385000.5584 - 20905.3550 * math.cos(GM) - 3699.1109 * math.cos(DD - GM) - 2955.9676 * math.cos (DD) - 569.9251 * math.cos(2 * GM)
+    a = 385000.5584 - 20905.3550 * math.cos(GM) - 3699.1109 * math.cos(DD - GM) - 2955.9676 * math.cos(DD) - 569.9251 * math.cos(2 * GM)
     return int(a + 0.5)
 
 ################################################################
