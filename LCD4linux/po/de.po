@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 16:21+0430\n"
-"PO-Revision-Date: 2021-08-05 15:46+0200\n"
+"POT-Creation-Date: 2021-08-27 17:17+0200\n"
+"PO-Revision-Date: 2021-08-28 14:48+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -189,6 +189,9 @@ msgstr "- HTTP-Höhe"
 
 msgid "- HTTP Width"
 msgstr "- HTTP-Breite"
+
+msgid "- Infolines"
+msgstr "- Infozeilen"
 
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1 Hintergrundfarbe"
@@ -745,6 +748,9 @@ msgstr "Aktiver Schirm"
 msgid "All"
 msgstr "Alles"
 
+msgid "All Informations"
+msgstr "Alle Informationen"
+
 msgid "Always All"
 msgstr "Immer Alle"
 
@@ -982,6 +988,18 @@ msgstr "Logdatei löschen"
 msgid "Display Delay [ms]"
 msgstr "Verzögerung [ms]"
 
+msgid "Distance only"
+msgstr "nur Abstand"
+
+msgid "Distance+Illumination"
+msgstr "Abstand+Ausleuchtung"
+
+msgid "Illumination+Moonphase"
+msgstr "Ausleuchtung+Mondphase"
+
+msgid "Distance+Moonphase"
+msgstr "Abstand+Mondphase"
+
 msgid "Double-button switches"
 msgstr "Doppel-Tasten Schalter"
 
@@ -1020,6 +1038,9 @@ msgstr "Externe IP Adresse"
 
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
+
+msgid "First Quarter"
+msgstr "Erstes Viertel"
 
 msgid "Flaps Design Date"
 msgstr "Klappen Design Datum"
@@ -1096,6 +1117,9 @@ msgstr "FritzCall Popup-Zeit"
 msgid "FritzCall remove Calls after hours"
 msgstr "FritzCall entferne Anrufe nach Stunden"
 
+msgid "Full Moon"
+msgstr "Vollmond"
+
 msgid "GUI Restart is required"
 msgstr "GUI Neustart ist notwendig"
 
@@ -1117,6 +1141,9 @@ msgstr "Verlauf"
 
 msgid "HDD"
 msgstr "HDD"
+
+msgid "Illumination only"
+msgstr "nur Ausleuchtung"
 
 msgid "IMAP"
 msgstr "IMAP"
@@ -1253,6 +1280,9 @@ msgstr "LCD4linux Einstellungen Global"
 msgid "LCD4linux enabled"
 msgstr "LCD4linux aktiviert"
 
+msgid "Last Quarter"
+msgstr "Letztes Viertel"
+
 msgid "Line"
 msgstr "Linie"
 
@@ -1334,6 +1364,9 @@ msgstr "MJPEG Stream LCD 3 virtuelle Helligkeit"
 
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 aktiv"
+
+msgid "Moonphase only"
+msgstr "nur Mondphase"
 
 msgid "MSN"
 msgstr "MSN"
@@ -1521,30 +1554,6 @@ msgstr "Mond-Icon-Verz. [ok]>"
 msgid "Moonphase"
 msgstr "Mondphase"
 
-msgid "New Moon"
-msgstr "Neumond"
-
-msgid "First Quarter"
-msgstr "Erstes Viertel"
-
-msgid "Waxing Crescent"
-msgstr "Zunehmender Halbmond"
-
-msgid "Waxing Moon"
-msgstr "Zunehmender Mond"
-
-msgid "Full Moon"
-msgstr "Vollmond"
-
-msgid "Waning Moon"
-msgstr "Abnehmender Mond"
-
-msgid "Waning Crescent"
-msgstr "Abnehmender Halbmond"
-
-msgid "Last Quarter"
-msgstr "Letztes Viertel"
-
 msgid "MusicCast"
 msgstr "MusicCast"
 
@@ -1607,6 +1616,9 @@ msgstr "Netatmo Komfort Indikator"
 
 msgid "Network Check active"
 msgstr "Netzwerk Check Aktive"
+
+msgid "New Moon"
+msgstr "Neumond"
 
 msgid "Next Program Info"
 msgstr "Nächste Programm Info"
@@ -2241,6 +2253,18 @@ msgstr "WWW Konverter Verwendung"
 
 msgid "WWW-Internet Converter"
 msgstr "WWW-Internet Konverter"
+
+msgid "Waning Crescent"
+msgstr "Abnehmender Halbmond"
+
+msgid "Waning Moon"
+msgstr "Abnehmender Mond"
+
+msgid "Waxing Crescent"
+msgstr "Zunehmender Halbmond"
+
+msgid "Waxing Moon"
+msgstr "Zunehmender Mond"
 
 msgid "Weather"
 msgstr "Wetter"

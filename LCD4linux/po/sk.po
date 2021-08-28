@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 16:22+0430\n"
-"PO-Revision-Date: 2021-08-07 14:43+0200\n"
+"POT-Creation-Date: 2021-08-27 17:17+0200\n"
+"PO-Revision-Date: 2021-08-27 18:56+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -187,6 +187,9 @@ msgstr "- HTTP výška"
 
 msgid "- HTTP Width"
 msgstr "- HTTP šírka"
+
+msgid "- Infolines"
+msgstr "- Informačné linky"
 
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1 farba pozadia"
@@ -743,6 +746,9 @@ msgstr "Aktívna obrazovka"
 msgid "All"
 msgstr "Všetko"
 
+msgid "All Informations"
+msgstr "Všetky Informácie"
+
 msgid "Always All"
 msgstr "Vždy všetko"
 
@@ -980,6 +986,18 @@ msgstr "Zmazanie log súboru"
 msgid "Display Delay [ms]"
 msgstr "Oneskorenie zobrazovača [ms]"
 
+msgid "Distance only"
+msgstr "Len Vzdialenosť"
+
+msgid "Distance+Illumination"
+msgstr "Vzdialenosť+Osvetlenie"
+
+msgid "Illumination+Moonphase"
+msgstr "Osvetlenie+Fáza mesačná"
+
+msgid "Distance+Moonphase"
+msgstr "Vzdialenosť+Fáza mesiaca"
+
 msgid "Double-button switches"
 msgstr "Zmena dvoj-stlačením tlačidla"
 
@@ -1121,6 +1139,9 @@ msgstr "Spád"
 
 msgid "HDD"
 msgstr "HDD"
+
+msgid "Illumination only"
+msgstr "Len Osvetlenie"
 
 msgid "IMAP"
 msgstr "IMAP"
@@ -1341,6 +1362,9 @@ msgstr "MJPEG stream pre LCD 2 Virtuálny jas"
 
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG stream pre LCD 3 povoliť"
+
+msgid "Moonphase only"
+msgstr "Len Fáza Mesiaca"
 
 msgid "MSN"
 msgstr "MSN"

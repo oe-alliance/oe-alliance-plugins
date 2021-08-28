@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 16:22+0430\n"
+"POT-Creation-Date: 2021-08-27 17:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: BH Team\n"
@@ -192,6 +192,9 @@ msgstr "- Altura HTTP"
 
 msgid "- HTTP Width"
 msgstr "- Largura HTTP"
+
+msgid "- Infolines"
+msgstr "- Linhas de Informação"
 
 msgid "- LCD 1 Background Color"
 msgstr "- Cor de Fundo LCD 1"
@@ -748,6 +751,9 @@ msgstr "Ecrã Ativo"
 msgid "All"
 msgstr "Tudo"
 
+msgid "All Informations"
+msgstr "Todas as Informações"
+
 msgid "Always All"
 msgstr "Sempre Tudo"
 
@@ -985,6 +991,18 @@ msgstr "Apagar ficheiro de Depuração"
 msgid "Display Delay [ms]"
 msgstr "Atraso Ecrã [ms]"
 
+msgid "Distance only"
+msgstr "Distância apenas"
+
+msgid "Distance+Illumination"
+msgstr "Distância+Iluminação"
+
+msgid "Illumination+Moonphase"
+msgstr "Iluminação+Fase da Lua"
+
+msgid "Distance+Moonphase"
+msgstr "Distância + Fases da Lua"
+
 msgid "Double-button switches"
 msgstr "Trocas Tecla dupla"
 
@@ -1126,6 +1144,9 @@ msgstr "Gradiente"
 
 msgid "HDD"
 msgstr "HDD"
+
+msgid "Illumination only"
+msgstr "Iluminação apenas"
 
 msgid "IMAP"
 msgstr "IMAP"
@@ -1346,6 +1367,9 @@ msgstr "MJPEG Stream LCD 3 Brilho Virtual"
 
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "Activar Stream MJPEG LCD 3"
+
+msgid "Moonphase only"
+msgstr "Fase da lua apenas"
 
 msgid "MSN"
 msgstr "MSN"

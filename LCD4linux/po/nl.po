@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 16:22+0430\n"
-"PO-Revision-Date: 2021-08-05 16:12+0200\n"
+"POT-Creation-Date: 2021-08-27 17:17+0200\n"
+"PO-Revision-Date: 2021-08-27 17:21+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -188,6 +188,9 @@ msgstr "- HTTP Hoogte"
 
 msgid "- HTTP Width"
 msgstr "- HTTP Breedte"
+
+msgid "- Infolines"
+msgstr "- Infolijnen"
 
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1 Achtergrondkleur"
@@ -744,6 +747,9 @@ msgstr "Actief scherm"
 msgid "All"
 msgstr "Alle"
 
+msgid "All Informations"
+msgstr "Alle Informatie"
+
 msgid "Always All"
 msgstr "Altijd alle"
 
@@ -981,6 +987,18 @@ msgstr "Verwijder logbestand"
 msgid "Display Delay [ms]"
 msgstr "Toon vertraging [ms]"
 
+msgid "Distance only"
+msgstr "alleen Afstand "
+
+msgid "Distance+Illumination"
+msgstr "Afstand + Verlichting"
+
+msgid "Illumination+Moonphase"
+msgstr "Verlichting + Maanfase"
+
+msgid "Distance+Moonphase"
+msgstr "Afstand + Maanfase"
+
 msgid "Double-button switches"
 msgstr "Dubbele toets schakelaars"
 
@@ -1122,6 +1140,9 @@ msgstr "Gradiënt"
 
 msgid "HDD"
 msgstr "HDD"
+
+msgid "Illumination only"
+msgstr "alleen Verlichting"
 
 msgid "IMAP"
 msgstr "IMAP"
@@ -1342,6 +1363,9 @@ msgstr "MJPEG-stream LCD 3 virtuele helderheid"
 
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 inschakelen"
+
+msgid "Moonphase only"
+msgstr "alleen Maanfase"
 
 msgid "MSN"
 msgstr "MSN"
