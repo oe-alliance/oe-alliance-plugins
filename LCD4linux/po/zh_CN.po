@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 16:22+0430\n"
-"PO-Revision-Date: 2021-08-05 15:00+0200\n"
+"POT-Creation-Date: 2021-08-27 17:17+0200\n"
+"PO-Revision-Date: 2021-08-27 19:19+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@163.com>\n"
 "Language: zh_CN\n"
@@ -23,11 +23,11 @@ msgstr "％+误码率"
 
 #, python-format
 msgid "% + Load@1min"
-msgstr "％ + 负载@ 1分钟"
+msgstr "% + 负载@1分钟"
 
 #, python-format
 msgid "% + Load@5min"
-msgstr "％ + 负载@ 5分钟"
+msgstr "% + 负载@ 5分钟"
 
 #, python-format
 msgid "%d Mails  %d New  %s"
@@ -45,10 +45,9 @@ msgstr "%Y.%m.%d - %H:%M"
 msgid "%d.%m.%y %H:%M:%S"
 msgstr "%y.%m.%d %H:%M:%S"
 
-#, fuzzy, python-format
-#| msgid "%s - Current value: %s"
+#, python-format
 msgid "%s - Current value: %s"
-msgstr "％s-当前值：％s"
+msgstr "%s - 当前值：%s"
 
 msgid "-  Type"
 msgstr "-  类型"
@@ -190,6 +189,9 @@ msgstr "- HTTP高度"
 
 msgid "- HTTP Width"
 msgstr "- HTTP宽度"
+
+msgid "- Infolines"
+msgstr "- 线"
 
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1背景色"
@@ -405,7 +407,7 @@ msgid "- Station"
 msgstr "- 站"
 
 msgid "- Text"
-msgstr "- 文本："
+msgstr "- 文本"
 
 msgid "- Text Size"
 msgstr "- 文本大小"
@@ -417,13 +419,13 @@ msgid "- Transparency"
 msgstr "- 透明度"
 
 msgid "- Trimmed"
-msgstr ""
+msgstr "- 修剪"
 
 msgid "- Tunerinfo"
 msgstr "- 调谐器信息"
 
 msgid "- Type"
-msgstr "- 类型: "
+msgstr "- 类型"
 
 msgid "- URL"
 msgstr "- URL"
@@ -437,13 +439,11 @@ msgstr "- 天气类型"
 msgid "- Zoom"
 msgstr "- 缩小 -"
 
-#, fuzzy
-#| msgid "- extra Info"
 msgid "- external IP URL"
-msgstr "- 额外信息 ："
+msgstr "- 外部 IP 网址"
 
 msgid "- extra Info"
-msgstr "- 额外信息 ："
+msgstr "- 额外信息"
 
 msgid "- free Warning"
 msgstr "- 免费警告"
@@ -467,7 +467,7 @@ msgid "0"
 msgstr "0"
 
 msgid "0.5"
-msgstr "0.5 "
+msgstr "0.5"
 
 msgid "1"
 msgstr "1"
@@ -497,7 +497,7 @@ msgid "10%"
 msgstr "10%"
 
 msgid "100%"
-msgstr "100% "
+msgstr "100%"
 
 msgid "10min"
 msgstr "10分钟"
@@ -506,12 +506,10 @@ msgid "10s"
 msgstr "10秒"
 
 msgid "128x32"
-msgstr ""
-" \t\n"
-"128x32 "
+msgstr "128x32"
 
 msgid "128x64"
-msgstr "128x64 "
+msgstr "128x64"
 
 msgid "132x64"
 msgstr "132x64"
@@ -565,7 +563,7 @@ msgid "2 x Mute"
 msgstr "2 x静音"
 
 msgid "2%"
-msgstr "2% "
+msgstr "2%"
 
 msgid "20"
 msgstr "20"
@@ -577,7 +575,7 @@ msgid "20min"
 msgstr "20分钟"
 
 msgid "20s"
-msgstr "20sek."
+msgstr "20s"
 
 msgid "220x176"
 msgstr "220x176"
@@ -646,7 +644,7 @@ msgid "400x240"
 msgstr "400x240"
 
 msgid "40s"
-msgstr "40sek."
+msgstr "40s"
 
 msgid "45%"
 msgstr "45%"
@@ -676,7 +674,7 @@ msgid "50%"
 msgstr "50%"
 
 msgid "50s"
-msgstr "50sek."
+msgstr "50s"
 
 msgid "55%"
 msgstr "55%"
@@ -750,6 +748,9 @@ msgstr "活动画面"
 msgid "All"
 msgstr "全部"
 
+msgid "All Informations"
+msgstr "所有信息"
+
 msgid "Always All"
 msgstr "总是"
 
@@ -790,25 +791,19 @@ msgid "Bitrate"
 msgstr "比特率"
 
 msgid "BlueSound"
-msgstr ""
+msgstr "BlueSound"
 
 msgid "BlueSound IP"
-msgstr ""
+msgstr "BlueSound IP"
 
-#, fuzzy
-#| msgid "Sonos Ping Timeout [ms]"
 msgid "BlueSound Ping Timeout [ms]"
-msgstr "休眠Ping超时[毫秒]"
+msgstr "BlueSound Ping 超时 [ms]"
 
-#, fuzzy
-#| msgid "Sonos Play Check"
 msgid "BlueSound Play Check"
-msgstr "休眠播放检查"
+msgstr "BlueSound 玩检查"
 
-#, fuzzy
-#| msgid "Sonos Refresh [s]"
 msgid "BlueSound Refresh [s]"
-msgstr "休眠更新间隔[秒]"
+msgstr "BlueSound刷新 [s]"
 
 msgid "Box-Skin-LCD"
 msgstr "盒式液晶显示器"
@@ -993,6 +988,18 @@ msgstr "删除日志文件"
 msgid "Display Delay [ms]"
 msgstr "显示延迟[毫秒]"
 
+msgid "Distance only"
+msgstr "仅距离"
+
+msgid "Distance+Illumination"
+msgstr "距离+照度"
+
+msgid "Illumination+Moonphase"
+msgstr "照明+月相"
+
+msgid "Distance+Moonphase"
+msgstr "距离+月相"
+
 msgid "Double-button switches"
 msgstr "双按钮开关"
 
@@ -1027,7 +1034,7 @@ msgid "Extended Description"
 msgstr "扩展描述"
 
 msgid "External IP Address"
-msgstr ""
+msgstr "外部 IP 地址"
 
 msgid "Fastmode (2s)"
 msgstr "快速模式（2秒）"
@@ -1134,6 +1141,9 @@ msgstr "渐变色"
 
 msgid "HDD"
 msgstr "HDD"
+
+msgid "Illumination only"
+msgstr "仅照明"
 
 msgid "IMAP"
 msgstr "IMAP"
@@ -1246,8 +1256,6 @@ msgstr "液晶显示屏"
 msgid "LCD Off when shutdown"
 msgstr "关机时液晶屏关闭"
 
-#, fuzzy
-#| msgid "LCD4linux"
 msgid "LCD4Linux"
 msgstr "LCD4linux"
 
@@ -1278,10 +1286,8 @@ msgstr "第四季度"
 msgid "Line"
 msgstr "行"
 
-#, fuzzy
-#| msgid "Storage-Devices"
 msgid "List of Storage Devices"
-msgstr "存储设备"
+msgstr "存储设备列表"
 
 msgid "Load Active Config-File"
 msgstr "加载活动配置文件"
@@ -1289,10 +1295,9 @@ msgstr "加载活动配置文件"
 msgid "Load Defaults / Empty Config"
 msgstr "加载默认值/清空配置"
 
-#, fuzzy, python-format
-#| msgid "Load File : %s"
+#, python-format
 msgid "Load File : %s"
-msgstr "加载文件：％s"
+msgstr "加载文件：%s"
 
 msgid "Load@1min"
 msgstr "负荷@ 1分钟"
@@ -1360,8 +1365,11 @@ msgstr "MJPEG流LCD 3虚拟亮度"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG流LCD 3启用"
 
+msgid "Moonphase only"
+msgstr "仅月相"
+
 msgid "MSN"
-msgstr "MSN "
+msgstr "MSN"
 
 msgid "MUTE or defined Keys"
 msgstr "静音或定义键"
@@ -1669,10 +1677,8 @@ msgstr "室外"
 msgid "PNG"
 msgstr "PNG"
 
-#, fuzzy
-#| msgid "Picture Directory Recursive"
 msgid "Parent Directory"
-msgstr "图片目录递归"
+msgstr "父目录"
 
 msgid "Pearl (or compatible LCD) 240x320"
 msgstr "珍珠（或相容的LCD）240x320"
@@ -1681,7 +1687,7 @@ msgid "Pearl (or compatible LCD) 320x240"
 msgstr "珍珠（或相容的LCD）320x240"
 
 msgid "Picon"
-msgstr "picon"
+msgstr "皮康"
 
 msgid "Picon 2"
 msgstr "Picon 2"
@@ -1696,10 +1702,10 @@ msgid "Picon+Position below"
 msgstr "Picon+下方位置"
 
 msgid "Picon+Position left"
-msgstr "picon+左侧位置"
+msgstr "皮康+左位置"
 
 msgid "Picon+Position right"
-msgstr "picon+位置右侧"
+msgstr "皮康+位置右"
 
 msgid "Picon+Timeshift"
 msgstr "Picon +时移"
@@ -1973,16 +1979,16 @@ msgid "Screen 2+4+6+8"
 msgstr "屏幕2 + 4 + 6 + 8"
 
 msgid "Screen 3"
-msgstr "屏幕3："
+msgstr "屏幕3"
 
 msgid "Screen 3+4"
 msgstr "屏幕3 + 4"
 
 msgid "Screen 4"
-msgstr "屏幕4："
+msgstr "屏幕4"
 
 msgid "Screen 5"
-msgstr "屏幕5："
+msgstr "屏幕5"
 
 msgid "Screen 5-8"
 msgstr "屏幕5-8"
@@ -1991,7 +1997,7 @@ msgid "Screen 5-9"
 msgstr "屏幕5-9"
 
 msgid "Screen 6"
-msgstr "屏幕6："
+msgstr "屏幕6"
 
 msgid "Screen 7"
 msgstr "屏幕7"
@@ -2140,10 +2146,8 @@ msgstr "切换帧缓冲区 [如果可能]"
 msgid "TV"
 msgstr "电视"
 
-#, fuzzy
-#| msgid "normal (full)"
 msgid "TV (full)"
-msgstr "正常（满）"
+msgstr "电视（完整）"
 
 msgid "TV+OSD"
 msgstr "电视+ OSD"
@@ -2417,7 +2421,7 @@ msgstr "浅蓝色"
 
 #, python-format
 msgid "currently set : %s"
-msgstr "当前设置：％s"
+msgstr "当前设置：%s"
 
 msgid "cyan"
 msgstr "青色"

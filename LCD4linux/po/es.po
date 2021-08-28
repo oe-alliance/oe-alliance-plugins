@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 16:22+0430\n"
-"PO-Revision-Date: 2021-08-05 15:47+0200\n"
+"POT-Creation-Date: 2021-08-27 17:17+0200\n"
+"PO-Revision-Date: 2021-08-27 17:48+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: OpenPlus\n"
 "Language: es\n"
@@ -186,6 +186,9 @@ msgstr "- Alto HTTP"
 
 msgid "- HTTP Width"
 msgstr "- Ancho HTTP"
+
+msgid "- Infolines"
+msgstr "- Líneas de información"
 
 msgid "- LCD 1 Background Color"
 msgstr "- Color de Fondo LCD 1"
@@ -742,6 +745,9 @@ msgstr "Pantalla Activa"
 msgid "All"
 msgstr "Todo"
 
+msgid "All Informations"
+msgstr "Todas las Informaciones"
+
 msgid "Always All"
 msgstr "Siempre Todo"
 
@@ -979,6 +985,18 @@ msgstr "Borrar Archivo de Depuración"
 msgid "Display Delay [ms]"
 msgstr "Retraso Pantalla [ms]"
 
+msgid "Distance only"
+msgstr "solo distancia"
+
+msgid "Distance+Illumination"
+msgstr "Distancia+Iluminación"
+
+msgid "Illumination+Moonphase"
+msgstr "Iluminación+Fase lunar"
+
+msgid "Distance+Moonphase"
+msgstr "Distancia+Fase lunar"
+
 msgid "Double-button switches"
 msgstr "Cambios Doble Botón"
 
@@ -1120,6 +1138,9 @@ msgstr "Gradiente"
 
 msgid "HDD"
 msgstr "HDD"
+
+msgid "Illumination only"
+msgstr "solo Iluminación"
 
 msgid "IMAP"
 msgstr "IMAP"
@@ -1340,6 +1361,9 @@ msgstr "MJPEG Arroyo LCD 3 Brillo virtual"
 
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Arroyo LCD 3 permitir"
+
+msgid "Moonphase only"
+msgstr "solo Fase lunar"
 
 msgid "MSN"
 msgstr "MSN"

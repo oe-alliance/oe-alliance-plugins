@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 16:21+0430\n"
-"PO-Revision-Date: 2021-08-05 16:13+0200\n"
+"POT-Creation-Date: 2021-08-27 17:17+0200\n"
+"PO-Revision-Date: 2021-08-27 17:23+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -186,6 +186,9 @@ msgstr "- HTTP Высота"
 
 msgid "- HTTP Width"
 msgstr "- HTTP Ширина"
+
+msgid "- Infolines"
+msgstr "- Информационные строки"
 
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1 Цвет фона"
@@ -742,6 +745,9 @@ msgstr "Активный экран"
 msgid "All"
 msgstr "Все"
 
+msgid "All Informations"
+msgstr "Вся информация"
+
 msgid "Always All"
 msgstr "Всегда все"
 
@@ -979,6 +985,18 @@ msgstr "Удалить Лог-файл"
 msgid "Display Delay [ms]"
 msgstr "Задержка [ms]"
 
+msgid "Distance only"
+msgstr "Только расстояние"
+
+msgid "Distance+Illumination"
+msgstr "Расстояние+Освещение"
+
+msgid "Illumination+Moonphase"
+msgstr "Освещение+фаза луны"
+
+msgid "Distance+Moonphase"
+msgstr "Расстояние+фаза луны"
+
 msgid "Double-button switches"
 msgstr "Double-button switches"
 
@@ -1120,6 +1138,9 @@ msgstr "Градиент"
 
 msgid "HDD"
 msgstr "HDD"
+
+msgid "Illumination only"
+msgstr "Только подсветка"
 
 msgid "IMAP"
 msgstr "IMAP"
@@ -1340,6 +1361,9 @@ msgstr "MJPEG Ручей LCD 3 виртуальная яркость"
 
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Ручей LCD 3 включить"
+
+msgid "Moonphase only"
+msgstr "Только фаза луны"
 
 msgid "MSN"
 msgstr "MSN"
@@ -2280,6 +2304,9 @@ msgstr "Погода Прозрачность"
 
 msgid "Weather Wind speed unit"
 msgstr "Погода Ветер скорость единицы измерения"
+
+msgid "Weather Wind Info Lines"
+msgstr "Линии информации о погоде и ветре"
 
 msgid "Weather-Icon Zoom"
 msgstr "Погода-Икона зум"
