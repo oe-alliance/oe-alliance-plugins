@@ -16,15 +16,14 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 #
-from __future__ import print_function, absolute_import
-from __future__ import division
-Version = "V5.0-r8z"
-from .import _
+from __future__ import print_function, absolute_import, division
+Version = "V5.0-r8A"
+from . import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
 from enigma import ePicLoad, ePixmap
 
-from boxbranding import getImageDistro, getDisplayType, getBoxType, getImageArch
+from boxbranding import getImageDistro, getBoxType, getImageArch
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
@@ -85,7 +84,7 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from enigma import eTimer, eEPGCache, eServiceReference, eServiceCenter, iPlayableService
 from RecordTimer import RecordTimer, RecordTimerEntry, parseEvent
 from threading import Thread, Lock
-from . ping import quiet_ping
+from .ping import quiet_ping
 
 from Components.config import configfile, getConfigListEntry, ConfigPassword, \
 	ConfigYesNo, ConfigText, ConfigClock, ConfigNumber, ConfigSelectionNumber, ConfigSelection, \
@@ -179,22 +178,7 @@ LCD4fonts = resolveFilename(SCOPE_FONTS) # /usr/share/fonts/
 LCD4config = LCD4enigma2config + "lcd4config" # /etc/enigma2/lcd4config
 LCD4plugin = LCD4enigma2plugin + "Extensions/LCD4linux/" # /usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/
 Data = LCD4plugin + "data/" # /usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/data/
-if getDisplayType() in ('colorlcd220'):
-	LCD4default = Data + "default.colorlcd220"
-elif getDisplayType() in ('colorlcd400'):
-	LCD4default = Data + "default.colorlcd400"
-elif getBoxType() == 'vuduo2':
-	LCD4default = Data + "default.vuduo2"
-elif getDisplayType() in ('colorlcd720'):
-	LCD4default = Data + "default.colorlcd720"
-elif getDisplayType() in ('colorlcd480'):
-	LCD4default = Data + "default.colorlcd480"
-elif getDisplayType() in ('colorlcd800'):
-	LCD4default = Data + "default.colorlcd800"
-elif getDisplayType() in ('bwlcd255'):
-	LCD4default = Data + "default.bwlcd255"
-else:
-	LCD4default = Data + "default.lcd"
+LCD4default = Data + "default.lcd"
 WetterPath = LCD4enigma2plugin + "Extensions/LCD4linux/wetter/"
 MeteoPath = LCD4enigma2plugin + "Extensions/LCD4linux/meteo/"
 FONTdefault = LCD4fonts + "nmsbd.ttf"
@@ -2573,6 +2557,9 @@ def L4LoadNewConfig(cfg):
 	if os.path.isfile(LCD4default):
 		LCD4linux.loadFromFile(LCD4default)
 	L4log("Config-Load", cfg)
+	if getBoxType() == 'vuduo2': # due to 2 displays, LCD4linux is integrated in this boximage
+		LCD4linux.loadFromFile(Data + "default.vuduo2")
+	L4log("Config-Load for 'Vu+ duo²'", cfg)
 	LCD4linux.loadFromFile(cfg)
 	LCD4linux.load()
 	if LCD4linux.ConfigWriteAll.value == False:
@@ -3010,8 +2997,6 @@ def find_dev2(idVendor, idProduct, idVendor2, idProduct2):
 	return gefunden
 
 # get picon path
-
-
 def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 	if len(P2C) < 3:
 		return ""
@@ -10531,7 +10516,9 @@ http://inamidst.com/code/moonphase.py
 """
 
 
-def MoonPosition(now=datetime.now()):
+def MoonPosition(now=None):
+	if now is None:
+		now = datetime.now()
 	diff = now - datetime(2001, 1, 1)
 	days = diff.days + diff.seconds / 86400
 	lunations = 0.20439731 + days * 0.03386319269
@@ -10560,13 +10547,15 @@ http://articles.adsabs.harvard.edu/full/1994A%26A...282..663S
 """
 
 
-def MoonDistance(now=datetime.utcnow()):
-    diff = now - datetime(2000, 1, 1, 12, 0, 0)
-    t = diff.days + diff.seconds / 86400
-    GM = (134.96341138 + 13.064992953630 * t) * math.pi / 180
-    DD = (297.85020420 + 12.190749117502 * t) * math.pi / 90
-    a = 385000.5584 - 20905.3550 * math.cos(GM) - 3699.1109 * math.cos(DD - GM) - 2955.9676 * math.cos(DD) - 569.9251 * math.cos(2 * GM)
-    return int(a + 0.5)
+def MoonDistance(now=None):
+	if now is None:
+		now = datetime.now()
+	diff = now - datetime(2000, 1, 1, 12, 0, 0)
+	t = diff.days + diff.seconds / 86400
+	GM = (134.96341138 + 13.064992953630 * t) * math.pi / 180
+	DD = (297.85020420 + 12.190749117502 * t) * math.pi / 90
+	a = 385000.5584 - 20905.3550 * math.cos(GM) - 3699.1109 * math.cos(DD - GM) - 2955.9676 * math.cos(DD) - 569.9251 * math.cos(2 * GM)
+	return int(a + 0.5)
 
 ################################################################
 ################################################################
@@ -11480,7 +11469,7 @@ def LCD4linuxPIC(self, session):
 			if ConfigInfo[2] == "1":
 				INFOS += str(MoonDistance()) + " km"
 			if ConfigInfo[1] == "1":
-				INFOS += "-" + str((500 - abs(math.floor(POS * 1000 - 500))) / 5.0) + " %"
+				INFOS += "-" + str(round(100 - abs(math.cos(math.pi * POS) * 100), 1)) + " %"
 			if INFOS != "":
 				w, h = getFsize(Code_utf8(INFOS), font)
 				if w > ConfigSize:
