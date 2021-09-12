@@ -2997,6 +2997,8 @@ def find_dev2(idVendor, idProduct, idVendor2, idProduct2):
 	return gefunden
 
 # get picon path
+
+
 def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 	if len(P2C) < 3:
 		return ""
