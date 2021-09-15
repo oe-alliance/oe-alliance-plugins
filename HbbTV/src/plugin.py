@@ -1,27 +1,22 @@
+from __future__ import absolute_import
+import os
+import struct
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.InfoBar import InfoBar
 from Screens.ChoiceBox import ChoiceBox
-from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.config import config
-from Components.ActionMap import ActionMap
-from Components.Language import language
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.VolumeControl import VolumeControl
-
 from enigma import eTimer, fbClass, eRCInput, iServiceInformation, iPlayableService
-
-import os
-import struct
-import vbcfg
-
-from __init__ import _
-from hbbtv import HbbTVWindow
-from browser import Browser
-from youtube import YoutubeTVWindow, YoutubeTVSettings
-from vbipc import VBController, VBServerThread, VBHandlers
+from . import vbcfg
+from .__init__ import _
+from .hbbtv import HbbTVWindow
+from .browser import Browser
+from .youtube import YoutubeTVWindow, YoutubeTVSettings
+from .vbipc import VBController, VBServerThread, VBHandlers
 
 strIsEmpty = lambda x: x is None or len(x) == 0
 
@@ -109,7 +104,7 @@ class VBHandler(VBHandlers):
 		return (True, None)
 
 	def _CB_CONTROL_TITLE(self, result, packet):
-		if packet.startswith('file://') or packet.startswith('http://'):
+		if packet.startswith(b'file://') or packet.startswith(b'http://'):
 			return (True, None)
 		for x in self.onSetTitleCB:
 			try:
@@ -121,7 +116,7 @@ class VBHandler(VBHandlers):
 		return (True, None)
 
 	def _CB_CONTROL_OK(self, result, packet):
-		if vbcfg.g_browser and packet.startswith('stop'):
+		if vbcfg.g_browser and packet.startswith(b'stop'):
 			vbcfg.g_browser.keyOK()
 		return (True, None)
 
@@ -332,7 +327,7 @@ class VBMain(Screen):
 				demux = info.getInfoString(iServiceInformation.sLiveStreamDemuxId)
 				vbcfg.DEBUG("demux = %s, pmtid = 0x%x, sid = 0x%x" % (demux, pmtid, sid))
 
-				from aitreader import eAITSectionReader
+				from .aitreader import eAITSectionReader
 				reader = eAITSectionReader(demux, pmtid, sid)
 				if reader.doOpen(info, self.m_vuplus):
 					reader.doParseApplications()
@@ -381,28 +376,6 @@ class VBMain(Screen):
 		return True
 
 
-def HelpableScreen__init__(self):
-	if isinstance(self, HelpableScreen):
-		HelpableScreen.showManual = showManual
-
-		self["helpActions"] = ActionMap(["HelpbuttonActions"], {
-			"help_b": self.showHelp,
-			"help_l": self.showManual,
-		}, -2)
-
-
-def showManual(self):
-	if not os.path.exists(vbcfg.MANUALROOT):
-		return
-
-	url = 'file://' + vbcfg.MANUALROOT + '/main.html'
-	lang = language.getLanguage()
-	if os.path.exists(vbcfg.MANUALROOT + '/' + lang):
-		url = 'file://' + vbcfg.MANUALROOT + '/' + lang + '/main.html'
-
-	vbcfg.g_browser = self.session.open(Browser, url)
-
-
 def auto_start_main(reason, **kwargs):
 	if reason:
 		try:
@@ -414,8 +387,6 @@ def auto_start_main(reason, **kwargs):
 
 def session_start_main(session, reason, **kwargs):
 	vbcfg.g_main = session.open(VBMain)
-	HelpableScreen.__init__ = HelpableScreen__init__
-	HelpableScreen.session = session
 
 
 def start_youtubetv_main(session, **kwargs):

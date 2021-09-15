@@ -19,6 +19,7 @@ from .__init__ import _
 from .bookmark import BookmarkManager, BookmarkData, CategoryData
 from .vbipc import VBController
 from . import vbcfg
+import six
 
 strIsEmpty = lambda x: x is None or len(x) == 0
 
@@ -959,6 +960,8 @@ class Browser(Screen):
 		vbcfg.LOG("open url: %s %d" % (data, mode))
 		if strIsEmpty(data):
 			return
+		elif six.PY3:
+			data = bytes(data, 'utf-8')
 
 		try:
 			if self._cb_set_title not in vbcfg.g_main.vbhandler.onSetTitleCB:

@@ -1,4 +1,6 @@
 from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import division
 # for localized messages
 from . import _
 
@@ -25,8 +27,9 @@ from Screens.ServiceScan import ServiceScan
 from Tools.BoundFunction import boundFunction
 
 import os
+import six
 
-from filters import TransponderFiltering # imported from Blindscan folder
+from . filters import TransponderFiltering # imported from Blindscan folder
 
 #used for the XML file
 from time import strftime, time
@@ -327,7 +330,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			if line.startswith('NIM Socket'):
 				sNo, sName, sI2C = -1, '', -1
 				try:
-					sNo = line.split()[2][:-1]
+					sNo = int(line.split()[2][:-1])
 				except:
 					sNo = -1
 			elif line.startswith('I2C_Device:'):
@@ -1168,6 +1171,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 
 	def blindscanContainerAvail(self, str):
 		print("[Blindscan][blindscanContainerAvail]", str)
+		str = six.ensure_str(str)
 		self.full_data = self.full_data + str # TODO: is this the cause of the duplicates in blindscanContainerClose?
 		if self.blindscan_session:
 			if self.SundtekScan:
@@ -1570,7 +1574,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		if len(tps) < 1:
 			return False
 		# freq, sr, pol, fec, inv, orb, sys, mod, roll, pilot [, MIS, pls_mode, pls_code, t2mi]
-		transponder = (tps[0][1] / 1000, tps[0][2] / 1000, tps[0][3], tps[0][4], 2, orb_pos, tps[0][5], tps[0][6], tps[0][8], tps[0][9])
+		transponder = (tps[0][1] // 1000, tps[0][2] // 1000, tps[0][3], tps[0][4], 2, orb_pos, tps[0][5], tps[0][6], tps[0][8], tps[0][9])
 		if not self.prepareFrontend():
 			print("[Blindscan][startDishMovingIfRotorSat] self.prepareFrontend() failed")
 			return False
@@ -1598,7 +1602,7 @@ def BlindscanMain(session, close=None, **kwargs):
 	except:
 		pass
 	if have_Support_Blindscan:
-		import dmmBlindScan
+		from . import dmmBlindScan
 		session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
 	else:
 		session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)

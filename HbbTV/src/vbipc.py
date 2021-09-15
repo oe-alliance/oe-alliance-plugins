@@ -8,6 +8,7 @@ import socket
 import select
 import struct
 from . import vbcfg
+import six
 
 _OPCODE = {}
 _BUFSIZE = 4096
@@ -106,7 +107,10 @@ class VBServerThread(threading.Thread):
 		if packet is None:
 			packet = ""
 		header = struct.pack('ibi', opcode, (result and 1 or 0), len(packet))
-		return header + packet
+		if six.PY3:
+			return header + bytes(packet, 'utf-8', errors='ignore')
+		else:
+			return header + packet
 
 	def process(self, conn, addr):
 		read_data = conn.recv(_BUFSIZE)

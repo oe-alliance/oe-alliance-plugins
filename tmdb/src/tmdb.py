@@ -797,11 +797,15 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		try:
 			description = json_data['overview']
 			description = description + "\n\n" + cast_string + "\n" + crew_string
-			self['description'].setText("%s" % description.encode('utf_8', 'ignore'))
+			if six.PY2:
+				description = description.encode('utf_8', 'ignore')
+			self['description'].setText("%s" % description)
 
 			movieinfo = "%s%s %s %s" % (str(genre_string), str(country_string), str(year), str(runtime))
 			fulldescription = subtitle + movieinfo + "\n\n" + description + "\n" + season
-			self['fulldescription'].setText("%s" % fulldescription.encode('utf_8', 'ignore'))
+			if six.PY2:
+				fulldescription = fulldescription.encode('utf_8', 'ignore')
+			self['fulldescription'].setText("%s" % fulldescription)
 			self.text = fulldescription
 		except:
 			description = "-"
