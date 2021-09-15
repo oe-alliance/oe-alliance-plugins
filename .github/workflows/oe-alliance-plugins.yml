@@ -35,24 +35,7 @@ jobs:
           CC: "gcc-${{ matrix.gcc }}"
           CXX: "g++-${{ matrix.gcc }}"
         run: |
-          autoreconf -i
-          ./configure
-          make
-          python -m compileall .
-
-      - uses: actions/checkout@v2
-        with:
-          ref: 'python3'
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-
-      - name: Build plugins, gcc-${{ matrix.gcc }}, python 3.8
-        env:
-          CC: "gcc-${{ matrix.gcc }}"
-          CXX: "g++-${{ matrix.gcc }}"
-        run: |
-          pip3 install six
+          pip install six
           autoreconf -i
           ./configure
           make
