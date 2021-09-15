@@ -38,11 +38,12 @@ from twisted.web import client
 from dns.resolver import Resolver
 from os import path as os_path, mkdir as os_mkdir
 
-from httplib import HTTPConnection
 import socket
-import urllib
-import urllib2
 import sys
+
+from six.moves.http_client import HTTPConnection
+from six.moves.urllib.request import HTTPHandler
+import six
 
 socket.setdefaulttimeout(300) #in seconds
 
@@ -135,7 +136,7 @@ class MainMenuList(GUIComponent):
 			pngthumb = self.picload.getData()
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r1.x, r1.y, r1.w, r1.h, pngthumb))
 
- 		return res
+		return res
 
 	def fillList(self, list):
 		self.totalitems = len(list)
@@ -297,7 +298,7 @@ class EpisodeList(GUIComponent):
 		pngthumb = self.picload.getData()
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 0, self.l.getItemSize().height() - 2, self.l.getItemSize().width(), 2, pngthumb))
 
- 		return res
+		return res
 
 	def fillEpisodeList(self, mediaList):
 		for x in mediaList:
@@ -305,7 +306,8 @@ class EpisodeList(GUIComponent):
 				tmp_icon = self.getThumbnailName(x[5])
 				thumbnailFile = self.imagedir + tmp_icon
 				if not os_path.exists(thumbnailFile):
-					client.downloadPage(x[5], thumbnailFile)
+					u = six.ensure_binary(x[5])
+					client.downloadPage(u, thumbnailFile)
 
 		self.l.setList(mediaList)
 		self.selectionChanged()
@@ -454,7 +456,7 @@ class MyHTTPConnection(HTTPConnection):
 				print("MyHTTPConnection: Failed to Connect to: ", secondaryDNS, " , error: ", exception)
 
 
-class MyHTTPHandler(urllib2.HTTPHandler):
+class MyHTTPHandler(HTTPHandler):
 	def http_open(self, req):
 		return self.do_open(MyHTTPConnection, req)
 

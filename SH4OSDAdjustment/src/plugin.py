@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigSubsection, ConfigInteger
@@ -13,7 +14,7 @@ config.OSDAdjustment.bottom = ConfigInteger(default=0)
 config.OSDAdjustment.left = ConfigInteger(default=0)
 config.OSDAdjustment.right = ConfigInteger(default=0)
 config.OSDAdjustment.settuxtxt2conf = ConfigInteger(default=0)
-from __init__ import _
+from .__init__ import _
 
 
 class Screen_adjust(Screen):

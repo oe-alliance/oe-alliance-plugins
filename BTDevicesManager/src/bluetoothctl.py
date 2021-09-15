@@ -27,6 +27,7 @@ import pexpect
 import subprocess
 import sys
 import re
+import six
 
 
 class BluetoothctlError(Exception):
@@ -50,7 +51,7 @@ class Bluetoothctl:
         if start_failed:
             raise BluetoothctlError("Bluetoothctl failed after running " + command)
 
-        return self.child.before.split("\r\n")
+        return self.child.before.splitlines()
 
     def start_scan(self):
         """Start bluetooth scanning process."""
@@ -99,6 +100,7 @@ class Bluetoothctl:
         else:
             available_devices = []
             for line in out:
+                line = six.ensure_str(line)
                 device = self.parse_device_info(line)
                 if device:
                     available_devices.append(device)
@@ -115,6 +117,7 @@ class Bluetoothctl:
         else:
             paired_devices = []
             for line in out:
+                line = six.ensure_str(line)
                 device = self.parse_device_info(line)
                 if device:
                     paired_devices.append(device)

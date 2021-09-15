@@ -1,15 +1,16 @@
 from __future__ import print_function
 # for localized messages
+from future.utils import raise_
 from . import _
 
 import os
 import fcntl
-import thread
+from six.moves import _thread
 
 from enigma import eTimer
 
-from urllib import urlretrieve
-import urllib
+from six.moves.urllib.request import urlretrieve
+from six.moves import urllib
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -55,7 +56,7 @@ class FPGAUpgradeCore():
 		try:
 			size = os.path.getsize(self.firmwarefile)
 			if size == 0:
-				raise Exception, 'data_size is zero'
+				raise Exception('data_size is zero')
 			#print '[FPGAUpgradeCore] data_size :',size
 
 			firmware = open(self.firmwarefile, 'rb')
@@ -64,12 +65,12 @@ class FPGAUpgradeCore():
 
 			rc = fcntl.ioctl(device, 0, size)
 			if rc < 0:
-				raise Exception, 'fail to set size : %d' % (rc)
+				raise_(Exception, 'fail to set size : %d' % (rc))
 			#print '[FPGAUpgradeCore] set size >> [ok]'
 
 			rc = fcntl.ioctl(device, 2, 5)
 			if rc < 0:
-				raise Exception, 'fail to set programming mode : %d' % (rc)
+				raise_(Exception, 'fail to set programming mode : %d' % (rc))
 			#print '[FPGAUpgradeCore] programming mode >> [ok]'
 			self.status = STATUS_PREPARED
 
@@ -83,10 +84,10 @@ class FPGAUpgradeCore():
 			self.status = STATUS_PROGRAMMING
 			rc = fcntl.ioctl(device, 1, 0)
 			if rc < 0:
-				raise Exception, 'fail to programming : %d' % (rc)
+				raise_(Exception, 'fail to programming : %d' % (rc))
 			#print '[FPGAUpgradeCore] upgrade done.'
 			if self.callcount < 100:
-				raise Exception, 'wrong fpga file.'
+				raise Exception('wrong fpga file.')
 		except Exception as msg:
 			self.errmsg = msg
 			print('[FPGAUpgradeCore] ERROR >>', msg)
@@ -114,7 +115,7 @@ class FPGAUpgradeManager:
 
 	def fpga_upgrade(self, datafile, device):
 		self.fu = FPGAUpgradeCore(firmwarefile=datafile, devicefile=device)
-		thread.start_new_thread(self.fu.upgradeMain, ())
+		_thread.start_new_thread(self.fu.upgradeMain, ())
 
 	def checkError(self):
 		if self.fu.status == STATUS_ERROR:
@@ -261,8 +262,8 @@ class FPGAUpgrade(Screen):
 		self["file_list"] = FileList("/", matchingPattern="^.*")
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", ],
-                {
-                        "red": self.onClickRed,
+			{
+			"red": self.onClickRed,
 			"green": self.onClickGreen,
 			"blue": self.onClickBlue,
 			"back": self.onClickRed,
@@ -271,14 +272,14 @@ class FPGAUpgrade(Screen):
 			"down": self.onClickDown,
 			"left": self.onClickLeft,
 			"right": self.onClickRight,
-                }, -1)
+			}, -1)
 		self.onLayoutFinish.append(self.doLayoutFinish)
 
-                self.ERROR_MSG = ''
-                self.ERROR_CODE = 0
-                self.SOURCELIST = self["file_list"]
-                self.STATUS_BAR = self["status"]
-                self.STATUS_BAR.setText(_(self.SOURCELIST.getCurrentDirectory()))
+		self.ERROR_MSG = ''
+		self.ERROR_CODE = 0
+		self.SOURCELIST = self["file_list"]
+		self.STATUS_BAR = self["status"]
+		self.STATUS_BAR.setText(_(self.SOURCELIST.getCurrentDirectory()))
 
 		self.DEVICE_LIST = '/dev/fpga_dp;/dev/dp;/dev/misc/dp;'
 		self.DOWNLOAD_TAR_PATH = '/tmp/'
@@ -392,12 +393,12 @@ class FPGAUpgrade(Screen):
 			before_name = self.SOURCELIST.getFilename()
 
 	def onClickOk(self):
-	        if self.SOURCELIST.canDescent(): # isDir
-	        	self.SOURCELIST.descent()
+		if self.SOURCELIST.canDescent(): # isDir
+			self.SOURCELIST.descent()
 			if self.SOURCELIST.getCurrentDirectory():
 				self.STATUS_BAR.setText(_(self.SOURCELIST.getCurrentDirectory()))
-        	else:
-			self.onClickGreen()
+			else:
+				self.onClickGreen()
 
 	def onClickUp(self):
 		self.SOURCELIST.up()

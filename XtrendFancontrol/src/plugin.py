@@ -34,6 +34,9 @@ from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.Label import Label
 from boxbranding import getImageDistro
+import six
+
+SIGN = '°' if six.PY3 else str('\xc2\xb0')
 
 PLUGIN_VERSION = _(" ver. 3.2")
 
@@ -173,7 +176,7 @@ class FanSetupScreen(Screen, ConfigListScreen):
 
 	def updateTemps(self):
 		if self.systemtempsensor:
-			self["sysTemp"].setText(_("System temperature") + " " + str(getSysTemp()) + str('\xc2\xb0') + ' C')
+			self["sysTemp"].setText(_("System temperature") + " " + str(getSysTemp()) + SIGN + ' C')
 		else:
 			self["sysTemp"].setText(_("System temperature") + " " + _("n.a."))
 
@@ -181,7 +184,7 @@ class FanSetupScreen(Screen, ConfigListScreen):
 		if hddTemp is None:
 			self["hddTemp"].setText(_("Harddisk temperature") + " " + _("n.a."))
 		else:
-			self["hddTemp"].setText(_("Harddisk temperature") + " " + str(hddTemp) + str('\xc2\xb0') + ' C')
+			self["hddTemp"].setText(_("Harddisk temperature") + " " + str(hddTemp) + SIGN + ' C')
 
 		self.temptimer.start(60000, True)
 
@@ -387,7 +390,7 @@ class FanManager:
 				if FanConf.hddwatch.value == "sleep" and FanConf.hddsleep.value is True:
 					sleepcount = 0
 					hddlist = harddiskmanager.HDDList()
-					for x in range(hddcount):
+					for x in list(range(hddcount)):
 						if hddlist[x][1].isSleeping():
 							sleepcount += 1
 						else:
@@ -515,12 +518,12 @@ def show_temp(session, **kwargs):
 	if hddTemp is None:
 		message += "\n" + _("No harddisk with temperature sensor found!")
 	else:
-		message += "\n" + disk + ": " + str(hddTemp) + str('\xc2\xb0') + ' C'
+		message += "\n" + disk + ": " + str(hddTemp) + SIGN + ' C'
 
 	if sysTemp is None:
 		message += "\n" + _("No system temperature sensor found!")
 	else:
-		message += "\n\n" + _("System temperature") + " " + str(sysTemp) + str('\xc2\xb0') + ' C'
+		message += "\n\n" + _("System temperature") + " " + str(sysTemp) + SIGN + ' C'
 	session.open(MessageBox, message, type=MessageBox.TYPE_INFO)
 
 

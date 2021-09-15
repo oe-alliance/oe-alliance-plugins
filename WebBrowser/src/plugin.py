@@ -8,11 +8,10 @@ from Plugins.Plugin import PluginDescriptor
 import time
 import os
 import socket
-import thread
-import socket
 import copy
 from socket import gaierror, error
 from os import path as os_path, remove as os_remove
+from six.moves import _thread
 
 import gdata.youtube
 import gdata.youtube.service
@@ -22,9 +21,8 @@ from twisted.web import client
 from twisted.internet import reactor
 
 from urlparse import parse_qs
-from urllib import quote, unquote_plus, unquote
-from urllib2 import Request, URLError, urlopen as urlopen2
-from httplib import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
+from six.moves.urllib.parse import quote, unquote_plus, unquote
+from six.moves.urllib.request import Request, URLError, urlopen as urlopen2
 
 from Components.Button import Button
 from Components.Label import Label
@@ -45,6 +43,10 @@ from Screens.InfoBarGenerics import InfoBarNotifications
 
 from enigma import eTimer, eServiceReference, iPlayableService, fbClass, eRCInput, eConsoleAppContainer
 from boxbranding import getBrandOEM
+
+import six
+from six.moves.http_client import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
+
 
 HTTPConnection.debuglevel = 1
 
@@ -323,10 +325,10 @@ class PlayerLauncher:
 			if fmtid in VIDEO_FMT_PRIORITY_MAP:
 				video_fmt_map[VIDEO_FMT_PRIORITY_MAP[fmtid]] = {'fmtid': fmtid, 'fmturl': unquote_plus(fmturl)}
 			fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
-		print("got", sorted(fmt_infomap.iterkeys()))
+		print("got", sorted(six.iterkeys(fmt_infomap)))
 		if video_fmt_map and len(video_fmt_map):
-			video_url = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmturl'].split(';')[0]
-			#print "found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+			video_url = video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]['fmturl'].split(';')[0]
+			#print "found best available video format:",video_fmt_map[sorted(six.iterkeys(video_fmt_map))[0]]['fmtid']
 			#print "found best available video url:",video_url
 		return video_url
 
@@ -358,7 +360,7 @@ class PlayerService:
 
 	def start(self, timeout=1):
 		self.socket_timeout = timeout
-		thread.start_new_thread(self.run, (True,))
+		_thread.start_new_thread(self.run, (True,))
 
 	def stop(self):
 		self.enable = False
@@ -422,7 +424,7 @@ class PlayerService:
 			self.vk_conn = conn
 			self.session.openWithCallback(self.cbOpenKeyboard, VirtualKeyBoard, title=(_("Enter your input data")), text="")
 
-        def cbOpenKeyboard(self, data=None):
+	def cbOpenKeyboard(self, data=None):
 		print("virtual keyboard callback!!")
 		wb_unlock()
 		self.sendResponse(self.vk_conn, data)
@@ -450,7 +452,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-                self.session = session
+		self.session = session
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
 
@@ -461,10 +463,10 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		self.browser_name = "arora"
 		self.conf_file = "/usr/lib/enigma2/python/Plugins/Extensions/WebBrowser/settings.conf"
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", "SetupActions", ],
-                {	"red": self.keyCancel,
-			"green": self.keyGo,
-			"cancel": self.keyExit,
-                }, -2)
+			{	"red": self.keyCancel,
+				"green": self.keyGo,
+				"cancel": self.keyExit,
+			}, -2)
 		self.info = Label(_("If you want to quit the Browser,\nPress RED -> EXIT."))
 		self["info"] = self.info
 		self["key_red"] = StaticText(_("Exit"))
@@ -654,7 +656,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 
 	def callbackLauncherDataAvail(self, ret_data):
 		print(ret_data)
-		if ret_data.startswith("--done--"):
+		if ret_data.startswith(b"--done--"):
 			self.lock = False
 			self.doExit()
 

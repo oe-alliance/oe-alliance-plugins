@@ -701,7 +701,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 		"""
 
 	def __init__(self, session):
-                self.session = session
+		self.session = session
 		Screen.__init__(self, session)
 
 		self.menulist = []
@@ -764,7 +764,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 		configString = configDataAppend(configString, "refresh", self.menuItemRefresh.value)
 		configString = configDataAppend(configString, "slideshow", self.menuItemSlideshow.value)
 		print(configString)
-		confFile = file(self.configFileName, 'w')
+		confFile = open(self.configFileName, 'w')
 		confFile.write(configString)
 		confFile.close()
 
@@ -783,7 +783,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 			setDefault('refresh', '10')
 			setDefault('slideshow', '10')
 			return
-		for line in file(self.configFileName).readlines():
+		for line in open(self.configFileName).readlines():
 			line = line.strip()
 			if line == '' or line[0] == '#':
 				continue
@@ -877,7 +877,7 @@ class DLNADeviceBrowser(Screen):
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbPrintClose)
 			cmd = 'djmount -o allow_other -o iocharset=utf8 %s' % (DLNA_CONFIG_ROOT_DIR)
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbStartDone)
-		self.taskManager.next()
+		next(self.taskManager)
 
 	def keyCancel(self):
 		self.close()
@@ -905,7 +905,7 @@ class DLNADeviceBrowser(Screen):
 			DLNA_CONFIG_SLIDESHOW = 10000
 			print("config : [%s][%d][%d]" % (DLNA_CONFIG_ROOT_DIR, DLNA_CONFIG_SLIDESHOW, DLNA_CONFIG_DEVICE_REFRESH))
 			return
-		for line in file(self.configFileName).readlines():
+		for line in open(self.configFileName).readlines():
 			line = line.strip()
 			if line == '' or line[0] == '#':
 				continue
@@ -961,7 +961,7 @@ class DLNADeviceBrowser(Screen):
 		print(data)
 
 	def cbPrintClose(self, ret):
-		self.taskManager.next()
+		next(self.taskManager)
 
 	def cbStopDone(self, ret):
 		self.taskManager.clean()
@@ -986,7 +986,8 @@ class DLNADeviceBrowser(Screen):
 	def setListOnView(slelf):
 		global DLNA_CONFIG_ROOT_DIR
 		items, rootdir = [], DLNA_CONFIG_ROOT_DIR
-		deviceList = sorted([name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name))])
+		deviceList = [name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name))]
+		deviceList.sort()
 		for d in deviceList:
 			if d[0] in ('.', '_'):
 				continue

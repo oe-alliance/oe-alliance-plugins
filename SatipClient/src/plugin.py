@@ -26,11 +26,11 @@ from twisted.internet.protocol import DatagramProtocol
 
 import glob
 import os
-import httplib
 
 import copy
 
-from Components.config import config, ConfigSubList, ConfigSelection, ConfigElement
+from six.moves import http_client
+import six
 
 
 def isEmpty(x):
@@ -42,7 +42,8 @@ def getVtunerList():
 	for x in glob.glob('/dev/misc/vtuner*'):
 		x = x.strip('/dev/misc/vtuner')
 		data.append(x)
-	data = sorted([int(x) for x in data])
+	data = [int(x) for x in data]
+	data.sort()
 	return data
 
 
@@ -68,7 +69,7 @@ class SSDPServerDiscovery(DatagramProtocol):
 		self.port = reactor.listenUDP(0, self, interface=iface)
 		if self.port is not None:
 			print("Sending M-SEARCH...")
-			self.port.write(MS, (SSDP_ADDR, SSDP_PORT))
+			self.port.write(bytes(MS, 'utf-8'), (SSDP_ADDR, SSDP_PORT))
 
 	def stop_msearch(self):
 		if self.port is not None:
@@ -141,14 +142,14 @@ class SATIPDiscovery:
 	def dataReceive(self, data):
 #		print "dataReceive:\n", data
 #		print "\n"
-		serverData = self.dataParse(data)
+		serverData = self.dataParse(six.ensure_str(data))
 		if 'LOCATION' in serverData:
 			self.xmlParse(serverData['LOCATION'])
 
 	def dataParse(self, data):
 		serverData = {}
 		for line in data.splitlines():
-#			print "[*] line : ", line
+			#print("[*] line : ", line)
 			if line.find(':') != -1:
 				(attr, value) = line.split(':', 1)
 				attr = attr.strip().upper()
@@ -222,11 +223,11 @@ class SATIPDiscovery:
 				port = location[AAA + 1: BBB]
 				request = location[BBB:]
 
-			#print "address2 : ", address
-			#print "port2: " , port
-			#print "request : ", request
+			#print("address2 : ", address)
+			#print("port2: " , port)
+			#print("request : ", request)
 
-			conn = httplib.HTTPConnection(address, int(port))
+			conn = http_client.HTTPConnection(address, int(port))
 			conn.request("GET", request)
 			res = conn.getresponse()
 		except Exception as ErrMsg:
@@ -353,7 +354,6 @@ class SATIPTuner(Screen, ConfigListScreen):
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self.satipconfig = ConfigSubsection()
-		self.satipconfig.server = None
 
 		if not self.discoveryEnd in satipdiscovery.updateCallback:
 			satipdiscovery.updateCallback.append(self.discoveryEnd)
@@ -374,13 +374,13 @@ class SATIPTuner(Screen, ConfigListScreen):
 
 	def DiscoveryStart(self):
 		self["shortcuts"].setEnabled(False)
-		self["config_actions"].setEnabled(False)
+		# self["config_actions"].setEnabled(False)
 		self["description"].setText(_("SAT>IP server discovering for %d seconds...") % (discoveryTimeoutMS / 1000))
 		satipdiscovery.DiscoveryStart()
 
 	def discoveryEnd(self):
 		self["shortcuts"].setEnabled(True)
-		self["config_actions"].setEnabled(True)
+		# self["config_actions"].setEnabled(True)
 		if not satipdiscovery.isEmptyServerData():
 			self.createServerConfig()
 			self.createSetup()
@@ -631,12 +631,12 @@ class SATIPClient(Screen):
 		self.sortVtunerConfig()
 		self.old_vtunerConfig = copy.deepcopy(self.vtunerConfig)
 		self.createSetup()
-                self.onShown.append(self.checkVTuner)
+		self.onShown.append(self.checkVTuner)
 
-        def checkVTuner(self):
-                if not VTUNER_IDX_LIST:
-                        self.session.open(MessageBox, _("No vtuner found."), MessageBox.TYPE_ERROR, close_on_any_key=True)
-                        self.close()
+	def checkVTuner(self):
+		if not VTUNER_IDX_LIST:
+			self.session.open(MessageBox, _("No vtuner found."), MessageBox.TYPE_ERROR, close_on_any_key=True)
+			self.close()
 
 	def isChanged(self):
 		for vtuner_idx in self.vtunerIndex:
@@ -749,7 +749,9 @@ class SATIPClient(Screen):
 #			self.keyDisable()
 
 	def sortVtunerConfig(self):
-		self.vtunerConfig.sort(reverse=True)
+		# FIXME What should be sorted here ???
+		if six.PY2:
+			self.vtunerConfig.sort(reverse=True)
 
 	def saveConfig(self):
 		data = ""

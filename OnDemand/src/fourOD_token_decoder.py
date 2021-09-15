@@ -1,3 +1,6 @@
+import six
+
+
 table_a2b_base64 = {
     'A': 0,
     'B': 1,
@@ -68,8 +71,8 @@ table_a2b_base64 = {
 
 
 def Base64_decodeToByteArray(s):
-    if not isinstance(s, (str, unicode)):
-        raise TypeError("expected string or unicode, got %r" % (s,))
+    if not isinstance(s, six.string_types):
+        raise TypeError("expected string or six.text_type, got %r" % (s,))
     s = s.rstrip()
     # clean out all invalid characters, this also strips the final '=' padding
     # check for correct padding

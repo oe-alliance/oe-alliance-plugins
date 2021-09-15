@@ -16,6 +16,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from __future__ import print_function
+from __future__ import absolute_import
 
 # for localized messages
 from . import _
@@ -35,13 +36,16 @@ import random
 from time import strftime, strptime, mktime
 from datetime import timedelta, date, datetime
 
-import urllib2
 import re
+from six.moves.urllib.request import Request, urlopen
 
 import simplejson
 from bs4 import BeautifulSoup
 
-from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
+from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
+
+import six
+
 
 __plugin__ = "ABC iView"
 __version__ = "1.0.1"
@@ -51,9 +55,9 @@ __version__ = "1.0.1"
 
 def wgetUrl(target):
 	try:
-		req = urllib2.Request(target)
+		req = Request(target)
 		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-		response = urllib2.urlopen(req)
+		response = urlopen(req)
 		outtxt = str(response.read())
 		response.close()
 		return outtxt
@@ -92,7 +96,7 @@ class iViewMenu(Screen):
 		self.action = action
 		self.value = value
 		osdList = []
-		if self.action is "start":
+		if self.action == "start":
 			osdList.append((_("Search"), "search"))
 			osdList.append((_("Recently Added"), "recent"))
 			osdList.append((_("Comedy - Cult"), "cult"))
@@ -143,12 +147,12 @@ class iViewMenu(Screen):
 		name = self["iViewMenu"].l.getCurrentSelection()[0]
 		selection = self["iViewMenu"].l.getCurrentSelection()[1]
 
-		if selection is "exit":
+		if selection == "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
 
-		elif self.action is "start":
-			if selection is "atoz":
+		elif self.action == "start":
+			if selection == "atoz":
 				self.session.open(StreamsMenu, selection, name, selection)
 			else:
 				self.session.open(StreamsThumb, selection, name, selection)
@@ -176,7 +180,7 @@ class StreamsMenu(Screen):
 
 	def __init__(self, session, action, value, url):
 		Screen.__init__(self, session)
-		if action is 'atoz':
+		if action == 'atoz':
 			Screen.setTitle(self, _("ABC iView - A to Z"))
 
 		self.action = action
@@ -206,7 +210,7 @@ class StreamsMenu(Screen):
 		selection = self["latestMenu"].l.getCurrentSelection()[1]
 
 		if selection is not None:
-			if selection is "exit":
+			if selection == "exit":
 				self.close(None)
 			else:
 				self.session.open(StreamsThumb, selection, title, selection)
@@ -287,7 +291,7 @@ class StreamsThumb(StreamsThumbCommon):
 		showID = self["list"].l.getCurrentSelection()[4]
 		showName = self["list"].l.getCurrentSelection()[1]
 
-		if self.cmd <> "episode":
+		if self.cmd != "episode":
 			self.session.open(StreamsThumb, "episode", showName, showID)
 		else:
 			fileUrl = self.findPlayUrl(showID)
@@ -490,7 +494,7 @@ class StreamsThumb(StreamsThumbCommon):
 						icon = ''
 
 					try:
-						name_tmp = str(unicode(entry[u'b']))
+						name_tmp = str(six.text_type(entry[u'b']))
 						name_tmp1 = checkUnicode(name_tmp)
 						name = remove_extra_spaces(name_tmp1)
 					except (Exception) as exception:

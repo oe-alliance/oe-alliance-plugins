@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -5,10 +6,8 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText, getConfigListEntry
-
-import vbcfg
-
-from __init__ import _
+from . import vbcfg
+from .__init__ import _
 
 config.plugins.youtubetv = ConfigSubsection()
 config.plugins.youtubetv.showhelp = ConfigYesNo(default=False)
@@ -30,8 +29,8 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 		</screen>
 		"""
 
-        def __init__(self, session):
-                Screen.__init__(self, session)
+	def __init__(self, session):
+		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "OkCancelActions", "ColorActions", "EPGSelectActions", ], {

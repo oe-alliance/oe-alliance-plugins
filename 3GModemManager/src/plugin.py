@@ -495,7 +495,7 @@ class ModemManual(Screen):
 				tempIndex += 1
 		apnString += '</apns>\n'
 		printDebugModemMgr(apnString)
-		apnListFile = file(resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/3GModemManager/apnlist.xml"), 'w')
+		apnListFile = open(resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/3GModemManager/apnlist.xml"), 'w')
 		apnListFile.write(apnString)
 		apnListFile.close()
 
@@ -922,7 +922,7 @@ class ModemManager(Screen):
 			self.taskManager.append(cmd, self.cbRunWvDialAvail, self.cbPrintClose)
 			self.taskManager.setStatusCB(self.setConnectStatus)
 
-		self.taskManager.next()
+		next(self.taskManager)
 
 	def printStatus(self, idx, STATUS):
 		message = ''
@@ -968,7 +968,7 @@ class ModemManager(Screen):
 			message = "Occur error during connection...\nPlease, Check your setting!!"
 			self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO)
 			return
-		self.taskManager.next()
+		next(self.taskManager)
 
 	def cbUnloadClose(self, ret):
 		self.taskManager.clean()
@@ -1000,7 +1000,7 @@ class ModemManager(Screen):
 
 		info = {}
 		try:
-			datalist = file('/etc/wvdial.conf').read().splitlines()
+			datalist = open('/etc/wvdial.conf').read().splitlines()
 			for x in datalist:
 				if x.startswith('Modem ='):
 					print(x)
@@ -1028,7 +1028,7 @@ class ModemManager(Screen):
 			info['phone'] = self.phone
 
 		self.makeWvDialConf(info)
-		self.taskManager.next()
+		next(self.taskManager)
 
 	def writeConf(self, data, oper='>>'):
 		confFile = '/etc/wvdial.conf'
@@ -1092,7 +1092,7 @@ class ModemManager(Screen):
 		self.writeConf('Abort on No Dialtone = 0')
 		self.writeConf('Auto DNS = 0')
 		if debug_mode_modem_mgr:
-			printDebugModemMgr(file('/etc/wvdial.conf').read())
+			printDebugModemMgr(open('/etc/wvdial.conf').read())
 
 	def updateUSBInfo(self):
 		info = ' '

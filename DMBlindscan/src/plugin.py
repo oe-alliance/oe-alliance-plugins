@@ -1,11 +1,12 @@
 from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import division
 # for localized messages
 from . import _
 
 from boxbranding import getBoxType
 from Components.ActionMap import NumberActionMap, ActionMap
-from Components.config import config, ConfigSubsection, ConfigSelection, \
-	ConfigYesNo, ConfigInteger, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.NimManager import nimmanager, getConfigSatlist
@@ -187,20 +188,20 @@ class SatelliteTransponderSearchSupport:
 				self.setTransponderSearchResult(None)
 		self.satellite_search_session = None
 		self.__tlist = None
-                self.timer.stop()
+		self.timer.stop()
 		self.TransponderSearchFinished()
 
 	def updateStateSat(self):
 		self.frontendStateChanged()
 
 	def frontendStateChanged(self):
-	    state = []
-	    state = self.frontend.getState()
-#	    print "State=", state[1]
-	    if state[1] > 1:
-		x = {}
-		self.frontend.getFrontendStatus(x)
-		assert x, "getFrontendStatus failed!"
+		state = []
+		state = self.frontend.getState()
+#		print "State=", state[1]
+		if state[1] > 1:
+			x = {}
+			self.frontend.getFrontendStatus(x)
+			assert x, "getFrontendStatus failed!"
 		if x["tuner_state"] in ("LOCKED", "FAILED", "LOSTLOCK"):
 			state = self.satellite_search_session
 
@@ -213,7 +214,7 @@ class SatelliteTransponderSearchSupport:
 				freq = d["frequency"]
 				parm = eDVBFrontendParametersSatellite()
 				parm.frequency = int(round(float(freq * 2) / 1000)) * 1000
-				parm.frequency /= 2
+				parm.frequency //= 2
 				fstr = str(parm.frequency)
 				if self.parm.polarisation == eDVBFrontendParametersSatellite.Polarisation_Horizontal:
 					fstr += "H KHz SR"
@@ -229,7 +230,7 @@ class SatelliteTransponderSearchSupport:
 					print("WARNING blind SR is < 0... skip")
 					self.parm.frequency += self.parm.symbol_rate
 				else:
-					sr_rounded = round(float(sr * 2L) / 1000) * 1000
+					sr_rounded = round(float(sr * 2) / 1000) * 1000
 					sr_rounded /= 2
 #					print "SR after round", sr_rounded
 					parm.symbol_rate = int(sr_rounded)
@@ -254,10 +255,10 @@ class SatelliteTransponderSearchSupport:
 						parm.pls_mode = d["pls_mode"]
 					self.__tlist.append(parm)
 
-					print("LOCKED at", freq, "SEARCHED at", self.parm.frequency, "half bw", (135L * ((sr + 1000) / 1000) / 200), "half search range", (self.parm.symbol_rate / 2))
+					print("LOCKED at", freq, "SEARCHED at", self.parm.frequency, "half bw", (135 * ((sr + 1000) / 1000) / 200), "half search range", (self.parm.symbol_rate / 2))
 					self.parm.frequency = freq
-					self.parm.frequency += (135L * ((sr + 999) / 1000) / 200)
-					self.parm.frequency += self.parm.symbol_rate / 2
+					self.parm.frequency += (135 * ((sr + 999) // 1000) // 200)
+					self.parm.frequency += self.parm.symbol_rate // 2
 
 					bm = state.getConstellationBitmap(5)
 					self.tp_found.append((fstr, bm))
@@ -293,7 +294,7 @@ class SatelliteTransponderSearchSupport:
 					self.channel = None
 					return
 
-			tmpstr = str((self.parm.frequency + 500) / 1000)
+			tmpstr = str((self.parm.frequency + 500) // 1000)
 			if self.parm.polarisation == eDVBFrontendParametersSatellite.Polarisation_Horizontal:
 				tmpstr += "H"
 			elif self.parm.polarisation == eDVBFrontendParametersSatellite.Polarisation_Vertical:
@@ -319,7 +320,7 @@ class SatelliteTransponderSearchSupport:
 			self.tuneNext()
 		else:
 			print("unhandled tuner state", x["tuner_state"])
-	    self.timer.start(500, True)
+		self.timer.start(500, True)
 
 	def tuneNext(self):
 		tparm = eDVBFrontendParameters()
@@ -359,10 +360,10 @@ class SatelliteTransponderSearchSupport:
 		mhz_done = 0
 		cnt = 0
 		for range in self.range_list:
-			mhz = (range[1] - range[0]) / 1000
+			mhz = (range[1] - range[0]) // 1000
 			mhz_complete += mhz
 			if cnt == self.current_range:
-				mhz_done += (self.parm.frequency - range[0]) / 1000
+				mhz_done += (self.parm.frequency - range[0]) // 1000
 			elif cnt < self.current_range:
 				mhz_done += mhz
 			cnt += 1
@@ -392,7 +393,7 @@ class SatelliteTransponderSearchSupport:
 				if not self.frontend:
 					if self.session.pipshown: # try to disable pip
 						self.session.pipshown = False
-	                                        self.session.deleteDialog(self.session.pip)
+						self.session.deleteDialog(self.session.pip)
 						del self.session.pip
 					(self.channel, self.frontend) = self.tryGetRawFrontend(nim_idx, False, False)
 					if not self.frontend:
@@ -543,7 +544,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 			selected_sat_pos = self.scan_satselection[index_to_scan].value
 			limit_list = self.nim_sat_frequency_range[index_to_scan][int(selected_sat_pos)]
 			l = limit_list[0]
-			limits = (l[0] / 1000, l[1] / 1000)
+			limits = (l[0] // 1000, l[1] // 1000)
 			self.scan_sat.bs_freq_start = ConfigInteger(default=limits[0], limits=(limits[0], limits[1]))
 			self.scan_sat.bs_freq_stop = ConfigInteger(default=limits[1], limits=(limits[0], limits[1]))
 			self.satelliteEntry = getConfigListEntry(_("Satellite"), self.scan_satselection[index_to_scan])

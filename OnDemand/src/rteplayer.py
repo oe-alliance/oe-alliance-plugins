@@ -16,6 +16,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from __future__ import print_function
+from __future__ import absolute_import
 
 # for localized messages
 from . import _
@@ -35,22 +36,22 @@ import random
 from time import strftime, strptime, mktime
 from datetime import timedelta, date, datetime
 
-import urllib2
 import re
+from six.moves.urllib.request import Request, urlopen
 
 from lxml import etree
 from lxml import html
 
-from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
+from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 ########### Retrieve the webpage data ####################################
 
 
 def wgetUrl(target):
 	try:
-		req = urllib2.Request(target)
+		req = Request(target)
 		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-		response = urllib2.urlopen(req)
+		response = urlopen(req)
 		outtxt = str(response.read())
 		response.close()
 		return outtxt
@@ -89,7 +90,7 @@ class RTEMenu(Screen):
 		self.action = action
 		self.value = value
 		osdList = []
-		if self.action is "start":
+		if self.action == "start":
 			osdList.append((_("Search"), "search"))
 			osdList.append((_("Latest Episodes"), "latest"))
 			osdList.append((_("Most Popular Episodes"), "pop"))
@@ -107,21 +108,21 @@ class RTEMenu(Screen):
 
 	def go(self):
 		returnValue = self["RTEMenu"].l.getCurrentSelection()[1]
-		if returnValue is "exit":
+		if returnValue == "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
-		elif self.action is "start":
-			if returnValue is "latest":
+		elif self.action == "start":
+			if returnValue == "latest":
 				self.session.open(StreamsThumb, "latest", "Latest", "http://feeds.rasset.ie/rteavgen/player/latest/?platform=playerxl&limit=36")
-			elif returnValue is "pop":
+			elif returnValue == "pop":
 				self.session.open(StreamsThumb, "pop", "Most Popular", "http://feeds.rasset.ie/rteavgen/player/chart/?platform=playerxl&limit=36")
-			elif returnValue is "by_date":
+			elif returnValue == "by_date":
 				self.session.open(StreamsMenu, "by_date", "0", "http://feeds.rasset.ie/rteavgen/player/datelist/?platform=playerxl")
-			elif returnValue is "cats":
+			elif returnValue == "cats":
 				self.session.open(StreamsMenu, "cats", "0", "http://feeds.rasset.ie/rteavgen/player/genrelist/?type=iptv")
-			elif returnValue is "a_z":
+			elif returnValue == "a_z":
 				self.session.open(StreamsMenu, "a_z", "0", "http://feeds.rasset.ie/rteavgen/player/azlist/?platform=playerxl")
-			elif returnValue is "search":
+			elif returnValue == "search":
 				self.session.open(StreamsThumb, "search", "0", "http://www.rte.ie/player/ie/search/?q=")
 
 	def cancel(self):
@@ -147,11 +148,11 @@ class StreamsMenu(Screen):
 
 	def __init__(self, session, action, value, url):
 		Screen.__init__(self, session)
-		if action is 'by_date':
+		if action == 'by_date':
 			Screen.setTitle(self, _("RTE Player - Choose Date"))
-		elif action is 'cats':
+		elif action == 'cats':
 			Screen.setTitle(self, _("RTE Player - Categories"))
-		elif action is 'a_z':
+		elif action == 'a_z':
 			Screen.setTitle(self, _("RTE Player - A to Z"))
 
 		self.action = action
@@ -166,7 +167,7 @@ class StreamsMenu(Screen):
 			# Find the first element <entry>
 			for elem in tree.xpath('//*[local-name() = "entry"]'):
 				# Iterate through the children of <entry>
-				if not action is 'a_z':
+				if not action == 'a_z':
 					name = checkUnicode(str(elem[1].text))
 					url = checkUnicode(str(elem[0].text))
 					osdList.append((_(name), url))
@@ -191,13 +192,13 @@ class StreamsMenu(Screen):
 		returnValue = self["latestMenu"].l.getCurrentSelection()[1]
 		title = self["latestMenu"].l.getCurrentSelection()[0]
 		if returnValue is not None:
-			if returnValue is "exit":
+			if returnValue == "exit":
 				self.close(None)
-			elif self.action is "by_date":
+			elif self.action == "by_date":
 				self.session.open(StreamsThumb, "by_date", title, returnValue)
-			elif self.action is "cats" or self.action is "a_z":
+			elif self.action == "cats" or self.action == "a_z":
 				self.session.open(StreamsThumb, "cat_secs", title, returnValue)
-			elif self.action is "cat_secs":
+			elif self.action == "cat_secs":
 				self.session.open(StreamsThumb, "programmeListMenu", title, returnValue)
 
 	def cancel(self):

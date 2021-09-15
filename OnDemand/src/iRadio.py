@@ -16,6 +16,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from __future__ import print_function
+from __future__ import absolute_import
 
 # for localized messages
 from . import _
@@ -41,14 +42,13 @@ import random
 from time import strftime, strptime, mktime
 from datetime import timedelta, date, datetime
 
-import urllib
-import urllib2
 import re
-from urllib import quote
+from six.moves.urllib.parse import quote
+from six.moves.urllib.request import Request, urlopen
 
 import xml.etree.cElementTree as ET
 
-from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
+from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 #----------------------------------------------------------------------------------------------------------------------------------------#
 # The Dev ID for calling the API
@@ -62,9 +62,9 @@ FAVORITE_FILE = '/etc/enigma2/iRadio.favorites'
 
 def wgetUrl(target):
 	try:
-		req = urllib2.Request(target)
+		req = Request(target)
 		req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-		response = urllib2.urlopen(req)
+		response = urlopen(req)
 		outtxt = str(response.read())
 		response.close()
 		return outtxt
@@ -77,7 +77,7 @@ def wgetUrl(target):
 
 def urlType(target):
 	try:
-		res = urllib.urlopen(target)
+		res = urlopen(target)
 		http_message = res.info()
 		full = http_message.type
 		main = http_message.maintype
@@ -109,7 +109,7 @@ class iRadioMenu(Screen):
 		self.action = action
 		self.value = value
 		osdList = []
-		if self.action is "start":
+		if self.action == "start":
 			osdList.append((_("Favorites"), "favourites", "none"))
 			osdList.append((_("SHOUTcast Radio"), "shoutcast", "http://api.shoutcast.com/genre/primary?k=%s&f=xml"))
 			osdList.append((_("Tunein Radio"), "tunein", "http://opml.radiotime.com/"))

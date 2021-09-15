@@ -1,11 +1,13 @@
 # -*- coding: UTF-8 -*-
 # for localized messages
 from __future__ import print_function
+from __future__ import absolute_import
 from . import _
 
 import os
 import re
-import urllib2
+from six.moves.urllib.request import Request, urlopen
+from six.moves.urllib.error import URLError, HTTPError
 
 from enigma import eServiceReference, eDVBDB
 
@@ -20,7 +22,7 @@ from twisted.internet import reactor
 from twisted.internet.protocol import ClientCreator
 from twisted.protocols.ftp import FTPClient
 
-from FTPDownloader import FTPDownloader
+from .FTPDownloader import FTPDownloader
 
 DIR_ENIGMA2 = '/etc/enigma2/'
 DIR_TMP = '/tmp/'
@@ -312,14 +314,14 @@ class ChannelsImporter(Screen):
 		url = "http://%s/api/saveepg" % self.getRemoteAddress()
 		print('[ChannelsImporter][saveEPGonRemoteReceiver] URL: %s' % url)
 		try:
-			req = urllib2.Request(url)
-			response = urllib2.urlopen(req)
+			req = Request(url)
+			response = urlopen(req)
 			print('[ChannelsImporter][saveEPGonRemoteReceiver] Response: %d, %s' % (response.getcode(), response.read().strip().replace("\r", "").replace("\n", "")))
-		except urllib2.HTTPError as err:
+		except HTTPError as err:
 			print('[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:', err)
-		except urllib2.URLError as err:
+		except URLError as err:
 			print('[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:', err.reason[0])
-		except urllib2 as err:
-			print('[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:', err)
+		#except urllib2 as err:
+		#	print('[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:', err)
 		except:
 			print('[ChannelsImporter][saveEPGonRemoteReceiver] undefined error')

@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
+from __future__ import print_function, absolute_import
 import os
 import xml.dom.minidom
 import re
+import six
 from enigma import iServiceInformation
+from . import vbcfg
 
 RE_XML_ILLEGAL = u'([\u0000-\u0008\u000b-\u000c\u000e-\u001f\ufffe-\uffff])' + \
                  u'|' + \
                  u'([%s-%s][^%s-%s])|([^%s-%s][%s-%s])|([%s-%s]$)|(^[%s-%s])' % \
-                  (unichr(0xd800), unichr(0xdbff), unichr(0xdc00), unichr(0xdfff),
-                   unichr(0xd800), unichr(0xdbff), unichr(0xdc00), unichr(0xdfff),
-                   unichr(0xd800), unichr(0xdbff), unichr(0xdc00), unichr(0xdfff))
-import vbcfg
+                  (six.unichr(0xd800), six.unichr(0xdbff), six.unichr(0xdc00), six.unichr(0xdfff),
+                   six.unichr(0xd800), six.unichr(0xdbff), six.unichr(0xdc00), six.unichr(0xdfff),
+                   six.unichr(0xd800), six.unichr(0xdbff), six.unichr(0xdc00), six.unichr(0xdfff))
+
+
 DUMPBIN = vbcfg.PLUGINROOT + "/dumpait"
 
 
@@ -113,7 +116,7 @@ def unit_test(demux, pmtid, sid):
 	reader = eAITSectionReader(demux, pmtid, sid)
 	if reader.doOpen():
 		reader.doParseApplications()
-		reader.doDump()
+		#reader.doDump()
 	else:
 		vbcfg.ERR("no data!!")
 

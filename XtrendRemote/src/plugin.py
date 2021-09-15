@@ -149,7 +149,7 @@ class RCSetupScreen(Screen, ConfigListScreen):
 		m = 'echo ' + config.plugins.RCSetup.mode.value + ' > /proc/stb/ir/rc/type'
 		file.write(m)
 		file.close()
-		os_chmod("/etc/rc3.d/S30rcsetup", 0755)
+		os_chmod("/etc/rc3.d/S30rcsetup", 0o755)
 
 	def removeFile(self):
 		if os_path.exists("/etc/rc3.d/S30rcsetup"):

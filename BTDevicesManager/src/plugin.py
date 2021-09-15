@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 #====================================================
 # Bluetooth Devices Manager - basic version
 # Version date - 20.11.2014
@@ -35,8 +36,9 @@ from Components.config import config, ConfigSelection, getConfigListEntry, Confi
 from Components.MenuList import MenuList
 from Components.ServiceEventTracker import ServiceEventTracker
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, fileExists
-from bluetoothctl import iBluetoothctl, Bluetoothctl
+from .bluetoothctl import iBluetoothctl, Bluetoothctl
 
+import six
 import os
 import time
 import signal
@@ -264,13 +266,13 @@ class BluetoothDevicesManager(Screen):
 
 		self.devicelist = []
 		self.devicelist.append((_("MAC:\t\tDevice name:"), _("entry")))
-
+		data = six.ensure_str(data)
 		data = data.splitlines()
 		i = 1
 		for x in data:
 			y = x.split("\t")
 			if not y[0] == "Scanning ...": ## We do not need to put this to the list
-			        i += 1
+				i += 1
 				self.devicelist.append((y[1] + "\t" + y[2], y[1]))
 
 		if i == 1: ## Not sure if it is good idea, but worth to inform user that BT can not detect any other devices
@@ -393,7 +395,7 @@ class BluetoothDevicesManager(Screen):
 					iBluetoothctl.agent_noinputnooutput()
 					iBluetoothctl.default_agent()
 					ret = iBluetoothctl.pair(mac_address)
-					if config.btdevicesmanager.audioaddress.getValue() is "":
+					if config.btdevicesmanager.audioaddress.getValue() == "":
 						config.btdevicesmanager.audioaddress.setValue(mac_address)
 					if ret is False:
 						if iBluetoothctl.passkey is not None:

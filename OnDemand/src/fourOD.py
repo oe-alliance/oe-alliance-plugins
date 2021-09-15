@@ -17,6 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -41,9 +42,12 @@ import re
 from bs4 import BeautifulSoup
 import simplejson
 
-import fourOD_token_decoder
+from . import fourOD_token_decoder
 
-from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon, RTMP
+from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon, RTMP
+
+import six
+
 
 __plugin__ = "4OD: "
 __version__ = "Version 1.0.2: "
@@ -189,7 +193,7 @@ class fourODMainMenu(Screen):
 		osdList = []
 
 		osdList.append((_("Search"), "search"))
-		if self.action is "start":
+		if self.action == "start":
 			# Read the URL for the selected category on the Main Menu.
 			try:
 				(data, isUK) = wgetUrl(self.url)
@@ -230,7 +234,7 @@ class fourODMainMenu(Screen):
 						match = re.search(pattern, id, re.DOTALL | re.IGNORECASE)
 
 						categoryName = match.group(1)
-						label = unicode(entry.text).replace('\r\n', '')
+						label = six.text_type(entry.text).replace('\r\n', '')
 						label = re.sub(' +', ' ', label)
 
 						osdList.append((_(str(label)), str(categoryName)))
@@ -253,10 +257,10 @@ class fourODMainMenu(Screen):
 		title = self["fourODMainMenu"].l.getCurrentSelection()[0]
 		category = self["fourODMainMenu"].l.getCurrentSelection()[1]
 
-		if category is "exit":
+		if category == "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
-		elif category is "search":
+		elif category == "search":
 			self.session.open(StreamsThumb, category, title, category)
 		else:
 			self.session.open(StreamsThumb, self.action, title, category)
@@ -428,7 +432,7 @@ class StreamsThumb(StreamsThumbCommon):
 				# If call is from Outside UK then stream URL might need to be altered.
 				if isUK == 1:
 					print(__plugin__, __version__, "GetStreamInfo: notUK user: streamURI: ", streamURI, " streamURI[:10]: ", streamURI[:10])
-					if streamURI[:10] <> "rtmpe://ll":
+					if streamURI[:10] != "rtmpe://ll":
 						streamURI = ""
 						continue
 
@@ -711,7 +715,7 @@ class StreamsThumb(StreamsThumbCommon):
 						icon = ''
 
 					try:
-						name_tmp = str(unicode(entry['title']))
+						name_tmp = str(six.text_type(entry['title']))
 						name_tmp1 = checkUnicode(name_tmp)
 						name = remove_extra_spaces(name_tmp1)
 					except (Exception) as exception:
@@ -775,7 +779,7 @@ class StreamsThumb(StreamsThumbCommon):
 						continue
 
 					try:
-						stream_tmp = str(unicode(entry[u'siteUrl']))
+						stream_tmp = str(six.text_type(entry[u'siteUrl']))
 						stream_split = stream_tmp.rsplit('/', 2)
 						stream = str(stream_split[1])
 					except (Exception) as exception:
@@ -784,14 +788,14 @@ class StreamsThumb(StreamsThumbCommon):
 					# Only set the Icon if they are enabled
 					if self.showIcon == 'True':
 						try:
-							icon = str(unicode(entry[u'imgUrl']))
+							icon = str(six.text_type(entry[u'imgUrl']))
 						except (Exception) as exception:
 							icon = ""
 					else:
 						icon = ''
 
 					try:
-						name_tmp = str(unicode(entry[u'value']))
+						name_tmp = str(six.text_type(entry[u'value']))
 						name_tmp1 = checkUnicode(name_tmp)
 						name = remove_extra_spaces(name_tmp1)
 					except (Exception) as exception:

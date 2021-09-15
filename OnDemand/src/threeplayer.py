@@ -16,6 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from __future__ import print_function
+from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -32,14 +33,14 @@ from os import path as os_path, remove as os_remove, mkdir as os_mkdir, walk as 
 from datetime import date
 from time import strftime
 
-import urllib
-import urllib2
 import re
+from six.moves.urllib.request import Request, urlopen
+from six.moves.urllib.parse import urlencode
 
 from lxml import etree
 from lxml import html
 
-from CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
+from .CommonModules import EpisodeList, MoviePlayer, MyHTTPConnection, MyHTTPHandler, StreamsThumbCommon
 
 #===================================================================================
 
@@ -54,9 +55,9 @@ def wgetUrl(query):
 		headers['Referer'] = 'http://www.tv3.ie/3player/'
 		headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 
-		data = urllib.urlencode(values)
-		req = urllib2.Request(target, data, headers)
-		response = urllib2.urlopen(req)
+		data = urlencode(values)
+		req = Request(target, data, headers)
+		response = urlopen(req)
 		html = str(response.read())
 		response.close()
 		return html
@@ -85,7 +86,7 @@ class threeMainMenu(Screen):
 		self.value = value
 		osdList = []
 
-		if self.action is "start":
+		if self.action == "start":
 
 			osdList.append((_("Search"), "search"))
 			osdList.append((_("Most Talked About"), "talked"))
@@ -105,19 +106,19 @@ class threeMainMenu(Screen):
 	def go(self):
 		returnValue = self["threeMainMenu"].l.getCurrentSelection()[1]
 
-		if returnValue is "exit":
+		if returnValue == "exit":
 			self.removeFiles(self.imagedir)
 			self.close(None)
-		elif self.action is "start":
-			if returnValue is "talked":
+		elif self.action == "start":
+			if returnValue == "talked":
 				self.session.open(StreamsThumb, "talked", "Most Talked About", "http://www.tv3.ie/3player")
-			elif returnValue is "straight":
+			elif returnValue == "straight":
 				self.session.open(StreamsThumb, "straight", "Straight Off The Telly", "http://www.tv3.ie/3player")
-			elif returnValue is "going":
+			elif returnValue == "going":
 				self.session.open(StreamsThumb, "going", "Going Going...", "http://www.tv3.ie/3player")
-			elif returnValue is "all_shows":
+			elif returnValue == "all_shows":
 				self.session.open(StreamsThumb, "all_shows", "All Shows", "http://www.tv3.ie/3player/allshows")
-			elif returnValue is "search":
+			elif returnValue == "search":
 				self.session.open(StreamsThumb, "search", "Search", "http://www.tv3.ie/player/assets/php/search.php")
 
 	def cancel(self):
@@ -380,9 +381,9 @@ class StreamsThumb(StreamsThumbCommon):
 		try:
 			url1 = 'http://www.tv3.ie' + url
 
-			req = urllib2.Request(url1)
+			req = Request(url1)
 			req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3 Gecko/2008092417 Firefox/3.0.3')
-			response = urllib2.urlopen(req)
+			response = urlopen(req)
 			html = str(response.read())
 			response.close()
 
@@ -390,9 +391,9 @@ class StreamsThumb(StreamsThumbCommon):
 				try:
 					headers = {'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}
 					values = {'age_ok': '1'}
-					data = urllib.urlencode(values)
-					req = urllib2.Request(url1, data, headers)
-					response = urllib2.urlopen(req)
+					data = urlencode(values)
+					req = Request(url1, data, headers)
+					response = urlopen(req)
 					html = str(response.read())
 					response.close()
 

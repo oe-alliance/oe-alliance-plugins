@@ -1,4 +1,3 @@
-from __future__ import print_function
 # for localized messages
 from . import _, PluginLanguageDomain
 
@@ -296,7 +295,7 @@ class schedule:
 			self.fetchtimer.startLongTimer(next - now)
 		else:
 			next = -1
-		print(("[ABMCustomMixImporter][startNextCycle] Time set to", strftime("%c", localtime(next)), strftime("(now=%c)", localtime(now))))
+		print("[ABMCustomMixImporter][startNextCycle] Time set to %s %s" % (strftime("%c", localtime(next)), strftime("(now=%c)", localtime(now))))
 
 
 scheduleTimer = None

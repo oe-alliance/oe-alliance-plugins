@@ -1,10 +1,11 @@
 from __future__ import print_function
 # for localized messages
+from future.utils import raise_
 from . import _
 
 import os
-import urllib
-from urllib import urlretrieve
+from six.moves.urllib.request import urlretrieve
+from six.moves import urllib
 
 from Plugins.Plugin import PluginDescriptor
 
@@ -69,7 +70,8 @@ if os.path.exists("/proc/stb/info/vumodel"):
 
 import os
 import fcntl
-import thread
+from six.moves import _thread
+
 STATUS_READY = 0
 STATUS_DONE = 1
 STATUS_ERROR = 2
@@ -98,7 +100,7 @@ class FPUpgradeCore():
 		try:
 			size = os.path.getsize(self.firmwarefile)
 			if size == 0:
-				raise Exception, 'data_size is zero'
+				raise Exception('data_size is zero')
 			#print '[FPUpgradeCore] data_size :',size
 
 			for xx in range(3):
@@ -111,7 +113,7 @@ class FPUpgradeCore():
 
 				rc = fcntl.ioctl(device, 0, size)
 				if rc < 0:
-					raise Exception, 'fail to set size : %d' % (rc)
+					raise_(Exception, 'fail to set size : %d' % (rc))
 				#print '[FPUpgradeCore] set size >> [ok]'
 				self.status = STATUS_PREPARED
 
@@ -127,13 +129,13 @@ class FPUpgradeCore():
 				if rc == 0:
 					break
 				if xx == 2:
-					raise Exception, 'fail to upgrade : %d' % (rc)
+					raise_(Exception, 'fail to upgrade : %d' % (rc))
 				self.errmsg = 'fail to upgrade, retry..'
 				self.status = STATUS_RETRY_UPGRADE
 				closefp(firmware, device)
 			#print '[FPUpgradeCore] upgrade done.'
 			if self.callcount < 20:
-				raise Exception, 'wrong fpga file.'
+				raise Exception('wrong fpga file.')
 		except Exception as msg:
 			self.errmsg = msg
 			print('[FPUpgradeCore] ERROR >>', msg)
@@ -174,7 +176,7 @@ class FPGAUpgradeCore():
 		try:
 			size = os.path.getsize(self.firmwarefile)
 			if size == 0:
-				raise Exception, 'data_size is zero'
+				raise Exception('data_size is zero')
 			#print '[FPGAUpgradeCore] data_size :',size
 
 			firmware = open(self.firmwarefile, 'rb')
@@ -183,12 +185,12 @@ class FPGAUpgradeCore():
 
 			rc = fcntl.ioctl(device, 0, size)
 			if rc < 0:
-				raise Exception, 'fail to set size : %d' % (rc)
+				raise_(Exception, 'fail to set size : %d' % (rc))
 			#print '[FPGAUpgradeCore] set size >> [ok]'
 
 			rc = fcntl.ioctl(device, 2, 5)
 			if rc < 0:
-				raise Exception, 'fail to set programming mode : %d' % (rc)
+				raise_(Exception, 'fail to set programming mode : %d' % (rc))
 			#print '[FPGAUpgradeCore] programming mode >> [ok]'
 			self.status = STATUS_PREPARED
 
@@ -202,10 +204,10 @@ class FPGAUpgradeCore():
 			self.status = STATUS_PROGRAMMING
 			rc = fcntl.ioctl(device, 1, 0)
 			if rc < 0:
-				raise Exception, 'fail to programming : %d' % (rc)
+				raise_(Exception, 'fail to programming : %d' % (rc))
 			#print '[FPGAUpgradeCore] upgrade done.'
 			if self.callcount < 20:
-				raise Exception, 'wrong fpga file.'
+				raise Exception('wrong fpga file.')
 		except Exception as msg:
 			self.errmsg = msg
 			print('[FPGAUpgradeCore] ERROR >>', msg)
@@ -251,7 +253,7 @@ class VFDCtrlUpgradeCore():
 			max_size = 1024 * 16
 			size = max_size #os.path.getsize(self.firmwarefile)
 			if size == 0:
-				raise Exception, 'data_size is zero'
+				raise Exception('data_size is zero')
 			#print '[VFDCtrlUpgradeCore] data_size :',size
 
 			for xx in range(3):
@@ -264,7 +266,7 @@ class VFDCtrlUpgradeCore():
 
 				rc = fcntl.ioctl(device, 0, size)
 				if rc < 0:
-					raise Exception, 'fail to set size : %d' % (rc)
+					raise_(Exception, 'fail to set size : %d' % (rc))
 				#print '[VFDCtrlUpgradeCore] set size >> [ok]'
 				self.status = STATUS_PREPARED
 
@@ -282,12 +284,12 @@ class VFDCtrlUpgradeCore():
 				if rc == 0:
 					break
 				if rc < 0 or xx == 2:
-					raise Exception, 'fail to upgrade : %d' % (rc)
+					raise_(Exception, 'fail to upgrade : %d' % (rc))
 				self.errmsg = 'fail to upgrade, retry..'
 				self.status = STATUS_RETRY_UPGRADE
 			#print '[VFDCtrlUpgradeCore] upgrade done.'
 			if self.callcount < 20:
-				raise Exception, 'wrong fpga file.'
+				raise Exception('wrong fpga file.')
 		except Exception as msg:
 			self.errmsg = msg
 			print('[VFDCtrlUpgradeCore] ERROR >>', msg)
@@ -320,7 +322,7 @@ class FirmwareUpgradeManager:
 			self.fu = FPUpgradeCore(firmwarefile=datafile, devicefile=device)
 		elif firmware == 'vfd':
 			self.fu = VFDCtrlUpgradeCore(firmwarefile=datafile, devicefile=device)
-		thread.start_new_thread(self.fu.upgradeMain, ())
+		_thread.start_new_thread(self.fu.upgradeMain, ())
 
 	def checkError(self):
 		if self.fu.status == STATUS_ERROR:
@@ -451,19 +453,19 @@ class FUFilebrowser(Screen):
 
 			<widget name="file_list" position="0,70" size="495,160" scrollbarMode="showOnDemand" />
 			<widget source="status" render="Label" position="0,230" zPosition="1" size="495,70" font="Regular;18" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-                </screen>
+		</screen>
 		"""
 
 	def __init__(self, session, parent, firmware):
 		Screen.__init__(self, session)
-                self.session = session
+		self.session = session
 
 		self["key_blue"] = StaticText(_("Download"))
 		self["status"] = StaticText(" ")
 		self["file_list"] = FileList("/", matchingPattern="^.*")
 
 		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions", "WizardActions", "ColorActions", ],
-                {
+			{
 			"ok": self.onClickOk,
 			"cancel": self.onClickCancel,
 			"blue": self.onClickBlue,
@@ -471,7 +473,7 @@ class FUFilebrowser(Screen):
 			"down": self.onClickDown,
 			"left": self.onClickLeft,
 			"right": self.onClickRight,
-                }, -1)
+			}, -1)
 
 		self.resetGUI()
 		self.firmware = firmware
@@ -492,9 +494,9 @@ class FUFilebrowser(Screen):
 		if self.downloadLock:
 			return
 
-	        if self["file_list"].canDescent(): # isDir
-	        	self["file_list"].descent()
-        		return
+		if self["file_list"].canDescent(): # isDir
+			self["file_list"].descent()
+			return
 
 		# verify data
 		self.gbin = self["file_list"].getCurrentDirectory() + self["file_list"].getFilename()
@@ -688,12 +690,12 @@ class FirmwareUpgrade(Screen, ConfigListScreen):
 
 			<widget name="config" zPosition="2" position="0,70" itemHeight="36" size="540,40" scrollbarMode="showOnDemand" transparent="1" />
 			<widget source="status" render="Label" position="0,100" zPosition="1" size="540,75" font="Regular;20" halign="center" valign="center" />
-                </screen>
+		</screen>
 		"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-                self.session = session
+		self.session = session
 
 		self["shortcuts"] = ActionMap(["ShortcutActions", "SetupActions"],
 		{

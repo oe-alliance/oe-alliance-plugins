@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.MenuList import MenuList
@@ -19,19 +20,23 @@ from Tools import NumericalTextInput
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from urllib2 import Request, URLError, HTTPError, urlopen as urlopen2
-from httplib import HTTPException
+from six.moves.urllib.request import Request, urlopen as urlopen2
+from six.moves.urllib.error import URLError, HTTPError
 from twisted.web import client
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir
 import socket
 from datetime import date, timedelta
 import time
 import urlparse
-import httplib
 import base64
-from pygoogle import pygoogle
+from .pygoogle import pygoogle
 import json
 import re
+
+import six
+from six.moves import http_client
+from six.moves.http_client import HTTPException
+
 
 config.plugins.OpenUitzendingGemist = ConfigSubsection()
 config.plugins.OpenUitzendingGemist.showpictures = ConfigBoolean(default=True)
@@ -66,7 +71,7 @@ def resolve_http_redirect(url, depth=0):
 	if depth > 10:
 		raise Exception("Redirected " + depth + " times, giving up.")
 	o = urlparse.urlparse(url, allow_fragments=True)
-	conn = httplib.HTTPConnection(o.netloc)
+	conn = http_client.HTTPConnection(o.netloc)
 	path = o.path
 	if o.query:
 		path += '?' + o.query
@@ -846,7 +851,7 @@ class OpenUg(Screen):
 			self.moveToChar(charstr[0], self["chosenletter"])
 
 	def keyAsciiCode(self):
-		unichar = unichr(getPrevAsciiCode())
+		unichar = six.unichr(getPrevAsciiCode())
 		charstr = unichar.encode("utf-8")
 		if len(charstr) == 1:
 			self.moveToString(charstr[0], self["chosenletter"])
@@ -955,7 +960,8 @@ class OpenUg(Screen):
 						self.fetchFinished(True, picture_id=tmp_icon, failed=False)
 					else:
 						if config.plugins.OpenUitzendingGemist.showpictures.value:
-							client.downloadPage(x[self.UG_ICON], thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
+							u = six.ensure_binary(x[self.UG_ICON])
+							client.downloadPage(u, thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
 				pos += 1
 			self["list"].setList(self.tmplist)
 
@@ -1347,7 +1353,7 @@ class OpenUg(Screen):
 		elif 'google' in self.choice:
 			if 'rtl' in self.choice:
 				tmp = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
-				if len(tmp) == 2 and tmp[1] is not '':
+				if len(tmp) == 2 and tmp[1] != '':
 					tmp = self.getRTLStream(tmp[1])
 					if tmp != '':
 						myreference = eServiceReference(4097, 0, tmp)
@@ -2027,7 +2033,7 @@ class OpenUg(Screen):
 			name = k.encode("utf8")
 			url = v.encode("utf8")
 			if 'site:rtlxl.nl/#!' in search:
-				if 'http://www.rtlxl.nl/#!/a-z/' in url or url is 'http://www.rtlxl.nl/#!/gemist' or 'http://www.rtlxl.nl/#!/films/' in url:
+				if 'http://www.rtlxl.nl/#!/a-z/' in url or url == 'http://www.rtlxl.nl/#!/gemist' or 'http://www.rtlxl.nl/#!/films/' in url:
 					print('Not in list')
 				else:
 					mediaList.append((date, name, short, channel, url, icon, '', True))

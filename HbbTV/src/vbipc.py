@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import absolute_import
 from enigma import fbClass, eRCInput
 import os
 import threading
@@ -6,7 +7,7 @@ import time
 import socket
 import select
 import struct
-import vbcfg
+from . import vbcfg
 
 _OPCODE = {}
 _BUFSIZE = 4096

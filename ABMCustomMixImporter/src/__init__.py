@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
 import gettext
 
 from Components.Language import language
@@ -26,4 +25,5 @@ def _(txt):
 		return gettext.gettext(txt)
 
 
-language.addCallback(localeInit())
+localeInit()
+language.addCallback(localeInit)

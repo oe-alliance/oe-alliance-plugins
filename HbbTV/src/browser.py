@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+import os
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.ChoiceBox import ChoiceBox
@@ -12,15 +14,11 @@ from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.config import ConfigText, ConfigSelection, ConfigSlider, getConfigListEntry
-
-import os
-import vbcfg
-
 from enigma import fbClass, eRCInput, eTimer, getDesktop
-
-from __init__ import _
-from bookmark import BookmarkManager, BookmarkData, CategoryData
-from vbipc import VBController
+from .__init__ import _
+from .bookmark import BookmarkManager, BookmarkData, CategoryData
+from .vbipc import VBController
+from . import vbcfg
 
 strIsEmpty = lambda x: x is None or len(x) == 0
 
@@ -590,10 +588,10 @@ class BrowserBookmarkWindow(Screen):
 		l = []
 		#self.mBookmarkManager.dump()
 		cd = self.mBookmarkManager.getBookmarkRoot()
-		for ck in cd.iterkeys():
+		for ck in cd:
 			l.append(('# ' + cd[ck].mName, cd[ck]))
 			bd = cd[ck].mBookmarks
-			for bk in bd.iterkeys():
+			for bk in bd:
 				l.append(('    - ' + bd[bk].mTitle, bd[bk]))
 		return l
 
@@ -1147,7 +1145,7 @@ class Browser(Screen):
 			eRCInput.getInstance().lock()
 			self.toggle_top()
 
-			VBController.command("BROWSER_MENU_CLOSE")
+			VBController.command("BROWSER_MENU_CLOSE", b"")
 			return
 		self._cmd_Exit()
 

@@ -18,6 +18,8 @@ import sys
 import urllib
 import logging
 import argparse
+from six.moves.urllib.parse import urlencode, unquote
+from six.moves.urllib.request import urlopen
 
 __author__ = "Kiran Bandla"
 __version__ = "0.2"
@@ -104,8 +106,8 @@ class pygoogle:
                     'hl': self.hl
                     }
             self.logger.debug('search: "%s" page# : %s' % (self.query, page))
-            q = urllib.urlencode(args)
-            search_results = urllib.urlopen(URL + q)
+            q = urlencode(args)
+            search_results = urlopen(URL + q)
             data = json.loads(search_results.read())
             if 'responseStatus' not in data:
                 self.logger.error('response does not have a responseStatus key')
@@ -118,9 +120,9 @@ class pygoogle:
                 if 'responseData' in data and 'results' in data['responseData']:
                     for result in data['responseData']['results']:
                         if result:
-                            print('[%s]' % (urllib.unquote(result['titleNoFormatting'])))
+                            print('[%s]' % (unquote(result['titleNoFormatting'])))
                             print(result['content'].strip("<b>...</b>").replace("<b>", '').replace("</b>", '').replace("&#39;", "'").strip())
-                            print(urllib.unquote(result['unescapedUrl']) + '\n')
+                            print(unquote(result['unescapedUrl']) + '\n')
                 else:
                     # no responseData key was found in 'data'
                     self.logger.error('no responseData key found in response. very unusal')
@@ -138,8 +140,8 @@ class pygoogle:
             if 'responseData' in data and 'results' in data['responseData']:
                 for result in data['responseData']['results']:
                     if result and 'titleNoFormatting' in result:
-                        title = urllib.unquote(result['titleNoFormatting'])
-                        results[title] = urllib.unquote(result['unescapedUrl'])
+                        title = unquote(result['titleNoFormatting'])
+                        results[title] = unquote(result['unescapedUrl'])
             else:
                 self.logger.error('no responseData key found in response')
                 self.logger.error(data)
@@ -156,14 +158,14 @@ class pygoogle:
                     'safe': SAFE_OFF,
                     'filter': FILTER_ON,
                     }
-            q = urllib.urlencode(args)
-            search_results = urllib.urlopen(URL + q)
+            q = urlencode(args)
+            search_results = urlopen(URL + q)
             data = json.loads(search_results.read())
             urls = []
             if 'responseData' in data and 'results' in data['responseData']:
                 for result in data['responseData']['results']:
                     if result and 'unescapedUrl' in result:
-                        url = urllib.unquote(result['unescapedUrl'])
+                        url = unquote(result['unescapedUrl'])
                         urls.append(url)
             else:
                 self.logger.error('no responseData key found in response')
@@ -181,7 +183,7 @@ class pygoogle:
             if data and 'responseData' in data and data['responseData']['results']:
                 for result in data['responseData']['results']:
                     if result:
-                        results.append(urllib.unquote(result['unescapedUrl']))
+                        results.append(unquote(result['unescapedUrl']))
         return results
 
     def get_result_count(self):
