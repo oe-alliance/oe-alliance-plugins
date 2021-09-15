@@ -202,6 +202,8 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 		self["key_yellow"] = Label(" ")
 		self["key_blue"] = Label(_("Scan"))
 
+		self["key_menu"] = StaticText(_("MENU"))
+
 		self["shortcuts"] = HelpableActionMap(self, "BluetoothSetupActions",
 		{
 			"ok": (self.keyOk, _("Connect/Disconnect selected device")),
