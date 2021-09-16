@@ -378,7 +378,6 @@ if OSMIO4K
 SUBDIRS += SimpleFancontrol
 endif
 
-
 if HAVE_TEMPFANCONTROL
 SUBDIRS += TempFanControl
 endif
@@ -429,4 +428,24 @@ endif
 
 if OSNINOPLUS
 SUBDIRS += VPLEDControl
+endif
+
+if HAVE_LIBVUPLDEMO
+SUBDIRS += libvupldemo
+endif
+
+if HAVE_VUSTALKER
+SUBDIRS += VuStalker
+endif
+
+if HAVE_VUEXTRAS
+SUBDIRS += VuChromium libvupldemo witaispeechtotext WebkitHbbTV VuBluetoothSetup VuStalker
+endif
+
+if HAVE_GBEXTRAS
+SUBDIRS += GigaBlueChromium GigaBlueBluetoothSetup
+endif
+
+if HAVE_PYTHON3
+SUBDIRS += PiconsUpdater TVSpielfilm
 endif

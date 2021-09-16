@@ -233,6 +233,27 @@ AM_CONDITIONAL(HAVE_ARMV7AHF, test "$BOXTYPE" == hd51 -o "$BOXTYPE" == 8100s -o 
 AM_CONDITIONAL(HAVE_CORTEXA9HF, test "$BOXTYPE" == wetekplay)
 AM_CONDITIONAL(HAVE_AARCH64, test "$BOXTYPE" == wetekplay2 -o "$BOXTYPE" == alien5 )
 
+AC_ARG_WITH(pythonver,
+	[--with-pythonver=NAME python ver [[python,python3]]],
+	[PYTHON="$withval"],[PYTHON=python])
+AC_SUBST(PYTHON)
+AC_DEFINE_UNQUOTED(PYTHON,"$PYTHON",[python ver])
+
+if test "$PYTHON" == "python3" ; then
+	AM_CONDITIONAL(HAVE_LIBVUPLDEMO, test "$BOXTYPE" == vusolo2 -o "$BOXTYPE" == vusolose -o "$BOXTYPE" == vuduo2 -o "$BOXTYPE" == vuduo2 )
+	AM_CONDITIONAL(HAVE_VUSTALKER, test "$BOXTYPE" == vuzero )
+	AM_CONDITIONAL(HAVE_VUEXTRAS, test "$BOXTYPE" == vusolo4k -o "$BOXTYPE" == vuuno4k -o "$BOXTYPE" == vuzero4k -o "$BOXTYPE" == vuuno4kse -o "$BOXTYPE" == vuultimo4k -o "$BOXTYPE" == vuultimo4k -o "$BOXTYPE" == vuduo4k -o "$BOXTYPE" == vuduo4kse )
+	AM_CONDITIONAL(HAVE_GBEXTRAS, test "$BOXTYPE" == gb7252 -o "$BOXTYPE" == gb72604 )
+else
+	AM_CONDITIONAL(HAVE_LIBVUPLDEMO, false )
+	AM_CONDITIONAL(HAVE_VUSTALKER, false )
+	AM_CONDITIONAL(HAVE_VUEXTRAS, false )
+	AM_CONDITIONAL(HAVE_GBEXTRAS, false )
+fi
+
+AM_CONDITIONAL(HAVE_PYTHON3, test "$PYTHON" == "python3")
+AM_CONDITIONAL(HAVE_LCD4LINUX_SUBDIR, test "$PYTHON" == "python")
+
 AC_CONFIG_FILES([
 Makefile
 
