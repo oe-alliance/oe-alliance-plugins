@@ -1,0 +1,163 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, python-format
+msgid "%d min"
+msgstr ""
+
+msgid "Account"
+msgstr ""
+
+msgid "Advanced option"
+msgstr ""
+
+msgid "Available"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Configure Stalker Client"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Fri"
+msgstr ""
+
+msgid "Genres"
+msgstr ""
+
+msgid "Loading"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Mon"
+msgstr ""
+
+msgid "Multi EPG"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "No channel info"
+msgstr ""
+
+msgid "Not available"
+msgstr ""
+
+msgid "Ok"
+msgstr ""
+
+msgid "Prev"
+msgstr ""
+
+msgid "Reload"
+msgstr ""
+
+msgid "Sat"
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Single EPG"
+msgstr ""
+
+msgid "Stalker Client"
+msgstr ""
+
+msgid "Stalker Client TV Channels"
+msgstr ""
+
+msgid "Stalker MAC"
+msgstr ""
+
+msgid "Stalker Server URL"
+msgstr ""
+
+msgid "Stalker password"
+msgstr ""
+
+msgid "Stalker username"
+msgstr ""
+
+msgid "StalkerClient Account"
+msgstr ""
+
+msgid "StalkerClient Configuration"
+msgstr ""
+
+msgid "StalkerClient Setup"
+msgstr ""
+
+msgid "StalkerClient TV"
+msgstr ""
+
+msgid "StalkerClient TV Menu"
+msgstr ""
+
+msgid "Stop playing this stream?"
+msgstr ""
+
+msgid "Sun"
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Wed"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "add service to bouquet"
+msgstr ""
+
+msgid "add service to favourites"
+msgstr ""
+
+msgid "offline"
+msgstr ""
+
+msgid "online"
+msgstr ""
+
+msgid "unknown service"
+msgstr ""

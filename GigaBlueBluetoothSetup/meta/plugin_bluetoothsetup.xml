@@ -1,0 +1,16 @@
+<default>
+  <prerequisites>
+                    <tag type="System" />
+  </prerequisites>
+          <info>
+                    <author>GigaBlue</author>
+                    <name>BluetoothSetup</name>
+                    <packagename>enigma2-plugin-systemplugins-bluetoothsetup</packagename>
+                    <shortdescription>GigaBlue bluetooth plugin</shortdescription>
+                    <description>GigaBlue bluetooth plugin</description>
+          </info>
+
+  <files type="package"> <!-- without version, without .ipk -->
+     <file type="package" name="enigma2-plugin-systemplugins-bluetoothsetup" />
+   </files>
+</default>

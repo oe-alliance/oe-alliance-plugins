@@ -1,0 +1,351 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid ""
+"\n"
+"Please repair Vu+ RCU. (by AUDIO+MENU)"
+msgstr ""
+
+msgid " "
+msgstr ""
+
+#, python-format
+msgid "%d event"
+msgstr ""
+
+#, python-format
+msgid "%s"
+msgstr ""
+
+#, python-format
+msgid "%s Pairing fail"
+msgstr ""
+
+#, python-format
+msgid "%s is connected."
+msgstr ""
+
+#, python-format
+msgid "%s is disconnected."
+msgstr ""
+
+#, python-format
+msgid "%s is not found."
+msgstr ""
+
+msgid ""
+"1. Move to Bluetooth Setup Options.\n"
+"(press MENU key in BluetoothSetup)\n"
+msgstr ""
+
+msgid "2. Change \"Skip firmware update of VUPLUS-BLE-RCU\" option to \"no\"\n"
+msgstr ""
+
+msgid ""
+"3. Reconnect the VUPLUS-BLE-RCU.\n"
+"\n"
+msgstr ""
+
+msgid "BT dongle has been inserted."
+msgstr ""
+
+msgid "BT dongle has been removed."
+msgstr ""
+
+#, python-format
+msgid "Battery is low. Suggest to prepare replacement batteries for using properly %s."
+msgstr ""
+
+#, python-format
+msgid "Battery level for OTA : %s"
+msgstr ""
+
+msgid "Bluetooth Scan"
+msgstr ""
+
+msgid "Bluetooth Setup"
+msgstr ""
+
+msgid "Bluetooth Setup Options"
+msgstr ""
+
+msgid "BluetoothSetup"
+msgstr ""
+
+#, python-format
+msgid "Can't communicate with %s"
+msgstr ""
+
+#, python-format
+msgid "Can't communicate with %s."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Connect"
+msgstr ""
+
+msgid "Connect/Disconnect selected device"
+msgstr ""
+
+#, python-format
+msgid ""
+"Connection failed.\n"
+"Another audio device is connected. (%s)"
+msgstr ""
+
+#, python-format
+msgid "Current FW version : %d"
+msgstr ""
+
+#, python-format
+msgid ""
+"Current FW version : %d\n"
+"New FW version : %d"
+msgstr ""
+
+msgid "Device is disabling..."
+msgstr ""
+
+msgid "Device is enabled."
+msgstr ""
+
+msgid "Device is enabling..."
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Disconnect"
+msgstr ""
+
+#, python-format
+msgid "Disconnect %s failed!!"
+msgstr ""
+
+#, python-format
+msgid "Disconnecting %s"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Enable/Disable bluetooth"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "Exit bluetooth setup"
+msgstr ""
+
+msgid ""
+"If you want to update this firmware version, follow belows.\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "New FW version : %d"
+msgstr ""
+
+msgid ""
+"New firmware detected for VUPLUS-BLE-RCU.\n"
+"\n"
+msgstr ""
+
+msgid "No nearby bluetooth devices were found."
+msgstr ""
+
+msgid ""
+"Not enough battery level for OTA update.\n"
+"Press exit and change battery of VUPLUS-BLE-RCU."
+msgstr ""
+
+#, python-format
+msgid ""
+"OTA Failed.\n"
+"%s is disconnected."
+msgstr ""
+
+msgid "Ok"
+msgstr ""
+
+#, python-format
+msgid "Pairing %s"
+msgstr ""
+
+#, python-format
+msgid "Pairing %s failed!!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Pairing Failed.\n"
+"Another audio device is connected. (%s)"
+msgstr ""
+
+msgid "Playing Voice data..."
+msgstr ""
+
+msgid ""
+"Please enable bluetooth \n"
+"before pairing the VUPLUS-BLE-RCU."
+msgstr ""
+
+msgid "Please select scan mode."
+msgstr ""
+
+msgid ""
+"Press and hold the buttons <MENU+AUDIO>\n"
+" for five seconds to start."
+msgstr ""
+
+msgid "Press green key to connect device."
+msgstr ""
+
+msgid "Press red key to enable bluetooth."
+msgstr ""
+
+msgid "Put your voice close to the remote control..."
+msgstr ""
+
+msgid "Remind Me later"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Remove selected device"
+msgstr ""
+
+msgid "Removing VUPLUS-BLE-RCU..."
+msgstr ""
+
+msgid "Scan"
+msgstr ""
+
+msgid "Scan and setup Vu+ Bluetooth RCU"
+msgstr ""
+
+msgid "Scan failed! try again."
+msgstr ""
+
+msgid ""
+"Scan failed. Please try again VUPLUS BLE RCU setup.\n"
+"(AUDIO+MENU buttons)"
+msgstr ""
+
+msgid "Scan other bluetooth 3.0 device (A2DP, HID)"
+msgstr ""
+
+msgid "Scanning VUPLUS BLE RCU"
+msgstr ""
+
+msgid "Scanning bluetooth devices"
+msgstr ""
+
+msgid "Set bluetooth audio delay (msec)"
+msgstr ""
+
+msgid "Setup bluetooth options"
+msgstr ""
+
+msgid "Show battery low message on infobar notification"
+msgstr ""
+
+msgid "Show state message on infobar notification"
+msgstr ""
+
+#, python-format
+msgid "Skip firmware update of VUPLUS-BLE-RCU (version : %d)"
+msgstr ""
+
+msgid "Skip this version"
+msgstr ""
+
+msgid "Start Scan / Setup VUPLUS BLE RCU"
+msgstr ""
+
+msgid "Start scan"
+msgstr ""
+
+msgid "Starting..."
+msgstr ""
+
+msgid "Stop scan"
+msgstr ""
+
+msgid "The BT dongle has been removed. It takes 10 seconds from when the BT dongle is removed until the remote control operates in IR mode."
+msgstr ""
+
+msgid "There is no voice input."
+msgstr ""
+
+msgid "Try connect to last audio device on start enable"
+msgstr ""
+
+#, python-format
+msgid "Type %s on %s to connect, then press Enter or Return."
+msgstr ""
+
+#, python-format
+msgid "Updateing %d %%"
+msgstr ""
+
+msgid "Upgrade now"
+msgstr ""
+
+msgid "VUPLUS-BLE-RCU is disconnected. Please connect and select again."
+msgstr ""
+
+msgid "Voice event handler"
+msgstr ""
+
+msgid "Vu+ Bluetooth RCU Setup"
+msgstr ""
+
+msgid ""
+"While the update is progress, RCU can not be used and other bluetooth device must be disconnected.\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "Wrong pin number for %s. Please try again and check pin number."
+msgstr ""
+
+#, python-format
+msgid "connect to %s failed!!"
+msgstr ""
+
+#, python-format
+msgid "connecting %s"
+msgstr ""
+
+#, python-format
+msgid "disconnect to %s failed!!"
+msgstr ""
+
+#, python-format
+msgid "disconnecting %s"
+msgstr ""
+
+#, python-format
+msgid "remove %s failed!!"
+msgstr ""

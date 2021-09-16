@@ -1,0 +1,214 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"PO-Revision-Date: 2020-07-07 13:38+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+"X-Poedit-Basepath: ../src\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+msgid "* RC Help"
+msgstr "* RC Hilfe"
+
+msgid "* Setting ChromiumOS"
+msgstr ""
+
+msgid "* Setting YouTube TV"
+msgstr ""
+
+msgid "* Start ChromiumOS"
+msgstr ""
+
+msgid "* Start YouTube TV"
+msgstr "* Start YouTube TV"
+
+msgid "Back key"
+msgstr ""
+
+msgid "Backspace Key"
+msgstr ""
+
+msgid "Browser Help"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Chromium Virtual Keyboard"
+msgstr ""
+
+msgid "ChromiumOS"
+msgstr ""
+
+msgid "ChromiumOS Settings"
+msgstr ""
+
+msgid "ChromiumOS by STT"
+msgstr ""
+
+msgid "Do not show YouTube TV Starter again"
+msgstr ""
+
+msgid "Down Key"
+msgstr ""
+
+msgid "Enable Ntpd when start ChromiumOS"
+msgstr ""
+
+msgid "Enable Ntpd when start YoutubeTV"
+msgstr ""
+
+msgid "Enter Key"
+msgstr "Geben Sie den Schlüssel ein"
+
+msgid "Exit"
+msgstr "Schließen"
+
+msgid "Exit YoutubeTV"
+msgstr ""
+
+msgid "Exit the Browser."
+msgstr "Den Browser verlassen."
+
+msgid "Global"
+msgstr "Global"
+
+msgid "Go to next page."
+msgstr ""
+
+msgid "Go to previous page."
+msgstr ""
+
+msgid "Help"
+msgstr "Hilfe"
+
+msgid "It will move the mouse pointer down."
+msgstr ""
+
+msgid "It will move the mouse pointer left."
+msgstr ""
+
+msgid "It will move the mouse pointer right."
+msgstr ""
+
+msgid "It will move the mouse pointer up."
+msgstr ""
+
+msgid "Keyboard"
+msgstr "Externe Tastatur"
+
+msgid "Left Key"
+msgstr ""
+
+msgid "Left Mouse Button"
+msgstr "Links Maustaste"
+
+msgid "Mouse"
+msgstr "Maus"
+
+msgid "Move down"
+msgstr "Nach unten"
+
+msgid "Move left"
+msgstr "Nach links bewegen"
+
+msgid "Move right"
+msgstr "Nach rechts bewegen"
+
+msgid "Move up"
+msgstr "Nach oben"
+
+msgid "Ntpd URL"
+msgstr ""
+
+msgid "Open the virtual-keyboard on enigma2"
+msgstr ""
+
+msgid "Page down key"
+msgstr ""
+
+msgid "Page up key"
+msgstr ""
+
+msgid "PageDown Key"
+msgstr ""
+
+msgid "PageUp Key"
+msgstr ""
+
+msgid "Pause current video"
+msgstr "Pause Aktuelles Video"
+
+msgid "Play current video"
+msgstr "Aktuelles Video abspielen"
+
+msgid "Play selected video"
+msgstr ""
+
+msgid "Right Key"
+msgstr ""
+
+msgid "Right Mouse Button"
+msgstr "Rechts Maustaste"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Search a video"
+msgstr "Video Suche"
+
+msgid "Setting"
+msgstr "Einstellungen"
+
+msgid "Skip backward 10 sec"
+msgstr "Rückwärts 10 sec Springen"
+
+msgid "Skip forward 10 sec"
+msgstr "Springe 10 sec vorwärts"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Start ChromiumOS"
+msgstr ""
+
+msgid "Start URL"
+msgstr "Start URL"
+
+msgid "Start Up URL"
+msgstr ""
+
+msgid "Start YouTube TV"
+msgstr "Start YouTube TV"
+
+msgid "Switch to keyboard/mouse mode."
+msgstr "In den Tastatur/Maus Modus schalten."
+
+msgid "Up Key"
+msgstr ""
+
+msgid "X-margin on GUI"
+msgstr ""
+
+msgid "Y-margin on GUI"
+msgstr ""
+
+msgid "YouTube TV Settings"
+msgstr ""
+
+msgid "YouTube TV is a new way to watch YouTube videos on Vu+"
+msgstr ""
+
+msgid "YouTubeTV"
+msgstr ""
+
+msgid "YouTubeTV Settings"
+msgstr ""

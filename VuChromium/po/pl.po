@@ -1,0 +1,214 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: VuChromium\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"PO-Revision-Date: 2020-07-09 19:19+0100\n"
+"Last-Translator: \n"
+"Language-Team: pololoko111 <pololoko111@o2.pl>\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+"X-Poedit-Basepath: ../src\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+msgid "* RC Help"
+msgstr "* Pomoc RC"
+
+msgid "* Setting ChromiumOS"
+msgstr "* Ustawienia ChromiumOS"
+
+msgid "* Setting YouTube TV"
+msgstr "* Ustawienia YouTube TV"
+
+msgid "* Start ChromiumOS"
+msgstr "* Uruchom ChromiumOS"
+
+msgid "* Start YouTube TV"
+msgstr "* Uruchom YouTube TV"
+
+msgid "Back key"
+msgstr "Powrót"
+
+msgid "Backspace Key"
+msgstr "Klawisz Backspace"
+
+msgid "Browser Help"
+msgstr "Pomoc Przeglądarki"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Chromium Virtual Keyboard"
+msgstr "Klawiatura wirtualna Chromium"
+
+msgid "ChromiumOS"
+msgstr ""
+
+msgid "ChromiumOS Settings"
+msgstr "Ustawienia ChromiumOS"
+
+msgid "ChromiumOS by STT"
+msgstr "ChromiumOS firmy STT"
+
+msgid "Do not show YouTube TV Starter again"
+msgstr "Nie pokazuj ponownie strony początkowej YouTube TV "
+
+msgid "Down Key"
+msgstr "Klawisz w Dół"
+
+msgid "Enable Ntpd when start ChromiumOS"
+msgstr "Włącz Ntpd podczas uruchamiania ChromiumOS"
+
+msgid "Enable Ntpd when start YoutubeTV"
+msgstr "Włącz Ntp podczas uruchamiania Youtube TV"
+
+msgid "Enter Key"
+msgstr "Klawisz ENTER"
+
+msgid "Exit"
+msgstr "Wyjście"
+
+msgid "Exit YoutubeTV"
+msgstr "Wyjdź z YoutubeTV"
+
+msgid "Exit the Browser."
+msgstr "Wyjdź z Przeglądarki."
+
+msgid "Global"
+msgstr "Globalny"
+
+msgid "Go to next page."
+msgstr "Przejdź do następnej strony."
+
+msgid "Go to previous page."
+msgstr "Wróć do poprzedniej strony."
+
+msgid "Help"
+msgstr "Pomoc"
+
+msgid "It will move the mouse pointer down."
+msgstr "Przesuwa wskaźnik myszy w dół."
+
+msgid "It will move the mouse pointer left."
+msgstr "Przesuwa wskaźnik myszy w lewo."
+
+msgid "It will move the mouse pointer right."
+msgstr "Przesuwa wskaźnik myszy w prawo."
+
+msgid "It will move the mouse pointer up."
+msgstr "Przesuwa wskaźnik myszy w górę."
+
+msgid "Keyboard"
+msgstr "Klawiatura"
+
+msgid "Left Key"
+msgstr "Lewy Klawisz"
+
+msgid "Left Mouse Button"
+msgstr "Lewy Przycisk Myszy"
+
+msgid "Mouse"
+msgstr "Myszka"
+
+msgid "Move down"
+msgstr "W Dół"
+
+msgid "Move left"
+msgstr "W Lewo"
+
+msgid "Move right"
+msgstr "W Prawo"
+
+msgid "Move up"
+msgstr "W Górę"
+
+msgid "Ntpd URL"
+msgstr ""
+
+msgid "Open the virtual-keyboard on enigma2"
+msgstr "Otwórz wirtualną klawiaturę na enigma2"
+
+msgid "Page down key"
+msgstr "Klawisz Strona w dół"
+
+msgid "Page up key"
+msgstr "Klawisz Strona w górę"
+
+msgid "PageDown Key"
+msgstr "Klawisz Strona w dół"
+
+msgid "PageUp Key"
+msgstr "Klawisz Strona w górę"
+
+msgid "Pause current video"
+msgstr "Wstrzymaj bieżące wideo"
+
+msgid "Play current video"
+msgstr "Odtwórz bieżące wideo"
+
+msgid "Play selected video"
+msgstr "Odtwórz wybrane wideo"
+
+msgid "Right Key"
+msgstr "Prawy Klawisz"
+
+msgid "Right Mouse Button"
+msgstr "Prawy Przycisk Myszy"
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Search a video"
+msgstr "Wyszukaj wideo"
+
+msgid "Setting"
+msgstr "Ustawienia"
+
+msgid "Skip backward 10 sec"
+msgstr "Przeskocz do tyłu o 10 sekund"
+
+msgid "Skip forward 10 sec"
+msgstr "Przeskocz do przodu o 10 sekund"
+
+msgid "Start"
+msgstr ""
+
+msgid "Start ChromiumOS"
+msgstr "Uruchom ChromiumOS"
+
+msgid "Start URL"
+msgstr "Początkowy adres URL"
+
+msgid "Start Up URL"
+msgstr "Początkowy adres URL"
+
+msgid "Start YouTube TV"
+msgstr "Uruchom YouTube TV"
+
+msgid "Switch to keyboard/mouse mode."
+msgstr "Przełącz na tryb klawiatury / myszy."
+
+msgid "Up Key"
+msgstr "Klawisz w Górę"
+
+msgid "X-margin on GUI"
+msgstr "Margines X na GUI"
+
+msgid "Y-margin on GUI"
+msgstr "Margines Y na GUI"
+
+msgid "YouTube TV Settings"
+msgstr "Ustawienia YouTube TV"
+
+msgid "YouTube TV is a new way to watch YouTube videos on Vu+"
+msgstr "YouTube TV to nowy sposób oglądania filmów z YouTube na Vu +"
+
+msgid "YouTubeTV"
+msgstr ""
+
+msgid "YouTubeTV Settings"
+msgstr "Ustawienia YouTubeTV"

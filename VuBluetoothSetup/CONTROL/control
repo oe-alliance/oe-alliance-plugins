@@ -1,0 +1,5 @@
+Package: enigma2-plugin-systemplugins-bluetoothsetup
+Version: 1.0-r0
+Description: VuPLus bluetooth plugin
+Maintainer: VuPlus
+Depends: libcurl, libsqlite3, libssl, libcrypto, libudev, libusb-compat

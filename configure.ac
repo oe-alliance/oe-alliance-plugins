@@ -138,12 +138,14 @@ AM_CONDITIONAL(GBX1, test "$BOXTYPE" == "gbx1")
 AM_CONDITIONAL(GBX2, test "$BOXTYPE" == "gbx2")
 AM_CONDITIONAL(GBX3, test "$BOXTYPE" == "gbx3")
 AM_CONDITIONAL(GBX3H, test "$BOXTYPE" == "gbx3h")
+AM_CONDITIONAL(GBX34K, test "$BOXTYPE" == "gbx34k")
 AM_CONDITIONAL(GB7356, test "$BOXTYPE" == "gb7356")
 AM_CONDITIONAL(GB7362, test "$BOXTYPE" == "gb7362")
 AM_CONDITIONAL(GB73625, test "$BOXTYPE" == "gb73625")
 AM_CONDITIONAL(GB7358, test "$BOXTYPE" == "gb7358")
 AM_CONDITIONAL(GB7325, test "$BOXTYPE" == "gb7325")
 AM_CONDITIONAL(GB7252, test "$BOXTYPE" == "gb7252")
+AM_CONDITIONAL(GB72604, test "$BOXTYPE" == "gb72604")
 AM_CONDITIONAL(INIHDE, test "$BOXTYPE" == "inihde")
 AM_CONDITIONAL(INIHDE2, test `echo "$BOXTYPE" | cut -b 1-7` == inihde2)
 AM_CONDITIONAL(INIHDP, test "$BOXTYPE" == "inihdp")
@@ -314,6 +316,16 @@ FPGAUpgrade/src/Makefile
 FPGAUpgrade/meta/Makefile
 FPGAUpgrade/po/Makefile
 
+GigaBlueBluetoothSetup/Makefile
+GigaBlueBluetoothSetup/src/Makefile
+GigaBlueBluetoothSetup/meta/Makefile
+GigaBlueBluetoothSetup/po/Makefile
+
+GigaBlueChromium/Makefile
+GigaBlueChromium/src/Makefile
+GigaBlueChromium/meta/Makefile
+GigaBlueChromium/po/Makefile
+
 GigaBlueRemote/Makefile
 GigaBlueRemote/src/Makefile
 GigaBlueRemote/meta/Makefile
@@ -328,6 +340,11 @@ HbbTV/Makefile
 HbbTV/src/Makefile
 HbbTV/meta/Makefile
 HbbTV/po/Makefile
+
+WebkitHbbTV/Makefile
+WebkitHbbTV/src/Makefile
+WebkitHbbTV/bin/Makefile
+WebkitHbbTV/po/Makefile
 
 INIVFDControl/Makefile
 INIVFDControl/src/Makefile
@@ -398,6 +415,11 @@ OnDemand/src/Makefile
 OnDemand/src/icons/Makefile
 OnDemand/meta/Makefile
 OnDemand/po/Makefile
+
+PiconsUpdater/Makefile
+PiconsUpdater/src/Makefile
+PiconsUpdater/meta/Makefile
+PiconsUpdater/po/Makefile
 
 RemoteChannelStreamConverter/Makefile
 RemoteChannelStreamConverter/src/Makefile
@@ -471,6 +493,42 @@ VentonFancontrol/src/Makefile
 VentonFancontrol/meta/Makefile
 VentonFancontrol/po/Makefile
 
+libvupldemo/Makefile
+libvupldemo/src/Makefile
+
+witaispeechtotext/Makefile
+witaispeechtotext/src/Makefile
+
+VuBluetoothSetup/Makefile
+VuBluetoothSetup/src/Makefile
+VuBluetoothSetup/src/vuduo4k/Makefile
+VuBluetoothSetup/src/vuduo4kse/Makefile
+VuBluetoothSetup/src/vusolo4k/Makefile
+VuBluetoothSetup/src/vuultimo4k/Makefile
+VuBluetoothSetup/src/vuuno4k/Makefile
+VuBluetoothSetup/src/vuuno4kse/Makefile
+VuBluetoothSetup/src/vuzero4k/Makefile
+VuBluetoothSetup/meta/Makefile
+VuBluetoothSetup/po/Makefile
+
+VuStalker/Makefile
+VuStalker/src/Makefile
+VuStalker/src/vuduo4k/Makefile
+VuStalker/src/vuduo4kse/Makefile
+VuStalker/src/vusolo4k/Makefile
+VuStalker/src/vuultimo4k/Makefile
+VuStalker/src/vuuno4k/Makefile
+VuStalker/src/vuuno4kse/Makefile
+VuStalker/src/vuzero4k/Makefile
+VuStalker/src/vuzero/Makefile
+VuStalker/meta/Makefile
+VuStalker/po/Makefile
+
+VuChromium/Makefile
+VuChromium/src/Makefile
+VuChromium/meta/Makefile
+VuChromium/po/Makefile
+
 VuRemote/Makefile
 VuRemote/src/Makefile
 VuRemote/meta/Makefile
@@ -517,6 +575,19 @@ SparkUnionTunerType/Makefile
 SparkUnionTunerType/src/Makefile
 SparkUnionTunerType/po/Makefile
 SparkUnionTunerType/meta/Makefile
+
+TVSpielfilm/Makefile
+TVSpielfilm/meta/Makefile
+TVSpielfilm/src/Makefile
+TVSpielfilm/src/db/Makefile
+TVSpielfilm/src/font/Makefile
+TVSpielfilm/src/pic/Makefile
+TVSpielfilm/src/pic/buttons/Makefile
+TVSpielfilm/src/pic/icons/Makefile
+TVSpielfilm/src/pic/logos/Makefile
+TVSpielfilm/src/pic/setup/Makefile
+TVSpielfilm/src/pic/slider/Makefile
+
 
 ])
 AC_OUTPUT

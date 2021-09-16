@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Background Image not downloaded yet, please wait some seconds and try again."
+msgstr ""
+
+msgid "Choose Picons"
+msgstr ""
+
+msgid "Choose folder"
+msgstr ""
+
+msgid "Download Picons for your channellist (favourites)"
+msgstr ""
+
+#, python-format
+msgid "Downloading %d of %d Picons"
+msgstr ""
+
+#, python-format
+msgid "Merge %d of %d Picons"
+msgstr ""
+
+msgid "Merge Picons"
+msgstr ""
+
+msgid "Mirror Effect"
+msgstr ""
+
+#, python-format
+msgid "Optimize %d of %d Picons"
+msgstr ""
+
+msgid "Optimize Picons Progress"
+msgstr ""
+
+msgid ""
+"Optimize Picons file size?\n"
+"\n"
+"Be aware, this function is maybe very slow!!"
+msgstr ""
+
+msgid "Picon Style"
+msgstr ""
+
+msgid "Picons Folder"
+msgstr ""
+
+msgid "Picons background/foreground image"
+msgstr ""
+
+msgid ""
+"Picons folder\n"
+"\n"
+"Press 'Ok' to open path selection view"
+msgstr ""
+
+msgid "Picons size"
+msgstr ""
+
+#, python-format
+msgid ""
+"Process Finished.\n"
+"%s Picons downloaded\n"
+"%s Picons not found"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+#, python-format
+msgid ""
+"The directory %s is not writable.\n"
+"Make sure you select a writable directory instead."
+msgstr ""

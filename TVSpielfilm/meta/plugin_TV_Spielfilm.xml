@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+					<tag type="extra" />
+	  </prerequisites>
+		  <info>
+					<author>kashmir (RIP), jbleyel</author>
+					<name>TV Spielfilm</name>
+					<packagename>enigma2-plugin-extensions-tvspielfilm</packagename>
+					<shortdescription>TVSpielfilm</shortdescription>
+					<description>TVSpielfilm</description>
+		  </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-tvspielfilm" />
+	  </files>
+</default>
