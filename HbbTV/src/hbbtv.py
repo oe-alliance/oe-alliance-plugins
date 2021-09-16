@@ -7,6 +7,7 @@ from .vbipc import VBController
 from . import vbcfg
 import six
 
+
 class HbbTVWindow(Screen):
 	skin = """
 		<screen name="HbbTVWindow" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder" title="HbbTV Plugin">
