@@ -5,7 +5,7 @@ from enigma import eTimer, fbClass, eRCInput
 from .__init__ import _
 from .vbipc import VBController
 from . import vbcfg
-
+import six
 
 class HbbTVWindow(Screen):
 	skin = """
@@ -59,10 +59,17 @@ class HbbTVWindow(Screen):
 
 		if self._info and self._info["control"] == 1 and vbcfg.g_channel_info is not None:
 			(sid, onid, tsid, name) = vbcfg.g_channel_info
-			params = struct.pack('iiiiii', 0, self._info["orgid"], sid, onid, tsid, 0) + vbcfg.g_channel_info[3]
+			params = struct.pack('iiiiii', 0, self._info["orgid"], sid, onid, tsid, 0)
+			if six.PY3:
+				params = params + bytes(vbcfg.g_channel_info[3], 'utf-8')
+			else:
+				params = params + vbcfg.g_channel_info[3]
 			ret = VBController.command('HBBTV_LOADAIT', params)
 		else:
-			ret = VBController.command('HBBTV_OPENURL', self._url)
+			if six.PY3:
+				ret = VBController.command('HBBTV_OPENURL', bytes(self._url, 'utf-8'))
+			else:
+				ret = VBController.command('HBBTV_OPENURL', self._url)
 
 		if ret is False:
 			self._close_timer.start(1000)

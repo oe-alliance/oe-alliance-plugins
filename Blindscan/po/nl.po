@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 16:21+0430\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2019-03-08 14:29+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -17,11 +17,6 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.2.1\n"
 "X-Poedit-SearchPath-0: ..\n"
-
-msgid ""
-"\n"
-"A recording is in progress."
-msgstr ""
 
 msgid ""
 "\n"
@@ -46,10 +41,6 @@ msgstr " tuner."
 msgid "\"channel scan\" searches for channels and saves them to your receiver; \"transponder scan\" does a transponder search and displays the results allowing user to select some or all transponder. Both options save the results in satellites.xml format under /tmp"
 msgstr "'zoek zenders' zoekt naar kanalen en slaat deze op in uw ontvanger; 'zoek transponders' zoekt naar transponders en vertoont het resultaat, waarna u één of meerdere transponders kunt selecteren om kanalen te zoeken. Beide opties laten het resultaat opslaan in het satellites.xml-formaat in /tmp"
 
-#, fuzzy
-msgid "\"scan for channels\" searches for channels and saves them to your receiver; \"Save to XML\" does a transponder search and saves the results in satellites.xml format and stores it in /tmp"
-msgstr "\"zenders zoeken\" zoekt naar zenders en slaat deze op in uw ontvanger; beide opties doen een transponder scan en slaan de resultaten daarvan op in /tmp in een XML bestand in satellites.xml formaat"
-
 #, python-format
 msgid "%d transponder(s) found"
 msgstr "%d transponders gevonden"
@@ -65,6 +56,9 @@ msgstr "%d:%02d/%d:%02dmin"
 #, python-format
 msgid "%dMHz scanned"
 msgstr "%dMHz gescanned"
+
+msgid "AUTOMATICALLY start service searching, press green to change."
+msgstr "Kanalen zoeken automatisch starten, druk op de groene knop om te veranderen."
 
 msgid "Accuracy (higher is better)"
 msgstr "Nauwkeurigheid (hoger is beter)"
@@ -146,6 +140,9 @@ msgstr "Frequentiewaardes moeten tussen %d MHz en %d MHz (C-band) liggen."
 msgid "Hardware blind scan is not supported by this tuner (%s)!"
 msgstr "Hardware blindscan wordt niet ondersteund door deze tuner (%s)!"
 
+msgid "Horizontal"
+msgstr "Horizontaal"
+
 msgid "If you select \"yes\" all channels on the satellite being searched will be deleted before starting the current search, yes (keep feeds) means the same but hold all feed services/transponders."
 msgstr "Als u 'Ja' kiest zullen alle kanalen van de satelliet worden verwijderd alvorens het zoeken begint. 'Ja (bewaar feeds)' betekent hetzelfde, maar alle feed transponders/kanalen worden bewaard."
 
@@ -171,6 +168,15 @@ msgstr ""
 "Zoekt beschikbare transponders.\n"
 "Dit zal een tijdje duren, wees geduldig."
 
+msgid "MANUALLY start service searching, press green to change."
+msgstr "Kanalen zoeken handmatig starten, druk op de groene knop om te veranderen."
+
+msgid "Maybe the reason that recording is currently running."
+msgstr "De oorzaak kan zijn dat er een opname loopt."
+
+msgid "Network scan"
+msgstr "Netwerkscan"
+
 msgid ""
 "No new transponders found! \n"
 "\n"
@@ -184,6 +190,20 @@ msgstr ""
 
 msgid "No transponders were found for those search parameters!"
 msgstr "Met deze zoek parameters zijn geen transponders gevonden!"
+
+msgid ""
+"No tuner is enabled!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Geen tuner ingeschakeld!\n"
+"Stel uw tuners in alvorens kanalen te zoeken."
+
+msgid ""
+"Nothing to scan!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Niets te scnannen!\n"
+"Stel uw tuners in alvorens kanalen te zoeken."
 
 msgid "Nothing to scan! Press Exit!"
 msgstr "Niets te scannen. Druk op Exit!"
@@ -201,13 +221,6 @@ msgid "Please setup your tuner configuration."
 msgstr "U moet de tunerconfiguratie vastleggen."
 
 msgid "Polarisation"
-msgstr "Polarisatie"
-
-msgid "Polarisation, select horizontal, vertical or both."
-msgstr ""
-
-#, fuzzy
-msgid "Polarization"
 msgstr "Polarisatie"
 
 msgid "Press OK to start the scan."
@@ -268,18 +281,11 @@ msgstr ""
 msgid "Search type"
 msgstr "Zoek type"
 
-#, fuzzy
-msgid "Searching for active satellite transponders..."
-msgstr "Probeer in gebruik zijnde transponders te vinden..."
-
 msgid "Select a tuner that is configured for the satellite you wish to search"
 msgstr "Kies een tuner die is geconfigureerd voor de satelliet die u wilt zoeken"
 
 msgid "Select all"
 msgstr "Selecteer alle"
-
-msgid "Select between 1 and 5. Higher numbers give more accurat search results."
-msgstr ""
 
 msgid "Select the satellite you wish to search"
 msgstr "Kies de satelliet die u wilt zoeken"
@@ -291,41 +297,15 @@ msgstr ""
 "Selecteer transponders en druk op groen om te scannen.\n"
 "Druk op geel om alle transponders te selecteren en op blauw om alle te deselecteren."
 
-msgid "Service searching to be started MANUALLY by the user. To change this press green."
-msgstr ""
-
-msgid "Service searching will start AUTOMATICALLY. To change this press green."
-msgstr ""
-
 msgid "Smaller steps takes longer but scan is more thorough"
 msgstr "Kleinere stappen duren langer maar geven een beter resultaat"
 
 msgid "Sorry, this tuner is in use."
 msgstr "Sorry, de tuner is in gebruik."
 
-#, fuzzy
-msgid "Start frequency"
-msgstr "Scan start frequentie"
-
-#, fuzzy
-msgid "Start symbol rate"
-msgstr "Scan start symbolrate"
-
 #, python-format
 msgid "Step %d %d:%02d min"
 msgstr "Stap %d %d:%02d min"
-
-#, fuzzy
-msgid "Stop frequency"
-msgstr "Scan stop frequentie"
-
-#, fuzzy
-msgid "Stop symbol rate"
-msgstr "Scan stop symbolrate"
-
-#, fuzzy, python-format
-msgid "Symbol rate values are in megasymbols; enter a value between %d and %d"
-msgstr "Symbol rate waardes in megasymbols; geef een waarde tussen 1 and 44 in"
 
 msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
 msgstr "Symbol rate waardes in megasymbols; geef een waarde tussen 1 and 44 in"
@@ -343,11 +323,17 @@ msgstr "De voorgestelde polarisatie voor deze satelliet is \"%s\""
 msgid "Transponder searching finished!"
 msgstr "Transponders zoeken gereed!"
 
+msgid "Try to find used satellite transponders..."
+msgstr "Probeer in gebruik zijnde transponders te vinden..."
+
 msgid "Tuner"
 msgstr "Tuner"
 
 msgid "Use Sundtek full hardware blind scan!"
 msgstr "Gebruik de volledige Sundtek hardware blindscan!"
+
+msgid "Vertical"
+msgstr "Vertikaal"
 
 msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr "Als een naburige satelliet erg sterk is, kunt u met deze instelling voorkomen dat transponders waarvan bekend is dat die van die satelliet afkomstig zijn, toegekend worden aan de gescande satelliet."

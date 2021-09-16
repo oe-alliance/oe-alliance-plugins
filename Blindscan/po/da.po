@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 16:21+0430\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2020-06-07 16:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: Danskholdet <dk-translation@pm.me>\n"
@@ -14,11 +14,6 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
-
-msgid ""
-"\n"
-"A recording is in progress."
-msgstr ""
 
 msgid ""
 "\n"
@@ -40,9 +35,6 @@ msgstr "Tuner"
 msgid "\"channel scan\" searches for channels and saves them to your receiver; \"transponder scan\" does a transponder search and displays the results allowing user to select some or all transponder. Both options save the results in satellites.xml format under /tmp"
 msgstr ""
 
-msgid "\"scan for channels\" searches for channels and saves them to your receiver; \"Save to XML\" does a transponder search and saves the results in satellites.xml format and stores it in /tmp"
-msgstr ""
-
 #, python-format
 msgid "%d transponder(s) found"
 msgstr "%d transponder(e) fundet"
@@ -58,6 +50,10 @@ msgstr "%d:%02d/%d:%02dmin"
 #, python-format
 msgid "%dMHz scanned"
 msgstr "%dMHz gennemsøgt"
+
+#, fuzzy
+msgid "AUTOMATICALLY start service searching, press green to change."
+msgstr "Start AUTOMATISK kanalsøgning, tryk grøn for at ændre"
 
 msgid "Accuracy (higher is better)"
 msgstr "Præcision (højere er bedre)"
@@ -140,6 +136,9 @@ msgstr ""
 msgid "Hardware blind scan is not supported by this tuner (%s)!"
 msgstr "Blindscan er ikke understøttet af denne Tuner (%s)"
 
+msgid "Horizontal"
+msgstr "Horisontal"
+
 msgid "If you select \"yes\" all channels on the satellite being searched will be deleted before starting the current search, yes (keep feeds) means the same but hold all feed services/transponders."
 msgstr ""
 
@@ -163,6 +162,16 @@ msgid ""
 "This will take a long time, please be patient."
 msgstr ""
 
+#, fuzzy
+msgid "MANUALLY start service searching, press green to change."
+msgstr "Start MANUEL kanalsøgning, tryk grøn for at ændre"
+
+msgid "Maybe the reason that recording is currently running."
+msgstr ""
+
+msgid "Network scan"
+msgstr "Netværkssøgning"
+
 msgid ""
 "No new transponders found! \n"
 "\n"
@@ -172,6 +181,20 @@ msgstr ""
 
 msgid "No transponders were found for those search parameters!"
 msgstr ""
+
+msgid ""
+"No tuner is enabled!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Ingen Tuner er aktiveret!\n"
+"Sæt venligst dine Tuner indstillinger op før du starter en kanalsøgning."
+
+msgid ""
+"Nothing to scan!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+"Intet at søge!\n"
+"Venligst opsæt Tuner indstilling op før du starter søgning."
 
 msgid "Nothing to scan! Press Exit!"
 msgstr "Intet at søge! Tryk EXIT!"
@@ -190,12 +213,6 @@ msgid "Please setup your tuner configuration."
 msgstr ""
 
 msgid "Polarisation"
-msgstr ""
-
-msgid "Polarisation, select horizontal, vertical or both."
-msgstr ""
-
-msgid "Polarization"
 msgstr ""
 
 #, fuzzy
@@ -251,17 +268,10 @@ msgstr ""
 msgid "Search type"
 msgstr ""
 
-#, fuzzy
-msgid "Searching for active satellite transponders..."
-msgstr "Prøv at finde brugte satellit-transpondere..."
-
 msgid "Select a tuner that is configured for the satellite you wish to search"
 msgstr ""
 
 msgid "Select all"
-msgstr ""
-
-msgid "Select between 1 and 5. Higher numbers give more accurat search results."
 msgstr ""
 
 msgid "Select the satellite you wish to search"
@@ -272,37 +282,15 @@ msgid ""
 "Press yellow to select all transponders and blue to deselect all."
 msgstr ""
 
-msgid "Service searching to be started MANUALLY by the user. To change this press green."
-msgstr ""
-
-msgid "Service searching will start AUTOMATICALLY. To change this press green."
-msgstr ""
-
 msgid "Smaller steps takes longer but scan is more thorough"
 msgstr ""
 
 msgid "Sorry, this tuner is in use."
 msgstr ""
 
-msgid "Start frequency"
-msgstr ""
-
-msgid "Start symbol rate"
-msgstr ""
-
 #, fuzzy, python-format
 msgid "Step %d %d:%02d min"
 msgstr "%d:%02d/%d:%02dmin"
-
-msgid "Stop frequency"
-msgstr ""
-
-msgid "Stop symbol rate"
-msgstr ""
-
-#, python-format
-msgid "Symbol rate values are in megasymbols; enter a value between %d and %d"
-msgstr ""
 
 msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
 msgstr ""
@@ -320,11 +308,17 @@ msgstr ""
 msgid "Transponder searching finished!"
 msgstr "Transponder søgning gennemført!"
 
+msgid "Try to find used satellite transponders..."
+msgstr "Prøv at finde brugte satellit-transpondere..."
+
 msgid "Tuner"
 msgstr "Tuner"
 
 msgid "Use Sundtek full hardware blind scan!"
 msgstr ""
+
+msgid "Vertical"
+msgstr "Vertikal"
 
 msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr ""
