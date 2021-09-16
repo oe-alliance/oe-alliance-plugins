@@ -42,7 +42,8 @@ def getVtunerList():
 	for x in glob.glob('/dev/misc/vtuner*'):
 		x = x.strip('/dev/misc/vtuner')
 		data.append(x)
-	data = sorted([int(x) for x in data])
+	data = [int(x) for x in data]
+	data.sort()
 	return data
 
 
