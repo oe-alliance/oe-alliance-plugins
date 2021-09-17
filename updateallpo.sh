@@ -11,6 +11,39 @@
 # Author: Pr2 for OE-Alliance
 # Version: 1.1
 
+localgsed="sed"
+findoptions=""
+
+#
+# Script only run with sed but on some distro normal sed is already sed so checking it.
+#
+sed --version 2> /dev/null | grep -q "GNU"
+if [ $? -eq 0 ]; then
+	localgsed="sed"
+else
+	"$localgsed" --version | grep -q "GNU"
+	if [ $? -eq 0 ]; then
+		printf "GNU sed found: [%s]\n" $localgsed
+	fi
+fi
+
+which python
+if [ $? -eq 1 ]; then
+	printf "python not found on this system, please install it first or ensure that it is in the PATH variable.\n"
+	exit 1
+fi
+
+#
+# On Mac OSX find option are specific
+#
+if [[ "$OSTYPE" == "darwin"* ]]
+	then
+		# Mac OSX
+		printf "Script running on Mac OSX [%s]\n" "$OSTYPE"
+    	findoptions=" -s -X "
+        localgsed="gsed"
+fi
+
 rootpath=$PWD
 #
 # Parsing the folders tree
@@ -23,10 +56,10 @@ for directory in */po/ ; do
 	printf "Processing plugin %s\n" $plugin
 	#
 	printf "Creating temporary file $plugin-py.pot\n"
-	find -s -X .. -name "*.py" -exec xgettext --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d $plugin -s -o $plugin-py.pot {} \+
-	gsed --in-place $plugin-py.pot --expression=s/CHARSET/UTF-8/
+	find $findoptions .. -name "*.py" -exec xgettext --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d $plugin -s -o $plugin-py.pot {} \+
+	$localgsed --in-place $plugin-py.pot --expression=s/CHARSET/UTF-8/
 	printf "Creating temporary file $plugin-xml.pot\n"
-	find -s -X .. -name "*.xml" -exec python $rootpath/xml2po.py {} \+ > $plugin-xml.pot
+	find $findoptions .. -name "*.xml" -exec python $rootpath/xml2po.py {} \+ > $plugin-xml.pot
 	printf "Merging pot files to create: %s.pot\n" $plugin
 	cat $plugin-py.pot $plugin-xml.pot | msguniq --no-wrap --no-location -o $plugin.pot -
 	rm $plugin-py.pot $plugin-xml.pot

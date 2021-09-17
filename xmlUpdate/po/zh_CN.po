@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
 "PO-Revision-Date: 2018-10-14 23:19+0200\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@163.com>\n"
 "Language-Team: none\n"
@@ -25,6 +25,7 @@ msgstr "退出"
 msgid "Fetch"
 msgstr "取回"
 
+#, python-format
 msgid ""
 "Fetching and saving %s.xml succeeded.\n"
 "Restart now for changes to take immediate effect?"
@@ -32,19 +33,11 @@ msgstr ""
 "获取并保存 %s.xml 成功.\n"
 "立即重新启动以使更改立即生效?"
 
-msgid ""
-"File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
-msgstr ""
-"正在更新的文件,即satellites.xml、cables.xml或ternal.xml."
+msgid "File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
+msgstr "正在更新的文件,即satellites.xml、cables.xml或ternal.xml."
 
-msgid ""
-"Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the "
-"default location. Files stored in \"/etc/enigma2\" override the default file "
-"and are not updated on a software update."
-msgstr ""
-"保存下载文件的文件夹. \"/etc/tuxbox\" 是 "
-"默认位置. 存储在 \"/etc/enigma2\" 中的文件覆盖默认文件 "
-"不会在软件更新时更新."
+msgid "Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the default location. Files stored in \"/etc/enigma2\" override the default file and are not updated on a software update."
+msgstr "保存下载文件的文件夹. \"/etc/tuxbox\" 是 默认位置. 存储在 \"/etc/enigma2\" 中的文件覆盖默认文件 不会在软件更新时更新."
 
 msgid "OE-Alliance"
 msgstr "OE联盟"
@@ -55,15 +48,18 @@ msgstr "从中检索转发器xml文件的联机源."
 msgid "Save to"
 msgstr "保存到"
 
+#, python-format
 msgid "Saving the %s.xml file failed"
 msgstr "保存 %s.xml 文件失败"
 
 msgid "Source"
 msgstr "来源"
 
+#, python-format
 msgid "The %s.xml download was corrupt."
 msgstr "这个 %s.xml 下载已损坏."
 
+#, python-format
 msgid "The %s.xml file could not be fetched"
 msgstr "无法获取 %s.xml 文件"
 

@@ -994,9 +994,6 @@ msgstr "nur Abstand"
 msgid "Distance+Illumination"
 msgstr "Abstand+Ausleuchtung"
 
-msgid "Illumination+Moonphase"
-msgstr "Ausleuchtung+Mondphase"
-
 msgid "Distance+Moonphase"
 msgstr "Abstand+Mondphase"
 
@@ -1142,9 +1139,6 @@ msgstr "Verlauf"
 msgid "HDD"
 msgstr "HDD"
 
-msgid "Illumination only"
-msgstr "nur Ausleuchtung"
-
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1156,6 +1150,12 @@ msgstr "IP Sicherheit durch Box nicht unterstützt"
 
 msgid "Idle"
 msgstr "Leerlauf"
+
+msgid "Illumination only"
+msgstr "nur Ausleuchtung"
+
+msgid "Illumination+Moonphase"
+msgstr "Ausleuchtung+Mondphase"
 
 msgid "Indoor"
 msgstr "Indoor"
@@ -1365,9 +1365,6 @@ msgstr "MJPEG Stream LCD 3 virtuelle Helligkeit"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 aktiv"
 
-msgid "Moonphase only"
-msgstr "nur Mondphase"
-
 msgid "MSN"
 msgstr "MSN"
 
@@ -1553,6 +1550,9 @@ msgstr "Mond-Icon-Verz. [ok]>"
 
 msgid "Moonphase"
 msgstr "Mondphase"
+
+msgid "Moonphase only"
+msgstr "nur Mondphase"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2305,11 +2305,11 @@ msgstr "Wetter Regen Wahrscheinlichkeit"
 msgid "Weather Transparency"
 msgstr "Wetter Transparenz"
 
-msgid "Weather Wind speed unit"
-msgstr "Wetter Wind Einheit"
-
 msgid "Weather Wind Info Lines"
 msgstr "Wetter Wind Infozeilen"
+
+msgid "Weather Wind speed unit"
+msgstr "Wetter Wind Einheit"
 
 msgid "Weather-Icon Zoom"
 msgstr "Wetter-Icon Zoom"

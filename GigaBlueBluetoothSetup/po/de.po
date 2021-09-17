@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2021-09-17 09:16+0200\n"
 "PO-Revision-Date: 2020-07-04 17:53+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -170,6 +170,9 @@ msgstr ""
 msgid ""
 "If you want to update this firmware version, follow belows.\n"
 "\n"
+msgstr ""
+
+msgid "MENU"
 msgstr ""
 
 #, python-format

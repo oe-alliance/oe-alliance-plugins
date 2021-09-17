@@ -993,9 +993,6 @@ msgstr "alleen Afstand "
 msgid "Distance+Illumination"
 msgstr "Afstand + Verlichting"
 
-msgid "Illumination+Moonphase"
-msgstr "Verlichting + Maanfase"
-
 msgid "Distance+Moonphase"
 msgstr "Afstand + Maanfase"
 
@@ -1141,9 +1138,6 @@ msgstr "Gradiënt"
 msgid "HDD"
 msgstr "HDD"
 
-msgid "Illumination only"
-msgstr "alleen Verlichting"
-
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1155,6 +1149,12 @@ msgstr "IP beveiliging is niet ondersteund door de box"
 
 msgid "Idle"
 msgstr "Idle"
+
+msgid "Illumination only"
+msgstr "alleen Verlichting"
+
+msgid "Illumination+Moonphase"
+msgstr "Verlichting + Maanfase"
 
 msgid "Indoor"
 msgstr "Binnenshuis"
@@ -1364,9 +1364,6 @@ msgstr "MJPEG-stream LCD 3 virtuele helderheid"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 inschakelen"
 
-msgid "Moonphase only"
-msgstr "alleen Maanfase"
-
 msgid "MSN"
 msgstr "MSN"
 
@@ -1552,6 +1549,9 @@ msgstr "Maan-ikoonpad [ok]>"
 
 msgid "Moonphase"
 msgstr "Maanfase"
+
+msgid "Moonphase only"
+msgstr "alleen Maanfase"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2304,11 +2304,11 @@ msgstr "Weer regenkans"
 msgid "Weather Transparency"
 msgstr "Weer transparantie"
 
-msgid "Weather Wind speed unit"
-msgstr "Weer windsnelheid eenheid"
-
 msgid "Weather Wind Info Lines"
 msgstr "Weer Wind Infolijnen"
+
+msgid "Weather Wind speed unit"
+msgstr "Weer windsnelheid eenheid"
 
 msgid "Weather-Icon Zoom"
 msgstr "Weer-ikoon zoom"

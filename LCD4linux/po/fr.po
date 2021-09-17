@@ -994,9 +994,6 @@ msgstr "Distance seulement"
 msgid "Distance+Illumination"
 msgstr "Distance+Éclairage"
 
-msgid "Illumination+Moonphase"
-msgstr "Illumination+Phase de Lune"
-
 msgid "Distance+Moonphase"
 msgstr "Distance+Moonphase"
 
@@ -1142,9 +1139,6 @@ msgstr "Dégradé"
 msgid "HDD"
 msgstr "HDD"
 
-msgid "Illumination only"
-msgstr "Éclairage seulement"
-
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1156,6 +1150,12 @@ msgstr "Sécurité IP non supporté par récepteur"
 
 msgid "Idle"
 msgstr "Veille"
+
+msgid "Illumination only"
+msgstr "Éclairage seulement"
+
+msgid "Illumination+Moonphase"
+msgstr "Illumination+Phase de Lune"
 
 msgid "Indoor"
 msgstr "Intérieur"
@@ -1365,9 +1365,6 @@ msgstr "MJPEG Stream LCD 3 Luminosité virtuelle"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 activé"
 
-msgid "Moonphase only"
-msgstr "Phase de lune uniquement"
-
 msgid "MSN"
 msgstr "MSN"
 
@@ -1553,6 +1550,9 @@ msgstr "Chemin des icônes de lune [ok]>"
 
 msgid "Moonphase"
 msgstr "Phase de lune"
+
+msgid "Moonphase only"
+msgstr "Phase de lune uniquement"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2305,11 +2305,11 @@ msgstr "Météo risque de pluie"
 msgid "Weather Transparency"
 msgstr "Météo transparence"
 
-msgid "Weather Wind speed unit"
-msgstr "Météo unité vitesse vent"
-
 msgid "Weather Wind Info Lines"
 msgstr "Météo Vent Lignes d'informations"
+
+msgid "Weather Wind speed unit"
+msgstr "Météo unité vitesse vent"
 
 msgid "Weather-Icon Zoom"
 msgstr "Zoom icône météo"
