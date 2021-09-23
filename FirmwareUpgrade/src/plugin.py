@@ -1,6 +1,5 @@
 from __future__ import print_function
 # for localized messages
-from future.utils import raise_
 from . import _
 
 import os
@@ -113,7 +112,7 @@ class FPUpgradeCore():
 
 				rc = fcntl.ioctl(device, 0, size)
 				if rc < 0:
-					raise_(Exception, 'fail to set size : %d' % (rc))
+					raise Exception('fail to set size : %d' % (rc))
 				#print '[FPUpgradeCore] set size >> [ok]'
 				self.status = STATUS_PREPARED
 
@@ -129,7 +128,7 @@ class FPUpgradeCore():
 				if rc == 0:
 					break
 				if xx == 2:
-					raise_(Exception, 'fail to upgrade : %d' % (rc))
+					raise Exception('fail to upgrade : %d' % (rc))
 				self.errmsg = 'fail to upgrade, retry..'
 				self.status = STATUS_RETRY_UPGRADE
 				closefp(firmware, device)
@@ -185,12 +184,12 @@ class FPGAUpgradeCore():
 
 			rc = fcntl.ioctl(device, 0, size)
 			if rc < 0:
-				raise_(Exception, 'fail to set size : %d' % (rc))
+				raise Exception('fail to set size : %d' % (rc))
 			#print '[FPGAUpgradeCore] set size >> [ok]'
 
 			rc = fcntl.ioctl(device, 2, 5)
 			if rc < 0:
-				raise_(Exception, 'fail to set programming mode : %d' % (rc))
+				raise Exception('fail to set programming mode : %d' % (rc))
 			#print '[FPGAUpgradeCore] programming mode >> [ok]'
 			self.status = STATUS_PREPARED
 
@@ -204,7 +203,7 @@ class FPGAUpgradeCore():
 			self.status = STATUS_PROGRAMMING
 			rc = fcntl.ioctl(device, 1, 0)
 			if rc < 0:
-				raise_(Exception, 'fail to programming : %d' % (rc))
+				raise Exception('fail to programming : %d' % (rc))
 			#print '[FPGAUpgradeCore] upgrade done.'
 			if self.callcount < 20:
 				raise Exception('wrong fpga file.')
@@ -266,7 +265,7 @@ class VFDCtrlUpgradeCore():
 
 				rc = fcntl.ioctl(device, 0, size)
 				if rc < 0:
-					raise_(Exception, 'fail to set size : %d' % (rc))
+					raise Exception('fail to set size : %d' % (rc))
 				#print '[VFDCtrlUpgradeCore] set size >> [ok]'
 				self.status = STATUS_PREPARED
 
@@ -284,7 +283,7 @@ class VFDCtrlUpgradeCore():
 				if rc == 0:
 					break
 				if rc < 0 or xx == 2:
-					raise_(Exception, 'fail to upgrade : %d' % (rc))
+					raise Exception('fail to upgrade : %d' % (rc))
 				self.errmsg = 'fail to upgrade, retry..'
 				self.status = STATUS_RETRY_UPGRADE
 			#print '[VFDCtrlUpgradeCore] upgrade done.'

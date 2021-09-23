@@ -12,7 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.3\n"
-"POT-Creation-Date: \n"
 
 msgid "Always off"
 msgstr "Aina pois päältä"

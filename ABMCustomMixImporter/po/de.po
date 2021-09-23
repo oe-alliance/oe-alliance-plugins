@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2021-09-17 09:16+0200\n"
 "PO-Revision-Date: 2018-10-10 23:31+0200\n"
 "Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
 "Language-Team: \n"
@@ -45,11 +45,12 @@ msgstr "ABM CustomMix"
 msgid "ABM CustomMix Importer"
 msgstr "ABM CustomMix Importeur"
 
+#, fuzzy
+msgid "ABMCustomMixImporter"
+msgstr "ABM CustomMix Importeur"
+
 msgid "Allows you automatically fetch the CustomMix file."
 msgstr "Ermöglicht es Ihnen, automatisch die CustomMix-Datei zu holen."
-
-msgid "Channels importer"
-msgstr "Kanäle Importeur"
 
 msgid "Delete file"
 msgstr "Datei löschen"

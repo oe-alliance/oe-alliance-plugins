@@ -992,9 +992,6 @@ msgstr "Len Vzdialenosť"
 msgid "Distance+Illumination"
 msgstr "Vzdialenosť+Osvetlenie"
 
-msgid "Illumination+Moonphase"
-msgstr "Osvetlenie+Fáza mesačná"
-
 msgid "Distance+Moonphase"
 msgstr "Vzdialenosť+Fáza mesiaca"
 
@@ -1140,9 +1137,6 @@ msgstr "Spád"
 msgid "HDD"
 msgstr "HDD"
 
-msgid "Illumination only"
-msgstr "Len Osvetlenie"
-
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1154,6 +1148,12 @@ msgstr "IP zabezpečenie nie je podporované v box-e"
 
 msgid "Idle"
 msgstr "Nečinný"
+
+msgid "Illumination only"
+msgstr "Len Osvetlenie"
+
+msgid "Illumination+Moonphase"
+msgstr "Osvetlenie+Fáza mesačná"
 
 msgid "Indoor"
 msgstr "Vnútorné"
@@ -1363,9 +1363,6 @@ msgstr "MJPEG stream pre LCD 2 Virtuálny jas"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG stream pre LCD 3 povoliť"
 
-msgid "Moonphase only"
-msgstr "Len Fáza Mesiaca"
-
 msgid "MSN"
 msgstr "MSN"
 
@@ -1551,6 +1548,9 @@ msgstr "Cesta k ikone mesiaca [ok]>"
 
 msgid "Moonphase"
 msgstr "Fáza mesiaca"
+
+msgid "Moonphase only"
+msgstr "Len Fáza Mesiaca"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2303,11 +2303,11 @@ msgstr "Počasie pravdepodobnosť dažďa"
 msgid "Weather Transparency"
 msgstr "Počasie priehľadnosť"
 
-msgid "Weather Wind speed unit"
-msgstr "Počasie jednotky rýchlosti vetra"
-
 msgid "Weather Wind Info Lines"
 msgstr "Počasie smer a rýchlosť vetra"
+
+msgid "Weather Wind speed unit"
+msgstr "Počasie jednotky rýchlosti vetra"
 
 msgid "Weather-Icon Zoom"
 msgstr "Počasie-Ikona zväčšenie"
