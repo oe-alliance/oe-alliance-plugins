@@ -7,6 +7,7 @@
 # (dynamic scaling for rectangle analog clockfaces and -hands and tested by Mr.Servo @ OpenA.TV + Turbohai @ IHAD)
 # (moon distance and moon illumination-ratio by Mr.Servo @ OpenA.TV)
 #
+#
 #  This plugin is licensed under the The Non-Profit Open Software License version 3.0 (NPOSL-3.0)
 #  http://opensource.org/licenses/NPOSL-3.0
 #
@@ -17,7 +18,7 @@
 #  For other uses, permission from the author is necessary.
 #
 from __future__ import print_function, absolute_import, division
-Version = "V5.0-r8A"
+Version = "V5.0-r8B"
 from . import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -76,6 +77,7 @@ import glob
 import random
 import struct
 import re
+import requests
 from time import gmtime, strftime, localtime, mktime, time, sleep, timezone, altzone, daylight
 from datetime import datetime, timedelta, date
 dummy = datetime.strptime('2000-01-01', '%Y-%m-%d').date()
@@ -179,15 +181,15 @@ LCD4config = LCD4enigma2config + "lcd4config" # /etc/enigma2/lcd4config
 LCD4plugin = LCD4enigma2plugin + "Extensions/LCD4linux/" # /usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/
 Data = LCD4plugin + "data/" # /usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/data/
 LCD4default = Data + "default.lcd"
-WetterPath = LCD4enigma2plugin + "Extensions/LCD4linux/wetter/"
-MeteoPath = LCD4enigma2plugin + "Extensions/LCD4linux/meteo/"
+WetterPath = LCD4plugin + "wetter/"
+MeteoPath = LCD4plugin + "meteo/"
 FONTdefault = LCD4fonts + "nmsbd.ttf"
 FONT = FONTdefault
 ClockBack = Data + "PAclock2.png"
 Clock = Data + "Clock"
 RecPic = Data + "rec.png"
-if os.path.islink(LCD4enigma2plugin + "Extensions/LCD4linux/tmp") == True:
-	TMP = os.path.realpath(LCD4enigma2plugin + "Extensions/LCD4linux/tmp") + "/"
+if os.path.islink(LCD4plugin+"tmp") == True:
+	TMP = os.path.realpath(LCD4plugin+"tmp") + "/"
 else:
 	TMP = "/tmp/"
 TMPL = TMP + "lcd4linux/"
@@ -378,7 +380,7 @@ ProgressType = [("1", _("only Progress Bar")),
 ]
 now = localtime()
 begin = mktime((
-	now.tm_year, now.tm_mon, now.tm_mday, 0o6, 00,
+	now.tm_year, now.tm_mon, now.tm_mday, 6, 00, \
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 # Find all directories "clock*" with result in a list, extract last two chars, extract integers, remove dupes, sort integers and convert it back to a list
@@ -4078,16 +4080,15 @@ def getHTMLwww(fn, url):
 	downloadPage(url, filename).addCallback(boundFunction(HTMLwwwDownloadFinished, filename)).addErrback(HTMLwwwDownloadFailed)
 
 
-def Urlget(url, params, method):
-	params = urlencode(params)
+def Urlget(url, params, method, API):
+	headers = {}
+	headers["Authorization"] = "Bearer " + API
 	if method == 'POST':
-		f = urlopen(url, params)
+		headers["Content-type"] = "application/json"
+		f = requests.post(url, headers=headers, params=params)
 	else:
-		f = urlopen(url + '?' + params)
-	fr = f.read()
-	fc = f.code
-	f.close()
-	return (fr, fc)
+		f = requests.get(url, headers=headers, params=params)
+	return (f.text, f.status_code)
 
 
 def getHTMLwwwCloudconvert(fn, www):
@@ -4097,31 +4098,43 @@ def getHTMLwwwCloudconvert(fn, www):
 	filename = WWWpic % str(fn)
 	L4log("downloading HTMLwww from", www)
 	try:
-		datastart = {"input": "url", "file": www, "filename": "convert.website", "outputformat": "jpg"}
 		for API in LCD4linux.WwwApiKeyCloudconvert.value.split():
-			dataget = {"apikey": API, "inputformat": "website", "outputformat": "jpg"}
-			content, resp = Urlget("https://api.cloudconvert.org/process", dataget, "POST")
+			dataget = {'url': www, 'output_format': 'jpg'}
+			content, resp = Urlget('https://api.cloudconvert.com/v2/capture-website', dataget, 'POST', API)
 			L4logE(content, resp)
-			if resp == 200:
+			if resp == 201:
 				break
-		if resp == 200:
+		if resp == 201:
 			r = simplejson.loads(content)
-			content2, resp2 = Urlget(r["url"].replace("//", "https://"), datastart, "POST")
+			content2, resp2 = Urlget(r['data']['links']['self'], {}, "GET", API)
 			L4logE(content2, resp2)
 			if resp2 == 200:
-				content3, resp3 = Urlget(r["url"].replace("//", "https://"), datastart, "GET")
+				content3, resp3 = Urlget(r['data']['links']['self'], {}, "GET", API)
 				L4logE(content3, resp3)
-				r3 = simplejson.loads(content3)
+				r3=simplejson.loads(content3)
 				i = 0
-				while r3.get("step", "") != "finished" and i < 30:
+				while r3['data']['status'] != 'finished' and i < 30:
 					sleep(0.5)
 					i += 1
-					content3, resp3 = Urlget(r["url"].replace("//", "https://"), datastart, "GET")
+					content3, resp3 = Urlget(r3['data']['links']['self'], {}, 'GET', API)
 					L4logE(content3, resp3)
-					r3 = simplejson.loads(content3)
+					r3=simplejson.loads(content3)
 				if resp3 == 200 and i < 30:
-					r3 = simplejson.loads(content3)
-					getHTMLwww(fn, r3["output"]["url"].replace("//", "http://"))
+					dataget = {"input": r3['data']['id']}
+					content4, resp4 = Urlget('https://api.cloudconvert.com/v2/export/url', dataget, 'POST', API)
+					L4logE(content4, resp4)
+					r4 = simplejson.loads(content4)
+					i = 0
+					while r4['data']['status'] != 'finished' and i < 30:
+						sleep(0.5)
+						i += 1
+						content4, resp4 = Urlget(r4['data']['links']['self'], {}, "GET", API)
+						L4logE(content4, resp4)
+						r4 = simplejson.loads(content4)
+					if resp4 == 200 and i < 30:
+						getHTMLwww(fn, r4['data']['result']['files'][0]['url'])
+					else:
+						L4log("WWW Error4:", (content4, resp4))
 				else:
 					L4log("WWW Error3:", (content3, resp3))
 			else:
@@ -4653,6 +4666,9 @@ try:
 	from Plugins.Extensions.Netatmo.NetatmoCore import NetatmoUnit
 	NetatmoOK = True
 	L4log("Register Netatmo ok")
+	from traceback import format_exc
+	L4log("Error:",format_exc() )
+
 except:
 	NetatmoOK = False
 	L4log("Netatmo not registered")
@@ -10352,6 +10368,7 @@ def getServiceInfo(self, NowNext):
 
 
 def getSplit(ConfigSplit, ConfigAlign, MAX_W, w):
+	MAX_W = int(MAX_W)
 	if int(ConfigAlign) > 9 and len(str(ConfigAlign)) < 4:
 		POSX = int(ConfigAlign)
 	else:
@@ -11255,7 +11272,8 @@ def LCD4linuxPIC(self, session):
 						else:
 							self.im[Wim].paste(pil_image, (POSX, PY + int(20 * Wmulti)))
 					if ConfigType == "3":
-						POSXs, POSYs = POSX, POSY + int(89 * Wmulti)
+						corr = int(LCD4linux.WetterWindLines.value) if LCD4linux.WetterWindLines.value != "off" else 0
+						POSXs, POSYs = POSX, POSY + int(44 * Wmulti) + int(WetterZoom * (2.4 + 0.85 * corr))
 					else:
 						POSXs, POSYs = POSX, POSY
 					minus5 = -3
@@ -11471,7 +11489,9 @@ def LCD4linuxPIC(self, session):
 			if ConfigInfo[2] == "1":
 				INFOS += str(MoonDistance()) + " km"
 			if ConfigInfo[1] == "1":
-				INFOS += "-" + str(round(100 - abs(math.cos(math.pi * POS) * 100), 1)) + " %"
+				illum = 100 - abs(math.cos(math.pi * POS) * 100)
+				illum = round((abs(illum - 1) / .99 if illum - 1 > 0 else 0.0), 1)
+				INFOS += "-" + str(round(illum, 1)) + " %"
 			if INFOS != "":
 				w, h = getFsize(Code_utf8(INFOS), font)
 				if w > ConfigSize:
