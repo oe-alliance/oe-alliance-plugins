@@ -188,8 +188,8 @@ FONT = FONTdefault
 ClockBack = Data + "PAclock2.png"
 Clock = Data + "Clock"
 RecPic = Data + "rec.png"
-if os.path.islink(LCD4plugin+"tmp") == True:
-	TMP = os.path.realpath(LCD4plugin+"tmp") + "/"
+if os.path.islink(LCD4plugin + "tmp") == True:
+	TMP = os.path.realpath(LCD4plugin + "tmp") + "/"
 else:
 	TMP = "/tmp/"
 TMPL = TMP + "lcd4linux/"
@@ -380,7 +380,7 @@ ProgressType = [("1", _("only Progress Bar")),
 ]
 now = localtime()
 begin = mktime((
-	now.tm_year, now.tm_mon, now.tm_mday, 6, 00, \
+	now.tm_year, now.tm_mon, now.tm_mday, 6, 00,
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 )
 # Find all directories "clock*" with result in a list, extract last two chars, extract integers, remove dupes, sort integers and convert it back to a list
@@ -4111,14 +4111,14 @@ def getHTMLwwwCloudconvert(fn, www):
 			if resp2 == 200:
 				content3, resp3 = Urlget(r['data']['links']['self'], {}, "GET", API)
 				L4logE(content3, resp3)
-				r3=simplejson.loads(content3)
+				r3 = simplejson.loads(content3)
 				i = 0
 				while r3['data']['status'] != 'finished' and i < 30:
 					sleep(0.5)
 					i += 1
 					content3, resp3 = Urlget(r3['data']['links']['self'], {}, 'GET', API)
 					L4logE(content3, resp3)
-					r3=simplejson.loads(content3)
+					r3 = simplejson.loads(content3)
 				if resp3 == 200 and i < 30:
 					dataget = {"input": r3['data']['id']}
 					content4, resp4 = Urlget('https://api.cloudconvert.com/v2/export/url', dataget, 'POST', API)
@@ -4667,7 +4667,7 @@ try:
 	NetatmoOK = True
 	L4log("Register Netatmo ok")
 	from traceback import format_exc
-	L4log("Error:",format_exc() )
+	L4log("Error:", format_exc())
 
 except:
 	NetatmoOK = False
