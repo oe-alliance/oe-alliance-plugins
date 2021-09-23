@@ -4667,7 +4667,7 @@ try:
 	NetatmoOK = True
 	L4log("Register Netatmo ok")
 	from traceback import format_exc
-	L4log("Error:",format_exc() )
+	L4log("Error:",format_exc())
 
 except:
 	NetatmoOK = False
