@@ -18,7 +18,7 @@
 #  For other uses, permission from the author is necessary.
 #
 from __future__ import print_function, absolute_import, division
-Version = "V5.0-r8B"
+Version = "V5.0-r9"
 from . import _
 from enigma import eConsoleAppContainer, eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol
 from enigma import getDesktop, getEnigmaVersionString, eEnv
@@ -9309,7 +9309,7 @@ class UpdateStatus(Screen):
 
 			self.LEventsDesc = None
 			_LsreftoString = None
-			if self.LsreftoString.startswith(("4097:0", "5001:0", "5002:0", "5003")):
+			if self.LsreftoString.startswith(("4097:0", "5001:0", "5002:0", "5003")) == False:
 				_LsreftoString = self.LsreftoString.replace("4097:0", "1:0", 1).replace("5001:0", "1:0", 1).replace("5002:0", "1:0", 1).replace("5003:0", "1:0", 1)
 				epgcache = eEPGCache.getInstance()
 				if epgcache is not None:
