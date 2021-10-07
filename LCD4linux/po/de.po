@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-27 17:17+0200\n"
-"PO-Revision-Date: 2021-08-28 14:48+0200\n"
+"PO-Revision-Date: 2021-10-06 19:50+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1008,6 +1008,9 @@ msgstr "Download Logdatei"
 
 msgid "E"
 msgstr "O"
+
+msgid "Element"
+msgstr "Element"
 
 msgid "ENE"
 msgstr "ONO"

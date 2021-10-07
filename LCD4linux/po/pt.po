@@ -1012,6 +1012,9 @@ msgstr "Descarregar Arquivo de Depuração"
 msgid "E"
 msgstr "E"
 
+msgid "Element"
+msgstr "Elemento"
+
 msgid "ENE"
 msgstr "ENE"
 

@@ -1012,6 +1012,9 @@ msgstr ""
 msgid "E"
 msgstr ""
 
+msgid "Element"
+msgstr ""
+
 msgid "ENE"
 msgstr ""
 
