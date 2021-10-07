@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-27 17:17+0200\n"
-"PO-Revision-Date: 2021-08-27 17:48+0200\n"
+"PO-Revision-Date: 2021-10-07 09:05+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: OpenPlus\n"
 "Language: es\n"
@@ -991,6 +991,9 @@ msgstr "solo distancia"
 msgid "Distance+Illumination"
 msgstr "Distancia+Iluminación"
 
+msgid "Illumination+Moonphase"
+msgstr "Iluminación+Fase lunar"
+
 msgid "Distance+Moonphase"
 msgstr "Distancia+Fase lunar"
 
@@ -1002,6 +1005,9 @@ msgstr "Descargar Archivo de Depuración"
 
 msgid "E"
 msgstr "E"
+
+msgid "Element"
+msgstr "Elemento"
 
 msgid "ENE"
 msgstr "ENE"
@@ -1136,6 +1142,9 @@ msgstr "Gradiente"
 msgid "HDD"
 msgstr "HDD"
 
+msgid "Illumination only"
+msgstr "solo Iluminación"
+
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1147,12 +1156,6 @@ msgstr "Seguridad de IP no soprtada por el dispositivo"
 
 msgid "Idle"
 msgstr "En Reposo"
-
-msgid "Illumination only"
-msgstr "solo Iluminación"
-
-msgid "Illumination+Moonphase"
-msgstr "Iluminación+Fase lunar"
 
 msgid "Indoor"
 msgstr "Interior"
@@ -1362,6 +1365,9 @@ msgstr "MJPEG Arroyo LCD 3 Brillo virtual"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Arroyo LCD 3 permitir"
 
+msgid "Moonphase only"
+msgstr "solo Fase lunar"
+
 msgid "MSN"
 msgstr "MSN"
 
@@ -1547,9 +1553,6 @@ msgstr "Ruta Iconos Lunares [ok]>"
 
 msgid "Moonphase"
 msgstr "Fases Lunares"
-
-msgid "Moonphase only"
-msgstr "solo Fase lunar"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2302,11 +2305,11 @@ msgstr "Posibilidad de Lluvia en el Tiempo"
 msgid "Weather Transparency"
 msgstr "Transparencias del Tiempo"
 
-msgid "Weather Wind Info Lines"
-msgstr "Líneas de información de viento meteorológico"
-
 msgid "Weather Wind speed unit"
 msgstr "Unidad de velocidad del viento meteorológico"
+
+msgid "Weather Wind Info Lines"
+msgstr "Líneas de información de viento meteorológico"
 
 msgid "Weather-Icon Zoom"
 msgstr "Zoom de Iconos del Tiempo"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-17 09:16+0200\n"
+"POT-Creation-Date: 2021-08-27 17:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
 
 msgid "%"
 msgstr ""
@@ -996,6 +997,9 @@ msgstr ""
 msgid "Distance+Illumination"
 msgstr ""
 
+msgid "Illumination+Moonphase"
+msgstr ""
+
 msgid "Distance+Moonphase"
 msgstr ""
 
@@ -1006,6 +1010,9 @@ msgid "Download Logfile"
 msgstr ""
 
 msgid "E"
+msgstr ""
+
+msgid "Element"
 msgstr ""
 
 msgid "ENE"
@@ -1139,6 +1146,9 @@ msgstr ""
 msgid "HDD"
 msgstr ""
 
+msgid "Illumination only"
+msgstr ""
+
 msgid "IMAP"
 msgstr ""
 
@@ -1149,12 +1159,6 @@ msgid "IP seurity not supported by Box"
 msgstr ""
 
 msgid "Idle"
-msgstr ""
-
-msgid "Illumination only"
-msgstr ""
-
-msgid "Illumination+Moonphase"
 msgstr ""
 
 msgid "Indoor"
@@ -1365,6 +1369,9 @@ msgstr ""
 msgid "MJPEG Stream LCD 3 enable"
 msgstr ""
 
+msgid "Moonphase only"
+msgstr ""
+
 msgid "MSN"
 msgstr ""
 
@@ -1549,9 +1556,6 @@ msgid "Moon-Icon-Path [ok]>"
 msgstr ""
 
 msgid "Moonphase"
-msgstr ""
-
-msgid "Moonphase only"
 msgstr ""
 
 msgid "MusicCast"
@@ -2305,10 +2309,10 @@ msgstr ""
 msgid "Weather Transparency"
 msgstr ""
 
-msgid "Weather Wind Info Lines"
+msgid "Weather Wind speed unit"
 msgstr ""
 
-msgid "Weather Wind speed unit"
+msgid "Weather Wind Info Lines"
 msgstr ""
 
 msgid "Weather-Icon Zoom"

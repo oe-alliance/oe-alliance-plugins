@@ -997,6 +997,9 @@ msgstr "Distância apenas"
 msgid "Distance+Illumination"
 msgstr "Distância+Iluminação"
 
+msgid "Illumination+Moonphase"
+msgstr "Iluminação+Fase da Lua"
+
 msgid "Distance+Moonphase"
 msgstr "Distância + Fases da Lua"
 
@@ -1008,6 +1011,9 @@ msgstr "Descarregar Arquivo de Depuração"
 
 msgid "E"
 msgstr "E"
+
+msgid "Element"
+msgstr "Elemento"
 
 msgid "ENE"
 msgstr "ENE"
@@ -1142,6 +1148,9 @@ msgstr "Gradiente"
 msgid "HDD"
 msgstr "HDD"
 
+msgid "Illumination only"
+msgstr "Iluminação apenas"
+
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1153,12 +1162,6 @@ msgstr "Segurança de IP não suportada pelo dispositivo"
 
 msgid "Idle"
 msgstr "Idle"
-
-msgid "Illumination only"
-msgstr "Iluminação apenas"
-
-msgid "Illumination+Moonphase"
-msgstr "Iluminação+Fase da Lua"
 
 msgid "Indoor"
 msgstr "Dentro de Casa"
@@ -1368,6 +1371,9 @@ msgstr "MJPEG Stream LCD 3 Brilho Virtual"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "Activar Stream MJPEG LCD 3"
 
+msgid "Moonphase only"
+msgstr "Fase da lua apenas"
+
 msgid "MSN"
 msgstr "MSN"
 
@@ -1553,9 +1559,6 @@ msgstr "Percurso Icons Lunares [OK]>"
 
 msgid "Moonphase"
 msgstr "Fases da Lua"
-
-msgid "Moonphase only"
-msgstr "Fase da lua apenas"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2308,11 +2311,11 @@ msgstr "Possibilidade de Chuva no Tempo"
 msgid "Weather Transparency"
 msgstr "Transparências do Tempo"
 
-msgid "Weather Wind Info Lines"
-msgstr "Linhas de informação do vento do tempo"
-
 msgid "Weather Wind speed unit"
 msgstr "Unidade de Velocidade do Viento no Tempo"
+
+msgid "Weather Wind Info Lines"
+msgstr "Linhas de informação do vento do tempo"
 
 msgid "Weather-Icon Zoom"
 msgstr "Zoom de Icons do Tempo"

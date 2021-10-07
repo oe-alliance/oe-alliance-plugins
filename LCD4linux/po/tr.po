@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-27 17:17+0200\n"
-"PO-Revision-Date: 2021-08-27 17:26+0200\n"
+"PO-Revision-Date: 2021-10-07 09:12+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -992,6 +992,9 @@ msgstr ""
 msgid "Distance+Illumination"
 msgstr ""
 
+msgid "Illumination+Moonphase"
+msgstr ""
+
 msgid "Distance+Moonphase"
 msgstr ""
 
@@ -1003,6 +1006,9 @@ msgstr ""
 
 msgid "E"
 msgstr ""
+
+msgid "Element"
+msgstr "Eleman"
 
 msgid "ENE"
 msgstr ""
@@ -1137,6 +1143,9 @@ msgstr ""
 msgid "HDD"
 msgstr ""
 
+msgid "Illumination only"
+msgstr ""
+
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1147,12 +1156,6 @@ msgid "IP seurity not supported by Box"
 msgstr ""
 
 msgid "Idle"
-msgstr ""
-
-msgid "Illumination only"
-msgstr ""
-
-msgid "Illumination+Moonphase"
 msgstr ""
 
 msgid "Indoor"
@@ -1364,6 +1367,9 @@ msgstr "- LCD 3 Sanal Parlaklık"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr ""
 
+msgid "Moonphase only"
+msgstr ""
+
 msgid "MSN"
 msgstr ""
 
@@ -1548,9 +1554,6 @@ msgid "Moon-Icon-Path [ok]>"
 msgstr ""
 
 msgid "Moonphase"
-msgstr ""
-
-msgid "Moonphase only"
 msgstr ""
 
 msgid "MusicCast"
@@ -2312,10 +2315,10 @@ msgstr ""
 msgid "Weather Transparency"
 msgstr ""
 
-msgid "Weather Wind Info Lines"
+msgid "Weather Wind speed unit"
 msgstr ""
 
-msgid "Weather Wind speed unit"
+msgid "Weather Wind Info Lines"
 msgstr ""
 
 msgid "Weather-Icon Zoom"
