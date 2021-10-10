@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 17:17+0200\n"
-"PO-Revision-Date: 2021-08-27 17:52+0200\n"
+"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"PO-Revision-Date: 2021-10-10 23:12+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -1012,6 +1012,9 @@ msgstr "Scaricare file di log"
 msgid "E"
 msgstr "O"
 
+msgid "Element"
+msgstr "Elemento"
+
 msgid "ENE"
 msgstr "ONO"
 
@@ -1038,6 +1041,9 @@ msgstr "Descrizione estesa"
 
 msgid "External IP Address"
 msgstr "Indirizzo IP esterno"
+
+msgid "Filename"
+msgstr "Nome del file"
 
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
@@ -1541,6 +1547,9 @@ msgstr "Modulo 5-6"
 
 msgid "Module 6"
 msgstr "Modulo 6"
+
+msgid "Mode"
+msgstr "Modo"
 
 msgid "Mon"
 msgstr "Lun"
