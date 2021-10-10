@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 17:17+0200\n"
-"PO-Revision-Date: 2021-10-07 09:13+0200\n"
+"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"PO-Revision-Date: 2021-10-10 23:20+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@163.com>\n"
 "Language: zh_CN\n"
@@ -1039,6 +1039,9 @@ msgstr "扩展描述"
 msgid "External IP Address"
 msgstr "外部 IP 地址"
 
+msgid "Filename"
+msgstr "文档名称"
+
 msgid "Fastmode (2s)"
 msgstr "快速模式（2秒）"
 
@@ -1541,6 +1544,9 @@ msgstr "模块5-6"
 
 msgid "Module 6"
 msgstr "模块6"
+
+msgid "Mode"
+msgstr "模式"
 
 msgid "Mon"
 msgstr "周一"

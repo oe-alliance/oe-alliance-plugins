@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 17:17+0200\n"
-"PO-Revision-Date: 2021-10-07 09:10+0200\n"
+"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"PO-Revision-Date: 2021-10-10 23:15+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -1036,6 +1036,9 @@ msgstr "Расширенное описание"
 msgid "External IP Address"
 msgstr "Внешний IP-адрес"
 
+msgid "Filename"
+msgstr "Имя файла"
+
 msgid "Fastmode (2s)"
 msgstr "Быстрый режим (2s)"
 
@@ -1538,6 +1541,9 @@ msgstr "Модуль 5-6"
 
 msgid "Module 6"
 msgstr "Модуль 6"
+
+msgid "Mode"
+msgstr "Режим"
 
 msgid "Mon"
 msgstr "Пон"
