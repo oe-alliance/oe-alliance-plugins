@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 17:17+0200\n"
-"PO-Revision-Date: 2021-08-27 17:52+0200\n"
+"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"PO-Revision-Date: 2021-10-10 23:12+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -997,6 +997,9 @@ msgstr "solo Distanza"
 msgid "Distance+Illumination"
 msgstr "Distanza+Illuminazione"
 
+msgid "Illumination+Moonphase"
+msgstr "Illuminazione+Fase lunare"
+
 msgid "Distance+Moonphase"
 msgstr "Distanza+Fase lunare"
 
@@ -1008,6 +1011,9 @@ msgstr "Scaricare file di log"
 
 msgid "E"
 msgstr "O"
+
+msgid "Element"
+msgstr "Elemento"
 
 msgid "ENE"
 msgstr "ONO"
@@ -1035,6 +1041,9 @@ msgstr "Descrizione estesa"
 
 msgid "External IP Address"
 msgstr "Indirizzo IP esterno"
+
+msgid "Filename"
+msgstr "Nome del file"
 
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
@@ -1142,6 +1151,9 @@ msgstr "Gradiente"
 msgid "HDD"
 msgstr "HDD"
 
+msgid "Illumination only"
+msgstr "solo Illuminazione"
+
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1153,12 +1165,6 @@ msgstr "Sicurezza IP non supportata dal Box"
 
 msgid "Idle"
 msgstr "Idle"
-
-msgid "Illumination only"
-msgstr "solo Illuminazione"
-
-msgid "Illumination+Moonphase"
-msgstr "Illuminazione+Fase lunare"
 
 msgid "Indoor"
 msgstr "Interno"
@@ -1368,6 +1374,9 @@ msgstr "MJPEG Stream LCD 3 Luminosità Virtuale"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 Abilitato"
 
+msgid "Moonphase only"
+msgstr "solo Fasi lunari"
+
 msgid "MSN"
 msgstr "MSN"
 
@@ -1539,6 +1548,9 @@ msgstr "Modulo 5-6"
 msgid "Module 6"
 msgstr "Modulo 6"
 
+msgid "Mode"
+msgstr "Modo"
+
 msgid "Mon"
 msgstr "Lun"
 
@@ -1553,9 +1565,6 @@ msgstr "Luna -Path- Icona [OK] >"
 
 msgid "Moonphase"
 msgstr "Fase lunare"
-
-msgid "Moonphase only"
-msgstr "solo Fasi lunari"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2308,11 +2317,11 @@ msgstr "Possibilità di pioggia"
 msgid "Weather Transparency"
 msgstr "Meteo - trasparenza"
 
-msgid "Weather Wind Info Lines"
-msgstr "Meteo Vento Linee Informative"
-
 msgid "Weather Wind speed unit"
 msgstr "Unità di velocità vento"
+
+msgid "Weather Wind Info Lines"
+msgstr "Meteo Vento Linee Informative"
 
 msgid "Weather-Icon Zoom"
 msgstr "Meteo - Zoom icona"

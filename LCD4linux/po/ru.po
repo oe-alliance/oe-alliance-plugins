@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 17:17+0200\n"
-"PO-Revision-Date: 2021-08-27 17:23+0200\n"
+"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"PO-Revision-Date: 2021-10-10 23:15+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -991,6 +991,9 @@ msgstr "Только расстояние"
 msgid "Distance+Illumination"
 msgstr "Расстояние+Освещение"
 
+msgid "Illumination+Moonphase"
+msgstr "Освещение+фаза луны"
+
 msgid "Distance+Moonphase"
 msgstr "Расстояние+фаза луны"
 
@@ -1002,6 +1005,9 @@ msgstr "Скачать Лог-файл"
 
 msgid "E"
 msgstr "E"
+
+msgid "Element"
+msgstr "Элемент"
 
 msgid "ENE"
 msgstr "E"
@@ -1029,6 +1035,9 @@ msgstr "Расширенное описание"
 
 msgid "External IP Address"
 msgstr "Внешний IP-адрес"
+
+msgid "Filename"
+msgstr "Имя файла"
 
 msgid "Fastmode (2s)"
 msgstr "Быстрый режим (2s)"
@@ -1136,6 +1145,9 @@ msgstr "Градиент"
 msgid "HDD"
 msgstr "HDD"
 
+msgid "Illumination only"
+msgstr "Только подсветка"
+
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1147,12 +1159,6 @@ msgstr "Безопасность IP не поддерживается Box"
 
 msgid "Idle"
 msgstr "Праздный"
-
-msgid "Illumination only"
-msgstr "Только подсветка"
-
-msgid "Illumination+Moonphase"
-msgstr "Освещение+фаза луны"
 
 msgid "Indoor"
 msgstr "В помещении"
@@ -1362,6 +1368,9 @@ msgstr "MJPEG Ручей LCD 3 виртуальная яркость"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Ручей LCD 3 включить"
 
+msgid "Moonphase only"
+msgstr "Только фаза луны"
+
 msgid "MSN"
 msgstr "MSN"
 
@@ -1533,6 +1542,9 @@ msgstr "Модуль 5-6"
 msgid "Module 6"
 msgstr "Модуль 6"
 
+msgid "Mode"
+msgstr "Режим"
+
 msgid "Mon"
 msgstr "Пон"
 
@@ -1547,9 +1559,6 @@ msgstr "Месяц-путь к иконкам[ok]>"
 
 msgid "Moonphase"
 msgstr "Фазы Луны"
-
-msgid "Moonphase only"
-msgstr "Только фаза луны"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2302,11 +2311,11 @@ msgstr "Возможен дождь"
 msgid "Weather Transparency"
 msgstr "Погода Прозрачность"
 
-msgid "Weather Wind Info Lines"
-msgstr "Линии информации о погоде и ветре"
-
 msgid "Weather Wind speed unit"
 msgstr "Погода Ветер скорость единицы измерения"
+
+msgid "Weather Wind Info Lines"
+msgstr "Линии информации о погоде и ветре"
 
 msgid "Weather-Icon Zoom"
 msgstr "Погода-Икона зум"

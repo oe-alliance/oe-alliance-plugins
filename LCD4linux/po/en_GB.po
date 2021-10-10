@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD 4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 17:17+0200\n"
-"PO-Revision-Date: 2021-08-27 17:18+0200\n"
+"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"PO-Revision-Date: 2021-10-10 23:07+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -997,6 +997,9 @@ msgstr "Distance only"
 msgid "Distance+Illumination"
 msgstr "Distance+Illumination"
 
+msgid "Illumination+Moonphase"
+msgstr "Illumination+Moonphase"
+
 msgid "Distance+Moonphase"
 msgstr "Distance+Moonphase"
 
@@ -1008,6 +1011,9 @@ msgstr "Download Logfile"
 
 msgid "E"
 msgstr "E"
+
+msgid "Element"
+msgstr "Element"
 
 msgid "ENE"
 msgstr "ENE"
@@ -1035,6 +1041,9 @@ msgstr "Extended Description"
 
 msgid "External IP Address"
 msgstr "External IP Address"
+
+msgid "Filename"
+msgstr "Filename"
 
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
@@ -1142,6 +1151,9 @@ msgstr "Gradient"
 msgid "HDD"
 msgstr "HDD"
 
+msgid "Illumination only"
+msgstr "Illumination only"
+
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1153,12 +1165,6 @@ msgstr "IP security not supported by Box"
 
 msgid "Idle"
 msgstr "Idle"
-
-msgid "Illumination only"
-msgstr "Illumination only"
-
-msgid "Illumination+Moonphase"
-msgstr "Illumination+Moonphase"
 
 msgid "Indoor"
 msgstr "Indoor"
@@ -1368,6 +1374,9 @@ msgstr "MJPEG Stream LCD 3 Virtual Brightness"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 enable"
 
+msgid "Moonphase only"
+msgstr "Moonphase only"
+
 msgid "MSN"
 msgstr "MSN"
 
@@ -1539,6 +1548,9 @@ msgstr "Module 5-6"
 msgid "Module 6"
 msgstr "Module 6"
 
+msgid "Mode"
+msgstr "Mode"
+
 msgid "Mon"
 msgstr "Mon"
 
@@ -1553,9 +1565,6 @@ msgstr "Moon-Icon-Path [ok]>"
 
 msgid "Moonphase"
 msgstr "Moonphase"
-
-msgid "Moonphase only"
-msgstr "Moonphase only"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2308,11 +2317,11 @@ msgstr "Weather Rain Chance"
 msgid "Weather Transparency"
 msgstr "Weather Transparency"
 
-msgid "Weather Wind Info Lines"
-msgstr "Weather Wind Info Lines"
-
 msgid "Weather Wind speed unit"
 msgstr "Weather Wind speed unit"
+
+msgid "Weather Wind Info Lines"
+msgstr "Weather Wind Info Lines"
 
 msgid "Weather-Icon Zoom"
 msgstr "Weather-Icon Zoom"

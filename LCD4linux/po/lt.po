@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 17:17+0200\n"
+"POT-Creation-Date: 2021-10-10 21:04+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Vytenis P. vyteniui@gmail.com\n"
@@ -11,7 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "%"
 msgstr "%"
@@ -992,6 +993,9 @@ msgstr "tik Atstumas"
 msgid "Distance+Illumination"
 msgstr "Atstumas+Apšvietimas"
 
+msgid "Illumination+Moonphase"
+msgstr "Apšvietimas+Mėnulio fazė"
+
 msgid "Distance+Moonphase"
 msgstr "Atstumas+Mėnulio fazė"
 
@@ -1003,6 +1007,9 @@ msgstr "Parsisiųsti žurnalą"
 
 msgid "E"
 msgstr "R"
+
+msgid "Element"
+msgstr "Elementas"
 
 msgid "ENE"
 msgstr "RŠR"
@@ -1030,6 +1037,9 @@ msgstr "Išsamus aprašymas"
 
 msgid "External IP Address"
 msgstr "Išorinis IP adresas"
+
+msgid "Filename"
+msgstr "Failo pavadinimas"
 
 msgid "Fastmode (2s)"
 msgstr "Greitasis režimas (2s)"
@@ -1137,6 +1147,9 @@ msgstr "Gradientas"
 msgid "HDD"
 msgstr "HDD"
 
+msgid "Illumination only"
+msgstr "tik Apšvietimas"
+
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1148,12 +1161,6 @@ msgstr "IP saugumo aparatas nepalaiko"
 
 msgid "Idle"
 msgstr "Neveikla"
-
-msgid "Illumination only"
-msgstr "tik Apšvietimas"
-
-msgid "Illumination+Moonphase"
-msgstr "Apšvietimas+Mėnulio fazė"
 
 msgid "Indoor"
 msgstr "Viduje"
@@ -1363,6 +1370,9 @@ msgstr "MJPEG srauto į LCD 3 virtualus šviesumas"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG srautas į LCD 3 įjungtas"
 
+msgid "Moonphase only"
+msgstr "tik Mėnulio fazė"
+
 msgid "MSN"
 msgstr "MSN"
 
@@ -1534,6 +1544,9 @@ msgstr "Moduliai 5-6"
 msgid "Module 6"
 msgstr "Modulis 6"
 
+msgid "Mode"
+msgstr "Režimas"
+
 msgid "Mon"
 msgstr "Pir"
 
@@ -1548,9 +1561,6 @@ msgstr "Kelias į mėnulio piktogramą [Ok]>"
 
 msgid "Moonphase"
 msgstr "Mėnulio fazė"
-
-msgid "Moonphase only"
-msgstr "tik Mėnulio fazė"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2303,11 +2313,11 @@ msgstr "Lietaus tikimybė"
 msgid "Weather Transparency"
 msgstr "Orų lango skaidrumas"
 
-msgid "Weather Wind Info Lines"
-msgstr "Oras Vėjas Informacijos linijos"
-
 msgid "Weather Wind speed unit"
 msgstr "Vėjo greičio matavimo vienetai"
+
+msgid "Weather Wind Info Lines"
+msgstr "Oras Vėjas Informacijos linijos"
 
 msgid "Weather-Icon Zoom"
 msgstr "Orų piktogramos dydis"
