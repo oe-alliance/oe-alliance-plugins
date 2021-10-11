@@ -2,9 +2,9 @@ name: oe-alliance plugins
 
 on:
   push:
-    branches: [ master, python3 ]
+    branches: [ master ]
   pull_request:
-    branches: [ master, python3 ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -43,7 +43,7 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          ref: 'python3'
+          ref: 'master'
       - uses: actions/setup-python@v2
         with:
           python-version: '3.9'
