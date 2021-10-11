@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 17:17+0200\n"
-"PO-Revision-Date: 2021-08-27 17:49+0200\n"
+"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"PO-Revision-Date: 2021-10-10 23:10+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Kojo\n"
 "Language: fi\n"
@@ -997,6 +997,9 @@ msgstr "Vain etäisyys"
 msgid "Distance+Illumination"
 msgstr "Etäisyys+valaistus"
 
+msgid "Illumination+Moonphase"
+msgstr "Valaistus+Kuun vaihe"
+
 msgid "Distance+Moonphase"
 msgstr "Etäisyys+kuun vaihe"
 
@@ -1008,6 +1011,9 @@ msgstr "Lataa lokitiedosto"
 
 msgid "E"
 msgstr "Itä"
+
+msgid "Element"
+msgstr "Elementti"
 
 msgid "ENE"
 msgstr "Itäkoillinen"
@@ -1035,6 +1041,9 @@ msgstr "Laajennettu kuvaus"
 
 msgid "External IP Address"
 msgstr "Ulkoinen IP Osoite"
+
+msgid "Filename"
+msgstr "Tiedostonimi"
 
 msgid "Fastmode (2s)"
 msgstr "Nopea (2s)"
@@ -1142,6 +1151,9 @@ msgstr "Liukuväri"
 msgid "HDD"
 msgstr "Kiintolevy"
 
+msgid "Illumination only"
+msgstr "Vain valaistus"
+
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1153,12 +1165,6 @@ msgstr "Laite ei tue IP-turvallisuutta"
 
 msgid "Idle"
 msgstr "Valmiustila"
-
-msgid "Illumination only"
-msgstr "Vain valaistus"
-
-msgid "Illumination+Moonphase"
-msgstr "Valaistus+Kuun vaihe"
 
 msgid "Indoor"
 msgstr "Sisätila"
@@ -1368,6 +1374,9 @@ msgstr "MJPEG: Syöte LCD 3 Virtuaalinen kirkkaus"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG: Syöte LCD 3 Päälle"
 
+msgid "Moonphase only"
+msgstr "Vain kuun vaihe"
+
 msgid "MSN"
 msgstr "MSN"
 
@@ -1539,6 +1548,9 @@ msgstr "Moduli 5-6"
 msgid "Module 6"
 msgstr "Moduli 6"
 
+msgid "Mode"
+msgstr "Tila"
+
 msgid "Mon"
 msgstr "Maa"
 
@@ -1553,9 +1565,6 @@ msgstr "Kuu-ikonin polku [ok]>"
 
 msgid "Moonphase"
 msgstr "Kuunkierto"
-
-msgid "Moonphase only"
-msgstr "Vain kuun vaihe"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2308,11 +2317,11 @@ msgstr "Sää: Sateen mahdollisuus"
 msgid "Weather Transparency"
 msgstr "Sää: Läpiväkyvyys"
 
-msgid "Weather Wind Info Lines"
-msgstr "Sää: Tuuli Info Linja"
-
 msgid "Weather Wind speed unit"
 msgstr "Sää: Tuulen nopeuden yksikkö"
+
+msgid "Weather Wind Info Lines"
+msgstr "Sää: Tuuli Info Linja"
 
 msgid "Weather-Icon Zoom"
 msgstr "Sää-ikoni zoom"

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 17:17+0200\n"
-"PO-Revision-Date: 2021-08-27 17:21+0200\n"
+"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"PO-Revision-Date: 2021-10-10 23:13+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -993,6 +993,9 @@ msgstr "alleen Afstand "
 msgid "Distance+Illumination"
 msgstr "Afstand + Verlichting"
 
+msgid "Illumination+Moonphase"
+msgstr "Verlichting + Maanfase"
+
 msgid "Distance+Moonphase"
 msgstr "Afstand + Maanfase"
 
@@ -1004,6 +1007,9 @@ msgstr "Download logbestand"
 
 msgid "E"
 msgstr "O"
+
+msgid "Element"
+msgstr "Element"
 
 msgid "ENE"
 msgstr "ONO"
@@ -1031,6 +1037,9 @@ msgstr "Uitgebreide beschrijving"
 
 msgid "External IP Address"
 msgstr "Extern IP adres"
+
+msgid "Filename"
+msgstr "Bestandsnaam"
 
 msgid "Fastmode (2s)"
 msgstr "Snelle modus (2s)"
@@ -1138,6 +1147,9 @@ msgstr "Gradiënt"
 msgid "HDD"
 msgstr "HDD"
 
+msgid "Illumination only"
+msgstr "alleen Verlichting"
+
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1149,12 +1161,6 @@ msgstr "IP beveiliging is niet ondersteund door de box"
 
 msgid "Idle"
 msgstr "Idle"
-
-msgid "Illumination only"
-msgstr "alleen Verlichting"
-
-msgid "Illumination+Moonphase"
-msgstr "Verlichting + Maanfase"
 
 msgid "Indoor"
 msgstr "Binnenshuis"
@@ -1364,6 +1370,9 @@ msgstr "MJPEG-stream LCD 3 virtuele helderheid"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 inschakelen"
 
+msgid "Moonphase only"
+msgstr "alleen Maanfase"
+
 msgid "MSN"
 msgstr "MSN"
 
@@ -1535,6 +1544,9 @@ msgstr "Module 5-6"
 msgid "Module 6"
 msgstr "Module 6"
 
+msgid "Mode"
+msgstr "Modus"
+
 msgid "Mon"
 msgstr "Ma"
 
@@ -1549,9 +1561,6 @@ msgstr "Maan-ikoonpad [ok]>"
 
 msgid "Moonphase"
 msgstr "Maanfase"
-
-msgid "Moonphase only"
-msgstr "alleen Maanfase"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2304,11 +2313,11 @@ msgstr "Weer regenkans"
 msgid "Weather Transparency"
 msgstr "Weer transparantie"
 
-msgid "Weather Wind Info Lines"
-msgstr "Weer Wind Infolijnen"
-
 msgid "Weather Wind speed unit"
 msgstr "Weer windsnelheid eenheid"
+
+msgid "Weather Wind Info Lines"
+msgstr "Weer Wind Infolijnen"
 
 msgid "Weather-Icon Zoom"
 msgstr "Weer-ikoon zoom"
