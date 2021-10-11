@@ -938,13 +938,13 @@ class ModemManager(Screen):
 
 	def setConnectStatus(self, idx):
 		STATUS = {
-		 0: '1. Load a Mobile Broadband Device'		, 1: '2. Set up a Mobile Broadband Device'		, 2: '3. Generate a WvDial profile'		, 3: '4. Attempt to connect'		, 4: '5. Done'
+		 0: '1. Load a Mobile Broadband Device', 1: '2. Set up a Mobile Broadband Device', 2: '3. Generate a WvDial profile', 3: '4. Attempt to connect', 4: '5. Done'
 		}
 		self.printStatus(idx, STATUS)
 
 	def setDisconnectStatus(self, idx):
 		STATUS = {
-		 0: '1. Drop WvDial'		, 1: '2. Unload a Mobile Broadband Device'		, 2: '3. Done'
+		 0: '1. Drop WvDial', 1: '2. Unload a Mobile Broadband Device', 2: '3. Done'
 		}
 		self.printStatus(idx, STATUS)
 

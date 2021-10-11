@@ -55,12 +55,12 @@ class BluetoothDiscovery(BluetoothTask):
 		self.appendEventCallback()
 
 		self.descriptionList = {
-			bt_types.BT_EVENT_PAIRING_SUCCESS	: _("%s is paired."),
-			bt_types.BT_EVENT_PAIRING_FAIL		: _("%s Pairing fail"),
-			bt_types.BT_EVENT_PAIRING_TIMEOUT	: _("Can't communicate with %s"),
-			bt_types.BT_EVENT_PAIRING_WRONG_PIN	: _("Wrong pin number for %s. Please try again and check pin number."),
-			bt_types.BT_EVENT_DISCONNECTED		: _("%s is disconnected."),
-			bt_types.BT_EVENT_CONNECTED		: _("%s is connected.")}
+			bt_types.BT_EVENT_PAIRING_SUCCESS: _("%s is paired."),
+			bt_types.BT_EVENT_PAIRING_FAIL: _("%s Pairing fail"),
+			bt_types.BT_EVENT_PAIRING_TIMEOUT: _("Can't communicate with %s"),
+			bt_types.BT_EVENT_PAIRING_WRONG_PIN: _("Wrong pin number for %s. Please try again and check pin number."),
+			bt_types.BT_EVENT_DISCONNECTED: _("%s is disconnected."),
+			bt_types.BT_EVENT_CONNECTED: _("%s is connected.")}
 
 		self.pincodeRequired = 0
 		self.pairingFailed = 0

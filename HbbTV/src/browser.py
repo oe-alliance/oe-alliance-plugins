@@ -870,7 +870,7 @@ class Browser(Screen):
 	def __init__(self, session, url=None, is_webapp=False):
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["DirectionActions", "MenuActions", "OkCancelActions"], {
-			 "cancel": self.keyCancel			, "ok": self.keyOK			, "left": self.keyLeft			, "right": self.keyRight			, "up": self.keyUp			, "down": self.keyDown			, "menu": self.keyMenu
+			 "cancel": self.keyCancel, "ok": self.keyOK, "left": self.keyLeft, "right": self.keyRight, "up": self.keyUp, "down": self.keyDown, "menu": self.keyMenu
 		}, -2)
 
 		self._cb_update_language()

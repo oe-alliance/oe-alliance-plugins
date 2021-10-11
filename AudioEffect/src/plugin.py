@@ -8,16 +8,16 @@ from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import fileExists
 
 AUDIOEFFECT_PROC_PATH = {
-	"3D_SURROUND"					: "/proc/stb/audio/3d_surround",
-	"AVL"							: "/proc/stb/audio/avl",
-	"3D_SURROUND_CHOICE"			: "/proc/stb/audio/3d_surround_choices",
-	"AVL_CHOICE"					: "/proc/stb/audio/avl_choices",
-	"3D_SURROUND_SPEAKER_POSITION"			: "/proc/stb/audio/3d_surround_speaker_position",
-	"3D_SURROUND_SPEAKER_POSITION_CHOICE"	: "/proc/stb/audio/3d_surround_speaker_position_choices"
+	"3D_SURROUND": "/proc/stb/audio/3d_surround",
+	"AVL": "/proc/stb/audio/avl",
+	"3D_SURROUND_CHOICE": "/proc/stb/audio/3d_surround_choices",
+	"AVL_CHOICE": "/proc/stb/audio/avl_choices",
+	"3D_SURROUND_SPEAKER_POSITION": "/proc/stb/audio/3d_surround_speaker_position",
+	"3D_SURROUND_SPEAKER_POSITION_CHOICE": "/proc/stb/audio/3d_surround_speaker_position_choices"
 }
 
 AUDIOOUT_ENTRY_NAME = {
-	"dac"	: "Analog Audio"
+	"dac": "Analog Audio"
 }
 
 AUDIOEFFECT_DEFAULT = "none"
