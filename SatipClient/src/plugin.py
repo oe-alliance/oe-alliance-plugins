@@ -1,5 +1,3 @@
-# -*- coding: UTF-8 -*-
-from __future__ import print_function
 from . import _
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
@@ -8,20 +6,15 @@ from Components.ActionMap import ActionMap
 from Screens.MessageBox import MessageBox
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
-from Tools.Directories import fileExists
 
-from Components.MenuList import MenuList
 from Components.Sources.List import List
 
 from enigma import eTimer
 from Screens.Standby import TryQuitMainloop
 from Components.Network import iNetwork
 
-from Tools.LoadPixmap import LoadPixmap
-from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_CURRENT_SKIN
-
 import xml.etree.cElementTree
-from twisted.internet import reactor, task
+from twisted.internet import reactor
 from twisted.internet.protocol import DatagramProtocol
 
 import glob
@@ -30,7 +23,7 @@ import os
 import copy
 
 from six.moves import http_client
-import six
+from six import PY2
 
 
 def isEmpty(x):
@@ -69,7 +62,7 @@ class SSDPServerDiscovery(DatagramProtocol):
 		self.port = reactor.listenUDP(0, self, interface=iface)
 		if self.port is not None:
 			print("Sending M-SEARCH...")
-			self.port.write(bytes(MS, 'utf-8'), (SSDP_ADDR, SSDP_PORT))
+			self.port.write(MS if PY2 else bytes(MS, 'utf-8'), (SSDP_ADDR, SSDP_PORT))
 
 	def stop_msearch(self):
 		if self.port is not None:
@@ -142,12 +135,14 @@ class SATIPDiscovery:
 	def dataReceive(self, data):
 #		print "dataReceive:\n", data
 #		print "\n"
-		serverData = self.dataParse(six.ensure_str(data))
+		serverData = self.dataParse(data)
 		if 'LOCATION' in serverData:
 			self.xmlParse(serverData['LOCATION'])
 
 	def dataParse(self, data):
 		serverData = {}
+		if not PY2:
+			data = data.decode("UTF-8")
 		for line in data.splitlines():
 			#print("[*] line : ", line)
 			if line.find(':') != -1:
@@ -750,7 +745,7 @@ class SATIPClient(Screen):
 
 	def sortVtunerConfig(self):
 		# FIXME What should be sorted here ???
-		if six.PY2:
+		if PY2:
 			self.vtunerConfig.sort(reverse=True)
 
 	def saveConfig(self):
