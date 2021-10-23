@@ -987,7 +987,6 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 			return True
 		return False # LNB type not supported by this plugin
 
-
 	def startScanCallback(self, answer=True):
 		if answer:
 			self.releaseFrontend()
