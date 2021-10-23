@@ -811,7 +811,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 		elif self.is_Ku_band_scan:
 			self.freq_limits = (self.Ku_band_freq_limits["low"], self.Ku_band_freq_limits["high"])
 		elif self.user_defined_lnb_scan:
-			self.freq_limits=(self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"], self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"])
+			self.freq_limits = (self.user_defined_lnb_lo_freq + self.tunerIfLimits["low"], self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"])
 
 		if self.is_c_band_scan:
 			self.dmmBlindscan.freq_start = ConfigInteger(default=self.c_band_freq_limits["default_low"], limits=(self.freq_limits[0], self.freq_limits[1]))
