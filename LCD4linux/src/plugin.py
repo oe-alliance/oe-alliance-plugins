@@ -11489,7 +11489,7 @@ def LCD4linuxPIC(self, session):
 			if ConfigInfo[2] == "1":
 				INFOS += str(MoonDistance()) + " km"
 			if ConfigInfo[1] == "1":
-				illum = 100 - abs(math.cos(math.pi * POS) * 100)
+				illum = 100 - abs(math.cos(math.pi * POS) ** 1.7 * 100)
 				illum = round((abs(illum - 1) / .99 if illum - 1 > 0 else 0.0), 1)
 				INFOS += "-" + str(round(illum, 1)) + " %"
 			if INFOS != "":
@@ -12583,8 +12583,8 @@ def LCD4linuxPIC(self, session):
 		ConfigSize = int(ConfigSize)
 		writeMultiline(PopText[1].replace("\r", ""), ConfigSize, ConfigPos, 10, ConfigColor, ConfigAlign, False, draw, im, ConfigFont=ConfigFont, ConfigBackColor=ConfigBackColor)
 		writeMultiline(PopText[0], int(ConfigSize / 2.5), ConfigPos - int(ConfigSize / 2.5), 1, ConfigColor, ConfigAlign, False, draw, im, ConfigFont=ConfigFont, ConfigBackColor=ConfigBackColor)
-# Volume
 
+# Volume
 	def putVol(workaround, draw, im):
 		(ConfigPos, ConfigSize, ConfigProzent, ConfigAlign, ConfigSplit, ConfigColor, ConfigShadow) = workaround
 		ConfigPos = int(ConfigPos)
