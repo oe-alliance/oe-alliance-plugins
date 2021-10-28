@@ -3,7 +3,7 @@ from . import _
 
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, configfile, ConfigSubList, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigInteger, integer_limits, NoSave, ConfigSelectionNumber
+from Components.config import config, configfile, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigInteger, ConfigSelectionNumber
 from Components.ActionMap import ActionMap
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
@@ -12,7 +12,7 @@ from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer
 from boxbranding import getMachineBuild
-from Tools.Directories import fileExists, pathExists
+from Tools.Directories import fileExists
 from os import path
 
 
