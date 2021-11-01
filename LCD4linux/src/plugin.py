@@ -11489,7 +11489,7 @@ def LCD4linuxPIC(self, session):
 			if ConfigInfo[2] == "1":
 				INFOS += str(MoonDistance()) + " km"
 			if ConfigInfo[1] == "1":
-				illum = 100 - abs(math.cos(math.pi * POS) ** 1.7 * 100)
+				illum = 100 - abs((math.cos(math.pi * POS) + 0j) ** 1.7 * 100)
 				illum = round((abs(illum - 1) / .99 if illum - 1 > 0 else 0.0), 1)
 				INFOS += "-" + str(round(illum, 1)) + " %"
 			if INFOS != "":
