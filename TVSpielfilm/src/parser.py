@@ -213,7 +213,6 @@ def transCHANNEL(data):
     data = sub('SYFY.*?,', 'scifi', data)
     data = sub('SyFy.*?,', 'scifi', data)
     data = sub('Syfy.*?,', 'scifi', data)
-    data = sub('TNT C.*?,', 'tnt-c', data)
     data = sub('TNT G.*?,', 'glitz', data)
     data = sub('glitz.*?,', 'glitz', data)
     data = sub('Universal.*?,', 'unive', data)
@@ -442,8 +441,9 @@ def transCHANNEL(data):
     data = sub('BR.*?,', 'swr', data)
     data = sub('TELE 5.*?,', 'TELE5', data)
     data = sub('BILD HD,', 'bild', data)
-    data = sub('Warner TV Comedy HD,', 'tnt-s', data)
+    data = sub('Warner TV Comedy HD,', 'tnt-c', data)
     data = sub('Warner TV Film HD,', 'tnt-f', data)
+    data = sub('Warner TV Serie HD,', 'tnt-s', data)
     return data
 
 
