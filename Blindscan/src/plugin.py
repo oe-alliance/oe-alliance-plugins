@@ -1170,8 +1170,8 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		self.blindscan_session = None
 
 	def blindscanContainerAvail(self, str):
-		print("[Blindscan][blindscanContainerAvail]", str)
 		str = six.ensure_str(str)
+		print("[Blindscan][blindscanContainerAvail]", str)
 		self.full_data = self.full_data + str # TODO: is this the cause of the duplicates in blindscanContainerClose?
 		if self.blindscan_session:
 			if self.SundtekScan:
