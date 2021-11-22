@@ -1268,7 +1268,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 						p.Modulation_8PSK: "8PSK",
 						p.Modulation_16APSK: "16APSK",
 						p.Modulation_32APSK: "32APSK"}
-					tp_str = "%g%s %d FEC %s %s %s" % (p.frequency // 1000.0, pol[p.polarisation], p.symbol_rate // 1000, fec[p.fec], sys[p.system], qam[p.modulation])
+					tp_str = "%g%s %d FEC %s %s %s" % (p.frequency / 1000.0, pol[p.polarisation], p.symbol_rate // 1000, fec[p.fec], sys[p.system], qam[p.modulation])
 					if p.is_id > eDVBFrontendParametersSatellite.No_Stream_Id_Filter:
 						tp_str += " MIS %d" % p.is_id
 					if p.pls_code > 0:
