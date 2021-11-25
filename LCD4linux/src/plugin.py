@@ -9667,11 +9667,13 @@ class UpdateStatus(Screen):
 						URL = Auth[-1].split(":")[-1]
 					Header = None
 					if len(Auth) > 1 and len(Auth[0].split(":", 1)[-1].split(":")) == 2:
-						import base64
+						from base64 import b64encode
 						username, password = Auth[0].split(":", 1)[-1].split(":")
-						basicAuth = base64.encodestring("%s:%s" % (username, password))
-						authHeader = "Basic " + basicAuth.strip()
-						Header = {"Authorization": authHeader}
+						up = "%s:%s" % (username, password)
+						basicAuth = b64encode(up.encode('utf-8'))
+						if PY3:
+							basicAuth = basicAuth.decode()
+						Header = {"Authorization": "Basic %s" % basicAuth}
 					if wwwURL[1] == 0:
 						feedurl = "http://%s/web/subservices" % URL
 					else:
@@ -9723,11 +9725,13 @@ class UpdateStatus(Screen):
 						URL = Auth[-1].split(":")[-1]
 					Header = None
 					if len(Auth) > 1 and len(Auth[0].split(":", 1)[-1].split(":")) == 2:
-						import base64
+						from base64 import b64encode
 						username, password = Auth[0].split(":", 1)[-1].split(":")
-						basicAuth = base64.encodestring("%s:%s" % (username, password))
-						authHeader = "Basic " + basicAuth.strip()
-						Header = {"Authorization": authHeader}
+						up = "%s:%s" % (username, password)
+						basicAuth = b64encode(up.encode('utf-8'))
+						if PY3:
+							basicAuth = basicAuth.decode()
+						Header = {"Authorization": "Basic %s" % basicAuth}
 					feedurl = "http://%s/web/timerlist" % URL
 					L4log("wwwBoxTimer %d" % i, feedurl)
 					feedurl = six.ensure_binary(feedurl)
