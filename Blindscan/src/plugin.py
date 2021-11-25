@@ -330,7 +330,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			if line.startswith('NIM Socket'):
 				sNo, sName, sI2C = -1, '', -1
 				try:
-					sNo = int(line.split()[2][:-1])
+					sNo = line.split()[2][:-1]
 				except:
 					sNo = -1
 			elif line.startswith('I2C_Device:'):
@@ -347,7 +347,8 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 						sName = splitLines[3][4:-1]
 				except:
 					sName = ""
-			if sNo >= 0 and sName != "":
+			print("sNo, sName, sI2C", sNo, sName, sI2C)
+			if sNo != -1 and sName != "":
 				if sName.startswith('BCM'):
 					sI2C = sNo
 				if sI2C != -1:
