@@ -609,6 +609,16 @@ TVSpielfilm/src/pic/logos/Makefile
 TVSpielfilm/src/pic/setup/Makefile
 TVSpielfilm/src/pic/slider/Makefile
 
+Chefkoch/Makefile
+Chefkoch/meta/Makefile
+Chefkoch/src/Makefile
+Chefkoch/src/db/Makefile
+Chefkoch/src/font/Makefile
+Chefkoch/src/pic/Makefile
+Chefkoch/src/pic/buttons/Makefile
+Chefkoch/src/pic/logos/Makefile
+Chefkoch/src/pic/setup/Makefile
+Chefkoch/src/pic/slider/Makefile
 
 ])
 AC_OUTPUT
