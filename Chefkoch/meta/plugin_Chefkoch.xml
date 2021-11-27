@@ -1,15 +1,15 @@
 <default>
-	  <prerequisites>
-					<tag type="extra" />
-	  </prerequisites>
-		  <info>
-					<author>kashmir (RIP), jbleyel</author>
-					<name>Chefkoch</name>
-					<packagename>enigma2-plugin-extensions-chefkoch</packagename>
-					<shortdescription>Chefkoch</shortdescription>
-					<description>Chefkoch</description>
-		  </info>
-	  <files type="package"> <!-- without version, without .ipk -->
+	<prerequisites>
+		<tag type="extra" />
+	</prerequisites>
+		<info>
+			<author>kashmir (RIP), Mr. Servo, jbleyel</author>
+			<name>Chefkoch</name>
+			<packagename>enigma2-plugin-extensions-chefkoch</packagename>
+			<shortdescription>Chefkoch</shortdescription>
+			<description>Chefkoch</description>
+		</info>
+	<files type="package"> <!-- without version, without .ipk -->
 		<file type="package" name="enigma2-plugin-extensions-chefkoch" />
-	  </files>
+	</files>
 </default>
