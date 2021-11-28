@@ -234,6 +234,8 @@ class ChefkochView(Screen):
         self.query = query
         self.titel = titel
         self.sort = sort
+        self.fav = fav
+        self.zufall = zufall
         self.sortname = ['{keine}', 'Anzahl Bewertungen', 'Anzahl Sterne', 'mit Video', 'Datum']
         self.orgGRP = []
         self.picfile = '/tmp/chefkoch.jpg'
@@ -255,8 +257,6 @@ class ChefkochView(Screen):
         Screen.__init__(self, session)
         self.currItem = 0
         self.rezeptfile = '/tmp/Rezept.html'
-        self.fav = fav
-        self.zufall = zufall
         self.hideflag = True
         self.ready = False
         self.postviewready = False
@@ -916,7 +916,7 @@ class ChefkochView(Screen):
 
     def searchReturn(self, search):
         if search and search != '':
-            self.session.open(ChefkochView, search, 'mit "' + search + '" gefundene Rezepte', 1, False, False)
+            self.session.open(ChefkochView, search, 'mit "' + search + '" gefundene Rezepte', 0, False, False)
 
     def makeKommentar(self):
         self.postviewready = False
@@ -1942,7 +1942,7 @@ class ChefkochMain(Screen):
                 if self.NKAT[i]['level'] == 1:
                     self.VKAT.append(self.NKAT[i])
             if not fileExists(Pluginpath + 'db/VKATdb'):
-                self.makeVKATdb()  # wird nur bei fehlender VKAT.db erzeugt (= Notfall)
+                self.makeVKATdb()  # wird nur bei fehlender VKATdb erzeugt (= Notfall)
             i = 1000  # erzeuge eigene IDs über 1000
             f = open(Pluginpath + 'db/VKATdb', 'r')
             for data in f:
@@ -2012,7 +2012,7 @@ class ChefkochMain(Screen):
 
     def searchReturn(self, search):
         if search and search != '':
-            self.session.open(ChefkochView, search, 'mit "' + search + '" gefundene Rezepte', 1, False, False)
+            self.session.open(ChefkochView, search, 'mit "' + search + '" gefundene Rezepte', 0, False, False)
 
     def fav(self):
         self.session.open(chefkochFav)
