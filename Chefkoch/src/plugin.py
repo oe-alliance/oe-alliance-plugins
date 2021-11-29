@@ -33,8 +33,8 @@ from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
-config.plugins.chefkoch = ConfigSubsection()
 Release = 'V1.6beta'
+config.plugins.chefkoch = ConfigSubsection()
 Pluginpath = resolveFilename(SCOPE_PLUGINS) + 'Extensions/Chefkoch/'
 deskWidth = getDesktop(0).size().width()
 if deskWidth >= 1920:
@@ -747,7 +747,7 @@ class ChefkochView(Screen):
         for i in range(len(self.REZ['ingredientGroups'])):
             for j in range(len(self.REZ['ingredientGroups'][i]['ingredients'])):
                 if not (i == 0 and j == 0):
-                    msgText += ', '
+                    msgText += '; '
                 if self.REZ['ingredientGroups'][i]['ingredients'][j]['amount'] != 0:
                     msgText += str(self.REZ['ingredientGroups'][i]['ingredients'][j]['amount']).replace('.0', '') + ' '
                     msgText += self.REZ['ingredientGroups'][i]['ingredients'][j]['unit'] + ' '
@@ -969,7 +969,7 @@ class ChefkochView(Screen):
         for i in range(len(self.REZ['ingredientGroups'])):
             for j in range(len(self.REZ['ingredientGroups'][i]['ingredients'])):
                 if not (i == 0 and j == 0):
-                    text += ', '
+                    text += '; '
                 if self.REZ['ingredientGroups'][i]['ingredients'][j]['amount'] != 0:
                     text += str(self.REZ['ingredientGroups'][i]['ingredients'][j]['amount']).replace('.0', '') + ' '
                     text += self.REZ['ingredientGroups'][i]['ingredients'][j]['unit'] + ' '
@@ -1215,9 +1215,6 @@ class ChefkochPicShow(Screen):
         Screen.__init__(self, session)
         self.setTitle(titel)
         self.picfile = '/tmp/chefkoch.jpg'
-        self.pic = []
-        for i in range(linesPerPage):
-            self.pic.append('/tmp/chefkoch%d.jpg' % i)
         self.hideflag = True
         self.pixlist = []
         self.picmax = 0
@@ -1392,9 +1389,6 @@ class FullScreen(Screen):
             self.skin = FullScreen.skinHD
         Screen.__init__(self, session)
         self.picfile = '/tmp/chefkoch.jpg'
-        self.pic = []
-        for i in range(linesPerPage):
-            self.pic.append('/tmp/chefkoch%d.jpg' % i)
         self.hideflag = True
         self['picture'] = Pixmap()
         self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {
@@ -1776,9 +1770,6 @@ class ChefkochMain(Screen):
             self.skin = applySkinVars(ChefkochMain.skinHD, self.dict)
         Screen.__init__(self, session)
         self.picfile = '/tmp/chefkoch.jpg'
-        self.pic = []
-        for i in range(linesPerPage):
-            self.pic.append('/tmp/chefkoch%d.jpg' % i)
         self.rezeptfile = '/tmp/Rezept.html'
         self.actmenu = 'mainmenu'
         self.hideflag = True
@@ -1819,9 +1810,13 @@ class ChefkochMain(Screen):
         self.currItem = self.getIndex(self[self.actmenu])
         if self.actmenu == 'mainmenu':
             mainId = self.mainId[self.currItem]
-            if mainId == '998':  # Id für CKVideo Hauptmenü
+            if mainId == '998':  # Id für CK-Video Hauptmenü (= Secondmenu)
                 self.CKvideo = True
                 self.currKAT = self.getVKAT()
+                self.makeSecondMenu(mainId)
+            elif mainId == '996': # Id für CK-Magazin Hauptmenü (= Secondmenu)
+                self.CKvideo = False
+                self.currKAT = self.getMKAT()
                 self.makeSecondMenu(mainId)
             else:
                 self.CKvideo = False
@@ -1845,8 +1840,9 @@ class ChefkochMain(Screen):
             self.session.openWithCallback(self.selectThirdMenu, ChefkochView, self.thirdmenuquery[self.currItem], self.thirdmenutitle[self.currItem], sort, False, False)
 
     def makeMainMenu(self):
-        self.NKAT = []  # Normalkategorien
-        self.VKAT = []  # Videokategorien
+        self.NKAT = [] # Normalkategorien
+        self.VKAT = [] # Videokategorien
+        self.MKAT = [] # Magazinkategorien
         self.mainmenulist = []
         self.mainmenuquery = []
         self.mainmenutitle = []
@@ -1932,6 +1928,7 @@ class ChefkochMain(Screen):
             if resp != 200:
                 return resp
             self.NKAT = loads(content)
+            self.NKAT.append({'id': '996', 'title': 'Chefkoch Magazin', 'parentId': None, 'level': 1, 'descriptionText': 'Chefkoch Magazin', 'linkName': 'https://www.chefkoch.de/magazin/'})
             self.NKAT.append({'id': '998', 'title': 'Chefkoch Videos', 'parentId': None, 'level': 1, 'descriptionText': 'Chefkoch Videos', 'linkName': 'video.html'})
             self.NKAT.append({'id': '999', 'title': 'Perfekte Dinner', 'parentId': None, 'level': 1, 'descriptionText': 'Das perfekte Dinner Rezepte', 'linkName': 'das-perfekte-dinner.html'})
         return self.NKAT
@@ -1943,17 +1940,17 @@ class ChefkochMain(Screen):
                     self.VKAT.append(self.NKAT[i])
             if not fileExists(Pluginpath + 'db/VKATdb'):
                 self.makeVKATdb()  # wird nur bei fehlender VKATdb erzeugt (= Notfall)
-            i = 1000  # erzeuge eigene IDs über 1000
+            i = 1000  # erzeuge eigene Video-IDs über 1000
             f = open(Pluginpath + 'db/VKATdb', 'r')
             for data in f:
                 dict = {}
                 dict['id'] = str(i)
                 dict['title'] = data.split('|')[1].replace('\n', '')
                 if data.split('|')[0].startswith('drupal'):
-                    dict['parentId'] = '998'  # Id für CKvideo Hauptmenü (secondmenu)
+                    dict['parentId'] = '998'  # Id für CK-Video Hauptmenü (= Secondmenu)
                     dict['level'] = 2
                 else:
-                    dict['parentId'] = '997'  # Id für CK-Video Untermenü (thirdmenu)
+                    dict['parentId'] = '997'  # Id für CK-Video Untermenü (= Thirdmenu)
                     dict['level'] = 3
                 dict['descriptionText'] = data.split('|')[1].replace('\n', '')
                 dict['linkName'] = data.split('|')[0]
@@ -1962,6 +1959,41 @@ class ChefkochMain(Screen):
             f.close()
             self.VKAT.append({'id': '997', 'title': 'weitere Videos', 'parentId': '998', 'level': 2, 'descriptionText': '>>> weitere Chefkoch Videos <<<', 'linkName': ''})
         return self.VKAT
+
+    def getMKAT(self):  # erzeuge die Magazinkategorie
+        if not self.MKAT:
+            content, resp = getAPIdata('/magazine/categories')
+            if resp != 200:
+                return resp
+            result = loads(content)
+            offset = 2000  # erzeuge eigene Magazin-IDs über 2000
+            for i in range(len(result)):
+                dict = {}
+                if result[i]['parent'] == '34' and result[i]['published']: # Id 34 ist die Root von CK-Magazin
+                    dict['id'] = str(int(result[i]['id']) + offset)
+                    dict['title'] = result[i]['name']
+                    dict['parentId'] = '996'  # Id für CK-Magazin Hauptmenü (= Secondmenu)
+                    dict['level'] = 2
+                    dict['descriptionText'] = result[i]['name']
+                    dict['linkName'] = result[i]['url']
+                    self.MKAT.append(dict)
+            MKATlen = len(self.MKAT)
+            for i in range(len(result)):
+                for j in range(MKATlen):
+                    dict = {}
+                    parentId = result[i]['parent']
+                    if parentId:
+                        if int(parentId) + offset == int(self.MKAT[j]['id']):
+                            dict['id'] = str(int(result[i]['id']) + offset)
+                            dict['title'] = result[i]['name']
+                            dict['parentId'] = str(int(parentId) + offset)
+                            dict['level'] = 3
+                            dict['descriptionText'] = result[i]['name']
+                            dict['linkName'] = result[i]['url']
+                            self.MKAT.append(dict)
+                            break
+            self.MKAT.reverse()
+        return self.MKAT
 
     def selectMainMenu(self):
         self.actmenu = 'mainmenu'
@@ -2055,9 +2087,10 @@ class ChefkochMain(Screen):
         if self.actmenu == 'mainmenu':
             config.usage.on_movie_stop.value = self.movie_stop
             config.usage.on_movie_eof.value = self.movie_eof
-            for i in range(len(self.pic)):
-                if fileExists(self.pic[i]):
-                    remove(self.pic[i])
+            for i in range(linesPerPage):
+                pic = '/tmp/chefkoch%d.jpg' % i
+                if fileExists(pic):
+                    remove(pic)
             if fileExists(self.picfile):
                 remove(self.picfile)
             if fileExists(self.rezeptfile):
@@ -2108,7 +2141,7 @@ class chefkochConfig(ConfigListScreen, Screen):
         list.append(getConfigListEntry('Plugin Sans Serif Schrift:', config.plugins.chefkoch.font))
         list.append(getConfigListEntry('Maximale Anzahl Rezepte:', config.plugins.chefkoch.maxrecipes))
         list.append(getConfigListEntry('Maximale Anzahl Kommentare:', config.plugins.chefkoch.maxcomments))
-        list.append(getConfigListEntry('Maximale Anzahl Bilder:', config.plugins.chefkoch.maxpictures))
+        list.append(getConfigListEntry('Maximale Anzahl Rezeptbilder:', config.plugins.chefkoch.maxpictures))
         list.append(getConfigListEntry('Versende Rezepte per E-mail:', config.plugins.chefkoch.mail))
         list.append(getConfigListEntry('E-mail Absender:', config.plugins.chefkoch.mailfrom))
         list.append(getConfigListEntry('E-mail Empfänger:', config.plugins.chefkoch.mailto))
