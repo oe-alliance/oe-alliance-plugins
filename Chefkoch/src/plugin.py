@@ -27,13 +27,14 @@ from Components.Sources.Boolean import Boolean
 from Components.ScrollLabel import ScrollLabel
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChannelSelection import ChannelSelection
+from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBar import MoviePlayer
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
-Release = 'V1.6beta'
+Release = 'V1.6'
 config.plugins.chefkoch = ConfigSubsection()
 Pluginpath = resolveFilename(SCOPE_PLUGINS) + 'Extensions/Chefkoch/'
 deskWidth = getDesktop(0).size().width()
@@ -674,19 +675,21 @@ class ChefkochView(Screen):
     def green(self):
         if self.current == 'postview' and self.postviewready:
             if config.plugins.chefkoch.mail.value == 'yes':
-                mailto = config.plugins.chefkoch.mailto.value
-                self.session.openWithCallback(self.green_return, MessageBox, "\nRezept an E-mail Adresse '%s' senden?" % mailto, MessageBox.TYPE_YESNO, default=False)
+                mailto = config.plugins.chefkoch.mailto.value.split(",")
+                mailto = [(i.strip(),) for i in mailto]
+                self.session.openWithCallback(self.green_return, ChoiceBox, title='Rezept an folgende E-mail Adresse senden:', list=mailto)
             else:
                 self.session.open(MessageBox, '\nDie E-mail Funktion ist nicht aktiviert. Aktivieren Sie die E-mail Funktion im Setup des Plugins.', MessageBox.TYPE_INFO, close_on_any_key=True)
         if self.current == 'menu':
             self.sort = self.sort + 1 if self.sort < len(self.sortname) - 1 else 0
+            self.currItem = 0
             self.makeChefkoch()
 
     def green_return(self, answer):
-        if answer is True:
-            self.sendRezept()
+        if answer:
+            self.sendRezept(answer[0])
 
-    def sendRezept(self):
+    def sendRezept(self, mailTo):
         effort = ['keine', 'simpel', 'normal', 'pfiffig']
         msgText = '\n'
         msgText = '<p>Linkadresse: <a href="' + self.rezept + self.currId + '">' + self.rezept + self.currId + '</a></p>'
@@ -757,11 +760,11 @@ class ChefkochView(Screen):
         msgText += '\n' + '_' * 30 + '\nChefkoch.de'
         Image.open('/tmp/chefkoch.jpg').resize((320, 240), Image.ANTIALIAS).save('/tmp/emailpic.jpg')
 
-        mailFrom = config.plugins.chefkoch.mailfrom.value
-        mailTo = config.plugins.chefkoch.mailto.value
-        mailLogin = config.plugins.chefkoch.login.value
-        mailPassword = ensure_str(b64decode(config.plugins.chefkoch.password.value))
-        mailServer = config.plugins.chefkoch.server.value
+        mailFrom = ensure_str(config.plugins.chefkoch.mailfrom.value.encode('ascii', 'xmlcharrefreplace'))
+        mailTo = ensure_str(mailTo.encode('ascii', 'xmlcharrefreplace'))
+        mailLogin = ensure_str(config.plugins.chefkoch.login.value.encode('ascii', 'xmlcharrefreplace'))
+        mailPassword = ensure_str(b64decode(config.plugins.chefkoch.password.value.encode('ascii', 'xmlcharrefreplace')))
+        mailServer = ensure_str(config.plugins.chefkoch.server.value.encode('ascii', 'xmlcharrefreplace'))
         mailPort = config.plugins.chefkoch.port.value
 
         msgRoot = MIMEMultipart('related')
@@ -2168,8 +2171,9 @@ class chefkochConfig(ConfigListScreen, Screen):
 
     def keySave(self):
         if config.plugins.chefkoch.password.value != self.password:
-            password = b64encode(config.plugins.chefkoch.password.value.encode("utf-8"))
+            password = b64encode(config.plugins.chefkoch.password.value.encode('utf-8'))
             config.plugins.chefkoch.password.value = password
+        current = self['config'].getCurrent()
         self.saveAll()
         self.exit()
 
