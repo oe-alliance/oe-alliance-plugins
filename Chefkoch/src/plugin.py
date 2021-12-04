@@ -775,8 +775,7 @@ class ChefkochView(Screen):
         msgAlternative = MIMEMultipart('alternative')
         msgRoot.attach(msgAlternative)
         msgAlternative.attach(MIMEText(msgText, _subtype='plain', _charset='UTF-8'))
-        msgHeader = '"' + self.titel + '"gesendet vom Plugin "Chefkoch.de"<br>'
-        msgHeader = 'gesendet vom Plugin "Chefkoch.de"'
+        msgHeader = '"' + self.titel + '" gesendet vom Plugin "Chefkoch.de"'
         msgText = ensure_str(msgText.replace('\n', '<br>').encode('ascii', 'xmlcharrefreplace'))
         msgAlternative.attach(MIMEText('<b>' + msgHeader + '</b><br><br><img src="cid:0"><br>' + msgText, 'html'))
         with open('/tmp/emailpic.jpg', 'rb') as img:
