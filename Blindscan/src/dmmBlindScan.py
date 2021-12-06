@@ -647,6 +647,17 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 #			selected_sat_pos = self.scan_satselection[index_to_scan].value
 		self.satelliteEntry = getConfigListEntry(_("Satellite"), self.scan_satselection[index_to_scan], _("Select the satellite you wish to search"))
 		self.list.append(self.satelliteEntry)
+		
+		if not self.SatBandCheck(int(self.scan_satselection[int(self.scan_nims.value)].value)):
+			self["config"].list = self.list
+			self["config"].l.setList(self.list)
+			self["description"].setText(_("LNB of current satellite not compatible with plugin"))
+			self["key_green"].setText("")
+			self["actions2"].setEnabled(False)
+			return
+
+		self.setFreqLimits()
+		
 		self.searchtypeEntry = getConfigListEntry(_("Search type"), self.search_type, _('"scan for channels" searches for channels and saves them to your receiver; "Save to XML" does a transponder search and saves the results in satellites.xml format and stores it in /tmp'))
 		self.list.append(self.searchtypeEntry)
 		self.list.append(getConfigListEntry(_("Start frequency"), self.dmmBlindscan.freq_start, _("Frequency values must be between %d MHz and %d MHz") % (self.freq_limits[0], self.freq_limits[1] - 1)))
@@ -804,8 +815,8 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 		self.c_band_freq_limits = {"low": 3000, "high": 4200, "default_low": 3400, "default_high": 4200}
 		self.tunerIfLimits = {"low": 950, "high": 2150}
 		self.circular_lnb_lo_freq = 10750
-		self.SatBandCheck(int(self.scan_satselection[int(self.scan_nims.value)].value))
 
+	def setFreqLimits(self):
 		if self.is_c_band_scan:
 			self.freq_limits = (self.c_band_freq_limits["low"], self.c_band_freq_limits["high"])
 		elif self.is_Ku_band_scan:
