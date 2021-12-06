@@ -647,7 +647,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 #			selected_sat_pos = self.scan_satselection[index_to_scan].value
 		self.satelliteEntry = getConfigListEntry(_("Satellite"), self.scan_satselection[index_to_scan], _("Select the satellite you wish to search"))
 		self.list.append(self.satelliteEntry)
-		
+
 		if not self.SatBandCheck(int(self.scan_satselection[int(self.scan_nims.value)].value)):
 			self["config"].list = self.list
 			self["config"].l.setList(self.list)
@@ -657,7 +657,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 			return
 
 		self.setFreqLimits()
-		
+
 		self.searchtypeEntry = getConfigListEntry(_("Search type"), self.search_type, _('"scan for channels" searches for channels and saves them to your receiver; "Save to XML" does a transponder search and saves the results in satellites.xml format and stores it in /tmp'))
 		self.list.append(self.searchtypeEntry)
 		self.list.append(getConfigListEntry(_("Start frequency"), self.dmmBlindscan.freq_start, _("Frequency values must be between %d MHz and %d MHz") % (self.freq_limits[0], self.freq_limits[1] - 1)))
