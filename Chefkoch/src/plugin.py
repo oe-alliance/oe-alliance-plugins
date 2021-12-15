@@ -472,8 +472,7 @@ class ChefkochView(Screen):
         self['label6'].setText('')
         self['textpage'].show()
         self.picCount = self.REZ['imageCount']
-        self.titel = self.REZ['title']
-        self.setTitle(str(self.titel))
+        self.setTitle(str(self.REZ['title']))
         if self.picCount == 0:
             self['label7'].setText('')
         elif self.picCount > 1:
