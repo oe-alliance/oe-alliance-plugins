@@ -15,9 +15,9 @@ from six import ensure_str, ensure_binary
 from six.moves.email_mime_multipart import MIMEMultipart
 from six.moves.email_mime_text import MIMEText
 from six.moves.email_mime_image import MIMEImage
-from enigma import addFont, eConsoleAppContainer, eListboxPythonMultiContent, eServiceReference, ePicLoad, eTimer, getDesktop, gFont, loadPNG, loadJPG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP
+from enigma import addFont, eConsoleAppContainer, eListboxPythonMultiContent, eServiceReference, ePicLoad, eTimer, getDesktop, gFont, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP
 from Components.ActionMap import ActionMap, NumberActionMap
-from Components.config import config, configfile, ConfigSubsection, ConfigInteger, ConfigPassword, ConfigSelection, ConfigText, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigPassword, ConfigSelection, ConfigText, getConfigListEntry, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.MenuList import MenuList
@@ -45,20 +45,22 @@ else:
     config.plugins.chefkoch.plugin_size = ConfigSelection(default='HDclassic', choices=[('HDclassic', 'HD (1280x720) klassisch')])
 config.plugins.chefkoch.position = ConfigInteger(85, (0, 160))
 config.plugins.chefkoch.font_size = ConfigSelection(default='large', choices=[('large', 'Groß'), ('normal', 'Normal')])
-config.plugins.chefkoch.font = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
-if config.plugins.chefkoch.font.value == 'yes':
+config.plugins.chefkoch.font = ConfigYesNo(default=True)
+if config.plugins.chefkoch.font.value:
     addFont(Pluginpath + 'font/Sans.ttf', 'Sans', 100, False, 0)
 config.plugins.chefkoch.maxrecipes = ConfigSelection(default='100', choices=['10', '20', '50', '100', '200', '500', '1000'])
 config.plugins.chefkoch.maxcomments = ConfigSelection(default='100', choices=['10', '20', '50', '100', '200', '500'])
 config.plugins.chefkoch.maxpictures = ConfigSelection(default='20', choices=['10', '20', '50', '100'])
-config.plugins.chefkoch.mail = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
+config.plugins.chefkoch.mail = ConfigYesNo(default=False)
 config.plugins.chefkoch.mailfrom = ConfigText(default='', fixed_size=False)
 config.plugins.chefkoch.mailto = ConfigText(default='', fixed_size=False)
 config.plugins.chefkoch.login = ConfigText(default='', fixed_size=False)
 config.plugins.chefkoch.password = ConfigPassword(default='', fixed_size=False)
 config.plugins.chefkoch.server = ConfigText(default='', fixed_size=False)
 config.plugins.chefkoch.port = ConfigInteger(465, (0, 99999))
-config.plugins.chefkoch.ssl = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
+config.plugins.chefkoch.ssl = ConfigYesNo(default=True)
+config.plugins.chefkoch.debuglog = ConfigYesNo(default=False)
+config.plugins.chefkoch.logtofile = ConfigYesNo(default=False)
 
 
 def applySkinVars(skin, dict):
@@ -85,16 +87,21 @@ def getAPIdata(apiuri):
     return(content, resp)
 
 
-def CKlog(info, wert=""):
-    print('[Chefkoch] %s %s' % (str(info), str(wert)))
-    try:
-        f = open('/home/root/logs/CKlog.txt', 'a')
+def CKlog(info, wert="", debug=False):
+    if debug and not config.plugins.chefkoch.debuglog.value:
+        return
+
+    if config.plugins.chefkoch.logtofile.value:
         try:
-            f.write(strftime('%H:%M:%S') + ' %s %s\r\n' % (str(info), str(wert)))
-        finally:
-            f.close()
-    except IOError:
-        print('[Chefkoch] Logging-Error')
+            f = open('/home/root/logs/chefkoch.log', 'a')
+            try:
+                f.write(strftime('%H:%M:%S') + ' %s %s\r\n' % (str(info), str(wert)))
+            finally:
+                f.close()
+        except IOError:
+            print('[Chefkoch] Logging-Error')
+    else:
+        print('[Chefkoch] %s %s' % (str(info), str(wert)))
 
 
 class ChefkochView(Screen):
@@ -240,7 +247,7 @@ class ChefkochView(Screen):
         self.sortname = ['{keine}', 'Anzahl Bewertungen', 'Anzahl Sterne', 'mit Video', 'Datum']
         self.orgGRP = []
         self.picfile = '/tmp/chefkoch.jpg'
-        font = 'Sans' if config.plugins.chefkoch.font.value == 'yes' else 'Regular'
+        font = 'Sans' if config.plugins.chefkoch.font.value else 'Regular'
         position = str(config.plugins.chefkoch.position.value)
         if config.plugins.chefkoch.font_size.value == 'large':
             self.fontlarge = True
@@ -673,7 +680,7 @@ class ChefkochView(Screen):
 
     def green(self):
         if self.current == 'postview' and self.postviewready:
-            if config.plugins.chefkoch.mail.value == 'yes':
+            if config.plugins.chefkoch.mail.value:
                 mailto = config.plugins.chefkoch.mailto.value.split(",")
                 mailto = [(i.strip(),) for i in mailto]
                 self.session.openWithCallback(self.green_return, ChoiceBox, title='Rezept an folgende E-mail Adresse senden:', list=mailto)
@@ -782,7 +789,7 @@ class ChefkochView(Screen):
         msgImage.add_header('Content-ID', '<0>')
         msgRoot.attach(msgImage)
         try:
-            if config.plugins.chefkoch.ssl.value == 'yes':
+            if config.plugins.chefkoch.ssl.value:
                 server = SMTP_SSL(mailServer, mailPort)
             else:
                 server = SMTP(mailServer, mailPort)
@@ -933,15 +940,15 @@ class ChefkochView(Screen):
             text += ' ' + self.formatDatumZeit(self.KOM['results'][i]['createdAt']) + ' Uhr\n'
             text += self.KOM['results'][i]['text']
             if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
-                if config.plugins.chefkoch.font.value == 'no':
-                    repeat = 128 if self.fontlarge else 136
-                else:
+                if config.plugins.chefkoch.font.value:
                     repeat = 128 if self.fontlarge else 148
-            else:
-                if config.plugins.chefkoch.font.value == 'no':
-                    repeat = 132 if self.fontlarge else 132
                 else:
+                    repeat = 128 if self.fontlarge else 136
+            else:
+                if config.plugins.chefkoch.font.value:
                     repeat = 132 if self.fontlarge else 148
+                else:
+                    repeat = 132
             text += '\n' + '_' * repeat
         text += '\nChefkoch.de'
         self['textpage'].setText(str(text))
@@ -978,15 +985,15 @@ class ChefkochView(Screen):
                 text += self.REZ['ingredientGroups'][i]['ingredients'][j]['usageInfo']
         text += '\n\nZUBEREITUNG\n' + self.REZ['instructions']
         if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
-            if config.plugins.chefkoch.font.value == 'no':
-                repeat = 128 if self.fontlarge else 136
-            else:
+            if config.plugins.chefkoch.font.value:
                 repeat = 128 if self.fontlarge else 148
-        else:
-            if config.plugins.chefkoch.font.value == 'no':
-                repeat = 132 if self.fontlarge else 132
             else:
+                repeat = 128 if self.fontlarge else 136
+        else:
+            if config.plugins.chefkoch.font.value:
                 repeat = 132 if self.fontlarge else 148
+            else:
+                repeat = 132
         text += '\n' + '_' * repeat + '\nChefkoch.de'
         self['textpage'].setText(str(text))
         self.postviewready = True
@@ -1131,7 +1138,7 @@ class getNumber(Screen):
 
     def __init__(self, session, number, max):
         position = str(config.plugins.chefkoch.position.value)
-        font = 'Sans' if config.plugins.chefkoch.font.value == 'yes' else 'Regular'
+        font = 'Sans' if config.plugins.chefkoch.font.value else 'Regular'
         self.dict = {'position': position, 'font': font}
         self.skin = applySkinVars(getNumber.skin, self.dict)
         Screen.__init__(self, session)
@@ -1199,7 +1206,7 @@ class ChefkochPicShow(Screen):
         self.IMG = images
         self.titel = titel
         self.currId = str(recipe['id'])
-        font = 'Sans' if config.plugins.chefkoch.font.value == 'yes' else 'Regular'
+        font = 'Sans' if config.plugins.chefkoch.font.value else 'Regular'
         position = str(config.plugins.chefkoch.position.value)
         fontoffset = 2 if config.plugins.chefkoch.font_size.value == 'large' else 0
         if 'FHD' in config.plugins.chefkoch.plugin_size.value:
@@ -1343,7 +1350,7 @@ class ChefkochPicShow(Screen):
         getPage(link).addCallback(name).addErrback(self.WdownloadError)
 
     def WdownloadError(self, output):
-        CKlog('Wdownloaderror:', link)
+        CKlog('Wdownloaderror:', output)
         pass
 
     def infoScreen(self):
@@ -1463,7 +1470,7 @@ class chefkochFav(Screen):
 
     def __init__(self, session):
         position = str(config.plugins.chefkoch.position.value)
-        font = 'Sans' if config.plugins.chefkoch.font.value == 'yes' else 'Regular'
+        font = 'Sans' if config.plugins.chefkoch.font.value else 'Regular'
         self.dict = {'position': position, 'picpath': Pluginpath + 'pic/', 'font': font}
         self.font = 0
         if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
@@ -1693,7 +1700,7 @@ class chefkochFav(Screen):
 class ItemList(MenuList):
     def __init__(self, items, enableWrapAround=True):
         MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
-        fontname = 'Sans' if config.plugins.chefkoch.font.value == 'yes' else 'Regular'
+        fontname = 'Sans' if config.plugins.chefkoch.font.value else 'Regular'
         fontoffset = 2 if config.plugins.chefkoch.font_size.value == 'large' else 0
         self.l.setFont(-2, gFont(fontname, int(24 * scale)))
         self.l.setFont(-1, gFont(fontname, int((22 + fontoffset) * scale)))
@@ -1756,7 +1763,7 @@ class ChefkochMain(Screen):
         global scale
         global linesPerPage
         self.session = session
-        font = 'Sans' if config.plugins.chefkoch.font.value == 'yes' else 'Regular'
+        font = 'Sans' if config.plugins.chefkoch.font.value else 'Regular'
         position = str(config.plugins.chefkoch.position.value)
         self.dict = {'position': position, 'picpath': Pluginpath + 'pic/', 'font': font}
         scale = 1.0
@@ -2128,7 +2135,7 @@ class chefkochConfig(ConfigListScreen, Screen):
         </screen>'''
 
     def __init__(self, session):
-        font = 'Sans' if config.plugins.chefkoch.font.value == 'yes' else 'Regular'
+        font = 'Sans' if config.plugins.chefkoch.font.value else 'Regular'
         self.dict = {'picpath': Pluginpath + 'pic/', 'font': font}
         self.skin = applySkinVars(chefkochConfig.skin, self.dict)
         Screen.__init__(self, session)
@@ -2136,21 +2143,24 @@ class chefkochConfig(ConfigListScreen, Screen):
         self.password = config.plugins.chefkoch.password.value
         self['plugin'] = Pixmap()
         list = []
-        list.append(getConfigListEntry('Plugin Größe:', config.plugins.chefkoch.plugin_size))
-        list.append(getConfigListEntry('Plugin Position:', config.plugins.chefkoch.position))
-        list.append(getConfigListEntry('Plugin Schriftgröße:', config.plugins.chefkoch.font_size))
-        list.append(getConfigListEntry('Plugin Sans Serif Schrift:', config.plugins.chefkoch.font))
-        list.append(getConfigListEntry('Maximale Anzahl Rezepte:', config.plugins.chefkoch.maxrecipes))
-        list.append(getConfigListEntry('Maximale Anzahl Kommentare:', config.plugins.chefkoch.maxcomments))
-        list.append(getConfigListEntry('Maximale Anzahl Rezeptbilder:', config.plugins.chefkoch.maxpictures))
-        list.append(getConfigListEntry('Versende Rezepte per E-mail:', config.plugins.chefkoch.mail))
-        list.append(getConfigListEntry('E-mail Absender:', config.plugins.chefkoch.mailfrom))
-        list.append(getConfigListEntry('E-mail Empfänger:', config.plugins.chefkoch.mailto))
-        list.append(getConfigListEntry('E-mail Login:', config.plugins.chefkoch.login))
-        list.append(getConfigListEntry('E-mail Passwort:', config.plugins.chefkoch.password))
-        list.append(getConfigListEntry('E-mail Server:', config.plugins.chefkoch.server))
-        list.append(getConfigListEntry('E-mail Server Port:', config.plugins.chefkoch.port))
-        list.append(getConfigListEntry('E-mail Server SSL:', config.plugins.chefkoch.ssl))
+        list.append(getConfigListEntry('Plugin Größe:', config.plugins.chefkoch.plugin_size, _("Plugins Gösse"))
+        list.append(getConfigListEntry('Plugin Position:', config.plugins.chefkoch.position, _("Plugins Position"))
+        list.append(getConfigListEntry('Plugin Schriftgröße:', config.plugins.chefkoch.font_size, _("Schriftgröße"))
+        list.append(getConfigListEntry('Plugin Sans Serif Schrift:', config.plugins.chefkoch.font, _("Plugin Sans Serif Schrift"))
+        list.append(getConfigListEntry('Maximale Anzahl Rezepte:', config.plugins.chefkoch.maxrecipes, _("Maximale Anzahl Rezepte"))
+        list.append(getConfigListEntry('Maximale Anzahl Kommentare:', config.plugins.chefkoch.maxcomments, _("Maximale Anzahl Kommentare"))
+        list.append(getConfigListEntry('Maximale Anzahl Rezeptbilder:', config.plugins.chefkoch.maxpictures, _("Maximale Anzahl Rezeptbilder"))
+        list.append(getConfigListEntry('Versende Rezepte per E-mail:', config.plugins.chefkoch.mail, _("Versende Rezepte per E-mail"))
+        list.append(getConfigListEntry('E-mail Absender:', config.plugins.chefkoch.mailfrom, _("E-mail Absender"))
+        list.append(getConfigListEntry('E-mail Empfänger:', config.plugins.chefkoch.mailto, _("E-mail Empfänger"))
+        list.append(getConfigListEntry('E-mail Login:', config.plugins.chefkoch.login, _("E-mail Login"))
+        list.append(getConfigListEntry('E-mail Passwort:', config.plugins.chefkoch.password, _("E-mail Passwort"))
+        list.append(getConfigListEntry('E-mail Server:', config.plugins.chefkoch.server, _("E-mail Server"))
+        list.append(getConfigListEntry('E-mail Server Port:', config.plugins.chefkoch.port, _("E-mail Server Port"))
+        list.append(getConfigListEntry('E-mail Server SSL:', config.plugins.chefkoch.ssl, _("E-mail Server SSL"))
+        list.append(getConfigListEntry('DebugLog', config.plugins.chefkoch.debuglog, _("Debug Logging aktivieren"))
+        list.append(getConfigListEntry('Log in Datei', config.plugins.chefkoch.logtofile, _("Log in Datei '/home/root/logs'"))
+
         self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {
             'cancel': self.keyCancel,
             'red': self.keyCancel,
