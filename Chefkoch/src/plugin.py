@@ -2143,7 +2143,7 @@ class chefkochConfig(ConfigListScreen, Screen):
         self.password = config.plugins.chefkoch.password.value
         self['plugin'] = Pixmap()
         list = []
-        list.append(getConfigListEntry('Plugin Größe:', config.plugins.chefkoch.plugin_size, _("Plugins Gösse"))
+        list.append(getConfigListEntry('Plugin Größe:', config.plugins.chefkoch.plugin_size, _("Plugins Größe"))
         list.append(getConfigListEntry('Plugin Position:', config.plugins.chefkoch.position, _("Plugins Position"))
         list.append(getConfigListEntry('Plugin Schriftgröße:', config.plugins.chefkoch.font_size, _("Schriftgröße"))
         list.append(getConfigListEntry('Plugin Sans Serif Schrift:', config.plugins.chefkoch.font, _("Plugin Sans Serif Schrift"))
