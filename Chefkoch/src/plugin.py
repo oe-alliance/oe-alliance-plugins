@@ -2161,7 +2161,7 @@ class chefkochConfig(ConfigListScreen, Screen):
         list.append(getConfigListEntry('DebugLog', config.plugins.chefkoch.debuglog, _("Debug Logging aktivieren"))
         list.append(getConfigListEntry('Log in Datei', config.plugins.chefkoch.logtofile, _("Log in Datei '/home/root/logs'"))
 
-        self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {
+        self['actions']=ActionMap(['OkCancelActions', 'ColorActions'], {
             'cancel': self.keyCancel,
             'red': self.keyCancel,
             'green': self.keySave
@@ -2170,18 +2170,18 @@ class chefkochConfig(ConfigListScreen, Screen):
         self.onLayoutFinish.append(self.UpdateComponents)
 
     def UpdateComponents(self):
-        png = Pluginpath + 'pic/setup/' + config.plugins.chefkoch.plugin_size.value + '.png'
+        png=Pluginpath + 'pic/setup/' + config.plugins.chefkoch.plugin_size.value + '.png'
         if fileExists(png):
-            PNG = loadPNG(png)
+            PNG=loadPNG(png)
             if PNG != None:
                 self['plugin'].instance.setPixmap(PNG)
-        current = self['config'].getCurrent()
+        current=self['config'].getCurrent()
 
     def keySave(self):
         if config.plugins.chefkoch.password.value != self.password:
-            password = b64encode(config.plugins.chefkoch.password.value.encode('utf-8'))
-            config.plugins.chefkoch.password.value = password
-        current = self['config'].getCurrent()
+            password=b64encode(config.plugins.chefkoch.password.value.encode('utf-8'))
+            config.plugins.chefkoch.password.value=password
+        current=self['config'].getCurrent()
         self.saveAll()
         self.exit()
 
