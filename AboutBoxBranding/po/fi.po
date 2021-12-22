@@ -1,0 +1,23 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2-AboutBoxBranding\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-05 00:08+0000\n"
+"PO-Revision-Date: 2021-12-22 07:22+0200\n"
+"Last-Translator: Orlandox\n"
+"Language-Team: Orlandox\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+
+msgid "About Boxbranding"
+msgstr "Tietoja Boxbranding:stä"
+
+msgid "Boxbranding"
+msgstr "Boxbranding"
+
+msgid "Close"
+msgstr "Sulje"

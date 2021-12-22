@@ -265,6 +265,7 @@ Makefile
 
 AboutBoxBranding/Makefile
 AboutBoxBranding/meta/Makefile
+AboutBoxBranding/po/Makefile
 AboutBoxBranding/src/Makefile
 
 ABMCustomMixImporter/Makefile
