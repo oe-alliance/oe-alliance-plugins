@@ -912,7 +912,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
 				return
-		elif getBrandOEM() in ('azbox', 'ceryon', 'amiko', 'clap', 'dinobot', 'gigablue', 'ini', 'home', 'uclan', 'vuplus', 'xtrend') or getBoxType().startswith('sf8008') or getMachineBuild() in ('dags72604', 'dagsmv200','sx988'):
+		elif getBrandOEM() in ('azbox', 'ceryon', 'amiko', 'clap', 'dinobot', 'gigablue', 'ini', 'home', 'uclan', 'vuplus', 'xtrend') or getBoxType().startswith('sf8008') or getMachineBuild() in ('dags72604', 'dagsmv200', 'sx988'):
 			exe_filename = getBrandOEM() == 'azbox' and "avl_azbox_blindscan" or \
 							getBrandOEM() == 'amiko' and "amiko-blindscan" or \
 							getBrandOEM() == 'ceryon' and "ceryon_blindscan" or \
@@ -930,9 +930,9 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			exe_path = "/usr/bin/%s" % exe_filename
 			if os.path.exists(exe_path):
 				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
-				if getBrandOEM() in ('ceryon', 'clap', 'dinobot', 'uclan', 'amiko') or getBoxType().startswith('sf8008') or getMachineBuild() in ('gbmv200', 'dags72604', 'dagsmv200','sx988'):
+				if getBrandOEM() in ('ceryon', 'clap', 'dinobot', 'uclan', 'amiko') or getBoxType().startswith('sf8008') or getMachineBuild() in ('gbmv200', 'dags72604', 'dagsmv200', 'sx988'):
 					cmd += " %d" % self.is_c_band_scan
-				if getBrandOEM() in ('clap', 'dinobot', 'uclan', 'amiko') or getBoxType().startswith('sf8008') or getMachineBuild() in ('gbmv200', 'dags72604', 'dagsmv200','sx988'):
+				if getBrandOEM() in ('clap', 'dinobot', 'uclan', 'amiko') or getBoxType().startswith('sf8008') or getMachineBuild() in ('gbmv200', 'dags72604', 'dagsmv200', 'sx988'):
 					cmd += " %d" % orb[0]
 				if getBrandOEM() in ('azbox',):
 					self.polsave = tab_pol[pol] # Data returned by the binary is not good we must save polarisation
