@@ -62,13 +62,16 @@ config.plugins.chefkoch.ssl = ConfigYesNo(default=True)
 config.plugins.chefkoch.debuglog = ConfigYesNo(default=False)
 config.plugins.chefkoch.logtofile = ConfigYesNo(default=False)
 
+
 def applySkinVars(skin, dict):
     for key in dict.keys():
         skin = skin.replace('{' + key + '}', dict[key])
     return skin
 
+
 picurlbase = 'https://img.chefkoch-cdn.de/rezepte'
 apiuribase = 'https://api.chefkoch.de/v2'
+
 
 def APIget(apiuri):
     try:
@@ -77,12 +80,14 @@ def APIget(apiuri):
     except IOError:
             return('Serverrespose error#: ', IOError)
 
+
 def getAPIdata(apiuri):
     apiuri = apiuribase + apiuri
     content, resp = APIget(apiuri)
     if resp != 200:
         CKlog('request failure from', apiuri)
     return(content, resp)
+
 
 def CKlog(info, wert="", debug=False):
     if debug and not config.plugins.chefkoch.debuglog.value:
