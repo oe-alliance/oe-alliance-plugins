@@ -62,35 +62,31 @@ config.plugins.chefkoch.ssl = ConfigYesNo(default=True)
 config.plugins.chefkoch.debuglog = ConfigYesNo(default=False)
 config.plugins.chefkoch.logtofile = ConfigYesNo(default=False)
 
-
 def applySkinVars(skin, dict):
     for key in dict.keys():
         skin = skin.replace('{' + key + '}', dict[key])
     return skin
 
-
 picurlbase = 'https://img.chefkoch-cdn.de/rezepte'
 apiuribase = 'https://api.chefkoch.de/v2'
 
-
 def APIget(apiuri):
-    f = get(apiuri)
-    return(f.text, f.status_code)
-
+    try:
+        f = get(apiuri)
+        return(f.text, f.status_code)
+    except IOError:
+            return('Serverrespose error#: ', IOError)
 
 def getAPIdata(apiuri):
     apiuri = apiuribase + apiuri
     content, resp = APIget(apiuri)
     if resp != 200:
         CKlog('request failure from', apiuri)
-        CKlog('Serverrespose error#', resp)
     return(content, resp)
-
 
 def CKlog(info, wert="", debug=False):
     if debug and not config.plugins.chefkoch.debuglog.value:
         return
-
     if config.plugins.chefkoch.logtofile.value:
         try:
             f = open('/home/root/logs/chefkoch.log', 'a')
@@ -122,7 +118,7 @@ class ChefkochView(Screen):
             <widget name="pic4" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />
             <widget name="pic5" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />
             <widget name="postpic" position="450,70" size="280,210" zPosition="1" />
-            <widget name="postvid" position="520,125" size="135,90" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
+            <widget name="postvid" position="530,125" size="135,90" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
             <widget name="score" position="10,70" size="236,36" alphatest="blend" zPosition="1" />
             <widget name="scoretext" position="10,105" size="440,165" font="{font};{fontsize}" halign="left" zPosition="1" />
             <widget name="recipetext" position="765,70" size="470,210" font="{font};{fontsize}" halign="left" zPosition="1" />
@@ -163,7 +159,7 @@ class ChefkochView(Screen):
             <widget name="pic4" position="1642,652" size="202,135" alphatest="blend" zPosition="1" />
             <widget name="pic5" position="1642,787" size="202,135" alphatest="blend" zPosition="1" />
             <widget name="postpic" position="675,105" size="420,315" zPosition="1" />
-            <widget name="postvid" position="780,187" size="202,135" pixmap="{picpath}videoiconFHD.png" alphatest="blend" zPosition="1" />
+            <widget name="postvid" position="790,187" size="202,135" pixmap="{picpath}videoiconFHD.png" alphatest="blend" zPosition="1" />
             <widget name="score" position="15,105" size="354,54" alphatest="blend" zPosition="1" />
             <widget name="scoretext" position="15,157" size="660,247" font="{font};{fontsize}" halign="left" zPosition="1" />
             <widget name="recipetext" position="1147,105" size="705,315" font="{font};{fontsize}" halign="left" zPosition="1" />
@@ -212,7 +208,7 @@ class ChefkochView(Screen):
             <widget name="pic8" position="1095,795" size="135,90" alphatest="blend" zPosition="1" />
             <widget name="pic9" position="1095,885" size="135,90" alphatest="blend" zPosition="1" />
             <widget name="postpic" position="450,70" size="280,210" zPosition="1" />
-            <widget name="postvid" position="520,125" size="135,90" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
+            <widget name="postvid" position="530,125" size="135,90" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
             <widget name="score" position="10,70" size="236,36" alphatest="blend" zPosition="1" />
             <widget name="scoretext" position="10,105" size="440,165" font="{font};{fontsize}" halign="left" zPosition="1" />
             <widget name="recipetext" position="765,70" size="470,210" font="{font};{fontsize}" halign="left" zPosition="1" />
@@ -425,7 +421,10 @@ class ChefkochView(Screen):
             self.videolist.append(self.GRP[i]['hasVideo'])
             res = [i]
             res.append(MultiContentEntryText(pos=(int(110 * scale), 0), size=(int(965 * scale), int(30 * scale)), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titel))  # TITLE
-            png = Pluginpath + 'pic/logos/suche-score-%sHD.png' % score
+            if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
+                png = Pluginpath + 'pic/logos/suche-score-%sFHD.png' % score
+            else:
+                png = Pluginpath + 'pic/logos/suche-score-%sHD.png' % score
             if fileExists(png):
                 res.append(MultiContentEntryPixmapAlphaTest(pos=(int(12 * scale), int(33 * scale)), size=(int(72 * scale), int(14 * scale)), png=loadPNG(png)))  # SCORE
             res.append(MultiContentEntryText(pos=(0, int(52 * scale)), size=(int(95 * scale), int(25 * scale)), font=-
@@ -553,14 +552,14 @@ class ChefkochView(Screen):
     def getREZ(self, id):  # hole den jeweiligen Rezeptdatensatz
         content, resp = getAPIdata('/recipes/' + id)
         if resp != 200:
-            return resp
+            return {}
         result = loads(content)
         return result
 
     def getIMG(self, id):  # hole die jeweilige Rezeptbilderliste
         content, resp = getAPIdata('/recipes/' + id + '/images?&offset=0&limit=' + config.plugins.chefkoch.maxpictures.value)
         if resp != 200:
-            return resp
+            return {}
         result = loads(content)
         self.IMGlen = int(config.plugins.chefkoch.maxpictures.value) if result['count'] > int(config.plugins.chefkoch.maxpictures.value) else result['count']
         dict = {}
@@ -572,23 +571,22 @@ class ChefkochView(Screen):
         if not self.KOM:
             content, resp = getAPIdata('/recipes/' + id + '/comments?&offset=0&limit=' + config.plugins.chefkoch.maxcomments.value)
             if resp != 200:
-                return resp
+                return {}
             result = loads(content)
         else:
             result = self.KOM
         self.KOMlen = int(config.plugins.chefkoch.maxcomments.value) if result['count'] > int(config.plugins.chefkoch.maxcomments.value) else result['count']
         return result
 
-    def getGRP(self):  # hole die gewünschte Rezeptgruppe (alle Rezepte oder nur Videos)
+    def getGRP(self):  # hole die gewünschte Rezeptgruppe (alle Rezepte, davon 'videocount' mit Video)
         if not self.orgGRP:
             limit = int(config.plugins.chefkoch.maxrecipes.value)
             videocount = 0
             for i in range(max((limit) // 100, 1)):
                 content, resp = getAPIdata('/recipes?query=%s&offset=%d&limit=%d' % (self.query, i * 100, min(limit, 100)))
-                if resp == 200:
-                    result = loads(content)
-                else:
-                    return resp
+                if resp != 200:
+                    return
+                result = loads(content)
                 for j in range(len(result['results'])):
                     dict = {}
                     dict['id'] = result['results'][j]['recipe']['id']
@@ -1119,7 +1117,7 @@ class ChefkochView(Screen):
         if self.REZ['recipeVideoId']:
             content, resp = getAPIdata('/videos/' + self.REZ['recipeVideoId'])
             if resp != 200:
-                return resp
+                return
             result = loads(content)
             sref = eServiceReference(4097, 0, str(result['video_brightcove_url']))
             description = result['video_description']
@@ -1711,7 +1709,7 @@ class ItemList(MenuList):
 
 class ChefkochMain(Screen):
     skinHD = '''
-        <screen position="center,{position}" size="590,625" title="Chefkoch.de">
+        <screen position="center,{position}" size="590,625" title="Suche den Chefkoch.de Server...">
             <ePixmap position="0,0" size="590,60" pixmap="{picpath}menuHD.png" alphatest="blend" zPosition="1" />
             <widget name="label1" position="34,10" size="140,20" font="{font};16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
             <widget name="label2" position="34,32" size="140,20" font="{font};16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
@@ -1727,7 +1725,7 @@ class ChefkochMain(Screen):
             <widget name="thirdmenu" position="10,70" size="570,540" scrollbarMode="showNever" zPosition="2" />
         </screen>'''
     skinFHD = '''
-        <screen position="center,{position}" size="885,980" title="Chefkoch.de">
+        <screen position="center,{position}" size="885,980" title="Suche den Chefkoch.de Server...">
             <ePixmap position="0,0" size="885,90" pixmap="{picpath}menuFHD.png" alphatest="blend" zPosition="1" />
             <widget name="label1" position="51,13" size="210,30" font="{font};24" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
             <widget name="label2" position="51,46" size="210,30" font="{font};24" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
@@ -1743,7 +1741,7 @@ class ChefkochMain(Screen):
             <widget name="thirdmenu" position="15,105" size="855,860" scrollbarMode="showNever" zPosition="2" />
         </screen>'''
     skinALT = '''
-        <screen position="center,{position}" size="590,980" title="Chefkoch.de">
+        <screen position="center,{position}" size="590,980" title="Suche den Chefkoch.de Server...">
             <ePixmap position="0,0" size="590,60" pixmap="{picpath}menuHD.png" alphatest="blend" zPosition="1" />
             <widget name="label1" position="34,10" size="140,20" font="{font};16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
             <widget name="label2" position="34,32" size="140,20" font="{font};16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
@@ -1811,7 +1809,7 @@ class ChefkochMain(Screen):
         config.usage.on_movie_stop.value = 'quit'
         config.usage.on_movie_eof.value = 'quit'
         self.ChefTimer = eTimer()
-        self.makeMainMenu()
+        self.ChefTimer.callback.append(self.makeMainMenu)
         self.ChefTimer.start(500, True)
 
     def ok(self):
@@ -1856,6 +1854,9 @@ class ChefkochMain(Screen):
         self.mainmenutitle = []
         self.mainId = []
         self.currKAT = self.getNKAT()
+        if not self.currKAT:
+            self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+        self.setTitle('Chefkoch.de')
         for i in range(len(self.currKAT)):
             res = ['']
             if self.currKAT[i]['level'] == 1:
@@ -1917,7 +1918,7 @@ class ChefkochMain(Screen):
     def makeVKATdb(self):  # hole alle verfügbaren Videokategorien
         content, resp = getAPIdata('/videos?&offset=0&limit=10000')
         if resp != 200:
-            return resp
+            return
         result = loads(content)
         VKAT = []
         f = open(Pluginpath + 'db/VKATdb', 'a')
@@ -1934,7 +1935,7 @@ class ChefkochMain(Screen):
         if not self.NKAT:
             content, resp = getAPIdata('/recipes/categories')
             if resp != 200:
-                return resp
+                return {}
             self.NKAT = loads(content)
             self.NKAT.append({'id': '996', 'title': 'Chefkoch Magazin', 'parentId': None, 'level': 1, 'descriptionText': 'Chefkoch Magazin', 'linkName': 'https://www.chefkoch.de/magazin/'})
             self.NKAT.append({'id': '998', 'title': 'Chefkoch Videos', 'parentId': None, 'level': 1, 'descriptionText': 'Chefkoch Videos', 'linkName': 'video.html'})
@@ -1972,7 +1973,7 @@ class ChefkochMain(Screen):
         if not self.MKAT:
             content, resp = getAPIdata('/magazine/categories')
             if resp != 200:
-                return resp
+                return {}
             result = loads(content)
             offset = 2000  # erzeuge eigene Magazin-IDs über 2000
             for i in range(len(result)):
@@ -2085,6 +2086,9 @@ class ChefkochMain(Screen):
                 f = open('/proc/stb/video/alpha', 'w')
                 f.write('%i' % (config.av.osd_alpha.value * i / 40))
                 f.close()
+
+    def eject(self, dummy):
+        self.exit()
 
     def exit(self):
         if self.hideflag == False:
