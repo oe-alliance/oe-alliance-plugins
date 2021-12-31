@@ -619,7 +619,7 @@ Chefkoch/src/db/Makefile
 Chefkoch/src/font/Makefile
 Chefkoch/src/pic/Makefile
 Chefkoch/src/pic/buttons/Makefile
-Chefkoch/src/pic/logos/Makefile
+Chefkoch/src/pic/starbars/Makefile
 Chefkoch/src/pic/setup/Makefile
 Chefkoch/src/pic/slider/Makefile
 
