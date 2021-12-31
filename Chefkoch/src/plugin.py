@@ -1480,13 +1480,13 @@ class chefkochFav(Screen):
         self.font = 0
         if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
             self.font = -1
-            self.dict = {'position': position, 'ssize':'1860,980', 'msize':'1800,865', 'picpath': Pluginpath + 'pic/', 'font': font}
+            self.dict = {'position': position, 'ssize': '1860,980', 'msize': '1800,865', 'picpath': Pluginpath + 'pic/', 'font': font}
             self.skin = applySkinVars(chefkochFav.skinFHD, self.dict)
         elif config.plugins.chefkoch.plugin_size.value == 'FHDaltern':
-            self.dict = {'position': position, 'ssize':'1240,980', 'msize':'1200,865', 'picpath': Pluginpath + 'pic/', 'font': font}
+            self.dict = {'position': position, 'ssize': '1240,980', 'msize': '1200,865', 'picpath': Pluginpath + 'pic/', 'font': font}
             self.skin = applySkinVars(chefkochFav.skinHD, self.dict)
         else:
-            self.dict = {'position': position, 'ssize':'1240,590', 'msize':'1200,510', 'picpath': Pluginpath + 'pic/', 'font': font}
+            self.dict = {'position': position, 'ssize': '1240,590', 'msize': '1200,510', 'picpath': Pluginpath + 'pic/', 'font': font}
             self.skin = applySkinVars(chefkochFav.skinHD, self.dict)
         self.session = session
         Screen.__init__(self, session)
