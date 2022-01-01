@@ -59,14 +59,14 @@ def byteify(input):
 
 def getBackgroundList():
     if not hasattr(getBackgroundList, 'config'):
-        if hasattr(ssl, '_create_unverified_context'):
-            context = ssl._create_unverified_context()
-            configFile = urlopen(CONFIG_FILE, context=context)
-        elif hasattr(ssl, '_create_stdlib_context'):
-            context = ssl._create_stdlib_context()
-            configFile = urlopen(CONFIG_FILE, context=context)
-        else:
-            configFile = urlopen(CONFIG_FILE)
+        #if hasattr(ssl, '_create_unverified_context'):
+        #    context = ssl._create_unverified_context()
+        #    configFile = urlopen(CONFIG_FILE, context=context)
+        #elif hasattr(ssl, '_create_stdlib_context'):
+        #    context = ssl._create_stdlib_context()
+        #    configFile = urlopen(CONFIG_FILE, context=context)
+        #else:
+        configFile = urlopen(CONFIG_FILE)
         encoding = configFile.headers['content-type'].split('charset=')[-1]
         if six.PY2:
             ucontent = six.text_type(configFile.read(), encoding)
