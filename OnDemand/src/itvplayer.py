@@ -180,7 +180,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 		try:
 			# Parse the XML with elementTree
-			parser = etree.XMLParser(encoding='utf-8')
+			parser = etree.XMLParser(encoding='utf-8', resolve_entities=False)
 			tree = etree.parse(url, parser)
 
 			# Find the first element <entry>
@@ -278,7 +278,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 		try:
 			# Parse the XML with elementTree
-			parser = etree.XMLParser(encoding='utf-8')
+			parser = etree.XMLParser(encoding='utf-8', resolve_entities=False)
 			tree = etree.parse(url, parser)
 
 			# Find the first element <entry>
